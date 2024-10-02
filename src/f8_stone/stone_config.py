@@ -1,5 +1,5 @@
 from src.f0_instrument.file import open_file
-from src.f0_instrument.python_tool import get_dict_from_json
+from src.f0_instrument.dict_tool import get_dict_from_json
 from src.f1_road.jaar_config import get_json_filename
 from src.f8_stone.examples.stone_env import src_stone_dir
 

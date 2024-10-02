@@ -1,4 +1,4 @@
-from src.f0_instrument.python_tool import get_nested_value
+from src.f0_instrument.dict_tool import get_nested_value
 from src.f2_bud.bud import BudUnit
 from src.f2_bud.bud_tool import (
     budunit_str,
@@ -229,7 +229,7 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
         x_tender_desc = f"{x_bud._owner_id}'s tender_desc"
 
     if _max_tree_traverse_value is not None:
-        x_str = f"{x_bud._owner_id}'s maximum number of Bud evaluations transited to {_max_tree_traverse_value}"
+        x_str = f"{x_bud._owner_id}'s maximum number of Bud evaluations set to {_max_tree_traverse_value}"
         legible_list.append(x_str)
     if _tender_desc_value is not None:
         x_str = f"{x_bud._owner_id}'s tender_desc is now called '{_tender_desc_value}'"
@@ -248,7 +248,7 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
         x_str = f"{x_tender_desc} debtor pool is now {debtor_respect_value}"
         legible_list.append(x_str)
     if _tally_value is not None:
-        x_str = f"{x_bud._owner_id}'s bud tally was transited to {_tally_value}"
+        x_str = f"{x_bud._owner_id}'s bud tally set to {_tally_value}"
         legible_list.append(x_str)
 
 
@@ -400,7 +400,7 @@ def add_bud_ideaunit_update_to_legible_list(
             morph_value = ideaunit_atom.get_value(morph_str())
             mass_value = ideaunit_atom.get_value(_mass_str)
             pledge_value = ideaunit_atom.get_value(pledge_str())
-            x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: "
+            x_str = f"Idea '{label_value}' with parent_road {parent_road_value} set these attributes: "
             if addin_value is not None:
                 x_str += f"addin={addin_value}."
             if begin_value is not None:
@@ -457,11 +457,11 @@ def add_bud_idea_awardlink_update_to_legible_list(
             give_force_value = idea_awardlink_atom.get_value("give_force")
             take_force_value = idea_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None:
-                x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value}."
+                x_str = f"Awardlink has been set for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value}."
             elif take_force_value is not None:
-                x_str = f"Awardlink has been transited for group {group_id_value} for idea '{road_value}'. Now take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {group_id_value} for idea '{road_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -507,7 +507,7 @@ def add_bud_idea_reasonunit_update_to_legible_list(
                 base_idea_active_requisite_str()
             )
             if base_idea_active_requisite_value is not None:
-                x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' transited with base_idea_active_requisite={base_idea_active_requisite_value}."
+                x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' set with base_idea_active_requisite={base_idea_active_requisite_value}."
             else:
                 x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' and no longer checks base active mode."
             legible_list.append(x_str)

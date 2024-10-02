@@ -30,7 +30,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_mass():
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s bud tally was transited to {tally_int}"
+    x_str = f"{sue_bud._owner_id}'s bud tally set to {tally_int}"
     assert legible_list[0] == x_str
 
 
@@ -163,5 +163,5 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_max_tree_traverse(
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s maximum number of Bud evaluations transited to {max_tree_traverse_int}"
+    x_str = f"{sue_bud._owner_id}'s maximum number of Bud evaluations set to {max_tree_traverse_int}"
     assert legible_list[0] == x_str

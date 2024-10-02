@@ -1,4 +1,4 @@
-from src.f0_instrument.python_tool import get_1_if_None, get_0_if_None
+from src.f0_instrument.dict_tool import get_1_if_None, get_0_if_None
 
 
 class MoneyUnit(float):

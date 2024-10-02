@@ -390,11 +390,11 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario5():
     wkday_road = create_road(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_road = create_road(wkday_road, wed_str)
-    wed_sun_str = "sunny"
-    wed_sun_road = create_road(wed_road, wed_sun_str)
+    wed_cloudy_str = "cloudy"
+    wed_cloudy_road = create_road(wed_road, wed_cloudy_str)
     wed_rain_str = "rainy"
     wed_rain_road = create_road(wed_road, wed_rain_str)
-    wed_sun_premise = premiseunit_shop(need=wed_sun_road)
+    wed_sun_premise = premiseunit_shop(need=wed_cloudy_road)
     assert wed_sun_premise._status is None
 
     # WHEN

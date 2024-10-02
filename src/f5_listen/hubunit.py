@@ -8,7 +8,7 @@ from src.f0_instrument.file import (
     set_dir,
     get_integer_filenames,
 )
-from src.f0_instrument.python_tool import get_empty_set_if_none
+from src.f0_instrument.dict_tool import get_empty_set_if_none
 from src.f0_instrument.db_tool import sqlite_connection
 from src.f1_road.jaar_config import (
     dutys_str,
@@ -31,12 +31,12 @@ from src.f1_road.finance import (
     default_money_magnitude_if_none,
     TimeLinePoint,
 )
-from src.f1_road.finance_outlay import (
-    OutlayEvent,
-    outlayevent_shop,
+from src.f1_road.finance_tran import (
+    OutlayEpisode,
+    outlayepisode_shop,
     OutlayLog,
     outlaylog_shop,
-    get_outlayevent_from_json,
+    get_outlayepisode_from_json,
 )
 from src.f1_road.road import (
     OwnerID,
@@ -421,7 +421,7 @@ class HubUnit:
     def outlay_file_path(self, x_timestamp: TimeLinePoint) -> str:
         return f_path(self.timepoint_dir(x_timestamp), self.outlay_file_name())
 
-    def _save_valid_outlay_file(self, x_outlay: OutlayEvent):
+    def _save_valid_outlay_file(self, x_outlay: OutlayEpisode):
         x_outlay.calc_magnitude()
         save_file(
             self.timepoint_dir(x_outlay.timestamp),
@@ -433,10 +433,10 @@ class HubUnit:
     def outlay_file_exists(self, x_timestamp: TimeLinePoint) -> bool:
         return os_path_exists(self.outlay_file_path(x_timestamp))
 
-    def get_outlay_file(self, x_timestamp: TimeLinePoint) -> OutlayEvent:
+    def get_outlay_file(self, x_timestamp: TimeLinePoint) -> OutlayEpisode:
         if self.outlay_file_exists(x_timestamp):
             x_json = open_file(self.timepoint_dir(x_timestamp), self.outlay_file_name())
-            return get_outlayevent_from_json(x_json)
+            return get_outlayepisode_from_json(x_json)
 
     def delete_outlay_file(self, x_timestamp: TimeLinePoint):
         delete_dir(self.outlay_file_path(x_timestamp))
@@ -445,8 +445,8 @@ class HubUnit:
         x_outlaylog = outlaylog_shop(self.owner_id)
         x_dirs = self._get_timepoint_dirs()
         for x_outlay_folder_name in x_dirs:
-            x_outlayevent = self.get_outlay_file(x_outlay_folder_name)
-            x_outlaylog.set_event(x_outlayevent)
+            x_outlayepisode = self.get_outlay_file(x_outlay_folder_name)
+            x_outlaylog.set_episode(x_outlayepisode)
         return x_outlaylog
 
     def _get_timepoint_dirs(self) -> list[str]:
@@ -492,14 +492,14 @@ class HubUnit:
             raise calc_timepoint_outlay_Exception(exception_str)
         x_budpoint = self.get_budpoint_file(x_timestamp)
         if self.outlay_file_exists(x_timestamp):
-            x_outlayevent = self.get_outlay_file(x_timestamp)
-            x_budpoint.set_fund_pool(x_outlayevent.purview)
+            x_outlayepisode = self.get_outlay_file(x_timestamp)
+            x_budpoint.set_fund_pool(x_outlayepisode.purview)
         else:
-            x_outlayevent = outlayevent_shop(x_timestamp)
+            x_outlayepisode = outlayepisode_shop(x_timestamp)
         x_net_outlays = get_bud_settle_acct_net_dict(x_budpoint, True)
-        x_outlayevent._net_outlays = x_net_outlays
+        x_outlayepisode._net_outlays = x_net_outlays
         self._save_valid_budpoint_file(x_timestamp, x_budpoint)
-        self._save_valid_outlay_file(x_outlayevent)
+        self._save_valid_outlay_file(x_outlayepisode)
 
     def calc_timepoint_outlays(self):
         for x_timepoint in self._get_timepoint_dirs():

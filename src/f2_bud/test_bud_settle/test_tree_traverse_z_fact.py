@@ -144,7 +144,7 @@ def test_BudUnit_settle_bud_FactHeirsCorrectlyInherited():
     assert str(type(fact_x1)).find(".reason.FactHeir'>")
 
 
-def test_BudUnit_settle_bud_FactUnitTransformsFactHeir():
+def test_BudUnit_settle_bud_FactUnitMoldsFactHeir():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     swim_str = "swim"

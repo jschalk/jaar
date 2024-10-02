@@ -26,7 +26,7 @@ from src.f4_gift.delta import (
 )
 from src.f2_bud.bud import budunit_shop
 from src.f4_gift.examples.example_deltas import get_deltaunit_example1
-from src.f0_instrument.python_tool import x_is_json
+from src.f0_instrument.dict_tool import x_is_json
 from pytest import raises as pytest_raises
 
 

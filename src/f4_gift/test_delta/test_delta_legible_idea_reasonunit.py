@@ -89,7 +89,7 @@ def test_create_legible_list_ReturnsObj_idea_reasonunit_UPDATE_base_idea_active_
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' transited with base_idea_active_requisite={base_idea_active_requisite_value}."
+    x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' set with base_idea_active_requisite={base_idea_active_requisite_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

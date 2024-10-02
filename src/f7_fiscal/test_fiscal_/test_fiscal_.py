@@ -8,7 +8,7 @@ from src.f1_road.road import default_road_delimiter_if_none
 from src.f2_bud.healer import healerlink_shop
 from src.f2_bud.idea import ideaunit_shop
 from src.f3_chrono.chrono import timelineunit_shop, get_min_from_dt
-from src.f1_road.finance_outlay import outlayevent_shop
+from src.f1_road.finance_tran import outlayepisode_shop
 from src.f5_listen.hubunit import hubunit_shop
 from src.f7_fiscal.fiscal import FiscalUnit, fiscalunit_shop
 from src.f7_fiscal.examples.fiscal_env import (

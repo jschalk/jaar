@@ -91,7 +91,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_open_IsNone():
     assert x_idearoot.factunits.get(weekday_road) == x10_factunit
 
 
-def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIsNotRangeRoot():
+def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIsNot_RangeRoot():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
     time_str = "time"

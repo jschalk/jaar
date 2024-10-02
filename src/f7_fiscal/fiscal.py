@@ -1,5 +1,5 @@
 from src.f0_instrument.file import set_dir, delete_dir, dir_files
-from src.f0_instrument.python_tool import (
+from src.f0_instrument.dict_tool import (
     get_0_if_None,
     get_dict_from_json,
     get_json_from_dict,
@@ -16,8 +16,8 @@ from src.f1_road.finance import (
 from src.f1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
 from src.f2_bud.bud import BudUnit
 from src.f3_chrono.chrono import TimeLineUnit, timelineunit_shop
-from src.f1_road.finance_outlay import (
-    OutlayEvent,
+from src.f1_road.finance_tran import (
+    OutlayEpisode,
     OutlayLog,
     outlaylog_shop,
     get_outlaylog_from_dict,
@@ -224,7 +224,7 @@ class FiscalUnit:
         return self._get_hubunit(owner_id).get_final_bud()
 
     # bud_history
-    def set_outlayevent(self, x_outlaylog: OutlayLog):
+    def set_outlaylog(self, x_outlaylog: OutlayLog):
         self.bud_history[x_outlaylog.owner_id] = x_outlaylog
 
     def outlaylog_exists(self, x_owner_id: OwnerID) -> bool:
@@ -236,13 +236,13 @@ class FiscalUnit:
     def del_outlaylog(self, x_owner_id: OwnerID):
         self.bud_history.pop(x_owner_id)
 
-    def add_outlayevent(
+    def add_outlaylog(
         self, x_owner_id: OwnerID, x_timestamp: TimeLinePoint, x_money_magnitude: int
     ):
         if self.outlaylog_exists(x_owner_id) is False:
-            self.set_outlayevent(outlaylog_shop(x_owner_id))
+            self.set_outlaylog(outlaylog_shop(x_owner_id))
         x_outlaylog = self.get_outlaylog(x_owner_id)
-        x_outlaylog.add_event(x_timestamp, x_money_magnitude)
+        x_outlaylog.add_episode(x_timestamp, x_money_magnitude)
 
     def get_dict(self) -> dict:
         return {
@@ -261,8 +261,8 @@ class FiscalUnit:
 
     def _get_bud_history_dict(self):
         return {
-            x_event.owner_id: x_event.get_dict()
-            for x_event in self.bud_history.values()
+            x_episode.owner_id: x_episode.get_dict()
+            for x_episode in self.bud_history.values()
         }
 
 

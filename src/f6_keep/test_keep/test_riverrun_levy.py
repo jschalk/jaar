@@ -2,7 +2,7 @@ from src.f6_keep.examples.example_credorledgers import example_yao_hubunit
 from src.f6_keep.riverrun import riverrun_shop
 
 
-def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario01():
+def test_RiverRun_levy_tax_dues_Molds_cycleledger_Scenario01():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"
@@ -24,7 +24,7 @@ def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario01():
     assert y_cycleledger.get(yao_str) == yao_paid - yao_tax_due
 
 
-def test_RiverRun_levy_tax_dues_Transforms_cycleledger_Scenario02():
+def test_RiverRun_levy_tax_dues_Molds_cycleledger_Scenario02():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"

@@ -1,4 +1,4 @@
-from src.f0_instrument.python_tool import x_is_json, get_dict_from_json
+from src.f0_instrument.dict_tool import x_is_json, get_dict_from_json
 from src.f1_road.road import default_road_delimiter_if_none
 from src.f2_bud.group import awardlink_shop
 from src.f2_bud.healer import healerlink_shop

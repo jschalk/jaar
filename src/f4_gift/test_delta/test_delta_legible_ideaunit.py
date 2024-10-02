@@ -97,7 +97,7 @@ def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"Idea '{label_value}' with parent_road {parent_road_value} transited these attributes: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.pledge={pledge_value}."
+    x_str = f"Idea '{label_value}' with parent_road {parent_road_value} set these attributes: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

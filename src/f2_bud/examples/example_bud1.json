@@ -631,7 +631,7 @@
                                 "_uid": 123,
                                 "pledge": true
                             },
-                            "Know Abuse Prevention and Reporting guildlines": {
+                            "Know Abuse Deterrence and Reporting guildlines": {
                                 "_kids": {
                                     "Accomplish Fall 2021 training": {
                                         "_label": "Accomplish Fall 2021 training",
@@ -663,7 +663,7 @@
                                         "pledge": true
                                     }
                                 },
-                                "_label": "Know Abuse Prevention and Reporting guildlines",
+                                "_label": "Know Abuse Deterrence and Reporting guildlines",
                                 "mass": 1,
                                 "_uid": 106
                             },
@@ -4260,8 +4260,8 @@
                         "mass": 1,
                         "_uid": 273
                     },
-                    "Star Wars Episode IV": {
-                        "_label": "Star Wars Episode IV",
+                    "Star Wars eps IV": {
+                        "_label": "Star Wars eps IV",
                         "mass": 1,
                         "_uid": 274
                     }
@@ -4371,8 +4371,8 @@
                             "music;No Movie playing": {
                                 "base": "music;No Movie playing",
                                 "premises": {
-                                    "music;No Movie playing,Star Wars Episode IV": {
-                                        "need": "music;No Movie playing,Star Wars Episode IV"
+                                    "music;No Movie playing,Star Wars eps IV": {
+                                        "need": "music;No Movie playing,Star Wars eps IV"
                                     }
                                 }
                             }

@@ -1,5 +1,5 @@
 from src.f0_instrument.file import open_file, save_file
-from src.f0_instrument.python_tool import (
+from src.f0_instrument.dict_tool import (
     get_json_from_dict,
     get_dict_from_json,
     get_nested_value,

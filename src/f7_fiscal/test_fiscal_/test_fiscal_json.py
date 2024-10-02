@@ -29,9 +29,9 @@ def test_FiscalUnit_get_dict_ReturnsObj():
     sue_x4_magnitude = 55
     sue_x7_timestamp = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_outlayevent(bob_str, bob_x0_timestamp, bob_x0_magnitude)
-    music_fiscal.add_outlayevent(sue_str, sue_x4_timestamp, sue_x4_magnitude)
-    music_fiscal.add_outlayevent(sue_str, sue_x7_timestamp, sue_x7_magnitude)
+    music_fiscal.add_outlaylog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
+    music_fiscal.add_outlaylog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
+    music_fiscal.add_outlaylog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
 
     # WHEN
     x_dict = music_fiscal.get_dict()
@@ -70,9 +70,9 @@ def test_FiscalUnit_get_json_ReturnsObj():
     sue_x4_magnitude = 55
     sue_x7_timestamp = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_outlayevent(bob_str, bob_x0_timestamp, bob_x0_magnitude)
-    music_fiscal.add_outlayevent(sue_str, sue_x4_timestamp, sue_x4_magnitude)
-    music_fiscal.add_outlayevent(sue_str, sue_x7_timestamp, sue_x7_magnitude)
+    music_fiscal.add_outlaylog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
+    music_fiscal.add_outlaylog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
+    music_fiscal.add_outlaylog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
 
     # WHEN
     x_json = music_fiscal.get_json()
@@ -102,9 +102,9 @@ def test_get_from_dict_ReturnsFiscalUnit():
     sue_x4_magnitude = 55
     sue_x7_timestamp = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_outlayevent(bob_str, bob_x0_timestamp, bob_x0_magnitude)
-    music_fiscal.add_outlayevent(sue_str, sue_x4_timestamp, sue_x4_magnitude)
-    music_fiscal.add_outlayevent(sue_str, sue_x7_timestamp, sue_x7_magnitude)
+    music_fiscal.add_outlaylog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
+    music_fiscal.add_outlaylog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
+    music_fiscal.add_outlaylog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
     music_fiscal.current_time = sue_current_time
     music_fiscal._road_delimiter = sue_road_delimiter
     music_fiscal._fund_coin = sue_fund_coin
@@ -147,9 +147,9 @@ def test_get_from_json_ReturnsFiscalUnit():
     sue_x4_magnitude = 55
     sue_x7_timestamp = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_outlayevent(bob_str, bob_x0_timestamp, bob_x0_magnitude)
-    music_fiscal.add_outlayevent(sue_str, sue_x4_timestamp, sue_x4_magnitude)
-    music_fiscal.add_outlayevent(sue_str, sue_x7_timestamp, sue_x7_magnitude)
+    music_fiscal.add_outlaylog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
+    music_fiscal.add_outlaylog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
+    music_fiscal.add_outlaylog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
     music_fiscal.current_time = sue_current_time
     music_fiscal._road_delimiter = sue_road_delimiter
     music_fiscal._fund_coin = sue_fund_coin
