@@ -13,8 +13,10 @@ from src.f0_instrument.dict_tool import (
     get_nested_dict_keys_by_level,
     get_nested_keys_by_level,
     get_nested_dict_key_by_level,
+    get_nested_non_dict_keys_by_level,
+    get_nested_non_dict_keys_list,
     is_2d_with_unique_keys,
-    create_2d_array_from_2d_with_unique_keys_dict,
+    create_2d_array_from_dict,
 )
 from pytest import raises as pytest_raises
 
@@ -533,6 +535,51 @@ def test_get_nested_keys_by_level_ReturnsObj():
     }
 
 
+def test_get_nested_non_dict_keys_by_level_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+    yao_str = "yao"
+    swim_str = "Swim"
+
+    #  WHEN / THEN
+    assert get_nested_non_dict_keys_by_level({}) == {}
+    assert get_nested_non_dict_keys_by_level({sue_str: 1}) == {0: {sue_str}}
+    assert get_nested_non_dict_keys_by_level({sue_str: {}}) == {0: set()}
+    x2_dict = {sue_str: {}, bob_str: {}}
+    assert get_nested_non_dict_keys_by_level(x2_dict) == {0: set()}
+    x3_dict = {swim_str: 155, sue_str: {}, bob_str: {}}
+    assert get_nested_non_dict_keys_by_level(x3_dict) == {0: {swim_str}}
+    x4_dict = {swim_str: 155, sue_str: {"zia": {}}, bob_str: {yao_str: {swim_str: 1}}}
+    assert get_nested_non_dict_keys_by_level(x4_dict) == {
+        0: {swim_str},
+        1: set(),
+        2: {swim_str},
+    }
+
+
+def test_get_nested_non_dict_keys_list_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+    yao_str = "yao"
+    swim_str = "Swim"
+    run_str = "Run"
+
+    #  WHEN / THEN
+    assert get_nested_non_dict_keys_list({}) == []
+    assert get_nested_non_dict_keys_list({sue_str: 1}) == [sue_str]
+    assert get_nested_non_dict_keys_list({sue_str: {}}) == []
+    x2_dict = {sue_str: {}, bob_str: {}}
+    assert get_nested_non_dict_keys_list(x2_dict) == []
+    x3_dict = {swim_str: 155, sue_str: {}, bob_str: {}}
+    assert get_nested_non_dict_keys_list(x3_dict) == [swim_str]
+    x4_dict = {swim_str: 155, sue_str: {"zia": {}}, bob_str: {yao_str: {run_str: 1}}}
+    assert get_nested_non_dict_keys_list(x4_dict) == [swim_str, run_str]
+    x5_dict = {"casa": {"clean": {"Bob": 13}}, "school": 14}
+    assert get_nested_non_dict_keys_list(x5_dict) == ["school", "Bob"]
+
+
 def test_get_nested_dict_key_by_level_RaisesError_is_2d_with_unique_keys_IsFalse():
     # ESTABLISH / WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -553,53 +600,29 @@ def test_get_nested_dict_key_by_level_ReturnsObj():
     assert get_nested_dict_key_by_level(x4_dict) == [sue_str, bob_str, "yao"]
 
 
-def test_create_2d_array_from_2d_with_unique_keys_dict_RaisesError_is_2d_with_unique_keys_IsFalse():
+def test_create_2d_array_from_dict_RaisesError_is_2d_with_unique_keys_IsFalse():
     # ESTABLISH / WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        create_2d_array_from_2d_with_unique_keys_dict({"Sue": {}, "Bob": {}})
+        create_2d_array_from_dict({"Sue": {}, "Bob": {}})
     exception_text = "dictionary is not 2d_with_unique_keys."
     assert str(excinfo.value) == exception_text
 
 
-# def test_create_2d_array_from_2d_with_unique_keys_dict_ReturnsObj_Scenario0_Simple():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     x1_int = 1
+def test_create_2d_array_from_dict_ReturnsObj_Scenario0_Simple():
+    # ESTABLISH
+    sue_str = "Sue"
+    x1_int = 1
 
-#     # WHEN / THEN
-#     assert create_2d_array_from_2d_with_unique_keys_dict({}) == [[]]
-#     assert create_2d_array_from_2d_with_unique_keys_dict({sue_str: x1_int}) == [[sue_str], [x1_int]]
-#     assert create_2d_array_from_2d_with_unique_keys_dict({sue_str: x1_int}) == [[sue_str], [x1_int]]
-#     x0_2d_array = [["swim", "Sue"], [155, None]]
-#     assert create_2d_array_from_2d_with_unique_keys_dict({"swim": 155, "Sue": {}}) == x0_2d_array
-#     assert create_2d_array_from_2d_with_unique_keys_dict({"casa": {"clean": "Bob"}})
-#     assert create_2d_array_from_2d_with_unique_keys_dict({"casa": {"clean": {"Bob": 13}}})
-#     assert create_2d_array_from_2d_with_unique_keys_dict(
-#         {"casa": {"clean": {"Bob": 13}}, "school": 14}
-#     )
-
-
-# def test_create_2d_array_from_2d_with_unique_keys_dict_ReturnsObj_Scenario1():
-#     # ESTABLISH
-#     swim_text = "swim"
-#     six_text = "six"
-#     seven_text = "seven"
-#     headers = [swim_text, six_text, seven_text]
-#     headerless_csv = """Bob,13,29
-# Sue,11,23
-# Yao,41,37
-# Zia,41,37
-# Yao,41,37
-# """
-
-#     # WHEN
-#     gen_csv = add_headers_to_csv(headers, headerless_csv)
-
-#     # THEN
-#     assert gen_csv
-#     assert (
-#         gen_csv
-#         == f"""{swim_text},{six_text},{seven_text}
-# {headerless_csv}"""
-#     )
-#     assert 1 == 2
+    # WHEN / THEN
+    assert create_2d_array_from_dict({}) == [[], []]
+    assert create_2d_array_from_dict({sue_str: x1_int}) == [[sue_str], [x1_int]]
+    assert create_2d_array_from_dict({sue_str: {}}) == [[], []]
+    x0_2d_array = [["swim"], [155]]
+    assert create_2d_array_from_dict({"swim": 155, sue_str: {}}) == x0_2d_array
+    x1_2d_array = [["clean"], ["Bob"]]
+    assert create_2d_array_from_dict({"casa": {"clean": "Bob"}}) == x1_2d_array
+    x2_2d_array = [["Bob"], [13]]
+    assert create_2d_array_from_dict({"casa": {"clean": {"Bob": 13}}}) == x2_2d_array
+    x2_2d_dict = {"casa": {"clean": {"Bob": 13}}, "school": 14}
+    x2_2d_array = [["school", "Bob"], [14, 13]]
+    assert create_2d_array_from_dict(x2_2d_dict) == x2_2d_array
