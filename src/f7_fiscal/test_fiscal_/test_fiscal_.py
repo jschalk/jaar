@@ -25,14 +25,15 @@ def test_FiscalUnit_Exists(env_dir_setup_cleanup):
     assert not music_fiscal.timeline
     assert not music_fiscal.current_time
     assert not music_fiscal.outlaylogs
+    assert not music_fiscal.road_delimiter
+    assert not music_fiscal.fund_coin
+    assert not music_fiscal.respect_bit
+    assert not music_fiscal.penny
     assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
+    # Calculated fields
     assert not music_fiscal._owners_dir
     assert not music_fiscal._journal_db
     assert not music_fiscal._gifts_dir
-    assert not music_fiscal._road_delimiter
-    assert not music_fiscal._fund_coin
-    assert not music_fiscal._respect_bit
-    assert not music_fiscal._penny
 
 
 def test_fiscalunit_shop_ReturnsFiscalUnit():
@@ -47,13 +48,14 @@ def test_fiscalunit_shop_ReturnsFiscalUnit():
     assert music_fiscal.timeline == timelineunit_shop()
     assert music_fiscal.current_time == 0
     assert music_fiscal.outlaylogs == {}
+    assert music_fiscal.road_delimiter == default_road_delimiter_if_none()
+    assert music_fiscal.fund_coin == default_fund_coin_if_none()
+    assert music_fiscal.respect_bit == default_respect_bit_if_none()
+    assert music_fiscal.penny == default_penny_if_none()
     assert music_fiscal.fiscals_dir is None
+    # Calculated fields
     assert music_fiscal._owners_dir is None
     assert music_fiscal._gifts_dir is None
-    assert music_fiscal._road_delimiter == default_road_delimiter_if_none()
-    assert music_fiscal._fund_coin == default_fund_coin_if_none()
-    assert music_fiscal._respect_bit == default_respect_bit_if_none()
-    assert music_fiscal._penny == default_penny_if_none()
 
 
 def test_fiscalunit_shop_ReturnsFiscalUnitWith_fiscals_dir(env_dir_setup_cleanup):
@@ -85,18 +87,18 @@ def test_fiscalunit_shop_ReturnsFiscalUnitWith_road_delimiter(env_dir_setup_clea
         fiscals_dir=get_test_fiscals_dir(),
         current_time=x_current_time,
         in_memory_journal=True,
-        _road_delimiter=slash_str,
-        _fund_coin=x_fund_coin,
-        _respect_bit=x_respect_bit,
-        _penny=x_penny,
+        road_delimiter=slash_str,
+        fund_coin=x_fund_coin,
+        respect_bit=x_respect_bit,
+        penny=x_penny,
     )
 
     # THEN
     assert music_fiscal.current_time == x_current_time
-    assert music_fiscal._road_delimiter == slash_str
-    assert music_fiscal._fund_coin == x_fund_coin
-    assert music_fiscal._respect_bit == x_respect_bit
-    assert music_fiscal._penny == x_penny
+    assert music_fiscal.road_delimiter == slash_str
+    assert music_fiscal.fund_coin == x_fund_coin
+    assert music_fiscal.respect_bit == x_respect_bit
+    assert music_fiscal.penny == x_penny
 
 
 def test_FiscalUnit_set_fiscal_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
@@ -156,9 +158,9 @@ def test_FiscalUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_clea
     music_fiscal = fiscalunit_shop(
         music_str,
         get_test_fiscals_dir(),
-        _road_delimiter=slash_str,
-        _fund_coin=x_fund_coin,
-        _respect_bit=x_respect_bit,
+        road_delimiter=slash_str,
+        fund_coin=x_fund_coin,
+        respect_bit=x_respect_bit,
         in_memory_journal=True,
     )
     sue_str = "Sue"
@@ -294,18 +296,18 @@ def test_FiscalUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
         fiscal_id=music_fiscal.fiscal_id,
         owner_id=sue_str,
         keep_road=None,
-        road_delimiter=music_fiscal._road_delimiter,
-        fund_coin=music_fiscal._fund_coin,
-        respect_bit=music_fiscal._respect_bit,
+        road_delimiter=music_fiscal.road_delimiter,
+        fund_coin=music_fiscal.fund_coin,
+        respect_bit=music_fiscal.respect_bit,
     )
     yao_hubunit = hubunit_shop(
         fiscals_dir=music_fiscal.fiscals_dir,
         fiscal_id=music_fiscal.fiscal_id,
         owner_id=yao_str,
         keep_road=None,
-        road_delimiter=music_fiscal._road_delimiter,
-        fund_coin=music_fiscal._fund_coin,
-        respect_bit=music_fiscal._respect_bit,
+        road_delimiter=music_fiscal.road_delimiter,
+        fund_coin=music_fiscal.fund_coin,
+        respect_bit=music_fiscal.respect_bit,
     )
     assert music_all_owners.get(sue_str) == sue_hubunit
     assert music_all_owners.get(yao_str) == yao_hubunit
