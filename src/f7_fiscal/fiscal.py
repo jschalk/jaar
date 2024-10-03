@@ -51,7 +51,7 @@ class FiscalUnit:
     fiscals_dir: str
     timeline: TimeLineUnit = None
     current_time: int = None
-    bud_history: dict[OwnerID, OutlayLog] = None
+    outlaylogs: dict[OwnerID, OutlayLog] = None
     _fiscal_dir: str = None
     _owners_dir: str = None
     _journal_db: str = None
@@ -223,18 +223,18 @@ class FiscalUnit:
     def get_final_file_bud(self, owner_id: OwnerID) -> BudUnit:
         return self._get_hubunit(owner_id).get_final_bud()
 
-    # bud_history
+    # outlaylogs
     def set_outlaylog(self, x_outlaylog: OutlayLog):
-        self.bud_history[x_outlaylog.owner_id] = x_outlaylog
+        self.outlaylogs[x_outlaylog.owner_id] = x_outlaylog
 
     def outlaylog_exists(self, x_owner_id: OwnerID) -> bool:
-        return self.bud_history.get(x_owner_id) != None
+        return self.outlaylogs.get(x_owner_id) != None
 
     def get_outlaylog(self, x_owner_id: OwnerID) -> OutlayLog:
-        return self.bud_history.get(x_owner_id)
+        return self.outlaylogs.get(x_owner_id)
 
     def del_outlaylog(self, x_owner_id: OwnerID):
-        self.bud_history.pop(x_owner_id)
+        self.outlaylogs.pop(x_owner_id)
 
     def add_outlaylog(
         self, x_owner_id: OwnerID, x_timestamp: TimeLinePoint, x_money_magnitude: int
@@ -249,7 +249,7 @@ class FiscalUnit:
             "fiscal_id": self.fiscal_id,
             "timeline": self.timeline.get_dict(),
             "current_time": self.current_time,
-            "bud_history": self._get_bud_history_dict(),
+            "outlaylogs": self._get_outlaylogs_dict(),
             "road_delimiter": self._road_delimiter,
             "fund_coin": self._fund_coin,
             "respect_bit": self._respect_bit,
@@ -259,10 +259,10 @@ class FiscalUnit:
     def get_json(self) -> str:
         return get_json_from_dict(self.get_dict())
 
-    def _get_bud_history_dict(self):
+    def _get_outlaylogs_dict(self):
         return {
             x_episode.owner_id: x_episode.get_dict()
-            for x_episode in self.bud_history.values()
+            for x_episode in self.outlaylogs.values()
         }
 
 
@@ -284,7 +284,7 @@ def fiscalunit_shop(
         fiscals_dir=fiscals_dir,
         timeline=timeline,
         current_time=get_0_if_None(current_time),
-        bud_history={},
+        outlaylogs={},
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _fund_coin=default_respect_bit_if_none(_fund_coin),
         _respect_bit=default_respect_bit_if_none(_respect_bit),
@@ -308,12 +308,12 @@ def get_from_dict(fiscal_dict: dict) -> FiscalUnit:
     x_fiscal._fund_coin = fiscal_dict.get("fund_coin")
     x_fiscal._respect_bit = fiscal_dict.get("respect_bit")
     x_fiscal._penny = fiscal_dict.get("penny")
-    x_fiscal.bud_history = _get_bud_history_from_dict(fiscal_dict.get("bud_history"))
+    x_fiscal.outlaylogs = _get_outlaylogs_from_dict(fiscal_dict.get("outlaylogs"))
     return x_fiscal
 
 
-def _get_bud_history_from_dict(bud_history_dict: dict) -> dict[OwnerID, OutlayLog]:
+def _get_outlaylogs_from_dict(outlaylogs_dict: dict) -> dict[OwnerID, OutlayLog]:
     return {
         x_owner_id: get_outlaylog_from_dict(outlaylog_dict)
-        for x_owner_id, outlaylog_dict in bud_history_dict.items()
+        for x_owner_id, outlaylog_dict in outlaylogs_dict.items()
     }

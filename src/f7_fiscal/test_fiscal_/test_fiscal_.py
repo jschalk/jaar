@@ -24,7 +24,7 @@ def test_FiscalUnit_Exists(env_dir_setup_cleanup):
     assert music_fiscal.fiscal_id == music_str
     assert not music_fiscal.timeline
     assert not music_fiscal.current_time
-    assert not music_fiscal.bud_history
+    assert not music_fiscal.outlaylogs
     assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
     assert not music_fiscal._owners_dir
     assert not music_fiscal._journal_db
@@ -46,7 +46,7 @@ def test_fiscalunit_shop_ReturnsFiscalUnit():
     assert music_fiscal.fiscal_id == music_str
     assert music_fiscal.timeline == timelineunit_shop()
     assert music_fiscal.current_time == 0
-    assert music_fiscal.bud_history == {}
+    assert music_fiscal.outlaylogs == {}
     assert music_fiscal.fiscals_dir is None
     assert music_fiscal._owners_dir is None
     assert music_fiscal._gifts_dir is None

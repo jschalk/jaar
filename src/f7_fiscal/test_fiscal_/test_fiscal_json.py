@@ -44,13 +44,13 @@ def test_FiscalUnit_get_dict_ReturnsObj():
     assert x_dict.get("fund_coin") == default_fund_coin_if_none()
     assert x_dict.get("respect_bit") == default_respect_bit_if_none()
     assert x_dict.get("penny") == default_penny_if_none()
-    assert x_dict.get("bud_history") == music_fiscal._get_bud_history_dict()
-    print(f"{ music_fiscal._get_bud_history_dict()=}")
+    assert x_dict.get("outlaylogs") == music_fiscal._get_outlaylogs_dict()
+    print(f"{ music_fiscal._get_outlaylogs_dict()=}")
     assert list(x_dict.keys()) == [
         "fiscal_id",
         "timeline",
         "current_time",
-        "bud_history",
+        "outlaylogs",
         "road_delimiter",
         "fund_coin",
         "respect_bit",
@@ -123,7 +123,7 @@ def test_get_from_dict_ReturnsFiscalUnit():
     assert x_fiscal._fund_coin == sue_fund_coin
     assert x_fiscal._respect_bit == sue_respect_bit
     assert x_fiscal._penny == sue_penny
-    assert x_fiscal.bud_history == music_fiscal.bud_history
+    assert x_fiscal.outlaylogs == music_fiscal.outlaylogs
     assert x_fiscal.fiscals_dir == music_fiscal.fiscals_dir
     assert x_fiscal == music_fiscal
 
@@ -168,6 +168,6 @@ def test_get_from_json_ReturnsFiscalUnit():
     assert x_fiscal._fund_coin == sue_fund_coin
     assert x_fiscal._respect_bit == sue_respect_bit
     assert x_fiscal._penny == sue_penny
-    assert x_fiscal.bud_history == music_fiscal.bud_history
+    assert x_fiscal.outlaylogs == music_fiscal.outlaylogs
     assert x_fiscal.fiscals_dir == music_fiscal.fiscals_dir
     assert x_fiscal == music_fiscal

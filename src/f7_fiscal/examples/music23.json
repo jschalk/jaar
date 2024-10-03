@@ -56,7 +56,7 @@
         "yr1_jan1_offset": 440640
     },
     "current_time": 23,
-    "bud_history": {
+    "outlaylogs": {
         "Bob": {
             "owner_id": "Bob",
             "episodes": {"702": {"timestamp": 702, "money_magnitude": 33}}
