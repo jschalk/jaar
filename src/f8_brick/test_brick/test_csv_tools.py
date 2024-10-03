@@ -1,6 +1,6 @@
 from src.f0_instrument.dict_tool import extract_csv_headers
 from src.f4_gift.atom_config import acct_id_str, fiscal_id_str, owner_id_str
-from src.f8_stone.stone import (
+from src.f8_brick.brick import (
     get_csv_fiscal_id_owner_id_metrics,
     fiscal_id_owner_id_nested_csv_dict,
 )

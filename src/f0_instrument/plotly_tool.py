@@ -77,7 +77,7 @@ def add_rect_arrow(fig: plotly_Figure, x0, y0, ax0, ay0, color=None):
     # darkorchid, darkred, darksalmon, darkseagreen,
     # darkslateblue, darkslategray, darkslategrey,
     # darkturquoise, darkviolet, deeppink, deepskyblue,
-    # dimgray, dimgrey, dodgerblue, firebrick,
+    # dimgray, dimgrey, dodgerblue,
     # floralwhite, forestgreen, fuchsia, gainsboro,
     # ghostwhite, gold, goldenrod, gray, grey, green,
     # greenyellow, honeydew, hotpink, indianred, indigo,

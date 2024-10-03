@@ -19,22 +19,22 @@ from src.f4_gift.atom_config import (
     debtit_vote_str,
     credit_vote_str,
 )
-from src.f8_stone.stone import create_stone_df, get_stoneref, save_stone_csv
-from src.f8_stone.stone_config import (
-    stone_format_00021_bud_acctunit_v0_0_0,
-    stone_format_00020_bud_acct_membership_v0_0_0,
-    stone_format_00003_ideaunit_v0_0_0,
-    stone_format_00019_ideaunit_v0_0_0,
+from src.f8_brick.brick import create_brick_df, get_brickref, save_brick_csv
+from src.f8_brick.brick_config import (
+    brick_format_00021_bud_acctunit_v0_0_0,
+    brick_format_00020_bud_acct_membership_v0_0_0,
+    brick_format_00003_ideaunit_v0_0_0,
+    brick_format_00019_ideaunit_v0_0_0,
 )
-from src.f8_stone.examples.stone_env import (
-    stone_examples_dir,
-    stone_fiscals_dir,
-    stone_env_setup_cleanup,
+from src.f8_brick.examples.brick_env import (
+    brick_examples_dir,
+    brick_fiscals_dir,
+    brick_env_setup_cleanup,
 )
 from os.path import exists as os_path_exists
 
 
-def test_create_stone_df_Arg_stone_format_00021_bud_acctunit_v0_0_0():
+def test_create_brick_df_Arg_brick_format_00021_bud_acctunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -52,13 +52,13 @@ def test_create_stone_df_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
 
     # WHEN
-    x_stone_name = stone_format_00021_bud_acctunit_v0_0_0()
-    acct_dataframe = create_stone_df(sue_budunit, x_stone_name)
+    x_brick_name = brick_format_00021_bud_acctunit_v0_0_0()
+    acct_dataframe = create_brick_df(sue_budunit, x_brick_name)
 
     # THEN
     array_headers = list(acct_dataframe.columns)
-    acct_stoneref = get_stoneref(x_stone_name)
-    assert array_headers == acct_stoneref.get_headers_list()
+    acct_brickref = get_brickref(x_brick_name)
+    assert array_headers == acct_brickref.get_headers_list()
     assert acct_dataframe.loc[0, fiscal_id_str()] == music_fiscal_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[0, acct_id_str()] == bob_str
@@ -80,7 +80,7 @@ def test_create_stone_df_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     assert len(acct_dataframe) == 3
 
 
-def test_create_stone_df_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
+def test_create_brick_df_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -109,14 +109,14 @@ def test_create_stone_df_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     yao_acctunit.add_membership(ohio_str, yao_ohio_credit_w, yao_ohio_debtit_w)
 
     # WHEN
-    x_stone_name = stone_format_00020_bud_acct_membership_v0_0_0()
-    membership_dataframe = create_stone_df(sue_budunit, x_stone_name)
+    x_brick_name = brick_format_00020_bud_acct_membership_v0_0_0()
+    membership_dataframe = create_brick_df(sue_budunit, x_brick_name)
 
     # THEN
     array_headers = list(membership_dataframe.columns)
-    acct_stoneref = get_stoneref(x_stone_name)
+    acct_brickref = get_brickref(x_brick_name)
     print(f"{len(membership_dataframe)=}")
-    assert array_headers == acct_stoneref.get_headers_list()
+    assert array_headers == acct_brickref.get_headers_list()
     assert membership_dataframe.loc[0, fiscal_id_str()] == music_fiscal_id
     assert membership_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert membership_dataframe.loc[0, acct_id_str()] == bob_str
@@ -147,7 +147,7 @@ def test_create_stone_df_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     assert len(membership_dataframe) == 7
 
 
-def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0():
+def test_create_brick_df_Arg_brick_format_00003_ideaunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     music_fiscal_id = "music56"
@@ -161,12 +161,12 @@ def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
 
     # WHEN
-    x_stone_name = stone_format_00003_ideaunit_v0_0_0()
-    ideaunit_format = create_stone_df(sue_budunit, x_stone_name)
+    x_brick_name = brick_format_00003_ideaunit_v0_0_0()
+    ideaunit_format = create_brick_df(sue_budunit, x_brick_name)
 
     # THEN
     array_headers = list(ideaunit_format.columns)
-    assert array_headers == get_stoneref(x_stone_name).get_headers_list()
+    assert array_headers == get_brickref(x_brick_name).get_headers_list()
 
     assert ideaunit_format.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert ideaunit_format.loc[0, pledge_str()] == ""
@@ -184,28 +184,28 @@ def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0():
     assert len(ideaunit_format) == 2
 
 
-def test_save_stone_csv_Arg_stone_format_00019_ideaunit_v0_0_0():
+def test_save_brick_csv_Arg_brick_format_00019_ideaunit_v0_0_0():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue", "music56")
     sue_budunit = add_time_creg_ideaunit(sue_budunit)
     sue_budunit = add_time_five_ideaunit(sue_budunit)
-    x_stone_name = stone_format_00019_ideaunit_v0_0_0()
+    x_brick_name = brick_format_00019_ideaunit_v0_0_0()
 
     # WHEN
     # acct_filename = f"{sue_str}_ideaunit_example_00019.csv"
-    # csv_example_path = create_file_path(stone_fiscals_dir(), acct_filename)
-    # save_stone_csv(x_stone_name, sue_budunit, stone_examples_dir(), acct_filename)
-    stone_df = create_stone_df(sue_budunit, x_stone_name)
+    # csv_example_path = create_file_path(brick_fiscals_dir(), acct_filename)
+    # save_brick_csv(x_brick_name, sue_budunit, brick_examples_dir(), acct_filename)
+    brick_df = create_brick_df(sue_budunit, x_brick_name)
 
     # THEN
-    array_headers = list(stone_df.columns)
-    assert array_headers == get_stoneref(x_stone_name).get_headers_list()
+    array_headers = list(brick_df.columns)
+    assert array_headers == get_brickref(x_brick_name).get_headers_list()
     # for x_array_header in array_headers:
     #     print(f"{x_array_header=}")
 
 
-def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
-    stone_env_setup_cleanup,
+def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
+    brick_env_setup_cleanup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -222,14 +222,14 @@ def test_save_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
-    j1_stonename = stone_format_00021_bud_acctunit_v0_0_0()
+    j1_brickname = brick_format_00021_bud_acctunit_v0_0_0()
     acct_filename = f"{sue_str}_acct_example_00.csv"
-    csv_example_path = create_file_path(stone_fiscals_dir(), acct_filename)
+    csv_example_path = create_file_path(brick_fiscals_dir(), acct_filename)
     print(f"{csv_example_path}")
     assert not os_path_exists(csv_example_path)
 
     # WHEN
-    save_stone_csv(j1_stonename, sue_budunit, stone_fiscals_dir(), acct_filename)
+    save_brick_csv(j1_brickname, sue_budunit, brick_fiscals_dir(), acct_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)
@@ -238,15 +238,15 @@ music56,Sue,Bob,29,13
 music56,Sue,Sue,23,11
 music56,Sue,Yao,37,41
 """
-    stone_file_str = open_file(stone_fiscals_dir(), acct_filename)
-    print(f"      {stone_file_str=}")
+    brick_file_str = open_file(brick_fiscals_dir(), acct_filename)
+    print(f"      {brick_file_str=}")
     print(f"{sue1_acct_example_csv=}")
-    assert stone_file_str == sue1_acct_example_csv
+    assert brick_file_str == sue1_acct_example_csv
 
     # WHEN
     zia_str = "Zia"
     sue_budunit.add_acctunit(zia_str)
-    save_stone_csv(j1_stonename, sue_budunit, stone_fiscals_dir(), acct_filename)
+    save_brick_csv(j1_brickname, sue_budunit, brick_fiscals_dir(), acct_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)
@@ -256,10 +256,10 @@ music56,Sue,Sue,23,11
 music56,Sue,Yao,37,41
 music56,Sue,Zia,1,1
 """
-    assert open_file(stone_fiscals_dir(), acct_filename) == sue2_acct_example_csv
+    assert open_file(brick_fiscals_dir(), acct_filename) == sue2_acct_example_csv
 
 
-def test_save_stone_csv_Arg_stone_format_00003_ideaunit_v0_0_0(stone_env_setup_cleanup):
+def test_save_brick_csv_Arg_brick_format_00003_ideaunit_v0_0_0(brick_env_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -272,14 +272,14 @@ def test_save_stone_csv_Arg_stone_format_00003_ideaunit_v0_0_0(stone_env_setup_c
     clean_str = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_str)
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
-    x_stone_name = stone_format_00003_ideaunit_v0_0_0()
-    ideaunit_format = create_stone_df(sue_budunit, x_stone_name)
+    x_brick_name = brick_format_00003_ideaunit_v0_0_0()
+    ideaunit_format = create_brick_df(sue_budunit, x_brick_name)
     acct_filename = f"{sue_str}_ideaunit_example_000.csv"
-    csv_example_path = create_file_path(stone_fiscals_dir(), acct_filename)
+    csv_example_path = create_file_path(brick_fiscals_dir(), acct_filename)
     assert not os_path_exists(csv_example_path)
 
     # WHEN
-    save_stone_csv(x_stone_name, sue_budunit, stone_fiscals_dir(), acct_filename)
+    save_brick_csv(x_brick_name, sue_budunit, brick_fiscals_dir(), acct_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)

@@ -21,15 +21,15 @@ from src.f4_gift.atom_config import (
     credit_vote_str,
 )
 from src.f4_gift.atom import atomunit_shop
-from src.f8_stone.stone import create_stone_df, make_deltaunit, get_stoneref
-from src.f8_stone.stone_config import (
-    stone_format_00021_bud_acctunit_v0_0_0,
-    stone_format_00020_bud_acct_membership_v0_0_0,
-    stone_format_00003_ideaunit_v0_0_0,
+from src.f8_brick.brick import create_brick_df, make_deltaunit, get_brickref
+from src.f8_brick.brick_config import (
+    brick_format_00021_bud_acctunit_v0_0_0,
+    brick_format_00020_bud_acct_membership_v0_0_0,
+    brick_format_00003_ideaunit_v0_0_0,
 )
 
 
-def test_make_deltaunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
+def test_make_deltaunit_Arg_brick_format_00021_bud_acctunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -45,8 +45,8 @@ def test_make_deltaunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
-    x_stone_name = stone_format_00021_bud_acctunit_v0_0_0()
-    acct_dataframe = create_stone_df(sue_budunit, x_stone_name)
+    x_brick_name = brick_format_00021_bud_acctunit_v0_0_0()
+    acct_dataframe = create_brick_df(sue_budunit, x_brick_name)
     acct_csv = acct_dataframe.to_csv(index=False)
 
     # WHEN
@@ -74,7 +74,7 @@ def test_make_deltaunit_Arg_stone_format_00021_bud_acctunit_v0_0_0():
     assert len(sue_acct_deltaunit.get_ordered_atomunits()) == 3
 
 
-def test_make_deltaunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
+def test_make_deltaunit_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -101,8 +101,8 @@ def test_make_deltaunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     bob_acctunit.add_membership(iowa_str, bob_iowa_credit_vote, bob_iowa_debtit_vote)
     yao_acctunit.add_membership(iowa_str, yao_iowa_credit_vote, yao_iowa_debtit_vote)
     yao_acctunit.add_membership(ohio_str, yao_ohio_credit_vote, yao_ohio_debtit_vote)
-    x_stone_name = stone_format_00020_bud_acct_membership_v0_0_0()
-    membership_dataframe = create_stone_df(sue_budunit, x_stone_name)
+    x_brick_name = brick_format_00020_bud_acct_membership_v0_0_0()
+    membership_dataframe = create_brick_df(sue_budunit, x_brick_name)
     assert len(membership_dataframe) == 7
     membership_csv = membership_dataframe.to_csv(index=False)
     print(f"{membership_csv=}")
@@ -144,7 +144,7 @@ def test_make_deltaunit_Arg_stone_format_00020_bud_acct_membership_v0_0_0():
     assert len(membership_changunit.get_ordered_atomunits()) == 7
 
 
-def test_make_deltaunit_Arg_stone_format_00003_ideaunit_v0_0_0():
+def test_make_deltaunit_Arg_brick_format_00003_ideaunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -157,8 +157,8 @@ def test_make_deltaunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     clean_str = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_str)
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
-    x_stone_name = stone_format_00003_ideaunit_v0_0_0()
-    ideaunit_dataframe = create_stone_df(sue_budunit, x_stone_name)
+    x_brick_name = brick_format_00003_ideaunit_v0_0_0()
+    ideaunit_dataframe = create_brick_df(sue_budunit, x_brick_name)
     ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
 
     # WHEN
@@ -182,24 +182,24 @@ def test_make_deltaunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     assert len(ideaunit_changunit.get_ordered_atomunits()) == 2
 
 
-def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001(
+def test_create_brick_df_Arg_brick_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001(
     big_volume,
 ):
     # sourcery skip: no-conditionals-in-tests
     if big_volume:
         # ESTABLISH / WHEN
-        x_stone_name = stone_format_00003_ideaunit_v0_0_0()
+        x_brick_name = brick_format_00003_ideaunit_v0_0_0()
 
         # WHEN
-        ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
+        ideaunit_format = create_brick_df(budunit_v001(), x_brick_name)
 
         # THEN
         array_headers = list(ideaunit_format.columns)
-        assert array_headers == get_stoneref(x_stone_name).get_headers_list()
+        assert array_headers == get_brickref(x_brick_name).get_headers_list()
         assert len(ideaunit_format) == 251
 
 
-def test_make_deltaunit_Arg_stone_format_00003_ideaunit_v0_0_0():
+def test_make_deltaunit_Arg_brick_format_00003_ideaunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -212,8 +212,8 @@ def test_make_deltaunit_Arg_stone_format_00003_ideaunit_v0_0_0():
     clean_str = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_str)
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
-    x_stone_name = stone_format_00003_ideaunit_v0_0_0()
-    ideaunit_dataframe = create_stone_df(sue_budunit, x_stone_name)
+    x_brick_name = brick_format_00003_ideaunit_v0_0_0()
+    ideaunit_dataframe = create_brick_df(sue_budunit, x_brick_name)
     ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
 
     # WHEN

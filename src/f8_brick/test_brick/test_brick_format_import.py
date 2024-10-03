@@ -8,26 +8,26 @@ from src.f4_gift.atom_config import (
     credit_belief_str,
 )
 from src.f5_listen.hubunit import hubunit_shop
-from src.f8_stone.stone import (
-    create_stone_df,
-    get_stoneref,
-    save_stone_csv,
-    open_stone_csv,
-    load_stone_csv,
+from src.f8_brick.brick import (
+    create_brick_df,
+    get_brickref,
+    save_brick_csv,
+    open_brick_csv,
+    load_brick_csv,
 )
-from src.f8_stone.stone_config import (
-    stone_format_00021_bud_acctunit_v0_0_0,
-    stone_format_00002_membership_v0_0_0,
-    stone_format_00003_ideaunit_v0_0_0,
+from src.f8_brick.brick_config import (
+    brick_format_00021_bud_acctunit_v0_0_0,
+    brick_format_00002_membership_v0_0_0,
+    brick_format_00003_ideaunit_v0_0_0,
 )
-from src.f8_stone.examples.stone_env import (
-    stone_examples_dir,
-    stone_fiscals_dir,
-    stone_env_setup_cleanup,
+from src.f8_brick.examples.brick_env import (
+    brick_examples_dir,
+    brick_fiscals_dir,
+    brick_env_setup_cleanup,
 )
 
 
-def test_open_stone_csv_ReturnsObj():
+def test_open_brick_csv_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -43,17 +43,17 @@ def test_open_stone_csv_ReturnsObj():
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
-    j1_stonename = stone_format_00021_bud_acctunit_v0_0_0()
+    j1_brickname = brick_format_00021_bud_acctunit_v0_0_0()
     acct_filename = f"{sue_str}_acct_example_01.csv"
-    save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
+    save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), acct_filename)
 
     # WHEN
-    acct_dataframe = open_stone_csv(stone_examples_dir(), acct_filename)
+    acct_dataframe = open_brick_csv(brick_examples_dir(), acct_filename)
 
     # THEN
     array_headers = list(acct_dataframe.columns)
-    acct_stoneref = get_stoneref(j1_stonename)
-    assert array_headers == acct_stoneref.get_headers_list()
+    acct_brickref = get_brickref(j1_brickname)
+    assert array_headers == acct_brickref.get_headers_list()
     assert acct_dataframe.loc[0, fiscal_id_str()] == music_fiscal_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[0, acct_id_str()] == bob_str
@@ -75,8 +75,8 @@ def test_open_stone_csv_ReturnsObj():
     assert len(acct_dataframe) == 3
 
 
-def test_load_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_csvToVoice(
-    stone_env_setup_cleanup,
+def test_load_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_csvToVoice(
+    brick_env_setup_cleanup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -93,17 +93,17 @@ def test_load_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_csvToVoice(
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
-    j1_stonename = stone_format_00021_bud_acctunit_v0_0_0()
+    j1_brickname = brick_format_00021_bud_acctunit_v0_0_0()
     acct_filename = f"{sue_str}_acct_example_02.csv"
-    csv_example_path = f_path(stone_examples_dir(), acct_filename)
+    csv_example_path = f_path(brick_examples_dir(), acct_filename)
     print(f"{csv_example_path}")
-    save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
-    sue_hubunit = hubunit_shop(stone_fiscals_dir(), music_fiscal_id, owner_id=sue_str)
+    save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), acct_filename)
+    sue_hubunit = hubunit_shop(brick_fiscals_dir(), music_fiscal_id, owner_id=sue_str)
     # Open FiscalUnit and confirm voice BudUnit does not exist
     assert not sue_hubunit.voice_file_exists()
 
     # WHEN
-    load_stone_csv(sue_hubunit.fiscals_dir, stone_examples_dir(), acct_filename)
+    load_brick_csv(sue_hubunit.fiscals_dir, brick_examples_dir(), acct_filename)
 
     # THEN
     # assert voice Budunit now exists
@@ -126,8 +126,8 @@ def test_load_stone_csv_Arg_stone_format_00021_bud_acctunit_v0_0_0_csvToVoice(
     assert yao_acctunit.debtit_belief == yao_debtit_belief
 
 
-def test_load_stone_csv_csvToVoice(
-    stone_env_setup_cleanup,
+def test_load_brick_csv_csvToVoice(
+    brick_env_setup_cleanup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -144,17 +144,17 @@ def test_load_stone_csv_csvToVoice(
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
-    j1_stonename = stone_format_00021_bud_acctunit_v0_0_0()
+    j1_brickname = brick_format_00021_bud_acctunit_v0_0_0()
     acct_filename = f"{sue_str}_acct_example_02.csv"
-    csv_example_path = f_path(stone_examples_dir(), acct_filename)
+    csv_example_path = f_path(brick_examples_dir(), acct_filename)
     print(f"{csv_example_path}")
-    save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
-    sue_hubunit = hubunit_shop(stone_fiscals_dir(), music_fiscal_id, owner_id=sue_str)
+    save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), acct_filename)
+    sue_hubunit = hubunit_shop(brick_fiscals_dir(), music_fiscal_id, owner_id=sue_str)
     # Open FiscalUnit and confirm voice BudUnit does not exist
     assert not sue_hubunit.voice_file_exists()
 
     # WHEN
-    load_stone_csv(sue_hubunit.fiscals_dir, stone_examples_dir(), acct_filename)
+    load_brick_csv(sue_hubunit.fiscals_dir, brick_examples_dir(), acct_filename)
 
     # THEN
     # assert voice Budunit now exists
@@ -177,8 +177,8 @@ def test_load_stone_csv_csvToVoice(
     assert yao_acctunit.debtit_belief == yao_debtit_belief
 
 
-# def test_load_stone_csv_csvToVoice(
-#     stone_env_setup_cleanup,
+# def test_load_brick_csv_csvToVoice(
+#     brick_env_setup_cleanup,
 # ):
 #     # ESTABLISH
 #     sue_str = "Sue"
@@ -187,12 +187,12 @@ def test_load_stone_csv_csvToVoice(
 #     sue_budunit = budunit_shop(sue_str, music_fiscal_id)
 #     sue_budunit.add_acctunit(sue_str)
 #     sue_budunit.add_acctunit(bob_str)
-#     j1_stonename = stone_format_00021_bud_acctunit_v0_0_0()
+#     j1_brickname = brick_format_00021_bud_acctunit_v0_0_0()
 #     acct_filename = f"{sue_str}_acct_example_02.csv"
-#     csv_example_path = f_path(stone_examples_dir(), acct_filename)
+#     csv_example_path = f_path(brick_examples_dir(), acct_filename)
 #     print(f"{csv_example_path}")
-#     save_stone_csv(j1_stonename, sue_budunit, stone_examples_dir(), acct_filename)
-#     sue_hubunit = hubunit_shop(stone_fiscals_dir(), music_fiscal_id, owner_id=sue_str)
+#     save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), acct_filename)
+#     sue_hubunit = hubunit_shop(brick_fiscals_dir(), music_fiscal_id, owner_id=sue_str)
 #     sue_hubunit.save_voice_bud(budunit_shop(sue_str, music_fiscal_id))
 #     sue_hubunit._create_initial_gift_files_from_voice()
 #     old_sue_voice = sue_hubunit.get_voice_bud()
@@ -207,7 +207,7 @@ def test_load_stone_csv_csvToVoice(
 #     assert sue_hubunit.get_max_gift_file_number() == 3
 
 #     # WHEN
-#     load_stone_csv(sue_hubunit.fiscals_dir, stone_examples_dir(), acct_filename)
+#     load_brick_csv(sue_hubunit.fiscals_dir, brick_examples_dir(), acct_filename)
 
 #     # THEN
 #     # assert voice Budunit acctunit now exists
@@ -221,17 +221,17 @@ def test_load_stone_csv_csvToVoice(
 #     assert 1 == 2
 
 
-# def test_create_stone_df_Arg_stone_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001(
+# def test_create_brick_df_Arg_brick_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001(
 #     big_volume,
 # ):
 #     if big_volume:
 #         # ESTABLISH / WHEN
-#         x_stone_name = stone_format_00003_ideaunit_v0_0_0()
+#         x_brick_name = brick_format_00003_ideaunit_v0_0_0()
 
 #         # WHEN
-#         ideaunit_format = create_stone_df(budunit_v001(), x_stone_name)
+#         ideaunit_format = create_brick_df(budunit_v001(), x_brick_name)
 
 #         # THEN
 #         array_headers = list(ideaunit_format.columns)
-#         assert array_headers == get_stoneref(x_stone_name).get_headers_list()
+#         assert array_headers == get_brickref(x_brick_name).get_headers_list()
 #         assert len(ideaunit_format) == 251
