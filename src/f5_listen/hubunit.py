@@ -32,11 +32,11 @@ from src.f1_road.finance import (
     TimeLinePoint,
 )
 from src.f1_road.finance_tran import (
-    OutlayEpisode,
-    outlayepisode_shop,
-    OutlayLog,
-    outlaylog_shop,
-    get_outlayepisode_from_json,
+    PurviewEpisode,
+    purviewepisode_shop,
+    PurviewLog,
+    purviewlog_shop,
+    get_purviewepisode_from_json,
 )
 from src.f1_road.road import (
     OwnerID,
@@ -91,7 +91,7 @@ class _save_valid_budpoint_Exception(Exception):
     pass
 
 
-class calc_timepoint_outlay_Exception(Exception):
+class calc_timepoint_purview_Exception(Exception):
     pass
 
 
@@ -415,39 +415,41 @@ class HubUnit:
     def timepoint_dir(self, x_timestamp: TimeLinePoint) -> str:
         return f"{self.timeline_dir()}/{x_timestamp}"
 
-    def outlay_file_name(self) -> str:
-        return "outlay.json"
+    def purview_file_name(self) -> str:
+        return "purview.json"
 
-    def outlay_file_path(self, x_timestamp: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_timestamp), self.outlay_file_name())
+    def purview_file_path(self, x_timestamp: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_timestamp), self.purview_file_name())
 
-    def _save_valid_outlay_file(self, x_outlay: OutlayEpisode):
-        x_outlay.calc_magnitude()
+    def _save_valid_purview_file(self, x_purview: PurviewEpisode):
+        x_purview.calc_magnitude()
         save_file(
-            self.timepoint_dir(x_outlay.timestamp),
-            self.outlay_file_name(),
-            x_outlay.get_json(),
+            self.timepoint_dir(x_purview.timestamp),
+            self.purview_file_name(),
+            x_purview.get_json(),
             replace=True,
         )
 
-    def outlay_file_exists(self, x_timestamp: TimeLinePoint) -> bool:
-        return os_path_exists(self.outlay_file_path(x_timestamp))
+    def purview_file_exists(self, x_timestamp: TimeLinePoint) -> bool:
+        return os_path_exists(self.purview_file_path(x_timestamp))
 
-    def get_outlay_file(self, x_timestamp: TimeLinePoint) -> OutlayEpisode:
-        if self.outlay_file_exists(x_timestamp):
-            x_json = open_file(self.timepoint_dir(x_timestamp), self.outlay_file_name())
-            return get_outlayepisode_from_json(x_json)
+    def get_purview_file(self, x_timestamp: TimeLinePoint) -> PurviewEpisode:
+        if self.purview_file_exists(x_timestamp):
+            x_json = open_file(
+                self.timepoint_dir(x_timestamp), self.purview_file_name()
+            )
+            return get_purviewepisode_from_json(x_json)
 
-    def delete_outlay_file(self, x_timestamp: TimeLinePoint):
-        delete_dir(self.outlay_file_path(x_timestamp))
+    def delete_purview_file(self, x_timestamp: TimeLinePoint):
+        delete_dir(self.purview_file_path(x_timestamp))
 
-    def get_outlaylog(self) -> OutlayLog:
-        x_outlaylog = outlaylog_shop(self.owner_id)
+    def get_purviewlog(self) -> PurviewLog:
+        x_purviewlog = purviewlog_shop(self.owner_id)
         x_dirs = self._get_timepoint_dirs()
-        for x_outlay_folder_name in x_dirs:
-            x_outlayepisode = self.get_outlay_file(x_outlay_folder_name)
-            x_outlaylog.set_episode(x_outlayepisode)
-        return x_outlaylog
+        for x_purview_folder_name in x_dirs:
+            x_purviewepisode = self.get_purview_file(x_purview_folder_name)
+            x_purviewlog.set_episode(x_purviewepisode)
+        return x_purviewlog
 
     def _get_timepoint_dirs(self) -> list[str]:
         x_dict = dir_files(self.timeline_dir(), include_dirs=True, include_files=False)
@@ -486,24 +488,24 @@ class HubUnit:
     def delete_budpoint_file(self, x_timestamp: TimeLinePoint):
         delete_dir(self.budpoint_file_path(x_timestamp))
 
-    def calc_timepoint_outlay(self, x_timestamp: TimeLinePoint):
+    def calc_timepoint_purview(self, x_timestamp: TimeLinePoint):
         if self.budpoint_file_exists(x_timestamp) is False:
-            exception_str = f"Cannot calculate timepoint {x_timestamp} outlays without saved BudPoint file"
-            raise calc_timepoint_outlay_Exception(exception_str)
+            exception_str = f"Cannot calculate timepoint {x_timestamp} purviews without saved BudPoint file"
+            raise calc_timepoint_purview_Exception(exception_str)
         x_budpoint = self.get_budpoint_file(x_timestamp)
-        if self.outlay_file_exists(x_timestamp):
-            x_outlayepisode = self.get_outlay_file(x_timestamp)
-            x_budpoint.set_fund_pool(x_outlayepisode.purview)
+        if self.purview_file_exists(x_timestamp):
+            x_purviewepisode = self.get_purview_file(x_timestamp)
+            x_budpoint.set_fund_pool(x_purviewepisode.amount)
         else:
-            x_outlayepisode = outlayepisode_shop(x_timestamp)
-        x_net_outlays = get_bud_settle_acct_net_dict(x_budpoint, True)
-        x_outlayepisode._net_outlays = x_net_outlays
+            x_purviewepisode = purviewepisode_shop(x_timestamp)
+        x_net_purviews = get_bud_settle_acct_net_dict(x_budpoint, True)
+        x_purviewepisode._net_purviews = x_net_purviews
         self._save_valid_budpoint_file(x_timestamp, x_budpoint)
-        self._save_valid_outlay_file(x_outlayepisode)
+        self._save_valid_purview_file(x_purviewepisode)
 
-    def calc_timepoint_outlays(self):
+    def calc_timepoint_purviews(self):
         for x_timepoint in self._get_timepoint_dirs():
-            self.calc_timepoint_outlay(x_timepoint)
+            self.calc_timepoint_purview(x_timepoint)
 
     def keep_dir(self) -> str:
         if self.keep_road is None:

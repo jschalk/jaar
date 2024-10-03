@@ -221,7 +221,7 @@ def bud_get_obj(x_category: str, x_bud: BudUnit, required_args: dict[str, any]) 
         return x_func(x_bud, required_args)
 
 
-def get_bud_outlay_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]:
+def get_bud_purview_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]:
     if settle_bud:
         x_bud.settle_bud()
 
@@ -233,10 +233,10 @@ def get_bud_outlay_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]:
     return x_list
 
 
-def get_bud_outlay_csv(x_bud: BudUnit, settle_bud: bool = None) -> str:
-    x_outlay_array = get_bud_outlay_array(x_bud, settle_bud)
+def get_bud_purview_csv(x_bud: BudUnit, settle_bud: bool = None) -> str:
+    x_purview_array = get_bud_purview_array(x_bud, settle_bud)
     x_headers = ["acct_id", "fund_take", "fund_give"]
-    return create_csv(x_headers, x_outlay_array)
+    return create_csv(x_headers, x_purview_array)
 
 
 def get_bud_settle_acct_net_dict(

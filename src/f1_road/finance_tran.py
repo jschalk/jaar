@@ -16,37 +16,37 @@ class calc_magnitudeException(Exception):
 
 
 @dataclass
-class OutlayEpisode:
+class PurviewEpisode:
     timestamp: TimeLinePoint = None
-    purview: FundNum = None
+    amount: FundNum = None
     _magnitude: FundNum = None
-    _net_outlays: dict[AcctID, FundNum] = None
+    _net_purviews: dict[AcctID, FundNum] = None
 
-    def set_net_outlay(self, x_acct_id: AcctID, net_outlay: FundNum):
-        self._net_outlays[x_acct_id] = net_outlay
+    def set_net_purview(self, x_acct_id: AcctID, net_purview: FundNum):
+        self._net_purviews[x_acct_id] = net_purview
 
-    def net_outlay_exists(self, x_acct_id: AcctID) -> bool:
-        return self._net_outlays.get(x_acct_id) != None
+    def net_purview_exists(self, x_acct_id: AcctID) -> bool:
+        return self._net_purviews.get(x_acct_id) != None
 
-    def get_net_outlay(self, x_acct_id: AcctID) -> FundNum:
-        return self._net_outlays.get(x_acct_id)
+    def get_net_purview(self, x_acct_id: AcctID) -> FundNum:
+        return self._net_purviews.get(x_acct_id)
 
-    def del_net_outlay(self, x_acct_id: AcctID):
-        self._net_outlays.pop(x_acct_id)
+    def del_net_purview(self, x_acct_id: AcctID):
+        self._net_purviews.pop(x_acct_id)
 
     def calc_magnitude(self):
-        net_outlays = self._net_outlays.values()
-        x_cred_sum = sum(net_outlay for net_outlay in net_outlays if net_outlay > 0)
-        x_debt_sum = sum(net_outlay for net_outlay in net_outlays if net_outlay < 0)
+        net_purviews = self._net_purviews.values()
+        x_cred_sum = sum(net_purview for net_purview in net_purviews if net_purview > 0)
+        x_debt_sum = sum(net_purview for net_purview in net_purviews if net_purview < 0)
         if x_cred_sum + x_debt_sum != 0:
-            exception_text = f"magnitude cannot be calculated: debt_outlay={x_debt_sum}, cred_outlay={x_cred_sum}"
+            exception_text = f"magnitude cannot be calculated: debt_purview={x_debt_sum}, cred_purview={x_cred_sum}"
             raise calc_magnitudeException(exception_text)
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
-        x_dict = {"timestamp": self.timestamp, "purview": self.purview}
-        if self._net_outlays:
-            x_dict["net_outlays"] = self._net_outlays
+        x_dict = {"timestamp": self.timestamp, "amount": self.amount}
+        if self._net_purviews:
+            x_dict["net_purviews"] = self._net_purviews
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
         return x_dict
@@ -55,42 +55,42 @@ class OutlayEpisode:
         return get_json_from_dict(self.get_dict())
 
 
-def outlayepisode_shop(
+def purviewepisode_shop(
     x_timestamp: TimeLinePoint,
-    x_purview: FundNum = None,
-    net_outlays: dict[AcctID, FundNum] = None,
+    x_amount: FundNum = None,
+    net_purviews: dict[AcctID, FundNum] = None,
     x_magnitude: FundNum = None,
-) -> OutlayEpisode:
-    if x_purview is None:
-        x_purview = default_fund_pool()
+) -> PurviewEpisode:
+    if x_amount is None:
+        x_amount = default_fund_pool()
 
-    return OutlayEpisode(
+    return PurviewEpisode(
         timestamp=x_timestamp,
-        purview=x_purview,
-        _net_outlays=get_empty_dict_if_none(net_outlays),
+        amount=x_amount,
+        _net_purviews=get_empty_dict_if_none(net_purviews),
         _magnitude=get_0_if_None(x_magnitude),
     )
 
 
 @dataclass
-class OutlayLog:
+class PurviewLog:
     owner_id: OwnerID = None
-    episodes: dict[TimeLinePoint, OutlayEpisode] = None
-    _sum_outlayepisode_purview: FundNum = None
-    _sum_acct_outlays: int = None
+    episodes: dict[TimeLinePoint, PurviewEpisode] = None
+    _sum_purviewepisode_amount: FundNum = None
+    _sum_acct_purviews: int = None
     _timestamp_min: TimeLinePoint = None
     _timestamp_max: TimeLinePoint = None
 
-    def set_episode(self, x_episode: OutlayEpisode):
+    def set_episode(self, x_episode: PurviewEpisode):
         self.episodes[x_episode.timestamp] = x_episode
 
-    def add_episode(self, x_timestamp: TimeLinePoint, x_purview: FundNum):
-        self.set_episode(outlayepisode_shop(x_timestamp, x_purview))
+    def add_episode(self, x_timestamp: TimeLinePoint, x_amount: FundNum):
+        self.set_episode(purviewepisode_shop(x_timestamp, x_amount))
 
     def episode_exists(self, x_timestamp: TimeLinePoint) -> bool:
         return self.episodes.get(x_timestamp) != None
 
-    def get_episode(self, x_timestamp: TimeLinePoint) -> OutlayEpisode:
+    def get_episode(self, x_timestamp: TimeLinePoint) -> PurviewEpisode:
         return self.episodes.get(x_timestamp)
 
     def del_episode(self, x_timestamp: TimeLinePoint):
@@ -98,12 +98,12 @@ class OutlayLog:
 
     def get_2d_array(self) -> list[list]:
         return [
-            [self.owner_id, x_episode.timestamp, x_episode.purview]
+            [self.owner_id, x_episode.timestamp, x_episode.amount]
             for x_episode in self.episodes.values()
         ]
 
     def get_headers(self) -> list:
-        return ["owner_id", "timestamp", "purview"]
+        return ["owner_id", "timestamp", "amount"]
 
     def get_dict(self) -> dict:
         return {"owner_id": self.owner_id, "episodes": self._get_episodes_dict()}
@@ -115,34 +115,34 @@ class OutlayLog:
         }
 
 
-def outlaylog_shop(owner_id: OwnerID) -> OutlayLog:
-    return OutlayLog(owner_id=owner_id, episodes={}, _sum_acct_outlays={})
+def purviewlog_shop(owner_id: OwnerID) -> PurviewLog:
+    return PurviewLog(owner_id=owner_id, episodes={}, _sum_acct_purviews={})
 
 
-def get_outlayepisode_from_dict(x_dict: dict) -> OutlayEpisode:
+def get_purviewepisode_from_dict(x_dict: dict) -> PurviewEpisode:
     x_timestamp = x_dict.get("timestamp")
-    x_purview = x_dict.get("purview")
-    x_net_outlays = x_dict.get("net_outlays")
+    x_amount = x_dict.get("amount")
+    x_net_purviews = x_dict.get("net_purviews")
     x_magnitude = x_dict.get("magnitude")
-    return outlayepisode_shop(x_timestamp, x_purview, x_net_outlays, x_magnitude)
+    return purviewepisode_shop(x_timestamp, x_amount, x_net_purviews, x_magnitude)
 
 
-def get_outlayepisode_from_json(x_json: str) -> OutlayEpisode:
-    return get_outlayepisode_from_dict(get_dict_from_json(x_json))
+def get_purviewepisode_from_json(x_json: str) -> PurviewEpisode:
+    return get_purviewepisode_from_dict(get_dict_from_json(x_json))
 
 
-def get_outlaylog_from_dict(x_dict: dict) -> OutlayLog:
+def get_purviewlog_from_dict(x_dict: dict) -> PurviewLog:
     x_owner_id = x_dict.get("owner_id")
-    x_outlaylog = outlaylog_shop(x_owner_id)
-    x_outlaylog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
-    return x_outlaylog
+    x_purviewlog = purviewlog_shop(x_owner_id)
+    x_purviewlog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
+    return x_purviewlog
 
 
-def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, OutlayEpisode]:
+def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, PurviewEpisode]:
     x_dict = {}
     for x_episode_dict in episodes_dict.values():
-        x_outlay_episode = get_outlayepisode_from_dict(x_episode_dict)
-        x_dict[x_outlay_episode.timestamp] = x_outlay_episode
+        x_purview_episode = get_purviewepisode_from_dict(x_episode_dict)
+        x_dict[x_purview_episode.timestamp] = x_purview_episode
     return x_dict
 
 

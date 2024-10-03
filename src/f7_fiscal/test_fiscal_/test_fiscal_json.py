@@ -29,9 +29,9 @@ def test_FiscalUnit_get_dict_ReturnsObj():
     sue_x4_magnitude = 55
     sue_x7_timestamp = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_outlaylog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
-    music_fiscal.add_outlaylog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
-    music_fiscal.add_outlaylog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
+    music_fiscal.add_purviewlog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
+    music_fiscal.add_purviewlog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
+    music_fiscal.add_purviewlog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
 
     # WHEN
     x_dict = music_fiscal.get_dict()
@@ -44,13 +44,13 @@ def test_FiscalUnit_get_dict_ReturnsObj():
     assert x_dict.get("fund_coin") == default_fund_coin_if_none()
     assert x_dict.get("respect_bit") == default_respect_bit_if_none()
     assert x_dict.get("penny") == default_penny_if_none()
-    assert x_dict.get("outlaylogs") == music_fiscal._get_outlaylogs_dict()
-    print(f"{ music_fiscal._get_outlaylogs_dict()=}")
+    assert x_dict.get("purviewlogs") == music_fiscal._get_purviewlogs_dict()
+    print(f"{ music_fiscal._get_purviewlogs_dict()=}")
     assert list(x_dict.keys()) == [
         "fiscal_id",
         "timeline",
         "current_time",
-        "outlaylogs",
+        "purviewlogs",
         "road_delimiter",
         "fund_coin",
         "respect_bit",
@@ -70,9 +70,9 @@ def test_FiscalUnit_get_json_ReturnsObj():
     sue_x4_magnitude = 55
     sue_x7_timestamp = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_outlaylog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
-    music_fiscal.add_outlaylog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
-    music_fiscal.add_outlaylog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
+    music_fiscal.add_purviewlog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
+    music_fiscal.add_purviewlog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
+    music_fiscal.add_purviewlog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
 
     # WHEN
     x_json = music_fiscal.get_json()
@@ -102,9 +102,9 @@ def test_get_from_dict_ReturnsFiscalUnit():
     sue_x4_magnitude = 55
     sue_x7_timestamp = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_outlaylog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
-    music_fiscal.add_outlaylog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
-    music_fiscal.add_outlaylog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
+    music_fiscal.add_purviewlog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
+    music_fiscal.add_purviewlog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
+    music_fiscal.add_purviewlog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
     music_fiscal.current_time = sue_current_time
     music_fiscal.road_delimiter = sue_road_delimiter
     music_fiscal.fund_coin = sue_fund_coin
@@ -123,7 +123,7 @@ def test_get_from_dict_ReturnsFiscalUnit():
     assert x_fiscal.fund_coin == sue_fund_coin
     assert x_fiscal.respect_bit == sue_respect_bit
     assert x_fiscal.penny == sue_penny
-    assert x_fiscal.outlaylogs == music_fiscal.outlaylogs
+    assert x_fiscal.purviewlogs == music_fiscal.purviewlogs
     assert x_fiscal.fiscals_dir == music_fiscal.fiscals_dir
     assert x_fiscal == music_fiscal
 
@@ -147,9 +147,9 @@ def test_get_from_json_ReturnsFiscalUnit():
     sue_x4_magnitude = 55
     sue_x7_timestamp = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_outlaylog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
-    music_fiscal.add_outlaylog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
-    music_fiscal.add_outlaylog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
+    music_fiscal.add_purviewlog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
+    music_fiscal.add_purviewlog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
+    music_fiscal.add_purviewlog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
     music_fiscal.current_time = sue_current_time
     music_fiscal.road_delimiter = sue_road_delimiter
     music_fiscal.fund_coin = sue_fund_coin
@@ -168,6 +168,6 @@ def test_get_from_json_ReturnsFiscalUnit():
     assert x_fiscal.fund_coin == sue_fund_coin
     assert x_fiscal.respect_bit == sue_respect_bit
     assert x_fiscal.penny == sue_penny
-    assert x_fiscal.outlaylogs == music_fiscal.outlaylogs
+    assert x_fiscal.purviewlogs == music_fiscal.purviewlogs
     assert x_fiscal.fiscals_dir == music_fiscal.fiscals_dir
     assert x_fiscal == music_fiscal
