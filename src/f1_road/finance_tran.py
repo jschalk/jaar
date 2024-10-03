@@ -21,7 +21,6 @@ class OutlayEpisode:
     purview: FundNum = None
     _magnitude: FundNum = None
     _net_outlays: dict[AcctID, FundNum] = None
-    _tender_desc: str = None
 
     def set_net_outlay(self, x_acct_id: AcctID, net_outlay: FundNum):
         self._net_outlays[x_acct_id] = net_outlay
@@ -151,7 +150,6 @@ def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, OutlayEpi
 class TranBook:
     fiscal_id: FiscalID = None
     tranlogs: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None
-    tender_desc: str = None
     _accts_net: dict[OwnerID, dict[AcctID, FundNum]] = None
 
     def set_tranlog(
@@ -204,12 +202,10 @@ class TranBook:
 def tranbook_shop(
     x_fiscal_id: FiscalID,
     x_tranlogs: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None,
-    x_tender_desc: str = None,
 ):
     return TranBook(
         fiscal_id=x_fiscal_id,
         tranlogs=get_empty_dict_if_none(x_tranlogs),
-        tender_desc=x_tender_desc,
         _accts_net={},
     )
 

@@ -127,7 +127,6 @@ class BudUnit:
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
     penny: PennyNum = None
-    tender_desc: str = None
     respect_bit: BitNum = None
     credor_respect: RespectNum = None
     debtor_respect: RespectNum = None
@@ -156,9 +155,6 @@ class BudUnit:
             exception_str = f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self._last_gift_id}."
             raise _last_gift_idException(exception_str)
         self._last_gift_id = x_last_gift_id
-
-    def set_tender_desc(self, x_tender_desc: str):
-        self.tender_desc = x_tender_desc
 
     def set_fund_pool(self, x_fund_pool):
         if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:

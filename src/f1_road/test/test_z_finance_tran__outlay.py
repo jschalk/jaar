@@ -21,7 +21,6 @@ def test_OutlayEpisode_Exists():
     assert not x_outlayepisode.purview
     assert not x_outlayepisode._net_outlays
     assert not x_outlayepisode._magnitude
-    assert not x_outlayepisode._tender_desc
 
 
 def test_outlayepisode_shop_ReturnsObj():
@@ -37,7 +36,6 @@ def test_outlayepisode_shop_ReturnsObj():
     assert t4_outlayepisode.purview == default_fund_pool()
     assert t4_outlayepisode._magnitude == 0
     assert not t4_outlayepisode._net_outlays
-    assert not t4_outlayepisode._tender_desc
 
 
 def test_outlayepisode_shop_ReturnsObjWith_net_outlays():
@@ -61,7 +59,6 @@ def test_outlayepisode_shop_ReturnsObjWith_net_outlays():
     assert x_outlayepisode.purview == t4_purview
     assert x_outlayepisode._magnitude == 677
     assert x_outlayepisode._net_outlays == t4_net_outlays
-    assert not x_outlayepisode._tender_desc
 
 
 def test_OutlayEpisode_set_net_outlay_SetsAttr():

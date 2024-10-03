@@ -415,11 +415,6 @@
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "tender_desc": {
-                "column_order": 8,
-                "python_type": "str",
-                "sqlite_datatype": "TEXT"
-            },
             "penny": {
                 "column_order": 6,
                 "python_type": "float",

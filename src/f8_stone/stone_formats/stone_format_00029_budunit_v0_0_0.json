@@ -19,9 +19,6 @@
         "max_tree_traverse": {
             "column_order": 7
         },
-        "tender_desc": {
-            "column_order": 10
-        },
         "owner_id": {
             "column_order": 1,
             "sort_order": 1

@@ -249,7 +249,7 @@ def test_get_atom_config_dict_CheckEachCategoryHasCorrectArgCount():
     assert _get_atom_config_required_args_len(bud_idea_healerlink_str()) == 2
     assert _get_atom_config_required_args_len(bud_idea_factunit_str()) == 2
 
-    assert _get_atom_config_optional_args_len(budunit_str()) == 9
+    assert _get_atom_config_optional_args_len(budunit_str()) == 8
     assert _get_atom_config_optional_args_len(bud_acctunit_str()) == 2
     assert _get_atom_config_optional_args_len(bud_acct_membership_str()) == 2
     assert _get_atom_config_optional_args_len(bud_ideaunit_str()) == 11
@@ -406,7 +406,7 @@ def test_get_flattened_atom_table_build_ReturnsCorrectObj():
     atom_columns = get_flattened_atom_table_build()
 
     # THEN
-    assert len(atom_columns) == 107
+    assert len(atom_columns) == 106
     assert atom_columns.get("budunit_UPDATE_credor_respect") == "INTEGER"
     # print(f"{atom_columns.keys()=}")
 
@@ -491,10 +491,9 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert cat_budunit.get(columns_str) is not None
 
     budunit_columns = cat_budunit.get(columns_str)
-    assert len(budunit_columns) == 10
+    assert len(budunit_columns) == 9
     assert budunit_columns.get("uid") is not None
     assert budunit_columns.get("max_tree_traverse") is not None
-    assert budunit_columns.get("tender_desc") is not None
     assert budunit_columns.get("credor_respect") is not None
     assert budunit_columns.get("debtor_respect") is not None
     assert budunit_columns.get("fund_pool") is not None
@@ -551,7 +550,7 @@ def test_get_atom_args_category_mapping_ReturnsObj():
     assert bud_idea_factunit_str() in road_categorys
     assert bud_idea_teamlink_str() in road_categorys
     assert len(road_categorys) == 6
-    assert len(x_atom_args_category_mapping) == 41
+    assert len(x_atom_args_category_mapping) == 40
 
 
 def get_python_type(x_category: str, x_arg: str) -> str:
@@ -663,7 +662,6 @@ def test_get_atom_args_python_types_ReturnsObj():
     assert x_python_types.get("label") == "RoadNode"
     assert x_python_types.get("mass") == "int"
     assert x_python_types.get("max_tree_traverse") == "int"
-    assert x_python_types.get("tender_desc") == "str"
     assert x_python_types.get("morph") == "bool"
     assert x_python_types.get("need") == "RoadUnit"
     assert x_python_types.get("nigh") == "float"

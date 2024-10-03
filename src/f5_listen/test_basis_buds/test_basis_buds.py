@@ -45,7 +45,6 @@ def test_create_empty_bud_ReturnsCorrectObj():
     assert yao_empty_job.fund_coin == yao_voice.fund_coin
     assert yao_empty_job.respect_bit == yao_voice.respect_bit
     assert yao_empty_job.penny == yao_voice.penny
-    assert yao_empty_job.tender_desc is None
     assert yao_empty_job.credor_respect != yao_voice.credor_respect
     assert yao_empty_job.credor_respect == validate_respect_num()
     assert yao_empty_job.debtor_respect != yao_voice.debtor_respect
@@ -88,7 +87,6 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert yao_basis_job.fund_pool == yao_duty.fund_pool
     assert yao_basis_job.fund_coin == yao_duty.fund_coin
     assert yao_basis_job.respect_bit == yao_duty.respect_bit
-    assert yao_basis_job.tender_desc == yao_duty.tender_desc
     assert yao_basis_job.credor_respect == yao_duty.credor_respect
     assert yao_basis_job.debtor_respect == yao_duty.debtor_respect
     yao_basis_job.settle_bud()

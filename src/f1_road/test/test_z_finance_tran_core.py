@@ -17,14 +17,12 @@ def test_TranBook_Exists():
     assert x_tranbook
     assert not x_tranbook.fiscal_id
     assert not x_tranbook.tranlogs
-    assert not x_tranbook.tender_desc
     assert not x_tranbook._accts_net
 
 
 def test_tranbook_shop_WithParametersReturnsObj():
     # ESTABLISH
     music23_str = "music23"
-    ducet_str = "ducet"
     x_timelinepoint = 5505
     x_fundnum = -45
     sue_str = "Sue"
@@ -32,13 +30,12 @@ def test_tranbook_shop_WithParametersReturnsObj():
     x_tranlogs = {sue_str: {yao_str: {x_timelinepoint: x_fundnum}}}
 
     # WHEN
-    x_tranbook = tranbook_shop(music23_str, x_tranlogs, ducet_str)
+    x_tranbook = tranbook_shop(music23_str, x_tranlogs)
 
     # THEN
     assert x_tranbook
     assert x_tranbook.fiscal_id == music23_str
     assert x_tranbook.tranlogs == x_tranlogs
-    assert x_tranbook.tender_desc == ducet_str
     assert x_tranbook._accts_net == {}
 
 
@@ -53,7 +50,6 @@ def test_tranbook_shop_WithoutParametersReturnsObj():
     assert x_tranbook
     assert x_tranbook.fiscal_id == music23_str
     assert x_tranbook.tranlogs == {}
-    assert x_tranbook.tender_desc is None
     assert x_tranbook._accts_net == {}
 
 
@@ -320,13 +316,12 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 # def test_TranBook_get_dict_ReturnsObj():
 #     # ESTABLISH
 #     music23_str = "music23"
-#     ducet_str = "ducet"
 #     x_timelinepoint = 5505
 #     x_fundnum = -45
 #     sue_str = "Sue"
 #     yao_str = "Yao"
 #     x_tranlogs = {sue_str: {yao_str: {x_timelinepoint: x_fundnum}}}
-#     x_tranbook = tranbook_shop(music23_str, x_tranlogs, ducet_str)
+#     x_tranbook = tranbook_shop(music23_str, x_tranlogs)
 
 #     # WHEN
 #     x_dict = x_tranbook.get_dict()
@@ -360,7 +355,6 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 #     assert x_tranbook.purview == x_purview
 #     assert x_tranbook._magnitude == 677
 #     assert x_tranbook._net_outlays == x_net_outlays
-#     assert not x_tranbook._tender_desc
 
 
 # def test_TranBook_set_net_outlay_SetsAttr():

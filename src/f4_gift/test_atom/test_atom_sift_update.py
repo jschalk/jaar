@@ -66,7 +66,6 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
     sue_fund_coin = 66
     sue_fund_pool = 69
     sue_max_tree_traverse = 72
-    sue_tender_desc = "huh"
     sue_penny = 2
     sue_tally = 100
     zia_atom = atomunit_shop(budunit_str(), atom_insert())
@@ -76,7 +75,6 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
     zia_atom.set_arg("fund_coin", sue_fund_coin)
     zia_atom.set_arg("fund_pool", sue_fund_pool)
     zia_atom.set_arg("max_tree_traverse", sue_max_tree_traverse)
-    zia_atom.set_arg("tender_desc", sue_tender_desc)
     zia_atom.set_arg("penny", sue_penny)
     zia_atom.set_arg("tally", sue_tally)
 
@@ -95,7 +93,6 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
         "fund_coin": sue_fund_coin,
         "fund_pool": sue_fund_pool,
         "max_tree_traverse": sue_max_tree_traverse,
-        "tender_desc": sue_tender_desc,
         "penny": sue_penny,
         "tally": sue_tally,
     }

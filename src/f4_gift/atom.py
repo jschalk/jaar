@@ -680,7 +680,6 @@ class AtomRow:
     label: RoadNode = None
     mass: int = None
     max_tree_traverse: int = None
-    tender_desc: str = None
     morph: bool = None
     need: RoadUnit = None
     nigh: float = None

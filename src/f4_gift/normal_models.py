@@ -11,7 +11,6 @@ class BudTable(Base):
     __tablename__ = "bud"
     uid = Column(Integer, primary_key=True)
     max_tree_traverse = Column(Integer)
-    tender_desc = Column(String)
     credor_respect = Column(Integer)
     debtor_respect = Column(Integer)
     fund_pool = Column(Float)
