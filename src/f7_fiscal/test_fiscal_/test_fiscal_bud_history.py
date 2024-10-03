@@ -7,7 +7,7 @@ def test_FiscalUnit_set_outlaylog_SetsAttr():
     # ESTABLISH
     music_str = "music"
     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
-    assert music_fiscal.bud_history == {}
+    assert music_fiscal.outlaylogs == {}
 
     # WHEN
     sue_str = "Sue"
@@ -15,8 +15,8 @@ def test_FiscalUnit_set_outlaylog_SetsAttr():
     music_fiscal.set_outlaylog(sue_outlaylog)
 
     # THEN
-    assert music_fiscal.bud_history != {}
-    assert music_fiscal.bud_history.get(sue_str) == sue_outlaylog
+    assert music_fiscal.outlaylogs != {}
+    assert music_fiscal.outlaylogs.get(sue_str) == sue_outlaylog
 
 
 def test_FiscalUnit_outlaylog_exists_ReturnsObj():
@@ -71,7 +71,7 @@ def test_FiscalUnit_add_outlaylog_SetsAttr():
     # ESTABLISH
     music_str = "music"
     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
-    assert music_fiscal.bud_history == {}
+    assert music_fiscal.outlaylogs == {}
 
     # WHEN
     bob_str = "Bob"
@@ -87,7 +87,7 @@ def test_FiscalUnit_add_outlaylog_SetsAttr():
     music_fiscal.add_outlaylog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
 
     # THEN
-    assert music_fiscal.bud_history != {}
+    assert music_fiscal.outlaylogs != {}
     sue_outlaylog = outlaylog_shop(sue_str)
     sue_outlaylog.add_episode(sue_x4_timestamp, sue_x4_magnitude)
     sue_outlaylog.add_episode(sue_x7_timestamp, sue_x7_magnitude)
