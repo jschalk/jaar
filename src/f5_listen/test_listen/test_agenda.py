@@ -164,7 +164,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBud():
     assert after_fly_ideaunit.mass == 18
 
 
-def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBudWhereAnIdeaUnitAlreadyExists():
+def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBudWhereAnIdeaUnitExistsInAdvance():
     # ESTABLISH
     yao_str = "Yao"
     before_yao_budunit = budunit_shop(yao_str)

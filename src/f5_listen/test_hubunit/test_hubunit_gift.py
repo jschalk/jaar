@@ -189,7 +189,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIf_replace_IsFalse(
         )
     assert (
         str(excinfo.value)
-        == f"GiftUnit file {six_filename} already exists and cannot be saved over."
+        == f"GiftUnit file {six_filename} exists and cannot be saved over."
     )
 
 

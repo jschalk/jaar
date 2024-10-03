@@ -27,8 +27,8 @@ from src.f8_brick.brick_config import (
     sort_order_str,
     get_brick_format_headers,
 )
-from pandas import DataFrame, read_csv
-import csv
+from pandas import DataFrame, read_csv as pandas_read_csv
+from csv import reader as csv_reader
 from dataclasses import dataclass
 
 
@@ -158,7 +158,7 @@ def save_brick_csv(x_brickname: str, x_budunit: BudUnit, x_dir: str, x_filename:
 
 
 def open_brick_csv(x_file_dir: str, x_filename: str) -> DataFrame:
-    return read_csv(create_file_path(x_file_dir, x_filename))
+    return pandas_read_csv(create_file_path(x_file_dir, x_filename))
 
 
 def get_csv_brickref(title_row: list[str]) -> brickRef:
@@ -171,7 +171,7 @@ def make_deltaunit(x_csv: str) -> DeltaUnit:
     title_row, headerless_csv = extract_csv_headers(x_csv)
     x_brickref = get_csv_brickref(title_row)
 
-    x_reader = csv.reader(headerless_csv.splitlines(), delimiter=",")
+    x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     x_dict = get_positional_dict(title_row)
     x_deltaunit = deltaunit_shop()
     for row in x_reader:

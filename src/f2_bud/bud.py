@@ -200,7 +200,7 @@ class BudUnit:
         if self._road_delimiter != new_road_delimiter:
             for x_idea_road in self._idea_dict.keys():
                 if is_string_in_road(new_road_delimiter, x_idea_road):
-                    exception_str = f"Cannot modify delimiter to '{new_road_delimiter}' because it already exists an idea label '{x_idea_road}'"
+                    exception_str = f"Cannot modify delimiter to '{new_road_delimiter}' because it exists an idea label '{x_idea_road}'"
                     raise NewDelimiterException(exception_str)
 
             # modify all road attributes in ideaunits

@@ -325,7 +325,7 @@ class HubUnit:
         gift_filename = self.gift_file_name(x_gift._gift_id)
         if not replace and self.gift_file_exists(x_gift._gift_id):
             raise SaveGiftFileException(
-                f"GiftUnit file {gift_filename} already exists and cannot be saved over."
+                f"GiftUnit file {gift_filename} exists and cannot be saved over."
             )
         x_gift.save_files()
         return x_gift

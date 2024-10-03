@@ -125,7 +125,7 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
     assert get_nested_value(y_dict, mount_list) == mount_obj
 
 
-def test_get_nested_value_RaisesReadableException():
+def test_get_nested_value_RaisesNestedException():
     # ESTABLISH
     y_dict = {}
     sports_str = "sports"

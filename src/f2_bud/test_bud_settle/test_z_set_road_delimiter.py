@@ -31,7 +31,7 @@ def test_BudUnit_set_idea_CorrectlySets_bud_fiscal_id_AND_fund_coin():
 
     casa_road = sue_bud.make_l1_road("casa")
     clean_road = sue_bud.make_road(casa_road, "cleaning")
-    cookery_str = "cookery ready to use"
+    cookery_str = "cookery to use"
     cookery_road = sue_bud.make_road(clean_road, cookery_str)
 
     # WHEN
@@ -95,7 +95,7 @@ def test_bud_set_road_delimiter_RaisesErrorIfNew_delimiter_IsAnIdea_label():
         zia_bud.set_road_delimiter(slash_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify delimiter to '{slash_str}' because it already exists an idea label '{casa_road}'"
+        == f"Cannot modify delimiter to '{slash_str}' because it exists an idea label '{casa_road}'"
     )
 
 
