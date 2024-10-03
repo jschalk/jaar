@@ -39,19 +39,19 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
                 "morph",
             ]
         )
-    x_idea_list = []
-    for x_idea in agenda_dict.values():
-        idea_dict = {
+    x_item_list = []
+    for x_item in agenda_dict.values():
+        item_dict = {
             "owner_id": x_bud._owner_id,
-            "fund_ratio": x_idea._fund_ratio,
-            "_label": x_idea._label,
-            "_parent_road": x_idea._parent_road,
-            "begin": x_idea.begin,
-            "close": x_idea.close,
-            "addin": x_idea.addin,
-            "denom": x_idea.denom,
-            "numor": x_idea.numor,
-            "morph": x_idea.morph,
+            "fund_ratio": x_item._fund_ratio,
+            "_label": x_item._label,
+            "_parent_road": x_item._parent_road,
+            "begin": x_item.begin,
+            "close": x_item.close,
+            "addin": x_item.addin,
+            "denom": x_item.denom,
+            "numor": x_item.numor,
+            "morph": x_item.morph,
         }
-        x_idea_list.append(idea_dict)
-    return DataFrame(x_idea_list)
+        x_item_list.append(item_dict)
+    return DataFrame(x_item_list)

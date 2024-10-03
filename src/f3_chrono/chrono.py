@@ -1,11 +1,11 @@
 from src.f0_instrument.dict_tool import get_0_if_None, get_dict_from_json
 from src.f0_instrument.file import open_file
 from src.f1_road.road import RoadUnit
-from src.f2_bud.idea import (
-    ideaunit_shop,
-    IdeaUnit,
-    ideas_calculated_range as calc_range,
-    all_ideas_between as all_between,
+from src.f2_bud.item import (
+    itemunit_shop,
+    ItemUnit,
+    items_calculated_range as calc_range,
+    all_items_between as all_between,
 )
 from src.f2_bud.bud import BudUnit
 from datetime import datetime
@@ -65,48 +65,48 @@ def day_length() -> int:
     return 1440
 
 
-def stan_c400_leap_ideaunit() -> IdeaUnit:
+def stan_c400_leap_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().c400_leap_length
-    return ideaunit_shop(c400_leap_str(), denom=x_denom, morph=True)
+    return itemunit_shop(c400_leap_str(), denom=x_denom, morph=True)
 
 
-def stan_c400_clean_ideaunit() -> IdeaUnit:
+def stan_c400_clean_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().c400_clean_length
-    return ideaunit_shop(c400_clean_str(), denom=x_denom, morph=True)
+    return itemunit_shop(c400_clean_str(), denom=x_denom, morph=True)
 
 
-def stan_c100_ideaunit() -> IdeaUnit:
+def stan_c100_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().c100_length
-    return ideaunit_shop(c100_str(), denom=x_denom, morph=True)
+    return itemunit_shop(c100_str(), denom=x_denom, morph=True)
 
 
-def stan_yr4_leap_ideaunit() -> IdeaUnit:
+def stan_yr4_leap_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().yr4_leap_length
-    return ideaunit_shop(yr4_leap_str(), denom=x_denom, morph=True)
+    return itemunit_shop(yr4_leap_str(), denom=x_denom, morph=True)
 
 
-def stan_yr4_clean_ideaunit() -> IdeaUnit:
+def stan_yr4_clean_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().yr4_clean_length
-    return ideaunit_shop(yr4_clean_str(), denom=x_denom, morph=True)
+    return itemunit_shop(yr4_clean_str(), denom=x_denom, morph=True)
 
 
-def stan_year_ideaunit() -> IdeaUnit:
+def stan_year_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().year_length
-    return ideaunit_shop(year_str(), denom=x_denom, morph=True)
+    return itemunit_shop(year_str(), denom=x_denom, morph=True)
 
 
-def stan_day_ideaunit() -> IdeaUnit:
+def stan_day_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().day_length
-    return ideaunit_shop(day_str(), denom=x_denom, morph=True)
+    return itemunit_shop(day_str(), denom=x_denom, morph=True)
 
 
-def stan_days_ideaunit() -> IdeaUnit:
+def stan_days_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().day_length
-    return ideaunit_shop(days_str(), denom=x_denom)
+    return itemunit_shop(days_str(), denom=x_denom)
 
 
-def _get_morph_idea(x_str: str, x_denom: int) -> IdeaUnit:
-    return ideaunit_shop(x_str, denom=x_denom, morph=True)
+def _get_morph_item(x_str: str, x_denom: int) -> ItemUnit:
+    return itemunit_shop(x_str, denom=x_denom, morph=True)
 
 
 def week_length(x_int: int) -> int:
@@ -137,21 +137,21 @@ def weeks_str():
     return f"{week_str()}s"
 
 
-def create_weekday_ideaunits(x_weekdays: list[str]) -> dict[str, IdeaUnit]:
+def create_weekday_itemunits(x_weekdays: list[str]) -> dict[str, ItemUnit]:
     x_dict = {}
     for x_weekday_num in range(len(x_weekdays)):
-        x_idea = ideaunit_shop(
+        x_item = itemunit_shop(
             x_weekdays[x_weekday_num],
             gogo_want=x_weekday_num * day_length(),
             stop_want=(x_weekday_num + 1) * day_length(),
         )
-        x_dict[x_weekdays[x_weekday_num]] = x_idea
+        x_dict[x_weekdays[x_weekday_num]] = x_item
     return x_dict
 
 
-def create_month_ideaunits(
+def create_month_itemunits(
     x_months_list: list[list[str, int]], monthday_distortion: int
-) -> dict[str, IdeaUnit]:
+) -> dict[str, ItemUnit]:
     x_dict = {}
     current_day = 0
     for x_month_list in x_months_list:
@@ -160,42 +160,42 @@ def create_month_ideaunits(
         x_gogo = current_day * day_length()
         x_stop = x_month_days * day_length()
         x_addin = monthday_distortion * day_length()
-        x_idea = ideaunit_shop(
+        x_item = itemunit_shop(
             x_month_str, gogo_want=x_gogo, stop_want=x_stop, addin=x_addin
         )
-        x_dict[x_month_str] = x_idea
+        x_dict[x_month_str] = x_item
         current_day = x_month_days
     return x_dict
 
 
-def create_hour_ideaunits(x_hours_list: list[str]) -> dict[str, IdeaUnit]:
+def create_hour_itemunits(x_hours_list: list[str]) -> dict[str, ItemUnit]:
     x_dict = {}
     current_min = 0
     for x_hour_list in x_hours_list:
         x_hour_str = x_hour_list[0]
         x_stop = x_hour_list[1]
-        x_idea = ideaunit_shop(x_hour_str, gogo_want=current_min, stop_want=x_stop)
-        x_dict[x_hour_str] = x_idea
+        x_item = itemunit_shop(x_hour_str, gogo_want=current_min, stop_want=x_stop)
+        x_dict[x_hour_str] = x_item
         current_min = x_stop
     return x_dict
 
 
-def create_week_ideaunits(x_weekdays_list) -> dict[str, IdeaUnit]:
+def create_week_itemunits(x_weekdays_list) -> dict[str, ItemUnit]:
     x_week_lenth = week_length(len(x_weekdays_list))
     week_str = "week"
     weeks_str = f"{week_str}s"
     return {
-        week_str: ideaunit_shop(week_str, denom=x_week_lenth, morph=True),
-        weeks_str: ideaunit_shop(weeks_str, denom=x_week_lenth),
+        week_str: itemunit_shop(week_str, denom=x_week_lenth, morph=True),
+        weeks_str: itemunit_shop(weeks_str, denom=x_week_lenth),
     }
 
 
-def new_timeline_ideaunit(timeline_label: str, c400_count: int) -> IdeaUnit:
+def new_timeline_itemunit(timeline_label: str, c400_count: int) -> ItemUnit:
     timeline_length = c400_count * get_c400_constants().c400_leap_length
-    return ideaunit_shop(timeline_label, begin=0, close=timeline_length)
+    return itemunit_shop(timeline_label, begin=0, close=timeline_length)
 
 
-def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
+def add_newtimeline_itemunit(x_budunit: BudUnit, timeline_config: dict):
     x_label = timeline_config.get(timeline_label_str())
     x_c400_count = timeline_config.get(c400_config_str())
     x_months = timeline_config.get(months_config_str())
@@ -210,24 +210,24 @@ def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
     week_road = x_budunit.make_road(new_road, week_str())
     year_road = get_year_road(x_budunit, new_road)
 
-    add_stan_ideaunits(x_budunit, time_road, x_label, x_c400_count)
-    add_ideaunits(x_budunit, day_road, create_hour_ideaunits(x_hours_list))
-    add_ideaunits(x_budunit, new_road, create_week_ideaunits(x_wkdays_list))
-    add_ideaunits(x_budunit, week_road, create_weekday_ideaunits(x_wkdays_list))
-    add_ideaunits(x_budunit, year_road, create_month_ideaunits(x_months, x_mday))
-    offset_idea = ideaunit_shop(yr1_jan1_offset_str(), addin=x_yr1_jan1_offset)
-    x_budunit.set_idea(offset_idea, new_road)
+    add_stan_itemunits(x_budunit, time_road, x_label, x_c400_count)
+    add_itemunits(x_budunit, day_road, create_hour_itemunits(x_hours_list))
+    add_itemunits(x_budunit, new_road, create_week_itemunits(x_wkdays_list))
+    add_itemunits(x_budunit, week_road, create_weekday_itemunits(x_wkdays_list))
+    add_itemunits(x_budunit, year_road, create_month_itemunits(x_months, x_mday))
+    offset_item = itemunit_shop(yr1_jan1_offset_str(), addin=x_yr1_jan1_offset)
+    x_budunit.set_item(offset_item, new_road)
     return x_budunit
 
 
-def add_ideaunits(
-    x_budunit: BudUnit, parent_road: RoadUnit, config_dict: dict[str, IdeaUnit]
+def add_itemunits(
+    x_budunit: BudUnit, parent_road: RoadUnit, config_dict: dict[str, ItemUnit]
 ):
-    for x_time_ideaunit in config_dict.values():
-        x_budunit.set_idea(x_time_ideaunit, parent_road)
+    for x_time_itemunit in config_dict.values():
+        x_budunit.set_item(x_time_itemunit, parent_road)
 
 
-def add_stan_ideaunits(
+def add_stan_itemunits(
     x_budunit: BudUnit,
     time_road: RoadUnit,
     timeline_label: str,
@@ -241,18 +241,18 @@ def add_stan_ideaunits(
     yr4_leap_road = x_budunit.make_road(c100_road, yr4_leap_str())
     yr4_clean_road = x_budunit.make_road(yr4_leap_road, yr4_clean_str())
 
-    if not x_budunit.idea_exists(time_road):
-        x_budunit.set_l1_idea(ideaunit_shop(time_str()))
-    timeline_ideaunit = new_timeline_ideaunit(timeline_label, timeline_c400_count)
-    x_budunit.set_idea(timeline_ideaunit, time_road)
-    x_budunit.set_idea(stan_c400_leap_ideaunit(), new_road)
-    x_budunit.set_idea(stan_c400_clean_ideaunit(), c400_leap_road)
-    x_budunit.set_idea(stan_c100_ideaunit(), c400_clean_road)
-    x_budunit.set_idea(stan_yr4_leap_ideaunit(), c100_road)
-    x_budunit.set_idea(stan_yr4_clean_ideaunit(), yr4_leap_road)
-    x_budunit.set_idea(stan_year_ideaunit(), yr4_clean_road)
-    x_budunit.set_idea(stan_day_ideaunit(), new_road)
-    x_budunit.set_idea(stan_days_ideaunit(), new_road)
+    if not x_budunit.item_exists(time_road):
+        x_budunit.set_l1_item(itemunit_shop(time_str()))
+    timeline_itemunit = new_timeline_itemunit(timeline_label, timeline_c400_count)
+    x_budunit.set_item(timeline_itemunit, time_road)
+    x_budunit.set_item(stan_c400_leap_itemunit(), new_road)
+    x_budunit.set_item(stan_c400_clean_itemunit(), c400_leap_road)
+    x_budunit.set_item(stan_c100_itemunit(), c400_clean_road)
+    x_budunit.set_item(stan_yr4_leap_itemunit(), c100_road)
+    x_budunit.set_item(stan_yr4_clean_itemunit(), yr4_leap_road)
+    x_budunit.set_item(stan_year_itemunit(), yr4_clean_road)
+    x_budunit.set_item(stan_day_itemunit(), new_road)
+    x_budunit.set_item(stan_days_itemunit(), new_road)
 
 
 def get_c400_clean_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
@@ -395,8 +395,8 @@ def get_min_from_dt(
     x_bud: BudUnit, timeline_road: RoadUnit, x_datetime: datetime
 ) -> int:
     offset_road = x_bud.make_road(timeline_road, yr1_jan1_offset_str())
-    offset_idea = x_bud.get_idea_obj(offset_road)
-    offset_amount = offset_idea.addin
+    offset_item = x_bud.get_item_obj(offset_road)
+    offset_amount = offset_item.addin
     return get_min_from_dt_offset(x_datetime, offset_amount)
 
 
@@ -412,7 +412,7 @@ class ChronoUnit:
     time_range_root_road: RoadUnit = None
     x_min: int = None
     # calculated fields
-    _timeline_idea: IdeaUnit = None
+    _timeline_item: ItemUnit = None
     _weekday: str = None
     _monthday: str = None
     _month: str = None
@@ -424,68 +424,68 @@ class ChronoUnit:
     _year_count: str = None
     _year_num: str = None
 
-    def _set_timeline_idea(self):
-        self._timeline_idea = self.x_budunit.get_idea_obj(self.time_range_root_road)
+    def _set_timeline_item(self):
+        self._timeline_item = self.x_budunit.get_item_obj(self.time_range_root_road)
 
     def _set_weekday(self):
         week_road = get_week_road(self.x_budunit, self.time_range_root_road)
-        week_idea = self.x_budunit.get_idea_obj(week_road)
-        x_idea_list = [self._timeline_idea, week_idea]
-        open_rangeunit = calc_range(x_idea_list, self.x_min, self.x_min)
-        open_weekday_dict = week_idea.get_kids_in_range(open_rangeunit.gogo)
+        week_item = self.x_budunit.get_item_obj(week_road)
+        x_item_list = [self._timeline_item, week_item]
+        open_rangeunit = calc_range(x_item_list, self.x_min, self.x_min)
+        open_weekday_dict = week_item.get_kids_in_range(open_rangeunit.gogo)
         for x_weekday in open_weekday_dict.keys():
             self._weekday = x_weekday
 
     def _set_month(self):
         year_road = get_year_road(self.x_budunit, self.time_range_root_road)
-        year_idea = self.x_budunit.get_idea_obj(year_road)
-        x_idea_dict = self.x_budunit._idea_dict
-        idea_list = all_between(x_idea_dict, self.time_range_root_road, year_road)
-        open_rangeunit = calc_range(idea_list, self.x_min, self.x_min)
-        gogo_month_dict = year_idea.get_kids_in_range(open_rangeunit.gogo)
-        month_idea = None
-        for x_monthname, month_idea in gogo_month_dict.items():
+        year_item = self.x_budunit.get_item_obj(year_road)
+        x_item_dict = self.x_budunit._item_dict
+        item_list = all_between(x_item_dict, self.time_range_root_road, year_road)
+        open_rangeunit = calc_range(item_list, self.x_min, self.x_min)
+        gogo_month_dict = year_item.get_kids_in_range(open_rangeunit.gogo)
+        month_item = None
+        for x_monthname, month_item in gogo_month_dict.items():
             self._month = x_monthname
-            month_idea = month_idea
+            month_item = month_item
 
-        self._monthday = open_rangeunit.gogo - month_idea._gogo_calc + month_idea.addin
+        self._monthday = open_rangeunit.gogo - month_item._gogo_calc + month_item.addin
         self._monthday = self._monthday // 1440
 
     def _set_hour(self):
         day_road = get_day_road(self.x_budunit, self.time_range_root_road)
-        day_idea = self.x_budunit.get_idea_obj(day_road)
-        x_idea_list = [self._timeline_idea, day_idea]
-        rangeunit = calc_range(x_idea_list, self.x_min, self.x_min)
-        hour_dict = day_idea.get_kids_in_range(rangeunit.gogo)
-        for x_hour, hour_idea in hour_dict.items():
+        day_item = self.x_budunit.get_item_obj(day_road)
+        x_item_list = [self._timeline_item, day_item]
+        rangeunit = calc_range(x_item_list, self.x_min, self.x_min)
+        hour_dict = day_item.get_kids_in_range(rangeunit.gogo)
+        for x_hour, hour_item in hour_dict.items():
             self._hour = x_hour
-            hour_idea = hour_idea
+            hour_item = hour_item
 
-        self._minute = rangeunit.gogo - hour_idea._gogo_calc
+        self._minute = rangeunit.gogo - hour_item._gogo_calc
 
     def _set_year(self):
         c400_constants = get_c400_constants()
         x_time_road = self.time_range_root_road
-        x_idea_dict = self.x_budunit._idea_dict
+        x_item_dict = self.x_budunit._item_dict
         # count 400 year blocks
         self._c400_count = self.x_min // c400_constants.c400_leap_length
 
         # count 100 year blocks
         c400_clean_road = get_c400_clean_road(self.x_budunit, x_time_road)
-        c400_clean_idea_list = all_between(x_idea_dict, x_time_road, c400_clean_road)
-        c400_clean_range = calc_range(c400_clean_idea_list, self.x_min, self.x_min)
+        c400_clean_item_list = all_between(x_item_dict, x_time_road, c400_clean_road)
+        c400_clean_range = calc_range(c400_clean_item_list, self.x_min, self.x_min)
         self._c100_count = c400_clean_range.gogo // c400_constants.c100_length
 
         # count 4 year blocks
         c100_road = get_c100_road(self.x_budunit, x_time_road)
-        c100_idea_list = all_between(x_idea_dict, x_time_road, c100_road)
-        c100_range = calc_range(c100_idea_list, self.x_min, self.x_min)
+        c100_item_list = all_between(x_item_dict, x_time_road, c100_road)
+        c100_range = calc_range(c100_item_list, self.x_min, self.x_min)
         self._yr4_count = c100_range.gogo // c400_constants.yr4_leap_length
 
         # count 1 year blocks
         yr4_clean_road = get_yr4_clean_road(self.x_budunit, x_time_road)
-        yr4_clean_ideas = all_between(x_idea_dict, x_time_road, yr4_clean_road)
-        yr4_clean_range = calc_range(yr4_clean_ideas, self.x_min, self.x_min)
+        yr4_clean_items = all_between(x_item_dict, x_time_road, yr4_clean_road)
+        yr4_clean_range = calc_range(yr4_clean_items, self.x_min, self.x_min)
         self._year_count = yr4_clean_range.gogo // c400_constants.year_length
 
         self._year_num = self._c400_count * 400
@@ -495,7 +495,7 @@ class ChronoUnit:
 
     def calc_timeline(self):
         self.x_budunit.settle_bud()
-        self._set_timeline_idea()
+        self._set_timeline_item()
         self._set_weekday()
         self._set_month()
         self._set_hour()

@@ -7,7 +7,7 @@ from src.f4_gift.atom import atomunit_shop
 from src.f4_gift.decipherer import Decipherer, decipherer_shop
 
 # from src.f4_gift.gift import giftunit_shop, get_init_gift_id_if_None
-# from src.f4_gift.examples.example_atoms import get_atom_example_ideaunit_sports
+# from src.f4_gift.examples.example_atoms import get_atom_example_itemunit_sports
 # from src.f4_gift.examples.example_deltas import get_deltaunit_sue_example
 from copy import deepcopy as copy_deepcopy
 

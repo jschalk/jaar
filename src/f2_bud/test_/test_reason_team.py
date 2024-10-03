@@ -432,7 +432,7 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
 #         x_teamheir.set_teamlinks(parent_teamheir, teamunit_swim3, x_groupboxs)
 #     assert (
 #         str(excinfo.value)
-#         == f"parent_teamheir does not contain all accts of the idea's teamunit\n{set(all_parent_teamheir_accts)=}\n\n{set(all_teamunit_accts)=}"
+#         == f"parent_teamheir does not contain all accts of the item's teamunit\n{set(all_parent_teamheir_accts)=}\n\n{set(all_teamunit_accts)=}"
 #     )
 
 

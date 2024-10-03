@@ -1,5 +1,5 @@
 from src.f1_road.road import create_road
-from src.f2_bud.bud_tool import budunit_str, bud_idea_factunit_str
+from src.f2_bud.bud_tool import budunit_str, bud_item_factunit_str
 from src.f4_gift.atom_config import atom_update, atom_insert, fopen_str, fnigh_str
 from src.f4_gift.atom import (
     atomunit_shop,
@@ -20,7 +20,7 @@ def test_AtomUnit_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     knee_road = create_road("a", knee_str)
 
     # WHEN
-    x_category = bud_idea_factunit_str()
+    x_category = bud_item_factunit_str()
     update_disc_atomunit = atomunit_shop(x_category, atom_update())
     update_disc_atomunit.set_required_arg("base", knee_road)
 
@@ -53,7 +53,7 @@ VALUES (
     assert x_atomunit.get_insert_sqlstr() == example_sqlstr
 
 
-def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_idea_factunit():
+def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_item_factunit():
     # ESTABLISH
     sports_str = "sports"
     sports_road = create_road("a", sports_str)
@@ -62,7 +62,7 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_idea_factunit():
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
     knee_open = 7
-    x_category = bud_idea_factunit_str()
+    x_category = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
     update_disc_atomunit = atomunit_shop(x_category, atom_insert())
@@ -90,7 +90,7 @@ VALUES (
     assert generated_sqlstr == example_sqlstr
 
 
-def test_get_atomunit_from_rowdata_ReturnsCorrectObj_idea_factunit():
+def test_get_atomunit_from_rowdata_ReturnsCorrectObj_item_factunit():
     # ESTABLISH
     sports_str = "sports"
     sports_road = create_road("a", sports_str)
@@ -99,7 +99,7 @@ def test_get_atomunit_from_rowdata_ReturnsCorrectObj_idea_factunit():
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
     knee_fopen = 7
-    x_category = bud_idea_factunit_str()
+    x_category = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
     x_sqlstr = f"""SELECT

@@ -9,7 +9,7 @@ from src.f0_instrument.plotly_tool import (
 from src.f1_road.jaar_config import voice_str, final_str
 from src.f1_road.finance import default_money_magnitude
 from src.f2_bud.bud import BudUnit
-from src.f2_bud.bud_graphics import display_ideatree
+from src.f2_bud.bud_graphics import display_itemtree
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 
@@ -272,7 +272,7 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
 def fund_explanation0(
     x_bud: BudUnit, mode: str = None, graphics_bool: bool = False
 ) -> plotly_Figure:
-    fig = display_ideatree(x_bud, mode, False)
+    fig = display_itemtree(x_bud, mode, False)
     fig.update_xaxes(range=[-1, 11])
     fig.update_yaxes(range=[-5, 3])
 

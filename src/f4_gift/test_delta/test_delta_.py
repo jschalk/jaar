@@ -4,8 +4,8 @@ from src.f2_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_awardlink_str,
+    bud_itemunit_str,
+    bud_item_awardlink_str,
 )
 from src.f4_gift.atom_config import (
     atom_update,
@@ -339,22 +339,22 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj():
     #         print(f"{x_atom.category=}")
 
 
-def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_IdeaUnitsSorted():
+def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
     # ESTABLISH
     x_fiscal_id = root_label()
     sports_str = "sports"
     sports_road = create_road(x_fiscal_id, sports_str)
     knee_str = "knee"
-    x_category = bud_ideaunit_str()
-    sports_insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
-    sports_insert_ideaunit_atomunit.set_required_arg(label_str(), sports_str)
-    sports_insert_ideaunit_atomunit.set_required_arg(parent_road_str(), x_fiscal_id)
-    knee_insert_ideaunit_atomunit = atomunit_shop(x_category, atom_insert())
-    knee_insert_ideaunit_atomunit.set_required_arg(label_str(), knee_str)
-    knee_insert_ideaunit_atomunit.set_required_arg(parent_road_str(), sports_road)
+    x_category = bud_itemunit_str()
+    sports_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
+    sports_insert_itemunit_atomunit.set_required_arg(label_str(), sports_str)
+    sports_insert_itemunit_atomunit.set_required_arg(parent_road_str(), x_fiscal_id)
+    knee_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
+    knee_insert_itemunit_atomunit.set_required_arg(label_str(), knee_str)
+    knee_insert_itemunit_atomunit.set_required_arg(parent_road_str(), sports_road)
     x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(knee_insert_ideaunit_atomunit)
-    x_deltaunit.set_atomunit(sports_insert_ideaunit_atomunit)
+    x_deltaunit.set_atomunit(knee_insert_itemunit_atomunit)
+    x_deltaunit.set_atomunit(sports_insert_itemunit_atomunit)
 
     # WHEN
     x_atom_order_list = x_deltaunit.get_sorted_atomunits()
@@ -363,8 +363,8 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_IdeaUnitsSorted():
     assert len(x_atom_order_list) == 2
     # for atomunit in x_atom_order_list:
     #     print(f"{atomunit.required_args=}")
-    assert x_atom_order_list[0] == sports_insert_ideaunit_atomunit
-    assert x_atom_order_list[1] == knee_insert_ideaunit_atomunit
+    assert x_atom_order_list[0] == sports_insert_itemunit_atomunit
+    assert x_atom_order_list[1] == knee_insert_itemunit_atomunit
     # for crud_str, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")
@@ -379,7 +379,7 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     sports_road = create_road(x_fiscal_id, sports_str)
     knee_str = "knee"
     knee_road = create_road(sports_road, knee_str)
-    x_category = bud_idea_awardlink_str()
+    x_category = bud_item_awardlink_str()
     road_str = "road"
     swimmers_str = ",Swimmers"
     sports_awardlink_atomunit = atomunit_shop(x_category, atom_insert())

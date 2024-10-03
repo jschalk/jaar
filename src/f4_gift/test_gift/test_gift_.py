@@ -4,7 +4,7 @@ from src.f1_road.road import get_default_fiscal_id_roadnode as root_label
 from src.f4_gift.atom_config import fiscal_id_str, owner_id_str
 from src.f4_gift.delta import deltaunit_shop
 from src.f4_gift.gift import GiftUnit, giftunit_shop, get_init_gift_id_if_None
-from src.f4_gift.examples.example_atoms import get_atom_example_ideaunit_sports
+from src.f4_gift.examples.example_atoms import get_atom_example_itemunit_sports
 from src.f4_gift.examples.example_deltas import get_deltaunit_sue_example
 
 
@@ -144,7 +144,7 @@ def test_GiftUnit_set_deltaunit_SetsAttribute():
 
     # WHEN
     farm_deltaunit = deltaunit_shop()
-    farm_deltaunit.set_atomunit(get_atom_example_ideaunit_sports())
+    farm_deltaunit.set_atomunit(get_atom_example_itemunit_sports())
     farm_giftunit.set_deltaunit(farm_deltaunit)
 
     # THEN
@@ -173,7 +173,7 @@ def test_GiftUnit_atomunit_exists_ReturnsCorrectObj():
     farm_giftunit.set_deltaunit(farm_deltaunit)
 
     # WHEN
-    sports_atomunit = get_atom_example_ideaunit_sports()
+    sports_atomunit = get_atom_example_itemunit_sports()
 
     # THEN
     assert farm_giftunit.atomunit_exists(sports_atomunit) is False
@@ -190,7 +190,7 @@ def test_GiftUnit_del_deltaunit_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
     farm_deltaunit = deltaunit_shop()
-    farm_deltaunit.set_atomunit(get_atom_example_ideaunit_sports())
+    farm_deltaunit.set_atomunit(get_atom_example_itemunit_sports())
     farm_giftunit = giftunit_shop(owner_id=bob_str, _deltaunit=farm_deltaunit)
     assert farm_giftunit._deltaunit != deltaunit_shop()
     assert farm_giftunit._deltaunit == farm_deltaunit

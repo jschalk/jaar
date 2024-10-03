@@ -18,7 +18,7 @@ def test_final_str():
 
 def test_get_rootpart_of_keep_dir_ReturnsCorrectObj():
     # ESTABLISH / WHEN / THEN
-    assert get_rootpart_of_keep_dir() == "idearoot"
+    assert get_rootpart_of_keep_dir() == "itemroot"
 
 
 def test_treasury_file_name_ReturnsObj() -> str:

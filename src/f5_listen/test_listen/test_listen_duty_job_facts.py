@@ -1,4 +1,4 @@
-from src.f2_bud.idea import ideaunit_shop
+from src.f2_bud.item import itemunit_shop
 from src.f2_bud.bud import budunit_shop
 from src.f5_listen.listen import (
     create_listen_basis,
@@ -70,9 +70,9 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnitWithDifferentTask(
     sue_texas_hubunit.save_duty_bud(yao_duty)
 
     zia_job = get_example_zia_speaker()
-    zia_job.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_road())
-    clean_ideaunit = zia_job.get_idea_obj(clean_road())
-    clean_ideaunit.teamunit.set_teamlink(yao_str)
+    zia_job.set_item(itemunit_shop(clean_str(), pledge=True), casa_road())
+    clean_itemunit = zia_job.get_item_obj(clean_road())
+    clean_itemunit.teamunit.set_teamlink(yao_str)
     sue_texas_hubunit.save_job_bud(zia_job)
 
     new_yao_job = create_listen_basis(yao_duty)
@@ -144,7 +144,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v1(
     assert new_yao_job.get_missing_fact_bases().get(eat_road()) is None
     listen_to_agendas_duty_job(new_yao_job, sue_texas_hubunit)
     print(f"{new_yao_job.get_missing_fact_bases().keys()=}")
-    print(f"{new_yao_job._idearoot.factunits.keys()=}")
+    print(f"{new_yao_job._itemroot.factunits.keys()=}")
     assert new_yao_job.get_missing_fact_bases().get(eat_road()) is not None
 
     # WHEN
@@ -212,7 +212,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
     assert new_yao_job1.get_missing_fact_bases().get(eat_road()) is None
     listen_to_agendas_duty_job(new_yao_job1, sue_texas_hubunit)
     print(f"{new_yao_job1.get_missing_fact_bases().keys()=}")
-    print(f"{new_yao_job1._idearoot.factunits.keys()=}")
+    print(f"{new_yao_job1._itemroot.factunits.keys()=}")
     assert new_yao_job1.get_missing_fact_bases().get(eat_road()) is not None
 
     # WHEN
@@ -264,14 +264,14 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 
 #     sue_speaker.add_acctunit(yao_str)
 #     sue_speaker.set_acct_respect(20)
-#     sue_speaker.set_idea(ideaunit_shop(clean_str), status_road)
-#     sue_speaker.set_idea(ideaunit_shop(dirty_str), status_road)
-#     sue_speaker.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_road)
-#     sue_speaker.edit_idea_attr(
+#     sue_speaker.set_item(itemunit_shop(clean_str), status_road)
+#     sue_speaker.set_item(itemunit_shop(dirty_str), status_road)
+#     sue_speaker.set_item(itemunit_shop(sweep_str, pledge=True), casa_road)
+#     sue_speaker.edit_item_attr(
 #         sweep_road, reason_base=status_road, reason_premise=dirty_road
 #     )
-#     sweep_idea = sue_speaker.get_idea_obj(sweep_road)
-#     sweep_idea.teamunit.set_teamlink(yao_str)
+#     sweep_item = sue_speaker.get_item_obj(sweep_road)
+#     sweep_item.teamunit.set_teamlink(yao_str)
 
 #     sue_texas_hubunit = get_texas_hubunit()
 #     sue_texas_hubunit.save_job_bud(sue_str, sue_speaker.get_json(), True)
@@ -279,14 +279,14 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 #     yao_duty.add_acctunit(yao_str)
 #     yao_duty.add_acctunit(sue_str)
 #     new_yao_job = create_listen_basis(yao_duty)
-#     print(f"{new_yao_job.get_idea_dict().keys()=}")
+#     print(f"{new_yao_job.get_item_dict().keys()=}")
 #     # assert new_yao_job.get_missing_fact_bases().get(status_road) is None
 #     listen_to_agendas_duty_job(new_yao_job, texas_hubunit)
-#     print(f"{new_yao_job.get_idea_dict().keys()=}")
+#     print(f"{new_yao_job.get_item_dict().keys()=}")
 #     assert new_yao_job.get_missing_fact_bases().get(status_road) is not None
 
 #     # assert new_yao_job.get_missing_fact_bases().keys() == {status_road}
-#     # sue_speaker.set_fact(status_road, clean_road, create_missing_ideas=True)
+#     # sue_speaker.set_fact(status_road, clean_road, create_missing_items=True)
 
 #     # # WHEN
 #     # listen_to_facts_duty_job(yao_duty, yao_job, missing_fact_bases)
@@ -317,14 +317,14 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 #     running_str = "running"
 #     running_road = yao_duty.make_road(fridge_road, running_str)
 
-#     yao_duty.set_idea(ideaunit_shop(running_str), fridge_road)
-#     yao_duty.set_idea(ideaunit_shop(clean_str), status_road)
-#     yao_duty.set_idea(ideaunit_shop(dirty_str), status_road)
-#     yao_duty.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_road)
-#     yao_duty.edit_idea_attr(
+#     yao_duty.set_item(itemunit_shop(running_str), fridge_road)
+#     yao_duty.set_item(itemunit_shop(clean_str), status_road)
+#     yao_duty.set_item(itemunit_shop(dirty_str), status_road)
+#     yao_duty.set_item(itemunit_shop(sweep_str, pledge=True), casa_road)
+#     yao_duty.edit_item_attr(
 #         sweep_road, reason_base=status_road, reason_premise=dirty_road
 #     )
-#     yao_duty.edit_idea_attr(
+#     yao_duty.edit_item_attr(
 #         sweep_road, reason_base=fridge_road, reason_premise=running_road
 #     )
 #     assert len(yao_duty.get_missing_fact_bases()) == 2
@@ -334,8 +334,8 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 
 #     # WHEN
 #     yao_job = budunit_shop(yao_str)
-#     yao_job.set_fact(status_road, clean_road, create_missing_ideas=True)
-#     yao_job.set_fact(fridge_road, running_road, create_missing_ideas=True)
+#     yao_job.set_fact(status_road, clean_road, create_missing_items=True)
+#     yao_job.set_fact(fridge_road, running_road, create_missing_items=True)
 #     missing_fact_bases = list(yao_duty.get_missing_fact_bases().keys())
 #     listen_to_facts_duty_job(yao_duty, yao_job, missing_fact_bases)
 

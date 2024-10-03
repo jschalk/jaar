@@ -4,13 +4,13 @@ from src.f2_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_awardlink_str,
-    bud_idea_reasonunit_str,
-    bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
-    bud_idea_healerlink_str,
-    bud_idea_factunit_str,
+    bud_itemunit_str,
+    bud_item_awardlink_str,
+    bud_item_reasonunit_str,
+    bud_item_reason_premiseunit_str,
+    bud_item_teamlink_str,
+    bud_item_healerlink_str,
+    bud_item_factunit_str,
 )
 from src.f4_gift.atom import AtomUnit
 from src.f4_gift.atom_config import (
@@ -22,7 +22,7 @@ from src.f4_gift.atom_config import (
     healer_id_str,
     parent_road_str,
     label_str,
-    base_idea_active_requisite_str,
+    base_item_active_requisite_str,
     pledge_str,
     addin_str,
     begin_str,
@@ -59,50 +59,50 @@ def create_legible_list(x_delta: DeltaUnit, x_bud: BudUnit) -> list[str]:
     x_list = [atom_delete(), bud_acct_membership_str()]
     acct_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_ideaunit_str()]
-    bud_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), bud_ideaunit_str()]
-    bud_ideaunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_ideaunit_str()]
-    bud_ideaunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_itemunit_str()]
+    bud_itemunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), bud_itemunit_str()]
+    bud_itemunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_itemunit_str()]
+    bud_itemunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_awardlink_str()]
-    bud_idea_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), bud_idea_awardlink_str()]
-    bud_idea_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_awardlink_str()]
-    bud_idea_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_item_awardlink_str()]
+    bud_item_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), bud_item_awardlink_str()]
+    bud_item_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_item_awardlink_str()]
+    bud_item_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_reasonunit_str()]
-    bud_idea_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), bud_idea_reasonunit_str()]
-    bud_idea_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_reasonunit_str()]
-    bud_idea_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_item_reasonunit_str()]
+    bud_item_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), bud_item_reasonunit_str()]
+    bud_item_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_item_reasonunit_str()]
+    bud_item_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_reason_premiseunit_str()]
-    bud_idea_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), bud_idea_reason_premiseunit_str()]
-    bud_idea_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_reason_premiseunit_str()]
-    bud_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_item_reason_premiseunit_str()]
+    bud_item_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), bud_item_reason_premiseunit_str()]
+    bud_item_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_item_reason_premiseunit_str()]
+    bud_item_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_teamlink_str()]
-    bud_idea_teamlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_teamlink_str()]
-    bud_idea_teamlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_item_teamlink_str()]
+    bud_item_teamlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_item_teamlink_str()]
+    bud_item_teamlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_healerlink_str()]
-    bud_idea_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_healerlink_str()]
-    bud_idea_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_item_healerlink_str()]
+    bud_item_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_item_healerlink_str()]
+    bud_item_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_factunit_str()]
-    bud_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), bud_idea_factunit_str()]
-    bud_idea_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_factunit_str()]
-    bud_idea_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_item_factunit_str()]
+    bud_item_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), bud_item_factunit_str()]
+    bud_item_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_item_factunit_str()]
+    bud_item_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []
     if budunit_atom is not None:
@@ -127,87 +127,87 @@ def create_legible_list(x_delta: DeltaUnit, x_bud: BudUnit) -> list[str]:
             leg_list, acct_membership_delete_dict, x_bud
         )
 
-    if bud_ideaunit_insert_dict is not None:
-        add_bud_ideaunit_insert_to_legible_list(
-            leg_list, bud_ideaunit_insert_dict, x_bud
+    if bud_itemunit_insert_dict is not None:
+        add_bud_itemunit_insert_to_legible_list(
+            leg_list, bud_itemunit_insert_dict, x_bud
         )
-    if bud_ideaunit_update_dict is not None:
-        add_bud_ideaunit_update_to_legible_list(
-            leg_list, bud_ideaunit_update_dict, x_bud
+    if bud_itemunit_update_dict is not None:
+        add_bud_itemunit_update_to_legible_list(
+            leg_list, bud_itemunit_update_dict, x_bud
         )
-    if bud_ideaunit_delete_dict is not None:
-        add_bud_ideaunit_delete_to_legible_list(
-            leg_list, bud_ideaunit_delete_dict, x_bud
-        )
-
-    if bud_idea_awardlink_insert_dict is not None:
-        add_bud_idea_awardlink_insert_to_legible_list(
-            leg_list, bud_idea_awardlink_insert_dict, x_bud
-        )
-    if bud_idea_awardlink_update_dict is not None:
-        add_bud_idea_awardlink_update_to_legible_list(
-            leg_list, bud_idea_awardlink_update_dict, x_bud
-        )
-    if bud_idea_awardlink_delete_dict is not None:
-        add_bud_idea_awardlink_delete_to_legible_list(
-            leg_list, bud_idea_awardlink_delete_dict, x_bud
+    if bud_itemunit_delete_dict is not None:
+        add_bud_itemunit_delete_to_legible_list(
+            leg_list, bud_itemunit_delete_dict, x_bud
         )
 
-    if bud_idea_reasonunit_insert_dict is not None:
-        add_bud_idea_reasonunit_insert_to_legible_list(
-            leg_list, bud_idea_reasonunit_insert_dict, x_bud
+    if bud_item_awardlink_insert_dict is not None:
+        add_bud_item_awardlink_insert_to_legible_list(
+            leg_list, bud_item_awardlink_insert_dict, x_bud
         )
-    if bud_idea_reasonunit_update_dict is not None:
-        add_bud_idea_reasonunit_update_to_legible_list(
-            leg_list, bud_idea_reasonunit_update_dict, x_bud
+    if bud_item_awardlink_update_dict is not None:
+        add_bud_item_awardlink_update_to_legible_list(
+            leg_list, bud_item_awardlink_update_dict, x_bud
         )
-    if bud_idea_reasonunit_delete_dict is not None:
-        add_bud_idea_reasonunit_delete_to_legible_list(
-            leg_list, bud_idea_reasonunit_delete_dict, x_bud
+    if bud_item_awardlink_delete_dict is not None:
+        add_bud_item_awardlink_delete_to_legible_list(
+            leg_list, bud_item_awardlink_delete_dict, x_bud
         )
 
-    if bud_idea_reason_premiseunit_insert_dict is not None:
+    if bud_item_reasonunit_insert_dict is not None:
+        add_bud_item_reasonunit_insert_to_legible_list(
+            leg_list, bud_item_reasonunit_insert_dict, x_bud
+        )
+    if bud_item_reasonunit_update_dict is not None:
+        add_bud_item_reasonunit_update_to_legible_list(
+            leg_list, bud_item_reasonunit_update_dict, x_bud
+        )
+    if bud_item_reasonunit_delete_dict is not None:
+        add_bud_item_reasonunit_delete_to_legible_list(
+            leg_list, bud_item_reasonunit_delete_dict, x_bud
+        )
+
+    if bud_item_reason_premiseunit_insert_dict is not None:
         add_bud_reason_premiseunit_insert_to_legible_list(
-            leg_list, bud_idea_reason_premiseunit_insert_dict, x_bud
+            leg_list, bud_item_reason_premiseunit_insert_dict, x_bud
         )
-    if bud_idea_reason_premiseunit_update_dict is not None:
+    if bud_item_reason_premiseunit_update_dict is not None:
         add_bud_reason_premiseunit_update_to_legible_list(
-            leg_list, bud_idea_reason_premiseunit_update_dict, x_bud
+            leg_list, bud_item_reason_premiseunit_update_dict, x_bud
         )
-    if bud_idea_reason_premiseunit_delete_dict is not None:
+    if bud_item_reason_premiseunit_delete_dict is not None:
         add_bud_reason_premiseunit_delete_to_legible_list(
-            leg_list, bud_idea_reason_premiseunit_delete_dict, x_bud
+            leg_list, bud_item_reason_premiseunit_delete_dict, x_bud
         )
 
-    if bud_idea_teamlink_insert_dict is not None:
-        add_bud_idea_teamlink_insert_to_legible_list(
-            leg_list, bud_idea_teamlink_insert_dict, x_bud
+    if bud_item_teamlink_insert_dict is not None:
+        add_bud_item_teamlink_insert_to_legible_list(
+            leg_list, bud_item_teamlink_insert_dict, x_bud
         )
-    if bud_idea_teamlink_delete_dict is not None:
-        add_bud_idea_teamlink_delete_to_legible_list(
-            leg_list, bud_idea_teamlink_delete_dict, x_bud
-        )
-
-    if bud_idea_healerlink_insert_dict is not None:
-        add_bud_idea_healerlink_insert_to_legible_list(
-            leg_list, bud_idea_healerlink_insert_dict, x_bud
-        )
-    if bud_idea_healerlink_delete_dict is not None:
-        add_bud_idea_healerlink_delete_to_legible_list(
-            leg_list, bud_idea_healerlink_delete_dict, x_bud
+    if bud_item_teamlink_delete_dict is not None:
+        add_bud_item_teamlink_delete_to_legible_list(
+            leg_list, bud_item_teamlink_delete_dict, x_bud
         )
 
-    if bud_idea_factunit_insert_dict is not None:
-        add_bud_idea_factunit_insert_to_legible_list(
-            leg_list, bud_idea_factunit_insert_dict, x_bud
+    if bud_item_healerlink_insert_dict is not None:
+        add_bud_item_healerlink_insert_to_legible_list(
+            leg_list, bud_item_healerlink_insert_dict, x_bud
         )
-    if bud_idea_factunit_update_dict is not None:
-        add_bud_idea_factunit_update_to_legible_list(
-            leg_list, bud_idea_factunit_update_dict, x_bud
+    if bud_item_healerlink_delete_dict is not None:
+        add_bud_item_healerlink_delete_to_legible_list(
+            leg_list, bud_item_healerlink_delete_dict, x_bud
         )
-    if bud_idea_factunit_delete_dict is not None:
-        add_bud_idea_factunit_delete_to_legible_list(
-            leg_list, bud_idea_factunit_delete_dict, x_bud
+
+    if bud_item_factunit_insert_dict is not None:
+        add_bud_item_factunit_insert_to_legible_list(
+            leg_list, bud_item_factunit_insert_dict, x_bud
+        )
+    if bud_item_factunit_update_dict is not None:
+        add_bud_item_factunit_update_to_legible_list(
+            leg_list, bud_item_factunit_update_dict, x_bud
+        )
+    if bud_item_factunit_delete_dict is not None:
+        add_bud_item_factunit_delete_to_legible_list(
+            leg_list, bud_item_factunit_delete_dict, x_bud
         )
 
     return leg_list
@@ -321,27 +321,27 @@ def add_bud_acct_membership_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_ideaunit_insert_to_legible_list(
-    legible_list: list[str], ideaunit_insert_dict: dict, x_bud: BudUnit
+def add_bud_itemunit_insert_to_legible_list(
+    legible_list: list[str], itemunit_insert_dict: dict, x_bud: BudUnit
 ):
     _problem_bool_str = "problem_bool"
     _morph_str = "morph"
     _mass_str = "mass"
-    for parent_road_dict in ideaunit_insert_dict.values():
-        for ideaunit_atom in parent_road_dict.values():
-            label_value = ideaunit_atom.get_value(label_str())
-            parent_road_value = ideaunit_atom.get_value(parent_road_str())
-            _addin_value = ideaunit_atom.get_value(addin_str())
-            _begin_value = ideaunit_atom.get_value(begin_str())
-            _close_value = ideaunit_atom.get_value(close_str())
-            _denom_value = ideaunit_atom.get_value(denom_str())
-            _numor_value = ideaunit_atom.get_value(numor_str())
-            _problem_bool_value = ideaunit_atom.get_value(_problem_bool_str)
-            _morph_value = ideaunit_atom.get_value(_morph_str)
-            _mass_value = ideaunit_atom.get_value(_mass_str)
-            pledge_value = ideaunit_atom.get_value(pledge_str())
+    for parent_road_dict in itemunit_insert_dict.values():
+        for itemunit_atom in parent_road_dict.values():
+            label_value = itemunit_atom.get_value(label_str())
+            parent_road_value = itemunit_atom.get_value(parent_road_str())
+            _addin_value = itemunit_atom.get_value(addin_str())
+            _begin_value = itemunit_atom.get_value(begin_str())
+            _close_value = itemunit_atom.get_value(close_str())
+            _denom_value = itemunit_atom.get_value(denom_str())
+            _numor_value = itemunit_atom.get_value(numor_str())
+            _problem_bool_value = itemunit_atom.get_value(_problem_bool_str)
+            _morph_value = itemunit_atom.get_value(_morph_str)
+            _mass_value = itemunit_atom.get_value(_mass_str)
+            pledge_value = itemunit_atom.get_value(pledge_str())
             x_str = (
-                f"Created Idea '{label_value}' with parent_road {parent_road_value}. "
+                f"Created Item '{label_value}' with parent_road {parent_road_value}. "
             )
             if _addin_value is not None:
                 x_str += f"addin={_addin_value}."
@@ -365,25 +365,25 @@ def add_bud_ideaunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_ideaunit_update_to_legible_list(
-    legible_list: list[str], ideaunit_update_dict: dict, x_bud: BudUnit
+def add_bud_itemunit_update_to_legible_list(
+    legible_list: list[str], itemunit_update_dict: dict, x_bud: BudUnit
 ):
     _problem_bool_str = "problem_bool"
     _mass_str = "mass"
-    for parent_road_dict in ideaunit_update_dict.values():
-        for ideaunit_atom in parent_road_dict.values():
-            label_value = ideaunit_atom.get_value(label_str())
-            parent_road_value = ideaunit_atom.get_value(parent_road_str())
-            addin_value = ideaunit_atom.get_value(addin_str())
-            begin_value = ideaunit_atom.get_value(begin_str())
-            close_value = ideaunit_atom.get_value(close_str())
-            denom_value = ideaunit_atom.get_value(denom_str())
-            numor_value = ideaunit_atom.get_value(numor_str())
-            problem_bool_value = ideaunit_atom.get_value(_problem_bool_str)
-            morph_value = ideaunit_atom.get_value(morph_str())
-            mass_value = ideaunit_atom.get_value(_mass_str)
-            pledge_value = ideaunit_atom.get_value(pledge_str())
-            x_str = f"Idea '{label_value}' with parent_road {parent_road_value} set these attributes: "
+    for parent_road_dict in itemunit_update_dict.values():
+        for itemunit_atom in parent_road_dict.values():
+            label_value = itemunit_atom.get_value(label_str())
+            parent_road_value = itemunit_atom.get_value(parent_road_str())
+            addin_value = itemunit_atom.get_value(addin_str())
+            begin_value = itemunit_atom.get_value(begin_str())
+            close_value = itemunit_atom.get_value(close_str())
+            denom_value = itemunit_atom.get_value(denom_str())
+            numor_value = itemunit_atom.get_value(numor_str())
+            problem_bool_value = itemunit_atom.get_value(_problem_bool_str)
+            morph_value = itemunit_atom.get_value(morph_str())
+            mass_value = itemunit_atom.get_value(_mass_str)
+            pledge_value = itemunit_atom.get_value(pledge_str())
+            x_str = f"Item '{label_value}' with parent_road {parent_road_value} set these attributes: "
             if addin_value is not None:
                 x_str += f"addin={addin_value}."
             if begin_value is not None:
@@ -406,110 +406,110 @@ def add_bud_ideaunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_ideaunit_delete_to_legible_list(
-    legible_list: list[str], ideaunit_delete_dict: dict, x_bud: BudUnit
+def add_bud_itemunit_delete_to_legible_list(
+    legible_list: list[str], itemunit_delete_dict: dict, x_bud: BudUnit
 ):
-    for parent_road_dict in ideaunit_delete_dict.values():
-        for ideaunit_atom in parent_road_dict.values():
-            label_value = ideaunit_atom.get_value(label_str())
-            parent_road_value = ideaunit_atom.get_value(parent_road_str())
-            x_str = f"Idea '{label_value}' with parent_road {parent_road_value} was deleted."
+    for parent_road_dict in itemunit_delete_dict.values():
+        for itemunit_atom in parent_road_dict.values():
+            label_value = itemunit_atom.get_value(label_str())
+            parent_road_value = itemunit_atom.get_value(parent_road_str())
+            x_str = f"Item '{label_value}' with parent_road {parent_road_value} was deleted."
             legible_list.append(x_str)
 
 
-def add_bud_idea_awardlink_insert_to_legible_list(
-    legible_list: list[str], idea_awardlink_insert_dict: dict, x_bud: BudUnit
+def add_bud_item_awardlink_insert_to_legible_list(
+    legible_list: list[str], item_awardlink_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_awardlink_insert_dict.values():
-        for idea_awardlink_atom in road_dict.values():
-            group_id_value = idea_awardlink_atom.get_value(group_id_str())
-            road_value = idea_awardlink_atom.get_value("road")
-            give_force_value = idea_awardlink_atom.get_value("give_force")
-            take_force_value = idea_awardlink_atom.get_value("take_force")
-            x_str = f"Awardlink created for group {group_id_value} for idea '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
+    for road_dict in item_awardlink_insert_dict.values():
+        for item_awardlink_atom in road_dict.values():
+            group_id_value = item_awardlink_atom.get_value(group_id_str())
+            road_value = item_awardlink_atom.get_value("road")
+            give_force_value = item_awardlink_atom.get_value("give_force")
+            take_force_value = item_awardlink_atom.get_value("take_force")
+            x_str = f"Awardlink created for group {group_id_value} for item '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
-def add_bud_idea_awardlink_update_to_legible_list(
-    legible_list: list[str], idea_awardlink_update_dict: dict, x_bud: BudUnit
+def add_bud_item_awardlink_update_to_legible_list(
+    legible_list: list[str], item_awardlink_update_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_awardlink_update_dict.values():
-        for idea_awardlink_atom in road_dict.values():
-            group_id_value = idea_awardlink_atom.get_value(group_id_str())
-            road_value = idea_awardlink_atom.get_value("road")
-            give_force_value = idea_awardlink_atom.get_value("give_force")
-            take_force_value = idea_awardlink_atom.get_value("take_force")
+    for road_dict in item_awardlink_update_dict.values():
+        for item_awardlink_atom in road_dict.values():
+            group_id_value = item_awardlink_atom.get_value(group_id_str())
+            road_value = item_awardlink_atom.get_value("road")
+            give_force_value = item_awardlink_atom.get_value("give_force")
+            take_force_value = item_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been set for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {group_id_value} for item '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None:
-                x_str = f"Awardlink has been set for group {group_id_value} for idea '{road_value}'. Now give_force={give_force_value}."
+                x_str = f"Awardlink has been set for group {group_id_value} for item '{road_value}'. Now give_force={give_force_value}."
             elif take_force_value is not None:
-                x_str = f"Awardlink has been set for group {group_id_value} for idea '{road_value}'. Now take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {group_id_value} for item '{road_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
-def add_bud_idea_awardlink_delete_to_legible_list(
-    legible_list: list[str], idea_awardlink_delete_dict: dict, x_bud: BudUnit
+def add_bud_item_awardlink_delete_to_legible_list(
+    legible_list: list[str], item_awardlink_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_awardlink_delete_dict.values():
-        for idea_awardlink_atom in road_dict.values():
-            group_id_value = idea_awardlink_atom.get_value(group_id_str())
-            road_value = idea_awardlink_atom.get_value("road")
-            x_str = f"Awardlink for group {group_id_value}, idea '{road_value}' has been deleted."
+    for road_dict in item_awardlink_delete_dict.values():
+        for item_awardlink_atom in road_dict.values():
+            group_id_value = item_awardlink_atom.get_value(group_id_str())
+            road_value = item_awardlink_atom.get_value("road")
+            x_str = f"Awardlink for group {group_id_value}, item '{road_value}' has been deleted."
             legible_list.append(x_str)
 
 
-def add_bud_idea_reasonunit_insert_to_legible_list(
-    legible_list: list[str], idea_reasonunit_insert_dict: dict, x_bud: BudUnit
+def add_bud_item_reasonunit_insert_to_legible_list(
+    legible_list: list[str], item_reasonunit_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_reasonunit_insert_dict.values():
-        for idea_reasonunit_atom in road_dict.values():
-            road_value = idea_reasonunit_atom.get_value("road")
-            base_value = idea_reasonunit_atom.get_value("base")
-            base_idea_active_requisite_value = idea_reasonunit_atom.get_value(
-                base_idea_active_requisite_str()
+    for road_dict in item_reasonunit_insert_dict.values():
+        for item_reasonunit_atom in road_dict.values():
+            road_value = item_reasonunit_atom.get_value("road")
+            base_value = item_reasonunit_atom.get_value("base")
+            base_item_active_requisite_value = item_reasonunit_atom.get_value(
+                base_item_active_requisite_str()
             )
             x_str = (
-                f"ReasonUnit created for idea '{road_value}' with base '{base_value}'."
+                f"ReasonUnit created for item '{road_value}' with base '{base_value}'."
             )
-            if base_idea_active_requisite_value is not None:
+            if base_item_active_requisite_value is not None:
                 x_str += (
-                    f" base_idea_active_requisite={base_idea_active_requisite_value}."
+                    f" base_item_active_requisite={base_item_active_requisite_value}."
                 )
             legible_list.append(x_str)
 
 
-def add_bud_idea_reasonunit_update_to_legible_list(
-    legible_list: list[str], idea_reasonunit_update_dict: dict, x_bud: BudUnit
+def add_bud_item_reasonunit_update_to_legible_list(
+    legible_list: list[str], item_reasonunit_update_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_reasonunit_update_dict.values():
-        for idea_reasonunit_atom in road_dict.values():
-            road_value = idea_reasonunit_atom.get_value("road")
-            base_value = idea_reasonunit_atom.get_value("base")
-            base_idea_active_requisite_value = idea_reasonunit_atom.get_value(
-                base_idea_active_requisite_str()
+    for road_dict in item_reasonunit_update_dict.values():
+        for item_reasonunit_atom in road_dict.values():
+            road_value = item_reasonunit_atom.get_value("road")
+            base_value = item_reasonunit_atom.get_value("base")
+            base_item_active_requisite_value = item_reasonunit_atom.get_value(
+                base_item_active_requisite_str()
             )
-            if base_idea_active_requisite_value is not None:
-                x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' set with base_idea_active_requisite={base_idea_active_requisite_value}."
+            if base_item_active_requisite_value is not None:
+                x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' set with base_item_active_requisite={base_item_active_requisite_value}."
             else:
-                x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' and no longer checks base active mode."
+                x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' and no longer checks base active mode."
             legible_list.append(x_str)
 
 
-def add_bud_idea_reasonunit_delete_to_legible_list(
-    legible_list: list[str], idea_reasonunit_delete_dict: dict, x_bud: BudUnit
+def add_bud_item_reasonunit_delete_to_legible_list(
+    legible_list: list[str], item_reasonunit_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_reasonunit_delete_dict.values():
-        for idea_reasonunit_atom in road_dict.values():
-            road_value = idea_reasonunit_atom.get_value("road")
-            base_value = idea_reasonunit_atom.get_value("base")
-            x_str = f"ReasonUnit base='{base_value}' for idea '{road_value}' has been deleted."
+    for road_dict in item_reasonunit_delete_dict.values():
+        for item_reasonunit_atom in road_dict.values():
+            road_value = item_reasonunit_atom.get_value("road")
+            base_value = item_reasonunit_atom.get_value("base")
+            x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' has been deleted."
             legible_list.append(x_str)
 
 
 def add_bud_reason_premiseunit_insert_to_legible_list(
     legible_list: list[str],
-    idea_reason_premiseunit_insert_dict: dict,
+    item_reason_premiseunit_insert_dict: dict,
     x_bud: BudUnit,
 ):
     road_str = "road"
@@ -518,16 +518,16 @@ def add_bud_reason_premiseunit_insert_to_legible_list(
     divisor_str = "divisor"
     nigh_str = "nigh"
     open_str = "open"
-    for road_dict in idea_reason_premiseunit_insert_dict.values():
+    for road_dict in item_reason_premiseunit_insert_dict.values():
         for base_dict in road_dict.values():
-            for idea_reason_premiseunit_atom in base_dict.values():
-                road_value = idea_reason_premiseunit_atom.get_value(road_str)
-                base_value = idea_reason_premiseunit_atom.get_value(base_str)
-                need_value = idea_reason_premiseunit_atom.get_value(need_str)
-                divisor_value = idea_reason_premiseunit_atom.get_value(divisor_str)
-                nigh_value = idea_reason_premiseunit_atom.get_value(nigh_str)
-                open_value = idea_reason_premiseunit_atom.get_value(open_str)
-                x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for idea '{road_value}'."
+            for item_reason_premiseunit_atom in base_dict.values():
+                road_value = item_reason_premiseunit_atom.get_value(road_str)
+                base_value = item_reason_premiseunit_atom.get_value(base_str)
+                need_value = item_reason_premiseunit_atom.get_value(need_str)
+                divisor_value = item_reason_premiseunit_atom.get_value(divisor_str)
+                nigh_value = item_reason_premiseunit_atom.get_value(nigh_str)
+                open_value = item_reason_premiseunit_atom.get_value(open_str)
+                x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for item '{road_value}'."
                 if open_value is not None:
                     x_str += f" Open={open_value}."
                 if nigh_value is not None:
@@ -539,7 +539,7 @@ def add_bud_reason_premiseunit_insert_to_legible_list(
 
 def add_bud_reason_premiseunit_update_to_legible_list(
     legible_list: list[str],
-    idea_reason_premiseunit_update_dict: dict,
+    item_reason_premiseunit_update_dict: dict,
     x_bud: BudUnit,
 ):
     road_str = "road"
@@ -548,16 +548,16 @@ def add_bud_reason_premiseunit_update_to_legible_list(
     divisor_str = "divisor"
     nigh_str = "nigh"
     open_str = "open"
-    for road_dict in idea_reason_premiseunit_update_dict.values():
+    for road_dict in item_reason_premiseunit_update_dict.values():
         for base_dict in road_dict.values():
-            for idea_reason_premiseunit_atom in base_dict.values():
-                road_value = idea_reason_premiseunit_atom.get_value(road_str)
-                base_value = idea_reason_premiseunit_atom.get_value(base_str)
-                need_value = idea_reason_premiseunit_atom.get_value(need_str)
-                divisor_value = idea_reason_premiseunit_atom.get_value(divisor_str)
-                nigh_value = idea_reason_premiseunit_atom.get_value(nigh_str)
-                open_value = idea_reason_premiseunit_atom.get_value(open_str)
-                x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for idea '{road_value}'."
+            for item_reason_premiseunit_atom in base_dict.values():
+                road_value = item_reason_premiseunit_atom.get_value(road_str)
+                base_value = item_reason_premiseunit_atom.get_value(base_str)
+                need_value = item_reason_premiseunit_atom.get_value(need_str)
+                divisor_value = item_reason_premiseunit_atom.get_value(divisor_str)
+                nigh_value = item_reason_premiseunit_atom.get_value(nigh_str)
+                open_value = item_reason_premiseunit_atom.get_value(open_str)
+                x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for item '{road_value}'."
                 if open_value is not None:
                     x_str += f" Open={open_value}."
                 if nigh_value is not None:
@@ -569,80 +569,80 @@ def add_bud_reason_premiseunit_update_to_legible_list(
 
 def add_bud_reason_premiseunit_delete_to_legible_list(
     legible_list: list[str],
-    idea_reason_premiseunit_delete_dict: dict,
+    item_reason_premiseunit_delete_dict: dict,
     x_bud: BudUnit,
 ):
     road_str = "road"
     base_str = "base"
     need_str = "need"
-    for road_dict in idea_reason_premiseunit_delete_dict.values():
+    for road_dict in item_reason_premiseunit_delete_dict.values():
         for base_dict in road_dict.values():
-            for idea_reason_premiseunit_atom in base_dict.values():
-                road_value = idea_reason_premiseunit_atom.get_value(road_str)
-                base_value = idea_reason_premiseunit_atom.get_value(base_str)
-                need_value = idea_reason_premiseunit_atom.get_value(need_str)
-                x_str = f"PremiseUnit '{need_value}' deleted from reason '{base_value}' for idea '{road_value}'."
+            for item_reason_premiseunit_atom in base_dict.values():
+                road_value = item_reason_premiseunit_atom.get_value(road_str)
+                base_value = item_reason_premiseunit_atom.get_value(base_str)
+                need_value = item_reason_premiseunit_atom.get_value(need_str)
+                x_str = f"PremiseUnit '{need_value}' deleted from reason '{base_value}' for item '{road_value}'."
                 legible_list.append(x_str)
 
 
-def add_bud_idea_teamlink_insert_to_legible_list(
-    legible_list: list[str], idea_teamlink_insert_dict: dict, x_bud: BudUnit
+def add_bud_item_teamlink_insert_to_legible_list(
+    legible_list: list[str], item_teamlink_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_teamlink_insert_dict.values():
-        for idea_teamlink_atom in road_dict.values():
-            group_id_value = idea_teamlink_atom.get_value(group_id_str())
-            road_value = idea_teamlink_atom.get_value("road")
-            x_str = f"teamlink '{group_id_value}' created for idea '{road_value}'."
+    for road_dict in item_teamlink_insert_dict.values():
+        for item_teamlink_atom in road_dict.values():
+            group_id_value = item_teamlink_atom.get_value(group_id_str())
+            road_value = item_teamlink_atom.get_value("road")
+            x_str = f"teamlink '{group_id_value}' created for item '{road_value}'."
             legible_list.append(x_str)
 
 
-def add_bud_idea_teamlink_delete_to_legible_list(
-    legible_list: list[str], idea_teamlink_delete_dict: dict, x_bud: BudUnit
+def add_bud_item_teamlink_delete_to_legible_list(
+    legible_list: list[str], item_teamlink_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_teamlink_delete_dict.values():
-        for idea_teamlink_atom in road_dict.values():
-            group_id_value = idea_teamlink_atom.get_value(group_id_str())
-            road_value = idea_teamlink_atom.get_value("road")
-            x_str = f"teamlink '{group_id_value}' deleted for idea '{road_value}'."
+    for road_dict in item_teamlink_delete_dict.values():
+        for item_teamlink_atom in road_dict.values():
+            group_id_value = item_teamlink_atom.get_value(group_id_str())
+            road_value = item_teamlink_atom.get_value("road")
+            x_str = f"teamlink '{group_id_value}' deleted for item '{road_value}'."
             legible_list.append(x_str)
 
 
-def add_bud_idea_healerlink_insert_to_legible_list(
-    legible_list: list[str], idea_healerlink_insert_dict: dict, x_bud: BudUnit
+def add_bud_item_healerlink_insert_to_legible_list(
+    legible_list: list[str], item_healerlink_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_healerlink_insert_dict.values():
-        for idea_healerlink_atom in road_dict.values():
-            healer_id_value = idea_healerlink_atom.get_value(healer_id_str())
-            road_value = idea_healerlink_atom.get_value("road")
-            x_str = f"HealerLink '{healer_id_value}' created for idea '{road_value}'."
+    for road_dict in item_healerlink_insert_dict.values():
+        for item_healerlink_atom in road_dict.values():
+            healer_id_value = item_healerlink_atom.get_value(healer_id_str())
+            road_value = item_healerlink_atom.get_value("road")
+            x_str = f"HealerLink '{healer_id_value}' created for item '{road_value}'."
             legible_list.append(x_str)
 
 
-def add_bud_idea_healerlink_delete_to_legible_list(
-    legible_list: list[str], idea_healerlink_delete_dict: dict, x_bud: BudUnit
+def add_bud_item_healerlink_delete_to_legible_list(
+    legible_list: list[str], item_healerlink_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in idea_healerlink_delete_dict.values():
-        for idea_healerlink_atom in road_dict.values():
-            healer_id_value = idea_healerlink_atom.get_value(healer_id_str())
-            road_value = idea_healerlink_atom.get_value("road")
-            x_str = f"HealerLink '{healer_id_value}' deleted for idea '{road_value}'."
+    for road_dict in item_healerlink_delete_dict.values():
+        for item_healerlink_atom in road_dict.values():
+            healer_id_value = item_healerlink_atom.get_value(healer_id_str())
+            road_value = item_healerlink_atom.get_value("road")
+            x_str = f"HealerLink '{healer_id_value}' deleted for item '{road_value}'."
             legible_list.append(x_str)
 
 
-def add_bud_idea_factunit_insert_to_legible_list(
-    legible_list: list[str], idea_factunit_insert_dict: dict, x_bud: BudUnit
+def add_bud_item_factunit_insert_to_legible_list(
+    legible_list: list[str], item_factunit_insert_dict: dict, x_bud: BudUnit
 ):
     road_str = "road"
     base_str = "base"
     pick_str = "pick"
-    for road_dict in idea_factunit_insert_dict.values():
-        for idea_factunit_atom in road_dict.values():
-            road_value = idea_factunit_atom.get_value(road_str)
-            base_value = idea_factunit_atom.get_value(base_str)
-            pick_value = idea_factunit_atom.get_value(pick_str)
-            fnigh_value = idea_factunit_atom.get_value(fnigh_str())
-            fopen_value = idea_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{pick_value}' created for base '{base_value}' for idea '{road_value}'."
+    for road_dict in item_factunit_insert_dict.values():
+        for item_factunit_atom in road_dict.values():
+            road_value = item_factunit_atom.get_value(road_str)
+            base_value = item_factunit_atom.get_value(base_str)
+            pick_value = item_factunit_atom.get_value(pick_str)
+            fnigh_value = item_factunit_atom.get_value(fnigh_str())
+            fopen_value = item_factunit_atom.get_value(fopen_str())
+            x_str = f"FactUnit '{pick_value}' created for base '{base_value}' for item '{road_value}'."
             if fopen_value is not None:
                 x_str += f" fOpen={fopen_value}."
             if fnigh_value is not None:
@@ -650,20 +650,20 @@ def add_bud_idea_factunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_idea_factunit_update_to_legible_list(
-    legible_list: list[str], idea_factunit_update_dict: dict, x_bud: BudUnit
+def add_bud_item_factunit_update_to_legible_list(
+    legible_list: list[str], item_factunit_update_dict: dict, x_bud: BudUnit
 ):
     road_str = "road"
     base_str = "base"
     pick_str = "pick"
-    for road_dict in idea_factunit_update_dict.values():
-        for idea_factunit_atom in road_dict.values():
-            road_value = idea_factunit_atom.get_value(road_str)
-            base_value = idea_factunit_atom.get_value(base_str)
-            pick_value = idea_factunit_atom.get_value(pick_str)
-            fnigh_value = idea_factunit_atom.get_value(fnigh_str())
-            fopen_value = idea_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{pick_value}' updated for base '{base_value}' for idea '{road_value}'."
+    for road_dict in item_factunit_update_dict.values():
+        for item_factunit_atom in road_dict.values():
+            road_value = item_factunit_atom.get_value(road_str)
+            base_value = item_factunit_atom.get_value(base_str)
+            pick_value = item_factunit_atom.get_value(pick_str)
+            fnigh_value = item_factunit_atom.get_value(fnigh_str())
+            fopen_value = item_factunit_atom.get_value(fopen_str())
+            x_str = f"FactUnit '{pick_value}' updated for base '{base_value}' for item '{road_value}'."
             if fopen_value is not None:
                 x_str += f" fOpen={fopen_value}."
             if fnigh_value is not None:
@@ -671,16 +671,16 @@ def add_bud_idea_factunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_idea_factunit_delete_to_legible_list(
-    legible_list: list[str], idea_factunit_delete_dict: dict, x_bud: BudUnit
+def add_bud_item_factunit_delete_to_legible_list(
+    legible_list: list[str], item_factunit_delete_dict: dict, x_bud: BudUnit
 ):
     road_str = "road"
     base_str = "base"
     pick_str = "pick"
-    for road_dict in idea_factunit_delete_dict.values():
-        for idea_factunit_atom in road_dict.values():
-            road_value = idea_factunit_atom.get_value(road_str)
-            base_value = idea_factunit_atom.get_value(base_str)
-            pick_value = idea_factunit_atom.get_value(pick_str)
-            x_str = f"FactUnit base '{base_value}' deleted for idea '{road_value}'."
+    for road_dict in item_factunit_delete_dict.values():
+        for item_factunit_atom in road_dict.values():
+            road_value = item_factunit_atom.get_value(road_str)
+            base_value = item_factunit_atom.get_value(base_str)
+            pick_value = item_factunit_atom.get_value(pick_str)
+            x_str = f"FactUnit base '{base_value}' deleted for item '{road_value}'."
             legible_list.append(x_str)

@@ -205,12 +205,12 @@ class FiscalUnit:
 
         # if nothing has come from voice->duty->job->final pipeline use voice->final pipeline
         x_final.settle_bud()
-        if len(x_final._idea_dict) == 1:
+        if len(x_final._item_dict) == 1:
             # pipeline_voice_final_str()
             listen_to_debtors_roll_voice_final(listener_hubunit)
             listener_hubunit.open_file_final()
             x_final.settle_bud()
-        if len(x_final._idea_dict) == 1:
+        if len(x_final._item_dict) == 1:
             x_final = x_voice
         listener_hubunit.save_final_bud(x_final)
 

@@ -2,8 +2,8 @@ from src.f2_bud.bud import BudUnit, budunit_shop
 from src.f3_chrono.chrono import ChronoUnit, chronounit_shop
 from src.f3_chrono.examples.chrono_examples import (
     five_str,
-    add_time_creg_ideaunit,
-    add_time_five_ideaunit,
+    add_time_creg_itemunit,
+    add_time_five_itemunit,
     creg_str,
     get_creg_min_from_dt,
     get_five_min_from_dt,
@@ -21,7 +21,7 @@ def test_ChronoUnit_Exists():
     assert not x_chronounit.x_budunit
     assert not x_chronounit.time_range_root_road
     assert not x_chronounit.x_min
-    assert not x_chronounit._timeline_idea
+    assert not x_chronounit._timeline_item
     assert not x_chronounit._weekday
     assert not x_chronounit._monthday
     assert not x_chronounit._month
@@ -53,32 +53,32 @@ def test_ChronoUnit_shop_ReturnsObj():
     assert x_chronounit.x_min == x_timeline_min
 
 
-def test_ChronoUnit_set_timeline_idea_SetsAttr():
+def test_ChronoUnit_set_timeline_item_SetsAttr():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud = add_time_creg_itemunit(sue_bud)
     sue_bud.settle_bud()
     time_road = sue_bud.make_l1_road("time")
     creg_road = sue_bud.make_road(time_road, creg_str())
     x_chronounit = chronounit_shop(sue_bud, creg_road, 10000000)
-    assert not x_chronounit._timeline_idea
+    assert not x_chronounit._timeline_item
 
     # WHEN
-    x_chronounit._set_timeline_idea()
+    x_chronounit._set_timeline_item()
 
     # THEN
-    assert x_chronounit._timeline_idea
+    assert x_chronounit._timeline_item
 
 
 def test_ChronoUnit_set_weekday_SetsAttr():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud = add_time_creg_itemunit(sue_bud)
     sue_bud.settle_bud()
     time_road = sue_bud.make_l1_road("time")
     creg_road = sue_bud.make_road(time_road, creg_str())
     x_chronounit = chronounit_shop(sue_bud, creg_road, 10001440)
-    x_chronounit._set_timeline_idea()
+    x_chronounit._set_timeline_item()
     assert not x_chronounit._weekday
 
     # WHEN
@@ -91,12 +91,12 @@ def test_ChronoUnit_set_weekday_SetsAttr():
 def test_ChronoUnit_set_month_SetsAttr():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud = add_time_creg_itemunit(sue_bud)
     sue_bud.settle_bud()
     time_road = sue_bud.make_l1_road("time")
     creg_road = sue_bud.make_road(time_road, creg_str())
     x_chronounit = chronounit_shop(sue_bud, creg_road, 10060000)
-    x_chronounit._set_timeline_idea()
+    x_chronounit._set_timeline_item()
     assert not x_chronounit._month
     assert not x_chronounit._monthday
 
@@ -112,12 +112,12 @@ def test_ChronoUnit_set_month_SetsAttr():
 def test_ChronoUnit_set_hour_SetsAttr():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud = add_time_creg_itemunit(sue_bud)
     sue_bud.settle_bud()
     time_road = sue_bud.make_l1_road("time")
     creg_road = sue_bud.make_road(time_road, creg_str())
     x_chronounit = chronounit_shop(sue_bud, creg_road, 10000001)
-    x_chronounit._set_timeline_idea()
+    x_chronounit._set_timeline_item()
     assert not x_chronounit._hour
     assert not x_chronounit._hour
     assert not x_chronounit._minute
@@ -133,12 +133,12 @@ def test_ChronoUnit_set_hour_SetsAttr():
 def test_ChronoUnit_set_year_SetsAttr():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud = add_time_creg_itemunit(sue_bud)
     sue_bud.settle_bud()
     time_road = sue_bud.make_l1_road("time")
     creg_road = sue_bud.make_road(time_road, creg_str())
     x_chronounit = chronounit_shop(sue_bud, creg_road, 1030600100)
-    x_chronounit._set_timeline_idea()
+    x_chronounit._set_timeline_item()
     assert not x_chronounit._c400_count
     assert not x_chronounit._c100_count
     assert not x_chronounit._yr4_count
@@ -160,11 +160,11 @@ def test_ChronoUnit_set_year_SetsAttr():
 def test_ChronoUnit_calc_timeline_SetsAttrs():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud = add_time_creg_itemunit(sue_bud)
     time_road = sue_bud.make_l1_road("time")
     creg_road = sue_bud.make_road(time_road, creg_str())
     x_chronounit = chronounit_shop(sue_bud, creg_road, 1030600102)
-    assert not x_chronounit._timeline_idea
+    assert not x_chronounit._timeline_item
     assert not x_chronounit._weekday
     assert not x_chronounit._monthday
     assert not x_chronounit._month
@@ -176,7 +176,7 @@ def test_ChronoUnit_calc_timeline_SetsAttrs():
     x_chronounit.calc_timeline()
 
     # THEN
-    assert x_chronounit._timeline_idea
+    assert x_chronounit._timeline_item
     assert x_chronounit._weekday
     assert x_chronounit._monthday
     assert x_chronounit._month
@@ -188,12 +188,12 @@ def test_ChronoUnit_calc_timeline_SetsAttrs():
 def test_ChronoUnit_get_blurb_ReturnsObj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud = add_time_creg_itemunit(sue_bud)
     time_road = sue_bud.make_l1_road("time")
     creg_road = sue_bud.make_road(time_road, creg_str())
     x_chronounit = chronounit_shop(sue_bud, creg_road, 1030600102)
     x_chronounit.calc_timeline()
-    assert x_chronounit._timeline_idea
+    assert x_chronounit._timeline_item
     assert x_chronounit._weekday
     assert x_chronounit._monthday
     assert x_chronounit._month
@@ -217,8 +217,8 @@ def test_ChronoUnit_get_blurb_ReturnsObj():
 def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_creg_ideaunit(sue_bud)
-    sue_bud = add_time_five_ideaunit(sue_bud)
+    sue_bud = add_time_creg_itemunit(sue_bud)
+    sue_bud = add_time_five_itemunit(sue_bud)
     time_road = sue_bud.make_l1_road("time")
     creg_road = sue_bud.make_road(time_road, creg_str())
     five_road = sue_bud.make_road(time_road, five_str())
@@ -299,7 +299,7 @@ def check_creg_timeline_attr(x_bud: BudUnit, x_datetime: datetime):
 def test_check_creg_timeline():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    sue_bud = add_time_creg_ideaunit(sue_bud)
+    sue_bud = add_time_creg_itemunit(sue_bud)
     check_creg_timeline_attr(sue_bud, datetime(2000, 3, 1, 0, 21))
     check_creg_timeline_attr(sue_bud, datetime(2000, 3, 1, 3, 21))
     check_creg_timeline_attr(sue_bud, datetime(2000, 3, 1, 12, 00))

@@ -1,10 +1,10 @@
 from src.f1_road.jaar_refer import sue_str, bob_str, yao_str
-from src.f2_bud.idea import ideaunit_shop
+from src.f2_bud.item import itemunit_shop
 from src.f2_bud.bud import budunit_shop
 from src.f2_bud.bud_tool import (
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
+    bud_itemunit_str,
 )
 from src.f2_bud.examples.example_buds import budunit_v001
 from src.f4_gift.atom_config import (
@@ -25,7 +25,7 @@ from src.f8_brick.brick import create_brick_df, make_deltaunit, get_brickref
 from src.f8_brick.brick_config import (
     brick_format_00021_bud_acctunit_v0_0_0,
     brick_format_00020_bud_acct_membership_v0_0_0,
-    brick_format_00003_ideaunit_v0_0_0,
+    brick_format_00003_itemunit_v0_0_0,
 )
 
 
@@ -144,7 +144,7 @@ def test_make_deltaunit_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     assert len(membership_changunit.get_ordered_atomunits()) == 7
 
 
-def test_make_deltaunit_Arg_brick_format_00003_ideaunit_v0_0_0():
+def test_make_deltaunit_Arg_brick_format_00003_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -153,53 +153,53 @@ def test_make_deltaunit_Arg_brick_format_00003_ideaunit_v0_0_0():
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_str, mass=casa_mass))
+    sue_budunit.set_l1_item(itemunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_str)
-    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
-    x_brick_name = brick_format_00003_ideaunit_v0_0_0()
-    ideaunit_dataframe = create_brick_df(sue_budunit, x_brick_name)
-    ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
+    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_road)
+    x_brick_name = brick_format_00003_itemunit_v0_0_0()
+    itemunit_dataframe = create_brick_df(sue_budunit, x_brick_name)
+    itemunit_csv = itemunit_dataframe.to_csv(index=False)
 
     # WHEN
-    ideaunit_changunit = make_deltaunit(ideaunit_csv)
+    itemunit_changunit = make_deltaunit(itemunit_csv)
 
     # THEN
-    casa_atomunit = atomunit_shop(bud_ideaunit_str(), atom_insert())
+    casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     casa_atomunit.set_arg(parent_road_str(), sue_budunit._fiscal_id)
     casa_atomunit.set_arg(label_str(), casa_str)
     casa_atomunit.set_arg(pledge_str(), False)
     casa_atomunit.set_arg(mass_str(), casa_mass)
     print(f"{casa_atomunit=}")
     assert casa_atomunit.get_value(mass_str()) == casa_mass
-    clean_atomunit = atomunit_shop(bud_ideaunit_str(), atom_insert())
+    clean_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     clean_atomunit.set_arg(parent_road_str(), casa_road)
     clean_atomunit.set_arg(label_str(), clean_str)
     clean_atomunit.set_arg(pledge_str(), True)
     clean_atomunit.set_arg(mass_str(), 1)
-    assert ideaunit_changunit.atomunit_exists(casa_atomunit)
-    assert ideaunit_changunit.atomunit_exists(clean_atomunit)
-    assert len(ideaunit_changunit.get_ordered_atomunits()) == 2
+    assert itemunit_changunit.atomunit_exists(casa_atomunit)
+    assert itemunit_changunit.atomunit_exists(clean_atomunit)
+    assert len(itemunit_changunit.get_ordered_atomunits()) == 2
 
 
-def test_create_brick_df_Arg_brick_format_00003_ideaunit_v0_0_0_Scenario_budunit_v001(
+def test_create_brick_df_Arg_brick_format_00003_itemunit_v0_0_0_Scenario_budunit_v001(
     big_volume,
 ):
     # sourcery skip: no-conditionals-in-tests
     if big_volume:
         # ESTABLISH / WHEN
-        x_brick_name = brick_format_00003_ideaunit_v0_0_0()
+        x_brick_name = brick_format_00003_itemunit_v0_0_0()
 
         # WHEN
-        ideaunit_format = create_brick_df(budunit_v001(), x_brick_name)
+        itemunit_format = create_brick_df(budunit_v001(), x_brick_name)
 
         # THEN
-        array_headers = list(ideaunit_format.columns)
+        array_headers = list(itemunit_format.columns)
         assert array_headers == get_brickref(x_brick_name).get_headers_list()
-        assert len(ideaunit_format) == 251
+        assert len(itemunit_format) == 251
 
 
-def test_make_deltaunit_Arg_brick_format_00003_ideaunit_v0_0_0():
+def test_make_deltaunit_Arg_brick_format_00003_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -208,30 +208,30 @@ def test_make_deltaunit_Arg_brick_format_00003_ideaunit_v0_0_0():
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_str, mass=casa_mass))
+    sue_budunit.set_l1_item(itemunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_str)
-    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
-    x_brick_name = brick_format_00003_ideaunit_v0_0_0()
-    ideaunit_dataframe = create_brick_df(sue_budunit, x_brick_name)
-    ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
+    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_road)
+    x_brick_name = brick_format_00003_itemunit_v0_0_0()
+    itemunit_dataframe = create_brick_df(sue_budunit, x_brick_name)
+    itemunit_csv = itemunit_dataframe.to_csv(index=False)
 
     # WHEN
-    ideaunit_changunit = make_deltaunit(ideaunit_csv)
+    itemunit_changunit = make_deltaunit(itemunit_csv)
 
     # THEN
-    casa_atomunit = atomunit_shop(bud_ideaunit_str(), atom_insert())
+    casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     casa_atomunit.set_arg(parent_road_str(), sue_budunit._fiscal_id)
     casa_atomunit.set_arg(label_str(), casa_str)
     casa_atomunit.set_arg(pledge_str(), False)
     casa_atomunit.set_arg(mass_str(), casa_mass)
     print(f"{casa_atomunit=}")
     assert casa_atomunit.get_value(mass_str()) == casa_mass
-    clean_atomunit = atomunit_shop(bud_ideaunit_str(), atom_insert())
+    clean_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     clean_atomunit.set_arg(parent_road_str(), casa_road)
     clean_atomunit.set_arg(label_str(), clean_str)
     clean_atomunit.set_arg(pledge_str(), True)
     clean_atomunit.set_arg(mass_str(), 1)
-    assert ideaunit_changunit.atomunit_exists(casa_atomunit)
-    assert ideaunit_changunit.atomunit_exists(clean_atomunit)
-    assert len(ideaunit_changunit.get_ordered_atomunits()) == 2
+    assert itemunit_changunit.atomunit_exists(casa_atomunit)
+    assert itemunit_changunit.atomunit_exists(clean_atomunit)
+    assert len(itemunit_changunit.get_ordered_atomunits()) == 2

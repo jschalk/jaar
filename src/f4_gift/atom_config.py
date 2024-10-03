@@ -191,8 +191,8 @@ def fnigh_str() -> str:
     return "fnigh"
 
 
-def base_idea_active_requisite_str() -> str:
-    return "base_idea_active_requisite"
+def base_item_active_requisite_str() -> str:
+    return "base_item_active_requisite"
 
 
 def get_atom_config_file_name() -> str:
@@ -270,7 +270,7 @@ def get_atom_args_python_types() -> dict[str, str]:
         "divisor": "int",
         "nigh": "float",
         "need": "RoadUnit",
-        "base_idea_active_requisite": "bool",
+        "base_item_active_requisite": "bool",
         "label": "RoadNode",
         "gogo_want": "float",
         "close": "float",

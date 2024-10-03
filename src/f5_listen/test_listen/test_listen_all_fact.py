@@ -1,4 +1,4 @@
-from src.f2_bud.idea import ideaunit_shop
+from src.f2_bud.item import itemunit_shop
 from src.f2_bud.bud import budunit_shop
 from src.f5_listen.listen import (
     migrate_all_facts,
@@ -134,16 +134,16 @@ def test_set_listen_to_speaker_fact_SetsFact():
 
     yao_listener.add_acctunit(yao_str)
     yao_listener.set_acct_respect(20)
-    yao_listener.set_idea(ideaunit_shop(clean_str), status_road)
-    yao_listener.set_idea(ideaunit_shop(dirty_str), status_road)
-    yao_listener.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_road)
-    yao_listener.edit_idea_attr(
+    yao_listener.set_item(itemunit_shop(clean_str), status_road)
+    yao_listener.set_item(itemunit_shop(dirty_str), status_road)
+    yao_listener.set_item(itemunit_shop(sweep_str, pledge=True), casa_road)
+    yao_listener.edit_item_attr(
         sweep_road, reason_base=status_road, reason_premise=dirty_road
     )
     missing_fact_bases = list(yao_listener.get_missing_fact_bases().keys())
 
     yao_speaker = budunit_shop(yao_str)
-    yao_speaker.set_fact(status_road, clean_road, create_missing_ideas=True)
+    yao_speaker.set_fact(status_road, clean_road, create_missing_items=True)
     assert yao_listener.get_missing_fact_bases().keys() == {status_road}
 
     # WHEN
@@ -174,14 +174,14 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     running_str = "running"
     running_road = yao_listener.make_road(fridge_road, running_str)
 
-    yao_listener.set_idea(ideaunit_shop(running_str), fridge_road)
-    yao_listener.set_idea(ideaunit_shop(clean_str), status_road)
-    yao_listener.set_idea(ideaunit_shop(dirty_str), status_road)
-    yao_listener.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_road)
-    yao_listener.edit_idea_attr(
+    yao_listener.set_item(itemunit_shop(running_str), fridge_road)
+    yao_listener.set_item(itemunit_shop(clean_str), status_road)
+    yao_listener.set_item(itemunit_shop(dirty_str), status_road)
+    yao_listener.set_item(itemunit_shop(sweep_str, pledge=True), casa_road)
+    yao_listener.edit_item_attr(
         sweep_road, reason_base=status_road, reason_premise=dirty_road
     )
-    yao_listener.edit_idea_attr(
+    yao_listener.edit_item_attr(
         sweep_road, reason_base=fridge_road, reason_premise=running_road
     )
     assert len(yao_listener.get_missing_fact_bases()) == 2
@@ -191,8 +191,8 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
 
     # WHEN
     yao_speaker = budunit_shop(yao_str)
-    yao_speaker.set_fact(status_road, clean_road, create_missing_ideas=True)
-    yao_speaker.set_fact(fridge_road, running_road, create_missing_ideas=True)
+    yao_speaker.set_fact(status_road, clean_road, create_missing_items=True)
+    yao_speaker.set_fact(fridge_road, running_road, create_missing_items=True)
     missing_fact_bases = list(yao_listener.get_missing_fact_bases().keys())
     listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_bases)
 
@@ -204,7 +204,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     assert yao_listener.get_fact(fridge_road).pick == running_road
 
 
-def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
+def test_migrate_all_facts_CorrectlyAddsItemUnitsAndSetsFactUnits():
     # ESTABLISH
     yao_str = "Yao"
     yao_src = budunit_shop(yao_str)
@@ -227,22 +227,22 @@ def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
 
     yao_src.add_acctunit(yao_str)
     yao_src.set_acct_respect(20)
-    yao_src.set_idea(ideaunit_shop(clean_str), status_road)
-    yao_src.set_idea(ideaunit_shop(dirty_str), status_road)
-    yao_src.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_road)
+    yao_src.set_item(itemunit_shop(clean_str), status_road)
+    yao_src.set_item(itemunit_shop(dirty_str), status_road)
+    yao_src.set_item(itemunit_shop(sweep_str, pledge=True), casa_road)
     yao_src.edit_reason(sweep_road, status_road, dirty_road)
     # missing_fact_bases = list(yao_src.get_missing_fact_bases().keys())
-    yao_src.set_idea(ideaunit_shop(rain_str), weather_road)
-    yao_src.set_idea(ideaunit_shop(snow_str), weather_road)
+    yao_src.set_item(itemunit_shop(rain_str), weather_road)
+    yao_src.set_item(itemunit_shop(snow_str), weather_road)
     yao_src.set_fact(weather_road, rain_road)
     yao_src.set_fact(status_road, clean_road)
     yao_src.settle_bud()
 
     yao_dst = budunit_shop(yao_str)
-    assert yao_dst.idea_exists(clean_road) is False
-    assert yao_dst.idea_exists(dirty_road) is False
-    assert yao_dst.idea_exists(rain_road) is False
-    assert yao_dst.idea_exists(snow_road) is False
+    assert yao_dst.item_exists(clean_road) is False
+    assert yao_dst.item_exists(dirty_road) is False
+    assert yao_dst.item_exists(rain_road) is False
+    assert yao_dst.item_exists(snow_road) is False
     assert yao_dst.get_fact(weather_road) is None
     assert yao_dst.get_fact(status_road) is None
 
@@ -250,10 +250,10 @@ def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
     migrate_all_facts(yao_src, yao_dst)
 
     # THEN
-    assert yao_dst.idea_exists(clean_road)
-    assert yao_dst.idea_exists(dirty_road)
-    assert yao_dst.idea_exists(rain_road)
-    assert yao_dst.idea_exists(snow_road)
+    assert yao_dst.item_exists(clean_road)
+    assert yao_dst.item_exists(dirty_road)
+    assert yao_dst.item_exists(rain_road)
+    assert yao_dst.item_exists(snow_road)
     assert yao_dst.get_fact(weather_road) is not None
     assert yao_dst.get_fact(status_road) is not None
     assert yao_dst.get_fact(weather_road).pick == rain_road

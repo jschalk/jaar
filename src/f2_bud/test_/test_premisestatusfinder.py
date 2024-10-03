@@ -1,5 +1,5 @@
 from src.f0_instrument.plotly_tool import conditional_fig_show
-from src.f2_bud.reason_idea import (
+from src.f2_bud.reason_item import (
     PremiseStatusFinder,
     premisestatusfinder_shop,
 )

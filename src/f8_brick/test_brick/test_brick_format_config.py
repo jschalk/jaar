@@ -33,17 +33,17 @@ from src.f8_brick.brick_config import (
     get_brick_formats_dir,
     get_brick_filenames,
     get_brickref_dict,
-    brick_format_00003_ideaunit_v0_0_0,
-    brick_format_00019_ideaunit_v0_0_0,
+    brick_format_00003_itemunit_v0_0_0,
+    brick_format_00019_itemunit_v0_0_0,
     brick_format_00020_bud_acct_membership_v0_0_0,
     brick_format_00021_bud_acctunit_v0_0_0,
-    brick_format_00022_bud_idea_awardlink_v0_0_0,
-    brick_format_00023_bud_idea_factunit_v0_0_0,
-    brick_format_00024_bud_idea_teamlink_v0_0_0,
-    brick_format_00025_bud_idea_healerlink_v0_0_0,
-    brick_format_00026_bud_idea_reason_premiseunit_v0_0_0,
-    brick_format_00027_bud_idea_reasonunit_v0_0_0,
-    brick_format_00028_bud_ideaunit_v0_0_0,
+    brick_format_00022_bud_item_awardlink_v0_0_0,
+    brick_format_00023_bud_item_factunit_v0_0_0,
+    brick_format_00024_bud_item_teamlink_v0_0_0,
+    brick_format_00025_bud_item_healerlink_v0_0_0,
+    brick_format_00026_bud_item_reason_premiseunit_v0_0_0,
+    brick_format_00027_bud_item_reasonunit_v0_0_0,
+    brick_format_00028_bud_itemunit_v0_0_0,
     brick_format_00029_budunit_v0_0_0,
     get_brick_format_headers,
     attributes_str,
@@ -63,8 +63,8 @@ def test_config_str_functions_ReturnObjs():
     assert brick_format_00021_bud_acctunit_v0_0_0() == x00021_brick
     x00020_brick = "brick_format_00020_bud_acct_membership_v0_0_0"
     assert brick_format_00020_bud_acct_membership_v0_0_0() == x00020_brick
-    x0003_brick = "brick_format_00003_ideaunit_v0_0_0"
-    assert brick_format_00003_ideaunit_v0_0_0() == x0003_brick
+    x0003_brick = "brick_format_00003_itemunit_v0_0_0"
+    assert brick_format_00003_itemunit_v0_0_0() == x0003_brick
 
 
 def test_get_brick_formats_dir_ReturnsObj():
@@ -82,7 +82,7 @@ def test_get_brick_filenames_ReturnsCorrectObj():
     print(f"{x_filenames=}")
     assert brick_format_00021_bud_acctunit_v0_0_0() in x_filenames
     assert brick_format_00020_bud_acct_membership_v0_0_0() in x_filenames
-    assert brick_format_00003_ideaunit_v0_0_0() in x_filenames
+    assert brick_format_00003_itemunit_v0_0_0() in x_filenames
 
 
 def test_get_brickref_ReturnsObj():
@@ -127,10 +127,10 @@ def test_get_sorted_headers_ReturnsObj():
     assert headers == "acct_id,credit_belief,debtit_belief,fiscal_id,owner_id"
 
     # ESTABLISH / WHEN
-    headers = get_sorted_headers(brick_format_00019_ideaunit_v0_0_0())
+    headers = get_sorted_headers(brick_format_00019_itemunit_v0_0_0())
     # THEN
-    idea_headers_str = "addin,begin,close,denom,fiscal_id,gogo_want,label,morph,numor,owner_id,parent_road,stop_want"
-    assert headers == idea_headers_str
+    item_headers_str = "addin,begin,close,denom,fiscal_id,gogo_want,label,morph,numor,owner_id,parent_road,stop_want"
+    assert headers == item_headers_str
 
 
 def check_sorted_headers_exist(brick_format_filename: str, x_headers: dict):
@@ -242,9 +242,9 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00020_bud_acct_membership_v0_
     assert credit_vote_brickcolumn.column_order == 5
 
 
-def test_get_brickref_HasCorrectAttrs_brick_format_00003_ideaunit_v0_0_0():
+def test_get_brickref_HasCorrectAttrs_brick_format_00003_itemunit_v0_0_0():
     # ESTABLISH
-    brick_name = brick_format_00003_ideaunit_v0_0_0()
+    brick_name = brick_format_00003_itemunit_v0_0_0()
 
     # WHEN
     format_00003_brickref = get_brickref(brick_name)
@@ -269,9 +269,9 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00003_ideaunit_v0_0_0():
     assert pledge_brickcolumn.column_order == 2
 
 
-def test_get_brickref_HasCorrectAttrs_brick_format_00019_ideaunit_v0_0_0():
+def test_get_brickref_HasCorrectAttrs_brick_format_00019_itemunit_v0_0_0():
     # ESTABLISH
-    brick_name = brick_format_00019_ideaunit_v0_0_0()
+    brick_name = brick_format_00019_itemunit_v0_0_0()
 
     # WHEN
     format_00019_brickref = get_brickref(brick_name)

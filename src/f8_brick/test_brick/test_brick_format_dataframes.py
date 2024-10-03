@@ -1,9 +1,9 @@
 from src.f0_instrument.file import open_file, create_file_path
-from src.f2_bud.idea import ideaunit_shop
+from src.f2_bud.item import itemunit_shop
 from src.f2_bud.bud import budunit_shop
 from src.f3_chrono.examples.chrono_examples import (
-    add_time_creg_ideaunit,
-    add_time_five_ideaunit,
+    add_time_creg_itemunit,
+    add_time_five_itemunit,
 )
 from src.f4_gift.atom_config import (
     fiscal_id_str,
@@ -23,8 +23,8 @@ from src.f8_brick.brick import create_brick_df, get_brickref, save_brick_csv
 from src.f8_brick.brick_config import (
     brick_format_00021_bud_acctunit_v0_0_0,
     brick_format_00020_bud_acct_membership_v0_0_0,
-    brick_format_00003_ideaunit_v0_0_0,
-    brick_format_00019_ideaunit_v0_0_0,
+    brick_format_00003_itemunit_v0_0_0,
+    brick_format_00019_itemunit_v0_0_0,
 )
 from src.f8_brick.examples.brick_env import (
     brick_examples_dir,
@@ -147,7 +147,7 @@ def test_create_brick_df_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     assert len(membership_dataframe) == 7
 
 
-def test_create_brick_df_Arg_brick_format_00003_ideaunit_v0_0_0():
+def test_create_brick_df_Arg_brick_format_00003_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     music_fiscal_id = "music56"
@@ -155,44 +155,44 @@ def test_create_brick_df_Arg_brick_format_00003_ideaunit_v0_0_0():
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_str, mass=casa_mass))
+    sue_budunit.set_l1_item(itemunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_str)
-    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
+    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_road)
 
     # WHEN
-    x_brick_name = brick_format_00003_ideaunit_v0_0_0()
-    ideaunit_format = create_brick_df(sue_budunit, x_brick_name)
+    x_brick_name = brick_format_00003_itemunit_v0_0_0()
+    itemunit_format = create_brick_df(sue_budunit, x_brick_name)
 
     # THEN
-    array_headers = list(ideaunit_format.columns)
+    array_headers = list(itemunit_format.columns)
     assert array_headers == get_brickref(x_brick_name).get_headers_list()
 
-    assert ideaunit_format.loc[0, owner_id_str()] == sue_budunit._owner_id
-    assert ideaunit_format.loc[0, pledge_str()] == ""
-    assert ideaunit_format.loc[0, fiscal_id_str()] == music_fiscal_id
-    assert ideaunit_format.loc[0, label_str()] == casa_str
-    assert ideaunit_format.loc[0, mass_str()] == casa_mass
-    assert ideaunit_format.loc[0, parent_road_str()] == music_fiscal_id
+    assert itemunit_format.loc[0, owner_id_str()] == sue_budunit._owner_id
+    assert itemunit_format.loc[0, pledge_str()] == ""
+    assert itemunit_format.loc[0, fiscal_id_str()] == music_fiscal_id
+    assert itemunit_format.loc[0, label_str()] == casa_str
+    assert itemunit_format.loc[0, mass_str()] == casa_mass
+    assert itemunit_format.loc[0, parent_road_str()] == music_fiscal_id
 
-    assert ideaunit_format.loc[1, owner_id_str()] == sue_budunit._owner_id
-    assert ideaunit_format.loc[1, pledge_str()] == "Yes"
-    assert ideaunit_format.loc[1, fiscal_id_str()] == music_fiscal_id
-    assert ideaunit_format.loc[1, parent_road_str()] == casa_road
-    assert ideaunit_format.loc[1, label_str()] == clean_str
-    assert ideaunit_format.loc[1, mass_str()] == 1
-    assert len(ideaunit_format) == 2
+    assert itemunit_format.loc[1, owner_id_str()] == sue_budunit._owner_id
+    assert itemunit_format.loc[1, pledge_str()] == "Yes"
+    assert itemunit_format.loc[1, fiscal_id_str()] == music_fiscal_id
+    assert itemunit_format.loc[1, parent_road_str()] == casa_road
+    assert itemunit_format.loc[1, label_str()] == clean_str
+    assert itemunit_format.loc[1, mass_str()] == 1
+    assert len(itemunit_format) == 2
 
 
-def test_save_brick_csv_Arg_brick_format_00019_ideaunit_v0_0_0():
+def test_save_brick_csv_Arg_brick_format_00019_itemunit_v0_0_0():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue", "music56")
-    sue_budunit = add_time_creg_ideaunit(sue_budunit)
-    sue_budunit = add_time_five_ideaunit(sue_budunit)
-    x_brick_name = brick_format_00019_ideaunit_v0_0_0()
+    sue_budunit = add_time_creg_itemunit(sue_budunit)
+    sue_budunit = add_time_five_itemunit(sue_budunit)
+    x_brick_name = brick_format_00019_itemunit_v0_0_0()
 
     # WHEN
-    # acct_filename = f"{sue_str}_ideaunit_example_00019.csv"
+    # acct_filename = f"{sue_str}_itemunit_example_00019.csv"
     # csv_example_path = create_file_path(brick_fiscals_dir(), acct_filename)
     # save_brick_csv(x_brick_name, sue_budunit, brick_examples_dir(), acct_filename)
     brick_df = create_brick_df(sue_budunit, x_brick_name)
@@ -259,7 +259,7 @@ music56,Sue,Zia,1,1
     assert open_file(brick_fiscals_dir(), acct_filename) == sue2_acct_example_csv
 
 
-def test_save_brick_csv_Arg_brick_format_00003_ideaunit_v0_0_0(brick_env_setup_cleanup):
+def test_save_brick_csv_Arg_brick_format_00003_itemunit_v0_0_0(brick_env_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -268,13 +268,13 @@ def test_save_brick_csv_Arg_brick_format_00003_ideaunit_v0_0_0(brick_env_setup_c
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_str, mass=casa_mass))
+    sue_budunit.set_l1_item(itemunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_road = sue_budunit.make_road(casa_road, clean_str)
-    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_road)
-    x_brick_name = brick_format_00003_ideaunit_v0_0_0()
-    ideaunit_format = create_brick_df(sue_budunit, x_brick_name)
-    acct_filename = f"{sue_str}_ideaunit_example_000.csv"
+    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_road)
+    x_brick_name = brick_format_00003_itemunit_v0_0_0()
+    itemunit_format = create_brick_df(sue_budunit, x_brick_name)
+    acct_filename = f"{sue_str}_itemunit_example_000.csv"
     csv_example_path = create_file_path(brick_fiscals_dir(), acct_filename)
     assert not os_path_exists(csv_example_path)
 

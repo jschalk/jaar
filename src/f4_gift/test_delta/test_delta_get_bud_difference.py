@@ -1,19 +1,19 @@
 from src.f2_bud.acct import acctunit_shop
 from src.f2_bud.group import awardlink_shop
-from src.f2_bud.idea import ideaunit_shop
-from src.f2_bud.reason_idea import factunit_shop
+from src.f2_bud.item import itemunit_shop
+from src.f2_bud.reason_item import factunit_shop
 from src.f2_bud.bud import budunit_shop
 from src.f2_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_awardlink_str,
-    bud_idea_reasonunit_str,
-    bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
-    bud_idea_healerlink_str,
-    bud_idea_factunit_str,
+    bud_itemunit_str,
+    bud_item_awardlink_str,
+    bud_item_reasonunit_str,
+    bud_item_reason_premiseunit_str,
+    bud_item_teamlink_str,
+    bud_item_healerlink_str,
+    bud_item_factunit_str,
 )
 from src.f4_gift.atom_config import (
     acct_id_str,
@@ -27,7 +27,7 @@ from src.f4_gift.atom_config import (
     mass_str,
     fopen_str,
     fnigh_str,
-    base_idea_active_requisite_str,
+    base_item_active_requisite_str,
 )
 from src.f4_gift.atom import atom_insert, atom_update, atom_delete
 from src.f4_gift.delta import DeltaUnit, deltaunit_shop
@@ -353,7 +353,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership_
     assert get_atomunit_total_count(sue_deltaunit) == 3
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_delete():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -361,33 +361,33 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_delete():
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     street_str = "street ball"
     street_road = before_sue_bud.make_road(ball_road, street_str)
-    before_sue_bud.set_idea(ideaunit_shop(street_str), ball_road)
+    before_sue_bud.set_item(itemunit_shop(street_str), ball_road)
     disc_str = "Ultimate Disc"
     disc_road = before_sue_bud.make_road(sports_road, disc_str)
     music_str = "music"
-    before_sue_bud.set_l1_idea(ideaunit_shop(music_str))
-    before_sue_bud.set_idea(ideaunit_shop(disc_str), sports_road)
-    # create after without ball_idea and street_idea
+    before_sue_bud.set_l1_item(itemunit_shop(music_str))
+    before_sue_bud.set_item(itemunit_shop(disc_str), sports_road)
+    # create after without ball_item and street_item
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_sue_bud.del_idea_obj(ball_road)
+    after_sue_bud.del_item_obj(ball_road)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_category = bud_ideaunit_str()
+    x_category = bud_itemunit_str()
     print(f"{sue_deltaunit.atomunits.get(atom_delete()).get(x_category).keys()=}")
 
-    x_keylist = [atom_delete(), bud_ideaunit_str(), ball_road, street_str]
+    x_keylist = [atom_delete(), bud_itemunit_str(), ball_road, street_str]
     street_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == ball_road
     assert street_atomunit.get_value(label_str()) == street_str
 
-    x_keylist = [atom_delete(), bud_ideaunit_str(), sports_road, ball_str]
+    x_keylist = [atom_delete(), bud_itemunit_str(), sports_road, ball_str]
     ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == sports_road
     assert ball_atomunit.get_value(label_str()) == ball_str
@@ -396,7 +396,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_delete():
     assert get_atomunit_total_count(sue_deltaunit) == 2
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -404,23 +404,23 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     street_str = "street ball"
     street_road = before_sue_bud.make_road(ball_road, street_str)
-    before_sue_bud.set_idea(ideaunit_shop(street_str), ball_road)
+    before_sue_bud.set_item(itemunit_shop(street_str), ball_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     disc_str = "Ultimate Disc"
     disc_road = after_sue_bud.make_road(sports_road, disc_str)
-    after_sue_bud.set_idea(ideaunit_shop(disc_str), sports_road)
+    after_sue_bud.set_item(itemunit_shop(disc_str), sports_road)
     music_str = "music"
     music_begin = 34
     music_close = 78
     music_mass = 55
     music_pledge = True
     music_road = after_sue_bud.make_l1_road(music_str)
-    after_sue_bud.set_l1_idea(
-        ideaunit_shop(
+    after_sue_bud.set_l1_item(
+        itemunit_shop(
             music_str,
             begin=music_begin,
             close=music_close,
@@ -436,14 +436,14 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     # THEN
     print_atomunit_keys(sue_deltaunit)
 
-    x_keylist = [atom_insert(), bud_ideaunit_str(), sports_road, disc_str]
+    x_keylist = [atom_insert(), bud_itemunit_str(), sports_road, disc_str]
     street_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == sports_road
     assert street_atomunit.get_value(label_str()) == disc_str
 
     x_keylist = [
         atom_insert(),
-        bud_ideaunit_str(),
+        bud_itemunit_str(),
         after_sue_bud._fiscal_id,
         music_str,
     ]
@@ -458,7 +458,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_insert():
     assert get_atomunit_total_count(sue_deltaunit) == 2
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -470,8 +470,8 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     before_music_mass = 55
     before_music_pledge = True
     music_road = before_sue_bud.make_l1_road(music_str)
-    before_sue_bud.set_l1_idea(
-        ideaunit_shop(
+    before_sue_bud.set_l1_item(
+        itemunit_shop(
             music_str,
             begin=before_music_begin,
             close=before_music_close,
@@ -485,7 +485,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     after_music_close = 111
     after_music_mass = 22
     after_music_pledge = False
-    after_sue_bud.edit_idea_attr(
+    after_sue_bud.edit_item_attr(
         music_road,
         begin=after_music_begin,
         close=after_music_close,
@@ -502,7 +502,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
 
     x_keylist = [
         atom_update(),
-        bud_ideaunit_str(),
+        bud_itemunit_str(),
         after_sue_bud._fiscal_id,
         music_str,
     ]
@@ -517,7 +517,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_update():
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_delete():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -543,15 +543,15 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_d
     ball_road = before_sue_au.make_road(sports_road, ball_str)
     disc_str = "Ultimate Disc"
     disc_road = before_sue_au.make_road(sports_road, disc_str)
-    before_sue_au.set_idea(ideaunit_shop(ball_str), sports_road)
-    before_sue_au.set_idea(ideaunit_shop(disc_str), sports_road)
-    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(fly_str))
-    before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(fly_str))
+    before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
+    before_sue_au.set_item(itemunit_shop(disc_str), sports_road)
+    before_sue_au.edit_item_attr(ball_road, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_item_attr(ball_road, awardlink=awardlink_shop(fly_str))
+    before_sue_au.edit_item_attr(disc_road, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_item_attr(disc_road, awardlink=awardlink_shop(fly_str))
 
     after_sue_bud = copy_deepcopy(before_sue_au)
-    after_sue_bud.edit_idea_attr(disc_road, awardlink_del=run_str)
+    after_sue_bud.edit_item_attr(disc_road, awardlink_del=run_str)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -560,7 +560,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_d
     # THEN
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
 
-    x_keylist = [atom_delete(), bud_idea_awardlink_str(), disc_road, run_str]
+    x_keylist = [atom_delete(), bud_item_awardlink_str(), disc_road, run_str]
     run_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
     assert run_atomunit.get_value("road") == disc_road
     assert run_atomunit.get_value(group_id_str()) == run_str
@@ -568,7 +568,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_d
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_insert():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -594,16 +594,16 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_i
     ball_road = before_sue_au.make_road(sports_road, ball_str)
     disc_str = "Ultimate Disc"
     disc_road = before_sue_au.make_road(sports_road, disc_str)
-    before_sue_au.set_idea(ideaunit_shop(ball_str), sports_road)
-    before_sue_au.set_idea(ideaunit_shop(disc_str), sports_road)
-    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_idea_attr(disc_road, awardlink=awardlink_shop(fly_str))
+    before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
+    before_sue_au.set_item(itemunit_shop(disc_str), sports_road)
+    before_sue_au.edit_item_attr(ball_road, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_item_attr(disc_road, awardlink=awardlink_shop(fly_str))
     after_sue_au = copy_deepcopy(before_sue_au)
-    after_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(fly_str))
+    after_sue_au.edit_item_attr(ball_road, awardlink=awardlink_shop(fly_str))
     after_run_give_force = 44
     after_run_take_force = 66
     x_awardlink = awardlink_shop(run_str, after_run_give_force, after_run_take_force)
-    after_sue_au.edit_idea_attr(disc_road, awardlink=x_awardlink)
+    after_sue_au.edit_item_attr(disc_road, awardlink=x_awardlink)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -612,7 +612,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_i
     # THEN
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
 
-    x_keylist = [atom_insert(), bud_idea_awardlink_str(), disc_road, run_str]
+    x_keylist = [atom_insert(), bud_item_awardlink_str(), disc_road, run_str]
     run_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
     assert run_atomunit.get_value("road") == disc_road
     assert run_atomunit.get_value(group_id_str()) == run_str
@@ -624,7 +624,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_i
     assert get_atomunit_total_count(sue_deltaunit) == 2
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_update():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -639,14 +639,14 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_u
     sports_road = before_sue_au.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_au.make_road(sports_road, ball_str)
-    before_sue_au.set_idea(ideaunit_shop(ball_str), sports_road)
-    before_sue_au.edit_idea_attr(ball_road, awardlink=awardlink_shop(run_str))
-    run_awardlink = before_sue_au.get_idea_obj(ball_road).awardlinks.get(run_str)
+    before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
+    before_sue_au.edit_item_attr(ball_road, awardlink=awardlink_shop(run_str))
+    run_awardlink = before_sue_au.get_item_obj(ball_road).awardlinks.get(run_str)
 
     after_sue_bud = copy_deepcopy(before_sue_au)
     after_give_force = 55
     after_take_force = 66
-    after_sue_bud.edit_idea_attr(
+    after_sue_bud.edit_item_attr(
         ball_road,
         awardlink=awardlink_shop(
             group_id=run_str,
@@ -661,7 +661,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_u
     # THEN
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
 
-    x_keylist = [atom_update(), bud_idea_awardlink_str(), ball_road, run_str]
+    x_keylist = [atom_update(), bud_item_awardlink_str(), ball_road, run_str]
     ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value(group_id_str()) == run_str
@@ -670,7 +670,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_awardlink_u
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_update():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_factunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -678,26 +678,26 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_up
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     bend_str = "bendable"
     bend_road = before_sue_bud.make_road(knee_road, bend_str)
-    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_road)
+    before_sue_bud.set_item(itemunit_shop(bend_str), knee_road)
     broken_str = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
+    before_sue_bud.set_l1_item(itemunit_shop(knee_str))
+    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
     before_fopen = 11
     before_fnigh = 22
     before_fact = factunit_shop(knee_road, bend_road, before_fopen, before_fnigh)
-    before_sue_bud.edit_idea_attr(ball_road, factunit=before_fact)
+    before_sue_bud.edit_item_attr(ball_road, factunit=before_fact)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_fopen = 55
     after_fnigh = 66
     knee_fact = factunit_shop(knee_road, broken_road, after_fopen, after_fnigh)
-    after_sue_bud.edit_idea_attr(ball_road, factunit=knee_fact)
+    after_sue_bud.edit_item_attr(ball_road, factunit=knee_fact)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -706,7 +706,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_up
     # THEN
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
 
-    x_keylist = [atom_update(), bud_idea_factunit_str(), ball_road, knee_road]
+    x_keylist = [atom_update(), bud_item_factunit_str(), ball_road, knee_road]
     ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
@@ -716,7 +716,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_up
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_insert():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_factunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -724,19 +724,19 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_in
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     broken_str = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
+    before_sue_bud.set_l1_item(itemunit_shop(knee_str))
+    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_fopen = 55
     after_fnigh = 66
     after_fact = factunit_shop(knee_road, broken_road, after_fopen, after_fnigh)
-    after_sue_bud.edit_idea_attr(road=ball_road, factunit=after_fact)
+    after_sue_bud.edit_item_attr(road=ball_road, factunit=after_fact)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -744,7 +744,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_in
 
     # THEN
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
-    x_keylist = [atom_insert(), bud_idea_factunit_str(), ball_road, knee_road]
+    x_keylist = [atom_insert(), bud_item_factunit_str(), ball_road, knee_road]
     ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
@@ -754,7 +754,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_in
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_delete():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_factunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -762,13 +762,13 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_de
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     broken_str = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
+    before_sue_bud.set_l1_item(itemunit_shop(knee_str))
+    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     before_broken_open = 55
@@ -779,7 +779,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_de
         fopen=before_broken_open,
         fnigh=before_broken_nigh,
     )
-    before_sue_bud.edit_idea_attr(road=ball_road, factunit=before_fact)
+    before_sue_bud.edit_item_attr(road=ball_road, factunit=before_fact)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -787,7 +787,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_de
 
     # THEN
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
-    x_keylist = [atom_delete(), bud_idea_factunit_str(), ball_road, knee_road]
+    x_keylist = [atom_delete(), bud_item_factunit_str(), ball_road, knee_road]
     ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
@@ -796,7 +796,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_factunit_de
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_premiseunit_insert():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reason_premiseunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -804,17 +804,17 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_l1_item(itemunit_shop(knee_str))
     broken_str = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_str)
-    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
+    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
     bend_str = "bend"
     bend_road = before_sue_bud.make_road(knee_road, bend_str)
-    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_road)
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.set_item(itemunit_shop(bend_str), knee_road)
+    before_sue_bud.edit_item_attr(
         ball_road, reason_base=knee_road, reason_premise=bend_road
     )
 
@@ -822,7 +822,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
     broken_open = 45
     broken_nigh = 77
     broken_divisor = 3
-    after_sue_bud.edit_idea_attr(
+    after_sue_bud.edit_item_attr(
         ball_road,
         reason_base=knee_road,
         reason_premise=broken_road,
@@ -839,7 +839,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_reason_premiseunit_str(),
+        bud_item_reason_premiseunit_str(),
         ball_road,
         knee_road,
         broken_road,
@@ -854,7 +854,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_premiseunit_delete():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reason_premiseunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -862,23 +862,23 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_l1_item(itemunit_shop(knee_str))
     broken_str = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_str)
-    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
+    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
     bend_str = "bend"
     bend_road = before_sue_bud.make_road(knee_road, bend_str)
-    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_road)
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.set_item(itemunit_shop(bend_str), knee_road)
+    before_sue_bud.edit_item_attr(
         ball_road, reason_base=knee_road, reason_premise=bend_road
     )
     broken_open = 45
     broken_nigh = 77
     broken_divisor = 3
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.edit_item_attr(
         ball_road,
         reason_base=knee_road,
         reason_premise=broken_road,
@@ -887,7 +887,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
         reason_premise_divisor=broken_divisor,
     )
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_sue_bud.edit_idea_attr(
+    after_sue_bud.edit_item_attr(
         ball_road,
         reason_del_premise_base=knee_road,
         reason_del_premise_need=broken_road,
@@ -901,7 +901,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_reason_premiseunit_str(),
+        bud_item_reason_premiseunit_str(),
         ball_road,
         knee_road,
         broken_road,
@@ -913,7 +913,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_premiseunit_update():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reason_premiseunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -921,23 +921,23 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_l1_item(itemunit_shop(knee_str))
     broken_str = "broke cartilage"
     broken_road = before_sue_bud.make_road(knee_road, broken_str)
-    before_sue_bud.set_idea(ideaunit_shop(broken_str), knee_road)
+    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
     bend_str = "bend"
     bend_road = before_sue_bud.make_road(knee_road, bend_str)
-    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_road)
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.set_item(itemunit_shop(bend_str), knee_road)
+    before_sue_bud.edit_item_attr(
         ball_road, reason_base=knee_road, reason_premise=bend_road
     )
     before_broken_open = 111
     before_broken_nigh = 777
     before_broken_divisor = 13
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.edit_item_attr(
         ball_road,
         reason_base=knee_road,
         reason_premise=broken_road,
@@ -950,7 +950,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
     after_broken_open = 333
     after_broken_nigh = 555
     after_broken_divisor = 78
-    after_sue_bud.edit_idea_attr(
+    after_sue_bud.edit_item_attr(
         ball_road,
         reason_base=knee_road,
         reason_premise=broken_road,
@@ -967,7 +967,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_update(),
-        bud_idea_reason_premiseunit_str(),
+        bud_item_reason_premiseunit_str(),
         ball_road,
         knee_road,
         broken_road,
@@ -982,7 +982,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reason_prem
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_insert():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -990,20 +990,20 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     medical_str = "get medical attention"
     medical_road = before_sue_bud.make_road(knee_road, medical_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_road)
+    before_sue_bud.set_l1_item(itemunit_shop(knee_str))
+    before_sue_bud.set_item(itemunit_shop(medical_str), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_medical_base_idea_active_requisite = False
-    after_sue_bud.edit_idea_attr(
+    after_medical_base_item_active_requisite = False
+    after_sue_bud.edit_item_attr(
         road=ball_road,
         reason_base=medical_road,
-        reason_base_idea_active_requisite=after_medical_base_idea_active_requisite,
+        reason_base_item_active_requisite=after_medical_base_item_active_requisite,
     )
 
     sue_deltaunit = deltaunit_shop()
@@ -1013,7 +1013,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_reasonunit_str(),
+        bud_item_reasonunit_str(),
         ball_road,
         medical_road,
     ]
@@ -1021,13 +1021,13 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == medical_road
     assert (
-        ball_atomunit.get_value(base_idea_active_requisite_str())
-        == after_medical_base_idea_active_requisite
+        ball_atomunit.get_value(base_item_active_requisite_str())
+        == after_medical_base_item_active_requisite
     )
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_update():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1035,26 +1035,26 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     medical_str = "get medical attention"
     medical_road = before_sue_bud.make_road(knee_road, medical_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_road)
-    before_medical_base_idea_active_requisite = True
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.set_l1_item(itemunit_shop(knee_str))
+    before_sue_bud.set_item(itemunit_shop(medical_str), knee_road)
+    before_medical_base_item_active_requisite = True
+    before_sue_bud.edit_item_attr(
         road=ball_road,
         reason_base=medical_road,
-        reason_base_idea_active_requisite=before_medical_base_idea_active_requisite,
+        reason_base_item_active_requisite=before_medical_base_item_active_requisite,
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_medical_base_idea_active_requisite = False
-    after_sue_bud.edit_idea_attr(
+    after_medical_base_item_active_requisite = False
+    after_sue_bud.edit_item_attr(
         road=ball_road,
         reason_base=medical_road,
-        reason_base_idea_active_requisite=after_medical_base_idea_active_requisite,
+        reason_base_item_active_requisite=after_medical_base_item_active_requisite,
     )
 
     # WHEN
@@ -1065,7 +1065,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_update(),
-        bud_idea_reasonunit_str(),
+        bud_item_reasonunit_str(),
         ball_road,
         medical_road,
     ]
@@ -1073,13 +1073,13 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == medical_road
     assert (
-        ball_atomunit.get_value(base_idea_active_requisite_str())
-        == after_medical_base_idea_active_requisite
+        ball_atomunit.get_value(base_item_active_requisite_str())
+        == after_medical_base_item_active_requisite
     )
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_delete():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1087,23 +1087,23 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     medical_str = "get medical attention"
     medical_road = before_sue_bud.make_road(knee_road, medical_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_road)
-    before_medical_base_idea_active_requisite = True
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.set_l1_item(itemunit_shop(knee_str))
+    before_sue_bud.set_item(itemunit_shop(medical_str), knee_road)
+    before_medical_base_item_active_requisite = True
+    before_sue_bud.edit_item_attr(
         road=ball_road,
         reason_base=medical_road,
-        reason_base_idea_active_requisite=before_medical_base_idea_active_requisite,
+        reason_base_item_active_requisite=before_medical_base_item_active_requisite,
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_ball_idea = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_idea.del_reasonunit_base(medical_road)
+    after_ball_item = after_sue_bud.get_item_obj(ball_road)
+    after_ball_item.del_reasonunit_base(medical_road)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -1113,7 +1113,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_reasonunit_str(),
+        bud_item_reasonunit_str(),
         ball_road,
         medical_road,
     ]
@@ -1123,7 +1123,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_reasonunit_
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_insert():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_teamlink_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1133,11 +1133,11 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_in
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.teamunit.set_teamlink(xio_str)
+    after_ball_itemunit = after_sue_bud.get_item_obj(ball_road)
+    after_ball_itemunit.teamunit.set_teamlink(xio_str)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -1147,7 +1147,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_in
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_teamlink_str(),
+        bud_item_teamlink_str(),
         ball_road,
         xio_str,
     ]
@@ -1157,7 +1157,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_in
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_delete():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_teamlink_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1167,13 +1167,13 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_de
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
-    before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit.teamunit.set_teamlink(xio_str)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
+    before_ball_itemunit = before_sue_bud.get_item_obj(ball_road)
+    before_ball_itemunit.teamunit.set_teamlink(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.teamunit.del_teamlink(xio_str)
+    after_ball_itemunit = after_sue_bud.get_item_obj(ball_road)
+    after_ball_itemunit.teamunit.del_teamlink(xio_str)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -1183,7 +1183,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_de
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_teamlink_str(),
+        bud_item_teamlink_str(),
         ball_road,
         xio_str,
     ]
@@ -1193,7 +1193,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_teamlink_de
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_insert_IdeaUnitUpdate():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_insert_ItemUnitUpdate():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1203,11 +1203,11 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.healerlink.set_healer_id(xio_str)
+    after_ball_itemunit = after_sue_bud.get_item_obj(ball_road)
+    after_ball_itemunit.healerlink.set_healer_id(xio_str)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -1217,7 +1217,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_healerlink_str(),
+        bud_item_healerlink_str(),
         ball_road,
         xio_str,
     ]
@@ -1227,7 +1227,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_insert_IdeaUnitInsert():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_insert_ItemUnitInsert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1239,9 +1239,9 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    after_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.healerlink.set_healer_id(xio_str)
+    after_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
+    after_ball_itemunit = after_sue_bud.get_item_obj(ball_road)
+    after_ball_itemunit.healerlink.set_healer_id(xio_str)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -1251,7 +1251,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_healerlink_str(),
+        bud_item_healerlink_str(),
         ball_road,
         xio_str,
     ]
@@ -1262,7 +1262,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_
     assert get_atomunit_total_count(sue_deltaunit) == 3
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_delete_IdeaUnitUpdate():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_delete_ItemUnitUpdate():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1272,13 +1272,13 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
-    before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit.healerlink.set_healer_id(xio_str)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
+    before_ball_itemunit = before_sue_bud.get_item_obj(ball_road)
+    before_ball_itemunit.healerlink.set_healer_id(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.healerlink.del_healer_id(xio_str)
+    after_ball_itemunit = after_sue_bud.get_item_obj(ball_road)
+    after_ball_itemunit.healerlink.del_healer_id(xio_str)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -1288,7 +1288,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_healerlink_str(),
+        bud_item_healerlink_str(),
         ball_road,
         xio_str,
     ]
@@ -1301,7 +1301,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
-def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_delete_IdeaUnitDelete():
+def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_delete_ItemUnitDelete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1311,12 +1311,12 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_
     sports_road = before_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
-    before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_road)
-    before_ball_ideaunit.healerlink.set_healer_id(xio_str)
+    before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
+    before_ball_itemunit = before_sue_bud.get_item_obj(ball_road)
+    before_ball_itemunit.healerlink.set_healer_id(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_sue_bud.del_idea_obj(ball_road)
+    after_sue_bud.del_item_obj(ball_road)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -1326,7 +1326,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_idea_healerlink_
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_healerlink_str(),
+        bud_item_healerlink_str(),
         ball_road,
         xio_str,
     ]
@@ -1351,9 +1351,9 @@ def test_DeltaUnit_add_all_atomunits_CorrectlyCreates_AtomUnits():
     sports_road = after_sue_bud.make_l1_road(sports_str)
     ball_str = "basketball"
     ball_road = after_sue_bud.make_road(sports_road, ball_str)
-    after_sue_bud.set_idea(ideaunit_shop(ball_str), sports_road)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_road)
-    after_ball_ideaunit.teamunit.set_teamlink(xio_str)
+    after_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
+    after_ball_itemunit = after_sue_bud.get_item_obj(ball_road)
+    after_ball_itemunit.teamunit.set_teamlink(xio_str)
 
     before_sue_bud = budunit_shop(sue_str)
     sue1_deltaunit = deltaunit_shop()

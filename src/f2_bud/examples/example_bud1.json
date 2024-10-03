@@ -561,7 +561,7 @@
         }
     },
     "respect_bit": 1,
-    "_idearoot": {
+    "_itemroot": {
         "factunits": {
             "music;day_hour": {
                 "base": "music;day_hour",

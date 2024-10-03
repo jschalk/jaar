@@ -45,8 +45,8 @@ class MemberShipTable(Base):
     debtit_vote = Column(Integer)
 
 
-class IdeaTable(Base):
-    __tablename__ = "idea"
+class ItemTable(Base):
+    __tablename__ = "item"
     uid = Column(Integer, primary_key=True)
     label = Column(String)
     parent_road = Column(String)
@@ -77,7 +77,7 @@ class ReasonTable(Base):
     uid = Column(Integer, primary_key=True)
     base = Column(String)
     road = Column(String)
-    base_idea_active_requisite = Column(Integer)
+    base_item_active_requisite = Column(Integer)
 
 
 class PremiseTable(Base):

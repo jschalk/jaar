@@ -5,9 +5,9 @@ from src.f4_gift.atom_config import owner_id_str
 from src.f4_gift.delta import deltaunit_shop
 from src.f4_gift.gift import giftunit_shop, create_giftunit_from_files
 from src.f4_gift.examples.example_atoms import (
-    get_atom_example_ideaunit_sports,
-    get_atom_example_ideaunit_knee,
-    get_atom_example_ideaunit_ball,
+    get_atom_example_itemunit_sports,
+    get_atom_example_itemunit_knee,
+    get_atom_example_itemunit_ball,
 )
 from src.f4_gift.examples.gift_env import (
     get_gift_temp_env_dir as fiscals_dir,
@@ -36,7 +36,7 @@ def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     assert os_path_exists(sue_atom6_path) is False
 
     # WHEN
-    sports_atom = get_atom_example_ideaunit_sports()
+    sports_atom = get_atom_example_itemunit_sports()
     farm_giftunit._save_atom_file(two_int, sports_atom)
 
     # THEN
@@ -66,7 +66,7 @@ def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     assert farm_giftunit.atom_file_exists(two_int) is False
 
     # WHEN
-    sports_atom = get_atom_example_ideaunit_sports()
+    sports_atom = get_atom_example_itemunit_sports()
     farm_giftunit._save_atom_file(two_int, sports_atom)
 
     # THEN
@@ -89,7 +89,7 @@ def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
     print(f"{sue_atom2_path=}")
     print(f"{sue_atom6_path=}")
     farm_giftunit = giftunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
-    sports_atom = get_atom_example_ideaunit_sports()
+    sports_atom = get_atom_example_itemunit_sports()
     farm_giftunit._save_atom_file(two_int, sports_atom)
     assert farm_giftunit.atom_file_exists(two_int)
 
@@ -181,8 +181,8 @@ def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     farm_giftunit.set_face(yao_str)
     int4 = 4
     int5 = 5
-    sports_atom = get_atom_example_ideaunit_sports()
-    knee_atom = get_atom_example_ideaunit_knee()
+    sports_atom = get_atom_example_itemunit_sports()
+    knee_atom = get_atom_example_itemunit_knee()
     farm_giftunit._deltaunit.set_atomunit(sports_atom)
     farm_giftunit._deltaunit.set_atomunit(knee_atom)
     assert farm_giftunit.gift_file_exists() is False
@@ -210,9 +210,9 @@ def test_GiftUnit_create_deltaunit_from_atom_files_SetsAttr(env_dir_setup_cleanu
     int4 = 4
     int5 = 5
     int9 = 9
-    spor_atom = get_atom_example_ideaunit_sports()
-    knee_atom = get_atom_example_ideaunit_knee()
-    ball_atom = get_atom_example_ideaunit_ball()
+    spor_atom = get_atom_example_itemunit_sports()
+    knee_atom = get_atom_example_itemunit_knee()
+    ball_atom = get_atom_example_itemunit_ball()
     sue_giftunit._save_atom_file(int4, spor_atom)
     sue_giftunit._save_atom_file(int5, knee_atom)
     sue_giftunit._save_atom_file(int9, ball_atom)
@@ -247,9 +247,9 @@ def test_create_giftunit_from_files_ReturnsCorrectObj(env_dir_setup_cleanup):
     )
     src_sue_giftunit.set_delta_start(sue_delta_start)
     src_sue_giftunit.set_face(yao_str)
-    sports_atom = get_atom_example_ideaunit_sports()
-    knee_atom = get_atom_example_ideaunit_knee()
-    ball_atom = get_atom_example_ideaunit_ball()
+    sports_atom = get_atom_example_itemunit_sports()
+    knee_atom = get_atom_example_itemunit_knee()
+    ball_atom = get_atom_example_itemunit_ball()
     src_sue_giftunit._deltaunit.set_atomunit(sports_atom)
     src_sue_giftunit._deltaunit.set_atomunit(knee_atom)
     src_sue_giftunit._deltaunit.set_atomunit(ball_atom)

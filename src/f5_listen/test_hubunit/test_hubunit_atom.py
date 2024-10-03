@@ -2,9 +2,9 @@ from src.f0_instrument.file import dir_files as file_dir_files
 from src.f5_listen.hubunit import hubunit_shop
 from src.f5_listen.examples.example_listen_atoms import (
     get_atom_example_factunit_knee,
-    get_atom_example_ideaunit_sports,
-    get_atom_example_ideaunit_ball,
-    get_atom_example_ideaunit_knee,
+    get_atom_example_itemunit_sports,
+    get_atom_example_itemunit_ball,
+    get_atom_example_itemunit_knee,
 )
 from src.f5_listen.examples.listen_env import (
     get_listen_temp_env_dir as fiscals_dir,
@@ -167,7 +167,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsFileWithZeroAtoms(
     assert yao_bud.respect_bit == yao_hubunit.respect_bit
 
 
-def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleIdea(
+def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleItem(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -175,7 +175,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleIdea(
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
 
     # save atom files
-    sports_atom = get_atom_example_ideaunit_sports(yao_hubunit.fiscal_id)
+    sports_atom = get_atom_example_itemunit_sports(yao_hubunit.fiscal_id)
     yao_hubunit.save_atom_file(sports_atom)
 
     # WHEN
@@ -188,7 +188,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleIdea(
     sports_str = "sports"
     sports_road = yao_bud.make_l1_road(sports_str)
 
-    assert yao_bud.idea_exists(sports_road)
+    assert yao_bud.item_exists(sports_road)
 
 
 def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
@@ -200,9 +200,9 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
 
     # save atom files
     x_fiscal_id = yao_hubunit.fiscal_id
-    yao_hubunit.save_atom_file(get_atom_example_ideaunit_sports(x_fiscal_id))
-    yao_hubunit.save_atom_file(get_atom_example_ideaunit_ball(x_fiscal_id))
-    yao_hubunit.save_atom_file(get_atom_example_ideaunit_knee(x_fiscal_id))
+    yao_hubunit.save_atom_file(get_atom_example_itemunit_sports(x_fiscal_id))
+    yao_hubunit.save_atom_file(get_atom_example_itemunit_ball(x_fiscal_id))
+    yao_hubunit.save_atom_file(get_atom_example_itemunit_knee(x_fiscal_id))
     yao_hubunit.save_atom_file(get_atom_example_factunit_knee(x_fiscal_id))
     print(f"{file_dir_files(yao_hubunit.atoms_dir()).keys()=}")
 
@@ -216,4 +216,4 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     sports_str = "sports"
     sports_road = yao_bud.make_l1_road(sports_str)
 
-    assert yao_bud.idea_exists(sports_road)
+    assert yao_bud.item_exists(sports_road)

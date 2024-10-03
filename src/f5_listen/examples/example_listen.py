@@ -1,5 +1,5 @@
 from src.f1_road.road import RoadUnit, create_road, get_default_fiscal_id_roadnode
-from src.f2_bud.idea import ideaunit_shop
+from src.f2_bud.item import itemunit_shop
 from src.f2_bud.bud import budunit_shop, BudUnit
 
 
@@ -62,14 +62,14 @@ def run_road() -> RoadUnit:
 def get_example_zia_speaker() -> BudUnit:
     zia_str = "Zia"
     zia_speaker = budunit_shop(zia_str)
-    zia_speaker.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
-    zia_speaker.set_idea(ideaunit_shop(hungry_str()), eat_road())
-    zia_speaker.set_idea(ideaunit_shop(full_str()), eat_road())
+    zia_speaker.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
+    zia_speaker.set_item(itemunit_shop(hungry_str()), eat_road())
+    zia_speaker.set_item(itemunit_shop(full_str()), eat_road())
     yao_str = "Yao"
     zia_speaker.add_acctunit(yao_str, debtit_belief=12)
-    cook_ideaunit = zia_speaker.get_idea_obj(cook_road())
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
-    zia_speaker.edit_idea_attr(
+    cook_itemunit = zia_speaker.get_item_obj(cook_road())
+    cook_itemunit.teamunit.set_teamlink(yao_str)
+    zia_speaker.edit_item_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
     zia_speaker.set_fact(eat_road(), full_road())
@@ -80,14 +80,14 @@ def get_example_zia_speaker() -> BudUnit:
 def get_example_bob_speaker() -> BudUnit:
     bob_str = "Bob"
     bob_speaker = budunit_shop(bob_str)
-    bob_speaker.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
-    bob_speaker.set_idea(ideaunit_shop(hungry_str()), eat_road())
-    bob_speaker.set_idea(ideaunit_shop(full_str()), eat_road())
+    bob_speaker.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
+    bob_speaker.set_item(itemunit_shop(hungry_str()), eat_road())
+    bob_speaker.set_item(itemunit_shop(full_str()), eat_road())
     yao_str = "Yao"
     bob_speaker.add_acctunit(yao_str, debtit_belief=12)
-    cook_ideaunit = bob_speaker.get_idea_obj(cook_road())
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
-    bob_speaker.edit_idea_attr(
+    cook_itemunit = bob_speaker.get_item_obj(cook_road())
+    cook_itemunit.teamunit.set_teamlink(yao_str)
+    bob_speaker.edit_item_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
     bob_speaker.set_fact(eat_road(), hungry_road())
@@ -104,12 +104,12 @@ def get_example_yao_speaker() -> BudUnit:
     yao_speaker.add_acctunit(zia_str, debtit_belief=36)
     yao_speaker.add_acctunit(bob_str, debtit_belief=48)
     yao_speaker.set_acct_respect(100)
-    yao_speaker.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
-    yao_speaker.set_idea(ideaunit_shop(hungry_str()), eat_road())
-    yao_speaker.set_idea(ideaunit_shop(full_str()), eat_road())
-    cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
-    yao_speaker.edit_idea_attr(
+    yao_speaker.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
+    yao_speaker.set_item(itemunit_shop(hungry_str()), eat_road())
+    yao_speaker.set_item(itemunit_shop(full_str()), eat_road())
+    cook_itemunit = yao_speaker.get_item_obj(cook_road())
+    cook_itemunit.teamunit.set_teamlink(yao_str)
+    yao_speaker.edit_item_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
     yao_speaker.set_fact(eat_road(), hungry_road())

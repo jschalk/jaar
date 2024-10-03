@@ -2,7 +2,7 @@ from src.f0_instrument.file import open_file, dir_files, delete_dir, set_dir, sa
 from src.f1_road.jaar_config import init_gift_id, get_test_fiscal_id as fiscal_id
 from src.f4_gift.gift import giftunit_shop, get_json_filename
 from src.f5_listen.hubunit import hubunit_shop
-from src.f5_listen.examples.example_listen_atoms import get_atom_example_ideaunit_knee
+from src.f5_listen.examples.example_listen_atoms import get_atom_example_itemunit_knee
 from src.f5_listen.examples.example_listen_gifts import (
     get_sue_giftunit,
     sue_1atomunits_giftunit,
@@ -363,7 +363,7 @@ def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
         _atoms_dir=sue_hubunit.atoms_dir(),
         _gifts_dir=sue_hubunit.gifts_dir(),
     )
-    sue_giftunit._deltaunit.set_atomunit(get_atom_example_ideaunit_knee())
+    sue_giftunit._deltaunit.set_atomunit(get_atom_example_itemunit_knee())
     zero_int = 0
     assert sue_hubunit.gift_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int) is False
@@ -487,14 +487,14 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_1atom(
     sports_road = voice_bud.make_l1_road(sports_str)
     knee_str = "knee"
     knee_road = voice_bud.make_road(sports_road, knee_str)
-    assert voice_bud.idea_exists(sports_road) is False
+    assert voice_bud.item_exists(sports_road) is False
 
     # WHEN
     new_bud = sue_hubunit._merge_any_gifts(voice_bud)
 
     # THEN
     assert new_bud != voice_bud
-    assert new_bud.idea_exists(sports_road)
+    assert new_bud.item_exists(sports_road)
 
 
 def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_2atoms(
@@ -511,13 +511,13 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_2atoms(
     sports_road = voice_bud.make_l1_road(sports_str)
     knee_str = "knee"
     knee_road = voice_bud.make_road(sports_road, knee_str)
-    assert voice_bud.idea_exists(sports_road) is False
-    assert voice_bud.idea_exists(knee_road) is False
+    assert voice_bud.item_exists(sports_road) is False
+    assert voice_bud.item_exists(knee_road) is False
 
     # WHEN
     new_bud = sue_hubunit._merge_any_gifts(voice_bud)
 
     # THEN
     assert new_bud != voice_bud
-    assert new_bud.idea_exists(sports_road)
-    assert new_bud.idea_exists(knee_road)
+    assert new_bud.item_exists(sports_road)
+    assert new_bud.item_exists(knee_road)

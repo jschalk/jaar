@@ -1,5 +1,5 @@
 from src.f2_bud.healer import healerlink_shop
-from src.f2_bud.idea import ideaunit_shop
+from src.f2_bud.item import itemunit_shop
 from src.f2_bud.bud import budunit_shop
 from src.f5_listen.hubunit import hubunit_shop
 from src.f7_fiscal.fiscal import fiscalunit_shop
@@ -98,9 +98,9 @@ def test_FiscalUnit_generate_final_bud_SetsFileWith_healerlink(env_dir_setup_cle
     texas_road = bob_voice_bud.make_l1_road(texas_str)
     elpaso_str = "el paso"
     elpaso_road = bob_voice_bud.make_road(texas_road, elpaso_str)
-    elpaso_idea = ideaunit_shop(elpaso_str, healerlink=healerlink_shop({bob_str}))
-    bob_voice_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
-    bob_voice_bud.set_idea(elpaso_idea, texas_road)
+    elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({bob_str}))
+    bob_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    bob_voice_bud.set_item(elpaso_item, texas_road)
     bob_hubunit.save_voice_bud(bob_voice_bud)
     after_bob_final_bud = music_fiscal.generate_final_bud(bob_str)
 
@@ -128,19 +128,19 @@ def test_FiscalUnit_generate_all_final_buds_SetsCorrectFiles(
     texas_road = bob_voice_bud.make_l1_road(texas_str)
     elpaso_str = "el paso"
     elpaso_road = bob_voice_bud.make_road(texas_road, elpaso_str)
-    elpaso_idea = ideaunit_shop(elpaso_str, healerlink=healerlink_shop({bob_str}))
+    elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({bob_str}))
 
     bob_voice_bud = bob_hubunit.get_voice_bud()
     bob_voice_bud.add_acctunit(bob_str)
-    bob_voice_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
-    bob_voice_bud.set_idea(elpaso_idea, texas_road)
+    bob_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    bob_voice_bud.set_item(elpaso_item, texas_road)
     bob_hubunit.save_voice_bud(bob_voice_bud)
 
     sue_voice_bud = sue_hubunit.get_voice_bud()
     sue_voice_bud.add_acctunit(sue_str)
     sue_voice_bud.add_acctunit(bob_str)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
-    sue_voice_bud.set_idea(elpaso_idea, texas_road)
+    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    sue_voice_bud.set_item(elpaso_item, texas_road)
     sue_hubunit.save_voice_bud(sue_voice_bud)
 
     before_bob_final_bud = music_fiscal.get_final_file_bud(bob_str)

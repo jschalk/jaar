@@ -1,5 +1,5 @@
 from src.f1_road.finance import default_respect_num, validate_respect_num
-from src.f2_bud.idea import ideaunit_shop
+from src.f2_bud.item import itemunit_shop
 from src.f2_bud.bud import budunit_shop
 from src.f5_listen.basis_buds import (
     create_empty_bud,
@@ -14,7 +14,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     slash_str = "/"
     penny_float = 0.7
     yao_voice = budunit_shop(yao_str, _road_delimiter=slash_str, penny=penny_float)
-    yao_voice.set_l1_idea(ideaunit_shop("Iowa"))
+    yao_voice.set_l1_item(itemunit_shop("Iowa"))
     zia_str = "Zia"
     zia_credit_belief = 47
     zia_debtit_belief = 41
@@ -58,7 +58,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     yao_str = "Yao"
     slash_str = "/"
     yao_duty = budunit_shop(yao_str, _road_delimiter=slash_str)
-    yao_duty.set_l1_idea(ideaunit_shop("Iowa"))
+    yao_duty.set_l1_item(itemunit_shop("Iowa"))
     zia_str = "Zia"
     zia_credit_belief = 47
     zia_debtit_belief = 41
@@ -90,8 +90,8 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert yao_basis_job.credor_respect == yao_duty.credor_respect
     assert yao_basis_job.debtor_respect == yao_duty.debtor_respect
     yao_basis_job.settle_bud()
-    assert len(yao_basis_job._idea_dict) != len(yao_duty._idea_dict)
-    assert len(yao_basis_job._idea_dict) == 1
+    assert len(yao_basis_job._item_dict) != len(yao_duty._item_dict)
+    assert len(yao_basis_job._item_dict) == 1
     job_zia_acctunit = yao_basis_job.get_acct(zia_str)
     assert (
         yao_basis_job.get_acctunits_dict().keys()
@@ -122,7 +122,7 @@ def test_get_default_final_bud_ReturnsCorrectObj():
     bob_acctunit = sue_budunit.get_acct(bob_str)
     bob_acctunit.add_membership(f"{slash_str}swimmers")
     sue_budunit.set_acct_respect(sue_acct_pool)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_l1_item(itemunit_shop(casa_str))
     sue_budunit.set_max_tree_traverse(sue_max_tree_traverse)
 
     # WHEN
@@ -142,4 +142,4 @@ def test_get_default_final_bud_ReturnsCorrectObj():
     assert default_final_bud.debtor_respect == default_respect_num()
     assert default_final_bud.max_tree_traverse == sue_max_tree_traverse
     assert len(default_final_bud.get_acctunits_dict()) == 1
-    assert len(default_final_bud._idea_dict) == 1
+    assert len(default_final_bud._item_dict) == 1

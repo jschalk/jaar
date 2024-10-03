@@ -1,5 +1,5 @@
 from src.f1_road.road import create_road
-from src.f2_bud.bud_tool import bud_idea_factunit_str
+from src.f2_bud.bud_tool import bud_item_factunit_str
 from src.f4_gift.atom_config import fopen_str, atom_insert, atom_hx_table_name
 from src.f4_gift.atom import atomunit_shop
 from src.f7_fiscal.journal_sqlstr import (
@@ -164,11 +164,11 @@ CREATE TABLE IF NOT EXISTS atom_hx (
 
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    example_idea_reasonunit_str = (
-        "idea_reasonunit_UPDATE_base_idea_active_requisite INTEGER NULL"
+    example_item_reasonunit_str = (
+        "item_reasonunit_UPDATE_base_item_active_requisite INTEGER NULL"
     )
-    assert generated_sqlstr.find(example_idea_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3435
+    assert generated_sqlstr.find(example_item_reasonunit_str) > 0
+    assert generated_sqlstr.find(example_item_reasonunit_str) == 3435
 
 
 def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
@@ -182,7 +182,7 @@ def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
     knee_fopen = 7
 
     # WHEN
-    x_category = bud_idea_factunit_str()
+    x_category = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
     update_disc_atomunit = atomunit_shop(x_category, atom_insert())
@@ -220,11 +220,11 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
     assert generated_sqlstr.find(end_sqlstr) == 5386
-    example_idea_reasonunit_str = (
-        "idea_reasonunit_UPDATE_base_idea_active_requisite INTEGER NULL"
+    example_item_reasonunit_str = (
+        "item_reasonunit_UPDATE_base_item_active_requisite INTEGER NULL"
     )
-    assert generated_sqlstr.find(example_idea_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3467
+    assert generated_sqlstr.find(example_item_reasonunit_str) > 0
+    assert generated_sqlstr.find(example_item_reasonunit_str) == 3467
 
 
 def test_get_create_table_if_not_exist_sqlstrs_HasCorrectNumberOfNumber():

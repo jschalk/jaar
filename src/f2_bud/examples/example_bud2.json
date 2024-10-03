@@ -561,7 +561,7 @@
         }
     },
     "respect_bit": 1,
-    "_idearoot": {
+    "_itemroot": {
         "factunits": {
             "A;Aaron Donald things effected by him": {
                 "base": "A;Aaron Donald things effected by him",

@@ -1,4 +1,4 @@
-from src.f2_bud.reason_idea import (
+from src.f2_bud.reason_item import (
     PremiseUnit,
     premiseunit_shop,
     factheir_shop,
