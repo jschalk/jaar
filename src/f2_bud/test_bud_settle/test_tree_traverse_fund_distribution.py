@@ -1024,14 +1024,14 @@ class AwardAgendaMetrics:
     agenda_yes_bud_i_sum = 0
 
     def set_sums(self, agenda_dict: dict[RoadUnit, IdeaUnit]):
-        for agenda_item in agenda_dict.values():
-            self.sum_bud_agenda_share += agenda_item.get_fund_share()
-            if agenda_item._awardlines == {}:
+        for agenda_idea in agenda_dict.values():
+            self.sum_bud_agenda_share += agenda_idea.get_fund_share()
+            if agenda_idea._awardlines == {}:
                 self.agenda_no_count += 1
-                self.agenda_no_bud_i_sum += agenda_item.get_fund_share()
+                self.agenda_no_bud_i_sum += agenda_idea.get_fund_share()
             else:
                 self.agenda_yes_count += 1
-                self.agenda_yes_bud_i_sum += agenda_item.get_fund_share()
+                self.agenda_yes_bud_i_sum += agenda_idea.get_fund_share()
 
 
 def test_BudUnit_agenda_cred_debt_IsCorrectlySet():

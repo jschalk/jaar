@@ -102,13 +102,13 @@ def get_all_nondictionary_objs(x_dict: dict) -> dict[str : list[any]]:
     for level1_key in level1_keys:
         z_dict[level1_key] = []
         level1_list = z_dict.get(level1_key)
-        eval_items = list(x_dict.get(level1_key).values())
-        while eval_items != []:
-            eval_item = eval_items.pop(0)
-            if type(eval_item) == type({}):
-                eval_items.extend(eval_item.values())
+        eval_values = list(x_dict.get(level1_key).values())
+        while eval_values != []:
+            eval_value = eval_values.pop(0)
+            if type(eval_value) == type({}):
+                eval_values.extend(eval_value.values())
             else:
-                level1_list.append(eval_item)
+                level1_list.append(eval_value)
     return z_dict
 
 
@@ -211,7 +211,7 @@ def get_nested_dict_keys_by_level(x_dict: dict) -> dict[int, set]:
     keys_by_level = {}
     queue = deque([(x_dict, 0)])  # Store (dictionary, current_level)
     while queue:
-        current_dict, level = queue.popleft()  # Pop the next item from the queue
+        current_dict, level = queue.popleft()
         # Traverse the current dictionary
         for key, value in current_dict.items():
             if isinstance(value, dict):
@@ -228,7 +228,7 @@ def get_nested_keys_by_level(x_dict: dict) -> dict[int, set]:
     # Queue for traversing the dictionary
     queue = deque([(x_dict, 0)])  # Store (dictionary, current_level)
     while queue:
-        current_dict, level = queue.popleft()  # Pop the next item from the queue
+        current_dict, level = queue.popleft()
         # Traverse the current dictionary
         for key, value in current_dict.items():
             if isinstance(value, dict):
@@ -245,7 +245,7 @@ def get_nested_non_dict_keys_by_level(x_dict: dict) -> dict[int, set]:
     # Queue for traversing the dictionary
     queue = deque([(x_dict, 0)])  # Store (dictionary, current_level)
     while queue:
-        current_dict, level = queue.popleft()  # Pop the next item from the queue
+        current_dict, level = queue.popleft()
         # Traverse the current dictionary
         for key, value in current_dict.items():
             if level not in keys_by_level:

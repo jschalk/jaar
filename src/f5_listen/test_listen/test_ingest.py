@@ -68,7 +68,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
 
     # WHEN
     ingested_list = generate_ingest_list(
-        item_list=list(zia_budunit.get_agenda_dict().values()),
+        idea_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )
@@ -95,7 +95,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
 
     # WHEN
     ingested_list = generate_ingest_list(
-        item_list=list(zia_budunit.get_agenda_dict().values()),
+        idea_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )
@@ -126,7 +126,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
 
     # WHEN
     ingested_list = generate_ingest_list(
-        item_list=list(zia_budunit.get_agenda_dict().values()),
+        idea_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )
@@ -155,7 +155,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
 
     # WHEN
     ingested_list = generate_ingest_list(
-        item_list=list(zia_budunit.get_agenda_dict().values()),
+        idea_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )

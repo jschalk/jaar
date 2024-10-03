@@ -33,7 +33,7 @@ def test_BudUnit_get_agenda_dict_ReturnsCorrectObj():
     assert sue_bud.make_l1_road("cat have dinner") in agenda_dict.keys()
 
 
-def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectItems():
+def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectIdeas():
     # ESTABLISH
     x_bud = get_budunit_with_4_levels_and_2reasons()
     week_str = "weekdays"
@@ -70,7 +70,7 @@ def test_BudUnit_get_agenda_dict_WithLargeBud_fund():
     assert agenda_dict.get(x_bud.make_l1_road(casa_str))._fund_ratio
 
 
-def test_BudUnit_get_agenda_dict_WithNo7amItemExample():
+def test_BudUnit_get_agenda_dict_WithNo7amIdeaExample():
     # ESTABLISH
     x_bud = get_budunit_with7amCleanTableReason()
 
@@ -86,11 +86,11 @@ def test_BudUnit_get_agenda_dict_WithNo7amItemExample():
     assert len(agenda_dict) == 1
 
     cat_str = "cat have dinner"
-    cat_agenda_item = agenda_dict.get(x_bud.make_l1_road(cat_str))
-    assert cat_agenda_item._label != clean_str
+    cat_agenda_idea = agenda_dict.get(x_bud.make_l1_road(cat_str))
+    assert cat_agenda_idea._label != clean_str
 
 
-def test_BudUnit_get_agenda_dict_With7amItemExample():
+def test_BudUnit_get_agenda_dict_With7amIdeaExample():
     # ESTABLISH
     # set facts as midnight to 8am
     x_bud = get_budunit_with7amCleanTableReason()
@@ -115,8 +115,8 @@ def test_BudUnit_get_agenda_dict_With7amItemExample():
     agenda_dict = x_bud.get_agenda_dict()
     print(f"{len(agenda_dict)=} {agenda_dict.keys()=}")
     assert len(agenda_dict) == 6
-    clean_item = agenda_dict.get(clean_road)
-    assert clean_item._label == clean_str
+    clean_idea = agenda_dict.get(clean_road)
+    assert clean_idea._label == clean_str
 
 
 def test_budunit_v001_AgendaExists():
@@ -212,11 +212,11 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     # for base in yao_bud.get_missing_fact_bases():
     #     print(f"{base=}")
 
-    # for agenda_item in idea_pledge_list:
-    #     print(f"{agenda_item._uid=} {agenda_item._parent_road=}")
+    # for agenda_idea in idea_pledge_list:
+    #     print(f"{agenda_idea._uid=} {agenda_idea._parent_road=}")
 
-    # for agenda_item in idea_pledge_list:
-    #     # print(f"{agenda_item._parent_road=}")
+    # for agenda_idea in idea_pledge_list:
+    #     # print(f"{agenda_idea._parent_road=}")
     #     pass
 
     print(len(idea_pledge_list))
@@ -231,11 +231,11 @@ def test_BudUnit_get_agenda_dict_BudUnitCanFilterOnBase_budunit_v001_with_large_
     # for base in yao_bud.get_missing_fact_bases():
     #     print(f"{base=}")
 
-    # for agenda_item in yao_bud.get_agenda_dict():
+    # for agenda_idea in yao_bud.get_agenda_dict():
     #     print(
-    #         f"{agenda_item._parent_road=} {agenda_item._label} {len(agenda_item.reasonunits)=}"
+    #         f"{agenda_idea._parent_road=} {agenda_idea._label} {len(agenda_idea.reasonunits)=}"
     #     )
-    #     for reason in agenda_item.reasonunits.values():
+    #     for reason in agenda_idea.reasonunits.values():
     #         if reason.base == weekdays:
     #             print(f"         {weekdays}")
 
@@ -409,7 +409,7 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     factheir_gregtime = night_idea._factheirs.get(gregtime_road)
     print(f"\n{factheir_gregtime=}")
 
-    # for reasonheir in agenda_item._reasonheirs.values():
+    # for reasonheir in agenda_idea._reasonheirs.values():
     #     print(f"{reasonheir.base=} {reasonheir._status=} {reasonheir._task=}")
     reasonheir_gregtime = night_idea._reasonheirs.get(gregtime_road)
     reasonheir_str = f"\nreasonheir_gregtime= '{reasonheir_gregtime.base}', status={reasonheir_gregtime._status}, task={reasonheir_gregtime._task}"

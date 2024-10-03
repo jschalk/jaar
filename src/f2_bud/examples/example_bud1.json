@@ -1040,8 +1040,8 @@
                             },
                             "IT DEPT regular hours responsiblities": {
                                 "_kids": {
-                                    "Add items to Azure DevOps": {
-                                        "_label": "Add items to Azure DevOps",
+                                    "Add to Azure DevOps": {
+                                        "_label": "Add to Azure DevOps",
                                         "mass": 1,
                                         "reasonunits": {
                                             "music;day_minute": {

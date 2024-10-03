@@ -562,7 +562,7 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_offset_IdeaUnits():
 #     assert len(sue_budunit.get_idea_ranged_kids(idea_road=week_road, begin=1440)) == 1
 
 
-def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
+def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeIdeasOutsideRange():
     # ESTABLISH
     sue_str = "Sue"
     sue_bud = add_time_creg_ideaunit(budunit_shop(sue_str))
@@ -608,7 +608,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     assert len(agenda_dict) == 0
 
 
-def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
+def test_BudUnit_create_agenda_idea_CorrectlyCreatesAllBudAttributes():
     # WHEN "I am cleaning the cookery since I'm in the flat and it's 8am and it's dirty and it's for my family"
 
     # ESTABLISH

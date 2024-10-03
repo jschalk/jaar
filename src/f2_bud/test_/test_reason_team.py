@@ -237,7 +237,7 @@ def test_TeamHeir_set_owner_id_team_CorrectlySetsAttribute_NonEmptyx_teamlinks_v
     assert x_teamheir._owner_id_team is False
 
 
-def test_TeamHeir_set_teamlink_TeamUnitEmpty_ParentTeamHeirEmpty():
+def test_TeamHeir_set_teamlink_TeamUnit_Empty_ParentTeamHeirEmpty():
     # ESTABLISH
     x_teamheir = teamheir_shop(_teamlinks={})
     parent_teamheir_empty = teamheir_shop()
@@ -287,7 +287,7 @@ def test_TeamHeir_set_teamlink_TeamUnitNotEmpty_ParentTeamHeirEmpty():
     assert x_teamheir._teamlinks == x_teamunit._teamlinks
 
 
-def test_TeamHeir_set_teamlink_TeamUnitEmpty_ParentTeamHeirNotEmpty():
+def test_TeamHeir_set_teamlink_TeamUnit_Empty_ParentTeamHeirNotEmpty():
     # ESTABLISH
     kent_str = "kent"
     swim_str = ",swim"

@@ -50,13 +50,13 @@ def get_speaker_perspective(speaker: BudUnit, listener_owner_id: OwnerID):
 
 
 def generate_ingest_list(
-    item_list: list[IdeaUnit], debtor_amount: float, respect_bit: float
+    idea_list: list[IdeaUnit], debtor_amount: float, respect_bit: float
 ) -> list[IdeaUnit]:
-    idea_ledger = {x_idea.get_road(): x_idea.mass for x_idea in item_list}
+    idea_ledger = {x_idea.get_road(): x_idea.mass for x_idea in idea_list}
     mass_allot = allot_scale(idea_ledger, debtor_amount, respect_bit)
-    for x_ideaunit in item_list:
+    for x_ideaunit in idea_list:
         x_ideaunit.mass = mass_allot.get(x_ideaunit.get_road())
-    return item_list
+    return idea_list
 
 
 def _ingest_single_ideaunit(listener: BudUnit, ingest_ideaunit: IdeaUnit):

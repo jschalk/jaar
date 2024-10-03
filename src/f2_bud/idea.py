@@ -257,7 +257,7 @@ class IdeaUnit:
     _gogo_calc: float = None
     _stop_calc: float = None
 
-    def is_agenda_item(self, necessary_base: RoadUnit = None) -> bool:
+    def is_agenda_idea(self, necessary_base: RoadUnit = None) -> bool:
         base_reasonunit_exists = self.base_reasonunit_exists(necessary_base)
         return self.pledge and self._active and base_reasonunit_exists
 

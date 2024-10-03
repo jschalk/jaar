@@ -227,11 +227,11 @@ def test_BudUnit_del_idea_obj_Level1CanBeDeleted_ChildrenDeleted():
     # THEN
     with pytest_raises(Exception) as excinfo:
         sue_bud.get_idea_obj(week_road)
-    assert str(excinfo.value) == f"get_idea_obj failed. no item at '{week_road}'"
+    assert str(excinfo.value) == f"get_idea_obj failed. no idea at '{week_road}'"
     new_sunday_road = sue_bud.make_l1_road("Sunday")
     with pytest_raises(Exception) as excinfo:
         sue_bud.get_idea_obj(new_sunday_road)
-    assert str(excinfo.value) == f"get_idea_obj failed. no item at '{new_sunday_road}'"
+    assert str(excinfo.value) == f"get_idea_obj failed. no idea at '{new_sunday_road}'"
 
 
 def test_BudUnit_del_idea_obj_Level1CanBeDeleted_ChildrenInherited():
@@ -249,7 +249,7 @@ def test_BudUnit_del_idea_obj_Level1CanBeDeleted_ChildrenInherited():
     # THEN
     with pytest_raises(Exception) as excinfo:
         sue_bud.get_idea_obj(old_sunday_road)
-    assert str(excinfo.value) == f"get_idea_obj failed. no item at '{old_sunday_road}'"
+    assert str(excinfo.value) == f"get_idea_obj failed. no idea at '{old_sunday_road}'"
     new_sunday_road = sue_bud.make_l1_road(sun_str)
     assert sue_bud.get_idea_obj(new_sunday_road)
     new_sunday_idea = sue_bud.get_idea_obj(new_sunday_road)
@@ -299,7 +299,7 @@ def test_BudUnit_del_idea_obj_Level2CanBeDeleted_ChildrenDeleted():
     # THEN
     with pytest_raises(Exception) as excinfo:
         sue_bud.get_idea_obj(monday_road)
-    assert str(excinfo.value) == f"get_idea_obj failed. no item at '{monday_road}'"
+    assert str(excinfo.value) == f"get_idea_obj failed. no idea at '{monday_road}'"
 
 
 def test_BudUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenDeleted():
@@ -319,7 +319,7 @@ def test_BudUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenDeleted():
     # THEN
     with pytest_raises(Exception) as excinfo:
         sue_bud.get_idea_obj(usa_texas_road)
-    assert str(excinfo.value) == f"get_idea_obj failed. no item at '{usa_texas_road}'"
+    assert str(excinfo.value) == f"get_idea_obj failed. no idea at '{usa_texas_road}'"
 
 
 def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
@@ -513,7 +513,7 @@ def test_BudUnit_set_idea_adoptee_RaisesErrorIfAdopteeIdeaDoesNotHaveCorrectPare
             parent_road=sports_road,
             adoptees=[swim_str, hike_str],
         )
-    assert str(excinfo.value) == f"get_idea_obj failed. no item at '{hike_road}'"
+    assert str(excinfo.value) == f"get_idea_obj failed. no idea at '{hike_road}'"
 
 
 def test_BudUnit_set_idea_adoptee_CorrectlyAddsAdoptee():
@@ -793,7 +793,7 @@ def test_BudUnit_get_idea_obj_ReturnsIdea():
     wrong_road = sue_bud.make_l1_road(bobdylan_str)
     with pytest_raises(Exception) as excinfo:
         sue_bud.get_idea_obj(road=wrong_road)
-    assert str(excinfo.value) == f"get_idea_obj failed. no item at '{wrong_road}'"
+    assert str(excinfo.value) == f"get_idea_obj failed. no idea at '{wrong_road}'"
 
 
 def test_BudUnit_idea_exists_ReturnsCorrectBool():

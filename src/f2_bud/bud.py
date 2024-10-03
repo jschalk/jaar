@@ -858,7 +858,7 @@ class BudUnit:
         return {
             x_idea.get_road(): x_idea
             for x_idea in self._idea_dict.values()
-            if x_idea.is_agenda_item(necessary_base)
+            if x_idea.is_agenda_idea(necessary_base)
         }
 
     def get_all_pledges(self) -> dict[RoadUnit, IdeaUnit]:
@@ -867,8 +867,8 @@ class BudUnit:
         return {x_idea.get_road(): x_idea for x_idea in all_ideas if x_idea.pledge}
 
     def set_agenda_task_complete(self, task_road: RoadUnit, base: RoadUnit):
-        pledge_item = self.get_idea_obj(task_road)
-        pledge_item.set_factunit_to_complete(self._idearoot.factunits[base])
+        pledge_idea = self.get_idea_obj(task_road)
+        pledge_idea.set_factunit_to_complete(self._idearoot.factunits[base])
 
     def get_credit_ledger_debtit_ledger(
         self,
@@ -927,8 +927,8 @@ class BudUnit:
             # If there are no awardlines associated with idea
             # allot fund_share via general acctunit
             # cred ratio and debt ratio
-            # if idea.is_agenda_item() and idea._awardlines == {}:
-            if idea.is_agenda_item():
+            # if idea.is_agenda_idea() and idea._awardlines == {}:
+            if idea.is_agenda_idea():
                 if idea.awardheir_exists():
                     for x_awardline in idea._awardlines.values():
                         self.add_to_groupbox_fund_agenda_give_take(
@@ -998,7 +998,7 @@ class BudUnit:
         if road is None:
             raise InvalidBudException("get_idea_obj received road=None")
         if self.idea_exists(road) is False and not if_missing_create:
-            raise InvalidBudException(f"get_idea_obj failed. no item at '{road}'")
+            raise InvalidBudException(f"get_idea_obj failed. no idea at '{road}'")
         roadnodes = get_all_road_nodes(road, delimiter=self._road_delimiter)
         if len(roadnodes) == 1:
             return self._idearoot
@@ -1235,8 +1235,8 @@ class BudUnit:
         cache_idea_list = [root_idea]
         while cache_idea_list != []:
             parent_idea = cache_idea_list.pop()
-            kids_items = parent_idea._kids.items()
-            x_ledger = {x_road: idea_kid.mass for x_road, idea_kid in kids_items}
+            kids_ideas = parent_idea._kids.items()
+            x_ledger = {x_road: idea_kid.mass for x_road, idea_kid in kids_ideas}
             parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_coin)
 
