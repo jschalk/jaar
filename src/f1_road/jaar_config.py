@@ -47,7 +47,7 @@ def grades_folder() -> str:
 
 
 def get_rootpart_of_keep_dir() -> str:
-    return "idearoot"
+    return "itemroot"
 
 
 def treasury_file_name() -> str:

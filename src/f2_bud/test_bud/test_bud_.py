@@ -24,20 +24,19 @@ def test_BudUnit_Exists():
     assert x_bud._owner_id is None
     assert x_bud.tally is None
     assert x_bud._accts is None
-    assert x_bud._idearoot is None
+    assert x_bud._itemroot is None
     assert x_bud.max_tree_traverse is None
     assert x_bud._road_delimiter is None
     assert x_bud.fund_pool is None
     assert x_bud.fund_coin is None
     assert x_bud.respect_bit is None
     assert x_bud.penny is None
-    assert x_bud.tender_desc is None
     assert x_bud.credor_respect is None
     assert x_bud.debtor_respect is None
     assert x_bud._last_gift_id is None
     assert x_bud._originunit is None
     # calculated attr
-    assert x_bud._idea_dict is None
+    assert x_bud._item_dict is None
     assert x_bud._keep_dict is None
     assert x_bud._healers_dict is None
     assert x_bud._tree_traverse_count is None
@@ -49,7 +48,7 @@ def test_BudUnit_Exists():
     assert x_bud._offtrack_fund is None
     assert x_bud._reason_bases is None
     assert x_bud._range_inheritors is None
-    assert str(type(x_bud._idearoot)).find("None") == 8
+    assert str(type(x_bud._itemroot)).find("None") == 8
 
 
 def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
@@ -79,20 +78,19 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud._fiscal_id == iowa_fiscal_id
     assert x_bud.tally == 1
     assert x_bud._accts == {}
-    assert x_bud._idearoot is not None
+    assert x_bud._itemroot is not None
     assert x_bud.max_tree_traverse == 3
     assert x_bud._road_delimiter == slash_road_delimiter
     assert x_bud.fund_pool == x_fund_pool
     assert x_bud.fund_coin == x_fund_coin
     assert x_bud.respect_bit == x_respect_bit
     assert x_bud.penny == x_penny
-    assert not x_bud.tender_desc
     assert x_bud.credor_respect == validate_respect_num()
     assert x_bud.debtor_respect == validate_respect_num()
     assert not x_bud._last_gift_id
     # calculated attr
     assert x_bud._originunit == originunit_shop()
-    assert x_bud._idea_dict == {}
+    assert x_bud._item_dict == {}
     assert x_bud._keep_dict == {}
     assert x_bud._healers_dict == {}
     assert not x_bud._tree_traverse_count
@@ -104,8 +102,8 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert not x_bud._offtrack_fund
     assert x_bud._reason_bases == set()
     assert x_bud._range_inheritors == {}
-    print(f"{type(x_bud._idearoot)=}") == 0
-    assert str(type(x_bud._idearoot)).find(".idea.IdeaUnit'>") > 0
+    print(f"{type(x_bud._itemroot)=}") == 0
+    assert str(type(x_bud._itemroot)).find(".item.ItemUnit'>") > 0
 
 
 def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
@@ -120,14 +118,14 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_bud.fund_coin == default_fund_coin_if_none()
     assert x_bud.respect_bit == default_respect_bit_if_none()
     assert x_bud.penny == default_penny_if_none()
-    assert x_bud._idearoot._fund_coin == x_bud.fund_coin
-    assert x_bud._idearoot._road_delimiter == x_bud._road_delimiter
-    assert x_bud._idearoot._root
-    assert x_bud._idearoot._uid == 1
-    assert x_bud._idearoot._level == 0
-    assert x_bud._idearoot._bud_fiscal_id == x_bud._fiscal_id
-    assert x_bud._idearoot._road_delimiter == x_bud._road_delimiter
-    assert x_bud._idearoot._parent_road == ""
+    assert x_bud._itemroot._fund_coin == x_bud.fund_coin
+    assert x_bud._itemroot._road_delimiter == x_bud._road_delimiter
+    assert x_bud._itemroot._root
+    assert x_bud._itemroot._uid == 1
+    assert x_bud._itemroot._level == 0
+    assert x_bud._itemroot._bud_fiscal_id == x_bud._fiscal_id
+    assert x_bud._itemroot._road_delimiter == x_bud._road_delimiter
+    assert x_bud._itemroot._parent_road == ""
 
 
 def test_BudUnit_set_max_tree_traverse_CorrectlySetsInt():
@@ -205,19 +203,6 @@ def test_BudUnit_make_road_ReturnsCorrectObj():
 
     # THEN
     assert v1_casa_road == v2_casa_road
-
-
-def test_BudUnit_set_tender_desc_SetsAttrCorrectly():
-    # ESTABLISH
-    sue_bud = budunit_shop("Sue", "Texas")
-    sue_tender_desc = "Folos"
-    assert sue_bud.tender_desc != sue_tender_desc
-
-    # WHEN
-    sue_bud.set_tender_desc(sue_tender_desc)
-
-    # THEN
-    assert sue_bud.tender_desc == sue_tender_desc
 
 
 def test_BudUnit_set_last_gift_id_SetsAttrCorrectly():

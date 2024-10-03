@@ -514,7 +514,7 @@ def test_replace_road_delimiter_CorrectlyRaisesError():
         )
     assert (
         str(excinfo.value)
-        == f"Cannot replace_road_delimiter '{semicolon_delimiter}' with '{slash_delimiter}' because the new one already exists in road '{gen_cooker_road}'."
+        == f"Cannot replace_road_delimiter '{semicolon_delimiter}' with '{slash_delimiter}' because the new one exists in road '{gen_cooker_road}'."
     )
 
 
@@ -536,7 +536,7 @@ def test_replace_road_delimiter_WhenNewdelimiterIsFirstInRoadUnitRaisesError():
         )
     assert (
         str(excinfo.value)
-        == f"Cannot replace_road_delimiter '{semicolon_delimiter}' with '{slash_delimiter}' because the new one already exists in road '{semicolon_delimiter_cooker_road}'."
+        == f"Cannot replace_road_delimiter '{semicolon_delimiter}' with '{slash_delimiter}' because the new one exists in road '{semicolon_delimiter_cooker_road}'."
     )
 
 

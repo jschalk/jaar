@@ -11,16 +11,16 @@ def create_pledge(
     reason_premise: RoadUnit = None,
 ):
     if pledge_road is not None and get_terminus_node(pledge_road) != "":
-        x_idea = x_bud.get_idea_obj(pledge_road, if_missing_create=True)
-        x_idea.pledge = True
-        x_idea.teamunit.set_teamlink(x_teamlink)
+        x_item = x_bud.get_item_obj(pledge_road, if_missing_create=True)
+        x_item.pledge = True
+        x_item.teamunit.set_teamlink(x_teamlink)
 
         if x_teamlink is not None and x_bud.acct_exists(x_teamlink) is False:
             x_bud.add_acctunit(x_teamlink)
 
         if reason_premise is not None:
-            if x_bud.idea_exists(reason_premise) is False:
-                x_bud.get_idea_obj(reason_premise, if_missing_create=True)
+            if x_bud.item_exists(reason_premise) is False:
+                x_bud.get_item_obj(reason_premise, if_missing_create=True)
             reason_base = get_parent_road(reason_premise)
             x_bud.edit_reason(pledge_road, reason_base, reason_premise)
 
@@ -41,8 +41,8 @@ def add_voice_pledge(
 
 
 def create_fact(x_bud: BudUnit, fact_pick: RoadUnit):
-    if x_bud.idea_exists(fact_pick) is False:
-        x_bud.get_idea_obj(fact_pick, if_missing_create=True)
+    if x_bud.item_exists(fact_pick) is False:
+        x_bud.get_item_obj(fact_pick, if_missing_create=True)
     fact_base = get_parent_road(fact_pick)
     x_bud.set_fact(fact_base, fact_pick)
 

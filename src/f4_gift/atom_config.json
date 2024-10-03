@@ -72,7 +72,7 @@
             "atom_order": 9
         }
     },
-    "bud_idea_awardlink": {
+    "bud_item_awardlink": {
         "DELETE": {
             "atom_order": 21
         },
@@ -112,7 +112,7 @@
             "atom_order": 12
         }
     },
-    "bud_idea_factunit": {
+    "bud_item_factunit": {
         "DELETE": {
             "atom_order": 18
         },
@@ -157,7 +157,7 @@
             "atom_order": 13
         }
     },
-    "bud_idea_healerlink": {
+    "bud_item_healerlink": {
         "DELETE": {
             "atom_order": 20
         },
@@ -183,7 +183,7 @@
             }
         }
     },
-    "bud_idea_reason_premiseunit": {
+    "bud_item_reason_premiseunit": {
         "DELETE": {
             "atom_order": 16
         },
@@ -234,7 +234,7 @@
             "atom_order": 14
         }
     },
-    "bud_idea_reasonunit": {
+    "bud_item_reasonunit": {
         "DELETE": {
             "atom_order": 17
         },
@@ -245,7 +245,7 @@
             "normal_table_name": "reason"
         },
         "optional_args": {
-            "base_idea_active_requisite": {
+            "base_item_active_requisite": {
                 "column_order": 2,
                 "python_type": "bool",
                 "sqlite_datatype": "INTEGER"
@@ -269,7 +269,7 @@
             "atom_order": 15
         }
     },
-    "bud_idea_teamlink": {
+    "bud_item_teamlink": {
         "DELETE": {
             "atom_order": 19
         },
@@ -295,7 +295,7 @@
             }
         }
     },
-    "bud_ideaunit": {
+    "bud_itemunit": {
         "DELETE": {
             "atom_order": 22
         },
@@ -303,7 +303,7 @@
             "atom_order": 2
         },
         "normal_specs": {
-            "normal_table_name": "idea"
+            "normal_table_name": "item"
         },
         "optional_args": {
             "addin": {
@@ -414,11 +414,6 @@
                 "column_order": 5,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
-            },
-            "tender_desc": {
-                "column_order": 8,
-                "python_type": "str",
-                "sqlite_datatype": "TEXT"
             },
             "penny": {
                 "column_order": 6,

@@ -6,9 +6,9 @@ from src.f1_road.finance import (
 from src.f1_road.jaar_config import get_gifts_folder, get_json_filename
 from src.f1_road.road import default_road_delimiter_if_none
 from src.f2_bud.healer import healerlink_shop
-from src.f2_bud.idea import ideaunit_shop
+from src.f2_bud.item import itemunit_shop
 from src.f3_chrono.chrono import timelineunit_shop, get_min_from_dt
-from src.f1_road.finance_tran import outlayepisode_shop
+from src.f1_road.finance_tran import purviewepisode_shop
 from src.f5_listen.hubunit import hubunit_shop
 from src.f7_fiscal.fiscal import FiscalUnit, fiscalunit_shop
 from src.f7_fiscal.examples.fiscal_env import (
@@ -24,7 +24,7 @@ def test_FiscalUnit_Exists(env_dir_setup_cleanup):
     assert music_fiscal.fiscal_id == music_str
     assert not music_fiscal.timeline
     assert not music_fiscal.current_time
-    assert not music_fiscal.outlaylogs
+    assert not music_fiscal.purviewlogs
     assert not music_fiscal.road_delimiter
     assert not music_fiscal.fund_coin
     assert not music_fiscal.respect_bit
@@ -47,7 +47,7 @@ def test_fiscalunit_shop_ReturnsFiscalUnit():
     assert music_fiscal.fiscal_id == music_str
     assert music_fiscal.timeline == timelineunit_shop()
     assert music_fiscal.current_time == 0
-    assert music_fiscal.outlaylogs == {}
+    assert music_fiscal.purviewlogs == {}
     assert music_fiscal.road_delimiter == default_road_delimiter_if_none()
     assert music_fiscal.fund_coin == default_fund_coin_if_none()
     assert music_fiscal.respect_bit == default_respect_bit_if_none()
@@ -222,21 +222,21 @@ def test_FiscalUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_voice_bud.add_acctunit(yao_str)
     texas_str = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_str)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
-    yao_voice_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
+    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    yao_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_str)
     dallas_healerlink = healerlink_shop({sue_str, yao_str})
-    dallas_idea = ideaunit_shop(dallas_str, healerlink=dallas_healerlink)
+    dallas_item = itemunit_shop(dallas_str, healerlink=dallas_healerlink)
     elpaso_str = "el paso"
     elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_str)
     elpaso_healerlink = healerlink_shop({sue_str})
-    elpaso_idea = ideaunit_shop(elpaso_str, healerlink=elpaso_healerlink)
+    elpaso_item = itemunit_shop(elpaso_str, healerlink=elpaso_healerlink)
 
-    sue_voice_bud.set_idea(dallas_idea, texas_road)
-    sue_voice_bud.set_idea(elpaso_idea, texas_road)
-    yao_voice_bud.set_idea(dallas_idea, texas_road)
-    yao_voice_bud.set_idea(elpaso_idea, texas_road)
+    sue_voice_bud.set_item(dallas_item, texas_road)
+    sue_voice_bud.set_item(elpaso_item, texas_road)
+    yao_voice_bud.set_item(dallas_item, texas_road)
+    yao_voice_bud.set_item(elpaso_item, texas_road)
 
     sue_hubunit.save_voice_bud(sue_voice_bud)
     yao_hubunit.save_voice_bud(yao_voice_bud)

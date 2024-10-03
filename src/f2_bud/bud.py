@@ -53,7 +53,7 @@ from src.f2_bud.group import (
     membership_shop,
 )
 from src.f2_bud.healer import HealerLink
-from src.f2_bud.reason_idea import (
+from src.f2_bud.reason_item import (
     FactUnit,
     FactUnit,
     ReasonUnit,
@@ -63,12 +63,12 @@ from src.f2_bud.reason_idea import (
 from src.f2_bud.reason_team import TeamUnit
 from src.f2_bud.tree_metrics import TreeMetrics, treemetrics_shop
 from src.f2_bud.origin import originunit_get_from_dict, originunit_shop, OriginUnit
-from src.f2_bud.idea import (
-    IdeaUnit,
-    ideaunit_shop,
-    ideaattrfilter_shop,
-    IdeaAttrFilter,
-    get_obj_from_idea_dict,
+from src.f2_bud.item import (
+    ItemUnit,
+    itemunit_shop,
+    itemattrfilter_shop,
+    ItemAttrFilter,
+    get_obj_from_item_dict,
 )
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
@@ -121,21 +121,20 @@ class BudUnit:
     _last_gift_id: int = None
     tally: float = None
     _accts: dict[AcctID, AcctUnit] = None
-    _idearoot: IdeaUnit = None
+    _itemroot: ItemUnit = None
     max_tree_traverse: int = None
     _road_delimiter: str = None
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
     penny: PennyNum = None
-    tender_desc: str = None
     respect_bit: BitNum = None
     credor_respect: RespectNum = None
     debtor_respect: RespectNum = None
     _originunit: OriginUnit = None  # In job buds this shows source
     # settle_bud Calculated field begin
-    _idea_dict: dict[RoadUnit, IdeaUnit] = None
-    _keep_dict: dict[RoadUnit, IdeaUnit] = None
-    _healers_dict: dict[HealerID, dict[RoadUnit, IdeaUnit]] = None
+    _item_dict: dict[RoadUnit, ItemUnit] = None
+    _keep_dict: dict[RoadUnit, ItemUnit] = None
+    _healers_dict: dict[HealerID, dict[RoadUnit, ItemUnit]] = None
     _tree_traverse_count: int = None
     _rational: bool = None
     _keeps_justified: bool = None
@@ -156,9 +155,6 @@ class BudUnit:
             exception_str = f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self._last_gift_id}."
             raise _last_gift_idException(exception_str)
         self._last_gift_id = x_last_gift_id
-
-    def set_tender_desc(self, x_tender_desc: str):
-        self.tender_desc = x_tender_desc
 
     def set_fund_pool(self, x_fund_pool):
         if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:
@@ -202,23 +198,23 @@ class BudUnit:
     def set_road_delimiter(self, new_road_delimiter: str):
         self.settle_bud()
         if self._road_delimiter != new_road_delimiter:
-            for x_idea_road in self._idea_dict.keys():
-                if is_string_in_road(new_road_delimiter, x_idea_road):
-                    exception_str = f"Cannot modify delimiter to '{new_road_delimiter}' because it already exists an idea label '{x_idea_road}'"
+            for x_item_road in self._item_dict.keys():
+                if is_string_in_road(new_road_delimiter, x_item_road):
+                    exception_str = f"Cannot modify delimiter to '{new_road_delimiter}' because it exists an item label '{x_item_road}'"
                     raise NewDelimiterException(exception_str)
 
-            # modify all road attributes in ideaunits
+            # modify all road attributes in itemunits
             self._road_delimiter = default_road_delimiter_if_none(new_road_delimiter)
-            for x_idea in self._idea_dict.values():
-                x_idea.set_road_delimiter(self._road_delimiter)
+            for x_item in self._item_dict.values():
+                x_item.set_road_delimiter(self._road_delimiter)
 
     def set_fiscal_id(self, fiscal_id: str):
         old_fiscal_id = copy_deepcopy(self._fiscal_id)
         self.settle_bud()
-        for idea_obj in self._idea_dict.values():
-            idea_obj._bud_fiscal_id = fiscal_id
+        for item_obj in self._item_dict.values():
+            item_obj._bud_fiscal_id = fiscal_id
         self._fiscal_id = fiscal_id
-        self.edit_idea_label(old_road=old_fiscal_id, new_label=self._fiscal_id)
+        self.edit_item_label(old_road=old_fiscal_id, new_label=self._fiscal_id)
         self.settle_bud()
 
     def set_max_tree_traverse(self, x_int: int):
@@ -242,8 +238,8 @@ class BudUnit:
         # nice to avoid infinite loops from programming errors though...
         while to_evaluate_list != []:
             x_road = to_evaluate_list.pop()
-            x_idea = self.get_idea_obj(x_road)
-            for reasonunit_obj in x_idea.reasonunits.values():
+            x_item = self.get_item_obj(x_road)
+            for reasonunit_obj in x_item.reasonunits.values():
                 reason_base = reasonunit_obj.base
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
@@ -275,8 +271,8 @@ class BudUnit:
             to_evaluate_hx_dict[to_evaluate_road] = road_type
 
             if road_type == "reasonunit_base":
-                ru_base_idea = self.get_idea_obj(to_evaluate_road)
-                for descendant_road in ru_base_idea.get_descendant_roads_from_kids():
+                ru_base_item = self.get_item_obj(to_evaluate_road)
+                for descendant_road in ru_base_item.get_descendant_roads_from_kids():
                     self._evaluate_relevancy(
                         to_evaluate_list=to_evaluate_list,
                         to_evaluate_hx_dict=to_evaluate_hx_dict,
@@ -284,10 +280,10 @@ class BudUnit:
                         road_type="reasonunit_descendant",
                     )
 
-    def all_ideas_relevant_to_pledge_idea(self, road: RoadUnit) -> bool:
-        pledge_idea_assoc_set = set(self._get_relevant_roads({road}))
-        all_ideas_set = set(self.get_idea_tree_ordered_road_list())
-        return all_ideas_set == all_ideas_set.intersection(pledge_idea_assoc_set)
+    def all_items_relevant_to_pledge_item(self, road: RoadUnit) -> bool:
+        pledge_item_assoc_set = set(self._get_relevant_roads({road}))
+        all_items_set = set(self.get_item_tree_ordered_road_list())
+        return all_items_set == all_items_set.intersection(pledge_item_assoc_set)
 
     def get_awardlinks_metrics(self) -> dict[GroupID, AwardLink]:
         tree_metrics = self.get_tree_metrics()
@@ -413,22 +409,22 @@ class BudUnit:
         all_group_ids = set(self._groupboxs.keys())
         return all_group_ids.difference(x_acctunit_group_ids)
 
-    def _is_idea_rangeroot(self, idea_road: RoadUnit) -> bool:
-        if self._fiscal_id == idea_road:
+    def _is_item_rangeroot(self, item_road: RoadUnit) -> bool:
+        if self._fiscal_id == item_road:
             raise InvalidBudException(
-                "its difficult to foresee a scenario where idearoot is rangeroot"
+                "its difficult to foresee a scenario where itemroot is rangeroot"
             )
-        parent_road = get_parent_road(idea_road)
-        parent_idea = self.get_idea_obj(parent_road)
-        return not parent_idea.is_math()
+        parent_road = get_parent_road(item_road)
+        parent_item = self.get_item_obj(parent_road)
+        return not parent_item.is_math()
 
     def _get_rangeroot_factunits(self) -> list[FactUnit]:
         return [
             fact
-            for fact in self._idearoot.factunits.values()
+            for fact in self._itemroot.factunits.values()
             if fact.fopen is not None
             and fact.fnigh is not None
-            and self._is_idea_rangeroot(idea_road=fact.base)
+            and self._is_item_rangeroot(item_road=fact.base)
         ]
 
     def set_fact(
@@ -437,36 +433,36 @@ class BudUnit:
         pick: RoadUnit = None,
         fopen: float = None,
         fnigh: float = None,
-        create_missing_ideas: bool = None,
+        create_missing_items: bool = None,
     ):
         pick = base if pick is None else pick
-        if create_missing_ideas:
-            self._create_ideakid_if_empty(road=base)
-            self._create_ideakid_if_empty(road=pick)
+        if create_missing_items:
+            self._create_itemkid_if_empty(road=base)
+            self._create_itemkid_if_empty(road=pick)
 
-        fact_base_idea = self.get_idea_obj(base)
-        x_idearoot = self.get_idea_obj(self._fiscal_id)
+        fact_base_item = self.get_item_obj(base)
+        x_itemroot = self.get_item_obj(self._fiscal_id)
         x_fopen = None
         if fnigh is not None and fopen is None:
-            x_fopen = x_idearoot.factunits.get(base).fopen
+            x_fopen = x_itemroot.factunits.get(base).fopen
         else:
             x_fopen = fopen
         x_fnigh = None
         if fopen is not None and fnigh is None:
-            x_fnigh = x_idearoot.factunits.get(base).fnigh
+            x_fnigh = x_itemroot.factunits.get(base).fnigh
         else:
             x_fnigh = fnigh
         x_factunit = factunit_shop(base=base, pick=pick, fopen=x_fopen, fnigh=x_fnigh)
 
-        if fact_base_idea.is_math() is False:
-            x_idearoot.set_factunit(x_factunit)
-        # if fact's idea no range or is a "range-root" then allow fact to be set
-        elif fact_base_idea.is_math() and self._is_idea_rangeroot(base) is False:
+        if fact_base_item.is_math() is False:
+            x_itemroot.set_factunit(x_factunit)
+        # if fact's item no range or is a "range-root" then allow fact to be set
+        elif fact_base_item.is_math() and self._is_item_rangeroot(base) is False:
             raise InvalidBudException(
                 f"Non range-root fact:{base} can only be set by range-root fact"
             )
-        elif fact_base_idea.is_math() and self._is_idea_rangeroot(base):
-            # WHEN idea is "range-root" identify any reason.bases that are descendants
+        elif fact_base_item.is_math() and self._is_item_rangeroot(base):
+            # WHEN item is "range-root" identify any reason.bases that are descendants
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,weeks" (spllt 10080) is range-descendant
@@ -476,72 +472,72 @@ class BudUnit:
             # should not set "timeline,weeks" fact, only "timeline" fact and
             # "timeline,weeks" should be set automatica_lly since there exists a reason
             # that has that base.
-            x_idearoot.set_factunit(x_factunit)
+            x_itemroot.set_factunit(x_factunit)
 
     def get_fact(self, base: RoadUnit) -> FactUnit:
-        return self._idearoot.factunits.get(base)
+        return self._itemroot.factunits.get(base)
 
     def del_fact(self, base: RoadUnit):
-        self._idearoot.del_factunit(base)
+        self._itemroot.del_factunit(base)
 
-    def get_idea_dict(self, problem: bool = None) -> dict[RoadUnit, IdeaUnit]:
+    def get_item_dict(self, problem: bool = None) -> dict[RoadUnit, ItemUnit]:
         self.settle_bud()
         if not problem:
-            return self._idea_dict
+            return self._item_dict
         if self._keeps_justified is False:
             exception_str = f"Cannot return problem set because _keeps_justified={self._keeps_justified}."
             raise Exception_keeps_justified(exception_str)
 
-        x_ideas = self._idea_dict.values()
-        return {x_idea.get_road(): x_idea for x_idea in x_ideas if x_idea.problem_bool}
+        x_items = self._item_dict.values()
+        return {x_item.get_road(): x_item for x_item in x_items if x_item.problem_bool}
 
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
         tree_metrics = treemetrics_shop()
         tree_metrics.evaluate_node(
-            level=self._idearoot._level,
-            reasons=self._idearoot.reasonunits,
-            awardlinks=self._idearoot.awardlinks,
-            uid=self._idearoot._uid,
-            pledge=self._idearoot.pledge,
-            idea_road=self._idearoot.get_road(),
+            level=self._itemroot._level,
+            reasons=self._itemroot.reasonunits,
+            awardlinks=self._itemroot.awardlinks,
+            uid=self._itemroot._uid,
+            pledge=self._itemroot.pledge,
+            item_road=self._itemroot.get_road(),
         )
 
-        x_idea_list = [self._idearoot]
-        while x_idea_list != []:
-            parent_idea = x_idea_list.pop()
-            for idea_kid in parent_idea._kids.values():
+        x_item_list = [self._itemroot]
+        while x_item_list != []:
+            parent_item = x_item_list.pop()
+            for item_kid in parent_item._kids.values():
                 self._eval_tree_metrics(
-                    parent_idea, idea_kid, tree_metrics, x_idea_list
+                    parent_item, item_kid, tree_metrics, x_item_list
                 )
         return tree_metrics
 
-    def _eval_tree_metrics(self, parent_idea, idea_kid, tree_metrics, x_idea_list):
-        idea_kid._level = parent_idea._level + 1
+    def _eval_tree_metrics(self, parent_item, item_kid, tree_metrics, x_item_list):
+        item_kid._level = parent_item._level + 1
         tree_metrics.evaluate_node(
-            level=idea_kid._level,
-            reasons=idea_kid.reasonunits,
-            awardlinks=idea_kid.awardlinks,
-            uid=idea_kid._uid,
-            pledge=idea_kid.pledge,
-            idea_road=idea_kid.get_road(),
+            level=item_kid._level,
+            reasons=item_kid.reasonunits,
+            awardlinks=item_kid.awardlinks,
+            uid=item_kid._uid,
+            pledge=item_kid.pledge,
+            item_road=item_kid.get_road(),
         )
-        x_idea_list.append(idea_kid)
+        x_item_list.append(item_kid)
 
-    def get_idea_uid_max(self) -> int:
+    def get_item_uid_max(self) -> int:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.uid_max
 
-    def set_all_idea_uids_unique(self):
+    def set_all_item_uids_unique(self):
         tree_metrics = self.get_tree_metrics()
-        idea_uid_max = tree_metrics.uid_max
-        idea_uid_dict = tree_metrics.uid_dict
+        item_uid_max = tree_metrics.uid_max
+        item_uid_dict = tree_metrics.uid_dict
 
-        for x_idea in self.get_idea_dict().values():
-            if x_idea._uid is None or idea_uid_dict.get(x_idea._uid) > 1:
-                new_idea_uid_max = idea_uid_max + 1
-                self.edit_idea_attr(road=x_idea.get_road(), uid=new_idea_uid_max)
-                idea_uid_max = new_idea_uid_max
+        for x_item in self.get_item_dict().values():
+            if x_item._uid is None or item_uid_dict.get(x_item._uid) > 1:
+                new_item_uid_max = item_uid_max + 1
+                self.edit_item_attr(road=x_item.get_road(), uid=new_item_uid_max)
+                item_uid_max = new_item_uid_max
 
     def get_level_count(self, level) -> int:
         tree_metrics = self.get_tree_metrics()
@@ -562,154 +558,154 @@ class BudUnit:
         missing_bases = {}
         for base, base_count in reason_bases.items():
             try:
-                self._idearoot.factunits[base]
+                self._itemroot.factunits[base]
             except KeyError:
                 missing_bases[base] = base_count
         return missing_bases
 
-    def add_idea(
-        self, idea_road: RoadUnit, mass: float = None, pledge: bool = None
-    ) -> IdeaUnit:
-        x_label = get_terminus_node(idea_road, self._road_delimiter)
-        x_parent_road = get_parent_road(idea_road, self._road_delimiter)
-        x_ideaunit = ideaunit_shop(x_label, mass=mass)
+    def add_item(
+        self, item_road: RoadUnit, mass: float = None, pledge: bool = None
+    ) -> ItemUnit:
+        x_label = get_terminus_node(item_road, self._road_delimiter)
+        x_parent_road = get_parent_road(item_road, self._road_delimiter)
+        x_itemunit = itemunit_shop(x_label, mass=mass)
         if pledge:
-            x_ideaunit.pledge = True
-        self.set_idea(x_ideaunit, x_parent_road)
-        return x_ideaunit
+            x_itemunit.pledge = True
+        self.set_item(x_itemunit, x_parent_road)
+        return x_itemunit
 
-    def set_l1_idea(
+    def set_l1_item(
         self,
-        idea_kid: IdeaUnit,
-        create_missing_ideas: bool = None,
+        item_kid: ItemUnit,
+        create_missing_items: bool = None,
         filter_out_missing_awardlinks_group_ids: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        self.set_idea(
-            idea_kid=idea_kid,
+        self.set_item(
+            item_kid=item_kid,
             parent_road=self._fiscal_id,
-            create_missing_ideas=create_missing_ideas,
+            create_missing_items=create_missing_items,
             filter_out_missing_awardlinks_group_ids=filter_out_missing_awardlinks_group_ids,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
         )
 
-    def set_idea(
+    def set_item(
         self,
-        idea_kid: IdeaUnit,
+        item_kid: ItemUnit,
         parent_road: RoadUnit,
         filter_out_missing_awardlinks_group_ids: bool = None,
-        create_missing_ideas: bool = None,
+        create_missing_items: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        if RoadNode(idea_kid._label).is_node(self._road_delimiter) is False:
-            x_str = f"set_idea failed because '{idea_kid._label}' is not a RoadNode."
+        if RoadNode(item_kid._label).is_node(self._road_delimiter) is False:
+            x_str = f"set_item failed because '{item_kid._label}' is not a RoadNode."
             raise InvalidBudException(x_str)
 
         x_root_node = get_root_node_from_road(parent_road, self._road_delimiter)
-        if self._idearoot._label != x_root_node:
-            exception_str = f"set_idea failed because parent_road '{parent_road}' has an invalid root node"
+        if self._itemroot._label != x_root_node:
+            exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root node"
             raise InvalidBudException(exception_str)
 
-        idea_kid._road_delimiter = self._road_delimiter
-        if idea_kid._bud_fiscal_id != self._fiscal_id:
-            idea_kid._bud_fiscal_id = self._fiscal_id
-        if idea_kid._fund_coin != self.fund_coin:
-            idea_kid._fund_coin = self.fund_coin
+        item_kid._road_delimiter = self._road_delimiter
+        if item_kid._bud_fiscal_id != self._fiscal_id:
+            item_kid._bud_fiscal_id = self._fiscal_id
+        if item_kid._fund_coin != self.fund_coin:
+            item_kid._fund_coin = self.fund_coin
         if not filter_out_missing_awardlinks_group_ids:
-            idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
-        idea_kid.set_parent_road(parent_road=parent_road)
+            item_kid = self._get_filtered_awardlinks_item(item_kid)
+        item_kid.set_parent_road(parent_road=parent_road)
 
-        # create any missing ideas
-        if not create_missing_ancestors and self.idea_exists(parent_road) is False:
-            x_str = f"set_idea failed because '{parent_road}' idea does not exist."
+        # create any missing items
+        if not create_missing_ancestors and self.item_exists(parent_road) is False:
+            x_str = f"set_item failed because '{parent_road}' item does not exist."
             raise InvalidBudException(x_str)
-        parent_road_idea = self.get_idea_obj(parent_road, create_missing_ancestors)
-        if parent_road_idea._root is False:
-            parent_road_idea
-        parent_road_idea.add_kid(idea_kid)
+        parent_road_item = self.get_item_obj(parent_road, create_missing_ancestors)
+        if parent_road_item._root is False:
+            parent_road_item
+        parent_road_item.add_kid(item_kid)
 
-        kid_road = self.make_road(parent_road, idea_kid._label)
+        kid_road = self.make_road(parent_road, item_kid._label)
         if adoptees is not None:
             mass_sum = 0
             for adoptee_label in adoptees:
                 adoptee_road = self.make_road(parent_road, adoptee_label)
-                adoptee_idea = self.get_idea_obj(adoptee_road)
-                mass_sum += adoptee_idea.mass
+                adoptee_item = self.get_item_obj(adoptee_road)
+                mass_sum += adoptee_item.mass
                 new_adoptee_parent_road = self.make_road(kid_road, adoptee_label)
-                self.set_idea(adoptee_idea, new_adoptee_parent_road)
-                self.edit_idea_attr(new_adoptee_parent_road, mass=adoptee_idea.mass)
-                self.del_idea_obj(adoptee_road)
+                self.set_item(adoptee_item, new_adoptee_parent_road)
+                self.edit_item_attr(new_adoptee_parent_road, mass=adoptee_item.mass)
+                self.del_item_obj(adoptee_road)
 
             if bundling:
-                self.edit_idea_attr(road=kid_road, mass=mass_sum)
+                self.edit_item_attr(road=kid_road, mass=mass_sum)
 
-        if create_missing_ideas:
-            self._create_missing_ideas(road=kid_road)
+        if create_missing_items:
+            self._create_missing_items(road=kid_road)
 
-    def _get_filtered_awardlinks_idea(self, x_idea: IdeaUnit) -> IdeaUnit:
+    def _get_filtered_awardlinks_item(self, x_item: ItemUnit) -> ItemUnit:
         _awardlinks_to_delete = [
             _awardlink_group_id
-            for _awardlink_group_id in x_idea.awardlinks.keys()
+            for _awardlink_group_id in x_item.awardlinks.keys()
             if self.get_acctunit_group_ids_dict().get(_awardlink_group_id) is None
         ]
         for _awardlink_group_id in _awardlinks_to_delete:
-            x_idea.awardlinks.pop(_awardlink_group_id)
+            x_item.awardlinks.pop(_awardlink_group_id)
 
-        if x_idea.teamunit is not None:
+        if x_item.teamunit is not None:
             _teamlinks_to_delete = [
                 _teamlink_group_id
-                for _teamlink_group_id in x_idea.teamunit._teamlinks
+                for _teamlink_group_id in x_item.teamunit._teamlinks
                 if self.get_acctunit_group_ids_dict().get(_teamlink_group_id) is None
             ]
             for _teamlink_group_id in _teamlinks_to_delete:
-                x_idea.teamunit.del_teamlink(_teamlink_group_id)
-        return x_idea
+                x_item.teamunit.del_teamlink(_teamlink_group_id)
+        return x_item
 
-    def _create_missing_ideas(self, road):
-        self._set_idea_dict()
-        posted_idea = self.get_idea_obj(road)
+    def _create_missing_items(self, road):
+        self._set_item_dict()
+        posted_item = self.get_item_obj(road)
 
-        for reason_x in posted_idea.reasonunits.values():
-            self._create_ideakid_if_empty(road=reason_x.base)
+        for reason_x in posted_item.reasonunits.values():
+            self._create_itemkid_if_empty(road=reason_x.base)
             for premise_x in reason_x.premises.values():
-                self._create_ideakid_if_empty(road=premise_x.need)
+                self._create_itemkid_if_empty(road=premise_x.need)
 
-    def _create_ideakid_if_empty(self, road: RoadUnit):
-        if self.idea_exists(road) is False:
-            self.add_idea(road)
+    def _create_itemkid_if_empty(self, road: RoadUnit):
+        if self.item_exists(road) is False:
+            self.add_item(road)
 
-    def del_idea_obj(self, road: RoadUnit, del_children: bool = True):
-        if road == self._idearoot.get_road():
-            raise InvalidBudException("Idearoot cannot be deleted")
+    def del_item_obj(self, road: RoadUnit, del_children: bool = True):
+        if road == self._itemroot.get_road():
+            raise InvalidBudException("Itemroot cannot be deleted")
         parent_road = get_parent_road(road)
-        if self.idea_exists(road):
+        if self.item_exists(road):
             if not del_children:
-                self._shift_idea_kids(x_road=road)
-            parent_idea = self.get_idea_obj(parent_road)
-            parent_idea.del_kid(get_terminus_node(road, self._road_delimiter))
+                self._shift_item_kids(x_road=road)
+            parent_item = self.get_item_obj(parent_road)
+            parent_item.del_kid(get_terminus_node(road, self._road_delimiter))
         self.settle_bud()
 
-    def _shift_idea_kids(self, x_road: RoadUnit):
+    def _shift_item_kids(self, x_road: RoadUnit):
         parent_road = get_parent_road(x_road)
-        d_temp_idea = self.get_idea_obj(x_road)
-        for kid in d_temp_idea._kids.values():
-            self.set_idea(kid, parent_road=parent_road)
+        d_temp_item = self.get_item_obj(x_road)
+        for kid in d_temp_item._kids.values():
+            self.set_item(kid, parent_road=parent_road)
 
     def set_owner_id(self, new_owner_id):
         self._owner_id = new_owner_id
 
-    def edit_idea_label(self, old_road: RoadUnit, new_label: RoadNode):
+    def edit_item_label(self, old_road: RoadUnit, new_label: RoadNode):
         if self._road_delimiter in new_label:
             exception_str = f"Cannot modify '{old_road}' because new_label {new_label} contains delimiter {self._road_delimiter}"
             raise InvalidLabelException(exception_str)
-        if self.idea_exists(old_road) is False:
-            raise InvalidBudException(f"Idea {old_road=} does not exist")
+        if self.item_exists(old_road) is False:
+            raise InvalidBudException(f"Item {old_road=} does not exist")
 
         parent_road = get_parent_road(road=old_road)
         new_road = (
@@ -719,45 +715,45 @@ class BudUnit:
         )
         if old_road != new_road:
             if parent_road == "":
-                self._idearoot.set_label(new_label)
+                self._itemroot.set_label(new_label)
             else:
-                self._non_root_idea_label_edit(old_road, new_label, parent_road)
-            self._idearoot_find_replace_road(old_road=old_road, new_road=new_road)
+                self._non_root_item_label_edit(old_road, new_label, parent_road)
+            self._itemroot_find_replace_road(old_road=old_road, new_road=new_road)
 
-    def _non_root_idea_label_edit(
+    def _non_root_item_label_edit(
         self, old_road: RoadUnit, new_label: RoadNode, parent_road: RoadUnit
     ):
-        x_idea = self.get_idea_obj(old_road)
-        x_idea.set_label(new_label)
-        x_idea._parent_road = parent_road
-        idea_parent = self.get_idea_obj(get_parent_road(old_road))
-        idea_parent._kids.pop(get_terminus_node(old_road, self._road_delimiter))
-        idea_parent._kids[x_idea._label] = x_idea
+        x_item = self.get_item_obj(old_road)
+        x_item.set_label(new_label)
+        x_item._parent_road = parent_road
+        item_parent = self.get_item_obj(get_parent_road(old_road))
+        item_parent._kids.pop(get_terminus_node(old_road, self._road_delimiter))
+        item_parent._kids[x_item._label] = x_item
 
-    def _idearoot_find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
-        self._idearoot.find_replace_road(old_road=old_road, new_road=new_road)
+    def _itemroot_find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
+        self._itemroot.find_replace_road(old_road=old_road, new_road=new_road)
 
-        idea_iter_list = [self._idearoot]
-        while idea_iter_list != []:
-            listed_idea = idea_iter_list.pop()
-            # add all idea_children in idea list
-            if listed_idea._kids is not None:
-                for idea_kid in listed_idea._kids.values():
-                    idea_iter_list.append(idea_kid)
-                    if is_sub_road(idea_kid._parent_road, sub_road=old_road):
-                        idea_kid._parent_road = rebuild_road(
-                            subj_road=idea_kid._parent_road,
+        item_iter_list = [self._itemroot]
+        while item_iter_list != []:
+            listed_item = item_iter_list.pop()
+            # add all item_children in item list
+            if listed_item._kids is not None:
+                for item_kid in listed_item._kids.values():
+                    item_iter_list.append(item_kid)
+                    if is_sub_road(item_kid._parent_road, sub_road=old_road):
+                        item_kid._parent_road = rebuild_road(
+                            subj_road=item_kid._parent_road,
                             old_road=old_road,
                             new_road=new_road,
                         )
-                    idea_kid.find_replace_road(old_road=old_road, new_road=new_road)
+                    item_kid.find_replace_road(old_road=old_road, new_road=new_road)
 
-    def _set_ideaattrfilter_premise_ranges(self, x_ideaattrfilter: IdeaAttrFilter):
-        premise_idea = self.get_idea_obj(x_ideaattrfilter.get_premise_need())
-        x_ideaattrfilter.set_premise_range_attributes_influenced_by_premise_idea(
-            premise_open=premise_idea.begin,
-            premise_nigh=premise_idea.close,
-            premise_denom=premise_idea.denom,
+    def _set_itemattrfilter_premise_ranges(self, x_itemattrfilter: ItemAttrFilter):
+        premise_item = self.get_item_obj(x_itemattrfilter.get_premise_need())
+        x_itemattrfilter.set_premise_range_attributes_influenced_by_premise_item(
+            premise_open=premise_item.begin,
+            premise_nigh=premise_item.close,
+            premise_denom=premise_item.denom,
         )
 
     def edit_reason(
@@ -769,7 +765,7 @@ class BudUnit:
         reason_premise_nigh: float = None,
         reason_premise_divisor: int = None,
     ):
-        self.edit_idea_attr(
+        self.edit_item_attr(
             road=road,
             reason_base=reason_base,
             reason_premise=reason_premise,
@@ -778,7 +774,7 @@ class BudUnit:
             reason_premise_divisor=reason_premise_divisor,
         )
 
-    def edit_idea_attr(
+    def edit_item_attr(
         self,
         road: RoadUnit,
         mass: int = None,
@@ -791,7 +787,7 @@ class BudUnit:
         reason_premise_divisor: int = None,
         reason_del_premise_base: RoadUnit = None,
         reason_del_premise_need: RoadUnit = None,
-        reason_base_idea_active_requisite: str = None,
+        reason_base_item_active_requisite: str = None,
         teamunit: TeamUnit = None,
         healerlink: HealerLink = None,
         begin: float = None,
@@ -815,10 +811,10 @@ class BudUnit:
         if healerlink is not None:
             for x_healer_id in healerlink._healer_ids:
                 if self.get_acctunit_group_ids_dict().get(x_healer_id) is None:
-                    exception_str = f"Idea cannot edit healerlink because group_id '{x_healer_id}' does not exist as group in Bud"
+                    exception_str = f"Item cannot edit healerlink because group_id '{x_healer_id}' does not exist as group in Bud"
                     raise healerlink_group_id_Exception(exception_str)
 
-        x_ideaattrfilter = ideaattrfilter_shop(
+        x_itemattrfilter = itemattrfilter_shop(
             mass=mass,
             uid=uid,
             reason=reason,
@@ -829,7 +825,7 @@ class BudUnit:
             reason_premise_divisor=reason_premise_divisor,
             reason_del_premise_base=reason_del_premise_base,
             reason_del_premise_need=reason_del_premise_need,
-            reason_base_idea_active_requisite=reason_base_idea_active_requisite,
+            reason_base_item_active_requisite=reason_base_item_active_requisite,
             teamunit=teamunit,
             healerlink=healerlink,
             begin=begin,
@@ -850,29 +846,29 @@ class BudUnit:
             factunit=factunit,
             problem_bool=problem_bool,
         )
-        if x_ideaattrfilter.has_reason_premise():
-            self._set_ideaattrfilter_premise_ranges(x_ideaattrfilter)
-        x_idea = self.get_idea_obj(road)
-        x_idea._set_attrs_to_ideaunit(idea_attr=x_ideaattrfilter)
+        if x_itemattrfilter.has_reason_premise():
+            self._set_itemattrfilter_premise_ranges(x_itemattrfilter)
+        x_item = self.get_item_obj(road)
+        x_item._set_attrs_to_itemunit(item_attr=x_itemattrfilter)
 
     def get_agenda_dict(
         self, necessary_base: RoadUnit = None
-    ) -> dict[RoadUnit, IdeaUnit]:
+    ) -> dict[RoadUnit, ItemUnit]:
         self.settle_bud()
         return {
-            x_idea.get_road(): x_idea
-            for x_idea in self._idea_dict.values()
-            if x_idea.is_agenda_item(necessary_base)
+            x_item.get_road(): x_item
+            for x_item in self._item_dict.values()
+            if x_item.is_agenda_item(necessary_base)
         }
 
-    def get_all_pledges(self) -> dict[RoadUnit, IdeaUnit]:
+    def get_all_pledges(self) -> dict[RoadUnit, ItemUnit]:
         self.settle_bud()
-        all_ideas = self._idea_dict.values()
-        return {x_idea.get_road(): x_idea for x_idea in all_ideas if x_idea.pledge}
+        all_items = self._item_dict.values()
+        return {x_item.get_road(): x_item for x_item in all_items if x_item.pledge}
 
     def set_agenda_task_complete(self, task_road: RoadUnit, base: RoadUnit):
-        pledge_item = self.get_idea_obj(task_road)
-        pledge_item.set_factunit_to_complete(self._idearoot.factunits[base])
+        pledge_item = self.get_item_obj(task_road)
+        pledge_item.set_factunit_to_complete(self._itemroot.factunits[base])
 
     def get_credit_ledger_debtit_ledger(
         self,
@@ -893,19 +889,19 @@ class BudUnit:
     def get_acctunits_debtit_belief_sum(self) -> float:
         return sum(acctunit.get_debtit_belief() for acctunit in self._accts.values())
 
-    def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
+    def _add_to_acctunits_fund_give_take(self, item_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
-        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self.fund_coin)
-        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self.fund_coin)
+        fund_give_allot = allot_scale(credor_ledger, item_fund_share, self.fund_coin)
+        fund_take_allot = allot_scale(debtor_ledger, item_fund_share, self.fund_coin)
         for x_acct_id, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_id).add_fund_give(acct_fund_give)
         for x_acct_id, acct_fund_take in fund_take_allot.items():
             self.get_acct(x_acct_id).add_fund_take(acct_fund_take)
 
-    def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
+    def _add_to_acctunits_fund_agenda_give_take(self, item_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
-        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self.fund_coin)
-        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self.fund_coin)
+        fund_give_allot = allot_scale(credor_ledger, item_fund_share, self.fund_coin)
+        fund_take_allot = allot_scale(debtor_ledger, item_fund_share, self.fund_coin)
         for x_acct_id, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_id).add_fund_agenda_give(acct_fund_give)
         for x_acct_id, acct_fund_take in fund_take_allot.items():
@@ -927,21 +923,21 @@ class BudUnit:
             )
 
     def _allot_fund_bud_agenda(self):
-        for idea in self._idea_dict.values():
-            # If there are no awardlines associated with idea
+        for item in self._item_dict.values():
+            # If there are no awardlines associated with item
             # allot fund_share via general acctunit
             # cred ratio and debt ratio
-            # if idea.is_agenda_item() and idea._awardlines == {}:
-            if idea.is_agenda_item():
-                if idea.awardheir_exists():
-                    for x_awardline in idea._awardlines.values():
+            # if item.is_agenda_item() and item._awardlines == {}:
+            if item.is_agenda_item():
+                if item.awardheir_exists():
+                    for x_awardline in item._awardlines.values():
                         self.add_to_groupbox_fund_agenda_give_take(
                             group_id=x_awardline.group_id,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
                 else:
-                    self._add_to_acctunits_fund_agenda_give_take(idea.get_fund_share())
+                    self._add_to_acctunits_fund_agenda_give_take(item.get_fund_share())
 
     def _allot_groupboxs_fund(self):
         for x_groupbox in self._groupboxs.values():
@@ -975,11 +971,11 @@ class BudUnit:
         for acctunit in self._accts.values():
             acctunit.clear_fund_give_take()
 
-    def idea_exists(self, road: RoadUnit) -> bool:
+    def item_exists(self, road: RoadUnit) -> bool:
         if road is None:
             return False
         root_road_label = get_root_node_from_road(road, delimiter=self._road_delimiter)
-        if root_road_label != self._idearoot._label:
+        if root_road_label != self._itemroot._label:
             return False
 
         nodes = get_all_road_nodes(road, delimiter=self._road_delimiter)
@@ -987,102 +983,102 @@ class BudUnit:
         if nodes == []:
             return True
 
-        idea_label = nodes.pop(0)
-        x_idea = self._idearoot.get_kid(idea_label)
-        if x_idea is None:
+        item_label = nodes.pop(0)
+        x_item = self._itemroot.get_kid(item_label)
+        if x_item is None:
             return False
         while nodes != []:
-            idea_label = nodes.pop(0)
-            x_idea = x_idea.get_kid(idea_label)
-            if x_idea is None:
+            item_label = nodes.pop(0)
+            x_item = x_item.get_kid(item_label)
+            if x_item is None:
                 return False
         return True
 
-    def get_idea_obj(self, road: RoadUnit, if_missing_create: bool = False) -> IdeaUnit:
+    def get_item_obj(self, road: RoadUnit, if_missing_create: bool = False) -> ItemUnit:
         if road is None:
-            raise InvalidBudException("get_idea_obj received road=None")
-        if self.idea_exists(road) is False and not if_missing_create:
-            raise InvalidBudException(f"get_idea_obj failed. no item at '{road}'")
+            raise InvalidBudException("get_item_obj received road=None")
+        if self.item_exists(road) is False and not if_missing_create:
+            raise InvalidBudException(f"get_item_obj failed. no item at '{road}'")
         roadnodes = get_all_road_nodes(road, delimiter=self._road_delimiter)
         if len(roadnodes) == 1:
-            return self._idearoot
+            return self._itemroot
 
         roadnodes.pop(0)
-        idea_label = roadnodes.pop(0)
-        x_idea = self._idearoot.get_kid(idea_label, if_missing_create)
+        item_label = roadnodes.pop(0)
+        x_item = self._itemroot.get_kid(item_label, if_missing_create)
         while roadnodes != []:
-            x_idea = x_idea.get_kid(roadnodes.pop(0), if_missing_create)
+            x_item = x_item.get_kid(roadnodes.pop(0), if_missing_create)
 
-        return x_idea
+        return x_item
 
-    def get_idea_ranged_kids(
-        self, idea_road: str, x_gogo_calc: float = None, x_stop_calc: float = None
-    ) -> dict[IdeaUnit]:
-        x_idea = self.get_idea_obj(idea_road)
-        return x_idea.get_kids_in_range(x_gogo_calc, x_stop_calc)
+    def get_item_ranged_kids(
+        self, item_road: str, x_gogo_calc: float = None, x_stop_calc: float = None
+    ) -> dict[ItemUnit]:
+        x_item = self.get_item_obj(item_road)
+        return x_item.get_kids_in_range(x_gogo_calc, x_stop_calc)
 
-    def get_inheritor_idea_list(
+    def get_inheritor_item_list(
         self, math_road: RoadUnit, inheritor_road: RoadUnit
-    ) -> list[IdeaUnit]:
-        idea_roads = all_roadunits_between(math_road, inheritor_road)
-        return [self.get_idea_obj(x_idea_road) for x_idea_road in idea_roads]
+    ) -> list[ItemUnit]:
+        item_roads = all_roadunits_between(math_road, inheritor_road)
+        return [self.get_item_obj(x_item_road) for x_item_road in item_roads]
 
-    def _set_idea_dict(self):
-        idea_list = [self.get_idea_obj(self._fiscal_id)]
-        while idea_list != []:
-            x_idea = idea_list.pop()
-            x_idea.clear_gogo_calc_stop_calc()
-            for idea_kid in x_idea._kids.values():
-                idea_kid.set_parent_road(x_idea.get_road())
-                idea_kid.set_level(x_idea._level)
-                idea_list.append(idea_kid)
-            self._idea_dict[x_idea.get_road()] = x_idea
-            for x_reason_base in x_idea.reasonunits.keys():
+    def _set_item_dict(self):
+        item_list = [self.get_item_obj(self._fiscal_id)]
+        while item_list != []:
+            x_item = item_list.pop()
+            x_item.clear_gogo_calc_stop_calc()
+            for item_kid in x_item._kids.values():
+                item_kid.set_parent_road(x_item.get_road())
+                item_kid.set_level(x_item._level)
+                item_list.append(item_kid)
+            self._item_dict[x_item.get_road()] = x_item
+            for x_reason_base in x_item.reasonunits.keys():
                 self._reason_bases.add(x_reason_base)
 
-    def _raise_gogo_calc_stop_calc_exception(self, idea_road: RoadUnit):
-        exception_str = f"Error has occurred, Idea '{idea_road}' is having _gogo_calc and _stop_calc attributes set twice"
+    def _raise_gogo_calc_stop_calc_exception(self, item_road: RoadUnit):
+        exception_str = f"Error has occurred, Item '{item_road}' is having _gogo_calc and _stop_calc attributes set twice"
         raise _gogo_calc_stop_calc_Exception(exception_str)
 
-    def _distribute_math_attrs(self, math_idea: IdeaUnit):
-        single_range_idea_list = [math_idea]
-        while single_range_idea_list != []:
-            r_idea = single_range_idea_list.pop()
-            if r_idea._range_evaluated:
-                self._raise_gogo_calc_stop_calc_exception(r_idea.get_road())
-            if r_idea.is_math():
-                r_idea._gogo_calc = r_idea.begin
-                r_idea._stop_calc = r_idea.close
+    def _distribute_math_attrs(self, math_item: ItemUnit):
+        single_range_item_list = [math_item]
+        while single_range_item_list != []:
+            r_item = single_range_item_list.pop()
+            if r_item._range_evaluated:
+                self._raise_gogo_calc_stop_calc_exception(r_item.get_road())
+            if r_item.is_math():
+                r_item._gogo_calc = r_item.begin
+                r_item._stop_calc = r_item.close
             else:
-                parent_road = get_parent_road(r_idea.get_road())
-                parent_idea = self.get_idea_obj(parent_road)
-                r_idea._gogo_calc = parent_idea._gogo_calc
-                r_idea._stop_calc = parent_idea._stop_calc
-                self._range_inheritors[r_idea.get_road()] = math_idea.get_road()
-            r_idea._mold_gogo_calc_stop_calc()
+                parent_road = get_parent_road(r_item.get_road())
+                parent_item = self.get_item_obj(parent_road)
+                r_item._gogo_calc = parent_item._gogo_calc
+                r_item._stop_calc = parent_item._stop_calc
+                self._range_inheritors[r_item.get_road()] = math_item.get_road()
+            r_item._mold_gogo_calc_stop_calc()
 
-            single_range_idea_list.extend(iter(r_idea._kids.values()))
+            single_range_item_list.extend(iter(r_item._kids.values()))
 
-    def _set_ideatree_range_attrs(self):
-        for x_idea in self._idea_dict.values():
-            if x_idea.is_math():
-                self._distribute_math_attrs(x_idea)
+    def _set_itemtree_range_attrs(self):
+        for x_item in self._item_dict.values():
+            if x_item.is_math():
+                self._distribute_math_attrs(x_item)
 
             if (
-                not x_idea.is_kidless()
-                and x_idea.get_kids_mass_sum() == 0
-                and x_idea.mass != 0
+                not x_item.is_kidless()
+                and x_item.get_kids_mass_sum() == 0
+                and x_item.mass != 0
             ):
-                self._offtrack_kids_mass_set.add(x_idea.get_road())
+                self._offtrack_kids_mass_set.add(x_item.get_road())
 
     def _set_groupbox_acctunit_funds(self, keep_exceptions):
-        for x_idea in self._idea_dict.values():
-            x_idea.set_awardheirs_fund_give_fund_take()
-            if x_idea.is_kidless():
+        for x_item in self._item_dict.values():
+            x_item.set_awardheirs_fund_give_fund_take()
+            if x_item.is_kidless():
                 self._set_ancestors_pledge_fund_keep_attrs(
-                    x_idea.get_road(), keep_exceptions
+                    x_item.get_road(), keep_exceptions
                 )
-                self._allot_fund_share(x_idea)
+                self._allot_fund_share(x_item)
 
     def _set_ancestors_pledge_fund_keep_attrs(
         self, road: RoadUnit, keep_exceptions: bool = False
@@ -1096,63 +1092,63 @@ class BudUnit:
 
         while ancestor_roads != []:
             youngest_road = ancestor_roads.pop(0)
-            x_idea_obj = self.get_idea_obj(youngest_road)
-            x_idea_obj.add_to_descendant_pledge_count(x_descendant_pledge_count)
-            if x_idea_obj.is_kidless():
-                x_idea_obj.set_kidless_awardlines()
-                child_awardlines = x_idea_obj._awardlines
+            x_item_obj = self.get_item_obj(youngest_road)
+            x_item_obj.add_to_descendant_pledge_count(x_descendant_pledge_count)
+            if x_item_obj.is_kidless():
+                x_item_obj.set_kidless_awardlines()
+                child_awardlines = x_item_obj._awardlines
             else:
-                x_idea_obj.set_awardlines(child_awardlines)
+                x_item_obj.set_awardlines(child_awardlines)
 
-            if x_idea_obj._task:
+            if x_item_obj._task:
                 x_descendant_pledge_count += 1
 
             if (
                 group_everyone != False
-                and x_idea_obj._all_acct_cred != False
-                and x_idea_obj._all_acct_debt != False
-                and x_idea_obj._awardheirs != {}
+                and x_item_obj._all_acct_cred != False
+                and x_item_obj._all_acct_debt != False
+                and x_item_obj._awardheirs != {}
             ) or (
                 group_everyone != False
-                and x_idea_obj._all_acct_cred is False
-                and x_idea_obj._all_acct_debt is False
+                and x_item_obj._all_acct_cred is False
+                and x_item_obj._all_acct_debt is False
             ):
                 group_everyone = False
             elif group_everyone != False:
                 group_everyone = True
-            x_idea_obj._all_acct_cred = group_everyone
-            x_idea_obj._all_acct_debt = group_everyone
+            x_item_obj._all_acct_cred = group_everyone
+            x_item_obj._all_acct_debt = group_everyone
 
-            if x_idea_obj.healerlink.any_healer_id_exists():
+            if x_item_obj.healerlink.any_healer_id_exists():
                 keep_justified_by_problem = False
                 healerlink_count += 1
-                self._sum_healerlink_share += x_idea_obj.get_fund_share()
-            if x_idea_obj.problem_bool:
+                self._sum_healerlink_share += x_item_obj.get_fund_share()
+            if x_item_obj.problem_bool:
                 keep_justified_by_problem = True
 
         if keep_justified_by_problem is False or healerlink_count > 1:
             if keep_exceptions:
-                exception_str = f"IdeaUnit '{road}' cannot sponsor ancestor keeps."
+                exception_str = f"ItemUnit '{road}' cannot sponsor ancestor keeps."
                 raise Exception_keeps_justified(exception_str)
             self._keeps_justified = False
 
-    def _clear_ideatree_fund_and_active_status_attrs(self):
-        for x_idea in self._idea_dict.values():
-            x_idea.clear_awardlines()
-            x_idea.clear_descendant_pledge_count()
-            x_idea.clear_all_acct_cred_debt()
+    def _clear_itemtree_fund_and_active_status_attrs(self):
+        for x_item in self._item_dict.values():
+            x_item.clear_awardlines()
+            x_item.clear_descendant_pledge_count()
+            x_item.clear_all_acct_cred_debt()
 
-    def _set_kids_active_status_attrs(self, x_idea: IdeaUnit, parent_idea: IdeaUnit):
-        x_idea.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
-        x_idea.set_range_factheirs(self._idea_dict, self._range_inheritors)
+    def _set_kids_active_status_attrs(self, x_item: ItemUnit, parent_item: ItemUnit):
+        x_item.set_reasonheirs(self._item_dict, parent_item._reasonheirs)
+        x_item.set_range_factheirs(self._item_dict, self._range_inheritors)
         tt_count = self._tree_traverse_count
-        x_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
+        x_item.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
 
-    def _allot_fund_share(self, idea: IdeaUnit):
-        if idea.awardheir_exists():
-            self._set_groupboxs_fund_share(idea._awardheirs)
-        elif idea.awardheir_exists() is False:
-            self._add_to_acctunits_fund_give_take(idea.get_fund_share())
+    def _allot_fund_share(self, item: ItemUnit):
+        if item.awardheir_exists():
+            self._set_groupboxs_fund_share(item._awardheirs)
+        elif item.awardheir_exists() is False:
+            self._add_to_acctunits_fund_give_take(item.get_fund_share())
 
     def _create_groupboxs_metrics(self):
         self._groupboxs = {}
@@ -1176,8 +1172,8 @@ class BudUnit:
         self._create_groupboxs_metrics()
         self._reset_acctunit_fund_give_take()
 
-    def _clear_idea_dict_and_bud_obj_settle_attrs(self):
-        self._idea_dict = {self._idearoot.get_road(): self._idearoot}
+    def _clear_item_dict_and_bud_obj_settle_attrs(self):
+        self._item_dict = {self._itemroot.get_road(): self._itemroot}
         self._rational = False
         self._tree_traverse_count = 0
         self._offtrack_kids_mass_set = set()
@@ -1189,80 +1185,80 @@ class BudUnit:
         self._keep_dict = {}
         self._healers_dict = {}
 
-    def _set_ideatree_factheirs_teamheirs_awardheirs(self):
-        for x_idea in get_sorted_idea_list(list(self._idea_dict.values())):
-            if x_idea._root:
-                x_idea.set_factheirs(x_idea.factunits)
-                x_idea.set_idearoot_inherit_reasonheirs()
-                x_idea.set_teamheir(None, self._groupboxs)
-                x_idea.inherit_awardheirs()
+    def _set_itemtree_factheirs_teamheirs_awardheirs(self):
+        for x_item in get_sorted_item_list(list(self._item_dict.values())):
+            if x_item._root:
+                x_item.set_factheirs(x_item.factunits)
+                x_item.set_itemroot_inherit_reasonheirs()
+                x_item.set_teamheir(None, self._groupboxs)
+                x_item.inherit_awardheirs()
             else:
-                parent_idea = self.get_idea_obj(x_idea._parent_road)
-                x_idea.set_factheirs(parent_idea._factheirs)
-                x_idea.set_teamheir(parent_idea._teamheir, self._groupboxs)
-                x_idea.inherit_awardheirs(parent_idea._awardheirs)
-            x_idea.set_awardheirs_fund_give_fund_take()
+                parent_item = self.get_item_obj(x_item._parent_road)
+                x_item.set_factheirs(parent_item._factheirs)
+                x_item.set_teamheir(parent_item._teamheir, self._groupboxs)
+                x_item.inherit_awardheirs(parent_item._awardheirs)
+            x_item.set_awardheirs_fund_give_fund_take()
 
     def settle_bud(self, keep_exceptions: bool = False):
-        self._clear_idea_dict_and_bud_obj_settle_attrs()
-        self._set_idea_dict()
-        self._set_ideatree_range_attrs()
+        self._clear_item_dict_and_bud_obj_settle_attrs()
+        self._set_item_dict()
+        self._set_itemtree_range_attrs()
         self._set_acctunit_groupbox_respect_ledgers()
         self._clear_acctunit_fund_attrs()
-        self._clear_ideatree_fund_and_active_status_attrs()
-        self._set_ideatree_factheirs_teamheirs_awardheirs()
+        self._clear_itemtree_fund_and_active_status_attrs()
+        self._set_itemtree_factheirs_teamheirs_awardheirs()
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
-            self._set_ideatree_active_status_attrs()
+            self._set_itemtree_active_status_attrs()
             self._set_rational_attr()
             self._tree_traverse_count += 1
 
-        self._set_ideatree_fund_attrs(self._idearoot)
+        self._set_itemtree_fund_attrs(self._itemroot)
         self._set_groupbox_acctunit_funds(keep_exceptions)
         self._set_acctunit_fund_related_attrs()
         self._set_bud_keep_attrs()
 
-    def _set_ideatree_active_status_attrs(self):
-        for x_idea in get_sorted_idea_list(list(self._idea_dict.values())):
-            if x_idea._root:
+    def _set_itemtree_active_status_attrs(self):
+        for x_item in get_sorted_item_list(list(self._item_dict.values())):
+            if x_item._root:
                 tt_count = self._tree_traverse_count
-                root_idea = self._idearoot
-                root_idea.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
+                root_item = self._itemroot
+                root_item.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
             else:
-                parent_idea = self.get_idea_obj(x_idea._parent_road)
-                self._set_kids_active_status_attrs(x_idea, parent_idea)
+                parent_item = self.get_item_obj(x_item._parent_road)
+                self._set_kids_active_status_attrs(x_item, parent_item)
 
-    def _set_ideatree_fund_attrs(self, root_idea: IdeaUnit):
-        root_idea.set_fund_attr(0, self.fund_pool, self.fund_pool)
+    def _set_itemtree_fund_attrs(self, root_item: ItemUnit):
+        root_item.set_fund_attr(0, self.fund_pool, self.fund_pool)
         # no function recursion, recursion by iterateing over list that can be added to by iterations
-        cache_idea_list = [root_idea]
-        while cache_idea_list != []:
-            parent_idea = cache_idea_list.pop()
-            kids_items = parent_idea._kids.items()
-            x_ledger = {x_road: idea_kid.mass for x_road, idea_kid in kids_items}
-            parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset
+        cache_item_list = [root_item]
+        while cache_item_list != []:
+            parent_item = cache_item_list.pop()
+            kids_items = parent_item._kids.items()
+            x_ledger = {x_road: item_kid.mass for x_road, item_kid in kids_items}
+            parent_fund_num = parent_item._fund_cease - parent_item._fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_coin)
 
             fund_onset = None
             fund_cease = None
-            for x_idea in parent_idea._kids.values():
+            for x_item in parent_item._kids.values():
                 if fund_onset is None:
-                    fund_onset = parent_idea._fund_onset
-                    fund_cease = fund_onset + alloted_fund_num.get(x_idea._label)
+                    fund_onset = parent_item._fund_onset
+                    fund_cease = fund_onset + alloted_fund_num.get(x_item._label)
                 else:
                     fund_onset = fund_cease
-                    fund_cease += alloted_fund_num.get(x_idea._label)
-                x_idea.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
-                cache_idea_list.append(x_idea)
+                    fund_cease += alloted_fund_num.get(x_item._label)
+                x_item.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
+                cache_item_list.append(x_item)
 
     def _set_rational_attr(self):
-        any_idea_active_status_has_altered = False
-        for idea in self._idea_dict.values():
-            if idea._active_hx.get(self._tree_traverse_count) is not None:
-                any_idea_active_status_has_altered = True
+        any_item_active_status_has_altered = False
+        for item in self._item_dict.values():
+            if item._active_hx.get(self._tree_traverse_count) is not None:
+                any_item_active_status_has_altered = True
 
-        if any_idea_active_status_has_altered is False:
+        if any_item_active_status_has_altered is False:
             self._rational = True
 
     def _set_acctunit_fund_related_attrs(self):
@@ -1280,26 +1276,26 @@ class BudUnit:
     def _set_keep_dict(self):
         if self._keeps_justified is False:
             self._sum_healerlink_share = 0
-        for x_idea in self._idea_dict.values():
+        for x_item in self._item_dict.values():
             if self._sum_healerlink_share == 0:
-                x_idea._healerlink_ratio = 0
+                x_item._healerlink_ratio = 0
             else:
                 x_sum = self._sum_healerlink_share
-                x_idea._healerlink_ratio = x_idea.get_fund_share() / x_sum
-            if self._keeps_justified and x_idea.healerlink.any_healer_id_exists():
-                self._keep_dict[x_idea.get_road()] = x_idea
+                x_item._healerlink_ratio = x_item.get_fund_share() / x_sum
+            if self._keeps_justified and x_item.healerlink.any_healer_id_exists():
+                self._keep_dict[x_item.get_road()] = x_item
 
-    def _get_healers_dict(self) -> dict[HealerID, dict[RoadUnit, IdeaUnit]]:
+    def _get_healers_dict(self) -> dict[HealerID, dict[RoadUnit, ItemUnit]]:
         _healers_dict = {}
-        for x_keep_road, x_keep_idea in self._keep_dict.items():
-            for x_healer_id in x_keep_idea.healerlink._healer_ids:
+        for x_keep_road, x_keep_item in self._keep_dict.items():
+            for x_healer_id in x_keep_item.healerlink._healer_ids:
                 x_groupbox = self.get_groupbox(x_healer_id)
                 for x_acct_id in x_groupbox._memberships.keys():
                     if _healers_dict.get(x_acct_id) is None:
-                        _healers_dict[x_acct_id] = {x_keep_road: x_keep_idea}
+                        _healers_dict[x_acct_id] = {x_keep_road: x_keep_item}
                     else:
                         healer_dict = _healers_dict.get(x_acct_id)
-                        healer_dict[x_keep_road] = x_keep_idea
+                        healer_dict[x_keep_road] = x_keep_item
         return _healers_dict
 
     def _get_buildable_keeps(self) -> bool:
@@ -1312,11 +1308,11 @@ class BudUnit:
         self._reset_groupboxs_fund_give_take()
         self._reset_acctunit_fund_give_take()
 
-    def get_idea_tree_ordered_road_list(
+    def get_item_tree_ordered_road_list(
         self, no_range_descendants: bool = False
     ) -> list[RoadUnit]:
-        idea_list = list(self.get_idea_dict().values())
-        node_dict = {idea.get_road().lower(): idea.get_road() for idea in idea_list}
+        item_list = list(self.get_item_dict().values())
+        node_dict = {item.get_road().lower(): item.get_road() for item in item_list}
         node_lowercase_ordered_list = sorted(list(node_dict))
         node_orginalcase_ordered_list = [
             node_dict[node_l] for node_l in node_lowercase_ordered_list
@@ -1331,19 +1327,19 @@ class BudUnit:
                 if len(anc_list) == 1:
                     list_x.append(road)
                 elif len(anc_list) == 2:
-                    if self._idearoot.begin is None and self._idearoot.close is None:
+                    if self._itemroot.begin is None and self._itemroot.close is None:
                         list_x.append(road)
                 else:
-                    parent_idea = self.get_idea_obj(road=anc_list[1])
-                    if parent_idea.begin is None and parent_idea.close is None:
+                    parent_item = self.get_item_obj(road=anc_list[1])
+                    if parent_item.begin is None and parent_item.close is None:
                         list_x.append(road)
 
         return list_x
 
     def get_factunits_dict(self) -> dict[str, str]:
         x_dict = {}
-        if self._idearoot.factunits is not None:
-            for fact_road, fact_obj in self._idearoot.factunits.items():
+        if self._itemroot.factunits is not None:
+            for fact_road, fact_obj in self._itemroot.factunits.items():
                 x_dict[fact_road] = fact_obj.get_dict()
         return x_dict
 
@@ -1367,7 +1363,7 @@ class BudUnit:
             "_fiscal_id": self._fiscal_id,
             "max_tree_traverse": self.max_tree_traverse,
             "_road_delimiter": self._road_delimiter,
-            "_idearoot": self._idearoot.get_dict(),
+            "_itemroot": self._itemroot.get_dict(),
         }
         if self.credor_respect is not None:
             x_dict["credor_respect"] = self.credor_respect
@@ -1381,19 +1377,19 @@ class BudUnit:
     def get_json(self) -> str:
         return get_json_from_dict(self.get_dict())
 
-    def set_dominate_pledge_idea(self, idea_kid: IdeaUnit):
-        idea_kid.pledge = True
-        self.set_idea(
-            idea_kid=idea_kid,
-            parent_road=self.make_road(idea_kid._parent_road),
+    def set_dominate_pledge_item(self, item_kid: ItemUnit):
+        item_kid.pledge = True
+        self.set_item(
+            item_kid=item_kid,
+            parent_road=self.make_road(item_kid._parent_road),
             filter_out_missing_awardlinks_group_ids=True,
-            create_missing_ideas=True,
+            create_missing_items=True,
         )
 
     def set_offtrack_fund(self) -> float:
         mass_set = self._offtrack_kids_mass_set
         self._offtrack_fund = sum(
-            self.get_idea_obj(x_roadunit).get_fund_share() for x_roadunit in mass_set
+            self.get_item_obj(x_roadunit).get_fund_share() for x_roadunit in mass_set
         )
 
 
@@ -1415,7 +1411,7 @@ def budunit_shop(
         _fiscal_id=_fiscal_id,
         _accts=get_empty_dict_if_none(None),
         _groupboxs={},
-        _idea_dict=get_empty_dict_if_none(None),
+        _item_dict=get_empty_dict_if_none(None),
         _keep_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
@@ -1432,7 +1428,7 @@ def budunit_shop(
         _reason_bases=set(),
         _range_inheritors={},
     )
-    x_bud._idearoot = ideaunit_shop(
+    x_bud._itemroot = itemunit_shop(
         _root=True,
         _uid=1,
         _level=0,
@@ -1457,7 +1453,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
     x_bud._fiscal_id = obj_from_bud_dict(bud_dict, "_fiscal_id")
-    x_bud._idearoot._label = obj_from_bud_dict(bud_dict, "_fiscal_id")
+    x_bud._itemroot._label = obj_from_bud_dict(bud_dict, "_fiscal_id")
     bud_road_delimiter = obj_from_bud_dict(bud_dict, "_road_delimiter")
     x_bud._road_delimiter = default_road_delimiter_if_none(bud_road_delimiter)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
@@ -1476,78 +1472,78 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     for x_acctunit in x_accts:
         x_bud.set_acctunit(x_acctunit)
     x_bud._originunit = obj_from_bud_dict(bud_dict, "_originunit")
-    create_idearoot_from_bud_dict(x_bud, bud_dict)
+    create_itemroot_from_bud_dict(x_bud, bud_dict)
     return x_bud
 
 
-def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
-    idearoot_dict = bud_dict.get("_idearoot")
-    x_bud._idearoot = ideaunit_shop(
+def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
+    itemroot_dict = bud_dict.get("_itemroot")
+    x_bud._itemroot = itemunit_shop(
         _root=True,
         _label=x_bud._fiscal_id,
         _parent_road="",
         _level=0,
-        _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
-        mass=get_obj_from_idea_dict(idearoot_dict, "mass"),
-        begin=get_obj_from_idea_dict(idearoot_dict, "begin"),
-        close=get_obj_from_idea_dict(idearoot_dict, "close"),
-        numor=get_obj_from_idea_dict(idearoot_dict, "numor"),
-        denom=get_obj_from_idea_dict(idearoot_dict, "denom"),
-        morph=get_obj_from_idea_dict(idearoot_dict, "morph"),
-        gogo_want=get_obj_from_idea_dict(idearoot_dict, "gogo_want"),
-        stop_want=get_obj_from_idea_dict(idearoot_dict, "stop_want"),
-        problem_bool=get_obj_from_idea_dict(idearoot_dict, "problem_bool"),
-        reasonunits=get_obj_from_idea_dict(idearoot_dict, "reasonunits"),
-        teamunit=get_obj_from_idea_dict(idearoot_dict, "teamunit"),
-        healerlink=get_obj_from_idea_dict(idearoot_dict, "healerlink"),
-        factunits=get_obj_from_idea_dict(idearoot_dict, "factunits"),
-        awardlinks=get_obj_from_idea_dict(idearoot_dict, "awardlinks"),
-        _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
-        _road_delimiter=get_obj_from_idea_dict(idearoot_dict, "_road_delimiter"),
+        _uid=get_obj_from_item_dict(itemroot_dict, "_uid"),
+        mass=get_obj_from_item_dict(itemroot_dict, "mass"),
+        begin=get_obj_from_item_dict(itemroot_dict, "begin"),
+        close=get_obj_from_item_dict(itemroot_dict, "close"),
+        numor=get_obj_from_item_dict(itemroot_dict, "numor"),
+        denom=get_obj_from_item_dict(itemroot_dict, "denom"),
+        morph=get_obj_from_item_dict(itemroot_dict, "morph"),
+        gogo_want=get_obj_from_item_dict(itemroot_dict, "gogo_want"),
+        stop_want=get_obj_from_item_dict(itemroot_dict, "stop_want"),
+        problem_bool=get_obj_from_item_dict(itemroot_dict, "problem_bool"),
+        reasonunits=get_obj_from_item_dict(itemroot_dict, "reasonunits"),
+        teamunit=get_obj_from_item_dict(itemroot_dict, "teamunit"),
+        healerlink=get_obj_from_item_dict(itemroot_dict, "healerlink"),
+        factunits=get_obj_from_item_dict(itemroot_dict, "factunits"),
+        awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
+        _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
+        _road_delimiter=get_obj_from_item_dict(itemroot_dict, "_road_delimiter"),
         _bud_fiscal_id=x_bud._fiscal_id,
         _fund_coin=default_fund_coin_if_none(x_bud.fund_coin),
     )
-    create_idearoot_kids_from_dict(x_bud, idearoot_dict)
+    create_itemroot_kids_from_dict(x_bud, itemroot_dict)
 
 
-def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
-    to_evaluate_idea_dicts = []
+def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
+    to_evaluate_item_dicts = []
     parent_road_str = "parent_road"
     # for every kid dict, set parent_road in dict, add to to_evaluate_list
-    for x_dict in get_obj_from_idea_dict(idearoot_dict, "_kids").values():
+    for x_dict in get_obj_from_item_dict(itemroot_dict, "_kids").values():
         x_dict[parent_road_str] = x_bud._fiscal_id
-        to_evaluate_idea_dicts.append(x_dict)
+        to_evaluate_item_dicts.append(x_dict)
 
-    while to_evaluate_idea_dicts != []:
-        idea_dict = to_evaluate_idea_dicts.pop(0)
+    while to_evaluate_item_dicts != []:
+        item_dict = to_evaluate_item_dicts.pop(0)
         # for every kid dict, set parent_road in dict, add to to_evaluate_list
-        for kid_dict in get_obj_from_idea_dict(idea_dict, "_kids").values():
-            parent_road = get_obj_from_idea_dict(idea_dict, parent_road_str)
-            kid_label = get_obj_from_idea_dict(idea_dict, "_label")
+        for kid_dict in get_obj_from_item_dict(item_dict, "_kids").values():
+            parent_road = get_obj_from_item_dict(item_dict, parent_road_str)
+            kid_label = get_obj_from_item_dict(item_dict, "_label")
             kid_dict[parent_road_str] = x_bud.make_road(parent_road, kid_label)
-            to_evaluate_idea_dicts.append(kid_dict)
-        x_ideakid = ideaunit_shop(
-            _label=get_obj_from_idea_dict(idea_dict, "_label"),
-            mass=get_obj_from_idea_dict(idea_dict, "mass"),
-            _uid=get_obj_from_idea_dict(idea_dict, "_uid"),
-            begin=get_obj_from_idea_dict(idea_dict, "begin"),
-            close=get_obj_from_idea_dict(idea_dict, "close"),
-            numor=get_obj_from_idea_dict(idea_dict, "numor"),
-            denom=get_obj_from_idea_dict(idea_dict, "denom"),
-            morph=get_obj_from_idea_dict(idea_dict, "morph"),
-            gogo_want=get_obj_from_idea_dict(idea_dict, "gogo_want"),
-            stop_want=get_obj_from_idea_dict(idea_dict, "stop_want"),
-            pledge=get_obj_from_idea_dict(idea_dict, "pledge"),
-            problem_bool=get_obj_from_idea_dict(idea_dict, "problem_bool"),
-            reasonunits=get_obj_from_idea_dict(idea_dict, "reasonunits"),
-            teamunit=get_obj_from_idea_dict(idea_dict, "teamunit"),
-            healerlink=get_obj_from_idea_dict(idea_dict, "healerlink"),
-            _originunit=get_obj_from_idea_dict(idea_dict, "_originunit"),
-            awardlinks=get_obj_from_idea_dict(idea_dict, "awardlinks"),
-            factunits=get_obj_from_idea_dict(idea_dict, "factunits"),
-            _is_expanded=get_obj_from_idea_dict(idea_dict, "_is_expanded"),
+            to_evaluate_item_dicts.append(kid_dict)
+        x_itemkid = itemunit_shop(
+            _label=get_obj_from_item_dict(item_dict, "_label"),
+            mass=get_obj_from_item_dict(item_dict, "mass"),
+            _uid=get_obj_from_item_dict(item_dict, "_uid"),
+            begin=get_obj_from_item_dict(item_dict, "begin"),
+            close=get_obj_from_item_dict(item_dict, "close"),
+            numor=get_obj_from_item_dict(item_dict, "numor"),
+            denom=get_obj_from_item_dict(item_dict, "denom"),
+            morph=get_obj_from_item_dict(item_dict, "morph"),
+            gogo_want=get_obj_from_item_dict(item_dict, "gogo_want"),
+            stop_want=get_obj_from_item_dict(item_dict, "stop_want"),
+            pledge=get_obj_from_item_dict(item_dict, "pledge"),
+            problem_bool=get_obj_from_item_dict(item_dict, "problem_bool"),
+            reasonunits=get_obj_from_item_dict(item_dict, "reasonunits"),
+            teamunit=get_obj_from_item_dict(item_dict, "teamunit"),
+            healerlink=get_obj_from_item_dict(item_dict, "healerlink"),
+            _originunit=get_obj_from_item_dict(item_dict, "_originunit"),
+            awardlinks=get_obj_from_item_dict(item_dict, "awardlinks"),
+            factunits=get_obj_from_item_dict(item_dict, "factunits"),
+            _is_expanded=get_obj_from_item_dict(item_dict, "_is_expanded"),
         )
-        x_bud.set_idea(x_ideakid, parent_road=idea_dict[parent_road_str])
+        x_bud.set_item(x_itemkid, parent_road=item_dict[parent_road_str])
 
 
 def obj_from_bud_dict(
@@ -1579,6 +1575,6 @@ def get_dict_of_bud_from_dict(x_dict: dict[str, dict]) -> dict[str, BudUnit]:
     return budunits
 
 
-def get_sorted_idea_list(x_list: list[IdeaUnit]) -> list[IdeaUnit]:
+def get_sorted_item_list(x_list: list[ItemUnit]) -> list[ItemUnit]:
     x_list.sort(key=lambda x: x.get_road(), reverse=False)
     return x_list

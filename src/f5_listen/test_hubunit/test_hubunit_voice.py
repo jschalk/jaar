@@ -228,13 +228,13 @@ def test_HubUnit_append_gifts_to_voice_file_AddsgiftsTovoiceFile(
     sports_road = voice_bud.make_l1_road(sports_str)
     knee_str = "knee"
     knee_road = voice_bud.make_road(sports_road, knee_str)
-    assert voice_bud.idea_exists(sports_road) is False
-    assert voice_bud.idea_exists(knee_road) is False
+    assert voice_bud.item_exists(sports_road) is False
+    assert voice_bud.item_exists(knee_road) is False
 
     # WHEN
     new_bud = sue_hubunit.append_gifts_to_voice_file()
 
     # THEN
     assert new_bud != voice_bud
-    assert new_bud.idea_exists(sports_road)
-    assert new_bud.idea_exists(knee_road)
+    assert new_bud.item_exists(sports_road)
+    assert new_bud.item_exists(knee_road)

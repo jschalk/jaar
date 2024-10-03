@@ -1,8 +1,8 @@
 from src.f0_instrument.file import delete_dir, save_file, open_file
 from src.f0_instrument.db_tool import check_connection
 from src.f2_bud.healer import healerlink_shop
-from src.f2_bud.idea import ideaunit_shop
-from src.f2_bud.bud_graphics import display_ideatree
+from src.f2_bud.item import itemunit_shop
+from src.f2_bud.bud_graphics import display_itemtree
 from src.f5_listen.hubunit import hubunit_shop, treasury_file_name
 from src.f5_listen.examples.listen_env import (
     env_dir_setup_cleanup,
@@ -27,10 +27,10 @@ def test_HubUnit_get_keep_roads_RaisesErrorWhen__keeps_justified_IsFalse(
     texas_road = sue_voice_bud.make_l1_road(texas_str)
     dallas_str = "dallas"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_str)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
-    sue_voice_bud.set_idea(ideaunit_shop(dallas_str), texas_road)
-    sue_voice_bud.edit_idea_attr(texas_road, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.edit_idea_attr(dallas_road, healerlink=healerlink_shop({sue_str}))
+    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    sue_voice_bud.set_item(itemunit_shop(dallas_str), texas_road)
+    sue_voice_bud.edit_item_attr(texas_road, healerlink=healerlink_shop({sue_str}))
+    sue_voice_bud.edit_item_attr(dallas_road, healerlink=healerlink_shop({sue_str}))
     sue_voice_bud.settle_bud()
     assert sue_voice_bud._keeps_justified is False
     sue_hubunit.save_voice_bud(sue_voice_bud)
@@ -55,8 +55,8 @@ def test_HubUnit_get_keep_roads_RaisesErrorWhen__keeps_buildable_IsFalse(
     sue_voice_bud.add_acctunit(sue_str)
     texas_str = "Tex/as"
     texas_road = sue_voice_bud.make_l1_road(texas_str)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
-    sue_voice_bud.edit_idea_attr(texas_road, healerlink=healerlink_shop({sue_str}))
+    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    sue_voice_bud.edit_item_attr(texas_road, healerlink=healerlink_shop({sue_str}))
     sue_voice_bud.settle_bud()
     assert sue_voice_bud._keeps_justified
     assert sue_voice_bud._keeps_buildable is False
@@ -80,17 +80,17 @@ def test_HubUnit_get_keep_roads_ReturnsObj(env_dir_setup_cleanup, graphics_bool)
     sue_voice_bud.add_acctunit(sue_str)
     texas_str = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_str)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
+    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     elpaso_str = "el paso"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_str)
     elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_str)
-    dallas_idea = ideaunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
-    elpaso_idea = ideaunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.set_idea(dallas_idea, texas_road)
-    sue_voice_bud.set_idea(elpaso_idea, texas_road)
+    dallas_item = itemunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
+    elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
+    sue_voice_bud.set_item(dallas_item, texas_road)
+    sue_voice_bud.set_item(elpaso_item, texas_road)
     sue_voice_bud.settle_bud()
-    display_ideatree(sue_voice_bud, mode="Keep", graphics_bool=graphics_bool)
+    display_itemtree(sue_voice_bud, mode="Keep", graphics_bool=graphics_bool)
     sue_hubunit.save_voice_bud(sue_voice_bud)
 
     # WHEN
@@ -115,16 +115,16 @@ def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
     sue_voice_bud.add_acctunit(bob_str)
     texas_str = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_str)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
+    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_str)
-    dallas_idea = ideaunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.set_idea(dallas_idea, texas_road)
+    dallas_item = itemunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
+    sue_voice_bud.set_item(dallas_item, texas_road)
     elpaso_str = "el paso"
     elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_str)
-    elpaso_idea = ideaunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.set_idea(elpaso_idea, texas_road)
-    display_ideatree(sue_voice_bud, mode="Keep", graphics_bool=graphics_bool)
+    elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
+    sue_voice_bud.set_item(elpaso_item, texas_road)
+    display_itemtree(sue_voice_bud, mode="Keep", graphics_bool=graphics_bool)
     sue_hubunit.save_voice_bud(sue_voice_bud)
     sue_dallas_hubunit = hubunit_shop(env_dir(), None, sue_str, dallas_road)
     sue_elpaso_hubunit = hubunit_shop(env_dir(), None, sue_str, elpaso_road)
@@ -253,17 +253,17 @@ def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(
     sue_voice_bud.add_acctunit(sue_str)
     texas_str = "Texas"
     texas_road = sue_voice_bud.make_l1_road(texas_str)
-    sue_voice_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
+    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     elpaso_str = "el paso"
     dallas_road = sue_voice_bud.make_road(texas_road, dallas_str)
     elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_str)
-    dallas_idea = ideaunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
-    elpaso_idea = ideaunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.set_idea(dallas_idea, texas_road)
-    sue_voice_bud.set_idea(elpaso_idea, texas_road)
+    dallas_item = itemunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
+    elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
+    sue_voice_bud.set_item(dallas_item, texas_road)
+    sue_voice_bud.set_item(elpaso_item, texas_road)
     sue_voice_bud.settle_bud()
-    display_ideatree(sue_voice_bud, mode="Keep", graphics_bool=graphics_bool)
+    display_itemtree(sue_voice_bud, mode="Keep", graphics_bool=graphics_bool)
     sue_hubunit.save_voice_bud(sue_voice_bud)
 
     dallas_hubunit = hubunit_shop(env_dir(), None, sue_str, dallas_road)

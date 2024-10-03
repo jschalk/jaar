@@ -36,11 +36,11 @@ def test_get_keep_path_ReturnsCorrectObj():
     dallas_str = "dallas"
     elpaso_str = "el paso"
     kern_str = "kern"
-    idearoot = get_rootpart_of_keep_dir()
-    texas_road = create_road_from_nodes([idearoot, texas_str])
-    dallas_road = create_road_from_nodes([idearoot, texas_str, dallas_str])
-    elpaso_road = create_road_from_nodes([idearoot, texas_str, elpaso_str])
-    kern_road = create_road_from_nodes([idearoot, texas_str, elpaso_str, kern_str])
+    itemroot = get_rootpart_of_keep_dir()
+    texas_road = create_road_from_nodes([itemroot, texas_str])
+    dallas_road = create_road_from_nodes([itemroot, texas_str, dallas_str])
+    elpaso_road = create_road_from_nodes([itemroot, texas_str, elpaso_str])
+    kern_road = create_road_from_nodes([itemroot, texas_str, elpaso_str, kern_str])
 
     # WHEN
     texas_path = get_keep_path(sue_hubunit, texas_road)
@@ -49,13 +49,13 @@ def test_get_keep_path_ReturnsCorrectObj():
     kern_path = get_keep_path(sue_hubunit, kern_road)
 
     # THEN
-    idearoot_dir = f"{sue_hubunit.keeps_dir()}/{get_rootpart_of_keep_dir()}"
+    itemroot_dir = f"{sue_hubunit.keeps_dir()}/{get_rootpart_of_keep_dir()}"
     print(f"{kern_road=}")
-    print(f"{idearoot_dir=}")
-    assert texas_path == f"{idearoot_dir}/{texas_str}"
-    assert dallas_path == f"{idearoot_dir}/{texas_str}/{dallas_str}"
-    assert elpaso_path == f"{idearoot_dir}/{texas_str}/{elpaso_str}"
-    assert kern_path == f"{idearoot_dir}/{texas_str}/{elpaso_str}/{kern_str}"
+    print(f"{itemroot_dir=}")
+    assert texas_path == f"{itemroot_dir}/{texas_str}"
+    assert dallas_path == f"{itemroot_dir}/{texas_str}/{dallas_str}"
+    assert elpaso_path == f"{itemroot_dir}/{texas_str}/{elpaso_str}"
+    assert kern_path == f"{itemroot_dir}/{texas_str}/{elpaso_str}/{kern_str}"
 
     # WHEN / THEN
     diff_root_texas_road = create_road_from_nodes([peru_str, texas_str])

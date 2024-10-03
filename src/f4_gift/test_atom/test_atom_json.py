@@ -1,5 +1,5 @@
 from src.f1_road.road import create_road
-from src.f2_bud.bud_tool import bud_idea_factunit_str
+from src.f2_bud.bud_tool import bud_item_factunit_str
 from src.f4_gift.atom_config import (
     required_args_str,
     optional_args_str,
@@ -22,7 +22,7 @@ def test_AtomUnit_get_dict_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_str)
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
-    x_category = bud_idea_factunit_str()
+    x_category = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
     open_str = "open"
@@ -55,7 +55,7 @@ def test_AtomUnit_get_json_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_str)
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
-    x_category = bud_idea_factunit_str()
+    x_category = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
     open_str = "open"
@@ -83,7 +83,7 @@ def test_atomunit_get_from_json_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_str)
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
-    x_category = bud_idea_factunit_str()
+    x_category = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
     open_str = "open"

@@ -4,7 +4,7 @@ workspace {
 */
 
     model {
-        activeperson = person "Active Person" "Ready to listen, judge, lead."
+        activeperson = person "Active Person" "Listen, judge, lead."
         jaar = person "Datastore and procedures" "Connect to others."
         interface = softwareSystem "Interface" "Listening to needs, judging metrics, leading with bud."
         listener = softwareSystem "Listens to others" "Goes to Keep and listens"

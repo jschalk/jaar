@@ -222,7 +222,7 @@ def is_string_in_road(string: str, road: RoadUnit) -> bool:
 def replace_road_delimiter(road: RoadUnit, old_delimiter: str, new_delimiter: str):
     if is_string_in_road(string=new_delimiter, road=road):
         raise InvaliddelimiterReplaceException(
-            f"Cannot replace_road_delimiter '{old_delimiter}' with '{new_delimiter}' because the new one already exists in road '{road}'."
+            f"Cannot replace_road_delimiter '{old_delimiter}' with '{new_delimiter}' because the new one exists in road '{road}'."
         )
     return road.replace(old_delimiter, new_delimiter)
 

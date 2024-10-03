@@ -4,7 +4,7 @@ from src.f1_road.road import (
     get_default_fiscal_id_roadnode,
     RoadNode,
 )
-from src.f2_bud.idea import ideaunit_shop
+from src.f2_bud.item import itemunit_shop
 from src.f2_bud.bud import BudUnit, budunit_shop
 from src.f5_listen.hubunit import hubunit_shop, HubUnit
 from src.f5_listen.listen import listen_to_owner_jobs, create_job_file_from_duty_file
@@ -100,7 +100,7 @@ def get_example_yao_bud() -> BudUnit:
     zia_str = "Zia"
     bob_str = "Bob"
     yao_speaker = budunit_shop(yao_str, get_default_fiscal_id_roadnode())
-    yao_speaker.set_idea(ideaunit_shop(run_str()), casa_road())
+    yao_speaker.set_item(itemunit_shop(run_str()), casa_road())
     yao_speaker.add_acctunit(yao_str, debtit_belief=10)
     yao_speaker.add_acctunit(zia_str, debtit_belief=30)
     yao_speaker.add_acctunit(bob_str, debtit_belief=40)
@@ -111,13 +111,13 @@ def get_example_yao_bud() -> BudUnit:
 def get_example_yao_job1_speaker() -> BudUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_bud()
-    yao_speaker.del_idea_obj(run_road())
+    yao_speaker.del_item_obj(run_road())
     yao_speaker.set_acct_respect(40)
-    yao_speaker.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
-    yao_speaker.set_idea(ideaunit_shop(hungry_str()), eat_road())
-    yao_speaker.set_idea(ideaunit_shop(full_str()), eat_road())
-    cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    yao_speaker.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
+    yao_speaker.set_item(itemunit_shop(hungry_str()), eat_road())
+    yao_speaker.set_item(itemunit_shop(full_str()), eat_road())
+    cook_itemunit = yao_speaker.get_item_obj(cook_road())
+    cook_itemunit.teamunit.set_teamlink(yao_str)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
     return yao_speaker
@@ -126,19 +126,19 @@ def get_example_yao_job1_speaker() -> BudUnit:
 def get_example_yao_job2_speaker() -> BudUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_bud()
-    yao_speaker.del_idea_obj(run_road())
+    yao_speaker.del_item_obj(run_road())
     yao_speaker.set_acct_respect(30)
-    yao_speaker.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_road())
-    yao_speaker.set_idea(ideaunit_shop(hungry_str()), eat_road())
-    yao_speaker.set_idea(ideaunit_shop(full_str()), eat_road())
-    cook_ideaunit = yao_speaker.get_idea_obj(cook_road())
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    yao_speaker.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
+    yao_speaker.set_item(itemunit_shop(hungry_str()), eat_road())
+    yao_speaker.set_item(itemunit_shop(full_str()), eat_road())
+    cook_itemunit = yao_speaker.get_item_obj(cook_road())
+    cook_itemunit.teamunit.set_teamlink(yao_str)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
     yao_speaker.set_fact(eat_road(), hungry_road())
 
-    yao_speaker.set_idea(ideaunit_shop(sweep_str(), pledge=True), casa_road())
-    yao_speaker.set_idea(ideaunit_shop(dirty_str()), sanitation_road())
-    yao_speaker.set_idea(ideaunit_shop(clean_str()), sanitation_road())
+    yao_speaker.set_item(itemunit_shop(sweep_str(), pledge=True), casa_road())
+    yao_speaker.set_item(itemunit_shop(dirty_str()), sanitation_road())
+    yao_speaker.set_item(itemunit_shop(clean_str()), sanitation_road())
     yao_speaker.edit_reason(sweep_road(), sanitation_road(), dirty_road())
     yao_speaker.set_fact(sweep_road(), dirty_road())
     return yao_speaker
@@ -146,11 +146,11 @@ def get_example_yao_job2_speaker() -> BudUnit:
 
 def get_example_yao_job3_speaker() -> BudUnit:
     yao_speaker = get_example_yao_bud()
-    yao_speaker.del_idea_obj(run_road())
+    yao_speaker.del_item_obj(run_road())
     yao_speaker.set_acct_respect(10)
-    yao_speaker.set_idea(ideaunit_shop(sweep_str(), pledge=True), casa_road())
-    yao_speaker.set_idea(ideaunit_shop(dirty_str()), sanitation_road())
-    yao_speaker.set_idea(ideaunit_shop(clean_str()), sanitation_road())
+    yao_speaker.set_item(itemunit_shop(sweep_str(), pledge=True), casa_road())
+    yao_speaker.set_item(itemunit_shop(dirty_str()), sanitation_road())
+    yao_speaker.set_item(itemunit_shop(clean_str()), sanitation_road())
     yao_speaker.edit_reason(sweep_road(), sanitation_road(), dirty_road())
     yao_speaker.set_fact(sweep_road(), dirty_road())
     return yao_speaker
@@ -254,15 +254,15 @@ def get_example_yao_voice_with_3_healers():
     yao_str = yao_voice.get_acct("Yao").acct_id
     bob_str = yao_voice.get_acct("Bob").acct_id
     zia_str = yao_voice.get_acct("Zia").acct_id
-    iowa_idea = ideaunit_shop(get_iowa_str(), problem_bool=True)
-    ohio_idea = ideaunit_shop(get_ohio_str(), problem_bool=True)
-    utah_idea = ideaunit_shop(get_utah_str(), problem_bool=True)
-    iowa_idea.healerlink.set_healer_id(get_yao_iowa_hubunit().owner_id)
-    ohio_idea.healerlink.set_healer_id(get_yao_ohio_hubunit().owner_id)
-    utah_idea.healerlink.set_healer_id(get_zia_utah_hubunit().owner_id)
-    yao_voice.set_idea(iowa_idea, get_usa_road())
-    yao_voice.set_idea(ohio_idea, get_usa_road())
-    yao_voice.set_idea(utah_idea, get_usa_road())
+    iowa_item = itemunit_shop(get_iowa_str(), problem_bool=True)
+    ohio_item = itemunit_shop(get_ohio_str(), problem_bool=True)
+    utah_item = itemunit_shop(get_utah_str(), problem_bool=True)
+    iowa_item.healerlink.set_healer_id(get_yao_iowa_hubunit().owner_id)
+    ohio_item.healerlink.set_healer_id(get_yao_ohio_hubunit().owner_id)
+    utah_item.healerlink.set_healer_id(get_zia_utah_hubunit().owner_id)
+    yao_voice.set_item(iowa_item, get_usa_road())
+    yao_voice.set_item(ohio_item, get_usa_road())
+    yao_voice.set_item(utah_item, get_usa_road())
 
     return yao_voice
 
@@ -275,18 +275,18 @@ def get_example_yao_voice_with_3_healers():
 #     # yao_job3 with 1 new task, fact stays with it
 
 #     yao_voice0 = get_example_yao_voice_with_3_healers()
-#     yao_voice0.del_idea_obj(run_road())
-#     yao_voice0.set_l1_idea(ideaunit_shop(get_location_str()))
-#     yao_voice0.set_idea(ideaunit_shop(get_in_ocean_str()), get_location_road())
-#     yao_voice0.set_idea(ideaunit_shop(get_on_land_str()), get_location_road())
-#     yao_voice0.set_l1_idea(ideaunit_shop(get_swim_str(), pledge=True))
+#     yao_voice0.del_item_obj(run_road())
+#     yao_voice0.set_l1_item(itemunit_shop(get_location_str()))
+#     yao_voice0.set_item(itemunit_shop(get_in_ocean_str()), get_location_road())
+#     yao_voice0.set_item(itemunit_shop(get_on_land_str()), get_location_road())
+#     yao_voice0.set_l1_item(itemunit_shop(get_swim_str(), pledge=True))
 #     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
 #     yao_voice0.settle_bud()
 #     assert yao_voice0._keep_dict.get(get_iowa_road())
 #     assert yao_voice0._keep_dict.get(get_ohio_road())
 #     assert yao_voice0._keep_dict.get(get_utah_road())
 #     assert len(yao_voice0._keep_dict) == 3
-#     print(f"{yao_voice0._idea_dict.keys()=}")
+#     print(f"{yao_voice0._item_dict.keys()=}")
 
 #     yao_str = yao_voice0._owner_id
 #     yao_job1 = get_example_yao_job1_speaker()
@@ -329,13 +329,13 @@ def get_example_yao_voice_with_3_healers():
 #     assert yao_final_accts.keys() == yao_voice0_accts.keys()
 #     assert yao_final_accts == yao_voice0_accts
 #     assert len(yao_final.get_dict().get("_accts")) == 3
-#     assert len(yao_final._idea_dict) == 10
-#     print(f"{yao_final._idea_dict.keys()=}")
+#     assert len(yao_final._item_dict) == 10
+#     print(f"{yao_final._item_dict.keys()=}")
 #     print(f"{yao_final.get_factunits_dict().keys()=}")
-#     assert yao_final.idea_exists(cook_road())
-#     assert yao_final.idea_exists(clean_road())
-#     assert yao_final.idea_exists(run_road()) is False
-#     assert len(yao_final._idearoot.factunits) == 2
+#     assert yao_final.item_exists(cook_road())
+#     assert yao_final.item_exists(clean_road())
+#     assert yao_final.item_exists(run_road()) is False
+#     assert len(yao_final._itemroot.factunits) == 2
 #     assert yao_final != yao_voice0
 
 
@@ -349,20 +349,20 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     # yao_job3 with 1 new task, fact stays with it
 
     yao_voice0 = get_example_yao_voice_with_3_healers()
-    yao_voice0.set_l1_idea(ideaunit_shop(get_location_str()))
-    yao_voice0.set_idea(ideaunit_shop(get_in_ocean_str()), get_location_road())
-    yao_voice0.set_idea(ideaunit_shop(get_on_land_str()), get_location_road())
-    yao_voice0.set_l1_idea(ideaunit_shop(get_swim_str(), pledge=True))
+    yao_voice0.set_l1_item(itemunit_shop(get_location_str()))
+    yao_voice0.set_item(itemunit_shop(get_in_ocean_str()), get_location_road())
+    yao_voice0.set_item(itemunit_shop(get_on_land_str()), get_location_road())
+    yao_voice0.set_l1_item(itemunit_shop(get_swim_str(), pledge=True))
     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
     yao_voice0.set_fact(get_location_road(), get_in_ocean_road())
     print(f"{yao_voice0.get_fact(get_location_road())=}")
-    yao_voice0.del_idea_obj(run_road())
+    yao_voice0.del_item_obj(run_road())
     assert yao_voice0._keep_dict.get(get_iowa_road())
     assert yao_voice0._keep_dict.get(get_ohio_road())
     assert yao_voice0._keep_dict.get(get_utah_road())
     yao_voice0.settle_bud()
     assert len(yao_voice0._keep_dict) == 3
-    # print(f"{yao_voice0._idea_dict.keys()=}")
+    # print(f"{yao_voice0._item_dict.keys()=}")
 
     yao_str = yao_voice0._owner_id
     yao_job1 = get_example_yao_job1_speaker()
@@ -406,19 +406,19 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert yao_final_accts.keys() == yao_voice0_accts.keys()
     assert yao_final_accts == yao_voice0_accts
     assert len(yao_final.get_dict().get("_accts")) == 3
-    assert len(yao_final._idea_dict) == 4
-    print(f"{yao_final._idea_dict.keys()=}")
+    assert len(yao_final._item_dict) == 4
+    print(f"{yao_final._item_dict.keys()=}")
     print(f"{yao_final.get_factunits_dict().keys()=}")
-    assert yao_final.idea_exists(cook_road()) is False
-    assert yao_final.idea_exists(clean_road()) is False
-    assert yao_final.idea_exists(run_road()) is False
-    assert yao_final.idea_exists(get_swim_road())
-    assert yao_final.idea_exists(get_in_ocean_road())
-    assert yao_final.idea_exists(get_on_land_road()) is False
+    assert yao_final.item_exists(cook_road()) is False
+    assert yao_final.item_exists(clean_road()) is False
+    assert yao_final.item_exists(run_road()) is False
+    assert yao_final.item_exists(get_swim_road())
+    assert yao_final.item_exists(get_in_ocean_road())
+    assert yao_final.item_exists(get_on_land_road()) is False
     assert yao_final.get_fact(get_location_road()) is not None
     assert yao_final.get_fact(get_location_road()).pick == get_in_ocean_road()
     assert len(yao_final.get_agenda_dict()) == 1
-    assert len(yao_final._idearoot.factunits) == 1
+    assert len(yao_final._itemroot.factunits) == 1
     assert yao_final != yao_voice0
 
 

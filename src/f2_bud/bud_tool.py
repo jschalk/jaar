@@ -3,8 +3,8 @@ from src.f1_road.finance import FundNum, get_net
 from src.f1_road.road import AcctID
 from src.f2_bud.acct import AcctUnit
 from src.f2_bud.group import MemberShip, AwardLink
-from src.f2_bud.idea import IdeaUnit
-from src.f2_bud.reason_idea import ReasonUnit, FactUnit, PremiseUnit
+from src.f2_bud.item import ItemUnit
+from src.f2_bud.reason_item import ReasonUnit, FactUnit, PremiseUnit
 from src.f2_bud.bud import BudUnit
 
 
@@ -20,32 +20,32 @@ def bud_acct_membership_str() -> str:
     return "bud_acct_membership"
 
 
-def bud_ideaunit_str() -> str:
-    return "bud_ideaunit"
+def bud_itemunit_str() -> str:
+    return "bud_itemunit"
 
 
-def bud_idea_awardlink_str() -> str:
-    return "bud_idea_awardlink"
+def bud_item_awardlink_str() -> str:
+    return "bud_item_awardlink"
 
 
-def bud_idea_reasonunit_str() -> str:
-    return "bud_idea_reasonunit"
+def bud_item_reasonunit_str() -> str:
+    return "bud_item_reasonunit"
 
 
-def bud_idea_reason_premiseunit_str() -> str:
-    return "bud_idea_reason_premiseunit"
+def bud_item_reason_premiseunit_str() -> str:
+    return "bud_item_reason_premiseunit"
 
 
-def bud_idea_teamlink_str() -> str:
-    return "bud_idea_teamlink"
+def bud_item_teamlink_str() -> str:
+    return "bud_item_teamlink"
 
 
-def bud_idea_healerlink_str() -> str:
-    return "bud_idea_healerlink"
+def bud_item_healerlink_str() -> str:
+    return "bud_item_healerlink"
 
 
-def bud_idea_factunit_str() -> str:
-    return "bud_idea_factunit"
+def bud_item_factunit_str() -> str:
+    return "bud_item_factunit"
 
 
 def budunit_exists(x_bud: BudUnit) -> bool:
@@ -66,65 +66,65 @@ def bud_acct_membership_exists(x_bud: BudUnit, required_args: dict[str, any]) ->
     )
 
 
-def bud_ideaunit_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
+def bud_itemunit_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
     x_road = required_args.get("road")
-    return False if x_bud is None else bool(x_bud.idea_exists(x_road))
+    return False if x_bud is None else bool(x_bud.item_exists(x_road))
 
 
-def bud_idea_awardlink_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
+def bud_item_awardlink_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
     x_group_id = required_args.get("group_id")
     x_road = required_args.get("road")
     return bool(
-        bud_ideaunit_exists(x_bud, required_args)
-        and x_bud.get_idea_obj(x_road).awardlink_exists(x_group_id)
+        bud_itemunit_exists(x_bud, required_args)
+        and x_bud.get_item_obj(x_road).awardlink_exists(x_group_id)
     )
 
 
-def bud_idea_reasonunit_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
+def bud_item_reasonunit_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
     x_road = required_args.get("road")
     x_base = required_args.get("base")
     return bool(
-        bud_ideaunit_exists(x_bud, required_args)
-        and x_bud.get_idea_obj(x_road).reasonunit_exists(x_base)
+        bud_itemunit_exists(x_bud, required_args)
+        and x_bud.get_item_obj(x_road).reasonunit_exists(x_base)
     )
 
 
-def bud_idea_reason_premiseunit_exists(
+def bud_item_reason_premiseunit_exists(
     x_bud: BudUnit, required_args: dict[str, any]
 ) -> bool:
     x_road = required_args.get("road")
     x_base = required_args.get("base")
     x_need = required_args.get("need")
     return bool(
-        bud_idea_reasonunit_exists(x_bud, required_args)
-        and x_bud.get_idea_obj(x_road).get_reasonunit(x_base).premise_exists(x_need)
+        bud_item_reasonunit_exists(x_bud, required_args)
+        and x_bud.get_item_obj(x_road).get_reasonunit(x_base).premise_exists(x_need)
     )
 
 
-def bud_idea_teamlink_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
+def bud_item_teamlink_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
     x_group_id = required_args.get("group_id")
     x_road = required_args.get("road")
     return bool(
-        bud_ideaunit_exists(x_bud, required_args)
-        and x_bud.get_idea_obj(x_road).teamunit.teamlink_exists(x_group_id)
+        bud_itemunit_exists(x_bud, required_args)
+        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_group_id)
     )
 
 
-def bud_idea_healerlink_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
+def bud_item_healerlink_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
     x_healer_id = required_args.get("healer_id")
     x_road = required_args.get("road")
     return bool(
-        bud_ideaunit_exists(x_bud, required_args)
-        and x_bud.get_idea_obj(x_road).healerlink.healer_id_exists(x_healer_id)
+        bud_itemunit_exists(x_bud, required_args)
+        and x_bud.get_item_obj(x_road).healerlink.healer_id_exists(x_healer_id)
     )
 
 
-def bud_idea_factunit_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
+def bud_item_factunit_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
     x_road = required_args.get("road")
     x_base = required_args.get("base")
     return bool(
-        bud_ideaunit_exists(x_bud, required_args)
-        and x_bud.get_idea_obj(x_road).factunit_exists(x_base)
+        bud_itemunit_exists(x_bud, required_args)
+        and x_bud.get_item_obj(x_road).factunit_exists(x_base)
     )
 
 
@@ -137,20 +137,20 @@ def bud_attr_exists(
         return bud_acctunit_exists(x_bud, required_args)
     elif x_category == bud_acct_membership_str():
         return bud_acct_membership_exists(x_bud, required_args)
-    elif x_category == bud_ideaunit_str():
-        return bud_ideaunit_exists(x_bud, required_args)
-    elif x_category == bud_idea_awardlink_str():
-        return bud_idea_awardlink_exists(x_bud, required_args)
-    elif x_category == bud_idea_reasonunit_str():
-        return bud_idea_reasonunit_exists(x_bud, required_args)
-    elif x_category == bud_idea_reason_premiseunit_str():
-        return bud_idea_reason_premiseunit_exists(x_bud, required_args)
-    elif x_category == bud_idea_teamlink_str():
-        return bud_idea_teamlink_exists(x_bud, required_args)
-    elif x_category == bud_idea_healerlink_str():
-        return bud_idea_healerlink_exists(x_bud, required_args)
-    elif x_category == bud_idea_factunit_str():
-        return bud_idea_factunit_exists(x_bud, required_args)
+    elif x_category == bud_itemunit_str():
+        return bud_itemunit_exists(x_bud, required_args)
+    elif x_category == bud_item_awardlink_str():
+        return bud_item_awardlink_exists(x_bud, required_args)
+    elif x_category == bud_item_reasonunit_str():
+        return bud_item_reasonunit_exists(x_bud, required_args)
+    elif x_category == bud_item_reason_premiseunit_str():
+        return bud_item_reason_premiseunit_exists(x_bud, required_args)
+    elif x_category == bud_item_teamlink_str():
+        return bud_item_teamlink_exists(x_bud, required_args)
+    elif x_category == bud_item_healerlink_str():
+        return bud_item_healerlink_exists(x_bud, required_args)
+    elif x_category == bud_item_factunit_str():
+        return bud_item_factunit_exists(x_bud, required_args)
     return True
 
 
@@ -166,42 +166,42 @@ def bud_acct_membership_get_obj(
     return x_bud.get_acct(x_acct_id).get_membership(x_group_id)
 
 
-def bud_ideaunit_get_obj(x_bud: BudUnit, required_args: dict[str, any]) -> IdeaUnit:
+def bud_itemunit_get_obj(x_bud: BudUnit, required_args: dict[str, any]) -> ItemUnit:
     x_road = required_args.get("road")
-    return x_bud.get_idea_obj(x_road)
+    return x_bud.get_item_obj(x_road)
 
 
-def bud_idea_awardlink_get_obj(
+def bud_item_awardlink_get_obj(
     x_bud: BudUnit, required_args: dict[str, any]
 ) -> AwardLink:
     x_road = required_args.get("road")
     x_group_id = required_args.get("group_id")
-    return x_bud.get_idea_obj(x_road).get_awardlink(x_group_id)
+    return x_bud.get_item_obj(x_road).get_awardlink(x_group_id)
 
 
-def bud_idea_reasonunit_get_obj(
+def bud_item_reasonunit_get_obj(
     x_bud: BudUnit, required_args: dict[str, any]
 ) -> ReasonUnit:
     x_road = required_args.get("road")
     x_base = required_args.get("base")
-    return x_bud.get_idea_obj(x_road).get_reasonunit(x_base)
+    return x_bud.get_item_obj(x_road).get_reasonunit(x_base)
 
 
-def bud_idea_reason_premiseunit_get_obj(
+def bud_item_reason_premiseunit_get_obj(
     x_bud: BudUnit, required_args: dict[str, any]
 ) -> PremiseUnit:
     x_road = required_args.get("road")
     x_base = required_args.get("base")
     x_need = required_args.get("need")
-    return x_bud.get_idea_obj(x_road).get_reasonunit(x_base).get_premise(x_need)
+    return x_bud.get_item_obj(x_road).get_reasonunit(x_base).get_premise(x_need)
 
 
-def bud_idea_factunit_get_obj(
+def bud_item_factunit_get_obj(
     x_bud: BudUnit, required_args: dict[str, any]
 ) -> FactUnit:
     x_road = required_args.get("road")
     x_base = required_args.get("base")
-    return x_bud.get_idea_obj(x_road).factunits.get(x_base)
+    return x_bud.get_item_obj(x_road).factunits.get(x_base)
 
 
 def bud_get_obj(x_category: str, x_bud: BudUnit, required_args: dict[str, any]) -> any:
@@ -211,17 +211,17 @@ def bud_get_obj(x_category: str, x_bud: BudUnit, required_args: dict[str, any]) 
     x_categorys = {
         bud_acctunit_str(): bud_acctunit_get_obj,
         bud_acct_membership_str(): bud_acct_membership_get_obj,
-        bud_ideaunit_str(): bud_ideaunit_get_obj,
-        bud_idea_awardlink_str(): bud_idea_awardlink_get_obj,
-        bud_idea_reasonunit_str(): bud_idea_reasonunit_get_obj,
-        bud_idea_reason_premiseunit_str(): bud_idea_reason_premiseunit_get_obj,
-        bud_idea_factunit_str(): bud_idea_factunit_get_obj,
+        bud_itemunit_str(): bud_itemunit_get_obj,
+        bud_item_awardlink_str(): bud_item_awardlink_get_obj,
+        bud_item_reasonunit_str(): bud_item_reasonunit_get_obj,
+        bud_item_reason_premiseunit_str(): bud_item_reason_premiseunit_get_obj,
+        bud_item_factunit_str(): bud_item_factunit_get_obj,
     }
     if x_func := x_categorys.get(x_category):
         return x_func(x_bud, required_args)
 
 
-def get_bud_outlay_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]:
+def get_bud_purview_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]:
     if settle_bud:
         x_bud.settle_bud()
 
@@ -233,10 +233,10 @@ def get_bud_outlay_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]:
     return x_list
 
 
-def get_bud_outlay_csv(x_bud: BudUnit, settle_bud: bool = None) -> str:
-    x_outlay_array = get_bud_outlay_array(x_bud, settle_bud)
+def get_bud_purview_csv(x_bud: BudUnit, settle_bud: bool = None) -> str:
+    x_purview_array = get_bud_purview_array(x_bud, settle_bud)
     x_headers = ["acct_id", "fund_take", "fund_give"]
-    return create_csv(x_headers, x_outlay_array)
+    return create_csv(x_headers, x_purview_array)
 
 
 def get_bud_settle_acct_net_dict(

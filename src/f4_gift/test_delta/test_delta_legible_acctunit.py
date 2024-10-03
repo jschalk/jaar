@@ -22,19 +22,17 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(yao_atomunit)
     sue_bud = budunit_shop("Sue")
-    sue_tender_desc = "dragon dollars"
-    sue_bud.set_tender_desc(sue_tender_desc)
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_str} was added with {credit_belief_value} {sue_bud.tender_desc} cred and {debtit_belief_value} {sue_bud.tender_desc} debt"
+    x_str = f"{yao_str} was added with {credit_belief_value} belief credit and {debtit_belief_value} belief debtit"
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acctunit_INSERT_tender_desc_IsNone():
+def test_create_legible_list_ReturnsObj_acctunit_INSERT_belief():
     # ESTABLISH
     category = bud_acctunit_str()
     credit_belief_str = "credit_belief"
@@ -55,7 +53,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT_tender_desc_IsNone():
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_str} was added with {credit_belief_value} tender_desc cred and {debtit_belief_value} tender_desc debt"
+    x_str = f"{yao_str} was added with {credit_belief_value} belief credit and {debtit_belief_value} belief debtit"
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -76,14 +74,12 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_belief_debtit_bel
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(yao_atomunit)
     sue_bud = budunit_shop("Sue")
-    sue_tender_desc = "dragon dollars"
-    sue_bud.set_tender_desc(sue_tender_desc)
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_str} now has {credit_belief_value} {sue_bud.tender_desc} cred and {debtit_belief_value} {sue_bud.tender_desc} debt."
+    x_str = f"{yao_str} now has {credit_belief_value} belief credit and {debtit_belief_value} belief debtit."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -101,14 +97,12 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_belief():
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(yao_atomunit)
     sue_bud = budunit_shop("Sue")
-    sue_tender_desc = "dragon dollars"
-    sue_bud.set_tender_desc(sue_tender_desc)
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_str} now has {credit_belief_value} {sue_bud.tender_desc} cred."
+    x_str = f"{yao_str} now has {credit_belief_value} belief credit."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -126,14 +120,12 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_belief():
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(yao_atomunit)
     sue_bud = budunit_shop("Sue")
-    sue_tender_desc = "dragon dollars"
-    sue_bud.set_tender_desc(sue_tender_desc)
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_str} now has {debtit_belief_value} {sue_bud.tender_desc} debt."
+    x_str = f"{yao_str} now has {debtit_belief_value} belief debtit."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -148,13 +140,11 @@ def test_create_legible_list_ReturnsObj_acctunit_DELETE():
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(yao_atomunit)
     sue_bud = budunit_shop("Sue")
-    sue_tender_desc = "dragon dollars"
-    sue_bud.set_tender_desc(sue_tender_desc)
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{yao_str} was removed from {sue_bud.tender_desc} accts."
+    x_str = f"{yao_str} was removed from belief accts."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

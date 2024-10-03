@@ -1,16 +1,16 @@
 from src.f2_bud.group import awardlink_shop
-from src.f2_bud.reason_idea import reasonunit_shop, factunit_shop
+from src.f2_bud.reason_item import reasonunit_shop, factunit_shop
 from src.f2_bud.bud import budunit_shop
 from src.f2_bud.bud_tool import (
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_awardlink_str,
-    bud_idea_reasonunit_str,
-    bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
-    bud_idea_healerlink_str,
-    bud_idea_factunit_str,
+    bud_itemunit_str,
+    bud_item_awardlink_str,
+    bud_item_reasonunit_str,
+    bud_item_reason_premiseunit_str,
+    bud_item_teamlink_str,
+    bud_item_healerlink_str,
+    bud_item_factunit_str,
 )
 from src.f4_gift.atom import atom_insert, atomunit_shop, sift_atomunit
 from src.f4_gift.atom_config import (
@@ -75,7 +75,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_acct_membership():
     assert not new_yao_run_atomunit
 
 
-def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_ideaunit():
+def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_itemunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -85,16 +85,16 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_ideaunit():
     sweep_str = "sweep"
     sweep_road = sue_bud.make_road(clean_road, sweep_str)
 
-    root_atom = atomunit_shop(bud_ideaunit_str(), atom_insert())
+    root_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     root_atom.set_arg(parent_road_str(), "")
     root_atom.set_arg(label_str(), sue_bud._fiscal_id)
-    casa_atom = atomunit_shop(bud_ideaunit_str(), atom_insert())
+    casa_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     casa_atom.set_arg(parent_road_str(), sue_bud._fiscal_id)
     casa_atom.set_arg(label_str(), casa_str)
-    clean_atom = atomunit_shop(bud_ideaunit_str(), atom_insert())
+    clean_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     clean_atom.set_arg(parent_road_str(), casa_road)
     clean_atom.set_arg(label_str(), clean_str)
-    sweep_atom = atomunit_shop(bud_ideaunit_str(), atom_insert())
+    sweep_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     sweep_atom.set_arg(parent_road_str(), clean_road)
     sweep_atom.set_arg(label_str(), sweep_str)
     assert not sift_atomunit(sue_bud, root_atom)
@@ -103,21 +103,21 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_ideaunit():
     assert sift_atomunit(sue_bud, sweep_atom)
 
     # WHEN
-    sue_bud.add_idea(casa_road)
+    sue_bud.add_item(casa_road)
     # THEN
     assert not sift_atomunit(sue_bud, casa_atom)
     assert sift_atomunit(sue_bud, clean_atom)
     assert sift_atomunit(sue_bud, sweep_atom)
 
     # WHEN
-    sue_bud.add_idea(clean_road)
+    sue_bud.add_item(clean_road)
     # THEN
     assert not sift_atomunit(sue_bud, casa_atom)
     assert not sift_atomunit(sue_bud, clean_atom)
     assert sift_atomunit(sue_bud, sweep_atom)
 
 
-def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_awardlink():
+def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_item_awardlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -126,32 +126,32 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_awardlink():
     clean_road = sue_bud.make_road(casa_road, clean_str)
     swim_str = "Swim"
 
-    casa_swim_atom = atomunit_shop(bud_idea_awardlink_str(), atom_insert())
+    casa_swim_atom = atomunit_shop(bud_item_awardlink_str(), atom_insert())
     casa_swim_atom.set_arg(road_str(), casa_road)
     casa_swim_atom.set_arg(group_id_str(), swim_str)
-    clean_swim_atom = atomunit_shop(bud_idea_awardlink_str(), atom_insert())
+    clean_swim_atom = atomunit_shop(bud_item_awardlink_str(), atom_insert())
     clean_swim_atom.set_arg(road_str(), clean_road)
     clean_swim_atom.set_arg(group_id_str(), swim_str)
-    sue_bud.add_idea(casa_road)
-    sue_bud.add_idea(clean_road)
+    sue_bud.add_item(casa_road)
+    sue_bud.add_item(clean_road)
     assert sift_atomunit(sue_bud, casa_swim_atom)
     assert sift_atomunit(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(casa_road).set_awardlink(awardlink_shop(swim_str))
+    sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(swim_str))
 
     # THEN
     assert not sift_atomunit(sue_bud, casa_swim_atom)
     assert sift_atomunit(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(clean_road).set_awardlink(awardlink_shop(swim_str))
+    sue_bud.get_item_obj(clean_road).set_awardlink(awardlink_shop(swim_str))
     # THEN
     assert not sift_atomunit(sue_bud, casa_swim_atom)
     assert not sift_atomunit(sue_bud, clean_swim_atom)
 
 
-def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_reasonunit():
+def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_item_reasonunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -161,32 +161,32 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_reasonunit():
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
 
-    casa_week_atom = atomunit_shop(bud_idea_reasonunit_str(), atom_insert())
+    casa_week_atom = atomunit_shop(bud_item_reasonunit_str(), atom_insert())
     casa_week_atom.set_arg(road_str(), casa_road)
     casa_week_atom.set_arg(base_str(), week_road)
-    clean_week_atom = atomunit_shop(bud_idea_reasonunit_str(), atom_insert())
+    clean_week_atom = atomunit_shop(bud_item_reasonunit_str(), atom_insert())
     clean_week_atom.set_arg(road_str(), clean_road)
     clean_week_atom.set_arg(base_str(), week_road)
-    sue_bud.add_idea(casa_road)
-    sue_bud.add_idea(clean_road)
+    sue_bud.add_item(casa_road)
+    sue_bud.add_item(clean_road)
     assert sift_atomunit(sue_bud, casa_week_atom)
     assert sift_atomunit(sue_bud, clean_week_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(casa_road).set_reasonunit(reasonunit_shop(week_road))
+    sue_bud.get_item_obj(casa_road).set_reasonunit(reasonunit_shop(week_road))
 
     # THEN
     assert not sift_atomunit(sue_bud, casa_week_atom)
     assert sift_atomunit(sue_bud, clean_week_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(clean_road).set_reasonunit(reasonunit_shop(week_road))
+    sue_bud.get_item_obj(clean_road).set_reasonunit(reasonunit_shop(week_road))
     # THEN
     assert not sift_atomunit(sue_bud, casa_week_atom)
     assert not sift_atomunit(sue_bud, clean_week_atom)
 
 
-def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_reason_premiseunit_exists():
+def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_item_reason_premiseunit_exists():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -198,39 +198,39 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_reason_premiseunit_exists
     thur_str = "thur"
     thur_road = sue_bud.make_road(week_road, thur_str)
 
-    casa_week_atom = atomunit_shop(bud_idea_reason_premiseunit_str(), atom_insert())
+    casa_week_atom = atomunit_shop(bud_item_reason_premiseunit_str(), atom_insert())
     casa_week_atom.set_arg(road_str(), casa_road)
     casa_week_atom.set_arg(base_str(), week_road)
     casa_week_atom.set_arg("need", thur_road)
-    clean_week_atom = atomunit_shop(bud_idea_reason_premiseunit_str(), atom_insert())
+    clean_week_atom = atomunit_shop(bud_item_reason_premiseunit_str(), atom_insert())
     clean_week_atom.set_arg(road_str(), clean_road)
     clean_week_atom.set_arg(base_str(), week_road)
     clean_week_atom.set_arg("need", thur_road)
-    sue_bud.add_idea(casa_road)
-    sue_bud.add_idea(clean_road)
-    casa_idea = sue_bud.get_idea_obj(casa_road)
-    clean_idea = sue_bud.get_idea_obj(clean_road)
-    casa_idea.set_reasonunit(reasonunit_shop(week_road))
-    clean_idea.set_reasonunit(reasonunit_shop(week_road))
+    sue_bud.add_item(casa_road)
+    sue_bud.add_item(clean_road)
+    casa_item = sue_bud.get_item_obj(casa_road)
+    clean_item = sue_bud.get_item_obj(clean_road)
+    casa_item.set_reasonunit(reasonunit_shop(week_road))
+    clean_item.set_reasonunit(reasonunit_shop(week_road))
     assert sift_atomunit(sue_bud, casa_week_atom)
     assert sift_atomunit(sue_bud, clean_week_atom)
 
     # WHEN
-    casa_idea.get_reasonunit(week_road).set_premise(thur_road)
+    casa_item.get_reasonunit(week_road).set_premise(thur_road)
 
     # THEN
     assert not sift_atomunit(sue_bud, casa_week_atom)
     assert sift_atomunit(sue_bud, clean_week_atom)
 
     # WHEN
-    clean_idea.get_reasonunit(week_road).set_premise(thur_road)
+    clean_item.get_reasonunit(week_road).set_premise(thur_road)
 
     # THEN
     assert not sift_atomunit(sue_bud, casa_week_atom)
     assert not sift_atomunit(sue_bud, clean_week_atom)
 
 
-def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_teamlink():
+def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_item_teamlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -239,32 +239,32 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_teamlink():
     clean_road = sue_bud.make_road(casa_road, clean_str)
     swim_str = "Swim"
 
-    casa_swim_atom = atomunit_shop(bud_idea_teamlink_str(), atom_insert())
+    casa_swim_atom = atomunit_shop(bud_item_teamlink_str(), atom_insert())
     casa_swim_atom.set_arg(road_str(), casa_road)
     casa_swim_atom.set_arg(group_id_str(), swim_str)
-    clean_swim_atom = atomunit_shop(bud_idea_teamlink_str(), atom_insert())
+    clean_swim_atom = atomunit_shop(bud_item_teamlink_str(), atom_insert())
     clean_swim_atom.set_arg(road_str(), clean_road)
     clean_swim_atom.set_arg(group_id_str(), swim_str)
-    sue_bud.add_idea(casa_road)
-    sue_bud.add_idea(clean_road)
+    sue_bud.add_item(casa_road)
+    sue_bud.add_item(clean_road)
     assert sift_atomunit(sue_bud, casa_swim_atom)
     assert sift_atomunit(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(casa_road).teamunit.set_teamlink(swim_str)
+    sue_bud.get_item_obj(casa_road).teamunit.set_teamlink(swim_str)
 
     # THEN
     assert not sift_atomunit(sue_bud, casa_swim_atom)
     assert sift_atomunit(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(clean_road).teamunit.set_teamlink(swim_str)
+    sue_bud.get_item_obj(clean_road).teamunit.set_teamlink(swim_str)
     # THEN
     assert not sift_atomunit(sue_bud, casa_swim_atom)
     assert not sift_atomunit(sue_bud, clean_swim_atom)
 
 
-def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_healerlink():
+def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_item_healerlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -273,32 +273,32 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_healerlink():
     clean_road = sue_bud.make_road(casa_road, clean_str)
     swim_str = "Swim"
 
-    casa_swim_atom = atomunit_shop(bud_idea_healerlink_str(), atom_insert())
+    casa_swim_atom = atomunit_shop(bud_item_healerlink_str(), atom_insert())
     casa_swim_atom.set_arg(road_str(), casa_road)
     casa_swim_atom.set_arg(healer_id_str(), swim_str)
-    clean_swim_atom = atomunit_shop(bud_idea_healerlink_str(), atom_insert())
+    clean_swim_atom = atomunit_shop(bud_item_healerlink_str(), atom_insert())
     clean_swim_atom.set_arg(road_str(), clean_road)
     clean_swim_atom.set_arg(healer_id_str(), swim_str)
-    sue_bud.add_idea(casa_road)
-    sue_bud.add_idea(clean_road)
+    sue_bud.add_item(casa_road)
+    sue_bud.add_item(clean_road)
     assert sift_atomunit(sue_bud, casa_swim_atom)
     assert sift_atomunit(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(casa_road).healerlink.set_healer_id(swim_str)
+    sue_bud.get_item_obj(casa_road).healerlink.set_healer_id(swim_str)
 
     # THEN
     assert not sift_atomunit(sue_bud, casa_swim_atom)
     assert sift_atomunit(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(clean_road).healerlink.set_healer_id(swim_str)
+    sue_bud.get_item_obj(clean_road).healerlink.set_healer_id(swim_str)
     # THEN
     assert not sift_atomunit(sue_bud, casa_swim_atom)
     assert not sift_atomunit(sue_bud, clean_swim_atom)
 
 
-def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_factunit():
+def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_item_factunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -308,26 +308,26 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_idea_factunit():
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
 
-    casa_week_atom = atomunit_shop(bud_idea_factunit_str(), atom_insert())
+    casa_week_atom = atomunit_shop(bud_item_factunit_str(), atom_insert())
     casa_week_atom.set_arg(road_str(), casa_road)
     casa_week_atom.set_arg(base_str(), week_road)
-    clean_week_atom = atomunit_shop(bud_idea_factunit_str(), atom_insert())
+    clean_week_atom = atomunit_shop(bud_item_factunit_str(), atom_insert())
     clean_week_atom.set_arg(road_str(), clean_road)
     clean_week_atom.set_arg(base_str(), week_road)
-    sue_bud.add_idea(casa_road)
-    sue_bud.add_idea(clean_road)
+    sue_bud.add_item(casa_road)
+    sue_bud.add_item(clean_road)
     assert sift_atomunit(sue_bud, casa_week_atom)
     assert sift_atomunit(sue_bud, clean_week_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(casa_road).set_factunit(factunit_shop(week_road))
+    sue_bud.get_item_obj(casa_road).set_factunit(factunit_shop(week_road))
 
     # THEN
     assert not sift_atomunit(sue_bud, casa_week_atom)
     assert sift_atomunit(sue_bud, clean_week_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(clean_road).set_factunit(factunit_shop(week_road))
+    sue_bud.get_item_obj(clean_road).set_factunit(factunit_shop(week_road))
     # THEN
     assert not sift_atomunit(sue_bud, casa_week_atom)
     assert not sift_atomunit(sue_bud, clean_week_atom)

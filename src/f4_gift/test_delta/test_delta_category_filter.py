@@ -1,4 +1,4 @@
-from src.f2_bud.idea import ideaunit_shop
+from src.f2_bud.item import itemunit_shop
 from src.f2_bud.bud import budunit_shop
 from src.f2_bud.bud_tool import bud_acctunit_str
 from src.f4_gift.atom_config import acct_id_str
@@ -17,7 +17,7 @@ def test_DeltaUnit_get_filtered_deltaunit_ReturnsObjFilteredBy_acctunit_insert()
     bob_credit_belief = 33
     bob_debtit_belief = 44
     after_sue_bud.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
-    after_sue_bud.set_l1_idea(ideaunit_shop("casa"))
+    after_sue_bud.set_l1_item(itemunit_shop("casa"))
     old_deltaunit = deltaunit_shop()
     old_deltaunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
