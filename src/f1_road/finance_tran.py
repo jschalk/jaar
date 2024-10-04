@@ -121,6 +121,9 @@ class PurviewLog:
             for x_episode in self.episodes.values()
         }
 
+    def get_timestamps(self) -> set[TimeLinePoint]:
+        return set(self.episodes.keys())
+
 
 def purviewlog_shop(owner_id: OwnerID) -> PurviewLog:
     return PurviewLog(owner_id=owner_id, episodes={}, _sum_acct_purviews={})

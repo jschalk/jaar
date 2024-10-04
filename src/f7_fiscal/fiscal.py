@@ -272,6 +272,12 @@ class FiscalUnit:
             for x_episode in self.purviewlogs.values()
         }
 
+    def get_purviewlogs_timestamps(self) -> set[TimeLinePoint]:
+        all_purviewepisode_timestamps = set()
+        for x_purviewlog in self.purviewlogs.values():
+            all_purviewepisode_timestamps.update(x_purviewlog.get_timestamps())
+        return all_purviewepisode_timestamps
+
 
 def fiscalunit_shop(
     fiscal_id: FiscalID = None,

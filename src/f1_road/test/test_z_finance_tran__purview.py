@@ -433,6 +433,24 @@ def test_PurviewLog_get_2d_array_ReturnsObj_Scenario1():
     ]
 
 
+def test_PurviewLog_get_timestamps_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_purviewlog = purviewlog_shop(sue_str)
+    x4_timestamp = 4
+    x4_amount = 55
+    x7_timestamp = 7
+    x7_amount = 66
+    assert sue_purviewlog.get_timestamps() == set()
+
+    # WHEN
+    sue_purviewlog.add_episode(x4_timestamp, x4_amount)
+    sue_purviewlog.add_episode(x7_timestamp, x7_amount)
+
+    # THEN
+    assert sue_purviewlog.get_timestamps() == {x4_timestamp, x7_timestamp}
+
+
 def test_PurviewLog_get_headers_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"

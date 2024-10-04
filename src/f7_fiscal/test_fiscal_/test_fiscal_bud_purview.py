@@ -95,3 +95,27 @@ def test_FiscalUnit_add_purviewlog_SetsAttr():
     bob_purviewlog.add_episode(bob_x0_timestamp, bob_x0_magnitude)
     assert music_fiscal.get_purviewlog(sue_str) == sue_purviewlog
     assert music_fiscal.get_purviewlog(bob_str) == bob_purviewlog
+
+
+def test_FiscalUnit_get_purviewlogs_timestamps_ReturnsObj():
+    # ESTABLISH
+    music_str = "music"
+    music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
+    bob_str = "Bob"
+    bob_x0_timestamp = 702
+    bob_x0_magnitude = 33
+    sue_str = "Sue"
+    sue_x4_timestamp = 4
+    sue_x4_magnitude = 55
+    sue_x7_timestamp = 7
+    sue_x7_magnitude = 66
+    assert music_fiscal.get_purviewlogs_timestamps() == set()
+
+    # WHEN
+    music_fiscal.add_purviewlog(bob_str, bob_x0_timestamp, bob_x0_magnitude)
+    music_fiscal.add_purviewlog(sue_str, sue_x4_timestamp, sue_x4_magnitude)
+    music_fiscal.add_purviewlog(sue_str, sue_x7_timestamp, sue_x7_magnitude)
+
+    # THEN
+    all_timestamps = {bob_x0_timestamp, sue_x4_timestamp, sue_x7_timestamp}
+    assert music_fiscal.get_purviewlogs_timestamps() == all_timestamps
