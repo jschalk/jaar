@@ -1,6 +1,6 @@
 from src.f0_instrument.dict_tool import (
     get_1_if_None,
-    add_dict_if_missing,
+    add_nested_dict_if_missing,
     set_in_nested_dict,
     get_all_nondictionary_objs,
     get_from_nested_dict,
@@ -21,6 +21,7 @@ from src.f0_instrument.dict_tool import (
     create_2d_array_from_dict,
 )
 from pytest import raises as pytest_raises
+from copy import deepcopy as copy_deepcopy
 
 
 def test_get_1_if_None():
@@ -30,7 +31,7 @@ def test_get_1_if_None():
     assert get_1_if_None(-3) == -3
 
 
-def test_add_dict_if_missing_CorrectAddsDict():
+def test_add_nested_dict_if_missing_CorrectAddsDict():
     # ESTABLISH
     y_dict = {}
 
@@ -38,7 +39,7 @@ def test_add_dict_if_missing_CorrectAddsDict():
     y_key1 = "sports"
     y_key2 = "running"
     y_key3 = "fun running"
-    add_dict_if_missing(x_dict=y_dict, x_keylist=[y_key1, y_key2, y_key3])
+    add_nested_dict_if_missing(x_dict=y_dict, x_keylist=[y_key1, y_key2, y_key3])
 
     # THEN
     assert y_dict == {y_key1: {y_key2: {y_key3: {}}}}
@@ -59,50 +60,66 @@ def test_set_in_nested_dict_CorrectAddsDict():
     assert y_dict == {y_key1: {y_key2: {y_key3: fly_str}}}
 
 
-# def test_exists_in_nested_dict_CorrectAddsDict():
-#     # ESTABLISH
-#     y_dict = {}
+def test_exists_in_nested_dict_CorrectAddsDict():
+    # ESTABLISH
+    y_dict = {}
 
-#     # WHEN
-#     y_key1 = "sports"
-#     y_key2 = "running"
-#     y_key3 = "fun running"
-#     y_keylist = [y_key1, y_key2, y_key3]
-#     fly_str = "flying"
-#     assert exists_in_nested_dict(x_dict=y_dict, x_keylist=y_keylist) is False
+    # WHEN
+    y_key1 = "sports"
+    y_key2 = "running"
+    y_key3 = "fun running"
+    y_keylist = [y_key1, y_key2, y_key3]
+    fly_str = "flying"
+    assert exists_in_nested_dict(x_dict=y_dict, x_keylist=y_keylist) is False
 
-#     # WHEN
-#     set_in_nested_dict(y_dict, y_keylist, x_obj=fly_str)
+    # WHEN
+    set_in_nested_dict(y_dict, y_keylist, x_obj=fly_str)
 
-#     # THEN
-#     assert exists_in_nested_dict(y_dict, y_keylist)
+    # THEN
+    assert exists_in_nested_dict(y_dict, y_keylist)
 
 
-# def test_del_in_nested_dict_CorrectSetsDict():
-#     # ESTABLISH
-#     y_dict = {}
-#     y_key1 = "sports"
-#     y_key2 = "running"
-#     y_key3 = "fun running"
-#     fly_str = "flying"
-#     set_in_nested_dict(x_dict=y_dict, x_keylist=[y_key1, y_key2, y_key3], x_obj=fly_str)
-#     assert y_dict == {y_key1: {y_key2: {y_key3: fly_str}}}
-#     assert get_from_nested_dict(y_dict, [y_key1, y_key2, y_key3], True)
+def test_del_in_nested_dict_CorrectSetsDict():
+    # ESTABLISH
+    y_dict = {}
+    y_key1 = "sports"
+    y_key2 = "running"
+    y_key3_0 = "fun running"
+    y_key3_1 = "rain running"
+    y3_0_keylist = [y_key1, y_key2, y_key3_0]
+    y3_1_keylist = [y_key1, y_key2, y_key3_1]
+    fly_str = "flying"
+    set_in_nested_dict(y_dict, y3_1_keylist, x_obj=fly_str)
+    assert y_dict == {y_key1: {y_key2: {y_key3_1: fly_str}}}
+    assert exists_in_nested_dict(y_dict, y3_0_keylist) is False
+    assert exists_in_nested_dict(y_dict, y3_1_keylist)
 
-#     # WHEN
-#     del_in_nested_dict(x_dict=y_dict, x_keylist=[y_key1, y_key2, y_key3])
+    # WHEN
+    del_in_nested_dict(y_dict, y3_0_keylist)
 
-#     # THEN
-#     assert y_dict == {}
-#     assert not get_from_nested_dict(y_dict, [y_key1, y_key2, y_key3], True)
+    # THEN
+    assert exists_in_nested_dict(y_dict, y3_0_keylist) is False
 
-#     # WHEN
-#     del_in_nested_dict(x_dict=y_dict, x_keylist=[y_key1, y_key2, y_key3])
+    # ESTABLISH
+    set_in_nested_dict(y_dict, y3_0_keylist, x_obj=fly_str)
+    assert y_dict == {y_key1: {y_key2: {y_key3_0: fly_str, y_key3_1: fly_str}}}
+    assert exists_in_nested_dict(y_dict, y3_0_keylist)
+    assert exists_in_nested_dict(y_dict, y3_1_keylist)
 
-#     # THEN
-#     assert y_dict == {}
-#     assert not get_from_nested_dict(y_dict, [y_key1, y_key2, y_key3], True)
-#     assert 1 == 2
+    # WHEN
+    del_in_nested_dict(y_dict, y3_0_keylist)
+
+    # THEN
+    assert y_dict == {y_key1: {y_key2: {y_key3_1: fly_str}}}
+    assert exists_in_nested_dict(y_dict, y3_0_keylist) is False
+    assert exists_in_nested_dict(y_dict, y3_1_keylist)
+
+    # WHEN
+    del_in_nested_dict(y_dict, y3_1_keylist)
+
+    # THEN
+    assert not y_dict
+    assert not get_from_nested_dict(y_dict, y3_0_keylist, True)
 
 
 def test_get_all_nondictionary_objs_ReturnsCorrectDict():

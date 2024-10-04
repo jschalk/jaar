@@ -37,7 +37,7 @@ def get_positive_int(x_obj: any = None):
     return max(x_int, 0)
 
 
-def add_dict_if_missing(x_dict: dict, x_keylist: list[any]):
+def add_nested_dict_if_missing(x_dict: dict, x_keylist: list[any]):
     for x_key in x_keylist:
         if x_dict.get(x_key) is None:
             x_dict[x_key] = {}
@@ -45,11 +45,11 @@ def add_dict_if_missing(x_dict: dict, x_keylist: list[any]):
 
 
 def set_in_nested_dict(x_dict: dict, x_keylist: list[any], x_obj: any):
-    x_keylist = copy_deepcopy(x_keylist)
-    last_key = x_keylist.pop(-1)
-    add_dict_if_missing(x_dict, x_keylist=x_keylist)
+    z_keylist = copy_deepcopy(x_keylist)
+    last_key = z_keylist.pop(-1)
+    add_nested_dict_if_missing(x_dict, x_keylist=z_keylist)
     last_dict = x_dict
-    for x_key in x_keylist:
+    for x_key in z_keylist:
         last_dict = last_dict[x_key]
     last_dict[last_key] = x_obj
 
@@ -73,10 +73,11 @@ class is_2d_with_unique_keys_Exception(Exception):
 def get_from_nested_dict(
     x_dict: dict, x_keylist: list, if_missing_return_None: bool = False
 ) -> any:
+    z_keylist = copy_deepcopy(x_keylist)
     if not if_missing_return_None:
-        return _sub_get_from_nested_dict(x_dict, x_keylist)
+        return _sub_get_from_nested_dict(x_dict, z_keylist)
     try:
-        return _sub_get_from_nested_dict(x_dict, x_keylist)
+        return _sub_get_from_nested_dict(x_dict, z_keylist)
     except Exception:
         return None
 
@@ -113,11 +114,24 @@ def get_all_nondictionary_objs(x_dict: dict) -> dict[str : list[any]]:
 
 
 def exists_in_nested_dict(x_dict: dict, x_keylist: list) -> bool:
-    return False
+    z_keylist = copy_deepcopy(x_keylist)
+    return get_from_nested_dict(x_dict, z_keylist, True) != None
 
 
 def del_in_nested_dict(x_dict: dict, x_keylist: list):
-    pass
+    z_keylist = copy_deepcopy(x_keylist)
+    if exists_in_nested_dict(x_dict, z_keylist):
+        parent_keylist = z_keylist
+        del_key = parent_keylist.pop(-1)
+        parent_dict = get_from_nested_dict(x_dict, parent_keylist)
+        parent_dict.pop(del_key)
+        while parent_dict == {} and len(parent_keylist) > 1:
+            del_key = parent_keylist.pop(-1)
+            parent_dict = get_from_nested_dict(x_dict, parent_keylist)
+            parent_dict.pop(del_key)
+
+        if len(parent_keylist) == 1 and x_dict.get(parent_keylist[0]) == {}:
+            x_dict.pop(parent_keylist[0])
 
 
 def get_json_from_dict(x_dict: dict) -> str:
