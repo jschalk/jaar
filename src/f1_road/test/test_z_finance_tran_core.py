@@ -7,6 +7,7 @@ from src.f1_road.finance_tran import (
     get_tranbook_from_json,
     get_purviewlog_from_dict,
 )
+from pytest import raises as pytest_raises
 
 
 def test_TranUnit_Exists():
@@ -148,6 +149,91 @@ def test_TranBook_set_tranunit_SetsAttr():
         },
         yao_str: {yao_str: {t77_t: t77_yao_amount}},
     }
+
+
+def test_TranBook_set_tranunit_SetsAttrWithBlockTimeStamp():
+    # ESTABLISH
+    music23_str = "music23"
+    x_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert x_tranbook.tranunits == {}
+
+    # WHEN
+    x_blocked_timestamps = {44}
+    x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_timestamps)
+
+    # THEN
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_t: t55_yao_amount}}}
+
+
+def test_TranBook_set_tranunit_SetsAttrWithBlockTimeStamp_RaisesError():
+    # ESTABLISH
+    music23_str = "music23"
+    x_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    x_blocked_timestamps = {t55_t}
+    sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert x_tranbook.tranunits == {}
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_timestamps)
+    exception_str = (
+        f"Cannot set tranunit for timestamp={t55_t}, timelinepoint is blocked"
+    )
+    assert str(excinfo.value) == exception_str
+
+
+def test_TranBook_set_tranunit_SetsAttrWithCurrentTimeStamp():
+    # ESTABLISH
+    music23_str = "music23"
+    x_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert x_tranbook.tranunits == {}
+
+    # WHEN
+    x_current_time = 8808
+    x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_current_time=x_current_time)
+
+    # THEN
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_t: t55_yao_amount}}}
+
+
+def test_TranBook_set_tranunit_SetsAttrWithCurrentTimeStamp_RaisesError():
+    # ESTABLISH
+    music23_str = "music23"
+    x_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert x_tranbook.tranunits == {}
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_current_time=t55_t)
+    exception_str = f"Cannot set tranunit for timestamp={t55_t}, timelinepoint is greater than current time={t55_t}"
+    assert str(excinfo.value) == exception_str
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_current_time=33)
+    exception_str = f"Cannot set tranunit for timestamp={t55_t}, timelinepoint is greater than current time=33"
+    assert str(excinfo.value) == exception_str
 
 
 def test_TranBook_add_tranunit_SetsAttr():

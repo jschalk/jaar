@@ -651,8 +651,8 @@ def test_get_nested_dict_key_by_level_RaisesError_is_2d_with_unique_keys_IsFalse
     # ESTABLISH / WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         get_nested_dict_key_by_level({"Sue": {}, "Bob": {}})
-    exception_text = "dictionary is not 2d_with_unique_keys."
-    assert str(excinfo.value) == exception_text
+    exception_str = "dictionary is not 2d_with_unique_keys."
+    assert str(excinfo.value) == exception_str
 
 
 def test_get_nested_dict_key_by_level_ReturnsObj():
@@ -671,8 +671,8 @@ def test_create_2d_array_from_dict_RaisesError_is_2d_with_unique_keys_IsFalse():
     # ESTABLISH / WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         create_2d_array_from_dict({"Sue": {}, "Bob": {}})
-    exception_text = "dictionary is not 2d_with_unique_keys."
-    assert str(excinfo.value) == exception_text
+    exception_str = "dictionary is not 2d_with_unique_keys."
+    assert str(excinfo.value) == exception_str
 
 
 def test_create_2d_array_from_dict_ReturnsObj_Scenario0_Simple():

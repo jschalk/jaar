@@ -1,5 +1,6 @@
 from src.f0_instrument.dict_tool import (
     get_empty_dict_if_none,
+    get_empty_set_if_none,
     get_0_if_None,
     get_json_from_dict,
     get_dict_from_json,
@@ -14,6 +15,10 @@ from dataclasses import dataclass
 
 
 class calc_magnitudeException(Exception):
+    pass
+
+
+class timestamp_Exception(Exception):
     pass
 
 
@@ -41,8 +46,8 @@ class PurviewEpisode:
         x_cred_sum = sum(net_purview for net_purview in net_purviews if net_purview > 0)
         x_debt_sum = sum(net_purview for net_purview in net_purviews if net_purview < 0)
         if x_cred_sum + x_debt_sum != 0:
-            exception_text = f"magnitude cannot be calculated: debt_purview={x_debt_sum}, cred_purview={x_cred_sum}"
-            raise calc_magnitudeException(exception_text)
+            exception_str = f"magnitude cannot be calculated: debt_purview={x_debt_sum}, cred_purview={x_cred_sum}"
+            raise calc_magnitudeException(exception_str)
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
@@ -168,12 +173,19 @@ class TranBook:
     tranunits: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None
     _accts_net: dict[OwnerID, dict[AcctID, FundNum]] = None
 
-    def set_tranunit(self, x_tranunit: TranUnit):
+    def set_tranunit(
+        self,
+        x_tranunit: TranUnit,
+        x_blocked_timestamps: set[TimeLinePoint] = None,
+        x_current_time: TimeLinePoint = None,
+    ):
         self.add_tranunit(
             x_owner_id=x_tranunit.src,
             x_acct_id=x_tranunit.dst,
             x_timestamp=x_tranunit.timestamp,
             x_amount=x_tranunit.amount,
+            x_blocked_timestamps=x_blocked_timestamps,
+            x_current_time=x_current_time,
         )
 
     def add_tranunit(
@@ -182,7 +194,15 @@ class TranBook:
         x_acct_id: AcctID,
         x_timestamp: TimeLinePoint,
         x_amount: FundNum,
+        x_blocked_timestamps: set[TimeLinePoint] = None,
+        x_current_time: TimeLinePoint = None,
     ):
+        if x_timestamp in get_empty_set_if_none(x_blocked_timestamps):
+            exception_str = f"Cannot set tranunit for timestamp={x_timestamp}, timelinepoint is blocked"
+            raise timestamp_Exception(exception_str)
+        if x_current_time != None and x_timestamp >= x_current_time:
+            exception_str = f"Cannot set tranunit for timestamp={x_timestamp}, timelinepoint is greater than current time={x_current_time}"
+            raise timestamp_Exception(exception_str)
         x_keylist = [x_owner_id, x_acct_id, x_timestamp]
         set_in_nested_dict(self.tranunits, x_keylist, x_amount)
 

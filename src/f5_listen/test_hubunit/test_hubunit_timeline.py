@@ -85,8 +85,8 @@ def test_HubUnit_save_valid_purview_file_RaisesError(env_dir_setup_cleanup):
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
         yao_hubunit._save_valid_purview_file(t_purview)
-    exception_text = "magnitude cannot be calculated: debt_purview=-5, cred_purview=3"
-    assert str(excinfo.value) == exception_text
+    exception_str = "magnitude cannot be calculated: debt_purview=-5, cred_purview=3"
+    assert str(excinfo.value) == exception_str
 
 
 def test_HubUnit_purview_file_exists_ReturnsObj(env_dir_setup_cleanup):
@@ -207,8 +207,8 @@ def test_HubUnit_save_valid_budpoint_file_RaisesError(env_dir_setup_cleanup):
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
         yao_hubunit._save_valid_budpoint_file(t55_timestamp, t_budpoint)
-    exception_text = "BudPoint could not be saved BudUnit._rational is False"
-    assert str(excinfo.value) == exception_text
+    exception_str = "BudPoint could not be saved BudUnit._rational is False"
+    assert str(excinfo.value) == exception_str
 
 
 def test_HubUnit_budpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
