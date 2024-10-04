@@ -1,4 +1,4 @@
-from src.f0_instrument.dict_tool import get_dict_from_json, get_nested_value
+from src.f0_instrument.dict_tool import get_dict_from_json, get_from_nested_dict
 from src.f0_instrument.file import delete_dir, save_file, open_file
 from src.f0_instrument.db_tool import (
     get_db_tables,
@@ -126,7 +126,7 @@ def test_fiscal_set_fiscal_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
     # grab config.json
     config_str = open_file(dest_dir="src/f7_fiscal", file_name="journal_db_check.json")
     config_dict = get_dict_from_json(config_str)
-    tables_dict = get_nested_value(config_dict, ["tables"])
+    tables_dict = get_from_nested_dict(config_dict, ["tables"])
     print(f"{tables_dict=}")
 
     with x_fiscal.get_journal_conn() as journal_conn:

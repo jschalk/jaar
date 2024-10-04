@@ -1,8 +1,8 @@
 from src.f0_instrument.dict_tool import (
     get_empty_dict_if_none,
     get_json_from_dict,
-    place_obj_in_dict,
-    get_nested_value,
+    set_in_nested_dict,
+    get_from_nested_dict,
     get_all_nondictionary_objs,
     get_0_if_None,
 )
@@ -122,7 +122,7 @@ class DeltaUnit:
             x_atomunit.category,
             *x_atomunit.get_nesting_order_args(),
         ]
-        place_obj_in_dict(self.atomunits, x_keylist, x_atomunit)
+        set_in_nested_dict(self.atomunits, x_keylist, x_atomunit)
 
     def atomunit_exists(self, x_atomunit: AtomUnit) -> bool:
         if x_atomunit.is_valid() is False:
@@ -138,7 +138,7 @@ class DeltaUnit:
             x_atomunit.category,
             *list(x_atomunit.get_nesting_order_args()),
         ]
-        nested_atomunit = get_nested_value(self.atomunits, x_keylist, True)
+        nested_atomunit = get_from_nested_dict(self.atomunits, x_keylist, True)
         return nested_atomunit == x_atomunit
 
     def add_atomunit(
@@ -160,7 +160,7 @@ class DeltaUnit:
         self, crud_str: str, category: str, required_args: list[str]
     ) -> AtomUnit:
         x_keylist = [crud_str, category, *required_args]
-        return get_nested_value(self.atomunits, x_keylist)
+        return get_from_nested_dict(self.atomunits, x_keylist)
 
     def add_all_atomunits(self, after_bud: BudUnit):
         before_bud = budunit_shop(after_bud._owner_id, after_bud._fiscal_id)

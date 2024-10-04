@@ -212,6 +212,87 @@ def test_TranBook_add_tranunit_SetsAttr():
     }
 
 
+def test_TranBook_tranunit_exists_ReturnsObj():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t) is False
+
+    # WHEN
+    music23_tranbook.set_tranunit(sue_yao_t55_tranunit)
+
+    # THEN
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
+
+
+def test_TranBook_get_tranunit_ReturnsObj():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
+
+    # WHEN
+    sue_yao_t55_tranunit = music23_tranbook.get_tranunit(sue_str, yao_str, t55_t)
+
+    # THEN
+    assert sue_yao_t55_tranunit
+    assert sue_yao_t55_tranunit.src == sue_str
+    assert sue_yao_t55_tranunit.dst == yao_str
+    assert sue_yao_t55_tranunit.timestamp == t55_t
+    assert sue_yao_t55_tranunit.amount == t55_yao_amount
+
+    # WHEN / THEN
+    assert not music23_tranbook.get_tranunit(sue_str, "Bob", t55_t)
+    assert not music23_tranbook.get_tranunit("Bob", yao_str, t55_t)
+    assert not music23_tranbook.get_tranunit(sue_str, yao_str, 44)
+
+
+def test_TranBook_get_amount_ReturnsObj():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
+
+    # WHEN
+    assert music23_tranbook.get_amount(sue_str, yao_str, t55_t) == t55_yao_amount
+    assert not music23_tranbook.get_amount(sue_str, "Bob", t55_t)
+    assert not music23_tranbook.get_amount("Bob", yao_str, t55_t)
+    assert not music23_tranbook.get_amount(sue_str, yao_str, 44)
+
+
+def test_TranBook_del_tranunit_SetsAttr():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
+
+    # WHEN
+    assert music23_tranbook.del_tranunit(sue_str, yao_str, t55_t)
+
+    # THEN
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
+
+
 def test_TranBook_get_owners_accts_net_ReturnObj_Scenario0():
     # ESTABLISH
     music23_str = "music23"

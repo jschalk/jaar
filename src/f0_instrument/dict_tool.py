@@ -44,7 +44,7 @@ def add_dict_if_missing(x_dict: dict, x_keylist: list[any]):
         x_dict = x_dict.get(x_key)
 
 
-def place_obj_in_dict(x_dict: dict, x_keylist: list[any], x_obj: any):
+def set_in_nested_dict(x_dict: dict, x_keylist: list[any], x_obj: any):
     x_keylist = copy_deepcopy(x_keylist)
     last_key = x_keylist.pop(-1)
     add_dict_if_missing(x_dict, x_keylist=x_keylist)
@@ -70,18 +70,18 @@ class is_2d_with_unique_keys_Exception(Exception):
     pass
 
 
-def get_nested_value(
+def get_from_nested_dict(
     x_dict: dict, x_keylist: list, if_missing_return_None: bool = False
 ) -> any:
     if not if_missing_return_None:
-        return _sub_get_nested_value(x_dict, x_keylist)
+        return _sub_get_from_nested_dict(x_dict, x_keylist)
     try:
-        return _sub_get_nested_value(x_dict, x_keylist)
+        return _sub_get_from_nested_dict(x_dict, x_keylist)
     except Exception:
         return None
 
 
-def _sub_get_nested_value(x_dict: dict, x_keylist: list) -> any:
+def _sub_get_from_nested_dict(x_dict: dict, x_keylist: list) -> any:
     last_key = x_keylist.pop(-1)
     temp_dict = x_dict
     x_count = 0
@@ -110,6 +110,14 @@ def get_all_nondictionary_objs(x_dict: dict) -> dict[str : list[any]]:
             else:
                 level1_list.append(eval_value)
     return z_dict
+
+
+def exists_in_nested_dict(x_dict: dict, x_keylist: list) -> bool:
+    return False
+
+
+def del_in_nested_dict(x_dict: dict, x_keylist: list):
+    pass
 
 
 def get_json_from_dict(x_dict: dict) -> str:
@@ -155,12 +163,12 @@ def get_csv_column1_column2_metrics(
     y_dict = {}
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
-        column2_count = get_nested_value(y_dict, [row[0], row[1]], True)
+        column2_count = get_from_nested_dict(y_dict, [row[0], row[1]], True)
         if not column2_count:
             column2_count = 1
         else:
             column2_count += 1
-        place_obj_in_dict(y_dict, [row[0], row[1]], column2_count)
+        set_in_nested_dict(y_dict, [row[0], row[1]], column2_count)
     return y_dict
 
 
@@ -171,18 +179,18 @@ def create_l2nested_csv_dict(
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
         fiscal_owner_io = (
-            get_nested_value(io_dict, [row[0], row[1]], True) or io_StringIO()
+            get_from_nested_dict(io_dict, [row[0], row[1]], True) or io_StringIO()
         )
         new_csv_writer = csv_writer(fiscal_owner_io, delimiter=",")
         new_csv_writer.writerow(row)
-        place_obj_in_dict(io_dict, [row[0], row[1]], fiscal_owner_io)
+        set_in_nested_dict(io_dict, [row[0], row[1]], fiscal_owner_io)
 
     x_dict = {}
     for fiscal_id, owner_id_dict in io_dict.items():
         for owner_id, io_function in owner_id_dict.items():
             fiscal_owner_csv = io_function.getvalue()
             fiscal_owner_csv = fiscal_owner_csv.replace("\r", "")
-            place_obj_in_dict(x_dict, [fiscal_id, owner_id], fiscal_owner_csv)
+            set_in_nested_dict(x_dict, [fiscal_id, owner_id], fiscal_owner_csv)
 
     return x_dict
 

@@ -3,8 +3,10 @@ from src.f0_instrument.dict_tool import (
     get_0_if_None,
     get_json_from_dict,
     get_dict_from_json,
-    place_obj_in_dict,
+    set_in_nested_dict,
     create_csv,
+    get_from_nested_dict,
+    del_in_nested_dict,
 )
 from src.f1_road.finance import FundNum, TimeLinePoint, default_fund_pool
 from src.f1_road.road import AcctID, OwnerID, FiscalID
@@ -182,7 +184,31 @@ class TranBook:
         x_amount: FundNum,
     ):
         x_keylist = [x_owner_id, x_acct_id, x_timestamp]
-        place_obj_in_dict(self.tranunits, x_keylist, x_amount)
+        set_in_nested_dict(self.tranunits, x_keylist, x_amount)
+
+    def tranunit_exists(
+        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
+    ) -> bool:
+        return get_from_nested_dict(self.tranunits, [src, dst, timestamp], True) != None
+
+    def get_tranunit(
+        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
+    ) -> TranUnit:
+        x_amount = get_from_nested_dict(self.tranunits, [src, dst, timestamp], True)
+        if x_amount != None:
+            return tranunit_shop(src, dst, timestamp, x_amount)
+
+    def get_amount(
+        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
+    ) -> TranUnit:
+        return get_from_nested_dict(self.tranunits, [src, dst, timestamp], True)
+
+    def del_tranunit(
+        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
+    ) -> TranUnit:
+        x_amount = get_from_nested_dict(self.tranunits, [src, dst, timestamp], True)
+        if x_amount != None:
+            return tranunit_shop(src, dst, timestamp, x_amount)
 
     def get_owners_accts_net(self) -> dict[OwnerID, dict[AcctID, FundNum]]:
         owners_accts_net_dict = {}
