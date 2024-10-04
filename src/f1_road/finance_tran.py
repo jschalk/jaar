@@ -147,12 +147,34 @@ def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, PurviewEp
 
 
 @dataclass
+class TranUnit:
+    src: AcctID = None
+    dst: AcctID = None
+    timestamp: TimeLinePoint = None
+    amount: FundNum = None
+
+
+def tranunit_shop(
+    src: AcctID, dst: AcctID, timestamp: TimeLinePoint, amount: FundNum
+) -> TranUnit:
+    return TranUnit(src=src, dst=dst, timestamp=timestamp, amount=amount)
+
+
+@dataclass
 class TranBook:
     fiscal_id: FiscalID = None
-    tranlogs: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None
+    tranunits: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None
     _accts_net: dict[OwnerID, dict[AcctID, FundNum]] = None
 
-    def set_tranlog(
+    def set_tranunit(self, x_tranunit: TranUnit):
+        self.add_tranunit(
+            x_owner_id=x_tranunit.src,
+            x_acct_id=x_tranunit.dst,
+            x_timestamp=x_tranunit.timestamp,
+            x_amount=x_tranunit.amount,
+        )
+
+    def add_tranunit(
         self,
         x_owner_id: OwnerID,
         x_acct_id: AcctID,
@@ -160,11 +182,11 @@ class TranBook:
         x_amount: FundNum,
     ):
         x_keylist = [x_owner_id, x_acct_id, x_timestamp]
-        place_obj_in_dict(self.tranlogs, x_keylist, x_amount)
+        place_obj_in_dict(self.tranunits, x_keylist, x_amount)
 
     def get_owners_accts_net(self) -> dict[OwnerID, dict[AcctID, FundNum]]:
         owners_accts_net_dict = {}
-        for owner_id, owner_dict in self.tranlogs.items():
+        for owner_id, owner_dict in self.tranunits.items():
             for acct_id, acct_dict in owner_dict.items():
                 if owners_accts_net_dict.get(owner_id) is None:
                     owners_accts_net_dict[owner_id] = {}
@@ -174,7 +196,7 @@ class TranBook:
 
     def get_accts_net_dict(self) -> dict[AcctID, FundNum]:
         accts_net_dict = {}
-        for owner_dict in self.tranlogs.values():
+        for owner_dict in self.tranunits.values():
             for acct_id, acct_dict in sorted(owner_dict.items()):
                 if accts_net_dict.get(acct_id) is None:
                     accts_net_dict[acct_id] = sum(acct_dict.values())
@@ -201,11 +223,11 @@ class TranBook:
 
 def tranbook_shop(
     x_fiscal_id: FiscalID,
-    x_tranlogs: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None,
+    x_tranunits: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None,
 ):
     return TranBook(
         fiscal_id=x_fiscal_id,
-        tranlogs=get_empty_dict_if_none(x_tranlogs),
+        tranunits=get_empty_dict_if_none(x_tranunits),
         _accts_net={},
     )
 

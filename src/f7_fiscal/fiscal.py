@@ -4,7 +4,11 @@ from src.f0_instrument.dict_tool import (
     get_dict_from_json,
     get_json_from_dict,
 )
-from src.f1_road.jaar_config import get_gifts_folder
+from src.f1_road.jaar_config import (
+    get_gifts_folder,
+    get_fiscal_id_if_None,
+    get_test_fiscals_dir,
+)
 from src.f1_road.finance import (
     default_respect_bit_if_none,
     default_penny_if_none,
@@ -17,10 +21,11 @@ from src.f1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, 
 from src.f2_bud.bud import BudUnit
 from src.f3_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f1_road.finance_tran import (
-    PurviewEpisode,
     PurviewLog,
     purviewlog_shop,
     get_purviewlog_from_dict,
+    TranBook,
+    tranbook_shop,
 )
 from src.f5_listen.basis_buds import get_default_final_bud
 from src.f5_listen.hubunit import hubunit_shop, HubUnit
@@ -47,11 +52,12 @@ class FiscalUnit:
     pipeline7: gifts->final (could be 5 of 6)
     """
 
-    fiscal_id: FiscalID
-    fiscals_dir: str
+    fiscal_id: FiscalID = None
+    fiscals_dir: str = None
     timeline: TimeLineUnit = None
     current_time: int = None
     purviewlogs: dict[OwnerID, PurviewLog] = None
+    cashbook: TranBook = None
     road_delimiter: str = None
     fund_coin: FundCoin = None
     respect_bit: BitNum = None
@@ -60,6 +66,7 @@ class FiscalUnit:
     _owners_dir: str = None
     _journal_db: str = None
     _gifts_dir: str = None
+    _tranbook: TranBook = None
 
     # directory setup
     def _set_fiscal_dirs(self, in_memory_journal: bool = None):
@@ -267,7 +274,7 @@ class FiscalUnit:
 
 
 def fiscalunit_shop(
-    fiscal_id: FiscalID,
+    fiscal_id: FiscalID = None,
     fiscals_dir: str = None,
     timeline: TimeLineUnit = None,
     current_time: int = None,
@@ -279,19 +286,23 @@ def fiscalunit_shop(
 ) -> FiscalUnit:
     if timeline is None:
         timeline = timelineunit_shop()
+    fiscal_id = get_fiscal_id_if_None(fiscal_id)
+    if fiscals_dir is None:
+        fiscals_dir = get_test_fiscals_dir()
     fiscal_x = FiscalUnit(
         fiscal_id=fiscal_id,
         fiscals_dir=fiscals_dir,
         timeline=timeline,
         current_time=get_0_if_None(current_time),
         purviewlogs={},
+        cashbook=tranbook_shop(fiscal_id),
         road_delimiter=default_road_delimiter_if_none(road_delimiter),
         fund_coin=default_respect_bit_if_none(fund_coin),
         respect_bit=default_respect_bit_if_none(respect_bit),
         penny=default_penny_if_none(penny),
+        _tranbook=tranbook_shop(fiscal_id),
     )
-    if fiscal_x.fiscals_dir is not None:
-        fiscal_x._set_fiscal_dirs(in_memory_journal=in_memory_journal)
+    fiscal_x._set_fiscal_dirs(in_memory_journal=in_memory_journal)
     return fiscal_x
 
 
