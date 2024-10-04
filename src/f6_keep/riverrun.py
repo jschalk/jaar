@@ -3,7 +3,7 @@ from src.f0_instrument.dict_tool import (
     get_empty_dict_if_none,
     get_positive_int,
     get_0_if_None,
-    place_obj_in_dict,
+    set_in_nested_dict,
 )
 from src.f1_road.jaar_config import get_json_filename
 from src.f1_road.finance import allot_scale
@@ -43,7 +43,7 @@ class RiverRun:
     def set_keep_credorledger(
         self, owner_id: OwnerID, acct_id: AcctID, acct_credit_belief: float
     ):
-        place_obj_in_dict(
+        set_in_nested_dict(
             x_dict=self.keep_credorledgers,
             x_keylist=[owner_id, acct_id],
             x_obj=acct_credit_belief,

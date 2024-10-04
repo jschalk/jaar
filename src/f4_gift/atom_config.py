@@ -2,7 +2,7 @@ from src.f0_instrument.file import open_file, save_file
 from src.f0_instrument.dict_tool import (
     get_json_from_dict,
     get_dict_from_json,
-    get_nested_value,
+    get_from_nested_dict,
 )
 from os import getcwd as os_getcwd
 
@@ -209,12 +209,12 @@ def get_atom_config_dict() -> dict:
 
 def get_atom_config_required_args(x_cat: str) -> dict:
     required_args_key_list = [x_cat, required_args_str()]
-    return get_nested_value(get_atom_config_dict(), required_args_key_list)
+    return get_from_nested_dict(get_atom_config_dict(), required_args_key_list)
 
 
 def get_atom_config_optional_args(x_cat: str) -> dict:
     optional_args_key_list = [x_cat, optional_args_str()]
-    return get_nested_value(get_atom_config_dict(), optional_args_key_list)
+    return get_from_nested_dict(get_atom_config_dict(), optional_args_key_list)
 
 
 def get_atom_config_args(x_category: str) -> dict[str, dict]:
@@ -424,12 +424,14 @@ def is_category_ref(category_str: str) -> bool:
 
 
 def get_atom_order(crud_str: str, category: str) -> int:
-    return get_nested_value(get_atom_config_dict(), [category, crud_str, "atom_order"])
+    return get_from_nested_dict(
+        get_atom_config_dict(), [category, crud_str, "atom_order"]
+    )
 
 
 def get_normal_table_name(category: str) -> str:
     nested_list = [category, normal_specs_str(), normal_table_name_str()]
-    return get_nested_value(get_atom_config_dict(), nested_list)
+    return get_from_nested_dict(get_atom_config_dict(), nested_list)
 
 
 def set_mog(

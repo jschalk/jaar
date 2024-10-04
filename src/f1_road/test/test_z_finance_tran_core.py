@@ -1,5 +1,6 @@
-from src.f1_road.finance import default_fund_pool
 from src.f1_road.finance_tran import (
+    TranUnit,
+    tranunit_shop,
     TranBook,
     tranbook_shop,
     get_tranbook_from_dict,
@@ -9,6 +10,37 @@ from src.f1_road.finance_tran import (
 from pytest import raises as pytest_raises
 
 
+def test_TranUnit_Exists():
+    # ESTABLISH / WHEN
+    x_tranunit = TranUnit()
+
+    # THEN
+    assert x_tranunit
+    assert not x_tranunit.src
+    assert not x_tranunit.dst
+    assert not x_tranunit.timestamp
+    assert not x_tranunit.amount
+
+
+def test_tranunit_shop_WithParametersReturnsObj():
+    # ESTABLISH
+    music23_str = "music23"
+    t55_timestamp = 5505
+    t55_fundnum = -45
+    sue_str = "Sue"
+    yao_str = "Yao"
+
+    # WHEN
+    x_tranunit = tranunit_shop(sue_str, yao_str, t55_timestamp, t55_fundnum)
+
+    # THEN
+    assert x_tranunit
+    assert x_tranunit.src == sue_str
+    assert x_tranunit.dst == yao_str
+    assert x_tranunit.timestamp == t55_timestamp
+    assert x_tranunit.amount == t55_fundnum
+
+
 def test_TranBook_Exists():
     # ESTABLISH / WHEN
     x_tranbook = TranBook()
@@ -16,7 +48,7 @@ def test_TranBook_Exists():
     # THEN
     assert x_tranbook
     assert not x_tranbook.fiscal_id
-    assert not x_tranbook.tranlogs
+    assert not x_tranbook.tranunits
     assert not x_tranbook._accts_net
 
 
@@ -27,15 +59,15 @@ def test_tranbook_shop_WithParametersReturnsObj():
     x_fundnum = -45
     sue_str = "Sue"
     yao_str = "Yao"
-    x_tranlogs = {sue_str: {yao_str: {x_timelinepoint: x_fundnum}}}
+    x_tranunits = {sue_str: {yao_str: {x_timelinepoint: x_fundnum}}}
 
     # WHEN
-    x_tranbook = tranbook_shop(music23_str, x_tranlogs)
+    x_tranbook = tranbook_shop(music23_str, x_tranunits)
 
     # THEN
     assert x_tranbook
     assert x_tranbook.fiscal_id == music23_str
-    assert x_tranbook.tranlogs == x_tranlogs
+    assert x_tranbook.tranunits == x_tranunits
     assert x_tranbook._accts_net == {}
 
 
@@ -49,35 +81,186 @@ def test_tranbook_shop_WithoutParametersReturnsObj():
     # THEN
     assert x_tranbook
     assert x_tranbook.fiscal_id == music23_str
-    assert x_tranbook.tranlogs == {}
+    assert x_tranbook.tranunits == {}
     assert x_tranbook._accts_net == {}
 
 
-def test_TranBook_set_tranlog_SetsAttr():
+def test_TranBook_set_tranunit_SetsAttr():
     # ESTABLISH
     music23_str = "music23"
     x_tranbook = tranbook_shop(music23_str)
-    assert x_tranbook.tranlogs == {}
+    assert x_tranbook.tranunits == {}
+
+    # WHEN
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
+    x_tranbook.set_tranunit(sue_yao_t55_tranunit)
+
+    # THEN
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_t: t55_yao_amount}}}
+
+    # WHEN
+    bob_str = "Bob"
+    t55_bob_amount = 600
+    sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_bob_amount)
+    x_tranbook.set_tranunit(sue_bob_t55_tranunit)
+
+    # THEN
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {
+        sue_str: {
+            yao_str: {t55_t: t55_yao_amount},
+            bob_str: {t55_t: t55_bob_amount},
+        }
+    }
+
+    # WHEN
+    t66_t = 6606
+    t66_yao_amount = -66
+    sue_yao_t66_tranunit = tranunit_shop(sue_str, yao_str, t66_t, t66_yao_amount)
+    x_tranbook.set_tranunit(sue_yao_t66_tranunit)
+
+    # THEN
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {
+        sue_str: {
+            yao_str: {t55_t: t55_yao_amount, t66_t: t66_yao_amount},
+            bob_str: {t55_t: t55_bob_amount},
+        }
+    }
+
+    # WHEN
+    t77_t = 7707
+    t77_yao_amount = -77
+    yao_yao_77_tranunit = tranunit_shop(yao_str, yao_str, t77_t, t77_yao_amount)
+    x_tranbook.set_tranunit(yao_yao_77_tranunit)
+
+    # THEN
+    print(f"{x_tranbook.tranunits=}")
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {
+        sue_str: {
+            yao_str: {t55_t: t55_yao_amount, t66_t: t66_yao_amount},
+            bob_str: {t55_t: t55_bob_amount},
+        },
+        yao_str: {yao_str: {t77_t: t77_yao_amount}},
+    }
+
+
+def test_TranBook_set_tranunit_SetsAttrWithBlockTimeStamp():
+    # ESTABLISH
+    music23_str = "music23"
+    x_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert x_tranbook.tranunits == {}
+
+    # WHEN
+    x_blocked_timestamps = {44}
+    x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_timestamps)
+
+    # THEN
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_t: t55_yao_amount}}}
+
+
+def test_TranBook_set_tranunit_SetsAttrWithBlockTimeStamp_RaisesError():
+    # ESTABLISH
+    music23_str = "music23"
+    x_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    x_blocked_timestamps = {t55_t}
+    sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert x_tranbook.tranunits == {}
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_timestamps)
+    exception_str = (
+        f"Cannot set tranunit for timestamp={t55_t}, timelinepoint is blocked"
+    )
+    assert str(excinfo.value) == exception_str
+
+
+def test_TranBook_set_tranunit_SetsAttrWithCurrentTimeStamp():
+    # ESTABLISH
+    music23_str = "music23"
+    x_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert x_tranbook.tranunits == {}
+
+    # WHEN
+    x_current_time = 8808
+    x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_current_time=x_current_time)
+
+    # THEN
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_t: t55_yao_amount}}}
+
+
+def test_TranBook_set_tranunit_SetsAttrWithCurrentTimeStamp_RaisesError():
+    # ESTABLISH
+    music23_str = "music23"
+    x_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert x_tranbook.tranunits == {}
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_current_time=t55_t)
+    exception_str = f"Cannot set tranunit for timestamp={t55_t}, timelinepoint is greater than current time={t55_t}"
+    assert str(excinfo.value) == exception_str
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_current_time=33)
+    exception_str = f"Cannot set tranunit for timestamp={t55_t}, timelinepoint is greater than current time=33"
+    assert str(excinfo.value) == exception_str
+
+
+def test_TranBook_add_tranunit_SetsAttr():
+    # ESTABLISH
+    music23_str = "music23"
+    x_tranbook = tranbook_shop(music23_str)
+    assert x_tranbook.tranunits == {}
 
     # WHEN
     sue_str = "Sue"
     yao_str = "Yao"
     t55_timestamp = 5505
     t55_yao_amount = -55
-    x_tranbook.set_tranlog(sue_str, yao_str, t55_timestamp, t55_yao_amount)
+    x_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
 
     # THEN
-    assert x_tranbook.tranlogs != {}
-    assert x_tranbook.tranlogs == {sue_str: {yao_str: {t55_timestamp: t55_yao_amount}}}
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_timestamp: t55_yao_amount}}}
 
     # WHEN
     bob_str = "Bob"
     t55_bob_amount = 600
-    x_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    x_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
 
     # THEN
-    assert x_tranbook.tranlogs != {}
-    assert x_tranbook.tranlogs == {
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {
         sue_str: {
             yao_str: {t55_timestamp: t55_yao_amount},
             bob_str: {t55_timestamp: t55_bob_amount},
@@ -87,11 +270,11 @@ def test_TranBook_set_tranlog_SetsAttr():
     # WHEN
     t66_timestamp = 6606
     t66_yao_amount = -66
-    x_tranbook.set_tranlog(sue_str, yao_str, t66_timestamp, t66_yao_amount)
+    x_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
 
     # THEN
-    assert x_tranbook.tranlogs != {}
-    assert x_tranbook.tranlogs == {
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {
         sue_str: {
             yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
             bob_str: {t55_timestamp: t55_bob_amount},
@@ -101,18 +284,99 @@ def test_TranBook_set_tranlog_SetsAttr():
     # WHEN
     t77_timestamp = 7707
     t77_yao_amount = -77
-    x_tranbook.set_tranlog(yao_str, yao_str, t77_timestamp, t77_yao_amount)
+    x_tranbook.add_tranunit(yao_str, yao_str, t77_timestamp, t77_yao_amount)
 
     # THEN
-    print(f"{x_tranbook.tranlogs=}")
-    assert x_tranbook.tranlogs != {}
-    assert x_tranbook.tranlogs == {
+    print(f"{x_tranbook.tranunits=}")
+    assert x_tranbook.tranunits != {}
+    assert x_tranbook.tranunits == {
         sue_str: {
             yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
             bob_str: {t55_timestamp: t55_bob_amount},
         },
         yao_str: {yao_str: {t77_timestamp: t77_yao_amount}},
     }
+
+
+def test_TranBook_tranunit_exists_ReturnsObj():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t) is False
+
+    # WHEN
+    music23_tranbook.set_tranunit(sue_yao_t55_tranunit)
+
+    # THEN
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
+
+
+def test_TranBook_get_tranunit_ReturnsObj():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
+
+    # WHEN
+    sue_yao_t55_tranunit = music23_tranbook.get_tranunit(sue_str, yao_str, t55_t)
+
+    # THEN
+    assert sue_yao_t55_tranunit
+    assert sue_yao_t55_tranunit.src == sue_str
+    assert sue_yao_t55_tranunit.dst == yao_str
+    assert sue_yao_t55_tranunit.timestamp == t55_t
+    assert sue_yao_t55_tranunit.amount == t55_yao_amount
+
+    # WHEN / THEN
+    assert not music23_tranbook.get_tranunit(sue_str, "Bob", t55_t)
+    assert not music23_tranbook.get_tranunit("Bob", yao_str, t55_t)
+    assert not music23_tranbook.get_tranunit(sue_str, yao_str, 44)
+
+
+def test_TranBook_get_amount_ReturnsObj():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
+
+    # WHEN
+    assert music23_tranbook.get_amount(sue_str, yao_str, t55_t) == t55_yao_amount
+    assert not music23_tranbook.get_amount(sue_str, "Bob", t55_t)
+    assert not music23_tranbook.get_amount("Bob", yao_str, t55_t)
+    assert not music23_tranbook.get_amount(sue_str, yao_str, 44)
+
+
+def test_TranBook_del_tranunit_SetsAttr():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    t55_t = 5505
+    t55_yao_amount = -55
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_t, t55_yao_amount)
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
+
+    # WHEN
+    assert music23_tranbook.del_tranunit(sue_str, yao_str, t55_t)
+
+    # THEN
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
 
 
 def test_TranBook_get_owners_accts_net_ReturnObj_Scenario0():
@@ -123,8 +387,8 @@ def test_TranBook_get_owners_accts_net_ReturnObj_Scenario0():
     bob_str = "Bob"
     t55_timestamp = 5505
     t55_bob_amount = 600
-    music23_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
-    assert music23_tranbook.tranlogs == {
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    assert music23_tranbook.tranunits == {
         sue_str: {bob_str: {t55_timestamp: t55_bob_amount}}
     }
 
@@ -148,10 +412,10 @@ def test_TranBook_get_owners_accts_net_ReturnsObj_Scenario1():
     t55_bob_amount = 600
     t66_timestamp = 6606
     t66_yao_amount = -66
-    music23_tranbook.set_tranlog(sue_str, yao_str, t55_timestamp, t55_yao_amount)
-    music23_tranbook.set_tranlog(sue_str, yao_str, t66_timestamp, t66_yao_amount)
-    music23_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
-    assert music23_tranbook.tranlogs == {
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    assert music23_tranbook.tranunits == {
         sue_str: {
             yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
             bob_str: {t55_timestamp: t55_bob_amount},
@@ -176,8 +440,8 @@ def test_TranBook_get_accts_net_dict_ReturnObj_Scenario0():
     bob_str = "Bob"
     t55_timestamp = 5505
     t55_bob_amount = 600
-    music23_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
-    assert music23_tranbook.tranlogs == {
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    assert music23_tranbook.tranunits == {
         sue_str: {bob_str: {t55_timestamp: t55_bob_amount}}
     }
 
@@ -203,12 +467,12 @@ def test_TranBook_get_accts_net_dict_ReturnObj_Scenario1():
     t66_yao_amount = -66
     t77_timestamp = 7707
     t77_yao_amount = -77
-    music23_tranbook.set_tranlog(sue_str, yao_str, t55_timestamp, t55_yao_amount)
-    music23_tranbook.set_tranlog(sue_str, yao_str, t66_timestamp, t66_yao_amount)
-    music23_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
 
-    music23_tranbook.set_tranlog(yao_str, yao_str, t77_timestamp, t77_yao_amount)
-    assert music23_tranbook.tranlogs == {
+    music23_tranbook.add_tranunit(yao_str, yao_str, t77_timestamp, t77_yao_amount)
+    assert music23_tranbook.tranunits == {
         sue_str: {
             yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
             bob_str: {t55_timestamp: t55_bob_amount},
@@ -241,12 +505,12 @@ def test_TranBook_get_accts_net_array_ReturnsObj():
     t66_yao_amount = -66
     t77_timestamp = 7707
     t77_yao_amount = -77
-    music23_tranbook.set_tranlog(sue_str, yao_str, t55_timestamp, t55_yao_amount)
-    music23_tranbook.set_tranlog(sue_str, yao_str, t66_timestamp, t66_yao_amount)
-    music23_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
 
-    music23_tranbook.set_tranlog(yao_str, yao_str, t77_timestamp, t77_yao_amount)
-    assert music23_tranbook.tranlogs == {
+    music23_tranbook.add_tranunit(yao_str, yao_str, t77_timestamp, t77_yao_amount)
+    assert music23_tranbook.tranunits == {
         sue_str: {
             yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
             bob_str: {t55_timestamp: t55_bob_amount},
@@ -288,12 +552,12 @@ def test_TranBook_get_accts_csv_ReturnsObj():
     t66_yao_amount = -66
     t77_timestamp = 7707
     t77_yao_amount = -77
-    music23_tranbook.set_tranlog(sue_str, yao_str, t55_timestamp, t55_yao_amount)
-    music23_tranbook.set_tranlog(sue_str, yao_str, t66_timestamp, t66_yao_amount)
-    music23_tranbook.set_tranlog(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
 
-    music23_tranbook.set_tranlog(yao_str, yao_str, t77_timestamp, t77_yao_amount)
-    assert music23_tranbook.tranlogs == {
+    music23_tranbook.add_tranunit(yao_str, yao_str, t77_timestamp, t77_yao_amount)
+    assert music23_tranbook.tranunits == {
         sue_str: {
             yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
             bob_str: {t55_timestamp: t55_bob_amount},
@@ -320,8 +584,8 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 #     x_fundnum = -45
 #     sue_str = "Sue"
 #     yao_str = "Yao"
-#     x_tranlogs = {sue_str: {yao_str: {x_timelinepoint: x_fundnum}}}
-#     x_tranbook = tranbook_shop(music23_str, x_tranlogs)
+#     x_tranunits = {sue_str: {yao_str: {x_timelinepoint: x_fundnum}}}
+#     x_tranbook = tranbook_shop(music23_str, x_tranunits)
 
 #     # WHEN
 #     x_dict = x_tranbook.get_dict()
@@ -331,7 +595,7 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 #     assert "music23_str" in x_dict.keys()
 #     music23_dict = x_dict.get(music23_str)
 #     assert music23_dict
-#     assert music23_dict == x_tranlogs
+#     assert music23_dict == x_tranunits
 
 
 # def test_tranbook_shop_ReturnsObjWith_net_purviews():

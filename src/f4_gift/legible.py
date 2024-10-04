@@ -1,4 +1,4 @@
-from src.f0_instrument.dict_tool import get_nested_value
+from src.f0_instrument.dict_tool import get_from_nested_dict
 from src.f2_bud.bud import BudUnit
 from src.f2_bud.bud_tool import (
     budunit_str,
@@ -41,7 +41,7 @@ from src.f4_gift.delta import DeltaUnit
 
 
 def get_leg_obj(x_dict: dict, x_keylist) -> any:
-    return get_nested_value(x_dict, x_keylist, if_missing_return_None=True)
+    return get_from_nested_dict(x_dict, x_keylist, if_missing_return_None=True)
 
 
 def create_legible_list(x_delta: DeltaUnit, x_bud: BudUnit) -> list[str]:

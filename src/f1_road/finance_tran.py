@@ -1,10 +1,13 @@
 from src.f0_instrument.dict_tool import (
     get_empty_dict_if_none,
+    get_empty_set_if_none,
     get_0_if_None,
     get_json_from_dict,
     get_dict_from_json,
-    place_obj_in_dict,
+    set_in_nested_dict,
     create_csv,
+    get_from_nested_dict,
+    del_in_nested_dict,
 )
 from src.f1_road.finance import FundNum, TimeLinePoint, default_fund_pool
 from src.f1_road.road import AcctID, OwnerID, FiscalID
@@ -12,6 +15,10 @@ from dataclasses import dataclass
 
 
 class calc_magnitudeException(Exception):
+    pass
+
+
+class timestamp_Exception(Exception):
     pass
 
 
@@ -39,8 +46,8 @@ class PurviewEpisode:
         x_cred_sum = sum(net_purview for net_purview in net_purviews if net_purview > 0)
         x_debt_sum = sum(net_purview for net_purview in net_purviews if net_purview < 0)
         if x_cred_sum + x_debt_sum != 0:
-            exception_text = f"magnitude cannot be calculated: debt_purview={x_debt_sum}, cred_purview={x_cred_sum}"
-            raise calc_magnitudeException(exception_text)
+            exception_str = f"magnitude cannot be calculated: debt_purview={x_debt_sum}, cred_purview={x_cred_sum}"
+            raise calc_magnitudeException(exception_str)
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
@@ -147,24 +154,85 @@ def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, PurviewEp
 
 
 @dataclass
+class TranUnit:
+    src: AcctID = None
+    dst: AcctID = None
+    timestamp: TimeLinePoint = None
+    amount: FundNum = None
+
+
+def tranunit_shop(
+    src: AcctID, dst: AcctID, timestamp: TimeLinePoint, amount: FundNum
+) -> TranUnit:
+    return TranUnit(src=src, dst=dst, timestamp=timestamp, amount=amount)
+
+
+@dataclass
 class TranBook:
     fiscal_id: FiscalID = None
-    tranlogs: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None
+    tranunits: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None
     _accts_net: dict[OwnerID, dict[AcctID, FundNum]] = None
 
-    def set_tranlog(
+    def set_tranunit(
+        self,
+        x_tranunit: TranUnit,
+        x_blocked_timestamps: set[TimeLinePoint] = None,
+        x_current_time: TimeLinePoint = None,
+    ):
+        self.add_tranunit(
+            x_owner_id=x_tranunit.src,
+            x_acct_id=x_tranunit.dst,
+            x_timestamp=x_tranunit.timestamp,
+            x_amount=x_tranunit.amount,
+            x_blocked_timestamps=x_blocked_timestamps,
+            x_current_time=x_current_time,
+        )
+
+    def add_tranunit(
         self,
         x_owner_id: OwnerID,
         x_acct_id: AcctID,
         x_timestamp: TimeLinePoint,
         x_amount: FundNum,
+        x_blocked_timestamps: set[TimeLinePoint] = None,
+        x_current_time: TimeLinePoint = None,
     ):
+        if x_timestamp in get_empty_set_if_none(x_blocked_timestamps):
+            exception_str = f"Cannot set tranunit for timestamp={x_timestamp}, timelinepoint is blocked"
+            raise timestamp_Exception(exception_str)
+        if x_current_time != None and x_timestamp >= x_current_time:
+            exception_str = f"Cannot set tranunit for timestamp={x_timestamp}, timelinepoint is greater than current time={x_current_time}"
+            raise timestamp_Exception(exception_str)
         x_keylist = [x_owner_id, x_acct_id, x_timestamp]
-        place_obj_in_dict(self.tranlogs, x_keylist, x_amount)
+        set_in_nested_dict(self.tranunits, x_keylist, x_amount)
+
+    def tranunit_exists(
+        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
+    ) -> bool:
+        return get_from_nested_dict(self.tranunits, [src, dst, timestamp], True) != None
+
+    def get_tranunit(
+        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
+    ) -> TranUnit:
+        x_amount = get_from_nested_dict(self.tranunits, [src, dst, timestamp], True)
+        if x_amount != None:
+            return tranunit_shop(src, dst, timestamp, x_amount)
+
+    def get_amount(
+        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
+    ) -> TranUnit:
+        return get_from_nested_dict(self.tranunits, [src, dst, timestamp], True)
+
+    def del_tranunit(
+        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
+    ) -> TranUnit:
+        x_amount = get_from_nested_dict(self.tranunits, [src, dst, timestamp], True)
+        if x_amount != None:
+            return tranunit_shop(src, dst, timestamp, x_amount)
 
     def get_owners_accts_net(self) -> dict[OwnerID, dict[AcctID, FundNum]]:
         owners_accts_net_dict = {}
-        for owner_id, owner_dict in self.tranlogs.items():
+        for owner_id, owner_dict in self.tranunits.items():
             for acct_id, acct_dict in owner_dict.items():
                 if owners_accts_net_dict.get(owner_id) is None:
                     owners_accts_net_dict[owner_id] = {}
@@ -174,7 +242,7 @@ class TranBook:
 
     def get_accts_net_dict(self) -> dict[AcctID, FundNum]:
         accts_net_dict = {}
-        for owner_dict in self.tranlogs.values():
+        for owner_dict in self.tranunits.values():
             for acct_id, acct_dict in sorted(owner_dict.items()):
                 if accts_net_dict.get(acct_id) is None:
                     accts_net_dict[acct_id] = sum(acct_dict.values())
@@ -201,11 +269,11 @@ class TranBook:
 
 def tranbook_shop(
     x_fiscal_id: FiscalID,
-    x_tranlogs: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None,
+    x_tranunits: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None,
 ):
     return TranBook(
         fiscal_id=x_fiscal_id,
-        tranlogs=get_empty_dict_if_none(x_tranlogs),
+        tranunits=get_empty_dict_if_none(x_tranunits),
         _accts_net={},
     )
 

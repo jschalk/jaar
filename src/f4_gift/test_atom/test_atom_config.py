@@ -1,4 +1,4 @@
-from src.f0_instrument.dict_tool import get_nested_value
+from src.f0_instrument.dict_tool import get_from_nested_dict
 from src.f2_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
@@ -228,12 +228,12 @@ def test_get_atom_config_dict_EveryCrudOperationHasDeltaOrderGroup():
 
 def _get_atom_config_required_args_len(x_cat: str) -> int:
     required_args_key_list = [x_cat, required_args_str()]
-    return len(get_nested_value(get_atom_config_dict(), required_args_key_list))
+    return len(get_from_nested_dict(get_atom_config_dict(), required_args_key_list))
 
 
 def _get_atom_config_optional_args_len(x_cat: str) -> int:
     optional_args_key_list = [x_cat, optional_args_str()]
-    return len(get_nested_value(get_atom_config_dict(), optional_args_key_list))
+    return len(get_from_nested_dict(get_atom_config_dict(), optional_args_key_list))
 
 
 def test_get_atom_config_dict_CheckEachCategoryHasCorrectArgCount():
@@ -323,12 +323,16 @@ def test_atom_config_NestingOrderExistsWhenNeeded():
 
 def _get_atom_config_optional_arg_keys(x_cat: str) -> set[str]:
     optional_args_key_list = [x_cat, optional_args_str()]
-    return set(get_nested_value(get_atom_config_dict(), optional_args_key_list).keys())
+    return set(
+        get_from_nested_dict(get_atom_config_dict(), optional_args_key_list).keys()
+    )
 
 
 def _get_atom_config_required_arg_keys(x_cat: str) -> set[str]:
     required_args_key_list = [x_cat, required_args_str()]
-    return set(get_nested_value(get_atom_config_dict(), required_args_key_list).keys())
+    return set(
+        get_from_nested_dict(get_atom_config_dict(), required_args_key_list).keys()
+    )
 
 
 def unique_optional_args():

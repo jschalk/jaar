@@ -3,12 +3,16 @@ from src.f1_road.finance import (
     default_respect_bit_if_none,
     default_penny_if_none,
 )
-from src.f1_road.jaar_config import get_gifts_folder, get_json_filename
+from src.f1_road.jaar_config import (
+    get_gifts_folder,
+    get_json_filename,
+    get_test_fiscal_id,
+)
 from src.f1_road.road import default_road_delimiter_if_none
+from src.f1_road.finance_tran import tranbook_shop
 from src.f2_bud.healer import healerlink_shop
 from src.f2_bud.item import itemunit_shop
-from src.f3_chrono.chrono import timelineunit_shop, get_min_from_dt
-from src.f1_road.finance_tran import purviewepisode_shop
+from src.f3_chrono.chrono import timelineunit_shop
 from src.f5_listen.hubunit import hubunit_shop
 from src.f7_fiscal.fiscal import FiscalUnit, fiscalunit_shop
 from src.f7_fiscal.examples.fiscal_env import (
@@ -20,20 +24,22 @@ from os.path import exists as os_path_exists, isdir as os_path_isdir
 
 def test_FiscalUnit_Exists(env_dir_setup_cleanup):
     music_str = "music"
-    music_fiscal = FiscalUnit(fiscal_id=music_str, fiscals_dir=get_test_fiscals_dir())
-    assert music_fiscal.fiscal_id == music_str
+    music_fiscal = FiscalUnit()
+    assert not music_fiscal.fiscal_id
     assert not music_fiscal.timeline
     assert not music_fiscal.current_time
     assert not music_fiscal.purviewlogs
+    assert not music_fiscal.cashbook
     assert not music_fiscal.road_delimiter
     assert not music_fiscal.fund_coin
     assert not music_fiscal.respect_bit
     assert not music_fiscal.penny
-    assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
+    assert not music_fiscal.fiscals_dir
     # Calculated fields
     assert not music_fiscal._owners_dir
     assert not music_fiscal._journal_db
     assert not music_fiscal._gifts_dir
+    assert not music_fiscal._tranbook
 
 
 def test_fiscalunit_shop_ReturnsFiscalUnit():
@@ -41,21 +47,23 @@ def test_fiscalunit_shop_ReturnsFiscalUnit():
     music_str = "music"
 
     # WHEN
-    music_fiscal = fiscalunit_shop(fiscal_id=music_str)
+    music_fiscal = fiscalunit_shop()
 
     # THEN
-    assert music_fiscal.fiscal_id == music_str
+    assert music_fiscal.fiscal_id == get_test_fiscal_id()
     assert music_fiscal.timeline == timelineunit_shop()
     assert music_fiscal.current_time == 0
     assert music_fiscal.purviewlogs == {}
+    assert music_fiscal.cashbook == tranbook_shop(get_test_fiscal_id())
     assert music_fiscal.road_delimiter == default_road_delimiter_if_none()
     assert music_fiscal.fund_coin == default_fund_coin_if_none()
     assert music_fiscal.respect_bit == default_respect_bit_if_none()
     assert music_fiscal.penny == default_penny_if_none()
-    assert music_fiscal.fiscals_dir is None
+    assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
     # Calculated fields
-    assert music_fiscal._owners_dir is None
-    assert music_fiscal._gifts_dir is None
+    assert music_fiscal._owners_dir != None
+    assert music_fiscal._gifts_dir != None
+    assert music_fiscal._tranbook == tranbook_shop(get_test_fiscal_id())
 
 
 def test_fiscalunit_shop_ReturnsFiscalUnitWith_fiscals_dir(env_dir_setup_cleanup):

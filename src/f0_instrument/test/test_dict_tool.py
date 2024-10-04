@@ -1,9 +1,11 @@
 from src.f0_instrument.dict_tool import (
     get_1_if_None,
-    add_dict_if_missing,
-    place_obj_in_dict,
+    add_nested_dict_if_missing,
+    set_in_nested_dict,
     get_all_nondictionary_objs,
-    get_nested_value,
+    get_from_nested_dict,
+    exists_in_nested_dict,
+    del_in_nested_dict,
     get_positive_int,
     extract_csv_headers,
     get_csv_column1_column2_metrics,
@@ -19,6 +21,7 @@ from src.f0_instrument.dict_tool import (
     create_2d_array_from_dict,
 )
 from pytest import raises as pytest_raises
+from copy import deepcopy as copy_deepcopy
 
 
 def test_get_1_if_None():
@@ -28,7 +31,7 @@ def test_get_1_if_None():
     assert get_1_if_None(-3) == -3
 
 
-def test_add_dict_if_missing_CorrectAddsDict():
+def test_add_nested_dict_if_missing_CorrectAddsDict():
     # ESTABLISH
     y_dict = {}
 
@@ -36,13 +39,13 @@ def test_add_dict_if_missing_CorrectAddsDict():
     y_key1 = "sports"
     y_key2 = "running"
     y_key3 = "fun running"
-    add_dict_if_missing(x_dict=y_dict, x_keylist=[y_key1, y_key2, y_key3])
+    add_nested_dict_if_missing(x_dict=y_dict, x_keylist=[y_key1, y_key2, y_key3])
 
     # THEN
     assert y_dict == {y_key1: {y_key2: {y_key3: {}}}}
 
 
-def test_place_obj_in_dict_CorrectAddsDict():
+def test_set_in_nested_dict_CorrectAddsDict():
     # ESTABLISH
     y_dict = {}
 
@@ -51,10 +54,72 @@ def test_place_obj_in_dict_CorrectAddsDict():
     y_key2 = "running"
     y_key3 = "fun running"
     fly_str = "flying"
-    place_obj_in_dict(x_dict=y_dict, x_keylist=[y_key1, y_key2, y_key3], x_obj=fly_str)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=[y_key1, y_key2, y_key3], x_obj=fly_str)
 
     # THEN
     assert y_dict == {y_key1: {y_key2: {y_key3: fly_str}}}
+
+
+def test_exists_in_nested_dict_CorrectAddsDict():
+    # ESTABLISH
+    y_dict = {}
+
+    # WHEN
+    y_key1 = "sports"
+    y_key2 = "running"
+    y_key3 = "fun running"
+    y_keylist = [y_key1, y_key2, y_key3]
+    fly_str = "flying"
+    assert exists_in_nested_dict(x_dict=y_dict, x_keylist=y_keylist) is False
+
+    # WHEN
+    set_in_nested_dict(y_dict, y_keylist, x_obj=fly_str)
+
+    # THEN
+    assert exists_in_nested_dict(y_dict, y_keylist)
+
+
+def test_del_in_nested_dict_CorrectSetsDict():
+    # ESTABLISH
+    y_dict = {}
+    y_key1 = "sports"
+    y_key2 = "running"
+    y_key3_0 = "fun running"
+    y_key3_1 = "rain running"
+    y3_0_keylist = [y_key1, y_key2, y_key3_0]
+    y3_1_keylist = [y_key1, y_key2, y_key3_1]
+    fly_str = "flying"
+    set_in_nested_dict(y_dict, y3_1_keylist, x_obj=fly_str)
+    assert y_dict == {y_key1: {y_key2: {y_key3_1: fly_str}}}
+    assert exists_in_nested_dict(y_dict, y3_0_keylist) is False
+    assert exists_in_nested_dict(y_dict, y3_1_keylist)
+
+    # WHEN
+    del_in_nested_dict(y_dict, y3_0_keylist)
+
+    # THEN
+    assert exists_in_nested_dict(y_dict, y3_0_keylist) is False
+
+    # ESTABLISH
+    set_in_nested_dict(y_dict, y3_0_keylist, x_obj=fly_str)
+    assert y_dict == {y_key1: {y_key2: {y_key3_0: fly_str, y_key3_1: fly_str}}}
+    assert exists_in_nested_dict(y_dict, y3_0_keylist)
+    assert exists_in_nested_dict(y_dict, y3_1_keylist)
+
+    # WHEN
+    del_in_nested_dict(y_dict, y3_0_keylist)
+
+    # THEN
+    assert y_dict == {y_key1: {y_key2: {y_key3_1: fly_str}}}
+    assert exists_in_nested_dict(y_dict, y3_0_keylist) is False
+    assert exists_in_nested_dict(y_dict, y3_1_keylist)
+
+    # WHEN
+    del_in_nested_dict(y_dict, y3_1_keylist)
+
+    # THEN
+    assert not y_dict
+    assert not get_from_nested_dict(y_dict, y3_0_keylist, True)
 
 
 def test_get_all_nondictionary_objs_ReturnsCorrectDict():
@@ -93,11 +158,11 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
         button_str,
     ]
 
-    place_obj_in_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
-    place_obj_in_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
-    place_obj_in_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
-    place_obj_in_dict(x_dict=y_dict, x_keylist=night_list, x_obj=night_obj)
-    place_obj_in_dict(x_dict=y_dict, x_keylist=rain_list, x_obj=silver_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=night_list, x_obj=night_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=rain_list, x_obj=silver_obj)
     print(y_dict)
 
     assert y_dict == {
@@ -121,11 +186,11 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
     assert childless_objs == {
         sports_str: [fun_obj, mount_obj, day_obj, night_obj, silver_obj]
     }
-    assert get_nested_value(y_dict, day_list) == day_obj
-    assert get_nested_value(y_dict, mount_list) == mount_obj
+    assert get_from_nested_dict(y_dict, day_list) == day_obj
+    assert get_from_nested_dict(y_dict, mount_list) == mount_obj
 
 
-def test_get_nested_value_RaisesNestedException():
+def test_get_from_nested_dict_RaisesNestedException():
     # ESTABLISH
     y_dict = {}
     sports_str = "sports"
@@ -147,32 +212,32 @@ def test_get_nested_value_RaisesNestedException():
     night_list = [sports_str, run_str, frank_str, night_str]
     night_obj = "is cool"
 
-    place_obj_in_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
-    place_obj_in_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
-    place_obj_in_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
-    place_obj_in_dict(x_dict=y_dict, x_keylist=night_list, x_obj=night_obj)
-    assert get_nested_value(y_dict, day_list) == day_obj
+    set_in_nested_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=night_list, x_obj=night_obj)
+    assert get_from_nested_dict(y_dict, day_list) == day_obj
 
     # WHEN / THEN
     swim_str = "swim"
     with pytest_raises(Exception) as excinfo:
-        get_nested_value(y_dict, [swim_str])
+        get_from_nested_dict(y_dict, [swim_str])
     assert str(excinfo.value) == f"'{swim_str}' failed at level 0."
 
     # WHEN / THEN
     swim_str = "swim"
     with pytest_raises(Exception) as excinfo:
-        get_nested_value(y_dict, [sports_str, swim_str])
+        get_from_nested_dict(y_dict, [sports_str, swim_str])
     assert str(excinfo.value) == f"'{swim_str}' failed at level 1."
 
     # WHEN / THEN
     swim_str = "swim"
     with pytest_raises(Exception) as excinfo:
-        get_nested_value(y_dict, [sports_str, swim_str, day_str])
+        get_from_nested_dict(y_dict, [sports_str, swim_str, day_str])
     assert str(excinfo.value) == f"'{swim_str}' failed at level 1."
 
 
-def test_get_nested_value_ReturnsNoneWhen_if_missing_return_None_True():
+def test_get_from_nested_dict_ReturnsNoneWhen_if_missing_return_None_True():
     y_dict = {}
     sports_str = "sports"
     run_str = "running"
@@ -193,26 +258,28 @@ def test_get_nested_value_ReturnsNoneWhen_if_missing_return_None_True():
     night_list = [sports_str, run_str, frank_str, night_str]
     night_obj = "is cool"
 
-    place_obj_in_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
-    place_obj_in_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
-    place_obj_in_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
-    place_obj_in_dict(x_dict=y_dict, x_keylist=night_list, x_obj=night_obj)
-    assert get_nested_value(y_dict, day_list, if_missing_return_None=True) == day_obj
+    set_in_nested_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=night_list, x_obj=night_obj)
+    assert (
+        get_from_nested_dict(y_dict, day_list, if_missing_return_None=True) == day_obj
+    )
 
     # WHEN / THEN
     swim_str = "swim"
-    assert get_nested_value(y_dict, [swim_str], if_missing_return_None=True) is None
+    assert get_from_nested_dict(y_dict, [swim_str], if_missing_return_None=True) is None
 
     # WHEN / THEN
     swim_str = "swim"
-    x_value = get_nested_value(
+    x_value = get_from_nested_dict(
         y_dict, [sports_str, swim_str], if_missing_return_None=True
     )
     assert x_value is None
 
     # WHEN / THEN
     swim_str = "swim"
-    x_value = get_nested_value(
+    x_value = get_from_nested_dict(
         y_dict, [sports_str, swim_str, day_str], if_missing_return_None=True
     )
     assert x_value is None
@@ -584,8 +651,8 @@ def test_get_nested_dict_key_by_level_RaisesError_is_2d_with_unique_keys_IsFalse
     # ESTABLISH / WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         get_nested_dict_key_by_level({"Sue": {}, "Bob": {}})
-    exception_text = "dictionary is not 2d_with_unique_keys."
-    assert str(excinfo.value) == exception_text
+    exception_str = "dictionary is not 2d_with_unique_keys."
+    assert str(excinfo.value) == exception_str
 
 
 def test_get_nested_dict_key_by_level_ReturnsObj():
@@ -604,8 +671,8 @@ def test_create_2d_array_from_dict_RaisesError_is_2d_with_unique_keys_IsFalse():
     # ESTABLISH / WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         create_2d_array_from_dict({"Sue": {}, "Bob": {}})
-    exception_text = "dictionary is not 2d_with_unique_keys."
-    assert str(excinfo.value) == exception_text
+    exception_str = "dictionary is not 2d_with_unique_keys."
+    assert str(excinfo.value) == exception_str
 
 
 def test_create_2d_array_from_dict_ReturnsObj_Scenario0_Simple():

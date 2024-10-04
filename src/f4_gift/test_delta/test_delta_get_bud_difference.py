@@ -32,7 +32,7 @@ from src.f4_gift.atom_config import (
 from src.f4_gift.atom import atom_insert, atom_update, atom_delete
 from src.f4_gift.delta import DeltaUnit, deltaunit_shop
 from src.f5_listen.examples.example_listen_buds import get_budunit_with_4_levels
-from src.f0_instrument.dict_tool import get_nested_value, get_empty_list_if_None
+from src.f0_instrument.dict_tool import get_from_nested_dict, get_empty_list_if_None
 from copy import deepcopy as copy_deepcopy
 
 
@@ -130,7 +130,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_delete(
     sue_deltaunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    xio_atomunit = get_nested_value(
+    xio_atomunit = get_from_nested_dict(
         sue_deltaunit.atomunits, [atom_delete(), bud_acctunit_str(), xio_str]
     )
     assert xio_atomunit.get_value(acct_id_str()) == xio_str
@@ -157,7 +157,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_update(
 
     # THEN
     x_keylist = [atom_update(), bud_acctunit_str(), xio_str]
-    xio_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    xio_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert xio_atomunit.get_value(acct_id_str()) == xio_str
     assert xio_atomunit.get_value("credit_belief") == xio_credit_belief
     assert xio_atomunit.get_value("debtit_belief") == xio_debtit_belief
@@ -192,7 +192,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_a
 
     # THEN
     x_keylist = [atom_update(), budunit_str()]
-    xio_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    xio_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert xio_atomunit.get_value("max_tree_traverse") == x_max_tree_traverse
     assert xio_atomunit.get_value("credor_respect") == x_credor_respect
     assert xio_atomunit.get_value("debtor_respect") == x_debtor_respect
@@ -235,17 +235,17 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership_
 
     # THEN
     x_keylist = [atom_insert(), bud_acctunit_str(), yao_str]
-    yao_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    yao_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert yao_atomunit.get_value(acct_id_str()) == yao_str
 
     x_keylist = [atom_insert(), bud_acctunit_str(), zia_str]
-    zia_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    zia_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert zia_atomunit.get_value(acct_id_str()) == zia_str
     print(f"\n{sue_deltaunit.atomunits=}")
     # print(f"\n{zia_atomunit=}")
 
     x_keylist = [atom_insert(), bud_acct_membership_str(), zia_str, run_str]
-    run_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    run_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert run_atomunit.get_value(acct_id_str()) == zia_str
     assert run_atomunit.get_value(group_id_str()) == run_str
     assert run_atomunit.get_value("credit_vote") == zia_run_credit_w
@@ -284,13 +284,13 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership_
 
     # THEN
     # x_keylist = [atom_update(), bud_acctunit_str(), xio_str]
-    # xio_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    # xio_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     # assert xio_atomunit.get_value(acct_id_str()) == xio_str
     # print(f"\n{sue_deltaunit.atomunits=}")
     # print(f"\n{xio_atomunit=}")
 
     x_keylist = [atom_update(), bud_acct_membership_str(), xio_str, run_str]
-    xio_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    xio_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert xio_atomunit.get_value(acct_id_str()) == xio_str
     assert xio_atomunit.get_value(group_id_str()) == run_str
     assert xio_atomunit.get_value("credit_vote") == after_xio_credit_w
@@ -341,7 +341,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership_
 
     # THEN
     x_keylist = [atom_delete(), bud_acct_membership_str(), bob_str, fly_str]
-    xio_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    xio_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert xio_atomunit.get_value(acct_id_str()) == bob_str
     assert xio_atomunit.get_value(group_id_str()) == fly_str
 
@@ -383,12 +383,12 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_delete():
     print(f"{sue_deltaunit.atomunits.get(atom_delete()).get(x_category).keys()=}")
 
     x_keylist = [atom_delete(), bud_itemunit_str(), ball_road, street_str]
-    street_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    street_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == ball_road
     assert street_atomunit.get_value(label_str()) == street_str
 
     x_keylist = [atom_delete(), bud_itemunit_str(), sports_road, ball_str]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == sports_road
     assert ball_atomunit.get_value(label_str()) == ball_str
 
@@ -437,7 +437,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_insert():
     print_atomunit_keys(sue_deltaunit)
 
     x_keylist = [atom_insert(), bud_itemunit_str(), sports_road, disc_str]
-    street_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    street_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == sports_road
     assert street_atomunit.get_value(label_str()) == disc_str
 
@@ -447,7 +447,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_insert():
         after_sue_bud._fiscal_id,
         music_str,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(label_str()) == music_str
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._fiscal_id
     assert ball_atomunit.get_value(begin_str()) == music_begin
@@ -506,7 +506,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_update():
         after_sue_bud._fiscal_id,
         music_str,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._fiscal_id
     assert ball_atomunit.get_value(label_str()) == music_str
     assert ball_atomunit.get_value(begin_str()) == after_music_begin
@@ -561,7 +561,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_d
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
 
     x_keylist = [atom_delete(), bud_item_awardlink_str(), disc_road, run_str]
-    run_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    run_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert run_atomunit.get_value("road") == disc_road
     assert run_atomunit.get_value(group_id_str()) == run_str
 
@@ -613,7 +613,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_i
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
 
     x_keylist = [atom_insert(), bud_item_awardlink_str(), disc_road, run_str]
-    run_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    run_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert run_atomunit.get_value("road") == disc_road
     assert run_atomunit.get_value(group_id_str()) == run_str
     assert run_atomunit.get_value("road") == disc_road
@@ -662,7 +662,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_u
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
 
     x_keylist = [atom_update(), bud_item_awardlink_str(), ball_road, run_str]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value(group_id_str()) == run_str
     assert ball_atomunit.get_value("give_force") == after_give_force
@@ -707,7 +707,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_factunit_up
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
 
     x_keylist = [atom_update(), bud_item_factunit_str(), ball_road, knee_road]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
     assert ball_atomunit.get_value("pick") == broken_road
@@ -745,7 +745,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_factunit_in
     # THEN
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [atom_insert(), bud_item_factunit_str(), ball_road, knee_road]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
     assert ball_atomunit.get_value("pick") == broken_road
@@ -788,7 +788,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_factunit_de
     # THEN
     print(f"{print_atomunit_keys(sue_deltaunit)=}")
     x_keylist = [atom_delete(), bud_item_factunit_str(), ball_road, knee_road]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
     assert ball_atomunit.get_value("road") == ball_road
@@ -844,7 +844,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reason_prem
         knee_road,
         broken_road,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
     assert ball_atomunit.get_value("need") == broken_road
@@ -906,7 +906,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reason_prem
         knee_road,
         broken_road,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
     assert ball_atomunit.get_value("need") == broken_road
@@ -972,7 +972,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reason_prem
         knee_road,
         broken_road,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == knee_road
     assert ball_atomunit.get_value("need") == broken_road
@@ -1017,7 +1017,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_
         ball_road,
         medical_road,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == medical_road
     assert (
@@ -1069,7 +1069,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_
         ball_road,
         medical_road,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == medical_road
     assert (
@@ -1117,7 +1117,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_
         ball_road,
         medical_road,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value("base") == medical_road
     assert get_atomunit_total_count(sue_deltaunit) == 1
@@ -1151,7 +1151,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_teamlink_in
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value(group_id_str()) == xio_str
     assert get_atomunit_total_count(sue_deltaunit) == 1
@@ -1187,7 +1187,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_teamlink_de
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value(group_id_str()) == xio_str
     assert get_atomunit_total_count(sue_deltaunit) == 1
@@ -1221,7 +1221,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value(healer_id_str()) == xio_str
     assert get_atomunit_total_count(sue_deltaunit) == 1
@@ -1255,7 +1255,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_nested_value(sue_deltaunit.atomunits, x_keylist, True)
+    ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist, True)
     assert ball_atomunit
     assert ball_atomunit.get_value("road") == ball_road
     assert ball_atomunit.get_value(healer_id_str()) == xio_str
@@ -1292,7 +1292,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_nested_value(
+    ball_atomunit = get_from_nested_dict(
         sue_deltaunit.atomunits, x_keylist, if_missing_return_None=True
     )
     assert ball_atomunit
@@ -1330,7 +1330,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_nested_value(
+    ball_atomunit = get_from_nested_dict(
         sue_deltaunit.atomunits, x_keylist, if_missing_return_None=True
     )
     assert ball_atomunit
