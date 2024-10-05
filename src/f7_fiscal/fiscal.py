@@ -17,13 +17,20 @@ from src.f1_road.finance import (
     BitNum,
     TimeLinePoint,
 )
-from src.f1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
+from src.f1_road.road import (
+    default_road_delimiter_if_none,
+    OwnerID,
+    RoadUnit,
+    FiscalID,
+    AcctID,
+)
 from src.f2_bud.bud import BudUnit
 from src.f3_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f1_road.finance_tran import (
     PurviewLog,
     purviewlog_shop,
     get_purviewlog_from_dict,
+    TranUnit,
     TranBook,
     tranbook_shop,
 )
@@ -38,6 +45,19 @@ from src.f5_listen.listen import (
 from src.f7_fiscal.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
+from copy import deepcopy as copy_deepcopy
+
+
+class purviewepisode_Exception(Exception):
+    pass
+
+
+class set_cashpurchase_Exception(Exception):
+    pass
+
+
+class set_current_time_Exception(Exception):
+    pass
 
 
 @dataclass
@@ -66,7 +86,7 @@ class FiscalUnit:
     _owners_dir: str = None
     _journal_db: str = None
     _gifts_dir: str = None
-    _tranbook: TranBook = None
+    _all_tranbook: TranBook = None
 
     # directory setup
     def _set_fiscal_dirs(self, in_memory_journal: bool = None):
@@ -243,9 +263,12 @@ class FiscalUnit:
     def del_purviewlog(self, x_owner_id: OwnerID):
         self.purviewlogs.pop(x_owner_id)
 
-    def add_purviewlog(
+    def add_purviewepisode(
         self, x_owner_id: OwnerID, x_timestamp: TimeLinePoint, x_money_magnitude: int
     ):
+        if x_timestamp < self.current_time:
+            exception_str = f"Cannot set purviewepisode because timestamp {x_timestamp} is less than FiscalUnit.current_time {self.current_time}."
+            raise purviewepisode_Exception(exception_str)
         if self.purviewlog_exists(x_owner_id) is False:
             self.set_purviewlog(purviewlog_shop(x_owner_id))
         x_purviewlog = self.get_purviewlog(x_owner_id)
@@ -271,6 +294,48 @@ class FiscalUnit:
             x_episode.owner_id: x_episode.get_dict()
             for x_episode in self.purviewlogs.values()
         }
+
+    def get_purviewlogs_timestamps(self) -> set[TimeLinePoint]:
+        all_purviewepisode_timestamps = set()
+        for x_purviewlog in self.purviewlogs.values():
+            all_purviewepisode_timestamps.update(x_purviewlog.get_timestamps())
+        return all_purviewepisode_timestamps
+
+    def set_cashpurchase(self, x_cashpurchase: TranUnit):
+        self.cashbook.set_tranunit(
+            x_tranunit=x_cashpurchase,
+            x_blocked_timestamps=self.get_purviewlogs_timestamps(),
+            x_current_time=self.current_time,
+        )
+
+    def cashpurchase_exists(
+        self, src: AcctID, dst: AcctID, x_timestamp: TimeLinePoint
+    ) -> bool:
+        return self.cashbook.tranunit_exists(src, dst, x_timestamp)
+
+    def get_cashpurchase(
+        self, src: AcctID, dst: AcctID, x_timestamp: TimeLinePoint
+    ) -> TranUnit:
+        return self.cashbook.get_tranunit(src, dst, x_timestamp)
+
+    def del_cashpurchase(self, src: AcctID, dst: AcctID, x_timestamp: TimeLinePoint):
+        return self.cashbook.del_tranunit(src, dst, x_timestamp)
+
+    def set_current_time(self, x_current_time: TimeLinePoint):
+        x_timestamps = self.cashbook.get_timestamps()
+        if x_timestamps != set() and max(x_timestamps) >= x_current_time:
+            exception_str = f"Cannot set current_time {x_current_time}, cashpurchase with greater timestamp exists"
+            raise set_current_time_Exception(exception_str)
+        self.current_time = x_current_time
+
+    def set_all_tranbook(self):
+        x_tranunits = copy_deepcopy(self.cashbook.tranunits)
+        x_tranbook = tranbook_shop(self.fiscal_id, x_tranunits)
+        for owner_id, x_purviewlog in self.purviewlogs.items():
+            for x_timestamp, x_purviewepisode in x_purviewlog.episodes.items():
+                for acct_id, x_amount in x_purviewepisode._net_purviews.items():
+                    x_tranbook.add_tranunit(owner_id, acct_id, x_timestamp, x_amount)
+        self._all_tranbook = x_tranbook
 
 
 def fiscalunit_shop(
@@ -300,7 +365,7 @@ def fiscalunit_shop(
         fund_coin=default_respect_bit_if_none(fund_coin),
         respect_bit=default_respect_bit_if_none(respect_bit),
         penny=default_penny_if_none(penny),
-        _tranbook=tranbook_shop(fiscal_id),
+        _all_tranbook=tranbook_shop(fiscal_id),
     )
     fiscal_x._set_fiscal_dirs(in_memory_journal=in_memory_journal)
     return fiscal_x

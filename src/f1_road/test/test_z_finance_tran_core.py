@@ -5,7 +5,6 @@ from src.f1_road.finance_tran import (
     tranbook_shop,
     get_tranbook_from_dict,
     get_tranbook_from_json,
-    get_purviewlog_from_dict,
 )
 from pytest import raises as pytest_raises
 
@@ -373,10 +372,37 @@ def test_TranBook_del_tranunit_SetsAttr():
     assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
 
     # WHEN
-    assert music23_tranbook.del_tranunit(sue_str, yao_str, t55_t)
+    music23_tranbook.del_tranunit(sue_str, yao_str, t55_t)
 
     # THEN
-    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t) is False
+
+
+def test_TranBook_get_timestamps_ReturnsObj():
+    # ESTABLISH
+    music23_str = "music23"
+    music23_tranbook = tranbook_shop(music23_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    bob_str = "Bob"
+    t55_timestamp = 5505
+    t55_yao_amount = -55
+    t55_bob_amount = 600
+    t66_timestamp = 6606
+    t66_yao_amount = -66
+    t77_timestamp = 7707
+    t77_bob_amount = -77
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t77_timestamp, t77_bob_amount)
+
+    # WHEN
+    music23_timestamps = music23_tranbook.get_timestamps()
+
+    # THEN
+    assert music23_timestamps
+    assert len(music23_timestamps)
+    assert music23_timestamps == {t55_timestamp, t66_timestamp, t77_timestamp}
 
 
 def test_TranBook_get_owners_accts_net_ReturnObj_Scenario0():

@@ -433,6 +433,24 @@ def test_PurviewLog_get_2d_array_ReturnsObj_Scenario1():
     ]
 
 
+def test_PurviewLog_get_timestamps_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_purviewlog = purviewlog_shop(sue_str)
+    x4_timestamp = 4
+    x4_amount = 55
+    x7_timestamp = 7
+    x7_amount = 66
+    assert sue_purviewlog.get_timestamps() == set()
+
+    # WHEN
+    sue_purviewlog.add_episode(x4_timestamp, x4_amount)
+    sue_purviewlog.add_episode(x7_timestamp, x7_amount)
+
+    # THEN
+    assert sue_purviewlog.get_timestamps() == {x4_timestamp, x7_timestamp}
+
+
 def test_PurviewLog_get_headers_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
@@ -564,3 +582,49 @@ def test_get_purviewlog_from_dict_ReturnsObj_Scenario2():
     assert len(x_purviewlog.get_episode(x7_timestamp)._net_purviews) == 2
     assert x_purviewlog.episodes == sue_purviewlog.episodes
     assert x_purviewlog == sue_purviewlog
+
+
+def test_PurviewLog_get_tranbook_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_purviewlog = purviewlog_shop(sue_str)
+    x4_timestamp = 4
+    x4_amount = 55
+    x7_timestamp = 7
+    x7_amount = 66
+    sue_purviewlog.add_episode(x4_timestamp, x4_amount)
+    sue_purviewlog.add_episode(x7_timestamp, x7_amount)
+    bob_str = "Bob"
+    zia_str = "Zia"
+    zia_net_purview = 887
+    bob_net_purview = 445
+    sue_purviewlog.get_episode(x4_timestamp).set_net_purview(bob_str, bob_net_purview)
+    sue_purviewlog.get_episode(x7_timestamp).set_net_purview(zia_str, zia_net_purview)
+    sue_episodes_dict = sue_purviewlog.get_dict()
+    assert sue_episodes_dict == {
+        "owner_id": sue_str,
+        "episodes": {
+            x4_timestamp: {
+                "timestamp": x4_timestamp,
+                "amount": x4_amount,
+                "net_purviews": {bob_str: bob_net_purview},
+            },
+            x7_timestamp: {
+                "timestamp": x7_timestamp,
+                "amount": x7_amount,
+                "net_purviews": {zia_str: zia_net_purview},
+            },
+        },
+    }
+
+    # WHEN
+    x_fiscal_id = "fiscal_id_x"
+    sue_tranbook = sue_purviewlog.get_tranbook(x_fiscal_id)
+
+    # THEN
+    assert sue_tranbook
+    assert sue_tranbook.fiscal_id == x_fiscal_id
+    assert sue_tranbook.tranunit_exists(sue_str, zia_str, x7_timestamp)
+    assert sue_tranbook.tranunit_exists(sue_str, bob_str, x4_timestamp)
+    assert sue_tranbook.get_amount(sue_str, zia_str, x7_timestamp) == zia_net_purview
+    assert sue_tranbook.get_amount(sue_str, bob_str, x4_timestamp) == bob_net_purview
