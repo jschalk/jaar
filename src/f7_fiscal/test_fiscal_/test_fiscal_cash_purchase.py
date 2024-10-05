@@ -171,3 +171,49 @@ def test_FiscalUnit_set_current_time_RaisesErrorWhen_cashpurchase_ExistsWithGrea
 
     # THEN
     assert x_fiscal.current_time == t6606_current_time
+
+
+# def test_FiscalUnit_set_all_tranbook_SetsAttr():
+#     # ESTABLISH
+#     x_fiscal = fiscalunit_shop(current_time=10101)
+#     sue_str = "Sue"
+#     bob_str = "Bob"
+#     yao_str = "Yao"
+#     t55_t = 5505
+#     t66_t = 6606
+#     t77_t = 7707
+#     t88_t = 8808
+#     t99_t = 9909
+#     t55_amount = 50
+#     t66_amount = 60
+#     t77_amount = 70
+#     t88_amount = 80
+#     t99_amount = 90
+#     t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
+#     t66_tranunit = tranunit_shop(yao_str, bob_str, t66_t, t66_amount)
+#     t77_tranunit = tranunit_shop(yao_str, sue_str, t77_t, t77_amount)
+#     t88_tranunit = tranunit_shop(sue_str, yao_str, t88_t, t88_amount)
+#     t99_tranunit = tranunit_shop(bob_str, sue_str, t99_t, t99_amount)
+#     x_fiscal.set_cashpurchase(t55_tranunit)
+#     x_fiscal.set_cashpurchase(t66_tranunit)
+#     x_fiscal.set_cashpurchase(t77_tranunit)
+#     x_fiscal.set_cashpurchase(t88_tranunit)
+#     x_fiscal.set_cashpurchase(t99_tranunit)
+#     assert x_fiscal._all_tranbook == tranbook_shop(x_fiscal.fiscal_id)
+#     assert x_fiscal.cashpurchase_exists(sue_str, bob_str, t55_t)
+#     assert x_fiscal.cashpurchase_exists(yao_str, bob_str, t66_t)
+#     assert x_fiscal.cashpurchase_exists(yao_str, sue_str, t77_t)
+#     assert x_fiscal.cashpurchase_exists(sue_str, yao_str, t88_t)
+#     assert x_fiscal.cashpurchase_exists(bob_str, sue_str, t99_t)
+#     # x_fiscal.add_purviewepisode()
+
+#     # WHEN
+#     x_fiscal.set_all_tranbook()
+
+#     # THEN
+#     assert x_fiscal._all_tranbook.tranunit_exists(sue_str, bob_str, t55_t)
+#     assert x_fiscal._all_tranbook.tranunit_exists(yao_str, bob_str, t66_t)
+#     assert x_fiscal._all_tranbook.tranunit_exists(yao_str, sue_str, t77_t)
+#     assert x_fiscal._all_tranbook.tranunit_exists(sue_str, yao_str, t88_t)
+#     assert x_fiscal._all_tranbook.tranunit_exists(bob_str, sue_str, t99_t)
+#     assert 1 == 2

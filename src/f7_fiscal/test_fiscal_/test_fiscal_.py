@@ -39,7 +39,7 @@ def test_FiscalUnit_Exists(env_dir_setup_cleanup):
     assert not music_fiscal._owners_dir
     assert not music_fiscal._journal_db
     assert not music_fiscal._gifts_dir
-    assert not music_fiscal._tranbook
+    assert not music_fiscal._all_tranbook
 
 
 def test_fiscalunit_shop_ReturnsFiscalUnit():
@@ -63,7 +63,7 @@ def test_fiscalunit_shop_ReturnsFiscalUnit():
     # Calculated fields
     assert music_fiscal._owners_dir != None
     assert music_fiscal._gifts_dir != None
-    assert music_fiscal._tranbook == tranbook_shop(get_test_fiscal_id())
+    assert music_fiscal._all_tranbook == tranbook_shop(get_test_fiscal_id())
 
 
 def test_fiscalunit_shop_ReturnsFiscalUnitWith_fiscals_dir(env_dir_setup_cleanup):

@@ -45,6 +45,7 @@ from src.f5_listen.listen import (
 from src.f7_fiscal.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
+from copy import deepcopy as copy_deepcopy
 
 
 class purviewepisode_Exception(Exception):
@@ -85,7 +86,7 @@ class FiscalUnit:
     _owners_dir: str = None
     _journal_db: str = None
     _gifts_dir: str = None
-    _tranbook: TranBook = None
+    _all_tranbook: TranBook = None
 
     # directory setup
     def _set_fiscal_dirs(self, in_memory_journal: bool = None):
@@ -327,6 +328,9 @@ class FiscalUnit:
             raise set_current_time_Exception(exception_str)
         self.current_time = x_current_time
 
+    def set_all_tranbook(self):
+        self._all_tranbook.tranunits = copy_deepcopy(self.cashbook.tranunits)
+
 
 def fiscalunit_shop(
     fiscal_id: FiscalID = None,
@@ -355,7 +359,7 @@ def fiscalunit_shop(
         fund_coin=default_respect_bit_if_none(fund_coin),
         respect_bit=default_respect_bit_if_none(respect_bit),
         penny=default_penny_if_none(penny),
-        _tranbook=tranbook_shop(fiscal_id),
+        _all_tranbook=tranbook_shop(fiscal_id),
     )
     fiscal_x._set_fiscal_dirs(in_memory_journal=in_memory_journal)
     return fiscal_x
