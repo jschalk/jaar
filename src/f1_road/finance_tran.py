@@ -234,6 +234,13 @@ class TranBook:
         if exists_in_nested_dict(self.tranunits, x_keylist):
             del_in_nested_dict(self.tranunits, x_keylist)
 
+    def get_timestamps(self) -> set[TimeLinePoint]:
+        x_set = set()
+        for dst_dict in self.tranunits.values():
+            for timestamp_dict in dst_dict.values():
+                x_set.update(set(timestamp_dict.keys()))
+        return x_set
+
     def get_owners_accts_net(self) -> dict[OwnerID, dict[AcctID, FundNum]]:
         owners_accts_net_dict = {}
         for owner_id, owner_dict in self.tranunits.items():
@@ -262,7 +269,6 @@ class TranBook:
         return [[acct_id, net_amount] for acct_id, net_amount in x_items]
 
     def get_accts_net_csv(self) -> str:
-        print(f"{self._get_accts_net_array()=}")
         return create_csv(self._get_accts_headers(), self._get_accts_net_array())
 
     # def get_dict(

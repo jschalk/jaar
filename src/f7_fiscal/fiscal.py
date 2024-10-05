@@ -51,6 +51,14 @@ class purviewepisode_Exception(Exception):
     pass
 
 
+class set_cashpurchase_Exception(Exception):
+    pass
+
+
+class set_current_time_Exception(Exception):
+    pass
+
+
 @dataclass
 class FiscalUnit:
     """Data pipelines:
@@ -293,7 +301,11 @@ class FiscalUnit:
         return all_purviewepisode_timestamps
 
     def set_cashpurchase(self, x_cashpurchase: TranUnit):
-        self.cashbook.set_tranunit(x_cashpurchase)
+        self.cashbook.set_tranunit(
+            x_tranunit=x_cashpurchase,
+            x_blocked_timestamps=self.get_purviewlogs_timestamps(),
+            x_current_time=self.current_time,
+        )
 
     def cashpurchase_exists(
         self, src: AcctID, dst: AcctID, x_timestamp: TimeLinePoint
@@ -307,6 +319,13 @@ class FiscalUnit:
 
     def del_cashpurchase(self, src: AcctID, dst: AcctID, x_timestamp: TimeLinePoint):
         return self.cashbook.del_tranunit(src, dst, x_timestamp)
+
+    def set_current_time(self, x_current_time: TimeLinePoint):
+        x_timestamps = self.cashbook.get_timestamps()
+        if x_timestamps != set() and max(x_timestamps) >= x_current_time:
+            exception_str = f"Cannot set current_time {x_current_time}, cashpurchase with greater timestamp exists"
+            raise set_current_time_Exception(exception_str)
+        self.current_time = x_current_time
 
 
 def fiscalunit_shop(
