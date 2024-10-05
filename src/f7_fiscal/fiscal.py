@@ -40,6 +40,10 @@ from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
 
 
+class purviewepisode_Exception(Exception):
+    pass
+
+
 @dataclass
 class FiscalUnit:
     """Data pipelines:
@@ -243,9 +247,12 @@ class FiscalUnit:
     def del_purviewlog(self, x_owner_id: OwnerID):
         self.purviewlogs.pop(x_owner_id)
 
-    def add_purviewlog(
+    def add_purviewepisode(
         self, x_owner_id: OwnerID, x_timestamp: TimeLinePoint, x_money_magnitude: int
     ):
+        if x_timestamp < self.current_time:
+            exception_str = f"Cannot set purviewepisode because timestamp {x_timestamp} is less than FiscalUnit.current_time {self.current_time}."
+            raise purviewepisode_Exception(exception_str)
         if self.purviewlog_exists(x_owner_id) is False:
             self.set_purviewlog(purviewlog_shop(x_owner_id))
         x_purviewlog = self.get_purviewlog(x_owner_id)
