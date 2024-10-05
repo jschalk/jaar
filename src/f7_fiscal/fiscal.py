@@ -17,13 +17,20 @@ from src.f1_road.finance import (
     BitNum,
     TimeLinePoint,
 )
-from src.f1_road.road import default_road_delimiter_if_none, OwnerID, RoadUnit, FiscalID
+from src.f1_road.road import (
+    default_road_delimiter_if_none,
+    OwnerID,
+    RoadUnit,
+    FiscalID,
+    AcctID,
+)
 from src.f2_bud.bud import BudUnit
 from src.f3_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f1_road.finance_tran import (
     PurviewLog,
     purviewlog_shop,
     get_purviewlog_from_dict,
+    TranUnit,
     TranBook,
     tranbook_shop,
 )
@@ -284,6 +291,22 @@ class FiscalUnit:
         for x_purviewlog in self.purviewlogs.values():
             all_purviewepisode_timestamps.update(x_purviewlog.get_timestamps())
         return all_purviewepisode_timestamps
+
+    def set_cashpurchase(self, x_cashpurchase: TranUnit):
+        self.cashbook.set_tranunit(x_cashpurchase)
+
+    def cashpurchase_exists(
+        self, src: AcctID, dst: AcctID, x_timestamp: TimeLinePoint
+    ) -> bool:
+        return self.cashbook.tranunit_exists(src, dst, x_timestamp)
+
+    def get_cashpurchase(
+        self, src: AcctID, dst: AcctID, x_timestamp: TimeLinePoint
+    ) -> TranUnit:
+        return self.cashbook.get_tranunit(src, dst, x_timestamp)
+
+    def del_cashpurchase(self, src: AcctID, dst: AcctID, x_timestamp: TimeLinePoint):
+        return self.cashbook.del_tranunit(src, dst, x_timestamp)
 
 
 def fiscalunit_shop(

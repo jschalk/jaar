@@ -373,10 +373,10 @@ def test_TranBook_del_tranunit_SetsAttr():
     assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
 
     # WHEN
-    assert music23_tranbook.del_tranunit(sue_str, yao_str, t55_t)
+    music23_tranbook.del_tranunit(sue_str, yao_str, t55_t)
 
     # THEN
-    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
+    assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t) is False
 
 
 def test_TranBook_get_owners_accts_net_ReturnObj_Scenario0():

@@ -7,6 +7,7 @@ from src.f0_instrument.dict_tool import (
     set_in_nested_dict,
     create_csv,
     get_from_nested_dict,
+    exists_in_nested_dict,
     del_in_nested_dict,
 )
 from src.f1_road.finance import FundNum, TimeLinePoint, default_fund_pool
@@ -229,9 +230,9 @@ class TranBook:
     def del_tranunit(
         self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
     ) -> TranUnit:
-        x_amount = get_from_nested_dict(self.tranunits, [src, dst, timestamp], True)
-        if x_amount != None:
-            return tranunit_shop(src, dst, timestamp, x_amount)
+        x_keylist = [src, dst, timestamp]
+        if exists_in_nested_dict(self.tranunits, x_keylist):
+            del_in_nested_dict(self.tranunits, x_keylist)
 
     def get_owners_accts_net(self) -> dict[OwnerID, dict[AcctID, FundNum]]:
         owners_accts_net_dict = {}

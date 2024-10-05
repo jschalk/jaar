@@ -1,74 +1,78 @@
-# from src.f1_road.finance_tran import tranbook_shop
-# from src.f7_fiscal.fiscal import fiscalunit_shop
+from src.f1_road.finance_tran import tranbook_shop, tranunit_shop
+from src.f7_fiscal.fiscal import fiscalunit_shop
 
 
-# def test_FiscalUnit_set_cashpurchase_SetsAttr():
-#     # ESTABLISH
-#     x_fiscal = fiscalunit_shop()
-#     sue_str = "Sue"
-#     bob_str = "Bob"
-#     t55_t = 5505
-#     assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
+def test_FiscalUnit_set_cashpurchase_SetsAttr():
+    # ESTABLISH
+    x_fiscal = fiscalunit_shop()
+    sue_str = "Sue"
+    bob_str = "Bob"
+    t55_t = 5505
+    t55_amount = 37
+    sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
+    assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t) is False
 
-#     # WHEN
-#     x_fiscal.cashbook(sue_cashpurchase)
+    # WHEN
+    x_fiscal.set_cashpurchase(sue_bob_t55_tranunit)
 
-#     # THEN
-#     assert x_fiscal.cashbook != {}
-#     assert x_fiscal.cashbook.get(sue_str) == sue_cashpurchase
-
-
-# def test_FiscalUnit_cashpurchase_exists_ReturnsObj():
-#     # ESTABLISH
-#     music_str = "music"
-#     x_fiscal = fiscalunit_shop()
-#     sue_str = "Sue"
-#     assert x_fiscal.cashpurchase_exists(sue_str) is False
-
-#     # WHEN
-#     sue_cashpurchase = cashpurchase_shop(sue_str)
-#     x_fiscal.set_cashpurchase(sue_cashpurchase)
-
-#     # THEN
-#     assert x_fiscal.cashpurchase_exists(sue_str)
+    # THEN
+    assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
-# def test_FiscalUnit_get_cashpurchase_ReturnsObj():
-#     # ESTABLISH
-#     music_str = "music"
-#     x_fiscal = fiscalunit_shop()
-#     sue_str = "Sue"
-#     sue_cashpurchase = cashpurchase_shop(sue_str)
-#     x_fiscal.set_cashpurchase(sue_cashpurchase)
-#     assert x_fiscal.cashpurchase_exists(sue_str)
+def test_FiscalUnit_cashpurchase_exists_ReturnsObj():
+    # ESTABLISH
+    x_fiscal = fiscalunit_shop()
+    sue_str = "Sue"
+    bob_str = "Bob"
+    t55_t = 5505
+    assert x_fiscal.cashpurchase_exists(sue_str, bob_str, t55_t) is False
 
-#     # WHEN
-#     sue_gen_cashpurchase = x_fiscal.get_cashpurchase(sue_str)
+    # WHEN
+    t55_amount = 37
+    x_fiscal.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
 
-#     # THEN
-#     assert sue_cashpurchase
-#     assert sue_cashpurchase == sue_gen_cashpurchase
+    # THEN
+    assert x_fiscal.cashpurchase_exists(sue_str, bob_str, t55_t)
 
 
-# def test_FiscalUnit_del_cashpurchase_SetsAttr():
-#     # ESTABLISH
-#     music_str = "music"
-#     x_fiscal = fiscalunit_shop()
-#     sue_str = "Sue"
-#     sue_cashpurchase = cashpurchase_shop(sue_str)
-#     x_fiscal.set_cashpurchase(sue_cashpurchase)
-#     assert x_fiscal.cashpurchase_exists(sue_str)
+def test_FiscalUnit_get_cashpurchase_ReturnsObj():
+    # ESTABLISH
+    x_fiscal = fiscalunit_shop()
+    sue_str = "Sue"
+    bob_str = "Bob"
+    t55_t = 5505
+    t55_amount = 37
+    x_fiscal.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
+    assert x_fiscal.cashpurchase_exists(sue_str, bob_str, t55_t)
 
-#     # WHEN
-#     x_fiscal.del_cashpurchase(sue_str)
+    # WHEN
+    sue_gen_cashpurchase = x_fiscal.get_cashpurchase(sue_str, bob_str, t55_t)
 
-#     # THEN
-#     assert x_fiscal.cashpurchase_exists(sue_str) is False
+    # THEN
+    assert sue_gen_cashpurchase
+    sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
+    assert sue_gen_cashpurchase == sue_bob_t55_tranunit
+
+
+def test_FiscalUnit_del_cashpurchase_SetsAttr():
+    # ESTABLISH
+    x_fiscal = fiscalunit_shop()
+    sue_str = "Sue"
+    bob_str = "Bob"
+    t55_t = 5505
+    t55_amount = 37
+    x_fiscal.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
+    assert x_fiscal.cashpurchase_exists(sue_str, bob_str, t55_t)
+
+    # WHEN
+    x_fiscal.del_cashpurchase(sue_str, bob_str, t55_t)
+
+    # THEN
+    assert x_fiscal.cashpurchase_exists(sue_str, bob_str, t55_t) is False
 
 
 # def test_FiscalUnit_add_cashpurchase_SetsAttr():
 #     # ESTABLISH
-#     music_str = "music"
 #     x_fiscal = fiscalunit_shop()
 #     assert x_fiscal.cashbook == tranbook_shop(x_fiscal.fiscal_id)
 
