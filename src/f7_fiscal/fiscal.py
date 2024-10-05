@@ -329,7 +329,13 @@ class FiscalUnit:
         self.current_time = x_current_time
 
     def set_all_tranbook(self):
-        self._all_tranbook.tranunits = copy_deepcopy(self.cashbook.tranunits)
+        x_tranunits = copy_deepcopy(self.cashbook.tranunits)
+        x_tranbook = tranbook_shop(self.fiscal_id, x_tranunits)
+        for owner_id, x_purviewlog in self.purviewlogs.items():
+            for x_timestamp, x_purviewepisode in x_purviewlog.episodes.items():
+                for acct_id, x_amount in x_purviewepisode._net_purviews.items():
+                    x_tranbook.add_tranunit(owner_id, acct_id, x_timestamp, x_amount)
+        self._all_tranbook = x_tranbook
 
 
 def fiscalunit_shop(
