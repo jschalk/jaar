@@ -24,140 +24,6 @@ class timestamp_Exception(Exception):
 
 
 @dataclass
-class PurviewEpisode:
-    timestamp: TimeLinePoint = None
-    amount: FundNum = None
-    _magnitude: FundNum = None
-    _net_purviews: dict[AcctID, FundNum] = None
-
-    def set_net_purview(self, x_acct_id: AcctID, net_purview: FundNum):
-        self._net_purviews[x_acct_id] = net_purview
-
-    def net_purview_exists(self, x_acct_id: AcctID) -> bool:
-        return self._net_purviews.get(x_acct_id) != None
-
-    def get_net_purview(self, x_acct_id: AcctID) -> FundNum:
-        return self._net_purviews.get(x_acct_id)
-
-    def del_net_purview(self, x_acct_id: AcctID):
-        self._net_purviews.pop(x_acct_id)
-
-    def calc_magnitude(self):
-        net_purviews = self._net_purviews.values()
-        x_cred_sum = sum(net_purview for net_purview in net_purviews if net_purview > 0)
-        x_debt_sum = sum(net_purview for net_purview in net_purviews if net_purview < 0)
-        if x_cred_sum + x_debt_sum != 0:
-            exception_str = f"magnitude cannot be calculated: debt_purview={x_debt_sum}, cred_purview={x_cred_sum}"
-            raise calc_magnitudeException(exception_str)
-        self._magnitude = x_cred_sum
-
-    def get_dict(self) -> dict[str,]:
-        x_dict = {"timestamp": self.timestamp, "amount": self.amount}
-        if self._net_purviews:
-            x_dict["net_purviews"] = self._net_purviews
-        if self._magnitude:
-            x_dict["magnitude"] = self._magnitude
-        return x_dict
-
-    def get_json(self) -> dict[str,]:
-        return get_json_from_dict(self.get_dict())
-
-
-def purviewepisode_shop(
-    x_timestamp: TimeLinePoint,
-    x_amount: FundNum = None,
-    net_purviews: dict[AcctID, FundNum] = None,
-    x_magnitude: FundNum = None,
-) -> PurviewEpisode:
-    if x_amount is None:
-        x_amount = default_fund_pool()
-
-    return PurviewEpisode(
-        timestamp=x_timestamp,
-        amount=x_amount,
-        _net_purviews=get_empty_dict_if_none(net_purviews),
-        _magnitude=get_0_if_None(x_magnitude),
-    )
-
-
-@dataclass
-class PurviewLog:
-    owner_id: OwnerID = None
-    episodes: dict[TimeLinePoint, PurviewEpisode] = None
-    _sum_purviewepisode_amount: FundNum = None
-    _sum_acct_purviews: int = None
-    _timestamp_min: TimeLinePoint = None
-    _timestamp_max: TimeLinePoint = None
-
-    def set_episode(self, x_episode: PurviewEpisode):
-        self.episodes[x_episode.timestamp] = x_episode
-
-    def add_episode(self, x_timestamp: TimeLinePoint, x_amount: FundNum):
-        self.set_episode(purviewepisode_shop(x_timestamp, x_amount))
-
-    def episode_exists(self, x_timestamp: TimeLinePoint) -> bool:
-        return self.episodes.get(x_timestamp) != None
-
-    def get_episode(self, x_timestamp: TimeLinePoint) -> PurviewEpisode:
-        return self.episodes.get(x_timestamp)
-
-    def del_episode(self, x_timestamp: TimeLinePoint):
-        self.episodes.pop(x_timestamp)
-
-    def get_2d_array(self) -> list[list]:
-        return [
-            [self.owner_id, x_episode.timestamp, x_episode.amount]
-            for x_episode in self.episodes.values()
-        ]
-
-    def get_headers(self) -> list:
-        return ["owner_id", "timestamp", "amount"]
-
-    def get_dict(self) -> dict:
-        return {"owner_id": self.owner_id, "episodes": self._get_episodes_dict()}
-
-    def _get_episodes_dict(self) -> dict:
-        return {
-            x_episode.timestamp: x_episode.get_dict()
-            for x_episode in self.episodes.values()
-        }
-
-    def get_timestamps(self) -> set[TimeLinePoint]:
-        return set(self.episodes.keys())
-
-
-def purviewlog_shop(owner_id: OwnerID) -> PurviewLog:
-    return PurviewLog(owner_id=owner_id, episodes={}, _sum_acct_purviews={})
-
-
-def get_purviewepisode_from_dict(x_dict: dict) -> PurviewEpisode:
-    x_timestamp = x_dict.get("timestamp")
-    x_amount = x_dict.get("amount")
-    x_net_purviews = x_dict.get("net_purviews")
-    x_magnitude = x_dict.get("magnitude")
-    return purviewepisode_shop(x_timestamp, x_amount, x_net_purviews, x_magnitude)
-
-
-def get_purviewepisode_from_json(x_json: str) -> PurviewEpisode:
-    return get_purviewepisode_from_dict(get_dict_from_json(x_json))
-
-
-def get_purviewlog_from_dict(x_dict: dict) -> PurviewLog:
-    x_owner_id = x_dict.get("owner_id")
-    x_purviewlog = purviewlog_shop(x_owner_id)
-    x_purviewlog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
-    return x_purviewlog
-
-
-def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, PurviewEpisode]:
-    x_dict = {}
-    for x_episode_dict in episodes_dict.values():
-        x_purview_episode = get_purviewepisode_from_dict(x_episode_dict)
-        x_dict[x_purview_episode.timestamp] = x_purview_episode
-    return x_dict
-
-
-@dataclass
 class TranUnit:
     src: AcctID = None
     dst: AcctID = None
@@ -271,6 +137,12 @@ class TranBook:
     def get_accts_net_csv(self) -> str:
         return create_csv(self._get_accts_headers(), self._get_accts_net_array())
 
+    def join(self, x_tranbook):
+        for src_acct_id, dst_dict in x_tranbook.tranunits.items():
+            for dst_acct_id, timestamp_dict in dst_dict.items():
+                for x_timestamp, x_amount in timestamp_dict.items():
+                    self.add_tranunit(src_acct_id, dst_acct_id, x_timestamp, x_amount)
+
     # def get_dict(
     #     self,
     # ) -> dict[FiscalID, dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]]]:
@@ -294,3 +166,149 @@ def get_tranbook_from_dict():
 
 def get_tranbook_from_json():
     pass
+
+
+@dataclass
+class PurviewEpisode:
+    timestamp: TimeLinePoint = None
+    amount: FundNum = None
+    _magnitude: FundNum = None
+    _net_purviews: dict[AcctID, FundNum] = None
+
+    def set_net_purview(self, x_acct_id: AcctID, net_purview: FundNum):
+        self._net_purviews[x_acct_id] = net_purview
+
+    def net_purview_exists(self, x_acct_id: AcctID) -> bool:
+        return self._net_purviews.get(x_acct_id) != None
+
+    def get_net_purview(self, x_acct_id: AcctID) -> FundNum:
+        return self._net_purviews.get(x_acct_id)
+
+    def del_net_purview(self, x_acct_id: AcctID):
+        self._net_purviews.pop(x_acct_id)
+
+    def calc_magnitude(self):
+        net_purviews = self._net_purviews.values()
+        x_cred_sum = sum(net_purview for net_purview in net_purviews if net_purview > 0)
+        x_debt_sum = sum(net_purview for net_purview in net_purviews if net_purview < 0)
+        if x_cred_sum + x_debt_sum != 0:
+            exception_str = f"magnitude cannot be calculated: debt_purview={x_debt_sum}, cred_purview={x_cred_sum}"
+            raise calc_magnitudeException(exception_str)
+        self._magnitude = x_cred_sum
+
+    def get_dict(self) -> dict[str,]:
+        x_dict = {"timestamp": self.timestamp, "amount": self.amount}
+        if self._net_purviews:
+            x_dict["net_purviews"] = self._net_purviews
+        if self._magnitude:
+            x_dict["magnitude"] = self._magnitude
+        return x_dict
+
+    def get_json(self) -> dict[str,]:
+        return get_json_from_dict(self.get_dict())
+
+
+def purviewepisode_shop(
+    x_timestamp: TimeLinePoint,
+    x_amount: FundNum = None,
+    net_purviews: dict[AcctID, FundNum] = None,
+    x_magnitude: FundNum = None,
+) -> PurviewEpisode:
+    if x_amount is None:
+        x_amount = default_fund_pool()
+
+    return PurviewEpisode(
+        timestamp=x_timestamp,
+        amount=x_amount,
+        _net_purviews=get_empty_dict_if_none(net_purviews),
+        _magnitude=get_0_if_None(x_magnitude),
+    )
+
+
+@dataclass
+class PurviewLog:
+    owner_id: OwnerID = None
+    episodes: dict[TimeLinePoint, PurviewEpisode] = None
+    _sum_purviewepisode_amount: FundNum = None
+    _sum_acct_purviews: int = None
+    _timestamp_min: TimeLinePoint = None
+    _timestamp_max: TimeLinePoint = None
+
+    def set_episode(self, x_episode: PurviewEpisode):
+        self.episodes[x_episode.timestamp] = x_episode
+
+    def add_episode(self, x_timestamp: TimeLinePoint, x_amount: FundNum):
+        self.set_episode(purviewepisode_shop(x_timestamp, x_amount))
+
+    def episode_exists(self, x_timestamp: TimeLinePoint) -> bool:
+        return self.episodes.get(x_timestamp) != None
+
+    def get_episode(self, x_timestamp: TimeLinePoint) -> PurviewEpisode:
+        return self.episodes.get(x_timestamp)
+
+    def del_episode(self, x_timestamp: TimeLinePoint):
+        self.episodes.pop(x_timestamp)
+
+    def get_2d_array(self) -> list[list]:
+        return [
+            [self.owner_id, x_episode.timestamp, x_episode.amount]
+            for x_episode in self.episodes.values()
+        ]
+
+    def get_headers(self) -> list:
+        return ["owner_id", "timestamp", "amount"]
+
+    def get_dict(self) -> dict:
+        return {"owner_id": self.owner_id, "episodes": self._get_episodes_dict()}
+
+    def _get_episodes_dict(self) -> dict:
+        return {
+            x_episode.timestamp: x_episode.get_dict()
+            for x_episode in self.episodes.values()
+        }
+
+    def get_timestamps(self) -> set[TimeLinePoint]:
+        return set(self.episodes.keys())
+
+    def get_tranbook(self, fiscal_id: FiscalID) -> TranBook:
+        x_tranbook = tranbook_shop(fiscal_id)
+        for x_timestamp, x_episode in self.episodes.items():
+            for dst_acct_id, x_amount in x_episode._net_purviews.items():
+                x_tranbook.add_tranunit(
+                    x_owner_id=self.owner_id,
+                    x_acct_id=dst_acct_id,
+                    x_timestamp=x_timestamp,
+                    x_amount=x_amount,
+                )
+        return x_tranbook
+
+
+def purviewlog_shop(owner_id: OwnerID) -> PurviewLog:
+    return PurviewLog(owner_id=owner_id, episodes={}, _sum_acct_purviews={})
+
+
+def get_purviewepisode_from_dict(x_dict: dict) -> PurviewEpisode:
+    x_timestamp = x_dict.get("timestamp")
+    x_amount = x_dict.get("amount")
+    x_net_purviews = x_dict.get("net_purviews")
+    x_magnitude = x_dict.get("magnitude")
+    return purviewepisode_shop(x_timestamp, x_amount, x_net_purviews, x_magnitude)
+
+
+def get_purviewepisode_from_json(x_json: str) -> PurviewEpisode:
+    return get_purviewepisode_from_dict(get_dict_from_json(x_json))
+
+
+def get_purviewlog_from_dict(x_dict: dict) -> PurviewLog:
+    x_owner_id = x_dict.get("owner_id")
+    x_purviewlog = purviewlog_shop(x_owner_id)
+    x_purviewlog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
+    return x_purviewlog
+
+
+def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, PurviewEpisode]:
+    x_dict = {}
+    for x_episode_dict in episodes_dict.values():
+        x_purview_episode = get_purviewepisode_from_dict(x_episode_dict)
+        x_dict[x_purview_episode.timestamp] = x_purview_episode
+    return x_dict

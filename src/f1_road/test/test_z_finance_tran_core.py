@@ -5,7 +5,6 @@ from src.f1_road.finance_tran import (
     tranbook_shop,
     get_tranbook_from_dict,
     get_tranbook_from_json,
-    get_purviewlog_from_dict,
 )
 from pytest import raises as pytest_raises
 
