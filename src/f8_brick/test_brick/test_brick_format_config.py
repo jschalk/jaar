@@ -33,7 +33,7 @@ from src.f8_brick.brick_config import (
     get_brick_formats_dir,
     get_brick_filenames,
     get_brickref_dict,
-    brick_format_00003_itemunit_v0_0_0,
+    brick_format_00013_itemunit_v0_0_0,
     brick_format_00019_itemunit_v0_0_0,
     brick_format_00020_bud_acct_membership_v0_0_0,
     brick_format_00021_bud_acctunit_v0_0_0,
@@ -63,8 +63,8 @@ def test_config_str_functions_ReturnObjs():
     assert brick_format_00021_bud_acctunit_v0_0_0() == x00021_brick
     x00020_brick = "brick_format_00020_bud_acct_membership_v0_0_0"
     assert brick_format_00020_bud_acct_membership_v0_0_0() == x00020_brick
-    x0003_brick = "brick_format_00003_itemunit_v0_0_0"
-    assert brick_format_00003_itemunit_v0_0_0() == x0003_brick
+    x0003_brick = "brick_format_00013_itemunit_v0_0_0"
+    assert brick_format_00013_itemunit_v0_0_0() == x0003_brick
 
 
 def test_get_brick_formats_dir_ReturnsObj():
@@ -82,7 +82,7 @@ def test_get_brick_filenames_ReturnsCorrectObj():
     print(f"{x_filenames=}")
     assert brick_format_00021_bud_acctunit_v0_0_0() in x_filenames
     assert brick_format_00020_bud_acct_membership_v0_0_0() in x_filenames
-    assert brick_format_00003_itemunit_v0_0_0() in x_filenames
+    assert brick_format_00013_itemunit_v0_0_0() in x_filenames
 
 
 def test_get_brickref_ReturnsObj():
@@ -242,9 +242,9 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00020_bud_acct_membership_v0_
     assert credit_vote_brickcolumn.column_order == 5
 
 
-def test_get_brickref_HasCorrectAttrs_brick_format_00003_itemunit_v0_0_0():
+def test_get_brickref_HasCorrectAttrs_brick_format_00013_itemunit_v0_0_0():
     # ESTABLISH
-    brick_name = brick_format_00003_itemunit_v0_0_0()
+    brick_name = brick_format_00013_itemunit_v0_0_0()
 
     # WHEN
     format_00003_brickref = get_brickref(brick_name)
