@@ -33,19 +33,19 @@ from dataclasses import dataclass
 
 
 @dataclass
-class brickColumn:
+class BrickColumn:
     attribute_key: str
     column_order: int
     sort_order: int = None
 
 
 @dataclass
-class brickRef:
+class BrickRef:
     brick_name: str = None
     atom_categorys: str = None
-    _brickcolumns: dict[str:brickColumn] = None
+    _brickcolumns: dict[str:BrickColumn] = None
 
-    def set_brickcolumn(self, x_brickcolumn: brickColumn):
+    def set_brickcolumn(self, x_brickcolumn: BrickColumn):
         self._brickcolumns[x_brickcolumn.attribute_key] = x_brickcolumn
 
     def get_headers_list(self) -> list[str]:
@@ -53,17 +53,17 @@ class brickRef:
         x_list = sorted(x_list, key=lambda x: x.column_order)
         return [x_brickcolumn.attribute_key for x_brickcolumn in x_list]
 
-    def get_brickcolumn(self, x_attribute_key: str) -> brickColumn:
+    def get_brickcolumn(self, x_attribute_key: str) -> BrickColumn:
         return self._brickcolumns.get(x_attribute_key)
 
 
-def brickref_shop(x_brick_name: str, x_atom_categorys: list[str]) -> brickRef:
-    return brickRef(
+def brickref_shop(x_brick_name: str, x_atom_categorys: list[str]) -> BrickRef:
+    return BrickRef(
         brick_name=x_brick_name, atom_categorys=x_atom_categorys, _brickcolumns={}
     )
 
 
-def get_brickref(brick_name: str) -> brickRef:
+def get_brickref(brick_name: str) -> BrickRef:
     brickref_dict = get_brickref_dict(brick_name)
     x_brickref = brickref_shop(brick_name, brickref_dict.get(atom_categorys_str()))
     x_attributes_dict = brickref_dict.get(attributes_str())
@@ -71,7 +71,7 @@ def get_brickref(brick_name: str) -> brickRef:
     for x_key, x_brickcolumn in x_attributes_dict.items():
         x_column_order = x_brickcolumn.get(column_order_str())
         x_sort_order = x_brickcolumn.get(sort_order_str())
-        x_brickcolumn = brickColumn(x_key, x_column_order, x_sort_order)
+        x_brickcolumn = BrickColumn(x_key, x_column_order, x_sort_order)
         x_brickcolumns[x_brickcolumn.attribute_key] = x_brickcolumn
     x_brickref._brickcolumns = x_brickcolumns
     return x_brickref
@@ -104,7 +104,7 @@ def create_brick_df(x_budunit: BudUnit, brick_name: str) -> DataFrame:
 
 
 def _get_sorted_atom_insert_atomunits(
-    x_deltaunit: DeltaUnit, x_brickref: brickRef
+    x_deltaunit: DeltaUnit, x_brickref: BrickRef
 ) -> list[AtomUnit]:
     category_set = set(x_brickref.atom_categorys)
     curd_set = {atom_insert()}
@@ -114,7 +114,7 @@ def _get_sorted_atom_insert_atomunits(
 
 def _create_d2_list(
     sorted_atomunits: list[AtomUnit],
-    x_brickref: brickRef,
+    x_brickref: BrickRef,
     x_fiscal_id: FiscalID,
     x_owner_id: OwnerID,
 ):
@@ -132,7 +132,7 @@ def _create_d2_list(
     return d2_list
 
 
-def _delta_all_pledge_values(d2_list: list[list], x_brickref: brickRef) -> list[list]:
+def _delta_all_pledge_values(d2_list: list[list], x_brickref: BrickRef) -> list[list]:
     for x_column_header, x_brickcolumn in x_brickref._brickcolumns.items():
         if x_column_header == pledge_str():
             pledge_column_number = x_brickcolumn.column_order
@@ -161,7 +161,7 @@ def open_brick_csv(x_file_dir: str, x_filename: str) -> DataFrame:
     return pandas_read_csv(create_file_path(x_file_dir, x_filename))
 
 
-def get_csv_brickref(title_row: list[str]) -> brickRef:
+def get_csv_brickref(title_row: list[str]) -> BrickRef:
     headers_str = create_sorted_concatenated_str(title_row)
     x_brickname = get_brick_format_headers().get(headers_str)
     return get_brickref(x_brickname)

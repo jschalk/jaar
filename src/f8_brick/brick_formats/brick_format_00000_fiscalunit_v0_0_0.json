@@ -1,0 +1,26 @@
+{
+    "fiscal_category": ["fiscalunit"],
+    "attributes": {
+        "current_time": {
+            "column_order": 1,
+            "sort_order": 1
+        },
+        "fiscal_id": {
+            "column_order": 0,
+            "sort_order": 0
+        },
+        "fund_coin": {
+            "column_order": 2
+        },
+        "penny": {
+            "column_order": 3
+        },
+        "respect_bit": {
+            "column_order": 4
+        },
+        "road_delimiter": {
+            "column_order": 5
+        }
+    }
+}
+
