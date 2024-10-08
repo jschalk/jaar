@@ -171,7 +171,7 @@ def get_tranbook_from_json():
 @dataclass
 class PurviewEpisode:
     timestamp: TimeLinePoint = None
-    amount: FundNum = None
+    quota: FundNum = None
     _magnitude: FundNum = None
     _net_purviews: dict[AcctID, FundNum] = None
 
@@ -197,7 +197,7 @@ class PurviewEpisode:
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
-        x_dict = {"timestamp": self.timestamp, "amount": self.amount}
+        x_dict = {"timestamp": self.timestamp, "quota": self.quota}
         if self._net_purviews:
             x_dict["net_purviews"] = self._net_purviews
         if self._magnitude:
@@ -210,16 +210,16 @@ class PurviewEpisode:
 
 def purviewepisode_shop(
     x_timestamp: TimeLinePoint,
-    x_amount: FundNum = None,
+    x_quota: FundNum = None,
     net_purviews: dict[AcctID, FundNum] = None,
     x_magnitude: FundNum = None,
 ) -> PurviewEpisode:
-    if x_amount is None:
-        x_amount = default_fund_pool()
+    if x_quota is None:
+        x_quota = default_fund_pool()
 
     return PurviewEpisode(
         timestamp=x_timestamp,
-        amount=x_amount,
+        quota=x_quota,
         _net_purviews=get_empty_dict_if_none(net_purviews),
         _magnitude=get_0_if_None(x_magnitude),
     )
@@ -229,7 +229,7 @@ def purviewepisode_shop(
 class PurviewLog:
     owner_id: OwnerID = None
     episodes: dict[TimeLinePoint, PurviewEpisode] = None
-    _sum_purviewepisode_amount: FundNum = None
+    _sum_purviewepisode_quota: FundNum = None
     _sum_acct_purviews: int = None
     _timestamp_min: TimeLinePoint = None
     _timestamp_max: TimeLinePoint = None
@@ -237,8 +237,8 @@ class PurviewLog:
     def set_episode(self, x_episode: PurviewEpisode):
         self.episodes[x_episode.timestamp] = x_episode
 
-    def add_episode(self, x_timestamp: TimeLinePoint, x_amount: FundNum):
-        self.set_episode(purviewepisode_shop(x_timestamp, x_amount))
+    def add_episode(self, x_timestamp: TimeLinePoint, x_quota: FundNum):
+        self.set_episode(purviewepisode_shop(x_timestamp, x_quota))
 
     def episode_exists(self, x_timestamp: TimeLinePoint) -> bool:
         return self.episodes.get(x_timestamp) != None
@@ -251,12 +251,12 @@ class PurviewLog:
 
     def get_2d_array(self) -> list[list]:
         return [
-            [self.owner_id, x_episode.timestamp, x_episode.amount]
+            [self.owner_id, x_episode.timestamp, x_episode.quota]
             for x_episode in self.episodes.values()
         ]
 
     def get_headers(self) -> list:
-        return ["owner_id", "timestamp", "amount"]
+        return ["owner_id", "timestamp", "quota"]
 
     def get_dict(self) -> dict:
         return {"owner_id": self.owner_id, "episodes": self._get_episodes_dict()}
@@ -273,12 +273,12 @@ class PurviewLog:
     def get_tranbook(self, fiscal_id: FiscalID) -> TranBook:
         x_tranbook = tranbook_shop(fiscal_id)
         for x_timestamp, x_episode in self.episodes.items():
-            for dst_acct_id, x_amount in x_episode._net_purviews.items():
+            for dst_acct_id, x_quota in x_episode._net_purviews.items():
                 x_tranbook.add_tranunit(
                     x_owner_id=self.owner_id,
                     x_acct_id=dst_acct_id,
                     x_timestamp=x_timestamp,
-                    x_amount=x_amount,
+                    x_amount=x_quota,
                 )
         return x_tranbook
 
@@ -289,10 +289,10 @@ def purviewlog_shop(owner_id: OwnerID) -> PurviewLog:
 
 def get_purviewepisode_from_dict(x_dict: dict) -> PurviewEpisode:
     x_timestamp = x_dict.get("timestamp")
-    x_amount = x_dict.get("amount")
+    x_quota = x_dict.get("quota")
     x_net_purviews = x_dict.get("net_purviews")
     x_magnitude = x_dict.get("magnitude")
-    return purviewepisode_shop(x_timestamp, x_amount, x_net_purviews, x_magnitude)
+    return purviewepisode_shop(x_timestamp, x_quota, x_net_purviews, x_magnitude)
 
 
 def get_purviewepisode_from_json(x_json: str) -> PurviewEpisode:

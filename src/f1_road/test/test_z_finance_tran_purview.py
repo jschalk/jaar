@@ -18,7 +18,7 @@ def test_PurviewEpisode_Exists():
     # THEN
     assert x_purviewepisode
     assert not x_purviewepisode.timestamp
-    assert not x_purviewepisode.amount
+    assert not x_purviewepisode.quota
     assert not x_purviewepisode._net_purviews
     assert not x_purviewepisode._magnitude
 
@@ -33,7 +33,7 @@ def test_purviewepisode_shop_ReturnsObj():
     # THEN
     assert t4_purviewepisode
     assert t4_purviewepisode.timestamp == t4_timestamp
-    assert t4_purviewepisode.amount == default_fund_pool()
+    assert t4_purviewepisode.quota == default_fund_pool()
     assert t4_purviewepisode._magnitude == 0
     assert not t4_purviewepisode._net_purviews
 
@@ -41,14 +41,14 @@ def test_purviewepisode_shop_ReturnsObj():
 def test_purviewepisode_shop_ReturnsObjWith_net_purviews():
     # ESTABLISH
     t4_timestamp = 4
-    t4_amount = 55
+    t4_quota = 55
     t4_net_purviews = {"Sue": -4}
     t4_magnitude = 677
 
     # WHEN
     x_purviewepisode = purviewepisode_shop(
         x_timestamp=t4_timestamp,
-        x_amount=t4_amount,
+        x_quota=t4_quota,
         net_purviews=t4_net_purviews,
         x_magnitude=t4_magnitude,
     )
@@ -56,7 +56,7 @@ def test_purviewepisode_shop_ReturnsObjWith_net_purviews():
     # THEN
     assert x_purviewepisode
     assert x_purviewepisode.timestamp == t4_timestamp
-    assert x_purviewepisode.amount == t4_amount
+    assert x_purviewepisode.quota == t4_quota
     assert x_purviewepisode._magnitude == 677
     assert x_purviewepisode._net_purviews == t4_net_purviews
 
@@ -120,14 +120,14 @@ def test_PurviewEpisode_del_net_purview_SetsAttr():
 def test_PurviewEpisode_get_dict_ReturnsObj():
     # ESTABLISH
     t4_timestamp = 4
-    t4_amount = 55
-    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_amount)
+    t4_quota = 55
+    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_quota)
 
     # WHEN
     t4_dict = t4_purviewepisode.get_dict()
 
     # THEN
-    assert t4_dict == {"timestamp": t4_timestamp, "amount": t4_amount}
+    assert t4_dict == {"timestamp": t4_timestamp, "quota": t4_quota}
 
 
 def test_PurviewEpisode_calc_magnitude_SetsAttr_Scenario0():
@@ -192,10 +192,10 @@ def test_PurviewEpisode_calc_magnitude_SetsAttr_Scenario3_RaisesError():
 def test_PurviewEpisode_get_dict_ReturnsObjWith_net_purviews():
     # ESTABLISH
     t4_timestamp = 4
-    t4_amount = 55
+    t4_quota = 55
     t4_net_purviews = {"Sue": -4}
     t4_magnitude = 67
-    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_amount, t4_net_purviews)
+    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_quota, t4_net_purviews)
     t4_purviewepisode._magnitude = 67
 
     # WHEN
@@ -204,7 +204,7 @@ def test_PurviewEpisode_get_dict_ReturnsObjWith_net_purviews():
     # THEN
     assert t4_dict == {
         "timestamp": t4_timestamp,
-        "amount": t4_amount,
+        "quota": t4_quota,
         "magnitude": t4_magnitude,
         "net_purviews": t4_net_purviews,
     }
@@ -213,9 +213,9 @@ def test_PurviewEpisode_get_dict_ReturnsObjWith_net_purviews():
 def test_PurviewEpisode_get_json_ReturnsObj():
     # ESTABLISH
     t4_timestamp = 4
-    t4_amount = 55
+    t4_quota = 55
     t4_net_purviews = {"Sue": -77}
-    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_amount, t4_net_purviews)
+    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_quota, t4_net_purviews)
     t4_purviewepisode._magnitude = 67
 
     # WHEN
@@ -223,11 +223,11 @@ def test_PurviewEpisode_get_json_ReturnsObj():
 
     # THEN
     static_t4_json = """{
-  "amount": 55,
   "magnitude": 67,
   "net_purviews": {
     "Sue": -77
   },
+  "quota": 55,
   "timestamp": 4
 }"""
     print(f"{t4_json=}")
@@ -237,10 +237,10 @@ def test_PurviewEpisode_get_json_ReturnsObj():
 def test_get_purviewepisode_from_dict_ReturnsObj_Sccenario0():
     # ESTABLISH
     t4_timestamp = 4
-    t4_amount = 55
-    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_amount)
+    t4_quota = 55
+    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_quota)
     t4_dict = t4_purviewepisode.get_dict()
-    assert t4_dict == {"timestamp": t4_timestamp, "amount": t4_amount}
+    assert t4_dict == {"timestamp": t4_timestamp, "quota": t4_quota}
 
     # WHEN
     x_purviewepisode = get_purviewepisode_from_dict(t4_dict)
@@ -248,7 +248,7 @@ def test_get_purviewepisode_from_dict_ReturnsObj_Sccenario0():
     # THEN
     assert x_purviewepisode
     assert x_purviewepisode.timestamp == t4_timestamp
-    assert x_purviewepisode.amount == t4_amount
+    assert x_purviewepisode.quota == t4_quota
     assert x_purviewepisode._magnitude == 0
     assert x_purviewepisode == t4_purviewepisode
 
@@ -256,10 +256,10 @@ def test_get_purviewepisode_from_dict_ReturnsObj_Sccenario0():
 def test_get_purviewepisode_from_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     t4_timestamp = 4
-    t4_amount = 55
+    t4_quota = 55
     t4_magnitude = 65
     t4_net_purviews = {"Sue": -77}
-    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_amount, t4_net_purviews)
+    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_quota, t4_net_purviews)
     t4_purviewepisode._magnitude = t4_magnitude
     t4_dict = t4_purviewepisode.get_dict()
 
@@ -269,7 +269,7 @@ def test_get_purviewepisode_from_dict_ReturnsObj_Scenario1():
     # THEN
     assert x_purviewepisode
     assert x_purviewepisode.timestamp == t4_timestamp
-    assert x_purviewepisode.amount == t4_amount
+    assert x_purviewepisode.quota == t4_quota
     assert x_purviewepisode._magnitude == t4_magnitude
     assert x_purviewepisode._net_purviews == t4_net_purviews
     assert x_purviewepisode == t4_purviewepisode
@@ -278,9 +278,9 @@ def test_get_purviewepisode_from_dict_ReturnsObj_Scenario1():
 def test_get_purviewepisode_from_json_ReturnsObj():
     # ESTABLISH
     t4_timestamp = 4
-    t4_amount = 55
+    t4_quota = 55
     t4_net_purviews = {"Sue": -57}
-    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_amount, t4_net_purviews)
+    t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_quota, t4_net_purviews)
     t4_json = t4_purviewepisode.get_json()
 
     # WHEN
@@ -289,7 +289,7 @@ def test_get_purviewepisode_from_json_ReturnsObj():
     # THEN
     assert x_purviewepisode
     assert x_purviewepisode.timestamp == t4_timestamp
-    assert x_purviewepisode.amount == t4_amount
+    assert x_purviewepisode.quota == t4_quota
     assert x_purviewepisode._net_purviews == t4_net_purviews
     assert x_purviewepisode == t4_purviewepisode
 
@@ -302,7 +302,7 @@ def test_PurviewLog_Exists():
     assert x_purviewlog
     assert not x_purviewlog.owner_id
     assert not x_purviewlog.episodes
-    assert not x_purviewlog._sum_purviewepisode_amount
+    assert not x_purviewlog._sum_purviewepisode_quota
     assert not x_purviewlog._sum_acct_purviews
     assert not x_purviewlog._timestamp_min
     assert not x_purviewlog._timestamp_max
@@ -319,7 +319,7 @@ def test_purviewlog_shop_ReturnsObj():
     assert x_purviewlog
     assert x_purviewlog.owner_id == sue_str
     assert x_purviewlog.episodes == {}
-    assert not x_purviewlog._sum_purviewepisode_amount
+    assert not x_purviewlog._sum_purviewepisode_quota
     assert x_purviewlog._sum_acct_purviews == {}
     assert not x_purviewlog._timestamp_min
     assert not x_purviewlog._timestamp_max
@@ -391,12 +391,12 @@ def test_PurviewLog_add_episode_SetsAttr():
 
     # WHEN
     t1_int = 145
-    t1_amount = 500
-    sue_purviewlog.add_episode(t1_int, x_amount=t1_amount)
+    t1_quota = 500
+    sue_purviewlog.add_episode(t1_int, x_quota=t1_quota)
 
     # THEN
     assert sue_purviewlog.episodes != {}
-    t1_purviewepisode = purviewepisode_shop(t1_int, t1_amount)
+    t1_purviewepisode = purviewepisode_shop(t1_int, t1_quota)
     assert sue_purviewlog.episodes.get(t1_int) == t1_purviewepisode
 
 
@@ -417,19 +417,19 @@ def test_PurviewLog_get_2d_array_ReturnsObj_Scenario1():
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
     x4_timestamp = 4
-    x4_amount = 55
+    x4_quota = 55
     x7_timestamp = 7
-    x7_amount = 66
-    sue_purviewlog.add_episode(x4_timestamp, x4_amount)
-    sue_purviewlog.add_episode(x7_timestamp, x7_amount)
+    x7_quota = 66
+    sue_purviewlog.add_episode(x4_timestamp, x4_quota)
+    sue_purviewlog.add_episode(x7_timestamp, x7_quota)
 
     # WHEN
     sue_episodes_2d_array = sue_purviewlog.get_2d_array()
 
     # THEN
     assert sue_episodes_2d_array == [
-        [sue_str, x4_timestamp, x4_amount],
-        [sue_str, x7_timestamp, x7_amount],
+        [sue_str, x4_timestamp, x4_quota],
+        [sue_str, x7_timestamp, x7_quota],
     ]
 
 
@@ -438,14 +438,14 @@ def test_PurviewLog_get_timestamps_ReturnsObj():
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
     x4_timestamp = 4
-    x4_amount = 55
+    x4_quota = 55
     x7_timestamp = 7
-    x7_amount = 66
+    x7_quota = 66
     assert sue_purviewlog.get_timestamps() == set()
 
     # WHEN
-    sue_purviewlog.add_episode(x4_timestamp, x4_amount)
-    sue_purviewlog.add_episode(x7_timestamp, x7_amount)
+    sue_purviewlog.add_episode(x4_timestamp, x4_quota)
+    sue_purviewlog.add_episode(x7_timestamp, x7_quota)
 
     # THEN
     assert sue_purviewlog.get_timestamps() == {x4_timestamp, x7_timestamp}
@@ -456,17 +456,17 @@ def test_PurviewLog_get_headers_ReturnsObj():
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
     x4_timestamp = 4
-    x4_amount = 55
+    x4_quota = 55
     x7_timestamp = 7
-    x7_amount = 66
-    sue_purviewlog.add_episode(x4_timestamp, x4_amount)
-    sue_purviewlog.add_episode(x7_timestamp, x7_amount)
+    x7_quota = 66
+    sue_purviewlog.add_episode(x4_timestamp, x4_quota)
+    sue_purviewlog.add_episode(x7_timestamp, x7_quota)
 
     # WHEN
     sue_headers_list = sue_purviewlog.get_headers()
 
     # THEN
-    assert sue_headers_list == ["owner_id", "timestamp", "amount"]
+    assert sue_headers_list == ["owner_id", "timestamp", "quota"]
 
 
 def test_PurviewLog_get_dict_ReturnsObj_Scenario0():
@@ -474,11 +474,11 @@ def test_PurviewLog_get_dict_ReturnsObj_Scenario0():
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
     x4_timestamp = 4
-    x4_amount = 55
+    x4_quota = 55
     x7_timestamp = 7
-    x7_amount = 66
-    sue_purviewlog.add_episode(x4_timestamp, x4_amount)
-    sue_purviewlog.add_episode(x7_timestamp, x7_amount)
+    x7_quota = 66
+    sue_purviewlog.add_episode(x4_timestamp, x4_quota)
+    sue_purviewlog.add_episode(x7_timestamp, x7_quota)
 
     # WHEN
     sue_episodes_dict = sue_purviewlog.get_dict()
@@ -487,8 +487,8 @@ def test_PurviewLog_get_dict_ReturnsObj_Scenario0():
     assert sue_episodes_dict == {
         "owner_id": sue_str,
         "episodes": {
-            x4_timestamp: {"amount": x4_amount, "timestamp": x4_timestamp},
-            x7_timestamp: {"amount": x7_amount, "timestamp": x7_timestamp},
+            x4_timestamp: {"quota": x4_quota, "timestamp": x4_timestamp},
+            x7_timestamp: {"quota": x7_quota, "timestamp": x7_timestamp},
         },
     }
 
@@ -516,17 +516,17 @@ def test_get_purviewlog_from_dict_ReturnsObj_Scenario1():
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
     x4_timestamp = 4
-    x4_amount = 55
+    x4_quota = 55
     x7_timestamp = 7
-    x7_amount = 66
-    sue_purviewlog.add_episode(x4_timestamp, x4_amount)
-    sue_purviewlog.add_episode(x7_timestamp, x7_amount)
+    x7_quota = 66
+    sue_purviewlog.add_episode(x4_timestamp, x4_quota)
+    sue_purviewlog.add_episode(x7_timestamp, x7_quota)
     sue_episodes_dict = sue_purviewlog.get_dict()
     assert sue_episodes_dict == {
         "owner_id": sue_str,
         "episodes": {
-            x4_timestamp: {"timestamp": x4_timestamp, "amount": x4_amount},
-            x7_timestamp: {"timestamp": x7_timestamp, "amount": x7_amount},
+            x4_timestamp: {"timestamp": x4_timestamp, "quota": x4_quota},
+            x7_timestamp: {"timestamp": x7_timestamp, "quota": x7_quota},
         },
     }
 
@@ -547,11 +547,11 @@ def test_get_purviewlog_from_dict_ReturnsObj_Scenario2():
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
     x4_timestamp = 4
-    x4_amount = 55
+    x4_quota = 55
     x7_timestamp = 7
-    x7_amount = 66
-    sue_purviewlog.add_episode(x4_timestamp, x4_amount)
-    sue_purviewlog.add_episode(x7_timestamp, x7_amount)
+    x7_quota = 66
+    sue_purviewlog.add_episode(x4_timestamp, x4_quota)
+    sue_purviewlog.add_episode(x7_timestamp, x7_quota)
     zia_str = "Zia"
     zia_net_purview = 887
     sue_net_purview = 445
@@ -561,10 +561,10 @@ def test_get_purviewlog_from_dict_ReturnsObj_Scenario2():
     assert sue_episodes_dict == {
         "owner_id": sue_str,
         "episodes": {
-            x4_timestamp: {"timestamp": x4_timestamp, "amount": x4_amount},
+            x4_timestamp: {"timestamp": x4_timestamp, "quota": x4_quota},
             x7_timestamp: {
                 "timestamp": x7_timestamp,
-                "amount": x7_amount,
+                "quota": x7_quota,
                 "net_purviews": {sue_str: sue_net_purview, zia_str: zia_net_purview},
             },
         },
@@ -589,11 +589,11 @@ def test_PurviewLog_get_tranbook_ReturnsObj():
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
     x4_timestamp = 4
-    x4_amount = 55
+    x4_quota = 55
     x7_timestamp = 7
-    x7_amount = 66
-    sue_purviewlog.add_episode(x4_timestamp, x4_amount)
-    sue_purviewlog.add_episode(x7_timestamp, x7_amount)
+    x7_quota = 66
+    sue_purviewlog.add_episode(x4_timestamp, x4_quota)
+    sue_purviewlog.add_episode(x7_timestamp, x7_quota)
     bob_str = "Bob"
     zia_str = "Zia"
     zia_net_purview = 887
@@ -606,12 +606,12 @@ def test_PurviewLog_get_tranbook_ReturnsObj():
         "episodes": {
             x4_timestamp: {
                 "timestamp": x4_timestamp,
-                "amount": x4_amount,
+                "quota": x4_quota,
                 "net_purviews": {bob_str: bob_net_purview},
             },
             x7_timestamp: {
                 "timestamp": x7_timestamp,
-                "amount": x7_amount,
+                "quota": x7_quota,
                 "net_purviews": {zia_str: zia_net_purview},
             },
         },

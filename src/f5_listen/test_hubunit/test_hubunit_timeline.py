@@ -277,7 +277,7 @@ def test_HubUnit_calc_timepoint_purview_Sets_purview_file_Scenario0(
     assert yao_hubunit.purview_file_exists(t55_timestamp)
     t55_purview = yao_hubunit.get_purview_file(t55_timestamp)
     assert t55_purview.timestamp == t55_timestamp
-    assert t55_purview.amount == default_fund_pool()
+    assert t55_purview.quota == default_fund_pool()
     assert t55_purview._magnitude == 283333333
     assert t55_purview.get_net_purview("Sue") == 77380952
     assert t55_purview.get_net_purview("Yao") == -283333333
@@ -298,7 +298,7 @@ def test_HubUnit_calc_timepoint_purview_Sets_purview_file_Scenario1(
     assert yao_hubunit.purview_file_exists(t88_timestamp)
     before_t88_purview = yao_hubunit.get_purview_file(t88_timestamp)
     assert before_t88_purview.timestamp == t88_timestamp
-    assert before_t88_purview.amount == 800
+    assert before_t88_purview.quota == 800
     assert before_t88_purview._magnitude == 0
     assert not before_t88_purview.get_net_purview("Sue")
     assert not before_t88_purview.get_net_purview("Yao")
@@ -313,8 +313,8 @@ def test_HubUnit_calc_timepoint_purview_Sets_purview_file_Scenario1(
     assert yao_hubunit.purview_file_exists(t88_timestamp)
     after_t88_purview = yao_hubunit.get_purview_file(t88_timestamp)
     assert after_t88_purview.timestamp == t88_timestamp
-    assert after_t88_purview.amount == 800
-    assert after_t88_purview.amount == yao_budpoint.fund_pool
+    assert after_t88_purview.quota == 800
+    assert after_t88_purview.quota == yao_budpoint.fund_pool
     assert after_t88_purview.get_net_purview("Sue") == 62
     assert after_t88_purview.get_net_purview("Yao") == -227
     assert after_t88_purview.get_net_purview("Zia") == 165
@@ -358,14 +358,14 @@ def test_HubUnit_calc_timepoint_purviews_Sets_purview_files_Scenario0(
     assert yao_hubunit.purview_file_exists(t88_timestamp)
     before_t66_purview = yao_hubunit.get_purview_file(t66_timestamp)
     assert before_t66_purview.timestamp == t66_timestamp
-    assert before_t66_purview.amount == default_fund_pool()
+    assert before_t66_purview.quota == default_fund_pool()
     assert before_t66_purview._magnitude == 5
     assert before_t66_purview.get_net_purview("Sue") == -5
     assert not before_t66_purview.get_net_purview("Yao")
     assert not before_t66_purview.get_net_purview("Zia")
     before_t88_purview = yao_hubunit.get_purview_file(t88_timestamp)
     assert before_t88_purview.timestamp == t88_timestamp
-    assert before_t88_purview.amount == 800
+    assert before_t88_purview.quota == 800
     assert before_t88_purview._magnitude == 0
     assert not before_t88_purview.get_net_purview("Sue")
     assert not before_t88_purview.get_net_purview("Yao")
@@ -380,15 +380,15 @@ def test_HubUnit_calc_timepoint_purviews_Sets_purview_files_Scenario0(
     assert yao_hubunit.purview_file_exists(t88_timestamp)
     after_t88_purview = yao_hubunit.get_purview_file(t88_timestamp)
     assert after_t88_purview.timestamp == t88_timestamp
-    assert after_t88_purview.amount == 800
-    assert after_t88_purview.amount == yao_budpoint.fund_pool
+    assert after_t88_purview.quota == 800
+    assert after_t88_purview.quota == yao_budpoint.fund_pool
     assert after_t88_purview.get_net_purview("Sue") == 62
     assert after_t88_purview.get_net_purview("Yao") == -227
     assert after_t88_purview.get_net_purview("Zia") == 165
     assert after_t88_purview._magnitude == 227
     after_t66_purview = yao_hubunit.get_purview_file(t66_timestamp)
     assert after_t66_purview.timestamp == t66_timestamp
-    assert after_t66_purview.amount == default_fund_pool()
+    assert after_t66_purview.quota == default_fund_pool()
     assert after_t66_purview.get_net_purview("Sue") == 77380952
     assert after_t66_purview.get_net_purview("Yao") == -283333333
     assert after_t66_purview.get_net_purview("Zia") == 205952381

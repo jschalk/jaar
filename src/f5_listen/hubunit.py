@@ -495,7 +495,7 @@ class HubUnit:
         x_budpoint = self.get_budpoint_file(x_timestamp)
         if self.purview_file_exists(x_timestamp):
             x_purviewepisode = self.get_purview_file(x_timestamp)
-            x_budpoint.set_fund_pool(x_purviewepisode.amount)
+            x_budpoint.set_fund_pool(x_purviewepisode.quota)
         else:
             x_purviewepisode = purviewepisode_shop(x_timestamp)
         x_net_purviews = get_bud_settle_acct_net_dict(x_budpoint, True)

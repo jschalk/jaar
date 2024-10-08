@@ -17,7 +17,7 @@ def get_purviewepisode_66_example() -> PurviewEpisode:
 def get_purviewepisode_88_example() -> PurviewEpisode:
     t88_timestamp = 88
     t88_purviewepisode = purviewepisode_shop(t88_timestamp)
-    t88_purviewepisode.amount = 800
+    t88_purviewepisode.quota = 800
     return t88_purviewepisode
 
 
