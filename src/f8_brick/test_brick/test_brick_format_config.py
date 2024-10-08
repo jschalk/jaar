@@ -134,6 +134,7 @@ def test_get_sorted_headers_ReturnsObj():
 
 
 def check_sorted_headers_exist(brick_format_filename: str, x_headers: dict):
+    # print(f"{brick_format_filename=}")
     sorted_headers = get_sorted_headers(brick_format_filename)
     print(f"{brick_format_filename=} {sorted_headers=}")
     assert x_headers.get(sorted_headers) == brick_format_filename
@@ -145,8 +146,11 @@ def test_get_brick_format_headers_ReturnsObj():
 
     # THEN
     # print(f"{set(get_brick_format_headers().values())=}")
+    # sourcery skip: no-loop-in-tests
     for x_brick_filename in get_brick_filenames():
         check_sorted_headers_exist(x_brick_filename, x_headers)
+
+    print(f"{x_headers=}")
     assert len(x_headers) == len(get_brick_filenames())
     assert set(x_headers.values()) == get_brick_filenames()
 

@@ -1,6 +1,8 @@
 {
-    "fiscal_category": ["fiscalunit"],
     "attributes": {
+        "c400_config": {
+            "column_order": 6
+        },
         "current_time": {
             "column_order": 1,
             "sort_order": 1
@@ -12,6 +14,9 @@
         "fund_coin": {
             "column_order": 2
         },
+        "monthday_distortion": {
+            "column_order": 7
+        },
         "penny": {
             "column_order": 3
         },
@@ -20,7 +25,15 @@
         },
         "road_delimiter": {
             "column_order": 5
+        },
+        "timeline_label": {
+            "column_order": 8
+        },
+        "yr1_jan1_offset": {
+            "column_order": 9
         }
-    }
+    },
+    "fiscal_category": [
+        "fiscalunit"
+    ]
 }
-
