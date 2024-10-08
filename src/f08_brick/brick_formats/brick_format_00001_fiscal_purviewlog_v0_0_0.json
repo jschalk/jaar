@@ -1,0 +1,14 @@
+{
+    "fiscal_category": ["fiscal_purviewlog"],
+    "attributes": {
+        "fiscal_id": {
+            "column_order": 0,
+            "sort_order": 0
+        },
+        "owner_id": {
+            "column_order": 1,
+            "sort_order": 1
+        }
+    }
+}
+

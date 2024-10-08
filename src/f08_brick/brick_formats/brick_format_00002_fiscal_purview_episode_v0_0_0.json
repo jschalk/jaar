@@ -1,0 +1,24 @@
+{
+    "fiscal_category": ["fiscal_purview_episode"],
+    "attributes": {
+        "acct_id": {
+            "column_order": 2,
+            "sort_order": 2
+        },
+        "fiscal_id": {
+            "column_order": 0,
+            "sort_order": 0
+        },
+        "owner_id": {
+            "column_order": 1,
+            "sort_order": 1
+        },
+        "quota": {
+            "column_order": 4
+        },
+        "timestamp": {
+            "column_order": 3
+        }
+    }
+}
+
