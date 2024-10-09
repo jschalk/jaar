@@ -296,7 +296,7 @@ def test_get_positive_int_ReturnsCorrectObj():
     assert get_positive_int(-10.8) == 0
 
 
-def test_extract_csv_headers_ReturnsEmptyObj():
+def test_extract_csv_headers_ReturnsObj_empty_list():
     # ESTABLISH
     x_csv = ""
 
@@ -353,7 +353,7 @@ music,Sue,Yao,41,37
     assert new_csv == headerless_csv
 
 
-def test_get_csv_column1_column2_metrics_ReturnsEmptyObj():
+def test_get_csv_column1_column2_metrics_ReturnsObj_empty_dict():
     # ESTABLISH
     headerless_csv = ""
 
