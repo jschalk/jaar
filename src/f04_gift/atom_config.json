@@ -420,6 +420,11 @@
                 "python_type": "float",
                 "sqlite_datatype": "FISCAL"
             },
+            "purview_timestamp": {
+                "column_order": 8,
+                "python_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
             "tally": {
                 "column_order": 7,
                 "python_type": "int",

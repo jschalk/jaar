@@ -202,7 +202,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "base,divisor,fiscal_id,need,nigh,open,owner_id,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
         "base,base_item_active_requisite,fiscal_id,owner_id,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),
         "addin,begin,close,denom,fiscal_id,gogo_want,label,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
-        "credor_respect,debtor_respect,fiscal_id,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
+        "credor_respect,debtor_respect,fiscal_id,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,purview_timestamp,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
         "fiscal_id,healer_id,label,owner_id,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
     }
 

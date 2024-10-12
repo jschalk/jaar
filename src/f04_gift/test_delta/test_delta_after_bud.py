@@ -89,6 +89,10 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     new7_arg = "penny"
     x_atomunit.set_optional_arg(new7_arg, new7_value)
     sue_deltaunit.set_atomunit(x_atomunit)
+    new0_value = 9900000
+    new0_arg = "purview_timestamp"
+    x_atomunit.set_optional_arg(new0_arg, new0_value)
+    sue_deltaunit.set_atomunit(x_atomunit)
 
     # WHEN
     after_sue_budunit = sue_deltaunit.get_edited_bud(before_sue_budunit)
@@ -108,6 +112,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     assert after_sue_budunit.respect_bit != before_sue_budunit.respect_bit
     assert after_sue_budunit.penny == new7_value
     assert after_sue_budunit.penny != before_sue_budunit.penny
+    assert after_sue_budunit.purview_timestamp == new0_value
+    assert after_sue_budunit.purview_timestamp != before_sue_budunit.purview_timestamp
 
 
 def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_acct():
@@ -1125,6 +1131,7 @@ def test_DeltaUnit_get_deltaunit_example1_ContainsAtomUnits():
     assert before_sue_budunit.max_tree_traverse != 66
     assert before_sue_budunit.credor_respect != 77
     assert before_sue_budunit.debtor_respect != 88
+    assert before_sue_budunit.purview_timestamp != 990000
     assert before_sue_budunit.acct_exists(yao_str)
     assert before_sue_budunit.acct_exists(zia_str)
     assert yao_acctunit.get_membership(fly_str) is not None
@@ -1139,5 +1146,6 @@ def test_DeltaUnit_get_deltaunit_example1_ContainsAtomUnits():
     assert after_sue_budunit.max_tree_traverse == 66
     assert after_sue_budunit.credor_respect == 77
     assert after_sue_budunit.debtor_respect == 88
+    assert after_sue_budunit.purview_timestamp == 990000
     assert after_sue_budunit.acct_exists(yao_str)
     assert after_sue_budunit.acct_exists(zia_str) is False

@@ -4,6 +4,7 @@ from src.f00_instrument.dict_tool import (
     get_dict_from_json,
 )
 from src.f00_instrument.db_tool import create_insert_sqlstr, RowData
+from src.f01_road.finance import TimeLinePoint
 from src.f01_road.road import (
     create_road,
     RoadNode,
@@ -247,6 +248,9 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
     x_arg = "respect_bit"
     if x_atom.get_value(x_arg) is not None:
         x_bud.respect_bit = x_atom.get_value(x_arg)
+    x_arg = "purview_timestamp"
+    if x_atom.get_value(x_arg) is not None:
+        x_bud.purview_timestamp = x_atom.get_value(x_arg)
     x_arg = "penny"
     if x_atom.get_value(x_arg) is not None:
         x_bud.penny = x_atom.get_value(x_arg)
@@ -690,6 +694,7 @@ class AtomRow:
     pick: RoadUnit = None
     pledge: bool = None
     problem_bool: bool = None
+    purview_timestamp: TimeLinePoint = None
     road: RoadUnit = None
     stop_want: float = None
     take_force: float = None

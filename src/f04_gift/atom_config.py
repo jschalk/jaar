@@ -286,6 +286,7 @@ def get_atom_args_python_types() -> dict[str, str]:
         "problem_bool": "bool",
         "max_tree_traverse": "int",
         "penny": "float",
+        "purview_timestamp": "int",
         "tally": "int",
         "credor_respect": "int",
         "debtor_respect": "int",
