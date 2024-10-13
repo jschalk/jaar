@@ -19,6 +19,10 @@ from src.f00_instrument.dict_tool import (
     get_nested_non_dict_keys_list,
     is_2d_with_unique_keys,
     create_2d_array_from_dict,
+    str_in_dict,
+    str_in_dict_keys,
+    str_in_dict_values,
+    get_str_in_sub_dict,
 )
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -693,3 +697,62 @@ def test_create_2d_array_from_dict_ReturnsObj_Scenario0_Simple():
     x2_2d_dict = {"casa": {"clean": {"Bob": 13}}, "school": 14}
     x2_2d_array = [["school", "Bob"], [14, 13]]
     assert create_2d_array_from_dict(x2_2d_dict) == x2_2d_array
+
+
+def test_str_in_dict_keys_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_dict_keys("", {}) is False
+    assert str_in_dict_keys("", {"": "Sue"})
+    assert str_in_dict_keys("", {"Sue": "Sue"})
+    assert str_in_dict_keys("Sue", {"Sue": "Bob"})
+    assert str_in_dict_keys("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict_keys("Sue", {"SueAndZia": "Bob"})
+    assert str_in_dict_keys("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict_keys("Sue", {"Bob": "SueAndZia"}) is False
+    assert str_in_dict_keys("Sue", {"Bob": "Zia"}) is False
+
+
+def test_str_in_dict_values_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_dict_values("", {}) is False
+    assert str_in_dict_values("", {"": "Sue"})
+    assert str_in_dict_values("", {"Sue": "Sue"})
+    assert str_in_dict_values("Sue", {"Sue": "Bob"}) is False
+    assert str_in_dict_values("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict_values("Sue", {"SueAndZia": "Bob"}) is False
+    assert str_in_dict_values("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict_values("Sue", {"Bob": "SueAndZia"})
+    assert str_in_dict_values("Sue", {"Bob": "Zia"}) is False
+
+
+def test_str_in_dict_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_dict("", {}) is False
+    assert str_in_dict("", {"": "Sue"})
+    assert str_in_dict("", {"Sue": "Sue"})
+    assert str_in_dict("Sue", {"Sue": "Bob"})
+    assert str_in_dict("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict("Sue", {"SueAndZia": "Bob"})
+    assert str_in_dict("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict("Sue", {"Bob": "SueAndZia"})
+    assert str_in_dict("Sue", {"Bob": "Zia"}) is False
+
+
+def test_get_str_in_sub_dict_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_str_in_sub_dict("", {}) == {}
+    assert get_str_in_sub_dict("", {"": "Sue"}) == {"": "Sue"}
+    assert get_str_in_sub_dict("", {"Sue": "Sue"}) == {"Sue": "Sue"}
+    assert get_str_in_sub_dict("Sue", {"Sue": "Bob"}) == {"Sue": "Bob"}
+    assert get_str_in_sub_dict("Sue", {"Zia": "Bob"}) == {}
+    assert get_str_in_sub_dict("Sue", {"SueAndZia": "Bob"}) == {"SueAndZia": "Bob"}
+    assert get_str_in_sub_dict("Sue", {"Zia": "Bob"}) == {}
+    assert get_str_in_sub_dict("Sue", {"Bob": "SueAndZia"}) == {"Bob": "SueAndZia"}
+    assert get_str_in_sub_dict("Sue", {"Bob": "Zia"}) == {}
+
+    xio_sue_dict = {"Xio": "Xio", "Sue": "Bob"}
+    assert get_str_in_sub_dict("Sue", xio_sue_dict) == {"Sue": "Bob"}
+    xio_sueandzia_dict = {"Xio": "Xio", "SueAndZia": "Bob"}
+    assert get_str_in_sub_dict("Sue", xio_sueandzia_dict) == {"SueAndZia": "Bob"}
+    xio_bob_dict = {"Xio": "Xio", "Bob": "SueAndZia"}
+    assert get_str_in_sub_dict("Sue", xio_bob_dict) == {"Bob": "SueAndZia"}
