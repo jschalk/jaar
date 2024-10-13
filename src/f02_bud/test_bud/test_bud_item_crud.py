@@ -696,7 +696,7 @@ def test_BudUnit_edit_item_attr_DeletesItemUnit_awardlinks():
     assert len(yao_bud._itemroot._kids[swim_str].awardlinks) == 2
 
 
-def test_BudUnit__get_filtered_awardlinks_item_CorrectlyFiltersItem_awardlinks():
+def test_BudUnit__get_cleaned_awardlinks_item_CorrectlyRemovesItem_awardlinks():
     # ESTABLISH
     bob_str = "Bob"
     x1_bud = budunit_shop(bob_str)
@@ -719,14 +719,14 @@ def test_BudUnit__get_filtered_awardlinks_item_CorrectlyFiltersItem_awardlinks()
     bob_bud.add_acctunit(xia_str)
 
     # WHEN
-    filtered_item = bob_bud._get_filtered_awardlinks_item(x1_bud_swim_item)
+    cleaned_item = bob_bud._get_cleaned_awardlinks_item(x1_bud_swim_item)
 
     # THEN
-    assert len(filtered_item.awardlinks) == 1
-    assert list(filtered_item.awardlinks.keys()) == [xia_str]
+    assert len(cleaned_item.awardlinks) == 1
+    assert list(cleaned_item.awardlinks.keys()) == [xia_str]
 
 
-def test_BudUnit_set_item_CorrectlyFiltersItem_awardlinks():
+def test_BudUnit_set_item_CorrectlyCleansItem_awardlinks():
     # ESTABLISH
     bob_str = "Bob"
     x1_bud = budunit_shop(bob_str)

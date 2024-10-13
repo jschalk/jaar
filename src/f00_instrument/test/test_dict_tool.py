@@ -453,7 +453,7 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
 """
 
     # WHEN
-    filtered_dict = create_l2nested_csv_dict(headerless_csv=headerless_csv)
+    tiered_dict = create_l2nested_csv_dict(headerless_csv=headerless_csv)
 
     # THEN
     # print(f"{u_dict=}")
@@ -465,8 +465,8 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
 """
     static_bob_csv = f"""{music4_id},{bob_str},Yao,41,37
 """
-    music3_dict = filtered_dict.get(music3_id)
-    music4_dict = filtered_dict.get(music4_id)
+    music3_dict = tiered_dict.get(music3_id)
+    music4_dict = tiered_dict.get(music4_id)
     assert music3_dict
     assert music4_dict
     assert list(music3_dict.keys()) == [sue_str]
@@ -481,7 +481,7 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
     assert generated4_sue_csv == music4_sue_csv
     owner_id3_csv_dict = {sue_str: music3_sue_csv}
     owner_id4_csv_dict = {sue_str: music4_sue_csv, bob_str: static_bob_csv}
-    assert filtered_dict == {
+    assert tiered_dict == {
         music3_id: owner_id3_csv_dict,
         music4_id: owner_id4_csv_dict,
     }

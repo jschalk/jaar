@@ -900,7 +900,7 @@ def bud_built_from_delta_is_valid(x_delta: DeltaUnit, x_bud: BudUnit = None) -> 
     return True
 
 
-def get_filtered_deltaunit(
+def get_categorys_cruds_deltaunit(
     x_deltaunit: DeltaUnit, category_set: set[str], curd_set: set[str]
 ) -> DeltaUnit:
     new_deltaunit = deltaunit_shop()

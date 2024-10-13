@@ -1,9 +1,9 @@
 from src.f02_bud.healer import healerlink_shop
-from src.f02_bud.item import ItemAttrFilter, itemattrfilter_shop
+from src.f02_bud.item import ItemAttrHolder, itemattrholder_shop
 
 
-def test_ItemAttrFilter_Exists():
-    new_obj = ItemAttrFilter()
+def test_ItemAttrHolder_Exists():
+    new_obj = ItemAttrHolder()
     assert new_obj.mass is None
     assert new_obj.uid is None
     assert new_obj.reason is None
@@ -33,9 +33,9 @@ def test_ItemAttrFilter_Exists():
     assert new_obj.is_expanded is None
 
 
-def test_ItemAttrFilter_CorrectlyCalculatesPremiseRanges():
+def test_ItemAttrHolder_CorrectlyCalculatesPremiseRanges():
     # ESTABLISH
-    item_attr = ItemAttrFilter(reason_premise="some_road")
+    item_attr = ItemAttrHolder(reason_premise="some_road")
     assert item_attr.reason_premise_open is None
     assert item_attr.reason_premise_nigh is None
     # assert item_attr.reason_premise_numor is None
@@ -57,12 +57,12 @@ def test_ItemAttrFilter_CorrectlyCalculatesPremiseRanges():
     # assert item_attr.reason_premise_morph is None
 
 
-def test_itemattrfilter_shop_ReturnsCorrectObj():
+def test_itemattrholder_shop_ReturnsCorrectObj():
     # ESTABLISH
     sue_healerlink = healerlink_shop({"Sue", "Yim"})
 
     # WHEN
-    x_itemattrfilter = itemattrfilter_shop(healerlink=sue_healerlink)
+    x_itemattrholder = itemattrholder_shop(healerlink=sue_healerlink)
 
     # THEN
-    assert x_itemattrfilter.healerlink == sue_healerlink
+    assert x_itemattrholder.healerlink == sue_healerlink

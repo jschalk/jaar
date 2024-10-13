@@ -383,7 +383,7 @@ def test_BudUnit_get_item_tree_ordered_road_list_ReturnsCorrectObj():
     assert y_1st_road_in_ordered_list == sue_bud._fiscal_id
 
 
-def test_BudUnit_get_item_tree_ordered_road_list_CorrectlyFiltersRangedItemRoadUnits():
+def test_BudUnit_get_item_tree_ordered_road_list_CorrectlyCleansRangedItemRoadUnits():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
 

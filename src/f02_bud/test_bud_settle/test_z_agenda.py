@@ -222,7 +222,7 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     print(len(item_pledge_list))
 
 
-def test_BudUnit_get_agenda_dict_BudUnitCanFilterOnBase_budunit_v001_with_large_agenda():
+def test_BudUnit_get_agenda_dict_BudUnitCanCleanOnBase_budunit_v001_with_large_agenda():
     # ESTABLISH
     yao_bud = budunit_v001_with_large_agenda()
     week_str = "weekdays"

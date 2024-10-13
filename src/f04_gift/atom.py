@@ -327,7 +327,7 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         ),
         parent_road=x_atom.get_value(parent_road_str()),
         create_missing_items=False,
-        filter_out_missing_awardlinks_group_ids=False,
+        get_rid_of_missing_awardlinks_group_ids=False,
         create_missing_ancestors=False,
     )
 

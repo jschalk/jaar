@@ -148,7 +148,7 @@ def test_bud_itemkid_teamunit_CorrectlySets_grandchild_item_teamheir():
     assert four_item._teamheir == x_teamheir
 
 
-def test_BudUnit__get_filtered_awardlinks_item_CorrectlyFiltersItem_Teamunit():
+def test_BudUnit__get_cleaned_awardlinks_item_CorrectlyCleansItem_Teamunit():
     # ESTABLISH
     sue_str = "Sue"
     sue1_bud = budunit_shop(sue_str)
@@ -174,15 +174,15 @@ def test_BudUnit__get_filtered_awardlinks_item_CorrectlyFiltersItem_Teamunit():
     # WHEN
     sue2_bud = budunit_shop(sue_str)
     sue2_bud.add_acctunit(xia_str)
-    filtered_item = sue2_bud._get_filtered_awardlinks_item(sue1_bud_swim_item)
+    cleaned_item = sue2_bud._get_cleaned_awardlinks_item(sue1_bud_swim_item)
 
     # THEN
-    filtered_swim_teamlinks = filtered_item.teamunit._teamlinks
-    assert len(filtered_swim_teamlinks) == 1
-    assert list(filtered_swim_teamlinks) == [xia_str]
+    cleaned_swim_teamlinks = cleaned_item.teamunit._teamlinks
+    assert len(cleaned_swim_teamlinks) == 1
+    assert list(cleaned_swim_teamlinks) == [xia_str]
 
 
-def test_BudUnit_set_item_CorrectlyFiltersItem_awardlinks():
+def test_BudUnit_set_item_CorrectlyCleansItem_awardlinks():
     # ESTABLISH
     sue1_bud = budunit_shop("Sue")
     xia_str = "Xia"
@@ -208,7 +208,7 @@ def test_BudUnit_set_item_CorrectlyFiltersItem_awardlinks():
     sue2_bud = budunit_shop("Sue")
     sue2_bud.add_acctunit(xia_str)
     sue2_bud.set_l1_item(
-        sue1_bud_swim_item, filter_out_missing_awardlinks_group_ids=False
+        sue1_bud_swim_item, get_rid_of_missing_awardlinks_group_ids=False
     )
 
     # THEN

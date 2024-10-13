@@ -395,7 +395,7 @@ def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_morph_Scenario1_PartialRange
     assert time_item._stop_calc == 4
 
 
-def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario0_NoFilter():
+def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario0_NoModifications():
     # ESTABLISH
     time_str = "time"
     time_denom = 7
@@ -422,7 +422,7 @@ def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario
     assert time_item._stop_calc == 40
 
 
-def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_FilterBoth():
+def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_ModifiyBoth():
     # ESTABLISH
     time_str = "time"
     time_denom = 7
@@ -449,7 +449,7 @@ def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario
     assert time_item._stop_calc == 45
 
 
-def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_FilterLeft():
+def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_ModifyLeft():
     # ESTABLISH
     time_str = "time"
     time_denom = 7
@@ -476,7 +476,7 @@ def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario
     assert time_item._stop_calc == 40
 
 
-def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario2_FilterRight():
+def test_ItemUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario2_ModifyRight():
     # ESTABLISH
     time_str = "time"
     time_denom = 7

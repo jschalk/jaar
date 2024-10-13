@@ -67,8 +67,8 @@ from src.f02_bud.origin import originunit_get_from_dict, originunit_shop, Origin
 from src.f02_bud.item import (
     ItemUnit,
     itemunit_shop,
-    itemattrfilter_shop,
-    ItemAttrFilter,
+    itemattrholder_shop,
+    ItemAttrHolder,
     get_obj_from_item_dict,
 )
 from copy import deepcopy as copy_deepcopy
@@ -583,7 +583,7 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         create_missing_items: bool = None,
-        filter_out_missing_awardlinks_group_ids: bool = None,
+        get_rid_of_missing_awardlinks_group_ids: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
@@ -592,7 +592,7 @@ class BudUnit:
             item_kid=item_kid,
             parent_road=self._fiscal_id,
             create_missing_items=create_missing_items,
-            filter_out_missing_awardlinks_group_ids=filter_out_missing_awardlinks_group_ids,
+            get_rid_of_missing_awardlinks_group_ids=get_rid_of_missing_awardlinks_group_ids,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
@@ -602,7 +602,7 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         parent_road: RoadUnit,
-        filter_out_missing_awardlinks_group_ids: bool = None,
+        get_rid_of_missing_awardlinks_group_ids: bool = None,
         create_missing_items: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
@@ -622,8 +622,8 @@ class BudUnit:
             item_kid._bud_fiscal_id = self._fiscal_id
         if item_kid._fund_coin != self.fund_coin:
             item_kid._fund_coin = self.fund_coin
-        if not filter_out_missing_awardlinks_group_ids:
-            item_kid = self._get_filtered_awardlinks_item(item_kid)
+        if not get_rid_of_missing_awardlinks_group_ids:
+            item_kid = self._get_cleaned_awardlinks_item(item_kid)
         item_kid.set_parent_road(parent_road=parent_road)
 
         # create any missing items
@@ -653,7 +653,7 @@ class BudUnit:
         if create_missing_items:
             self._create_missing_items(road=kid_road)
 
-    def _get_filtered_awardlinks_item(self, x_item: ItemUnit) -> ItemUnit:
+    def _get_cleaned_awardlinks_item(self, x_item: ItemUnit) -> ItemUnit:
         _awardlinks_to_delete = [
             _awardlink_group_id
             for _awardlink_group_id in x_item.awardlinks.keys()
@@ -753,9 +753,9 @@ class BudUnit:
                         )
                     item_kid.find_replace_road(old_road=old_road, new_road=new_road)
 
-    def _set_itemattrfilter_premise_ranges(self, x_itemattrfilter: ItemAttrFilter):
-        premise_item = self.get_item_obj(x_itemattrfilter.get_premise_need())
-        x_itemattrfilter.set_premise_range_attributes_influenced_by_premise_item(
+    def _set_itemattrholder_premise_ranges(self, x_itemattrholder: ItemAttrHolder):
+        premise_item = self.get_item_obj(x_itemattrholder.reason_premise)
+        x_itemattrholder.set_premise_range_attributes_influenced_by_premise_item(
             premise_open=premise_item.begin,
             premise_nigh=premise_item.close,
             premise_denom=premise_item.denom,
@@ -819,7 +819,7 @@ class BudUnit:
                     exception_str = f"Item cannot edit healerlink because group_id '{x_healer_id}' does not exist as group in Bud"
                     raise healerlink_group_id_Exception(exception_str)
 
-        x_itemattrfilter = itemattrfilter_shop(
+        x_itemattrholder = itemattrholder_shop(
             mass=mass,
             uid=uid,
             reason=reason,
@@ -851,10 +851,10 @@ class BudUnit:
             factunit=factunit,
             problem_bool=problem_bool,
         )
-        if x_itemattrfilter.has_reason_premise():
-            self._set_itemattrfilter_premise_ranges(x_itemattrfilter)
+        if reason_premise is not None:
+            self._set_itemattrholder_premise_ranges(x_itemattrholder)
         x_item = self.get_item_obj(road)
-        x_item._set_attrs_to_itemunit(item_attr=x_itemattrfilter)
+        x_item._set_attrs_to_itemunit(item_attr=x_itemattrholder)
 
     def get_agenda_dict(
         self, necessary_base: RoadUnit = None
@@ -1387,7 +1387,7 @@ class BudUnit:
         self.set_item(
             item_kid=item_kid,
             parent_road=self.make_road(item_kid._parent_road),
-            filter_out_missing_awardlinks_group_ids=True,
+            get_rid_of_missing_awardlinks_group_ids=True,
             create_missing_items=True,
         )
 
