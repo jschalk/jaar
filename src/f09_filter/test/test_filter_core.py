@@ -1,5 +1,5 @@
 from src.f01_road.road import default_road_delimiter_if_none
-from src.f09_read.read import (
+from src.f09_filter.filter import (
     BridgeUnit,
     bridgeunit_shop,
     default_unknown_word,
@@ -7,9 +7,9 @@ from src.f09_read.read import (
 )
 from pytest import raises as pytest_raises
 
-# from src.f09_read.examples.read_env import get_test_reads_dir, env_dir_setup_cleanup
+# from src.f09_filter.examples.filter_env import get_test_filters_dir, env_dir_setup_cleanup
 
-# The goal of the read function is to allow a single command, pointing at a bunch of directories
+# The goal of the filter function is to allow a single command, pointing at a bunch of directories
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
 
 
