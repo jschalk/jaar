@@ -6,6 +6,7 @@ from src.f00_instrument.dict_tool import (
     get_str_in_sub_dict,
 )
 from src.f01_road.road import default_road_delimiter_if_none
+from src.f04_gift.atom_config import get_atom_args_python_types
 from dataclasses import dataclass
 
 
@@ -15,10 +16,12 @@ class set_all_src_to_dstException(Exception):
 
 @dataclass
 class BridgeUnit:
+    atom_arg: str = None  # always key from from get_atom_args_python_types
     src_to_dst: dict[any:any] = None
     unknown_word: str = None
     src_road_delimiter: str = None
     dst_road_delimiter: str = None
+    calc_atom_python_type: str = None
 
     def set_all_src_to_dst(
         self, x_src_to_dst: dict, raise_exception_if_invalid: bool = False
@@ -58,6 +61,7 @@ class BridgeUnit:
 
 
 def bridgeunit_shop(
+    x_atom_arg: str,
     x_src_to_dst: dict = None,
     x_unknown_word: str = None,
     x_src_road_delimiter: str = None,
@@ -77,10 +81,12 @@ def bridgeunit_shop(
     #     if dst_word == x_u
 
     return BridgeUnit(
+        atom_arg=x_atom_arg,
         src_to_dst=get_empty_dict_if_none(x_src_to_dst),
         unknown_word=x_unknown_word,
         src_road_delimiter=x_src_road_delimiter,
         dst_road_delimiter=x_dst_road_delimiter,
+        calc_atom_python_type=get_atom_args_python_types().get(x_atom_arg),
     )
 
 
