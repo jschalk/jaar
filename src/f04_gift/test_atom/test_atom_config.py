@@ -587,7 +587,7 @@ def test_get_allowed_python_types_ReturnsObj():
         "float",
         "bool",
         "RoadNode",
-        "str",
+        "TimeLinePoint",
     }
 
     # WHEN / THEN
@@ -677,7 +677,7 @@ def test_get_atom_args_python_types_ReturnsObj():
     assert x_python_types.get("pick") == "RoadUnit"
     assert x_python_types.get("pledge") == "bool"
     assert x_python_types.get("problem_bool") == "bool"
-    assert x_python_types.get("purview_timestamp") == "int"
+    assert x_python_types.get("purview_timestamp") == "TimeLinePoint"
     assert x_python_types.get("road") == "RoadUnit"
     assert x_python_types.get("stop_want") == "float"
     assert x_python_types.get("take_force") == "float"

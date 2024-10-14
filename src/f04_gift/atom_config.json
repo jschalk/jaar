@@ -422,7 +422,7 @@
             },
             "purview_timestamp": {
                 "column_order": 8,
-                "python_type": "int",
+                "python_type": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"
             },
             "tally": {
