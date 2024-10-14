@@ -14,6 +14,10 @@ class set_all_src_to_dstException(Exception):
     pass
 
 
+class atom_args_python_typeException(Exception):
+    pass
+
+
 @dataclass
 class BridgeUnit:
     atom_arg: str = None  # always key from from get_atom_args_python_types
@@ -21,7 +25,18 @@ class BridgeUnit:
     unknown_word: str = None
     src_road_delimiter: str = None
     dst_road_delimiter: str = None
-    calc_atom_python_type: str = None
+    _calc_atom_python_type: str = None
+
+    def set_atom_arg(self, x_atom_arg: str):
+        x_atom_python_type = get_atom_args_python_types().get(x_atom_arg)
+        if x_atom_python_type is None:
+            exception_str = (
+                f"set_atom_arg Error: '{x_atom_arg}' not arg in atom_config."
+            )
+            raise atom_args_python_typeException(exception_str)
+
+        self.atom_arg = x_atom_arg
+        self._calc_atom_python_type = x_atom_python_type
 
     def set_all_src_to_dst(
         self, x_src_to_dst: dict, raise_exception_if_invalid: bool = False
@@ -86,7 +101,7 @@ def bridgeunit_shop(
         unknown_word=x_unknown_word,
         src_road_delimiter=x_src_road_delimiter,
         dst_road_delimiter=x_dst_road_delimiter,
-        calc_atom_python_type=get_atom_args_python_types().get(x_atom_arg),
+        _calc_atom_python_type=get_atom_args_python_types().get(x_atom_arg),
     )
 
 

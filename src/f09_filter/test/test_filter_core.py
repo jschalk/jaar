@@ -34,7 +34,7 @@ def test_BridgeUnit_Exists():
     assert not x_bridgeunit.unknown_word
     assert not x_bridgeunit.src_road_delimiter
     assert not x_bridgeunit.dst_road_delimiter
-    assert not x_bridgeunit.calc_atom_python_type
+    assert not x_bridgeunit._calc_atom_python_type
 
 
 def test_bridgeunit_shop_ReturnsObj_scenario0():
@@ -62,7 +62,7 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
     assert acct_id_bridgeunit.src_road_delimiter == slash_src_road_delimiter
     assert acct_id_bridgeunit.dst_road_delimiter == colon_dst_road_delimiter
     acct_id_python_type = get_atom_args_python_types().get(acct_id_str())
-    assert acct_id_bridgeunit.calc_atom_python_type == acct_id_python_type
+    assert acct_id_bridgeunit._calc_atom_python_type == acct_id_python_type
 
 
 def test_bridgeunit_shop_ReturnsObj_scenario1():
@@ -76,7 +76,38 @@ def test_bridgeunit_shop_ReturnsObj_scenario1():
     assert credit_vote_bridgeunit.src_road_delimiter == default_road_delimiter_if_none()
     assert credit_vote_bridgeunit.dst_road_delimiter == default_road_delimiter_if_none()
     cv_python_type = get_atom_args_python_types().get(credit_vote_str())
-    assert credit_vote_bridgeunit.calc_atom_python_type == cv_python_type
+    assert credit_vote_bridgeunit._calc_atom_python_type == cv_python_type
+
+
+def test_BridgeUnit_set_atom_arg_SetsAttr():
+    # ESTABLISH
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str())
+    acct_id_python_type = "AcctID"
+    assert acct_id_bridgeunit.atom_arg == acct_id_str()
+    assert acct_id_bridgeunit._calc_atom_python_type == acct_id_python_type
+
+    # WHEN
+    acct_id_bridgeunit.set_atom_arg(credit_vote_str())
+
+    # THEN
+    assert acct_id_bridgeunit.atom_arg == credit_vote_str()
+    int_python_type = "int"
+    assert acct_id_bridgeunit._calc_atom_python_type == int_python_type
+
+
+def test_BridgeUnit_set_atom_arg_RaisesErrorIf_atom_arg_DoesNotExistIn_atom_config():
+    # ESTABLISH
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str())
+    acct_id_python_type = "AcctID"
+    assert acct_id_bridgeunit.atom_arg == acct_id_str()
+    assert acct_id_bridgeunit._calc_atom_python_type == acct_id_python_type
+
+    # WHEN
+    rush_acct_id_str = "rush_acct_id"
+    with pytest_raises(Exception) as excinfo:
+        acct_id_bridgeunit.set_atom_arg(rush_acct_id_str)
+    exception_str = f"set_atom_arg Error: '{rush_acct_id_str}' not arg in atom_config."
+    assert str(excinfo.value) == exception_str
 
 
 def test_BridgeUnit_set_all_src_to_dst_SetsAttr():
@@ -107,9 +138,7 @@ def test_BridgeUnit_set_all_src_to_dst_RaisesErrorIf_unknown_word_IsKeyIn_src_to
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        acct_id_bridgeunit.set_all_src_to_dst(
-            x_src_to_dst, raise_exception_if_invalid=True
-        )
+        acct_id_bridgeunit.set_all_src_to_dst(x_src_to_dst, True)
     exception_str = f"src_to_dst cannot have unknown_word '{x_unknown_word}' in any str. Affected keys include ['{x_unknown_word}']."
     assert str(excinfo.value) == exception_str
 
