@@ -12,6 +12,7 @@ from src.f00_instrument.dict_tool import (
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import get_atom_args_python_types
 from dataclasses import dataclass
+from copy import copy as copy_copy
 
 
 class set_all_src_to_dstException(Exception):
@@ -70,11 +71,17 @@ class BridgeUnit:
     def _get_dst_value(self, src_word: str) -> str:
         return self.src_to_dst.get(src_word)
 
-    def get_dst(self, src_word: str, missing_add: bool = True) -> str:
+    def get_create_dst(self, src_word: str, missing_add: bool = True) -> str:
         if missing_add and self.src_exists(src_word) is False:
+            dst_word = copy_copy(src_word)
+            if self._calc_atom_python_type in {"GroupID"}:
+                src_r_delimiter = self.src_road_delimiter
+                dst_r_delimiter = self.dst_road_delimiter
+                dst_word = dst_word.replace(src_r_delimiter, dst_r_delimiter)
+
             if self.dst_road_delimiter in src_word:
                 return None
-            self.set_src_to_dst(src_word, src_word)
+            self.set_src_to_dst(src_word, dst_word)
 
         return self._get_dst_value(src_word)
 
