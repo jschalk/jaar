@@ -418,7 +418,7 @@ def test_BridgeUnit_is_dst_delimiter_inclusion_correct_ReturnsObj_GroupID():
     xio_str = "Xio"
     sue_str = "Sue"
     dst_road_delimiter = "/"
-    zia_src = f"Zia"
+    zia_src = "Zia"
     zia_dst = f"Zia{dst_road_delimiter}"
     acct_id_bridgeunit = bridgeunit_shop(group_id_str(), None, dst_road_delimiter)
     assert acct_id_bridgeunit._calc_atom_python_type == "GroupID"
@@ -505,7 +505,7 @@ def test_BridgeUnit_is_src_delimiter_inclusion_correct_ReturnsObj_RoadNode():
     clean_dst = "prop"
     src_road_delimiter = "/"
     casa_src = f"casa{src_road_delimiter}"
-    casa_dst = f"casa"
+    casa_dst = "casa"
     acct_id_bridgeunit = bridgeunit_shop(label_str(), src_road_delimiter)
     assert acct_id_bridgeunit._calc_atom_python_type == "RoadNode"
     assert acct_id_bridgeunit._is_src_delimiter_inclusion_correct()
@@ -597,7 +597,7 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario0_label_str():
     clean_dst = "prop"
     src_road_delimiter = "/"
     casa_src = f"casa{src_road_delimiter}"
-    casa_dst = f"casa"
+    casa_dst = "casa"
     label_bridgeunit = bridgeunit_shop(label_str(), src_road_delimiter)
     assert label_bridgeunit._calc_atom_python_type == "RoadNode"
     assert label_bridgeunit.is_valid()
@@ -642,7 +642,7 @@ def test_BridgeUnit_is_valid_ReturnsObj_scenario2_road():
     dst_road_delimiter = "/"
     sue_src = f"Xio{src_road_delimiter}"
     sue_dst = f"Sue{dst_road_delimiter}"
-    zia_src = f"Zia"
+    zia_src = "Zia"
     zia_dst = f"Zia{dst_road_delimiter}"
     group_id_bridgeunit = bridgeunit_shop(
         group_id_str(), src_road_delimiter, dst_road_delimiter

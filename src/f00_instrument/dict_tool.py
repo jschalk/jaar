@@ -345,16 +345,16 @@ def str_in_dict(x_str: str, x_dict: dict[str:str]) -> bool:
 
 
 def str_in_all_dict_keys(x_str: str, x_dict: dict[str:str]) -> bool:
-    return not any(x_str not in x_key for x_key in x_dict)
+    return all(x_str in x_key for x_key in x_dict)
 
 
 def str_in_all_dict_values(x_str: str, x_dict: dict[str:str]) -> bool:
-    return not any(x_str not in x_value for x_value in x_dict.values())
+    return all(x_str in x_value for x_value in x_dict.values())
 
 
 def str_in_all_dict(x_str: str, x_dict: dict[str:str]) -> bool:
-    return not any(
-        not (x_str in x_key and x_str in x_value) for x_key, x_value in x_dict.items()
+    return all(
+        (x_str in x_key and x_str in x_value) for x_key, x_value in x_dict.items()
     )
 
 
