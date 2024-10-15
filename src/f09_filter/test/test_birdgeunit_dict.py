@@ -11,6 +11,8 @@ def test_BridgeUnit_get_dict_ReturnsObj():
     # ESTABLISH
     clean_src = "clean"
     clean_dst = "prop"
+    casa_src = "casa1"
+    casa_dst = "casa2"
     slash_src_road_delimiter = "/"
     label_bridgeunit = bridgeunit_shop(label_str(), slash_src_road_delimiter)
     x1_label_bridge_dict = {
@@ -18,18 +20,21 @@ def test_BridgeUnit_get_dict_ReturnsObj():
         "src_road_delimiter": label_bridgeunit.src_road_delimiter,
         "dst_road_delimiter": label_bridgeunit.dst_road_delimiter,
         "unknown_word": label_bridgeunit.unknown_word,
+        "explicit_label_map": label_bridgeunit.explicit_label_map,
         "src_to_dst": {},
     }
     assert label_bridgeunit.get_dict() == x1_label_bridge_dict
 
     # WHEN
     label_bridgeunit.set_src_to_dst(clean_src, clean_dst)
+    label_bridgeunit.set_explicit_label_map(casa_src, casa_dst)
     # THEN
     x2_label_bridge_dict = {
         "atom_arg": label_bridgeunit.atom_arg,
         "src_road_delimiter": label_bridgeunit.src_road_delimiter,
         "dst_road_delimiter": label_bridgeunit.dst_road_delimiter,
         "unknown_word": label_bridgeunit.unknown_word,
+        "explicit_label_map": {casa_src: casa_dst},
         "src_to_dst": {clean_src: clean_dst},
     }
     assert label_bridgeunit.get_dict() == x2_label_bridge_dict
@@ -39,11 +44,14 @@ def test_BridgeUnit_get_json_ReturnsObj():
     # ESTABLISH
     clean_src = "clean"
     clean_dst = "prop"
+    casa_src = "casa1"
+    casa_dst = "casa2"
     slash_src_road_delimiter = "/"
     label_bridgeunit = bridgeunit_shop(label_str(), slash_src_road_delimiter)
     x1_label_bridge_json = f"""{{
   "atom_arg": "{label_bridgeunit.atom_arg}",
   "dst_road_delimiter": "{label_bridgeunit.dst_road_delimiter}",
+  "explicit_label_map": {label_bridgeunit.explicit_label_map},
   "src_road_delimiter": "{label_bridgeunit.src_road_delimiter}",
   "src_to_dst": {{}},
   "unknown_word": "{label_bridgeunit.unknown_word}"
@@ -54,10 +62,14 @@ def test_BridgeUnit_get_json_ReturnsObj():
 
     # WHEN
     label_bridgeunit.set_src_to_dst(clean_src, clean_dst)
+    label_bridgeunit.set_explicit_label_map(casa_src, casa_dst)
     # THEN
     x2_label_bridge_json = f"""{{
   "atom_arg": "{label_bridgeunit.atom_arg}",
   "dst_road_delimiter": "{label_bridgeunit.dst_road_delimiter}",
+  "explicit_label_map": {{
+    "{casa_src}": "{casa_dst}"
+  }},
   "src_road_delimiter": "{label_bridgeunit.src_road_delimiter}",
   "src_to_dst": {{
     "{clean_src}": "{clean_dst}"
@@ -73,9 +85,12 @@ def test_get_bridgeunit_from_dict_ReturnsObj():
     # ESTABLISH
     clean_src = "clean"
     clean_dst = "prop"
+    casa_src = "casa1"
+    casa_dst = "casa2"
     slash_src_road_delimiter = "/"
     label_bridgeunit = bridgeunit_shop(label_str(), slash_src_road_delimiter)
     label_bridgeunit.set_src_to_dst(clean_src, clean_dst)
+    label_bridgeunit.set_explicit_label_map(casa_src, casa_dst)
 
     # WHEN
     x_bridgeunit = get_bridgeunit_from_dict(label_bridgeunit.get_dict())

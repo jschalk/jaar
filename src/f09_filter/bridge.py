@@ -183,6 +183,7 @@ class BridgeUnit:
             "src_road_delimiter": self.src_road_delimiter,
             "dst_road_delimiter": self.dst_road_delimiter,
             "unknown_word": self.unknown_word,
+            "explicit_label_map": self.explicit_label_map,
             "src_to_dst": self.src_to_dst,
         }
 
@@ -194,6 +195,7 @@ def bridgeunit_shop(
     x_atom_arg: str,
     x_src_road_delimiter: str = None,
     x_dst_road_delimiter: str = None,
+    x_explicit_label_map: dict = None,
     x_src_to_dst: dict = None,
     x_unknown_word: str = None,
 ) -> BridgeUnit:
@@ -210,7 +212,7 @@ def bridgeunit_shop(
         unknown_word=x_unknown_word,
         src_road_delimiter=x_src_road_delimiter,
         dst_road_delimiter=x_dst_road_delimiter,
-        explicit_label_map={},
+        explicit_label_map=get_empty_dict_if_none(x_explicit_label_map),
         _calc_atom_python_type=get_atom_args_python_types().get(x_atom_arg),
     )
 
@@ -223,6 +225,7 @@ def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
     return bridgeunit_shop(
         x_atom_arg=x_dict.get("atom_arg"),
         x_dst_road_delimiter=x_dict.get("dst_road_delimiter"),
+        x_explicit_label_map=x_dict.get("explicit_label_map"),
         x_src_road_delimiter=x_dict.get("src_road_delimiter"),
         x_src_to_dst=x_dict.get("src_to_dst"),
         x_unknown_word=x_dict.get("unknown_word"),
