@@ -50,6 +50,7 @@ class BridgeUnit:
     unknown_word: str = None
     src_road_delimiter: str = None
     dst_road_delimiter: str = None
+    explicit_label_map: dict = None
     _calc_atom_python_type: str = None
 
     def set_atom_arg(self, x_atom_arg: str):
@@ -191,6 +192,7 @@ def bridgeunit_shop(
         unknown_word=x_unknown_word,
         src_road_delimiter=x_src_road_delimiter,
         dst_road_delimiter=x_dst_road_delimiter,
+        explicit_label_map={},
         _calc_atom_python_type=get_atom_args_python_types().get(x_atom_arg),
     )
 
