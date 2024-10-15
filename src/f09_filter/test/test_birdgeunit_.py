@@ -462,19 +462,19 @@ def test_BridgeUnit_is_valid_ReturnsObj_scenario0():
     src_road_delimiter = "/"
     casa_src = f"casa{src_road_delimiter}"
     casa_dst = f"casa"
-    acct_id_bridgeunit = bridgeunit_shop(label_str(), src_road_delimiter)
-    assert acct_id_bridgeunit._calc_atom_python_type == "RoadNode"
-    assert acct_id_bridgeunit.is_valid()
+    label_bridgeunit = bridgeunit_shop(label_str(), src_road_delimiter)
+    assert label_bridgeunit._calc_atom_python_type == "RoadNode"
+    assert label_bridgeunit.is_valid()
 
     # WHEN
-    acct_id_bridgeunit.set_src_to_dst(clean_str, clean_dst)
+    label_bridgeunit.set_src_to_dst(clean_str, clean_dst)
     # THEN
-    assert acct_id_bridgeunit.is_valid()
+    assert label_bridgeunit.is_valid()
 
     # WHEN
-    acct_id_bridgeunit.set_src_to_dst(casa_src, casa_dst)
+    label_bridgeunit.set_src_to_dst(casa_src, casa_dst)
     # THEN
-    assert acct_id_bridgeunit.is_valid() is False
+    assert label_bridgeunit.is_valid() is False
 
 
 def test_BridgeUnit_is_valid_ReturnsObj_scenario1():
@@ -485,21 +485,21 @@ def test_BridgeUnit_is_valid_ReturnsObj_scenario1():
     sue_dst = f"Sue{dst_road_delimiter}"
     zia_src = f"Zia"
     zia_dst = f"Zia{dst_road_delimiter}"
-    acct_id_bridgeunit = bridgeunit_shop(
+    group_id_bridgeunit = bridgeunit_shop(
         group_id_str(), src_road_delimiter, dst_road_delimiter
     )
-    assert acct_id_bridgeunit._calc_atom_python_type == "GroupID"
-    assert acct_id_bridgeunit.is_valid()
+    assert group_id_bridgeunit._calc_atom_python_type == "GroupID"
+    assert group_id_bridgeunit.is_valid()
 
     # WHEN
-    acct_id_bridgeunit.set_src_to_dst(sue_src, sue_dst)
+    group_id_bridgeunit.set_src_to_dst(sue_src, sue_dst)
     # THEN
-    assert acct_id_bridgeunit.is_valid()
+    assert group_id_bridgeunit.is_valid()
 
     # WHEN
-    acct_id_bridgeunit.set_src_to_dst(zia_src, zia_dst)
+    group_id_bridgeunit.set_src_to_dst(zia_src, zia_dst)
     # THEN
-    assert acct_id_bridgeunit.is_valid() is False
+    assert group_id_bridgeunit.is_valid() is False
 
 
 # def test_get_bridgeunit_mapping_ReturnsObj():

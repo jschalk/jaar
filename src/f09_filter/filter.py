@@ -6,6 +6,8 @@ from src.f00_instrument.dict_tool import (
     get_str_in_sub_dict,
     str_in_all_dict_keys,
     str_in_all_dict_values,
+    get_json_from_dict,
+    get_dict_from_json,
 )
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import get_atom_args_python_types
@@ -107,6 +109,18 @@ class BridgeUnit:
             and self._is_dst_delimiter_inclusion_correct()
         )
 
+    def get_dict(self) -> dict:
+        return {
+            "atom_arg": self.atom_arg,
+            "src_road_delimiter": self.src_road_delimiter,
+            "dst_road_delimiter": self.dst_road_delimiter,
+            "unknown_word": self.unknown_word,
+            "src_to_dst": self.src_to_dst,
+        }
+
+    def get_json(self) -> str:
+        return get_json_from_dict(self.get_dict())
+
 
 def bridgeunit_shop(
     x_atom_arg: str,
@@ -138,3 +152,17 @@ def default_unknown_word() -> str:
 
 def get_bridgeunit_mapping(x_bridgeunit: BridgeUnit, x_str: str) -> str:
     return x_str
+
+
+def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
+    return bridgeunit_shop(
+        x_atom_arg=x_dict.get("atom_arg"),
+        x_dst_road_delimiter=x_dict.get("dst_road_delimiter"),
+        x_src_road_delimiter=x_dict.get("src_road_delimiter"),
+        x_src_to_dst=x_dict.get("src_to_dst"),
+        x_unknown_word=x_dict.get("unknown_word"),
+    )
+
+
+def get_bridgeunit_from_json(x_json: str) -> BridgeUnit:
+    return get_bridgeunit_from_dict(get_dict_from_json(x_json))
