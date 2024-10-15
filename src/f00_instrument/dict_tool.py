@@ -353,9 +353,7 @@ def str_in_all_dict_values(x_str: str, x_dict: dict[str:str]) -> bool:
 
 
 def str_in_all_dict(x_str: str, x_dict: dict[str:str]) -> bool:
-    return all(
-        (x_str in x_key and x_str in x_value) for x_key, x_value in x_dict.items()
-    )
+    return all((x_str in x_key and x_str in x_val) for x_key, x_val in x_dict.items())
 
 
 def get_str_in_all_sub_dict(x_str: str, x_dict: dict[str:str]) -> dict[str:str]:
