@@ -207,19 +207,19 @@ def test_BridgeUnit_set_src_to_dst_SetsAttr():
     assert acct_id_bridgeunit.src_to_dst == {xio_str: sue_str}
 
 
-def test_BridgeUnit_get_src_to_dst_ReturnsObj():
+def test_BridgeUnit_get_dst_value_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
     acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
-    assert acct_id_bridgeunit.get_src_to_dst(xio_str) != sue_str
+    assert acct_id_bridgeunit._get_dst_value(xio_str) != sue_str
 
     # WHEN
     acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
 
     # THEN
-    assert acct_id_bridgeunit.get_src_to_dst(xio_str) == sue_str
+    assert acct_id_bridgeunit._get_dst_value(xio_str) == sue_str
 
 
 def test_BridgeUnit_src_to_dst_exists_ReturnsObj():
@@ -227,17 +227,63 @@ def test_BridgeUnit_src_to_dst_exists_ReturnsObj():
     xio_str = "Xio"
     sue_str = "Sue"
     bob_str = "Bob"
+    zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
     acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
     assert acct_id_bridgeunit.src_to_dst_exists(xio_str, sue_str) is False
+    assert acct_id_bridgeunit.src_to_dst_exists(xio_str, zia_str) is False
     assert acct_id_bridgeunit.src_to_dst_exists(xio_str, bob_str) is False
+    assert acct_id_bridgeunit.src_to_dst_exists(zia_str, zia_str) is False
 
     # WHEN
     acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
 
     # THEN
     assert acct_id_bridgeunit.src_to_dst_exists(xio_str, sue_str)
+    assert acct_id_bridgeunit.src_to_dst_exists(xio_str, zia_str) is False
     assert acct_id_bridgeunit.src_to_dst_exists(xio_str, bob_str) is False
+    assert acct_id_bridgeunit.src_to_dst_exists(zia_str, zia_str) is False
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(zia_str, zia_str)
+
+    # THEN
+    assert acct_id_bridgeunit.src_to_dst_exists(xio_str, sue_str)
+    assert acct_id_bridgeunit.src_to_dst_exists(xio_str, zia_str) is False
+    assert acct_id_bridgeunit.src_to_dst_exists(xio_str, bob_str) is False
+    assert acct_id_bridgeunit.src_to_dst_exists(zia_str, zia_str)
+
+
+def test_BridgeUnit_src_exists_ReturnsObj():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    zia_str = "Zia"
+    x_unknown_word = "UnknownAcctId"
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    assert acct_id_bridgeunit.src_exists(xio_str) is False
+    assert acct_id_bridgeunit.src_exists(sue_str) is False
+    assert acct_id_bridgeunit.src_exists(bob_str) is False
+    assert acct_id_bridgeunit.src_exists(zia_str) is False
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
+
+    # THEN
+    assert acct_id_bridgeunit.src_exists(xio_str)
+    assert acct_id_bridgeunit.src_exists(sue_str) is False
+    assert acct_id_bridgeunit.src_exists(bob_str) is False
+    assert acct_id_bridgeunit.src_exists(zia_str) is False
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(zia_str, zia_str)
+
+    # THEN
+    assert acct_id_bridgeunit.src_exists(xio_str)
+    assert acct_id_bridgeunit.src_exists(sue_str) is False
+    assert acct_id_bridgeunit.src_exists(bob_str) is False
+    assert acct_id_bridgeunit.src_exists(zia_str)
 
 
 def test_BridgeUnit_del_src_to_dst_SetsAttr():

@@ -67,11 +67,22 @@ class BridgeUnit:
     def set_src_to_dst(self, src_word: str, dst_word: str):
         self.src_to_dst[src_word] = dst_word
 
-    def get_src_to_dst(self, src_word: str) -> str:
+    def _get_dst_value(self, src_word: str) -> str:
         return self.src_to_dst.get(src_word)
 
+    def get_dst(self, src_word: str, missing_add: bool = True) -> str:
+        if missing_add and self.src_exists(src_word) is False:
+            if self.dst_road_delimiter in src_word:
+                return None
+            self.set_src_to_dst(src_word, src_word)
+
+        return self._get_dst_value(src_word)
+
     def src_to_dst_exists(self, src_word: str, dst_word: str) -> bool:
-        return self.get_src_to_dst(src_word) == dst_word
+        return self._get_dst_value(src_word) == dst_word
+
+    def src_exists(self, src_word: str) -> bool:
+        return self._get_dst_value(src_word) != None
 
     def del_src_to_dst(self, src_word: str):
         self.src_to_dst.pop(src_word)
