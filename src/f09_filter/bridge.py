@@ -181,6 +181,7 @@ class BridgeUnit:
         return (
             self._is_src_delimiter_inclusion_correct()
             and self._is_dst_delimiter_inclusion_correct()
+            and self.all_src_parent_roads_exist()
         )
 
     def get_dict(self) -> dict:

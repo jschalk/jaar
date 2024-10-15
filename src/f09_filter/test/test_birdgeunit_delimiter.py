@@ -296,7 +296,7 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario0_label_str():
     assert label_bridgeunit.is_valid() is False
 
 
-def test_BridgeUnit_is_valid_ReturnsObj_Scenario1_group_id_str():
+def test_BridgeUnit_is_valid_ReturnsObj_Scenario1_road_str():
     # ESTABLISH
     music_str = "music45"
     src_r_delimiter = "/"
@@ -308,6 +308,7 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario1_group_id_str():
     # casa_src = f"casa{src_road_delimiter}"
     # casa_dst = f"casa"
     road_bridgeunit = bridgeunit_shop(road_str(), src_r_delimiter, dst_r_delimiter)
+    road_bridgeunit.set_src_to_dst(music_str, music_str)
     assert road_bridgeunit._calc_atom_python_type == "RoadUnit"
     assert road_bridgeunit.is_valid()
     assert road_bridgeunit.src_to_dst_exists(clean_src_road, clean_dst_road) is False
@@ -319,7 +320,7 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario1_group_id_str():
     assert road_bridgeunit.src_to_dst_exists(clean_src_road, clean_dst_road)
 
 
-def test_BridgeUnit_is_valid_ReturnsObj_scenario2_road():
+def test_BridgeUnit_is_valid_ReturnsObj_Scenario2_group_id_str():
     # ESTABLISH
     src_road_delimiter = ":"
     dst_road_delimiter = "/"
@@ -342,3 +343,34 @@ def test_BridgeUnit_is_valid_ReturnsObj_scenario2_road():
     group_id_bridgeunit.set_src_to_dst(zia_src, zia_dst)
     # THEN
     assert group_id_bridgeunit.is_valid() is False
+
+
+def test_BridgeUnit_is_valid_ReturnsObj_Scenario3_RoadUnit():
+    # ESTABLISH
+    clean_src_parent_road = "music45"
+    src_r_delimiter = "/"
+    clean_src_str = "clean"
+    clean_src_road = f"{clean_src_parent_road}{src_r_delimiter}{clean_src_str}"
+
+    road_bridgeunit = bridgeunit_shop(road_str(), src_r_delimiter)
+    assert road_bridgeunit._calc_atom_python_type == "RoadUnit"
+    assert road_bridgeunit.src_exists(clean_src_parent_road) is False
+    assert road_bridgeunit.src_exists(clean_src_road) is False
+    assert road_bridgeunit.all_src_parent_roads_exist()
+    assert road_bridgeunit.is_valid()
+
+    # WHEN
+    road_bridgeunit.set_src_to_dst(clean_src_road, "any")
+    # THEN
+    assert road_bridgeunit.src_exists(clean_src_parent_road) is False
+    assert road_bridgeunit.src_exists(clean_src_road)
+    assert road_bridgeunit.all_src_parent_roads_exist() is False
+    assert road_bridgeunit.is_valid() is False
+
+    # WHEN
+    road_bridgeunit.set_src_to_dst(clean_src_parent_road, "any")
+    # THEN
+    assert road_bridgeunit.src_exists(clean_src_parent_road)
+    assert road_bridgeunit.src_exists(clean_src_road)
+    assert road_bridgeunit.all_src_parent_roads_exist()
+    assert road_bridgeunit.is_valid()
