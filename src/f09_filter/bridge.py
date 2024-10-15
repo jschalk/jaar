@@ -15,6 +15,7 @@ from src.f01_road.road import (
     get_parent_road,
     create_road,
     is_roadnode,
+    RoadUnit,
 )
 from src.f04_gift.atom_config import get_atom_args_python_types
 from dataclasses import dataclass
@@ -80,30 +81,26 @@ class BridgeUnit:
     def get_create_dst(self, src_word: str, missing_add: bool = True) -> str:
         if missing_add and self.src_exists(src_word) is False:
             dst_word = copy_copy(src_word)
-            if self._calc_atom_python_type in {"GroupID", "RoadUnit"}:
+            if self._calc_atom_python_type in {"GroupID"}:
                 src_r_delimiter = self.src_road_delimiter
                 dst_r_delimiter = self.dst_road_delimiter
                 dst_word = dst_word.replace(src_r_delimiter, dst_r_delimiter)
-                if self._calc_atom_python_type in {"RoadUnit"}:
-                    src_parent_road = get_parent_road(src_word, self.src_road_delimiter)
-                    if is_roadnode(src_word, self.src_road_delimiter):
-                        dst_word = src_word
-                    elif self.src_exists(src_parent_road) is False:
-                        return None
-                    else:
-                        src_terminus = get_terminus_node(
-                            src_word, self.src_road_delimiter
-                        )
-                        dst_parent_road = self._get_dst_value(src_parent_road)
-                        dst_word = create_road(
-                            dst_parent_road, src_terminus, self.dst_road_delimiter
-                        )
-                        print(f"{dst_word=}")
+            if self._calc_atom_python_type in {"RoadUnit"}:
+                dst_word = self._get_create_roadunit_dst(src_word)
             if self.dst_road_delimiter in src_word:
                 return None
             self.set_src_to_dst(src_word, dst_word)
-
         return self._get_dst_value(src_word)
+
+    def _get_create_roadunit_dst(self, src_word) -> RoadUnit:
+        src_parent_road = get_parent_road(src_word, self.src_road_delimiter)
+        if is_roadnode(src_word, self.src_road_delimiter):
+            return src_word
+        elif self.src_exists(src_parent_road) is False:
+            return None
+        src_terminus = get_terminus_node(src_word, self.src_road_delimiter)
+        dst_parent_road = self._get_dst_value(src_parent_road)
+        return create_road(dst_parent_road, src_terminus, self.dst_road_delimiter)
 
     def src_to_dst_exists(self, src_word: str, dst_word: str) -> bool:
         return self._get_dst_value(src_word) == dst_word
