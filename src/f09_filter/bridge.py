@@ -87,22 +87,28 @@ class BridgeUnit:
                 src_r_delimiter = self.src_road_delimiter
                 dst_r_delimiter = self.dst_road_delimiter
                 dst_word = dst_word.replace(src_r_delimiter, dst_r_delimiter)
-            if self._calc_atom_python_type in {"RoadUnit"}:
+            if self._calc_atom_python_type in {"RoadUnit", "RoadNode"}:
                 dst_word = self._get_create_roadunit_dst(src_word)
             if self.dst_road_delimiter in src_word:
                 return None
             self.set_src_to_dst(src_word, dst_word)
         return self._get_dst_value(src_word)
 
-    def _get_create_roadunit_dst(self, src_word) -> RoadUnit:
-        src_parent_road = get_parent_road(src_word, self.src_road_delimiter)
-        if is_roadnode(src_word, self.src_road_delimiter):
-            return src_word
+    def _get_create_roadunit_dst(self, src_road) -> RoadUnit:
+        src_parent_road = get_parent_road(src_road, self.src_road_delimiter)
+        if is_roadnode(src_road, self.src_road_delimiter):
+            return self._get_explicit_roadnode(src_road)
         elif self.src_exists(src_parent_road) is False:
             return None
-        src_terminus = get_terminus_node(src_word, self.src_road_delimiter)
+        src_terminus = get_terminus_node(src_road, self.src_road_delimiter)
+        src_terminus = self._get_explicit_roadnode(src_terminus)
         dst_parent_road = self._get_dst_value(src_parent_road)
         return create_road(dst_parent_road, src_terminus, self.dst_road_delimiter)
+
+    def _get_explicit_roadnode(self, x_roadNode: RoadNode) -> RoadNode:
+        if self.explicit_src_label_exists(x_roadNode):
+            return self._get_explicit_dst_label(x_roadNode)
+        return x_roadNode
 
     def src_to_dst_exists(self, src_word: str, dst_word: str) -> bool:
         return self._get_dst_value(src_word) == dst_word
