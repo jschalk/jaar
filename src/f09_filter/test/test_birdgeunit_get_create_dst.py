@@ -1,4 +1,4 @@
-from src.f04_gift.atom_config import label_str, group_id_str
+from src.f04_gift.atom_config import label_str, group_id_str, road_str
 from src.f09_filter.bridge import bridgeunit_shop
 
 
@@ -32,6 +32,59 @@ def test_BridgeUnit_get_create_dst_ReturnsObjAndSetsAttr_label():
     assert label_bridgeunit.src_exists(fail_clean_src) is False
     assert label_bridgeunit.get_create_dst(fail_clean_src) is None
     assert label_bridgeunit.src_exists(fail_clean_src) is False
+
+
+def test_BridgeUnit_get_create_dst_ReturnsObjAndSetsAttr_road_Scenario0():
+    # ESTABLISH
+    src_music45_str = "music45"
+    src_r_delimiter = "/"
+    dst_r_delimiter = ":"
+    label_bridgeunit = bridgeunit_shop(road_str(), src_r_delimiter, dst_r_delimiter)
+    assert label_bridgeunit.src_exists(src_music45_str) is False
+    assert label_bridgeunit.src_to_dst_exists(src_music45_str, src_music45_str) is False
+
+    # WHEN
+    gen_dst_road = label_bridgeunit.get_create_dst(src_music45_str)
+
+    # THEN
+    assert gen_dst_road == src_music45_str
+    assert label_bridgeunit.src_exists(src_music45_str)
+    assert label_bridgeunit.src_to_dst_exists(src_music45_str, src_music45_str)
+
+
+def test_BridgeUnit_get_create_dst_ReturnsObjAndSetsAttr_road_Scenario1():
+    # ESTABLISH
+    src_music45_str = "music45"
+    dst_music87_str = "music87"
+    src_r_delimiter = "/"
+    dst_r_delimiter = ":"
+    clean_src_str = "clean"
+    clean_src_road = f"{src_music45_str}{src_r_delimiter}{clean_src_str}"
+    label_bridgeunit = bridgeunit_shop(road_str(), src_r_delimiter, dst_r_delimiter)
+    assert label_bridgeunit.src_exists(src_music45_str) is False
+    assert label_bridgeunit.src_exists(clean_src_road) is False
+
+    # WHEN
+    gen_dst_road = label_bridgeunit.get_create_dst(clean_src_road)
+
+    # THEN
+    assert gen_dst_road is None
+    assert label_bridgeunit.src_exists(src_music45_str) is False
+    assert label_bridgeunit.src_exists(clean_src_road) is False
+    assert label_bridgeunit.src_to_dst_exists(src_music45_str, dst_music87_str) is False
+
+    # ESTABLISH
+    label_bridgeunit.set_src_to_dst(src_music45_str, dst_music87_str)
+    assert label_bridgeunit.src_to_dst_exists(src_music45_str, dst_music87_str)
+    assert label_bridgeunit.src_exists(clean_src_road) is False
+
+    # WHEN
+    gen_dst_road = label_bridgeunit.get_create_dst(clean_src_road)
+
+    # THEN
+    assert label_bridgeunit.src_exists(clean_src_road)
+    assert label_bridgeunit.src_to_dst_exists(clean_src_road, gen_dst_road)
+    assert gen_dst_road == f"{dst_music87_str}{dst_r_delimiter}{clean_src_str}"
 
 
 def test_BridgeUnit_get_create_dst_ReturnsObjAndSetsAttr_group_id():

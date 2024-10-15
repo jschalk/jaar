@@ -9,7 +9,13 @@ from src.f00_instrument.dict_tool import (
     get_json_from_dict,
     get_dict_from_json,
 )
-from src.f01_road.road import default_road_delimiter_if_none
+from src.f01_road.road import (
+    default_road_delimiter_if_none,
+    get_terminus_node,
+    get_parent_road,
+    create_road,
+    is_roadnode,
+)
 from src.f04_gift.atom_config import get_atom_args_python_types
 from dataclasses import dataclass
 from copy import copy as copy_copy
@@ -74,11 +80,25 @@ class BridgeUnit:
     def get_create_dst(self, src_word: str, missing_add: bool = True) -> str:
         if missing_add and self.src_exists(src_word) is False:
             dst_word = copy_copy(src_word)
-            if self._calc_atom_python_type in {"GroupID"}:
+            if self._calc_atom_python_type in {"GroupID", "RoadUnit"}:
                 src_r_delimiter = self.src_road_delimiter
                 dst_r_delimiter = self.dst_road_delimiter
                 dst_word = dst_word.replace(src_r_delimiter, dst_r_delimiter)
-
+                if self._calc_atom_python_type in {"RoadUnit"}:
+                    src_parent_road = get_parent_road(src_word, self.src_road_delimiter)
+                    if is_roadnode(src_word, self.src_road_delimiter):
+                        dst_word = src_word
+                    elif self.src_exists(src_parent_road) is False:
+                        return None
+                    else:
+                        src_terminus = get_terminus_node(
+                            src_word, self.src_road_delimiter
+                        )
+                        dst_parent_road = self._get_dst_value(src_parent_road)
+                        dst_word = create_road(
+                            dst_parent_road, src_terminus, self.dst_road_delimiter
+                        )
+                        print(f"{dst_word=}")
             if self.dst_road_delimiter in src_word:
                 return None
             self.set_src_to_dst(src_word, dst_word)
@@ -114,12 +134,26 @@ class BridgeUnit:
             return not self._src_road_delimiter_in_src_words()
         elif self._calc_atom_python_type in {"GroupID"}:
             return str_in_all_dict_keys(self.src_road_delimiter, self.src_to_dst)
+        elif self._calc_atom_python_type in {"RoadUnit"}:
+            return True
 
     def _is_dst_delimiter_inclusion_correct(self) -> bool:
         if self._calc_atom_python_type in {"AcctID", "RoadNode"}:
             return not self._dst_road_delimiter_in_dst_words()
         elif self._calc_atom_python_type in {"GroupID"}:
             return str_in_all_dict_values(self.dst_road_delimiter, self.src_to_dst)
+        elif self._calc_atom_python_type in {"RoadUnit"}:
+            return True
+
+    def all_src_parent_roads_exist(self) -> bool:
+        if self._calc_atom_python_type not in {"RoadUnit"}:
+            return True
+        for x_road in self.src_to_dst.keys():
+            if is_roadnode(x_road, self.src_road_delimiter) is False:
+                parent_road = get_parent_road(x_road, self.src_road_delimiter)
+                if self.src_exists(parent_road) is False:
+                    return False
+        return True
 
     def is_valid(self) -> bool:
         return (
@@ -166,10 +200,6 @@ def bridgeunit_shop(
 
 def default_unknown_word() -> str:
     return "UNKNOWN"
-
-
-def get_bridgeunit_mapping(x_bridgeunit: BridgeUnit, x_str: str) -> str:
-    return x_str
 
 
 def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:

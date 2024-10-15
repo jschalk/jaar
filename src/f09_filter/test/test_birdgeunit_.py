@@ -2,6 +2,7 @@ from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import (
     acct_id_str,
     label_str,
+    road_str,
     group_id_str,
     get_atom_args_python_types,
     credit_vote_str,
@@ -10,7 +11,6 @@ from src.f09_filter.bridge import (
     BridgeUnit,
     bridgeunit_shop,
     default_unknown_word,
-    get_bridgeunit_mapping,
     rules_by_python_type,
 )
 from pytest import raises as pytest_raises
@@ -435,6 +435,26 @@ def test_BridgeUnit_is_dst_delimiter_inclusion_correct_ReturnsObj_GroupID():
     assert acct_id_bridgeunit._is_dst_delimiter_inclusion_correct() is False
 
 
+def test_BridgeUnit_is_dst_delimiter_inclusion_correct_ReturnsObj_RoadUnit():
+    # ESTABLISH
+    music_str = "music45"
+    src_r_delimiter = "/"
+    dst_r_delimiter = ":"
+    clean_src_str = "clean"
+    clean_src_road = f"{music_str}{src_r_delimiter}{clean_src_str}"
+    clean_dst_str = "prop"
+    clean_dst_road = f"{music_str}{dst_r_delimiter}{clean_dst_str}"
+
+    road_bridgeunit = bridgeunit_shop(road_str(), src_r_delimiter, dst_r_delimiter)
+    assert road_bridgeunit._calc_atom_python_type == "RoadUnit"
+    assert road_bridgeunit._is_dst_delimiter_inclusion_correct()
+
+    # WHEN
+    road_bridgeunit.set_src_to_dst(clean_src_road, clean_dst_road)
+    # THEN
+    assert road_bridgeunit._is_dst_delimiter_inclusion_correct()
+
+
 def test_BridgeUnit_is_src_delimiter_inclusion_correct_ReturnsObj_AcctID():
     # ESTABLISH
     xio_src = "Xio"
@@ -501,7 +521,77 @@ def test_BridgeUnit_is_src_delimiter_inclusion_correct_ReturnsObj_RoadNode():
     assert acct_id_bridgeunit._is_src_delimiter_inclusion_correct() is False
 
 
-def test_BridgeUnit_is_valid_ReturnsObj_scenario0():
+def test_BridgeUnit_is_src_delimiter_inclusion_correct_ReturnsObj_RoadUnit():
+    # ESTABLISH
+    music_str = "music45"
+    src_r_delimiter = "/"
+    dst_r_delimiter = ":"
+    clean_src_str = "clean"
+    clean_src_road = f"{music_str}{src_r_delimiter}{clean_src_str}"
+    clean_dst_str = "prop"
+    clean_dst_road = f"{music_str}{dst_r_delimiter}{clean_dst_str}"
+
+    road_bridgeunit = bridgeunit_shop(road_str(), src_r_delimiter, dst_r_delimiter)
+    assert road_bridgeunit._calc_atom_python_type == "RoadUnit"
+    assert road_bridgeunit._is_src_delimiter_inclusion_correct()
+
+    # WHEN
+    road_bridgeunit.set_src_to_dst(clean_src_road, clean_dst_road)
+    # THEN
+    assert road_bridgeunit._is_src_delimiter_inclusion_correct()
+
+
+def test_BridgeUnit_all_src_parent_roads_exist_ReturnsObjAlwaysTrue_GroupID():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    src_road_delimiter = "/"
+    zia_dst = "Zia"
+    zia_src = f"Zia{src_road_delimiter}"
+    acct_id_bridgeunit = bridgeunit_shop(group_id_str(), src_road_delimiter)
+    assert acct_id_bridgeunit._calc_atom_python_type == "GroupID"
+    assert acct_id_bridgeunit.all_src_parent_roads_exist()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(zia_src, zia_dst)
+    # THEN
+    assert acct_id_bridgeunit.all_src_parent_roads_exist()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
+    # THEN
+    assert acct_id_bridgeunit.all_src_parent_roads_exist()
+
+
+def test_BridgeUnit_all_src_parent_roads_exist_ReturnsObj_RoadUnit():
+    # ESTABLISH
+    clean_src_parent_road = "music45"
+    src_r_delimiter = "/"
+    clean_src_str = "clean"
+    clean_src_road = f"{clean_src_parent_road}{src_r_delimiter}{clean_src_str}"
+
+    road_bridgeunit = bridgeunit_shop(road_str(), src_r_delimiter)
+    assert road_bridgeunit._calc_atom_python_type == "RoadUnit"
+    assert road_bridgeunit.src_exists(clean_src_parent_road) is False
+    assert road_bridgeunit.src_exists(clean_src_road) is False
+    assert road_bridgeunit.all_src_parent_roads_exist()
+
+    # WHEN
+    road_bridgeunit.set_src_to_dst(clean_src_road, "any")
+    # THEN
+    assert road_bridgeunit.src_exists(clean_src_parent_road) is False
+    assert road_bridgeunit.src_exists(clean_src_road)
+    assert road_bridgeunit.all_src_parent_roads_exist() is False
+
+    # WHEN
+    road_bridgeunit.set_src_to_dst(clean_src_parent_road, "any")
+    # THEN
+    assert road_bridgeunit.src_exists(clean_src_parent_road)
+    assert road_bridgeunit.src_exists(clean_src_road)
+    assert road_bridgeunit.all_src_parent_roads_exist()
+
+
+def test_BridgeUnit_is_valid_ReturnsObj_Scenario0_label_str():
     # ESTABLISH
     clean_str = "clean"
     clean_dst = "prop"
@@ -523,7 +613,30 @@ def test_BridgeUnit_is_valid_ReturnsObj_scenario0():
     assert label_bridgeunit.is_valid() is False
 
 
-def test_BridgeUnit_is_valid_ReturnsObj_scenario1():
+def test_BridgeUnit_is_valid_ReturnsObj_Scenario1_group_id_str():
+    # ESTABLISH
+    music_str = "music45"
+    src_r_delimiter = "/"
+    dst_r_delimiter = ":"
+    clean_src_str = "clean"
+    clean_src_road = f"{music_str}{src_r_delimiter}{clean_src_str}"
+    clean_dst_str = "prop"
+    clean_dst_road = f"{music_str}{dst_r_delimiter}{clean_dst_str}"
+    # casa_src = f"casa{src_road_delimiter}"
+    # casa_dst = f"casa"
+    road_bridgeunit = bridgeunit_shop(road_str(), src_r_delimiter, dst_r_delimiter)
+    assert road_bridgeunit._calc_atom_python_type == "RoadUnit"
+    assert road_bridgeunit.is_valid()
+    assert road_bridgeunit.src_to_dst_exists(clean_src_road, clean_dst_road) is False
+
+    # WHEN
+    road_bridgeunit.set_src_to_dst(clean_src_road, clean_dst_road)
+    # THEN
+    assert road_bridgeunit.is_valid()
+    assert road_bridgeunit.src_to_dst_exists(clean_src_road, clean_dst_road)
+
+
+def test_BridgeUnit_is_valid_ReturnsObj_scenario2_road():
     # ESTABLISH
     src_road_delimiter = ":"
     dst_road_delimiter = "/"
@@ -546,21 +659,3 @@ def test_BridgeUnit_is_valid_ReturnsObj_scenario1():
     group_id_bridgeunit.set_src_to_dst(zia_src, zia_dst)
     # THEN
     assert group_id_bridgeunit.is_valid() is False
-
-
-# def test_get_bridgeunit_mapping_ReturnsObj():
-#     # ESTABLISH
-#     xio_str = "Xio"
-#     sue_str = "Sue"
-#     bob_str = "Bob"
-#     src_to_dst = {xio_str: sue_str, bob_str: bob_str}
-#     x_unknown_word = "UnknownAcctId"
-#     acct_id_bridgeunit = bridgeunit_shop(src_to_dst, x_unknown_word)
-#     assert acct_id_bridgeunit.src_to_dst == src_to_dst
-#     assert acct_id_bridgeunit.unknown_word == x_unknown_word
-
-#     # WHEN / THEN
-#     assert get_bridgeunit_mapping(acct_id_bridgeunit, None) == None
-#     assert get_bridgeunit_mapping(acct_id_bridgeunit, bob_str) == bob_str
-#     assert get_bridgeunit_mapping(acct_id_bridgeunit, xio_str) == sue_str
-#     assert get_bridgeunit_mapping(acct_id_bridgeunit, sue_str) == x_unknown_word
