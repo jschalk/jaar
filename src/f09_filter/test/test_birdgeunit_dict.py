@@ -1,6 +1,6 @@
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import acct_id_str, label_str, group_id_str
-from src.f09_filter.filter import (
+from src.f09_filter.bridge import (
     bridgeunit_shop,
     get_bridgeunit_from_dict,
     get_bridgeunit_from_json,

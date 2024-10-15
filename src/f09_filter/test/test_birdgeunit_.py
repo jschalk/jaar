@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     get_atom_args_python_types,
     credit_vote_str,
 )
-from src.f09_filter.filter import (
+from src.f09_filter.bridge import (
     BridgeUnit,
     bridgeunit_shop,
     default_unknown_word,
