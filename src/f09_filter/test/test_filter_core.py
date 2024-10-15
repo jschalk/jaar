@@ -1,6 +1,8 @@
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import (
     acct_id_str,
+    label_str,
+    group_id_str,
     get_atom_args_python_types,
     credit_vote_str,
 )
@@ -9,6 +11,7 @@ from src.f09_filter.filter import (
     bridgeunit_shop,
     default_unknown_word,
     get_bridgeunit_mapping,
+    rules_by_python_type,
 )
 from pytest import raises as pytest_raises
 
@@ -21,6 +24,35 @@ from pytest import raises as pytest_raises
 def test_default_unknown_word_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert default_unknown_word() == "UNKNOWN"
+
+
+def test_rules_by_python_type_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_rules_by_python_type = rules_by_python_type()
+
+    # THEN
+    assert len(x_rules_by_python_type) == 8
+
+    generated_acct_id_rules = x_rules_by_python_type.get("AcctID")
+    static_acct_id_rules = {
+        "python_type": "AcctID",
+        "rule": "No road_delimiter",
+    }
+    assert generated_acct_id_rules == static_acct_id_rules
+
+    generated_roadnode_rules = x_rules_by_python_type.get("RoadNode")
+    static_roadnode_rules = {
+        "python_type": "RoadNode",
+        "rule": "No road_delimiter",
+    }
+    assert generated_roadnode_rules == static_roadnode_rules
+
+    generated_group_id_rules = x_rules_by_python_type.get("GroupID")
+    static_group_id_rules = {
+        "python_type": "GroupID",
+        "rule": "Must have road_delimiter",
+    }
+    assert generated_group_id_rules == static_group_id_rules
 
 
 def test_BridgeUnit_Exists():
@@ -248,9 +280,7 @@ def test_BridgeUnit_src_road_delimiter_in_src_words_ReturnsObj():
     src_road_delimiter = "/"
     zia_dst = "Zia"
     zia_src = f"Zia{src_road_delimiter}"
-    acct_id_bridgeunit = bridgeunit_shop(
-        acct_id_str(), x_src_road_delimiter=src_road_delimiter
-    )
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), src_road_delimiter)
     acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
     assert acct_id_bridgeunit._src_road_delimiter_in_src_words() is False
 
@@ -268,9 +298,7 @@ def test_BridgeUnit_dst_road_delimiter_in_src_words_ReturnsObj():
     dst_road_delimiter = "/"
     zia_dst = "Zia"
     zia_src = f"Zia{dst_road_delimiter}"
-    acct_id_bridgeunit = bridgeunit_shop(
-        acct_id_str(), x_dst_road_delimiter=dst_road_delimiter
-    )
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), None, dst_road_delimiter)
     acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
     assert acct_id_bridgeunit._dst_road_delimiter_in_src_words() is False
 
@@ -288,9 +316,7 @@ def test_BridgeUnit_src_road_delimiter_in_dst_words_ReturnsObj():
     src_road_delimiter = "/"
     zia_src = "Zia"
     zia_dst = f"Zia{src_road_delimiter}"
-    acct_id_bridgeunit = bridgeunit_shop(
-        acct_id_str(), x_src_road_delimiter=src_road_delimiter
-    )
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), src_road_delimiter)
     acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
     assert acct_id_bridgeunit._src_road_delimiter_in_dst_words() is False
 
@@ -308,9 +334,7 @@ def test_BridgeUnit_dst_road_delimiter_in_dst_words_ReturnsObj():
     dst_road_delimiter = "/"
     zia_src = "Zia"
     zia_dst = f"Zia{dst_road_delimiter}"
-    acct_id_bridgeunit = bridgeunit_shop(
-        acct_id_str(), x_dst_road_delimiter=dst_road_delimiter
-    )
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), None, dst_road_delimiter)
     acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
     assert acct_id_bridgeunit._dst_road_delimiter_in_dst_words() is False
 
@@ -319,6 +343,163 @@ def test_BridgeUnit_dst_road_delimiter_in_dst_words_ReturnsObj():
 
     # THEN
     assert acct_id_bridgeunit._dst_road_delimiter_in_dst_words()
+
+
+def test_BridgeUnit_is_dst_delimiter_inclusion_correct_ReturnsObj_AcctID():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    dst_road_delimiter = "/"
+    zia_src = "Zia"
+    zia_dst = f"Zia{dst_road_delimiter}"
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), None, dst_road_delimiter)
+    assert acct_id_bridgeunit._calc_atom_python_type == "AcctID"
+    assert acct_id_bridgeunit._is_dst_delimiter_inclusion_correct()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
+    # THEN
+    assert acct_id_bridgeunit._is_dst_delimiter_inclusion_correct()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(zia_src, zia_dst)
+    # THEN
+    assert acct_id_bridgeunit._is_dst_delimiter_inclusion_correct() is False
+
+
+def test_BridgeUnit_is_dst_delimiter_inclusion_correct_ReturnsObj_GroupID():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    dst_road_delimiter = "/"
+    zia_src = f"Zia"
+    zia_dst = f"Zia{dst_road_delimiter}"
+    acct_id_bridgeunit = bridgeunit_shop(group_id_str(), None, dst_road_delimiter)
+    assert acct_id_bridgeunit._calc_atom_python_type == "GroupID"
+    assert acct_id_bridgeunit._is_dst_delimiter_inclusion_correct()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(zia_src, zia_dst)
+    # THEN
+    assert acct_id_bridgeunit._is_dst_delimiter_inclusion_correct()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
+    # THEN
+    assert acct_id_bridgeunit._is_dst_delimiter_inclusion_correct() is False
+
+
+def test_BridgeUnit_is_src_delimiter_inclusion_correct_ReturnsObj_AcctID():
+    # ESTABLISH
+    xio_src = "Xio"
+    xio_dst = "XioXio"
+    src_road_delimiter = "/"
+    zia_src = f"Zia{src_road_delimiter}"
+    zia_dst = "Zia"
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), src_road_delimiter)
+    assert acct_id_bridgeunit._calc_atom_python_type == "AcctID"
+    assert acct_id_bridgeunit._is_src_delimiter_inclusion_correct()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(xio_src, xio_dst)
+    # THEN
+    assert acct_id_bridgeunit._is_src_delimiter_inclusion_correct()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(zia_src, zia_dst)
+    # THEN
+    assert acct_id_bridgeunit._is_src_delimiter_inclusion_correct() is False
+
+
+def test_BridgeUnit_is_src_delimiter_inclusion_correct_ReturnsObj_GroupID():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    src_road_delimiter = "/"
+    zia_dst = "Zia"
+    zia_src = f"Zia{src_road_delimiter}"
+    acct_id_bridgeunit = bridgeunit_shop(group_id_str(), src_road_delimiter)
+    assert acct_id_bridgeunit._calc_atom_python_type == "GroupID"
+    assert acct_id_bridgeunit._is_src_delimiter_inclusion_correct()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(zia_src, zia_dst)
+    # THEN
+    assert acct_id_bridgeunit._is_src_delimiter_inclusion_correct()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
+    # THEN
+    assert acct_id_bridgeunit._is_src_delimiter_inclusion_correct() is False
+
+
+def test_BridgeUnit_is_src_delimiter_inclusion_correct_ReturnsObj_RoadNode():
+    # ESTABLISH
+    clean_str = "clean"
+    clean_dst = "prop"
+    src_road_delimiter = "/"
+    casa_src = f"casa{src_road_delimiter}"
+    casa_dst = f"casa"
+    acct_id_bridgeunit = bridgeunit_shop(label_str(), src_road_delimiter)
+    assert acct_id_bridgeunit._calc_atom_python_type == "RoadNode"
+    assert acct_id_bridgeunit._is_src_delimiter_inclusion_correct()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(clean_str, clean_dst)
+    # THEN
+    assert acct_id_bridgeunit._is_src_delimiter_inclusion_correct()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(casa_src, casa_dst)
+    # THEN
+    assert acct_id_bridgeunit._is_src_delimiter_inclusion_correct() is False
+
+
+def test_BridgeUnit_is_valid_ReturnsObj_scenario0():
+    # ESTABLISH
+    clean_str = "clean"
+    clean_dst = "prop"
+    src_road_delimiter = "/"
+    casa_src = f"casa{src_road_delimiter}"
+    casa_dst = f"casa"
+    acct_id_bridgeunit = bridgeunit_shop(label_str(), src_road_delimiter)
+    assert acct_id_bridgeunit._calc_atom_python_type == "RoadNode"
+    assert acct_id_bridgeunit.is_valid()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(clean_str, clean_dst)
+    # THEN
+    assert acct_id_bridgeunit.is_valid()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(casa_src, casa_dst)
+    # THEN
+    assert acct_id_bridgeunit.is_valid() is False
+
+
+def test_BridgeUnit_is_valid_ReturnsObj_scenario1():
+    # ESTABLISH
+    src_road_delimiter = ":"
+    dst_road_delimiter = "/"
+    sue_src = f"Xio{src_road_delimiter}"
+    sue_dst = f"Sue{dst_road_delimiter}"
+    zia_src = f"Zia"
+    zia_dst = f"Zia{dst_road_delimiter}"
+    acct_id_bridgeunit = bridgeunit_shop(
+        group_id_str(), src_road_delimiter, dst_road_delimiter
+    )
+    assert acct_id_bridgeunit._calc_atom_python_type == "GroupID"
+    assert acct_id_bridgeunit.is_valid()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(sue_src, sue_dst)
+    # THEN
+    assert acct_id_bridgeunit.is_valid()
+
+    # WHEN
+    acct_id_bridgeunit.set_src_to_dst(zia_src, zia_dst)
+    # THEN
+    assert acct_id_bridgeunit.is_valid() is False
 
 
 # def test_get_bridgeunit_mapping_ReturnsObj():

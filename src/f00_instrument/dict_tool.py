@@ -344,6 +344,28 @@ def str_in_dict(x_str: str, x_dict: dict[str:str]) -> bool:
     return any(x_str in x_key or x_str in x_value for x_key, x_value in x_dict.items())
 
 
+def str_in_all_dict_keys(x_str: str, x_dict: dict[str:str]) -> bool:
+    return not any(x_str not in x_key for x_key in x_dict)
+
+
+def str_in_all_dict_values(x_str: str, x_dict: dict[str:str]) -> bool:
+    return not any(x_str not in x_value for x_value in x_dict.values())
+
+
+def str_in_all_dict(x_str: str, x_dict: dict[str:str]) -> bool:
+    return not any(
+        not (x_str in x_key and x_str in x_value) for x_key, x_value in x_dict.items()
+    )
+
+
+def get_str_in_all_sub_dict(x_str: str, x_dict: dict[str:str]) -> dict[str:str]:
+    return {
+        x_key: x_value
+        for x_key, x_value in x_dict.items()
+        if x_str not in x_key or x_str not in x_value
+    }
+
+
 def get_str_in_sub_dict(x_str: str, x_dict: dict[str:str]) -> dict[str:str]:
     return {
         x_key: x_value

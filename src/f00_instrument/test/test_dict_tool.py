@@ -23,6 +23,11 @@ from src.f00_instrument.dict_tool import (
     str_in_dict_keys,
     str_in_dict_values,
     get_str_in_sub_dict,
+    str_in_all_dict,
+    str_in_all_dict_keys,
+    str_in_all_dict_values,
+    get_str_in_sub_dict,
+    get_str_in_all_sub_dict,
 )
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -756,3 +761,61 @@ def test_get_str_in_sub_dict_ReturnsObj():
     assert get_str_in_sub_dict("Sue", xio_sueandzia_dict) == {"SueAndZia": "Bob"}
     xio_bob_dict = {"Xio": "Xio", "Bob": "SueAndZia"}
     assert get_str_in_sub_dict("Sue", xio_bob_dict) == {"Bob": "SueAndZia"}
+
+
+def test_str_in_all_dict_keys_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_all_dict_keys("", {})
+    assert str_in_all_dict_keys("", {"": "Sue"})
+    assert str_in_all_dict_keys("", {"Sue": "Sue"})
+    assert str_in_all_dict_keys("Sue", {"Bob": "Sue"}) is False
+    assert str_in_all_dict_keys("Sue", {"Sue": "Zia", "Bob": "Bob"}) is False
+    assert str_in_all_dict_keys("Sue", {"Zia": "Bob", "SueAndZia": "Bob"}) is False
+    assert str_in_all_dict_keys("Sue", {"Sue": "Bob", "SueAndZia": ""})
+    assert str_in_all_dict_keys("Sue", {"Bob": "Zia"}) is False
+
+
+def test_str_in_all_dict_values_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_all_dict_values("", {})
+    assert str_in_all_dict_values("", {"": "Sue"})
+    assert str_in_all_dict_values("", {"Sue": "Sue"})
+    assert str_in_all_dict_values("Sue", {"Bob": "Sue"})
+    assert str_in_all_dict_values("Sue", {"Zia": "Sue", "Sue": "Bob"}) is False
+    assert str_in_all_dict_values("Sue", {"Zia": "Sue", "SueAndZia": "Bob"}) is False
+    assert str_in_all_dict_values("Sue", {"Zia": "Sue", "Bob": "SueAndZia"})
+    assert str_in_all_dict_values("Sue", {"Bob": "Zia"}) is False
+
+
+def test_str_in_all_dict_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_all_dict("", {})
+    assert str_in_all_dict("", {"": "Sue"})
+    assert str_in_all_dict("", {"Sue": "Sue"})
+    assert str_in_all_dict("Sue", {"Sue": "Bob"}) is False
+    assert str_in_all_dict("Sue", {"Zia": "Sue", "Sue": "Bob"}) is False
+    assert str_in_all_dict("Sue", {"Sue": "Sue", "SueZia": "SueBob"})
+    assert str_in_all_dict("Sue", {"Zia": "Sue", "SueZia": "SueZia"}) is False
+    assert str_in_all_dict("Sue", {"Bob": "Zia"}) is False
+
+
+def test_get_str_not_in_sub_dict_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_str_in_all_sub_dict("", {}) == {}
+    assert get_str_in_all_sub_dict("", {"": "Sue"}) == {}
+    assert get_str_in_all_sub_dict("", {"Sue": "Sue"}) == {}
+    assert get_str_in_all_sub_dict("Sue", {"Sue": "Bob"}) == {"Sue": "Bob"}
+    assert get_str_in_all_sub_dict("Sue", {"Zia": "Bob"}) == {"Zia": "Bob"}
+    assert get_str_in_all_sub_dict("Sue", {"Sue": "SueAndZia"}) == {}
+    assert get_str_in_all_sub_dict("Sue", {"SueAndZia": "Bob"}) == {"SueAndZia": "Bob"}
+    assert get_str_in_all_sub_dict("Sue", {"Zia": "Bob"}) == {"Zia": "Bob"}
+    x_dict = {"Bob": "SueZia", "Sue": "Sue"}
+    assert get_str_in_all_sub_dict("Sue", x_dict) == {"Bob": "SueZia"}
+    assert get_str_in_all_sub_dict("Sue", {"Bob": "Zia"}) == {"Bob": "Zia"}
+
+    suezia_sue_dict = {"SueZia": "SueZia", "Sue": "Bob"}
+    assert get_str_in_all_sub_dict("Sue", suezia_sue_dict) == {"Sue": "Bob"}
+    suezia_sueandzia_dict = {"SueZia": "SueZia", "SueAndZia": "Bob"}
+    assert get_str_in_all_sub_dict("Sue", suezia_sueandzia_dict) == {"SueAndZia": "Bob"}
+    suezia_bob_dict = {"SueZia": "SueZia", "Bob": "SueAndZia"}
+    assert get_str_in_all_sub_dict("Sue", suezia_bob_dict) == {"Bob": "SueAndZia"}

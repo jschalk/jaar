@@ -4,6 +4,8 @@ from src.f00_instrument.dict_tool import (
     str_in_dict_keys,
     str_in_dict_values,
     get_str_in_sub_dict,
+    str_in_all_dict_keys,
+    str_in_all_dict_values,
 )
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import get_atom_args_python_types
@@ -16,6 +18,19 @@ class set_all_src_to_dstException(Exception):
 
 class atom_args_python_typeException(Exception):
     pass
+
+
+def rules_by_python_type() -> dict:
+    return {
+        "AcctID": {"python_type": "AcctID", "rule": "No road_delimiter"},
+        "bool": None,
+        "float": None,
+        "GroupID": {"python_type": "GroupID", "rule": "Must have road_delimiter"},
+        "int": None,
+        "RoadNode": {"python_type": "RoadNode", "rule": "No road_delimiter"},
+        "RoadUnit": None,
+        "TimeLinePoint": None,
+    }
 
 
 @dataclass
@@ -74,13 +89,31 @@ class BridgeUnit:
     def _dst_road_delimiter_in_dst_words(self) -> bool:
         return str_in_dict_values(self.dst_road_delimiter, self.src_to_dst)
 
+    def _is_src_delimiter_inclusion_correct(self) -> bool:
+        if self._calc_atom_python_type in {"AcctID", "RoadNode"}:
+            return not self._src_road_delimiter_in_src_words()
+        elif self._calc_atom_python_type in {"GroupID"}:
+            return str_in_all_dict_keys(self.src_road_delimiter, self.src_to_dst)
+
+    def _is_dst_delimiter_inclusion_correct(self) -> bool:
+        if self._calc_atom_python_type in {"AcctID", "RoadNode"}:
+            return not self._dst_road_delimiter_in_dst_words()
+        elif self._calc_atom_python_type in {"GroupID"}:
+            return str_in_all_dict_values(self.dst_road_delimiter, self.src_to_dst)
+
+    def is_valid(self) -> bool:
+        return (
+            self._is_src_delimiter_inclusion_correct()
+            and self._is_dst_delimiter_inclusion_correct()
+        )
+
 
 def bridgeunit_shop(
     x_atom_arg: str,
-    x_src_to_dst: dict = None,
-    x_unknown_word: str = None,
     x_src_road_delimiter: str = None,
     x_dst_road_delimiter: str = None,
+    x_src_to_dst: dict = None,
+    x_unknown_word: str = None,
 ) -> BridgeUnit:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
@@ -88,12 +121,6 @@ def bridgeunit_shop(
         x_src_road_delimiter = default_road_delimiter_if_none()
     if x_dst_road_delimiter is None:
         x_dst_road_delimiter = default_road_delimiter_if_none()
-
-    # if x_src_to_dst.get(x_unknown_word) != None:
-    #     exception_str = f"src_to_dst cannot have unknown_word '{x_unknown_word}' as key"
-    #     raise Exception(exception_str)
-    # for dst_word in x_src_to_dst.values():
-    #     if dst_word == x_u
 
     return BridgeUnit(
         atom_arg=x_atom_arg,
