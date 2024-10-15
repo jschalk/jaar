@@ -4,6 +4,7 @@ from src.f01_road.road import (
     OwnerID,
     AcctID,
     RoadUnit,
+    DoarUnit,
     GroupID,
     rebuild_road,
     is_sub_road,
@@ -35,6 +36,51 @@ from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 
 
+def test_HealerID_exists():
+    # ESTABLISH
+    bob_str = "Bob"
+    # WHEN
+    bob_healer_id = HealerID(bob_str)
+    # THEN
+    assert bob_healer_id == bob_str
+    assert (
+        inspect_getdoc(bob_healer_id)
+        == "A RoadNode used to identify a Problem's Healer"
+    )
+
+
+def test_OwnerID_exists():
+    # ESTABLISH
+    bob_str = "Bob"
+    # WHEN
+    bob_owner_id = OwnerID(bob_str)
+    # THEN
+    assert bob_owner_id == bob_str
+    assert (
+        inspect_getdoc(bob_owner_id)
+        == "A RoadNode used to identify a BudUnit's owner_id"
+    )
+
+
+def test_AcctID_exists():
+    # ESTABLISH
+    bob_str = "Bob"
+    # WHEN
+    bob_acct_id = AcctID(bob_str)
+    # THEN
+    assert bob_acct_id == bob_str
+    assert (
+        inspect_getdoc(bob_acct_id)
+        == "Every AcctID object is OwnerID, must follow OwnerID format."
+    )
+
+
+def test_GroupID_exists():
+    bikers_group_id = GroupID("bikers")
+    assert bikers_group_id is not None
+    assert str(type(bikers_group_id)).find("src.f01_road.road.GroupID") > 0
+
+
 def test_RoadNode_exists():
     # ESTABLISH
     empty_str = ""
@@ -48,6 +94,16 @@ def test_RoadNode_exists():
     )
 
 
+def test_Roadnode_is_node_ReturnsCorrectBool():
+    # WHEN / THEN
+    assert RoadNode("").is_node()
+
+    # WHEN / THEN
+    x_s = default_road_delimiter_if_none()
+    x_roadnode = RoadNode(f"casa{x_s}kitchen")
+    assert x_roadnode.is_node() is False
+
+
 def test_RoadUnit_exists():
     # ESTABLISH
     empty_str = ""
@@ -58,6 +114,19 @@ def test_RoadUnit_exists():
     assert (
         inspect_getdoc(x_road)
         == "A string presentation of a tree path. RoadNodes are seperated by road delimiter"
+    )
+
+
+def test_DoarUnit_exists():
+    # ESTABLISH
+    empty_str = ""
+    # WHEN
+    x_road = DoarUnit(empty_str)
+    # THEN
+    assert x_road == empty_str
+    assert (
+        inspect_getdoc(x_road)
+        == "DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. RoadNodes are seperated by road delimiter."
     )
 
 
@@ -273,7 +342,7 @@ def test_road_create_road_without_root_node_ReturnsCorrectObj():
 
 
 @dataclass
-class EmptyObj:
+class TempTestingObj:
     x_road: RoadUnit = ""
 
     def find_replace_road(self, old_road, new_road):
@@ -287,7 +356,7 @@ def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
     # ESTABLISH
     x_s = default_road_delimiter_if_none()
     old_seasons_road = f"{root_label()}{x_s}casa{x_s}seasons"
-    old_dict_x = {old_seasons_road: EmptyObj(old_seasons_road)}
+    old_dict_x = {old_seasons_road: TempTestingObj(old_seasons_road)}
     assert old_dict_x.get(old_seasons_road) is not None
 
     # WHEN
@@ -296,6 +365,7 @@ def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
         dict_x=old_dict_x, old_road=old_seasons_road, new_road=new_seasons_road
     )
 
+    # THEN
     assert new_dict_x != {}
     assert len(new_dict_x) == 1
     print(f"{new_dict_x=}")
@@ -399,27 +469,6 @@ def test_road_create_road_ReturnsCorrectObj():
     assert bloomers_road == create_road(casa_road, bloomers_str)
     assert roses_road == create_road(bloomers_road, roses_str)
     assert roses_road == create_road(roses_road, None)
-
-
-def test_Roadnode_exists():
-    # ESTABLISH
-    empty_str = ""
-
-    # WHEN
-    new_obj = RoadNode(empty_str)
-
-    # THEN
-    assert new_obj == empty_str
-
-
-def test_Roadnode_is_node_ReturnsCorrectBool():
-    # WHEN / THEN
-    assert RoadNode("").is_node()
-
-    # WHEN / THEN
-    x_s = default_road_delimiter_if_none()
-    x_roadnode = RoadNode(f"casa{x_s}kitchen")
-    assert x_roadnode.is_node() is False
 
 
 def test_is_roadnode_ReturnsObj():
@@ -540,45 +589,6 @@ def test_replace_road_delimiter_WhenNewdelimiterIsFirstInRoadUnitRaisesError():
     )
 
 
-def test_HealerID_exists():
-    # ESTABLISH
-    bob_str = "Bob"
-    # WHEN
-    bob_healer_id = HealerID(bob_str)
-    # THEN
-    assert bob_healer_id == bob_str
-    assert (
-        inspect_getdoc(bob_healer_id)
-        == "A RoadNode used to identify a Problem's Healer"
-    )
-
-
-def test_OwnerID_exists():
-    # ESTABLISH
-    bob_str = "Bob"
-    # WHEN
-    bob_owner_id = OwnerID(bob_str)
-    # THEN
-    assert bob_owner_id == bob_str
-    assert (
-        inspect_getdoc(bob_owner_id)
-        == "A RoadNode used to identify a BudUnit's owner_id"
-    )
-
-
-def test_AcctID_exists():
-    # ESTABLISH
-    bob_str = "Bob"
-    # WHEN
-    bob_acct_id = AcctID(bob_str)
-    # THEN
-    assert bob_acct_id == bob_str
-    assert (
-        inspect_getdoc(bob_acct_id)
-        == "Every AcctID object is OwnerID, must follow OwnerID format."
-    )
-
-
 def test_validate_roadnode_RaisesErrorWhenNotRoadNode():
     # ESTABLISH
     bob_str = "Bob, Tom"
@@ -663,12 +673,6 @@ def test_roadunit_valid_dir_path_ReturnsCorrectObjWhereSlashNotDelimiterEdgeCase
     assert roadunit_valid_dir_path(run_road, delimiter=question_str) is False
     assert roadunit_valid_dir_path(lap_road, delimiter=question_str) is False
     assert roadunit_valid_dir_path(lap_road, delimiter=",") is False
-
-
-def test_GroupID_exists():
-    bikers_group_id = GroupID("bikers")
-    assert bikers_group_id is not None
-    assert str(type(bikers_group_id)).find("src.f01_road.road.GroupID") > 0
 
 
 def test_all_roadunits_between_ReturnsObj():

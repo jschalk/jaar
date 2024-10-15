@@ -3,10 +3,10 @@ from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_gift.atom_config import acct_id_str
 from src.f04_gift.atom import atom_insert
-from src.f04_gift.delta import deltaunit_shop, get_filtered_deltaunit
+from src.f04_gift.delta import deltaunit_shop, get_categorys_cruds_deltaunit
 
 
-def test_DeltaUnit_get_filtered_deltaunit_ReturnsObjFilteredBy_acctunit_insert():
+def test_DeltaUnit_get_categorys_cruds_deltaunit_ReturnsObjWithCorrectCategorysAndCRUDsBy_acctunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
@@ -23,7 +23,7 @@ def test_DeltaUnit_get_filtered_deltaunit_ReturnsObjFilteredBy_acctunit_insert()
 
     category_set = [bud_acctunit_str()]
     curd_set = {atom_insert()}
-    new_deltaunit = get_filtered_deltaunit(old_deltaunit, category_set, curd_set)
+    new_deltaunit = get_categorys_cruds_deltaunit(old_deltaunit, category_set, curd_set)
 
     # THEN
     new_deltaunit.get_category_sorted_atomunits_list()

@@ -3,7 +3,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_codespace_instrument_dir() -> str:
-    return "src/f0_instrument"
+    return "src/f00_instrument"
 
 
 def get_instrument_examples_dir():

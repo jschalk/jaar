@@ -47,6 +47,12 @@ class RoadUnit(str):
     pass
 
 
+class DoarUnit(str):
+    """DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. RoadNodes are seperated by road delimiter."""
+
+    pass
+
+
 class GroupID(str):  # Created to help track the concept
     pass
 
@@ -260,3 +266,13 @@ def roadunit_valid_dir_path(x_roadunit: RoadUnit, delimiter: str) -> bool:
         return False
 
     return is_path_valid(x_road_os_path)
+
+
+def get_road_from_doar(x_doarunit: DoarUnit, delimiter: str = None) -> RoadUnit:
+    x_delimiter = default_road_delimiter_if_none(delimiter)
+    doar_nodes = get_all_road_nodes(x_doarunit, x_delimiter)
+    return RoadUnit(create_road_from_nodes(doar_nodes[::-1], x_delimiter))
+
+
+def get_doar_from_road(x_roadunit: RoadUnit, delimiter: str = None) -> DoarUnit:
+    return DoarUnit(get_road_from_doar(x_roadunit, delimiter))

@@ -30,6 +30,9 @@
             "column_order": 0,
             "sort_order": 0
         },
+        "purview_timestamp": {
+            "column_order": 10
+        },
         "tally": {
             "column_order": 9
         }

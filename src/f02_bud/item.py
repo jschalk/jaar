@@ -83,7 +83,7 @@ class ranged_fact_item_Exception(Exception):
 
 
 @dataclass
-class ItemAttrFilter:
+class ItemAttrHolder:
     mass: int = None
     uid: int = None
     reason: ReasonUnit = None
@@ -115,34 +115,22 @@ class ItemAttrFilter:
     is_expanded: bool = None
     problem_bool: bool = None
 
-    def get_premise_need(self):
-        return self.reason_premise
-
     def set_premise_range_attributes_influenced_by_premise_item(
         self,
         premise_open,
         premise_nigh,
-        # premise_numor,
         premise_denom,
-        # premise_morph,
     ):
         if self.reason_premise is not None:
             if self.reason_premise_open is None:
                 self.reason_premise_open = premise_open
             if self.reason_premise_nigh is None:
                 self.reason_premise_nigh = premise_nigh
-            # if self.reason_premise_numor is None:
-            #     numor_x = premise_numor
             if self.reason_premise_divisor is None:
                 self.reason_premise_divisor = premise_denom
-            # if self.reason_premise_morph is None:
-            #     self.reason_premise_morph = premise_morph
-
-    def has_reason_premise(self):
-        return self.reason_premise is not None
 
 
-def itemattrfilter_shop(
+def itemattrholder_shop(
     mass: int = None,
     uid: int = None,
     reason: ReasonUnit = None,
@@ -173,8 +161,8 @@ def itemattrfilter_shop(
     awardlink_del: GroupID = None,
     is_expanded: bool = None,
     problem_bool: bool = None,
-) -> ItemAttrFilter:
-    return ItemAttrFilter(
+) -> ItemAttrHolder:
+    return ItemAttrHolder(
         mass=mass,
         uid=uid,
         reason=reason,
@@ -555,7 +543,7 @@ class ItemUnit:
     def get_originunit_dict(self) -> dict[str, str]:
         return self._originunit.get_dict()
 
-    def _set_attrs_to_itemunit(self, item_attr: ItemAttrFilter):
+    def _set_attrs_to_itemunit(self, item_attr: ItemAttrHolder):
         if item_attr.mass is not None:
             self.mass = item_attr.mass
         if item_attr.uid is not None:

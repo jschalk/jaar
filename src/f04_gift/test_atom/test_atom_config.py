@@ -249,7 +249,7 @@ def test_get_atom_config_dict_CheckEachCategoryHasCorrectArgCount():
     assert _get_atom_config_required_args_len(bud_item_healerlink_str()) == 2
     assert _get_atom_config_required_args_len(bud_item_factunit_str()) == 2
 
-    assert _get_atom_config_optional_args_len(budunit_str()) == 8
+    assert _get_atom_config_optional_args_len(budunit_str()) == 9
     assert _get_atom_config_optional_args_len(bud_acctunit_str()) == 2
     assert _get_atom_config_optional_args_len(bud_acct_membership_str()) == 2
     assert _get_atom_config_optional_args_len(bud_itemunit_str()) == 11
@@ -410,7 +410,7 @@ def test_get_flattened_atom_table_build_ReturnsCorrectObj():
     atom_columns = get_flattened_atom_table_build()
 
     # THEN
-    assert len(atom_columns) == 106
+    assert len(atom_columns) == 107
     assert atom_columns.get("budunit_UPDATE_credor_respect") == "INTEGER"
     # print(f"{atom_columns.keys()=}")
 
@@ -495,7 +495,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert cat_budunit.get(columns_str) is not None
 
     budunit_columns = cat_budunit.get(columns_str)
-    assert len(budunit_columns) == 9
+    assert len(budunit_columns) == 10
     assert budunit_columns.get("uid") is not None
     assert budunit_columns.get("max_tree_traverse") is not None
     assert budunit_columns.get("credor_respect") is not None
@@ -504,6 +504,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert budunit_columns.get("fund_coin") is not None
     assert budunit_columns.get("respect_bit") is not None
     assert budunit_columns.get("penny") is not None
+    assert budunit_columns.get("purview_timestamp") is not None
     assert budunit_columns.get("tally") is not None
 
     assert len(cat_acctunit) == 2
@@ -554,7 +555,7 @@ def test_get_atom_args_category_mapping_ReturnsObj():
     assert bud_item_factunit_str() in road_categorys
     assert bud_item_teamlink_str() in road_categorys
     assert len(road_categorys) == 6
-    assert len(x_atom_args_category_mapping) == 40
+    assert len(x_atom_args_category_mapping) == 41
 
 
 def get_python_type(x_category: str, x_arg: str) -> str:
@@ -586,7 +587,7 @@ def test_get_allowed_python_types_ReturnsObj():
         "float",
         "bool",
         "RoadNode",
-        "str",
+        "TimeLinePoint",
     }
 
     # WHEN / THEN
@@ -676,6 +677,7 @@ def test_get_atom_args_python_types_ReturnsObj():
     assert x_python_types.get("pick") == "RoadUnit"
     assert x_python_types.get("pledge") == "bool"
     assert x_python_types.get("problem_bool") == "bool"
+    assert x_python_types.get("purview_timestamp") == "TimeLinePoint"
     assert x_python_types.get("road") == "RoadUnit"
     assert x_python_types.get("stop_want") == "float"
     assert x_python_types.get("take_force") == "float"

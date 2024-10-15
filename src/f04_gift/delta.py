@@ -193,6 +193,10 @@ class DeltaUnit:
             x_atomunit.set_optional_arg("fund_pool", after_bud.fund_pool)
         if before_bud.fund_coin != after_bud.fund_coin:
             x_atomunit.set_optional_arg("fund_coin", after_bud.fund_coin)
+        if before_bud.purview_timestamp != after_bud.purview_timestamp:
+            x_atomunit.set_optional_arg(
+                "purview_timestamp", after_bud.purview_timestamp
+            )
         if before_bud.respect_bit != after_bud.respect_bit:
             x_atomunit.set_optional_arg("respect_bit", after_bud.respect_bit)
         self.set_atomunit(x_atomunit)
@@ -896,7 +900,7 @@ def bud_built_from_delta_is_valid(x_delta: DeltaUnit, x_bud: BudUnit = None) -> 
     return True
 
 
-def get_filtered_deltaunit(
+def get_categorys_cruds_deltaunit(
     x_deltaunit: DeltaUnit, category_set: set[str], curd_set: set[str]
 ) -> DeltaUnit:
     new_deltaunit = deltaunit_shop()

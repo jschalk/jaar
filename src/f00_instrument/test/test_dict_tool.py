@@ -19,6 +19,15 @@ from src.f00_instrument.dict_tool import (
     get_nested_non_dict_keys_list,
     is_2d_with_unique_keys,
     create_2d_array_from_dict,
+    str_in_dict,
+    str_in_dict_keys,
+    str_in_dict_values,
+    get_str_in_sub_dict,
+    str_in_all_dict,
+    str_in_all_dict_keys,
+    str_in_all_dict_values,
+    get_str_in_sub_dict,
+    get_str_in_all_sub_dict,
 )
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -296,7 +305,7 @@ def test_get_positive_int_ReturnsCorrectObj():
     assert get_positive_int(-10.8) == 0
 
 
-def test_extract_csv_headers_ReturnsEmptyObj():
+def test_extract_csv_headers_ReturnsObj_empty_list():
     # ESTABLISH
     x_csv = ""
 
@@ -353,7 +362,7 @@ music,Sue,Yao,41,37
     assert new_csv == headerless_csv
 
 
-def test_get_csv_column1_column2_metrics_ReturnsEmptyObj():
+def test_get_csv_column1_column2_metrics_ReturnsObj_empty_dict():
     # ESTABLISH
     headerless_csv = ""
 
@@ -449,7 +458,7 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
 """
 
     # WHEN
-    filtered_dict = create_l2nested_csv_dict(headerless_csv=headerless_csv)
+    tiered_dict = create_l2nested_csv_dict(headerless_csv=headerless_csv)
 
     # THEN
     # print(f"{u_dict=}")
@@ -461,8 +470,8 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
 """
     static_bob_csv = f"""{music4_id},{bob_str},Yao,41,37
 """
-    music3_dict = filtered_dict.get(music3_id)
-    music4_dict = filtered_dict.get(music4_id)
+    music3_dict = tiered_dict.get(music3_id)
+    music4_dict = tiered_dict.get(music4_id)
     assert music3_dict
     assert music4_dict
     assert list(music3_dict.keys()) == [sue_str]
@@ -477,7 +486,7 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
     assert generated4_sue_csv == music4_sue_csv
     owner_id3_csv_dict = {sue_str: music3_sue_csv}
     owner_id4_csv_dict = {sue_str: music4_sue_csv, bob_str: static_bob_csv}
-    assert filtered_dict == {
+    assert tiered_dict == {
         music3_id: owner_id3_csv_dict,
         music4_id: owner_id4_csv_dict,
     }
@@ -693,3 +702,120 @@ def test_create_2d_array_from_dict_ReturnsObj_Scenario0_Simple():
     x2_2d_dict = {"casa": {"clean": {"Bob": 13}}, "school": 14}
     x2_2d_array = [["school", "Bob"], [14, 13]]
     assert create_2d_array_from_dict(x2_2d_dict) == x2_2d_array
+
+
+def test_str_in_dict_keys_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_dict_keys("", {}) is False
+    assert str_in_dict_keys("", {"": "Sue"})
+    assert str_in_dict_keys("", {"Sue": "Sue"})
+    assert str_in_dict_keys("Sue", {"Sue": "Bob"})
+    assert str_in_dict_keys("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict_keys("Sue", {"SueAndZia": "Bob"})
+    assert str_in_dict_keys("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict_keys("Sue", {"Bob": "SueAndZia"}) is False
+    assert str_in_dict_keys("Sue", {"Bob": "Zia"}) is False
+
+
+def test_str_in_dict_values_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_dict_values("", {}) is False
+    assert str_in_dict_values("", {"": "Sue"})
+    assert str_in_dict_values("", {"Sue": "Sue"})
+    assert str_in_dict_values("Sue", {"Sue": "Bob"}) is False
+    assert str_in_dict_values("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict_values("Sue", {"SueAndZia": "Bob"}) is False
+    assert str_in_dict_values("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict_values("Sue", {"Bob": "SueAndZia"})
+    assert str_in_dict_values("Sue", {"Bob": "Zia"}) is False
+
+
+def test_str_in_dict_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_dict("", {}) is False
+    assert str_in_dict("", {"": "Sue"})
+    assert str_in_dict("", {"Sue": "Sue"})
+    assert str_in_dict("Sue", {"Sue": "Bob"})
+    assert str_in_dict("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict("Sue", {"SueAndZia": "Bob"})
+    assert str_in_dict("Sue", {"Zia": "Bob"}) is False
+    assert str_in_dict("Sue", {"Bob": "SueAndZia"})
+    assert str_in_dict("Sue", {"Bob": "Zia"}) is False
+
+
+def test_get_str_in_sub_dict_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_str_in_sub_dict("", {}) == {}
+    assert get_str_in_sub_dict("", {"": "Sue"}) == {"": "Sue"}
+    assert get_str_in_sub_dict("", {"Sue": "Sue"}) == {"Sue": "Sue"}
+    assert get_str_in_sub_dict("Sue", {"Sue": "Bob"}) == {"Sue": "Bob"}
+    assert get_str_in_sub_dict("Sue", {"Zia": "Bob"}) == {}
+    assert get_str_in_sub_dict("Sue", {"SueAndZia": "Bob"}) == {"SueAndZia": "Bob"}
+    assert get_str_in_sub_dict("Sue", {"Zia": "Bob"}) == {}
+    assert get_str_in_sub_dict("Sue", {"Bob": "SueAndZia"}) == {"Bob": "SueAndZia"}
+    assert get_str_in_sub_dict("Sue", {"Bob": "Zia"}) == {}
+
+    xio_sue_dict = {"Xio": "Xio", "Sue": "Bob"}
+    assert get_str_in_sub_dict("Sue", xio_sue_dict) == {"Sue": "Bob"}
+    xio_sueandzia_dict = {"Xio": "Xio", "SueAndZia": "Bob"}
+    assert get_str_in_sub_dict("Sue", xio_sueandzia_dict) == {"SueAndZia": "Bob"}
+    xio_bob_dict = {"Xio": "Xio", "Bob": "SueAndZia"}
+    assert get_str_in_sub_dict("Sue", xio_bob_dict) == {"Bob": "SueAndZia"}
+
+
+def test_str_in_all_dict_keys_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_all_dict_keys("", {})
+    assert str_in_all_dict_keys("", {"": "Sue"})
+    assert str_in_all_dict_keys("", {"Sue": "Sue"})
+    assert str_in_all_dict_keys("Sue", {"Bob": "Sue"}) is False
+    assert str_in_all_dict_keys("Sue", {"Sue": "Zia", "Bob": "Bob"}) is False
+    assert str_in_all_dict_keys("Sue", {"Zia": "Bob", "SueAndZia": "Bob"}) is False
+    assert str_in_all_dict_keys("Sue", {"Sue": "Bob", "SueAndZia": ""})
+    assert str_in_all_dict_keys("Sue", {"Bob": "Zia"}) is False
+
+
+def test_str_in_all_dict_values_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_all_dict_values("", {})
+    assert str_in_all_dict_values("", {"": "Sue"})
+    assert str_in_all_dict_values("", {"Sue": "Sue"})
+    assert str_in_all_dict_values("Sue", {"Bob": "Sue"})
+    assert str_in_all_dict_values("Sue", {"Zia": "Sue", "Sue": "Bob"}) is False
+    assert str_in_all_dict_values("Sue", {"Zia": "Sue", "SueAndZia": "Bob"}) is False
+    assert str_in_all_dict_values("Sue", {"Zia": "Sue", "Bob": "SueAndZia"})
+    assert str_in_all_dict_values("Sue", {"Bob": "Zia"}) is False
+
+
+def test_str_in_all_dict_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert str_in_all_dict("", {})
+    assert str_in_all_dict("", {"": "Sue"})
+    assert str_in_all_dict("", {"Sue": "Sue"})
+    assert str_in_all_dict("Sue", {"Sue": "Bob"}) is False
+    assert str_in_all_dict("Sue", {"Zia": "Sue", "Sue": "Bob"}) is False
+    assert str_in_all_dict("Sue", {"Sue": "Sue", "SueZia": "SueBob"})
+    assert str_in_all_dict("Sue", {"Zia": "Sue", "SueZia": "SueZia"}) is False
+    assert str_in_all_dict("Sue", {"Bob": "Zia"}) is False
+
+
+def test_get_str_not_in_sub_dict_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_str_in_all_sub_dict("", {}) == {}
+    assert get_str_in_all_sub_dict("", {"": "Sue"}) == {}
+    assert get_str_in_all_sub_dict("", {"Sue": "Sue"}) == {}
+    assert get_str_in_all_sub_dict("Sue", {"Sue": "Bob"}) == {"Sue": "Bob"}
+    assert get_str_in_all_sub_dict("Sue", {"Zia": "Bob"}) == {"Zia": "Bob"}
+    assert get_str_in_all_sub_dict("Sue", {"Sue": "SueAndZia"}) == {}
+    assert get_str_in_all_sub_dict("Sue", {"SueAndZia": "Bob"}) == {"SueAndZia": "Bob"}
+    assert get_str_in_all_sub_dict("Sue", {"Zia": "Bob"}) == {"Zia": "Bob"}
+    x_dict = {"Bob": "SueZia", "Sue": "Sue"}
+    assert get_str_in_all_sub_dict("Sue", x_dict) == {"Bob": "SueZia"}
+    assert get_str_in_all_sub_dict("Sue", {"Bob": "Zia"}) == {"Bob": "Zia"}
+
+    suezia_sue_dict = {"SueZia": "SueZia", "Sue": "Bob"}
+    assert get_str_in_all_sub_dict("Sue", suezia_sue_dict) == {"Sue": "Bob"}
+    suezia_sueandzia_dict = {"SueZia": "SueZia", "SueAndZia": "Bob"}
+    assert get_str_in_all_sub_dict("Sue", suezia_sueandzia_dict) == {"SueAndZia": "Bob"}
+    suezia_bob_dict = {"SueZia": "SueZia", "Bob": "SueAndZia"}
+    assert get_str_in_all_sub_dict("Sue", suezia_bob_dict) == {"Bob": "SueAndZia"}

@@ -13,7 +13,7 @@ from src.f04_gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
 from src.f04_gift.atom_config import fiscal_id_str, owner_id_str, pledge_str
 from src.f04_gift.delta import (
     deltaunit_shop,
-    get_filtered_deltaunit,
+    get_categorys_cruds_deltaunit,
     DeltaUnit,
     sift_deltaunit,
 )
@@ -108,8 +108,8 @@ def _get_sorted_atom_insert_atomunits(
 ) -> list[AtomUnit]:
     category_set = set(x_brickref.atom_categorys)
     curd_set = {atom_insert()}
-    filtered_delta = get_filtered_deltaunit(x_deltaunit, category_set, curd_set)
-    return filtered_delta.get_category_sorted_atomunits_list()
+    limited_delta = get_categorys_cruds_deltaunit(x_deltaunit, category_set, curd_set)
+    return limited_delta.get_category_sorted_atomunits_list()
 
 
 def _create_d2_list(

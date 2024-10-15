@@ -33,6 +33,7 @@ def test_BudUnit_Exists():
     assert x_bud.penny is None
     assert x_bud.credor_respect is None
     assert x_bud.debtor_respect is None
+    assert x_bud.purview_timestamp is None
     assert x_bud._last_gift_id is None
     assert x_bud._originunit is None
     # calculated attr
@@ -87,6 +88,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud.penny == x_penny
     assert x_bud.credor_respect == validate_respect_num()
     assert x_bud.debtor_respect == validate_respect_num()
+    assert not x_bud.purview_timestamp
     assert not x_bud._last_gift_id
     # calculated attr
     assert x_bud._originunit == originunit_shop()
@@ -279,3 +281,20 @@ def test_BudUnit_set_fund_pool_RaisesErrorWhenArgIsNotMultiple():
         str(excinfo.value)
         == f"Bud '{zia_str}' cannot set fund_pool='{new_fund_pool}'. It is not divisible by fund_coin '{zia_bud.fund_coin}'"
     )
+
+
+def test_BudUnit_set_purview_CorrectlySetsAttr():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    assert sue_bud.purview_timestamp is None
+
+    # WHEN
+    sue_purview = 99000
+    sue_bud.set_purview_timestamp(sue_purview)
+    # THEN
+    assert sue_bud.purview_timestamp == sue_purview
+
+    # WHEN
+    sue_bud.set_purview_timestamp(None)
+    # THEN
+    assert sue_bud.purview_timestamp is None
