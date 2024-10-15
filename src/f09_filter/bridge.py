@@ -16,6 +16,7 @@ from src.f01_road.road import (
     create_road,
     is_roadnode,
     RoadUnit,
+    RoadNode,
 )
 from src.f04_gift.atom_config import get_atom_args_python_types
 from dataclasses import dataclass
@@ -111,6 +112,23 @@ class BridgeUnit:
 
     def del_src_to_dst(self, src_word: str):
         self.src_to_dst.pop(src_word)
+
+    def set_explicit_label_map(self, src_label: RoadNode, dst_label: RoadNode):
+        self.explicit_label_map[src_label] = dst_label
+
+    def _get_explicit_dst_label(self, src_label: RoadNode) -> RoadNode:
+        return self.explicit_label_map.get(src_label)
+
+    def explicit_label_map_exists(
+        self, src_label: RoadNode, dst_label: RoadNode
+    ) -> bool:
+        return self._get_explicit_dst_label(src_label) == dst_label
+
+    def explicit_src_label_exists(self, src_label: RoadNode) -> bool:
+        return self._get_explicit_dst_label(src_label) != None
+
+    def del_explicit_label_map(self, src_label: RoadNode) -> bool:
+        self.explicit_label_map.pop(src_label)
 
     def _unknown_word_in_src_to_dst(self) -> bool:
         return str_in_dict(self.unknown_word, self.src_to_dst)

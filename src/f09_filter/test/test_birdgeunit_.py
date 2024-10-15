@@ -316,3 +316,113 @@ def test_BridgeUnit_unknown_word_in_src_to_dst_ReturnsObj():
 
     # THEN
     assert acct_id_bridgeunit._unknown_word_in_src_to_dst()
+
+
+def test_BridgeUnit_set_explicit_label_map_SetsAttr():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    x_unknown_word = "UnknownAcctId"
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    assert acct_id_bridgeunit.explicit_label_map == {}
+
+    # WHEN
+    acct_id_bridgeunit.set_explicit_label_map(xio_str, sue_str)
+
+    # THEN
+    assert acct_id_bridgeunit.explicit_label_map == {xio_str: sue_str}
+
+
+def test_BridgeUnit_get_explicit_dst_label_ReturnsObj():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    x_unknown_word = "UnknownAcctId"
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    assert acct_id_bridgeunit._get_explicit_dst_label(xio_str) != sue_str
+
+    # WHEN
+    acct_id_bridgeunit.set_explicit_label_map(xio_str, sue_str)
+
+    # THEN
+    assert acct_id_bridgeunit._get_explicit_dst_label(xio_str) == sue_str
+
+
+def test_BridgeUnit_explicit_label_map_exists_ReturnsObj():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    zia_str = "Zia"
+    x_unknown_word = "UnknownAcctId"
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, sue_str) is False
+    assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, zia_str) is False
+    assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, bob_str) is False
+    assert acct_id_bridgeunit.explicit_label_map_exists(zia_str, zia_str) is False
+
+    # WHEN
+    acct_id_bridgeunit.set_explicit_label_map(xio_str, sue_str)
+
+    # THEN
+    assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, sue_str)
+    assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, zia_str) is False
+    assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, bob_str) is False
+    assert acct_id_bridgeunit.explicit_label_map_exists(zia_str, zia_str) is False
+
+    # WHEN
+    acct_id_bridgeunit.set_explicit_label_map(zia_str, zia_str)
+
+    # THEN
+    assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, sue_str)
+    assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, zia_str) is False
+    assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, bob_str) is False
+    assert acct_id_bridgeunit.explicit_label_map_exists(zia_str, zia_str)
+
+
+def test_BridgeUnit_explicit_src_label_exists_ReturnsObj():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    zia_str = "Zia"
+    x_unknown_word = "UnknownAcctId"
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    assert acct_id_bridgeunit.explicit_src_label_exists(xio_str) is False
+    assert acct_id_bridgeunit.explicit_src_label_exists(sue_str) is False
+    assert acct_id_bridgeunit.explicit_src_label_exists(bob_str) is False
+    assert acct_id_bridgeunit.explicit_src_label_exists(zia_str) is False
+
+    # WHEN
+    acct_id_bridgeunit.set_explicit_label_map(xio_str, sue_str)
+
+    # THEN
+    assert acct_id_bridgeunit.explicit_src_label_exists(xio_str)
+    assert acct_id_bridgeunit.explicit_src_label_exists(sue_str) is False
+    assert acct_id_bridgeunit.explicit_src_label_exists(bob_str) is False
+    assert acct_id_bridgeunit.explicit_src_label_exists(zia_str) is False
+
+    # WHEN
+    acct_id_bridgeunit.set_explicit_label_map(zia_str, zia_str)
+
+    # THEN
+    assert acct_id_bridgeunit.explicit_src_label_exists(xio_str)
+    assert acct_id_bridgeunit.explicit_src_label_exists(sue_str) is False
+    assert acct_id_bridgeunit.explicit_src_label_exists(bob_str) is False
+    assert acct_id_bridgeunit.explicit_src_label_exists(zia_str)
+
+
+def test_BridgeUnit_del_explicit_label_map_SetsAttr():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    x_unknown_word = "UnknownAcctId"
+    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit.set_explicit_label_map(xio_str, sue_str)
+    assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, sue_str)
+
+    # WHEN
+    acct_id_bridgeunit.del_explicit_label_map(xio_str)
+
+    # THEN
+    assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, sue_str) is False
