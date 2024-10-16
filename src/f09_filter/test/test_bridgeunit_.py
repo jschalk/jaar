@@ -74,9 +74,7 @@ def test_BridgeUnit_Exists():
     x_bridgeunit = BridgeUnit()
 
     # WHEN / THEN
-    assert not x_bridgeunit.acctid
-    assert not x_bridgeunit.groupid
-    assert not x_bridgeunit.road
+    assert not x_bridgeunit.bridgekinds
     assert not x_bridgeunit.unknown_word
     assert not x_bridgeunit.src_road_delimiter
     assert not x_bridgeunit.dst_road_delimiter
@@ -84,27 +82,27 @@ def test_BridgeUnit_Exists():
 
 
 def test_bridgeunit_shop_ReturnsObj_scenario0():
-    # ESTABLISH / WHEN
-    x_bridgeunit = bridgeunit_shop()
+    # ESTABLISH
+    sue_str = "Sue"
+
+    # WHEN
+    sue_bridgeunit = bridgeunit_shop(sue_str)
 
     # THEN
-    assert x_bridgeunit.acctid == bridgekind_shop(type_AcctID_str())
-    assert x_bridgeunit.groupid == bridgekind_shop(type_GroupID_str())
-    assert x_bridgeunit.road == bridgekind_shop(type_RoadUnit_str())
-    assert x_bridgeunit.unknown_word == default_unknown_word()
-    assert x_bridgeunit.src_road_delimiter == default_road_delimiter_if_none()
-    assert x_bridgeunit.dst_road_delimiter == default_road_delimiter_if_none()
-    assert not x_bridgeunit.face_id
+    assert sue_bridgeunit.face_id == sue_str
+    assert sue_bridgeunit.unknown_word == default_unknown_word()
+    assert sue_bridgeunit.src_road_delimiter == default_road_delimiter_if_none()
+    assert sue_bridgeunit.dst_road_delimiter == default_road_delimiter_if_none()
 
-    acctid_bridgekind = x_bridgeunit.acctid
+    acctid_bridgekind = sue_bridgeunit.bridgekinds.get(type_AcctID_str())
     assert acctid_bridgekind.unknown_word == default_unknown_word()
     assert acctid_bridgekind.src_road_delimiter == default_road_delimiter_if_none()
     assert acctid_bridgekind.dst_road_delimiter == default_road_delimiter_if_none()
-    groupid_bridgekind = x_bridgeunit.groupid
+    groupid_bridgekind = sue_bridgeunit.bridgekinds.get(type_GroupID_str())
     assert groupid_bridgekind.unknown_word == default_unknown_word()
     assert groupid_bridgekind.src_road_delimiter == default_road_delimiter_if_none()
     assert groupid_bridgekind.dst_road_delimiter == default_road_delimiter_if_none()
-    road_bridgekind = x_bridgeunit.road
+    road_bridgekind = sue_bridgeunit.bridgekinds.get(type_RoadUnit_str())
     assert road_bridgekind.unknown_word == default_unknown_word()
     assert road_bridgekind.src_road_delimiter == default_road_delimiter_if_none()
     assert road_bridgekind.dst_road_delimiter == default_road_delimiter_if_none()
@@ -112,84 +110,99 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
 
 def test_bridgeunit_shop_ReturnsObj_scenario1():
     # ESTABLISH
+    sue_str = "Sue"
     y_unknown_word = "UnknownAcctId"
     slash_src_road_delimiter = "/"
     colon_dst_road_delimiter = ":"
 
     # WHEN
-    x_bridgeunit = bridgeunit_shop(
-        slash_src_road_delimiter, colon_dst_road_delimiter, y_unknown_word
+    sue_bridgeunit = bridgeunit_shop(
+        sue_str, slash_src_road_delimiter, colon_dst_road_delimiter, y_unknown_word
     )
 
     # THEN
-    assert x_bridgeunit.unknown_word == y_unknown_word
-    assert x_bridgeunit.src_road_delimiter == slash_src_road_delimiter
-    assert x_bridgeunit.dst_road_delimiter == colon_dst_road_delimiter
-    assert not x_bridgeunit.face_id
+    assert sue_bridgeunit.unknown_word == y_unknown_word
+    assert sue_bridgeunit.src_road_delimiter == slash_src_road_delimiter
+    assert sue_bridgeunit.dst_road_delimiter == colon_dst_road_delimiter
 
-    acctid_bridgekind = x_bridgeunit.acctid
+    assert len(sue_bridgeunit.bridgekinds) == 3
+    acctid_bridgekind = sue_bridgeunit.bridgekinds.get(type_AcctID_str())
     assert acctid_bridgekind.unknown_word == y_unknown_word
     assert acctid_bridgekind.src_road_delimiter == slash_src_road_delimiter
     assert acctid_bridgekind.dst_road_delimiter == colon_dst_road_delimiter
-    groupid_bridgekind = x_bridgeunit.groupid
+    groupid_bridgekind = sue_bridgeunit.bridgekinds.get(type_GroupID_str())
     assert groupid_bridgekind.unknown_word == y_unknown_word
     assert groupid_bridgekind.src_road_delimiter == slash_src_road_delimiter
     assert groupid_bridgekind.dst_road_delimiter == colon_dst_road_delimiter
-    road_bridgekind = x_bridgeunit.road
+    road_bridgekind = sue_bridgeunit.bridgekinds.get(type_RoadUnit_str())
     assert road_bridgekind.unknown_word == y_unknown_word
     assert road_bridgekind.src_road_delimiter == slash_src_road_delimiter
     assert road_bridgekind.dst_road_delimiter == colon_dst_road_delimiter
 
 
-# def test_BridgeKind_set_atom_arg_SetsAttr():
-#     # ESTABLISH
-#     acct_id_bridgekind = bridgekind_shop(None, acct_id_str())
-#     acct_id_python_type = type_AcctID_str()
-#     assert acct_id_bridgekind.atom_arg == acct_id_str()
-#     assert acct_id_bridgekind.python_type == acct_id_python_type
+def test_BridgeKind_set_bridgekind_SetsAttr():
+    # ESTABLISH
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    acct_id_bridgekind = bridgekind_shop(type_AcctID_str())
+    acct_id_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
+    assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
 
-#     # WHEN
-#     acct_id_bridgekind.set_atom_arg(credit_vote_str())
+    # WHEN
+    sue_bridgeunit.set_bridgekind(acct_id_bridgekind)
 
-#     # THEN
-#     assert acct_id_bridgekind.atom_arg == credit_vote_str()
-#     int_python_type = "int"
-#     assert acct_id_bridgekind.python_type == int_python_type
+    # THEN
+    assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) == acct_id_bridgekind
 
 
-# def test_BridgeKind_set_atom_arg_RaisesErrorIf_atom_arg_DoesNotExistIn_atom_config():
-#     # ESTABLISH
-#     acct_id_bridgekind = bridgekind_shop(None, acct_id_str())
-#     acct_id_python_type = type_AcctID_str()
-#     assert acct_id_bridgekind.atom_arg == acct_id_str()
-#     assert acct_id_bridgekind.python_type == acct_id_python_type
+def test_BridgeKind_set_bridgekind_RaisesErrorIf_bridgekind_src_road_delimiter_IsNotSame():
+    # ESTABLISH
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    slash_src_road_delimiter = "/"
+    acct_id_bridgekind = bridgekind_shop(
+        type_AcctID_str(), x_src_road_delimiter=slash_src_road_delimiter
+    )
+    assert sue_bridgeunit.src_road_delimiter != acct_id_bridgekind.src_road_delimiter
+    assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
 
-#     # WHEN
-#     rush_acct_id_str = "rush_acct_id"
-#     with pytest_raises(Exception) as excinfo:
-#         acct_id_bridgekind.set_atom_arg(rush_acct_id_str)
-#     exception_str = f"set_atom_arg Error: '{rush_acct_id_str}' not arg in atom_config."
-#     assert str(excinfo.value) == exception_str
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        sue_bridgeunit.set_bridgekind(acct_id_bridgekind)
+    exception_str = f"set_bridgekind Error: BrideUnit src_road_delimiter is '{sue_bridgeunit.src_road_delimiter}', BridgeKind is '{slash_src_road_delimiter}'."
+    assert str(excinfo.value) == exception_str
 
 
-#     # THEN
-# xio_str = "Xio"
-# sue_str = "Sue"
-# bob_str = "Bob"
-# src_to_dst = {xio_str: sue_str}
-# x_unknown_word = "UnknownAcctId"
-# slash_src_road_delimiter = "/"
-# colon_dst_road_delimiter = ":"
-#     assert acct_id_bridgeunit.python_type == type_AcctID_str()
-#     assert acct_id_bridgeunit.atom_arg == acct_id_str()
-#     assert acct_id_bridgeunit.src_to_dst == src_to_dst
-#     assert acct_id_bridgeunit.unknown_word == x_unknown_word
-#     assert acct_id_bridgeunit.src_road_delimiter == slash_src_road_delimiter
-#     assert acct_id_bridgeunit.dst_road_delimiter == colon_dst_road_delimiter
-#     assert acct_id_bridgeunit.explicit_label_map == {}
-#     acct_id_python_type = get_atom_args_python_types().get(acct_id_str())
-#     assert acct_id_bridgeunit.python_type == acct_id_python_type
-#     assert acct_id_bridgeunit.face_id == bob_str
+def test_BridgeKind_set_bridgekind_RaisesErrorIf_bridgekind_dst_road_delimiter_IsNotSame():
+    # ESTABLISH
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    slash_dst_road_delimiter = "/"
+    acct_id_bridgekind = bridgekind_shop(
+        type_AcctID_str(), x_dst_road_delimiter=slash_dst_road_delimiter
+    )
+    assert sue_bridgeunit.dst_road_delimiter != acct_id_bridgekind.dst_road_delimiter
+    assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        sue_bridgeunit.set_bridgekind(acct_id_bridgekind)
+    exception_str = f"set_bridgekind Error: BrideUnit dst_road_delimiter is '{sue_bridgeunit.dst_road_delimiter}', BridgeKind is '{slash_dst_road_delimiter}'."
+    assert str(excinfo.value) == exception_str
+
+
+def test_BridgeKind_set_bridgekind_RaisesErrorIf_bridgekind_unknown_word_IsNotSame():
+    # ESTABLISH
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    casa_unknown_word = "Unknown_casa"
+    acct_id_bridgekind = bridgekind_shop(
+        type_AcctID_str(), x_unknown_word=casa_unknown_word
+    )
+    assert sue_bridgeunit.unknown_word != acct_id_bridgekind.unknown_word
+    assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        sue_bridgeunit.set_bridgekind(acct_id_bridgekind)
+    exception_str = f"set_bridgekind Error: BrideUnit unknown_word is '{sue_bridgeunit.unknown_word}', BridgeKind is '{casa_unknown_word}'."
+    assert str(excinfo.value) == exception_str
 
 
 # def test_bridgeunit_shop_ReturnsObj_scenario1():
