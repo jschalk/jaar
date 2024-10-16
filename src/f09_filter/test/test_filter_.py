@@ -4,7 +4,7 @@ from src.f04_gift.atom_config import (
     credit_belief_str,
     base_str,
 )
-from src.f09_filter.bridge import bridgeunit_shop
+from src.f09_filter.bridge import bridgekind_shop
 from src.f09_filter.filter import (
     filter_single_column_dataframe,
     get_dataframe_filterable_columns,
@@ -29,11 +29,11 @@ def test_get_dataframe_filterable_columns_ReturnsObj():
 
 def test_filter_single_column_dataframe_ReturnsObj_Scenario0_AcctID_EmptyDataFrame():
     # ESTABLISH
-    acct_id_bridgeunit = bridgeunit_shop("acct_id")
+    acct_id_bridgekind = bridgekind_shop("acct_id")
     empty_dt = DataFrame(columns=[acct_id_str()])
 
     # WHEN
-    gen_dt = filter_single_column_dataframe(empty_dt, acct_id_bridgeunit)
+    gen_dt = filter_single_column_dataframe(empty_dt, acct_id_bridgekind)
 
     # THEN
     assert gen_dt.to_csv() == empty_dt.to_csv()
@@ -48,10 +48,10 @@ def test_filter_single_column_dataframe_ReturnsObj_Scenario0_AcctID_5rows():
     xio_dst = "Xioita"
     sue_dst = "Suita"
     bob_dst = "Bobita"
-    acct_id_bridgeunit = bridgeunit_shop(None, acct_id_str())
-    acct_id_bridgeunit.set_src_to_dst(xio_src, xio_dst)
-    acct_id_bridgeunit.set_src_to_dst(sue_src, sue_dst)
-    acct_id_bridgeunit.set_src_to_dst(bob_src, bob_dst)
+    acct_id_bridgekind = bridgekind_shop(None, acct_id_str())
+    acct_id_bridgekind.set_src_to_dst(xio_src, xio_dst)
+    acct_id_bridgekind.set_src_to_dst(sue_src, sue_dst)
+    acct_id_bridgekind.set_src_to_dst(bob_src, bob_dst)
     src_dt = DataFrame(columns=[acct_id_str()])
     src_dt.loc[0] = [zia_src]
     src_dt.loc[1] = [sue_src]
@@ -62,7 +62,7 @@ def test_filter_single_column_dataframe_ReturnsObj_Scenario0_AcctID_5rows():
     print(f"{src_dt=}")
 
     # WHEN
-    filter_single_column_dataframe(src_dt, acct_id_bridgeunit)
+    filter_single_column_dataframe(src_dt, acct_id_bridgekind)
 
     # THEN
     assert src_dt.iloc[0][acct_id_str()] == zia_src
@@ -87,10 +87,10 @@ def test_filter_single_column_dataframe_ReturnsObj_Scenario1_AcctID_5rowsMultipl
     xio_dst = "Xioita"
     sue_dst = "Suita"
     bob_dst = "Bobita"
-    acct_id_bridgeunit = bridgeunit_shop(None, acct_id_str())
-    acct_id_bridgeunit.set_src_to_dst(xio_src, xio_dst)
-    acct_id_bridgeunit.set_src_to_dst(sue_src, sue_dst)
-    acct_id_bridgeunit.set_src_to_dst(bob_src, bob_dst)
+    acct_id_bridgekind = bridgekind_shop(None, acct_id_str())
+    acct_id_bridgekind.set_src_to_dst(xio_src, xio_dst)
+    acct_id_bridgekind.set_src_to_dst(sue_src, sue_dst)
+    acct_id_bridgekind.set_src_to_dst(bob_src, bob_dst)
     src_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
     src_dt.loc[0] = ["ZZ", zia_src, 12]
     src_dt.loc[1] = ["ZZ", sue_src, 12]
@@ -101,7 +101,7 @@ def test_filter_single_column_dataframe_ReturnsObj_Scenario1_AcctID_5rowsMultipl
     print(f"{src_dt=}")
 
     # WHEN
-    filter_single_column_dataframe(src_dt, acct_id_bridgeunit)
+    filter_single_column_dataframe(src_dt, acct_id_bridgekind)
 
     # THEN
     assert src_dt.iloc[0][acct_id_str()] == zia_src

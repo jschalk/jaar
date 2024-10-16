@@ -50,7 +50,7 @@ def filterable_atom_args() -> set:
 
 
 @dataclass
-class BridgeUnit:
+class BridgeKind:
     atom_arg: str = None  # always key from from get_atom_args_python_types
     src_to_dst: dict[any:any] = None
     unknown_word: str = None
@@ -204,7 +204,7 @@ class BridgeUnit:
         return get_json_from_dict(self.get_dict())
 
 
-def bridgeunit_shop(
+def bridgekind_shop(
     x_python_type: str = None,
     x_atom_arg: str = None,
     x_src_road_delimiter: str = None,
@@ -213,7 +213,7 @@ def bridgeunit_shop(
     x_src_to_dst: dict = None,
     x_unknown_word: str = None,
     x_face_id: str = None,
-) -> BridgeUnit:
+) -> BridgeKind:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
     if x_src_road_delimiter is None:
@@ -224,7 +224,7 @@ def bridgeunit_shop(
     if x_python_type is None:
         x_python_type = get_atom_args_python_types().get(x_atom_arg)
 
-    return BridgeUnit(
+    return BridgeKind(
         python_type=x_python_type,
         atom_arg=x_atom_arg,
         src_to_dst=get_empty_dict_if_none(x_src_to_dst),
@@ -240,8 +240,8 @@ def default_unknown_word() -> str:
     return "UNKNOWN"
 
 
-def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
-    return bridgeunit_shop(
+def get_bridgekind_from_dict(x_dict: dict) -> BridgeKind:
+    return bridgekind_shop(
         x_atom_arg=x_dict.get("atom_arg"),
         x_dst_road_delimiter=x_dict.get("dst_road_delimiter"),
         x_explicit_label_map=x_dict.get("explicit_label_map"),
@@ -251,5 +251,5 @@ def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
     )
 
 
-def get_bridgeunit_from_json(x_json: str) -> BridgeUnit:
-    return get_bridgeunit_from_dict(get_dict_from_json(x_json))
+def get_bridgekind_from_json(x_json: str) -> BridgeKind:
+    return get_bridgekind_from_dict(get_dict_from_json(x_json))
