@@ -18,7 +18,12 @@ from src.f01_road.road import (
     RoadUnit,
     RoadNode,
 )
-from src.f04_gift.atom_config import get_atom_args_python_types
+from src.f04_gift.atom_config import (
+    get_atom_args_python_types,
+    type_AcctID_str,
+    type_GroupID_str,
+    type_RoadUnit_str,
+)
 from dataclasses import dataclass
 from copy import copy as copy_copy
 
@@ -253,3 +258,56 @@ def get_bridgekind_from_dict(x_dict: dict) -> BridgeKind:
 
 def get_bridgekind_from_json(x_json: str) -> BridgeKind:
     return get_bridgekind_from_dict(get_dict_from_json(x_json))
+
+
+@dataclass
+class BridgeUnit:
+    acctid: BridgeKind = None
+    groupid: BridgeKind = None
+    road: BridgeKind = None
+    unknown_word: str = None
+    src_road_delimiter: str = None
+    dst_road_delimiter: str = None
+    face_id: str = None
+
+
+def bridgeunit_shop(
+    x_src_road_delimiter: str = None,
+    x_dst_road_delimiter: str = None,
+    x_unknown_word: str = None,
+    # face_id: str
+) -> BridgeUnit:
+    if x_unknown_word is None:
+        x_unknown_word = default_unknown_word()
+    if x_src_road_delimiter is None:
+        x_src_road_delimiter = default_road_delimiter_if_none()
+    if x_dst_road_delimiter is None:
+        x_dst_road_delimiter = default_road_delimiter_if_none()
+
+    acctid = bridgekind_shop(
+        x_python_type=type_AcctID_str(),
+        x_unknown_word=x_unknown_word,
+        x_src_road_delimiter=x_src_road_delimiter,
+        x_dst_road_delimiter=x_dst_road_delimiter,
+    )
+    groupid = bridgekind_shop(
+        x_python_type=type_GroupID_str(),
+        x_unknown_word=x_unknown_word,
+        x_src_road_delimiter=x_src_road_delimiter,
+        x_dst_road_delimiter=x_dst_road_delimiter,
+    )
+    road = bridgekind_shop(
+        x_python_type=type_RoadUnit_str(),
+        x_unknown_word=x_unknown_word,
+        x_src_road_delimiter=x_src_road_delimiter,
+        x_dst_road_delimiter=x_dst_road_delimiter,
+    )
+
+    return BridgeUnit(
+        acctid=acctid,
+        groupid=groupid,
+        road=road,
+        unknown_word=x_unknown_word,
+        src_road_delimiter=x_src_road_delimiter,
+        dst_road_delimiter=x_dst_road_delimiter,
+    )
