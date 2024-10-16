@@ -57,7 +57,8 @@ class BridgeUnit:
     src_road_delimiter: str = None
     dst_road_delimiter: str = None
     explicit_label_map: dict = None
-    _calc_atom_python_type: str = None
+    python_type: str = None
+    face_id: str = None
 
     def set_atom_arg(self, x_atom_arg: str):
         x_atom_python_type = get_atom_args_python_types().get(x_atom_arg)
@@ -68,7 +69,7 @@ class BridgeUnit:
             raise atom_args_python_typeException(exception_str)
 
         self.atom_arg = x_atom_arg
-        self._calc_atom_python_type = x_atom_python_type
+        self.python_type = x_atom_python_type
 
     def set_all_src_to_dst(
         self, x_src_to_dst: dict, raise_exception_if_invalid: bool = False
@@ -88,11 +89,11 @@ class BridgeUnit:
     def get_create_dst(self, src_word: str, missing_add: bool = True) -> str:
         if missing_add and self.src_exists(src_word) is False:
             dst_word = copy_copy(src_word)
-            if self._calc_atom_python_type in {"GroupID"}:
+            if self.python_type in {"GroupID"}:
                 src_r_delimiter = self.src_road_delimiter
                 dst_r_delimiter = self.dst_road_delimiter
                 dst_word = dst_word.replace(src_r_delimiter, dst_r_delimiter)
-            if self._calc_atom_python_type in {"RoadUnit", "RoadNode"}:
+            if self.python_type in {"RoadUnit", "RoadNode"}:
                 dst_word = self._get_create_roadunit_dst(src_word)
             if self.dst_road_delimiter in src_word:
                 return None
@@ -157,23 +158,23 @@ class BridgeUnit:
         return str_in_dict_values(self.dst_road_delimiter, self.src_to_dst)
 
     def _is_src_delimiter_inclusion_correct(self) -> bool:
-        if self._calc_atom_python_type in {"AcctID", "RoadNode"}:
+        if self.python_type in {"AcctID", "RoadNode"}:
             return not self._src_road_delimiter_in_src_words()
-        elif self._calc_atom_python_type in {"GroupID"}:
+        elif self.python_type in {"GroupID"}:
             return str_in_all_dict_keys(self.src_road_delimiter, self.src_to_dst)
-        elif self._calc_atom_python_type in {"RoadUnit"}:
+        elif self.python_type in {"RoadUnit"}:
             return True
 
     def _is_dst_delimiter_inclusion_correct(self) -> bool:
-        if self._calc_atom_python_type in {"AcctID", "RoadNode"}:
+        if self.python_type in {"AcctID", "RoadNode"}:
             return not self._dst_road_delimiter_in_dst_words()
-        elif self._calc_atom_python_type in {"GroupID"}:
+        elif self.python_type in {"GroupID"}:
             return str_in_all_dict_values(self.dst_road_delimiter, self.src_to_dst)
-        elif self._calc_atom_python_type in {"RoadUnit"}:
+        elif self.python_type in {"RoadUnit"}:
             return True
 
     def all_src_parent_roads_exist(self) -> bool:
-        if self._calc_atom_python_type not in {"RoadUnit"}:
+        if self.python_type not in {"RoadUnit"}:
             return True
         for x_road in self.src_to_dst.keys():
             if is_roadnode(x_road, self.src_road_delimiter) is False:
@@ -204,12 +205,14 @@ class BridgeUnit:
 
 
 def bridgeunit_shop(
-    x_atom_arg: str,
+    x_python_type: str = None,
+    x_atom_arg: str = None,
     x_src_road_delimiter: str = None,
     x_dst_road_delimiter: str = None,
     x_explicit_label_map: dict = None,
     x_src_to_dst: dict = None,
     x_unknown_word: str = None,
+    x_face_id: str = None,
 ) -> BridgeUnit:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
@@ -218,14 +221,18 @@ def bridgeunit_shop(
     if x_dst_road_delimiter is None:
         x_dst_road_delimiter = default_road_delimiter_if_none()
 
+    if x_python_type is None:
+        x_python_type = get_atom_args_python_types().get(x_atom_arg)
+
     return BridgeUnit(
+        python_type=x_python_type,
         atom_arg=x_atom_arg,
         src_to_dst=get_empty_dict_if_none(x_src_to_dst),
         unknown_word=x_unknown_word,
         src_road_delimiter=x_src_road_delimiter,
         dst_road_delimiter=x_dst_road_delimiter,
         explicit_label_map=get_empty_dict_if_none(x_explicit_label_map),
-        _calc_atom_python_type=get_atom_args_python_types().get(x_atom_arg),
+        face_id=x_face_id,
     )
 
 

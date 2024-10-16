@@ -51,6 +51,22 @@ def python_type_str() -> str:
     return "python_type"
 
 
+def type_AcctID_str() -> str:
+    return "AcctID"
+
+
+def type_GroupID_str() -> str:
+    return "GroupID"
+
+
+def type_RoadUnit_str() -> str:
+    return "RoadUnit"
+
+
+def type_RoadNode_str() -> str:
+    return "RoadNode"
+
+
 def nullable_str() -> str:
     return "nullable"
 

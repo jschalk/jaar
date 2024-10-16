@@ -10,7 +10,9 @@ def test_BridgeUnit_get_create_dst_ReturnsObjAndSetsAttr_label():
     casa_src = "casa"
     casa_dst = "casa"
     dst_r_delimiter = ":"
-    label_bridgeunit = bridgeunit_shop(label_str(), src_r_delimiter, dst_r_delimiter)
+    label_bridgeunit = bridgeunit_shop(
+        None, label_str(), src_r_delimiter, dst_r_delimiter
+    )
     label_bridgeunit.set_src_to_dst(clean_src, clean_dst)
     label_bridgeunit.set_src_to_dst(casa_src, casa_dst)
     assert label_bridgeunit.is_valid()
@@ -42,7 +44,9 @@ def test_BridgeUnit_get_create_dst_ReturnsObjAndSetsAttr_label_With_explicit_lab
     casa_src = "casa"
     casa_dst = "house"
     dst_r_delimiter = ":"
-    label_bridgeunit = bridgeunit_shop(label_str(), src_r_delimiter, dst_r_delimiter)
+    label_bridgeunit = bridgeunit_shop(
+        None, label_str(), src_r_delimiter, dst_r_delimiter
+    )
     label_bridgeunit.set_src_to_dst(clean_src, clean_dst)
     label_bridgeunit.set_explicit_label_map(casa_src, casa_dst)
     assert casa_src != casa_dst
@@ -64,7 +68,9 @@ def test_BridgeUnit_get_create_dst_ReturnsObjAndSetsAttr_road_Scenario0():
     src_music45_str = "music45"
     src_r_delimiter = "/"
     dst_r_delimiter = ":"
-    road_bridgeunit = bridgeunit_shop(road_str(), src_r_delimiter, dst_r_delimiter)
+    road_bridgeunit = bridgeunit_shop(
+        None, road_str(), src_r_delimiter, dst_r_delimiter
+    )
     assert road_bridgeunit.src_exists(src_music45_str) is False
     assert road_bridgeunit.src_to_dst_exists(src_music45_str, src_music45_str) is False
 
@@ -85,7 +91,9 @@ def test_BridgeUnit_get_create_dst_ReturnsObjAndSetsAttr_road_Scenario1():
     dst_r_delimiter = ":"
     clean_src_str = "clean"
     clean_src_road = f"{src_music45_str}{src_r_delimiter}{clean_src_str}"
-    road_bridgeunit = bridgeunit_shop(road_str(), src_r_delimiter, dst_r_delimiter)
+    road_bridgeunit = bridgeunit_shop(
+        None, road_str(), src_r_delimiter, dst_r_delimiter
+    )
     assert road_bridgeunit.src_exists(src_music45_str) is False
     assert road_bridgeunit.src_exists(clean_src_road) is False
 
@@ -121,7 +129,9 @@ def test_BridgeUnit_get_create_dst_ReturnsObjAndSetsAttr_road_Scenario2_With_exp
     clean_src_str = "clean"
     clean_dst_str = "prop"
     clean_src_road = f"{src_music45_str}{src_r_delimiter}{clean_src_str}"
-    road_bridgeunit = bridgeunit_shop(road_str(), src_r_delimiter, dst_r_delimiter)
+    road_bridgeunit = bridgeunit_shop(
+        None, road_str(), src_r_delimiter, dst_r_delimiter
+    )
     road_bridgeunit.set_explicit_label_map(clean_src_str, clean_dst_str)
     assert road_bridgeunit.src_exists(src_music45_str) is False
     assert road_bridgeunit.src_exists(clean_src_road) is False
@@ -157,7 +167,7 @@ def test_BridgeUnit_get_create_dst_ReturnsObjAndSetsAttr_group_id():
     swim_src = f"swim{src_r_delimiter}"
     climb_src = f"climb{src_r_delimiter}_{dst_r_delimiter}"
     group_id_bridgeunit = bridgeunit_shop(
-        group_id_str(), src_r_delimiter, dst_r_delimiter
+        None, group_id_str(), src_r_delimiter, dst_r_delimiter
     )
     group_id_bridgeunit.src_exists(swim_src) is False
     group_id_bridgeunit.src_exists(climb_src) is False
@@ -186,7 +196,9 @@ def test_BridgeUnit_get_create_dst_AddsMissingElementsTo_src_to_dst():
     casa_src = "casa"
     casa_dst = "casa"
     dst_r_delimiter = ":"
-    label_bridgeunit = bridgeunit_shop(label_str(), src_r_delimiter, dst_r_delimiter)
+    label_bridgeunit = bridgeunit_shop(
+        None, label_str(), src_r_delimiter, dst_r_delimiter
+    )
     label_bridgeunit.set_src_to_dst(clean_src, clean_dst)
     label_bridgeunit.set_src_to_dst(casa_src, casa_dst)
     swim_str = "swim"

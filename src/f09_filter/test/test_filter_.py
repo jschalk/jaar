@@ -48,7 +48,7 @@ def test_filter_single_column_dataframe_ReturnsObj_Scenario0_AcctID_5rows():
     xio_dst = "Xioita"
     sue_dst = "Suita"
     bob_dst = "Bobita"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str())
+    acct_id_bridgeunit = bridgeunit_shop(None, acct_id_str())
     acct_id_bridgeunit.set_src_to_dst(xio_src, xio_dst)
     acct_id_bridgeunit.set_src_to_dst(sue_src, sue_dst)
     acct_id_bridgeunit.set_src_to_dst(bob_src, bob_dst)
@@ -87,7 +87,7 @@ def test_filter_single_column_dataframe_ReturnsObj_Scenario1_AcctID_5rowsMultipl
     xio_dst = "Xioita"
     sue_dst = "Suita"
     bob_dst = "Bobita"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str())
+    acct_id_bridgeunit = bridgeunit_shop(None, acct_id_str())
     acct_id_bridgeunit.set_src_to_dst(xio_src, xio_dst)
     acct_id_bridgeunit.set_src_to_dst(sue_src, sue_dst)
     acct_id_bridgeunit.set_src_to_dst(bob_src, bob_dst)

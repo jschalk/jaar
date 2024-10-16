@@ -3,6 +3,10 @@ from src.f04_gift.atom_config import (
     acct_id_str,
     get_atom_args_python_types,
     credit_vote_str,
+    type_AcctID_str,
+    type_GroupID_str,
+    type_RoadNode_str,
+    type_RoadUnit_str,
 )
 from src.f09_filter.bridge import (
     BridgeUnit,
@@ -31,10 +35,10 @@ def test_filterable_python_types_ReturnsObj():
     # THEN
     assert len(x_filterable_python_types) == 4
     assert x_filterable_python_types == {
-        "AcctID",
-        "GroupID",
-        "RoadNode",
-        "RoadUnit",
+        type_AcctID_str(),
+        type_GroupID_str(),
+        type_RoadNode_str(),
+        type_RoadUnit_str(),
     }
     print(f"{set(get_atom_args_python_types().values())=}")
     all_atom_python_types = set(get_atom_args_python_types().values())
@@ -74,20 +78,21 @@ def test_BridgeUnit_Exists():
     x_bridgeunit = BridgeUnit()
 
     # WHEN / THEN
+    assert not x_bridgeunit.python_type
     assert not x_bridgeunit.atom_arg
-    assert not x_bridgeunit.src_to_dst
     assert not x_bridgeunit.src_to_dst
     assert not x_bridgeunit.unknown_word
     assert not x_bridgeunit.src_road_delimiter
     assert not x_bridgeunit.dst_road_delimiter
     assert not x_bridgeunit.explicit_label_map
-    assert not x_bridgeunit._calc_atom_python_type
+    assert not x_bridgeunit.face_id
 
 
 def test_bridgeunit_shop_ReturnsObj_scenario0():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
+    bob_str = "Bob"
     src_to_dst = {xio_str: sue_str}
     x_unknown_word = "UnknownAcctId"
     slash_src_road_delimiter = "/"
@@ -95,14 +100,17 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
 
     # WHEN
     acct_id_bridgeunit = bridgeunit_shop(
+        x_python_type=type_AcctID_str(),
         x_atom_arg=acct_id_str(),
         x_src_to_dst=src_to_dst,
         x_unknown_word=x_unknown_word,
         x_src_road_delimiter=slash_src_road_delimiter,
         x_dst_road_delimiter=colon_dst_road_delimiter,
+        x_face_id=bob_str,
     )
 
     # THEN
+    assert acct_id_bridgeunit.python_type == type_AcctID_str()
     assert acct_id_bridgeunit.atom_arg == acct_id_str()
     assert acct_id_bridgeunit.src_to_dst == src_to_dst
     assert acct_id_bridgeunit.unknown_word == x_unknown_word
@@ -110,12 +118,13 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
     assert acct_id_bridgeunit.dst_road_delimiter == colon_dst_road_delimiter
     assert acct_id_bridgeunit.explicit_label_map == {}
     acct_id_python_type = get_atom_args_python_types().get(acct_id_str())
-    assert acct_id_bridgeunit._calc_atom_python_type == acct_id_python_type
+    assert acct_id_bridgeunit.python_type == acct_id_python_type
+    assert acct_id_bridgeunit.face_id == bob_str
 
 
 def test_bridgeunit_shop_ReturnsObj_scenario1():
     # ESTABLISH / WHEN
-    credit_vote_bridgeunit = bridgeunit_shop(credit_vote_str())
+    credit_vote_bridgeunit = bridgeunit_shop(None, credit_vote_str())
 
     # THEN
     assert credit_vote_bridgeunit.atom_arg == credit_vote_str()
@@ -124,15 +133,30 @@ def test_bridgeunit_shop_ReturnsObj_scenario1():
     assert credit_vote_bridgeunit.src_road_delimiter == default_road_delimiter_if_none()
     assert credit_vote_bridgeunit.dst_road_delimiter == default_road_delimiter_if_none()
     cv_python_type = get_atom_args_python_types().get(credit_vote_str())
-    assert credit_vote_bridgeunit._calc_atom_python_type == cv_python_type
+    assert credit_vote_bridgeunit.python_type == cv_python_type
+    assert credit_vote_bridgeunit.face_id is None
+
+
+def test_bridgeunit_shop_ReturnsObj_Scenario2_atom_arg_IsNone():
+    # ESTABLISH / WHEN
+    credit_vote_bridgeunit = bridgeunit_shop(type_AcctID_str())
+
+    # THEN
+    assert credit_vote_bridgeunit.python_type == type_AcctID_str()
+    assert credit_vote_bridgeunit.atom_arg is None
+    assert credit_vote_bridgeunit.src_to_dst == {}
+    assert credit_vote_bridgeunit.unknown_word == default_unknown_word()
+    assert credit_vote_bridgeunit.src_road_delimiter == default_road_delimiter_if_none()
+    assert credit_vote_bridgeunit.dst_road_delimiter == default_road_delimiter_if_none()
+    assert credit_vote_bridgeunit.face_id is None
 
 
 def test_BridgeUnit_set_atom_arg_SetsAttr():
     # ESTABLISH
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str())
-    acct_id_python_type = "AcctID"
+    acct_id_bridgeunit = bridgeunit_shop(None, acct_id_str())
+    acct_id_python_type = type_AcctID_str()
     assert acct_id_bridgeunit.atom_arg == acct_id_str()
-    assert acct_id_bridgeunit._calc_atom_python_type == acct_id_python_type
+    assert acct_id_bridgeunit.python_type == acct_id_python_type
 
     # WHEN
     acct_id_bridgeunit.set_atom_arg(credit_vote_str())
@@ -140,15 +164,15 @@ def test_BridgeUnit_set_atom_arg_SetsAttr():
     # THEN
     assert acct_id_bridgeunit.atom_arg == credit_vote_str()
     int_python_type = "int"
-    assert acct_id_bridgeunit._calc_atom_python_type == int_python_type
+    assert acct_id_bridgeunit.python_type == int_python_type
 
 
 def test_BridgeUnit_set_atom_arg_RaisesErrorIf_atom_arg_DoesNotExistIn_atom_config():
     # ESTABLISH
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str())
-    acct_id_python_type = "AcctID"
+    acct_id_bridgeunit = bridgeunit_shop(None, acct_id_str())
+    acct_id_python_type = type_AcctID_str()
     assert acct_id_bridgeunit.atom_arg == acct_id_str()
-    assert acct_id_bridgeunit._calc_atom_python_type == acct_id_python_type
+    assert acct_id_bridgeunit.python_type == acct_id_python_type
 
     # WHEN
     rush_acct_id_str = "rush_acct_id"
@@ -163,7 +187,7 @@ def test_BridgeUnit_set_all_src_to_dst_SetsAttr():
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str())
+    acct_id_bridgeunit = bridgeunit_shop(None, acct_id_str())
     x_src_to_dst = {xio_str: sue_str, zia_str: zia_str}
     assert acct_id_bridgeunit.src_to_dst != x_src_to_dst
 
@@ -180,7 +204,9 @@ def test_BridgeUnit_set_all_src_to_dst_RaisesErrorIf_unknown_word_IsKeyIn_src_to
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     x_src_to_dst = {xio_str: sue_str, x_unknown_word: zia_str}
     assert acct_id_bridgeunit.src_to_dst != x_src_to_dst
 
@@ -197,7 +223,9 @@ def test_BridgeUnit_set_all_src_to_dst_DoesNotRaiseErrorIfParameterSetToTrue():
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     x_src_to_dst = {xio_str: sue_str, x_unknown_word: zia_str}
     assert acct_id_bridgeunit.src_to_dst != x_src_to_dst
 
@@ -213,7 +241,9 @@ def test_BridgeUnit_set_src_to_dst_SetsAttr():
     xio_str = "Xio"
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     assert acct_id_bridgeunit.src_to_dst == {}
 
     # WHEN
@@ -228,7 +258,9 @@ def test_BridgeUnit_get_dst_value_ReturnsObj():
     xio_str = "Xio"
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     assert acct_id_bridgeunit._get_dst_value(xio_str) != sue_str
 
     # WHEN
@@ -245,7 +277,9 @@ def test_BridgeUnit_src_to_dst_exists_ReturnsObj():
     bob_str = "Bob"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     assert acct_id_bridgeunit.src_to_dst_exists(xio_str, sue_str) is False
     assert acct_id_bridgeunit.src_to_dst_exists(xio_str, zia_str) is False
     assert acct_id_bridgeunit.src_to_dst_exists(xio_str, bob_str) is False
@@ -277,7 +311,9 @@ def test_BridgeUnit_src_exists_ReturnsObj():
     bob_str = "Bob"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     assert acct_id_bridgeunit.src_exists(xio_str) is False
     assert acct_id_bridgeunit.src_exists(sue_str) is False
     assert acct_id_bridgeunit.src_exists(bob_str) is False
@@ -307,7 +343,9 @@ def test_BridgeUnit_del_src_to_dst_SetsAttr():
     xio_str = "Xio"
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
     assert acct_id_bridgeunit.src_to_dst_exists(xio_str, sue_str)
 
@@ -324,7 +362,9 @@ def test_BridgeUnit_unknown_word_in_src_to_dst_ReturnsObj():
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     acct_id_bridgeunit.set_src_to_dst(xio_str, sue_str)
     assert acct_id_bridgeunit._unknown_word_in_src_to_dst() is False
 
@@ -340,7 +380,9 @@ def test_BridgeUnit_set_explicit_label_map_SetsAttr():
     xio_str = "Xio"
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     assert acct_id_bridgeunit.explicit_label_map == {}
 
     # WHEN
@@ -355,7 +397,9 @@ def test_BridgeUnit_get_explicit_dst_label_ReturnsObj():
     xio_str = "Xio"
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     assert acct_id_bridgeunit._get_explicit_dst_label(xio_str) != sue_str
 
     # WHEN
@@ -372,7 +416,9 @@ def test_BridgeUnit_explicit_label_map_exists_ReturnsObj():
     bob_str = "Bob"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, sue_str) is False
     assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, zia_str) is False
     assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, bob_str) is False
@@ -404,7 +450,9 @@ def test_BridgeUnit_explicit_src_label_exists_ReturnsObj():
     bob_str = "Bob"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     assert acct_id_bridgeunit.explicit_src_label_exists(xio_str) is False
     assert acct_id_bridgeunit.explicit_src_label_exists(sue_str) is False
     assert acct_id_bridgeunit.explicit_src_label_exists(bob_str) is False
@@ -434,7 +482,9 @@ def test_BridgeUnit_del_explicit_label_map_SetsAttr():
     xio_str = "Xio"
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgeunit = bridgeunit_shop(acct_id_str(), x_unknown_word=x_unknown_word)
+    acct_id_bridgeunit = bridgeunit_shop(
+        None, acct_id_str(), x_unknown_word=x_unknown_word
+    )
     acct_id_bridgeunit.set_explicit_label_map(xio_str, sue_str)
     assert acct_id_bridgeunit.explicit_label_map_exists(xio_str, sue_str)
 
