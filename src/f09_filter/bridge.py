@@ -263,6 +263,9 @@ class BridgeUnit:
 
         self.bridgekinds[x_bridgekind.python_type] = x_bridgekind
 
+    def get_bridgekind(self, x_python_type: str) -> BridgeKind:
+        return self.bridgekinds.get(x_python_type)
+
     # def set_atom_arg(self, x_atom_arg: str):
     #     x_atom_python_type = get_atom_args_python_types().get(x_atom_arg)
     #     if x_atom_python_type is None:

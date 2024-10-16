@@ -205,6 +205,20 @@ def test_BridgeKind_set_bridgekind_RaisesErrorIf_bridgekind_unknown_word_IsNotSa
     assert str(excinfo.value) == exception_str
 
 
+def test_BridgeKind_get_bridgekind_ReturnsObj():
+    # ESTABLISH
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    static_acct_id_bridgekind = bridgekind_shop(type_AcctID_str())
+    static_acct_id_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
+    sue_bridgeunit.set_bridgekind(static_acct_id_bridgekind)
+
+    # WHEN
+    gen_acct_id_bridgekind = sue_bridgeunit.get_bridgekind(type_AcctID_str())
+
+    # THEN
+    assert gen_acct_id_bridgekind == static_acct_id_bridgekind
+
+
 # def test_bridgeunit_shop_ReturnsObj_scenario1():
 #     # ESTABLISH / WHEN
 #     credit_vote_bridgeunit = bridgeunit_shop(None, credit_vote_str())
