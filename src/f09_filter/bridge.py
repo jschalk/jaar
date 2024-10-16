@@ -31,16 +31,21 @@ class atom_args_python_typeException(Exception):
     pass
 
 
-def rules_by_python_type() -> dict:
+def filterable_python_types() -> set:
+    return {"AcctID", "GroupID", "RoadNode", "RoadUnit"}
+
+
+def filterable_atom_args() -> set:
     return {
-        "AcctID": {"python_type": "AcctID", "rule": "No road_delimiter"},
-        "bool": None,
-        "float": None,
-        "GroupID": {"python_type": "GroupID", "rule": "Must have road_delimiter"},
-        "int": None,
-        "RoadNode": {"python_type": "RoadNode", "rule": "No road_delimiter"},
-        "RoadUnit": None,
-        "TimeLinePoint": None,
+        "acct_id",
+        "road",
+        "parent_road",
+        "label",
+        "healer_id",
+        "need",
+        "base",
+        "pick",
+        "group_id",
     }
 
 

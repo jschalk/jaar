@@ -1,5 +1,9 @@
-from src.f09_filter.bridge import BridgeUnit
+from src.f09_filter.bridge import BridgeUnit, filterable_atom_args
 from pandas import DataFrame
+
+
+def get_dataframe_filterable_columns(x_dt: DataFrame) -> set[str]:
+    return {x_column for x_column in x_dt.columns if x_column in filterable_atom_args()}
 
 
 def filter_single_column_dataframe(

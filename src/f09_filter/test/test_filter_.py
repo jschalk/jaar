@@ -1,8 +1,30 @@
-from src.f04_gift.atom_config import acct_id_str, fiscal_id_str, credit_belief_str
+from src.f04_gift.atom_config import (
+    acct_id_str,
+    fiscal_id_str,
+    credit_belief_str,
+    base_str,
+)
 from src.f09_filter.bridge import bridgeunit_shop
-from src.f09_filter.filter import filter_single_column_dataframe
+from src.f09_filter.filter import (
+    filter_single_column_dataframe,
+    get_dataframe_filterable_columns,
+)
 from pandas import DataFrame
 from copy import deepcopy as copy_deepcopy
+
+
+def test_get_dataframe_filterable_columns_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    x_dt = DataFrame()
+    assert get_dataframe_filterable_columns(x_dt) == set()
+    x_dt = DataFrame(columns=[acct_id_str()])
+    assert get_dataframe_filterable_columns(x_dt) == {acct_id_str()}
+    x_dt = DataFrame(columns=[acct_id_str(), credit_belief_str()])
+    assert get_dataframe_filterable_columns(x_dt) == {acct_id_str()}
+    x_dt = DataFrame(columns=[base_str(), acct_id_str(), credit_belief_str()])
+    assert get_dataframe_filterable_columns(x_dt) == {acct_id_str(), base_str()}
+    x_dt = DataFrame(columns=["calc_swim", acct_id_str(), credit_belief_str()])
+    assert get_dataframe_filterable_columns(x_dt) == {acct_id_str()}
 
 
 def test_filter_single_column_dataframe_ReturnsObj_Scenario0_AcctID_EmptyDataFrame():

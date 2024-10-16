@@ -8,7 +8,8 @@ from src.f09_filter.bridge import (
     BridgeUnit,
     bridgeunit_shop,
     default_unknown_word,
-    rules_by_python_type,
+    filterable_python_types,
+    filterable_atom_args,
 )
 from pytest import raises as pytest_raises
 
@@ -23,33 +24,49 @@ def test_default_unknown_word_ReturnsObj():
     assert default_unknown_word() == "UNKNOWN"
 
 
-def test_rules_by_python_type_ReturnsObj():
+def test_filterable_python_types_ReturnsObj():
     # ESTABLISH / WHEN
-    x_rules_by_python_type = rules_by_python_type()
+    x_filterable_python_types = filterable_python_types()
 
     # THEN
-    assert len(x_rules_by_python_type) == 8
-
-    generated_acct_id_rules = x_rules_by_python_type.get("AcctID")
-    static_acct_id_rules = {
-        "python_type": "AcctID",
-        "rule": "No road_delimiter",
+    assert len(x_filterable_python_types) == 4
+    assert x_filterable_python_types == {
+        "AcctID",
+        "GroupID",
+        "RoadNode",
+        "RoadUnit",
     }
-    assert generated_acct_id_rules == static_acct_id_rules
+    print(f"{set(get_atom_args_python_types().values())=}")
+    all_atom_python_types = set(get_atom_args_python_types().values())
+    inter_x = set(all_atom_python_types).intersection(x_filterable_python_types)
+    assert inter_x == x_filterable_python_types
 
-    generated_roadnode_rules = x_rules_by_python_type.get("RoadNode")
-    static_roadnode_rules = {
-        "python_type": "RoadNode",
-        "rule": "No road_delimiter",
-    }
-    assert generated_roadnode_rules == static_roadnode_rules
 
-    generated_group_id_rules = x_rules_by_python_type.get("GroupID")
-    static_group_id_rules = {
-        "python_type": "GroupID",
-        "rule": "Must have road_delimiter",
+def test_filterable_atom_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_filterable_atom_args = filterable_atom_args()
+
+    # THEN
+    assert len(x_filterable_atom_args) == 9
+    assert x_filterable_atom_args == {
+        "acct_id",
+        "road",
+        "parent_road",
+        "label",
+        "healer_id",
+        "need",
+        "base",
+        "pick",
+        "group_id",
     }
-    assert generated_group_id_rules == static_group_id_rules
+
+    print(f"{filterable_python_types()=}")
+    static_filterable_atom_args = {
+        x_arg
+        for x_arg, python_type in get_atom_args_python_types().items()
+        if python_type in filterable_python_types()
+    }
+    assert x_filterable_atom_args == static_filterable_atom_args
 
 
 def test_BridgeUnit_Exists():
