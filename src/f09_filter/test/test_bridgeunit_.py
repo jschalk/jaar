@@ -24,6 +24,51 @@ from pytest import raises as pytest_raises
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
 
 
+def test_filterable_python_types_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_filterable_python_types = filterable_python_types()
+
+    # THEN
+    assert len(x_filterable_python_types) == 4
+    assert x_filterable_python_types == {
+        type_AcctID_str(),
+        type_GroupID_str(),
+        type_RoadNode_str(),
+        type_RoadUnit_str(),
+    }
+    print(f"{set(get_atom_args_python_types().values())=}")
+    all_atom_python_types = set(get_atom_args_python_types().values())
+    inter_x = set(all_atom_python_types).intersection(x_filterable_python_types)
+    assert inter_x == x_filterable_python_types
+
+
+def test_filterable_atom_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_filterable_atom_args = filterable_atom_args()
+
+    # THEN
+    assert len(x_filterable_atom_args) == 9
+    assert x_filterable_atom_args == {
+        "acct_id",
+        "road",
+        "parent_road",
+        "label",
+        "healer_id",
+        "need",
+        "base",
+        "pick",
+        "group_id",
+    }
+
+    print(f"{filterable_python_types()=}")
+    static_filterable_atom_args = {
+        x_arg
+        for x_arg, python_type in get_atom_args_python_types().items()
+        if python_type in filterable_python_types()
+    }
+    assert x_filterable_atom_args == static_filterable_atom_args
+
+
 def test_BridgeUnit_Exists():
     # ESTABLISH
     x_bridgeunit = BridgeUnit()
@@ -94,6 +139,37 @@ def test_bridgeunit_shop_ReturnsObj_scenario1():
     assert road_bridgekind.unknown_word == y_unknown_word
     assert road_bridgekind.src_road_delimiter == slash_src_road_delimiter
     assert road_bridgekind.dst_road_delimiter == colon_dst_road_delimiter
+
+
+# def test_BridgeKind_set_atom_arg_SetsAttr():
+#     # ESTABLISH
+#     acct_id_bridgekind = bridgekind_shop(None, acct_id_str())
+#     acct_id_python_type = type_AcctID_str()
+#     assert acct_id_bridgekind.atom_arg == acct_id_str()
+#     assert acct_id_bridgekind.python_type == acct_id_python_type
+
+#     # WHEN
+#     acct_id_bridgekind.set_atom_arg(credit_vote_str())
+
+#     # THEN
+#     assert acct_id_bridgekind.atom_arg == credit_vote_str()
+#     int_python_type = "int"
+#     assert acct_id_bridgekind.python_type == int_python_type
+
+
+# def test_BridgeKind_set_atom_arg_RaisesErrorIf_atom_arg_DoesNotExistIn_atom_config():
+#     # ESTABLISH
+#     acct_id_bridgekind = bridgekind_shop(None, acct_id_str())
+#     acct_id_python_type = type_AcctID_str()
+#     assert acct_id_bridgekind.atom_arg == acct_id_str()
+#     assert acct_id_bridgekind.python_type == acct_id_python_type
+
+#     # WHEN
+#     rush_acct_id_str = "rush_acct_id"
+#     with pytest_raises(Exception) as excinfo:
+#         acct_id_bridgekind.set_atom_arg(rush_acct_id_str)
+#     exception_str = f"set_atom_arg Error: '{rush_acct_id_str}' not arg in atom_config."
+#     assert str(excinfo.value) == exception_str
 
 
 #     # THEN

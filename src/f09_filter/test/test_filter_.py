@@ -33,7 +33,7 @@ def test_filter_single_column_dataframe_ReturnsObj_Scenario0_AcctID_EmptyDataFra
     empty_dt = DataFrame(columns=[acct_id_str()])
 
     # WHEN
-    gen_dt = filter_single_column_dataframe(empty_dt, acct_id_bridgekind)
+    gen_dt = filter_single_column_dataframe(empty_dt, acct_id_bridgekind, acct_id_str())
 
     # THEN
     assert gen_dt.to_csv() == empty_dt.to_csv()
@@ -62,7 +62,7 @@ def test_filter_single_column_dataframe_ReturnsObj_Scenario0_AcctID_5rows():
     print(f"{src_dt=}")
 
     # WHEN
-    filter_single_column_dataframe(src_dt, acct_id_bridgekind)
+    filter_single_column_dataframe(src_dt, acct_id_bridgekind, acct_id_str())
 
     # THEN
     assert src_dt.iloc[0][acct_id_str()] == zia_src
@@ -101,7 +101,7 @@ def test_filter_single_column_dataframe_ReturnsObj_Scenario1_AcctID_5rowsMultipl
     print(f"{src_dt=}")
 
     # WHEN
-    filter_single_column_dataframe(src_dt, acct_id_bridgekind)
+    filter_single_column_dataframe(src_dt, acct_id_bridgekind, acct_id_str())
 
     # THEN
     assert src_dt.iloc[0][acct_id_str()] == zia_src

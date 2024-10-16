@@ -1,4 +1,8 @@
-from src.f04_gift.atom_config import label_str, group_id_str, road_str
+from src.f04_gift.atom_config import (
+    type_RoadNode_str,
+    type_RoadUnit_str,
+    type_GroupID_str,
+)
 from src.f09_filter.bridge import bridgekind_shop
 
 
@@ -11,7 +15,7 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label():
     casa_dst = "casa"
     dst_r_delimiter = ":"
     label_bridgekind = bridgekind_shop(
-        None, label_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadNode_str(), src_r_delimiter, dst_r_delimiter
     )
     label_bridgekind.set_src_to_dst(clean_src, clean_dst)
     label_bridgekind.set_src_to_dst(casa_src, casa_dst)
@@ -45,7 +49,7 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label_With_explicit_lab
     casa_dst = "house"
     dst_r_delimiter = ":"
     label_bridgekind = bridgekind_shop(
-        None, label_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadNode_str(), src_r_delimiter, dst_r_delimiter
     )
     label_bridgekind.set_src_to_dst(clean_src, clean_dst)
     label_bridgekind.set_explicit_label_map(casa_src, casa_dst)
@@ -69,7 +73,7 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_road_Scenario0():
     src_r_delimiter = "/"
     dst_r_delimiter = ":"
     road_bridgekind = bridgekind_shop(
-        None, road_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadUnit_str(), src_r_delimiter, dst_r_delimiter
     )
     assert road_bridgekind.src_exists(src_music45_str) is False
     assert road_bridgekind.src_to_dst_exists(src_music45_str, src_music45_str) is False
@@ -92,7 +96,7 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_road_Scenario1():
     clean_src_str = "clean"
     clean_src_road = f"{src_music45_str}{src_r_delimiter}{clean_src_str}"
     road_bridgekind = bridgekind_shop(
-        None, road_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadUnit_str(), src_r_delimiter, dst_r_delimiter
     )
     assert road_bridgekind.src_exists(src_music45_str) is False
     assert road_bridgekind.src_exists(clean_src_road) is False
@@ -130,7 +134,7 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_road_Scenario2_With_exp
     clean_dst_str = "prop"
     clean_src_road = f"{src_music45_str}{src_r_delimiter}{clean_src_str}"
     road_bridgekind = bridgekind_shop(
-        None, road_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadUnit_str(), src_r_delimiter, dst_r_delimiter
     )
     road_bridgekind.set_explicit_label_map(clean_src_str, clean_dst_str)
     assert road_bridgekind.src_exists(src_music45_str) is False
@@ -167,7 +171,7 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_group_id():
     swim_src = f"swim{src_r_delimiter}"
     climb_src = f"climb{src_r_delimiter}_{dst_r_delimiter}"
     group_id_bridgekind = bridgekind_shop(
-        None, group_id_str(), src_r_delimiter, dst_r_delimiter
+        type_GroupID_str(), src_r_delimiter, dst_r_delimiter
     )
     group_id_bridgekind.src_exists(swim_src) is False
     group_id_bridgekind.src_exists(climb_src) is False
@@ -197,7 +201,7 @@ def test_BridgeKind_get_create_dst_AddsMissingElementsTo_src_to_dst():
     casa_dst = "casa"
     dst_r_delimiter = ":"
     label_bridgekind = bridgekind_shop(
-        None, label_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadNode_str(), src_r_delimiter, dst_r_delimiter
     )
     label_bridgekind.set_src_to_dst(clean_src, clean_dst)
     label_bridgekind.set_src_to_dst(casa_src, casa_dst)

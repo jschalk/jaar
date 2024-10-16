@@ -56,7 +56,6 @@ def filterable_atom_args() -> set:
 
 @dataclass
 class BridgeKind:
-    atom_arg: str = None  # always key from from get_atom_args_python_types
     src_to_dst: dict[any:any] = None
     unknown_word: str = None
     src_road_delimiter: str = None
@@ -64,17 +63,6 @@ class BridgeKind:
     explicit_label_map: dict = None
     python_type: str = None
     face_id: str = None
-
-    def set_atom_arg(self, x_atom_arg: str):
-        x_atom_python_type = get_atom_args_python_types().get(x_atom_arg)
-        if x_atom_python_type is None:
-            exception_str = (
-                f"set_atom_arg Error: '{x_atom_arg}' not arg in atom_config."
-            )
-            raise atom_args_python_typeException(exception_str)
-
-        self.atom_arg = x_atom_arg
-        self.python_type = x_atom_python_type
 
     def set_all_src_to_dst(
         self, x_src_to_dst: dict, raise_exception_if_invalid: bool = False
@@ -197,7 +185,6 @@ class BridgeKind:
 
     def get_dict(self) -> dict:
         return {
-            "atom_arg": self.atom_arg,
             "src_road_delimiter": self.src_road_delimiter,
             "dst_road_delimiter": self.dst_road_delimiter,
             "unknown_word": self.unknown_word,
@@ -210,8 +197,7 @@ class BridgeKind:
 
 
 def bridgekind_shop(
-    x_python_type: str = None,
-    x_atom_arg: str = None,
+    x_python_type: str,
     x_src_road_delimiter: str = None,
     x_dst_road_delimiter: str = None,
     x_explicit_label_map: dict = None,
@@ -226,12 +212,8 @@ def bridgekind_shop(
     if x_dst_road_delimiter is None:
         x_dst_road_delimiter = default_road_delimiter_if_none()
 
-    if x_python_type is None:
-        x_python_type = get_atom_args_python_types().get(x_atom_arg)
-
     return BridgeKind(
         python_type=x_python_type,
-        atom_arg=x_atom_arg,
         src_to_dst=get_empty_dict_if_none(x_src_to_dst),
         unknown_word=x_unknown_word,
         src_road_delimiter=x_src_road_delimiter,
@@ -247,7 +229,7 @@ def default_unknown_word() -> str:
 
 def get_bridgekind_from_dict(x_dict: dict) -> BridgeKind:
     return bridgekind_shop(
-        x_atom_arg=x_dict.get("atom_arg"),
+        x_python_type=x_dict.get("python_type"),
         x_dst_road_delimiter=x_dict.get("dst_road_delimiter"),
         x_explicit_label_map=x_dict.get("explicit_label_map"),
         x_src_road_delimiter=x_dict.get("src_road_delimiter"),
@@ -269,6 +251,17 @@ class BridgeUnit:
     src_road_delimiter: str = None
     dst_road_delimiter: str = None
     face_id: str = None
+
+    # def set_atom_arg(self, x_atom_arg: str):
+    #     x_atom_python_type = get_atom_args_python_types().get(x_atom_arg)
+    #     if x_atom_python_type is None:
+    #         exception_str = (
+    #             f"set_atom_arg Error: '{x_atom_arg}' not arg in atom_config."
+    #         )
+    #         raise atom_args_python_typeException(exception_str)
+
+    #     self.atom_arg = x_atom_arg
+    #     self.python_type = x_atom_python_type
 
 
 def bridgeunit_shop(

@@ -16,7 +16,6 @@ def test_BridgeKind_get_dict_ReturnsObj():
     slash_src_road_delimiter = "/"
     label_bridgekind = bridgekind_shop(None, label_str(), slash_src_road_delimiter)
     x1_label_bridge_dict = {
-        "atom_arg": label_bridgekind.atom_arg,
         "src_road_delimiter": label_bridgekind.src_road_delimiter,
         "dst_road_delimiter": label_bridgekind.dst_road_delimiter,
         "unknown_word": label_bridgekind.unknown_word,
@@ -30,7 +29,6 @@ def test_BridgeKind_get_dict_ReturnsObj():
     label_bridgekind.set_explicit_label_map(casa_src, casa_dst)
     # THEN
     x2_label_bridge_dict = {
-        "atom_arg": label_bridgekind.atom_arg,
         "src_road_delimiter": label_bridgekind.src_road_delimiter,
         "dst_road_delimiter": label_bridgekind.dst_road_delimiter,
         "unknown_word": label_bridgekind.unknown_word,
@@ -49,7 +47,6 @@ def test_BridgeKind_get_json_ReturnsObj():
     slash_src_road_delimiter = "/"
     label_bridgekind = bridgekind_shop(None, label_str(), slash_src_road_delimiter)
     x1_label_bridge_json = f"""{{
-  "atom_arg": "{label_bridgekind.atom_arg}",
   "dst_road_delimiter": "{label_bridgekind.dst_road_delimiter}",
   "explicit_label_map": {label_bridgekind.explicit_label_map},
   "src_road_delimiter": "{label_bridgekind.src_road_delimiter}",
@@ -65,7 +62,6 @@ def test_BridgeKind_get_json_ReturnsObj():
     label_bridgekind.set_explicit_label_map(casa_src, casa_dst)
     # THEN
     x2_label_bridge_json = f"""{{
-  "atom_arg": "{label_bridgekind.atom_arg}",
   "dst_road_delimiter": "{label_bridgekind.dst_road_delimiter}",
   "explicit_label_map": {{
     "{casa_src}": "{casa_dst}"
