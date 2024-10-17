@@ -1,5 +1,4 @@
 from src.f00_instrument.file import save_file, dir_files
-from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import (
     acct_id_str,
     road_str,
@@ -7,13 +6,8 @@ from src.f04_gift.atom_config import (
     type_GroupID_str,
 )
 from src.f08_brick.brick import open_brick_csv
-from src.f09_filter.bridge import (
-    bridgeunit_shop,
-    default_unknown_word,
-    get_bridgeunit_from_dict,
-    get_bridgeunit_from_json,
-)
-from src.f09_filter.filter import filter_files
+from src.f09_filter.bridge import bridgeunit_shop
+from src.f09_filter.filter import filter_files_from_src_dir_to_dst_dir
 from src.f09_filter.examples.filter_env import (
     env_dir_setup_cleanup,
     get_test_filters_dir,
@@ -30,7 +24,9 @@ from pandas import DataFrame
 
 
 # save two dataframes to be filtered: two files in src, two files in dst
-def test_filter_files_CreatesFilteredFiles_Scenario0_SingleFile(env_dir_setup_cleanup):
+def test_filter_files_from_src_dir_to_dst_dir_CreatesFilteredFiles_Scenario0_SingleFile(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     bob_src = "Bob"
     sue_src = "Sue"
@@ -59,7 +55,7 @@ def test_filter_files_CreatesFilteredFiles_Scenario0_SingleFile(env_dir_setup_cl
     assert os_path_exists(dst_file_path) is False
 
     # WHEN
-    filter_files(src_dir, dst_dir, bridge_dir)
+    filter_files_from_src_dir_to_dst_dir(src_dir, dst_dir, bridge_dir)
 
     # THEN
     assert os_path_exists(bridgeunit_file_path)

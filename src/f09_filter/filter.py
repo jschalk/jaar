@@ -36,7 +36,7 @@ def filter_all_columns_dataframe(x_dt: DataFrame, x_bridgeunit: BridgeUnit):
         filter_single_column_dataframe(x_dt, x_bridgekind, filterable_column)
 
 
-def filter_files(src_dir: str, dst_dir: str, bridge_dir: str):
+def filter_files_from_src_dir_to_dst_dir(src_dir: str, dst_dir: str, bridge_dir: str):
     # if os_path_exists(src_dir)
     src_csvs = dir_files(src_dir, delete_extensions=True)
     for x_file_name, x_csv in src_csvs.items():
