@@ -180,6 +180,8 @@ class BridgeKind:
 
     def get_dict(self) -> dict:
         return {
+            "python_type": self.python_type,
+            "face_id": self.face_id,
             "src_road_delimiter": self.src_road_delimiter,
             "dst_road_delimiter": self.dst_road_delimiter,
             "unknown_word": self.unknown_word,
@@ -225,6 +227,7 @@ def default_unknown_word() -> str:
 def get_bridgekind_from_dict(x_dict: dict) -> BridgeKind:
     return bridgekind_shop(
         x_python_type=x_dict.get("python_type"),
+        x_face_id=x_dict.get("face_id"),
         x_dst_road_delimiter=x_dict.get("dst_road_delimiter"),
         x_explicit_label_map=x_dict.get("explicit_label_map"),
         x_src_road_delimiter=x_dict.get("src_road_delimiter"),
@@ -246,6 +249,9 @@ class BridgeUnit:
     dst_road_delimiter: str = None
 
     def set_bridgekind(self, x_bridgekind: BridgeKind):
+        if self.face_id != x_bridgekind.face_id:
+            exception_str = f"set_bridgekind Error: BrideUnit face_id is '{self.face_id}', BridgeKind is '{x_bridgekind.face_id}'."
+            raise atom_args_python_typeException(exception_str)
         if self.src_road_delimiter != x_bridgekind.src_road_delimiter:
             exception_str = f"set_bridgekind Error: BrideUnit src_road_delimiter is '{self.src_road_delimiter}', BridgeKind is '{x_bridgekind.src_road_delimiter}'."
             raise atom_args_python_typeException(exception_str)
@@ -280,6 +286,30 @@ class BridgeUnit:
 
     def _get_dst_value(self, x_python_type: str, x_src: str) -> str:
         return self.get_bridgekind(x_python_type)._get_dst_value(x_src)
+
+    def src_to_dst_exists(self, x_python_type: str, x_src: str, x_dst: str) -> bool:
+        return self.get_bridgekind(x_python_type).src_to_dst_exists(x_src, x_dst)
+
+    def del_src_to_dst(self, x_python_type: str, x_src: str):
+        self.get_bridgekind(x_python_type).del_src_to_dst(x_src)
+
+    def get_dict(self) -> dict:
+        return {
+            "face_id": self.face_id,
+            "src_road_delimiter": self.src_road_delimiter,
+            "dst_road_delimiter": self.dst_road_delimiter,
+            "unknown_word": self.unknown_word,
+            "bridgekinds": self.get_bridgekinds_dict(),
+        }
+
+    def get_bridgekinds_dict(self) -> dict:
+        return {
+            x_key: x_brandkind.get_dict()
+            for x_key, x_brandkind in self.bridgekinds.items()
+        }
+
+    def get_json(self) -> str:
+        return get_json_from_dict(self.get_dict())
 
 
 def bridgeunit_shop(
@@ -323,3 +353,20 @@ def bridgeunit_shop(
         dst_road_delimiter=x_dst_road_delimiter,
         bridgekinds=x_bridgekinds,
     )
+
+
+def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
+    return BridgeUnit(
+        face_id=x_dict.get("face_id"),
+        src_road_delimiter=x_dict.get("src_road_delimiter"),
+        dst_road_delimiter=x_dict.get("dst_road_delimiter"),
+        unknown_word=x_dict.get("unknown_word"),
+        bridgekinds=get_bridgekinds_from_dict(x_dict.get("bridgekinds")),
+    )
+
+
+def get_bridgekinds_from_dict(bridgekinds_dict: dict) -> dict[str, BridgeKind]:
+    bridgekind_objs = {}
+    for x_python_type, x_bridgekind_dict in bridgekinds_dict.items():
+        bridgekind_objs[x_python_type] = get_bridgekind_from_dict(x_bridgekind_dict)
+    return bridgekind_objs
