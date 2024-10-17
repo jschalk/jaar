@@ -14,7 +14,9 @@ def get_clean_roadnode_bridgekind() -> BridgeKind:
     casa_src = "casa1"
     casa_dst = "casa2"
     slash_src_road_delimiter = "/"
-    roadnode_bridgekind = bridgekind_shop(type_RoadNode_str(), slash_src_road_delimiter)
+    roadnode_bridgekind = bridgekind_shop(
+        type_RoadNode_str(), slash_src_road_delimiter, x_face_id="Sue"
+    )
     roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)
     roadnode_bridgekind.set_src_to_dst(casa_src, casa_dst)
     return roadnode_bridgekind
@@ -27,7 +29,7 @@ def get_clean_roadunit_bridgekind() -> BridgeKind:
     clean_dst_str = "prop"
     road_delimiter = default_road_delimiter_if_none()
     clean_src_road = f"{src_music45_str}{road_delimiter}{clean_src_str}"
-    road_bridgekind = bridgekind_shop(type_RoadUnit_str())
+    road_bridgekind = bridgekind_shop(type_RoadUnit_str(), x_face_id="Sue")
     road_bridgekind.set_explicit_label_map(clean_src_str, clean_dst_str)
     road_bridgekind.set_src_to_dst(src_music45_str, dst_music87_str)
     road_bridgekind.get_create_dst(clean_src_road)
@@ -39,7 +41,7 @@ def get_swim_groupid_bridgekind() -> BridgeKind:
     swim_src = f"swim{road_delimiter}"
     swim_dst = f"nage{road_delimiter}"
     climb_src = f"climb{road_delimiter}"
-    group_id_bridgekind = bridgekind_shop(type_GroupID_str())
+    group_id_bridgekind = bridgekind_shop(type_GroupID_str(), x_face_id="Sue")
     group_id_bridgekind.set_src_to_dst(swim_src, swim_dst)
     group_id_bridgekind.set_src_to_dst(climb_src, climb_src)
     return group_id_bridgekind
@@ -53,7 +55,7 @@ def get_suita_acctid_bridgekind() -> BridgeKind:
     xio_dst = "Xioita"
     sue_dst = "Suita"
     bob_dst = "Bobita"
-    acct_id_bridgekind = bridgekind_shop(type_AcctID_str())
+    acct_id_bridgekind = bridgekind_shop(type_AcctID_str(), x_face_id="Sue")
     acct_id_bridgekind.set_src_to_dst(xio_src, xio_dst)
     acct_id_bridgekind.set_src_to_dst(sue_src, sue_dst)
     acct_id_bridgekind.set_src_to_dst(bob_src, bob_dst)
@@ -65,7 +67,7 @@ def get_invalid_acctid_bridgekind() -> BridgeKind:
     sue_dst = "Sue"
     zia_src = "Zia"
     zia_dst = "Zia"
-    group_id_bridgekind = bridgekind_shop(type_AcctID_str())
+    group_id_bridgekind = bridgekind_shop(type_AcctID_str(), x_face_id="Sue")
     group_id_bridgekind.set_src_to_dst(sue_src, sue_dst)
     group_id_bridgekind.set_src_to_dst(zia_src, zia_dst)
     return group_id_bridgekind
@@ -76,7 +78,7 @@ def get_invalid_groupid_bridgekind() -> BridgeKind:
     sue_dst = f"Sue{default_road_delimiter_if_none()}"
     zia_src = "Zia"
     zia_dst = f"Zia{default_road_delimiter_if_none()}"
-    group_id_bridgekind = bridgekind_shop(type_GroupID_str())
+    group_id_bridgekind = bridgekind_shop(type_GroupID_str(), x_face_id="Sue")
     group_id_bridgekind.set_src_to_dst(sue_src, sue_dst)
     group_id_bridgekind.set_src_to_dst(zia_src, zia_dst)
     return group_id_bridgekind
@@ -87,7 +89,7 @@ def get_invalid_road_bridgekind() -> BridgeKind:
     clean_dst = "prop"
     casa_src = f"casa{default_road_delimiter_if_none()}"
     casa_dst = "casa"
-    roadnode_bridgekind = bridgekind_shop(type_RoadNode_str())
+    roadnode_bridgekind = bridgekind_shop(type_RoadNode_str(), x_face_id="Sue")
     roadnode_bridgekind.set_src_to_dst(clean_str, clean_dst)
     roadnode_bridgekind.set_src_to_dst(casa_src, casa_dst)
     return roadnode_bridgekind

@@ -150,8 +150,9 @@ def test_bridgeunit_shop_ReturnsObj_scenario1():
 
 def test_BridgeUnit_set_bridgekind_SetsAttr():
     # ESTABLISH
-    sue_bridgeunit = bridgeunit_shop("Sue")
-    acct_id_bridgekind = bridgekind_shop(type_AcctID_str())
+    sue_str = "Sue"
+    sue_bridgeunit = bridgeunit_shop(sue_str)
+    acct_id_bridgekind = bridgekind_shop(type_AcctID_str(), x_face_id=sue_str)
     acct_id_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
     assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
 
@@ -164,8 +165,9 @@ def test_BridgeUnit_set_bridgekind_SetsAttr():
 
 def test_BridgeUnit_set_bridgekind_SetsAttr_SpecialCase_RoadUnit():
     # ESTABLISH
-    sue_bridgeunit = bridgeunit_shop("Sue")
-    road_bridgekind = bridgekind_shop(type_RoadUnit_str())
+    sue_str = "Sue"
+    sue_bridgeunit = bridgeunit_shop(sue_str)
+    road_bridgekind = bridgekind_shop(type_RoadUnit_str(), x_face_id=sue_str)
     road_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
     assert sue_bridgeunit.bridgekinds.get(road_str()) != road_bridgekind
 
@@ -178,8 +180,9 @@ def test_BridgeUnit_set_bridgekind_SetsAttr_SpecialCase_RoadUnit():
 
 def test_BridgeUnit_set_bridgekind_SetsAttr_SpecialCase_RoadNode():
     # ESTABLISH
-    sue_bridgeunit = bridgeunit_shop("Sue")
-    roadnode_bridgekind = bridgekind_shop(type_RoadNode_str())
+    sue_str = "Sue"
+    sue_bridgeunit = bridgeunit_shop(sue_str)
+    roadnode_bridgekind = bridgekind_shop(type_RoadNode_str(), x_face_id=sue_str)
     roadnode_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
     old_roadnode_bridgekind = copy_deepcopy(roadnode_bridgekind)
     assert sue_bridgeunit.bridgekinds.get(road_str()) != old_roadnode_bridgekind
@@ -188,7 +191,7 @@ def test_BridgeUnit_set_bridgekind_SetsAttr_SpecialCase_RoadNode():
     sue_bridgeunit.set_bridgekind(roadnode_bridgekind)
 
     # THEN
-    roadunit_bridgekind = bridgekind_shop(type_RoadUnit_str())
+    roadunit_bridgekind = bridgekind_shop(type_RoadUnit_str(), x_face_id=sue_str)
     roadunit_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
     assert sue_bridgeunit.bridgekinds.get(road_str()) != old_roadnode_bridgekind
     assert sue_bridgeunit.bridgekinds.get(road_str()) == roadunit_bridgekind
@@ -196,10 +199,13 @@ def test_BridgeUnit_set_bridgekind_SetsAttr_SpecialCase_RoadNode():
 
 def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_src_road_delimiter_IsNotSame():
     # ESTABLISH
-    sue_bridgeunit = bridgeunit_shop("Sue")
+    sue_str = "Sue"
+    sue_bridgeunit = bridgeunit_shop(sue_str)
     slash_src_road_delimiter = "/"
     acct_id_bridgekind = bridgekind_shop(
-        type_AcctID_str(), x_src_road_delimiter=slash_src_road_delimiter
+        type_AcctID_str(),
+        x_src_road_delimiter=slash_src_road_delimiter,
+        x_face_id=sue_str,
     )
     assert sue_bridgeunit.src_road_delimiter != acct_id_bridgekind.src_road_delimiter
     assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
@@ -213,10 +219,13 @@ def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_src_road_delimiter_I
 
 def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_dst_road_delimiter_IsNotSame():
     # ESTABLISH
-    sue_bridgeunit = bridgeunit_shop("Sue")
+    sue_str = "Sue"
+    sue_bridgeunit = bridgeunit_shop(sue_str)
     slash_dst_road_delimiter = "/"
     acct_id_bridgekind = bridgekind_shop(
-        type_AcctID_str(), x_dst_road_delimiter=slash_dst_road_delimiter
+        type_AcctID_str(),
+        x_dst_road_delimiter=slash_dst_road_delimiter,
+        x_face_id=sue_str,
     )
     assert sue_bridgeunit.dst_road_delimiter != acct_id_bridgekind.dst_road_delimiter
     assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
@@ -230,10 +239,11 @@ def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_dst_road_delimiter_I
 
 def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_unknown_word_IsNotSame():
     # ESTABLISH
-    sue_bridgeunit = bridgeunit_shop("Sue")
+    sue_str = "Sue"
+    sue_bridgeunit = bridgeunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
     acct_id_bridgekind = bridgekind_shop(
-        type_AcctID_str(), x_unknown_word=casa_unknown_word
+        type_AcctID_str(), x_unknown_word=casa_unknown_word, x_face_id=sue_str
     )
     assert sue_bridgeunit.unknown_word != acct_id_bridgekind.unknown_word
     assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
@@ -245,10 +255,27 @@ def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_unknown_word_IsNotSa
     assert str(excinfo.value) == exception_str
 
 
+def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_face_id_IsNotSame():
+    # ESTABLISH
+    sue_str = "Sue"
+    yao_str = "Yao"
+    sue_bridgeunit = bridgeunit_shop(sue_str)
+    acct_id_bridgekind = bridgekind_shop(type_AcctID_str(), x_face_id=yao_str)
+    assert sue_bridgeunit.face_id != acct_id_bridgekind.face_id
+    assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        sue_bridgeunit.set_bridgekind(acct_id_bridgekind)
+    exception_str = f"set_bridgekind Error: BrideUnit face_id is '{sue_bridgeunit.face_id}', BridgeKind is '{yao_str}'."
+    assert str(excinfo.value) == exception_str
+
+
 def test_BridgeUnit_get_bridgekind_ReturnsObj():
     # ESTABLISH
-    sue_bridgeunit = bridgeunit_shop("Sue")
-    static_acct_id_bridgekind = bridgekind_shop(type_AcctID_str())
+    sue_str = "Sue"
+    sue_bridgeunit = bridgeunit_shop(sue_str)
+    static_acct_id_bridgekind = bridgekind_shop(type_AcctID_str(), x_face_id=sue_str)
     static_acct_id_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
     sue_bridgeunit.set_bridgekind(static_acct_id_bridgekind)
 
@@ -261,8 +288,9 @@ def test_BridgeUnit_get_bridgekind_ReturnsObj():
 
 def test_BridgeUnit_get_bridgekind_ReturnsObj_SpecialCase_RoadUnit():
     # ESTABLISH
-    sue_bridgeunit = bridgeunit_shop("Sue")
-    static_road_bridgekind = bridgekind_shop(type_RoadUnit_str())
+    sue_str = "Sue"
+    sue_bridgeunit = bridgeunit_shop(sue_str)
+    static_road_bridgekind = bridgekind_shop(type_RoadUnit_str(), x_face_id=sue_str)
     static_road_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
     sue_bridgeunit.set_bridgekind(static_road_bridgekind)
 

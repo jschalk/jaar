@@ -180,6 +180,8 @@ class BridgeKind:
 
     def get_dict(self) -> dict:
         return {
+            "python_type": self.python_type,
+            "face_id": self.face_id,
             "src_road_delimiter": self.src_road_delimiter,
             "dst_road_delimiter": self.dst_road_delimiter,
             "unknown_word": self.unknown_word,
@@ -225,6 +227,7 @@ def default_unknown_word() -> str:
 def get_bridgekind_from_dict(x_dict: dict) -> BridgeKind:
     return bridgekind_shop(
         x_python_type=x_dict.get("python_type"),
+        x_face_id=x_dict.get("face_id"),
         x_dst_road_delimiter=x_dict.get("dst_road_delimiter"),
         x_explicit_label_map=x_dict.get("explicit_label_map"),
         x_src_road_delimiter=x_dict.get("src_road_delimiter"),
@@ -246,6 +249,9 @@ class BridgeUnit:
     dst_road_delimiter: str = None
 
     def set_bridgekind(self, x_bridgekind: BridgeKind):
+        if self.face_id != x_bridgekind.face_id:
+            exception_str = f"set_bridgekind Error: BrideUnit face_id is '{self.face_id}', BridgeKind is '{x_bridgekind.face_id}'."
+            raise atom_args_python_typeException(exception_str)
         if self.src_road_delimiter != x_bridgekind.src_road_delimiter:
             exception_str = f"set_bridgekind Error: BrideUnit src_road_delimiter is '{self.src_road_delimiter}', BridgeKind is '{x_bridgekind.src_road_delimiter}'."
             raise atom_args_python_typeException(exception_str)
