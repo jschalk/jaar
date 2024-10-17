@@ -33,6 +33,10 @@ from src.f04_gift.atom_config import (
     normal_specs_str,
     sqlite_datatype_str,
     python_type_str,
+    type_AcctID_str,
+    type_GroupID_str,
+    type_RoadUnit_str,
+    type_RoadNode_str,
     nesting_order_str,
     column_order_str,
     get_sorted_required_arg_keys,
@@ -50,39 +54,36 @@ from src.f04_gift.atom_config import (
     stop_want_str,
     base_str,
 )
-from copy import deepcopy as copy_deepcopy
 
 
-def test_required_args_str_ReturnsObj():
+def test_str_functions_ReturnsObj():
     assert required_args_str() == "required_args"
-
-
-def test_optional_args_str_ReturnsObj():
     assert optional_args_str() == "optional_args"
-
-
-def test_column_order_str_ReturnsObj():
     assert column_order_str() == "column_order"
-
-
-def test_category_str_ReturnsObj():
     assert category_str() == "category"
-
-
-def test_atom_insert_ReturnsObj():
     assert atom_insert() == "INSERT"
-
-
-def test_atom_update_ReturnsObj():
     assert atom_update() == "UPDATE"
-
-
-def test_atom_delete_ReturnsObj():
     assert atom_delete() == "DELETE"
-
-
-def test_crud_str_str_ReturnsObj():
+    assert nesting_order_str() == "nesting_order"
+    assert sqlite_datatype_str() == "sqlite_datatype"
+    assert python_type_str() == "python_type"
+    assert parent_road_str() == "parent_road"
+    assert type_AcctID_str() == "AcctID"
+    assert type_GroupID_str() == "GroupID"
+    assert type_RoadUnit_str() == "RoadUnit"
+    assert type_RoadNode_str() == "RoadNode"
+    assert road_str() == "road"
+    assert acct_id_str() == "acct_id"
+    assert group_id_str() == "group_id"
     assert crud_str_str() == "crud_str"
+    assert begin_str() == "begin"
+    assert close_str() == "close"
+    assert addin_str() == "addin"
+    assert numor_str() == "numor"
+    assert denom_str() == "denom"
+    assert morph_str() == "morph"
+    assert gogo_want_str() == "gogo_want"
+    assert stop_want_str() == "stop_want"
 
 
 def test_atom_config_HasCorrect_category():
@@ -100,38 +101,6 @@ def test_atom_config_HasCorrect_category():
     }
     assert bud_acctunit_str() in category_ref()
     assert is_category_ref("itemroot") is False
-
-
-def test_begin_str_ReturnsObj():
-    assert begin_str() == "begin"
-
-
-def test_close_str_ReturnsObj():
-    assert close_str() == "close"
-
-
-def test_addin_str_ReturnsObj():
-    assert addin_str() == "addin"
-
-
-def test_numor_str_ReturnsObj():
-    assert numor_str() == "numor"
-
-
-def test_denom_str_ReturnsObj():
-    assert denom_str() == "denom"
-
-
-def test_morph_str_ReturnsObj():
-    assert morph_str() == "morph"
-
-
-def test_gogo_want_str_ReturnsObj():
-    assert gogo_want_str() == "gogo_want"
-
-
-def test_stop_want_str_ReturnsObj():
-    assert stop_want_str() == "stop_want"
 
 
 def check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
@@ -573,20 +542,20 @@ def get_python_type(x_category: str, x_arg: str) -> str:
 
 def test_get_python_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_python_type(bud_acctunit_str(), acct_id_str()) == "AcctID"
+    assert get_python_type(bud_acctunit_str(), acct_id_str()) == type_AcctID_str()
     assert get_python_type(bud_itemunit_str(), gogo_want_str()) == "float"
 
 
 def test_get_allowed_python_types_ReturnsObj():
     # ESTABLISH
     x_allowed_python_types = {
-        "RoadUnit",
         "int",
-        "AcctID",
-        "GroupID",
+        type_AcctID_str(),
+        type_GroupID_str(),
+        type_RoadNode_str(),
+        type_RoadUnit_str(),
         "float",
         "bool",
-        "RoadNode",
         "TimeLinePoint",
     }
 
@@ -641,9 +610,9 @@ def test_get_atom_args_python_types_ReturnsObj():
     # THEN
     assert all_atom_args_python_types_are_correct(x_python_types)
     assert x_python_types.keys() == get_atom_args_category_mapping().keys()
-    assert x_python_types.get("acct_id") == "AcctID"
+    assert x_python_types.get("acct_id") == type_AcctID_str()
     assert x_python_types.get("addin") == "float"
-    assert x_python_types.get("base") == "RoadUnit"
+    assert x_python_types.get("base") == type_RoadUnit_str()
     assert x_python_types.get("base_item_active_requisite") == "bool"
     assert x_python_types.get("begin") == "float"
     assert x_python_types.get("respect_bit") == "float"
@@ -662,23 +631,23 @@ def test_get_atom_args_python_types_ReturnsObj():
     assert x_python_types.get("fund_pool") == "float"
     assert x_python_types.get("give_force") == "float"
     assert x_python_types.get("gogo_want") == "float"
-    assert x_python_types.get("group_id") == "GroupID"
-    assert x_python_types.get("healer_id") == "GroupID"
-    assert x_python_types.get("label") == "RoadNode"
+    assert x_python_types.get("group_id") == type_GroupID_str()
+    assert x_python_types.get("healer_id") == type_GroupID_str()
+    assert x_python_types.get("label") == type_RoadNode_str()
     assert x_python_types.get("mass") == "int"
     assert x_python_types.get("max_tree_traverse") == "int"
     assert x_python_types.get("morph") == "bool"
-    assert x_python_types.get("need") == "RoadUnit"
+    assert x_python_types.get("need") == type_RoadUnit_str()
     assert x_python_types.get("nigh") == "float"
     assert x_python_types.get("numor") == "int"
     assert x_python_types.get("open") == "float"
-    assert x_python_types.get("parent_road") == "RoadUnit"
+    assert x_python_types.get("parent_road") == type_RoadUnit_str()
     assert x_python_types.get("penny") == "float"
-    assert x_python_types.get("pick") == "RoadUnit"
+    assert x_python_types.get("pick") == type_RoadUnit_str()
     assert x_python_types.get("pledge") == "bool"
     assert x_python_types.get("problem_bool") == "bool"
     assert x_python_types.get("purview_timestamp") == "TimeLinePoint"
-    assert x_python_types.get("road") == "RoadUnit"
+    assert x_python_types.get("road") == type_RoadUnit_str()
     assert x_python_types.get("stop_want") == "float"
     assert x_python_types.get("take_force") == "float"
     assert x_python_types.get("tally") == "int"
