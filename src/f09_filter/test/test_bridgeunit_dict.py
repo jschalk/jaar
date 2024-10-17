@@ -1,26 +1,12 @@
 from src.f01_road.road import default_road_delimiter_if_none
-from src.f04_gift.atom_config import (
-    get_atom_args_python_types,
-    road_str,
-    type_AcctID_str,
-    type_GroupID_str,
-    type_RoadNode_str,
-    type_RoadUnit_str,
-)
+from src.f04_gift.atom_config import road_str, type_AcctID_str, type_GroupID_str
 from src.f09_filter.bridge import (
-    BridgeUnit,
     bridgeunit_shop,
-    bridgekind_shop,
     default_unknown_word,
-    filterable_python_types,
-    filterable_atom_args,
     get_bridgeunit_from_dict,
     get_bridgeunit_from_json,
 )
-from src.f09_filter.examples.examples_filter import (
-    get_invalid_acctid_bridgekind,
-    get_invalid_groupid_bridgekind,
-    get_invalid_road_bridgekind,
+from src.f09_filter.examples.example_bridges import (
     get_clean_roadunit_bridgekind,
     get_swim_groupid_bridgekind,
     get_suita_acctid_bridgekind,
@@ -28,8 +14,6 @@ from src.f09_filter.examples.examples_filter import (
     get_slash_groupid_bridgekind,
     get_slash_acctid_bridgekind,
 )
-from pytest import raises as pytest_raises
-from copy import deepcopy as copy_deepcopy
 
 
 def test_BridgeUnit_get_dict_ReturnsObj_Scenario0():

@@ -15,7 +15,7 @@ from src.f09_filter.bridge import (
     filterable_python_types,
     filterable_atom_args,
 )
-from src.f09_filter.examples.examples_filter import (
+from src.f09_filter.examples.example_bridges import (
     get_invalid_acctid_bridgekind,
     get_invalid_groupid_bridgekind,
     get_invalid_road_bridgekind,

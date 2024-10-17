@@ -1,11 +1,13 @@
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import (
+    acct_id_str,
     type_RoadUnit_str,
     type_AcctID_str,
     type_GroupID_str,
     type_RoadNode_str,
 )
 from src.f09_filter.bridge import bridgekind_shop, BridgeKind
+from pandas import DataFrame
 
 
 def get_clean_roadnode_bridgekind() -> BridgeKind:
@@ -160,3 +162,29 @@ def get_slash_acctid_bridgekind() -> BridgeKind:
     acct_id_bridgekind.set_src_to_dst(sue_src, sue_dst)
     acct_id_bridgekind.set_src_to_dst(bob_src, bob_dst)
     return acct_id_bridgekind
+
+
+def get_suita_acctid_src_dt() -> DataFrame:
+    xio_src = "Xio"
+    sue_src = "Sue"
+    bob_src = "Bob"
+    zia_src = "Zia"
+    src_dt = DataFrame(columns=[acct_id_str()])
+    src_dt.loc[0, acct_id_str()] = zia_src
+    src_dt.loc[1, acct_id_str()] = sue_src
+    src_dt.loc[2, acct_id_str()] = bob_src
+    src_dt.loc[3, acct_id_str()] = xio_src
+    return src_dt
+
+
+def get_suita_acctid_dst_dt() -> DataFrame:
+    xio_dst = "Xioita"
+    sue_dst = "Suita"
+    bob_dst = "Bobita"
+    zia_src = "Zia"
+    dst_dt = DataFrame(columns=[acct_id_str()])
+    dst_dt.loc[0, acct_id_str()] = xio_dst
+    dst_dt.loc[1, acct_id_str()] = sue_dst
+    dst_dt.loc[2, acct_id_str()] = bob_dst
+    dst_dt.loc[3, acct_id_str()] = zia_src
+    return dst_dt
