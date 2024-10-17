@@ -256,9 +256,13 @@ class BridgeUnit:
             exception_str = f"set_bridgekind Error: BrideUnit unknown_word is '{self.unknown_word}', BridgeKind is '{x_bridgekind.unknown_word}'."
             raise atom_args_python_typeException(exception_str)
 
-        x_python_type = x_bridgekind.python_type
-        if x_python_type in {"RoadUnit", "RoadNode"}:
+        x_python_type = None
+        if x_bridgekind.python_type in {"RoadUnit", "RoadNode"}:
             x_python_type = "road"
+            if x_bridgekind.python_type in {"RoadNode"}:
+                x_bridgekind.python_type = "RoadUnit"
+        else:
+            x_python_type = x_bridgekind.python_type
 
         self.bridgekinds[x_python_type] = x_bridgekind
 
@@ -268,22 +272,14 @@ class BridgeUnit:
         return self.bridgekinds.get(x_python_type)
 
     def is_valid(self) -> bool:
-        for x_brandkind in self.bridgekinds.values():
-            if x_brandkind.is_valid() is False:
-                print(f"{x_brandkind=}")
-                return False
-        return True
+        x_bridgekinds = self.bridgekinds.values()
+        return all(x_bridgekind.is_valid() is True for x_bridgekind in x_bridgekinds)
 
-    # def set_atom_arg(self, x_atom_arg: str):
-    #     x_atom_python_type = get_atom_args_python_types().get(x_atom_arg)
-    #     if x_atom_python_type is None:
-    #         exception_str = (
-    #             f"set_atom_arg Error: '{x_atom_arg}' not arg in atom_config."
-    #         )
-    #         raise atom_args_python_typeException(exception_str)
+    def set_src_to_dst(self, x_python_type: str, x_src: str, x_dst: str):
+        self.get_bridgekind(x_python_type).set_src_to_dst(x_src, x_dst)
 
-    #     self.atom_arg = x_atom_arg
-    #     self.python_type = x_atom_python_type
+    def _get_dst_value(self, x_python_type: str, x_src: str) -> str:
+        return self.get_bridgekind(x_python_type)._get_dst_value(x_src)
 
 
 def bridgeunit_shop(
