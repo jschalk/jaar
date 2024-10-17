@@ -287,6 +287,21 @@ class BridgeUnit:
     def _get_dst_value(self, x_python_type: str, x_src: str) -> str:
         return self.get_bridgekind(x_python_type)._get_dst_value(x_src)
 
+    def get_dict(self) -> dict:
+        return {
+            "face_id": self.face_id,
+            "src_road_delimiter": self.src_road_delimiter,
+            "dst_road_delimiter": self.dst_road_delimiter,
+            "unknown_word": self.unknown_word,
+            "brandkinds": self.get_brandkinds_dict(),
+        }
+
+    def get_brandkinds_dict(self) -> dict:
+        return {
+            x_key: x_brandkind.get_dict()
+            for x_key, x_brandkind in self.bridgekinds.items()
+        }
+
 
 def bridgeunit_shop(
     x_face_id: str,
