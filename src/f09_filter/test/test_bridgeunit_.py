@@ -343,7 +343,7 @@ def test_BridgeUnit_is_valid_ReturnsObj():
     assert sue_bridgeunit.is_valid()
 
 
-def test_BridgeUnit_set_all_src_to_dst_SetsAttr():
+def test_BridgeUnit_set_src_to_dst_SetsAttr_Scenario0_type_AcctID_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_src = "Sue"
@@ -359,6 +359,54 @@ def test_BridgeUnit_set_all_src_to_dst_SetsAttr():
     assert apptid_bridgekind.src_to_dst_exists(sue_src, sue_dst)
 
 
+def test_BridgeUnit_set_src_to_dst_SetsAttr_Scenario1_type_RoadUnit_str():
+    # ESTABLISH
+    zia_str = "Zia"
+    sue_src = "Sue"
+    sue_dst = "Suita"
+    zia_bridgeunit = bridgeunit_shop(zia_str)
+    road_bridgekind = zia_bridgeunit.get_bridgekind(type_RoadUnit_str())
+    assert road_bridgekind.src_to_dst_exists(sue_src, sue_dst) is False
+
+    # WHEN
+    zia_bridgeunit.set_src_to_dst(type_RoadUnit_str(), sue_src, sue_dst)
+
+    # THEN
+    assert road_bridgekind.src_to_dst_exists(sue_src, sue_dst)
+
+
+def test_BridgeUnit_set_src_to_dst_SetsAttr_Scenario2_type_RoadNode_str():
+    # ESTABLISH
+    zia_str = "Zia"
+    sue_src = "Sue"
+    sue_dst = "Suita"
+    zia_bridgeunit = bridgeunit_shop(zia_str)
+    road_bridgekind = zia_bridgeunit.get_bridgekind(type_RoadNode_str())
+    assert road_bridgekind.src_to_dst_exists(sue_src, sue_dst) is False
+
+    # WHEN
+    zia_bridgeunit.set_src_to_dst(type_RoadNode_str(), sue_src, sue_dst)
+
+    # THEN
+    assert road_bridgekind.src_to_dst_exists(sue_src, sue_dst)
+
+
+def test_BridgeUnit_src_to_dst_exists_ReturnsObj():
+    # ESTABLISH
+    zia_str = "Zia"
+    sue_src = "Sue"
+    sue_dst = "Suita"
+    zia_bridgeunit = bridgeunit_shop(zia_str)
+    road_type = type_RoadNode_str()
+    assert zia_bridgeunit.src_to_dst_exists(road_type, sue_src, sue_dst) is False
+
+    # WHEN
+    zia_bridgeunit.set_src_to_dst(type_RoadNode_str(), sue_src, sue_dst)
+
+    # THEN
+    assert zia_bridgeunit.src_to_dst_exists(road_type, sue_src, sue_dst)
+
+
 def test_BridgeUnit_get_dst_value_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
@@ -372,6 +420,26 @@ def test_BridgeUnit_get_dst_value_ReturnsObj():
 
     # THEN
     assert zia_bridgeunit._get_dst_value(type_AcctID_str(), sue_src) == sue_dst
+
+
+def test_BridgeUnit_del_src_to_dst_ReturnsObj():
+    # ESTABLISH
+    zia_str = "Zia"
+    sue_src = "Sue"
+    sue_dst = "Suita"
+    zia_bridgeunit = bridgeunit_shop(zia_str)
+    road_type = type_RoadNode_str()
+    zia_bridgeunit.set_src_to_dst(type_RoadNode_str(), sue_src, sue_dst)
+    zia_bridgeunit.set_src_to_dst(type_RoadNode_str(), zia_str, zia_str)
+    assert zia_bridgeunit.src_to_dst_exists(road_type, sue_src, sue_dst)
+    assert zia_bridgeunit.src_to_dst_exists(road_type, zia_str, zia_str)
+
+    # WHEN
+    zia_bridgeunit.del_src_to_dst(road_type, sue_src)
+
+    # THEN
+    assert zia_bridgeunit.src_to_dst_exists(road_type, sue_src, sue_dst) is False
+    assert zia_bridgeunit.src_to_dst_exists(road_type, zia_str, zia_str)
 
 
 # def test_BridgeUnit_set_explicit_label_map_SetsAttr():

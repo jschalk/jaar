@@ -287,6 +287,12 @@ class BridgeUnit:
     def _get_dst_value(self, x_python_type: str, x_src: str) -> str:
         return self.get_bridgekind(x_python_type)._get_dst_value(x_src)
 
+    def src_to_dst_exists(self, x_python_type: str, x_src: str, x_dst: str) -> bool:
+        return self.get_bridgekind(x_python_type).src_to_dst_exists(x_src, x_dst)
+
+    def del_src_to_dst(self, x_python_type: str, x_src: str):
+        self.get_bridgekind(x_python_type).del_src_to_dst(x_src)
+
     def get_dict(self) -> dict:
         return {
             "face_id": self.face_id,
