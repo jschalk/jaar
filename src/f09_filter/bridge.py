@@ -18,12 +18,7 @@ from src.f01_road.road import (
     RoadUnit,
     RoadNode,
 )
-from src.f04_gift.atom_config import (
-    get_atom_args_python_types,
-    type_AcctID_str,
-    type_GroupID_str,
-    type_RoadUnit_str,
-)
+from src.f04_gift.atom_config import get_atom_args_python_types
 from dataclasses import dataclass
 from copy import copy as copy_copy
 
@@ -261,10 +256,23 @@ class BridgeUnit:
             exception_str = f"set_bridgekind Error: BrideUnit unknown_word is '{self.unknown_word}', BridgeKind is '{x_bridgekind.unknown_word}'."
             raise atom_args_python_typeException(exception_str)
 
-        self.bridgekinds[x_bridgekind.python_type] = x_bridgekind
+        x_python_type = x_bridgekind.python_type
+        if x_python_type in {"RoadUnit", "RoadNode"}:
+            x_python_type = "road"
+
+        self.bridgekinds[x_python_type] = x_bridgekind
 
     def get_bridgekind(self, x_python_type: str) -> BridgeKind:
+        if x_python_type in {"RoadUnit", "RoadNode"}:
+            x_python_type = "road"
         return self.bridgekinds.get(x_python_type)
+
+    def is_valid(self) -> bool:
+        for x_brandkind in self.bridgekinds.values():
+            if x_brandkind.is_valid() is False:
+                print(f"{x_brandkind=}")
+                return False
+        return True
 
     # def set_atom_arg(self, x_atom_arg: str):
     #     x_atom_python_type = get_atom_args_python_types().get(x_atom_arg)
@@ -292,20 +300,20 @@ def bridgeunit_shop(
         x_dst_road_delimiter = default_road_delimiter_if_none()
 
     x_bridgekinds = {
-        type_AcctID_str(): bridgekind_shop(
-            x_python_type=type_AcctID_str(),
+        "AcctID": bridgekind_shop(
+            x_python_type="AcctID",
             x_unknown_word=x_unknown_word,
             x_src_road_delimiter=x_src_road_delimiter,
             x_dst_road_delimiter=x_dst_road_delimiter,
         ),
-        type_GroupID_str(): bridgekind_shop(
-            x_python_type=type_GroupID_str(),
+        "GroupID": bridgekind_shop(
+            x_python_type="GroupID",
             x_unknown_word=x_unknown_word,
             x_src_road_delimiter=x_src_road_delimiter,
             x_dst_road_delimiter=x_dst_road_delimiter,
         ),
-        type_RoadUnit_str(): bridgekind_shop(
-            x_python_type=type_RoadUnit_str(),
+        "road": bridgekind_shop(
+            x_python_type="RoadUnit",
             x_unknown_word=x_unknown_word,
             x_src_road_delimiter=x_src_road_delimiter,
             x_dst_road_delimiter=x_dst_road_delimiter,

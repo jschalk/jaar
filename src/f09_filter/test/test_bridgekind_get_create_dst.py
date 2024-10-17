@@ -14,30 +14,30 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label():
     casa_src = "casa"
     casa_dst = "casa"
     dst_r_delimiter = ":"
-    label_bridgekind = bridgekind_shop(
+    roadnode_bridgekind = bridgekind_shop(
         type_RoadNode_str(), src_r_delimiter, dst_r_delimiter
     )
-    label_bridgekind.set_src_to_dst(clean_src, clean_dst)
-    label_bridgekind.set_src_to_dst(casa_src, casa_dst)
-    assert label_bridgekind.is_valid()
+    roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)
+    roadnode_bridgekind.set_src_to_dst(casa_src, casa_dst)
+    assert roadnode_bridgekind.is_valid()
 
     # WHEN / THEN
-    assert label_bridgekind.get_create_dst(clean_src) == clean_dst
-    assert label_bridgekind.get_create_dst(casa_src) == casa_dst
+    assert roadnode_bridgekind.get_create_dst(clean_src) == clean_dst
+    assert roadnode_bridgekind.get_create_dst(casa_src) == casa_dst
     swim_str = "swim"
-    assert label_bridgekind.get_create_dst(swim_str, False) is None
-    assert label_bridgekind.src_exists(swim_str) is False
+    assert roadnode_bridgekind.get_create_dst(swim_str, False) is None
+    assert roadnode_bridgekind.src_exists(swim_str) is False
 
     # WHEN
-    assert label_bridgekind.get_create_dst(swim_str) == swim_str
+    assert roadnode_bridgekind.get_create_dst(swim_str) == swim_str
     # THEN
-    assert label_bridgekind.src_exists(swim_str)
+    assert roadnode_bridgekind.src_exists(swim_str)
 
     # WHEN / THEN
     fail_clean_src = f"clean{dst_r_delimiter}"
-    assert label_bridgekind.src_exists(fail_clean_src) is False
-    assert label_bridgekind.get_create_dst(fail_clean_src) is None
-    assert label_bridgekind.src_exists(fail_clean_src) is False
+    assert roadnode_bridgekind.src_exists(fail_clean_src) is False
+    assert roadnode_bridgekind.get_create_dst(fail_clean_src) is None
+    assert roadnode_bridgekind.src_exists(fail_clean_src) is False
 
 
 def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label_With_explicit_label_map():
@@ -48,22 +48,22 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label_With_explicit_lab
     casa_src = "casa"
     casa_dst = "house"
     dst_r_delimiter = ":"
-    label_bridgekind = bridgekind_shop(
+    roadnode_bridgekind = bridgekind_shop(
         type_RoadNode_str(), src_r_delimiter, dst_r_delimiter
     )
-    label_bridgekind.set_src_to_dst(clean_src, clean_dst)
-    label_bridgekind.set_explicit_label_map(casa_src, casa_dst)
+    roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)
+    roadnode_bridgekind.set_explicit_label_map(casa_src, casa_dst)
     assert casa_src != casa_dst
-    assert label_bridgekind.explicit_label_map_exists(casa_src, casa_dst)
-    assert label_bridgekind.src_to_dst_exists(casa_src, casa_dst) is False
+    assert roadnode_bridgekind.explicit_label_map_exists(casa_src, casa_dst)
+    assert roadnode_bridgekind.src_to_dst_exists(casa_src, casa_dst) is False
 
     # WHEN
-    generated_dst = label_bridgekind.get_create_dst(casa_src)
+    generated_dst = roadnode_bridgekind.get_create_dst(casa_src)
 
     # THEN
     assert generated_dst == casa_dst
-    assert label_bridgekind.explicit_label_map_exists(casa_src, casa_dst)
-    assert label_bridgekind.src_to_dst_exists(casa_src, casa_dst)
+    assert roadnode_bridgekind.explicit_label_map_exists(casa_src, casa_dst)
+    assert roadnode_bridgekind.src_to_dst_exists(casa_src, casa_dst)
     print(f"{casa_dst=}")
 
 
@@ -200,17 +200,17 @@ def test_BridgeKind_get_create_dst_AddsMissingElementsTo_src_to_dst():
     casa_src = "casa"
     casa_dst = "casa"
     dst_r_delimiter = ":"
-    label_bridgekind = bridgekind_shop(
+    roadnode_bridgekind = bridgekind_shop(
         type_RoadNode_str(), src_r_delimiter, dst_r_delimiter
     )
-    label_bridgekind.set_src_to_dst(clean_src, clean_dst)
-    label_bridgekind.set_src_to_dst(casa_src, casa_dst)
+    roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)
+    roadnode_bridgekind.set_src_to_dst(casa_src, casa_dst)
     swim_str = "swim"
-    assert label_bridgekind.src_exists(swim_str) is False
+    assert roadnode_bridgekind.src_exists(swim_str) is False
 
     # WHEN
-    assert label_bridgekind.get_create_dst(swim_str, True) == swim_str
+    assert roadnode_bridgekind.get_create_dst(swim_str, True) == swim_str
 
     # THEN
-    assert label_bridgekind.src_exists(swim_str)
-    assert label_bridgekind.src_to_dst_exists(swim_str, swim_str)
+    assert roadnode_bridgekind.src_exists(swim_str)
+    assert roadnode_bridgekind.src_to_dst_exists(swim_str, swim_str)

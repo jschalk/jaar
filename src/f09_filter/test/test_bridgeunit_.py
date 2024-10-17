@@ -1,8 +1,7 @@
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import (
-    acct_id_str,
     get_atom_args_python_types,
-    credit_vote_str,
+    road_str,
     type_AcctID_str,
     type_GroupID_str,
     type_RoadNode_str,
@@ -15,6 +14,14 @@ from src.f09_filter.bridge import (
     default_unknown_word,
     filterable_python_types,
     filterable_atom_args,
+)
+from src.f09_filter.examples.examples_filter import (
+    get_invalid_acctid_bridgekind,
+    get_invalid_groupid_bridgekind,
+    get_invalid_road_bridgekind,
+    get_clean_roadunit_bridgekind,
+    get_swim_groupid_bridgekind,
+    get_suita_acctid_bridgekind,
 )
 from pytest import raises as pytest_raises
 
@@ -102,7 +109,7 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
     assert groupid_bridgekind.unknown_word == default_unknown_word()
     assert groupid_bridgekind.src_road_delimiter == default_road_delimiter_if_none()
     assert groupid_bridgekind.dst_road_delimiter == default_road_delimiter_if_none()
-    road_bridgekind = sue_bridgeunit.bridgekinds.get(type_RoadUnit_str())
+    road_bridgekind = sue_bridgeunit.bridgekinds.get(road_str())
     assert road_bridgekind.unknown_word == default_unknown_word()
     assert road_bridgekind.src_road_delimiter == default_road_delimiter_if_none()
     assert road_bridgekind.dst_road_delimiter == default_road_delimiter_if_none()
@@ -134,13 +141,13 @@ def test_bridgeunit_shop_ReturnsObj_scenario1():
     assert groupid_bridgekind.unknown_word == y_unknown_word
     assert groupid_bridgekind.src_road_delimiter == slash_src_road_delimiter
     assert groupid_bridgekind.dst_road_delimiter == colon_dst_road_delimiter
-    road_bridgekind = sue_bridgeunit.bridgekinds.get(type_RoadUnit_str())
+    road_bridgekind = sue_bridgeunit.bridgekinds.get(road_str())
     assert road_bridgekind.unknown_word == y_unknown_word
     assert road_bridgekind.src_road_delimiter == slash_src_road_delimiter
     assert road_bridgekind.dst_road_delimiter == colon_dst_road_delimiter
 
 
-def test_BridgeKind_set_bridgekind_SetsAttr():
+def test_BridgeUnit_set_bridgekind_SetsAttr():
     # ESTABLISH
     sue_bridgeunit = bridgeunit_shop("Sue")
     acct_id_bridgekind = bridgekind_shop(type_AcctID_str())
@@ -154,7 +161,35 @@ def test_BridgeKind_set_bridgekind_SetsAttr():
     assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) == acct_id_bridgekind
 
 
-def test_BridgeKind_set_bridgekind_RaisesErrorIf_bridgekind_src_road_delimiter_IsNotSame():
+def test_BridgeUnit_set_bridgekind_SetsAttr_SpecialCase_RoadUnit():
+    # ESTABLISH
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    road_bridgekind = bridgekind_shop(type_RoadUnit_str())
+    road_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
+    assert sue_bridgeunit.bridgekinds.get(road_str()) != road_bridgekind
+
+    # WHEN
+    sue_bridgeunit.set_bridgekind(road_bridgekind)
+
+    # THEN
+    assert sue_bridgeunit.bridgekinds.get(road_str()) == road_bridgekind
+
+
+def test_BridgeUnit_set_bridgekind_SetsAttr_SpecialCase_RoadNode():
+    # ESTABLISH
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    road_bridgekind = bridgekind_shop(type_RoadNode_str())
+    road_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
+    assert sue_bridgeunit.bridgekinds.get(road_str()) != road_bridgekind
+
+    # WHEN
+    sue_bridgeunit.set_bridgekind(road_bridgekind)
+
+    # THEN
+    assert sue_bridgeunit.bridgekinds.get(road_str()) == road_bridgekind
+
+
+def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_src_road_delimiter_IsNotSame():
     # ESTABLISH
     sue_bridgeunit = bridgeunit_shop("Sue")
     slash_src_road_delimiter = "/"
@@ -171,7 +206,7 @@ def test_BridgeKind_set_bridgekind_RaisesErrorIf_bridgekind_src_road_delimiter_I
     assert str(excinfo.value) == exception_str
 
 
-def test_BridgeKind_set_bridgekind_RaisesErrorIf_bridgekind_dst_road_delimiter_IsNotSame():
+def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_dst_road_delimiter_IsNotSame():
     # ESTABLISH
     sue_bridgeunit = bridgeunit_shop("Sue")
     slash_dst_road_delimiter = "/"
@@ -188,7 +223,7 @@ def test_BridgeKind_set_bridgekind_RaisesErrorIf_bridgekind_dst_road_delimiter_I
     assert str(excinfo.value) == exception_str
 
 
-def test_BridgeKind_set_bridgekind_RaisesErrorIf_bridgekind_unknown_word_IsNotSame():
+def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_unknown_word_IsNotSame():
     # ESTABLISH
     sue_bridgeunit = bridgeunit_shop("Sue")
     casa_unknown_word = "Unknown_casa"
@@ -205,7 +240,7 @@ def test_BridgeKind_set_bridgekind_RaisesErrorIf_bridgekind_unknown_word_IsNotSa
     assert str(excinfo.value) == exception_str
 
 
-def test_BridgeKind_get_bridgekind_ReturnsObj():
+def test_BridgeUnit_get_bridgekind_ReturnsObj():
     # ESTABLISH
     sue_bridgeunit = bridgeunit_shop("Sue")
     static_acct_id_bridgekind = bridgekind_shop(type_AcctID_str())
@@ -217,6 +252,62 @@ def test_BridgeKind_get_bridgekind_ReturnsObj():
 
     # THEN
     assert gen_acct_id_bridgekind == static_acct_id_bridgekind
+
+
+def test_BridgeUnit_get_bridgekind_ReturnsObj_SpecialCase_RoadUnit():
+    # ESTABLISH
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    static_road_bridgekind = bridgekind_shop(type_RoadUnit_str())
+    static_road_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
+    sue_bridgeunit.set_bridgekind(static_road_bridgekind)
+
+    # WHEN
+    gen_road_bridgekind = sue_bridgeunit.get_bridgekind(type_RoadUnit_str())
+
+    # THEN
+    assert gen_road_bridgekind == static_road_bridgekind
+
+
+def test_BridgeUnit_is_valid_ReturnsObj():
+    # ESTABLISH
+    invalid_acctid_bridgekind = get_invalid_acctid_bridgekind()
+    invalid_groupid_bridgekind = get_invalid_groupid_bridgekind()
+    invalid_road_bridgekind = get_invalid_road_bridgekind()
+    valid_acctid_bridgekind = get_suita_acctid_bridgekind()
+    valid_groupid_bridgekind = get_swim_groupid_bridgekind()
+    valid_road_bridgekind = get_clean_roadunit_bridgekind()
+    assert valid_acctid_bridgekind.is_valid()
+    assert valid_groupid_bridgekind.is_valid()
+    assert valid_road_bridgekind.is_valid()
+    assert invalid_road_bridgekind.is_valid() is False
+    assert invalid_groupid_bridgekind.is_valid() is False
+    assert invalid_acctid_bridgekind.is_valid() is False
+
+    # WHEN / THEN
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    assert sue_bridgeunit.is_valid()
+    sue_bridgeunit.set_bridgekind(valid_acctid_bridgekind)
+    sue_bridgeunit.set_bridgekind(valid_groupid_bridgekind)
+    sue_bridgeunit.set_bridgekind(valid_road_bridgekind)
+    assert sue_bridgeunit.is_valid()
+
+    # WHEN / THEN
+    sue_bridgeunit.set_bridgekind(invalid_acctid_bridgekind)
+    assert sue_bridgeunit.is_valid() is False
+    sue_bridgeunit.set_bridgekind(valid_acctid_bridgekind)
+    assert sue_bridgeunit.is_valid()
+
+    # WHEN / THEN
+    sue_bridgeunit.set_bridgekind(invalid_groupid_bridgekind)
+    assert sue_bridgeunit.is_valid() is False
+    sue_bridgeunit.set_bridgekind(valid_groupid_bridgekind)
+    assert sue_bridgeunit.is_valid()
+
+    # WHEN / THEN
+    sue_bridgeunit.set_bridgekind(invalid_road_bridgekind)
+    assert sue_bridgeunit.is_valid() is False
+    sue_bridgeunit.set_bridgekind(valid_road_bridgekind)
+    assert sue_bridgeunit.is_valid()
 
 
 # def test_bridgeunit_shop_ReturnsObj_scenario1():

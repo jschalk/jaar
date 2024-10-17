@@ -290,19 +290,19 @@ def test_BridgeKind_is_valid_ReturnsObj_Scenario0_label_str():
     src_road_delimiter = "/"
     casa_src = f"casa{src_road_delimiter}"
     casa_dst = "casa"
-    label_bridgekind = bridgekind_shop(type_RoadNode_str(), src_road_delimiter)
-    assert label_bridgekind.python_type == type_RoadNode_str()
-    assert label_bridgekind.is_valid()
+    roadnode_bridgekind = bridgekind_shop(type_RoadNode_str(), src_road_delimiter)
+    assert roadnode_bridgekind.python_type == type_RoadNode_str()
+    assert roadnode_bridgekind.is_valid()
 
     # WHEN
-    label_bridgekind.set_src_to_dst(clean_str, clean_dst)
+    roadnode_bridgekind.set_src_to_dst(clean_str, clean_dst)
     # THEN
-    assert label_bridgekind.is_valid()
+    assert roadnode_bridgekind.is_valid()
 
     # WHEN
-    label_bridgekind.set_src_to_dst(casa_src, casa_dst)
+    roadnode_bridgekind.set_src_to_dst(casa_src, casa_dst)
     # THEN
-    assert label_bridgekind.is_valid() is False
+    assert roadnode_bridgekind.is_valid() is False
 
 
 def test_BridgeKind_is_valid_ReturnsObj_Scenario1_road_str():
