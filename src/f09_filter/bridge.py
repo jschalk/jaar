@@ -299,14 +299,17 @@ class BridgeUnit:
             "src_road_delimiter": self.src_road_delimiter,
             "dst_road_delimiter": self.dst_road_delimiter,
             "unknown_word": self.unknown_word,
-            "brandkinds": self.get_brandkinds_dict(),
+            "bridgekinds": self.get_bridgekinds_dict(),
         }
 
-    def get_brandkinds_dict(self) -> dict:
+    def get_bridgekinds_dict(self) -> dict:
         return {
             x_key: x_brandkind.get_dict()
             for x_key, x_brandkind in self.bridgekinds.items()
         }
+
+    def get_json(self) -> str:
+        return get_json_from_dict(self.get_dict())
 
 
 def bridgeunit_shop(
@@ -350,3 +353,20 @@ def bridgeunit_shop(
         dst_road_delimiter=x_dst_road_delimiter,
         bridgekinds=x_bridgekinds,
     )
+
+
+def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
+    return BridgeUnit(
+        face_id=x_dict.get("face_id"),
+        src_road_delimiter=x_dict.get("src_road_delimiter"),
+        dst_road_delimiter=x_dict.get("dst_road_delimiter"),
+        unknown_word=x_dict.get("unknown_word"),
+        bridgekinds=get_bridgekinds_from_dict(x_dict.get("bridgekinds")),
+    )
+
+
+def get_bridgekinds_from_dict(bridgekinds_dict: dict) -> dict[str, BridgeKind]:
+    bridgekind_objs = {}
+    for x_python_type, x_bridgekind_dict in bridgekinds_dict.items():
+        bridgekind_objs[x_python_type] = get_bridgekind_from_dict(x_bridgekind_dict)
+    return bridgekind_objs

@@ -93,3 +93,70 @@ def get_invalid_road_bridgekind() -> BridgeKind:
     roadnode_bridgekind.set_src_to_dst(clean_str, clean_dst)
     roadnode_bridgekind.set_src_to_dst(casa_src, casa_dst)
     return roadnode_bridgekind
+
+
+def get_slash_roadunit_bridgekind() -> BridgeKind:
+    src_music45_str = "music45"
+    dst_music87_str = "music87"
+    clean_src_str = "clean"
+    clean_dst_str = "prop"
+    x_unknown_word = "UnknownAcctId"
+    slash_src_road_delimiter = "/"
+    colon_dst_road_delimiter = ":"
+    clean_src_road = f"{src_music45_str}{slash_src_road_delimiter}{clean_src_str}"
+    clean_src_road = f"{src_music45_str}{colon_dst_road_delimiter}{clean_src_str}"
+    road_bridgekind = bridgekind_shop(
+        type_RoadUnit_str(),
+        x_src_road_delimiter=slash_src_road_delimiter,
+        x_dst_road_delimiter=colon_dst_road_delimiter,
+        x_unknown_word=x_unknown_word,
+        x_face_id="Sue",
+    )
+    road_bridgekind.set_explicit_label_map(clean_src_str, clean_dst_str)
+    road_bridgekind.set_src_to_dst(src_music45_str, dst_music87_str)
+    road_bridgekind.get_create_dst(clean_src_road)
+    return road_bridgekind
+
+
+def get_slash_groupid_bridgekind() -> BridgeKind:
+    x_unknown_word = "UnknownAcctId"
+    slash_src_road_delimiter = "/"
+    colon_dst_road_delimiter = ":"
+    swim_src = f"swim{slash_src_road_delimiter}"
+    swim_dst = f"nage{colon_dst_road_delimiter}"
+    climb_src = f"climb{slash_src_road_delimiter}"
+    climb_dst = f"climb{colon_dst_road_delimiter}"
+    group_id_bridgekind = bridgekind_shop(
+        type_GroupID_str(),
+        x_src_road_delimiter=slash_src_road_delimiter,
+        x_dst_road_delimiter=colon_dst_road_delimiter,
+        x_unknown_word=x_unknown_word,
+        x_face_id="Sue",
+    )
+    group_id_bridgekind.set_src_to_dst(swim_src, swim_dst)
+    group_id_bridgekind.set_src_to_dst(climb_src, climb_dst)
+    return group_id_bridgekind
+
+
+def get_slash_acctid_bridgekind() -> BridgeKind:
+    x_unknown_word = "UnknownAcctId"
+    slash_src_road_delimiter = "/"
+    colon_dst_road_delimiter = ":"
+    xio_src = "Xio"
+    sue_src = "Sue"
+    bob_src = "Bob"
+    zia_src = "Zia"
+    xio_dst = "Xioita"
+    sue_dst = "Suita"
+    bob_dst = "Bobita"
+    acct_id_bridgekind = bridgekind_shop(
+        type_AcctID_str(),
+        x_src_road_delimiter=slash_src_road_delimiter,
+        x_dst_road_delimiter=colon_dst_road_delimiter,
+        x_unknown_word=x_unknown_word,
+        x_face_id="Sue",
+    )
+    acct_id_bridgekind.set_src_to_dst(xio_src, xio_dst)
+    acct_id_bridgekind.set_src_to_dst(sue_src, sue_dst)
+    acct_id_bridgekind.set_src_to_dst(bob_src, bob_dst)
+    return acct_id_bridgekind
