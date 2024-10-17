@@ -366,7 +366,11 @@ def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
 
 
 def get_bridgekinds_from_dict(bridgekinds_dict: dict) -> dict[str, BridgeKind]:
-    bridgekind_objs = {}
-    for x_python_type, x_bridgekind_dict in bridgekinds_dict.items():
-        bridgekind_objs[x_python_type] = get_bridgekind_from_dict(x_bridgekind_dict)
-    return bridgekind_objs
+    return {
+        x_python_type: get_bridgekind_from_dict(x_bridgekind_dict)
+        for x_python_type, x_bridgekind_dict in bridgekinds_dict.items()
+    }
+
+
+def get_bridgeunit_from_json(x_json: str) -> BridgeUnit:
+    return get_bridgeunit_from_dict(get_dict_from_json(x_json))
