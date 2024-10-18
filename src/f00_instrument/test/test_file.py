@@ -1,5 +1,6 @@
 from src.f00_instrument.file import (
     create_file_path,
+    create_dir,
     dir_files,
     save_file,
     open_file,
@@ -34,6 +35,26 @@ def test_create_file_path_ReturnsObj():
     assert create_file_path(None, obj_filename) == f"/{obj_filename}"
     assert create_file_path(x_dir, None) == x_dir
     assert create_file_path(x_dir, x_file_name) == f"{x_dir}/{x_file_name}"
+
+
+def test_create_dir_SetsFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    fizz_name = "fizz_buzz"
+    fizz_dir = f"{env_dir}/{fizz_name}"
+    assert not os_path_exist(fizz_dir)
+
+    # WHEN
+    create_dir(fizz_dir)
+
+    # THEN
+    assert os_path_exist(fizz_dir)
+
+    # WHEN running it again does not error out
+    create_dir(fizz_dir)
+
+    # THEN
+    assert os_path_exist(fizz_dir)
 
 
 def test_save_file_SetsFile(env_dir_setup_cleanup):

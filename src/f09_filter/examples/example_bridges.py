@@ -6,7 +6,12 @@ from src.f04_gift.atom_config import (
     type_GroupID_str,
     type_RoadNode_str,
 )
-from src.f09_filter.bridge import bridgekind_shop, BridgeKind
+from src.f09_filter.bridge import (
+    bridgekind_shop,
+    BridgeKind,
+    BridgeUnit,
+    bridgeunit_shop,
+)
 from pandas import DataFrame
 
 
@@ -162,6 +167,14 @@ def get_slash_acctid_bridgekind() -> BridgeKind:
     acct_id_bridgekind.set_src_to_dst(sue_src, sue_dst)
     acct_id_bridgekind.set_src_to_dst(bob_src, bob_dst)
     return acct_id_bridgekind
+
+
+def get_sue_bridgeunit() -> BridgeUnit:
+    x_bridgeunit = bridgeunit_shop("Sue")
+    x_bridgeunit.set_bridgekind(get_suita_acctid_bridgekind())
+    x_bridgeunit.set_bridgekind(get_clean_roadunit_bridgekind())
+    x_bridgeunit.set_bridgekind(get_swim_groupid_bridgekind())
+    return x_bridgeunit
 
 
 def get_suita_acctid_src_dt() -> DataFrame:

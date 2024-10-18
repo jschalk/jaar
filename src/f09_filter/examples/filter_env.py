@@ -6,6 +6,10 @@ def get_test_filters_dir():
     return "src/f09_filter/examples/fiscals"
 
 
+def get_test_faces_dir():
+    return f"{get_test_filters_dir()}/faces"
+
+
 @pytest_fixture()
 def env_dir_setup_cleanup():
     env_dir = get_test_filters_dir()
