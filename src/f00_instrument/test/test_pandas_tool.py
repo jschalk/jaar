@@ -15,7 +15,6 @@ def test_save_dataframe_to_csv_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     small_dt = get_small_example01_dataframe()
-    ex_filename = "fizzbuzz"
     ex_file_name = "fizzbuzz.csv"
     ex_file_path = create_file_path(env_dir, ex_file_name)
     assert os_path_exists(ex_file_path) is False
