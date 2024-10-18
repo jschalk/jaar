@@ -1,6 +1,7 @@
-from src.f01_road.road import default_road_delimiter_if_none
+from src.f01_road.road import default_road_delimiter_if_none, create_road
 from src.f04_gift.atom_config import (
     acct_id_str,
+    base_str,
     type_RoadUnit_str,
     type_AcctID_str,
     type_GroupID_str,
@@ -17,7 +18,7 @@ from pandas import DataFrame
 
 def get_clean_roadnode_bridgekind() -> BridgeKind:
     clean_src = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     casa_src = "casa1"
     casa_dst = "casa2"
     slash_src_road_delimiter = "/"
@@ -93,7 +94,7 @@ def get_invalid_groupid_bridgekind() -> BridgeKind:
 
 def get_invalid_road_bridgekind() -> BridgeKind:
     clean_str = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     casa_src = f"casa{default_road_delimiter_if_none()}"
     casa_dst = "casa"
     roadnode_bridgekind = bridgekind_shop(type_RoadNode_str(), x_face_id="Sue")
@@ -170,11 +171,11 @@ def get_slash_acctid_bridgekind() -> BridgeKind:
 
 
 def get_sue_bridgeunit() -> BridgeUnit:
-    x_bridgeunit = bridgeunit_shop("Sue")
-    x_bridgeunit.set_bridgekind(get_suita_acctid_bridgekind())
-    x_bridgeunit.set_bridgekind(get_clean_roadunit_bridgekind())
-    x_bridgeunit.set_bridgekind(get_swim_groupid_bridgekind())
-    return x_bridgeunit
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    sue_bridgeunit.set_bridgekind(get_suita_acctid_bridgekind())
+    sue_bridgeunit.set_bridgekind(get_clean_roadunit_bridgekind())
+    sue_bridgeunit.set_bridgekind(get_swim_groupid_bridgekind())
+    return sue_bridgeunit
 
 
 def get_suita_acctid_src_dt() -> DataFrame:
@@ -200,4 +201,81 @@ def get_suita_acctid_dst_dt() -> DataFrame:
     dst_dt.loc[1, acct_id_str()] = sue_dst
     dst_dt.loc[2, acct_id_str()] = bob_dst
     dst_dt.loc[3, acct_id_str()] = zia_src
+    return dst_dt
+
+
+def get_casa_maison_bridgeunit_set_by_src_to_dst() -> BridgeUnit:
+    src_music45_str = "music45"
+    dst_music87_str = "music87"
+    casa_src_str = "casa"
+    casa_dst_str = "maison"
+    casa_src_road = create_road(src_music45_str, casa_src_str)
+    casa_dst_road = create_road(dst_music87_str, casa_dst_str)
+    clean_src_str = "clean"
+    clean_dst_str = "propre"
+    clean_src_road = create_road(casa_src_road, clean_src_str)
+    clean_dst_road = create_road(casa_dst_road, clean_dst_str)
+    sweep_str = "sweep"
+    sweep_src_road = create_road(clean_src_road, sweep_str)
+    sweep_dst_road = create_road(clean_dst_road, sweep_str)
+
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    rx = type_RoadNode_str()
+    sue_bridgeunit.set_src_to_dst(rx, src_music45_str, dst_music87_str)
+    sue_bridgeunit.set_src_to_dst(rx, casa_src_road, casa_dst_road)
+    sue_bridgeunit.set_src_to_dst(rx, clean_src_road, clean_dst_road)
+    sue_bridgeunit.set_src_to_dst(rx, sweep_src_road, sweep_dst_road)
+    return sue_bridgeunit
+
+
+# def get_casa_maison_bridgeunit_set_by_explicit_map() -> BridgeUnit:
+#     src_music45_str = "music45"
+#     dst_music87_str = "music87"
+#     casa_src_str = "casa"
+#     casa_dst_str = "maison"
+#     casa_src_road = create_road(src_music45_str, casa_src_str)
+#     casa_dst_road = create_road(dst_music87_str, casa_dst_str)
+#     clean_src_str = "clean"
+#     clean_dst_str = "propre"
+#     clean_src_road = create_road(casa_src_road, clean_src_str)
+#     clean_dst_road = create_road(casa_dst_road, clean_dst_str)
+#     sweep_str = "sweep"
+#     sweep_src_road = create_road(clean_src_road, sweep_str)
+#     sweep_dst_road = create_road(clean_dst_road, sweep_str)
+
+#     sue_bridgeunit = bridgeunit_shop("Sue")
+#     rx = type_RoadNode_str()
+#     sue_bridgeunit.(rx, src_music45_str, dst_music87_str)
+#     sue_bridgeunit.set_src_to_dst(rx, casa_src_road, casa_dst_road)
+#     sue_bridgeunit.set_src_to_dst(rx, clean_src_road, clean_dst_road)
+#     sue_bridgeunit.set_src_to_dst(rx, sweep_src_road, sweep_dst_road)
+#     return sue_bridgeunit
+
+
+def get_casa_maison_road_src_dt() -> DataFrame:
+    src_music45_str = "music45"
+    casa_src_str = "casa"
+    casa_src_road = create_road(src_music45_str, casa_src_str)
+    clean_src_str = "clean"
+    clean_src_road = create_road(casa_src_road, clean_src_str)
+    sweep_str = "sweep"
+    sweep_src_road = create_road(clean_src_road, sweep_str)
+    src_dt = DataFrame(columns=[base_str()])
+    src_dt.loc[0, base_str()] = src_music45_str
+    src_dt.loc[1, base_str()] = casa_src_road
+    src_dt.loc[2, base_str()] = clean_src_road
+    src_dt.loc[3, base_str()] = sweep_src_road
+    return src_dt
+
+
+def get_casa_maison_road_dst_dt() -> DataFrame:
+    dst_music87_str = "music87"
+    casa_dst_road = create_road(dst_music87_str, "maison")
+    clean_dst_road = create_road(casa_dst_road, "propre")
+    sweep_dst_road = create_road(clean_dst_road, "sweep")
+    dst_dt = DataFrame(columns=[base_str()])
+    dst_dt.loc[0, base_str()] = dst_music87_str
+    dst_dt.loc[1, base_str()] = casa_dst_road
+    dst_dt.loc[2, base_str()] = clean_dst_road
+    dst_dt.loc[3, base_str()] = sweep_dst_road
     return dst_dt

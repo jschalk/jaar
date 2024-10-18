@@ -9,7 +9,7 @@ from src.f09_filter.bridge import bridgekind_shop
 def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label():
     # ESTABLISH
     clean_src = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     src_r_delimiter = "/"
     casa_src = "casa"
     casa_dst = "casa"
@@ -43,7 +43,7 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label():
 def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label_With_explicit_label_map():
     # ESTABLISH
     clean_src = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     src_r_delimiter = "/"
     casa_src = "casa"
     casa_dst = "house"
@@ -195,7 +195,7 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_group_id():
 def test_BridgeKind_get_create_dst_AddsMissingElementsTo_src_to_dst():
     # ESTABLISH
     clean_src = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     src_r_delimiter = "/"
     casa_src = "casa"
     casa_dst = "casa"

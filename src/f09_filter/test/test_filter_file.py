@@ -1,4 +1,5 @@
 from src.f00_instrument.file import save_file, dir_files, create_dir
+from src.f00_instrument.pandas_tool import save_dataframe_to_csv
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import (
     acct_id_str,
@@ -25,7 +26,6 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame
 
 
-# save two dataframes to be filtered: two files in src, two files in dst
 def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
     env_dir_setup_cleanup,
 ):
@@ -52,8 +52,7 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
     example_filename = "appt_id_example.csv"
     src_file_path = f"{src_dir}/{example_filename}"
     dst_file_path = f"{dst_dir}/{example_filename}"
-    create_dir(src_dir)
-    sue_src_dt.to_csv(src_file_path, index=False)
+    save_dataframe_to_csv(sue_src_dt, src_dir, example_filename)
     assert os_path_exists(bridgeunit_file_path)
     assert os_path_exists(src_file_path)
     assert os_path_exists(dst_file_path) is False
@@ -86,7 +85,7 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
 
 
 # # save two dataframes to be filtered: two files in src, two files in dst
-# def test_filter_face_dir_files_CreatesFilteredFiles_Scenario1_FileOverRides_src_to_dst(
+# def test_filter_face_dir_files_CreatesFilteredFiles_Scenario1_TwoFile(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -94,64 +93,59 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
 #     sue_src = "Sue"
 #     xio_src = "Xio"
 #     zia_src = "Zia"
-#     old_bob_dst = "Bobita"
-#     old_sue_dst = "Suita"
-#     old_xio_dst = "Xioita"
-#     sue_bridgeunit = get_sue_bridgeunit()
-#     assert sue_bridgeunit._get_dst_value(bob_src) == old_bob_dst
-#     assert sue_bridgeunit._get_dst_value(sue_src) == old_sue_dst
-#     assert sue_bridgeunit._get_dst_value(xio_src) == old_xio_dst
-
-#     bridge_dir = f"{get_test_filters_dir()}/bridge"
-#     save_file(bridge_dir, f"{sue_src}.json", sue_bridgeunit.get_json())
-
-#     # create csv with src and new_dst
-#     # save csv to src_to_dst_dir
-#     new_bob_dst = "BobNew"
-#     new_sue_dst = "SueNew"
-#     new_xio_dst = "XioNew"
-#     src_to_dst_dir = f"{bridge_dir}/src_to_dst"
-
+#     bob_dst = "Bobita"
+#     sue_dst = "Suita"
+#     xio_dst = "Xioita"
+#     sue_bridgeunit = bridgeunit_shop(sue_src)
+#     sue_bridgeunit.set_bridgekind(get_suita_acctid_bridgekind())
+#     sue_dir = f"{get_test_faces_dir()}/{sue_src}"
+#     bridge_filename = "bridge.json"
+#     bridgeunit_file_path = f"{sue_dir}/{bridge_filename}"
+#     print(f"{sue_dir=}")
+#     save_file(sue_dir, bridge_filename, sue_bridgeunit.get_json())
 #     sue_src_dt = get_suita_acctid_src_dt()
-#     sue_dst_dt = get_suita_acctid_dst_dt()
-#     src_dir = f"{get_test_filters_dir()}/src"
-#     dst_dir = f"{get_test_filters_dir()}/dst"
+#     sue_dst_dt = get_clean_roadunit_bridgekind()
+#     src_dir = f"{sue_dir}/src"
+#     dst_dir = f"{sue_dir}/dst"
 
-#     save_file(src_dir, f"{sue_src}.json", "save to create dir")
-#     save_file(dst_dir, f"{sue_src}.json", "save to create dir")
-#     bridgeunit_file_path = f"{bridge_dir}/{sue_src}.json"
-#     src_file_path = f"{src_dir}/{sue_src}.csv"
-#     dst_file_path = f"{dst_dir}/{new_sue_dst}.csv"
+#     example1_filename = "appt_id_example1.csv"
+#     example2_filename = "appt_id_example2.csv"
+#     src1_file_path = f"{src_dir}/{example1_filename}"
+#     src2_file_path = f"{src_dir}/{example2_filename}"
+#     dst1_file_path = f"{dst_dir}/{example1_filename}"
+#     dst2_file_path = f"{dst_dir}/{example2_filename}"
+
+#     create_dir(src_dir)
 #     sue_src_dt.to_csv(src_file_path, index=False)
 #     assert os_path_exists(bridgeunit_file_path)
 #     assert os_path_exists(src_file_path)
 #     assert os_path_exists(dst_file_path) is False
 
 #     # WHEN
-#     filter_face_dir_files(src_dir, dst_dir, bridge_dir)
+#     filter_face_dir_files(sue_dir)
 
 #     # THEN
 #     assert os_path_exists(bridgeunit_file_path)
 #     assert os_path_exists(src_file_path)
 #     assert os_path_exists(dst_file_path)
-#     gen_dst_dt = open_brick_csv(dst_dir, f"{new_sue_dst}.csv")
+#     gen_dst_dt = open_brick_csv(dst_dir, example_filename)
 #     assert gen_dst_dt.iloc[0][acct_id_str()] == zia_src
-#     assert gen_dst_dt.iloc[1][acct_id_str()] == new_sue_dst
+#     assert gen_dst_dt.iloc[1][acct_id_str()] == sue_dst
 #     assert gen_dst_dt.to_csv() != sue_src_dt.to_csv()
-#     example_dst_dt = DataFrame(columns=[acct_id_str()])
-#     example_dst_dt.loc[0, acct_id_str()] = zia_src
-#     example_dst_dt.loc[1, acct_id_str()] = new_sue_dst
-#     example_dst_dt.loc[2, acct_id_str()] = new_bob_dst
-#     example_dst_dt.loc[3, acct_id_str()] = new_xio_dst
-#     assert gen_dst_dt.iloc[0][acct_id_str()] == example_dst_dt.iloc[0][acct_id_str()]
-#     assert gen_dst_dt.iloc[1][acct_id_str()] == example_dst_dt.iloc[1][acct_id_str()]
-#     assert gen_dst_dt.iloc[2][acct_id_str()] == example_dst_dt.iloc[2][acct_id_str()]
-#     assert gen_dst_dt.iloc[3][acct_id_str()] == example_dst_dt.iloc[3][acct_id_str()]
+#     static_dst_dt = DataFrame(columns=[acct_id_str()])
+#     static_dst_dt.loc[0, acct_id_str()] = zia_src
+#     static_dst_dt.loc[1, acct_id_str()] = sue_dst
+#     static_dst_dt.loc[2, acct_id_str()] = bob_dst
+#     static_dst_dt.loc[3, acct_id_str()] = xio_dst
+#     assert gen_dst_dt.iloc[0][acct_id_str()] == static_dst_dt.iloc[0][acct_id_str()]
+#     assert gen_dst_dt.iloc[1][acct_id_str()] == static_dst_dt.iloc[1][acct_id_str()]
+#     assert gen_dst_dt.iloc[2][acct_id_str()] == static_dst_dt.iloc[2][acct_id_str()]
+#     assert gen_dst_dt.iloc[3][acct_id_str()] == static_dst_dt.iloc[3][acct_id_str()]
 #     print(f"{gen_dst_dt.to_csv(index=False)=}")
 #     gen_csv = gen_dst_dt.sort_values(acct_id_str()).to_csv(index=False)
 #     sue_dst_csv = sue_dst_dt.sort_values(acct_id_str()).to_csv(index=False)
 #     assert gen_csv == sue_dst_csv
-#     assert gen_dst_dt.to_csv() == example_dst_dt.to_csv()
+#     assert gen_dst_dt.to_csv() == static_dst_dt.to_csv()
 
 
 # # save two dataframes to be filtered: two files in src, two files in dst

@@ -14,7 +14,7 @@ from src.f09_filter.bridge import (
 def test_BridgeKind_get_dict_ReturnsObj():
     # ESTABLISH
     clean_src = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     casa_src = "casa1"
     casa_dst = "casa2"
     sue_str = "Sue"
@@ -57,7 +57,7 @@ def test_BridgeKind_get_json_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     clean_src = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     casa_src = "casa1"
     casa_dst = "casa2"
     slash_src_road_delimiter = "/"
@@ -103,7 +103,7 @@ def test_get_bridgekind_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     clean_src = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     casa_src = "casa1"
     casa_dst = "casa2"
     slash_src_road_delimiter = "/"
@@ -125,7 +125,7 @@ def test_get_bridgekind_from_dict_ReturnsObj():
 def test_get_bridgekind_from_json_ReturnsObj():
     # ESTABLISH
     clean_src = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     slash_src_road_delimiter = "/"
     roadnode_bridgekind = bridgekind_shop(type_RoadNode_str(), slash_src_road_delimiter)
     roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)

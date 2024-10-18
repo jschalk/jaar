@@ -1,3 +1,4 @@
+from src.f01_road.road import create_road
 from src.f04_gift.atom_config import (
     acct_id_str,
     fiscal_id_str,
@@ -10,6 +11,11 @@ from src.f09_filter.filter import (
     filter_single_column_dataframe,
     filter_all_columns_dataframe,
     get_dataframe_filterable_columns,
+)
+from src.f09_filter.examples.example_bridges import (
+    get_casa_maison_bridgeunit_set_by_src_to_dst,
+    get_casa_maison_road_src_dt,
+    get_casa_maison_road_dst_dt,
 )
 from pandas import DataFrame
 from copy import deepcopy as copy_deepcopy
@@ -119,7 +125,7 @@ def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5row
     assert src_dt.to_csv() == dst_dt.to_csv()
 
 
-def test_filter_all_columns_dataframe_SetsParameterAttrs():
+def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     # ESTABLISH
     yao_str = "Yao"
     xio_src = "Xio"
@@ -154,6 +160,84 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs():
     dst_dt.loc[1] = ["ZZ", sue_dst, 12]
     dst_dt.loc[2] = ["ZZ", bob_dst, 12]
     dst_dt.loc[3] = ["ZZ", xio_dst, 12]
+    print(f"{str(src_dt.to_csv())=}")
+    print(f"{str(dst_dt.to_csv())=}")
+    assert src_dt.to_csv() == dst_dt.to_csv()
+
+
+def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_bridgeunit_set_by_src_to_dst():
+    # ESTABLISH
+    src_music45_str = "music45"
+    dst_music87_str = "music87"
+    casa_src_str = "casa"
+    casa_dst_str = "maison"
+    casa_src_road = create_road(src_music45_str, casa_src_str)
+    casa_dst_road = create_road(dst_music87_str, casa_dst_str)
+    clean_src_str = "clean"
+    clean_dst_str = "propre"
+    clean_src_road = create_road(casa_src_road, clean_src_str)
+    clean_dst_road = create_road(casa_dst_road, clean_dst_str)
+    sweep_str = "sweep"
+    sweep_src_road = create_road(clean_src_road, sweep_str)
+    sweep_dst_road = create_road(clean_dst_road, sweep_str)
+    yao_bridgeunit = get_casa_maison_bridgeunit_set_by_src_to_dst()
+    src_dt = get_casa_maison_road_src_dt()
+    old_src_dt = copy_deepcopy(src_dt)
+    assert src_dt.iloc[0][base_str()] == src_music45_str
+    assert src_dt.iloc[1][base_str()] == casa_src_road
+    assert src_dt.iloc[2][base_str()] == clean_src_road
+    assert src_dt.iloc[3][base_str()] == sweep_src_road
+    print(f"{src_dt=}")
+
+    # WHEN
+    filter_all_columns_dataframe(src_dt, yao_bridgeunit)
+
+    # THEN
+    assert src_dt.iloc[0][base_str()] == dst_music87_str
+    assert src_dt.iloc[1][base_str()] == casa_dst_road
+    assert src_dt.iloc[2][base_str()] == clean_dst_road
+    assert src_dt.iloc[3][base_str()] == sweep_dst_road
+    assert src_dt.to_csv() != old_src_dt.to_csv()
+    dst_dt = get_casa_maison_road_dst_dt()
+    print(f"{str(src_dt.to_csv())=}")
+    print(f"{str(dst_dt.to_csv())=}")
+    assert src_dt.to_csv() == dst_dt.to_csv()
+
+
+def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_bridgeunit_set_by_explicit_map():
+    # ESTABLISH
+    src_music45_str = "music45"
+    dst_music87_str = "music87"
+    casa_src_str = "casa"
+    casa_dst_str = "maison"
+    casa_src_road = create_road(src_music45_str, casa_src_str)
+    casa_dst_road = create_road(dst_music87_str, casa_dst_str)
+    clean_src_str = "clean"
+    clean_dst_str = "propre"
+    clean_src_road = create_road(casa_src_road, clean_src_str)
+    clean_dst_road = create_road(casa_dst_road, clean_dst_str)
+    sweep_str = "sweep"
+    sweep_src_road = create_road(clean_src_road, sweep_str)
+    sweep_dst_road = create_road(clean_dst_road, sweep_str)
+    yao_bridgeunit = get_casa_maison_bridgeunit_set_by_src_to_dst()
+    src_dt = get_casa_maison_road_src_dt()
+    old_src_dt = copy_deepcopy(src_dt)
+    assert src_dt.iloc[0][base_str()] == src_music45_str
+    assert src_dt.iloc[1][base_str()] == casa_src_road
+    assert src_dt.iloc[2][base_str()] == clean_src_road
+    assert src_dt.iloc[3][base_str()] == sweep_src_road
+    print(f"{src_dt=}")
+
+    # WHEN
+    filter_all_columns_dataframe(src_dt, yao_bridgeunit)
+
+    # THEN
+    assert src_dt.iloc[0][base_str()] == dst_music87_str
+    assert src_dt.iloc[1][base_str()] == casa_dst_road
+    assert src_dt.iloc[2][base_str()] == clean_dst_road
+    assert src_dt.iloc[3][base_str()] == sweep_dst_road
+    assert src_dt.to_csv() != old_src_dt.to_csv()
+    dst_dt = get_casa_maison_road_dst_dt()
     print(f"{str(src_dt.to_csv())=}")
     print(f"{str(dst_dt.to_csv())=}")
     assert src_dt.to_csv() == dst_dt.to_csv()
