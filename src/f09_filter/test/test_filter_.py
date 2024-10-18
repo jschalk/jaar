@@ -204,7 +204,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_
     assert src_dt.to_csv() == dst_dt.to_csv()
 
 
-def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_bridgeunit_set_by_explicit_map():
+def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_bridgeunit_set_by_explicit_label_map():
     # ESTABLISH
     src_music45_str = "music45"
     dst_music87_str = "music87"

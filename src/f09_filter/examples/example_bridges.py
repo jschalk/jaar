@@ -228,28 +228,28 @@ def get_casa_maison_bridgeunit_set_by_src_to_dst() -> BridgeUnit:
     return sue_bridgeunit
 
 
-# def get_casa_maison_bridgeunit_set_by_explicit_map() -> BridgeUnit:
-#     src_music45_str = "music45"
-#     dst_music87_str = "music87"
-#     casa_src_str = "casa"
-#     casa_dst_str = "maison"
-#     casa_src_road = create_road(src_music45_str, casa_src_str)
-#     casa_dst_road = create_road(dst_music87_str, casa_dst_str)
-#     clean_src_str = "clean"
-#     clean_dst_str = "propre"
-#     clean_src_road = create_road(casa_src_road, clean_src_str)
-#     clean_dst_road = create_road(casa_dst_road, clean_dst_str)
-#     sweep_str = "sweep"
-#     sweep_src_road = create_road(clean_src_road, sweep_str)
-#     sweep_dst_road = create_road(clean_dst_road, sweep_str)
+def get_casa_maison_bridgeunit_set_by_explicit_label_map() -> BridgeUnit:
+    src_music45_str = "music45"
+    dst_music87_str = "music87"
+    casa_src_str = "casa"
+    casa_dst_str = "maison"
+    casa_src_road = create_road(src_music45_str, casa_src_str)
+    casa_dst_road = create_road(dst_music87_str, casa_dst_str)
+    clean_src_str = "clean"
+    clean_dst_str = "propre"
+    clean_src_road = create_road(casa_src_road, clean_src_str)
+    clean_dst_road = create_road(casa_dst_road, clean_dst_str)
+    sweep_str = "sweep"
+    sweep_src_road = create_road(clean_src_road, sweep_str)
+    sweep_dst_road = create_road(clean_dst_road, sweep_str)
 
-#     sue_bridgeunit = bridgeunit_shop("Sue")
-#     rx = type_RoadNode_str()
-#     sue_bridgeunit.(rx, src_music45_str, dst_music87_str)
-#     sue_bridgeunit.set_src_to_dst(rx, casa_src_road, casa_dst_road)
-#     sue_bridgeunit.set_src_to_dst(rx, clean_src_road, clean_dst_road)
-#     sue_bridgeunit.set_src_to_dst(rx, sweep_src_road, sweep_dst_road)
-#     return sue_bridgeunit
+    sue_bridgeunit = bridgeunit_shop("Sue")
+    rx = type_RoadNode_str()
+    sue_bridgeunit.set_explicit_label_map(rx, src_music45_str, dst_music87_str)
+    sue_bridgeunit.set_explicit_label_map(rx, casa_src_road, casa_dst_road)
+    sue_bridgeunit.set_explicit_label_map(rx, clean_src_road, clean_dst_road)
+    sue_bridgeunit.set_explicit_label_map(rx, sweep_src_road, sweep_dst_road)
+    return sue_bridgeunit
 
 
 def get_casa_maison_road_src_dt() -> DataFrame:

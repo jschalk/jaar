@@ -293,6 +293,21 @@ class BridgeUnit:
     def del_src_to_dst(self, x_python_type: str, x_src: str):
         self.get_bridgekind(x_python_type).del_src_to_dst(x_src)
 
+    def set_explicit_label_map(self, x_python_type: str, x_src: str, x_dst: str):
+        self.get_bridgekind(x_python_type).set_explicit_label_map(x_src, x_dst)
+
+    def _get_explicit_dst_label(self, x_python_type: str, x_src: str) -> str:
+        return self.get_bridgekind(x_python_type)._get_explicit_dst_label(x_src)
+
+    def explicit_label_map_exists(
+        self, x_python_type: str, x_src: str, x_dst: str
+    ) -> bool:
+        x_bridgekind = self.get_bridgekind(x_python_type)
+        return x_bridgekind.explicit_label_map_exists(x_src, x_dst)
+
+    def del_explicit_label_map(self, x_python_type: str, x_src: str):
+        self.get_bridgekind(x_python_type).del_explicit_label_map(x_src)
+
     def get_dict(self) -> dict:
         return {
             "face_id": self.face_id,
