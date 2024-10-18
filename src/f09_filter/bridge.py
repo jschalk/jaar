@@ -18,7 +18,6 @@ from src.f01_road.road import (
     RoadUnit,
     RoadNode,
 )
-from src.f04_gift.atom_config import get_atom_args_python_types
 from dataclasses import dataclass
 from copy import copy as copy_copy
 

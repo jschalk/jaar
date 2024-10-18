@@ -1,8 +1,9 @@
-from src.f00_instrument.file import save_file, dir_files, create_dir
+from src.f00_instrument.file import save_file
 from src.f00_instrument.pandas_tool import save_dataframe_to_csv
-from src.f01_road.road import default_road_delimiter_if_none
+from src.f01_road.road import default_road_delimiter_if_none, create_road
 from src.f04_gift.atom_config import (
     acct_id_str,
+    base_str,
     road_str,
     type_AcctID_str,
     type_GroupID_str,
@@ -15,6 +16,9 @@ from src.f09_filter.examples.filter_env import (
     get_test_faces_dir,
 )
 from src.f09_filter.examples.example_bridges import (
+    get_casa_maison_bridgeunit_set_by_explicit_label_map,
+    get_casa_maison_road_src_dt,
+    get_casa_maison_road_dst_dt,
     get_clean_roadunit_bridgekind,
     get_swim_groupid_bridgekind,
     get_suita_acctid_bridgekind,
@@ -148,62 +152,61 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
 #     assert gen_dst_dt.to_csv() == static_dst_dt.to_csv()
 
 
-# # save two dataframes to be filtered: two files in src, two files in dst
-# def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_SingleFile_RoadUnit(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_src = "Sue"
-#     sue_dst = "Suita"
-#     src_music45_str = "music45"
-#     dst_music87_str = "music87"
-#     clean_src_str = "clean"
-#     clean_dst_str = "prop"
-#     road_delimiter = default_road_delimiter_if_none()
-#     clean_src_road = f"{src_music45_str}{road_delimiter}{clean_src_str}"
-#     bridge_dir = f"{get_test_filters_dir()}/bridge"
-#     save_file(bridge_dir, f"{sue_src}.json", get_sue_bridgeunit().get_json())
-#     sue_src_dt = get_suita_acctid_src_dt()
-#     sue_dst_dt = get_suita_acctid_dst_dt()
-#     src_dir = f"{get_test_filters_dir()}/src"
-#     dst_dir = f"{get_test_filters_dir()}/dst"
+# save two dataframes to be filtered: two files in src, two files in dst
+def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_SingleFile_RoadUnit(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    src_music45_str = "music45"
+    dst_music87_str = "music87"
+    casa_src_str = "casa"
+    casa_dst_str = "maison"
+    casa_src_road = create_road(src_music45_str, casa_src_str)
+    casa_dst_road = create_road(dst_music87_str, casa_dst_str)
+    clean_src_str = "clean"
+    clean_dst_str = "propre"
+    clean_src_road = create_road(casa_src_road, clean_src_str)
+    clean_dst_road = create_road(casa_dst_road, clean_dst_str)
+    sweep_str = "sweep"
+    sweep_src_road = create_road(clean_src_road, sweep_str)
+    sweep_dst_road = create_road(clean_dst_road, sweep_str)
 
-#     save_file(src_dir, f"{sue_src}.json", "save to create dir")
-#     save_file(dst_dir, f"{sue_src}.json", "save to create dir")
-#     bridgeunit_file_path = f"{bridge_dir}/{sue_src}.json"
-#     src_file_path = f"{src_dir}/{sue_src}.csv"
-#     dst_file_path = f"{dst_dir}/{sue_dst}.csv"
-#     sue_src_dt.to_csv(src_file_path, index=False)
-#     assert os_path_exists(bridgeunit_file_path)
-#     assert os_path_exists(src_file_path)
-#     assert os_path_exists(dst_file_path) is False
+    sue_bridgeunit = get_casa_maison_bridgeunit_set_by_explicit_label_map()
+    sue_dir = f"{get_test_faces_dir()}/{sue_bridgeunit.face_id}"
+    save_file(sue_dir, "bridge.json", sue_bridgeunit.get_json())
+    sue_src_dt = get_casa_maison_road_src_dt()
+    sue_dst_dt = get_casa_maison_road_dst_dt()
+    src_dir = f"{sue_dir}/src"
+    dst_dir = f"{sue_dir}/dst"
 
-#     # WHEN
-#     filter_face_dir_files(src_dir, dst_dir, bridge_dir)
+    example_filename = "road1_example.csv"
+    src_file_path = f"{src_dir}/{example_filename}"
+    dst_file_path = f"{dst_dir}/{example_filename}"
+    save_dataframe_to_csv(sue_src_dt, src_dir, example_filename)
+    assert os_path_exists(src_file_path)
+    assert os_path_exists(dst_file_path) is False
 
-#     # THEN
-#     assert os_path_exists(bridgeunit_file_path)
-#     assert os_path_exists(src_file_path)
-#     assert os_path_exists(dst_file_path)
-#     gen_dst_dt = open_brick_csv(dst_dir, f"{sue_dst}.csv")
-#     # assert gen_dst_dt.iloc[0][acct_id_str()] == zia_src
-#     # assert gen_dst_dt.iloc[1][acct_id_str()] == sue_dst
-#     # assert gen_dst_dt.to_csv() != sue_src_dt.to_csv()
-#     # example_dst_dt = DataFrame(columns=[acct_id_str()])
-#     # example_dst_dt.loc[0, acct_id_str()] = zia_src
-#     # example_dst_dt.loc[1, acct_id_str()] = sue_dst
-#     # example_dst_dt.loc[2, acct_id_str()] = bob_dst
-#     # example_dst_dt.loc[3, acct_id_str()] = xio_dst
-#     # assert gen_dst_dt.iloc[0][acct_id_str()] == example_dst_dt.iloc[0][acct_id_str()]
-#     # assert gen_dst_dt.iloc[1][acct_id_str()] == example_dst_dt.iloc[1][acct_id_str()]
-#     # assert gen_dst_dt.iloc[2][acct_id_str()] == example_dst_dt.iloc[2][acct_id_str()]
-#     # assert gen_dst_dt.iloc[3][acct_id_str()] == example_dst_dt.iloc[3][acct_id_str()]
-#     # print(f"{gen_dst_dt.to_csv(index=False)=}")
-#     # gen_csv = gen_dst_dt.sort_values(acct_id_str()).to_csv(index=False)
-#     # sue_dst_csv = sue_dst_dt.sort_values(acct_id_str()).to_csv(index=False)
-#     # assert gen_csv == sue_dst_csv
-#     # assert gen_dst_dt.to_csv() == example_dst_dt.to_csv()
-#     assert 1 == 2
+    # WHEN
+    filter_face_dir_files(sue_dir)
+
+    # THEN
+    assert os_path_exists(src_file_path)
+    assert os_path_exists(dst_file_path)
+    print(f"{sue_src_dt=} \n")
+    print(f"{sue_dst_dt=} \n")
+    gen_dst_dt = open_brick_csv(dst_dir, example_filename)
+    assert gen_dst_dt.iloc[0][base_str()] == dst_music87_str
+    assert gen_dst_dt.iloc[1][base_str()] == casa_dst_road
+    assert gen_dst_dt.to_csv() != sue_src_dt.to_csv()
+    assert gen_dst_dt.iloc[0][base_str()] == sue_dst_dt.iloc[0][base_str()]
+    assert gen_dst_dt.iloc[1][base_str()] == sue_dst_dt.iloc[1][base_str()]
+    assert gen_dst_dt.iloc[2][base_str()] == sue_dst_dt.iloc[2][base_str()]
+    assert gen_dst_dt.iloc[3][base_str()] == sue_dst_dt.iloc[3][base_str()]
+    print(f"{gen_dst_dt.to_csv(index=False)=}")
+    gen_csv = gen_dst_dt.sort_values(base_str()).to_csv(index=False)
+    sue_dst_csv = sue_dst_dt.sort_values(base_str()).to_csv(index=False)
+    assert gen_csv == sue_dst_csv
+    assert gen_dst_dt.to_csv() == sue_dst_dt.to_csv()
 
 
 # def test_BridgeUnit_get_dict_ReturnsObj_Scenario0():
