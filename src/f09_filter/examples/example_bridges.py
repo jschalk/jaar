@@ -246,9 +246,8 @@ def get_casa_maison_bridgeunit_set_by_explicit_label_map() -> BridgeUnit:
     sue_bridgeunit = bridgeunit_shop("Sue")
     rx = type_RoadNode_str()
     sue_bridgeunit.set_explicit_label_map(rx, src_music45_str, dst_music87_str)
-    sue_bridgeunit.set_explicit_label_map(rx, casa_src_road, casa_dst_road)
-    sue_bridgeunit.set_explicit_label_map(rx, clean_src_road, clean_dst_road)
-    sue_bridgeunit.set_explicit_label_map(rx, sweep_src_road, sweep_dst_road)
+    sue_bridgeunit.set_explicit_label_map(rx, casa_src_str, casa_dst_str)
+    sue_bridgeunit.set_explicit_label_map(rx, clean_src_str, clean_dst_str)
     return sue_bridgeunit
 
 

@@ -31,6 +31,10 @@ class atom_args_python_typeException(Exception):
     pass
 
 
+class set_explicit_label_map_Exception(Exception):
+    pass
+
+
 def filterable_python_types() -> set:
     return {"AcctID", "GroupID", "RoadNode", "RoadUnit"}
 
@@ -78,25 +82,31 @@ class BridgeKind:
         if missing_add and self.src_exists(src_word) is False:
             dst_word = copy_copy(src_word)
             if self.python_type in {"GroupID"}:
+                if self.dst_road_delimiter in src_word:
+                    return None
                 src_r_delimiter = self.src_road_delimiter
                 dst_r_delimiter = self.dst_road_delimiter
                 dst_word = dst_word.replace(src_r_delimiter, dst_r_delimiter)
-            if self.python_type in {"RoadUnit", "RoadNode"}:
+            if self.python_type in {"RoadUnit"}:
                 dst_word = self._get_create_roadunit_dst(src_word)
-            if self.dst_road_delimiter in src_word:
-                return None
+            if self.python_type in {"RoadNode"}:
+                if self.dst_road_delimiter in src_word:
+                    return None
+                dst_word = self._get_explicit_roadnode(src_word)
             self.set_src_to_dst(src_word, dst_word)
+
         return self._get_dst_value(src_word)
 
     def _get_create_roadunit_dst(self, src_road) -> RoadUnit:
         src_parent_road = get_parent_road(src_road, self.src_road_delimiter)
-        if is_roadnode(src_road, self.src_road_delimiter):
-            return self._get_explicit_roadnode(src_road)
-        elif self.src_exists(src_parent_road) is False:
+        if self.src_exists(src_parent_road) is False and src_parent_road != "":
             return None
         src_terminus = get_terminus_node(src_road, self.src_road_delimiter)
         src_terminus = self._get_explicit_roadnode(src_terminus)
-        dst_parent_road = self._get_dst_value(src_parent_road)
+        if src_parent_road == "":
+            dst_parent_road = ""
+        else:
+            dst_parent_road = self._get_dst_value(src_parent_road)
         return create_road(dst_parent_road, src_terminus, self.dst_road_delimiter)
 
     def _get_explicit_roadnode(self, x_roadNode: RoadNode) -> RoadNode:
@@ -114,6 +124,13 @@ class BridgeKind:
         self.src_to_dst.pop(src_word)
 
     def set_explicit_label_map(self, src_label: RoadNode, dst_label: RoadNode):
+        if self.src_road_delimiter in src_label:
+            exception_str = f"explicit_label_map cannot have src_label '{src_label}'. It must be not have road_delimiter {self.src_road_delimiter}."
+            raise set_explicit_label_map_Exception(exception_str)
+        if self.dst_road_delimiter in dst_label:
+            exception_str = f"explicit_label_map cannot have dst_label '{dst_label}'. It must be not have road_delimiter {self.dst_road_delimiter}."
+            raise set_explicit_label_map_Exception(exception_str)
+
         self.explicit_label_map[src_label] = dst_label
 
     def _get_explicit_dst_label(self, src_label: RoadNode) -> RoadNode:
