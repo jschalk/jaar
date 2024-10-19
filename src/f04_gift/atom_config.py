@@ -119,6 +119,10 @@ def group_id_str() -> str:
     return "group_id"
 
 
+def team_id_str() -> str:
+    return "team_id"
+
+
 def healer_id_str() -> str:
     return "healer_id"
 
@@ -309,6 +313,7 @@ def get_atom_args_python_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
+        "team_id": "GroupID",
     }
 
 

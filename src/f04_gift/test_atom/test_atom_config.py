@@ -44,6 +44,7 @@ from src.f04_gift.atom_config import (
     road_str,
     acct_id_str,
     group_id_str,
+    team_id_str,
     begin_str,
     close_str,
     addin_str,
@@ -75,6 +76,7 @@ def test_str_functions_ReturnsObj():
     assert road_str() == "road"
     assert acct_id_str() == "acct_id"
     assert group_id_str() == "group_id"
+    assert team_id_str() == "team_id"
     assert crud_str_str() == "crud_str"
     assert begin_str() == "begin"
     assert close_str() == "close"
@@ -524,7 +526,7 @@ def test_get_atom_args_category_mapping_ReturnsObj():
     assert bud_item_factunit_str() in road_categorys
     assert bud_item_teamlink_str() in road_categorys
     assert len(road_categorys) == 6
-    assert len(x_atom_args_category_mapping) == 41
+    assert len(x_atom_args_category_mapping) == 42
 
 
 def get_python_type(x_category: str, x_arg: str) -> str:
@@ -597,7 +599,9 @@ def all_atom_args_python_types_are_correct(x_python_types) -> bool:
         x_categorys = list(x_atom_args_category_mapping.get(x_atom_arg))
         x_category = x_categorys[0]
         x_python_type = get_python_type(x_category, x_atom_arg)
-        print(f"assert x_python_types.get({x_atom_arg} == {x_python_type}")
+        print(
+            f"assert x_python_types.get({x_atom_arg}) == {x_python_type} {x_python_types.get(x_atom_arg)=}"
+        )
         if x_python_types.get(x_atom_arg) != x_python_type:
             return False
     return True
@@ -608,8 +612,6 @@ def test_get_atom_args_python_types_ReturnsObj():
     x_python_types = get_atom_args_python_types()
 
     # THEN
-    assert all_atom_args_python_types_are_correct(x_python_types)
-    assert x_python_types.keys() == get_atom_args_category_mapping().keys()
     assert x_python_types.get("acct_id") == type_AcctID_str()
     assert x_python_types.get("addin") == "float"
     assert x_python_types.get("base") == type_RoadUnit_str()
@@ -651,3 +653,6 @@ def test_get_atom_args_python_types_ReturnsObj():
     assert x_python_types.get("stop_want") == "float"
     assert x_python_types.get("take_force") == "float"
     assert x_python_types.get("tally") == "int"
+    assert x_python_types.get("team_id") == type_GroupID_str()
+    assert x_python_types.keys() == get_atom_args_category_mapping().keys()
+    assert all_atom_args_python_types_are_correct(x_python_types)

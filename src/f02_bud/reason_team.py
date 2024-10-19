@@ -15,18 +15,18 @@ class TeamUnit:
     def get_dict(self) -> dict[str, str]:
         return {"_teamlinks": list(self._teamlinks)}
 
-    def set_teamlink(self, group_id: GroupID):
-        self._teamlinks.add(group_id)
+    def set_teamlink(self, team_id: GroupID):
+        self._teamlinks.add(team_id)
 
-    def teamlink_exists(self, group_id: GroupID):
-        return group_id in self._teamlinks
+    def teamlink_exists(self, team_id: GroupID):
+        return team_id in self._teamlinks
 
-    def del_teamlink(self, group_id: GroupID):
-        self._teamlinks.remove(group_id)
+    def del_teamlink(self, team_id: GroupID):
+        self._teamlinks.remove(team_id)
 
-    def get_teamlink(self, group_id: GroupID) -> GroupID:
-        if self.teamlink_exists(group_id):
-            return group_id
+    def get_teamlink(self, team_id: GroupID) -> GroupID:
+        if self.teamlink_exists(team_id):
+            return team_id
 
 
 def teamunit_shop(_teamlinks: set[GroupID] = None) -> TeamUnit:
@@ -47,11 +47,11 @@ class TeamHeir:
     def _get_all_accts(
         self,
         bud_groupboxs: dict[GroupID, GroupBox],
-        group_id_set: set[GroupID],
+        team_id_set: set[GroupID],
     ) -> dict[GroupID, GroupBox]:
         dict_x = {}
-        for group_id_x in group_id_set:
-            dict_x |= bud_groupboxs.get(group_id_x)._memberships
+        for x_team_id in team_id_set:
+            dict_x |= bud_groupboxs.get(x_team_id)._memberships
         return dict_x
 
     def is_empty(self) -> bool:
@@ -68,8 +68,8 @@ class TeamHeir:
         if self._teamlinks == set():
             return True
 
-        for x_group_id, x_groupbox in bud_groupboxs.items():
-            if x_group_id in self._teamlinks:
+        for x_team_id, x_groupbox in bud_groupboxs.items():
+            if x_team_id in self._teamlinks:
                 for x_acct_id in x_groupbox._memberships.keys():
                     if x_acct_id == bud_owner_id:
                         return True
@@ -94,12 +94,12 @@ class TeamHeir:
             # get all_accts of parent teamheir groupboxs
             all_parent_teamheir_accts = self._get_all_accts(
                 bud_groupboxs=bud_groupboxs,
-                group_id_set=parent_teamheir._teamlinks,
+                team_id_set=parent_teamheir._teamlinks,
             )
             # get all_accts of teamunit groupboxs
             all_teamunit_accts = self._get_all_accts(
                 bud_groupboxs=bud_groupboxs,
-                group_id_set=teamunit._teamlinks,
+                team_id_set=teamunit._teamlinks,
             )
             if not set(all_teamunit_accts).issubset(set(all_parent_teamheir_accts)):
                 # else raise error
@@ -112,8 +112,8 @@ class TeamHeir:
                 x_teamlinks.add(teamlink)
         self._teamlinks = x_teamlinks
 
-    def has_group(self, group_ids: set[GroupID]):
-        return self.is_empty() or any(gn_x in self._teamlinks for gn_x in group_ids)
+    def has_team(self, team_ids: set[GroupID]):
+        return self.is_empty() or any(gn_x in self._teamlinks for gn_x in team_ids)
 
 
 def teamheir_shop(
@@ -128,7 +128,7 @@ def teamheir_shop(
 
 def teamunit_get_from_dict(teamunit_dict: dict) -> TeamUnit:
     x_teamunit = teamunit_shop()
-    for x_group_id in teamunit_dict.get("_teamlinks"):
-        x_teamunit.set_teamlink(x_group_id)
+    for x_team_id in teamunit_dict.get("_teamlinks"):
+        x_teamunit.set_teamlink(x_team_id)
 
     return x_teamunit

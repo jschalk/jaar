@@ -19,6 +19,7 @@ from src.f04_gift.atom_config import (
     atom_update,
     acct_id_str,
     group_id_str,
+    team_id_str,
     healer_id_str,
     parent_road_str,
     label_str,
@@ -595,9 +596,9 @@ def add_bud_item_teamlink_insert_to_legible_list(
 ):
     for road_dict in item_teamlink_insert_dict.values():
         for item_teamlink_atom in road_dict.values():
-            group_id_value = item_teamlink_atom.get_value(group_id_str())
+            team_id_value = item_teamlink_atom.get_value(team_id_str())
             road_value = item_teamlink_atom.get_value("road")
-            x_str = f"teamlink '{group_id_value}' created for item '{road_value}'."
+            x_str = f"teamlink '{team_id_value}' created for item '{road_value}'."
             legible_list.append(x_str)
 
 
@@ -606,9 +607,9 @@ def add_bud_item_teamlink_delete_to_legible_list(
 ):
     for road_dict in item_teamlink_delete_dict.values():
         for item_teamlink_atom in road_dict.values():
-            group_id_value = item_teamlink_atom.get_value(group_id_str())
+            team_id_value = item_teamlink_atom.get_value(team_id_str())
             road_value = item_teamlink_atom.get_value("road")
-            x_str = f"teamlink '{group_id_value}' deleted for item '{road_value}'."
+            x_str = f"teamlink '{team_id_value}' deleted for item '{road_value}'."
             legible_list.append(x_str)
 
 

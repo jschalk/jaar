@@ -197,7 +197,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "acct_id,credit_belief,debtit_belief,fiscal_id,owner_id": brick_format_00021_bud_acctunit_v0_0_0(),
         "fiscal_id,give_force,group_id,owner_id,road,take_force": brick_format_00022_bud_item_awardlink_v0_0_0(),
         "base,fiscal_id,fnigh,fopen,owner_id,pick,road": brick_format_00023_bud_item_factunit_v0_0_0(),
-        "fiscal_id,group_id,owner_id,road": brick_format_00024_bud_item_teamlink_v0_0_0(),
+        "fiscal_id,owner_id,road,team_id": brick_format_00024_bud_item_teamlink_v0_0_0(),
         "fiscal_id,healer_id,owner_id,road": brick_format_00025_bud_item_healerlink_v0_0_0(),
         "base,divisor,fiscal_id,need,nigh,open,owner_id,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
         "base,base_item_active_requisite,fiscal_id,owner_id,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),

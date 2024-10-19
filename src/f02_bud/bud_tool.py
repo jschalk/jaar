@@ -102,11 +102,11 @@ def bud_item_reason_premiseunit_exists(
 
 
 def bud_item_teamlink_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
-    x_group_id = required_args.get("group_id")
+    x_team_id = required_args.get("team_id")
     x_road = required_args.get("road")
     return bool(
         bud_itemunit_exists(x_bud, required_args)
-        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_group_id)
+        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_team_id)
     )
 
 

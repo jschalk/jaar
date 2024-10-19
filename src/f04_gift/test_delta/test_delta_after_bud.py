@@ -19,6 +19,7 @@ from src.f04_gift.atom import atom_update, atom_delete, atom_insert, atomunit_sh
 from src.f04_gift.atom_config import (
     acct_id_str,
     group_id_str,
+    team_id_str,
     healer_id_str,
     parent_road_str,
     label_str,
@@ -1006,7 +1007,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_teamlink
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg(group_id_str(), yao_str)
+    update_disc_atomunit.set_required_arg(team_id_str(), yao_str)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
     after_sue_au = sue_deltaunit.get_edited_bud(before_sue_au)
@@ -1036,7 +1037,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_teamlink
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_delete())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg(group_id_str(), yao_str)
+    update_disc_atomunit.set_required_arg(team_id_str(), yao_str)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
     print(f"{before_sue_au.get_item_obj(ball_road).teamunit=}")

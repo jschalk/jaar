@@ -46,10 +46,10 @@ def test_teamunit_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
 
 def test_create_teamunit_ReturnsCorrectObj():
     # ESTABLISH
-    swim_group_id = GroupID("swimmers")
+    swim_team_id = GroupID("swimmers")
 
     # WHEN
-    swim_teamunit = create_teamunit(swim_group_id)
+    swim_teamunit = create_teamunit(swim_team_id)
 
     # THEN
     assert swim_teamunit
@@ -58,8 +58,8 @@ def test_create_teamunit_ReturnsCorrectObj():
 
 def test_TeamUnit_get_dict_ReturnsCorrectDictWithSingle_teamlink():
     # ESTABLISH
-    bob_group_id = GroupID("Bob")
-    x_teamlinks = {bob_group_id: bob_group_id}
+    bob_team_id = GroupID("Bob")
+    x_teamlinks = {bob_team_id: bob_team_id}
     x_teamunit = teamunit_shop(_teamlinks=x_teamlinks)
 
     # WHEN
@@ -67,7 +67,7 @@ def test_TeamUnit_get_dict_ReturnsCorrectDictWithSingle_teamlink():
 
     # THEN
     assert obj_dict is not None
-    example_dict = {"_teamlinks": [bob_group_id]}
+    example_dict = {"_teamlinks": [bob_team_id]}
     print(f"{example_dict=}")
     assert obj_dict == example_dict
 
@@ -79,7 +79,7 @@ def test_TeamUnit_set_teamlink_CorrectlySets_teamlinks_v1():
 
     # WHEN
     yao_str = "Yao"
-    x_teamunit.set_teamlink(group_id=yao_str)
+    x_teamunit.set_teamlink(team_id=yao_str)
 
     # THEN
     assert len(x_teamunit._teamlinks) == 1
@@ -92,7 +92,7 @@ def test_TeamUnit_teamlink_exists_ReturnsCorrectObj():
     assert x_teamunit.teamlink_exists(yao_str) is False
 
     # WHEN
-    x_teamunit.set_teamlink(group_id=yao_str)
+    x_teamunit.set_teamlink(team_id=yao_str)
 
     # THEN
     assert x_teamunit.teamlink_exists(yao_str)
@@ -103,12 +103,12 @@ def test_TeamUnit_del_teamlink_CorrectlyDeletes_teamlinks_v1():
     x_teamunit = teamunit_shop()
     yao_str = "Yao"
     sue_str = "Sue"
-    x_teamunit.set_teamlink(group_id=yao_str)
-    x_teamunit.set_teamlink(group_id=sue_str)
+    x_teamunit.set_teamlink(team_id=yao_str)
+    x_teamunit.set_teamlink(team_id=sue_str)
     assert len(x_teamunit._teamlinks) == 2
 
     # WHEN
-    x_teamunit.del_teamlink(group_id=sue_str)
+    x_teamunit.del_teamlink(team_id=sue_str)
 
     # THEN
     assert len(x_teamunit._teamlinks) == 1
@@ -259,8 +259,8 @@ def test_TeamHeir_set_teamlink_TeamUnitNotEmpty_ParentTeamHeirIsNone():
     kent_str = "kent"
     swim_str = ",swim"
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(group_id=kent_str)
-    x_teamunit.set_teamlink(group_id=swim_str)
+    x_teamunit.set_teamlink(team_id=kent_str)
+    x_teamunit.set_teamlink(team_id=swim_str)
 
     # WHEN
     x_teamheir = teamheir_shop()
@@ -275,8 +275,8 @@ def test_TeamHeir_set_teamlink_TeamUnitNotEmpty_ParentTeamHeirEmpty():
     kent_str = "kent"
     swim_str = ",swim"
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(group_id=kent_str)
-    x_teamunit.set_teamlink(group_id=swim_str)
+    x_teamunit.set_teamlink(team_id=kent_str)
+    x_teamunit.set_teamlink(team_id=swim_str)
 
     # WHEN
     x_teamheir = teamheir_shop()
@@ -292,8 +292,8 @@ def test_TeamHeir_set_teamlink_TeamUnit_Empty_ParentTeamHeirNotEmpty():
     kent_str = "kent"
     swim_str = ",swim"
     teamunit_swim = teamunit_shop()
-    teamunit_swim.set_teamlink(group_id=kent_str)
-    teamunit_swim.set_teamlink(group_id=swim_str)
+    teamunit_swim.set_teamlink(team_id=kent_str)
+    teamunit_swim.set_teamlink(team_id=swim_str)
     empty_teamheir = teamheir_shop()
 
     parent_teamheir = teamheir_shop()
@@ -316,8 +316,8 @@ def test_TeamHeir_set_teamlink_TeamUnitEqualParentTeamHeir_NonEmpty():
     kent_str = "kent"
     swim_str = ",swim"
     teamunit_swim = teamunit_shop()
-    teamunit_swim.set_teamlink(group_id=kent_str)
-    teamunit_swim.set_teamlink(group_id=swim_str)
+    teamunit_swim.set_teamlink(team_id=kent_str)
+    teamunit_swim.set_teamlink(team_id=swim_str)
     empty_teamheir = teamheir_shop()
 
     parent_teamheir = teamheir_shop()
@@ -365,14 +365,14 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
     }
 
     parent_teamunit = teamunit_shop()
-    parent_teamunit.set_teamlink(group_id=swim3_str)
+    parent_teamunit.set_teamlink(team_id=swim3_str)
     parent_teamheir = teamheir_shop()
     parent_teamheir.set_teamlinks(
         parent_teamheir=None, teamunit=parent_teamunit, bud_groupboxs=None
     )
 
     teamunit_swim2 = teamunit_shop()
-    teamunit_swim2.set_teamlink(group_id=swim2_str)
+    teamunit_swim2.set_teamlink(team_id=swim2_str)
 
     # WHEN
     x_teamheir = teamheir_shop()
@@ -403,7 +403,7 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
 #     swim2_groupbox.set_membership(membership_shop(swim2_str, _acct_id=sue_str))
 
 #     swim3_str = ",swim3"
-#     swim3_groupbox = groupbox_shop(group_id=swim3_str)
+#     swim3_groupbox = groupbox_shop(team_id=swim3_str)
 #     swim3_groupbox.set_membership(membership_shop(swim3_str, _acct_id=yao_str))
 #     swim3_groupbox.set_membership(membership_shop(swim3_str, _acct_id=sue_str))
 #     swim3_groupbox.set_membership(membership_shop(swim3_str, _acct_id=zia_str))
@@ -422,7 +422,7 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
 #     parent_teamheir.set_teamlinks(None, parent_teamunit, x_groupboxs)
 
 #     teamunit_swim3 = teamunit_shop()
-#     teamunit_swim3.set_teamlink(group_id=swim3_str)
+#     teamunit_swim3.set_teamlink(team_id=swim3_str)
 
 #     # WHEN / THEN
 #     x_teamheir = teamheir_shop()
@@ -454,15 +454,15 @@ def test_TeamUnit_get_teamlink_ReturnsCorrectObj():
     assert x_teamunit.get_teamlink(run_str) is None
 
 
-def test_TeamHeir_group_id_in_ReturnsCorrectBoolWhen_teamlinksNotEmpty():
+def test_TeamHeir_team_id_in_ReturnsCorrectBoolWhen_teamlinksNotEmpty():
     # ESTABLISH
     swim_str = ",swim"
     hike_str = ",hike"
     swim_dict = {swim_str}
     hike_dict = {hike_str}
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(group_id=swim_str)
-    x_teamunit.set_teamlink(group_id=hike_str)
+    x_teamunit.set_teamlink(team_id=swim_str)
+    x_teamunit.set_teamlink(team_id=hike_str)
     x_teamheir = teamheir_shop()
     x_teamheir.set_teamlinks(
         parent_teamheir=None, teamunit=x_teamunit, bud_groupboxs=None
@@ -480,14 +480,14 @@ def test_TeamHeir_group_id_in_ReturnsCorrectBoolWhen_teamlinksNotEmpty():
     hunt_play_dict = {hunt_str, play_str}
 
     # WHEN / THEN
-    assert x_teamheir.has_group(swim_dict)
-    assert x_teamheir.has_group(hike_dict)
-    assert x_teamheir.has_group(hunt_dict) is False
-    assert x_teamheir.has_group(hunt_hike_dict)
-    assert x_teamheir.has_group(hunt_play_dict) is False
+    assert x_teamheir.has_team(swim_dict)
+    assert x_teamheir.has_team(hike_dict)
+    assert x_teamheir.has_team(hunt_dict) is False
+    assert x_teamheir.has_team(hunt_hike_dict)
+    assert x_teamheir.has_team(hunt_play_dict) is False
 
 
-def test_TeamHeir_has_group_ReturnsCorrectBoolWhen_teamlinksEmpty():
+def test_TeamHeir_has_team_ReturnsCorrectBoolWhen_teamlinksEmpty():
     # ESTABLISH
     hike_str = ",hike"
     hike_dict = {hike_str}
@@ -505,8 +505,8 @@ def test_TeamHeir_has_group_ReturnsCorrectBoolWhen_teamlinksEmpty():
     hunt_play_dict = {hunt_str, play_str}
 
     # WHEN / THEN
-    assert x_teamheir.has_group(hike_dict)
-    assert x_teamheir.has_group(hunt_dict)
-    assert x_teamheir.has_group(play_dict)
-    assert x_teamheir.has_group(hunt_hike_dict)
-    assert x_teamheir.has_group(hunt_play_dict)
+    assert x_teamheir.has_team(hike_dict)
+    assert x_teamheir.has_team(hunt_dict)
+    assert x_teamheir.has_team(play_dict)
+    assert x_teamheir.has_team(hunt_hike_dict)
+    assert x_teamheir.has_team(hunt_play_dict)

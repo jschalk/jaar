@@ -408,7 +408,7 @@ class DeltaUnit:
             )
             self.add_atomunit_item_teamlink_insert(
                 item_road=insert_item_road,
-                insert_teamlink_group_ids=insert_itemunit.teamunit._teamlinks,
+                insert_teamlink_team_ids=insert_itemunit.teamunit._teamlinks,
             )
             self.add_atomunit_item_healerlink_insert(
                 item_road=insert_item_road,
@@ -521,18 +521,18 @@ class DeltaUnit:
             # update reasonunits_permises delete_premise
 
             # insert / update / delete teamlinks
-            before_teamlinks_group_ids = set(before_itemunit.teamunit._teamlinks)
-            after_teamlinks_group_ids = set(after_itemunit.teamunit._teamlinks)
+            before_teamlinks_team_ids = set(before_itemunit.teamunit._teamlinks)
+            after_teamlinks_team_ids = set(after_itemunit.teamunit._teamlinks)
             self.add_atomunit_item_teamlink_insert(
                 item_road=item_road,
-                insert_teamlink_group_ids=after_teamlinks_group_ids.difference(
-                    before_teamlinks_group_ids
+                insert_teamlink_team_ids=after_teamlinks_team_ids.difference(
+                    before_teamlinks_team_ids
                 ),
             )
             self.add_atomunit_item_teamlink_deletes(
                 item_road=item_road,
-                delete_teamlink_group_ids=before_teamlinks_group_ids.difference(
-                    after_teamlinks_group_ids
+                delete_teamlink_team_ids=before_teamlinks_team_ids.difference(
+                    after_teamlinks_team_ids
                 ),
             )
 
@@ -579,7 +579,7 @@ class DeltaUnit:
             )
             self.add_atomunit_item_teamlink_deletes(
                 item_road=delete_item_road,
-                delete_teamlink_group_ids=delete_itemunit.teamunit._teamlinks,
+                delete_teamlink_team_ids=delete_itemunit.teamunit._teamlinks,
             )
             self.add_atomunit_item_healerlink_deletes(
                 item_road=delete_item_road,
@@ -736,21 +736,21 @@ class DeltaUnit:
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_teamlink_insert(
-        self, item_road: RoadUnit, insert_teamlink_group_ids: set
+        self, item_road: RoadUnit, insert_teamlink_team_ids: set
     ):
-        for insert_teamlink_group_id in insert_teamlink_group_ids:
+        for insert_teamlink_team_id in insert_teamlink_team_ids:
             x_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_insert())
             x_atomunit.set_required_arg(road_str(), item_road)
-            x_atomunit.set_required_arg(group_id_str(), insert_teamlink_group_id)
+            x_atomunit.set_required_arg("team_id", insert_teamlink_team_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_teamlink_deletes(
-        self, item_road: RoadUnit, delete_teamlink_group_ids: set
+        self, item_road: RoadUnit, delete_teamlink_team_ids: set
     ):
-        for delete_teamlink_group_id in delete_teamlink_group_ids:
+        for delete_teamlink_team_id in delete_teamlink_team_ids:
             x_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_delete())
             x_atomunit.set_required_arg(road_str(), item_road)
-            x_atomunit.set_required_arg(group_id_str(), delete_teamlink_group_id)
+            x_atomunit.set_required_arg("team_id", delete_teamlink_team_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_healerlink_insert(

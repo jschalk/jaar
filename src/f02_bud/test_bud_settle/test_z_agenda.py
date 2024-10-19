@@ -452,7 +452,7 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
     sue_str = "Sue"
     yao_bud.add_acctunit(sue_str)
     teamunit_sue = teamunit_shop()
-    teamunit_sue.set_teamlink(group_id=sue_str)
+    teamunit_sue.set_teamlink(team_id=sue_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
@@ -464,7 +464,7 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
     # WHEN
     yao_bud.add_acctunit(yao_str)
     teamunit_yao = teamunit_shop()
-    teamunit_yao.set_teamlink(group_id=yao_str)
+    teamunit_yao.set_teamlink(team_id=yao_str)
 
     # WHEN
     yao_bud.edit_item_attr(road=casa_road, teamunit=teamunit_yao)
@@ -492,7 +492,7 @@ def test_BudUnit_get_agenda_dict_IsSetByTeamUnit_2AcctGroup():
     sue_acctunit.add_membership(run_str)
 
     run_teamunit = teamunit_shop()
-    run_teamunit.set_teamlink(group_id=run_str)
+    run_teamunit.set_teamlink(team_id=run_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN

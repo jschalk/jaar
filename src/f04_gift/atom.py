@@ -445,12 +445,12 @@ def _modify_bud_item_reason_premiseunit_insert(x_bud: BudUnit, x_atom: AtomUnit)
 
 def _modify_bud_item_teamlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.teamunit.del_teamlink(group_id=x_atom.get_value(group_id_str()))
+    x_itemunit.teamunit.del_teamlink(team_id=x_atom.get_value("team_id"))
 
 
 def _modify_bud_item_teamlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.teamunit.set_teamlink(group_id=x_atom.get_value(group_id_str()))
+    x_itemunit.teamunit.set_teamlink(team_id=x_atom.get_value("team_id"))
 
 
 def _modify_bud_item_healerlink_delete(x_bud: BudUnit, x_atom: AtomUnit):

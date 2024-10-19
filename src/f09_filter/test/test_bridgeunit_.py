@@ -52,7 +52,7 @@ def test_filterable_python_types_ReturnsObj():
 
 def test_filterable_atom_args_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert len(filterable_atom_args()) == 9
+    assert len(filterable_atom_args()) == 10
     assert filterable_atom_args() == {
         "acct_id",
         "road",
@@ -63,6 +63,7 @@ def test_filterable_atom_args_ReturnsObj():
         "base",
         "pick",
         "group_id",
+        "team_id",
     }
 
     print(f"{filterable_python_types()=}")

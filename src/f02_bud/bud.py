@@ -664,12 +664,12 @@ class BudUnit:
 
         if x_item.teamunit is not None:
             _teamlinks_to_delete = [
-                _teamlink_group_id
-                for _teamlink_group_id in x_item.teamunit._teamlinks
-                if self.get_acctunit_group_ids_dict().get(_teamlink_group_id) is None
+                _teamlink_team_id
+                for _teamlink_team_id in x_item.teamunit._teamlinks
+                if self.get_acctunit_group_ids_dict().get(_teamlink_team_id) is None
             ]
-            for _teamlink_group_id in _teamlinks_to_delete:
-                x_item.teamunit.del_teamlink(_teamlink_group_id)
+            for _teamlink_team_id in _teamlinks_to_delete:
+                x_item.teamunit.del_teamlink(_teamlink_team_id)
         return x_item
 
     def _create_missing_items(self, road):

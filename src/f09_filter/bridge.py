@@ -49,6 +49,7 @@ def filterable_atom_args() -> set:
         "base",
         "pick",
         "group_id",
+        "team_id",
     }
 
 

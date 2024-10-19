@@ -89,7 +89,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemroot_teamunit():
     run_str = "runners"
     sue_bud = budunit_shop("Sue")
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(group_id=run_str)
+    x_teamunit.set_teamlink(team_id=run_str)
     sue_bud.edit_item_attr(sue_bud._fiscal_id, teamunit=x_teamunit)
     root_item = sue_bud.get_item_obj(sue_bud._fiscal_id)
     x_gogo_want = 5
@@ -141,7 +141,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemkid_TeamUnit():
     morn_road = sue_bud.make_l1_road(morn_str)
     sue_bud.set_l1_item(itemunit_shop(morn_str))
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(group_id=run_str)
+    x_teamunit.set_teamlink(team_id=run_str)
     sue_bud.edit_item_attr(teamunit=x_teamunit, road=morn_road)
 
     # WHEN
@@ -324,10 +324,10 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     sue_acctunit.add_membership(run_str)
     xio_acctunit.add_membership(run_str)
     run_teamunit = teamunit_shop()
-    run_teamunit.set_teamlink(group_id=run_str)
+    run_teamunit.set_teamlink(team_id=run_str)
     zia_bud.edit_item_attr(zia_bud._fiscal_id, teamunit=run_teamunit)
     xio_teamunit = teamunit_shop()
-    xio_teamunit.set_teamlink(group_id=xio_str)
+    xio_teamunit.set_teamlink(team_id=xio_str)
     zia_bud.edit_item_attr(shave_road, teamunit=xio_teamunit)
     zia_bud.edit_item_attr(shave_road, awardlink=awardlink_shop(xio_str))
     zia_bud.edit_item_attr(shave_road, awardlink=awardlink_shop(sue_str))

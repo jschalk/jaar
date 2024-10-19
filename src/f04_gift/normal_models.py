@@ -92,10 +92,10 @@ class PremiseTable(Base):
     open = Column(Float)
 
 
-class TeamlinkTable(Base):
+class TeamLinkTable(Base):
     __tablename__ = "teamlink"
     uid = Column(Integer, primary_key=True)
-    group_id = Column(String)
+    team_id = Column(String)
     road = Column(String)
 
 
