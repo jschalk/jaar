@@ -11,6 +11,8 @@ from src.f00_instrument.dict_tool import (
 )
 from src.f01_road.road import (
     default_road_delimiter_if_none,
+    get_all_road_nodes,
+    create_road_from_nodes,
     get_terminus_node,
     get_parent_road,
     create_road,
@@ -133,6 +135,20 @@ class BridgeKind:
             raise set_explicit_label_map_Exception(exception_str)
 
         self.explicit_label_map[src_label] = dst_label
+
+        if self.python_type == "RoadUnit":
+            self._set_new_explicit_label_map_to_src_dst(src_label, dst_label)
+
+    def _set_new_explicit_label_map_to_src_dst(self, src_label, dst_label):
+        for src_road, dst_road in self.src_to_dst.items():
+            src_roadnodes = get_all_road_nodes(src_road, self.src_road_delimiter)
+            dst_roadnodes = get_all_road_nodes(dst_road, self.dst_road_delimiter)
+            x_count = 0
+            for src_roadnode in src_roadnodes:
+                if src_roadnode == src_label:
+                    dst_roadnodes[x_count] = dst_label
+                x_count += 1
+            self.set_src_to_dst(src_road, create_road_from_nodes(dst_roadnodes))
 
     def _get_explicit_dst_label(self, src_label: RoadNode) -> RoadNode:
         return self.explicit_label_map.get(src_label)

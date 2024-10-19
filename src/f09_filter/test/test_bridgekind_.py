@@ -1,4 +1,4 @@
-from src.f01_road.road import default_road_delimiter_if_none
+from src.f01_road.road import default_road_delimiter_if_none, create_road
 from src.f04_gift.atom_config import (
     acct_id_str,
     get_atom_args_python_types,
@@ -410,3 +410,41 @@ def test_BridgeKind_del_explicit_label_map_SetsAttr():
 
     # THEN
     assert x_bridgekind.explicit_label_map_exists(xio_str, sue_str) is False
+
+
+def test_BridgeKind_set_explicit_label_map_Edits_src_to_dst():
+    # ESTABLISH
+    src_music45_str = "music45"
+    dst_music87_str = "music87"
+    casa_src_str = "casa"
+    casa_dst_str = "maison"
+    casa_src_road = create_road(src_music45_str, casa_src_str)
+    casa_dst_road = create_road(dst_music87_str, casa_dst_str)
+    clean_src_str = "clean"
+    clean_dst_str = "propre"
+    clean_src_road = create_road(casa_src_road, clean_src_str)
+    clean_dst_road = create_road(casa_dst_road, clean_dst_str)
+    sweep_str = "sweep"
+    sweep_src_road = create_road(clean_src_road, sweep_str)
+    sweep_dst_road = create_road(clean_dst_road, sweep_str)
+    x_bridgekind = bridgekind_shop(type_RoadUnit_str())
+    x_bridgekind.set_src_to_dst(src_music45_str, dst_music87_str)
+    x_bridgekind.set_src_to_dst(casa_src_road, casa_dst_road)
+    x_bridgekind.set_src_to_dst(clean_src_road, clean_dst_road)
+    x_bridgekind.set_src_to_dst(sweep_src_road, sweep_dst_road)
+    assert x_bridgekind.src_to_dst_exists(src_music45_str, dst_music87_str)
+    assert x_bridgekind.src_to_dst_exists(casa_src_road, casa_dst_road)
+    assert x_bridgekind.src_to_dst_exists(clean_src_road, clean_dst_road)
+    assert x_bridgekind.src_to_dst_exists(sweep_src_road, sweep_dst_road)
+
+    # WHEN
+    menage_dst_str = "menage"
+    x_bridgekind.set_explicit_label_map(clean_src_str, menage_dst_str)
+
+    # THEN
+    menage_dst_road = create_road(casa_dst_road, menage_dst_str)
+    sweep_menage_dst_road = create_road(menage_dst_road, sweep_str)
+    assert x_bridgekind.src_to_dst_exists(src_music45_str, dst_music87_str)
+    assert x_bridgekind.src_to_dst_exists(casa_src_road, casa_dst_road)
+    assert x_bridgekind.src_to_dst_exists(clean_src_road, menage_dst_road)
+    assert x_bridgekind.src_to_dst_exists(sweep_src_road, sweep_menage_dst_road)

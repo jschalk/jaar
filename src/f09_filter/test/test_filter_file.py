@@ -69,14 +69,14 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
     assert os_path_exists(src_file_path)
     assert os_path_exists(dst_file_path)
     gen_dst_dt = open_brick_csv(dst_dir, example_filename)
-    assert gen_dst_dt.iloc[0][acct_id_str()] == zia_src
-    assert gen_dst_dt.iloc[1][acct_id_str()] == sue_dst
+    assert gen_dst_dt.iloc[0][acct_id_str()] == bob_dst
+    assert gen_dst_dt.iloc[3][acct_id_str()] == zia_src
     assert gen_dst_dt.to_csv() != sue_src_dt.to_csv()
     static_dst_dt = DataFrame(columns=[acct_id_str()])
-    static_dst_dt.loc[0, acct_id_str()] = zia_src
+    static_dst_dt.loc[0, acct_id_str()] = bob_dst
     static_dst_dt.loc[1, acct_id_str()] = sue_dst
-    static_dst_dt.loc[2, acct_id_str()] = bob_dst
-    static_dst_dt.loc[3, acct_id_str()] = xio_dst
+    static_dst_dt.loc[2, acct_id_str()] = xio_dst
+    static_dst_dt.loc[3, acct_id_str()] = zia_src
     assert gen_dst_dt.iloc[0][acct_id_str()] == static_dst_dt.iloc[0][acct_id_str()]
     assert gen_dst_dt.iloc[1][acct_id_str()] == static_dst_dt.iloc[1][acct_id_str()]
     assert gen_dst_dt.iloc[2][acct_id_str()] == static_dst_dt.iloc[2][acct_id_str()]
