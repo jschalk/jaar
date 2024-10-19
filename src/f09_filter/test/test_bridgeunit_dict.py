@@ -27,8 +27,8 @@ def test_BridgeUnit_get_dict_ReturnsObj_Scenario0():
     # THEN
     assert sue_dict
     assert sue_dict.get("face_id") == sue_str
-    assert sue_dict.get("src_road_delimiter") == default_road_delimiter_if_none()
-    assert sue_dict.get("dst_road_delimiter") == default_road_delimiter_if_none()
+    assert sue_dict.get("otx_road_delimiter") == default_road_delimiter_if_none()
+    assert sue_dict.get("inx_road_delimiter") == default_road_delimiter_if_none()
     assert sue_dict.get("unknown_word") == default_unknown_word()
     assert sue_dict.get("bridgekinds")
     x_bridgekinds = sue_dict.get("bridgekinds")
@@ -50,10 +50,10 @@ def test_BridgeUnit_get_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    slash_src_road_delimiter = "/"
-    colon_dst_road_delimiter = ":"
+    slash_otx_road_delimiter = "/"
+    colon_inx_road_delimiter = ":"
     sue_bridgeunit = bridgeunit_shop(
-        sue_str, slash_src_road_delimiter, colon_dst_road_delimiter, x_unknown_word
+        sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
     )
     sue_bridgeunit.set_bridgekind(get_slash_roadunit_bridgekind())
     sue_bridgeunit.set_bridgekind(get_slash_groupid_bridgekind())
@@ -64,8 +64,8 @@ def test_BridgeUnit_get_dict_ReturnsObj_Scenario1():
 
     # THEN
     assert sue_dict.get("face_id") == sue_str
-    assert sue_dict.get("src_road_delimiter") == slash_src_road_delimiter
-    assert sue_dict.get("dst_road_delimiter") == colon_dst_road_delimiter
+    assert sue_dict.get("otx_road_delimiter") == slash_otx_road_delimiter
+    assert sue_dict.get("inx_road_delimiter") == colon_inx_road_delimiter
     assert sue_dict.get("unknown_word") == x_unknown_word
     assert sue_dict.get("bridgekinds")
     x_bridgekinds = sue_dict.get("bridgekinds")
@@ -91,17 +91,17 @@ def test_BridgeUnit_get_json_ReturnsObj():
 
     # THEN
     assert sue_json.find("bridgekinds") == 5
-    assert sue_json.find("src_road_delimiter") == 164
+    assert sue_json.find("otx_road_delimiter") == 133
 
 
 def test_get_bridgeunit_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    slash_src_road_delimiter = "/"
-    colon_dst_road_delimiter = ":"
+    slash_otx_road_delimiter = "/"
+    colon_inx_road_delimiter = ":"
     sue_bridgeunit = bridgeunit_shop(
-        sue_str, slash_src_road_delimiter, colon_dst_road_delimiter, x_unknown_word
+        sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
     )
     sue_bridgeunit.set_bridgekind(get_slash_roadunit_bridgekind())
     sue_bridgeunit.set_bridgekind(get_slash_groupid_bridgekind())
@@ -113,8 +113,8 @@ def test_get_bridgeunit_from_dict_ReturnsObj():
     # THEN
     assert gen_bridgeunit
     assert gen_bridgeunit.face_id == sue_str
-    assert gen_bridgeunit.src_road_delimiter == slash_src_road_delimiter
-    assert gen_bridgeunit.dst_road_delimiter == colon_dst_road_delimiter
+    assert gen_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
+    assert gen_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
     assert gen_bridgeunit.unknown_word == x_unknown_word
     x_bridgekinds = gen_bridgeunit.bridgekinds
     assert len(x_bridgekinds) == 3
@@ -130,10 +130,10 @@ def test_get_bridgeunit_from_json_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    slash_src_road_delimiter = "/"
-    colon_dst_road_delimiter = ":"
+    slash_otx_road_delimiter = "/"
+    colon_inx_road_delimiter = ":"
     sue_bridgeunit = bridgeunit_shop(
-        sue_str, slash_src_road_delimiter, colon_dst_road_delimiter, x_unknown_word
+        sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
     )
     sue_bridgeunit.set_bridgekind(get_slash_roadunit_bridgekind())
     sue_bridgeunit.set_bridgekind(get_slash_groupid_bridgekind())
@@ -145,8 +145,8 @@ def test_get_bridgeunit_from_json_ReturnsObj():
     # THEN
     assert gen_bridgeunit
     assert gen_bridgeunit.face_id == sue_str
-    assert gen_bridgeunit.src_road_delimiter == slash_src_road_delimiter
-    assert gen_bridgeunit.dst_road_delimiter == colon_dst_road_delimiter
+    assert gen_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
+    assert gen_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
     assert gen_bridgeunit.unknown_word == x_unknown_word
     x_bridgekinds = gen_bridgeunit.bridgekinds
     assert len(x_bridgekinds) == 3

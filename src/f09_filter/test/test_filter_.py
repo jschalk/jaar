@@ -13,10 +13,10 @@ from src.f09_filter.filter import (
     get_dataframe_filterable_columns,
 )
 from src.f09_filter.examples.example_bridges import (
-    get_casa_maison_bridgeunit_set_by_src_to_dst,
+    get_casa_maison_bridgeunit_set_by_otx_to_inx,
     get_casa_maison_bridgeunit_set_by_explicit_label_map,
-    get_casa_maison_road_src_dt,
-    get_casa_maison_road_dst_dt,
+    get_casa_maison_road_otx_dt,
+    get_casa_maison_road_inx_dt,
 )
 from pandas import DataFrame
 from copy import deepcopy as copy_deepcopy
@@ -50,199 +50,199 @@ def test_filter_single_column_dataframe_ReturnsObj_Scenario0_AcctID_EmptyDataFra
 
 def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5rows():
     # ESTABLISH
-    xio_src = "Xio"
-    sue_src = "Sue"
-    bob_src = "Bob"
-    zia_src = "Zia"
-    xio_dst = "Xioita"
-    sue_dst = "Suita"
-    bob_dst = "Bobita"
+    xio_otx = "Xio"
+    sue_otx = "Sue"
+    bob_otx = "Bob"
+    zia_otx = "Zia"
+    xio_inx = "Xioita"
+    sue_inx = "Suita"
+    bob_inx = "Bobita"
     acct_id_bridgekind = bridgekind_shop(type_AcctID_str())
-    acct_id_bridgekind.set_src_to_dst(xio_src, xio_dst)
-    acct_id_bridgekind.set_src_to_dst(sue_src, sue_dst)
-    acct_id_bridgekind.set_src_to_dst(bob_src, bob_dst)
-    src_dt = DataFrame(columns=[acct_id_str()])
-    src_dt.loc[0] = [zia_src]
-    src_dt.loc[1] = [sue_src]
-    src_dt.loc[2] = [bob_src]
-    src_dt.loc[3] = [xio_src]
-    src_dt = src_dt.reset_index(drop=True)
-    old_src_dt = copy_deepcopy(src_dt)
-    print(f"{src_dt=}")
+    acct_id_bridgekind.set_otx_to_inx(xio_otx, xio_inx)
+    acct_id_bridgekind.set_otx_to_inx(sue_otx, sue_inx)
+    acct_id_bridgekind.set_otx_to_inx(bob_otx, bob_inx)
+    otx_dt = DataFrame(columns=[acct_id_str()])
+    otx_dt.loc[0] = [zia_otx]
+    otx_dt.loc[1] = [sue_otx]
+    otx_dt.loc[2] = [bob_otx]
+    otx_dt.loc[3] = [xio_otx]
+    otx_dt = otx_dt.reset_index(drop=True)
+    old_otx_dt = copy_deepcopy(otx_dt)
+    print(f"{otx_dt=}")
 
     # WHEN
-    filter_single_column_dataframe(src_dt, acct_id_bridgekind, acct_id_str())
+    filter_single_column_dataframe(otx_dt, acct_id_bridgekind, acct_id_str())
 
     # THEN
-    assert src_dt.iloc[0][acct_id_str()] == zia_src
-    assert src_dt.iloc[1][acct_id_str()] == sue_dst
-    assert src_dt.to_csv() != old_src_dt.to_csv()
-    dst_dt = DataFrame(columns=[acct_id_str()])
-    dst_dt.loc[0] = zia_src
-    dst_dt.loc[1] = sue_dst
-    dst_dt.loc[2] = bob_dst
-    dst_dt.loc[3] = xio_dst
-    print(f"{str(src_dt.to_csv())=}")
-    print(f"{str(dst_dt.to_csv())=}")
-    assert src_dt.to_csv() == dst_dt.to_csv()
+    assert otx_dt.iloc[0][acct_id_str()] == zia_otx
+    assert otx_dt.iloc[1][acct_id_str()] == sue_inx
+    assert otx_dt.to_csv() != old_otx_dt.to_csv()
+    inx_dt = DataFrame(columns=[acct_id_str()])
+    inx_dt.loc[0] = zia_otx
+    inx_dt.loc[1] = sue_inx
+    inx_dt.loc[2] = bob_inx
+    inx_dt.loc[3] = xio_inx
+    print(f"{str(otx_dt.to_csv())=}")
+    print(f"{str(inx_dt.to_csv())=}")
+    assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
 def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5rowsMultipleColumns():
     # ESTABLISH
-    xio_src = "Xio"
-    sue_src = "Sue"
-    bob_src = "Bob"
-    zia_src = "Zia"
-    xio_dst = "Xioita"
-    sue_dst = "Suita"
-    bob_dst = "Bobita"
+    xio_otx = "Xio"
+    sue_otx = "Sue"
+    bob_otx = "Bob"
+    zia_otx = "Zia"
+    xio_inx = "Xioita"
+    sue_inx = "Suita"
+    bob_inx = "Bobita"
     acct_id_bridgekind = bridgekind_shop(type_AcctID_str())
-    acct_id_bridgekind.set_src_to_dst(xio_src, xio_dst)
-    acct_id_bridgekind.set_src_to_dst(sue_src, sue_dst)
-    acct_id_bridgekind.set_src_to_dst(bob_src, bob_dst)
-    src_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
-    src_dt.loc[0] = ["ZZ", zia_src, 12]
-    src_dt.loc[1] = ["ZZ", sue_src, 12]
-    src_dt.loc[2] = ["ZZ", bob_src, 12]
-    src_dt.loc[3] = ["ZZ", xio_src, 12]
-    src_dt = src_dt.reset_index(drop=True)
-    old_src_dt = copy_deepcopy(src_dt)
-    print(f"{src_dt=}")
+    acct_id_bridgekind.set_otx_to_inx(xio_otx, xio_inx)
+    acct_id_bridgekind.set_otx_to_inx(sue_otx, sue_inx)
+    acct_id_bridgekind.set_otx_to_inx(bob_otx, bob_inx)
+    otx_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
+    otx_dt.loc[0] = ["ZZ", zia_otx, 12]
+    otx_dt.loc[1] = ["ZZ", sue_otx, 12]
+    otx_dt.loc[2] = ["ZZ", bob_otx, 12]
+    otx_dt.loc[3] = ["ZZ", xio_otx, 12]
+    otx_dt = otx_dt.reset_index(drop=True)
+    old_otx_dt = copy_deepcopy(otx_dt)
+    print(f"{otx_dt=}")
 
     # WHEN
-    filter_single_column_dataframe(src_dt, acct_id_bridgekind, acct_id_str())
+    filter_single_column_dataframe(otx_dt, acct_id_bridgekind, acct_id_str())
 
     # THEN
-    assert src_dt.iloc[0][acct_id_str()] == zia_src
-    assert src_dt.iloc[1][acct_id_str()] == sue_dst
-    assert src_dt.to_csv() != old_src_dt.to_csv()
-    dst_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
-    dst_dt.loc[0] = ["ZZ", zia_src, 12]
-    dst_dt.loc[1] = ["ZZ", sue_dst, 12]
-    dst_dt.loc[2] = ["ZZ", bob_dst, 12]
-    dst_dt.loc[3] = ["ZZ", xio_dst, 12]
-    print(f"{str(src_dt.to_csv())=}")
-    print(f"{str(dst_dt.to_csv())=}")
-    assert src_dt.to_csv() == dst_dt.to_csv()
+    assert otx_dt.iloc[0][acct_id_str()] == zia_otx
+    assert otx_dt.iloc[1][acct_id_str()] == sue_inx
+    assert otx_dt.to_csv() != old_otx_dt.to_csv()
+    inx_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
+    inx_dt.loc[0] = ["ZZ", zia_otx, 12]
+    inx_dt.loc[1] = ["ZZ", sue_inx, 12]
+    inx_dt.loc[2] = ["ZZ", bob_inx, 12]
+    inx_dt.loc[3] = ["ZZ", xio_inx, 12]
+    print(f"{str(otx_dt.to_csv())=}")
+    print(f"{str(inx_dt.to_csv())=}")
+    assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
 def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     # ESTABLISH
     yao_str = "Yao"
-    xio_src = "Xio"
-    sue_src = "Sue"
-    bob_src = "Bob"
-    zia_src = "Zia"
-    xio_dst = "Xioita"
-    sue_dst = "Suita"
-    bob_dst = "Bobita"
+    xio_otx = "Xio"
+    sue_otx = "Sue"
+    bob_otx = "Bob"
+    zia_otx = "Zia"
+    xio_inx = "Xioita"
+    sue_inx = "Suita"
+    bob_inx = "Bobita"
     yao_bridgeunit = bridgeunit_shop(yao_str)
-    yao_bridgeunit.set_src_to_dst(type_AcctID_str(), xio_src, xio_dst)
-    yao_bridgeunit.set_src_to_dst(type_AcctID_str(), sue_src, sue_dst)
-    yao_bridgeunit.set_src_to_dst(type_AcctID_str(), bob_src, bob_dst)
-    src_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
-    src_dt.loc[0] = ["ZZ", zia_src, 12]
-    src_dt.loc[1] = ["ZZ", sue_src, 12]
-    src_dt.loc[2] = ["ZZ", bob_src, 12]
-    src_dt.loc[3] = ["ZZ", xio_src, 12]
-    src_dt = src_dt.reset_index(drop=True)
-    old_src_dt = copy_deepcopy(src_dt)
-    print(f"{src_dt=}")
+    yao_bridgeunit.set_otx_to_inx(type_AcctID_str(), xio_otx, xio_inx)
+    yao_bridgeunit.set_otx_to_inx(type_AcctID_str(), sue_otx, sue_inx)
+    yao_bridgeunit.set_otx_to_inx(type_AcctID_str(), bob_otx, bob_inx)
+    otx_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
+    otx_dt.loc[0] = ["ZZ", zia_otx, 12]
+    otx_dt.loc[1] = ["ZZ", sue_otx, 12]
+    otx_dt.loc[2] = ["ZZ", bob_otx, 12]
+    otx_dt.loc[3] = ["ZZ", xio_otx, 12]
+    otx_dt = otx_dt.reset_index(drop=True)
+    old_otx_dt = copy_deepcopy(otx_dt)
+    print(f"{otx_dt=}")
 
     # WHEN
-    filter_all_columns_dataframe(src_dt, yao_bridgeunit)
+    filter_all_columns_dataframe(otx_dt, yao_bridgeunit)
 
     # THEN
-    assert src_dt.iloc[0][acct_id_str()] == zia_src
-    assert src_dt.iloc[1][acct_id_str()] == sue_dst
-    assert src_dt.to_csv() != old_src_dt.to_csv()
-    dst_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
-    dst_dt.loc[0] = ["ZZ", zia_src, 12]
-    dst_dt.loc[1] = ["ZZ", sue_dst, 12]
-    dst_dt.loc[2] = ["ZZ", bob_dst, 12]
-    dst_dt.loc[3] = ["ZZ", xio_dst, 12]
-    print(f"{str(src_dt.to_csv())=}")
-    print(f"{str(dst_dt.to_csv())=}")
-    assert src_dt.to_csv() == dst_dt.to_csv()
+    assert otx_dt.iloc[0][acct_id_str()] == zia_otx
+    assert otx_dt.iloc[1][acct_id_str()] == sue_inx
+    assert otx_dt.to_csv() != old_otx_dt.to_csv()
+    inx_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
+    inx_dt.loc[0] = ["ZZ", zia_otx, 12]
+    inx_dt.loc[1] = ["ZZ", sue_inx, 12]
+    inx_dt.loc[2] = ["ZZ", bob_inx, 12]
+    inx_dt.loc[3] = ["ZZ", xio_inx, 12]
+    print(f"{str(otx_dt.to_csv())=}")
+    print(f"{str(inx_dt.to_csv())=}")
+    assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_bridgeunit_set_by_src_to_dst():
+def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_bridgeunit_set_by_otx_to_inx():
     # ESTABLISH
-    src_music45_str = "music45"
-    dst_music87_str = "music87"
-    casa_src_str = "casa"
-    casa_dst_str = "maison"
-    casa_src_road = create_road(src_music45_str, casa_src_str)
-    casa_dst_road = create_road(dst_music87_str, casa_dst_str)
-    clean_src_str = "clean"
-    clean_dst_str = "propre"
-    clean_src_road = create_road(casa_src_road, clean_src_str)
-    clean_dst_road = create_road(casa_dst_road, clean_dst_str)
+    otx_music45_str = "music45"
+    inx_music87_str = "music87"
+    casa_otx_str = "casa"
+    casa_inx_str = "maison"
+    casa_otx_road = create_road(otx_music45_str, casa_otx_str)
+    casa_inx_road = create_road(inx_music87_str, casa_inx_str)
+    clean_otx_str = "clean"
+    clean_inx_str = "propre"
+    clean_otx_road = create_road(casa_otx_road, clean_otx_str)
+    clean_inx_road = create_road(casa_inx_road, clean_inx_str)
     sweep_str = "sweep"
-    sweep_src_road = create_road(clean_src_road, sweep_str)
-    sweep_dst_road = create_road(clean_dst_road, sweep_str)
-    yao_bridgeunit = get_casa_maison_bridgeunit_set_by_src_to_dst()
-    src_dt = get_casa_maison_road_src_dt()
-    old_src_dt = copy_deepcopy(src_dt)
-    assert src_dt.iloc[0][base_str()] == src_music45_str
-    assert src_dt.iloc[1][base_str()] == casa_src_road
-    assert src_dt.iloc[2][base_str()] == clean_src_road
-    assert src_dt.iloc[3][base_str()] == sweep_src_road
-    print(f"{src_dt=}")
+    sweep_otx_road = create_road(clean_otx_road, sweep_str)
+    sweep_inx_road = create_road(clean_inx_road, sweep_str)
+    yao_bridgeunit = get_casa_maison_bridgeunit_set_by_otx_to_inx()
+    otx_dt = get_casa_maison_road_otx_dt()
+    old_otx_dt = copy_deepcopy(otx_dt)
+    assert otx_dt.iloc[0][base_str()] == otx_music45_str
+    assert otx_dt.iloc[1][base_str()] == casa_otx_road
+    assert otx_dt.iloc[2][base_str()] == clean_otx_road
+    assert otx_dt.iloc[3][base_str()] == sweep_otx_road
+    print(f"{otx_dt=}")
 
     # WHEN
-    filter_all_columns_dataframe(src_dt, yao_bridgeunit)
+    filter_all_columns_dataframe(otx_dt, yao_bridgeunit)
 
     # THEN
-    assert src_dt.iloc[0][base_str()] == dst_music87_str
-    assert src_dt.iloc[1][base_str()] == casa_dst_road
-    assert src_dt.iloc[2][base_str()] == clean_dst_road
-    assert src_dt.iloc[3][base_str()] == sweep_dst_road
-    assert src_dt.to_csv() != old_src_dt.to_csv()
-    dst_dt = get_casa_maison_road_dst_dt()
-    print(f"{str(src_dt.to_csv())=}")
-    print(f"{str(dst_dt.to_csv())=}")
-    assert src_dt.to_csv() == dst_dt.to_csv()
+    assert otx_dt.iloc[0][base_str()] == inx_music87_str
+    assert otx_dt.iloc[1][base_str()] == casa_inx_road
+    assert otx_dt.iloc[2][base_str()] == clean_inx_road
+    assert otx_dt.iloc[3][base_str()] == sweep_inx_road
+    assert otx_dt.to_csv() != old_otx_dt.to_csv()
+    inx_dt = get_casa_maison_road_inx_dt()
+    print(f"{str(otx_dt.to_csv())=}")
+    print(f"{str(inx_dt.to_csv())=}")
+    assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
 def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_casa_maison_bridgeunit_set_by_explicit_label_map():
     # ESTABLISH
-    src_music45_str = "music45"
-    dst_music87_str = "music87"
-    casa_src_str = "casa"
-    casa_dst_str = "maison"
-    casa_src_road = create_road(src_music45_str, casa_src_str)
-    casa_dst_road = create_road(dst_music87_str, casa_dst_str)
-    clean_src_str = "clean"
-    clean_dst_str = "propre"
-    clean_src_road = create_road(casa_src_road, clean_src_str)
-    clean_dst_road = create_road(casa_dst_road, clean_dst_str)
+    otx_music45_str = "music45"
+    inx_music87_str = "music87"
+    casa_otx_str = "casa"
+    casa_inx_str = "maison"
+    casa_otx_road = create_road(otx_music45_str, casa_otx_str)
+    casa_inx_road = create_road(inx_music87_str, casa_inx_str)
+    clean_otx_str = "clean"
+    clean_inx_str = "propre"
+    clean_otx_road = create_road(casa_otx_road, clean_otx_str)
+    clean_inx_road = create_road(casa_inx_road, clean_inx_str)
     sweep_str = "sweep"
-    sweep_src_road = create_road(clean_src_road, sweep_str)
-    sweep_dst_road = create_road(clean_dst_road, sweep_str)
+    sweep_otx_road = create_road(clean_otx_road, sweep_str)
+    sweep_inx_road = create_road(clean_inx_road, sweep_str)
     yao_bridgeunit = get_casa_maison_bridgeunit_set_by_explicit_label_map()
     # print(f"{yao_bridgeunit=}")
-    src_dt = get_casa_maison_road_src_dt()
-    old_src_dt = copy_deepcopy(src_dt)
-    assert src_dt.iloc[0][base_str()] == src_music45_str
-    assert src_dt.iloc[1][base_str()] == casa_src_road
-    assert src_dt.iloc[2][base_str()] == clean_src_road
-    assert src_dt.iloc[3][base_str()] == sweep_src_road
-    print(f"Before {src_dt=}")
+    otx_dt = get_casa_maison_road_otx_dt()
+    old_otx_dt = copy_deepcopy(otx_dt)
+    assert otx_dt.iloc[0][base_str()] == otx_music45_str
+    assert otx_dt.iloc[1][base_str()] == casa_otx_road
+    assert otx_dt.iloc[2][base_str()] == clean_otx_road
+    assert otx_dt.iloc[3][base_str()] == sweep_otx_road
+    print(f"Before {otx_dt=}")
     print("")
 
     # WHEN
-    filter_all_columns_dataframe(src_dt, yao_bridgeunit)
+    filter_all_columns_dataframe(otx_dt, yao_bridgeunit)
 
     # THEN
     print("")
-    print(f"After  {src_dt=}")
-    assert src_dt.iloc[0][base_str()] == dst_music87_str
-    assert src_dt.iloc[1][base_str()] == casa_dst_road
-    assert src_dt.iloc[2][base_str()] == clean_dst_road
-    assert src_dt.iloc[3][base_str()] == sweep_dst_road
-    assert src_dt.to_csv() != old_src_dt.to_csv()
-    dst_dt = get_casa_maison_road_dst_dt()
-    print(f"{str(src_dt.to_csv())=}")
-    print(f"{str(dst_dt.to_csv())=}")
-    assert src_dt.to_csv() == dst_dt.to_csv()
+    print(f"After  {otx_dt=}")
+    assert otx_dt.iloc[0][base_str()] == inx_music87_str
+    assert otx_dt.iloc[1][base_str()] == casa_inx_road
+    assert otx_dt.iloc[2][base_str()] == clean_inx_road
+    assert otx_dt.iloc[3][base_str()] == sweep_inx_road
+    assert otx_dt.to_csv() != old_otx_dt.to_csv()
+    inx_dt = get_casa_maison_road_inx_dt()
+    print(f"{str(otx_dt.to_csv())=}")
+    print(f"{str(inx_dt.to_csv())=}")
+    assert otx_dt.to_csv() == inx_dt.to_csv()

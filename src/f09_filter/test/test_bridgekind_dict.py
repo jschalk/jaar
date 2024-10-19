@@ -13,40 +13,40 @@ from src.f09_filter.bridge import (
 
 def test_BridgeKind_get_dict_ReturnsObj():
     # ESTABLISH
-    clean_src = "clean"
-    clean_dst = "propre"
-    casa_src = "casa1"
-    casa_dst = "casa2"
+    clean_otx = "clean"
+    clean_inx = "propre"
+    casa_otx = "casa1"
+    casa_inx = "casa2"
     sue_str = "Sue"
-    slash_src_road_delimiter = "/"
-    colon_dst_road_delimiter = ":"
+    slash_otx_road_delimiter = "/"
+    colon_inx_road_delimiter = ":"
     roadnode_bridgekind = bridgekind_shop(
         x_python_type=type_RoadNode_str(),
-        x_src_road_delimiter=slash_src_road_delimiter,
-        x_dst_road_delimiter=colon_dst_road_delimiter,
+        x_otx_road_delimiter=slash_otx_road_delimiter,
+        x_inx_road_delimiter=colon_inx_road_delimiter,
         x_face_id=sue_str,
     )
     x1_road_bridge_dict = {
-        "src_road_delimiter": roadnode_bridgekind.src_road_delimiter,
-        "dst_road_delimiter": roadnode_bridgekind.dst_road_delimiter,
+        "otx_road_delimiter": roadnode_bridgekind.otx_road_delimiter,
+        "inx_road_delimiter": roadnode_bridgekind.inx_road_delimiter,
         "unknown_word": roadnode_bridgekind.unknown_word,
         "explicit_label_map": roadnode_bridgekind.explicit_label_map,
-        "src_to_dst": {},
+        "otx_to_inx": {},
         "face_id": roadnode_bridgekind.face_id,
         "python_type": roadnode_bridgekind.python_type,
     }
     assert roadnode_bridgekind.get_dict() == x1_road_bridge_dict
 
     # WHEN
-    roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)
-    roadnode_bridgekind.set_explicit_label_map(casa_src, casa_dst)
+    roadnode_bridgekind.set_otx_to_inx(clean_otx, clean_inx)
+    roadnode_bridgekind.set_explicit_label_map(casa_otx, casa_inx)
     # THEN
     x2_road_bridge_dict = {
-        "src_road_delimiter": roadnode_bridgekind.src_road_delimiter,
-        "dst_road_delimiter": roadnode_bridgekind.dst_road_delimiter,
+        "otx_road_delimiter": roadnode_bridgekind.otx_road_delimiter,
+        "inx_road_delimiter": roadnode_bridgekind.inx_road_delimiter,
         "unknown_word": roadnode_bridgekind.unknown_word,
-        "explicit_label_map": {casa_src: casa_dst},
-        "src_to_dst": {clean_src: clean_dst},
+        "explicit_label_map": {casa_otx: casa_inx},
+        "otx_to_inx": {clean_otx: clean_inx},
         "face_id": sue_str,
         "python_type": type_RoadNode_str(),
     }
@@ -56,21 +56,21 @@ def test_BridgeKind_get_dict_ReturnsObj():
 def test_BridgeKind_get_json_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    clean_src = "clean"
-    clean_dst = "propre"
-    casa_src = "casa1"
-    casa_dst = "casa2"
-    slash_src_road_delimiter = "/"
+    clean_otx = "clean"
+    clean_inx = "propre"
+    casa_otx = "casa1"
+    casa_inx = "casa2"
+    slash_otx_road_delimiter = "/"
     roadnode_bridgekind = bridgekind_shop(
-        type_RoadNode_str(), slash_src_road_delimiter, x_face_id=sue_str
+        type_RoadNode_str(), slash_otx_road_delimiter, x_face_id=sue_str
     )
     x1_road_bridge_json = f"""{{
-  "dst_road_delimiter": "{roadnode_bridgekind.dst_road_delimiter}",
   "explicit_label_map": {roadnode_bridgekind.explicit_label_map},
   "face_id": "{sue_str}",
+  "inx_road_delimiter": "{roadnode_bridgekind.inx_road_delimiter}",
+  "otx_road_delimiter": "{roadnode_bridgekind.otx_road_delimiter}",
+  "otx_to_inx": {{}},
   "python_type": "{type_RoadNode_str()}",
-  "src_road_delimiter": "{roadnode_bridgekind.src_road_delimiter}",
-  "src_to_dst": {{}},
   "unknown_word": "{roadnode_bridgekind.unknown_word}"
 }}"""
     print(f"       {x1_road_bridge_json=}")
@@ -78,20 +78,20 @@ def test_BridgeKind_get_json_ReturnsObj():
     assert roadnode_bridgekind.get_json() == x1_road_bridge_json
 
     # WHEN
-    roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)
-    roadnode_bridgekind.set_explicit_label_map(casa_src, casa_dst)
+    roadnode_bridgekind.set_otx_to_inx(clean_otx, clean_inx)
+    roadnode_bridgekind.set_explicit_label_map(casa_otx, casa_inx)
     # THEN
     x2_road_bridge_json = f"""{{
-  "dst_road_delimiter": "{roadnode_bridgekind.dst_road_delimiter}",
   "explicit_label_map": {{
-    "{casa_src}": "{casa_dst}"
+    "{casa_otx}": "{casa_inx}"
   }},
   "face_id": "{sue_str}",
-  "python_type": "{type_RoadNode_str()}",
-  "src_road_delimiter": "{roadnode_bridgekind.src_road_delimiter}",
-  "src_to_dst": {{
-    "{clean_src}": "{clean_dst}"
+  "inx_road_delimiter": "{roadnode_bridgekind.inx_road_delimiter}",
+  "otx_road_delimiter": "{roadnode_bridgekind.otx_road_delimiter}",
+  "otx_to_inx": {{
+    "{clean_otx}": "{clean_inx}"
   }},
+  "python_type": "{type_RoadNode_str()}",
   "unknown_word": "{roadnode_bridgekind.unknown_word}"
 }}"""
     print(f"       {x2_road_bridge_json=}")
@@ -102,16 +102,16 @@ def test_BridgeKind_get_json_ReturnsObj():
 def test_get_bridgekind_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    clean_src = "clean"
-    clean_dst = "propre"
-    casa_src = "casa1"
-    casa_dst = "casa2"
-    slash_src_road_delimiter = "/"
+    clean_otx = "clean"
+    clean_inx = "propre"
+    casa_otx = "casa1"
+    casa_inx = "casa2"
+    slash_otx_road_delimiter = "/"
     roadnode_bridgekind = bridgekind_shop(
-        type_RoadNode_str(), slash_src_road_delimiter, x_face_id=sue_str
+        type_RoadNode_str(), slash_otx_road_delimiter, x_face_id=sue_str
     )
-    roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)
-    roadnode_bridgekind.set_explicit_label_map(casa_src, casa_dst)
+    roadnode_bridgekind.set_otx_to_inx(clean_otx, clean_inx)
+    roadnode_bridgekind.set_explicit_label_map(casa_otx, casa_inx)
 
     # WHEN
     gen_bridgekind = get_bridgekind_from_dict(roadnode_bridgekind.get_dict())
@@ -124,11 +124,11 @@ def test_get_bridgekind_from_dict_ReturnsObj():
 
 def test_get_bridgekind_from_json_ReturnsObj():
     # ESTABLISH
-    clean_src = "clean"
-    clean_dst = "propre"
-    slash_src_road_delimiter = "/"
-    roadnode_bridgekind = bridgekind_shop(type_RoadNode_str(), slash_src_road_delimiter)
-    roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)
+    clean_otx = "clean"
+    clean_inx = "propre"
+    slash_otx_road_delimiter = "/"
+    roadnode_bridgekind = bridgekind_shop(type_RoadNode_str(), slash_otx_road_delimiter)
+    roadnode_bridgekind.set_otx_to_inx(clean_otx, clean_inx)
 
     # WHEN
     x_bridgekind = get_bridgekind_from_json(roadnode_bridgekind.get_json())
