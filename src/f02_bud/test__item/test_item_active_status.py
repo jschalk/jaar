@@ -80,7 +80,7 @@ def test_ItemUnit_get_awardlink_ReturnsObj():
 
     # THEN
     assert biker_awardlink
-    assert biker_awardlink.group_id == biker_str
+    assert biker_awardlink.awardee_id == biker_str
 
 
 def test_ItemUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
@@ -95,8 +95,8 @@ def test_ItemUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValue
     swim_take_force = 32
     swim_awardheir = awardheir_shop(swim_group_id, swim_give_force, swim_take_force)
     x_awardheirs = {
-        swim_awardheir.group_id: swim_awardheir,
-        biker_awardheir.group_id: biker_awardheir,
+        swim_awardheir.awardee_id: swim_awardheir,
+        biker_awardheir.awardee_id: biker_awardheir,
     }
     sport_str = "sport"
     sport_item = itemunit_shop(sport_str, _awardheirs=x_awardheirs)
@@ -451,7 +451,7 @@ def test_ItemUnit_set_teamheir_CorrectlySetsAttr():
     swim_str = "swimmers"
     sport_str = "sports"
     sport_item = itemunit_shop(sport_str)
-    sport_item.teamunit.set_teamlink(group_id=swim_str)
+    sport_item.teamunit.set_teamlink(team_id=swim_str)
     # assert sport_item._teamheir is None
 
     # WHEN
@@ -460,7 +460,7 @@ def test_ItemUnit_set_teamheir_CorrectlySetsAttr():
     # THEN
     assert sport_item._teamheir is not None
     swim_teamunit = teamunit_shop()
-    swim_teamunit.set_teamlink(group_id=swim_str)
+    swim_teamunit.set_teamlink(team_id=swim_str)
     swim_teamheir = teamheir_shop()
     swim_teamheir.set_teamlinks(
         teamunit=swim_teamunit, parent_teamheir=None, bud_groupboxs=None

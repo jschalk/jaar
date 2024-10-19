@@ -152,8 +152,8 @@ def test_itemunit_shop_ReturnsObjWith_awardlinks():
     swim_take_force = 32
     swim_awardlink = awardlink_shop(swim_group_id, swim_give_force, swim_take_force)
     x_awardlinks = {
-        swim_awardlink.group_id: swim_awardlink,
-        biker_awardlink.group_id: biker_awardlink,
+        swim_awardlink.awardee_id: swim_awardlink,
+        biker_awardlink.awardee_id: biker_awardlink,
     }
 
     # WHEN

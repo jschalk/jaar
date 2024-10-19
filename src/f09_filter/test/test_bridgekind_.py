@@ -115,9 +115,7 @@ def test_BridgeKind_set_all_src_to_dst_RaisesErrorIf_unknown_word_IsKeyIn_src_to
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
+    acct_id_bridgekind = bridgekind_shop(None, x_unknown_word=x_unknown_word)
     x_src_to_dst = {xio_str: sue_str, x_unknown_word: zia_str}
     assert acct_id_bridgekind.src_to_dst != x_src_to_dst
 
@@ -134,51 +132,43 @@ def test_BridgeKind_set_all_src_to_dst_DoesNotRaiseErrorIfParameterSetToTrue():
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
+    x_bridgekind = bridgekind_shop(None)
     x_src_to_dst = {xio_str: sue_str, x_unknown_word: zia_str}
-    assert acct_id_bridgekind.src_to_dst != x_src_to_dst
+    assert x_bridgekind.src_to_dst != x_src_to_dst
 
     # WHEN
-    acct_id_bridgekind.set_all_src_to_dst(x_src_to_dst)
+    x_bridgekind.set_all_src_to_dst(x_src_to_dst)
 
     # THEN
-    assert acct_id_bridgekind.src_to_dst == x_src_to_dst
+    assert x_bridgekind.src_to_dst == x_src_to_dst
 
 
 def test_BridgeKind_set_src_to_dst_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
-    x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
-    assert acct_id_bridgekind.src_to_dst == {}
+    x_bridgekind = bridgekind_shop(None)
+    assert x_bridgekind.src_to_dst == {}
 
     # WHEN
-    acct_id_bridgekind.set_src_to_dst(xio_str, sue_str)
+    x_bridgekind.set_src_to_dst(xio_str, sue_str)
 
     # THEN
-    assert acct_id_bridgekind.src_to_dst == {xio_str: sue_str}
+    assert x_bridgekind.src_to_dst == {xio_str: sue_str}
 
 
 def test_BridgeKind_get_dst_value_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
-    x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
-    assert acct_id_bridgekind._get_dst_value(xio_str) != sue_str
+    x_bridgekind = bridgekind_shop(None)
+    assert x_bridgekind._get_dst_value(xio_str) != sue_str
 
     # WHEN
-    acct_id_bridgekind.set_src_to_dst(xio_str, sue_str)
+    x_bridgekind.set_src_to_dst(xio_str, sue_str)
 
     # THEN
-    assert acct_id_bridgekind._get_dst_value(xio_str) == sue_str
+    assert x_bridgekind._get_dst_value(xio_str) == sue_str
 
 
 def test_BridgeKind_src_to_dst_exists_ReturnsObj():
@@ -187,32 +177,29 @@ def test_BridgeKind_src_to_dst_exists_ReturnsObj():
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
-    assert acct_id_bridgekind.src_to_dst_exists(xio_str, sue_str) is False
-    assert acct_id_bridgekind.src_to_dst_exists(xio_str, zia_str) is False
-    assert acct_id_bridgekind.src_to_dst_exists(xio_str, bob_str) is False
-    assert acct_id_bridgekind.src_to_dst_exists(zia_str, zia_str) is False
+    x_bridgekind = bridgekind_shop(None)
+    assert x_bridgekind.src_to_dst_exists(xio_str, sue_str) is False
+    assert x_bridgekind.src_to_dst_exists(xio_str, zia_str) is False
+    assert x_bridgekind.src_to_dst_exists(xio_str, bob_str) is False
+    assert x_bridgekind.src_to_dst_exists(zia_str, zia_str) is False
 
     # WHEN
-    acct_id_bridgekind.set_src_to_dst(xio_str, sue_str)
+    x_bridgekind.set_src_to_dst(xio_str, sue_str)
 
     # THEN
-    assert acct_id_bridgekind.src_to_dst_exists(xio_str, sue_str)
-    assert acct_id_bridgekind.src_to_dst_exists(xio_str, zia_str) is False
-    assert acct_id_bridgekind.src_to_dst_exists(xio_str, bob_str) is False
-    assert acct_id_bridgekind.src_to_dst_exists(zia_str, zia_str) is False
+    assert x_bridgekind.src_to_dst_exists(xio_str, sue_str)
+    assert x_bridgekind.src_to_dst_exists(xio_str, zia_str) is False
+    assert x_bridgekind.src_to_dst_exists(xio_str, bob_str) is False
+    assert x_bridgekind.src_to_dst_exists(zia_str, zia_str) is False
 
     # WHEN
-    acct_id_bridgekind.set_src_to_dst(zia_str, zia_str)
+    x_bridgekind.set_src_to_dst(zia_str, zia_str)
 
     # THEN
-    assert acct_id_bridgekind.src_to_dst_exists(xio_str, sue_str)
-    assert acct_id_bridgekind.src_to_dst_exists(xio_str, zia_str) is False
-    assert acct_id_bridgekind.src_to_dst_exists(xio_str, bob_str) is False
-    assert acct_id_bridgekind.src_to_dst_exists(zia_str, zia_str)
+    assert x_bridgekind.src_to_dst_exists(xio_str, sue_str)
+    assert x_bridgekind.src_to_dst_exists(xio_str, zia_str) is False
+    assert x_bridgekind.src_to_dst_exists(xio_str, bob_str) is False
+    assert x_bridgekind.src_to_dst_exists(zia_str, zia_str)
 
 
 def test_BridgeKind_src_exists_ReturnsObj():
@@ -221,50 +208,44 @@ def test_BridgeKind_src_exists_ReturnsObj():
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
-    assert acct_id_bridgekind.src_exists(xio_str) is False
-    assert acct_id_bridgekind.src_exists(sue_str) is False
-    assert acct_id_bridgekind.src_exists(bob_str) is False
-    assert acct_id_bridgekind.src_exists(zia_str) is False
+    x_bridgekind = bridgekind_shop(None)
+    assert x_bridgekind.src_exists(xio_str) is False
+    assert x_bridgekind.src_exists(sue_str) is False
+    assert x_bridgekind.src_exists(bob_str) is False
+    assert x_bridgekind.src_exists(zia_str) is False
 
     # WHEN
-    acct_id_bridgekind.set_src_to_dst(xio_str, sue_str)
+    x_bridgekind.set_src_to_dst(xio_str, sue_str)
 
     # THEN
-    assert acct_id_bridgekind.src_exists(xio_str)
-    assert acct_id_bridgekind.src_exists(sue_str) is False
-    assert acct_id_bridgekind.src_exists(bob_str) is False
-    assert acct_id_bridgekind.src_exists(zia_str) is False
+    assert x_bridgekind.src_exists(xio_str)
+    assert x_bridgekind.src_exists(sue_str) is False
+    assert x_bridgekind.src_exists(bob_str) is False
+    assert x_bridgekind.src_exists(zia_str) is False
 
     # WHEN
-    acct_id_bridgekind.set_src_to_dst(zia_str, zia_str)
+    x_bridgekind.set_src_to_dst(zia_str, zia_str)
 
     # THEN
-    assert acct_id_bridgekind.src_exists(xio_str)
-    assert acct_id_bridgekind.src_exists(sue_str) is False
-    assert acct_id_bridgekind.src_exists(bob_str) is False
-    assert acct_id_bridgekind.src_exists(zia_str)
+    assert x_bridgekind.src_exists(xio_str)
+    assert x_bridgekind.src_exists(sue_str) is False
+    assert x_bridgekind.src_exists(bob_str) is False
+    assert x_bridgekind.src_exists(zia_str)
 
 
 def test_BridgeKind_del_src_to_dst_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
-    x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
-    acct_id_bridgekind.set_src_to_dst(xio_str, sue_str)
-    assert acct_id_bridgekind.src_to_dst_exists(xio_str, sue_str)
+    x_bridgekind = bridgekind_shop(None)
+    x_bridgekind.set_src_to_dst(xio_str, sue_str)
+    assert x_bridgekind.src_to_dst_exists(xio_str, sue_str)
 
     # WHEN
-    acct_id_bridgekind.del_src_to_dst(xio_str)
+    x_bridgekind.del_src_to_dst(xio_str)
 
     # THEN
-    assert acct_id_bridgekind.src_to_dst_exists(xio_str, sue_str) is False
+    assert x_bridgekind.src_to_dst_exists(xio_str, sue_str) is False
 
 
 def test_BridgeKind_unknown_word_in_src_to_dst_ReturnsObj():
@@ -273,51 +254,85 @@ def test_BridgeKind_unknown_word_in_src_to_dst_ReturnsObj():
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
-    acct_id_bridgekind.set_src_to_dst(xio_str, sue_str)
-    assert acct_id_bridgekind._unknown_word_in_src_to_dst() is False
+    x_bridgekind = bridgekind_shop(None, x_unknown_word=x_unknown_word)
+    x_bridgekind.set_src_to_dst(xio_str, sue_str)
+    assert x_bridgekind._unknown_word_in_src_to_dst() is False
 
     # WHEN
-    acct_id_bridgekind.set_src_to_dst(zia_str, x_unknown_word)
+    x_bridgekind.set_src_to_dst(zia_str, x_unknown_word)
 
     # THEN
-    assert acct_id_bridgekind._unknown_word_in_src_to_dst()
+    assert x_bridgekind._unknown_word_in_src_to_dst()
 
 
 def test_BridgeKind_set_explicit_label_map_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
-    x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
-    assert acct_id_bridgekind.explicit_label_map == {}
+    x_bridgekind = bridgekind_shop(None)
+    assert x_bridgekind.explicit_label_map == {}
 
     # WHEN
-    acct_id_bridgekind.set_explicit_label_map(xio_str, sue_str)
+    x_bridgekind.set_explicit_label_map(xio_str, sue_str)
 
     # THEN
-    assert acct_id_bridgekind.explicit_label_map == {xio_str: sue_str}
+    assert x_bridgekind.explicit_label_map == {xio_str: sue_str}
+
+
+def test_BridgeKind_set_explicit_label_map_SetsAttr():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    x_bridgekind = bridgekind_shop(None)
+    assert x_bridgekind.explicit_label_map == {}
+
+    # WHEN
+    x_bridgekind.set_explicit_label_map(xio_str, sue_str)
+
+    # THEN
+    assert x_bridgekind.explicit_label_map == {xio_str: sue_str}
+
+
+def test_BridgeKind_set_explicit_label_map_RaisesExceptionWhen_road_delimiter_In_src_label():
+    # ESTABLISH
+    x_bridgekind = bridgekind_shop(None)
+    sue_src = f"Sue{x_bridgekind.src_road_delimiter}"
+    sue_dst = "Sue"
+    assert x_bridgekind.explicit_label_map == {}
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        x_bridgekind.set_explicit_label_map(sue_src, sue_dst)
+    exception_str = f"explicit_label_map cannot have src_label '{sue_src}'. It must be not have road_delimiter {x_bridgekind.src_road_delimiter}."
+    assert str(excinfo.value) == exception_str
+
+
+def test_BridgeKind_set_explicit_label_map_RaisesExceptionWhen_road_delimiter_In_dst_label():
+    # ESTABLISH
+    x_bridgekind = bridgekind_shop(None)
+    sue_dst = f"Sue{x_bridgekind.src_road_delimiter}"
+    sue_src = "Sue"
+    assert x_bridgekind.explicit_label_map == {}
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        x_bridgekind.set_explicit_label_map(sue_src, sue_dst)
+    exception_str = f"explicit_label_map cannot have dst_label '{sue_dst}'. It must be not have road_delimiter {x_bridgekind.dst_road_delimiter}."
+    assert str(excinfo.value) == exception_str
 
 
 def test_BridgeKind_get_explicit_dst_label_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
-    x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
-    assert acct_id_bridgekind._get_explicit_dst_label(xio_str) != sue_str
+    x_bridgekind = bridgekind_shop(None)
+    assert x_bridgekind._get_explicit_dst_label(xio_str) != sue_str
 
     # WHEN
-    acct_id_bridgekind.set_explicit_label_map(xio_str, sue_str)
+    x_bridgekind.set_explicit_label_map(xio_str, sue_str)
 
     # THEN
-    assert acct_id_bridgekind._get_explicit_dst_label(xio_str) == sue_str
+    assert x_bridgekind._get_explicit_dst_label(xio_str) == sue_str
 
 
 def test_BridgeKind_explicit_label_map_exists_ReturnsObj():
@@ -326,32 +341,29 @@ def test_BridgeKind_explicit_label_map_exists_ReturnsObj():
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
-    assert acct_id_bridgekind.explicit_label_map_exists(xio_str, sue_str) is False
-    assert acct_id_bridgekind.explicit_label_map_exists(xio_str, zia_str) is False
-    assert acct_id_bridgekind.explicit_label_map_exists(xio_str, bob_str) is False
-    assert acct_id_bridgekind.explicit_label_map_exists(zia_str, zia_str) is False
+    x_bridgekind = bridgekind_shop(None)
+    assert x_bridgekind.explicit_label_map_exists(xio_str, sue_str) is False
+    assert x_bridgekind.explicit_label_map_exists(xio_str, zia_str) is False
+    assert x_bridgekind.explicit_label_map_exists(xio_str, bob_str) is False
+    assert x_bridgekind.explicit_label_map_exists(zia_str, zia_str) is False
 
     # WHEN
-    acct_id_bridgekind.set_explicit_label_map(xio_str, sue_str)
+    x_bridgekind.set_explicit_label_map(xio_str, sue_str)
 
     # THEN
-    assert acct_id_bridgekind.explicit_label_map_exists(xio_str, sue_str)
-    assert acct_id_bridgekind.explicit_label_map_exists(xio_str, zia_str) is False
-    assert acct_id_bridgekind.explicit_label_map_exists(xio_str, bob_str) is False
-    assert acct_id_bridgekind.explicit_label_map_exists(zia_str, zia_str) is False
+    assert x_bridgekind.explicit_label_map_exists(xio_str, sue_str)
+    assert x_bridgekind.explicit_label_map_exists(xio_str, zia_str) is False
+    assert x_bridgekind.explicit_label_map_exists(xio_str, bob_str) is False
+    assert x_bridgekind.explicit_label_map_exists(zia_str, zia_str) is False
 
     # WHEN
-    acct_id_bridgekind.set_explicit_label_map(zia_str, zia_str)
+    x_bridgekind.set_explicit_label_map(zia_str, zia_str)
 
     # THEN
-    assert acct_id_bridgekind.explicit_label_map_exists(xio_str, sue_str)
-    assert acct_id_bridgekind.explicit_label_map_exists(xio_str, zia_str) is False
-    assert acct_id_bridgekind.explicit_label_map_exists(xio_str, bob_str) is False
-    assert acct_id_bridgekind.explicit_label_map_exists(zia_str, zia_str)
+    assert x_bridgekind.explicit_label_map_exists(xio_str, sue_str)
+    assert x_bridgekind.explicit_label_map_exists(xio_str, zia_str) is False
+    assert x_bridgekind.explicit_label_map_exists(xio_str, bob_str) is False
+    assert x_bridgekind.explicit_label_map_exists(zia_str, zia_str)
 
 
 def test_BridgeKind_explicit_src_label_exists_ReturnsObj():
@@ -360,47 +372,41 @@ def test_BridgeKind_explicit_src_label_exists_ReturnsObj():
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
-    assert acct_id_bridgekind.explicit_src_label_exists(xio_str) is False
-    assert acct_id_bridgekind.explicit_src_label_exists(sue_str) is False
-    assert acct_id_bridgekind.explicit_src_label_exists(bob_str) is False
-    assert acct_id_bridgekind.explicit_src_label_exists(zia_str) is False
+    x_bridgekind = bridgekind_shop(None)
+    assert x_bridgekind.explicit_src_label_exists(xio_str) is False
+    assert x_bridgekind.explicit_src_label_exists(sue_str) is False
+    assert x_bridgekind.explicit_src_label_exists(bob_str) is False
+    assert x_bridgekind.explicit_src_label_exists(zia_str) is False
 
     # WHEN
-    acct_id_bridgekind.set_explicit_label_map(xio_str, sue_str)
+    x_bridgekind.set_explicit_label_map(xio_str, sue_str)
 
     # THEN
-    assert acct_id_bridgekind.explicit_src_label_exists(xio_str)
-    assert acct_id_bridgekind.explicit_src_label_exists(sue_str) is False
-    assert acct_id_bridgekind.explicit_src_label_exists(bob_str) is False
-    assert acct_id_bridgekind.explicit_src_label_exists(zia_str) is False
+    assert x_bridgekind.explicit_src_label_exists(xio_str)
+    assert x_bridgekind.explicit_src_label_exists(sue_str) is False
+    assert x_bridgekind.explicit_src_label_exists(bob_str) is False
+    assert x_bridgekind.explicit_src_label_exists(zia_str) is False
 
     # WHEN
-    acct_id_bridgekind.set_explicit_label_map(zia_str, zia_str)
+    x_bridgekind.set_explicit_label_map(zia_str, zia_str)
 
     # THEN
-    assert acct_id_bridgekind.explicit_src_label_exists(xio_str)
-    assert acct_id_bridgekind.explicit_src_label_exists(sue_str) is False
-    assert acct_id_bridgekind.explicit_src_label_exists(bob_str) is False
-    assert acct_id_bridgekind.explicit_src_label_exists(zia_str)
+    assert x_bridgekind.explicit_src_label_exists(xio_str)
+    assert x_bridgekind.explicit_src_label_exists(sue_str) is False
+    assert x_bridgekind.explicit_src_label_exists(bob_str) is False
+    assert x_bridgekind.explicit_src_label_exists(zia_str)
 
 
 def test_BridgeKind_del_explicit_label_map_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
-    x_unknown_word = "UnknownAcctId"
-    acct_id_bridgekind = bridgekind_shop(
-        None, acct_id_str(), x_unknown_word=x_unknown_word
-    )
-    acct_id_bridgekind.set_explicit_label_map(xio_str, sue_str)
-    assert acct_id_bridgekind.explicit_label_map_exists(xio_str, sue_str)
+    x_bridgekind = bridgekind_shop(None)
+    x_bridgekind.set_explicit_label_map(xio_str, sue_str)
+    assert x_bridgekind.explicit_label_map_exists(xio_str, sue_str)
 
     # WHEN
-    acct_id_bridgekind.del_explicit_label_map(xio_str)
+    x_bridgekind.del_explicit_label_map(xio_str)
 
     # THEN
-    assert acct_id_bridgekind.explicit_label_map_exists(xio_str, sue_str) is False
+    assert x_bridgekind.explicit_label_map_exists(xio_str, sue_str) is False

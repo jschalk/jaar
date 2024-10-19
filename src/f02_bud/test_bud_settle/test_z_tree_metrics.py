@@ -172,12 +172,12 @@ def test_BudUnit_3AdvocatesNoitemunit_shop():
     accts_metrics = zia_budunit.get_awardlinks_metrics()
 
     # THEN
-    awardlink_yao = accts_metrics[yao_str]
-    awardlink_sue = accts_metrics[sue_str]
-    awardlink_zia = accts_metrics[zia_str]
-    assert awardlink_yao.group_id is not None
-    assert awardlink_sue.group_id is not None
-    assert awardlink_zia.group_id is not None
-    assert awardlink_yao.group_id == yao_str
-    assert awardlink_sue.group_id == sue_str
-    assert awardlink_zia.group_id == zia_str
+    yao_awardlink = accts_metrics[yao_str]
+    sue_awardlink = accts_metrics[sue_str]
+    zia_awardlink = accts_metrics[zia_str]
+    assert yao_awardlink.awardee_id is not None
+    assert sue_awardlink.awardee_id is not None
+    assert zia_awardlink.awardee_id is not None
+    assert yao_awardlink.awardee_id == yao_str
+    assert sue_awardlink.awardee_id == sue_str
+    assert zia_awardlink.awardee_id == zia_str

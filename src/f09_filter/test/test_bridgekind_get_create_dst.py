@@ -1,3 +1,4 @@
+from src.f01_road.road import create_road
 from src.f04_gift.atom_config import (
     type_RoadNode_str,
     type_RoadUnit_str,
@@ -9,7 +10,7 @@ from src.f09_filter.bridge import bridgekind_shop
 def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label():
     # ESTABLISH
     clean_src = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     src_r_delimiter = "/"
     casa_src = "casa"
     casa_dst = "casa"
@@ -43,7 +44,7 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label():
 def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label_With_explicit_label_map():
     # ESTABLISH
     clean_src = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     src_r_delimiter = "/"
     casa_src = "casa"
     casa_dst = "house"
@@ -192,10 +193,10 @@ def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_group_id():
     assert group_id_bridgekind.src_exists(climb_src) is False
 
 
-def test_BridgeKind_get_create_dst_AddsMissingElementsTo_src_to_dst():
+def test_BridgeKind_get_create_dst_AddsMissingElementsTo_src_to_dst_RoadNode():
     # ESTABLISH
     clean_src = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     src_r_delimiter = "/"
     casa_src = "casa"
     casa_dst = "casa"
@@ -214,3 +215,65 @@ def test_BridgeKind_get_create_dst_AddsMissingElementsTo_src_to_dst():
     # THEN
     assert roadnode_bridgekind.src_exists(swim_str)
     assert roadnode_bridgekind.src_to_dst_exists(swim_str, swim_str)
+
+
+def test_BridgeKind_get_create_dst_AddsMissingElementsTo_src_to_dst_RoadUnit():
+    # ESTABLISH
+    src_music45_str = "music45"
+    dst_music87_str = "music87"
+    casa_src_str = "casa"
+    casa_dst_str = "maison"
+    casa_src_road = create_road(src_music45_str, casa_src_str)
+    casa_dst_road = create_road(dst_music87_str, casa_dst_str)
+    clean_src_str = "clean"
+    clean_dst_str = "propre"
+    clean_src_road = create_road(casa_src_road, clean_src_str)
+    clean_dst_road = create_road(casa_dst_road, clean_dst_str)
+    sweep_str = "sweep"
+    sweep_src_road = create_road(clean_src_road, sweep_str)
+    sweep_dst_road = create_road(clean_dst_road, sweep_str)
+    road_bd = bridgekind_shop(type_RoadUnit_str())
+    road_bd.set_explicit_label_map(src_music45_str, dst_music87_str)
+    road_bd.set_explicit_label_map(casa_src_str, casa_dst_str)
+    road_bd.set_explicit_label_map(clean_src_str, clean_dst_str)
+    assert road_bd.src_exists(src_music45_str) is False
+    assert road_bd.src_exists(casa_src_road) is False
+    assert road_bd.src_exists(clean_src_road) is False
+    assert road_bd.src_exists(sweep_src_road) is False
+    assert road_bd.src_to_dst_exists(src_music45_str, dst_music87_str) is False
+    assert road_bd.src_to_dst_exists(casa_src_road, casa_dst_road) is False
+    assert road_bd.src_to_dst_exists(clean_src_road, clean_dst_road) is False
+    assert road_bd.src_to_dst_exists(sweep_src_road, sweep_dst_road) is False
+
+    # WHEN
+    assert road_bd.get_create_dst(src_music45_str) == dst_music87_str
+    # THEN
+    assert road_bd.src_exists(src_music45_str)
+    assert road_bd.src_exists(casa_src_road) is False
+    assert road_bd.src_exists(clean_src_road) is False
+    assert road_bd.src_exists(sweep_src_road) is False
+    assert road_bd.src_to_dst_exists(src_music45_str, dst_music87_str)
+    assert road_bd.src_to_dst_exists(casa_src_road, casa_dst_road) is False
+    assert road_bd.src_to_dst_exists(clean_src_road, clean_dst_road) is False
+    assert road_bd.src_to_dst_exists(sweep_src_road, sweep_dst_road) is False
+
+    # WHEN
+    assert road_bd.get_create_dst(casa_src_road) == casa_dst_road
+    # THEN
+    assert road_bd.src_exists(src_music45_str)
+    assert road_bd.src_exists(casa_src_road)
+    assert road_bd.src_exists(clean_src_road) is False
+    assert road_bd.src_exists(sweep_src_road) is False
+    assert road_bd.src_to_dst_exists(src_music45_str, dst_music87_str)
+    assert road_bd.src_to_dst_exists(casa_src_road, casa_dst_road)
+    assert road_bd.src_to_dst_exists(clean_src_road, clean_dst_road) is False
+    assert road_bd.src_to_dst_exists(sweep_src_road, sweep_dst_road) is False
+
+    # WHEN
+    assert road_bd.get_create_dst(clean_src_road) == clean_dst_road
+    assert road_bd.get_create_dst(sweep_src_road) == sweep_dst_road
+    # THEN
+    assert road_bd.src_to_dst_exists(src_music45_str, dst_music87_str)
+    assert road_bd.src_to_dst_exists(casa_src_road, casa_dst_road)
+    assert road_bd.src_to_dst_exists(clean_src_road, clean_dst_road)
+    assert road_bd.src_to_dst_exists(sweep_src_road, sweep_dst_road)

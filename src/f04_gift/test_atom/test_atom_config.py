@@ -1,4 +1,5 @@
 from src.f00_instrument.dict_tool import get_from_nested_dict
+from src.f00_instrument.pandas_tool import get_sorting_priority_atom_args
 from src.f02_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
@@ -43,7 +44,9 @@ from src.f04_gift.atom_config import (
     parent_road_str,
     road_str,
     acct_id_str,
+    awardee_id_str,
     group_id_str,
+    team_id_str,
     begin_str,
     close_str,
     addin_str,
@@ -74,7 +77,9 @@ def test_str_functions_ReturnsObj():
     assert type_RoadNode_str() == "RoadNode"
     assert road_str() == "road"
     assert acct_id_str() == "acct_id"
+    assert awardee_id_str() == "awardee_id"
     assert group_id_str() == "group_id"
+    assert team_id_str() == "team_id"
     assert crud_str_str() == "crud_str"
     assert begin_str() == "begin"
     assert close_str() == "close"
@@ -524,7 +529,7 @@ def test_get_atom_args_category_mapping_ReturnsObj():
     assert bud_item_factunit_str() in road_categorys
     assert bud_item_teamlink_str() in road_categorys
     assert len(road_categorys) == 6
-    assert len(x_atom_args_category_mapping) == 41
+    assert len(x_atom_args_category_mapping) == 43
 
 
 def get_python_type(x_category: str, x_arg: str) -> str:
@@ -597,7 +602,9 @@ def all_atom_args_python_types_are_correct(x_python_types) -> bool:
         x_categorys = list(x_atom_args_category_mapping.get(x_atom_arg))
         x_category = x_categorys[0]
         x_python_type = get_python_type(x_category, x_atom_arg)
-        print(f"assert x_python_types.get({x_atom_arg} == {x_python_type}")
+        print(
+            f"assert x_python_types.get({x_atom_arg}) == {x_python_type} {x_python_types.get(x_atom_arg)=}"
+        )
         if x_python_types.get(x_atom_arg) != x_python_type:
             return False
     return True
@@ -608,10 +615,9 @@ def test_get_atom_args_python_types_ReturnsObj():
     x_python_types = get_atom_args_python_types()
 
     # THEN
-    assert all_atom_args_python_types_are_correct(x_python_types)
-    assert x_python_types.keys() == get_atom_args_category_mapping().keys()
     assert x_python_types.get("acct_id") == type_AcctID_str()
     assert x_python_types.get("addin") == "float"
+    assert x_python_types.get("awardee_id") == type_GroupID_str()
     assert x_python_types.get("base") == type_RoadUnit_str()
     assert x_python_types.get("base_item_active_requisite") == "bool"
     assert x_python_types.get("begin") == "float"
@@ -651,3 +657,58 @@ def test_get_atom_args_python_types_ReturnsObj():
     assert x_python_types.get("stop_want") == "float"
     assert x_python_types.get("take_force") == "float"
     assert x_python_types.get("tally") == "int"
+    assert x_python_types.get("team_id") == type_GroupID_str()
+    assert x_python_types.keys() == get_atom_args_category_mapping().keys()
+    assert all_atom_args_python_types_are_correct(x_python_types)
+
+
+def test_get_sorting_priority_atom_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    table_sorting_priority = get_sorting_priority_atom_args()
+
+    # THEN
+    assert table_sorting_priority[0] == "acct_id"
+    assert table_sorting_priority[1] == "group_id"
+    assert table_sorting_priority[2] == "parent_road"
+    assert table_sorting_priority[3] == "label"
+    assert table_sorting_priority[4] == "road"
+    assert table_sorting_priority[5] == "base"
+    assert table_sorting_priority[6] == "need"
+    assert table_sorting_priority[7] == "pick"
+    assert table_sorting_priority[8] == "team_id"
+    assert table_sorting_priority[9] == "awardee_id"
+    assert table_sorting_priority[10] == "healer_id"
+    assert table_sorting_priority[11] == "numor"
+    assert table_sorting_priority[12] == "denom"
+    assert table_sorting_priority[13] == "addin"
+    assert table_sorting_priority[14] == "base_item_active_requisite"
+    assert table_sorting_priority[15] == "begin"
+    assert table_sorting_priority[16] == "close"
+    assert table_sorting_priority[17] == "credit_belief"
+    assert table_sorting_priority[18] == "debtit_belief"
+    assert table_sorting_priority[19] == "credit_vote"
+    assert table_sorting_priority[20] == "debtit_vote"
+    assert table_sorting_priority[21] == "credor_respect"
+    assert table_sorting_priority[22] == "debtor_respect"
+    assert table_sorting_priority[23] == "fopen"
+    assert table_sorting_priority[24] == "fnigh"
+    assert table_sorting_priority[25] == "fund_pool"
+    assert table_sorting_priority[26] == "give_force"
+    assert table_sorting_priority[27] == "gogo_want"
+    assert table_sorting_priority[28] == "mass"
+    assert table_sorting_priority[29] == "max_tree_traverse"
+    assert table_sorting_priority[30] == "morph"
+    assert table_sorting_priority[31] == "nigh"
+    assert table_sorting_priority[32] == "open"
+    assert table_sorting_priority[33] == "divisor"
+    assert table_sorting_priority[34] == "pledge"
+    assert table_sorting_priority[35] == "problem_bool"
+    assert table_sorting_priority[36] == "purview_timestamp"
+    assert table_sorting_priority[37] == "stop_want"
+    assert table_sorting_priority[38] == "take_force"
+    assert table_sorting_priority[39] == "tally"
+    assert table_sorting_priority[40] == "fund_coin"
+    assert table_sorting_priority[41] == "penny"
+    assert table_sorting_priority[42] == "respect_bit"
+    assert len(table_sorting_priority) == 43
+    assert set(table_sorting_priority) == set(get_atom_args_category_mapping().keys())

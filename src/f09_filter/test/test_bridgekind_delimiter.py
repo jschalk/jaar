@@ -192,7 +192,7 @@ def test_BridgeKind_is_src_delimiter_inclusion_correct_ReturnsObj_GroupID():
 def test_BridgeKind_is_src_delimiter_inclusion_correct_ReturnsObj_RoadNode():
     # ESTABLISH
     clean_str = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     src_road_delimiter = "/"
     casa_src = f"casa{src_road_delimiter}"
     casa_dst = "casa"
@@ -286,7 +286,7 @@ def test_BridgeKind_all_src_parent_roads_exist_ReturnsObj_RoadUnit():
 def test_BridgeKind_is_valid_ReturnsObj_Scenario0_label_str():
     # ESTABLISH
     clean_str = "clean"
-    clean_dst = "prop"
+    clean_dst = "propre"
     src_road_delimiter = "/"
     casa_src = f"casa{src_road_delimiter}"
     casa_dst = "casa"

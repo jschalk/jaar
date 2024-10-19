@@ -72,11 +72,11 @@ def bud_itemunit_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
 
 
 def bud_item_awardlink_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
-    x_group_id = required_args.get("group_id")
+    x_awardee_id = required_args.get("awardee_id")
     x_road = required_args.get("road")
     return bool(
         bud_itemunit_exists(x_bud, required_args)
-        and x_bud.get_item_obj(x_road).awardlink_exists(x_group_id)
+        and x_bud.get_item_obj(x_road).awardlink_exists(x_awardee_id)
     )
 
 
@@ -102,11 +102,11 @@ def bud_item_reason_premiseunit_exists(
 
 
 def bud_item_teamlink_exists(x_bud: BudUnit, required_args: dict[str, any]) -> bool:
-    x_group_id = required_args.get("group_id")
+    x_team_id = required_args.get("team_id")
     x_road = required_args.get("road")
     return bool(
         bud_itemunit_exists(x_bud, required_args)
-        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_group_id)
+        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_team_id)
     )
 
 
@@ -175,8 +175,8 @@ def bud_item_awardlink_get_obj(
     x_bud: BudUnit, required_args: dict[str, any]
 ) -> AwardLink:
     x_road = required_args.get("road")
-    x_group_id = required_args.get("group_id")
-    return x_bud.get_item_obj(x_road).get_awardlink(x_group_id)
+    x_awardee_id = required_args.get("awardee_id")
+    return x_bud.get_item_obj(x_road).get_awardlink(x_awardee_id)
 
 
 def bud_item_reasonunit_get_obj(

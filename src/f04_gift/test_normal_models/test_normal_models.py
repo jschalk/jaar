@@ -25,7 +25,7 @@ from src.f04_gift.normal_models import (
     AwardLinkTable,
     ReasonTable,
     PremiseTable,
-    TeamlinkTable,
+    TeamLinkTable,
     HealerLinkTable,
     FactTable,
 )
@@ -177,16 +177,16 @@ def test_normalized_table_PremiseTable_premise_Exists():
     all_columns_are_as_config_requires(mapper, config_category)
 
 
-def test_normalized_table_TeamlinkTable_teamlink_Exists():
+def test_normalized_table_TeamLinkTable_teamlink_Exists():
     # ESTABLISH
     config_category = get_normalized_bud_table_build().get(bud_item_teamlink_str())
-    mapper = inspect(TeamlinkTable)
+    mapper = inspect(TeamLinkTable)
     print_out_expected_class_attribute_declarations(config_category)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_category)
     assert config_table_name == "teamlink"
-    assert config_table_name == TeamlinkTable.__tablename__
+    assert config_table_name == TeamLinkTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_category)
 
 

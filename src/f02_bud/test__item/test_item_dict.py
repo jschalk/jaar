@@ -93,33 +93,35 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
             base=states_road, premises={usa_premise.need: usa_premise}, _status=False
         ),
     }
-    biker_group_id = "bikers"
+    biker_awardee_id = "bikers"
     biker_give_force = 3.0
     biker_take_force = 7.0
-    biker_awardlink = awardlink_shop(biker_group_id, biker_give_force, biker_take_force)
-    flyer_group_id = "flyers"
+    biker_awardlink = awardlink_shop(
+        biker_awardee_id, biker_give_force, biker_take_force
+    )
+    flyer_awardee_id = "flyers"
     flyer_give_force = 6.0
     flyer_take_force = 9.0
     flyer_awardlink = awardlink_shop(
-        group_id=flyer_group_id,
+        awardee_id=flyer_awardee_id,
         give_force=flyer_give_force,
         take_force=flyer_take_force,
     )
     biker_and_flyer_awardlinks = {
-        biker_awardlink.group_id: biker_awardlink,
-        flyer_awardlink.group_id: flyer_awardlink,
+        biker_awardlink.awardee_id: biker_awardlink,
+        flyer_awardlink.awardee_id: flyer_awardlink,
     }
     biker_get_dict = {
-        "group_id": biker_awardlink.group_id,
+        "awardee_id": biker_awardlink.awardee_id,
         "give_force": biker_awardlink.give_force,
         "take_force": biker_awardlink.take_force,
     }
     flyer_get_dict = {
-        "group_id": flyer_awardlink.group_id,
+        "awardee_id": flyer_awardlink.awardee_id,
         "give_force": flyer_awardlink.give_force,
         "take_force": flyer_awardlink.take_force,
     }
-    x1_awardlinks = {biker_group_id: biker_get_dict, flyer_group_id: flyer_get_dict}
+    x1_awardlinks = {biker_awardee_id: biker_get_dict, flyer_awardee_id: flyer_get_dict}
     sue_str = "Sue"
     yao_str = "Yao"
     sue_teamunit = teamunit_shop({sue_str: -1, yao_str: -1})
@@ -223,7 +225,7 @@ def test_ItemUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_item.set_awardlink(awardlink_shop(yao_str))
 
     x_teamunit = casa_item.teamunit
-    x_teamunit.set_teamlink(group_id=yao_str)
+    x_teamunit.set_teamlink(team_id=yao_str)
 
     x_originunit = casa_item._originunit
     x_originunit.set_originhold(yao_str, 1)

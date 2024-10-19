@@ -6,6 +6,9 @@
         "INSERT": {
             "atom_order": 1
         },
+        "UPDATE": {
+            "atom_order": 10
+        },
         "normal_specs": {
             "normal_table_name": "membership"
         },
@@ -34,9 +37,6 @@
                 "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
             }
-        },
-        "UPDATE": {
-            "atom_order": 10
         }
     },
     "bud_acctunit": {
@@ -45,6 +45,9 @@
         },
         "INSERT": {
             "atom_order": 0
+        },
+        "UPDATE": {
+            "atom_order": 9
         },
         "normal_specs": {
             "normal_table_name": "acctunit"
@@ -67,9 +70,6 @@
                 "python_type": "AcctID",
                 "sqlite_datatype": "TEXT"
             }
-        },
-        "UPDATE": {
-            "atom_order": 9
         }
     },
     "bud_item_awardlink": {
@@ -78,6 +78,9 @@
         },
         "INSERT": {
             "atom_order": 3
+        },
+        "UPDATE": {
+            "atom_order": 12
         },
         "normal_specs": {
             "normal_table_name": "awardlink"
@@ -95,7 +98,7 @@
             }
         },
         "required_args": {
-            "group_id": {
+            "awardee_id": {
                 "column_order": 1,
                 "nesting_order": 1,
                 "python_type": "GroupID",
@@ -107,9 +110,6 @@
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
-        },
-        "UPDATE": {
-            "atom_order": 12
         }
     },
     "bud_item_factunit": {
@@ -118,6 +118,9 @@
         },
         "INSERT": {
             "atom_order": 6
+        },
+        "UPDATE": {
+            "atom_order": 13
         },
         "normal_specs": {
             "normal_table_name": "fact"
@@ -152,9 +155,6 @@
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
-        },
-        "UPDATE": {
-            "atom_order": 13
         }
     },
     "bud_item_healerlink": {
@@ -189,6 +189,9 @@
         },
         "INSERT": {
             "atom_order": 8
+        },
+        "UPDATE": {
+            "atom_order": 14
         },
         "normal_specs": {
             "normal_table_name": "premise"
@@ -229,9 +232,6 @@
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
-        },
-        "UPDATE": {
-            "atom_order": 14
         }
     },
     "bud_item_reasonunit": {
@@ -240,6 +240,9 @@
         },
         "INSERT": {
             "atom_order": 7
+        },
+        "UPDATE": {
+            "atom_order": 15
         },
         "normal_specs": {
             "normal_table_name": "reason"
@@ -264,9 +267,6 @@
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
-        },
-        "UPDATE": {
-            "atom_order": 15
         }
     },
     "bud_item_teamlink": {
@@ -281,16 +281,16 @@
         },
         "optional_args": {},
         "required_args": {
-            "group_id": {
-                "column_order": 1,
-                "nesting_order": 1,
-                "python_type": "GroupID",
-                "sqlite_datatype": "TEXT"
-            },
             "road": {
                 "column_order": 0,
                 "nesting_order": 0,
                 "python_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "team_id": {
+                "column_order": 1,
+                "nesting_order": 1,
+                "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -301,6 +301,9 @@
         },
         "INSERT": {
             "atom_order": 2
+        },
+        "UPDATE": {
+            "atom_order": 11
         },
         "normal_specs": {
             "normal_table_name": "item"
@@ -375,21 +378,16 @@
                 "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
-        },
-        "UPDATE": {
-            "atom_order": 11
         }
     },
     "budunit": {
+        "UPDATE": {
+            "atom_order": 25
+        },
         "normal_specs": {
             "normal_table_name": "bud"
         },
         "optional_args": {
-            "respect_bit": {
-                "column_order": 4,
-                "python_type": "float",
-                "sqlite_datatype": "FISCAL"
-            },
             "credor_respect": {
                 "column_order": 3,
                 "python_type": "int",
@@ -425,15 +423,17 @@
                 "python_type": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"
             },
+            "respect_bit": {
+                "column_order": 4,
+                "python_type": "float",
+                "sqlite_datatype": "FISCAL"
+            },
             "tally": {
                 "column_order": 7,
                 "python_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
-        "required_args": {},
-        "UPDATE": {
-            "atom_order": 25
-        }
+        "required_args": {}
     }
 }
