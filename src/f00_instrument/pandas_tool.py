@@ -12,9 +12,7 @@ def get_orderd_csv(x_dt: DataFrame, sorting_columns: list[str] = None) -> str:
         sorting_columns = []
     sort_columns_in_dt = set(sorting_columns).intersection(set(x_dt.columns))
     new_sorting_columns = [
-        sort_column
-        for sort_column in sorting_columns
-        if sort_column in sort_columns_in_dt
+        sort_col for sort_col in sorting_columns if sort_col in sort_columns_in_dt
     ]
     x_dt.sort_values(new_sorting_columns, inplace=True)
     x_dt.reset_index(inplace=True)

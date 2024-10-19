@@ -51,12 +51,9 @@ def test_filterable_python_types_ReturnsObj():
 
 
 def test_filterable_atom_args_ReturnsObj():
-    # ESTABLISH / WHEN
-    x_filterable_atom_args = filterable_atom_args()
-
-    # THEN
-    assert len(x_filterable_atom_args) == 9
-    assert x_filterable_atom_args == {
+    # ESTABLISH / WHEN / THEN
+    assert len(filterable_atom_args()) == 9
+    assert filterable_atom_args() == {
         "acct_id",
         "road",
         "parent_road",
@@ -70,13 +67,13 @@ def test_filterable_atom_args_ReturnsObj():
 
     print(f"{filterable_python_types()=}")
     all_python_types = set(get_atom_args_python_types().keys())
-    assert x_filterable_atom_args.issubset(all_python_types)
+    assert filterable_atom_args().issubset(all_python_types)
     static_filterable_atom_args = {
         x_arg
         for x_arg, python_type in get_atom_args_python_types().items()
         if python_type in filterable_python_types()
     }
-    assert x_filterable_atom_args == static_filterable_atom_args
+    assert filterable_atom_args() == static_filterable_atom_args
 
 
 def test_BridgeUnit_Exists():
