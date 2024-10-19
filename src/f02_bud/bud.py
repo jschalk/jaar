@@ -583,7 +583,7 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         create_missing_items: bool = None,
-        get_rid_of_missing_awardlinks_group_ids: bool = None,
+        get_rid_of_missing_awardlinks_awardee_ids: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
@@ -592,7 +592,7 @@ class BudUnit:
             item_kid=item_kid,
             parent_road=self._fiscal_id,
             create_missing_items=create_missing_items,
-            get_rid_of_missing_awardlinks_group_ids=get_rid_of_missing_awardlinks_group_ids,
+            get_rid_of_missing_awardlinks_awardee_ids=get_rid_of_missing_awardlinks_awardee_ids,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
@@ -602,7 +602,7 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         parent_road: RoadUnit,
-        get_rid_of_missing_awardlinks_group_ids: bool = None,
+        get_rid_of_missing_awardlinks_awardee_ids: bool = None,
         create_missing_items: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
@@ -622,7 +622,7 @@ class BudUnit:
             item_kid._bud_fiscal_id = self._fiscal_id
         if item_kid._fund_coin != self.fund_coin:
             item_kid._fund_coin = self.fund_coin
-        if not get_rid_of_missing_awardlinks_group_ids:
+        if not get_rid_of_missing_awardlinks_awardee_ids:
             item_kid = self._get_cleaned_awardlinks_item(item_kid)
         item_kid.set_parent_road(parent_road=parent_road)
 
@@ -655,12 +655,12 @@ class BudUnit:
 
     def _get_cleaned_awardlinks_item(self, x_item: ItemUnit) -> ItemUnit:
         _awardlinks_to_delete = [
-            _awardlink_group_id
-            for _awardlink_group_id in x_item.awardlinks.keys()
-            if self.get_acctunit_group_ids_dict().get(_awardlink_group_id) is None
+            _awardlink_awardee_id
+            for _awardlink_awardee_id in x_item.awardlinks.keys()
+            if self.get_acctunit_group_ids_dict().get(_awardlink_awardee_id) is None
         ]
-        for _awardlink_group_id in _awardlinks_to_delete:
-            x_item.awardlinks.pop(_awardlink_group_id)
+        for _awardlink_awardee_id in _awardlinks_to_delete:
+            x_item.awardlinks.pop(_awardlink_awardee_id)
 
         if x_item.teamunit is not None:
             _teamlinks_to_delete = [
@@ -918,11 +918,11 @@ class BudUnit:
 
     def _set_groupboxs_fund_share(self, awardheirs: dict[GroupID, AwardLink]):
         for awardlink_obj in awardheirs.values():
-            x_group_id = awardlink_obj.group_id
-            if not self.groupbox_exists(x_group_id):
-                self.set_groupbox(self.create_symmetry_groupbox(x_group_id))
+            x_awardee_id = awardlink_obj.awardee_id
+            if not self.groupbox_exists(x_awardee_id):
+                self.set_groupbox(self.create_symmetry_groupbox(x_awardee_id))
             self.add_to_groupbox_fund_give_fund_take(
-                group_id=awardlink_obj.group_id,
+                group_id=awardlink_obj.awardee_id,
                 awardheir_fund_give=awardlink_obj._fund_give,
                 awardheir_fund_take=awardlink_obj._fund_take,
             )
@@ -937,7 +937,7 @@ class BudUnit:
                 if item.awardheir_exists():
                     for x_awardline in item._awardlines.values():
                         self.add_to_groupbox_fund_agenda_give_take(
-                            group_id=x_awardline.group_id,
+                            group_id=x_awardline.awardee_id,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
@@ -1387,7 +1387,7 @@ class BudUnit:
         self.set_item(
             item_kid=item_kid,
             parent_road=self.make_road(item_kid._parent_road),
-            get_rid_of_missing_awardlinks_group_ids=True,
+            get_rid_of_missing_awardlinks_awardee_ids=True,
             create_missing_items=True,
         )
 

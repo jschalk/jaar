@@ -422,29 +422,29 @@ class ItemUnit:
         self._awardheirs = {}
         for ib in parent_awardheirs.values():
             awardheir = awardheir_shop(
-                group_id=ib.group_id,
+                awardee_id=ib.awardee_id,
                 give_force=ib.give_force,
                 take_force=ib.take_force,
             )
-            self._awardheirs[awardheir.group_id] = awardheir
+            self._awardheirs[awardheir.awardee_id] = awardheir
 
         for ib in self.awardlinks.values():
             awardheir = awardheir_shop(
-                group_id=ib.group_id,
+                awardee_id=ib.awardee_id,
                 give_force=ib.give_force,
                 take_force=ib.take_force,
             )
-            self._awardheirs[awardheir.group_id] = awardheir
+            self._awardheirs[awardheir.awardee_id] = awardheir
 
     def set_kidless_awardlines(self):
         # get awardlines from self
         for bh in self._awardheirs.values():
             x_awardline = awardline_shop(
-                group_id=bh.group_id,
+                awardee_id=bh.awardee_id,
                 _fund_give=bh._fund_give,
                 _fund_take=bh._fund_take,
             )
-            self._awardlines[x_awardline.group_id] = x_awardline
+            self._awardlines[x_awardline.awardee_id] = x_awardline
 
     def set_awardlines(self, child_awardlines: dict[GroupID, AwardLine] = None):
         if child_awardlines is None:
@@ -452,29 +452,29 @@ class ItemUnit:
 
         # get awardlines from child
         for bl in child_awardlines.values():
-            if self._awardlines.get(bl.group_id) is None:
-                self._awardlines[bl.group_id] = awardline_shop(
-                    group_id=bl.group_id,
+            if self._awardlines.get(bl.awardee_id) is None:
+                self._awardlines[bl.awardee_id] = awardline_shop(
+                    awardee_id=bl.awardee_id,
                     _fund_give=0,
                     _fund_take=0,
                 )
 
-            self._awardlines[bl.group_id].add_fund_give_take(
+            self._awardlines[bl.awardee_id].add_fund_give_take(
                 fund_give=bl._fund_give, fund_take=bl._fund_take
             )
 
     def set_awardheirs_fund_give_fund_take(self):
         give_ledger = {}
         take_ledger = {}
-        for x_group_id, x_awardheir in self._awardheirs.items():
-            give_ledger[x_group_id] = x_awardheir.give_force
-            take_ledger[x_group_id] = x_awardheir.take_force
+        for x_awardee_id, x_awardheir in self._awardheirs.items():
+            give_ledger[x_awardee_id] = x_awardheir.give_force
+            take_ledger[x_awardee_id] = x_awardheir.take_force
         x_fund_share = self.get_fund_share()
         give_allot = allot_scale(give_ledger, x_fund_share, self._fund_coin)
         take_allot = allot_scale(take_ledger, x_fund_share, self._fund_coin)
-        for x_group_id, x_awardheir in self._awardheirs.items():
-            x_awardheir._fund_give = give_allot.get(x_group_id)
-            x_awardheir._fund_take = take_allot.get(x_group_id)
+        for x_awardee_id, x_awardheir in self._awardheirs.items():
+            x_awardheir._fund_give = give_allot.get(x_awardee_id)
+            x_awardheir._fund_take = take_allot.get(x_awardee_id)
 
     def clear_awardlines(self):
         self._awardlines = {}
@@ -595,7 +595,7 @@ class ItemUnit:
         if item_attr.awardlink is not None:
             self.set_awardlink(awardlink=item_attr.awardlink)
         if item_attr.awardlink_del is not None:
-            self.del_awardlink(group_id=item_attr.awardlink_del)
+            self.del_awardlink(awardee_id=item_attr.awardlink_del)
         if item_attr.is_expanded is not None:
             self._is_expanded = item_attr.is_expanded
         if item_attr.pledge is not None:
@@ -726,19 +726,19 @@ class ItemUnit:
         return sum(x_kid.mass for x_kid in self._kids.values())
 
     def set_awardlink(self, awardlink: AwardLink):
-        self.awardlinks[awardlink.group_id] = awardlink
+        self.awardlinks[awardlink.awardee_id] = awardlink
 
-    def get_awardlink(self, group_id: GroupID) -> AwardLink:
-        return self.awardlinks.get(group_id)
+    def get_awardlink(self, awardee_id: GroupID) -> AwardLink:
+        return self.awardlinks.get(awardee_id)
 
-    def del_awardlink(self, group_id: GroupID):
+    def del_awardlink(self, awardee_id: GroupID):
         try:
-            self.awardlinks.pop(group_id)
+            self.awardlinks.pop(awardee_id)
         except KeyError as e:
-            raise (f"Cannot delete awardlink '{group_id}'.") from e
+            raise (f"Cannot delete awardlink '{awardee_id}'.") from e
 
-    def awardlink_exists(self, x_group_id: GroupID) -> bool:
-        return self.awardlinks.get(x_group_id) != None
+    def awardlink_exists(self, x_awardee_id: GroupID) -> bool:
+        return self.awardlinks.get(x_awardee_id) != None
 
     def set_reasonunit(self, reason: ReasonUnit):
         reason.delimiter = self._road_delimiter
@@ -865,7 +865,8 @@ class ItemUnit:
     def get_awardlinks_dict(self) -> dict[GroupID, dict]:
         x_awardlinks = self.awardlinks.items()
         return {
-            x_group_id: awardlink.get_dict() for x_group_id, awardlink in x_awardlinks
+            x_awardee_id: awardlink.get_dict()
+            for x_awardee_id, awardlink in x_awardlinks
         }
 
     def is_kidless(self) -> bool:

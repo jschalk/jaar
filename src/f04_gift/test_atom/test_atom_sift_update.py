@@ -17,6 +17,7 @@ from src.f02_bud.bud_tool import (
 from src.f04_gift.atom import atom_insert, atom_update, atomunit_shop, sift_atomunit
 from src.f04_gift.atom_config import (
     acct_id_str,
+    awardee_id_str,
     group_id_str,
     healer_id_str,
     parent_road_str,
@@ -214,7 +215,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_awardlink():
 
     zia_atom = atomunit_shop(bud_item_awardlink_str(), atom_insert())
     zia_atom.set_arg(road_str(), casa_road)
-    zia_atom.set_arg(group_id_str(), run_str)
+    zia_atom.set_arg(awardee_id_str(), run_str)
     zia_atom.set_arg("give_force", zia_run_give_force)
     zia_atom.set_arg("take_force", zia_run_take_force)
 

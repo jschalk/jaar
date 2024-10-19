@@ -80,7 +80,7 @@ def test_ItemUnit_get_awardlink_ReturnsObj():
 
     # THEN
     assert biker_awardlink
-    assert biker_awardlink.group_id == biker_str
+    assert biker_awardlink.awardee_id == biker_str
 
 
 def test_ItemUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
@@ -95,8 +95,8 @@ def test_ItemUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValue
     swim_take_force = 32
     swim_awardheir = awardheir_shop(swim_group_id, swim_give_force, swim_take_force)
     x_awardheirs = {
-        swim_awardheir.group_id: swim_awardheir,
-        biker_awardheir.group_id: biker_awardheir,
+        swim_awardheir.awardee_id: swim_awardheir,
+        biker_awardheir.awardee_id: biker_awardheir,
     }
     sport_str = "sport"
     sport_item = itemunit_shop(sport_str, _awardheirs=x_awardheirs)

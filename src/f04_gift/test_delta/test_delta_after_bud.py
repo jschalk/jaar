@@ -18,6 +18,7 @@ from src.f02_bud.bud_tool import (
 from src.f04_gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
 from src.f04_gift.atom_config import (
     acct_id_str,
+    awardee_id_str,
     group_id_str,
     team_id_str,
     healer_id_str,
@@ -484,7 +485,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_awardlin
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_delete())
     delete_disc_atomunit.set_required_arg("road", disc_road)
-    delete_disc_atomunit.set_required_arg(group_id_str(), fly_str)
+    delete_disc_atomunit.set_required_arg(awardee_id_str(), fly_str)
     print(f"{delete_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(delete_disc_atomunit)
@@ -522,7 +523,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_awardlin
     x_take_force = 66
     update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_update())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg(group_id_str(), run_str)
+    update_disc_atomunit.set_required_arg(awardee_id_str(), run_str)
     update_disc_atomunit.set_optional_arg("give_force", x_give_force)
     update_disc_atomunit.set_optional_arg("take_force", x_take_force)
     # print(f"{update_disc_atomunit=}")
@@ -561,7 +562,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_awardlin
     x_take_force = 66
     update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg(group_id_str(), run_str)
+    update_disc_atomunit.set_required_arg(awardee_id_str(), run_str)
     update_disc_atomunit.set_optional_arg("give_force", x_give_force)
     update_disc_atomunit.set_optional_arg("take_force", x_take_force)
     # print(f"{update_disc_atomunit=}")

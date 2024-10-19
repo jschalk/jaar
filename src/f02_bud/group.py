@@ -91,13 +91,18 @@ def memberships_get_from_dict(
 
 
 @dataclass
-class AwardLink(GroupCore):
+class AwardCore:
+    awardee_id: GroupID = None
+
+
+@dataclass
+class AwardLink(AwardCore):
     give_force: float = 1.0
     take_force: float = 1.0
 
     def get_dict(self) -> dict[str, str]:
         return {
-            "group_id": self.group_id,
+            "awardee_id": self.awardee_id,
             "give_force": self.give_force,
             "take_force": self.take_force,
         }
@@ -113,24 +118,24 @@ def awardlinks_get_from_dict(x_dict: dict) -> dict[GroupID, AwardLink]:
     awardlinks = {}
     for awardlinks_dict in x_dict.values():
         x_group = awardlink_shop(
-            group_id=awardlinks_dict["group_id"],
+            awardee_id=awardlinks_dict["awardee_id"],
             give_force=awardlinks_dict["give_force"],
             take_force=awardlinks_dict["take_force"],
         )
-        awardlinks[x_group.group_id] = x_group
+        awardlinks[x_group.awardee_id] = x_group
     return awardlinks
 
 
 def awardlink_shop(
-    group_id: GroupID, give_force: float = None, take_force: float = None
+    awardee_id: GroupID, give_force: float = None, take_force: float = None
 ) -> AwardLink:
     give_force = get_1_if_None(give_force)
     take_force = get_1_if_None(take_force)
-    return AwardLink(group_id, give_force, take_force=take_force)
+    return AwardLink(awardee_id, give_force, take_force=take_force)
 
 
 @dataclass
-class AwardHeir(GroupCore):
+class AwardHeir(AwardCore):
     give_force: float = 1.0
     take_force: float = 1.0
     _fund_give: float = None
@@ -138,7 +143,7 @@ class AwardHeir(GroupCore):
 
 
 def awardheir_shop(
-    group_id: GroupID,
+    awardee_id: GroupID,
     give_force: float = None,
     take_force: float = None,
     _fund_give: float = None,
@@ -146,11 +151,11 @@ def awardheir_shop(
 ) -> AwardHeir:
     give_force = get_1_if_None(give_force)
     take_force = get_1_if_None(take_force)
-    return AwardHeir(group_id, give_force, take_force, _fund_give, _fund_take)
+    return AwardHeir(awardee_id, give_force, take_force, _fund_give, _fund_take)
 
 
 @dataclass
-class AwardLine(GroupCore):
+class AwardLine(AwardCore):
     _fund_give: float = None
     _fund_take: float = None
 
@@ -166,8 +171,8 @@ class AwardLine(GroupCore):
             self._fund_take = 0
 
 
-def awardline_shop(group_id: GroupID, _fund_give: float, _fund_take: float):
-    return AwardLine(group_id, _fund_give=_fund_give, _fund_take=_fund_take)
+def awardline_shop(awardee_id: GroupID, _fund_give: float, _fund_take: float):
+    return AwardLine(awardee_id, _fund_give=_fund_give, _fund_take=_fund_take)
 
 
 @dataclass

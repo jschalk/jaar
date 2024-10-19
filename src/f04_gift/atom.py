@@ -52,6 +52,7 @@ from src.f04_gift.atom_config import (
     category_str,
     crud_str_str,
     acct_id_str,
+    awardee_id_str,
     group_id_str,
     healer_id_str,
     parent_road_str,
@@ -327,7 +328,7 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         ),
         parent_road=x_atom.get_value(parent_road_str()),
         create_missing_items=False,
-        get_rid_of_missing_awardlinks_group_ids=False,
+        get_rid_of_missing_awardlinks_awardee_ids=False,
         create_missing_ancestors=False,
     )
 
@@ -335,13 +336,13 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_item_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_item_attr(
         road=x_atom.get_value("road"),
-        awardlink_del=x_atom.get_value(group_id_str()),
+        awardlink_del=x_atom.get_value(awardee_id_str()),
     )
 
 
 def _modify_bud_item_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_item = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_awardlink = x_item.awardlinks.get(x_atom.get_value(group_id_str()))
+    x_awardlink = x_item.awardlinks.get(x_atom.get_value(awardee_id_str()))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -353,7 +354,7 @@ def _modify_bud_item_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_item_awardlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
-        group_id=x_atom.get_value(group_id_str()),
+        awardee_id=x_atom.get_value("awardee_id"),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
@@ -660,6 +661,7 @@ class AtomRow:
     _crud_command: CRUD_command = None
     acct_id: AcctID = None
     addin: float = None
+    awardee_id: GroupID = None
     base: RoadUnit = None
     base_item_active_requisite: bool = None
     begin: float = None
@@ -699,6 +701,7 @@ class AtomRow:
     stop_want: float = None
     take_force: float = None
     tally: int = None
+    team_id: int = None
 
     def set_atom_category(self, atom_category: str):
         self._atom_categorys.add(atom_category)
@@ -776,7 +779,6 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
         for optional_arg in x_optional_args:
             optional_value = x_atom.get_value(optional_arg)
             obj_value = x_bud_obj.__dict__[optional_arg]
-            print(f"{optional_arg=} {optional_value=} {obj_value=}")
             if obj_value != optional_value:
                 update_atom.set_arg(optional_arg, optional_value)
 

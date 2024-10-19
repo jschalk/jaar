@@ -115,6 +115,10 @@ def acct_id_str() -> str:
     return "acct_id"
 
 
+def awardee_id_str() -> str:
+    return "awardee_id"
+
+
 def group_id_str() -> str:
     return "group_id"
 
@@ -274,6 +278,7 @@ def get_atom_args_python_types() -> dict[str, str]:
     return {
         "acct_id": "AcctID",
         "addin": "float",
+        "awardee_id": "GroupID",
         "base": "RoadUnit",
         "base_item_active_requisite": "bool",
         "begin": "float",

@@ -278,7 +278,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     sue_str = "Sue"
     week_str = "weekdays"
     nation_str = "nation-state"
-    sue_awardlink = awardlink_shop(group_id=sue_str)
+    sue_awardlink = awardlink_shop(awardee_id=sue_str)
     sue_bud.add_acctunit(acct_id=sue_str)
     sue_bud._itemroot.set_awardlink(awardlink=sue_awardlink)
     # item tree has awardlines
@@ -289,7 +289,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
 
     # THEN
     assert sue_bud._itemroot._awardheirs.get(sue_str) is not None
-    assert sue_bud._itemroot._awardheirs.get(sue_str).group_id == sue_str
+    assert sue_bud._itemroot._awardheirs.get(sue_str).awardee_id == sue_str
     assert sue_bud._itemroot._awardlines != {}
     root_item = sue_bud.get_item_obj(road=sue_bud._itemroot._label)
     sue_awardline = sue_bud._itemroot._awardlines.get(sue_str)
@@ -322,7 +322,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     assert round(sue_awardline._fund_give, 15) == default_fund_pool()
     assert round(sue_awardline._fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(sue_str, default_fund_pool(), default_fund_pool())
-    assert sue_bud._itemroot._awardlines == {x_awardline.group_id: x_awardline}
+    assert sue_bud._itemroot._awardlines == {x_awardline.awardee_id: x_awardline}
 
 
 def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootItemUnitFromNonRootItemUnit():
@@ -332,7 +332,7 @@ def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootItemUnitFromNonRoo
     sue_str = "Sue"
     sue_bud.add_acctunit(sue_str)
     casa_road = sue_bud.make_l1_road("casa")
-    sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(group_id=sue_str))
+    sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(awardee_id=sue_str))
     assert sue_bud._itemroot._awardlines == {}
 
     # WHEN
@@ -342,14 +342,14 @@ def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootItemUnitFromNonRoo
     assert sue_bud._itemroot._awardlines != {}
     print(f"{sue_bud._itemroot._awardlines=}")
     x_awardline = awardline_shop(
-        group_id=sue_str,
+        awardee_id=sue_str,
         _fund_give=0.230769231 * default_fund_pool(),
         _fund_take=0.230769231 * default_fund_pool(),
     )
-    assert sue_bud._itemroot._awardlines == {x_awardline.group_id: x_awardline}
+    assert sue_bud._itemroot._awardlines == {x_awardline.awardee_id: x_awardline}
     casa_itemunit = sue_bud.get_item_obj(casa_road)
     assert casa_itemunit._awardlines != {}
-    assert casa_itemunit._awardlines == {x_awardline.group_id: x_awardline}
+    assert casa_itemunit._awardlines == {x_awardline.awardee_id: x_awardline}
 
 
 def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupBox_fund_give_fund_take():

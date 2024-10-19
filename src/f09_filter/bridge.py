@@ -41,6 +41,7 @@ def filterable_python_types() -> set:
 def filterable_atom_args() -> set:
     return {
         "acct_id",
+        "awardee_id",
         "road",
         "parent_road",
         "label",

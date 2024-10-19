@@ -53,7 +53,7 @@ class TreeMetrics:
     def evaluate_awardlinks(self, awardlinks: dict[GroupID, AwardLink]):
         if awardlinks is not None:
             for awardlink in awardlinks.values():
-                self.awardlinks_metrics[awardlink.group_id] = awardlink
+                self.awardlinks_metrics[awardlink.awardee_id] = awardlink
 
     def evaluate_uid_max(self, uid):
         if uid is not None and self.uid_max < uid:

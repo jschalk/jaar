@@ -52,9 +52,10 @@ def test_filterable_python_types_ReturnsObj():
 
 def test_filterable_atom_args_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert len(filterable_atom_args()) == 10
+    assert len(filterable_atom_args()) == 11
     assert filterable_atom_args() == {
         "acct_id",
+        "awardee_id",
         "road",
         "parent_road",
         "label",

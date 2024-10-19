@@ -29,6 +29,7 @@ from src.f02_bud.bud_tool import (
 from src.f04_gift.atom_config import (
     CRUD_command,
     acct_id_str,
+    awardee_id_str,
     group_id_str,
     healer_id_str,
     parent_road_str,
@@ -400,7 +401,7 @@ class DeltaUnit:
             )
             self.add_atomunit_item_awardlink_inserts(
                 after_itemunit=insert_itemunit,
-                insert_awardlink_group_ids=set(insert_itemunit.awardlinks.keys()),
+                insert_awardlink_awardee_ids=set(insert_itemunit.awardlinks.keys()),
             )
             self.add_atomunit_item_reasonunit_inserts(
                 after_itemunit=insert_itemunit,
@@ -471,25 +472,25 @@ class DeltaUnit:
             )
 
             # insert / update / delete awardunits
-            before_awardlinks_group_ids = set(before_itemunit.awardlinks.keys())
-            after_awardlinks_group_ids = set(after_itemunit.awardlinks.keys())
+            before_awardlinks_awardee_ids = set(before_itemunit.awardlinks.keys())
+            after_awardlinks_awardee_ids = set(after_itemunit.awardlinks.keys())
             self.add_atomunit_item_awardlink_inserts(
                 after_itemunit=after_itemunit,
-                insert_awardlink_group_ids=after_awardlinks_group_ids.difference(
-                    before_awardlinks_group_ids
+                insert_awardlink_awardee_ids=after_awardlinks_awardee_ids.difference(
+                    before_awardlinks_awardee_ids
                 ),
             )
             self.add_atomunit_item_awardlink_updates(
                 before_itemunit=before_itemunit,
                 after_itemunit=after_itemunit,
-                update_awardlink_group_ids=before_awardlinks_group_ids.intersection(
-                    after_awardlinks_group_ids
+                update_awardlink_awardee_ids=before_awardlinks_awardee_ids.intersection(
+                    after_awardlinks_awardee_ids
                 ),
             )
             self.add_atomunit_item_awardlink_deletes(
                 item_road=item_road,
-                delete_awardlink_group_ids=before_awardlinks_group_ids.difference(
-                    after_awardlinks_group_ids
+                delete_awardlink_awardee_ids=before_awardlinks_awardee_ids.difference(
+                    after_awardlinks_awardee_ids
                 ),
             )
 
@@ -571,7 +572,7 @@ class DeltaUnit:
 
             self.add_atomunit_item_awardlink_deletes(
                 item_road=delete_item_road,
-                delete_awardlink_group_ids=set(delete_itemunit.awardlinks.keys()),
+                delete_awardlink_awardee_ids=set(delete_itemunit.awardlinks.keys()),
             )
             self.add_atomunit_item_reasonunit_deletes(
                 before_itemunit=delete_itemunit,
@@ -772,13 +773,13 @@ class DeltaUnit:
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_awardlink_inserts(
-        self, after_itemunit: ItemUnit, insert_awardlink_group_ids: set
+        self, after_itemunit: ItemUnit, insert_awardlink_awardee_ids: set
     ):
-        for after_awardlink_group_id in insert_awardlink_group_ids:
-            after_awardlink = after_itemunit.awardlinks.get(after_awardlink_group_id)
+        for after_awardlink_awardee_id in insert_awardlink_awardee_ids:
+            after_awardlink = after_itemunit.awardlinks.get(after_awardlink_awardee_id)
             x_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_insert())
             x_atomunit.set_required_arg(road_str(), after_itemunit.get_road())
-            x_atomunit.set_required_arg(group_id_str(), after_awardlink.group_id)
+            x_atomunit.set_required_arg(awardee_id_str(), after_awardlink.awardee_id)
             x_atomunit.set_optional_arg("give_force", after_awardlink.give_force)
             x_atomunit.set_optional_arg("take_force", after_awardlink.take_force)
             self.set_atomunit(x_atomunit)
@@ -787,17 +788,21 @@ class DeltaUnit:
         self,
         before_itemunit: ItemUnit,
         after_itemunit: ItemUnit,
-        update_awardlink_group_ids: set,
+        update_awardlink_awardee_ids: set,
     ):
-        for update_awardlink_group_id in update_awardlink_group_ids:
-            before_awardlink = before_itemunit.awardlinks.get(update_awardlink_group_id)
-            after_awardlink = after_itemunit.awardlinks.get(update_awardlink_group_id)
+        for update_awardlink_awardee_id in update_awardlink_awardee_ids:
+            before_awardlink = before_itemunit.awardlinks.get(
+                update_awardlink_awardee_id
+            )
+            after_awardlink = after_itemunit.awardlinks.get(update_awardlink_awardee_id)
             if optional_args_different(
                 bud_item_awardlink_str(), before_awardlink, after_awardlink
             ):
                 x_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_update())
                 x_atomunit.set_required_arg(road_str(), before_itemunit.get_road())
-                x_atomunit.set_required_arg(group_id_str(), after_awardlink.group_id)
+                x_atomunit.set_required_arg(
+                    awardee_id_str(), after_awardlink.awardee_id
+                )
                 if before_awardlink.give_force != after_awardlink.give_force:
                     x_atomunit.set_optional_arg(
                         "give_force", after_awardlink.give_force
@@ -809,12 +814,12 @@ class DeltaUnit:
                 self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_awardlink_deletes(
-        self, item_road: RoadUnit, delete_awardlink_group_ids: set
+        self, item_road: RoadUnit, delete_awardlink_awardee_ids: set
     ):
-        for delete_awardlink_group_id in delete_awardlink_group_ids:
+        for delete_awardlink_awardee_id in delete_awardlink_awardee_ids:
             x_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_delete())
             x_atomunit.set_required_arg(road_str(), item_road)
-            x_atomunit.set_required_arg(group_id_str(), delete_awardlink_group_id)
+            x_atomunit.set_required_arg(awardee_id_str(), delete_awardlink_awardee_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_factunit_inserts(

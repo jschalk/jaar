@@ -12,6 +12,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     acct_id_str,
+    awardee_id_str,
     group_id_str,
     parent_road_str,
     label_str,
@@ -383,10 +384,10 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     road_str = "road"
     swimmers_str = ",Swimmers"
     sports_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
-    sports_awardlink_atomunit.set_required_arg(group_id_str(), swimmers_str)
+    sports_awardlink_atomunit.set_required_arg(awardee_id_str(), swimmers_str)
     sports_awardlink_atomunit.set_required_arg(road_str, sports_road)
     knee_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
-    knee_awardlink_atomunit.set_required_arg(group_id_str(), swimmers_str)
+    knee_awardlink_atomunit.set_required_arg(awardee_id_str(), swimmers_str)
     knee_awardlink_atomunit.set_required_arg(road_str, knee_road)
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(knee_awardlink_atomunit)

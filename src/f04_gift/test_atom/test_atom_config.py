@@ -43,6 +43,7 @@ from src.f04_gift.atom_config import (
     parent_road_str,
     road_str,
     acct_id_str,
+    awardee_id_str,
     group_id_str,
     team_id_str,
     begin_str,
@@ -75,6 +76,7 @@ def test_str_functions_ReturnsObj():
     assert type_RoadNode_str() == "RoadNode"
     assert road_str() == "road"
     assert acct_id_str() == "acct_id"
+    assert awardee_id_str() == "awardee_id"
     assert group_id_str() == "group_id"
     assert team_id_str() == "team_id"
     assert crud_str_str() == "crud_str"
@@ -526,7 +528,7 @@ def test_get_atom_args_category_mapping_ReturnsObj():
     assert bud_item_factunit_str() in road_categorys
     assert bud_item_teamlink_str() in road_categorys
     assert len(road_categorys) == 6
-    assert len(x_atom_args_category_mapping) == 42
+    assert len(x_atom_args_category_mapping) == 43
 
 
 def get_python_type(x_category: str, x_arg: str) -> str:
@@ -614,6 +616,7 @@ def test_get_atom_args_python_types_ReturnsObj():
     # THEN
     assert x_python_types.get("acct_id") == type_AcctID_str()
     assert x_python_types.get("addin") == "float"
+    assert x_python_types.get("awardee_id") == type_GroupID_str()
     assert x_python_types.get("base") == type_RoadUnit_str()
     assert x_python_types.get("base_item_active_requisite") == "bool"
     assert x_python_types.get("begin") == "float"

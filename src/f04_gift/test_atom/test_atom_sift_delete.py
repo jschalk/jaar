@@ -15,6 +15,7 @@ from src.f02_bud.bud_tool import (
 from src.f04_gift.atom import atom_delete, atomunit_shop, sift_atomunit
 from src.f04_gift.atom_config import (
     acct_id_str,
+    awardee_id_str,
     group_id_str,
     team_id_str,
     healer_id_str,
@@ -169,10 +170,10 @@ def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_awardlink():
 
     casa_swim_atom = atomunit_shop(bud_item_awardlink_str(), atom_delete())
     casa_swim_atom.set_arg(road_str(), casa_road)
-    casa_swim_atom.set_arg(group_id_str(), swim_str)
+    casa_swim_atom.set_arg(awardee_id_str(), swim_str)
     clean_swim_atom = atomunit_shop(bud_item_awardlink_str(), atom_delete())
     clean_swim_atom.set_arg(road_str(), clean_road)
-    clean_swim_atom.set_arg(group_id_str(), swim_str)
+    clean_swim_atom.set_arg(awardee_id_str(), swim_str)
     sue_bud.add_item(casa_road)
     sue_bud.add_item(clean_road)
     assert not sift_atomunit(sue_bud, casa_swim_atom)

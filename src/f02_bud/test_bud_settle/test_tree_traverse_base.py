@@ -208,7 +208,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     sue_bud.set_item(vacuum_item, parent_road=casa_road)
 
     sue_bud.add_acctunit(acct_id=sue_str)
-    x_awardlink = awardlink_shop(group_id=sue_str)
+    x_awardlink = awardlink_shop(awardee_id=sue_str)
 
     sue_bud._itemroot._kids[casa_str]._kids[email_str].set_awardlink(
         awardlink=x_awardlink

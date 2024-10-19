@@ -17,6 +17,7 @@ from src.f02_bud.bud_tool import (
 )
 from src.f04_gift.atom_config import (
     acct_id_str,
+    awardee_id_str,
     group_id_str,
     road_str,
     team_id_str,
@@ -568,7 +569,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_d
     x_keylist = [atom_delete(), bud_item_awardlink_str(), disc_road, run_str]
     run_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert run_atomunit.get_value(road_str()) == disc_road
-    assert run_atomunit.get_value(group_id_str()) == run_str
+    assert run_atomunit.get_value(awardee_id_str()) == run_str
 
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
@@ -620,9 +621,9 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_i
     x_keylist = [atom_insert(), bud_item_awardlink_str(), disc_road, run_str]
     run_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert run_atomunit.get_value(road_str()) == disc_road
-    assert run_atomunit.get_value(group_id_str()) == run_str
+    assert run_atomunit.get_value(awardee_id_str()) == run_str
     assert run_atomunit.get_value(road_str()) == disc_road
-    assert run_atomunit.get_value(group_id_str()) == run_str
+    assert run_atomunit.get_value(awardee_id_str()) == run_str
     assert run_atomunit.get_value("give_force") == after_run_give_force
     assert run_atomunit.get_value("take_force") == after_run_take_force
 
@@ -654,7 +655,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_u
     after_sue_bud.edit_item_attr(
         ball_road,
         awardlink=awardlink_shop(
-            group_id=run_str,
+            awardee_id=run_str,
             give_force=after_give_force,
             take_force=after_take_force,
         ),
@@ -669,7 +670,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_u
     x_keylist = [atom_update(), bud_item_awardlink_str(), ball_road, run_str]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(group_id_str()) == run_str
+    assert ball_atomunit.get_value(awardee_id_str()) == run_str
     assert ball_atomunit.get_value("give_force") == after_give_force
     assert ball_atomunit.get_value("take_force") == after_take_force
     assert get_atomunit_total_count(sue_deltaunit) == 1
