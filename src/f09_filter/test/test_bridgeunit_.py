@@ -69,6 +69,8 @@ def test_filterable_atom_args_ReturnsObj():
     }
 
     print(f"{filterable_python_types()=}")
+    all_python_types = set(get_atom_args_python_types().keys())
+    assert x_filterable_atom_args.issubset(all_python_types)
     static_filterable_atom_args = {
         x_arg
         for x_arg, python_type in get_atom_args_python_types().items()

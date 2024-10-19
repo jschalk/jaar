@@ -58,3 +58,5 @@ def test_get_orderd_csv_ReturnsObj():
     assert get_orderd_csv(x1_dt, ["count"]) == count_csv
     assert get_orderd_csv(x1_dt, ["count", "buzz"]) == count_buzz_csv
     assert get_orderd_csv(x1_dt, ["count", "x_boolean"]) == count_bool_csv
+    # have sorting work even if sorting column does not exist
+    assert get_orderd_csv(x1_dt, ["count", "vic", "buzz"]) == count_buzz_csv
