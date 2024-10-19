@@ -20,6 +20,7 @@ from src.f01_road.road import (
     RoadUnit,
     RoadNode,
 )
+from pandas import DataFrame
 from dataclasses import dataclass
 from copy import copy as copy_copy
 
@@ -421,3 +422,31 @@ def get_bridgekinds_from_dict(bridgekinds_dict: dict) -> dict[str, BridgeKind]:
 
 def get_bridgeunit_from_json(x_json: str) -> BridgeUnit:
     return get_bridgeunit_from_dict(get_dict_from_json(x_json))
+
+
+def get_otx_to_inx_dt_columns() -> list[str]:
+    return [
+        "face_id",
+        "python_type",
+        "otx_road_delimiter",
+        "inx_road_delimiter",
+        "unknown_word",
+        "otx_word",
+        "inx_word",
+    ]
+
+
+def create_otx_to_inx_dt(x_bridgekind: BridgeKind) -> DataFrame:
+    x_rows_list = [
+        {
+            "face_id": x_bridgekind.face_id,
+            "python_type": x_bridgekind.python_type,
+            "otx_road_delimiter": x_bridgekind.otx_road_delimiter,
+            "inx_road_delimiter": x_bridgekind.inx_road_delimiter,
+            "unknown_word": x_bridgekind.unknown_word,
+            "otx_word": otx_value,
+            "inx_word": inx_value,
+        }
+        for otx_value, inx_value in x_bridgekind.otx_to_inx.items()
+    ]
+    return DataFrame(x_rows_list, columns=get_otx_to_inx_dt_columns())

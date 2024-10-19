@@ -1,13 +1,25 @@
+from src.f00_instrument.pandas_tool import get_orderd_csv
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import (
     type_AcctID_str,
     type_RoadNode_str,
+    type_RoadUnit_str,
     type_GroupID_str,
 )
 from src.f09_filter.bridge import (
     bridgekind_shop,
     get_bridgekind_from_dict,
     get_bridgekind_from_json,
+    create_otx_to_inx_dt,
+    get_otx_to_inx_dt_columns,
+)
+from src.f09_filter.examples.filter_env import (
+    env_dir_setup_cleanup,
+    get_test_faces_dir,
+)
+from src.f09_filter.examples.example_bridges import (
+    get_casa_maison_bridgeunit_set_by_otx_to_inx,
+    get_casa_maison_road_otx_to_inx_dt,
 )
 
 
@@ -135,3 +147,35 @@ def test_get_bridgekind_from_json_ReturnsObj():
 
     # THEN
     assert x_bridgekind == roadnode_bridgekind
+
+
+def test_get_otx_to_inx_dt_columns_ReturnsObj():
+    # ESTABLISH / WHEN /THEN
+    assert get_otx_to_inx_dt_columns()
+    assert len(get_otx_to_inx_dt_columns()) == 7
+    static_list = [
+        "face_id",
+        "python_type",
+        "otx_road_delimiter",
+        "inx_road_delimiter",
+        "unknown_word",
+        "otx_word",
+        "inx_word",
+    ]
+    assert get_otx_to_inx_dt_columns() == static_list
+
+
+def test_create_otx_to_inx_dt_ReturnsObj():
+    # ESTABLISH
+    casa_bridgeunit = get_casa_maison_bridgeunit_set_by_otx_to_inx()
+    casa_bridgekind = casa_bridgeunit.get_bridgekind(type_RoadUnit_str())
+
+    # WHEN
+    casa_dataframe = create_otx_to_inx_dt(casa_bridgekind)
+
+    # THEN
+    assert list(casa_dataframe.columns) == get_otx_to_inx_dt_columns()
+    assert len(casa_dataframe) == 4
+    casa_csv = get_orderd_csv(casa_dataframe)
+    print(f"{casa_csv=}")
+    assert casa_csv == get_orderd_csv(get_casa_maison_road_otx_to_inx_dt())

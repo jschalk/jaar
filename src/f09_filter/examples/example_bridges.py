@@ -12,6 +12,7 @@ from src.f09_filter.bridge import (
     BridgeKind,
     BridgeUnit,
     bridgeunit_shop,
+    default_unknown_word,
 )
 from pandas import DataFrame
 
@@ -277,4 +278,35 @@ def get_casa_maison_road_inx_dt() -> DataFrame:
     inx_dt.loc[1, base_str()] = casa_inx_road
     inx_dt.loc[2, base_str()] = clean_inx_road
     inx_dt.loc[3, base_str()] = sweep_inx_road
+    return inx_dt
+
+
+def get_casa_maison_road_otx_to_inx_dt() -> DataFrame:
+    inx_music87_str = "music87"
+    casa_inx_road = create_road(inx_music87_str, "maison")
+    clean_inx_road = create_road(casa_inx_road, "propre")
+    sweep_inx_road = create_road(clean_inx_road, "sweep")
+    otx_music45_str = "music45"
+    casa_otx_road = create_road(otx_music45_str, "casa")
+    clean_otx_road = create_road(casa_otx_road, "clean")
+    sweep_otx_road = create_road(clean_otx_road, "sweep")
+    x_rd = default_road_delimiter_if_none()
+    uw = default_unknown_word()
+
+    inx_dt = DataFrame(
+        columns=[
+            "face_id",
+            "python_type",
+            "otx_road_delimiter",
+            "inx_road_delimiter",
+            "unknown_word",
+            "otx_word",
+            "inx_word",
+        ]
+    )
+    rt = type_RoadUnit_str()
+    inx_dt.loc[0] = [None, rt, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
+    inx_dt.loc[1] = [None, rt, x_rd, x_rd, uw, casa_otx_road, casa_inx_road]
+    inx_dt.loc[2] = [None, rt, x_rd, x_rd, uw, clean_otx_road, clean_inx_road]
+    inx_dt.loc[3] = [None, rt, x_rd, x_rd, uw, sweep_otx_road, sweep_inx_road]
     return inx_dt
