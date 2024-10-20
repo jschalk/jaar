@@ -59,7 +59,7 @@ def filterable_atom_args() -> set:
 
 @dataclass
 class BridgeKind:
-    otx_to_inx: dict[any:any] = None
+    otx_to_inx: dict = None
     unknown_word: str = None
     otx_road_delimiter: str = None
     inx_road_delimiter: str = None
@@ -436,6 +436,18 @@ def get_otx_to_inx_dt_columns() -> list[str]:
     ]
 
 
+def get_explicit_label_map_columns() -> list[str]:
+    return [
+        "face_id",
+        "python_type",
+        "otx_road_delimiter",
+        "inx_road_delimiter",
+        "unknown_word",
+        "otx_label",
+        "inx_label",
+    ]
+
+
 def create_otx_to_inx_dt(x_bridgekind: BridgeKind) -> DataFrame:
     x_rows_list = [
         {
@@ -450,3 +462,19 @@ def create_otx_to_inx_dt(x_bridgekind: BridgeKind) -> DataFrame:
         for otx_value, inx_value in x_bridgekind.otx_to_inx.items()
     ]
     return DataFrame(x_rows_list, columns=get_otx_to_inx_dt_columns())
+
+
+def create_explicit_label_map_dt(x_bridgekind: BridgeKind) -> DataFrame:
+    x_rows_list = [
+        {
+            "face_id": x_bridgekind.face_id,
+            "python_type": x_bridgekind.python_type,
+            "otx_road_delimiter": x_bridgekind.otx_road_delimiter,
+            "inx_road_delimiter": x_bridgekind.inx_road_delimiter,
+            "unknown_word": x_bridgekind.unknown_word,
+            "otx_label": otx_value,
+            "inx_label": inx_value,
+        }
+        for otx_value, inx_value in x_bridgekind.explicit_label_map.items()
+    ]
+    return DataFrame(x_rows_list, columns=get_explicit_label_map_columns())

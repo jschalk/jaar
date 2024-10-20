@@ -310,3 +310,33 @@ def get_casa_maison_road_otx_to_inx_dt() -> DataFrame:
     inx_dt.loc[2] = [None, rt, x_rd, x_rd, uw, clean_otx_road, clean_inx_road]
     inx_dt.loc[3] = [None, rt, x_rd, x_rd, uw, sweep_otx_road, sweep_inx_road]
     return inx_dt
+
+
+def get_casa_maison_road_explicit_label_map_dt() -> DataFrame:
+    inx_music87_str = "music87"
+    casa_inx_str = "maison"
+    clean_inx_str = "propre"
+    sweep_inx_str = "sweep"
+    otx_music45_str = "music45"
+    casa_otx_str = "casa"
+    clean_otx_str = "clean"
+    sweep_otx_str = "sweep"
+    x_rd = default_road_delimiter_if_none()
+    uw = default_unknown_word()
+
+    inx_dt = DataFrame(
+        columns=[
+            "face_id",
+            "python_type",
+            "otx_road_delimiter",
+            "inx_road_delimiter",
+            "unknown_word",
+            "otx_label",
+            "inx_label",
+        ]
+    )
+    rt = type_RoadUnit_str()
+    inx_dt.loc[0] = [None, rt, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
+    inx_dt.loc[1] = [None, rt, x_rd, x_rd, uw, casa_otx_str, casa_inx_str]
+    inx_dt.loc[2] = [None, rt, x_rd, x_rd, uw, clean_otx_str, clean_inx_str]
+    return inx_dt

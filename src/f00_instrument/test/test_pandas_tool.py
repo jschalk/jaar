@@ -2,7 +2,7 @@ from src.f00_instrument.file import open_file, create_file_path
 from src.f00_instrument.pandas_tool import (
     get_sorting_priority_column_headers,
     save_dataframe_to_csv,
-    get_orderd_csv,
+    get_ordered_csv,
 )
 from src.f00_instrument.examples.examples_pandas import (
     get_empty_dataframe,
@@ -31,62 +31,64 @@ def test_get_sorting_priority_column_headers_ReturnsObj():
     # THEN
     assert table_sorting_priority[0] == "face_id"
     assert table_sorting_priority[1] == "python_type"
-    assert table_sorting_priority[2] == "otx_road_delimiter"
-    assert table_sorting_priority[3] == "inx_road_delimiter"
-    assert table_sorting_priority[4] == "unknown_word"
-    assert table_sorting_priority[5] == "otx_word"
-    assert table_sorting_priority[6] == "inx_word"
-    assert table_sorting_priority[7] == "owner_id"
-    assert table_sorting_priority[8] == "acct_id"
-    assert table_sorting_priority[9] == "group_id"
-    assert table_sorting_priority[10] == "parent_road"
-    assert table_sorting_priority[11] == "label"
-    assert table_sorting_priority[12] == "road"
-    assert table_sorting_priority[13] == "base"
-    assert table_sorting_priority[14] == "need"
-    assert table_sorting_priority[15] == "pick"
-    assert table_sorting_priority[16] == "team_id"
-    assert table_sorting_priority[17] == "awardee_id"
-    assert table_sorting_priority[18] == "healer_id"
-    assert table_sorting_priority[19] == "numor"
-    assert table_sorting_priority[20] == "denom"
-    assert table_sorting_priority[21] == "addin"
-    assert table_sorting_priority[22] == "base_item_active_requisite"
-    assert table_sorting_priority[23] == "begin"
-    assert table_sorting_priority[24] == "close"
-    assert table_sorting_priority[25] == "credit_belief"
-    assert table_sorting_priority[26] == "debtit_belief"
-    assert table_sorting_priority[27] == "credit_vote"
-    assert table_sorting_priority[28] == "debtit_vote"
-    assert table_sorting_priority[29] == "credor_respect"
-    assert table_sorting_priority[30] == "debtor_respect"
-    assert table_sorting_priority[31] == "fopen"
-    assert table_sorting_priority[32] == "fnigh"
-    assert table_sorting_priority[33] == "fund_pool"
-    assert table_sorting_priority[34] == "give_force"
-    assert table_sorting_priority[35] == "gogo_want"
-    assert table_sorting_priority[36] == "mass"
-    assert table_sorting_priority[37] == "max_tree_traverse"
-    assert table_sorting_priority[38] == "morph"
-    assert table_sorting_priority[39] == "nigh"
-    assert table_sorting_priority[40] == "open"
-    assert table_sorting_priority[41] == "divisor"
-    assert table_sorting_priority[42] == "pledge"
-    assert table_sorting_priority[43] == "problem_bool"
-    assert table_sorting_priority[44] == "purview_timestamp"
-    assert table_sorting_priority[45] == "stop_want"
-    assert table_sorting_priority[46] == "take_force"
-    assert table_sorting_priority[47] == "tally"
-    assert table_sorting_priority[48] == "fund_coin"
-    assert table_sorting_priority[49] == "penny"
-    assert table_sorting_priority[50] == "respect_bit"
-    assert len(table_sorting_priority) == 51
+    assert table_sorting_priority[2] == "owner_id"
+    assert table_sorting_priority[3] == "acct_id"
+    assert table_sorting_priority[4] == "group_id"
+    assert table_sorting_priority[5] == "parent_road"
+    assert table_sorting_priority[6] == "label"
+    assert table_sorting_priority[7] == "road"
+    assert table_sorting_priority[8] == "base"
+    assert table_sorting_priority[9] == "need"
+    assert table_sorting_priority[10] == "pick"
+    assert table_sorting_priority[11] == "team_id"
+    assert table_sorting_priority[12] == "awardee_id"
+    assert table_sorting_priority[13] == "healer_id"
+    assert table_sorting_priority[14] == "numor"
+    assert table_sorting_priority[15] == "denom"
+    assert table_sorting_priority[16] == "addin"
+    assert table_sorting_priority[17] == "base_item_active_requisite"
+    assert table_sorting_priority[18] == "begin"
+    assert table_sorting_priority[19] == "close"
+    assert table_sorting_priority[20] == "credit_belief"
+    assert table_sorting_priority[21] == "debtit_belief"
+    assert table_sorting_priority[22] == "credit_vote"
+    assert table_sorting_priority[23] == "debtit_vote"
+    assert table_sorting_priority[24] == "credor_respect"
+    assert table_sorting_priority[25] == "debtor_respect"
+    assert table_sorting_priority[26] == "fopen"
+    assert table_sorting_priority[27] == "fnigh"
+    assert table_sorting_priority[28] == "fund_pool"
+    assert table_sorting_priority[29] == "give_force"
+    assert table_sorting_priority[30] == "gogo_want"
+    assert table_sorting_priority[31] == "mass"
+    assert table_sorting_priority[32] == "max_tree_traverse"
+    assert table_sorting_priority[33] == "morph"
+    assert table_sorting_priority[34] == "nigh"
+    assert table_sorting_priority[35] == "open"
+    assert table_sorting_priority[36] == "divisor"
+    assert table_sorting_priority[37] == "pledge"
+    assert table_sorting_priority[38] == "problem_bool"
+    assert table_sorting_priority[39] == "purview_timestamp"
+    assert table_sorting_priority[40] == "stop_want"
+    assert table_sorting_priority[41] == "take_force"
+    assert table_sorting_priority[42] == "tally"
+    assert table_sorting_priority[43] == "fund_coin"
+    assert table_sorting_priority[44] == "penny"
+    assert table_sorting_priority[45] == "respect_bit"
+    assert table_sorting_priority[46] == "otx_road_delimiter"
+    assert table_sorting_priority[47] == "inx_road_delimiter"
+    assert table_sorting_priority[48] == "unknown_word"
+    assert table_sorting_priority[49] == "otx_word"
+    assert table_sorting_priority[50] == "inx_word"
+    assert table_sorting_priority[51] == "otx_label"
+    assert table_sorting_priority[52] == "inx_label"
+    assert len(table_sorting_priority) == 53
 
 
-def test_get_orderd_csv_ReturnsObj():
+def test_get_ordered_csv_ReturnsObj():
     # ESTABLISH
     empty_dt = get_empty_dataframe()
-    empty_csv = get_orderd_csv(empty_dt).replace("\r", "")
+    empty_csv = get_ordered_csv(empty_dt).replace("\r", "")
     x1_dt = get_ex01_dataframe()
     unordered_csv = get_ex01_unordered_csv()
     fizz_csv = get_ex01_ordered_by_fizz_csv()
@@ -97,14 +99,14 @@ def test_get_orderd_csv_ReturnsObj():
     # WHEN / THEN
     print(f"    {empty_csv=}")
     print(f"{unordered_csv=}")
-    assert get_orderd_csv(empty_dt) == """\n"""
-    assert get_orderd_csv(x1_dt) == unordered_csv
-    assert get_orderd_csv(x1_dt, ["fizz"]) == fizz_csv
-    assert get_orderd_csv(x1_dt, ["count"]) == count_csv
-    assert get_orderd_csv(x1_dt, ["count", "buzz"]) == count_buzz_csv
-    assert get_orderd_csv(x1_dt, ["count", "x_boolean"]) == count_bool_csv
+    assert get_ordered_csv(empty_dt) == """\n"""
+    assert get_ordered_csv(x1_dt) == unordered_csv
+    assert get_ordered_csv(x1_dt, ["fizz"]) == fizz_csv
+    assert get_ordered_csv(x1_dt, ["count"]) == count_csv
+    assert get_ordered_csv(x1_dt, ["count", "buzz"]) == count_buzz_csv
+    assert get_ordered_csv(x1_dt, ["count", "x_boolean"]) == count_bool_csv
     # have sorting work even if sorting column does not exist
-    assert get_orderd_csv(x1_dt, ["count", "vic", "buzz"]) == count_buzz_csv
+    assert get_ordered_csv(x1_dt, ["count", "vic", "buzz"]) == count_buzz_csv
 
 
 def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(

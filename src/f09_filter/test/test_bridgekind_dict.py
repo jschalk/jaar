@@ -1,4 +1,7 @@
-from src.f00_instrument.pandas_tool import get_orderd_csv
+from src.f00_instrument.pandas_tool import (
+    get_ordered_csv,
+    get_sorting_priority_column_headers as sorting_columns,
+)
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import (
     type_AcctID_str,
@@ -10,8 +13,10 @@ from src.f09_filter.bridge import (
     bridgekind_shop,
     get_bridgekind_from_dict,
     get_bridgekind_from_json,
-    create_otx_to_inx_dt,
     get_otx_to_inx_dt_columns,
+    get_explicit_label_map_columns,
+    create_otx_to_inx_dt,
+    create_explicit_label_map_dt,
 )
 from src.f09_filter.examples.filter_env import (
     env_dir_setup_cleanup,
@@ -19,7 +24,9 @@ from src.f09_filter.examples.filter_env import (
 )
 from src.f09_filter.examples.example_bridges import (
     get_casa_maison_bridgeunit_set_by_otx_to_inx,
+    get_casa_maison_bridgeunit_set_by_explicit_label_map,
     get_casa_maison_road_otx_to_inx_dt,
+    get_casa_maison_road_explicit_label_map_dt,
 )
 
 
@@ -163,6 +170,7 @@ def test_get_otx_to_inx_dt_columns_ReturnsObj():
         "inx_word",
     ]
     assert get_otx_to_inx_dt_columns() == static_list
+    assert set(get_otx_to_inx_dt_columns()).issubset(set(sorting_columns()))
 
 
 def test_create_otx_to_inx_dt_ReturnsObj():
@@ -176,6 +184,45 @@ def test_create_otx_to_inx_dt_ReturnsObj():
     # THEN
     assert list(casa_dataframe.columns) == get_otx_to_inx_dt_columns()
     assert len(casa_dataframe) == 4
-    casa_csv = get_orderd_csv(casa_dataframe)
+    casa_csv = get_ordered_csv(casa_dataframe)
     print(f"{casa_csv=}")
-    assert casa_csv == get_orderd_csv(get_casa_maison_road_otx_to_inx_dt())
+    assert casa_csv == get_ordered_csv(get_casa_maison_road_otx_to_inx_dt())
+
+
+def test_get_explicit_label_map_columns_ReturnsObj():
+    # ESTABLISH / WHEN /THEN
+    assert get_explicit_label_map_columns()
+    assert len(get_explicit_label_map_columns()) == 7
+    static_list = [
+        "face_id",
+        "python_type",
+        "otx_road_delimiter",
+        "inx_road_delimiter",
+        "unknown_word",
+        "otx_label",
+        "inx_label",
+    ]
+    assert get_explicit_label_map_columns() == static_list
+    assert set(get_explicit_label_map_columns()).issubset(set(sorting_columns()))
+
+
+def test_create_explicit_label_map_dt_ReturnsObj():
+    # ESTABLISH
+    casa_bridgeunit = get_casa_maison_bridgeunit_set_by_explicit_label_map()
+    casa_bridgekind = casa_bridgeunit.get_bridgekind(type_RoadUnit_str())
+
+    # WHEN
+    casa_dataframe = create_explicit_label_map_dt(casa_bridgekind)
+
+    # THEN
+    # print(f"{get_explicit_label_map_columns()=}")
+    # print(f"    {list(casa_dataframe.columns)=}")
+    # print("")
+    # print(f"{casa_dataframe=}")
+    assert list(casa_dataframe.columns) == get_explicit_label_map_columns()
+    assert len(casa_dataframe) == 3
+    casa_csv = get_ordered_csv(casa_dataframe)
+    ex_explicit_csv = get_ordered_csv(get_casa_maison_road_explicit_label_map_dt())
+    print(f"       {casa_csv=}")
+    print(f"{ex_explicit_csv=}")
+    assert casa_csv == ex_explicit_csv
