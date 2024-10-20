@@ -350,14 +350,14 @@ def test_BridgeUnit_set_otx_to_inx_SetsAttr_Scenario0_type_AcctID_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
-    apptid_bridgekind = zia_bridgeunit.get_bridgekind(type_AcctID_str())
-    assert apptid_bridgekind.otx_to_inx_exists(sue_otx, sue_inx) is False
+    acctid_bridgekind = zia_bridgeunit.get_bridgekind(type_AcctID_str())
+    assert acctid_bridgekind.otx_to_inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_bridgeunit.set_otx_to_inx(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert apptid_bridgekind.otx_to_inx_exists(sue_otx, sue_inx)
+    assert acctid_bridgekind.otx_to_inx_exists(sue_otx, sue_inx)
 
 
 def test_BridgeUnit_set_otx_to_inx_SetsAttr_Scenario1_type_RoadUnit_str():
@@ -443,69 +443,69 @@ def test_BridgeUnit_del_otx_to_inx_ReturnsObj():
     assert zia_bridgeunit.otx_to_inx_exists(road_type, zia_str, zia_str)
 
 
-def test_BridgeUnit_set_explicit_label_map_SetsAttr_Scenario0_type_AcctID_str():
+def test_BridgeUnit_set_explicit_label_SetsAttr_Scenario0_type_AcctID_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
-    apptid_bridgekind = zia_bridgeunit.get_bridgekind(type_AcctID_str())
-    assert apptid_bridgekind.explicit_label_map_exists(sue_otx, sue_inx) is False
+    acctid_bridgekind = zia_bridgeunit.get_bridgekind(type_AcctID_str())
+    assert acctid_bridgekind.explicit_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_bridgeunit.set_explicit_label_map(type_AcctID_str(), sue_otx, sue_inx)
+    zia_bridgeunit.set_explicit_label(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert apptid_bridgekind.explicit_label_map_exists(sue_otx, sue_inx)
+    assert acctid_bridgekind.explicit_label_exists(sue_otx, sue_inx)
 
 
-def test_BridgeUnit_set_explicit_label_map_SetsAttr_Scenario1_type_RoadUnit_str():
+def test_BridgeUnit_set_explicit_label_SetsAttr_Scenario1_type_RoadUnit_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_bridgekind = zia_bridgeunit.get_bridgekind(type_RoadUnit_str())
-    assert road_bridgekind.explicit_label_map_exists(sue_otx, sue_inx) is False
+    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_bridgeunit.set_explicit_label_map(type_RoadUnit_str(), sue_otx, sue_inx)
+    zia_bridgeunit.set_explicit_label(type_RoadUnit_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgekind.explicit_label_map_exists(sue_otx, sue_inx)
+    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx)
 
 
-def test_BridgeUnit_set_explicit_label_map_SetsAttr_Scenario2_type_RoadNode_str():
+def test_BridgeUnit_set_explicit_label_SetsAttr_Scenario2_type_RoadNode_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_bridgekind = zia_bridgeunit.get_bridgekind(type_RoadNode_str())
-    assert road_bridgekind.explicit_label_map_exists(sue_otx, sue_inx) is False
+    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_bridgeunit.set_explicit_label_map(type_RoadNode_str(), sue_otx, sue_inx)
+    zia_bridgeunit.set_explicit_label(type_RoadNode_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgekind.explicit_label_map_exists(sue_otx, sue_inx)
+    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx)
 
 
-def test_BridgeUnit_explicit_label_map_exists_ReturnsObj():
+def test_BridgeUnit_explicit_label_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_type = type_RoadNode_str()
-    sue_exists = zia_bridgeunit.explicit_label_map_exists(road_type, sue_otx, sue_inx)
+    sue_exists = zia_bridgeunit.explicit_label_exists(road_type, sue_otx, sue_inx)
     assert sue_exists is False
 
     # WHEN
-    zia_bridgeunit.set_explicit_label_map(type_RoadNode_str(), sue_otx, sue_inx)
+    zia_bridgeunit.set_explicit_label(type_RoadNode_str(), sue_otx, sue_inx)
 
     # THEN
-    assert zia_bridgeunit.explicit_label_map_exists(road_type, sue_otx, sue_inx)
+    assert zia_bridgeunit.explicit_label_exists(road_type, sue_otx, sue_inx)
 
 
 def test_BridgeUnit_get_explicit_inx_label_ReturnsObj():
@@ -517,28 +517,28 @@ def test_BridgeUnit_get_explicit_inx_label_ReturnsObj():
     assert zia_bridgeunit._get_explicit_inx_label(type_AcctID_str(), sue_otx) != sue_inx
 
     # WHEN
-    zia_bridgeunit.set_explicit_label_map(type_AcctID_str(), sue_otx, sue_inx)
+    zia_bridgeunit.set_explicit_label(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
     assert zia_bridgeunit._get_explicit_inx_label(type_AcctID_str(), sue_otx) == sue_inx
 
 
-def test_BridgeUnit_del_explicit_label_map_ReturnsObj():
+def test_BridgeUnit_del_explicit_label_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_type = type_RoadNode_str()
-    zia_bridgeunit.set_explicit_label_map(type_RoadNode_str(), sue_otx, sue_inx)
-    zia_bridgeunit.set_explicit_label_map(type_RoadNode_str(), zia_str, zia_str)
-    assert zia_bridgeunit.explicit_label_map_exists(road_type, sue_otx, sue_inx)
-    assert zia_bridgeunit.explicit_label_map_exists(road_type, zia_str, zia_str)
+    zia_bridgeunit.set_explicit_label(type_RoadNode_str(), sue_otx, sue_inx)
+    zia_bridgeunit.set_explicit_label(type_RoadNode_str(), zia_str, zia_str)
+    assert zia_bridgeunit.explicit_label_exists(road_type, sue_otx, sue_inx)
+    assert zia_bridgeunit.explicit_label_exists(road_type, zia_str, zia_str)
 
     # WHEN
-    zia_bridgeunit.del_explicit_label_map(road_type, sue_otx)
+    zia_bridgeunit.del_explicit_label(road_type, sue_otx)
 
     # THEN
-    sue_exists = zia_bridgeunit.explicit_label_map_exists(road_type, sue_otx, sue_inx)
+    sue_exists = zia_bridgeunit.explicit_label_exists(road_type, sue_otx, sue_inx)
     assert sue_exists is False
-    assert zia_bridgeunit.explicit_label_map_exists(road_type, zia_str, zia_str)
+    assert zia_bridgeunit.explicit_label_exists(road_type, zia_str, zia_str)

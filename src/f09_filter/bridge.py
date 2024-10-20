@@ -1,3 +1,4 @@
+from src.f00_instrument.file import save_file
 from src.f00_instrument.dict_tool import (
     get_empty_dict_if_none,
     str_in_dict,
@@ -9,6 +10,7 @@ from src.f00_instrument.dict_tool import (
     get_json_from_dict,
     get_dict_from_json,
 )
+from src.f00_instrument.pandas_tool import get_ordered_csv
 from src.f01_road.road import (
     default_road_delimiter_if_none,
     get_all_road_nodes,
@@ -20,6 +22,7 @@ from src.f01_road.road import (
     RoadUnit,
     RoadNode,
 )
+from src.f04_gift.atom_config import type_AcctID_str, type_GroupID_str, road_str
 from pandas import DataFrame
 from dataclasses import dataclass
 from copy import copy as copy_copy
@@ -33,7 +36,7 @@ class atom_args_python_typeException(Exception):
     pass
 
 
-class set_explicit_label_map_Exception(Exception):
+class set_explicit_label_Exception(Exception):
     pass
 
 
@@ -63,7 +66,7 @@ class BridgeKind:
     unknown_word: str = None
     otx_road_delimiter: str = None
     inx_road_delimiter: str = None
-    explicit_label_map: dict = None
+    explicit_label: dict = None
     python_type: str = None
     face_id: str = None
 
@@ -127,20 +130,20 @@ class BridgeKind:
     def del_otx_to_inx(self, otx_word: str):
         self.otx_to_inx.pop(otx_word)
 
-    def set_explicit_label_map(self, otx_label: RoadNode, inx_label: RoadNode):
+    def set_explicit_label(self, otx_label: RoadNode, inx_label: RoadNode):
         if self.otx_road_delimiter in otx_label:
-            exception_str = f"explicit_label_map cannot have otx_label '{otx_label}'. It must be not have road_delimiter {self.otx_road_delimiter}."
-            raise set_explicit_label_map_Exception(exception_str)
+            exception_str = f"explicit_label cannot have otx_label '{otx_label}'. It must be not have road_delimiter {self.otx_road_delimiter}."
+            raise set_explicit_label_Exception(exception_str)
         if self.inx_road_delimiter in inx_label:
-            exception_str = f"explicit_label_map cannot have inx_label '{inx_label}'. It must be not have road_delimiter {self.inx_road_delimiter}."
-            raise set_explicit_label_map_Exception(exception_str)
+            exception_str = f"explicit_label cannot have inx_label '{inx_label}'. It must be not have road_delimiter {self.inx_road_delimiter}."
+            raise set_explicit_label_Exception(exception_str)
 
-        self.explicit_label_map[otx_label] = inx_label
+        self.explicit_label[otx_label] = inx_label
 
         if self.python_type == "RoadUnit":
-            self._set_new_explicit_label_map_to_otx_inx(otx_label, inx_label)
+            self._set_new_explicit_label_to_otx_inx(otx_label, inx_label)
 
-    def _set_new_explicit_label_map_to_otx_inx(self, otx_label, inx_label):
+    def _set_new_explicit_label_to_otx_inx(self, otx_label, inx_label):
         for otx_road, inx_road in self.otx_to_inx.items():
             otx_roadnodes = get_all_road_nodes(otx_road, self.otx_road_delimiter)
             inx_roadnodes = get_all_road_nodes(inx_road, self.inx_road_delimiter)
@@ -150,18 +153,16 @@ class BridgeKind:
             self.set_otx_to_inx(otx_road, create_road_from_nodes(inx_roadnodes))
 
     def _get_explicit_inx_label(self, otx_label: RoadNode) -> RoadNode:
-        return self.explicit_label_map.get(otx_label)
+        return self.explicit_label.get(otx_label)
 
-    def explicit_label_map_exists(
-        self, otx_label: RoadNode, inx_label: RoadNode
-    ) -> bool:
+    def explicit_label_exists(self, otx_label: RoadNode, inx_label: RoadNode) -> bool:
         return self._get_explicit_inx_label(otx_label) == inx_label
 
     def explicit_otx_label_exists(self, otx_label: RoadNode) -> bool:
         return self._get_explicit_inx_label(otx_label) != None
 
-    def del_explicit_label_map(self, otx_label: RoadNode) -> bool:
-        self.explicit_label_map.pop(otx_label)
+    def del_explicit_label(self, otx_label: RoadNode) -> bool:
+        self.explicit_label.pop(otx_label)
 
     def _unknown_word_in_otx_to_inx(self) -> bool:
         return str_in_dict(self.unknown_word, self.otx_to_inx)
@@ -218,7 +219,7 @@ class BridgeKind:
             "otx_road_delimiter": self.otx_road_delimiter,
             "inx_road_delimiter": self.inx_road_delimiter,
             "unknown_word": self.unknown_word,
-            "explicit_label_map": self.explicit_label_map,
+            "explicit_label": self.explicit_label,
             "otx_to_inx": self.otx_to_inx,
         }
 
@@ -230,7 +231,7 @@ def bridgekind_shop(
     x_python_type: str,
     x_otx_road_delimiter: str = None,
     x_inx_road_delimiter: str = None,
-    x_explicit_label_map: dict = None,
+    x_explicit_label: dict = None,
     x_otx_to_inx: dict = None,
     x_unknown_word: str = None,
     x_face_id: str = None,
@@ -248,7 +249,7 @@ def bridgekind_shop(
         unknown_word=x_unknown_word,
         otx_road_delimiter=x_otx_road_delimiter,
         inx_road_delimiter=x_inx_road_delimiter,
-        explicit_label_map=get_empty_dict_if_none(x_explicit_label_map),
+        explicit_label=get_empty_dict_if_none(x_explicit_label),
         face_id=x_face_id,
     )
 
@@ -262,7 +263,7 @@ def get_bridgekind_from_dict(x_dict: dict) -> BridgeKind:
         x_python_type=x_dict.get("python_type"),
         x_face_id=x_dict.get("face_id"),
         x_inx_road_delimiter=x_dict.get("inx_road_delimiter"),
-        x_explicit_label_map=x_dict.get("explicit_label_map"),
+        x_explicit_label=x_dict.get("explicit_label"),
         x_otx_road_delimiter=x_dict.get("otx_road_delimiter"),
         x_otx_to_inx=x_dict.get("otx_to_inx"),
         x_unknown_word=x_dict.get("unknown_word"),
@@ -326,20 +327,18 @@ class BridgeUnit:
     def del_otx_to_inx(self, x_python_type: str, x_otx: str):
         self.get_bridgekind(x_python_type).del_otx_to_inx(x_otx)
 
-    def set_explicit_label_map(self, x_python_type: str, x_otx: str, x_inx: str):
-        self.get_bridgekind(x_python_type).set_explicit_label_map(x_otx, x_inx)
+    def set_explicit_label(self, x_python_type: str, x_otx: str, x_inx: str):
+        self.get_bridgekind(x_python_type).set_explicit_label(x_otx, x_inx)
 
     def _get_explicit_inx_label(self, x_python_type: str, x_otx: str) -> str:
         return self.get_bridgekind(x_python_type)._get_explicit_inx_label(x_otx)
 
-    def explicit_label_map_exists(
-        self, x_python_type: str, x_otx: str, x_inx: str
-    ) -> bool:
+    def explicit_label_exists(self, x_python_type: str, x_otx: str, x_inx: str) -> bool:
         x_bridgekind = self.get_bridgekind(x_python_type)
-        return x_bridgekind.explicit_label_map_exists(x_otx, x_inx)
+        return x_bridgekind.explicit_label_exists(x_otx, x_inx)
 
-    def del_explicit_label_map(self, x_python_type: str, x_otx: str):
-        self.get_bridgekind(x_python_type).del_explicit_label_map(x_otx)
+    def del_explicit_label(self, x_python_type: str, x_otx: str):
+        self.get_bridgekind(x_python_type).del_explicit_label(x_otx)
 
     def get_dict(self) -> dict:
         return {
@@ -436,7 +435,7 @@ def get_otx_to_inx_dt_columns() -> list[str]:
     ]
 
 
-def get_explicit_label_map_columns() -> list[str]:
+def get_explicit_label_columns() -> list[str]:
     return [
         "face_id",
         "python_type",
@@ -464,7 +463,7 @@ def create_otx_to_inx_dt(x_bridgekind: BridgeKind) -> DataFrame:
     return DataFrame(x_rows_list, columns=get_otx_to_inx_dt_columns())
 
 
-def create_explicit_label_map_dt(x_bridgekind: BridgeKind) -> DataFrame:
+def create_explicit_label_dt(x_bridgekind: BridgeKind) -> DataFrame:
     x_rows_list = [
         {
             "face_id": x_bridgekind.face_id,
@@ -475,6 +474,38 @@ def create_explicit_label_map_dt(x_bridgekind: BridgeKind) -> DataFrame:
             "otx_label": otx_value,
             "inx_label": inx_value,
         }
-        for otx_value, inx_value in x_bridgekind.explicit_label_map.items()
+        for otx_value, inx_value in x_bridgekind.explicit_label.items()
     ]
-    return DataFrame(x_rows_list, columns=get_explicit_label_map_columns())
+    return DataFrame(x_rows_list, columns=get_explicit_label_columns())
+
+
+def save_all_bridgeunit_files(x_dir: str, x_bridgeunit: BridgeUnit):
+    acctid_bridgekind = x_bridgeunit.get_bridgekind(type_AcctID_str())
+    groupid_bridgekind = x_bridgeunit.get_bridgekind(type_GroupID_str())
+    road_bridgekind = x_bridgeunit.get_bridgekind(road_str())
+    acctid_otx_to_inx_dt = create_otx_to_inx_dt(acctid_bridgekind)
+    groupid_otx_to_inx_dt = create_otx_to_inx_dt(groupid_bridgekind)
+    road_otx_to_inx_dt = create_otx_to_inx_dt(road_bridgekind)
+    acctid_explicit_label_dt = create_explicit_label_dt(acctid_bridgekind)
+    groupid_explicit_label_dt = create_explicit_label_dt(groupid_bridgekind)
+    road_explicit_label_dt = create_explicit_label_dt(road_bridgekind)
+
+    acctid_otx_to_inx_csv = get_ordered_csv(acctid_otx_to_inx_dt)
+    groupid_otx_to_inx_csv = get_ordered_csv(groupid_otx_to_inx_dt)
+    road_otx_to_inx_csv = get_ordered_csv(road_otx_to_inx_dt)
+    acctid_explicit_label_csv = get_ordered_csv(acctid_explicit_label_dt)
+    groupid_explicit_label_csv = get_ordered_csv(groupid_explicit_label_dt)
+    road_explicit_label_csv = get_ordered_csv(road_explicit_label_dt)
+    acctid_otx_to_inx_filename = f"{type_AcctID_str()}_otx_to_inx_dt.csv"
+    acctid_explicit_label_filename = f"{type_AcctID_str()}_explicit_label.csv"
+    groupid_otx_to_inx_filename = f"{type_GroupID_str()}_otx_to_inx_dt.csv"
+    groupid_explicit_label_filename = f"{type_GroupID_str()}_explicit_label.csv"
+    road_otx_to_inx_filename = f"{road_str()}_otx_to_inx_dt.csv"
+    road_explicit_label_filename = f"{road_str()}_explicit_label.csv"
+
+    save_file(x_dir, acctid_otx_to_inx_filename, acctid_otx_to_inx_csv)
+    save_file(x_dir, acctid_explicit_label_filename, groupid_otx_to_inx_csv)
+    save_file(x_dir, groupid_otx_to_inx_filename, road_otx_to_inx_csv)
+    save_file(x_dir, groupid_explicit_label_filename, acctid_explicit_label_csv)
+    save_file(x_dir, road_otx_to_inx_filename, groupid_explicit_label_csv)
+    save_file(x_dir, road_explicit_label_filename, road_explicit_label_csv)

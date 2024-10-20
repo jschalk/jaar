@@ -41,7 +41,7 @@ def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_label():
     assert roadnode_bridgekind.otx_exists(fail_clean_otx) is False
 
 
-def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_label_With_explicit_label_map():
+def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_label_With_explicit_label():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
@@ -53,9 +53,9 @@ def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_label_With_explicit_lab
         type_RoadNode_str(), otx_r_delimiter, inx_r_delimiter
     )
     roadnode_bridgekind.set_otx_to_inx(clean_otx, clean_inx)
-    roadnode_bridgekind.set_explicit_label_map(casa_otx, casa_inx)
+    roadnode_bridgekind.set_explicit_label(casa_otx, casa_inx)
     assert casa_otx != casa_inx
-    assert roadnode_bridgekind.explicit_label_map_exists(casa_otx, casa_inx)
+    assert roadnode_bridgekind.explicit_label_exists(casa_otx, casa_inx)
     assert roadnode_bridgekind.otx_to_inx_exists(casa_otx, casa_inx) is False
 
     # WHEN
@@ -63,7 +63,7 @@ def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_label_With_explicit_lab
 
     # THEN
     assert generated_inx == casa_inx
-    assert roadnode_bridgekind.explicit_label_map_exists(casa_otx, casa_inx)
+    assert roadnode_bridgekind.explicit_label_exists(casa_otx, casa_inx)
     assert roadnode_bridgekind.otx_to_inx_exists(casa_otx, casa_inx)
     print(f"{casa_inx=}")
 
@@ -125,7 +125,7 @@ def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     assert gen_inx_road == f"{inx_music87_str}{inx_r_delimiter}{clean_otx_str}"
 
 
-def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_explicit_label_map():
+def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_explicit_label():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -137,7 +137,7 @@ def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_exp
     road_bridgekind = bridgekind_shop(
         type_RoadUnit_str(), otx_r_delimiter, inx_r_delimiter
     )
-    road_bridgekind.set_explicit_label_map(clean_otx_str, clean_inx_str)
+    road_bridgekind.set_explicit_label(clean_otx_str, clean_inx_str)
     assert road_bridgekind.otx_exists(otx_music45_str) is False
     assert road_bridgekind.otx_exists(clean_otx_road) is False
 
@@ -233,9 +233,9 @@ def test_BridgeKind_get_create_inx_AddsMissingElementsTo_otx_to_inx_RoadUnit():
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
     road_bd = bridgekind_shop(type_RoadUnit_str())
-    road_bd.set_explicit_label_map(otx_music45_str, inx_music87_str)
-    road_bd.set_explicit_label_map(casa_otx_str, casa_inx_str)
-    road_bd.set_explicit_label_map(clean_otx_str, clean_inx_str)
+    road_bd.set_explicit_label(otx_music45_str, inx_music87_str)
+    road_bd.set_explicit_label(casa_otx_str, casa_inx_str)
+    road_bd.set_explicit_label(clean_otx_str, clean_inx_str)
     assert road_bd.otx_exists(otx_music45_str) is False
     assert road_bd.otx_exists(casa_otx_road) is False
     assert road_bd.otx_exists(clean_otx_road) is False

@@ -16,7 +16,7 @@ from src.f09_filter.examples.filter_env import (
     get_test_faces_dir,
 )
 from src.f09_filter.examples.example_bridges import (
-    get_casa_maison_bridgeunit_set_by_explicit_label_map,
+    get_casa_maison_bridgeunit_set_by_explicit_label,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
     get_clean_roadunit_bridgekind,
@@ -107,7 +107,7 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario1_SingleFile_RoadUni
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
-    sue_bridgeunit = get_casa_maison_bridgeunit_set_by_explicit_label_map()
+    sue_bridgeunit = get_casa_maison_bridgeunit_set_by_explicit_label()
     sue_dir = f"{get_test_faces_dir()}/{sue_bridgeunit.face_id}"
     save_file(sue_dir, "bridge.json", sue_bridgeunit.get_json())
     sue_otx_dt = get_casa_maison_road_otx_dt()
@@ -150,7 +150,7 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    sue_bridgeunit = get_casa_maison_bridgeunit_set_by_explicit_label_map()
+    sue_bridgeunit = get_casa_maison_bridgeunit_set_by_explicit_label()
     sue_bridgeunit.set_bridgekind(get_suita_acctid_bridgekind())
     sue_dir = f"{get_test_faces_dir()}/{sue_bridgeunit.face_id}"
     bridge_filename = "bridge.json"
