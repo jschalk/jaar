@@ -6,6 +6,7 @@ from src.f09_filter.bridge import (
     get_bridgeunit_from_dict,
     get_bridgeunit_from_json,
     save_all_bridgeunit_files,
+    load_otx_to_inx_from_csv,
 )
 from src.f09_filter.examples.filter_env import (
     env_dir_setup_cleanup,
@@ -169,11 +170,11 @@ def test_save_all_bridgeunit_files_SavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     sue_bridgeunit = get_sue_bridgeunit()
     bridge_dir = get_test_faces_dir()
-    acctid_otx_to_inx_filename = f"{type_AcctID_str()}_otx_to_inx_dt.csv"
+    acctid_otx_to_inx_filename = f"{type_AcctID_str()}_otx_to_inx.csv"
     acctid_explicit_label_filename = f"{type_AcctID_str()}_explicit_label.csv"
-    groupid_otx_to_inx_filename = f"{type_GroupID_str()}_otx_to_inx_dt.csv"
+    groupid_otx_to_inx_filename = f"{type_GroupID_str()}_otx_to_inx.csv"
     groupid_explicit_label_filename = f"{type_GroupID_str()}_explicit_label.csv"
-    road_otx_to_inx_filename = f"{road_str()}_otx_to_inx_dt.csv"
+    road_otx_to_inx_filename = f"{road_str()}_otx_to_inx.csv"
     road_explicit_label_filename = f"{road_str()}_explicit_label.csv"
     acctid_otx_to_inx_csv_path = f"{bridge_dir}/{acctid_otx_to_inx_filename}"
     acctid_explicit_label_csv_path = f"{bridge_dir}/{acctid_explicit_label_filename}"
@@ -198,3 +199,45 @@ def test_save_all_bridgeunit_files_SavesFiles(env_dir_setup_cleanup):
     assert os_path_exists(groupid_explicit_label_csv_path)
     assert os_path_exists(road_otx_to_inx_csv_path)
     assert os_path_exists(road_explicit_label_csv_path)
+
+
+# def test_load_otx_to_inx_from_csv_SetsAttr():
+#     # ESTABLISH
+#     sue_bridgeunit = get_sue_bridgeunit()
+#     bridge_dir = get_test_faces_dir()
+#     acctid_filename = f"{type_AcctID_str()}_otx_to_inx.csv"
+#     groupid_filename = f"{type_GroupID_str()}_otx_to_inx.csv"
+#     road_filename = f"{road_str()}_otx_to_inx.csv"
+#     acctid_otx_to_inx_csv_path = f"{bridge_dir}/{acctid_filename}"
+#     groupid_otx_to_inx_csv_path = f"{bridge_dir}/{groupid_filename}"
+#     road_otx_to_inx_csv_path = f"{bridge_dir}/{road_filename}"
+#     save_all_bridgeunit_files(bridge_dir, sue_bridgeunit)
+#     assert os_path_exists(acctid_otx_to_inx_csv_path)
+#     assert os_path_exists(groupid_otx_to_inx_csv_path)
+#     assert os_path_exists(road_otx_to_inx_csv_path)
+#     empty_bridgeunit = bridgeunit_shop("Sue")
+#     x_acctid_bridgekind = empty_bridgeunit.get_bridgekind(type_AcctID_str())
+#     x_groupid_bridgekind = empty_bridgeunit.get_bridgekind(type_GroupID_str())
+#     x_road_bridgekind = empty_bridgeunit.get_bridgekind(road_str())
+#     assert len(x_acctid_bridgekind.otx_to_inx) == 0
+#     assert len(x_groupid_bridgekind.otx_to_inx) == 0
+#     assert len(x_road_bridgekind.otx_to_inx) == 0
+
+#     # WHEN
+#     x_acctid_bridgekind = load_otx_to_inx_from_csv(bridge_dir, x_acctid_bridgekind)
+#     x_groupid_bridgekind = load_otx_to_inx_from_csv(bridge_dir, x_groupid_bridgekind)
+#     x_road_bridgekind = load_otx_to_inx_from_csv(bridge_dir, x_road_bridgekind)
+
+#     # THEN
+#     assert len(x_acctid_bridgekind.otx_to_inx) == 100
+#     assert len(x_groupid_bridgekind.otx_to_inx) == 100
+#     assert len(x_road_bridgekind.otx_to_inx) == 100
+
+#     ex_acctid_bridgekind = sue_bridgeunit.get_bridgekind(type_AcctID_str())
+#     ex_groupid_bridgekind = sue_bridgeunit.get_bridgekind(type_GroupID_str())
+#     ex_road_bridgekind = sue_bridgeunit.get_bridgekind(road_str())
+
+#     assert ex_acctid_bridgekind == x_acctid_bridgekind
+#     assert ex_groupid_bridgekind == x_groupid_bridgekind
+#     assert ex_road_bridgekind == x_road_bridgekind
+#     assert 1 == 2

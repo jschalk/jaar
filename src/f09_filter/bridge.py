@@ -10,7 +10,7 @@ from src.f00_instrument.dict_tool import (
     get_json_from_dict,
     get_dict_from_json,
 )
-from src.f00_instrument.pandas_tool import get_ordered_csv
+from src.f00_instrument.pandas_tool import get_ordered_csv, open_csv
 from src.f01_road.road import (
     default_road_delimiter_if_none,
     get_all_road_nodes,
@@ -22,7 +22,13 @@ from src.f01_road.road import (
     RoadUnit,
     RoadNode,
 )
-from src.f04_gift.atom_config import type_AcctID_str, type_GroupID_str, road_str
+from src.f04_gift.atom_config import (
+    type_AcctID_str,
+    type_GroupID_str,
+    road_str,
+    type_RoadNode_str,
+    type_RoadUnit_str,
+)
 from pandas import DataFrame
 from dataclasses import dataclass
 from copy import copy as copy_copy
@@ -480,32 +486,28 @@ def create_explicit_label_dt(x_bridgekind: BridgeKind) -> DataFrame:
 
 
 def save_all_bridgeunit_files(x_dir: str, x_bridgeunit: BridgeUnit):
-    acctid_bridgekind = x_bridgeunit.get_bridgekind(type_AcctID_str())
-    groupid_bridgekind = x_bridgeunit.get_bridgekind(type_GroupID_str())
-    road_bridgekind = x_bridgeunit.get_bridgekind(road_str())
-    acctid_otx_to_inx_dt = create_otx_to_inx_dt(acctid_bridgekind)
-    groupid_otx_to_inx_dt = create_otx_to_inx_dt(groupid_bridgekind)
-    road_otx_to_inx_dt = create_otx_to_inx_dt(road_bridgekind)
-    acctid_explicit_label_dt = create_explicit_label_dt(acctid_bridgekind)
-    groupid_explicit_label_dt = create_explicit_label_dt(groupid_bridgekind)
-    road_explicit_label_dt = create_explicit_label_dt(road_bridgekind)
+    for x_key, x_bridgekind in x_bridgeunit.bridgekinds.items():
+        x_otx_to_inx_dt = create_otx_to_inx_dt(x_bridgekind)
+        x_explicit_label_dt = create_explicit_label_dt(x_bridgekind)
+        x_otx_to_inx_csv = get_ordered_csv(x_otx_to_inx_dt)
+        x_explicit_label_csv = get_ordered_csv(x_explicit_label_dt)
+        x_otx_to_inx_filename = f"{x_key}_otx_to_inx.csv"
+        x_explicit_label_filename = f"{x_key}_explicit_label.csv"
+        save_file(x_dir, x_otx_to_inx_filename, x_otx_to_inx_csv)
+        save_file(x_dir, x_explicit_label_filename, x_explicit_label_csv)
 
-    acctid_otx_to_inx_csv = get_ordered_csv(acctid_otx_to_inx_dt)
-    groupid_otx_to_inx_csv = get_ordered_csv(groupid_otx_to_inx_dt)
-    road_otx_to_inx_csv = get_ordered_csv(road_otx_to_inx_dt)
-    acctid_explicit_label_csv = get_ordered_csv(acctid_explicit_label_dt)
-    groupid_explicit_label_csv = get_ordered_csv(groupid_explicit_label_dt)
-    road_explicit_label_csv = get_ordered_csv(road_explicit_label_dt)
-    acctid_otx_to_inx_filename = f"{type_AcctID_str()}_otx_to_inx_dt.csv"
-    acctid_explicit_label_filename = f"{type_AcctID_str()}_explicit_label.csv"
-    groupid_otx_to_inx_filename = f"{type_GroupID_str()}_otx_to_inx_dt.csv"
-    groupid_explicit_label_filename = f"{type_GroupID_str()}_explicit_label.csv"
-    road_otx_to_inx_filename = f"{road_str()}_otx_to_inx_dt.csv"
-    road_explicit_label_filename = f"{road_str()}_explicit_label.csv"
 
-    save_file(x_dir, acctid_otx_to_inx_filename, acctid_otx_to_inx_csv)
-    save_file(x_dir, acctid_explicit_label_filename, groupid_otx_to_inx_csv)
-    save_file(x_dir, groupid_otx_to_inx_filename, road_otx_to_inx_csv)
-    save_file(x_dir, groupid_explicit_label_filename, acctid_explicit_label_csv)
-    save_file(x_dir, road_otx_to_inx_filename, groupid_explicit_label_csv)
-    save_file(x_dir, road_explicit_label_filename, road_explicit_label_csv)
+def load_otx_to_inx_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind:
+    pass
+    # file_key = x_bridgekind.python_type
+    # if x_bridgekind.python_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
+    #     file_key = road_str()
+    # otx_to_inx_filename = f"{file_key}_otx_to_inx.csv"
+    # otx_to_inx_dt = open_csv(x_dir, otx_to_inx_filename)
+    # print(f"{otx_to_inx_dt.to_dict('records')=}")
+    # # x_dict
+    # # for table_row in otx_to_inx_dt.to_dict('index'):
+
+    # print("")
+
+    # return x_bridgekind

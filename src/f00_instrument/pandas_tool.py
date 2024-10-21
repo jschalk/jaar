@@ -1,5 +1,5 @@
-from src.f00_instrument.file import create_dir, save_file
-from pandas import DataFrame
+from src.f00_instrument.file import save_file, create_file_path
+from pandas import DataFrame, read_csv as pandas_read_csv
 
 
 def get_sorting_priority_column_headers() -> list[str]:
@@ -75,3 +75,7 @@ def get_ordered_csv(x_dt: DataFrame, sorting_columns: list[str] = None) -> str:
     x_dt.reset_index(inplace=True)
     x_dt.drop(columns=["index"], inplace=True)
     return x_dt.to_csv(index=False).replace("\r", "")
+
+
+def open_csv(x_file_dir: str, x_filename: str) -> DataFrame:
+    return pandas_read_csv(create_file_path(x_file_dir, x_filename))

@@ -1,5 +1,5 @@
 from src.f00_instrument.file import save_file
-from src.f00_instrument.pandas_tool import save_dataframe_to_csv
+from src.f00_instrument.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f01_road.road import default_road_delimiter_if_none, create_road
 from src.f04_gift.atom_config import (
     acct_id_str,
@@ -8,7 +8,6 @@ from src.f04_gift.atom_config import (
     type_AcctID_str,
     type_GroupID_str,
 )
-from src.f08_brick.brick import open_brick_csv
 from src.f09_filter.bridge import bridgeunit_shop
 from src.f09_filter.filter import filter_face_dir_files
 from src.f09_filter.examples.filter_env import (
@@ -68,7 +67,7 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
     assert os_path_exists(bridgeunit_file_path)
     assert os_path_exists(otx_file_path)
     assert os_path_exists(inx_file_path)
-    gen_inx_dt = open_brick_csv(inx_dir, example_filename)
+    gen_inx_dt = open_csv(inx_dir, example_filename)
     assert gen_inx_dt.iloc[0][acct_id_str()] == bob_inx
     assert gen_inx_dt.iloc[3][acct_id_str()] == zia_otx
     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()
@@ -130,7 +129,7 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario1_SingleFile_RoadUni
     assert os_path_exists(inx_file_path)
     print(f"{sue_otx_dt=} \n")
     print(f"{sue_inx_dt=} \n")
-    gen_inx_dt = open_brick_csv(inx_dir, example_filename)
+    gen_inx_dt = open_csv(inx_dir, example_filename)
     assert gen_inx_dt.iloc[0][base_str()] == inx_music87_str
     assert gen_inx_dt.iloc[1][base_str()] == casa_inx_road
     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()
@@ -185,12 +184,12 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
     assert os_path_exists(bridgeunit_file_path)
     assert os_path_exists(appt_id_otx_file_path)
     assert os_path_exists(appt_id_inx_file_path)
-    appt_inx_dt = open_brick_csv(inx_dir, appt_id_filename)
+    appt_inx_dt = open_csv(inx_dir, appt_id_filename)
     gen_csv = appt_inx_dt.sort_values(acct_id_str()).to_csv(index=False)
     sue_inx_dt = get_suita_acctid_inx_dt()
     assert gen_csv == sue_inx_dt.sort_values(acct_id_str()).to_csv(index=False)
 
-    gen_road1_inx_dt = open_brick_csv(inx_dir, road1_filename)
+    gen_road1_inx_dt = open_csv(inx_dir, road1_filename)
     road1_inx_dt = get_casa_maison_road_inx_dt()
     assert gen_road1_inx_dt.to_csv() == road1_inx_dt.to_csv()
 
@@ -239,7 +238,7 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
 #     assert os_path_exists(bridgeunit_file_path)
 #     assert os_path_exists(otx_file_path)
 #     assert os_path_exists(inx_file_path)
-#     gen_inx_dt = open_brick_csv(inx_dir, example_filename)
+#     gen_inx_dt = open_csv(inx_dir, example_filename)
 #     assert gen_inx_dt.iloc[0][acct_id_str()] == zia_otx
 #     assert gen_inx_dt.iloc[1][acct_id_str()] == sue_inx
 #     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()

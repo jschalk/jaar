@@ -1,5 +1,5 @@
 from src.f00_instrument.file import open_file, create_file_path
-from src.f00_instrument.pandas_tool import save_dataframe_to_csv
+from src.f00_instrument.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f00_instrument.dict_tool import (
     extract_csv_headers,
     get_csv_column1_column2_metrics,
@@ -28,7 +28,7 @@ from src.f08_brick.brick_config import (
     sort_order_str,
     get_brick_format_headers,
 )
-from pandas import DataFrame, read_csv as pandas_read_csv
+from pandas import DataFrame
 from csv import reader as csv_reader
 from dataclasses import dataclass
 
@@ -156,10 +156,6 @@ def _sort_dataframe(x_brick: DataFrame, sorting_columns: list[str]) -> DataFrame
 def save_brick_csv(x_brickname: str, x_budunit: BudUnit, x_dir: str, x_filename: str):
     x_dataframe = create_brick_df(x_budunit, x_brickname)
     save_dataframe_to_csv(x_dataframe, x_dir, x_filename)
-
-
-def open_brick_csv(x_file_dir: str, x_filename: str) -> DataFrame:
-    return pandas_read_csv(create_file_path(x_file_dir, x_filename))
 
 
 def get_csv_brickref(title_row: list[str]) -> BrickRef:
