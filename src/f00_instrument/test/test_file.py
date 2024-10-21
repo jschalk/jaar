@@ -181,7 +181,7 @@ def test_dir_files_correctlyGrabsFileData(env_dir_setup_cleanup):
     save_file(dest_dir=env_dir, file_name=x2_file_name, file_str=x2_file_str)
 
     # WHEN
-    files_dict = dir_files(dir_path=env_dir)
+    files_dict = dir_files(x_dir=env_dir)
 
     # THEN
     assert len(files_dict) == 2
@@ -204,7 +204,7 @@ def test_dir_files_delete_extensions_ReturnsCorrectObj(env_dir_setup_cleanup):
     save_file(dest_dir=env_dir, file_name=x2_file_name, file_str=x2_file_str)
 
     # WHEN
-    files_dict = dir_files(dir_path=env_dir, delete_extensions=True)
+    files_dict = dir_files(x_dir=env_dir, delete_extensions=True)
 
     # THEN
     assert files_dict.get(x1_name) == x1_file_str
@@ -234,7 +234,7 @@ def test_dir_files_returnsSubDirs(env_dir_setup_cleanup):
     )
 
     # WHEN
-    files_dict = dir_files(dir_path=env_dir, delete_extensions=True, include_dirs=True)
+    files_dict = dir_files(x_dir=env_dir, delete_extensions=True, include_dirs=True)
 
     # THEN
     assert files_dict.get(x1_name) is True
@@ -260,7 +260,7 @@ def test_dir_files_doesNotReturnsFiles(env_dir_setup_cleanup):
     )
 
     # WHEN
-    files_dict = dir_files(dir_path=env_dir, include_files=False)
+    files_dict = dir_files(x_dir=env_dir, include_files=False)
 
     # THEN
     print(f"{files_dict.get(x1_file_name)=}")

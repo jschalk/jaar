@@ -305,10 +305,10 @@ def get_casa_maison_road_otx_to_inx_dt() -> DataFrame:
         ]
     )
     rt = type_RoadUnit_str()
-    inx_dt.loc[0] = [None, rt, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
-    inx_dt.loc[1] = [None, rt, x_rd, x_rd, uw, casa_otx_road, casa_inx_road]
-    inx_dt.loc[2] = [None, rt, x_rd, x_rd, uw, clean_otx_road, clean_inx_road]
-    inx_dt.loc[3] = [None, rt, x_rd, x_rd, uw, sweep_otx_road, sweep_inx_road]
+    inx_dt.loc[0] = ["Sue", rt, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
+    inx_dt.loc[1] = ["Sue", rt, x_rd, x_rd, uw, casa_otx_road, casa_inx_road]
+    inx_dt.loc[2] = ["Sue", rt, x_rd, x_rd, uw, clean_otx_road, clean_inx_road]
+    inx_dt.loc[3] = ["Sue", rt, x_rd, x_rd, uw, sweep_otx_road, sweep_inx_road]
     return inx_dt
 
 
@@ -336,7 +336,7 @@ def get_casa_maison_road_explicit_label_dt() -> DataFrame:
         ]
     )
     rt = type_RoadUnit_str()
-    inx_dt.loc[0] = [None, rt, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
-    inx_dt.loc[1] = [None, rt, x_rd, x_rd, uw, casa_otx_str, casa_inx_str]
-    inx_dt.loc[2] = [None, rt, x_rd, x_rd, uw, clean_otx_str, clean_inx_str]
+    inx_dt.loc[0] = ["Sue", rt, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
+    inx_dt.loc[1] = ["Sue", rt, x_rd, x_rd, uw, casa_otx_str, casa_inx_str]
+    inx_dt.loc[2] = ["Sue", rt, x_rd, x_rd, uw, clean_otx_str, clean_inx_str]
     return inx_dt

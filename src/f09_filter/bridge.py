@@ -384,18 +384,21 @@ def bridgeunit_shop(
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
             x_inx_road_delimiter=x_inx_road_delimiter,
+            x_face_id=x_face_id,
         ),
         "GroupID": bridgekind_shop(
             x_python_type="GroupID",
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
             x_inx_road_delimiter=x_inx_road_delimiter,
+            x_face_id=x_face_id,
         ),
         "road": bridgekind_shop(
             x_python_type="RoadUnit",
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
             x_inx_road_delimiter=x_inx_road_delimiter,
+            x_face_id=x_face_id,
         ),
     }
 
@@ -487,27 +490,47 @@ def create_explicit_label_dt(x_bridgekind: BridgeKind) -> DataFrame:
 
 def save_all_bridgeunit_files(x_dir: str, x_bridgeunit: BridgeUnit):
     for x_key, x_bridgekind in x_bridgeunit.bridgekinds.items():
-        x_otx_to_inx_dt = create_otx_to_inx_dt(x_bridgekind)
-        x_explicit_label_dt = create_explicit_label_dt(x_bridgekind)
-        x_otx_to_inx_csv = get_ordered_csv(x_otx_to_inx_dt)
-        x_explicit_label_csv = get_ordered_csv(x_explicit_label_dt)
-        x_otx_to_inx_filename = f"{x_key}_otx_to_inx.csv"
-        x_explicit_label_filename = f"{x_key}_explicit_label.csv"
-        save_file(x_dir, x_otx_to_inx_filename, x_otx_to_inx_csv)
-        save_file(x_dir, x_explicit_label_filename, x_explicit_label_csv)
+        _save_otx_to_inx_dt_file(x_dir, x_bridgekind, x_key)
+        _save_explicit_label_dt_file(x_dir, x_bridgekind, x_key)
+
+
+def _save_otx_to_inx_dt_file(x_dir: str, x_bridgekind: BridgeKind, x_filename: str):
+    x_otx_to_inx_dt = create_otx_to_inx_dt(x_bridgekind)
+    x_otx_to_inx_csv = get_ordered_csv(x_otx_to_inx_dt)
+    x_otx_to_inx_filename = f"{x_filename}_otx_to_inx.csv"
+    save_file(x_dir, x_otx_to_inx_filename, x_otx_to_inx_csv)
+
+
+def _save_explicit_label_dt_file(x_dir, x_bridgekind, x_key):
+    x_explicit_label_dt = create_explicit_label_dt(x_bridgekind)
+    x_explicit_label_csv = get_ordered_csv(x_explicit_label_dt)
+    x_explicit_label_filename = f"{x_key}_explicit_label.csv"
+    save_file(x_dir, x_explicit_label_filename, x_explicit_label_csv)
 
 
 def load_otx_to_inx_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind:
-    pass
-    # file_key = x_bridgekind.python_type
-    # if x_bridgekind.python_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
-    #     file_key = road_str()
-    # otx_to_inx_filename = f"{file_key}_otx_to_inx.csv"
-    # otx_to_inx_dt = open_csv(x_dir, otx_to_inx_filename)
-    # print(f"{otx_to_inx_dt.to_dict('records')=}")
-    # # x_dict
-    # # for table_row in otx_to_inx_dt.to_dict('index'):
+    file_key = x_bridgekind.python_type
+    if x_bridgekind.python_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
+        file_key = road_str()
+    otx_to_inx_filename = f"{file_key}_otx_to_inx.csv"
+    otx_to_inx_dt = open_csv(x_dir, otx_to_inx_filename)
+    for table_row in otx_to_inx_dt.to_dict("records"):
+        otx_word_value = table_row.get("otx_word")
+        inx_word_value = table_row.get("inx_word")
+        if x_bridgekind.otx_to_inx_exists(otx_word_value, inx_word_value) is False:
+            x_bridgekind.set_otx_to_inx(otx_word_value, inx_word_value)
+    return x_bridgekind
 
-    # print("")
 
-    # return x_bridgekind
+def load_explicit_label_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind:
+    file_key = x_bridgekind.python_type
+    if x_bridgekind.python_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
+        file_key = road_str()
+    explicit_label_filename = f"{file_key}_explicit_label.csv"
+    explicit_label_dt = open_csv(x_dir, explicit_label_filename)
+    for table_row in explicit_label_dt.to_dict("records"):
+        otx_word_value = table_row.get("otx_label")
+        inx_word_value = table_row.get("inx_label")
+        if x_bridgekind.explicit_label_exists(otx_word_value, inx_word_value) is False:
+            x_bridgekind.set_explicit_label(otx_word_value, inx_word_value)
+    return x_bridgekind

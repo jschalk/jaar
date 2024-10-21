@@ -139,14 +139,17 @@ def test_bridgeunit_shop_ReturnsObj_scenario1():
     assert acctid_bridgekind.unknown_word == y_unknown_word
     assert acctid_bridgekind.otx_road_delimiter == slash_otx_road_delimiter
     assert acctid_bridgekind.inx_road_delimiter == colon_inx_road_delimiter
+    assert acctid_bridgekind.face_id == sue_str
     groupid_bridgekind = sue_bridgeunit.bridgekinds.get(type_GroupID_str())
     assert groupid_bridgekind.unknown_word == y_unknown_word
     assert groupid_bridgekind.otx_road_delimiter == slash_otx_road_delimiter
     assert groupid_bridgekind.inx_road_delimiter == colon_inx_road_delimiter
+    assert groupid_bridgekind.face_id == sue_str
     road_bridgekind = sue_bridgeunit.bridgekinds.get(road_str())
     assert road_bridgekind.unknown_word == y_unknown_word
     assert road_bridgekind.otx_road_delimiter == slash_otx_road_delimiter
     assert road_bridgekind.inx_road_delimiter == colon_inx_road_delimiter
+    assert road_bridgekind.face_id == sue_str
 
 
 def test_BridgeUnit_set_bridgekind_SetsAttr():

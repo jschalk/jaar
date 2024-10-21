@@ -180,12 +180,14 @@ def test_create_otx_to_inx_dt_ReturnsObj():
 
     # WHEN
     casa_dataframe = create_otx_to_inx_dt(casa_bridgekind)
+    print(f"{casa_dataframe=}")
 
     # THEN
     assert list(casa_dataframe.columns) == get_otx_to_inx_dt_columns()
     assert len(casa_dataframe) == 4
     casa_csv = get_ordered_csv(casa_dataframe)
     print(f"{casa_csv=}")
+    print(f"{get_ordered_csv(get_casa_maison_road_otx_to_inx_dt())=}")
     assert casa_csv == get_ordered_csv(get_casa_maison_road_otx_to_inx_dt())
 
 
