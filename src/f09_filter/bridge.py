@@ -1,4 +1,4 @@
-from src.f00_instrument.file import save_file
+from src.f00_instrument.file import save_file, dir_files
 from src.f00_instrument.dict_tool import (
     get_empty_dict_if_none,
     str_in_dict,
@@ -21,6 +21,7 @@ from src.f01_road.road import (
     is_roadnode,
     RoadUnit,
     RoadNode,
+    OwnerID,
 )
 from src.f04_gift.atom_config import (
     type_AcctID_str,
@@ -74,7 +75,7 @@ class BridgeKind:
     inx_road_delimiter: str = None
     explicit_label: dict = None
     python_type: str = None
-    face_id: str = None
+    face_id: OwnerID = None
 
     def set_all_otx_to_inx(
         self, x_otx_to_inx: dict, raise_exception_if_invalid: bool = False
@@ -240,7 +241,7 @@ def bridgekind_shop(
     x_explicit_label: dict = None,
     x_otx_to_inx: dict = None,
     x_unknown_word: str = None,
-    x_face_id: str = None,
+    x_face_id: OwnerID = None,
 ) -> BridgeKind:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
@@ -282,7 +283,7 @@ def get_bridgekind_from_json(x_json: str) -> BridgeKind:
 
 @dataclass
 class BridgeUnit:
-    face_id: str = None
+    face_id: OwnerID = None
     bridgekinds: dict[str, BridgeKind] = None
     unknown_word: str = None
     otx_road_delimiter: str = None
@@ -366,7 +367,7 @@ class BridgeUnit:
 
 
 def bridgeunit_shop(
-    x_face_id: str,
+    x_face_id: OwnerID,
     x_otx_road_delimiter: str = None,
     x_inx_road_delimiter: str = None,
     x_unknown_word: str = None,
@@ -488,27 +489,27 @@ def create_explicit_label_dt(x_bridgekind: BridgeKind) -> DataFrame:
     return DataFrame(x_rows_list, columns=get_explicit_label_columns())
 
 
-def save_all_bridgeunit_files(x_dir: str, x_bridgeunit: BridgeUnit):
+def save_all_csvs_from_bridgeunit(x_dir: str, x_bridgeunit: BridgeUnit):
     for x_key, x_bridgekind in x_bridgeunit.bridgekinds.items():
-        _save_otx_to_inx_dt_file(x_dir, x_bridgekind, x_key)
-        _save_explicit_label_dt_file(x_dir, x_bridgekind, x_key)
+        _save_otx_to_inx_csv(x_dir, x_bridgekind, x_key)
+        _save_explicit_label_csv(x_dir, x_bridgekind, x_key)
 
 
-def _save_otx_to_inx_dt_file(x_dir: str, x_bridgekind: BridgeKind, x_filename: str):
+def _save_otx_to_inx_csv(x_dir: str, x_bridgekind: BridgeKind, x_filename: str):
     x_otx_to_inx_dt = create_otx_to_inx_dt(x_bridgekind)
     x_otx_to_inx_csv = get_ordered_csv(x_otx_to_inx_dt)
     x_otx_to_inx_filename = f"{x_filename}_otx_to_inx.csv"
     save_file(x_dir, x_otx_to_inx_filename, x_otx_to_inx_csv)
 
 
-def _save_explicit_label_dt_file(x_dir, x_bridgekind, x_key):
+def _save_explicit_label_csv(x_dir, x_bridgekind, x_key):
     x_explicit_label_dt = create_explicit_label_dt(x_bridgekind)
     x_explicit_label_csv = get_ordered_csv(x_explicit_label_dt)
     x_explicit_label_filename = f"{x_key}_explicit_label.csv"
     save_file(x_dir, x_explicit_label_filename, x_explicit_label_csv)
 
 
-def load_otx_to_inx_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind:
+def _load_otx_to_inx_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind:
     file_key = x_bridgekind.python_type
     if x_bridgekind.python_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
         file_key = road_str()
@@ -522,7 +523,7 @@ def load_otx_to_inx_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind:
     return x_bridgekind
 
 
-def load_explicit_label_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind:
+def _load_explicit_label_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind:
     file_key = x_bridgekind.python_type
     if x_bridgekind.python_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
         file_key = road_str()
@@ -534,3 +535,57 @@ def load_explicit_label_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind:
         if x_bridgekind.explicit_label_exists(otx_word_value, inx_word_value) is False:
             x_bridgekind.set_explicit_label(otx_word_value, inx_word_value)
     return x_bridgekind
+
+
+def get_csvs_loaded_bridgeunit(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
+    for x_bridgekind in x_bridgeunit.bridgekinds.values():
+        _load_otx_to_inx_from_csv(x_dir, x_bridgekind)
+        _load_explicit_label_from_csv(x_dir, x_bridgekind)
+    return x_bridgeunit
+
+
+def create_dir_valid_bridgeunit(x_dir: str) -> BridgeUnit:
+    face_id_set = set()
+    unknown_word_set = set()
+    otx_road_delimiter_set = set()
+    inx_road_delimiter_set = set()
+    for x_filename in dir_files(x_dir).keys():
+        x_dt = open_csv(x_dir, x_filename)
+        face_id_set.update(x_dt.face_id.unique())
+        unknown_word_set.update(x_dt.unknown_word.unique())
+        otx_road_delimiter_set.update(x_dt.otx_road_delimiter.unique())
+        inx_road_delimiter_set.update(x_dt.inx_road_delimiter.unique())
+
+    if len(face_id_set) == 1:
+        x_face_id = face_id_set.pop()
+    if len(unknown_word_set) == 1:
+        x_unknown_word = unknown_word_set.pop()
+    if len(otx_road_delimiter_set) == 1:
+        x_otx_road_delimiter = otx_road_delimiter_set.pop()
+    if len(inx_road_delimiter_set) == 1:
+        x_inx_road_delimiter = inx_road_delimiter_set.pop()
+
+    # if (
+    #     face_id_set != set()
+    #     or unknown_word_set != set()
+    #     or otx_road_delimiter_set != set()
+    #     or inx_road_delimiter_set != set()
+    # ):
+    #     raise Exception(
+    #         f"{face_id_set=} {unknown_word_set=}  {otx_road_delimiter_set=} {inx_road_delimiter_set=}"
+    #     )
+
+    return bridgeunit_shop(
+        x_face_id=x_face_id,
+        x_otx_road_delimiter=x_otx_road_delimiter,
+        x_inx_road_delimiter=x_inx_road_delimiter,
+        x_unknown_word=x_unknown_word,
+    )
+
+
+def get_csvs_loaded_bridgeunit(x_dir: str) -> BridgeUnit:
+    x_bridgeunit = create_dir_valid_bridgeunit(x_dir)
+    for x_bridgekind in x_bridgeunit.bridgekinds.values():
+        _load_otx_to_inx_from_csv(x_dir, x_bridgekind)
+        _load_explicit_label_from_csv(x_dir, x_bridgekind)
+    return x_bridgeunit
