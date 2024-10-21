@@ -1,3 +1,4 @@
+from src.f00_instrument.file import dir_files
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import road_str, type_AcctID_str, type_GroupID_str
 from src.f09_filter.bridge import (
@@ -5,6 +6,14 @@ from src.f09_filter.bridge import (
     default_unknown_word,
     get_bridgeunit_from_dict,
     get_bridgeunit_from_json,
+    save_all_bridgeunit_files,
+    load_otx_to_inx_from_csv,
+    load_explicit_label_from_csv,
+    _save_explicit_label_dt_file,
+)
+from src.f09_filter.examples.filter_env import (
+    env_dir_setup_cleanup,
+    get_test_faces_dir,
 )
 from src.f09_filter.examples.example_bridges import (
     get_clean_roadunit_bridgekind,
@@ -13,7 +22,10 @@ from src.f09_filter.examples.example_bridges import (
     get_slash_roadunit_bridgekind,
     get_slash_groupid_bridgekind,
     get_slash_acctid_bridgekind,
+    get_sue_bridgeunit,
+    get_casa_maison_bridgeunit_set_by_explicit_label,
 )
+from os.path import exists as os_path_exists
 
 
 def test_BridgeUnit_get_dict_ReturnsObj_Scenario0():
@@ -27,8 +39,8 @@ def test_BridgeUnit_get_dict_ReturnsObj_Scenario0():
     # THEN
     assert sue_dict
     assert sue_dict.get("face_id") == sue_str
-    assert sue_dict.get("src_road_delimiter") == default_road_delimiter_if_none()
-    assert sue_dict.get("dst_road_delimiter") == default_road_delimiter_if_none()
+    assert sue_dict.get("otx_road_delimiter") == default_road_delimiter_if_none()
+    assert sue_dict.get("inx_road_delimiter") == default_road_delimiter_if_none()
     assert sue_dict.get("unknown_word") == default_unknown_word()
     assert sue_dict.get("bridgekinds")
     x_bridgekinds = sue_dict.get("bridgekinds")
@@ -50,10 +62,10 @@ def test_BridgeUnit_get_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    slash_src_road_delimiter = "/"
-    colon_dst_road_delimiter = ":"
+    slash_otx_road_delimiter = "/"
+    colon_inx_road_delimiter = ":"
     sue_bridgeunit = bridgeunit_shop(
-        sue_str, slash_src_road_delimiter, colon_dst_road_delimiter, x_unknown_word
+        sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
     )
     sue_bridgeunit.set_bridgekind(get_slash_roadunit_bridgekind())
     sue_bridgeunit.set_bridgekind(get_slash_groupid_bridgekind())
@@ -64,8 +76,8 @@ def test_BridgeUnit_get_dict_ReturnsObj_Scenario1():
 
     # THEN
     assert sue_dict.get("face_id") == sue_str
-    assert sue_dict.get("src_road_delimiter") == slash_src_road_delimiter
-    assert sue_dict.get("dst_road_delimiter") == colon_dst_road_delimiter
+    assert sue_dict.get("otx_road_delimiter") == slash_otx_road_delimiter
+    assert sue_dict.get("inx_road_delimiter") == colon_inx_road_delimiter
     assert sue_dict.get("unknown_word") == x_unknown_word
     assert sue_dict.get("bridgekinds")
     x_bridgekinds = sue_dict.get("bridgekinds")
@@ -91,17 +103,17 @@ def test_BridgeUnit_get_json_ReturnsObj():
 
     # THEN
     assert sue_json.find("bridgekinds") == 5
-    assert sue_json.find("src_road_delimiter") == 164
+    assert sue_json.find("otx_road_delimiter") == 129
 
 
 def test_get_bridgeunit_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    slash_src_road_delimiter = "/"
-    colon_dst_road_delimiter = ":"
+    slash_otx_road_delimiter = "/"
+    colon_inx_road_delimiter = ":"
     sue_bridgeunit = bridgeunit_shop(
-        sue_str, slash_src_road_delimiter, colon_dst_road_delimiter, x_unknown_word
+        sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
     )
     sue_bridgeunit.set_bridgekind(get_slash_roadunit_bridgekind())
     sue_bridgeunit.set_bridgekind(get_slash_groupid_bridgekind())
@@ -113,8 +125,8 @@ def test_get_bridgeunit_from_dict_ReturnsObj():
     # THEN
     assert gen_bridgeunit
     assert gen_bridgeunit.face_id == sue_str
-    assert gen_bridgeunit.src_road_delimiter == slash_src_road_delimiter
-    assert gen_bridgeunit.dst_road_delimiter == colon_dst_road_delimiter
+    assert gen_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
+    assert gen_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
     assert gen_bridgeunit.unknown_word == x_unknown_word
     x_bridgekinds = gen_bridgeunit.bridgekinds
     assert len(x_bridgekinds) == 3
@@ -130,10 +142,10 @@ def test_get_bridgeunit_from_json_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    slash_src_road_delimiter = "/"
-    colon_dst_road_delimiter = ":"
+    slash_otx_road_delimiter = "/"
+    colon_inx_road_delimiter = ":"
     sue_bridgeunit = bridgeunit_shop(
-        sue_str, slash_src_road_delimiter, colon_dst_road_delimiter, x_unknown_word
+        sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
     )
     sue_bridgeunit.set_bridgekind(get_slash_roadunit_bridgekind())
     sue_bridgeunit.set_bridgekind(get_slash_groupid_bridgekind())
@@ -145,8 +157,8 @@ def test_get_bridgeunit_from_json_ReturnsObj():
     # THEN
     assert gen_bridgeunit
     assert gen_bridgeunit.face_id == sue_str
-    assert gen_bridgeunit.src_road_delimiter == slash_src_road_delimiter
-    assert gen_bridgeunit.dst_road_delimiter == colon_dst_road_delimiter
+    assert gen_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
+    assert gen_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
     assert gen_bridgeunit.unknown_word == x_unknown_word
     x_bridgekinds = gen_bridgeunit.bridgekinds
     assert len(x_bridgekinds) == 3
@@ -156,3 +168,88 @@ def test_get_bridgeunit_from_json_ReturnsObj():
     assert acct_id_bridgekind.get_dict() == get_slash_acctid_bridgekind().get_dict()
     assert group_id_bridgekind.get_dict() == get_slash_groupid_bridgekind().get_dict()
     assert road_bridgekind.get_dict() == get_slash_roadunit_bridgekind().get_dict()
+
+
+def test_save_all_bridgeunit_files_SavesFiles(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_bridgeunit = get_sue_bridgeunit()
+    bridge_dir = get_test_faces_dir()
+    acctid_otx_to_inx_filename = f"{type_AcctID_str()}_otx_to_inx.csv"
+    acctid_explicit_label_filename = f"{type_AcctID_str()}_explicit_label.csv"
+    groupid_otx_to_inx_filename = f"{type_GroupID_str()}_otx_to_inx.csv"
+    groupid_explicit_label_filename = f"{type_GroupID_str()}_explicit_label.csv"
+    road_otx_to_inx_filename = f"{road_str()}_otx_to_inx.csv"
+    road_explicit_label_filename = f"{road_str()}_explicit_label.csv"
+    acctid_otx_to_inx_csv_path = f"{bridge_dir}/{acctid_otx_to_inx_filename}"
+    acctid_explicit_label_csv_path = f"{bridge_dir}/{acctid_explicit_label_filename}"
+    groupid_otx_to_inx_csv_path = f"{bridge_dir}/{groupid_otx_to_inx_filename}"
+    groupid_explicit_label_csv_path = f"{bridge_dir}/{groupid_explicit_label_filename}"
+    road_otx_to_inx_csv_path = f"{bridge_dir}/{road_otx_to_inx_filename}"
+    road_explicit_label_csv_path = f"{bridge_dir}/{road_explicit_label_filename}"
+    assert os_path_exists(acctid_otx_to_inx_csv_path) is False
+    assert os_path_exists(acctid_explicit_label_csv_path) is False
+    assert os_path_exists(groupid_otx_to_inx_csv_path) is False
+    assert os_path_exists(groupid_explicit_label_csv_path) is False
+    assert os_path_exists(road_otx_to_inx_csv_path) is False
+    assert os_path_exists(road_explicit_label_csv_path) is False
+    assert len(dir_files(bridge_dir)) == 0
+
+    # WHEN
+    save_all_bridgeunit_files(bridge_dir, sue_bridgeunit)
+
+    # THEN
+    assert os_path_exists(acctid_otx_to_inx_csv_path)
+    assert os_path_exists(acctid_explicit_label_csv_path)
+    assert os_path_exists(groupid_otx_to_inx_csv_path)
+    assert os_path_exists(groupid_explicit_label_csv_path)
+    assert os_path_exists(road_otx_to_inx_csv_path)
+    assert os_path_exists(road_explicit_label_csv_path)
+    assert len(dir_files(bridge_dir)) == 6
+
+
+def test_load_otx_to_inx_from_csv_SetsAttr(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_bridgeunit = get_sue_bridgeunit()
+    bridge_dir = get_test_faces_dir()
+    acctid_filename = f"{type_AcctID_str()}_otx_to_inx.csv"
+    acctid_otx_to_inx_csv_path = f"{bridge_dir}/{acctid_filename}"
+    save_all_bridgeunit_files(bridge_dir, sue_bridgeunit)
+    assert os_path_exists(acctid_otx_to_inx_csv_path)
+    empty_bridgeunit = bridgeunit_shop("Sue")
+    sue_acctid_bridgekind = empty_bridgeunit.get_bridgekind(type_AcctID_str())
+    sue_acctid_bridgekind.face_id = "Sue"
+    print(f"{empty_bridgeunit=} {sue_acctid_bridgekind=}")
+    assert len(sue_acctid_bridgekind.otx_to_inx) == 0
+
+    # WHEN
+    sue_acctid_bridgekind = load_otx_to_inx_from_csv(bridge_dir, sue_acctid_bridgekind)
+
+    # THEN
+    assert len(sue_acctid_bridgekind.otx_to_inx) == 3
+    ex_acctid_bridgekind = sue_bridgeunit.get_bridgekind(type_AcctID_str())
+    assert ex_acctid_bridgekind == sue_acctid_bridgekind
+
+
+def test_load_explicit_label_map_from_csv_SetsAttr(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_bridgeunit = get_casa_maison_bridgeunit_set_by_explicit_label()
+    before_road_bridgekind = sue_bridgeunit.get_bridgekind(road_str())
+    print(f"{before_road_bridgekind.explicit_label=}")
+    bridge_dir = get_test_faces_dir()
+    road_filename = f"{road_str()}_explicit_label.csv"
+    road_otx_to_inx_csv_path = f"{bridge_dir}/{road_filename}"
+    _save_explicit_label_dt_file(bridge_dir, before_road_bridgekind, road_str())
+    assert os_path_exists(road_otx_to_inx_csv_path)
+    empty_bridgeunit = bridgeunit_shop("Sue")
+    empty_road_bridgekind = empty_bridgeunit.get_bridgekind(road_str())
+    empty_road_bridgekind.face_id = "Sue"
+    print(f"{empty_bridgeunit=} {empty_road_bridgekind=}")
+    assert len(empty_road_bridgekind.explicit_label) == 0
+
+    # WHEN
+    gen_bridgekind = load_explicit_label_from_csv(bridge_dir, empty_road_bridgekind)
+
+    # THEN
+    assert len(gen_bridgekind.explicit_label) == 3
+    assert gen_bridgekind == before_road_bridgekind
+    assert gen_bridgekind == empty_road_bridgekind

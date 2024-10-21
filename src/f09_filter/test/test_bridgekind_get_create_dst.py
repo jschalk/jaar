@@ -7,273 +7,273 @@ from src.f04_gift.atom_config import (
 from src.f09_filter.bridge import bridgekind_shop
 
 
-def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label():
+def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_label():
     # ESTABLISH
-    clean_src = "clean"
-    clean_dst = "propre"
-    src_r_delimiter = "/"
-    casa_src = "casa"
-    casa_dst = "casa"
-    dst_r_delimiter = ":"
+    clean_otx = "clean"
+    clean_inx = "propre"
+    otx_r_delimiter = "/"
+    casa_otx = "casa"
+    casa_inx = "casa"
+    inx_r_delimiter = ":"
     roadnode_bridgekind = bridgekind_shop(
-        type_RoadNode_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadNode_str(), otx_r_delimiter, inx_r_delimiter
     )
-    roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)
-    roadnode_bridgekind.set_src_to_dst(casa_src, casa_dst)
+    roadnode_bridgekind.set_otx_to_inx(clean_otx, clean_inx)
+    roadnode_bridgekind.set_otx_to_inx(casa_otx, casa_inx)
     assert roadnode_bridgekind.is_valid()
 
     # WHEN / THEN
-    assert roadnode_bridgekind.get_create_dst(clean_src) == clean_dst
-    assert roadnode_bridgekind.get_create_dst(casa_src) == casa_dst
+    assert roadnode_bridgekind.get_create_inx(clean_otx) == clean_inx
+    assert roadnode_bridgekind.get_create_inx(casa_otx) == casa_inx
     swim_str = "swim"
-    assert roadnode_bridgekind.get_create_dst(swim_str, False) is None
-    assert roadnode_bridgekind.src_exists(swim_str) is False
+    assert roadnode_bridgekind.get_create_inx(swim_str, False) is None
+    assert roadnode_bridgekind.otx_exists(swim_str) is False
 
     # WHEN
-    assert roadnode_bridgekind.get_create_dst(swim_str) == swim_str
+    assert roadnode_bridgekind.get_create_inx(swim_str) == swim_str
     # THEN
-    assert roadnode_bridgekind.src_exists(swim_str)
+    assert roadnode_bridgekind.otx_exists(swim_str)
 
     # WHEN / THEN
-    fail_clean_src = f"clean{dst_r_delimiter}"
-    assert roadnode_bridgekind.src_exists(fail_clean_src) is False
-    assert roadnode_bridgekind.get_create_dst(fail_clean_src) is None
-    assert roadnode_bridgekind.src_exists(fail_clean_src) is False
+    fail_clean_otx = f"clean{inx_r_delimiter}"
+    assert roadnode_bridgekind.otx_exists(fail_clean_otx) is False
+    assert roadnode_bridgekind.get_create_inx(fail_clean_otx) is None
+    assert roadnode_bridgekind.otx_exists(fail_clean_otx) is False
 
 
-def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_label_With_explicit_label_map():
+def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_label_With_explicit_label():
     # ESTABLISH
-    clean_src = "clean"
-    clean_dst = "propre"
-    src_r_delimiter = "/"
-    casa_src = "casa"
-    casa_dst = "house"
-    dst_r_delimiter = ":"
+    clean_otx = "clean"
+    clean_inx = "propre"
+    otx_r_delimiter = "/"
+    casa_otx = "casa"
+    casa_inx = "house"
+    inx_r_delimiter = ":"
     roadnode_bridgekind = bridgekind_shop(
-        type_RoadNode_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadNode_str(), otx_r_delimiter, inx_r_delimiter
     )
-    roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)
-    roadnode_bridgekind.set_explicit_label_map(casa_src, casa_dst)
-    assert casa_src != casa_dst
-    assert roadnode_bridgekind.explicit_label_map_exists(casa_src, casa_dst)
-    assert roadnode_bridgekind.src_to_dst_exists(casa_src, casa_dst) is False
+    roadnode_bridgekind.set_otx_to_inx(clean_otx, clean_inx)
+    roadnode_bridgekind.set_explicit_label(casa_otx, casa_inx)
+    assert casa_otx != casa_inx
+    assert roadnode_bridgekind.explicit_label_exists(casa_otx, casa_inx)
+    assert roadnode_bridgekind.otx_to_inx_exists(casa_otx, casa_inx) is False
 
     # WHEN
-    generated_dst = roadnode_bridgekind.get_create_dst(casa_src)
+    generated_inx = roadnode_bridgekind.get_create_inx(casa_otx)
 
     # THEN
-    assert generated_dst == casa_dst
-    assert roadnode_bridgekind.explicit_label_map_exists(casa_src, casa_dst)
-    assert roadnode_bridgekind.src_to_dst_exists(casa_src, casa_dst)
-    print(f"{casa_dst=}")
+    assert generated_inx == casa_inx
+    assert roadnode_bridgekind.explicit_label_exists(casa_otx, casa_inx)
+    assert roadnode_bridgekind.otx_to_inx_exists(casa_otx, casa_inx)
+    print(f"{casa_inx=}")
 
 
-def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_road_Scenario0():
+def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario0():
     # ESTABLISH
-    src_music45_str = "music45"
-    src_r_delimiter = "/"
-    dst_r_delimiter = ":"
+    otx_music45_str = "music45"
+    otx_r_delimiter = "/"
+    inx_r_delimiter = ":"
     road_bridgekind = bridgekind_shop(
-        type_RoadUnit_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadUnit_str(), otx_r_delimiter, inx_r_delimiter
     )
-    assert road_bridgekind.src_exists(src_music45_str) is False
-    assert road_bridgekind.src_to_dst_exists(src_music45_str, src_music45_str) is False
+    assert road_bridgekind.otx_exists(otx_music45_str) is False
+    assert road_bridgekind.otx_to_inx_exists(otx_music45_str, otx_music45_str) is False
 
     # WHEN
-    gen_dst_road = road_bridgekind.get_create_dst(src_music45_str)
+    gen_inx_road = road_bridgekind.get_create_inx(otx_music45_str)
 
     # THEN
-    assert gen_dst_road == src_music45_str
-    assert road_bridgekind.src_exists(src_music45_str)
-    assert road_bridgekind.src_to_dst_exists(src_music45_str, src_music45_str)
+    assert gen_inx_road == otx_music45_str
+    assert road_bridgekind.otx_exists(otx_music45_str)
+    assert road_bridgekind.otx_to_inx_exists(otx_music45_str, otx_music45_str)
 
 
-def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_road_Scenario1():
+def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     # ESTABLISH
-    src_music45_str = "music45"
-    dst_music87_str = "music87"
-    src_r_delimiter = "/"
-    dst_r_delimiter = ":"
-    clean_src_str = "clean"
-    clean_src_road = f"{src_music45_str}{src_r_delimiter}{clean_src_str}"
+    otx_music45_str = "music45"
+    inx_music87_str = "music87"
+    otx_r_delimiter = "/"
+    inx_r_delimiter = ":"
+    clean_otx_str = "clean"
+    clean_otx_road = f"{otx_music45_str}{otx_r_delimiter}{clean_otx_str}"
     road_bridgekind = bridgekind_shop(
-        type_RoadUnit_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadUnit_str(), otx_r_delimiter, inx_r_delimiter
     )
-    assert road_bridgekind.src_exists(src_music45_str) is False
-    assert road_bridgekind.src_exists(clean_src_road) is False
+    assert road_bridgekind.otx_exists(otx_music45_str) is False
+    assert road_bridgekind.otx_exists(clean_otx_road) is False
 
     # WHEN
-    gen_dst_road = road_bridgekind.get_create_dst(clean_src_road)
+    gen_inx_road = road_bridgekind.get_create_inx(clean_otx_road)
 
     # THEN
-    assert gen_dst_road is None
-    assert road_bridgekind.src_exists(src_music45_str) is False
-    assert road_bridgekind.src_exists(clean_src_road) is False
-    assert road_bridgekind.src_to_dst_exists(src_music45_str, dst_music87_str) is False
+    assert gen_inx_road is None
+    assert road_bridgekind.otx_exists(otx_music45_str) is False
+    assert road_bridgekind.otx_exists(clean_otx_road) is False
+    assert road_bridgekind.otx_to_inx_exists(otx_music45_str, inx_music87_str) is False
 
     # ESTABLISH
-    road_bridgekind.set_src_to_dst(src_music45_str, dst_music87_str)
-    assert road_bridgekind.src_to_dst_exists(src_music45_str, dst_music87_str)
-    assert road_bridgekind.src_exists(clean_src_road) is False
+    road_bridgekind.set_otx_to_inx(otx_music45_str, inx_music87_str)
+    assert road_bridgekind.otx_to_inx_exists(otx_music45_str, inx_music87_str)
+    assert road_bridgekind.otx_exists(clean_otx_road) is False
 
     # WHEN
-    gen_dst_road = road_bridgekind.get_create_dst(clean_src_road)
+    gen_inx_road = road_bridgekind.get_create_inx(clean_otx_road)
 
     # THEN
-    assert road_bridgekind.src_exists(clean_src_road)
-    assert road_bridgekind.src_to_dst_exists(clean_src_road, gen_dst_road)
-    assert gen_dst_road == f"{dst_music87_str}{dst_r_delimiter}{clean_src_str}"
+    assert road_bridgekind.otx_exists(clean_otx_road)
+    assert road_bridgekind.otx_to_inx_exists(clean_otx_road, gen_inx_road)
+    assert gen_inx_road == f"{inx_music87_str}{inx_r_delimiter}{clean_otx_str}"
 
 
-def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_road_Scenario2_With_explicit_label_map():
+def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_explicit_label():
     # ESTABLISH
-    src_music45_str = "music45"
-    dst_music87_str = "music87"
-    src_r_delimiter = "/"
-    dst_r_delimiter = ":"
-    clean_src_str = "clean"
-    clean_dst_str = "prop"
-    clean_src_road = f"{src_music45_str}{src_r_delimiter}{clean_src_str}"
+    otx_music45_str = "music45"
+    inx_music87_str = "music87"
+    otx_r_delimiter = "/"
+    inx_r_delimiter = ":"
+    clean_otx_str = "clean"
+    clean_inx_str = "prop"
+    clean_otx_road = f"{otx_music45_str}{otx_r_delimiter}{clean_otx_str}"
     road_bridgekind = bridgekind_shop(
-        type_RoadUnit_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadUnit_str(), otx_r_delimiter, inx_r_delimiter
     )
-    road_bridgekind.set_explicit_label_map(clean_src_str, clean_dst_str)
-    assert road_bridgekind.src_exists(src_music45_str) is False
-    assert road_bridgekind.src_exists(clean_src_road) is False
+    road_bridgekind.set_explicit_label(clean_otx_str, clean_inx_str)
+    assert road_bridgekind.otx_exists(otx_music45_str) is False
+    assert road_bridgekind.otx_exists(clean_otx_road) is False
 
     # WHEN
-    gen_dst_road = road_bridgekind.get_create_dst(clean_src_road)
+    gen_inx_road = road_bridgekind.get_create_inx(clean_otx_road)
 
     # THEN
-    assert gen_dst_road is None
-    assert road_bridgekind.src_exists(src_music45_str) is False
-    assert road_bridgekind.src_exists(clean_src_road) is False
-    assert road_bridgekind.src_to_dst_exists(src_music45_str, dst_music87_str) is False
+    assert gen_inx_road is None
+    assert road_bridgekind.otx_exists(otx_music45_str) is False
+    assert road_bridgekind.otx_exists(clean_otx_road) is False
+    assert road_bridgekind.otx_to_inx_exists(otx_music45_str, inx_music87_str) is False
 
     # ESTABLISH
-    road_bridgekind.set_src_to_dst(src_music45_str, dst_music87_str)
-    assert road_bridgekind.src_to_dst_exists(src_music45_str, dst_music87_str)
-    assert road_bridgekind.src_exists(clean_src_road) is False
+    road_bridgekind.set_otx_to_inx(otx_music45_str, inx_music87_str)
+    assert road_bridgekind.otx_to_inx_exists(otx_music45_str, inx_music87_str)
+    assert road_bridgekind.otx_exists(clean_otx_road) is False
 
     # WHEN
-    gen_dst_road = road_bridgekind.get_create_dst(clean_src_road)
+    gen_inx_road = road_bridgekind.get_create_inx(clean_otx_road)
 
     # THEN
-    assert road_bridgekind.src_to_dst_exists(src_music45_str, dst_music87_str)
-    assert road_bridgekind.src_exists(clean_src_road)
-    assert road_bridgekind.src_to_dst_exists(clean_src_road, gen_dst_road)
-    assert gen_dst_road == f"{dst_music87_str}{dst_r_delimiter}{clean_dst_str}"
+    assert road_bridgekind.otx_to_inx_exists(otx_music45_str, inx_music87_str)
+    assert road_bridgekind.otx_exists(clean_otx_road)
+    assert road_bridgekind.otx_to_inx_exists(clean_otx_road, gen_inx_road)
+    assert gen_inx_road == f"{inx_music87_str}{inx_r_delimiter}{clean_inx_str}"
 
 
-def test_BridgeKind_get_create_dst_ReturnsObjAndSetsAttr_group_id():
+def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_group_id():
     # ESTABLISH
-    dst_r_delimiter = ":"
-    src_r_delimiter = "/"
-    swim_src = f"swim{src_r_delimiter}"
-    climb_src = f"climb{src_r_delimiter}_{dst_r_delimiter}"
+    inx_r_delimiter = ":"
+    otx_r_delimiter = "/"
+    swim_otx = f"swim{otx_r_delimiter}"
+    climb_otx = f"climb{otx_r_delimiter}_{inx_r_delimiter}"
     group_id_bridgekind = bridgekind_shop(
-        type_GroupID_str(), src_r_delimiter, dst_r_delimiter
+        type_GroupID_str(), otx_r_delimiter, inx_r_delimiter
     )
-    group_id_bridgekind.src_exists(swim_src) is False
-    group_id_bridgekind.src_exists(climb_src) is False
+    group_id_bridgekind.otx_exists(swim_otx) is False
+    group_id_bridgekind.otx_exists(climb_otx) is False
 
     # WHEN
-    swim_dst = f"swim{dst_r_delimiter}"
-    assert group_id_bridgekind.get_create_dst(swim_src) == swim_dst
+    swim_inx = f"swim{inx_r_delimiter}"
+    assert group_id_bridgekind.get_create_inx(swim_otx) == swim_inx
 
     # THEN
-    assert group_id_bridgekind.src_exists(swim_src)
-    assert group_id_bridgekind.src_exists(climb_src) is False
-    assert group_id_bridgekind._get_dst_value(swim_src) == swim_dst
+    assert group_id_bridgekind.otx_exists(swim_otx)
+    assert group_id_bridgekind.otx_exists(climb_otx) is False
+    assert group_id_bridgekind._get_inx_value(swim_otx) == swim_inx
 
     # WHEN
-    assert group_id_bridgekind.get_create_dst(climb_src) is None
+    assert group_id_bridgekind.get_create_inx(climb_otx) is None
     # THEN
-    assert group_id_bridgekind.src_exists(swim_src)
-    assert group_id_bridgekind.src_exists(climb_src) is False
+    assert group_id_bridgekind.otx_exists(swim_otx)
+    assert group_id_bridgekind.otx_exists(climb_otx) is False
 
 
-def test_BridgeKind_get_create_dst_AddsMissingElementsTo_src_to_dst_RoadNode():
+def test_BridgeKind_get_create_inx_AddsMissingElementsTo_otx_to_inx_RoadNode():
     # ESTABLISH
-    clean_src = "clean"
-    clean_dst = "propre"
-    src_r_delimiter = "/"
-    casa_src = "casa"
-    casa_dst = "casa"
-    dst_r_delimiter = ":"
+    clean_otx = "clean"
+    clean_inx = "propre"
+    otx_r_delimiter = "/"
+    casa_otx = "casa"
+    casa_inx = "casa"
+    inx_r_delimiter = ":"
     roadnode_bridgekind = bridgekind_shop(
-        type_RoadNode_str(), src_r_delimiter, dst_r_delimiter
+        type_RoadNode_str(), otx_r_delimiter, inx_r_delimiter
     )
-    roadnode_bridgekind.set_src_to_dst(clean_src, clean_dst)
-    roadnode_bridgekind.set_src_to_dst(casa_src, casa_dst)
+    roadnode_bridgekind.set_otx_to_inx(clean_otx, clean_inx)
+    roadnode_bridgekind.set_otx_to_inx(casa_otx, casa_inx)
     swim_str = "swim"
-    assert roadnode_bridgekind.src_exists(swim_str) is False
+    assert roadnode_bridgekind.otx_exists(swim_str) is False
 
     # WHEN
-    assert roadnode_bridgekind.get_create_dst(swim_str, True) == swim_str
+    assert roadnode_bridgekind.get_create_inx(swim_str, True) == swim_str
 
     # THEN
-    assert roadnode_bridgekind.src_exists(swim_str)
-    assert roadnode_bridgekind.src_to_dst_exists(swim_str, swim_str)
+    assert roadnode_bridgekind.otx_exists(swim_str)
+    assert roadnode_bridgekind.otx_to_inx_exists(swim_str, swim_str)
 
 
-def test_BridgeKind_get_create_dst_AddsMissingElementsTo_src_to_dst_RoadUnit():
+def test_BridgeKind_get_create_inx_AddsMissingElementsTo_otx_to_inx_RoadUnit():
     # ESTABLISH
-    src_music45_str = "music45"
-    dst_music87_str = "music87"
-    casa_src_str = "casa"
-    casa_dst_str = "maison"
-    casa_src_road = create_road(src_music45_str, casa_src_str)
-    casa_dst_road = create_road(dst_music87_str, casa_dst_str)
-    clean_src_str = "clean"
-    clean_dst_str = "propre"
-    clean_src_road = create_road(casa_src_road, clean_src_str)
-    clean_dst_road = create_road(casa_dst_road, clean_dst_str)
+    otx_music45_str = "music45"
+    inx_music87_str = "music87"
+    casa_otx_str = "casa"
+    casa_inx_str = "maison"
+    casa_otx_road = create_road(otx_music45_str, casa_otx_str)
+    casa_inx_road = create_road(inx_music87_str, casa_inx_str)
+    clean_otx_str = "clean"
+    clean_inx_str = "propre"
+    clean_otx_road = create_road(casa_otx_road, clean_otx_str)
+    clean_inx_road = create_road(casa_inx_road, clean_inx_str)
     sweep_str = "sweep"
-    sweep_src_road = create_road(clean_src_road, sweep_str)
-    sweep_dst_road = create_road(clean_dst_road, sweep_str)
+    sweep_otx_road = create_road(clean_otx_road, sweep_str)
+    sweep_inx_road = create_road(clean_inx_road, sweep_str)
     road_bd = bridgekind_shop(type_RoadUnit_str())
-    road_bd.set_explicit_label_map(src_music45_str, dst_music87_str)
-    road_bd.set_explicit_label_map(casa_src_str, casa_dst_str)
-    road_bd.set_explicit_label_map(clean_src_str, clean_dst_str)
-    assert road_bd.src_exists(src_music45_str) is False
-    assert road_bd.src_exists(casa_src_road) is False
-    assert road_bd.src_exists(clean_src_road) is False
-    assert road_bd.src_exists(sweep_src_road) is False
-    assert road_bd.src_to_dst_exists(src_music45_str, dst_music87_str) is False
-    assert road_bd.src_to_dst_exists(casa_src_road, casa_dst_road) is False
-    assert road_bd.src_to_dst_exists(clean_src_road, clean_dst_road) is False
-    assert road_bd.src_to_dst_exists(sweep_src_road, sweep_dst_road) is False
+    road_bd.set_explicit_label(otx_music45_str, inx_music87_str)
+    road_bd.set_explicit_label(casa_otx_str, casa_inx_str)
+    road_bd.set_explicit_label(clean_otx_str, clean_inx_str)
+    assert road_bd.otx_exists(otx_music45_str) is False
+    assert road_bd.otx_exists(casa_otx_road) is False
+    assert road_bd.otx_exists(clean_otx_road) is False
+    assert road_bd.otx_exists(sweep_otx_road) is False
+    assert road_bd.otx_to_inx_exists(otx_music45_str, inx_music87_str) is False
+    assert road_bd.otx_to_inx_exists(casa_otx_road, casa_inx_road) is False
+    assert road_bd.otx_to_inx_exists(clean_otx_road, clean_inx_road) is False
+    assert road_bd.otx_to_inx_exists(sweep_otx_road, sweep_inx_road) is False
 
     # WHEN
-    assert road_bd.get_create_dst(src_music45_str) == dst_music87_str
+    assert road_bd.get_create_inx(otx_music45_str) == inx_music87_str
     # THEN
-    assert road_bd.src_exists(src_music45_str)
-    assert road_bd.src_exists(casa_src_road) is False
-    assert road_bd.src_exists(clean_src_road) is False
-    assert road_bd.src_exists(sweep_src_road) is False
-    assert road_bd.src_to_dst_exists(src_music45_str, dst_music87_str)
-    assert road_bd.src_to_dst_exists(casa_src_road, casa_dst_road) is False
-    assert road_bd.src_to_dst_exists(clean_src_road, clean_dst_road) is False
-    assert road_bd.src_to_dst_exists(sweep_src_road, sweep_dst_road) is False
+    assert road_bd.otx_exists(otx_music45_str)
+    assert road_bd.otx_exists(casa_otx_road) is False
+    assert road_bd.otx_exists(clean_otx_road) is False
+    assert road_bd.otx_exists(sweep_otx_road) is False
+    assert road_bd.otx_to_inx_exists(otx_music45_str, inx_music87_str)
+    assert road_bd.otx_to_inx_exists(casa_otx_road, casa_inx_road) is False
+    assert road_bd.otx_to_inx_exists(clean_otx_road, clean_inx_road) is False
+    assert road_bd.otx_to_inx_exists(sweep_otx_road, sweep_inx_road) is False
 
     # WHEN
-    assert road_bd.get_create_dst(casa_src_road) == casa_dst_road
+    assert road_bd.get_create_inx(casa_otx_road) == casa_inx_road
     # THEN
-    assert road_bd.src_exists(src_music45_str)
-    assert road_bd.src_exists(casa_src_road)
-    assert road_bd.src_exists(clean_src_road) is False
-    assert road_bd.src_exists(sweep_src_road) is False
-    assert road_bd.src_to_dst_exists(src_music45_str, dst_music87_str)
-    assert road_bd.src_to_dst_exists(casa_src_road, casa_dst_road)
-    assert road_bd.src_to_dst_exists(clean_src_road, clean_dst_road) is False
-    assert road_bd.src_to_dst_exists(sweep_src_road, sweep_dst_road) is False
+    assert road_bd.otx_exists(otx_music45_str)
+    assert road_bd.otx_exists(casa_otx_road)
+    assert road_bd.otx_exists(clean_otx_road) is False
+    assert road_bd.otx_exists(sweep_otx_road) is False
+    assert road_bd.otx_to_inx_exists(otx_music45_str, inx_music87_str)
+    assert road_bd.otx_to_inx_exists(casa_otx_road, casa_inx_road)
+    assert road_bd.otx_to_inx_exists(clean_otx_road, clean_inx_road) is False
+    assert road_bd.otx_to_inx_exists(sweep_otx_road, sweep_inx_road) is False
 
     # WHEN
-    assert road_bd.get_create_dst(clean_src_road) == clean_dst_road
-    assert road_bd.get_create_dst(sweep_src_road) == sweep_dst_road
+    assert road_bd.get_create_inx(clean_otx_road) == clean_inx_road
+    assert road_bd.get_create_inx(sweep_otx_road) == sweep_inx_road
     # THEN
-    assert road_bd.src_to_dst_exists(src_music45_str, dst_music87_str)
-    assert road_bd.src_to_dst_exists(casa_src_road, casa_dst_road)
-    assert road_bd.src_to_dst_exists(clean_src_road, clean_dst_road)
-    assert road_bd.src_to_dst_exists(sweep_src_road, sweep_dst_road)
+    assert road_bd.otx_to_inx_exists(otx_music45_str, inx_music87_str)
+    assert road_bd.otx_to_inx_exists(casa_otx_road, casa_inx_road)
+    assert road_bd.otx_to_inx_exists(clean_otx_road, clean_inx_road)
+    assert road_bd.otx_to_inx_exists(sweep_otx_road, sweep_inx_road)

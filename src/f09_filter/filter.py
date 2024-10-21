@@ -1,7 +1,6 @@
 from src.f00_instrument.file import dir_files, open_file
-from src.f00_instrument.pandas_tool import save_dataframe_to_csv
+from src.f00_instrument.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f04_gift.atom_config import get_atom_args_python_types
-from src.f08_brick.brick import open_brick_csv
 from src.f09_filter.bridge import (
     BridgeKind,
     BridgeUnit,
@@ -21,9 +20,9 @@ def filter_single_column_dataframe(
     if column_name in x_dt:
         row_count = len(x_dt)
         for cur_row in range(row_count):
-            src_value = x_dt.iloc[cur_row][column_name]
-            dst_value = x_bridgekind.get_create_dst(src_value)
-            x_dt.at[cur_row, column_name] = dst_value
+            otx_value = x_dt.iloc[cur_row][column_name]
+            inx_value = x_bridgekind.get_create_inx(otx_value)
+            x_dt.at[cur_row, column_name] = inx_value
     return x_dt
 
 
@@ -37,13 +36,13 @@ def filter_all_columns_dataframe(x_dt: DataFrame, x_bridgeunit: BridgeUnit):
 
 
 def filter_face_dir_files(face_dir: str):
-    src_dir = f"{face_dir}/src"
-    dst_dir = f"{face_dir}/dst"
+    otx_dir = f"{face_dir}/otx"
+    inx_dir = f"{face_dir}/inx"
     bridge_filename = "bridge.json"
     bridgeunit_json = open_file(face_dir, bridge_filename)
     face_bridgeunit = get_bridgeunit_from_json(bridgeunit_json)
-    src_dir_files = dir_files(src_dir, delete_extensions=False)
-    for x_file_name in src_dir_files.keys():
-        x_dt = open_brick_csv(src_dir, x_file_name)
+    otx_dir_files = dir_files(otx_dir, delete_extensions=False)
+    for x_file_name in otx_dir_files.keys():
+        x_dt = open_csv(otx_dir, x_file_name)
         filter_all_columns_dataframe(x_dt, face_bridgeunit)
-        save_dataframe_to_csv(x_dt, dst_dir, x_file_name)
+        save_dataframe_to_csv(x_dt, inx_dir, x_file_name)

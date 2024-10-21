@@ -101,22 +101,23 @@ def count_files(dir_path: str) -> int:
 
 
 def dir_files(
-    dir_path: str, delete_extensions: bool = None, include_dirs=None, include_files=None
+    x_dir: str, delete_extensions: bool = None, include_dirs=None, include_files=None
 ) -> dict[str, str]:
     include_dirs = True if include_dirs is None else include_dirs
     include_files = True if include_files is None else include_files
 
+    create_dir(x_dir)
     dict_x = {}
-    for obj_name in os_listdir(dir_path):
+    for obj_name in os_listdir(x_dir):
         dict_key = None
         file_name = None
         file_path = None
         file_str = None
-        obj_path = create_file_path(dir_path, obj_name)
+        obj_path = create_file_path(x_dir, obj_name)
         if os_path_isfile(obj_path) and include_files:
             file_name = obj_name
-            file_path = create_file_path(dir_path, file_name)
-            file_str = open_file(dest_dir=dir_path, file_name=file_name)
+            file_path = create_file_path(x_dir, file_name)
+            file_str = open_file(dest_dir=x_dir, file_name=file_name)
             dict_key = (
                 os_path_splitext(file_name)[0] if delete_extensions else file_name
             )

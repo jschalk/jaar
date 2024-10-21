@@ -26,7 +26,7 @@ from src.f09_filter.examples.example_bridges import (
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
 
-# from src.f09_filter.examples.filter_env import get_test_filters_dir, env_dir_setup_cleanup
+# from otx.f09_filter.examples.filter_env import get_test_filters_dir, env_dir_setup_cleanup
 
 # The goal of the filter function is to allow a single command, pointing at a bunch of directories
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
@@ -85,8 +85,8 @@ def test_BridgeUnit_Exists():
     # WHEN / THEN
     assert not x_bridgeunit.bridgekinds
     assert not x_bridgeunit.unknown_word
-    assert not x_bridgeunit.src_road_delimiter
-    assert not x_bridgeunit.dst_road_delimiter
+    assert not x_bridgeunit.otx_road_delimiter
+    assert not x_bridgeunit.inx_road_delimiter
     assert not x_bridgeunit.face_id
 
 
@@ -100,53 +100,56 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
     # THEN
     assert sue_bridgeunit.face_id == sue_str
     assert sue_bridgeunit.unknown_word == default_unknown_word()
-    assert sue_bridgeunit.src_road_delimiter == default_road_delimiter_if_none()
-    assert sue_bridgeunit.dst_road_delimiter == default_road_delimiter_if_none()
+    assert sue_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
+    assert sue_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
 
     acctid_bridgekind = sue_bridgeunit.bridgekinds.get(type_AcctID_str())
     assert acctid_bridgekind.unknown_word == default_unknown_word()
-    assert acctid_bridgekind.src_road_delimiter == default_road_delimiter_if_none()
-    assert acctid_bridgekind.dst_road_delimiter == default_road_delimiter_if_none()
+    assert acctid_bridgekind.otx_road_delimiter == default_road_delimiter_if_none()
+    assert acctid_bridgekind.inx_road_delimiter == default_road_delimiter_if_none()
     groupid_bridgekind = sue_bridgeunit.bridgekinds.get(type_GroupID_str())
     assert groupid_bridgekind.unknown_word == default_unknown_word()
-    assert groupid_bridgekind.src_road_delimiter == default_road_delimiter_if_none()
-    assert groupid_bridgekind.dst_road_delimiter == default_road_delimiter_if_none()
+    assert groupid_bridgekind.otx_road_delimiter == default_road_delimiter_if_none()
+    assert groupid_bridgekind.inx_road_delimiter == default_road_delimiter_if_none()
     road_bridgekind = sue_bridgeunit.bridgekinds.get(road_str())
     assert road_bridgekind.unknown_word == default_unknown_word()
-    assert road_bridgekind.src_road_delimiter == default_road_delimiter_if_none()
-    assert road_bridgekind.dst_road_delimiter == default_road_delimiter_if_none()
+    assert road_bridgekind.otx_road_delimiter == default_road_delimiter_if_none()
+    assert road_bridgekind.inx_road_delimiter == default_road_delimiter_if_none()
 
 
 def test_bridgeunit_shop_ReturnsObj_scenario1():
     # ESTABLISH
     sue_str = "Sue"
     y_unknown_word = "UnknownAcctId"
-    slash_src_road_delimiter = "/"
-    colon_dst_road_delimiter = ":"
+    slash_otx_road_delimiter = "/"
+    colon_inx_road_delimiter = ":"
 
     # WHEN
     sue_bridgeunit = bridgeunit_shop(
-        sue_str, slash_src_road_delimiter, colon_dst_road_delimiter, y_unknown_word
+        sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, y_unknown_word
     )
 
     # THEN
     assert sue_bridgeunit.unknown_word == y_unknown_word
-    assert sue_bridgeunit.src_road_delimiter == slash_src_road_delimiter
-    assert sue_bridgeunit.dst_road_delimiter == colon_dst_road_delimiter
+    assert sue_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
+    assert sue_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
 
     assert len(sue_bridgeunit.bridgekinds) == 3
     acctid_bridgekind = sue_bridgeunit.bridgekinds.get(type_AcctID_str())
     assert acctid_bridgekind.unknown_word == y_unknown_word
-    assert acctid_bridgekind.src_road_delimiter == slash_src_road_delimiter
-    assert acctid_bridgekind.dst_road_delimiter == colon_dst_road_delimiter
+    assert acctid_bridgekind.otx_road_delimiter == slash_otx_road_delimiter
+    assert acctid_bridgekind.inx_road_delimiter == colon_inx_road_delimiter
+    assert acctid_bridgekind.face_id == sue_str
     groupid_bridgekind = sue_bridgeunit.bridgekinds.get(type_GroupID_str())
     assert groupid_bridgekind.unknown_word == y_unknown_word
-    assert groupid_bridgekind.src_road_delimiter == slash_src_road_delimiter
-    assert groupid_bridgekind.dst_road_delimiter == colon_dst_road_delimiter
+    assert groupid_bridgekind.otx_road_delimiter == slash_otx_road_delimiter
+    assert groupid_bridgekind.inx_road_delimiter == colon_inx_road_delimiter
+    assert groupid_bridgekind.face_id == sue_str
     road_bridgekind = sue_bridgeunit.bridgekinds.get(road_str())
     assert road_bridgekind.unknown_word == y_unknown_word
-    assert road_bridgekind.src_road_delimiter == slash_src_road_delimiter
-    assert road_bridgekind.dst_road_delimiter == colon_dst_road_delimiter
+    assert road_bridgekind.otx_road_delimiter == slash_otx_road_delimiter
+    assert road_bridgekind.inx_road_delimiter == colon_inx_road_delimiter
+    assert road_bridgekind.face_id == sue_str
 
 
 def test_BridgeUnit_set_bridgekind_SetsAttr():
@@ -154,7 +157,7 @@ def test_BridgeUnit_set_bridgekind_SetsAttr():
     sue_str = "Sue"
     sue_bridgeunit = bridgeunit_shop(sue_str)
     acct_id_bridgekind = bridgekind_shop(type_AcctID_str(), x_face_id=sue_str)
-    acct_id_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
+    acct_id_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
     assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
 
     # WHEN
@@ -169,7 +172,7 @@ def test_BridgeUnit_set_bridgekind_SetsAttr_SpecialCase_RoadUnit():
     sue_str = "Sue"
     sue_bridgeunit = bridgeunit_shop(sue_str)
     road_bridgekind = bridgekind_shop(type_RoadUnit_str(), x_face_id=sue_str)
-    road_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
+    road_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
     assert sue_bridgeunit.bridgekinds.get(road_str()) != road_bridgekind
 
     # WHEN
@@ -184,7 +187,7 @@ def test_BridgeUnit_set_bridgekind_SetsAttr_SpecialCase_RoadNode():
     sue_str = "Sue"
     sue_bridgeunit = bridgeunit_shop(sue_str)
     roadnode_bridgekind = bridgekind_shop(type_RoadNode_str(), x_face_id=sue_str)
-    roadnode_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
+    roadnode_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
     old_roadnode_bridgekind = copy_deepcopy(roadnode_bridgekind)
     assert sue_bridgeunit.bridgekinds.get(road_str()) != old_roadnode_bridgekind
 
@@ -193,48 +196,48 @@ def test_BridgeUnit_set_bridgekind_SetsAttr_SpecialCase_RoadNode():
 
     # THEN
     roadunit_bridgekind = bridgekind_shop(type_RoadUnit_str(), x_face_id=sue_str)
-    roadunit_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
+    roadunit_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
     assert sue_bridgeunit.bridgekinds.get(road_str()) != old_roadnode_bridgekind
     assert sue_bridgeunit.bridgekinds.get(road_str()) == roadunit_bridgekind
 
 
-def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_src_road_delimiter_IsNotSame():
+def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_otx_road_delimiter_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_bridgeunit = bridgeunit_shop(sue_str)
-    slash_src_road_delimiter = "/"
+    slash_otx_road_delimiter = "/"
     acct_id_bridgekind = bridgekind_shop(
         type_AcctID_str(),
-        x_src_road_delimiter=slash_src_road_delimiter,
+        x_otx_road_delimiter=slash_otx_road_delimiter,
         x_face_id=sue_str,
     )
-    assert sue_bridgeunit.src_road_delimiter != acct_id_bridgekind.src_road_delimiter
+    assert sue_bridgeunit.otx_road_delimiter != acct_id_bridgekind.otx_road_delimiter
     assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_bridgeunit.set_bridgekind(acct_id_bridgekind)
-    exception_str = f"set_bridgekind Error: BrideUnit src_road_delimiter is '{sue_bridgeunit.src_road_delimiter}', BridgeKind is '{slash_src_road_delimiter}'."
+    exception_str = f"set_bridgekind Error: BrideUnit otx_road_delimiter is '{sue_bridgeunit.otx_road_delimiter}', BridgeKind is '{slash_otx_road_delimiter}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_dst_road_delimiter_IsNotSame():
+def test_BridgeUnit_set_bridgekind_RaisesErrorIf_bridgekind_inx_road_delimiter_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_bridgeunit = bridgeunit_shop(sue_str)
-    slash_dst_road_delimiter = "/"
+    slash_inx_road_delimiter = "/"
     acct_id_bridgekind = bridgekind_shop(
         type_AcctID_str(),
-        x_dst_road_delimiter=slash_dst_road_delimiter,
+        x_inx_road_delimiter=slash_inx_road_delimiter,
         x_face_id=sue_str,
     )
-    assert sue_bridgeunit.dst_road_delimiter != acct_id_bridgekind.dst_road_delimiter
+    assert sue_bridgeunit.inx_road_delimiter != acct_id_bridgekind.inx_road_delimiter
     assert sue_bridgeunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_bridgeunit.set_bridgekind(acct_id_bridgekind)
-    exception_str = f"set_bridgekind Error: BrideUnit dst_road_delimiter is '{sue_bridgeunit.dst_road_delimiter}', BridgeKind is '{slash_dst_road_delimiter}'."
+    exception_str = f"set_bridgekind Error: BrideUnit inx_road_delimiter is '{sue_bridgeunit.inx_road_delimiter}', BridgeKind is '{slash_inx_road_delimiter}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -277,7 +280,7 @@ def test_BridgeUnit_get_bridgekind_ReturnsObj():
     sue_str = "Sue"
     sue_bridgeunit = bridgeunit_shop(sue_str)
     static_acct_id_bridgekind = bridgekind_shop(type_AcctID_str(), x_face_id=sue_str)
-    static_acct_id_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
+    static_acct_id_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
     sue_bridgeunit.set_bridgekind(static_acct_id_bridgekind)
 
     # WHEN
@@ -292,7 +295,7 @@ def test_BridgeUnit_get_bridgekind_ReturnsObj_SpecialCase_RoadUnit():
     sue_str = "Sue"
     sue_bridgeunit = bridgeunit_shop(sue_str)
     static_road_bridgekind = bridgekind_shop(type_RoadUnit_str(), x_face_id=sue_str)
-    static_road_bridgekind.set_src_to_dst("Bob", "Bob of Portland")
+    static_road_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
     sue_bridgeunit.set_bridgekind(static_road_bridgekind)
 
     # WHEN
@@ -344,201 +347,201 @@ def test_BridgeUnit_is_valid_ReturnsObj():
     assert sue_bridgeunit.is_valid()
 
 
-def test_BridgeUnit_set_src_to_dst_SetsAttr_Scenario0_type_AcctID_str():
+def test_BridgeUnit_set_otx_to_inx_SetsAttr_Scenario0_type_AcctID_str():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
-    apptid_bridgekind = zia_bridgeunit.get_bridgekind(type_AcctID_str())
-    assert apptid_bridgekind.src_to_dst_exists(sue_src, sue_dst) is False
+    acctid_bridgekind = zia_bridgeunit.get_bridgekind(type_AcctID_str())
+    assert acctid_bridgekind.otx_to_inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_bridgeunit.set_src_to_dst(type_AcctID_str(), sue_src, sue_dst)
+    zia_bridgeunit.set_otx_to_inx(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert apptid_bridgekind.src_to_dst_exists(sue_src, sue_dst)
+    assert acctid_bridgekind.otx_to_inx_exists(sue_otx, sue_inx)
 
 
-def test_BridgeUnit_set_src_to_dst_SetsAttr_Scenario1_type_RoadUnit_str():
+def test_BridgeUnit_set_otx_to_inx_SetsAttr_Scenario1_type_RoadUnit_str():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_bridgekind = zia_bridgeunit.get_bridgekind(type_RoadUnit_str())
-    assert road_bridgekind.src_to_dst_exists(sue_src, sue_dst) is False
+    assert road_bridgekind.otx_to_inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_bridgeunit.set_src_to_dst(type_RoadUnit_str(), sue_src, sue_dst)
+    zia_bridgeunit.set_otx_to_inx(type_RoadUnit_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgekind.src_to_dst_exists(sue_src, sue_dst)
+    assert road_bridgekind.otx_to_inx_exists(sue_otx, sue_inx)
 
 
-def test_BridgeUnit_set_src_to_dst_SetsAttr_Scenario2_type_RoadNode_str():
+def test_BridgeUnit_set_otx_to_inx_SetsAttr_Scenario2_type_RoadNode_str():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_bridgekind = zia_bridgeunit.get_bridgekind(type_RoadNode_str())
-    assert road_bridgekind.src_to_dst_exists(sue_src, sue_dst) is False
+    assert road_bridgekind.otx_to_inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_bridgeunit.set_src_to_dst(type_RoadNode_str(), sue_src, sue_dst)
+    zia_bridgeunit.set_otx_to_inx(type_RoadNode_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgekind.src_to_dst_exists(sue_src, sue_dst)
+    assert road_bridgekind.otx_to_inx_exists(sue_otx, sue_inx)
 
 
-def test_BridgeUnit_src_to_dst_exists_ReturnsObj():
+def test_BridgeUnit_otx_to_inx_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_type = type_RoadNode_str()
-    assert zia_bridgeunit.src_to_dst_exists(road_type, sue_src, sue_dst) is False
+    assert zia_bridgeunit.otx_to_inx_exists(road_type, sue_otx, sue_inx) is False
 
     # WHEN
-    zia_bridgeunit.set_src_to_dst(type_RoadNode_str(), sue_src, sue_dst)
+    zia_bridgeunit.set_otx_to_inx(type_RoadNode_str(), sue_otx, sue_inx)
 
     # THEN
-    assert zia_bridgeunit.src_to_dst_exists(road_type, sue_src, sue_dst)
+    assert zia_bridgeunit.otx_to_inx_exists(road_type, sue_otx, sue_inx)
 
 
-def test_BridgeUnit_get_dst_value_ReturnsObj():
+def test_BridgeUnit_get_inx_value_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
-    assert zia_bridgeunit._get_dst_value(type_AcctID_str(), sue_src) != sue_dst
+    assert zia_bridgeunit._get_inx_value(type_AcctID_str(), sue_otx) != sue_inx
 
     # WHEN
-    zia_bridgeunit.set_src_to_dst(type_AcctID_str(), sue_src, sue_dst)
+    zia_bridgeunit.set_otx_to_inx(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert zia_bridgeunit._get_dst_value(type_AcctID_str(), sue_src) == sue_dst
+    assert zia_bridgeunit._get_inx_value(type_AcctID_str(), sue_otx) == sue_inx
 
 
-def test_BridgeUnit_del_src_to_dst_ReturnsObj():
+def test_BridgeUnit_del_otx_to_inx_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_type = type_RoadNode_str()
-    zia_bridgeunit.set_src_to_dst(type_RoadNode_str(), sue_src, sue_dst)
-    zia_bridgeunit.set_src_to_dst(type_RoadNode_str(), zia_str, zia_str)
-    assert zia_bridgeunit.src_to_dst_exists(road_type, sue_src, sue_dst)
-    assert zia_bridgeunit.src_to_dst_exists(road_type, zia_str, zia_str)
+    zia_bridgeunit.set_otx_to_inx(type_RoadNode_str(), sue_otx, sue_inx)
+    zia_bridgeunit.set_otx_to_inx(type_RoadNode_str(), zia_str, zia_str)
+    assert zia_bridgeunit.otx_to_inx_exists(road_type, sue_otx, sue_inx)
+    assert zia_bridgeunit.otx_to_inx_exists(road_type, zia_str, zia_str)
 
     # WHEN
-    zia_bridgeunit.del_src_to_dst(road_type, sue_src)
+    zia_bridgeunit.del_otx_to_inx(road_type, sue_otx)
 
     # THEN
-    assert zia_bridgeunit.src_to_dst_exists(road_type, sue_src, sue_dst) is False
-    assert zia_bridgeunit.src_to_dst_exists(road_type, zia_str, zia_str)
+    assert zia_bridgeunit.otx_to_inx_exists(road_type, sue_otx, sue_inx) is False
+    assert zia_bridgeunit.otx_to_inx_exists(road_type, zia_str, zia_str)
 
 
-def test_BridgeUnit_set_explicit_label_map_SetsAttr_Scenario0_type_AcctID_str():
+def test_BridgeUnit_set_explicit_label_SetsAttr_Scenario0_type_AcctID_str():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
-    apptid_bridgekind = zia_bridgeunit.get_bridgekind(type_AcctID_str())
-    assert apptid_bridgekind.explicit_label_map_exists(sue_src, sue_dst) is False
+    acctid_bridgekind = zia_bridgeunit.get_bridgekind(type_AcctID_str())
+    assert acctid_bridgekind.explicit_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_bridgeunit.set_explicit_label_map(type_AcctID_str(), sue_src, sue_dst)
+    zia_bridgeunit.set_explicit_label(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert apptid_bridgekind.explicit_label_map_exists(sue_src, sue_dst)
+    assert acctid_bridgekind.explicit_label_exists(sue_otx, sue_inx)
 
 
-def test_BridgeUnit_set_explicit_label_map_SetsAttr_Scenario1_type_RoadUnit_str():
+def test_BridgeUnit_set_explicit_label_SetsAttr_Scenario1_type_RoadUnit_str():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_bridgekind = zia_bridgeunit.get_bridgekind(type_RoadUnit_str())
-    assert road_bridgekind.explicit_label_map_exists(sue_src, sue_dst) is False
+    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_bridgeunit.set_explicit_label_map(type_RoadUnit_str(), sue_src, sue_dst)
+    zia_bridgeunit.set_explicit_label(type_RoadUnit_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgekind.explicit_label_map_exists(sue_src, sue_dst)
+    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx)
 
 
-def test_BridgeUnit_set_explicit_label_map_SetsAttr_Scenario2_type_RoadNode_str():
+def test_BridgeUnit_set_explicit_label_SetsAttr_Scenario2_type_RoadNode_str():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_bridgekind = zia_bridgeunit.get_bridgekind(type_RoadNode_str())
-    assert road_bridgekind.explicit_label_map_exists(sue_src, sue_dst) is False
+    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_bridgeunit.set_explicit_label_map(type_RoadNode_str(), sue_src, sue_dst)
+    zia_bridgeunit.set_explicit_label(type_RoadNode_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgekind.explicit_label_map_exists(sue_src, sue_dst)
+    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx)
 
 
-def test_BridgeUnit_explicit_label_map_exists_ReturnsObj():
+def test_BridgeUnit_explicit_label_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_type = type_RoadNode_str()
-    sue_exists = zia_bridgeunit.explicit_label_map_exists(road_type, sue_src, sue_dst)
+    sue_exists = zia_bridgeunit.explicit_label_exists(road_type, sue_otx, sue_inx)
     assert sue_exists is False
 
     # WHEN
-    zia_bridgeunit.set_explicit_label_map(type_RoadNode_str(), sue_src, sue_dst)
+    zia_bridgeunit.set_explicit_label(type_RoadNode_str(), sue_otx, sue_inx)
 
     # THEN
-    assert zia_bridgeunit.explicit_label_map_exists(road_type, sue_src, sue_dst)
+    assert zia_bridgeunit.explicit_label_exists(road_type, sue_otx, sue_inx)
 
 
-def test_BridgeUnit_get_explicit_dst_label_ReturnsObj():
+def test_BridgeUnit_get_explicit_inx_label_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
-    assert zia_bridgeunit._get_explicit_dst_label(type_AcctID_str(), sue_src) != sue_dst
+    assert zia_bridgeunit._get_explicit_inx_label(type_AcctID_str(), sue_otx) != sue_inx
 
     # WHEN
-    zia_bridgeunit.set_explicit_label_map(type_AcctID_str(), sue_src, sue_dst)
+    zia_bridgeunit.set_explicit_label(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert zia_bridgeunit._get_explicit_dst_label(type_AcctID_str(), sue_src) == sue_dst
+    assert zia_bridgeunit._get_explicit_inx_label(type_AcctID_str(), sue_otx) == sue_inx
 
 
-def test_BridgeUnit_del_explicit_label_map_ReturnsObj():
+def test_BridgeUnit_del_explicit_label_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
-    sue_src = "Sue"
-    sue_dst = "Suita"
+    sue_otx = "Sue"
+    sue_inx = "Suita"
     zia_bridgeunit = bridgeunit_shop(zia_str)
     road_type = type_RoadNode_str()
-    zia_bridgeunit.set_explicit_label_map(type_RoadNode_str(), sue_src, sue_dst)
-    zia_bridgeunit.set_explicit_label_map(type_RoadNode_str(), zia_str, zia_str)
-    assert zia_bridgeunit.explicit_label_map_exists(road_type, sue_src, sue_dst)
-    assert zia_bridgeunit.explicit_label_map_exists(road_type, zia_str, zia_str)
+    zia_bridgeunit.set_explicit_label(type_RoadNode_str(), sue_otx, sue_inx)
+    zia_bridgeunit.set_explicit_label(type_RoadNode_str(), zia_str, zia_str)
+    assert zia_bridgeunit.explicit_label_exists(road_type, sue_otx, sue_inx)
+    assert zia_bridgeunit.explicit_label_exists(road_type, zia_str, zia_str)
 
     # WHEN
-    zia_bridgeunit.del_explicit_label_map(road_type, sue_src)
+    zia_bridgeunit.del_explicit_label(road_type, sue_otx)
 
     # THEN
-    sue_exists = zia_bridgeunit.explicit_label_map_exists(road_type, sue_src, sue_dst)
+    sue_exists = zia_bridgeunit.explicit_label_exists(road_type, sue_otx, sue_inx)
     assert sue_exists is False
-    assert zia_bridgeunit.explicit_label_map_exists(road_type, zia_str, zia_str)
+    assert zia_bridgeunit.explicit_label_exists(road_type, zia_str, zia_str)

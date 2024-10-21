@@ -1,4 +1,5 @@
 from src.f00_instrument.file import create_file_path as f_path
+from src.f00_instrument.pandas_tool import open_csv
 from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import (
     fiscal_id_str,
@@ -12,7 +13,6 @@ from src.f08_brick.brick import (
     create_brick_df,
     get_brickref,
     save_brick_csv,
-    open_brick_csv,
     load_brick_csv,
 )
 from src.f08_brick.brick_config import (
@@ -27,7 +27,7 @@ from src.f08_brick.examples.brick_env import (
 )
 
 
-def test_open_brick_csv_ReturnsObj():
+def test_open_csv_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -48,7 +48,7 @@ def test_open_brick_csv_ReturnsObj():
     save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), acct_filename)
 
     # WHEN
-    acct_dataframe = open_brick_csv(brick_examples_dir(), acct_filename)
+    acct_dataframe = open_csv(brick_examples_dir(), acct_filename)
 
     # THEN
     array_headers = list(acct_dataframe.columns)
