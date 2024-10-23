@@ -290,18 +290,10 @@ class BridgeUnit:
     inx_road_delimiter: str = None
 
     def set_bridgekind(self, x_bridgekind: BridgeKind):
-        if self.face_id != x_bridgekind.face_id:
-            exception_str = f"set_bridgekind Error: BrideUnit face_id is '{self.face_id}', BridgeKind is '{x_bridgekind.face_id}'."
-            raise atom_args_python_typeException(exception_str)
-        if self.otx_road_delimiter != x_bridgekind.otx_road_delimiter:
-            exception_str = f"set_bridgekind Error: BrideUnit otx_road_delimiter is '{self.otx_road_delimiter}', BridgeKind is '{x_bridgekind.otx_road_delimiter}'."
-            raise atom_args_python_typeException(exception_str)
-        if self.inx_road_delimiter != x_bridgekind.inx_road_delimiter:
-            exception_str = f"set_bridgekind Error: BrideUnit inx_road_delimiter is '{self.inx_road_delimiter}', BridgeKind is '{x_bridgekind.inx_road_delimiter}'."
-            raise atom_args_python_typeException(exception_str)
-        if self.unknown_word != x_bridgekind.unknown_word:
-            exception_str = f"set_bridgekind Error: BrideUnit unknown_word is '{self.unknown_word}', BridgeKind is '{x_bridgekind.unknown_word}'."
-            raise atom_args_python_typeException(exception_str)
+        self._check_attr_match("face_id", x_bridgekind)
+        self._check_attr_match("otx_road_delimiter", x_bridgekind)
+        self._check_attr_match("inx_road_delimiter", x_bridgekind)
+        self._check_attr_match("unknown_word", x_bridgekind)
 
         x_python_type = None
         if x_bridgekind.python_type in {"RoadUnit", "RoadNode"}:
@@ -312,6 +304,13 @@ class BridgeUnit:
             x_python_type = x_bridgekind.python_type
 
         self.bridgekinds[x_python_type] = x_bridgekind
+
+    def _check_attr_match(self, attr: str, bridgekind: BridgeKind):
+        self_attr = getattr(self, attr)
+        kind_attr = getattr(bridgekind, attr)
+        if self_attr != kind_attr:
+            exception_str = f"set_bridgekind Error: BrideUnit {attr} is '{self_attr}', BridgeKind is '{kind_attr}'."
+            raise atom_args_python_typeException(exception_str)
 
     def get_bridgekind(self, x_python_type: str) -> BridgeKind:
         if x_python_type in {"RoadUnit", "RoadNode"}:

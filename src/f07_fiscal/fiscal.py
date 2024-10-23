@@ -337,6 +337,14 @@ class FiscalUnit:
                     x_tranbook.add_tranunit(owner_id, acct_id, x_timestamp, x_amount)
         self._all_tranbook = x_tranbook
 
+    # TODO evaluate if this should be used
+    # def set_all_tranbook(self):
+    #     if not hasattr(self, "_combined_tranbook"):
+    #         self._combined_tranbook = tranbook_shop(self.fiscal_id, [])
+    #     new_tranunits = self.cashbook.get_new_tranunits()
+    #     self._combined_tranbook.add_tranunits(new_tranunits)
+    #     return self._combined_tranbook
+
 
 def fiscalunit_shop(
     fiscal_id: FiscalID = None,

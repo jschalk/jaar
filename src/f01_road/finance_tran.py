@@ -137,8 +137,18 @@ class TranBook:
     def get_accts_net_csv(self) -> str:
         return create_csv(self._get_accts_headers(), self._get_accts_net_array())
 
+    # def join(self, x_tranbook):
+    #     for src_acct_id, dst_dict in x_tranbook.tranunits.items():
+    #         for dst_acct_id, timestamp_dict in dst_dict.items():
+    #             for x_timestamp, x_amount in timestamp_dict.items():
+    #                 self.add_tranunit(src_acct_id, dst_acct_id, x_timestamp, x_amount)
+
     def join(self, x_tranbook):
-        for src_acct_id, dst_dict in x_tranbook.tranunits.items():
+        sorted_tranunits = sorted(
+            x_tranbook.tranunits.items(),
+            key=lambda x: next(iter(next(iter(x[1].values())).keys())),
+        )
+        for src_acct_id, dst_dict in sorted_tranunits:
             for dst_acct_id, timestamp_dict in dst_dict.items():
                 for x_timestamp, x_amount in timestamp_dict.items():
                     self.add_tranunit(src_acct_id, dst_acct_id, x_timestamp, x_amount)

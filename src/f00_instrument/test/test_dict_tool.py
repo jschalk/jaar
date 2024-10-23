@@ -89,6 +89,40 @@ def test_exists_in_nested_dict_CorrectAddsDict():
 
 
 def test_del_in_nested_dict_CorrectSetsDict():
+    # TODO apply suggestions from Sourery
+    # -def add_dict_if_missing(x_dict: dict, x_keylist: list[any]):
+    # +def add_nested_dict_if_missing(x_dict: dict, x_keylist: list[any]):
+    # issue (complexity): Consider simplifying nested dictionary operations using built-in Python features and more efficient algorithms.
+
+    # While the introduction of consistent nested dictionary operations can improve code readability, the current implementation adds unnecessary complexity. Consider the following simplifications:
+
+    # Use collections.defaultdict to simplify nested dictionary creation:
+    # from collections import defaultdict
+
+    # def nested_dict():
+    #     return defaultdict(nested_dict)
+
+    # # Usage
+    # my_dict = nested_dict()
+    # my_dict['a']['b']['c'] = 1  # No need for explicit nested creation
+    # Simplify del_in_nested_dict by using a recursive approach:
+    # def del_in_nested_dict(d, keys):
+    #     if len(keys) == 1:
+    #         del d[keys[0]]
+    #     else:
+    #         del_in_nested_dict(d[keys[0]], keys[1:])
+    #         if not d[keys[0]]:  # Remove empty nested dicts
+    #             del d[keys[0]]
+    # Consider using functools.reduce for get_from_nested_dict:
+    # from functools import reduce
+    # import operator
+
+    # def get_from_nested_dict(d, keys, default=None):
+    #     try:
+    #         return reduce(operator.getitem, keys, d)
+    #     except (KeyError, TypeError):
+    #         return default
+    # These changes maintain the consistent interface while reducing code complexity and improving efficiency. The defaultdict approach eliminates the need for explicit nested dictionary creation, the simplified del_in_nested_dict is more readable and efficient, and the reduce-based get_from_nested_dict is more concise.
     # ESTABLISH
     y_dict = {}
     y_key1 = "sports"
