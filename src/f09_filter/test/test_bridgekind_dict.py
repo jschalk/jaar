@@ -9,7 +9,7 @@ from src.f04_gift.atom_config import (
     type_RoadUnit_str,
     type_GroupID_str,
 )
-from src.f09_filter.bridge import (
+from src.f09_filter.filter import (
     bridgekind_shop,
     get_bridgekind_from_dict,
     get_bridgekind_from_json,
@@ -22,9 +22,9 @@ from src.f09_filter.examples.filter_env import (
     env_dir_setup_cleanup,
     get_test_faces_dir,
 )
-from src.f09_filter.examples.example_bridges import (
-    get_casa_maison_bridgeunit_set_by_otx_to_inx,
-    get_casa_maison_bridgeunit_set_by_explicit_label,
+from src.f09_filter.examples.example_filters import (
+    get_casa_maison_filterunit_set_by_otx_to_inx,
+    get_casa_maison_filterunit_set_by_explicit_label,
     get_casa_maison_road_otx_to_inx_dt,
     get_casa_maison_road_explicit_label_dt,
 )
@@ -175,8 +175,8 @@ def test_get_otx_to_inx_dt_columns_ReturnsObj():
 
 def test_create_otx_to_inx_dt_ReturnsObj():
     # ESTABLISH
-    casa_bridgeunit = get_casa_maison_bridgeunit_set_by_otx_to_inx()
-    casa_bridgekind = casa_bridgeunit.get_bridgekind(type_RoadUnit_str())
+    casa_filterunit = get_casa_maison_filterunit_set_by_otx_to_inx()
+    casa_bridgekind = casa_filterunit.get_bridgekind(type_RoadUnit_str())
 
     # WHEN
     casa_dataframe = create_otx_to_inx_dt(casa_bridgekind)
@@ -210,8 +210,8 @@ def test_get_explicit_label_columns_ReturnsObj():
 
 def test_create_explicit_label_dt_ReturnsObj():
     # ESTABLISH
-    casa_bridgeunit = get_casa_maison_bridgeunit_set_by_explicit_label()
-    casa_bridgekind = casa_bridgeunit.get_bridgekind(type_RoadUnit_str())
+    casa_filterunit = get_casa_maison_filterunit_set_by_explicit_label()
+    casa_bridgekind = casa_filterunit.get_bridgekind(type_RoadUnit_str())
 
     # WHEN
     casa_dataframe = create_explicit_label_dt(casa_bridgekind)

@@ -282,7 +282,7 @@ def get_bridgekind_from_json(x_json: str) -> BridgeKind:
 
 
 @dataclass
-class BridgeUnit:
+class FilterUnit:
     face_id: OwnerID = None
     bridgekinds: dict[str, BridgeKind] = None
     unknown_word: str = None
@@ -365,12 +365,12 @@ class BridgeUnit:
         return get_json_from_dict(self.get_dict())
 
 
-def bridgeunit_shop(
+def filterunit_shop(
     x_face_id: OwnerID,
     x_otx_road_delimiter: str = None,
     x_inx_road_delimiter: str = None,
     x_unknown_word: str = None,
-) -> BridgeUnit:
+) -> FilterUnit:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
     if x_otx_road_delimiter is None:
@@ -402,7 +402,7 @@ def bridgeunit_shop(
         ),
     }
 
-    return BridgeUnit(
+    return FilterUnit(
         face_id=x_face_id,
         unknown_word=x_unknown_word,
         otx_road_delimiter=x_otx_road_delimiter,
@@ -411,8 +411,8 @@ def bridgeunit_shop(
     )
 
 
-def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
-    return BridgeUnit(
+def get_filterunit_from_dict(x_dict: dict) -> FilterUnit:
+    return FilterUnit(
         face_id=x_dict.get("face_id"),
         otx_road_delimiter=x_dict.get("otx_road_delimiter"),
         inx_road_delimiter=x_dict.get("inx_road_delimiter"),
@@ -428,8 +428,8 @@ def get_bridgekinds_from_dict(bridgekinds_dict: dict) -> dict[str, BridgeKind]:
     }
 
 
-def get_bridgeunit_from_json(x_json: str) -> BridgeUnit:
-    return get_bridgeunit_from_dict(get_dict_from_json(x_json))
+def get_filterunit_from_json(x_json: str) -> FilterUnit:
+    return get_filterunit_from_dict(get_dict_from_json(x_json))
 
 
 def get_otx_to_inx_dt_columns() -> list[str]:
@@ -488,8 +488,8 @@ def create_explicit_label_dt(x_bridgekind: BridgeKind) -> DataFrame:
     return DataFrame(x_rows_list, columns=get_explicit_label_columns())
 
 
-def save_all_csvs_from_bridgeunit(x_dir: str, x_bridgeunit: BridgeUnit):
-    for x_key, x_bridgekind in x_bridgeunit.bridgekinds.items():
+def save_all_csvs_from_filterunit(x_dir: str, x_filterunit: FilterUnit):
+    for x_key, x_bridgekind in x_filterunit.bridgekinds.items():
         _save_otx_to_inx_csv(x_dir, x_bridgekind, x_key)
         _save_explicit_label_csv(x_dir, x_bridgekind, x_key)
 
@@ -536,7 +536,7 @@ def _load_explicit_label_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind
     return x_bridgekind
 
 
-def create_dir_valid_bridgeunit(x_dir: str) -> BridgeUnit:
+def create_dir_valid_filterunit(x_dir: str) -> FilterUnit:
     face_id_set = set()
     unknown_word_set = set()
     otx_road_delimiter_set = set()
@@ -567,7 +567,7 @@ def create_dir_valid_bridgeunit(x_dir: str) -> BridgeUnit:
     #         f"{face_id_set=} {unknown_word_set=}  {otx_road_delimiter_set=} {inx_road_delimiter_set=}"
     #     )
 
-    return bridgeunit_shop(
+    return filterunit_shop(
         x_face_id=x_face_id,
         x_otx_road_delimiter=x_otx_road_delimiter,
         x_inx_road_delimiter=x_inx_road_delimiter,
@@ -575,9 +575,9 @@ def create_dir_valid_bridgeunit(x_dir: str) -> BridgeUnit:
     )
 
 
-def init_bridgeunit_from_dir(x_dir: str) -> BridgeUnit:
-    x_bridgeunit = create_dir_valid_bridgeunit(x_dir)
-    for x_bridgekind in x_bridgeunit.bridgekinds.values():
+def init_filterunit_from_dir(x_dir: str) -> FilterUnit:
+    x_filterunit = create_dir_valid_filterunit(x_dir)
+    for x_bridgekind in x_filterunit.bridgekinds.values():
         _load_otx_to_inx_from_csv(x_dir, x_bridgekind)
         _load_explicit_label_from_csv(x_dir, x_bridgekind)
-    return x_bridgeunit
+    return x_filterunit

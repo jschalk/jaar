@@ -8,16 +8,15 @@ from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
     FiscalID,
     WorldID,
-    RoadNode,
     TimeLineLabel,
     get_default_world_id,
     FaceID,
 )
 from src.f07_fiscal.fiscal import FiscalUnit
-from src.f09_filter.bridge import (
-    BridgeUnit,
-    bridgeunit_shop,
-    save_all_csvs_from_bridgeunit,
+from src.f09_filter.filter import (
+    FilterUnit,
+    filterunit_shop,
+    save_all_csvs_from_filterunit,
 )
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
@@ -32,20 +31,20 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     current_time: TimeLinePoint = None
-    faces: dict[str, BridgeUnit] = None
-    _faces_dir: dict[str, int] = None
+    faces: dict[FaceID, FilterUnit] = None
+    _faces_dir: dict[FaceID,] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _fiscalunits: set[FiscalID] = None
 
-    def set_face_id(self, face_id: FaceID, x_bridgeunit: BridgeUnit = None):
-        if x_bridgeunit is None:
-            x_bridgeunit = bridgeunit_shop(face_id)
-        self.faces[face_id] = x_bridgeunit
+    def set_face_id(self, face_id: FaceID, x_filterunit: FilterUnit = None):
+        if x_filterunit is None:
+            x_filterunit = filterunit_shop(face_id)
+        self.faces[face_id] = x_filterunit
 
     def face_id_exists(self, face_id: FaceID) -> bool:
         return self.faces.get(face_id) != None
 
-    def get_face_id_bridgeunit(self, face_id: FaceID) -> BridgeUnit:
+    def get_face_id_filterunit(self, face_id: FaceID) -> FilterUnit:
         return self.faces.get(face_id)
 
     def del_face_id(self, face_id: FaceID):
@@ -58,9 +57,9 @@ class WorldUnit:
         return self.faces == {}
 
     def save_face_files(self, face_id: FaceID):
-        x_bridgeunit = self.get_face_id_bridgeunit(face_id)
+        x_filterunit = self.get_face_id_filterunit(face_id)
         face_dir = get_face_dir(self._faces_dir, face_id)
-        save_all_csvs_from_bridgeunit(face_dir, x_bridgeunit)
+        save_all_csvs_from_filterunit(face_dir, x_filterunit)
 
     def face_files_exists(self, face_id: FaceID) -> bool:
         face_dir = get_face_dir(self._faces_dir, face_id)

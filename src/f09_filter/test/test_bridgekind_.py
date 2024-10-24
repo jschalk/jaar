@@ -8,7 +8,7 @@ from src.f04_gift.atom_config import (
     type_RoadNode_str,
     type_RoadUnit_str,
 )
-from src.f09_filter.bridge import BridgeKind, bridgekind_shop, default_unknown_word
+from src.f09_filter.filter import BridgeKind, bridgekind_shop, default_unknown_word
 from pytest import raises as pytest_raises
 
 # from otx.f09_filter.examples.filter_env import get_test_filters_dir, env_dir_setup_cleanup

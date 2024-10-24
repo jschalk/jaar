@@ -1,6 +1,6 @@
 from src.f00_instrument.file import save_file, delete_dir, create_file_path
 from src.f01_road.finance_tran import timeconversion_shop
-from src.f09_filter.bridge import bridgeunit_shop
+from src.f09_filter.filter import filterunit_shop
 from src.f10_world.world import (
     init_fiscalunits_from_dirs,
     WorldUnit,
@@ -40,8 +40,8 @@ def test_worldunit_shop_ReturnsObj_WithParameters():
     sue_str = "Sue"
     bob_str = "Bob"
     world2_faces = {
-        sue_str: bridgeunit_shop(sue_str),
-        bob_str: bridgeunit_shop(bob_str),
+        sue_str: filterunit_shop(sue_str),
+        bob_str: filterunit_shop(bob_str),
     }
     world2timeconversions = {music_text: timeconversion_shop(music_text)}
     world2_fiscalunits = {"music45"}
@@ -87,12 +87,12 @@ def test_WorldUnit_set_face_id_SetsAttr_Scenario0():
 
     # WHEN
     sue_str = "Sue"
-    sue_bridgeunit = bridgeunit_shop(sue_str)
-    x_world.set_face_id(sue_str, sue_bridgeunit)
+    sue_filterunit = filterunit_shop(sue_str)
+    x_world.set_face_id(sue_str, sue_filterunit)
 
     # THEN
     assert x_world.faces != {}
-    assert x_world.faces == {sue_str: sue_bridgeunit}
+    assert x_world.faces == {sue_str: sue_filterunit}
 
 
 def test_WorldUnit_set_face_id_SetsAttr_Scenario1_NoValue():
@@ -106,10 +106,10 @@ def test_WorldUnit_set_face_id_SetsAttr_Scenario1_NoValue():
 
     # THEN
     assert x_world.faces != {}
-    assert x_world.faces == {sue_str: bridgeunit_shop(sue_str)}
+    assert x_world.faces == {sue_str: filterunit_shop(sue_str)}
 
 
-def test_BridgeUnit_face_id_exists_ReturnsObj():
+def test_FilterUnit_face_id_exists_ReturnsObj():
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
@@ -122,39 +122,39 @@ def test_BridgeUnit_face_id_exists_ReturnsObj():
     assert x_world.face_id_exists(sue_str)
 
 
-def test_BridgeUnit_get_face_id_bridgeunit_ReturnsObj():
+def test_FilterUnit_get_face_id_filterunit_ReturnsObj():
     # ESTABLISH
     x_world = worldunit_shop()
     slash_str = "/"
     sue_str = "Sue"
-    sue_bridgeunit = bridgeunit_shop(sue_str, slash_str)
-    assert x_world.get_face_id_bridgeunit(sue_str) is None
+    sue_filterunit = filterunit_shop(sue_str, slash_str)
+    assert x_world.get_face_id_filterunit(sue_str) is None
 
     # WHEN
-    x_world.set_face_id(sue_str, sue_bridgeunit)
+    x_world.set_face_id(sue_str, sue_filterunit)
 
     # THEN
-    assert x_world.get_face_id_bridgeunit(sue_str) == sue_bridgeunit
+    assert x_world.get_face_id_filterunit(sue_str) == sue_filterunit
 
 
-def test_BridgeUnit_del_face_id_ReturnsObj():
+def test_FilterUnit_del_face_id_ReturnsObj():
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_bridgeunit = bridgeunit_shop(sue_str)
-    bob_bridgeunit = bridgeunit_shop(bob_str)
-    x_world.set_face_id(sue_str, sue_bridgeunit)
-    x_world.set_face_id(bob_str, bob_bridgeunit)
-    assert x_world.get_face_id_bridgeunit(sue_str) == sue_bridgeunit
-    assert x_world.get_face_id_bridgeunit(bob_str) == bob_bridgeunit
+    sue_filterunit = filterunit_shop(sue_str)
+    bob_filterunit = filterunit_shop(bob_str)
+    x_world.set_face_id(sue_str, sue_filterunit)
+    x_world.set_face_id(bob_str, bob_filterunit)
+    assert x_world.get_face_id_filterunit(sue_str) == sue_filterunit
+    assert x_world.get_face_id_filterunit(bob_str) == bob_filterunit
 
     # WHEN
     x_world.del_face_id(sue_str)
 
     # THEN
-    assert x_world.get_face_id_bridgeunit(sue_str) is None
-    assert x_world.get_face_id_bridgeunit(bob_str) == bob_bridgeunit
+    assert x_world.get_face_id_filterunit(sue_str) is None
+    assert x_world.get_face_id_filterunit(bob_str) == bob_filterunit
 
 
 def test_WorldUnit_del_all_face_id_SetsAttr():
@@ -162,19 +162,19 @@ def test_WorldUnit_del_all_face_id_SetsAttr():
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_bridgeunit = bridgeunit_shop(sue_str)
-    bob_bridgeunit = bridgeunit_shop(bob_str)
-    x_world.set_face_id(sue_str, sue_bridgeunit)
-    x_world.set_face_id(bob_str, bob_bridgeunit)
-    assert x_world.get_face_id_bridgeunit(sue_str) == sue_bridgeunit
-    assert x_world.get_face_id_bridgeunit(bob_str) == bob_bridgeunit
+    sue_filterunit = filterunit_shop(sue_str)
+    bob_filterunit = filterunit_shop(bob_str)
+    x_world.set_face_id(sue_str, sue_filterunit)
+    x_world.set_face_id(bob_str, bob_filterunit)
+    assert x_world.get_face_id_filterunit(sue_str) == sue_filterunit
+    assert x_world.get_face_id_filterunit(bob_str) == bob_filterunit
 
     # WHEN
     x_world.del_all_face_id()
 
     # THEN
-    assert x_world.get_face_id_bridgeunit(sue_str) is None
-    assert x_world.get_face_id_bridgeunit(bob_str) is None
+    assert x_world.get_face_id_filterunit(sue_str) is None
+    assert x_world.get_face_id_filterunit(bob_str) is None
     assert x_world.faces == {}
 
 

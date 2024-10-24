@@ -7,11 +7,11 @@ from src.f04_gift.atom_config import (
     type_GroupID_str,
     type_RoadNode_str,
 )
-from src.f09_filter.bridge import (
+from src.f09_filter.filter import (
     bridgekind_shop,
     BridgeKind,
-    BridgeUnit,
-    bridgeunit_shop,
+    FilterUnit,
+    filterunit_shop,
     default_unknown_word,
 )
 from pandas import DataFrame
@@ -171,12 +171,12 @@ def get_slash_acctid_bridgekind() -> BridgeKind:
     return acct_id_bridgekind
 
 
-def get_sue_bridgeunit() -> BridgeUnit:
-    sue_bridgeunit = bridgeunit_shop("Sue")
-    sue_bridgeunit.set_bridgekind(get_suita_acctid_bridgekind())
-    sue_bridgeunit.set_bridgekind(get_clean_roadunit_bridgekind())
-    sue_bridgeunit.set_bridgekind(get_swim_groupid_bridgekind())
-    return sue_bridgeunit
+def get_sue_filterunit() -> FilterUnit:
+    sue_filterunit = filterunit_shop("Sue")
+    sue_filterunit.set_bridgekind(get_suita_acctid_bridgekind())
+    sue_filterunit.set_bridgekind(get_clean_roadunit_bridgekind())
+    sue_filterunit.set_bridgekind(get_swim_groupid_bridgekind())
+    return sue_filterunit
 
 
 def get_suita_acctid_otx_dt() -> DataFrame:
@@ -205,7 +205,7 @@ def get_suita_acctid_inx_dt() -> DataFrame:
     return inx_dt
 
 
-def get_casa_maison_bridgeunit_set_by_otx_to_inx() -> BridgeUnit:
+def get_casa_maison_filterunit_set_by_otx_to_inx() -> FilterUnit:
     otx_music45_str = "music45"
     inx_music87_str = "music87"
     casa_otx_str = "casa"
@@ -220,16 +220,16 @@ def get_casa_maison_bridgeunit_set_by_otx_to_inx() -> BridgeUnit:
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
-    sue_bridgeunit = bridgeunit_shop("Sue")
+    sue_filterunit = filterunit_shop("Sue")
     rx = type_RoadNode_str()
-    sue_bridgeunit.set_otx_to_inx(rx, otx_music45_str, inx_music87_str)
-    sue_bridgeunit.set_otx_to_inx(rx, casa_otx_road, casa_inx_road)
-    sue_bridgeunit.set_otx_to_inx(rx, clean_otx_road, clean_inx_road)
-    sue_bridgeunit.set_otx_to_inx(rx, sweep_otx_road, sweep_inx_road)
-    return sue_bridgeunit
+    sue_filterunit.set_otx_to_inx(rx, otx_music45_str, inx_music87_str)
+    sue_filterunit.set_otx_to_inx(rx, casa_otx_road, casa_inx_road)
+    sue_filterunit.set_otx_to_inx(rx, clean_otx_road, clean_inx_road)
+    sue_filterunit.set_otx_to_inx(rx, sweep_otx_road, sweep_inx_road)
+    return sue_filterunit
 
 
-def get_casa_maison_bridgeunit_set_by_explicit_label() -> BridgeUnit:
+def get_casa_maison_filterunit_set_by_explicit_label() -> FilterUnit:
     otx_music45_str = "music45"
     inx_music87_str = "music87"
     casa_otx_str = "casa"
@@ -244,12 +244,12 @@ def get_casa_maison_bridgeunit_set_by_explicit_label() -> BridgeUnit:
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
-    sue_bridgeunit = bridgeunit_shop("Sue")
+    sue_filterunit = filterunit_shop("Sue")
     rx = type_RoadNode_str()
-    sue_bridgeunit.set_explicit_label(rx, otx_music45_str, inx_music87_str)
-    sue_bridgeunit.set_explicit_label(rx, casa_otx_str, casa_inx_str)
-    sue_bridgeunit.set_explicit_label(rx, clean_otx_str, clean_inx_str)
-    return sue_bridgeunit
+    sue_filterunit.set_explicit_label(rx, otx_music45_str, inx_music87_str)
+    sue_filterunit.set_explicit_label(rx, casa_otx_str, casa_inx_str)
+    sue_filterunit.set_explicit_label(rx, clean_otx_str, clean_inx_str)
+    return sue_filterunit
 
 
 def get_casa_maison_road_otx_dt() -> DataFrame:
