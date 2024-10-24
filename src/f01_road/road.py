@@ -63,6 +63,22 @@ class GroupID(str):  # Created to help track the concept
     pass
 
 
+class WorldID(str):
+    pass
+
+
+def get_default_world_id() -> WorldID:
+    return WorldID("TestingWorld3")
+
+
+class FaceID(str):
+    pass
+
+
+def get_default_face_id() -> FaceID:
+    return FaceID("Face1234")
+
+
 def default_road_delimiter_if_none(delimiter: str = None) -> str:
     return delimiter if delimiter is not None else ";"
 
@@ -282,11 +298,3 @@ def get_road_from_doar(x_doarunit: DoarUnit, delimiter: str = None) -> RoadUnit:
 
 def get_doar_from_road(x_roadunit: RoadUnit, delimiter: str = None) -> DoarUnit:
     return DoarUnit(get_road_from_doar(x_roadunit, delimiter))
-
-
-class WorldID(str):
-    pass
-
-
-def get_default_world_id() -> WorldID:
-    return WorldID("TestingWorld3")

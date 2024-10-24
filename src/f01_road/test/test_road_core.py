@@ -32,6 +32,8 @@ from src.f01_road.road import (
     WorldID,
     get_default_world_id,
     TimeLineLabel,
+    FaceID,
+    get_default_face_id,
 )
 from pytest import raises as pytest_raises
 from dataclasses import dataclass
@@ -143,6 +145,17 @@ def test_WorldID_Exists():
 def test_get_default_world_id_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_default_world_id() == "TestingWorld3"
+
+
+def test_FaceID_Exists():
+    # ESTABLISH / WHEN / THEN
+    assert FaceID() == ""
+    assert FaceID("cookie") == "cookie"
+
+
+def test_get_default_face_id_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_default_face_id() == "Face1234"
 
 
 def test_road_is_sub_road_correctlyReturnsBool():
