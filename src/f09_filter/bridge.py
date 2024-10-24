@@ -536,13 +536,6 @@ def _load_explicit_label_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind
     return x_bridgekind
 
 
-def get_csvs_loaded_bridgeunit(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
-    for x_bridgekind in x_bridgeunit.bridgekinds.values():
-        _load_otx_to_inx_from_csv(x_dir, x_bridgekind)
-        _load_explicit_label_from_csv(x_dir, x_bridgekind)
-    return x_bridgeunit
-
-
 def create_dir_valid_bridgeunit(x_dir: str) -> BridgeUnit:
     face_id_set = set()
     unknown_word_set = set()
@@ -582,7 +575,7 @@ def create_dir_valid_bridgeunit(x_dir: str) -> BridgeUnit:
     )
 
 
-def get_csvs_loaded_bridgeunit(x_dir: str) -> BridgeUnit:
+def init_bridgeunit_from_dir(x_dir: str) -> BridgeUnit:
     x_bridgeunit = create_dir_valid_bridgeunit(x_dir)
     for x_bridgekind in x_bridgeunit.bridgekinds.values():
         _load_otx_to_inx_from_csv(x_dir, x_bridgekind)

@@ -11,7 +11,7 @@ from src.f09_filter.bridge import (
     _load_explicit_label_from_csv,
     _save_explicit_label_csv,
     create_dir_valid_bridgeunit,
-    get_csvs_loaded_bridgeunit,
+    init_bridgeunit_from_dir,
 )
 from src.f09_filter.examples.filter_env import (
     env_dir_setup_cleanup,
@@ -288,14 +288,14 @@ def test_create_dir_valid_bridgeunit_Sets_otx_road_delimiter_inx_road_delimiter(
     assert gen_bridgekind.inx_road_delimiter == colon_inx_road_delimiter
 
 
-def test_get_csvs_loaded_bridgeunit_ReturnsObj(env_dir_setup_cleanup):
+def test_init_bridgeunit_from_dir_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_bridgeunit = get_sue_bridgeunit()
     bridge_dir = get_test_faces_dir()
     save_all_csvs_from_bridgeunit(bridge_dir, sue_bridgeunit)
 
     # WHEN
-    gen_bridgeunit = get_csvs_loaded_bridgeunit(bridge_dir)
+    gen_bridgeunit = init_bridgeunit_from_dir(bridge_dir)
 
     # THEN
     assert gen_bridgeunit

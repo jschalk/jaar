@@ -14,10 +14,16 @@ from src.f01_road.road import (
     FaceID,
 )
 from src.f07_fiscal.fiscal import FiscalUnit
+from src.f09_filter.bridge import (
+    BridgeUnit,
+    bridgeunit_shop,
+    save_all_csvs_from_bridgeunit,
+)
 from dataclasses import dataclass
+from os.path import exists as os_path_exists
 
 
-def get_default_worlds_dir():
+def get_default_worlds_dir() -> str:
     return "src/f10_world/examples/worlds"
 
 
@@ -26,18 +32,20 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     current_time: TimeLinePoint = None
-    faces: dict[str, int] = None
+    faces: dict[str, BridgeUnit] = None
     _faces_dir: dict[str, int] = None
-    timeconversions: dict[RoadNode, TimeConversion] = None
+    timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _fiscalunits: set[FiscalID] = None
 
-    def set_face_id(self, face_id: FaceID, x_value=None):
-        self.faces[face_id] = get_0_if_None(x_value)
+    def set_face_id(self, face_id: FaceID, x_bridgeunit: BridgeUnit = None):
+        if x_bridgeunit is None:
+            x_bridgeunit = bridgeunit_shop(face_id)
+        self.faces[face_id] = x_bridgeunit
 
     def face_id_exists(self, face_id: FaceID) -> bool:
         return self.faces.get(face_id) != None
 
-    def get_face_id_value(self, face_id: FaceID) -> int:
+    def get_face_id_bridgeunit(self, face_id: FaceID) -> BridgeUnit:
         return self.faces.get(face_id)
 
     def del_face_id(self, face_id: FaceID):
@@ -49,12 +57,21 @@ class WorldUnit:
     def face_ids_empty(self) -> bool:
         return self.faces == {}
 
-    def set_all_face_ids_from_dirs(self):
+    def save_face_files(self, face_id: FaceID):
+        x_bridgeunit = self.get_face_id_bridgeunit(face_id)
+        face_dir = get_face_dir(self._faces_dir, face_id)
+        save_all_csvs_from_bridgeunit(face_dir, x_bridgeunit)
+
+    def face_files_exists(self, face_id: FaceID) -> bool:
+        face_dir = get_face_dir(self._faces_dir, face_id)
+        return os_path_exists(face_dir)
+
+    def _set_all_face_ids_from_dirs(self):
         self.del_all_face_id()
         for dir_name in dir_files(self._faces_dir, include_files=False).keys():
             self.set_face_id(dir_name)
 
-    def get_timeconversions_dict(self) -> dict:
+    def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
     def get_dict(self) -> dict:
@@ -73,7 +90,7 @@ def worldunit_shop(
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
     faces: set[str] = None,
     _fiscalunits: set[FiscalID] = None,
-):
+) -> WorldUnit:
     if world_id is None:
         world_id = get_default_world_id()
     if worlds_dir is None:
@@ -91,3 +108,7 @@ def worldunit_shop(
 
 def init_fiscalunits_from_dirs(x_dirs: list[str]) -> list[FiscalUnit]:
     return []
+
+
+def get_face_dir(faces_dir: str, face_id: FaceID) -> str:
+    return create_file_path(faces_dir, face_id)

@@ -1,5 +1,6 @@
-from src.f00_instrument.file import save_file, delete_dir
+from src.f00_instrument.file import save_file, delete_dir, create_file_path
 from src.f01_road.finance_tran import timeconversion_shop
+from src.f09_filter.bridge import bridgeunit_shop
 from src.f10_world.world import (
     init_fiscalunits_from_dirs,
     WorldUnit,
@@ -10,6 +11,7 @@ from src.f10_world.examples.world_env import (
     get_test_worlds_dir,
     env_dir_setup_cleanup,
 )
+from os.path import exists as os_path_exists
 
 # The goal of the world function is to allow a single command, pointing at a bunch of directories
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
@@ -35,7 +37,12 @@ def test_worldunit_shop_ReturnsObj_WithParameters():
     five_world_id = "five"
     world2_current_time = 55
     music_text = "music45"
-    world2_faces = {"Sue": 1, "Bob": 1}
+    sue_str = "Sue"
+    bob_str = "Bob"
+    world2_faces = {
+        sue_str: bridgeunit_shop(sue_str),
+        bob_str: bridgeunit_shop(bob_str),
+    }
     world2timeconversions = {music_text: timeconversion_shop(music_text)}
     world2_fiscalunits = {"music45"}
 
@@ -80,12 +87,12 @@ def test_WorldUnit_set_face_id_SetsAttr_Scenario0():
 
     # WHEN
     sue_str = "Sue"
-    sue_value = 33
-    x_world.set_face_id(sue_str, sue_value)
+    sue_bridgeunit = bridgeunit_shop(sue_str)
+    x_world.set_face_id(sue_str, sue_bridgeunit)
 
     # THEN
     assert x_world.faces != {}
-    assert x_world.faces == {sue_str: sue_value}
+    assert x_world.faces == {sue_str: sue_bridgeunit}
 
 
 def test_WorldUnit_set_face_id_SetsAttr_Scenario1_NoValue():
@@ -99,7 +106,7 @@ def test_WorldUnit_set_face_id_SetsAttr_Scenario1_NoValue():
 
     # THEN
     assert x_world.faces != {}
-    assert x_world.faces == {sue_str: 0}
+    assert x_world.faces == {sue_str: bridgeunit_shop(sue_str)}
 
 
 def test_BridgeUnit_face_id_exists_ReturnsObj():
@@ -115,19 +122,19 @@ def test_BridgeUnit_face_id_exists_ReturnsObj():
     assert x_world.face_id_exists(sue_str)
 
 
-def test_BridgeUnit_get_face_id_value_ReturnsObj():
+def test_BridgeUnit_get_face_id_bridgeunit_ReturnsObj():
     # ESTABLISH
     x_world = worldunit_shop()
+    slash_str = "/"
     sue_str = "Sue"
-    sue_value = 33
-    assert x_world.get_face_id_value(sue_str) is None
-    assert x_world.get_face_id_value(sue_str) != sue_value
+    sue_bridgeunit = bridgeunit_shop(sue_str, slash_str)
+    assert x_world.get_face_id_bridgeunit(sue_str) is None
 
     # WHEN
-    x_world.set_face_id(sue_str, sue_value)
+    x_world.set_face_id(sue_str, sue_bridgeunit)
 
     # THEN
-    assert x_world.get_face_id_value(sue_str) == sue_value
+    assert x_world.get_face_id_bridgeunit(sue_str) == sue_bridgeunit
 
 
 def test_BridgeUnit_del_face_id_ReturnsObj():
@@ -135,19 +142,19 @@ def test_BridgeUnit_del_face_id_ReturnsObj():
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_value = 33
-    bob_value = 44
-    x_world.set_face_id(sue_str, sue_value)
-    x_world.set_face_id(bob_str, bob_value)
-    assert x_world.get_face_id_value(sue_str) == sue_value
-    assert x_world.get_face_id_value(bob_str) == bob_value
+    sue_bridgeunit = bridgeunit_shop(sue_str)
+    bob_bridgeunit = bridgeunit_shop(bob_str)
+    x_world.set_face_id(sue_str, sue_bridgeunit)
+    x_world.set_face_id(bob_str, bob_bridgeunit)
+    assert x_world.get_face_id_bridgeunit(sue_str) == sue_bridgeunit
+    assert x_world.get_face_id_bridgeunit(bob_str) == bob_bridgeunit
 
     # WHEN
     x_world.del_face_id(sue_str)
 
     # THEN
-    assert x_world.get_face_id_value(sue_str) is None
-    assert x_world.get_face_id_value(bob_str) == bob_value
+    assert x_world.get_face_id_bridgeunit(sue_str) is None
+    assert x_world.get_face_id_bridgeunit(bob_str) == bob_bridgeunit
 
 
 def test_WorldUnit_del_all_face_id_SetsAttr():
@@ -155,23 +162,23 @@ def test_WorldUnit_del_all_face_id_SetsAttr():
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_value = 33
-    bob_value = 44
-    x_world.set_face_id(sue_str, sue_value)
-    x_world.set_face_id(bob_str, bob_value)
-    assert x_world.get_face_id_value(sue_str) == sue_value
-    assert x_world.get_face_id_value(bob_str) == bob_value
+    sue_bridgeunit = bridgeunit_shop(sue_str)
+    bob_bridgeunit = bridgeunit_shop(bob_str)
+    x_world.set_face_id(sue_str, sue_bridgeunit)
+    x_world.set_face_id(bob_str, bob_bridgeunit)
+    assert x_world.get_face_id_bridgeunit(sue_str) == sue_bridgeunit
+    assert x_world.get_face_id_bridgeunit(bob_str) == bob_bridgeunit
 
     # WHEN
     x_world.del_all_face_id()
 
     # THEN
-    assert x_world.get_face_id_value(sue_str) is None
-    assert x_world.get_face_id_value(bob_str) is None
+    assert x_world.get_face_id_bridgeunit(sue_str) is None
+    assert x_world.get_face_id_bridgeunit(bob_str) is None
     assert x_world.faces == {}
 
 
-def test_BridgeUnit_face_ids_empty_ReturnsObj():
+def test_WorldUnit_face_ids_empty_ReturnsObj():
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
@@ -191,6 +198,70 @@ def test_BridgeUnit_face_ids_empty_ReturnsObj():
     assert x_world.face_ids_empty()
 
 
+def test_WorldUnit_save_face_files_SavesFiles(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_world = worldunit_shop()
+    sue_str = "Sue"
+    bob_str = "Bob"
+    x_world.set_face_id(sue_str)
+    x_world.set_face_id(bob_str)
+    sue_dir = create_file_path(x_world._faces_dir, sue_str)
+    bob_dir = create_file_path(x_world._faces_dir, bob_str)
+    assert os_path_exists(bob_dir) is False
+    assert os_path_exists(sue_dir) is False
+
+    # WHEN
+    x_world.save_face_files(sue_str)
+
+    # THEN
+    assert os_path_exists(bob_dir) is False
+    assert os_path_exists(sue_dir)
+
+
+def test_WorldUnit_face_files_exist_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_world = worldunit_shop()
+    sue_str = "Sue"
+    bob_str = "Bob"
+    x_world.set_face_id(sue_str)
+    x_world.set_face_id(bob_str)
+    sue_dir = create_file_path(x_world._faces_dir, sue_str)
+    bob_dir = create_file_path(x_world._faces_dir, bob_str)
+    assert os_path_exists(bob_dir) is False
+    assert os_path_exists(sue_dir) is False
+    assert x_world.face_files_exists(bob_str) is False
+    assert x_world.face_files_exists(sue_str) is False
+
+    # WHEN
+    x_world.save_face_files(sue_str)
+
+    # THEN
+    assert os_path_exists(bob_dir) is False
+    assert os_path_exists(sue_dir)
+    assert x_world.face_files_exists(bob_str) is False
+    assert x_world.face_files_exists(sue_str)
+
+
+# def test_WorldUnit_open_face_from_files_ReturnsObj(env_dir_setup_cleanup):
+#     # ESTABLISH
+#     x_world = worldunit_shop()
+#     sue_str = "Sue"
+#     bob_str = "Bob"
+#     x_world.set_face_id(sue_str)
+#     x_world.set_face_id(bob_str)
+#     sue_dir = create_file_path(x_world._faces_dir, sue_str)
+#     bob_dir = create_file_path(x_world._faces_dir, bob_str)
+#     assert os_path_exists(sue_dir) is False
+#     assert os_path_exists(bob_dir) is False
+
+#     # WHEN
+#     x_world.save_face_files(sue_str)
+
+#     # THEN
+#     assert os_path_exists(sue_dir)
+#     assert os_path_exists(bob_dir) is False
+
+
 def test_WorldUnit_set_all_face_ids_from_dirs_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
@@ -206,7 +277,7 @@ def test_WorldUnit_set_all_face_ids_from_dirs_SetsAttr(env_dir_setup_cleanup):
     assert x_world.face_ids_empty()
 
     # WHEN
-    x_world.set_all_face_ids_from_dirs()
+    x_world._set_all_face_ids_from_dirs()
 
     # THEN
     assert x_world.face_id_exists(sue_str)
@@ -216,13 +287,47 @@ def test_WorldUnit_set_all_face_ids_from_dirs_SetsAttr(env_dir_setup_cleanup):
 
     # WHEN
     delete_dir(f"{x_world._faces_dir}/{zia_str}")
-    x_world.set_all_face_ids_from_dirs()
+    x_world._set_all_face_ids_from_dirs()
 
     # THEN
     assert x_world.face_id_exists(sue_str)
     assert x_world.face_id_exists(bob_str)
     assert x_world.face_id_exists(zia_str) is False
     assert x_world.face_ids_empty() is False
+
+
+# def test_WorldUnit_save_face_id_elements_ChangesFiles(env_dir_setup_cleanup):
+#     # ESTABLISH
+#     x_world = worldunit_shop()
+#     sue_str = "Sue"
+#     bob_str = "Bob"
+#     zia_str = "Zia"
+#     save_file(f"{x_world._faces_dir}/{sue_str}", "temp.txt", "")
+#     save_file(f"{x_world._faces_dir}/{bob_str}", "temp.txt", "")
+#     save_file(f"{x_world._faces_dir}/{zia_str}", "temp.txt", "")
+#     assert x_world.face_id_exists(sue_str) is False
+#     assert x_world.face_id_exists(bob_str) is False
+#     assert x_world.face_id_exists(zia_str) is False
+#     assert x_world.face_ids_empty()
+
+#     # WHEN
+#     x_world._set_all_face_ids_from_dirs()
+
+#     # THEN
+#     assert x_world.face_id_exists(sue_str)
+#     assert x_world.face_id_exists(bob_str)
+#     assert x_world.face_id_exists(zia_str)
+#     assert x_world.face_ids_empty() is False
+
+#     # WHEN
+#     delete_dir(f"{x_world._faces_dir}/{zia_str}")
+#     x_world._set_all_face_ids_from_dirs()
+
+#     # THEN
+#     assert x_world.face_id_exists(sue_str)
+#     assert x_world.face_id_exists(bob_str)
+#     assert x_world.face_id_exists(zia_str) is False
+#     assert x_world.face_ids_empty() is False
 
 
 def test_init_fiscalunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
