@@ -17,6 +17,7 @@ from src.f09_filter.filter import (
     FilterUnit,
     filterunit_shop,
     save_all_csvs_from_filterunit,
+    init_filterunit_from_dir,
 )
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
@@ -44,7 +45,7 @@ class WorldUnit:
     def face_id_exists(self, face_id: FaceID) -> bool:
         return self.faces.get(face_id) != None
 
-    def get_face_id_filterunit(self, face_id: FaceID) -> FilterUnit:
+    def get_filterunit(self, face_id: FaceID) -> FilterUnit:
         return self.faces.get(face_id)
 
     def del_face_id(self, face_id: FaceID):
@@ -56,12 +57,12 @@ class WorldUnit:
     def face_ids_empty(self) -> bool:
         return self.faces == {}
 
-    def save_face_files(self, face_id: FaceID):
-        x_filterunit = self.get_face_id_filterunit(face_id)
+    def save_filterunit_files(self, face_id: FaceID):
+        x_filterunit = self.get_filterunit(face_id)
         face_dir = get_face_dir(self._faces_dir, face_id)
         save_all_csvs_from_filterunit(face_dir, x_filterunit)
 
-    def face_files_exists(self, face_id: FaceID) -> bool:
+    def face_dir_exists(self, face_id: FaceID) -> bool:
         face_dir = get_face_dir(self._faces_dir, face_id)
         return os_path_exists(face_dir)
 
@@ -72,6 +73,10 @@ class WorldUnit:
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
+
+    def load_filterunit_from_files(self, face_id: FaceID):
+        x_filterunit = init_filterunit_from_dir(get_face_dir(self._faces_dir, face_id))
+        self.set_face_id(face_id, x_filterunit)
 
     def get_dict(self) -> dict:
         return {
