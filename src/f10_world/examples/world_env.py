@@ -1,9 +1,14 @@
 from src.f00_instrument.file import delete_dir
+from src.f01_road.road import WorldID, get_default_world_id
 from pytest import fixture as pytest_fixture
 
 
+def get_test_world_id() -> WorldID:
+    return get_default_world_id()
+
+
 def get_test_worlds_dir():
-    return "src/f10_world/examples/fiscals"
+    return "src/f10_world/examples/worlds"
 
 
 @pytest_fixture()

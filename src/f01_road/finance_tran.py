@@ -11,7 +11,7 @@ from src.f00_instrument.dict_tool import (
     del_in_nested_dict,
 )
 from src.f01_road.finance import FundNum, TimeLinePoint, default_fund_pool
-from src.f01_road.road import AcctID, OwnerID, FiscalID
+from src.f01_road.road import AcctID, OwnerID, FiscalID, get_default_fiscal_id_roadnode
 from dataclasses import dataclass
 
 
@@ -322,3 +322,19 @@ def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, PurviewEp
         x_purview_episode = get_purviewepisode_from_dict(x_episode_dict)
         x_dict[x_purview_episode.timestamp] = x_purview_episode
     return x_dict
+
+
+@dataclass
+class TimeConversion:
+    fiscal_id: str = None
+    addin: str = None
+
+
+def timeconversion_shop(
+    fiscal_id: FiscalID = None, addin: int = None
+) -> TimeConversion:
+    if fiscal_id is None:
+        fiscal_id = get_default_fiscal_id_roadnode()
+    if addin is None:
+        addin = 0
+    return TimeConversion(fiscal_id=fiscal_id, addin=addin)

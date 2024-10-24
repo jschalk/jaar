@@ -1,4 +1,5 @@
 from src.f01_road.finance import (
+    TimeLinePoint,
     FundCoin,
     FundNum,
     BitNum,
@@ -18,6 +19,7 @@ from src.f01_road.finance import (
     valid_finance_ratio,
     get_net,
 )
+from src.f01_road.road import FiscalID
 from inspect import getdoc as inspect_getdoc
 from pytest import raises as pytest_raises
 
@@ -206,3 +208,8 @@ def test_get_net_ReturnsObj():
         str(excinfo.value)
         == "get_net x_give=-4 and x_take=-5. Only non-negative numbers allowed."
     )
+
+
+def test_TimeLinePoint_Exists():
+    # ESTABLISH / WHEN / THEN
+    assert TimeLinePoint(8) == 8
