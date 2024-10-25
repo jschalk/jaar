@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_file_path, dir_files
+from src.f00_instrument.file import create_file_path, dir_files, delete_dir
 from src.f00_instrument.dict_tool import (
     get_empty_dict_if_none,
     get_0_if_None,
@@ -57,25 +57,29 @@ class WorldUnit:
     def face_ids_empty(self) -> bool:
         return self.faces == {}
 
+    def _face_dir(self, face_id: FaceID) -> str:
+        return create_file_path(self._faces_dir, face_id)
+
     def save_filterunit_files(self, face_id: FaceID):
         x_filterunit = self.get_filterunit(face_id)
-        face_dir = get_face_dir(self._faces_dir, face_id)
-        save_all_csvs_from_filterunit(face_dir, x_filterunit)
+        save_all_csvs_from_filterunit(self._face_dir(face_id), x_filterunit)
 
     def face_dir_exists(self, face_id: FaceID) -> bool:
-        face_dir = get_face_dir(self._faces_dir, face_id)
-        return os_path_exists(face_dir)
+        return os_path_exists(self._face_dir(face_id))
 
     def _set_all_face_ids_from_dirs(self):
         self.del_all_face_id()
         for dir_name in dir_files(self._faces_dir, include_files=False).keys():
             self.set_face_id(dir_name)
 
+    def _delete_filterunit_dir(self, face_id: FaceID):
+        delete_dir(self._face_dir(face_id))
+
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
     def load_filterunit_from_files(self, face_id: FaceID):
-        x_filterunit = init_filterunit_from_dir(get_face_dir(self._faces_dir, face_id))
+        x_filterunit = init_filterunit_from_dir(self._face_dir(face_id))
         self.set_face_id(face_id, x_filterunit)
 
     def get_dict(self) -> dict:
@@ -112,7 +116,3 @@ def worldunit_shop(
 
 def init_fiscalunits_from_dirs(x_dirs: list[str]) -> list[FiscalUnit]:
     return []
-
-
-def get_face_dir(faces_dir: str, face_id: FaceID) -> str:
-    return create_file_path(faces_dir, face_id)

@@ -243,7 +243,7 @@ def test_WorldUnit_face_dir_exist_ReturnsObj(env_dir_setup_cleanup):
     assert x_world.face_dir_exists(sue_str)
 
 
-def test_WorldUnit_load_filterunit_from_files_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_load_filterunit_from_files_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
@@ -266,6 +266,30 @@ def test_WorldUnit_load_filterunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     after_filterunit = x_world.get_filterunit(sue_str)
     assert after_filterunit.otx_to_inx_exists(road_str(), bob_otx, bob2_inx)
     assert after_filterunit.otx_to_inx_exists(road_str(), bob_otx, bob3_inx) is False
+
+
+def test_WorldUnit_delete_filterunit_dir_SetsAttrDeletesDir(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_world = worldunit_shop()
+    sue_str = "Sue"
+    bob_str = "Bob"
+    x_world.set_face_id(sue_str)
+    x_world.set_face_id(bob_str)
+    x_world.save_filterunit_files(sue_str)
+    x_world.save_filterunit_files(bob_str)
+    assert x_world.face_id_exists(sue_str)
+    assert x_world.face_id_exists(bob_str)
+    assert x_world.face_dir_exists(sue_str)
+    assert x_world.face_dir_exists(bob_str)
+
+    # WHEN
+    x_world._delete_filterunit_dir(sue_str)
+
+    # THEN
+    assert x_world.face_id_exists(sue_str)
+    assert x_world.face_id_exists(bob_str)
+    assert x_world.face_dir_exists(sue_str) is False
+    assert x_world.face_dir_exists(bob_str)
 
 
 # def test_WorldUnit_open_face_from_files_ReturnsObj(env_dir_setup_cleanup):
