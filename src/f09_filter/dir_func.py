@@ -1,4 +1,4 @@
-from src.f00_instrument.file import dir_files, open_file
+from src.f00_instrument.file import get_dir_file_strs, open_file
 from src.f00_instrument.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f04_gift.atom_config import get_atom_args_python_types
 from src.f09_filter.filter import (
@@ -41,7 +41,7 @@ def filter_face_dir_files(face_dir: str):
     bridge_filename = "bridge.json"
     filterunit_json = open_file(face_dir, bridge_filename)
     face_filterunit = get_filterunit_from_json(filterunit_json)
-    otx_dir_files = dir_files(otx_dir, delete_extensions=False)
+    otx_dir_files = get_dir_file_strs(otx_dir, delete_extensions=False)
     for x_file_name in otx_dir_files.keys():
         x_dt = open_csv(otx_dir, x_file_name)
         filter_all_columns_dataframe(x_dt, face_filterunit)

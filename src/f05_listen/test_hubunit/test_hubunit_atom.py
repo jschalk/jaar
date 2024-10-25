@@ -1,4 +1,4 @@
-from src.f00_instrument.file import dir_files as file_dir_files
+from src.f00_instrument.file import get_dir_file_strs
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.example_listen_atoms import (
     get_atom_example_factunit_knee,
@@ -204,7 +204,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     yao_hubunit.save_atom_file(get_atom_example_itemunit_ball(x_fiscal_id))
     yao_hubunit.save_atom_file(get_atom_example_itemunit_knee(x_fiscal_id))
     yao_hubunit.save_atom_file(get_atom_example_factunit_knee(x_fiscal_id))
-    print(f"{file_dir_files(yao_hubunit.atoms_dir()).keys()=}")
+    print(f"{get_dir_file_strs(yao_hubunit.atoms_dir()).keys()=}")
 
     # WHEN
     yao_bud = yao_hubunit._get_bud_from_atom_files()

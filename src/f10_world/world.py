@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_file_path, dir_files, delete_dir
+from src.f00_instrument.file import create_file_path, get_dir_file_strs, delete_dir
 from src.f00_instrument.dict_tool import (
     get_empty_dict_if_none,
     get_0_if_None,
@@ -69,7 +69,7 @@ class WorldUnit:
 
     def _set_all_face_ids_from_dirs(self):
         self.del_all_face_id()
-        for dir_name in dir_files(self._faces_dir, include_files=False).keys():
+        for dir_name in get_dir_file_strs(self._faces_dir, include_files=False).keys():
             self.set_face_id(dir_name)
 
     def _delete_filterunit_dir(self, face_id: FaceID):

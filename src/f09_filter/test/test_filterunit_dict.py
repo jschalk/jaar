@@ -1,4 +1,4 @@
-from src.f00_instrument.file import dir_files
+from src.f00_instrument.file import get_dir_file_strs
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import road_str, type_AcctID_str, type_GroupID_str
 from src.f09_filter.filter import (
@@ -194,7 +194,7 @@ def test_save_all_csvs_from_filterunit_SavesFiles(env_dir_setup_cleanup):
     assert os_path_exists(groupid_explicit_label_csv_path) is False
     assert os_path_exists(road_otx_to_inx_csv_path) is False
     assert os_path_exists(road_explicit_label_csv_path) is False
-    assert len(dir_files(bridge_dir)) == 0
+    assert len(get_dir_file_strs(bridge_dir)) == 0
 
     # WHEN
     save_all_csvs_from_filterunit(bridge_dir, sue_filterunit)
@@ -206,7 +206,7 @@ def test_save_all_csvs_from_filterunit_SavesFiles(env_dir_setup_cleanup):
     assert os_path_exists(groupid_explicit_label_csv_path)
     assert os_path_exists(road_otx_to_inx_csv_path)
     assert os_path_exists(road_explicit_label_csv_path)
-    assert len(dir_files(bridge_dir)) == 6
+    assert len(get_dir_file_strs(bridge_dir)) == 6
 
 
 def test_load_otx_to_inx_from_csv_SetsAttr(env_dir_setup_cleanup):

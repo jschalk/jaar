@@ -1,4 +1,4 @@
-from src.f00_instrument.file import save_file, dir_files
+from src.f00_instrument.file import save_file, get_dir_file_strs
 from src.f00_instrument.dict_tool import (
     get_empty_dict_if_none,
     str_in_dict,
@@ -541,7 +541,7 @@ def create_dir_valid_filterunit(x_dir: str) -> FilterUnit:
     unknown_word_set = set()
     otx_road_delimiter_set = set()
     inx_road_delimiter_set = set()
-    for x_filename in dir_files(x_dir).keys():
+    for x_filename in get_dir_file_strs(x_dir).keys():
         x_dt = open_csv(x_dir, x_filename)
         face_id_set.update(x_dt.face_id.unique())
         unknown_word_set.update(x_dt.unknown_word.unique())
