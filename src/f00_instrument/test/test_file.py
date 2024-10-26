@@ -13,6 +13,7 @@ from src.f00_instrument.file import (
     is_path_existent_or_probably_creatable,
     get_all_dirs_with_file,
     get_integer_filenames,
+    get_all_filenames,
 )
 from src.f00_instrument.examples.instrument_env import (
     get_instrument_temp_env_dir,
@@ -458,3 +459,75 @@ def test_get_all_dirs_with_file_ReturnsCorrectDirectorys(env_dir_setup_cleanup):
 
     # THEN
     assert directory_set == {iowa_rel_dir, ohio_rel_dir}
+
+
+def test_get_all_filenames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x1_file_name = "x1.txt"
+    x2_file_name = "x2.txt"
+    iowa_rel_dir = "iowa/dallas"
+    ohio_rel_dir = "ohio/elpaso"
+    iowa_dir = f"{env_dir}/{iowa_rel_dir}"
+    ohio_dir = f"{env_dir}/{ohio_rel_dir}"
+    save_file(iowa_dir, x1_file_name, "")
+    save_file(iowa_dir, x2_file_name, "")
+    save_file(ohio_dir, x2_file_name, "")
+
+    # WHEN
+    filenames_set = get_all_filenames(env_dir)
+
+    # THEN
+    assert (iowa_rel_dir, x1_file_name) in filenames_set
+    assert (iowa_rel_dir, x2_file_name) in filenames_set
+    assert (ohio_rel_dir, x2_file_name) in filenames_set
+    assert len(filenames_set) == 3
+
+
+def test_get_all_filenames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x1_file_name = "x1.txt"
+    x2_file_name = "x2.txt"
+    iowa_rel_dir = "iowa/dallas"
+    ohio_rel_dir = "ohio/elpaso"
+    iowa_dir = f"{env_dir}/{iowa_rel_dir}"
+    ohio_dir = f"{env_dir}/{ohio_rel_dir}"
+    save_file(iowa_dir, x1_file_name, "")
+    save_file(iowa_dir, x2_file_name, "")
+    save_file(ohio_dir, x2_file_name, "")
+
+    # WHEN
+    filenames_set = get_all_filenames(env_dir)
+
+    # THEN
+    assert (iowa_rel_dir, x1_file_name) in filenames_set
+    assert (iowa_rel_dir, x2_file_name) in filenames_set
+    assert (ohio_rel_dir, x2_file_name) in filenames_set
+    assert len(filenames_set) == 3
+
+
+def test_get_all_filenames_ReturnsObj_Scenario1_FilterByExtension(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x1_file_name = "x1.txt"
+    x2_file_name = "x2.json"
+    iowa_rel_dir = "iowa/dallas"
+    ohio_rel_dir = "ohio/elpaso"
+    iowa_dir = f"{env_dir}/{iowa_rel_dir}"
+    ohio_dir = f"{env_dir}/{ohio_rel_dir}"
+    save_file(iowa_dir, x1_file_name, "")
+    save_file(iowa_dir, x2_file_name, "")
+    save_file(ohio_dir, x2_file_name, "")
+
+    # WHEN
+    filenames_set = get_all_filenames(env_dir, include_extensions={"json"})
+
+    # THEN
+    print(f"{filenames_set=}")
+    assert (iowa_rel_dir, x1_file_name) not in filenames_set
+    assert (iowa_rel_dir, x2_file_name) in filenames_set
+    assert (ohio_rel_dir, x2_file_name) in filenames_set
+    assert len(filenames_set) == 2
