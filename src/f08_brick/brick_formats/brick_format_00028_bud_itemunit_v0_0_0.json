@@ -1,5 +1,7 @@
 {
-    "atom_categorys": ["bud_itemunit"],
+    "atom_categorys": [
+        "bud_itemunit"
+    ],
     "attributes": {
         "addin": {
             "column_order": 12
@@ -12,6 +14,10 @@
         },
         "denom": {
             "column_order": 10
+        },
+        "fiscal_id": {
+            "column_order": 0,
+            "sort_order": 0
         },
         "gogo_want": {
             "column_order": 13
@@ -43,12 +49,9 @@
         "problem_bool": {
             "column_order": 6
         },
-        "fiscal_id": {
-            "column_order": 0,
-            "sort_order": 0
-        },
         "stop_want": {
             "column_order": 14
         }
-    }
+    },
+    "brick_number": "br00028"
 }

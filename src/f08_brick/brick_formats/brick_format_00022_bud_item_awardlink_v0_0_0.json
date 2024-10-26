@@ -1,5 +1,7 @@
 {
-    "atom_categorys": ["bud_item_awardlink"],
+    "atom_categorys": [
+        "bud_item_awardlink"
+    ],
     "attributes": {
         "awardee_id": {
             "column_order": 3,
@@ -23,5 +25,6 @@
         "take_force": {
             "column_order": 4
         }
-    }
+    },
+    "brick_number": "br00022"
 }

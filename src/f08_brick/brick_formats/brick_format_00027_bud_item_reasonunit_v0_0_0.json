@@ -1,5 +1,7 @@
 {
-    "atom_categorys": ["bud_item_reasonunit"],
+    "atom_categorys": [
+        "bud_item_reasonunit"
+    ],
     "attributes": {
         "base": {
             "column_order": 3,
@@ -8,17 +10,18 @@
         "base_item_active_requisite": {
             "column_order": 4
         },
-        "owner_id": {
-            "column_order": 1,
-            "sort_order": 1
-        },
         "fiscal_id": {
             "column_order": 0,
             "sort_order": 0
+        },
+        "owner_id": {
+            "column_order": 1,
+            "sort_order": 1
         },
         "road": {
             "column_order": 2,
             "sort_order": 2
         }
-    }
+    },
+    "brick_number": "br00027"
 }

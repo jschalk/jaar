@@ -19,6 +19,10 @@ def get_brick_config_dict() -> dict:
     )
 
 
+def brick_number_str() -> str:
+    return "brick_number"
+
+
 def column_order_str() -> str:
     return "column_order"
 
@@ -186,6 +190,32 @@ def get_brick_filenames() -> set[str]:
         brick_format_00028_bud_itemunit_v0_0_0(),
         brick_format_00029_budunit_v0_0_0(),
         brick_format_00036_problem_healer_v0_0_0(),
+    }
+
+
+def get_brick_numbers() -> set[str]:
+    return {
+        "br00000",
+        "br00001",
+        "br00002",
+        "br00003",
+        "br00004",
+        "br00005",
+        "br00011",
+        "br00012",
+        "br00013",
+        "br00019",
+        "br00020",
+        "br00021",
+        "br00022",
+        "br00023",
+        "br00024",
+        "br00025",
+        "br00026",
+        "br00027",
+        "br00028",
+        "br00029",
+        "br00036",
     }
 
 

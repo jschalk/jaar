@@ -1,14 +1,17 @@
 {
-    "atom_categorys": ["budunit"],
+    "atom_categorys": [
+        "budunit"
+    ],
     "attributes": {
-        "respect_bit": {
-            "column_order": 6
-        },
         "credor_respect": {
             "column_order": 5
         },
         "debtor_respect": {
             "column_order": 4
+        },
+        "fiscal_id": {
+            "column_order": 0,
+            "sort_order": 0
         },
         "fund_coin": {
             "column_order": 3
@@ -26,15 +29,15 @@
         "penny": {
             "column_order": 8
         },
-        "fiscal_id": {
-            "column_order": 0,
-            "sort_order": 0
-        },
         "purview_timestamp": {
             "column_order": 10
+        },
+        "respect_bit": {
+            "column_order": 6
         },
         "tally": {
             "column_order": 9
         }
-    }
+    },
+    "brick_number": "br00029"
 }

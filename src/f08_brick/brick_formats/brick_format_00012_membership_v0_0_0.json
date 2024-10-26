@@ -1,9 +1,14 @@
 {
-    "atom_categorys": ["bud_acct_membership"],
+    "atom_categorys": [
+        "bud_acct_membership"
+    ],
     "attributes": {
         "acct_id": {
             "column_order": 2,
             "sort_order": 0
+        },
+        "fiscal_id": {
+            "column_order": 0
         },
         "group_id": {
             "column_order": 3,
@@ -11,9 +16,7 @@
         },
         "owner_id": {
             "column_order": 1
-        },
-        "fiscal_id": {
-            "column_order": 0
         }
-    }
+    },
+    "brick_number": "br00012"
 }
