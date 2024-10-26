@@ -2,6 +2,21 @@ from src.f00_instrument.file import open_file
 from src.f00_instrument.dict_tool import get_dict_from_json
 from src.f01_road.jaar_config import get_json_filename
 from src.f08_brick.examples.brick_env import src_brick_dir
+from os import getcwd as os_getcwd
+
+
+def get_brick_config_file_name() -> str:
+    return "brick_config.json"
+
+
+def config_file_dir() -> str:
+    return f"{os_getcwd()}/src/f08_brick"
+
+
+def get_brick_config_dict() -> dict:
+    return get_dict_from_json(
+        open_file(config_file_dir(), get_brick_config_file_name())
+    )
 
 
 def column_order_str() -> str:

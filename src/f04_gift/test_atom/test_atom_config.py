@@ -108,7 +108,7 @@ def test_atom_config_HasCorrect_category():
     assert is_category_ref("itemroot") is False
 
 
-def check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
+def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
     for category, category_dict in atom_config_dict.items():
         if category_dict.get(atom_insert()) is not None:
             category_insert = category_dict.get(atom_insert())
@@ -143,7 +143,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasDeltaOrderGroup():
     mog = atom_order_str
 
     # WHEN / THEN
-    assert check_every_crud_dict_has_element(get_atom_config_dict(), atom_order_str)
+    assert _check_every_crud_dict_has_element(get_atom_config_dict(), atom_order_str)
     # # Simple script for editing atom_config.json
     # set_mog(atom_insert(), bud_acctunit_str(), 0)
     # set_mog(atom_insert(), bud_acct_membership_str(), 1)

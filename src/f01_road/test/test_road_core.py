@@ -29,6 +29,11 @@ from src.f01_road.road import (
     roadunit_valid_dir_path,
     all_roadunits_between,
     is_roadnode,
+    WorldID,
+    get_default_world_id,
+    TimeLineLabel,
+    FaceID,
+    get_default_face_id,
 )
 from pytest import raises as pytest_raises
 from dataclasses import dataclass
@@ -43,10 +48,8 @@ def test_HealerID_exists():
     bob_healer_id = HealerID(bob_str)
     # THEN
     assert bob_healer_id == bob_str
-    assert (
-        inspect_getdoc(bob_healer_id)
-        == "A RoadNode used to identify a Problem's Healer"
-    )
+    doc_str = "A RoadNode used to identify a Problem's Healer"
+    assert inspect_getdoc(bob_healer_id) == doc_str
 
 
 def test_OwnerID_exists():
@@ -56,10 +59,8 @@ def test_OwnerID_exists():
     bob_owner_id = OwnerID(bob_str)
     # THEN
     assert bob_owner_id == bob_str
-    assert (
-        inspect_getdoc(bob_owner_id)
-        == "A RoadNode used to identify a BudUnit's owner_id"
-    )
+    doc_str = "A RoadNode used to identify a BudUnit's owner_id"
+    assert inspect_getdoc(bob_owner_id) == doc_str
 
 
 def test_AcctID_exists():
@@ -69,10 +70,8 @@ def test_AcctID_exists():
     bob_acct_id = AcctID(bob_str)
     # THEN
     assert bob_acct_id == bob_str
-    assert (
-        inspect_getdoc(bob_acct_id)
-        == "Every AcctID object is OwnerID, must follow OwnerID format."
-    )
+    doc_str = "Every AcctID object is OwnerID, must follow OwnerID format."
+    assert inspect_getdoc(bob_acct_id) == doc_str
 
 
 def test_GroupID_exists():
@@ -88,10 +87,10 @@ def test_RoadNode_exists():
     x_road = RoadNode(empty_str)
     # THEN
     assert x_road == empty_str
-    assert (
-        inspect_getdoc(x_road)
-        == "A string presentation of a tree node. Nodes cannot contain RoadUnit delimiter"
+    doc_str = (
+        "A string presentation of a tree node. Nodes cannot contain RoadUnit delimiter"
     )
+    assert inspect_getdoc(x_road) == doc_str
 
 
 def test_Roadnode_is_node_ReturnsCorrectBool():
@@ -111,10 +110,8 @@ def test_RoadUnit_exists():
     x_road = RoadUnit(empty_str)
     # THEN
     assert x_road == empty_str
-    assert (
-        inspect_getdoc(x_road)
-        == "A string presentation of a tree path. RoadNodes are seperated by road delimiter"
-    )
+    doc_str = "A string presentation of a tree path. RoadNodes are seperated by road delimiter"
+    assert inspect_getdoc(x_road) == doc_str
 
 
 def test_DoarUnit_exists():
@@ -124,10 +121,41 @@ def test_DoarUnit_exists():
     x_road = DoarUnit(empty_str)
     # THEN
     assert x_road == empty_str
-    assert (
-        inspect_getdoc(x_road)
-        == "DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. RoadNodes are seperated by road delimiter."
-    )
+    doc_str = "DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. RoadNodes are seperated by road delimiter."
+    assert inspect_getdoc(x_road) == doc_str
+
+
+def test_TimeLineLabel_exists():
+    # ESTABLISH
+    empty_str = ""
+    # WHEN
+    x_timelinelabel = TimeLineLabel(empty_str)
+    # THEN
+    assert x_timelinelabel == empty_str
+    doc_str = "TimeLineLabel is required for every TimeLineUnit. It is a RoadNode that must not container the road_delimiter."
+    assert inspect_getdoc(x_timelinelabel) == doc_str
+
+
+def test_WorldID_Exists():
+    # ESTABLISH / WHEN / THEN
+    assert WorldID() == ""
+    assert WorldID("cookie") == "cookie"
+
+
+def test_get_default_world_id_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_default_world_id() == "TestingWorld3"
+
+
+def test_FaceID_Exists():
+    # ESTABLISH / WHEN / THEN
+    assert FaceID() == ""
+    assert FaceID("cookie") == "cookie"
+
+
+def test_get_default_face_id_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_default_face_id() == "Face1234"
 
 
 def test_road_is_sub_road_correctlyReturnsBool():

@@ -41,6 +41,12 @@ class AcctID(OwnerID):  # Created to help track the concept
     pass
 
 
+class TimeLineLabel(RoadNode):
+    "TimeLineLabel is required for every TimeLineUnit. It is a RoadNode that must not container the road_delimiter."
+
+    pass
+
+
 class RoadUnit(str):
     """A string presentation of a tree path. RoadNodes are seperated by road delimiter"""
 
@@ -55,6 +61,22 @@ class DoarUnit(str):
 
 class GroupID(str):  # Created to help track the concept
     pass
+
+
+class WorldID(str):
+    pass
+
+
+def get_default_world_id() -> WorldID:
+    return WorldID("TestingWorld3")
+
+
+class FaceID(str):
+    pass
+
+
+def get_default_face_id() -> FaceID:
+    return FaceID("Face1234")
 
 
 def default_road_delimiter_if_none(delimiter: str = None) -> str:

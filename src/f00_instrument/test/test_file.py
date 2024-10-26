@@ -1,7 +1,7 @@
 from src.f00_instrument.file import (
     create_file_path,
     create_dir,
-    dir_files,
+    get_dir_file_strs,
     save_file,
     open_file,
     count_files,
@@ -13,6 +13,7 @@ from src.f00_instrument.file import (
     is_path_existent_or_probably_creatable,
     get_all_dirs_with_file,
     get_integer_filenames,
+    get_all_filenames,
 )
 from src.f00_instrument.examples.instrument_env import (
     get_instrument_temp_env_dir,
@@ -170,7 +171,7 @@ def test_save_file_DoesNotReplaceFile(env_dir_setup_cleanup):
     assert open_file(env_dir, swim_file_name) == swim_old_file_str
 
 
-def test_dir_files_correctlyGrabsFileData(env_dir_setup_cleanup):
+def test_get_dir_file_strs_correctlyGrabsFileData(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_file_name = "x1.txt"
@@ -181,7 +182,7 @@ def test_dir_files_correctlyGrabsFileData(env_dir_setup_cleanup):
     save_file(dest_dir=env_dir, file_name=x2_file_name, file_str=x2_file_str)
 
     # WHEN
-    files_dict = dir_files(x_dir=env_dir)
+    files_dict = get_dir_file_strs(x_dir=env_dir)
 
     # THEN
     assert len(files_dict) == 2
@@ -189,7 +190,7 @@ def test_dir_files_correctlyGrabsFileData(env_dir_setup_cleanup):
     assert files_dict.get(x2_file_name) == x2_file_str
 
 
-def test_dir_files_delete_extensions_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_get_dir_file_strs_delete_extensions_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_name = "x1"
@@ -204,14 +205,14 @@ def test_dir_files_delete_extensions_ReturnsCorrectObj(env_dir_setup_cleanup):
     save_file(dest_dir=env_dir, file_name=x2_file_name, file_str=x2_file_str)
 
     # WHEN
-    files_dict = dir_files(x_dir=env_dir, delete_extensions=True)
+    files_dict = get_dir_file_strs(x_dir=env_dir, delete_extensions=True)
 
     # THEN
     assert files_dict.get(x1_name) == x1_file_str
     assert files_dict.get(x2_name) == x2_file_str
 
 
-def test_dir_files_returnsSubDirs(env_dir_setup_cleanup):
+def test_get_dir_file_strs_returnsSubDirs(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_name = "x1"
@@ -234,14 +235,16 @@ def test_dir_files_returnsSubDirs(env_dir_setup_cleanup):
     )
 
     # WHEN
-    files_dict = dir_files(x_dir=env_dir, delete_extensions=True, include_dirs=True)
+    files_dict = get_dir_file_strs(
+        x_dir=env_dir, delete_extensions=True, include_dirs=True
+    )
 
     # THEN
     assert files_dict.get(x1_name) is True
     assert files_dict.get(x2_name) is True
 
 
-def test_dir_files_doesNotReturnsFiles(env_dir_setup_cleanup):
+def test_get_dir_file_strs_doesNotReturnsFiles(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_name = "x1"
@@ -260,7 +263,7 @@ def test_dir_files_doesNotReturnsFiles(env_dir_setup_cleanup):
     )
 
     # WHEN
-    files_dict = dir_files(x_dir=env_dir, include_files=False)
+    files_dict = get_dir_file_strs(x_dir=env_dir, include_files=False)
 
     # THEN
     print(f"{files_dict.get(x1_file_name)=}")
@@ -456,3 +459,75 @@ def test_get_all_dirs_with_file_ReturnsCorrectDirectorys(env_dir_setup_cleanup):
 
     # THEN
     assert directory_set == {iowa_rel_dir, ohio_rel_dir}
+
+
+def test_get_all_filenames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x1_file_name = "x1.txt"
+    x2_file_name = "x2.txt"
+    iowa_rel_dir = "iowa/dallas"
+    ohio_rel_dir = "ohio/elpaso"
+    iowa_dir = f"{env_dir}/{iowa_rel_dir}"
+    ohio_dir = f"{env_dir}/{ohio_rel_dir}"
+    save_file(iowa_dir, x1_file_name, "")
+    save_file(iowa_dir, x2_file_name, "")
+    save_file(ohio_dir, x2_file_name, "")
+
+    # WHEN
+    filenames_set = get_all_filenames(env_dir)
+
+    # THEN
+    assert (iowa_rel_dir, x1_file_name) in filenames_set
+    assert (iowa_rel_dir, x2_file_name) in filenames_set
+    assert (ohio_rel_dir, x2_file_name) in filenames_set
+    assert len(filenames_set) == 3
+
+
+def test_get_all_filenames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x1_file_name = "x1.txt"
+    x2_file_name = "x2.txt"
+    iowa_rel_dir = "iowa/dallas"
+    ohio_rel_dir = "ohio/elpaso"
+    iowa_dir = f"{env_dir}/{iowa_rel_dir}"
+    ohio_dir = f"{env_dir}/{ohio_rel_dir}"
+    save_file(iowa_dir, x1_file_name, "")
+    save_file(iowa_dir, x2_file_name, "")
+    save_file(ohio_dir, x2_file_name, "")
+
+    # WHEN
+    filenames_set = get_all_filenames(env_dir)
+
+    # THEN
+    assert (iowa_rel_dir, x1_file_name) in filenames_set
+    assert (iowa_rel_dir, x2_file_name) in filenames_set
+    assert (ohio_rel_dir, x2_file_name) in filenames_set
+    assert len(filenames_set) == 3
+
+
+def test_get_all_filenames_ReturnsObj_Scenario1_FilterByExtension(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x1_file_name = "x1.txt"
+    x2_file_name = "x2.json"
+    iowa_rel_dir = "iowa/dallas"
+    ohio_rel_dir = "ohio/elpaso"
+    iowa_dir = f"{env_dir}/{iowa_rel_dir}"
+    ohio_dir = f"{env_dir}/{ohio_rel_dir}"
+    save_file(iowa_dir, x1_file_name, "")
+    save_file(iowa_dir, x2_file_name, "")
+    save_file(ohio_dir, x2_file_name, "")
+
+    # WHEN
+    filenames_set = get_all_filenames(env_dir, include_extensions={"json"})
+
+    # THEN
+    print(f"{filenames_set=}")
+    assert (iowa_rel_dir, x1_file_name) not in filenames_set
+    assert (iowa_rel_dir, x2_file_name) in filenames_set
+    assert (ohio_rel_dir, x2_file_name) in filenames_set
+    assert len(filenames_set) == 2

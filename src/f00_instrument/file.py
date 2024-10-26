@@ -100,7 +100,7 @@ def count_files(dir_path: str) -> int:
     )
 
 
-def dir_files(
+def get_dir_file_strs(
     x_dir: str, delete_extensions: bool = None, include_dirs=None, include_files=None
 ) -> dict[str, str]:
     include_dirs = True if include_dirs is None else include_dirs
@@ -293,3 +293,20 @@ def get_all_dirs_with_file(x_file_name: str, x_dir: pathlib_Path) -> set[str]:
 def get_parts_dir(x_dir: pathlib_Path) -> list[str]:
     x_parts = pathlib_Path(x_dir).parts
     return [str(x_part) for x_part in x_parts]
+
+
+def get_all_filenames(
+    x_dir: str, include_extensions: set[str] = None
+) -> set[tuple[str, str]]:
+    if include_extensions is None:
+        include_extensions = set()
+    x_set = set()
+    for dirpath, dirnames, filenames in os_walk(x_dir):
+        for filename in filenames:
+            obj_extension = os_path_splitext(filename)[1].replace(".", "")
+            if not include_extensions or obj_extension in include_extensions:
+                x_dir_path = pathlib_Path(dirpath)
+                relative_path = x_dir_path.relative_to(x_dir)
+                relative_path = str(relative_path).replace("\\", "/")
+                x_set.add((relative_path, filename))
+    return x_set

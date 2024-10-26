@@ -1,4 +1,4 @@
-from src.f00_instrument.file import set_dir, delete_dir, dir_files
+from src.f00_instrument.file import set_dir, delete_dir, get_dir_file_strs
 from src.f00_instrument.dict_tool import (
     get_0_if_None,
     get_dict_from_json,
@@ -102,7 +102,9 @@ class FiscalUnit:
         return f"{self._owners_dir}/{owner_id}"
 
     def _get_owner_folder_names(self) -> set:
-        owners = dir_files(self._owners_dir, include_dirs=True, include_files=False)
+        owners = get_dir_file_strs(
+            self._owners_dir, include_dirs=True, include_files=False
+        )
         return set(owners.keys())
 
     def get_owner_hubunits(self) -> dict[OwnerID:HubUnit]:
@@ -336,6 +338,14 @@ class FiscalUnit:
                 for acct_id, x_amount in x_purviewepisode._net_purviews.items():
                     x_tranbook.add_tranunit(owner_id, acct_id, x_timestamp, x_amount)
         self._all_tranbook = x_tranbook
+
+    # TODO evaluate if this should be used
+    # def set_all_tranbook(self):
+    #     if not hasattr(self, "_combined_tranbook"):
+    #         self._combined_tranbook = tranbook_shop(self.fiscal_id, [])
+    #     new_tranunits = self.cashbook.get_new_tranunits()
+    #     self._combined_tranbook.add_tranunits(new_tranunits)
+    #     return self._combined_tranbook
 
 
 def fiscalunit_shop(

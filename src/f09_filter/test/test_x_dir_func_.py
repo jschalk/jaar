@@ -6,15 +6,15 @@ from src.f04_gift.atom_config import (
     base_str,
     type_AcctID_str,
 )
-from src.f09_filter.bridge import bridgekind_shop, bridgeunit_shop
-from src.f09_filter.filter import (
+from src.f09_filter.filter import bridgekind_shop, filterunit_shop
+from src.f09_filter.dir_func import (
     filter_single_column_dataframe,
     filter_all_columns_dataframe,
     get_dataframe_filterable_columns,
 )
-from src.f09_filter.examples.example_bridges import (
-    get_casa_maison_bridgeunit_set_by_otx_to_inx,
-    get_casa_maison_bridgeunit_set_by_explicit_label,
+from src.f09_filter.examples.example_filters import (
+    get_casa_maison_filterunit_set_by_otx_to_inx,
+    get_casa_maison_filterunit_set_by_explicit_label,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
 )
@@ -136,10 +136,10 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    yao_bridgeunit = bridgeunit_shop(yao_str)
-    yao_bridgeunit.set_otx_to_inx(type_AcctID_str(), xio_otx, xio_inx)
-    yao_bridgeunit.set_otx_to_inx(type_AcctID_str(), sue_otx, sue_inx)
-    yao_bridgeunit.set_otx_to_inx(type_AcctID_str(), bob_otx, bob_inx)
+    yao_filterunit = filterunit_shop(yao_str)
+    yao_filterunit.set_otx_to_inx(type_AcctID_str(), xio_otx, xio_inx)
+    yao_filterunit.set_otx_to_inx(type_AcctID_str(), sue_otx, sue_inx)
+    yao_filterunit.set_otx_to_inx(type_AcctID_str(), bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
@@ -150,7 +150,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     print(f"{otx_dt=}")
 
     # WHEN
-    filter_all_columns_dataframe(otx_dt, yao_bridgeunit)
+    filter_all_columns_dataframe(otx_dt, yao_filterunit)
 
     # THEN
     assert otx_dt.iloc[0][acct_id_str()] == zia_otx
@@ -166,7 +166,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_bridgeunit_set_by_otx_to_inx():
+def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_filterunit_set_by_otx_to_inx():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -181,7 +181,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_
     sweep_str = "sweep"
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
-    yao_bridgeunit = get_casa_maison_bridgeunit_set_by_otx_to_inx()
+    yao_filterunit = get_casa_maison_filterunit_set_by_otx_to_inx()
     otx_dt = get_casa_maison_road_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
     assert otx_dt.iloc[0][base_str()] == otx_music45_str
@@ -191,7 +191,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_
     print(f"{otx_dt=}")
 
     # WHEN
-    filter_all_columns_dataframe(otx_dt, yao_bridgeunit)
+    filter_all_columns_dataframe(otx_dt, yao_filterunit)
 
     # THEN
     assert otx_dt.iloc[0][base_str()] == inx_music87_str
@@ -205,7 +205,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_
     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_casa_maison_bridgeunit_set_by_explicit_label():
+def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_casa_maison_filterunit_set_by_explicit_label():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -220,8 +220,8 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_
     sweep_str = "sweep"
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
-    yao_bridgeunit = get_casa_maison_bridgeunit_set_by_explicit_label()
-    # print(f"{yao_bridgeunit=}")
+    yao_filterunit = get_casa_maison_filterunit_set_by_explicit_label()
+    # print(f"{yao_filterunit=}")
     otx_dt = get_casa_maison_road_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
     assert otx_dt.iloc[0][base_str()] == otx_music45_str
@@ -232,7 +232,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_
     print("")
 
     # WHEN
-    filter_all_columns_dataframe(otx_dt, yao_bridgeunit)
+    filter_all_columns_dataframe(otx_dt, yao_filterunit)
 
     # THEN
     print("")

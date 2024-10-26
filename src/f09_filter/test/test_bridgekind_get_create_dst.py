@@ -4,7 +4,7 @@ from src.f04_gift.atom_config import (
     type_RoadUnit_str,
     type_GroupID_str,
 )
-from src.f09_filter.bridge import bridgekind_shop
+from src.f09_filter.filter import bridgekind_shop
 
 
 def test_BridgeKind_get_create_inx_ReturnsObjAndSetsAttr_label():

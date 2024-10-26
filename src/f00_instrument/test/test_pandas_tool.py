@@ -1,8 +1,9 @@
-from src.f00_instrument.file import open_file, create_file_path
+from src.f00_instrument.file import open_file, create_file_path, create_dir
 from src.f00_instrument.pandas_tool import (
     get_sorting_priority_column_headers,
     save_dataframe_to_csv,
     get_ordered_csv,
+    get_all_excel_sheetnames,
 )
 from src.f00_instrument.examples.examples_pandas import (
     get_empty_dataframe,
@@ -22,6 +23,7 @@ from src.f00_instrument.examples.instrument_env import (
     get_instrument_temp_env_dir,
 )
 from os.path import exists as os_path_exists
+from pandas import DataFrame, ExcelWriter
 
 
 def test_get_sorting_priority_column_headers_ReturnsObj():
@@ -143,3 +145,28 @@ def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(env_dir_setup_c
     print(f"{function_ex02_atom_csv=}")
     print(f"    {file_ex02_atom_csv=}")
     assert file_ex02_atom_csv == function_ex02_atom_csv
+
+
+def test_get_all_excel_sheetnames_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x_dir = create_file_path(env_dir, "examples_folder")
+    ex_file_name = "fizzbuzz.xlsx"
+    ex_file_path = create_file_path(x_dir, ex_file_name)
+    df1 = DataFrame([["AAA", "BBB"]], columns=["Spam", "Egg"])
+    df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
+    sheet_name1 = "Sheet1x"
+    sheet_name2 = "Sheet2x"
+    create_dir(x_dir)
+    with ExcelWriter(ex_file_path) as writer:
+        df1.to_excel(writer, sheet_name=sheet_name1)
+        df2.to_excel(writer, sheet_name=sheet_name2)
+
+    # WHEN
+    x_sheetnames = get_all_excel_sheetnames(env_dir)
+
+    # THEN
+    assert x_sheetnames
+    assert (x_dir, ex_file_name, sheet_name1) in x_sheetnames
+    assert (x_dir, ex_file_name, sheet_name2) in x_sheetnames
+    assert len(x_sheetnames) == 2

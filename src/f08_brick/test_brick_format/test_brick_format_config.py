@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_tool import create_sorted_concatenated_str
-from src.f00_instrument.file import dir_files
+from src.f00_instrument.file import get_dir_file_strs
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_gift.atom_config import (
     fiscal_id_str,
@@ -187,7 +187,7 @@ def test_brick_FilesExist():
     brick_dir = get_brick_formats_dir()
 
     # WHEN
-    brick_files = dir_files(brick_dir, True)
+    brick_files = get_dir_file_strs(brick_dir, True)
 
     # THEN
     brick_filenames = set(brick_files.keys())

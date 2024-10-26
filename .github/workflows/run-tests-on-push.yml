@@ -19,6 +19,7 @@ jobs:
           python -m pip install pandas
           python -m pip install plotly
           python -m pip install pytest-cov
+          python -m pip install openpyxl
           python -m pip install sqlalchemy
       - name: Execute tests and generate report
         id: pytest

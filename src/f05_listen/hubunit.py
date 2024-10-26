@@ -4,7 +4,7 @@ from src.f00_instrument.file import (
     save_file,
     open_file,
     delete_dir,
-    dir_files,
+    get_dir_file_strs,
     set_dir,
     get_integer_filenames,
 )
@@ -223,7 +223,7 @@ class HubUnit:
     def get_max_atom_file_number(self) -> int:
         if not os_path_exists(self.atoms_dir()):
             return None
-        atom_files_dict = dir_files(self.atoms_dir(), True, include_files=True)
+        atom_files_dict = get_dir_file_strs(self.atoms_dir(), True, include_files=True)
         atom_filenames = atom_files_dict.keys()
         atom_file_numbers = {int(atom_filename) for atom_filename in atom_filenames}
         return max(atom_file_numbers, default=None)
@@ -260,7 +260,7 @@ class HubUnit:
     def _get_bud_from_atom_files(self) -> BudUnit:
         x_bud = budunit_shop(self.owner_id, self.fiscal_id)
         if self.atom_file_exists(self.get_max_atom_file_number()):
-            x_atom_files = dir_files(self.atoms_dir(), delete_extensions=True)
+            x_atom_files = get_dir_file_strs(self.atoms_dir(), delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
 
             for x_atom_filename in sorted_atom_filenames:
@@ -273,7 +273,7 @@ class HubUnit:
         if not os_path_exists(self.gifts_dir()):
             return None
         gifts_dir = self.gifts_dir()
-        gift_filenames = dir_files(gifts_dir, True, include_files=True).keys()
+        gift_filenames = get_dir_file_strs(gifts_dir, True, include_files=True).keys()
         gift_file_numbers = {int(filename) for filename in gift_filenames}
         return max(gift_file_numbers, default=None)
 
@@ -456,7 +456,9 @@ class HubUnit:
         return x_purviewlog
 
     def _get_timepoint_dirs(self) -> list[str]:
-        x_dict = dir_files(self.timeline_dir(), include_dirs=True, include_files=False)
+        x_dict = get_dir_file_strs(
+            self.timeline_dir(), include_dirs=True, include_files=False
+        )
         return list(x_dict.keys())
 
     def budpoint_file_name(self) -> str:
@@ -550,7 +552,7 @@ class HubUnit:
 
     def get_jobs_dir_file_names_list(self) -> list[str]:
         try:
-            return list(dir_files(self.jobs_dir(), True).keys())
+            return list(get_dir_file_strs(self.jobs_dir(), True).keys())
         except Exception:
             return []
 

@@ -1,4 +1,10 @@
-from src.f00_instrument.file import open_file, dir_files, delete_dir, set_dir, save_file
+from src.f00_instrument.file import (
+    open_file,
+    get_dir_file_strs,
+    delete_dir,
+    set_dir,
+    save_file,
+)
 from src.f01_road.jaar_config import init_gift_id, get_test_fiscal_id as fiscal_id
 from src.f04_gift.gift import giftunit_shop, get_json_filename
 from src.f05_listen.hubunit import hubunit_shop
@@ -371,7 +377,7 @@ def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
     sue_hubunit = hubunit_shop(env_dir(), fiscal_id(), sue_str)
     sue_hubunit.save_gift_file(sue_giftunit, correct_invalid_attrs=False)
 
-    print(f"{dir_files(sue_hubunit.atoms_dir())}")
+    print(f"{get_dir_file_strs(sue_hubunit.atoms_dir())}")
     assert sue_hubunit.gift_file_exists(six_int)
     assert sue_hubunit.atom_file_exists(zero_int)
 
@@ -393,8 +399,8 @@ def test_HubUnit_save_gift_file_CanCreateAndModify3giftunits(
     delete_dir(sue_hubunit.atoms_dir())
     set_dir(sue_hubunit.gifts_dir())
     set_dir(sue_hubunit.atoms_dir())
-    assert len(dir_files(sue_hubunit.gifts_dir())) == 0
-    assert len(dir_files(sue_hubunit.atoms_dir())) == 0
+    assert len(get_dir_file_strs(sue_hubunit.gifts_dir())) == 0
+    assert len(get_dir_file_strs(sue_hubunit.atoms_dir())) == 0
 
     # WHEN
     sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
@@ -402,8 +408,8 @@ def test_HubUnit_save_gift_file_CanCreateAndModify3giftunits(
     sue_hubunit.save_gift_file(sue_4atomunits_giftunit())
 
     # THEN
-    assert len(dir_files(sue_hubunit.gifts_dir())) == 3
-    assert len(dir_files(sue_hubunit.atoms_dir())) == 9
+    assert len(get_dir_file_strs(sue_hubunit.gifts_dir())) == 3
+    assert len(get_dir_file_strs(sue_hubunit.atoms_dir())) == 9
 
 
 def test_HubUnit_save_gift_file_ReturnsValidObj(env_dir_setup_cleanup):
