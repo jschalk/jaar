@@ -147,7 +147,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(env_dir_setup_c
     assert file_ex02_atom_csv == function_ex02_atom_csv
 
 
-def test_get_all_excel_sheetnames_ReturnsObj(env_dir_setup_cleanup):
+def test_get_all_excel_sheetnames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x_dir = create_file_path(env_dir, "examples_folder")
@@ -169,4 +169,35 @@ def test_get_all_excel_sheetnames_ReturnsObj(env_dir_setup_cleanup):
     assert x_sheetnames
     assert (x_dir, ex_file_name, sheet_name1) in x_sheetnames
     assert (x_dir, ex_file_name, sheet_name2) in x_sheetnames
+    assert len(x_sheetnames) == 2
+
+
+def test_get_all_excel_sheetnames_ReturnsObj_Scenario1_FilterSheetNames(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    x_dir = create_file_path(env_dir, "examples_folder")
+    ex_file_name = "fizzbuzz.xlsx"
+    ex_file_path = create_file_path(x_dir, ex_file_name)
+    df1 = DataFrame([["AAA", "BBB"]], columns=["Spam", "Egg"])
+    df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
+    sugar_str = "sugar"
+    honey_name1 = "honey1x"
+    sugar_name1 = f"{sugar_str}2x"
+    sugar_name2 = f"honey_{sugar_str}3x"
+    create_dir(x_dir)
+    with ExcelWriter(ex_file_path) as writer:
+        df1.to_excel(writer, sheet_name=honey_name1)
+        df2.to_excel(writer, sheet_name=sugar_name1)
+        df2.to_excel(writer, sheet_name=sugar_name2)
+
+    # WHEN
+    x_sheetnames = get_all_excel_sheetnames(env_dir, in_name_strs={sugar_str})
+
+    # THEN
+    assert x_sheetnames
+    assert (x_dir, ex_file_name, honey_name1) not in x_sheetnames
+    assert (x_dir, ex_file_name, sugar_name1) in x_sheetnames
+    assert (x_dir, ex_file_name, sugar_name2) in x_sheetnames
     assert len(x_sheetnames) == 2
