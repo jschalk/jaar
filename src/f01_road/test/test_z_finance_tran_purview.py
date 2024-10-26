@@ -1,5 +1,7 @@
 from src.f01_road.finance import default_fund_pool
 from src.f01_road.finance_tran import (
+    quota_str,
+    timestamp_str,
     PurviewEpisode,
     purviewepisode_shop,
     PurviewLog,
@@ -9,6 +11,11 @@ from src.f01_road.finance_tran import (
     get_purviewlog_from_dict,
 )
 from pytest import raises as pytest_raises
+
+
+def test_str_functions_ReturnObj():
+    assert timestamp_str() == "timestamp"
+    assert quota_str() == "quota"
 
 
 def test_PurviewEpisode_Exists():
@@ -127,7 +134,7 @@ def test_PurviewEpisode_get_dict_ReturnsObj():
     t4_dict = t4_purviewepisode.get_dict()
 
     # THEN
-    assert t4_dict == {"timestamp": t4_timestamp, "quota": t4_quota}
+    assert t4_dict == {"timestamp": t4_timestamp, quota_str(): t4_quota}
 
 
 def test_PurviewEpisode_calc_magnitude_SetsAttr_Scenario0():
@@ -204,7 +211,7 @@ def test_PurviewEpisode_get_dict_ReturnsObjWith_net_purviews():
     # THEN
     assert t4_dict == {
         "timestamp": t4_timestamp,
-        "quota": t4_quota,
+        quota_str(): t4_quota,
         "magnitude": t4_magnitude,
         "net_purviews": t4_net_purviews,
     }
@@ -240,7 +247,7 @@ def test_get_purviewepisode_from_dict_ReturnsObj_Sccenario0():
     t4_quota = 55
     t4_purviewepisode = purviewepisode_shop(t4_timestamp, t4_quota)
     t4_dict = t4_purviewepisode.get_dict()
-    assert t4_dict == {"timestamp": t4_timestamp, "quota": t4_quota}
+    assert t4_dict == {"timestamp": t4_timestamp, quota_str(): t4_quota}
 
     # WHEN
     x_purviewepisode = get_purviewepisode_from_dict(t4_dict)
@@ -466,7 +473,7 @@ def test_PurviewLog_get_headers_ReturnsObj():
     sue_headers_list = sue_purviewlog.get_headers()
 
     # THEN
-    assert sue_headers_list == ["owner_id", "timestamp", "quota"]
+    assert sue_headers_list == ["owner_id", "timestamp", quota_str()]
 
 
 def test_PurviewLog_get_dict_ReturnsObj_Scenario0():
@@ -487,8 +494,8 @@ def test_PurviewLog_get_dict_ReturnsObj_Scenario0():
     assert sue_episodes_dict == {
         "owner_id": sue_str,
         "episodes": {
-            x4_timestamp: {"quota": x4_quota, "timestamp": x4_timestamp},
-            x7_timestamp: {"quota": x7_quota, "timestamp": x7_timestamp},
+            x4_timestamp: {quota_str(): x4_quota, "timestamp": x4_timestamp},
+            x7_timestamp: {quota_str(): x7_quota, "timestamp": x7_timestamp},
         },
     }
 
@@ -525,8 +532,8 @@ def test_get_purviewlog_from_dict_ReturnsObj_Scenario1():
     assert sue_episodes_dict == {
         "owner_id": sue_str,
         "episodes": {
-            x4_timestamp: {"timestamp": x4_timestamp, "quota": x4_quota},
-            x7_timestamp: {"timestamp": x7_timestamp, "quota": x7_quota},
+            x4_timestamp: {"timestamp": x4_timestamp, quota_str(): x4_quota},
+            x7_timestamp: {"timestamp": x7_timestamp, quota_str(): x7_quota},
         },
     }
 
@@ -561,10 +568,10 @@ def test_get_purviewlog_from_dict_ReturnsObj_Scenario2():
     assert sue_episodes_dict == {
         "owner_id": sue_str,
         "episodes": {
-            x4_timestamp: {"timestamp": x4_timestamp, "quota": x4_quota},
+            x4_timestamp: {"timestamp": x4_timestamp, quota_str(): x4_quota},
             x7_timestamp: {
                 "timestamp": x7_timestamp,
-                "quota": x7_quota,
+                quota_str(): x7_quota,
                 "net_purviews": {sue_str: sue_net_purview, zia_str: zia_net_purview},
             },
         },
@@ -606,12 +613,12 @@ def test_PurviewLog_get_tranbook_ReturnsObj():
         "episodes": {
             x4_timestamp: {
                 "timestamp": x4_timestamp,
-                "quota": x4_quota,
+                quota_str(): x4_quota,
                 "net_purviews": {bob_str: bob_net_purview},
             },
             x7_timestamp: {
                 "timestamp": x7_timestamp,
-                "quota": x7_quota,
+                quota_str(): x7_quota,
                 "net_purviews": {zia_str: zia_net_purview},
             },
         },

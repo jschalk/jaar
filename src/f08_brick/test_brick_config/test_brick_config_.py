@@ -1,4 +1,5 @@
 from src.f04_gift.atom_config import get_atom_config_dict
+from src.f07_fiscal.fiscal_config import get_fiscal_config_dict
 from src.f08_brick.brick_config import (
     config_file_dir,
     get_brick_config_file_name,
@@ -42,6 +43,8 @@ def test_get_brick_config_dict_ReturnsObj():
     assert "budunit" in brick_config_categorys
     atom_config_categorys = set(get_atom_config_dict().keys())
     assert atom_config_categorys.issubset(brick_config_categorys)
+    fiscal_config_categorys = set(get_fiscal_config_dict().keys())
+    assert fiscal_config_categorys.issubset(brick_config_categorys)
     assert len(x_brick_config) == 17
 
 

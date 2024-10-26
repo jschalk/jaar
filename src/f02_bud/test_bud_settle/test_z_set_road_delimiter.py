@@ -8,16 +8,16 @@ from pytest import raises as pytest_raises
 
 def test_BudUnit_set_fiscal_id_CorrectlySetsAttr():
     # ESTABLISH
-    fiscal_id_str = "Sun"
+    x_fiscal_id = "music45"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str)
     assert sue_bud._fiscal_id == root_label()
 
     # WHEN
-    sue_bud.set_fiscal_id(fiscal_id=fiscal_id_str)
+    sue_bud.set_fiscal_id(fiscal_id=x_fiscal_id)
 
     # THEN
-    assert sue_bud._fiscal_id == fiscal_id_str
+    assert sue_bud._fiscal_id == x_fiscal_id
 
 
 def test_BudUnit_set_item_CorrectlySets_bud_fiscal_id_AND_fund_coin():
@@ -62,17 +62,17 @@ def test_bud_set_fiscal_id_CorrectlySetsAttr():
     assert yao_bud._fiscal_id == yao_bud._fiscal_id
 
     # WHEN
-    fiscal_id_str = "Sun"
-    yao_bud.set_fiscal_id(fiscal_id=fiscal_id_str)
+    x_fiscal_id = "music45"
+    yao_bud.set_fiscal_id(fiscal_id=x_fiscal_id)
 
     # THEN
     new_casa_road = yao_bud.make_l1_road(casa_str)
     swim_str = "swim"
     new_swim_road = yao_bud.make_road(new_casa_road, swim_str)
-    assert yao_bud._fiscal_id == fiscal_id_str
-    assert yao_bud._itemroot._label == fiscal_id_str
+    assert yao_bud._fiscal_id == x_fiscal_id
+    assert yao_bud._itemroot._label == x_fiscal_id
     casa_item = yao_bud.get_item_obj(new_casa_road)
-    assert casa_item._parent_road == fiscal_id_str
+    assert casa_item._parent_road == x_fiscal_id
     swim_item = yao_bud.get_item_obj(new_swim_road)
     assert swim_item._parent_road == new_casa_road
 

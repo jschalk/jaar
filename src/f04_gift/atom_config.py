@@ -111,6 +111,18 @@ def debtor_respect_str() -> str:
     return "debtor_respect"
 
 
+def fund_coin_str() -> str:
+    return "fund_coin"
+
+
+def penny_str() -> str:
+    return "penny"
+
+
+def respect_bit_str() -> str:
+    return "respect_bit"
+
+
 def acct_id_str() -> str:
     return "acct_id"
 

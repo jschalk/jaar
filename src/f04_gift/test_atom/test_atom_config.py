@@ -56,6 +56,9 @@ from src.f04_gift.atom_config import (
     gogo_want_str,
     stop_want_str,
     base_str,
+    fund_coin_str,
+    penny_str,
+    respect_bit_str,
 )
 
 
@@ -89,6 +92,9 @@ def test_str_functions_ReturnsObj():
     assert morph_str() == "morph"
     assert gogo_want_str() == "gogo_want"
     assert stop_want_str() == "stop_want"
+    assert fund_coin_str() == "fund_coin"
+    assert penny_str() == "penny"
+    assert respect_bit_str() == "respect_bit"
 
 
 def test_atom_config_HasCorrect_category():
