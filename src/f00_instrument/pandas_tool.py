@@ -101,3 +101,20 @@ def get_all_excel_sheetnames(
                     if sheet_name.find(in_name_str) >= 0:
                         sheet_names.add((absolute_dir, filename, sheet_name))
     return sheet_names
+
+
+def get_relevant_columns_dataframe(
+    src_dt: DataFrame,
+    relevant_columns: list[str] = None,
+    relevant_columns_necessary: bool = True,
+) -> DataFrame:
+    if relevant_columns is None:
+        relevant_columns = get_sorting_priority_column_headers()
+    current_columns = set(src_dt.columns.to_list())
+    relevant_columns_set = set(relevant_columns)
+    current_relevant_columns = current_columns.intersection(relevant_columns_set)
+    relevant_cols_in_order = [
+        r_col for r_col in relevant_columns if r_col in current_relevant_columns
+    ]
+    print(f"{relevant_cols_in_order=}")
+    return src_dt[relevant_cols_in_order]

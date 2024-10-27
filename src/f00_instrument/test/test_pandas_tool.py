@@ -4,6 +4,7 @@ from src.f00_instrument.pandas_tool import (
     save_dataframe_to_csv,
     get_ordered_csv,
     get_all_excel_sheetnames,
+    get_relevant_columns_dataframe,
 )
 from src.f00_instrument.examples.examples_pandas import (
     get_empty_dataframe,
@@ -153,7 +154,7 @@ def test_get_all_excel_sheetnames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cl
     x_dir = create_file_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
     ex_file_path = create_file_path(x_dir, ex_file_name)
-    df1 = DataFrame([["AAA", "BBB"]], columns=["Spam", "Egg"])
+    df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     sheet_name1 = "Sheet1x"
     sheet_name2 = "Sheet2x"
@@ -180,7 +181,7 @@ def test_get_all_excel_sheetnames_ReturnsObj_Scenario1_FilterSheetNames(
     x_dir = create_file_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
     ex_file_path = create_file_path(x_dir, ex_file_name)
-    df1 = DataFrame([["AAA", "BBB"]], columns=["Spam", "Egg"])
+    df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     sugar_str = "sugar"
     honey_name1 = "honey1x"
@@ -201,3 +202,79 @@ def test_get_all_excel_sheetnames_ReturnsObj_Scenario1_FilterSheetNames(
     assert (x_dir, ex_file_name, sugar_name1) in x_sheetnames
     assert (x_dir, ex_file_name, sugar_name2) in x_sheetnames
     assert len(x_sheetnames) == 2
+
+
+def test_get_relevant_columns_dataframe_ReturnsObj_Scenario0():
+    # ESTABLISH
+    spam_str = "spam"
+    df1 = DataFrame([["AAA", "BBB"]], columns=[spam_str, "egg"])
+
+    # WHEN
+    relevant_dataframe = get_relevant_columns_dataframe(df1)
+
+    # THEN
+    assert relevant_dataframe is not None
+    assert not list(relevant_dataframe.columns)
+
+
+def test_get_relevant_columns_dataframe_ReturnsObj_Scenario1():
+    # ESTABLISH
+    spam_str = "spam"
+    df1 = DataFrame([["AAA", "BBB"]], columns=[spam_str, "egg"])
+
+    # WHEN
+    relevant_dataframe = get_relevant_columns_dataframe(df1, [spam_str])
+
+    # THEN
+    assert relevant_dataframe is not None
+    print(f"{type(relevant_dataframe.columns)=}")
+    print(f"{relevant_dataframe.columns.to_list()=}")
+    assert relevant_dataframe.columns.to_list() == [spam_str]
+
+
+def test_get_relevant_columns_dataframe_ReturnsObj_Scenario2_UnimportantOnesAreignored():
+    # ESTABLISH
+    spam_str = "spam"
+    df1 = DataFrame([["AAA", "BBB"]], columns=[spam_str, "egg"])
+
+    # WHEN
+    relevant_columns = [spam_str, "something_else"]
+    relevant_dataframe = get_relevant_columns_dataframe(df1, relevant_columns)
+
+    # THEN
+    assert relevant_dataframe is not None
+    assert relevant_dataframe.columns.to_list() == [spam_str]
+
+
+def test_get_relevant_columns_dataframe_ReturnsObj_Scenario3_ColumnOrderCorrect():
+    # ESTABLISH
+    spam_str = "spam"
+    egg_str = "egg"
+    ham_str = "ham"
+    df1 = DataFrame([["AAA", "BBB", "CCC"]], columns=[ham_str, spam_str, egg_str])
+
+    # WHEN
+    relevant_columns = [egg_str, spam_str, ham_str]
+    relevant_dataframe = get_relevant_columns_dataframe(df1, relevant_columns)
+
+    # THEN
+    assert relevant_dataframe is not None
+    print(f"{relevant_dataframe.columns=}")
+    assert relevant_dataframe.columns.to_list() == relevant_columns
+    assert relevant_dataframe.columns.to_list()[0] == egg_str
+
+
+def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect():
+    # ESTABLISH
+    acct_id_str = "acct_id"
+    group_id_str = "group_id"
+    df1 = DataFrame([["AAA", "BBB"]], columns=[group_id_str, acct_id_str])
+
+    # WHEN
+    relevant_dataframe = get_relevant_columns_dataframe(df1)
+
+    # THEN
+    assert relevant_dataframe is not None
+    print(f"{relevant_dataframe.columns=}")
+    assert relevant_dataframe.columns.to_list()[0] == acct_id_str
+    assert relevant_dataframe.columns.to_list() == [acct_id_str, group_id_str]

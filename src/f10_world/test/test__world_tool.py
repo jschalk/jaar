@@ -10,7 +10,7 @@ def test_get_all_excel_bricksheets_ReturnsObj_Scenario0_SheetNames():
     x_dir = create_file_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
     ex_file_path = create_file_path(x_dir, ex_file_name)
-    df1 = DataFrame([["AAA", "BBB"]], columns=["Spam", "Egg"])
+    df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     br00000_str = "br00000"
     br00001_str = "br00001"
@@ -40,7 +40,7 @@ def test_get_all_excel_sheetnames_ReturnsObj_Scenario1_FilterSheetNames(
     x_dir = create_file_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
     ex_file_path = create_file_path(x_dir, ex_file_name)
-    df1 = DataFrame([["AAA", "BBB"]], columns=["Spam", "Egg"])
+    df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     not_br00000_str = "b00000"
     br00001_str = "example_br00001"
