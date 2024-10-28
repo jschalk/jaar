@@ -18,9 +18,9 @@ from src.f09_filter.examples.example_filters import (
     get_casa_maison_filterunit_set_by_explicit_label,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
-    get_clean_roadunit_bridgekind,
-    get_swim_groupid_bridgekind,
-    get_suita_acctid_bridgekind,
+    get_clean_roadunit_bridgeunit,
+    get_swim_groupid_bridgeunit,
+    get_suita_acctid_bridgeunit,
     get_suita_acctid_otx_dt,
     get_suita_acctid_inx_dt,
     get_sue_filterunit,
@@ -41,7 +41,7 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
     sue_inx = "Suita"
     xio_inx = "Xioita"
     sue_filterunit = filterunit_shop(sue_otx)
-    sue_filterunit.set_bridgekind(get_suita_acctid_bridgekind())
+    sue_filterunit.set_bridgeunit(get_suita_acctid_bridgeunit())
     sue_dir = f"{get_test_faces_dir()}/{sue_otx}"
     bridge_filename = "bridge.json"
     filterunit_file_path = f"{sue_dir}/{bridge_filename}"
@@ -150,7 +150,7 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
 ):
     # ESTABLISH
     sue_filterunit = get_casa_maison_filterunit_set_by_explicit_label()
-    sue_filterunit.set_bridgekind(get_suita_acctid_bridgekind())
+    sue_filterunit.set_bridgeunit(get_suita_acctid_bridgeunit())
     sue_dir = f"{get_test_faces_dir()}/{sue_filterunit.face_id}"
     bridge_filename = "bridge.json"
     filterunit_file_path = f"{sue_dir}/{bridge_filename}"
@@ -207,14 +207,14 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
 #     sue_inx = "Suita"
 #     xio_inx = "Xioita"
 #     sue_filterunit = filterunit_shop(sue_otx)
-#     sue_filterunit.set_bridgekind(get_suita_acctid_bridgekind())
+#     sue_filterunit.set_bridgeunit(get_suita_acctid_bridgeunit())
 #     sue_dir = f"{get_test_faces_dir()}/{sue_otx}"
 #     bridge_filename = "bridge.json"
 #     filterunit_file_path = f"{sue_dir}/{bridge_filename}"
 #     print(f"{sue_dir=}")
 #     save_file(sue_dir, bridge_filename, sue_filterunit.get_json())
 #     sue_otx_dt = get_suita_acctid_otx_dt()
-#     sue_inx_dt = get_clean_roadunit_bridgekind()
+#     sue_inx_dt = get_clean_roadunit_bridgeunit()
 #     otx_dir = f"{sue_dir}/otx"
 #     inx_dir = f"{sue_dir}/inx"
 
@@ -271,20 +271,20 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
 #     assert sue_dict.get("otx_road_delimiter") == default_road_delimiter_if_none()
 #     assert sue_dict.get("inx_road_delimiter") == default_road_delimiter_if_none()
 #     assert sue_dict.get("unknown_word") == default_unknown_word()
-#     assert sue_dict.get("bridgekinds")
-#     x_bridgekinds = sue_dict.get("bridgekinds")
-#     assert len(x_bridgekinds) == 3
-#     assert set(x_bridgekinds.keys()) == {
+#     assert sue_dict.get("bridgeunits")
+#     x_bridgeunits = sue_dict.get("bridgeunits")
+#     assert len(x_bridgeunits) == 3
+#     assert set(x_bridgeunits.keys()) == {
 #         type_AcctID_str(),
 #         type_GroupID_str(),
 #         road_str(),
 #     }
-#     acct_id_bridgekind = sue_filterunit.get_bridgekind(type_AcctID_str())
-#     group_id_bridgekind = sue_filterunit.get_bridgekind(type_GroupID_str())
-#     road_bridgekind = sue_filterunit.get_bridgekind(road_str())
-#     assert x_bridgekinds.get(type_AcctID_str()) == acct_id_bridgekind.get_dict()
-#     assert x_bridgekinds.get(type_GroupID_str()) == group_id_bridgekind.get_dict()
-#     assert x_bridgekinds.get(road_str()) == road_bridgekind.get_dict()
+#     acct_id_bridgeunit = sue_filterunit.get_bridgeunit(type_AcctID_str())
+#     group_id_bridgeunit = sue_filterunit.get_bridgeunit(type_GroupID_str())
+#     road_bridgeunit = sue_filterunit.get_bridgeunit(road_str())
+#     assert x_bridgeunits.get(type_AcctID_str()) == acct_id_bridgeunit.get_dict()
+#     assert x_bridgeunits.get(type_GroupID_str()) == group_id_bridgeunit.get_dict()
+#     assert x_bridgeunits.get(road_str()) == road_bridgeunit.get_dict()
 
 
 # def test_FilterUnit_get_dict_ReturnsObj_Scenario1():
@@ -296,9 +296,9 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
 #     sue_filterunit = filterunit_shop(
 #         sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
 #     )
-#     sue_filterunit.set_bridgekind(get_slash_roadunit_bridgekind())
-#     sue_filterunit.set_bridgekind(get_slash_groupid_bridgekind())
-#     sue_filterunit.set_bridgekind(get_slash_acctid_bridgekind())
+#     sue_filterunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
+#     sue_filterunit.set_bridgeunit(get_slash_groupid_bridgeunit())
+#     sue_filterunit.set_bridgeunit(get_slash_acctid_bridgeunit())
 
 #     # WHEN
 #     sue_dict = sue_filterunit.get_dict()
@@ -308,30 +308,30 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
 #     assert sue_dict.get("otx_road_delimiter") == slash_otx_road_delimiter
 #     assert sue_dict.get("inx_road_delimiter") == colon_inx_road_delimiter
 #     assert sue_dict.get("unknown_word") == x_unknown_word
-#     assert sue_dict.get("bridgekinds")
-#     x_bridgekinds = sue_dict.get("bridgekinds")
-#     assert len(x_bridgekinds) == 3
-#     acct_id_bridgekind = sue_filterunit.get_bridgekind(type_AcctID_str())
-#     group_id_bridgekind = sue_filterunit.get_bridgekind(type_GroupID_str())
-#     road_bridgekind = sue_filterunit.get_bridgekind(road_str())
-#     assert acct_id_bridgekind.get_dict() == get_slash_acctid_bridgekind().get_dict()
-#     assert group_id_bridgekind.get_dict() == get_slash_groupid_bridgekind().get_dict()
-#     assert road_bridgekind.get_dict() == get_slash_roadunit_bridgekind().get_dict()
+#     assert sue_dict.get("bridgeunits")
+#     x_bridgeunits = sue_dict.get("bridgeunits")
+#     assert len(x_bridgeunits) == 3
+#     acct_id_bridgeunit = sue_filterunit.get_bridgeunit(type_AcctID_str())
+#     group_id_bridgeunit = sue_filterunit.get_bridgeunit(type_GroupID_str())
+#     road_bridgeunit = sue_filterunit.get_bridgeunit(road_str())
+#     assert acct_id_bridgeunit.get_dict() == get_slash_acctid_bridgeunit().get_dict()
+#     assert group_id_bridgeunit.get_dict() == get_slash_groupid_bridgeunit().get_dict()
+#     assert road_bridgeunit.get_dict() == get_slash_roadunit_bridgeunit().get_dict()
 
 
 # def test_FilterUnit_get_json_ReturnsObj():
 #     # ESTABLISH
 #     sue_str = "Sue"
 #     sue_filterunit = filterunit_shop(sue_str)
-#     sue_filterunit.set_bridgekind(get_clean_roadunit_bridgekind())
-#     sue_filterunit.set_bridgekind(get_swim_groupid_bridgekind())
-#     sue_filterunit.set_bridgekind(get_suita_acctid_bridgekind())
+#     sue_filterunit.set_bridgeunit(get_clean_roadunit_bridgeunit())
+#     sue_filterunit.set_bridgeunit(get_swim_groupid_bridgeunit())
+#     sue_filterunit.set_bridgeunit(get_suita_acctid_bridgeunit())
 
 #     # WHEN
 #     sue_json = sue_filterunit.get_json()
 
 #     # THEN
-#     assert sue_json.find("bridgekinds") == 5
+#     assert sue_json.find("bridgeunits") == 5
 #     assert sue_json.find("otx_road_delimiter") == 164
 
 
@@ -344,9 +344,9 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
 #     sue_filterunit = filterunit_shop(
 #         sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
 #     )
-#     sue_filterunit.set_bridgekind(get_slash_roadunit_bridgekind())
-#     sue_filterunit.set_bridgekind(get_slash_groupid_bridgekind())
-#     sue_filterunit.set_bridgekind(get_slash_acctid_bridgekind())
+#     sue_filterunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
+#     sue_filterunit.set_bridgeunit(get_slash_groupid_bridgeunit())
+#     sue_filterunit.set_bridgeunit(get_slash_acctid_bridgeunit())
 
 #     # WHEN
 #     gen_filterunit = get_filterunit_from_dict(sue_filterunit.get_dict())
@@ -357,14 +357,14 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
 #     assert gen_filterunit.otx_road_delimiter == slash_otx_road_delimiter
 #     assert gen_filterunit.inx_road_delimiter == colon_inx_road_delimiter
 #     assert gen_filterunit.unknown_word == x_unknown_word
-#     x_bridgekinds = gen_filterunit.bridgekinds
-#     assert len(x_bridgekinds) == 3
-#     acct_id_bridgekind = sue_filterunit.get_bridgekind(type_AcctID_str())
-#     group_id_bridgekind = sue_filterunit.get_bridgekind(type_GroupID_str())
-#     road_bridgekind = sue_filterunit.get_bridgekind(road_str())
-#     assert acct_id_bridgekind.get_dict() == get_slash_acctid_bridgekind().get_dict()
-#     assert group_id_bridgekind.get_dict() == get_slash_groupid_bridgekind().get_dict()
-#     assert road_bridgekind.get_dict() == get_slash_roadunit_bridgekind().get_dict()
+#     x_bridgeunits = gen_filterunit.bridgeunits
+#     assert len(x_bridgeunits) == 3
+#     acct_id_bridgeunit = sue_filterunit.get_bridgeunit(type_AcctID_str())
+#     group_id_bridgeunit = sue_filterunit.get_bridgeunit(type_GroupID_str())
+#     road_bridgeunit = sue_filterunit.get_bridgeunit(road_str())
+#     assert acct_id_bridgeunit.get_dict() == get_slash_acctid_bridgeunit().get_dict()
+#     assert group_id_bridgeunit.get_dict() == get_slash_groupid_bridgeunit().get_dict()
+#     assert road_bridgeunit.get_dict() == get_slash_roadunit_bridgeunit().get_dict()
 
 
 # def test_get_filterunit_from_json_ReturnsObj():
@@ -376,9 +376,9 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
 #     sue_filterunit = filterunit_shop(
 #         sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
 #     )
-#     sue_filterunit.set_bridgekind(get_slash_roadunit_bridgekind())
-#     sue_filterunit.set_bridgekind(get_slash_groupid_bridgekind())
-#     sue_filterunit.set_bridgekind(get_slash_acctid_bridgekind())
+#     sue_filterunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
+#     sue_filterunit.set_bridgeunit(get_slash_groupid_bridgeunit())
+#     sue_filterunit.set_bridgeunit(get_slash_acctid_bridgeunit())
 
 #     # WHEN
 #     gen_filterunit = get_filterunit_from_json(sue_filterunit.get_json())
@@ -389,11 +389,11 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
 #     assert gen_filterunit.otx_road_delimiter == slash_otx_road_delimiter
 #     assert gen_filterunit.inx_road_delimiter == colon_inx_road_delimiter
 #     assert gen_filterunit.unknown_word == x_unknown_word
-#     x_bridgekinds = gen_filterunit.bridgekinds
-#     assert len(x_bridgekinds) == 3
-#     acct_id_bridgekind = sue_filterunit.get_bridgekind(type_AcctID_str())
-#     group_id_bridgekind = sue_filterunit.get_bridgekind(type_GroupID_str())
-#     road_bridgekind = sue_filterunit.get_bridgekind(road_str())
-#     assert acct_id_bridgekind.get_dict() == get_slash_acctid_bridgekind().get_dict()
-#     assert group_id_bridgekind.get_dict() == get_slash_groupid_bridgekind().get_dict()
-#     assert road_bridgekind.get_dict() == get_slash_roadunit_bridgekind().get_dict()
+#     x_bridgeunits = gen_filterunit.bridgeunits
+#     assert len(x_bridgeunits) == 3
+#     acct_id_bridgeunit = sue_filterunit.get_bridgeunit(type_AcctID_str())
+#     group_id_bridgeunit = sue_filterunit.get_bridgeunit(type_GroupID_str())
+#     road_bridgeunit = sue_filterunit.get_bridgeunit(road_str())
+#     assert acct_id_bridgeunit.get_dict() == get_slash_acctid_bridgeunit().get_dict()
+#     assert group_id_bridgeunit.get_dict() == get_slash_groupid_bridgeunit().get_dict()
+#     assert road_bridgeunit.get_dict() == get_slash_roadunit_bridgeunit().get_dict()

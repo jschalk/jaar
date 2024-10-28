@@ -10,18 +10,18 @@ from src.f04_gift.atom_config import (
 from src.f09_filter.filter import (
     FilterUnit,
     filterunit_shop,
-    bridgekind_shop,
+    bridgeunit_shop,
     default_unknown_word,
     filterable_python_types,
     filterable_atom_args,
 )
 from src.f09_filter.examples.example_filters import (
-    get_invalid_acctid_bridgekind,
-    get_invalid_groupid_bridgekind,
-    get_invalid_road_bridgekind,
-    get_clean_roadunit_bridgekind,
-    get_swim_groupid_bridgekind,
-    get_suita_acctid_bridgekind,
+    get_invalid_acctid_bridgeunit,
+    get_invalid_groupid_bridgeunit,
+    get_invalid_road_bridgeunit,
+    get_clean_roadunit_bridgeunit,
+    get_swim_groupid_bridgeunit,
+    get_suita_acctid_bridgeunit,
 )
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -83,7 +83,7 @@ def test_FilterUnit_Exists():
     x_filterunit = FilterUnit()
 
     # WHEN / THEN
-    assert not x_filterunit.bridgekinds
+    assert not x_filterunit.bridgeunits
     assert not x_filterunit.unknown_word
     assert not x_filterunit.otx_road_delimiter
     assert not x_filterunit.inx_road_delimiter
@@ -103,18 +103,18 @@ def test_filterunit_shop_ReturnsObj_scenario0():
     assert sue_filterunit.otx_road_delimiter == default_road_delimiter_if_none()
     assert sue_filterunit.inx_road_delimiter == default_road_delimiter_if_none()
 
-    acctid_bridgekind = sue_filterunit.bridgekinds.get(type_AcctID_str())
-    assert acctid_bridgekind.unknown_word == default_unknown_word()
-    assert acctid_bridgekind.otx_road_delimiter == default_road_delimiter_if_none()
-    assert acctid_bridgekind.inx_road_delimiter == default_road_delimiter_if_none()
-    groupid_bridgekind = sue_filterunit.bridgekinds.get(type_GroupID_str())
-    assert groupid_bridgekind.unknown_word == default_unknown_word()
-    assert groupid_bridgekind.otx_road_delimiter == default_road_delimiter_if_none()
-    assert groupid_bridgekind.inx_road_delimiter == default_road_delimiter_if_none()
-    road_bridgekind = sue_filterunit.bridgekinds.get(road_str())
-    assert road_bridgekind.unknown_word == default_unknown_word()
-    assert road_bridgekind.otx_road_delimiter == default_road_delimiter_if_none()
-    assert road_bridgekind.inx_road_delimiter == default_road_delimiter_if_none()
+    acctid_bridgeunit = sue_filterunit.bridgeunits.get(type_AcctID_str())
+    assert acctid_bridgeunit.unknown_word == default_unknown_word()
+    assert acctid_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
+    assert acctid_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
+    groupid_bridgeunit = sue_filterunit.bridgeunits.get(type_GroupID_str())
+    assert groupid_bridgeunit.unknown_word == default_unknown_word()
+    assert groupid_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
+    assert groupid_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
+    road_bridgeunit = sue_filterunit.bridgeunits.get(road_str())
+    assert road_bridgeunit.unknown_word == default_unknown_word()
+    assert road_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
+    assert road_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
 
 
 def test_filterunit_shop_ReturnsObj_scenario1():
@@ -134,216 +134,216 @@ def test_filterunit_shop_ReturnsObj_scenario1():
     assert sue_filterunit.otx_road_delimiter == slash_otx_road_delimiter
     assert sue_filterunit.inx_road_delimiter == colon_inx_road_delimiter
 
-    assert len(sue_filterunit.bridgekinds) == 3
-    acctid_bridgekind = sue_filterunit.bridgekinds.get(type_AcctID_str())
-    assert acctid_bridgekind.unknown_word == y_unknown_word
-    assert acctid_bridgekind.otx_road_delimiter == slash_otx_road_delimiter
-    assert acctid_bridgekind.inx_road_delimiter == colon_inx_road_delimiter
-    assert acctid_bridgekind.face_id == sue_str
-    groupid_bridgekind = sue_filterunit.bridgekinds.get(type_GroupID_str())
-    assert groupid_bridgekind.unknown_word == y_unknown_word
-    assert groupid_bridgekind.otx_road_delimiter == slash_otx_road_delimiter
-    assert groupid_bridgekind.inx_road_delimiter == colon_inx_road_delimiter
-    assert groupid_bridgekind.face_id == sue_str
-    road_bridgekind = sue_filterunit.bridgekinds.get(road_str())
-    assert road_bridgekind.unknown_word == y_unknown_word
-    assert road_bridgekind.otx_road_delimiter == slash_otx_road_delimiter
-    assert road_bridgekind.inx_road_delimiter == colon_inx_road_delimiter
-    assert road_bridgekind.face_id == sue_str
+    assert len(sue_filterunit.bridgeunits) == 3
+    acctid_bridgeunit = sue_filterunit.bridgeunits.get(type_AcctID_str())
+    assert acctid_bridgeunit.unknown_word == y_unknown_word
+    assert acctid_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
+    assert acctid_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert acctid_bridgeunit.face_id == sue_str
+    groupid_bridgeunit = sue_filterunit.bridgeunits.get(type_GroupID_str())
+    assert groupid_bridgeunit.unknown_word == y_unknown_word
+    assert groupid_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
+    assert groupid_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert groupid_bridgeunit.face_id == sue_str
+    road_bridgeunit = sue_filterunit.bridgeunits.get(road_str())
+    assert road_bridgeunit.unknown_word == y_unknown_word
+    assert road_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
+    assert road_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert road_bridgeunit.face_id == sue_str
 
 
-def test_FilterUnit_set_bridgekind_SetsAttr():
+def test_FilterUnit_set_bridgeunit_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
     sue_filterunit = filterunit_shop(sue_str)
-    acct_id_bridgekind = bridgekind_shop(type_AcctID_str(), x_face_id=sue_str)
-    acct_id_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
-    assert sue_filterunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
+    acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), x_face_id=sue_str)
+    acct_id_bridgeunit.set_otx_to_inx("Bob", "Bob of Portland")
+    assert sue_filterunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
 
     # WHEN
-    sue_filterunit.set_bridgekind(acct_id_bridgekind)
+    sue_filterunit.set_bridgeunit(acct_id_bridgeunit)
 
     # THEN
-    assert sue_filterunit.bridgekinds.get(type_AcctID_str()) == acct_id_bridgekind
+    assert sue_filterunit.bridgeunits.get(type_AcctID_str()) == acct_id_bridgeunit
 
 
-def test_FilterUnit_set_bridgekind_SetsAttr_SpecialCase_RoadUnit():
+def test_FilterUnit_set_bridgeunit_SetsAttr_SpecialCase_RoadUnit():
     # ESTABLISH
     sue_str = "Sue"
     sue_filterunit = filterunit_shop(sue_str)
-    road_bridgekind = bridgekind_shop(type_RoadUnit_str(), x_face_id=sue_str)
-    road_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
-    assert sue_filterunit.bridgekinds.get(road_str()) != road_bridgekind
+    road_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), x_face_id=sue_str)
+    road_bridgeunit.set_otx_to_inx("Bob", "Bob of Portland")
+    assert sue_filterunit.bridgeunits.get(road_str()) != road_bridgeunit
 
     # WHEN
-    sue_filterunit.set_bridgekind(road_bridgekind)
+    sue_filterunit.set_bridgeunit(road_bridgeunit)
 
     # THEN
-    assert sue_filterunit.bridgekinds.get(road_str()) == road_bridgekind
+    assert sue_filterunit.bridgeunits.get(road_str()) == road_bridgeunit
 
 
-def test_FilterUnit_set_bridgekind_SetsAttr_SpecialCase_RoadNode():
+def test_FilterUnit_set_bridgeunit_SetsAttr_SpecialCase_RoadNode():
     # ESTABLISH
     sue_str = "Sue"
     sue_filterunit = filterunit_shop(sue_str)
-    roadnode_bridgekind = bridgekind_shop(type_RoadNode_str(), x_face_id=sue_str)
-    roadnode_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
-    old_roadnode_bridgekind = copy_deepcopy(roadnode_bridgekind)
-    assert sue_filterunit.bridgekinds.get(road_str()) != old_roadnode_bridgekind
+    roadnode_bridgeunit = bridgeunit_shop(type_RoadNode_str(), x_face_id=sue_str)
+    roadnode_bridgeunit.set_otx_to_inx("Bob", "Bob of Portland")
+    old_roadnode_bridgeunit = copy_deepcopy(roadnode_bridgeunit)
+    assert sue_filterunit.bridgeunits.get(road_str()) != old_roadnode_bridgeunit
 
     # WHEN
-    sue_filterunit.set_bridgekind(roadnode_bridgekind)
+    sue_filterunit.set_bridgeunit(roadnode_bridgeunit)
 
     # THEN
-    roadunit_bridgekind = bridgekind_shop(type_RoadUnit_str(), x_face_id=sue_str)
-    roadunit_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
-    assert sue_filterunit.bridgekinds.get(road_str()) != old_roadnode_bridgekind
-    assert sue_filterunit.bridgekinds.get(road_str()) == roadunit_bridgekind
+    roadunit_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), x_face_id=sue_str)
+    roadunit_bridgeunit.set_otx_to_inx("Bob", "Bob of Portland")
+    assert sue_filterunit.bridgeunits.get(road_str()) != old_roadnode_bridgeunit
+    assert sue_filterunit.bridgeunits.get(road_str()) == roadunit_bridgeunit
 
 
-def test_FilterUnit_set_bridgekind_RaisesErrorIf_bridgekind_otx_road_delimiter_IsNotSame():
+def test_FilterUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_otx_road_delimiter_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_filterunit = filterunit_shop(sue_str)
     slash_otx_road_delimiter = "/"
-    acct_id_bridgekind = bridgekind_shop(
+    acct_id_bridgeunit = bridgeunit_shop(
         type_AcctID_str(),
         x_otx_road_delimiter=slash_otx_road_delimiter,
         x_face_id=sue_str,
     )
-    assert sue_filterunit.otx_road_delimiter != acct_id_bridgekind.otx_road_delimiter
-    assert sue_filterunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
+    assert sue_filterunit.otx_road_delimiter != acct_id_bridgeunit.otx_road_delimiter
+    assert sue_filterunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_filterunit.set_bridgekind(acct_id_bridgekind)
-    exception_str = f"set_bridgekind Error: BrideUnit otx_road_delimiter is '{sue_filterunit.otx_road_delimiter}', BridgeKind is '{slash_otx_road_delimiter}'."
+        sue_filterunit.set_bridgeunit(acct_id_bridgeunit)
+    exception_str = f"set_bridgeunit Error: BrideUnit otx_road_delimiter is '{sue_filterunit.otx_road_delimiter}', BridgeUnit is '{slash_otx_road_delimiter}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_FilterUnit_set_bridgekind_RaisesErrorIf_bridgekind_inx_road_delimiter_IsNotSame():
+def test_FilterUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_inx_road_delimiter_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_filterunit = filterunit_shop(sue_str)
     slash_inx_road_delimiter = "/"
-    acct_id_bridgekind = bridgekind_shop(
+    acct_id_bridgeunit = bridgeunit_shop(
         type_AcctID_str(),
         x_inx_road_delimiter=slash_inx_road_delimiter,
         x_face_id=sue_str,
     )
-    assert sue_filterunit.inx_road_delimiter != acct_id_bridgekind.inx_road_delimiter
-    assert sue_filterunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
+    assert sue_filterunit.inx_road_delimiter != acct_id_bridgeunit.inx_road_delimiter
+    assert sue_filterunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_filterunit.set_bridgekind(acct_id_bridgekind)
-    exception_str = f"set_bridgekind Error: BrideUnit inx_road_delimiter is '{sue_filterunit.inx_road_delimiter}', BridgeKind is '{slash_inx_road_delimiter}'."
+        sue_filterunit.set_bridgeunit(acct_id_bridgeunit)
+    exception_str = f"set_bridgeunit Error: BrideUnit inx_road_delimiter is '{sue_filterunit.inx_road_delimiter}', BridgeUnit is '{slash_inx_road_delimiter}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_FilterUnit_set_bridgekind_RaisesErrorIf_bridgekind_unknown_word_IsNotSame():
+def test_FilterUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_unknown_word_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_filterunit = filterunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
-    acct_id_bridgekind = bridgekind_shop(
+    acct_id_bridgeunit = bridgeunit_shop(
         type_AcctID_str(), x_unknown_word=casa_unknown_word, x_face_id=sue_str
     )
-    assert sue_filterunit.unknown_word != acct_id_bridgekind.unknown_word
-    assert sue_filterunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
+    assert sue_filterunit.unknown_word != acct_id_bridgeunit.unknown_word
+    assert sue_filterunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_filterunit.set_bridgekind(acct_id_bridgekind)
-    exception_str = f"set_bridgekind Error: BrideUnit unknown_word is '{sue_filterunit.unknown_word}', BridgeKind is '{casa_unknown_word}'."
+        sue_filterunit.set_bridgeunit(acct_id_bridgeunit)
+    exception_str = f"set_bridgeunit Error: BrideUnit unknown_word is '{sue_filterunit.unknown_word}', BridgeUnit is '{casa_unknown_word}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_FilterUnit_set_bridgekind_RaisesErrorIf_bridgekind_face_id_IsNotSame():
+def test_FilterUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_face_id_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
     sue_filterunit = filterunit_shop(sue_str)
-    acct_id_bridgekind = bridgekind_shop(type_AcctID_str(), x_face_id=yao_str)
-    assert sue_filterunit.face_id != acct_id_bridgekind.face_id
-    assert sue_filterunit.bridgekinds.get(type_AcctID_str()) != acct_id_bridgekind
+    acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), x_face_id=yao_str)
+    assert sue_filterunit.face_id != acct_id_bridgeunit.face_id
+    assert sue_filterunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_filterunit.set_bridgekind(acct_id_bridgekind)
-    exception_str = f"set_bridgekind Error: BrideUnit face_id is '{sue_filterunit.face_id}', BridgeKind is '{yao_str}'."
+        sue_filterunit.set_bridgeunit(acct_id_bridgeunit)
+    exception_str = f"set_bridgeunit Error: BrideUnit face_id is '{sue_filterunit.face_id}', BridgeUnit is '{yao_str}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_FilterUnit_get_bridgekind_ReturnsObj():
+def test_FilterUnit_get_bridgeunit_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_filterunit = filterunit_shop(sue_str)
-    static_acct_id_bridgekind = bridgekind_shop(type_AcctID_str(), x_face_id=sue_str)
-    static_acct_id_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
-    sue_filterunit.set_bridgekind(static_acct_id_bridgekind)
+    static_acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), x_face_id=sue_str)
+    static_acct_id_bridgeunit.set_otx_to_inx("Bob", "Bob of Portland")
+    sue_filterunit.set_bridgeunit(static_acct_id_bridgeunit)
 
     # WHEN
-    gen_acct_id_bridgekind = sue_filterunit.get_bridgekind(type_AcctID_str())
+    gen_acct_id_bridgeunit = sue_filterunit.get_bridgeunit(type_AcctID_str())
 
     # THEN
-    assert gen_acct_id_bridgekind == static_acct_id_bridgekind
+    assert gen_acct_id_bridgeunit == static_acct_id_bridgeunit
 
 
-def test_FilterUnit_get_bridgekind_ReturnsObj_SpecialCase_RoadUnit():
+def test_FilterUnit_get_bridgeunit_ReturnsObj_SpecialCase_RoadUnit():
     # ESTABLISH
     sue_str = "Sue"
     sue_filterunit = filterunit_shop(sue_str)
-    static_road_bridgekind = bridgekind_shop(type_RoadUnit_str(), x_face_id=sue_str)
-    static_road_bridgekind.set_otx_to_inx("Bob", "Bob of Portland")
-    sue_filterunit.set_bridgekind(static_road_bridgekind)
+    static_road_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), x_face_id=sue_str)
+    static_road_bridgeunit.set_otx_to_inx("Bob", "Bob of Portland")
+    sue_filterunit.set_bridgeunit(static_road_bridgeunit)
 
     # WHEN
-    gen_road_bridgekind = sue_filterunit.get_bridgekind(type_RoadUnit_str())
+    gen_road_bridgeunit = sue_filterunit.get_bridgeunit(type_RoadUnit_str())
 
     # THEN
-    assert gen_road_bridgekind == static_road_bridgekind
+    assert gen_road_bridgeunit == static_road_bridgeunit
 
 
 def test_FilterUnit_is_valid_ReturnsObj():
     # ESTABLISH
-    invalid_acctid_bridgekind = get_invalid_acctid_bridgekind()
-    invalid_groupid_bridgekind = get_invalid_groupid_bridgekind()
-    invalid_road_bridgekind = get_invalid_road_bridgekind()
-    valid_acctid_bridgekind = get_suita_acctid_bridgekind()
-    valid_groupid_bridgekind = get_swim_groupid_bridgekind()
-    valid_road_bridgekind = get_clean_roadunit_bridgekind()
-    assert valid_acctid_bridgekind.is_valid()
-    assert valid_groupid_bridgekind.is_valid()
-    assert valid_road_bridgekind.is_valid()
-    assert invalid_road_bridgekind.is_valid() is False
-    assert invalid_groupid_bridgekind.is_valid() is False
-    assert invalid_acctid_bridgekind.is_valid() is False
+    invalid_acctid_bridgeunit = get_invalid_acctid_bridgeunit()
+    invalid_groupid_bridgeunit = get_invalid_groupid_bridgeunit()
+    invalid_road_bridgeunit = get_invalid_road_bridgeunit()
+    valid_acctid_bridgeunit = get_suita_acctid_bridgeunit()
+    valid_groupid_bridgeunit = get_swim_groupid_bridgeunit()
+    valid_road_bridgeunit = get_clean_roadunit_bridgeunit()
+    assert valid_acctid_bridgeunit.is_valid()
+    assert valid_groupid_bridgeunit.is_valid()
+    assert valid_road_bridgeunit.is_valid()
+    assert invalid_road_bridgeunit.is_valid() is False
+    assert invalid_groupid_bridgeunit.is_valid() is False
+    assert invalid_acctid_bridgeunit.is_valid() is False
 
     # WHEN / THEN
     sue_filterunit = filterunit_shop("Sue")
     assert sue_filterunit.is_valid()
-    sue_filterunit.set_bridgekind(valid_acctid_bridgekind)
-    sue_filterunit.set_bridgekind(valid_groupid_bridgekind)
-    sue_filterunit.set_bridgekind(valid_road_bridgekind)
+    sue_filterunit.set_bridgeunit(valid_acctid_bridgeunit)
+    sue_filterunit.set_bridgeunit(valid_groupid_bridgeunit)
+    sue_filterunit.set_bridgeunit(valid_road_bridgeunit)
     assert sue_filterunit.is_valid()
 
     # WHEN / THEN
-    sue_filterunit.set_bridgekind(invalid_acctid_bridgekind)
+    sue_filterunit.set_bridgeunit(invalid_acctid_bridgeunit)
     assert sue_filterunit.is_valid() is False
-    sue_filterunit.set_bridgekind(valid_acctid_bridgekind)
+    sue_filterunit.set_bridgeunit(valid_acctid_bridgeunit)
     assert sue_filterunit.is_valid()
 
     # WHEN / THEN
-    sue_filterunit.set_bridgekind(invalid_groupid_bridgekind)
+    sue_filterunit.set_bridgeunit(invalid_groupid_bridgeunit)
     assert sue_filterunit.is_valid() is False
-    sue_filterunit.set_bridgekind(valid_groupid_bridgekind)
+    sue_filterunit.set_bridgeunit(valid_groupid_bridgeunit)
     assert sue_filterunit.is_valid()
 
     # WHEN / THEN
-    sue_filterunit.set_bridgekind(invalid_road_bridgekind)
+    sue_filterunit.set_bridgeunit(invalid_road_bridgeunit)
     assert sue_filterunit.is_valid() is False
-    sue_filterunit.set_bridgekind(valid_road_bridgekind)
+    sue_filterunit.set_bridgeunit(valid_road_bridgeunit)
     assert sue_filterunit.is_valid()
 
 
@@ -353,14 +353,14 @@ def test_FilterUnit_set_otx_to_inx_SetsAttr_Scenario0_type_AcctID_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_filterunit = filterunit_shop(zia_str)
-    acctid_bridgekind = zia_filterunit.get_bridgekind(type_AcctID_str())
-    assert acctid_bridgekind.otx_to_inx_exists(sue_otx, sue_inx) is False
+    acctid_bridgeunit = zia_filterunit.get_bridgeunit(type_AcctID_str())
+    assert acctid_bridgeunit.otx_to_inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_filterunit.set_otx_to_inx(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert acctid_bridgekind.otx_to_inx_exists(sue_otx, sue_inx)
+    assert acctid_bridgeunit.otx_to_inx_exists(sue_otx, sue_inx)
 
 
 def test_FilterUnit_set_otx_to_inx_SetsAttr_Scenario1_type_RoadUnit_str():
@@ -369,14 +369,14 @@ def test_FilterUnit_set_otx_to_inx_SetsAttr_Scenario1_type_RoadUnit_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_filterunit = filterunit_shop(zia_str)
-    road_bridgekind = zia_filterunit.get_bridgekind(type_RoadUnit_str())
-    assert road_bridgekind.otx_to_inx_exists(sue_otx, sue_inx) is False
+    road_bridgeunit = zia_filterunit.get_bridgeunit(type_RoadUnit_str())
+    assert road_bridgeunit.otx_to_inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_filterunit.set_otx_to_inx(type_RoadUnit_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgekind.otx_to_inx_exists(sue_otx, sue_inx)
+    assert road_bridgeunit.otx_to_inx_exists(sue_otx, sue_inx)
 
 
 def test_FilterUnit_set_otx_to_inx_SetsAttr_Scenario2_type_RoadNode_str():
@@ -385,14 +385,14 @@ def test_FilterUnit_set_otx_to_inx_SetsAttr_Scenario2_type_RoadNode_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_filterunit = filterunit_shop(zia_str)
-    road_bridgekind = zia_filterunit.get_bridgekind(type_RoadNode_str())
-    assert road_bridgekind.otx_to_inx_exists(sue_otx, sue_inx) is False
+    road_bridgeunit = zia_filterunit.get_bridgeunit(type_RoadNode_str())
+    assert road_bridgeunit.otx_to_inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_filterunit.set_otx_to_inx(type_RoadNode_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgekind.otx_to_inx_exists(sue_otx, sue_inx)
+    assert road_bridgeunit.otx_to_inx_exists(sue_otx, sue_inx)
 
 
 def test_FilterUnit_otx_to_inx_exists_ReturnsObj():
@@ -452,14 +452,14 @@ def test_FilterUnit_set_explicit_label_SetsAttr_Scenario0_type_AcctID_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_filterunit = filterunit_shop(zia_str)
-    acctid_bridgekind = zia_filterunit.get_bridgekind(type_AcctID_str())
-    assert acctid_bridgekind.explicit_label_exists(sue_otx, sue_inx) is False
+    acctid_bridgeunit = zia_filterunit.get_bridgeunit(type_AcctID_str())
+    assert acctid_bridgeunit.explicit_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_filterunit.set_explicit_label(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert acctid_bridgekind.explicit_label_exists(sue_otx, sue_inx)
+    assert acctid_bridgeunit.explicit_label_exists(sue_otx, sue_inx)
 
 
 def test_FilterUnit_set_explicit_label_SetsAttr_Scenario1_type_RoadUnit_str():
@@ -468,14 +468,14 @@ def test_FilterUnit_set_explicit_label_SetsAttr_Scenario1_type_RoadUnit_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_filterunit = filterunit_shop(zia_str)
-    road_bridgekind = zia_filterunit.get_bridgekind(type_RoadUnit_str())
-    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx) is False
+    road_bridgeunit = zia_filterunit.get_bridgeunit(type_RoadUnit_str())
+    assert road_bridgeunit.explicit_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_filterunit.set_explicit_label(type_RoadUnit_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx)
+    assert road_bridgeunit.explicit_label_exists(sue_otx, sue_inx)
 
 
 def test_FilterUnit_set_explicit_label_SetsAttr_Scenario2_type_RoadNode_str():
@@ -484,14 +484,14 @@ def test_FilterUnit_set_explicit_label_SetsAttr_Scenario2_type_RoadNode_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_filterunit = filterunit_shop(zia_str)
-    road_bridgekind = zia_filterunit.get_bridgekind(type_RoadNode_str())
-    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx) is False
+    road_bridgeunit = zia_filterunit.get_bridgeunit(type_RoadNode_str())
+    assert road_bridgeunit.explicit_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_filterunit.set_explicit_label(type_RoadNode_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgekind.explicit_label_exists(sue_otx, sue_inx)
+    assert road_bridgeunit.explicit_label_exists(sue_otx, sue_inx)
 
 
 def test_FilterUnit_explicit_label_exists_ReturnsObj():

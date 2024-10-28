@@ -68,7 +68,7 @@ def filterable_atom_args() -> set:
 
 
 @dataclass
-class BridgeKind:
+class BridgeUnit:
     otx_to_inx: dict = None
     unknown_word: str = None
     otx_road_delimiter: str = None
@@ -234,7 +234,7 @@ class BridgeKind:
         return get_json_from_dict(self.get_dict())
 
 
-def bridgekind_shop(
+def bridgeunit_shop(
     x_python_type: str,
     x_otx_road_delimiter: str = None,
     x_inx_road_delimiter: str = None,
@@ -242,7 +242,7 @@ def bridgekind_shop(
     x_otx_to_inx: dict = None,
     x_unknown_word: str = None,
     x_face_id: OwnerID = None,
-) -> BridgeKind:
+) -> BridgeUnit:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
     if x_otx_road_delimiter is None:
@@ -250,7 +250,7 @@ def bridgekind_shop(
     if x_inx_road_delimiter is None:
         x_inx_road_delimiter = default_road_delimiter_if_none()
 
-    return BridgeKind(
+    return BridgeUnit(
         python_type=x_python_type,
         otx_to_inx=get_empty_dict_if_none(x_otx_to_inx),
         unknown_word=x_unknown_word,
@@ -265,8 +265,8 @@ def default_unknown_word() -> str:
     return "UNKNOWN"
 
 
-def get_bridgekind_from_dict(x_dict: dict) -> BridgeKind:
-    return bridgekind_shop(
+def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
+    return bridgeunit_shop(
         x_python_type=x_dict.get("python_type"),
         x_face_id=x_dict.get("face_id"),
         x_inx_road_delimiter=x_dict.get("inx_road_delimiter"),
@@ -277,74 +277,74 @@ def get_bridgekind_from_dict(x_dict: dict) -> BridgeKind:
     )
 
 
-def get_bridgekind_from_json(x_json: str) -> BridgeKind:
-    return get_bridgekind_from_dict(get_dict_from_json(x_json))
+def get_bridgeunit_from_json(x_json: str) -> BridgeUnit:
+    return get_bridgeunit_from_dict(get_dict_from_json(x_json))
 
 
 @dataclass
 class FilterUnit:
     face_id: OwnerID = None
-    bridgekinds: dict[str, BridgeKind] = None
+    bridgeunits: dict[str, BridgeUnit] = None
     unknown_word: str = None
     otx_road_delimiter: str = None
     inx_road_delimiter: str = None
 
-    def set_bridgekind(self, x_bridgekind: BridgeKind):
-        self._check_attr_match("face_id", x_bridgekind)
-        self._check_attr_match("otx_road_delimiter", x_bridgekind)
-        self._check_attr_match("inx_road_delimiter", x_bridgekind)
-        self._check_attr_match("unknown_word", x_bridgekind)
+    def set_bridgeunit(self, x_bridgeunit: BridgeUnit):
+        self._check_attr_match("face_id", x_bridgeunit)
+        self._check_attr_match("otx_road_delimiter", x_bridgeunit)
+        self._check_attr_match("inx_road_delimiter", x_bridgeunit)
+        self._check_attr_match("unknown_word", x_bridgeunit)
 
         x_python_type = None
-        if x_bridgekind.python_type in {"RoadUnit", "RoadNode"}:
+        if x_bridgeunit.python_type in {"RoadUnit", "RoadNode"}:
             x_python_type = "road"
-            if x_bridgekind.python_type in {"RoadNode"}:
-                x_bridgekind.python_type = "RoadUnit"
+            if x_bridgeunit.python_type in {"RoadNode"}:
+                x_bridgeunit.python_type = "RoadUnit"
         else:
-            x_python_type = x_bridgekind.python_type
+            x_python_type = x_bridgeunit.python_type
 
-        self.bridgekinds[x_python_type] = x_bridgekind
+        self.bridgeunits[x_python_type] = x_bridgeunit
 
-    def _check_attr_match(self, attr: str, bridgekind: BridgeKind):
+    def _check_attr_match(self, attr: str, bridgeunit: BridgeUnit):
         self_attr = getattr(self, attr)
-        kind_attr = getattr(bridgekind, attr)
-        if self_attr != kind_attr:
-            exception_str = f"set_bridgekind Error: BrideUnit {attr} is '{self_attr}', BridgeKind is '{kind_attr}'."
+        unit_attr = getattr(bridgeunit, attr)
+        if self_attr != unit_attr:
+            exception_str = f"set_bridgeunit Error: BrideUnit {attr} is '{self_attr}', BridgeUnit is '{unit_attr}'."
             raise atom_args_python_typeException(exception_str)
 
-    def get_bridgekind(self, x_python_type: str) -> BridgeKind:
+    def get_bridgeunit(self, x_python_type: str) -> BridgeUnit:
         if x_python_type in {"RoadUnit", "RoadNode"}:
             x_python_type = "road"
-        return self.bridgekinds.get(x_python_type)
+        return self.bridgeunits.get(x_python_type)
 
     def is_valid(self) -> bool:
-        x_bridgekinds = self.bridgekinds.values()
-        return all(x_bridgekind.is_valid() is True for x_bridgekind in x_bridgekinds)
+        x_bridgeunits = self.bridgeunits.values()
+        return all(x_bridgeunit.is_valid() is True for x_bridgeunit in x_bridgeunits)
 
     def set_otx_to_inx(self, x_python_type: str, x_otx: str, x_inx: str):
-        self.get_bridgekind(x_python_type).set_otx_to_inx(x_otx, x_inx)
+        self.get_bridgeunit(x_python_type).set_otx_to_inx(x_otx, x_inx)
 
     def _get_inx_value(self, x_python_type: str, x_otx: str) -> str:
-        return self.get_bridgekind(x_python_type)._get_inx_value(x_otx)
+        return self.get_bridgeunit(x_python_type)._get_inx_value(x_otx)
 
     def otx_to_inx_exists(self, x_python_type: str, x_otx: str, x_inx: str) -> bool:
-        return self.get_bridgekind(x_python_type).otx_to_inx_exists(x_otx, x_inx)
+        return self.get_bridgeunit(x_python_type).otx_to_inx_exists(x_otx, x_inx)
 
     def del_otx_to_inx(self, x_python_type: str, x_otx: str):
-        self.get_bridgekind(x_python_type).del_otx_to_inx(x_otx)
+        self.get_bridgeunit(x_python_type).del_otx_to_inx(x_otx)
 
     def set_explicit_label(self, x_python_type: str, x_otx: str, x_inx: str):
-        self.get_bridgekind(x_python_type).set_explicit_label(x_otx, x_inx)
+        self.get_bridgeunit(x_python_type).set_explicit_label(x_otx, x_inx)
 
     def _get_explicit_inx_label(self, x_python_type: str, x_otx: str) -> str:
-        return self.get_bridgekind(x_python_type)._get_explicit_inx_label(x_otx)
+        return self.get_bridgeunit(x_python_type)._get_explicit_inx_label(x_otx)
 
     def explicit_label_exists(self, x_python_type: str, x_otx: str, x_inx: str) -> bool:
-        x_bridgekind = self.get_bridgekind(x_python_type)
-        return x_bridgekind.explicit_label_exists(x_otx, x_inx)
+        x_bridgeunit = self.get_bridgeunit(x_python_type)
+        return x_bridgeunit.explicit_label_exists(x_otx, x_inx)
 
     def del_explicit_label(self, x_python_type: str, x_otx: str):
-        self.get_bridgekind(x_python_type).del_explicit_label(x_otx)
+        self.get_bridgeunit(x_python_type).del_explicit_label(x_otx)
 
     def get_dict(self) -> dict:
         return {
@@ -352,13 +352,13 @@ class FilterUnit:
             "otx_road_delimiter": self.otx_road_delimiter,
             "inx_road_delimiter": self.inx_road_delimiter,
             "unknown_word": self.unknown_word,
-            "bridgekinds": self.get_bridgekinds_dict(),
+            "bridgeunits": self.get_bridgeunits_dict(),
         }
 
-    def get_bridgekinds_dict(self) -> dict:
+    def get_bridgeunits_dict(self) -> dict:
         return {
-            x_key: x_brandkind.get_dict()
-            for x_key, x_brandkind in self.bridgekinds.items()
+            x_key: x_bridgeunit.get_dict()
+            for x_key, x_bridgeunit in self.bridgeunits.items()
         }
 
     def get_json(self) -> str:
@@ -378,22 +378,22 @@ def filterunit_shop(
     if x_inx_road_delimiter is None:
         x_inx_road_delimiter = default_road_delimiter_if_none()
 
-    x_bridgekinds = {
-        "AcctID": bridgekind_shop(
+    x_bridgeunits = {
+        "AcctID": bridgeunit_shop(
             x_python_type="AcctID",
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
             x_inx_road_delimiter=x_inx_road_delimiter,
             x_face_id=x_face_id,
         ),
-        "GroupID": bridgekind_shop(
+        "GroupID": bridgeunit_shop(
             x_python_type="GroupID",
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
             x_inx_road_delimiter=x_inx_road_delimiter,
             x_face_id=x_face_id,
         ),
-        "road": bridgekind_shop(
+        "road": bridgeunit_shop(
             x_python_type="RoadUnit",
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
@@ -407,7 +407,7 @@ def filterunit_shop(
         unknown_word=x_unknown_word,
         otx_road_delimiter=x_otx_road_delimiter,
         inx_road_delimiter=x_inx_road_delimiter,
-        bridgekinds=x_bridgekinds,
+        bridgeunits=x_bridgeunits,
     )
 
 
@@ -417,14 +417,14 @@ def get_filterunit_from_dict(x_dict: dict) -> FilterUnit:
         otx_road_delimiter=x_dict.get("otx_road_delimiter"),
         inx_road_delimiter=x_dict.get("inx_road_delimiter"),
         unknown_word=x_dict.get("unknown_word"),
-        bridgekinds=get_bridgekinds_from_dict(x_dict.get("bridgekinds")),
+        bridgeunits=get_bridgeunits_from_dict(x_dict.get("bridgeunits")),
     )
 
 
-def get_bridgekinds_from_dict(bridgekinds_dict: dict) -> dict[str, BridgeKind]:
+def get_bridgeunits_from_dict(bridgeunits_dict: dict) -> dict[str, BridgeUnit]:
     return {
-        x_python_type: get_bridgekind_from_dict(x_bridgekind_dict)
-        for x_python_type, x_bridgekind_dict in bridgekinds_dict.items()
+        x_python_type: get_bridgeunit_from_dict(x_bridgeunit_dict)
+        for x_python_type, x_bridgeunit_dict in bridgeunits_dict.items()
     }
 
 
@@ -456,84 +456,84 @@ def get_explicit_label_columns() -> list[str]:
     ]
 
 
-def create_otx_to_inx_dt(x_bridgekind: BridgeKind) -> DataFrame:
+def create_otx_to_inx_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
     x_rows_list = [
         {
-            "face_id": x_bridgekind.face_id,
-            "python_type": x_bridgekind.python_type,
-            "otx_road_delimiter": x_bridgekind.otx_road_delimiter,
-            "inx_road_delimiter": x_bridgekind.inx_road_delimiter,
-            "unknown_word": x_bridgekind.unknown_word,
+            "face_id": x_bridgeunit.face_id,
+            "python_type": x_bridgeunit.python_type,
+            "otx_road_delimiter": x_bridgeunit.otx_road_delimiter,
+            "inx_road_delimiter": x_bridgeunit.inx_road_delimiter,
+            "unknown_word": x_bridgeunit.unknown_word,
             "otx_word": otx_value,
             "inx_word": inx_value,
         }
-        for otx_value, inx_value in x_bridgekind.otx_to_inx.items()
+        for otx_value, inx_value in x_bridgeunit.otx_to_inx.items()
     ]
     return DataFrame(x_rows_list, columns=get_otx_to_inx_dt_columns())
 
 
-def create_explicit_label_dt(x_bridgekind: BridgeKind) -> DataFrame:
+def create_explicit_label_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
     x_rows_list = [
         {
-            "face_id": x_bridgekind.face_id,
-            "python_type": x_bridgekind.python_type,
-            "otx_road_delimiter": x_bridgekind.otx_road_delimiter,
-            "inx_road_delimiter": x_bridgekind.inx_road_delimiter,
-            "unknown_word": x_bridgekind.unknown_word,
+            "face_id": x_bridgeunit.face_id,
+            "python_type": x_bridgeunit.python_type,
+            "otx_road_delimiter": x_bridgeunit.otx_road_delimiter,
+            "inx_road_delimiter": x_bridgeunit.inx_road_delimiter,
+            "unknown_word": x_bridgeunit.unknown_word,
             "otx_label": otx_value,
             "inx_label": inx_value,
         }
-        for otx_value, inx_value in x_bridgekind.explicit_label.items()
+        for otx_value, inx_value in x_bridgeunit.explicit_label.items()
     ]
     return DataFrame(x_rows_list, columns=get_explicit_label_columns())
 
 
 def save_all_csvs_from_filterunit(x_dir: str, x_filterunit: FilterUnit):
-    for x_key, x_bridgekind in x_filterunit.bridgekinds.items():
-        _save_otx_to_inx_csv(x_dir, x_bridgekind, x_key)
-        _save_explicit_label_csv(x_dir, x_bridgekind, x_key)
+    for x_key, x_bridgeunit in x_filterunit.bridgeunits.items():
+        _save_otx_to_inx_csv(x_dir, x_bridgeunit, x_key)
+        _save_explicit_label_csv(x_dir, x_bridgeunit, x_key)
 
 
-def _save_otx_to_inx_csv(x_dir: str, x_bridgekind: BridgeKind, x_filename: str):
-    x_otx_to_inx_dt = create_otx_to_inx_dt(x_bridgekind)
+def _save_otx_to_inx_csv(x_dir: str, x_bridgeunit: BridgeUnit, x_filename: str):
+    x_otx_to_inx_dt = create_otx_to_inx_dt(x_bridgeunit)
     x_otx_to_inx_csv = get_ordered_csv(x_otx_to_inx_dt)
     x_otx_to_inx_filename = f"{x_filename}_otx_to_inx.csv"
     save_file(x_dir, x_otx_to_inx_filename, x_otx_to_inx_csv)
 
 
-def _save_explicit_label_csv(x_dir, x_bridgekind, x_key):
-    x_explicit_label_dt = create_explicit_label_dt(x_bridgekind)
+def _save_explicit_label_csv(x_dir, x_bridgeunit, x_key):
+    x_explicit_label_dt = create_explicit_label_dt(x_bridgeunit)
     x_explicit_label_csv = get_ordered_csv(x_explicit_label_dt)
     x_explicit_label_filename = f"{x_key}_explicit_label.csv"
     save_file(x_dir, x_explicit_label_filename, x_explicit_label_csv)
 
 
-def _load_otx_to_inx_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind:
-    file_key = x_bridgekind.python_type
-    if x_bridgekind.python_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
+def _load_otx_to_inx_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
+    file_key = x_bridgeunit.python_type
+    if x_bridgeunit.python_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
         file_key = road_str()
     otx_to_inx_filename = f"{file_key}_otx_to_inx.csv"
     otx_to_inx_dt = open_csv(x_dir, otx_to_inx_filename)
     for table_row in otx_to_inx_dt.to_dict("records"):
         otx_word_value = table_row.get("otx_word")
         inx_word_value = table_row.get("inx_word")
-        if x_bridgekind.otx_to_inx_exists(otx_word_value, inx_word_value) is False:
-            x_bridgekind.set_otx_to_inx(otx_word_value, inx_word_value)
-    return x_bridgekind
+        if x_bridgeunit.otx_to_inx_exists(otx_word_value, inx_word_value) is False:
+            x_bridgeunit.set_otx_to_inx(otx_word_value, inx_word_value)
+    return x_bridgeunit
 
 
-def _load_explicit_label_from_csv(x_dir, x_bridgekind: BridgeKind) -> BridgeKind:
-    file_key = x_bridgekind.python_type
-    if x_bridgekind.python_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
+def _load_explicit_label_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
+    file_key = x_bridgeunit.python_type
+    if x_bridgeunit.python_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
         file_key = road_str()
     explicit_label_filename = f"{file_key}_explicit_label.csv"
     explicit_label_dt = open_csv(x_dir, explicit_label_filename)
     for table_row in explicit_label_dt.to_dict("records"):
         otx_word_value = table_row.get("otx_label")
         inx_word_value = table_row.get("inx_label")
-        if x_bridgekind.explicit_label_exists(otx_word_value, inx_word_value) is False:
-            x_bridgekind.set_explicit_label(otx_word_value, inx_word_value)
-    return x_bridgekind
+        if x_bridgeunit.explicit_label_exists(otx_word_value, inx_word_value) is False:
+            x_bridgeunit.set_explicit_label(otx_word_value, inx_word_value)
+    return x_bridgeunit
 
 
 def create_dir_valid_filterunit(x_dir: str) -> FilterUnit:
@@ -577,7 +577,7 @@ def create_dir_valid_filterunit(x_dir: str) -> FilterUnit:
 
 def init_filterunit_from_dir(x_dir: str) -> FilterUnit:
     x_filterunit = create_dir_valid_filterunit(x_dir)
-    for x_bridgekind in x_filterunit.bridgekinds.values():
-        _load_otx_to_inx_from_csv(x_dir, x_bridgekind)
-        _load_explicit_label_from_csv(x_dir, x_bridgekind)
+    for x_bridgeunit in x_filterunit.bridgeunits.values():
+        _load_otx_to_inx_from_csv(x_dir, x_bridgeunit)
+        _load_explicit_label_from_csv(x_dir, x_bridgeunit)
     return x_filterunit

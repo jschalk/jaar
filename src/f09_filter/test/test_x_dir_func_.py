@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     base_str,
     type_AcctID_str,
 )
-from src.f09_filter.filter import bridgekind_shop, filterunit_shop
+from src.f09_filter.filter import bridgeunit_shop, filterunit_shop
 from src.f09_filter.dir_func import (
     filter_single_column_dataframe,
     filter_all_columns_dataframe,
@@ -38,11 +38,11 @@ def test_get_dataframe_filterable_columns_ReturnsObj():
 
 def test_filter_single_column_dataframe_ReturnsObj_Scenario0_AcctID_EmptyDataFrame():
     # ESTABLISH
-    acct_id_bridgekind = bridgekind_shop("acct_id")
+    acct_id_bridgeunit = bridgeunit_shop("acct_id")
     empty_dt = DataFrame(columns=[acct_id_str()])
 
     # WHEN
-    gen_dt = filter_single_column_dataframe(empty_dt, acct_id_bridgekind, acct_id_str())
+    gen_dt = filter_single_column_dataframe(empty_dt, acct_id_bridgeunit, acct_id_str())
 
     # THEN
     assert gen_dt.to_csv() == empty_dt.to_csv()
@@ -57,10 +57,10 @@ def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5row
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_id_bridgekind = bridgekind_shop(type_AcctID_str())
-    acct_id_bridgekind.set_otx_to_inx(xio_otx, xio_inx)
-    acct_id_bridgekind.set_otx_to_inx(sue_otx, sue_inx)
-    acct_id_bridgekind.set_otx_to_inx(bob_otx, bob_inx)
+    acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str())
+    acct_id_bridgeunit.set_otx_to_inx(xio_otx, xio_inx)
+    acct_id_bridgeunit.set_otx_to_inx(sue_otx, sue_inx)
+    acct_id_bridgeunit.set_otx_to_inx(bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[acct_id_str()])
     otx_dt.loc[0] = [zia_otx]
     otx_dt.loc[1] = [sue_otx]
@@ -71,7 +71,7 @@ def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5row
     print(f"{otx_dt=}")
 
     # WHEN
-    filter_single_column_dataframe(otx_dt, acct_id_bridgekind, acct_id_str())
+    filter_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
 
     # THEN
     assert otx_dt.iloc[0][acct_id_str()] == zia_otx
@@ -96,10 +96,10 @@ def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5row
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_id_bridgekind = bridgekind_shop(type_AcctID_str())
-    acct_id_bridgekind.set_otx_to_inx(xio_otx, xio_inx)
-    acct_id_bridgekind.set_otx_to_inx(sue_otx, sue_inx)
-    acct_id_bridgekind.set_otx_to_inx(bob_otx, bob_inx)
+    acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str())
+    acct_id_bridgeunit.set_otx_to_inx(xio_otx, xio_inx)
+    acct_id_bridgeunit.set_otx_to_inx(sue_otx, sue_inx)
+    acct_id_bridgeunit.set_otx_to_inx(bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
@@ -110,7 +110,7 @@ def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5row
     print(f"{otx_dt=}")
 
     # WHEN
-    filter_single_column_dataframe(otx_dt, acct_id_bridgekind, acct_id_str())
+    filter_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
 
     # THEN
     assert otx_dt.iloc[0][acct_id_str()] == zia_otx
