@@ -1,9 +1,52 @@
 {
-    "fiscal_cashbook": {},
-    "fiscal_purview_episode": {},
-    "fiscal_purviewlog": {},
-    "fiscal_timeline_hour": {},
-    "fiscal_timeline_month": {},
-    "fiscal_timeline_weekday": {},
-    "fiscalunit": {}
+    "fiscal_cashbook": {
+        "optional_args": {
+            "amount": {}
+        },
+        "required_args": {
+            "acct_id": {},
+            "fiscal_id": {},
+            "owner_id": {},
+            "timestamp": {}
+        }
+    },
+    "fiscal_purview_episode": {
+        "optional_args": {
+            "quota": {}
+        },
+        "required_args": {
+            "acct_id": {},
+            "fiscal_id": {},
+            "owner_id": {},
+            "time                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           stamp": {}
+        }
+    },
+    "fiscal_timeline_hour": {
+        "optional_args": {},
+        "required_args": {
+            "cumlative_minute": {},
+            "fiscal_id": {},
+            "hour_label": {}
+        }
+    },
+    "fiscal_timeline_month": {
+        "optional_args": {},
+        "required_args": {
+            "cumlative_day": {},
+            "fiscal_id": {},
+            "month_label": {}
+        }
+    },
+    "fiscal_timeline_weekday": {
+        "optional_args": {},
+        "required_args": {
+            "fiscal_id": {},
+            "weekday_label": {},
+            "weekday_order": {}
+        }
+    },
+    "fiscalunit": {
+        "optional_args": {},
+        "required_args": {}
+    }
 }
