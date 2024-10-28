@@ -41,7 +41,7 @@ class set_all_otx_to_inxException(Exception):
     pass
 
 
-class atom_args_jaar_typeException(Exception):
+class atom_args_obj_classException(Exception):
     pass
 
 
@@ -49,7 +49,7 @@ class set_explicit_label_Exception(Exception):
     pass
 
 
-def filterable_jaar_types() -> set:
+def filterable_obj_classs() -> set:
     return {"AcctID", "GroupID", "RoadNode", "RoadUnit"}
 
 
@@ -76,7 +76,7 @@ class BridgeUnit:
     otx_road_delimiter: str = None
     inx_road_delimiter: str = None
     explicit_label: dict = None
-    jaar_type: str = None
+    obj_class: str = None
     face_id: OwnerID = None
 
     def set_all_otx_to_inx(
@@ -97,15 +97,15 @@ class BridgeUnit:
     def get_create_inx(self, otx_word: str, missing_add: bool = True) -> str:
         if missing_add and self.otx_exists(otx_word) is False:
             inx_word = copy_copy(otx_word)
-            if self.jaar_type in {"GroupID"}:
+            if self.obj_class in {"GroupID"}:
                 if self.inx_road_delimiter in otx_word:
                     return None
                 otx_r_delimiter = self.otx_road_delimiter
                 inx_r_delimiter = self.inx_road_delimiter
                 inx_word = inx_word.replace(otx_r_delimiter, inx_r_delimiter)
-            if self.jaar_type in {"RoadUnit"}:
+            if self.obj_class in {"RoadUnit"}:
                 inx_word = self._get_create_roadunit_inx(otx_word)
-            if self.jaar_type in {"RoadNode"}:
+            if self.obj_class in {"RoadNode"}:
                 if self.inx_road_delimiter in otx_word:
                     return None
                 inx_word = self._get_explicit_roadnode(otx_word)
@@ -149,7 +149,7 @@ class BridgeUnit:
 
         self.explicit_label[otx_label] = inx_label
 
-        if self.jaar_type == "RoadUnit":
+        if self.obj_class == "RoadUnit":
             self._set_new_explicit_label_to_otx_inx(otx_label, inx_label)
 
     def _set_new_explicit_label_to_otx_inx(self, otx_label, inx_label):
@@ -189,23 +189,23 @@ class BridgeUnit:
         return str_in_dict_values(self.inx_road_delimiter, self.otx_to_inx)
 
     def _is_otx_delimiter_inclusion_correct(self) -> bool:
-        if self.jaar_type in {"AcctID", "RoadNode"}:
+        if self.obj_class in {"AcctID", "RoadNode"}:
             return not self._otx_road_delimiter_in_otx_words()
-        elif self.jaar_type in {"GroupID"}:
+        elif self.obj_class in {"GroupID"}:
             return str_in_all_dict_keys(self.otx_road_delimiter, self.otx_to_inx)
-        elif self.jaar_type in {"RoadUnit"}:
+        elif self.obj_class in {"RoadUnit"}:
             return True
 
     def _is_inx_delimiter_inclusion_correct(self) -> bool:
-        if self.jaar_type in {"AcctID", "RoadNode"}:
+        if self.obj_class in {"AcctID", "RoadNode"}:
             return not self._inx_road_delimiter_in_inx_words()
-        elif self.jaar_type in {"GroupID"}:
+        elif self.obj_class in {"GroupID"}:
             return str_in_all_dict_values(self.inx_road_delimiter, self.otx_to_inx)
-        elif self.jaar_type in {"RoadUnit"}:
+        elif self.obj_class in {"RoadUnit"}:
             return True
 
     def all_otx_parent_roads_exist(self) -> bool:
-        if self.jaar_type not in {"RoadUnit"}:
+        if self.obj_class not in {"RoadUnit"}:
             return True
         for x_road in self.otx_to_inx.keys():
             if is_roadnode(x_road, self.otx_road_delimiter) is False:
@@ -223,7 +223,7 @@ class BridgeUnit:
 
     def get_dict(self) -> dict:
         return {
-            "jaar_type": self.jaar_type,
+            "obj_class": self.obj_class,
             "face_id": self.face_id,
             "otx_road_delimiter": self.otx_road_delimiter,
             "inx_road_delimiter": self.inx_road_delimiter,
@@ -237,7 +237,7 @@ class BridgeUnit:
 
 
 def bridgeunit_shop(
-    x_jaar_type: str,
+    x_obj_class: str,
     x_otx_road_delimiter: str = None,
     x_inx_road_delimiter: str = None,
     x_explicit_label: dict = None,
@@ -253,7 +253,7 @@ def bridgeunit_shop(
         x_inx_road_delimiter = default_road_delimiter_if_none()
 
     return BridgeUnit(
-        jaar_type=x_jaar_type,
+        obj_class=x_obj_class,
         otx_to_inx=get_empty_dict_if_none(x_otx_to_inx),
         unknown_word=x_unknown_word,
         otx_road_delimiter=x_otx_road_delimiter,
@@ -269,7 +269,7 @@ def default_unknown_word() -> str:
 
 def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
     return bridgeunit_shop(
-        x_jaar_type=x_dict.get("jaar_type"),
+        x_obj_class=x_dict.get("obj_class"),
         x_face_id=x_dict.get("face_id"),
         x_inx_road_delimiter=x_dict.get("inx_road_delimiter"),
         x_explicit_label=x_dict.get("explicit_label"),
@@ -298,56 +298,56 @@ class FilterUnit:
         self._check_attr_match("inx_road_delimiter", x_bridgeunit)
         self._check_attr_match("unknown_word", x_bridgeunit)
 
-        x_jaar_type = None
-        if x_bridgeunit.jaar_type in {"RoadUnit", "RoadNode"}:
-            x_jaar_type = "road"
-            if x_bridgeunit.jaar_type in {"RoadNode"}:
-                x_bridgeunit.jaar_type = "RoadUnit"
+        x_obj_class = None
+        if x_bridgeunit.obj_class in {"RoadUnit", "RoadNode"}:
+            x_obj_class = "road"
+            if x_bridgeunit.obj_class in {"RoadNode"}:
+                x_bridgeunit.obj_class = "RoadUnit"
         else:
-            x_jaar_type = x_bridgeunit.jaar_type
+            x_obj_class = x_bridgeunit.obj_class
 
-        self.bridgeunits[x_jaar_type] = x_bridgeunit
+        self.bridgeunits[x_obj_class] = x_bridgeunit
 
     def _check_attr_match(self, attr: str, bridgeunit: BridgeUnit):
         self_attr = getattr(self, attr)
         unit_attr = getattr(bridgeunit, attr)
         if self_attr != unit_attr:
             exception_str = f"set_bridgeunit Error: BridgeUnit {attr} is '{self_attr}', BridgeUnit is '{unit_attr}'."
-            raise atom_args_jaar_typeException(exception_str)
+            raise atom_args_obj_classException(exception_str)
 
-    def get_bridgeunit(self, x_jaar_type: str) -> BridgeUnit:
-        if x_jaar_type in {"RoadUnit", "RoadNode"}:
-            x_jaar_type = "road"
-        return self.bridgeunits.get(x_jaar_type)
+    def get_bridgeunit(self, x_obj_class: str) -> BridgeUnit:
+        if x_obj_class in {"RoadUnit", "RoadNode"}:
+            x_obj_class = "road"
+        return self.bridgeunits.get(x_obj_class)
 
     def is_valid(self) -> bool:
         x_bridgeunits = self.bridgeunits.values()
         return all(x_bridgeunit.is_valid() is True for x_bridgeunit in x_bridgeunits)
 
-    def set_otx_to_inx(self, x_jaar_type: str, x_otx: str, x_inx: str):
-        self.get_bridgeunit(x_jaar_type).set_otx_to_inx(x_otx, x_inx)
+    def set_otx_to_inx(self, x_obj_class: str, x_otx: str, x_inx: str):
+        self.get_bridgeunit(x_obj_class).set_otx_to_inx(x_otx, x_inx)
 
-    def _get_inx_value(self, x_jaar_type: str, x_otx: str) -> str:
-        return self.get_bridgeunit(x_jaar_type)._get_inx_value(x_otx)
+    def _get_inx_value(self, x_obj_class: str, x_otx: str) -> str:
+        return self.get_bridgeunit(x_obj_class)._get_inx_value(x_otx)
 
-    def otx_to_inx_exists(self, x_jaar_type: str, x_otx: str, x_inx: str) -> bool:
-        return self.get_bridgeunit(x_jaar_type).otx_to_inx_exists(x_otx, x_inx)
+    def otx_to_inx_exists(self, x_obj_class: str, x_otx: str, x_inx: str) -> bool:
+        return self.get_bridgeunit(x_obj_class).otx_to_inx_exists(x_otx, x_inx)
 
-    def del_otx_to_inx(self, x_jaar_type: str, x_otx: str):
-        self.get_bridgeunit(x_jaar_type).del_otx_to_inx(x_otx)
+    def del_otx_to_inx(self, x_obj_class: str, x_otx: str):
+        self.get_bridgeunit(x_obj_class).del_otx_to_inx(x_otx)
 
-    def set_explicit_label(self, x_jaar_type: str, x_otx: str, x_inx: str):
-        self.get_bridgeunit(x_jaar_type).set_explicit_label(x_otx, x_inx)
+    def set_explicit_label(self, x_obj_class: str, x_otx: str, x_inx: str):
+        self.get_bridgeunit(x_obj_class).set_explicit_label(x_otx, x_inx)
 
-    def _get_explicit_inx_label(self, x_jaar_type: str, x_otx: str) -> str:
-        return self.get_bridgeunit(x_jaar_type)._get_explicit_inx_label(x_otx)
+    def _get_explicit_inx_label(self, x_obj_class: str, x_otx: str) -> str:
+        return self.get_bridgeunit(x_obj_class)._get_explicit_inx_label(x_otx)
 
-    def explicit_label_exists(self, x_jaar_type: str, x_otx: str, x_inx: str) -> bool:
-        x_bridgeunit = self.get_bridgeunit(x_jaar_type)
+    def explicit_label_exists(self, x_obj_class: str, x_otx: str, x_inx: str) -> bool:
+        x_bridgeunit = self.get_bridgeunit(x_obj_class)
         return x_bridgeunit.explicit_label_exists(x_otx, x_inx)
 
-    def del_explicit_label(self, x_jaar_type: str, x_otx: str):
-        self.get_bridgeunit(x_jaar_type).del_explicit_label(x_otx)
+    def del_explicit_label(self, x_obj_class: str, x_otx: str):
+        self.get_bridgeunit(x_obj_class).del_explicit_label(x_otx)
 
     def get_dict(self) -> dict:
         return {
@@ -385,21 +385,21 @@ def filterunit_shop(
 
     x_bridgeunits = {
         "AcctID": bridgeunit_shop(
-            x_jaar_type="AcctID",
+            x_obj_class="AcctID",
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
             x_inx_road_delimiter=x_inx_road_delimiter,
             x_face_id=x_face_id,
         ),
         "GroupID": bridgeunit_shop(
-            x_jaar_type="GroupID",
+            x_obj_class="GroupID",
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
             x_inx_road_delimiter=x_inx_road_delimiter,
             x_face_id=x_face_id,
         ),
         "road": bridgeunit_shop(
-            x_jaar_type="RoadUnit",
+            x_obj_class="RoadUnit",
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
             x_inx_road_delimiter=x_inx_road_delimiter,
@@ -430,8 +430,8 @@ def get_filterunit_from_dict(x_dict: dict) -> FilterUnit:
 
 def get_bridgeunits_from_dict(bridgeunits_dict: dict) -> dict[str, BridgeUnit]:
     return {
-        x_jaar_type: get_bridgeunit_from_dict(x_bridgeunit_dict)
-        for x_jaar_type, x_bridgeunit_dict in bridgeunits_dict.items()
+        x_obj_class: get_bridgeunit_from_dict(x_bridgeunit_dict)
+        for x_obj_class, x_bridgeunit_dict in bridgeunits_dict.items()
     }
 
 
@@ -442,7 +442,7 @@ def get_filterunit_from_json(x_json: str) -> FilterUnit:
 def get_otx_to_inx_dt_columns() -> list[str]:
     return [
         "face_id",
-        "jaar_type",
+        "obj_class",
         "otx_road_delimiter",
         "inx_road_delimiter",
         "unknown_word",
@@ -454,7 +454,7 @@ def get_otx_to_inx_dt_columns() -> list[str]:
 def get_explicit_label_columns() -> list[str]:
     return [
         "face_id",
-        "jaar_type",
+        "obj_class",
         "otx_road_delimiter",
         "inx_road_delimiter",
         "unknown_word",
@@ -467,7 +467,7 @@ def create_otx_to_inx_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
     x_rows_list = [
         {
             "face_id": x_bridgeunit.face_id,
-            "jaar_type": x_bridgeunit.jaar_type,
+            "obj_class": x_bridgeunit.obj_class,
             "otx_road_delimiter": x_bridgeunit.otx_road_delimiter,
             "inx_road_delimiter": x_bridgeunit.inx_road_delimiter,
             "unknown_word": x_bridgeunit.unknown_word,
@@ -483,7 +483,7 @@ def create_explicit_label_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
     x_rows_list = [
         {
             "face_id": x_bridgeunit.face_id,
-            "jaar_type": x_bridgeunit.jaar_type,
+            "obj_class": x_bridgeunit.obj_class,
             "otx_road_delimiter": x_bridgeunit.otx_road_delimiter,
             "inx_road_delimiter": x_bridgeunit.inx_road_delimiter,
             "unknown_word": x_bridgeunit.unknown_word,
@@ -516,8 +516,8 @@ def _save_explicit_label_csv(x_dir, x_bridgeunit, x_key):
 
 
 def _load_otx_to_inx_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
-    file_key = x_bridgeunit.jaar_type
-    if x_bridgeunit.jaar_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
+    file_key = x_bridgeunit.obj_class
+    if x_bridgeunit.obj_class in {type_RoadUnit_str(), type_RoadUnit_str()}:
         file_key = road_str()
     otx_to_inx_filename = f"{file_key}_otx_to_inx.csv"
     otx_to_inx_dt = open_csv(x_dir, otx_to_inx_filename)
@@ -530,8 +530,8 @@ def _load_otx_to_inx_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
 
 
 def _load_explicit_label_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
-    file_key = x_bridgeunit.jaar_type
-    if x_bridgeunit.jaar_type in {type_RoadUnit_str(), type_RoadUnit_str()}:
+    file_key = x_bridgeunit.obj_class
+    if x_bridgeunit.obj_class in {type_RoadUnit_str(), type_RoadUnit_str()}:
         file_key = road_str()
     explicit_label_filename = f"{file_key}_explicit_label.csv"
     explicit_label_dt = open_csv(x_dir, explicit_label_filename)

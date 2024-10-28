@@ -47,8 +47,8 @@ def sqlite_datatype_str() -> str:
     return "sqlite_datatype"
 
 
-def jaar_type_str() -> str:
-    return "jaar_type"
+def obj_class_str() -> str:
+    return "obj_class"
 
 
 def type_AcctID_str() -> str:
@@ -273,7 +273,7 @@ def get_atom_args_category_mapping() -> dict[str, set[str]]:
     return x_dict
 
 
-def get_allowed_jaar_types() -> set[str]:
+def get_allowed_obj_classs() -> set[str]:
     return {
         "AcctID",
         "bool",
@@ -286,7 +286,7 @@ def get_allowed_jaar_types() -> set[str]:
     }
 
 
-def get_atom_args_jaar_types() -> dict[str, str]:
+def get_atom_args_obj_classs() -> dict[str, str]:
     return {
         "acct_id": "AcctID",
         "addin": "float",

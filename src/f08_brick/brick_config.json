@@ -1,400 +1,449 @@
 {
     "bud_acct_membership": {
+        "allowed_crud": "DELETE_INSERT_UPDATE",
         "brick_type": "bud",
         "optional_args": {
             "credit_vote": {
-                "column_order": 3,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_vote": {
-                "column_order": 2,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "acct_id": {
-                "column_order": 0,
-                "jaar_type": "AcctID",
+                "obj_class": "AcctID",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "group_id": {
-                "column_order": 1,
-                "jaar_type": "GroupID",
+                "obj_class": "GroupID",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_acctunit": {
+        "allowed_crud": "DELETE_INSERT_UPDATE",
         "brick_type": "bud",
         "optional_args": {
             "credit_belief": {
-                "column_order": 2,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_belief": {
-                "column_order": 1,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "acct_id": {
-                "column_order": 0,
-                "jaar_type": "AcctID",
+                "obj_class": "AcctID",
                 "sqlite_datatype": "TEXT"
+            },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_awardlink": {
+        "allowed_crud": "DELETE_INSERT_UPDATE",
         "brick_type": "bud",
         "optional_args": {
             "give_force": {
-                "column_order": 3,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "take_force": {
-                "column_order": 2,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             }
         },
         "required_args": {
             "awardee_id": {
-                "column_order": 1,
-                "jaar_type": "GroupID",
+                "obj_class": "GroupID",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "road": {
-                "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_factunit": {
+        "allowed_crud": "DELETE_INSERT_UPDATE",
         "brick_type": "bud",
         "optional_args": {
             "fnigh": {
-                "column_order": 4,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "fopen": {
-                "column_order": 3,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "pick": {
-                "column_order": 2,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         },
         "required_args": {
             "base": {
-                "column_order": 1,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "road": {
-                "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_healerlink": {
+        "allowed_crud": "DELETE_INSERT",
         "brick_type": "bud",
         "optional_args": {},
         "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "healer_id": {
-                "column_order": 1,
-                "jaar_type": "GroupID",
+                "obj_class": "GroupID",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
-                "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_reason_premiseunit": {
+        "allowed_crud": "DELETE_INSERT_UPDATE",
         "brick_type": "bud",
         "optional_args": {
             "divisor": {
-                "column_order": 5,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "nigh": {
-                "column_order": 4,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "open": {
-                "column_order": 3,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             }
         },
         "required_args": {
             "base": {
-                "column_order": 1,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "need": {
-                "column_order": 2,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "nesting_order": 2,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
-                "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_reasonunit": {
+        "allowed_crud": "DELETE_INSERT_UPDATE",
         "brick_type": "bud",
         "optional_args": {
             "base_item_active_requisite": {
-                "column_order": 2,
-                "jaar_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "base": {
-                "column_order": 1,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "road": {
-                "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_teamlink": {
+        "allowed_crud": "DELETE_INSERT",
         "brick_type": "bud",
         "optional_args": {},
         "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "road": {
-                "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "team_id": {
-                "column_order": 1,
-                "jaar_type": "GroupID",
+                "obj_class": "GroupID",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_itemunit": {
+        "allowed_crud": "DELETE_INSERT_UPDATE",
         "brick_type": "bud",
         "optional_args": {
             "addin": {
-                "column_order": 10,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "begin": {
-                "column_order": 5,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "close": {
-                "column_order": 6,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "denom": {
-                "column_order": 8,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "gogo_want": {
-                "column_order": 11,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "mass": {
-                "column_order": 3,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "morph": {
-                "column_order": 9,
-                "jaar_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "numor": {
-                "column_order": 7,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "pledge": {
-                "column_order": 2,
-                "jaar_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "problem_bool": {
-                "column_order": 4,
-                "jaar_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "stop_want": {
-                "column_order": 12,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             }
         },
         "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "label": {
-                "column_order": 1,
-                "jaar_type": "RoadNode",
+                "obj_class": "RoadNode",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
-                "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "budunit": {
+        "allowed_crud": "UPDATE",
         "brick_type": "bud",
         "optional_args": {
             "credor_respect": {
-                "column_order": 3,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtor_respect": {
-                "column_order": 2,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "fund_coin": {
-                "column_order": 1,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "fund_pool": {
-                "column_order": 0,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "max_tree_traverse": {
-                "column_order": 5,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "penny": {
-                "column_order": 6,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "purview_timestamp": {
-                "column_order": 8,
-                "jaar_type": "TimeLinePoint",
+                "obj_class": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"
             },
             "respect_bit": {
-                "column_order": 4,
-                "jaar_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "tally": {
-                "column_order": 7,
-                "jaar_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
-        "required_args": {}
+        "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            }
+        }
     },
     "fiscal_cashbook": {
+        "allowed_crud": "INSERT_MULITPLE",
         "brick_type": "fiscal",
         "optional_args": {
             "amount": {}
         },
         "required_args": {
             "acct_id": {},
-            "fiscal_id": {},
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "owner_id": {},
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            },
             "timestamp": {}
         }
     },
     "fiscal_purview_episode": {
+        "allowed_crud": "INSERT_MULITPLE",
         "brick_type": "fiscal",
         "optional_args": {
             "quota": {}
         },
         "required_args": {
             "acct_id": {},
-            "fiscal_id": {},
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "owner_id": {},
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            },
             "timestamp": {}
         }
     },
     "fiscal_timeline_hour": {
+        "allowed_crud": "INSERT_ONE_TIME",
         "brick_type": "fiscal",
         "optional_args": {},
         "required_args": {
             "cumlative_minute": {},
-            "fiscal_id": {},
-            "hour_label": {}
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "hour_label": {},
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            }
         }
     },
     "fiscal_timeline_month": {
+        "allowed_crud": "INSERT_ONE_TIME",
         "brick_type": "fiscal",
         "optional_args": {},
         "required_args": {
             "cumlative_day": {},
-            "fiscal_id": {},
-            "month_label": {}
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "month_label": {},
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            }
         }
     },
     "fiscal_timeline_weekday": {
+        "allowed_crud": "INSERT_ONE_TIME",
         "brick_type": "fiscal",
         "optional_args": {},
         "required_args": {
-            "fiscal_id": {},
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            },
             "weekday_label": {},
             "weekday_order": {}
         }
     },
     "fiscalunit": {
+        "allowed_crud": "INSERT_ONE_TIME",
         "brick_type": "fiscal",
         "optional_args": {
-            "c400_config": {},
             "current_time": {},
-            "fiscal_id": {},
             "fund_coin": {},
             "monthday_distortion": {},
             "penny": {},
@@ -403,6 +452,13 @@
             "timeline_label": {},
             "yr1_jan1_offset": {}
         },
-        "required_args": {}
+        "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            }
+        }
     }
 }

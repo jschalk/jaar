@@ -6,7 +6,7 @@ from openpyxl import load_workbook as openpyxl_load_workbook
 def get_sorting_priority_column_headers() -> list[str]:
     return [
         "face_id",
-        "jaar_type",
+        "obj_class",
         "owner_id",
         "acct_id",
         "group_id",

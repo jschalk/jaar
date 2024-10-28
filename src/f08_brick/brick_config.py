@@ -19,8 +19,16 @@ def get_brick_config_dict() -> dict:
     )
 
 
+def time_id_str() -> str:
+    return "time_id"
+
+
 def brick_number_str() -> str:
     return "brick_number"
+
+
+def allowed_crud_str() -> str:
+    return "allowed_crud"
 
 
 def column_order_str() -> str:

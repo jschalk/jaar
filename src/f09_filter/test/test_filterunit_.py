@@ -1,6 +1,6 @@
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import (
-    get_atom_args_jaar_types,
+    get_atom_args_obj_classs,
     road_str,
     type_AcctID_str,
     type_GroupID_str,
@@ -12,7 +12,7 @@ from src.f09_filter.filter import (
     filterunit_shop,
     bridgeunit_shop,
     default_unknown_word,
-    filterable_jaar_types,
+    filterable_obj_classs,
     filterable_atom_args,
 )
 from src.f09_filter.examples.example_filters import (
@@ -32,22 +32,22 @@ from copy import deepcopy as copy_deepcopy
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
 
 
-def test_filterable_jaar_types_ReturnsObj():
+def test_filterable_obj_classs_ReturnsObj():
     # ESTABLISH / WHEN
-    x_filterable_jaar_types = filterable_jaar_types()
+    x_filterable_obj_classs = filterable_obj_classs()
 
     # THEN
-    assert len(x_filterable_jaar_types) == 4
-    assert x_filterable_jaar_types == {
+    assert len(x_filterable_obj_classs) == 4
+    assert x_filterable_obj_classs == {
         type_AcctID_str(),
         type_GroupID_str(),
         type_RoadNode_str(),
         type_RoadUnit_str(),
     }
-    print(f"{set(get_atom_args_jaar_types().values())=}")
-    all_atom_jaar_types = set(get_atom_args_jaar_types().values())
-    inter_x = set(all_atom_jaar_types).intersection(x_filterable_jaar_types)
-    assert inter_x == x_filterable_jaar_types
+    print(f"{set(get_atom_args_obj_classs().values())=}")
+    all_atom_obj_classs = set(get_atom_args_obj_classs().values())
+    inter_x = set(all_atom_obj_classs).intersection(x_filterable_obj_classs)
+    assert inter_x == x_filterable_obj_classs
 
 
 def test_filterable_atom_args_ReturnsObj():
@@ -67,13 +67,13 @@ def test_filterable_atom_args_ReturnsObj():
         "team_id",
     }
 
-    print(f"{filterable_jaar_types()=}")
-    all_jaar_types = set(get_atom_args_jaar_types().keys())
-    assert filterable_atom_args().issubset(all_jaar_types)
+    print(f"{filterable_obj_classs()=}")
+    all_obj_classs = set(get_atom_args_obj_classs().keys())
+    assert filterable_atom_args().issubset(all_obj_classs)
     static_filterable_atom_args = {
         x_arg
-        for x_arg, jaar_type in get_atom_args_jaar_types().items()
-        if jaar_type in filterable_jaar_types()
+        for x_arg, obj_class in get_atom_args_obj_classs().items()
+        if obj_class in filterable_obj_classs()
     }
     assert filterable_atom_args() == static_filterable_atom_args
 

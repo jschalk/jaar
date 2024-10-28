@@ -18,6 +18,7 @@ from src.f04_gift.atom_config import (
     normal_specs_str,
     required_args_str,
     optional_args_str,
+    fiscal_id_str,
 )
 from src.f07_fiscal.fiscal_config import (
     get_fiscal_config_dict,
@@ -30,7 +31,9 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_weekday_str,
 )
 from src.f08_brick.brick_config import (
+    time_id_str,
     brick_number_str,
+    allowed_crud_str,
     get_brickref_dict,
     config_file_dir,
     get_brick_config_file_name,
@@ -94,6 +97,7 @@ def _validate_brick_config(x_brick_config: dict):
         assert brick_dict.get("brick_type") in {"fiscal", "bud"}
         assert brick_dict.get(required_args_str()) is not None
         assert brick_dict.get(optional_args_str()) is not None
+        assert brick_dict.get(allowed_crud_str()) is not None
         assert brick_dict.get(atom_update()) is None
         assert brick_dict.get(atom_insert()) is None
         assert brick_dict.get(atom_delete()) is None
@@ -103,17 +107,76 @@ def _validate_brick_config(x_brick_config: dict):
         if brick_category[:3] == "fis":
             sub_category = fiscal_config_dict.get(brick_category)
 
+        if brick_category in {
+            fiscal_timeline_hour_str(),
+            fiscal_timeline_month_str(),
+            fiscal_timeline_weekday_str(),
+            fiscalunit_str(),
+        }:
+            assert brick_dict.get(allowed_crud_str()) == "INSERT_ONE_TIME"
+        elif brick_category in {fiscal_purview_episode_str(), fiscal_cashbook_str()}:
+            assert brick_dict.get(allowed_crud_str()) == "INSERT_MULITPLE"
+        elif (
+            sub_category.get(atom_update()) != None
+            and sub_category.get(atom_insert()) != None
+            and sub_category.get(atom_delete()) != None
+        ):
+            assert brick_dict.get(allowed_crud_str()) == "DELETE_INSERT_UPDATE"
+        elif (
+            sub_category.get(atom_update()) != None
+            and sub_category.get(atom_insert()) != None
+            and sub_category.get(atom_delete()) is None
+        ):
+            assert brick_dict.get(allowed_crud_str()) == "INSERT_UPDATE"
+        elif (
+            sub_category.get(atom_update()) is None
+            and sub_category.get(atom_insert()) != None
+            and sub_category.get(atom_delete()) != None
+        ):
+            assert brick_dict.get(allowed_crud_str()) == "DELETE_INSERT"
+        elif (
+            sub_category.get(atom_update()) != None
+            and sub_category.get(atom_insert()) is None
+            and sub_category.get(atom_delete()) != None
+        ):
+            assert brick_dict.get(allowed_crud_str()) == "DELETE_UPDATE"
+        elif (
+            sub_category.get(atom_update()) != None
+            and sub_category.get(atom_insert()) is None
+            and sub_category.get(atom_delete()) is None
+        ):
+            assert brick_dict.get(allowed_crud_str()) == "UPDATE"
+        elif (
+            sub_category.get(atom_update()) is None
+            and sub_category.get(atom_insert()) != None
+            and sub_category.get(atom_delete()) is None
+        ):
+            assert brick_dict.get(allowed_crud_str()) == "INSERT"
+        elif (
+            sub_category.get(atom_update()) is None
+            and sub_category.get(atom_insert()) is None
+            and sub_category.get(atom_delete()) != None
+        ):
+            assert brick_dict.get(allowed_crud_str()) == "DELETE"
+
         sub_required_args_keys = set(sub_category.get(required_args_str()).keys())
         brick_required_args_keys = set(brick_dict.get(required_args_str()).keys())
-        print(f"  {sub_required_args_keys=}")
-        print(f"{brick_required_args_keys=}")
+        # print(f"  {sub_required_args_keys=}")
+        # print(f"{brick_required_args_keys=}")
         assert sub_required_args_keys.issubset(brick_required_args_keys)
 
         sub_optional_args_keys = set(sub_category.get(optional_args_str()).keys())
+        if fiscal_id_str() in sub_optional_args_keys:
+            sub_optional_args_keys.remove(fiscal_id_str())
+
         brick_optional_args_keys = set(brick_dict.get(optional_args_str()).keys())
-        print(f"  {sub_optional_args_keys=}")
-        print(f"{brick_optional_args_keys=}")
+        # print(f"  {sub_optional_args_keys=}")
+        # print(f"{brick_optional_args_keys=}")
         assert sub_optional_args_keys.issubset(brick_optional_args_keys)
+
+        assert fiscal_id_str() not in brick_optional_args_keys
+        assert fiscal_id_str() in brick_required_args_keys
+        assert time_id_str() in brick_required_args_keys
 
 
 def test_get_brick_filenames_ReturnsObj():
