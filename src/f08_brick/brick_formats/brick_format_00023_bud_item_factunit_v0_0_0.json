@@ -1,9 +1,15 @@
 {
-    "atom_categorys": ["bud_item_factunit"],
+    "atom_categorys": [
+        "bud_item_factunit"
+    ],
     "attributes": {
         "base": {
             "column_order": 3,
             "sort_order": 3
+        },
+        "fiscal_id": {
+            "column_order": 0,
+            "sort_order": 0
         },
         "fnigh": {
             "column_order": 6
@@ -18,13 +24,10 @@
         "pick": {
             "column_order": 4
         },
-        "fiscal_id": {
-            "column_order": 0,
-            "sort_order": 0
-        },
         "road": {
             "column_order": 2,
             "sort_order": 2
         }
-    }
+    },
+    "brick_number": "br00023"
 }

@@ -177,10 +177,10 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
 
 def test_BudUnit_set_road_delimiter_CorrectlySetsAttr():
     # ESTABLISH
-    fiscal_id_str = "Sun"
+    x_fiscal_id = "music45"
     slash_road_delimiter = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, fiscal_id_str, _road_delimiter=slash_road_delimiter)
+    sue_bud = budunit_shop(sue_str, x_fiscal_id, _road_delimiter=slash_road_delimiter)
     assert sue_bud._road_delimiter == slash_road_delimiter
 
     # WHEN
@@ -193,10 +193,10 @@ def test_BudUnit_set_road_delimiter_CorrectlySetsAttr():
 
 def test_BudUnit_make_road_ReturnsCorrectObj():
     # ESTABLISH
-    fiscal_id_str = "Sun"
+    x_fiscal_id = "music45"
     slash_road_delimiter = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, fiscal_id_str, _road_delimiter=slash_road_delimiter)
+    sue_bud = budunit_shop(sue_str, x_fiscal_id, _road_delimiter=slash_road_delimiter)
     casa_str = "casa"
     v1_casa_road = sue_bud.make_l1_road(casa_str)
 

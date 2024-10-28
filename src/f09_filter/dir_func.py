@@ -1,8 +1,8 @@
 from src.f00_instrument.file import get_dir_file_strs, open_file
-from src.f00_instrument.pandas_tool import save_dataframe_to_csv, open_csv
-from src.f04_gift.atom_config import get_atom_args_python_types
+from src.f04_gift.atom_config import get_atom_args_obj_classs
+from src.f08_brick.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f09_filter.filter import (
-    BridgeKind,
+    BridgeUnit,
     FilterUnit,
     filterable_atom_args,
     get_filterunit_from_json,
@@ -15,13 +15,13 @@ def get_dataframe_filterable_columns(x_dt: DataFrame) -> set[str]:
 
 
 def filter_single_column_dataframe(
-    x_dt: DataFrame, x_bridgekind: BridgeKind, column_name: str
+    x_dt: DataFrame, x_bridgeunit: BridgeUnit, column_name: str
 ) -> DataFrame:
     if column_name in x_dt:
         row_count = len(x_dt)
         for cur_row in range(row_count):
             otx_value = x_dt.iloc[cur_row][column_name]
-            inx_value = x_bridgekind.get_create_inx(otx_value)
+            inx_value = x_bridgeunit.get_create_inx(otx_value)
             x_dt.at[cur_row, column_name] = inx_value
     return x_dt
 
@@ -30,9 +30,9 @@ def filter_all_columns_dataframe(x_dt: DataFrame, x_filterunit: FilterUnit):
     column_names = set(x_dt.columns)
     filterable_columns = column_names.intersection(filterable_atom_args())
     for filterable_column in filterable_columns:
-        python_type = get_atom_args_python_types().get(filterable_column)
-        x_bridgekind = x_filterunit.get_bridgekind(python_type)
-        filter_single_column_dataframe(x_dt, x_bridgekind, filterable_column)
+        obj_class = get_atom_args_obj_classs().get(filterable_column)
+        x_bridgeunit = x_filterunit.get_bridgeunit(obj_class)
+        filter_single_column_dataframe(x_dt, x_bridgeunit, filterable_column)
 
 
 def filter_face_dir_files(face_dir: str):

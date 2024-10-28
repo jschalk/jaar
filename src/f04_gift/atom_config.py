@@ -47,8 +47,8 @@ def sqlite_datatype_str() -> str:
     return "sqlite_datatype"
 
 
-def python_type_str() -> str:
-    return "python_type"
+def obj_class_str() -> str:
+    return "obj_class"
 
 
 def type_AcctID_str() -> str:
@@ -109,6 +109,18 @@ def credor_respect_str() -> str:
 
 def debtor_respect_str() -> str:
     return "debtor_respect"
+
+
+def fund_coin_str() -> str:
+    return "fund_coin"
+
+
+def penny_str() -> str:
+    return "penny"
+
+
+def respect_bit_str() -> str:
+    return "respect_bit"
 
 
 def acct_id_str() -> str:
@@ -261,7 +273,7 @@ def get_atom_args_category_mapping() -> dict[str, set[str]]:
     return x_dict
 
 
-def get_allowed_python_types() -> set[str]:
+def get_allowed_obj_classs() -> set[str]:
     return {
         "AcctID",
         "bool",
@@ -274,7 +286,7 @@ def get_allowed_python_types() -> set[str]:
     }
 
 
-def get_atom_args_python_types() -> dict[str, str]:
+def get_atom_args_obj_classs() -> dict[str, str]:
     return {
         "acct_id": "AcctID",
         "addin": "float",

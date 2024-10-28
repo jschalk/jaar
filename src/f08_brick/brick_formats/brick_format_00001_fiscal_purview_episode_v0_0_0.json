@@ -1,5 +1,4 @@
 {
-    "fiscal_category": ["fiscal_purview_episode"],
     "attributes": {
         "acct_id": {
             "column_order": 2,
@@ -19,6 +18,9 @@
         "timestamp": {
             "column_order": 3
         }
-    }
+    },
+    "brick_number": "br00001",
+    "fiscal_category": [
+        "fiscal_purview_episode"
+    ]
 }
-

@@ -15,12 +15,12 @@
         "optional_args": {
             "credit_vote": {
                 "column_order": 3,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_vote": {
                 "column_order": 2,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
@@ -28,13 +28,13 @@
             "acct_id": {
                 "column_order": 0,
                 "nesting_order": 0,
-                "python_type": "AcctID",
+                "obj_class": "AcctID",
                 "sqlite_datatype": "TEXT"
             },
             "group_id": {
                 "column_order": 1,
                 "nesting_order": 1,
-                "python_type": "GroupID",
+                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -55,19 +55,19 @@
         "optional_args": {
             "credit_belief": {
                 "column_order": 2,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_belief": {
                 "column_order": 1,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "acct_id": {
                 "column_order": 0,
-                "python_type": "AcctID",
+                "obj_class": "AcctID",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -88,12 +88,12 @@
         "optional_args": {
             "give_force": {
                 "column_order": 3,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "take_force": {
                 "column_order": 2,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             }
         },
@@ -101,13 +101,13 @@
             "awardee_id": {
                 "column_order": 1,
                 "nesting_order": 1,
-                "python_type": "GroupID",
+                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -128,17 +128,17 @@
         "optional_args": {
             "fnigh": {
                 "column_order": 4,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "fopen": {
                 "column_order": 3,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "pick": {
                 "column_order": 2,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -146,13 +146,13 @@
             "base": {
                 "column_order": 1,
                 "nesting_order": 1,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -172,13 +172,13 @@
             "healer_id": {
                 "column_order": 1,
                 "nesting_order": 1,
-                "python_type": "GroupID",
+                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -199,17 +199,17 @@
         "optional_args": {
             "divisor": {
                 "column_order": 5,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "nigh": {
                 "column_order": 4,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "open": {
                 "column_order": 3,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             }
         },
@@ -217,19 +217,19 @@
             "base": {
                 "column_order": 1,
                 "nesting_order": 1,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "need": {
                 "column_order": 2,
                 "nesting_order": 2,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -250,7 +250,7 @@
         "optional_args": {
             "base_item_active_requisite": {
                 "column_order": 2,
-                "python_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             }
         },
@@ -258,13 +258,13 @@
             "base": {
                 "column_order": 1,
                 "nesting_order": 1,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -284,13 +284,13 @@
             "road": {
                 "column_order": 0,
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "team_id": {
                 "column_order": 1,
                 "nesting_order": 1,
-                "python_type": "GroupID",
+                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -311,57 +311,57 @@
         "optional_args": {
             "addin": {
                 "column_order": 10,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "begin": {
                 "column_order": 5,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "close": {
                 "column_order": 6,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "denom": {
                 "column_order": 8,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "gogo_want": {
                 "column_order": 11,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "mass": {
                 "column_order": 3,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "morph": {
                 "column_order": 9,
-                "python_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "numor": {
                 "column_order": 7,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "pledge": {
                 "column_order": 2,
-                "python_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "problem_bool": {
                 "column_order": 4,
-                "python_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "stop_want": {
                 "column_order": 12,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             }
         },
@@ -369,13 +369,13 @@
             "label": {
                 "column_order": 1,
                 "nesting_order": 1,
-                "python_type": "RoadNode",
+                "obj_class": "RoadNode",
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
                 "column_order": 0,
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -390,47 +390,47 @@
         "optional_args": {
             "credor_respect": {
                 "column_order": 3,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtor_respect": {
                 "column_order": 2,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "fund_coin": {
                 "column_order": 1,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "fund_pool": {
                 "column_order": 0,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "max_tree_traverse": {
                 "column_order": 5,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "penny": {
                 "column_order": 6,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "purview_timestamp": {
                 "column_order": 8,
-                "python_type": "TimeLinePoint",
+                "obj_class": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"
             },
             "respect_bit": {
                 "column_order": 4,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "tally": {
                 "column_order": 7,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },

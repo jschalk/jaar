@@ -1,0 +1,118 @@
+{
+    "fiscal_cashbook": {
+        "optional_args": {
+            "amount": {
+                "obj_class": "float"
+            }
+        },
+        "required_args": {
+            "acct_id": {
+                "obj_class": "AcctID"
+            },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "owner_id": {
+                "obj_class": "AcctID"
+            },
+            "timestamp": {
+                "obj_class": "TimeLinePoint"
+            }
+        }
+    },
+    "fiscal_purview_episode": {
+        "optional_args": {
+            "quota": {
+                "obj_class": "int"
+            }
+        },
+        "required_args": {
+            "acct_id": {
+                "obj_class": "AcctID"
+            },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "owner_id": {
+                "obj_class": "AcctID"
+            },
+            "timestamp": {
+                "obj_class": "TimeLinePoint"
+            }
+        }
+    },
+    "fiscal_timeline_hour": {
+        "optional_args": {},
+        "required_args": {
+            "cumlative_minute": {
+                "obj_class": "int"
+            },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "hour_label": {
+                "obj_class": "RoadNode"
+            }
+        }
+    },
+    "fiscal_timeline_month": {
+        "optional_args": {},
+        "required_args": {
+            "cumlative_day": {
+                "obj_class": "int"
+            },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "month_label": {
+                "obj_class": "RoadNode"
+            }
+        }
+    },
+    "fiscal_timeline_weekday": {
+        "optional_args": {},
+        "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "weekday_label": {
+                "obj_class": "RoadNode"
+            },
+            "weekday_order": {
+                "obj_class": "int"
+            }
+        }
+    },
+    "fiscalunit": {
+        "optional_args": {
+            "current_time": {
+                "obj_class": "int"
+            },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "fund_coin": {
+                "obj_class": "float"
+            },
+            "monthday_distortion": {
+                "obj_class": "int"
+            },
+            "penny": {
+                "obj_class": "float"
+            },
+            "respect_bit": {
+                "obj_class": "float"
+            },
+            "road_delimiter": {
+                "obj_class": "str"
+            },
+            "timeline_label": {
+                "obj_class": "RoadNode"
+            },
+            "yr1_jan1_offset": {
+                "obj_class": "int"
+            }
+        },
+        "required_args": {}
+    }
+}

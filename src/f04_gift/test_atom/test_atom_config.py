@@ -1,5 +1,4 @@
 from src.f00_instrument.dict_tool import get_from_nested_dict
-from src.f00_instrument.pandas_tool import get_sorting_priority_column_headers
 from src.f02_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
@@ -20,8 +19,8 @@ from src.f04_gift.atom_config import (
     is_category_ref,
     get_atom_config_dict,
     get_atom_args_category_mapping,
-    get_allowed_python_types,
-    get_atom_args_python_types,
+    get_allowed_obj_classs,
+    get_atom_args_obj_classs,
     get_atom_order as q_order,
     set_mog,
     get_flattened_atom_table_build,
@@ -33,7 +32,7 @@ from src.f04_gift.atom_config import (
     normal_table_name_str,
     normal_specs_str,
     sqlite_datatype_str,
-    python_type_str,
+    obj_class_str,
     type_AcctID_str,
     type_GroupID_str,
     type_RoadUnit_str,
@@ -56,6 +55,9 @@ from src.f04_gift.atom_config import (
     gogo_want_str,
     stop_want_str,
     base_str,
+    fund_coin_str,
+    penny_str,
+    respect_bit_str,
 )
 
 
@@ -69,7 +71,7 @@ def test_str_functions_ReturnsObj():
     assert atom_delete() == "DELETE"
     assert nesting_order_str() == "nesting_order"
     assert sqlite_datatype_str() == "sqlite_datatype"
-    assert python_type_str() == "python_type"
+    assert obj_class_str() == "obj_class"
     assert parent_road_str() == "parent_road"
     assert type_AcctID_str() == "AcctID"
     assert type_GroupID_str() == "GroupID"
@@ -89,6 +91,9 @@ def test_str_functions_ReturnsObj():
     assert morph_str() == "morph"
     assert gogo_want_str() == "gogo_want"
     assert stop_want_str() == "stop_want"
+    assert fund_coin_str() == "fund_coin"
+    assert penny_str() == "penny"
+    assert respect_bit_str() == "respect_bit"
 
 
 def test_atom_config_HasCorrect_category():
@@ -236,7 +241,7 @@ def test_get_atom_config_dict_CheckEachCategoryHasCorrectArgCount():
 
 
 def _has_every_element(x_arg, x_dict) -> bool:
-    arg_elements = {python_type_str(), sqlite_datatype_str(), column_order_str()}
+    arg_elements = {obj_class_str(), sqlite_datatype_str(), column_order_str()}
     for arg_element in arg_elements:
         if x_dict.get(arg_element) is None:
             print(f"{arg_element} failed for {x_arg=}")
@@ -262,7 +267,7 @@ def check_every_arg_dict_has_elements(atom_config_dict):
     return True
 
 
-def test_atom_config_AllArgsHave_python_type_sqlite_datatype():
+def test_atom_config_AllArgsHave_obj_class_sqlite_datatype():
     # ESTABLISH / WHEN / THEN
     assert check_every_arg_dict_has_elements(get_atom_config_dict())
 
@@ -532,7 +537,7 @@ def test_get_atom_args_category_mapping_ReturnsObj():
     assert len(x_atom_args_category_mapping) == 43
 
 
-def get_python_type(x_category: str, x_arg: str) -> str:
+def get_obj_class(x_category: str, x_arg: str) -> str:
     atom_config_dict = get_atom_config_dict()
     category_dict = atom_config_dict.get(x_category)
     optional_dict = category_dict.get(optional_args_str())
@@ -542,18 +547,18 @@ def get_python_type(x_category: str, x_arg: str) -> str:
         arg_dict = category_dict.get(optional_args_str()).get(x_arg)
     if required_dict.get(x_arg):
         arg_dict = required_dict.get(x_arg)
-    return arg_dict.get(python_type_str())
+    return arg_dict.get(obj_class_str())
 
 
-def test_get_python_type_ReturnsObj():
+def test_get_obj_class_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_python_type(bud_acctunit_str(), acct_id_str()) == type_AcctID_str()
-    assert get_python_type(bud_itemunit_str(), gogo_want_str()) == "float"
+    assert get_obj_class(bud_acctunit_str(), acct_id_str()) == type_AcctID_str()
+    assert get_obj_class(bud_itemunit_str(), gogo_want_str()) == "float"
 
 
-def test_get_allowed_python_types_ReturnsObj():
+def test_get_allowed_obj_classs_ReturnsObj():
     # ESTABLISH
-    x_allowed_python_types = {
+    x_allowed_obj_classs = {
         "int",
         type_AcctID_str(),
         type_GroupID_str(),
@@ -565,151 +570,98 @@ def test_get_allowed_python_types_ReturnsObj():
     }
 
     # WHEN / THEN
-    assert get_allowed_python_types() == x_allowed_python_types
+    assert get_allowed_obj_classs() == x_allowed_obj_classs
 
 
 def test_get_atom_config_dict_ValidatePythonTypes():
     # make sure all atom config python types are valid and repeated args are the same
     # ESTABLISH WHEN / THEN
-    assert all_atom_config_python_types_are_valid(get_allowed_python_types())
+    assert all_atom_config_obj_classs_are_valid(get_allowed_obj_classs())
 
 
-def all_atom_config_python_types_are_valid(allowed_python_types):
+def all_atom_config_obj_classs_are_valid(allowed_obj_classs):
     x_atom_args_category_mapping = get_atom_args_category_mapping()
     for x_atom_arg, categorys in x_atom_args_category_mapping.items():
-        old_python_type = None
-        x_python_type = ""
+        old_obj_class = None
+        x_obj_class = ""
         for x_category in categorys:
-            x_python_type = get_python_type(x_category, x_atom_arg)
-            # print(f"{x_python_type=} {x_atom_arg=} {x_category=}")
-            if x_python_type not in allowed_python_types:
+            x_obj_class = get_obj_class(x_category, x_atom_arg)
+            # print(f"{x_obj_class=} {x_atom_arg=} {x_category=}")
+            if x_obj_class not in allowed_obj_classs:
                 return False
 
-            if old_python_type is None:
-                old_python_type = x_python_type
+            if old_obj_class is None:
+                old_obj_class = x_obj_class
             # confirm each atom_arg has same data type in all categorys
-            print(f"{x_python_type=} {old_python_type=} {x_atom_arg=} {x_category=}")
-            if x_python_type != old_python_type:
+            print(f"{x_obj_class=} {old_obj_class=} {x_atom_arg=} {x_category=}")
+            if x_obj_class != old_obj_class:
                 return False
-            old_python_type = x_python_type
+            old_obj_class = x_obj_class
     return True
 
 
-def all_atom_args_python_types_are_correct(x_python_types) -> bool:
+def all_atom_args_obj_classs_are_correct(x_obj_classs) -> bool:
     x_atom_args_category_mapping = get_atom_args_category_mapping()
-    x_sorted_python_types = sorted(list(x_python_types.keys()))
-    for x_atom_arg in x_sorted_python_types:
+    x_sorted_obj_classs = sorted(list(x_obj_classs.keys()))
+    for x_atom_arg in x_sorted_obj_classs:
         x_categorys = list(x_atom_args_category_mapping.get(x_atom_arg))
         x_category = x_categorys[0]
-        x_python_type = get_python_type(x_category, x_atom_arg)
+        x_obj_class = get_obj_class(x_category, x_atom_arg)
         print(
-            f"assert x_python_types.get({x_atom_arg}) == {x_python_type} {x_python_types.get(x_atom_arg)=}"
+            f"assert x_obj_classs.get({x_atom_arg}) == {x_obj_class} {x_obj_classs.get(x_atom_arg)=}"
         )
-        if x_python_types.get(x_atom_arg) != x_python_type:
+        if x_obj_classs.get(x_atom_arg) != x_obj_class:
             return False
     return True
 
 
-def test_get_atom_args_python_types_ReturnsObj():
+def test_get_atom_args_obj_classs_ReturnsObj():
     # ESTABLISH / WHEN
-    x_python_types = get_atom_args_python_types()
+    x_obj_classs = get_atom_args_obj_classs()
 
     # THEN
-    assert x_python_types.get("acct_id") == type_AcctID_str()
-    assert x_python_types.get("addin") == "float"
-    assert x_python_types.get("awardee_id") == type_GroupID_str()
-    assert x_python_types.get("base") == type_RoadUnit_str()
-    assert x_python_types.get("base_item_active_requisite") == "bool"
-    assert x_python_types.get("begin") == "float"
-    assert x_python_types.get("respect_bit") == "float"
-    assert x_python_types.get("close") == "float"
-    assert x_python_types.get("credit_belief") == "int"
-    assert x_python_types.get("credit_vote") == "int"
-    assert x_python_types.get("credor_respect") == "int"
-    assert x_python_types.get("debtit_belief") == "int"
-    assert x_python_types.get("debtit_vote") == "int"
-    assert x_python_types.get("debtor_respect") == "int"
-    assert x_python_types.get("denom") == "int"
-    assert x_python_types.get("divisor") == "int"
-    assert x_python_types.get("fnigh") == "float"
-    assert x_python_types.get("fopen") == "float"
-    assert x_python_types.get("fund_coin") == "float"
-    assert x_python_types.get("fund_pool") == "float"
-    assert x_python_types.get("give_force") == "float"
-    assert x_python_types.get("gogo_want") == "float"
-    assert x_python_types.get("group_id") == type_GroupID_str()
-    assert x_python_types.get("healer_id") == type_GroupID_str()
-    assert x_python_types.get("label") == type_RoadNode_str()
-    assert x_python_types.get("mass") == "int"
-    assert x_python_types.get("max_tree_traverse") == "int"
-    assert x_python_types.get("morph") == "bool"
-    assert x_python_types.get("need") == type_RoadUnit_str()
-    assert x_python_types.get("nigh") == "float"
-    assert x_python_types.get("numor") == "int"
-    assert x_python_types.get("open") == "float"
-    assert x_python_types.get("parent_road") == type_RoadUnit_str()
-    assert x_python_types.get("penny") == "float"
-    assert x_python_types.get("pick") == type_RoadUnit_str()
-    assert x_python_types.get("pledge") == "bool"
-    assert x_python_types.get("problem_bool") == "bool"
-    assert x_python_types.get("purview_timestamp") == "TimeLinePoint"
-    assert x_python_types.get("road") == type_RoadUnit_str()
-    assert x_python_types.get("stop_want") == "float"
-    assert x_python_types.get("take_force") == "float"
-    assert x_python_types.get("tally") == "int"
-    assert x_python_types.get("team_id") == type_GroupID_str()
-    assert x_python_types.keys() == get_atom_args_category_mapping().keys()
-    assert all_atom_args_python_types_are_correct(x_python_types)
-
-
-def test_get_atom_args_category_mapping_IsIn_get_sorting_priority_column_headers():
-    # ESTABLISH / WHEN
-    table_sorting_priority = get_sorting_priority_column_headers()
-
-    # THEN
-    assert table_sorting_priority[3] == "acct_id"
-    assert table_sorting_priority[4] == "group_id"
-    assert table_sorting_priority[5] == "parent_road"
-    assert table_sorting_priority[6] == "label"
-    assert table_sorting_priority[7] == "road"
-    assert table_sorting_priority[8] == "base"
-    assert table_sorting_priority[9] == "need"
-    assert table_sorting_priority[10] == "pick"
-    assert table_sorting_priority[11] == "team_id"
-    assert table_sorting_priority[12] == "awardee_id"
-    assert table_sorting_priority[13] == "healer_id"
-    assert table_sorting_priority[14] == "numor"
-    assert table_sorting_priority[15] == "denom"
-    assert table_sorting_priority[16] == "addin"
-    assert table_sorting_priority[17] == "base_item_active_requisite"
-    assert table_sorting_priority[18] == "begin"
-    assert table_sorting_priority[19] == "close"
-    assert table_sorting_priority[20] == "credit_belief"
-    assert table_sorting_priority[21] == "debtit_belief"
-    assert table_sorting_priority[22] == "credit_vote"
-    assert table_sorting_priority[23] == "debtit_vote"
-    assert table_sorting_priority[24] == "credor_respect"
-    assert table_sorting_priority[25] == "debtor_respect"
-    assert table_sorting_priority[26] == "fopen"
-    assert table_sorting_priority[27] == "fnigh"
-    assert table_sorting_priority[28] == "fund_pool"
-    assert table_sorting_priority[29] == "give_force"
-    assert table_sorting_priority[30] == "gogo_want"
-    assert table_sorting_priority[31] == "mass"
-    assert table_sorting_priority[32] == "max_tree_traverse"
-    assert table_sorting_priority[33] == "morph"
-    assert table_sorting_priority[34] == "nigh"
-    assert table_sorting_priority[35] == "open"
-    assert table_sorting_priority[36] == "divisor"
-    assert table_sorting_priority[37] == "pledge"
-    assert table_sorting_priority[38] == "problem_bool"
-    assert table_sorting_priority[39] == "purview_timestamp"
-    assert table_sorting_priority[40] == "stop_want"
-    assert table_sorting_priority[41] == "take_force"
-    assert table_sorting_priority[42] == "tally"
-    assert table_sorting_priority[43] == "fund_coin"
-    assert table_sorting_priority[44] == "penny"
-    assert table_sorting_priority[45] == "respect_bit"
-    assert len(table_sorting_priority) == 53
-    atom_args = set(get_atom_args_category_mapping().keys())
-    assert atom_args.issubset(set(table_sorting_priority))
+    assert x_obj_classs.get("acct_id") == type_AcctID_str()
+    assert x_obj_classs.get("addin") == "float"
+    assert x_obj_classs.get("awardee_id") == type_GroupID_str()
+    assert x_obj_classs.get("base") == type_RoadUnit_str()
+    assert x_obj_classs.get("base_item_active_requisite") == "bool"
+    assert x_obj_classs.get("begin") == "float"
+    assert x_obj_classs.get("respect_bit") == "float"
+    assert x_obj_classs.get("close") == "float"
+    assert x_obj_classs.get("credit_belief") == "int"
+    assert x_obj_classs.get("credit_vote") == "int"
+    assert x_obj_classs.get("credor_respect") == "int"
+    assert x_obj_classs.get("debtit_belief") == "int"
+    assert x_obj_classs.get("debtit_vote") == "int"
+    assert x_obj_classs.get("debtor_respect") == "int"
+    assert x_obj_classs.get("denom") == "int"
+    assert x_obj_classs.get("divisor") == "int"
+    assert x_obj_classs.get("fnigh") == "float"
+    assert x_obj_classs.get("fopen") == "float"
+    assert x_obj_classs.get("fund_coin") == "float"
+    assert x_obj_classs.get("fund_pool") == "float"
+    assert x_obj_classs.get("give_force") == "float"
+    assert x_obj_classs.get("gogo_want") == "float"
+    assert x_obj_classs.get("group_id") == type_GroupID_str()
+    assert x_obj_classs.get("healer_id") == type_GroupID_str()
+    assert x_obj_classs.get("label") == type_RoadNode_str()
+    assert x_obj_classs.get("mass") == "int"
+    assert x_obj_classs.get("max_tree_traverse") == "int"
+    assert x_obj_classs.get("morph") == "bool"
+    assert x_obj_classs.get("need") == type_RoadUnit_str()
+    assert x_obj_classs.get("nigh") == "float"
+    assert x_obj_classs.get("numor") == "int"
+    assert x_obj_classs.get("open") == "float"
+    assert x_obj_classs.get("parent_road") == type_RoadUnit_str()
+    assert x_obj_classs.get("penny") == "float"
+    assert x_obj_classs.get("pick") == type_RoadUnit_str()
+    assert x_obj_classs.get("pledge") == "bool"
+    assert x_obj_classs.get("problem_bool") == "bool"
+    assert x_obj_classs.get("purview_timestamp") == "TimeLinePoint"
+    assert x_obj_classs.get("road") == type_RoadUnit_str()
+    assert x_obj_classs.get("stop_want") == "float"
+    assert x_obj_classs.get("take_force") == "float"
+    assert x_obj_classs.get("tally") == "int"
+    assert x_obj_classs.get("team_id") == type_GroupID_str()
+    assert x_obj_classs.keys() == get_atom_args_category_mapping().keys()
+    assert all_atom_args_obj_classs_are_correct(x_obj_classs)

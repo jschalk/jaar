@@ -23,6 +23,14 @@ class timestamp_Exception(Exception):
     pass
 
 
+def timestamp_str() -> str:
+    return "timestamp"
+
+
+def quota_str() -> str:
+    return "quota"
+
+
 @dataclass
 class TranUnit:
     src: AcctID = None

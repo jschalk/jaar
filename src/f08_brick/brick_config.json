@@ -1,446 +1,464 @@
 {
     "bud_acct_membership": {
-        "DELETE": {
-            "atom_order": 23
-        },
-        "INSERT": {
-            "atom_order": 1
-        },
-        "UPDATE": {
-            "atom_order": 10
-        },
-        "normal_specs": {
-            "normal_table_name": "membership"
-        },
+        "allowed_crud": "DELETE_INSERT_UPDATE",
+        "brick_type": "bud",
         "optional_args": {
             "credit_vote": {
-                "column_order": 3,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_vote": {
-                "column_order": 2,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "acct_id": {
-                "column_order": 0,
+                "obj_class": "AcctID",
                 "nesting_order": 0,
-                "python_type": "AcctID",
                 "sqlite_datatype": "TEXT"
             },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "group_id": {
-                "column_order": 1,
+                "obj_class": "GroupID",
                 "nesting_order": 1,
-                "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_acctunit": {
-        "DELETE": {
-            "atom_order": 24
-        },
-        "INSERT": {
-            "atom_order": 0
-        },
-        "UPDATE": {
-            "atom_order": 9
-        },
-        "normal_specs": {
-            "normal_table_name": "acctunit"
-        },
+        "allowed_crud": "DELETE_INSERT_UPDATE",
+        "brick_type": "bud",
         "optional_args": {
             "credit_belief": {
-                "column_order": 2,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_belief": {
-                "column_order": 1,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "acct_id": {
-                "column_order": 0,
-                "python_type": "AcctID",
+                "obj_class": "AcctID",
                 "sqlite_datatype": "TEXT"
+            },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_awardlink": {
-        "DELETE": {
-            "atom_order": 21
-        },
-        "INSERT": {
-            "atom_order": 3
-        },
-        "UPDATE": {
-            "atom_order": 12
-        },
-        "normal_specs": {
-            "normal_table_name": "awardlink"
-        },
+        "allowed_crud": "DELETE_INSERT_UPDATE",
+        "brick_type": "bud",
         "optional_args": {
             "give_force": {
-                "column_order": 3,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "take_force": {
-                "column_order": 2,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             }
         },
         "required_args": {
             "awardee_id": {
-                "column_order": 1,
+                "obj_class": "GroupID",
                 "nesting_order": 1,
-                "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "road": {
-                "column_order": 0,
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_factunit": {
-        "DELETE": {
-            "atom_order": 18
-        },
-        "INSERT": {
-            "atom_order": 6
-        },
-        "UPDATE": {
-            "atom_order": 13
-        },
-        "normal_specs": {
-            "normal_table_name": "fact"
-        },
+        "allowed_crud": "DELETE_INSERT_UPDATE",
+        "brick_type": "bud",
         "optional_args": {
             "fnigh": {
-                "column_order": 4,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "fopen": {
-                "column_order": 3,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "pick": {
-                "column_order": 2,
-                "python_type": "RoadUnit",
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         },
         "required_args": {
             "base": {
-                "column_order": 1,
+                "obj_class": "RoadUnit",
                 "nesting_order": 1,
-                "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "road": {
-                "column_order": 0,
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_healerlink": {
-        "DELETE": {
-            "atom_order": 20
-        },
-        "INSERT": {
-            "atom_order": 5
-        },
-        "normal_specs": {
-            "normal_table_name": "healerlink"
-        },
+        "allowed_crud": "DELETE_INSERT",
+        "brick_type": "bud",
         "optional_args": {},
         "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "healer_id": {
-                "column_order": 1,
+                "obj_class": "GroupID",
                 "nesting_order": 1,
-                "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
-                "column_order": 0,
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_reason_premiseunit": {
-        "DELETE": {
-            "atom_order": 16
-        },
-        "INSERT": {
-            "atom_order": 8
-        },
-        "UPDATE": {
-            "atom_order": 14
-        },
-        "normal_specs": {
-            "normal_table_name": "premise"
-        },
+        "allowed_crud": "DELETE_INSERT_UPDATE",
+        "brick_type": "bud",
         "optional_args": {
             "divisor": {
-                "column_order": 5,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "nigh": {
-                "column_order": 4,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "open": {
-                "column_order": 3,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             }
         },
         "required_args": {
             "base": {
-                "column_order": 1,
+                "obj_class": "RoadUnit",
                 "nesting_order": 1,
-                "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "need": {
-                "column_order": 2,
+                "obj_class": "RoadUnit",
                 "nesting_order": 2,
-                "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
-                "column_order": 0,
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_reasonunit": {
-        "DELETE": {
-            "atom_order": 17
-        },
-        "INSERT": {
-            "atom_order": 7
-        },
-        "UPDATE": {
-            "atom_order": 15
-        },
-        "normal_specs": {
-            "normal_table_name": "reason"
-        },
+        "allowed_crud": "DELETE_INSERT_UPDATE",
+        "brick_type": "bud",
         "optional_args": {
             "base_item_active_requisite": {
-                "column_order": 2,
-                "python_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "base": {
-                "column_order": 1,
+                "obj_class": "RoadUnit",
                 "nesting_order": 1,
-                "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "road": {
-                "column_order": 0,
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_item_teamlink": {
-        "DELETE": {
-            "atom_order": 19
-        },
-        "INSERT": {
-            "atom_order": 4
-        },
-        "normal_specs": {
-            "normal_table_name": "teamlink"
-        },
+        "allowed_crud": "DELETE_INSERT",
+        "brick_type": "bud",
         "optional_args": {},
         "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "road": {
-                "column_order": 0,
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "team_id": {
-                "column_order": 1,
+                "obj_class": "GroupID",
                 "nesting_order": 1,
-                "python_type": "GroupID",
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "bud_itemunit": {
-        "DELETE": {
-            "atom_order": 22
-        },
-        "INSERT": {
-            "atom_order": 2
-        },
-        "UPDATE": {
-            "atom_order": 11
-        },
-        "normal_specs": {
-            "normal_table_name": "item"
-        },
+        "allowed_crud": "DELETE_INSERT_UPDATE",
+        "brick_type": "bud",
         "optional_args": {
             "addin": {
-                "column_order": 10,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "begin": {
-                "column_order": 5,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "close": {
-                "column_order": 6,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "denom": {
-                "column_order": 8,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "gogo_want": {
-                "column_order": 11,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "mass": {
-                "column_order": 3,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "morph": {
-                "column_order": 9,
-                "python_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "numor": {
-                "column_order": 7,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "pledge": {
-                "column_order": 2,
-                "python_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "problem_bool": {
-                "column_order": 4,
-                "python_type": "bool",
+                "obj_class": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "stop_want": {
-                "column_order": 12,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             }
         },
         "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
             "label": {
-                "column_order": 1,
+                "obj_class": "RoadNode",
                 "nesting_order": 1,
-                "python_type": "RoadNode",
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
-                "column_order": 0,
+                "obj_class": "RoadUnit",
                 "nesting_order": 0,
-                "python_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
             }
         }
     },
     "budunit": {
-        "UPDATE": {
-            "atom_order": 25
-        },
-        "normal_specs": {
-            "normal_table_name": "bud"
-        },
+        "allowed_crud": "UPDATE",
+        "brick_type": "bud",
         "optional_args": {
             "credor_respect": {
-                "column_order": 3,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtor_respect": {
-                "column_order": 2,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "fund_coin": {
-                "column_order": 1,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "fund_pool": {
-                "column_order": 0,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "max_tree_traverse": {
-                "column_order": 5,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "penny": {
-                "column_order": 6,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "purview_timestamp": {
-                "column_order": 8,
-                "python_type": "TimeLinePoint",
+                "obj_class": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"
             },
             "respect_bit": {
-                "column_order": 4,
-                "python_type": "float",
+                "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
             "tally": {
-                "column_order": 7,
-                "python_type": "int",
+                "obj_class": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
-        "required_args": {}
+        "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            }
+        }
     },
-    "fiscal_cashbook": {},
-    "fiscal_purview_episode": {},
-    "fiscal_purviewlog": {},
-    "fiscal_timeline_hour": {},
-    "fiscal_timeline_month": {},
-    "fiscal_timeline_weekday": {},
-    "fiscalunit": {}
+    "fiscal_cashbook": {
+        "allowed_crud": "INSERT_MULITPLE",
+        "brick_type": "fiscal",
+        "optional_args": {
+            "amount": {}
+        },
+        "required_args": {
+            "acct_id": {},
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "owner_id": {},
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            },
+            "timestamp": {}
+        }
+    },
+    "fiscal_purview_episode": {
+        "allowed_crud": "INSERT_MULITPLE",
+        "brick_type": "fiscal",
+        "optional_args": {
+            "quota": {}
+        },
+        "required_args": {
+            "acct_id": {},
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "owner_id": {},
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            },
+            "timestamp": {}
+        }
+    },
+    "fiscal_timeline_hour": {
+        "allowed_crud": "INSERT_ONE_TIME",
+        "brick_type": "fiscal",
+        "optional_args": {},
+        "required_args": {
+            "cumlative_minute": {},
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "hour_label": {},
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            }
+        }
+    },
+    "fiscal_timeline_month": {
+        "allowed_crud": "INSERT_ONE_TIME",
+        "brick_type": "fiscal",
+        "optional_args": {},
+        "required_args": {
+            "cumlative_day": {},
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "month_label": {},
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            }
+        }
+    },
+    "fiscal_timeline_weekday": {
+        "allowed_crud": "INSERT_ONE_TIME",
+        "brick_type": "fiscal",
+        "optional_args": {},
+        "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            },
+            "weekday_label": {},
+            "weekday_order": {}
+        }
+    },
+    "fiscalunit": {
+        "allowed_crud": "INSERT_ONE_TIME",
+        "brick_type": "fiscal",
+        "optional_args": {
+            "current_time": {},
+            "fund_coin": {},
+            "monthday_distortion": {},
+            "penny": {},
+            "respect_bit": {},
+            "road_delimiter": {},
+            "timeline_label": {},
+            "yr1_jan1_offset": {}
+        },
+        "required_args": {
+            "fiscal_id": {
+                "obj_class": "FiscalID"
+            },
+            "time_id": {
+                "obj_class": "TimeLinePoint"
+            }
+        }
+    }
 }
