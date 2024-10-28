@@ -49,6 +49,41 @@ def config_file_dir() -> str:
     return f"{os_getcwd()}/src/f07_fiscal"
 
 
+# def fiscalunit_str()-> str: return "fiscalunit"
+# def fiscal_purviewlog_str()-> str: return "fiscal_purviewlog"
+# def fiscal_purview_episode_str()-> str: return "fiscal_purview_episode"
+# def fiscal_cashbook_str()-> str: return "fiscal_cashbook"
+# def fiscal_timeline_hour_str()-> str: return "fiscal_timeline_hour"
+# def fiscal_timeline_month_str()-> str: return "fiscal_timeline_month"
+# def fiscal_timeline_weekday_str()-> str: return "fiscal_timeline_weekday"
+def fiscalunit_str() -> str:
+    return "fiscalunit"
+
+
+def fiscal_purviewlog_str() -> str:
+    return "fiscal_purviewlog"
+
+
+def fiscal_purview_episode_str() -> str:
+    return "fiscal_purview_episode"
+
+
+def fiscal_cashbook_str() -> str:
+    return "fiscal_cashbook"
+
+
+def fiscal_timeline_hour_str() -> str:
+    return "fiscal_timeline_hour"
+
+
+def fiscal_timeline_month_str() -> str:
+    return "fiscal_timeline_month"
+
+
+def fiscal_timeline_weekday_str() -> str:
+    return "fiscal_timeline_weekday"
+
+
 def get_fiscal_config_dict() -> dict:
     return get_dict_from_json(
         open_file(config_file_dir(), get_fiscal_config_file_name())

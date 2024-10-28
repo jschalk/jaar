@@ -14,10 +14,10 @@ from src.f08_brick.brick import atom_categorys_str, attributes_str, sort_order_s
 from src.f08_brick.brick_config import get_brick_formats_dir
 
 
-def test_create_categorys_brick_format_dicts_ReturnObj(rebuild_bool):
+def test_create_categorys_brick_format_dict_ReturnObj(rebuild_bool):
     # ESTABLISH / WHEN
     categorys_brick_format_dict = create_categorys_brick_format_dict()
-    # print(f"{categorys_brick_format_dict=}")
+    print(f"{categorys_brick_format_dict.keys()=}")
 
     # THEN
     assert len(categorys_brick_format_dict) == 10
@@ -45,6 +45,7 @@ def test_create_categorys_brick_format_dicts_ReturnObj(rebuild_bool):
     assert parent_road_dict == {column_order_str(): 2, sort_order_str(): 2}
     assert label_dict == {column_order_str(): 3, sort_order_str(): 3}
     rebuild_format_jsons(rebuild_bool)
+    # assert 1 == 2
 
 
 def rebuild_format_jsons(x_rebuild_format_jsons: bool):

@@ -1,17 +1,6 @@
 {
     "bud_acct_membership": {
-        "DELETE": {
-            "atom_order": 23
-        },
-        "INSERT": {
-            "atom_order": 1
-        },
-        "UPDATE": {
-            "atom_order": 10
-        },
-        "normal_specs": {
-            "normal_table_name": "membership"
-        },
+        "brick_type": "bud",
         "optional_args": {
             "credit_vote": {
                 "column_order": 3,
@@ -27,31 +16,20 @@
         "required_args": {
             "acct_id": {
                 "column_order": 0,
-                "nesting_order": 0,
                 "jaar_type": "AcctID",
+                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "group_id": {
                 "column_order": 1,
-                "nesting_order": 1,
                 "jaar_type": "GroupID",
+                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
         }
     },
     "bud_acctunit": {
-        "DELETE": {
-            "atom_order": 24
-        },
-        "INSERT": {
-            "atom_order": 0
-        },
-        "UPDATE": {
-            "atom_order": 9
-        },
-        "normal_specs": {
-            "normal_table_name": "acctunit"
-        },
+        "brick_type": "bud",
         "optional_args": {
             "credit_belief": {
                 "column_order": 2,
@@ -73,18 +51,7 @@
         }
     },
     "bud_item_awardlink": {
-        "DELETE": {
-            "atom_order": 21
-        },
-        "INSERT": {
-            "atom_order": 3
-        },
-        "UPDATE": {
-            "atom_order": 12
-        },
-        "normal_specs": {
-            "normal_table_name": "awardlink"
-        },
+        "brick_type": "bud",
         "optional_args": {
             "give_force": {
                 "column_order": 3,
@@ -100,31 +67,20 @@
         "required_args": {
             "awardee_id": {
                 "column_order": 1,
-                "nesting_order": 1,
                 "jaar_type": "GroupID",
+                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
-                "nesting_order": 0,
                 "jaar_type": "RoadUnit",
+                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         }
     },
     "bud_item_factunit": {
-        "DELETE": {
-            "atom_order": 18
-        },
-        "INSERT": {
-            "atom_order": 6
-        },
-        "UPDATE": {
-            "atom_order": 13
-        },
-        "normal_specs": {
-            "normal_table_name": "fact"
-        },
+        "brick_type": "bud",
         "optional_args": {
             "fnigh": {
                 "column_order": 4,
@@ -145,57 +101,38 @@
         "required_args": {
             "base": {
                 "column_order": 1,
-                "nesting_order": 1,
                 "jaar_type": "RoadUnit",
+                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
-                "nesting_order": 0,
                 "jaar_type": "RoadUnit",
+                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         }
     },
     "bud_item_healerlink": {
-        "DELETE": {
-            "atom_order": 20
-        },
-        "INSERT": {
-            "atom_order": 5
-        },
-        "normal_specs": {
-            "normal_table_name": "healerlink"
-        },
+        "brick_type": "bud",
         "optional_args": {},
         "required_args": {
             "healer_id": {
                 "column_order": 1,
-                "nesting_order": 1,
                 "jaar_type": "GroupID",
+                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
-                "nesting_order": 0,
                 "jaar_type": "RoadUnit",
+                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         }
     },
     "bud_item_reason_premiseunit": {
-        "DELETE": {
-            "atom_order": 16
-        },
-        "INSERT": {
-            "atom_order": 8
-        },
-        "UPDATE": {
-            "atom_order": 14
-        },
-        "normal_specs": {
-            "normal_table_name": "premise"
-        },
+        "brick_type": "bud",
         "optional_args": {
             "divisor": {
                 "column_order": 5,
@@ -216,37 +153,26 @@
         "required_args": {
             "base": {
                 "column_order": 1,
-                "nesting_order": 1,
                 "jaar_type": "RoadUnit",
+                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "need": {
                 "column_order": 2,
-                "nesting_order": 2,
                 "jaar_type": "RoadUnit",
+                "nesting_order": 2,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
-                "nesting_order": 0,
                 "jaar_type": "RoadUnit",
+                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         }
     },
     "bud_item_reasonunit": {
-        "DELETE": {
-            "atom_order": 17
-        },
-        "INSERT": {
-            "atom_order": 7
-        },
-        "UPDATE": {
-            "atom_order": 15
-        },
-        "normal_specs": {
-            "normal_table_name": "reason"
-        },
+        "brick_type": "bud",
         "optional_args": {
             "base_item_active_requisite": {
                 "column_order": 2,
@@ -257,57 +183,38 @@
         "required_args": {
             "base": {
                 "column_order": 1,
-                "nesting_order": 1,
                 "jaar_type": "RoadUnit",
+                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
-                "nesting_order": 0,
                 "jaar_type": "RoadUnit",
+                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         }
     },
     "bud_item_teamlink": {
-        "DELETE": {
-            "atom_order": 19
-        },
-        "INSERT": {
-            "atom_order": 4
-        },
-        "normal_specs": {
-            "normal_table_name": "teamlink"
-        },
+        "brick_type": "bud",
         "optional_args": {},
         "required_args": {
             "road": {
                 "column_order": 0,
-                "nesting_order": 0,
                 "jaar_type": "RoadUnit",
+                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "team_id": {
                 "column_order": 1,
-                "nesting_order": 1,
                 "jaar_type": "GroupID",
+                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
         }
     },
     "bud_itemunit": {
-        "DELETE": {
-            "atom_order": 22
-        },
-        "INSERT": {
-            "atom_order": 2
-        },
-        "UPDATE": {
-            "atom_order": 11
-        },
-        "normal_specs": {
-            "normal_table_name": "item"
-        },
+        "brick_type": "bud",
         "optional_args": {
             "addin": {
                 "column_order": 10,
@@ -368,25 +275,20 @@
         "required_args": {
             "label": {
                 "column_order": 1,
-                "nesting_order": 1,
                 "jaar_type": "RoadNode",
+                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
                 "column_order": 0,
-                "nesting_order": 0,
                 "jaar_type": "RoadUnit",
+                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         }
     },
     "budunit": {
-        "UPDATE": {
-            "atom_order": 25
-        },
-        "normal_specs": {
-            "normal_table_name": "bud"
-        },
+        "brick_type": "bud",
         "optional_args": {
             "credor_respect": {
                 "column_order": 3,
@@ -436,11 +338,39 @@
         },
         "required_args": {}
     },
-    "fiscal_cashbook": {},
-    "fiscal_purview_episode": {},
-    "fiscal_purviewlog": {},
-    "fiscal_timeline_hour": {},
-    "fiscal_timeline_month": {},
-    "fiscal_timeline_weekday": {},
-    "fiscalunit": {}
+    "fiscal_cashbook": {
+        "brick_type": "fiscal",
+        "optional_args": {},
+        "required_args": {}
+    },
+    "fiscal_purview_episode": {
+        "brick_type": "fiscal",
+        "optional_args": {},
+        "required_args": {}
+    },
+    "fiscal_purviewlog": {
+        "brick_type": "fiscal",
+        "optional_args": {},
+        "required_args": {}
+    },
+    "fiscal_timeline_hour": {
+        "brick_type": "fiscal",
+        "optional_args": {},
+        "required_args": {}
+    },
+    "fiscal_timeline_month": {
+        "brick_type": "fiscal",
+        "optional_args": {},
+        "required_args": {}
+    },
+    "fiscal_timeline_weekday": {
+        "brick_type": "fiscal",
+        "optional_args": {},
+        "required_args": {}
+    },
+    "fiscalunit": {
+        "brick_type": "fiscal",
+        "optional_args": {},
+        "required_args": {}
+    }
 }
