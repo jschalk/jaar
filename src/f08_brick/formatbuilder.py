@@ -12,8 +12,7 @@ from src.f08_brick.brick import atom_categorys_str, attributes_str, sort_order_s
 def create_categorys_brick_format_dict() -> dict:
     atom_config_dict = get_atom_config_dict()
     x_dict = {}
-    x_count = 20
-    for x_atom_category in atom_config_dict.keys():
+    for x_count, x_atom_category in enumerate(atom_config_dict.keys(), start=20):
         brick_filename = f"brick_format_{x_count:05}_{x_atom_category}_v0_0_0.json"
         attributes_dict = {
             fiscal_id_str(): {column_order_str(): 0, sort_order_str(): 0},
@@ -35,6 +34,4 @@ def create_categorys_brick_format_dict() -> dict:
             attributes_str(): attributes_dict,
         }
         x_dict[brick_filename] = brick_format
-        x_count += 1
-
     return x_dict
