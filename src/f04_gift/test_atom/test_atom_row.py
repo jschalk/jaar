@@ -113,7 +113,7 @@ def test_AtomRow_delete_atom_category_SetsAttr():
     assert not x_atomrow.atom_category_exists(bud_acct_membership_str())
 
 
-def test_AtomRow_set_python_types_SetsAttr():
+def test_AtomRow_set_jaar_types_SetsAttr():
     # ESTABLISH
     x_atomrow = atomrow_shop({}, atom_insert())
     x_atomrow.close = "4"
@@ -132,7 +132,7 @@ def test_AtomRow_set_python_types_SetsAttr():
     assert not x_atomrow.road
 
     # WHEN
-    x_atomrow._set_python_types()
+    x_atomrow._set_jaar_types()
 
     # THEN
     assert x_atomrow.close == four_int

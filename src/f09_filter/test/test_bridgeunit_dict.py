@@ -40,7 +40,7 @@ def test_BridgeUnit_get_dict_ReturnsObj():
     slash_otx_road_delimiter = "/"
     colon_inx_road_delimiter = ":"
     roadnode_bridgeunit = bridgeunit_shop(
-        x_python_type=type_RoadNode_str(),
+        x_jaar_type=type_RoadNode_str(),
         x_otx_road_delimiter=slash_otx_road_delimiter,
         x_inx_road_delimiter=colon_inx_road_delimiter,
         x_face_id=sue_str,
@@ -52,7 +52,7 @@ def test_BridgeUnit_get_dict_ReturnsObj():
         "explicit_label": roadnode_bridgeunit.explicit_label,
         "otx_to_inx": {},
         "face_id": roadnode_bridgeunit.face_id,
-        "python_type": roadnode_bridgeunit.python_type,
+        "jaar_type": roadnode_bridgeunit.jaar_type,
     }
     assert roadnode_bridgeunit.get_dict() == x1_road_bridge_dict
 
@@ -67,7 +67,7 @@ def test_BridgeUnit_get_dict_ReturnsObj():
         "explicit_label": {casa_otx: casa_inx},
         "otx_to_inx": {clean_otx: clean_inx},
         "face_id": sue_str,
-        "python_type": type_RoadNode_str(),
+        "jaar_type": type_RoadNode_str(),
     }
     assert roadnode_bridgeunit.get_dict() == x2_road_bridge_dict
 
@@ -87,9 +87,9 @@ def test_BridgeUnit_get_json_ReturnsObj():
   "explicit_label": {roadnode_bridgeunit.explicit_label},
   "face_id": "{sue_str}",
   "inx_road_delimiter": "{roadnode_bridgeunit.inx_road_delimiter}",
+  "jaar_type": "{type_RoadNode_str()}",
   "otx_road_delimiter": "{roadnode_bridgeunit.otx_road_delimiter}",
   "otx_to_inx": {{}},
-  "python_type": "{type_RoadNode_str()}",
   "unknown_word": "{roadnode_bridgeunit.unknown_word}"
 }}"""
     print(f"       {x1_road_bridge_json=}")
@@ -106,11 +106,11 @@ def test_BridgeUnit_get_json_ReturnsObj():
   }},
   "face_id": "{sue_str}",
   "inx_road_delimiter": "{roadnode_bridgeunit.inx_road_delimiter}",
+  "jaar_type": "{type_RoadNode_str()}",
   "otx_road_delimiter": "{roadnode_bridgeunit.otx_road_delimiter}",
   "otx_to_inx": {{
     "{clean_otx}": "{clean_inx}"
   }},
-  "python_type": "{type_RoadNode_str()}",
   "unknown_word": "{roadnode_bridgeunit.unknown_word}"
 }}"""
     print(f"       {x2_road_bridge_json=}")
@@ -137,7 +137,7 @@ def test_get_bridgeunit_from_dict_ReturnsObj():
 
     # THEN
     assert gen_bridgeunit.face_id == roadnode_bridgeunit.face_id
-    assert gen_bridgeunit.python_type == roadnode_bridgeunit.python_type
+    assert gen_bridgeunit.jaar_type == roadnode_bridgeunit.jaar_type
     assert gen_bridgeunit == roadnode_bridgeunit
 
 
@@ -162,7 +162,7 @@ def test_get_otx_to_inx_dt_columns_ReturnsObj():
     assert len(get_otx_to_inx_dt_columns()) == 7
     static_list = [
         "face_id",
-        "python_type",
+        "jaar_type",
         "otx_road_delimiter",
         "inx_road_delimiter",
         "unknown_word",
@@ -197,7 +197,7 @@ def test_get_explicit_label_columns_ReturnsObj():
     assert len(get_explicit_label_columns()) == 7
     static_list = [
         "face_id",
-        "python_type",
+        "jaar_type",
         "otx_road_delimiter",
         "inx_road_delimiter",
         "unknown_word",

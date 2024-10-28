@@ -1,5 +1,5 @@
 from src.f00_instrument.file import get_dir_file_strs, open_file
-from src.f04_gift.atom_config import get_atom_args_python_types
+from src.f04_gift.atom_config import get_atom_args_jaar_types
 from src.f08_brick.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f09_filter.filter import (
     BridgeUnit,
@@ -30,8 +30,8 @@ def filter_all_columns_dataframe(x_dt: DataFrame, x_filterunit: FilterUnit):
     column_names = set(x_dt.columns)
     filterable_columns = column_names.intersection(filterable_atom_args())
     for filterable_column in filterable_columns:
-        python_type = get_atom_args_python_types().get(filterable_column)
-        x_bridgeunit = x_filterunit.get_bridgeunit(python_type)
+        jaar_type = get_atom_args_jaar_types().get(filterable_column)
+        x_bridgeunit = x_filterunit.get_bridgeunit(jaar_type)
         filter_single_column_dataframe(x_dt, x_bridgeunit, filterable_column)
 
 

@@ -106,7 +106,7 @@ def test_FilterUnit_get_json_ReturnsObj():
 
     # THEN
     assert sue_json.find("bridgeunits") == 5
-    assert sue_json.find("otx_road_delimiter") == 129
+    assert sue_json.find("otx_road_delimiter") == 158
 
 
 def test_get_filterunit_from_dict_ReturnsObj():

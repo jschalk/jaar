@@ -34,7 +34,7 @@ def test_get_sorting_priority_column_headers_ReturnsObj():
 
     # THEN
     assert table_sorting_priority[0] == "face_id"
-    assert table_sorting_priority[1] == "python_type"
+    assert table_sorting_priority[1] == "jaar_type"
     assert table_sorting_priority[2] == "owner_id"
     assert table_sorting_priority[3] == "acct_id"
     assert table_sorting_priority[4] == "group_id"
