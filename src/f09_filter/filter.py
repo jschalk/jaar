@@ -1,5 +1,6 @@
 from src.f00_instrument.file import save_file, get_dir_file_strs
 from src.f00_instrument.dict_tool import (
+    get_0_if_None,
     get_empty_dict_if_none,
     str_in_dict,
     str_in_dict_keys,
@@ -10,6 +11,7 @@ from src.f00_instrument.dict_tool import (
     get_json_from_dict,
     get_dict_from_json,
 )
+from src.f01_road.finance import TimeLinePoint
 from src.f01_road.road import (
     default_road_delimiter_if_none,
     get_all_road_nodes,
@@ -283,6 +285,7 @@ def get_bridgeunit_from_json(x_json: str) -> BridgeUnit:
 
 @dataclass
 class FilterUnit:
+    time_id: TimeLinePoint = None
     face_id: OwnerID = None
     bridgeunits: dict[str, BridgeUnit] = None
     unknown_word: str = None
@@ -349,6 +352,7 @@ class FilterUnit:
     def get_dict(self) -> dict:
         return {
             "face_id": self.face_id,
+            "time_id": self.time_id,
             "otx_road_delimiter": self.otx_road_delimiter,
             "inx_road_delimiter": self.inx_road_delimiter,
             "unknown_word": self.unknown_word,
@@ -367,6 +371,7 @@ class FilterUnit:
 
 def filterunit_shop(
     x_face_id: OwnerID,
+    x_time_id: TimeLinePoint = None,
     x_otx_road_delimiter: str = None,
     x_inx_road_delimiter: str = None,
     x_unknown_word: str = None,
@@ -404,6 +409,7 @@ def filterunit_shop(
 
     return FilterUnit(
         face_id=x_face_id,
+        time_id=get_0_if_None(x_time_id),
         unknown_word=x_unknown_word,
         otx_road_delimiter=x_otx_road_delimiter,
         inx_road_delimiter=x_inx_road_delimiter,
@@ -414,6 +420,7 @@ def filterunit_shop(
 def get_filterunit_from_dict(x_dict: dict) -> FilterUnit:
     return FilterUnit(
         face_id=x_dict.get("face_id"),
+        time_id=x_dict.get("time_id"),
         otx_road_delimiter=x_dict.get("otx_road_delimiter"),
         inx_road_delimiter=x_dict.get("inx_road_delimiter"),
         unknown_word=x_dict.get("unknown_word"),

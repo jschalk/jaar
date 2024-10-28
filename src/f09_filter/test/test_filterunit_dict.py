@@ -41,6 +41,7 @@ def test_FilterUnit_get_dict_ReturnsObj_Scenario0():
     # THEN
     assert sue_dict
     assert sue_dict.get("face_id") == sue_str
+    assert sue_dict.get("time_id") == sue_filterunit.time_id
     assert sue_dict.get("otx_road_delimiter") == default_road_delimiter_if_none()
     assert sue_dict.get("inx_road_delimiter") == default_road_delimiter_if_none()
     assert sue_dict.get("unknown_word") == default_unknown_word()
@@ -67,7 +68,7 @@ def test_FilterUnit_get_dict_ReturnsObj_Scenario1():
     slash_otx_road_delimiter = "/"
     colon_inx_road_delimiter = ":"
     sue_filterunit = filterunit_shop(
-        sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
+        sue_str, 0, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
     )
     sue_filterunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
     sue_filterunit.set_bridgeunit(get_slash_groupid_bridgeunit())
@@ -111,11 +112,16 @@ def test_FilterUnit_get_json_ReturnsObj():
 def test_get_filterunit_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
+    sue_time_id = 77
     x_unknown_word = "UnknownAcctId"
     slash_otx_road_delimiter = "/"
     colon_inx_road_delimiter = ":"
     sue_filterunit = filterunit_shop(
-        sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
+        sue_str,
+        sue_time_id,
+        slash_otx_road_delimiter,
+        colon_inx_road_delimiter,
+        x_unknown_word,
     )
     sue_filterunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
     sue_filterunit.set_bridgeunit(get_slash_groupid_bridgeunit())
@@ -127,6 +133,7 @@ def test_get_filterunit_from_dict_ReturnsObj():
     # THEN
     assert gen_filterunit
     assert gen_filterunit.face_id == sue_str
+    assert gen_filterunit.time_id == sue_time_id
     assert gen_filterunit.otx_road_delimiter == slash_otx_road_delimiter
     assert gen_filterunit.inx_road_delimiter == colon_inx_road_delimiter
     assert gen_filterunit.unknown_word == x_unknown_word
@@ -143,11 +150,16 @@ def test_get_filterunit_from_dict_ReturnsObj():
 def test_get_filterunit_from_json_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
+    sue_time_id = 77
     x_unknown_word = "UnknownAcctId"
     slash_otx_road_delimiter = "/"
     colon_inx_road_delimiter = ":"
     sue_filterunit = filterunit_shop(
-        sue_str, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
+        sue_str,
+        sue_time_id,
+        slash_otx_road_delimiter,
+        colon_inx_road_delimiter,
+        x_unknown_word,
     )
     sue_filterunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
     sue_filterunit.set_bridgeunit(get_slash_groupid_bridgeunit())
@@ -159,6 +171,7 @@ def test_get_filterunit_from_json_ReturnsObj():
     # THEN
     assert gen_filterunit
     assert gen_filterunit.face_id == sue_str
+    assert gen_filterunit.time_id == sue_time_id
     assert gen_filterunit.otx_road_delimiter == slash_otx_road_delimiter
     assert gen_filterunit.inx_road_delimiter == colon_inx_road_delimiter
     assert gen_filterunit.unknown_word == x_unknown_word
