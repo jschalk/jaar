@@ -309,7 +309,7 @@ class FilterUnit:
         self_attr = getattr(self, attr)
         unit_attr = getattr(bridgeunit, attr)
         if self_attr != unit_attr:
-            exception_str = f"set_bridgeunit Error: BrideUnit {attr} is '{self_attr}', BridgeUnit is '{unit_attr}'."
+            exception_str = f"set_bridgeunit Error: BridgeUnit {attr} is '{self_attr}', BridgeUnit is '{unit_attr}'."
             raise atom_args_python_typeException(exception_str)
 
     def get_bridgeunit(self, x_python_type: str) -> BridgeUnit:

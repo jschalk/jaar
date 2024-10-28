@@ -217,7 +217,7 @@ def test_FilterUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_otx_road_delimiter_I
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_filterunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgeunit Error: BrideUnit otx_road_delimiter is '{sue_filterunit.otx_road_delimiter}', BridgeUnit is '{slash_otx_road_delimiter}'."
+    exception_str = f"set_bridgeunit Error: BridgeUnit otx_road_delimiter is '{sue_filterunit.otx_road_delimiter}', BridgeUnit is '{slash_otx_road_delimiter}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -237,7 +237,7 @@ def test_FilterUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_inx_road_delimiter_I
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_filterunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgeunit Error: BrideUnit inx_road_delimiter is '{sue_filterunit.inx_road_delimiter}', BridgeUnit is '{slash_inx_road_delimiter}'."
+    exception_str = f"set_bridgeunit Error: BridgeUnit inx_road_delimiter is '{sue_filterunit.inx_road_delimiter}', BridgeUnit is '{slash_inx_road_delimiter}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -255,7 +255,7 @@ def test_FilterUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_unknown_word_IsNotSa
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_filterunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgeunit Error: BrideUnit unknown_word is '{sue_filterunit.unknown_word}', BridgeUnit is '{casa_unknown_word}'."
+    exception_str = f"set_bridgeunit Error: BridgeUnit unknown_word is '{sue_filterunit.unknown_word}', BridgeUnit is '{casa_unknown_word}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -271,7 +271,7 @@ def test_FilterUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_face_id_IsNotSame():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_filterunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgeunit Error: BrideUnit face_id is '{sue_filterunit.face_id}', BridgeUnit is '{yao_str}'."
+    exception_str = f"set_bridgeunit Error: BridgeUnit face_id is '{sue_filterunit.face_id}', BridgeUnit is '{yao_str}'."
     assert str(excinfo.value) == exception_str
 
 
