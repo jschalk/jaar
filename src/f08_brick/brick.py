@@ -1,5 +1,4 @@
 from src.f00_instrument.file import open_file, create_file_path
-from src.f00_instrument.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f00_instrument.dict_tool import (
     extract_csv_headers,
     get_csv_column1_column2_metrics,
@@ -28,6 +27,7 @@ from src.f08_brick.brick_config import (
     sort_order_str,
     get_brick_format_headers,
 )
+from src.f08_brick.pandas_tool import save_dataframe_to_csv, open_csv
 from pandas import DataFrame
 from csv import reader as csv_reader
 from dataclasses import dataclass

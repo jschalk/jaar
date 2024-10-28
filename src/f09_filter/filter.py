@@ -10,7 +10,6 @@ from src.f00_instrument.dict_tool import (
     get_json_from_dict,
     get_dict_from_json,
 )
-from src.f00_instrument.pandas_tool import get_ordered_csv, open_csv
 from src.f01_road.road import (
     default_road_delimiter_if_none,
     get_all_road_nodes,
@@ -30,6 +29,7 @@ from src.f04_gift.atom_config import (
     type_RoadNode_str,
     type_RoadUnit_str,
 )
+from src.f08_brick.pandas_tool import get_ordered_csv, open_csv
 from pandas import DataFrame
 from dataclasses import dataclass
 from copy import copy as copy_copy

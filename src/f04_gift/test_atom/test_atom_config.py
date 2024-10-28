@@ -1,5 +1,4 @@
 from src.f00_instrument.dict_tool import get_from_nested_dict
-from src.f00_instrument.pandas_tool import get_sorting_priority_column_headers
 from src.f02_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
@@ -666,56 +665,3 @@ def test_get_atom_args_python_types_ReturnsObj():
     assert x_python_types.get("team_id") == type_GroupID_str()
     assert x_python_types.keys() == get_atom_args_category_mapping().keys()
     assert all_atom_args_python_types_are_correct(x_python_types)
-
-
-def test_get_atom_args_category_mapping_IsIn_get_sorting_priority_column_headers():
-    # ESTABLISH / WHEN
-    table_sorting_priority = get_sorting_priority_column_headers()
-
-    # THEN
-    assert table_sorting_priority[3] == "acct_id"
-    assert table_sorting_priority[4] == "group_id"
-    assert table_sorting_priority[5] == "parent_road"
-    assert table_sorting_priority[6] == "label"
-    assert table_sorting_priority[7] == "road"
-    assert table_sorting_priority[8] == "base"
-    assert table_sorting_priority[9] == "need"
-    assert table_sorting_priority[10] == "pick"
-    assert table_sorting_priority[11] == "team_id"
-    assert table_sorting_priority[12] == "awardee_id"
-    assert table_sorting_priority[13] == "healer_id"
-    assert table_sorting_priority[14] == "numor"
-    assert table_sorting_priority[15] == "denom"
-    assert table_sorting_priority[16] == "addin"
-    assert table_sorting_priority[17] == "base_item_active_requisite"
-    assert table_sorting_priority[18] == "begin"
-    assert table_sorting_priority[19] == "close"
-    assert table_sorting_priority[20] == "credit_belief"
-    assert table_sorting_priority[21] == "debtit_belief"
-    assert table_sorting_priority[22] == "credit_vote"
-    assert table_sorting_priority[23] == "debtit_vote"
-    assert table_sorting_priority[24] == "credor_respect"
-    assert table_sorting_priority[25] == "debtor_respect"
-    assert table_sorting_priority[26] == "fopen"
-    assert table_sorting_priority[27] == "fnigh"
-    assert table_sorting_priority[28] == "fund_pool"
-    assert table_sorting_priority[29] == "give_force"
-    assert table_sorting_priority[30] == "gogo_want"
-    assert table_sorting_priority[31] == "mass"
-    assert table_sorting_priority[32] == "max_tree_traverse"
-    assert table_sorting_priority[33] == "morph"
-    assert table_sorting_priority[34] == "nigh"
-    assert table_sorting_priority[35] == "open"
-    assert table_sorting_priority[36] == "divisor"
-    assert table_sorting_priority[37] == "pledge"
-    assert table_sorting_priority[38] == "problem_bool"
-    assert table_sorting_priority[39] == "purview_timestamp"
-    assert table_sorting_priority[40] == "stop_want"
-    assert table_sorting_priority[41] == "take_force"
-    assert table_sorting_priority[42] == "tally"
-    assert table_sorting_priority[43] == "fund_coin"
-    assert table_sorting_priority[44] == "penny"
-    assert table_sorting_priority[45] == "respect_bit"
-    assert len(table_sorting_priority) == 53
-    atom_args = set(get_atom_args_category_mapping().keys())
-    assert atom_args.issubset(set(table_sorting_priority))

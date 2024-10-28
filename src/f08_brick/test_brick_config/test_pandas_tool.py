@@ -1,5 +1,5 @@
 from src.f00_instrument.file import open_file, create_file_path, create_dir
-from src.f00_instrument.pandas_tool import (
+from src.f08_brick.pandas_tool import (
     get_sorting_priority_column_headers,
     save_dataframe_to_csv,
     get_ordered_csv,
@@ -23,6 +23,7 @@ from src.f00_instrument.examples.instrument_env import (
     env_dir_setup_cleanup,
     get_instrument_temp_env_dir,
 )
+from src.f04_gift.atom_config import get_atom_args_category_mapping
 from os.path import exists as os_path_exists
 from pandas import DataFrame, ExcelWriter
 
@@ -86,6 +87,8 @@ def test_get_sorting_priority_column_headers_ReturnsObj():
     assert table_sorting_priority[51] == "otx_label"
     assert table_sorting_priority[52] == "inx_label"
     assert len(table_sorting_priority) == 53
+    atom_args = set(get_atom_args_category_mapping().keys())
+    assert atom_args.issubset(set(table_sorting_priority))
 
 
 def test_get_ordered_csv_ReturnsObj():

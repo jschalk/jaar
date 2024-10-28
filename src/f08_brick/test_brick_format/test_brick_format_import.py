@@ -1,5 +1,4 @@
 from src.f00_instrument.file import create_file_path as f_path
-from src.f00_instrument.pandas_tool import open_csv
 from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import (
     fiscal_id_str,
@@ -20,6 +19,7 @@ from src.f08_brick.brick_config import (
     brick_format_00012_membership_v0_0_0,
     brick_format_00013_itemunit_v0_0_0,
 )
+from src.f08_brick.pandas_tool import open_csv
 from src.f08_brick.examples.brick_env import (
     brick_examples_dir,
     brick_fiscals_dir,
