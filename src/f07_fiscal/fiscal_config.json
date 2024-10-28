@@ -18,7 +18,7 @@
             "acct_id": {},
             "fiscal_id": {},
             "owner_id": {},
-            "time                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           stamp": {}
+            "timestamp": {}
         }
     },
     "fiscal_timeline_hour": {
@@ -46,7 +46,18 @@
         }
     },
     "fiscalunit": {
-        "optional_args": {},
+        "optional_args": {
+            "c400_config": {},
+            "current_time": {},
+            "fiscal_id": {},
+            "fund_coin": {},
+            "monthday_distortion": {},
+            "penny": {},
+            "respect_bit": {},
+            "road_delimiter": {},
+            "timeline_label": {},
+            "yr1_jan1_offset": {}
+        },
         "required_args": {}
     }
 }

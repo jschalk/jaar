@@ -340,37 +340,69 @@
     },
     "fiscal_cashbook": {
         "brick_type": "fiscal",
-        "optional_args": {},
-        "required_args": {}
+        "optional_args": {
+            "amount": {}
+        },
+        "required_args": {
+            "acct_id": {},
+            "fiscal_id": {},
+            "owner_id": {},
+            "timestamp": {}
+        }
     },
     "fiscal_purview_episode": {
         "brick_type": "fiscal",
-        "optional_args": {},
-        "required_args": {}
-    },
-    "fiscal_purviewlog": {
-        "brick_type": "fiscal",
-        "optional_args": {},
-        "required_args": {}
+        "optional_args": {
+            "quota": {}
+        },
+        "required_args": {
+            "acct_id": {},
+            "fiscal_id": {},
+            "owner_id": {},
+            "timestamp": {}
+        }
     },
     "fiscal_timeline_hour": {
         "brick_type": "fiscal",
         "optional_args": {},
-        "required_args": {}
+        "required_args": {
+            "cumlative_minute": {},
+            "fiscal_id": {},
+            "hour_label": {}
+        }
     },
     "fiscal_timeline_month": {
         "brick_type": "fiscal",
         "optional_args": {},
-        "required_args": {}
+        "required_args": {
+            "cumlative_day": {},
+            "fiscal_id": {},
+            "month_label": {}
+        }
     },
     "fiscal_timeline_weekday": {
         "brick_type": "fiscal",
         "optional_args": {},
-        "required_args": {}
+        "required_args": {
+            "fiscal_id": {},
+            "weekday_label": {},
+            "weekday_order": {}
+        }
     },
     "fiscalunit": {
         "brick_type": "fiscal",
-        "optional_args": {},
+        "optional_args": {
+            "c400_config": {},
+            "current_time": {},
+            "fiscal_id": {},
+            "fund_coin": {},
+            "monthday_distortion": {},
+            "penny": {},
+            "respect_bit": {},
+            "road_delimiter": {},
+            "timeline_label": {},
+            "yr1_jan1_offset": {}
+        },
         "required_args": {}
     }
 }

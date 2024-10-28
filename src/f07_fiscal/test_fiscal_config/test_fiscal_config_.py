@@ -92,18 +92,28 @@ def test_get_fiscal_config_dict_ReturnsObj():
     assert len(fiscal_timeline_hour_dict.get(required_args_str())) == 3
     assert len(fiscal_timeline_month_dict.get(required_args_str())) == 3
     assert len(fiscal_timeline_weekday_dict.get(required_args_str())) == 3
-    assert len(fiscalunit_dict.get(optional_args_str())) == 0
+
+    x_fiscalunit_optional_args = {
+        "c400_config",
+        "current_time",
+        "fiscal_id",
+        "fund_coin",
+        "monthday_distortion",
+        "penny",
+        "respect_bit",
+        "road_delimiter",
+        "timeline_label",
+        "yr1_jan1_offset",
+    }
+    print(f"{fiscalunit_dict.get(optional_args_str()).keys()=}")
+    gen_optional_args = set(fiscalunit_dict.get(optional_args_str()).keys())
+    assert gen_optional_args == x_fiscalunit_optional_args
+    assert len(fiscalunit_dict.get(optional_args_str())) == 10
     assert len(fiscal_purview_episode_dict.get(optional_args_str())) == 1
     assert len(fiscal_cashbook_dict.get(optional_args_str())) == 1
     assert len(fiscal_timeline_hour_dict.get(optional_args_str())) == 0
     assert len(fiscal_timeline_month_dict.get(optional_args_str())) == 0
     assert len(fiscal_timeline_weekday_dict.get(optional_args_str())) == 0
-
-
-# fiscalunit        "c400_config,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,road_delimiter,timeline_label,yr1_jan1_offset":
-# fiscal_timeline_hour        "cumlative_minute,fiscal_id,hour_label"
-# fiscal_timeline_month        "cumlative_day,fiscal_id,month_label"
-# fiscal_timeline_weekday        "fiscal_id,weekday_label,weekday_order"
 
 
 def _validate_fiscal_config(fiscal_config: dict):

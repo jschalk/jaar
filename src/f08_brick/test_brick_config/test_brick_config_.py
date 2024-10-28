@@ -61,7 +61,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert x_brick_config
     brick_config_categorys = set(x_brick_config.keys())
     assert fiscalunit_str() in brick_config_categorys
-    assert fiscal_purviewlog_str() in brick_config_categorys
+    assert fiscal_purviewlog_str() not in brick_config_categorys
     assert fiscal_purview_episode_str() in brick_config_categorys
     assert fiscal_cashbook_str() in brick_config_categorys
     assert fiscal_timeline_hour_str() in brick_config_categorys
@@ -81,12 +81,13 @@ def test_get_brick_config_dict_ReturnsObj():
     assert atom_config_categorys.issubset(brick_config_categorys)
     fiscal_config_categorys = set(get_fiscal_config_dict().keys())
     assert fiscal_config_categorys.issubset(brick_config_categorys)
-    assert len(x_brick_config) == 17
+    assert len(x_brick_config) == 16
     _validate_brick_config(x_brick_config)
 
 
 def _validate_brick_config(x_brick_config: dict):
     atom_config_dict = get_atom_config_dict()
+    fiscal_config_dict = get_fiscal_config_dict()
     # for every brick_format file there exists a unique brick_number always with leading zeros to make 5 digits
     for brick_category, brick_dict in x_brick_config.items():
         print(f"{brick_category=}")
@@ -98,19 +99,21 @@ def _validate_brick_config(x_brick_config: dict):
         assert brick_dict.get(atom_delete()) is None
         assert brick_dict.get(normal_specs_str()) is None
         if brick_category[:3] == "bud":
-            atom_category = atom_config_dict.get(brick_category)
+            sub_category = atom_config_dict.get(brick_category)
+        if brick_category[:3] == "fis":
+            sub_category = fiscal_config_dict.get(brick_category)
 
-            atom_required_args_keys = set(atom_category.get(required_args_str()).keys())
-            brick_required_args_keys = set(brick_dict.get(required_args_str()).keys())
-            # print(f"{atom_required_args_keys=}")
-            # print(f"{brick_required_args_keys=}")
-            assert atom_required_args_keys.issubset(brick_required_args_keys)
+        sub_required_args_keys = set(sub_category.get(required_args_str()).keys())
+        brick_required_args_keys = set(brick_dict.get(required_args_str()).keys())
+        print(f"  {sub_required_args_keys=}")
+        print(f"{brick_required_args_keys=}")
+        assert sub_required_args_keys.issubset(brick_required_args_keys)
 
-            atom_optional_args_keys = set(atom_category.get(optional_args_str()).keys())
-            brick_optional_args_keys = set(brick_dict.get(optional_args_str()).keys())
-            # print(f" {atom_optional_args_keys=}")
-            # print(f"{brick_optional_args_keys=}")
-            assert atom_optional_args_keys.issubset(brick_optional_args_keys)
+        sub_optional_args_keys = set(sub_category.get(optional_args_str()).keys())
+        brick_optional_args_keys = set(brick_dict.get(optional_args_str()).keys())
+        print(f"  {sub_optional_args_keys=}")
+        print(f"{brick_optional_args_keys=}")
+        assert sub_optional_args_keys.issubset(brick_optional_args_keys)
 
 
 def test_get_brick_filenames_ReturnsObj():
