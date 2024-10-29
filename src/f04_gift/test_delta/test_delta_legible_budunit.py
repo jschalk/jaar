@@ -34,22 +34,22 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tally():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_purview_time_id():
+def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_purview_time_fid():
     # ESTABLISH
     category = budunit_str()
-    purview_time_id_str = "purview_time_id"
-    purview_time_id_int = 55
-    purview_time_id_atomunit = atomunit_shop(category, atom_update())
-    purview_time_id_atomunit.set_arg(purview_time_id_str, purview_time_id_int)
+    purview_time_fid_str = "purview_time_fid"
+    purview_time_fid_int = 55
+    purview_time_fid_atomunit = atomunit_shop(category, atom_update())
+    purview_time_fid_atomunit.set_arg(purview_time_fid_str, purview_time_fid_int)
     x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(purview_time_id_atomunit)
+    x_deltaunit.set_atomunit(purview_time_fid_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s bud purview_time_id set to {purview_time_id_int}"
+    x_str = f"{sue_bud._owner_id}'s bud purview_time_fid set to {purview_time_fid_int}"
     assert legible_list[0] == x_str
 
 

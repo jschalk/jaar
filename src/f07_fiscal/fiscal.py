@@ -266,15 +266,15 @@ class FiscalUnit:
         self.purviewlogs.pop(x_owner_id)
 
     def add_purviewepisode(
-        self, x_owner_id: OwnerID, x_time_id: TimeLinePoint, x_money_magnitude: int
+        self, x_owner_id: OwnerID, x_time_fid: TimeLinePoint, x_money_magnitude: int
     ):
-        if x_time_id < self.current_time:
-            exception_str = f"Cannot set purviewepisode because time_id {x_time_id} is less than FiscalUnit.current_time {self.current_time}."
+        if x_time_fid < self.current_time:
+            exception_str = f"Cannot set purviewepisode because time_fid {x_time_fid} is less than FiscalUnit.current_time {self.current_time}."
             raise purviewepisode_Exception(exception_str)
         if self.purviewlog_exists(x_owner_id) is False:
             self.set_purviewlog(purviewlog_shop(x_owner_id))
         x_purviewlog = self.get_purviewlog(x_owner_id)
-        x_purviewlog.add_episode(x_time_id, x_money_magnitude)
+        x_purviewlog.add_episode(x_time_fid, x_money_magnitude)
 
     def get_dict(self) -> dict:
         return {
@@ -297,36 +297,36 @@ class FiscalUnit:
             for x_episode in self.purviewlogs.values()
         }
 
-    def get_purviewlogs_time_ids(self) -> set[TimeLinePoint]:
-        all_purviewepisode_time_ids = set()
+    def get_purviewlogs_time_fids(self) -> set[TimeLinePoint]:
+        all_purviewepisode_time_fids = set()
         for x_purviewlog in self.purviewlogs.values():
-            all_purviewepisode_time_ids.update(x_purviewlog.get_time_ids())
-        return all_purviewepisode_time_ids
+            all_purviewepisode_time_fids.update(x_purviewlog.get_time_fids())
+        return all_purviewepisode_time_fids
 
     def set_cashpurchase(self, x_cashpurchase: TranUnit):
         self.cashbook.set_tranunit(
             x_tranunit=x_cashpurchase,
-            x_blocked_time_ids=self.get_purviewlogs_time_ids(),
+            x_blocked_time_fids=self.get_purviewlogs_time_fids(),
             x_current_time=self.current_time,
         )
 
     def cashpurchase_exists(
-        self, src: AcctID, dst: AcctID, x_time_id: TimeLinePoint
+        self, src: AcctID, dst: AcctID, x_time_fid: TimeLinePoint
     ) -> bool:
-        return self.cashbook.tranunit_exists(src, dst, x_time_id)
+        return self.cashbook.tranunit_exists(src, dst, x_time_fid)
 
     def get_cashpurchase(
-        self, src: AcctID, dst: AcctID, x_time_id: TimeLinePoint
+        self, src: AcctID, dst: AcctID, x_time_fid: TimeLinePoint
     ) -> TranUnit:
-        return self.cashbook.get_tranunit(src, dst, x_time_id)
+        return self.cashbook.get_tranunit(src, dst, x_time_fid)
 
-    def del_cashpurchase(self, src: AcctID, dst: AcctID, x_time_id: TimeLinePoint):
-        return self.cashbook.del_tranunit(src, dst, x_time_id)
+    def del_cashpurchase(self, src: AcctID, dst: AcctID, x_time_fid: TimeLinePoint):
+        return self.cashbook.del_tranunit(src, dst, x_time_fid)
 
     def set_current_time(self, x_current_time: TimeLinePoint):
-        x_time_ids = self.cashbook.get_time_ids()
-        if x_time_ids != set() and max(x_time_ids) >= x_current_time:
-            exception_str = f"Cannot set current_time {x_current_time}, cashpurchase with greater time_id exists"
+        x_time_fids = self.cashbook.get_time_fids()
+        if x_time_fids != set() and max(x_time_fids) >= x_current_time:
+            exception_str = f"Cannot set current_time {x_current_time}, cashpurchase with greater time_fid exists"
             raise set_current_time_Exception(exception_str)
         self.current_time = x_current_time
 
@@ -334,9 +334,9 @@ class FiscalUnit:
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
         x_tranbook = tranbook_shop(self.fiscal_id, x_tranunits)
         for owner_id, x_purviewlog in self.purviewlogs.items():
-            for x_time_id, x_purviewepisode in x_purviewlog.episodes.items():
+            for x_time_fid, x_purviewepisode in x_purviewlog.episodes.items():
                 for acct_id, x_amount in x_purviewepisode._net_purviews.items():
-                    x_tranbook.add_tranunit(owner_id, acct_id, x_time_id, x_amount)
+                    x_tranbook.add_tranunit(owner_id, acct_id, x_time_fid, x_amount)
         self._all_tranbook = x_tranbook
 
     # TODO evaluate if this should be used

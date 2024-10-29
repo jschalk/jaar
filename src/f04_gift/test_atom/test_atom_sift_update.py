@@ -68,7 +68,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
     sue_fund_pool = 69
     sue_max_tree_traverse = 72
     sue_penny = 2
-    sue_purview_time_id = 9990000
+    sue_purview_time_fid = 9990000
     sue_tally = 100
     zia_atom = atomunit_shop(budunit_str(), atom_insert())
     zia_atom.set_arg("respect_bit", sue_bit)
@@ -78,7 +78,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
     zia_atom.set_arg("fund_pool", sue_fund_pool)
     zia_atom.set_arg("max_tree_traverse", sue_max_tree_traverse)
     zia_atom.set_arg("penny", sue_penny)
-    zia_atom.set_arg("purview_time_id", sue_purview_time_id)
+    zia_atom.set_arg("purview_time_fid", sue_purview_time_fid)
     zia_atom.set_arg("tally", sue_tally)
 
     # WHEN
@@ -97,7 +97,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
         "fund_pool": sue_fund_pool,
         "max_tree_traverse": sue_max_tree_traverse,
         "penny": sue_penny,
-        "purview_time_id": sue_purview_time_id,
+        "purview_time_fid": sue_purview_time_fid,
         "tally": sue_tally,
     }
 

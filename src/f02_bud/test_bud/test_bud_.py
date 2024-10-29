@@ -33,7 +33,7 @@ def test_BudUnit_Exists():
     assert x_bud.penny is None
     assert x_bud.credor_respect is None
     assert x_bud.debtor_respect is None
-    assert x_bud.purview_time_id is None
+    assert x_bud.purview_time_fid is None
     assert x_bud._last_gift_id is None
     assert x_bud._originunit is None
     # calculated attr
@@ -88,7 +88,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud.penny == x_penny
     assert x_bud.credor_respect == validate_respect_num()
     assert x_bud.debtor_respect == validate_respect_num()
-    assert not x_bud.purview_time_id
+    assert not x_bud.purview_time_fid
     assert not x_bud._last_gift_id
     # calculated attr
     assert x_bud._originunit == originunit_shop()
@@ -286,15 +286,15 @@ def test_BudUnit_set_fund_pool_RaisesErrorWhenArgIsNotMultiple():
 def test_BudUnit_set_purview_CorrectlySetsAttr():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    assert sue_bud.purview_time_id is None
+    assert sue_bud.purview_time_fid is None
 
     # WHEN
     sue_purview = 99000
-    sue_bud.set_purview_time_id(sue_purview)
+    sue_bud.set_purview_time_fid(sue_purview)
     # THEN
-    assert sue_bud.purview_time_id == sue_purview
+    assert sue_bud.purview_time_fid == sue_purview
 
     # WHEN
-    sue_bud.set_purview_time_id(None)
+    sue_bud.set_purview_time_fid(None)
     # THEN
-    assert sue_bud.purview_time_id is None
+    assert sue_bud.purview_time_fid is None

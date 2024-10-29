@@ -26,7 +26,7 @@
                 "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -52,7 +52,7 @@
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -84,7 +84,7 @@
                 "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -120,7 +120,7 @@
                 "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -143,7 +143,7 @@
                 "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -184,7 +184,7 @@
                 "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -212,7 +212,7 @@
                 "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -235,7 +235,7 @@
                 "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -303,7 +303,7 @@
                 "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -336,7 +336,7 @@
                 "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
-            "purview_time_id": {
+            "purview_time_fid": {
                 "obj_class": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"
             },
@@ -353,7 +353,7 @@
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -370,7 +370,7 @@
                 "obj_class": "FiscalID"
             },
             "owner_id": {},
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -387,7 +387,7 @@
                 "obj_class": "FiscalID"
             },
             "owner_id": {},
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -402,7 +402,7 @@
                 "obj_class": "FiscalID"
             },
             "hour_label": {},
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -417,7 +417,7 @@
                 "obj_class": "FiscalID"
             },
             "month_label": {},
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -430,7 +430,7 @@
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             },
             "weekday_label": {},
@@ -454,7 +454,7 @@
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
-            "time_id": {
+            "time_fid": {
                 "obj_class": "TimeLinePoint"
             }
         }

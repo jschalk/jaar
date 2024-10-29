@@ -219,12 +219,12 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     optional_args = x_atom.optional_args
     _tally_str = "tally"
     _max_tree_traverse_str = "max_tree_traverse"
-    purview_time_id_str = "purview_time_id"
+    purview_time_fid_str = "purview_time_fid"
     _max_tree_traverse_value = optional_args.get(_max_tree_traverse_str)
     credor_respect_value = optional_args.get(credor_respect_str())
     debtor_respect_value = optional_args.get(debtor_respect_str())
     _tally_value = optional_args.get(_tally_str)
-    purview_time_id_value = optional_args.get(purview_time_id_str)
+    purview_time_fid_value = optional_args.get(purview_time_fid_str)
 
     if _max_tree_traverse_value is not None:
         x_str = f"{x_bud._owner_id}'s maximum number of Bud evaluations set to {_max_tree_traverse_value}"
@@ -245,8 +245,8 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     if _tally_value is not None:
         x_str = f"{x_bud._owner_id}'s bud tally set to {_tally_value}"
         legible_list.append(x_str)
-    if purview_time_id_value is not None:
-        x_str = f"{x_bud._owner_id}'s bud {purview_time_id_str} set to {purview_time_id_value}"
+    if purview_time_fid_value is not None:
+        x_str = f"{x_bud._owner_id}'s bud {purview_time_fid_str} set to {purview_time_fid_value}"
         legible_list.append(x_str)
 
 

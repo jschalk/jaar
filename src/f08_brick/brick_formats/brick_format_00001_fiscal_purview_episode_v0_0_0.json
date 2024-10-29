@@ -15,7 +15,7 @@
         "quota": {
             "column_order": 4
         },
-        "time_id": {
+        "time_fid": {
             "column_order": 3
         }
     },

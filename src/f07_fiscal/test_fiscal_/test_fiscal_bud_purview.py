@@ -76,72 +76,72 @@ def test_FiscalUnit_add_purviewepisode_SetsAttr():
 
     # WHEN
     bob_str = "Bob"
-    bob_x0_time_id = 702
+    bob_x0_time_fid = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_id = 4
+    sue_x4_time_fid = 4
     sue_x4_magnitude = 55
-    sue_x7_time_id = 7
+    sue_x7_time_fid = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_fid, bob_x0_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_fid, sue_x4_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_fid, sue_x7_magnitude)
 
     # THEN
     assert music_fiscal.purviewlogs != {}
     sue_purviewlog = purviewlog_shop(sue_str)
-    sue_purviewlog.add_episode(sue_x4_time_id, sue_x4_magnitude)
-    sue_purviewlog.add_episode(sue_x7_time_id, sue_x7_magnitude)
+    sue_purviewlog.add_episode(sue_x4_time_fid, sue_x4_magnitude)
+    sue_purviewlog.add_episode(sue_x7_time_fid, sue_x7_magnitude)
     bob_purviewlog = purviewlog_shop(bob_str)
-    bob_purviewlog.add_episode(bob_x0_time_id, bob_x0_magnitude)
+    bob_purviewlog.add_episode(bob_x0_time_fid, bob_x0_magnitude)
     assert music_fiscal.get_purviewlog(sue_str) == sue_purviewlog
     assert music_fiscal.get_purviewlog(bob_str) == bob_purviewlog
 
 
-def test_FiscalUnit_get_purviewlogs_time_ids_ReturnsObj():
+def test_FiscalUnit_get_purviewlogs_time_fids_ReturnsObj():
     # ESTABLISH
     music_str = "music"
     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
     bob_str = "Bob"
-    bob_x0_time_id = 702
+    bob_x0_time_fid = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_id = 4
+    sue_x4_time_fid = 4
     sue_x4_magnitude = 55
-    sue_x7_time_id = 7
+    sue_x7_time_fid = 7
     sue_x7_magnitude = 66
-    assert music_fiscal.get_purviewlogs_time_ids() == set()
+    assert music_fiscal.get_purviewlogs_time_fids() == set()
 
     # WHEN
-    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_fid, bob_x0_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_fid, sue_x4_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_fid, sue_x7_magnitude)
 
     # THEN
-    all_time_ids = {bob_x0_time_id, sue_x4_time_id, sue_x7_time_id}
-    assert music_fiscal.get_purviewlogs_time_ids() == all_time_ids
+    all_time_fids = {bob_x0_time_fid, sue_x4_time_fid, sue_x7_time_fid}
+    assert music_fiscal.get_purviewlogs_time_fids() == all_time_fids
 
 
-def test_FiscalUnit_add_purviewepisode_RaisesErrorWhenPurview_time_id_IsLessThan_current_time():
+def test_FiscalUnit_add_purviewepisode_RaisesErrorWhenPurview_time_fid_IsLessThan_current_time():
     # ESTABLISH
     music_str = "music"
     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
     music_current_time = 606
     music_fiscal.current_time = music_current_time
     bob_str = "Bob"
-    bob_x0_time_id = 707
+    bob_x0_time_fid = 707
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_id = 404
+    sue_x4_time_fid = 404
     sue_x4_magnitude = 55
-    sue_x7_time_id = 808
+    sue_x7_time_fid = 808
     sue_x7_magnitude = 66
-    assert music_fiscal.get_purviewlogs_time_ids() == set()
-    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+    assert music_fiscal.get_purviewlogs_time_fids() == set()
+    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_fid, bob_x0_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_fid, sue_x7_magnitude)
 
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
-        music_fiscal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
-    exception_str = f"Cannot set purviewepisode because time_id {sue_x4_time_id} is less than FiscalUnit.current_time {music_current_time}."
+        music_fiscal.add_purviewepisode(sue_str, sue_x4_time_fid, sue_x4_magnitude)
+    exception_str = f"Cannot set purviewepisode because time_fid {sue_x4_time_fid} is less than FiscalUnit.current_time {music_current_time}."
     assert str(excinfo.value) == exception_str

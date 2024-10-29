@@ -416,34 +416,34 @@ class HubUnit:
         self.save_voice_bud(voice_bud)
         return self.get_voice_bud()
 
-    def timepoint_dir(self, x_time_id: TimeLinePoint) -> str:
-        return f"{self.timeline_dir()}/{x_time_id}"
+    def timepoint_dir(self, x_time_fid: TimeLinePoint) -> str:
+        return f"{self.timeline_dir()}/{x_time_fid}"
 
     def purview_file_name(self) -> str:
         return "purview.json"
 
-    def purview_file_path(self, x_time_id: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_id), self.purview_file_name())
+    def purview_file_path(self, x_time_fid: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_time_fid), self.purview_file_name())
 
     def _save_valid_purview_file(self, x_purview: PurviewEpisode):
         x_purview.calc_magnitude()
         save_file(
-            self.timepoint_dir(x_purview.time_id),
+            self.timepoint_dir(x_purview.time_fid),
             self.purview_file_name(),
             x_purview.get_json(),
             replace=True,
         )
 
-    def purview_file_exists(self, x_time_id: TimeLinePoint) -> bool:
-        return os_path_exists(self.purview_file_path(x_time_id))
+    def purview_file_exists(self, x_time_fid: TimeLinePoint) -> bool:
+        return os_path_exists(self.purview_file_path(x_time_fid))
 
-    def get_purview_file(self, x_time_id: TimeLinePoint) -> PurviewEpisode:
-        if self.purview_file_exists(x_time_id):
-            x_json = open_file(self.timepoint_dir(x_time_id), self.purview_file_name())
+    def get_purview_file(self, x_time_fid: TimeLinePoint) -> PurviewEpisode:
+        if self.purview_file_exists(x_time_fid):
+            x_json = open_file(self.timepoint_dir(x_time_fid), self.purview_file_name())
             return get_purviewepisode_from_json(x_json)
 
-    def delete_purview_file(self, x_time_id: TimeLinePoint):
-        delete_dir(self.purview_file_path(x_time_id))
+    def delete_purview_file(self, x_time_fid: TimeLinePoint):
+        delete_dir(self.purview_file_path(x_time_fid))
 
     def get_purviewlog(self) -> PurviewLog:
         x_purviewlog = purviewlog_shop(self.owner_id)
@@ -462,47 +462,47 @@ class HubUnit:
     def budpoint_file_name(self) -> str:
         return "budpoint.json"
 
-    def budpoint_file_path(self, x_time_id: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_id), self.budpoint_file_name())
+    def budpoint_file_path(self, x_time_fid: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_time_fid), self.budpoint_file_name())
 
-    def _save_valid_budpoint_file(self, x_time_id: TimeLinePoint, x_budpoint: BudUnit):
+    def _save_valid_budpoint_file(self, x_time_fid: TimeLinePoint, x_budpoint: BudUnit):
         x_budpoint.settle_bud()
         if x_budpoint._rational is False:
             raise _save_valid_budpoint_Exception(
                 "BudPoint could not be saved BudUnit._rational is False"
             )
         save_file(
-            self.timepoint_dir(x_time_id),
+            self.timepoint_dir(x_time_fid),
             self.budpoint_file_name(),
             x_budpoint.get_json(),
             replace=True,
         )
 
-    def budpoint_file_exists(self, x_time_id: TimeLinePoint) -> bool:
-        return os_path_exists(self.budpoint_file_path(x_time_id))
+    def budpoint_file_exists(self, x_time_fid: TimeLinePoint) -> bool:
+        return os_path_exists(self.budpoint_file_path(x_time_fid))
 
-    def get_budpoint_file(self, x_time_id: TimeLinePoint) -> BudUnit:
-        if self.budpoint_file_exists(x_time_id):
-            timepoint_dir = self.timepoint_dir(x_time_id)
+    def get_budpoint_file(self, x_time_fid: TimeLinePoint) -> BudUnit:
+        if self.budpoint_file_exists(x_time_fid):
+            timepoint_dir = self.timepoint_dir(x_time_fid)
             file_content = open_file(timepoint_dir, self.budpoint_file_name())
             return budunit_get_from_json(file_content)
 
-    def delete_budpoint_file(self, x_time_id: TimeLinePoint):
-        delete_dir(self.budpoint_file_path(x_time_id))
+    def delete_budpoint_file(self, x_time_fid: TimeLinePoint):
+        delete_dir(self.budpoint_file_path(x_time_fid))
 
-    def calc_timepoint_purview(self, x_time_id: TimeLinePoint):
-        if self.budpoint_file_exists(x_time_id) is False:
-            exception_str = f"Cannot calculate timepoint {x_time_id} purviews without saved BudPoint file"
+    def calc_timepoint_purview(self, x_time_fid: TimeLinePoint):
+        if self.budpoint_file_exists(x_time_fid) is False:
+            exception_str = f"Cannot calculate timepoint {x_time_fid} purviews without saved BudPoint file"
             raise calc_timepoint_purview_Exception(exception_str)
-        x_budpoint = self.get_budpoint_file(x_time_id)
-        if self.purview_file_exists(x_time_id):
-            x_purviewepisode = self.get_purview_file(x_time_id)
+        x_budpoint = self.get_budpoint_file(x_time_fid)
+        if self.purview_file_exists(x_time_fid):
+            x_purviewepisode = self.get_purview_file(x_time_fid)
             x_budpoint.set_fund_pool(x_purviewepisode.quota)
         else:
-            x_purviewepisode = purviewepisode_shop(x_time_id)
+            x_purviewepisode = purviewepisode_shop(x_time_fid)
         x_net_purviews = get_bud_settle_acct_net_dict(x_budpoint, True)
         x_purviewepisode._net_purviews = x_net_purviews
-        self._save_valid_budpoint_file(x_time_id, x_budpoint)
+        self._save_valid_budpoint_file(x_time_fid, x_budpoint)
         self._save_valid_purview_file(x_purviewepisode)
 
     def calc_timepoint_purviews(self):
