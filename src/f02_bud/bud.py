@@ -131,7 +131,7 @@ class BudUnit:
     respect_bit: BitNum = None
     credor_respect: RespectNum = None
     debtor_respect: RespectNum = None
-    purview_timestamp: TimeLinePoint = None
+    purview_time_id: TimeLinePoint = None
     _originunit: OriginUnit = None  # In job buds this shows source
     # settle_bud Calculated field begin
     _item_dict: dict[RoadUnit, ItemUnit] = None
@@ -158,8 +158,8 @@ class BudUnit:
             raise _last_gift_idException(exception_str)
         self._last_gift_id = x_last_gift_id
 
-    def set_purview_timestamp(self, x_purview_timestamp: TimeLinePoint):
-        self.purview_timestamp = x_purview_timestamp
+    def set_purview_time_id(self, x_purview_time_id: TimeLinePoint):
+        self.purview_time_id = x_purview_time_id
 
     def set_fund_pool(self, x_fund_pool):
         if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:

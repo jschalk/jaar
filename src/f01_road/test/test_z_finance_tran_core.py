@@ -17,26 +17,26 @@ def test_TranUnit_Exists():
     assert x_tranunit
     assert not x_tranunit.src
     assert not x_tranunit.dst
-    assert not x_tranunit.timestamp
+    assert not x_tranunit.time_id
     assert not x_tranunit.amount
 
 
 def test_tranunit_shop_WithParametersReturnsObj():
     # ESTABLISH
     music23_str = "music23"
-    t55_timestamp = 5505
+    t55_time_id = 5505
     t55_fundnum = -45
     sue_str = "Sue"
     yao_str = "Yao"
 
     # WHEN
-    x_tranunit = tranunit_shop(sue_str, yao_str, t55_timestamp, t55_fundnum)
+    x_tranunit = tranunit_shop(sue_str, yao_str, t55_time_id, t55_fundnum)
 
     # THEN
     assert x_tranunit
     assert x_tranunit.src == sue_str
     assert x_tranunit.dst == yao_str
-    assert x_tranunit.timestamp == t55_timestamp
+    assert x_tranunit.time_id == t55_time_id
     assert x_tranunit.amount == t55_fundnum
 
 
@@ -150,7 +150,7 @@ def test_TranBook_set_tranunit_SetsAttr():
     }
 
 
-def test_TranBook_set_tranunit_SetsAttrWithBlockTimeStamp():
+def test_TranBook_set_tranunit_SetsAttrWithBlocktime_id():
     # ESTABLISH
     music23_str = "music23"
     x_tranbook = tranbook_shop(music23_str)
@@ -162,15 +162,15 @@ def test_TranBook_set_tranunit_SetsAttrWithBlockTimeStamp():
     assert x_tranbook.tranunits == {}
 
     # WHEN
-    x_blocked_timestamps = {44}
-    x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_timestamps)
+    x_blocked_time_ids = {44}
+    x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_time_ids)
 
     # THEN
     assert x_tranbook.tranunits != {}
     assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_t: t55_yao_amount}}}
 
 
-def test_TranBook_set_tranunit_SetsAttrWithBlockTimeStamp_RaisesError():
+def test_TranBook_set_tranunit_SetsAttrWithBlocktime_id_RaisesError():
     # ESTABLISH
     music23_str = "music23"
     x_tranbook = tranbook_shop(music23_str)
@@ -178,20 +178,18 @@ def test_TranBook_set_tranunit_SetsAttrWithBlockTimeStamp_RaisesError():
     yao_str = "Yao"
     t55_t = 5505
     t55_yao_amount = -55
-    x_blocked_timestamps = {t55_t}
+    x_blocked_time_ids = {t55_t}
     sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
     assert x_tranbook.tranunits == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_timestamps)
-    exception_str = (
-        f"Cannot set tranunit for timestamp={t55_t}, timelinepoint is blocked"
-    )
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_time_ids)
+    exception_str = f"Cannot set tranunit for time_id={t55_t}, timelinepoint is blocked"
     assert str(excinfo.value) == exception_str
 
 
-def test_TranBook_set_tranunit_SetsAttrWithCurrentTimeStamp():
+def test_TranBook_set_tranunit_SetsAttrWithCurrenttime_id():
     # ESTABLISH
     music23_str = "music23"
     x_tranbook = tranbook_shop(music23_str)
@@ -211,7 +209,7 @@ def test_TranBook_set_tranunit_SetsAttrWithCurrentTimeStamp():
     assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_t: t55_yao_amount}}}
 
 
-def test_TranBook_set_tranunit_SetsAttrWithCurrentTimeStamp_RaisesError():
+def test_TranBook_set_tranunit_SetsAttrWithCurrenttime_id_RaisesError():
     # ESTABLISH
     music23_str = "music23"
     x_tranbook = tranbook_shop(music23_str)
@@ -225,13 +223,13 @@ def test_TranBook_set_tranunit_SetsAttrWithCurrentTimeStamp_RaisesError():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_current_time=t55_t)
-    exception_str = f"Cannot set tranunit for timestamp={t55_t}, timelinepoint is greater than current time={t55_t}"
+    exception_str = f"Cannot set tranunit for time_id={t55_t}, timelinepoint is greater than current time={t55_t}"
     assert str(excinfo.value) == exception_str
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_current_time=33)
-    exception_str = f"Cannot set tranunit for timestamp={t55_t}, timelinepoint is greater than current time=33"
+    exception_str = f"Cannot set tranunit for time_id={t55_t}, timelinepoint is greater than current time=33"
     assert str(excinfo.value) == exception_str
 
 
@@ -244,56 +242,56 @@ def test_TranBook_add_tranunit_SetsAttr():
     # WHEN
     sue_str = "Sue"
     yao_str = "Yao"
-    t55_timestamp = 5505
+    t55_time_id = 5505
     t55_yao_amount = -55
-    x_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
+    x_tranbook.add_tranunit(sue_str, yao_str, t55_time_id, t55_yao_amount)
 
     # THEN
     assert x_tranbook.tranunits != {}
-    assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_timestamp: t55_yao_amount}}}
+    assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_time_id: t55_yao_amount}}}
 
     # WHEN
     bob_str = "Bob"
     t55_bob_amount = 600
-    x_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    x_tranbook.add_tranunit(sue_str, bob_str, t55_time_id, t55_bob_amount)
 
     # THEN
     assert x_tranbook.tranunits != {}
     assert x_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_timestamp: t55_yao_amount},
-            bob_str: {t55_timestamp: t55_bob_amount},
+            yao_str: {t55_time_id: t55_yao_amount},
+            bob_str: {t55_time_id: t55_bob_amount},
         }
     }
 
     # WHEN
-    t66_timestamp = 6606
+    t66_time_id = 6606
     t66_yao_amount = -66
-    x_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
+    x_tranbook.add_tranunit(sue_str, yao_str, t66_time_id, t66_yao_amount)
 
     # THEN
     assert x_tranbook.tranunits != {}
     assert x_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
-            bob_str: {t55_timestamp: t55_bob_amount},
+            yao_str: {t55_time_id: t55_yao_amount, t66_time_id: t66_yao_amount},
+            bob_str: {t55_time_id: t55_bob_amount},
         }
     }
 
     # WHEN
-    t77_timestamp = 7707
+    t77_time_id = 7707
     t77_yao_amount = -77
-    x_tranbook.add_tranunit(yao_str, yao_str, t77_timestamp, t77_yao_amount)
+    x_tranbook.add_tranunit(yao_str, yao_str, t77_time_id, t77_yao_amount)
 
     # THEN
     print(f"{x_tranbook.tranunits=}")
     assert x_tranbook.tranunits != {}
     assert x_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
-            bob_str: {t55_timestamp: t55_bob_amount},
+            yao_str: {t55_time_id: t55_yao_amount, t66_time_id: t66_yao_amount},
+            bob_str: {t55_time_id: t55_bob_amount},
         },
-        yao_str: {yao_str: {t77_timestamp: t77_yao_amount}},
+        yao_str: {yao_str: {t77_time_id: t77_yao_amount}},
     }
 
 
@@ -333,7 +331,7 @@ def test_TranBook_get_tranunit_ReturnsObj():
     assert sue_yao_t55_tranunit
     assert sue_yao_t55_tranunit.src == sue_str
     assert sue_yao_t55_tranunit.dst == yao_str
-    assert sue_yao_t55_tranunit.timestamp == t55_t
+    assert sue_yao_t55_tranunit.time_id == t55_t
     assert sue_yao_t55_tranunit.amount == t55_yao_amount
 
     # WHEN / THEN
@@ -378,31 +376,31 @@ def test_TranBook_del_tranunit_SetsAttr():
     assert music23_tranbook.tranunit_exists(sue_str, yao_str, t55_t) is False
 
 
-def test_TranBook_get_timestamps_ReturnsObj():
+def test_TranBook_get_time_ids_ReturnsObj():
     # ESTABLISH
     music23_str = "music23"
     music23_tranbook = tranbook_shop(music23_str)
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_timestamp = 5505
+    t55_time_id = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_timestamp = 6606
+    t66_time_id = 6606
     t66_yao_amount = -66
-    t77_timestamp = 7707
+    t77_time_id = 7707
     t77_bob_amount = -77
-    music23_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
-    music23_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
-    music23_tranbook.add_tranunit(sue_str, bob_str, t77_timestamp, t77_bob_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_time_id, t55_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t66_time_id, t66_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t77_time_id, t77_bob_amount)
 
     # WHEN
-    music23_timestamps = music23_tranbook.get_timestamps()
+    music23_time_ids = music23_tranbook.get_time_ids()
 
     # THEN
-    assert music23_timestamps
-    assert len(music23_timestamps)
-    assert music23_timestamps == {t55_timestamp, t66_timestamp, t77_timestamp}
+    assert music23_time_ids
+    assert len(music23_time_ids)
+    assert music23_time_ids == {t55_time_id, t66_time_id, t77_time_id}
 
 
 def test_TranBook_get_owners_accts_net_ReturnObj_Scenario0():
@@ -411,11 +409,11 @@ def test_TranBook_get_owners_accts_net_ReturnObj_Scenario0():
     music23_tranbook = tranbook_shop(music23_str)
     sue_str = "Sue"
     bob_str = "Bob"
-    t55_timestamp = 5505
+    t55_time_id = 5505
     t55_bob_amount = 600
-    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_time_id, t55_bob_amount)
     assert music23_tranbook.tranunits == {
-        sue_str: {bob_str: {t55_timestamp: t55_bob_amount}}
+        sue_str: {bob_str: {t55_time_id: t55_bob_amount}}
     }
 
     # WHEN
@@ -433,18 +431,18 @@ def test_TranBook_get_owners_accts_net_ReturnsObj_Scenario1():
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_timestamp = 5505
+    t55_time_id = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_timestamp = 6606
+    t66_time_id = 6606
     t66_yao_amount = -66
-    music23_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
-    music23_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
-    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_time_id, t55_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t66_time_id, t66_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_time_id, t55_bob_amount)
     assert music23_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
-            bob_str: {t55_timestamp: t55_bob_amount},
+            yao_str: {t55_time_id: t55_yao_amount, t66_time_id: t66_yao_amount},
+            bob_str: {t55_time_id: t55_bob_amount},
         }
     }
 
@@ -464,11 +462,11 @@ def test_TranBook_get_accts_net_dict_ReturnObj_Scenario0():
     music23_tranbook = tranbook_shop(music23_str)
     sue_str = "Sue"
     bob_str = "Bob"
-    t55_timestamp = 5505
+    t55_time_id = 5505
     t55_bob_amount = 600
-    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_time_id, t55_bob_amount)
     assert music23_tranbook.tranunits == {
-        sue_str: {bob_str: {t55_timestamp: t55_bob_amount}}
+        sue_str: {bob_str: {t55_time_id: t55_bob_amount}}
     }
 
     # WHEN
@@ -486,24 +484,24 @@ def test_TranBook_get_accts_net_dict_ReturnObj_Scenario1():
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_timestamp = 5505
+    t55_time_id = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_timestamp = 6606
+    t66_time_id = 6606
     t66_yao_amount = -66
-    t77_timestamp = 7707
+    t77_time_id = 7707
     t77_yao_amount = -77
-    music23_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
-    music23_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
-    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_time_id, t55_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t66_time_id, t66_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_time_id, t55_bob_amount)
 
-    music23_tranbook.add_tranunit(yao_str, yao_str, t77_timestamp, t77_yao_amount)
+    music23_tranbook.add_tranunit(yao_str, yao_str, t77_time_id, t77_yao_amount)
     assert music23_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
-            bob_str: {t55_timestamp: t55_bob_amount},
+            yao_str: {t55_time_id: t55_yao_amount, t66_time_id: t66_yao_amount},
+            bob_str: {t55_time_id: t55_bob_amount},
         },
-        yao_str: {yao_str: {t77_timestamp: t77_yao_amount}},
+        yao_str: {yao_str: {t77_time_id: t77_yao_amount}},
     }
 
     # WHEN
@@ -524,24 +522,24 @@ def test_TranBook_get_accts_net_array_ReturnsObj():
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_timestamp = 5505
+    t55_time_id = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_timestamp = 6606
+    t66_time_id = 6606
     t66_yao_amount = -66
-    t77_timestamp = 7707
+    t77_time_id = 7707
     t77_yao_amount = -77
-    music23_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
-    music23_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
-    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_time_id, t55_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t66_time_id, t66_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_time_id, t55_bob_amount)
 
-    music23_tranbook.add_tranunit(yao_str, yao_str, t77_timestamp, t77_yao_amount)
+    music23_tranbook.add_tranunit(yao_str, yao_str, t77_time_id, t77_yao_amount)
     assert music23_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
-            bob_str: {t55_timestamp: t55_bob_amount},
+            yao_str: {t55_time_id: t55_yao_amount, t66_time_id: t66_yao_amount},
+            bob_str: {t55_time_id: t55_bob_amount},
         },
-        yao_str: {yao_str: {t77_timestamp: t77_yao_amount}},
+        yao_str: {yao_str: {t77_time_id: t77_yao_amount}},
     }
 
     # WHEN
@@ -571,24 +569,24 @@ def test_TranBook_get_accts_csv_ReturnsObj():
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_timestamp = 5505
+    t55_time_id = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_timestamp = 6606
+    t66_time_id = 6606
     t66_yao_amount = -66
-    t77_timestamp = 7707
+    t77_time_id = 7707
     t77_yao_amount = -77
-    music23_tranbook.add_tranunit(sue_str, yao_str, t55_timestamp, t55_yao_amount)
-    music23_tranbook.add_tranunit(sue_str, yao_str, t66_timestamp, t66_yao_amount)
-    music23_tranbook.add_tranunit(sue_str, bob_str, t55_timestamp, t55_bob_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t55_time_id, t55_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, yao_str, t66_time_id, t66_yao_amount)
+    music23_tranbook.add_tranunit(sue_str, bob_str, t55_time_id, t55_bob_amount)
 
-    music23_tranbook.add_tranunit(yao_str, yao_str, t77_timestamp, t77_yao_amount)
+    music23_tranbook.add_tranunit(yao_str, yao_str, t77_time_id, t77_yao_amount)
     assert music23_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_timestamp: t55_yao_amount, t66_timestamp: t66_yao_amount},
-            bob_str: {t55_timestamp: t55_bob_amount},
+            yao_str: {t55_time_id: t55_yao_amount, t66_time_id: t66_yao_amount},
+            bob_str: {t55_time_id: t55_bob_amount},
         },
-        yao_str: {yao_str: {t77_timestamp: t77_yao_amount}},
+        yao_str: {yao_str: {t77_time_id: t77_yao_amount}},
     }
 
     # WHEN
@@ -626,14 +624,14 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 # def test_tranbook_shop_ReturnsObjWith_net_purviews():
 #     # ESTABLISH
-#     x_timestamp = 4
+#     x_time_id = 4
 #     x_amount = 55
 #     x_net_purviews = {"Sue": -4}
 #     x_magnitude = 677
 
 #     # WHEN
 #     x_tranbook = tranbook_shop(
-#         x_timestamp=x_timestamp,
+#         x_time_id=x_time_id,
 #         x_amount=x_amount,
 #         net_purviews=x_net_purviews,
 #         x_magnitude=x_magnitude,
@@ -641,7 +639,7 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 #     # THEN
 #     assert x_tranbook
-#     assert x_tranbook.timestamp == x_timestamp
+#     assert x_tranbook.time_id == x_time_id
 #     assert x_tranbook.amount == x_amount
 #     assert x_tranbook._magnitude == 677
 #     assert x_tranbook._net_purviews == x_net_purviews
@@ -705,21 +703,21 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 # def test_TranBook_get_dict_ReturnsObj():
 #     # ESTABLISH
-#     x_timestamp = 4
+#     x_time_id = 4
 #     x_amount = 55
-#     x_tranbook = tranbook_shop(x_timestamp, x_amount)
+#     x_tranbook = tranbook_shop(x_time_id, x_amount)
 
 #     # WHEN
 #     x_dict = x_tranbook.get_dict()
 
 #     # THEN
-#     assert x_dict == {"timestamp": x_timestamp, "amount": x_amount}
+#     assert x_dict == {"time_id": x_time_id, "amount": x_amount}
 
 
 # def test_TranBook_calc_magnitude_SetsAttr_Scenario0():
 #     # ESTABLISH
-#     x_timestamp = 4
-#     x_tranbook = tranbook_shop(x_timestamp)
+#     x_time_id = 4
+#     x_tranbook = tranbook_shop(x_time_id)
 #     assert x_tranbook._magnitude == 0
 
 #     # WHEN
@@ -731,10 +729,10 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 # def test_TranBook_calc_magnitude_SetsAttr_Scenario1():
 #     # ESTABLISH
-#     x_timestamp = 4
+#     x_time_id = 4
 #     x_net_purviews = {"Sue": -4, "Yao": 2, "Zia": 2}
 
-#     x_tranbook = tranbook_shop(x_timestamp, net_purviews=x_net_purviews)
+#     x_tranbook = tranbook_shop(x_time_id, net_purviews=x_net_purviews)
 #     assert x_tranbook._magnitude == 0
 
 #     # WHEN
@@ -746,10 +744,10 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 # def test_TranBook_calc_magnitude_SetsAttr_Scenario2():
 #     # ESTABLISH
-#     x_timestamp = 4
+#     x_time_id = 4
 #     x_net_purviews = {"Bob": -13, "Sue": -7, "Yao": 18, "Zia": 2}
 
-#     x_tranbook = tranbook_shop(x_timestamp, net_purviews=x_net_purviews)
+#     x_tranbook = tranbook_shop(x_time_id, net_purviews=x_net_purviews)
 #     assert x_tranbook._magnitude == 0
 
 #     # WHEN
@@ -761,12 +759,12 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 # def test_TranBook_calc_magnitude_SetsAttr_Scenario3_RaisesError():
 #     # ESTABLISH
-#     x_timestamp = 4
+#     x_time_id = 4
 #     bob_purview = -13
 #     sue_purview = -3
 #     yao_purview = 100
 #     x_net_purviews = {"Bob": bob_purview, "Sue": sue_purview, "Yao": yao_purview}
-#     x_tranbook = tranbook_shop(x_timestamp, net_purviews=x_net_purviews)
+#     x_tranbook = tranbook_shop(x_time_id, net_purviews=x_net_purviews)
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
@@ -777,11 +775,11 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 # def test_TranBook_get_dict_ReturnsObjWith_net_purviews():
 #     # ESTABLISH
-#     x_timestamp = 4
+#     x_time_id = 4
 #     x_amount = 55
 #     x_net_purviews = {"Sue": -4}
 #     x_magnitude = 67
-#     x_tranbook = tranbook_shop(x_timestamp, x_amount, x_net_purviews)
+#     x_tranbook = tranbook_shop(x_time_id, x_amount, x_net_purviews)
 #     x_tranbook._magnitude = 67
 
 #     # WHEN
@@ -789,7 +787,7 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 #     # THEN
 #     assert x_dict == {
-#         "timestamp": x_timestamp,
+#         "time_id": x_time_id,
 #         "amount": x_amount,
 #         "magnitude": x_magnitude,
 #         "net_purviews": x_net_purviews,
@@ -798,10 +796,10 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 # def test_TranBook_get_json_ReturnsObj():
 #     # ESTABLISH
-#     x_timestamp = 4
+#     x_time_id = 4
 #     x_amount = 55
 #     x_net_purviews = {"Sue": -77}
-#     x_tranbook = tranbook_shop(x_timestamp, x_amount, x_net_purviews)
+#     x_tranbook = tranbook_shop(x_time_id, x_amount, x_net_purviews)
 #     x_tranbook._magnitude = 67
 
 #     # WHEN
@@ -814,7 +812,7 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 #     "Sue": -77
 #   },
 #   "amount": 55,
-#   "timestamp": 4
+#   "time_id": 4
 # }"""
 #     print(f"{x_json=}")
 #     assert x_json == static_x_json
@@ -822,18 +820,18 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 # def test_get_tranbook_from_dict_ReturnsObj_Sccenario0():
 #     # ESTABLISH
-#     x_timestamp = 4
+#     x_time_id = 4
 #     x_amount = 55
-#     x_tranbook = tranbook_shop(x_timestamp, x_amount)
+#     x_tranbook = tranbook_shop(x_time_id, x_amount)
 #     x_dict = x_tranbook.get_dict()
-#     assert x_dict == {"timestamp": x_timestamp, "amount": x_amount}
+#     assert x_dict == {"time_id": x_time_id, "amount": x_amount}
 
 #     # WHEN
 #     x_tranbook = get_tranbook_from_dict(x_dict)
 
 #     # THEN
 #     assert x_tranbook
-#     assert x_tranbook.timestamp == x_timestamp
+#     assert x_tranbook.time_id == x_time_id
 #     assert x_tranbook.amount == x_amount
 #     assert x_tranbook._magnitude == 0
 #     assert x_tranbook == x_tranbook
@@ -841,11 +839,11 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 # def test_get_tranbook_from_dict_ReturnsObj_Scenario1():
 #     # ESTABLISH
-#     x_timestamp = 4
+#     x_time_id = 4
 #     x_amount = 55
 #     x_magnitude = 65
 #     x_net_purviews = {"Sue": -77}
-#     x_tranbook = tranbook_shop(x_timestamp, x_amount, x_net_purviews)
+#     x_tranbook = tranbook_shop(x_time_id, x_amount, x_net_purviews)
 #     x_tranbook._magnitude = x_magnitude
 #     x_dict = x_tranbook.get_dict()
 
@@ -854,7 +852,7 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 #     # THEN
 #     assert x_tranbook
-#     assert x_tranbook.timestamp == x_timestamp
+#     assert x_tranbook.time_id == x_time_id
 #     assert x_tranbook.amount == x_amount
 #     assert x_tranbook._magnitude == x_magnitude
 #     assert x_tranbook._net_purviews == x_net_purviews
@@ -863,10 +861,10 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 # def test_get_tranbook_from_json_ReturnsObj():
 #     # ESTABLISH
-#     x_timestamp = 4
+#     x_time_id = 4
 #     x_amount = 55
 #     x_net_purviews = {"Sue": -57}
-#     x_tranbook = tranbook_shop(x_timestamp, x_amount, x_net_purviews)
+#     x_tranbook = tranbook_shop(x_time_id, x_amount, x_net_purviews)
 #     x_json = x_tranbook.get_json()
 
 #     # WHEN
@@ -874,7 +872,7 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
 #     # THEN
 #     assert x_tranbook
-#     assert x_tranbook.timestamp == x_timestamp
+#     assert x_tranbook.time_id == x_time_id
 #     assert x_tranbook.amount == x_amount
 #     assert x_tranbook._net_purviews == x_net_purviews
 #     assert x_tranbook == x_tranbook

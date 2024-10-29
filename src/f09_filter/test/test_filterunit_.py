@@ -83,7 +83,7 @@ def test_FilterUnit_Exists():
     x_filterunit = FilterUnit()
 
     # WHEN / THEN
-    assert not x_filterunit.time_id
+    assert not x_filterunit.eon_id
     assert not x_filterunit.bridgeunits
     assert not x_filterunit.unknown_word
     assert not x_filterunit.otx_road_delimiter
@@ -100,7 +100,7 @@ def test_filterunit_shop_ReturnsObj_scenario0():
 
     # THEN
     assert sue_filterunit.face_id == sue_str
-    assert sue_filterunit.time_id == 0
+    assert sue_filterunit.eon_id == 0
     assert sue_filterunit.unknown_word == default_unknown_word()
     assert sue_filterunit.otx_road_delimiter == default_road_delimiter_if_none()
     assert sue_filterunit.inx_road_delimiter == default_road_delimiter_if_none()
@@ -122,7 +122,7 @@ def test_filterunit_shop_ReturnsObj_scenario0():
 def test_filterunit_shop_ReturnsObj_scenario1():
     # ESTABLISH
     sue_str = "Sue"
-    five_time_id = 5
+    five_eon_id = 5
     y_unknown_word = "UnknownAcctId"
     slash_otx_road_delimiter = "/"
     colon_inx_road_delimiter = ":"
@@ -130,14 +130,14 @@ def test_filterunit_shop_ReturnsObj_scenario1():
     # WHEN
     sue_filterunit = filterunit_shop(
         sue_str,
-        five_time_id,
+        five_eon_id,
         slash_otx_road_delimiter,
         colon_inx_road_delimiter,
         y_unknown_word,
     )
 
     # THEN
-    assert sue_filterunit.time_id == five_time_id
+    assert sue_filterunit.eon_id == five_eon_id
     assert sue_filterunit.unknown_word == y_unknown_word
     assert sue_filterunit.otx_road_delimiter == slash_otx_road_delimiter
     assert sue_filterunit.inx_road_delimiter == colon_inx_road_delimiter

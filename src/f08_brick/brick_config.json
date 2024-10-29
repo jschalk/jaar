@@ -14,16 +14,16 @@
         },
         "required_args": {
             "acct_id": {
-                "obj_class": "AcctID",
                 "nesting_order": 0,
+                "obj_class": "AcctID",
                 "sqlite_datatype": "TEXT"
             },
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
             "group_id": {
-                "obj_class": "GroupID",
                 "nesting_order": 1,
+                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "time_id": {
@@ -72,16 +72,16 @@
         },
         "required_args": {
             "awardee_id": {
-                "obj_class": "GroupID",
                 "nesting_order": 1,
+                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
             "road": {
-                "obj_class": "RoadUnit",
                 "nesting_order": 0,
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "time_id": {
@@ -108,16 +108,16 @@
         },
         "required_args": {
             "base": {
-                "obj_class": "RoadUnit",
                 "nesting_order": 1,
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
             "road": {
-                "obj_class": "RoadUnit",
                 "nesting_order": 0,
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "time_id": {
@@ -134,13 +134,13 @@
                 "obj_class": "FiscalID"
             },
             "healer_id": {
-                "obj_class": "GroupID",
                 "nesting_order": 1,
+                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
-                "obj_class": "RoadUnit",
                 "nesting_order": 0,
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "time_id": {
@@ -167,21 +167,21 @@
         },
         "required_args": {
             "base": {
-                "obj_class": "RoadUnit",
                 "nesting_order": 1,
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
             "need": {
-                "obj_class": "RoadUnit",
                 "nesting_order": 2,
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
-                "obj_class": "RoadUnit",
                 "nesting_order": 0,
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "time_id": {
@@ -200,16 +200,16 @@
         },
         "required_args": {
             "base": {
-                "obj_class": "RoadUnit",
                 "nesting_order": 1,
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
             "road": {
-                "obj_class": "RoadUnit",
                 "nesting_order": 0,
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "time_id": {
@@ -226,13 +226,13 @@
                 "obj_class": "FiscalID"
             },
             "road": {
-                "obj_class": "RoadUnit",
                 "nesting_order": 0,
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "team_id": {
-                "obj_class": "GroupID",
                 "nesting_order": 1,
+                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "time_id": {
@@ -294,13 +294,13 @@
                 "obj_class": "FiscalID"
             },
             "label": {
-                "obj_class": "RoadNode",
                 "nesting_order": 1,
+                "obj_class": "RoadNode",
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
-                "obj_class": "RoadUnit",
                 "nesting_order": 0,
+                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "time_id": {
@@ -336,7 +336,7 @@
                 "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
-            "purview_timestamp": {
+            "purview_time_id": {
                 "obj_class": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"
             },
@@ -372,8 +372,7 @@
             "owner_id": {},
             "time_id": {
                 "obj_class": "TimeLinePoint"
-            },
-            "timestamp": {}
+            }
         }
     },
     "fiscal_purview_episode": {
@@ -390,8 +389,7 @@
             "owner_id": {},
             "time_id": {
                 "obj_class": "TimeLinePoint"
-            },
-            "timestamp": {}
+            }
         }
     },
     "fiscal_timeline_hour": {

@@ -119,7 +119,7 @@ def test_BudUnit_settle_bud_CorrectlyRaisesErrorWhenKeepIsLevelBelowProblem():
     )
 
 
-def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenTwoKeepsAreOnTheEqualLine():
+def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenTwoKeepsAre_OnTheEqualLine():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_healerlink = healerlink_shop({"Yao"})
