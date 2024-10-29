@@ -372,8 +372,7 @@
             "owner_id": {},
             "time_id": {
                 "obj_class": "TimeLinePoint"
-            },
-            "time_id": {}
+            }
         }
     },
     "fiscal_purview_episode": {
@@ -390,8 +389,7 @@
             "owner_id": {},
             "time_id": {
                 "obj_class": "TimeLinePoint"
-            },
-            "time_id": {}
+            }
         }
     },
     "fiscal_timeline_hour": {
