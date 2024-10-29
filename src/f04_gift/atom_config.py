@@ -324,7 +324,7 @@ def get_atom_args_obj_classs() -> dict[str, str]:
         "pick": "RoadUnit",
         "pledge": "bool",
         "problem_bool": "bool",
-        "purview_time_fid": "TimeLinePoint",
+        "purview_time_id": "TimeLinePoint",
         "respect_bit": "float",
         "road": "RoadUnit",
         "stop_want": "float",

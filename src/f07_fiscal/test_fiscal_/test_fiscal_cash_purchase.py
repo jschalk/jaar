@@ -21,7 +21,7 @@ def test_FiscalUnit_set_cashpurchase_SetsAttr():
     assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
-def test_FiscalUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_fid_GreaterThanOrEqual_current_time():
+def test_FiscalUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_id_GreaterThanOrEqual_current_time():
     # ESTABLISH
     t6606_current_time = 6606
     x_fiscal = fiscalunit_shop(current_time=t6606_current_time)
@@ -31,8 +31,8 @@ def test_FiscalUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_fid_GreaterTh
     t55_amount = 37
     sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
     assert x_fiscal.current_time == t6606_current_time
-    assert sue_bob_t55_tranunit.time_fid == t55_t
-    assert sue_bob_t55_tranunit.time_fid < x_fiscal.current_time
+    assert sue_bob_t55_tranunit.time_id == t55_t
+    assert sue_bob_t55_tranunit.time_id < x_fiscal.current_time
 
     # WHEN
     x_fiscal.set_cashpurchase(sue_bob_t55_tranunit)
@@ -47,18 +47,18 @@ def test_FiscalUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_fid_GreaterTh
     # WHEN/THEN
     with pytest_raises(Exception) as excinfo:
         x_fiscal.set_cashpurchase(sue_bob_t77_tranunit)
-    exception_str = f"Cannot set tranunit for time_fid={t77_t}, timelinepoint is greater than current time={t6606_current_time}"
+    exception_str = f"Cannot set tranunit for time_id={t77_t}, timelinepoint is greater than current time={t6606_current_time}"
     assert str(excinfo.value) == exception_str
 
     # WHEN/THEN
     sue_bob_t6606 = tranunit_shop(sue_str, bob_str, t6606_current_time, t77_amount)
     with pytest_raises(Exception) as excinfo:
         x_fiscal.set_cashpurchase(sue_bob_t6606)
-    exception_str = f"Cannot set tranunit for time_fid={t6606_current_time}, timelinepoint is greater than current time={t6606_current_time}"
+    exception_str = f"Cannot set tranunit for time_id={t6606_current_time}, timelinepoint is greater than current time={t6606_current_time}"
     assert str(excinfo.value) == exception_str
 
 
-def test_FiscalUnit_set_cashpurchase_RaisesErrorWhenPurviewEpisodeHas_time_fid():
+def test_FiscalUnit_set_cashpurchase_RaisesErrorWhenPurviewEpisodeHas_time_id():
     # ESTABLISH
     x_fiscal = fiscalunit_shop(current_time=0)
     sue_str = "Sue"
@@ -74,9 +74,7 @@ def test_FiscalUnit_set_cashpurchase_RaisesErrorWhenPurviewEpisodeHas_time_fid()
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_fiscal.set_cashpurchase(sue_bob_t55_tranunit)
-    exception_str = (
-        f"Cannot set tranunit for time_fid={t55_t}, timelinepoint is blocked"
-    )
+    exception_str = f"Cannot set tranunit for time_id={t55_t}, timelinepoint is blocked"
     assert str(excinfo.value) == exception_str
 
 
@@ -151,7 +149,7 @@ def test_FiscalUnit_set_current_time_SetsAttr():
     assert x_fiscal.current_time == t4404_current_time
 
 
-def test_FiscalUnit_set_current_time_RaisesErrorWhen_cashpurchase_ExistsWithGreatertime_fid():
+def test_FiscalUnit_set_current_time_RaisesErrorWhen_cashpurchase_ExistsWithGreatertime_id():
     # ESTABLISH
     t6606_current_time = 6606
     x_fiscal = fiscalunit_shop(current_time=t6606_current_time)
@@ -166,7 +164,7 @@ def test_FiscalUnit_set_current_time_RaisesErrorWhen_cashpurchase_ExistsWithGrea
     t4404_current_time = 4404
     with pytest_raises(Exception) as excinfo:
         x_fiscal.set_current_time(t4404_current_time)
-    exception_str = f"Cannot set current_time {t4404_current_time}, cashpurchase with greater time_fid exists"
+    exception_str = f"Cannot set current_time {t4404_current_time}, cashpurchase with greater time_id exists"
     assert str(excinfo.value) == exception_str
 
     # THEN
@@ -200,16 +198,16 @@ def test_FiscalUnit_set_all_tranbook_SetsAttr():
     x_fiscal.set_cashpurchase(t88_tranunit)
     x_fiscal.set_cashpurchase(t99_tranunit)
 
-    x40000_time_fid = 40000
-    x70000_time_fid = 70000
-    x_fiscal.add_purviewepisode(sue_str, x40000_time_fid, 1)
-    x_fiscal.add_purviewepisode(sue_str, x70000_time_fid, 1)
+    x40000_time_id = 40000
+    x70000_time_id = 70000
+    x_fiscal.add_purviewepisode(sue_str, x40000_time_id, 1)
+    x_fiscal.add_purviewepisode(sue_str, x70000_time_id, 1)
     bob_str = "Bob"
     zia_str = "Zia"
     zia_net_purview = 887
     bob_net_purview = 445
-    sue_x40000_episode = x_fiscal.get_purviewlog(sue_str).get_episode(x40000_time_fid)
-    sue_x70000_episode = x_fiscal.get_purviewlog(sue_str).get_episode(x70000_time_fid)
+    sue_x40000_episode = x_fiscal.get_purviewlog(sue_str).get_episode(x40000_time_id)
+    sue_x70000_episode = x_fiscal.get_purviewlog(sue_str).get_episode(x70000_time_id)
     sue_x40000_episode.set_net_purview(bob_str, bob_net_purview)
     sue_x70000_episode.set_net_purview(zia_str, zia_net_purview)
 
@@ -233,5 +231,5 @@ def test_FiscalUnit_set_all_tranbook_SetsAttr():
     assert x_fiscal._all_tranbook.tranunit_exists(yao_str, sue_str, t77_t)
     assert x_fiscal._all_tranbook.tranunit_exists(sue_str, yao_str, t88_t)
     assert x_fiscal._all_tranbook.tranunit_exists(bob_str, sue_str, t99_t)
-    assert x_fiscal._all_tranbook.tranunit_exists(sue_str, bob_str, x40000_time_fid)
-    assert x_fiscal._all_tranbook.tranunit_exists(sue_str, zia_str, x70000_time_fid)
+    assert x_fiscal._all_tranbook.tranunit_exists(sue_str, bob_str, x40000_time_id)
+    assert x_fiscal._all_tranbook.tranunit_exists(sue_str, zia_str, x70000_time_id)

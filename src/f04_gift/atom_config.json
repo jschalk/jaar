@@ -418,7 +418,7 @@
                 "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
-            "purview_time_fid": {
+            "purview_time_id": {
                 "column_order": 8,
                 "obj_class": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"

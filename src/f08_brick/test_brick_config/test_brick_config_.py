@@ -31,7 +31,7 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_weekday_str,
 )
 from src.f08_brick.brick_config import (
-    time_fid_str,
+    time_id_str,
     brick_number_str,
     allowed_crud_str,
     get_brickref_dict,
@@ -176,7 +176,7 @@ def _validate_brick_config(x_brick_config: dict):
 
         assert fiscal_id_str() not in brick_optional_args_keys
         assert fiscal_id_str() in brick_required_args_keys
-        assert time_fid_str() in brick_required_args_keys
+        assert time_id_str() in brick_required_args_keys
 
 
 def test_get_brick_filenames_ReturnsObj():

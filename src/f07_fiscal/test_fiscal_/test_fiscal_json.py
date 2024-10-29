@@ -22,16 +22,16 @@ def test_FiscalUnit_get_dict_ReturnsObj():
     music_str = "music"
     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
     bob_str = "Bob"
-    bob_x0_time_fid = 702
+    bob_x0_time_id = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_fid = 4
+    sue_x4_time_id = 4
     sue_x4_magnitude = 55
-    sue_x7_time_fid = 7
+    sue_x7_time_id = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_fid, bob_x0_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_fid, sue_x4_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_fid, sue_x7_magnitude)
+    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
 
     # WHEN
     x_dict = music_fiscal.get_dict()
@@ -63,16 +63,16 @@ def test_FiscalUnit_get_json_ReturnsObj():
     music_str = "music"
     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
     bob_str = "Bob"
-    bob_x0_time_fid = 702
+    bob_x0_time_id = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_fid = 4
+    sue_x4_time_id = 4
     sue_x4_magnitude = 55
-    sue_x7_time_fid = 7
+    sue_x7_time_id = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_fid, bob_x0_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_fid, sue_x4_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_fid, sue_x7_magnitude)
+    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
 
     # WHEN
     x_json = music_fiscal.get_json()
@@ -95,16 +95,16 @@ def test_get_from_dict_ReturnsFiscalUnit():
     sue_respect_bit = 0.5
     sue_penny = 0.8
     bob_str = "Bob"
-    bob_x0_time_fid = 702
+    bob_x0_time_id = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_fid = 4
+    sue_x4_time_id = 4
     sue_x4_magnitude = 55
-    sue_x7_time_fid = 7
+    sue_x7_time_id = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_fid, bob_x0_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_fid, sue_x4_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_fid, sue_x7_magnitude)
+    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
     music_fiscal.current_time = sue_current_time
     music_fiscal.road_delimiter = sue_road_delimiter
     music_fiscal.fund_coin = sue_fund_coin
@@ -140,16 +140,16 @@ def test_get_from_json_ReturnsFiscalUnit():
     sue_respect_bit = 0.5
     sue_penny = 0.8
     bob_str = "Bob"
-    bob_x0_time_fid = 702
+    bob_x0_time_id = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_fid = 4
+    sue_x4_time_id = 4
     sue_x4_magnitude = 55
-    sue_x7_time_fid = 7
+    sue_x7_time_id = 7
     sue_x7_magnitude = 66
-    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_fid, bob_x0_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_fid, sue_x4_magnitude)
-    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_fid, sue_x7_magnitude)
+    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
     music_fiscal.current_time = sue_current_time
     music_fiscal.road_delimiter = sue_road_delimiter
     music_fiscal.fund_coin = sue_fund_coin

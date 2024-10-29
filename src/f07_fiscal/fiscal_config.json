@@ -15,7 +15,7 @@
             "owner_id": {
                 "obj_class": "AcctID"
             },
-            "time_fid": {
+            "time_id": {
                 "obj_class": "TimeLinePoint"
             }
         }
@@ -36,7 +36,7 @@
             "owner_id": {
                 "obj_class": "AcctID"
             },
-            "time_fid": {
+            "time_id": {
                 "obj_class": "TimeLinePoint"
             }
         }

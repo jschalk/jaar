@@ -72,7 +72,7 @@ def test_get_sorting_priority_column_headers_ReturnsObj():
     assert table_sorting_priority[36] == "divisor"
     assert table_sorting_priority[37] == "pledge"
     assert table_sorting_priority[38] == "problem_bool"
-    assert table_sorting_priority[39] == "purview_time_fid"
+    assert table_sorting_priority[39] == "purview_time_id"
     assert table_sorting_priority[40] == "stop_want"
     assert table_sorting_priority[41] == "take_force"
     assert table_sorting_priority[42] == "tally"

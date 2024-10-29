@@ -483,7 +483,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert budunit_columns.get("fund_coin") is not None
     assert budunit_columns.get("respect_bit") is not None
     assert budunit_columns.get("penny") is not None
-    assert budunit_columns.get("purview_time_fid") is not None
+    assert budunit_columns.get("purview_time_id") is not None
     assert budunit_columns.get("tally") is not None
 
     assert len(cat_acctunit) == 2
@@ -657,7 +657,7 @@ def test_get_atom_args_obj_classs_ReturnsObj():
     assert x_obj_classs.get("pick") == type_RoadUnit_str()
     assert x_obj_classs.get("pledge") == "bool"
     assert x_obj_classs.get("problem_bool") == "bool"
-    assert x_obj_classs.get("purview_time_fid") == "TimeLinePoint"
+    assert x_obj_classs.get("purview_time_id") == "TimeLinePoint"
     assert x_obj_classs.get("road") == type_RoadUnit_str()
     assert x_obj_classs.get("stop_want") == "float"
     assert x_obj_classs.get("take_force") == "float"

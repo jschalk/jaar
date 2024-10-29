@@ -29,7 +29,7 @@
         "penny": {
             "column_order": 8
         },
-        "purview_time_fid": {
+        "purview_time_id": {
             "column_order": 10
         },
         "respect_bit": {
