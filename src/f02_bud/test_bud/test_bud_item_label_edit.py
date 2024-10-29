@@ -20,7 +20,7 @@ def test_BudUnit_edit_item_label_FailsWhenItemDoesNotExist():
     # WHEN / THEN
     no_item_road = yao_bud.make_l1_road("bees")
     with pytest_raises(Exception) as excinfo:
-        yao_bud.edit_item_label(old_road=no_item_road, new_label="pigeons")
+        yao_bud.edit_item_label(old_road=no_item_road, new_label="birds")
     assert str(excinfo.value) == f"Item old_road='{no_item_road}' does not exist"
 
 
