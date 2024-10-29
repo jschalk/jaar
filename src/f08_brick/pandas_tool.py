@@ -44,7 +44,7 @@ def get_sorting_priority_column_headers() -> list[str]:
         "divisor",
         "pledge",
         "problem_bool",
-        "purview_timestamp",
+        "purview_time_id",
         "stop_want",
         "take_force",
         "tally",

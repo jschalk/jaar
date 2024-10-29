@@ -19,12 +19,12 @@ class calc_magnitudeException(Exception):
     pass
 
 
-class timestamp_Exception(Exception):
+class time_id_Exception(Exception):
     pass
 
 
-def timestamp_str() -> str:
-    return "timestamp"
+def time_id_str() -> str:
+    return "time_id"
 
 
 def quota_str() -> str:
@@ -35,14 +35,14 @@ def quota_str() -> str:
 class TranUnit:
     src: AcctID = None
     dst: AcctID = None
-    timestamp: TimeLinePoint = None
+    time_id: TimeLinePoint = None
     amount: FundNum = None
 
 
 def tranunit_shop(
-    src: AcctID, dst: AcctID, timestamp: TimeLinePoint, amount: FundNum
+    src: AcctID, dst: AcctID, time_id: TimeLinePoint, amount: FundNum
 ) -> TranUnit:
-    return TranUnit(src=src, dst=dst, timestamp=timestamp, amount=amount)
+    return TranUnit(src=src, dst=dst, time_id=time_id, amount=amount)
 
 
 @dataclass
@@ -54,15 +54,15 @@ class TranBook:
     def set_tranunit(
         self,
         x_tranunit: TranUnit,
-        x_blocked_timestamps: set[TimeLinePoint] = None,
+        x_blocked_time_ids: set[TimeLinePoint] = None,
         x_current_time: TimeLinePoint = None,
     ):
         self.add_tranunit(
             x_owner_id=x_tranunit.src,
             x_acct_id=x_tranunit.dst,
-            x_timestamp=x_tranunit.timestamp,
+            x_time_id=x_tranunit.time_id,
             x_amount=x_tranunit.amount,
-            x_blocked_timestamps=x_blocked_timestamps,
+            x_blocked_time_ids=x_blocked_time_ids,
             x_current_time=x_current_time,
         )
 
@@ -70,49 +70,47 @@ class TranBook:
         self,
         x_owner_id: OwnerID,
         x_acct_id: AcctID,
-        x_timestamp: TimeLinePoint,
+        x_time_id: TimeLinePoint,
         x_amount: FundNum,
-        x_blocked_timestamps: set[TimeLinePoint] = None,
+        x_blocked_time_ids: set[TimeLinePoint] = None,
         x_current_time: TimeLinePoint = None,
     ):
-        if x_timestamp in get_empty_set_if_none(x_blocked_timestamps):
-            exception_str = f"Cannot set tranunit for timestamp={x_timestamp}, timelinepoint is blocked"
-            raise timestamp_Exception(exception_str)
-        if x_current_time != None and x_timestamp >= x_current_time:
-            exception_str = f"Cannot set tranunit for timestamp={x_timestamp}, timelinepoint is greater than current time={x_current_time}"
-            raise timestamp_Exception(exception_str)
-        x_keylist = [x_owner_id, x_acct_id, x_timestamp]
+        if x_time_id in get_empty_set_if_none(x_blocked_time_ids):
+            exception_str = (
+                f"Cannot set tranunit for time_id={x_time_id}, timelinepoint is blocked"
+            )
+            raise time_id_Exception(exception_str)
+        if x_current_time != None and x_time_id >= x_current_time:
+            exception_str = f"Cannot set tranunit for time_id={x_time_id}, timelinepoint is greater than current time={x_current_time}"
+            raise time_id_Exception(exception_str)
+        x_keylist = [x_owner_id, x_acct_id, x_time_id]
         set_in_nested_dict(self.tranunits, x_keylist, x_amount)
 
-    def tranunit_exists(
-        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
-    ) -> bool:
-        return get_from_nested_dict(self.tranunits, [src, dst, timestamp], True) != None
+    def tranunit_exists(self, src: AcctID, dst: AcctID, time_id: TimeLinePoint) -> bool:
+        return get_from_nested_dict(self.tranunits, [src, dst, time_id], True) != None
 
     def get_tranunit(
-        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
+        self, src: AcctID, dst: AcctID, time_id: TimeLinePoint
     ) -> TranUnit:
-        x_amount = get_from_nested_dict(self.tranunits, [src, dst, timestamp], True)
+        x_amount = get_from_nested_dict(self.tranunits, [src, dst, time_id], True)
         if x_amount != None:
-            return tranunit_shop(src, dst, timestamp, x_amount)
+            return tranunit_shop(src, dst, time_id, x_amount)
 
-    def get_amount(
-        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
-    ) -> TranUnit:
-        return get_from_nested_dict(self.tranunits, [src, dst, timestamp], True)
+    def get_amount(self, src: AcctID, dst: AcctID, time_id: TimeLinePoint) -> TranUnit:
+        return get_from_nested_dict(self.tranunits, [src, dst, time_id], True)
 
     def del_tranunit(
-        self, src: AcctID, dst: AcctID, timestamp: TimeLinePoint
+        self, src: AcctID, dst: AcctID, time_id: TimeLinePoint
     ) -> TranUnit:
-        x_keylist = [src, dst, timestamp]
+        x_keylist = [src, dst, time_id]
         if exists_in_nested_dict(self.tranunits, x_keylist):
             del_in_nested_dict(self.tranunits, x_keylist)
 
-    def get_timestamps(self) -> set[TimeLinePoint]:
+    def get_time_ids(self) -> set[TimeLinePoint]:
         x_set = set()
         for dst_dict in self.tranunits.values():
-            for timestamp_dict in dst_dict.values():
-                x_set.update(set(timestamp_dict.keys()))
+            for time_id_dict in dst_dict.values():
+                x_set.update(set(time_id_dict.keys()))
         return x_set
 
     def get_owners_accts_net(self) -> dict[OwnerID, dict[AcctID, FundNum]]:
@@ -147,9 +145,9 @@ class TranBook:
 
     # def join(self, x_tranbook):
     #     for src_acct_id, dst_dict in x_tranbook.tranunits.items():
-    #         for dst_acct_id, timestamp_dict in dst_dict.items():
-    #             for x_timestamp, x_amount in timestamp_dict.items():
-    #                 self.add_tranunit(src_acct_id, dst_acct_id, x_timestamp, x_amount)
+    #         for dst_acct_id, time_id_dict in dst_dict.items():
+    #             for x_time_id, x_amount in time_id_dict.items():
+    #                 self.add_tranunit(src_acct_id, dst_acct_id, x_time_id, x_amount)
 
     def join(self, x_tranbook):
         sorted_tranunits = sorted(
@@ -157,9 +155,9 @@ class TranBook:
             key=lambda x: next(iter(next(iter(x[1].values())).keys())),
         )
         for src_acct_id, dst_dict in sorted_tranunits:
-            for dst_acct_id, timestamp_dict in dst_dict.items():
-                for x_timestamp, x_amount in timestamp_dict.items():
-                    self.add_tranunit(src_acct_id, dst_acct_id, x_timestamp, x_amount)
+            for dst_acct_id, time_id_dict in dst_dict.items():
+                for x_time_id, x_amount in time_id_dict.items():
+                    self.add_tranunit(src_acct_id, dst_acct_id, x_time_id, x_amount)
 
     # def get_dict(
     #     self,
@@ -188,7 +186,7 @@ def get_tranbook_from_json():
 
 @dataclass
 class PurviewEpisode:
-    timestamp: TimeLinePoint = None
+    time_id: TimeLinePoint = None
     quota: FundNum = None
     _magnitude: FundNum = None
     _net_purviews: dict[AcctID, FundNum] = None
@@ -215,7 +213,7 @@ class PurviewEpisode:
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
-        x_dict = {"timestamp": self.timestamp, "quota": self.quota}
+        x_dict = {"time_id": self.time_id, "quota": self.quota}
         if self._net_purviews:
             x_dict["net_purviews"] = self._net_purviews
         if self._magnitude:
@@ -227,7 +225,7 @@ class PurviewEpisode:
 
 
 def purviewepisode_shop(
-    x_timestamp: TimeLinePoint,
+    x_time_id: TimeLinePoint,
     x_quota: FundNum = None,
     net_purviews: dict[AcctID, FundNum] = None,
     x_magnitude: FundNum = None,
@@ -236,7 +234,7 @@ def purviewepisode_shop(
         x_quota = default_fund_pool()
 
     return PurviewEpisode(
-        timestamp=x_timestamp,
+        time_id=x_time_id,
         quota=x_quota,
         _net_purviews=get_empty_dict_if_none(net_purviews),
         _magnitude=get_0_if_None(x_magnitude),
@@ -249,53 +247,53 @@ class PurviewLog:
     episodes: dict[TimeLinePoint, PurviewEpisode] = None
     _sum_purviewepisode_quota: FundNum = None
     _sum_acct_purviews: int = None
-    _timestamp_min: TimeLinePoint = None
-    _timestamp_max: TimeLinePoint = None
+    _time_id_min: TimeLinePoint = None
+    _time_id_max: TimeLinePoint = None
 
     def set_episode(self, x_episode: PurviewEpisode):
-        self.episodes[x_episode.timestamp] = x_episode
+        self.episodes[x_episode.time_id] = x_episode
 
-    def add_episode(self, x_timestamp: TimeLinePoint, x_quota: FundNum):
-        self.set_episode(purviewepisode_shop(x_timestamp, x_quota))
+    def add_episode(self, x_time_id: TimeLinePoint, x_quota: FundNum):
+        self.set_episode(purviewepisode_shop(x_time_id, x_quota))
 
-    def episode_exists(self, x_timestamp: TimeLinePoint) -> bool:
-        return self.episodes.get(x_timestamp) != None
+    def episode_exists(self, x_time_id: TimeLinePoint) -> bool:
+        return self.episodes.get(x_time_id) != None
 
-    def get_episode(self, x_timestamp: TimeLinePoint) -> PurviewEpisode:
-        return self.episodes.get(x_timestamp)
+    def get_episode(self, x_time_id: TimeLinePoint) -> PurviewEpisode:
+        return self.episodes.get(x_time_id)
 
-    def del_episode(self, x_timestamp: TimeLinePoint):
-        self.episodes.pop(x_timestamp)
+    def del_episode(self, x_time_id: TimeLinePoint):
+        self.episodes.pop(x_time_id)
 
     def get_2d_array(self) -> list[list]:
         return [
-            [self.owner_id, x_episode.timestamp, x_episode.quota]
+            [self.owner_id, x_episode.time_id, x_episode.quota]
             for x_episode in self.episodes.values()
         ]
 
     def get_headers(self) -> list:
-        return ["owner_id", "timestamp", "quota"]
+        return ["owner_id", "time_id", "quota"]
 
     def get_dict(self) -> dict:
         return {"owner_id": self.owner_id, "episodes": self._get_episodes_dict()}
 
     def _get_episodes_dict(self) -> dict:
         return {
-            x_episode.timestamp: x_episode.get_dict()
+            x_episode.time_id: x_episode.get_dict()
             for x_episode in self.episodes.values()
         }
 
-    def get_timestamps(self) -> set[TimeLinePoint]:
+    def get_time_ids(self) -> set[TimeLinePoint]:
         return set(self.episodes.keys())
 
     def get_tranbook(self, fiscal_id: FiscalID) -> TranBook:
         x_tranbook = tranbook_shop(fiscal_id)
-        for x_timestamp, x_episode in self.episodes.items():
+        for x_time_id, x_episode in self.episodes.items():
             for dst_acct_id, x_quota in x_episode._net_purviews.items():
                 x_tranbook.add_tranunit(
                     x_owner_id=self.owner_id,
                     x_acct_id=dst_acct_id,
-                    x_timestamp=x_timestamp,
+                    x_time_id=x_time_id,
                     x_amount=x_quota,
                 )
         return x_tranbook
@@ -306,11 +304,11 @@ def purviewlog_shop(owner_id: OwnerID) -> PurviewLog:
 
 
 def get_purviewepisode_from_dict(x_dict: dict) -> PurviewEpisode:
-    x_timestamp = x_dict.get("timestamp")
+    x_time_id = x_dict.get("time_id")
     x_quota = x_dict.get("quota")
     x_net_purviews = x_dict.get("net_purviews")
     x_magnitude = x_dict.get("magnitude")
-    return purviewepisode_shop(x_timestamp, x_quota, x_net_purviews, x_magnitude)
+    return purviewepisode_shop(x_time_id, x_quota, x_net_purviews, x_magnitude)
 
 
 def get_purviewepisode_from_json(x_json: str) -> PurviewEpisode:
@@ -328,7 +326,7 @@ def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, PurviewEp
     x_dict = {}
     for x_episode_dict in episodes_dict.values():
         x_purview_episode = get_purviewepisode_from_dict(x_episode_dict)
-        x_dict[x_purview_episode.timestamp] = x_purview_episode
+        x_dict[x_purview_episode.time_id] = x_purview_episode
     return x_dict
 
 

@@ -336,7 +336,7 @@
                 "obj_class": "float",
                 "sqlite_datatype": "FISCAL"
             },
-            "purview_timestamp": {
+            "purview_time_id": {
                 "obj_class": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"
             },
@@ -373,7 +373,7 @@
             "time_id": {
                 "obj_class": "TimeLinePoint"
             },
-            "timestamp": {}
+            "time_id": {}
         }
     },
     "fiscal_purview_episode": {
@@ -391,7 +391,7 @@
             "time_id": {
                 "obj_class": "TimeLinePoint"
             },
-            "timestamp": {}
+            "time_id": {}
         }
     },
     "fiscal_timeline_hour": {
