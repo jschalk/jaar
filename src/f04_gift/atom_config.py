@@ -95,6 +95,10 @@ def crud_str_str() -> str:
     return "crud_str"
 
 
+def face_id_str() -> str:
+    return "face_id"
+
+
 def fiscal_id_str() -> str:
     return "fiscal_id"
 

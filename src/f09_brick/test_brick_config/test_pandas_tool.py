@@ -24,6 +24,7 @@ from src.f03_chrono.chrono import (
 )
 from src.f04_gift.atom_config import (
     get_atom_args_category_mapping,
+    face_id_str,
     obj_class_str,
     fiscal_id_str,
     owner_id_str,
@@ -80,6 +81,7 @@ from src.f08_filter.filter_config import (
     inx_word_str,
     otx_label_str,
     inx_label_str,
+    get_filter_args_category_mapping,
 )
 from src.f09_brick.pandas_tool import (
     get_sorting_priority_column_headers,
@@ -97,7 +99,7 @@ def test_get_sorting_priority_column_headers_ReturnsObj():
     table_sorting_priority = get_sorting_priority_column_headers()
 
     # THEN
-    assert table_sorting_priority[0] == "face_id"
+    assert table_sorting_priority[0] == face_id_str()
     assert table_sorting_priority[1] == "eon_id"
     assert table_sorting_priority[2] == fiscal_id_str()
     assert table_sorting_priority[3] == obj_class_str()
@@ -173,12 +175,15 @@ def test_get_sorting_priority_column_headers_ReturnsObj():
     print(f"{fiscal_args=}")
     print(f"{fiscal_args.difference(set(table_sorting_priority))=}")
     assert fiscal_args.issubset(set(table_sorting_priority))
-    # brick_args = set(get_atom_args_category_mapping().keys())
-    # assert brick_args.issubset(set(table_sorting_priority))
-    # atom_fiscal_brick_args = atom_args
-    # atom_fiscal_brick_args.update(fiscal_args)
-    # atom_fiscal_brick_args.update(brick_args)
-    # assert atom_fiscal_brick_args == set(table_sorting_priority)
+    filter_args = set(get_filter_args_category_mapping().keys())
+    assert filter_args.issubset(set(table_sorting_priority))
+    atom_fiscal_filter_args = atom_args
+    atom_fiscal_filter_args.update(fiscal_args)
+    atom_fiscal_filter_args.update(filter_args)
+    table_sorting_priority.remove("eon_id")
+    table_sorting_priority.remove(face_id_str())
+    table_sorting_priority.remove("obj_class")
+    assert atom_fiscal_filter_args == set(table_sorting_priority)
 
 
 def test_get_ordered_csv_ReturnsObj():

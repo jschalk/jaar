@@ -5,6 +5,7 @@ from src.f04_gift.atom_config import (
     type_RoadUnit_str,
     type_GroupID_str,
     road_str,
+    face_id_str,
     type_AcctID_str,
     type_GroupID_str,
 )
@@ -46,7 +47,7 @@ def test_get_otx_to_inx_dt_columns_ReturnsObj():
     assert get_otx_to_inx_dt_columns()
     assert len(get_otx_to_inx_dt_columns()) == 7
     static_list = [
-        "face_id",
+        face_id_str(),
         "obj_class",
         "otx_road_delimiter",
         "inx_road_delimiter",
@@ -81,7 +82,7 @@ def test_get_explicit_label_columns_ReturnsObj():
     assert get_explicit_label_columns()
     assert len(get_explicit_label_columns()) == 7
     static_list = [
-        "face_id",
+        face_id_str(),
         "obj_class",
         "otx_road_delimiter",
         "inx_road_delimiter",

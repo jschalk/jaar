@@ -11,6 +11,7 @@ from src.f02_bud.bud_tool import (
     budunit_str,
 )
 from src.f04_gift.atom_config import (
+    face_id_str,
     get_atom_config_dict,
     atom_delete,
     atom_insert,
@@ -18,6 +19,7 @@ from src.f04_gift.atom_config import (
     normal_specs_str,
     required_args_str,
     optional_args_str,
+    face_id_str,
     fiscal_id_str,
     get_atom_categorys,
 )
@@ -32,6 +34,7 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_month_str,
     fiscal_timeline_weekday_str,
 )
+from src.f08_filter.filter_config import eon_id_str
 from src.f09_brick.brick_config import (
     time_id_str,
     brick_number_str,
@@ -195,6 +198,7 @@ def test_get_brick_format_filenames_ReturnsObj():
 
     # WHEN / THEN
     assert _validate_brick_format_files(brick_filenames)
+    # assert 1 == 2
 
 
 def _validate_brick_format_files(brick_filenames: set[str]):
@@ -219,6 +223,14 @@ def _validate_brick_format_files(brick_filenames: set[str]):
         for brick_format_category in brick_format_categorys:
             assert brick_format_category in valid_brick_categorys
             print(f"{brick_format_category=}")
+
+        assert brickref_dict.get("attributes") is not None
+        brick_format_attributes = brickref_dict.get("attributes").keys()
+        # assert fiscal_id_str() in brick_format_attributes
+        # assert face_id_str() in brick_format_attributes
+        # assert eon_id_str() in brick_format_attributes
+        # for brick_format_attribute in brick_format_attributes:
+        #     print(f"{brick_format_attribute=}")
 
     # confirm every bricknumber is unique
     assert len(brick_numbers_set) == len(brick_filenames)

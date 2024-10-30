@@ -1,7 +1,7 @@
 from src.f00_instrument.dict_tool import x_is_json
 from src.f01_road.jaar_config import init_gift_id, get_gifts_folder
 from src.f01_road.road import get_default_fiscal_id_roadnode as root_label
-from src.f04_gift.atom_config import fiscal_id_str, owner_id_str
+from src.f04_gift.atom_config import fiscal_id_str, owner_id_str, face_id_str
 from src.f04_gift.delta import deltaunit_shop
 from src.f04_gift.gift import GiftUnit, giftunit_shop, get_init_gift_id_if_None
 from src.f04_gift.examples.example_atoms import get_atom_example_itemunit_sports
@@ -218,10 +218,8 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
     assert x_dict.get(fiscal_id_str()) == music_str
     assert x_dict.get(owner_id_str()) is not None
     assert x_dict.get(owner_id_str()) == bob_str
-
-    face_id_str = "face_id"
-    assert x_dict.get(face_id_str) is not None
-    assert x_dict.get(face_id_str) == sue_str
+    assert x_dict.get(face_id_str()) is not None
+    assert x_dict.get(face_id_str()) == sue_str
 
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
@@ -314,9 +312,8 @@ def test_GiftUnit_get_deltametric_dict_ReturnsCorrectObj():
     assert x_dict.get(owner_id_str()) is not None
     assert x_dict.get(owner_id_str()) == bob_str
 
-    face_id_str = "face_id"
-    assert x_dict.get(face_id_str) is not None
-    assert x_dict.get(face_id_str) == yao_str
+    assert x_dict.get(face_id_str()) is not None
+    assert x_dict.get(face_id_str()) == yao_str
 
     delta_atom_numbers_str = "delta_atom_numbers"
     assert x_dict.get(delta_atom_numbers_str) is not None
