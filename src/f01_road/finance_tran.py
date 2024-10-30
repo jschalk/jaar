@@ -27,6 +27,10 @@ def time_id_str() -> str:
     return "time_id"
 
 
+def road_delimiter_str() -> str:
+    return "road_delimiter"
+
+
 def quota_str() -> str:
     return "quota"
 

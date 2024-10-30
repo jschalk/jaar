@@ -7,6 +7,7 @@ def get_sorting_priority_column_headers() -> list[str]:
     return [
         "face_id",
         "eon_id",
+        "fiscal_id",
         "obj_class",
         "owner_id",
         "acct_id",
@@ -20,6 +21,7 @@ def get_sorting_priority_column_headers() -> list[str]:
         "team_id",
         "awardee_id",
         "healer_id",
+        "time_id",
         "numor",
         "denom",
         "addin",
@@ -52,6 +54,14 @@ def get_sorting_priority_column_headers() -> list[str]:
         "fund_coin",
         "penny",
         "respect_bit",
+        "current_time",
+        "amount",
+        "month_label",
+        "hour_label",
+        "cumlative_minute",
+        "cumlative_day",
+        "weekday_label",
+        "weekday_order",
         "otx_road_delimiter",
         "inx_road_delimiter",
         "unknown_word",
@@ -59,6 +69,11 @@ def get_sorting_priority_column_headers() -> list[str]:
         "inx_word",
         "otx_label",
         "inx_label",
+        "road_delimiter",
+        "yr1_jan1_offset",
+        "quota",
+        "monthday_distortion",
+        "timeline_label",
     ]
 
 

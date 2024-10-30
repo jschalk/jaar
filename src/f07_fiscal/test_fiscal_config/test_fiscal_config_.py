@@ -26,6 +26,7 @@ from src.f07_fiscal.fiscal_config import (
     config_file_dir,
     get_fiscal_config_file_name,
     get_fiscal_config_dict,
+    get_fiscal_args_category_mapping,
     current_time_str,
     amount_str,
     month_label_str,
@@ -173,3 +174,20 @@ def test_get_fiscal_categorys_ReturnsObj():
     assert fiscal_timeline_hour_str() in fiscal_config_categorys
     assert fiscal_timeline_month_str() in fiscal_config_categorys
     assert fiscal_timeline_weekday_str() in fiscal_config_categorys
+
+
+def test_get_fiscal_args_category_mapping_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_fiscal_args_category_mapping = get_fiscal_args_category_mapping()
+
+    # THEN
+    assert x_fiscal_args_category_mapping
+    assert x_fiscal_args_category_mapping.get(current_time_str())
+    x_hour = {fiscal_timeline_hour_str()}
+    assert x_fiscal_args_category_mapping.get(cumlative_minute_str()) == x_hour
+    assert x_fiscal_args_category_mapping.get(fund_coin_str())
+    fiscal_id_categorys = x_fiscal_args_category_mapping.get(fiscal_id_str())
+    assert fiscal_timeline_hour_str() in fiscal_id_categorys
+    assert fiscalunit_str() in fiscal_id_categorys
+    assert len(fiscal_id_categorys) == 6
+    assert len(x_fiscal_args_category_mapping) == 20
