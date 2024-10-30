@@ -19,9 +19,11 @@ from src.f04_gift.atom_config import (
     required_args_str,
     optional_args_str,
     fiscal_id_str,
+    get_atom_categorys,
 )
 from src.f07_fiscal.fiscal_config import (
     get_fiscal_config_dict,
+    get_fiscal_categorys,
     fiscalunit_str,
     fiscal_purviewlog_str,
     fiscal_purview_episode_str,
@@ -44,6 +46,7 @@ from src.f08_brick.brick_config import (
     brick_format_00020_bud_acct_membership_v0_0_0,
     brick_format_00013_itemunit_v0_0_0,
 )
+from src.f08_brick.filter_config import get_filter_categorys
 from os import getcwd as os_getcwd
 
 
@@ -195,6 +198,11 @@ def test_get_brick_format_filenames_ReturnsObj():
 
 
 def _validate_brick_format_files(brick_filenames: set[str]):
+    valid_brick_categorys = set()
+    valid_brick_categorys.update(get_atom_categorys())
+    valid_brick_categorys.update(get_fiscal_categorys())
+    valid_brick_categorys.update(get_filter_categorys())
+
     # for every brick_format file there exists a unique brick_number always with leading zeros to make 5 digits
     brick_numbers_set = set()
     for brick_filename in brick_filenames:
@@ -209,6 +217,7 @@ def _validate_brick_format_files(brick_filenames: set[str]):
         assert brick_format_categorys is not None
         assert len(brick_format_categorys) > 0
         for brick_format_category in brick_format_categorys:
+            assert brick_format_category in valid_brick_categorys
             print(f"{brick_format_category=}")
 
     # confirm every bricknumber is unique

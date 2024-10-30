@@ -41,6 +41,7 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_hour_str,
     fiscal_timeline_month_str,
     fiscal_timeline_weekday_str,
+    get_fiscal_categorys,
 )
 from os import getcwd as os_getcwd
 
@@ -158,3 +159,17 @@ def _validate_fiscal_config(fiscal_config: dict):
             print(f"_validate_fiscal_config {fiscal_categorys=} {optional_arg_key=} ")
             arg_dict = optional_arg_dict.get(optional_arg_key)
             assert arg_dict.get(obj_class_str()) in accepted_obj_classes
+
+
+def test_get_fiscal_categorys_ReturnsObj():
+    # ESTABLISH / WHEN
+    fiscal_config_categorys = get_fiscal_categorys()
+
+    # THEN
+    assert fiscalunit_str() in fiscal_config_categorys
+    assert fiscal_purviewlog_str() not in fiscal_config_categorys
+    assert fiscal_purview_episode_str() in fiscal_config_categorys
+    assert fiscal_cashbook_str() in fiscal_config_categorys
+    assert fiscal_timeline_hour_str() in fiscal_config_categorys
+    assert fiscal_timeline_month_str() in fiscal_config_categorys
+    assert fiscal_timeline_weekday_str() in fiscal_config_categorys

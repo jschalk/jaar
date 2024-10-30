@@ -1,7 +1,5 @@
 from src.f00_instrument.file import open_file
 from src.f00_instrument.dict_tool import get_dict_from_json
-from src.f01_road.jaar_config import get_json_filename, get_test_fiscals_dir
-from src.f07_fiscal.examples.fiscal_env import env_dir_setup_cleanup
 from os import getcwd as os_getcwd
 
 
@@ -88,3 +86,7 @@ def get_fiscal_config_dict() -> dict:
     return get_dict_from_json(
         open_file(config_file_dir(), get_fiscal_config_file_name())
     )
+
+
+def get_fiscal_categorys() -> set[str]:
+    return set(get_fiscal_config_dict().keys())

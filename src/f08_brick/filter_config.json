@@ -1,0 +1,42 @@
+{
+    "bridge_explicit_label": {
+        "optional_args": {},
+        "required_args": {
+            "inx_label": {
+                "obj_class": "str"
+            },
+            "inx_road_delimiter": {
+                "obj_class": "str"
+            },
+            "otx_label": {
+                "obj_class": "str"
+            },
+            "otx_road_delimiter": {
+                "obj_class": "str"
+            },
+            "unknown_word": {
+                "obj_class": "str"
+            }
+        }
+    },
+    "bridge_otx_to_inx": {
+        "optional_args": {},
+        "required_args": {
+            "inx_road_delimiter": {
+                "obj_class": "str"
+            },
+            "inx_word": {
+                "obj_class": "str"
+            },
+            "otx_road_delimiter": {
+                "obj_class": "str"
+            },
+            "otx_word": {
+                "obj_class": "str"
+            },
+            "unknown_word": {
+                "obj_class": "str"
+            }
+        }
+    }
+}
