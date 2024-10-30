@@ -131,6 +131,14 @@ def awardee_id_str() -> str:
     return "awardee_id"
 
 
+def give_force_str() -> str:
+    return "give_force"
+
+
+def take_force_str() -> str:
+    return "take_force"
+
+
 def group_id_str() -> str:
     return "group_id"
 
@@ -454,12 +462,12 @@ def save_atom_config_file(atom_config_dict):
     save_file(config_file_dir(), get_atom_config_file_name(), x_file_str)
 
 
-def category_ref() -> set:
+def get_atom_categorys() -> set:
     return get_atom_config_dict().keys()
 
 
-def is_category_ref(category_str: str) -> bool:
-    return category_str in category_ref()
+def is_atom_category(category_str: str) -> bool:
+    return category_str in get_atom_categorys()
 
 
 def get_atom_order(crud_str: str, category: str) -> int:
@@ -486,9 +494,9 @@ def set_mog(
 
 
 def get_category_from_dict(x_row_dict: dict) -> str:
-    x_category_ref = category_ref()
+    x_get_atom_categorys = get_atom_categorys()
     for x_columnname in x_row_dict:
-        for x_category in x_category_ref:
+        for x_category in x_get_atom_categorys:
             if x_columnname.find(x_category) == 0:
                 category_len = len(x_category)
                 return x_category, x_columnname[category_len + 1 : category_len + 7]

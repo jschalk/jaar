@@ -1,0 +1,19 @@
+{
+    "attributes": {
+        "fiscal_id": {
+            "column_order": 0,
+            "sort_order": 0
+        },
+        "weekday_label": {
+            "column_order": 1
+        },
+        "weekday_order": {
+            "column_order": 2,
+            "sort_order": 1
+        }
+    },
+    "brick_number": "br00005",
+    "categorys": [
+        "fiscal_timeline_weekday"
+    ]
+}

@@ -38,6 +38,8 @@ from src.f04_gift.atom_config import (
     stop_want_str,
     base_item_active_requisite_str,
     fopen_str,
+    give_force_str,
+    take_force_str,
 )
 
 
@@ -216,8 +218,8 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_awardlink():
     zia_atom = atomunit_shop(bud_item_awardlink_str(), atom_insert())
     zia_atom.set_arg(road_str(), casa_road)
     zia_atom.set_arg(awardee_id_str(), run_str)
-    zia_atom.set_arg("give_force", zia_run_give_force)
-    zia_atom.set_arg("take_force", zia_run_take_force)
+    zia_atom.set_arg(give_force_str(), zia_run_give_force)
+    zia_atom.set_arg(take_force_str(), zia_run_take_force)
 
     # WHEN
     new_zia_atomunit = sift_atomunit(sue_bud, zia_atom)
@@ -227,8 +229,8 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_awardlink():
     assert new_zia_atomunit.crud_str == atom_update()
     assert new_zia_atomunit.get_optional_args_dict() != {}
     zia_optional_args = new_zia_atomunit.get_optional_args_dict()
-    assert zia_optional_args.get("give_force") == zia_run_give_force
-    assert zia_optional_args.get("take_force") == zia_run_take_force
+    assert zia_optional_args.get(give_force_str()) == zia_run_give_force
+    assert zia_optional_args.get(take_force_str()) == zia_run_take_force
 
 
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_reasonunit():

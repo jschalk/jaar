@@ -15,8 +15,8 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     atom_update,
-    category_ref,
-    is_category_ref,
+    get_atom_categorys,
+    is_atom_category,
     get_atom_config_dict,
     get_atom_args_category_mapping,
     get_allowed_obj_classs,
@@ -97,7 +97,7 @@ def test_str_functions_ReturnsObj():
 
 
 def test_atom_config_HasCorrect_category():
-    assert category_ref() == {
+    assert get_atom_categorys() == {
         budunit_str(),
         bud_acctunit_str(),
         bud_acct_membership_str(),
@@ -109,8 +109,8 @@ def test_atom_config_HasCorrect_category():
         bud_item_healerlink_str(),
         bud_item_factunit_str(),
     }
-    assert bud_acctunit_str() in category_ref()
-    assert is_category_ref("itemroot") is False
+    assert bud_acctunit_str() in get_atom_categorys()
+    assert is_atom_category("itemroot") is False
 
 
 def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):

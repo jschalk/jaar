@@ -1,0 +1,28 @@
+{
+    "attributes": {
+        "inx_label": {
+            "column_order": 3,
+            "sort_order": 3
+        },
+        "inx_road_delimiter": {
+            "column_order": 0,
+            "sort_order": 0
+        },
+        "otx_label": {
+            "column_order": 1,
+            "sort_order": 1
+        },
+        "otx_road_delimiter": {
+            "column_order": 3,
+            "sort_order": 3
+        },
+        "unknown_word": {
+            "column_order": 2,
+            "sort_order": 2
+        }
+    },
+    "brick_number": "br00041",
+    "categorys": [
+        "bridge_explicit_label"
+    ]
+}

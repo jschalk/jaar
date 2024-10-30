@@ -35,14 +35,14 @@ from src.f02_bud.bud_tool import (
 from src.f04_gift.atom_config import (
     get_category_from_dict,
     get_atom_config_required_args,
-    category_ref,
+    get_atom_categorys,
     atom_delete,
     atom_insert,
     atom_update,
     atom_hx_table_name,
     get_atom_order,
     get_atom_config_dict,
-    is_category_ref,
+    is_atom_category,
     get_atom_config_args,
     get_sorted_required_arg_keys,
     get_atom_args_obj_classs,
@@ -208,7 +208,7 @@ def atomunit_shop(
     required_args: dict[str, str] = None,
     optional_args: dict[str, str] = None,
 ) -> AtomUnit:
-    if is_category_ref(category):
+    if is_atom_category(category):
         return AtomUnit(
             category=category,
             crud_str=crud_str,

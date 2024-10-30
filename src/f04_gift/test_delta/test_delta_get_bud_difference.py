@@ -31,6 +31,8 @@ from src.f04_gift.atom_config import (
     fopen_str,
     fnigh_str,
     base_item_active_requisite_str,
+    give_force_str,
+    take_force_str,
 )
 from src.f04_gift.atom import atom_insert, atom_update, atom_delete
 from src.f04_gift.delta import DeltaUnit, deltaunit_shop
@@ -624,8 +626,8 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_i
     assert run_atomunit.get_value(awardee_id_str()) == run_str
     assert run_atomunit.get_value(road_str()) == disc_road
     assert run_atomunit.get_value(awardee_id_str()) == run_str
-    assert run_atomunit.get_value("give_force") == after_run_give_force
-    assert run_atomunit.get_value("take_force") == after_run_take_force
+    assert run_atomunit.get_value(give_force_str()) == after_run_give_force
+    assert run_atomunit.get_value(take_force_str()) == after_run_take_force
 
     assert get_atomunit_total_count(sue_deltaunit) == 2
 
@@ -671,8 +673,8 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_u
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(road_str()) == ball_road
     assert ball_atomunit.get_value(awardee_id_str()) == run_str
-    assert ball_atomunit.get_value("give_force") == after_give_force
-    assert ball_atomunit.get_value("take_force") == after_take_force
+    assert ball_atomunit.get_value(give_force_str()) == after_give_force
+    assert ball_atomunit.get_value(take_force_str()) == after_take_force
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 

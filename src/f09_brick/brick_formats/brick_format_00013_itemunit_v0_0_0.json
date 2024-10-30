@@ -1,0 +1,28 @@
+{
+    "attributes": {
+        "fiscal_id": {
+            "column_order": 0
+        },
+        "label": {
+            "column_order": 5,
+            "sort_order": 2
+        },
+        "mass": {
+            "column_order": 4
+        },
+        "owner_id": {
+            "column_order": 1
+        },
+        "parent_road": {
+            "column_order": 3,
+            "sort_order": 1
+        },
+        "pledge": {
+            "column_order": 2
+        }
+    },
+    "brick_number": "br00013",
+    "categorys": [
+        "bud_itemunit"
+    ]
+}

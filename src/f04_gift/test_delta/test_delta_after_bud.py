@@ -34,6 +34,8 @@ from src.f04_gift.atom_config import (
     stop_want_str,
     fopen_str,
     fnigh_str,
+    give_force_str,
+    take_force_str,
 )
 from src.f04_gift.delta import deltaunit_shop
 from src.f04_gift.examples.example_deltas import get_deltaunit_example1
@@ -524,8 +526,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_awardlin
     update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_update())
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg(awardee_id_str(), run_str)
-    update_disc_atomunit.set_optional_arg("give_force", x_give_force)
-    update_disc_atomunit.set_optional_arg("take_force", x_take_force)
+    update_disc_atomunit.set_optional_arg(give_force_str(), x_give_force)
+    update_disc_atomunit.set_optional_arg(take_force_str(), x_take_force)
     # print(f"{update_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
@@ -563,8 +565,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_awardlin
     update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_insert())
     update_disc_atomunit.set_required_arg("road", ball_road)
     update_disc_atomunit.set_required_arg(awardee_id_str(), run_str)
-    update_disc_atomunit.set_optional_arg("give_force", x_give_force)
-    update_disc_atomunit.set_optional_arg("take_force", x_take_force)
+    update_disc_atomunit.set_optional_arg(give_force_str(), x_give_force)
+    update_disc_atomunit.set_optional_arg(take_force_str(), x_take_force)
     # print(f"{update_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)

@@ -1,0 +1,19 @@
+{
+    "attributes": {
+        "cumlative_day": {
+            "column_order": 2,
+            "sort_order": 1
+        },
+        "fiscal_id": {
+            "column_order": 0,
+            "sort_order": 0
+        },
+        "month_label": {
+            "column_order": 1
+        }
+    },
+    "brick_number": "br00004",
+    "categorys": [
+        "fiscal_timeline_month"
+    ]
+}

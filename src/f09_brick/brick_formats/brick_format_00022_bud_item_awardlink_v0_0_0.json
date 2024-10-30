@@ -1,0 +1,30 @@
+{
+    "attributes": {
+        "awardee_id": {
+            "column_order": 3,
+            "sort_order": 3
+        },
+        "fiscal_id": {
+            "column_order": 0,
+            "sort_order": 0
+        },
+        "give_force": {
+            "column_order": 5
+        },
+        "owner_id": {
+            "column_order": 1,
+            "sort_order": 1
+        },
+        "road": {
+            "column_order": 2,
+            "sort_order": 2
+        },
+        "take_force": {
+            "column_order": 4
+        }
+    },
+    "brick_number": "br00022",
+    "categorys": [
+        "bud_item_awardlink"
+    ]
+}
