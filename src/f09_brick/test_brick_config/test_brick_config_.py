@@ -46,7 +46,7 @@ from src.f09_brick.brick_config import (
     brick_format_00020_bud_acct_membership_v0_0_0,
     brick_format_00013_itemunit_v0_0_0,
 )
-from src.f08__filter.filter_config import get_filter_categorys
+from src.f08_filter.filter_config import get_filter_categorys
 from os import getcwd as os_getcwd
 
 

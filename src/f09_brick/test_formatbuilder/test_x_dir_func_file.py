@@ -8,13 +8,13 @@ from src.f04_gift.atom_config import (
     type_GroupID_str,
 )
 from src.f09_brick.pandas_tool import save_dataframe_to_csv, open_csv
-from src.f09_filter.filter import filterunit_shop
-from src.f09_filter.dir_func import filter_face_dir_files
-from src.f09_filter.examples.filter_env import (
+from src.f08_filter.filter import filterunit_shop
+from src.f09_brick.dir_func import filter_face_dir_files
+from src.f08_filter.examples.filter_env import (
     env_dir_setup_cleanup,
     get_test_faces_dir,
 )
-from src.f09_filter.examples.example_filters import (
+from src.f08_filter.examples.example_filters import (
     get_casa_maison_filterunit_set_by_explicit_label,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,

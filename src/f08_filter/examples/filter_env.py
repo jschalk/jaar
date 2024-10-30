@@ -3,7 +3,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_test_filters_dir():
-    return "src/f09_filter/examples/fiscals"
+    return "src/f08_filter/examples/fiscals"
 
 
 def get_test_faces_dir():

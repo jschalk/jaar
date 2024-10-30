@@ -7,7 +7,7 @@ from src.f04_gift.atom_config import (
     type_RoadNode_str,
     type_RoadUnit_str,
 )
-from src.f09_filter.filter import (
+from src.f08_filter.filter import (
     FilterUnit,
     filterunit_shop,
     bridgeunit_shop,
@@ -15,7 +15,7 @@ from src.f09_filter.filter import (
     filterable_obj_classs,
     filterable_atom_args,
 )
-from src.f09_filter.examples.example_filters import (
+from src.f08_filter.examples.example_filters import (
     get_invalid_acctid_bridgeunit,
     get_invalid_groupid_bridgeunit,
     get_invalid_road_bridgeunit,
@@ -26,7 +26,7 @@ from src.f09_filter.examples.example_filters import (
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
 
-# from otx.f09_filter.examples.filter_env import get_test_filters_dir, env_dir_setup_cleanup
+# from otx.f08_filter.examples.filter_env import get_test_filters_dir, env_dir_setup_cleanup
 
 # The goal of the filter function is to allow a single command, pointing at a bunch of directories
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status

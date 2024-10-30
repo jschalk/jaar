@@ -13,12 +13,11 @@ from src.f01_road.road import (
     FaceID,
 )
 from src.f07_fiscal.fiscal import FiscalUnit
-from src.f09_filter.filter import (
-    FilterUnit,
-    filterunit_shop,
+from src.f09_brick.filter_init_tool import (
     save_all_csvs_from_filterunit,
     init_filterunit_from_dir,
 )
+from src.f08_filter.filter import FilterUnit, filterunit_shop
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
 

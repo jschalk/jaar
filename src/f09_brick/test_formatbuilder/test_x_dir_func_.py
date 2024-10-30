@@ -6,13 +6,13 @@ from src.f04_gift.atom_config import (
     base_str,
     type_AcctID_str,
 )
-from src.f09_filter.filter import bridgeunit_shop, filterunit_shop
-from src.f09_filter.dir_func import (
+from src.f08_filter.filter import bridgeunit_shop, filterunit_shop
+from src.f09_brick.dir_func import (
     filter_single_column_dataframe,
     filter_all_columns_dataframe,
     get_dataframe_filterable_columns,
 )
-from src.f09_filter.examples.example_filters import (
+from src.f08_filter.examples.example_filters import (
     get_casa_maison_filterunit_set_by_otx_to_inx,
     get_casa_maison_filterunit_set_by_explicit_label,
     get_casa_maison_road_otx_dt,
