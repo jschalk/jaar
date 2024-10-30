@@ -131,6 +131,14 @@ def awardee_id_str() -> str:
     return "awardee_id"
 
 
+def give_force_str() -> str:
+    return "give_force"
+
+
+def take_force_str() -> str:
+    return "take_force"
+
+
 def group_id_str() -> str:
     return "group_id"
 

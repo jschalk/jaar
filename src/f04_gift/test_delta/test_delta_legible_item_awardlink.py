@@ -4,6 +4,8 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     awardee_id_str,
+    give_force_str,
+    take_force_str,
 )
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.delta import deltaunit_shop
@@ -19,15 +21,13 @@ def test_create_legible_list_ReturnsObj_item_awardlink_INSERT():
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
     awardee_id_value = f"{sue_bud._road_delimiter}Swimmers"
-    give_force_str = "give_force"
-    take_force_str = "take_force"
     give_force_value = 81
     take_force_value = 43
     swim_atomunit = atomunit_shop(category, atom_insert())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(awardee_id_str(), awardee_id_value)
-    swim_atomunit.set_arg(give_force_str, give_force_value)
-    swim_atomunit.set_arg(take_force_str, take_force_value)
+    swim_atomunit.set_arg(give_force_str(), give_force_value)
+    swim_atomunit.set_arg(take_force_str(), take_force_value)
     # print(f"{swim_atomunit=}")
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(swim_atomunit)
@@ -50,15 +50,13 @@ def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_give_force_take_fo
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    give_force_str = "give_force"
-    take_force_str = "take_force"
     give_force_value = 81
     take_force_value = 43
     swim_atomunit = atomunit_shop(category, atom_update())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(awardee_id_str(), awardee_id_value)
-    swim_atomunit.set_arg(give_force_str, give_force_value)
-    swim_atomunit.set_arg(take_force_str, take_force_value)
+    swim_atomunit.set_arg(give_force_str(), give_force_value)
+    swim_atomunit.set_arg(take_force_str(), take_force_value)
     # print(f"{swim_atomunit=}")
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(swim_atomunit)
@@ -80,12 +78,11 @@ def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_give_force():
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    give_force_str = "give_force"
     give_force_value = 81
     swim_atomunit = atomunit_shop(category, atom_update())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(awardee_id_str(), awardee_id_value)
-    swim_atomunit.set_arg(give_force_str, give_force_value)
+    swim_atomunit.set_arg(give_force_str(), give_force_value)
     # print(f"{swim_atomunit=}")
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(swim_atomunit)
@@ -107,12 +104,12 @@ def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_take_force():
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    take_force_str = "take_force"
+
     take_force_value = 81
     swim_atomunit = atomunit_shop(category, atom_update())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(awardee_id_str(), awardee_id_value)
-    swim_atomunit.set_arg(take_force_str, take_force_value)
+    swim_atomunit.set_arg(take_force_str(), take_force_value)
     # print(f"{swim_atomunit=}")
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(swim_atomunit)
