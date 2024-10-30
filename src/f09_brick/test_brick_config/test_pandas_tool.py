@@ -61,6 +61,15 @@ from src.f04_gift.atom_config import (
     give_force_str,
     take_force_str,
 )
+from src.f08_filter.filter_config import (
+    otx_road_delimiter_str,
+    inx_road_delimiter_str,
+    unknown_word_str,
+    otx_word_str,
+    inx_word_str,
+    otx_label_str,
+    inx_label_str,
+)
 from os.path import exists as os_path_exists
 from pandas import DataFrame, ExcelWriter
 
@@ -117,16 +126,24 @@ def test_get_sorting_priority_column_headers_ReturnsObj():
     assert table_sorting_priority[44] == fund_coin_str()
     assert table_sorting_priority[45] == penny_str()
     assert table_sorting_priority[46] == respect_bit_str()
-    assert table_sorting_priority[47] == "otx_road_delimiter"
-    assert table_sorting_priority[48] == "inx_road_delimiter"
-    assert table_sorting_priority[49] == "unknown_word"
-    assert table_sorting_priority[50] == "otx_word"
-    assert table_sorting_priority[51] == "inx_word"
-    assert table_sorting_priority[52] == "otx_label"
-    assert table_sorting_priority[53] == "inx_label"
+    assert table_sorting_priority[47] == otx_road_delimiter_str()
+    assert table_sorting_priority[48] == inx_road_delimiter_str()
+    assert table_sorting_priority[49] == unknown_word_str()
+    assert table_sorting_priority[50] == otx_word_str()
+    assert table_sorting_priority[51] == inx_word_str()
+    assert table_sorting_priority[52] == otx_label_str()
+    assert table_sorting_priority[53] == inx_label_str()
     assert len(table_sorting_priority) == 54
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
+    # fiscal_args = set(get_atom_args_category_mapping().keys())
+    # assert fiscal_args.issubset(set(table_sorting_priority))
+    # brick_args = set(get_atom_args_category_mapping().keys())
+    # assert brick_args.issubset(set(table_sorting_priority))
+    # atom_fiscal_brick_args = atom_args
+    # atom_fiscal_brick_args.update(fiscal_args)
+    # atom_fiscal_brick_args.update(brick_args)
+    # assert atom_fiscal_brick_args == set(table_sorting_priority)
 
 
 def test_get_ordered_csv_ReturnsObj():
@@ -307,9 +324,7 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario3_ColumnOrderCorrect(
 
 def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect():
     # ESTABLISH
-    acct_id_str = "acct_id"
-    group_id_str = "group_id"
-    df1 = DataFrame([["AAA", "BBB"]], columns=[group_id_str, acct_id_str])
+    df1 = DataFrame([["AAA", "BBB"]], columns=[group_id_str(), acct_id_str()])
 
     # WHEN
     relevant_dataframe = get_relevant_columns_dataframe(df1)
@@ -317,5 +332,5 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     # THEN
     assert relevant_dataframe is not None
     print(f"{relevant_dataframe.columns=}")
-    assert relevant_dataframe.columns.to_list()[0] == acct_id_str
-    assert relevant_dataframe.columns.to_list() == [acct_id_str, group_id_str]
+    assert relevant_dataframe.columns.to_list()[0] == acct_id_str()
+    assert relevant_dataframe.columns.to_list() == [acct_id_str(), group_id_str()]
