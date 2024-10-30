@@ -4,11 +4,11 @@ from os import makedirs as os_makedirs
 
 
 def src_brick_dir() -> str:
-    return "src/f08_brick"
+    return "src/f09_brick"
 
 
 def src_brick_examples_dir() -> str:
-    return "src/f08_brick/examples"
+    return "src/f09_brick/examples"
 
 
 def brick_examples_dir() -> str:

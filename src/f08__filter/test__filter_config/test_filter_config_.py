@@ -43,7 +43,7 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_weekday_str,
     get_fiscal_categorys,
 )
-from src.f08_brick.filter_config import (
+from src.f08__filter.filter_config import (
     config_file_dir,
     get_filter_categorys,
     get_filter_config_file_name,
@@ -83,7 +83,7 @@ def test_get_filter_config_file_name_ReturnsObj():
 
 
 def test_config_file_dir_ReturnsObj() -> str:
-    assert config_file_dir() == f"{os_getcwd()}/src/f08_brick"
+    assert config_file_dir() == f"{os_getcwd()}/src/f08__filter"
 
 
 def test_get_filter_config_dict_ReturnsObj():

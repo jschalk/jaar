@@ -21,8 +21,8 @@ from src.f04_gift.atom_config import (
     credit_vote_str,
 )
 from src.f04_gift.atom import atomunit_shop
-from src.f08_brick.brick import create_brick_df, make_deltaunit, get_brickref
-from src.f08_brick.brick_config import (
+from src.f09_brick.brick import create_brick_df, make_deltaunit, get_brickref
+from src.f09_brick.brick_config import (
     brick_format_00021_bud_acctunit_v0_0_0,
     brick_format_00020_bud_acct_membership_v0_0_0,
     brick_format_00013_itemunit_v0_0_0,

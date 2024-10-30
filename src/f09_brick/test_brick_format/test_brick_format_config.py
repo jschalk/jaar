@@ -24,12 +24,12 @@ from src.f04_gift.atom_config import (
     gogo_want_str,
     stop_want_str,
 )
-from src.f08_brick.brick import (
+from src.f09_brick.brick import (
     _generate_brick_dataframe,
     get_brickref,
     _get_headers_list,
 )
-from src.f08_brick.brick_config import (
+from src.f09_brick.brick_config import (
     get_brick_formats_dir,
     get_brick_format_filenames,
     get_brickref_dict,
@@ -48,7 +48,7 @@ from src.f08_brick.brick_config import (
     get_brick_format_headers,
     attributes_str,
 )
-from src.f08_brick.examples.brick_env import src_brick_dir
+from src.f09_brick.examples.brick_env import src_brick_dir
 
 
 def test_config_str_functions_ReturnObjs():

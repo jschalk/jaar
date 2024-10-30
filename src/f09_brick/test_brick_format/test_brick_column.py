@@ -1,5 +1,5 @@
 from src.f02_bud.bud_tool import bud_acctunit_str
-from src.f08_brick.brick import BrickColumn, BrickRef, brickref_shop
+from src.f09_brick.brick import BrickColumn, BrickRef, brickref_shop
 
 
 def test_BrickColumn_Exists():

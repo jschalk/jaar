@@ -5,8 +5,8 @@ from src.f04_gift.atom_config import (
     nesting_order_str,
     get_atom_config_args,
 )
-from src.f08_brick.brick_config import get_brick_config_dict
-from src.f08_brick.brick import categorys_str, attributes_str, sort_order_str
+from src.f09_brick.brick_config import get_brick_config_dict
+from src.f09_brick.brick import categorys_str, attributes_str, sort_order_str
 
 
 def create_categorys_brick_format_dict() -> dict:

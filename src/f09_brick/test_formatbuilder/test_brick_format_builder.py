@@ -9,9 +9,9 @@ from src.f04_gift.atom_config import (
     owner_id_str,
     column_order_str,
 )
-from src.f08_brick.formatbuilder import create_categorys_brick_format_dict
-from src.f08_brick.brick import categorys_str, attributes_str, sort_order_str
-from src.f08_brick.brick_config import get_brick_formats_dir
+from src.f09_brick.formatbuilder import create_categorys_brick_format_dict
+from src.f09_brick.brick import categorys_str, attributes_str, sort_order_str
+from src.f09_brick.brick_config import get_brick_formats_dir
 
 
 def test_create_categorys_brick_format_dict_ReturnObj(rebuild_bool):

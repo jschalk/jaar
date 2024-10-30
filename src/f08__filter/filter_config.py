@@ -4,7 +4,7 @@ from os import getcwd as os_getcwd
 
 
 def config_file_dir() -> str:
-    return f"{os_getcwd()}/src/f08_brick"
+    return f"{os_getcwd()}/src/f08__filter"
 
 
 def get_filter_config_file_name() -> str:
