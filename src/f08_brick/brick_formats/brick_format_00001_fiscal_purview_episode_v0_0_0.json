@@ -20,7 +20,7 @@
         }
     },
     "brick_number": "br00001",
-    "fiscal_category": [
+    "categorys": [
         "fiscal_purview_episode"
     ]
 }

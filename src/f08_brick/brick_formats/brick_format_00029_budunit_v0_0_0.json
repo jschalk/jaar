@@ -1,7 +1,4 @@
 {
-    "atom_categorys": [
-        "budunit"
-    ],
     "attributes": {
         "credor_respect": {
             "column_order": 5
@@ -39,5 +36,8 @@
             "column_order": 9
         }
     },
-    "brick_number": "br00029"
+    "brick_number": "br00029",
+    "categorys": [
+        "budunit"
+    ]
 }

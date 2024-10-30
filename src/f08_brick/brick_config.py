@@ -39,8 +39,8 @@ def sort_order_str() -> str:
     return "sort_order"
 
 
-def atom_categorys_str() -> str:
-    return "atom_categorys"
+def categorys_str() -> str:
+    return "categorys"
 
 
 def attributes_str() -> str:
@@ -175,7 +175,15 @@ def brick_format_00029_budunit_v0_0_0() -> str:
     return "brick_format_00029_budunit_v0_0_0"
 
 
-def get_brick_filenames() -> set[str]:
+def brick_format_00040_bridge_otx_to_inx_v0_0_0() -> str:
+    return "brick_format_00040_bridge_otx_to_inx_v0_0_0"
+
+
+def brick_format_00041_bridge_explicit_label_v0_0_0() -> str:
+    return "brick_format_00041_bridge_explicit_label_v0_0_0"
+
+
+def get_brick_format_filenames() -> set[str]:
     return {
         brick_format_00000_fiscalunit_v0_0_0(),
         brick_format_00001_fiscal_purview_episode_v0_0_0(),
@@ -198,6 +206,8 @@ def get_brick_filenames() -> set[str]:
         brick_format_00028_bud_itemunit_v0_0_0(),
         brick_format_00029_budunit_v0_0_0(),
         brick_format_00036_problem_healer_v0_0_0(),
+        brick_format_00040_bridge_otx_to_inx_v0_0_0(),
+        brick_format_00041_bridge_explicit_label_v0_0_0(),
     }
 
 
@@ -224,6 +234,8 @@ def get_brick_numbers() -> set[str]:
         "br00028",
         "br00029",
         "br00036",
+        "br00040",
+        "br00041",
     }
 
 
@@ -250,6 +262,8 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "addin,begin,close,denom,fiscal_id,gogo_want,label,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
         "credor_respect,debtor_respect,fiscal_id,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,purview_time_id,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
         "fiscal_id,healer_id,label,owner_id,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
+        "inx_road_delimiter,inx_word,otx_road_delimiter,otx_word,unknown_word": brick_format_00040_bridge_otx_to_inx_v0_0_0(),
+        "inx_label,inx_road_delimiter,otx_label,otx_road_delimiter,unknown_word": brick_format_00041_bridge_explicit_label_v0_0_0(),
     }
 
 

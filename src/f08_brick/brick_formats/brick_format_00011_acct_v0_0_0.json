@@ -1,7 +1,4 @@
 {
-    "atom_categorys": [
-        "bud_acctunit"
-    ],
     "attributes": {
         "acct_id": {
             "column_order": 2,
@@ -14,5 +11,8 @@
             "column_order": 1
         }
     },
-    "brick_number": "br00011"
+    "brick_number": "br00011",
+    "categorys": [
+        "bud_acctunit"
+    ]
 }

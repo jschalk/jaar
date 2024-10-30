@@ -23,7 +23,7 @@ def test_BrickRef_Exists():
 
     # THEN
     assert not x_brickref.brick_name
-    assert not x_brickref.atom_categorys
+    assert not x_brickref.categorys
     assert not x_brickref._brickcolumns
 
 
@@ -33,12 +33,12 @@ def test_brickref_shop_ReturnsObj():
 
     # WHEN
     x_brickref = brickref_shop(
-        x_brick_name=x1_brick_name, x_atom_categorys=[bud_acctunit_str()]
+        x_brick_name=x1_brick_name, x_categorys=[bud_acctunit_str()]
     )
 
     # THEN
     assert x_brickref.brick_name == x1_brick_name
-    assert x_brickref.atom_categorys == [bud_acctunit_str()]
+    assert x_brickref.categorys == [bud_acctunit_str()]
     assert x_brickref._brickcolumns == {}
 
 

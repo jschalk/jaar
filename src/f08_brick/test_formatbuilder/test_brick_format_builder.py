@@ -10,7 +10,7 @@ from src.f04_gift.atom_config import (
     column_order_str,
 )
 from src.f08_brick.formatbuilder import create_categorys_brick_format_dict
-from src.f08_brick.brick import atom_categorys_str, attributes_str, sort_order_str
+from src.f08_brick.brick import categorys_str, attributes_str, sort_order_str
 from src.f08_brick.brick_config import get_brick_formats_dir
 
 
@@ -24,7 +24,7 @@ def test_create_categorys_brick_format_dict_ReturnObj(rebuild_bool):
     bud_itemunit_filename = f"brick_format_00028_{bud_itemunit_str()}_v0_0_0.json"
     assert categorys_brick_format_dict.get(bud_itemunit_filename)
     bud_itemunit_dict = categorys_brick_format_dict.get(bud_itemunit_filename)
-    assert bud_itemunit_dict.get(atom_categorys_str()) == [bud_itemunit_str()]
+    assert bud_itemunit_dict.get(categorys_str()) == [bud_itemunit_str()]
     assert bud_itemunit_dict.get(attributes_str())
     bud_itemunit_attributes = bud_itemunit_dict.get(attributes_str())
     assert bud_itemunit_attributes.get(fiscal_id_str())

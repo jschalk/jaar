@@ -1,7 +1,4 @@
 {
-    "atom_categorys": [
-        "bud_item_factunit"
-    ],
     "attributes": {
         "base": {
             "column_order": 3,
@@ -29,5 +26,8 @@
             "sort_order": 2
         }
     },
-    "brick_number": "br00023"
+    "brick_number": "br00023",
+    "categorys": [
+        "bud_item_factunit"
+    ]
 }

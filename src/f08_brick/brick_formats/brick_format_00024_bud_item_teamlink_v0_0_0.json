@@ -1,7 +1,4 @@
 {
-    "atom_categorys": [
-        "bud_item_teamlink"
-    ],
     "attributes": {
         "fiscal_id": {
             "column_order": 0,
@@ -20,5 +17,8 @@
             "sort_order": 3
         }
     },
-    "brick_number": "br00024"
+    "brick_number": "br00024",
+    "categorys": [
+        "bud_item_teamlink"
+    ]
 }

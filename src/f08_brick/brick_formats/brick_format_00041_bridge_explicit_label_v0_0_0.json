@@ -1,27 +1,28 @@
 {
     "attributes": {
-        "base": {
+        "inx_label": {
             "column_order": 3,
             "sort_order": 3
         },
-        "base_item_active_requisite": {
-            "column_order": 4
-        },
-        "fiscal_id": {
+        "inx_road_delimiter": {
             "column_order": 0,
             "sort_order": 0
         },
-        "owner_id": {
+        "otx_label": {
             "column_order": 1,
             "sort_order": 1
         },
-        "road": {
+        "otx_road_delimiter": {
+            "column_order": 3,
+            "sort_order": 3
+        },
+        "unknown_word": {
             "column_order": 2,
             "sort_order": 2
         }
     },
-    "brick_number": "br00027",
+    "brick_number": "br00041",
     "categorys": [
-        "bud_item_reasonunit"
+        "bridge_explicit_label"
     ]
 }

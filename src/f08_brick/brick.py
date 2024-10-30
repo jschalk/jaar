@@ -21,7 +21,7 @@ from src.f04_gift.gift import giftunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f08_brick.brick_config import (
     get_brickref_dict,
-    atom_categorys_str,
+    categorys_str,
     attributes_str,
     column_order_str,
     sort_order_str,
@@ -43,7 +43,7 @@ class BrickColumn:
 @dataclass
 class BrickRef:
     brick_name: str = None
-    atom_categorys: str = None
+    categorys: str = None
     _brickcolumns: dict[str:BrickColumn] = None
 
     def set_brickcolumn(self, x_brickcolumn: BrickColumn):
@@ -58,15 +58,13 @@ class BrickRef:
         return self._brickcolumns.get(x_attribute_key)
 
 
-def brickref_shop(x_brick_name: str, x_atom_categorys: list[str]) -> BrickRef:
-    return BrickRef(
-        brick_name=x_brick_name, atom_categorys=x_atom_categorys, _brickcolumns={}
-    )
+def brickref_shop(x_brick_name: str, x_categorys: list[str]) -> BrickRef:
+    return BrickRef(brick_name=x_brick_name, categorys=x_categorys, _brickcolumns={})
 
 
 def get_brickref(brick_name: str) -> BrickRef:
     brickref_dict = get_brickref_dict(brick_name)
-    x_brickref = brickref_shop(brick_name, brickref_dict.get(atom_categorys_str()))
+    x_brickref = brickref_shop(brick_name, brickref_dict.get(categorys_str()))
     x_attributes_dict = brickref_dict.get(attributes_str())
     x_brickcolumns = {}
     for x_key, x_brickcolumn in x_attributes_dict.items():
@@ -107,7 +105,7 @@ def create_brick_df(x_budunit: BudUnit, brick_name: str) -> DataFrame:
 def _get_sorted_atom_insert_atomunits(
     x_deltaunit: DeltaUnit, x_brickref: BrickRef
 ) -> list[AtomUnit]:
-    category_set = set(x_brickref.atom_categorys)
+    category_set = set(x_brickref.categorys)
     curd_set = {atom_insert()}
     limited_delta = get_categorys_cruds_deltaunit(x_deltaunit, category_set, curd_set)
     return limited_delta.get_category_sorted_atomunits_list()
@@ -172,7 +170,7 @@ def make_deltaunit(x_csv: str) -> DeltaUnit:
     x_dict = get_positional_dict(title_row)
     x_deltaunit = deltaunit_shop()
     for row in x_reader:
-        x_atomrow = atomrow_shop(x_brickref.atom_categorys, atom_insert())
+        x_atomrow = atomrow_shop(x_brickref.categorys, atom_insert())
         for x_header in title_row:
             if header_index := x_dict.get(x_header):
                 x_atomrow.__dict__[x_header] = row[header_index]

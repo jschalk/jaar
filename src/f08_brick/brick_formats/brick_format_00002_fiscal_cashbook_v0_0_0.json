@@ -20,7 +20,7 @@
         }
     },
     "brick_number": "br00002",
-    "fiscal_category": [
+    "categorys": [
         "fiscal_cashbook"
     ]
 }

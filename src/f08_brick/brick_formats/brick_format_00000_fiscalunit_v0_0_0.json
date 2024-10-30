@@ -34,7 +34,7 @@
         }
     },
     "brick_number": "br00000",
-    "fiscal_category": [
+    "categorys": [
         "fiscalunit"
     ]
 }

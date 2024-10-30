@@ -1,7 +1,4 @@
 {
-    "atom_categorys": [
-        "bud_itemunit"
-    ],
     "attributes": {
         "addin": {
             "column_order": 6
@@ -42,5 +39,8 @@
             "column_order": 11
         }
     },
-    "brick_number": "br00019"
+    "brick_number": "br00019",
+    "categorys": [
+        "bud_itemunit"
+    ]
 }

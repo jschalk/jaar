@@ -31,7 +31,7 @@ from src.f08_brick.brick import (
 )
 from src.f08_brick.brick_config import (
     get_brick_formats_dir,
-    get_brick_filenames,
+    get_brick_format_filenames,
     get_brickref_dict,
     brick_format_00013_itemunit_v0_0_0,
     brick_format_00019_itemunit_v0_0_0,
@@ -84,7 +84,7 @@ def test_get_brickref_ReturnsObj():
 
     # THEN
     assert x_brickref.brick_name == brick_name_00021
-    assert x_brickref.atom_categorys == [bud_acctunit_str()]
+    assert x_brickref.categorys == [bud_acctunit_str()]
     assert x_brickref._brickcolumns != {}
     assert len(x_brickref._brickcolumns) == 5
 
@@ -137,12 +137,12 @@ def test_get_brick_format_headers_ReturnsObj():
     # THEN
     # print(f"{set(get_brick_format_headers().values())=}")
     # sourcery skip: no-loop-in-tests
-    for x_brick_filename in get_brick_filenames():
+    for x_brick_filename in get_brick_format_filenames():
         check_sorted_headers_exist(x_brick_filename, x_headers)
 
     print(f"{x_headers=}")
-    assert len(x_headers) == len(get_brick_filenames())
-    assert set(x_headers.values()) == get_brick_filenames()
+    assert len(x_headers) == len(get_brick_format_filenames())
+    assert set(x_headers.values()) == get_brick_format_filenames()
 
 
 def test__generate_brick_dataframe_ReturnsCorrectObj():
@@ -158,7 +158,7 @@ def test__generate_brick_dataframe_ReturnsCorrectObj():
 def for_all_bricks__generate_brick_dataframe():
     # Catching broad exceptions can make debugging difficult. Consider catching more specific exceptions or at least logging the exception details.
     empty_d2 = []
-    for x_filename in get_brick_filenames():
+    for x_filename in get_brick_format_filenames():
         try:
             _generate_brick_dataframe(empty_d2, x_filename)
         except Exception:
@@ -182,8 +182,8 @@ def test_brick_FilesExist():
     # THEN
     brick_filenames = set(brick_files.keys())
     print(f"{brick_filenames=}")
-    assert brick_filenames == get_brick_filenames()
-    assert len(brick_filenames) == len(get_brick_filenames())
+    assert brick_filenames == get_brick_format_filenames()
+    assert len(brick_filenames) == len(get_brick_format_filenames())
 
 
 def test_get_brickref_HasCorrectAttrs_brick_format_00021_bud_acctunit_v0_0_0():

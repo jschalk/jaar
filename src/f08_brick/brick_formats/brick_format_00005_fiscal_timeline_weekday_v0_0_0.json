@@ -13,7 +13,7 @@
         }
     },
     "brick_number": "br00005",
-    "fiscal_category": [
+    "categorys": [
         "fiscal_timeline_weekday"
     ]
 }

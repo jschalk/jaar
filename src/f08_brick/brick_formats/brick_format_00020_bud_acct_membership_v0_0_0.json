@@ -1,5 +1,4 @@
 {
-    "atom_categorys": ["bud_acct_membership"], "brick_number": "br00020",
     "attributes": {
         "acct_id": {
             "column_order": 2,
@@ -11,6 +10,10 @@
         "debtit_vote": {
             "column_order": 4
         },
+        "fiscal_id": {
+            "column_order": 0,
+            "sort_order": 0
+        },
         "group_id": {
             "column_order": 3,
             "sort_order": 3
@@ -18,10 +21,10 @@
         "owner_id": {
             "column_order": 1,
             "sort_order": 1
-        },
-        "fiscal_id": {
-            "column_order": 0,
-            "sort_order": 0
         }
-    }
+    },
+    "brick_number": "br00020",
+    "categorys": [
+        "bud_acct_membership"
+    ]
 }

@@ -137,8 +137,8 @@ def _validate_fiscal_config(fiscal_config: dict):
     }
 
     # for every fiscal_format file there exists a unique fiscal_number always with leading zeros to make 5 digits
-    for fiscal_category, cat_dict in fiscal_config.items():
-        print(f"_validate_fiscal_config {fiscal_category=}")
+    for fiscal_categorys, cat_dict in fiscal_config.items():
+        print(f"_validate_fiscal_config {fiscal_categorys=}")
         assert cat_dict.get(required_args_str()) is not None
         assert cat_dict.get(optional_args_str()) is not None
         assert cat_dict.get(atom_update()) is None
@@ -149,12 +149,12 @@ def _validate_fiscal_config(fiscal_config: dict):
         fiscal_required_args_keys = set(cat_dict.get(required_args_str()).keys())
         for required_arg_key in fiscal_required_args_keys:
             required_arg_dict = cat_dict.get(required_args_str())
-            print(f"_validate_fiscal_config {fiscal_category=} {required_arg_key=} ")
+            print(f"_validate_fiscal_config {fiscal_categorys=} {required_arg_key=} ")
             arg_dict = required_arg_dict.get(required_arg_key)
             assert arg_dict.get(obj_class_str()) in accepted_obj_classes
         fiscal_optional_args_keys = set(cat_dict.get(optional_args_str()).keys())
         for optional_arg_key in fiscal_optional_args_keys:
             optional_arg_dict = cat_dict.get(optional_args_str())
-            print(f"_validate_fiscal_config {fiscal_category=} {optional_arg_key=} ")
+            print(f"_validate_fiscal_config {fiscal_categorys=} {optional_arg_key=} ")
             arg_dict = optional_arg_dict.get(optional_arg_key)
             assert arg_dict.get(obj_class_str()) in accepted_obj_classes

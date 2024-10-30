@@ -38,7 +38,7 @@ from src.f08_brick.brick_config import (
     config_file_dir,
     get_brick_config_file_name,
     get_brick_config_dict,
-    get_brick_filenames,
+    get_brick_format_filenames,
     get_brick_numbers,
     brick_format_00021_bud_acctunit_v0_0_0,
     brick_format_00020_bud_acct_membership_v0_0_0,
@@ -179,21 +179,22 @@ def _validate_brick_config(x_brick_config: dict):
         assert time_id_str() in brick_required_args_keys
 
 
-def test_get_brick_filenames_ReturnsObj():
+def test_get_brick_format_filenames_ReturnsObj():
     # ESTABLISH
-    brick_filenames = get_brick_filenames()
+    brick_filenames = get_brick_format_filenames()
 
     # THEN
     print(f"{brick_filenames=}")
+    print("")
     assert brick_format_00021_bud_acctunit_v0_0_0() in brick_filenames
     assert brick_format_00020_bud_acct_membership_v0_0_0() in brick_filenames
     assert brick_format_00013_itemunit_v0_0_0() in brick_filenames
 
     # WHEN / THEN
-    assert _validate_brick_files(brick_filenames)
+    assert _validate_brick_format_files(brick_filenames)
 
 
-def _validate_brick_files(brick_filenames: set[str]):
+def _validate_brick_format_files(brick_filenames: set[str]):
     # for every brick_format file there exists a unique brick_number always with leading zeros to make 5 digits
     brick_numbers_set = set()
     for brick_filename in brick_filenames:
@@ -203,6 +204,12 @@ def _validate_brick_files(brick_filenames: set[str]):
         assert brick_number_value
         assert brick_number_value[2:8] == brick_filename[13:18]
         brick_numbers_set.add(brick_number_value)
+
+        brick_format_categorys = brickref_dict.get("categorys")
+        assert brick_format_categorys is not None
+        assert len(brick_format_categorys) > 0
+        for brick_format_category in brick_format_categorys:
+            print(f"{brick_format_category=}")
 
     # confirm every bricknumber is unique
     assert len(brick_numbers_set) == len(brick_filenames)
