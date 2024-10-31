@@ -22,12 +22,15 @@ def get_sorting_priority_column_headers() -> list[str]:
         "awardee_id",
         "healer_id",
         "time_id",
-        "numor",
-        "denom",
-        "addin",
-        "base_item_active_requisite",
         "begin",
         "close",
+        "addin",
+        "numor",
+        "denom",
+        "morph",
+        "gogo_want",
+        "stop_want",
+        "base_item_active_requisite",
         "credit_belief",
         "debtit_belief",
         "credit_vote",
@@ -38,17 +41,14 @@ def get_sorting_priority_column_headers() -> list[str]:
         "fnigh",
         "fund_pool",
         "give_force",
-        "gogo_want",
         "mass",
         "max_tree_traverse",
-        "morph",
         "nigh",
         "open",
         "divisor",
         "pledge",
         "problem_bool",
         "purview_time_id",
-        "stop_want",
         "take_force",
         "tally",
         "fund_coin",
@@ -81,13 +81,19 @@ def save_dataframe_to_csv(x_dt: DataFrame, x_dir: str, x_filename: str):
     save_file(x_dir, x_filename, get_ordered_csv(x_dt))
 
 
-def get_ordered_csv(x_dt: DataFrame, sorting_columns: list[str] = None) -> str:
+def get_new_sorting_columns(
+    existing_columns: set[str], sorting_columns: list[str] = None
+) -> list[str]:
     if sorting_columns is None:
         sorting_columns = get_sorting_priority_column_headers()
-    sort_columns_in_dt = set(sorting_columns).intersection(set(x_dt.columns))
-    new_sorting_columns = [
-        sort_col for sort_col in sorting_columns if sort_col in sort_columns_in_dt
+    sort_columns_in_existing = set(sorting_columns).intersection(existing_columns)
+    return [
+        sort_col for sort_col in sorting_columns if sort_col in sort_columns_in_existing
     ]
+
+
+def get_ordered_csv(x_dt: DataFrame, sorting_columns: list[str] = None) -> str:
+    new_sorting_columns = get_new_sorting_columns(set(x_dt.columns), sorting_columns)
     x_dt.sort_values(new_sorting_columns, inplace=True)
     x_dt.reset_index(inplace=True)
     x_dt.drop(columns=["index"], inplace=True)

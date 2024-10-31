@@ -116,33 +116,33 @@ def test_get_sorting_priority_column_headers_ReturnsObj():
     assert table_sorting_priority[14] == awardee_id_str()
     assert table_sorting_priority[15] == healer_id_str()
     assert table_sorting_priority[16] == time_id_str()
-    assert table_sorting_priority[17] == numor_str()
-    assert table_sorting_priority[18] == denom_str()
+    assert table_sorting_priority[17] == begin_str()
+    assert table_sorting_priority[18] == close_str()
     assert table_sorting_priority[19] == addin_str()
-    assert table_sorting_priority[20] == base_item_active_requisite_str()
-    assert table_sorting_priority[21] == begin_str()
-    assert table_sorting_priority[22] == close_str()
-    assert table_sorting_priority[23] == credit_belief_str()
-    assert table_sorting_priority[24] == debtit_belief_str()
-    assert table_sorting_priority[25] == credit_vote_str()
-    assert table_sorting_priority[26] == debtit_vote_str()
-    assert table_sorting_priority[27] == credor_respect_str()
-    assert table_sorting_priority[28] == debtor_respect_str()
-    assert table_sorting_priority[29] == fopen_str()
-    assert table_sorting_priority[30] == fnigh_str()
-    assert table_sorting_priority[31] == "fund_pool"
-    assert table_sorting_priority[32] == give_force_str()
-    assert table_sorting_priority[33] == gogo_want_str()
-    assert table_sorting_priority[34] == mass_str()
-    assert table_sorting_priority[35] == "max_tree_traverse"
-    assert table_sorting_priority[36] == morph_str()
-    assert table_sorting_priority[37] == "nigh"
-    assert table_sorting_priority[38] == "open"
-    assert table_sorting_priority[39] == "divisor"
-    assert table_sorting_priority[40] == pledge_str()
-    assert table_sorting_priority[41] == "problem_bool"
-    assert table_sorting_priority[42] == "purview_time_id"
-    assert table_sorting_priority[43] == stop_want_str()
+    assert table_sorting_priority[20] == numor_str()
+    assert table_sorting_priority[21] == denom_str()
+    assert table_sorting_priority[22] == morph_str()
+    assert table_sorting_priority[23] == gogo_want_str()
+    assert table_sorting_priority[24] == stop_want_str()
+    assert table_sorting_priority[25] == base_item_active_requisite_str()
+    assert table_sorting_priority[26] == credit_belief_str()
+    assert table_sorting_priority[27] == debtit_belief_str()
+    assert table_sorting_priority[28] == credit_vote_str()
+    assert table_sorting_priority[29] == debtit_vote_str()
+    assert table_sorting_priority[30] == credor_respect_str()
+    assert table_sorting_priority[31] == debtor_respect_str()
+    assert table_sorting_priority[32] == fopen_str()
+    assert table_sorting_priority[33] == fnigh_str()
+    assert table_sorting_priority[34] == "fund_pool"
+    assert table_sorting_priority[35] == give_force_str()
+    assert table_sorting_priority[36] == mass_str()
+    assert table_sorting_priority[37] == "max_tree_traverse"
+    assert table_sorting_priority[38] == "nigh"
+    assert table_sorting_priority[39] == "open"
+    assert table_sorting_priority[40] == "divisor"
+    assert table_sorting_priority[41] == pledge_str()
+    assert table_sorting_priority[42] == "problem_bool"
+    assert table_sorting_priority[43] == "purview_time_id"
     assert table_sorting_priority[44] == take_force_str()
     assert table_sorting_priority[45] == "tally"
     assert table_sorting_priority[46] == fund_coin_str()

@@ -28,14 +28,6 @@ def allowed_crud_str() -> str:
     return "allowed_crud"
 
 
-def column_order_str() -> str:
-    return "column_order"
-
-
-def sort_order_str() -> str:
-    return "sort_order"
-
-
 def categorys_str() -> str:
     return "categorys"
 

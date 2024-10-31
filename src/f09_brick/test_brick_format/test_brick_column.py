@@ -1,20 +1,6 @@
 from src.f02_bud.bud_tool import bud_acctunit_str
-from src.f09_brick.brick import BrickColumn, BrickRef, brickref_shop
-
-
-def test_BrickColumn_Exists():
-    # ESTABLISH
-    x_attribute_key = "1"
-    x_column_order = 2
-    x_sort_order = 3
-
-    # WHEN
-    x_brickcolumn = BrickColumn(x_attribute_key, x_column_order, x_sort_order)
-
-    # THEN
-    assert x_brickcolumn.attribute_key == x_attribute_key
-    assert x_brickcolumn.column_order == x_column_order
-    assert x_brickcolumn.sort_order == x_sort_order
+from src.f04_gift.atom_config import acct_id_str, group_id_str, road_str
+from src.f09_brick.brick import BrickRef, brickref_shop
 
 
 def test_BrickRef_Exists():
@@ -24,7 +10,7 @@ def test_BrickRef_Exists():
     # THEN
     assert not x_brickref.brick_name
     assert not x_brickref.categorys
-    assert not x_brickref._brickcolumns
+    assert not x_brickref._attributes
 
 
 def test_brickref_shop_ReturnsObj():
@@ -39,38 +25,21 @@ def test_brickref_shop_ReturnsObj():
     # THEN
     assert x_brickref.brick_name == x1_brick_name
     assert x_brickref.categorys == [bud_acctunit_str()]
-    assert x_brickref._brickcolumns == {}
+    assert x_brickref._attributes == set()
 
 
-def test_BrickColumn_set_brickcolumn_SetsAttr():
+def test_BrickColumn_set_attribute_SetsAttr():
     # ESTABLISH
     x_brickref = brickref_shop("0003", bud_acctunit_str())
-    x_attribute_key = "1"
-    x_column_order = 2
-    x_sort_order = 3
-    x_brickcolumn = BrickColumn(x_attribute_key, x_column_order, x_sort_order)
-    assert x_brickref._brickcolumns == {}
+    x_attribute = "1"
+    assert x_brickref._attributes == set()
 
     # WHEN
-    x_brickref.set_brickcolumn(x_brickcolumn)
+    x_brickref.set_attribute(x_attribute)
 
     # THEN
-    assert x_brickref._brickcolumns != {}
-    assert x_brickref._brickcolumns.get(x_attribute_key) == x_brickcolumn
-
-
-def test_BrickColumn_get_brickcolumn_ReturnsObj():
-    # ESTABLISH
-
-    x_brickref = brickref_shop("0003", bud_acctunit_str())
-    x_attribute_key = "1"
-    x_column_order = 2
-    x_sort_order = 3
-    x_brickcolumn = BrickColumn(x_attribute_key, x_column_order, x_sort_order)
-    x_brickref.set_brickcolumn(x_brickcolumn)
-
-    # WHEN / THEN
-    assert x_brickref.get_brickcolumn(x_attribute_key) == x_brickcolumn
+    assert x_brickref._attributes != set()
+    assert x_brickref._attributes == {x_attribute}
 
 
 def test_BrickColumn_get_headers_list_ReturnsObj_Scenario0():
@@ -89,57 +58,25 @@ def test_BrickColumn_get_headers_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
     x3_brickref = brickref_shop("0003", bud_acctunit_str())
-    x_attribute_key = "1"
-    x_column_order = 2
-    x_sort_order = 3
-    x_brickcolumn = BrickColumn(x_attribute_key, x_column_order, x_sort_order)
-    x3_brickref.set_brickcolumn(x_brickcolumn)
+    x3_brickref.set_attribute(group_id_str())
 
     # WHEN
     x_headers_list = x3_brickref.get_headers_list()
 
     # THEN
-    assert x_headers_list == [x_attribute_key]
-
-
-def test_BrickColumn_get_headers_list_ReturnsObj_Scenario1():
-    # ESTABLISH
-
-    x3_brickref = brickref_shop("0003", bud_acctunit_str())
-    third_column_str = "third column"
-    skeepd_column_str = "skeepd column"
-    first_column_str = "first column"
-    x3_brickref.set_brickcolumn(BrickColumn(third_column_str, column_order=2))
-    x3_brickref.set_brickcolumn(BrickColumn(skeepd_column_str, column_order=1))
-    x3_brickref.set_brickcolumn(BrickColumn(first_column_str, column_order=0))
-
-    # WHEN
-    x_headers_list = x3_brickref.get_headers_list()
-
-    # THEN
-    assert x_headers_list == [first_column_str, skeepd_column_str, third_column_str]
+    assert x_headers_list == [group_id_str()]
 
 
 def test_BrickColumn_get_headers_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
     x3_brickref = brickref_shop("0003", bud_acctunit_str())
-    third_column_str = "third column"
-    skeepd_column_str = "skeepd column"
-    first_column_str = "first column"
-    fouth_column_str = "fourth column"
-    x3_brickref.set_brickcolumn(BrickColumn(third_column_str, column_order=2))
-    x3_brickref.set_brickcolumn(BrickColumn(skeepd_column_str, column_order=1))
-    x3_brickref.set_brickcolumn(BrickColumn(first_column_str, column_order=0))
-    x3_brickref.set_brickcolumn(BrickColumn(fouth_column_str, column_order=3))
+    x3_brickref.set_attribute(road_str())
+    x3_brickref.set_attribute(group_id_str())
+    x3_brickref.set_attribute(acct_id_str())
 
     # WHEN
     x_headers_list = x3_brickref.get_headers_list()
 
     # THEN
-    assert x_headers_list == [
-        first_column_str,
-        skeepd_column_str,
-        third_column_str,
-        fouth_column_str,
-    ]
+    assert x_headers_list == [acct_id_str(), group_id_str(), road_str()]

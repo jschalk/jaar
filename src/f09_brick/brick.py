@@ -1,4 +1,4 @@
-from src.f00_instrument.file import open_file, create_file_path
+from src.f00_instrument.file import open_file
 from src.f00_instrument.dict_tool import (
     extract_csv_headers,
     get_csv_column1_column2_metrics,
@@ -11,68 +11,43 @@ from src.f01_road.road import FiscalID, OwnerID
 from src.f02_bud.bud import BudUnit
 from src.f04_gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
 from src.f04_gift.atom_config import fiscal_id_str, owner_id_str, pledge_str
-from src.f04_gift.delta import (
-    deltaunit_shop,
-    get_categorys_cruds_deltaunit,
-    DeltaUnit,
-    sift_deltaunit,
-)
+from src.f04_gift.delta import deltaunit_shop, get_categorys_cruds_deltaunit, DeltaUnit
 from src.f04_gift.gift import giftunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f09_brick.brick_config import (
     get_brickref_dict,
     categorys_str,
     attributes_str,
-    column_order_str,
-    sort_order_str,
     get_brick_format_headers,
 )
-from src.f09_brick.pandas_tool import save_dataframe_to_csv, open_csv
+from src.f09_brick.pandas_tool import save_dataframe_to_csv, get_new_sorting_columns
 from pandas import DataFrame
 from csv import reader as csv_reader
 from dataclasses import dataclass
 
 
 @dataclass
-class BrickColumn:
-    attribute_key: str
-    column_order: int
-    sort_order: int = None
-
-
-@dataclass
 class BrickRef:
     brick_name: str = None
     categorys: str = None
-    _brickcolumns: dict[str:BrickColumn] = None
+    _attributes: set[str] = None
 
-    def set_brickcolumn(self, x_brickcolumn: BrickColumn):
-        self._brickcolumns[x_brickcolumn.attribute_key] = x_brickcolumn
+    def set_attribute(self, x_attribute: str):
+        self._attributes.add(x_attribute)
 
     def get_headers_list(self) -> list[str]:
-        x_list = list(self._brickcolumns.values())
-        x_list = sorted(x_list, key=lambda x: x.column_order)
-        return [x_brickcolumn.attribute_key for x_brickcolumn in x_list]
-
-    def get_brickcolumn(self, x_attribute_key: str) -> BrickColumn:
-        return self._brickcolumns.get(x_attribute_key)
+        print(f"{self._attributes}")
+        return get_new_sorting_columns(self._attributes)
 
 
 def brickref_shop(x_brick_name: str, x_categorys: list[str]) -> BrickRef:
-    return BrickRef(brick_name=x_brick_name, categorys=x_categorys, _brickcolumns={})
+    return BrickRef(brick_name=x_brick_name, categorys=x_categorys, _attributes=set())
 
 
 def get_brickref(brick_name: str) -> BrickRef:
     brickref_dict = get_brickref_dict(brick_name)
     x_brickref = brickref_shop(brick_name, brickref_dict.get(categorys_str()))
-    x_attributes_dict = brickref_dict.get(attributes_str())
-    x_brickcolumns = {}
-    for x_key, x_brickcolumn in x_attributes_dict.items():
-        x_column_order = x_brickcolumn.get(column_order_str())
-        x_sort_order = x_brickcolumn.get(sort_order_str())
-        x_brickcolumn = BrickColumn(x_key, x_column_order, x_sort_order)
-        x_brickcolumns[x_brickcolumn.attribute_key] = x_brickcolumn
-    x_brickref._brickcolumns = x_brickcolumns
+    x_brickref._attributes = set(brickref_dict.get(attributes_str()))
     return x_brickref
 
 
@@ -120,26 +95,27 @@ def _create_d2_list(
     d2_list = []
     for x_atomunit in sorted_atomunits:
         d1_list = []
-        for x_brickcolumn in x_brickref.get_headers_list():
-            if x_brickcolumn == fiscal_id_str():
+        for x_attribute in x_brickref.get_headers_list():
+            if x_attribute == fiscal_id_str():
                 d1_list.append(x_fiscal_id)
-            elif x_brickcolumn == owner_id_str():
+            elif x_attribute == owner_id_str():
                 d1_list.append(x_owner_id)
             else:
-                d1_list.append(x_atomunit.get_value(x_brickcolumn))
+                d1_list.append(x_atomunit.get_value(x_attribute))
         d2_list.append(d1_list)
     return d2_list
 
 
 def _delta_all_pledge_values(d2_list: list[list], x_brickref: BrickRef) -> list[list]:
-    for x_column_header, x_brickcolumn in x_brickref._brickcolumns.items():
-        if x_column_header == pledge_str():
-            pledge_column_number = x_brickcolumn.column_order
-            for x_row in d2_list:
-                if x_row[pledge_column_number] is True:
-                    x_row[pledge_column_number] = "Yes"
-                else:
-                    x_row[pledge_column_number] = ""
+    if pledge_str() in x_brickref._attributes:
+        for x_count, x_header in enumerate(x_brickref.get_headers_list()):
+            if x_header == pledge_str():
+                pledge_column_number = x_count
+        for x_row in d2_list:
+            if x_row[pledge_column_number] is True:
+                x_row[pledge_column_number] = "Yes"
+            else:
+                x_row[pledge_column_number] = ""
     return d2_list
 
 

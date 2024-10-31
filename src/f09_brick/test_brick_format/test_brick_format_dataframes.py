@@ -233,10 +233,10 @@ def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_acct_example_csv = """fiscal_id,owner_id,acct_id,debtit_belief,credit_belief
-music56,Sue,Bob,29,13
-music56,Sue,Sue,23,11
-music56,Sue,Yao,37,41
+    sue1_acct_example_csv = """fiscal_id,owner_id,acct_id,credit_belief,debtit_belief
+music56,Sue,Bob,13,29
+music56,Sue,Sue,11,23
+music56,Sue,Yao,41,37
 """
     brick_file_str = open_file(brick_fiscals_dir(), acct_filename)
     print(f"      {brick_file_str=}")
@@ -250,10 +250,10 @@ music56,Sue,Yao,37,41
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_acct_example_csv = """fiscal_id,owner_id,acct_id,debtit_belief,credit_belief
-music56,Sue,Bob,29,13
-music56,Sue,Sue,23,11
-music56,Sue,Yao,37,41
+    sue2_acct_example_csv = """fiscal_id,owner_id,acct_id,credit_belief,debtit_belief
+music56,Sue,Bob,13,29
+music56,Sue,Sue,11,23
+music56,Sue,Yao,41,37
 music56,Sue,Zia,1,1
 """
     assert open_file(brick_fiscals_dir(), acct_filename) == sue2_acct_example_csv
