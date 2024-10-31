@@ -128,9 +128,7 @@
         "allowed_crud": "DELETE_INSERT_UPDATE",
         "brick_type": "budunit",
         "optional_args": {
-            "base_item_active_requisite": {
-                "obj_class": "bool"
-            }
+            "base_item_active_requisite": {}
         },
         "required_args": {
             "base": {},
@@ -164,16 +162,10 @@
             "denom": {},
             "gogo_want": {},
             "mass": {},
-            "morph": {
-                "obj_class": "bool"
-            },
+            "morph": {},
             "numor": {},
-            "pledge": {
-                "obj_class": "bool"
-            },
-            "problem_bool": {
-                "obj_class": "bool"
-            },
+            "pledge": {},
+            "problem_bool": {},
             "stop_want": {}
         },
         "required_args": {

@@ -11,7 +11,7 @@ from src.f04_gift.atom_config import (
 )
 from src.f09_brick.pandas_tool import (
     get_ordered_csv,
-    get_sorting_priority_column_headers as sorting_columns,
+    get_brick_elements_sort_order as sorting_columns,
 )
 from src.f08_filter.filter import filterunit_shop
 from src.f09_brick.filter_init_tool import (

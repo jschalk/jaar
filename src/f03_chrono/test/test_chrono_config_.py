@@ -167,7 +167,7 @@ def test_get_default_timeline_config_dict_IsValid():
     assert validate_timeline_config(default_config)
 
 
-def test_is_timeline_config_valid_ReturnsObj_CheckElementsRepeat():
+def test_is_timeline_config_valid_ReturnsObj_CheckObjsRepeat():
     # ESTABLISH / WHEN / THEN
     orig_creg_config = get_creg_config()
     assert validate_timeline_config(orig_creg_config)

@@ -74,6 +74,7 @@ from src.f07_fiscal.fiscal_config import (
     weekday_order_str,
 )
 from src.f08_filter.filter_config import (
+    eon_id_str,
     otx_road_delimiter_str,
     inx_road_delimiter_str,
     unknown_word_str,
@@ -84,7 +85,8 @@ from src.f08_filter.filter_config import (
     get_filter_args_category_mapping,
 )
 from src.f09_brick.pandas_tool import (
-    get_sorting_priority_column_headers,
+    get_brick_elements_sort_order,
+    get_brick_sqlite_type,
     save_dataframe_to_csv,
     get_ordered_csv,
     get_all_excel_sheetnames,
@@ -94,13 +96,13 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame, ExcelWriter
 
 
-def test_get_sorting_priority_column_headers_ReturnsObj():
+def test_get_brick_elements_sort_order_ReturnsObj():
     # ESTABLISH / WHEN
-    table_sorting_priority = get_sorting_priority_column_headers()
+    table_sorting_priority = get_brick_elements_sort_order()
 
     # THEN
     assert table_sorting_priority[0] == face_id_str()
-    assert table_sorting_priority[1] == "eon_id"
+    assert table_sorting_priority[1] == eon_id_str()
     assert table_sorting_priority[2] == fiscal_id_str()
     assert table_sorting_priority[3] == obj_class_str()
     assert table_sorting_priority[4] == owner_id_str()
@@ -180,10 +182,87 @@ def test_get_sorting_priority_column_headers_ReturnsObj():
     atom_fiscal_filter_args = atom_args
     atom_fiscal_filter_args.update(fiscal_args)
     atom_fiscal_filter_args.update(filter_args)
-    table_sorting_priority.remove("eon_id")
+    table_sorting_priority.remove(eon_id_str())
     table_sorting_priority.remove(face_id_str())
-    table_sorting_priority.remove("obj_class")
+    table_sorting_priority.remove(obj_class_str())
     assert atom_fiscal_filter_args == set(table_sorting_priority)
+
+
+def test_get_brick_sqlite_type_ReturnsObj():
+    # ESTABLISH / WHEN
+    sqlite_types = get_brick_sqlite_type()
+
+    # THEN
+    assert set(sqlite_types.keys()) == set(get_brick_elements_sort_order())
+    assert sqlite_types.get(face_id_str()) == "TEXT" == "TEXT"
+    assert sqlite_types.get(eon_id_str()) == "INTEGER"
+    assert sqlite_types.get(fiscal_id_str()) == "TEXT"
+    assert sqlite_types.get(obj_class_str()) == "TEXT"
+    assert sqlite_types.get(owner_id_str()) == "TEXT"
+    assert sqlite_types.get(acct_id_str()) == "TEXT"
+    assert sqlite_types.get(group_id_str()) == "TEXT"
+    assert sqlite_types.get(parent_road_str()) == "TEXT"
+    assert sqlite_types.get(label_str()) == "TEXT"
+    assert sqlite_types.get(road_str()) == "TEXT"
+    assert sqlite_types.get(base_str()) == "TEXT"
+    assert sqlite_types.get("need") == "TEXT"
+    assert sqlite_types.get("pick") == "TEXT"
+    assert sqlite_types.get(team_id_str()) == "TEXT"
+    assert sqlite_types.get(awardee_id_str()) == "TEXT"
+    assert sqlite_types.get(healer_id_str()) == "TEXT"
+    assert sqlite_types.get(time_id_str()) == "INTEGER"
+    assert sqlite_types.get(begin_str()) == "REAL"
+    assert sqlite_types.get(close_str()) == "REAL"
+    assert sqlite_types.get(addin_str()) == "REAL"
+    assert sqlite_types.get(numor_str()) == "REAL"
+    assert sqlite_types.get(denom_str()) == "REAL"
+    assert sqlite_types.get(morph_str()) == "INTEGER"
+    assert sqlite_types.get(gogo_want_str()) == "REAL"
+    assert sqlite_types.get(stop_want_str()) == "REAL"
+    assert sqlite_types.get(base_item_active_requisite_str()) == "TEXT"
+    assert sqlite_types.get(credit_belief_str()) == "REAL"
+    assert sqlite_types.get(debtit_belief_str()) == "REAL"
+    assert sqlite_types.get(credit_vote_str()) == "REAL"
+    assert sqlite_types.get(debtit_vote_str()) == "REAL"
+    assert sqlite_types.get(credor_respect_str()) == "REAL"
+    assert sqlite_types.get(debtor_respect_str()) == "REAL"
+    assert sqlite_types.get(fopen_str()) == "REAL"
+    assert sqlite_types.get(fnigh_str()) == "REAL"
+    assert sqlite_types.get("fund_pool") == "REAL"
+    assert sqlite_types.get(give_force_str()) == "REAL"
+    assert sqlite_types.get(mass_str()) == "REAL"
+    assert sqlite_types.get("max_tree_traverse") == "INT"
+    assert sqlite_types.get("nigh") == "REAL"
+    assert sqlite_types.get("open") == "REAL"
+    assert sqlite_types.get("divisor") == "REAL"
+    assert sqlite_types.get(pledge_str()) == "INTEGER"
+    assert sqlite_types.get("problem_bool") == "INTEGER"
+    assert sqlite_types.get("purview_time_id") == "INTEGER"
+    assert sqlite_types.get(take_force_str()) == "REAL"
+    assert sqlite_types.get("tally") == "REAL"
+    assert sqlite_types.get(fund_coin_str()) == "REAL"
+    assert sqlite_types.get(penny_str()) == "REAL"
+    assert sqlite_types.get(respect_bit_str()) == "REAL"
+    assert sqlite_types.get(current_time_str()) == "INTEGER"
+    assert sqlite_types.get(amount_str()) == "REAL"
+    assert sqlite_types.get(month_label_str()) == "TEXT"
+    assert sqlite_types.get(hour_label_str()) == "TEXT"
+    assert sqlite_types.get(cumlative_minute_str()) == "INTEGER"
+    assert sqlite_types.get(cumlative_day_str()) == "INTEGER"
+    assert sqlite_types.get(weekday_label_str()) == "TEXT"
+    assert sqlite_types.get(weekday_order_str()) == "INTEGER"
+    assert sqlite_types.get(otx_road_delimiter_str()) == "TEXT"
+    assert sqlite_types.get(inx_road_delimiter_str()) == "TEXT"
+    assert sqlite_types.get(unknown_word_str()) == "TEXT"
+    assert sqlite_types.get(otx_word_str()) == "TEXT"
+    assert sqlite_types.get(inx_word_str()) == "TEXT"
+    assert sqlite_types.get(otx_label_str()) == "TEXT"
+    assert sqlite_types.get(inx_label_str()) == "TEXT"
+    assert sqlite_types.get(road_delimiter_str()) == "TEXT"
+    assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
+    assert sqlite_types.get(quota_str()) == "REAL"
+    assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
+    assert sqlite_types.get(timeline_label_str()) == "TEXT"
 
 
 def test_get_ordered_csv_ReturnsObj():
