@@ -4,3 +4,7 @@ from src.f09_brick.pandas_tool import get_all_excel_sheetnames
 
 def get_all_excel_bricksheets(dir: str) -> set[str, str, str]:
     return get_all_excel_sheetnames(dir, get_brick_numbers())
+
+
+def get_all_brick_dataframes():
+    pass
