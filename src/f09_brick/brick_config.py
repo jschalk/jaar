@@ -46,6 +46,44 @@ def attributes_str() -> str:
     return "attributes"
 
 
+def insert_one_time_str() -> str:
+    return "INSERT_ONE_TIME"
+
+
+def insert_mulitple_str() -> str:
+    return "INSERT_MULITPLE"
+
+
+def delete_insert_update_str() -> str:
+    return "DELETE_INSERT_UPDATE"
+
+
+def insert_update_str() -> str:
+    return "INSERT_UPDATE"
+
+
+def delete_insert_str() -> str:
+    return "DELETE_INSERT"
+
+
+def delete_update_str() -> str:
+    return "DELETE_UPDATE"
+
+
+def get_allowed_curds() -> set[str]:
+    return {
+        "INSERT_ONE_TIME",
+        "INSERT_MULITPLE",
+        "DELETE_INSERT_UPDATE",
+        "INSERT_UPDATE",
+        "DELETE_INSERT",
+        "DELETE_UPDATE",
+        "UPDATE",
+        "DELETE",
+        "INSERT",
+    }
+
+
 def get_brick_formats_dir() -> str:
     return f"{src_brick_dir()}/brick_formats"
 

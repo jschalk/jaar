@@ -50,6 +50,13 @@ from src.f09_brick.brick_config import (
     allowed_crud_str,
     attributes_str,
     categorys_str,
+    insert_one_time_str,
+    insert_mulitple_str,
+    delete_insert_update_str,
+    insert_update_str,
+    delete_insert_str,
+    delete_update_str,
+    get_allowed_curds,
     get_brickref_dict,
     config_file_dir,
     get_brick_config_file_name,
@@ -71,7 +78,29 @@ def test_str_functions_ReturnObj():
     assert allowed_crud_str() == "allowed_crud"
     assert attributes_str() == "attributes"
     assert categorys_str() == "categorys"
+    assert insert_one_time_str() == "INSERT_ONE_TIME"
+    assert insert_mulitple_str() == "INSERT_MULITPLE"
+    assert delete_insert_update_str() == "DELETE_INSERT_UPDATE"
+    assert insert_update_str() == "INSERT_UPDATE"
+    assert delete_insert_str() == "DELETE_INSERT"
+    assert delete_update_str() == "DELETE_UPDATE"
+
     assert get_brick_types() == {budunit_str(), fiscalunit_str(), filterunit_str()}
+
+
+def test_get_allowed_curds_ReturnObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_allowed_curds() == {
+        insert_one_time_str(),
+        insert_mulitple_str(),
+        delete_insert_update_str(),
+        insert_update_str(),
+        delete_insert_str(),
+        delete_update_str(),
+        atom_insert(),
+        atom_delete(),
+        atom_update(),
+    }
 
 
 def test_get_brick_config_file_name_ReturnsObj():
@@ -136,6 +165,8 @@ def _validate_brick_config(x_brick_config: dict):
         if brick_dict.get(brick_type_str()) == filterunit_str():
             sub_category = filter_config_dict.get(brick_category)
 
+        assert brick_dict.get(allowed_crud_str()) in get_allowed_curds()
+
         if brick_category in {
             fiscal_timeline_hour_str(),
             fiscal_timeline_month_str(),
@@ -176,19 +207,19 @@ def _validate_brick_config(x_brick_config: dict):
             and sub_category.get(atom_insert()) is None
             and sub_category.get(atom_delete()) is None
         ):
-            assert brick_dict.get(allowed_crud_str()) == "UPDATE"
+            assert brick_dict.get(allowed_crud_str()) == atom_update()
         elif (
             sub_category.get(atom_update()) is None
             and sub_category.get(atom_insert()) != None
             and sub_category.get(atom_delete()) is None
         ):
-            assert brick_dict.get(allowed_crud_str()) == "INSERT"
+            assert brick_dict.get(allowed_crud_str()) == atom_insert()
         elif (
             sub_category.get(atom_update()) is None
             and sub_category.get(atom_insert()) is None
             and sub_category.get(atom_delete()) != None
         ):
-            assert brick_dict.get(allowed_crud_str()) == "DELETE"
+            assert brick_dict.get(allowed_crud_str()) == atom_delete()
         else:
             test_str = f"{allowed_crud_str()} not checked by test"
             assert brick_dict.get(allowed_crud_str()) == test_str
