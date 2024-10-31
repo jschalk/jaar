@@ -22,6 +22,10 @@ def get_filter_categorys() -> set[str]:
     return set(get_filter_config_dict().keys())
 
 
+def filterunit_str() -> str:
+    return "filterunit"
+
+
 def eon_id_str() -> str:
     return "eon_id"
 

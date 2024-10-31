@@ -33,7 +33,6 @@ def test_create_categorys_brick_format_dict_ReturnObj(rebuild_bool):
     assert gogo_want_str() in bud_itemunit_attributes
 
     rebuild_format_jsons(rebuild_bool)
-    # assert 1 == 2
 
 
 def rebuild_format_jsons(x_rebuild_format_jsons: bool):

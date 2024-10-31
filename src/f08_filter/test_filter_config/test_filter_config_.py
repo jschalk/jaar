@@ -1,9 +1,4 @@
 from src.f04_gift.atom_config import (
-    fiscal_id_str,
-    penny_str,
-    fund_coin_str,
-    penny_str,
-    respect_bit_str,
     required_args_str,
     optional_args_str,
     atom_update,
@@ -11,15 +6,6 @@ from src.f04_gift.atom_config import (
     atom_delete,
     normal_specs_str,
     obj_class_str,
-    type_AcctID_str,
-    type_GroupID_str,
-    type_RoadNode_str,
-    type_RoadUnit_str,
-)
-from src.f07_fiscal.fiscal_config import (
-    config_file_dir,
-    current_time_str,
-    cumlative_minute_str,
 )
 from src.f08_filter.filter_config import (
     config_file_dir,
@@ -27,6 +13,7 @@ from src.f08_filter.filter_config import (
     get_filter_config_file_name,
     get_filter_config_dict,
     get_filter_args_category_mapping,
+    filterunit_str,
     eon_id_str,
     otx_road_delimiter_str,
     inx_road_delimiter_str,
@@ -44,6 +31,7 @@ from os import getcwd as os_getcwd
 
 
 def test_str_functions_ReturnsObj():
+    assert filterunit_str() == "filterunit"
     assert otx_road_delimiter_str() == "otx_road_delimiter"
     assert inx_road_delimiter_str() == "inx_road_delimiter"
     assert inx_word_str() == "inx_word"

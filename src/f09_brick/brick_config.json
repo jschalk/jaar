@@ -1,7 +1,7 @@
 {
     "bridge_explicit_label": {
         "allowed_crud": "INSERT_ONE_TIME",
-        "brick_type": "filter",
+        "brick_type": "filterunit",
         "optional_args": {},
         "required_args": {
             "inx_label": {
@@ -23,7 +23,7 @@
     },
     "bridge_otx_to_inx": {
         "allowed_crud": "INSERT_ONE_TIME",
-        "brick_type": "filter",
+        "brick_type": "filterunit",
         "optional_args": {},
         "required_args": {
             "inx_road_delimiter": {
@@ -45,7 +45,7 @@
     },
     "bud_acct_membership": {
         "allowed_crud": "DELETE_INSERT_UPDATE",
-        "brick_type": "bud",
+        "brick_type": "budunit",
         "optional_args": {
             "credit_vote": {
                 "obj_class": "int",
@@ -77,7 +77,7 @@
     },
     "bud_acctunit": {
         "allowed_crud": "DELETE_INSERT_UPDATE",
-        "brick_type": "bud",
+        "brick_type": "budunit",
         "optional_args": {
             "credit_belief": {
                 "obj_class": "int",
@@ -103,7 +103,7 @@
     },
     "bud_item_awardlink": {
         "allowed_crud": "DELETE_INSERT_UPDATE",
-        "brick_type": "bud",
+        "brick_type": "budunit",
         "optional_args": {
             "give_force": {
                 "obj_class": "float",
@@ -135,7 +135,7 @@
     },
     "bud_item_factunit": {
         "allowed_crud": "DELETE_INSERT_UPDATE",
-        "brick_type": "bud",
+        "brick_type": "budunit",
         "optional_args": {
             "fnigh": {
                 "obj_class": "float",
@@ -171,7 +171,7 @@
     },
     "bud_item_healerlink": {
         "allowed_crud": "DELETE_INSERT",
-        "brick_type": "bud",
+        "brick_type": "budunit",
         "optional_args": {},
         "required_args": {
             "fiscal_id": {
@@ -194,7 +194,7 @@
     },
     "bud_item_reason_premiseunit": {
         "allowed_crud": "DELETE_INSERT_UPDATE",
-        "brick_type": "bud",
+        "brick_type": "budunit",
         "optional_args": {
             "divisor": {
                 "obj_class": "int",
@@ -235,7 +235,7 @@
     },
     "bud_item_reasonunit": {
         "allowed_crud": "DELETE_INSERT_UPDATE",
-        "brick_type": "bud",
+        "brick_type": "budunit",
         "optional_args": {
             "base_item_active_requisite": {
                 "obj_class": "bool",
@@ -263,7 +263,7 @@
     },
     "bud_item_teamlink": {
         "allowed_crud": "DELETE_INSERT",
-        "brick_type": "bud",
+        "brick_type": "budunit",
         "optional_args": {},
         "required_args": {
             "fiscal_id": {
@@ -286,7 +286,7 @@
     },
     "bud_itemunit": {
         "allowed_crud": "DELETE_INSERT_UPDATE",
-        "brick_type": "bud",
+        "brick_type": "budunit",
         "optional_args": {
             "addin": {
                 "obj_class": "float",
@@ -354,7 +354,7 @@
     },
     "budunit": {
         "allowed_crud": "UPDATE",
-        "brick_type": "bud",
+        "brick_type": "budunit",
         "optional_args": {
             "credor_respect": {
                 "obj_class": "int",
@@ -404,7 +404,7 @@
     },
     "fiscal_cashbook": {
         "allowed_crud": "INSERT_MULITPLE",
-        "brick_type": "fiscal",
+        "brick_type": "fiscalunit",
         "optional_args": {
             "amount": {}
         },
@@ -421,7 +421,7 @@
     },
     "fiscal_purview_episode": {
         "allowed_crud": "INSERT_MULITPLE",
-        "brick_type": "fiscal",
+        "brick_type": "fiscalunit",
         "optional_args": {
             "quota": {}
         },
@@ -438,7 +438,7 @@
     },
     "fiscal_timeline_hour": {
         "allowed_crud": "INSERT_ONE_TIME",
-        "brick_type": "fiscal",
+        "brick_type": "fiscalunit",
         "optional_args": {},
         "required_args": {
             "cumlative_minute": {},
@@ -453,7 +453,7 @@
     },
     "fiscal_timeline_month": {
         "allowed_crud": "INSERT_ONE_TIME",
-        "brick_type": "fiscal",
+        "brick_type": "fiscalunit",
         "optional_args": {},
         "required_args": {
             "cumlative_day": {},
@@ -468,7 +468,7 @@
     },
     "fiscal_timeline_weekday": {
         "allowed_crud": "INSERT_ONE_TIME",
-        "brick_type": "fiscal",
+        "brick_type": "fiscalunit",
         "optional_args": {},
         "required_args": {
             "fiscal_id": {
@@ -483,7 +483,7 @@
     },
     "fiscalunit": {
         "allowed_crud": "INSERT_ONE_TIME",
-        "brick_type": "fiscal",
+        "brick_type": "fiscalunit",
         "optional_args": {
             "current_time": {},
             "fund_coin": {},

@@ -37,6 +37,7 @@ from src.f07_fiscal.fiscal_config import (
 )
 from src.f08_filter.filter_config import (
     eon_id_str,
+    filterunit_str,
     bridge_explicit_label_str,
     bridge_otx_to_inx_str,
     get_filter_categorys,
@@ -44,6 +45,7 @@ from src.f08_filter.filter_config import (
 )
 from src.f09_brick.brick_config import (
     brick_type_str,
+    get_brick_types,
     brick_number_str,
     allowed_crud_str,
     attributes_str,
@@ -69,6 +71,7 @@ def test_str_functions_ReturnObj():
     assert allowed_crud_str() == "allowed_crud"
     assert attributes_str() == "attributes"
     assert categorys_str() == "categorys"
+    assert get_brick_types() == {budunit_str(), fiscalunit_str(), filterunit_str()}
 
 
 def test_get_brick_config_file_name_ReturnsObj():
@@ -118,7 +121,7 @@ def _validate_brick_config(x_brick_config: dict):
     # for every brick_format file there exists a unique brick_number always with leading zeros to make 5 digits
     for brick_category, brick_dict in x_brick_config.items():
         print(f"{brick_category=}")
-        assert brick_dict.get(brick_type_str()) in {"fiscal", "bud", "filter"}
+        assert brick_dict.get(brick_type_str()) in get_brick_types()
         assert brick_dict.get(required_args_str()) is not None
         assert brick_dict.get(optional_args_str()) is not None
         assert brick_dict.get(allowed_crud_str()) is not None
@@ -126,11 +129,11 @@ def _validate_brick_config(x_brick_config: dict):
         assert brick_dict.get(atom_insert()) is None
         assert brick_dict.get(atom_delete()) is None
         assert brick_dict.get(normal_specs_str()) is None
-        if brick_dict.get(brick_type_str()) == "bud":
+        if brick_dict.get(brick_type_str()) == budunit_str():
             sub_category = atom_config_dict.get(brick_category)
-        if brick_dict.get(brick_type_str()) == "fiscal":
+        if brick_dict.get(brick_type_str()) == fiscalunit_str():
             sub_category = fiscal_config_dict.get(brick_category)
-        if brick_dict.get(brick_type_str()) == "filter":
+        if brick_dict.get(brick_type_str()) == filterunit_str():
             sub_category = filter_config_dict.get(brick_category)
 
         if brick_category in {
@@ -206,7 +209,7 @@ def _validate_brick_config(x_brick_config: dict):
         assert sub_optional_args_keys.issubset(brick_optional_args_keys)
 
         assert fiscal_id_str() not in brick_optional_args_keys
-        if brick_dict.get(brick_type_str()) != "filter":
+        if brick_dict.get(brick_type_str()) != filterunit_str():
             assert fiscal_id_str() in brick_required_args_keys
             assert time_id_str() in brick_required_args_keys
 
