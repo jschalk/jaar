@@ -1,43 +1,19 @@
 {
     "attributes": {
-        "addin": {
-            "column_order": 6
-        },
-        "begin": {
-            "column_order": 4
-        },
-        "close": {
-            "column_order": 5
-        },
-        "denom": {
-            "column_order": 8
-        },
-        "fiscal_id": {
-            "column_order": 0
-        },
-        "gogo_want": {
-            "column_order": 10
-        },
-        "label": {
-            "column_order": 3,
-            "sort_order": 2
-        },
-        "morph": {
-            "column_order": 9
-        },
-        "numor": {
-            "column_order": 7
-        },
-        "owner_id": {
-            "column_order": 1
-        },
-        "parent_road": {
-            "column_order": 2,
-            "sort_order": 1
-        },
-        "stop_want": {
-            "column_order": 11
-        }
+        "addin": {},
+        "begin": {},
+        "close": {},
+        "denom": {},
+        "eon_id": {},
+        "face_id": {},
+        "fiscal_id": {},
+        "gogo_want": {},
+        "label": {},
+        "morph": {},
+        "numor": {},
+        "owner_id": {},
+        "parent_road": {},
+        "stop_want": {}
     },
     "brick_number": "br00019",
     "categorys": [

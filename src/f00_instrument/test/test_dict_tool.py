@@ -448,11 +448,11 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario0():
     x_id = "music56"
     sue_str = "Sue"
     bob_str = "Bob"
-    headerless_csv = f"""{x_id},{sue_str},Bob,13,29
-{x_id},{sue_str},Sue,11,23
-{x_id},{sue_str},Yao,41,37
-{x_id},{sue_str},Zia,41,37
-{x_id},{bob_str},Yao,41,37
+    headerless_csv = f""",,{x_id},{sue_str},Bob,13,29
+,,{x_id},{sue_str},Sue,11,23
+,,{x_id},{sue_str},Yao,41,37
+,,{x_id},{sue_str},Zia,41,37
+,,{x_id},{bob_str},Yao,41,37
 """
 
     # WHEN
@@ -460,12 +460,12 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario0():
 
     # THEN
     # print(f"{u_dict=}")
-    static_sue_csv = f"""{x_id},{sue_str},Bob,13,29
-{x_id},{sue_str},Sue,11,23
-{x_id},{sue_str},Yao,41,37
-{x_id},{sue_str},Zia,41,37
+    static_sue_csv = f""",,{x_id},{sue_str},Bob,13,29
+,,{x_id},{sue_str},Sue,11,23
+,,{x_id},{sue_str},Yao,41,37
+,,{x_id},{sue_str},Zia,41,37
 """
-    static_bob_csv = f"""{x_id},{bob_str},Yao,41,37
+    static_bob_csv = f""",,{x_id},{bob_str},Yao,41,37
 """
     generated_owner_id_dict = u_dict.get(x_id)
     assert generated_owner_id_dict
@@ -484,11 +484,11 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
     music4_id = "music4"
     sue_str = "Sue"
     bob_str = "Bob"
-    headerless_csv = f"""{music3_id},{sue_str},Bob,13,29
-{music4_id},{sue_str},Sue,11,23
-{music4_id},{sue_str},Yao,41,37
-{music4_id},{sue_str},Zia,41,37
-{music4_id},{bob_str},Yao,41,37
+    headerless_csv = f""",,{music3_id},{sue_str},Bob,13,29
+,,{music4_id},{sue_str},Sue,11,23
+,,{music4_id},{sue_str},Yao,41,37
+,,{music4_id},{sue_str},Zia,41,37
+,,{music4_id},{bob_str},Yao,41,37
 """
 
     # WHEN
@@ -496,13 +496,13 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
 
     # THEN
     # print(f"{u_dict=}")
-    music3_sue_csv = f"""{music3_id},{sue_str},Bob,13,29
+    music3_sue_csv = f""",,{music3_id},{sue_str},Bob,13,29
 """
-    music4_sue_csv = f"""{music4_id},{sue_str},Sue,11,23
-{music4_id},{sue_str},Yao,41,37
-{music4_id},{sue_str},Zia,41,37
+    music4_sue_csv = f""",,{music4_id},{sue_str},Sue,11,23
+,,{music4_id},{sue_str},Yao,41,37
+,,{music4_id},{sue_str},Zia,41,37
 """
-    static_bob_csv = f"""{music4_id},{bob_str},Yao,41,37
+    static_bob_csv = f""",,{music4_id},{bob_str},Yao,41,37
 """
     music3_dict = tiered_dict.get(music3_id)
     music4_dict = tiered_dict.get(music4_id)

@@ -76,11 +76,11 @@ def test_fiscal_id_owner_id_nested_csv_dict_ReturnsObj_Scenario0():
     music_fiscal_id = "music56"
     sue_str = "Sue"
     bob_str = "Bob"
-    headerless_csv = f"""{music_fiscal_id},{sue_str},Bob,13,29
-{music_fiscal_id},{sue_str},Sue,11,23
-{music_fiscal_id},{sue_str},Yao,41,37
-{music_fiscal_id},{sue_str},Zia,41,37
-{music_fiscal_id},{bob_str},Yao,41,37
+    headerless_csv = f"""face_x,eon_x,{music_fiscal_id},{sue_str},Bob,13,29
+,,{music_fiscal_id},{sue_str},Sue,11,23
+,,{music_fiscal_id},{sue_str},Yao,41,37
+,,{music_fiscal_id},{sue_str},Zia,41,37
+,,{music_fiscal_id},{bob_str},Yao,41,37
 """
 
     # WHEN
@@ -88,12 +88,12 @@ def test_fiscal_id_owner_id_nested_csv_dict_ReturnsObj_Scenario0():
 
     # THEN
     # print(f"{u_dict=}")
-    static_sue_csv = f"""{music_fiscal_id},{sue_str},Bob,13,29
-{music_fiscal_id},{sue_str},Sue,11,23
-{music_fiscal_id},{sue_str},Yao,41,37
-{music_fiscal_id},{sue_str},Zia,41,37
+    static_sue_csv = f"""face_x,eon_x,{music_fiscal_id},{sue_str},Bob,13,29
+,,{music_fiscal_id},{sue_str},Sue,11,23
+,,{music_fiscal_id},{sue_str},Yao,41,37
+,,{music_fiscal_id},{sue_str},Zia,41,37
 """
-    static_bob_csv = f"""{music_fiscal_id},{bob_str},Yao,41,37
+    static_bob_csv = f""",,{music_fiscal_id},{bob_str},Yao,41,37
 """
     generated_owner_id_dict = u_dict.get(music_fiscal_id)
     assert generated_owner_id_dict

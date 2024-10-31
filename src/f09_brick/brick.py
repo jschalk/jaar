@@ -36,7 +36,6 @@ class BrickRef:
         self._attributes.add(x_attribute)
 
     def get_headers_list(self) -> list[str]:
-        print(f"{self._attributes}")
         return get_new_sorting_columns(self._attributes)
 
 
@@ -134,6 +133,8 @@ def save_brick_csv(x_brickname: str, x_budunit: BudUnit, x_dir: str, x_filename:
 
 def get_csv_brickref(title_row: list[str]) -> BrickRef:
     headers_str = create_sorted_concatenated_str(title_row)
+    headers_str = headers_str.replace("face_id,", "")
+    headers_str = headers_str.replace("eon_id,", "")
     x_brickname = get_brick_format_headers().get(headers_str)
     return get_brickref(x_brickname)
 
@@ -173,6 +174,8 @@ def _load_individual_brick_csv(
 def load_brick_csv(fiscals_dir: str, x_file_dir: str, x_filename: str):
     x_csv = open_file(x_file_dir, x_filename)
     headers_list, headerless_csv = extract_csv_headers(x_csv)
+    print(f"{headers_list=}")
+    print(f"{headerless_csv=}")
     nested_csv = fiscal_id_owner_id_nested_csv_dict(headerless_csv, delimiter=",")
     for x_fiscal_id, fiscal_dict in nested_csv.items():
         for x_owner_id, owner_csv in fiscal_dict.items():
