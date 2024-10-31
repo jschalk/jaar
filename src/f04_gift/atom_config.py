@@ -467,7 +467,7 @@ def save_atom_config_file(atom_config_dict):
 
 
 def get_atom_categorys() -> set:
-    return get_atom_config_dict().keys()
+    return set(get_atom_config_dict().keys())
 
 
 def is_atom_category(category_str: str) -> bool:

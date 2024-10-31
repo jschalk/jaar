@@ -19,7 +19,7 @@ def get_filter_config_dict() -> dict:
 
 
 def get_filter_categorys() -> set[str]:
-    return get_filter_config_dict().keys()
+    return set(get_filter_config_dict().keys())
 
 
 def eon_id_str() -> str:

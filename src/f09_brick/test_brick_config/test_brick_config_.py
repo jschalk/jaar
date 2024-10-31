@@ -1,3 +1,4 @@
+from src.f01_road.finance_tran import time_id_str
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
     bud_acctunit_str,
@@ -34,11 +35,19 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_month_str,
     fiscal_timeline_weekday_str,
 )
-from src.f08_filter.filter_config import eon_id_str
+from src.f08_filter.filter_config import (
+    eon_id_str,
+    bridge_explicit_label_str,
+    bridge_otx_to_inx_str,
+    get_filter_categorys,
+    get_filter_config_dict,
+)
 from src.f09_brick.brick_config import (
-    time_id_str,
+    brick_type_str,
     brick_number_str,
     allowed_crud_str,
+    attributes_str,
+    categorys_str,
     get_brickref_dict,
     config_file_dir,
     get_brick_config_file_name,
@@ -51,6 +60,15 @@ from src.f09_brick.brick_config import (
 )
 from src.f08_filter.filter_config import get_filter_categorys
 from os import getcwd as os_getcwd
+
+
+def test_str_functions_ReturnObj():
+    # ESTABLISH / WHEN / THEN
+    assert brick_type_str() == "brick_type"
+    assert brick_number_str() == "brick_number"
+    assert allowed_crud_str() == "allowed_crud"
+    assert attributes_str() == "attributes"
+    assert categorys_str() == "categorys"
 
 
 def test_get_brick_config_file_name_ReturnsObj():
@@ -86,21 +104,21 @@ def test_get_brick_config_dict_ReturnsObj():
     assert bud_item_reasonunit_str() in brick_config_categorys
     assert bud_itemunit_str() in brick_config_categorys
     assert budunit_str() in brick_config_categorys
-    atom_config_categorys = set(get_atom_config_dict().keys())
-    assert atom_config_categorys.issubset(brick_config_categorys)
-    fiscal_config_categorys = set(get_fiscal_config_dict().keys())
-    assert fiscal_config_categorys.issubset(brick_config_categorys)
-    assert len(x_brick_config) == 16
+    assert get_atom_categorys().issubset(brick_config_categorys)
+    assert get_fiscal_categorys().issubset(brick_config_categorys)
+    assert get_filter_categorys().issubset(brick_config_categorys)
+    assert len(x_brick_config) == 18
     _validate_brick_config(x_brick_config)
 
 
 def _validate_brick_config(x_brick_config: dict):
     atom_config_dict = get_atom_config_dict()
     fiscal_config_dict = get_fiscal_config_dict()
+    filter_config_dict = get_filter_config_dict()
     # for every brick_format file there exists a unique brick_number always with leading zeros to make 5 digits
     for brick_category, brick_dict in x_brick_config.items():
         print(f"{brick_category=}")
-        assert brick_dict.get("brick_type") in {"fiscal", "bud"}
+        assert brick_dict.get(brick_type_str()) in {"fiscal", "bud", "filter"}
         assert brick_dict.get(required_args_str()) is not None
         assert brick_dict.get(optional_args_str()) is not None
         assert brick_dict.get(allowed_crud_str()) is not None
@@ -108,16 +126,20 @@ def _validate_brick_config(x_brick_config: dict):
         assert brick_dict.get(atom_insert()) is None
         assert brick_dict.get(atom_delete()) is None
         assert brick_dict.get(normal_specs_str()) is None
-        if brick_category[:3] == "bud":
+        if brick_dict.get(brick_type_str()) == "bud":
             sub_category = atom_config_dict.get(brick_category)
-        if brick_category[:3] == "fis":
+        if brick_dict.get(brick_type_str()) == "fiscal":
             sub_category = fiscal_config_dict.get(brick_category)
+        if brick_dict.get(brick_type_str()) == "filter":
+            sub_category = filter_config_dict.get(brick_category)
 
         if brick_category in {
             fiscal_timeline_hour_str(),
             fiscal_timeline_month_str(),
             fiscal_timeline_weekday_str(),
             fiscalunit_str(),
+            bridge_explicit_label_str(),
+            bridge_otx_to_inx_str(),
         }:
             assert brick_dict.get(allowed_crud_str()) == "INSERT_ONE_TIME"
         elif brick_category in {fiscal_purview_episode_str(), fiscal_cashbook_str()}:
@@ -164,6 +186,9 @@ def _validate_brick_config(x_brick_config: dict):
             and sub_category.get(atom_delete()) != None
         ):
             assert brick_dict.get(allowed_crud_str()) == "DELETE"
+        else:
+            test_str = f"{allowed_crud_str()} not checked by test"
+            assert brick_dict.get(allowed_crud_str()) == test_str
 
         sub_required_args_keys = set(sub_category.get(required_args_str()).keys())
         brick_required_args_keys = set(brick_dict.get(required_args_str()).keys())
@@ -181,8 +206,9 @@ def _validate_brick_config(x_brick_config: dict):
         assert sub_optional_args_keys.issubset(brick_optional_args_keys)
 
         assert fiscal_id_str() not in brick_optional_args_keys
-        assert fiscal_id_str() in brick_required_args_keys
-        assert time_id_str() in brick_required_args_keys
+        if brick_dict.get(brick_type_str()) != "filter":
+            assert fiscal_id_str() in brick_required_args_keys
+            assert time_id_str() in brick_required_args_keys
 
 
 def test_get_brick_format_filenames_ReturnsObj():
@@ -217,15 +243,15 @@ def _validate_brick_format_files(brick_filenames: set[str]):
         assert brick_number_value[2:8] == brick_filename[13:18]
         brick_numbers_set.add(brick_number_value)
 
-        brick_format_categorys = brickref_dict.get("categorys")
+        brick_format_categorys = brickref_dict.get(categorys_str())
         assert brick_format_categorys is not None
         assert len(brick_format_categorys) > 0
         for brick_format_category in brick_format_categorys:
             assert brick_format_category in valid_brick_categorys
             print(f"{brick_format_category=}")
 
-        assert brickref_dict.get("attributes") is not None
-        brick_format_attributes = brickref_dict.get("attributes").keys()
+        assert brickref_dict.get(attributes_str()) is not None
+        brick_format_attributes = brickref_dict.get(attributes_str()).keys()
         # assert fiscal_id_str() in brick_format_attributes
         # assert face_id_str() in brick_format_attributes
         # assert eon_id_str() in brick_format_attributes
