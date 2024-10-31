@@ -69,10 +69,10 @@ def test_get_filter_config_dict_ReturnsObj():
     _validate_filter_config(filter_config)
     bridge_otx_to_inx_dict = filter_config.get(bridge_otx_to_inx_str())
     bridge_explicit_label_dict = filter_config.get(bridge_explicit_label_str())
-    assert len(bridge_otx_to_inx_dict.get(required_args_str())) == 5
-    assert len(bridge_explicit_label_dict.get(required_args_str())) == 5
-    assert len(bridge_otx_to_inx_dict.get(optional_args_str())) == 0
-    assert len(bridge_explicit_label_dict.get(optional_args_str())) == 0
+    assert len(bridge_otx_to_inx_dict.get(required_args_str())) == 1
+    assert len(bridge_explicit_label_dict.get(required_args_str())) == 1
+    assert len(bridge_otx_to_inx_dict.get(optional_args_str())) == 4
+    assert len(bridge_explicit_label_dict.get(optional_args_str())) == 4
 
     # assert gen_optional_args == x_filterunit_optional_args
     # assert len(filterunit_dict.get(optional_args_str())) == 9
