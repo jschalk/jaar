@@ -70,6 +70,10 @@ def delete_update_str() -> str:
     return "DELETE_UPDATE"
 
 
+def build_order_str() -> str:
+    return "build_order"
+
+
 def get_allowed_curds() -> set[str]:
     return {
         "INSERT_ONE_TIME",
