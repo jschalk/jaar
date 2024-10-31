@@ -239,6 +239,8 @@ def _validate_brick_config(x_brick_config: dict):
         # print(f"{brick_optional_args_keys=}")
         assert sub_optional_args_keys.issubset(brick_optional_args_keys)
 
+        assert face_id_str() in brick_required_args_keys
+        assert eon_id_str() in brick_required_args_keys
         assert fiscal_id_str() not in brick_optional_args_keys
         if brick_dict.get(brick_type_str()) != filterunit_str():
             assert fiscal_id_str() in brick_required_args_keys
