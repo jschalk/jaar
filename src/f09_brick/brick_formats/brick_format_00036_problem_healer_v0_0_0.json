@@ -1,28 +1,13 @@
 {
     "attributes": {
-        "fiscal_id": {
-            "column_order": 0,
-            "sort_order": 0
-        },
-        "healer_id": {
-            "column_order": 3,
-            "sort_order": 3
-        },
-        "label": {
-            "column_order": 3,
-            "sort_order": 3
-        },
-        "owner_id": {
-            "column_order": 1,
-            "sort_order": 1
-        },
-        "parent_road": {
-            "column_order": 2,
-            "sort_order": 2
-        },
-        "problem_bool": {
-            "column_order": 6
-        }
+        "eon_id": {},
+        "face_id": {},
+        "fiscal_id": {},
+        "healer_id": {},
+        "label": {},
+        "owner_id": {},
+        "parent_road": {},
+        "problem_bool": {}
     },
     "brick_number": "br00036",
     "categorys": [

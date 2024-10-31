@@ -1,6 +1,9 @@
 from src.f00_instrument.file import open_file
 from src.f00_instrument.dict_tool import get_dict_from_json
 from src.f01_road.jaar_config import get_json_filename
+from src.f02_bud.bud_tool import budunit_str
+from src.f07_fiscal.fiscal_config import fiscalunit_str
+from src.f08_filter.filter_config import filterunit_str
 from src.f09_brick.examples.brick_env import src_brick_dir
 from os import getcwd as os_getcwd
 
@@ -19,24 +22,20 @@ def get_brick_config_dict() -> dict:
     )
 
 
-def time_id_str() -> str:
-    return "time_id"
-
-
 def brick_number_str() -> str:
     return "brick_number"
 
 
+def brick_type_str() -> str:
+    return "brick_type"
+
+
+def get_brick_types() -> set[str]:
+    return {budunit_str(), fiscalunit_str(), filterunit_str()}
+
+
 def allowed_crud_str() -> str:
     return "allowed_crud"
-
-
-def column_order_str() -> str:
-    return "column_order"
-
-
-def sort_order_str() -> str:
-    return "sort_order"
 
 
 def categorys_str() -> str:
@@ -47,24 +46,42 @@ def attributes_str() -> str:
     return "attributes"
 
 
-def must_be_roadnode_str() -> str:
-    return "must_be_RoadNode"
+def insert_one_time_str() -> str:
+    return "INSERT_ONE_TIME"
 
 
-def must_be_roadunit_str() -> str:
-    return "must_be_RoadUnit"
+def insert_mulitple_str() -> str:
+    return "INSERT_MULITPLE"
 
 
-def must_be_str() -> str:
-    return "must_be_str"
+def delete_insert_update_str() -> str:
+    return "DELETE_INSERT_UPDATE"
 
 
-def must_be_number_str() -> str:
-    return "must_be_number"
+def insert_update_str() -> str:
+    return "INSERT_UPDATE"
 
 
-def must_be_bool_str() -> str:
-    return "must_be_bool"
+def delete_insert_str() -> str:
+    return "DELETE_INSERT"
+
+
+def delete_update_str() -> str:
+    return "DELETE_UPDATE"
+
+
+def get_allowed_curds() -> set[str]:
+    return {
+        "INSERT_ONE_TIME",
+        "INSERT_MULITPLE",
+        "DELETE_INSERT_UPDATE",
+        "INSERT_UPDATE",
+        "DELETE_INSERT",
+        "DELETE_UPDATE",
+        "UPDATE",
+        "DELETE",
+        "INSERT",
+    }
 
 
 def get_brick_formats_dir() -> str:

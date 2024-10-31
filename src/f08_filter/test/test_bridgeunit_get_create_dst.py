@@ -193,7 +193,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_group_id():
     assert group_id_bridgeunit.otx_exists(climb_otx) is False
 
 
-def test_BridgeUnit_get_create_inx_AddsMissingElementsTo_otx_to_inx_RoadNode():
+def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx_to_inx_RoadNode():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
@@ -217,7 +217,7 @@ def test_BridgeUnit_get_create_inx_AddsMissingElementsTo_otx_to_inx_RoadNode():
     assert roadnode_bridgeunit.otx_to_inx_exists(swim_str, swim_str)
 
 
-def test_BridgeUnit_get_create_inx_AddsMissingElementsTo_otx_to_inx_RoadUnit():
+def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx_to_inx_RoadUnit():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"

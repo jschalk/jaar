@@ -1,21 +1,11 @@
 {
     "attributes": {
-        "fiscal_id": {
-            "column_order": 0,
-            "sort_order": 0
-        },
-        "healer_id": {
-            "column_order": 3,
-            "sort_order": 3
-        },
-        "owner_id": {
-            "column_order": 1,
-            "sort_order": 1
-        },
-        "road": {
-            "column_order": 2,
-            "sort_order": 2
-        }
+        "eon_id": {},
+        "face_id": {},
+        "fiscal_id": {},
+        "healer_id": {},
+        "owner_id": {},
+        "road": {}
     },
     "brick_number": "br00025",
     "categorys": [

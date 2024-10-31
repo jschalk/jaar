@@ -7,10 +7,9 @@ from src.f04_gift.atom_config import (
     gogo_want_str,
     fiscal_id_str,
     owner_id_str,
-    column_order_str,
 )
 from src.f09_brick.formatbuilder import create_categorys_brick_format_dict
-from src.f09_brick.brick import categorys_str, attributes_str, sort_order_str
+from src.f09_brick.brick import categorys_str, attributes_str
 from src.f09_brick.brick_config import get_brick_formats_dir
 
 
@@ -27,25 +26,13 @@ def test_create_categorys_brick_format_dict_ReturnObj(rebuild_bool):
     assert bud_itemunit_dict.get(categorys_str()) == [bud_itemunit_str()]
     assert bud_itemunit_dict.get(attributes_str())
     bud_itemunit_attributes = bud_itemunit_dict.get(attributes_str())
-    assert bud_itemunit_attributes.get(fiscal_id_str())
-    assert bud_itemunit_attributes.get(owner_id_str())
-    fiscal_id_dict = bud_itemunit_attributes.get(fiscal_id_str())
-    owner_id_dict = bud_itemunit_attributes.get(owner_id_str())
-    assert fiscal_id_dict == {column_order_str(): 0, sort_order_str(): 0}
-    assert owner_id_dict == {column_order_str(): 1, sort_order_str(): 1}
+    assert fiscal_id_str() in bud_itemunit_attributes
+    assert owner_id_str() in bud_itemunit_attributes
+    assert parent_road_str() in bud_itemunit_attributes
+    assert label_str() in bud_itemunit_attributes
+    assert gogo_want_str() in bud_itemunit_attributes
 
-    assert bud_itemunit_attributes.get(parent_road_str())
-    assert bud_itemunit_attributes.get(label_str())
-    assert bud_itemunit_attributes.get(gogo_want_str())
-    parent_road_dict = bud_itemunit_attributes.get(parent_road_str())
-    label_dict = bud_itemunit_attributes.get(label_str())
-    gogo_want_dict = bud_itemunit_attributes.get(gogo_want_str())
-    assert gogo_want_dict == {column_order_str(): 13}
-
-    assert parent_road_dict == {column_order_str(): 2, sort_order_str(): 2}
-    assert label_dict == {column_order_str(): 3, sort_order_str(): 3}
     rebuild_format_jsons(rebuild_bool)
-    # assert 1 == 2
 
 
 def rebuild_format_jsons(x_rebuild_format_jsons: bool):

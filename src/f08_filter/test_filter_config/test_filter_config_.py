@@ -1,15 +1,4 @@
-from src.f03_chrono.chrono import (
-    c400_config_str,
-    timeline_label_str,
-    yr1_jan1_offset_str,
-    monthday_distortion_str,
-)
 from src.f04_gift.atom_config import (
-    fiscal_id_str,
-    penny_str,
-    fund_coin_str,
-    penny_str,
-    respect_bit_str,
     required_args_str,
     optional_args_str,
     atom_update,
@@ -17,37 +6,15 @@ from src.f04_gift.atom_config import (
     atom_delete,
     normal_specs_str,
     obj_class_str,
-    type_AcctID_str,
-    type_GroupID_str,
-    type_RoadNode_str,
-    type_RoadUnit_str,
-)
-from src.f07_fiscal.fiscal_config import (
-    config_file_dir,
-    get_fiscal_config_file_name,
-    get_fiscal_config_dict,
-    current_time_str,
-    amount_str,
-    month_label_str,
-    hour_label_str,
-    cumlative_minute_str,
-    cumlative_day_str,
-    weekday_label_str,
-    weekday_order_str,
-    fiscalunit_str,
-    fiscal_purviewlog_str,
-    fiscal_purview_episode_str,
-    fiscal_cashbook_str,
-    fiscal_timeline_hour_str,
-    fiscal_timeline_month_str,
-    fiscal_timeline_weekday_str,
-    get_fiscal_categorys,
 )
 from src.f08_filter.filter_config import (
     config_file_dir,
     get_filter_categorys,
     get_filter_config_file_name,
     get_filter_config_dict,
+    get_filter_args_category_mapping,
+    filterunit_str,
+    eon_id_str,
     otx_road_delimiter_str,
     inx_road_delimiter_str,
     inx_word_str,
@@ -64,6 +31,7 @@ from os import getcwd as os_getcwd
 
 
 def test_str_functions_ReturnsObj():
+    assert filterunit_str() == "filterunit"
     assert otx_road_delimiter_str() == "otx_road_delimiter"
     assert inx_road_delimiter_str() == "inx_road_delimiter"
     assert inx_word_str() == "inx_word"
@@ -75,6 +43,7 @@ def test_str_functions_ReturnsObj():
     assert otx_to_inx_str() == "otx_to_inx"
     assert bridge_otx_to_inx_str() == "bridge_otx_to_inx"
     assert bridge_explicit_label_str() == "bridge_explicit_label"
+    assert eon_id_str() == "eon_id"
 
 
 def test_get_filter_config_file_name_ReturnsObj():
@@ -100,10 +69,10 @@ def test_get_filter_config_dict_ReturnsObj():
     _validate_filter_config(filter_config)
     bridge_otx_to_inx_dict = filter_config.get(bridge_otx_to_inx_str())
     bridge_explicit_label_dict = filter_config.get(bridge_explicit_label_str())
-    assert len(bridge_otx_to_inx_dict.get(required_args_str())) == 5
-    assert len(bridge_explicit_label_dict.get(required_args_str())) == 5
-    assert len(bridge_otx_to_inx_dict.get(optional_args_str())) == 0
-    assert len(bridge_explicit_label_dict.get(optional_args_str())) == 0
+    assert len(bridge_otx_to_inx_dict.get(required_args_str())) == 1
+    assert len(bridge_explicit_label_dict.get(required_args_str())) == 1
+    assert len(bridge_otx_to_inx_dict.get(optional_args_str())) == 4
+    assert len(bridge_explicit_label_dict.get(optional_args_str())) == 4
 
     # assert gen_optional_args == x_filterunit_optional_args
     # assert len(filterunit_dict.get(optional_args_str())) == 9
@@ -159,3 +128,21 @@ def test_get_filter_categorys_ReturnsObj():
     # THEN
     assert bridge_otx_to_inx_str() in filter_config_categorys
     assert bridge_explicit_label_str() in filter_config_categorys
+
+
+def test_get_filter_args_category_mapping_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_filter_args_category_mapping = get_filter_args_category_mapping()
+    print(f"{x_filter_args_category_mapping=}")
+
+    # THEN
+    assert x_filter_args_category_mapping
+    assert x_filter_args_category_mapping.get(otx_word_str())
+    x_categorys = {bridge_otx_to_inx_str()}
+    assert x_filter_args_category_mapping.get(otx_word_str()) == x_categorys
+    assert x_filter_args_category_mapping.get(inx_road_delimiter_str())
+    filter_id_categorys = x_filter_args_category_mapping.get(inx_road_delimiter_str())
+    assert bridge_otx_to_inx_str() in filter_id_categorys
+    assert bridge_explicit_label_str() in filter_id_categorys
+    assert len(filter_id_categorys) == 2
+    assert len(x_filter_args_category_mapping) == 7

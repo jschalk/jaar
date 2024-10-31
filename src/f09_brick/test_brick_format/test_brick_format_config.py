@@ -2,6 +2,7 @@ from src.f00_instrument.dict_tool import create_sorted_concatenated_str
 from src.f00_instrument.file import get_dir_file_strs
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_gift.atom_config import (
+    face_id_str,
     fiscal_id_str,
     owner_id_str,
     acct_id_str,
@@ -24,6 +25,7 @@ from src.f04_gift.atom_config import (
     gogo_want_str,
     stop_want_str,
 )
+from src.f08_filter.filter_config import eon_id_str
 from src.f09_brick.brick import (
     _generate_brick_dataframe,
     get_brickref,
@@ -85,8 +87,8 @@ def test_get_brickref_ReturnsObj():
     # THEN
     assert x_brickref.brick_name == brick_name_00021
     assert x_brickref.categorys == [bud_acctunit_str()]
-    assert x_brickref._brickcolumns != {}
-    assert len(x_brickref._brickcolumns) == 5
+    assert x_brickref._attributes != {}
+    assert len(x_brickref._attributes) == 7
 
 
 def test_get_headers_list_ReturnsObj():
@@ -96,18 +98,22 @@ def test_get_headers_list_ReturnsObj():
     # THEN
     # print(f"{format_00001_headers=}")
     assert format_00021_headers == [
+        face_id_str(),
+        eon_id_str(),
         fiscal_id_str(),
         owner_id_str(),
         acct_id_str(),
-        "debtit_belief",
         "credit_belief",
+        "debtit_belief",
     ]
 
 
 def get_sorted_headers(brick_filename):
     x_brickref = get_brickref_dict(brick_filename)
-    brick_attributes = list(x_brickref.get(attributes_str()).keys())
-    return create_sorted_concatenated_str(brick_attributes)
+    brick_attributes = set(x_brickref.get(attributes_str()).keys())
+    brick_attributes.remove(face_id_str())
+    brick_attributes.remove(eon_id_str())
+    return create_sorted_concatenated_str(list(brick_attributes))
 
 
 def test_get_sorted_headers_ReturnsObj():
@@ -194,22 +200,15 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00021_bud_acctunit_v0_0_0():
     format_00001_brickref = get_brickref(brick_name)
 
     # THEN
-    fiscal_id_brickcolumn = format_00001_brickref.get_brickcolumn(fiscal_id_str())
-    owner_id_brickcolumn = format_00001_brickref.get_brickcolumn(owner_id_str())
-    acct_id_brickcolumn = format_00001_brickref.get_brickcolumn(acct_id_str())
-    credit_belief_brickcolumn = format_00001_brickref.get_brickcolumn(
-        credit_belief_str()
-    )
-    debtit_belief_brickcolumn = format_00001_brickref.get_brickcolumn(
-        debtit_belief_str()
-    )
-    assert len(format_00001_brickref._brickcolumns) == 5
-
-    assert fiscal_id_brickcolumn.column_order == 0
-    assert owner_id_brickcolumn.column_order == 1
-    assert acct_id_brickcolumn.column_order == 2
-    assert credit_belief_brickcolumn.column_order == 4
-    assert debtit_belief_brickcolumn.column_order == 3
+    assert len(format_00001_brickref._attributes) == 7
+    headers_list = format_00001_brickref.get_headers_list()
+    assert headers_list[0] == face_id_str()
+    assert headers_list[1] == eon_id_str()
+    assert headers_list[2] == fiscal_id_str()
+    assert headers_list[3] == owner_id_str()
+    assert headers_list[4] == acct_id_str()
+    assert headers_list[5] == "credit_belief"
+    assert headers_list[6] == "debtit_belief"
 
 
 def test_get_brickref_HasCorrectAttrs_brick_format_00020_bud_acct_membership_v0_0_0():
@@ -220,20 +219,16 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00020_bud_acct_membership_v0_
     format_00021_brickref = get_brickref(brick_name)
 
     # THEN
-    fiscal_id_brickcolumn = format_00021_brickref.get_brickcolumn(fiscal_id_str())
-    owner_id_brickcolumn = format_00021_brickref.get_brickcolumn(owner_id_str())
-    acct_id_brickcolumn = format_00021_brickref.get_brickcolumn(acct_id_str())
-    group_id_brickcolumn = format_00021_brickref.get_brickcolumn(group_id_str())
-    credit_vote_brickcolumn = format_00021_brickref.get_brickcolumn(credit_vote_str())
-    debtit_vote_brickcolumn = format_00021_brickref.get_brickcolumn(debtit_vote_str())
-    assert len(format_00021_brickref._brickcolumns) == 6
-
-    assert fiscal_id_brickcolumn.column_order == 0
-    assert owner_id_brickcolumn.column_order == 1
-    assert acct_id_brickcolumn.column_order == 2
-    assert group_id_brickcolumn.column_order == 3
-    assert debtit_vote_brickcolumn.column_order == 4
-    assert credit_vote_brickcolumn.column_order == 5
+    assert len(format_00021_brickref._attributes) == 8
+    headers_list = format_00021_brickref.get_headers_list()
+    assert headers_list[0] == face_id_str()
+    assert headers_list[1] == eon_id_str()
+    assert headers_list[2] == fiscal_id_str()
+    assert headers_list[3] == owner_id_str()
+    assert headers_list[4] == acct_id_str()
+    assert headers_list[5] == group_id_str()
+    assert headers_list[6] == "credit_vote"
+    assert headers_list[7] == "debtit_vote"
 
 
 def test_get_brickref_HasCorrectAttrs_brick_format_00013_itemunit_v0_0_0():
@@ -244,23 +239,16 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00013_itemunit_v0_0_0():
     format_00003_brickref = get_brickref(brick_name)
 
     # THEN
-    fiscal_id_brickcolumn = format_00003_brickref.get_brickcolumn(fiscal_id_str())
-    owner_id_brickcolumn = format_00003_brickref.get_brickcolumn(owner_id_str())
-    parent_road_brickcolumn = format_00003_brickref.get_brickcolumn(parent_road_str())
-    label_brickcolumn = format_00003_brickref.get_brickcolumn(label_str())
-    print(f"{format_00003_brickref._brickcolumns.keys()=}")
-    print(f"{format_00003_brickref._brickcolumns.get(mass_str())=}")
-    mass_brickcolumn = format_00003_brickref.get_brickcolumn(mass_str())
-    print(f"{mass_brickcolumn=}")
-    pledge_brickcolumn = format_00003_brickref.get_brickcolumn(pledge_str())
-    assert len(format_00003_brickref._brickcolumns) == 6
-
-    assert fiscal_id_brickcolumn.column_order == 0
-    assert owner_id_brickcolumn.column_order == 1
-    assert parent_road_brickcolumn.column_order == 3
-    assert label_brickcolumn.column_order == 5
-    assert mass_brickcolumn.column_order == 4
-    assert pledge_brickcolumn.column_order == 2
+    assert len(format_00003_brickref._attributes) == 8
+    headers_list = format_00003_brickref.get_headers_list()
+    assert headers_list[0] == face_id_str()
+    assert headers_list[1] == eon_id_str()
+    assert headers_list[2] == fiscal_id_str()
+    assert headers_list[3] == owner_id_str()
+    assert headers_list[4] == parent_road_str()
+    assert headers_list[5] == label_str()
+    assert headers_list[6] == mass_str()
+    assert headers_list[7] == pledge_str()
 
 
 def test_get_brickref_HasCorrectAttrs_brick_format_00019_itemunit_v0_0_0():
@@ -271,31 +259,19 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00019_itemunit_v0_0_0():
     format_00019_brickref = get_brickref(brick_name)
 
     # THEN
-    fiscal_id_brickcolumn = format_00019_brickref.get_brickcolumn(fiscal_id_str())
-    owner_id_brickcolumn = format_00019_brickref.get_brickcolumn(owner_id_str())
-    parent_road_brickcolumn = format_00019_brickref.get_brickcolumn(parent_road_str())
-    label_brickcolumn = format_00019_brickref.get_brickcolumn(label_str())
-    print(f"{format_00019_brickref._brickcolumns.keys()=}")
-    begin_brickcolumn = format_00019_brickref.get_brickcolumn(begin_str())
-    close_brickcolumn = format_00019_brickref.get_brickcolumn(close_str())
-    addin_brickcolumn = format_00019_brickref.get_brickcolumn(addin_str())
-    numor_brickcolumn = format_00019_brickref.get_brickcolumn(numor_str())
-    denom_brickcolumn = format_00019_brickref.get_brickcolumn(denom_str())
-    morph_brickcolumn = format_00019_brickref.get_brickcolumn(morph_str())
-    gogo_want_brickcolumn = format_00019_brickref.get_brickcolumn(gogo_want_str())
-    stop_want_brickcolumn = format_00019_brickref.get_brickcolumn(stop_want_str())
-
-    assert len(format_00019_brickref._brickcolumns) == 12
-
-    assert fiscal_id_brickcolumn.column_order == 0
-    assert owner_id_brickcolumn.column_order == 1
-    assert parent_road_brickcolumn.column_order == 2
-    assert label_brickcolumn.column_order == 3
-    assert begin_brickcolumn.column_order == 4
-    assert close_brickcolumn.column_order == 5
-    assert addin_brickcolumn.column_order == 6
-    assert numor_brickcolumn.column_order == 7
-    assert denom_brickcolumn.column_order == 8
-    assert morph_brickcolumn.column_order == 9
-    assert gogo_want_brickcolumn.column_order == 10
-    assert stop_want_brickcolumn.column_order == 11
+    assert len(format_00019_brickref._attributes) == 14
+    headers_list = format_00019_brickref.get_headers_list()
+    assert headers_list[0] == face_id_str()
+    assert headers_list[1] == eon_id_str()
+    assert headers_list[2] == fiscal_id_str()
+    assert headers_list[3] == owner_id_str()
+    assert headers_list[4] == parent_road_str()
+    assert headers_list[5] == label_str()
+    assert headers_list[6] == begin_str()
+    assert headers_list[7] == close_str()
+    assert headers_list[8] == addin_str()
+    assert headers_list[9] == numor_str()
+    assert headers_list[10] == denom_str()
+    assert headers_list[11] == morph_str()
+    assert headers_list[12] == gogo_want_str()
+    assert headers_list[13] == stop_want_str()

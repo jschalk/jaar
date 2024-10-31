@@ -1,14 +1,11 @@
 from src.f00_instrument.file import open_file
-from src.f00_instrument.dict_tool import get_dict_from_json
+from src.f00_instrument.dict_tool import get_dict_from_json, get_from_nested_dict
+from src.f04_gift.atom_config import required_args_str, optional_args_str
 from os import getcwd as os_getcwd
 
 
 def current_time_str() -> str:
     return "current_time"
-
-
-def monthday_distortion_str() -> str:
-    return "monthday_distortion"
 
 
 def amount_str() -> str:
@@ -90,3 +87,33 @@ def get_fiscal_config_dict() -> dict:
 
 def get_fiscal_categorys() -> set[str]:
     return set(get_fiscal_config_dict().keys())
+
+
+def get_fiscal_config_required_args(x_cat: str) -> dict:
+    required_args_key_list = [x_cat, required_args_str()]
+    return get_from_nested_dict(get_fiscal_config_dict(), required_args_key_list)
+
+
+def get_fiscal_config_optional_args(x_cat: str) -> dict:
+    optional_args_key_list = [x_cat, optional_args_str()]
+    return get_from_nested_dict(get_fiscal_config_dict(), optional_args_key_list)
+
+
+def get_fiscal_config_args(x_category: str) -> dict[str, dict]:
+    args_dict = get_fiscal_config_required_args(x_category)
+    args_dict.update(get_fiscal_config_optional_args(x_category))
+    return args_dict
+
+
+def get_fiscal_args_category_mapping() -> dict[str, str]:
+    x_dict = {}
+    for fiscal_category in get_fiscal_config_dict().keys():
+        args_set = set(get_fiscal_config_args(fiscal_category))
+        for x_arg in args_set:
+            if x_dict.get(x_arg) is None:
+                x_dict[x_arg] = {fiscal_category}
+            else:
+                x_category_set = x_dict.get(x_arg)
+                x_category_set.add(fiscal_category)
+                x_dict[x_arg] = x_category_set
+    return x_dict

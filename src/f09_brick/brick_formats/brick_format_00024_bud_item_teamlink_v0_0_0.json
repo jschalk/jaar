@@ -1,21 +1,11 @@
 {
     "attributes": {
-        "fiscal_id": {
-            "column_order": 0,
-            "sort_order": 0
-        },
-        "owner_id": {
-            "column_order": 1,
-            "sort_order": 1
-        },
-        "road": {
-            "column_order": 2,
-            "sort_order": 2
-        },
-        "team_id": {
-            "column_order": 3,
-            "sort_order": 3
-        }
+        "eon_id": {},
+        "face_id": {},
+        "fiscal_id": {},
+        "owner_id": {},
+        "road": {},
+        "team_id": {}
     },
     "brick_number": "br00024",
     "categorys": [

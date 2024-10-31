@@ -1,23 +1,12 @@
 {
     "attributes": {
-        "acct_id": {
-            "column_order": 2,
-            "sort_order": 2
-        },
-        "fiscal_id": {
-            "column_order": 0,
-            "sort_order": 0
-        },
-        "owner_id": {
-            "column_order": 1,
-            "sort_order": 1
-        },
-        "quota": {
-            "column_order": 4
-        },
-        "time_id": {
-            "column_order": 3
-        }
+        "acct_id": {},
+        "eon_id": {},
+        "face_id": {},
+        "fiscal_id": {},
+        "owner_id": {},
+        "quota": {},
+        "time_id": {}
     },
     "brick_number": "br00001",
     "categorys": [

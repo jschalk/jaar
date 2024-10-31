@@ -1,4 +1,4 @@
-fiscal_id,owner_id,acct_id,debtit_belief,credit_belief
-music56,Sue,Bob,29,13
-music56,Sue,Sue,23,11
-music56,Sue,Yao,37,41
+face_id,eon_id,fiscal_id,owner_id,acct_id,credit_belief,debtit_belief
+,,music56,Sue,Bob,13,29
+,,music56,Sue,Sue,11,23
+,,music56,Sue,Yao,41,37

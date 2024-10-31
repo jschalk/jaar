@@ -1,15 +1,10 @@
 {
     "attributes": {
-        "acct_id": {
-            "column_order": 2,
-            "sort_order": 3
-        },
-        "fiscal_id": {
-            "column_order": 0
-        },
-        "owner_id": {
-            "column_order": 1
-        }
+        "acct_id": {},
+        "eon_id": {},
+        "face_id": {},
+        "fiscal_id": {},
+        "owner_id": {}
     },
     "brick_number": "br00011",
     "categorys": [
