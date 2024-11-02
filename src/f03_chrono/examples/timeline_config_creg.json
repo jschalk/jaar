@@ -1,5 +1,5 @@
 {
-    "c400_config": 7,
+    "c400_number": 7,
     "hours_config": [
         ["0-12am", 60],
         ["1-1am", 120],

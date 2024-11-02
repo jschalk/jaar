@@ -18,6 +18,7 @@ from src.f00_instrument.examples.instrument_env import (
 )
 from src.f01_road.finance_tran import quota_str, time_id_str, road_delimiter_str
 from src.f03_chrono.chrono import (
+    c400_number_str,
     timeline_label_str,
     yr1_jan1_offset_str,
     monthday_distortion_str,
@@ -166,11 +167,12 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[62] == otx_label_str()
     assert table_sorting_priority[63] == inx_label_str()
     assert table_sorting_priority[64] == road_delimiter_str()
-    assert table_sorting_priority[65] == yr1_jan1_offset_str()
-    assert table_sorting_priority[66] == quota_str()
-    assert table_sorting_priority[67] == monthday_distortion_str()
-    assert table_sorting_priority[68] == timeline_label_str()
-    assert len(table_sorting_priority) == 69
+    assert table_sorting_priority[65] == c400_number_str()
+    assert table_sorting_priority[66] == yr1_jan1_offset_str()
+    assert table_sorting_priority[67] == quota_str()
+    assert table_sorting_priority[68] == monthday_distortion_str()
+    assert table_sorting_priority[69] == timeline_label_str()
+    assert len(table_sorting_priority) == 70
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
     fiscal_args = set(get_fiscal_args_category_mapping().keys())
@@ -259,6 +261,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(otx_label_str()) == "TEXT"
     assert sqlite_types.get(inx_label_str()) == "TEXT"
     assert sqlite_types.get(road_delimiter_str()) == "TEXT"
+    assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(quota_str()) == "REAL"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"

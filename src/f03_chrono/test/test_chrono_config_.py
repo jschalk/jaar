@@ -19,7 +19,7 @@ from src.f03_chrono.chrono import (
     months_config_str,
     monthday_distortion_str,
     timeline_label_str,
-    c400_config_str,
+    c400_number_str,
     yr1_jan1_offset_str,
     validate_timeline_config,
     create_timeline_config,
@@ -87,7 +87,7 @@ def test_str_functions_ReturnsObj():
     assert months_config_str() == "months_config"
     assert monthday_distortion_str() == "monthday_distortion"
     assert timeline_label_str() == "timeline_label"
-    assert c400_config_str() == "c400_config"
+    assert c400_number_str() == "c400_number"
     assert yr1_jan1_offset_str() == "yr1_jan1_offset"
 
 
@@ -129,7 +129,7 @@ def test_validate_timeline_config_ReturnsObj_CheckEachElementIsNecessary():
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(c400_config_str())
+    creg_config.pop(c400_number_str())
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
@@ -239,7 +239,7 @@ def test_create_timeline_config_ReturnsObj():
     # THEN
     assert validate_timeline_config(five_dict)
     assert five_dict.get(timeline_label_str()) == five_str()
-    assert five_dict.get(c400_config_str()) == five_c400_count
+    assert five_dict.get(c400_number_str()) == five_c400_count
     assert five_dict.get(weekdays_config_str()) == five_weekday_list
     x_months_config = five_dict.get(months_config_str())
     gen_months = [mon_config[0] for mon_config in x_months_config]
@@ -313,7 +313,7 @@ def test_TimeLineUnit_Exists():
 
     # THEN
     assert x_timelineunit
-    assert not x_timelineunit.c400_config
+    assert not x_timelineunit.c400_number
     assert not x_timelineunit.hours_config
     assert not x_timelineunit.months_config
     assert not x_timelineunit.monthday_distortion
@@ -330,7 +330,7 @@ def test_timelineunit_shop_ReturnsObj_Default():
     x_timelineunit = timelineunit_shop()
 
     # THEN
-    creg_c400_config = creg_config.get(c400_config_str())
+    creg_c400_number = creg_config.get(c400_number_str())
     creg_hours_config = creg_config.get(hours_config_str())
     creg_months_config = creg_config.get(months_config_str())
     creg_timeline_label = creg_config.get(timeline_label_str())
@@ -339,7 +339,7 @@ def test_timelineunit_shop_ReturnsObj_Default():
     creg_yr1_jan1_offset = creg_config.get(yr1_jan1_offset_str())
 
     assert x_timelineunit
-    assert x_timelineunit.c400_config == creg_c400_config
+    assert x_timelineunit.c400_number == creg_c400_number
     assert x_timelineunit.hours_config == creg_hours_config
     assert x_timelineunit.months_config == creg_months_config
     assert x_timelineunit.monthday_distortion == creg_monthday_distortion

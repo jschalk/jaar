@@ -13,7 +13,7 @@ from src.f03_chrono.chrono import (
     months_config_str,
     timeline_label_str,
     yr1_jan1_offset_str,
-    c400_config_str,
+    c400_number_str,
     chronounit_shop,
 )
 from datetime import datetime
@@ -50,7 +50,7 @@ def get_example_timeline_config(timeline_label: str) -> dict:
 
 
 def cregtime_itemunit() -> ItemUnit:
-    c400_count = get_creg_config().get(c400_config_str())
+    c400_count = get_creg_config().get(c400_number_str())
     return new_timeline_itemunit(get_cregtime_str(), c400_count)
 
 

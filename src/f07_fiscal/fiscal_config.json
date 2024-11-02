@@ -109,6 +109,9 @@
             "timeline_label": {
                 "obj_class": "RoadNode"
             },
+            "c400_number": {
+                "obj_class": "int"
+            },
             "yr1_jan1_offset": {
                 "obj_class": "int"
             }

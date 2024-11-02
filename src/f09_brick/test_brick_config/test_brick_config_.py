@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_tool import get_json_from_dict
 from src.f00_instrument.file import save_file
-from src.f01_road.finance_tran import time_id_str
+from src.f01_road.finance_tran import time_id_str, road_delimiter_str
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
     bud_acctunit_str,
@@ -13,8 +13,17 @@ from src.f02_bud.bud_tool import (
     bud_itemunit_str,
     budunit_str,
 )
+from src.f03_chrono.chrono import (
+    c400_number_str,
+    monthday_distortion_str,
+    timeline_label_str,
+    yr1_jan1_offset_str,
+)
 from src.f04_gift.atom_config import (
     face_id_str,
+    penny_str,
+    respect_bit_str,
+    fund_coin_str,
     get_atom_config_dict,
     atom_delete,
     atom_insert,
@@ -36,6 +45,7 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_hour_str,
     fiscal_timeline_month_str,
     fiscal_timeline_weekday_str,
+    current_time_str,
 )
 from src.f08_filter.filter_config import (
     eon_id_str,
@@ -61,6 +71,7 @@ from src.f09_brick.brick_config import (
     build_order_str,
     get_allowed_curds,
     get_brickref_dict,
+    get_quick_bricks_column_ref,
     config_file_dir,
     get_brick_config_file_name,
     get_brick_config_dict,
@@ -358,3 +369,25 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     assert x_brick_config.get(budunit_str()).get(bo) == 16
     assert x_brick_config.get(fiscal_purview_episode_str()).get(bo) == 17
     assert x_brick_config.get(fiscal_cashbook_str()).get(bo) == 18
+
+
+def test_get_quick_bricks_column_ref_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_brick_quick_column_ref = get_quick_bricks_column_ref()
+
+    # THEN
+    assert len(x_brick_quick_column_ref) == len(get_brick_numbers())
+    assert x_brick_quick_column_ref.get("br00000") == {
+        face_id_str(),
+        eon_id_str(),
+        c400_number_str(),
+        current_time_str(),
+        fiscal_id_str(),
+        fund_coin_str(),
+        monthday_distortion_str(),
+        penny_str(),
+        respect_bit_str(),
+        road_delimiter_str(),
+        timeline_label_str(),
+        yr1_jan1_offset_str(),
+    }

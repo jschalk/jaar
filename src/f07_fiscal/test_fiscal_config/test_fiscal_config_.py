@@ -1,5 +1,5 @@
 from src.f03_chrono.chrono import (
-    c400_config_str,
+    c400_number_str,
     timeline_label_str,
     yr1_jan1_offset_str,
     monthday_distortion_str,
@@ -104,6 +104,7 @@ def test_get_fiscal_config_dict_ReturnsObj():
     assert len(fiscal_timeline_weekday_dict.get(required_args_str())) == 3
 
     x_fiscalunit_optional_args = {
+        c400_number_str(),
         current_time_str(),
         fiscal_id_str(),
         fund_coin_str(),
@@ -117,7 +118,7 @@ def test_get_fiscal_config_dict_ReturnsObj():
     print(f"{fiscalunit_dict.get(optional_args_str()).keys()=}")
     gen_optional_args = set(fiscalunit_dict.get(optional_args_str()).keys())
     assert gen_optional_args == x_fiscalunit_optional_args
-    assert len(fiscalunit_dict.get(optional_args_str())) == 9
+    assert len(fiscalunit_dict.get(optional_args_str())) == 10
     assert len(fiscal_purview_episode_dict.get(optional_args_str())) == 1
     assert len(fiscal_cashbook_dict.get(optional_args_str())) == 1
     assert len(fiscal_timeline_hour_dict.get(optional_args_str())) == 0
@@ -190,4 +191,4 @@ def test_get_fiscal_args_category_mapping_ReturnsObj():
     assert fiscal_timeline_hour_str() in fiscal_id_categorys
     assert fiscalunit_str() in fiscal_id_categorys
     assert len(fiscal_id_categorys) == 6
-    assert len(x_fiscal_args_category_mapping) == 20
+    assert len(x_fiscal_args_category_mapping) == 21
