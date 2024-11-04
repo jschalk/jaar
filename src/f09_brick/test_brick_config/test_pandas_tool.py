@@ -90,7 +90,7 @@ from src.f09_brick.pandas_tool import (
     get_brick_sqlite_type,
     save_dataframe_to_csv,
     get_ordered_csv,
-    get_all_excel_sheetnames,
+    get_all_excel_sheet_names,
     get_relevant_columns_dataframe,
 )
 from os.path import exists as os_path_exists
@@ -328,7 +328,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(env_dir_setup_c
     assert file_ex02_atom_csv == function_ex02_atom_csv
 
 
-def test_get_all_excel_sheetnames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
+def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x_dir = create_file_path(env_dir, "examples_folder")
@@ -344,16 +344,16 @@ def test_get_all_excel_sheetnames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cl
         df2.to_excel(writer, sheet_name=sheet_name2)
 
     # WHEN
-    x_sheetnames = get_all_excel_sheetnames(env_dir)
+    x_sheet_names = get_all_excel_sheet_names(env_dir)
 
     # THEN
-    assert x_sheetnames
-    assert (x_dir, ex_file_name, sheet_name1) in x_sheetnames
-    assert (x_dir, ex_file_name, sheet_name2) in x_sheetnames
-    assert len(x_sheetnames) == 2
+    assert x_sheet_names
+    assert (x_dir, ex_file_name, sheet_name1) in x_sheet_names
+    assert (x_dir, ex_file_name, sheet_name2) in x_sheet_names
+    assert len(x_sheet_names) == 2
 
 
-def test_get_all_excel_sheetnames_ReturnsObj_Scenario1_FilterSheetNames(
+def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_FilterSheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -374,14 +374,14 @@ def test_get_all_excel_sheetnames_ReturnsObj_Scenario1_FilterSheetNames(
         df2.to_excel(writer, sheet_name=sugar_name2)
 
     # WHEN
-    x_sheetnames = get_all_excel_sheetnames(env_dir, in_name_strs={sugar_str})
+    x_sheet_names = get_all_excel_sheet_names(env_dir, sub_strs={sugar_str})
 
     # THEN
-    assert x_sheetnames
-    assert (x_dir, ex_file_name, honey_name1) not in x_sheetnames
-    assert (x_dir, ex_file_name, sugar_name1) in x_sheetnames
-    assert (x_dir, ex_file_name, sugar_name2) in x_sheetnames
-    assert len(x_sheetnames) == 2
+    assert x_sheet_names
+    assert (x_dir, ex_file_name, honey_name1) not in x_sheet_names
+    assert (x_dir, ex_file_name, sugar_name1) in x_sheet_names
+    assert (x_dir, ex_file_name, sugar_name2) in x_sheet_names
+    assert len(x_sheet_names) == 2
 
 
 def test_get_relevant_columns_dataframe_ReturnsObj_Scenario0():

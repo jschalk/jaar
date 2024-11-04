@@ -26,11 +26,11 @@ def test_jungle_to_zoo_FiltersAll(env_dir_setup_cleanup):
         df2.to_excel(writer, sheet_name=br00002_str)
 
     # WHEN
-    x_sheetnames = get_all_excel_bricksheets(env_dir)
+    x_sheet_names = get_all_excel_bricksheets(env_dir)
 
     # THEN
-    assert x_sheetnames
-    assert (x_dir, ex_file_name, br00000_str) in x_sheetnames
-    assert (x_dir, ex_file_name, br00001_str) in x_sheetnames
-    assert (x_dir, ex_file_name, br00002_str) in x_sheetnames
-    assert len(x_sheetnames) == 3
+    assert x_sheet_names
+    assert (x_dir, ex_file_name, br00000_str) in x_sheet_names
+    assert (x_dir, ex_file_name, br00001_str) in x_sheet_names
+    assert (x_dir, ex_file_name, br00002_str) in x_sheet_names
+    assert len(x_sheet_names) == 3
