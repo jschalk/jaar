@@ -197,7 +197,7 @@ def new_timeline_itemunit(timeline_label: TimeLineLabel, c400_count: int) -> Ite
 
 def add_newtimeline_itemunit(x_budunit: BudUnit, timeline_config: dict):
     x_label = timeline_config.get(timeline_label_str())
-    x_c400_count = timeline_config.get(c400_config_str())
+    x_c400_count = timeline_config.get(c400_number_str())
     x_months = timeline_config.get(months_config_str())
     x_mday = timeline_config.get(monthday_distortion_str())
     x_hours_list = timeline_config.get(hours_config_str())
@@ -304,8 +304,8 @@ def timeline_label_str() -> str:
     return "timeline_label"
 
 
-def c400_config_str() -> str:
-    return "c400_config"
+def c400_number_str() -> str:
+    return "c400_number"
 
 
 def yr1_jan1_offset_str() -> str:
@@ -319,7 +319,7 @@ def validate_timeline_config(config_dict: dict) -> bool:
         months_config_str(),
         monthday_distortion_str(),
         timeline_label_str(),
-        c400_config_str(),
+        c400_number_str(),
         yr1_jan1_offset_str(),
     ]
     for config_key in config_elements:
@@ -367,7 +367,7 @@ def create_timeline_config(
         weekdays_config_str(): weekday_list,
         months_config_str(): month_config,
         timeline_label_str(): timeline_label,
-        c400_config_str(): c400_count,
+        c400_number_str(): c400_count,
         monthday_distortion_str(): get_0_if_None(monthday_distortion),
         yr1_jan1_offset_str(): get_0_if_None(yr1_jan1_offset),
     }
@@ -530,7 +530,7 @@ def get_default_timeline_config_dict() -> dict:
 
 @dataclass
 class TimeLineUnit:
-    c400_config: int = None
+    c400_number: int = None
     hours_config: list[list[str, int]] = None
     months_config: list[list[str, int]] = None
     monthday_distortion: int = None
@@ -540,7 +540,7 @@ class TimeLineUnit:
 
     def get_dict(self) -> dict:
         return {
-            "c400_config": self.c400_config,
+            "c400_number": self.c400_number,
             "hours_config": self.hours_config,
             "months_config": self.months_config,
             "monthday_distortion": self.monthday_distortion,
@@ -554,7 +554,7 @@ def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
     if timeline_config is None:
         timeline_config = get_default_timeline_config_dict()
     return TimeLineUnit(
-        c400_config=timeline_config.get(c400_config_str()),
+        c400_number=timeline_config.get(c400_number_str()),
         hours_config=timeline_config.get(hours_config_str()),
         months_config=timeline_config.get(months_config_str()),
         monthday_distortion=timeline_config.get(monthday_distortion_str()),

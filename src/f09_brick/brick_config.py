@@ -70,6 +70,10 @@ def delete_update_str() -> str:
     return "DELETE_UPDATE"
 
 
+def build_order_str() -> str:
+    return "build_order"
+
+
 def get_allowed_curds() -> set[str]:
     return {
         "INSERT_ONE_TIME",
@@ -258,7 +262,7 @@ def get_brick_numbers() -> set[str]:
 
 def get_brick_format_headers() -> dict[str, list[str]]:
     return {
-        "c400_config,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,road_delimiter,timeline_label,yr1_jan1_offset": brick_format_00000_fiscalunit_v0_0_0(),
+        "c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,road_delimiter,timeline_label,yr1_jan1_offset": brick_format_00000_fiscalunit_v0_0_0(),
         "acct_id,fiscal_id,owner_id,quota,time_id": brick_format_00001_fiscal_purview_episode_v0_0_0(),
         "acct_id,amount,fiscal_id,owner_id,time_id": brick_format_00002_fiscal_cashbook_v0_0_0(),
         "cumlative_minute,fiscal_id,hour_label": brick_format_00003_fiscal_timeline_hour_v0_0_0(),
@@ -284,7 +288,166 @@ def get_brick_format_headers() -> dict[str, list[str]]:
     }
 
 
-def get_brickref_dict(brick_name) -> dict:
-    brickref_filename = get_json_filename(brick_name)
+def get_brickref_dict(brick_filename: str) -> dict:
+    brickref_filename = get_json_filename(brick_filename)
     brickref_json = open_file(get_brick_formats_dir(), brickref_filename)
     return get_dict_from_json(brickref_json)
+
+
+def get_quick_bricks_column_ref() -> dict[str, set[str]]:
+    brick_number_dict = {}
+    for brick_format_filename in get_brick_format_filenames():
+        brickref_dict = get_brickref_dict(brick_format_filename)
+        brick_number = brickref_dict.get("brick_number")
+        brick_number_dict[brick_number] = set(brickref_dict.get("attributes").keys())
+    return brick_number_dict
+
+
+def get_brick_elements_sort_order() -> list[str]:
+    return [
+        "face_id",
+        "eon_id",
+        "fiscal_id",
+        "obj_class",
+        "owner_id",
+        "acct_id",
+        "group_id",
+        "parent_road",
+        "label",
+        "road",
+        "base",
+        "need",
+        "pick",
+        "team_id",
+        "awardee_id",
+        "healer_id",
+        "time_id",
+        "begin",
+        "close",
+        "addin",
+        "numor",
+        "denom",
+        "morph",
+        "gogo_want",
+        "stop_want",
+        "base_item_active_requisite",
+        "credit_belief",
+        "debtit_belief",
+        "credit_vote",
+        "debtit_vote",
+        "credor_respect",
+        "debtor_respect",
+        "fopen",
+        "fnigh",
+        "fund_pool",
+        "give_force",
+        "mass",
+        "max_tree_traverse",
+        "nigh",
+        "open",
+        "divisor",
+        "pledge",
+        "problem_bool",
+        "purview_time_id",
+        "take_force",
+        "tally",
+        "fund_coin",
+        "penny",
+        "respect_bit",
+        "current_time",
+        "amount",
+        "month_label",
+        "hour_label",
+        "cumlative_minute",
+        "cumlative_day",
+        "weekday_label",
+        "weekday_order",
+        "otx_road_delimiter",
+        "inx_road_delimiter",
+        "unknown_word",
+        "otx_word",
+        "inx_word",
+        "otx_label",
+        "inx_label",
+        "road_delimiter",
+        "c400_number",
+        "yr1_jan1_offset",
+        "quota",
+        "monthday_distortion",
+        "timeline_label",
+    ]
+
+
+def get_brick_sqlite_type() -> dict[str, str]:
+    return {
+        "face_id": "TEXT",
+        "eon_id": "INTEGER",
+        "fiscal_id": "TEXT",
+        "obj_class": "TEXT",
+        "owner_id": "TEXT",
+        "acct_id": "TEXT",
+        "group_id": "TEXT",
+        "parent_road": "TEXT",
+        "label": "TEXT",
+        "road": "TEXT",
+        "base": "TEXT",
+        "need": "TEXT",
+        "pick": "TEXT",
+        "team_id": "TEXT",
+        "awardee_id": "TEXT",
+        "healer_id": "TEXT",
+        "time_id": "INTEGER",
+        "begin": "REAL",
+        "close": "REAL",
+        "addin": "REAL",
+        "numor": "REAL",
+        "denom": "REAL",
+        "morph": "INTEGER",
+        "gogo_want": "REAL",
+        "stop_want": "REAL",
+        "base_item_active_requisite": "TEXT",
+        "credit_belief": "REAL",
+        "debtit_belief": "REAL",
+        "credit_vote": "REAL",
+        "debtit_vote": "REAL",
+        "credor_respect": "REAL",
+        "debtor_respect": "REAL",
+        "fopen": "REAL",
+        "fnigh": "REAL",
+        "fund_pool": "REAL",
+        "give_force": "REAL",
+        "mass": "REAL",
+        "max_tree_traverse": "INTEGER",
+        "nigh": "REAL",
+        "open": "REAL",
+        "divisor": "REAL",
+        "pledge": "INTEGER",
+        "problem_bool": "INTEGER",
+        "purview_time_id": "INTEGER",
+        "take_force": "REAL",
+        "tally": "REAL",
+        "fund_coin": "REAL",
+        "penny": "REAL",
+        "respect_bit": "REAL",
+        "current_time": "INTEGER",
+        "amount": "REAL",
+        "month_label": "TEXT",
+        "hour_label": "TEXT",
+        "cumlative_minute": "INTEGER",
+        "cumlative_day": "INTEGER",
+        "weekday_label": "TEXT",
+        "weekday_order": "INTEGER",
+        "otx_road_delimiter": "TEXT",
+        "inx_road_delimiter": "TEXT",
+        "unknown_word": "TEXT",
+        "otx_word": "TEXT",
+        "inx_word": "TEXT",
+        "otx_label": "TEXT",
+        "inx_label": "TEXT",
+        "road_delimiter": "TEXT",
+        "c400_number": "INTEGER",
+        "yr1_jan1_offset": "INTEGER",
+        "quota": "REAL",
+        "monthday_distortion": "INTEGER",
+        "timeline_label": "TEXT",
+    }
