@@ -1,4 +1,4 @@
-from src.f00_instrument.plotly_tool import conditional_fig_show
+from src.f00_instrument.plotly_toolbox import conditional_fig_show
 from src.f02_bud.examples.example_buds import (
     budunit_v001_with_large_agenda,
     get_budunit_with_4_levels,

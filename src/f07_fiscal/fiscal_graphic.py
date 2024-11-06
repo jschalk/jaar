@@ -1,4 +1,4 @@
-from src.f00_instrument.plotly_tool import conditional_fig_show
+from src.f00_instrument.plotly_toolbox import conditional_fig_show
 from src.f01_road.jaar_refer import (
     LightSeaGreen_str,
     green_str,

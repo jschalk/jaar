@@ -11,7 +11,7 @@ from src.f04_gift.atom import (
     atom_insert,
     get_from_json as atomunit_get_from_json,
 )
-from src.f00_instrument.dict_tool import x_is_json
+from src.f00_instrument.dict_toolbox import x_is_json
 
 
 def test_AtomUnit_get_dict_ReturnsCorrectObj():

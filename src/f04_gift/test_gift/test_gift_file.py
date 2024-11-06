@@ -1,5 +1,5 @@
 from src.f00_instrument.file import open_file, create_file_path as f_path
-from src.f00_instrument.dict_tool import get_dict_from_json
+from src.f00_instrument.dict_toolbox import get_dict_from_json
 from src.f01_road.jaar_config import get_gifts_folder, get_test_fiscal_id as fiscal_id
 from src.f04_gift.atom_config import owner_id_str, face_id_str
 from src.f04_gift.delta import deltaunit_shop

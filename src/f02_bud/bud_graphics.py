@@ -1,4 +1,4 @@
-from src.f00_instrument.plotly_tool import (
+from src.f00_instrument.plotly_toolbox import (
     conditional_fig_show,
     add_simp_rect,
     add_rect_arrow,

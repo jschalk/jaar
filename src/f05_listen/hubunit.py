@@ -8,8 +8,8 @@ from src.f00_instrument.file import (
     set_dir,
     get_integer_filenames,
 )
-from src.f00_instrument.dict_tool import get_empty_set_if_none
-from src.f00_instrument.db_tool import sqlite_connection
+from src.f00_instrument.dict_toolbox import get_empty_set_if_none
+from src.f00_instrument.db_toolbox import sqlite_connection
 from src.f01_road.jaar_config import (
     dutys_str,
     jobs_str,

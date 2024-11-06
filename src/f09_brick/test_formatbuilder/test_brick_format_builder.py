@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_tool import get_json_from_dict
+from src.f00_instrument.dict_toolbox import get_json_from_dict
 from src.f00_instrument.file import save_file
 from src.f02_bud.bud_tool import bud_itemunit_str
 from src.f04_gift.atom_config import (

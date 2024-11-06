@@ -14,7 +14,7 @@ from src.f09_brick.pandas_tool import (
     get_brick_elements_sort_order as sorting_columns,
 )
 from src.f08_filter.filter import filterunit_shop
-from src.f09_brick.filter_init_tool import (
+from src.f09_brick.filter_toolbox import (
     get_otx_to_inx_dt_columns,
     get_explicit_label_columns,
     create_otx_to_inx_dt,

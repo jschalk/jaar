@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_tool import (
+from src.f00_instrument.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
     get_1_if_None,

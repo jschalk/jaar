@@ -1,5 +1,5 @@
 from src.f00_instrument.file import save_file
-from src.f00_instrument.dict_tool import get_json_from_dict
+from src.f00_instrument.dict_toolbox import get_json_from_dict
 from src.f01_road.finance import TimeLinePoint
 from src.f02_bud.bud import budunit_shop
 from src.f03_chrono.examples.chrono_examples import (

@@ -1,5 +1,5 @@
 from src.f00_instrument.file import set_dir, delete_dir, get_dir_file_strs
-from src.f00_instrument.dict_tool import (
+from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
     get_dict_from_json,
     get_json_from_dict,
