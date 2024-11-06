@@ -176,7 +176,7 @@ def awardline_shop(awardee_id: GroupID, _fund_give: float, _fund_take: float):
 
 
 @dataclass
-class GroupBox(GroupCore):
+class GroupUnit(GroupCore):
     _memberships: dict[AcctID, MemberShip] = None  # set by BudUnit.set_acctunit()
     _road_delimiter: str = None  # calculated by BudUnit
     # calculated by BudUnit.settle_bud()
@@ -191,7 +191,7 @@ class GroupBox(GroupCore):
     def set_membership(self, x_membership: MemberShip):
         if x_membership.group_id != self.group_id:
             raise membership_group_id_Exception(
-                f"GroupBox.group_id={self.group_id} cannot set membership.group_id={x_membership.group_id}"
+                f"GroupUnit.group_id={self.group_id} cannot set membership.group_id={x_membership.group_id}"
             )
         if x_membership._acct_id is None:
             raise membership_group_id_Exception(
@@ -245,10 +245,10 @@ class GroupBox(GroupCore):
             x_membership._fund_agenda_take = fund_agenda_take_allot.get(acct_id)
 
 
-def groupbox_shop(
+def groupunit_shop(
     group_id: GroupID, _road_delimiter: str = None, _fund_coin: FundCoin = None
-) -> GroupBox:
-    return GroupBox(
+) -> GroupUnit:
+    return GroupUnit(
         group_id=group_id,
         _memberships={},
         _fund_give=0,
@@ -260,5 +260,5 @@ def groupbox_shop(
         _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
         _fund_coin=default_fund_coin_if_none(_fund_coin),
     )
-    # x_groupbox.set_group_id(group_id=group_id)
-    # return x_groupbox
+    # x_groupunit.set_group_id(group_id=group_id)
+    # return x_groupunit

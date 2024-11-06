@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_tool import get_empty_set_if_none
-from src.f02_bud.group import GroupBox, GroupID
+from src.f02_bud.group import GroupUnit, GroupID
 from src.f02_bud.acct import AcctID
 from dataclasses import dataclass
 
@@ -46,31 +46,31 @@ class TeamHeir:
 
     def _get_all_accts(
         self,
-        bud_groupboxs: dict[GroupID, GroupBox],
+        bud_groupunits: dict[GroupID, GroupUnit],
         team_id_set: set[GroupID],
-    ) -> dict[GroupID, GroupBox]:
+    ) -> dict[GroupID, GroupUnit]:
         dict_x = {}
         for x_team_id in team_id_set:
-            dict_x |= bud_groupboxs.get(x_team_id)._memberships
+            dict_x |= bud_groupunits.get(x_team_id)._memberships
         return dict_x
 
     def is_empty(self) -> bool:
         return self._teamlinks == set()
 
     def set_owner_id_team(
-        self, bud_groupboxs: dict[GroupID, GroupBox], bud_owner_id: AcctID
+        self, bud_groupunits: dict[GroupID, GroupUnit], bud_owner_id: AcctID
     ):
-        self._owner_id_team = self.get_owner_id_team_bool(bud_groupboxs, bud_owner_id)
+        self._owner_id_team = self.get_owner_id_team_bool(bud_groupunits, bud_owner_id)
 
     def get_owner_id_team_bool(
-        self, bud_groupboxs: dict[GroupID, GroupBox], bud_owner_id: AcctID
+        self, bud_groupunits: dict[GroupID, GroupUnit], bud_owner_id: AcctID
     ) -> bool:
         if self._teamlinks == set():
             return True
 
-        for x_team_id, x_groupbox in bud_groupboxs.items():
+        for x_team_id, x_groupunit in bud_groupunits.items():
             if x_team_id in self._teamlinks:
-                for x_acct_id in x_groupbox._memberships.keys():
+                for x_acct_id in x_groupunit._memberships.keys():
                     if x_acct_id == bud_owner_id:
                         return True
         return False
@@ -79,7 +79,7 @@ class TeamHeir:
         self,
         parent_teamheir,
         teamunit: TeamUnit,
-        bud_groupboxs: dict[GroupID, GroupBox],
+        bud_groupunits: dict[GroupID, GroupUnit],
     ):
         x_teamlinks = set()
         if parent_teamheir is None or parent_teamheir._teamlinks == set():
@@ -91,14 +91,14 @@ class TeamHeir:
             for teamlink in parent_teamheir._teamlinks:
                 x_teamlinks.add(teamlink)
         else:
-            # get all_accts of parent teamheir groupboxs
+            # get all_accts of parent teamheir groupunits
             all_parent_teamheir_accts = self._get_all_accts(
-                bud_groupboxs=bud_groupboxs,
+                bud_groupunits=bud_groupunits,
                 team_id_set=parent_teamheir._teamlinks,
             )
-            # get all_accts of teamunit groupboxs
+            # get all_accts of teamunit groupunits
             all_teamunit_accts = self._get_all_accts(
-                bud_groupboxs=bud_groupboxs,
+                bud_groupunits=bud_groupunits,
                 team_id_set=teamunit._teamlinks,
             )
             if not set(all_teamunit_accts).issubset(set(all_parent_teamheir_accts)):
@@ -107,7 +107,7 @@ class TeamHeir:
                     f"parent_teamheir does not contain all accts of the item's teamunit\n{set(all_parent_teamheir_accts)=}\n\n{set(all_teamunit_accts)=}"
                 )
 
-            # set dict_x = to teamunit groupboxs
+            # set dict_x = to teamunit groupunits
             for teamlink in teamunit._teamlinks:
                 x_teamlinks.add(teamlink)
         self._teamlinks = x_teamlinks

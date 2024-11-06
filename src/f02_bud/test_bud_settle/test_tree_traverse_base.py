@@ -505,7 +505,7 @@ def test_BudUnit_settle_bud_WhenItemUnitHas_massButAll_kidsHaveZero_massAddTo_of
     assert sue_budunit._offtrack_kids_mass_set == {clean_road}
 
 
-def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario0():
+def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
@@ -522,35 +522,37 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario0():
     xio_str = "Xio"
     x_itemroot.set_awardlink(awardlink_shop(xio_str))
     assert len(yao_bud.get_acctunit_group_ids_dict()) == 2
-    assert not yao_bud.groupbox_exists(yao_str)
-    assert not yao_bud.groupbox_exists(zia_str)
-    assert not yao_bud.groupbox_exists(xio_str)
+    assert not yao_bud.groupunit_exists(yao_str)
+    assert not yao_bud.groupunit_exists(zia_str)
+    assert not yao_bud.groupunit_exists(xio_str)
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert yao_bud.groupbox_exists(yao_str)
-    assert yao_bud.groupbox_exists(zia_str)
-    assert yao_bud.groupbox_exists(xio_str)
+    assert yao_bud.groupunit_exists(yao_str)
+    assert yao_bud.groupunit_exists(zia_str)
+    assert yao_bud.groupunit_exists(xio_str)
     assert len(yao_bud.get_acctunit_group_ids_dict()) == 2
-    assert len(yao_bud.get_acctunit_group_ids_dict()) != len(yao_bud._groupboxs)
-    assert len(yao_bud._groupboxs) == 3
-    xio_groupbox = yao_bud.get_groupbox(xio_str)
-    xio_symmerty_groupbox = yao_bud.create_symmetry_groupbox(xio_str)
-    assert xio_groupbox._memberships.keys() == xio_symmerty_groupbox._memberships.keys()
-    assert xio_groupbox.membership_exists(yao_str)
-    assert xio_groupbox.membership_exists(zia_str)
-    assert not xio_groupbox.membership_exists(xio_str)
-    yao_membership = xio_groupbox.get_membership(yao_str)
-    zia_membership = xio_groupbox.get_membership(zia_str)
+    assert len(yao_bud.get_acctunit_group_ids_dict()) != len(yao_bud._groupunits)
+    assert len(yao_bud._groupunits) == 3
+    xio_groupunit = yao_bud.get_groupunit(xio_str)
+    xio_symmerty_groupunit = yao_bud.create_symmetry_groupunit(xio_str)
+    assert (
+        xio_groupunit._memberships.keys() == xio_symmerty_groupunit._memberships.keys()
+    )
+    assert xio_groupunit.membership_exists(yao_str)
+    assert xio_groupunit.membership_exists(zia_str)
+    assert not xio_groupunit.membership_exists(xio_str)
+    yao_membership = xio_groupunit.get_membership(yao_str)
+    zia_membership = xio_groupunit.get_membership(zia_str)
     assert yao_membership.credit_vote == yao_credit_belief
     assert zia_membership.credit_vote == zia_credit_belief
     assert yao_membership.debtit_vote == yao_debtit_belief
     assert zia_membership.debtit_vote == zia_debtit_belief
 
 
-def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario1():
+def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
@@ -566,29 +568,31 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxsWhenNeeded_Scenario1():
     xio_str = "Xio"
     swim_item.set_awardlink(awardlink_shop(xio_str))
     assert len(yao_bud.get_acctunit_group_ids_dict()) == 2
-    assert not yao_bud.groupbox_exists(yao_str)
-    assert not yao_bud.groupbox_exists(zia_str)
-    assert not yao_bud.groupbox_exists(xio_str)
+    assert not yao_bud.groupunit_exists(yao_str)
+    assert not yao_bud.groupunit_exists(zia_str)
+    assert not yao_bud.groupunit_exists(xio_str)
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert yao_bud.groupbox_exists(yao_str)
-    assert yao_bud.groupbox_exists(zia_str)
-    assert yao_bud.groupbox_exists(xio_str)
+    assert yao_bud.groupunit_exists(yao_str)
+    assert yao_bud.groupunit_exists(zia_str)
+    assert yao_bud.groupunit_exists(xio_str)
     assert len(yao_bud.get_acctunit_group_ids_dict()) == 2
-    assert len(yao_bud.get_acctunit_group_ids_dict()) != len(yao_bud._groupboxs)
-    assert len(yao_bud._groupboxs) == 3
-    xio_groupbox = yao_bud.get_groupbox(xio_str)
-    xio_symmerty_groupbox = yao_bud.create_symmetry_groupbox(xio_str)
-    assert xio_groupbox._memberships.keys() == xio_symmerty_groupbox._memberships.keys()
-    assert xio_groupbox.membership_exists(yao_str)
-    assert xio_groupbox.membership_exists(zia_str)
-    assert not xio_groupbox.membership_exists(xio_str)
+    assert len(yao_bud.get_acctunit_group_ids_dict()) != len(yao_bud._groupunits)
+    assert len(yao_bud._groupunits) == 3
+    xio_groupunit = yao_bud.get_groupunit(xio_str)
+    xio_symmerty_groupunit = yao_bud.create_symmetry_groupunit(xio_str)
+    assert (
+        xio_groupunit._memberships.keys() == xio_symmerty_groupunit._memberships.keys()
+    )
+    assert xio_groupunit.membership_exists(yao_str)
+    assert xio_groupunit.membership_exists(zia_str)
+    assert not xio_groupunit.membership_exists(xio_str)
 
 
-def test_BudUnit_get_tree_traverse_generated_groupboxs_ReturnsObj():
+def test_BudUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
@@ -604,14 +608,14 @@ def test_BudUnit_get_tree_traverse_generated_groupboxs_ReturnsObj():
     xio_str = "Xio"
     swim_item.set_awardlink(awardlink_shop(xio_str))
     yao_bud.settle_bud()
-    assert yao_bud.groupbox_exists(yao_str)
-    assert yao_bud.groupbox_exists(zia_str)
-    assert yao_bud.groupbox_exists(xio_str)
+    assert yao_bud.groupunit_exists(yao_str)
+    assert yao_bud.groupunit_exists(zia_str)
+    assert yao_bud.groupunit_exists(xio_str)
     assert len(yao_bud.get_acctunit_group_ids_dict()) == 2
-    assert len(yao_bud.get_acctunit_group_ids_dict()) != len(yao_bud._groupboxs)
+    assert len(yao_bud.get_acctunit_group_ids_dict()) != len(yao_bud._groupunits)
 
     # WHEN
-    symmerty_group_ids = yao_bud.get_tree_traverse_generated_groupboxs()
+    symmerty_group_ids = yao_bud.get_tree_traverse_generated_groupunits()
 
     # THEN
     assert len(symmerty_group_ids) == 1
@@ -620,12 +624,12 @@ def test_BudUnit_get_tree_traverse_generated_groupboxs_ReturnsObj():
     # ESTABLISH
     run_str = ";Run"
     swim_item.set_awardlink(awardlink_shop(run_str))
-    assert not yao_bud.groupbox_exists(run_str)
+    assert not yao_bud.groupunit_exists(run_str)
     yao_bud.settle_bud()
-    assert yao_bud.groupbox_exists(run_str)
+    assert yao_bud.groupunit_exists(run_str)
 
     # WHEN
-    symmerty_group_ids = yao_bud.get_tree_traverse_generated_groupboxs()
+    symmerty_group_ids = yao_bud.get_tree_traverse_generated_groupunits()
 
     # THEN
     assert len(symmerty_group_ids) == 2

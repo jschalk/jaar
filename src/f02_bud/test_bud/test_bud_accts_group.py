@@ -1,4 +1,4 @@
-from src.f02_bud.group import groupbox_shop
+from src.f02_bud.group import groupunit_shop
 from src.f02_bud.bud import budunit_shop
 
 
@@ -34,59 +34,59 @@ def test_BudUnit_get_acctunit_group_ids_dict_ReturnsObj():
     assert group_ids_dict.get(zia_str) == {zia_str}
 
 
-def test_BudUnit_set_groupbox_SetsAttr_Scenario0():
+def test_BudUnit_set_groupunit_SetsAttr_Scenario0():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
     run_str = ";Run"
-    assert not bob_bud._groupboxs.get(run_str)
+    assert not bob_bud._groupunits.get(run_str)
 
     # WHEN
-    bob_bud.set_groupbox(groupbox_shop(run_str))
+    bob_bud.set_groupunit(groupunit_shop(run_str))
 
     # THEN
-    assert bob_bud._groupboxs.get(run_str)
+    assert bob_bud._groupunits.get(run_str)
 
 
-def test_BudUnit_set_groupbox_Sets_road_fund_coin():
+def test_BudUnit_set_groupunit_Sets_road_fund_coin():
     # ESTABLISH
     x_fund_coin = 5
     bob_bud = budunit_shop("Bob", fund_coin=x_fund_coin)
     run_str = ";Run"
-    assert not bob_bud._groupboxs.get(run_str)
+    assert not bob_bud._groupunits.get(run_str)
 
     # WHEN
-    bob_bud.set_groupbox(groupbox_shop(run_str))
+    bob_bud.set_groupunit(groupunit_shop(run_str))
 
     # THEN
-    assert bob_bud._groupboxs.get(run_str)._fund_coin == x_fund_coin
+    assert bob_bud._groupunits.get(run_str)._fund_coin == x_fund_coin
 
 
-def test_BudUnit_groupbox_exists_ReturnsObj():
+def test_BudUnit_groupunit_exists_ReturnsObj():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
     run_str = ";Run"
-    assert not bob_bud.groupbox_exists(run_str)
+    assert not bob_bud.groupunit_exists(run_str)
 
     # WHEN
-    bob_bud.set_groupbox(groupbox_shop(run_str))
+    bob_bud.set_groupunit(groupunit_shop(run_str))
 
     # THEN
-    assert bob_bud.groupbox_exists(run_str)
+    assert bob_bud.groupunit_exists(run_str)
 
 
-def test_BudUnit_get_groupbox_ReturnsObj():
+def test_BudUnit_get_groupunit_ReturnsObj():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
     run_str = ";Run"
-    x_run_groupbox = groupbox_shop(run_str)
-    bob_bud.set_groupbox(x_run_groupbox)
-    assert bob_bud._groupboxs.get(run_str)
+    x_run_groupunit = groupunit_shop(run_str)
+    bob_bud.set_groupunit(x_run_groupunit)
+    assert bob_bud._groupunits.get(run_str)
 
     # WHEN / THEN
-    assert bob_bud.get_groupbox(run_str) == groupbox_shop(run_str)
+    assert bob_bud.get_groupunit(run_str) == groupunit_shop(run_str)
 
 
-def test_BudUnit_create_symmetry_groupbox_ReturnsObj():
+def test_BudUnit_create_symmetry_groupunit_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
@@ -100,16 +100,16 @@ def test_BudUnit_create_symmetry_groupbox_ReturnsObj():
 
     # WHEN
     xio_str = "Xio"
-    xio_groupbox = yao_bud.create_symmetry_groupbox(xio_str)
+    xio_groupunit = yao_bud.create_symmetry_groupunit(xio_str)
 
     # THEN
-    assert xio_groupbox.group_id == xio_str
-    assert xio_groupbox.membership_exists(yao_str)
-    assert xio_groupbox.membership_exists(zia_str)
-    assert len(xio_groupbox._memberships) == 2
-    yao_groupbox = xio_groupbox.get_membership(yao_str)
-    zia_groupbox = xio_groupbox.get_membership(zia_str)
-    assert yao_groupbox.credit_vote == yao_credit_vote
-    assert zia_groupbox.credit_vote == zia_credit_vote
-    assert yao_groupbox.debtit_vote == yao_debtit_vote
-    assert zia_groupbox.debtit_vote == zia_debtit_vote
+    assert xio_groupunit.group_id == xio_str
+    assert xio_groupunit.membership_exists(yao_str)
+    assert xio_groupunit.membership_exists(zia_str)
+    assert len(xio_groupunit._memberships) == 2
+    yao_groupunit = xio_groupunit.get_membership(yao_str)
+    zia_groupunit = xio_groupunit.get_membership(zia_str)
+    assert yao_groupunit.credit_vote == yao_credit_vote
+    assert zia_groupunit.credit_vote == zia_credit_vote
+    assert yao_groupunit.debtit_vote == yao_debtit_vote
+    assert zia_groupunit.debtit_vote == zia_debtit_vote

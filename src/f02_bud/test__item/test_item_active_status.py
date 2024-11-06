@@ -455,7 +455,7 @@ def test_ItemUnit_set_teamheir_CorrectlySetsAttr():
     # assert sport_item._teamheir is None
 
     # WHEN
-    sport_item.set_teamheir(parent_teamheir=None, bud_groupboxs=None)
+    sport_item.set_teamheir(parent_teamheir=None, bud_groupunits=None)
 
     # THEN
     assert sport_item._teamheir is not None
@@ -463,6 +463,6 @@ def test_ItemUnit_set_teamheir_CorrectlySetsAttr():
     swim_teamunit.set_teamlink(team_id=swim_str)
     swim_teamheir = teamheir_shop()
     swim_teamheir.set_teamlinks(
-        teamunit=swim_teamunit, parent_teamheir=None, bud_groupboxs=None
+        teamunit=swim_teamunit, parent_teamheir=None, bud_groupunits=None
     )
     assert sport_item._teamheir == swim_teamheir

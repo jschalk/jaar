@@ -58,7 +58,7 @@ from src.f02_bud.group import (
     AwardLine,
     awardline_shop,
     awardheir_shop,
-    GroupBox,
+    GroupUnit,
 )
 from src.f02_bud.origin import OriginUnit, originunit_get_from_dict
 from src.f02_bud.origin import originunit_shop
@@ -758,11 +758,11 @@ class ItemUnit:
     def set_active_attrs(
         self,
         tree_traverse_count: int,
-        bud_groupboxs: dict[GroupID, GroupBox] = None,
+        bud_groupunits: dict[GroupID, GroupUnit] = None,
         bud_owner_id: AcctID = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active_bool(bud_groupboxs, bud_owner_id)
+        self._active = self._create_active_bool(bud_groupunits, bud_owner_id)
         self._set_item_task()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
@@ -778,17 +778,17 @@ class ItemUnit:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
     def _create_active_bool(
-        self, bud_groupboxs: dict[GroupID, GroupBox], bud_owner_id: AcctID
+        self, bud_groupunits: dict[GroupID, GroupUnit], bud_owner_id: AcctID
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
         if (
             active_bool
-            and bud_groupboxs != {}
+            and bud_groupunits != {}
             and bud_owner_id is not None
             and self._teamheir._teamlinks != {}
         ):
-            self._teamheir.set_owner_id_team(bud_groupboxs, bud_owner_id)
+            self._teamheir.set_owner_id_team(bud_groupunits, bud_owner_id)
             if self._teamheir._owner_id_team is False:
                 active_bool = False
         return active_bool
@@ -943,13 +943,13 @@ class ItemUnit:
     def set_teamheir(
         self,
         parent_teamheir: TeamHeir,
-        bud_groupboxs: dict[GroupID, GroupBox],
+        bud_groupunits: dict[GroupID, GroupUnit],
     ):
         self._teamheir = teamheir_shop()
         self._teamheir.set_teamlinks(
             parent_teamheir=parent_teamheir,
             teamunit=self.teamunit,
-            bud_groupboxs=bud_groupboxs,
+            bud_groupunits=bud_groupunits,
         )
 
     def get_teamunit_dict(self) -> dict:

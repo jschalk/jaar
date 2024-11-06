@@ -533,11 +533,11 @@ def fund_explanation0(
             mode="text",
         )
     )
-    groupbox_str = "GroupBox"
+    groupunit_str = "GroupUnit"
     orange_str = "orange"
-    add_simp_rect(fig, 5.5, -0.2, 6.25, 0.4, groupbox_str, orange_str)
-    add_simp_rect(fig, 5.5, -0.8, 6.25, -0.2, groupbox_str, orange_str)
-    add_simp_rect(fig, 5.5, -1.4, 6.25, -0.8, groupbox_str, orange_str)
+    add_simp_rect(fig, 5.5, -0.2, 6.25, 0.4, groupunit_str, orange_str)
+    add_simp_rect(fig, 5.5, -0.8, 6.25, -0.2, groupunit_str, orange_str)
+    add_simp_rect(fig, 5.5, -1.4, 6.25, -0.8, groupunit_str, orange_str)
     add_rect_arrow(fig, 9, -3.9, 3.1, -3.9, green_str)
     add_rect_arrow(fig, 9, -1.9, 3.1, -1.9, green_str)
     add_rect_arrow(fig, 9, -2.1, 3.1, -2.1, blue_str)
@@ -570,10 +570,10 @@ def fund_explanation0(
     fund_t2_0 = "AwardHeir._fund_give"
     fund_t2_1 = "AwardHeir._fund_take"
 
-    fund_trace3_0 = "GroupBox._fund_give"
-    fund_trace3_1 = "GroupBox._fund_take"
-    fund_trace3_2 = "GroupBox._fund_agenda_give"
-    fund_trace3_3 = "GroupBox._fund_agenda_take"
+    fund_trace3_0 = "GroupUnit._fund_give"
+    fund_trace3_1 = "GroupUnit._fund_take"
+    fund_trace3_2 = "GroupUnit._fund_agenda_give"
+    fund_trace3_3 = "GroupUnit._fund_agenda_take"
 
     fund_trace4_0 = "MemberShip._fund_give"
     fund_trace4_1 = "MemberShip._fund_take"
