@@ -1,5 +1,5 @@
 from src.f00_instrument.file import open_file, save_file
-from src.f00_instrument.dict_tool import (
+from src.f00_instrument.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
     get_from_nested_dict,

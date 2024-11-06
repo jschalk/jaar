@@ -1,5 +1,5 @@
 from src.f00_instrument.file import save_file, open_file, create_file_path
-from src.f00_instrument.dict_tool import get_json_from_dict, get_dict_from_json
+from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
 from src.f01_road.jaar_config import get_init_gift_id_if_None, get_json_filename
 from src.f01_road.road import OwnerID, FiscalID, get_default_fiscal_id_roadnode
 from src.f04_gift.atom_config import fiscal_id_str, owner_id_str

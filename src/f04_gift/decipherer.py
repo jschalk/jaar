@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_tool import get_empty_dict_if_none
+from src.f00_instrument.dict_toolbox import get_empty_dict_if_none
 from src.f01_road.jaar_config import get_fiscal_id_if_None
 from src.f01_road.road import FiscalID, AcctID, default_road_delimiter_if_none
 from src.f04_gift.atom_config import acct_id_str

@@ -35,7 +35,7 @@ def test_bud_itemroot_teamunit_CorrectlySets_item_teamheir():
     # THEN
     x_teamheir = teamheir_shop()
     x_teamheir.set_teamlinks(
-        parent_teamheir=None, teamunit=x_teamunit, bud_groupboxs=None
+        parent_teamheir=None, teamunit=x_teamunit, bud_groupunits=None
     )
     assert yao_bud._itemroot._teamheir is not None
     assert yao_bud._itemroot._teamheir == x_teamheir
@@ -66,9 +66,9 @@ def test_bud_itemkid_teamunit_EmptyCorrectlySets_item_teamheir():
     x_teamheir.set_teamlinks(
         parent_teamheir=None,
         teamunit=x_teamunit,
-        bud_groupboxs=bob_bud._groupboxs,
+        bud_groupunits=bob_bud._groupunits,
     )
-    x_teamheir.set_owner_id_team(bob_bud._groupboxs, bob_bud._owner_id)
+    x_teamheir.set_owner_id_team(bob_bud._groupunits, bob_bud._owner_id)
     print(f"{x_teamheir._owner_id_team=}")
     assert run_item._teamheir._owner_id_team == x_teamheir._owner_id_team
     assert run_item._teamheir == x_teamheir
@@ -99,9 +99,9 @@ def test_bud_itemkid_teamunit_EmptyCorrectlySets_item_teamheir():
     x_teamheir.set_teamlinks(
         parent_teamheir=None,
         teamunit=x_teamunit,
-        bud_groupboxs=bob_bud._groupboxs,
+        bud_groupunits=bob_bud._groupunits,
     )
-    x_teamheir.set_owner_id_team(bob_bud._groupboxs, bob_bud._owner_id)
+    x_teamheir.set_owner_id_team(bob_bud._groupunits, bob_bud._owner_id)
     print(f"{x_teamheir._owner_id_team=}")
     assert run_item._teamheir._owner_id_team == x_teamheir._owner_id_team
     assert run_item._teamheir == x_teamheir
@@ -142,7 +142,7 @@ def test_bud_itemkid_teamunit_CorrectlySets_grandchild_item_teamheir():
     x_teamheir.set_teamlinks(
         parent_teamheir=None,
         teamunit=x_teamunit,
-        bud_groupboxs=sue_bud._groupboxs,
+        bud_groupunits=sue_bud._groupunits,
     )
     assert four_item._teamheir is not None
     assert four_item._teamheir == x_teamheir

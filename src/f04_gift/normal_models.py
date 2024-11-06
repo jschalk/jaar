@@ -23,18 +23,10 @@ class BudTable(Base):
 
 class AcctUnitTable(Base):
     __tablename__ = "acctunit"
-
     uid = Column(Integer, primary_key=True)
     acct_id = Column(String)
     credit_belief = Column(Integer)
     debtit_belief = Column(Integer)
-
-
-# class GroupTable(Base):
-#     __tablename__ = "groupbox"
-
-#     uid = Column(Integer, primary_key=True)
-#     group_id = Column(String)
 
 
 class MemberShipTable(Base):

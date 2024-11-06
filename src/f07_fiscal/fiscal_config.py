@@ -1,5 +1,5 @@
 from src.f00_instrument.file import open_file
-from src.f00_instrument.dict_tool import get_dict_from_json, get_from_nested_dict
+from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
 from src.f04_gift.atom_config import required_args_str, optional_args_str
 from os import getcwd as os_getcwd
 

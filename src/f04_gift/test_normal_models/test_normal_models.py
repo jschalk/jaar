@@ -99,13 +99,13 @@ def test_normalized_table_AcctUnitTable_Exists():
 
 # def test_normalized_table_GroupTable_Exists():
 #     # ESTABLISH
-#     config_category = get_normalized_bud_table_build().get("bud_groupbox")
+#     config_category = get_normalized_bud_table_build().get("bud_groupunit")
 #     mapper = inspect(GroupTable)
 #     print_out_expected_class_attribute_declarations(config_category)
 
 #     # WHEN / THEN
 #     config_table_name = get_config_table_name(config_category)
-#     assert config_table_name == "groupbox"
+#     assert config_table_name == "groupunit"
 #     assert config_table_name == GroupTable.__tablename__
 #     all_columns_are_as_config_requires(mapper, config_category)
 

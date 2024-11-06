@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_tool import get_json_from_dict
+from src.f00_instrument.dict_toolbox import get_json_from_dict
 from src.f00_instrument.file import save_file
 from src.f01_road.finance_tran import quota_str, time_id_str, road_delimiter_str
 from src.f02_bud.bud_tool import (

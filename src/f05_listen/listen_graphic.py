@@ -1,4 +1,4 @@
-from src.f00_instrument.plotly_tool import (
+from src.f00_instrument.plotly_toolbox import (
     conditional_fig_show,
     add_simp_rect,
     add_direc_rect,
@@ -293,11 +293,11 @@ def fund_explanation0(
     add_simp_rect(fig, 4, -3.2, 5, -2.8, teamunit_str)
     add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_str)
     add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4)
-    groupbox_str = "GroupBox"
+    groupunit_str = "GroupUnit"
     orange_str = "orange"
-    add_simp_rect(fig, 5.5, -0.2, 6.25, 0.4, groupbox_str, orange_str)
-    add_simp_rect(fig, 5.5, -0.8, 6.25, -0.2, groupbox_str, orange_str)
-    add_simp_rect(fig, 5.5, -1.4, 6.25, -0.8, groupbox_str, orange_str)
+    add_simp_rect(fig, 5.5, -0.2, 6.25, 0.4, groupunit_str, orange_str)
+    add_simp_rect(fig, 5.5, -0.8, 6.25, -0.2, groupunit_str, orange_str)
+    add_simp_rect(fig, 5.5, -1.4, 6.25, -0.8, groupunit_str, orange_str)
     add_rect_arrow(fig, 9, -3.9, 3.1, -3.9, green_str)
     add_rect_arrow(fig, 9, -1.9, 3.1, -1.9, green_str)
     add_rect_arrow(fig, 9, -2.1, 3.1, -2.1, blue_str)

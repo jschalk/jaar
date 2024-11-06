@@ -113,7 +113,7 @@ def add_atom_rect(fig: plotly_Figure, atomplotyshape: AtomPlotlyShape):
     add_rect_str(fig, x=text_x, y=text_y, text=atomplotyshape.display_str)
 
 
-def add_groupboxs_circle(fig: plotly_Figure):
+def add_groupunits_circle(fig: plotly_Figure):
     home_form_x0 = 0.2
     home_form_x1 = 1 - 0.2
     home_width = home_form_x1 - home_form_x0
@@ -138,7 +138,7 @@ def add_groupboxs_circle(fig: plotly_Figure):
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_str(fig, x=text_x, y=text_y, text="GroupBoxs")
+    add_rect_str(fig, x=text_x, y=text_y, text="GroupUnits")
 
 
 def add_different_items_circle(fig: plotly_Figure):
@@ -285,7 +285,7 @@ def atomunit_periodic_table0() -> plotly_Figure:
     add_atom_rect(fig, bud_acct_membership_delete)
     add_atom_rect(fig, bud_acctunit_delete)
     add_atom_rect(fig, budunit_update)
-    add_groupboxs_circle(fig)
+    add_groupunits_circle(fig)
     add_different_items_circle(fig)
 
     fig.add_trace(

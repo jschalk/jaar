@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_tool import get_from_nested_dict
+from src.f00_instrument.dict_toolbox import get_from_nested_dict
 from src.f02_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,

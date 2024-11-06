@@ -7,33 +7,8 @@ class Base(DeclarativeBase):
     pass
 
 
-# class br00000Table(Base):__tablename__="br00000"
-# class br00001Table(Base):__tablename__="br00001"
-# class br00002Table(Base):__tablename__="br00002"
-# class br00003Table(Base):__tablename__="br00003"
-# class br00004Table(Base):__tablename__="br00004"
-# class br00005Table(Base):__tablename__="br00005"
-# class br00011Table(Base):__tablename__="br00011"
-# class br00012Table(Base):__tablename__="br00012"
-# class br00013Table(Base):__tablename__="br00013"
-# class br00019Table(Base):__tablename__="br00019"
-# class br00020Table(Base):__tablename__="br00020"
-# class br00021Table(Base):__tablename__="br00021"
-# class br00022Table(Base):__tablename__="br00022"
-# class br00023Table(Base):__tablename__="br00023"
-# class br00024Table(Base):__tablename__="br00024"
-# class br00025Table(Base):__tablename__="br00025"
-# class br00026Table(Base):__tablename__="br00026"
-# class br00027Table(Base):__tablename__="br00027"
-# class br00028Table(Base):__tablename__="br00028"
-# class br00029Table(Base):__tablename__="br00029"
-# class br00036Table(Base):__tablename__="br00036"
-# class br00040Table(Base):__tablename__="br00040"
-# class br00041Table(Base):__tablename__="br00041"
-
-
-class br00000Table(Base):
-    __tablename__ = "br00000"
+class br00000AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     c400_number = Column(Integer)
@@ -48,8 +23,8 @@ class br00000Table(Base):
     yr1_jan1_offset = Column(Integer)
 
 
-class br00001Table(Base):
-    __tablename__ = "br00001"
+class br00001AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     acct_id = Column(String)
@@ -59,8 +34,8 @@ class br00001Table(Base):
     time_id = Column(Integer)
 
 
-class br00002Table(Base):
-    __tablename__ = "br00002"
+class br00002AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     acct_id = Column(String)
@@ -70,8 +45,8 @@ class br00002Table(Base):
     time_id = Column(Integer)
 
 
-class br00003Table(Base):
-    __tablename__ = "br00003"
+class br00003AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     cumlative_minute = Column(Integer)
@@ -79,8 +54,8 @@ class br00003Table(Base):
     hour_label = Column(String)
 
 
-class br00004Table(Base):
-    __tablename__ = "br00004"
+class br00004AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     cumlative_day = Column(Integer)
@@ -88,8 +63,8 @@ class br00004Table(Base):
     month_label = Column(String)
 
 
-class br00005Table(Base):
-    __tablename__ = "br00005"
+class br00005AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     weekday_order = Column(Integer)
@@ -97,8 +72,8 @@ class br00005Table(Base):
     weekday_label = Column(String)
 
 
-class br00011Table(Base):
-    __tablename__ = "br00011"
+class br00011AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     acct_id = Column(String)
@@ -106,8 +81,8 @@ class br00011Table(Base):
     owner_id = Column(String)
 
 
-class br00012Table(Base):
-    __tablename__ = "br00012"
+class br00012AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     acct_id = Column(String)
@@ -116,8 +91,8 @@ class br00012Table(Base):
     owner_id = Column(String)
 
 
-class br00013Table(Base):
-    __tablename__ = "br00013"
+class br00013AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     fiscal_id = Column(String)
@@ -128,8 +103,8 @@ class br00013Table(Base):
     pledge = Column(Integer)
 
 
-class br00019Table(Base):
-    __tablename__ = "br00019"
+class br00019AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     addin = Column(Float)
@@ -146,8 +121,8 @@ class br00019Table(Base):
     stop_want = Column(Float)
 
 
-class br00020Table(Base):
-    __tablename__ = "br00020"
+class br00020AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     acct_id = Column(String)
@@ -158,8 +133,8 @@ class br00020Table(Base):
     owner_id = Column(String)
 
 
-class br00021Table(Base):
-    __tablename__ = "br00021"
+class br00021AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     acct_id = Column(String)
@@ -169,8 +144,8 @@ class br00021Table(Base):
     owner_id = Column(String)
 
 
-class br00022Table(Base):
-    __tablename__ = "br00022"
+class br00022AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     awardee_id = Column(String)
@@ -181,8 +156,8 @@ class br00022Table(Base):
     take_force = Column(Float)
 
 
-class br00023Table(Base):
-    __tablename__ = "br00023"
+class br00023AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     base = Column(String)
@@ -194,8 +169,8 @@ class br00023Table(Base):
     road = Column(String)
 
 
-class br00024Table(Base):
-    __tablename__ = "br00024"
+class br00024AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     fiscal_id = Column(String)
@@ -204,8 +179,8 @@ class br00024Table(Base):
     team_id = Column(String)
 
 
-class br00025Table(Base):
-    __tablename__ = "br00025"
+class br00025AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     fiscal_id = Column(String)
@@ -214,8 +189,8 @@ class br00025Table(Base):
     healer_id = Column(String)
 
 
-class br00026Table(Base):
-    __tablename__ = "br00026"
+class br00026AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     base = Column(String)
@@ -228,8 +203,8 @@ class br00026Table(Base):
     road = Column(String)
 
 
-class br00027Table(Base):
-    __tablename__ = "br00027"
+class br00027AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     base = Column(String)
@@ -239,8 +214,8 @@ class br00027Table(Base):
     road = Column(String)
 
 
-class br00028Table(Base):
-    __tablename__ = "br00028"
+class br00028AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     addin = Column(Float)
@@ -260,8 +235,8 @@ class br00028Table(Base):
     stop_want = Column(Float)
 
 
-class br00029Table(Base):
-    __tablename__ = "br00029"
+class br00029AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     credor_respect = Column(Float)
@@ -277,8 +252,8 @@ class br00029Table(Base):
     tally = Column(Float)
 
 
-class br00036Table(Base):
-    __tablename__ = "br00036"
+class br00036AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     fiscal_id = Column(String)
@@ -289,8 +264,8 @@ class br00036Table(Base):
     problem_bool = Column(Integer)
 
 
-class br00040Table(Base):
-    __tablename__ = "br00040"
+class br00040AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     inx_road_delimiter = Column(String)
@@ -300,8 +275,8 @@ class br00040Table(Base):
     unknown_word = Column(String)
 
 
-class br00041Table(Base):
-    __tablename__ = "br00041"
+class br00041AbstractTable(Base):
+    __abstract__ = True
     face_id = Column(String, primary_key=True)
     eon_id = Column(Integer, primary_key=True)
     inx_label = Column(String)
@@ -309,3 +284,312 @@ class br00041Table(Base):
     otx_label = Column(String)
     otx_road_delimiter = Column(String)
     unknown_word = Column(String)
+
+
+class br00000HoldTable(br00000AbstractTable):
+    __tablename__ = "br00000_hold"
+
+
+class br00001HoldTable(br00001AbstractTable):
+    __tablename__ = "br00001_hold"
+
+
+class br00002HoldTable(br00002AbstractTable):
+    __tablename__ = "br00002_hold"
+
+
+class br00003HoldTable(br00003AbstractTable):
+    __tablename__ = "br00003_hold"
+
+
+class br00004HoldTable(br00004AbstractTable):
+    __tablename__ = "br00004_hold"
+
+
+class br00005HoldTable(br00005AbstractTable):
+    __tablename__ = "br00005_hold"
+
+
+class br00011HoldTable(br00011AbstractTable):
+    __tablename__ = "br00011_hold"
+
+
+class br00012HoldTable(br00012AbstractTable):
+    __tablename__ = "br00012_hold"
+
+
+class br00013HoldTable(br00013AbstractTable):
+    __tablename__ = "br00013_hold"
+
+
+class br00019HoldTable(br00019AbstractTable):
+    __tablename__ = "br00019_hold"
+
+
+class br00020HoldTable(br00020AbstractTable):
+    __tablename__ = "br00020_hold"
+
+
+class br00021HoldTable(br00021AbstractTable):
+    __tablename__ = "br00021_hold"
+
+
+class br00022HoldTable(br00022AbstractTable):
+    __tablename__ = "br00022_hold"
+
+
+class br00023HoldTable(br00023AbstractTable):
+    __tablename__ = "br00023_hold"
+
+
+class br00024HoldTable(br00024AbstractTable):
+    __tablename__ = "br00024_hold"
+
+
+class br00025HoldTable(br00025AbstractTable):
+    __tablename__ = "br00025_hold"
+
+
+class br00026HoldTable(br00026AbstractTable):
+    __tablename__ = "br00026_hold"
+
+
+class br00027HoldTable(br00027AbstractTable):
+    __tablename__ = "br00027_hold"
+
+
+class br00028HoldTable(br00028AbstractTable):
+    __tablename__ = "br00028_hold"
+
+
+class br00029HoldTable(br00029AbstractTable):
+    __tablename__ = "br00029_hold"
+
+
+class br00036HoldTable(br00036AbstractTable):
+    __tablename__ = "br00036_hold"
+
+
+class br00040HoldTable(br00040AbstractTable):
+    __tablename__ = "br00040_hold"
+
+
+class br00041HoldTable(br00041AbstractTable):
+    __tablename__ = "br00041_hold"
+
+
+class br00000StageTable(br00000AbstractTable):
+    __tablename__ = "br00000_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00001StageTable(br00001AbstractTable):
+    __tablename__ = "br00001_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00002StageTable(br00002AbstractTable):
+    __tablename__ = "br00002_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00003StageTable(br00003AbstractTable):
+    __tablename__ = "br00003_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00004StageTable(br00004AbstractTable):
+    __tablename__ = "br00004_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00005StageTable(br00005AbstractTable):
+    __tablename__ = "br00005_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00011StageTable(br00011AbstractTable):
+    __tablename__ = "br00011_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00012StageTable(br00012AbstractTable):
+    __tablename__ = "br00012_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00013StageTable(br00013AbstractTable):
+    __tablename__ = "br00013_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00019StageTable(br00019AbstractTable):
+    __tablename__ = "br00019_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00020StageTable(br00020AbstractTable):
+    __tablename__ = "br00020_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00021StageTable(br00021AbstractTable):
+    __tablename__ = "br00021_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00022StageTable(br00022AbstractTable):
+    __tablename__ = "br00022_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00023StageTable(br00023AbstractTable):
+    __tablename__ = "br00023_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00024StageTable(br00024AbstractTable):
+    __tablename__ = "br00024_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00025StageTable(br00025AbstractTable):
+    __tablename__ = "br00025_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00026StageTable(br00026AbstractTable):
+    __tablename__ = "br00026_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00027StageTable(br00027AbstractTable):
+    __tablename__ = "br00027_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00028StageTable(br00028AbstractTable):
+    __tablename__ = "br00028_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00029StageTable(br00029AbstractTable):
+    __tablename__ = "br00029_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00036StageTable(br00036AbstractTable):
+    __tablename__ = "br00036_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00040StageTable(br00040AbstractTable):
+    __tablename__ = "br00040_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00041StageTable(br00041AbstractTable):
+    __tablename__ = "br00041_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+def get_brick_holdtables() -> dict[str, DeclarativeBase]:
+    return {
+        "br00000": br00000HoldTable,
+        "br00001": br00001HoldTable,
+        "br00002": br00002HoldTable,
+        "br00003": br00003HoldTable,
+        "br00004": br00004HoldTable,
+        "br00005": br00005HoldTable,
+        "br00011": br00011HoldTable,
+        "br00012": br00012HoldTable,
+        "br00013": br00013HoldTable,
+        "br00019": br00019HoldTable,
+        "br00020": br00020HoldTable,
+        "br00021": br00021HoldTable,
+        "br00022": br00022HoldTable,
+        "br00023": br00023HoldTable,
+        "br00024": br00024HoldTable,
+        "br00025": br00025HoldTable,
+        "br00026": br00026HoldTable,
+        "br00027": br00027HoldTable,
+        "br00028": br00028HoldTable,
+        "br00029": br00029HoldTable,
+        "br00036": br00036HoldTable,
+        "br00040": br00040HoldTable,
+        "br00041": br00041HoldTable,
+    }
+
+
+def get_brick_stagetables() -> dict[str, DeclarativeBase]:
+    return {
+        "br00000": br00000StageTable,
+        "br00001": br00001StageTable,
+        "br00002": br00002StageTable,
+        "br00003": br00003StageTable,
+        "br00004": br00004StageTable,
+        "br00005": br00005StageTable,
+        "br00011": br00011StageTable,
+        "br00012": br00012StageTable,
+        "br00013": br00013StageTable,
+        "br00019": br00019StageTable,
+        "br00020": br00020StageTable,
+        "br00021": br00021StageTable,
+        "br00022": br00022StageTable,
+        "br00023": br00023StageTable,
+        "br00024": br00024StageTable,
+        "br00025": br00025StageTable,
+        "br00026": br00026StageTable,
+        "br00027": br00027StageTable,
+        "br00028": br00028StageTable,
+        "br00029": br00029StageTable,
+        "br00036": br00036StageTable,
+        "br00040": br00040StageTable,
+        "br00041": br00041StageTable,
+    }

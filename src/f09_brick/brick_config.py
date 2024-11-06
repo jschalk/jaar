@@ -1,5 +1,5 @@
 from src.f00_instrument.file import open_file
-from src.f00_instrument.dict_tool import get_dict_from_json
+from src.f00_instrument.dict_toolbox import get_dict_from_json
 from src.f01_road.jaar_config import get_json_filename
 from src.f02_bud.bud_tool import budunit_str
 from src.f07_fiscal.fiscal_config import fiscalunit_str

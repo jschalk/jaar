@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_tool import (
+from src.f00_instrument.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
     get_1_if_None,
@@ -49,8 +49,8 @@ from src.f02_bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
 from src.f02_bud.group import (
     AwardLink,
     GroupID,
-    GroupBox,
-    groupbox_shop,
+    GroupUnit,
+    groupunit_shop,
     membership_shop,
 )
 from src.f02_bud.healer import HealerLink
@@ -142,7 +142,7 @@ class BudUnit:
     _keeps_justified: bool = None
     _keeps_buildable: bool = None
     _sum_healerlink_share: float = None
-    _groupboxs: dict[GroupID, GroupBox] = None
+    _groupunits: dict[GroupID, GroupUnit] = None
     _offtrack_kids_mass_set: set[RoadUnit] = None
     _offtrack_fund: float = None
     _reason_bases: set[RoadUnit] = None
@@ -294,27 +294,27 @@ class BudUnit:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
 
-    def add_to_groupbox_fund_give_fund_take(
+    def add_to_groupunit_fund_give_fund_take(
         self,
         group_id: GroupID,
         awardheir_fund_give: float,
         awardheir_fund_take: float,
     ):
-        x_groupbox = self.get_groupbox(group_id)
-        if x_groupbox is not None:
-            x_groupbox._fund_give += awardheir_fund_give
-            x_groupbox._fund_take += awardheir_fund_take
+        x_groupunit = self.get_groupunit(group_id)
+        if x_groupunit is not None:
+            x_groupunit._fund_give += awardheir_fund_give
+            x_groupunit._fund_take += awardheir_fund_take
 
-    def add_to_groupbox_fund_agenda_give_take(
+    def add_to_groupunit_fund_agenda_give_take(
         self,
         group_id: GroupID,
         awardline_fund_give: float,
         awardline_fund_take: float,
     ):
-        x_groupbox = self.get_groupbox(group_id)
+        x_groupunit = self.get_groupunit(group_id)
         if awardline_fund_give is not None and awardline_fund_take is not None:
-            x_groupbox._fund_agenda_give += awardline_fund_give
-            x_groupbox._fund_agenda_take += awardline_fund_take
+            x_groupunit._fund_agenda_give += awardline_fund_give
+            x_groupunit._fund_agenda_take += awardline_fund_take
 
     def add_to_acctunit_fund_give_take(
         self,
@@ -387,18 +387,18 @@ class BudUnit:
                     x_dict[x_group_id] = acct_id_set
         return x_dict
 
-    def set_groupbox(self, x_groupbox: GroupBox):
-        x_groupbox._fund_coin = self.fund_coin
-        self._groupboxs[x_groupbox.group_id] = x_groupbox
+    def set_groupunit(self, x_groupunit: GroupUnit):
+        x_groupunit._fund_coin = self.fund_coin
+        self._groupunits[x_groupunit.group_id] = x_groupunit
 
-    def groupbox_exists(self, group_id: GroupID) -> bool:
-        return self._groupboxs.get(group_id) is not None
+    def groupunit_exists(self, group_id: GroupID) -> bool:
+        return self._groupunits.get(group_id) is not None
 
-    def get_groupbox(self, x_group_id: GroupID) -> GroupBox:
-        return self._groupboxs.get(x_group_id)
+    def get_groupunit(self, x_group_id: GroupID) -> GroupUnit:
+        return self._groupunits.get(x_group_id)
 
-    def create_symmetry_groupbox(self, x_group_id: GroupID) -> GroupBox:
-        x_groupbox = groupbox_shop(x_group_id)
+    def create_symmetry_groupunit(self, x_group_id: GroupID) -> GroupUnit:
+        x_groupunit = groupunit_shop(x_group_id)
         for x_acctunit in self._accts.values():
             x_membership = membership_shop(
                 group_id=x_group_id,
@@ -406,12 +406,12 @@ class BudUnit:
                 debtit_vote=x_acctunit.debtit_belief,
                 _acct_id=x_acctunit.acct_id,
             )
-            x_groupbox.set_membership(x_membership)
-        return x_groupbox
+            x_groupunit.set_membership(x_membership)
+        return x_groupunit
 
-    def get_tree_traverse_generated_groupboxs(self) -> set[GroupID]:
+    def get_tree_traverse_generated_groupunits(self) -> set[GroupID]:
         x_acctunit_group_ids = set(self.get_acctunit_group_ids_dict().keys())
-        all_group_ids = set(self._groupboxs.keys())
+        all_group_ids = set(self._groupunits.keys())
         return all_group_ids.difference(x_acctunit_group_ids)
 
     def _is_item_rangeroot(self, item_road: RoadUnit) -> bool:
@@ -912,16 +912,16 @@ class BudUnit:
         for x_acct_id, acct_fund_take in fund_take_allot.items():
             self.get_acct(x_acct_id).add_fund_agenda_take(acct_fund_take)
 
-    def _reset_groupboxs_fund_give_take(self):
-        for groupbox_obj in self._groupboxs.values():
-            groupbox_obj.clear_fund_give_take()
+    def _reset_groupunits_fund_give_take(self):
+        for groupunit_obj in self._groupunits.values():
+            groupunit_obj.clear_fund_give_take()
 
-    def _set_groupboxs_fund_share(self, awardheirs: dict[GroupID, AwardLink]):
+    def _set_groupunits_fund_share(self, awardheirs: dict[GroupID, AwardLink]):
         for awardlink_obj in awardheirs.values():
             x_awardee_id = awardlink_obj.awardee_id
-            if not self.groupbox_exists(x_awardee_id):
-                self.set_groupbox(self.create_symmetry_groupbox(x_awardee_id))
-            self.add_to_groupbox_fund_give_fund_take(
+            if not self.groupunit_exists(x_awardee_id):
+                self.set_groupunit(self.create_symmetry_groupunit(x_awardee_id))
+            self.add_to_groupunit_fund_give_fund_take(
                 group_id=awardlink_obj.awardee_id,
                 awardheir_fund_give=awardlink_obj._fund_give,
                 awardheir_fund_take=awardlink_obj._fund_take,
@@ -936,7 +936,7 @@ class BudUnit:
             if item.is_agenda_item():
                 if item.awardheir_exists():
                     for x_awardline in item._awardlines.values():
-                        self.add_to_groupbox_fund_agenda_give_take(
+                        self.add_to_groupunit_fund_agenda_give_take(
                             group_id=x_awardline.awardee_id,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
@@ -944,10 +944,10 @@ class BudUnit:
                 else:
                     self._add_to_acctunits_fund_agenda_give_take(item.get_fund_share())
 
-    def _allot_groupboxs_fund(self):
-        for x_groupbox in self._groupboxs.values():
-            x_groupbox._set_membership_fund_give_fund_take()
-            for x_membership in x_groupbox._memberships.values():
+    def _allot_groupunits_fund(self):
+        for x_groupunit in self._groupunits.values():
+            x_groupunit._set_membership_fund_give_fund_take()
+            for x_membership in x_groupunit._memberships.values():
                 self.add_to_acctunit_fund_give_take(
                     acctunit_acct_id=x_membership._acct_id,
                     fund_give=x_membership._fund_give,
@@ -1076,7 +1076,7 @@ class BudUnit:
             ):
                 self._offtrack_kids_mass_set.add(x_item.get_road())
 
-    def _set_groupbox_acctunit_funds(self, keep_exceptions):
+    def _set_groupunit_acctunit_funds(self, keep_exceptions):
         for x_item in self._item_dict.values():
             x_item.set_awardheirs_fund_give_fund_take()
             if x_item.is_kidless():
@@ -1147,24 +1147,24 @@ class BudUnit:
         x_item.set_reasonheirs(self._item_dict, parent_item._reasonheirs)
         x_item.set_range_factheirs(self._item_dict, self._range_inheritors)
         tt_count = self._tree_traverse_count
-        x_item.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
+        x_item.set_active_attrs(tt_count, self._groupunits, self._owner_id)
 
     def _allot_fund_share(self, item: ItemUnit):
         if item.awardheir_exists():
-            self._set_groupboxs_fund_share(item._awardheirs)
+            self._set_groupunits_fund_share(item._awardheirs)
         elif item.awardheir_exists() is False:
             self._add_to_acctunits_fund_give_take(item.get_fund_share())
 
-    def _create_groupboxs_metrics(self):
-        self._groupboxs = {}
+    def _create_groupunits_metrics(self):
+        self._groupunits = {}
         for group_id, acct_id_set in self.get_acctunit_group_ids_dict().items():
-            x_groupbox = groupbox_shop(group_id, _road_delimiter=self._road_delimiter)
+            x_groupunit = groupunit_shop(group_id, _road_delimiter=self._road_delimiter)
             for x_acct_id in acct_id_set:
                 x_membership = self.get_acct(x_acct_id).get_membership(group_id)
-                x_groupbox.set_membership(x_membership)
-                self.set_groupbox(x_groupbox)
+                x_groupunit.set_membership(x_membership)
+                self.set_groupunit(x_groupunit)
 
-    def _set_acctunit_groupbox_respect_ledgers(self):
+    def _set_acctunit_groupunit_respect_ledgers(self):
         self.credor_respect = validate_respect_num(self.credor_respect)
         self.debtor_respect = validate_respect_num(self.debtor_respect)
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
@@ -1174,7 +1174,7 @@ class BudUnit:
             self.get_acct(x_acct_id).set_credor_pool(acct_credor_pool)
         for x_acct_id, acct_debtor_pool in debtor_allot.items():
             self.get_acct(x_acct_id).set_debtor_pool(acct_debtor_pool)
-        self._create_groupboxs_metrics()
+        self._create_groupunits_metrics()
         self._reset_acctunit_fund_give_take()
 
     def _clear_item_dict_and_bud_obj_settle_attrs(self):
@@ -1195,12 +1195,12 @@ class BudUnit:
             if x_item._root:
                 x_item.set_factheirs(x_item.factunits)
                 x_item.set_itemroot_inherit_reasonheirs()
-                x_item.set_teamheir(None, self._groupboxs)
+                x_item.set_teamheir(None, self._groupunits)
                 x_item.inherit_awardheirs()
             else:
                 parent_item = self.get_item_obj(x_item._parent_road)
                 x_item.set_factheirs(parent_item._factheirs)
-                x_item.set_teamheir(parent_item._teamheir, self._groupboxs)
+                x_item.set_teamheir(parent_item._teamheir, self._groupunits)
                 x_item.inherit_awardheirs(parent_item._awardheirs)
             x_item.set_awardheirs_fund_give_fund_take()
 
@@ -1208,7 +1208,7 @@ class BudUnit:
         self._clear_item_dict_and_bud_obj_settle_attrs()
         self._set_item_dict()
         self._set_itemtree_range_attrs()
-        self._set_acctunit_groupbox_respect_ledgers()
+        self._set_acctunit_groupunit_respect_ledgers()
         self._clear_acctunit_fund_attrs()
         self._clear_itemtree_fund_and_active_status_attrs()
         self._set_itemtree_factheirs_teamheirs_awardheirs()
@@ -1220,7 +1220,7 @@ class BudUnit:
             self._tree_traverse_count += 1
 
         self._set_itemtree_fund_attrs(self._itemroot)
-        self._set_groupbox_acctunit_funds(keep_exceptions)
+        self._set_groupunit_acctunit_funds(keep_exceptions)
         self._set_acctunit_fund_related_attrs()
         self._set_bud_keep_attrs()
 
@@ -1229,7 +1229,7 @@ class BudUnit:
             if x_item._root:
                 tt_count = self._tree_traverse_count
                 root_item = self._itemroot
-                root_item.set_active_attrs(tt_count, self._groupboxs, self._owner_id)
+                root_item.set_active_attrs(tt_count, self._groupunits, self._owner_id)
             else:
                 parent_item = self.get_item_obj(x_item._parent_road)
                 self._set_kids_active_status_attrs(x_item, parent_item)
@@ -1270,7 +1270,7 @@ class BudUnit:
         self.set_offtrack_fund()
         self._allot_offtrack_fund()
         self._allot_fund_bud_agenda()
-        self._allot_groupboxs_fund()
+        self._allot_groupunits_fund()
         self._set_acctunits_fund_agenda_ratios()
 
     def _set_bud_keep_attrs(self):
@@ -1294,8 +1294,8 @@ class BudUnit:
         _healers_dict = {}
         for x_keep_road, x_keep_item in self._keep_dict.items():
             for x_healer_id in x_keep_item.healerlink._healer_ids:
-                x_groupbox = self.get_groupbox(x_healer_id)
-                for x_acct_id in x_groupbox._memberships.keys():
+                x_groupunit = self.get_groupunit(x_healer_id)
+                for x_acct_id in x_groupunit._memberships.keys():
                     if _healers_dict.get(x_acct_id) is None:
                         _healers_dict[x_acct_id] = {x_keep_road: x_keep_item}
                     else:
@@ -1310,7 +1310,7 @@ class BudUnit:
         )
 
     def _clear_acctunit_fund_attrs(self):
-        self._reset_groupboxs_fund_give_take()
+        self._reset_groupunits_fund_give_take()
         self._reset_acctunit_fund_give_take()
 
     def get_item_tree_ordered_road_list(
@@ -1415,7 +1415,7 @@ def budunit_shop(
         tally=get_1_if_None(tally),
         _fiscal_id=_fiscal_id,
         _accts=get_empty_dict_if_none(None),
-        _groupboxs={},
+        _groupunits={},
         _item_dict=get_empty_dict_if_none(None),
         _keep_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),

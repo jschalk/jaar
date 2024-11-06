@@ -244,7 +244,7 @@ def test_BudUnit_settle_bud_WhenItemUnitHasFundsBut_kidsHaveNoMassDistributeFund
     assert sue_budunit.get_item_obj(clean_road)._fund_ratio is None
     assert sue_budunit.get_item_obj(sweep_road)._fund_ratio is None
     assert sue_budunit.get_item_obj(vaccum_road)._fund_ratio is None
-    assert sue_budunit.get_groupbox(yao_str) is None
+    assert sue_budunit.get_groupunit(yao_str) is None
 
     assert not sue_budunit._offtrack_fund
     assert sue_budunit.get_acct(yao_str)._fund_give == 0
@@ -261,8 +261,8 @@ def test_BudUnit_settle_bud_WhenItemUnitHasFundsBut_kidsHaveNoMassDistributeFund
     assert sue_budunit.get_item_obj(clean_road)._fund_ratio == clean_fund_ratio
     assert sue_budunit.get_item_obj(sweep_road)._fund_ratio == 0
     assert sue_budunit.get_item_obj(vaccum_road)._fund_ratio == 0
-    assert sue_budunit.get_groupbox(yao_str)._fund_give == 0
-    assert sue_budunit.get_groupbox(yao_str)._fund_take == 0
+    assert sue_budunit.get_groupunit(yao_str)._fund_give == 0
+    assert sue_budunit.get_groupunit(yao_str)._fund_take == 0
 
     assert sue_budunit._offtrack_fund == clean_fund_ratio * default_fund_pool()
     assert sue_budunit.get_acct(yao_str)._fund_give == default_fund_pool()
@@ -352,7 +352,7 @@ def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootItemUnitFromNonRoo
     assert casa_itemunit._awardlines == {x_awardline.awardee_id: x_awardline}
 
 
-def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupBox_fund_give_fund_take():
+def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_take():
     # ESTABLISH
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str)
@@ -375,20 +375,20 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupBox_fund_give_fund_ta
     sue_bud.settle_bud()
 
     # THEN
-    yao_groupbox = sue_bud.get_groupbox(yao_str)
-    zia_groupbox = sue_bud.get_groupbox(zia_str)
-    xio_groupbox = sue_bud.get_groupbox(xio_str)
-    assert yao_groupbox._fund_give == 0.5 * default_fund_pool()
-    assert yao_groupbox._fund_take == 0.75 * default_fund_pool()
-    assert zia_groupbox._fund_give == 0.25 * default_fund_pool()
-    assert zia_groupbox._fund_take == 0.125 * default_fund_pool()
-    assert xio_groupbox._fund_give == 0.25 * default_fund_pool()
-    assert xio_groupbox._fund_take == 0.125 * default_fund_pool()
-    cred_sum1 = yao_groupbox._fund_give
-    cred_sum1 += zia_groupbox._fund_give + xio_groupbox._fund_give
+    yao_groupunit = sue_bud.get_groupunit(yao_str)
+    zia_groupunit = sue_bud.get_groupunit(zia_str)
+    xio_groupunit = sue_bud.get_groupunit(xio_str)
+    assert yao_groupunit._fund_give == 0.5 * default_fund_pool()
+    assert yao_groupunit._fund_take == 0.75 * default_fund_pool()
+    assert zia_groupunit._fund_give == 0.25 * default_fund_pool()
+    assert zia_groupunit._fund_take == 0.125 * default_fund_pool()
+    assert xio_groupunit._fund_give == 0.25 * default_fund_pool()
+    assert xio_groupunit._fund_take == 0.125 * default_fund_pool()
+    cred_sum1 = yao_groupunit._fund_give
+    cred_sum1 += zia_groupunit._fund_give + xio_groupunit._fund_give
     assert cred_sum1 == 1 * default_fund_pool()
-    debt_sum1 = yao_groupbox._fund_take
-    debt_sum1 += zia_groupbox._fund_take + xio_groupbox._fund_take
+    debt_sum1 = yao_groupunit._fund_take
+    debt_sum1 += zia_groupunit._fund_take + xio_groupunit._fund_take
     assert debt_sum1 == 1 * default_fund_pool()
 
     # ESTABLISH
@@ -402,27 +402,27 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupBox_fund_give_fund_ta
     sue_bud.settle_bud()
 
     # THEN
-    yao_groupbox = sue_bud.get_groupbox(yao_str)
-    zia_groupbox = sue_bud.get_groupbox(zia_str)
-    xio_groupbox = sue_bud.get_groupbox(xio_str)
-    sue_groupbox = sue_bud.get_groupbox(sue_str)
-    assert yao_groupbox._fund_give != 0.5 * default_fund_pool()
-    assert yao_groupbox._fund_take != 0.75 * default_fund_pool()
-    assert zia_groupbox._fund_give != 0.25 * default_fund_pool()
-    assert zia_groupbox._fund_take != 0.125 * default_fund_pool()
-    assert xio_groupbox._fund_give != 0.25 * default_fund_pool()
-    assert xio_groupbox._fund_take != 0.125 * default_fund_pool()
-    assert sue_groupbox._fund_give is not None
-    assert sue_groupbox._fund_take is not None
-    cred_sum1 = yao_groupbox._fund_give + zia_groupbox._fund_give
-    cred_sum1 += xio_groupbox._fund_give + sue_groupbox._fund_give
+    yao_groupunit = sue_bud.get_groupunit(yao_str)
+    zia_groupunit = sue_bud.get_groupunit(zia_str)
+    xio_groupunit = sue_bud.get_groupunit(xio_str)
+    sue_groupunit = sue_bud.get_groupunit(sue_str)
+    assert yao_groupunit._fund_give != 0.5 * default_fund_pool()
+    assert yao_groupunit._fund_take != 0.75 * default_fund_pool()
+    assert zia_groupunit._fund_give != 0.25 * default_fund_pool()
+    assert zia_groupunit._fund_take != 0.125 * default_fund_pool()
+    assert xio_groupunit._fund_give != 0.25 * default_fund_pool()
+    assert xio_groupunit._fund_take != 0.125 * default_fund_pool()
+    assert sue_groupunit._fund_give is not None
+    assert sue_groupunit._fund_take is not None
+    cred_sum1 = yao_groupunit._fund_give + zia_groupunit._fund_give
+    cred_sum1 += xio_groupunit._fund_give + sue_groupunit._fund_give
     assert cred_sum1 == 1 * default_fund_pool()
-    debt_sum1 = yao_groupbox._fund_take + zia_groupbox._fund_take
-    debt_sum1 += xio_groupbox._fund_take + sue_groupbox._fund_take
+    debt_sum1 = yao_groupunit._fund_take + zia_groupunit._fund_take
+    debt_sum1 += xio_groupunit._fund_take + sue_groupunit._fund_take
     assert round(debt_sum1) == 1 * default_fund_pool()
 
 
-def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsGroupBox_fund_give_fund_take():
+def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsGroupUnit_fund_give_fund_take():
     # ESTABLISH
     bob_str = "Bob"
     x_bud = budunit_shop(bob_str)
@@ -449,26 +449,26 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsGroupBox_fund_give_fund_take(
     x_bud.settle_bud()
 
     # THEN
-    yao_groupbox = x_bud.get_groupbox(yao_str)
-    zia_groupbox = x_bud.get_groupbox(zia_str)
-    xio_groupbox = x_bud.get_groupbox(xio_str)
-    assert yao_groupbox._fund_give == 0.5 * default_fund_pool()
-    assert yao_groupbox._fund_take == 0.75 * default_fund_pool()
-    assert zia_groupbox._fund_give == 0.25 * default_fund_pool()
-    assert zia_groupbox._fund_take == 0.125 * default_fund_pool()
-    assert xio_groupbox._fund_give == 0.25 * default_fund_pool()
-    assert xio_groupbox._fund_take == 0.125 * default_fund_pool()
-    groupbox_fund_give_sum = (
-        yao_groupbox._fund_give + zia_groupbox._fund_give + xio_groupbox._fund_give
+    yao_groupunit = x_bud.get_groupunit(yao_str)
+    zia_groupunit = x_bud.get_groupunit(zia_str)
+    xio_groupunit = x_bud.get_groupunit(xio_str)
+    assert yao_groupunit._fund_give == 0.5 * default_fund_pool()
+    assert yao_groupunit._fund_take == 0.75 * default_fund_pool()
+    assert zia_groupunit._fund_give == 0.25 * default_fund_pool()
+    assert zia_groupunit._fund_take == 0.125 * default_fund_pool()
+    assert xio_groupunit._fund_give == 0.25 * default_fund_pool()
+    assert xio_groupunit._fund_take == 0.125 * default_fund_pool()
+    groupunit_fund_give_sum = (
+        yao_groupunit._fund_give + zia_groupunit._fund_give + xio_groupunit._fund_give
     )
-    groupbox_fund_take_sum = (
-        yao_groupbox._fund_take + zia_groupbox._fund_take + xio_groupbox._fund_take
+    groupunit_fund_take_sum = (
+        yao_groupunit._fund_take + zia_groupunit._fund_take + xio_groupunit._fund_take
     )
-    assert groupbox_fund_give_sum == 1 * default_fund_pool()
-    assert groupbox_fund_take_sum == 1 * default_fund_pool()
+    assert groupunit_fund_give_sum == 1 * default_fund_pool()
+    assert groupunit_fund_take_sum == 1 * default_fund_pool()
 
 
-def test_BudUnit_settle_bud_CreatesNewGroupBoxAndSets_fund_give_fund_take():
+def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     # ESTABLISH
     yao_str = "Yao"
     x_bud = budunit_shop(yao_str)
@@ -495,27 +495,27 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxAndSets_fund_give_fund_take():
     x_bud.settle_bud()
 
     # THEN
-    yao_groupbox = x_bud.get_groupbox(yao_str)
-    zia_groupbox = x_bud.get_groupbox(zia_str)
-    xio_groupbox = x_bud.get_groupbox(xio_str)
-    assert len(x_bud.get_acctunit_group_ids_dict()) != len(x_bud._groupboxs)
-    assert yao_groupbox._fund_give == 0.5 * default_fund_pool()
-    assert yao_groupbox._fund_take == 0.75 * default_fund_pool()
-    assert zia_groupbox._fund_give == 0.25 * default_fund_pool()
-    assert zia_groupbox._fund_take == 0.125 * default_fund_pool()
-    assert xio_groupbox._fund_give == 0.25 * default_fund_pool()
-    assert xio_groupbox._fund_take == 0.125 * default_fund_pool()
-    groupbox_fund_give_sum = (
-        yao_groupbox._fund_give + zia_groupbox._fund_give + xio_groupbox._fund_give
+    yao_groupunit = x_bud.get_groupunit(yao_str)
+    zia_groupunit = x_bud.get_groupunit(zia_str)
+    xio_groupunit = x_bud.get_groupunit(xio_str)
+    assert len(x_bud.get_acctunit_group_ids_dict()) != len(x_bud._groupunits)
+    assert yao_groupunit._fund_give == 0.5 * default_fund_pool()
+    assert yao_groupunit._fund_take == 0.75 * default_fund_pool()
+    assert zia_groupunit._fund_give == 0.25 * default_fund_pool()
+    assert zia_groupunit._fund_take == 0.125 * default_fund_pool()
+    assert xio_groupunit._fund_give == 0.25 * default_fund_pool()
+    assert xio_groupunit._fund_take == 0.125 * default_fund_pool()
+    groupunit_fund_give_sum = (
+        yao_groupunit._fund_give + zia_groupunit._fund_give + xio_groupunit._fund_give
     )
-    groupbox_fund_take_sum = (
-        yao_groupbox._fund_take + zia_groupbox._fund_take + xio_groupbox._fund_take
+    groupunit_fund_take_sum = (
+        yao_groupunit._fund_take + zia_groupunit._fund_take + xio_groupunit._fund_take
     )
-    assert groupbox_fund_give_sum == 1 * default_fund_pool()
-    assert groupbox_fund_take_sum == 1 * default_fund_pool()
+    assert groupunit_fund_give_sum == 1 * default_fund_pool()
+    assert groupunit_fund_take_sum == 1 * default_fund_pool()
 
 
-def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupBox_fund_give_fund_take():
+def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_fund_give_fund_take():
     # ESTABLISH
     yao_str = "Yao"
     x_bud = budunit_shop(yao_str)
@@ -565,21 +565,21 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupBox_fun
     assert str(excinfo.value) == f"'{xio_str}'"
 
     # THEN
-    yao_groupbox = x_bud.get_groupbox(yao_str)
-    zia_groupbox = x_bud.get_groupbox(zia_str)
-    xio_groupbox = x_bud.get_groupbox(xio_str)
-    assert yao_groupbox._fund_give == 0.125 * default_fund_pool()
-    assert yao_groupbox._fund_take == 0.1875 * default_fund_pool()
-    assert zia_groupbox._fund_give == 0.0625 * default_fund_pool()
-    assert zia_groupbox._fund_take == 0.03125 * default_fund_pool()
-    assert xio_groupbox._fund_give == 0.0625 * default_fund_pool()
-    assert xio_groupbox._fund_take == 0.03125 * default_fund_pool()
+    yao_groupunit = x_bud.get_groupunit(yao_str)
+    zia_groupunit = x_bud.get_groupunit(zia_str)
+    xio_groupunit = x_bud.get_groupunit(xio_str)
+    assert yao_groupunit._fund_give == 0.125 * default_fund_pool()
+    assert yao_groupunit._fund_take == 0.1875 * default_fund_pool()
+    assert zia_groupunit._fund_give == 0.0625 * default_fund_pool()
+    assert zia_groupunit._fund_take == 0.03125 * default_fund_pool()
+    assert xio_groupunit._fund_give == 0.0625 * default_fund_pool()
+    assert xio_groupunit._fund_take == 0.03125 * default_fund_pool()
     assert (
-        yao_groupbox._fund_give + zia_groupbox._fund_give + xio_groupbox._fund_give
+        yao_groupunit._fund_give + zia_groupunit._fund_give + xio_groupunit._fund_give
         == 0.25 * default_fund_pool()
     )
     assert (
-        yao_groupbox._fund_take + zia_groupbox._fund_take + xio_groupbox._fund_take
+        yao_groupunit._fund_take + zia_groupunit._fund_take + xio_groupunit._fund_take
         == 0.25 * default_fund_pool()
     )
 
@@ -705,8 +705,8 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     yao_bud.settle_bud()
 
     # THEN
-    xio_groupbox = yao_bud.get_groupbox(xio_str)
-    xio_xio_membership = xio_groupbox.get_membership(xio_str)
+    xio_groupunit = yao_bud.get_groupunit(xio_str)
+    xio_xio_membership = xio_groupunit.get_membership(xio_str)
     sue_acctunit = yao_bud.get_acct(sue_str)
     bob_acctunit = yao_bud.get_acct(bob_str)
     zia_acctunit = yao_bud.get_acct(zia_str)
@@ -859,21 +859,21 @@ def test_BudUnit_settle_bud_CorrectlySetsPartGroupedLWAcctUnitBud_fund():
     yao_bud.settle_bud()
 
     # THEN
-    sue_groupbox = yao_bud.get_groupbox(sue_str)
-    bob_groupbox = yao_bud.get_groupbox(bob_str)
-    zia_groupbox = yao_bud.get_groupbox(zia_str)
-    assert sue_groupbox._fund_give != 0.5 * default_fund_pool()
-    assert sue_groupbox._fund_take != 0.8 * default_fund_pool()
-    assert bob_groupbox._fund_give != 0.25 * default_fund_pool()
-    assert bob_groupbox._fund_take != 0.1 * default_fund_pool()
-    assert zia_groupbox._fund_give != 0.25 * default_fund_pool()
-    assert zia_groupbox._fund_take != 0.1 * default_fund_pool()
+    sue_groupunit = yao_bud.get_groupunit(sue_str)
+    bob_groupunit = yao_bud.get_groupunit(bob_str)
+    zia_groupunit = yao_bud.get_groupunit(zia_str)
+    assert sue_groupunit._fund_give != 0.5 * default_fund_pool()
+    assert sue_groupunit._fund_take != 0.8 * default_fund_pool()
+    assert bob_groupunit._fund_give != 0.25 * default_fund_pool()
+    assert bob_groupunit._fund_take != 0.1 * default_fund_pool()
+    assert zia_groupunit._fund_give != 0.25 * default_fund_pool()
+    assert zia_groupunit._fund_take != 0.1 * default_fund_pool()
     assert (
-        sue_groupbox._fund_give + bob_groupbox._fund_give + zia_groupbox._fund_give
+        sue_groupunit._fund_give + bob_groupunit._fund_give + zia_groupunit._fund_give
         == 0.25 * default_fund_pool()
     )
     assert (
-        sue_groupbox._fund_take + bob_groupbox._fund_take + zia_groupbox._fund_take
+        sue_groupunit._fund_take + bob_groupunit._fund_take + zia_groupunit._fund_take
         == 0.25 * default_fund_pool()
     )
 
@@ -898,7 +898,7 @@ def test_BudUnit_settle_bud_CorrectlySetsPartGroupedLWAcctUnitBud_fund():
     )
 
 
-def test_BudUnit_settle_bud_CreatesNewGroupBoxAndSets_fund_give_fund_take():
+def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     # ESTABLISH
     bob_str = "Bob"
     bob_bud = budunit_shop(bob_str)
@@ -925,8 +925,8 @@ def test_BudUnit_settle_bud_CreatesNewGroupBoxAndSets_fund_give_fund_take():
     bob_bud.settle_bud()
 
     # THEN
-    xio_groupbox = bob_bud.get_groupbox(xio_str)
-    assert len(bob_bud.get_acctunit_group_ids_dict()) != len(bob_bud._groupboxs)
+    xio_groupunit = bob_bud.get_groupunit(xio_str)
+    assert len(bob_bud.get_acctunit_group_ids_dict()) != len(bob_bud._groupunits)
     assert not bob_bud.acct_exists(xio_str)
     yao_acctunit = bob_bud.get_acct(yao_str)
     zia_acctunit = bob_bud.get_acct(zia_str)
@@ -970,12 +970,12 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnit_fund_give_fund_take():
     assert fund_take_sum == 1.0 * default_fund_pool()
 
 
-def clear_all_acctunits_groupboxs_fund_agenda_give_take(x_bud: BudUnit):
+def clear_all_acctunits_groupunits_fund_agenda_give_take(x_bud: BudUnit):
     # DELETE bud_agenda_debt and bud_agenda_cred
-    for groupbox_x in x_bud._groupboxs.values():
-        groupbox_x.clear_fund_give_take()
-        # for membership_x in groupbox_x._accts.values():
-        #     print(f"{groupbox_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.debtit_belief=} {membership__fund_take:t:.6f} {membership_x.} ")
+    for groupunit_x in x_bud._groupunits.values():
+        groupunit_x.clear_fund_give_take()
+        # for membership_x in groupunit_x._accts.values():
+        #     print(f"{groupunit_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.debtit_belief=} {membership__fund_take:t:.6f} {membership_x.} ")
 
     # DELETE bud_agenda_debt and bud_agenda_cred
     for x_acctunit in x_bud._accts.values():
@@ -984,17 +984,17 @@ def clear_all_acctunits_groupboxs_fund_agenda_give_take(x_bud: BudUnit):
 
 @dataclass
 class GroupAgendaMetrics:
-    sum_groupbox_give: float = 0
-    sum_groupbox_take: float = 0
+    sum_groupunit_give: float = 0
+    sum_groupunit_take: float = 0
     sum_membership_cred: float = 0
     sum_membership_debt: float = 0
     membership_count: int = 0
 
     def set_sums(self, x_bud: BudUnit):
-        for x_groupbox in x_bud._groupboxs.values():
-            self.sum_groupbox_give += x_groupbox._fund_agenda_give
-            self.sum_groupbox_take += x_groupbox._fund_agenda_take
-            for membership_x in x_groupbox._memberships.values():
+        for x_groupunit in x_bud._groupunits.values():
+            self.sum_groupunit_give += x_groupunit._fund_agenda_give
+            self.sum_groupunit_take += x_groupunit._fund_agenda_take
+            for membership_x in x_groupunit._memberships.values():
                 self.sum_membership_cred += membership_x._fund_agenda_give
                 self.sum_membership_debt += membership_x._fund_agenda_take
                 self.membership_count += 1
@@ -1037,13 +1037,13 @@ class AwardAgendaMetrics:
 def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     # ESTABLISH
     yao_bud = budunit_v001_with_large_agenda()
-    clear_all_acctunits_groupboxs_fund_agenda_give_take(yao_bud)
+    clear_all_acctunits_groupunits_fund_agenda_give_take(yao_bud)
 
     # TEST bud_agenda_debt and bud_agenda_cred are empty
     x_groupagendametrics = GroupAgendaMetrics()
     x_groupagendametrics.set_sums(yao_bud)
-    assert x_groupagendametrics.sum_groupbox_give == 0
-    assert x_groupagendametrics.sum_groupbox_take == 0
+    assert x_groupagendametrics.sum_groupunit_give == 0
+    assert x_groupagendametrics.sum_groupunit_take == 0
     assert x_groupagendametrics.sum_membership_cred == 0
     assert x_groupagendametrics.sum_membership_debt == 0
 
@@ -1086,14 +1086,14 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     x_groupagendametrics.set_sums(yao_bud)
     assert x_groupagendametrics.membership_count == 81
     x_sum = 3065400
-    print(f"{x_groupagendametrics.sum_groupbox_give=}")
-    assert are_equal(x_groupagendametrics.sum_groupbox_give, x_sum)
-    assert are_equal(x_groupagendametrics.sum_groupbox_take, x_sum)
+    print(f"{x_groupagendametrics.sum_groupunit_give=}")
+    assert are_equal(x_groupagendametrics.sum_groupunit_give, x_sum)
+    assert are_equal(x_groupagendametrics.sum_groupunit_take, x_sum)
     assert are_equal(x_groupagendametrics.sum_membership_cred, x_sum)
     assert are_equal(x_groupagendametrics.sum_membership_debt, x_sum)
     assert are_equal(
         x_awardagendametrics.agenda_yes_bud_i_sum,
-        x_groupagendametrics.sum_groupbox_give,
+        x_groupagendametrics.sum_groupunit_give,
     )
 
     assert all_acctunits_have_legitimate_values(yao_bud)
@@ -1183,16 +1183,16 @@ def test_BudUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenBudIsEmpty():
     assert yao_bud_zia_acct._fund_agenda_ratio_take == 0.5
 
 
-def test_BudUnit_settle_bud_CreatesGroupBoxWith_budunit_v001():
+def test_BudUnit_settle_bud_CreatesGroupUnitWith_budunit_v001():
     # ESTABLISH / WHEN
     yao_bud = budunit_v001()
     yao_bud.settle_bud()
 
     # THEN
-    assert yao_bud._groupboxs is not None
-    assert len(yao_bud._groupboxs) == 34
+    assert yao_bud._groupunits is not None
+    assert len(yao_bud._groupunits) == 34
     everyone_accts_len = None
-    everyone_group = yao_bud.get_groupbox(";Everyone")
+    everyone_group = yao_bud.get_groupunit(";Everyone")
     everyone_accts_len = len(everyone_group._memberships)
     assert everyone_accts_len == 22
 

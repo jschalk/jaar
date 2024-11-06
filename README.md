@@ -60,7 +60,7 @@ BudUnit objects
 
 BudUnit AcctUnit objects
 
-BudUnit GroupBox objects
+BudUnit GroupUnit objects
 
 BudUnit ItemUnit objects
 

@@ -1,6 +1,6 @@
-from src.f00_instrument.dict_tool import get_dict_from_json, get_from_nested_dict
+from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
 from src.f00_instrument.file import delete_dir, save_file, open_file
-from src.f00_instrument.db_tool import (
+from src.f00_instrument.db_toolbox import (
     get_db_tables,
     get_db_columns,
     check_connection,
