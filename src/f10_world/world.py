@@ -22,9 +22,11 @@ from src.f09_brick.filter_toolbox import (
     save_all_csvs_from_filterunit,
     init_filterunit_from_dir,
 )
+from src.f09_brick.brick_models import Base as brick_modelsBase
 from src.f08_filter.filter import FilterUnit, filterunit_shop
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
+from sqlalchemy import create_engine
 from os.path import exists as os_path_exists
 
 
@@ -42,7 +44,6 @@ class WorldUnit:
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _fiscalunits: set[FiscalID] = None
     _world_dir: str = None
-    _db = None
 
     def set_face_id(self, face_id: FaceID, x_filterunit: FilterUnit = None):
         if x_filterunit is None:
@@ -92,31 +93,6 @@ class WorldUnit:
             set_dir(self._world_dir)
         if not os_path_exists(self._faces_dir):
             set_dir(self._faces_dir)
-        self._create_db(in_memory)
-
-    def _create_db(self, in_memory: bool) -> Connection:
-        # journal_file_new = False
-        # if overwrite:
-        #     journal_file_new = True
-        #     self._delete_journal()
-
-        if in_memory:
-            # if self._journal_db is None:
-            # journal_file_new = True
-            self._db = sqlite3_connect(":memory:")
-        else:
-            return sqlite3_connect(self.get_db_path())
-
-        # if journal_file_new:
-        #     with self.get_journal_conn() as journal_conn:
-        #         for sqlstr in get_create_table_if_not_exist_sqlstrs():
-        #             journal_conn.execute(sqlstr)
-
-    def get_conn(self) -> Connection:
-        if self._db is None:
-            return sqlite3_connect(self.get_db_path())
-        else:
-            return self._db
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions

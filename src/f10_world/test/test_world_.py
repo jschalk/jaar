@@ -31,7 +31,6 @@ def test_WorldUnit_Exists():
     assert not x_world._faces_dir
     assert not x_world._fiscalunits
     assert not x_world._world_dir
-    assert not x_world._db
 
 
 def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):

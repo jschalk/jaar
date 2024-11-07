@@ -135,6 +135,7 @@ def get_row_count(db_conn: Connection, table_name: str) -> str:
 
 def check_table_column_existence(tables_dict: dict, db_conn: Connection) -> bool:
     db_tables = get_db_tables(db_conn)
+    print(f"{db_tables=}")
     db_tables_columns = get_db_columns(db_conn)
 
     # for table_name, table_dict in tables_dict.items():

@@ -3,8 +3,9 @@ from src.f09_brick.brick_config import (
     get_brick_sqlite_type,
     get_brick_numbers,
 )
-from src.f09_brick.brick_models import get_brick_holdtables, get_brick_stagetables
-from sqlalchemy import inspect
+from src.f09_brick.brick_models import get_brick_holdtables, get_brick_stagetables, Base
+from src.f09_brick.examples.brick_env import brick_env_setup_cleanup, brick_examples_dir
+from sqlalchemy import inspect, create_engine, MetaData
 
 
 def test_get_brick_holdtables_ReturnObj():
@@ -76,3 +77,41 @@ def test_StageTable_ClassesHaveCorrectAttrs():
     }
     # WHEN / THEN
     check_sqlalchemytableclass(get_brick_stagetables(), "stage", extra_columns)
+
+
+def test_Base_create_all_CreatesTables_Scenario0_InMemory():
+    # ESTABLISH
+    engine = create_engine("sqlite://")
+
+    # WHEN
+    Base.metadata.create_all(engine)
+
+    # THEN
+    # Create a MetaData object and reflect the database schema
+    metadata = MetaData()
+    metadata.reflect(bind=engine)
+
+    # List all tables in the database
+    tables = metadata.tables
+    assert len(tables) == 46
+
+
+def test_Base_create_all_CreatesTables_Scenario1_File(brick_env_setup_cleanup):
+    # ESTABLISH
+    engine = create_engine(f"sqlite:///{brick_examples_dir()}mydatabase.db")
+
+    # WHEN
+    Base.metadata.create_all(engine)
+
+    # THEN
+    # Create a MetaData object and reflect the database schema
+    metadata = MetaData()
+    metadata.reflect(bind=engine)
+
+    # List all tables in the database
+    tables = metadata.tables
+    print("Tables in the database:")
+    # for table_name in tables:
+    #     print(table_name)
+
+    assert len(tables) == 46
