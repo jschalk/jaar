@@ -216,7 +216,8 @@ def fiscal_build_from_df(
     fiscal_hours_dict = {}
     for y_fiscal_id in br00003_df.fiscal_id.unique():
         x_hours_list = []
-        for index, row in br00003_df.iterrows():
+        query_str = f"fiscal_id == '{y_fiscal_id}'"
+        for index, row in br00003_df.query(query_str).iterrows():
             x_hours_list.append([row["hour_label"], row["cumlative_minute"]])
         fiscal_hours_dict[y_fiscal_id] = x_hours_list
 
@@ -224,19 +225,19 @@ def fiscal_build_from_df(
     fiscal_months_dict = {}
     for y_fiscal_id in br00004_df.fiscal_id.unique():
         x_months_list = []
-        for index, row in br00004_df.iterrows():
+        query_str = f"fiscal_id == '{y_fiscal_id}'"
+        for index, row in br00004_df.query(query_str).iterrows():
             x_months_list.append([row["month_label"], row["cumlative_day"]])
         fiscal_months_dict[y_fiscal_id] = x_months_list
 
     # 00005_weekday
     fiscal_weekdays_dict = {}
     for y_fiscal_id in br00005_df.fiscal_id.unique():
-        print(f"weekdays fiscal_id {y_fiscal_id=}")
         x_weekdays_list = []
-        for index, row in br00005_df.iterrows():
+        query_str = f"fiscal_id == '{y_fiscal_id}'"
+        for index, row in br00005_df.query(query_str).iterrows():
             x_weekdays_list.append(row["weekday_label"])
         fiscal_weekdays_dict[y_fiscal_id] = x_weekdays_list
-    print(f"{fiscal_weekdays_dict=}")
 
     fiscalunit_dict = {}
     for index, row in br00000_df.iterrows():
@@ -262,6 +263,7 @@ def fiscal_build_from_df(
             respect_bit=x_respect_bit,
             penny=x_penny,
         )
+        print(f"{x_fiscalunit.fiscal_id=}")
         fiscalunit_dict[x_fiscalunit.fiscal_id] = x_fiscalunit
 
     return fiscalunit_dict
