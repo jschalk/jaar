@@ -9,11 +9,13 @@ from src.f00_instrument.dict_toolbox import (
 )
 from src.f01_road.road import FiscalID, OwnerID
 from src.f02_bud.bud import BudUnit
+from src.f03_chrono.chrono import timelineunit_shop
 from src.f04_gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
 from src.f04_gift.atom_config import fiscal_id_str, owner_id_str, pledge_str
 from src.f04_gift.delta import deltaunit_shop, get_categorys_cruds_deltaunit, DeltaUnit
 from src.f04_gift.gift import giftunit_shop
 from src.f05_listen.hubunit import hubunit_shop
+from src.f07_fiscal.fiscal import fiscalunit_shop, FiscalUnit
 from src.f09_brick.brick_config import (
     get_brickref_dict,
     categorys_str,
@@ -195,3 +197,73 @@ def fiscal_id_owner_id_nested_csv_dict(
     headerless_csv: str, delimiter: str = None
 ) -> dict[FiscalID, dict[OwnerID, str]]:
     return create_l2nested_csv_dict(headerless_csv, delimiter)
+
+
+def fiscal_build_from_df(
+    br00000_df: DataFrame,
+    br00001_df: DataFrame,
+    br00002_df: DataFrame,
+    br00003_df: DataFrame,
+    br00004_df: DataFrame,
+    br00005_df: DataFrame,
+    x_fund_coin,
+    x_respect_bit,
+    x_penny,
+    x_fiscals_dir,
+    slash_text,
+) -> dict[FiscalID, FiscalUnit]:
+    # 00003_hour
+    fiscal_hours_dict = {}
+    for y_fiscal_id in br00003_df.fiscal_id.unique():
+        x_hours_list = []
+        query_str = f"fiscal_id == '{y_fiscal_id}'"
+        for index, row in br00003_df.query(query_str).iterrows():
+            x_hours_list.append([row["hour_label"], row["cumlative_minute"]])
+        fiscal_hours_dict[y_fiscal_id] = x_hours_list
+
+    # 00004_month
+    fiscal_months_dict = {}
+    for y_fiscal_id in br00004_df.fiscal_id.unique():
+        x_months_list = []
+        query_str = f"fiscal_id == '{y_fiscal_id}'"
+        for index, row in br00004_df.query(query_str).iterrows():
+            x_months_list.append([row["month_label"], row["cumlative_day"]])
+        fiscal_months_dict[y_fiscal_id] = x_months_list
+
+    # 00005_weekday
+    fiscal_weekdays_dict = {}
+    for y_fiscal_id in br00005_df.fiscal_id.unique():
+        x_weekdays_list = []
+        query_str = f"fiscal_id == '{y_fiscal_id}'"
+        for index, row in br00005_df.query(query_str).iterrows():
+            x_weekdays_list.append(row["weekday_label"])
+        fiscal_weekdays_dict[y_fiscal_id] = x_weekdays_list
+
+    fiscalunit_dict = {}
+    for index, row in br00000_df.iterrows():
+        x_fiscal_id = row["fiscal_id"]
+        x_timeline_config = {
+            "c400_number": row["c400_number"],
+            "hours_config": fiscal_hours_dict.get(x_fiscal_id),
+            "months_config": fiscal_months_dict.get(x_fiscal_id),
+            "monthday_distortion": row["monthday_distortion"],
+            "timeline_label": row["timeline_label"],
+            "weekdays_config": fiscal_weekdays_dict.get(x_fiscal_id),
+            "yr1_jan1_offset": row["yr1_jan1_offset"],
+        }
+        x_timeline = timelineunit_shop(x_timeline_config)
+        x_fiscalunit = fiscalunit_shop(
+            fiscal_id=x_fiscal_id,
+            fiscals_dir=x_fiscals_dir,
+            timeline=x_timeline,
+            current_time=row["current_time"],
+            # in_memory_journal=row["in_memory_journal"],
+            road_delimiter=row["road_delimiter"],
+            fund_coin=x_fund_coin,
+            respect_bit=x_respect_bit,
+            penny=x_penny,
+        )
+        print(f"{x_fiscalunit.fiscal_id=}")
+        fiscalunit_dict[x_fiscalunit.fiscal_id] = x_fiscalunit
+
+    return fiscalunit_dict

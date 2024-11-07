@@ -1,5 +1,6 @@
 from src.f00_instrument.file import create_file_path
 from src.f09_brick.brick_config import get_brick_numbers, get_quick_bricks_column_ref
+from src.f09_brick.brick_models import get_brick_stagetables, Base
 from src.f09_brick.pandas_tool import get_all_excel_sheet_names
 from pandas import read_excel as pandas_read_excel
 
@@ -25,3 +26,39 @@ def get_all_brick_dataframes(dir: str) -> set[tuple[str, str, str]]:
             valid_bricks.add((dir, filename, sheet_name))
 
     return valid_bricks
+
+
+# from sqlalchemy import create_engine, Column, Integer, String, Date, Float
+# from sqlalchemy.orm import sessionmaker
+# from datetime import datetime
+
+
+# # 2. Create an engine and session
+# engine = create_engine("sqlite:///employees.db")
+# Base.metadata.create_all(engine)
+# Session = sessionmaker(bind=engine)
+# session = Session()
+
+# # 3. Read Excel data into a Pandas DataFrame
+# df = pd.read_excel("employees.xlsx")
+
+# # 4. Insert data from DataFrame to the database
+# for index, row in df.iterrows():
+#     employee = Employee(
+#         id=row["id"],
+#         name=row["name"],
+#         position=row["position"],
+#         hire_date=pd.to_datetime(row["hire_date"]).date(),
+#         salary=row["salary"],
+#     )
+#     session.add(employee)
+
+# # 5. Commit the session and verify data
+# session.commit()
+
+# # Optional: Print out the records
+# for employee in session.query(Employee).all():
+#     print(f"{employee.id}: {employee.name} - {employee.position} - {employee.salary}")
+
+# # 6. Close the session
+# session.close()
