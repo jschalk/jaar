@@ -2,6 +2,7 @@ from src.f03_chrono.examples.chrono_examples import get_five_config
 from src.f03_chrono.chrono import timelineunit_shop, get_default_timeline_config_dict
 from src.f07_fiscal.examples.example_fiscals import create_example_fiscal2
 from src.f07_fiscal.fiscal import fiscalunit_shop
+from src.f09_brick.examples.brick_env import brick_fiscals_dir, brick_env_setup_cleanup
 from src.f09_brick.examples.brick_df_examples import (
     get_ex1_br00000_df,
     get_ex1_br00001_df,
@@ -21,7 +22,7 @@ from pandas import DataFrame
 
 
 # given a dataframe, build a fiscal unit
-def test_fiscal_build_from_df_ReturnsObj_Scenario0_1FiscalID():
+def test_fiscal_build_from_df_ReturnsObj_Scenario0_1FiscalID(brick_env_setup_cleanup):
     # ESTABLISH / WHEN
 
     # brick_format_00000_fiscalunit_v0_0_0
@@ -39,7 +40,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario0_1FiscalID():
     x_fund_coin = 55
     x_respect_bit = 66
     x_penny = 77
-    x_fiscals_dir = "/fizz/fiscals/"
+    x_fiscals_dir = f"{brick_fiscals_dir()}/fizz"
     music23_str = "music23"
     slash_text = "/"
 
@@ -89,7 +90,9 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario0_1FiscalID():
 
 
 # given a dataframe, build a fiscal unit
-def test_fiscal_build_from_df_ReturnsObj_Scenario1_TwoFiscalIDs():
+def test_fiscal_build_from_df_ReturnsObj_Scenario1_TwoFiscalIDs(
+    brick_env_setup_cleanup,
+):
     # ESTABLISH / WHEN
 
     # brick_format_00000_fiscalunit_v0_0_0
@@ -107,7 +110,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario1_TwoFiscalIDs():
     x_fund_coin = 55
     x_respect_bit = 66
     x_penny = 77
-    x_fiscals_dir = "/fizz/fiscals/"
+    x_fiscals_dir = f"{brick_fiscals_dir()}/fizz"
     music23_str = "music23"
     slash_text = "/"
 
