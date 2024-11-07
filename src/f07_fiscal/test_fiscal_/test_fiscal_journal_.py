@@ -103,7 +103,7 @@ def test_FiscalUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
 ):
     # ESTABLISH create Fiscal
     x_fiscal = FiscalUnit(get_fiscal_id_if_None(), get_test_fiscals_dir())
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         check_connection(x_fiscal.get_journal_conn())
     assert str(excinfo.value) == "unable to open database file"

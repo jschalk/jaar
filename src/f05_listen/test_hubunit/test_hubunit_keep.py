@@ -214,7 +214,7 @@ def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
 #     sue_str = "Sue"
 #     sue_hubunit = hubunit_shop(env_dir(), None, sue_str, get_texas_road())
 
-#     # WHEN/THEN
+#     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
 #         check_connection(sue_hubunit.treasury_db_file_conn())
 #     assert str(excinfo.value) == "unable to open database file"
@@ -233,7 +233,7 @@ def test_HubUnit_treasury_db_file_conn_RaisesErrorIfMissing_keep_road(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_str, None)
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.treasury_db_file_conn()
     assert (

@@ -245,7 +245,7 @@ def test_road_get_all_road_nodes_ReturnsRoadNodes():
     roses_str = "roses"
     roses_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
 
-    # WHEN/THENs
+    # WHEN / THENs
     root_list = [root_label()]
     assert get_all_road_nodes(road=root_label()) == root_list
     casa_list = [root_label(), casa_str]
@@ -266,7 +266,7 @@ def test_road_get_terminus_node_ReturnsRoadNode():
     roses_str = "roses"
     roses_road = f"{bloomers_road}{x_s}{roses_str}"
 
-    # WHEN/THENs
+    # WHEN / THENs
     assert get_terminus_node(road=root_label()) == root_label()
     assert get_terminus_node(road=casa_road) == casa_str
     assert get_terminus_node(road=bloomers_road) == bloomers_str
@@ -283,7 +283,7 @@ def test_road_get_terminus_node_ReturnsRoadNodeWhenNonDefaultDelimiter():
     slash_bloomers_road = f"{slash_casa_road}{slash_str}{bloomers_str}"
     slash_roses_road = f"{slash_bloomers_road}{slash_str}{roses_str}"
 
-    # WHEN/THENs
+    # WHEN / THENs
     assert get_terminus_node(root_label(), slash_str) == root_label()
     assert get_terminus_node(slash_casa_road, slash_str) == casa_str
     assert get_terminus_node(slash_bloomers_road, slash_str) == bloomers_str
@@ -299,7 +299,7 @@ def test_road_get_root_node_from_road_ReturnsRoadNode():
     roses_str = "roses"
     roses_road = create_road(casa_str, roses_str)
 
-    # WHEN/THENs
+    # WHEN / THENs
     assert get_root_node_from_road(root_label()) == root_label()
     assert get_root_node_from_road(casa_road) == root_label()
     assert get_root_node_from_road(bloomers_road) == root_label()
@@ -316,7 +316,7 @@ def test_road_get_parent_road_ReturnsCorrectObj_Scenario0():
     roses_str = "roses"
     roses_road = f"{bloomers_road}{x_s}{roses_str}"
 
-    # WHEN/THENs
+    # WHEN / THENs
     assert get_parent_road(root_label(), x_s) == ""
     assert get_parent_road(casa_road, x_s) == root_label()
     assert get_parent_road(bloomers_road, x_s) == casa_road
@@ -333,7 +333,7 @@ def test_road_get_parent_road_ReturnsCorrectObj_Scenario1():
     roses_str = "roses"
     roses_road = f"{bloomers_road}{x_s}{roses_str}"
 
-    # WHEN/THENs
+    # WHEN / THENs
     assert get_parent_road(root_label(), x_s) == ""
     assert get_parent_road(casa_road, x_s) == root_label()
     assert get_parent_road(bloomers_road, x_s) == casa_road
@@ -353,7 +353,7 @@ def test_road_create_road_without_root_node_ReturnsCorrectObj():
     roses_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
     roses_without_root_road = f"{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
 
-    # WHEN/THENs
+    # WHEN / THENs
     assert create_road_without_root_node(road=root_label()) == x_s
     assert create_road_without_root_node(road=casa_road) == casa_without_root_road
     assert (

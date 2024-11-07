@@ -150,7 +150,7 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     assert zia_bud.max_tree_traverse == 3
     zia_tree_traverse = 1
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_max_tree_traverse(x_int=zia_tree_traverse)
     assert (
@@ -165,7 +165,7 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     zia_bud = budunit_shop(_owner_id=zia_str)
     assert zia_bud.max_tree_traverse == 3
 
-    # WHEN/THEN
+    # WHEN / THEN
     zia_tree_traverse = 3.5
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_max_tree_traverse(x_int=zia_tree_traverse)

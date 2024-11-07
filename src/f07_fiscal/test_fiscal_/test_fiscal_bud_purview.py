@@ -140,7 +140,7 @@ def test_FiscalUnit_add_purviewepisode_RaisesErrorWhenPurview_time_id_IsLessThan
     music_fiscal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
     music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         music_fiscal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
     exception_str = f"Cannot set purviewepisode because time_id {sue_x4_time_id} is less than FiscalUnit.current_time {music_current_time}."

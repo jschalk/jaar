@@ -99,7 +99,7 @@ def test_ItemUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
     nation_item.add_kid(nation_item)
     max_count = 1000
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         nation_item.get_descendant_roads_from_kids()
     assert (

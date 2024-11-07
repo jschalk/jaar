@@ -82,7 +82,7 @@ def test_HubUnit_save_valid_purview_file_RaisesError(env_dir_setup_cleanup):
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_id(), yao_str)
     t_purview = get_purviewepisode_invalid_example()
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         yao_hubunit._save_valid_purview_file(t_purview)
     exception_str = "magnitude cannot be calculated: debt_purview=-5, cred_purview=3"
@@ -202,7 +202,7 @@ def test_HubUnit_save_valid_budpoint_file_RaisesError(env_dir_setup_cleanup):
     t_budpoint = get_budunit_irrational_example()
     t55_time_id = 55
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         yao_hubunit._save_valid_budpoint_file(t55_time_id, t_budpoint)
     exception_str = "BudPoint could not be saved BudUnit._rational is False"

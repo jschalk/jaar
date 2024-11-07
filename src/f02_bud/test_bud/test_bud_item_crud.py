@@ -15,7 +15,7 @@ def test_BudUnit_set_item_RaisesErrorWhen_parent_road_IsInvalid():
     assert invalid_rootnode_swim_road != zia_bud._fiscal_id
     casa_str = "casa"
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_item(
             itemunit_shop(casa_str), parent_road=invalid_rootnode_swim_road
@@ -32,7 +32,7 @@ def test_BudUnit_set_item_RaisesErrorWhen_parent_road_ItemDoesNotExist():
     swim_road = zia_bud.make_l1_road("swimming")
     casa_str = "casa"
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_item(
             itemunit_shop(casa_str),
@@ -54,7 +54,7 @@ def test_BudUnit_set_item_RaisesErrorWhen_label_IsNotNode():
     run_str = "run"
     run_road = zia_bud.make_road(casa_road, run_str)
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_item(itemunit_shop(run_road), parent_road=swim_road)
     assert (
@@ -821,7 +821,7 @@ def test_BudUnit_item_exists_ReturnsCorrectBool():
     idaho_road = sue_bud.make_road(usa_road, "Idaho")
     japan_road = sue_bud.make_road(nation_road, "Japan")
 
-    # WHEN/THEN
+    # WHEN / THEN
     assert sue_bud.item_exists("") is False
     assert sue_bud.item_exists(None) is False
     assert sue_bud.item_exists(sue_bud._fiscal_id)

@@ -27,7 +27,7 @@ def test_sqlite_bool_ReturnsCorrectObj():
 def test_sqlite_str_ReturnsCorrectObj():
     assert sqlite_str(True) == "TRUE"
     assert sqlite_str(False) == "FALSE"
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sqlite_str("Bob")
     assert str(excinfo.value) == "function requires boolean"

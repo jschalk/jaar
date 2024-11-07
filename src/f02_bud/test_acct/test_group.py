@@ -149,7 +149,7 @@ def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_id_IsWrong():
     yao_ohio_membership._debtor_pool = 6600
     iowa_groupunit = groupunit_shop(iowa_str)
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         iowa_groupunit.set_membership(yao_ohio_membership)
     assert (
