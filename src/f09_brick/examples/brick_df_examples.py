@@ -5,9 +5,10 @@ MUSIC23_STR = "music23"
 JEFFY45_STR = "jeffy45"
 
 
-# brick_format_00000_fiscalunit_v0_0_0
 def get_ex1_br00000_df() -> DataFrame:
-    # "c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,road_delimiter,timeline_label,yr1_jan1_offset":
+    """brick_format_00000_fiscalunit_v0_0_0
+    c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,road_delimiter,timeline_label,yr1_jan1_offset
+    """
     x_df = DataFrame(
         columns=[
             "c400_number",
@@ -26,25 +27,25 @@ def get_ex1_br00000_df() -> DataFrame:
     return x_df
 
 
-# brick_format_00001_fiscal_purview_episode_v0_0_0
 def get_ex1_br00001_df() -> DataFrame:
-    # "acct_id,fiscal_id,owner_id,quota,time_id":
+    """brick_format_00001_fiscal_purview_episode_v0_0_0
+    acct_id,fiscal_id,owner_id,quota,time_id"""
     x_df = DataFrame(columns=["acct_id", "fiscal_id", "owner_id", "quota", "time_id"])
     x_df.loc[0] = ["Bob", MUSIC23_STR, "Sue", 445, 777]
     return x_df
 
 
-# brick_format_00002_fiscal_cashbook_v0_0_0
 def get_ex1_br00002_df() -> DataFrame:
-    # "acct_id,amount,fiscal_id,owner_id,time_id":
+    """brick_format_00002_fiscal_cashbook_v0_0_0
+    acct_id,amount,fiscal_id,owner_id,time_id"""
     x_df = DataFrame(columns=["acct_id", "amount", "fiscal_id", "owner_id", "time_id"])
     x_df.loc[0] = ["Bob", 888, MUSIC23_STR, "Zia", 777]
     return x_df
 
 
-# brick_format_00003_fiscal_timeline_hour_v0_0_0
 def get_ex1_br00003_df() -> DataFrame:
-    # "cumlative_minute,fiscal_id,hour_label":
+    """brick_format_00003_fiscal_timeline_hour_v0_0_0
+    cumlative_minute,fiscal_id,hour_label"""
     x_df = DataFrame(columns=["fiscal_id", "hour_label", "cumlative_minute"])
     x_df.loc[0] = [MUSIC23_STR, "0-12am", 60]
     x_df.loc[1] = [MUSIC23_STR, "1-1am", 120]
@@ -73,9 +74,9 @@ def get_ex1_br00003_df() -> DataFrame:
     return x_df
 
 
-# brick_format_00004_fiscal_timeline_month_v0_0_0
 def get_ex1_br00004_df() -> DataFrame:
-    # "cumlative_day,fiscal_id,month_label":
+    """brick_format_00004_fiscal_timeline_month_v0_0_0
+    cumlative_day,fiscal_id,month_label"""
     x_df = DataFrame(columns=["fiscal_id", "month_label", "cumlative_day"])
     x_df.loc[0] = [MUSIC23_STR, "March", 31]
     x_df.loc[1] = [MUSIC23_STR, "April", 61]
@@ -92,9 +93,9 @@ def get_ex1_br00004_df() -> DataFrame:
     return x_df
 
 
-# brick_format_00005_fiscal_timeline_weekday_v0_0_0
 def get_ex1_br00005_df() -> DataFrame:
-    # "fiscal_id,weekday_label,weekday_order":
+    """brick_format_00005_fiscal_timeline_weekday_v0_0_0
+    fiscal_id,weekday_label,weekday_order"""
     x_df = DataFrame(columns=["fiscal_id", "weekday_label", "weekday_order"])
     x_df.loc[0] = [MUSIC23_STR, "Wednesday", 0]
     x_df.loc[1] = [MUSIC23_STR, "Thursday", 1]
@@ -106,9 +107,10 @@ def get_ex1_br00005_df() -> DataFrame:
     return x_df
 
 
-# brick_format_00000_fiscalunit_v0_0_0
 def get_ex2_br00000_df() -> DataFrame:
-    # "c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,road_delimiter,timeline_label,yr1_jan1_offset":
+    """brick_format_00000_fiscalunit_v0_0_0
+    c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,road_delimiter,timeline_label,yr1_jan1_offset
+    """
     x_df = DataFrame(
         columns=[
             "c400_number",
@@ -128,25 +130,33 @@ def get_ex2_br00000_df() -> DataFrame:
     return x_df
 
 
-# brick_format_00001_fiscal_purview_episode_v0_0_0
 def get_ex2_br00001_df() -> DataFrame:
-    # "acct_id,fiscal_id,owner_id,quota,time_id":
+    """brick_format_00001_fiscal_purview_episode_v0_0_0
+    acct_id,fiscal_id,owner_id,quota,time_id"""
     x_df = DataFrame(columns=["acct_id", "fiscal_id", "owner_id", "quota", "time_id"])
     x_df.loc[0] = ["Bob", MUSIC23_STR, "Sue", 445, 777]
+    x_df.loc[1] = ["Yao", MUSIC23_STR, "Bob", 332, 999]
+    x_df.loc[2] = ["Bob", MUSIC23_STR, "Yao", 700, 222]
+    x_df.loc[3] = ["Yao", JEFFY45_STR, "Xio", 332, 999]
+    x_df.loc[4] = ["Bob", JEFFY45_STR, "Zia", 700, 222]
     return x_df
 
 
-# brick_format_00002_fiscal_cashbook_v0_0_0
 def get_ex2_br00002_df() -> DataFrame:
-    # "acct_id,amount,fiscal_id,owner_id,time_id":
+    """brick_format_00002_fiscal_cashbook_v0_0_0
+    acct_id,amount,fiscal_id,owner_id,time_id"""
     x_df = DataFrame(columns=["acct_id", "amount", "fiscal_id", "owner_id", "time_id"])
     x_df.loc[0] = ["Bob", 888, MUSIC23_STR, "Zia", 777]
+    x_df.loc[1] = ["Zia", 234, MUSIC23_STR, "Sue", 999]
+    x_df.loc[2] = ["Zia", 888, MUSIC23_STR, "Bob", 777]
+    x_df.loc[3] = ["Zia", 234, MUSIC23_STR, "Yao", 999]
+    x_df.loc[4] = ["Zia", 234, JEFFY45_STR, "Yao", 999]
     return x_df
 
 
-# brick_format_00003_fiscal_timeline_hour_v0_0_0
 def get_ex2_br00003_df() -> DataFrame:
-    # "cumlative_minute,fiscal_id,hour_label":
+    """brick_format_00003_fiscal_timeline_hour_v0_0_0
+    cumlative_minute,fiscal_id,hour_label"""
     x_df = DataFrame(columns=["fiscal_id", "hour_label", "cumlative_minute"])
     x_df.loc[0] = [MUSIC23_STR, "0-12am", 60]
     x_df.loc[1] = [MUSIC23_STR, "1-1am", 120]
@@ -199,9 +209,9 @@ def get_ex2_br00003_df() -> DataFrame:
     return x_df
 
 
-# brick_format_00004_fiscal_timeline_month_v0_0_0
 def get_ex2_br00004_df() -> DataFrame:
-    # "cumlative_day,fiscal_id,month_label":
+    """brick_format_00004_fiscal_timeline_month_v0_0_0
+    cumlative_day,fiscal_id,month_label"""
     x_df = DataFrame(columns=["fiscal_id", "month_label", "cumlative_day"])
     x_df.loc[0] = [MUSIC23_STR, "March", 31]
     x_df.loc[1] = [MUSIC23_STR, "April", 61]
@@ -233,9 +243,9 @@ def get_ex2_br00004_df() -> DataFrame:
     return x_df
 
 
-# brick_format_00005_fiscal_timeline_weekday_v0_0_0
 def get_ex2_br00005_df() -> DataFrame:
-    # "fiscal_id,weekday_label,weekday_order":
+    """brick_format_00005_fiscal_timeline_weekday_v0_0_0
+    fiscal_id,weekday_label,weekday_order"""
     x_df = DataFrame(columns=["fiscal_id", "weekday_label", "weekday_order"])
     x_df.loc[0] = [MUSIC23_STR, "Wednesday", 0]
     x_df.loc[1] = [MUSIC23_STR, "Thursday", 1]

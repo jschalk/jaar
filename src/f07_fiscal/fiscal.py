@@ -16,6 +16,7 @@ from src.f01_road.finance import (
     FundCoin,
     BitNum,
     TimeLinePoint,
+    FundNum,
 )
 from src.f01_road.road import (
     default_road_delimiter_if_none,
@@ -266,9 +267,13 @@ class FiscalUnit:
         self.purviewlogs.pop(x_owner_id)
 
     def add_purviewepisode(
-        self, x_owner_id: OwnerID, x_time_id: TimeLinePoint, x_money_magnitude: int
+        self,
+        x_owner_id: OwnerID,
+        x_time_id: TimeLinePoint,
+        x_money_magnitude: int,
+        allow_prev_to_current_time_entry: bool = False,
     ):
-        if x_time_id < self.current_time:
+        if x_time_id < self.current_time and allow_prev_to_current_time_entry is False:
             exception_str = f"Cannot set purviewepisode because time_id {x_time_id} is less than FiscalUnit.current_time {self.current_time}."
             raise purviewepisode_Exception(exception_str)
         if self.purviewlog_exists(x_owner_id) is False:
@@ -308,6 +313,24 @@ class FiscalUnit:
             x_tranunit=x_cashpurchase,
             x_blocked_time_ids=self.get_purviewlogs_time_ids(),
             x_current_time=self.current_time,
+        )
+
+    def add_cashpurchase(
+        self,
+        x_owner_id: OwnerID,
+        x_acct_id: AcctID,
+        x_time_id: TimeLinePoint,
+        x_amount: FundNum,
+        x_blocked_time_ids: set[TimeLinePoint] = None,
+        x_current_time: TimeLinePoint = None,
+    ):
+        self.cashbook.add_tranunit(
+            x_owner_id=x_owner_id,
+            x_acct_id=x_acct_id,
+            x_time_id=x_time_id,
+            x_amount=x_amount,
+            x_blocked_time_ids=x_blocked_time_ids,
+            x_current_time=x_current_time,
         )
 
     def cashpurchase_exists(

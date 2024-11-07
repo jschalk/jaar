@@ -21,6 +21,23 @@ def test_FiscalUnit_set_cashpurchase_SetsAttr():
     assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
+def test_FiscalUnit_add_cashpurchase_SetsAttr():
+    # ESTABLISH
+    t6606_current_time = 6606
+    x_fiscal = fiscalunit_shop(current_time=t6606_current_time)
+    sue_str = "Sue"
+    bob_str = "Bob"
+    t55_t = 5505
+    t55_amount = 37
+    assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t) is False
+
+    # WHEN
+    x_fiscal.add_cashpurchase(sue_str, bob_str, x_time_id=t55_t, x_amount=t55_amount)
+
+    # THEN
+    assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
+
+
 def test_FiscalUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_id_GreaterThanOrEqual_current_time():
     # ESTABLISH
     t6606_current_time = 6606

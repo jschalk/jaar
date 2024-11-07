@@ -176,8 +176,6 @@ def _load_individual_brick_csv(
 def load_brick_csv(fiscals_dir: str, x_file_dir: str, x_filename: str):
     x_csv = open_file(x_file_dir, x_filename)
     headers_list, headerless_csv = extract_csv_headers(x_csv)
-    print(f"{headers_list=}")
-    print(f"{headerless_csv=}")
     nested_csv = fiscal_id_owner_id_nested_csv_dict(headerless_csv, delimiter=",")
     for x_fiscal_id, fiscal_dict in nested_csv.items():
         for x_owner_id, owner_csv in fiscal_dict.items():
@@ -263,7 +261,25 @@ def fiscal_build_from_df(
             respect_bit=x_respect_bit,
             penny=x_penny,
         )
-        print(f"{x_fiscalunit.fiscal_id=}")
         fiscalunit_dict[x_fiscalunit.fiscal_id] = x_fiscalunit
+
+        query_str = f"fiscal_id == '{x_fiscal_id}'"
+        for index, row in br00001_df.query(query_str).iterrows():
+            x_fiscalunit.add_purviewepisode(
+                x_owner_id=row["owner_id"],
+                x_time_id=row["time_id"],
+                x_money_magnitude=row["quota"],
+                allow_prev_to_current_time_entry=True,
+            )
+        for index, row in br00002_df.query(query_str).iterrows():
+            x_fiscalunit.add_cashpurchase(
+                x_owner_id=row["owner_id"],
+                x_acct_id=row["acct_id"],
+                x_time_id=row["time_id"],
+                x_amount=row["amount"],
+            )
+        # x_fiscalunit.set_purviewlog(x_owner=owner_id, x_time_id=, x_money_magnitude=)
+        # x_fiscalunit.cashbook.add_tranunit()
+        # x_fiscalunit.cashbook.tranunits
 
     return fiscalunit_dict
