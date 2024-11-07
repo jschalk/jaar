@@ -47,7 +47,6 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario0_OneFiscalID(brick_env_setup_c
         x_respect_bit,
         x_penny,
         x_fiscals_dir,
-        slash_text,
     )
 
     # THEN
@@ -121,7 +120,6 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario1_TwoFiscalIDs(
         x_respect_bit,
         x_penny,
         x_fiscals_dir,
-        slash_text,
     )
 
     # THEN

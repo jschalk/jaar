@@ -208,34 +208,10 @@ def fiscal_build_from_df(
     x_respect_bit,
     x_penny,
     x_fiscals_dir,
-    slash_text,
 ) -> dict[FiscalID, FiscalUnit]:
-    # 00003_hour
-    fiscal_hours_dict = {}
-    for y_fiscal_id in br00003_df.fiscal_id.unique():
-        x_hours_list = []
-        query_str = f"fiscal_id == '{y_fiscal_id}'"
-        for index, row in br00003_df.query(query_str).iterrows():
-            x_hours_list.append([row["hour_label"], row["cumlative_minute"]])
-        fiscal_hours_dict[y_fiscal_id] = x_hours_list
-
-    # 00004_month
-    fiscal_months_dict = {}
-    for y_fiscal_id in br00004_df.fiscal_id.unique():
-        x_months_list = []
-        query_str = f"fiscal_id == '{y_fiscal_id}'"
-        for index, row in br00004_df.query(query_str).iterrows():
-            x_months_list.append([row["month_label"], row["cumlative_day"]])
-        fiscal_months_dict[y_fiscal_id] = x_months_list
-
-    # 00005_weekday
-    fiscal_weekdays_dict = {}
-    for y_fiscal_id in br00005_df.fiscal_id.unique():
-        x_weekdays_list = []
-        query_str = f"fiscal_id == '{y_fiscal_id}'"
-        for index, row in br00005_df.query(query_str).iterrows():
-            x_weekdays_list.append(row["weekday_label"])
-        fiscal_weekdays_dict[y_fiscal_id] = x_weekdays_list
+    fiscal_hours_dict = _get_fiscal_hours_dict(br00003_df)
+    fiscal_months_dict = _get_fiscal_months_dict(br00004_df)
+    fiscal_weekdays_dict = _get_fiscal_weekdays_dict(br00005_df)
 
     fiscalunit_dict = {}
     for index, row in br00000_df.iterrows():
@@ -262,24 +238,64 @@ def fiscal_build_from_df(
             penny=x_penny,
         )
         fiscalunit_dict[x_fiscalunit.fiscal_id] = x_fiscalunit
-
-        query_str = f"fiscal_id == '{x_fiscal_id}'"
-        for index, row in br00001_df.query(query_str).iterrows():
-            x_fiscalunit.add_purviewepisode(
-                x_owner_id=row["owner_id"],
-                x_time_id=row["time_id"],
-                x_money_magnitude=row["quota"],
-                allow_prev_to_current_time_entry=True,
-            )
-        for index, row in br00002_df.query(query_str).iterrows():
-            x_fiscalunit.add_cashpurchase(
-                x_owner_id=row["owner_id"],
-                x_acct_id=row["acct_id"],
-                x_time_id=row["time_id"],
-                x_amount=row["amount"],
-            )
-        # x_fiscalunit.set_purviewlog(x_owner=owner_id, x_time_id=, x_money_magnitude=)
-        # x_fiscalunit.cashbook.add_tranunit()
-        # x_fiscalunit.cashbook.tranunits
-
+        _add_purviewepisode(x_fiscalunit, br00001_df)
+        _add_cashpurchase(x_fiscalunit, br00002_df)
     return fiscalunit_dict
+
+
+def _get_fiscal_hours_dict(br00003_df: DataFrame) -> dict[str, list[str, str]]:
+    fiscal_hours_dict = {}
+    for y_fiscal_id in br00003_df.fiscal_id.unique():
+        query_str = f"fiscal_id == '{y_fiscal_id}'"
+        x_hours_list = [
+            [row["hour_label"], row["cumlative_minute"]]
+            for index, row in br00003_df.query(query_str).iterrows()
+        ]
+        fiscal_hours_dict[y_fiscal_id] = x_hours_list
+    return fiscal_hours_dict
+
+
+def _get_fiscal_months_dict(br00004_df: DataFrame) -> dict[str, list[str, str]]:
+    fiscal_months_dict = {}
+    for y_fiscal_id in br00004_df.fiscal_id.unique():
+        query_str = f"fiscal_id == '{y_fiscal_id}'"
+        x_months_list = [
+            [row["month_label"], row["cumlative_day"]]
+            for index, row in br00004_df.query(query_str).iterrows()
+        ]
+        fiscal_months_dict[y_fiscal_id] = x_months_list
+    return fiscal_months_dict
+
+
+def _get_fiscal_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
+    fiscal_weekdays_dict = {}
+    for y_fiscal_id in br00005_df.fiscal_id.unique():
+        query_str = f"fiscal_id == '{y_fiscal_id}'"
+        x_weekdays_list = [
+            row["weekday_label"]
+            for index, row in br00005_df.query(query_str).iterrows()
+        ]
+        fiscal_weekdays_dict[y_fiscal_id] = x_weekdays_list
+    return fiscal_weekdays_dict
+
+
+def _add_purviewepisode(x_fiscalunit: FiscalUnit, br00001_df: DataFrame):
+    query_str = f"fiscal_id == '{x_fiscalunit.fiscal_id}'"
+    for index, row in br00001_df.query(query_str).iterrows():
+        x_fiscalunit.add_purviewepisode(
+            x_owner_id=row["owner_id"],
+            x_time_id=row["time_id"],
+            x_money_magnitude=row["quota"],
+            allow_prev_to_current_time_entry=True,
+        )
+
+
+def _add_cashpurchase(x_fiscalunit: FiscalUnit, br00002_df: DataFrame):
+    query_str = f"fiscal_id == '{x_fiscalunit.fiscal_id}'"
+    for index, row in br00002_df.query(query_str).iterrows():
+        x_fiscalunit.add_cashpurchase(
+            x_owner_id=row["owner_id"],
+            x_acct_id=row["acct_id"],
+            x_time_id=row["time_id"],
+            x_amount=row["amount"],
+        )
