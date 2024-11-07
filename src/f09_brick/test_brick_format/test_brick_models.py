@@ -24,21 +24,22 @@ def test_get_brick_stagetables_ReturnObj():
 
 
 def check_sqlalchemytableclass(
-    brick_number: str, SqlAlchemyTable, table_type: str, extra_columns: dict[str, str]
+    tableclasses_dict: dict[str,], table_type: str, extra_columns: dict[str, str]
 ):
-    # ESTABLISH
-    mapper = inspect(SqlAlchemyTable)
+    for brick_number, SqlAlchemyTable in tableclasses_dict.items():
+        # ESTABLISH
+        mapper = inspect(SqlAlchemyTable)
 
-    # WHEN / THEN
-    assert SqlAlchemyTable.__tablename__ == f"{brick_number}_{table_type}"
-    for x_column, column_type in extra_columns.items():
-        _check_sqlalchemycolumn(x_column, mapper, SqlAlchemyTable, column_type)
+        # WHEN / THEN
+        assert SqlAlchemyTable.__tablename__ == f"{brick_number}_{table_type}"
+        for x_column, column_type in extra_columns.items():
+            _check_sqlalchemycolumn(x_column, mapper, SqlAlchemyTable, column_type)
 
-    brickref_columns = get_quick_bricks_column_ref().get(brick_number)
-    for brickref_column in brickref_columns:
-        _check_sqlalchemycolumn(brickref_column, mapper, SqlAlchemyTable)
+        brickref_columns = get_quick_bricks_column_ref().get(brick_number)
+        for brickref_column in brickref_columns:
+            _check_sqlalchemycolumn(brickref_column, mapper, SqlAlchemyTable)
 
-    assert len(mapper.columns) == len(brickref_columns) + len(extra_columns)
+        assert len(mapper.columns) == len(brickref_columns) + len(extra_columns)
 
 
 def _check_sqlalchemycolumn(
@@ -63,8 +64,7 @@ def _check_sqlalchemycolumn(
 
 def test_HoldTable_ClassesHaveCorrectAttrs():
     # ESTABLISH / WHEN / THEN
-    for brick_number, HoldTable in get_brick_holdtables().items():
-        check_sqlalchemytableclass(brick_number, HoldTable, "hold", {})
+    check_sqlalchemytableclass(get_brick_holdtables(), "hold", {})
 
 
 def test_StageTable_ClassesHaveCorrectAttrs():
@@ -75,5 +75,4 @@ def test_StageTable_ClassesHaveCorrectAttrs():
         "src_sheet": "VARCHAR",
     }
     # WHEN / THEN
-    for brick_number, StageTable in get_brick_stagetables().items():
-        check_sqlalchemytableclass(brick_number, StageTable, "stage", extra_columns)
+    check_sqlalchemytableclass(get_brick_stagetables(), "stage", extra_columns)
