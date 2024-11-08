@@ -5,6 +5,7 @@ from src.f00_instrument.file import (
     delete_dir,
 )
 from src.f00_instrument.dict_toolbox import (
+    set_in_nested_dict,
     get_empty_dict_if_none,
     get_0_if_None,
     get_empty_set_if_none,
@@ -22,8 +23,11 @@ from src.f09_brick.filter_toolbox import (
     save_all_csvs_from_filterunit,
     init_filterunit_from_dir,
 )
-from src.f09_brick.brick_models import Base as brick_modelsBase
+
+# from src.f09_brick.brick_models import Base as brick_modelsBase
 from src.f08_filter.filter import FilterUnit, filterunit_shop
+from src.f10_world.world_tool import get_all_brick_dataframes
+from pandas import ExcelWriter, read_excel as pandas_read_excel, concat as pandas_concat
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
 from sqlalchemy import create_engine, Engine
@@ -121,6 +125,30 @@ class WorldUnit:
     def load_filterunit_from_files(self, face_id: FaceID):
         x_filterunit = init_filterunit_from_dir(self._face_dir(face_id))
         self.set_face_id(face_id, x_filterunit)
+
+    def jungle_to_zoo(self):
+        bricks_dict = {}
+        for ex_brickfileref in get_all_brick_dataframes(self._jungle_dir):
+            x_file_dir = ex_brickfileref.file_dir
+            x_file_name = ex_brickfileref.file_name
+            x_sheet_name = ex_brickfileref.sheet_name
+            file_path = create_file_path(x_file_dir, x_file_name)
+            sheet_df = pandas_read_excel(file_path, x_sheet_name)
+            sheet_df["file_dir"] = x_file_dir
+            sheet_df["file_name"] = x_file_name
+            sheet_df["sheet_name"] = x_sheet_name
+            nested_keys = [ex_brickfileref.brick_number, file_path, x_sheet_name]
+            set_in_nested_dict(bricks_dict, nested_keys, sheet_df)
+
+        for x_brick_number, file_path_dict in bricks_dict.items():
+            df_list = []
+            for file_path, sheet_dict in file_path_dict.items():
+                for sheet_name, sheet_df in sheet_dict.items():
+                    df_list.append(sheet_df)
+            final_df = pandas_concat(df_list)
+            zoo_file_path = create_file_path(self._zoo_dir, f"{x_brick_number}.xlsx")
+            with ExcelWriter(zoo_file_path) as writer:
+                final_df.to_excel(writer, sheet_name=x_brick_number, index=False)
 
     def get_dict(self) -> dict:
         return {
