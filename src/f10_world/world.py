@@ -38,6 +38,37 @@ def get_default_worlds_dir() -> str:
     return "src/f10_world/examples/worlds"
 
 
+class JungleToZooTransformer:
+    def __init__(self, jungle_dir: str, zoo_dir: str):
+        self.jungle_dir = jungle_dir
+        self.zoo_dir = zoo_dir
+
+    def transform(self):
+        for brick_number, dfs in self._group_jungle_data().items():
+            self._save_consolidated_brick(brick_number, dfs)
+
+    def _group_jungle_data(self):
+        grouped_data = {}
+        for ref in get_all_brick_dataframes(self.jungle_dir):
+            df = self._read_and_tag_dataframe(ref)
+            grouped_data.setdefault(ref.brick_number, []).append(df)
+        return grouped_data
+
+    def _read_and_tag_dataframe(self, ref):
+        x_file_path = create_file_path(ref.file_dir, ref.file_name)
+        df = pandas_read_excel(x_file_path, ref.sheet_name)
+        df["file_dir"] = ref.file_dir
+        df["file_name"] = ref.file_name
+        df["sheet_name"] = ref.sheet_name
+        return df
+
+    def _save_consolidated_brick(self, brick_number: str, dfs: list):
+        final_df = pandas_concat(dfs)
+        zoo_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
+        with ExcelWriter(zoo_path) as writer:
+            final_df.to_excel(writer, sheet_name=brick_number, index=False)
+
+
 @dataclass
 class WorldUnit:
     world_id: WorldID = None
@@ -127,28 +158,8 @@ class WorldUnit:
         self.set_face_id(face_id, x_filterunit)
 
     def jungle_to_zoo(self):
-        bricks_dict = {}
-        for ex_brickfileref in get_all_brick_dataframes(self._jungle_dir):
-            x_file_dir = ex_brickfileref.file_dir
-            x_file_name = ex_brickfileref.file_name
-            x_sheet_name = ex_brickfileref.sheet_name
-            file_path = create_file_path(x_file_dir, x_file_name)
-            sheet_df = pandas_read_excel(file_path, x_sheet_name)
-            sheet_df["file_dir"] = x_file_dir
-            sheet_df["file_name"] = x_file_name
-            sheet_df["sheet_name"] = x_sheet_name
-            nested_keys = [ex_brickfileref.brick_number, file_path, x_sheet_name]
-            set_in_nested_dict(bricks_dict, nested_keys, sheet_df)
-
-        for x_brick_number, file_path_dict in bricks_dict.items():
-            df_list = []
-            for file_path, sheet_dict in file_path_dict.items():
-                for sheet_name, sheet_df in sheet_dict.items():
-                    df_list.append(sheet_df)
-            final_df = pandas_concat(df_list)
-            zoo_file_path = create_file_path(self._zoo_dir, f"{x_brick_number}.xlsx")
-            with ExcelWriter(zoo_file_path) as writer:
-                final_df.to_excel(writer, sheet_name=x_brick_number, index=False)
+        transformer = JungleToZooTransformer(self._jungle_dir, self._zoo_dir)
+        transformer.transform()
 
     def get_dict(self) -> dict:
         return {

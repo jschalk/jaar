@@ -15,6 +15,7 @@ def test_WorldUnit_jungle_to_zoo_CreatesZooFiles(env_dir_setup_cleanup):
     music_world = worldunit_shop(music23_str)
     sue_str = "Sue"
     eon_1 = 1
+    eon_2 = 2
     minute_360 = 360
     minute_420 = 420
     hour6am = "6am"
@@ -31,6 +32,7 @@ def test_WorldUnit_jungle_to_zoo_CreatesZooFiles(env_dir_setup_cleanup):
     ]
     row1 = [sue_str, eon_1, minute_360, music23_str, hour6am]
     row2 = [sue_str, eon_1, minute_420, music23_str, hour7am]
+    row3 = [sue_str, eon_2, minute_420, music23_str, hour7am]
     incomplete_brick_columns = [
         face_id_str(),
         eon_id_str(),
@@ -42,7 +44,7 @@ def test_WorldUnit_jungle_to_zoo_CreatesZooFiles(env_dir_setup_cleanup):
 
     df1 = DataFrame([row1, row2], columns=brick_columns)
     df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_brick_columns)
-    df3 = DataFrame([row2, row1], columns=brick_columns)
+    df3 = DataFrame([row2, row1, row3], columns=brick_columns)
     br00003_ex1_str = "example1_br00003"
     br00003_ex2_str = "example2_br00003"
     br00003_ex3_str = "example3_br00003"
@@ -58,11 +60,12 @@ def test_WorldUnit_jungle_to_zoo_CreatesZooFiles(env_dir_setup_cleanup):
     # THEN
     print(f"{zoo_file_path=}")
     assert os_path_exists(zoo_file_path)
-    df = pandas_read_excel(zoo_file_path, sheet_name="br00003")
-    assert set(brick_columns).issubset(set(df.columns))
+    x_df = pandas_read_excel(zoo_file_path, sheet_name="br00003")
+    assert set(brick_columns).issubset(set(x_df.columns))
     file_dir_str = "file_dir"
     file_name_str = "file_name"
     sheet_name_str = "sheet_name"
-    assert file_dir_str in set(df.columns)
-    assert file_name_str in set(df.columns)
-    assert sheet_name_str in set(df.columns)
+    assert file_dir_str in set(x_df.columns)
+    assert file_name_str in set(x_df.columns)
+    assert sheet_name_str in set(x_df.columns)
+    assert len(x_df) == 5
