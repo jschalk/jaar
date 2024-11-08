@@ -135,13 +135,13 @@ def get_row_count(db_conn: Connection, table_name: str) -> str:
 
 def check_table_column_existence(tables_dict: dict, db_conn: Connection) -> bool:
     db_tables = get_db_tables(db_conn)
-    print(f"{db_tables=}")
+    print(f"{db_tables.keys()=}")
     db_tables_columns = get_db_columns(db_conn)
 
     # for table_name, table_dict in tables_dict.items():
     for table_name in tables_dict:
-        print(f"Table: {table_name}")
         if db_tables.get(table_name) is None:
+            print(f"Table {table_name} is missing")
             return False
 
         # db_columns = set(db_tables_columns.get(table_name).keys())

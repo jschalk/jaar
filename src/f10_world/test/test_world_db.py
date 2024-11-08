@@ -2,12 +2,14 @@ from src.f00_instrument.file import save_file, delete_dir, create_file_path, ope
 from src.f00_instrument.db_toolbox import check_connection, check_table_column_existence
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
 from src.f08_filter.filter import filterunit_shop
+from src.f09_brick.examples.brick_df_examples import get_ex1_br00001_df
 from src.f10_world.world import WorldUnit, worldunit_shop
 from src.f10_world.examples.world_env import (
     get_test_world_id,
     get_test_worlds_dir,
     env_dir_setup_cleanup,
 )
+from pandas import read_sql_table
 from pytest import raises as pytest_raises
 from os.path import exists as os_path_exists
 
@@ -20,14 +22,18 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     music_str = "music"
     music_world = WorldUnit(world_id=music_str, worlds_dir=get_test_worlds_dir())
     x_world_dir = f"{get_test_worlds_dir()}/{music_str}"
-    wrd_file_name = "wrd.db"
-    wrd_file_path = f"{x_world_dir}/{wrd_file_name}"
     x_faces_dir = f"{x_world_dir}/faces"
+    x_jungle_dir = f"{x_world_dir}/jungle"
+    x_zoo_dir = f"{x_world_dir}/zoo"
 
     assert music_world._world_dir is None
     assert music_world._faces_dir is None
+    assert music_world._jungle_dir is None
+    assert music_world._zoo_dir is None
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_faces_dir) is False
+    assert os_path_exists(x_jungle_dir) is False
+    assert os_path_exists(x_zoo_dir) is False
 
     # WHEN
     music_world._set_world_dirs()
@@ -35,131 +41,101 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     # THEN
     assert music_world._world_dir == x_world_dir
     assert music_world._faces_dir == x_faces_dir
+    assert music_world._jungle_dir == x_jungle_dir
+    assert music_world._zoo_dir == x_zoo_dir
     assert os_path_exists(x_world_dir)
     assert os_path_exists(x_faces_dir)
+    assert os_path_exists(x_jungle_dir)
+    assert os_path_exists(x_zoo_dir)
 
 
-def test_WorldUnit_get_db_path_ReturnsCorrectObj():
-    # ESTABLISH
-    music_str = "music"
-    music_world = WorldUnit(world_id=music_str, worlds_dir=get_test_worlds_dir())
+# def test_WorldUnit_get_db_path_ReturnsCorrectObj():
+#     # ESTABLISH
+#     music_str = "music"
+#     music_world = WorldUnit(world_id=music_str, worlds_dir=get_test_worlds_dir())
+#     music_world._world_dir = create_file_path(music_world.worlds_dir, music_str)
 
-    # WHEN
-    x_db_path = music_world.get_db_path()
+#     # WHEN
+#     x_db_path = music_world.get_db_path()
 
-    # THEN
-    x_world_dir = f"{get_test_worlds_dir()}/{music_str}"
-    file_name = "wrd.db"
-    assert x_db_path == f"{x_world_dir}/{file_name}"
+#     # THEN
+#     x_world_dir = f"{get_test_worlds_dir()}/{music_str}"
+#     file_name = "wrd.db"
+#     assert x_db_path == f"{x_world_dir}/{file_name}"
 
 
-# def test_WorldUnit_create_db_CreatesDBIfDoesNotExist(
+# def test_WorldUnit_create_wrd_db_CreatesDBFile(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
 #     music_str = "music"
-#     music_world = worldunit_shop(world_id=music_str, worlds_dir=get_test_worlds_dir())
-#     assert os_path_exists(music_world.get_db_path())
-#     delete_dir(music_world.get_db_path())
+#     music_world = worldunit_shop(music_str, get_test_worlds_dir())
 #     assert os_path_exists(music_world.get_db_path()) is False
 
 #     # WHEN
-#     music_world._create_db(in_memory=False)
-
+#     music_world._create_wrd_db()
 #     # THEN
 #     assert os_path_exists(music_world.get_db_path())
 
 
-# def test_WorldUnit_create_db_DoesNotOverWriteDBIfExists(
+# def test_WorldUnit_db_exists_ReturnsObj(env_dir_setup_cleanup):
+#     # ESTABLISH
+#     music_str = "music"
+#     music_world = worldunit_shop(music_str, get_test_worlds_dir())
+#     assert os_path_exists(music_world.get_db_path()) is False
+#     assert music_world.db_exists() is False
+
+#     # WHEN
+#     music_world._create_wrd_db()
+#     # THEN
+#     assert os_path_exists(music_world.get_db_path())
+#     assert music_world.db_exists()
+
+
+# def test_WorldUnit_get_engine_CreatesWrdDBIfDoesNotExist(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     music_str = "music"
-#     music_world = worldunit_shop(world_id=music_str, worlds_dir=get_test_worlds_dir())
-#     delete_dir(dir=music_world.get_db_path())  # clear out any treasury.db file
-#     music_world._create_db(in_memory=False)
-#     assert os_path_exists(music_world.get_db_path())
-
-#     # SETUP
-#     x_file_str = "Texas Dallas ElPaso"
-#     db_file = "wrd.db"
-#     save_file(music_world._world_dir, db_file, file_str=x_file_str, replace=True)
-#     assert os_path_exists(music_world.get_db_path())
-#     assert open_file(music_world._world_dir, file_name=db_file) == x_file_str
+#     fizz_world = worldunit_shop("fizz", worlds_dir=get_test_worlds_dir())
+#     assert fizz_world.db_exists() is False
 
 #     # WHEN
-#     music_world._create_db(in_memory=False)
+#     fizz_world.get_db_engine()
 #     # THEN
-#     assert open_file(music_world._world_dir, file_name=db_file) == x_file_str
+#     assert fizz_world.db_exists()
 
-#     # # WHEN
-#     # music_world._create_db(overwrite=True)
-#     # # THEN
-#     # assert open_file(music_world._world_dir, file_name=db_file) != x_file_str
+#     # WHEN
+#     fizz_world.get_db_engine()
+#     # THEN
+#     assert fizz_world.db_exists()
 
 
-# def test_WorldUnit_create_db_CanCreateInMemory(env_dir_setup_cleanup):
+# def test_WorldUnit_insert_brick_into_wrd_db_CorrectChangesDB():
 #     # ESTABLISH
-#     music_str = "music"
-#     music_world = worldunit_shop(music_str, get_test_worlds_dir(), in_memory_db=True)
+#     fizz_world = worldunit_shop("fizz", get_test_worlds_dir())
+#     # get brick dataframe
+#     x_df = get_ex1_br00001_df()
+#     x_df["face_id"] = "Sue"
+#     x_df["eon_id"] = 2
+#     engine = fizz_world.get_db_engine()
 
-#     music_world._db = None
-#     assert music_world._db is None
-#     assert os_path_exists(music_world.get_db_path()) is False
-
-#     # WHEN
-#     music_world._create_db(in_memory=True)
-
-#     # THEN
-#     assert music_world._db is not None
-#     assert os_path_exists(music_world.get_db_path()) is False
-
-
-# def test_WorldUnit_get_conn_CreatesWrdDBIfDoesNotExist(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     fizz_world = WorldUnit("fizz", worlds_dir=get_test_worlds_dir())
-#     print(f"{fizz_world.get_db_path()=}")
-#     assert os_path_exists(fizz_world.get_db_path()) is False
-
-#     # WHEN / THEN
-#     with pytest_raises(Exception) as excinfo:
-#         check_connection(fizz_world.get_conn())
-#     assert str(excinfo.value) == "unable to open database file"
+#     brick_number = "br00001"
+#     x_table = "br00001_hold"
 
 #     # WHEN
-#     fizz_world._set_world_dirs(in_memory=True)
+#     with engine.connect() as conn:
+#         assert len(read_sql_table(x_table, conn)) == 0
+#         x_df.to_sql(
+#             name=x_table,
+#             con=conn,
+#             if_exists="append",
+#             index=False,
+#             schema=fizz_world.get_db_path(),
+#         )
+#         assert len(read_sql_table(x_table, conn)) == 1
+
+#     with engine.connect() as conn:
+#         assert len(read_sql_table(x_table, conn)) == 1
 
 #     # THEN
-#     assert check_connection(fizz_world.get_conn())
-
-
-# def test_world_set_world_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
-#     # ESTABLISH
-#     # create db in memory, check each table has the columns it needs
-#     x_world = worldunit_shop(get_test_world_id(), get_test_worlds_dir())
-#     # grab config.json
-#     tables_dict = {"fan": {}}
-
-#     # WHEN
-#     x_world._set_world_dirs(in_memory=True)
-
-#     # THEN
-#     with x_world.get_conn() as conn:
-#         assert check_table_column_existence(tables_dict, conn)
-
-
-# def test_WorldUnit_set_face_id_SetsAttr_Scenario0():
-#     # ESTABLISH
-#     x_world = worldunit_shop()
-#     assert x_world.faces == {}
-
-#     # WHEN
-#     sue_str = "Sue"
-#     sue_filterunit = filterunit_shop(sue_str)
-#     x_world.set_face_id(sue_str, sue_filterunit)
-
-#     # THEN
-#     assert x_world.faces != {}
-#     assert x_world.faces == {sue_str: sue_filterunit}
+#     assert 1 == 2

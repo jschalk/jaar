@@ -26,7 +26,7 @@ from src.f09_brick.brick_models import Base as brick_modelsBase
 from src.f08_filter.filter import FilterUnit, filterunit_shop
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, Engine
 from os.path import exists as os_path_exists
 
 
@@ -44,6 +44,8 @@ class WorldUnit:
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _fiscalunits: set[FiscalID] = None
     _world_dir: str = None
+    _jungle_dir: str = None
+    _zoo_dir: str = None
 
     def set_face_id(self, face_id: FaceID, x_filterunit: FilterUnit = None):
         if x_filterunit is None:
@@ -83,16 +85,35 @@ class WorldUnit:
     def _delete_filterunit_dir(self, face_id: FaceID):
         delete_dir(self._face_dir(face_id))
 
-    def get_db_path(self) -> str:
-        return create_file_path(self.worlds_dir, f"{self.world_id}/wrd.db")
+    # def get_db_path(self) -> str:
+    #     return create_file_path(self._world_dir, "wrd.db")
 
-    def _set_world_dirs(self, in_memory: bool = False):
+    # def _create_wrd_db(self):
+    #     engine = create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
+    #     brick_modelsBase.metadata.create_all(engine)
+    #     engine.dispose()
+
+    # def db_exists(self) -> bool:
+    #     return os_path_exists(self.get_db_path())
+
+    # def get_db_engine(self) -> Engine:
+    #     if self.db_exists() is False:
+    #         self._create_wrd_db()
+    #     return create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
+
+    def _set_world_dirs(self):
         self._world_dir = create_file_path(self.worlds_dir, self.world_id)
         self._faces_dir = create_file_path(self._world_dir, "faces")
+        self._jungle_dir = create_file_path(self._world_dir, "jungle")
+        self._zoo_dir = create_file_path(self._world_dir, "zoo")
         if not os_path_exists(self._world_dir):
             set_dir(self._world_dir)
         if not os_path_exists(self._faces_dir):
             set_dir(self._faces_dir)
+        if not os_path_exists(self._jungle_dir):
+            set_dir(self._jungle_dir)
+        if not os_path_exists(self._zoo_dir):
+            set_dir(self._zoo_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
@@ -132,7 +153,7 @@ def worldunit_shop(
         _faces_dir=create_file_path(worlds_dir, "faces"),
         _fiscalunits=get_empty_set_if_none(_fiscalunits),
     )
-    x_worldunit._set_world_dirs(in_memory_db)
+    x_worldunit._set_world_dirs()
     return x_worldunit
 
 
