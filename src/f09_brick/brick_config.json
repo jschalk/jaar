@@ -4,15 +4,15 @@
     "brick_type": "filterunit",
     "build_order": 1,
     "optional_args": {
+      "inx_label": {},
       "inx_road_delimiter": {},
-      "otx_label": {},
       "otx_road_delimiter": {},
       "unknown_word": {}
     },
     "required_args": {
       "eon_id": {},
       "face_id": {},
-      "inx_label": {}
+      "otx_label": {}
     }
   },
   "bridge_otx_to_inx": {
@@ -21,14 +21,14 @@
     "build_order": 0,
     "optional_args": {
       "inx_road_delimiter": {},
+      "inx_word": {},
       "otx_road_delimiter": {},
-      "otx_word": {},
       "unknown_word": {}
     },
     "required_args": {
       "eon_id": {},
       "face_id": {},
-      "inx_word": {}
+      "otx_word": {}
     }
   },
   "bud_acct_membership": {
