@@ -103,8 +103,8 @@ def test_get_headers_list_ReturnsObj():
         fiscal_id_str(),
         owner_id_str(),
         acct_id_str(),
-        "credit_belief",
-        "debtit_belief",
+        credit_belief_str(),
+        debtit_belief_str(),
     ]
 
 
@@ -207,8 +207,8 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00021_bud_acctunit_v0_0_0():
     assert headers_list[2] == fiscal_id_str()
     assert headers_list[3] == owner_id_str()
     assert headers_list[4] == acct_id_str()
-    assert headers_list[5] == "credit_belief"
-    assert headers_list[6] == "debtit_belief"
+    assert headers_list[5] == credit_belief_str()
+    assert headers_list[6] == debtit_belief_str()
 
 
 def test_get_brickref_HasCorrectAttrs_brick_format_00020_bud_acct_membership_v0_0_0():
@@ -227,8 +227,8 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00020_bud_acct_membership_v0_
     assert headers_list[3] == owner_id_str()
     assert headers_list[4] == acct_id_str()
     assert headers_list[5] == group_id_str()
-    assert headers_list[6] == "credit_vote"
-    assert headers_list[7] == "debtit_vote"
+    assert headers_list[6] == credit_vote_str()
+    assert headers_list[7] == debtit_vote_str()
 
 
 def test_get_brickref_HasCorrectAttrs_brick_format_00013_itemunit_v0_0_0():
