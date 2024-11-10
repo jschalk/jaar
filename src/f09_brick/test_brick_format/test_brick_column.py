@@ -28,7 +28,7 @@ def test_brickref_shop_ReturnsObj():
     assert x_brickref._attributes == set()
 
 
-def test_BrickColumn_set_attribute_SetsAttr():
+def test_BrickRef_set_attribute_SetsAttr():
     # ESTABLISH
     x_brickref = brickref_shop("0003", bud_acctunit_str())
     x_attribute = "1"
@@ -42,7 +42,7 @@ def test_BrickColumn_set_attribute_SetsAttr():
     assert x_brickref._attributes == {x_attribute}
 
 
-def test_BrickColumn_get_headers_list_ReturnsObj_Scenario0():
+def test_BrickRef_get_headers_list_ReturnsObj_Scenario0():
     # ESTABLISH
 
     x_brickref = brickref_shop("0003", bud_acctunit_str())
@@ -54,7 +54,7 @@ def test_BrickColumn_get_headers_list_ReturnsObj_Scenario0():
     assert x_headers_list == []
 
 
-def test_BrickColumn_get_headers_list_ReturnsObj_Scenario1():
+def test_BrickRef_get_headers_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
     x3_brickref = brickref_shop("0003", bud_acctunit_str())
@@ -67,7 +67,7 @@ def test_BrickColumn_get_headers_list_ReturnsObj_Scenario1():
     assert x_headers_list == [group_id_str()]
 
 
-def test_BrickColumn_get_headers_list_ReturnsObj_Scenario2():
+def test_BrickRef_get_headers_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
     x3_brickref = brickref_shop("0003", bud_acctunit_str())

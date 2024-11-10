@@ -1,4 +1,9 @@
-from src.f00_instrument.file import create_file_path, get_dir_file_strs, delete_dir
+from src.f00_instrument.file import (
+    set_dir,
+    create_file_path,
+    get_dir_file_strs,
+    delete_dir,
+)
 from src.f00_instrument.dict_toolbox import (
     get_empty_dict_if_none,
     get_0_if_None,
@@ -13,17 +18,89 @@ from src.f01_road.road import (
     FaceID,
 )
 from src.f07_fiscal.fiscal import FiscalUnit
+from src.f08_filter.filter import FilterUnit, filterunit_shop
+from src.f09_brick.brick_config import get_brick_numbers, get_quick_bricks_column_ref
 from src.f09_brick.filter_toolbox import (
     save_all_csvs_from_filterunit,
     init_filterunit_from_dir,
 )
-from src.f08_filter.filter import FilterUnit, filterunit_shop
+from src.f09_brick.pandas_tool import get_new_sorting_columns
+from src.f10_world.world_tool import get_all_brick_dataframes
+from pandas import (
+    ExcelWriter,
+    read_excel as pandas_read_excel,
+    concat as pandas_concat,
+    DataFrame,
+)
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
 
 
 def get_default_worlds_dir() -> str:
     return "src/f10_world/examples/worlds"
+
+
+class JungleToZooTransformer:
+    def __init__(self, jungle_dir: str, zoo_dir: str):
+        self.jungle_dir = jungle_dir
+        self.zoo_dir = zoo_dir
+
+    def transform(self):
+        for brick_number, dfs in self._group_jungle_data().items():
+            self._save_consolidated_brick(brick_number, dfs)
+
+    def _group_jungle_data(self):
+        grouped_data = {}
+        for ref in get_all_brick_dataframes(self.jungle_dir):
+            df = self._read_and_tag_dataframe(ref)
+            grouped_data.setdefault(ref.brick_number, []).append(df)
+        return grouped_data
+
+    def _read_and_tag_dataframe(self, ref):
+        x_file_path = create_file_path(ref.file_dir, ref.file_name)
+        df = pandas_read_excel(x_file_path, ref.sheet_name)
+        df["file_dir"] = ref.file_dir
+        df["file_name"] = ref.file_name
+        df["sheet_name"] = ref.sheet_name
+        return df
+
+    def _save_consolidated_brick(self, brick_number: str, dfs: list):
+        final_df = pandas_concat(dfs)
+        zoo_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
+        with ExcelWriter(zoo_path) as writer:
+            final_df.to_excel(writer, sheet_name="zoo", index=False)
+
+
+class ZooToOtxTransformer:
+    def __init__(self, zoo_dir: str):
+        self.zoo_dir = zoo_dir
+
+    def transform(self):
+        for brick_number in get_brick_numbers():
+            zoo_brick_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
+            if os_path_exists(zoo_brick_path):
+                zoo_df = pandas_read_excel(zoo_brick_path, "zoo")
+                otx_df = self._group_by_brick_columns(zoo_df, brick_number)
+                self._save_otx_brick(zoo_brick_path, otx_df)
+
+    def _group_by_brick_columns(
+        self, zoo_df: DataFrame, brick_number: str
+    ) -> DataFrame:
+        brick_columns_set = get_quick_bricks_column_ref().get(brick_number)
+        brick_columns_list = get_new_sorting_columns(brick_columns_set)
+        return zoo_df[brick_columns_list]
+
+    # def _read_and_tag_dataframe(self, ref):
+    #     x_file_path = create_file_path(ref.file_dir, ref.file_name)
+    #     df = pandas_read_excel(x_file_path, ref.sheet_name)
+    #     df["file_dir"] = ref.file_dir
+    #     df["file_name"] = ref.file_name
+    #     df["sheet_name"] = ref.sheet_name
+    #     return df
+
+    def _save_otx_brick(self, brick_path: str, zoo_df: DataFrame):
+        with ExcelWriter(brick_path) as writer:
+            zoo_df.to_excel(writer, sheet_name="otx", index=False)
 
 
 @dataclass
@@ -35,6 +112,9 @@ class WorldUnit:
     _faces_dir: dict[FaceID,] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _fiscalunits: set[FiscalID] = None
+    _world_dir: str = None
+    _jungle_dir: str = None
+    _zoo_dir: str = None
 
     def set_face_id(self, face_id: FaceID, x_filterunit: FilterUnit = None):
         if x_filterunit is None:
@@ -74,12 +154,50 @@ class WorldUnit:
     def _delete_filterunit_dir(self, face_id: FaceID):
         delete_dir(self._face_dir(face_id))
 
+    # def get_db_path(self) -> str:
+    #     return create_file_path(self._world_dir, "wrd.db")
+
+    # def _create_wrd_db(self):
+    #     engine = create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
+    #     brick_modelsBase.metadata.create_all(engine)
+    #     engine.dispose()
+
+    # def db_exists(self) -> bool:
+    #     return os_path_exists(self.get_db_path())
+
+    # def get_db_engine(self) -> Engine:
+    #     if self.db_exists() is False:
+    #         self._create_wrd_db()
+    #     return create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
+
+    def _set_world_dirs(self):
+        self._world_dir = create_file_path(self.worlds_dir, self.world_id)
+        self._faces_dir = create_file_path(self._world_dir, "faces")
+        self._jungle_dir = create_file_path(self._world_dir, "jungle")
+        self._zoo_dir = create_file_path(self._world_dir, "zoo")
+        if not os_path_exists(self._world_dir):
+            set_dir(self._world_dir)
+        if not os_path_exists(self._faces_dir):
+            set_dir(self._faces_dir)
+        if not os_path_exists(self._jungle_dir):
+            set_dir(self._jungle_dir)
+        if not os_path_exists(self._zoo_dir):
+            set_dir(self._zoo_dir)
+
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
     def load_filterunit_from_files(self, face_id: FaceID):
         x_filterunit = init_filterunit_from_dir(self._face_dir(face_id))
         self.set_face_id(face_id, x_filterunit)
+
+    def jungle_to_zoo(self):
+        transformer = JungleToZooTransformer(self._jungle_dir, self._zoo_dir)
+        transformer.transform()
+
+    def zoo_to_otx(self):
+        transformer = ZooToOtxTransformer(self._zoo_dir)
+        transformer.transform()
 
     def get_dict(self) -> dict:
         return {
@@ -97,12 +215,13 @@ def worldunit_shop(
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
     faces: set[str] = None,
     _fiscalunits: set[FiscalID] = None,
+    in_memory_db: bool = None,
 ) -> WorldUnit:
     if world_id is None:
         world_id = get_default_world_id()
     if worlds_dir is None:
         worlds_dir = get_default_worlds_dir()
-    return WorldUnit(
+    x_worldunit = WorldUnit(
         world_id=world_id,
         worlds_dir=worlds_dir,
         current_time=get_0_if_None(current_time),
@@ -111,6 +230,8 @@ def worldunit_shop(
         _faces_dir=create_file_path(worlds_dir, "faces"),
         _fiscalunits=get_empty_set_if_none(_fiscalunits),
     )
+    x_worldunit._set_world_dirs()
+    return x_worldunit
 
 
 def init_fiscalunits_from_dirs(x_dirs: list[str]) -> list[FiscalUnit]:

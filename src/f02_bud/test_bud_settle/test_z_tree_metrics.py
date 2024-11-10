@@ -88,7 +88,7 @@ def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_ItemRoadUnit():
     nia_bud.set_l1_item(itemunit_shop(weekdays, mass=40))
     tree_metrics_before = nia_bud.get_tree_metrics()
 
-    # WHEN/THEN
+    # WHEN / THEN
     assert tree_metrics_before.last_evaluated_pledge_item_road is None
 
 
@@ -97,7 +97,7 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_ItemRoadUnit():
     yao_bud = budunit_v001()
     yao_tree_metrics = yao_bud.get_tree_metrics()
 
-    # WHEN/THEN
+    # WHEN / THEN
     train_road = create_road_from_nodes(
         [
             yao_bud._fiscal_id,

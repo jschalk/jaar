@@ -2,7 +2,11 @@ from src.f00_instrument.file import create_file_path, create_dir
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_filter.filter_config import eon_id_str
-from src.f10_world.world_tool import get_all_excel_bricksheets, get_all_brick_dataframes
+from src.f10_world.world_tool import (
+    get_all_excel_bricksheets,
+    get_all_brick_dataframes,
+    BrickFileRef,
+)
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, ExcelWriter
 
@@ -65,6 +69,17 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_FilterSheetNames(
     assert len(x_bricksheets) == 2
 
 
+def test_BrickFileRef_Exists():
+    # ESTABLISH / WHEN
+    x_brickfileref = BrickFileRef()
+
+    # THEN
+    assert x_brickfileref.file_dir is None
+    assert x_brickfileref.file_name is None
+    assert x_brickfileref.sheet_name is None
+    assert x_brickfileref.brick_number is None
+
+
 def test_get_all_brick_dataframes_ReturnsObj_Scenario0_FilterSheetNames(
     env_dir_setup_cleanup,
 ):
@@ -102,7 +117,9 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario0_FilterSheetNames(
 
     # THEN
     assert x_bricksheets
-    assert (x_dir, ex_file_name, br00003_str) in x_bricksheets
+    br3_brickfileref = BrickFileRef(x_dir, ex_file_name, br00003_str, "br00003")
+    assert x_bricksheets == [br3_brickfileref]
+    # assert (x_dir, ex_file_name, br00003_str) in x_bricksheets
     assert len(x_bricksheets) == 1
 
 
@@ -151,6 +168,8 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
 
     # THEN
     assert x_bricksheets
-    assert (x_dir, ex_file_name, br00003_ex1_str) in x_bricksheets
-    assert (x_dir, ex_file_name, br00003_ex2_str) not in x_bricksheets
+    ex1_brickfileref = BrickFileRef(x_dir, ex_file_name, br00003_ex1_str, "br00003")
+    ex2_brickfileref = BrickFileRef(x_dir, ex_file_name, br00003_ex2_str, "br00003")
+
+    assert x_bricksheets == [ex1_brickfileref]
     assert len(x_bricksheets) == 1

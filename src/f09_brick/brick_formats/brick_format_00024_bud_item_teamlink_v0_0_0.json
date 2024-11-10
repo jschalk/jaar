@@ -1,11 +1,23 @@
 {
     "attributes": {
-        "eon_id": {},
-        "face_id": {},
-        "fiscal_id": {},
-        "owner_id": {},
-        "road": {},
-        "team_id": {}
+        "eon_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "owner_id": {
+            "otx_key": true
+        },
+        "road": {
+            "otx_key": true
+        },
+        "team_id": {
+            "otx_key": true
+        }
     },
     "brick_number": "br00024",
     "categorys": [

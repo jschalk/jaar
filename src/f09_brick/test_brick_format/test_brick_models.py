@@ -3,8 +3,9 @@ from src.f09_brick.brick_config import (
     get_brick_sqlite_type,
     get_brick_numbers,
 )
-from src.f09_brick.brick_models import get_brick_holdtables, get_brick_stagetables
-from sqlalchemy import inspect
+from src.f09_brick.brick_models import get_brick_holdtables, get_brick_stagetables, Base
+from src.f09_brick.examples.brick_env import brick_env_setup_cleanup, brick_examples_dir
+from sqlalchemy import inspect, create_engine, MetaData
 
 
 def test_get_brick_holdtables_ReturnObj():
@@ -24,21 +25,22 @@ def test_get_brick_stagetables_ReturnObj():
 
 
 def check_sqlalchemytableclass(
-    brick_number: str, SqlAlchemyTable, table_type: str, extra_columns: dict[str, str]
+    tableclasses_dict: dict[str,], table_type: str, extra_columns: dict[str, str]
 ):
-    # ESTABLISH
-    mapper = inspect(SqlAlchemyTable)
+    for brick_number, SqlAlchemyTable in tableclasses_dict.items():
+        # ESTABLISH
+        mapper = inspect(SqlAlchemyTable)
 
-    # WHEN / THEN
-    assert SqlAlchemyTable.__tablename__ == f"{brick_number}_{table_type}"
-    for x_column, column_type in extra_columns.items():
-        _check_sqlalchemycolumn(x_column, mapper, SqlAlchemyTable, column_type)
+        # WHEN / THEN
+        assert SqlAlchemyTable.__tablename__ == f"{brick_number}_{table_type}"
+        for x_column, column_type in extra_columns.items():
+            _check_sqlalchemycolumn(x_column, mapper, SqlAlchemyTable, column_type)
 
-    brickref_columns = get_quick_bricks_column_ref().get(brick_number)
-    for brickref_column in brickref_columns:
-        _check_sqlalchemycolumn(brickref_column, mapper, SqlAlchemyTable)
+        brickref_columns = get_quick_bricks_column_ref().get(brick_number)
+        for brickref_column in brickref_columns:
+            _check_sqlalchemycolumn(brickref_column, mapper, SqlAlchemyTable)
 
-    assert len(mapper.columns) == len(brickref_columns) + len(extra_columns)
+        assert len(mapper.columns) == len(brickref_columns) + len(extra_columns)
 
 
 def _check_sqlalchemycolumn(
@@ -63,8 +65,7 @@ def _check_sqlalchemycolumn(
 
 def test_HoldTable_ClassesHaveCorrectAttrs():
     # ESTABLISH / WHEN / THEN
-    for brick_number, HoldTable in get_brick_holdtables().items():
-        check_sqlalchemytableclass(brick_number, HoldTable, "hold", {})
+    check_sqlalchemytableclass(get_brick_holdtables(), "hold", {})
 
 
 def test_StageTable_ClassesHaveCorrectAttrs():
@@ -75,5 +76,42 @@ def test_StageTable_ClassesHaveCorrectAttrs():
         "src_sheet": "VARCHAR",
     }
     # WHEN / THEN
-    for brick_number, StageTable in get_brick_stagetables().items():
-        check_sqlalchemytableclass(brick_number, StageTable, "stage", extra_columns)
+    check_sqlalchemytableclass(get_brick_stagetables(), "stage", extra_columns)
+
+
+def test_Base_create_all_CreatesTables_Scenario0_InMemory():
+    # ESTABLISH
+    engine = create_engine("sqlite://")
+
+    # WHEN
+    Base.metadata.create_all(engine)
+
+    # THEN
+    # Create a MetaData object and reflect the database schema
+    metadata = MetaData()
+    metadata.reflect(bind=engine)
+
+    # List all tables in the database
+    tables = metadata.tables
+    assert len(tables) == 46
+
+
+def test_Base_create_all_CreatesTables_Scenario1_File(brick_env_setup_cleanup):
+    # ESTABLISH
+    engine = create_engine(f"sqlite:///{brick_examples_dir()}mydatabase.db")
+
+    # WHEN
+    Base.metadata.create_all(engine)
+
+    # THEN
+    # Create a MetaData object and reflect the database schema
+    metadata = MetaData()
+    metadata.reflect(bind=engine)
+
+    # List all tables in the database
+    tables = metadata.tables
+    print("Tables in the database:")
+    # for table_name in tables:
+    #     print(table_name)
+
+    assert len(tables) == 46

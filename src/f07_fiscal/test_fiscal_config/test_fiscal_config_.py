@@ -99,9 +99,9 @@ def test_get_fiscal_config_dict_ReturnsObj():
     assert len(fiscalunit_dict.get(required_args_str())) == 0
     assert len(fiscal_purview_episode_dict.get(required_args_str())) == 4
     assert len(fiscal_cashbook_dict.get(required_args_str())) == 4
-    assert len(fiscal_timeline_hour_dict.get(required_args_str())) == 3
-    assert len(fiscal_timeline_month_dict.get(required_args_str())) == 3
-    assert len(fiscal_timeline_weekday_dict.get(required_args_str())) == 3
+    assert len(fiscal_timeline_hour_dict.get(required_args_str())) == 2
+    assert len(fiscal_timeline_month_dict.get(required_args_str())) == 2
+    assert len(fiscal_timeline_weekday_dict.get(required_args_str())) == 2
 
     x_fiscalunit_optional_args = {
         c400_number_str(),
@@ -121,9 +121,9 @@ def test_get_fiscal_config_dict_ReturnsObj():
     assert len(fiscalunit_dict.get(optional_args_str())) == 10
     assert len(fiscal_purview_episode_dict.get(optional_args_str())) == 1
     assert len(fiscal_cashbook_dict.get(optional_args_str())) == 1
-    assert len(fiscal_timeline_hour_dict.get(optional_args_str())) == 0
-    assert len(fiscal_timeline_month_dict.get(optional_args_str())) == 0
-    assert len(fiscal_timeline_weekday_dict.get(optional_args_str())) == 0
+    assert len(fiscal_timeline_hour_dict.get(optional_args_str())) == 1
+    assert len(fiscal_timeline_month_dict.get(optional_args_str())) == 1
+    assert len(fiscal_timeline_weekday_dict.get(optional_args_str())) == 1
 
 
 def _validate_fiscal_config(fiscal_config: dict):

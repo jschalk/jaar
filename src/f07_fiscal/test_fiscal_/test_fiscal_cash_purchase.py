@@ -21,6 +21,23 @@ def test_FiscalUnit_set_cashpurchase_SetsAttr():
     assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
+def test_FiscalUnit_add_cashpurchase_SetsAttr():
+    # ESTABLISH
+    t6606_current_time = 6606
+    x_fiscal = fiscalunit_shop(current_time=t6606_current_time)
+    sue_str = "Sue"
+    bob_str = "Bob"
+    t55_t = 5505
+    t55_amount = 37
+    assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t) is False
+
+    # WHEN
+    x_fiscal.add_cashpurchase(sue_str, bob_str, x_time_id=t55_t, x_amount=t55_amount)
+
+    # THEN
+    assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
+
+
 def test_FiscalUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_id_GreaterThanOrEqual_current_time():
     # ESTABLISH
     t6606_current_time = 6606
@@ -44,13 +61,13 @@ def test_FiscalUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_id_GreaterTha
     t77_amount = 30
     sue_bob_t77_tranunit = tranunit_shop(sue_str, bob_str, t77_t, t77_amount)
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_fiscal.set_cashpurchase(sue_bob_t77_tranunit)
     exception_str = f"Cannot set tranunit for time_id={t77_t}, timelinepoint is greater than current time={t6606_current_time}"
     assert str(excinfo.value) == exception_str
 
-    # WHEN/THEN
+    # WHEN / THEN
     sue_bob_t6606 = tranunit_shop(sue_str, bob_str, t6606_current_time, t77_amount)
     with pytest_raises(Exception) as excinfo:
         x_fiscal.set_cashpurchase(sue_bob_t6606)

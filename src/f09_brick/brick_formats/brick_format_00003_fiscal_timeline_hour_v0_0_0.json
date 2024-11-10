@@ -1,10 +1,20 @@
 {
     "attributes": {
-        "cumlative_minute": {},
-        "eon_id": {},
-        "face_id": {},
-        "fiscal_id": {},
-        "hour_label": {}
+        "cumlative_minute": {
+            "otx_key": false
+        },
+        "eon_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "hour_label": {
+            "otx_key": true
+        }
     },
     "brick_number": "br00003",
     "categorys": [

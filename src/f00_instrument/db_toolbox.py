@@ -135,12 +135,13 @@ def get_row_count(db_conn: Connection, table_name: str) -> str:
 
 def check_table_column_existence(tables_dict: dict, db_conn: Connection) -> bool:
     db_tables = get_db_tables(db_conn)
+    print(f"{db_tables.keys()=}")
     db_tables_columns = get_db_columns(db_conn)
 
     # for table_name, table_dict in tables_dict.items():
     for table_name in tables_dict:
-        print(f"Table: {table_name}")
         if db_tables.get(table_name) is None:
+            print(f"Table {table_name} is missing")
             return False
 
         # db_columns = set(db_tables_columns.get(table_name).keys())
@@ -166,3 +167,51 @@ def sqlite_connection(db_name):
         raise
     finally:
         conn.close()
+
+
+def _get_grouping_select_clause(
+    group_by_columns: list[str], value_columns: list[str]
+) -> str:
+    select_str = "SELECT"
+    for group_by_column in group_by_columns:
+        select_str += f" {group_by_column},"
+    for value_column in value_columns:
+        select_str += f" MAX({value_column}) AS {value_column},"
+    return _remove_comma_at_end(select_str)
+
+
+def _remove_comma_at_end(x_str: str) -> str:
+    if x_str[len(x_str) - 1 : len(x_str)] == ",":
+        x_str = x_str[0:-1]
+    return x_str
+
+
+def _get_grouping_groupby_clause(group_by_columns: list[str]) -> str:
+    groupby_str = "GROUP BY"
+    for group_by_column in group_by_columns:
+        groupby_str += f" {group_by_column},"
+    return _remove_comma_at_end(groupby_str)
+
+
+def _get_having_equal_value_clause(value_columns: list[str]) -> str:
+    if value_columns == []:
+        return ""
+    else:
+        having_clause = "HAVING"
+        for value_column in value_columns:
+            if having_clause != "HAVING":
+                having_clause += f" AND"
+            having_clause += f" MIN({value_column}) = MAX({value_column})"
+        return _remove_comma_at_end(having_clause)
+
+
+def get_groupby_sql_query(
+    x_table: str, group_by_columns: list[str], value_columns: list[str]
+) -> str:
+    return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)}"
+
+
+def get_consistent_values_sql_query(
+    x_table: str, group_by_columns: list[str], value_columns: list[str]
+) -> str:
+    return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)} {_get_having_equal_value_clause(value_columns)}"

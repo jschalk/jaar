@@ -43,10 +43,7 @@ def test_FiscalUnit_Exists(env_dir_setup_cleanup):
 
 
 def test_fiscalunit_shop_ReturnsFiscalUnit():
-    # ESTABLISH
-    music_str = "music"
-
-    # WHEN
+    # ESTABLISH / WHEN
     music_fiscal = fiscalunit_shop()
 
     # THEN

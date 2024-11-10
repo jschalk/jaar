@@ -1,12 +1,26 @@
 {
     "attributes": {
-        "eon_id": {},
-        "face_id": {},
-        "inx_road_delimiter": {},
-        "inx_word": {},
-        "otx_road_delimiter": {},
-        "otx_word": {},
-        "unknown_word": {}
+        "eon_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "inx_road_delimiter": {
+            "otx_key": false
+        },
+        "inx_word": {
+            "otx_key": false
+        },
+        "otx_road_delimiter": {
+            "otx_key": false
+        },
+        "otx_word": {
+            "otx_key": true
+        },
+        "unknown_word": {
+            "otx_key": false
+        }
     },
     "brick_number": "br00040",
     "categorys": [

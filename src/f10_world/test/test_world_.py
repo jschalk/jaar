@@ -23,16 +23,19 @@ def test_WorldUnit_Exists():
     x_world = WorldUnit()
 
     # THEN
-    assert x_world.world_id is None
-    assert x_world.worlds_dir is None
-    assert x_world.current_time is None
-    assert x_world.timeconversions is None
-    assert x_world.faces is None
-    assert x_world._faces_dir is None
-    assert x_world._fiscalunits is None
+    assert not x_world.world_id
+    assert not x_world.worlds_dir
+    assert not x_world.current_time
+    assert not x_world.timeconversions
+    assert not x_world.faces
+    assert not x_world._faces_dir
+    assert not x_world._fiscalunits
+    assert not x_world._world_dir
+    assert not x_world._jungle_dir
+    assert not x_world._zoo_dir
 
 
-def test_worldunit_shop_ReturnsObj_WithParameters():
+def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     # ESTABLISH
     worlds2_dir = f"{get_test_worlds_dir()}/worlds2"
     five_world_id = "five"
@@ -63,11 +66,11 @@ def test_worldunit_shop_ReturnsObj_WithParameters():
     assert x_world.current_time == world2_current_time
     assert x_world.timeconversions == world2timeconversions
     assert x_world.faces == world2_faces
-    assert x_world._faces_dir == f"{worlds2_dir}/faces"
+    assert x_world._faces_dir == f"{worlds2_dir}/{five_world_id}/faces"
     assert x_world._fiscalunits == world2_fiscalunits
 
 
-def test_worldunit_shop_ReturnsObj_WithoutParameters():
+def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     # ESTABLISH / WHEN
     x_world = worldunit_shop()
 
@@ -77,11 +80,11 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters():
     assert x_world.current_time == 0
     assert x_world.timeconversions == {}
     assert x_world.faces == {}
-    assert x_world._faces_dir == f"{get_test_worlds_dir()}/faces"
+    assert x_world._faces_dir == f"{get_test_worlds_dir()}/{x_world.world_id}/faces"
     assert x_world._fiscalunits == set()
 
 
-def test_WorldUnit_set_face_id_SetsAttr_Scenario0():
+def test_WorldUnit_set_face_id_SetsAttr_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     assert x_world.faces == {}
@@ -96,7 +99,7 @@ def test_WorldUnit_set_face_id_SetsAttr_Scenario0():
     assert x_world.faces == {sue_str: sue_filterunit}
 
 
-def test_WorldUnit_set_face_id_SetsAttr_Scenario1_NoValue():
+def test_WorldUnit_set_face_id_SetsAttr_Scenario1_NoValue(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     assert x_world.faces == {}
@@ -110,7 +113,7 @@ def test_WorldUnit_set_face_id_SetsAttr_Scenario1_NoValue():
     assert x_world.faces == {sue_str: filterunit_shop(sue_str)}
 
 
-def test_FilterUnit_face_id_exists_ReturnsObj():
+def test_FilterUnit_face_id_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
@@ -123,7 +126,7 @@ def test_FilterUnit_face_id_exists_ReturnsObj():
     assert x_world.face_id_exists(sue_str)
 
 
-def test_FilterUnit_get_filterunit_ReturnsObj():
+def test_FilterUnit_get_filterunit_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     slash_str = "/"
@@ -138,7 +141,7 @@ def test_FilterUnit_get_filterunit_ReturnsObj():
     assert x_world.get_filterunit(sue_str) == sue_filterunit
 
 
-def test_FilterUnit_del_face_id_ReturnsObj():
+def test_FilterUnit_del_face_id_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
@@ -158,7 +161,7 @@ def test_FilterUnit_del_face_id_ReturnsObj():
     assert x_world.get_filterunit(bob_str) == bob_filterunit
 
 
-def test_WorldUnit_del_all_face_id_SetsAttr():
+def test_WorldUnit_del_all_face_id_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
@@ -179,7 +182,7 @@ def test_WorldUnit_del_all_face_id_SetsAttr():
     assert x_world.faces == {}
 
 
-def test_WorldUnit_face_ids_empty_ReturnsObj():
+def test_WorldUnit_face_ids_empty_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"

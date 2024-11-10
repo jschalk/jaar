@@ -1,5 +1,10 @@
 from src.f00_instrument.file import open_file, create_file_path, create_dir
-from src.f00_instrument.examples.examples_pandas import (
+from src.f00_instrument.examples.instrument_env import (
+    env_dir_setup_cleanup,
+    get_instrument_temp_env_dir,
+)
+from src.f04_gift.atom_config import acct_id_str, group_id_str, credor_respect_str
+from src.f09_brick.examples.examples_pandas import (
     get_empty_dataframe,
     get_small_example01_csv,
     get_small_example01_dataframe,
@@ -12,16 +17,12 @@ from src.f00_instrument.examples.examples_pandas import (
     get_ex02_atom_dataframe,
     get_ex02_atom_csv,
 )
-from src.f00_instrument.examples.instrument_env import (
-    env_dir_setup_cleanup,
-    get_instrument_temp_env_dir,
-)
-from src.f04_gift.atom_config import acct_id_str, group_id_str
 from src.f09_brick.pandas_tool import (
     save_dataframe_to_csv,
     get_ordered_csv,
     get_all_excel_sheet_names,
     get_relevant_columns_dataframe,
+    get_groupby_dataframe,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame, ExcelWriter
@@ -215,3 +216,106 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     print(f"{relevant_dataframe.columns=}")
     assert relevant_dataframe.columns.to_list()[0] == acct_id_str()
     assert relevant_dataframe.columns.to_list() == [acct_id_str(), group_id_str()]
+
+
+def test_get_groupby_dataframe_ReturnsObj_Scenario0_EmptyDataframe():
+    # ESTABLISH
+    df1 = DataFrame([[]], columns=[])
+    group_by_list = [group_id_str(), acct_id_str()]
+
+    # WHEN
+    group_by_dataframe = get_groupby_dataframe(df1, group_by_list)
+
+    # THEN
+    assert group_by_dataframe is not None
+    assert len(group_by_dataframe) == len(DataFrame([[]], columns=[]))
+    print(f"{group_by_dataframe.columns=}")
+    assert group_by_dataframe.columns.to_list() == []
+
+
+def test_get_groupby_dataframe_ReturnsObj_Scenario1_GroupBySingleColumn():
+    # ESTABLISH
+    df_columns = [group_id_str(), credor_respect_str()]
+    before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
+    df1 = DataFrame(before_df_values, columns=df_columns)
+    group_by_list = [group_id_str()]
+
+    # WHEN
+    group_by_dataframe = get_groupby_dataframe(df1, group_by_list)
+    print(f"{group_by_dataframe=}")
+
+    # THEN
+    assert group_by_dataframe is not None
+    after_df_values = [["AA0", "BB0"]]
+    after_df = DataFrame(after_df_values, columns=df_columns)
+    assert len(group_by_dataframe) == len(after_df)
+    print(f"{group_by_dataframe.columns=}")
+    assert group_by_dataframe.columns.to_list() == after_df.columns.to_list()
+    assert group_by_dataframe.to_csv() == after_df.to_csv()
+
+
+def test_get_groupby_dataframe_ReturnsObj_Scenario2_GroupByExtraColumns():
+    # ESTABLISH
+    df_columns = [group_id_str(), credor_respect_str()]
+    before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
+    df1 = DataFrame(before_df_values, columns=df_columns)
+    group_by_list = [group_id_str(), acct_id_str()]
+
+    # WHEN
+    group_by_dataframe = get_groupby_dataframe(df1, group_by_list)
+    print(f"{group_by_dataframe=}")
+
+    # THEN
+    assert group_by_dataframe is not None
+    after_df_values = [["AA0", "BB0"]]
+    after_df = DataFrame(after_df_values, columns=df_columns)
+    assert len(group_by_dataframe) == len(after_df)
+    print(f"{group_by_dataframe.columns=}")
+    assert group_by_dataframe.columns.to_list() == after_df.columns.to_list()
+    assert group_by_dataframe.to_csv() == after_df.to_csv()
+
+
+def test_get_groupby_dataframe_ReturnsObj_Scenario3_GroupByExtraColumns():
+    # ESTABLISH
+    df_columns = [group_id_str(), credor_respect_str(), "column3"]
+    before_df_values = [["AA0", "BB0", "CC0"], ["AA0", "BB0", "CC0"]]
+    df1 = DataFrame(before_df_values, columns=df_columns)
+    group_by_list = [group_id_str(), acct_id_str(), credor_respect_str()]
+
+    # WHEN
+    group_by_dataframe = get_groupby_dataframe(df1, group_by_list)
+    print(f"{group_by_dataframe=}")
+
+    # THEN
+    assert group_by_dataframe is not None
+    after_df_values = [["AA0", "BB0", "CC0"]]
+    after_df = DataFrame(after_df_values, columns=df_columns)
+    assert len(group_by_dataframe) == len(after_df)
+    print(f"{group_by_dataframe.columns=}")
+    assert group_by_dataframe.columns.to_list() == after_df.columns.to_list()
+    assert group_by_dataframe.to_csv() == after_df.to_csv()
+
+
+def test_get_groupby_dataframe_ReturnsObj_Scenario4_GroupByExtraColumns():
+    # ESTABLISH
+    df_columns = [group_id_str(), credor_respect_str(), "column3"]
+    before_df_values = [
+        ["AA0", "BB0", "CC0"],
+        ["AA0", "BB0", "CC1"],
+        ["DD0", "EE0", "FF0"],
+    ]
+    df1 = DataFrame(before_df_values, columns=df_columns)
+    group_by_list = [group_id_str(), acct_id_str(), credor_respect_str()]
+
+    # WHEN
+    group_by_dataframe = get_groupby_dataframe(df1, group_by_list)
+    print(f"{group_by_dataframe=}")
+
+    # THEN
+    after_df_values = [["DD0", "EE0", "FF0"]]
+    assert group_by_dataframe is not None
+    after_df = DataFrame(after_df_values, columns=df_columns)
+    assert group_by_dataframe.columns.to_list() == after_df.columns.to_list()
+    assert len(group_by_dataframe) == len(after_df)
+    print(f"{group_by_dataframe.columns=}")
+    assert group_by_dataframe.to_csv() == after_df.to_csv()

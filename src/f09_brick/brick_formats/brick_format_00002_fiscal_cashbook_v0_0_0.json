@@ -1,12 +1,26 @@
 {
     "attributes": {
-        "acct_id": {},
-        "amount": {},
-        "eon_id": {},
-        "face_id": {},
-        "fiscal_id": {},
-        "owner_id": {},
-        "time_id": {}
+        "acct_id": {
+            "otx_key": true
+        },
+        "amount": {
+            "otx_key": false
+        },
+        "eon_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "owner_id": {
+            "otx_key": true
+        },
+        "time_id": {
+            "otx_key": true
+        }
     },
     "brick_number": "br00002",
     "categorys": [

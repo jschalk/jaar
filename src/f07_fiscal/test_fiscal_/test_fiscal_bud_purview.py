@@ -140,8 +140,47 @@ def test_FiscalUnit_add_purviewepisode_RaisesErrorWhenPurview_time_id_IsLessThan
     music_fiscal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
     music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
 
-    # WHEN/THEN
+    # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         music_fiscal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
     exception_str = f"Cannot set purviewepisode because time_id {sue_x4_time_id} is less than FiscalUnit.current_time {music_current_time}."
     assert str(excinfo.value) == exception_str
+
+
+def test_FiscalUnit_add_purviewepisode_DoesNotRaiseError_allow_prev_to_current_time_entry_IsTrue():
+    # ESTABLISH
+    music_str = "music"
+    music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir())
+    music_current_time = 606
+    music_fiscal.current_time = music_current_time
+    bob_str = "Bob"
+    bob_x0_time_id = 707
+    bob_x0_magnitude = 33
+    sue_str = "Sue"
+    sue_x4_time_id = 404
+    sue_x4_magnitude = 55
+    sue_x7_time_id = 808
+    sue_x7_magnitude = 66
+    assert music_fiscal.get_purviewlogs_time_ids() == set()
+    music_fiscal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
+    music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+
+    sue_purviewlog = purviewlog_shop(sue_str)
+    sue_purviewlog.add_episode(sue_x4_time_id, sue_x4_magnitude)
+    sue_purviewlog.add_episode(sue_x7_time_id, sue_x7_magnitude)
+    assert music_fiscal.get_purviewlog(sue_str) != sue_purviewlog
+
+    # WHEN
+    music_fiscal.add_purviewepisode(
+        x_owner_id=sue_str,
+        x_time_id=sue_x4_time_id,
+        x_money_magnitude=sue_x4_magnitude,
+        allow_prev_to_current_time_entry=True,
+    )
+
+    # THEN
+    assert music_fiscal.purviewlogs != {}
+    assert music_fiscal.get_purviewlog(sue_str) == sue_purviewlog
+    bob_purviewlog = purviewlog_shop(bob_str)
+    bob_purviewlog.add_episode(bob_x0_time_id, bob_x0_magnitude)
+    assert music_fiscal.get_purviewlog(bob_str) == bob_purviewlog

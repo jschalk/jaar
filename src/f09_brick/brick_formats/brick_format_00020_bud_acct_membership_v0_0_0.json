@@ -1,13 +1,29 @@
 {
     "attributes": {
-        "acct_id": {},
-        "credit_vote": {},
-        "debtit_vote": {},
-        "eon_id": {},
-        "face_id": {},
-        "fiscal_id": {},
-        "group_id": {},
-        "owner_id": {}
+        "acct_id": {
+            "otx_key": true
+        },
+        "credit_vote": {
+            "otx_key": false
+        },
+        "debtit_vote": {
+            "otx_key": false
+        },
+        "eon_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "group_id": {
+            "otx_key": true
+        },
+        "owner_id": {
+            "otx_key": true
+        }
     },
     "brick_number": "br00020",
     "categorys": [
