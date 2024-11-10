@@ -167,3 +167,33 @@ def sqlite_connection(db_name):
         raise
     finally:
         conn.close()
+
+
+def get_grouping_select_clause(
+    group_by_columns: list[str], value_columns: list[str]
+) -> str:
+    sql_str = "SELECT"
+    for group_by_column in group_by_columns:
+        sql_str += f" {group_by_column},"
+    for value_column in value_columns:
+        sql_str += f" MAX({value_column}),"
+    return _remove_comma_at_end(sql_str)
+
+
+def _remove_comma_at_end(sql_str: str) -> str:
+    if sql_str[len(sql_str) - 1 : len(sql_str)] == ",":
+        sql_str = sql_str[0:-1]
+    return sql_str
+
+
+def get_grouping_groupby_clause(group_by_columns: list[str]) -> str:
+    sql_str = "GROUP BY"
+    for group_by_column in group_by_columns:
+        sql_str += f" {group_by_column},"
+    return _remove_comma_at_end(sql_str)
+
+
+def get_groupby_sql_stmt(
+    x_table: str, group_by_columns: list[str], value_columns: list[str]
+) -> str:
+    return f"{get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {get_grouping_groupby_clause(group_by_columns)}"

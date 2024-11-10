@@ -8,6 +8,9 @@ from src.f00_instrument.db_toolbox import (
     get_rowdata,
     dict_factory,
     sqlite_connection,
+    get_grouping_select_clause,
+    get_grouping_groupby_clause,
+    get_groupby_sql_stmt,
 )
 from pytest import raises as pytest_raises
 
@@ -149,3 +152,90 @@ def test_get_rowdata_ReturnsCorrectObj():
     assert x_rowdata
     assert x_rowdata.tablename == "earth"
     assert x_rowdata.row_dict == {"name": "Earth", "radius": 6378}
+
+
+def test_get_groupby_select_clause_ReturnsObj_Scenario0():
+    # ESTABLISH
+    x_group_by_columns = set()
+    x_value_columns = set()
+
+    # WHEN
+    x_select_clause = get_grouping_select_clause(x_group_by_columns, x_value_columns)
+
+    # THEN
+    assert x_select_clause == "SELECT"
+
+
+def test_get_groupby_select_clause_ReturnsObj_Scenario1():
+    # ESTABLISH
+    fizz_str = "fizz"
+    buzz_str = "buzz"
+    x_group_by_columns = [fizz_str, buzz_str]
+    x_value_columns = []
+
+    # WHEN
+    x_select_clause = get_grouping_select_clause(x_group_by_columns, x_value_columns)
+
+    # THEN
+    assert x_select_clause == f"SELECT {fizz_str}, {buzz_str}"
+
+
+def test_get_groupby_select_clause_ReturnsObj_Scenario2():
+    # ESTABLISH
+    fizz_str = "fizz"
+    buzz_str = "buzz"
+    swim_str = "swim"
+    run_str = "run"
+    x_group_by_columns = [fizz_str, buzz_str]
+    x_value_columns = [swim_str, run_str]
+
+    # WHEN
+    gen_select_clause = get_grouping_select_clause(x_group_by_columns, x_value_columns)
+
+    # THEN
+    example_str = f"SELECT {fizz_str}, {buzz_str}, MAX({swim_str}), MAX({run_str})"
+    assert gen_select_clause == example_str
+
+
+def test_get_grouping_groupby_clause_ReturnsObj_Scenario0():
+    # ESTABLISH
+    x_group_by_columns = set()
+
+    # WHEN
+    x_select_clause = get_grouping_groupby_clause(x_group_by_columns)
+
+    # THEN
+    assert x_select_clause == "GROUP BY"
+
+
+def test_get_grouping_groupby_clause_ReturnsObj_Scenario1():
+    # ESTABLISH
+    fizz_str = "fizz"
+    buzz_str = "buzz"
+    x_group_by_columns = [fizz_str, buzz_str]
+
+    # WHEN
+    x_select_clause = get_grouping_groupby_clause(x_group_by_columns)
+
+    # THEN
+    assert x_select_clause == f"GROUP BY {fizz_str}, {buzz_str}"
+
+
+def test_get_groupby_sql_stmt_ReturnsObj_Scenario0():
+    # ESTABLISH
+    fizz_str = "fizz"
+    buzz_str = "buzz"
+    swim_str = "swim"
+    run_str = "run"
+    x_group_by_columns = [fizz_str, buzz_str]
+    x_value_columns = [swim_str, run_str]
+    x_table_name = "fizzybuzzy"
+
+    # WHEN
+    gen_select_clause = get_groupby_sql_stmt(
+        x_table_name, x_group_by_columns, x_value_columns
+    )
+
+    # THEN
+    example_str = f"""SELECT {fizz_str}, {buzz_str}, MAX({swim_str}), MAX({run_str}) FROM {x_table_name} GROUP BY {fizz_str}, {buzz_str}"""
+    assert gen_select_clause == example_str
