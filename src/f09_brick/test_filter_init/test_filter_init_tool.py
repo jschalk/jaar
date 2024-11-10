@@ -9,23 +9,7 @@ from src.f04_gift.atom_config import (
     type_AcctID_str,
     type_GroupID_str,
 )
-from src.f09_brick.pandas_tool import (
-    get_ordered_csv,
-    get_brick_elements_sort_order as sorting_columns,
-)
 from src.f08_filter.filter import filterunit_shop
-from src.f09_brick.filter_toolbox import (
-    get_otx_to_inx_dt_columns,
-    get_explicit_label_columns,
-    create_otx_to_inx_dt,
-    create_explicit_label_dt,
-    save_all_csvs_from_filterunit,
-    _load_otx_to_inx_from_csv,
-    _load_explicit_label_from_csv,
-    _save_explicit_label_csv,
-    create_dir_valid_filterunit,
-    init_filterunit_from_dir,
-)
 from src.f08_filter.examples.filter_env import (
     env_dir_setup_cleanup,
     get_test_faces_dir,
@@ -38,6 +22,22 @@ from src.f08_filter.examples.example_filters import (
     get_slash_acctid_bridgeunit,
     get_sue_filterunit,
     get_casa_maison_filterunit_set_by_explicit_label,
+)
+from src.f09_brick.filter_toolbox import (
+    get_otx_to_inx_dt_columns,
+    get_explicit_label_columns,
+    create_otx_to_inx_dt,
+    create_explicit_label_dt,
+    save_all_csvs_from_filterunit,
+    _load_otx_to_inx_from_csv,
+    _load_explicit_label_from_csv,
+    _save_explicit_label_csv,
+    create_dir_valid_filterunit,
+    init_filterunit_from_dir,
+)
+from src.f09_brick.pandas_tool import (
+    get_ordered_csv,
+    get_brick_elements_sort_order as sorting_columns,
 )
 from os.path import exists as os_path_exists
 

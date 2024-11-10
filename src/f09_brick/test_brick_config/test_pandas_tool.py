@@ -1,5 +1,5 @@
 from src.f00_instrument.file import open_file, create_file_path, create_dir
-from src.f00_instrument.examples.examples_pandas import (
+from src.f09_brick.examples.examples_pandas import (
     get_empty_dataframe,
     get_small_example01_csv,
     get_small_example01_dataframe,

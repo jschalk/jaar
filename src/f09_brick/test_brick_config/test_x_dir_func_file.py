@@ -9,7 +9,7 @@ from src.f04_gift.atom_config import (
 )
 from src.f09_brick.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f08_filter.filter import filterunit_shop
-from src.f09_brick.dir_func import filter_face_dir_files
+from src.f09_brick.pandas_tool import filter_face_dir_files
 from src.f08_filter.examples.filter_env import (
     env_dir_setup_cleanup,
     get_test_faces_dir,
