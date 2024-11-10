@@ -42,11 +42,12 @@
         }
     },
     "fiscal_timeline_hour": {
-        "optional_args": {},
-        "required_args": {
+        "optional_args": {
             "cumlative_minute": {
                 "obj_class": "int"
-            },
+            }
+        },
+        "required_args": {
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
@@ -56,11 +57,12 @@
         }
     },
     "fiscal_timeline_month": {
-        "optional_args": {},
-        "required_args": {
+        "optional_args": {
             "cumlative_day": {
                 "obj_class": "int"
-            },
+            }
+        },
+        "required_args": {
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
@@ -70,21 +72,25 @@
         }
     },
     "fiscal_timeline_weekday": {
-        "optional_args": {},
+        "optional_args": {
+            "weekday_order": {
+                "obj_class": "int"
+            }
+        },
         "required_args": {
             "fiscal_id": {
                 "obj_class": "FiscalID"
             },
             "weekday_label": {
                 "obj_class": "RoadNode"
-            },
-            "weekday_order": {
-                "obj_class": "int"
             }
         }
     },
     "fiscalunit": {
         "optional_args": {
+            "c400_number": {
+                "obj_class": "int"
+            },
             "current_time": {
                 "obj_class": "int"
             },
@@ -108,9 +114,6 @@
             },
             "timeline_label": {
                 "obj_class": "RoadNode"
-            },
-            "c400_number": {
-                "obj_class": "int"
             },
             "yr1_jan1_offset": {
                 "obj_class": "int"

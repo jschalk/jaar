@@ -1,13 +1,29 @@
 {
     "attributes": {
-        "awardee_id": {},
-        "eon_id": {},
-        "face_id": {},
-        "fiscal_id": {},
-        "give_force": {},
-        "owner_id": {},
-        "road": {},
-        "take_force": {}
+        "awardee_id": {
+            "otx_key": true
+        },
+        "eon_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "give_force": {
+            "otx_key": false
+        },
+        "owner_id": {
+            "otx_key": true
+        },
+        "road": {
+            "otx_key": true
+        },
+        "take_force": {
+            "otx_key": false
+        }
     },
     "brick_number": "br00022",
     "categorys": [

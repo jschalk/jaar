@@ -1,12 +1,26 @@
 {
     "attributes": {
-        "base": {},
-        "base_item_active_requisite": {},
-        "eon_id": {},
-        "face_id": {},
-        "fiscal_id": {},
-        "owner_id": {},
-        "road": {}
+        "base": {
+            "otx_key": true
+        },
+        "base_item_active_requisite": {
+            "otx_key": false
+        },
+        "eon_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "owner_id": {
+            "otx_key": true
+        },
+        "road": {
+            "otx_key": true
+        }
     },
     "brick_number": "br00027",
     "categorys": [

@@ -1,10 +1,20 @@
 {
     "attributes": {
-        "cumlative_day": {},
-        "eon_id": {},
-        "face_id": {},
-        "fiscal_id": {},
-        "month_label": {}
+        "cumlative_day": {
+            "otx_key": false
+        },
+        "eon_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "month_label": {
+            "otx_key": true
+        }
     },
     "brick_number": "br00004",
     "categorys": [

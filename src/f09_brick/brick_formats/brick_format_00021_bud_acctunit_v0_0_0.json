@@ -1,12 +1,26 @@
 {
     "attributes": {
-        "acct_id": {},
-        "credit_belief": {},
-        "debtit_belief": {},
-        "eon_id": {},
-        "face_id": {},
-        "fiscal_id": {},
-        "owner_id": {}
+        "acct_id": {
+            "otx_key": true
+        },
+        "credit_belief": {
+            "otx_key": false
+        },
+        "debtit_belief": {
+            "otx_key": false
+        },
+        "eon_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "owner_id": {
+            "otx_key": true
+        }
     },
     "brick_number": "br00021",
     "categorys": [

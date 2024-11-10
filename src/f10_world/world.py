@@ -5,7 +5,6 @@ from src.f00_instrument.file import (
     delete_dir,
 )
 from src.f00_instrument.dict_toolbox import (
-    set_in_nested_dict,
     get_empty_dict_if_none,
     get_0_if_None,
     get_empty_set_if_none,
@@ -19,18 +18,21 @@ from src.f01_road.road import (
     FaceID,
 )
 from src.f07_fiscal.fiscal import FiscalUnit
+from src.f08_filter.filter import FilterUnit, filterunit_shop
+from src.f09_brick.brick_config import get_brick_numbers, get_quick_bricks_column_ref
 from src.f09_brick.filter_toolbox import (
     save_all_csvs_from_filterunit,
     init_filterunit_from_dir,
 )
-
-# from src.f09_brick.brick_models import Base as brick_modelsBase
-from src.f08_filter.filter import FilterUnit, filterunit_shop
+from src.f09_brick.pandas_tool import get_new_sorting_columns
 from src.f10_world.world_tool import get_all_brick_dataframes
-from pandas import ExcelWriter, read_excel as pandas_read_excel, concat as pandas_concat
+from pandas import (
+    ExcelWriter,
+    read_excel as pandas_read_excel,
+    concat as pandas_concat,
+    DataFrame,
+)
 from dataclasses import dataclass
-from sqlite3 import connect as sqlite3_connect, Connection
-from sqlalchemy import create_engine, Engine
 from os.path import exists as os_path_exists
 
 
@@ -66,7 +68,39 @@ class JungleToZooTransformer:
         final_df = pandas_concat(dfs)
         zoo_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
         with ExcelWriter(zoo_path) as writer:
-            final_df.to_excel(writer, sheet_name=brick_number, index=False)
+            final_df.to_excel(writer, sheet_name="zoo", index=False)
+
+
+class ZooToOtxTransformer:
+    def __init__(self, zoo_dir: str):
+        self.zoo_dir = zoo_dir
+
+    def transform(self):
+        for brick_number in get_brick_numbers():
+            zoo_brick_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
+            if os_path_exists(zoo_brick_path):
+                zoo_df = pandas_read_excel(zoo_brick_path, "zoo")
+                otx_df = self._group_by_brick_columns(zoo_df, brick_number)
+                self._save_otx_brick(zoo_brick_path, otx_df)
+
+    def _group_by_brick_columns(
+        self, zoo_df: DataFrame, brick_number: str
+    ) -> DataFrame:
+        brick_columns_set = get_quick_bricks_column_ref().get(brick_number)
+        brick_columns_list = get_new_sorting_columns(brick_columns_set)
+        return zoo_df[brick_columns_list]
+
+    # def _read_and_tag_dataframe(self, ref):
+    #     x_file_path = create_file_path(ref.file_dir, ref.file_name)
+    #     df = pandas_read_excel(x_file_path, ref.sheet_name)
+    #     df["file_dir"] = ref.file_dir
+    #     df["file_name"] = ref.file_name
+    #     df["sheet_name"] = ref.sheet_name
+    #     return df
+
+    def _save_otx_brick(self, brick_path: str, zoo_df: DataFrame):
+        with ExcelWriter(brick_path) as writer:
+            zoo_df.to_excel(writer, sheet_name="otx", index=False)
 
 
 @dataclass
@@ -159,6 +193,10 @@ class WorldUnit:
 
     def jungle_to_zoo(self):
         transformer = JungleToZooTransformer(self._jungle_dir, self._zoo_dir)
+        transformer.transform()
+
+    def zoo_to_otx(self):
+        transformer = ZooToOtxTransformer(self._zoo_dir)
         transformer.transform()
 
     def get_dict(self) -> dict:

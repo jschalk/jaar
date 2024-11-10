@@ -114,6 +114,7 @@ from src.f09_brick.brick_config import (
     allowed_crud_str,
     attributes_str,
     categorys_str,
+    otx_key_str,
     insert_one_time_str,
     insert_mulitple_str,
     delete_insert_update_str,
@@ -144,6 +145,7 @@ def test_str_functions_ReturnObj():
     assert allowed_crud_str() == "allowed_crud"
     assert attributes_str() == "attributes"
     assert categorys_str() == "categorys"
+    assert otx_key_str() == "otx_key"
     assert insert_one_time_str() == "INSERT_ONE_TIME"
     assert insert_mulitple_str() == "INSERT_MULITPLE"
     assert delete_insert_update_str() == "DELETE_INSERT_UPDATE"
@@ -515,18 +517,18 @@ def _validate_brick_config(x_brick_config: dict):
 
 def test_get_brick_format_filenames_ReturnsObj():
     # ESTABLISH
-    brick_filenames = get_brick_format_filenames()
+    brick_filenames_set = get_brick_format_filenames()
+    brick_filenames_sorted = list(brick_filenames_set)
+    brick_filenames_sorted.sort(key=lambda x: x)
+    print(brick_filenames_sorted)
 
     # THEN
-    print(f"{brick_filenames=}")
-    print("")
-    assert brick_format_00021_bud_acctunit_v0_0_0() in brick_filenames
-    assert brick_format_00020_bud_acct_membership_v0_0_0() in brick_filenames
-    assert brick_format_00013_itemunit_v0_0_0() in brick_filenames
+    assert brick_format_00021_bud_acctunit_v0_0_0() in brick_filenames_set
+    assert brick_format_00020_bud_acct_membership_v0_0_0() in brick_filenames_set
+    assert brick_format_00013_itemunit_v0_0_0() in brick_filenames_set
 
     # WHEN / THEN
-    assert _validate_brick_format_files(brick_filenames)
-    # assert 1 == 2
+    assert _validate_brick_format_files(brick_filenames_sorted)
 
 
 def _validate_brick_format_files(brick_filenames: set[str]):
@@ -534,31 +536,48 @@ def _validate_brick_format_files(brick_filenames: set[str]):
     valid_brick_categorys.update(get_atom_categorys())
     valid_brick_categorys.update(get_fiscal_categorys())
     valid_brick_categorys.update(get_filter_categorys())
+    config_dict = get_brick_config_dict()
 
     # for every brick_format file there exists a unique brick_number always with leading zeros to make 5 digits
     brick_numbers_set = set()
     for brick_filename in brick_filenames:
-        brickref_dict = get_brickref_dict(brick_filename)
-        print(f"{brick_filename=} {brickref_dict.get(brick_number_str())=}")
-        brick_number_value = brickref_dict.get(brick_number_str())
+        ref_dict = get_brickref_dict(brick_filename)
+        print(f"{brick_filename=} {ref_dict.get(brick_number_str())=}")
+        brick_number_value = ref_dict.get(brick_number_str())
         assert brick_number_value
         assert brick_number_value[2:8] == brick_filename[13:18]
         brick_numbers_set.add(brick_number_value)
 
-        brick_format_categorys = brickref_dict.get(categorys_str())
-        assert brick_format_categorys is not None
-        assert len(brick_format_categorys) > 0
-        for brick_format_category in brick_format_categorys:
+        format_cats = ref_dict.get(categorys_str())
+        assert format_cats is not None
+        assert len(format_cats) > 0
+        for brick_format_category in format_cats:
             assert brick_format_category in valid_brick_categorys
-            print(f"{brick_format_category=}")
 
-        assert brickref_dict.get(attributes_str()) is not None
-        brick_format_attributes = brickref_dict.get(attributes_str()).keys()
-        # assert fiscal_id_str() in brick_format_attributes
-        # assert face_id_str() in brick_format_attributes
-        # assert eon_id_str() in brick_format_attributes
-        # for brick_format_attribute in brick_format_attributes:
-        #     print(f"{brick_format_attribute=}")
+        assert ref_dict.get(attributes_str()) is not None
+        brick_format_attributes = ref_dict.get(attributes_str())
+        for brick_attribute, attr_dict in brick_format_attributes.items():
+            assert otx_key_str() in set(attr_dict.keys())
+            otx_key_value = attr_dict.get(otx_key_str())
+            for brick_format_category in format_cats:
+                format_config = config_dict.get(brick_format_category)
+                cat_required_keys = set(format_config.get(required_args_str()).keys())
+                cat_optional_keys = set(format_config.get(optional_args_str()).keys())
+                attr_in_required = brick_attribute in cat_required_keys
+                attr_in_optional = brick_attribute in cat_optional_keys
+                attr_in_keys = attr_in_required or attr_in_optional
+                assert_fail_str = (
+                    f"{brick_format_category=} {brick_attribute=} {otx_key_value=}"
+                )
+                if attr_in_keys and brick_attribute == "owner_id":
+                    assert otx_key_value
+                elif attr_in_keys and otx_key_value:
+                    assert attr_in_required, assert_fail_str
+                elif attr_in_keys:
+                    assert attr_in_optional, assert_fail_str
+
+    # assert face_id_str() in brick_format_attributes
+    # assert eon_id_str() in brick_format_attributes
 
     # confirm every bricknumber is unique
     assert len(brick_numbers_set) == len(brick_filenames)

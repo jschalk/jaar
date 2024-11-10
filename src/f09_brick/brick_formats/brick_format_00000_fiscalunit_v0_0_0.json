@@ -1,17 +1,41 @@
 {
     "attributes": {
-        "c400_number": {},
-        "current_time": {},
-        "eon_id": {},
-        "face_id": {},
-        "fiscal_id": {},
-        "fund_coin": {},
-        "monthday_distortion": {},
-        "penny": {},
-        "respect_bit": {},
-        "road_delimiter": {},
-        "timeline_label": {},
-        "yr1_jan1_offset": {}
+        "c400_number": {
+            "otx_key": false
+        },
+        "current_time": {
+            "otx_key": false
+        },
+        "eon_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "fund_coin": {
+            "otx_key": false
+        },
+        "monthday_distortion": {
+            "otx_key": false
+        },
+        "penny": {
+            "otx_key": false
+        },
+        "respect_bit": {
+            "otx_key": false
+        },
+        "road_delimiter": {
+            "otx_key": false
+        },
+        "timeline_label": {
+            "otx_key": false
+        },
+        "yr1_jan1_offset": {
+            "otx_key": false
+        }
     },
     "brick_number": "br00000",
     "categorys": [

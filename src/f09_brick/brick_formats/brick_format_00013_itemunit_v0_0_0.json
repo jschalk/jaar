@@ -1,13 +1,29 @@
 {
     "attributes": {
-        "eon_id": {},
-        "face_id": {},
-        "fiscal_id": {},
-        "label": {},
-        "mass": {},
-        "owner_id": {},
-        "parent_road": {},
-        "pledge": {}
+        "eon_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "label": {
+            "otx_key": true
+        },
+        "mass": {
+            "otx_key": false
+        },
+        "owner_id": {
+            "otx_key": true
+        },
+        "parent_road": {
+            "otx_key": true
+        },
+        "pledge": {
+            "otx_key": false
+        }
     },
     "brick_number": "br00013",
     "categorys": [

@@ -42,6 +42,10 @@ def categorys_str() -> str:
     return "categorys"
 
 
+def otx_key_str() -> str:
+    return "otx_key"
+
+
 def attributes_str() -> str:
     return "attributes"
 
