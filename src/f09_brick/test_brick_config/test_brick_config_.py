@@ -569,9 +569,7 @@ def _validate_brick_format_files(brick_filenames: set[str]):
                 assert_fail_str = (
                     f"{brick_format_category=} {brick_attribute=} {otx_key_value=}"
                 )
-                if attr_in_keys and brick_attribute == "owner_id":
-                    assert otx_key_value
-                elif attr_in_keys and otx_key_value:
+                if attr_in_keys and otx_key_value:
                     assert attr_in_required, assert_fail_str
                 elif attr_in_keys:
                     assert attr_in_optional, assert_fail_str
