@@ -176,7 +176,7 @@ def _get_grouping_select_clause(
     for group_by_column in group_by_columns:
         select_str += f" {group_by_column},"
     for value_column in value_columns:
-        select_str += f" MAX({value_column}),"
+        select_str += f" MAX({value_column}) AS {value_column},"
     return _remove_comma_at_end(select_str)
 
 
@@ -193,7 +193,25 @@ def _get_grouping_groupby_clause(group_by_columns: list[str]) -> str:
     return _remove_comma_at_end(groupby_str)
 
 
+def _get_having_equal_value_clause(value_columns: list[str]) -> str:
+    if value_columns == []:
+        return ""
+    else:
+        having_clause = "HAVING"
+        for value_column in value_columns:
+            if having_clause != "HAVING":
+                having_clause += f" AND"
+            having_clause += f" MIN({value_column}) = MAX({value_column})"
+        return _remove_comma_at_end(having_clause)
+
+
 def get_groupby_sql_query(
     x_table: str, group_by_columns: list[str], value_columns: list[str]
 ) -> str:
     return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)}"
+
+
+def get_consistent_values_sql_query(
+    x_table: str, group_by_columns: list[str], value_columns: list[str]
+) -> str:
+    return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)} {_get_having_equal_value_clause(value_columns)}"

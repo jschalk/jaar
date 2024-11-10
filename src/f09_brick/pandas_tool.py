@@ -5,6 +5,7 @@ from src.f00_instrument.file import (
     get_dir_file_strs,
     open_file,
 )
+from src.f00_instrument.db_toolbox import get_consistent_values_sql_query
 from src.f04_gift.atom_config import get_atom_args_obj_classs
 from src.f08_filter.filter import (
     BridgeUnit,
@@ -13,12 +14,17 @@ from src.f08_filter.filter import (
     get_filterunit_from_json,
 )
 from src.f09_brick.brick_config import get_brick_elements_sort_order
-from pandas import DataFrame, read_csv as pandas_read_csv
+from pandas import (
+    DataFrame,
+    read_csv as pandas_read_csv,
+    read_sql_query as pandas_read_sql_query,
+)
 from openpyxl import load_workbook as openpyxl_load_workbook
+from sqlite3 import connect as sqlite3_connect
 
 
-def save_dataframe_to_csv(x_dt: DataFrame, x_dir: str, x_filename: str):
-    save_file(x_dir, x_filename, get_ordered_csv(x_dt))
+def save_dataframe_to_csv(x_df: DataFrame, x_dir: str, x_filename: str):
+    save_file(x_dir, x_filename, get_ordered_csv(x_df))
 
 
 def get_new_sorting_columns(
@@ -32,12 +38,12 @@ def get_new_sorting_columns(
     ]
 
 
-def get_ordered_csv(x_dt: DataFrame, sorting_columns: list[str] = None) -> str:
-    new_sorting_columns = get_new_sorting_columns(set(x_dt.columns), sorting_columns)
-    x_dt.sort_values(new_sorting_columns, inplace=True)
-    x_dt.reset_index(inplace=True)
-    x_dt.drop(columns=["index"], inplace=True)
-    return x_dt.to_csv(index=False).replace("\r", "")
+def get_ordered_csv(x_df: DataFrame, sorting_columns: list[str] = None) -> str:
+    new_sorting_columns = get_new_sorting_columns(set(x_df.columns), sorting_columns)
+    x_df.sort_values(new_sorting_columns, inplace=True)
+    x_df.reset_index(inplace=True)
+    x_df.drop(columns=["index"], inplace=True)
+    return x_df.to_csv(index=False).replace("\r", "")
 
 
 def open_csv(x_file_dir: str, x_filename: str) -> DataFrame:
@@ -66,45 +72,74 @@ def get_all_excel_sheet_names(
 
 
 def get_relevant_columns_dataframe(
-    src_dt: DataFrame,
+    src_df: DataFrame,
     relevant_columns: list[str] = None,
     relevant_columns_necessary: bool = True,
 ) -> DataFrame:
     if relevant_columns is None:
         relevant_columns = get_brick_elements_sort_order()
-    current_columns = set(src_dt.columns.to_list())
+    current_columns = set(src_df.columns.to_list())
     relevant_columns_set = set(relevant_columns)
     current_relevant_columns = current_columns.intersection(relevant_columns_set)
     relevant_cols_in_order = [
         r_col for r_col in relevant_columns if r_col in current_relevant_columns
     ]
     print(f"{relevant_cols_in_order=}")
-    return src_dt[relevant_cols_in_order]
+    return src_df[relevant_cols_in_order]
 
 
-def get_dataframe_filterable_columns(x_dt: DataFrame) -> set[str]:
-    return {x_column for x_column in x_dt.columns if x_column in filterable_atom_args()}
+def get_groupby_dataframe(x_df: DataFrame, group_by_list: list) -> DataFrame:
+    df_columns = set(x_df.columns)
+    grouping_columns = get_new_sorting_columns(df_columns, group_by_list)
+    value_columns = df_columns.difference(grouping_columns)
+    print(f"{df_columns=}")
+    print(f"{grouping_columns=}")
+    print(f"{value_columns=}")
+
+    if grouping_columns != []:
+        with sqlite3_connect(":memory:") as conn:
+            zoo_brick_str = "zoo_brick"
+            x_df.to_sql(zoo_brick_str, conn, index=False)
+            query_str = get_consistent_values_sql_query(
+                zoo_brick_str, grouping_columns, value_columns
+            )
+
+            print(f"{query_str=}")
+            # Execute the query and load the result into a new DataFrame
+            result_df = pandas_read_sql_query(query_str, conn)
+
+            # Step 6: Close the connection
+
+            # x_groupby = x_df.groupby(grouping_columns).max()
+            # x_df = x_groupby.reset_index()
+            return result_df
+    else:
+        return x_df
+
+
+def get_dataframe_filterable_columns(x_df: DataFrame) -> set[str]:
+    return {x_column for x_column in x_df.columns if x_column in filterable_atom_args()}
 
 
 def filter_single_column_dataframe(
-    x_dt: DataFrame, x_bridgeunit: BridgeUnit, column_name: str
+    x_df: DataFrame, x_bridgeunit: BridgeUnit, column_name: str
 ) -> DataFrame:
-    if column_name in x_dt:
-        row_count = len(x_dt)
+    if column_name in x_df:
+        row_count = len(x_df)
         for cur_row in range(row_count):
-            otx_value = x_dt.iloc[cur_row][column_name]
+            otx_value = x_df.iloc[cur_row][column_name]
             inx_value = x_bridgeunit.get_create_inx(otx_value)
-            x_dt.at[cur_row, column_name] = inx_value
-    return x_dt
+            x_df.at[cur_row, column_name] = inx_value
+    return x_df
 
 
-def filter_all_columns_dataframe(x_dt: DataFrame, x_filterunit: FilterUnit):
-    column_names = set(x_dt.columns)
+def filter_all_columns_dataframe(x_df: DataFrame, x_filterunit: FilterUnit):
+    column_names = set(x_df.columns)
     filterable_columns = column_names.intersection(filterable_atom_args())
     for filterable_column in filterable_columns:
         obj_class = get_atom_args_obj_classs().get(filterable_column)
         x_bridgeunit = x_filterunit.get_bridgeunit(obj_class)
-        filter_single_column_dataframe(x_dt, x_bridgeunit, filterable_column)
+        filter_single_column_dataframe(x_df, x_bridgeunit, filterable_column)
 
 
 def filter_face_dir_files(face_dir: str):
@@ -115,6 +150,6 @@ def filter_face_dir_files(face_dir: str):
     face_filterunit = get_filterunit_from_json(filterunit_json)
     otx_dir_files = get_dir_file_strs(otx_dir, delete_extensions=False)
     for x_file_name in otx_dir_files.keys():
-        x_dt = open_csv(otx_dir, x_file_name)
-        filter_all_columns_dataframe(x_dt, face_filterunit)
-        save_dataframe_to_csv(x_dt, inx_dir, x_file_name)
+        x_df = open_csv(otx_dir, x_file_name)
+        filter_all_columns_dataframe(x_df, face_filterunit)
+        save_dataframe_to_csv(x_df, inx_dir, x_file_name)
