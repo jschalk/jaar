@@ -17,7 +17,7 @@ from src.f04_gift.gift import giftunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fiscal.fiscal import fiscalunit_shop, FiscalUnit
 from src.f09_brick.brick_config import (
-    get_brickref_dict,
+    get_brickref_from_file,
     categorys_str,
     attributes_str,
     get_brick_format_headers,
@@ -32,23 +32,39 @@ from dataclasses import dataclass
 class BrickRef:
     brick_name: str = None
     categorys: str = None
-    _attributes: set[str] = None
+    _attributes: dict[str, dict[str, bool]] = None
 
-    def set_attribute(self, x_attribute: str):
-        self._attributes.add(x_attribute)
+    def set_attribute(self, x_attribute: str, otx_key: bool):
+        self._attributes[x_attribute] = {"otx_key": otx_key}
 
     def get_headers_list(self) -> list[str]:
         return get_new_sorting_columns(self._attributes)
 
+    def get_otx_keys_list(self) -> list[str]:
+        x_set = {
+            x_attr
+            for x_attr, otx_dict in self._attributes.items()
+            if otx_dict.get("otx_key") is True
+        }
+        return get_new_sorting_columns(x_set)
+
+    def get_otx_values_list(self) -> list[str]:
+        x_set = {
+            x_attr
+            for x_attr, otx_dict in self._attributes.items()
+            if otx_dict.get("otx_key") is False
+        }
+        return get_new_sorting_columns(x_set)
+
 
 def brickref_shop(x_brick_name: str, x_categorys: list[str]) -> BrickRef:
-    return BrickRef(brick_name=x_brick_name, categorys=x_categorys, _attributes=set())
+    return BrickRef(brick_name=x_brick_name, categorys=x_categorys, _attributes={})
 
 
-def get_brickref(brick_name: str) -> BrickRef:
-    brickref_dict = get_brickref_dict(brick_name)
+def get_brickref_obj(brick_name: str) -> BrickRef:
+    brickref_dict = get_brickref_from_file(brick_name)
     x_brickref = brickref_shop(brick_name, brickref_dict.get(categorys_str()))
-    x_brickref._attributes = set(brickref_dict.get(attributes_str()))
+    x_brickref._attributes = brickref_dict.get(attributes_str())
     return x_brickref
 
 
@@ -57,7 +73,7 @@ def get_ascending_bools(sorting_attributes: list[str]) -> list[bool]:
 
 
 def _get_headers_list(brick_name: str) -> list[str]:
-    return get_brickref(brick_name).get_headers_list()
+    return get_brickref_obj(brick_name).get_headers_list()
 
 
 def _generate_brick_dataframe(d2_list: list[list[str]], brick_name: str) -> DataFrame:
@@ -67,7 +83,7 @@ def _generate_brick_dataframe(d2_list: list[list[str]], brick_name: str) -> Data
 def create_brick_df(x_budunit: BudUnit, brick_name: str) -> DataFrame:
     x_deltaunit = deltaunit_shop()
     x_deltaunit.add_all_atomunits(x_budunit)
-    x_brickref = get_brickref(brick_name)
+    x_brickref = get_brickref_obj(brick_name)
     x_fiscal_id = x_budunit._fiscal_id
     x_owner_id = x_budunit._owner_id
     sorted_atomunits = _get_sorted_atom_insert_atomunits(x_deltaunit, x_brickref)
@@ -138,7 +154,7 @@ def get_csv_brickref(title_row: list[str]) -> BrickRef:
     headers_str = headers_str.replace("face_id,", "")
     headers_str = headers_str.replace("eon_id,", "")
     x_brickname = get_brick_format_headers().get(headers_str)
-    return get_brickref(x_brickname)
+    return get_brickref_obj(x_brickname)
 
 
 def make_deltaunit(x_csv: str) -> DeltaUnit:

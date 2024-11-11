@@ -211,7 +211,7 @@ def get_groupby_sql_query(
     return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)}"
 
 
-def get_consistent_values_sql_query(
+def get_grouping_with_all_values_equal_sql_query(
     x_table: str, group_by_columns: list[str], value_columns: list[str]
 ) -> str:
     return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)} {_get_having_equal_value_clause(value_columns)}"

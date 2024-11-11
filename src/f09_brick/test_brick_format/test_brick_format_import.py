@@ -10,7 +10,7 @@ from src.f04_gift.atom_config import (
 from src.f05_listen.hubunit import hubunit_shop
 from src.f09_brick.brick import (
     create_brick_df,
-    get_brickref,
+    get_brickref_obj,
     save_brick_csv,
     load_brick_csv,
 )
@@ -52,7 +52,7 @@ def test_open_csv_ReturnsObj():
 
     # THEN
     array_headers = list(acct_dataframe.columns)
-    acct_brickref = get_brickref(j1_brickname)
+    acct_brickref = get_brickref_obj(j1_brickname)
     assert array_headers == acct_brickref.get_headers_list()
     assert acct_dataframe.loc[0, fiscal_id_str()] == music_fiscal_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
@@ -233,5 +233,5 @@ def test_load_brick_csv_csvToVoice(
 
 #         # THEN
 #         array_headers = list(itemunit_format.columns)
-#         assert array_headers == get_brickref(x_brick_name).get_headers_list()
+#         assert array_headers == get_brickref_obj(x_brick_name).get_headers_list()
 #         assert len(itemunit_format) == 251

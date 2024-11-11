@@ -19,7 +19,7 @@ from src.f04_gift.atom_config import (
     debtit_vote_str,
     credit_vote_str,
 )
-from src.f09_brick.brick import create_brick_df, get_brickref, save_brick_csv
+from src.f09_brick.brick import create_brick_df, get_brickref_obj, save_brick_csv
 from src.f09_brick.brick_config import (
     brick_format_00021_bud_acctunit_v0_0_0,
     brick_format_00020_bud_acct_membership_v0_0_0,
@@ -57,7 +57,7 @@ def test_create_brick_df_Arg_brick_format_00021_bud_acctunit_v0_0_0():
 
     # THEN
     array_headers = list(acct_dataframe.columns)
-    acct_brickref = get_brickref(x_brick_name)
+    acct_brickref = get_brickref_obj(x_brick_name)
     assert array_headers == acct_brickref.get_headers_list()
     assert acct_dataframe.loc[0, fiscal_id_str()] == music_fiscal_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
@@ -114,7 +114,7 @@ def test_create_brick_df_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
 
     # THEN
     array_headers = list(membership_dataframe.columns)
-    acct_brickref = get_brickref(x_brick_name)
+    acct_brickref = get_brickref_obj(x_brick_name)
     print(f"{len(membership_dataframe)=}")
     assert array_headers == acct_brickref.get_headers_list()
     assert membership_dataframe.loc[0, fiscal_id_str()] == music_fiscal_id
@@ -166,7 +166,7 @@ def test_create_brick_df_Arg_brick_format_00013_itemunit_v0_0_0():
 
     # THEN
     array_headers = list(itemunit_format.columns)
-    assert array_headers == get_brickref(x_brick_name).get_headers_list()
+    assert array_headers == get_brickref_obj(x_brick_name).get_headers_list()
 
     assert itemunit_format.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert itemunit_format.loc[0, pledge_str()] == ""
@@ -199,7 +199,7 @@ def test_save_brick_csv_Arg_brick_format_00019_itemunit_v0_0_0():
 
     # THEN
     array_headers = list(brick_df.columns)
-    assert array_headers == get_brickref(x_brick_name).get_headers_list()
+    assert array_headers == get_brickref_obj(x_brick_name).get_headers_list()
     # for x_array_header in array_headers:
     #     print(f"{x_array_header=}")
 
