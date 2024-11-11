@@ -1,7 +1,7 @@
 from src.f00_instrument.file import (
     save_file,
     create_file_path,
-    get_all_filenames,
+    get_dir_filenames,
     get_dir_file_strs,
     open_file,
 )
@@ -13,7 +13,11 @@ from src.f08_pidgin.pidgin import (
     pidginable_atom_args,
     get_pidginunit_from_json,
 )
-from src.f09_brick.brick_config import get_brick_elements_sort_order
+from src.f09_brick.brick_config import (
+    get_brick_elements_sort_order,
+    get_brick_category_ref,
+    get_brick_format_filename,
+)
 from pandas import (
     DataFrame,
     read_csv as pandas_read_csv,
@@ -55,7 +59,7 @@ def get_all_excel_sheet_names(
 ) -> set[(str, str, str)]:
     if sub_strs is None:
         sub_strs = set()
-    excel_files = get_all_filenames(dir, {"xlsx"})
+    excel_files = get_dir_filenames(dir, {"xlsx"})
     sheet_names = set()
     for relative_dir, filename in excel_files:
         absolute_dir = create_file_path(dir, relative_dir)
@@ -133,7 +137,7 @@ def pidgin_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
         pidgin_single_column_dataframe(x_df, x_bridgeunit, pidginable_column)
 
 
-def pidgin_face_dir_files(face_dir: str):
+def move_otx_csvs_to_pidgin_inx(face_dir: str):
     otx_dir = f"{face_dir}/otx"
     inx_dir = f"{face_dir}/inx"
     bridge_filename = "bridge.json"
@@ -144,3 +148,9 @@ def pidgin_face_dir_files(face_dir: str):
         x_df = open_csv(otx_dir, x_file_name)
         pidgin_all_columns_dataframe(x_df, face_pidginunit)
         save_dataframe_to_csv(x_df, inx_dir, x_file_name)
+
+
+def _get_pidgen_brick_filenames() -> set[str]:
+    brick_numbers = set(get_brick_category_ref().get("bridge_otx_to_inx"))
+    brick_numbers.update(set(get_brick_category_ref().get("bridge_explicit_label")))
+    return {f"{brick_number}.xlsx" for brick_number in brick_numbers}

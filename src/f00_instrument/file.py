@@ -25,6 +25,7 @@ from os.path import (
 from pathlib import Path as pathlib_Path
 from errno import ENAMETOOLONG as errno_ENAMETOOLONG, ERANGE as errno_ERANGE
 from tempfile import TemporaryFile as tempfile_TemporaryFile
+from copy import deepcopy as copy_deepcopy
 
 
 def create_file_path(x_dir: str, filename: str) -> str:
@@ -295,12 +296,12 @@ def get_parts_dir(x_dir: pathlib_Path) -> list[str]:
     return [str(x_part) for x_part in x_parts]
 
 
-def get_all_filenames(
-    x_dir: str, include_extensions: set[str] = None
+def get_dir_filenames(
+    x_dir: str, include_extensions: set[str] = None, matchs: set[str] = set()
 ) -> set[tuple[str, str]]:
     if include_extensions is None:
         include_extensions = set()
-    x_set = set()
+    filenames_set = set()
     for dirpath, dirnames, filenames in os_walk(x_dir):
         for filename in filenames:
             obj_extension = os_path_splitext(filename)[1].replace(".", "")
@@ -308,5 +309,9 @@ def get_all_filenames(
                 x_dir_path = pathlib_Path(dirpath)
                 relative_path = x_dir_path.relative_to(x_dir)
                 relative_path = str(relative_path).replace("\\", "/")
-                x_set.add((relative_path, filename))
-    return x_set
+                filenames_set.add((relative_path, filename))
+    if matchs != set():
+        for dir, filename in copy_deepcopy(filenames_set):
+            if filename not in matchs:
+                filenames_set.remove((dir, filename))
+    return filenames_set

@@ -110,7 +110,7 @@ from src.f09_brick.brick_config import (
     get_brick_types,
     get_brick_elements_sort_order,
     get_brick_sqlite_type,
-    brick_category_ref,
+    get_brick_category_ref,
     brick_number_str,
     allowed_crud_str,
     attributes_str,
@@ -681,7 +681,7 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
     }
 
 
-def test_brick_category_ref_ReturnsObj():
+def test_get_brick_category_ref_ReturnsObj():
     # ESTABLISH / WHEN
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
@@ -701,4 +701,4 @@ def test_brick_category_ref_ReturnsObj():
     print(f"{example_ref=}")
 
     # WHEN / THEN
-    assert brick_category_ref() == example_ref
+    assert get_brick_category_ref() == example_ref

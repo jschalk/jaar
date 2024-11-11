@@ -265,7 +265,6 @@ def get_brick_numbers() -> set[str]:
 
 
 def get_brick_format_filename(brick_number: str) -> str:
-
     brick_number_substring = brick_number[2:]
     for brick_format_filename in get_brick_format_filenames():
         if brick_format_filename[13:18] == brick_number_substring:
@@ -465,7 +464,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
     }
 
 
-def brick_category_ref() -> dict[str, set[str]]:
+def get_brick_category_ref() -> dict[str, set[str]]:
     return {
         "fiscalunit": ["br00000"],
         "fiscal_purview_episode": ["br00001"],

@@ -9,7 +9,10 @@ from src.f04_gift.atom_config import (
 )
 from src.f09_brick.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f08_pidgin.pidgin import pidginunit_shop
-from src.f09_brick.pandas_tool import pidgin_face_dir_files
+from src.f09_brick.pandas_tool import (
+    move_otx_csvs_to_pidgin_inx,
+    _get_pidgen_brick_filenames,
+)
 from src.f08_pidgin.examples.pidgin_env import (
     env_dir_setup_cleanup,
     get_test_faces_dir,
@@ -29,7 +32,7 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame
 
 
-def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario0_SingleFile(
+def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -61,7 +64,7 @@ def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario0_SingleFile(
     assert os_path_exists(inx_file_path) is False
 
     # WHEN
-    pidgin_face_dir_files(sue_dir)
+    move_otx_csvs_to_pidgin_inx(sue_dir)
 
     # THEN
     assert os_path_exists(pidginunit_file_path)
@@ -88,7 +91,7 @@ def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario0_SingleFile(
 
 
 # save two dataframes to be pidgined: two files in otx, two files in inx
-def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario1_SingleFile_RoadUnit(
+def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_RoadUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -122,7 +125,7 @@ def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario1_SingleFile_RoadUni
     assert os_path_exists(inx_file_path) is False
 
     # WHEN
-    pidgin_face_dir_files(sue_dir)
+    move_otx_csvs_to_pidgin_inx(sue_dir)
 
     # THEN
     assert os_path_exists(otx_file_path)
@@ -145,7 +148,7 @@ def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario1_SingleFile_RoadUni
 
 
 # save two dataframes to be pidgined: two files in otx, two files in inx
-def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario2_TwoFile(
+def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -176,7 +179,7 @@ def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario2_TwoFile(
     assert os_path_exists(appt_id_inx_file_path) is False
 
     # WHEN
-    pidgin_face_dir_files(sue_dir)
+    move_otx_csvs_to_pidgin_inx(sue_dir)
 
     # THEN
     assert os_path_exists(road1_otx_file_path)
@@ -192,3 +195,27 @@ def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario2_TwoFile(
     gen_road1_inx_dt = open_csv(inx_dir, road1_filename)
     road1_inx_dt = get_casa_maison_road_inx_dt()
     assert gen_road1_inx_dt.to_csv() == road1_inx_dt.to_csv()
+
+
+def test_get_pidgen_brick_filenames_ReturnsObj():
+    # ESTABLISH
+    env_dir = get_test_faces_dir()
+    br00003_file_name = "br00003.xlsx"
+    br00040_file_name = "br00040.xlsx"
+    br00041_file_name = "br00041.xlsx"
+    br00042_file_name = "br00042.xlsx"
+    save_file(env_dir, br00003_file_name, "")
+    save_file(env_dir, br00040_file_name, "")
+    save_file(env_dir, br00041_file_name, "")
+    save_file(env_dir, br00042_file_name, "")
+
+    # WHEN
+    x_pidgen_brick_filenames = _get_pidgen_brick_filenames()
+
+    # THEN
+    print(f"{x_pidgen_brick_filenames=}")
+    assert br00003_file_name not in x_pidgen_brick_filenames
+    assert br00040_file_name in x_pidgen_brick_filenames
+    assert br00041_file_name in x_pidgen_brick_filenames
+    assert br00042_file_name not in x_pidgen_brick_filenames
+    assert len(x_pidgen_brick_filenames) == 2
