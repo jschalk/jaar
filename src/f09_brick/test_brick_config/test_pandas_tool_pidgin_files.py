@@ -1,12 +1,6 @@
 from src.f00_instrument.file import save_file
-from src.f01_road.road import default_road_delimiter_if_none, create_road
-from src.f04_gift.atom_config import (
-    acct_id_str,
-    base_str,
-    road_str,
-    type_AcctID_str,
-    type_GroupID_str,
-)
+from src.f01_road.road import create_road
+from src.f04_gift.atom_config import acct_id_str, base_str
 from src.f09_brick.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f08_pidgin.pidgin import pidginunit_shop
 from src.f09_brick.pandas_tool import (
@@ -199,15 +193,10 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
 
 def test_get_pidgen_brick_filenames_ReturnsObj():
     # ESTABLISH
-    env_dir = get_test_faces_dir()
     br00003_file_name = "br00003.xlsx"
     br00040_file_name = "br00040.xlsx"
     br00041_file_name = "br00041.xlsx"
     br00042_file_name = "br00042.xlsx"
-    save_file(env_dir, br00003_file_name, "")
-    save_file(env_dir, br00040_file_name, "")
-    save_file(env_dir, br00041_file_name, "")
-    save_file(env_dir, br00042_file_name, "")
 
     # WHEN
     x_pidgen_brick_filenames = _get_pidgen_brick_filenames()
@@ -219,3 +208,27 @@ def test_get_pidgen_brick_filenames_ReturnsObj():
     assert br00041_file_name in x_pidgen_brick_filenames
     assert br00042_file_name not in x_pidgen_brick_filenames
     assert len(x_pidgen_brick_filenames) == 2
+
+
+# def test_get_pidgen_brick_filenames_ReturnsObj():
+#     # ESTABLISH
+#     env_dir = get_test_faces_dir()
+#     br00003_file_name = "br00003.xlsx"
+#     br00040_file_name = "br00040.xlsx"
+#     br00041_file_name = "br00041.xlsx"
+#     br00042_file_name = "br00042.xlsx"
+#     save_file(env_dir, br00003_file_name, "")
+#     save_file(env_dir, br00040_file_name, "")
+#     save_file(env_dir, br00041_file_name, "")
+#     save_file(env_dir, br00042_file_name, "")
+
+#     # WHEN
+#     x_pidgen_brick_filenames = _get_pidgen_brick_filenames()
+
+#     # THEN
+#     print(f"{x_pidgen_brick_filenames=}")
+#     assert br00003_file_name not in x_pidgen_brick_filenames
+#     assert br00040_file_name in x_pidgen_brick_filenames
+#     assert br00041_file_name in x_pidgen_brick_filenames
+#     assert br00042_file_name not in x_pidgen_brick_filenames
+#     assert len(x_pidgen_brick_filenames) == 2
