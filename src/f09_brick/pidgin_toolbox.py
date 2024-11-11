@@ -1,11 +1,4 @@
 from src.f00_instrument.file import save_file, get_dir_file_strs
-from src.f04_gift.atom_config import (
-    type_AcctID_str,
-    type_GroupID_str,
-    road_str,
-    type_RoadNode_str,
-    type_RoadUnit_str,
-)
 from src.f08_pidgin.pidgin import PidginUnit, BridgeUnit, pidginunit_shop
 from src.f09_brick.pandas_tool import get_ordered_csv, open_csv
 from pandas import DataFrame
@@ -89,8 +82,8 @@ def _save_explicit_label_csv(x_dir, x_bridgeunit, x_key):
 
 def _load_otx_to_inx_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
     file_key = x_bridgeunit.obj_class
-    if x_bridgeunit.obj_class in {type_RoadUnit_str(), type_RoadUnit_str()}:
-        file_key = road_str()
+    if x_bridgeunit.obj_class in {"RoadNode", "RoadUnit"}:
+        file_key = "road"
     otx_to_inx_filename = f"{file_key}_otx_to_inx.csv"
     otx_to_inx_dt = open_csv(x_dir, otx_to_inx_filename)
     for table_row in otx_to_inx_dt.to_dict("records"):
@@ -103,8 +96,8 @@ def _load_otx_to_inx_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
 
 def _load_explicit_label_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
     file_key = x_bridgeunit.obj_class
-    if x_bridgeunit.obj_class in {type_RoadUnit_str(), type_RoadUnit_str()}:
-        file_key = road_str()
+    if x_bridgeunit.obj_class in {"RoadNode", "RoadUnit"}:
+        file_key = "road"
     explicit_label_filename = f"{file_key}_explicit_label.csv"
     explicit_label_dt = open_csv(x_dir, explicit_label_filename)
     for table_row in explicit_label_dt.to_dict("records"):

@@ -275,6 +275,12 @@ def get_bridgeunit_from_json(x_json: str) -> BridgeUnit:
 
 @dataclass
 class PidginUnit:
+    """Per face object that translates any translatable str.
+    otx is the reference for the outside, what the face says
+    inx is the reference for the inside, what the same inteprets from the face
+    Contains a bridgeunit for each translatable type: RoadUnit, AcctID, GroupID...
+    """
+
     eon_id: TimeLinePoint = None
     face_id: OwnerID = None
     bridgeunits: dict[str, BridgeUnit] = None

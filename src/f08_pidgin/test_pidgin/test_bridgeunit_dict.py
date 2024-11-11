@@ -16,7 +16,7 @@ def test_BridgeUnit_get_dict_ReturnsObj():
     slash_otx_road_delimiter = "/"
     colon_inx_road_delimiter = ":"
     roadnode_bridgeunit = bridgeunit_shop(
-        x_obj_class="RoadNode"(),
+        x_obj_class="RoadNode",
         x_otx_road_delimiter=slash_otx_road_delimiter,
         x_inx_road_delimiter=colon_inx_road_delimiter,
         x_face_id=sue_str,
@@ -43,7 +43,7 @@ def test_BridgeUnit_get_dict_ReturnsObj():
         "explicit_label": {casa_otx: casa_inx},
         "otx_to_inx": {clean_otx: clean_inx},
         face_id_str(): sue_str,
-        "obj_class": "RoadNode"(),
+        "obj_class": "RoadNode",
     }
     assert roadnode_bridgeunit.get_dict() == x2_road_bridge_dict
 
@@ -57,13 +57,13 @@ def test_BridgeUnit_get_json_ReturnsObj():
     casa_inx = "casa2"
     slash_otx_road_delimiter = "/"
     roadnode_bridgeunit = bridgeunit_shop(
-        "RoadNode"(), slash_otx_road_delimiter, x_face_id=sue_str
+        "RoadNode", slash_otx_road_delimiter, x_face_id=sue_str
     )
     x1_road_bridge_json = f"""{{
   "explicit_label": {roadnode_bridgeunit.explicit_label},
   "{face_id_str()}": "{sue_str}",
   "inx_road_delimiter": "{roadnode_bridgeunit.inx_road_delimiter}",
-  "obj_class": "{"RoadNode"()}",
+  "obj_class": "{"RoadNode"}",
   "otx_road_delimiter": "{roadnode_bridgeunit.otx_road_delimiter}",
   "otx_to_inx": {{}},
   "unknown_word": "{roadnode_bridgeunit.unknown_word}"
@@ -82,7 +82,7 @@ def test_BridgeUnit_get_json_ReturnsObj():
   }},
   "{face_id_str()}": "{sue_str}",
   "inx_road_delimiter": "{roadnode_bridgeunit.inx_road_delimiter}",
-  "obj_class": "{"RoadNode"()}",
+  "obj_class": "{"RoadNode"}",
   "otx_road_delimiter": "{roadnode_bridgeunit.otx_road_delimiter}",
   "otx_to_inx": {{
     "{clean_otx}": "{clean_inx}"
@@ -103,7 +103,7 @@ def test_get_bridgeunit_from_dict_ReturnsObj():
     casa_inx = "casa2"
     slash_otx_road_delimiter = "/"
     roadnode_bridgeunit = bridgeunit_shop(
-        "RoadNode"(), slash_otx_road_delimiter, x_face_id=sue_str
+        "RoadNode", slash_otx_road_delimiter, x_face_id=sue_str
     )
     roadnode_bridgeunit.set_otx_to_inx(clean_otx, clean_inx)
     roadnode_bridgeunit.set_explicit_label(casa_otx, casa_inx)
@@ -122,7 +122,7 @@ def test_get_bridgeunit_from_json_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     slash_otx_road_delimiter = "/"
-    roadnode_bridgeunit = bridgeunit_shop("RoadNode"(), slash_otx_road_delimiter)
+    roadnode_bridgeunit = bridgeunit_shop("RoadNode", slash_otx_road_delimiter)
     roadnode_bridgeunit.set_otx_to_inx(clean_otx, clean_inx)
 
     # WHEN
