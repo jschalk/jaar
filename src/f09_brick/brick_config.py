@@ -264,6 +264,14 @@ def get_brick_numbers() -> set[str]:
     }
 
 
+def get_brick_format_filename(brick_number: str) -> str:
+
+    brick_number_substring = brick_number[2:]
+    for brick_format_filename in get_brick_format_filenames():
+        if brick_format_filename[13:18] == brick_number_substring:
+            return brick_format_filename
+
+
 def get_brick_format_headers() -> dict[str, list[str]]:
     return {
         "c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,road_delimiter,timeline_label,yr1_jan1_offset": brick_format_00000_fiscalunit_v0_0_0(),
@@ -292,8 +300,8 @@ def get_brick_format_headers() -> dict[str, list[str]]:
     }
 
 
-def get_brickref_dict(brick_filename: str) -> dict:
-    brickref_filename = get_json_filename(brick_filename)
+def get_brickref_from_file(brick_format_filename: str) -> dict:
+    brickref_filename = get_json_filename(brick_format_filename)
     brickref_json = open_file(get_brick_formats_dir(), brickref_filename)
     return get_dict_from_json(brickref_json)
 
@@ -301,7 +309,7 @@ def get_brickref_dict(brick_filename: str) -> dict:
 def get_quick_bricks_column_ref() -> dict[str, set[str]]:
     brick_number_dict = {}
     for brick_format_filename in get_brick_format_filenames():
-        brickref_dict = get_brickref_dict(brick_format_filename)
+        brickref_dict = get_brickref_from_file(brick_format_filename)
         brick_number = brickref_dict.get("brick_number")
         brick_number_dict[brick_number] = set(brickref_dict.get("attributes").keys())
     return brick_number_dict

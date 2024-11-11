@@ -28,13 +28,13 @@ from src.f04_gift.atom_config import (
 from src.f08_filter.filter_config import eon_id_str
 from src.f09_brick.brick import (
     _generate_brick_dataframe,
-    get_brickref,
+    get_brickref_obj,
     _get_headers_list,
 )
 from src.f09_brick.brick_config import (
     get_brick_formats_dir,
     get_brick_format_filenames,
-    get_brickref_dict,
+    get_brickref_from_file,
     brick_format_00013_itemunit_v0_0_0,
     brick_format_00019_itemunit_v0_0_0,
     brick_format_00020_bud_acct_membership_v0_0_0,
@@ -77,12 +77,12 @@ def test_get_brick_formats_dir_ReturnsObj():
     assert brick_dir == f"{(src_brick_dir())}/brick_formats"
 
 
-def test_get_brickref_ReturnsObj():
+def test_get_brickref_obj_ReturnsObj():
     # ESTABLISH
     brick_name_00021 = brick_format_00021_bud_acctunit_v0_0_0()
 
     # WHEN
-    x_brickref = get_brickref(brick_name_00021)
+    x_brickref = get_brickref_obj(brick_name_00021)
 
     # THEN
     assert x_brickref.brick_name == brick_name_00021
@@ -109,7 +109,7 @@ def test_get_headers_list_ReturnsObj():
 
 
 def get_sorted_headers(brick_filename):
-    x_brickref = get_brickref_dict(brick_filename)
+    x_brickref = get_brickref_from_file(brick_filename)
     brick_attributes = set(x_brickref.get(attributes_str()).keys())
     brick_attributes.remove(face_id_str())
     brick_attributes.remove(eon_id_str())
@@ -192,15 +192,24 @@ def test_brick_FilesExist():
     assert len(brick_filenames) == len(get_brick_format_filenames())
 
 
-def test_get_brickref_HasCorrectAttrs_brick_format_00021_bud_acctunit_v0_0_0():
+def test_get_brickref_obj_HasCorrectAttrs_brick_format_00021_bud_acctunit_v0_0_0():
     # ESTABLISH
     brick_name = brick_format_00021_bud_acctunit_v0_0_0()
 
     # WHEN
-    format_00001_brickref = get_brickref(brick_name)
+    format_00001_brickref = get_brickref_obj(brick_name)
 
     # THEN
     assert len(format_00001_brickref._attributes) == 7
+    assert format_00001_brickref._attributes == {
+        "acct_id": {"otx_key": True},
+        "credit_belief": {"otx_key": False},
+        "debtit_belief": {"otx_key": False},
+        "eon_id": {"otx_key": True},
+        "face_id": {"otx_key": True},
+        "fiscal_id": {"otx_key": True},
+        "owner_id": {"otx_key": True},
+    }
     headers_list = format_00001_brickref.get_headers_list()
     assert headers_list[0] == face_id_str()
     assert headers_list[1] == eon_id_str()
@@ -211,12 +220,12 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00021_bud_acctunit_v0_0_0():
     assert headers_list[6] == debtit_belief_str()
 
 
-def test_get_brickref_HasCorrectAttrs_brick_format_00020_bud_acct_membership_v0_0_0():
+def test_get_brickref_obj_HasCorrectAttrs_brick_format_00020_bud_acct_membership_v0_0_0():
     # ESTABLISH
     brick_name = brick_format_00020_bud_acct_membership_v0_0_0()
 
     # WHEN
-    format_00021_brickref = get_brickref(brick_name)
+    format_00021_brickref = get_brickref_obj(brick_name)
 
     # THEN
     assert len(format_00021_brickref._attributes) == 8
@@ -231,12 +240,12 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00020_bud_acct_membership_v0_
     assert headers_list[7] == debtit_vote_str()
 
 
-def test_get_brickref_HasCorrectAttrs_brick_format_00013_itemunit_v0_0_0():
+def test_get_brickref_obj_HasCorrectAttrs_brick_format_00013_itemunit_v0_0_0():
     # ESTABLISH
     brick_name = brick_format_00013_itemunit_v0_0_0()
 
     # WHEN
-    format_00003_brickref = get_brickref(brick_name)
+    format_00003_brickref = get_brickref_obj(brick_name)
 
     # THEN
     assert len(format_00003_brickref._attributes) == 8
@@ -251,12 +260,12 @@ def test_get_brickref_HasCorrectAttrs_brick_format_00013_itemunit_v0_0_0():
     assert headers_list[7] == pledge_str()
 
 
-def test_get_brickref_HasCorrectAttrs_brick_format_00019_itemunit_v0_0_0():
+def test_get_brickref_obj_HasCorrectAttrs_brick_format_00019_itemunit_v0_0_0():
     # ESTABLISH
     brick_name = brick_format_00019_itemunit_v0_0_0()
 
     # WHEN
-    format_00019_brickref = get_brickref(brick_name)
+    format_00019_brickref = get_brickref_obj(brick_name)
 
     # THEN
     assert len(format_00019_brickref._attributes) == 14

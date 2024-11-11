@@ -11,7 +11,7 @@ from src.f00_instrument.db_toolbox import (
     _get_grouping_select_clause,
     _get_grouping_groupby_clause,
     _get_having_equal_value_clause,
-    get_consistent_values_sql_query,
+    get_grouping_with_all_values_equal_sql_query,
     get_groupby_sql_query,
 )
 from pytest import raises as pytest_raises
@@ -270,7 +270,7 @@ def test_get_groupby_sql_query_ReturnsObj_Scenario0():
     assert gen_select_clause == example_str
 
 
-def test_get_consistent_values_sql_query_ReturnsObj_Scenario0():
+def test_get_grouping_with_all_values_equal_sql_query_ReturnsObj_Scenario0():
     # ESTABLISH
     fizz_str = "fizz"
     buzz_str = "buzz"
@@ -281,7 +281,7 @@ def test_get_consistent_values_sql_query_ReturnsObj_Scenario0():
     x_table_name = "fizzybuzzy"
 
     # WHEN
-    gen_select_clause = get_consistent_values_sql_query(
+    gen_select_clause = get_grouping_with_all_values_equal_sql_query(
         x_table_name, x_group_by_columns, x_value_columns
     )
 

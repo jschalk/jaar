@@ -5,7 +5,7 @@ from src.f00_instrument.file import (
     get_dir_file_strs,
     open_file,
 )
-from src.f00_instrument.db_toolbox import get_consistent_values_sql_query
+from src.f00_instrument.db_toolbox import get_grouping_with_all_values_equal_sql_query
 from src.f04_gift.atom_config import get_atom_args_obj_classs
 from src.f08_filter.filter import (
     BridgeUnit,
@@ -88,33 +88,24 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def get_groupby_dataframe(x_df: DataFrame, group_by_list: list) -> DataFrame:
+def get_grouping_with_all_values_equal_df(
+    x_df: DataFrame, group_by_list: list
+) -> DataFrame:
     df_columns = set(x_df.columns)
     grouping_columns = get_new_sorting_columns(df_columns, group_by_list)
     value_columns = df_columns.difference(grouping_columns)
-    print(f"{df_columns=}")
-    print(f"{grouping_columns=}")
-    print(f"{value_columns=}")
 
-    if grouping_columns != []:
-        with sqlite3_connect(":memory:") as conn:
-            zoo_brick_str = "zoo_brick"
-            x_df.to_sql(zoo_brick_str, conn, index=False)
-            query_str = get_consistent_values_sql_query(
-                zoo_brick_str, grouping_columns, value_columns
-            )
-
-            print(f"{query_str=}")
-            # Execute the query and load the result into a new DataFrame
-            result_df = pandas_read_sql_query(query_str, conn)
-
-            # Step 6: Close the connection
-
-            # x_groupby = x_df.groupby(grouping_columns).max()
-            # x_df = x_groupby.reset_index()
-            return result_df
-    else:
+    if grouping_columns == []:
         return x_df
+    with sqlite3_connect(":memory:") as conn:
+        zoo_str = "zoo"
+        x_df.to_sql(zoo_str, conn, index=False)
+        query_str = get_grouping_with_all_values_equal_sql_query(
+            x_table=zoo_str,
+            group_by_columns=grouping_columns,
+            value_columns=value_columns,
+        )
+        return pandas_read_sql_query(query_str, conn)
 
 
 def get_dataframe_filterable_columns(x_df: DataFrame) -> set[str]:

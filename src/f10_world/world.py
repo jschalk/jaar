@@ -19,12 +19,20 @@ from src.f01_road.road import (
 )
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f08_filter.filter import FilterUnit, filterunit_shop
-from src.f09_brick.brick_config import get_brick_numbers, get_quick_bricks_column_ref
+from src.f09_brick.brick_config import (
+    get_brick_numbers,
+    get_brick_format_filename,
+    get_quick_bricks_column_ref,
+)
+from src.f09_brick.brick import get_brickref_obj
 from src.f09_brick.filter_toolbox import (
     save_all_csvs_from_filterunit,
     init_filterunit_from_dir,
 )
-from src.f09_brick.pandas_tool import get_new_sorting_columns
+from src.f09_brick.pandas_tool import (
+    get_new_sorting_columns,
+    get_grouping_with_all_values_equal_df,
+)
 from src.f10_world.world_tool import get_all_brick_dataframes
 from pandas import (
     ExcelWriter,
@@ -86,9 +94,13 @@ class ZooToOtxTransformer:
     def _group_by_brick_columns(
         self, zoo_df: DataFrame, brick_number: str
     ) -> DataFrame:
-        brick_columns_set = get_quick_bricks_column_ref().get(brick_number)
+        brick_filename = get_brick_format_filename(brick_number)
+        brickref = get_brickref_obj(brick_filename)
+        required_columns = brickref.get_otx_keys_list()
+        brick_columns_set = set(brickref._attributes.keys())
         brick_columns_list = get_new_sorting_columns(brick_columns_set)
-        return zoo_df[brick_columns_list]
+        zoo_df = zoo_df[brick_columns_list]
+        return get_grouping_with_all_values_equal_df(zoo_df, required_columns)
 
     # def _read_and_tag_dataframe(self, ref):
     #     x_file_path = create_file_path(ref.file_dir, ref.file_name)
