@@ -110,6 +110,7 @@ from src.f09_brick.brick_config import (
     get_brick_types,
     get_brick_elements_sort_order,
     get_brick_sqlite_type,
+    brick_category_ref,
     brick_number_str,
     allowed_crud_str,
     attributes_str,
@@ -678,3 +679,26 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
         timeline_label_str(),
         yr1_jan1_offset_str(),
     }
+
+
+def test_brick_category_ref_ReturnsObj():
+    # ESTABLISH / WHEN
+    # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
+    brick_numbers_sorted = list(get_brick_numbers())
+    brick_numbers_sorted.sort(key=lambda x: x)
+
+    example_ref = {}
+    for brick_number in brick_numbers_sorted:
+        categorys_list = get_brickref_from_file(
+            get_brick_format_filename(brick_number)
+        ).get(categorys_str())
+        for x_category in categorys_list:
+            if example_ref.get(x_category) is None:
+                example_ref[x_category] = [brick_number]
+            else:
+                example_ref.get(x_category).append(brick_number)
+    print(f"{example_ref=}")
+
+    # WHEN / THEN
+    assert brick_category_ref() == example_ref

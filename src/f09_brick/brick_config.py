@@ -463,3 +463,26 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "monthday_distortion": "INTEGER",
         "timeline_label": "TEXT",
     }
+
+
+def brick_category_ref() -> dict[str, set[str]]:
+    return {
+        "fiscalunit": ["br00000"],
+        "fiscal_purview_episode": ["br00001"],
+        "fiscal_cashbook": ["br00002"],
+        "fiscal_timeline_hour": ["br00003"],
+        "fiscal_timeline_month": ["br00004"],
+        "fiscal_timeline_weekday": ["br00005"],
+        "bud_acctunit": ["br00011", "br00021"],
+        "bud_acct_membership": ["br00012", "br00020"],
+        "bud_itemunit": ["br00013", "br00019", "br00028", "br00036"],
+        "bud_item_awardlink": ["br00022"],
+        "bud_item_factunit": ["br00023"],
+        "bud_item_teamlink": ["br00024"],
+        "bud_item_healerlink": ["br00025", "br00036"],
+        "bud_item_reason_premiseunit": ["br00026"],
+        "bud_item_reasonunit": ["br00027"],
+        "budunit": ["br00029"],
+        "bridge_otx_to_inx": ["br00040"],
+        "bridge_explicit_label": ["br00041"],
+    }
