@@ -18,16 +18,16 @@ from src.f01_road.road import (
     FaceID,
 )
 from src.f07_fiscal.fiscal import FiscalUnit
-from src.f08_filter.filter import FilterUnit, filterunit_shop
+from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
 from src.f09_brick.brick_config import (
     get_brick_numbers,
     get_brick_format_filename,
     get_quick_bricks_column_ref,
 )
 from src.f09_brick.brick import get_brickref_obj
-from src.f09_brick.filter_toolbox import (
-    save_all_csvs_from_filterunit,
-    init_filterunit_from_dir,
+from src.f09_brick.pidgin_toolbox import (
+    save_all_csvs_from_pidginunit,
+    init_pidginunit_from_dir,
 )
 from src.f09_brick.pandas_tool import (
     get_new_sorting_columns,
@@ -120,7 +120,7 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     current_time: TimeLinePoint = None
-    faces: dict[FaceID, FilterUnit] = None
+    faces: dict[FaceID, PidginUnit] = None
     _faces_dir: dict[FaceID,] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _fiscalunits: set[FiscalID] = None
@@ -128,15 +128,15 @@ class WorldUnit:
     _jungle_dir: str = None
     _zoo_dir: str = None
 
-    def set_face_id(self, face_id: FaceID, x_filterunit: FilterUnit = None):
-        if x_filterunit is None:
-            x_filterunit = filterunit_shop(face_id)
-        self.faces[face_id] = x_filterunit
+    def set_face_id(self, face_id: FaceID, x_pidginunit: PidginUnit = None):
+        if x_pidginunit is None:
+            x_pidginunit = pidginunit_shop(face_id)
+        self.faces[face_id] = x_pidginunit
 
     def face_id_exists(self, face_id: FaceID) -> bool:
         return self.faces.get(face_id) != None
 
-    def get_filterunit(self, face_id: FaceID) -> FilterUnit:
+    def get_pidginunit(self, face_id: FaceID) -> PidginUnit:
         return self.faces.get(face_id)
 
     def del_face_id(self, face_id: FaceID):
@@ -151,9 +151,9 @@ class WorldUnit:
     def _face_dir(self, face_id: FaceID) -> str:
         return create_file_path(self._faces_dir, face_id)
 
-    def save_filterunit_files(self, face_id: FaceID):
-        x_filterunit = self.get_filterunit(face_id)
-        save_all_csvs_from_filterunit(self._face_dir(face_id), x_filterunit)
+    def save_pidginunit_files(self, face_id: FaceID):
+        x_pidginunit = self.get_pidginunit(face_id)
+        save_all_csvs_from_pidginunit(self._face_dir(face_id), x_pidginunit)
 
     def face_dir_exists(self, face_id: FaceID) -> bool:
         return os_path_exists(self._face_dir(face_id))
@@ -163,7 +163,7 @@ class WorldUnit:
         for dir_name in get_dir_file_strs(self._faces_dir, include_files=False).keys():
             self.set_face_id(dir_name)
 
-    def _delete_filterunit_dir(self, face_id: FaceID):
+    def _delete_pidginunit_dir(self, face_id: FaceID):
         delete_dir(self._face_dir(face_id))
 
     # def get_db_path(self) -> str:
@@ -199,9 +199,9 @@ class WorldUnit:
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
-    def load_filterunit_from_files(self, face_id: FaceID):
-        x_filterunit = init_filterunit_from_dir(self._face_dir(face_id))
-        self.set_face_id(face_id, x_filterunit)
+    def load_pidginunit_from_files(self, face_id: FaceID):
+        x_pidginunit = init_pidginunit_from_dir(self._face_dir(face_id))
+        self.set_face_id(face_id, x_pidginunit)
 
     def jungle_to_zoo(self):
         transformer = JungleToZooTransformer(self._jungle_dir, self._zoo_dir)

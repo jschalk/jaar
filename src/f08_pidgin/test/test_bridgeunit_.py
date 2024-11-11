@@ -8,12 +8,12 @@ from src.f04_gift.atom_config import (
     type_RoadNode_str,
     type_RoadUnit_str,
 )
-from src.f08_filter.filter import BridgeUnit, bridgeunit_shop, default_unknown_word
+from src.f08_pidgin.pidgin import BridgeUnit, bridgeunit_shop, default_unknown_word
 from pytest import raises as pytest_raises
 
-# from otx.f08_filter.examples.filter_env import get_test_filters_dir, env_dir_setup_cleanup
+# from otx.f08_pidgin.examples.pidgin_env import get_test_pidgins_dir, env_dir_setup_cleanup
 
-# The goal of the filter function is to allow a single command, pointing at a bunch of directories
+# The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
 
 

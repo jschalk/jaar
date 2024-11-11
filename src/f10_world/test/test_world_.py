@@ -1,7 +1,7 @@
 from src.f00_instrument.file import save_file, delete_dir, create_file_path
 from src.f01_road.finance_tran import timeconversion_shop
 from src.f04_gift.atom_config import road_str
-from src.f08_filter.filter import filterunit_shop
+from src.f08_pidgin.pidgin import pidginunit_shop
 from src.f10_world.world import (
     init_fiscalunits_from_dirs,
     WorldUnit,
@@ -44,8 +44,8 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     sue_str = "Sue"
     bob_str = "Bob"
     world2_faces = {
-        sue_str: filterunit_shop(sue_str),
-        bob_str: filterunit_shop(bob_str),
+        sue_str: pidginunit_shop(sue_str),
+        bob_str: pidginunit_shop(bob_str),
     }
     world2timeconversions = {music_text: timeconversion_shop(music_text)}
     world2_fiscalunits = {"music45"}
@@ -91,12 +91,12 @@ def test_WorldUnit_set_face_id_SetsAttr_Scenario0(env_dir_setup_cleanup):
 
     # WHEN
     sue_str = "Sue"
-    sue_filterunit = filterunit_shop(sue_str)
-    x_world.set_face_id(sue_str, sue_filterunit)
+    sue_pidginunit = pidginunit_shop(sue_str)
+    x_world.set_face_id(sue_str, sue_pidginunit)
 
     # THEN
     assert x_world.faces != {}
-    assert x_world.faces == {sue_str: sue_filterunit}
+    assert x_world.faces == {sue_str: sue_pidginunit}
 
 
 def test_WorldUnit_set_face_id_SetsAttr_Scenario1_NoValue(env_dir_setup_cleanup):
@@ -110,10 +110,10 @@ def test_WorldUnit_set_face_id_SetsAttr_Scenario1_NoValue(env_dir_setup_cleanup)
 
     # THEN
     assert x_world.faces != {}
-    assert x_world.faces == {sue_str: filterunit_shop(sue_str)}
+    assert x_world.faces == {sue_str: pidginunit_shop(sue_str)}
 
 
-def test_FilterUnit_face_id_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_PidginUnit_face_id_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
@@ -126,39 +126,39 @@ def test_FilterUnit_face_id_exists_ReturnsObj(env_dir_setup_cleanup):
     assert x_world.face_id_exists(sue_str)
 
 
-def test_FilterUnit_get_filterunit_ReturnsObj(env_dir_setup_cleanup):
+def test_PidginUnit_get_pidginunit_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     slash_str = "/"
     sue_str = "Sue"
-    sue_filterunit = filterunit_shop(sue_str, slash_str)
-    assert x_world.get_filterunit(sue_str) is None
+    sue_pidginunit = pidginunit_shop(sue_str, slash_str)
+    assert x_world.get_pidginunit(sue_str) is None
 
     # WHEN
-    x_world.set_face_id(sue_str, sue_filterunit)
+    x_world.set_face_id(sue_str, sue_pidginunit)
 
     # THEN
-    assert x_world.get_filterunit(sue_str) == sue_filterunit
+    assert x_world.get_pidginunit(sue_str) == sue_pidginunit
 
 
-def test_FilterUnit_del_face_id_ReturnsObj(env_dir_setup_cleanup):
+def test_PidginUnit_del_face_id_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_filterunit = filterunit_shop(sue_str)
-    bob_filterunit = filterunit_shop(bob_str)
-    x_world.set_face_id(sue_str, sue_filterunit)
-    x_world.set_face_id(bob_str, bob_filterunit)
-    assert x_world.get_filterunit(sue_str) == sue_filterunit
-    assert x_world.get_filterunit(bob_str) == bob_filterunit
+    sue_pidginunit = pidginunit_shop(sue_str)
+    bob_pidginunit = pidginunit_shop(bob_str)
+    x_world.set_face_id(sue_str, sue_pidginunit)
+    x_world.set_face_id(bob_str, bob_pidginunit)
+    assert x_world.get_pidginunit(sue_str) == sue_pidginunit
+    assert x_world.get_pidginunit(bob_str) == bob_pidginunit
 
     # WHEN
     x_world.del_face_id(sue_str)
 
     # THEN
-    assert x_world.get_filterunit(sue_str) is None
-    assert x_world.get_filterunit(bob_str) == bob_filterunit
+    assert x_world.get_pidginunit(sue_str) is None
+    assert x_world.get_pidginunit(bob_str) == bob_pidginunit
 
 
 def test_WorldUnit_del_all_face_id_SetsAttr(env_dir_setup_cleanup):
@@ -166,19 +166,19 @@ def test_WorldUnit_del_all_face_id_SetsAttr(env_dir_setup_cleanup):
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_filterunit = filterunit_shop(sue_str)
-    bob_filterunit = filterunit_shop(bob_str)
-    x_world.set_face_id(sue_str, sue_filterunit)
-    x_world.set_face_id(bob_str, bob_filterunit)
-    assert x_world.get_filterunit(sue_str) == sue_filterunit
-    assert x_world.get_filterunit(bob_str) == bob_filterunit
+    sue_pidginunit = pidginunit_shop(sue_str)
+    bob_pidginunit = pidginunit_shop(bob_str)
+    x_world.set_face_id(sue_str, sue_pidginunit)
+    x_world.set_face_id(bob_str, bob_pidginunit)
+    assert x_world.get_pidginunit(sue_str) == sue_pidginunit
+    assert x_world.get_pidginunit(bob_str) == bob_pidginunit
 
     # WHEN
     x_world.del_all_face_id()
 
     # THEN
-    assert x_world.get_filterunit(sue_str) is None
-    assert x_world.get_filterunit(bob_str) is None
+    assert x_world.get_pidginunit(sue_str) is None
+    assert x_world.get_pidginunit(bob_str) is None
     assert x_world.faces == {}
 
 
@@ -202,7 +202,7 @@ def test_WorldUnit_face_ids_empty_ReturnsObj(env_dir_setup_cleanup):
     assert x_world.face_ids_empty()
 
 
-def test_WorldUnit_save_filterunit_files_SavesFiles(env_dir_setup_cleanup):
+def test_WorldUnit_save_pidginunit_files_SavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
@@ -215,7 +215,7 @@ def test_WorldUnit_save_filterunit_files_SavesFiles(env_dir_setup_cleanup):
     assert os_path_exists(sue_dir) is False
 
     # WHEN
-    x_world.save_filterunit_files(sue_str)
+    x_world.save_pidginunit_files(sue_str)
 
     # THEN
     assert os_path_exists(bob_dir) is False
@@ -237,7 +237,7 @@ def test_WorldUnit_face_dir_exist_ReturnsObj(env_dir_setup_cleanup):
     assert x_world.face_dir_exists(sue_str) is False
 
     # WHEN
-    x_world.save_filterunit_files(sue_str)
+    x_world.save_pidginunit_files(sue_str)
 
     # THEN
     assert os_path_exists(bob_dir) is False
@@ -246,7 +246,7 @@ def test_WorldUnit_face_dir_exist_ReturnsObj(env_dir_setup_cleanup):
     assert x_world.face_dir_exists(sue_str)
 
 
-def test_WorldUnit_load_filterunit_from_files_SetsAttr(env_dir_setup_cleanup):
+def test_WorldUnit_load_pidginunit_from_files_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
@@ -254,39 +254,39 @@ def test_WorldUnit_load_filterunit_from_files_SetsAttr(env_dir_setup_cleanup):
     bob2_inx = "Bob2"
     bob3_inx = "Bob3"
     x_world.set_face_id(sue_str)
-    sue_filterunit = x_world.get_filterunit(sue_str)
-    sue_filterunit.set_otx_to_inx(road_str(), bob_otx, bob2_inx)
-    x_world.save_filterunit_files(sue_str)
-    sue_filterunit.set_otx_to_inx(road_str(), bob_otx, bob3_inx)
+    sue_pidginunit = x_world.get_pidginunit(sue_str)
+    sue_pidginunit.set_otx_to_inx(road_str(), bob_otx, bob2_inx)
+    x_world.save_pidginunit_files(sue_str)
+    sue_pidginunit.set_otx_to_inx(road_str(), bob_otx, bob3_inx)
     assert x_world.face_dir_exists(sue_str)
-    assert sue_filterunit.otx_to_inx_exists(road_str(), bob_otx, bob2_inx) is False
-    assert sue_filterunit.otx_to_inx_exists(road_str(), bob_otx, bob3_inx)
+    assert sue_pidginunit.otx_to_inx_exists(road_str(), bob_otx, bob2_inx) is False
+    assert sue_pidginunit.otx_to_inx_exists(road_str(), bob_otx, bob3_inx)
 
     # WHEN
-    x_world.load_filterunit_from_files(sue_str)
+    x_world.load_pidginunit_from_files(sue_str)
 
     # THEN
-    after_filterunit = x_world.get_filterunit(sue_str)
-    assert after_filterunit.otx_to_inx_exists(road_str(), bob_otx, bob2_inx)
-    assert after_filterunit.otx_to_inx_exists(road_str(), bob_otx, bob3_inx) is False
+    after_pidginunit = x_world.get_pidginunit(sue_str)
+    assert after_pidginunit.otx_to_inx_exists(road_str(), bob_otx, bob2_inx)
+    assert after_pidginunit.otx_to_inx_exists(road_str(), bob_otx, bob3_inx) is False
 
 
-def test_WorldUnit_delete_filterunit_dir_SetsAttrDeletesDir(env_dir_setup_cleanup):
+def test_WorldUnit_delete_pidginunit_dir_SetsAttrDeletesDir(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
     x_world.set_face_id(sue_str)
     x_world.set_face_id(bob_str)
-    x_world.save_filterunit_files(sue_str)
-    x_world.save_filterunit_files(bob_str)
+    x_world.save_pidginunit_files(sue_str)
+    x_world.save_pidginunit_files(bob_str)
     assert x_world.face_id_exists(sue_str)
     assert x_world.face_id_exists(bob_str)
     assert x_world.face_dir_exists(sue_str)
     assert x_world.face_dir_exists(bob_str)
 
     # WHEN
-    x_world._delete_filterunit_dir(sue_str)
+    x_world._delete_pidginunit_dir(sue_str)
 
     # THEN
     assert x_world.face_id_exists(sue_str)
@@ -308,7 +308,7 @@ def test_WorldUnit_delete_filterunit_dir_SetsAttrDeletesDir(env_dir_setup_cleanu
 #     assert os_path_exists(bob_dir) is False
 
 #     # WHEN
-#     x_world.save_filterunit_files(sue_str)
+#     x_world.save_pidginunit_files(sue_str)
 
 #     # THEN
 #     assert os_path_exists(sue_dir)

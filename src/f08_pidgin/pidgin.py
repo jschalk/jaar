@@ -39,11 +39,11 @@ class set_explicit_label_Exception(Exception):
     pass
 
 
-def filterable_obj_classs() -> set:
+def pidginable_obj_classs() -> set:
     return {"AcctID", "GroupID", "RoadNode", "RoadUnit"}
 
 
-def filterable_atom_args() -> set:
+def pidginable_atom_args() -> set:
     return {
         "acct_id",
         "awardee_id",
@@ -274,7 +274,7 @@ def get_bridgeunit_from_json(x_json: str) -> BridgeUnit:
 
 
 @dataclass
-class FilterUnit:
+class PidginUnit:
     eon_id: TimeLinePoint = None
     face_id: OwnerID = None
     bridgeunits: dict[str, BridgeUnit] = None
@@ -359,13 +359,13 @@ class FilterUnit:
         return get_json_from_dict(self.get_dict())
 
 
-def filterunit_shop(
+def pidginunit_shop(
     x_face_id: OwnerID,
     x_eon_id: TimeLinePoint = None,
     x_otx_road_delimiter: str = None,
     x_inx_road_delimiter: str = None,
     x_unknown_word: str = None,
-) -> FilterUnit:
+) -> PidginUnit:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
     if x_otx_road_delimiter is None:
@@ -397,7 +397,7 @@ def filterunit_shop(
         ),
     }
 
-    return FilterUnit(
+    return PidginUnit(
         face_id=x_face_id,
         eon_id=get_0_if_None(x_eon_id),
         unknown_word=x_unknown_word,
@@ -407,8 +407,8 @@ def filterunit_shop(
     )
 
 
-def get_filterunit_from_dict(x_dict: dict) -> FilterUnit:
-    return FilterUnit(
+def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
+    return PidginUnit(
         face_id=x_dict.get("face_id"),
         eon_id=x_dict.get("eon_id"),
         otx_road_delimiter=x_dict.get("otx_road_delimiter"),
@@ -425,5 +425,5 @@ def get_bridgeunits_from_dict(bridgeunits_dict: dict) -> dict[str, BridgeUnit]:
     }
 
 
-def get_filterunit_from_json(x_json: str) -> FilterUnit:
-    return get_filterunit_from_dict(get_dict_from_json(x_json))
+def get_pidginunit_from_json(x_json: str) -> PidginUnit:
+    return get_pidginunit_from_dict(get_dict_from_json(x_json))

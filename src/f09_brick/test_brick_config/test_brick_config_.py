@@ -89,9 +89,9 @@ from src.f07_fiscal.fiscal_config import (
     weekday_label_str,
     weekday_order_str,
 )
-from src.f08_filter.filter_config import (
+from src.f08_pidgin.pidgin_config import (
     eon_id_str,
-    filterunit_str,
+    pidginunit_str,
     otx_road_delimiter_str,
     inx_road_delimiter_str,
     unknown_word_str,
@@ -101,9 +101,9 @@ from src.f08_filter.filter_config import (
     inx_label_str,
     bridge_explicit_label_str,
     bridge_otx_to_inx_str,
-    get_filter_categorys,
-    get_filter_config_dict,
-    get_filter_args_category_mapping,
+    get_pidgin_categorys,
+    get_pidgin_config_dict,
+    get_pidgin_args_category_mapping,
 )
 from src.f09_brick.brick_config import (
     brick_type_str,
@@ -154,7 +154,7 @@ def test_str_functions_ReturnObj():
     assert delete_insert_str() == "DELETE_INSERT"
     assert delete_update_str() == "DELETE_UPDATE"
 
-    assert get_brick_types() == {budunit_str(), fiscalunit_str(), filterunit_str()}
+    assert get_brick_types() == {budunit_str(), fiscalunit_str(), pidginunit_str()}
 
 
 def test_get_brick_elements_sort_order_ReturnsObj():
@@ -239,15 +239,15 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     print(f"{fiscal_args=}")
     print(f"{fiscal_args.difference(set(table_sorting_priority))=}")
     assert fiscal_args.issubset(set(table_sorting_priority))
-    filter_args = set(get_filter_args_category_mapping().keys())
-    assert filter_args.issubset(set(table_sorting_priority))
-    atom_fiscal_filter_args = atom_args
-    atom_fiscal_filter_args.update(fiscal_args)
-    atom_fiscal_filter_args.update(filter_args)
+    pidgin_args = set(get_pidgin_args_category_mapping().keys())
+    assert pidgin_args.issubset(set(table_sorting_priority))
+    atom_fiscal_pidgin_args = atom_args
+    atom_fiscal_pidgin_args.update(fiscal_args)
+    atom_fiscal_pidgin_args.update(pidgin_args)
     table_sorting_priority.remove(eon_id_str())
     table_sorting_priority.remove(face_id_str())
     table_sorting_priority.remove(obj_class_str())
-    assert atom_fiscal_filter_args == set(table_sorting_priority)
+    assert atom_fiscal_pidgin_args == set(table_sorting_priority)
 
 
 def test_get_brick_sqlite_type_ReturnsObj():
@@ -380,7 +380,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert bridge_otx_to_inx_str() in brick_config_categorys
     assert get_atom_categorys().issubset(brick_config_categorys)
     assert get_fiscal_categorys().issubset(brick_config_categorys)
-    assert get_filter_categorys().issubset(brick_config_categorys)
+    assert get_pidgin_categorys().issubset(brick_config_categorys)
     assert len(x_brick_config) == 18
     _validate_brick_config(x_brick_config)
 
@@ -388,7 +388,7 @@ def test_get_brick_config_dict_ReturnsObj():
 def _validate_brick_config(x_brick_config: dict):
     atom_config_dict = get_atom_config_dict()
     fiscal_config_dict = get_fiscal_config_dict()
-    filter_config_dict = get_filter_config_dict()
+    pidgin_config_dict = get_pidgin_config_dict()
     # for every brick_format file there exists a unique brick_number always with leading zeros to make 5 digits
     for brick_category, brick_dict in x_brick_config.items():
         print(f"{brick_category=}")
@@ -404,8 +404,8 @@ def _validate_brick_config(x_brick_config: dict):
             sub_category = atom_config_dict.get(brick_category)
         elif brick_dict.get(brick_type_str()) == fiscalunit_str():
             sub_category = fiscal_config_dict.get(brick_category)
-        elif brick_dict.get(brick_type_str()) == filterunit_str():
-            sub_category = filter_config_dict.get(brick_category)
+        elif brick_dict.get(brick_type_str()) == pidginunit_str():
+            sub_category = pidgin_config_dict.get(brick_category)
 
         assert brick_dict.get(allowed_crud_str()) in get_allowed_curds()
 
@@ -485,7 +485,7 @@ def _validate_brick_config(x_brick_config: dict):
         assert face_id_str() in brick_required_args_keys
         assert eon_id_str() in brick_required_args_keys
         assert fiscal_id_str() not in brick_optional_args_keys
-        if brick_dict.get(brick_type_str()) != filterunit_str():
+        if brick_dict.get(brick_type_str()) != pidginunit_str():
             assert fiscal_id_str() in brick_required_args_keys
             assert time_id_str() in brick_required_args_keys
 
@@ -536,7 +536,7 @@ def _validate_brick_format_files(brick_filenames: set[str]):
     valid_brick_categorys = set()
     valid_brick_categorys.update(get_atom_categorys())
     valid_brick_categorys.update(get_fiscal_categorys())
-    valid_brick_categorys.update(get_filter_categorys())
+    valid_brick_categorys.update(get_pidgin_categorys())
     config_dict = get_brick_config_dict()
 
     # for every brick_format file there exists a unique brick_number always with leading zeros to make 5 digits

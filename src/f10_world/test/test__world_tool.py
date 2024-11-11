@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_file_path, create_dir
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
-from src.f08_filter.filter_config import eon_id_str
+from src.f08_pidgin.pidgin_config import eon_id_str
 from src.f10_world.world_tool import (
     get_all_excel_bricksheets,
     get_all_brick_dataframes,
@@ -39,7 +39,7 @@ def test_get_all_excel_bricksheets_ReturnsObj_Scenario0_SheetNames():
     assert len(x_sheet_names) == 3
 
 
-def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_FilterSheetNames(
+def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -80,7 +80,7 @@ def test_BrickFileRef_Exists():
     assert x_brickfileref.brick_number is None
 
 
-def test_get_all_brick_dataframes_ReturnsObj_Scenario0_FilterSheetNames(
+def test_get_all_brick_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

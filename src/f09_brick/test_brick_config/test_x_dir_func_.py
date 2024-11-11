@@ -6,15 +6,15 @@ from src.f04_gift.atom_config import (
     base_str,
     type_AcctID_str,
 )
-from src.f08_filter.filter import bridgeunit_shop, filterunit_shop
+from src.f08_pidgin.pidgin import bridgeunit_shop, pidginunit_shop
 from src.f09_brick.pandas_tool import (
-    filter_single_column_dataframe,
-    filter_all_columns_dataframe,
-    get_dataframe_filterable_columns,
+    pidgin_single_column_dataframe,
+    pidgin_all_columns_dataframe,
+    get_dataframe_pidginable_columns,
 )
-from src.f08_filter.examples.example_filters import (
-    get_casa_maison_filterunit_set_by_otx_to_inx,
-    get_casa_maison_filterunit_set_by_explicit_label,
+from src.f08_pidgin.examples.example_pidgins import (
+    get_casa_maison_pidginunit_set_by_otx_to_inx,
+    get_casa_maison_pidginunit_set_by_explicit_label,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
 )
@@ -22,33 +22,33 @@ from pandas import DataFrame
 from copy import deepcopy as copy_deepcopy
 
 
-def test_get_dataframe_filterable_columns_ReturnsObj():
+def test_get_dataframe_pidginable_columns_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     x_dt = DataFrame()
-    assert get_dataframe_filterable_columns(x_dt) == set()
+    assert get_dataframe_pidginable_columns(x_dt) == set()
     x_dt = DataFrame(columns=[acct_id_str()])
-    assert get_dataframe_filterable_columns(x_dt) == {acct_id_str()}
+    assert get_dataframe_pidginable_columns(x_dt) == {acct_id_str()}
     x_dt = DataFrame(columns=[acct_id_str(), credit_belief_str()])
-    assert get_dataframe_filterable_columns(x_dt) == {acct_id_str()}
+    assert get_dataframe_pidginable_columns(x_dt) == {acct_id_str()}
     x_dt = DataFrame(columns=[base_str(), acct_id_str(), credit_belief_str()])
-    assert get_dataframe_filterable_columns(x_dt) == {acct_id_str(), base_str()}
+    assert get_dataframe_pidginable_columns(x_dt) == {acct_id_str(), base_str()}
     x_dt = DataFrame(columns=["calc_swim", acct_id_str(), credit_belief_str()])
-    assert get_dataframe_filterable_columns(x_dt) == {acct_id_str()}
+    assert get_dataframe_pidginable_columns(x_dt) == {acct_id_str()}
 
 
-def test_filter_single_column_dataframe_ReturnsObj_Scenario0_AcctID_EmptyDataFrame():
+def test_pidgin_single_column_dataframe_ReturnsObj_Scenario0_AcctID_EmptyDataFrame():
     # ESTABLISH
     acct_id_bridgeunit = bridgeunit_shop("acct_id")
     empty_dt = DataFrame(columns=[acct_id_str()])
 
     # WHEN
-    gen_dt = filter_single_column_dataframe(empty_dt, acct_id_bridgeunit, acct_id_str())
+    gen_dt = pidgin_single_column_dataframe(empty_dt, acct_id_bridgeunit, acct_id_str())
 
     # THEN
     assert gen_dt.to_csv() == empty_dt.to_csv()
 
 
-def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5rows():
+def test_pidgin_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5rows():
     # ESTABLISH
     xio_otx = "Xio"
     sue_otx = "Sue"
@@ -71,7 +71,7 @@ def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5row
     print(f"{otx_dt=}")
 
     # WHEN
-    filter_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
+    pidgin_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
 
     # THEN
     assert otx_dt.iloc[0][acct_id_str()] == zia_otx
@@ -87,7 +87,7 @@ def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5row
     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5rowsMultipleColumns():
+def test_pidgin_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5rowsMultipleColumns():
     # ESTABLISH
     xio_otx = "Xio"
     sue_otx = "Sue"
@@ -110,7 +110,7 @@ def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5row
     print(f"{otx_dt=}")
 
     # WHEN
-    filter_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
+    pidgin_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
 
     # THEN
     assert otx_dt.iloc[0][acct_id_str()] == zia_otx
@@ -126,7 +126,7 @@ def test_filter_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5row
     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
+def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     # ESTABLISH
     yao_str = "Yao"
     xio_otx = "Xio"
@@ -136,10 +136,10 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    yao_filterunit = filterunit_shop(yao_str)
-    yao_filterunit.set_otx_to_inx(type_AcctID_str(), xio_otx, xio_inx)
-    yao_filterunit.set_otx_to_inx(type_AcctID_str(), sue_otx, sue_inx)
-    yao_filterunit.set_otx_to_inx(type_AcctID_str(), bob_otx, bob_inx)
+    yao_pidginunit = pidginunit_shop(yao_str)
+    yao_pidginunit.set_otx_to_inx(type_AcctID_str(), xio_otx, xio_inx)
+    yao_pidginunit.set_otx_to_inx(type_AcctID_str(), sue_otx, sue_inx)
+    yao_pidginunit.set_otx_to_inx(type_AcctID_str(), bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
@@ -150,7 +150,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     print(f"{otx_dt=}")
 
     # WHEN
-    filter_all_columns_dataframe(otx_dt, yao_filterunit)
+    pidgin_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
     assert otx_dt.iloc[0][acct_id_str()] == zia_otx
@@ -166,7 +166,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_filterunit_set_by_otx_to_inx():
+def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_pidginunit_set_by_otx_to_inx():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -181,7 +181,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_
     sweep_str = "sweep"
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
-    yao_filterunit = get_casa_maison_filterunit_set_by_otx_to_inx()
+    yao_pidginunit = get_casa_maison_pidginunit_set_by_otx_to_inx()
     otx_dt = get_casa_maison_road_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
     assert otx_dt.iloc[0][base_str()] == otx_music45_str
@@ -191,7 +191,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_
     print(f"{otx_dt=}")
 
     # WHEN
-    filter_all_columns_dataframe(otx_dt, yao_filterunit)
+    pidgin_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
     assert otx_dt.iloc[0][base_str()] == inx_music87_str
@@ -205,7 +205,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_
     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_casa_maison_filterunit_set_by_explicit_label():
+def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_casa_maison_pidginunit_set_by_explicit_label():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -220,8 +220,8 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_
     sweep_str = "sweep"
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
-    yao_filterunit = get_casa_maison_filterunit_set_by_explicit_label()
-    # print(f"{yao_filterunit=}")
+    yao_pidginunit = get_casa_maison_pidginunit_set_by_explicit_label()
+    # print(f"{yao_pidginunit=}")
     otx_dt = get_casa_maison_road_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
     assert otx_dt.iloc[0][base_str()] == otx_music45_str
@@ -232,7 +232,7 @@ def test_filter_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_
     print("")
 
     # WHEN
-    filter_all_columns_dataframe(otx_dt, yao_filterunit)
+    pidgin_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
     print("")

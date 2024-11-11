@@ -3,7 +3,7 @@ from src.f00_instrument.dict_toolbox import get_dict_from_json
 from src.f01_road.jaar_config import get_json_filename
 from src.f02_bud.bud_tool import budunit_str
 from src.f07_fiscal.fiscal_config import fiscalunit_str
-from src.f08_filter.filter_config import filterunit_str
+from src.f08_pidgin.pidgin_config import pidginunit_str
 from src.f09_brick.examples.brick_env import src_brick_dir
 from os import getcwd as os_getcwd
 
@@ -31,7 +31,7 @@ def brick_type_str() -> str:
 
 
 def get_brick_types() -> set[str]:
-    return {budunit_str(), fiscalunit_str(), filterunit_str()}
+    return {budunit_str(), fiscalunit_str(), pidginunit_str()}
 
 
 def allowed_crud_str() -> str:

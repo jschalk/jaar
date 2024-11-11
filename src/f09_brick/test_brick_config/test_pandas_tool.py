@@ -88,7 +88,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(env_dir_setup_c
     assert file_ex02_atom_csv == function_ex02_atom_csv
 
 
-def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
+def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x_dir = create_file_path(env_dir, "examples_folder")
@@ -113,7 +113,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoFilter(env_dir_setup_c
     assert len(x_sheet_names) == 2
 
 
-def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_FilterSheetNames(
+def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

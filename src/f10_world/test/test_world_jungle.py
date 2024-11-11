@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_file_path, create_dir
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
-from src.f08_filter.filter_config import eon_id_str
+from src.f08_pidgin.pidgin_config import eon_id_str
 from src.f10_world.world import worldunit_shop, WorldUnit
 from src.f10_world.world_tool import get_all_brick_dataframes
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup

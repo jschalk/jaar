@@ -6,18 +6,18 @@ from src.f04_gift.atom_config import (
     type_GroupID_str,
     face_id_str,
 )
-from src.f08_filter.filter import (
+from src.f08_pidgin.pidgin import (
     bridgeunit_shop,
     get_bridgeunit_from_dict,
     get_bridgeunit_from_json,
 )
-from src.f08_filter.examples.filter_env import (
+from src.f08_pidgin.examples.pidgin_env import (
     env_dir_setup_cleanup,
     get_test_faces_dir,
 )
-from src.f08_filter.examples.example_filters import (
-    get_casa_maison_filterunit_set_by_otx_to_inx,
-    get_casa_maison_filterunit_set_by_explicit_label,
+from src.f08_pidgin.examples.example_pidgins import (
+    get_casa_maison_pidginunit_set_by_otx_to_inx,
+    get_casa_maison_pidginunit_set_by_explicit_label,
     get_casa_maison_road_otx_to_inx_dt,
     get_casa_maison_road_explicit_label_dt,
 )

@@ -7,11 +7,11 @@ from src.f00_instrument.file import (
 )
 from src.f00_instrument.db_toolbox import get_grouping_with_all_values_equal_sql_query
 from src.f04_gift.atom_config import get_atom_args_obj_classs
-from src.f08_filter.filter import (
+from src.f08_pidgin.pidgin import (
     BridgeUnit,
-    FilterUnit,
-    filterable_atom_args,
-    get_filterunit_from_json,
+    PidginUnit,
+    pidginable_atom_args,
+    get_pidginunit_from_json,
 )
 from src.f09_brick.brick_config import get_brick_elements_sort_order
 from pandas import (
@@ -108,11 +108,11 @@ def get_grouping_with_all_values_equal_df(
         return pandas_read_sql_query(query_str, conn)
 
 
-def get_dataframe_filterable_columns(x_df: DataFrame) -> set[str]:
-    return {x_column for x_column in x_df.columns if x_column in filterable_atom_args()}
+def get_dataframe_pidginable_columns(x_df: DataFrame) -> set[str]:
+    return {x_column for x_column in x_df.columns if x_column in pidginable_atom_args()}
 
 
-def filter_single_column_dataframe(
+def pidgin_single_column_dataframe(
     x_df: DataFrame, x_bridgeunit: BridgeUnit, column_name: str
 ) -> DataFrame:
     if column_name in x_df:
@@ -124,23 +124,23 @@ def filter_single_column_dataframe(
     return x_df
 
 
-def filter_all_columns_dataframe(x_df: DataFrame, x_filterunit: FilterUnit):
+def pidgin_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
     column_names = set(x_df.columns)
-    filterable_columns = column_names.intersection(filterable_atom_args())
-    for filterable_column in filterable_columns:
-        obj_class = get_atom_args_obj_classs().get(filterable_column)
-        x_bridgeunit = x_filterunit.get_bridgeunit(obj_class)
-        filter_single_column_dataframe(x_df, x_bridgeunit, filterable_column)
+    pidginable_columns = column_names.intersection(pidginable_atom_args())
+    for pidginable_column in pidginable_columns:
+        obj_class = get_atom_args_obj_classs().get(pidginable_column)
+        x_bridgeunit = x_pidginunit.get_bridgeunit(obj_class)
+        pidgin_single_column_dataframe(x_df, x_bridgeunit, pidginable_column)
 
 
-def filter_face_dir_files(face_dir: str):
+def pidgin_face_dir_files(face_dir: str):
     otx_dir = f"{face_dir}/otx"
     inx_dir = f"{face_dir}/inx"
     bridge_filename = "bridge.json"
-    filterunit_json = open_file(face_dir, bridge_filename)
-    face_filterunit = get_filterunit_from_json(filterunit_json)
+    pidginunit_json = open_file(face_dir, bridge_filename)
+    face_pidginunit = get_pidginunit_from_json(pidginunit_json)
     otx_dir_files = get_dir_file_strs(otx_dir, delete_extensions=False)
     for x_file_name in otx_dir_files.keys():
         x_df = open_csv(otx_dir, x_file_name)
-        filter_all_columns_dataframe(x_df, face_filterunit)
+        pidgin_all_columns_dataframe(x_df, face_pidginunit)
         save_dataframe_to_csv(x_df, inx_dir, x_file_name)

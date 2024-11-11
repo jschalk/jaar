@@ -8,14 +8,14 @@ from src.f04_gift.atom_config import (
     type_GroupID_str,
 )
 from src.f09_brick.pandas_tool import save_dataframe_to_csv, open_csv
-from src.f08_filter.filter import filterunit_shop
-from src.f09_brick.pandas_tool import filter_face_dir_files
-from src.f08_filter.examples.filter_env import (
+from src.f08_pidgin.pidgin import pidginunit_shop
+from src.f09_brick.pandas_tool import pidgin_face_dir_files
+from src.f08_pidgin.examples.pidgin_env import (
     env_dir_setup_cleanup,
     get_test_faces_dir,
 )
-from src.f08_filter.examples.example_filters import (
-    get_casa_maison_filterunit_set_by_explicit_label,
+from src.f08_pidgin.examples.example_pidgins import (
+    get_casa_maison_pidginunit_set_by_explicit_label,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
     get_clean_roadunit_bridgeunit,
@@ -23,13 +23,13 @@ from src.f08_filter.examples.example_filters import (
     get_suita_acctid_bridgeunit,
     get_suita_acctid_otx_dt,
     get_suita_acctid_inx_dt,
-    get_sue_filterunit,
+    get_sue_pidginunit,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame
 
 
-def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
+def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario0_SingleFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -40,13 +40,13 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
     bob_inx = "Bobita"
     sue_inx = "Suita"
     xio_inx = "Xioita"
-    sue_filterunit = filterunit_shop(sue_otx)
-    sue_filterunit.set_bridgeunit(get_suita_acctid_bridgeunit())
+    sue_pidginunit = pidginunit_shop(sue_otx)
+    sue_pidginunit.set_bridgeunit(get_suita_acctid_bridgeunit())
     sue_dir = f"{get_test_faces_dir()}/{sue_otx}"
     bridge_filename = "bridge.json"
-    filterunit_file_path = f"{sue_dir}/{bridge_filename}"
+    pidginunit_file_path = f"{sue_dir}/{bridge_filename}"
     print(f"{sue_dir=}")
-    save_file(sue_dir, bridge_filename, sue_filterunit.get_json())
+    save_file(sue_dir, bridge_filename, sue_pidginunit.get_json())
     sue_otx_dt = get_suita_acctid_otx_dt()
     sue_inx_dt = get_suita_acctid_inx_dt()
     otx_dir = f"{sue_dir}/otx"
@@ -56,15 +56,15 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
     otx_file_path = f"{otx_dir}/{example_filename}"
     inx_file_path = f"{inx_dir}/{example_filename}"
     save_dataframe_to_csv(sue_otx_dt, otx_dir, example_filename)
-    assert os_path_exists(filterunit_file_path)
+    assert os_path_exists(pidginunit_file_path)
     assert os_path_exists(otx_file_path)
     assert os_path_exists(inx_file_path) is False
 
     # WHEN
-    filter_face_dir_files(sue_dir)
+    pidgin_face_dir_files(sue_dir)
 
     # THEN
-    assert os_path_exists(filterunit_file_path)
+    assert os_path_exists(pidginunit_file_path)
     assert os_path_exists(otx_file_path)
     assert os_path_exists(inx_file_path)
     gen_inx_dt = open_csv(inx_dir, example_filename)
@@ -87,8 +87,8 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario0_SingleFile(
     assert gen_inx_dt.to_csv() == static_inx_dt.to_csv()
 
 
-# save two dataframes to be filtered: two files in otx, two files in inx
-def test_filter_face_dir_files_CreatesFilteredFiles_Scenario1_SingleFile_RoadUnit(
+# save two dataframes to be pidgined: two files in otx, two files in inx
+def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario1_SingleFile_RoadUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -106,9 +106,9 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario1_SingleFile_RoadUni
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
-    sue_filterunit = get_casa_maison_filterunit_set_by_explicit_label()
-    sue_dir = f"{get_test_faces_dir()}/{sue_filterunit.face_id}"
-    save_file(sue_dir, "bridge.json", sue_filterunit.get_json())
+    sue_pidginunit = get_casa_maison_pidginunit_set_by_explicit_label()
+    sue_dir = f"{get_test_faces_dir()}/{sue_pidginunit.face_id}"
+    save_file(sue_dir, "bridge.json", sue_pidginunit.get_json())
     sue_otx_dt = get_casa_maison_road_otx_dt()
     sue_inx_dt = get_casa_maison_road_inx_dt()
     otx_dir = f"{sue_dir}/otx"
@@ -122,7 +122,7 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario1_SingleFile_RoadUni
     assert os_path_exists(inx_file_path) is False
 
     # WHEN
-    filter_face_dir_files(sue_dir)
+    pidgin_face_dir_files(sue_dir)
 
     # THEN
     assert os_path_exists(otx_file_path)
@@ -144,18 +144,18 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario1_SingleFile_RoadUni
     assert gen_inx_dt.to_csv() == sue_inx_dt.to_csv()
 
 
-# save two dataframes to be filtered: two files in otx, two files in inx
-def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
+# save two dataframes to be pidgined: two files in otx, two files in inx
+def test_pidgin_face_dir_files_CreatesPidginedFiles_Scenario2_TwoFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    sue_filterunit = get_casa_maison_filterunit_set_by_explicit_label()
-    sue_filterunit.set_bridgeunit(get_suita_acctid_bridgeunit())
-    sue_dir = f"{get_test_faces_dir()}/{sue_filterunit.face_id}"
+    sue_pidginunit = get_casa_maison_pidginunit_set_by_explicit_label()
+    sue_pidginunit.set_bridgeunit(get_suita_acctid_bridgeunit())
+    sue_dir = f"{get_test_faces_dir()}/{sue_pidginunit.face_id}"
     bridge_filename = "bridge.json"
-    filterunit_file_path = f"{sue_dir}/{bridge_filename}"
+    pidginunit_file_path = f"{sue_dir}/{bridge_filename}"
     print(f"{sue_dir=}")
-    save_file(sue_dir, bridge_filename, sue_filterunit.get_json())
+    save_file(sue_dir, bridge_filename, sue_pidginunit.get_json())
     sue_otx_dt = get_suita_acctid_otx_dt()
     otx_dir = f"{sue_dir}/otx"
     inx_dir = f"{sue_dir}/inx"
@@ -171,17 +171,17 @@ def test_filter_face_dir_files_CreatesFilteredFiles_Scenario2_TwoFile(
     save_dataframe_to_csv(sue_otx_dt, otx_dir, appt_id_filename)
     assert os_path_exists(road1_otx_file_path)
     assert os_path_exists(road1_inx_file_path) is False
-    assert os_path_exists(filterunit_file_path)
+    assert os_path_exists(pidginunit_file_path)
     assert os_path_exists(appt_id_otx_file_path)
     assert os_path_exists(appt_id_inx_file_path) is False
 
     # WHEN
-    filter_face_dir_files(sue_dir)
+    pidgin_face_dir_files(sue_dir)
 
     # THEN
     assert os_path_exists(road1_otx_file_path)
     assert os_path_exists(road1_inx_file_path)
-    assert os_path_exists(filterunit_file_path)
+    assert os_path_exists(pidginunit_file_path)
     assert os_path_exists(appt_id_otx_file_path)
     assert os_path_exists(appt_id_inx_file_path)
     appt_inx_dt = open_csv(inx_dir, appt_id_filename)

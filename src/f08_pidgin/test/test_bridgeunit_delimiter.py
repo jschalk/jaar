@@ -4,7 +4,7 @@ from src.f04_gift.atom_config import (
     type_RoadUnit_str,
     type_RoadNode_str,
 )
-from src.f08_filter.filter import bridgeunit_shop
+from src.f08_pidgin.pidgin import bridgeunit_shop
 
 
 def test_BridgeUnit_otx_road_delimiter_in_otx_words_ReturnsObj():
