@@ -23,8 +23,8 @@ from src.f04_gift.atom_config import (
     get_atom_args_category_mapping,
     get_atom_config_dict,
     get_atom_categorys,
-    required_args_str,
-    optional_args_str,
+    jkeys_str,
+    jvalues_str,
     normal_specs_str,
     column_order_str,
     atom_delete,
@@ -393,8 +393,8 @@ def _validate_brick_config(x_brick_config: dict):
     for brick_category, brick_dict in x_brick_config.items():
         print(f"{brick_category=}")
         assert brick_dict.get(brick_type_str()) in get_brick_types()
-        assert brick_dict.get(required_args_str()) is not None
-        assert brick_dict.get(optional_args_str()) is not None
+        assert brick_dict.get(jkeys_str()) is not None
+        assert brick_dict.get(jvalues_str()) is not None
         assert brick_dict.get(allowed_crud_str()) is not None
         assert brick_dict.get(atom_update()) is None
         assert brick_dict.get(atom_insert()) is None
@@ -466,28 +466,28 @@ def _validate_brick_config(x_brick_config: dict):
             test_str = f"{allowed_crud_str()} not checked by test"
             assert brick_dict.get(allowed_crud_str()) == test_str
 
-        sub_required_args_keys = set(sub_category.get(required_args_str()).keys())
-        brick_required_args_keys = set(brick_dict.get(required_args_str()).keys())
-        # print(f"  {sub_required_args_keys=}")
-        # print(f"{brick_required_args_keys=}")
-        assert sub_required_args_keys.issubset(brick_required_args_keys)
+        sub_jkeys_keys = set(sub_category.get(jkeys_str()).keys())
+        brick_jkeys_keys = set(brick_dict.get(jkeys_str()).keys())
+        # print(f"  {sub_jkeys_keys=}")
+        # print(f"{brick_jkeys_keys=}")
+        assert sub_jkeys_keys.issubset(brick_jkeys_keys)
 
-        sub_optional_args_keys = set(sub_category.get(optional_args_str()).keys())
-        if fiscal_id_str() in sub_optional_args_keys:
-            sub_optional_args_keys.remove(fiscal_id_str())
+        sub_jvalues_keys = set(sub_category.get(jvalues_str()).keys())
+        if fiscal_id_str() in sub_jvalues_keys:
+            sub_jvalues_keys.remove(fiscal_id_str())
 
-        brick_optional_args_dict = brick_dict.get(optional_args_str())
-        brick_optional_args_keys = set(brick_optional_args_dict.keys())
-        # print(f"  {sub_optional_args_keys=}")
-        # print(f"{brick_optional_args_keys=}")
-        assert sub_optional_args_keys.issubset(brick_optional_args_keys)
+        brick_jvalues_dict = brick_dict.get(jvalues_str())
+        brick_jvalues_keys = set(brick_jvalues_dict.keys())
+        # print(f"  {sub_jvalues_keys=}")
+        # print(f"{brick_jvalues_keys=}")
+        assert sub_jvalues_keys.issubset(brick_jvalues_keys)
 
-        assert face_id_str() in brick_required_args_keys
-        assert eon_id_str() in brick_required_args_keys
-        assert fiscal_id_str() not in brick_optional_args_keys
+        assert face_id_str() in brick_jkeys_keys
+        assert eon_id_str() in brick_jkeys_keys
+        assert fiscal_id_str() not in brick_jvalues_keys
         if brick_dict.get(brick_type_str()) != pidginunit_str():
-            assert fiscal_id_str() in brick_required_args_keys
-            assert time_id_str() in brick_required_args_keys
+            assert fiscal_id_str() in brick_jkeys_keys
+            assert time_id_str() in brick_jkeys_keys
 
         # sort_list = get_brick_elements_sort_order()
         # x_count = 0
@@ -497,23 +497,23 @@ def _validate_brick_config(x_brick_config: dict):
         #     sort_dict1[x_count] = brick_arg
         #     sort_dict1[brick_arg] = x_count
 
-        # for optional_arg in brick_optional_args_keys:
-        #     print(f"{optional_arg=} {brick_optional_args_dict=}")
-        #     optional_arg_dict = brick_optional_args_dict.get(optional_arg)
-        #     optional_arg_column_order = optional_arg_dict.get(column_order_str())
-        #     assert optional_arg_column_order != None
-        #     list_ref_arg = sort_list[optional_arg_column_order]
+        # for jvalue in brick_jvalues_keys:
+        #     print(f"{jvalue=} {brick_jvalues_dict=}")
+        #     jvalue_dict = brick_jvalues_dict.get(jvalue)
+        #     jvalue_column_order = jvalue_dict.get(column_order_str())
+        #     assert jvalue_column_order != None
+        #     list_ref_arg = sort_list[jvalue_column_order]
         #     assert list_ref_arg != None
-        #     assert optional_arg == list_ref_arg
+        #     assert jvalue == list_ref_arg
 
-        # # for required_arg in brick_required_args_keys:
-        #     print(f"{required_arg=} {brick_required_args_dict=}")
-        #     required_arg_dict = brick_required_args_dict.get(required_arg)
-        #     required_arg_column_order = required_arg_dict.get(column_order_str())
-        #     assert required_arg_column_order != None
-        #     list_ref_arg = sort_list[required_arg_column_order]
+        # # for jkey in brick_jkeys_keys:
+        #     print(f"{jkey=} {brick_jkeys_dict=}")
+        #     jkey_dict = brick_jkeys_dict.get(jkey)
+        #     jkey_column_order = jkey_dict.get(column_order_str())
+        #     assert jkey_column_order != None
+        #     list_ref_arg = sort_list[jkey_column_order]
         #     assert list_ref_arg != None
-        #     assert required_arg == list_ref_arg
+        #     assert jkey == list_ref_arg
 
 
 def test_get_brick_format_filenames_ReturnsObj():
@@ -562,8 +562,8 @@ def _validate_brick_format_files(brick_filenames: set[str]):
             otx_key_value = attr_dict.get(otx_key_str())
             for brick_format_category in format_cats:
                 format_config = config_dict.get(brick_format_category)
-                cat_required_keys = set(format_config.get(required_args_str()).keys())
-                cat_optional_keys = set(format_config.get(optional_args_str()).keys())
+                cat_required_keys = set(format_config.get(jkeys_str()).keys())
+                cat_optional_keys = set(format_config.get(jvalues_str()).keys())
                 attr_in_required = brick_attribute in cat_required_keys
                 attr_in_optional = brick_attribute in cat_optional_keys
                 attr_in_keys = attr_in_required or attr_in_optional

@@ -10,8 +10,8 @@ from src.f04_gift.atom_config import (
     fund_coin_str,
     penny_str,
     respect_bit_str,
-    required_args_str,
-    optional_args_str,
+    jkeys_str,
+    jvalues_str,
     atom_update,
     atom_insert,
     atom_delete,
@@ -96,14 +96,14 @@ def test_get_fiscal_config_dict_ReturnsObj():
     fiscal_timeline_hour_dict = fiscal_config.get(fiscal_timeline_hour_str())
     fiscal_timeline_month_dict = fiscal_config.get(fiscal_timeline_month_str())
     fiscal_timeline_weekday_dict = fiscal_config.get(fiscal_timeline_weekday_str())
-    assert len(fiscalunit_dict.get(required_args_str())) == 0
-    assert len(fiscal_purview_episode_dict.get(required_args_str())) == 4
-    assert len(fiscal_cashbook_dict.get(required_args_str())) == 4
-    assert len(fiscal_timeline_hour_dict.get(required_args_str())) == 2
-    assert len(fiscal_timeline_month_dict.get(required_args_str())) == 2
-    assert len(fiscal_timeline_weekday_dict.get(required_args_str())) == 2
+    assert len(fiscalunit_dict.get(jkeys_str())) == 0
+    assert len(fiscal_purview_episode_dict.get(jkeys_str())) == 4
+    assert len(fiscal_cashbook_dict.get(jkeys_str())) == 4
+    assert len(fiscal_timeline_hour_dict.get(jkeys_str())) == 2
+    assert len(fiscal_timeline_month_dict.get(jkeys_str())) == 2
+    assert len(fiscal_timeline_weekday_dict.get(jkeys_str())) == 2
 
-    x_fiscalunit_optional_args = {
+    x_fiscalunit_jvalues = {
         c400_number_str(),
         current_time_str(),
         fiscal_id_str(),
@@ -115,15 +115,15 @@ def test_get_fiscal_config_dict_ReturnsObj():
         timeline_label_str(),
         yr1_jan1_offset_str(),
     }
-    print(f"{fiscalunit_dict.get(optional_args_str()).keys()=}")
-    gen_optional_args = set(fiscalunit_dict.get(optional_args_str()).keys())
-    assert gen_optional_args == x_fiscalunit_optional_args
-    assert len(fiscalunit_dict.get(optional_args_str())) == 10
-    assert len(fiscal_purview_episode_dict.get(optional_args_str())) == 1
-    assert len(fiscal_cashbook_dict.get(optional_args_str())) == 1
-    assert len(fiscal_timeline_hour_dict.get(optional_args_str())) == 1
-    assert len(fiscal_timeline_month_dict.get(optional_args_str())) == 1
-    assert len(fiscal_timeline_weekday_dict.get(optional_args_str())) == 1
+    print(f"{fiscalunit_dict.get(jvalues_str()).keys()=}")
+    gen_jvalues = set(fiscalunit_dict.get(jvalues_str()).keys())
+    assert gen_jvalues == x_fiscalunit_jvalues
+    assert len(fiscalunit_dict.get(jvalues_str())) == 10
+    assert len(fiscal_purview_episode_dict.get(jvalues_str())) == 1
+    assert len(fiscal_cashbook_dict.get(jvalues_str())) == 1
+    assert len(fiscal_timeline_hour_dict.get(jvalues_str())) == 1
+    assert len(fiscal_timeline_month_dict.get(jvalues_str())) == 1
+    assert len(fiscal_timeline_weekday_dict.get(jvalues_str())) == 1
 
 
 def _validate_fiscal_config(fiscal_config: dict):
@@ -142,24 +142,24 @@ def _validate_fiscal_config(fiscal_config: dict):
     # for every fiscal_format file there exists a unique fiscal_number always with leading zeros to make 5 digits
     for fiscal_categorys, cat_dict in fiscal_config.items():
         print(f"_validate_fiscal_config {fiscal_categorys=}")
-        assert cat_dict.get(required_args_str()) is not None
-        assert cat_dict.get(optional_args_str()) is not None
+        assert cat_dict.get(jkeys_str()) is not None
+        assert cat_dict.get(jvalues_str()) is not None
         assert cat_dict.get(atom_update()) is None
         assert cat_dict.get(atom_insert()) is None
         assert cat_dict.get(atom_delete()) is None
         assert cat_dict.get(normal_specs_str()) is None
 
-        fiscal_required_args_keys = set(cat_dict.get(required_args_str()).keys())
-        for required_arg_key in fiscal_required_args_keys:
-            required_arg_dict = cat_dict.get(required_args_str())
-            print(f"_validate_fiscal_config {fiscal_categorys=} {required_arg_key=} ")
-            arg_dict = required_arg_dict.get(required_arg_key)
+        fiscal_jkeys_keys = set(cat_dict.get(jkeys_str()).keys())
+        for jkey_key in fiscal_jkeys_keys:
+            jkey_dict = cat_dict.get(jkeys_str())
+            print(f"_validate_fiscal_config {fiscal_categorys=} {jkey_key=} ")
+            arg_dict = jkey_dict.get(jkey_key)
             assert arg_dict.get(jaar_type_str()) in accepted_jaar_typees
-        fiscal_optional_args_keys = set(cat_dict.get(optional_args_str()).keys())
-        for optional_arg_key in fiscal_optional_args_keys:
-            optional_arg_dict = cat_dict.get(optional_args_str())
-            print(f"_validate_fiscal_config {fiscal_categorys=} {optional_arg_key=} ")
-            arg_dict = optional_arg_dict.get(optional_arg_key)
+        fiscal_jvalues_keys = set(cat_dict.get(jvalues_str()).keys())
+        for jvalue_key in fiscal_jvalues_keys:
+            jvalue_dict = cat_dict.get(jvalues_str())
+            print(f"_validate_fiscal_config {fiscal_categorys=} {jvalue_key=} ")
+            arg_dict = jvalue_dict.get(jvalue_key)
             assert arg_dict.get(jaar_type_str()) in accepted_jaar_typees
 
 

@@ -49,8 +49,8 @@ from src.f04_gift.atom_config import (
     fopen_str,
     fnigh_str,
     base_item_active_requisite_str,
-    get_atom_config_required_args,
-    get_atom_config_optional_args,
+    get_atom_config_jkeys,
+    get_atom_config_jvalues,
 )
 from src.f04_gift.atom import (
     AtomUnit,
@@ -60,7 +60,7 @@ from src.f04_gift.atom import (
     atom_delete,
     atom_insert,
     atom_update,
-    optional_args_different,
+    jvalues_different,
     sift_atomunit,
 )
 from dataclasses import dataclass
@@ -90,12 +90,10 @@ class DeltaUnit:
 
         ordered_list = []
         for x_list in atom_order_key_dict.values():
-            if x_list[0].required_args.get(parent_road_str()) is not None:
-                x_list = sorted(
-                    x_list, key=lambda x: x.required_args.get(parent_road_str())
-                )
-            if x_list[0].required_args.get(road_str()) is not None:
-                x_list = sorted(x_list, key=lambda x: x.required_args.get(road_str()))
+            if x_list[0].jkeys.get(parent_road_str()) is not None:
+                x_list = sorted(x_list, key=lambda x: x.jkeys.get(parent_road_str()))
+            if x_list[0].jkeys.get(road_str()) is not None:
+                x_list = sorted(x_list, key=lambda x: x.jkeys.get(road_str()))
             ordered_list.extend(x_list)
         return ordered_list
 
@@ -113,8 +111,8 @@ class DeltaUnit:
         if x_atomunit.is_valid() is False:
             raise InvalidAtomUnitException(
                 f"""'{x_atomunit.category}' {x_atomunit.crud_str} AtomUnit is invalid
-                {x_atomunit.is_required_args_valid()=}
-                {x_atomunit.is_optional_args_valid()=}"""
+                {x_atomunit.is_jkeys_valid()=}
+                {x_atomunit.is_jvalues_valid()=}"""
             )
 
         x_atomunit.set_atom_order()
@@ -129,8 +127,8 @@ class DeltaUnit:
         if x_atomunit.is_valid() is False:
             raise InvalidAtomUnitException(
                 f"""'{x_atomunit.category}' {x_atomunit.crud_str} AtomUnit is invalid
-                {x_atomunit.is_required_args_valid()=}
-                {x_atomunit.is_optional_args_valid()=}"""
+                {x_atomunit.is_jkeys_valid()=}
+                {x_atomunit.is_jvalues_valid()=}"""
             )
 
         x_atomunit.set_atom_order()
@@ -146,21 +144,19 @@ class DeltaUnit:
         self,
         category: str,
         crud_str: str,
-        required_args: str = None,
-        optional_args: str = None,
+        jkeys: str = None,
+        jvalues: str = None,
     ):
         x_atomunit = atomunit_shop(
             category=category,
             crud_str=crud_str,
-            required_args=required_args,
-            optional_args=optional_args,
+            jkeys=jkeys,
+            jvalues=jvalues,
         )
         self.set_atomunit(x_atomunit)
 
-    def get_atomunit(
-        self, crud_str: str, category: str, required_args: list[str]
-    ) -> AtomUnit:
-        x_keylist = [crud_str, category, *required_args]
+    def get_atomunit(self, crud_str: str, category: str, jkeys: list[str]) -> AtomUnit:
+        x_keylist = [crud_str, category, *jkeys]
         return get_from_nested_dict(self.atomunits, x_keylist)
 
     def add_all_atomunits(self, after_bud: BudUnit):
@@ -177,27 +173,25 @@ class DeltaUnit:
     def add_atomunits_budunit_simple_attrs(
         self, before_bud: BudUnit, after_bud: BudUnit
     ):
-        if not optional_args_different(budunit_str(), before_bud, after_bud):
+        if not jvalues_different(budunit_str(), before_bud, after_bud):
             return
         x_atomunit = atomunit_shop(budunit_str(), atom_update())
         if before_bud.max_tree_traverse != after_bud.max_tree_traverse:
-            x_atomunit.set_optional_arg(
-                "max_tree_traverse", after_bud.max_tree_traverse
-            )
+            x_atomunit.set_jvalue("max_tree_traverse", after_bud.max_tree_traverse)
         if before_bud.credor_respect != after_bud.credor_respect:
-            x_atomunit.set_optional_arg("credor_respect", after_bud.credor_respect)
+            x_atomunit.set_jvalue("credor_respect", after_bud.credor_respect)
         if before_bud.debtor_respect != after_bud.debtor_respect:
-            x_atomunit.set_optional_arg("debtor_respect", after_bud.debtor_respect)
+            x_atomunit.set_jvalue("debtor_respect", after_bud.debtor_respect)
         if before_bud.tally != after_bud.tally:
-            x_atomunit.set_optional_arg("tally", after_bud.tally)
+            x_atomunit.set_jvalue("tally", after_bud.tally)
         if before_bud.fund_pool != after_bud.fund_pool:
-            x_atomunit.set_optional_arg("fund_pool", after_bud.fund_pool)
+            x_atomunit.set_jvalue("fund_pool", after_bud.fund_pool)
         if before_bud.fund_coin != after_bud.fund_coin:
-            x_atomunit.set_optional_arg("fund_coin", after_bud.fund_coin)
+            x_atomunit.set_jvalue("fund_coin", after_bud.fund_coin)
         if before_bud.purview_time_id != after_bud.purview_time_id:
-            x_atomunit.set_optional_arg("purview_time_id", after_bud.purview_time_id)
+            x_atomunit.set_jvalue("purview_time_id", after_bud.purview_time_id)
         if before_bud.respect_bit != after_bud.respect_bit:
-            x_atomunit.set_optional_arg("respect_bit", after_bud.respect_bit)
+            x_atomunit.set_jvalue("respect_bit", after_bud.respect_bit)
         self.set_atomunit(x_atomunit)
 
     def add_atomunits_accts(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -222,15 +216,11 @@ class DeltaUnit:
         for insert_acct_id in insert_acct_ids:
             insert_acctunit = after_bud.get_acct(insert_acct_id)
             x_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
-            x_atomunit.set_required_arg(acct_id_str(), insert_acctunit.acct_id)
+            x_atomunit.set_jkey(acct_id_str(), insert_acctunit.acct_id)
             if insert_acctunit.credit_belief is not None:
-                x_atomunit.set_optional_arg(
-                    "credit_belief", insert_acctunit.credit_belief
-                )
+                x_atomunit.set_jvalue("credit_belief", insert_acctunit.credit_belief)
             if insert_acctunit.debtit_belief is not None:
-                x_atomunit.set_optional_arg(
-                    "debtit_belief", insert_acctunit.debtit_belief
-                )
+                x_atomunit.set_jvalue("debtit_belief", insert_acctunit.debtit_belief)
             self.set_atomunit(x_atomunit)
             all_group_ids = set(insert_acctunit._memberships.keys())
             self.add_atomunit_memberships_inserts(
@@ -244,19 +234,13 @@ class DeltaUnit:
         for acct_id in update_acct_ids:
             after_acctunit = after_bud.get_acct(acct_id)
             before_acctunit = before_bud.get_acct(acct_id)
-            if optional_args_different(
-                bud_acctunit_str(), after_acctunit, before_acctunit
-            ):
+            if jvalues_different(bud_acctunit_str(), after_acctunit, before_acctunit):
                 x_atomunit = atomunit_shop(bud_acctunit_str(), atom_update())
-                x_atomunit.set_required_arg(acct_id_str(), after_acctunit.acct_id)
+                x_atomunit.set_jkey(acct_id_str(), after_acctunit.acct_id)
                 if before_acctunit.credit_belief != after_acctunit.credit_belief:
-                    x_atomunit.set_optional_arg(
-                        "credit_belief", after_acctunit.credit_belief
-                    )
+                    x_atomunit.set_jvalue("credit_belief", after_acctunit.credit_belief)
                 if before_acctunit.debtit_belief != after_acctunit.debtit_belief:
-                    x_atomunit.set_optional_arg(
-                        "debtit_belief", after_acctunit.debtit_belief
-                    )
+                    x_atomunit.set_jvalue("debtit_belief", after_acctunit.debtit_belief)
                 self.set_atomunit(x_atomunit)
             self.add_atomunit_acctunit_update_memberships(
                 after_acctunit=after_acctunit, before_acctunit=before_acctunit
@@ -265,7 +249,7 @@ class DeltaUnit:
     def add_atomunit_acctunit_deletes(self, before_bud: BudUnit, delete_acct_ids: set):
         for delete_acct_id in delete_acct_ids:
             x_atomunit = atomunit_shop(bud_acctunit_str(), atom_delete())
-            x_atomunit.set_required_arg(acct_id_str(), delete_acct_id)
+            x_atomunit.set_jkey(acct_id_str(), delete_acct_id)
             self.set_atomunit(x_atomunit)
             delete_acctunit = before_bud.get_acct(delete_acct_id)
             non_mirror_group_ids = {
@@ -305,7 +289,7 @@ class DeltaUnit:
         for update_acct_id in update_group_ids:
             before_membership = before_acctunit.get_membership(update_acct_id)
             after_membership = after_acctunit.get_membership(update_acct_id)
-            if optional_args_different(
+            if jvalues_different(
                 bud_acct_membership_str(), before_membership, after_membership
             ):
                 self.add_atomunit_membership_update(
@@ -323,16 +307,12 @@ class DeltaUnit:
         for insert_group_id in insert_membership_group_ids:
             after_membership = after_acctunit.get_membership(insert_group_id)
             x_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
-            x_atomunit.set_required_arg(acct_id_str(), after_acct_id)
-            x_atomunit.set_required_arg(group_id_str(), after_membership.group_id)
+            x_atomunit.set_jkey(acct_id_str(), after_acct_id)
+            x_atomunit.set_jkey(group_id_str(), after_membership.group_id)
             if after_membership.credit_vote is not None:
-                x_atomunit.set_optional_arg(
-                    credit_vote_str(), after_membership.credit_vote
-                )
+                x_atomunit.set_jvalue(credit_vote_str(), after_membership.credit_vote)
             if after_membership.debtit_vote is not None:
-                x_atomunit.set_optional_arg(
-                    debtit_vote_str(), after_membership.debtit_vote
-                )
+                x_atomunit.set_jvalue(debtit_vote_str(), after_membership.debtit_vote)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_membership_update(
@@ -342,12 +322,12 @@ class DeltaUnit:
         after_membership: MemberShip,
     ):
         x_atomunit = atomunit_shop(bud_acct_membership_str(), atom_update())
-        x_atomunit.set_required_arg(acct_id_str(), acct_id)
-        x_atomunit.set_required_arg(group_id_str(), after_membership.group_id)
+        x_atomunit.set_jkey(acct_id_str(), acct_id)
+        x_atomunit.set_jkey(group_id_str(), after_membership.group_id)
         if after_membership.credit_vote != before_membership.credit_vote:
-            x_atomunit.set_optional_arg(credit_vote_str(), after_membership.credit_vote)
+            x_atomunit.set_jvalue(credit_vote_str(), after_membership.credit_vote)
         if after_membership.debtit_vote != before_membership.debtit_vote:
-            x_atomunit.set_optional_arg(debtit_vote_str(), after_membership.debtit_vote)
+            x_atomunit.set_jvalue(debtit_vote_str(), after_membership.debtit_vote)
         self.set_atomunit(x_atomunit)
 
     def add_atomunit_memberships_delete(
@@ -355,8 +335,8 @@ class DeltaUnit:
     ):
         for delete_group_id in before_group_ids:
             x_atomunit = atomunit_shop(bud_acct_membership_str(), atom_delete())
-            x_atomunit.set_required_arg(acct_id_str(), before_acct_id)
-            x_atomunit.set_required_arg(group_id_str(), delete_group_id)
+            x_atomunit.set_jkey(acct_id_str(), before_acct_id)
+            x_atomunit.set_jkey(group_id_str(), delete_group_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunits_items(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -381,16 +361,16 @@ class DeltaUnit:
         for insert_item_road in insert_item_roads:
             insert_itemunit = after_bud.get_item_obj(insert_item_road)
             x_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-            x_atomunit.set_required_arg(parent_road_str(), insert_itemunit._parent_road)
-            x_atomunit.set_required_arg(label_str(), insert_itemunit._label)
-            x_atomunit.set_optional_arg(addin_str(), insert_itemunit.addin)
-            x_atomunit.set_optional_arg(begin_str(), insert_itemunit.begin)
-            x_atomunit.set_optional_arg(close_str(), insert_itemunit.close)
-            x_atomunit.set_optional_arg(denom_str(), insert_itemunit.denom)
-            x_atomunit.set_optional_arg(numor_str(), insert_itemunit.numor)
-            x_atomunit.set_optional_arg(morph_str(), insert_itemunit.morph)
-            x_atomunit.set_optional_arg(mass_str(), insert_itemunit.mass)
-            x_atomunit.set_optional_arg(pledge_str(), insert_itemunit.pledge)
+            x_atomunit.set_jkey(parent_road_str(), insert_itemunit._parent_road)
+            x_atomunit.set_jkey(label_str(), insert_itemunit._label)
+            x_atomunit.set_jvalue(addin_str(), insert_itemunit.addin)
+            x_atomunit.set_jvalue(begin_str(), insert_itemunit.begin)
+            x_atomunit.set_jvalue(close_str(), insert_itemunit.close)
+            x_atomunit.set_jvalue(denom_str(), insert_itemunit.denom)
+            x_atomunit.set_jvalue(numor_str(), insert_itemunit.numor)
+            x_atomunit.set_jvalue(morph_str(), insert_itemunit.morph)
+            x_atomunit.set_jvalue(mass_str(), insert_itemunit.mass)
+            x_atomunit.set_jvalue(pledge_str(), insert_itemunit.pledge)
             self.set_atomunit(x_atomunit)
 
             self.add_atomunit_item_factunit_inserts(
@@ -420,30 +400,26 @@ class DeltaUnit:
         for item_road in update_roads:
             after_itemunit = after_bud.get_item_obj(item_road)
             before_itemunit = before_bud.get_item_obj(item_road)
-            if optional_args_different(
-                bud_itemunit_str(), before_itemunit, after_itemunit
-            ):
+            if jvalues_different(bud_itemunit_str(), before_itemunit, after_itemunit):
                 x_atomunit = atomunit_shop(bud_itemunit_str(), atom_update())
-                x_atomunit.set_required_arg(
-                    parent_road_str(), after_itemunit._parent_road
-                )
-                x_atomunit.set_required_arg(label_str(), after_itemunit._label)
+                x_atomunit.set_jkey(parent_road_str(), after_itemunit._parent_road)
+                x_atomunit.set_jkey(label_str(), after_itemunit._label)
                 if before_itemunit.addin != after_itemunit.addin:
-                    x_atomunit.set_optional_arg(addin_str(), after_itemunit.addin)
+                    x_atomunit.set_jvalue(addin_str(), after_itemunit.addin)
                 if before_itemunit.begin != after_itemunit.begin:
-                    x_atomunit.set_optional_arg(begin_str(), after_itemunit.begin)
+                    x_atomunit.set_jvalue(begin_str(), after_itemunit.begin)
                 if before_itemunit.close != after_itemunit.close:
-                    x_atomunit.set_optional_arg(close_str(), after_itemunit.close)
+                    x_atomunit.set_jvalue(close_str(), after_itemunit.close)
                 if before_itemunit.denom != after_itemunit.denom:
-                    x_atomunit.set_optional_arg(denom_str(), after_itemunit.denom)
+                    x_atomunit.set_jvalue(denom_str(), after_itemunit.denom)
                 if before_itemunit.numor != after_itemunit.numor:
-                    x_atomunit.set_optional_arg(numor_str(), after_itemunit.numor)
+                    x_atomunit.set_jvalue(numor_str(), after_itemunit.numor)
                 if before_itemunit.morph != after_itemunit.morph:
-                    x_atomunit.set_optional_arg(morph_str(), after_itemunit.morph)
+                    x_atomunit.set_jvalue(morph_str(), after_itemunit.morph)
                 if before_itemunit.mass != after_itemunit.mass:
-                    x_atomunit.set_optional_arg(mass_str(), after_itemunit.mass)
+                    x_atomunit.set_jvalue(mass_str(), after_itemunit.mass)
                 if before_itemunit.pledge != after_itemunit.pledge:
-                    x_atomunit.set_optional_arg(pledge_str(), after_itemunit.pledge)
+                    x_atomunit.set_jvalue(pledge_str(), after_itemunit.pledge)
                 self.set_atomunit(x_atomunit)
 
             # insert / update / delete factunits
@@ -558,8 +534,8 @@ class DeltaUnit:
             )
             x_label = get_terminus_node(delete_item_road, before_bud._road_delimiter)
             x_atomunit = atomunit_shop(bud_itemunit_str(), atom_delete())
-            x_atomunit.set_required_arg(parent_road_str(), x_parent_road)
-            x_atomunit.set_required_arg(label_str(), x_label)
+            x_atomunit.set_jkey(parent_road_str(), x_parent_road)
+            x_atomunit.set_jkey(label_str(), x_label)
             self.set_atomunit(x_atomunit)
 
             delete_itemunit = before_bud.get_item_obj(delete_item_road)
@@ -591,10 +567,10 @@ class DeltaUnit:
         for insert_reasonunit_base in insert_reasonunit_bases:
             after_reasonunit = after_itemunit.get_reasonunit(insert_reasonunit_base)
             x_atomunit = atomunit_shop(bud_item_reasonunit_str(), atom_insert())
-            x_atomunit.set_required_arg(road_str(), after_itemunit.get_road())
-            x_atomunit.set_required_arg("base", after_reasonunit.base)
+            x_atomunit.set_jkey(road_str(), after_itemunit.get_road())
+            x_atomunit.set_jkey("base", after_reasonunit.base)
             if after_reasonunit.base_item_active_requisite is not None:
-                x_atomunit.set_optional_arg(
+                x_atomunit.set_jvalue(
                     base_item_active_requisite_str(),
                     after_reasonunit.base_item_active_requisite,
                 )
@@ -615,17 +591,17 @@ class DeltaUnit:
         for update_reasonunit_base in update_reasonunit_bases:
             before_reasonunit = before_itemunit.get_reasonunit(update_reasonunit_base)
             after_reasonunit = after_itemunit.get_reasonunit(update_reasonunit_base)
-            if optional_args_different(
+            if jvalues_different(
                 bud_item_reasonunit_str(), before_reasonunit, after_reasonunit
             ):
                 x_atomunit = atomunit_shop(bud_item_reasonunit_str(), atom_update())
-                x_atomunit.set_required_arg(road_str(), before_itemunit.get_road())
-                x_atomunit.set_required_arg("base", after_reasonunit.base)
+                x_atomunit.set_jkey(road_str(), before_itemunit.get_road())
+                x_atomunit.set_jkey("base", after_reasonunit.base)
                 if (
                     before_reasonunit.base_item_active_requisite
                     != after_reasonunit.base_item_active_requisite
                 ):
-                    x_atomunit.set_optional_arg(
+                    x_atomunit.set_jvalue(
                         base_item_active_requisite_str(),
                         after_reasonunit.base_item_active_requisite,
                     )
@@ -661,8 +637,8 @@ class DeltaUnit:
     ):
         for delete_reasonunit_base in delete_reasonunit_bases:
             x_atomunit = atomunit_shop(bud_item_reasonunit_str(), atom_delete())
-            x_atomunit.set_required_arg(road_str(), before_itemunit.get_road())
-            x_atomunit.set_required_arg("base", delete_reasonunit_base)
+            x_atomunit.set_jkey(road_str(), before_itemunit.get_road())
+            x_atomunit.set_jkey("base", delete_reasonunit_base)
             self.set_atomunit(x_atomunit)
 
             before_reasonunit = before_itemunit.get_reasonunit(delete_reasonunit_base)
@@ -681,15 +657,15 @@ class DeltaUnit:
         for insert_premise_need in insert_premise_needs:
             after_premiseunit = after_reasonunit.get_premise(insert_premise_need)
             x_atomunit = atomunit_shop(bud_item_reason_premiseunit_str(), atom_insert())
-            x_atomunit.set_required_arg(road_str(), item_road)
-            x_atomunit.set_required_arg("base", after_reasonunit.base)
-            x_atomunit.set_required_arg("need", after_premiseunit.need)
+            x_atomunit.set_jkey(road_str(), item_road)
+            x_atomunit.set_jkey("base", after_reasonunit.base)
+            x_atomunit.set_jkey("need", after_premiseunit.need)
             if after_premiseunit.open is not None:
-                x_atomunit.set_optional_arg("open", after_premiseunit.open)
+                x_atomunit.set_jvalue("open", after_premiseunit.open)
             if after_premiseunit.nigh is not None:
-                x_atomunit.set_optional_arg("nigh", after_premiseunit.nigh)
+                x_atomunit.set_jvalue("nigh", after_premiseunit.nigh)
             if after_premiseunit.divisor is not None:
-                x_atomunit.set_optional_arg("divisor", after_premiseunit.divisor)
+                x_atomunit.set_jvalue("divisor", after_premiseunit.divisor)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_reason_premiseunit_updates(
@@ -702,7 +678,7 @@ class DeltaUnit:
         for update_premise_need in update_premise_needs:
             before_premiseunit = before_reasonunit.get_premise(update_premise_need)
             after_premiseunit = after_reasonunit.get_premise(update_premise_need)
-            if optional_args_different(
+            if jvalues_different(
                 bud_item_reason_premiseunit_str(),
                 before_premiseunit,
                 after_premiseunit,
@@ -710,15 +686,15 @@ class DeltaUnit:
                 x_atomunit = atomunit_shop(
                     bud_item_reason_premiseunit_str(), atom_update()
                 )
-                x_atomunit.set_required_arg(road_str(), item_road)
-                x_atomunit.set_required_arg("base", before_reasonunit.base)
-                x_atomunit.set_required_arg("need", after_premiseunit.need)
+                x_atomunit.set_jkey(road_str(), item_road)
+                x_atomunit.set_jkey("base", before_reasonunit.base)
+                x_atomunit.set_jkey("need", after_premiseunit.need)
                 if after_premiseunit.open != before_premiseunit.open:
-                    x_atomunit.set_optional_arg("open", after_premiseunit.open)
+                    x_atomunit.set_jvalue("open", after_premiseunit.open)
                 if after_premiseunit.nigh != before_premiseunit.nigh:
-                    x_atomunit.set_optional_arg("nigh", after_premiseunit.nigh)
+                    x_atomunit.set_jvalue("nigh", after_premiseunit.nigh)
                 if after_premiseunit.divisor != before_premiseunit.divisor:
-                    x_atomunit.set_optional_arg("divisor", after_premiseunit.divisor)
+                    x_atomunit.set_jvalue("divisor", after_premiseunit.divisor)
                 self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_reason_premiseunit_deletes(
@@ -729,9 +705,9 @@ class DeltaUnit:
     ):
         for delete_premise_need in delete_premise_needs:
             x_atomunit = atomunit_shop(bud_item_reason_premiseunit_str(), atom_delete())
-            x_atomunit.set_required_arg(road_str(), item_road)
-            x_atomunit.set_required_arg("base", reasonunit_base)
-            x_atomunit.set_required_arg("need", delete_premise_need)
+            x_atomunit.set_jkey(road_str(), item_road)
+            x_atomunit.set_jkey("base", reasonunit_base)
+            x_atomunit.set_jkey("need", delete_premise_need)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_teamlink_insert(
@@ -739,8 +715,8 @@ class DeltaUnit:
     ):
         for insert_teamlink_team_id in insert_teamlink_team_ids:
             x_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_insert())
-            x_atomunit.set_required_arg(road_str(), item_road)
-            x_atomunit.set_required_arg("team_id", insert_teamlink_team_id)
+            x_atomunit.set_jkey(road_str(), item_road)
+            x_atomunit.set_jkey("team_id", insert_teamlink_team_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_teamlink_deletes(
@@ -748,8 +724,8 @@ class DeltaUnit:
     ):
         for delete_teamlink_team_id in delete_teamlink_team_ids:
             x_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_delete())
-            x_atomunit.set_required_arg(road_str(), item_road)
-            x_atomunit.set_required_arg("team_id", delete_teamlink_team_id)
+            x_atomunit.set_jkey(road_str(), item_road)
+            x_atomunit.set_jkey("team_id", delete_teamlink_team_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_healerlink_insert(
@@ -757,8 +733,8 @@ class DeltaUnit:
     ):
         for insert_healerlink_healer_id in insert_healerlink_healer_ids:
             x_atomunit = atomunit_shop(bud_item_healerlink_str(), atom_insert())
-            x_atomunit.set_required_arg(road_str(), item_road)
-            x_atomunit.set_required_arg(healer_id_str(), insert_healerlink_healer_id)
+            x_atomunit.set_jkey(road_str(), item_road)
+            x_atomunit.set_jkey(healer_id_str(), insert_healerlink_healer_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_healerlink_deletes(
@@ -766,8 +742,8 @@ class DeltaUnit:
     ):
         for delete_healerlink_healer_id in delete_healerlink_healer_ids:
             x_atomunit = atomunit_shop(bud_item_healerlink_str(), atom_delete())
-            x_atomunit.set_required_arg(road_str(), item_road)
-            x_atomunit.set_required_arg(healer_id_str(), delete_healerlink_healer_id)
+            x_atomunit.set_jkey(road_str(), item_road)
+            x_atomunit.set_jkey(healer_id_str(), delete_healerlink_healer_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_awardlink_inserts(
@@ -776,10 +752,10 @@ class DeltaUnit:
         for after_awardlink_awardee_id in insert_awardlink_awardee_ids:
             after_awardlink = after_itemunit.awardlinks.get(after_awardlink_awardee_id)
             x_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_insert())
-            x_atomunit.set_required_arg(road_str(), after_itemunit.get_road())
-            x_atomunit.set_required_arg(awardee_id_str(), after_awardlink.awardee_id)
-            x_atomunit.set_optional_arg("give_force", after_awardlink.give_force)
-            x_atomunit.set_optional_arg("take_force", after_awardlink.take_force)
+            x_atomunit.set_jkey(road_str(), after_itemunit.get_road())
+            x_atomunit.set_jkey(awardee_id_str(), after_awardlink.awardee_id)
+            x_atomunit.set_jvalue("give_force", after_awardlink.give_force)
+            x_atomunit.set_jvalue("take_force", after_awardlink.take_force)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_awardlink_updates(
@@ -793,22 +769,16 @@ class DeltaUnit:
                 update_awardlink_awardee_id
             )
             after_awardlink = after_itemunit.awardlinks.get(update_awardlink_awardee_id)
-            if optional_args_different(
+            if jvalues_different(
                 bud_item_awardlink_str(), before_awardlink, after_awardlink
             ):
                 x_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_update())
-                x_atomunit.set_required_arg(road_str(), before_itemunit.get_road())
-                x_atomunit.set_required_arg(
-                    awardee_id_str(), after_awardlink.awardee_id
-                )
+                x_atomunit.set_jkey(road_str(), before_itemunit.get_road())
+                x_atomunit.set_jkey(awardee_id_str(), after_awardlink.awardee_id)
                 if before_awardlink.give_force != after_awardlink.give_force:
-                    x_atomunit.set_optional_arg(
-                        "give_force", after_awardlink.give_force
-                    )
+                    x_atomunit.set_jvalue("give_force", after_awardlink.give_force)
                 if before_awardlink.take_force != after_awardlink.take_force:
-                    x_atomunit.set_optional_arg(
-                        "take_force", after_awardlink.take_force
-                    )
+                    x_atomunit.set_jvalue("take_force", after_awardlink.take_force)
                 self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_awardlink_deletes(
@@ -816,8 +786,8 @@ class DeltaUnit:
     ):
         for delete_awardlink_awardee_id in delete_awardlink_awardee_ids:
             x_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_delete())
-            x_atomunit.set_required_arg(road_str(), item_road)
-            x_atomunit.set_required_arg(awardee_id_str(), delete_awardlink_awardee_id)
+            x_atomunit.set_jkey(road_str(), item_road)
+            x_atomunit.set_jkey(awardee_id_str(), delete_awardlink_awardee_id)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_factunit_inserts(
@@ -826,14 +796,14 @@ class DeltaUnit:
         for insert_factunit_base in insert_factunit_bases:
             insert_factunit = itemunit.factunits.get(insert_factunit_base)
             x_atomunit = atomunit_shop(bud_item_factunit_str(), atom_insert())
-            x_atomunit.set_required_arg(road_str(), itemunit.get_road())
-            x_atomunit.set_required_arg("base", insert_factunit.base)
+            x_atomunit.set_jkey(road_str(), itemunit.get_road())
+            x_atomunit.set_jkey("base", insert_factunit.base)
             if insert_factunit.pick is not None:
-                x_atomunit.set_optional_arg("pick", insert_factunit.pick)
+                x_atomunit.set_jvalue("pick", insert_factunit.pick)
             if insert_factunit.fopen is not None:
-                x_atomunit.set_optional_arg(fopen_str(), insert_factunit.fopen)
+                x_atomunit.set_jvalue(fopen_str(), insert_factunit.fopen)
             if insert_factunit.fnigh is not None:
-                x_atomunit.set_optional_arg(fnigh_str(), insert_factunit.fnigh)
+                x_atomunit.set_jvalue(fnigh_str(), insert_factunit.fnigh)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_factunit_updates(
@@ -845,18 +815,18 @@ class DeltaUnit:
         for update_factunit_base in update_factunit_bases:
             before_factunit = before_itemunit.factunits.get(update_factunit_base)
             after_factunit = after_itemunit.factunits.get(update_factunit_base)
-            if optional_args_different(
+            if jvalues_different(
                 bud_item_factunit_str(), before_factunit, after_factunit
             ):
                 x_atomunit = atomunit_shop(bud_item_factunit_str(), atom_update())
-                x_atomunit.set_required_arg(road_str(), before_itemunit.get_road())
-                x_atomunit.set_required_arg("base", after_factunit.base)
+                x_atomunit.set_jkey(road_str(), before_itemunit.get_road())
+                x_atomunit.set_jkey("base", after_factunit.base)
                 if before_factunit.pick != after_factunit.pick:
-                    x_atomunit.set_optional_arg("pick", after_factunit.pick)
+                    x_atomunit.set_jvalue("pick", after_factunit.pick)
                 if before_factunit.fopen != after_factunit.fopen:
-                    x_atomunit.set_optional_arg(fopen_str(), after_factunit.fopen)
+                    x_atomunit.set_jvalue(fopen_str(), after_factunit.fopen)
                 if before_factunit.fnigh != after_factunit.fnigh:
-                    x_atomunit.set_optional_arg(fnigh_str(), after_factunit.fnigh)
+                    x_atomunit.set_jvalue(fnigh_str(), after_factunit.fnigh)
                 self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_factunit_deletes(
@@ -864,8 +834,8 @@ class DeltaUnit:
     ):
         for delete_factunit_base in delete_factunit_bases:
             x_atomunit = atomunit_shop(bud_item_factunit_str(), atom_delete())
-            x_atomunit.set_required_arg(road_str(), item_road)
-            x_atomunit.set_required_arg("base", delete_factunit_base)
+            x_atomunit.set_jkey(road_str(), item_road)
+            x_atomunit.set_jkey("base", delete_factunit_base)
             self.set_atomunit(x_atomunit)
 
     def get_ordered_atomunits(self, x_count: int = None) -> dict[int, AtomUnit]:

@@ -216,15 +216,15 @@ def create_legible_list(x_delta: DeltaUnit, x_bud: BudUnit) -> list[str]:
 
 
 def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: BudUnit):
-    optional_args = x_atom.optional_args
+    jvalues = x_atom.jvalues
     _tally_str = "tally"
     _max_tree_traverse_str = "max_tree_traverse"
     purview_time_id_str = "purview_time_id"
-    _max_tree_traverse_value = optional_args.get(_max_tree_traverse_str)
-    credor_respect_value = optional_args.get(credor_respect_str())
-    debtor_respect_value = optional_args.get(debtor_respect_str())
-    _tally_value = optional_args.get(_tally_str)
-    purview_time_id_value = optional_args.get(purview_time_id_str)
+    _max_tree_traverse_value = jvalues.get(_max_tree_traverse_str)
+    credor_respect_value = jvalues.get(credor_respect_str())
+    debtor_respect_value = jvalues.get(debtor_respect_str())
+    _tally_value = jvalues.get(_tally_str)
+    purview_time_id_value = jvalues.get(purview_time_id_str)
 
     if _max_tree_traverse_value is not None:
         x_str = f"{x_bud._owner_id}'s maximum number of Bud evaluations set to {_max_tree_traverse_value}"

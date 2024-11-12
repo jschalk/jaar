@@ -75,12 +75,12 @@ def nesting_order_str() -> str:
     return "nesting_order"
 
 
-def required_args_str() -> str:
-    return "required_args"
+def jkeys_str() -> str:
+    return "jkeys"
 
 
-def optional_args_str() -> str:
-    return "optional_args"
+def jvalues_str() -> str:
+    return "jvalues"
 
 
 def column_order_str() -> str:
@@ -255,19 +255,19 @@ def get_atom_config_dict() -> dict:
     return get_dict_from_json(open_file(config_file_dir(), get_atom_config_file_name()))
 
 
-def get_atom_config_required_args(x_cat: str) -> dict:
-    required_args_key_list = [x_cat, required_args_str()]
-    return get_from_nested_dict(get_atom_config_dict(), required_args_key_list)
+def get_atom_config_jkeys(x_cat: str) -> dict:
+    jkeys_key_list = [x_cat, jkeys_str()]
+    return get_from_nested_dict(get_atom_config_dict(), jkeys_key_list)
 
 
-def get_atom_config_optional_args(x_cat: str) -> dict:
-    optional_args_key_list = [x_cat, optional_args_str()]
-    return get_from_nested_dict(get_atom_config_dict(), optional_args_key_list)
+def get_atom_config_jvalues(x_cat: str) -> dict:
+    jvalues_key_list = [x_cat, jvalues_str()]
+    return get_from_nested_dict(get_atom_config_dict(), jvalues_key_list)
 
 
 def get_atom_config_args(x_category: str) -> dict[str, dict]:
-    args_dict = get_atom_config_required_args(x_category)
-    args_dict.update(get_atom_config_optional_args(x_category))
+    args_dict = get_atom_config_jkeys(x_category)
+    args_dict.update(get_atom_config_jvalues(x_category))
     return args_dict
 
 
@@ -346,15 +346,15 @@ def get_atom_args_jaar_types() -> dict[str, str]:
     }
 
 
-def get_sorted_required_arg_keys(atom_category: str) -> list[str]:
+def get_sorted_jkey_keys(atom_category: str) -> list[str]:
     atom_config = get_atom_config_dict()
     atom_category_config = atom_config.get(atom_category)
-    atom_required_args_config = atom_category_config.get(required_args_str())
-    if len(atom_required_args_config) == 1:
-        return list(atom_required_args_config.keys())
+    atom_jkeys_config = atom_category_config.get(jkeys_str())
+    if len(atom_jkeys_config) == 1:
+        return list(atom_jkeys_config.keys())
     nesting_order_dict = {
         required_key: required_dict.get(nesting_order_str())
-        for required_key, required_dict in atom_required_args_config.items()
+        for required_key, required_dict in atom_jkeys_config.items()
     }
     sorted_tuples = sorted(nesting_order_dict.items(), key=lambda x: x[1])
     return [x_tuple[0] for x_tuple in sorted_tuples]
@@ -372,51 +372,51 @@ def get_flattened_atom_table_build() -> dict[str, any]:
         catergory_update = category_dict.get(atom_update())
         catergory_delete = category_dict.get(atom_delete())
         if catergory_insert is not None:
-            required_args = category_dict.get(required_args_str())
-            optional_args = category_dict.get(optional_args_str())
-            for required_arg, x_value in required_args.items():
+            jkeys = category_dict.get(jkeys_str())
+            jvalues = category_dict.get(jvalues_str())
+            for jkey, x_value in jkeys.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
                     atom_category,
                     atom_insert(),
-                    required_arg,
+                    jkey,
                     x_value,
                 )
-            for optional_arg, x_value in optional_args.items():
+            for jvalue, x_value in jvalues.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
                     atom_category,
                     atom_insert(),
-                    optional_arg,
+                    jvalue,
                     x_value,
                 )
         if catergory_update is not None:
-            required_args = category_dict.get(required_args_str())
-            optional_args = category_dict.get(optional_args_str())
-            for required_arg, x_value in required_args.items():
+            jkeys = category_dict.get(jkeys_str())
+            jvalues = category_dict.get(jvalues_str())
+            for jkey, x_value in jkeys.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
                     atom_category,
                     atom_update(),
-                    required_arg,
+                    jkey,
                     x_value,
                 )
-            for optional_arg, x_value in optional_args.items():
+            for jvalue, x_value in jvalues.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
                     atom_category,
                     atom_update(),
-                    optional_arg,
+                    jvalue,
                     x_value,
                 )
         if catergory_delete is not None:
-            required_args = category_dict.get(required_args_str())
-            for required_arg, x_value in required_args.items():
+            jkeys = category_dict.get(jkeys_str())
+            for jkey, x_value in jkeys.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
                     atom_category,
                     atom_delete(),
-                    required_arg,
+                    jkey,
                     x_value,
                 )
     return atom_table_columns
@@ -436,18 +436,18 @@ def get_normalized_bud_table_build() -> dict[str : dict[str, any]]:
             nullable_str(): False,
             "primary_key": True,
         }
-        required_args = category_dict.get(required_args_str())
-        optional_args = category_dict.get(optional_args_str())
-        if required_args is not None:
-            for required_arg, x_value in required_args.items():
-                normal_columns_dict[required_arg] = {
+        jkeys = category_dict.get(jkeys_str())
+        jvalues = category_dict.get(jvalues_str())
+        if jkeys is not None:
+            for jkey, x_value in jkeys.items():
+                normal_columns_dict[jkey] = {
                     sqlite_datatype_str(): x_value.get(sqlite_datatype_str()),
                     nullable_str(): False,
                 }
 
-        if optional_args is not None:
-            for optional_arg, x_value in optional_args.items():
-                normal_columns_dict[optional_arg] = {
+        if jvalues is not None:
+            for jvalue, x_value in jvalues.items():
+                normal_columns_dict[jvalue] = {
                     sqlite_datatype_str(): x_value.get(sqlite_datatype_str()),
                     nullable_str(): True,
                 }

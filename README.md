@@ -125,14 +125,14 @@ screenshots and elucidatory text.)
 PUT conflicts in 
 
 x_dict = {
-    "bud_acct_membership":          {"required_args": {"acct_id","group_id"},       "optional_args": {"credit_vote","debtit_vote"},
-    "bud_acctunit":                 {"required_args": {"acct_id",},                 "optional_args": {"credit_belief","debtit_belief"},
+    "bud_acct_membership":          {"jkeys": {"acct_id","group_id"},       "jvalues": {"credit_vote","debtit_vote"},
+    "bud_acctunit":                 {"jkeys": {"acct_id",},                 "jvalues": {"credit_belief","debtit_belief"},
 each brick will either have bud_acctunit as a category or not. that will decide if the atom is created. 
-    "bud_item_awardlink":           {"required_args": {"road","group_id",},         "optional_args": {"give_force","take_force"},
-    "bud_item_teamlink":            {"required_args": {"road","group_id",},         "optional_args",
+    "bud_item_awardlink":           {"jkeys": {"road","group_id",},         "jvalues": {"give_force","take_force"},
+    "bud_item_teamlink":            {"jkeys": {"road","group_id",},         "jvalues",
 each brick will either have bud_item_teamlink as a category or not. that will decide if the atom is created. 
-    "bud_item_factunit":            {"required_args": {"road","base",},             "optional_args": {"fnigh","fopen","pick",},},
+    "bud_item_factunit":            {"jkeys": {"road","base",},             "jvalues": {"fnigh","fopen","pick",},},
 each brick will either have bud_item_factunit as a category or not. Would be nice if pick was required...not required for delete
-    "bud_item_reason_premiseunit":  {"required_args": {"road","base","need",},      "optional_args": {"divisor","nigh","open",},},
-    "bud_item_reasonunit":          {"required_args": {"road","base",},             "optional_args": {"base_item_active_requisite",},},
+    "bud_item_reason_premiseunit":  {"jkeys": {"road","base","need",},      "jvalues": {"divisor","nigh","open",},},
+    "bud_item_reasonunit":          {"jkeys": {"road","base",},             "jvalues": {"base_item_active_requisite",},},
 }

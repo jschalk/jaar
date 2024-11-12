@@ -25,8 +25,8 @@ def get_atom_example_itemunit_sports(fiscal_id: FiscalID = None) -> AtomUnit:
     sports_str = "sports"
     x_category = bud_itemunit_str()
     insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_itemunit_atomunit.set_required_arg(label_str(), sports_str)
-    insert_itemunit_atomunit.set_required_arg(parent_road_str(), fiscal_id)
+    insert_itemunit_atomunit.set_jkey(label_str(), sports_str)
+    insert_itemunit_atomunit.set_jkey(parent_road_str(), fiscal_id)
     return insert_itemunit_atomunit
 
 
@@ -37,8 +37,8 @@ def get_atom_example_itemunit_ball(fiscal_id: FiscalID = None) -> AtomUnit:
     ball_str = "basketball"
     x_category = bud_itemunit_str()
     insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_itemunit_atomunit.set_required_arg(label_str(), ball_str)
-    insert_itemunit_atomunit.set_required_arg(parent_road_str(), sports_road)
+    insert_itemunit_atomunit.set_jkey(label_str(), ball_str)
+    insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
     return insert_itemunit_atomunit
 
 
@@ -53,10 +53,10 @@ def get_atom_example_itemunit_knee(fiscal_id: FiscalID = None) -> AtomUnit:
     begin_str = "begin"
     close_str = "close"
     insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_itemunit_atomunit.set_required_arg(label_str(), knee_str)
-    insert_itemunit_atomunit.set_required_arg(parent_road_str(), sports_road)
-    insert_itemunit_atomunit.set_optional_arg(begin_str, knee_begin)
-    insert_itemunit_atomunit.set_optional_arg(close_str, knee_close)
+    insert_itemunit_atomunit.set_jkey(label_str(), knee_str)
+    insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
+    insert_itemunit_atomunit.set_jvalue(begin_str, knee_begin)
+    insert_itemunit_atomunit.set_jvalue(close_str, knee_close)
     return insert_itemunit_atomunit
 
 
@@ -74,10 +74,10 @@ def get_atom_example_factunit_knee(fiscal_id: FiscalID = None) -> AtomUnit:
     road_str = "road"
     base_str = "base"
     insert_factunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_factunit_atomunit.set_required_arg(road_str, ball_road)
-    insert_factunit_atomunit.set_required_arg(base_str, knee_road)
-    insert_factunit_atomunit.set_optional_arg(fopen_str(), knee_fopen)
-    insert_factunit_atomunit.set_optional_arg(fnigh_str(), knee_fnigh)
+    insert_factunit_atomunit.set_jkey(road_str, ball_road)
+    insert_factunit_atomunit.set_jkey(base_str, knee_road)
+    insert_factunit_atomunit.set_jvalue(fopen_str(), knee_fopen)
+    insert_factunit_atomunit.set_jvalue(fnigh_str(), knee_fnigh)
     return insert_factunit_atomunit
 
 
@@ -86,12 +86,12 @@ def get_deltaunit_sue_example() -> DeltaUnit:
 
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
     pool_attribute = "credor_respect"
-    pool_atomunit.set_optional_arg(pool_attribute, 77)
+    pool_atomunit.set_jvalue(pool_attribute, 77)
     sue_deltaunit.set_atomunit(pool_atomunit)
 
     category = bud_acctunit_str()
     sue_str = "Sue"
     sue_atomunit = atomunit_shop(category, atom_delete())
-    sue_atomunit.set_required_arg(acct_id_str(), sue_str)
+    sue_atomunit.set_jkey(acct_id_str(), sue_str)
     sue_deltaunit.set_atomunit(sue_atomunit)
     return sue_deltaunit

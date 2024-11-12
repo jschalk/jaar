@@ -186,9 +186,9 @@ def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
     road_str = "road"
     base_str = "base"
     update_disc_atomunit = atomunit_shop(x_category, atom_insert())
-    update_disc_atomunit.set_required_arg(road_str, ball_road)
-    update_disc_atomunit.set_required_arg(base_str, knee_road)
-    update_disc_atomunit.set_optional_arg(fopen_str(), knee_fopen)
+    update_disc_atomunit.set_jkey(road_str, ball_road)
+    update_disc_atomunit.set_jkey(base_str, knee_road)
+    update_disc_atomunit.set_jvalue(fopen_str(), knee_fopen)
 
     # THEN
     example_sqlstr = f"""

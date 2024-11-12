@@ -12,7 +12,7 @@
         "normal_specs": {
             "normal_table_name": "membership"
         },
-        "optional_args": {
+        "jvalues": {
             "credit_vote": {
                 "column_order": 3,
                 "jaar_type": "int",
@@ -24,7 +24,7 @@
                 "sqlite_datatype": "INTEGER"
             }
         },
-        "required_args": {
+        "jkeys": {
             "acct_id": {
                 "column_order": 0,
                 "jaar_type": "AcctID",
@@ -52,7 +52,7 @@
         "normal_specs": {
             "normal_table_name": "acctunit"
         },
-        "optional_args": {
+        "jvalues": {
             "credit_belief": {
                 "column_order": 2,
                 "jaar_type": "int",
@@ -64,7 +64,7 @@
                 "sqlite_datatype": "INTEGER"
             }
         },
-        "required_args": {
+        "jkeys": {
             "acct_id": {
                 "column_order": 0,
                 "jaar_type": "AcctID",
@@ -85,7 +85,7 @@
         "normal_specs": {
             "normal_table_name": "awardlink"
         },
-        "optional_args": {
+        "jvalues": {
             "give_force": {
                 "column_order": 3,
                 "jaar_type": "float",
@@ -97,7 +97,7 @@
                 "sqlite_datatype": "REAL"
             }
         },
-        "required_args": {
+        "jkeys": {
             "awardee_id": {
                 "column_order": 1,
                 "jaar_type": "GroupID",
@@ -125,7 +125,7 @@
         "normal_specs": {
             "normal_table_name": "fact"
         },
-        "optional_args": {
+        "jvalues": {
             "fnigh": {
                 "column_order": 4,
                 "jaar_type": "float",
@@ -142,7 +142,7 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "required_args": {
+        "jkeys": {
             "base": {
                 "column_order": 1,
                 "jaar_type": "RoadUnit",
@@ -167,8 +167,8 @@
         "normal_specs": {
             "normal_table_name": "healerlink"
         },
-        "optional_args": {},
-        "required_args": {
+        "jvalues": {},
+        "jkeys": {
             "healer_id": {
                 "column_order": 1,
                 "jaar_type": "GroupID",
@@ -196,7 +196,7 @@
         "normal_specs": {
             "normal_table_name": "premise"
         },
-        "optional_args": {
+        "jvalues": {
             "divisor": {
                 "column_order": 5,
                 "jaar_type": "int",
@@ -213,7 +213,7 @@
                 "sqlite_datatype": "REAL"
             }
         },
-        "required_args": {
+        "jkeys": {
             "base": {
                 "column_order": 1,
                 "jaar_type": "RoadUnit",
@@ -247,14 +247,14 @@
         "normal_specs": {
             "normal_table_name": "reason"
         },
-        "optional_args": {
+        "jvalues": {
             "base_item_active_requisite": {
                 "column_order": 2,
                 "jaar_type": "bool",
                 "sqlite_datatype": "INTEGER"
             }
         },
-        "required_args": {
+        "jkeys": {
             "base": {
                 "column_order": 1,
                 "jaar_type": "RoadUnit",
@@ -279,8 +279,8 @@
         "normal_specs": {
             "normal_table_name": "teamlink"
         },
-        "optional_args": {},
-        "required_args": {
+        "jvalues": {},
+        "jkeys": {
             "road": {
                 "column_order": 0,
                 "jaar_type": "RoadUnit",
@@ -308,7 +308,7 @@
         "normal_specs": {
             "normal_table_name": "item"
         },
-        "optional_args": {
+        "jvalues": {
             "addin": {
                 "column_order": 10,
                 "jaar_type": "float",
@@ -365,7 +365,7 @@
                 "sqlite_datatype": "REAL"
             }
         },
-        "required_args": {
+        "jkeys": {
             "label": {
                 "column_order": 1,
                 "jaar_type": "RoadNode",
@@ -387,7 +387,7 @@
         "normal_specs": {
             "normal_table_name": "bud"
         },
-        "optional_args": {
+        "jvalues": {
             "credor_respect": {
                 "column_order": 3,
                 "jaar_type": "int",
@@ -434,6 +434,6 @@
                 "sqlite_datatype": "INTEGER"
             }
         },
-        "required_args": {}
+        "jkeys": {}
     }
 }

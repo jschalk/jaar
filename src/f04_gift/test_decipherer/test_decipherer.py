@@ -96,8 +96,8 @@ def test_Decipherer_decipher_acct_id_ReturnsObjWithNoDeltas():
     x_category = bud_acctunit_str()
     credit_belief_str = "credit_belief"
     acctunit_atom = atomunit_shop(x_category, atom_insert())
-    acctunit_atom.set_required_arg(acct_id_str(), yao_str)
-    acctunit_atom.set_optional_arg(credit_belief_str, 51)
+    acctunit_atom.set_jkey(acct_id_str(), yao_str)
+    acctunit_atom.set_jvalue(credit_belief_str, 51)
 
     old_atomunit = copy_deepcopy(acctunit_atom)
     music_decipherer = decipherer_shop()
@@ -119,8 +119,8 @@ def test_Decipherer_decipher_acct_id_ReturnsObjWithDelta_acct_id():
     x_category = bud_acctunit_str()
     credit_belief_str = "credit_belief"
     acctunit_atom = atomunit_shop(x_category, atom_insert())
-    acctunit_atom.set_required_arg(acct_id_str(), susan_str)
-    acctunit_atom.set_optional_arg(credit_belief_str, 51)
+    acctunit_atom.set_jkey(acct_id_str(), susan_str)
+    acctunit_atom.set_jvalue(credit_belief_str, 51)
 
     sue_str = "Sue"
     music_decipherer = decipherer_shop()

@@ -89,9 +89,9 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
     # THEN
     assert new_zia_atomunit
     assert new_zia_atomunit.crud_str == atom_update()
-    assert new_zia_atomunit.get_optional_args_dict() != {}
-    zia_optional_args = new_zia_atomunit.get_optional_args_dict()
-    assert zia_optional_args == {
+    assert new_zia_atomunit.get_jvalues_dict() != {}
+    zia_jvalues = new_zia_atomunit.get_jvalues_dict()
+    assert zia_jvalues == {
         "respect_bit": sue_bit,
         "credor_respect": sue_credor_respect,
         "debtor_respect": sue_debtor_respect,
@@ -121,9 +121,9 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acctunit():
     # THEN
     assert new_zia_atomunit
     assert new_zia_atomunit.crud_str == atom_update()
-    assert new_zia_atomunit.get_optional_args_dict() != {}
-    zia_optional_args = new_zia_atomunit.get_optional_args_dict()
-    assert zia_optional_args == {debtit_belief_str(): 51}
+    assert new_zia_atomunit.get_jvalues_dict() != {}
+    zia_jvalues = new_zia_atomunit.get_jvalues_dict()
+    assert zia_jvalues == {debtit_belief_str(): 51}
 
 
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acct_membership():
@@ -146,9 +146,9 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acct_membership():
     # THEN
     assert new_zia_atomunit
     assert new_zia_atomunit.crud_str == atom_update()
-    assert new_zia_atomunit.get_optional_args_dict() != {}
-    zia_optional_args = new_zia_atomunit.get_optional_args_dict()
-    assert zia_optional_args == {debtit_vote_str(): zia_run_debtit_vote}
+    assert new_zia_atomunit.get_jvalues_dict() != {}
+    zia_jvalues = new_zia_atomunit.get_jvalues_dict()
+    assert zia_jvalues == {debtit_vote_str(): zia_run_debtit_vote}
 
 
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_itemunit():
@@ -189,19 +189,19 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_itemunit():
     # THEN
     assert new_casa_atom
     assert new_casa_atom.crud_str == atom_update()
-    assert new_casa_atom.get_optional_args_dict()
-    zia_optional_args = new_casa_atom.get_optional_args_dict()
-    assert zia_optional_args.get(addin_str()) == sue_addin
-    assert zia_optional_args.get(begin_str()) == sue_begin
-    assert zia_optional_args.get(close_str()) == sue_close
-    assert zia_optional_args.get(denom_str()) == sue_denom
-    assert zia_optional_args.get(gogo_want_str()) == sue_gogo_want
-    assert zia_optional_args.get(mass_str()) == sue_mass
-    assert zia_optional_args.get(morph_str()) == sue_morph
-    assert zia_optional_args.get(numor_str()) == sue_numor
-    assert zia_optional_args.get(pledge_str()) == sue_pledge
-    assert zia_optional_args.get("problem_bool") == sue_problem_bool
-    assert zia_optional_args.get(stop_want_str()) == sue_stop_want
+    assert new_casa_atom.get_jvalues_dict()
+    zia_jvalues = new_casa_atom.get_jvalues_dict()
+    assert zia_jvalues.get(addin_str()) == sue_addin
+    assert zia_jvalues.get(begin_str()) == sue_begin
+    assert zia_jvalues.get(close_str()) == sue_close
+    assert zia_jvalues.get(denom_str()) == sue_denom
+    assert zia_jvalues.get(gogo_want_str()) == sue_gogo_want
+    assert zia_jvalues.get(mass_str()) == sue_mass
+    assert zia_jvalues.get(morph_str()) == sue_morph
+    assert zia_jvalues.get(numor_str()) == sue_numor
+    assert zia_jvalues.get(pledge_str()) == sue_pledge
+    assert zia_jvalues.get("problem_bool") == sue_problem_bool
+    assert zia_jvalues.get(stop_want_str()) == sue_stop_want
 
 
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_awardlink():
@@ -227,10 +227,10 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_awardlink():
     # THEN
     assert new_zia_atomunit
     assert new_zia_atomunit.crud_str == atom_update()
-    assert new_zia_atomunit.get_optional_args_dict() != {}
-    zia_optional_args = new_zia_atomunit.get_optional_args_dict()
-    assert zia_optional_args.get(give_force_str()) == zia_run_give_force
-    assert zia_optional_args.get(take_force_str()) == zia_run_take_force
+    assert new_zia_atomunit.get_jvalues_dict() != {}
+    zia_jvalues = new_zia_atomunit.get_jvalues_dict()
+    assert zia_jvalues.get(give_force_str()) == zia_run_give_force
+    assert zia_jvalues.get(take_force_str()) == zia_run_take_force
 
 
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_reasonunit():
@@ -248,8 +248,8 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_reasonunit():
     casa_atom.set_arg(road_str(), casa_road)
     casa_atom.set_arg(base_str(), week_road)
     casa_atom.set_arg(base_item_active_requisite_str(), new_base_item_active_requisite)
-    casa_required_args = casa_atom.get_required_args_dict()
-    casa_reasonunit = bud_item_reasonunit_get_obj(sue_bud, casa_required_args)
+    casa_jkeys = casa_atom.get_jkeys_dict()
+    casa_reasonunit = bud_item_reasonunit_get_obj(sue_bud, casa_jkeys)
     assert casa_reasonunit.base_item_active_requisite != new_base_item_active_requisite
     assert casa_reasonunit.base_item_active_requisite is None
 
@@ -259,9 +259,9 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_reasonunit():
     # THEN
     assert new_zia_atomunit
     assert new_zia_atomunit.crud_str == atom_update()
-    assert new_zia_atomunit.get_optional_args_dict() != {}
-    zia_optional_args = new_zia_atomunit.get_optional_args_dict()
-    zia_requisite_value = zia_optional_args.get(base_item_active_requisite_str())
+    assert new_zia_atomunit.get_jvalues_dict() != {}
+    zia_jvalues = new_zia_atomunit.get_jvalues_dict()
+    zia_requisite_value = zia_jvalues.get(base_item_active_requisite_str())
     assert zia_requisite_value == new_base_item_active_requisite
 
 
@@ -289,8 +289,8 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_reason_premiseunit():
     thur_atom.set_arg("need", thur_road)
     assert thur_atom.is_valid()
     thur_atom.set_arg("divisor", thur_divisor)
-    thur_required_args = thur_atom.get_required_args_dict()
-    thur_premiseunit = premiseunit_get_obj(sue_bud, thur_required_args)
+    thur_jkeys = thur_atom.get_jkeys_dict()
+    thur_premiseunit = premiseunit_get_obj(sue_bud, thur_jkeys)
     assert thur_premiseunit.divisor != thur_divisor
     assert thur_premiseunit.divisor is None
 
@@ -300,9 +300,9 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_reason_premiseunit():
     # THEN
     assert new_zia_atomunit
     assert new_zia_atomunit.crud_str == atom_update()
-    assert new_zia_atomunit.get_optional_args_dict() != {}
-    zia_optional_args = new_zia_atomunit.get_optional_args_dict()
-    assert zia_optional_args.get("divisor") == thur_divisor
+    assert new_zia_atomunit.get_jvalues_dict() != {}
+    zia_jvalues = new_zia_atomunit.get_jvalues_dict()
+    assert zia_jvalues.get("divisor") == thur_divisor
 
 
 def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_factunit():
@@ -320,8 +320,8 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_factunit():
     casa_atom.set_arg(road_str(), casa_road)
     casa_atom.set_arg(base_str(), week_road)
     casa_atom.set_arg(fopen_str(), casa_fopen)
-    casa_required_args = casa_atom.get_required_args_dict()
-    casa_factunit = bud_item_factunit_get_obj(sue_bud, casa_required_args)
+    casa_jkeys = casa_atom.get_jkeys_dict()
+    casa_factunit = bud_item_factunit_get_obj(sue_bud, casa_jkeys)
     assert casa_factunit.fopen != casa_fopen
     assert casa_factunit.fopen is None
 
@@ -331,6 +331,6 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_item_factunit():
     # THEN
     assert new_zia_atomunit
     assert new_zia_atomunit.crud_str == atom_update()
-    assert new_zia_atomunit.get_optional_args_dict() != {}
-    zia_optional_args = new_zia_atomunit.get_optional_args_dict()
-    assert zia_optional_args.get(fopen_str()) == casa_fopen
+    assert new_zia_atomunit.get_jvalues_dict() != {}
+    zia_jvalues = new_zia_atomunit.get_jvalues_dict()
+    assert zia_jvalues.get(fopen_str()) == casa_fopen
