@@ -175,9 +175,7 @@ class AtomUnit:
 
     def get_value(self, arg_key: str) -> any:
         required_value = self.jkeys.get(arg_key)
-        if required_value is None:
-            return self.jvalues.get(arg_key)
-        return required_value
+        return self.jvalues.get(arg_key) if required_value is None else required_value
 
     def get_jkeys_dict(self) -> dict[str, str]:
         return dict(self.jkeys.items())
