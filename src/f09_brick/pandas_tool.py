@@ -6,7 +6,7 @@ from src.f00_instrument.file import (
     open_file,
 )
 from src.f00_instrument.db_toolbox import get_grouping_with_all_values_equal_sql_query
-from src.f04_gift.atom_config import get_atom_args_obj_classs
+from src.f04_gift.atom_config import get_atom_args_jaar_types
 from src.f08_pidgin.pidgin import (
     BridgeUnit,
     PidginUnit,
@@ -132,8 +132,8 @@ def pidgin_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
     column_names = set(x_df.columns)
     pidginable_columns = column_names.intersection(pidginable_atom_args())
     for pidginable_column in pidginable_columns:
-        obj_class = get_atom_args_obj_classs().get(pidginable_column)
-        x_bridgeunit = x_pidginunit.get_bridgeunit(obj_class)
+        jaar_type = get_atom_args_jaar_types().get(pidginable_column)
+        x_bridgeunit = x_pidginunit.get_bridgeunit(jaar_type)
         pidgin_single_column_dataframe(x_df, x_bridgeunit, pidginable_column)
 
 

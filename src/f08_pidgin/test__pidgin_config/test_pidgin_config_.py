@@ -5,7 +5,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     normal_specs_str,
-    obj_class_str,
+    jaar_type_str,
 )
 from src.f08_pidgin.pidgin_config import (
     config_file_dir,
@@ -87,7 +87,7 @@ def _validate_pidgin_config(pidgin_config: dict):
     x_possible_args = {
         inx_road_delimiter_str(),
         otx_road_delimiter_str(),
-        obj_class_str(),
+        jaar_type_str(),
         inx_word_str(),
         otx_word_str(),
         inx_label_str(),

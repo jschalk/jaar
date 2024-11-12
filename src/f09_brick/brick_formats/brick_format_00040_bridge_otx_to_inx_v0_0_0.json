@@ -12,7 +12,7 @@
         "inx_word": {
             "otx_key": false
         },
-        "obj_class": {
+        "jaar_type": {
             "otx_key": true
         },
         "otx_road_delimiter": {

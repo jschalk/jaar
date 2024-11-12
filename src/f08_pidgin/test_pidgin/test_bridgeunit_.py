@@ -1,7 +1,7 @@
 from src.f01_road.road import default_road_delimiter_if_none, create_road
 from src.f04_gift.atom_config import (
     acct_id_str,
-    get_atom_args_obj_classs,
+    get_atom_args_jaar_types,
     credit_vote_str,
     type_AcctID_str,
     type_GroupID_str,
@@ -27,7 +27,7 @@ def test_BridgeUnit_Exists():
     x_bridgeunit = BridgeUnit()
 
     # WHEN / THEN
-    assert not x_bridgeunit.obj_class
+    assert not x_bridgeunit.jaar_type
     assert not x_bridgeunit.otx_to_inx
     assert not x_bridgeunit.unknown_word
     assert not x_bridgeunit.otx_road_delimiter
@@ -48,7 +48,7 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
 
     # WHEN
     acct_id_bridgeunit = bridgeunit_shop(
-        x_obj_class=type_AcctID_str(),
+        x_jaar_type=type_AcctID_str(),
         x_otx_to_inx=otx_to_inx,
         x_unknown_word=x_unknown_word,
         x_otx_road_delimiter=slash_otx_road_delimiter,
@@ -57,7 +57,7 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
     )
 
     # THEN
-    assert acct_id_bridgeunit.obj_class == type_AcctID_str()
+    assert acct_id_bridgeunit.jaar_type == type_AcctID_str()
     assert acct_id_bridgeunit.otx_to_inx == otx_to_inx
     assert acct_id_bridgeunit.unknown_word == x_unknown_word
     assert acct_id_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
@@ -68,15 +68,15 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
 
 def test_bridgeunit_shop_ReturnsObj_scenario1():
     # ESTABLISH / WHEN
-    cv_obj_class = get_atom_args_obj_classs().get(credit_vote_str())
-    credit_vote_bridgeunit = bridgeunit_shop(cv_obj_class)
+    cv_jaar_type = get_atom_args_jaar_types().get(credit_vote_str())
+    credit_vote_bridgeunit = bridgeunit_shop(cv_jaar_type)
 
     # THEN
     assert credit_vote_bridgeunit.otx_to_inx == {}
     assert credit_vote_bridgeunit.unknown_word == default_unknown_word()
     assert credit_vote_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
     assert credit_vote_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
-    assert credit_vote_bridgeunit.obj_class == cv_obj_class
+    assert credit_vote_bridgeunit.jaar_type == cv_jaar_type
     assert credit_vote_bridgeunit.face_id is None
 
 
@@ -85,7 +85,7 @@ def test_bridgeunit_shop_ReturnsObj_Scenario2():
     credit_vote_bridgeunit = bridgeunit_shop(type_AcctID_str())
 
     # THEN
-    assert credit_vote_bridgeunit.obj_class == type_AcctID_str()
+    assert credit_vote_bridgeunit.jaar_type == type_AcctID_str()
     assert credit_vote_bridgeunit.otx_to_inx == {}
     assert credit_vote_bridgeunit.unknown_word == default_unknown_word()
     assert credit_vote_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()

@@ -16,7 +16,7 @@ def test_BridgeUnit_get_dict_ReturnsObj():
     slash_otx_road_delimiter = "/"
     colon_inx_road_delimiter = ":"
     roadnode_bridgeunit = bridgeunit_shop(
-        x_obj_class="RoadNode",
+        x_jaar_type="RoadNode",
         x_otx_road_delimiter=slash_otx_road_delimiter,
         x_inx_road_delimiter=colon_inx_road_delimiter,
         x_face_id=sue_str,
@@ -28,7 +28,7 @@ def test_BridgeUnit_get_dict_ReturnsObj():
         "explicit_label": roadnode_bridgeunit.explicit_label,
         "otx_to_inx": {},
         face_id_str(): roadnode_bridgeunit.face_id,
-        "obj_class": roadnode_bridgeunit.obj_class,
+        "jaar_type": roadnode_bridgeunit.jaar_type,
     }
     assert roadnode_bridgeunit.get_dict() == x1_road_bridge_dict
 
@@ -43,7 +43,7 @@ def test_BridgeUnit_get_dict_ReturnsObj():
         "explicit_label": {casa_otx: casa_inx},
         "otx_to_inx": {clean_otx: clean_inx},
         face_id_str(): sue_str,
-        "obj_class": "RoadNode",
+        "jaar_type": "RoadNode",
     }
     assert roadnode_bridgeunit.get_dict() == x2_road_bridge_dict
 
@@ -63,7 +63,7 @@ def test_BridgeUnit_get_json_ReturnsObj():
   "explicit_label": {roadnode_bridgeunit.explicit_label},
   "{face_id_str()}": "{sue_str}",
   "inx_road_delimiter": "{roadnode_bridgeunit.inx_road_delimiter}",
-  "obj_class": "{"RoadNode"}",
+  "jaar_type": "{"RoadNode"}",
   "otx_road_delimiter": "{roadnode_bridgeunit.otx_road_delimiter}",
   "otx_to_inx": {{}},
   "unknown_word": "{roadnode_bridgeunit.unknown_word}"
@@ -82,7 +82,7 @@ def test_BridgeUnit_get_json_ReturnsObj():
   }},
   "{face_id_str()}": "{sue_str}",
   "inx_road_delimiter": "{roadnode_bridgeunit.inx_road_delimiter}",
-  "obj_class": "{"RoadNode"}",
+  "jaar_type": "{"RoadNode"}",
   "otx_road_delimiter": "{roadnode_bridgeunit.otx_road_delimiter}",
   "otx_to_inx": {{
     "{clean_otx}": "{clean_inx}"
@@ -113,7 +113,7 @@ def test_get_bridgeunit_from_dict_ReturnsObj():
 
     # THEN
     assert gen_bridgeunit.face_id == roadnode_bridgeunit.face_id
-    assert gen_bridgeunit.obj_class == roadnode_bridgeunit.obj_class
+    assert gen_bridgeunit.jaar_type == roadnode_bridgeunit.jaar_type
     assert gen_bridgeunit == roadnode_bridgeunit
 
 

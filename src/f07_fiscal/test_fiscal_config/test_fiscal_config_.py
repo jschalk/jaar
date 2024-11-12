@@ -16,7 +16,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     normal_specs_str,
-    obj_class_str,
+    jaar_type_str,
     type_AcctID_str,
     type_GroupID_str,
     type_RoadNode_str,
@@ -127,7 +127,7 @@ def test_get_fiscal_config_dict_ReturnsObj():
 
 
 def _validate_fiscal_config(fiscal_config: dict):
-    accepted_obj_classes = {
+    accepted_jaar_typees = {
         type_RoadUnit_str(),
         type_AcctID_str(),
         type_GroupID_str(),
@@ -154,13 +154,13 @@ def _validate_fiscal_config(fiscal_config: dict):
             required_arg_dict = cat_dict.get(required_args_str())
             print(f"_validate_fiscal_config {fiscal_categorys=} {required_arg_key=} ")
             arg_dict = required_arg_dict.get(required_arg_key)
-            assert arg_dict.get(obj_class_str()) in accepted_obj_classes
+            assert arg_dict.get(jaar_type_str()) in accepted_jaar_typees
         fiscal_optional_args_keys = set(cat_dict.get(optional_args_str()).keys())
         for optional_arg_key in fiscal_optional_args_keys:
             optional_arg_dict = cat_dict.get(optional_args_str())
             print(f"_validate_fiscal_config {fiscal_categorys=} {optional_arg_key=} ")
             arg_dict = optional_arg_dict.get(optional_arg_key)
-            assert arg_dict.get(obj_class_str()) in accepted_obj_classes
+            assert arg_dict.get(jaar_type_str()) in accepted_jaar_typees
 
 
 def test_get_fiscal_categorys_ReturnsObj():

@@ -48,7 +48,7 @@ def test_get_otx_to_inx_dt_columns_ReturnsObj():
     assert len(get_otx_to_inx_dt_columns()) == 7
     static_list = [
         face_id_str(),
-        "obj_class",
+        "jaar_type",
         "otx_road_delimiter",
         "inx_road_delimiter",
         "unknown_word",
@@ -83,7 +83,7 @@ def test_get_explicit_label_columns_ReturnsObj():
     assert len(get_explicit_label_columns()) == 7
     static_list = [
         face_id_str(),
-        "obj_class",
+        "jaar_type",
         "otx_road_delimiter",
         "inx_road_delimiter",
         "unknown_word",

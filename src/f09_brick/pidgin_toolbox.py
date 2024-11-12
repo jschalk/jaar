@@ -7,7 +7,7 @@ from pandas import DataFrame
 def get_otx_to_inx_dt_columns() -> list[str]:
     return [
         "face_id",
-        "obj_class",
+        "jaar_type",
         "otx_road_delimiter",
         "inx_road_delimiter",
         "unknown_word",
@@ -19,7 +19,7 @@ def get_otx_to_inx_dt_columns() -> list[str]:
 def get_explicit_label_columns() -> list[str]:
     return [
         "face_id",
-        "obj_class",
+        "jaar_type",
         "otx_road_delimiter",
         "inx_road_delimiter",
         "unknown_word",
@@ -32,7 +32,7 @@ def create_otx_to_inx_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
     x_rows_list = [
         {
             "face_id": x_bridgeunit.face_id,
-            "obj_class": x_bridgeunit.obj_class,
+            "jaar_type": x_bridgeunit.jaar_type,
             "otx_road_delimiter": x_bridgeunit.otx_road_delimiter,
             "inx_road_delimiter": x_bridgeunit.inx_road_delimiter,
             "unknown_word": x_bridgeunit.unknown_word,
@@ -48,7 +48,7 @@ def create_explicit_label_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
     x_rows_list = [
         {
             "face_id": x_bridgeunit.face_id,
-            "obj_class": x_bridgeunit.obj_class,
+            "jaar_type": x_bridgeunit.jaar_type,
             "otx_road_delimiter": x_bridgeunit.otx_road_delimiter,
             "inx_road_delimiter": x_bridgeunit.inx_road_delimiter,
             "unknown_word": x_bridgeunit.unknown_word,
@@ -81,8 +81,8 @@ def _save_explicit_label_csv(x_dir, x_bridgeunit, x_key):
 
 
 def _load_otx_to_inx_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
-    file_key = x_bridgeunit.obj_class
-    if x_bridgeunit.obj_class in {"RoadNode", "RoadUnit"}:
+    file_key = x_bridgeunit.jaar_type
+    if x_bridgeunit.jaar_type in {"RoadNode", "RoadUnit"}:
         file_key = "road"
     otx_to_inx_filename = f"{file_key}_otx_to_inx.csv"
     otx_to_inx_dt = open_csv(x_dir, otx_to_inx_filename)
@@ -95,8 +95,8 @@ def _load_otx_to_inx_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
 
 
 def _load_explicit_label_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
-    file_key = x_bridgeunit.obj_class
-    if x_bridgeunit.obj_class in {"RoadNode", "RoadUnit"}:
+    file_key = x_bridgeunit.jaar_type
+    if x_bridgeunit.jaar_type in {"RoadNode", "RoadUnit"}:
         file_key = "road"
     explicit_label_filename = f"{file_key}_explicit_label.csv"
     explicit_label_dt = open_csv(x_dir, explicit_label_filename)

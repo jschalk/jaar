@@ -28,7 +28,7 @@
     "required_args": {
       "eon_id": {},
       "face_id": {},
-      "obj_class": {},
+      "jaar_type": {},
       "otx_word": {}
     }
   },

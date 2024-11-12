@@ -294,7 +294,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "addin,begin,close,denom,fiscal_id,gogo_want,label,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
         "credor_respect,debtor_respect,fiscal_id,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,purview_time_id,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
         "fiscal_id,healer_id,label,owner_id,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
-        "inx_road_delimiter,inx_word,obj_class,otx_road_delimiter,otx_word,unknown_word": brick_format_00040_bridge_otx_to_inx_v0_0_0(),
+        "inx_road_delimiter,inx_word,jaar_type,otx_road_delimiter,otx_word,unknown_word": brick_format_00040_bridge_otx_to_inx_v0_0_0(),
         "inx_label,inx_road_delimiter,otx_label,otx_road_delimiter,unknown_word": brick_format_00041_bridge_explicit_label_v0_0_0(),
     }
 
@@ -319,7 +319,7 @@ def get_brick_elements_sort_order() -> list[str]:
         "face_id",
         "eon_id",
         "fiscal_id",
-        "obj_class",
+        "jaar_type",
         "owner_id",
         "acct_id",
         "group_id",
@@ -394,7 +394,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "face_id": "TEXT",
         "eon_id": "INTEGER",
         "fiscal_id": "TEXT",
-        "obj_class": "TEXT",
+        "jaar_type": "TEXT",
         "owner_id": "TEXT",
         "acct_id": "TEXT",
         "group_id": "TEXT",

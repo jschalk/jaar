@@ -296,7 +296,7 @@ def get_casa_maison_road_otx_to_inx_dt() -> DataFrame:
     inx_dt = DataFrame(
         columns=[
             "face_id",
-            "obj_class",
+            "jaar_type",
             "otx_road_delimiter",
             "inx_road_delimiter",
             "unknown_word",
@@ -327,7 +327,7 @@ def get_casa_maison_road_explicit_label_dt() -> DataFrame:
     inx_dt = DataFrame(
         columns=[
             "face_id",
-            "obj_class",
+            "jaar_type",
             "otx_road_delimiter",
             "inx_road_delimiter",
             "unknown_word",

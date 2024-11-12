@@ -31,7 +31,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_update,
     face_id_str,
-    obj_class_str,
+    jaar_type_str,
     fiscal_id_str,
     owner_id_str,
     acct_id_str,
@@ -166,7 +166,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[0] == face_id_str()
     assert table_sorting_priority[1] == eon_id_str()
     assert table_sorting_priority[2] == fiscal_id_str()
-    assert table_sorting_priority[3] == obj_class_str()
+    assert table_sorting_priority[3] == jaar_type_str()
     assert table_sorting_priority[4] == owner_id_str()
     assert table_sorting_priority[5] == acct_id_str()
     assert table_sorting_priority[6] == group_id_str()
@@ -259,7 +259,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(face_id_str()) == "TEXT"
     assert sqlite_types.get(eon_id_str()) == "INTEGER"
     assert sqlite_types.get(fiscal_id_str()) == "TEXT"
-    assert sqlite_types.get(obj_class_str()) == "TEXT"
+    assert sqlite_types.get(jaar_type_str()) == "TEXT"
     assert sqlite_types.get(owner_id_str()) == "TEXT"
     assert sqlite_types.get(acct_id_str()) == "TEXT"
     assert sqlite_types.get(group_id_str()) == "TEXT"

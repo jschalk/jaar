@@ -1,6 +1,6 @@
 from src.f01_road.road import default_road_delimiter_if_none
 from src.f04_gift.atom_config import (
-    get_atom_args_obj_classs,
+    get_atom_args_jaar_types,
     road_str,
     type_AcctID_str,
     type_GroupID_str,
@@ -12,7 +12,7 @@ from src.f08_pidgin.pidgin import (
     pidginunit_shop,
     bridgeunit_shop,
     default_unknown_word,
-    pidginable_obj_classs,
+    pidginable_jaar_types,
     pidginable_atom_args,
 )
 from src.f08_pidgin.examples.example_pidgins import (
@@ -32,22 +32,22 @@ from copy import deepcopy as copy_deepcopy
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
 
 
-def test_pidginable_obj_classs_ReturnsObj():
+def test_pidginable_jaar_types_ReturnsObj():
     # ESTABLISH / WHEN
-    x_pidginable_obj_classs = pidginable_obj_classs()
+    x_pidginable_jaar_types = pidginable_jaar_types()
 
     # THEN
-    assert len(x_pidginable_obj_classs) == 4
-    assert x_pidginable_obj_classs == {
+    assert len(x_pidginable_jaar_types) == 4
+    assert x_pidginable_jaar_types == {
         type_AcctID_str(),
         type_GroupID_str(),
         type_RoadNode_str(),
         type_RoadUnit_str(),
     }
-    print(f"{set(get_atom_args_obj_classs().values())=}")
-    all_atom_obj_classs = set(get_atom_args_obj_classs().values())
-    inter_x = set(all_atom_obj_classs).intersection(x_pidginable_obj_classs)
-    assert inter_x == x_pidginable_obj_classs
+    print(f"{set(get_atom_args_jaar_types().values())=}")
+    all_atom_jaar_types = set(get_atom_args_jaar_types().values())
+    inter_x = set(all_atom_jaar_types).intersection(x_pidginable_jaar_types)
+    assert inter_x == x_pidginable_jaar_types
 
 
 def test_pidginable_atom_args_ReturnsObj():
@@ -67,13 +67,13 @@ def test_pidginable_atom_args_ReturnsObj():
         "team_id",
     }
 
-    print(f"{pidginable_obj_classs()=}")
-    all_obj_classs = set(get_atom_args_obj_classs().keys())
-    assert pidginable_atom_args().issubset(all_obj_classs)
+    print(f"{pidginable_jaar_types()=}")
+    all_jaar_types = set(get_atom_args_jaar_types().keys())
+    assert pidginable_atom_args().issubset(all_jaar_types)
     static_pidginable_atom_args = {
         x_arg
-        for x_arg, obj_class in get_atom_args_obj_classs().items()
-        if obj_class in pidginable_obj_classs()
+        for x_arg, jaar_type in get_atom_args_jaar_types().items()
+        if jaar_type in pidginable_jaar_types()
     }
     assert pidginable_atom_args() == static_pidginable_atom_args
 
