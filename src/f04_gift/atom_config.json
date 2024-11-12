@@ -9,21 +9,6 @@
         "UPDATE": {
             "atom_order": 10
         },
-        "normal_specs": {
-            "normal_table_name": "membership"
-        },
-        "jvalues": {
-            "credit_vote": {
-                "column_order": 3,
-                "jaar_type": "int",
-                "sqlite_datatype": "INTEGER"
-            },
-            "debtit_vote": {
-                "column_order": 2,
-                "jaar_type": "int",
-                "sqlite_datatype": "INTEGER"
-            }
-        },
         "jkeys": {
             "acct_id": {
                 "column_order": 0,
@@ -37,6 +22,21 @@
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
+        },
+        "jvalues": {
+            "credit_vote": {
+                "column_order": 3,
+                "jaar_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "debtit_vote": {
+                "column_order": 2,
+                "jaar_type": "int",
+                "sqlite_datatype": "INTEGER"
+            }
+        },
+        "normal_specs": {
+            "normal_table_name": "membership"
         }
     },
     "bud_acctunit": {
@@ -49,8 +49,12 @@
         "UPDATE": {
             "atom_order": 9
         },
-        "normal_specs": {
-            "normal_table_name": "acctunit"
+        "jkeys": {
+            "acct_id": {
+                "column_order": 0,
+                "jaar_type": "AcctID",
+                "sqlite_datatype": "TEXT"
+            }
         },
         "jvalues": {
             "credit_belief": {
@@ -64,12 +68,8 @@
                 "sqlite_datatype": "INTEGER"
             }
         },
-        "jkeys": {
-            "acct_id": {
-                "column_order": 0,
-                "jaar_type": "AcctID",
-                "sqlite_datatype": "TEXT"
-            }
+        "normal_specs": {
+            "normal_table_name": "acctunit"
         }
     },
     "bud_item_awardlink": {
@@ -81,21 +81,6 @@
         },
         "UPDATE": {
             "atom_order": 12
-        },
-        "normal_specs": {
-            "normal_table_name": "awardlink"
-        },
-        "jvalues": {
-            "give_force": {
-                "column_order": 3,
-                "jaar_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "take_force": {
-                "column_order": 2,
-                "jaar_type": "float",
-                "sqlite_datatype": "REAL"
-            }
         },
         "jkeys": {
             "awardee_id": {
@@ -110,6 +95,21 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
+        },
+        "jvalues": {
+            "give_force": {
+                "column_order": 3,
+                "jaar_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "take_force": {
+                "column_order": 2,
+                "jaar_type": "float",
+                "sqlite_datatype": "REAL"
+            }
+        },
+        "normal_specs": {
+            "normal_table_name": "awardlink"
         }
     },
     "bud_item_factunit": {
@@ -122,8 +122,19 @@
         "UPDATE": {
             "atom_order": 13
         },
-        "normal_specs": {
-            "normal_table_name": "fact"
+        "jkeys": {
+            "base": {
+                "column_order": 1,
+                "jaar_type": "RoadUnit",
+                "nesting_order": 1,
+                "sqlite_datatype": "TEXT"
+            },
+            "road": {
+                "column_order": 0,
+                "jaar_type": "RoadUnit",
+                "nesting_order": 0,
+                "sqlite_datatype": "TEXT"
+            }
         },
         "jvalues": {
             "fnigh": {
@@ -142,19 +153,8 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jkeys": {
-            "base": {
-                "column_order": 1,
-                "jaar_type": "RoadUnit",
-                "nesting_order": 1,
-                "sqlite_datatype": "TEXT"
-            },
-            "road": {
-                "column_order": 0,
-                "jaar_type": "RoadUnit",
-                "nesting_order": 0,
-                "sqlite_datatype": "TEXT"
-            }
+        "normal_specs": {
+            "normal_table_name": "fact"
         }
     },
     "bud_item_healerlink": {
@@ -164,10 +164,6 @@
         "INSERT": {
             "atom_order": 5
         },
-        "normal_specs": {
-            "normal_table_name": "healerlink"
-        },
-        "jvalues": {},
         "jkeys": {
             "healer_id": {
                 "column_order": 1,
@@ -181,6 +177,10 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
+        },
+        "jvalues": {},
+        "normal_specs": {
+            "normal_table_name": "healerlink"
         }
     },
     "bud_item_reason_premiseunit": {
@@ -192,26 +192,6 @@
         },
         "UPDATE": {
             "atom_order": 14
-        },
-        "normal_specs": {
-            "normal_table_name": "premise"
-        },
-        "jvalues": {
-            "divisor": {
-                "column_order": 5,
-                "jaar_type": "int",
-                "sqlite_datatype": "INTEGER"
-            },
-            "nigh": {
-                "column_order": 4,
-                "jaar_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "open": {
-                "column_order": 3,
-                "jaar_type": "float",
-                "sqlite_datatype": "REAL"
-            }
         },
         "jkeys": {
             "base": {
@@ -232,6 +212,26 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
+        },
+        "jvalues": {
+            "divisor": {
+                "column_order": 5,
+                "jaar_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "nigh": {
+                "column_order": 4,
+                "jaar_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "open": {
+                "column_order": 3,
+                "jaar_type": "float",
+                "sqlite_datatype": "REAL"
+            }
+        },
+        "normal_specs": {
+            "normal_table_name": "premise"
         }
     },
     "bud_item_reasonunit": {
@@ -243,16 +243,6 @@
         },
         "UPDATE": {
             "atom_order": 15
-        },
-        "normal_specs": {
-            "normal_table_name": "reason"
-        },
-        "jvalues": {
-            "base_item_active_requisite": {
-                "column_order": 2,
-                "jaar_type": "bool",
-                "sqlite_datatype": "INTEGER"
-            }
         },
         "jkeys": {
             "base": {
@@ -267,6 +257,16 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
+        },
+        "jvalues": {
+            "base_item_active_requisite": {
+                "column_order": 2,
+                "jaar_type": "bool",
+                "sqlite_datatype": "INTEGER"
+            }
+        },
+        "normal_specs": {
+            "normal_table_name": "reason"
         }
     },
     "bud_item_teamlink": {
@@ -276,10 +276,6 @@
         "INSERT": {
             "atom_order": 4
         },
-        "normal_specs": {
-            "normal_table_name": "teamlink"
-        },
-        "jvalues": {},
         "jkeys": {
             "road": {
                 "column_order": 0,
@@ -293,6 +289,10 @@
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
+        },
+        "jvalues": {},
+        "normal_specs": {
+            "normal_table_name": "teamlink"
         }
     },
     "bud_itemunit": {
@@ -305,8 +305,19 @@
         "UPDATE": {
             "atom_order": 11
         },
-        "normal_specs": {
-            "normal_table_name": "item"
+        "jkeys": {
+            "label": {
+                "column_order": 1,
+                "jaar_type": "RoadNode",
+                "nesting_order": 1,
+                "sqlite_datatype": "TEXT"
+            },
+            "parent_road": {
+                "column_order": 0,
+                "jaar_type": "RoadUnit",
+                "nesting_order": 0,
+                "sqlite_datatype": "TEXT"
+            }
         },
         "jvalues": {
             "addin": {
@@ -365,28 +376,15 @@
                 "sqlite_datatype": "REAL"
             }
         },
-        "jkeys": {
-            "label": {
-                "column_order": 1,
-                "jaar_type": "RoadNode",
-                "nesting_order": 1,
-                "sqlite_datatype": "TEXT"
-            },
-            "parent_road": {
-                "column_order": 0,
-                "jaar_type": "RoadUnit",
-                "nesting_order": 0,
-                "sqlite_datatype": "TEXT"
-            }
+        "normal_specs": {
+            "normal_table_name": "item"
         }
     },
     "budunit": {
         "UPDATE": {
             "atom_order": 25
         },
-        "normal_specs": {
-            "normal_table_name": "bud"
-        },
+        "jkeys": {},
         "jvalues": {
             "credor_respect": {
                 "column_order": 3,
@@ -434,6 +432,8 @@
                 "sqlite_datatype": "INTEGER"
             }
         },
-        "jkeys": {}
+        "normal_specs": {
+            "normal_table_name": "bud"
+        }
     }
 }

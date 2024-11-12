@@ -3,43 +3,39 @@
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 1,
+    "jkeys": {
+      "eon_id": {},
+      "face_id": {},
+      "otx_label": {}
+    },
     "jvalues": {
       "inx_label": {},
       "inx_road_delimiter": {},
       "otx_road_delimiter": {},
       "unknown_word": {}
-    },
-    "jkeys": {
-      "eon_id": {},
-      "face_id": {},
-      "otx_label": {}
     }
   },
   "bridge_otx_to_inx": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 0,
-    "jvalues": {
-      "inx_road_delimiter": {},
-      "inx_word": {},
-      "otx_road_delimiter": {},
-      "unknown_word": {}
-    },
     "jkeys": {
       "eon_id": {},
       "face_id": {},
       "jaar_type": {},
       "otx_word": {}
+    },
+    "jvalues": {
+      "inx_road_delimiter": {},
+      "inx_word": {},
+      "otx_road_delimiter": {},
+      "unknown_word": {}
     }
   },
   "bud_acct_membership": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "brick_type": "budunit",
     "build_order": 6,
-    "jvalues": {
-      "credit_vote": {},
-      "debtit_vote": {}
-    },
     "jkeys": {
       "acct_id": {},
       "eon_id": {},
@@ -47,32 +43,32 @@
       "fiscal_id": {},
       "group_id": {},
       "time_id": {}
+    },
+    "jvalues": {
+      "credit_vote": {},
+      "debtit_vote": {}
     }
   },
   "bud_acctunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "brick_type": "budunit",
     "build_order": 7,
-    "jvalues": {
-      "credit_belief": {},
-      "debtit_belief": {}
-    },
     "jkeys": {
       "acct_id": {},
       "eon_id": {},
       "face_id": {},
       "fiscal_id": {},
       "time_id": {}
+    },
+    "jvalues": {
+      "credit_belief": {},
+      "debtit_belief": {}
     }
   },
   "bud_item_awardlink": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "brick_type": "budunit",
     "build_order": 8,
-    "jvalues": {
-      "give_force": {},
-      "take_force": {}
-    },
     "jkeys": {
       "awardee_id": {},
       "eon_id": {},
@@ -80,17 +76,16 @@
       "fiscal_id": {},
       "road": {},
       "time_id": {}
+    },
+    "jvalues": {
+      "give_force": {},
+      "take_force": {}
     }
   },
   "bud_item_factunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "brick_type": "budunit",
     "build_order": 9,
-    "jvalues": {
-      "fnigh": {},
-      "fopen": {},
-      "pick": {}
-    },
     "jkeys": {
       "base": {},
       "eon_id": {},
@@ -98,13 +93,17 @@
       "fiscal_id": {},
       "road": {},
       "time_id": {}
+    },
+    "jvalues": {
+      "fnigh": {},
+      "fopen": {},
+      "pick": {}
     }
   },
   "bud_item_healerlink": {
     "allowed_crud": "DELETE_INSERT",
     "brick_type": "budunit",
     "build_order": 11,
-    "jvalues": {},
     "jkeys": {
       "eon_id": {},
       "face_id": {},
@@ -112,17 +111,13 @@
       "healer_id": {},
       "road": {},
       "time_id": {}
-    }
+    },
+    "jvalues": {}
   },
   "bud_item_reason_premiseunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "brick_type": "budunit",
     "build_order": 12,
-    "jvalues": {
-      "divisor": {},
-      "nigh": {},
-      "open": {}
-    },
     "jkeys": {
       "base": {},
       "eon_id": {},
@@ -131,15 +126,17 @@
       "need": {},
       "road": {},
       "time_id": {}
+    },
+    "jvalues": {
+      "divisor": {},
+      "nigh": {},
+      "open": {}
     }
   },
   "bud_item_reasonunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "brick_type": "budunit",
     "build_order": 14,
-    "jvalues": {
-      "base_item_active_requisite": {}
-    },
     "jkeys": {
       "base": {},
       "eon_id": {},
@@ -147,13 +144,15 @@
       "fiscal_id": {},
       "road": {},
       "time_id": {}
+    },
+    "jvalues": {
+      "base_item_active_requisite": {}
     }
   },
   "bud_item_teamlink": {
     "allowed_crud": "DELETE_INSERT",
     "brick_type": "budunit",
     "build_order": 10,
-    "jvalues": {},
     "jkeys": {
       "eon_id": {},
       "face_id": {},
@@ -161,12 +160,21 @@
       "road": {},
       "team_id": {},
       "time_id": {}
-    }
+    },
+    "jvalues": {}
   },
   "bud_itemunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "brick_type": "budunit",
     "build_order": 15,
+    "jkeys": {
+      "eon_id": {},
+      "face_id": {},
+      "fiscal_id": {},
+      "label": {},
+      "parent_road": {},
+      "time_id": {}
+    },
     "jvalues": {
       "addin": {},
       "begin": {},
@@ -179,20 +187,18 @@
       "pledge": {},
       "problem_bool": {},
       "stop_want": {}
-    },
-    "jkeys": {
-      "eon_id": {},
-      "face_id": {},
-      "fiscal_id": {},
-      "label": {},
-      "parent_road": {},
-      "time_id": {}
     }
   },
   "budunit": {
     "allowed_crud": "UPDATE",
     "brick_type": "budunit",
     "build_order": 16,
+    "jkeys": {
+      "eon_id": {},
+      "face_id": {},
+      "fiscal_id": {},
+      "time_id": {}
+    },
     "jvalues": {
       "credor_respect": {},
       "debtor_respect": {},
@@ -203,21 +209,12 @@
       "purview_time_id": {},
       "respect_bit": {},
       "tally": {}
-    },
-    "jkeys": {
-      "eon_id": {},
-      "face_id": {},
-      "fiscal_id": {},
-      "time_id": {}
     }
   },
   "fiscal_cashbook": {
     "allowed_crud": "INSERT_MULITPLE",
     "brick_type": "fiscalunit",
     "build_order": 18,
-    "jvalues": {
-      "amount": {}
-    },
     "jkeys": {
       "acct_id": {},
       "eon_id": {},
@@ -225,15 +222,15 @@
       "fiscal_id": {},
       "owner_id": {},
       "time_id": {}
+    },
+    "jvalues": {
+      "amount": {}
     }
   },
   "fiscal_purview_episode": {
     "allowed_crud": "INSERT_MULITPLE",
     "brick_type": "fiscalunit",
     "build_order": 17,
-    "jvalues": {
-      "quota": {}
-    },
     "jkeys": {
       "acct_id": {},
       "eon_id": {},
@@ -241,57 +238,66 @@
       "fiscal_id": {},
       "owner_id": {},
       "time_id": {}
+    },
+    "jvalues": {
+      "quota": {}
     }
   },
   "fiscal_timeline_hour": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "fiscalunit",
     "build_order": 3,
-    "jvalues": {
-      "cumlative_minute": {}
-    },
     "jkeys": {
       "eon_id": {},
       "face_id": {},
       "fiscal_id": {},
       "hour_label": {},
       "time_id": {}
+    },
+    "jvalues": {
+      "cumlative_minute": {}
     }
   },
   "fiscal_timeline_month": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "fiscalunit",
     "build_order": 4,
-    "jvalues": {
-      "cumlative_day": {}
-    },
     "jkeys": {
       "eon_id": {},
       "face_id": {},
       "fiscal_id": {},
       "month_label": {},
       "time_id": {}
+    },
+    "jvalues": {
+      "cumlative_day": {}
     }
   },
   "fiscal_timeline_weekday": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "fiscalunit",
     "build_order": 5,
-    "jvalues": {
-      "weekday_order": {}
-    },
     "jkeys": {
       "eon_id": {},
       "face_id": {},
       "fiscal_id": {},
       "time_id": {},
       "weekday_label": {}
+    },
+    "jvalues": {
+      "weekday_order": {}
     }
   },
   "fiscalunit": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "fiscalunit",
     "build_order": 2,
+    "jkeys": {
+      "eon_id": {},
+      "face_id": {},
+      "fiscal_id": {},
+      "time_id": {}
+    },
     "jvalues": {
       "c400_number": {},
       "current_time": {},
@@ -302,12 +308,6 @@
       "road_delimiter": {},
       "timeline_label": {},
       "yr1_jan1_offset": {}
-    },
-    "jkeys": {
-      "eon_id": {},
-      "face_id": {},
-      "fiscal_id": {},
-      "time_id": {}
     }
   }
 }
