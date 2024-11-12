@@ -28,6 +28,7 @@
     "required_args": {
       "eon_id": {},
       "face_id": {},
+      "obj_class": {},
       "otx_word": {}
     }
   },

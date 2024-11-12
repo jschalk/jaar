@@ -12,6 +12,9 @@
         "inx_word": {
             "otx_key": false
         },
+        "obj_class": {
+            "otx_key": true
+        },
         "otx_road_delimiter": {
             "otx_key": false
         },

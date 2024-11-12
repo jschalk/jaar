@@ -1,44 +1,25 @@
 {
     "bridge_explicit_label": {
         "optional_args": {
-            "inx_label": {
-                "obj_class": "str"
-            },
-            "inx_road_delimiter": {
-                "obj_class": "str"
-            },
-            "otx_road_delimiter": {
-                "obj_class": "str"
-            },
-            "unknown_word": {
-                "obj_class": "str"
-            }
+            "inx_label": {},
+            "inx_road_delimiter": {},
+            "otx_road_delimiter": {},
+            "unknown_word": {}
         },
         "required_args": {
-            "otx_label": {
-                "obj_class": "str"
-            }
+            "otx_label": {}
         }
     },
     "bridge_otx_to_inx": {
         "optional_args": {
-            "inx_road_delimiter": {
-                "obj_class": "str"
-            },
-            "inx_word": {
-                "obj_class": "str"
-            },
-            "otx_road_delimiter": {
-                "obj_class": "str"
-            },
-            "unknown_word": {
-                "obj_class": "str"
-            }
+            "inx_road_delimiter": {},
+            "inx_word": {},
+            "otx_road_delimiter": {},
+            "unknown_word": {}
         },
         "required_args": {
-            "otx_word": {
-                "obj_class": "str"
-            }
+            "obj_class": {},
+            "otx_word": {}
         }
     }
 }

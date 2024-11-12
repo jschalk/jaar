@@ -69,7 +69,7 @@ def test_get_pidgin_config_dict_ReturnsObj():
     _validate_pidgin_config(pidgin_config)
     bridge_otx_to_inx_dict = pidgin_config.get(bridge_otx_to_inx_str())
     bridge_explicit_label_dict = pidgin_config.get(bridge_explicit_label_str())
-    assert len(bridge_otx_to_inx_dict.get(required_args_str())) == 1
+    assert len(bridge_otx_to_inx_dict.get(required_args_str())) == 2
     assert len(bridge_explicit_label_dict.get(required_args_str())) == 1
     assert len(bridge_otx_to_inx_dict.get(optional_args_str())) == 4
     assert len(bridge_explicit_label_dict.get(optional_args_str())) == 4
@@ -84,10 +84,10 @@ def test_get_pidgin_config_dict_ReturnsObj():
 
 
 def _validate_pidgin_config(pidgin_config: dict):
-    accepted_obj_classes = {"str"}
     x_possible_args = {
         inx_road_delimiter_str(),
         otx_road_delimiter_str(),
+        obj_class_str(),
         inx_word_str(),
         otx_word_str(),
         inx_label_str(),
@@ -107,17 +107,11 @@ def _validate_pidgin_config(pidgin_config: dict):
 
         pidgin_required_args_keys = set(cat_dict.get(required_args_str()).keys())
         for required_arg_key in pidgin_required_args_keys:
-            required_arg_dict = cat_dict.get(required_args_str())
             print(f"_validate_pidgin_config {pidgin_categorys=} {required_arg_key=} ")
-            arg_dict = required_arg_dict.get(required_arg_key)
-            assert arg_dict.get(obj_class_str()) in accepted_obj_classes
             assert required_arg_key in x_possible_args
         pidgin_optional_args_keys = set(cat_dict.get(optional_args_str()).keys())
         for optional_arg_key in pidgin_optional_args_keys:
-            optional_arg_dict = cat_dict.get(optional_args_str())
             print(f"_validate_pidgin_config {pidgin_categorys=} {optional_arg_key=} ")
-            arg_dict = optional_arg_dict.get(optional_arg_key)
-            assert arg_dict.get(obj_class_str()) in accepted_obj_classes
             assert optional_arg_key in x_possible_args
 
 
@@ -145,4 +139,4 @@ def test_get_pidgin_args_category_mapping_ReturnsObj():
     assert bridge_otx_to_inx_str() in pidgin_id_categorys
     assert bridge_explicit_label_str() in pidgin_id_categorys
     assert len(pidgin_id_categorys) == 2
-    assert len(x_pidgin_args_category_mapping) == 7
+    assert len(x_pidgin_args_category_mapping) == 8

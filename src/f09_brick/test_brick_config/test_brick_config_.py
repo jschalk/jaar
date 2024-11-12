@@ -247,7 +247,6 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     atom_fiscal_pidgin_args.update(pidgin_args)
     table_sorting_priority.remove(eon_id_str())
     table_sorting_priority.remove(face_id_str())
-    table_sorting_priority.remove(obj_class_str())
     assert atom_fiscal_pidgin_args == set(table_sorting_priority)
 
 
