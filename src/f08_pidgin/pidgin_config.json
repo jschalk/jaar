@@ -1,0 +1,25 @@
+{
+    "bridge_explicit_label": {
+        "optional_args": {
+            "inx_label": {},
+            "inx_road_delimiter": {},
+            "otx_road_delimiter": {},
+            "unknown_word": {}
+        },
+        "required_args": {
+            "otx_label": {}
+        }
+    },
+    "bridge_otx_to_inx": {
+        "optional_args": {
+            "inx_road_delimiter": {},
+            "inx_word": {},
+            "otx_road_delimiter": {},
+            "unknown_word": {}
+        },
+        "required_args": {
+            "jaar_type": {},
+            "otx_word": {}
+        }
+    }
+}

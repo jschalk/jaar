@@ -4,7 +4,7 @@ from src.f04_gift.atom_config import (
     type_RoadUnit_str,
     type_GroupID_str,
 )
-from src.f08_filter.filter import bridgeunit_shop
+from src.f08_pidgin.pidgin import bridgeunit_shop
 
 
 def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label():
@@ -15,9 +15,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label():
     casa_otx = "casa"
     casa_inx = "casa"
     inx_r_delimiter = ":"
-    roadnode_bridgeunit = bridgeunit_shop(
-        type_RoadNode_str(), otx_r_delimiter, inx_r_delimiter
-    )
+    roadnode_bridgeunit = bridgeunit_shop("RoadNode", otx_r_delimiter, inx_r_delimiter)
     roadnode_bridgeunit.set_otx_to_inx(clean_otx, clean_inx)
     roadnode_bridgeunit.set_otx_to_inx(casa_otx, casa_inx)
     assert roadnode_bridgeunit.is_valid()
@@ -49,9 +47,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label_With_explicit_lab
     casa_otx = "casa"
     casa_inx = "house"
     inx_r_delimiter = ":"
-    roadnode_bridgeunit = bridgeunit_shop(
-        type_RoadNode_str(), otx_r_delimiter, inx_r_delimiter
-    )
+    roadnode_bridgeunit = bridgeunit_shop("RoadNode", otx_r_delimiter, inx_r_delimiter)
     roadnode_bridgeunit.set_otx_to_inx(clean_otx, clean_inx)
     roadnode_bridgeunit.set_explicit_label(casa_otx, casa_inx)
     assert casa_otx != casa_inx
@@ -73,9 +69,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario0():
     otx_music45_str = "music45"
     otx_r_delimiter = "/"
     inx_r_delimiter = ":"
-    road_bridgeunit = bridgeunit_shop(
-        type_RoadUnit_str(), otx_r_delimiter, inx_r_delimiter
-    )
+    road_bridgeunit = bridgeunit_shop("RoadUnit", otx_r_delimiter, inx_r_delimiter)
     assert road_bridgeunit.otx_exists(otx_music45_str) is False
     assert road_bridgeunit.otx_to_inx_exists(otx_music45_str, otx_music45_str) is False
 
@@ -96,9 +90,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     inx_r_delimiter = ":"
     clean_otx_str = "clean"
     clean_otx_road = f"{otx_music45_str}{otx_r_delimiter}{clean_otx_str}"
-    road_bridgeunit = bridgeunit_shop(
-        type_RoadUnit_str(), otx_r_delimiter, inx_r_delimiter
-    )
+    road_bridgeunit = bridgeunit_shop("RoadUnit", otx_r_delimiter, inx_r_delimiter)
     assert road_bridgeunit.otx_exists(otx_music45_str) is False
     assert road_bridgeunit.otx_exists(clean_otx_road) is False
 
@@ -134,9 +126,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_exp
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     clean_otx_road = f"{otx_music45_str}{otx_r_delimiter}{clean_otx_str}"
-    road_bridgeunit = bridgeunit_shop(
-        type_RoadUnit_str(), otx_r_delimiter, inx_r_delimiter
-    )
+    road_bridgeunit = bridgeunit_shop("RoadUnit", otx_r_delimiter, inx_r_delimiter)
     road_bridgeunit.set_explicit_label(clean_otx_str, clean_inx_str)
     assert road_bridgeunit.otx_exists(otx_music45_str) is False
     assert road_bridgeunit.otx_exists(clean_otx_road) is False
@@ -171,9 +161,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_group_id():
     otx_r_delimiter = "/"
     swim_otx = f"swim{otx_r_delimiter}"
     climb_otx = f"climb{otx_r_delimiter}_{inx_r_delimiter}"
-    group_id_bridgeunit = bridgeunit_shop(
-        type_GroupID_str(), otx_r_delimiter, inx_r_delimiter
-    )
+    group_id_bridgeunit = bridgeunit_shop("GroupID", otx_r_delimiter, inx_r_delimiter)
     group_id_bridgeunit.otx_exists(swim_otx) is False
     group_id_bridgeunit.otx_exists(climb_otx) is False
 
@@ -201,9 +189,7 @@ def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx_to_inx_RoadNode():
     casa_otx = "casa"
     casa_inx = "casa"
     inx_r_delimiter = ":"
-    roadnode_bridgeunit = bridgeunit_shop(
-        type_RoadNode_str(), otx_r_delimiter, inx_r_delimiter
-    )
+    roadnode_bridgeunit = bridgeunit_shop("RoadNode", otx_r_delimiter, inx_r_delimiter)
     roadnode_bridgeunit.set_otx_to_inx(clean_otx, clean_inx)
     roadnode_bridgeunit.set_otx_to_inx(casa_otx, casa_inx)
     swim_str = "swim"
@@ -232,7 +218,7 @@ def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx_to_inx_RoadUnit():
     sweep_str = "sweep"
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
-    road_bd = bridgeunit_shop(type_RoadUnit_str())
+    road_bd = bridgeunit_shop("RoadUnit")
     road_bd.set_explicit_label(otx_music45_str, inx_music87_str)
     road_bd.set_explicit_label(casa_otx_str, casa_inx_str)
     road_bd.set_explicit_label(clean_otx_str, clean_inx_str)

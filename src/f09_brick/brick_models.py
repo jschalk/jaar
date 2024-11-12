@@ -270,6 +270,7 @@ class br00040AbstractTable(Base):
     eon_id = Column(Integer, primary_key=True)
     inx_road_delimiter = Column(String)
     inx_word = Column(String)
+    jaar_type = Column(String)
     otx_road_delimiter = Column(String)
     otx_word = Column(String)
     unknown_word = Column(String)

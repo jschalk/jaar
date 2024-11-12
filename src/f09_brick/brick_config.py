@@ -3,7 +3,7 @@ from src.f00_instrument.dict_toolbox import get_dict_from_json
 from src.f01_road.jaar_config import get_json_filename
 from src.f02_bud.bud_tool import budunit_str
 from src.f07_fiscal.fiscal_config import fiscalunit_str
-from src.f08_filter.filter_config import filterunit_str
+from src.f08_pidgin.pidgin_config import pidginunit_str
 from src.f09_brick.examples.brick_env import src_brick_dir
 from os import getcwd as os_getcwd
 
@@ -31,7 +31,7 @@ def brick_type_str() -> str:
 
 
 def get_brick_types() -> set[str]:
-    return {budunit_str(), fiscalunit_str(), filterunit_str()}
+    return {budunit_str(), fiscalunit_str(), pidginunit_str()}
 
 
 def allowed_crud_str() -> str:
@@ -265,7 +265,6 @@ def get_brick_numbers() -> set[str]:
 
 
 def get_brick_format_filename(brick_number: str) -> str:
-
     brick_number_substring = brick_number[2:]
     for brick_format_filename in get_brick_format_filenames():
         if brick_format_filename[13:18] == brick_number_substring:
@@ -295,7 +294,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "addin,begin,close,denom,fiscal_id,gogo_want,label,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
         "credor_respect,debtor_respect,fiscal_id,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,purview_time_id,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
         "fiscal_id,healer_id,label,owner_id,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
-        "inx_road_delimiter,inx_word,otx_road_delimiter,otx_word,unknown_word": brick_format_00040_bridge_otx_to_inx_v0_0_0(),
+        "inx_road_delimiter,inx_word,jaar_type,otx_road_delimiter,otx_word,unknown_word": brick_format_00040_bridge_otx_to_inx_v0_0_0(),
         "inx_label,inx_road_delimiter,otx_label,otx_road_delimiter,unknown_word": brick_format_00041_bridge_explicit_label_v0_0_0(),
     }
 
@@ -320,7 +319,7 @@ def get_brick_elements_sort_order() -> list[str]:
         "face_id",
         "eon_id",
         "fiscal_id",
-        "obj_class",
+        "jaar_type",
         "owner_id",
         "acct_id",
         "group_id",
@@ -395,7 +394,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "face_id": "TEXT",
         "eon_id": "INTEGER",
         "fiscal_id": "TEXT",
-        "obj_class": "TEXT",
+        "jaar_type": "TEXT",
         "owner_id": "TEXT",
         "acct_id": "TEXT",
         "group_id": "TEXT",
@@ -462,4 +461,27 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "quota": "REAL",
         "monthday_distortion": "INTEGER",
         "timeline_label": "TEXT",
+    }
+
+
+def get_brick_category_ref() -> dict[str, set[str]]:
+    return {
+        "fiscalunit": ["br00000"],
+        "fiscal_purview_episode": ["br00001"],
+        "fiscal_cashbook": ["br00002"],
+        "fiscal_timeline_hour": ["br00003"],
+        "fiscal_timeline_month": ["br00004"],
+        "fiscal_timeline_weekday": ["br00005"],
+        "bud_acctunit": ["br00011", "br00021"],
+        "bud_acct_membership": ["br00012", "br00020"],
+        "bud_itemunit": ["br00013", "br00019", "br00028", "br00036"],
+        "bud_item_awardlink": ["br00022"],
+        "bud_item_factunit": ["br00023"],
+        "bud_item_teamlink": ["br00024"],
+        "bud_item_healerlink": ["br00025", "br00036"],
+        "bud_item_reason_premiseunit": ["br00026"],
+        "bud_item_reasonunit": ["br00027"],
+        "budunit": ["br00029"],
+        "bridge_otx_to_inx": ["br00040"],
+        "bridge_explicit_label": ["br00041"],
     }

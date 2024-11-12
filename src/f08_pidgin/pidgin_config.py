@@ -5,25 +5,25 @@ from os import getcwd as os_getcwd
 
 
 def config_file_dir() -> str:
-    return f"{os_getcwd()}/src/f08_filter"
+    return f"{os_getcwd()}/src/f08_pidgin"
 
 
-def get_filter_config_file_name() -> str:
-    return "filter_config.json"
+def get_pidgin_config_file_name() -> str:
+    return "pidgin_config.json"
 
 
-def get_filter_config_dict() -> dict:
+def get_pidgin_config_dict() -> dict:
     return get_dict_from_json(
-        open_file(config_file_dir(), get_filter_config_file_name())
+        open_file(config_file_dir(), get_pidgin_config_file_name())
     )
 
 
-def get_filter_categorys() -> set[str]:
-    return set(get_filter_config_dict().keys())
+def get_pidgin_categorys() -> set[str]:
+    return set(get_pidgin_config_dict().keys())
 
 
-def filterunit_str() -> str:
-    return "filterunit"
+def pidginunit_str() -> str:
+    return "pidginunit"
 
 
 def eon_id_str() -> str:
@@ -74,31 +74,31 @@ def bridge_explicit_label_str() -> str:
     return "bridge_explicit_label"
 
 
-def get_filter_config_required_args(x_cat: str) -> dict:
+def get_pidgin_config_required_args(x_cat: str) -> dict:
     required_args_key_list = [x_cat, required_args_str()]
-    return get_from_nested_dict(get_filter_config_dict(), required_args_key_list)
+    return get_from_nested_dict(get_pidgin_config_dict(), required_args_key_list)
 
 
-def get_filter_config_optional_args(x_cat: str) -> dict:
+def get_pidgin_config_optional_args(x_cat: str) -> dict:
     optional_args_key_list = [x_cat, optional_args_str()]
-    return get_from_nested_dict(get_filter_config_dict(), optional_args_key_list)
+    return get_from_nested_dict(get_pidgin_config_dict(), optional_args_key_list)
 
 
-def get_filter_config_args(x_category: str) -> dict[str, dict]:
-    args_dict = get_filter_config_required_args(x_category)
-    args_dict.update(get_filter_config_optional_args(x_category))
+def get_pidgin_config_args(x_category: str) -> dict[str, dict]:
+    args_dict = get_pidgin_config_required_args(x_category)
+    args_dict.update(get_pidgin_config_optional_args(x_category))
     return args_dict
 
 
-def get_filter_args_category_mapping() -> dict[str, str]:
+def get_pidgin_args_category_mapping() -> dict[str, str]:
     x_dict = {}
-    for filter_category in get_filter_config_dict().keys():
-        args_set = set(get_filter_config_args(filter_category))
+    for pidgin_category in get_pidgin_config_dict().keys():
+        args_set = set(get_pidgin_config_args(pidgin_category))
         for x_arg in args_set:
             if x_dict.get(x_arg) is None:
-                x_dict[x_arg] = {filter_category}
+                x_dict[x_arg] = {pidgin_category}
             else:
                 x_category_set = x_dict.get(x_arg)
-                x_category_set.add(filter_category)
+                x_category_set.add(pidgin_category)
                 x_dict[x_arg] = x_category_set
     return x_dict

@@ -2,121 +2,121 @@
     "fiscal_cashbook": {
         "optional_args": {
             "amount": {
-                "obj_class": "float"
+                "jaar_type": "float"
             }
         },
         "required_args": {
             "acct_id": {
-                "obj_class": "AcctID"
+                "jaar_type": "AcctID"
             },
             "fiscal_id": {
-                "obj_class": "FiscalID"
+                "jaar_type": "FiscalID"
             },
             "owner_id": {
-                "obj_class": "AcctID"
+                "jaar_type": "AcctID"
             },
             "time_id": {
-                "obj_class": "TimeLinePoint"
+                "jaar_type": "TimeLinePoint"
             }
         }
     },
     "fiscal_purview_episode": {
         "optional_args": {
             "quota": {
-                "obj_class": "int"
+                "jaar_type": "int"
             }
         },
         "required_args": {
             "acct_id": {
-                "obj_class": "AcctID"
+                "jaar_type": "AcctID"
             },
             "fiscal_id": {
-                "obj_class": "FiscalID"
+                "jaar_type": "FiscalID"
             },
             "owner_id": {
-                "obj_class": "AcctID"
+                "jaar_type": "AcctID"
             },
             "time_id": {
-                "obj_class": "TimeLinePoint"
+                "jaar_type": "TimeLinePoint"
             }
         }
     },
     "fiscal_timeline_hour": {
         "optional_args": {
             "cumlative_minute": {
-                "obj_class": "int"
+                "jaar_type": "int"
             }
         },
         "required_args": {
             "fiscal_id": {
-                "obj_class": "FiscalID"
+                "jaar_type": "FiscalID"
             },
             "hour_label": {
-                "obj_class": "RoadNode"
+                "jaar_type": "RoadNode"
             }
         }
     },
     "fiscal_timeline_month": {
         "optional_args": {
             "cumlative_day": {
-                "obj_class": "int"
+                "jaar_type": "int"
             }
         },
         "required_args": {
             "fiscal_id": {
-                "obj_class": "FiscalID"
+                "jaar_type": "FiscalID"
             },
             "month_label": {
-                "obj_class": "RoadNode"
+                "jaar_type": "RoadNode"
             }
         }
     },
     "fiscal_timeline_weekday": {
         "optional_args": {
             "weekday_order": {
-                "obj_class": "int"
+                "jaar_type": "int"
             }
         },
         "required_args": {
             "fiscal_id": {
-                "obj_class": "FiscalID"
+                "jaar_type": "FiscalID"
             },
             "weekday_label": {
-                "obj_class": "RoadNode"
+                "jaar_type": "RoadNode"
             }
         }
     },
     "fiscalunit": {
         "optional_args": {
             "c400_number": {
-                "obj_class": "int"
+                "jaar_type": "int"
             },
             "current_time": {
-                "obj_class": "int"
+                "jaar_type": "int"
             },
             "fiscal_id": {
-                "obj_class": "FiscalID"
+                "jaar_type": "FiscalID"
             },
             "fund_coin": {
-                "obj_class": "float"
+                "jaar_type": "float"
             },
             "monthday_distortion": {
-                "obj_class": "int"
+                "jaar_type": "int"
             },
             "penny": {
-                "obj_class": "float"
+                "jaar_type": "float"
             },
             "respect_bit": {
-                "obj_class": "float"
+                "jaar_type": "float"
             },
             "road_delimiter": {
-                "obj_class": "str"
+                "jaar_type": "str"
             },
             "timeline_label": {
-                "obj_class": "RoadNode"
+                "jaar_type": "RoadNode"
             },
             "yr1_jan1_offset": {
-                "obj_class": "int"
+                "jaar_type": "int"
             }
         },
         "required_args": {}

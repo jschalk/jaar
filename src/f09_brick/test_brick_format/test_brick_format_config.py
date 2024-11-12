@@ -25,7 +25,7 @@ from src.f04_gift.atom_config import (
     gogo_want_str,
     stop_want_str,
 )
-from src.f08_filter.filter_config import eon_id_str
+from src.f08_pidgin.pidgin_config import eon_id_str
 from src.f09_brick.brick import (
     _generate_brick_dataframe,
     get_brickref_obj,

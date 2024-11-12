@@ -1,12 +1,5 @@
 from src.f00_instrument.file import save_file, get_dir_file_strs
-from src.f04_gift.atom_config import (
-    type_AcctID_str,
-    type_GroupID_str,
-    road_str,
-    type_RoadNode_str,
-    type_RoadUnit_str,
-)
-from src.f08_filter.filter import FilterUnit, BridgeUnit, filterunit_shop
+from src.f08_pidgin.pidgin import PidginUnit, BridgeUnit, pidginunit_shop
 from src.f09_brick.pandas_tool import get_ordered_csv, open_csv
 from pandas import DataFrame
 
@@ -14,7 +7,7 @@ from pandas import DataFrame
 def get_otx_to_inx_dt_columns() -> list[str]:
     return [
         "face_id",
-        "obj_class",
+        "jaar_type",
         "otx_road_delimiter",
         "inx_road_delimiter",
         "unknown_word",
@@ -26,7 +19,7 @@ def get_otx_to_inx_dt_columns() -> list[str]:
 def get_explicit_label_columns() -> list[str]:
     return [
         "face_id",
-        "obj_class",
+        "jaar_type",
         "otx_road_delimiter",
         "inx_road_delimiter",
         "unknown_word",
@@ -39,7 +32,7 @@ def create_otx_to_inx_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
     x_rows_list = [
         {
             "face_id": x_bridgeunit.face_id,
-            "obj_class": x_bridgeunit.obj_class,
+            "jaar_type": x_bridgeunit.jaar_type,
             "otx_road_delimiter": x_bridgeunit.otx_road_delimiter,
             "inx_road_delimiter": x_bridgeunit.inx_road_delimiter,
             "unknown_word": x_bridgeunit.unknown_word,
@@ -55,7 +48,7 @@ def create_explicit_label_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
     x_rows_list = [
         {
             "face_id": x_bridgeunit.face_id,
-            "obj_class": x_bridgeunit.obj_class,
+            "jaar_type": x_bridgeunit.jaar_type,
             "otx_road_delimiter": x_bridgeunit.otx_road_delimiter,
             "inx_road_delimiter": x_bridgeunit.inx_road_delimiter,
             "unknown_word": x_bridgeunit.unknown_word,
@@ -67,8 +60,8 @@ def create_explicit_label_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
     return DataFrame(x_rows_list, columns=get_explicit_label_columns())
 
 
-def save_all_csvs_from_filterunit(x_dir: str, x_filterunit: FilterUnit):
-    for x_key, x_bridgeunit in x_filterunit.bridgeunits.items():
+def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
+    for x_key, x_bridgeunit in x_pidginunit.bridgeunits.items():
         _save_otx_to_inx_csv(x_dir, x_bridgeunit, x_key)
         _save_explicit_label_csv(x_dir, x_bridgeunit, x_key)
 
@@ -88,9 +81,9 @@ def _save_explicit_label_csv(x_dir, x_bridgeunit, x_key):
 
 
 def _load_otx_to_inx_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
-    file_key = x_bridgeunit.obj_class
-    if x_bridgeunit.obj_class in {type_RoadUnit_str(), type_RoadUnit_str()}:
-        file_key = road_str()
+    file_key = x_bridgeunit.jaar_type
+    if x_bridgeunit.jaar_type in {"RoadNode", "RoadUnit"}:
+        file_key = "road"
     otx_to_inx_filename = f"{file_key}_otx_to_inx.csv"
     otx_to_inx_dt = open_csv(x_dir, otx_to_inx_filename)
     for table_row in otx_to_inx_dt.to_dict("records"):
@@ -102,9 +95,9 @@ def _load_otx_to_inx_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
 
 
 def _load_explicit_label_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
-    file_key = x_bridgeunit.obj_class
-    if x_bridgeunit.obj_class in {type_RoadUnit_str(), type_RoadUnit_str()}:
-        file_key = road_str()
+    file_key = x_bridgeunit.jaar_type
+    if x_bridgeunit.jaar_type in {"RoadNode", "RoadUnit"}:
+        file_key = "road"
     explicit_label_filename = f"{file_key}_explicit_label.csv"
     explicit_label_dt = open_csv(x_dir, explicit_label_filename)
     for table_row in explicit_label_dt.to_dict("records"):
@@ -115,7 +108,7 @@ def _load_explicit_label_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit
     return x_bridgeunit
 
 
-def create_dir_valid_filterunit(x_dir: str) -> FilterUnit:
+def create_dir_valid_pidginunit(x_dir: str) -> PidginUnit:
     face_id_set = set()
     unknown_word_set = set()
     otx_road_delimiter_set = set()
@@ -146,7 +139,7 @@ def create_dir_valid_filterunit(x_dir: str) -> FilterUnit:
     #         f"{face_id_set=} {unknown_word_set=}  {otx_road_delimiter_set=} {inx_road_delimiter_set=}"
     #     )
 
-    return filterunit_shop(
+    return pidginunit_shop(
         x_face_id=x_face_id,
         x_otx_road_delimiter=x_otx_road_delimiter,
         x_inx_road_delimiter=x_inx_road_delimiter,
@@ -154,9 +147,9 @@ def create_dir_valid_filterunit(x_dir: str) -> FilterUnit:
     )
 
 
-def init_filterunit_from_dir(x_dir: str) -> FilterUnit:
-    x_filterunit = create_dir_valid_filterunit(x_dir)
-    for x_bridgeunit in x_filterunit.bridgeunits.values():
+def init_pidginunit_from_dir(x_dir: str) -> PidginUnit:
+    x_pidginunit = create_dir_valid_pidginunit(x_dir)
+    for x_bridgeunit in x_pidginunit.bridgeunits.values():
         _load_otx_to_inx_from_csv(x_dir, x_bridgeunit)
         _load_explicit_label_from_csv(x_dir, x_bridgeunit)
-    return x_filterunit
+    return x_pidginunit

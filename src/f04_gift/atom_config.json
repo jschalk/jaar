@@ -15,26 +15,26 @@
         "optional_args": {
             "credit_vote": {
                 "column_order": 3,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_vote": {
                 "column_order": 2,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "acct_id": {
                 "column_order": 0,
+                "jaar_type": "AcctID",
                 "nesting_order": 0,
-                "obj_class": "AcctID",
                 "sqlite_datatype": "TEXT"
             },
             "group_id": {
                 "column_order": 1,
+                "jaar_type": "GroupID",
                 "nesting_order": 1,
-                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -55,19 +55,19 @@
         "optional_args": {
             "credit_belief": {
                 "column_order": 2,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_belief": {
                 "column_order": 1,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "acct_id": {
                 "column_order": 0,
-                "obj_class": "AcctID",
+                "jaar_type": "AcctID",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -88,26 +88,26 @@
         "optional_args": {
             "give_force": {
                 "column_order": 3,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "take_force": {
                 "column_order": 2,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "required_args": {
             "awardee_id": {
                 "column_order": 1,
+                "jaar_type": "GroupID",
                 "nesting_order": 1,
-                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
+                "jaar_type": "RoadUnit",
                 "nesting_order": 0,
-                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -128,31 +128,31 @@
         "optional_args": {
             "fnigh": {
                 "column_order": 4,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "fopen": {
                 "column_order": 3,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "pick": {
                 "column_order": 2,
-                "obj_class": "RoadUnit",
+                "jaar_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         },
         "required_args": {
             "base": {
                 "column_order": 1,
+                "jaar_type": "RoadUnit",
                 "nesting_order": 1,
-                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
+                "jaar_type": "RoadUnit",
                 "nesting_order": 0,
-                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -171,14 +171,14 @@
         "required_args": {
             "healer_id": {
                 "column_order": 1,
+                "jaar_type": "GroupID",
                 "nesting_order": 1,
-                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
+                "jaar_type": "RoadUnit",
                 "nesting_order": 0,
-                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -199,37 +199,37 @@
         "optional_args": {
             "divisor": {
                 "column_order": 5,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "nigh": {
                 "column_order": 4,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "open": {
                 "column_order": 3,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "required_args": {
             "base": {
                 "column_order": 1,
+                "jaar_type": "RoadUnit",
                 "nesting_order": 1,
-                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "need": {
                 "column_order": 2,
+                "jaar_type": "RoadUnit",
                 "nesting_order": 2,
-                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
+                "jaar_type": "RoadUnit",
                 "nesting_order": 0,
-                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -250,21 +250,21 @@
         "optional_args": {
             "base_item_active_requisite": {
                 "column_order": 2,
-                "obj_class": "bool",
+                "jaar_type": "bool",
                 "sqlite_datatype": "INTEGER"
             }
         },
         "required_args": {
             "base": {
                 "column_order": 1,
+                "jaar_type": "RoadUnit",
                 "nesting_order": 1,
-                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
+                "jaar_type": "RoadUnit",
                 "nesting_order": 0,
-                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -283,14 +283,14 @@
         "required_args": {
             "road": {
                 "column_order": 0,
+                "jaar_type": "RoadUnit",
                 "nesting_order": 0,
-                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
             "team_id": {
                 "column_order": 1,
+                "jaar_type": "GroupID",
                 "nesting_order": 1,
-                "obj_class": "GroupID",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -311,71 +311,71 @@
         "optional_args": {
             "addin": {
                 "column_order": 10,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "begin": {
                 "column_order": 5,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "close": {
                 "column_order": 6,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "denom": {
                 "column_order": 8,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "gogo_want": {
                 "column_order": 11,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "mass": {
                 "column_order": 3,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "morph": {
                 "column_order": 9,
-                "obj_class": "bool",
+                "jaar_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "numor": {
                 "column_order": 7,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "pledge": {
                 "column_order": 2,
-                "obj_class": "bool",
+                "jaar_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "problem_bool": {
                 "column_order": 4,
-                "obj_class": "bool",
+                "jaar_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "stop_want": {
                 "column_order": 12,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "required_args": {
             "label": {
                 "column_order": 1,
+                "jaar_type": "RoadNode",
                 "nesting_order": 1,
-                "obj_class": "RoadNode",
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
                 "column_order": 0,
+                "jaar_type": "RoadUnit",
                 "nesting_order": 0,
-                "obj_class": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -390,47 +390,47 @@
         "optional_args": {
             "credor_respect": {
                 "column_order": 3,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtor_respect": {
                 "column_order": 2,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "fund_coin": {
                 "column_order": 1,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "fund_pool": {
                 "column_order": 0,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "max_tree_traverse": {
                 "column_order": 5,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "penny": {
                 "column_order": 6,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "purview_time_id": {
                 "column_order": 8,
-                "obj_class": "TimeLinePoint",
+                "jaar_type": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"
             },
             "respect_bit": {
                 "column_order": 4,
-                "obj_class": "float",
+                "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "tally": {
                 "column_order": 7,
-                "obj_class": "int",
+                "jaar_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },

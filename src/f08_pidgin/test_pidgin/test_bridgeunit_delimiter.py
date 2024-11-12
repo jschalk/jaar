@@ -4,7 +4,7 @@ from src.f04_gift.atom_config import (
     type_RoadUnit_str,
     type_RoadNode_str,
 )
-from src.f08_filter.filter import bridgeunit_shop
+from src.f08_pidgin.pidgin import bridgeunit_shop
 
 
 def test_BridgeUnit_otx_road_delimiter_in_otx_words_ReturnsObj():
@@ -87,7 +87,7 @@ def test_BridgeUnit_is_inx_delimiter_inclusion_correct_ReturnsObj_AcctID():
     zia_otx = "Zia"
     zia_inx = f"Zia{inx_road_delimiter}"
     acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), None, inx_road_delimiter)
-    assert acct_id_bridgeunit.obj_class == type_AcctID_str()
+    assert acct_id_bridgeunit.jaar_type == type_AcctID_str()
     assert acct_id_bridgeunit._is_inx_delimiter_inclusion_correct()
 
     # WHEN
@@ -109,7 +109,7 @@ def test_BridgeUnit_is_inx_delimiter_inclusion_correct_ReturnsObj_GroupID():
     zia_otx = "Zia"
     zia_inx = f"Zia{inx_road_delimiter}"
     acct_id_bridgeunit = bridgeunit_shop(type_GroupID_str(), None, inx_road_delimiter)
-    assert acct_id_bridgeunit.obj_class == type_GroupID_str()
+    assert acct_id_bridgeunit.jaar_type == type_GroupID_str()
     assert acct_id_bridgeunit._is_inx_delimiter_inclusion_correct()
 
     # WHEN
@@ -136,7 +136,7 @@ def test_BridgeUnit_is_inx_delimiter_inclusion_correct_ReturnsObj_RoadUnit():
     road_bridgeunit = bridgeunit_shop(
         type_RoadUnit_str(), otx_r_delimiter, inx_r_delimiter
     )
-    assert road_bridgeunit.obj_class == type_RoadUnit_str()
+    assert road_bridgeunit.jaar_type == type_RoadUnit_str()
     assert road_bridgeunit._is_inx_delimiter_inclusion_correct()
 
     # WHEN
@@ -153,7 +153,7 @@ def test_BridgeUnit_is_otx_delimiter_inclusion_correct_ReturnsObj_AcctID():
     zia_otx = f"Zia{otx_road_delimiter}"
     zia_inx = "Zia"
     acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), otx_road_delimiter)
-    assert acct_id_bridgeunit.obj_class == type_AcctID_str()
+    assert acct_id_bridgeunit.jaar_type == type_AcctID_str()
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct()
 
     # WHEN
@@ -175,7 +175,7 @@ def test_BridgeUnit_is_otx_delimiter_inclusion_correct_ReturnsObj_GroupID():
     zia_inx = "Zia"
     zia_otx = f"Zia{otx_road_delimiter}"
     acct_id_bridgeunit = bridgeunit_shop(type_GroupID_str(), otx_road_delimiter)
-    assert acct_id_bridgeunit.obj_class == type_GroupID_str()
+    assert acct_id_bridgeunit.jaar_type == type_GroupID_str()
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct()
 
     # WHEN
@@ -197,7 +197,7 @@ def test_BridgeUnit_is_otx_delimiter_inclusion_correct_ReturnsObj_RoadNode():
     casa_otx = f"casa{otx_road_delimiter}"
     casa_inx = "casa"
     acct_id_bridgeunit = bridgeunit_shop(type_RoadNode_str(), otx_road_delimiter)
-    assert acct_id_bridgeunit.obj_class == type_RoadNode_str()
+    assert acct_id_bridgeunit.jaar_type == type_RoadNode_str()
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct()
 
     # WHEN
@@ -224,7 +224,7 @@ def test_BridgeUnit_is_otx_delimiter_inclusion_correct_ReturnsObj_RoadUnit():
     road_bridgeunit = bridgeunit_shop(
         type_RoadUnit_str(), otx_r_delimiter, inx_r_delimiter
     )
-    assert road_bridgeunit.obj_class == type_RoadUnit_str()
+    assert road_bridgeunit.jaar_type == type_RoadUnit_str()
     assert road_bridgeunit._is_otx_delimiter_inclusion_correct()
 
     # WHEN
@@ -241,7 +241,7 @@ def test_BridgeUnit_all_otx_parent_roads_exist_ReturnsObjAlwaysTrue_GroupID():
     zia_inx = "Zia"
     zia_otx = f"Zia{otx_road_delimiter}"
     acct_id_bridgeunit = bridgeunit_shop(type_GroupID_str(), otx_road_delimiter)
-    assert acct_id_bridgeunit.obj_class == type_GroupID_str()
+    assert acct_id_bridgeunit.jaar_type == type_GroupID_str()
     assert acct_id_bridgeunit.all_otx_parent_roads_exist()
 
     # WHEN
@@ -263,7 +263,7 @@ def test_BridgeUnit_all_otx_parent_roads_exist_ReturnsObj_RoadUnit():
     clean_otx_road = f"{clean_otx_parent_road}{otx_r_delimiter}{clean_otx_str}"
 
     road_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), otx_r_delimiter)
-    assert road_bridgeunit.obj_class == type_RoadUnit_str()
+    assert road_bridgeunit.jaar_type == type_RoadUnit_str()
     assert road_bridgeunit.otx_exists(clean_otx_parent_road) is False
     assert road_bridgeunit.otx_exists(clean_otx_road) is False
     assert road_bridgeunit.all_otx_parent_roads_exist()
@@ -291,7 +291,7 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario0_label_str():
     casa_otx = f"casa{otx_road_delimiter}"
     casa_inx = "casa"
     roadnode_bridgeunit = bridgeunit_shop(type_RoadNode_str(), otx_road_delimiter)
-    assert roadnode_bridgeunit.obj_class == type_RoadNode_str()
+    assert roadnode_bridgeunit.jaar_type == type_RoadNode_str()
     assert roadnode_bridgeunit.is_valid()
 
     # WHEN
@@ -320,7 +320,7 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario1_road_str():
         type_RoadUnit_str(), otx_r_delimiter, inx_r_delimiter
     )
     road_bridgeunit.set_otx_to_inx(music_str, music_str)
-    assert road_bridgeunit.obj_class == type_RoadUnit_str()
+    assert road_bridgeunit.jaar_type == type_RoadUnit_str()
     assert road_bridgeunit.is_valid()
     assert road_bridgeunit.otx_to_inx_exists(clean_otx_road, clean_inx_road) is False
 
@@ -342,7 +342,7 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario2_group_id_str():
     group_id_bridgeunit = bridgeunit_shop(
         type_GroupID_str(), otx_road_delimiter, inx_road_delimiter
     )
-    assert group_id_bridgeunit.obj_class == type_GroupID_str()
+    assert group_id_bridgeunit.jaar_type == type_GroupID_str()
     assert group_id_bridgeunit.is_valid()
 
     # WHEN
@@ -364,7 +364,7 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario3_RoadUnit():
     clean_otx_road = f"{clean_otx_parent_road}{otx_r_delimiter}{clean_otx_str}"
 
     road_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), otx_r_delimiter)
-    assert road_bridgeunit.obj_class == type_RoadUnit_str()
+    assert road_bridgeunit.jaar_type == type_RoadUnit_str()
     assert road_bridgeunit.otx_exists(clean_otx_parent_road) is False
     assert road_bridgeunit.otx_exists(clean_otx_road) is False
     assert road_bridgeunit.all_otx_parent_roads_exist()

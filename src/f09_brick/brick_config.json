@@ -1,7 +1,7 @@
 {
   "bridge_explicit_label": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "brick_type": "filterunit",
+    "brick_type": "pidginunit",
     "build_order": 1,
     "optional_args": {
       "inx_label": {},
@@ -17,7 +17,7 @@
   },
   "bridge_otx_to_inx": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "brick_type": "filterunit",
+    "brick_type": "pidginunit",
     "build_order": 0,
     "optional_args": {
       "inx_road_delimiter": {},
@@ -28,6 +28,7 @@
     "required_args": {
       "eon_id": {},
       "face_id": {},
+      "jaar_type": {},
       "otx_word": {}
     }
   },

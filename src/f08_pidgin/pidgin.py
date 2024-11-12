@@ -31,7 +31,7 @@ class set_all_otx_to_inxException(Exception):
     pass
 
 
-class atom_args_obj_classException(Exception):
+class atom_args_jaar_typeException(Exception):
     pass
 
 
@@ -39,11 +39,11 @@ class set_explicit_label_Exception(Exception):
     pass
 
 
-def filterable_obj_classs() -> set:
+def pidginable_jaar_types() -> set:
     return {"AcctID", "GroupID", "RoadNode", "RoadUnit"}
 
 
-def filterable_atom_args() -> set:
+def pidginable_atom_args() -> set:
     return {
         "acct_id",
         "awardee_id",
@@ -66,7 +66,7 @@ class BridgeUnit:
     otx_road_delimiter: str = None
     inx_road_delimiter: str = None
     explicit_label: dict = None
-    obj_class: str = None
+    jaar_type: str = None
     face_id: OwnerID = None
 
     def set_all_otx_to_inx(
@@ -87,15 +87,15 @@ class BridgeUnit:
     def get_create_inx(self, otx_word: str, missing_add: bool = True) -> str:
         if missing_add and self.otx_exists(otx_word) is False:
             inx_word = copy_copy(otx_word)
-            if self.obj_class in {"GroupID"}:
+            if self.jaar_type in {"GroupID"}:
                 if self.inx_road_delimiter in otx_word:
                     return None
                 otx_r_delimiter = self.otx_road_delimiter
                 inx_r_delimiter = self.inx_road_delimiter
                 inx_word = inx_word.replace(otx_r_delimiter, inx_r_delimiter)
-            if self.obj_class in {"RoadUnit"}:
+            if self.jaar_type in {"RoadUnit"}:
                 inx_word = self._get_create_roadunit_inx(otx_word)
-            if self.obj_class in {"RoadNode"}:
+            if self.jaar_type in {"RoadNode"}:
                 if self.inx_road_delimiter in otx_word:
                     return None
                 inx_word = self._get_explicit_roadnode(otx_word)
@@ -139,7 +139,7 @@ class BridgeUnit:
 
         self.explicit_label[otx_label] = inx_label
 
-        if self.obj_class == "RoadUnit":
+        if self.jaar_type == "RoadUnit":
             self._set_new_explicit_label_to_otx_inx(otx_label, inx_label)
 
     def _set_new_explicit_label_to_otx_inx(self, otx_label, inx_label):
@@ -179,23 +179,23 @@ class BridgeUnit:
         return str_in_dict_values(self.inx_road_delimiter, self.otx_to_inx)
 
     def _is_otx_delimiter_inclusion_correct(self) -> bool:
-        if self.obj_class in {"AcctID", "RoadNode"}:
+        if self.jaar_type in {"AcctID", "RoadNode"}:
             return not self._otx_road_delimiter_in_otx_words()
-        elif self.obj_class in {"GroupID"}:
+        elif self.jaar_type in {"GroupID"}:
             return str_in_all_dict_keys(self.otx_road_delimiter, self.otx_to_inx)
-        elif self.obj_class in {"RoadUnit"}:
+        elif self.jaar_type in {"RoadUnit"}:
             return True
 
     def _is_inx_delimiter_inclusion_correct(self) -> bool:
-        if self.obj_class in {"AcctID", "RoadNode"}:
+        if self.jaar_type in {"AcctID", "RoadNode"}:
             return not self._inx_road_delimiter_in_inx_words()
-        elif self.obj_class in {"GroupID"}:
+        elif self.jaar_type in {"GroupID"}:
             return str_in_all_dict_values(self.inx_road_delimiter, self.otx_to_inx)
-        elif self.obj_class in {"RoadUnit"}:
+        elif self.jaar_type in {"RoadUnit"}:
             return True
 
     def all_otx_parent_roads_exist(self) -> bool:
-        if self.obj_class not in {"RoadUnit"}:
+        if self.jaar_type not in {"RoadUnit"}:
             return True
         for x_road in self.otx_to_inx.keys():
             if is_roadnode(x_road, self.otx_road_delimiter) is False:
@@ -213,7 +213,7 @@ class BridgeUnit:
 
     def get_dict(self) -> dict:
         return {
-            "obj_class": self.obj_class,
+            "jaar_type": self.jaar_type,
             "face_id": self.face_id,
             "otx_road_delimiter": self.otx_road_delimiter,
             "inx_road_delimiter": self.inx_road_delimiter,
@@ -227,7 +227,7 @@ class BridgeUnit:
 
 
 def bridgeunit_shop(
-    x_obj_class: str,
+    x_jaar_type: str,
     x_otx_road_delimiter: str = None,
     x_inx_road_delimiter: str = None,
     x_explicit_label: dict = None,
@@ -243,7 +243,7 @@ def bridgeunit_shop(
         x_inx_road_delimiter = default_road_delimiter_if_none()
 
     return BridgeUnit(
-        obj_class=x_obj_class,
+        jaar_type=x_jaar_type,
         otx_to_inx=get_empty_dict_if_none(x_otx_to_inx),
         unknown_word=x_unknown_word,
         otx_road_delimiter=x_otx_road_delimiter,
@@ -259,7 +259,7 @@ def default_unknown_word() -> str:
 
 def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
     return bridgeunit_shop(
-        x_obj_class=x_dict.get("obj_class"),
+        x_jaar_type=x_dict.get("jaar_type"),
         x_face_id=x_dict.get("face_id"),
         x_inx_road_delimiter=x_dict.get("inx_road_delimiter"),
         x_explicit_label=x_dict.get("explicit_label"),
@@ -274,7 +274,13 @@ def get_bridgeunit_from_json(x_json: str) -> BridgeUnit:
 
 
 @dataclass
-class FilterUnit:
+class PidginUnit:
+    """Per face object that translates any translatable str.
+    otx is the reference for the outside, what the face says
+    inx is the reference for the inside, what the same inteprets from the face
+    Contains a bridgeunit for each translatable type: RoadUnit, AcctID, GroupID...
+    """
+
     eon_id: TimeLinePoint = None
     face_id: OwnerID = None
     bridgeunits: dict[str, BridgeUnit] = None
@@ -288,56 +294,56 @@ class FilterUnit:
         self._check_attr_match("inx_road_delimiter", x_bridgeunit)
         self._check_attr_match("unknown_word", x_bridgeunit)
 
-        x_obj_class = None
-        if x_bridgeunit.obj_class in {"RoadUnit", "RoadNode"}:
-            x_obj_class = "road"
-            if x_bridgeunit.obj_class in {"RoadNode"}:
-                x_bridgeunit.obj_class = "RoadUnit"
+        x_jaar_type = None
+        if x_bridgeunit.jaar_type in {"RoadUnit", "RoadNode"}:
+            x_jaar_type = "road"
+            if x_bridgeunit.jaar_type in {"RoadNode"}:
+                x_bridgeunit.jaar_type = "RoadUnit"
         else:
-            x_obj_class = x_bridgeunit.obj_class
+            x_jaar_type = x_bridgeunit.jaar_type
 
-        self.bridgeunits[x_obj_class] = x_bridgeunit
+        self.bridgeunits[x_jaar_type] = x_bridgeunit
 
     def _check_attr_match(self, attr: str, bridgeunit: BridgeUnit):
         self_attr = getattr(self, attr)
         unit_attr = getattr(bridgeunit, attr)
         if self_attr != unit_attr:
             exception_str = f"set_bridgeunit Error: BridgeUnit {attr} is '{self_attr}', BridgeUnit is '{unit_attr}'."
-            raise atom_args_obj_classException(exception_str)
+            raise atom_args_jaar_typeException(exception_str)
 
-    def get_bridgeunit(self, x_obj_class: str) -> BridgeUnit:
-        if x_obj_class in {"RoadUnit", "RoadNode"}:
-            x_obj_class = "road"
-        return self.bridgeunits.get(x_obj_class)
+    def get_bridgeunit(self, x_jaar_type: str) -> BridgeUnit:
+        if x_jaar_type in {"RoadUnit", "RoadNode"}:
+            x_jaar_type = "road"
+        return self.bridgeunits.get(x_jaar_type)
 
     def is_valid(self) -> bool:
         x_bridgeunits = self.bridgeunits.values()
         return all(x_bridgeunit.is_valid() is True for x_bridgeunit in x_bridgeunits)
 
-    def set_otx_to_inx(self, x_obj_class: str, x_otx: str, x_inx: str):
-        self.get_bridgeunit(x_obj_class).set_otx_to_inx(x_otx, x_inx)
+    def set_otx_to_inx(self, x_jaar_type: str, x_otx: str, x_inx: str):
+        self.get_bridgeunit(x_jaar_type).set_otx_to_inx(x_otx, x_inx)
 
-    def _get_inx_value(self, x_obj_class: str, x_otx: str) -> str:
-        return self.get_bridgeunit(x_obj_class)._get_inx_value(x_otx)
+    def _get_inx_value(self, x_jaar_type: str, x_otx: str) -> str:
+        return self.get_bridgeunit(x_jaar_type)._get_inx_value(x_otx)
 
-    def otx_to_inx_exists(self, x_obj_class: str, x_otx: str, x_inx: str) -> bool:
-        return self.get_bridgeunit(x_obj_class).otx_to_inx_exists(x_otx, x_inx)
+    def otx_to_inx_exists(self, x_jaar_type: str, x_otx: str, x_inx: str) -> bool:
+        return self.get_bridgeunit(x_jaar_type).otx_to_inx_exists(x_otx, x_inx)
 
-    def del_otx_to_inx(self, x_obj_class: str, x_otx: str):
-        self.get_bridgeunit(x_obj_class).del_otx_to_inx(x_otx)
+    def del_otx_to_inx(self, x_jaar_type: str, x_otx: str):
+        self.get_bridgeunit(x_jaar_type).del_otx_to_inx(x_otx)
 
-    def set_explicit_label(self, x_obj_class: str, x_otx: str, x_inx: str):
-        self.get_bridgeunit(x_obj_class).set_explicit_label(x_otx, x_inx)
+    def set_explicit_label(self, x_jaar_type: str, x_otx: str, x_inx: str):
+        self.get_bridgeunit(x_jaar_type).set_explicit_label(x_otx, x_inx)
 
-    def _get_explicit_inx_label(self, x_obj_class: str, x_otx: str) -> str:
-        return self.get_bridgeunit(x_obj_class)._get_explicit_inx_label(x_otx)
+    def _get_explicit_inx_label(self, x_jaar_type: str, x_otx: str) -> str:
+        return self.get_bridgeunit(x_jaar_type)._get_explicit_inx_label(x_otx)
 
-    def explicit_label_exists(self, x_obj_class: str, x_otx: str, x_inx: str) -> bool:
-        x_bridgeunit = self.get_bridgeunit(x_obj_class)
+    def explicit_label_exists(self, x_jaar_type: str, x_otx: str, x_inx: str) -> bool:
+        x_bridgeunit = self.get_bridgeunit(x_jaar_type)
         return x_bridgeunit.explicit_label_exists(x_otx, x_inx)
 
-    def del_explicit_label(self, x_obj_class: str, x_otx: str):
-        self.get_bridgeunit(x_obj_class).del_explicit_label(x_otx)
+    def del_explicit_label(self, x_jaar_type: str, x_otx: str):
+        self.get_bridgeunit(x_jaar_type).del_explicit_label(x_otx)
 
     def get_dict(self) -> dict:
         return {
@@ -359,13 +365,13 @@ class FilterUnit:
         return get_json_from_dict(self.get_dict())
 
 
-def filterunit_shop(
+def pidginunit_shop(
     x_face_id: OwnerID,
     x_eon_id: TimeLinePoint = None,
     x_otx_road_delimiter: str = None,
     x_inx_road_delimiter: str = None,
     x_unknown_word: str = None,
-) -> FilterUnit:
+) -> PidginUnit:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
     if x_otx_road_delimiter is None:
@@ -375,21 +381,21 @@ def filterunit_shop(
 
     x_bridgeunits = {
         "AcctID": bridgeunit_shop(
-            x_obj_class="AcctID",
+            x_jaar_type="AcctID",
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
             x_inx_road_delimiter=x_inx_road_delimiter,
             x_face_id=x_face_id,
         ),
         "GroupID": bridgeunit_shop(
-            x_obj_class="GroupID",
+            x_jaar_type="GroupID",
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
             x_inx_road_delimiter=x_inx_road_delimiter,
             x_face_id=x_face_id,
         ),
         "road": bridgeunit_shop(
-            x_obj_class="RoadUnit",
+            x_jaar_type="RoadUnit",
             x_unknown_word=x_unknown_word,
             x_otx_road_delimiter=x_otx_road_delimiter,
             x_inx_road_delimiter=x_inx_road_delimiter,
@@ -397,7 +403,7 @@ def filterunit_shop(
         ),
     }
 
-    return FilterUnit(
+    return PidginUnit(
         face_id=x_face_id,
         eon_id=get_0_if_None(x_eon_id),
         unknown_word=x_unknown_word,
@@ -407,8 +413,8 @@ def filterunit_shop(
     )
 
 
-def get_filterunit_from_dict(x_dict: dict) -> FilterUnit:
-    return FilterUnit(
+def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
+    return PidginUnit(
         face_id=x_dict.get("face_id"),
         eon_id=x_dict.get("eon_id"),
         otx_road_delimiter=x_dict.get("otx_road_delimiter"),
@@ -420,10 +426,10 @@ def get_filterunit_from_dict(x_dict: dict) -> FilterUnit:
 
 def get_bridgeunits_from_dict(bridgeunits_dict: dict) -> dict[str, BridgeUnit]:
     return {
-        x_obj_class: get_bridgeunit_from_dict(x_bridgeunit_dict)
-        for x_obj_class, x_bridgeunit_dict in bridgeunits_dict.items()
+        x_jaar_type: get_bridgeunit_from_dict(x_bridgeunit_dict)
+        for x_jaar_type, x_bridgeunit_dict in bridgeunits_dict.items()
     }
 
 
-def get_filterunit_from_json(x_json: str) -> FilterUnit:
-    return get_filterunit_from_dict(get_dict_from_json(x_json))
+def get_pidginunit_from_json(x_json: str) -> PidginUnit:
+    return get_pidginunit_from_dict(get_dict_from_json(x_json))

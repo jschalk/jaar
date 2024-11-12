@@ -1,19 +1,23 @@
 from src.f00_instrument.file import (
     save_file,
     create_file_path,
-    get_all_filenames,
+    get_dir_filenames,
     get_dir_file_strs,
     open_file,
 )
 from src.f00_instrument.db_toolbox import get_grouping_with_all_values_equal_sql_query
-from src.f04_gift.atom_config import get_atom_args_obj_classs
-from src.f08_filter.filter import (
+from src.f04_gift.atom_config import get_atom_args_jaar_types
+from src.f08_pidgin.pidgin import (
     BridgeUnit,
-    FilterUnit,
-    filterable_atom_args,
-    get_filterunit_from_json,
+    PidginUnit,
+    pidginable_atom_args,
+    get_pidginunit_from_json,
 )
-from src.f09_brick.brick_config import get_brick_elements_sort_order
+from src.f09_brick.brick_config import (
+    get_brick_elements_sort_order,
+    get_brick_category_ref,
+    get_brick_format_filename,
+)
 from pandas import (
     DataFrame,
     read_csv as pandas_read_csv,
@@ -55,7 +59,7 @@ def get_all_excel_sheet_names(
 ) -> set[(str, str, str)]:
     if sub_strs is None:
         sub_strs = set()
-    excel_files = get_all_filenames(dir, {"xlsx"})
+    excel_files = get_dir_filenames(dir, {"xlsx"})
     sheet_names = set()
     for relative_dir, filename in excel_files:
         absolute_dir = create_file_path(dir, relative_dir)
@@ -108,11 +112,11 @@ def get_grouping_with_all_values_equal_df(
         return pandas_read_sql_query(query_str, conn)
 
 
-def get_dataframe_filterable_columns(x_df: DataFrame) -> set[str]:
-    return {x_column for x_column in x_df.columns if x_column in filterable_atom_args()}
+def get_dataframe_pidginable_columns(x_df: DataFrame) -> set[str]:
+    return {x_column for x_column in x_df.columns if x_column in pidginable_atom_args()}
 
 
-def filter_single_column_dataframe(
+def pidgin_single_column_dataframe(
     x_df: DataFrame, x_bridgeunit: BridgeUnit, column_name: str
 ) -> DataFrame:
     if column_name in x_df:
@@ -124,23 +128,29 @@ def filter_single_column_dataframe(
     return x_df
 
 
-def filter_all_columns_dataframe(x_df: DataFrame, x_filterunit: FilterUnit):
+def pidgin_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
     column_names = set(x_df.columns)
-    filterable_columns = column_names.intersection(filterable_atom_args())
-    for filterable_column in filterable_columns:
-        obj_class = get_atom_args_obj_classs().get(filterable_column)
-        x_bridgeunit = x_filterunit.get_bridgeunit(obj_class)
-        filter_single_column_dataframe(x_df, x_bridgeunit, filterable_column)
+    pidginable_columns = column_names.intersection(pidginable_atom_args())
+    for pidginable_column in pidginable_columns:
+        jaar_type = get_atom_args_jaar_types().get(pidginable_column)
+        x_bridgeunit = x_pidginunit.get_bridgeunit(jaar_type)
+        pidgin_single_column_dataframe(x_df, x_bridgeunit, pidginable_column)
 
 
-def filter_face_dir_files(face_dir: str):
+def move_otx_csvs_to_pidgin_inx(face_dir: str):
     otx_dir = f"{face_dir}/otx"
     inx_dir = f"{face_dir}/inx"
     bridge_filename = "bridge.json"
-    filterunit_json = open_file(face_dir, bridge_filename)
-    face_filterunit = get_filterunit_from_json(filterunit_json)
+    pidginunit_json = open_file(face_dir, bridge_filename)
+    face_pidginunit = get_pidginunit_from_json(pidginunit_json)
     otx_dir_files = get_dir_file_strs(otx_dir, delete_extensions=False)
     for x_file_name in otx_dir_files.keys():
         x_df = open_csv(otx_dir, x_file_name)
-        filter_all_columns_dataframe(x_df, face_filterunit)
+        pidgin_all_columns_dataframe(x_df, face_pidginunit)
         save_dataframe_to_csv(x_df, inx_dir, x_file_name)
+
+
+def _get_pidgen_brick_format_filenames() -> set[str]:
+    brick_numbers = set(get_brick_category_ref().get("bridge_otx_to_inx"))
+    brick_numbers.update(set(get_brick_category_ref().get("bridge_explicit_label")))
+    return {f"{brick_number}.xlsx" for brick_number in brick_numbers}
