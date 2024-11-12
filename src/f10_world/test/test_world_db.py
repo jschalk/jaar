@@ -1,8 +1,8 @@
-from src.f00_instrument.file import save_file, delete_dir, create_file_path, open_file
-from src.f00_instrument.db_toolbox import check_connection, check_table_column_existence
-from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
-from src.f08_pidgin.pidgin import pidginunit_shop
-from src.f09_brick.examples.brick_df_examples import get_ex1_br00001_df
+# from src.f00_instrument.file import save_file, delete_dir, create_file_path, open_file
+# from src.f00_instrument.db_toolbox import check_connection, check_table_column_existence
+# from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
+# from src.f08_pidgin.pidgin import pidginunit_shop
+# from src.f09_brick.examples.brick_df_examples import get_ex1_br00001_df
 from src.f10_world.world import WorldUnit, worldunit_shop
 from src.f10_world.examples.world_env import (
     get_test_world_id,
@@ -19,30 +19,30 @@ from os.path import exists as os_path_exists
 
 def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    music_str = "music"
-    music_world = WorldUnit(world_id=music_str, worlds_dir=get_test_worlds_dir())
-    x_world_dir = f"{get_test_worlds_dir()}/{music_str}"
+    fizz_str = "fizz"
+    fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=get_test_worlds_dir())
+    x_world_dir = f"{get_test_worlds_dir()}/{fizz_str}"
     x_faces_dir = f"{x_world_dir}/faces"
     x_jungle_dir = f"{x_world_dir}/jungle"
     x_zoo_dir = f"{x_world_dir}/zoo"
 
-    assert music_world._world_dir is None
-    assert music_world._faces_dir is None
-    assert music_world._jungle_dir is None
-    assert music_world._zoo_dir is None
+    assert fizz_world._world_dir is None
+    assert fizz_world._faces_dir is None
+    assert fizz_world._jungle_dir is None
+    assert fizz_world._zoo_dir is None
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_faces_dir) is False
     assert os_path_exists(x_jungle_dir) is False
     assert os_path_exists(x_zoo_dir) is False
 
     # WHEN
-    music_world._set_world_dirs()
+    fizz_world._set_world_dirs()
 
     # THEN
-    assert music_world._world_dir == x_world_dir
-    assert music_world._faces_dir == x_faces_dir
-    assert music_world._jungle_dir == x_jungle_dir
-    assert music_world._zoo_dir == x_zoo_dir
+    assert fizz_world._world_dir == x_world_dir
+    assert fizz_world._faces_dir == x_faces_dir
+    assert fizz_world._jungle_dir == x_jungle_dir
+    assert fizz_world._zoo_dir == x_zoo_dir
     assert os_path_exists(x_world_dir)
     assert os_path_exists(x_faces_dir)
     assert os_path_exists(x_jungle_dir)
@@ -51,15 +51,15 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
 
 # def test_WorldUnit_get_db_path_ReturnsCorrectObj():
 #     # ESTABLISH
-#     music_str = "music"
-#     music_world = WorldUnit(world_id=music_str, worlds_dir=get_test_worlds_dir())
-#     music_world._world_dir = create_file_path(music_world.worlds_dir, music_str)
+#     fizz_str = "fizz"
+#     fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=get_test_worlds_dir())
+#     fizz_world._world_dir = create_file_path(fizz_world.worlds_dir, fizz_str)
 
 #     # WHEN
-#     x_db_path = music_world.get_db_path()
+#     x_db_path = fizz_world.get_db_path()
 
 #     # THEN
-#     x_world_dir = f"{get_test_worlds_dir()}/{music_str}"
+#     x_world_dir = f"{get_test_worlds_dir()}/{fizz_str}"
 #     file_name = "wrd.db"
 #     assert x_db_path == f"{x_world_dir}/{file_name}"
 
@@ -68,28 +68,28 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     music_str = "music"
-#     music_world = worldunit_shop(music_str, get_test_worlds_dir())
-#     assert os_path_exists(music_world.get_db_path()) is False
+#     fizz_str = "fizz"
+#     fizz_world = worldunit_shop(fizz_str, get_test_worlds_dir())
+#     assert os_path_exists(fizz_world.get_db_path()) is False
 
 #     # WHEN
-#     music_world._create_wrd_db()
+#     fizz_world._create_wrd_db()
 #     # THEN
-#     assert os_path_exists(music_world.get_db_path())
+#     assert os_path_exists(fizz_world.get_db_path())
 
 
 # def test_WorldUnit_db_exists_ReturnsObj(env_dir_setup_cleanup):
 #     # ESTABLISH
-#     music_str = "music"
-#     music_world = worldunit_shop(music_str, get_test_worlds_dir())
-#     assert os_path_exists(music_world.get_db_path()) is False
-#     assert music_world.db_exists() is False
+#     fizz_str = "fizz"
+#     fizz_world = worldunit_shop(fizz_str, get_test_worlds_dir())
+#     assert os_path_exists(fizz_world.get_db_path()) is False
+#     assert fizz_world.db_exists() is False
 
 #     # WHEN
-#     music_world._create_wrd_db()
+#     fizz_world._create_wrd_db()
 #     # THEN
-#     assert os_path_exists(music_world.get_db_path())
-#     assert music_world.db_exists()
+#     assert os_path_exists(fizz_world.get_db_path())
+#     assert fizz_world.db_exists()
 
 
 # def test_WorldUnit_get_engine_CreatesWrdDBIfDoesNotExist(

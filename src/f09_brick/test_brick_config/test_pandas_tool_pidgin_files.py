@@ -5,7 +5,7 @@ from src.f09_brick.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f08_pidgin.pidgin import pidginunit_shop
 from src.f09_brick.pandas_tool import (
     move_otx_csvs_to_pidgin_inx,
-    _get_pidgen_brick_filenames,
+    _get_pidgen_brick_format_filenames,
 )
 from src.f08_pidgin.examples.pidgin_env import (
     env_dir_setup_cleanup,
@@ -191,7 +191,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     assert gen_road1_inx_dt.to_csv() == road1_inx_dt.to_csv()
 
 
-def test_get_pidgen_brick_filenames_ReturnsObj():
+def test_get_pidgen_brick_format_filenames_ReturnsObj():
     # ESTABLISH
     br00003_file_name = "br00003.xlsx"
     br00040_file_name = "br00040.xlsx"
@@ -199,7 +199,7 @@ def test_get_pidgen_brick_filenames_ReturnsObj():
     br00042_file_name = "br00042.xlsx"
 
     # WHEN
-    x_pidgen_brick_filenames = _get_pidgen_brick_filenames()
+    x_pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
 
     # THEN
     print(f"{x_pidgen_brick_filenames=}")
@@ -210,7 +210,7 @@ def test_get_pidgen_brick_filenames_ReturnsObj():
     assert len(x_pidgen_brick_filenames) == 2
 
 
-# def test_get_pidgen_brick_filenames_ReturnsObj():
+# def test_get_pidgen_brick_format_filenames_ReturnsObj():
 #     # ESTABLISH
 #     env_dir = get_test_faces_dir()
 #     br00003_file_name = "br00003.xlsx"
@@ -223,7 +223,7 @@ def test_get_pidgen_brick_filenames_ReturnsObj():
 #     save_file(env_dir, br00042_file_name, "")
 
 #     # WHEN
-#     x_pidgen_brick_filenames = _get_pidgen_brick_filenames()
+#     x_pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
 
 #     # THEN
 #     print(f"{x_pidgen_brick_filenames=}")
