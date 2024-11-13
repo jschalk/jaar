@@ -108,7 +108,7 @@ def _load_explicit_label_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit
     return x_bridgeunit
 
 
-def create_dir_valid_pidginunit(x_dir: str) -> PidginUnit:
+def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
     face_id_set = set()
     unknown_word_set = set()
     otx_road_delimiter_set = set()
@@ -148,7 +148,7 @@ def create_dir_valid_pidginunit(x_dir: str) -> PidginUnit:
 
 
 def init_pidginunit_from_dir(x_dir: str) -> PidginUnit:
-    x_pidginunit = create_dir_valid_pidginunit(x_dir)
+    x_pidginunit = create_dir_valid_empty_pidginunit(x_dir)
     for x_bridgeunit in x_pidginunit.bridgeunits.values():
         _load_otx_to_inx_from_csv(x_dir, x_bridgeunit)
         _load_explicit_label_from_csv(x_dir, x_bridgeunit)

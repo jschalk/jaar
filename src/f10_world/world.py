@@ -211,7 +211,7 @@ class WorldUnit:
         transformer = ZooToOtxTransformer(self._zoo_dir)
         transformer.transform()
 
-    def otx_to_pidgen_ref(self):
+    def otx_to_faces_eon(self):
         pass
 
     def get_dict(self) -> dict:

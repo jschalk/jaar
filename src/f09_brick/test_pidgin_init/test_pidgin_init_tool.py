@@ -32,7 +32,7 @@ from src.f09_brick.pidgin_toolbox import (
     _load_otx_to_inx_from_csv,
     _load_explicit_label_from_csv,
     _save_explicit_label_csv,
-    create_dir_valid_pidginunit,
+    create_dir_valid_empty_pidginunit,
     init_pidginunit_from_dir,
 )
 from src.f09_brick.pandas_tool import (
@@ -201,7 +201,7 @@ def test_load_explicit_label_map_from_csv_SetsAttr(env_dir_setup_cleanup):
     assert gen_bridgeunit == empty_road_bridgeunit
 
 
-def test_create_dir_valid_pidginunit_Sets_otx_road_delimiter_inx_road_delimiter(
+def test_create_dir_valid_empty_pidginunit_Sets_otx_road_delimiter_inx_road_delimiter(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -220,7 +220,7 @@ def test_create_dir_valid_pidginunit_Sets_otx_road_delimiter_inx_road_delimiter(
     save_all_csvs_from_pidginunit(bridge_dir, sue_pidginunit)
 
     # WHEN
-    gen_pidginunit = create_dir_valid_pidginunit(bridge_dir)
+    gen_pidginunit = create_dir_valid_empty_pidginunit(bridge_dir)
 
     # # THEN
     assert gen_pidginunit.unknown_word == x_unknown_word

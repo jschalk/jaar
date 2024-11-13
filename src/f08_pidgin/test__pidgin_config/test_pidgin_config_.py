@@ -70,7 +70,7 @@ def test_get_pidgin_config_dict_ReturnsObj():
     bridge_otx_to_inx_dict = pidgin_config.get(bridge_otx_to_inx_str())
     bridge_explicit_label_dict = pidgin_config.get(bridge_explicit_label_str())
     assert len(bridge_otx_to_inx_dict.get(jkeys_str())) == 2
-    assert len(bridge_explicit_label_dict.get(jkeys_str())) == 1
+    assert len(bridge_explicit_label_dict.get(jkeys_str())) == 2
     assert len(bridge_otx_to_inx_dict.get(jvalues_str())) == 4
     assert len(bridge_explicit_label_dict.get(jvalues_str())) == 4
 
