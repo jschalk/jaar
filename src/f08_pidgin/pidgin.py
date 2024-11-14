@@ -281,7 +281,7 @@ class PidginUnit:
     Contains a bridgeunit for each translatable type: RoadUnit, AcctID, GroupID...
     """
 
-    eon_id: TimeLinePoint = None
+    event_id: TimeLinePoint = None
     face_id: OwnerID = None
     bridgeunits: dict[str, BridgeUnit] = None
     unknown_word: str = None
@@ -348,7 +348,7 @@ class PidginUnit:
     def get_dict(self) -> dict:
         return {
             "face_id": self.face_id,
-            "eon_id": self.eon_id,
+            "event_id": self.event_id,
             "otx_road_delimiter": self.otx_road_delimiter,
             "inx_road_delimiter": self.inx_road_delimiter,
             "unknown_word": self.unknown_word,
@@ -367,7 +367,7 @@ class PidginUnit:
 
 def pidginunit_shop(
     x_face_id: OwnerID,
-    x_eon_id: TimeLinePoint = None,
+    x_event_id: TimeLinePoint = None,
     x_otx_road_delimiter: str = None,
     x_inx_road_delimiter: str = None,
     x_unknown_word: str = None,
@@ -405,7 +405,7 @@ def pidginunit_shop(
 
     return PidginUnit(
         face_id=x_face_id,
-        eon_id=get_0_if_None(x_eon_id),
+        event_id=get_0_if_None(x_event_id),
         unknown_word=x_unknown_word,
         otx_road_delimiter=x_otx_road_delimiter,
         inx_road_delimiter=x_inx_road_delimiter,
@@ -416,7 +416,7 @@ def pidginunit_shop(
 def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
     return PidginUnit(
         face_id=x_dict.get("face_id"),
-        eon_id=x_dict.get("eon_id"),
+        event_id=x_dict.get("event_id"),
         otx_road_delimiter=x_dict.get("otx_road_delimiter"),
         inx_road_delimiter=x_dict.get("inx_road_delimiter"),
         unknown_word=x_dict.get("unknown_word"),

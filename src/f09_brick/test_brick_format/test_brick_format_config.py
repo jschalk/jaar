@@ -25,7 +25,7 @@ from src.f04_gift.atom_config import (
     gogo_want_str,
     stop_want_str,
 )
-from src.f08_pidgin.pidgin_config import eon_id_str
+from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.brick import (
     _generate_brick_dataframe,
     get_brickref_obj,
@@ -99,7 +99,7 @@ def test_get_headers_list_ReturnsObj():
     # print(f"{format_00001_headers=}")
     assert format_00021_headers == [
         face_id_str(),
-        eon_id_str(),
+        event_id_str(),
         fiscal_id_str(),
         owner_id_str(),
         acct_id_str(),
@@ -112,7 +112,7 @@ def get_sorted_headers(brick_filename):
     x_brickref = get_brickref_from_file(brick_filename)
     brick_attributes = set(x_brickref.get(attributes_str()).keys())
     brick_attributes.remove(face_id_str())
-    brick_attributes.remove(eon_id_str())
+    brick_attributes.remove(event_id_str())
     return create_sorted_concatenated_str(list(brick_attributes))
 
 
@@ -205,14 +205,14 @@ def test_get_brickref_obj_HasCorrectAttrs_brick_format_00021_bud_acctunit_v0_0_0
         "acct_id": {"otx_key": True},
         "credit_belief": {"otx_key": False},
         "debtit_belief": {"otx_key": False},
-        "eon_id": {"otx_key": True},
+        "event_id": {"otx_key": True},
         "face_id": {"otx_key": True},
         "fiscal_id": {"otx_key": True},
         "owner_id": {"otx_key": True},
     }
     headers_list = format_00001_brickref.get_headers_list()
     assert headers_list[0] == face_id_str()
-    assert headers_list[1] == eon_id_str()
+    assert headers_list[1] == event_id_str()
     assert headers_list[2] == fiscal_id_str()
     assert headers_list[3] == owner_id_str()
     assert headers_list[4] == acct_id_str()
@@ -231,7 +231,7 @@ def test_get_brickref_obj_HasCorrectAttrs_brick_format_00020_bud_acct_membership
     assert len(format_00021_brickref._attributes) == 8
     headers_list = format_00021_brickref.get_headers_list()
     assert headers_list[0] == face_id_str()
-    assert headers_list[1] == eon_id_str()
+    assert headers_list[1] == event_id_str()
     assert headers_list[2] == fiscal_id_str()
     assert headers_list[3] == owner_id_str()
     assert headers_list[4] == acct_id_str()
@@ -251,7 +251,7 @@ def test_get_brickref_obj_HasCorrectAttrs_brick_format_00013_itemunit_v0_0_0():
     assert len(format_00003_brickref._attributes) == 8
     headers_list = format_00003_brickref.get_headers_list()
     assert headers_list[0] == face_id_str()
-    assert headers_list[1] == eon_id_str()
+    assert headers_list[1] == event_id_str()
     assert headers_list[2] == fiscal_id_str()
     assert headers_list[3] == owner_id_str()
     assert headers_list[4] == parent_road_str()
@@ -271,7 +271,7 @@ def test_get_brickref_obj_HasCorrectAttrs_brick_format_00019_itemunit_v0_0_0():
     assert len(format_00019_brickref._attributes) == 14
     headers_list = format_00019_brickref.get_headers_list()
     assert headers_list[0] == face_id_str()
-    assert headers_list[1] == eon_id_str()
+    assert headers_list[1] == event_id_str()
     assert headers_list[2] == fiscal_id_str()
     assert headers_list[3] == owner_id_str()
     assert headers_list[4] == parent_road_str()

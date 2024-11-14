@@ -116,7 +116,7 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
 #     # get brick dataframe
 #     x_df = get_ex1_br00001_df()
 #     x_df["face_id"] = "Sue"
-#     x_df["eon_id"] = 2
+#     x_df["event_id"] = 2
 #     engine = fizz_world.get_db_engine()
 
 #     brick_number = "br00001"

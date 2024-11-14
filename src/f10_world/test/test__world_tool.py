@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_file_path, create_dir
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
-from src.f08_pidgin.pidgin_config import eon_id_str
+from src.f08_pidgin.pidgin_config import event_id_str
 from src.f10_world.world_tool import (
     get_all_excel_bricksheets,
     get_all_brick_dataframes,
@@ -87,7 +87,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     env_dir = get_test_worlds_dir()
     x_dir = create_file_path(env_dir, "examples_folder")
     sue_str = "Sue"
-    eon_1 = 1
+    event_1 = 1
     minute_360 = 360
     minute_420 = 420
     music23_str = "music23"
@@ -97,13 +97,13 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     ex_file_path = create_file_path(x_dir, ex_file_name)
     brick_columns = [
         face_id_str(),
-        eon_id_str(),
+        event_id_str(),
         cumlative_minute_str(),
         fiscal_id_str(),
         hour_label_str(),
     ]
-    row1 = [sue_str, eon_1, minute_360, music23_str, hour6am]
-    row2 = [sue_str, eon_1, minute_420, music23_str, hour7am]
+    row1 = [sue_str, event_1, minute_360, music23_str, hour6am]
+    row2 = [sue_str, event_1, minute_420, music23_str, hour7am]
 
     df1 = DataFrame([row1, row2], columns=brick_columns)
     br00003_str = "example_br00003"
@@ -128,7 +128,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     env_dir = get_test_worlds_dir()
     x_dir = create_file_path(env_dir, "examples_folder")
     sue_str = "Sue"
-    eon_1 = 1
+    event_1 = 1
     minute_360 = 360
     minute_420 = 420
     music23_str = "music23"
@@ -138,21 +138,21 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     ex_file_path = create_file_path(x_dir, ex_file_name)
     brick_columns = [
         face_id_str(),
-        eon_id_str(),
+        event_id_str(),
         cumlative_minute_str(),
         fiscal_id_str(),
         hour_label_str(),
     ]
-    row1 = [sue_str, eon_1, minute_360, music23_str, hour6am]
-    row2 = [sue_str, eon_1, minute_420, music23_str, hour7am]
+    row1 = [sue_str, event_1, minute_360, music23_str, hour6am]
+    row2 = [sue_str, event_1, minute_420, music23_str, hour7am]
     incomplete_brick_columns = [
         face_id_str(),
-        eon_id_str(),
+        event_id_str(),
         cumlative_minute_str(),
         fiscal_id_str(),
     ]
-    incom_row1 = [sue_str, eon_1, minute_360, music23_str]
-    incom_row2 = [sue_str, eon_1, minute_420, music23_str]
+    incom_row1 = [sue_str, event_1, minute_360, music23_str]
+    incom_row2 = [sue_str, event_1, minute_420, music23_str]
 
     df1 = DataFrame([row1, row2], columns=brick_columns)
     df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_brick_columns)

@@ -14,7 +14,7 @@ from src.f08_pidgin.pidgin_config import (
     get_pidgin_config_dict,
     get_pidgin_args_category_mapping,
     pidginunit_str,
-    eon_id_str,
+    event_id_str,
     otx_road_delimiter_str,
     inx_road_delimiter_str,
     inx_word_str,
@@ -43,7 +43,7 @@ def test_str_functions_ReturnsObj():
     assert otx_to_inx_str() == "otx_to_inx"
     assert bridge_otx_to_inx_str() == "bridge_otx_to_inx"
     assert bridge_explicit_label_str() == "bridge_explicit_label"
-    assert eon_id_str() == "eon_id"
+    assert event_id_str() == "event_id"
 
 
 def test_get_pidgin_config_file_name_ReturnsObj():

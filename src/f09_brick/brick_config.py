@@ -317,7 +317,7 @@ def get_quick_bricks_column_ref() -> dict[str, set[str]]:
 def get_brick_elements_sort_order() -> list[str]:
     return [
         "face_id",
-        "eon_id",
+        "event_id",
         "fiscal_id",
         "jaar_type",
         "owner_id",
@@ -392,7 +392,7 @@ def get_brick_elements_sort_order() -> list[str]:
 def get_brick_sqlite_type() -> dict[str, str]:
     return {
         "face_id": "TEXT",
-        "eon_id": "INTEGER",
+        "event_id": "INTEGER",
         "fiscal_id": "TEXT",
         "jaar_type": "TEXT",
         "owner_id": "TEXT",

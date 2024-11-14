@@ -4,7 +4,7 @@
     "brick_type": "pidginunit",
     "build_order": 1,
     "jkeys": {
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "jaar_type": {},
       "otx_label": {}
@@ -21,7 +21,7 @@
     "brick_type": "pidginunit",
     "build_order": 0,
     "jkeys": {
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "jaar_type": {},
       "otx_word": {}
@@ -39,7 +39,7 @@
     "build_order": 6,
     "jkeys": {
       "acct_id": {},
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "group_id": {},
@@ -56,7 +56,7 @@
     "build_order": 7,
     "jkeys": {
       "acct_id": {},
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "time_id": {}
@@ -72,7 +72,7 @@
     "build_order": 8,
     "jkeys": {
       "awardee_id": {},
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "road": {},
@@ -89,7 +89,7 @@
     "build_order": 9,
     "jkeys": {
       "base": {},
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "road": {},
@@ -106,7 +106,7 @@
     "brick_type": "budunit",
     "build_order": 11,
     "jkeys": {
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "healer_id": {},
@@ -121,7 +121,7 @@
     "build_order": 12,
     "jkeys": {
       "base": {},
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "need": {},
@@ -140,7 +140,7 @@
     "build_order": 14,
     "jkeys": {
       "base": {},
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "road": {},
@@ -155,7 +155,7 @@
     "brick_type": "budunit",
     "build_order": 10,
     "jkeys": {
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "road": {},
@@ -169,7 +169,7 @@
     "brick_type": "budunit",
     "build_order": 15,
     "jkeys": {
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "label": {},
@@ -195,7 +195,7 @@
     "brick_type": "budunit",
     "build_order": 16,
     "jkeys": {
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "time_id": {}
@@ -218,7 +218,7 @@
     "build_order": 18,
     "jkeys": {
       "acct_id": {},
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "owner_id": {},
@@ -234,7 +234,7 @@
     "build_order": 17,
     "jkeys": {
       "acct_id": {},
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "owner_id": {},
@@ -249,7 +249,7 @@
     "brick_type": "fiscalunit",
     "build_order": 3,
     "jkeys": {
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "hour_label": {},
@@ -264,7 +264,7 @@
     "brick_type": "fiscalunit",
     "build_order": 4,
     "jkeys": {
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "month_label": {},
@@ -279,7 +279,7 @@
     "brick_type": "fiscalunit",
     "build_order": 5,
     "jkeys": {
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "time_id": {},
@@ -294,7 +294,7 @@
     "brick_type": "fiscalunit",
     "build_order": 2,
     "jkeys": {
-      "eon_id": {},
+      "event_id": {},
       "face_id": {},
       "fiscal_id": {},
       "time_id": {}

@@ -27,7 +27,7 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     # THEN
     assert sue_dict
     assert sue_dict.get("face_id") == sue_str
-    assert sue_dict.get("eon_id") == sue_pidginunit.eon_id
+    assert sue_dict.get("event_id") == sue_pidginunit.event_id
     assert sue_dict.get("otx_road_delimiter") == default_road_delimiter_if_none()
     assert sue_dict.get("inx_road_delimiter") == default_road_delimiter_if_none()
     assert sue_dict.get("unknown_word") == default_unknown_word()
@@ -98,13 +98,13 @@ def test_PidginUnit_get_json_ReturnsObj():
 def test_get_pidginunit_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    sue_eon_id = 77
+    sue_event_id = 77
     x_unknown_word = "UnknownAcctId"
     slash_otx_road_delimiter = "/"
     colon_inx_road_delimiter = ":"
     sue_pidginunit = pidginunit_shop(
         sue_str,
-        sue_eon_id,
+        sue_event_id,
         slash_otx_road_delimiter,
         colon_inx_road_delimiter,
         x_unknown_word,
@@ -119,7 +119,7 @@ def test_get_pidginunit_from_dict_ReturnsObj():
     # THEN
     assert gen_pidginunit
     assert gen_pidginunit.face_id == sue_str
-    assert gen_pidginunit.eon_id == sue_eon_id
+    assert gen_pidginunit.event_id == sue_event_id
     assert gen_pidginunit.otx_road_delimiter == slash_otx_road_delimiter
     assert gen_pidginunit.inx_road_delimiter == colon_inx_road_delimiter
     assert gen_pidginunit.unknown_word == x_unknown_word
@@ -136,13 +136,13 @@ def test_get_pidginunit_from_dict_ReturnsObj():
 def test_get_pidginunit_from_json_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    sue_eon_id = 77
+    sue_event_id = 77
     x_unknown_word = "UnknownAcctId"
     slash_otx_road_delimiter = "/"
     colon_inx_road_delimiter = ":"
     sue_pidginunit = pidginunit_shop(
         sue_str,
-        sue_eon_id,
+        sue_event_id,
         slash_otx_road_delimiter,
         colon_inx_road_delimiter,
         x_unknown_word,
@@ -157,7 +157,7 @@ def test_get_pidginunit_from_json_ReturnsObj():
     # THEN
     assert gen_pidginunit
     assert gen_pidginunit.face_id == sue_str
-    assert gen_pidginunit.eon_id == sue_eon_id
+    assert gen_pidginunit.event_id == sue_event_id
     assert gen_pidginunit.otx_road_delimiter == slash_otx_road_delimiter
     assert gen_pidginunit.inx_road_delimiter == colon_inx_road_delimiter
     assert gen_pidginunit.unknown_word == x_unknown_word

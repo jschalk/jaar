@@ -90,7 +90,7 @@ from src.f07_fiscal.fiscal_config import (
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import (
-    eon_id_str,
+    event_id_str,
     pidginunit_str,
     otx_road_delimiter_str,
     inx_road_delimiter_str,
@@ -164,7 +164,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
 
     # THEN
     assert table_sorting_priority[0] == face_id_str()
-    assert table_sorting_priority[1] == eon_id_str()
+    assert table_sorting_priority[1] == event_id_str()
     assert table_sorting_priority[2] == fiscal_id_str()
     assert table_sorting_priority[3] == jaar_type_str()
     assert table_sorting_priority[4] == owner_id_str()
@@ -245,7 +245,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     atom_fiscal_pidgin_args = atom_args
     atom_fiscal_pidgin_args.update(fiscal_args)
     atom_fiscal_pidgin_args.update(pidgin_args)
-    table_sorting_priority.remove(eon_id_str())
+    table_sorting_priority.remove(event_id_str())
     table_sorting_priority.remove(face_id_str())
     assert atom_fiscal_pidgin_args == set(table_sorting_priority)
 
@@ -257,7 +257,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     # THEN
     assert set(sqlite_types.keys()) == set(get_brick_elements_sort_order())
     assert sqlite_types.get(face_id_str()) == "TEXT"
-    assert sqlite_types.get(eon_id_str()) == "INTEGER"
+    assert sqlite_types.get(event_id_str()) == "INTEGER"
     assert sqlite_types.get(fiscal_id_str()) == "TEXT"
     assert sqlite_types.get(jaar_type_str()) == "TEXT"
     assert sqlite_types.get(owner_id_str()) == "TEXT"
@@ -483,7 +483,7 @@ def _validate_brick_config(x_brick_config: dict):
         assert sub_jvalues_keys.issubset(brick_jvalues_keys)
 
         assert face_id_str() in brick_jkeys_keys
-        assert eon_id_str() in brick_jkeys_keys
+        assert event_id_str() in brick_jkeys_keys
         assert fiscal_id_str() not in brick_jvalues_keys
         if brick_dict.get(brick_type_str()) != pidginunit_str():
             assert fiscal_id_str() in brick_jkeys_keys
@@ -576,7 +576,7 @@ def _validate_brick_format_files(brick_filenames: set[str]):
                     assert attr_in_optional, assert_fail_str
 
     # assert face_id_str() in brick_format_attributes
-    # assert eon_id_str() in brick_format_attributes
+    # assert event_id_str() in brick_format_attributes
 
     # confirm every bricknumber is unique
     assert len(brick_numbers_set) == len(brick_filenames)
@@ -666,7 +666,7 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
     assert len(x_brick_quick_column_ref) == len(get_brick_numbers())
     assert x_brick_quick_column_ref.get("br00000") == {
         face_id_str(),
-        eon_id_str(),
+        event_id_str(),
         c400_number_str(),
         current_time_str(),
         fiscal_id_str(),

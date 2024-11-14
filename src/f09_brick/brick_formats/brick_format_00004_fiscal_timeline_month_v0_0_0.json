@@ -3,7 +3,7 @@
         "cumlative_day": {
             "otx_key": false
         },
-        "eon_id": {
+        "event_id": {
             "otx_key": true
         },
         "face_id": {

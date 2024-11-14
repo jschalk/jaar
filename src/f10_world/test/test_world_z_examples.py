@@ -13,7 +13,7 @@ def test_jungle_to_zoo_PidginsAll(env_dir_setup_cleanup):
     ex_file_path = create_file_path(x_dir, ex_file_name)
     music_str = "music23"
     sue_str = "Sue"
-    eon_id = 55
+    event_id = 55
     df1 = DataFrame([[music_str, sue_str]], columns=[fiscal_id_str(), acct_id_str()])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     br00000_str = "br00000"

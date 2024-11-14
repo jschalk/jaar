@@ -152,7 +152,7 @@ def save_brick_csv(x_brickname: str, x_budunit: BudUnit, x_dir: str, x_filename:
 def get_csv_brickref(title_row: list[str]) -> BrickRef:
     headers_str = create_sorted_concatenated_str(title_row)
     headers_str = headers_str.replace("face_id,", "")
-    headers_str = headers_str.replace("eon_id,", "")
+    headers_str = headers_str.replace("event_id,", "")
     x_brickname = get_brick_format_headers().get(headers_str)
     return get_brickref_obj(x_brickname)
 

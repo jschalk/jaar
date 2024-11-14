@@ -26,8 +26,8 @@ def pidginunit_str() -> str:
     return "pidginunit"
 
 
-def eon_id_str() -> str:
-    return "eon_id"
+def event_id_str() -> str:
+    return "event_id"
 
 
 def otx_road_delimiter_str() -> str:

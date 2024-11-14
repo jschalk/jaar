@@ -204,7 +204,7 @@ class WorldUnit:
         transformer = ZooToOtxTransformer(self._zoo_dir)
         transformer.transform()
 
-    def otx_to_faces_eon(self):
+    def otx_to_faces_event(self):
         pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
         for pidgen_brick_filename in pidgen_brick_filenames:
             pidgen_brick_path = create_file_path(self._zoo_dir, pidgen_brick_filename)
