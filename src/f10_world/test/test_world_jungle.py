@@ -193,6 +193,11 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflicti
 #     sue_str = "Sue"
 #     yao_str = "Yao"
 #     eon_1 = 1
+#     eon_2 = 2
+#     eon_5 = 5
+#     eon_7 = 7
+#     eon_8 = 8
+#     eon_9 = 9
 #     hr6am = "6am"
 #     hr7am = "7am"
 #     vetday = "veterns day"
@@ -201,6 +206,7 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflicti
 #     colon_str = ":"
 #     x_uk = "unknownSue"
 #     roadnode_str = "RoadNode"
+#     groupid_str = "GroupID"
 #     br00040_file_path = create_file_path(fizz_world._zoo_dir, br00040_xlsx_file)
 #     br00041_file_path = create_file_path(fizz_world._zoo_dir, br00041_xlsx_file)
 #     br00040_columns = [
@@ -223,29 +229,31 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflicti
 #         otx_road_delimiter_str(),
 #         unknown_word_str(),
 #     ]
-#     oi_row1 = [sue_str, eon_1, hr6am, slash_str, roadnode_str, hr6am, colon_str, x_uk]
-#     oi_row2 = [sue_str, eon_1, hr7am, slash_str, roadnode_str, hr7am, colon_str, x_uk]
-#     oi_row3 = [sue_str, eon_1, hr7am, slash_str, roadnode_str, hr7am, colon_str, x_uk]
-#     el_row4 = [yao_str, eon_1, hr7am, slash_str, roadnode_str, hr7am, colon_str, x_uk]
-#     el_row5 = [sue_str, eon_1, armday, slash_str, roadnode_str, vetday, colon_str, x_uk]
-#     br00040_df = DataFrame([oi_row1, oi_row2, oi_row3], columns=br00040_columns)
-#     br00041_df = DataFrame([el_row4, el_row5], columns=br00041_columns)
+#     sue_oi0 = [sue_str, eon_1, slash_str, hr6am, groupid_str, colon_str, hr6am, x_uk]
+#     sue_oi1 = [sue_str, eon_1, slash_str, hr6am, roadnode_str, colon_str, hr6am, x_uk]
+#     sue_oi2 = [sue_str, eon_2, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
+#     sue_oi3 = [sue_str, eon_5, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
+#     yao_1 = [yao_str, eon_7, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
+#     sue_el = [sue_str, eon_8, armday, slash_str, roadnode_str, vetday, colon_str, x_uk]
+#     yao_el = [yao_str, eon_9, vetday, slash_str, roadnode_str, vetday, colon_str, x_uk]
+#     br00040_df = DataFrame([sue_oi1, sue_oi2, sue_oi3, yao_1], columns=br00040_columns)
+#     br00041_df = DataFrame([yao_el, sue_el], columns=br00041_columns)
 #     with ExcelWriter(br00040_file_path) as writer:
-#         br00040_df.to_excel(writer, sheet_name="otx")
+#         br00040_df.to_excel(writer, sheet_name="otx", index=False)
 #     with ExcelWriter(br00041_file_path) as writer:
-#         br00041_df.to_excel(writer, sheet_name="otx")
+#         br00041_df.to_excel(writer, sheet_name="otx", index=False)
 #     sue_face_dir = create_file_path(fizz_world._faces_dir, f"/{sue_str}")
 #     yao_face_dir = create_file_path(fizz_world._faces_dir, f"/{yao_str}")
-#     sue_otx_to_inx_path = create_file_path(sue_face_dir, "road_otx_to_inx_csv")
-#     sue_otx_explicit_path = create_file_path(sue_face_dir, "road_explicit_label.csv")
-#     yao_otx_to_inx_path = create_file_path(yao_face_dir, "road_otx_to_inx_csv")
-#     yao_otx_explicit_path = create_file_path(yao_face_dir, "road_explicit_label.csv")
+#     sue_road_to_inx_path = create_file_path(sue_face_dir, "road_otx_to_inx_csv")
+#     sue_road_explicit_path = create_file_path(sue_face_dir, "road_explicit_label.csv")
+#     yao_road_to_inx_path = create_file_path(yao_face_dir, "road_otx_to_inx_csv")
+#     yao_road_explicit_path = create_file_path(yao_face_dir, "road_explicit_label.csv")
 #     assert os_path_exists(sue_face_dir) is False
 #     assert os_path_exists(yao_face_dir) is False
-#     assert os_path_exists(sue_otx_to_inx_path) is False
-#     assert os_path_exists(sue_otx_explicit_path) is False
-#     assert os_path_exists(yao_otx_to_inx_path) is False
-#     assert os_path_exists(yao_otx_explicit_path) is False
+#     assert os_path_exists(sue_road_to_inx_path) is False
+#     assert os_path_exists(sue_road_explicit_path) is False
+#     assert os_path_exists(yao_road_to_inx_path) is False
+#     assert os_path_exists(yao_road_explicit_path) is False
 
 #     # WHEN
 #     fizz_world.otx_to_faces_eon()
@@ -253,10 +261,10 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflicti
 #     # THEN
 #     assert os_path_exists(sue_face_dir)
 #     assert os_path_exists(yao_face_dir)
-#     assert os_path_exists(sue_otx_to_inx_path)
-#     assert os_path_exists(sue_otx_explicit_path)
-#     assert os_path_exists(yao_otx_to_inx_path)
-#     assert os_path_exists(yao_otx_explicit_path)
+#     assert os_path_exists(sue_road_to_inx_path)
+#     assert os_path_exists(sue_road_explicit_path)
+#     assert os_path_exists(yao_road_to_inx_path)
+#     assert os_path_exists(yao_road_explicit_path)
 #     # gen_sue_otx_to_inx_df = open_csv(sue_otx_to_inx_path)
 #     # gen_sue_otx_explicit_df = open_csv(sue_otx_explicit_path)
 #     # gen_yao_otx_to_inx_df = open_csv(yao_otx_to_inx_path)

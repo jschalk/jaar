@@ -25,6 +25,7 @@ from src.f09_brick.brick_config import (
     get_quick_bricks_column_ref,
 )
 from src.f09_brick.brick import get_brickref_obj
+from src.f09_brick.pandas_tool import _get_pidgen_brick_format_filenames
 from src.f09_brick.pidgin_toolbox import (
     save_all_csvs_from_pidginunit,
     init_pidginunit_from_dir,
@@ -101,14 +102,6 @@ class ZooToOtxTransformer:
         brick_columns_list = get_new_sorting_columns(brick_columns_set)
         zoo_df = zoo_df[brick_columns_list]
         return get_grouping_with_all_values_equal_df(zoo_df, required_columns)
-
-    # def _read_and_tag_dataframe(self, ref):
-    #     x_file_path = create_file_path(ref.file_dir, ref.file_name)
-    #     df = pandas_read_excel(x_file_path, ref.sheet_name)
-    #     df["file_dir"] = ref.file_dir
-    #     df["file_name"] = ref.file_name
-    #     df["sheet_name"] = ref.sheet_name
-    #     return df
 
     def _save_otx_brick(self, brick_path: str, zoo_df: DataFrame):
         with ExcelWriter(brick_path) as writer:
@@ -212,7 +205,13 @@ class WorldUnit:
         transformer.transform()
 
     def otx_to_faces_eon(self):
-        pass
+        pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
+        for pidgen_brick_filename in pidgen_brick_filenames:
+            pidgen_brick_path = create_file_path(self._zoo_dir, pidgen_brick_filename)
+            df = pandas_read_excel(pidgen_brick_path, "otx")
+
+            print(f"{pidgen_brick_path=}")
+            print(f"{df=}")
 
     def get_dict(self) -> dict:
         return {
