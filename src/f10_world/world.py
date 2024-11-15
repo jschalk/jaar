@@ -108,6 +108,26 @@ class ZooToOtxTransformer:
             zoo_df.to_excel(writer, sheet_name="otx", index=False)
 
 
+class OtxToOtxEventsTransformer:
+    def __init__(self, zoo_dir: str):
+        self.zoo_dir = zoo_dir
+
+    def transform(self):
+        for brick_number in get_brick_numbers():
+            zoo_brick_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
+            if os_path_exists(zoo_brick_path):
+                otx_df = pandas_read_excel(zoo_brick_path, "otx")
+                events_df = self.get_unique_events(otx_df)
+                self._save_otx_brick(zoo_brick_path, events_df)
+
+    def get_unique_events(self, otx_df: DataFrame) -> DataFrame:
+        return otx_df[["face_id", "event_id"]].drop_duplicates()
+
+    def _save_otx_brick(self, brick_path: str, events_df: DataFrame):
+        with ExcelWriter(brick_path) as writer:
+            events_df.to_excel(writer, sheet_name="otx_events", index=False)
+
+
 @dataclass
 class WorldUnit:
     world_id: WorldID = None
@@ -212,6 +232,10 @@ class WorldUnit:
 
             print(f"{pidgen_brick_path=}")
             print(f"{df=}")
+
+    def otx_to_otx_events(self):
+        transformer = OtxToOtxEventsTransformer(self._zoo_dir)
+        transformer.transform()
 
     def get_dict(self) -> dict:
         return {
