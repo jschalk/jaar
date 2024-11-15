@@ -358,8 +358,8 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflicti
 #         br00040_df.to_excel(writer, sheet_name="otx", index=False)
 #     with ExcelWriter(br00041_file_path) as writer:
 #         br00041_df.to_excel(writer, sheet_name="otx", index=False)
-#     sue_face_dir = create_file_path(fizz_world._faces_dir, f"/{sue_str}")
-#     yao_face_dir = create_file_path(fizz_world._faces_dir, f"/{yao_str}")
+#     sue_face_dir = create_file_path(fizz_world._events_dir, f"/{sue_str}")
+#     yao_face_dir = create_file_path(fizz_world._events_dir, f"/{yao_str}")
 #     sue_road_to_inx_path = create_file_path(sue_face_dir, "road_otx_to_inx_csv")
 #     sue_road_explicit_path = create_file_path(sue_face_dir, "road_explicit_label.csv")
 #     yao_road_to_inx_path = create_file_path(yao_face_dir, "road_otx_to_inx_csv")

@@ -10,13 +10,7 @@ from src.f00_instrument.dict_toolbox import (
     get_empty_set_if_none,
 )
 from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
-from src.f01_road.road import (
-    FiscalID,
-    WorldID,
-    TimeLineLabel,
-    get_default_world_id,
-    FaceID,
-)
+from src.f01_road.road import FiscalID, WorldID, TimeLineLabel, get_default_world_id
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
 from src.f09_brick.brick_config import (
@@ -139,51 +133,54 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     current_time: TimeLinePoint = None
-    faces: dict[FaceID, PidginUnit] = None
-    _faces_dir: dict[FaceID,] = None
+    events: dict[TimeLinePoint, PidginUnit] = None
+    _events_dir: str = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _fiscalunits: set[FiscalID] = None
     _world_dir: str = None
     _jungle_dir: str = None
     _zoo_dir: str = None
 
-    def set_face_id(self, face_id: FaceID, x_pidginunit: PidginUnit = None):
+    def set_event_id(self, event_id: TimeLinePoint, x_pidginunit: PidginUnit = None):
         if x_pidginunit is None:
-            x_pidginunit = pidginunit_shop(face_id)
-        self.faces[face_id] = x_pidginunit
+            x_pidginunit = pidginunit_shop(event_id)
+        self.events[event_id] = x_pidginunit
 
-    def face_id_exists(self, face_id: FaceID) -> bool:
-        return self.faces.get(face_id) != None
+    def event_id_exists(self, event_id: TimeLinePoint) -> bool:
+        return self.events.get(event_id) != None
 
-    def get_pidginunit(self, face_id: FaceID) -> PidginUnit:
-        return self.faces.get(face_id)
+    def get_pidginunit(self, event_id: TimeLinePoint) -> PidginUnit:
+        return self.events.get(event_id)
 
-    def del_face_id(self, face_id: FaceID):
-        self.faces.pop(face_id)
+    def del_event_id(self, event_id: TimeLinePoint):
+        self.events.pop(event_id)
 
-    def del_all_face_id(self):
-        self.faces = {}
+    def del_all_event_id(self):
+        self.events = {}
 
-    def face_ids_empty(self) -> bool:
-        return self.faces == {}
+    def events_empty(self) -> bool:
+        return self.events == {}
 
-    def _face_dir(self, face_id: FaceID) -> str:
-        return create_file_path(self._faces_dir, face_id)
+    def _event_dir(self, event_id: TimeLinePoint) -> str:
+        return create_file_path(self._events_dir, event_id)
 
-    def save_pidginunit_files(self, face_id: FaceID):
-        x_pidginunit = self.get_pidginunit(face_id)
-        save_all_csvs_from_pidginunit(self._face_dir(face_id), x_pidginunit)
+    def save_pidginunit_files(self, event_id: TimeLinePoint):
+        x_pidginunit = self.get_pidginunit(event_id)
+        save_all_csvs_from_pidginunit(self._event_dir(event_id), x_pidginunit)
 
-    def face_dir_exists(self, face_id: FaceID) -> bool:
-        return os_path_exists(self._face_dir(face_id))
+    def event_dir_exists(self, event_id: TimeLinePoint) -> bool:
+        return os_path_exists(self._event_dir(event_id))
 
-    def _set_all_face_ids_from_dirs(self):
-        self.del_all_face_id()
-        for dir_name in get_dir_file_strs(self._faces_dir, include_files=False).keys():
-            self.set_face_id(dir_name)
+    def _set_all_events_from_dirs(self):
+        self.del_all_event_id()
+        for dir_name in get_dir_file_strs(self._events_dir, include_files=False).keys():
+            self.set_event_id(dir_name)
 
-    def _delete_pidginunit_dir(self, face_id: FaceID):
-        delete_dir(self._face_dir(face_id))
+    def _delete_pidginunit_dir(self, event_id: TimeLinePoint):
+        delete_dir(self._event_dir(event_id))
+
+    def otx_events_to_all_events(self):
+        pass
 
     # def get_db_path(self) -> str:
     #     return create_file_path(self._world_dir, "wrd.db")
@@ -203,13 +200,13 @@ class WorldUnit:
 
     def _set_world_dirs(self):
         self._world_dir = create_file_path(self.worlds_dir, self.world_id)
-        self._faces_dir = create_file_path(self._world_dir, "faces")
+        self._events_dir = create_file_path(self._world_dir, "events")
         self._jungle_dir = create_file_path(self._world_dir, "jungle")
         self._zoo_dir = create_file_path(self._world_dir, "zoo")
         if not os_path_exists(self._world_dir):
             set_dir(self._world_dir)
-        if not os_path_exists(self._faces_dir):
-            set_dir(self._faces_dir)
+        if not os_path_exists(self._events_dir):
+            set_dir(self._events_dir)
         if not os_path_exists(self._jungle_dir):
             set_dir(self._jungle_dir)
         if not os_path_exists(self._zoo_dir):
@@ -218,9 +215,9 @@ class WorldUnit:
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
-    def load_pidginunit_from_files(self, face_id: FaceID):
-        x_pidginunit = init_pidginunit_from_dir(self._face_dir(face_id))
-        self.set_face_id(face_id, x_pidginunit)
+    def load_pidginunit_from_files(self, event_id: TimeLinePoint):
+        x_pidginunit = init_pidginunit_from_dir(self._event_dir(event_id))
+        self.set_event_id(event_id, x_pidginunit)
 
     def jungle_to_zoo(self):
         transformer = JungleToZooTransformer(self._jungle_dir, self._zoo_dir)
@@ -232,12 +229,12 @@ class WorldUnit:
 
     def otx_to_faces_event(self):
         pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
-        for pidgen_brick_filename in pidgen_brick_filenames:
-            pidgen_brick_path = create_file_path(self._zoo_dir, pidgen_brick_filename)
-            df = pandas_read_excel(pidgen_brick_path, "otx")
+        # for pidgen_brick_filename in pidgen_brick_filenames:
+        #     pidgen_brick_path = create_file_path(self._zoo_dir, pidgen_brick_filename)
+        #     df = pandas_read_excel(pidgen_brick_path, "otx")
 
-            print(f"{pidgen_brick_path=}")
-            print(f"{df=}")
+        #     print(f"{pidgen_brick_path=}")
+        #     print(f"{df=}")
 
     def otx_to_otx_events(self):
         transformer = OtxToOtxEventsTransformer(self._zoo_dir)
@@ -248,7 +245,7 @@ class WorldUnit:
             "world_id": self.world_id,
             "current_time": self.current_time,
             "timeconversions": self.get_timeconversions_dict(),
-            "faces": self.faces,
+            "events": self.events,
         }
 
 
@@ -257,7 +254,7 @@ def worldunit_shop(
     worlds_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
-    faces: set[str] = None,
+    events: set[str] = None,
     _fiscalunits: set[FiscalID] = None,
     in_memory_db: bool = None,
 ) -> WorldUnit:
@@ -270,8 +267,8 @@ def worldunit_shop(
         worlds_dir=worlds_dir,
         current_time=get_0_if_None(current_time),
         timeconversions=get_empty_dict_if_none(timeconversions),
-        faces=get_empty_dict_if_none(faces),
-        _faces_dir=create_file_path(worlds_dir, "faces"),
+        events=get_empty_dict_if_none(events),
+        _events_dir=create_file_path(worlds_dir, "events"),
         _fiscalunits=get_empty_set_if_none(_fiscalunits),
     )
     x_worldunit._set_world_dirs()
