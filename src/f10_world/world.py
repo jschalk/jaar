@@ -121,7 +121,13 @@ class OtxToOtxEventsTransformer:
                 self._save_otx_brick(zoo_brick_path, events_df)
 
     def get_unique_events(self, otx_df: DataFrame) -> DataFrame:
-        return otx_df[["face_id", "event_id"]].drop_duplicates()
+        events_df = otx_df[["face_id", "event_id"]].drop_duplicates()
+        events_df["note"] = (
+            events_df["event_id"]
+            .duplicated(keep=False)
+            .apply(lambda x: "invalid because of conflicting event_id" if x else "")
+        )
+        return events_df.sort_values(["face_id", "event_id"])
 
     def _save_otx_brick(self, brick_path: str, events_df: DataFrame):
         with ExcelWriter(brick_path) as writer:
