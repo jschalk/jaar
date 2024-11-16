@@ -28,6 +28,7 @@ def test_WorldUnit_Exists():
     assert not x_world.current_time
     assert not x_world.timeconversions
     assert not x_world.events
+    assert not x_world.faces
     assert not x_world._events_dir
     assert not x_world._fiscalunits
     assert not x_world._world_dir
@@ -43,7 +44,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     music_text = "music45"
     sue_str = "Sue"
     bob_str = "Bob"
-    world2_events = {
+    world2_faces = {
         sue_str: pidginunit_shop(sue_str),
         bob_str: pidginunit_shop(bob_str),
     }
@@ -56,7 +57,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
         worlds2_dir,
         world2_current_time,
         world2timeconversions,
-        world2_events,
+        world2_faces,
         world2_fiscalunits,
     )
 
@@ -65,7 +66,8 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.worlds_dir == worlds2_dir
     assert x_world.current_time == world2_current_time
     assert x_world.timeconversions == world2timeconversions
-    assert x_world.events == world2_events
+    assert x_world.events == {}
+    assert x_world.faces == world2_faces
     assert x_world._events_dir == f"{worlds2_dir}/{five_world_id}/events"
     assert x_world._fiscalunits == world2_fiscalunits
 

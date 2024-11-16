@@ -10,7 +10,13 @@ from src.f00_instrument.dict_toolbox import (
     get_empty_set_if_none,
 )
 from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
-from src.f01_road.road import FiscalID, WorldID, TimeLineLabel, get_default_world_id
+from src.f01_road.road import (
+    AcctID,
+    FiscalID,
+    WorldID,
+    TimeLineLabel,
+    get_default_world_id,
+)
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
 from src.f09_brick.brick_config import get_brick_numbers, get_brick_format_filename
@@ -165,7 +171,8 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     current_time: TimeLinePoint = None
-    events: dict[TimeLinePoint, PidginUnit] = None
+    events: dict[TimeLinePoint, AcctID] = None
+    faces: dict[AcctID, PidginUnit] = None
     _events_dir: str = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _fiscalunits: set[FiscalID] = None
@@ -295,6 +302,7 @@ class WorldUnit:
             "current_time": self.current_time,
             "timeconversions": self.get_timeconversions_dict(),
             "events": self.events,
+            "faces": self.faces,
         }
 
 
@@ -316,7 +324,8 @@ def worldunit_shop(
         worlds_dir=worlds_dir,
         current_time=get_0_if_None(current_time),
         timeconversions=get_empty_dict_if_none(timeconversions),
-        events=get_empty_dict_if_none(events),
+        events={},
+        faces=get_empty_dict_if_none(events),
         _events_dir=create_file_path(worlds_dir, "events"),
         _fiscalunits=get_empty_set_if_none(_fiscalunits),
     )
