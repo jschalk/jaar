@@ -1,6 +1,6 @@
 from src.f00_instrument.file import open_file
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
-from src.f04_gift.atom_config import required_args_str, optional_args_str
+from src.f04_gift.atom_config import jkeys_str, jvalues_str
 from os import getcwd as os_getcwd
 
 
@@ -26,8 +26,8 @@ def pidginunit_str() -> str:
     return "pidginunit"
 
 
-def eon_id_str() -> str:
-    return "eon_id"
+def event_id_str() -> str:
+    return "event_id"
 
 
 def otx_road_delimiter_str() -> str:
@@ -74,19 +74,19 @@ def bridge_explicit_label_str() -> str:
     return "bridge_explicit_label"
 
 
-def get_pidgin_config_required_args(x_cat: str) -> dict:
-    required_args_key_list = [x_cat, required_args_str()]
-    return get_from_nested_dict(get_pidgin_config_dict(), required_args_key_list)
+def get_pidgin_config_jkeys(x_cat: str) -> dict:
+    jkeys_key_list = [x_cat, jkeys_str()]
+    return get_from_nested_dict(get_pidgin_config_dict(), jkeys_key_list)
 
 
-def get_pidgin_config_optional_args(x_cat: str) -> dict:
-    optional_args_key_list = [x_cat, optional_args_str()]
-    return get_from_nested_dict(get_pidgin_config_dict(), optional_args_key_list)
+def get_pidgin_config_jvalues(x_cat: str) -> dict:
+    jvalues_key_list = [x_cat, jvalues_str()]
+    return get_from_nested_dict(get_pidgin_config_dict(), jvalues_key_list)
 
 
 def get_pidgin_config_args(x_category: str) -> dict[str, dict]:
-    args_dict = get_pidgin_config_required_args(x_category)
-    args_dict.update(get_pidgin_config_optional_args(x_category))
+    args_dict = get_pidgin_config_jkeys(x_category)
+    args_dict.update(get_pidgin_config_jvalues(x_category))
     return args_dict
 
 

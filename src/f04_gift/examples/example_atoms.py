@@ -10,8 +10,8 @@ def get_atom_example_itemunit_sports(fiscal_id: FiscalID = None) -> AtomUnit:
     sports_str = "sports"
     x_category = bud_itemunit_str()
     insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_itemunit_atomunit.set_required_arg(label_str(), sports_str)
-    insert_itemunit_atomunit.set_required_arg(parent_road_str(), fiscal_id)
+    insert_itemunit_atomunit.set_jkey(label_str(), sports_str)
+    insert_itemunit_atomunit.set_jkey(parent_road_str(), fiscal_id)
     return insert_itemunit_atomunit
 
 
@@ -22,8 +22,8 @@ def get_atom_example_itemunit_ball(fiscal_id: FiscalID = None) -> AtomUnit:
     ball_str = "basketball"
     x_category = bud_itemunit_str()
     insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_itemunit_atomunit.set_required_arg(label_str(), ball_str)
-    insert_itemunit_atomunit.set_required_arg(parent_road_str(), sports_road)
+    insert_itemunit_atomunit.set_jkey(label_str(), ball_str)
+    insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
     return insert_itemunit_atomunit
 
 
@@ -38,8 +38,8 @@ def get_atom_example_itemunit_knee(fiscal_id: FiscalID = None) -> AtomUnit:
     begin_str = "begin"
     close_str = "close"
     insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_itemunit_atomunit.set_required_arg(label_str(), knee_str)
-    insert_itemunit_atomunit.set_required_arg(parent_road_str(), sports_road)
-    insert_itemunit_atomunit.set_optional_arg(begin_str, knee_begin)
-    insert_itemunit_atomunit.set_optional_arg(close_str, knee_close)
+    insert_itemunit_atomunit.set_jkey(label_str(), knee_str)
+    insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
+    insert_itemunit_atomunit.set_jvalue(begin_str, knee_begin)
+    insert_itemunit_atomunit.set_jvalue(close_str, knee_close)
     return insert_itemunit_atomunit

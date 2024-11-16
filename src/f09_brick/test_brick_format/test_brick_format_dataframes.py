@@ -233,7 +233,7 @@ def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_acct_example_csv = """face_id,eon_id,fiscal_id,owner_id,acct_id,credit_belief,debtit_belief
+    sue1_acct_example_csv = """face_id,event_id,fiscal_id,owner_id,acct_id,credit_belief,debtit_belief
 ,,music56,Sue,Bob,13,29
 ,,music56,Sue,Sue,11,23
 ,,music56,Sue,Yao,41,37
@@ -250,7 +250,7 @@ def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_acct_example_csv = """face_id,eon_id,fiscal_id,owner_id,acct_id,credit_belief,debtit_belief
+    sue2_acct_example_csv = """face_id,event_id,fiscal_id,owner_id,acct_id,credit_belief,debtit_belief
 ,,music56,Sue,Bob,13,29
 ,,music56,Sue,Sue,11,23
 ,,music56,Sue,Yao,41,37

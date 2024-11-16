@@ -26,12 +26,12 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario0MinimalParameters():
         "world_id",
         "current_time",
         "timeconversions",
-        "faces",
+        "events",
     }
     assert x_world_dict.get("world_id") == five_world_id
     assert x_world_dict.get("current_time") == 0
     assert x_world_dict.get("timeconversions") == {}
-    assert x_world_dict.get("faces") == {}
+    assert x_world_dict.get("events") == {}
 
 
 def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
@@ -40,7 +40,7 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     five_world_id = "five"
     world2_current_time = 55
     music_text = "music45"
-    world2_faces = {"Sue", "Bob"}
+    world2_events = {"Sue", "Bob"}
     world2_timeconversions = {music_text: timeconversion_shop(music_text)}
     world2_fiscalunits = {"music45"}
     x_world = worldunit_shop(
@@ -48,7 +48,7 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
         worlds2_dir,
         world2_current_time,
         world2_timeconversions,
-        world2_faces,
+        world2_events,
         world2_fiscalunits,
     )
 
@@ -60,4 +60,4 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     assert x_world_dict.get("world_id") == five_world_id
     assert x_world_dict.get("current_time") == world2_current_time
     assert x_world_dict.get("timeconversions") == world2_timeconversions
-    assert x_world_dict.get("faces") == world2_faces
+    assert x_world_dict.get("events") == world2_events

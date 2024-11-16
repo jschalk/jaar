@@ -25,8 +25,8 @@ from src.f04_gift.atom_config import (
     set_mog,
     get_flattened_atom_table_build,
     get_normalized_bud_table_build,
-    required_args_str,
-    optional_args_str,
+    jkeys_str,
+    jvalues_str,
     category_str,
     crud_str_str,
     normal_table_name_str,
@@ -39,7 +39,7 @@ from src.f04_gift.atom_config import (
     type_RoadNode_str,
     nesting_order_str,
     column_order_str,
-    get_sorted_required_arg_keys,
+    get_sorted_jkey_keys,
     parent_road_str,
     road_str,
     acct_id_str,
@@ -62,8 +62,8 @@ from src.f04_gift.atom_config import (
 
 
 def test_str_functions_ReturnsObj():
-    assert required_args_str() == "required_args"
-    assert optional_args_str() == "optional_args"
+    assert jkeys_str() == "jkeys"
+    assert jvalues_str() == "jvalues"
     assert column_order_str() == "column_order"
     assert category_str() == "category"
     assert atom_insert() == "INSERT"
@@ -205,39 +205,39 @@ def test_get_atom_config_dict_EveryCrudOperationHasDeltaOrderGroup():
     assert 25 == q_order(atom_update(), budunit_str())
 
 
-def _get_atom_config_required_args_len(x_cat: str) -> int:
-    required_args_key_list = [x_cat, required_args_str()]
-    return len(get_from_nested_dict(get_atom_config_dict(), required_args_key_list))
+def _get_atom_config_jkeys_len(x_cat: str) -> int:
+    jkeys_key_list = [x_cat, jkeys_str()]
+    return len(get_from_nested_dict(get_atom_config_dict(), jkeys_key_list))
 
 
-def _get_atom_config_optional_args_len(x_cat: str) -> int:
-    optional_args_key_list = [x_cat, optional_args_str()]
-    return len(get_from_nested_dict(get_atom_config_dict(), optional_args_key_list))
+def _get_atom_config_jvalues_len(x_cat: str) -> int:
+    jvalues_key_list = [x_cat, jvalues_str()]
+    return len(get_from_nested_dict(get_atom_config_dict(), jvalues_key_list))
 
 
 def test_get_atom_config_dict_CheckEachCategoryHasCorrectArgCount():
     # ESTABLISH
-    assert _get_atom_config_required_args_len(budunit_str()) == 0
-    assert _get_atom_config_required_args_len(bud_acctunit_str()) == 1
-    assert _get_atom_config_required_args_len(bud_acct_membership_str()) == 2
-    assert _get_atom_config_required_args_len(bud_itemunit_str()) == 2
-    assert _get_atom_config_required_args_len(bud_item_awardlink_str()) == 2
-    assert _get_atom_config_required_args_len(bud_item_reasonunit_str()) == 2
-    assert _get_atom_config_required_args_len(bud_item_reason_premiseunit_str()) == 3
-    assert _get_atom_config_required_args_len(bud_item_teamlink_str()) == 2
-    assert _get_atom_config_required_args_len(bud_item_healerlink_str()) == 2
-    assert _get_atom_config_required_args_len(bud_item_factunit_str()) == 2
+    assert _get_atom_config_jkeys_len(budunit_str()) == 0
+    assert _get_atom_config_jkeys_len(bud_acctunit_str()) == 1
+    assert _get_atom_config_jkeys_len(bud_acct_membership_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_itemunit_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_item_awardlink_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_item_reasonunit_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_item_reason_premiseunit_str()) == 3
+    assert _get_atom_config_jkeys_len(bud_item_teamlink_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_item_healerlink_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_item_factunit_str()) == 2
 
-    assert _get_atom_config_optional_args_len(budunit_str()) == 9
-    assert _get_atom_config_optional_args_len(bud_acctunit_str()) == 2
-    assert _get_atom_config_optional_args_len(bud_acct_membership_str()) == 2
-    assert _get_atom_config_optional_args_len(bud_itemunit_str()) == 11
-    assert _get_atom_config_optional_args_len(bud_item_awardlink_str()) == 2
-    assert _get_atom_config_optional_args_len(bud_item_reasonunit_str()) == 1
-    assert _get_atom_config_optional_args_len(bud_item_reason_premiseunit_str()) == 3
-    assert _get_atom_config_optional_args_len(bud_item_teamlink_str()) == 0
-    assert _get_atom_config_optional_args_len(bud_item_healerlink_str()) == 0
-    assert _get_atom_config_optional_args_len(bud_item_factunit_str()) == 3
+    assert _get_atom_config_jvalues_len(budunit_str()) == 9
+    assert _get_atom_config_jvalues_len(bud_acctunit_str()) == 2
+    assert _get_atom_config_jvalues_len(bud_acct_membership_str()) == 2
+    assert _get_atom_config_jvalues_len(bud_itemunit_str()) == 11
+    assert _get_atom_config_jvalues_len(bud_item_awardlink_str()) == 2
+    assert _get_atom_config_jvalues_len(bud_item_reasonunit_str()) == 1
+    assert _get_atom_config_jvalues_len(bud_item_reason_premiseunit_str()) == 3
+    assert _get_atom_config_jvalues_len(bud_item_teamlink_str()) == 0
+    assert _get_atom_config_jvalues_len(bud_item_healerlink_str()) == 0
+    assert _get_atom_config_jvalues_len(bud_item_factunit_str()) == 3
 
 
 def _has_every_element(x_arg, x_dict) -> bool:
@@ -250,12 +250,12 @@ def _has_every_element(x_arg, x_dict) -> bool:
 
 
 def _every_category_dict_has_arg_elements(category_dict: dict) -> bool:
-    for required_arg, x_dict in category_dict.get(required_args_str()).items():
-        if not _has_every_element(required_arg, x_dict):
+    for jkey, x_dict in category_dict.get(jkeys_str()).items():
+        if not _has_every_element(jkey, x_dict):
             return False
-    if category_dict.get(optional_args_str()) is not None:
-        for optional_arg, x_dict in category_dict.get(optional_args_str()).items():
-            if not _has_every_element(optional_arg, x_dict):
+    if category_dict.get(jvalues_str()) is not None:
+        for jvalue, x_dict in category_dict.get(jvalues_str()).items():
+            if not _has_every_element(jvalue, x_dict):
                 return False
     return True
 
@@ -274,17 +274,17 @@ def test_atom_config_AllArgsHave_jaar_type_sqlite_datatype():
 
 def check_necessary_nesting_order_exists() -> bool:
     atom_config = get_atom_config_dict()
-    multi_required_arg_dict = {}
+    multi_jkey_dict = {}
     for atom_key, atom_value in atom_config.items():
-        required_args = atom_value.get(required_args_str())
-        if len(required_args) > 1:
-            multi_required_arg_dict[atom_key] = required_args
-    # print(f"{multi_required_arg_dict.keys()=}")
-    for atom_key, required_args in multi_required_arg_dict.items():
-        for required_arg_key, required_args_dict in required_args.items():
-            required_arg_nesting_order = required_args_dict.get(nesting_order_str())
-            print(f"{atom_key=} {required_arg_key=} {required_arg_nesting_order=}")
-            if required_arg_nesting_order is None:
+        jkeys = atom_value.get(jkeys_str())
+        if len(jkeys) > 1:
+            multi_jkey_dict[atom_key] = jkeys
+    # print(f"{multi_jkey_dict.keys()=}")
+    for atom_key, jkeys in multi_jkey_dict.items():
+        for jkey_key, jkeys_dict in jkeys.items():
+            jkey_nesting_order = jkeys_dict.get(nesting_order_str())
+            print(f"{atom_key=} {jkey_key=} {jkey_nesting_order=}")
+            if jkey_nesting_order is None:
                 return False
     return True
 
@@ -300,88 +300,84 @@ def test_atom_config_NestingOrderExistsWhenNeeded():
     assert check_necessary_nesting_order_exists()
 
 
-def _get_atom_config_optional_arg_keys(x_cat: str) -> set[str]:
-    optional_args_key_list = [x_cat, optional_args_str()]
-    return set(
-        get_from_nested_dict(get_atom_config_dict(), optional_args_key_list).keys()
-    )
+def _get_atom_config_jvalue_keys(x_cat: str) -> set[str]:
+    jvalues_key_list = [x_cat, jvalues_str()]
+    return set(get_from_nested_dict(get_atom_config_dict(), jvalues_key_list).keys())
 
 
-def _get_atom_config_required_arg_keys(x_cat: str) -> set[str]:
-    required_args_key_list = [x_cat, required_args_str()]
-    return set(
-        get_from_nested_dict(get_atom_config_dict(), required_args_key_list).keys()
-    )
+def _get_atom_config_jkey_keys(x_cat: str) -> set[str]:
+    jkeys_key_list = [x_cat, jkeys_str()]
+    return set(get_from_nested_dict(get_atom_config_dict(), jkeys_key_list).keys())
 
 
-def unique_optional_args():
-    optional_arg_keys = set()
-    optional_arg_key_count = 0
+def unique_jvalues():
+    jvalue_keys = set()
+    jvalue_key_count = 0
     for atom_category in get_atom_config_dict().keys():
-        new_optional_arg_keys = _get_atom_config_optional_arg_keys(atom_category)
-        optional_arg_key_count += len(new_optional_arg_keys)
-        optional_arg_keys.update(new_optional_arg_keys)
-        # print(f"{atom_category} {_get_atom_config_optional_arg_keys(atom_category)}")
-    return optional_arg_keys, optional_arg_key_count
+        new_jvalue_keys = _get_atom_config_jvalue_keys(atom_category)
+        jvalue_key_count += len(new_jvalue_keys)
+        jvalue_keys.update(new_jvalue_keys)
+        # print(f"{atom_category} {_get_atom_config_jvalue_keys(atom_category)}")
+    return jvalue_keys, jvalue_key_count
 
 
 def test_get_atom_config_dict_CheckEveryOptionalArgHasUniqueKey():
     # ESTABLISH / WHEN
-    optional_arg_keys, optional_arg_key_count = unique_optional_args()
+    jvalue_keys, jvalue_key_count = unique_jvalues()
 
     # THEN
-    print(f"{optional_arg_key_count=} {len(optional_arg_keys)=}")
-    assert optional_arg_key_count == len(optional_arg_keys)
+    print(f"{jvalue_key_count=} {len(jvalue_keys)=}")
+    assert jvalue_key_count == len(jvalue_keys)
 
 
-def unique_required_args():
-    required_arg_keys = set()
-    required_arg_key_count = 0
+def unique_jkeys():
+    jkey_keys = set()
+    jkey_key_count = 0
     for atom_category in get_atom_config_dict().keys():
-        new_required_arg_keys = _get_atom_config_required_arg_keys(atom_category)
-        if road_str() in new_required_arg_keys:
-            new_required_arg_keys.remove(road_str())
-        if base_str() in new_required_arg_keys:
-            new_required_arg_keys.remove(base_str())
-        if acct_id_str() in new_required_arg_keys:
-            new_required_arg_keys.remove(acct_id_str())
-        if group_id_str() in new_required_arg_keys:
-            new_required_arg_keys.remove(group_id_str())
-        print(f"{atom_category} {new_required_arg_keys=}")
-        required_arg_key_count += len(new_required_arg_keys)
-        required_arg_keys.update(new_required_arg_keys)
-    return required_arg_keys, required_arg_key_count
+        new_jkey_keys = _get_atom_config_jkey_keys(atom_category)
+        if road_str() in new_jkey_keys:
+            new_jkey_keys.remove(road_str())
+        if base_str() in new_jkey_keys:
+            new_jkey_keys.remove(base_str())
+        if acct_id_str() in new_jkey_keys:
+            new_jkey_keys.remove(acct_id_str())
+        if group_id_str() in new_jkey_keys:
+            new_jkey_keys.remove(group_id_str())
+        print(f"{atom_category} {new_jkey_keys=}")
+        jkey_key_count += len(new_jkey_keys)
+        jkey_keys.update(new_jkey_keys)
+    return jkey_keys, jkey_key_count
 
 
 def test_get_atom_config_dict_SomeRequiredArgAreUnique():
     # ESTABLISH / WHEN
-    required_arg_keys, required_arg_key_count = unique_required_args()
+    jkey_keys, jkey_key_count = unique_jkeys()
 
     # THEN
-    print(f"{required_arg_key_count=} {len(required_arg_keys)=}")
-    assert required_arg_key_count == len(required_arg_keys)
+    print(f"{jkey_key_count=} {len(jkey_keys)=}")
+    assert jkey_key_count == len(jkey_keys)
 
 
-def test_get_sorted_required_arg_keys_ReturnsObj_bud_acctunit():
+def test_get_sorted_jkey_keys_ReturnsObj_bud_acctunit():
     # ESTABLISH
     x_category = bud_acctunit_str()
 
     # WHEN
-    x_sorted_required_arg_keys = get_sorted_required_arg_keys(x_category)
+    x_sorted_jkey_keys = get_sorted_jkey_keys(x_category)
 
     # THEN
-    assert x_sorted_required_arg_keys == [acct_id_str()]
+    assert x_sorted_jkey_keys == [acct_id_str()]
 
 
-def test_get_sorted_required_arg_keys_ReturnsObj_bud_item_reason_premiseunit():
+def test_get_sorted_jkey_keys_ReturnsObj_bud_item_reason_premiseunit():
     # ESTABLISH
     x_category = bud_item_reason_premiseunit_str()
 
     # WHEN
-    x_sorted_required_arg_keys = get_sorted_required_arg_keys(x_category)
+    x_sorted_jkey_keys = get_sorted_jkey_keys(x_category)
 
     # THEN
-    assert x_sorted_required_arg_keys == [road_str(), base_str(), "need"]
+    assert x_sorted_jkey_keys == [road_str(), base_str(), "need"]
 
 
 def test_get_flattened_atom_table_build_ReturnsCorrectObj():
@@ -540,11 +536,11 @@ def test_get_atom_args_category_mapping_ReturnsObj():
 def get_jaar_type(x_category: str, x_arg: str) -> str:
     atom_config_dict = get_atom_config_dict()
     category_dict = atom_config_dict.get(x_category)
-    optional_dict = category_dict.get(optional_args_str())
-    required_dict = category_dict.get(required_args_str())
+    optional_dict = category_dict.get(jvalues_str())
+    required_dict = category_dict.get(jkeys_str())
     arg_dict = {}
     if optional_dict.get(x_arg):
-        arg_dict = category_dict.get(optional_args_str()).get(x_arg)
+        arg_dict = category_dict.get(jvalues_str()).get(x_arg)
     if required_dict.get(x_arg):
         arg_dict = required_dict.get(x_arg)
     return arg_dict.get(jaar_type_str())

@@ -22,7 +22,7 @@ def test_AtomUnit_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     # WHEN
     x_category = bud_item_factunit_str()
     update_disc_atomunit = atomunit_shop(x_category, atom_update())
-    update_disc_atomunit.set_required_arg("base", knee_road)
+    update_disc_atomunit.set_jkey("base", knee_road)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -39,7 +39,7 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_BudUnitSimpleAttrs():
     category = budunit_str()
     opt_arg2 = "max_tree_traverse"
     x_atomunit = atomunit_shop(category, atom_update())
-    x_atomunit.set_optional_arg(opt_arg2, new2_value)
+    x_atomunit.set_jvalue(opt_arg2, new2_value)
     # THEN
     x_table = "atom_hx"
     example_sqlstr = f"""
@@ -66,9 +66,9 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_item_factunit():
     road_str = "road"
     base_str = "base"
     update_disc_atomunit = atomunit_shop(x_category, atom_insert())
-    update_disc_atomunit.set_required_arg(road_str, ball_road)
-    update_disc_atomunit.set_required_arg(base_str, knee_road)
-    update_disc_atomunit.set_optional_arg(fopen_str(), knee_open)
+    update_disc_atomunit.set_jkey(road_str, ball_road)
+    update_disc_atomunit.set_jkey(base_str, knee_road)
+    update_disc_atomunit.set_jvalue(fopen_str(), knee_open)
 
     # WHEN
     generated_sqlstr = update_disc_atomunit.get_insert_sqlstr()
@@ -115,10 +115,10 @@ def test_get_atomunit_from_rowdata_ReturnsCorrectObj_item_factunit():
 
     # THEN
     update_disc_atomunit = atomunit_shop(x_category, atom_insert())
-    update_disc_atomunit.set_required_arg(road_str, ball_road)
-    update_disc_atomunit.set_required_arg(base_str, knee_road)
-    update_disc_atomunit.set_optional_arg(fopen_str(), knee_fopen)
+    update_disc_atomunit.set_jkey(road_str, ball_road)
+    update_disc_atomunit.set_jkey(base_str, knee_road)
+    update_disc_atomunit.set_jvalue(fopen_str(), knee_fopen)
     assert update_disc_atomunit.category == x_atomunit.category
     assert update_disc_atomunit.crud_str == x_atomunit.crud_str
-    assert update_disc_atomunit.required_args == x_atomunit.required_args
-    assert update_disc_atomunit.optional_args == x_atomunit.optional_args
+    assert update_disc_atomunit.jkeys == x_atomunit.jkeys
+    assert update_disc_atomunit.jvalues == x_atomunit.jvalues

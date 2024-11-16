@@ -33,5 +33,5 @@ def test_sift_deltaunit_ReturnsObjUPDATEAtomUnit_bud_acctunit():
     assert len(new_deltaunit.get_sorted_atomunits()) == 1
     new_atomunit = new_deltaunit.get_sorted_atomunits()[0]
     assert new_atomunit.crud_str == atom_update()
-    new_optional_args = new_atomunit.get_optional_args_dict()
-    assert new_optional_args == {credit_belief_str(): new_bob_credit_belief}
+    new_jvalues = new_atomunit.get_jvalues_dict()
+    assert new_jvalues == {credit_belief_str(): new_bob_credit_belief}

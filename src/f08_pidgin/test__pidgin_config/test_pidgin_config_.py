@@ -1,6 +1,6 @@
 from src.f04_gift.atom_config import (
-    required_args_str,
-    optional_args_str,
+    jkeys_str,
+    jvalues_str,
     atom_update,
     atom_insert,
     atom_delete,
@@ -14,7 +14,7 @@ from src.f08_pidgin.pidgin_config import (
     get_pidgin_config_dict,
     get_pidgin_args_category_mapping,
     pidginunit_str,
-    eon_id_str,
+    event_id_str,
     otx_road_delimiter_str,
     inx_road_delimiter_str,
     inx_word_str,
@@ -43,7 +43,7 @@ def test_str_functions_ReturnsObj():
     assert otx_to_inx_str() == "otx_to_inx"
     assert bridge_otx_to_inx_str() == "bridge_otx_to_inx"
     assert bridge_explicit_label_str() == "bridge_explicit_label"
-    assert eon_id_str() == "eon_id"
+    assert event_id_str() == "event_id"
 
 
 def test_get_pidgin_config_file_name_ReturnsObj():
@@ -69,18 +69,18 @@ def test_get_pidgin_config_dict_ReturnsObj():
     _validate_pidgin_config(pidgin_config)
     bridge_otx_to_inx_dict = pidgin_config.get(bridge_otx_to_inx_str())
     bridge_explicit_label_dict = pidgin_config.get(bridge_explicit_label_str())
-    assert len(bridge_otx_to_inx_dict.get(required_args_str())) == 2
-    assert len(bridge_explicit_label_dict.get(required_args_str())) == 1
-    assert len(bridge_otx_to_inx_dict.get(optional_args_str())) == 4
-    assert len(bridge_explicit_label_dict.get(optional_args_str())) == 4
+    assert len(bridge_otx_to_inx_dict.get(jkeys_str())) == 2
+    assert len(bridge_explicit_label_dict.get(jkeys_str())) == 2
+    assert len(bridge_otx_to_inx_dict.get(jvalues_str())) == 4
+    assert len(bridge_explicit_label_dict.get(jvalues_str())) == 4
 
-    # assert gen_optional_args == x_pidginunit_optional_args
-    # assert len(pidginunit_dict.get(optional_args_str())) == 9
-    # assert len(pidgin_purview_episode_dict.get(optional_args_str())) == 1
-    # assert len(pidgin_cashbook_dict.get(optional_args_str())) == 1
-    # assert len(pidgin_timeline_hour_dict.get(optional_args_str())) == 0
-    # assert len(pidgin_timeline_month_dict.get(optional_args_str())) == 0
-    # assert len(pidgin_timeline_weekday_dict.get(optional_args_str())) == 0
+    # assert gen_jvalues == x_pidginunit_jvalues
+    # assert len(pidginunit_dict.get(jvalues_str())) == 9
+    # assert len(pidgin_purview_episode_dict.get(jvalues_str())) == 1
+    # assert len(pidgin_cashbook_dict.get(jvalues_str())) == 1
+    # assert len(pidgin_timeline_hour_dict.get(jvalues_str())) == 0
+    # assert len(pidgin_timeline_month_dict.get(jvalues_str())) == 0
+    # assert len(pidgin_timeline_weekday_dict.get(jvalues_str())) == 0
 
 
 def _validate_pidgin_config(pidgin_config: dict):
@@ -98,21 +98,21 @@ def _validate_pidgin_config(pidgin_config: dict):
     # for every pidgin_format file there exists a unique pidgin_number always with leading zeros to make 5 digits
     for pidgin_categorys, cat_dict in pidgin_config.items():
         print(f"_validate_pidgin_config {pidgin_categorys=}")
-        assert cat_dict.get(required_args_str()) is not None
-        assert cat_dict.get(optional_args_str()) is not None
+        assert cat_dict.get(jkeys_str()) is not None
+        assert cat_dict.get(jvalues_str()) is not None
         assert cat_dict.get(atom_update()) is None
         assert cat_dict.get(atom_insert()) is None
         assert cat_dict.get(atom_delete()) is None
         assert cat_dict.get(normal_specs_str()) is None
 
-        pidgin_required_args_keys = set(cat_dict.get(required_args_str()).keys())
-        for required_arg_key in pidgin_required_args_keys:
-            print(f"_validate_pidgin_config {pidgin_categorys=} {required_arg_key=} ")
-            assert required_arg_key in x_possible_args
-        pidgin_optional_args_keys = set(cat_dict.get(optional_args_str()).keys())
-        for optional_arg_key in pidgin_optional_args_keys:
-            print(f"_validate_pidgin_config {pidgin_categorys=} {optional_arg_key=} ")
-            assert optional_arg_key in x_possible_args
+        pidgin_jkeys_keys = set(cat_dict.get(jkeys_str()).keys())
+        for jkey_key in pidgin_jkeys_keys:
+            print(f"_validate_pidgin_config {pidgin_categorys=} {jkey_key=} ")
+            assert jkey_key in x_possible_args
+        pidgin_jvalues_keys = set(cat_dict.get(jvalues_str()).keys())
+        for jvalue_key in pidgin_jvalues_keys:
+            print(f"_validate_pidgin_config {pidgin_categorys=} {jvalue_key=} ")
+            assert jvalue_key in x_possible_args
 
 
 def test_get_pidgin_categorys_ReturnsObj():

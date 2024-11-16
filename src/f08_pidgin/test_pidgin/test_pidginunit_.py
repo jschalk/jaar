@@ -83,7 +83,7 @@ def test_PidginUnit_Exists():
     x_pidginunit = PidginUnit()
 
     # WHEN / THEN
-    assert not x_pidginunit.eon_id
+    assert not x_pidginunit.event_id
     assert not x_pidginunit.bridgeunits
     assert not x_pidginunit.unknown_word
     assert not x_pidginunit.otx_road_delimiter
@@ -100,7 +100,7 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
 
     # THEN
     assert sue_pidginunit.face_id == sue_str
-    assert sue_pidginunit.eon_id == 0
+    assert sue_pidginunit.event_id == 0
     assert sue_pidginunit.unknown_word == default_unknown_word()
     assert sue_pidginunit.otx_road_delimiter == default_road_delimiter_if_none()
     assert sue_pidginunit.inx_road_delimiter == default_road_delimiter_if_none()
@@ -122,7 +122,7 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
 def test_pidginunit_shop_ReturnsObj_scenario1():
     # ESTABLISH
     sue_str = "Sue"
-    five_eon_id = 5
+    five_event_id = 5
     y_unknown_word = "UnknownAcctId"
     slash_otx_road_delimiter = "/"
     colon_inx_road_delimiter = ":"
@@ -130,14 +130,14 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     # WHEN
     sue_pidginunit = pidginunit_shop(
         sue_str,
-        five_eon_id,
+        five_event_id,
         slash_otx_road_delimiter,
         colon_inx_road_delimiter,
         y_unknown_word,
     )
 
     # THEN
-    assert sue_pidginunit.eon_id == five_eon_id
+    assert sue_pidginunit.event_id == five_event_id
     assert sue_pidginunit.unknown_word == y_unknown_word
     assert sue_pidginunit.otx_road_delimiter == slash_otx_road_delimiter
     assert sue_pidginunit.inx_road_delimiter == colon_inx_road_delimiter

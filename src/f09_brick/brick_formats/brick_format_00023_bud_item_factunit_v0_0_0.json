@@ -3,7 +3,7 @@
         "base": {
             "otx_key": true
         },
-        "eon_id": {
+        "event_id": {
             "otx_key": true
         },
         "face_id": {

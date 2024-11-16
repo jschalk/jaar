@@ -34,7 +34,7 @@ from src.f02_bud.bud_tool import (
 )
 from src.f04_gift.atom_config import (
     get_category_from_dict,
-    get_atom_config_required_args,
+    get_atom_config_jkeys,
     get_atom_categorys,
     atom_delete,
     atom_insert,
@@ -44,11 +44,11 @@ from src.f04_gift.atom_config import (
     get_atom_config_dict,
     is_atom_category,
     get_atom_config_args,
-    get_sorted_required_arg_keys,
+    get_sorted_jkey_keys,
     get_atom_args_jaar_types,
     nesting_order_str,
-    required_args_str,
-    optional_args_str,
+    jkeys_str,
+    jvalues_str,
     category_str,
     crud_str_str,
     acct_id_str,
@@ -88,8 +88,8 @@ class AtomUnitDescriptionException(Exception):
 class AtomUnit:
     category: str = None
     crud_str: str = None
-    required_args: dict[str, str] = None
-    optional_args: dict[str, str] = None
+    jkeys: dict[str, str] = None
+    jvalues: dict[str, str] = None
     atom_order: int = None
 
     def get_insert_sqlstr(self) -> str:
@@ -99,38 +99,38 @@ class AtomUnit:
             )
 
         x_columns = [
-            f"{self.category}_{self.crud_str}_{required_arg}"
-            for required_arg in get_sorted_required_arg_keys(self.category)
+            f"{self.category}_{self.crud_str}_{jkey}"
+            for jkey in get_sorted_jkey_keys(self.category)
         ]
         x_columns.extend(
-            f"{self.category}_{self.crud_str}_{optional_arg}"
-            for optional_arg in self.optional_args.keys()
+            f"{self.category}_{self.crud_str}_{jvalue}"
+            for jvalue in self.jvalues.keys()
         )
         x_values = self.get_nesting_order_args()
-        x_values.extend(iter(self.optional_args.values()))
+        x_values.extend(iter(self.jvalues.values()))
         return create_insert_sqlstr(atom_hx_table_name(), x_columns, x_values)
 
     def get_all_args_in_list(self):
         x_list = self.get_nesting_order_args()
-        x_list.extend(list(self.optional_args.values()))
+        x_list.extend(list(self.jvalues.values()))
         return x_list
 
     def set_atom_order(self):
         self.atom_order = get_atom_order(self.crud_str, self.category)
 
     def set_arg(self, x_key: str, x_value: any):
-        for required_arg in self._get_required_args_dict():
-            if x_key == required_arg:
-                self.set_required_arg(x_key, x_value)
-        for optional_arg in self._get_optional_args_dict():
-            if x_key == optional_arg:
-                self.set_optional_arg(x_key, x_value)
+        for jkey in self._get_jkeys_dict():
+            if x_key == jkey:
+                self.set_jkey(x_key, x_value)
+        for jvalue in self._get_jvalues_dict():
+            if x_key == jvalue:
+                self.set_jvalue(x_key, x_value)
 
-    def set_required_arg(self, x_key: str, x_value: any):
-        self.required_args[x_key] = x_value
+    def set_jkey(self, x_key: str, x_value: any):
+        self.jkeys[x_key] = x_value
 
-    def set_optional_arg(self, x_key: str, x_value: any):
-        self.optional_args[x_key] = x_value
+    def set_jvalue(self, x_key: str, x_value: any):
+        self.jvalues[x_key] = x_value
 
     def _get_category_dict(self) -> dict:
         return get_atom_config_dict().get(self.category)
@@ -138,64 +138,59 @@ class AtomUnit:
     def _get_crud_dict(self) -> dict:
         return self._get_category_dict().get(self.crud_str)
 
-    def _get_required_args_dict(self) -> dict:
-        return self._get_category_dict().get(required_args_str())
+    def _get_jkeys_dict(self) -> dict:
+        return self._get_category_dict().get(jkeys_str())
 
-    def _get_optional_args_dict(self) -> dict:
-        x_key = optional_args_str()
+    def _get_jvalues_dict(self) -> dict:
+        x_key = jvalues_str()
         return get_empty_dict_if_none(self._get_category_dict().get(x_key))
 
     def get_nesting_order_args(self) -> list[str]:
         # When ChangUnit places an AtomUnit in a nested dictionary ChangUnit.atomunits
         # the order of required argments decides the location. The order must always be
         # the same
-        sorted_required_arg_keys = get_sorted_required_arg_keys(self.category)
-        return [
-            self.required_args.get(required_arg)
-            for required_arg in sorted_required_arg_keys
-        ]
+        sorted_jkey_keys = get_sorted_jkey_keys(self.category)
+        return [self.jkeys.get(jkey) for jkey in sorted_jkey_keys]
 
-    def is_required_args_valid(self) -> bool:
+    def is_jkeys_valid(self) -> bool:
         if self.crud_str not in {atom_delete(), atom_insert(), atom_update()}:
             return False
-        required_args_dict = self._get_required_args_dict()
-        return required_args_dict.keys() == self.required_args.keys()
+        jkeys_dict = self._get_jkeys_dict()
+        return jkeys_dict.keys() == self.jkeys.keys()
 
-    def is_optional_args_valid(self) -> bool:
-        if self.crud_str == atom_delete() and self.optional_args == {}:
+    def is_jvalues_valid(self) -> bool:
+        if self.crud_str == atom_delete() and self.jvalues == {}:
             return True
         if self.crud_str not in {atom_insert(), atom_update()}:
             return False
-        optional_args_dict = self._get_optional_args_dict()
-        return set(self.optional_args.keys()).issubset(set(optional_args_dict.keys()))
+        jvalues_dict = self._get_jvalues_dict()
+        return set(self.jvalues.keys()).issubset(set(jvalues_dict.keys()))
 
     def is_valid(self) -> bool:
         return (
-            self.is_required_args_valid()
-            and self.is_optional_args_valid()
-            and (self.required_args != {} or self.optional_args != {})
+            self.is_jkeys_valid()
+            and self.is_jvalues_valid()
+            and (self.jkeys != {} or self.jvalues != {})
         )
 
     def get_value(self, arg_key: str) -> any:
-        required_value = self.required_args.get(arg_key)
-        if required_value is None:
-            return self.optional_args.get(arg_key)
-        return required_value
+        required_value = self.jkeys.get(arg_key)
+        return self.jvalues.get(arg_key) if required_value is None else required_value
 
-    def get_required_args_dict(self) -> dict[str, str]:
-        return dict(self.required_args.items())
+    def get_jkeys_dict(self) -> dict[str, str]:
+        return dict(self.jkeys.items())
 
-    def get_optional_args_dict(self) -> dict[str, str]:
-        return dict(self.optional_args.items())
+    def get_jvalues_dict(self) -> dict[str, str]:
+        return dict(self.jvalues.items())
 
     def get_dict(self) -> dict[str, str]:
-        required_args_dict = self.get_required_args_dict()
-        optional_args_dict = self.get_optional_args_dict()
+        jkeys_dict = self.get_jkeys_dict()
+        jvalues_dict = self.get_jvalues_dict()
         return {
             category_str(): self.category,
             crud_str_str(): self.crud_str,
-            required_args_str(): required_args_dict,
-            optional_args_str(): optional_args_dict,
+            jkeys_str(): jkeys_dict,
+            jvalues_str(): jvalues_dict,
         }
 
     def get_json(self) -> str:
@@ -205,25 +200,25 @@ class AtomUnit:
 def atomunit_shop(
     category: str,
     crud_str: str = None,
-    required_args: dict[str, str] = None,
-    optional_args: dict[str, str] = None,
+    jkeys: dict[str, str] = None,
+    jvalues: dict[str, str] = None,
 ) -> AtomUnit:
     if is_atom_category(category):
         return AtomUnit(
             category=category,
             crud_str=crud_str,
-            required_args=get_empty_dict_if_none(required_args),
-            optional_args=get_empty_dict_if_none(optional_args),
+            jkeys=get_empty_dict_if_none(jkeys),
+            jvalues=get_empty_dict_if_none(jvalues),
         )
 
 
 def get_from_json(x_str: str) -> AtomUnit:
     x_dict = get_dict_from_json(x_str)
     x_atom = atomunit_shop(x_dict[category_str()], x_dict[crud_str_str()])
-    for x_key, x_value in x_dict[required_args_str()].items():
-        x_atom.set_required_arg(x_key, x_value)
-    for x_key, x_value in x_dict[optional_args_str()].items():
-        x_atom.set_optional_arg(x_key, x_value)
+    for x_key, x_value in x_dict[jkeys_str()].items():
+        x_atom.set_jkey(x_key, x_value)
+    for x_key, x_value in x_dict[jvalues_str()].items():
+        x_atom.set_jvalue(x_key, x_value)
     return x_atom
 
 
@@ -591,7 +586,7 @@ def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
         _modify_bud_acctunit(x_bud, x_atom)
 
 
-def optional_args_different(category: str, x_obj: any, y_obj: any) -> bool:
+def jvalues_different(category: str, x_obj: any, y_obj: any) -> bool:
     if category == budunit_str():
         return (
             x_obj.tally != y_obj.tally
@@ -755,7 +750,7 @@ def atomrow_shop(atom_categorys: set[str], crud_command: CRUD_command) -> AtomRo
 
 def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
     x_category = x_atom.category
-    config_req_args = get_atom_config_required_args(x_category)
+    config_req_args = get_atom_config_jkeys(x_category)
     x_atom_reqs = {req_arg: x_atom.get_value(req_arg) for req_arg in config_req_args}
     x_parent_road = x_atom_reqs.get(parent_road_str())
     x_label = x_atom_reqs.get(label_str())
@@ -774,14 +769,14 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
         return x_atom
     elif x_atom.crud_str == atom_insert() and x_exists:
         x_bud_obj = bud_get_obj(x_category, x_bud, x_atom_reqs)
-        x_optional_args = x_atom.get_optional_args_dict()
-        update_atom = atomunit_shop(x_category, atom_update(), x_atom.required_args)
-        for optional_arg in x_optional_args:
-            optional_value = x_atom.get_value(optional_arg)
-            obj_value = x_bud_obj.__dict__[optional_arg]
+        x_jvalues = x_atom.get_jvalues_dict()
+        update_atom = atomunit_shop(x_category, atom_update(), x_atom.jkeys)
+        for jvalue in x_jvalues:
+            optional_value = x_atom.get_value(jvalue)
+            obj_value = x_bud_obj.__dict__[jvalue]
             if obj_value != optional_value:
-                update_atom.set_arg(optional_arg, optional_value)
+                update_atom.set_arg(jvalue, optional_value)
 
-        if update_atom.get_optional_args_dict() != {}:
+        if update_atom.get_jvalues_dict() != {}:
             return update_atom
     return None

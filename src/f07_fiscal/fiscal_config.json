@@ -1,11 +1,6 @@
 {
     "fiscal_cashbook": {
-        "optional_args": {
-            "amount": {
-                "jaar_type": "float"
-            }
-        },
-        "required_args": {
+        "jkeys": {
             "acct_id": {
                 "jaar_type": "AcctID"
             },
@@ -17,16 +12,16 @@
             },
             "time_id": {
                 "jaar_type": "TimeLinePoint"
+            }
+        },
+        "jvalues": {
+            "amount": {
+                "jaar_type": "float"
             }
         }
     },
     "fiscal_purview_episode": {
-        "optional_args": {
-            "quota": {
-                "jaar_type": "int"
-            }
-        },
-        "required_args": {
+        "jkeys": {
             "acct_id": {
                 "jaar_type": "AcctID"
             },
@@ -39,55 +34,61 @@
             "time_id": {
                 "jaar_type": "TimeLinePoint"
             }
+        },
+        "jvalues": {
+            "quota": {
+                "jaar_type": "int"
+            }
         }
     },
     "fiscal_timeline_hour": {
-        "optional_args": {
-            "cumlative_minute": {
-                "jaar_type": "int"
-            }
-        },
-        "required_args": {
+        "jkeys": {
             "fiscal_id": {
                 "jaar_type": "FiscalID"
             },
             "hour_label": {
                 "jaar_type": "RoadNode"
             }
+        },
+        "jvalues": {
+            "cumlative_minute": {
+                "jaar_type": "int"
+            }
         }
     },
     "fiscal_timeline_month": {
-        "optional_args": {
-            "cumlative_day": {
-                "jaar_type": "int"
-            }
-        },
-        "required_args": {
+        "jkeys": {
             "fiscal_id": {
                 "jaar_type": "FiscalID"
             },
             "month_label": {
                 "jaar_type": "RoadNode"
             }
+        },
+        "jvalues": {
+            "cumlative_day": {
+                "jaar_type": "int"
+            }
         }
     },
     "fiscal_timeline_weekday": {
-        "optional_args": {
-            "weekday_order": {
-                "jaar_type": "int"
-            }
-        },
-        "required_args": {
+        "jkeys": {
             "fiscal_id": {
                 "jaar_type": "FiscalID"
             },
             "weekday_label": {
                 "jaar_type": "RoadNode"
             }
+        },
+        "jvalues": {
+            "weekday_order": {
+                "jaar_type": "int"
+            }
         }
     },
     "fiscalunit": {
-        "optional_args": {
+        "jkeys": {},
+        "jvalues": {
             "c400_number": {
                 "jaar_type": "int"
             },
@@ -118,7 +119,6 @@
             "yr1_jan1_offset": {
                 "jaar_type": "int"
             }
-        },
-        "required_args": {}
+        }
     }
 }

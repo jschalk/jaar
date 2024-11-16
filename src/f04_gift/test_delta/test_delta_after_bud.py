@@ -68,34 +68,34 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     x_atomunit = atomunit_shop(category, atom_update())
     new1_value = 55
     new1_arg = "tally"
-    x_atomunit.set_optional_arg(new1_arg, new1_value)
+    x_atomunit.set_jvalue(new1_arg, new1_value)
     new2_value = 66
     new2_arg = "max_tree_traverse"
-    x_atomunit.set_optional_arg(new2_arg, new2_value)
+    x_atomunit.set_jvalue(new2_arg, new2_value)
     new3_value = 77
     new3_arg = "credor_respect"
-    x_atomunit.set_optional_arg(new3_arg, new3_value)
+    x_atomunit.set_jvalue(new3_arg, new3_value)
     new4_value = 88
     new4_arg = "debtor_respect"
-    x_atomunit.set_optional_arg(new4_arg, new4_value)
+    x_atomunit.set_jvalue(new4_arg, new4_value)
     new9_value = 55550000
     new9_arg = "fund_pool"
-    x_atomunit.set_optional_arg(new9_arg, new9_value)
+    x_atomunit.set_jvalue(new9_arg, new9_value)
     new8_value = 0.5555
     new8_arg = "fund_coin"
-    x_atomunit.set_optional_arg(new8_arg, new8_value)
+    x_atomunit.set_jvalue(new8_arg, new8_value)
     sue_deltaunit.set_atomunit(x_atomunit)
     new6_value = 0.5
     new6_arg = "respect_bit"
-    x_atomunit.set_optional_arg(new6_arg, new6_value)
+    x_atomunit.set_jvalue(new6_arg, new6_value)
     sue_deltaunit.set_atomunit(x_atomunit)
     new7_value = 0.025
     new7_arg = "penny"
-    x_atomunit.set_optional_arg(new7_arg, new7_value)
+    x_atomunit.set_jvalue(new7_arg, new7_value)
     sue_deltaunit.set_atomunit(x_atomunit)
     new0_value = 9900000
     new0_arg = "purview_time_id"
-    x_atomunit.set_optional_arg(new0_arg, new0_value)
+    x_atomunit.set_jvalue(new0_arg, new0_value)
     sue_deltaunit.set_atomunit(x_atomunit)
 
     # WHEN
@@ -133,7 +133,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_acct():
 
     category = bud_acctunit_str()
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_required_arg(acct_id_str(), zia_str)
+    x_atomunit.set_jkey(acct_id_str(), zia_str)
     sue_deltaunit.set_atomunit(x_atomunit)
 
     # WHEN
@@ -161,11 +161,11 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_acct():
     # WHEN
     category = bud_acctunit_str()
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_required_arg(acct_id_str(), zia_str)
+    x_atomunit.set_jkey(acct_id_str(), zia_str)
     x_credit_belief = 55
     x_debtit_belief = 66
-    x_atomunit.set_optional_arg("credit_belief", x_credit_belief)
-    x_atomunit.set_optional_arg("debtit_belief", x_debtit_belief)
+    x_atomunit.set_jvalue("credit_belief", x_credit_belief)
+    x_atomunit.set_jvalue("debtit_belief", x_debtit_belief)
     sue_deltaunit.set_atomunit(x_atomunit)
     print(f"{sue_deltaunit.atomunits.keys()=}")
     after_sue_budunit = sue_deltaunit.get_edited_bud(before_sue_budunit)
@@ -192,9 +192,9 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_acct():
     # WHEN
     category = bud_acctunit_str()
     x_atomunit = atomunit_shop(category, atom_update())
-    x_atomunit.set_required_arg(acct_id_str(), yao_str)
+    x_atomunit.set_jkey(acct_id_str(), yao_str)
     yao_credit_belief = 55
-    x_atomunit.set_optional_arg("credit_belief", yao_credit_belief)
+    x_atomunit.set_jvalue("credit_belief", yao_credit_belief)
     sue_deltaunit.set_atomunit(x_atomunit)
     print(f"{sue_deltaunit.atomunits.keys()=}")
     after_sue_budunit = sue_deltaunit.get_edited_bud(before_sue_budunit)
@@ -230,12 +230,12 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_membership():
 
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_delete())
-    yao_atomunit.set_required_arg(group_id_str(), run_str)
-    yao_atomunit.set_required_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_jkey(group_id_str(), run_str)
+    yao_atomunit.set_jkey(acct_id_str(), yao_str)
     # print(f"{yao_atomunit=}")
     zia_atomunit = atomunit_shop(bud_acct_membership_str(), atom_delete())
-    zia_atomunit.set_required_arg(group_id_str(), fly_str)
-    zia_atomunit.set_required_arg(acct_id_str(), zia_str)
+    zia_atomunit.set_jkey(group_id_str(), fly_str)
+    zia_atomunit.set_jkey(acct_id_str(), zia_str)
     # print(f"{zia_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(yao_atomunit)
@@ -266,10 +266,10 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership():
 
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    yao_atomunit.set_required_arg(group_id_str(), run_str)
-    yao_atomunit.set_required_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_jkey(group_id_str(), run_str)
+    yao_atomunit.set_jkey(acct_id_str(), yao_str)
     yao_run_credit_vote = 17
-    yao_atomunit.set_optional_arg("credit_vote", yao_run_credit_vote)
+    yao_atomunit.set_jvalue("credit_vote", yao_run_credit_vote)
     print(f"{yao_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(yao_atomunit)
@@ -300,12 +300,12 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership():
 
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_update())
-    yao_atomunit.set_required_arg(group_id_str(), run_str)
-    yao_atomunit.set_required_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_jkey(group_id_str(), run_str)
+    yao_atomunit.set_jkey(acct_id_str(), yao_str)
     new_yao_run_credit_vote = 7
     new_yao_run_debtit_vote = 11
-    yao_atomunit.set_optional_arg(credit_vote_str(), new_yao_run_credit_vote)
-    yao_atomunit.set_optional_arg(debtit_vote_str(), new_yao_run_debtit_vote)
+    yao_atomunit.set_jvalue(credit_vote_str(), new_yao_run_credit_vote)
+    yao_atomunit.set_jvalue(debtit_vote_str(), new_yao_run_debtit_vote)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(yao_atomunit)
     after_sue_budunit = sue_deltaunit.get_edited_bud(before_sue_budunit)
@@ -334,11 +334,11 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_itemunit():
 
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_delete())
-    delete_disc_atomunit.set_required_arg(
+    delete_disc_atomunit.set_jkey(
         label_str(), get_terminus_node(disc_road, before_sue_budunit._road_delimiter)
     )
     print(f"{disc_road=}")
-    delete_disc_atomunit.set_required_arg(
+    delete_disc_atomunit.set_jkey(
         parent_road_str(),
         get_parent_road(disc_road, before_sue_budunit._road_delimiter),
     )
@@ -374,16 +374,16 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_itemunit():
     # x_numor = 10
     x_pledge = True
     insert_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    insert_disc_atomunit.set_required_arg(label_str(), disc_str)
-    insert_disc_atomunit.set_required_arg(parent_road_str(), sports_road)
-    # insert_disc_atomunit.set_optional_arg(addin_str(), x_addin)
-    # insert_disc_atomunit.set_optional_arg(begin_str(), x_begin)
-    # insert_disc_atomunit.set_optional_arg(close_str(), x_close)
-    # insert_disc_atomunit.set_optional_arg(denom_str(), x_denom)
-    # insert_disc_atomunit.set_optional_arg(numor_str(), x_numor)
-    insert_disc_atomunit.set_optional_arg(pledge_str(), x_pledge)
-    insert_disc_atomunit.set_optional_arg(gogo_want_str(), x_gogo_want)
-    insert_disc_atomunit.set_optional_arg(stop_want_str(), x_stop_want)
+    insert_disc_atomunit.set_jkey(label_str(), disc_str)
+    insert_disc_atomunit.set_jkey(parent_road_str(), sports_road)
+    # insert_disc_atomunit.set_jvalue(addin_str(), x_addin)
+    # insert_disc_atomunit.set_jvalue(begin_str(), x_begin)
+    # insert_disc_atomunit.set_jvalue(close_str(), x_close)
+    # insert_disc_atomunit.set_jvalue(denom_str(), x_denom)
+    # insert_disc_atomunit.set_jvalue(numor_str(), x_numor)
+    insert_disc_atomunit.set_jvalue(pledge_str(), x_pledge)
+    insert_disc_atomunit.set_jvalue(gogo_want_str(), x_gogo_want)
+    insert_disc_atomunit.set_jvalue(stop_want_str(), x_stop_want)
 
     print(f"{insert_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
@@ -417,16 +417,16 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_itemunit_Simp
     x_stop_want = 1333
     x_pledge = True
     insert_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_update())
-    insert_disc_atomunit.set_required_arg(label_str(), ball_str)
-    insert_disc_atomunit.set_required_arg(parent_road_str(), sports_road)
-    # insert_disc_atomunit.set_optional_arg(addin_str(), x_addin)
-    insert_disc_atomunit.set_optional_arg(begin_str(), x_begin)
-    insert_disc_atomunit.set_optional_arg(close_str(), x_close)
-    # insert_disc_atomunit.set_optional_arg(denom_str(), x_denom)
-    # insert_disc_atomunit.set_optional_arg(numor_str(), x_numor)
-    insert_disc_atomunit.set_optional_arg(pledge_str(), x_pledge)
-    insert_disc_atomunit.set_optional_arg(gogo_want_str(), x_gogo_want)
-    insert_disc_atomunit.set_optional_arg(stop_want_str(), x_stop_want)
+    insert_disc_atomunit.set_jkey(label_str(), ball_str)
+    insert_disc_atomunit.set_jkey(parent_road_str(), sports_road)
+    # insert_disc_atomunit.set_jvalue(addin_str(), x_addin)
+    insert_disc_atomunit.set_jvalue(begin_str(), x_begin)
+    insert_disc_atomunit.set_jvalue(close_str(), x_close)
+    # insert_disc_atomunit.set_jvalue(denom_str(), x_denom)
+    # insert_disc_atomunit.set_jvalue(numor_str(), x_numor)
+    insert_disc_atomunit.set_jvalue(pledge_str(), x_pledge)
+    insert_disc_atomunit.set_jvalue(gogo_want_str(), x_gogo_want)
+    insert_disc_atomunit.set_jvalue(stop_want_str(), x_stop_want)
 
     print(f"{insert_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
@@ -486,8 +486,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_awardlin
 
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_delete())
-    delete_disc_atomunit.set_required_arg("road", disc_road)
-    delete_disc_atomunit.set_required_arg(awardee_id_str(), fly_str)
+    delete_disc_atomunit.set_jkey("road", disc_road)
+    delete_disc_atomunit.set_jkey(awardee_id_str(), fly_str)
     print(f"{delete_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(delete_disc_atomunit)
@@ -524,10 +524,10 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_awardlin
     x_give_force = 55
     x_take_force = 66
     update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_update())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg(awardee_id_str(), run_str)
-    update_disc_atomunit.set_optional_arg(give_force_str(), x_give_force)
-    update_disc_atomunit.set_optional_arg(take_force_str(), x_take_force)
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey(awardee_id_str(), run_str)
+    update_disc_atomunit.set_jvalue(give_force_str(), x_give_force)
+    update_disc_atomunit.set_jvalue(take_force_str(), x_take_force)
     # print(f"{update_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
@@ -563,10 +563,10 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_awardlin
     x_give_force = 55
     x_take_force = 66
     update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_insert())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg(awardee_id_str(), run_str)
-    update_disc_atomunit.set_optional_arg(give_force_str(), x_give_force)
-    update_disc_atomunit.set_optional_arg(take_force_str(), x_take_force)
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey(awardee_id_str(), run_str)
+    update_disc_atomunit.set_jvalue(give_force_str(), x_give_force)
+    update_disc_atomunit.set_jvalue(take_force_str(), x_take_force)
     # print(f"{update_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
@@ -599,11 +599,11 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_factunit
     broken_fopen = 55
     broken_fnigh = 66
     update_disc_atomunit = atomunit_shop(bud_item_factunit_str(), atom_insert())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("base", knee_road)
-    update_disc_atomunit.set_optional_arg("pick", broken_road)
-    update_disc_atomunit.set_optional_arg(fopen_str(), broken_fopen)
-    update_disc_atomunit.set_optional_arg(fnigh_str(), broken_fnigh)
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey("base", knee_road)
+    update_disc_atomunit.set_jvalue("pick", broken_road)
+    update_disc_atomunit.set_jvalue(fopen_str(), broken_fopen)
+    update_disc_atomunit.set_jvalue(fnigh_str(), broken_fnigh)
     # print(f"{update_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
@@ -643,8 +643,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_factunit
 
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_item_factunit_str(), atom_delete())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("base", knee_road)
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey("base", knee_road)
     # print(f"{update_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
@@ -686,11 +686,11 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_factunit
     medical_fopen = 45
     medical_fnigh = 77
     update_disc_atomunit = atomunit_shop(bud_item_factunit_str(), atom_update())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("base", knee_road)
-    update_disc_atomunit.set_optional_arg("pick", medical_road)
-    update_disc_atomunit.set_optional_arg(fopen_str(), medical_fopen)
-    update_disc_atomunit.set_optional_arg(fnigh_str(), medical_fnigh)
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey("base", knee_road)
+    update_disc_atomunit.set_jvalue("pick", medical_road)
+    update_disc_atomunit.set_jvalue(fopen_str(), medical_fopen)
+    update_disc_atomunit.set_jvalue(fnigh_str(), medical_fnigh)
     # print(f"{update_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
@@ -740,12 +740,12 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_reason_p
     update_disc_atomunit = atomunit_shop(
         bud_item_reason_premiseunit_str(), atom_update()
     )
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("base", knee_road)
-    update_disc_atomunit.set_required_arg("need", broken_road)
-    update_disc_atomunit.set_optional_arg("open", broken_open)
-    update_disc_atomunit.set_optional_arg("nigh", broken_nigh)
-    update_disc_atomunit.set_optional_arg("divisor", broken_divisor)
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey("base", knee_road)
+    update_disc_atomunit.set_jkey("need", broken_road)
+    update_disc_atomunit.set_jvalue("open", broken_open)
+    update_disc_atomunit.set_jvalue("nigh", broken_nigh)
+    update_disc_atomunit.set_jvalue("divisor", broken_divisor)
     # print(f"{update_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
@@ -795,12 +795,12 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_reason_p
     update_disc_atomunit = atomunit_shop(
         bud_item_reason_premiseunit_str(), atom_insert()
     )
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("base", knee_road)
-    update_disc_atomunit.set_required_arg("need", medical_road)
-    update_disc_atomunit.set_optional_arg("open", medical_open)
-    update_disc_atomunit.set_optional_arg("nigh", medical_nigh)
-    update_disc_atomunit.set_optional_arg("divisor", medical_divisor)
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey("base", knee_road)
+    update_disc_atomunit.set_jkey("need", medical_road)
+    update_disc_atomunit.set_jvalue("open", medical_open)
+    update_disc_atomunit.set_jvalue("nigh", medical_nigh)
+    update_disc_atomunit.set_jvalue("divisor", medical_divisor)
     # print(f"{update_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
@@ -850,9 +850,9 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_reason_p
     update_disc_atomunit = atomunit_shop(
         bud_item_reason_premiseunit_str(), atom_delete()
     )
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("base", knee_road)
-    update_disc_atomunit.set_required_arg("need", medical_road)
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey("base", knee_road)
+    update_disc_atomunit.set_jkey("need", medical_road)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
     after_sue_au = sue_deltaunit.get_edited_bud(before_sue_au)
@@ -885,9 +885,9 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_reasonun
     # WHEN
     medical_base_item_active_requisite = True
     update_disc_atomunit = atomunit_shop(bud_item_reasonunit_str(), atom_insert())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("base", knee_road)
-    update_disc_atomunit.set_optional_arg(
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey("base", knee_road)
+    update_disc_atomunit.set_jvalue(
         base_item_active_requisite_str(), medical_base_item_active_requisite
     )
     # print(f"{update_disc_atomunit=}")
@@ -938,9 +938,9 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_reasonun
     # WHEN
     after_medical_base_item_active_requisite = True
     update_disc_atomunit = atomunit_shop(bud_item_reasonunit_str(), atom_update())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("base", knee_road)
-    update_disc_atomunit.set_optional_arg(
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey("base", knee_road)
+    update_disc_atomunit.set_jvalue(
         base_item_active_requisite_str(), after_medical_base_item_active_requisite
     )
     # print(f"{update_disc_atomunit=}")
@@ -982,8 +982,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_reasonun
 
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_item_reasonunit_str(), atom_delete())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg("base", knee_road)
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey("base", knee_road)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
     after_sue_au = sue_deltaunit.get_edited_bud(before_sue_au)
@@ -1009,8 +1009,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_teamlink
 
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_insert())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg(team_id_str(), yao_str)
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey(team_id_str(), yao_str)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
     after_sue_au = sue_deltaunit.get_edited_bud(before_sue_au)
@@ -1039,8 +1039,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_teamlink
 
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_delete())
-    update_disc_atomunit.set_required_arg("road", ball_road)
-    update_disc_atomunit.set_required_arg(team_id_str(), yao_str)
+    update_disc_atomunit.set_jkey("road", ball_road)
+    update_disc_atomunit.set_jkey(team_id_str(), yao_str)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
     print(f"{before_sue_au.get_item_obj(ball_road).teamunit=}")
@@ -1068,8 +1068,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_healerli
 
     # WHEN
     x_atomunit = atomunit_shop(bud_item_healerlink_str(), atom_insert())
-    x_atomunit.set_required_arg("road", ball_road)
-    x_atomunit.set_required_arg(healer_id_str(), yao_str)
+    x_atomunit.set_jkey("road", ball_road)
+    x_atomunit.set_jkey(healer_id_str(), yao_str)
     print(f"{x_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(x_atomunit)
@@ -1099,8 +1099,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_healerli
 
     # WHEN
     x_atomunit = atomunit_shop(bud_item_healerlink_str(), atom_delete())
-    x_atomunit.set_required_arg("road", ball_road)
-    x_atomunit.set_required_arg(healer_id_str(), yao_str)
+    x_atomunit.set_jkey("road", ball_road)
+    x_atomunit.set_jkey(healer_id_str(), yao_str)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(x_atomunit)
     print(f"{before_sue_au.get_item_obj(ball_road).teamunit=}")
