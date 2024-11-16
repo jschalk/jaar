@@ -23,15 +23,18 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=get_test_worlds_dir())
     x_world_dir = f"{get_test_worlds_dir()}/{fizz_str}"
     x_events_dir = f"{x_world_dir}/events"
+    x_pidgins_dir = f"{x_world_dir}/pidgins"
     x_jungle_dir = f"{x_world_dir}/jungle"
     x_zoo_dir = f"{x_world_dir}/zoo"
 
     assert fizz_world._world_dir is None
     assert fizz_world._events_dir is None
+    assert fizz_world._pidgins_dir is None
     assert fizz_world._jungle_dir is None
     assert fizz_world._zoo_dir is None
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_events_dir) is False
+    assert os_path_exists(x_pidgins_dir) is False
     assert os_path_exists(x_jungle_dir) is False
     assert os_path_exists(x_zoo_dir) is False
 
@@ -41,10 +44,12 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     # THEN
     assert fizz_world._world_dir == x_world_dir
     assert fizz_world._events_dir == x_events_dir
+    assert fizz_world._pidgins_dir == x_pidgins_dir
     assert fizz_world._jungle_dir == x_jungle_dir
     assert fizz_world._zoo_dir == x_zoo_dir
     assert os_path_exists(x_world_dir)
     assert os_path_exists(x_events_dir)
+    assert os_path_exists(x_pidgins_dir)
     assert os_path_exists(x_jungle_dir)
     assert os_path_exists(x_zoo_dir)
 

@@ -172,51 +172,56 @@ class WorldUnit:
     worlds_dir: str = None
     current_time: TimeLinePoint = None
     events: dict[TimeLinePoint, AcctID] = None
-    faces: dict[AcctID, PidginUnit] = None
+    pidgins: dict[AcctID, PidginUnit] = None
     _events_dir: str = None
+    _pidgins_dir: str = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _fiscalunits: set[FiscalID] = None
     _world_dir: str = None
     _jungle_dir: str = None
     _zoo_dir: str = None
 
-    def set_event_id(self, event_id: TimeLinePoint, x_pidginunit: PidginUnit = None):
-        if x_pidginunit is None:
-            x_pidginunit = pidginunit_shop(event_id)
-        self.events[event_id] = x_pidginunit
+    def set_pidginunit(self, x_pidginunit: PidginUnit):
+        self.pidgins[x_pidginunit.face_id] = x_pidginunit
 
-    def event_id_exists(self, event_id: TimeLinePoint) -> bool:
-        return self.events.get(event_id) != None
+    def add_pidginunit(self, face_id: AcctID):
+        x_pidginunit = pidginunit_shop(face_id)
+        self.set_pidginunit(x_pidginunit)
 
-    def get_pidginunit(self, event_id: TimeLinePoint) -> PidginUnit:
-        return self.events.get(event_id)
+    def pidginunit_exists(self, face_id: AcctID) -> bool:
+        return self.pidgins.get(face_id) != None
 
-    def del_event_id(self, event_id: TimeLinePoint):
-        self.events.pop(event_id)
+    def get_pidginunit(self, face_id: AcctID) -> PidginUnit:
+        return self.pidgins.get(face_id)
 
-    def del_all_event_id(self):
-        self.events = {}
+    def del_pidginunit(self, face_id: TimeLinePoint):
+        self.pidgins.pop(face_id)
 
-    def events_empty(self) -> bool:
-        return self.events == {}
+    def del_all_pidginunits(self):
+        self.pidgins = {}
 
-    def _event_dir(self, event_id: TimeLinePoint) -> str:
-        return create_file_path(self._events_dir, event_id)
+    def pidgins_empty(self) -> bool:
+        return self.pidgins == {}
 
-    def save_pidginunit_files(self, event_id: TimeLinePoint):
-        x_pidginunit = self.get_pidginunit(event_id)
-        save_all_csvs_from_pidginunit(self._event_dir(event_id), x_pidginunit)
+    def _pidgin_dir(self, face_id: AcctID) -> str:
+        return create_file_path(self._pidgins_dir, face_id)
 
-    def event_dir_exists(self, event_id: TimeLinePoint) -> bool:
-        return os_path_exists(self._event_dir(event_id))
+    def save_pidginunit_files(self, face_id: AcctID):
+        x_pidginunit = self.get_pidginunit(face_id)
+        save_all_csvs_from_pidginunit(self._pidgin_dir(face_id), x_pidginunit)
 
-    def _set_all_events_from_dirs(self):
-        self.del_all_event_id()
-        for dir_name in get_dir_file_strs(self._events_dir, include_files=False).keys():
-            self.set_event_id(dir_name)
+    def pidgin_dir_exists(self, face_id: AcctID) -> bool:
+        return os_path_exists(self._pidgin_dir(face_id))
+
+    def _set_all_pidginunits_from_dirs(self):
+        self.del_all_pidginunits()
+        for dir_name in get_dir_file_strs(
+            self._pidgins_dir, include_files=False
+        ).keys():
+            self.add_pidginunit(dir_name)
 
     def _delete_pidginunit_dir(self, event_id: TimeLinePoint):
-        delete_dir(self._event_dir(event_id))
+        delete_dir(self._pidgin_dir(event_id))
 
     # def get_db_path(self) -> str:
     #     return create_file_path(self._world_dir, "wrd.db")
@@ -237,12 +242,15 @@ class WorldUnit:
     def _set_world_dirs(self):
         self._world_dir = create_file_path(self.worlds_dir, self.world_id)
         self._events_dir = create_file_path(self._world_dir, "events")
+        self._pidgins_dir = create_file_path(self._world_dir, "pidgins")
         self._jungle_dir = create_file_path(self._world_dir, "jungle")
         self._zoo_dir = create_file_path(self._world_dir, "zoo")
         if not os_path_exists(self._world_dir):
             set_dir(self._world_dir)
         if not os_path_exists(self._events_dir):
             set_dir(self._events_dir)
+        if not os_path_exists(self._pidgins_dir):
+            set_dir(self._pidgins_dir)
         if not os_path_exists(self._jungle_dir):
             set_dir(self._jungle_dir)
         if not os_path_exists(self._zoo_dir):
@@ -251,9 +259,9 @@ class WorldUnit:
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
-    def load_pidginunit_from_files(self, event_id: TimeLinePoint):
-        x_pidginunit = init_pidginunit_from_dir(self._event_dir(event_id))
-        self.set_event_id(event_id, x_pidginunit)
+    def load_pidginunit_from_files(self, face_id: AcctID):
+        x_pidginunit = init_pidginunit_from_dir(self._pidgin_dir(face_id))
+        self.set_pidginunit(x_pidginunit)
 
     def jungle_to_zoo(self):
         transformer = JungleToZooTransformer(self._jungle_dir, self._zoo_dir)
@@ -263,7 +271,7 @@ class WorldUnit:
         transformer = ZooToOtxTransformer(self._zoo_dir)
         transformer.transform()
 
-    def otx_to_faces_event(self):
+    def otx_to_pidgins_event(self):
         pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
         # for pidgen_brick_filename in pidgen_brick_filenames:
         #     pidgen_brick_path = create_file_path(self._zoo_dir, pidgen_brick_filename)
@@ -302,7 +310,7 @@ class WorldUnit:
             "current_time": self.current_time,
             "timeconversions": self.get_timeconversions_dict(),
             "events": self.events,
-            "faces": self.faces,
+            "pidgins": self.pidgins,
         }
 
 
@@ -311,9 +319,8 @@ def worldunit_shop(
     worlds_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
-    events: set[str] = None,
+    pidgins: dict[AcctID, PidginUnit] = None,
     _fiscalunits: set[FiscalID] = None,
-    in_memory_db: bool = None,
 ) -> WorldUnit:
     if world_id is None:
         world_id = get_default_world_id()
@@ -325,8 +332,7 @@ def worldunit_shop(
         current_time=get_0_if_None(current_time),
         timeconversions=get_empty_dict_if_none(timeconversions),
         events={},
-        faces=get_empty_dict_if_none(events),
-        _events_dir=create_file_path(worlds_dir, "events"),
+        pidgins=get_empty_dict_if_none(pidgins),
         _fiscalunits=get_empty_set_if_none(_fiscalunits),
     )
     x_worldunit._set_world_dirs()

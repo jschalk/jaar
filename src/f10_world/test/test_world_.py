@@ -28,8 +28,9 @@ def test_WorldUnit_Exists():
     assert not x_world.current_time
     assert not x_world.timeconversions
     assert not x_world.events
-    assert not x_world.faces
+    assert not x_world.pidgins
     assert not x_world._events_dir
+    assert not x_world._pidgins_dir
     assert not x_world._fiscalunits
     assert not x_world._world_dir
     assert not x_world._jungle_dir
@@ -44,7 +45,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     music_text = "music45"
     sue_str = "Sue"
     bob_str = "Bob"
-    world2_faces = {
+    world2_pidgins = {
         sue_str: pidginunit_shop(sue_str),
         bob_str: pidginunit_shop(bob_str),
     }
@@ -57,7 +58,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
         worlds2_dir,
         world2_current_time,
         world2timeconversions,
-        world2_faces,
+        world2_pidgins,
         world2_fiscalunits,
     )
 
@@ -67,8 +68,9 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.current_time == world2_current_time
     assert x_world.timeconversions == world2timeconversions
     assert x_world.events == {}
-    assert x_world.faces == world2_faces
+    assert x_world.pidgins == world2_pidgins
     assert x_world._events_dir == f"{worlds2_dir}/{five_world_id}/events"
+    assert x_world._pidgins_dir == f"{worlds2_dir}/{five_world_id}/pidgins"
     assert x_world._fiscalunits == world2_fiscalunits
 
 
@@ -81,54 +83,56 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world.worlds_dir == get_test_worlds_dir()
     assert x_world.current_time == 0
     assert x_world.timeconversions == {}
+    assert x_world.pidgins == {}
     assert x_world.events == {}
     assert x_world._events_dir == f"{get_test_worlds_dir()}/{x_world.world_id}/events"
+    assert x_world._pidgins_dir == f"{get_test_worlds_dir()}/{x_world.world_id}/pidgins"
     assert x_world._fiscalunits == set()
 
 
-def test_WorldUnit_set_event_id_SetsAttr_Scenario0(env_dir_setup_cleanup):
+def test_WorldUnit_set_pidginunit_SetsAttr_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
-    assert x_world.events == {}
+    assert x_world.pidgins == {}
 
     # WHEN
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    x_world.set_event_id(sue_str, sue_pidginunit)
+    x_world.set_pidginunit(sue_pidginunit)
 
     # THEN
-    assert x_world.events != {}
-    assert x_world.events == {sue_str: sue_pidginunit}
+    assert x_world.pidgins != {}
+    assert x_world.pidgins == {sue_str: sue_pidginunit}
 
 
-def test_WorldUnit_set_event_id_SetsAttr_Scenario1_NoValue(env_dir_setup_cleanup):
+def test_WorldUnit_add_pidginunit_SetsAttr_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
-    assert x_world.events == {}
+    assert x_world.pidgins == {}
 
     # WHEN
     sue_str = "Sue"
-    x_world.set_event_id(sue_str)
+    x_world.add_pidginunit(sue_str)
 
     # THEN
-    assert x_world.events != {}
-    assert x_world.events == {sue_str: pidginunit_shop(sue_str)}
+    assert x_world.pidgins != {}
+    assert x_world.pidgins == {sue_str: pidginunit_shop(sue_str)}
 
 
-def test_PidginUnit_event_id_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_pidginunit_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
-    assert x_world.event_id_exists(sue_str) is False
+    assert x_world.pidginunit_exists(sue_str) is False
 
     # WHEN
-    x_world.set_event_id(sue_str)
+    x_world.add_pidginunit(sue_str)
 
     # THEN
-    assert x_world.event_id_exists(sue_str)
+    assert x_world.pidginunit_exists(sue_str)
 
 
-def test_PidginUnit_get_pidginunit_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_get_pidginunit_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     slash_str = "/"
@@ -137,71 +141,71 @@ def test_PidginUnit_get_pidginunit_ReturnsObj(env_dir_setup_cleanup):
     assert x_world.get_pidginunit(sue_str) is None
 
     # WHEN
-    x_world.set_event_id(sue_str, sue_pidginunit)
+    x_world.set_pidginunit(sue_pidginunit)
 
     # THEN
     assert x_world.get_pidginunit(sue_str) == sue_pidginunit
 
 
-def test_PidginUnit_del_event_id_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_del_pidginunit_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
     sue_pidginunit = pidginunit_shop(sue_str)
     bob_pidginunit = pidginunit_shop(bob_str)
-    x_world.set_event_id(sue_str, sue_pidginunit)
-    x_world.set_event_id(bob_str, bob_pidginunit)
+    x_world.set_pidginunit(sue_pidginunit)
+    x_world.set_pidginunit(bob_pidginunit)
     assert x_world.get_pidginunit(sue_str) == sue_pidginunit
     assert x_world.get_pidginunit(bob_str) == bob_pidginunit
 
     # WHEN
-    x_world.del_event_id(sue_str)
+    x_world.del_pidginunit(sue_str)
 
     # THEN
     assert x_world.get_pidginunit(sue_str) is None
     assert x_world.get_pidginunit(bob_str) == bob_pidginunit
 
 
-def test_WorldUnit_del_all_event_id_SetsAttr(env_dir_setup_cleanup):
+def test_WorldUnit_del_all_pidginunits_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
     sue_pidginunit = pidginunit_shop(sue_str)
     bob_pidginunit = pidginunit_shop(bob_str)
-    x_world.set_event_id(sue_str, sue_pidginunit)
-    x_world.set_event_id(bob_str, bob_pidginunit)
+    x_world.set_pidginunit(sue_pidginunit)
+    x_world.set_pidginunit(bob_pidginunit)
     assert x_world.get_pidginunit(sue_str) == sue_pidginunit
     assert x_world.get_pidginunit(bob_str) == bob_pidginunit
 
     # WHEN
-    x_world.del_all_event_id()
+    x_world.del_all_pidginunits()
 
     # THEN
     assert x_world.get_pidginunit(sue_str) is None
     assert x_world.get_pidginunit(bob_str) is None
-    assert x_world.events == {}
+    assert x_world.pidgins == {}
 
 
-def test_WorldUnit_events_empty_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_pidgins_empty_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
-    assert x_world.events_empty()
+    assert x_world.pidgins_empty()
 
     # WHEN / THEN
-    x_world.set_event_id(sue_str)
-    assert x_world.events_empty() is False
+    x_world.add_pidginunit(sue_str)
+    assert x_world.pidgins_empty() is False
 
     # WHEN / THEN
-    x_world.set_event_id(bob_str)
-    assert x_world.events_empty() is False
+    x_world.add_pidginunit(bob_str)
+    assert x_world.pidgins_empty() is False
 
     # WHEN / THEN
-    x_world.del_all_event_id()
-    assert x_world.events_empty()
+    x_world.del_all_pidginunits()
+    assert x_world.pidgins_empty()
 
 
 def test_WorldUnit_save_pidginunit_files_SavesFiles(env_dir_setup_cleanup):
@@ -209,10 +213,10 @@ def test_WorldUnit_save_pidginunit_files_SavesFiles(env_dir_setup_cleanup):
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
-    x_world.set_event_id(sue_str)
-    x_world.set_event_id(bob_str)
-    sue_dir = create_file_path(x_world._events_dir, sue_str)
-    bob_dir = create_file_path(x_world._events_dir, bob_str)
+    x_world.add_pidginunit(sue_str)
+    x_world.add_pidginunit(bob_str)
+    sue_dir = create_file_path(x_world._pidgins_dir, sue_str)
+    bob_dir = create_file_path(x_world._pidgins_dir, bob_str)
     assert os_path_exists(bob_dir) is False
     assert os_path_exists(sue_dir) is False
 
@@ -224,19 +228,19 @@ def test_WorldUnit_save_pidginunit_files_SavesFiles(env_dir_setup_cleanup):
     assert os_path_exists(sue_dir)
 
 
-def test_WorldUnit_event_dir_exist_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_pidgins_dir_exist_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
-    x_world.set_event_id(sue_str)
-    x_world.set_event_id(bob_str)
-    sue_dir = create_file_path(x_world._events_dir, sue_str)
-    bob_dir = create_file_path(x_world._events_dir, bob_str)
+    x_world.add_pidginunit(sue_str)
+    x_world.add_pidginunit(bob_str)
+    sue_dir = create_file_path(x_world._pidgins_dir, sue_str)
+    bob_dir = create_file_path(x_world._pidgins_dir, bob_str)
     assert os_path_exists(bob_dir) is False
     assert os_path_exists(sue_dir) is False
-    assert x_world.event_dir_exists(bob_str) is False
-    assert x_world.event_dir_exists(sue_str) is False
+    assert x_world.pidgin_dir_exists(bob_str) is False
+    assert x_world.pidgin_dir_exists(sue_str) is False
 
     # WHEN
     x_world.save_pidginunit_files(sue_str)
@@ -244,8 +248,8 @@ def test_WorldUnit_event_dir_exist_ReturnsObj(env_dir_setup_cleanup):
     # THEN
     assert os_path_exists(bob_dir) is False
     assert os_path_exists(sue_dir)
-    assert x_world.event_dir_exists(bob_str) is False
-    assert x_world.event_dir_exists(sue_str)
+    assert x_world.pidgin_dir_exists(bob_str) is False
+    assert x_world.pidgin_dir_exists(sue_str)
 
 
 def test_WorldUnit_load_pidginunit_from_files_SetsAttr(env_dir_setup_cleanup):
@@ -255,12 +259,12 @@ def test_WorldUnit_load_pidginunit_from_files_SetsAttr(env_dir_setup_cleanup):
     bob_otx = "Bob"
     bob2_inx = "Bob2"
     bob3_inx = "Bob3"
-    x_world.set_event_id(sue_str)
+    x_world.add_pidginunit(sue_str)
     sue_pidginunit = x_world.get_pidginunit(sue_str)
     sue_pidginunit.set_otx_to_inx(road_str(), bob_otx, bob2_inx)
     x_world.save_pidginunit_files(sue_str)
     sue_pidginunit.set_otx_to_inx(road_str(), bob_otx, bob3_inx)
-    assert x_world.event_dir_exists(sue_str)
+    assert x_world.pidgin_dir_exists(sue_str)
     assert sue_pidginunit.otx_to_inx_exists(road_str(), bob_otx, bob2_inx) is False
     assert sue_pidginunit.otx_to_inx_exists(road_str(), bob_otx, bob3_inx)
 
@@ -278,23 +282,23 @@ def test_WorldUnit_delete_pidginunit_dir_SetsAttrDeletesDir(env_dir_setup_cleanu
     x_world = worldunit_shop()
     sue_str = "Sue"
     bob_str = "Bob"
-    x_world.set_event_id(sue_str)
-    x_world.set_event_id(bob_str)
+    x_world.add_pidginunit(sue_str)
+    x_world.add_pidginunit(bob_str)
     x_world.save_pidginunit_files(sue_str)
     x_world.save_pidginunit_files(bob_str)
-    assert x_world.event_id_exists(sue_str)
-    assert x_world.event_id_exists(bob_str)
-    assert x_world.event_dir_exists(sue_str)
-    assert x_world.event_dir_exists(bob_str)
+    assert x_world.pidginunit_exists(sue_str)
+    assert x_world.pidginunit_exists(bob_str)
+    assert x_world.pidgin_dir_exists(sue_str)
+    assert x_world.pidgin_dir_exists(bob_str)
 
     # WHEN
     x_world._delete_pidginunit_dir(sue_str)
 
     # THEN
-    assert x_world.event_id_exists(sue_str)
-    assert x_world.event_id_exists(bob_str)
-    assert x_world.event_dir_exists(sue_str) is False
-    assert x_world.event_dir_exists(bob_str)
+    assert x_world.pidginunit_exists(sue_str)
+    assert x_world.pidginunit_exists(bob_str)
+    assert x_world.pidgin_dir_exists(sue_str) is False
+    assert x_world.pidgin_dir_exists(bob_str)
 
 
 # def test_WorldUnit_open_event_from_files_ReturnsObj(env_dir_setup_cleanup):
@@ -302,10 +306,10 @@ def test_WorldUnit_delete_pidginunit_dir_SetsAttrDeletesDir(env_dir_setup_cleanu
 #     x_world = worldunit_shop()
 #     sue_str = "Sue"
 #     bob_str = "Bob"
-#     x_world.set_event_id(sue_str)
-#     x_world.set_event_id(bob_str)
-#     sue_dir = create_file_path(x_world._events_dir, sue_str)
-#     bob_dir = create_file_path(x_world._events_dir, bob_str)
+#     x_world.add_pidginunit(sue_str)
+#     x_world.add_pidginunit(bob_str)
+#     sue_dir = create_file_path(x_world._pidgins_dir, sue_str)
+#     bob_dir = create_file_path(x_world._pidgins_dir, bob_str)
 #     assert os_path_exists(sue_dir) is False
 #     assert os_path_exists(bob_dir) is False
 
@@ -323,66 +327,66 @@ def test_WorldUnit_set_all_events_from_dirs_SetsAttr(env_dir_setup_cleanup):
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    save_file(f"{x_world._events_dir}/{sue_str}", "temp.txt", "")
-    save_file(f"{x_world._events_dir}/{bob_str}", "temp.txt", "")
-    save_file(f"{x_world._events_dir}/{zia_str}", "temp.txt", "")
-    assert x_world.event_id_exists(sue_str) is False
-    assert x_world.event_id_exists(bob_str) is False
-    assert x_world.event_id_exists(zia_str) is False
-    assert x_world.events_empty()
+    save_file(f"{x_world._pidgins_dir}/{sue_str}", "temp.txt", "")
+    save_file(f"{x_world._pidgins_dir}/{bob_str}", "temp.txt", "")
+    save_file(f"{x_world._pidgins_dir}/{zia_str}", "temp.txt", "")
+    assert x_world.pidginunit_exists(sue_str) is False
+    assert x_world.pidginunit_exists(bob_str) is False
+    assert x_world.pidginunit_exists(zia_str) is False
+    assert x_world.pidgins_empty()
 
     # WHEN
-    x_world._set_all_events_from_dirs()
+    x_world._set_all_pidginunits_from_dirs()
 
     # THEN
-    assert x_world.event_id_exists(sue_str)
-    assert x_world.event_id_exists(bob_str)
-    assert x_world.event_id_exists(zia_str)
-    assert x_world.events_empty() is False
+    assert x_world.pidginunit_exists(sue_str)
+    assert x_world.pidginunit_exists(bob_str)
+    assert x_world.pidginunit_exists(zia_str)
+    assert x_world.pidgins_empty() is False
 
     # WHEN
-    delete_dir(f"{x_world._events_dir}/{zia_str}")
-    x_world._set_all_events_from_dirs()
+    delete_dir(f"{x_world._pidgins_dir}/{zia_str}")
+    x_world._set_all_pidginunits_from_dirs()
 
     # THEN
-    assert x_world.event_id_exists(sue_str)
-    assert x_world.event_id_exists(bob_str)
-    assert x_world.event_id_exists(zia_str) is False
-    assert x_world.events_empty() is False
+    assert x_world.pidginunit_exists(sue_str)
+    assert x_world.pidginunit_exists(bob_str)
+    assert x_world.pidginunit_exists(zia_str) is False
+    assert x_world.pidgins_empty() is False
 
 
-# def test_WorldUnit_save_event_id_ChangesFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_save_pidginunit_ChangesFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     x_world = worldunit_shop()
 #     sue_str = "Sue"
 #     bob_str = "Bob"
 #     zia_str = "Zia"
-#     save_file(f"{x_world._events_dir}/{sue_str}", "temp.txt", "")
-#     save_file(f"{x_world._events_dir}/{bob_str}", "temp.txt", "")
-#     save_file(f"{x_world._events_dir}/{zia_str}", "temp.txt", "")
-#     assert x_world.event_id_exists(sue_str) is False
-#     assert x_world.event_id_exists(bob_str) is False
-#     assert x_world.event_id_exists(zia_str) is False
-#     assert x_world.events_empty()
+#     save_file(f"{x_world._pidgins_dir}/{sue_str}", "temp.txt", "")
+#     save_file(f"{x_world._pidgins_dir}/{bob_str}", "temp.txt", "")
+#     save_file(f"{x_world._pidgins_dir}/{zia_str}", "temp.txt", "")
+#     assert x_world.pidginunit_exists(sue_str) is False
+#     assert x_world.pidginunit_exists(bob_str) is False
+#     assert x_world.pidginunit_exists(zia_str) is False
+#     assert x_world.pidgins_empty()
 
 #     # WHEN
-#     x_world._set_all_events_from_dirs()
+#     x_world._set_all_pidginunits_from_dirs()
 
 #     # THEN
-#     assert x_world.event_id_exists(sue_str)
-#     assert x_world.event_id_exists(bob_str)
-#     assert x_world.event_id_exists(zia_str)
-#     assert x_world.events_empty() is False
+#     assert x_world.pidginunit_exists(sue_str)
+#     assert x_world.pidginunit_exists(bob_str)
+#     assert x_world.pidginunit_exists(zia_str)
+#     assert x_world.pidgins_empty() is False
 
 #     # WHEN
-#     delete_dir(f"{x_world._events_dir}/{zia_str}")
-#     x_world._set_all_events_from_dirs()
+#     delete_dir(f"{x_world._pidgins_dir}/{zia_str}")
+#     x_world._set_all_pidginunits_from_dirs()
 
 #     # THEN
-#     assert x_world.event_id_exists(sue_str)
-#     assert x_world.event_id_exists(bob_str)
-#     assert x_world.event_id_exists(zia_str) is False
-#     assert x_world.events_empty() is False
+#     assert x_world.pidginunit_exists(sue_str)
+#     assert x_world.pidginunit_exists(bob_str)
+#     assert x_world.pidginunit_exists(zia_str) is False
+#     assert x_world.pidgins_empty() is False
 
 
 def test_init_fiscalunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
