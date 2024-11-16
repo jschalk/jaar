@@ -13,11 +13,7 @@ from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import FiscalID, WorldID, TimeLineLabel, get_default_world_id
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
-from src.f09_brick.brick_config import (
-    get_brick_numbers,
-    get_brick_format_filename,
-    get_quick_bricks_column_ref,
-)
+from src.f09_brick.brick_config import get_brick_numbers, get_brick_format_filename
 from src.f09_brick.brick import get_brickref_obj
 from src.f09_brick.pandas_tool import _get_pidgen_brick_format_filenames
 from src.f09_brick.pidgin_toolbox import (
@@ -277,6 +273,13 @@ class WorldUnit:
         transformer = OtxEventsToEventsLogTransformer(self._zoo_dir)
         transformer.transform()
 
+    def events_log_to_events_agg(self):
+        events_file_path = create_file_path(self._zoo_dir, "events.xlsx")
+        events_log_df = pandas_read_excel(events_file_path, "events_log")
+        events_agg_df = _create_events_agg_df(events_log_df)
+        with ExcelWriter(events_file_path) as writer:
+            events_agg_df.to_excel(writer, sheet_name="events_agg", index=False)
+
     def get_dict(self) -> dict:
         return {
             "world_id": self.world_id,
@@ -314,3 +317,13 @@ def worldunit_shop(
 
 def init_fiscalunits_from_dirs(x_dirs: list[str]) -> list[FiscalUnit]:
     return []
+
+
+def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
+    events_agg_df = events_log_df[["face_id", "event_id"]].drop_duplicates()
+    events_agg_df["note"] = (
+        events_agg_df["event_id"]
+        .duplicated(keep=False)
+        .apply(lambda x: "invalid because of conflicting event_id" if x else "")
+    )
+    return events_agg_df.sort_values(["event_id", "face_id"])
