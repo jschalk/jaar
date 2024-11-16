@@ -133,10 +133,11 @@ class OtxEventsToEventsLogTransformer:
         self.zoo_dir = zoo_dir
 
     def transform(self):
-        for brick_number in get_brick_numbers():
+        for brick_number in sorted(get_brick_numbers()):
             brick_file_name = f"{brick_number}.xlsx"
             zoo_brick_path = create_file_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
+                print(f"{zoo_brick_path=}")
                 sheet_name = "otx_events"
                 otx_events_df = pandas_read_excel(zoo_brick_path, sheet_name)
                 events_log_df = self.get_event_log_df(
@@ -150,18 +151,18 @@ class OtxEventsToEventsLogTransformer:
         otx_events_df[["file_dir"]] = x_dir
         otx_events_df[["file_name"]] = x_file_name
         otx_events_df[["sheet_name"]] = "otx_events"
-        otx_events_df = otx_events_df[
-            ["file_dir", "file_name", "sheet_name", "face_id", "event_id", "note"]
-        ]
-        file_name_str = "file_name"
-        print(f"{otx_events_df[file_name_str]=}")
+        cols = ["file_dir", "file_name", "sheet_name", "face_id", "event_id", "note"]
+        otx_events_df = otx_events_df[cols]
         return otx_events_df
 
     def _save_events_log_file(self, events_df: DataFrame):
         events_file_path = create_file_path(self.zoo_dir, "events.xlsx")
-        print(f"{events_file_path=}")
+        events_log_str = "events_log"
+        if os_path_exists(events_file_path):
+            events_log_df = pandas_read_excel(events_file_path, events_log_str)
+            events_df = pandas_concat([events_log_df, events_df])
         with ExcelWriter(events_file_path) as writer:
-            events_df.to_excel(writer, sheet_name="events_log", index=False)
+            events_df.to_excel(writer, sheet_name=events_log_str, index=False)
 
 
 @dataclass
@@ -276,7 +277,6 @@ class WorldUnit:
     def otx_events_to_events_log(self):
         transformer = OtxEventsToEventsLogTransformer(self._zoo_dir)
         transformer.transform()
-        print("huh")
 
     def get_dict(self) -> dict:
         return {
