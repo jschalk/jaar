@@ -280,6 +280,15 @@ class WorldUnit:
         with ExcelWriter(events_file_path) as writer:
             events_agg_df.to_excel(writer, sheet_name="events_agg", index=False)
 
+    def set_events_from_events_agg(self):
+        self.events = {}
+        events_file_path = create_file_path(self._zoo_dir, "events.xlsx")
+        events_agg_df = pandas_read_excel(events_file_path, "events_agg")
+        for index, event_agg_row in events_agg_df.iterrows():
+            x_note = event_agg_row["note"]
+            if x_note != "invalid because of conflicting event_id":
+                self.events[event_agg_row["event_id"]] = event_agg_row["face_id"]
+
     def get_dict(self) -> dict:
         return {
             "world_id": self.world_id,

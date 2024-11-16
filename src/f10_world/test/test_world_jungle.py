@@ -592,6 +592,59 @@ def test_WorldUnit_events_log_to_events_agg_CreatesSheets_Scenario0(
     assert gen_events_agg_df.to_csv(index=False) == ex_events_agg_df.to_csv(index=False)
 
 
+def test_WorldUnit_set_events_from_events_agg_SetsAttr_Scenario0(env_dir_setup_cleanup):
+    # ESTABLISH
+    fizz_str = "fizz"
+    fizz_world = worldunit_shop(fizz_str)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    bob_str = "Bob"
+    event1 = 1
+    event3 = 3
+    event9 = 9
+    invalid_error_str = "invalid because of conflicting event_id"
+    invalid_error_str = "invalid because of conflicting event_id"
+    zoo_dir = fizz_world._zoo_dir
+    e3_row = [bob_str, event3, ""]
+    e1_sue_row = [sue_str, event1, invalid_error_str]
+    e1_yao_row = [yao_str, event1, invalid_error_str]
+    e9_row = [yao_str, event9, ""]
+    el_rows = [e1_sue_row, e1_yao_row, e3_row, e9_row]
+    events_agg_columns = [face_id_str(), event_id_str(), "note"]
+    ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
+    events_agg_str = "events_agg"
+    events_file_path = create_file_path(zoo_dir, "events.xlsx")
+    with ExcelWriter(events_file_path) as writer:
+        ex_events_agg_df.to_excel(writer, sheet_name=events_agg_str, index=False)
+    assert len(fizz_world.events) != 2
+
+    # WHEN
+    fizz_world.set_events_from_events_agg()
+
+    # THEN
+    assert len(fizz_world.events) == 2
+    assert fizz_world.events == {event3: bob_str, event9: yao_str}
+
+
+def test_WorldUnit_set_events_from_events_agg_ClearsAttr(env_dir_setup_cleanup):
+    # ESTABLISH
+    fizz_world = worldunit_shop("fizz")
+    events_agg_columns = [face_id_str(), event_id_str(), "note"]
+    ex_events_agg_df = DataFrame([], columns=events_agg_columns)
+    events_agg_str = "events_agg"
+    events_file_path = create_file_path(fizz_world._zoo_dir, "events.xlsx")
+    with ExcelWriter(events_file_path) as writer:
+        ex_events_agg_df.to_excel(writer, sheet_name=events_agg_str, index=False)
+    fizz_world.events = {2: "Sue", 44: "Bob"}
+    assert fizz_world.events == {2: "Sue", 44: "Bob"}
+
+    # WHEN
+    fizz_world.set_events_from_events_agg()
+
+    # THEN
+    assert not fizz_world.events
+
+
 # def test_WorldUnit_otx_to_faces_event_CreatesPidgenSheets_Scenario0(
 #     env_dir_setup_cleanup,
 # ):
