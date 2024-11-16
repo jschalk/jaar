@@ -137,7 +137,6 @@ class OtxEventsToEventsLogTransformer:
             brick_file_name = f"{brick_number}.xlsx"
             zoo_brick_path = create_file_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
-                print(f"{zoo_brick_path=}")
                 sheet_name = "otx_events"
                 otx_events_df = pandas_read_excel(zoo_brick_path, sheet_name)
                 events_log_df = self.get_event_log_df(
