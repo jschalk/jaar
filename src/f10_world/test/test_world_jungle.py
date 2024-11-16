@@ -130,7 +130,56 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario0_GroupByWorks(
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
 
 
-def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0_GroupByWorks(
+def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fizz_world = worldunit_shop("fizz")
+    sue_str = "Sue"
+    event_1 = 1
+    minute_360 = 360
+    minute_420 = 420
+    minute_480 = 480
+    hour6am = "6am"
+    hour7am = "7am"
+    ex_file_name = "fizzbuzz.xlsx"
+    jungle_file_path = create_file_path(fizz_world._jungle_dir, ex_file_name)
+    zoo_file_path = create_file_path(fizz_world._zoo_dir, "br00003.xlsx")
+    brick_columns = [
+        face_id_str(),
+        event_id_str(),
+        fiscal_id_str(),
+        hour_label_str(),
+        cumlative_minute_str(),
+    ]
+    music23_str = "music23"
+    row1 = [sue_str, event_1, music23_str, hour6am, minute_360]
+    row2 = [sue_str, event_1, music23_str, hour7am, minute_420]
+    row3 = [sue_str, event_1, music23_str, hour7am, minute_480]
+    df1 = DataFrame([row1, row2, row3], columns=brick_columns)
+    with ExcelWriter(jungle_file_path) as writer:
+        df1.to_excel(writer, sheet_name="example1_br00003")
+    fizz_world.jungle_to_zoo()
+    zoo_df = pandas_read_excel(zoo_file_path, sheet_name="zoo")
+    assert len(zoo_df) == 3
+
+    # WHEN
+    fizz_world.zoo_to_otx()
+
+    # THEN
+    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name="otx")
+    ex_otx_df = DataFrame([row1], columns=brick_columns)
+    # print(f"{gen_otx_df.columns=}")
+    print(f"{gen_otx_df=}")
+    assert len(ex_otx_df.columns) == len(gen_otx_df.columns)
+    assert list(ex_otx_df.columns) == list(gen_otx_df.columns)
+    assert len(gen_otx_df) > 0
+    assert len(ex_otx_df) == len(gen_otx_df)
+    assert len(gen_otx_df) == 1
+    assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
+
+
+def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -185,7 +234,7 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0_GroupByWorks(
     assert gen_otx_events_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
 
 
-def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario1_GroupByWorks(
+def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -246,21 +295,24 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario1_GroupByWorks(
     assert gen_otx_events_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
 
 
-def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_str = "fizz"
+    fizz_world = worldunit_shop(fizz_str)
     sue_str = "Sue"
-    event_1 = 1
+    yao_str = "Yao"
+    bob_str = "Bob"
+    event1 = 1
+    event3 = 3
+    event9 = 9
     minute_360 = 360
     minute_420 = 420
-    minute_480 = 480
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
     jungle_file_path = create_file_path(fizz_world._jungle_dir, ex_file_name)
-    zoo_file_path = create_file_path(fizz_world._zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -269,30 +321,136 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflicti
         cumlative_minute_str(),
     ]
     music23_str = "music23"
-    row1 = [sue_str, event_1, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event_1, music23_str, hour7am, minute_420]
-    row3 = [sue_str, event_1, music23_str, hour7am, minute_480]
-    df1 = DataFrame([row1, row2, row3], columns=brick_columns)
+    row1 = [sue_str, event1, music23_str, hour6am, minute_360]
+    row2 = [sue_str, event1, music23_str, hour7am, minute_420]
+    row3 = [yao_str, event1, music23_str, hour7am, minute_420]
+    row4 = [yao_str, event9, music23_str, hour7am, minute_420]
+    row5 = [bob_str, event3, music23_str, hour7am, minute_420]
+    df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
     with ExcelWriter(jungle_file_path) as writer:
         df1.to_excel(writer, sheet_name="example1_br00003")
     fizz_world.jungle_to_zoo()
-    zoo_df = pandas_read_excel(zoo_file_path, sheet_name="zoo")
-    assert len(zoo_df) == 3
+    fizz_world.zoo_to_otx()
+    fizz_world.otx_to_otx_events()
+    events_file_name = "events.xlsx"
+    events_file_path = create_file_path(fizz_world._zoo_dir, events_file_name)
+    assert os_path_exists(events_file_path) is False
 
     # WHEN
-    fizz_world.zoo_to_otx()
+    fizz_world.otx_events_to_events_log()
 
     # THEN
-    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name="otx")
-    ex_otx_df = DataFrame([row1], columns=brick_columns)
-    # print(f"{gen_otx_df.columns=}")
-    print(f"{gen_otx_df=}")
-    assert len(ex_otx_df.columns) == len(gen_otx_df.columns)
-    assert list(ex_otx_df.columns) == list(gen_otx_df.columns)
-    assert len(gen_otx_df) > 0
-    assert len(ex_otx_df) == len(gen_otx_df)
-    assert len(gen_otx_df) == 1
-    assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
+    assert os_path_exists(events_file_path)
+    elog = "events_log"
+    gen_events_log_df = pandas_read_excel(events_file_path, sheet_name=elog)
+    print(f"{gen_events_log_df.columns=}")
+    events_otx_columns = [
+        "file_dir",
+        "file_name",
+        "sheet_name",
+        face_id_str(),
+        event_id_str(),
+        "note",
+    ]
+    invalid_error_str = "invalid because of conflicting event_id"
+    invalid_error_str = "invalid because of conflicting event_id"
+    zoo_dir = fizz_world._zoo_dir
+    src_file_name = "br00003.xlsx"
+    oe_str = "otx_events"
+    bob_row = [zoo_dir, src_file_name, oe_str, bob_str, event3, ""]
+    sue_row = [zoo_dir, src_file_name, oe_str, sue_str, event1, invalid_error_str]
+    yao1_row = [zoo_dir, src_file_name, oe_str, yao_str, event1, invalid_error_str]
+    yao9_row = [zoo_dir, src_file_name, oe_str, yao_str, event9, ""]
+    # el_rows = [zoo_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
+    el_rows = [bob_row, sue_row, yao1_row, yao9_row]
+    ex_otx_events_df = DataFrame(el_rows, columns=events_otx_columns)
+    assert len(gen_events_log_df.columns) == len(ex_otx_events_df.columns)
+    assert list(gen_events_log_df.columns) == list(ex_otx_events_df.columns)
+    assert len(gen_events_log_df) > 0
+    assert len(gen_events_log_df) == 4
+    assert len(gen_events_log_df) == len(ex_otx_events_df)
+    print(f"{gen_events_log_df.to_csv(index=False)=}")
+    print(f" {ex_otx_events_df.to_csv(index=False)=}")
+    assert gen_events_log_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
+
+
+# def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario1_MultipleBricks(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     fizz_str = "fizz"
+#     fizz_world = worldunit_shop(fizz_str)
+#     sue_str = "Sue"
+#     yao_str = "Yao"
+#     bob_str = "Bob"
+#     event1 = 1
+#     event3 = 3
+#     event9 = 9
+#     minute_360 = 360
+#     minute_420 = 420
+#     hour6am = "6am"
+#     hour7am = "7am"
+#     ex_file_name = "fizzbuzz.xlsx"
+#     jungle_file_path = create_file_path(fizz_world._jungle_dir, ex_file_name)
+#     brick_columns = [
+#         face_id_str(),
+#         event_id_str(),
+#         fiscal_id_str(),
+#         hour_label_str(),
+#         cumlative_minute_str(),
+#     ]
+#     music23_str = "music23"
+#     row1 = [sue_str, event1, music23_str, hour6am, minute_360]
+#     row2 = [sue_str, event1, music23_str, hour7am, minute_420]
+#     row3 = [yao_str, event1, music23_str, hour7am, minute_420]
+#     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
+#     row5 = [bob_str, event3, music23_str, hour7am, minute_420]
+#     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
+#     with ExcelWriter(jungle_file_path) as writer:
+#         df1.to_excel(writer, sheet_name="example1_br00003")
+#     fizz_world.jungle_to_zoo()
+#     fizz_world.zoo_to_otx()
+#     fizz_world.otx_to_otx_events()
+#     events_file_name = "events.xlsx"
+#     events_file_path = create_file_path(fizz_world._zoo_dir, events_file_name)
+#     assert os_path_exists(events_file_path) is False
+
+#     # WHEN
+#     fizz_world.otx_events_to_events_log()
+
+#     # THEN
+#     assert os_path_exists(events_file_path)
+#     elog = "events_log"
+#     gen_events_log_df = pandas_read_excel(events_file_path, sheet_name=elog)
+#     print(f"{gen_events_log_df.columns=}")
+#     events_otx_columns = [
+#         "file_dir",
+#         "file_name",
+#         "sheet_name",
+#         face_id_str(),
+#         event_id_str(),
+#         "note",
+#     ]
+#     invalid_error_str = "invalid because of conflicting event_id"
+#     invalid_error_str = "invalid because of conflicting event_id"
+#     zoo_dir = fizz_world._zoo_dir
+#     src_file_name = "br00003.xlsx"
+#     oe_str = "otx_events"
+#     bob_row = [zoo_dir, src_file_name, oe_str, bob_str, event3, ""]
+#     sue_row = [zoo_dir, src_file_name, oe_str, sue_str, event1, invalid_error_str]
+#     yao1_row = [zoo_dir, src_file_name, oe_str, yao_str, event1, invalid_error_str]
+#     yao9_row = [zoo_dir, src_file_name, oe_str, yao_str, event9, ""]
+#     # el_rows = [zoo_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
+#     el_rows = [bob_row, sue_row, yao1_row, yao9_row]
+#     ex_otx_events_df = DataFrame(el_rows, columns=events_otx_columns)
+#     assert len(gen_events_log_df.columns) == len(ex_otx_events_df.columns)
+#     assert list(gen_events_log_df.columns) == list(ex_otx_events_df.columns)
+#     assert len(gen_events_log_df) > 0
+#     assert len(gen_events_log_df) == 4
+#     assert len(gen_events_log_df) == len(ex_otx_events_df)
+#     print(f"{gen_events_log_df.to_csv(index=False)=}")
+#     print(f" {ex_otx_events_df.to_csv(index=False)=}")
+#     assert gen_events_log_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
 
 
 # def test_WorldUnit_otx_to_faces_event_CreatesPidgenSheets_Scenario0(

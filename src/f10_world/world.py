@@ -128,6 +128,42 @@ class OtxToOtxEventsTransformer:
             events_df.to_excel(writer, sheet_name="otx_events", index=False)
 
 
+class OtxEventsToEventsLogTransformer:
+    def __init__(self, zoo_dir: str):
+        self.zoo_dir = zoo_dir
+
+    def transform(self):
+        for brick_number in get_brick_numbers():
+            brick_file_name = f"{brick_number}.xlsx"
+            zoo_brick_path = create_file_path(self.zoo_dir, brick_file_name)
+            if os_path_exists(zoo_brick_path):
+                sheet_name = "otx_events"
+                otx_events_df = pandas_read_excel(zoo_brick_path, sheet_name)
+                events_log_df = self.get_event_log_df(
+                    otx_events_df, self.zoo_dir, brick_file_name
+                )
+                self._save_events_log_file(events_log_df)
+
+    def get_event_log_df(
+        self, otx_events_df: DataFrame, x_dir: str, x_file_name: str
+    ) -> DataFrame:
+        otx_events_df[["file_dir"]] = x_dir
+        otx_events_df[["file_name"]] = x_file_name
+        otx_events_df[["sheet_name"]] = "otx_events"
+        otx_events_df = otx_events_df[
+            ["file_dir", "file_name", "sheet_name", "face_id", "event_id", "note"]
+        ]
+        file_name_str = "file_name"
+        print(f"{otx_events_df[file_name_str]=}")
+        return otx_events_df
+
+    def _save_events_log_file(self, events_df: DataFrame):
+        events_file_path = create_file_path(self.zoo_dir, "events.xlsx")
+        print(f"{events_file_path=}")
+        with ExcelWriter(events_file_path) as writer:
+            events_df.to_excel(writer, sheet_name="events_log", index=False)
+
+
 @dataclass
 class WorldUnit:
     world_id: WorldID = None
@@ -178,9 +214,6 @@ class WorldUnit:
 
     def _delete_pidginunit_dir(self, event_id: TimeLinePoint):
         delete_dir(self._event_dir(event_id))
-
-    def otx_events_to_all_events(self):
-        pass
 
     # def get_db_path(self) -> str:
     #     return create_file_path(self._world_dir, "wrd.db")
@@ -239,6 +272,11 @@ class WorldUnit:
     def otx_to_otx_events(self):
         transformer = OtxToOtxEventsTransformer(self._zoo_dir)
         transformer.transform()
+
+    def otx_events_to_events_log(self):
+        transformer = OtxEventsToEventsLogTransformer(self._zoo_dir)
+        transformer.transform()
+        print("huh")
 
     def get_dict(self) -> dict:
         return {
