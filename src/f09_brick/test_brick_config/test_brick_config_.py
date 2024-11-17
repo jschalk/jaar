@@ -689,9 +689,9 @@ def test_get_brick_category_ref_ReturnsObj():
 
     example_ref = {}
     for brick_number in brick_numbers_sorted:
-        categorys_list = get_brickref_from_file(
-            get_brick_format_filename(brick_number)
-        ).get(categorys_str())
+        brick_format_file_name = get_brick_format_filename(brick_number)
+        x_brickref = get_brickref_from_file(brick_format_file_name)
+        categorys_list = x_brickref.get(categorys_str())
         for x_category in categorys_list:
             if example_ref.get(x_category) is None:
                 example_ref[x_category] = [brick_number]

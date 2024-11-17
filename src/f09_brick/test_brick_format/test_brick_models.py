@@ -93,7 +93,7 @@ def test_Base_create_all_CreatesTables_Scenario0_InMemory():
 
     # List all tables in the database
     tables = metadata.tables
-    assert len(tables) == 46
+    assert len(tables) == 48
 
 
 def test_Base_create_all_CreatesTables_Scenario1_File(brick_env_setup_cleanup):
@@ -114,4 +114,4 @@ def test_Base_create_all_CreatesTables_Scenario1_File(brick_env_setup_cleanup):
     # for table_name in tables:
     #     print(table_name)
 
-    assert len(tables) == 46
+    assert len(tables) == 48

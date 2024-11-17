@@ -645,6 +645,22 @@ def test_WorldUnit_set_events_from_events_agg_ClearsAttr(env_dir_setup_cleanup):
     assert not fizz_world.events
 
 
+def test_get_pidgen_brick_format_filenames_ReturnsObj():
+    # ESTABLISH /  WHEN
+    pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
+
+    # THEN
+    print(f"need examples for {pidgen_brick_filenames=}")
+    br00040_xlsx_file = "br00040.xlsx"
+    br00041_xlsx_file = "br00041.xlsx"
+    br00113_xlsx_file = "br00113.xlsx"
+    assert pidgen_brick_filenames == {
+        br00040_xlsx_file,
+        br00041_xlsx_file,
+        br00113_xlsx_file,
+    }
+
+
 # def test_WorldUnit_otx_to_faces_event_CreatesPidgenSheets_Scenario0(
 #     env_dir_setup_cleanup,
 # ):
@@ -653,17 +669,22 @@ def test_WorldUnit_set_events_from_events_agg_ClearsAttr(env_dir_setup_cleanup):
 #     print(f"need examples for {pidgen_brick_filenames=}")
 #     br00040_xlsx_file = "br00040.xlsx"
 #     br00041_xlsx_file = "br00041.xlsx"
-#     assert pidgen_brick_filenames == {br00040_xlsx_file, br00041_xlsx_file}
+#     br00113_xlsx_file = "br00113.xlsx"
+#     assert pidgen_brick_filenames == {
+#         br00040_xlsx_file,
+#         br00041_xlsx_file,
+#         br00113_xlsx_file,
+#     }
 
 #     fizz_world = worldunit_shop("fizz")
 #     sue_str = "Sue"
 #     yao_str = "Yao"
-#     event_1 = 1
-#     event_2 = 2
-#     event_5 = 5
-#     event_7 = 7
-#     event_8 = 8
-#     event_9 = 9
+#     event1 = 1
+#     event2 = 2
+#     event5 = 5
+#     event7 = 7
+#     event8 = 8
+#     event9 = 9
 #     hr6am = "6am"
 #     hr7am = "7am"
 #     vetday = "veterns day"
@@ -676,8 +697,8 @@ def test_WorldUnit_set_events_from_events_agg_ClearsAttr(env_dir_setup_cleanup):
 #     br00040_file_path = create_file_path(fizz_world._zoo_dir, br00040_xlsx_file)
 #     br00041_file_path = create_file_path(fizz_world._zoo_dir, br00041_xlsx_file)
 #     br00040_columns = [
-#         event_id_str(),
 #         face_id_str(),
+#         event_id_str(),
 #         inx_road_delimiter_str(),
 #         inx_word_str(),
 #         jaar_type_str(),
@@ -695,14 +716,15 @@ def test_WorldUnit_set_events_from_events_agg_ClearsAttr(env_dir_setup_cleanup):
 #         otx_road_delimiter_str(),
 #         unknown_word_str(),
 #     ]
-#     sue_oi0 = [sue_str, event_1, slash_str, hr6am, groupid_str, colon_str, hr6am, x_uk]
-#     sue_oi1 = [sue_str, event_1, slash_str, hr6am, roadnode_str, colon_str, hr6am, x_uk]
-#     sue_oi2 = [sue_str, event_2, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
-#     sue_oi3 = [sue_str, event_5, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
-#     yao_1 = [yao_str, event_7, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
-#     sue_el = [sue_str, event_8, armday, slash_str, roadnode_str, vetday, colon_str, x_uk]
-#     yao_el = [yao_str, event_9, vetday, slash_str, roadnode_str, vetday, colon_str, x_uk]
-#     br00040_df = DataFrame([sue_oi1, sue_oi2, sue_oi3, yao_1], columns=br00040_columns)
+#     sue_oi0 = [sue_str, event1, slash_str, hr6am, groupid_str, colon_str, hr6am, x_uk]
+#     sue_oi1 = [sue_str, event1, slash_str, hr6am, roadnode_str, colon_str, hr6am, x_uk]
+#     sue_oi2 = [sue_str, event2, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
+#     sue_oi3 = [sue_str, event5, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
+#     yao_1 = [yao_str, event7, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
+#     sue_el = [sue_str, event8, armday, slash_str, roadnode_str, vetday, colon_str, x_uk]
+#     yao_el = [yao_str, event9, vetday, slash_str, roadnode_str, vetday, colon_str, x_uk]
+#     b40_rows = [sue_oi0, sue_oi1, sue_oi2, sue_oi3, yao_1]
+#     br00040_df = DataFrame(b40_rows, columns=br00040_columns)
 #     br00041_df = DataFrame([yao_el, sue_el], columns=br00041_columns)
 #     with ExcelWriter(br00040_file_path) as writer:
 #         br00040_df.to_excel(writer, sheet_name="otx", index=False)
@@ -758,7 +780,16 @@ def test_WorldUnit_set_events_from_events_agg_ClearsAttr(env_dir_setup_cleanup):
 #     sue_oi2 = [sue_str, event_1, hr7am, slash_str, roadnode_str, hr7am, colon_str, x_uk]
 #     sue_oi3 = [sue_str, event_1, hr7am, slash_str, roadnode_str, hr7am, colon_str, x_uk]
 #     yao_el1 = [yao_str, event_1, hr7am, slash_str, roadnode_str, hr7am, colon_str, x_uk]
-#     sue_el1 = [sue_str, event_1, armday, slash_str, roadnode_str, vetday, colon_str, x_uk]
+#     sue_el1 = [
+#         sue_str,
+#         event_1,
+#         armday,
+#         slash_str,
+#         roadnode_str,
+#         vetday,
+#         colon_str,
+#         x_uk,
+#     ]
 #     ex1_sue_otx_to_inx_df = DataFrame([sue_oi1, sue_oi2, sue_oi3], otx_to_inx_columns)
 #     ex1_sue_otx_explicit_df = DataFrame([sue_el1], explicit_label_columns)
 #     ex1_yao_otx_to_inx_df = DataFrame([], otx_to_inx_columns)

@@ -143,7 +143,7 @@ def test_get_brick_format_headers_ReturnsObj():
     # THEN
     # print(f"{set(get_brick_format_headers().values())=}")
     # sourcery skip: no-loop-in-tests
-    for x_brick_filename in get_brick_format_filenames():
+    for x_brick_filename in sorted(list(get_brick_format_filenames())):
         check_sorted_headers_exist(x_brick_filename, x_headers)
 
     print(f"{x_headers=}")

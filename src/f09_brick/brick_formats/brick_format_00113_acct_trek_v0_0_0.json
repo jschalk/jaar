@@ -1,0 +1,30 @@
+{
+    "attributes": {
+        "acct_id": {
+            "otx_key": true
+        },
+        "event_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "inx_word": {
+            "otx_key": false
+        },
+        "jaar_type": {
+            "otx_key": true
+        },
+        "owner_id": {
+            "otx_key": true
+        }
+    },
+    "brick_number": "br00113",
+    "categorys": [
+        "bridge_otx_to_inx",
+        "bud_acctunit"
+    ]
+}
