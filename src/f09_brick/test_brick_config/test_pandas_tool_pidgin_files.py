@@ -12,7 +12,7 @@ from src.f08_pidgin.examples.pidgin_env import (
     get_test_faces_dir,
 )
 from src.f08_pidgin.examples.example_pidgins import (
-    get_casa_maison_pidginunit_set_by_explicit_label,
+    get_casa_maison_pidginunit_set_by_nub_label,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
     get_clean_roadunit_bridgeunit,
@@ -103,7 +103,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
-    sue_pidginunit = get_casa_maison_pidginunit_set_by_explicit_label()
+    sue_pidginunit = get_casa_maison_pidginunit_set_by_nub_label()
     sue_dir = f"{get_test_faces_dir()}/{sue_pidginunit.face_id}"
     save_file(sue_dir, "bridge.json", sue_pidginunit.get_json())
     sue_otx_dt = get_casa_maison_road_otx_dt()
@@ -146,7 +146,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    sue_pidginunit = get_casa_maison_pidginunit_set_by_explicit_label()
+    sue_pidginunit = get_casa_maison_pidginunit_set_by_nub_label()
     sue_pidginunit.set_bridgeunit(get_suita_acctid_bridgeunit())
     sue_dir = f"{get_test_faces_dir()}/{sue_pidginunit.face_id}"
     bridge_filename = "bridge.json"

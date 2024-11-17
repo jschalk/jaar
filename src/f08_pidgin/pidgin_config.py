@@ -58,8 +58,8 @@ def unknown_word_str() -> str:
     return "unknown_word"
 
 
-def explicit_label_str() -> str:
-    return "explicit_label"
+def nub_label_str() -> str:
+    return "nub_label"
 
 
 def otx_to_inx_str() -> str:
@@ -70,8 +70,8 @@ def bridge_otx_to_inx_str() -> str:
     return "bridge_otx_to_inx"
 
 
-def bridge_explicit_label_str() -> str:
-    return "bridge_explicit_label"
+def bridge_nub_label_str() -> str:
+    return "bridge_nub_label"
 
 
 def get_pidgin_config_jkeys(x_cat: str) -> dict:

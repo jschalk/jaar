@@ -14,7 +14,7 @@ from src.f09_brick.pandas_tool import (
 )
 from src.f08_pidgin.examples.example_pidgins import (
     get_casa_maison_pidginunit_set_by_otx_to_inx,
-    get_casa_maison_pidginunit_set_by_explicit_label,
+    get_casa_maison_pidginunit_set_by_nub_label,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
 )
@@ -205,7 +205,7 @@ def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_
     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_casa_maison_pidginunit_set_by_explicit_label():
+def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_casa_maison_pidginunit_set_by_nub_label():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -220,7 +220,7 @@ def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_
     sweep_str = "sweep"
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
-    yao_pidginunit = get_casa_maison_pidginunit_set_by_explicit_label()
+    yao_pidginunit = get_casa_maison_pidginunit_set_by_nub_label()
     # print(f"{yao_pidginunit=}")
     otx_dt = get_casa_maison_road_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)

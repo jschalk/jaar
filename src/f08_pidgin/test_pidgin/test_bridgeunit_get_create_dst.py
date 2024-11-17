@@ -39,7 +39,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label():
     assert roadnode_bridgeunit.otx_exists(fail_clean_otx) is False
 
 
-def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label_With_explicit_label():
+def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label_With_nub_label():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
@@ -49,9 +49,9 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label_With_explicit_lab
     inx_r_delimiter = ":"
     roadnode_bridgeunit = bridgeunit_shop("RoadNode", otx_r_delimiter, inx_r_delimiter)
     roadnode_bridgeunit.set_otx_to_inx(clean_otx, clean_inx)
-    roadnode_bridgeunit.set_explicit_label(casa_otx, casa_inx)
+    roadnode_bridgeunit.set_nub_label(casa_otx, casa_inx)
     assert casa_otx != casa_inx
-    assert roadnode_bridgeunit.explicit_label_exists(casa_otx, casa_inx)
+    assert roadnode_bridgeunit.nub_label_exists(casa_otx, casa_inx)
     assert roadnode_bridgeunit.otx_to_inx_exists(casa_otx, casa_inx) is False
 
     # WHEN
@@ -59,7 +59,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label_With_explicit_lab
 
     # THEN
     assert generated_inx == casa_inx
-    assert roadnode_bridgeunit.explicit_label_exists(casa_otx, casa_inx)
+    assert roadnode_bridgeunit.nub_label_exists(casa_otx, casa_inx)
     assert roadnode_bridgeunit.otx_to_inx_exists(casa_otx, casa_inx)
     print(f"{casa_inx=}")
 
@@ -117,7 +117,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     assert gen_inx_road == f"{inx_music87_str}{inx_r_delimiter}{clean_otx_str}"
 
 
-def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_explicit_label():
+def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_nub_label():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -127,7 +127,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_exp
     clean_inx_str = "prop"
     clean_otx_road = f"{otx_music45_str}{otx_r_delimiter}{clean_otx_str}"
     road_bridgeunit = bridgeunit_shop("RoadUnit", otx_r_delimiter, inx_r_delimiter)
-    road_bridgeunit.set_explicit_label(clean_otx_str, clean_inx_str)
+    road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
     assert road_bridgeunit.otx_exists(otx_music45_str) is False
     assert road_bridgeunit.otx_exists(clean_otx_road) is False
 
@@ -219,9 +219,9 @@ def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx_to_inx_RoadUnit():
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
     road_bd = bridgeunit_shop("RoadUnit")
-    road_bd.set_explicit_label(otx_music45_str, inx_music87_str)
-    road_bd.set_explicit_label(casa_otx_str, casa_inx_str)
-    road_bd.set_explicit_label(clean_otx_str, clean_inx_str)
+    road_bd.set_nub_label(otx_music45_str, inx_music87_str)
+    road_bd.set_nub_label(casa_otx_str, casa_inx_str)
+    road_bd.set_nub_label(clean_otx_str, clean_inx_str)
     assert road_bd.otx_exists(otx_music45_str) is False
     assert road_bd.otx_exists(casa_otx_road) is False
     assert road_bd.otx_exists(clean_otx_road) is False

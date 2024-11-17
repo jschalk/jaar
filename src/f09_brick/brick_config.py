@@ -204,8 +204,8 @@ def brick_format_00040_bridge_otx_to_inx_v0_0_0() -> str:
     return "brick_format_00040_bridge_otx_to_inx_v0_0_0"
 
 
-def brick_format_00041_bridge_explicit_label_v0_0_0() -> str:
-    return "brick_format_00041_bridge_explicit_label_v0_0_0"
+def brick_format_00041_bridge_nub_label_v0_0_0() -> str:
+    return "brick_format_00041_bridge_nub_label_v0_0_0"
 
 
 def brick_format_00113_acct_trek_v0_0_0() -> str:
@@ -236,7 +236,7 @@ def get_brick_format_filenames() -> set[str]:
         brick_format_00029_budunit_v0_0_0(),
         brick_format_00036_problem_healer_v0_0_0(),
         brick_format_00040_bridge_otx_to_inx_v0_0_0(),
-        brick_format_00041_bridge_explicit_label_v0_0_0(),
+        brick_format_00041_bridge_nub_label_v0_0_0(),
         brick_format_00113_acct_trek_v0_0_0(),
     }
 
@@ -301,7 +301,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "credor_respect,debtor_respect,fiscal_id,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,purview_time_id,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
         "fiscal_id,healer_id,label,owner_id,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
         "inx_road_delimiter,inx_word,jaar_type,otx_road_delimiter,otx_word,unknown_word": brick_format_00040_bridge_otx_to_inx_v0_0_0(),
-        "inx_label,inx_road_delimiter,otx_label,otx_road_delimiter,unknown_word": brick_format_00041_bridge_explicit_label_v0_0_0(),
+        "inx_label,inx_road_delimiter,otx_label,otx_road_delimiter,unknown_word": brick_format_00041_bridge_nub_label_v0_0_0(),
         "acct_id,fiscal_id,inx_word,jaar_type,otx_word,owner_id": brick_format_00113_acct_trek_v0_0_0(),
     }
 
@@ -490,5 +490,5 @@ def get_brick_category_ref() -> dict[str, set[str]]:
         "bud_item_reasonunit": ["br00027"],
         "budunit": ["br00029"],
         "bridge_otx_to_inx": ["br00040", "br00113"],
-        "bridge_explicit_label": ["br00041"],
+        "bridge_nub_label": ["br00041"],
     }

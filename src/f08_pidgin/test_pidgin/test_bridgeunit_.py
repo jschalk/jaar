@@ -32,7 +32,7 @@ def test_BridgeUnit_Exists():
     assert not x_bridgeunit.unknown_word
     assert not x_bridgeunit.otx_road_delimiter
     assert not x_bridgeunit.inx_road_delimiter
-    assert not x_bridgeunit.explicit_label
+    assert not x_bridgeunit.nub_label
     assert not x_bridgeunit.face_id
 
 
@@ -62,7 +62,7 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
     assert acct_id_bridgeunit.unknown_word == x_unknown_word
     assert acct_id_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
     assert acct_id_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
-    assert acct_id_bridgeunit.explicit_label == {}
+    assert acct_id_bridgeunit.nub_label == {}
     assert acct_id_bridgeunit.face_id == bob_str
 
 
@@ -265,154 +265,154 @@ def test_BridgeUnit_unknown_word_in_otx_to_inx_ReturnsObj():
     assert x_bridgeunit._unknown_word_in_otx_to_inx()
 
 
-def test_BridgeUnit_set_explicit_label_SetsAttr():
+def test_BridgeUnit_set_nub_label_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_bridgeunit = bridgeunit_shop(None)
-    assert x_bridgeunit.explicit_label == {}
+    assert x_bridgeunit.nub_label == {}
 
     # WHEN
-    x_bridgeunit.set_explicit_label(xio_str, sue_str)
+    x_bridgeunit.set_nub_label(xio_str, sue_str)
 
     # THEN
-    assert x_bridgeunit.explicit_label == {xio_str: sue_str}
+    assert x_bridgeunit.nub_label == {xio_str: sue_str}
 
 
-def test_BridgeUnit_set_explicit_label_SetsAttr():
+def test_BridgeUnit_set_nub_label_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_bridgeunit = bridgeunit_shop(None)
-    assert x_bridgeunit.explicit_label == {}
+    assert x_bridgeunit.nub_label == {}
 
     # WHEN
-    x_bridgeunit.set_explicit_label(xio_str, sue_str)
+    x_bridgeunit.set_nub_label(xio_str, sue_str)
 
     # THEN
-    assert x_bridgeunit.explicit_label == {xio_str: sue_str}
+    assert x_bridgeunit.nub_label == {xio_str: sue_str}
 
 
-def test_BridgeUnit_set_explicit_label_RaisesExceptionWhen_road_delimiter_In_otx_label():
+def test_BridgeUnit_set_nub_label_RaisesExceptionWhen_road_delimiter_In_otx_label():
     # ESTABLISH
     x_bridgeunit = bridgeunit_shop(None)
     sue_otx = f"Sue{x_bridgeunit.otx_road_delimiter}"
     sue_inx = "Sue"
-    assert x_bridgeunit.explicit_label == {}
+    assert x_bridgeunit.nub_label == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_bridgeunit.set_explicit_label(sue_otx, sue_inx)
-    exception_str = f"explicit_label cannot have otx_label '{sue_otx}'. It must be not have road_delimiter {x_bridgeunit.otx_road_delimiter}."
+        x_bridgeunit.set_nub_label(sue_otx, sue_inx)
+    exception_str = f"nub_label cannot have otx_label '{sue_otx}'. It must be not have road_delimiter {x_bridgeunit.otx_road_delimiter}."
     assert str(excinfo.value) == exception_str
 
 
-def test_BridgeUnit_set_explicit_label_RaisesExceptionWhen_road_delimiter_In_inx_label():
+def test_BridgeUnit_set_nub_label_RaisesExceptionWhen_road_delimiter_In_inx_label():
     # ESTABLISH
     x_bridgeunit = bridgeunit_shop(None)
     sue_inx = f"Sue{x_bridgeunit.otx_road_delimiter}"
     sue_otx = "Sue"
-    assert x_bridgeunit.explicit_label == {}
+    assert x_bridgeunit.nub_label == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_bridgeunit.set_explicit_label(sue_otx, sue_inx)
-    exception_str = f"explicit_label cannot have inx_label '{sue_inx}'. It must be not have road_delimiter {x_bridgeunit.inx_road_delimiter}."
+        x_bridgeunit.set_nub_label(sue_otx, sue_inx)
+    exception_str = f"nub_label cannot have inx_label '{sue_inx}'. It must be not have road_delimiter {x_bridgeunit.inx_road_delimiter}."
     assert str(excinfo.value) == exception_str
 
 
-def test_BridgeUnit_get_explicit_inx_label_ReturnsObj():
+def test_BridgeUnit_get_nub_inx_label_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_bridgeunit = bridgeunit_shop(None)
-    assert x_bridgeunit._get_explicit_inx_label(xio_str) != sue_str
+    assert x_bridgeunit._get_nub_inx_label(xio_str) != sue_str
 
     # WHEN
-    x_bridgeunit.set_explicit_label(xio_str, sue_str)
+    x_bridgeunit.set_nub_label(xio_str, sue_str)
 
     # THEN
-    assert x_bridgeunit._get_explicit_inx_label(xio_str) == sue_str
+    assert x_bridgeunit._get_nub_inx_label(xio_str) == sue_str
 
 
-def test_BridgeUnit_explicit_label_exists_ReturnsObj():
-    # ESTABLISH
-    xio_str = "Xio"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    zia_str = "Zia"
-    x_bridgeunit = bridgeunit_shop(None)
-    assert x_bridgeunit.explicit_label_exists(xio_str, sue_str) is False
-    assert x_bridgeunit.explicit_label_exists(xio_str, zia_str) is False
-    assert x_bridgeunit.explicit_label_exists(xio_str, bob_str) is False
-    assert x_bridgeunit.explicit_label_exists(zia_str, zia_str) is False
-
-    # WHEN
-    x_bridgeunit.set_explicit_label(xio_str, sue_str)
-
-    # THEN
-    assert x_bridgeunit.explicit_label_exists(xio_str, sue_str)
-    assert x_bridgeunit.explicit_label_exists(xio_str, zia_str) is False
-    assert x_bridgeunit.explicit_label_exists(xio_str, bob_str) is False
-    assert x_bridgeunit.explicit_label_exists(zia_str, zia_str) is False
-
-    # WHEN
-    x_bridgeunit.set_explicit_label(zia_str, zia_str)
-
-    # THEN
-    assert x_bridgeunit.explicit_label_exists(xio_str, sue_str)
-    assert x_bridgeunit.explicit_label_exists(xio_str, zia_str) is False
-    assert x_bridgeunit.explicit_label_exists(xio_str, bob_str) is False
-    assert x_bridgeunit.explicit_label_exists(zia_str, zia_str)
-
-
-def test_BridgeUnit_explicit_otx_label_exists_ReturnsObj():
+def test_BridgeUnit_nub_label_exists_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
     x_bridgeunit = bridgeunit_shop(None)
-    assert x_bridgeunit.explicit_otx_label_exists(xio_str) is False
-    assert x_bridgeunit.explicit_otx_label_exists(sue_str) is False
-    assert x_bridgeunit.explicit_otx_label_exists(bob_str) is False
-    assert x_bridgeunit.explicit_otx_label_exists(zia_str) is False
+    assert x_bridgeunit.nub_label_exists(xio_str, sue_str) is False
+    assert x_bridgeunit.nub_label_exists(xio_str, zia_str) is False
+    assert x_bridgeunit.nub_label_exists(xio_str, bob_str) is False
+    assert x_bridgeunit.nub_label_exists(zia_str, zia_str) is False
 
     # WHEN
-    x_bridgeunit.set_explicit_label(xio_str, sue_str)
+    x_bridgeunit.set_nub_label(xio_str, sue_str)
 
     # THEN
-    assert x_bridgeunit.explicit_otx_label_exists(xio_str)
-    assert x_bridgeunit.explicit_otx_label_exists(sue_str) is False
-    assert x_bridgeunit.explicit_otx_label_exists(bob_str) is False
-    assert x_bridgeunit.explicit_otx_label_exists(zia_str) is False
+    assert x_bridgeunit.nub_label_exists(xio_str, sue_str)
+    assert x_bridgeunit.nub_label_exists(xio_str, zia_str) is False
+    assert x_bridgeunit.nub_label_exists(xio_str, bob_str) is False
+    assert x_bridgeunit.nub_label_exists(zia_str, zia_str) is False
 
     # WHEN
-    x_bridgeunit.set_explicit_label(zia_str, zia_str)
+    x_bridgeunit.set_nub_label(zia_str, zia_str)
 
     # THEN
-    assert x_bridgeunit.explicit_otx_label_exists(xio_str)
-    assert x_bridgeunit.explicit_otx_label_exists(sue_str) is False
-    assert x_bridgeunit.explicit_otx_label_exists(bob_str) is False
-    assert x_bridgeunit.explicit_otx_label_exists(zia_str)
+    assert x_bridgeunit.nub_label_exists(xio_str, sue_str)
+    assert x_bridgeunit.nub_label_exists(xio_str, zia_str) is False
+    assert x_bridgeunit.nub_label_exists(xio_str, bob_str) is False
+    assert x_bridgeunit.nub_label_exists(zia_str, zia_str)
 
 
-def test_BridgeUnit_del_explicit_label_SetsAttr():
+def test_BridgeUnit_nub_otx_label_exists_ReturnsObj():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    zia_str = "Zia"
+    x_bridgeunit = bridgeunit_shop(None)
+    assert x_bridgeunit.nub_otx_label_exists(xio_str) is False
+    assert x_bridgeunit.nub_otx_label_exists(sue_str) is False
+    assert x_bridgeunit.nub_otx_label_exists(bob_str) is False
+    assert x_bridgeunit.nub_otx_label_exists(zia_str) is False
+
+    # WHEN
+    x_bridgeunit.set_nub_label(xio_str, sue_str)
+
+    # THEN
+    assert x_bridgeunit.nub_otx_label_exists(xio_str)
+    assert x_bridgeunit.nub_otx_label_exists(sue_str) is False
+    assert x_bridgeunit.nub_otx_label_exists(bob_str) is False
+    assert x_bridgeunit.nub_otx_label_exists(zia_str) is False
+
+    # WHEN
+    x_bridgeunit.set_nub_label(zia_str, zia_str)
+
+    # THEN
+    assert x_bridgeunit.nub_otx_label_exists(xio_str)
+    assert x_bridgeunit.nub_otx_label_exists(sue_str) is False
+    assert x_bridgeunit.nub_otx_label_exists(bob_str) is False
+    assert x_bridgeunit.nub_otx_label_exists(zia_str)
+
+
+def test_BridgeUnit_del_nub_label_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_bridgeunit = bridgeunit_shop(None)
-    x_bridgeunit.set_explicit_label(xio_str, sue_str)
-    assert x_bridgeunit.explicit_label_exists(xio_str, sue_str)
+    x_bridgeunit.set_nub_label(xio_str, sue_str)
+    assert x_bridgeunit.nub_label_exists(xio_str, sue_str)
 
     # WHEN
-    x_bridgeunit.del_explicit_label(xio_str)
+    x_bridgeunit.del_nub_label(xio_str)
 
     # THEN
-    assert x_bridgeunit.explicit_label_exists(xio_str, sue_str) is False
+    assert x_bridgeunit.nub_label_exists(xio_str, sue_str) is False
 
 
-def test_BridgeUnit_set_explicit_label_Edits_otx_to_inx():
+def test_BridgeUnit_set_nub_label_Edits_otx_to_inx():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -439,7 +439,7 @@ def test_BridgeUnit_set_explicit_label_Edits_otx_to_inx():
 
     # WHEN
     menage_inx_str = "menage"
-    x_bridgeunit.set_explicit_label(clean_otx_str, menage_inx_str)
+    x_bridgeunit.set_nub_label(clean_otx_str, menage_inx_str)
 
     # THEN
     menage_inx_road = create_road(casa_inx_road, menage_inx_str)

@@ -35,7 +35,7 @@ class atom_args_jaar_typeException(Exception):
     pass
 
 
-class set_explicit_label_Exception(Exception):
+class set_nub_label_Exception(Exception):
     pass
 
 
@@ -65,7 +65,7 @@ class BridgeUnit:
     unknown_word: str = None
     otx_road_delimiter: str = None
     inx_road_delimiter: str = None
-    explicit_label: dict = None
+    nub_label: dict = None
     jaar_type: str = None
     face_id: OwnerID = None
 
@@ -98,7 +98,7 @@ class BridgeUnit:
             if self.jaar_type in {"RoadNode"}:
                 if self.inx_road_delimiter in otx_word:
                     return None
-                inx_word = self._get_explicit_roadnode(otx_word)
+                inx_word = self._get_nub_roadnode(otx_word)
             self.set_otx_to_inx(otx_word, inx_word)
 
         return self._get_inx_value(otx_word)
@@ -108,16 +108,16 @@ class BridgeUnit:
         if self.otx_exists(otx_parent_road) is False and otx_parent_road != "":
             return None
         otx_terminus = get_terminus_node(otx_road, self.otx_road_delimiter)
-        otx_terminus = self._get_explicit_roadnode(otx_terminus)
+        otx_terminus = self._get_nub_roadnode(otx_terminus)
         if otx_parent_road == "":
             inx_parent_road = ""
         else:
             inx_parent_road = self._get_inx_value(otx_parent_road)
         return create_road(inx_parent_road, otx_terminus, self.inx_road_delimiter)
 
-    def _get_explicit_roadnode(self, x_roadNode: RoadNode) -> RoadNode:
-        if self.explicit_otx_label_exists(x_roadNode):
-            return self._get_explicit_inx_label(x_roadNode)
+    def _get_nub_roadnode(self, x_roadNode: RoadNode) -> RoadNode:
+        if self.nub_otx_label_exists(x_roadNode):
+            return self._get_nub_inx_label(x_roadNode)
         return x_roadNode
 
     def otx_to_inx_exists(self, otx_word: str, inx_word: str) -> bool:
@@ -129,20 +129,20 @@ class BridgeUnit:
     def del_otx_to_inx(self, otx_word: str):
         self.otx_to_inx.pop(otx_word)
 
-    def set_explicit_label(self, otx_label: RoadNode, inx_label: RoadNode):
+    def set_nub_label(self, otx_label: RoadNode, inx_label: RoadNode):
         if self.otx_road_delimiter in otx_label:
-            exception_str = f"explicit_label cannot have otx_label '{otx_label}'. It must be not have road_delimiter {self.otx_road_delimiter}."
-            raise set_explicit_label_Exception(exception_str)
+            exception_str = f"nub_label cannot have otx_label '{otx_label}'. It must be not have road_delimiter {self.otx_road_delimiter}."
+            raise set_nub_label_Exception(exception_str)
         if self.inx_road_delimiter in inx_label:
-            exception_str = f"explicit_label cannot have inx_label '{inx_label}'. It must be not have road_delimiter {self.inx_road_delimiter}."
-            raise set_explicit_label_Exception(exception_str)
+            exception_str = f"nub_label cannot have inx_label '{inx_label}'. It must be not have road_delimiter {self.inx_road_delimiter}."
+            raise set_nub_label_Exception(exception_str)
 
-        self.explicit_label[otx_label] = inx_label
+        self.nub_label[otx_label] = inx_label
 
         if self.jaar_type == "RoadUnit":
-            self._set_new_explicit_label_to_otx_inx(otx_label, inx_label)
+            self._set_new_nub_label_to_otx_inx(otx_label, inx_label)
 
-    def _set_new_explicit_label_to_otx_inx(self, otx_label, inx_label):
+    def _set_new_nub_label_to_otx_inx(self, otx_label, inx_label):
         for otx_road, inx_road in self.otx_to_inx.items():
             otx_roadnodes = get_all_road_nodes(otx_road, self.otx_road_delimiter)
             inx_roadnodes = get_all_road_nodes(inx_road, self.inx_road_delimiter)
@@ -151,17 +151,17 @@ class BridgeUnit:
                     inx_roadnodes[x_count] = inx_label
             self.set_otx_to_inx(otx_road, create_road_from_nodes(inx_roadnodes))
 
-    def _get_explicit_inx_label(self, otx_label: RoadNode) -> RoadNode:
-        return self.explicit_label.get(otx_label)
+    def _get_nub_inx_label(self, otx_label: RoadNode) -> RoadNode:
+        return self.nub_label.get(otx_label)
 
-    def explicit_label_exists(self, otx_label: RoadNode, inx_label: RoadNode) -> bool:
-        return self._get_explicit_inx_label(otx_label) == inx_label
+    def nub_label_exists(self, otx_label: RoadNode, inx_label: RoadNode) -> bool:
+        return self._get_nub_inx_label(otx_label) == inx_label
 
-    def explicit_otx_label_exists(self, otx_label: RoadNode) -> bool:
-        return self._get_explicit_inx_label(otx_label) != None
+    def nub_otx_label_exists(self, otx_label: RoadNode) -> bool:
+        return self._get_nub_inx_label(otx_label) != None
 
-    def del_explicit_label(self, otx_label: RoadNode) -> bool:
-        self.explicit_label.pop(otx_label)
+    def del_nub_label(self, otx_label: RoadNode) -> bool:
+        self.nub_label.pop(otx_label)
 
     def _unknown_word_in_otx_to_inx(self) -> bool:
         return str_in_dict(self.unknown_word, self.otx_to_inx)
@@ -218,7 +218,7 @@ class BridgeUnit:
             "otx_road_delimiter": self.otx_road_delimiter,
             "inx_road_delimiter": self.inx_road_delimiter,
             "unknown_word": self.unknown_word,
-            "explicit_label": self.explicit_label,
+            "nub_label": self.nub_label,
             "otx_to_inx": self.otx_to_inx,
         }
 
@@ -230,7 +230,7 @@ def bridgeunit_shop(
     x_jaar_type: str,
     x_otx_road_delimiter: str = None,
     x_inx_road_delimiter: str = None,
-    x_explicit_label: dict = None,
+    x_nub_label: dict = None,
     x_otx_to_inx: dict = None,
     x_unknown_word: str = None,
     x_face_id: OwnerID = None,
@@ -248,7 +248,7 @@ def bridgeunit_shop(
         unknown_word=x_unknown_word,
         otx_road_delimiter=x_otx_road_delimiter,
         inx_road_delimiter=x_inx_road_delimiter,
-        explicit_label=get_empty_dict_if_none(x_explicit_label),
+        nub_label=get_empty_dict_if_none(x_nub_label),
         face_id=x_face_id,
     )
 
@@ -262,7 +262,7 @@ def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:
         x_jaar_type=x_dict.get("jaar_type"),
         x_face_id=x_dict.get("face_id"),
         x_inx_road_delimiter=x_dict.get("inx_road_delimiter"),
-        x_explicit_label=x_dict.get("explicit_label"),
+        x_nub_label=x_dict.get("nub_label"),
         x_otx_road_delimiter=x_dict.get("otx_road_delimiter"),
         x_otx_to_inx=x_dict.get("otx_to_inx"),
         x_unknown_word=x_dict.get("unknown_word"),
@@ -332,18 +332,18 @@ class PidginUnit:
     def del_otx_to_inx(self, x_jaar_type: str, x_otx: str):
         self.get_bridgeunit(x_jaar_type).del_otx_to_inx(x_otx)
 
-    def set_explicit_label(self, x_jaar_type: str, x_otx: str, x_inx: str):
-        self.get_bridgeunit(x_jaar_type).set_explicit_label(x_otx, x_inx)
+    def set_nub_label(self, x_jaar_type: str, x_otx: str, x_inx: str):
+        self.get_bridgeunit(x_jaar_type).set_nub_label(x_otx, x_inx)
 
-    def _get_explicit_inx_label(self, x_jaar_type: str, x_otx: str) -> str:
-        return self.get_bridgeunit(x_jaar_type)._get_explicit_inx_label(x_otx)
+    def _get_nub_inx_label(self, x_jaar_type: str, x_otx: str) -> str:
+        return self.get_bridgeunit(x_jaar_type)._get_nub_inx_label(x_otx)
 
-    def explicit_label_exists(self, x_jaar_type: str, x_otx: str, x_inx: str) -> bool:
+    def nub_label_exists(self, x_jaar_type: str, x_otx: str, x_inx: str) -> bool:
         x_bridgeunit = self.get_bridgeunit(x_jaar_type)
-        return x_bridgeunit.explicit_label_exists(x_otx, x_inx)
+        return x_bridgeunit.nub_label_exists(x_otx, x_inx)
 
-    def del_explicit_label(self, x_jaar_type: str, x_otx: str):
-        self.get_bridgeunit(x_jaar_type).del_explicit_label(x_otx)
+    def del_nub_label(self, x_jaar_type: str, x_otx: str):
+        self.get_bridgeunit(x_jaar_type).del_nub_label(x_otx)
 
     def get_dict(self) -> dict:
         return {

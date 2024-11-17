@@ -454,102 +454,102 @@ def test_PidginUnit_del_otx_to_inx_ReturnsObj():
     assert zia_pidginunit.otx_to_inx_exists(road_type, zia_str, zia_str)
 
 
-def test_PidginUnit_set_explicit_label_SetsAttr_Scenario0_type_AcctID_str():
+def test_PidginUnit_set_nub_label_SetsAttr_Scenario0_type_AcctID_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
     acctid_bridgeunit = zia_pidginunit.get_bridgeunit(type_AcctID_str())
-    assert acctid_bridgeunit.explicit_label_exists(sue_otx, sue_inx) is False
+    assert acctid_bridgeunit.nub_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_explicit_label(type_AcctID_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_nub_label(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert acctid_bridgeunit.explicit_label_exists(sue_otx, sue_inx)
+    assert acctid_bridgeunit.nub_label_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_set_explicit_label_SetsAttr_Scenario1_type_RoadUnit_str():
+def test_PidginUnit_set_nub_label_SetsAttr_Scenario1_type_RoadUnit_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
     road_bridgeunit = zia_pidginunit.get_bridgeunit(type_RoadUnit_str())
-    assert road_bridgeunit.explicit_label_exists(sue_otx, sue_inx) is False
+    assert road_bridgeunit.nub_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_explicit_label(type_RoadUnit_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_nub_label(type_RoadUnit_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgeunit.explicit_label_exists(sue_otx, sue_inx)
+    assert road_bridgeunit.nub_label_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_set_explicit_label_SetsAttr_Scenario2_type_RoadNode_str():
+def test_PidginUnit_set_nub_label_SetsAttr_Scenario2_type_RoadNode_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
     road_bridgeunit = zia_pidginunit.get_bridgeunit(type_RoadNode_str())
-    assert road_bridgeunit.explicit_label_exists(sue_otx, sue_inx) is False
+    assert road_bridgeunit.nub_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_explicit_label(type_RoadNode_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_nub_label(type_RoadNode_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgeunit.explicit_label_exists(sue_otx, sue_inx)
+    assert road_bridgeunit.nub_label_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_explicit_label_exists_ReturnsObj():
+def test_PidginUnit_nub_label_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
     road_type = type_RoadNode_str()
-    sue_exists = zia_pidginunit.explicit_label_exists(road_type, sue_otx, sue_inx)
+    sue_exists = zia_pidginunit.nub_label_exists(road_type, sue_otx, sue_inx)
     assert sue_exists is False
 
     # WHEN
-    zia_pidginunit.set_explicit_label(type_RoadNode_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_nub_label(type_RoadNode_str(), sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit.explicit_label_exists(road_type, sue_otx, sue_inx)
+    assert zia_pidginunit.nub_label_exists(road_type, sue_otx, sue_inx)
 
 
-def test_PidginUnit_get_explicit_inx_label_ReturnsObj():
+def test_PidginUnit_get_nub_inx_label_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_explicit_inx_label(type_AcctID_str(), sue_otx) != sue_inx
+    assert zia_pidginunit._get_nub_inx_label(type_AcctID_str(), sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_explicit_label(type_AcctID_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_nub_label(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit._get_explicit_inx_label(type_AcctID_str(), sue_otx) == sue_inx
+    assert zia_pidginunit._get_nub_inx_label(type_AcctID_str(), sue_otx) == sue_inx
 
 
-def test_PidginUnit_del_explicit_label_ReturnsObj():
+def test_PidginUnit_del_nub_label_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
     road_type = type_RoadNode_str()
-    zia_pidginunit.set_explicit_label(type_RoadNode_str(), sue_otx, sue_inx)
-    zia_pidginunit.set_explicit_label(type_RoadNode_str(), zia_str, zia_str)
-    assert zia_pidginunit.explicit_label_exists(road_type, sue_otx, sue_inx)
-    assert zia_pidginunit.explicit_label_exists(road_type, zia_str, zia_str)
+    zia_pidginunit.set_nub_label(type_RoadNode_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_nub_label(type_RoadNode_str(), zia_str, zia_str)
+    assert zia_pidginunit.nub_label_exists(road_type, sue_otx, sue_inx)
+    assert zia_pidginunit.nub_label_exists(road_type, zia_str, zia_str)
 
     # WHEN
-    zia_pidginunit.del_explicit_label(road_type, sue_otx)
+    zia_pidginunit.del_nub_label(road_type, sue_otx)
 
     # THEN
-    sue_exists = zia_pidginunit.explicit_label_exists(road_type, sue_otx, sue_inx)
+    sue_exists = zia_pidginunit.nub_label_exists(road_type, sue_otx, sue_inx)
     assert sue_exists is False
-    assert zia_pidginunit.explicit_label_exists(road_type, zia_str, zia_str)
+    assert zia_pidginunit.nub_label_exists(road_type, zia_str, zia_str)

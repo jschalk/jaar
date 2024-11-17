@@ -92,7 +92,7 @@ def test_PidginUnit_get_json_ReturnsObj():
 
     # THEN
     assert sue_json.find("bridgeunits") == 5
-    assert sue_json.find("otx_road_delimiter") == 158
+    assert sue_json.find("otx_road_delimiter") == 153
 
 
 def test_get_pidginunit_from_dict_ReturnsObj():

@@ -39,7 +39,7 @@ def get_clean_roadunit_bridgeunit() -> BridgeUnit:
     road_delimiter = default_road_delimiter_if_none()
     clean_otx_road = f"{otx_music45_str}{road_delimiter}{clean_otx_str}"
     road_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), x_face_id="Sue")
-    road_bridgeunit.set_explicit_label(clean_otx_str, clean_inx_str)
+    road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
     road_bridgeunit.set_otx_to_inx(otx_music45_str, inx_music87_str)
     road_bridgeunit.get_create_inx(clean_otx_road)
     return road_bridgeunit
@@ -121,7 +121,7 @@ def get_slash_roadunit_bridgeunit() -> BridgeUnit:
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
     )
-    road_bridgeunit.set_explicit_label(clean_otx_str, clean_inx_str)
+    road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
     road_bridgeunit.set_otx_to_inx(otx_music45_str, inx_music87_str)
     road_bridgeunit.get_create_inx(clean_otx_road)
     return road_bridgeunit
@@ -229,7 +229,7 @@ def get_casa_maison_pidginunit_set_by_otx_to_inx() -> PidginUnit:
     return sue_pidginunit
 
 
-def get_casa_maison_pidginunit_set_by_explicit_label() -> PidginUnit:
+def get_casa_maison_pidginunit_set_by_nub_label() -> PidginUnit:
     otx_music45_str = "music45"
     inx_music87_str = "music87"
     casa_otx_str = "casa"
@@ -246,9 +246,9 @@ def get_casa_maison_pidginunit_set_by_explicit_label() -> PidginUnit:
 
     sue_pidginunit = pidginunit_shop("Sue")
     rx = type_RoadNode_str()
-    sue_pidginunit.set_explicit_label(rx, otx_music45_str, inx_music87_str)
-    sue_pidginunit.set_explicit_label(rx, casa_otx_str, casa_inx_str)
-    sue_pidginunit.set_explicit_label(rx, clean_otx_str, clean_inx_str)
+    sue_pidginunit.set_nub_label(rx, otx_music45_str, inx_music87_str)
+    sue_pidginunit.set_nub_label(rx, casa_otx_str, casa_inx_str)
+    sue_pidginunit.set_nub_label(rx, clean_otx_str, clean_inx_str)
     return sue_pidginunit
 
 
@@ -312,7 +312,7 @@ def get_casa_maison_road_otx_to_inx_dt() -> DataFrame:
     return inx_dt
 
 
-def get_casa_maison_road_explicit_label_dt() -> DataFrame:
+def get_casa_maison_road_nub_label_dt() -> DataFrame:
     inx_music87_str = "music87"
     casa_inx_str = "maison"
     clean_inx_str = "propre"

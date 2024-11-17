@@ -152,5 +152,5 @@ def move_otx_csvs_to_pidgin_inx(face_dir: str):
 
 def _get_pidgen_brick_format_filenames() -> set[str]:
     brick_numbers = set(get_brick_category_ref().get("bridge_otx_to_inx"))
-    brick_numbers.update(set(get_brick_category_ref().get("bridge_explicit_label")))
+    brick_numbers.update(set(get_brick_category_ref().get("bridge_nub_label")))
     return {f"{brick_number}.xlsx" for brick_number in brick_numbers}
