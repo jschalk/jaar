@@ -19,7 +19,11 @@ from src.f01_road.road import (
 )
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
-from src.f09_brick.brick_config import get_brick_numbers, get_brick_format_filename
+from src.f09_brick.brick_config import (
+    get_brick_numbers,
+    get_brick_format_filename,
+    get_brick_category_ref,
+)
 from src.f09_brick.brick import get_brickref_obj
 from src.f09_brick.pandas_tool import _get_pidgen_brick_format_filenames
 from src.f09_brick.pidgin_toolbox import (
@@ -100,7 +104,7 @@ class ZooToOtxTransformer:
         return get_grouping_with_all_values_equal_df(zoo_df, required_columns)
 
     def _save_otx_brick(self, brick_path: str, zoo_df: DataFrame):
-        with ExcelWriter(brick_path) as writer:
+        with ExcelWriter(brick_path, mode="a") as writer:
             zoo_df.to_excel(writer, sheet_name="otx", index=False)
 
 
@@ -126,7 +130,7 @@ class OtxToOtxEventsTransformer:
         return events_df.sort_values(["face_id", "event_id"])
 
     def _save_otx_brick(self, brick_path: str, events_df: DataFrame):
-        with ExcelWriter(brick_path) as writer:
+        with ExcelWriter(brick_path, mode="a") as writer:
             events_df.to_excel(writer, sheet_name="otx_events", index=False)
 
 
@@ -145,6 +149,44 @@ class OtxEventsToEventsLogTransformer:
                     otx_events_df, self.zoo_dir, brick_file_name
                 )
                 self._save_events_log_file(events_log_df)
+
+    def get_event_log_df(
+        self, otx_events_df: DataFrame, x_dir: str, x_file_name: str
+    ) -> DataFrame:
+        otx_events_df[["file_dir"]] = x_dir
+        otx_events_df[["file_name"]] = x_file_name
+        otx_events_df[["sheet_name"]] = "otx_events"
+        cols = ["file_dir", "file_name", "sheet_name", "face_id", "event_id", "note"]
+        otx_events_df = otx_events_df[cols]
+        return otx_events_df
+
+    def _save_events_log_file(self, events_df: DataFrame):
+        events_file_path = create_path(self.zoo_dir, "events.xlsx")
+        events_log_str = "events_log"
+        if os_path_exists(events_file_path):
+            events_log_df = pandas_read_excel(events_file_path, events_log_str)
+            events_df = pandas_concat([events_log_df, events_df])
+        with ExcelWriter(events_file_path) as writer:
+            events_df.to_excel(writer, sheet_name=events_log_str, index=False)
+
+
+class OtxToOtx2InxPiginTransformer:
+    def __init__(self, zoo_dir: str):
+        self.zoo_dir = zoo_dir
+
+    def transform(self):
+        otx2inx_bricks = get_brick_category_ref().get("bridge_otx2inx")
+        for brick_number in sorted(otx2inx_bricks):
+            brick_file_name = f"{brick_number}.xlsx"
+            zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
+            if os_path_exists(zoo_brick_path):
+                otx_events_df = pandas_read_excel(zoo_brick_path, sheet_name="otx")
+                for index, x_row in otx_events_df.iterrows():
+                    print(f"{x_row=}")
+                # events_log_df = self.get_event_log_df(
+                #     otx_events_df, self.zoo_dir, brick_file_name
+                # )
+                # self._save_events_log_file(events_log_df)
 
     def get_event_log_df(
         self, otx_events_df: DataFrame, x_dir: str, x_file_name: str
@@ -296,7 +338,7 @@ class WorldUnit:
         events_file_path = create_path(self._zoo_dir, "events.xlsx")
         events_log_df = pandas_read_excel(events_file_path, "events_log")
         events_agg_df = _create_events_agg_df(events_log_df)
-        with ExcelWriter(events_file_path) as writer:
+        with ExcelWriter(events_file_path, mode="a") as writer:
             events_agg_df.to_excel(writer, sheet_name="events_agg", index=False)
 
     def set_events_from_events_agg(self):
@@ -307,6 +349,10 @@ class WorldUnit:
             x_note = event_agg_row["note"]
             if x_note != "invalid because of conflicting event_id":
                 self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
+
+    def otx_to_otxinx_staging(self):
+        transformer = OtxToOtx2InxPiginTransformer(self._zoo_dir)
+        transformer.transform()
 
     def get_dict(self) -> dict:
         return {

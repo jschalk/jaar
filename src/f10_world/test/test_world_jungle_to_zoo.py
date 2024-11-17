@@ -22,7 +22,10 @@ from src.f08_pidgin.pidgin_config import (
     inx_label_str,
     otx_label_str,
 )
-from src.f09_brick.pandas_tool import _get_pidgen_brick_format_filenames, open_csv
+from src.f09_brick.pandas_tool import (
+    _get_pidgen_brick_format_filenames,
+    get_sheet_names,
+)
 from src.f10_world.world import worldunit_shop, _create_events_agg_df
 from src.f10_world.world_tool import get_all_brick_dataframes
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -91,6 +94,7 @@ def test_WorldUnit_jungle_to_zoo_CreatesZooFiles(env_dir_setup_cleanup):
     assert file_name_str in set(x_df.columns)
     assert sheet_name_str in set(x_df.columns)
     assert len(x_df) == 5
+    assert get_sheet_names(zoo_file_path) == ["zoo"]
 
 
 def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario0_GroupByWorks(
@@ -139,6 +143,7 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario0_GroupByWorks(
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 2
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
+    assert get_sheet_names(zoo_file_path) == ["zoo", "otx"]
 
 
 def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
@@ -188,6 +193,7 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflicti
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 1
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
+    assert get_sheet_names(zoo_file_path) == ["zoo", "otx"]
 
 
 def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0(
@@ -243,6 +249,7 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0(
     assert len(gen_otx_events_df) == 3
     assert len(gen_otx_events_df) == len(ex_otx_events_df)
     assert gen_otx_events_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
+    assert get_sheet_names(zoo_file_path) == ["zoo", "otx", "otx_events"]
 
 
 def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario1(
@@ -383,6 +390,7 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario0(
     print(f"{gen_events_log_df.to_csv(index=False)=}")
     print(f" {ex_otx_events_df.to_csv(index=False)=}")
     assert gen_events_log_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
+    assert get_sheet_names(events_file_path) == ["events_log"]
 
 
 def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario1_MultipleBricks(
@@ -476,6 +484,7 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
     print(f"{gen_events_log_df.to_csv(index=False)=}")
     print(f" {ex_events_log_df.to_csv(index=False)=}")
     assert gen_events_log_df.to_csv(index=False) == ex_events_log_df.to_csv(index=False)
+    assert get_sheet_names(events_file_path) == ["events_log"]
 
 
 def test_WorldUnit_create_events_agg_df_ReturnsObj(
@@ -596,6 +605,7 @@ def test_WorldUnit_events_log_to_events_agg_CreatesSheets_Scenario0(
     print(f"{gen_events_agg_df.to_csv(index=False)=}")
     print(f" {ex_events_agg_df.to_csv(index=False)=}")
     assert gen_events_agg_df.to_csv(index=False) == ex_events_agg_df.to_csv(index=False)
+    assert get_sheet_names(events_file_path) == ["events_log", "events_agg"]
 
 
 def test_WorldUnit_set_events_from_events_agg_SetsAttr_Scenario0(env_dir_setup_cleanup):
@@ -660,22 +670,20 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
     assert pidgen_brick_filenames == {"br00040.xlsx", "br00041.xlsx", "br00113.xlsx"}
 
 
-# def test_WorldUnit_otx_to_otxinx_staging_CreatesFile():
+# def test_WorldUnit_otx_to_otxinx_staging_CreatesFile(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_world = worldunit_shop("fizz")
+#     bob_str = "Bob"
 #     sue_str = "Sue"
 #     yao_str = "Yao"
+#     yao_inx = "Yaoito"
+#     bob_inx = "Bobito"
+#     m_str = "music23"
 #     event1 = 1
 #     event2 = 2
 #     event5 = 5
 #     event7 = 7
-#     hr6am = "6am"
-#     hr7am = "7am"
-#     slash_str = "/"
-#     colon_str = ":"
-#     x_uk = "unknownSue"
-#     roadnode_str = "RoadNode"
-#     groupid_str = "GroupID"
+#     acctid_str = "AcctID"
 #     br00113_file_path = create_path(fizz_world._zoo_dir, "br00113.xlsx")
 #     br00113_columns = [
 #         face_id_str(),
@@ -687,17 +695,22 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
 #         otx_word_str(),
 #         inx_word_str(),
 #     ]
-#     sue_oi0 = [sue_str, event1, slash_str, hr6am, groupid_str, colon_str, hr6am, x_uk]
-#     sue_oi1 = [sue_str, event1, slash_str, hr6am, roadnode_str, colon_str, hr6am, x_uk]
-#     sue_oi2 = [sue_str, event2, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
-#     sue_oi3 = [sue_str, event5, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
-#     yao_1 = [yao_str, event7, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
-#     b40_rows = [sue_oi0, sue_oi1, sue_oi2, sue_oi3, yao_1]
-#     br00113_df = DataFrame(b40_rows, columns=br00113_columns)
-#     otxinx_sheet_name = "otx2inx"
+#     sue0 = [sue_str, event1, m_str, bob_str, yao_str, acctid_str, yao_str, yao_inx]
+#     sue1 = [sue_str, event1, m_str, bob_str, bob_str, acctid_str, bob_str, bob_inx]
+#     # sue2 = [sue_str, event2, m_str, sue_str, yao_str, acctid_str, yao_str]
+#     # sue3 = [sue_str, event5, m_str, bob_str, yao_str, acctid_str, yao_str]
+#     # yao1 = [yao_str, event7, m_str, bob_str, yao_str, acctid_str, yao_str]
+#     b113_rows = [sue0, sue1]
+#     br00113_df = DataFrame(b113_rows, columns=br00113_columns)
 #     with ExcelWriter(br00113_file_path) as writer:
-#         br00113_df.to_excel(writer, sheet_name=otxinx_sheet_name, index=False)
+#         br00113_df.to_excel(writer, sheet_name="otx", index=False)
 #     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
+#     assert fizz_world.events == {}
+#     fizz_world.otx_to_otx_events()
+#     fizz_world.otx_events_to_events_log()
+#     fizz_world.events_log_to_events_agg()
+#     fizz_world.set_events_from_events_agg()
+#     assert fizz_world.events == {event1: sue_str}
 #     assert os_path_exists(pidgin_path) is False
 
 #     # WHEN
@@ -705,20 +718,29 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
 
 #     # THEN
 #     assert os_path_exists(pidgin_path)
-#     otxinx_df = pandas_read_excel(pidgin_path, sheet_name=otxinx_sheet_name)
-#     assert set(otxinx_df.columns) == set(br00113_columns)
-#     assert len(otxinx_df) == 5
-#     assert fizz_world.events == {event3: bob_str, event9: yao_str}
-
-#     sue_road_to_inx_path = create_path(sue_face_dir, "road_otx2inx_csv")
-#     sue_road_nub_path = create_path(sue_face_dir, "road_nub_label.csv")
-#     yao_road_to_inx_path = create_path(yao_face_dir, "road_otx2inx_csv")
-#     yao_road_nub_path = create_path(yao_face_dir, "road_nub_label.csv")
-
-
-# WHEN
-
-# THEN
+#     assert 1 == 2
+#     otxinx_sheet_name = "otx2inx"
+#     gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=otxinx_sheet_name)
+#     pidgin_file_columns = {
+#         "event_id",
+#         "face_id",
+#         "jaar_type",
+#         "otx_word",
+#         "otx_road_delimiter",
+#         "inx_word",
+#         "inx_road_delimiter",
+#         "unknown_word",
+#     }
+#     assert set(gen_otx2inx_df.columns) == pidgin_file_columns
+#     assert len(gen_otx2inx_df) == 2
+#     e1_otx2inx0 = [event1, sue_str, acctid_str, yao_str, None, yao_inx, None, None]
+#     e1_otx2inx1 = [event1, sue_str, acctid_str, bob_str, None, bob_inx, None, None]
+#     e1_otx2inx_rows = [e1_otx2inx0, e1_otx2inx1]
+#     e1_otx2inx_df = DataFrame(e1_otx2inx_rows, columns=pidgin_file_columns)
+#     assert len(gen_otx2inx_df) == len(e1_otx2inx_df)
+#     assert gen_otx2inx_df.to_csv() == e1_otx2inx_df.to_csv()
+#     assert get_sheet_names(pidgin_path) == ["otxinx_staging"]
+#     assert 1 == 2
 
 
 # def test_WorldUnit_otx_to_faces_event_CreatesPidgenSheets_Scenario0(

@@ -54,6 +54,10 @@ def open_csv(x_file_dir: str, x_filename: str) -> DataFrame:
     return pandas_read_csv(create_path(x_file_dir, x_filename))
 
 
+def get_sheet_names(x_path: str) -> list[str]:
+    return openpyxl_load_workbook(x_path).sheetnames
+
+
 def get_all_excel_sheet_names(
     dir: str, sub_strs: set[str] = None
 ) -> set[(str, str, str)]:
@@ -64,7 +68,7 @@ def get_all_excel_sheet_names(
     for relative_dir, filename in excel_files:
         absolute_dir = create_path(dir, relative_dir)
         absolute_path = create_path(absolute_dir, filename)
-        file_sheet_names = openpyxl_load_workbook(absolute_path).sheetnames
+        file_sheet_names = get_sheet_names(absolute_path)
         for sheet_name in file_sheet_names:
             if not sub_strs:
                 sheet_names.add((absolute_dir, filename, sheet_name))
