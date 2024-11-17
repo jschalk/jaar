@@ -102,3 +102,25 @@ def get_pidgin_args_category_mapping() -> dict[str, str]:
                 x_category_set.add(pidgin_category)
                 x_dict[x_arg] = x_category_set
     return x_dict
+
+
+def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
+    """for each pidgin_config category contains the associated columns"""
+    return {
+        "bridge_nub_label": {
+            "jaar_type",
+            "unknown_word",
+            "inx_road_delimiter",
+            "inx_label",
+            "otx_road_delimiter",
+            "otx_label",
+        },
+        "bridge_otx2inx": {
+            "inx_word",
+            "jaar_type",
+            "unknown_word",
+            "inx_road_delimiter",
+            "otx_road_delimiter",
+            "otx_word",
+        },
+    }

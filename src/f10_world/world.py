@@ -19,20 +19,21 @@ from src.f01_road.road import (
 )
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
+from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_brick.brick_config import (
     get_brick_numbers,
     get_brick_format_filename,
     get_brick_category_ref,
 )
 from src.f09_brick.brick import get_brickref_obj
-from src.f09_brick.pandas_tool import _get_pidgen_brick_format_filenames
+from src.f09_brick.pandas_tool import (
+    get_grouping_with_all_values_equal_df,
+    get_new_sorting_columns,
+    get_brick_elements_sort_order,
+)
 from src.f09_brick.pidgin_toolbox import (
     save_all_csvs_from_pidginunit,
     init_pidginunit_from_dir,
-)
-from src.f09_brick.pandas_tool import (
-    get_new_sorting_columns,
-    get_grouping_with_all_values_equal_df,
 )
 from src.f10_world.world_tool import get_all_brick_dataframes
 from pandas import (
@@ -176,36 +177,49 @@ class OtxToOtx2InxPiginTransformer:
 
     def transform(self):
         otx2inx_bricks = get_brick_category_ref().get("bridge_otx2inx")
+        otx2inx_columns = get_quick_pidgens_column_ref().get("bridge_otx2inx")
+        otx2inx_columns.update({"face_id", "event_id"})
+        otx2inx_columns = get_new_sorting_columns(otx2inx_columns)
+        otx2inx_df = DataFrame(columns=otx2inx_columns)
         for brick_number in sorted(otx2inx_bricks):
             brick_file_name = f"{brick_number}.xlsx"
             zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
-                otx_events_df = pandas_read_excel(zoo_brick_path, sheet_name="otx")
-                for index, x_row in otx_events_df.iterrows():
-                    print(f"{x_row=}")
-                # events_log_df = self.get_event_log_df(
-                #     otx_events_df, self.zoo_dir, brick_file_name
-                # )
-                # self._save_events_log_file(events_log_df)
+                otx_df = pandas_read_excel(zoo_brick_path, sheet_name="otx")
+                otx2inx_missing_cols = set(otx2inx_columns).difference(otx_df.columns)
 
-    def get_event_log_df(
-        self, otx_events_df: DataFrame, x_dir: str, x_file_name: str
-    ) -> DataFrame:
-        otx_events_df[["file_dir"]] = x_dir
-        otx_events_df[["file_name"]] = x_file_name
-        otx_events_df[["sheet_name"]] = "otx_events"
-        cols = ["file_dir", "file_name", "sheet_name", "face_id", "event_id", "note"]
-        otx_events_df = otx_events_df[cols]
-        return otx_events_df
+                for index, x_row in otx_df.iterrows():
+                    event_id = x_row["event_id"]
+                    face_id = x_row["face_id"]
+                    jaar_type = x_row["jaar_type"]
+                    otx_word = x_row["otx_word"]
+                    otx_road_delimiter = None
+                    if "otx_road_delimiter" not in otx2inx_missing_cols:
+                        otx_road_delimiter = x_row["otx_road_delimiter"]
+                    inx_word = None
+                    if "inx_word" not in otx2inx_missing_cols:
+                        inx_word = x_row["inx_word"]
+                    inx_road_delimiter = None
+                    if "inx_road_delimiter" not in otx2inx_missing_cols:
+                        inx_road_delimiter = x_row["inx_road_delimiter"]
+                    unknown_word = None
+                    if "unknown_word" not in otx2inx_missing_cols:
+                        unknown_word = x_row["unknown_word"]
+                    df_len = len(otx2inx_df.index)
+                    otx2inx_df.loc[df_len] = [
+                        face_id,
+                        event_id,
+                        jaar_type,
+                        otx_road_delimiter,
+                        inx_road_delimiter,
+                        unknown_word,
+                        otx_word,
+                        inx_word,
+                    ]
 
-    def _save_events_log_file(self, events_df: DataFrame):
-        events_file_path = create_path(self.zoo_dir, "events.xlsx")
-        events_log_str = "events_log"
-        if os_path_exists(events_file_path):
-            events_log_df = pandas_read_excel(events_file_path, events_log_str)
-            events_df = pandas_concat([events_log_df, events_df])
-        with ExcelWriter(events_file_path) as writer:
-            events_df.to_excel(writer, sheet_name=events_log_str, index=False)
+        pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
+        with ExcelWriter(pidgin_file_path) as writer:
+            otx2inx_df.to_excel(writer, sheet_name="otx2inx_staging", index=False)
 
 
 @dataclass
@@ -316,15 +330,6 @@ class WorldUnit:
     def zoo_to_otx(self):
         transformer = ZooToOtxTransformer(self._zoo_dir)
         transformer.transform()
-
-    def otx_to_pidgins_event(self):
-        pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
-        # for pidgen_brick_filename in pidgen_brick_filenames:
-        #     pidgen_brick_path = create_path(self._zoo_dir, pidgen_brick_filename)
-        #     df = pandas_read_excel(pidgen_brick_path, "otx")
-
-        #     print(f"{pidgen_brick_path=}")
-        #     print(f"{df=}")
 
     def otx_to_otx_events(self):
         transformer = OtxToOtxEventsTransformer(self._zoo_dir)
