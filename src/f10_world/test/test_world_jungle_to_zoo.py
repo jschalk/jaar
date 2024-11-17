@@ -676,17 +676,16 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
 #     x_uk = "unknownSue"
 #     roadnode_str = "RoadNode"
 #     groupid_str = "GroupID"
-#     br00040_file_path = create_path(fizz_world._zoo_dir, "br00113.xlsx")
-#     br00040_columns = [
+#     br00113_file_path = create_path(fizz_world._zoo_dir, "br00113.xlsx")
+#     br00113_columns = [
 #         face_id_str(),
 #         event_id_str(),
-#         acct_id_str(),
 #         fiscal_id_str(),
-#         inx_word_str(),
-#         jaar_type_str(),
 #         owner_id_str(),
+#         acct_id_str(),
+#         jaar_type_str(),
 #         otx_word_str(),
-#         unknown_word_str(),
+#         inx_word_str(),
 #     ]
 #     sue_oi0 = [sue_str, event1, slash_str, hr6am, groupid_str, colon_str, hr6am, x_uk]
 #     sue_oi1 = [sue_str, event1, slash_str, hr6am, roadnode_str, colon_str, hr6am, x_uk]
@@ -694,21 +693,32 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
 #     sue_oi3 = [sue_str, event5, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
 #     yao_1 = [yao_str, event7, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
 #     b40_rows = [sue_oi0, sue_oi1, sue_oi2, sue_oi3, yao_1]
-#     br00040_df = DataFrame(b40_rows, columns=br00040_columns)
-#     with ExcelWriter(br00040_file_path) as writer:
-#         br00040_df.to_excel(writer, sheet_name="otx", index=False)
-#     _dir = create_path(
-#         fizz_world._events_dir,
-#     )
-#     sue_road_to_inx_path = create_path(sue_face_dir, "road_otx_to_inx_csv")
+#     br00113_df = DataFrame(b40_rows, columns=br00113_columns)
+#     otxinx_sheet_name = "otx2inx"
+#     with ExcelWriter(br00113_file_path) as writer:
+#         br00113_df.to_excel(writer, sheet_name=otxinx_sheet_name, index=False)
+#     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
+#     assert os_path_exists(pidgin_path) is False
+
+#     # WHEN
+#     fizz_world.otx_to_otxinx_staging()
+
+#     # THEN
+#     assert os_path_exists(pidgin_path)
+#     otxinx_df = pandas_read_excel(pidgin_path, sheet_name=otxinx_sheet_name)
+#     assert set(otxinx_df.columns) == set(br00113_columns)
+#     assert len(otxinx_df) == 5
+#     assert fizz_world.events == {event3: bob_str, event9: yao_str}
+
+#     sue_road_to_inx_path = create_path(sue_face_dir, "road_otx2inx_csv")
 #     sue_road_nub_path = create_path(sue_face_dir, "road_nub_label.csv")
-#     yao_road_to_inx_path = create_path(yao_face_dir, "road_otx_to_inx_csv")
+#     yao_road_to_inx_path = create_path(yao_face_dir, "road_otx2inx_csv")
 #     yao_road_nub_path = create_path(yao_face_dir, "road_nub_label.csv")
 
 
-# # WHEN
+# WHEN
 
-# # THEN
+# THEN
 
 
 # def test_WorldUnit_otx_to_faces_event_CreatesPidgenSheets_Scenario0(
@@ -771,9 +781,9 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
 #         br00041_df.to_excel(writer, sheet_name="otx", index=False)
 #     sue_face_dir = create_path(fizz_world._events_dir, f"/{sue_str}")
 #     yao_face_dir = create_path(fizz_world._events_dir, f"/{yao_str}")
-#     sue_road_to_inx_path = create_path(sue_face_dir, "road_otx_to_inx_csv")
+#     sue_road_to_inx_path = create_path(sue_face_dir, "road_otx2inx_csv")
 #     sue_road_nub_path = create_path(sue_face_dir, "road_nub_label.csv")
-#     yao_road_to_inx_path = create_path(yao_face_dir, "road_otx_to_inx_csv")
+#     yao_road_to_inx_path = create_path(yao_face_dir, "road_otx2inx_csv")
 #     yao_road_nub_path = create_path(yao_face_dir, "road_nub_label.csv")
 #     assert os_path_exists(sue_face_dir) is False
 #     assert os_path_exists(yao_face_dir) is False
@@ -792,12 +802,12 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
 #     assert os_path_exists(sue_road_nub_path)
 #     assert os_path_exists(yao_road_to_inx_path)
 #     assert os_path_exists(yao_road_nub_path)
-#     # gen_sue_otx_to_inx_df = open_csv(sue_otx_to_inx_path)
+#     # gen_sue_otx2inx_df = open_csv(sue_otx2inx_path)
 #     # gen_sue_otx_nub_df = open_csv(sue_otx_nub_path)
-#     # gen_yao_otx_to_inx_df = open_csv(yao_otx_to_inx_path)
+#     # gen_yao_otx2inx_df = open_csv(yao_otx2inx_path)
 #     # gen_yao_otx_nub_df = open_csv(yao_otx_nub_path)
 
-#     otx_to_inx_columns = [
+#     otx2inx_columns = [
 #         face_id_str(),
 #         jaar_type_str(),
 #         otx_road_delimiter_str(),
@@ -829,22 +839,22 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
 #         colon_str,
 #         x_uk,
 #     ]
-#     ex1_sue_otx_to_inx_df = DataFrame([sue_oi1, sue_oi2, sue_oi3], otx_to_inx_columns)
+#     ex1_sue_otx2inx_df = DataFrame([sue_oi1, sue_oi2, sue_oi3], otx2inx_columns)
 #     ex1_sue_otx_nub_df = DataFrame([sue_el1], nub_label_columns)
-#     ex1_yao_otx_to_inx_df = DataFrame([], otx_to_inx_columns)
+#     ex1_yao_otx2inx_df = DataFrame([], otx2inx_columns)
 #     ex1_yao_otx_nub_df = DataFrame([yao_el1], nub_label_columns)
 
 #     # print(f"{gen_otx_df.columns=}")
-#     # assert list(gen_sue_otx_to_inx_df.columns) == otx_to_inx_columns
+#     # assert list(gen_sue_otx2inx_df.columns) == otx2inx_columns
 #     # assert list(gen_sue_otx_nub_df.columns) == nub_label_columns
-#     # assert len(gen_yao_otx_to_inx_df) > 0
-#     # assert len(gen_yao_otx_to_inx_df) == len(gen_sue_otx_nub_df)
+#     # assert len(gen_yao_otx2inx_df) > 0
+#     # assert len(gen_yao_otx2inx_df) == len(gen_sue_otx_nub_df)
 #     # assert len(gen_sue_otx_nub_df) == 1
 #     # assert gen_sue_otx_nub_df.to_csv() == gen_sue_otx_nub_df.to_csv()
 
-#     assert ex1_sue_otx_to_inx_df == open_csv(sue_otx_to_inx_path)
+#     assert ex1_sue_otx2inx_df == open_csv(sue_otx2inx_path)
 #     assert ex1_sue_otx_nub_df == open_csv(sue_otx_nub_path)
-#     assert ex1_yao_otx_to_inx_df == open_csv(yao_otx_to_inx_path)
+#     assert ex1_yao_otx2inx_df == open_csv(yao_otx2inx_path)
 #     assert ex1_yao_otx_nub_df == open_csv(yao_otx_nub_path)
 
 #     assert 1 == 2

@@ -100,7 +100,7 @@ from src.f08_pidgin.pidgin_config import (
     otx_label_str,
     inx_label_str,
     bridge_nub_label_str,
-    bridge_otx_to_inx_str,
+    bridge_otx2inx_str,
     get_pidgin_categorys,
     get_pidgin_config_dict,
     get_pidgin_args_category_mapping,
@@ -377,7 +377,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert bud_itemunit_str() in brick_config_categorys
     assert budunit_str() in brick_config_categorys
     assert bridge_nub_label_str() in brick_config_categorys
-    assert bridge_otx_to_inx_str() in brick_config_categorys
+    assert bridge_otx2inx_str() in brick_config_categorys
     assert get_atom_categorys().issubset(brick_config_categorys)
     assert get_fiscal_categorys().issubset(brick_config_categorys)
     assert get_pidgin_categorys().issubset(brick_config_categorys)
@@ -415,7 +415,7 @@ def _validate_brick_config(x_brick_config: dict):
             fiscal_timeline_weekday_str(),
             fiscalunit_str(),
             bridge_nub_label_str(),
-            bridge_otx_to_inx_str(),
+            bridge_otx2inx_str(),
         }:
             assert brick_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif brick_category in {fiscal_purview_episode_str(), fiscal_cashbook_str()}:
@@ -617,7 +617,7 @@ def set_brick_config_json(category: str, build_order: int):
 def test_get_brick_config_dict_ReturnsObj_build_order():
     # ESTABLISH / WHEN
     bo = build_order_str()
-    # set_brick_config_json(bridge_otx_to_inx_str(), 0)
+    # set_brick_config_json(bridge_otx2inx_str(), 0)
     # set_brick_config_json(bridge_nub_label_str(), 1)
     # set_brick_config_json(fiscalunit_str(), 2)
     # set_brick_config_json(fiscal_timeline_hour_str(), 3)
@@ -638,7 +638,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     x_brick_config = get_brick_config_dict()
 
     # THEN
-    assert x_brick_config.get(bridge_otx_to_inx_str()).get(bo) == 0
+    assert x_brick_config.get(bridge_otx2inx_str()).get(bo) == 0
     assert x_brick_config.get(bridge_nub_label_str()).get(bo) == 1
     assert x_brick_config.get(fiscalunit_str()).get(bo) == 2
     assert x_brick_config.get(fiscal_timeline_hour_str()).get(bo) == 3

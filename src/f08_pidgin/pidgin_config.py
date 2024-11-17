@@ -62,12 +62,12 @@ def nub_label_str() -> str:
     return "nub_label"
 
 
-def otx_to_inx_str() -> str:
-    return "otx_to_inx"
+def otx2inx_str() -> str:
+    return "otx2inx"
 
 
-def bridge_otx_to_inx_str() -> str:
-    return "bridge_otx_to_inx"
+def bridge_otx2inx_str() -> str:
+    return "bridge_otx2inx"
 
 
 def bridge_nub_label_str() -> str:

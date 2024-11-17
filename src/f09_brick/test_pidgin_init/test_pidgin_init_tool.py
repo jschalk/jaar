@@ -15,21 +15,21 @@ from src.f08_pidgin.examples.pidgin_env import (
     get_test_faces_dir,
 )
 from src.f08_pidgin.examples.example_pidgins import (
-    get_casa_maison_pidginunit_set_by_otx_to_inx,
+    get_casa_maison_pidginunit_set_by_otx2inx,
     get_casa_maison_pidginunit_set_by_nub_label,
-    get_casa_maison_road_otx_to_inx_dt,
+    get_casa_maison_road_otx2inx_dt,
     get_casa_maison_road_nub_label_dt,
     get_slash_acctid_bridgeunit,
     get_sue_pidginunit,
     get_casa_maison_pidginunit_set_by_nub_label,
 )
 from src.f09_brick.pidgin_toolbox import (
-    get_otx_to_inx_dt_columns,
+    get_otx2inx_dt_columns,
     get_nub_label_columns,
-    create_otx_to_inx_dt,
+    create_otx2inx_dt,
     create_nub_label_dt,
     save_all_csvs_from_pidginunit,
-    _load_otx_to_inx_from_csv,
+    _load_otx2inx_from_csv,
     _load_nub_label_from_csv,
     _save_nub_label_csv,
     create_dir_valid_empty_pidginunit,
@@ -42,10 +42,10 @@ from src.f09_brick.pandas_tool import (
 from os.path import exists as os_path_exists
 
 
-def test_get_otx_to_inx_dt_columns_ReturnsObj():
+def test_get_otx2inx_dt_columns_ReturnsObj():
     # ESTABLISH / WHEN /THEN
-    assert get_otx_to_inx_dt_columns()
-    assert len(get_otx_to_inx_dt_columns()) == 7
+    assert get_otx2inx_dt_columns()
+    assert len(get_otx2inx_dt_columns()) == 7
     static_list = [
         face_id_str(),
         "jaar_type",
@@ -55,26 +55,26 @@ def test_get_otx_to_inx_dt_columns_ReturnsObj():
         "otx_word",
         "inx_word",
     ]
-    assert get_otx_to_inx_dt_columns() == static_list
-    assert set(get_otx_to_inx_dt_columns()).issubset(set(sorting_columns()))
+    assert get_otx2inx_dt_columns() == static_list
+    assert set(get_otx2inx_dt_columns()).issubset(set(sorting_columns()))
 
 
-def test_create_otx_to_inx_dt_ReturnsObj():
+def test_create_otx2inx_dt_ReturnsObj():
     # ESTABLISH
-    casa_pidginunit = get_casa_maison_pidginunit_set_by_otx_to_inx()
+    casa_pidginunit = get_casa_maison_pidginunit_set_by_otx2inx()
     casa_bridgeunit = casa_pidginunit.get_bridgeunit(type_RoadUnit_str())
 
     # WHEN
-    casa_dataframe = create_otx_to_inx_dt(casa_bridgeunit)
+    casa_dataframe = create_otx2inx_dt(casa_bridgeunit)
     print(f"{casa_dataframe=}")
 
     # THEN
-    assert list(casa_dataframe.columns) == get_otx_to_inx_dt_columns()
+    assert list(casa_dataframe.columns) == get_otx2inx_dt_columns()
     assert len(casa_dataframe) == 4
     casa_csv = get_ordered_csv(casa_dataframe)
     print(f"{casa_csv=}")
-    print(f"{get_ordered_csv(get_casa_maison_road_otx_to_inx_dt())=}")
-    assert casa_csv == get_ordered_csv(get_casa_maison_road_otx_to_inx_dt())
+    print(f"{get_ordered_csv(get_casa_maison_road_otx2inx_dt())=}")
+    assert casa_csv == get_ordered_csv(get_casa_maison_road_otx2inx_dt())
 
 
 def test_get_nub_label_columns_ReturnsObj():
@@ -120,23 +120,23 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
     bridge_dir = get_test_faces_dir()
-    acctid_otx_to_inx_filename = f"{type_AcctID_str()}_otx_to_inx.csv"
+    acctid_otx2inx_filename = f"{type_AcctID_str()}_otx2inx.csv"
     acctid_nub_label_filename = f"{type_AcctID_str()}_nub_label.csv"
-    groupid_otx_to_inx_filename = f"{type_GroupID_str()}_otx_to_inx.csv"
+    groupid_otx2inx_filename = f"{type_GroupID_str()}_otx2inx.csv"
     groupid_nub_label_filename = f"{type_GroupID_str()}_nub_label.csv"
-    road_otx_to_inx_filename = f"{road_str()}_otx_to_inx.csv"
+    road_otx2inx_filename = f"{road_str()}_otx2inx.csv"
     road_nub_label_filename = f"{road_str()}_nub_label.csv"
-    acctid_otx_to_inx_csv_path = f"{bridge_dir}/{acctid_otx_to_inx_filename}"
+    acctid_otx2inx_csv_path = f"{bridge_dir}/{acctid_otx2inx_filename}"
     acctid_nub_label_csv_path = f"{bridge_dir}/{acctid_nub_label_filename}"
-    groupid_otx_to_inx_csv_path = f"{bridge_dir}/{groupid_otx_to_inx_filename}"
+    groupid_otx2inx_csv_path = f"{bridge_dir}/{groupid_otx2inx_filename}"
     groupid_nub_label_csv_path = f"{bridge_dir}/{groupid_nub_label_filename}"
-    road_otx_to_inx_csv_path = f"{bridge_dir}/{road_otx_to_inx_filename}"
+    road_otx2inx_csv_path = f"{bridge_dir}/{road_otx2inx_filename}"
     road_nub_label_csv_path = f"{bridge_dir}/{road_nub_label_filename}"
-    assert os_path_exists(acctid_otx_to_inx_csv_path) is False
+    assert os_path_exists(acctid_otx2inx_csv_path) is False
     assert os_path_exists(acctid_nub_label_csv_path) is False
-    assert os_path_exists(groupid_otx_to_inx_csv_path) is False
+    assert os_path_exists(groupid_otx2inx_csv_path) is False
     assert os_path_exists(groupid_nub_label_csv_path) is False
-    assert os_path_exists(road_otx_to_inx_csv_path) is False
+    assert os_path_exists(road_otx2inx_csv_path) is False
     assert os_path_exists(road_nub_label_csv_path) is False
     assert len(get_dir_file_strs(bridge_dir)) == 0
 
@@ -144,34 +144,34 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     save_all_csvs_from_pidginunit(bridge_dir, sue_pidginunit)
 
     # THEN
-    assert os_path_exists(acctid_otx_to_inx_csv_path)
+    assert os_path_exists(acctid_otx2inx_csv_path)
     assert os_path_exists(acctid_nub_label_csv_path)
-    assert os_path_exists(groupid_otx_to_inx_csv_path)
+    assert os_path_exists(groupid_otx2inx_csv_path)
     assert os_path_exists(groupid_nub_label_csv_path)
-    assert os_path_exists(road_otx_to_inx_csv_path)
+    assert os_path_exists(road_otx2inx_csv_path)
     assert os_path_exists(road_nub_label_csv_path)
     assert len(get_dir_file_strs(bridge_dir)) == 6
 
 
-def test_load_otx_to_inx_from_csv_SetsAttr(env_dir_setup_cleanup):
+def test_load_otx2inx_from_csv_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
     bridge_dir = get_test_faces_dir()
-    acctid_filename = f"{type_AcctID_str()}_otx_to_inx.csv"
-    acctid_otx_to_inx_csv_path = f"{bridge_dir}/{acctid_filename}"
+    acctid_filename = f"{type_AcctID_str()}_otx2inx.csv"
+    acctid_otx2inx_csv_path = f"{bridge_dir}/{acctid_filename}"
     save_all_csvs_from_pidginunit(bridge_dir, sue_pidginunit)
-    assert os_path_exists(acctid_otx_to_inx_csv_path)
+    assert os_path_exists(acctid_otx2inx_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
     sue_acctid_bridgeunit = empty_pidginunit.get_bridgeunit(type_AcctID_str())
     sue_acctid_bridgeunit.face_id = "Sue"
     print(f"{empty_pidginunit=} {sue_acctid_bridgeunit=}")
-    assert len(sue_acctid_bridgeunit.otx_to_inx) == 0
+    assert len(sue_acctid_bridgeunit.otx2inx) == 0
 
     # WHEN
-    sue_acctid_bridgeunit = _load_otx_to_inx_from_csv(bridge_dir, sue_acctid_bridgeunit)
+    sue_acctid_bridgeunit = _load_otx2inx_from_csv(bridge_dir, sue_acctid_bridgeunit)
 
     # THEN
-    assert len(sue_acctid_bridgeunit.otx_to_inx) == 3
+    assert len(sue_acctid_bridgeunit.otx2inx) == 3
     ex_acctid_bridgeunit = sue_pidginunit.get_bridgeunit(type_AcctID_str())
     assert ex_acctid_bridgeunit == sue_acctid_bridgeunit
 
@@ -183,9 +183,9 @@ def test_load_nub_label_map_from_csv_SetsAttr(env_dir_setup_cleanup):
     print(f"{before_road_bridgeunit.nub_label=}")
     bridge_dir = get_test_faces_dir()
     road_filename = f"{road_str()}_nub_label.csv"
-    road_otx_to_inx_csv_path = f"{bridge_dir}/{road_filename}"
+    road_otx2inx_csv_path = f"{bridge_dir}/{road_filename}"
     _save_nub_label_csv(bridge_dir, before_road_bridgeunit, road_str())
-    assert os_path_exists(road_otx_to_inx_csv_path)
+    assert os_path_exists(road_otx2inx_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
     empty_road_bridgeunit = empty_pidginunit.get_bridgeunit(road_str())
     empty_road_bridgeunit.face_id = "Sue"
@@ -244,9 +244,9 @@ def test_init_pidginunit_from_dir_ReturnsObj(env_dir_setup_cleanup):
     # THEN
     assert gen_pidginunit
     gen_acctid_bridgeunit = gen_pidginunit.get_bridgeunit(type_AcctID_str())
-    assert len(gen_acctid_bridgeunit.otx_to_inx) == 3
+    assert len(gen_acctid_bridgeunit.otx2inx) == 3
 
     sue_acctid_bridgeunit = sue_pidginunit.get_bridgeunit(type_AcctID_str())
-    assert len(sue_acctid_bridgeunit.otx_to_inx) == 3
+    assert len(sue_acctid_bridgeunit.otx2inx) == 3
     assert gen_acctid_bridgeunit == sue_acctid_bridgeunit
     assert gen_pidginunit == sue_pidginunit

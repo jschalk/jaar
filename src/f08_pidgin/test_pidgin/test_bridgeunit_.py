@@ -28,7 +28,7 @@ def test_BridgeUnit_Exists():
 
     # WHEN / THEN
     assert not x_bridgeunit.jaar_type
-    assert not x_bridgeunit.otx_to_inx
+    assert not x_bridgeunit.otx2inx
     assert not x_bridgeunit.unknown_word
     assert not x_bridgeunit.otx_road_delimiter
     assert not x_bridgeunit.inx_road_delimiter
@@ -41,7 +41,7 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
     xio_str = "Xio"
     sue_str = "Sue"
     bob_str = "Bob"
-    otx_to_inx = {xio_str: sue_str}
+    otx2inx = {xio_str: sue_str}
     x_unknown_word = "UnknownAcctId"
     slash_otx_road_delimiter = "/"
     colon_inx_road_delimiter = ":"
@@ -49,7 +49,7 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
     # WHEN
     acct_id_bridgeunit = bridgeunit_shop(
         x_jaar_type=type_AcctID_str(),
-        x_otx_to_inx=otx_to_inx,
+        x_otx2inx=otx2inx,
         x_unknown_word=x_unknown_word,
         x_otx_road_delimiter=slash_otx_road_delimiter,
         x_inx_road_delimiter=colon_inx_road_delimiter,
@@ -58,7 +58,7 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
 
     # THEN
     assert acct_id_bridgeunit.jaar_type == type_AcctID_str()
-    assert acct_id_bridgeunit.otx_to_inx == otx_to_inx
+    assert acct_id_bridgeunit.otx2inx == otx2inx
     assert acct_id_bridgeunit.unknown_word == x_unknown_word
     assert acct_id_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
     assert acct_id_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
@@ -72,7 +72,7 @@ def test_bridgeunit_shop_ReturnsObj_scenario1():
     credit_vote_bridgeunit = bridgeunit_shop(cv_jaar_type)
 
     # THEN
-    assert credit_vote_bridgeunit.otx_to_inx == {}
+    assert credit_vote_bridgeunit.otx2inx == {}
     assert credit_vote_bridgeunit.unknown_word == default_unknown_word()
     assert credit_vote_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
     assert credit_vote_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
@@ -86,75 +86,75 @@ def test_bridgeunit_shop_ReturnsObj_Scenario2():
 
     # THEN
     assert credit_vote_bridgeunit.jaar_type == type_AcctID_str()
-    assert credit_vote_bridgeunit.otx_to_inx == {}
+    assert credit_vote_bridgeunit.otx2inx == {}
     assert credit_vote_bridgeunit.unknown_word == default_unknown_word()
     assert credit_vote_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
     assert credit_vote_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
     assert credit_vote_bridgeunit.face_id is None
 
 
-def test_BridgeUnit_set_all_otx_to_inx_SetsAttr():
+def test_BridgeUnit_set_all_otx2inx_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
     acct_id_bridgeunit = bridgeunit_shop(None, acct_id_str())
-    x_otx_to_inx = {xio_str: sue_str, zia_str: zia_str}
-    assert acct_id_bridgeunit.otx_to_inx != x_otx_to_inx
+    x_otx2inx = {xio_str: sue_str, zia_str: zia_str}
+    assert acct_id_bridgeunit.otx2inx != x_otx2inx
 
     # WHEN
-    acct_id_bridgeunit.set_all_otx_to_inx(x_otx_to_inx)
+    acct_id_bridgeunit.set_all_otx2inx(x_otx2inx)
 
     # THEN
-    assert acct_id_bridgeunit.otx_to_inx == x_otx_to_inx
+    assert acct_id_bridgeunit.otx2inx == x_otx2inx
 
 
-def test_BridgeUnit_set_all_otx_to_inx_RaisesErrorIf_unknown_word_IsKeyIn_otx_to_inx():
+def test_BridgeUnit_set_all_otx2inx_RaisesErrorIf_unknown_word_IsKeyIn_otx2inx():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
     acct_id_bridgeunit = bridgeunit_shop(None, x_unknown_word=x_unknown_word)
-    x_otx_to_inx = {xio_str: sue_str, x_unknown_word: zia_str}
-    assert acct_id_bridgeunit.otx_to_inx != x_otx_to_inx
+    x_otx2inx = {xio_str: sue_str, x_unknown_word: zia_str}
+    assert acct_id_bridgeunit.otx2inx != x_otx2inx
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        acct_id_bridgeunit.set_all_otx_to_inx(x_otx_to_inx, True)
-    exception_str = f"otx_to_inx cannot have unknown_word '{x_unknown_word}' in any str. Affected keys include ['{x_unknown_word}']."
+        acct_id_bridgeunit.set_all_otx2inx(x_otx2inx, True)
+    exception_str = f"otx2inx cannot have unknown_word '{x_unknown_word}' in any str. Affected keys include ['{x_unknown_word}']."
     assert str(excinfo.value) == exception_str
 
 
-def test_BridgeUnit_set_all_otx_to_inx_DoesNotRaiseErrorIfParameterSetToTrue():
+def test_BridgeUnit_set_all_otx2inx_DoesNotRaiseErrorIfParameterSetToTrue():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
     x_bridgeunit = bridgeunit_shop(None)
-    x_otx_to_inx = {xio_str: sue_str, x_unknown_word: zia_str}
-    assert x_bridgeunit.otx_to_inx != x_otx_to_inx
+    x_otx2inx = {xio_str: sue_str, x_unknown_word: zia_str}
+    assert x_bridgeunit.otx2inx != x_otx2inx
 
     # WHEN
-    x_bridgeunit.set_all_otx_to_inx(x_otx_to_inx)
+    x_bridgeunit.set_all_otx2inx(x_otx2inx)
 
     # THEN
-    assert x_bridgeunit.otx_to_inx == x_otx_to_inx
+    assert x_bridgeunit.otx2inx == x_otx2inx
 
 
-def test_BridgeUnit_set_otx_to_inx_SetsAttr():
+def test_BridgeUnit_set_otx2inx_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_bridgeunit = bridgeunit_shop(None)
-    assert x_bridgeunit.otx_to_inx == {}
+    assert x_bridgeunit.otx2inx == {}
 
     # WHEN
-    x_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    x_bridgeunit.set_otx2inx(xio_str, sue_str)
 
     # THEN
-    assert x_bridgeunit.otx_to_inx == {xio_str: sue_str}
+    assert x_bridgeunit.otx2inx == {xio_str: sue_str}
 
 
 def test_BridgeUnit_get_inx_value_ReturnsObj():
@@ -165,41 +165,41 @@ def test_BridgeUnit_get_inx_value_ReturnsObj():
     assert x_bridgeunit._get_inx_value(xio_str) != sue_str
 
     # WHEN
-    x_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    x_bridgeunit.set_otx2inx(xio_str, sue_str)
 
     # THEN
     assert x_bridgeunit._get_inx_value(xio_str) == sue_str
 
 
-def test_BridgeUnit_otx_to_inx_exists_ReturnsObj():
+def test_BridgeUnit_otx2inx_exists_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
     x_bridgeunit = bridgeunit_shop(None)
-    assert x_bridgeunit.otx_to_inx_exists(xio_str, sue_str) is False
-    assert x_bridgeunit.otx_to_inx_exists(xio_str, zia_str) is False
-    assert x_bridgeunit.otx_to_inx_exists(xio_str, bob_str) is False
-    assert x_bridgeunit.otx_to_inx_exists(zia_str, zia_str) is False
+    assert x_bridgeunit.otx2inx_exists(xio_str, sue_str) is False
+    assert x_bridgeunit.otx2inx_exists(xio_str, zia_str) is False
+    assert x_bridgeunit.otx2inx_exists(xio_str, bob_str) is False
+    assert x_bridgeunit.otx2inx_exists(zia_str, zia_str) is False
 
     # WHEN
-    x_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    x_bridgeunit.set_otx2inx(xio_str, sue_str)
 
     # THEN
-    assert x_bridgeunit.otx_to_inx_exists(xio_str, sue_str)
-    assert x_bridgeunit.otx_to_inx_exists(xio_str, zia_str) is False
-    assert x_bridgeunit.otx_to_inx_exists(xio_str, bob_str) is False
-    assert x_bridgeunit.otx_to_inx_exists(zia_str, zia_str) is False
+    assert x_bridgeunit.otx2inx_exists(xio_str, sue_str)
+    assert x_bridgeunit.otx2inx_exists(xio_str, zia_str) is False
+    assert x_bridgeunit.otx2inx_exists(xio_str, bob_str) is False
+    assert x_bridgeunit.otx2inx_exists(zia_str, zia_str) is False
 
     # WHEN
-    x_bridgeunit.set_otx_to_inx(zia_str, zia_str)
+    x_bridgeunit.set_otx2inx(zia_str, zia_str)
 
     # THEN
-    assert x_bridgeunit.otx_to_inx_exists(xio_str, sue_str)
-    assert x_bridgeunit.otx_to_inx_exists(xio_str, zia_str) is False
-    assert x_bridgeunit.otx_to_inx_exists(xio_str, bob_str) is False
-    assert x_bridgeunit.otx_to_inx_exists(zia_str, zia_str)
+    assert x_bridgeunit.otx2inx_exists(xio_str, sue_str)
+    assert x_bridgeunit.otx2inx_exists(xio_str, zia_str) is False
+    assert x_bridgeunit.otx2inx_exists(xio_str, bob_str) is False
+    assert x_bridgeunit.otx2inx_exists(zia_str, zia_str)
 
 
 def test_BridgeUnit_otx_exists_ReturnsObj():
@@ -215,7 +215,7 @@ def test_BridgeUnit_otx_exists_ReturnsObj():
     assert x_bridgeunit.otx_exists(zia_str) is False
 
     # WHEN
-    x_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    x_bridgeunit.set_otx2inx(xio_str, sue_str)
 
     # THEN
     assert x_bridgeunit.otx_exists(xio_str)
@@ -224,7 +224,7 @@ def test_BridgeUnit_otx_exists_ReturnsObj():
     assert x_bridgeunit.otx_exists(zia_str) is False
 
     # WHEN
-    x_bridgeunit.set_otx_to_inx(zia_str, zia_str)
+    x_bridgeunit.set_otx2inx(zia_str, zia_str)
 
     # THEN
     assert x_bridgeunit.otx_exists(xio_str)
@@ -233,36 +233,36 @@ def test_BridgeUnit_otx_exists_ReturnsObj():
     assert x_bridgeunit.otx_exists(zia_str)
 
 
-def test_BridgeUnit_del_otx_to_inx_SetsAttr():
+def test_BridgeUnit_del_otx2inx_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_bridgeunit = bridgeunit_shop(None)
-    x_bridgeunit.set_otx_to_inx(xio_str, sue_str)
-    assert x_bridgeunit.otx_to_inx_exists(xio_str, sue_str)
+    x_bridgeunit.set_otx2inx(xio_str, sue_str)
+    assert x_bridgeunit.otx2inx_exists(xio_str, sue_str)
 
     # WHEN
-    x_bridgeunit.del_otx_to_inx(xio_str)
+    x_bridgeunit.del_otx2inx(xio_str)
 
     # THEN
-    assert x_bridgeunit.otx_to_inx_exists(xio_str, sue_str) is False
+    assert x_bridgeunit.otx2inx_exists(xio_str, sue_str) is False
 
 
-def test_BridgeUnit_unknown_word_in_otx_to_inx_ReturnsObj():
+def test_BridgeUnit_unknown_word_in_otx2inx_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
     x_bridgeunit = bridgeunit_shop(None, x_unknown_word=x_unknown_word)
-    x_bridgeunit.set_otx_to_inx(xio_str, sue_str)
-    assert x_bridgeunit._unknown_word_in_otx_to_inx() is False
+    x_bridgeunit.set_otx2inx(xio_str, sue_str)
+    assert x_bridgeunit._unknown_word_in_otx2inx() is False
 
     # WHEN
-    x_bridgeunit.set_otx_to_inx(zia_str, x_unknown_word)
+    x_bridgeunit.set_otx2inx(zia_str, x_unknown_word)
 
     # THEN
-    assert x_bridgeunit._unknown_word_in_otx_to_inx()
+    assert x_bridgeunit._unknown_word_in_otx2inx()
 
 
 def test_BridgeUnit_set_nub_label_SetsAttr():
@@ -412,7 +412,7 @@ def test_BridgeUnit_del_nub_label_SetsAttr():
     assert x_bridgeunit.nub_label_exists(xio_str, sue_str) is False
 
 
-def test_BridgeUnit_set_nub_label_Edits_otx_to_inx():
+def test_BridgeUnit_set_nub_label_Edits_otx2inx():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -428,14 +428,14 @@ def test_BridgeUnit_set_nub_label_Edits_otx_to_inx():
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
     x_bridgeunit = bridgeunit_shop(type_RoadUnit_str())
-    x_bridgeunit.set_otx_to_inx(otx_music45_str, inx_music87_str)
-    x_bridgeunit.set_otx_to_inx(casa_otx_road, casa_inx_road)
-    x_bridgeunit.set_otx_to_inx(clean_otx_road, clean_inx_road)
-    x_bridgeunit.set_otx_to_inx(sweep_otx_road, sweep_inx_road)
-    assert x_bridgeunit.otx_to_inx_exists(otx_music45_str, inx_music87_str)
-    assert x_bridgeunit.otx_to_inx_exists(casa_otx_road, casa_inx_road)
-    assert x_bridgeunit.otx_to_inx_exists(clean_otx_road, clean_inx_road)
-    assert x_bridgeunit.otx_to_inx_exists(sweep_otx_road, sweep_inx_road)
+    x_bridgeunit.set_otx2inx(otx_music45_str, inx_music87_str)
+    x_bridgeunit.set_otx2inx(casa_otx_road, casa_inx_road)
+    x_bridgeunit.set_otx2inx(clean_otx_road, clean_inx_road)
+    x_bridgeunit.set_otx2inx(sweep_otx_road, sweep_inx_road)
+    assert x_bridgeunit.otx2inx_exists(otx_music45_str, inx_music87_str)
+    assert x_bridgeunit.otx2inx_exists(casa_otx_road, casa_inx_road)
+    assert x_bridgeunit.otx2inx_exists(clean_otx_road, clean_inx_road)
+    assert x_bridgeunit.otx2inx_exists(sweep_otx_road, sweep_inx_road)
 
     # WHEN
     menage_inx_str = "menage"
@@ -444,7 +444,7 @@ def test_BridgeUnit_set_nub_label_Edits_otx_to_inx():
     # THEN
     menage_inx_road = create_road(casa_inx_road, menage_inx_str)
     sweep_menage_inx_road = create_road(menage_inx_road, sweep_str)
-    assert x_bridgeunit.otx_to_inx_exists(otx_music45_str, inx_music87_str)
-    assert x_bridgeunit.otx_to_inx_exists(casa_otx_road, casa_inx_road)
-    assert x_bridgeunit.otx_to_inx_exists(clean_otx_road, menage_inx_road)
-    assert x_bridgeunit.otx_to_inx_exists(sweep_otx_road, sweep_menage_inx_road)
+    assert x_bridgeunit.otx2inx_exists(otx_music45_str, inx_music87_str)
+    assert x_bridgeunit.otx2inx_exists(casa_otx_road, casa_inx_road)
+    assert x_bridgeunit.otx2inx_exists(clean_otx_road, menage_inx_road)
+    assert x_bridgeunit.otx2inx_exists(sweep_otx_road, sweep_menage_inx_road)

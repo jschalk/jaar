@@ -4,7 +4,7 @@ from src.f09_brick.pandas_tool import get_ordered_csv, open_csv
 from pandas import DataFrame
 
 
-def get_otx_to_inx_dt_columns() -> list[str]:
+def get_otx2inx_dt_columns() -> list[str]:
     return [
         "face_id",
         "jaar_type",
@@ -28,7 +28,7 @@ def get_nub_label_columns() -> list[str]:
     ]
 
 
-def create_otx_to_inx_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
+def create_otx2inx_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
     x_rows_list = [
         {
             "face_id": x_bridgeunit.face_id,
@@ -39,9 +39,9 @@ def create_otx_to_inx_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
             "otx_word": otx_value,
             "inx_word": inx_value,
         }
-        for otx_value, inx_value in x_bridgeunit.otx_to_inx.items()
+        for otx_value, inx_value in x_bridgeunit.otx2inx.items()
     ]
-    return DataFrame(x_rows_list, columns=get_otx_to_inx_dt_columns())
+    return DataFrame(x_rows_list, columns=get_otx2inx_dt_columns())
 
 
 def create_nub_label_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
@@ -62,15 +62,15 @@ def create_nub_label_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
 
 def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
     for x_key, x_bridgeunit in x_pidginunit.bridgeunits.items():
-        _save_otx_to_inx_csv(x_dir, x_bridgeunit, x_key)
+        _save_otx2inx_csv(x_dir, x_bridgeunit, x_key)
         _save_nub_label_csv(x_dir, x_bridgeunit, x_key)
 
 
-def _save_otx_to_inx_csv(x_dir: str, x_bridgeunit: BridgeUnit, x_filename: str):
-    x_otx_to_inx_dt = create_otx_to_inx_dt(x_bridgeunit)
-    x_otx_to_inx_csv = get_ordered_csv(x_otx_to_inx_dt)
-    x_otx_to_inx_filename = f"{x_filename}_otx_to_inx.csv"
-    save_file(x_dir, x_otx_to_inx_filename, x_otx_to_inx_csv)
+def _save_otx2inx_csv(x_dir: str, x_bridgeunit: BridgeUnit, x_filename: str):
+    x_otx2inx_dt = create_otx2inx_dt(x_bridgeunit)
+    x_otx2inx_csv = get_ordered_csv(x_otx2inx_dt)
+    x_otx2inx_filename = f"{x_filename}_otx2inx.csv"
+    save_file(x_dir, x_otx2inx_filename, x_otx2inx_csv)
 
 
 def _save_nub_label_csv(x_dir, x_bridgeunit, x_key):
@@ -80,17 +80,17 @@ def _save_nub_label_csv(x_dir, x_bridgeunit, x_key):
     save_file(x_dir, x_nub_label_filename, x_nub_label_csv)
 
 
-def _load_otx_to_inx_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
+def _load_otx2inx_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
     file_key = x_bridgeunit.jaar_type
     if x_bridgeunit.jaar_type in {"RoadNode", "RoadUnit"}:
         file_key = "road"
-    otx_to_inx_filename = f"{file_key}_otx_to_inx.csv"
-    otx_to_inx_dt = open_csv(x_dir, otx_to_inx_filename)
-    for table_row in otx_to_inx_dt.to_dict("records"):
+    otx2inx_filename = f"{file_key}_otx2inx.csv"
+    otx2inx_dt = open_csv(x_dir, otx2inx_filename)
+    for table_row in otx2inx_dt.to_dict("records"):
         otx_word_value = table_row.get("otx_word")
         inx_word_value = table_row.get("inx_word")
-        if x_bridgeunit.otx_to_inx_exists(otx_word_value, inx_word_value) is False:
-            x_bridgeunit.set_otx_to_inx(otx_word_value, inx_word_value)
+        if x_bridgeunit.otx2inx_exists(otx_word_value, inx_word_value) is False:
+            x_bridgeunit.set_otx2inx(otx_word_value, inx_word_value)
     return x_bridgeunit
 
 
@@ -150,6 +150,6 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
 def init_pidginunit_from_dir(x_dir: str) -> PidginUnit:
     x_pidginunit = create_dir_valid_empty_pidginunit(x_dir)
     for x_bridgeunit in x_pidginunit.bridgeunits.values():
-        _load_otx_to_inx_from_csv(x_dir, x_bridgeunit)
+        _load_otx2inx_from_csv(x_dir, x_bridgeunit)
         _load_nub_label_from_csv(x_dir, x_bridgeunit)
     return x_pidginunit

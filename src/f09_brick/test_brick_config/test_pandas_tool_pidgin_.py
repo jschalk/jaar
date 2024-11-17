@@ -13,7 +13,7 @@ from src.f09_brick.pandas_tool import (
     get_dataframe_pidginable_columns,
 )
 from src.f08_pidgin.examples.example_pidgins import (
-    get_casa_maison_pidginunit_set_by_otx_to_inx,
+    get_casa_maison_pidginunit_set_by_otx2inx,
     get_casa_maison_pidginunit_set_by_nub_label,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
@@ -58,9 +58,9 @@ def test_pidgin_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5row
     sue_inx = "Suita"
     bob_inx = "Bobita"
     acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str())
-    acct_id_bridgeunit.set_otx_to_inx(xio_otx, xio_inx)
-    acct_id_bridgeunit.set_otx_to_inx(sue_otx, sue_inx)
-    acct_id_bridgeunit.set_otx_to_inx(bob_otx, bob_inx)
+    acct_id_bridgeunit.set_otx2inx(xio_otx, xio_inx)
+    acct_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
+    acct_id_bridgeunit.set_otx2inx(bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[acct_id_str()])
     otx_dt.loc[0] = [zia_otx]
     otx_dt.loc[1] = [sue_otx]
@@ -97,9 +97,9 @@ def test_pidgin_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5row
     sue_inx = "Suita"
     bob_inx = "Bobita"
     acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str())
-    acct_id_bridgeunit.set_otx_to_inx(xio_otx, xio_inx)
-    acct_id_bridgeunit.set_otx_to_inx(sue_otx, sue_inx)
-    acct_id_bridgeunit.set_otx_to_inx(bob_otx, bob_inx)
+    acct_id_bridgeunit.set_otx2inx(xio_otx, xio_inx)
+    acct_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
+    acct_id_bridgeunit.set_otx2inx(bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
@@ -137,9 +137,9 @@ def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     sue_inx = "Suita"
     bob_inx = "Bobita"
     yao_pidginunit = pidginunit_shop(yao_str)
-    yao_pidginunit.set_otx_to_inx(type_AcctID_str(), xio_otx, xio_inx)
-    yao_pidginunit.set_otx_to_inx(type_AcctID_str(), sue_otx, sue_inx)
-    yao_pidginunit.set_otx_to_inx(type_AcctID_str(), bob_otx, bob_inx)
+    yao_pidginunit.set_otx2inx(type_AcctID_str(), xio_otx, xio_inx)
+    yao_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
+    yao_pidginunit.set_otx2inx(type_AcctID_str(), bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[fiscal_id_str(), acct_id_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
@@ -166,7 +166,7 @@ def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_pidginunit_set_by_otx_to_inx():
+def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_pidginunit_set_by_otx2inx():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -181,7 +181,7 @@ def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_
     sweep_str = "sweep"
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
-    yao_pidginunit = get_casa_maison_pidginunit_set_by_otx_to_inx()
+    yao_pidginunit = get_casa_maison_pidginunit_set_by_otx2inx()
     otx_dt = get_casa_maison_road_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
     assert otx_dt.iloc[0][base_str()] == otx_music45_str

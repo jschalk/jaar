@@ -11,7 +11,7 @@
             "unknown_word": {}
         }
     },
-    "bridge_otx_to_inx": {
+    "bridge_otx2inx": {
         "jkeys": {
             "jaar_type": {},
             "otx_word": {}
