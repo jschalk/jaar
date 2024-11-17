@@ -1,5 +1,5 @@
 from src.f00_instrument.file import (
-    create_file_path as f_path,
+    create_path as f_path,
     get_directory_path,
     save_file,
     open_file,

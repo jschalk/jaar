@@ -302,7 +302,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "fiscal_id,healer_id,label,owner_id,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
         "inx_road_delimiter,inx_word,jaar_type,otx_road_delimiter,otx_word,unknown_word": brick_format_00040_bridge_otx_to_inx_v0_0_0(),
         "inx_label,inx_road_delimiter,otx_label,otx_road_delimiter,unknown_word": brick_format_00041_bridge_explicit_label_v0_0_0(),
-        "acct_id,fiscal_id,inx_word,jaar_type,owner_id": brick_format_00113_acct_trek_v0_0_0(),
+        "acct_id,fiscal_id,inx_word,jaar_type,otx_word,owner_id": brick_format_00113_acct_trek_v0_0_0(),
     }
 
 

@@ -1,4 +1,4 @@
-# from src.f00_instrument.file import save_file, delete_dir, create_file_path, open_file
+# from src.f00_instrument.file import save_file, delete_dir, create_path, open_file
 # from src.f00_instrument.db_toolbox import check_connection, check_table_column_existence
 # from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
 # from src.f08_pidgin.pidgin import pidginunit_shop
@@ -58,7 +58,7 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=get_test_worlds_dir())
-#     fizz_world._world_dir = create_file_path(fizz_world.worlds_dir, fizz_str)
+#     fizz_world._world_dir = create_path(fizz_world.worlds_dir, fizz_str)
 
 #     # WHEN
 #     x_db_path = fizz_world.get_db_path()

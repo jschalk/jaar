@@ -1,6 +1,6 @@
 from src.f00_instrument.file import (
     set_dir,
-    create_file_path,
+    create_path,
     get_dir_file_strs,
     delete_dir,
 )
@@ -62,7 +62,7 @@ class JungleToZooTransformer:
         return grouped_data
 
     def _read_and_tag_dataframe(self, ref):
-        x_file_path = create_file_path(ref.file_dir, ref.file_name)
+        x_file_path = create_path(ref.file_dir, ref.file_name)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
         df["file_dir"] = ref.file_dir
         df["file_name"] = ref.file_name
@@ -71,7 +71,7 @@ class JungleToZooTransformer:
 
     def _save_consolidated_brick(self, brick_number: str, dfs: list):
         final_df = pandas_concat(dfs)
-        zoo_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
+        zoo_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
         with ExcelWriter(zoo_path) as writer:
             final_df.to_excel(writer, sheet_name="zoo", index=False)
 
@@ -82,7 +82,7 @@ class ZooToOtxTransformer:
 
     def transform(self):
         for brick_number in get_brick_numbers():
-            zoo_brick_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
+            zoo_brick_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
             if os_path_exists(zoo_brick_path):
                 zoo_df = pandas_read_excel(zoo_brick_path, "zoo")
                 otx_df = self._group_by_brick_columns(zoo_df, brick_number)
@@ -110,7 +110,7 @@ class OtxToOtxEventsTransformer:
 
     def transform(self):
         for brick_number in get_brick_numbers():
-            zoo_brick_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
+            zoo_brick_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
             if os_path_exists(zoo_brick_path):
                 otx_df = pandas_read_excel(zoo_brick_path, "otx")
                 events_df = self.get_unique_events(otx_df)
@@ -137,7 +137,7 @@ class OtxEventsToEventsLogTransformer:
     def transform(self):
         for brick_number in sorted(get_brick_numbers()):
             brick_file_name = f"{brick_number}.xlsx"
-            zoo_brick_path = create_file_path(self.zoo_dir, brick_file_name)
+            zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
                 sheet_name = "otx_events"
                 otx_events_df = pandas_read_excel(zoo_brick_path, sheet_name)
@@ -157,7 +157,7 @@ class OtxEventsToEventsLogTransformer:
         return otx_events_df
 
     def _save_events_log_file(self, events_df: DataFrame):
-        events_file_path = create_file_path(self.zoo_dir, "events.xlsx")
+        events_file_path = create_path(self.zoo_dir, "events.xlsx")
         events_log_str = "events_log"
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, events_log_str)
@@ -213,7 +213,7 @@ class WorldUnit:
         return self.pidgins == {}
 
     def _pidgin_dir(self, face_id: AcctID) -> str:
-        return create_file_path(self._pidgins_dir, face_id)
+        return create_path(self._pidgins_dir, face_id)
 
     def save_pidginunit_files(self, face_id: AcctID):
         x_pidginunit = self.get_pidginunit(face_id)
@@ -233,7 +233,7 @@ class WorldUnit:
         delete_dir(self._pidgin_dir(event_id))
 
     # def get_db_path(self) -> str:
-    #     return create_file_path(self._world_dir, "wrd.db")
+    #     return create_path(self._world_dir, "wrd.db")
 
     # def _create_wrd_db(self):
     #     engine = create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
@@ -249,11 +249,11 @@ class WorldUnit:
     #     return create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
 
     def _set_world_dirs(self):
-        self._world_dir = create_file_path(self.worlds_dir, self.world_id)
-        self._events_dir = create_file_path(self._world_dir, "events")
-        self._pidgins_dir = create_file_path(self._world_dir, "pidgins")
-        self._jungle_dir = create_file_path(self._world_dir, "jungle")
-        self._zoo_dir = create_file_path(self._world_dir, "zoo")
+        self._world_dir = create_path(self.worlds_dir, self.world_id)
+        self._events_dir = create_path(self._world_dir, "events")
+        self._pidgins_dir = create_path(self._world_dir, "pidgins")
+        self._jungle_dir = create_path(self._world_dir, "jungle")
+        self._zoo_dir = create_path(self._world_dir, "zoo")
         if not os_path_exists(self._world_dir):
             set_dir(self._world_dir)
         if not os_path_exists(self._events_dir):
@@ -283,7 +283,7 @@ class WorldUnit:
     def otx_to_pidgins_event(self):
         pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
         # for pidgen_brick_filename in pidgen_brick_filenames:
-        #     pidgen_brick_path = create_file_path(self._zoo_dir, pidgen_brick_filename)
+        #     pidgen_brick_path = create_path(self._zoo_dir, pidgen_brick_filename)
         #     df = pandas_read_excel(pidgen_brick_path, "otx")
 
         #     print(f"{pidgen_brick_path=}")
@@ -298,7 +298,7 @@ class WorldUnit:
         transformer.transform()
 
     def events_log_to_events_agg(self):
-        events_file_path = create_file_path(self._zoo_dir, "events.xlsx")
+        events_file_path = create_path(self._zoo_dir, "events.xlsx")
         events_log_df = pandas_read_excel(events_file_path, "events_log")
         events_agg_df = _create_events_agg_df(events_log_df)
         with ExcelWriter(events_file_path) as writer:
@@ -306,7 +306,7 @@ class WorldUnit:
 
     def set_events_from_events_agg(self):
         self.events = {}
-        events_file_path = create_file_path(self._zoo_dir, "events.xlsx")
+        events_file_path = create_path(self._zoo_dir, "events.xlsx")
         events_agg_df = pandas_read_excel(events_file_path, "events_agg")
         for index, event_agg_row in events_agg_df.iterrows():
             x_note = event_agg_row["note"]

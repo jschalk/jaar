@@ -15,6 +15,9 @@
         "inx_word": {
             "otx_key": false
         },
+        "otx_word": {
+            "otx_key": true
+        },
         "jaar_type": {
             "otx_key": true
         },

@@ -1,6 +1,6 @@
 from src.f00_instrument.file import (
     save_file,
-    create_file_path,
+    create_path,
     get_dir_filenames,
     get_dir_file_strs,
     open_file,
@@ -51,7 +51,7 @@ def get_ordered_csv(x_df: DataFrame, sorting_columns: list[str] = None) -> str:
 
 
 def open_csv(x_file_dir: str, x_filename: str) -> DataFrame:
-    return pandas_read_csv(create_file_path(x_file_dir, x_filename))
+    return pandas_read_csv(create_path(x_file_dir, x_filename))
 
 
 def get_all_excel_sheet_names(
@@ -62,8 +62,8 @@ def get_all_excel_sheet_names(
     excel_files = get_dir_filenames(dir, {"xlsx"})
     sheet_names = set()
     for relative_dir, filename in excel_files:
-        absolute_dir = create_file_path(dir, relative_dir)
-        absolute_path = create_file_path(absolute_dir, filename)
+        absolute_dir = create_path(dir, relative_dir)
+        absolute_path = create_path(absolute_dir, filename)
         file_sheet_names = openpyxl_load_workbook(absolute_path).sheetnames
         for sheet_name in file_sheet_names:
             if not sub_strs:

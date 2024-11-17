@@ -1,5 +1,5 @@
 from src.f00_instrument.file import (
-    create_file_path,
+    create_path,
     create_dir,
     get_dir_file_strs,
     save_file,
@@ -24,18 +24,18 @@ from platform import system as platform_system
 from os.path import exists as os_path_exist
 
 
-def test_create_file_path_ReturnsObj():
+def test_create_path_ReturnsObj():
     # ESTABLISH
     obj_filename = "obj.json"
     x_dir = ("src/_instrument",)
     x_file_name = "examples"
 
     # WHEN / THEN
-    assert create_file_path(None, None) == ""
-    assert create_file_path(None, "") == ""
-    assert create_file_path(None, obj_filename) == f"/{obj_filename}"
-    assert create_file_path(x_dir, None) == x_dir
-    assert create_file_path(x_dir, x_file_name) == f"{x_dir}/{x_file_name}"
+    assert create_path(None, None) == ""
+    assert create_path(None, "") == ""
+    assert create_path(None, obj_filename) == f"/{obj_filename}"
+    assert create_path(x_dir, None) == x_dir
+    assert create_path(x_dir, x_file_name) == f"{x_dir}/{x_file_name}"
 
 
 def test_create_dir_SetsFile(env_dir_setup_cleanup):
@@ -66,13 +66,13 @@ def test_save_file_SetsFile(env_dir_setup_cleanup):
     x_file_name = f"{x_name}.{x_file_ext}"
     x_file_str = "trying this"
     print(f"{env_dir=} {x_file_name=}")
-    assert not os_path_exist(create_file_path(env_dir, x_file_name))
+    assert not os_path_exist(create_path(env_dir, x_file_name))
 
     # WHEN
     save_file(dest_dir=env_dir, file_name=x_file_name, file_str=x_file_str)
 
     # THEN
-    assert os_path_exist(create_file_path(env_dir, x_file_name))
+    assert os_path_exist(create_path(env_dir, x_file_name))
 
 
 def test_open_file_OpensFilesCorrectlyWith_dest_dirAnd_file_name(

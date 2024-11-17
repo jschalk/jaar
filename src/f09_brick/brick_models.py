@@ -294,6 +294,7 @@ class br00113AbstractTable(Base):
     acct_id = Column(String)
     fiscal_id = Column(String)
     inx_word = Column(String)
+    otx_word = Column(String)
     jaar_type = Column(String)
     owner_id = Column(String)
 

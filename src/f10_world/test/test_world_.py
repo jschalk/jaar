@@ -1,4 +1,4 @@
-from src.f00_instrument.file import save_file, delete_dir, create_file_path
+from src.f00_instrument.file import save_file, delete_dir, create_path
 from src.f01_road.finance_tran import timeconversion_shop
 from src.f04_gift.atom_config import road_str
 from src.f08_pidgin.pidgin import pidginunit_shop
@@ -215,8 +215,8 @@ def test_WorldUnit_save_pidginunit_files_SavesFiles(env_dir_setup_cleanup):
     bob_str = "Bob"
     x_world.add_pidginunit(sue_str)
     x_world.add_pidginunit(bob_str)
-    sue_dir = create_file_path(x_world._pidgins_dir, sue_str)
-    bob_dir = create_file_path(x_world._pidgins_dir, bob_str)
+    sue_dir = create_path(x_world._pidgins_dir, sue_str)
+    bob_dir = create_path(x_world._pidgins_dir, bob_str)
     assert os_path_exists(bob_dir) is False
     assert os_path_exists(sue_dir) is False
 
@@ -235,8 +235,8 @@ def test_WorldUnit_pidgins_dir_exist_ReturnsObj(env_dir_setup_cleanup):
     bob_str = "Bob"
     x_world.add_pidginunit(sue_str)
     x_world.add_pidginunit(bob_str)
-    sue_dir = create_file_path(x_world._pidgins_dir, sue_str)
-    bob_dir = create_file_path(x_world._pidgins_dir, bob_str)
+    sue_dir = create_path(x_world._pidgins_dir, sue_str)
+    bob_dir = create_path(x_world._pidgins_dir, bob_str)
     assert os_path_exists(bob_dir) is False
     assert os_path_exists(sue_dir) is False
     assert x_world.pidgin_dir_exists(bob_str) is False
@@ -308,8 +308,8 @@ def test_WorldUnit_delete_pidginunit_dir_SetsAttrDeletesDir(env_dir_setup_cleanu
 #     bob_str = "Bob"
 #     x_world.add_pidginunit(sue_str)
 #     x_world.add_pidginunit(bob_str)
-#     sue_dir = create_file_path(x_world._pidgins_dir, sue_str)
-#     bob_dir = create_file_path(x_world._pidgins_dir, bob_str)
+#     sue_dir = create_path(x_world._pidgins_dir, sue_str)
+#     bob_dir = create_path(x_world._pidgins_dir, bob_str)
 #     assert os_path_exists(sue_dir) is False
 #     assert os_path_exists(bob_dir) is False
 

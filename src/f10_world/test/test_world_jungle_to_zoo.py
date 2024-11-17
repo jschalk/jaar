@@ -1,5 +1,11 @@
-from src.f00_instrument.file import create_file_path, create_dir
-from src.f04_gift.atom_config import face_id_str, fiscal_id_str, jaar_type_str
+from src.f00_instrument.file import create_path, create_dir
+from src.f04_gift.atom_config import (
+    face_id_str,
+    fiscal_id_str,
+    jaar_type_str,
+    acct_id_str,
+    owner_id_str,
+)
 from src.f07_fiscal.fiscal_config import (
     cumlative_minute_str,
     hour_label_str,
@@ -36,8 +42,8 @@ def test_WorldUnit_jungle_to_zoo_CreatesZooFiles(env_dir_setup_cleanup):
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_file_path = create_file_path(fizz_world._jungle_dir, ex_file_name)
-    zoo_file_path = create_file_path(fizz_world._zoo_dir, "br00003.xlsx")
+    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
+    zoo_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -100,8 +106,8 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario0_GroupByWorks(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_file_path = create_file_path(fizz_world._jungle_dir, ex_file_name)
-    zoo_file_path = create_file_path(fizz_world._zoo_dir, "br00003.xlsx")
+    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
+    zoo_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -148,8 +154,8 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflicti
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_file_path = create_file_path(fizz_world._jungle_dir, ex_file_name)
-    zoo_file_path = create_file_path(fizz_world._zoo_dir, "br00003.xlsx")
+    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
+    zoo_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -200,8 +206,8 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_file_path = create_file_path(fizz_world._jungle_dir, ex_file_name)
-    zoo_file_path = create_file_path(fizz_world._zoo_dir, "br00003.xlsx")
+    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
+    zoo_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -256,8 +262,8 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario1(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_file_path = create_file_path(fizz_world._jungle_dir, ex_file_name)
-    zoo_file_path = create_file_path(fizz_world._zoo_dir, "br00003.xlsx")
+    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
+    zoo_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -317,7 +323,7 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_file_path = create_file_path(fizz_world._jungle_dir, ex_file_name)
+    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -338,7 +344,7 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario0(
     fizz_world.zoo_to_otx()
     fizz_world.otx_to_otx_events()
     events_file_name = "events.xlsx"
-    events_file_path = create_file_path(fizz_world._zoo_dir, events_file_name)
+    events_file_path = create_path(fizz_world._zoo_dir, events_file_name)
     assert os_path_exists(events_file_path) is False
 
     # WHEN
@@ -396,7 +402,7 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_file_path = create_file_path(fizz_world._jungle_dir, ex_file_name)
+    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
     brick3_columns = [
         face_id_str(),
         event_id_str(),
@@ -428,7 +434,7 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
     fizz_world.zoo_to_otx()
     fizz_world.otx_to_otx_events()
     events_file_name = "events.xlsx"
-    events_file_path = create_file_path(fizz_world._zoo_dir, events_file_name)
+    events_file_path = create_path(fizz_world._zoo_dir, events_file_name)
     assert os_path_exists(events_file_path) is False
 
     # WHEN
@@ -564,7 +570,7 @@ def test_WorldUnit_events_log_to_events_agg_CreatesSheets_Scenario0(
     # el_rows = [zoo_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
     el_rows = [bob_row, sue_row, yao1_row, yao9_row, s5_0_row, s5_1_row]
     ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
-    events_file_path = create_file_path(zoo_dir, "events.xlsx")
+    events_file_path = create_path(zoo_dir, "events.xlsx")
     events_log_str = "events_log"
     with ExcelWriter(events_file_path) as writer:
         ex_events_log_df.to_excel(writer, sheet_name=events_log_str, index=False)
@@ -613,7 +619,7 @@ def test_WorldUnit_set_events_from_events_agg_SetsAttr_Scenario0(env_dir_setup_c
     events_agg_columns = [face_id_str(), event_id_str(), "note"]
     ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
     events_agg_str = "events_agg"
-    events_file_path = create_file_path(zoo_dir, "events.xlsx")
+    events_file_path = create_path(zoo_dir, "events.xlsx")
     with ExcelWriter(events_file_path) as writer:
         ex_events_agg_df.to_excel(writer, sheet_name=events_agg_str, index=False)
     assert len(fizz_world.events) != 2
@@ -632,7 +638,7 @@ def test_WorldUnit_set_events_from_events_agg_ClearsAttr(env_dir_setup_cleanup):
     events_agg_columns = [face_id_str(), event_id_str(), "note"]
     ex_events_agg_df = DataFrame([], columns=events_agg_columns)
     events_agg_str = "events_agg"
-    events_file_path = create_file_path(fizz_world._zoo_dir, "events.xlsx")
+    events_file_path = create_path(fizz_world._zoo_dir, "events.xlsx")
     with ExcelWriter(events_file_path) as writer:
         ex_events_agg_df.to_excel(writer, sheet_name=events_agg_str, index=False)
     fizz_world.events = {2: "Sue", 44: "Bob"}
@@ -646,36 +652,68 @@ def test_WorldUnit_set_events_from_events_agg_ClearsAttr(env_dir_setup_cleanup):
 
 
 def test_get_pidgen_brick_format_filenames_ReturnsObj():
-    # ESTABLISH /  WHEN
+    # ESTABLISH / WHEN
     pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
 
     # THEN
     print(f"need examples for {pidgen_brick_filenames=}")
-    br00040_xlsx_file = "br00040.xlsx"
-    br00041_xlsx_file = "br00041.xlsx"
-    br00113_xlsx_file = "br00113.xlsx"
-    assert pidgen_brick_filenames == {
-        br00040_xlsx_file,
-        br00041_xlsx_file,
-        br00113_xlsx_file,
-    }
+    assert pidgen_brick_filenames == {"br00040.xlsx", "br00041.xlsx", "br00113.xlsx"}
+
+
+# def test_WorldUnit_otx_to_otxinx_staging_CreatesFile():
+#     # ESTABLISH
+#     fizz_world = worldunit_shop("fizz")
+#     sue_str = "Sue"
+#     yao_str = "Yao"
+#     event1 = 1
+#     event2 = 2
+#     event5 = 5
+#     event7 = 7
+#     hr6am = "6am"
+#     hr7am = "7am"
+#     slash_str = "/"
+#     colon_str = ":"
+#     x_uk = "unknownSue"
+#     roadnode_str = "RoadNode"
+#     groupid_str = "GroupID"
+#     br00040_file_path = create_path(fizz_world._zoo_dir, "br00113.xlsx")
+#     br00040_columns = [
+#         face_id_str(),
+#         event_id_str(),
+#         acct_id_str(),
+#         fiscal_id_str(),
+#         inx_word_str(),
+#         jaar_type_str(),
+#         owner_id_str(),
+#         otx_word_str(),
+#         unknown_word_str(),
+#     ]
+# sue_oi0 = [sue_str, event1, slash_str, hr6am, groupid_str, colon_str, hr6am, x_uk]
+# sue_oi1 = [sue_str, event1, slash_str, hr6am, roadnode_str, colon_str, hr6am, x_uk]
+# sue_oi2 = [sue_str, event2, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
+# sue_oi3 = [sue_str, event5, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
+# yao_1 = [yao_str, event7, slash_str, hr7am, roadnode_str, colon_str, hr7am, x_uk]
+# b40_rows = [sue_oi0, sue_oi1, sue_oi2, sue_oi3, yao_1]
+# br00040_df = DataFrame(b40_rows, columns=br00040_columns)
+# with ExcelWriter(br00040_file_path) as writer:
+#     br00040_df.to_excel(writer, sheet_name="otx", index=False)
+# _dir = create_path(
+#     fizz_world._events_dir,
+# )
+# sue_road_to_inx_path = create_path(sue_face_dir, "road_otx_to_inx_csv")
+# sue_road_explicit_path = create_path(sue_face_dir, "road_explicit_label.csv")
+# yao_road_to_inx_path = create_path(yao_face_dir, "road_otx_to_inx_csv")
+# yao_road_explicit_path = create_path(yao_face_dir, "road_explicit_label.csv")
+
+# WHEN
+
+# THEN
 
 
 # def test_WorldUnit_otx_to_faces_event_CreatesPidgenSheets_Scenario0(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
-#     print(f"need examples for {pidgen_brick_filenames=}")
-#     br00040_xlsx_file = "br00040.xlsx"
-#     br00041_xlsx_file = "br00041.xlsx"
-#     br00113_xlsx_file = "br00113.xlsx"
-#     assert pidgen_brick_filenames == {
-#         br00040_xlsx_file,
-#         br00041_xlsx_file,
-#         br00113_xlsx_file,
-#     }
-
 #     fizz_world = worldunit_shop("fizz")
 #     sue_str = "Sue"
 #     yao_str = "Yao"
@@ -694,8 +732,8 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
 #     x_uk = "unknownSue"
 #     roadnode_str = "RoadNode"
 #     groupid_str = "GroupID"
-#     br00040_file_path = create_file_path(fizz_world._zoo_dir, br00040_xlsx_file)
-#     br00041_file_path = create_file_path(fizz_world._zoo_dir, br00041_xlsx_file)
+#     br00040_file_path = create_path(fizz_world._zoo_dir, br00040_xlsx_file)
+#     br00041_file_path = create_path(fizz_world._zoo_dir, br00041_xlsx_file)
 #     br00040_columns = [
 #         face_id_str(),
 #         event_id_str(),
@@ -730,12 +768,12 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
 #         br00040_df.to_excel(writer, sheet_name="otx", index=False)
 #     with ExcelWriter(br00041_file_path) as writer:
 #         br00041_df.to_excel(writer, sheet_name="otx", index=False)
-#     sue_face_dir = create_file_path(fizz_world._events_dir, f"/{sue_str}")
-#     yao_face_dir = create_file_path(fizz_world._events_dir, f"/{yao_str}")
-#     sue_road_to_inx_path = create_file_path(sue_face_dir, "road_otx_to_inx_csv")
-#     sue_road_explicit_path = create_file_path(sue_face_dir, "road_explicit_label.csv")
-#     yao_road_to_inx_path = create_file_path(yao_face_dir, "road_otx_to_inx_csv")
-#     yao_road_explicit_path = create_file_path(yao_face_dir, "road_explicit_label.csv")
+#     sue_face_dir = create_path(fizz_world._events_dir, f"/{sue_str}")
+#     yao_face_dir = create_path(fizz_world._events_dir, f"/{yao_str}")
+#     sue_road_to_inx_path = create_path(sue_face_dir, "road_otx_to_inx_csv")
+#     sue_road_explicit_path = create_path(sue_face_dir, "road_explicit_label.csv")
+#     yao_road_to_inx_path = create_path(yao_face_dir, "road_otx_to_inx_csv")
+#     yao_road_explicit_path = create_path(yao_face_dir, "road_explicit_label.csv")
 #     assert os_path_exists(sue_face_dir) is False
 #     assert os_path_exists(yao_face_dir) is False
 #     assert os_path_exists(sue_road_to_inx_path) is False
