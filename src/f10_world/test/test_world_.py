@@ -398,3 +398,46 @@ def test_init_fiscalunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
 
     # THEN
     assert x_fiscalunits == []
+
+
+def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_world = worldunit_shop()
+    assert x_world.events == {}
+
+    # WHEN
+    e5_event_id = 5
+    e5_face_id = "Sue"
+    x_world.set_event(e5_event_id, e5_face_id)
+
+    # THEN
+    assert x_world.events != {}
+    assert x_world.events == {e5_event_id: e5_face_id}
+
+
+def test_WorldUnit_event_exists_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_world = worldunit_shop()
+    e5_event_id = 5
+    e5_face_id = "Sue"
+    assert x_world.event_exists(e5_event_id) is False
+
+    # WHEN
+    x_world.set_event(e5_event_id, e5_face_id)
+
+    # THEN
+    assert x_world.event_exists(e5_event_id)
+
+
+def test_WorldUnit_get_event_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_world = worldunit_shop()
+    e5_event_id = 5
+    e5_face_id = "Sue"
+    assert x_world.get_event(e5_event_id) is None
+
+    # WHEN
+    x_world.set_event(e5_event_id, e5_face_id)
+
+    # THEN
+    assert x_world.get_event(e5_event_id) == e5_face_id

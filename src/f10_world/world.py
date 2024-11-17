@@ -181,6 +181,15 @@ class WorldUnit:
     _jungle_dir: str = None
     _zoo_dir: str = None
 
+    def set_event(self, event_id: TimeLinePoint, face_id: AcctID):
+        self.events[event_id] = face_id
+
+    def event_exists(self, event_id: TimeLinePoint) -> bool:
+        return self.events.get(event_id) != None
+
+    def get_event(self, event_id: TimeLinePoint) -> bool:
+        return self.events.get(event_id)
+
     def set_pidginunit(self, x_pidginunit: PidginUnit):
         self.pidgins[x_pidginunit.face_id] = x_pidginunit
 
@@ -302,7 +311,7 @@ class WorldUnit:
         for index, event_agg_row in events_agg_df.iterrows():
             x_note = event_agg_row["note"]
             if x_note != "invalid because of conflicting event_id":
-                self.events[event_agg_row["event_id"]] = event_agg_row["face_id"]
+                self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
 
     def get_dict(self) -> dict:
         return {
