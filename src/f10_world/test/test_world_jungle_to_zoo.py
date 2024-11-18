@@ -33,7 +33,7 @@ from pandas import DataFrame, ExcelWriter, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_jungle_to_zoo_CreatesZooFiles(env_dir_setup_cleanup):
+def test_WorldUnit_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str)
@@ -80,12 +80,12 @@ def test_WorldUnit_jungle_to_zoo_CreatesZooFiles(env_dir_setup_cleanup):
     assert os_path_exists(zoo_file_path) is False
 
     # WHEN
-    fizz_world.jungle_to_zoo()
+    fizz_world.jungle_to_zoo_staging()
 
     # THEN
     print(f"{zoo_file_path=}")
     assert os_path_exists(zoo_file_path)
-    x_df = pandas_read_excel(zoo_file_path, sheet_name="zoo")
+    x_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_staging")
     assert set(brick_columns).issubset(set(x_df.columns))
     file_dir_str = "file_dir"
     file_name_str = "file_name"
@@ -94,10 +94,10 @@ def test_WorldUnit_jungle_to_zoo_CreatesZooFiles(env_dir_setup_cleanup):
     assert file_name_str in set(x_df.columns)
     assert sheet_name_str in set(x_df.columns)
     assert len(x_df) == 5
-    assert get_sheet_names(zoo_file_path) == ["zoo"]
+    assert get_sheet_names(zoo_file_path) == ["zoo_staging"]
 
 
-def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario0_GroupByWorks(
+def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -126,15 +126,15 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario0_GroupByWorks(
     df1 = DataFrame([row1, row2, row3], columns=brick_columns)
     with ExcelWriter(jungle_file_path) as writer:
         df1.to_excel(writer, sheet_name="example1_br00003")
-    fizz_world.jungle_to_zoo()
-    zoo_df = pandas_read_excel(zoo_file_path, sheet_name="zoo")
-    assert len(zoo_df) == 3
+    fizz_world.jungle_to_zoo_staging()
+    zoo__staging_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_staging")
+    assert len(zoo__staging_df) == 3
 
     # WHEN
-    fizz_world.zoo_to_otx()
+    fizz_world.zoo_staging_to_zoo_agg()
 
     # THEN
-    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name="otx")
+    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_agg")
     ex_otx_df = DataFrame([row1, row2], columns=brick_columns)
     print(f"{gen_otx_df.columns=}")
     assert len(ex_otx_df.columns) == len(gen_otx_df.columns)
@@ -143,10 +143,10 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario0_GroupByWorks(
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 2
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(zoo_file_path) == ["zoo", "otx"]
+    assert get_sheet_names(zoo_file_path) == ["zoo_staging", "zoo_agg"]
 
 
-def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -175,15 +175,15 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflicti
     df1 = DataFrame([row1, row2, row3], columns=brick_columns)
     with ExcelWriter(jungle_file_path) as writer:
         df1.to_excel(writer, sheet_name="example1_br00003")
-    fizz_world.jungle_to_zoo()
-    zoo_df = pandas_read_excel(zoo_file_path, sheet_name="zoo")
+    fizz_world.jungle_to_zoo_staging()
+    zoo_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_staging")
     assert len(zoo_df) == 3
 
     # WHEN
-    fizz_world.zoo_to_otx()
+    fizz_world.zoo_staging_to_zoo_agg()
 
     # THEN
-    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name="otx")
+    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_agg")
     ex_otx_df = DataFrame([row1], columns=brick_columns)
     # print(f"{gen_otx_df.columns=}")
     print(f"{gen_otx_df=}")
@@ -193,7 +193,7 @@ def test_WorldUnit_zoo_to_otx_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflicti
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 1
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(zoo_file_path) == ["zoo", "otx"]
+    assert get_sheet_names(zoo_file_path) == ["zoo_staging", "zoo_agg"]
 
 
 def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0(
@@ -229,14 +229,14 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0(
     df1 = DataFrame([row1, row2, row3, row4], columns=brick_columns)
     with ExcelWriter(jungle_file_path) as writer:
         df1.to_excel(writer, sheet_name="example1_br00003")
-    fizz_world.jungle_to_zoo()
-    fizz_world.zoo_to_otx()
+    fizz_world.jungle_to_zoo_staging()
+    fizz_world.zoo_staging_to_zoo_agg()
 
     # WHEN
     fizz_world.otx_to_otx_events()
 
     # THEN
-    gen_otx_events_df = pandas_read_excel(zoo_file_path, sheet_name="otx_events")
+    gen_otx_events_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_events")
     print(f"{gen_otx_events_df.columns=}")
     events_otx_columns = [face_id_str(), event_id_str(), "note"]
     sue_r = [sue_str, event1, ""]
@@ -249,7 +249,7 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0(
     assert len(gen_otx_events_df) == 3
     assert len(gen_otx_events_df) == len(ex_otx_events_df)
     assert gen_otx_events_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
-    assert get_sheet_names(zoo_file_path) == ["zoo", "otx", "otx_events"]
+    assert get_sheet_names(zoo_file_path) == ["zoo_staging", "zoo_agg", "zoo_events"]
 
 
 def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario1(
@@ -287,14 +287,14 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario1(
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
     with ExcelWriter(jungle_file_path) as writer:
         df1.to_excel(writer, sheet_name="example1_br00003")
-    fizz_world.jungle_to_zoo()
-    fizz_world.zoo_to_otx()
+    fizz_world.jungle_to_zoo_staging()
+    fizz_world.zoo_staging_to_zoo_agg()
 
     # WHEN
     fizz_world.otx_to_otx_events()
 
     # THEN
-    gen_otx_events_df = pandas_read_excel(zoo_file_path, sheet_name="otx_events")
+    gen_otx_events_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_events")
     print(f"{gen_otx_events_df.columns=}")
     events_otx_columns = [face_id_str(), event_id_str(), "note"]
     bob_row = [bob_str, event3, ""]
@@ -347,8 +347,8 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario0(
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
     with ExcelWriter(jungle_file_path) as writer:
         df1.to_excel(writer, sheet_name="example1_br00003")
-    fizz_world.jungle_to_zoo()
-    fizz_world.zoo_to_otx()
+    fizz_world.jungle_to_zoo_staging()
+    fizz_world.zoo_staging_to_zoo_agg()
     fizz_world.otx_to_otx_events()
     events_file_name = "events.xlsx"
     events_file_path = create_path(fizz_world._zoo_dir, events_file_name)
@@ -374,7 +374,7 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario0(
     invalid_error_str = "invalid because of conflicting event_id"
     zoo_dir = fizz_world._zoo_dir
     src_file_name = "br00003.xlsx"
-    oe_str = "otx_events"
+    oe_str = "zoo_events"
     bob_row = [zoo_dir, src_file_name, oe_str, bob_str, event3, ""]
     sue_row = [zoo_dir, src_file_name, oe_str, sue_str, event1, invalid_error_str]
     yao1_row = [zoo_dir, src_file_name, oe_str, yao_str, event1, invalid_error_str]
@@ -438,8 +438,8 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
     with ExcelWriter(jungle_file_path) as writer:
         b3_df.to_excel(writer, sheet_name="example1_br00003")
         b5_df.to_excel(writer, sheet_name="example2_br00005")
-    fizz_world.jungle_to_zoo()
-    fizz_world.zoo_to_otx()
+    fizz_world.jungle_to_zoo_staging()
+    fizz_world.zoo_staging_to_zoo_agg()
     fizz_world.otx_to_otx_events()
     events_file_name = "events.xlsx"
     events_file_path = create_path(fizz_world._zoo_dir, events_file_name)
@@ -466,7 +466,7 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
     zoo_dir = fizz_world._zoo_dir
     src3_file_name = "br00003.xlsx"
     src5_file_name = "br00005.xlsx"
-    oe_str = "otx_events"
+    oe_str = "zoo_events"
     bob_row = [zoo_dir, src3_file_name, oe_str, bob_str, event3, ""]
     sue_row = [zoo_dir, src3_file_name, oe_str, sue_str, event1, invalid_error_str]
     yao1_row = [zoo_dir, src3_file_name, oe_str, yao_str, event1, invalid_error_str]
@@ -512,7 +512,7 @@ def test_WorldUnit_create_events_agg_df_ReturnsObj(
     zoo_dir = fizz_world._zoo_dir
     src3_file_name = "br00003.xlsx"
     src5_file_name = "br00005.xlsx"
-    oe_str = "otx_events"
+    oe_str = "zoo_events"
     bob_row = [zoo_dir, src3_file_name, oe_str, bob_str, event3, ""]
     sue_row = [zoo_dir, src3_file_name, oe_str, sue_str, event1, invalid_error_str]
     yao1_row = [zoo_dir, src3_file_name, oe_str, yao_str, event1, invalid_error_str]
@@ -569,7 +569,7 @@ def test_WorldUnit_events_log_to_events_agg_CreatesSheets_Scenario0(
     zoo_dir = fizz_world._zoo_dir
     src3_file_name = "br00003.xlsx"
     src5_file_name = "br00005.xlsx"
-    oe_str = "otx_events"
+    oe_str = "zoo_events"
     bob_row = [zoo_dir, src3_file_name, oe_str, bob_str, event3, ""]
     sue_row = [zoo_dir, src3_file_name, oe_str, sue_str, event1, invalid_error_str]
     yao1_row = [zoo_dir, src3_file_name, oe_str, yao_str, event1, invalid_error_str]
@@ -699,7 +699,7 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario0_SingleBrick(
     b113_rows = [sue0, sue1]
     br00113_df = DataFrame(b113_rows, columns=br00113_columns)
     with ExcelWriter(br00113_file_path) as writer:
-        br00113_df.to_excel(writer, sheet_name="otx", index=False)
+        br00113_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     fizz_world.otx_to_otx_events()
     fizz_world.otx_events_to_events_log()
@@ -787,11 +787,11 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario1_MultipleBricksFil
     b113_rows = [sue0, sue1]
     br00113_df = DataFrame(b113_rows, columns=br00113_columns)
     with ExcelWriter(br00113_file_path) as writer:
-        br00113_df.to_excel(writer, sheet_name="otx", index=False)
+        br00113_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     b40_rows = [sue2, sue3, yao1]
     br00040_df = DataFrame(b40_rows, columns=br00040_columns)
     with ExcelWriter(br00040_file_path) as writer:
-        br00040_df.to_excel(writer, sheet_name="otx", index=False)
+        br00040_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     fizz_world.otx_to_otx_events()
     fizz_world.otx_events_to_events_log()
@@ -883,11 +883,11 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_events_
     b113_rows = [sue0, sue1]
     br00113_df = DataFrame(b113_rows, columns=br00113_columns)
     with ExcelWriter(br00113_file_path) as writer:
-        br00113_df.to_excel(writer, sheet_name="otx", index=False)
+        br00113_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     b40_rows = [sue2, sue3, yao1]
     br00040_df = DataFrame(b40_rows, columns=br00040_columns)
     with ExcelWriter(br00040_file_path) as writer:
-        br00040_df.to_excel(writer, sheet_name="otx", index=False)
+        br00040_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     assert fizz_world.events == {}
     fizz_world.otx_to_otx_events()
@@ -963,7 +963,7 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_events_
 #     b113_rows = [sue0, sue1]
 #     br00113_df = DataFrame(b113_rows, columns=br00113_columns)
 #     with ExcelWriter(br00113_file_path) as writer:
-#         br00113_df.to_excel(writer, sheet_name="otx", index=False)
+#         br00113_df.to_excel(writer, sheet_name="zoo_agg", index=False)
 #     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
 #     assert fizz_world.events == {}
 #     fizz_world.otx_to_otx_events()
@@ -1058,9 +1058,9 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_events_
 #     br00040_df = DataFrame(b40_rows, columns=br00040_columns)
 #     br00041_df = DataFrame([yao_el, sue_el], columns=br00041_columns)
 #     with ExcelWriter(br00040_file_path) as writer:
-#         br00040_df.to_excel(writer, sheet_name="otx", index=False)
+#         br00040_df.to_excel(writer, sheet_name="zoo_agg", index=False)
 #     with ExcelWriter(br00041_file_path) as writer:
-#         br00041_df.to_excel(writer, sheet_name="otx", index=False)
+#         br00041_df.to_excel(writer, sheet_name="zoo_agg", index=False)
 #     sue_face_dir = create_path(fizz_world._events_dir, f"/{sue_str}")
 #     yao_face_dir = create_path(fizz_world._events_dir, f"/{yao_str}")
 #     sue_road_to_inx_path = create_path(sue_face_dir, "road_otx2inx_csv")

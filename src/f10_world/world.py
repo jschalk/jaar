@@ -27,7 +27,7 @@ from src.f09_brick.brick_config import (
 )
 from src.f09_brick.brick import get_brickref_obj
 from src.f09_brick.pandas_tool import (
-    get_grouping_with_all_values_equal_df,
+    get_zoo_staging_grouping_with_all_values_equal_df,
     get_new_sorting_columns,
     get_brick_elements_sort_order,
 )
@@ -57,7 +57,7 @@ class JungleToZooTransformer:
 
     def transform(self):
         for brick_number, dfs in self._group_jungle_data().items():
-            self._save_consolidated_brick(brick_number, dfs)
+            self._save_to_zoo_staging(brick_number, dfs)
 
     def _group_jungle_data(self):
         grouped_data = {}
@@ -74,14 +74,14 @@ class JungleToZooTransformer:
         df["sheet_name"] = ref.sheet_name
         return df
 
-    def _save_consolidated_brick(self, brick_number: str, dfs: list):
+    def _save_to_zoo_staging(self, brick_number: str, dfs: list):
         final_df = pandas_concat(dfs)
         zoo_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
         with ExcelWriter(zoo_path) as writer:
-            final_df.to_excel(writer, sheet_name="zoo", index=False)
+            final_df.to_excel(writer, sheet_name="zoo_staging", index=False)
 
 
-class ZooToOtxTransformer:
+class ZooStagingToZooAggTransformer:
     def __init__(self, zoo_dir: str):
         self.zoo_dir = zoo_dir
 
@@ -89,27 +89,29 @@ class ZooToOtxTransformer:
         for brick_number in get_brick_numbers():
             zoo_brick_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
             if os_path_exists(zoo_brick_path):
-                zoo_df = pandas_read_excel(zoo_brick_path, "zoo")
-                otx_df = self._group_by_brick_columns(zoo_df, brick_number)
-                self._save_otx_brick(zoo_brick_path, otx_df)
+                zoo_staging_df = pandas_read_excel(zoo_brick_path, "zoo_staging")
+                otx_df = self._group_by_brick_columns(zoo_staging_df, brick_number)
+                self._save_zoo_agg(zoo_brick_path, otx_df)
 
     def _group_by_brick_columns(
-        self, zoo_df: DataFrame, brick_number: str
+        self, zoo_staging_df: DataFrame, brick_number: str
     ) -> DataFrame:
         brick_filename = get_brick_format_filename(brick_number)
         brickref = get_brickref_obj(brick_filename)
         required_columns = brickref.get_otx_keys_list()
         brick_columns_set = set(brickref._attributes.keys())
         brick_columns_list = get_new_sorting_columns(brick_columns_set)
-        zoo_df = zoo_df[brick_columns_list]
-        return get_grouping_with_all_values_equal_df(zoo_df, required_columns)
+        zoo_staging_df = zoo_staging_df[brick_columns_list]
+        return get_zoo_staging_grouping_with_all_values_equal_df(
+            zoo_staging_df, required_columns
+        )
 
-    def _save_otx_brick(self, brick_path: str, zoo_df: DataFrame):
+    def _save_zoo_agg(self, brick_path: str, zoo_staging_df: DataFrame):
         with ExcelWriter(brick_path, mode="a") as writer:
-            zoo_df.to_excel(writer, sheet_name="otx", index=False)
+            zoo_staging_df.to_excel(writer, sheet_name="zoo_agg", index=False)
 
 
-class OtxToOtxEventsTransformer:
+class ZooAggToZooEventsTransformer:
     def __init__(self, zoo_dir: str):
         self.zoo_dir = zoo_dir
 
@@ -117,12 +119,12 @@ class OtxToOtxEventsTransformer:
         for brick_number in get_brick_numbers():
             zoo_brick_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
             if os_path_exists(zoo_brick_path):
-                otx_df = pandas_read_excel(zoo_brick_path, "otx")
-                events_df = self.get_unique_events(otx_df)
-                self._save_otx_brick(zoo_brick_path, events_df)
+                zoo_agg_df = pandas_read_excel(zoo_brick_path, "zoo_agg")
+                events_df = self.get_unique_events(zoo_agg_df)
+                self._save_zoo_events(zoo_brick_path, events_df)
 
-    def get_unique_events(self, otx_df: DataFrame) -> DataFrame:
-        events_df = otx_df[["face_id", "event_id"]].drop_duplicates()
+    def get_unique_events(self, zoo_agg_df: DataFrame) -> DataFrame:
+        events_df = zoo_agg_df[["face_id", "event_id"]].drop_duplicates()
         events_df["note"] = (
             events_df["event_id"]
             .duplicated(keep=False)
@@ -130,12 +132,12 @@ class OtxToOtxEventsTransformer:
         )
         return events_df.sort_values(["face_id", "event_id"])
 
-    def _save_otx_brick(self, brick_path: str, events_df: DataFrame):
+    def _save_zoo_events(self, brick_path: str, events_df: DataFrame):
         with ExcelWriter(brick_path, mode="a") as writer:
-            events_df.to_excel(writer, sheet_name="otx_events", index=False)
+            events_df.to_excel(writer, sheet_name="zoo_events", index=False)
 
 
-class OtxEventsToEventsLogTransformer:
+class ZooEventsToEventsLogTransformer:
     def __init__(self, zoo_dir: str):
         self.zoo_dir = zoo_dir
 
@@ -144,7 +146,7 @@ class OtxEventsToEventsLogTransformer:
             brick_file_name = f"{brick_number}.xlsx"
             zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
-                sheet_name = "otx_events"
+                sheet_name = "zoo_events"
                 otx_events_df = pandas_read_excel(zoo_brick_path, sheet_name)
                 events_log_df = self.get_event_log_df(
                     otx_events_df, self.zoo_dir, brick_file_name
@@ -156,7 +158,7 @@ class OtxEventsToEventsLogTransformer:
     ) -> DataFrame:
         otx_events_df[["file_dir"]] = x_dir
         otx_events_df[["file_name"]] = x_file_name
-        otx_events_df[["sheet_name"]] = "otx_events"
+        otx_events_df[["sheet_name"]] = "zoo_events"
         cols = ["file_dir", "file_name", "sheet_name", "face_id", "event_id", "note"]
         otx_events_df = otx_events_df[cols]
         return otx_events_df
@@ -171,7 +173,7 @@ class OtxEventsToEventsLogTransformer:
             events_df.to_excel(writer, sheet_name=events_log_str, index=False)
 
 
-class OtxToOtx2InxPiginTransformer:
+class ZooAggToOtx2InxStagingTransformer:
     def __init__(self, zoo_dir: str, legitmate_events: set[TimeLinePoint]):
         self.zoo_dir = zoo_dir
         self.legitmate_events = legitmate_events
@@ -187,24 +189,24 @@ class OtxToOtx2InxPiginTransformer:
             brick_file_name = f"{brick_number}.xlsx"
             zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
-                self.insert_legitmate_brick_otx2inx(
-                    brick_number, zoo_brick_path, otx2inx_columns, otx2inx_df
+                self.insert_legitmate_zoo_agg_otx2inx_atts(
+                    otx2inx_df, brick_number, zoo_brick_path, otx2inx_columns
                 )
 
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
         with ExcelWriter(pidgin_file_path) as writer:
             otx2inx_df.to_excel(writer, sheet_name="otx2inx_staging", index=False)
 
-    def insert_legitmate_brick_otx2inx(
+    def insert_legitmate_zoo_agg_otx2inx_atts(
         self,
+        otx2inx_df: DataFrame,
         brick_number: str,
         zoo_brick_path: str,
         otx2inx_columns: list[str],
-        otx2inx_df: DataFrame,
     ):
-        otx_df = pandas_read_excel(zoo_brick_path, sheet_name="otx")
-        otx2inx_missing_cols = set(otx2inx_columns).difference(otx_df.columns)
-        for index, x_row in otx_df.iterrows():
+        zoo_agg_df = pandas_read_excel(zoo_brick_path, sheet_name="zoo_agg")
+        otx2inx_missing_cols = set(otx2inx_columns).difference(zoo_agg_df.columns)
+        for index, x_row in zoo_agg_df.iterrows():
             event_id = x_row["event_id"]
             if event_id in self.legitmate_events:
                 face_id = x_row["face_id"]
@@ -337,20 +339,20 @@ class WorldUnit:
         x_pidginunit = init_pidginunit_from_dir(self._pidgin_dir(face_id))
         self.set_pidginunit(x_pidginunit)
 
-    def jungle_to_zoo(self):
+    def jungle_to_zoo_staging(self):
         transformer = JungleToZooTransformer(self._jungle_dir, self._zoo_dir)
         transformer.transform()
 
-    def zoo_to_otx(self):
-        transformer = ZooToOtxTransformer(self._zoo_dir)
+    def zoo_staging_to_zoo_agg(self):
+        transformer = ZooStagingToZooAggTransformer(self._zoo_dir)
         transformer.transform()
 
     def otx_to_otx_events(self):
-        transformer = OtxToOtxEventsTransformer(self._zoo_dir)
+        transformer = ZooAggToZooEventsTransformer(self._zoo_dir)
         transformer.transform()
 
     def otx_events_to_events_log(self):
-        transformer = OtxEventsToEventsLogTransformer(self._zoo_dir)
+        transformer = ZooEventsToEventsLogTransformer(self._zoo_dir)
         transformer.transform()
 
     def events_log_to_events_agg(self):
@@ -371,7 +373,7 @@ class WorldUnit:
 
     def otx_to_otxinx_staging(self):
         legitmate_events = set(self.events.keys())
-        transformer = OtxToOtx2InxPiginTransformer(self._zoo_dir, legitmate_events)
+        transformer = ZooAggToOtx2InxStagingTransformer(self._zoo_dir, legitmate_events)
         transformer.transform()
 
     def get_dict(self) -> dict:
