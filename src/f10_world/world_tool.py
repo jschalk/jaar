@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f09_brick.brick_config import get_brick_numbers, get_quick_bricks_column_ref
 from src.f09_brick.pandas_tool import get_all_excel_sheet_names
-from pandas import read_excel as pandas_read_excel
+from pandas import read_excel as pandas_read_excel, DataFrame, Series as PandaSeries
 from dataclasses import dataclass
 
 
@@ -70,3 +70,30 @@ def get_all_brick_dataframes(dir: str) -> list[BrickFileRef]:
 
 # # 6. Close the session
 # session.close()
+
+
+def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
+    events_agg_df = events_log_df[["face_id", "event_id"]].drop_duplicates()
+    events_agg_df["note"] = (
+        events_agg_df["event_id"]
+        .duplicated(keep=False)
+        .apply(lambda x: "invalid because of conflicting event_id" if x else "")
+    )
+    return events_agg_df.sort_values(["event_id", "face_id"])
+
+
+def get_pidgin_core_report_df(pidgin_dataframe: DataFrame) -> DataFrame:
+    pidgin_core_columns = [
+        "face_id",
+        "otx_road_delimiter",
+        "inx_road_delimiter",
+        "unknown_word",
+    ]
+    pidgin_core_df = DataFrame([], columns=pidgin_core_columns)
+    core_attrs = ["otx_road_delimiter", "inx_road_delimiter", "unknown_word"]
+    pidgin_agg_df = pidgin_dataframe.groupby("face_id").apply(
+        lambda x: {col: x[col].unique().tolist() for col in core_attrs}
+    )
+    pidgin_core_df = pidgin_agg_df.apply(PandaSeries)
+    pidgin_core_df = pidgin_core_df.reset_index()
+    return pidgin_core_df

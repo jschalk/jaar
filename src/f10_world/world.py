@@ -29,13 +29,12 @@ from src.f09_brick.brick import get_brickref_obj
 from src.f09_brick.pandas_tool import (
     get_zoo_staging_grouping_with_all_values_equal_df,
     get_new_sorting_columns,
-    get_brick_elements_sort_order,
 )
 from src.f09_brick.pidgin_toolbox import (
     save_all_csvs_from_pidginunit,
     init_pidginunit_from_dir,
 )
-from src.f10_world.world_tool import get_all_brick_dataframes
+from src.f10_world.world_tool import get_all_brick_dataframes, _create_events_agg_df
 from pandas import (
     ExcelWriter,
     read_excel as pandas_read_excel,
@@ -485,13 +484,3 @@ def worldunit_shop(
 
 def init_fiscalunits_from_dirs(x_dirs: list[str]) -> list[FiscalUnit]:
     return []
-
-
-def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
-    events_agg_df = events_log_df[["face_id", "event_id"]].drop_duplicates()
-    events_agg_df["note"] = (
-        events_agg_df["event_id"]
-        .duplicated(keep=False)
-        .apply(lambda x: "invalid because of conflicting event_id" if x else "")
-    )
-    return events_agg_df.sort_values(["event_id", "face_id"])

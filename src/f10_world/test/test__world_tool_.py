@@ -6,6 +6,7 @@ from src.f10_world.world_tool import (
     get_all_excel_bricksheets,
     get_all_brick_dataframes,
     BrickFileRef,
+    _create_events_agg_df,
 )
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, ExcelWriter
@@ -173,3 +174,58 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
 
     assert x_bricksheets == [ex1_brickfileref]
     assert len(x_bricksheets) == 1
+
+
+def test_WorldUnit_create_events_agg_df_ReturnsObj(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    zoo_dir = "fizzyz"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    bob_str = "Bob"
+    event1 = 1
+    event3 = 3
+    event9 = 9
+    events_otx_columns = [
+        "file_dir",
+        "file_name",
+        "sheet_name",
+        face_id_str(),
+        event_id_str(),
+        "note",
+    ]
+    invalid_error_str = "invalid because of conflicting event_id"
+    invalid_error_str = "invalid because of conflicting event_id"
+    src3_file_name = "br00003.xlsx"
+    src5_file_name = "br00005.xlsx"
+    oe_str = "zoo_events"
+    bob_row = [zoo_dir, src3_file_name, oe_str, bob_str, event3, ""]
+    sue_row = [zoo_dir, src3_file_name, oe_str, sue_str, event1, invalid_error_str]
+    yao1_row = [zoo_dir, src3_file_name, oe_str, yao_str, event1, invalid_error_str]
+    yao9_row = [zoo_dir, src3_file_name, oe_str, yao_str, event9, ""]
+    s5_0_row = [zoo_dir, src5_file_name, oe_str, bob_str, event3, ""]
+    s5_1_row = [zoo_dir, src5_file_name, oe_str, yao_str, event9, ""]
+    # el_rows = [zoo_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
+    el_rows = [bob_row, sue_row, yao1_row, yao9_row, s5_0_row, s5_1_row]
+    ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
+
+    # WHEN
+    gen_events_agg_df = _create_events_agg_df(ex_events_log_df)
+
+    # THEN
+    e3_row = [bob_str, event3, ""]
+    e1_sue_row = [sue_str, event1, invalid_error_str]
+    e1_yao_row = [yao_str, event1, invalid_error_str]
+    e9_row = [yao_str, event9, ""]
+    el_rows = [e1_sue_row, e1_yao_row, e3_row, e9_row]
+    events_agg_columns = [face_id_str(), event_id_str(), "note"]
+    ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
+    assert len(gen_events_agg_df.columns) == len(ex_events_agg_df.columns)
+    assert list(gen_events_agg_df.columns) == list(ex_events_agg_df.columns)
+    assert len(gen_events_agg_df) > 0
+    assert len(gen_events_agg_df) == 4
+    assert len(gen_events_agg_df) == len(ex_events_agg_df)
+    print(f"{gen_events_agg_df.to_csv(index=False)=}")
+    print(f" {ex_events_agg_df.to_csv(index=False)=}")
+    assert gen_events_agg_df.to_csv(index=False) == ex_events_agg_df.to_csv(index=False)
