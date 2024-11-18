@@ -180,6 +180,7 @@ class OtxToOtx2InxPiginTransformer:
         otx2inx_columns = get_quick_pidgens_column_ref().get("bridge_otx2inx")
         otx2inx_columns.update({"face_id", "event_id"})
         otx2inx_columns = get_new_sorting_columns(otx2inx_columns)
+        otx2inx_columns.insert(0, "src_brick")
         otx2inx_df = DataFrame(columns=otx2inx_columns)
         for brick_number in sorted(otx2inx_bricks):
             brick_file_name = f"{brick_number}.xlsx"
@@ -207,14 +208,15 @@ class OtxToOtx2InxPiginTransformer:
                         unknown_word = x_row["unknown_word"]
                     df_len = len(otx2inx_df.index)
                     otx2inx_df.loc[df_len] = [
+                        brick_number,
                         face_id,
                         event_id,
                         jaar_type,
+                        otx_word,
+                        inx_word,
                         otx_road_delimiter,
                         inx_road_delimiter,
                         unknown_word,
-                        otx_word,
-                        inx_word,
                     ]
 
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")

@@ -721,19 +721,21 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile(env_dir_setup_cleanup):
     otxinx_staging_str = "otx2inx_staging"
     gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=otxinx_staging_str)
     otx2inx_file_columns = [
-        "face_id",
-        "event_id",
-        "jaar_type",
-        "otx_road_delimiter",
-        "inx_road_delimiter",
-        "unknown_word",
-        "otx_word",
-        "inx_word",
+        "src_brick",
+        face_id_str(),
+        event_id_str(),
+        jaar_type_str(),
+        otx_word_str(),
+        inx_word_str(),
+        otx_road_delimiter_str(),
+        inx_road_delimiter_str(),
+        unknown_word_str(),
     ]
-    assert set(gen_otx2inx_df.columns) == set(otx2inx_file_columns)
+    assert list(gen_otx2inx_df.columns) == otx2inx_file_columns
     assert len(gen_otx2inx_df) == 2
-    e1_otx2inx0 = [sue_str, event1, acctid_str, None, None, None, yao_str, yao_inx]
-    e1_otx2inx1 = [sue_str, event1, acctid_str, None, None, None, bob_str, bob_inx]
+    bx = "br00113"
+    e1_otx2inx0 = [bx, sue_str, event1, acctid_str, yao_str, yao_inx, None, None, None]
+    e1_otx2inx1 = [bx, sue_str, event1, acctid_str, bob_str, bob_inx, None, None, None]
     e1_otx2inx_rows = [e1_otx2inx0, e1_otx2inx1]
     e1_otx2inx_df = DataFrame(e1_otx2inx_rows, columns=otx2inx_file_columns)
     assert len(gen_otx2inx_df) == len(e1_otx2inx_df)
