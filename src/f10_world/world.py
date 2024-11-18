@@ -238,6 +238,73 @@ class ZooAggToOtx2InxStagingTransformer:
                 ]
 
 
+class ZooAggToNubStagingTransformer:
+    def __init__(self, zoo_dir: str, legitmate_events: set[TimeLinePoint]):
+        self.zoo_dir = zoo_dir
+        self.legitmate_events = legitmate_events
+
+    def transform(self):
+        nub_bricks = get_brick_category_ref().get("bridge_nub_label")
+        nub_columns = get_quick_pidgens_column_ref().get("bridge_nub_label")
+        nub_columns.update({"face_id", "event_id"})
+        nub_columns = get_new_sorting_columns(nub_columns)
+        nub_columns.insert(0, "src_brick")
+        nub_df = DataFrame(columns=nub_columns)
+        for brick_number in sorted(nub_bricks):
+            brick_file_name = f"{brick_number}.xlsx"
+            print(f"{brick_file_name=}")
+            zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
+            if os_path_exists(zoo_brick_path):
+                print(f"{brick_file_name=}")
+                self.insert_legitmate_zoo_agg_nub_atts(
+                    nub_df, brick_number, zoo_brick_path, nub_columns
+                )
+
+        pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
+        with ExcelWriter(pidgin_file_path) as writer:
+            nub_df.to_excel(writer, sheet_name="nub_staging", index=False)
+
+    def insert_legitmate_zoo_agg_nub_atts(
+        self,
+        nub_df: DataFrame,
+        brick_number: str,
+        zoo_brick_path: str,
+        nub_columns: list[str],
+    ):
+        zoo_agg_df = pandas_read_excel(zoo_brick_path, sheet_name="zoo_agg")
+        nub_missing_cols = set(nub_columns).difference(zoo_agg_df.columns)
+        for index, x_row in zoo_agg_df.iterrows():
+            event_id = x_row["event_id"]
+            if event_id in self.legitmate_events:
+                face_id = x_row["face_id"]
+                jaar_type = x_row["jaar_type"]
+                otx_label = x_row["otx_label"]
+                df_len = len(nub_df.index)
+                otx_road_delimiter = None
+                if "otx_road_delimiter" not in nub_missing_cols:
+                    otx_road_delimiter = x_row["otx_road_delimiter"]
+                inx_label = None
+                if "inx_label" not in nub_missing_cols:
+                    inx_label = x_row["inx_label"]
+                inx_road_delimiter = None
+                if "inx_road_delimiter" not in nub_missing_cols:
+                    inx_road_delimiter = x_row["inx_road_delimiter"]
+                unknown_word = None
+                if "unknown_word" not in nub_missing_cols:
+                    unknown_word = x_row["unknown_word"]
+                nub_df.loc[df_len] = [
+                    brick_number,
+                    face_id,
+                    event_id,
+                    jaar_type,
+                    otx_label,
+                    inx_label,
+                    otx_road_delimiter,
+                    inx_road_delimiter,
+                    unknown_word,
+                ]
+
+
 @dataclass
 class WorldUnit:
     world_id: WorldID = None
@@ -374,6 +441,11 @@ class WorldUnit:
     def zoo_agg_to_otx2inx_staging(self):
         legitmate_events = set(self.events.keys())
         transformer = ZooAggToOtx2InxStagingTransformer(self._zoo_dir, legitmate_events)
+        transformer.transform()
+
+    def zoo_agg_to_nub_staging(self):
+        legitmate_events = set(self.events.keys())
+        transformer = ZooAggToNubStagingTransformer(self._zoo_dir, legitmate_events)
         transformer.transform()
 
     def get_dict(self) -> dict:
