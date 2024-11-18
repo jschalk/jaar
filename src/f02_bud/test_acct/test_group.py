@@ -79,7 +79,7 @@ def test_groupunit_shop_ReturnsCorrectObj_wall():
 #         groupunit_shop(bob_str, _acct_mirror=True, _wall=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{bob_str}' needs to be a RoadNode. Cannot contain delimiter: '{slash_str}'"
+#         == f"'{bob_str}' needs to be a RoadNode. Cannot contain wall: '{slash_str}'"
 #     )
 
 

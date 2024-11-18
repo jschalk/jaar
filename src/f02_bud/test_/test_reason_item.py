@@ -32,21 +32,21 @@ def test_ReasonCore_attributesExist():
     assert wkday_reason.base == wkday_road
     assert wkday_reason.premises == premises
     assert wkday_reason.base_item_active_requisite is False
-    assert wkday_reason.delimiter is None
+    assert wkday_reason.wall is None
 
 
-def test_reasoncore_shop_ReturnsCorrectAttrWith_delimiter():
+def test_reasoncore_shop_ReturnsCorrectAttrWith_wall():
     # ESTABLISH
     slash_str = "/"
     casa_str = "casa"
-    casa_road = create_road(root_label(), casa_str, delimiter=slash_str)
+    casa_road = create_road(root_label(), casa_str, wall=slash_str)
     print(f"{casa_road=} ")
 
     # WHEN
-    casa_reason = reasonheir_shop(casa_road, delimiter=slash_str)
+    casa_reason = reasonheir_shop(casa_road, wall=slash_str)
 
     # THEN
-    assert casa_reason.delimiter == slash_str
+    assert casa_reason.wall == slash_str
 
 
 def test_reasonheir_shop_ReturnsCorrectObj():
@@ -59,7 +59,7 @@ def test_reasonheir_shop_ReturnsCorrectObj():
 
     # THEN
     assert casa_reason.premises == {}
-    assert casa_reason.delimiter == default_wall_if_none()
+    assert casa_reason.wall == default_wall_if_none()
 
 
 def test_ReasonHeir_clear_CorrectlyClearsField():
@@ -230,7 +230,7 @@ def test_reasonunit_shop_ReturnsCorrectObj():
 
     # THEN
     assert wkday_reasonunit.premises == {}
-    assert wkday_reasonunit.delimiter == default_wall_if_none()
+    assert wkday_reasonunit.wall == default_wall_if_none()
 
 
 def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():
@@ -473,27 +473,27 @@ def test_ReasonCore_find_replace_road_casas():
     assert x_reason.premises.get(new_sunday_road).need == new_sunday_road
 
 
-def test_ReasonCore_set_delimiter_SetsAttrsCorrectly():
+def test_ReasonCore_set_wall_SetsAttrsCorrectly():
     # ESTABLISH
     week_str = "weekday"
     sun_str = "Sunday"
     slash_str = "/"
-    slash_week_road = create_road(root_label(), week_str, delimiter=slash_str)
-    slash_sun_road = create_road(slash_week_road, sun_str, delimiter=slash_str)
-    week_reasonunit = reasoncore_shop(slash_week_road, delimiter=slash_str)
+    slash_week_road = create_road(root_label(), week_str, wall=slash_str)
+    slash_sun_road = create_road(slash_week_road, sun_str, wall=slash_str)
+    week_reasonunit = reasoncore_shop(slash_week_road, wall=slash_str)
     week_reasonunit.set_premise(slash_sun_road)
-    assert week_reasonunit.delimiter == slash_str
+    assert week_reasonunit.wall == slash_str
     assert week_reasonunit.base == slash_week_road
     assert week_reasonunit.premises.get(slash_sun_road).need == slash_sun_road
 
     # WHEN
     star_str = "*"
-    week_reasonunit.set_delimiter(new_delimiter=star_str)
+    week_reasonunit.set_wall(new_wall=star_str)
 
     # THEN
-    assert week_reasonunit.delimiter == star_str
-    star_week_road = create_road(root_label(), week_str, delimiter=star_str)
-    star_sun_road = create_road(star_week_road, sun_str, delimiter=star_str)
+    assert week_reasonunit.wall == star_str
+    star_week_road = create_road(root_label(), week_str, wall=star_str)
+    star_sun_road = create_road(star_week_road, sun_str, wall=star_str)
     assert week_reasonunit.base == star_week_road
     assert week_reasonunit.premises.get(star_sun_road) is not None
     assert week_reasonunit.premises.get(star_sun_road).need == star_sun_road

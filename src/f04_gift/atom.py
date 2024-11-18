@@ -282,7 +282,7 @@ def _modify_bud_itemunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     item_road = create_road(
         x_atom.get_value(parent_road_str()),
         x_atom.get_value(label_str()),
-        delimiter=x_bud._wall,
+        wall=x_bud._wall,
     )
     x_bud.del_item_obj(item_road, del_children=x_atom.get_value("del_children"))
 
@@ -291,7 +291,7 @@ def _modify_bud_itemunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     item_road = create_road(
         x_atom.get_value(parent_road_str()),
         x_atom.get_value(label_str()),
-        delimiter=x_bud._wall,
+        wall=x_bud._wall,
     )
     x_bud.edit_item_attr(
         road=item_road,

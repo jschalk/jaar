@@ -154,7 +154,7 @@ def test_BudUnit_add_item_ReturnsObj():
     assert casa_itemunit.mass == casa_mass
 
 
-def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_delimiter():
+def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_wall():
     # ESTABLISH
     slash_str = "/"
     assert slash_str != default_wall_if_none()

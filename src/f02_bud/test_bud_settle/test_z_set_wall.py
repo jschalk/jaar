@@ -77,7 +77,7 @@ def test_bud_set_fiscal_id_CorrectlySetsAttr():
     assert swim_item._parent_road == new_casa_road
 
 
-def test_bud_set_wall_RaisesErrorIfNew_delimiter_IsAnItem_label():
+def test_bud_set_wall_RaisesErrorIfNew_wall_IsAnItem_label():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     print(f"{zia_bud.max_tree_traverse=}")
@@ -95,7 +95,7 @@ def test_bud_set_wall_RaisesErrorIfNew_delimiter_IsAnItem_label():
         zia_bud.set_wall(slash_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify delimiter to '{slash_str}' because it exists an item label '{casa_road}'"
+        == f"Cannot modify wall to '{slash_str}' because it exists an item label '{casa_road}'"
     )
 
 
@@ -125,8 +125,8 @@ def test_bud_set_wall_CorrectlyModifies_parent_road():
     # THEN
     assert cook_item.get_road() != semicolon_cook_road
     zia_fiscal_id = zia_bud._fiscal_id
-    slash_casa_road = create_road(zia_fiscal_id, casa_str, delimiter=slash_str)
-    slash_cook_road = create_road(slash_casa_road, cook_str, delimiter=slash_str)
+    slash_casa_road = create_road(zia_fiscal_id, casa_str, wall=slash_str)
+    slash_cook_road = create_road(slash_casa_road, cook_str, wall=slash_str)
     assert cook_item.get_road() == slash_cook_road
 
 

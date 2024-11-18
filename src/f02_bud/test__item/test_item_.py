@@ -197,14 +197,14 @@ def test_ItemUnit_get_road_ReturnsCorrectObj():
     # ESTABLISH
     round_str = "round_things"
     slash_str = "/"
-    round_road = create_road(root_label(), round_str, delimiter=slash_str)
+    round_road = create_road(root_label(), round_str, wall=slash_str)
     ball_str = "ball"
 
     # WHEN
     ball_item = itemunit_shop(ball_str, _parent_road=round_road, _wall=slash_str)
 
     # THEN
-    ball_road = create_road(round_road, ball_str, delimiter=slash_str)
+    ball_road = create_road(round_road, ball_str, wall=slash_str)
     assert ball_item.get_road() == ball_road
 
 
@@ -212,13 +212,13 @@ def test_ItemUnit_set_parent_road_SetsAttr():
     # ESTABLISH
     round_str = "round_things"
     slash_str = "/"
-    round_road = create_road(root_label(), round_str, delimiter=slash_str)
+    round_road = create_road(root_label(), round_str, wall=slash_str)
     ball_str = "ball"
     ball_item = itemunit_shop(ball_str, _parent_road=round_road, _wall=slash_str)
     assert ball_item._parent_road == round_road
 
     # WHEN
-    sports_road = create_road(root_label(), "sports", delimiter=slash_str)
+    sports_road = create_road(root_label(), "sports", wall=slash_str)
     ball_item.set_parent_road(parent_road=sports_road)
 
     # THEN

@@ -284,7 +284,7 @@ class PremiseUnit:
     divisor: int = None
     _status: bool = None
     _task: bool = None
-    delimiter: str = None
+    wall: str = None
 
     def get_obj_key(self):
         return self.need
@@ -304,17 +304,15 @@ class PremiseUnit:
     def clear_status(self):
         self._status = None
 
-    def set_delimiter(self, new_delimiter: str):
-        old_delimiter = copy_deepcopy(self.delimiter)
-        self.delimiter = new_delimiter
-        self.need = replace_wall(
-            road=self.need, old_delimiter=old_delimiter, new_delimiter=self.delimiter
-        )
+    def set_wall(self, new_wall: str):
+        old_wall = copy_deepcopy(self.wall)
+        self.wall = new_wall
+        self.need = replace_wall(road=self.need, old_wall=old_wall, new_wall=self.wall)
 
     def is_in_lineage(self, fact_pick: RoadUnit):
         return is_heir_road(
-            src=self.need, heir=fact_pick, delimiter=self.delimiter
-        ) or is_heir_road(src=fact_pick, heir=self.need, delimiter=self.delimiter)
+            src=self.need, heir=fact_pick, wall=self.wall
+        ) or is_heir_road(src=fact_pick, heir=self.need, wall=self.wall)
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
@@ -402,14 +400,14 @@ def premiseunit_shop(
     open: float = None,
     nigh: float = None,
     divisor: float = None,
-    delimiter: str = None,
+    wall: str = None,
 ) -> PremiseUnit:
     return PremiseUnit(
         need=need,
         open=open,
         nigh=nigh,
         divisor=divisor,
-        delimiter=default_wall_if_none(delimiter),
+        wall=default_wall_if_none(wall),
     )
 
 
@@ -444,21 +442,21 @@ class ReasonCore:
     base: RoadUnit
     premises: dict[RoadUnit, PremiseUnit]
     base_item_active_requisite: bool = None
-    delimiter: str = None
+    wall: str = None
 
-    def set_delimiter(self, new_delimiter: str):
-        old_delimiter = copy_deepcopy(self.delimiter)
-        self.delimiter = new_delimiter
-        self.base = replace_wall(self.base, old_delimiter, new_delimiter)
+    def set_wall(self, new_wall: str):
+        old_wall = copy_deepcopy(self.wall)
+        self.wall = new_wall
+        self.base = replace_wall(self.base, old_wall, new_wall)
 
         new_premises = {}
         for premise_road, premise_obj in self.premises.items():
             new_premise_road = replace_wall(
                 road=premise_road,
-                old_delimiter=old_delimiter,
-                new_delimiter=self.delimiter,
+                old_wall=old_wall,
+                new_wall=self.wall,
             )
-            premise_obj.set_delimiter(self.delimiter)
+            premise_obj.set_wall(self.wall)
             new_premises[new_premise_road] = premise_obj
         self.premises = new_premises
 
@@ -480,7 +478,7 @@ class ReasonCore:
             open=open,
             nigh=nigh,
             divisor=divisor,
-            delimiter=self.delimiter,
+            wall=self.wall,
         )
 
     def premise_exists(self, x_need: RoadUnit) -> bool:
@@ -506,13 +504,13 @@ def reasoncore_shop(
     base: RoadUnit,
     premises: dict[RoadUnit, PremiseUnit] = None,
     base_item_active_requisite: bool = None,
-    delimiter: str = None,
+    wall: str = None,
 ):
     return ReasonCore(
         base=base,
         premises=get_empty_dict_if_none(premises),
         base_item_active_requisite=base_item_active_requisite,
-        delimiter=default_wall_if_none(delimiter),
+        wall=default_wall_if_none(wall),
     )
 
 
@@ -535,13 +533,13 @@ def reasonunit_shop(
     base: RoadUnit,
     premises: dict[RoadUnit, PremiseUnit] = None,
     base_item_active_requisite: bool = None,
-    delimiter: str = None,
+    wall: str = None,
 ):
     return ReasonUnit(
         base=base,
         premises=get_empty_dict_if_none(premises),
         base_item_active_requisite=base_item_active_requisite,
-        delimiter=default_wall_if_none(delimiter),
+        wall=default_wall_if_none(wall),
     )
 
 
@@ -624,7 +622,7 @@ def reasonheir_shop(
     _status: bool = None,
     _task: bool = None,
     _base_item_active_value: bool = None,
-    delimiter: str = None,
+    wall: str = None,
 ):
     return ReasonHeir(
         base=base,
@@ -633,7 +631,7 @@ def reasonheir_shop(
         _status=_status,
         _task=_task,
         _base_item_active_value=_base_item_active_value,
-        delimiter=default_wall_if_none(delimiter),
+        wall=default_wall_if_none(wall),
     )
 
 

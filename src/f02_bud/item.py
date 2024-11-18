@@ -372,11 +372,9 @@ class ItemUnit:
 
     def get_road(self) -> RoadUnit:
         if self._parent_road in (None, ""):
-            return road_create_road(self._label, delimiter=self._wall)
+            return road_create_road(self._label, wall=self._wall)
         else:
-            return road_create_road(
-                self._parent_road, self._label, delimiter=self._wall
-            )
+            return road_create_road(self._parent_road, self._label, wall=self._wall)
 
     def clear_descendant_pledge_count(self):
         self._descendant_pledge_count = None
@@ -496,24 +494,24 @@ class ItemUnit:
             self._label = _label
 
     def set_wall(self, new_wall: str):
-        old_delimiter = deepcopy(self._wall)
-        if old_delimiter is None:
-            old_delimiter = default_wall_if_none()
+        old_wall = deepcopy(self._wall)
+        if old_wall is None:
+            old_wall = default_wall_if_none()
         self._wall = default_wall_if_none(new_wall)
-        if old_delimiter != self._wall:
-            self._find_replace_wall(old_delimiter)
+        if old_wall != self._wall:
+            self._find_replace_wall(old_wall)
 
-    def _find_replace_wall(self, old_delimiter):
-        self._parent_road = replace_wall(self._parent_road, old_delimiter, self._wall)
+    def _find_replace_wall(self, old_wall):
+        self._parent_road = replace_wall(self._parent_road, old_wall, self._wall)
 
         new_reasonunits = {}
         for reasonunit_road, reasonunit_obj in self.reasonunits.items():
             new_reasonunit_road = replace_wall(
                 road=reasonunit_road,
-                old_delimiter=old_delimiter,
-                new_delimiter=self._wall,
+                old_wall=old_wall,
+                new_wall=self._wall,
             )
-            reasonunit_obj.set_delimiter(self._wall)
+            reasonunit_obj.set_wall(self._wall)
             new_reasonunits[new_reasonunit_road] = reasonunit_obj
         self.reasonunits = new_reasonunits
 
@@ -521,14 +519,14 @@ class ItemUnit:
         for factunit_road, factunit_obj in self.factunits.items():
             new_base_road = replace_wall(
                 road=factunit_road,
-                old_delimiter=old_delimiter,
-                new_delimiter=self._wall,
+                old_wall=old_wall,
+                new_wall=self._wall,
             )
             factunit_obj.base = new_base_road
             new_pick_road = replace_wall(
                 road=factunit_obj.pick,
-                old_delimiter=old_delimiter,
-                new_delimiter=self._wall,
+                old_wall=old_wall,
+                new_wall=self._wall,
             )
             factunit_obj.set_attr(pick=new_pick_road)
             new_factunits[new_base_road] = factunit_obj
@@ -674,7 +672,7 @@ class ItemUnit:
         try:
             x_reasonunit = self.reasonunits[base]
         except Exception:
-            x_reasonunit = reasonunit_shop(base, delimiter=self._wall)
+            x_reasonunit = reasonunit_shop(base, wall=self._wall)
             self.reasonunits[base] = x_reasonunit
         return x_reasonunit
 
@@ -739,7 +737,7 @@ class ItemUnit:
         return self.awardlinks.get(x_awardee_id) != None
 
     def set_reasonunit(self, reason: ReasonUnit):
-        reason.delimiter = self._wall
+        reason.wall = self._wall
         self.reasonunits[reason.base] = reason
 
     def reasonunit_exists(self, x_base: RoadUnit) -> bool:

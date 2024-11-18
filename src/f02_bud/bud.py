@@ -83,7 +83,7 @@ class InvalidLabelException(Exception):
     pass
 
 
-class NewDelimiterException(Exception):
+class NewWallException(Exception):
     pass
 
 
@@ -193,7 +193,7 @@ class BudUnit:
         x_road = create_road(
             parent_road=parent_road,
             terminus_node=terminus_node,
-            delimiter=self._wall,
+            wall=self._wall,
         )
         return road_validate(x_road, self._wall, self._fiscal_id)
 
@@ -205,8 +205,8 @@ class BudUnit:
         if self._wall != new_wall:
             for x_item_road in self._item_dict.keys():
                 if is_string_in_road(new_wall, x_item_road):
-                    exception_str = f"Cannot modify delimiter to '{new_wall}' because it exists an item label '{x_item_road}'"
-                    raise NewDelimiterException(exception_str)
+                    exception_str = f"Cannot modify wall to '{new_wall}' because it exists an item label '{x_item_road}'"
+                    raise NewWallException(exception_str)
 
             # modify all road attributes in itemunits
             self._wall = default_wall_if_none(new_wall)
@@ -705,7 +705,7 @@ class BudUnit:
 
     def edit_item_label(self, old_road: RoadUnit, new_label: RoadNode):
         if self._wall in new_label:
-            exception_str = f"Cannot modify '{old_road}' because new_label {new_label} contains delimiter {self._wall}"
+            exception_str = f"Cannot modify '{old_road}' because new_label {new_label} contains wall {self._wall}"
             raise InvalidLabelException(exception_str)
         if self.item_exists(old_road) is False:
             raise InvalidBudException(f"Item {old_road=} does not exist")
@@ -977,11 +977,11 @@ class BudUnit:
     def item_exists(self, road: RoadUnit) -> bool:
         if road is None:
             return False
-        root_road_label = get_root_node_from_road(road, delimiter=self._wall)
+        root_road_label = get_root_node_from_road(road, wall=self._wall)
         if root_road_label != self._itemroot._label:
             return False
 
-        nodes = get_all_road_nodes(road, delimiter=self._wall)
+        nodes = get_all_road_nodes(road, wall=self._wall)
         root_road_label = nodes.pop(0)
         if nodes == []:
             return True
@@ -1002,7 +1002,7 @@ class BudUnit:
             raise InvalidBudException("get_item_obj received road=None")
         if self.item_exists(road) is False and not if_missing_create:
             raise InvalidBudException(f"get_item_obj failed. no item at '{road}'")
-        roadnodes = get_all_road_nodes(road, delimiter=self._wall)
+        roadnodes = get_all_road_nodes(road, wall=self._wall)
         if len(roadnodes) == 1:
             return self._itemroot
 

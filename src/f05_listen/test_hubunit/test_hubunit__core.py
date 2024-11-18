@@ -206,7 +206,7 @@ def test_hubunit_shop_RaisesErrorIf_owner_id_Contains_wall():
         hubunit_shop(None, None, owner_id=bob_str, wall=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a RoadNode. Cannot contain delimiter: '{slash_str}'"
+        == f"'{bob_str}' needs to be a RoadNode. Cannot contain wall: '{slash_str}'"
     )
 
 

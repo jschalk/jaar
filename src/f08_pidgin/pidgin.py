@@ -90,9 +90,9 @@ class BridgeUnit:
             if self.jaar_type in {"GroupID"}:
                 if self.inx_wall in otx_word:
                     return None
-                otx_r_delimiter = self.otx_wall
-                inx_r_delimiter = self.inx_wall
-                inx_word = inx_word.replace(otx_r_delimiter, inx_r_delimiter)
+                otx_r_wall = self.otx_wall
+                inx_r_wall = self.inx_wall
+                inx_word = inx_word.replace(otx_r_wall, inx_r_wall)
             if self.jaar_type in {"RoadUnit"}:
                 inx_word = self._get_create_roadunit_inx(otx_word)
             if self.jaar_type in {"RoadNode"}:
@@ -178,7 +178,7 @@ class BridgeUnit:
     def _inx_wall_in_inx_words(self) -> bool:
         return str_in_dict_values(self.inx_wall, self.otx2inx)
 
-    def _is_otx_delimiter_inclusion_correct(self) -> bool:
+    def _is_otx_wall_inclusion_correct(self) -> bool:
         if self.jaar_type in {"AcctID", "RoadNode"}:
             return not self._otx_wall_in_otx_words()
         elif self.jaar_type in {"GroupID"}:
@@ -186,7 +186,7 @@ class BridgeUnit:
         elif self.jaar_type in {"RoadUnit"}:
             return True
 
-    def _is_inx_delimiter_inclusion_correct(self) -> bool:
+    def _is_inx_wall_inclusion_correct(self) -> bool:
         if self.jaar_type in {"AcctID", "RoadNode"}:
             return not self._inx_wall_in_inx_words()
         elif self.jaar_type in {"GroupID"}:
@@ -206,8 +206,8 @@ class BridgeUnit:
 
     def is_valid(self) -> bool:
         return (
-            self._is_otx_delimiter_inclusion_correct()
-            and self._is_inx_delimiter_inclusion_correct()
+            self._is_otx_wall_inclusion_correct()
+            and self._is_inx_wall_inclusion_correct()
             and self.all_otx_parent_roads_exist()
         )
 

@@ -184,11 +184,11 @@ def test_BudUnit_set_wall_CorrectlySetsAttr():
     assert sue_bud._wall == slash_wall
 
     # WHEN
-    at_node_delimiter = "@"
-    sue_bud.set_wall(new_wall=at_node_delimiter)
+    at_node_wall = "@"
+    sue_bud.set_wall(new_wall=at_node_wall)
 
     # THEN
-    assert sue_bud._wall == at_node_delimiter
+    assert sue_bud._wall == at_node_wall
 
 
 def test_BudUnit_make_road_ReturnsCorrectObj():

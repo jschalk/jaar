@@ -440,8 +440,8 @@ def test_budunit_get_from_json_ReturnsCorrectItemRoot():
 
 def test_budunit_get_from_json_ReturnsCorrectObj_wall_Example():
     # ESTABLISH
-    slash_delimiter = "/"
-    before_bob_bud = budunit_shop("Bob", _wall=slash_delimiter)
+    slash_wall = "/"
+    before_bob_bud = budunit_shop("Bob", _wall=slash_wall)
     assert before_bob_bud._wall != default_wall_if_none()
 
     # WHEN
@@ -450,14 +450,14 @@ def test_budunit_get_from_json_ReturnsCorrectObj_wall_Example():
 
     # THEN
     assert after_bob_bud._wall != default_wall_if_none()
-    assert after_bob_bud._wall == slash_delimiter
+    assert after_bob_bud._wall == slash_wall
     assert after_bob_bud._wall == before_bob_bud._wall
 
 
 def test_budunit_get_from_json_ReturnsCorrectObj_wall_AcctExample():
     # ESTABLISH
-    slash_delimiter = "/"
-    before_bob_bud = budunit_shop("Bob", _wall=slash_delimiter)
+    slash_wall = "/"
+    before_bob_bud = budunit_shop("Bob", _wall=slash_wall)
     bob_str = ",Bob"
     before_bob_bud.add_acctunit(bob_str)
     assert before_bob_bud.acct_exists(bob_str)
@@ -468,15 +468,15 @@ def test_budunit_get_from_json_ReturnsCorrectObj_wall_AcctExample():
 
     # THEN
     after_bob_acctunit = after_bob_bud.get_acct(bob_str)
-    assert after_bob_acctunit._wall == slash_delimiter
+    assert after_bob_acctunit._wall == slash_wall
 
 
 def test_budunit_get_from_json_ReturnsCorrectObj_wall_GroupExample():
     # ESTABLISH
-    slash_delimiter = "/"
-    before_bob_bud = budunit_shop("Bob", _wall=slash_delimiter)
+    slash_wall = "/"
+    before_bob_bud = budunit_shop("Bob", _wall=slash_wall)
     yao_str = "Yao"
-    swim_str = f"{slash_delimiter}Swimmers"
+    swim_str = f"{slash_wall}Swimmers"
     before_bob_bud.add_acctunit(yao_str)
     yao_acctunit = before_bob_bud.get_acct(yao_str)
     yao_acctunit.add_membership(swim_str)
@@ -487,7 +487,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_wall_GroupExample():
 
     # THEN
     after_yao_acctunit = after_bob_bud.get_acct(yao_str)
-    assert after_yao_acctunit._wall == slash_delimiter
+    assert after_yao_acctunit._wall == slash_wall
 
 
 def test_budunit_get_from_json_ExportsBudUnit_mass():
