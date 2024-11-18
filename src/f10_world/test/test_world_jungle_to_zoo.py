@@ -670,7 +670,7 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
     assert pidgen_brick_filenames == {"br00040.xlsx", "br00041.xlsx", "br00113.xlsx"}
 
 
-def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario0_SingleBrick(
+def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario0_SingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -708,12 +708,12 @@ def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario0_SingleBrick(
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.zoo_agg_to_otxinx_staging()
+    fizz_world.zoo_agg_to_otx2inx_staging()
 
     # THEN
     assert os_path_exists(pidgin_path)
-    otxinx_staging_str = "otx2inx_staging"
-    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=otxinx_staging_str)
+    otx2inx_staging_str = "otx2inx_staging"
+    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=otx2inx_staging_str)
     otx2inx_file_columns = [
         "src_brick",
         face_id_str(),
@@ -736,10 +736,10 @@ def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario0_SingleBrick(
     print(f"{gen_otx2inx_df.to_csv()=}")
     print(f" {e1_otx2inx_df.to_csv()=}")
     assert gen_otx2inx_df.to_csv(index=False) == e1_otx2inx_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [otxinx_staging_str]
+    assert get_sheet_names(pidgin_path) == [otx2inx_staging_str]
 
 
-def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario1_MultipleBricksFiles(
+def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario1_MultipleBricksFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -800,12 +800,12 @@ def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario1_MultipleBrick
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.zoo_agg_to_otxinx_staging()
+    fizz_world.zoo_agg_to_otx2inx_staging()
 
     # THEN
     assert os_path_exists(pidgin_path)
-    otxinx_staging_str = "otx2inx_staging"
-    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=otxinx_staging_str)
+    otx2inx_staging_str = "otx2inx_staging"
+    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=otx2inx_staging_str)
     otx2inx_file_columns = [
         "src_brick",
         face_id_str(),
@@ -833,10 +833,10 @@ def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario1_MultipleBrick
     print(f"{gen_otx2inx_df.to_csv()=}")
     print(f" {e1_otx2inx_df.to_csv()=}")
     assert gen_otx2inx_df.to_csv(index=False) == e1_otx2inx_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [otxinx_staging_str]
+    assert get_sheet_names(pidgin_path) == [otx2inx_staging_str]
 
 
-def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -898,12 +898,12 @@ def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_eve
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.zoo_agg_to_otxinx_staging()
+    fizz_world.zoo_agg_to_otx2inx_staging()
 
     # THEN
     assert os_path_exists(pidgin_path)
-    otxinx_staging_str = "otx2inx_staging"
-    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=otxinx_staging_str)
+    otx2inx_staging_str = "otx2inx_staging"
+    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=otx2inx_staging_str)
     otx2inx_file_columns = [
         "src_brick",
         face_id_str(),
@@ -927,10 +927,10 @@ def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_eve
     print(f"{gen_otx2inx_df.to_csv()=}")
     print(f" {e1_otx2inx_df.to_csv()=}")
     assert gen_otx2inx_df.to_csv(index=False) == e1_otx2inx_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [otxinx_staging_str]
+    assert get_sheet_names(pidgin_path) == [otx2inx_staging_str]
 
 
-# def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile(env_dir_setup_cleanup):
+# def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_world = worldunit_shop("fizz")
 #     bob_str = "Bob"
@@ -974,7 +974,7 @@ def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_eve
 #     assert os_path_exists(pidgin_path) is False
 
 #     # WHEN
-#     fizz_world.zoo_agg_to_otxinx_staging()
+#     fizz_world.zoo_agg_to_otx2inx_staging()
 
 #     # THEN
 #     assert os_path_exists(pidgin_path)
@@ -999,7 +999,7 @@ def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_eve
 #     e1_otx2inx_df = DataFrame(e1_otx2inx_rows, columns=pidgin_file_columns)
 #     assert len(gen_otx2inx_df) == len(e1_otx2inx_df)
 #     assert gen_otx2inx_df.to_csv() == e1_otx2inx_df.to_csv()
-#     assert get_sheet_names(pidgin_path) == ["otxinx_staging"]
+#     assert get_sheet_names(pidgin_path) == ["otx2inx_staging"]
 #     assert 1 == 2
 
 

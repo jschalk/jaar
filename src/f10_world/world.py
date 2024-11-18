@@ -371,7 +371,7 @@ class WorldUnit:
             if x_note != "invalid because of conflicting event_id":
                 self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
 
-    def zoo_agg_to_otxinx_staging(self):
+    def zoo_agg_to_otx2inx_staging(self):
         legitmate_events = set(self.events.keys())
         transformer = ZooAggToOtx2InxStagingTransformer(self._zoo_dir, legitmate_events)
         transformer.transform()
