@@ -6,8 +6,8 @@
         },
         "jvalues": {
             "inx_label": {},
-            "inx_road_delimiter": {},
-            "otx_road_delimiter": {},
+            "inx_wall": {},
+            "otx_wall": {},
             "unknown_word": {}
         }
     },
@@ -17,9 +17,9 @@
             "otx_word": {}
         },
         "jvalues": {
-            "inx_road_delimiter": {},
+            "inx_wall": {},
             "inx_word": {},
-            "otx_road_delimiter": {},
+            "otx_wall": {},
             "unknown_word": {}
         }
     }

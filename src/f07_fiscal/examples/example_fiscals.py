@@ -39,7 +39,7 @@ from src.f07_fiscal.examples.fiscal_env import get_test_fiscals_dir
 #         fiscal_id=yao_hubunit.fiscal_id,
 #         owner_id=yao_hubunit.owner_id,
 #         keep_road=None,
-#         road_delimiter=yao_hubunit.road_delimiter,
+#         wall=yao_hubunit.wall,
 #         respect_bit=yao_hubunit.respect_bit,
 #     )
 #     x_hubunit.save_voice_bud(yao_voice_bud)

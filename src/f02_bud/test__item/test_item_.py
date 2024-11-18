@@ -2,7 +2,7 @@ from src.f01_road.finance import default_fund_coin_if_none
 from src.f01_road.road import (
     get_default_fiscal_id_roadnode as root_label,
     create_road,
-    default_road_delimiter_if_none,
+    default_wall_if_none,
 )
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.group import awardlink_shop
@@ -28,7 +28,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit._awardlines is None  # calculated field'
     assert x_itemunit._awardheirs is None  # calculated field'
     assert x_itemunit._originunit is None
-    assert x_itemunit._road_delimiter is None
+    assert x_itemunit._wall is None
     assert x_itemunit.begin is None
     assert x_itemunit.close is None
     assert x_itemunit.addin is None
@@ -99,7 +99,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit.teamunit == teamunit_shop()
     assert x_itemunit._teamheir is None
     assert x_itemunit._originunit == originunit_shop()
-    assert x_itemunit._road_delimiter == default_road_delimiter_if_none()
+    assert x_itemunit._wall == default_wall_if_none()
     assert x_itemunit._root is False
     assert x_itemunit._all_acct_cred is None
     assert x_itemunit._all_acct_debt is None
@@ -197,16 +197,14 @@ def test_ItemUnit_get_road_ReturnsCorrectObj():
     # ESTABLISH
     round_str = "round_things"
     slash_str = "/"
-    round_road = create_road(root_label(), round_str, delimiter=slash_str)
+    round_road = create_road(root_label(), round_str, wall=slash_str)
     ball_str = "ball"
 
     # WHEN
-    ball_item = itemunit_shop(
-        ball_str, _parent_road=round_road, _road_delimiter=slash_str
-    )
+    ball_item = itemunit_shop(ball_str, _parent_road=round_road, _wall=slash_str)
 
     # THEN
-    ball_road = create_road(round_road, ball_str, delimiter=slash_str)
+    ball_road = create_road(round_road, ball_str, wall=slash_str)
     assert ball_item.get_road() == ball_road
 
 
@@ -214,15 +212,13 @@ def test_ItemUnit_set_parent_road_SetsAttr():
     # ESTABLISH
     round_str = "round_things"
     slash_str = "/"
-    round_road = create_road(root_label(), round_str, delimiter=slash_str)
+    round_road = create_road(root_label(), round_str, wall=slash_str)
     ball_str = "ball"
-    ball_item = itemunit_shop(
-        ball_str, _parent_road=round_road, _road_delimiter=slash_str
-    )
+    ball_item = itemunit_shop(ball_str, _parent_road=round_road, _wall=slash_str)
     assert ball_item._parent_road == round_road
 
     # WHEN
-    sports_road = create_road(root_label(), "sports", delimiter=slash_str)
+    sports_road = create_road(root_label(), "sports", wall=slash_str)
     ball_item.set_parent_road(parent_road=sports_road)
 
     # THEN

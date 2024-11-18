@@ -16,8 +16,8 @@ from src.f08_pidgin.pidgin_config import (
     get_quick_pidgens_column_ref,
     pidginunit_str,
     event_id_str,
-    otx_road_delimiter_str,
-    inx_road_delimiter_str,
+    otx_wall_str,
+    inx_wall_str,
     inx_word_str,
     otx_word_str,
     inx_label_str,
@@ -33,8 +33,8 @@ from os import getcwd as os_getcwd
 
 def test_str_functions_ReturnsObj():
     assert pidginunit_str() == "pidginunit"
-    assert otx_road_delimiter_str() == "otx_road_delimiter"
-    assert inx_road_delimiter_str() == "inx_road_delimiter"
+    assert otx_wall_str() == "otx_wall"
+    assert inx_wall_str() == "inx_wall"
     assert inx_word_str() == "inx_word"
     assert otx_word_str() == "otx_word"
     assert inx_label_str() == "inx_label"
@@ -86,8 +86,8 @@ def test_get_pidgin_config_dict_ReturnsObj():
 
 def _validate_pidgin_config(pidgin_config: dict):
     x_possible_args = {
-        inx_road_delimiter_str(),
-        otx_road_delimiter_str(),
+        inx_wall_str(),
+        otx_wall_str(),
         jaar_type_str(),
         inx_word_str(),
         otx_word_str(),
@@ -135,8 +135,8 @@ def test_get_pidgin_args_category_mapping_ReturnsObj():
     assert x_pidgin_args_category_mapping.get(otx_word_str())
     x_categorys = {bridge_otx2inx_str()}
     assert x_pidgin_args_category_mapping.get(otx_word_str()) == x_categorys
-    assert x_pidgin_args_category_mapping.get(inx_road_delimiter_str())
-    pidgin_id_categorys = x_pidgin_args_category_mapping.get(inx_road_delimiter_str())
+    assert x_pidgin_args_category_mapping.get(inx_wall_str())
+    pidgin_id_categorys = x_pidgin_args_category_mapping.get(inx_wall_str())
     assert bridge_otx2inx_str() in pidgin_id_categorys
     assert bridge_nub_label_str() in pidgin_id_categorys
     assert len(pidgin_id_categorys) == 2

@@ -11,11 +11,11 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
-    otx_r_delimiter = "/"
+    otx_r_wall = "/"
     casa_otx = "casa"
     casa_inx = "casa"
-    inx_r_delimiter = ":"
-    roadnode_bridgeunit = bridgeunit_shop("RoadNode", otx_r_delimiter, inx_r_delimiter)
+    inx_r_wall = ":"
+    roadnode_bridgeunit = bridgeunit_shop("RoadNode", otx_r_wall, inx_r_wall)
     roadnode_bridgeunit.set_otx2inx(clean_otx, clean_inx)
     roadnode_bridgeunit.set_otx2inx(casa_otx, casa_inx)
     assert roadnode_bridgeunit.is_valid()
@@ -33,7 +33,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label():
     assert roadnode_bridgeunit.otx_exists(swim_str)
 
     # WHEN / THEN
-    fail_clean_otx = f"clean{inx_r_delimiter}"
+    fail_clean_otx = f"clean{inx_r_wall}"
     assert roadnode_bridgeunit.otx_exists(fail_clean_otx) is False
     assert roadnode_bridgeunit.get_create_inx(fail_clean_otx) is None
     assert roadnode_bridgeunit.otx_exists(fail_clean_otx) is False
@@ -43,11 +43,11 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label_With_nub_label():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
-    otx_r_delimiter = "/"
+    otx_r_wall = "/"
     casa_otx = "casa"
     casa_inx = "house"
-    inx_r_delimiter = ":"
-    roadnode_bridgeunit = bridgeunit_shop("RoadNode", otx_r_delimiter, inx_r_delimiter)
+    inx_r_wall = ":"
+    roadnode_bridgeunit = bridgeunit_shop("RoadNode", otx_r_wall, inx_r_wall)
     roadnode_bridgeunit.set_otx2inx(clean_otx, clean_inx)
     roadnode_bridgeunit.set_nub_label(casa_otx, casa_inx)
     assert casa_otx != casa_inx
@@ -67,9 +67,9 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label_With_nub_label():
 def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario0():
     # ESTABLISH
     otx_music45_str = "music45"
-    otx_r_delimiter = "/"
-    inx_r_delimiter = ":"
-    road_bridgeunit = bridgeunit_shop("RoadUnit", otx_r_delimiter, inx_r_delimiter)
+    otx_r_wall = "/"
+    inx_r_wall = ":"
+    road_bridgeunit = bridgeunit_shop("RoadUnit", otx_r_wall, inx_r_wall)
     assert road_bridgeunit.otx_exists(otx_music45_str) is False
     assert road_bridgeunit.otx2inx_exists(otx_music45_str, otx_music45_str) is False
 
@@ -86,11 +86,11 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
-    otx_r_delimiter = "/"
-    inx_r_delimiter = ":"
+    otx_r_wall = "/"
+    inx_r_wall = ":"
     clean_otx_str = "clean"
-    clean_otx_road = f"{otx_music45_str}{otx_r_delimiter}{clean_otx_str}"
-    road_bridgeunit = bridgeunit_shop("RoadUnit", otx_r_delimiter, inx_r_delimiter)
+    clean_otx_road = f"{otx_music45_str}{otx_r_wall}{clean_otx_str}"
+    road_bridgeunit = bridgeunit_shop("RoadUnit", otx_r_wall, inx_r_wall)
     assert road_bridgeunit.otx_exists(otx_music45_str) is False
     assert road_bridgeunit.otx_exists(clean_otx_road) is False
 
@@ -114,19 +114,19 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     # THEN
     assert road_bridgeunit.otx_exists(clean_otx_road)
     assert road_bridgeunit.otx2inx_exists(clean_otx_road, gen_inx_road)
-    assert gen_inx_road == f"{inx_music87_str}{inx_r_delimiter}{clean_otx_str}"
+    assert gen_inx_road == f"{inx_music87_str}{inx_r_wall}{clean_otx_str}"
 
 
 def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_nub_label():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
-    otx_r_delimiter = "/"
-    inx_r_delimiter = ":"
+    otx_r_wall = "/"
+    inx_r_wall = ":"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    clean_otx_road = f"{otx_music45_str}{otx_r_delimiter}{clean_otx_str}"
-    road_bridgeunit = bridgeunit_shop("RoadUnit", otx_r_delimiter, inx_r_delimiter)
+    clean_otx_road = f"{otx_music45_str}{otx_r_wall}{clean_otx_str}"
+    road_bridgeunit = bridgeunit_shop("RoadUnit", otx_r_wall, inx_r_wall)
     road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
     assert road_bridgeunit.otx_exists(otx_music45_str) is False
     assert road_bridgeunit.otx_exists(clean_otx_road) is False
@@ -152,21 +152,21 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_nub
     assert road_bridgeunit.otx2inx_exists(otx_music45_str, inx_music87_str)
     assert road_bridgeunit.otx_exists(clean_otx_road)
     assert road_bridgeunit.otx2inx_exists(clean_otx_road, gen_inx_road)
-    assert gen_inx_road == f"{inx_music87_str}{inx_r_delimiter}{clean_inx_str}"
+    assert gen_inx_road == f"{inx_music87_str}{inx_r_wall}{clean_inx_str}"
 
 
 def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_group_id():
     # ESTABLISH
-    inx_r_delimiter = ":"
-    otx_r_delimiter = "/"
-    swim_otx = f"swim{otx_r_delimiter}"
-    climb_otx = f"climb{otx_r_delimiter}_{inx_r_delimiter}"
-    group_id_bridgeunit = bridgeunit_shop("GroupID", otx_r_delimiter, inx_r_delimiter)
+    inx_r_wall = ":"
+    otx_r_wall = "/"
+    swim_otx = f"swim{otx_r_wall}"
+    climb_otx = f"climb{otx_r_wall}_{inx_r_wall}"
+    group_id_bridgeunit = bridgeunit_shop("GroupID", otx_r_wall, inx_r_wall)
     group_id_bridgeunit.otx_exists(swim_otx) is False
     group_id_bridgeunit.otx_exists(climb_otx) is False
 
     # WHEN
-    swim_inx = f"swim{inx_r_delimiter}"
+    swim_inx = f"swim{inx_r_wall}"
     assert group_id_bridgeunit.get_create_inx(swim_otx) == swim_inx
 
     # THEN
@@ -185,11 +185,11 @@ def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx2inx_RoadNode():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
-    otx_r_delimiter = "/"
+    otx_r_wall = "/"
     casa_otx = "casa"
     casa_inx = "casa"
-    inx_r_delimiter = ":"
-    roadnode_bridgeunit = bridgeunit_shop("RoadNode", otx_r_delimiter, inx_r_delimiter)
+    inx_r_wall = ":"
+    roadnode_bridgeunit = bridgeunit_shop("RoadNode", otx_r_wall, inx_r_wall)
     roadnode_bridgeunit.set_otx2inx(clean_otx, clean_inx)
     roadnode_bridgeunit.set_otx2inx(casa_otx, casa_inx)
     swim_str = "swim"

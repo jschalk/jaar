@@ -1,4 +1,4 @@
-from src.f01_road.road import default_road_delimiter_if_none
+from src.f01_road.road import default_wall_if_none
 from src.f04_gift.atom_config import (
     get_atom_args_jaar_types,
     road_str,
@@ -86,8 +86,8 @@ def test_PidginUnit_Exists():
     assert not x_pidginunit.event_id
     assert not x_pidginunit.bridgeunits
     assert not x_pidginunit.unknown_word
-    assert not x_pidginunit.otx_road_delimiter
-    assert not x_pidginunit.inx_road_delimiter
+    assert not x_pidginunit.otx_wall
+    assert not x_pidginunit.inx_wall
     assert not x_pidginunit.face_id
 
 
@@ -102,21 +102,21 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.face_id == sue_str
     assert sue_pidginunit.event_id == 0
     assert sue_pidginunit.unknown_word == default_unknown_word()
-    assert sue_pidginunit.otx_road_delimiter == default_road_delimiter_if_none()
-    assert sue_pidginunit.inx_road_delimiter == default_road_delimiter_if_none()
+    assert sue_pidginunit.otx_wall == default_wall_if_none()
+    assert sue_pidginunit.inx_wall == default_wall_if_none()
 
     acctid_bridgeunit = sue_pidginunit.bridgeunits.get(type_AcctID_str())
     assert acctid_bridgeunit.unknown_word == default_unknown_word()
-    assert acctid_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
-    assert acctid_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
+    assert acctid_bridgeunit.otx_wall == default_wall_if_none()
+    assert acctid_bridgeunit.inx_wall == default_wall_if_none()
     groupid_bridgeunit = sue_pidginunit.bridgeunits.get(type_GroupID_str())
     assert groupid_bridgeunit.unknown_word == default_unknown_word()
-    assert groupid_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
-    assert groupid_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
+    assert groupid_bridgeunit.otx_wall == default_wall_if_none()
+    assert groupid_bridgeunit.inx_wall == default_wall_if_none()
     road_bridgeunit = sue_pidginunit.bridgeunits.get(road_str())
     assert road_bridgeunit.unknown_word == default_unknown_word()
-    assert road_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
-    assert road_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
+    assert road_bridgeunit.otx_wall == default_wall_if_none()
+    assert road_bridgeunit.inx_wall == default_wall_if_none()
 
 
 def test_pidginunit_shop_ReturnsObj_scenario1():
@@ -124,39 +124,39 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     sue_str = "Sue"
     five_event_id = 5
     y_unknown_word = "UnknownAcctId"
-    slash_otx_road_delimiter = "/"
-    colon_inx_road_delimiter = ":"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
 
     # WHEN
     sue_pidginunit = pidginunit_shop(
         sue_str,
         five_event_id,
-        slash_otx_road_delimiter,
-        colon_inx_road_delimiter,
+        slash_otx_wall,
+        colon_inx_wall,
         y_unknown_word,
     )
 
     # THEN
     assert sue_pidginunit.event_id == five_event_id
     assert sue_pidginunit.unknown_word == y_unknown_word
-    assert sue_pidginunit.otx_road_delimiter == slash_otx_road_delimiter
-    assert sue_pidginunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert sue_pidginunit.otx_wall == slash_otx_wall
+    assert sue_pidginunit.inx_wall == colon_inx_wall
 
     assert len(sue_pidginunit.bridgeunits) == 3
     acctid_bridgeunit = sue_pidginunit.bridgeunits.get(type_AcctID_str())
     assert acctid_bridgeunit.unknown_word == y_unknown_word
-    assert acctid_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
-    assert acctid_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert acctid_bridgeunit.otx_wall == slash_otx_wall
+    assert acctid_bridgeunit.inx_wall == colon_inx_wall
     assert acctid_bridgeunit.face_id == sue_str
     groupid_bridgeunit = sue_pidginunit.bridgeunits.get(type_GroupID_str())
     assert groupid_bridgeunit.unknown_word == y_unknown_word
-    assert groupid_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
-    assert groupid_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert groupid_bridgeunit.otx_wall == slash_otx_wall
+    assert groupid_bridgeunit.inx_wall == colon_inx_wall
     assert groupid_bridgeunit.face_id == sue_str
     road_bridgeunit = sue_pidginunit.bridgeunits.get(road_str())
     assert road_bridgeunit.unknown_word == y_unknown_word
-    assert road_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
-    assert road_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert road_bridgeunit.otx_wall == slash_otx_wall
+    assert road_bridgeunit.inx_wall == colon_inx_wall
     assert road_bridgeunit.face_id == sue_str
 
 
@@ -209,43 +209,43 @@ def test_PidginUnit_set_bridgeunit_SetsAttr_SpecialCase_RoadNode():
     assert sue_pidginunit.bridgeunits.get(road_str()) == roadunit_bridgeunit
 
 
-def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_otx_road_delimiter_IsNotSame():
+def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_otx_wall_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    slash_otx_road_delimiter = "/"
+    slash_otx_wall = "/"
     acct_id_bridgeunit = bridgeunit_shop(
         type_AcctID_str(),
-        x_otx_road_delimiter=slash_otx_road_delimiter,
+        x_otx_wall=slash_otx_wall,
         x_face_id=sue_str,
     )
-    assert sue_pidginunit.otx_road_delimiter != acct_id_bridgeunit.otx_road_delimiter
+    assert sue_pidginunit.otx_wall != acct_id_bridgeunit.otx_wall
     assert sue_pidginunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgeunit Error: BridgeUnit otx_road_delimiter is '{sue_pidginunit.otx_road_delimiter}', BridgeUnit is '{slash_otx_road_delimiter}'."
+    exception_str = f"set_bridgeunit Error: BridgeUnit otx_wall is '{sue_pidginunit.otx_wall}', BridgeUnit is '{slash_otx_wall}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_inx_road_delimiter_IsNotSame():
+def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_inx_wall_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    slash_inx_road_delimiter = "/"
+    slash_inx_wall = "/"
     acct_id_bridgeunit = bridgeunit_shop(
         type_AcctID_str(),
-        x_inx_road_delimiter=slash_inx_road_delimiter,
+        x_inx_wall=slash_inx_wall,
         x_face_id=sue_str,
     )
-    assert sue_pidginunit.inx_road_delimiter != acct_id_bridgeunit.inx_road_delimiter
+    assert sue_pidginunit.inx_wall != acct_id_bridgeunit.inx_wall
     assert sue_pidginunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgeunit Error: BridgeUnit inx_road_delimiter is '{sue_pidginunit.inx_road_delimiter}', BridgeUnit is '{slash_inx_road_delimiter}'."
+    exception_str = f"set_bridgeunit Error: BridgeUnit inx_wall is '{sue_pidginunit.inx_wall}', BridgeUnit is '{slash_inx_wall}'."
     assert str(excinfo.value) == exception_str
 
 

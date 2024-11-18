@@ -7,7 +7,7 @@ JEFFY45_STR = "jeffy45"
 
 def get_ex1_br00000_df() -> DataFrame:
     """brick_format_00000_fiscalunit_v0_0_0
-    c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,road_delimiter,timeline_label,yr1_jan1_offset
+    c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,wall,timeline_label,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
@@ -18,7 +18,7 @@ def get_ex1_br00000_df() -> DataFrame:
             "monthday_distortion",
             "penny",
             "respect_bit",
-            "road_delimiter",
+            "wall",
             "timeline_label",
             "yr1_jan1_offset",
         ]
@@ -109,7 +109,7 @@ def get_ex1_br00005_df() -> DataFrame:
 
 def get_ex2_br00000_df() -> DataFrame:
     """brick_format_00000_fiscalunit_v0_0_0
-    c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,road_delimiter,timeline_label,yr1_jan1_offset
+    c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,wall,timeline_label,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
@@ -120,7 +120,7 @@ def get_ex2_br00000_df() -> DataFrame:
             "monthday_distortion",
             "penny",
             "respect_bit",
-            "road_delimiter",
+            "wall",
             "timeline_label",
             "yr1_jan1_offset",
         ]

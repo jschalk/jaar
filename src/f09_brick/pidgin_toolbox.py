@@ -8,8 +8,8 @@ def get_otx2inx_dt_columns() -> list[str]:
     return [
         "face_id",
         "jaar_type",
-        "otx_road_delimiter",
-        "inx_road_delimiter",
+        "otx_wall",
+        "inx_wall",
         "unknown_word",
         "otx_word",
         "inx_word",
@@ -20,8 +20,8 @@ def get_nub_label_columns() -> list[str]:
     return [
         "face_id",
         "jaar_type",
-        "otx_road_delimiter",
-        "inx_road_delimiter",
+        "otx_wall",
+        "inx_wall",
         "unknown_word",
         "otx_label",
         "inx_label",
@@ -33,8 +33,8 @@ def create_otx2inx_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
         {
             "face_id": x_bridgeunit.face_id,
             "jaar_type": x_bridgeunit.jaar_type,
-            "otx_road_delimiter": x_bridgeunit.otx_road_delimiter,
-            "inx_road_delimiter": x_bridgeunit.inx_road_delimiter,
+            "otx_wall": x_bridgeunit.otx_wall,
+            "inx_wall": x_bridgeunit.inx_wall,
             "unknown_word": x_bridgeunit.unknown_word,
             "otx_word": otx_value,
             "inx_word": inx_value,
@@ -49,8 +49,8 @@ def create_nub_label_dt(x_bridgeunit: BridgeUnit) -> DataFrame:
         {
             "face_id": x_bridgeunit.face_id,
             "jaar_type": x_bridgeunit.jaar_type,
-            "otx_road_delimiter": x_bridgeunit.otx_road_delimiter,
-            "inx_road_delimiter": x_bridgeunit.inx_road_delimiter,
+            "otx_wall": x_bridgeunit.otx_wall,
+            "inx_wall": x_bridgeunit.inx_wall,
             "unknown_word": x_bridgeunit.unknown_word,
             "otx_label": otx_value,
             "inx_label": inx_value,
@@ -111,38 +111,38 @@ def _load_nub_label_from_csv(x_dir, x_bridgeunit: BridgeUnit) -> BridgeUnit:
 def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
     face_id_set = set()
     unknown_word_set = set()
-    otx_road_delimiter_set = set()
-    inx_road_delimiter_set = set()
+    otx_wall_set = set()
+    inx_wall_set = set()
     for x_filename in get_dir_file_strs(x_dir).keys():
         x_dt = open_csv(x_dir, x_filename)
         face_id_set.update(x_dt.face_id.unique())
         unknown_word_set.update(x_dt.unknown_word.unique())
-        otx_road_delimiter_set.update(x_dt.otx_road_delimiter.unique())
-        inx_road_delimiter_set.update(x_dt.inx_road_delimiter.unique())
+        otx_wall_set.update(x_dt.otx_wall.unique())
+        inx_wall_set.update(x_dt.inx_wall.unique())
 
     if len(face_id_set) == 1:
         x_face_id = face_id_set.pop()
     if len(unknown_word_set) == 1:
         x_unknown_word = unknown_word_set.pop()
-    if len(otx_road_delimiter_set) == 1:
-        x_otx_road_delimiter = otx_road_delimiter_set.pop()
-    if len(inx_road_delimiter_set) == 1:
-        x_inx_road_delimiter = inx_road_delimiter_set.pop()
+    if len(otx_wall_set) == 1:
+        x_otx_wall = otx_wall_set.pop()
+    if len(inx_wall_set) == 1:
+        x_inx_wall = inx_wall_set.pop()
 
     # if (
     #     face_id_set != set()
     #     or unknown_word_set != set()
-    #     or otx_road_delimiter_set != set()
-    #     or inx_road_delimiter_set != set()
+    #     or otx_wall_set != set()
+    #     or inx_wall_set != set()
     # ):
     #     raise Exception(
-    #         f"{face_id_set=} {unknown_word_set=}  {otx_road_delimiter_set=} {inx_road_delimiter_set=}"
+    #         f"{face_id_set=} {unknown_word_set=}  {otx_wall_set=} {inx_wall_set=}"
     #     )
 
     return pidginunit_shop(
         x_face_id=x_face_id,
-        x_otx_road_delimiter=x_otx_road_delimiter,
-        x_inx_road_delimiter=x_inx_road_delimiter,
+        x_otx_wall=x_otx_wall,
+        x_inx_wall=x_inx_wall,
         x_unknown_word=x_unknown_word,
     )
 

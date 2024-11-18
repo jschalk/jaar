@@ -35,7 +35,7 @@ from src.f01_road.road import (
     get_all_road_nodes,
     get_forefather_roads,
     create_road,
-    default_road_delimiter_if_none,
+    default_wall_if_none,
     RoadNode,
     RoadUnit,
     is_string_in_road,
@@ -83,7 +83,7 @@ class InvalidLabelException(Exception):
     pass
 
 
-class NewDelimiterException(Exception):
+class NewWallException(Exception):
     pass
 
 
@@ -124,7 +124,7 @@ class BudUnit:
     _accts: dict[AcctID, AcctUnit] = None
     _itemroot: ItemUnit = None
     max_tree_traverse: int = None
-    _road_delimiter: str = None
+    _wall: str = None
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
     penny: PennyNum = None
@@ -193,25 +193,25 @@ class BudUnit:
         x_road = create_road(
             parent_road=parent_road,
             terminus_node=terminus_node,
-            delimiter=self._road_delimiter,
+            wall=self._wall,
         )
-        return road_validate(x_road, self._road_delimiter, self._fiscal_id)
+        return road_validate(x_road, self._wall, self._fiscal_id)
 
     def make_l1_road(self, l1_node: RoadNode):
         return self.make_road(self._fiscal_id, l1_node)
 
-    def set_road_delimiter(self, new_road_delimiter: str):
+    def set_wall(self, new_wall: str):
         self.settle_bud()
-        if self._road_delimiter != new_road_delimiter:
+        if self._wall != new_wall:
             for x_item_road in self._item_dict.keys():
-                if is_string_in_road(new_road_delimiter, x_item_road):
-                    exception_str = f"Cannot modify delimiter to '{new_road_delimiter}' because it exists an item label '{x_item_road}'"
-                    raise NewDelimiterException(exception_str)
+                if is_string_in_road(new_wall, x_item_road):
+                    exception_str = f"Cannot modify wall to '{new_wall}' because it exists an item label '{x_item_road}'"
+                    raise NewWallException(exception_str)
 
             # modify all road attributes in itemunits
-            self._road_delimiter = default_road_delimiter_if_none(new_road_delimiter)
+            self._wall = default_wall_if_none(new_wall)
             for x_item in self._item_dict.values():
-                x_item.set_road_delimiter(self._road_delimiter)
+                x_item.set_wall(self._wall)
 
     def set_fiscal_id(self, fiscal_id: str):
         old_fiscal_id = copy_deepcopy(self._fiscal_id)
@@ -338,15 +338,13 @@ class BudUnit:
     def add_acctunit(
         self, acct_id: AcctID, credit_belief: int = None, debtit_belief: int = None
     ):
-        x_road_delimiter = self._road_delimiter
-        acctunit = acctunit_shop(
-            acct_id, credit_belief, debtit_belief, x_road_delimiter
-        )
+        x_wall = self._wall
+        acctunit = acctunit_shop(acct_id, credit_belief, debtit_belief, x_wall)
         self.set_acctunit(acctunit)
 
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
-        if x_acctunit._road_delimiter != self._road_delimiter:
-            x_acctunit._road_delimiter = self._road_delimiter
+        if x_acctunit._wall != self._wall:
+            x_acctunit._wall = self._wall
         if x_acctunit._respect_bit != self.respect_bit:
             x_acctunit._respect_bit = self.respect_bit
         if auto_set_membership and x_acctunit.memberships_exist() is False:
@@ -571,8 +569,8 @@ class BudUnit:
     def add_item(
         self, item_road: RoadUnit, mass: float = None, pledge: bool = None
     ) -> ItemUnit:
-        x_label = get_terminus_node(item_road, self._road_delimiter)
-        x_parent_road = get_parent_road(item_road, self._road_delimiter)
+        x_label = get_terminus_node(item_road, self._wall)
+        x_parent_road = get_parent_road(item_road, self._wall)
         x_itemunit = itemunit_shop(x_label, mass=mass)
         if pledge:
             x_itemunit.pledge = True
@@ -608,16 +606,16 @@ class BudUnit:
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        if RoadNode(item_kid._label).is_node(self._road_delimiter) is False:
+        if RoadNode(item_kid._label).is_node(self._wall) is False:
             x_str = f"set_item failed because '{item_kid._label}' is not a RoadNode."
             raise InvalidBudException(x_str)
 
-        x_root_node = get_root_node_from_road(parent_road, self._road_delimiter)
+        x_root_node = get_root_node_from_road(parent_road, self._wall)
         if self._itemroot._label != x_root_node:
             exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root node"
             raise InvalidBudException(exception_str)
 
-        item_kid._road_delimiter = self._road_delimiter
+        item_kid._wall = self._wall
         if item_kid._bud_fiscal_id != self._fiscal_id:
             item_kid._bud_fiscal_id = self._fiscal_id
         if item_kid._fund_coin != self.fund_coin:
@@ -693,7 +691,7 @@ class BudUnit:
             if not del_children:
                 self._shift_item_kids(x_road=road)
             parent_item = self.get_item_obj(parent_road)
-            parent_item.del_kid(get_terminus_node(road, self._road_delimiter))
+            parent_item.del_kid(get_terminus_node(road, self._wall))
         self.settle_bud()
 
     def _shift_item_kids(self, x_road: RoadUnit):
@@ -706,8 +704,8 @@ class BudUnit:
         self._owner_id = new_owner_id
 
     def edit_item_label(self, old_road: RoadUnit, new_label: RoadNode):
-        if self._road_delimiter in new_label:
-            exception_str = f"Cannot modify '{old_road}' because new_label {new_label} contains delimiter {self._road_delimiter}"
+        if self._wall in new_label:
+            exception_str = f"Cannot modify '{old_road}' because new_label {new_label} contains wall {self._wall}"
             raise InvalidLabelException(exception_str)
         if self.item_exists(old_road) is False:
             raise InvalidBudException(f"Item {old_road=} does not exist")
@@ -732,7 +730,7 @@ class BudUnit:
         x_item.set_label(new_label)
         x_item._parent_road = parent_road
         item_parent = self.get_item_obj(get_parent_road(old_road))
-        item_parent._kids.pop(get_terminus_node(old_road, self._road_delimiter))
+        item_parent._kids.pop(get_terminus_node(old_road, self._wall))
         item_parent._kids[x_item._label] = x_item
 
     def _itemroot_find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
@@ -979,11 +977,11 @@ class BudUnit:
     def item_exists(self, road: RoadUnit) -> bool:
         if road is None:
             return False
-        root_road_label = get_root_node_from_road(road, delimiter=self._road_delimiter)
+        root_road_label = get_root_node_from_road(road, wall=self._wall)
         if root_road_label != self._itemroot._label:
             return False
 
-        nodes = get_all_road_nodes(road, delimiter=self._road_delimiter)
+        nodes = get_all_road_nodes(road, wall=self._wall)
         root_road_label = nodes.pop(0)
         if nodes == []:
             return True
@@ -1004,7 +1002,7 @@ class BudUnit:
             raise InvalidBudException("get_item_obj received road=None")
         if self.item_exists(road) is False and not if_missing_create:
             raise InvalidBudException(f"get_item_obj failed. no item at '{road}'")
-        roadnodes = get_all_road_nodes(road, delimiter=self._road_delimiter)
+        roadnodes = get_all_road_nodes(road, wall=self._wall)
         if len(roadnodes) == 1:
             return self._itemroot
 
@@ -1158,7 +1156,7 @@ class BudUnit:
     def _create_groupunits_metrics(self):
         self._groupunits = {}
         for group_id, acct_id_set in self.get_acctunit_group_ids_dict().items():
-            x_groupunit = groupunit_shop(group_id, _road_delimiter=self._road_delimiter)
+            x_groupunit = groupunit_shop(group_id, _wall=self._wall)
             for x_acct_id in acct_id_set:
                 x_membership = self.get_acct(x_acct_id).get_membership(group_id)
                 x_groupunit.set_membership(x_membership)
@@ -1305,7 +1303,7 @@ class BudUnit:
 
     def _get_buildable_keeps(self) -> bool:
         return all(
-            roadunit_valid_dir_path(keep_road, self._road_delimiter) != False
+            roadunit_valid_dir_path(keep_road, self._wall) != False
             for keep_road in self._keep_dict.keys()
         )
 
@@ -1367,7 +1365,7 @@ class BudUnit:
             "_owner_id": self._owner_id,
             "_fiscal_id": self._fiscal_id,
             "max_tree_traverse": self.max_tree_traverse,
-            "_road_delimiter": self._road_delimiter,
+            "_wall": self._wall,
             "_itemroot": self._itemroot.get_dict(),
         }
         if self.credor_respect is not None:
@@ -1401,7 +1399,7 @@ class BudUnit:
 def budunit_shop(
     _owner_id: OwnerID = None,
     _fiscal_id: FiscalID = None,
-    _road_delimiter: str = None,
+    _wall: str = None,
     fund_pool: FundNum = None,
     fund_coin: FundCoin = None,
     respect_bit: BitNum = None,
@@ -1419,7 +1417,7 @@ def budunit_shop(
         _item_dict=get_empty_dict_if_none(None),
         _keep_dict=get_empty_dict_if_none(None),
         _healers_dict=get_empty_dict_if_none(None),
-        _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
+        _wall=default_wall_if_none(_wall),
         credor_respect=validate_respect_num(),
         debtor_respect=validate_respect_num(),
         fund_pool=validate_fund_pool(fund_pool),
@@ -1438,7 +1436,7 @@ def budunit_shop(
         _uid=1,
         _level=0,
         _bud_fiscal_id=x_bud._fiscal_id,
-        _road_delimiter=x_bud._road_delimiter,
+        _wall=x_bud._wall,
         _fund_coin=x_bud.fund_coin,
         _parent_road="",
     )
@@ -1459,8 +1457,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
     x_bud._fiscal_id = obj_from_bud_dict(bud_dict, "_fiscal_id")
     x_bud._itemroot._label = obj_from_bud_dict(bud_dict, "_fiscal_id")
-    bud_road_delimiter = obj_from_bud_dict(bud_dict, "_road_delimiter")
-    x_bud._road_delimiter = default_road_delimiter_if_none(bud_road_delimiter)
+    bud_wall = obj_from_bud_dict(bud_dict, "_wall")
+    x_bud._wall = default_wall_if_none(bud_wall)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
     x_bud.fund_coin = default_fund_coin_if_none(
         obj_from_bud_dict(bud_dict, "fund_coin")
@@ -1472,8 +1470,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.credor_respect = obj_from_bud_dict(bud_dict, "credor_respect")
     x_bud.debtor_respect = obj_from_bud_dict(bud_dict, "debtor_respect")
     x_bud._last_gift_id = obj_from_bud_dict(bud_dict, "_last_gift_id")
-    x_road_delimiter = x_bud._road_delimiter
-    x_accts = obj_from_bud_dict(bud_dict, "_accts", x_road_delimiter).values()
+    x_wall = x_bud._wall
+    x_accts = obj_from_bud_dict(bud_dict, "_accts", x_wall).values()
     for x_acctunit in x_accts:
         x_bud.set_acctunit(x_acctunit)
     x_bud._originunit = obj_from_bud_dict(bud_dict, "_originunit")
@@ -1504,7 +1502,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         factunits=get_obj_from_item_dict(itemroot_dict, "factunits"),
         awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
-        _road_delimiter=get_obj_from_item_dict(itemroot_dict, "_road_delimiter"),
+        _wall=get_obj_from_item_dict(itemroot_dict, "_wall"),
         _bud_fiscal_id=x_bud._fiscal_id,
         _fund_coin=default_fund_coin_if_none(x_bud.fund_coin),
     )
@@ -1551,9 +1549,7 @@ def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
         x_bud.set_item(x_itemkid, parent_road=item_dict[parent_road_str])
 
 
-def obj_from_bud_dict(
-    x_dict: dict[str, dict], dict_key: str, _road_delimiter: str = None
-) -> any:
+def obj_from_bud_dict(x_dict: dict[str, dict], dict_key: str, _wall: str = None) -> any:
     if dict_key == "_originunit":
         return (
             originunit_get_from_dict(x_dict[dict_key])
@@ -1561,7 +1557,7 @@ def obj_from_bud_dict(
             else originunit_shop()
         )
     elif dict_key == "_accts":
-        return acctunits_get_from_dict(x_dict[dict_key], _road_delimiter)
+        return acctunits_get_from_dict(x_dict[dict_key], _wall)
     elif dict_key == "_max_tree_traverse":
         return (
             x_dict[dict_key]

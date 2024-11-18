@@ -129,7 +129,7 @@ def test_ItemUnit_get_obj_key_ReturnsCorrectInfo():
     assert red_item.get_obj_key() == red_str
 
 
-def test_ItemUnit_set_road_delimiter_CorrectlyModifiesReasonRoadUnits():
+def test_ItemUnit_set_wall_CorrectlyModifiesReasonRoadUnits():
     # ESTABLISH
     casa_str = "casa"
     casa_item = itemunit_shop(casa_str)
@@ -137,7 +137,7 @@ def test_ItemUnit_set_road_delimiter_CorrectlyModifiesReasonRoadUnits():
 
     # WHEN
     slash_str = "/"
-    casa_item.set_road_delimiter(slash_str)
+    casa_item.set_wall(slash_str)
 
     # THEN
-    assert casa_item._road_delimiter == slash_str
+    assert casa_item._wall == slash_str

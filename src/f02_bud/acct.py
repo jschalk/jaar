@@ -5,7 +5,7 @@ from src.f00_instrument.dict_toolbox import (
 )
 from src.f01_road.road import (
     AcctID,
-    default_road_delimiter_if_none,
+    default_wall_if_none,
     validate_roadnode,
     is_roadnode,
 )
@@ -30,11 +30,11 @@ class Bad_acct_idMemberShipException(Exception):
 @dataclass
 class AcctCore:
     acct_id: AcctID = None
-    _road_delimiter: str = None
+    _wall: str = None
     _respect_bit: float = None
 
     def set_acct_id(self, x_acct_id: AcctID):
-        self.acct_id = validate_roadnode(x_acct_id, self._road_delimiter)
+        self.acct_id = validate_roadnode(x_acct_id, self._wall)
 
 
 @dataclass
@@ -162,7 +162,7 @@ class AcctUnit(AcctCore):
 
     def set_membership(self, x_membership: MemberShip):
         x_group_id = x_membership.group_id
-        group_id_is_acct_id = is_roadnode(x_group_id, self._road_delimiter)
+        group_id_is_acct_id = is_roadnode(x_group_id, self._wall)
         if group_id_is_acct_id and self.acct_id != x_group_id:
             raise Bad_acct_idMemberShipException(
                 f"AcctUnit with acct_id='{self.acct_id}' cannot have link to '{x_group_id}'."
@@ -247,24 +247,20 @@ def acctunits_get_from_json(acctunits_json: str) -> dict[str, AcctUnit]:
     return acctunits_get_from_dict(x_dict=acctunits_dict)
 
 
-def acctunits_get_from_dict(
-    x_dict: dict, _road_delimiter: str = None
-) -> dict[str, AcctUnit]:
+def acctunits_get_from_dict(x_dict: dict, _wall: str = None) -> dict[str, AcctUnit]:
     acctunits = {}
     for acctunit_dict in x_dict.values():
-        x_acctunit = acctunit_get_from_dict(acctunit_dict, _road_delimiter)
+        x_acctunit = acctunit_get_from_dict(acctunit_dict, _wall)
         acctunits[x_acctunit.acct_id] = x_acctunit
     return acctunits
 
 
-def acctunit_get_from_dict(acctunit_dict: dict, _road_delimiter: str) -> AcctUnit:
+def acctunit_get_from_dict(acctunit_dict: dict, _wall: str) -> AcctUnit:
     x_acct_id = acctunit_dict["acct_id"]
     x_credit_belief = acctunit_dict["credit_belief"]
     x_debtit_belief = acctunit_dict["debtit_belief"]
     x_memberships_dict = acctunit_dict["_memberships"]
-    x_acctunit = acctunit_shop(
-        x_acct_id, x_credit_belief, x_debtit_belief, _road_delimiter
-    )
+    x_acctunit = acctunit_shop(x_acct_id, x_credit_belief, x_debtit_belief, _wall)
     x_acctunit._memberships = memberships_get_from_dict(x_memberships_dict, x_acct_id)
     _irrational_debtit_belief = acctunit_dict.get("_irrational_debtit_belief", 0)
     _inallocable_debtit_belief = acctunit_dict.get("_inallocable_debtit_belief", 0)
@@ -278,7 +274,7 @@ def acctunit_shop(
     acct_id: AcctID,
     credit_belief: int = None,
     debtit_belief: int = None,
-    _road_delimiter: str = None,
+    _wall: str = None,
     _respect_bit: float = None,
 ) -> AcctUnit:
     x_acctunit = AcctUnit(
@@ -295,7 +291,7 @@ def acctunit_shop(
         _fund_agenda_take=0,
         _fund_agenda_ratio_give=0,
         _fund_agenda_ratio_take=0,
-        _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
+        _wall=default_wall_if_none(_wall),
         _respect_bit=default_respect_bit_if_none(_respect_bit),
     )
     x_acctunit.set_acct_id(x_acct_id=acct_id)

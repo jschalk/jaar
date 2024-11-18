@@ -1,4 +1,4 @@
-from src.f01_road.road import default_road_delimiter_if_none
+from src.f01_road.road import default_wall_if_none
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.examples.example_buds import get_budunit_with_4_levels
 from src.f02_bud.group import awardlink_shop
@@ -108,7 +108,7 @@ def test_BudUnit_add_item_SetsAttr_Scenario0():
     # ESTABLISH
     bob_str = "Bob"
     slash_str = "/"
-    bob_budunit = budunit_shop(bob_str, _road_delimiter=slash_str)
+    bob_budunit = budunit_shop(bob_str, _wall=slash_str)
     casa_road = bob_budunit.make_l1_road("casa")
     assert not bob_budunit.item_exists(casa_road)
 
@@ -118,7 +118,7 @@ def test_BudUnit_add_item_SetsAttr_Scenario0():
     # THEN
     assert bob_budunit.item_exists(casa_road)
     casa_itemunit = bob_budunit.get_item_obj(casa_road)
-    assert casa_itemunit._road_delimiter == bob_budunit._road_delimiter
+    assert casa_itemunit._wall == bob_budunit._wall
     assert not casa_itemunit.pledge
 
 
@@ -154,11 +154,11 @@ def test_BudUnit_add_item_ReturnsObj():
     assert casa_itemunit.mass == casa_mass
 
 
-def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_delimiter():
+def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_wall():
     # ESTABLISH
     slash_str = "/"
-    assert slash_str != default_road_delimiter_if_none()
-    bob_bud = budunit_shop("Bob", _road_delimiter=slash_str)
+    assert slash_str != default_wall_if_none()
+    bob_bud = budunit_shop("Bob", _wall=slash_str)
     casa_str = "casa"
     week_str = "week"
     wed_str = "Wednesday"
@@ -171,8 +171,8 @@ def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_delimiter():
     print(f"{bob_bud._itemroot._kids.keys()=}")
     assert len(bob_bud._itemroot._kids) == 2
     wed_item = bob_bud.get_item_obj(wed_road)
-    assert wed_item._road_delimiter == slash_str
-    assert wed_item._road_delimiter == bob_bud._road_delimiter
+    assert wed_item._wall == slash_str
+    assert wed_item._wall == bob_bud._wall
 
     # WHEN
     bob_bud.edit_item_attr(casa_road, reason_base=week_road, reason_premise=wed_road)

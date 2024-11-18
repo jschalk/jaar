@@ -537,7 +537,7 @@
             "credit_belief": 1,
             "debtit_belief": 1
         },
-        "WIlliam Wallace": {
+        "WIlliam Wellace": {
             "_memberships": {
                 ";ACME DevOps": {
                     "credit_vote": 1,
@@ -549,13 +549,13 @@
                     "debtit_vote": 1,
                     "group_id": ";Everyone"
                 },
-                "WIlliam Wallace": {
+                "WIlliam Wellace": {
                     "credit_vote": 1,
                     "debtit_vote": 1,
-                    "group_id": "WIlliam Wallace"
+                    "group_id": "WIlliam Wellace"
                 }
             },
-            "acct_id": "WIlliam Wallace",
+            "acct_id": "WIlliam Wellace",
             "credit_belief": 1,
             "debtit_belief": 1
         }
@@ -5425,7 +5425,7 @@
         "_originholds": {}
     },
     "_owner_id": "Bob",
-    "_road_delimiter": ";",
+    "_wall": ";",
     "mass": 1,
     "max_tree_traverse": 20,
     "penny": 1,

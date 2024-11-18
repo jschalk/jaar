@@ -18,7 +18,7 @@ class br00000AbstractTable(Base):
     monthday_distortion = Column(Integer)
     penny = Column(Float)
     respect_bit = Column(Float)
-    road_delimiter = Column(String)
+    wall = Column(String)
     timeline_label = Column(String)
     yr1_jan1_offset = Column(Integer)
 
@@ -268,10 +268,10 @@ class br00040AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
     event_id = Column(Integer, primary_key=True)
-    inx_road_delimiter = Column(String)
+    inx_wall = Column(String)
     inx_word = Column(String)
     jaar_type = Column(String)
-    otx_road_delimiter = Column(String)
+    otx_wall = Column(String)
     otx_word = Column(String)
     unknown_word = Column(String)
 
@@ -281,9 +281,9 @@ class br00041AbstractTable(Base):
     face_id = Column(String, primary_key=True)
     event_id = Column(Integer, primary_key=True)
     inx_label = Column(String)
-    inx_road_delimiter = Column(String)
+    inx_wall = Column(String)
     otx_label = Column(String)
-    otx_road_delimiter = Column(String)
+    otx_wall = Column(String)
     unknown_word = Column(String)
 
 

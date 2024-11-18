@@ -1,4 +1,4 @@
-from src.f01_road.road import default_road_delimiter_if_none, create_road
+from src.f01_road.road import default_wall_if_none, create_road
 from src.f04_gift.atom_config import (
     acct_id_str,
     base_str,
@@ -22,9 +22,9 @@ def get_clean_roadnode_bridgeunit() -> BridgeUnit:
     clean_inx = "propre"
     casa_otx = "casa1"
     casa_inx = "casa2"
-    slash_otx_road_delimiter = "/"
+    slash_otx_wall = "/"
     roadnode_bridgeunit = bridgeunit_shop(
-        type_RoadNode_str(), slash_otx_road_delimiter, x_face_id="Sue"
+        type_RoadNode_str(), slash_otx_wall, x_face_id="Sue"
     )
     roadnode_bridgeunit.set_otx2inx(clean_otx, clean_inx)
     roadnode_bridgeunit.set_otx2inx(casa_otx, casa_inx)
@@ -36,8 +36,8 @@ def get_clean_roadunit_bridgeunit() -> BridgeUnit:
     inx_music87_str = "music87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    road_delimiter = default_road_delimiter_if_none()
-    clean_otx_road = f"{otx_music45_str}{road_delimiter}{clean_otx_str}"
+    wall = default_wall_if_none()
+    clean_otx_road = f"{otx_music45_str}{wall}{clean_otx_str}"
     road_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), x_face_id="Sue")
     road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
     road_bridgeunit.set_otx2inx(otx_music45_str, inx_music87_str)
@@ -46,10 +46,10 @@ def get_clean_roadunit_bridgeunit() -> BridgeUnit:
 
 
 def get_swim_groupid_bridgeunit() -> BridgeUnit:
-    road_delimiter = default_road_delimiter_if_none()
-    swim_otx = f"swim{road_delimiter}"
-    swim_inx = f"nage{road_delimiter}"
-    climb_otx = f"climb{road_delimiter}"
+    wall = default_wall_if_none()
+    swim_otx = f"swim{wall}"
+    swim_inx = f"nage{wall}"
+    climb_otx = f"climb{wall}"
     group_id_bridgeunit = bridgeunit_shop(type_GroupID_str(), x_face_id="Sue")
     group_id_bridgeunit.set_otx2inx(swim_otx, swim_inx)
     group_id_bridgeunit.set_otx2inx(climb_otx, climb_otx)
@@ -72,7 +72,7 @@ def get_suita_acctid_bridgeunit() -> BridgeUnit:
 
 
 def get_invalid_acctid_bridgeunit() -> BridgeUnit:
-    sue_otx = f"Xio{default_road_delimiter_if_none()}"
+    sue_otx = f"Xio{default_wall_if_none()}"
     sue_inx = "Sue"
     zia_otx = "Zia"
     zia_inx = "Zia"
@@ -83,10 +83,10 @@ def get_invalid_acctid_bridgeunit() -> BridgeUnit:
 
 
 def get_invalid_groupid_bridgeunit() -> BridgeUnit:
-    sue_otx = f"Xio{default_road_delimiter_if_none()}"
-    sue_inx = f"Sue{default_road_delimiter_if_none()}"
+    sue_otx = f"Xio{default_wall_if_none()}"
+    sue_inx = f"Sue{default_wall_if_none()}"
     zia_otx = "Zia"
-    zia_inx = f"Zia{default_road_delimiter_if_none()}"
+    zia_inx = f"Zia{default_wall_if_none()}"
     group_id_bridgeunit = bridgeunit_shop(type_GroupID_str(), x_face_id="Sue")
     group_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
     group_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
@@ -96,7 +96,7 @@ def get_invalid_groupid_bridgeunit() -> BridgeUnit:
 def get_invalid_road_bridgeunit() -> BridgeUnit:
     clean_str = "clean"
     clean_inx = "propre"
-    casa_otx = f"casa{default_road_delimiter_if_none()}"
+    casa_otx = f"casa{default_wall_if_none()}"
     casa_inx = "casa"
     roadnode_bridgeunit = bridgeunit_shop(type_RoadNode_str(), x_face_id="Sue")
     roadnode_bridgeunit.set_otx2inx(clean_str, clean_inx)
@@ -110,14 +110,14 @@ def get_slash_roadunit_bridgeunit() -> BridgeUnit:
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     x_unknown_word = "UnknownAcctId"
-    slash_otx_road_delimiter = "/"
-    colon_inx_road_delimiter = ":"
-    clean_otx_road = f"{otx_music45_str}{slash_otx_road_delimiter}{clean_otx_str}"
-    clean_otx_road = f"{otx_music45_str}{colon_inx_road_delimiter}{clean_otx_str}"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
+    clean_otx_road = f"{otx_music45_str}{slash_otx_wall}{clean_otx_str}"
+    clean_otx_road = f"{otx_music45_str}{colon_inx_wall}{clean_otx_str}"
     road_bridgeunit = bridgeunit_shop(
         type_RoadUnit_str(),
-        x_otx_road_delimiter=slash_otx_road_delimiter,
-        x_inx_road_delimiter=colon_inx_road_delimiter,
+        x_otx_wall=slash_otx_wall,
+        x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
     )
@@ -129,16 +129,16 @@ def get_slash_roadunit_bridgeunit() -> BridgeUnit:
 
 def get_slash_groupid_bridgeunit() -> BridgeUnit:
     x_unknown_word = "UnknownAcctId"
-    slash_otx_road_delimiter = "/"
-    colon_inx_road_delimiter = ":"
-    swim_otx = f"swim{slash_otx_road_delimiter}"
-    swim_inx = f"nage{colon_inx_road_delimiter}"
-    climb_otx = f"climb{slash_otx_road_delimiter}"
-    climb_inx = f"climb{colon_inx_road_delimiter}"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
+    swim_otx = f"swim{slash_otx_wall}"
+    swim_inx = f"nage{colon_inx_wall}"
+    climb_otx = f"climb{slash_otx_wall}"
+    climb_inx = f"climb{colon_inx_wall}"
     group_id_bridgeunit = bridgeunit_shop(
         type_GroupID_str(),
-        x_otx_road_delimiter=slash_otx_road_delimiter,
-        x_inx_road_delimiter=colon_inx_road_delimiter,
+        x_otx_wall=slash_otx_wall,
+        x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
     )
@@ -149,8 +149,8 @@ def get_slash_groupid_bridgeunit() -> BridgeUnit:
 
 def get_slash_acctid_bridgeunit() -> BridgeUnit:
     x_unknown_word = "UnknownAcctId"
-    slash_otx_road_delimiter = "/"
-    colon_inx_road_delimiter = ":"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
     xio_otx = "Xio"
     sue_otx = "Sue"
     bob_otx = "Bob"
@@ -160,8 +160,8 @@ def get_slash_acctid_bridgeunit() -> BridgeUnit:
     bob_inx = "Bobita"
     acct_id_bridgeunit = bridgeunit_shop(
         type_AcctID_str(),
-        x_otx_road_delimiter=slash_otx_road_delimiter,
-        x_inx_road_delimiter=colon_inx_road_delimiter,
+        x_otx_wall=slash_otx_wall,
+        x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
     )
@@ -290,15 +290,15 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
     casa_otx_road = create_road(otx_music45_str, "casa")
     clean_otx_road = create_road(casa_otx_road, "clean")
     sweep_otx_road = create_road(clean_otx_road, "sweep")
-    x_rd = default_road_delimiter_if_none()
+    x_rd = default_wall_if_none()
     uw = default_unknown_word()
 
     inx_dt = DataFrame(
         columns=[
             "face_id",
             "jaar_type",
-            "otx_road_delimiter",
-            "inx_road_delimiter",
+            "otx_wall",
+            "inx_wall",
             "unknown_word",
             "otx_word",
             "inx_word",
@@ -321,15 +321,15 @@ def get_casa_maison_road_nub_label_dt() -> DataFrame:
     casa_otx_str = "casa"
     clean_otx_str = "clean"
     sweep_otx_str = "sweep"
-    x_rd = default_road_delimiter_if_none()
+    x_rd = default_wall_if_none()
     uw = default_unknown_word()
 
     inx_dt = DataFrame(
         columns=[
             "face_id",
             "jaar_type",
-            "otx_road_delimiter",
-            "inx_road_delimiter",
+            "otx_wall",
+            "inx_wall",
             "unknown_word",
             "otx_label",
             "inx_label",

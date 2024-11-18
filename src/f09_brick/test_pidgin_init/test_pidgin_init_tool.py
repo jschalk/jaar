@@ -49,8 +49,8 @@ def test_get_otx2inx_dt_columns_ReturnsObj():
     static_list = [
         face_id_str(),
         "jaar_type",
-        "otx_road_delimiter",
-        "inx_road_delimiter",
+        "otx_wall",
+        "inx_wall",
         "unknown_word",
         "otx_word",
         "inx_word",
@@ -84,8 +84,8 @@ def test_get_nub_label_columns_ReturnsObj():
     static_list = [
         face_id_str(),
         "jaar_type",
-        "otx_road_delimiter",
-        "inx_road_delimiter",
+        "otx_wall",
+        "inx_wall",
         "unknown_word",
         "otx_label",
         "inx_label",
@@ -201,18 +201,18 @@ def test_load_nub_label_map_from_csv_SetsAttr(env_dir_setup_cleanup):
     assert gen_bridgeunit == empty_road_bridgeunit
 
 
-def test_create_dir_valid_empty_pidginunit_Sets_otx_road_delimiter_inx_road_delimiter(
+def test_create_dir_valid_empty_pidginunit_Sets_otx_wall_inx_wall(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    slash_otx_road_delimiter = "/"
-    colon_inx_road_delimiter = ":"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
     sue_pidginunit = pidginunit_shop(
         x_face_id=sue_str,
-        x_otx_road_delimiter=slash_otx_road_delimiter,
-        x_inx_road_delimiter=colon_inx_road_delimiter,
+        x_otx_wall=slash_otx_wall,
+        x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
     )
     sue_pidginunit.set_bridgeunit(get_slash_acctid_bridgeunit())
@@ -224,12 +224,12 @@ def test_create_dir_valid_empty_pidginunit_Sets_otx_road_delimiter_inx_road_deli
 
     # # THEN
     assert gen_pidginunit.unknown_word == x_unknown_word
-    assert gen_pidginunit.otx_road_delimiter == slash_otx_road_delimiter
-    assert gen_pidginunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert gen_pidginunit.otx_wall == slash_otx_wall
+    assert gen_pidginunit.inx_wall == colon_inx_wall
     gen_bridgeunit = gen_pidginunit.get_bridgeunit(type_AcctID_str())
     assert gen_bridgeunit.unknown_word == x_unknown_word
-    assert gen_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
-    assert gen_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert gen_bridgeunit.otx_wall == slash_otx_wall
+    assert gen_bridgeunit.inx_wall == colon_inx_wall
 
 
 def test_init_pidginunit_from_dir_ReturnsObj(env_dir_setup_cleanup):

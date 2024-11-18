@@ -27,8 +27,8 @@ def time_id_str() -> str:
     return "time_id"
 
 
-def road_delimiter_str() -> str:
-    return "road_delimiter"
+def wall_str() -> str:
+    return "wall"
 
 
 def quota_str() -> str:

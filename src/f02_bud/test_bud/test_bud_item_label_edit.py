@@ -254,7 +254,7 @@ def test_bud_set_owner_id_CorrectlyModifiesBoth():
     assert sue_bud._itemroot._label == sue_bud._fiscal_id
 
 
-def test_bud_edit_item_label_RaisesErrorIfdelimiterIsInLabel():
+def test_bud_edit_item_label_RaisesErrorIfwallIsInLabel():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     old_weekday_str = "weekdays"
@@ -266,5 +266,5 @@ def test_bud_edit_item_label_RaisesErrorIfdelimiterIsInLabel():
         sue_bud.edit_item_label(old_road=old_weekday_road, new_label=new_weekday_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify '{old_weekday_road}' because new_label {new_weekday_str} contains delimiter {sue_bud._road_delimiter}"
+        == f"Cannot modify '{old_weekday_road}' because new_label {new_weekday_str} contains wall {sue_bud._wall}"
     )

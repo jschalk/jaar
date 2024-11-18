@@ -19,7 +19,7 @@ from src.f01_road.finance import (
     FundNum,
 )
 from src.f01_road.road import (
-    default_road_delimiter_if_none,
+    default_wall_if_none,
     OwnerID,
     RoadUnit,
     FiscalID,
@@ -79,7 +79,7 @@ class FiscalUnit:
     current_time: int = None
     purviewlogs: dict[OwnerID, PurviewLog] = None
     cashbook: TranBook = None
-    road_delimiter: str = None
+    wall: str = None
     fund_coin: FundCoin = None
     respect_bit: BitNum = None
     penny: PennyNum = None
@@ -116,7 +116,7 @@ class FiscalUnit:
                 fiscal_id=self.fiscal_id,
                 owner_id=x_owner_id,
                 keep_road=None,
-                road_delimiter=self.road_delimiter,
+                wall=self.wall,
                 respect_bit=self.respect_bit,
             )
             for x_owner_id in x_owner_ids
@@ -163,7 +163,7 @@ class FiscalUnit:
             fiscal_id=self.fiscal_id,
             fiscals_dir=self.fiscals_dir,
             keep_road=None,
-            road_delimiter=self.road_delimiter,
+            wall=self.wall,
             respect_bit=self.respect_bit,
         )
 
@@ -185,7 +185,7 @@ class FiscalUnit:
                 healer_id,
                 keep_road=None,
                 # "duty_job",
-                road_delimiter=self.road_delimiter,
+                wall=self.wall,
                 respect_bit=self.respect_bit,
             )
             for keep_road in healer_dict.keys():
@@ -214,7 +214,7 @@ class FiscalUnit:
                 owner_id=healer_id,
                 keep_road=None,
                 # "duty_job",
-                road_delimiter=self.road_delimiter,
+                wall=self.wall,
                 respect_bit=self.respect_bit,
             )
             healer_hubunit.create_voice_treasury_db_files()
@@ -225,7 +225,7 @@ class FiscalUnit:
                     owner_id=healer_id,
                     keep_road=keep_road,
                     # "duty_job",
-                    road_delimiter=self.road_delimiter,
+                    wall=self.wall,
                     respect_bit=self.respect_bit,
                 )
                 keep_hubunit.save_duty_bud(x_voice)
@@ -287,7 +287,7 @@ class FiscalUnit:
             "timeline": self.timeline.get_dict(),
             "current_time": self.current_time,
             "purviewlogs": self._get_purviewlogs_dict(),
-            "road_delimiter": self.road_delimiter,
+            "wall": self.wall,
             "fund_coin": self.fund_coin,
             "respect_bit": self.respect_bit,
             "penny": self.penny,
@@ -377,7 +377,7 @@ def fiscalunit_shop(
     timeline: TimeLineUnit = None,
     current_time: int = None,
     in_memory_journal: bool = None,
-    road_delimiter: str = None,
+    wall: str = None,
     fund_coin: float = None,
     respect_bit: float = None,
     penny: float = None,
@@ -394,7 +394,7 @@ def fiscalunit_shop(
         current_time=get_0_if_None(current_time),
         purviewlogs={},
         cashbook=tranbook_shop(fiscal_id),
-        road_delimiter=default_road_delimiter_if_none(road_delimiter),
+        wall=default_wall_if_none(wall),
         fund_coin=default_respect_bit_if_none(fund_coin),
         respect_bit=default_respect_bit_if_none(respect_bit),
         penny=default_penny_if_none(penny),
@@ -413,7 +413,7 @@ def get_from_dict(fiscal_dict: dict) -> FiscalUnit:
     x_fiscal = fiscalunit_shop(x_fiscal_id, None)
     x_fiscal.timeline = timelineunit_shop(fiscal_dict.get("timeline"))
     x_fiscal.current_time = fiscal_dict.get("current_time")
-    x_fiscal.road_delimiter = fiscal_dict.get("road_delimiter")
+    x_fiscal.wall = fiscal_dict.get("wall")
     x_fiscal.fund_coin = fiscal_dict.get("fund_coin")
     x_fiscal.respect_bit = fiscal_dict.get("respect_bit")
     x_fiscal.penny = fiscal_dict.get("penny")
