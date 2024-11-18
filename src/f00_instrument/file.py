@@ -28,7 +28,7 @@ from tempfile import TemporaryFile as tempfile_TemporaryFile
 from copy import deepcopy as copy_deepcopy
 
 
-def create_file_path(x_dir: str, filename: str) -> str:
+def create_path(x_dir: str, filename: str) -> str:
     if not x_dir:
         return f"/{filename}" if filename else ""
     return f"{x_dir}/{filename}" if filename else x_dir
@@ -68,7 +68,7 @@ def create_dir(x_dir: str):
 def save_file(dest_dir: str, file_name: str, file_str: str, replace: bool = None):
     replace = True if replace is None else replace
     create_dir(dest_dir)
-    file_path = create_file_path(dest_dir, file_name)
+    file_path = create_path(dest_dir, file_name)
     if (os_path_exists(file_path) and replace) or os_path_exists(file_path) is False:
         with open(file_path, "w") as f:
             f.write(file_str)
@@ -80,7 +80,7 @@ class CouldNotOpenFileException(Exception):
 
 
 def open_file(dest_dir: str, file_name: str):
-    file_path = create_file_path(dest_dir, file_name)
+    file_path = create_path(dest_dir, file_name)
     text_x = ""
     try:
         with open(file_path, "r") as f:
@@ -114,10 +114,10 @@ def get_dir_file_strs(
         file_name = None
         file_path = None
         file_str = None
-        obj_path = create_file_path(x_dir, obj_name)
+        obj_path = create_path(x_dir, obj_name)
         if os_path_isfile(obj_path) and include_files:
             file_name = obj_name
-            file_path = create_file_path(x_dir, file_name)
+            file_path = create_path(x_dir, file_name)
             file_str = open_file(dest_dir=x_dir, file_name=file_name)
             dict_key = (
                 os_path_splitext(file_name)[0] if delete_extensions else file_name
@@ -141,7 +141,7 @@ def get_integer_filenames(
         return x_set
 
     for obj_name in os_listdir(dir_path):
-        obj_path = create_file_path(dir_path, obj_name)
+        obj_path = create_path(dir_path, obj_name)
         if os_path_isfile(obj_path):
             obj_extension = os_path_splitext(obj_name)[1].replace(".", "")
             filename_without_extension = os_path_splitext(obj_name)[0]
@@ -163,7 +163,7 @@ def get_directory_path(x_list: list[str] = None) -> str:
     x_str = ""
     while x_list != []:
         x_level = x_list.pop(0)
-        x_str = create_file_path(x_str, x_level)
+        x_str = create_path(x_str, x_level)
     return x_str
 
 

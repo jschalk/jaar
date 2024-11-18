@@ -25,23 +25,23 @@ def test_BridgeUnit_get_dict_ReturnsObj():
         "otx_road_delimiter": roadnode_bridgeunit.otx_road_delimiter,
         "inx_road_delimiter": roadnode_bridgeunit.inx_road_delimiter,
         "unknown_word": roadnode_bridgeunit.unknown_word,
-        "explicit_label": roadnode_bridgeunit.explicit_label,
-        "otx_to_inx": {},
+        "nub_label": roadnode_bridgeunit.nub_label,
+        "otx2inx": {},
         face_id_str(): roadnode_bridgeunit.face_id,
         "jaar_type": roadnode_bridgeunit.jaar_type,
     }
     assert roadnode_bridgeunit.get_dict() == x1_road_bridge_dict
 
     # WHEN
-    roadnode_bridgeunit.set_otx_to_inx(clean_otx, clean_inx)
-    roadnode_bridgeunit.set_explicit_label(casa_otx, casa_inx)
+    roadnode_bridgeunit.set_otx2inx(clean_otx, clean_inx)
+    roadnode_bridgeunit.set_nub_label(casa_otx, casa_inx)
     # THEN
     x2_road_bridge_dict = {
         "otx_road_delimiter": roadnode_bridgeunit.otx_road_delimiter,
         "inx_road_delimiter": roadnode_bridgeunit.inx_road_delimiter,
         "unknown_word": roadnode_bridgeunit.unknown_word,
-        "explicit_label": {casa_otx: casa_inx},
-        "otx_to_inx": {clean_otx: clean_inx},
+        "nub_label": {casa_otx: casa_inx},
+        "otx2inx": {clean_otx: clean_inx},
         face_id_str(): sue_str,
         "jaar_type": "RoadNode",
     }
@@ -60,36 +60,36 @@ def test_BridgeUnit_get_json_ReturnsObj():
         "RoadNode", slash_otx_road_delimiter, x_face_id=sue_str
     )
     x1_road_bridge_json = f"""{{
-  "explicit_label": {roadnode_bridgeunit.explicit_label},
   "{face_id_str()}": "{sue_str}",
   "inx_road_delimiter": "{roadnode_bridgeunit.inx_road_delimiter}",
-  "jaar_type": "{"RoadNode"}",
+  "jaar_type": "RoadNode",
+  "nub_label": {roadnode_bridgeunit.nub_label},
+  "otx2inx": {{}},
   "otx_road_delimiter": "{roadnode_bridgeunit.otx_road_delimiter}",
-  "otx_to_inx": {{}},
   "unknown_word": "{roadnode_bridgeunit.unknown_word}"
 }}"""
-    print(f"       {x1_road_bridge_json=}")
+    print(f"           {x1_road_bridge_json=}")
     print(f"{roadnode_bridgeunit.get_json()=}")
     assert roadnode_bridgeunit.get_json() == x1_road_bridge_json
 
     # WHEN
-    roadnode_bridgeunit.set_otx_to_inx(clean_otx, clean_inx)
-    roadnode_bridgeunit.set_explicit_label(casa_otx, casa_inx)
+    roadnode_bridgeunit.set_otx2inx(clean_otx, clean_inx)
+    roadnode_bridgeunit.set_nub_label(casa_otx, casa_inx)
     # THEN
     x2_road_bridge_json = f"""{{
-  "explicit_label": {{
-    "{casa_otx}": "{casa_inx}"
-  }},
   "{face_id_str()}": "{sue_str}",
   "inx_road_delimiter": "{roadnode_bridgeunit.inx_road_delimiter}",
-  "jaar_type": "{"RoadNode"}",
-  "otx_road_delimiter": "{roadnode_bridgeunit.otx_road_delimiter}",
-  "otx_to_inx": {{
+  "jaar_type": "RoadNode",
+  "nub_label": {{
+    "{casa_otx}": "{casa_inx}"
+  }},
+  "otx2inx": {{
     "{clean_otx}": "{clean_inx}"
   }},
+  "otx_road_delimiter": "{roadnode_bridgeunit.otx_road_delimiter}",
   "unknown_word": "{roadnode_bridgeunit.unknown_word}"
 }}"""
-    print(f"       {x2_road_bridge_json=}")
+    print(f"           {x2_road_bridge_json=}")
     print(f"{roadnode_bridgeunit.get_json()=}")
     assert roadnode_bridgeunit.get_json() == x2_road_bridge_json
 
@@ -105,8 +105,8 @@ def test_get_bridgeunit_from_dict_ReturnsObj():
     roadnode_bridgeunit = bridgeunit_shop(
         "RoadNode", slash_otx_road_delimiter, x_face_id=sue_str
     )
-    roadnode_bridgeunit.set_otx_to_inx(clean_otx, clean_inx)
-    roadnode_bridgeunit.set_explicit_label(casa_otx, casa_inx)
+    roadnode_bridgeunit.set_otx2inx(clean_otx, clean_inx)
+    roadnode_bridgeunit.set_nub_label(casa_otx, casa_inx)
 
     # WHEN
     gen_bridgeunit = get_bridgeunit_from_dict(roadnode_bridgeunit.get_dict())
@@ -123,7 +123,7 @@ def test_get_bridgeunit_from_json_ReturnsObj():
     clean_inx = "propre"
     slash_otx_road_delimiter = "/"
     roadnode_bridgeunit = bridgeunit_shop("RoadNode", slash_otx_road_delimiter)
-    roadnode_bridgeunit.set_otx_to_inx(clean_otx, clean_inx)
+    roadnode_bridgeunit.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
     x_bridgeunit = get_bridgeunit_from_json(roadnode_bridgeunit.get_json())

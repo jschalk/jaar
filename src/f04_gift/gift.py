@@ -1,4 +1,4 @@
-from src.f00_instrument.file import save_file, open_file, create_file_path
+from src.f00_instrument.file import save_file, open_file, create_path
 from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
 from src.f01_road.jaar_config import get_init_gift_id_if_None, get_json_filename
 from src.f01_road.road import OwnerID, FiscalID, get_default_fiscal_id_roadnode
@@ -70,7 +70,7 @@ class GiftUnit:
 
     def atom_file_exists(self, atom_number: int) -> bool:
         x_filename = self._get_num_filename(atom_number)
-        return os_path_exists(create_file_path(self._atoms_dir, x_filename))
+        return os_path_exists(create_path(self._atoms_dir, x_filename))
 
     def _open_atom_file(self, atom_number: int) -> AtomUnit:
         x_json = open_file(self._atoms_dir, self._get_num_filename(atom_number))
@@ -82,7 +82,7 @@ class GiftUnit:
 
     def gift_file_exists(self) -> bool:
         x_filename = self._get_num_filename(self._gift_id)
-        return os_path_exists(create_file_path(self._gifts_dir, x_filename))
+        return os_path_exists(create_path(self._gifts_dir, x_filename))
 
     def _save_atom_files(self):
         step_dict = self.get_step_dict()

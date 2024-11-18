@@ -26,8 +26,8 @@ def get_clean_roadnode_bridgeunit() -> BridgeUnit:
     roadnode_bridgeunit = bridgeunit_shop(
         type_RoadNode_str(), slash_otx_road_delimiter, x_face_id="Sue"
     )
-    roadnode_bridgeunit.set_otx_to_inx(clean_otx, clean_inx)
-    roadnode_bridgeunit.set_otx_to_inx(casa_otx, casa_inx)
+    roadnode_bridgeunit.set_otx2inx(clean_otx, clean_inx)
+    roadnode_bridgeunit.set_otx2inx(casa_otx, casa_inx)
     return roadnode_bridgeunit
 
 
@@ -39,8 +39,8 @@ def get_clean_roadunit_bridgeunit() -> BridgeUnit:
     road_delimiter = default_road_delimiter_if_none()
     clean_otx_road = f"{otx_music45_str}{road_delimiter}{clean_otx_str}"
     road_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), x_face_id="Sue")
-    road_bridgeunit.set_explicit_label(clean_otx_str, clean_inx_str)
-    road_bridgeunit.set_otx_to_inx(otx_music45_str, inx_music87_str)
+    road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
+    road_bridgeunit.set_otx2inx(otx_music45_str, inx_music87_str)
     road_bridgeunit.get_create_inx(clean_otx_road)
     return road_bridgeunit
 
@@ -51,8 +51,8 @@ def get_swim_groupid_bridgeunit() -> BridgeUnit:
     swim_inx = f"nage{road_delimiter}"
     climb_otx = f"climb{road_delimiter}"
     group_id_bridgeunit = bridgeunit_shop(type_GroupID_str(), x_face_id="Sue")
-    group_id_bridgeunit.set_otx_to_inx(swim_otx, swim_inx)
-    group_id_bridgeunit.set_otx_to_inx(climb_otx, climb_otx)
+    group_id_bridgeunit.set_otx2inx(swim_otx, swim_inx)
+    group_id_bridgeunit.set_otx2inx(climb_otx, climb_otx)
     return group_id_bridgeunit
 
 
@@ -65,9 +65,9 @@ def get_suita_acctid_bridgeunit() -> BridgeUnit:
     sue_inx = "Suita"
     bob_inx = "Bobita"
     acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), x_face_id="Sue")
-    acct_id_bridgeunit.set_otx_to_inx(xio_otx, xio_inx)
-    acct_id_bridgeunit.set_otx_to_inx(sue_otx, sue_inx)
-    acct_id_bridgeunit.set_otx_to_inx(bob_otx, bob_inx)
+    acct_id_bridgeunit.set_otx2inx(xio_otx, xio_inx)
+    acct_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
+    acct_id_bridgeunit.set_otx2inx(bob_otx, bob_inx)
     return acct_id_bridgeunit
 
 
@@ -77,8 +77,8 @@ def get_invalid_acctid_bridgeunit() -> BridgeUnit:
     zia_otx = "Zia"
     zia_inx = "Zia"
     group_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), x_face_id="Sue")
-    group_id_bridgeunit.set_otx_to_inx(sue_otx, sue_inx)
-    group_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    group_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
+    group_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
     return group_id_bridgeunit
 
 
@@ -88,8 +88,8 @@ def get_invalid_groupid_bridgeunit() -> BridgeUnit:
     zia_otx = "Zia"
     zia_inx = f"Zia{default_road_delimiter_if_none()}"
     group_id_bridgeunit = bridgeunit_shop(type_GroupID_str(), x_face_id="Sue")
-    group_id_bridgeunit.set_otx_to_inx(sue_otx, sue_inx)
-    group_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    group_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
+    group_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
     return group_id_bridgeunit
 
 
@@ -99,8 +99,8 @@ def get_invalid_road_bridgeunit() -> BridgeUnit:
     casa_otx = f"casa{default_road_delimiter_if_none()}"
     casa_inx = "casa"
     roadnode_bridgeunit = bridgeunit_shop(type_RoadNode_str(), x_face_id="Sue")
-    roadnode_bridgeunit.set_otx_to_inx(clean_str, clean_inx)
-    roadnode_bridgeunit.set_otx_to_inx(casa_otx, casa_inx)
+    roadnode_bridgeunit.set_otx2inx(clean_str, clean_inx)
+    roadnode_bridgeunit.set_otx2inx(casa_otx, casa_inx)
     return roadnode_bridgeunit
 
 
@@ -121,8 +121,8 @@ def get_slash_roadunit_bridgeunit() -> BridgeUnit:
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
     )
-    road_bridgeunit.set_explicit_label(clean_otx_str, clean_inx_str)
-    road_bridgeunit.set_otx_to_inx(otx_music45_str, inx_music87_str)
+    road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
+    road_bridgeunit.set_otx2inx(otx_music45_str, inx_music87_str)
     road_bridgeunit.get_create_inx(clean_otx_road)
     return road_bridgeunit
 
@@ -142,8 +142,8 @@ def get_slash_groupid_bridgeunit() -> BridgeUnit:
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
     )
-    group_id_bridgeunit.set_otx_to_inx(swim_otx, swim_inx)
-    group_id_bridgeunit.set_otx_to_inx(climb_otx, climb_inx)
+    group_id_bridgeunit.set_otx2inx(swim_otx, swim_inx)
+    group_id_bridgeunit.set_otx2inx(climb_otx, climb_inx)
     return group_id_bridgeunit
 
 
@@ -165,9 +165,9 @@ def get_slash_acctid_bridgeunit() -> BridgeUnit:
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
     )
-    acct_id_bridgeunit.set_otx_to_inx(xio_otx, xio_inx)
-    acct_id_bridgeunit.set_otx_to_inx(sue_otx, sue_inx)
-    acct_id_bridgeunit.set_otx_to_inx(bob_otx, bob_inx)
+    acct_id_bridgeunit.set_otx2inx(xio_otx, xio_inx)
+    acct_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
+    acct_id_bridgeunit.set_otx2inx(bob_otx, bob_inx)
     return acct_id_bridgeunit
 
 
@@ -205,7 +205,7 @@ def get_suita_acctid_inx_dt() -> DataFrame:
     return inx_dt
 
 
-def get_casa_maison_pidginunit_set_by_otx_to_inx() -> PidginUnit:
+def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     otx_music45_str = "music45"
     inx_music87_str = "music87"
     casa_otx_str = "casa"
@@ -222,14 +222,14 @@ def get_casa_maison_pidginunit_set_by_otx_to_inx() -> PidginUnit:
 
     sue_pidginunit = pidginunit_shop("Sue")
     rx = type_RoadNode_str()
-    sue_pidginunit.set_otx_to_inx(rx, otx_music45_str, inx_music87_str)
-    sue_pidginunit.set_otx_to_inx(rx, casa_otx_road, casa_inx_road)
-    sue_pidginunit.set_otx_to_inx(rx, clean_otx_road, clean_inx_road)
-    sue_pidginunit.set_otx_to_inx(rx, sweep_otx_road, sweep_inx_road)
+    sue_pidginunit.set_otx2inx(rx, otx_music45_str, inx_music87_str)
+    sue_pidginunit.set_otx2inx(rx, casa_otx_road, casa_inx_road)
+    sue_pidginunit.set_otx2inx(rx, clean_otx_road, clean_inx_road)
+    sue_pidginunit.set_otx2inx(rx, sweep_otx_road, sweep_inx_road)
     return sue_pidginunit
 
 
-def get_casa_maison_pidginunit_set_by_explicit_label() -> PidginUnit:
+def get_casa_maison_pidginunit_set_by_nub_label() -> PidginUnit:
     otx_music45_str = "music45"
     inx_music87_str = "music87"
     casa_otx_str = "casa"
@@ -246,9 +246,9 @@ def get_casa_maison_pidginunit_set_by_explicit_label() -> PidginUnit:
 
     sue_pidginunit = pidginunit_shop("Sue")
     rx = type_RoadNode_str()
-    sue_pidginunit.set_explicit_label(rx, otx_music45_str, inx_music87_str)
-    sue_pidginunit.set_explicit_label(rx, casa_otx_str, casa_inx_str)
-    sue_pidginunit.set_explicit_label(rx, clean_otx_str, clean_inx_str)
+    sue_pidginunit.set_nub_label(rx, otx_music45_str, inx_music87_str)
+    sue_pidginunit.set_nub_label(rx, casa_otx_str, casa_inx_str)
+    sue_pidginunit.set_nub_label(rx, clean_otx_str, clean_inx_str)
     return sue_pidginunit
 
 
@@ -281,7 +281,7 @@ def get_casa_maison_road_inx_dt() -> DataFrame:
     return inx_dt
 
 
-def get_casa_maison_road_otx_to_inx_dt() -> DataFrame:
+def get_casa_maison_road_otx2inx_dt() -> DataFrame:
     inx_music87_str = "music87"
     casa_inx_road = create_road(inx_music87_str, "maison")
     clean_inx_road = create_road(casa_inx_road, "propre")
@@ -312,7 +312,7 @@ def get_casa_maison_road_otx_to_inx_dt() -> DataFrame:
     return inx_dt
 
 
-def get_casa_maison_road_explicit_label_dt() -> DataFrame:
+def get_casa_maison_road_nub_label_dt() -> DataFrame:
     inx_music87_str = "music87"
     casa_inx_str = "maison"
     clean_inx_str = "propre"

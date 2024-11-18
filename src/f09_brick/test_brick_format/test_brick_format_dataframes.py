@@ -1,4 +1,4 @@
-from src.f00_instrument.file import open_file, create_file_path
+from src.f00_instrument.file import open_file, create_path
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f03_chrono.examples.chrono_examples import (
@@ -193,7 +193,7 @@ def test_save_brick_csv_Arg_brick_format_00019_itemunit_v0_0_0():
 
     # WHEN
     # acct_filename = f"{sue_str}_itemunit_example_00019.csv"
-    # csv_example_path = create_file_path(brick_fiscals_dir(), acct_filename)
+    # csv_example_path = create_path(brick_fiscals_dir(), acct_filename)
     # save_brick_csv(x_brick_name, sue_budunit, brick_examples_dir(), acct_filename)
     brick_df = create_brick_df(sue_budunit, x_brick_name)
 
@@ -224,7 +224,7 @@ def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     j1_brickname = brick_format_00021_bud_acctunit_v0_0_0()
     acct_filename = f"{sue_str}_acct_example_00.csv"
-    csv_example_path = create_file_path(brick_fiscals_dir(), acct_filename)
+    csv_example_path = create_path(brick_fiscals_dir(), acct_filename)
     print(f"{csv_example_path}")
     assert not os_path_exists(csv_example_path)
 
@@ -275,7 +275,7 @@ def test_save_brick_csv_Arg_brick_format_00013_itemunit_v0_0_0(brick_env_setup_c
     x_brick_name = brick_format_00013_itemunit_v0_0_0()
     itemunit_format = create_brick_df(sue_budunit, x_brick_name)
     acct_filename = f"{sue_str}_itemunit_example_000.csv"
-    csv_example_path = create_file_path(brick_fiscals_dir(), acct_filename)
+    csv_example_path = create_path(brick_fiscals_dir(), acct_filename)
     assert not os_path_exists(csv_example_path)
 
     # WHEN

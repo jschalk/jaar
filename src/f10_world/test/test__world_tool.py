@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_file_path, create_dir
+from src.f00_instrument.file import create_path, create_dir
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
@@ -14,9 +14,9 @@ from pandas import DataFrame, ExcelWriter
 def test_get_all_excel_bricksheets_ReturnsObj_Scenario0_SheetNames():
     # ESTABLISH
     env_dir = get_test_worlds_dir()
-    x_dir = create_file_path(env_dir, "examples_folder")
+    x_dir = create_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_file_path(x_dir, ex_file_name)
+    ex_file_path = create_path(x_dir, ex_file_name)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     br00000_str = "br00000"
@@ -44,9 +44,9 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
 ):
     # ESTABLISH
     env_dir = get_test_worlds_dir()
-    x_dir = create_file_path(env_dir, "examples_folder")
+    x_dir = create_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_file_path(x_dir, ex_file_name)
+    ex_file_path = create_path(x_dir, ex_file_name)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     not_br00000_str = "b00000"
@@ -85,7 +85,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
 ):
     # ESTABLISH
     env_dir = get_test_worlds_dir()
-    x_dir = create_file_path(env_dir, "examples_folder")
+    x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
     event_1 = 1
     minute_360 = 360
@@ -94,7 +94,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_file_path(x_dir, ex_file_name)
+    ex_file_path = create_path(x_dir, ex_file_name)
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -126,7 +126,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
 def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_test_worlds_dir()
-    x_dir = create_file_path(env_dir, "examples_folder")
+    x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
     event_1 = 1
     minute_360 = 360
@@ -135,7 +135,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_file_path(x_dir, ex_file_name)
+    ex_file_path = create_path(x_dir, ex_file_name)
     brick_columns = [
         face_id_str(),
         event_id_str(),

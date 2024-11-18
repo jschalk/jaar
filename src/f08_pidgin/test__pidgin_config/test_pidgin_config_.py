@@ -13,6 +13,7 @@ from src.f08_pidgin.pidgin_config import (
     get_pidgin_config_file_name,
     get_pidgin_config_dict,
     get_pidgin_args_category_mapping,
+    get_quick_pidgens_column_ref,
     pidginunit_str,
     event_id_str,
     otx_road_delimiter_str,
@@ -22,10 +23,10 @@ from src.f08_pidgin.pidgin_config import (
     inx_label_str,
     otx_label_str,
     unknown_word_str,
-    explicit_label_str,
-    otx_to_inx_str,
-    bridge_otx_to_inx_str,
-    bridge_explicit_label_str,
+    nub_label_str,
+    otx2inx_str,
+    bridge_otx2inx_str,
+    bridge_nub_label_str,
 )
 from os import getcwd as os_getcwd
 
@@ -39,10 +40,10 @@ def test_str_functions_ReturnsObj():
     assert inx_label_str() == "inx_label"
     assert otx_label_str() == "otx_label"
     assert unknown_word_str() == "unknown_word"
-    assert explicit_label_str() == "explicit_label"
-    assert otx_to_inx_str() == "otx_to_inx"
-    assert bridge_otx_to_inx_str() == "bridge_otx_to_inx"
-    assert bridge_explicit_label_str() == "bridge_explicit_label"
+    assert nub_label_str() == "nub_label"
+    assert otx2inx_str() == "otx2inx"
+    assert bridge_otx2inx_str() == "bridge_otx2inx"
+    assert bridge_nub_label_str() == "bridge_nub_label"
     assert event_id_str() == "event_id"
 
 
@@ -62,17 +63,17 @@ def test_get_pidgin_config_dict_ReturnsObj():
     # THEN
     assert pidgin_config
     pidgin_config_categorys = set(pidgin_config.keys())
-    assert bridge_otx_to_inx_str() in pidgin_config_categorys
-    assert bridge_explicit_label_str() in pidgin_config_categorys
+    assert bridge_otx2inx_str() in pidgin_config_categorys
+    assert bridge_nub_label_str() in pidgin_config_categorys
     assert len(pidgin_config) == 2
 
     _validate_pidgin_config(pidgin_config)
-    bridge_otx_to_inx_dict = pidgin_config.get(bridge_otx_to_inx_str())
-    bridge_explicit_label_dict = pidgin_config.get(bridge_explicit_label_str())
-    assert len(bridge_otx_to_inx_dict.get(jkeys_str())) == 2
-    assert len(bridge_explicit_label_dict.get(jkeys_str())) == 2
-    assert len(bridge_otx_to_inx_dict.get(jvalues_str())) == 4
-    assert len(bridge_explicit_label_dict.get(jvalues_str())) == 4
+    bridge_otx2inx_dict = pidgin_config.get(bridge_otx2inx_str())
+    bridge_nub_label_dict = pidgin_config.get(bridge_nub_label_str())
+    assert len(bridge_otx2inx_dict.get(jkeys_str())) == 2
+    assert len(bridge_nub_label_dict.get(jkeys_str())) == 2
+    assert len(bridge_otx2inx_dict.get(jvalues_str())) == 4
+    assert len(bridge_nub_label_dict.get(jvalues_str())) == 4
 
     # assert gen_jvalues == x_pidginunit_jvalues
     # assert len(pidginunit_dict.get(jvalues_str())) == 9
@@ -120,8 +121,8 @@ def test_get_pidgin_categorys_ReturnsObj():
     pidgin_config_categorys = get_pidgin_categorys()
 
     # THEN
-    assert bridge_otx_to_inx_str() in pidgin_config_categorys
-    assert bridge_explicit_label_str() in pidgin_config_categorys
+    assert bridge_otx2inx_str() in pidgin_config_categorys
+    assert bridge_nub_label_str() in pidgin_config_categorys
 
 
 def test_get_pidgin_args_category_mapping_ReturnsObj():
@@ -132,11 +133,33 @@ def test_get_pidgin_args_category_mapping_ReturnsObj():
     # THEN
     assert x_pidgin_args_category_mapping
     assert x_pidgin_args_category_mapping.get(otx_word_str())
-    x_categorys = {bridge_otx_to_inx_str()}
+    x_categorys = {bridge_otx2inx_str()}
     assert x_pidgin_args_category_mapping.get(otx_word_str()) == x_categorys
     assert x_pidgin_args_category_mapping.get(inx_road_delimiter_str())
     pidgin_id_categorys = x_pidgin_args_category_mapping.get(inx_road_delimiter_str())
-    assert bridge_otx_to_inx_str() in pidgin_id_categorys
-    assert bridge_explicit_label_str() in pidgin_id_categorys
+    assert bridge_otx2inx_str() in pidgin_id_categorys
+    assert bridge_nub_label_str() in pidgin_id_categorys
     assert len(pidgin_id_categorys) == 2
     assert len(x_pidgin_args_category_mapping) == 8
+
+
+def _get_all_pidgen_config_attrs() -> dict[str, set[str]]:
+    pidgin_config = get_pidgin_config_dict()
+    print(f"{pidgin_config=}")
+    x_pidgen_attrs = {}
+    for pidgin_category, jkeys_jvalues_dict in pidgin_config.items():
+        attrs_set = set(jkeys_jvalues_dict.get("jkeys").keys())
+        attrs_set.update(set(jkeys_jvalues_dict.get("jvalues").keys()))
+        x_pidgen_attrs[pidgin_category] = attrs_set
+    return x_pidgen_attrs
+
+
+def test_get_quick_pidgens_column_ref_ReturnsObj():
+    # ESTABLISH
+    all_pidgen_config_attrs = _get_all_pidgen_config_attrs()
+    print(f"{all_pidgen_config_attrs=}")
+
+    # WHEN / THEN
+    assert bridge_otx2inx_str() in set(get_quick_pidgens_column_ref().keys())
+    assert len(get_quick_pidgens_column_ref().keys()) == 2
+    assert get_quick_pidgens_column_ref() == all_pidgen_config_attrs

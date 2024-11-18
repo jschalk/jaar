@@ -15,11 +15,11 @@ def test_BridgeUnit_otx_road_delimiter_in_otx_words_ReturnsObj():
     zia_inx = "Zia"
     zia_otx = f"Zia{otx_road_delimiter}"
     acct_id_bridgeunit = bridgeunit_shop(None, otx_road_delimiter)
-    acct_id_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    acct_id_bridgeunit.set_otx2inx(xio_str, sue_str)
     assert acct_id_bridgeunit._otx_road_delimiter_in_otx_words() is False
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    acct_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
 
     # THEN
     assert acct_id_bridgeunit._otx_road_delimiter_in_otx_words()
@@ -33,11 +33,11 @@ def test_BridgeUnit_inx_road_delimiter_in_otx_words_ReturnsObj():
     zia_inx = "Zia"
     zia_otx = f"Zia{inx_road_delimiter}"
     acct_id_bridgeunit = bridgeunit_shop(None, None, inx_road_delimiter)
-    acct_id_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    acct_id_bridgeunit.set_otx2inx(xio_str, sue_str)
     assert acct_id_bridgeunit._inx_road_delimiter_in_otx_words() is False
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    acct_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
 
     # THEN
     assert acct_id_bridgeunit._inx_road_delimiter_in_otx_words()
@@ -51,11 +51,11 @@ def test_BridgeUnit_otx_road_delimiter_in_inx_words_ReturnsObj():
     zia_otx = "Zia"
     zia_inx = f"Zia{otx_road_delimiter}"
     acct_id_bridgeunit = bridgeunit_shop(None, otx_road_delimiter)
-    acct_id_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    acct_id_bridgeunit.set_otx2inx(xio_str, sue_str)
     assert acct_id_bridgeunit._otx_road_delimiter_in_inx_words() is False
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    acct_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
 
     # THEN
     assert acct_id_bridgeunit._otx_road_delimiter_in_inx_words()
@@ -69,11 +69,11 @@ def test_BridgeUnit_inx_road_delimiter_in_inx_words_ReturnsObj():
     zia_otx = "Zia"
     zia_inx = f"Zia{inx_road_delimiter}"
     acct_id_bridgeunit = bridgeunit_shop(None, None, inx_road_delimiter)
-    acct_id_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    acct_id_bridgeunit.set_otx2inx(xio_str, sue_str)
     assert acct_id_bridgeunit._inx_road_delimiter_in_inx_words() is False
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    acct_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
 
     # THEN
     assert acct_id_bridgeunit._inx_road_delimiter_in_inx_words()
@@ -91,12 +91,12 @@ def test_BridgeUnit_is_inx_delimiter_inclusion_correct_ReturnsObj_AcctID():
     assert acct_id_bridgeunit._is_inx_delimiter_inclusion_correct()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    acct_id_bridgeunit.set_otx2inx(xio_str, sue_str)
     # THEN
     assert acct_id_bridgeunit._is_inx_delimiter_inclusion_correct()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    acct_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
     # THEN
     assert acct_id_bridgeunit._is_inx_delimiter_inclusion_correct() is False
 
@@ -113,12 +113,12 @@ def test_BridgeUnit_is_inx_delimiter_inclusion_correct_ReturnsObj_GroupID():
     assert acct_id_bridgeunit._is_inx_delimiter_inclusion_correct()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    acct_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
     # THEN
     assert acct_id_bridgeunit._is_inx_delimiter_inclusion_correct()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    acct_id_bridgeunit.set_otx2inx(xio_str, sue_str)
     # THEN
     assert acct_id_bridgeunit._is_inx_delimiter_inclusion_correct() is False
 
@@ -140,7 +140,7 @@ def test_BridgeUnit_is_inx_delimiter_inclusion_correct_ReturnsObj_RoadUnit():
     assert road_bridgeunit._is_inx_delimiter_inclusion_correct()
 
     # WHEN
-    road_bridgeunit.set_otx_to_inx(clean_otx_road, clean_inx_road)
+    road_bridgeunit.set_otx2inx(clean_otx_road, clean_inx_road)
     # THEN
     assert road_bridgeunit._is_inx_delimiter_inclusion_correct()
 
@@ -157,12 +157,12 @@ def test_BridgeUnit_is_otx_delimiter_inclusion_correct_ReturnsObj_AcctID():
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(xio_otx, xio_inx)
+    acct_id_bridgeunit.set_otx2inx(xio_otx, xio_inx)
     # THEN
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    acct_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
     # THEN
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct() is False
 
@@ -179,12 +179,12 @@ def test_BridgeUnit_is_otx_delimiter_inclusion_correct_ReturnsObj_GroupID():
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    acct_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
     # THEN
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    acct_id_bridgeunit.set_otx2inx(xio_str, sue_str)
     # THEN
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct() is False
 
@@ -201,12 +201,12 @@ def test_BridgeUnit_is_otx_delimiter_inclusion_correct_ReturnsObj_RoadNode():
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(clean_str, clean_inx)
+    acct_id_bridgeunit.set_otx2inx(clean_str, clean_inx)
     # THEN
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(casa_otx, casa_inx)
+    acct_id_bridgeunit.set_otx2inx(casa_otx, casa_inx)
     # THEN
     assert acct_id_bridgeunit._is_otx_delimiter_inclusion_correct() is False
 
@@ -228,7 +228,7 @@ def test_BridgeUnit_is_otx_delimiter_inclusion_correct_ReturnsObj_RoadUnit():
     assert road_bridgeunit._is_otx_delimiter_inclusion_correct()
 
     # WHEN
-    road_bridgeunit.set_otx_to_inx(clean_otx_road, clean_inx_road)
+    road_bridgeunit.set_otx2inx(clean_otx_road, clean_inx_road)
     # THEN
     assert road_bridgeunit._is_otx_delimiter_inclusion_correct()
 
@@ -245,12 +245,12 @@ def test_BridgeUnit_all_otx_parent_roads_exist_ReturnsObjAlwaysTrue_GroupID():
     assert acct_id_bridgeunit.all_otx_parent_roads_exist()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    acct_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
     # THEN
     assert acct_id_bridgeunit.all_otx_parent_roads_exist()
 
     # WHEN
-    acct_id_bridgeunit.set_otx_to_inx(xio_str, sue_str)
+    acct_id_bridgeunit.set_otx2inx(xio_str, sue_str)
     # THEN
     assert acct_id_bridgeunit.all_otx_parent_roads_exist()
 
@@ -269,14 +269,14 @@ def test_BridgeUnit_all_otx_parent_roads_exist_ReturnsObj_RoadUnit():
     assert road_bridgeunit.all_otx_parent_roads_exist()
 
     # WHEN
-    road_bridgeunit.set_otx_to_inx(clean_otx_road, "any")
+    road_bridgeunit.set_otx2inx(clean_otx_road, "any")
     # THEN
     assert road_bridgeunit.otx_exists(clean_otx_parent_road) is False
     assert road_bridgeunit.otx_exists(clean_otx_road)
     assert road_bridgeunit.all_otx_parent_roads_exist() is False
 
     # WHEN
-    road_bridgeunit.set_otx_to_inx(clean_otx_parent_road, "any")
+    road_bridgeunit.set_otx2inx(clean_otx_parent_road, "any")
     # THEN
     assert road_bridgeunit.otx_exists(clean_otx_parent_road)
     assert road_bridgeunit.otx_exists(clean_otx_road)
@@ -295,12 +295,12 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario0_label_str():
     assert roadnode_bridgeunit.is_valid()
 
     # WHEN
-    roadnode_bridgeunit.set_otx_to_inx(clean_str, clean_inx)
+    roadnode_bridgeunit.set_otx2inx(clean_str, clean_inx)
     # THEN
     assert roadnode_bridgeunit.is_valid()
 
     # WHEN
-    roadnode_bridgeunit.set_otx_to_inx(casa_otx, casa_inx)
+    roadnode_bridgeunit.set_otx2inx(casa_otx, casa_inx)
     # THEN
     assert roadnode_bridgeunit.is_valid() is False
 
@@ -319,16 +319,16 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario1_road_str():
     road_bridgeunit = bridgeunit_shop(
         type_RoadUnit_str(), otx_r_delimiter, inx_r_delimiter
     )
-    road_bridgeunit.set_otx_to_inx(music_str, music_str)
+    road_bridgeunit.set_otx2inx(music_str, music_str)
     assert road_bridgeunit.jaar_type == type_RoadUnit_str()
     assert road_bridgeunit.is_valid()
-    assert road_bridgeunit.otx_to_inx_exists(clean_otx_road, clean_inx_road) is False
+    assert road_bridgeunit.otx2inx_exists(clean_otx_road, clean_inx_road) is False
 
     # WHEN
-    road_bridgeunit.set_otx_to_inx(clean_otx_road, clean_inx_road)
+    road_bridgeunit.set_otx2inx(clean_otx_road, clean_inx_road)
     # THEN
     assert road_bridgeunit.is_valid()
-    assert road_bridgeunit.otx_to_inx_exists(clean_otx_road, clean_inx_road)
+    assert road_bridgeunit.otx2inx_exists(clean_otx_road, clean_inx_road)
 
 
 def test_BridgeUnit_is_valid_ReturnsObj_Scenario2_group_id_str():
@@ -346,12 +346,12 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario2_group_id_str():
     assert group_id_bridgeunit.is_valid()
 
     # WHEN
-    group_id_bridgeunit.set_otx_to_inx(sue_otx, sue_inx)
+    group_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
     # THEN
     assert group_id_bridgeunit.is_valid()
 
     # WHEN
-    group_id_bridgeunit.set_otx_to_inx(zia_otx, zia_inx)
+    group_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
     # THEN
     assert group_id_bridgeunit.is_valid() is False
 
@@ -371,7 +371,7 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario3_RoadUnit():
     assert road_bridgeunit.is_valid()
 
     # WHEN
-    road_bridgeunit.set_otx_to_inx(clean_otx_road, "any")
+    road_bridgeunit.set_otx2inx(clean_otx_road, "any")
     # THEN
     assert road_bridgeunit.otx_exists(clean_otx_parent_road) is False
     assert road_bridgeunit.otx_exists(clean_otx_road)
@@ -379,7 +379,7 @@ def test_BridgeUnit_is_valid_ReturnsObj_Scenario3_RoadUnit():
     assert road_bridgeunit.is_valid() is False
 
     # WHEN
-    road_bridgeunit.set_otx_to_inx(clean_otx_parent_road, "any")
+    road_bridgeunit.set_otx2inx(clean_otx_parent_road, "any")
     # THEN
     assert road_bridgeunit.otx_exists(clean_otx_parent_road)
     assert road_bridgeunit.otx_exists(clean_otx_road)

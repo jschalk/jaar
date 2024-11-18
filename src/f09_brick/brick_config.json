@@ -1,5 +1,5 @@
 {
-  "bridge_explicit_label": {
+  "bridge_nub_label": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 1,
@@ -16,7 +16,7 @@
       "unknown_word": {}
     }
   },
-  "bridge_otx_to_inx": {
+  "bridge_otx2inx": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 0,

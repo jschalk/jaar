@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_file_path as f_path
+from src.f00_instrument.file import create_path as f_path
 from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import (
     fiscal_id_str,

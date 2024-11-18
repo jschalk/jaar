@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_file_path, create_dir
+from src.f00_instrument.file import create_path, create_dir
 from src.f04_gift.atom_config import fiscal_id_str, acct_id_str
 from src.f10_world.world_tool import get_all_excel_bricksheets
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -8,9 +8,9 @@ from pandas import DataFrame, ExcelWriter
 def test_jungle_to_zoo_PidginsAll(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_test_worlds_dir()
-    x_dir = create_file_path(env_dir, "examples_folder")
+    x_dir = create_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_file_path(x_dir, ex_file_name)
+    ex_file_path = create_path(x_dir, ex_file_name)
     music_str = "music23"
     sue_str = "Sue"
     event_id = 55

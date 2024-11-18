@@ -1,6 +1,6 @@
 from src.f00_instrument.file import (
     set_dir,
-    create_file_path,
+    create_path,
     get_dir_file_strs,
     delete_dir,
 )
@@ -10,19 +10,30 @@ from src.f00_instrument.dict_toolbox import (
     get_empty_set_if_none,
 )
 from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
-from src.f01_road.road import FiscalID, WorldID, TimeLineLabel, get_default_world_id
+from src.f01_road.road import (
+    AcctID,
+    FiscalID,
+    WorldID,
+    TimeLineLabel,
+    get_default_world_id,
+)
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
-from src.f09_brick.brick_config import get_brick_numbers, get_brick_format_filename
+from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
+from src.f09_brick.brick_config import (
+    get_brick_numbers,
+    get_brick_format_filename,
+    get_brick_category_ref,
+)
 from src.f09_brick.brick import get_brickref_obj
-from src.f09_brick.pandas_tool import _get_pidgen_brick_format_filenames
+from src.f09_brick.pandas_tool import (
+    get_grouping_with_all_values_equal_df,
+    get_new_sorting_columns,
+    get_brick_elements_sort_order,
+)
 from src.f09_brick.pidgin_toolbox import (
     save_all_csvs_from_pidginunit,
     init_pidginunit_from_dir,
-)
-from src.f09_brick.pandas_tool import (
-    get_new_sorting_columns,
-    get_grouping_with_all_values_equal_df,
 )
 from src.f10_world.world_tool import get_all_brick_dataframes
 from pandas import (
@@ -56,7 +67,7 @@ class JungleToZooTransformer:
         return grouped_data
 
     def _read_and_tag_dataframe(self, ref):
-        x_file_path = create_file_path(ref.file_dir, ref.file_name)
+        x_file_path = create_path(ref.file_dir, ref.file_name)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
         df["file_dir"] = ref.file_dir
         df["file_name"] = ref.file_name
@@ -65,7 +76,7 @@ class JungleToZooTransformer:
 
     def _save_consolidated_brick(self, brick_number: str, dfs: list):
         final_df = pandas_concat(dfs)
-        zoo_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
+        zoo_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
         with ExcelWriter(zoo_path) as writer:
             final_df.to_excel(writer, sheet_name="zoo", index=False)
 
@@ -76,7 +87,7 @@ class ZooToOtxTransformer:
 
     def transform(self):
         for brick_number in get_brick_numbers():
-            zoo_brick_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
+            zoo_brick_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
             if os_path_exists(zoo_brick_path):
                 zoo_df = pandas_read_excel(zoo_brick_path, "zoo")
                 otx_df = self._group_by_brick_columns(zoo_df, brick_number)
@@ -94,7 +105,7 @@ class ZooToOtxTransformer:
         return get_grouping_with_all_values_equal_df(zoo_df, required_columns)
 
     def _save_otx_brick(self, brick_path: str, zoo_df: DataFrame):
-        with ExcelWriter(brick_path) as writer:
+        with ExcelWriter(brick_path, mode="a") as writer:
             zoo_df.to_excel(writer, sheet_name="otx", index=False)
 
 
@@ -104,7 +115,7 @@ class OtxToOtxEventsTransformer:
 
     def transform(self):
         for brick_number in get_brick_numbers():
-            zoo_brick_path = create_file_path(self.zoo_dir, f"{brick_number}.xlsx")
+            zoo_brick_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
             if os_path_exists(zoo_brick_path):
                 otx_df = pandas_read_excel(zoo_brick_path, "otx")
                 events_df = self.get_unique_events(otx_df)
@@ -120,7 +131,7 @@ class OtxToOtxEventsTransformer:
         return events_df.sort_values(["face_id", "event_id"])
 
     def _save_otx_brick(self, brick_path: str, events_df: DataFrame):
-        with ExcelWriter(brick_path) as writer:
+        with ExcelWriter(brick_path, mode="a") as writer:
             events_df.to_excel(writer, sheet_name="otx_events", index=False)
 
 
@@ -131,7 +142,7 @@ class OtxEventsToEventsLogTransformer:
     def transform(self):
         for brick_number in sorted(get_brick_numbers()):
             brick_file_name = f"{brick_number}.xlsx"
-            zoo_brick_path = create_file_path(self.zoo_dir, brick_file_name)
+            zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
                 sheet_name = "otx_events"
                 otx_events_df = pandas_read_excel(zoo_brick_path, sheet_name)
@@ -151,7 +162,7 @@ class OtxEventsToEventsLogTransformer:
         return otx_events_df
 
     def _save_events_log_file(self, events_df: DataFrame):
-        events_file_path = create_file_path(self.zoo_dir, "events.xlsx")
+        events_file_path = create_path(self.zoo_dir, "events.xlsx")
         events_log_str = "events_log"
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, events_log_str)
@@ -160,59 +171,139 @@ class OtxEventsToEventsLogTransformer:
             events_df.to_excel(writer, sheet_name=events_log_str, index=False)
 
 
+class OtxToOtx2InxPiginTransformer:
+    def __init__(self, zoo_dir: str, legitmate_events: set[TimeLinePoint]):
+        self.zoo_dir = zoo_dir
+        self.legitmate_events = legitmate_events
+
+    def transform(self):
+        otx2inx_bricks = get_brick_category_ref().get("bridge_otx2inx")
+        otx2inx_columns = get_quick_pidgens_column_ref().get("bridge_otx2inx")
+        otx2inx_columns.update({"face_id", "event_id"})
+        otx2inx_columns = get_new_sorting_columns(otx2inx_columns)
+        otx2inx_columns.insert(0, "src_brick")
+        otx2inx_df = DataFrame(columns=otx2inx_columns)
+        for brick_number in sorted(otx2inx_bricks):
+            brick_file_name = f"{brick_number}.xlsx"
+            zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
+            if os_path_exists(zoo_brick_path):
+                self.insert_legitmate_brick_otx2inx(
+                    brick_number, zoo_brick_path, otx2inx_columns, otx2inx_df
+                )
+
+        pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
+        with ExcelWriter(pidgin_file_path) as writer:
+            otx2inx_df.to_excel(writer, sheet_name="otx2inx_staging", index=False)
+
+    def insert_legitmate_brick_otx2inx(
+        self,
+        brick_number: str,
+        zoo_brick_path: str,
+        otx2inx_columns: list[str],
+        otx2inx_df: DataFrame,
+    ):
+        otx_df = pandas_read_excel(zoo_brick_path, sheet_name="otx")
+        otx2inx_missing_cols = set(otx2inx_columns).difference(otx_df.columns)
+        for index, x_row in otx_df.iterrows():
+            event_id = x_row["event_id"]
+            if event_id in self.legitmate_events:
+                face_id = x_row["face_id"]
+                jaar_type = x_row["jaar_type"]
+                otx_word = x_row["otx_word"]
+                df_len = len(otx2inx_df.index)
+                otx_road_delimiter = None
+                if "otx_road_delimiter" not in otx2inx_missing_cols:
+                    otx_road_delimiter = x_row["otx_road_delimiter"]
+                inx_word = None
+                if "inx_word" not in otx2inx_missing_cols:
+                    inx_word = x_row["inx_word"]
+                inx_road_delimiter = None
+                if "inx_road_delimiter" not in otx2inx_missing_cols:
+                    inx_road_delimiter = x_row["inx_road_delimiter"]
+                unknown_word = None
+                if "unknown_word" not in otx2inx_missing_cols:
+                    unknown_word = x_row["unknown_word"]
+                otx2inx_df.loc[df_len] = [
+                    brick_number,
+                    face_id,
+                    event_id,
+                    jaar_type,
+                    otx_word,
+                    inx_word,
+                    otx_road_delimiter,
+                    inx_road_delimiter,
+                    unknown_word,
+                ]
+
+
 @dataclass
 class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     current_time: TimeLinePoint = None
-    events: dict[TimeLinePoint, PidginUnit] = None
-    _events_dir: str = None
+    events: dict[TimeLinePoint, AcctID] = None
+    pidgins: dict[AcctID, PidginUnit] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
+    _events_dir: str = None
+    _pidgins_dir: str = None
     _fiscalunits: set[FiscalID] = None
     _world_dir: str = None
     _jungle_dir: str = None
     _zoo_dir: str = None
 
-    def set_event_id(self, event_id: TimeLinePoint, x_pidginunit: PidginUnit = None):
-        if x_pidginunit is None:
-            x_pidginunit = pidginunit_shop(event_id)
-        self.events[event_id] = x_pidginunit
+    def set_event(self, event_id: TimeLinePoint, face_id: AcctID):
+        self.events[event_id] = face_id
 
-    def event_id_exists(self, event_id: TimeLinePoint) -> bool:
+    def event_exists(self, event_id: TimeLinePoint) -> bool:
         return self.events.get(event_id) != None
 
-    def get_pidginunit(self, event_id: TimeLinePoint) -> PidginUnit:
+    def get_event(self, event_id: TimeLinePoint) -> bool:
         return self.events.get(event_id)
 
-    def del_event_id(self, event_id: TimeLinePoint):
-        self.events.pop(event_id)
+    def set_pidginunit(self, x_pidginunit: PidginUnit):
+        self.pidgins[x_pidginunit.face_id] = x_pidginunit
 
-    def del_all_event_id(self):
-        self.events = {}
+    def add_pidginunit(self, face_id: AcctID):
+        x_pidginunit = pidginunit_shop(face_id)
+        self.set_pidginunit(x_pidginunit)
 
-    def events_empty(self) -> bool:
-        return self.events == {}
+    def pidginunit_exists(self, face_id: AcctID) -> bool:
+        return self.pidgins.get(face_id) != None
 
-    def _event_dir(self, event_id: TimeLinePoint) -> str:
-        return create_file_path(self._events_dir, event_id)
+    def get_pidginunit(self, face_id: AcctID) -> PidginUnit:
+        return self.pidgins.get(face_id)
 
-    def save_pidginunit_files(self, event_id: TimeLinePoint):
-        x_pidginunit = self.get_pidginunit(event_id)
-        save_all_csvs_from_pidginunit(self._event_dir(event_id), x_pidginunit)
+    def del_pidginunit(self, face_id: TimeLinePoint):
+        self.pidgins.pop(face_id)
 
-    def event_dir_exists(self, event_id: TimeLinePoint) -> bool:
-        return os_path_exists(self._event_dir(event_id))
+    def del_all_pidginunits(self):
+        self.pidgins = {}
 
-    def _set_all_events_from_dirs(self):
-        self.del_all_event_id()
-        for dir_name in get_dir_file_strs(self._events_dir, include_files=False).keys():
-            self.set_event_id(dir_name)
+    def pidgins_empty(self) -> bool:
+        return self.pidgins == {}
+
+    def _pidgin_dir(self, face_id: AcctID) -> str:
+        return create_path(self._pidgins_dir, face_id)
+
+    def save_pidginunit_files(self, face_id: AcctID):
+        x_pidginunit = self.get_pidginunit(face_id)
+        save_all_csvs_from_pidginunit(self._pidgin_dir(face_id), x_pidginunit)
+
+    def pidgin_dir_exists(self, face_id: AcctID) -> bool:
+        return os_path_exists(self._pidgin_dir(face_id))
+
+    def _set_all_pidginunits_from_dirs(self):
+        self.del_all_pidginunits()
+        for dir_name in get_dir_file_strs(
+            self._pidgins_dir, include_files=False
+        ).keys():
+            self.add_pidginunit(dir_name)
 
     def _delete_pidginunit_dir(self, event_id: TimeLinePoint):
-        delete_dir(self._event_dir(event_id))
+        delete_dir(self._pidgin_dir(event_id))
 
     # def get_db_path(self) -> str:
-    #     return create_file_path(self._world_dir, "wrd.db")
+    #     return create_path(self._world_dir, "wrd.db")
 
     # def _create_wrd_db(self):
     #     engine = create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
@@ -228,25 +319,23 @@ class WorldUnit:
     #     return create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
 
     def _set_world_dirs(self):
-        self._world_dir = create_file_path(self.worlds_dir, self.world_id)
-        self._events_dir = create_file_path(self._world_dir, "events")
-        self._jungle_dir = create_file_path(self._world_dir, "jungle")
-        self._zoo_dir = create_file_path(self._world_dir, "zoo")
-        if not os_path_exists(self._world_dir):
-            set_dir(self._world_dir)
-        if not os_path_exists(self._events_dir):
-            set_dir(self._events_dir)
-        if not os_path_exists(self._jungle_dir):
-            set_dir(self._jungle_dir)
-        if not os_path_exists(self._zoo_dir):
-            set_dir(self._zoo_dir)
+        self._world_dir = create_path(self.worlds_dir, self.world_id)
+        self._events_dir = create_path(self._world_dir, "events")
+        self._pidgins_dir = create_path(self._world_dir, "pidgins")
+        self._jungle_dir = create_path(self._world_dir, "jungle")
+        self._zoo_dir = create_path(self._world_dir, "zoo")
+        set_dir(self._world_dir)
+        set_dir(self._events_dir)
+        set_dir(self._pidgins_dir)
+        set_dir(self._jungle_dir)
+        set_dir(self._zoo_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
-    def load_pidginunit_from_files(self, event_id: TimeLinePoint):
-        x_pidginunit = init_pidginunit_from_dir(self._event_dir(event_id))
-        self.set_event_id(event_id, x_pidginunit)
+    def load_pidginunit_from_files(self, face_id: AcctID):
+        x_pidginunit = init_pidginunit_from_dir(self._pidgin_dir(face_id))
+        self.set_pidginunit(x_pidginunit)
 
     def jungle_to_zoo(self):
         transformer = JungleToZooTransformer(self._jungle_dir, self._zoo_dir)
@@ -255,15 +344,6 @@ class WorldUnit:
     def zoo_to_otx(self):
         transformer = ZooToOtxTransformer(self._zoo_dir)
         transformer.transform()
-
-    def otx_to_faces_event(self):
-        pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
-        # for pidgen_brick_filename in pidgen_brick_filenames:
-        #     pidgen_brick_path = create_file_path(self._zoo_dir, pidgen_brick_filename)
-        #     df = pandas_read_excel(pidgen_brick_path, "otx")
-
-        #     print(f"{pidgen_brick_path=}")
-        #     print(f"{df=}")
 
     def otx_to_otx_events(self):
         transformer = OtxToOtxEventsTransformer(self._zoo_dir)
@@ -274,11 +354,25 @@ class WorldUnit:
         transformer.transform()
 
     def events_log_to_events_agg(self):
-        events_file_path = create_file_path(self._zoo_dir, "events.xlsx")
+        events_file_path = create_path(self._zoo_dir, "events.xlsx")
         events_log_df = pandas_read_excel(events_file_path, "events_log")
         events_agg_df = _create_events_agg_df(events_log_df)
-        with ExcelWriter(events_file_path) as writer:
+        with ExcelWriter(events_file_path, mode="a") as writer:
             events_agg_df.to_excel(writer, sheet_name="events_agg", index=False)
+
+    def set_events_from_events_agg(self):
+        self.events = {}
+        events_file_path = create_path(self._zoo_dir, "events.xlsx")
+        events_agg_df = pandas_read_excel(events_file_path, "events_agg")
+        for index, event_agg_row in events_agg_df.iterrows():
+            x_note = event_agg_row["note"]
+            if x_note != "invalid because of conflicting event_id":
+                self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
+
+    def otx_to_otxinx_staging(self):
+        legitmate_events = set(self.events.keys())
+        transformer = OtxToOtx2InxPiginTransformer(self._zoo_dir, legitmate_events)
+        transformer.transform()
 
     def get_dict(self) -> dict:
         return {
@@ -286,6 +380,7 @@ class WorldUnit:
             "current_time": self.current_time,
             "timeconversions": self.get_timeconversions_dict(),
             "events": self.events,
+            "pidgins": self.pidgins,
         }
 
 
@@ -294,9 +389,8 @@ def worldunit_shop(
     worlds_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
-    events: set[str] = None,
+    pidgins: dict[AcctID, PidginUnit] = None,
     _fiscalunits: set[FiscalID] = None,
-    in_memory_db: bool = None,
 ) -> WorldUnit:
     if world_id is None:
         world_id = get_default_world_id()
@@ -307,8 +401,8 @@ def worldunit_shop(
         worlds_dir=worlds_dir,
         current_time=get_0_if_None(current_time),
         timeconversions=get_empty_dict_if_none(timeconversions),
-        events=get_empty_dict_if_none(events),
-        _events_dir=create_file_path(worlds_dir, "events"),
+        events={},
+        pidgins=get_empty_dict_if_none(pidgins),
         _fiscalunits=get_empty_set_if_none(_fiscalunits),
     )
     x_worldunit._set_world_dirs()

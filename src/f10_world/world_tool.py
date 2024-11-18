@@ -1,6 +1,5 @@
-from src.f00_instrument.file import create_file_path
+from src.f00_instrument.file import create_path
 from src.f09_brick.brick_config import get_brick_numbers, get_quick_bricks_column_ref
-from src.f09_brick.brick_models import get_brick_stagetables, Base
 from src.f09_brick.pandas_tool import get_all_excel_sheet_names
 from pandas import read_excel as pandas_read_excel
 from dataclasses import dataclass
@@ -29,7 +28,7 @@ def get_all_brick_dataframes(dir: str) -> list[BrickFileRef]:
     valid_bricks = []
     for dir, filename, sheet_name, brick_number in candidate_bricks:
         brick_columns = get_quick_bricks_column_ref().get(brick_number)
-        file_path = create_file_path(dir, filename)
+        file_path = create_path(dir, filename)
         df = pandas_read_excel(file_path, sheet_name=sheet_name)
         if brick_columns.issubset(set(df.columns)):
             valid_bricks.append(BrickFileRef(dir, filename, sheet_name, brick_number))

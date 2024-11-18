@@ -58,20 +58,20 @@ def unknown_word_str() -> str:
     return "unknown_word"
 
 
-def explicit_label_str() -> str:
-    return "explicit_label"
+def nub_label_str() -> str:
+    return "nub_label"
 
 
-def otx_to_inx_str() -> str:
-    return "otx_to_inx"
+def otx2inx_str() -> str:
+    return "otx2inx"
 
 
-def bridge_otx_to_inx_str() -> str:
-    return "bridge_otx_to_inx"
+def bridge_otx2inx_str() -> str:
+    return "bridge_otx2inx"
 
 
-def bridge_explicit_label_str() -> str:
-    return "bridge_explicit_label"
+def bridge_nub_label_str() -> str:
+    return "bridge_nub_label"
 
 
 def get_pidgin_config_jkeys(x_cat: str) -> dict:
@@ -102,3 +102,25 @@ def get_pidgin_args_category_mapping() -> dict[str, str]:
                 x_category_set.add(pidgin_category)
                 x_dict[x_arg] = x_category_set
     return x_dict
+
+
+def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
+    """for each pidgin_config category contains the associated columns"""
+    return {
+        "bridge_nub_label": {
+            "jaar_type",
+            "unknown_word",
+            "inx_road_delimiter",
+            "inx_label",
+            "otx_road_delimiter",
+            "otx_label",
+        },
+        "bridge_otx2inx": {
+            "inx_word",
+            "jaar_type",
+            "unknown_word",
+            "inx_road_delimiter",
+            "otx_road_delimiter",
+            "otx_word",
+        },
+    }

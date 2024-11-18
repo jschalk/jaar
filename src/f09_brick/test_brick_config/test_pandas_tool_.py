@@ -1,4 +1,4 @@
-from src.f00_instrument.file import open_file, create_file_path, create_dir
+from src.f00_instrument.file import open_file, create_path, create_dir
 from src.f00_instrument.examples.instrument_env import (
     env_dir_setup_cleanup,
     get_instrument_temp_env_dir,
@@ -59,7 +59,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(
     env_dir = get_instrument_temp_env_dir()
     small_dt = get_small_example01_dataframe()
     ex_file_name = "fizzbuzz.csv"
-    ex_file_path = create_file_path(env_dir, ex_file_name)
+    ex_file_path = create_path(env_dir, ex_file_name)
     assert os_path_exists(ex_file_path) is False
 
     # WHEN
@@ -91,9 +91,9 @@ def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(env_dir_setup_c
 def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
-    x_dir = create_file_path(env_dir, "examples_folder")
+    x_dir = create_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_file_path(x_dir, ex_file_name)
+    ex_file_path = create_path(x_dir, ex_file_name)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     sheet_name1 = "Sheet1x"
@@ -118,9 +118,9 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
 ):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
-    x_dir = create_file_path(env_dir, "examples_folder")
+    x_dir = create_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_file_path(x_dir, ex_file_name)
+    ex_file_path = create_path(x_dir, ex_file_name)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     sugar_str = "sugar"
