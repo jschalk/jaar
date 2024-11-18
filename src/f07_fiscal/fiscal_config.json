@@ -110,7 +110,7 @@
             "respect_bit": {
                 "jaar_type": "float"
             },
-            "road_delimiter": {
+            "wall": {
                 "jaar_type": "str"
             },
             "timeline_label": {

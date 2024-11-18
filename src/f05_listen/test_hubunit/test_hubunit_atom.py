@@ -161,7 +161,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsFileWithZeroAtoms(
     # THEN
     assert yao_bud._owner_id == yao_str
     assert yao_bud._fiscal_id == yao_hubunit.fiscal_id
-    assert yao_bud._road_delimiter == yao_hubunit.road_delimiter
+    assert yao_bud._wall == yao_hubunit.wall
     assert yao_bud.fund_pool == yao_hubunit.fund_pool
     assert yao_bud.fund_coin == yao_hubunit.fund_coin
     assert yao_bud.respect_bit == yao_hubunit.respect_bit
@@ -184,7 +184,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleItem(
     # THEN
     assert yao_bud._owner_id == yao_str
     assert yao_bud._fiscal_id == yao_hubunit.fiscal_id
-    assert yao_bud._road_delimiter == yao_hubunit.road_delimiter
+    assert yao_bud._wall == yao_hubunit.wall
     sports_str = "sports"
     sports_road = yao_bud.make_l1_road(sports_str)
 
@@ -212,7 +212,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     # THEN
     assert yao_bud._owner_id == yao_str
     assert yao_bud._fiscal_id == yao_hubunit.fiscal_id
-    assert yao_bud._road_delimiter == yao_hubunit.road_delimiter
+    assert yao_bud._wall == yao_hubunit.wall
     sports_str = "sports"
     sports_road = yao_bud.make_l1_road(sports_str)
 

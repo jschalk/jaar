@@ -103,7 +103,7 @@ def test_membership_shop_ReturnsCorrectObjAttr_acct_id():
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         membership_shop(swim_str, _acct_id=bob_str, _road_delimiter=slash_str)
+#         membership_shop(swim_str, _acct_id=bob_str, _wall=slash_str)
 #     assert (
 #         str(excinfo.value)
 #         == f"'{swim_str}' needs to not be a RoadNode. Must contain delimiter: '{slash_str}'"

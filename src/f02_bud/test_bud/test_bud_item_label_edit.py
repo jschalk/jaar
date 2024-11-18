@@ -266,5 +266,5 @@ def test_bud_edit_item_label_RaisesErrorIfdelimiterIsInLabel():
         sue_bud.edit_item_label(old_road=old_weekday_road, new_label=new_weekday_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify '{old_weekday_road}' because new_label {new_weekday_str} contains delimiter {sue_bud._road_delimiter}"
+        == f"Cannot modify '{old_weekday_road}' because new_label {new_weekday_str} contains delimiter {sue_bud._wall}"
     )

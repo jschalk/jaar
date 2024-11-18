@@ -10,7 +10,7 @@ from src.f02_bud.reason_item import (
 from src.f01_road.road import (
     get_default_fiscal_id_roadnode as root_label,
     create_road,
-    default_road_delimiter_if_none,
+    default_wall_if_none,
 )
 
 
@@ -59,7 +59,7 @@ def test_reasonheir_shop_ReturnsCorrectObj():
 
     # THEN
     assert casa_reason.premises == {}
-    assert casa_reason.delimiter == default_road_delimiter_if_none()
+    assert casa_reason.delimiter == default_wall_if_none()
 
 
 def test_ReasonHeir_clear_CorrectlyClearsField():
@@ -230,7 +230,7 @@ def test_reasonunit_shop_ReturnsCorrectObj():
 
     # THEN
     assert wkday_reasonunit.premises == {}
-    assert wkday_reasonunit.delimiter == default_road_delimiter_if_none()
+    assert wkday_reasonunit.delimiter == default_wall_if_none()
 
 
 def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():

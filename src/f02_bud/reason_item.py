@@ -2,9 +2,9 @@ from src.f01_road.road import (
     RoadUnit,
     rebuild_road,
     find_replace_road_key_dict,
-    replace_road_delimiter,
+    replace_wall,
     is_heir_road,
-    default_road_delimiter_if_none,
+    default_wall_if_none,
 )
 from src.f00_instrument.dict_toolbox import get_empty_dict_if_none
 from copy import deepcopy as copy_deepcopy
@@ -307,7 +307,7 @@ class PremiseUnit:
     def set_delimiter(self, new_delimiter: str):
         old_delimiter = copy_deepcopy(self.delimiter)
         self.delimiter = new_delimiter
-        self.need = replace_road_delimiter(
+        self.need = replace_wall(
             road=self.need, old_delimiter=old_delimiter, new_delimiter=self.delimiter
         )
 
@@ -409,7 +409,7 @@ def premiseunit_shop(
         open=open,
         nigh=nigh,
         divisor=divisor,
-        delimiter=default_road_delimiter_if_none(delimiter),
+        delimiter=default_wall_if_none(delimiter),
     )
 
 
@@ -449,11 +449,11 @@ class ReasonCore:
     def set_delimiter(self, new_delimiter: str):
         old_delimiter = copy_deepcopy(self.delimiter)
         self.delimiter = new_delimiter
-        self.base = replace_road_delimiter(self.base, old_delimiter, new_delimiter)
+        self.base = replace_wall(self.base, old_delimiter, new_delimiter)
 
         new_premises = {}
         for premise_road, premise_obj in self.premises.items():
-            new_premise_road = replace_road_delimiter(
+            new_premise_road = replace_wall(
                 road=premise_road,
                 old_delimiter=old_delimiter,
                 new_delimiter=self.delimiter,
@@ -512,7 +512,7 @@ def reasoncore_shop(
         base=base,
         premises=get_empty_dict_if_none(premises),
         base_item_active_requisite=base_item_active_requisite,
-        delimiter=default_road_delimiter_if_none(delimiter),
+        delimiter=default_wall_if_none(delimiter),
     )
 
 
@@ -541,7 +541,7 @@ def reasonunit_shop(
         base=base,
         premises=get_empty_dict_if_none(premises),
         base_item_active_requisite=base_item_active_requisite,
-        delimiter=default_road_delimiter_if_none(delimiter),
+        delimiter=default_wall_if_none(delimiter),
     )
 
 
@@ -633,7 +633,7 @@ def reasonheir_shop(
         _status=_status,
         _task=_task,
         _base_item_active_value=_base_item_active_value,
-        delimiter=default_road_delimiter_if_none(delimiter),
+        delimiter=default_wall_if_none(delimiter),
     )
 
 

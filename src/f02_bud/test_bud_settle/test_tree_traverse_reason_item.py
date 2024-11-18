@@ -53,13 +53,13 @@ def test_BudUnit_edit_item_attr_reasonunit_CorrectlySets_delimiter():
     casa_item = sue_bud.get_item_obj(casa_road)
     week_reasonunit = casa_item.reasonunits.get(week_road)
     assert week_reasonunit.delimiter != slash_str
-    assert week_reasonunit.delimiter == sue_bud._road_delimiter
+    assert week_reasonunit.delimiter == sue_bud._wall
 
 
 def test_BudUnit_edit_item_attr_reason_base_CorrectlySets_delimiter():
     # ESTABLISH
     slash_str = "/"
-    bob_bud = budunit_shop("Bob", _road_delimiter=slash_str)
+    bob_bud = budunit_shop("Bob", _wall=slash_str)
     casa_str = "casa"
     week_str = "week"
     wed_str = "Wednesday"
@@ -71,18 +71,18 @@ def test_BudUnit_edit_item_attr_reason_base_CorrectlySets_delimiter():
     bob_bud.set_item(itemunit_shop(wed_str), week_road)
     print(f"{bob_bud._itemroot._kids.keys()=}")
     wed_item = bob_bud.get_item_obj(wed_road)
-    assert wed_item._road_delimiter == slash_str
-    assert wed_item._road_delimiter == bob_bud._road_delimiter
+    assert wed_item._wall == slash_str
+    assert wed_item._wall == bob_bud._wall
 
     # WHEN
     bob_bud.edit_item_attr(casa_road, reason_base=week_road, reason_premise=wed_road)
 
     # THEN
     casa_item = bob_bud.get_item_obj(casa_road)
-    assert casa_item._road_delimiter == slash_str
+    assert casa_item._wall == slash_str
     week_reasonunit = casa_item.reasonunits.get(week_road)
     assert week_reasonunit.delimiter != ","
-    assert week_reasonunit.delimiter == bob_bud._road_delimiter
+    assert week_reasonunit.delimiter == bob_bud._wall
 
 
 def test_BudUnit_set_reasonunits_status():

@@ -9,7 +9,7 @@ def _is_empty_bud(x_bud: BudUnit) -> bool:
 
 def create_empty_bud(ref_bud: BudUnit, x_owner_id: OwnerID = None) -> BudUnit:
     x_owner_id = ref_bud._owner_id if x_owner_id is None else x_owner_id
-    x_road_delimiter = ref_bud._road_delimiter
+    x_wall = ref_bud._wall
     x_fund_pool = ref_bud.fund_pool
     x_fund_coin = ref_bud.fund_coin
     x_respect_bit = ref_bud.respect_bit
@@ -17,7 +17,7 @@ def create_empty_bud(ref_bud: BudUnit, x_owner_id: OwnerID = None) -> BudUnit:
     return budunit_shop(
         _owner_id=x_owner_id,
         _fiscal_id=ref_bud._fiscal_id,
-        _road_delimiter=x_road_delimiter,
+        _wall=x_wall,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
         respect_bit=x_respect_bit,

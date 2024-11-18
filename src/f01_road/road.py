@@ -10,7 +10,7 @@ class RoadNode(str):
     """A string presentation of a tree node. Nodes cannot contain RoadUnit delimiter"""
 
     def is_node(self, delimiter: str = None) -> bool:
-        return self.find(default_road_delimiter_if_none(delimiter)) == -1
+        return self.find(default_wall_if_none(delimiter)) == -1
 
 
 class FiscalID(RoadNode):  # Created to help track the concept
@@ -42,7 +42,7 @@ class AcctID(OwnerID):  # Created to help track the concept
 
 
 class TimeLineLabel(RoadNode):
-    "TimeLineLabel is required for every TimeLineUnit. It is a RoadNode that must not container the road_delimiter."
+    "TimeLineLabel is required for every TimeLineUnit. It is a RoadNode that must not container the wall."
 
     pass
 
@@ -79,7 +79,7 @@ def get_default_face_id() -> FaceID:
     return FaceID("Face1234")
 
 
-def default_road_delimiter_if_none(delimiter: str = None) -> str:
+def default_wall_if_none(delimiter: str = None) -> str:
     return delimiter if delimiter is not None else ";"
 
 
@@ -100,10 +100,7 @@ def is_sub_road(ref_road: RoadUnit, sub_road: RoadUnit) -> bool:
 
 
 def is_heir_road(src: RoadUnit, heir: RoadUnit, delimiter: str = None) -> bool:
-    return (
-        src == heir
-        or heir.find(f"{src}{default_road_delimiter_if_none(delimiter)}") == 0
-    )
+    return src == heir or heir.find(f"{src}{default_wall_if_none(delimiter)}") == 0
 
 
 def find_replace_road_key_dict(
@@ -127,7 +124,7 @@ def find_replace_road_key_dict(
 
 
 def get_all_road_nodes(road: RoadUnit, delimiter: str = None) -> list[RoadNode]:
-    return road.split(default_road_delimiter_if_none(delimiter))
+    return road.split(default_wall_if_none(delimiter))
 
 
 def get_terminus_node(road: RoadUnit, delimiter: str = None) -> RoadNode:
@@ -144,12 +141,12 @@ def get_parent_road(
 def create_road_without_root_node(
     road: RoadUnit, delimiter: str = None
 ) -> RoadUnit:  # road without terminus nodef
-    if road[:1] == default_road_delimiter_if_none(delimiter):
+    if road[:1] == default_wall_if_none(delimiter):
         raise InvalidRoadUnitException(
             f"Cannot create_road_without_root_node of '{road}' because it has no root node."
         )
     road_without_root_node = create_road_from_nodes(get_all_road_nodes(road=road)[1:])
-    return f"{default_road_delimiter_if_none(delimiter)}{road_without_root_node}"
+    return f"{default_wall_if_none(delimiter)}{road_without_root_node}"
 
 
 def get_root_node_from_road(road: RoadUnit, delimiter: str = None) -> RoadNode:
@@ -218,7 +215,7 @@ def get_default_fiscal_id_roadnode() -> FiscalID:
 
 
 def create_road_from_nodes(nodes: list[RoadNode], delimiter: str = None) -> RoadUnit:
-    return default_road_delimiter_if_none(delimiter).join(nodes)
+    return default_wall_if_none(delimiter).join(nodes)
 
 
 def create_road(
@@ -230,12 +227,12 @@ def create_road(
         return RoadUnit(
             terminus_node
             if parent_road in {"", None}
-            else f"{parent_road}{default_road_delimiter_if_none(delimiter)}{terminus_node}"
+            else f"{parent_road}{default_wall_if_none(delimiter)}{terminus_node}"
         )
 
 
 def get_diff_road(x_road: RoadUnit, sub_road: RoadUnit, delimiter: str = None):
-    sub_road = f"{sub_road}{default_road_delimiter_if_none(delimiter)}"
+    sub_road = f"{sub_road}{default_wall_if_none(delimiter)}"
     return x_road.replace(sub_road, "")
 
 
@@ -247,10 +244,10 @@ def is_string_in_road(string: str, road: RoadUnit) -> bool:
     return road.find(string) >= 0
 
 
-def replace_road_delimiter(road: RoadUnit, old_delimiter: str, new_delimiter: str):
+def replace_wall(road: RoadUnit, old_delimiter: str, new_delimiter: str):
     if is_string_in_road(string=new_delimiter, road=road):
         raise InvaliddelimiterReplaceException(
-            f"Cannot replace_road_delimiter '{old_delimiter}' with '{new_delimiter}' because the new one exists in road '{road}'."
+            f"Cannot replace_wall '{old_delimiter}' with '{new_delimiter}' because the new one exists in road '{road}'."
         )
     return road.replace(old_delimiter, new_delimiter)
 
@@ -291,7 +288,7 @@ def roadunit_valid_dir_path(x_roadunit: RoadUnit, delimiter: str) -> bool:
 
 
 def get_road_from_doar(x_doarunit: DoarUnit, delimiter: str = None) -> RoadUnit:
-    x_delimiter = default_road_delimiter_if_none(delimiter)
+    x_delimiter = default_wall_if_none(delimiter)
     doar_nodes = get_all_road_nodes(x_doarunit, x_delimiter)
     return RoadUnit(create_road_from_nodes(doar_nodes[::-1], x_delimiter))
 

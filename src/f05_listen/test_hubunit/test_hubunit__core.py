@@ -1,5 +1,5 @@
 from src.f01_road.road import (
-    default_road_delimiter_if_none,
+    default_wall_if_none,
     create_road_from_nodes,
     create_road,
     get_default_fiscal_id_roadnode as root_label,
@@ -75,7 +75,7 @@ def test_HubUnit_Exists():
     assert x_hubunit.fiscal_id is None
     assert x_hubunit.owner_id is None
     assert x_hubunit.keep_road is None
-    assert x_hubunit.road_delimiter is None
+    assert x_hubunit.wall is None
     assert x_hubunit.fund_pool is None
     assert x_hubunit.fund_coin is None
     assert x_hubunit.respect_bit is None
@@ -102,7 +102,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     x_fiscals_dir = "src/f07_fiscal/examples"
     x_fiscal_id = "music"
     sue_str = "Sue"
-    x_road_delimiter = "/"
+    x_wall = "/"
     x_fund_pool = 13000
     x_fund_coin = 13
     x_respect_bit = 9
@@ -115,7 +115,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
         fiscal_id=x_fiscal_id,
         owner_id=sue_str,
         keep_road=None,
-        road_delimiter=x_road_delimiter,
+        wall=x_wall,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
         respect_bit=x_respect_bit,
@@ -127,7 +127,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.fiscals_dir == x_fiscals_dir
     assert x_hubunit.fiscal_id == x_fiscal_id
     assert x_hubunit.owner_id == sue_str
-    assert x_hubunit.road_delimiter == x_road_delimiter
+    assert x_hubunit.wall == x_wall
     assert x_hubunit.fund_pool == x_fund_pool
     assert x_hubunit.fund_coin == x_fund_coin
     assert x_hubunit.respect_bit == x_respect_bit
@@ -171,7 +171,7 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
         == f"{get_test_fiscals_dir()}/{get_fiscal_id_if_None()}"
     )
     assert sue_hubunit.owner_id == sue_str
-    assert sue_hubunit.road_delimiter == default_road_delimiter_if_none()
+    assert sue_hubunit.wall == default_wall_if_none()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_coin == default_fund_coin_if_none()
     assert sue_hubunit.respect_bit == default_respect_bit_if_none()
@@ -196,14 +196,14 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     assert sue_hubunit.treasury_db_path() == treasury_file_path
 
 
-def test_hubunit_shop_RaisesErrorIf_owner_id_Contains_road_delimiter():
+def test_hubunit_shop_RaisesErrorIf_owner_id_Contains_wall():
     # ESTABLISH
     slash_str = "/"
     bob_str = f"Bob{slash_str}Sue"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        hubunit_shop(None, None, owner_id=bob_str, road_delimiter=slash_str)
+        hubunit_shop(None, None, owner_id=bob_str, wall=slash_str)
     assert (
         str(excinfo.value)
         == f"'{bob_str}' needs to be a RoadNode. Cannot contain delimiter: '{slash_str}'"

@@ -1,6 +1,6 @@
 # from src.f00_instrument.python import x_is_json
 from src.f01_road.jaar_config import get_test_fiscal_id
-from src.f01_road.road import default_road_delimiter_if_none
+from src.f01_road.road import default_wall_if_none
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_gift.atom_config import atom_insert, acct_id_str
 from src.f04_gift.atom import atomunit_shop
@@ -19,7 +19,7 @@ def test_Decipherer_Exists():
     # THEN
     assert x_decipherer.in_fiscal_id is None
     assert x_decipherer.in_acct_ids is None
-    assert x_decipherer.in_road_delimiter is None
+    assert x_decipherer.in_wall is None
 
 
 def test_decipherer_shop_WithOutParametersReturnsObj():
@@ -29,7 +29,7 @@ def test_decipherer_shop_WithOutParametersReturnsObj():
     # THEN
     assert music_decipherer.in_fiscal_id == get_test_fiscal_id()
     assert music_decipherer.in_acct_ids == {}
-    assert music_decipherer.in_road_delimiter == default_road_delimiter_if_none()
+    assert music_decipherer.in_wall == default_wall_if_none()
 
 
 def test_decipherer_shop_WithParametersReturnsObj():

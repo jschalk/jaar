@@ -2,7 +2,7 @@ from src.f01_road.finance import default_fund_pool
 from src.f01_road.finance_tran import (
     quota_str,
     time_id_str,
-    road_delimiter_str,
+    wall_str,
     PurviewEpisode,
     purviewepisode_shop,
     PurviewLog,
@@ -15,7 +15,7 @@ from pytest import raises as pytest_raises
 
 
 def test_str_functions_ReturnObj():
-    assert road_delimiter_str() == "road_delimiter"
+    assert wall_str() == "wall"
     assert time_id_str() == "time_id"
     assert quota_str() == "quota"
 

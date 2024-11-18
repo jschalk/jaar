@@ -30,12 +30,12 @@ def event_id_str() -> str:
     return "event_id"
 
 
-def otx_road_delimiter_str() -> str:
-    return "otx_road_delimiter"
+def otx_wall_str() -> str:
+    return "otx_wall"
 
 
-def inx_road_delimiter_str() -> str:
-    return "inx_road_delimiter"
+def inx_wall_str() -> str:
+    return "inx_wall"
 
 
 def inx_word_str() -> str:
@@ -110,17 +110,17 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
         "bridge_nub_label": {
             "jaar_type",
             "unknown_word",
-            "inx_road_delimiter",
+            "inx_wall",
             "inx_label",
-            "otx_road_delimiter",
+            "otx_wall",
             "otx_label",
         },
         "bridge_otx2inx": {
             "inx_word",
             "jaar_type",
             "unknown_word",
-            "inx_road_delimiter",
-            "otx_road_delimiter",
+            "inx_wall",
+            "otx_wall",
             "otx_word",
         },
     }

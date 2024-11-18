@@ -19,8 +19,8 @@ from src.f01_road.road import (
     get_default_fiscal_id_roadnode as root_label,
     all_roadunits_between,
     create_road as road_create_road,
-    default_road_delimiter_if_none,
-    replace_road_delimiter,
+    default_wall_if_none,
+    replace_wall,
     FiscalID,
     AcctID,
     GroupID,
@@ -221,7 +221,7 @@ class ItemUnit:
     pledge: bool = None
     _originunit: OriginUnit = None
     problem_bool: bool = None
-    _road_delimiter: str = None
+    _wall: str = None
     _is_expanded: bool = None
     # Calculated fields
     _active: bool = None
@@ -372,10 +372,10 @@ class ItemUnit:
 
     def get_road(self) -> RoadUnit:
         if self._parent_road in (None, ""):
-            return road_create_road(self._label, delimiter=self._road_delimiter)
+            return road_create_road(self._label, delimiter=self._wall)
         else:
             return road_create_road(
-                self._parent_road, self._label, delimiter=self._road_delimiter
+                self._parent_road, self._label, delimiter=self._wall
             )
 
     def clear_descendant_pledge_count(self):
@@ -495,42 +495,40 @@ class ItemUnit:
         else:
             self._label = _label
 
-    def set_road_delimiter(self, new_road_delimiter: str):
-        old_delimiter = deepcopy(self._road_delimiter)
+    def set_wall(self, new_wall: str):
+        old_delimiter = deepcopy(self._wall)
         if old_delimiter is None:
-            old_delimiter = default_road_delimiter_if_none()
-        self._road_delimiter = default_road_delimiter_if_none(new_road_delimiter)
-        if old_delimiter != self._road_delimiter:
-            self._find_replace_road_delimiter(old_delimiter)
+            old_delimiter = default_wall_if_none()
+        self._wall = default_wall_if_none(new_wall)
+        if old_delimiter != self._wall:
+            self._find_replace_wall(old_delimiter)
 
-    def _find_replace_road_delimiter(self, old_delimiter):
-        self._parent_road = replace_road_delimiter(
-            self._parent_road, old_delimiter, self._road_delimiter
-        )
+    def _find_replace_wall(self, old_delimiter):
+        self._parent_road = replace_wall(self._parent_road, old_delimiter, self._wall)
 
         new_reasonunits = {}
         for reasonunit_road, reasonunit_obj in self.reasonunits.items():
-            new_reasonunit_road = replace_road_delimiter(
+            new_reasonunit_road = replace_wall(
                 road=reasonunit_road,
                 old_delimiter=old_delimiter,
-                new_delimiter=self._road_delimiter,
+                new_delimiter=self._wall,
             )
-            reasonunit_obj.set_delimiter(self._road_delimiter)
+            reasonunit_obj.set_delimiter(self._wall)
             new_reasonunits[new_reasonunit_road] = reasonunit_obj
         self.reasonunits = new_reasonunits
 
         new_factunits = {}
         for factunit_road, factunit_obj in self.factunits.items():
-            new_base_road = replace_road_delimiter(
+            new_base_road = replace_wall(
                 road=factunit_road,
                 old_delimiter=old_delimiter,
-                new_delimiter=self._road_delimiter,
+                new_delimiter=self._wall,
             )
             factunit_obj.base = new_base_road
-            new_pick_road = replace_road_delimiter(
+            new_pick_road = replace_wall(
                 road=factunit_obj.pick,
                 old_delimiter=old_delimiter,
-                new_delimiter=self._road_delimiter,
+                new_delimiter=self._wall,
             )
             factunit_obj.set_attr(pick=new_pick_road)
             new_factunits[new_base_road] = factunit_obj
@@ -676,7 +674,7 @@ class ItemUnit:
         try:
             x_reasonunit = self.reasonunits[base]
         except Exception:
-            x_reasonunit = reasonunit_shop(base, delimiter=self._road_delimiter)
+            x_reasonunit = reasonunit_shop(base, delimiter=self._wall)
             self.reasonunits[base] = x_reasonunit
         return x_reasonunit
 
@@ -741,7 +739,7 @@ class ItemUnit:
         return self.awardlinks.get(x_awardee_id) != None
 
     def set_reasonunit(self, reason: ReasonUnit):
-        reason.delimiter = self._road_delimiter
+        reason.delimiter = self._wall
         self.reasonunits[reason.base] = reason
 
     def reasonunit_exists(self, x_base: RoadUnit) -> bool:
@@ -998,7 +996,7 @@ def itemunit_shop(
     _all_acct_debt: bool = None,
     _is_expanded: bool = True,
     _active_hx: dict[int, bool] = None,
-    _road_delimiter: str = None,
+    _wall: str = None,
     _healerlink_ratio: float = None,
 ) -> ItemUnit:
     _bud_fiscal_id = root_label() if _bud_fiscal_id is None else _bud_fiscal_id
@@ -1046,7 +1044,7 @@ def itemunit_shop(
         _all_acct_debt=_all_acct_debt,
         _is_expanded=_is_expanded,
         _active_hx=get_empty_dict_if_none(_active_hx),
-        _road_delimiter=default_road_delimiter_if_none(_road_delimiter),
+        _wall=default_wall_if_none(_wall),
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_itemkid._root:

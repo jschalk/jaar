@@ -44,7 +44,7 @@ def budunit_v001_with_large_agenda() -> BudUnit:
 
 def budunit_v002() -> BudUnit:
     bob_bud = budunit_get_from_json(open_file(env_dir(), "example_bud2.json"))
-    print(f"{bob_bud._fiscal_id=} {bob_bud._road_delimiter=}")
+    print(f"{bob_bud._fiscal_id=} {bob_bud._wall=}")
     return bob_bud
 
 

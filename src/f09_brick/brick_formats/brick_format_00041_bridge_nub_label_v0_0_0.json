@@ -9,13 +9,13 @@
         "inx_label": {
             "otx_key": false
         },
-        "inx_road_delimiter": {
+        "inx_wall": {
             "otx_key": false
         },
         "otx_label": {
             "otx_key": true
         },
-        "otx_road_delimiter": {
+        "otx_wall": {
             "otx_key": false
         },
         "unknown_word": {

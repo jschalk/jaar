@@ -212,15 +212,15 @@ class ZooAggToOtx2InxStagingTransformer:
                 jaar_type = x_row["jaar_type"]
                 otx_word = x_row["otx_word"]
                 df_len = len(otx2inx_df.index)
-                otx_road_delimiter = None
-                if "otx_road_delimiter" not in otx2inx_missing_cols:
-                    otx_road_delimiter = x_row["otx_road_delimiter"]
+                otx_wall = None
+                if "otx_wall" not in otx2inx_missing_cols:
+                    otx_wall = x_row["otx_wall"]
                 inx_word = None
                 if "inx_word" not in otx2inx_missing_cols:
                     inx_word = x_row["inx_word"]
-                inx_road_delimiter = None
-                if "inx_road_delimiter" not in otx2inx_missing_cols:
-                    inx_road_delimiter = x_row["inx_road_delimiter"]
+                inx_wall = None
+                if "inx_wall" not in otx2inx_missing_cols:
+                    inx_wall = x_row["inx_wall"]
                 unknown_word = None
                 if "unknown_word" not in otx2inx_missing_cols:
                     unknown_word = x_row["unknown_word"]
@@ -231,8 +231,8 @@ class ZooAggToOtx2InxStagingTransformer:
                     jaar_type,
                     otx_word,
                     inx_word,
-                    otx_road_delimiter,
-                    inx_road_delimiter,
+                    otx_wall,
+                    inx_wall,
                     unknown_word,
                 ]
 
@@ -279,15 +279,15 @@ class ZooAggToNubStagingTransformer:
                 jaar_type = x_row["jaar_type"]
                 otx_label = x_row["otx_label"]
                 df_len = len(nub_df.index)
-                otx_road_delimiter = None
-                if "otx_road_delimiter" not in nub_missing_cols:
-                    otx_road_delimiter = x_row["otx_road_delimiter"]
+                otx_wall = None
+                if "otx_wall" not in nub_missing_cols:
+                    otx_wall = x_row["otx_wall"]
                 inx_label = None
                 if "inx_label" not in nub_missing_cols:
                     inx_label = x_row["inx_label"]
-                inx_road_delimiter = None
-                if "inx_road_delimiter" not in nub_missing_cols:
-                    inx_road_delimiter = x_row["inx_road_delimiter"]
+                inx_wall = None
+                if "inx_wall" not in nub_missing_cols:
+                    inx_wall = x_row["inx_wall"]
                 unknown_word = None
                 if "unknown_word" not in nub_missing_cols:
                     unknown_word = x_row["unknown_word"]
@@ -298,8 +298,8 @@ class ZooAggToNubStagingTransformer:
                     jaar_type,
                     otx_label,
                     inx_label,
-                    otx_road_delimiter,
-                    inx_road_delimiter,
+                    otx_wall,
+                    inx_wall,
                     unknown_word,
                 ]
 

@@ -14,8 +14,8 @@ from src.f07_fiscal.fiscal_config import (
 )
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
-    inx_road_delimiter_str,
-    otx_road_delimiter_str,
+    inx_wall_str,
+    otx_wall_str,
     inx_word_str,
     otx_word_str,
     unknown_word_str,
@@ -55,8 +55,8 @@ def test_WorldUnit_get_pidgin_core_report_df_ReturnsObj():
         jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     b3 = "br00114"
@@ -76,8 +76,8 @@ def test_WorldUnit_get_pidgin_core_report_df_ReturnsObj():
     # THEN
     pidgin_core_columns = [
         face_id_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     print(f"{list(pidgin_core_report.columns)}")

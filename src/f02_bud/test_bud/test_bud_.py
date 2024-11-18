@@ -8,7 +8,7 @@ from src.f01_road.finance import (
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f01_road.road import (
     get_default_fiscal_id_roadnode as root_label,
-    default_road_delimiter_if_none,
+    default_wall_if_none,
 )
 from src.f02_bud.origin import originunit_shop
 from pytest import raises as pytest_raises
@@ -26,7 +26,7 @@ def test_BudUnit_Exists():
     assert x_bud._accts is None
     assert x_bud._itemroot is None
     assert x_bud.max_tree_traverse is None
-    assert x_bud._road_delimiter is None
+    assert x_bud._wall is None
     assert x_bud.fund_pool is None
     assert x_bud.fund_coin is None
     assert x_bud.respect_bit is None
@@ -56,7 +56,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
     iowa_fiscal_id = "Iowa"
-    slash_road_delimiter = "/"
+    slash_wall = "/"
     x_fund_pool = 555
     x_fund_coin = 7
     x_respect_bit = 5
@@ -66,7 +66,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     x_bud = budunit_shop(
         _owner_id=sue_str,
         _fiscal_id=iowa_fiscal_id,
-        _road_delimiter=slash_road_delimiter,
+        _wall=slash_wall,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
         respect_bit=x_respect_bit,
@@ -81,7 +81,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud._accts == {}
     assert x_bud._itemroot is not None
     assert x_bud.max_tree_traverse == 3
-    assert x_bud._road_delimiter == slash_road_delimiter
+    assert x_bud._wall == slash_wall
     assert x_bud.fund_pool == x_fund_pool
     assert x_bud.fund_coin == x_fund_coin
     assert x_bud.respect_bit == x_respect_bit
@@ -115,18 +115,18 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     # THEN
     assert x_bud._owner_id == ""
     assert x_bud._fiscal_id == root_label()
-    assert x_bud._road_delimiter == default_road_delimiter_if_none()
+    assert x_bud._wall == default_wall_if_none()
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_none()
     assert x_bud.respect_bit == default_respect_bit_if_none()
     assert x_bud.penny == default_penny_if_none()
     assert x_bud._itemroot._fund_coin == x_bud.fund_coin
-    assert x_bud._itemroot._road_delimiter == x_bud._road_delimiter
+    assert x_bud._itemroot._wall == x_bud._wall
     assert x_bud._itemroot._root
     assert x_bud._itemroot._uid == 1
     assert x_bud._itemroot._level == 0
     assert x_bud._itemroot._bud_fiscal_id == x_bud._fiscal_id
-    assert x_bud._itemroot._road_delimiter == x_bud._road_delimiter
+    assert x_bud._itemroot._wall == x_bud._wall
     assert x_bud._itemroot._parent_road == ""
 
 
@@ -175,28 +175,28 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     )
 
 
-def test_BudUnit_set_road_delimiter_CorrectlySetsAttr():
+def test_BudUnit_set_wall_CorrectlySetsAttr():
     # ESTABLISH
     x_fiscal_id = "music45"
-    slash_road_delimiter = "/"
+    slash_wall = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_fiscal_id, _road_delimiter=slash_road_delimiter)
-    assert sue_bud._road_delimiter == slash_road_delimiter
+    sue_bud = budunit_shop(sue_str, x_fiscal_id, _wall=slash_wall)
+    assert sue_bud._wall == slash_wall
 
     # WHEN
     at_node_delimiter = "@"
-    sue_bud.set_road_delimiter(new_road_delimiter=at_node_delimiter)
+    sue_bud.set_wall(new_wall=at_node_delimiter)
 
     # THEN
-    assert sue_bud._road_delimiter == at_node_delimiter
+    assert sue_bud._wall == at_node_delimiter
 
 
 def test_BudUnit_make_road_ReturnsCorrectObj():
     # ESTABLISH
     x_fiscal_id = "music45"
-    slash_road_delimiter = "/"
+    slash_wall = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_fiscal_id, _road_delimiter=slash_road_delimiter)
+    sue_bud = budunit_shop(sue_str, x_fiscal_id, _wall=slash_wall)
     casa_str = "casa"
     v1_casa_road = sue_bud.make_l1_road(casa_str)
 

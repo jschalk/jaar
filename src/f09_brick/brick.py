@@ -248,7 +248,7 @@ def fiscal_build_from_df(
             timeline=x_timeline,
             current_time=row["current_time"],
             # in_memory_journal=row["in_memory_journal"],
-            road_delimiter=row["road_delimiter"],
+            wall=row["wall"],
             fund_coin=x_fund_coin,
             respect_bit=x_respect_bit,
             penny=x_penny,

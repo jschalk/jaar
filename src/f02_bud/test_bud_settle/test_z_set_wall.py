@@ -77,7 +77,7 @@ def test_bud_set_fiscal_id_CorrectlySetsAttr():
     assert swim_item._parent_road == new_casa_road
 
 
-def test_bud_set_road_delimiter_RaisesErrorIfNew_delimiter_IsAnItem_label():
+def test_bud_set_wall_RaisesErrorIfNew_delimiter_IsAnItem_label():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     print(f"{zia_bud.max_tree_traverse=}")
@@ -92,14 +92,14 @@ def test_bud_set_road_delimiter_RaisesErrorIfNew_delimiter_IsAnItem_label():
     casa_road = zia_bud.make_road(casa_road, casa_str)
     print(f"{casa_road=}")
     with pytest_raises(Exception) as excinfo:
-        zia_bud.set_road_delimiter(slash_str)
+        zia_bud.set_wall(slash_str)
     assert (
         str(excinfo.value)
         == f"Cannot modify delimiter to '{slash_str}' because it exists an item label '{casa_road}'"
     )
 
 
-def test_bud_set_road_delimiter_CorrectlyModifies_parent_road():
+def test_bud_set_wall_CorrectlyModifies_parent_road():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -110,7 +110,7 @@ def test_bud_set_road_delimiter_CorrectlyModifies_parent_road():
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
     cook_item = zia_bud.get_item_obj(semicolon_cook_road)
     semicolon_str = ";"
-    assert zia_bud._road_delimiter == semicolon_str
+    assert zia_bud._wall == semicolon_str
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
     # print(f"{zia_bud._fiscal_id=} {zia_bud._itemroot._label=} {casa_road=}")
     # print(f"{cook_item._parent_road=} {cook_item._label=}")
@@ -120,7 +120,7 @@ def test_bud_set_road_delimiter_CorrectlyModifies_parent_road():
 
     # WHEN
     slash_str = "/"
-    zia_bud.set_road_delimiter(slash_str)
+    zia_bud.set_wall(slash_str)
 
     # THEN
     assert cook_item.get_road() != semicolon_cook_road
@@ -130,7 +130,7 @@ def test_bud_set_road_delimiter_CorrectlyModifies_parent_road():
     assert cook_item.get_road() == slash_cook_road
 
 
-def test_bud_set_road_delimiter_CorrectlyModifiesReasonUnit():
+def test_bud_set_wall_CorrectlyModifiesReasonUnit():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -152,7 +152,7 @@ def test_bud_set_road_delimiter_CorrectlyModifiesReasonUnit():
 
     # WHEN
     slash_str = "/"
-    zia_bud.set_road_delimiter(slash_str)
+    zia_bud.set_wall(slash_str)
 
     # THEN
     slash_time_road = zia_bud.make_l1_road(time_str)
@@ -169,7 +169,7 @@ def test_bud_set_road_delimiter_CorrectlyModifiesReasonUnit():
     assert gen_time_reasonunit.premises.get(semicolon_8am_road) is None
 
 
-def test_bud_set_road_delimiter_CorrectlyModifiesFactUnit():
+def test_bud_set_wall_CorrectlyModifiesFactUnit():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -189,7 +189,7 @@ def test_bud_set_road_delimiter_CorrectlyModifiesFactUnit():
 
     # WHEN
     slash_str = "/"
-    zia_bud.set_road_delimiter(slash_str)
+    zia_bud.set_wall(slash_str)
 
     # THEN
     slash_time_road = zia_bud.make_l1_road(time_str)

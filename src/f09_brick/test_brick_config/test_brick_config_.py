@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_json_from_dict
 from src.f00_instrument.file import save_file
-from src.f01_road.finance_tran import quota_str, time_id_str, road_delimiter_str
+from src.f01_road.finance_tran import quota_str, time_id_str, wall_str
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
     bud_acctunit_str,
@@ -92,8 +92,8 @@ from src.f07_fiscal.fiscal_config import (
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
     pidginunit_str,
-    otx_road_delimiter_str,
-    inx_road_delimiter_str,
+    otx_wall_str,
+    inx_wall_str,
     unknown_word_str,
     otx_word_str,
     inx_word_str,
@@ -224,9 +224,9 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[58] == inx_word_str()
     assert table_sorting_priority[59] == otx_label_str()
     assert table_sorting_priority[60] == inx_label_str()
-    assert table_sorting_priority[61] == otx_road_delimiter_str()
-    assert table_sorting_priority[62] == inx_road_delimiter_str()
-    assert table_sorting_priority[63] == road_delimiter_str()
+    assert table_sorting_priority[61] == otx_wall_str()
+    assert table_sorting_priority[62] == inx_wall_str()
+    assert table_sorting_priority[63] == wall_str()
     assert table_sorting_priority[64] == unknown_word_str()
     assert table_sorting_priority[65] == c400_number_str()
     assert table_sorting_priority[66] == yr1_jan1_offset_str()
@@ -313,14 +313,14 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(cumlative_day_str()) == "INTEGER"
     assert sqlite_types.get(weekday_label_str()) == "TEXT"
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
-    assert sqlite_types.get(otx_road_delimiter_str()) == "TEXT"
-    assert sqlite_types.get(inx_road_delimiter_str()) == "TEXT"
+    assert sqlite_types.get(otx_wall_str()) == "TEXT"
+    assert sqlite_types.get(inx_wall_str()) == "TEXT"
     assert sqlite_types.get(unknown_word_str()) == "TEXT"
     assert sqlite_types.get(otx_word_str()) == "TEXT"
     assert sqlite_types.get(inx_word_str()) == "TEXT"
     assert sqlite_types.get(otx_label_str()) == "TEXT"
     assert sqlite_types.get(inx_label_str()) == "TEXT"
-    assert sqlite_types.get(road_delimiter_str()) == "TEXT"
+    assert sqlite_types.get(wall_str()) == "TEXT"
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(quota_str()) == "REAL"
@@ -674,7 +674,7 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),
-        road_delimiter_str(),
+        wall_str(),
         timeline_label_str(),
         yr1_jan1_offset_str(),
     }

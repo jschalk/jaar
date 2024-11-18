@@ -23,8 +23,8 @@ from src.f01_road.road import (
     get_diff_road,
     create_road,
     is_heir_road,
-    default_road_delimiter_if_none,
-    replace_road_delimiter,
+    default_wall_if_none,
+    replace_wall,
     validate_roadnode,
     roadunit_valid_dir_path,
     all_roadunits_between,
@@ -98,7 +98,7 @@ def test_Roadnode_is_node_ReturnsCorrectBool():
     assert RoadNode("").is_node()
 
     # WHEN / THEN
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     x_roadnode = RoadNode(f"casa{x_s}kitchen")
     assert x_roadnode.is_node() is False
 
@@ -132,7 +132,7 @@ def test_TimeLineLabel_exists():
     x_timelinelabel = TimeLineLabel(empty_str)
     # THEN
     assert x_timelinelabel == empty_str
-    doc_str = "TimeLineLabel is required for every TimeLineUnit. It is a RoadNode that must not container the road_delimiter."
+    doc_str = "TimeLineLabel is required for every TimeLineUnit. It is a RoadNode that must not container the wall."
     assert inspect_getdoc(x_timelinelabel) == doc_str
 
 
@@ -161,11 +161,11 @@ def test_get_default_face_id_ReturnsObj():
 def test_road_is_sub_road_correctlyReturnsBool():
     # WHEN
     casa_str = "casa"
-    casa_road = f"{root_label()}{default_road_delimiter_if_none()}{casa_str}"
+    casa_road = f"{root_label()}{default_wall_if_none()}{casa_str}"
     cleaning_str = "cleaning"
-    cleaning_road = f"{casa_road}{default_road_delimiter_if_none()}{cleaning_str}"
+    cleaning_road = f"{casa_road}{default_wall_if_none()}{cleaning_str}"
     laundrys_str = "laundrys"
-    laundrys_road = f"{cleaning_road}{default_road_delimiter_if_none()}{laundrys_str}"
+    laundrys_road = f"{cleaning_road}{default_wall_if_none()}{laundrys_str}"
     print(f"{cleaning_road=}")
     print(f"{laundrys_road=}")
 
@@ -176,7 +176,7 @@ def test_road_is_sub_road_correctlyReturnsBool():
 
 
 def test_road_road_validate_correctlyReturnsRoadUnit():
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     _fiscal_id = "x"
     casa_road = f"{_fiscal_id}{x_s}casa"
     clean_road = f"{_fiscal_id}{x_s}clean"
@@ -237,7 +237,7 @@ def test_road_rebuild_road_ReturnsCorrectRoadUnit():
 
 def test_road_get_all_road_nodes_ReturnsRoadNodes():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -258,7 +258,7 @@ def test_road_get_all_road_nodes_ReturnsRoadNodes():
 
 def test_road_get_terminus_node_ReturnsRoadNode():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -278,7 +278,7 @@ def test_road_get_terminus_node_ReturnsRoadNodeWhenNonDefaultDelimiter():
     casa_str = "casa"
     bloomers_str = "bloomers"
     roses_str = "roses"
-    slash_str = default_road_delimiter_if_none()
+    slash_str = default_wall_if_none()
     slash_casa_road = f"{root_label()}{slash_str}{casa_str}"
     slash_bloomers_road = f"{slash_casa_road}{slash_str}{bloomers_str}"
     slash_roses_road = f"{slash_bloomers_road}{slash_str}{roses_str}"
@@ -308,7 +308,7 @@ def test_road_get_root_node_from_road_ReturnsRoadNode():
 
 def test_road_get_parent_road_ReturnsCorrectObj_Scenario0():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -342,7 +342,7 @@ def test_road_get_parent_road_ReturnsCorrectObj_Scenario1():
 
 def test_road_create_road_without_root_node_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     casa_without_root_road = f"{x_s}{casa_str}"
@@ -382,7 +382,7 @@ class TempTestingObj:
 
 def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     old_seasons_road = f"{root_label()}{x_s}casa{x_s}seasons"
     old_dict_x = {old_seasons_road: TempTestingObj(old_seasons_road)}
     assert old_dict_x.get(old_seasons_road) is not None
@@ -403,7 +403,7 @@ def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
 
 def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     nation_str = "nation-state"
     nation_road = f"{root_label()}{x_s}{nation_str}"
     usa_str = "USA"
@@ -433,7 +433,7 @@ def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
 
 def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     nation_str = "nation-state"
     nation_road = f"{root_label()}{x_s}{nation_str}"
     usa_str = "USA"
@@ -461,7 +461,7 @@ def test_road_get_default_fiscal_id_roadnode_ReturnsCorrectObj():
 
 def test_road_create_road_from_nodes_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     root_list = get_all_road_nodes(root_label())
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
@@ -482,7 +482,7 @@ def test_road_create_road_from_nodes_ReturnsCorrectObj():
 
 def test_road_create_road_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -501,7 +501,7 @@ def test_road_create_road_ReturnsCorrectObj():
 
 def test_is_roadnode_ReturnsObj():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
 
     # WHEN / THEN
     assert is_roadnode("", x_delimiter=x_s)
@@ -513,7 +513,7 @@ def test_is_roadnode_ReturnsObj():
 
 def test_get_diff_road_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -533,7 +533,7 @@ def test_get_diff_road_ReturnsCorrectObj():
 
 def test_is_heir_road_CorrectlyIdentifiesHeirs():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     usa_str = "USA"
     usa_road = f"{root_label()}{x_s}Nation-States{x_s}{usa_str}"
     texas_str = "Texas"
@@ -552,18 +552,18 @@ def test_is_heir_road_CorrectlyIdentifiesHeirs():
     assert is_heir_road(src=f"earth{x_s}sea", heir=f"earth{x_s}seaside") is False
 
 
-def test_replace_road_delimiter_ReturnsNewObj():
+def test_replace_wall_ReturnsNewObj():
     # ESTABLISH
     casa_str = "casa"
     gen_casa_road = create_road(root_label(), casa_str)
-    semicolon_delimiter = default_road_delimiter_if_none()
+    semicolon_delimiter = default_wall_if_none()
     semicolon_delimiter_casa_road = f"{root_label()}{semicolon_delimiter}{casa_str}"
     assert semicolon_delimiter == ";"
     assert gen_casa_road == semicolon_delimiter_casa_road
 
     # WHEN
     slash_delimiter = "/"
-    gen_casa_road = replace_road_delimiter(
+    gen_casa_road = replace_wall(
         gen_casa_road, old_delimiter=semicolon_delimiter, new_delimiter=slash_delimiter
     )
 
@@ -572,11 +572,11 @@ def test_replace_road_delimiter_ReturnsNewObj():
     assert gen_casa_road == slash_delimiter_casa_road
 
 
-def test_replace_road_delimiter_CorrectlyRaisesError():
+def test_replace_wall_CorrectlyRaisesError():
     # ESTABLISH
     cooker_str = "cooker/cleaner"
     gen_cooker_road = create_road(root_label(), cooker_str)
-    semicolon_delimiter = default_road_delimiter_if_none()
+    semicolon_delimiter = default_wall_if_none()
     semicolon_delimiter_cooker_road = f"{root_label()}{semicolon_delimiter}{cooker_str}"
     assert semicolon_delimiter == ";"
     assert gen_cooker_road == semicolon_delimiter_cooker_road
@@ -584,36 +584,36 @@ def test_replace_road_delimiter_CorrectlyRaisesError():
     # WHEN / THEN
     slash_delimiter = "/"
     with pytest_raises(Exception) as excinfo:
-        gen_cooker_road = replace_road_delimiter(
+        gen_cooker_road = replace_wall(
             gen_cooker_road,
             old_delimiter=semicolon_delimiter,
             new_delimiter=slash_delimiter,
         )
     assert (
         str(excinfo.value)
-        == f"Cannot replace_road_delimiter '{semicolon_delimiter}' with '{slash_delimiter}' because the new one exists in road '{gen_cooker_road}'."
+        == f"Cannot replace_wall '{semicolon_delimiter}' with '{slash_delimiter}' because the new one exists in road '{gen_cooker_road}'."
     )
 
 
-def test_replace_road_delimiter_WhenNewdelimiterIsFirstInRoadUnitRaisesError():
+def test_replace_wall_WhenNewdelimiterIsFirstInRoadUnitRaisesError():
     # ESTABLISH
     cooker_str = "/cooker"
     cleaner_str = "cleaner"
-    semicolon_delimiter = default_road_delimiter_if_none()
+    semicolon_delimiter = default_wall_if_none()
     semicolon_delimiter_cooker_road = f"{cooker_str}{semicolon_delimiter}{cleaner_str}"
     assert semicolon_delimiter == ";"
 
     # WHEN / THEN
     slash_delimiter = "/"
     with pytest_raises(Exception) as excinfo:
-        semicolon_delimiter_cooker_road = replace_road_delimiter(
+        semicolon_delimiter_cooker_road = replace_wall(
             semicolon_delimiter_cooker_road,
             old_delimiter=semicolon_delimiter,
             new_delimiter=slash_delimiter,
         )
     assert (
         str(excinfo.value)
-        == f"Cannot replace_road_delimiter '{semicolon_delimiter}' with '{slash_delimiter}' because the new one exists in road '{semicolon_delimiter_cooker_road}'."
+        == f"Cannot replace_wall '{semicolon_delimiter}' with '{slash_delimiter}' because the new one exists in road '{semicolon_delimiter_cooker_road}'."
     )
 
 

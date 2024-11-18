@@ -189,11 +189,11 @@ def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsNone()
     assert len(x_dict.keys()) == 10
 
 
-def test_acctunit_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
+def test_acctunit_get_from_dict_ReturnsCorrectObjWith_wall():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    before_yao_acctunit = acctunit_shop(yao_str, _road_delimiter=slash_str)
+    before_yao_acctunit = acctunit_shop(yao_str, _wall=slash_str)
     yao_dict = before_yao_acctunit.get_dict()
 
     # WHEN
@@ -201,14 +201,14 @@ def test_acctunit_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
 
     # THEN
     assert before_yao_acctunit == after_yao_acctunit
-    assert after_yao_acctunit._road_delimiter == slash_str
+    assert after_yao_acctunit._wall == slash_str
 
 
 def test_acctunit_get_from_dict_Returns_memberships():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    before_yao_acctunit = acctunit_shop(yao_str, _road_delimiter=slash_str)
+    before_yao_acctunit = acctunit_shop(yao_str, _wall=slash_str)
     ohio_str = f"{slash_str}ohio"
     iowa_str = f"{slash_str}iowa"
     ohio_credit_vote = 90
@@ -227,14 +227,14 @@ def test_acctunit_get_from_dict_Returns_memberships():
     # THEN
     assert before_yao_acctunit._memberships == after_yao_acctunit._memberships
     assert before_yao_acctunit == after_yao_acctunit
-    assert after_yao_acctunit._road_delimiter == slash_str
+    assert after_yao_acctunit._wall == slash_str
 
 
-def test_acctunits_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
+def test_acctunits_get_from_dict_ReturnsCorrectObjWith_wall():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    yao_acctunit = acctunit_shop(yao_str, _road_delimiter=slash_str)
+    yao_acctunit = acctunit_shop(yao_str, _wall=slash_str)
     yao_dict = yao_acctunit.get_dict()
     x_acctunits_dict = {yao_str: yao_dict}
 
@@ -243,7 +243,7 @@ def test_acctunits_get_from_dict_ReturnsCorrectObjWith_road_delimiter():
 
     # THEN
     assert x_acctunits_objs.get(yao_str) == yao_acctunit
-    assert x_acctunits_objs.get(yao_str)._road_delimiter == slash_str
+    assert x_acctunits_objs.get(yao_str)._wall == slash_str
 
 
 def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteData():

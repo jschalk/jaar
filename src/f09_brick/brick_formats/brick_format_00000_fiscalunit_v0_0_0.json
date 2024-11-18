@@ -27,7 +27,7 @@
         "respect_bit": {
             "otx_key": false
         },
-        "road_delimiter": {
+        "wall": {
             "otx_key": false
         },
         "timeline_label": {

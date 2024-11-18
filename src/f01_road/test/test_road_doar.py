@@ -1,14 +1,14 @@
 from src.f01_road.road import (
     get_default_fiscal_id_roadnode as root_label,
-    default_road_delimiter_if_none,
+    default_wall_if_none,
     get_road_from_doar,
     get_doar_from_road,
 )
 
 
-def test_get_road_from_doar_ReturnsObj_default_road_delimiter():
+def test_get_road_from_doar_ReturnsObj_default_wall():
     # ESTABLISH
-    x_s = default_road_delimiter_if_none()
+    x_s = default_wall_if_none()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     casa_doar = f"{casa_str}{x_s}{root_label()}"
@@ -27,7 +27,7 @@ def test_get_road_from_doar_ReturnsObj_default_road_delimiter():
     assert get_road_from_doar(roses_road) == roses_doar
 
 
-def test_get_road_from_doar_ReturnsObj_Not_default_road_delimiter():
+def test_get_road_from_doar_ReturnsObj_Not_default_wall():
     # ESTABLISH
     x_s = "/"
     casa_str = "casa"
@@ -48,7 +48,7 @@ def test_get_road_from_doar_ReturnsObj_Not_default_road_delimiter():
     assert get_road_from_doar(roses_road, x_s) == roses_doar
 
 
-def test_get_doar_from_road_ReturnsObj_Not_default_road_delimiter():
+def test_get_doar_from_road_ReturnsObj_Not_default_wall():
     # ESTABLISH
     x_s = "/"
     casa_str = "casa"

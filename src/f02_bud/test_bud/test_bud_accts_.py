@@ -11,16 +11,16 @@ def test_BudUnit_set_acctunit_SetObjCorrectly():
     yao_acctunit.add_membership(yao_str)
     deepcopy_yao_acctunit = copy_deepcopy(yao_acctunit)
     slash_str = "/"
-    bob_bud = budunit_shop("Bob", _road_delimiter=slash_str)
+    bob_bud = budunit_shop("Bob", _wall=slash_str)
 
     # WHEN
     bob_bud.set_acctunit(yao_acctunit)
 
     # THEN
-    assert bob_bud._accts.get(yao_str)._road_delimiter == slash_str
+    assert bob_bud._accts.get(yao_str)._wall == slash_str
     x_accts = {yao_acctunit.acct_id: deepcopy_yao_acctunit}
     assert bob_bud._accts != x_accts
-    deepcopy_yao_acctunit._road_delimiter = bob_bud._road_delimiter
+    deepcopy_yao_acctunit._wall = bob_bud._wall
     assert bob_bud._accts == x_accts
 
 

@@ -1,4 +1,4 @@
-from src.f01_road.road import default_road_delimiter_if_none
+from src.f01_road.road import default_wall_if_none
 from src.f01_road.finance import (
     default_fund_coin_if_none,
     default_respect_bit_if_none,
@@ -40,7 +40,7 @@ def test_FiscalUnit_get_dict_ReturnsObj():
     assert x_dict.get(fiscal_id_str()) == music_str
     assert x_dict.get("timeline") == get_default_timeline_config_dict()
     assert x_dict.get("current_time") == 0
-    assert x_dict.get("road_delimiter") == default_road_delimiter_if_none()
+    assert x_dict.get("wall") == default_wall_if_none()
     assert x_dict.get("fund_coin") == default_fund_coin_if_none()
     assert x_dict.get("respect_bit") == default_respect_bit_if_none()
     assert x_dict.get("penny") == default_penny_if_none()
@@ -51,7 +51,7 @@ def test_FiscalUnit_get_dict_ReturnsObj():
         "timeline",
         "current_time",
         "purviewlogs",
-        "road_delimiter",
+        "wall",
         "fund_coin",
         "respect_bit",
         "penny",
@@ -90,7 +90,7 @@ def test_get_from_dict_ReturnsFiscalUnit():
     sue_timeline_label = "sue casa"
     music_fiscal.timeline.timeline_label = sue_timeline_label
     sue_current_time = 23
-    sue_road_delimiter = "/"
+    sue_wall = "/"
     sue_fund_coin = 0.3
     sue_respect_bit = 0.5
     sue_penny = 0.8
@@ -106,7 +106,7 @@ def test_get_from_dict_ReturnsFiscalUnit():
     music_fiscal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
     music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
     music_fiscal.current_time = sue_current_time
-    music_fiscal.road_delimiter = sue_road_delimiter
+    music_fiscal.wall = sue_wall
     music_fiscal.fund_coin = sue_fund_coin
     music_fiscal.respect_bit = sue_respect_bit
     music_fiscal.penny = sue_penny
@@ -119,7 +119,7 @@ def test_get_from_dict_ReturnsFiscalUnit():
     assert x_fiscal.fiscal_id == music_str
     assert x_fiscal.timeline.timeline_label == sue_timeline_label
     assert x_fiscal.current_time == sue_current_time
-    assert x_fiscal.road_delimiter == sue_road_delimiter
+    assert x_fiscal.wall == sue_wall
     assert x_fiscal.fund_coin == sue_fund_coin
     assert x_fiscal.respect_bit == sue_respect_bit
     assert x_fiscal.penny == sue_penny
@@ -135,7 +135,7 @@ def test_get_from_json_ReturnsFiscalUnit():
     sue_timeline_label = "sue casa"
     music_fiscal.timeline.timeline_label = sue_timeline_label
     sue_current_time = 23
-    sue_road_delimiter = "/"
+    sue_wall = "/"
     sue_fund_coin = 0.3
     sue_respect_bit = 0.5
     sue_penny = 0.8
@@ -151,7 +151,7 @@ def test_get_from_json_ReturnsFiscalUnit():
     music_fiscal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
     music_fiscal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
     music_fiscal.current_time = sue_current_time
-    music_fiscal.road_delimiter = sue_road_delimiter
+    music_fiscal.wall = sue_wall
     music_fiscal.fund_coin = sue_fund_coin
     music_fiscal.respect_bit = sue_respect_bit
     music_fiscal.penny = sue_penny
@@ -164,7 +164,7 @@ def test_get_from_json_ReturnsFiscalUnit():
     assert x_fiscal.fiscal_id == music_str
     assert x_fiscal.timeline.timeline_label == sue_timeline_label
     assert x_fiscal.current_time == sue_current_time
-    assert x_fiscal.road_delimiter == sue_road_delimiter
+    assert x_fiscal.wall == sue_wall
     assert x_fiscal.fund_coin == sue_fund_coin
     assert x_fiscal.respect_bit == sue_respect_bit
     assert x_fiscal.penny == sue_penny

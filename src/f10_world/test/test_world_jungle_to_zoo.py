@@ -14,8 +14,8 @@ from src.f07_fiscal.fiscal_config import (
 )
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
-    inx_road_delimiter_str,
-    otx_road_delimiter_str,
+    inx_wall_str,
+    otx_wall_str,
     inx_word_str,
     otx_word_str,
     unknown_word_str,
@@ -669,8 +669,8 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario0_SingleBrick(
         jaar_type_str(),
         otx_word_str(),
         inx_word_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     assert list(gen_otx2inx_df.columns) == otx2inx_file_columns
@@ -723,8 +723,8 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario1_MultipleBric
         jaar_type_str(),
         otx_word_str(),
         inx_word_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, acctid_str, yao_str, yao_inx]
@@ -761,8 +761,8 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario1_MultipleBric
         jaar_type_str(),
         otx_word_str(),
         inx_word_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     assert list(gen_otx2inx_df.columns) == otx2inx_file_columns
@@ -819,8 +819,8 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario2_WorldUnit_ev
         jaar_type_str(),
         otx_word_str(),
         inx_word_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, acctid_str, yao_str, yao_inx]
@@ -859,8 +859,8 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario2_WorldUnit_ev
         jaar_type_str(),
         otx_word_str(),
         inx_word_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     assert list(gen_otx2inx_df.columns) == otx2inx_file_columns
@@ -929,8 +929,8 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario0_SingleBrick(
         jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     assert list(gen_nub_df.columns) == nub_file_columns
@@ -983,8 +983,8 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario1_MultipleBricksFi
         jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, roadnode, yao_str, yao_inx]
@@ -1021,8 +1021,8 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario1_MultipleBricksFi
         jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     assert list(gen_nub_df.columns) == nub_file_columns
@@ -1079,8 +1079,8 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
         jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, roadnode, yao_str, yao_inx]
@@ -1119,8 +1119,8 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
         jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
-        otx_road_delimiter_str(),
-        inx_road_delimiter_str(),
+        otx_wall_str(),
+        inx_wall_str(),
         unknown_word_str(),
     ]
     assert list(gen_nub_df.columns) == nub_file_columns
@@ -1163,8 +1163,8 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
 #         jaar_type_str(),
 #         otx_label_str(),
 #         inx_label_str(),
-#         otx_road_delimiter_str(),
-#         inx_road_delimiter_str(),
+#         otx_wall_str(),
+#         inx_wall_str(),
 #         unknown_word_str(),
 #     ]
 #     b3 = "br00114"

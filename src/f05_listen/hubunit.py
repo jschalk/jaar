@@ -46,7 +46,7 @@ from src.f01_road.road import (
     rebuild_road,
     get_all_road_nodes,
     validate_roadnode,
-    default_road_delimiter_if_none,
+    default_wall_if_none,
 )
 from src.f02_bud.bud import (
     BudUnit,
@@ -117,7 +117,7 @@ class HubUnit:
     fiscals_dir: str = None
     fiscal_id: str = None
     keep_road: RoadUnit = None
-    road_delimiter: str = None
+    wall: str = None
     fund_pool: float = None
     fund_coin: float = None
     respect_bit: float = None
@@ -205,7 +205,7 @@ class HubUnit:
         x_budunit = budunit_shop(
             _owner_id=self.owner_id,
             _fiscal_id=self.fiscal_id,
-            _road_delimiter=self.road_delimiter,
+            _wall=self.wall,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,
             respect_bit=self.respect_bit,
@@ -609,7 +609,7 @@ class HubUnit:
             fiscals_dir=self.fiscals_dir,
             fiscal_id=self.fiscal_id,
             owner_id=speaker_id,
-            road_delimiter=self.road_delimiter,
+            wall=self.wall,
             respect_bit=self.respect_bit,
         )
         return speaker_hubunit.get_final_bud()
@@ -630,7 +630,7 @@ class HubUnit:
             fiscal_id=self.fiscal_id,
             owner_id=healer_id,
             keep_road=self.keep_road,
-            road_delimiter=self.road_delimiter,
+            wall=self.wall,
             respect_bit=self.respect_bit,
         )
         return speaker_hubunit.get_job_bud(speaker_id)
@@ -690,7 +690,7 @@ def hubunit_shop(
     fiscal_id: FiscalID,
     owner_id: OwnerID = None,
     keep_road: RoadUnit = None,
-    road_delimiter: str = None,
+    wall: str = None,
     fund_pool: float = None,
     fund_coin: float = None,
     respect_bit: float = None,
@@ -703,9 +703,9 @@ def hubunit_shop(
     return HubUnit(
         fiscals_dir=fiscals_dir,
         fiscal_id=fiscal_id,
-        owner_id=validate_roadnode(owner_id, road_delimiter),
+        owner_id=validate_roadnode(owner_id, wall),
         keep_road=keep_road,
-        road_delimiter=default_road_delimiter_if_none(road_delimiter),
+        wall=default_wall_if_none(wall),
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_none(fund_coin),
         respect_bit=default_respect_bit_if_none(respect_bit),
@@ -717,5 +717,5 @@ def hubunit_shop(
 def get_keep_path(x_hubunit: HubUnit, x_road: RoadNode) -> str:
     keep_root = get_rootpart_of_keep_dir()
     x_road = rebuild_road(x_road, x_hubunit.fiscal_id, keep_root)
-    x_list = get_all_road_nodes(x_road, x_hubunit.road_delimiter)
+    x_list = get_all_road_nodes(x_road, x_hubunit.wall)
     return f"{x_hubunit.keeps_dir()}{get_directory_path(x_list=[*x_list])}"

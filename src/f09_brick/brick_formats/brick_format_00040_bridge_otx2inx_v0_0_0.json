@@ -6,7 +6,7 @@
         "face_id": {
             "otx_key": true
         },
-        "inx_road_delimiter": {
+        "inx_wall": {
             "otx_key": false
         },
         "inx_word": {
@@ -15,7 +15,7 @@
         "jaar_type": {
             "otx_key": true
         },
-        "otx_road_delimiter": {
+        "otx_wall": {
             "otx_key": false
         },
         "otx_word": {

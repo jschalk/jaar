@@ -1,4 +1,4 @@
-from src.f01_road.road import default_road_delimiter_if_none, create_road
+from src.f01_road.road import default_wall_if_none, create_road
 from src.f04_gift.atom_config import (
     acct_id_str,
     get_atom_args_jaar_types,
@@ -30,8 +30,8 @@ def test_BridgeUnit_Exists():
     assert not x_bridgeunit.jaar_type
     assert not x_bridgeunit.otx2inx
     assert not x_bridgeunit.unknown_word
-    assert not x_bridgeunit.otx_road_delimiter
-    assert not x_bridgeunit.inx_road_delimiter
+    assert not x_bridgeunit.otx_wall
+    assert not x_bridgeunit.inx_wall
     assert not x_bridgeunit.nub_label
     assert not x_bridgeunit.face_id
 
@@ -43,16 +43,16 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
     bob_str = "Bob"
     otx2inx = {xio_str: sue_str}
     x_unknown_word = "UnknownAcctId"
-    slash_otx_road_delimiter = "/"
-    colon_inx_road_delimiter = ":"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
 
     # WHEN
     acct_id_bridgeunit = bridgeunit_shop(
         x_jaar_type=type_AcctID_str(),
         x_otx2inx=otx2inx,
         x_unknown_word=x_unknown_word,
-        x_otx_road_delimiter=slash_otx_road_delimiter,
-        x_inx_road_delimiter=colon_inx_road_delimiter,
+        x_otx_wall=slash_otx_wall,
+        x_inx_wall=colon_inx_wall,
         x_face_id=bob_str,
     )
 
@@ -60,8 +60,8 @@ def test_bridgeunit_shop_ReturnsObj_scenario0():
     assert acct_id_bridgeunit.jaar_type == type_AcctID_str()
     assert acct_id_bridgeunit.otx2inx == otx2inx
     assert acct_id_bridgeunit.unknown_word == x_unknown_word
-    assert acct_id_bridgeunit.otx_road_delimiter == slash_otx_road_delimiter
-    assert acct_id_bridgeunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert acct_id_bridgeunit.otx_wall == slash_otx_wall
+    assert acct_id_bridgeunit.inx_wall == colon_inx_wall
     assert acct_id_bridgeunit.nub_label == {}
     assert acct_id_bridgeunit.face_id == bob_str
 
@@ -74,8 +74,8 @@ def test_bridgeunit_shop_ReturnsObj_scenario1():
     # THEN
     assert credit_vote_bridgeunit.otx2inx == {}
     assert credit_vote_bridgeunit.unknown_word == default_unknown_word()
-    assert credit_vote_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
-    assert credit_vote_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
+    assert credit_vote_bridgeunit.otx_wall == default_wall_if_none()
+    assert credit_vote_bridgeunit.inx_wall == default_wall_if_none()
     assert credit_vote_bridgeunit.jaar_type == cv_jaar_type
     assert credit_vote_bridgeunit.face_id is None
 
@@ -88,8 +88,8 @@ def test_bridgeunit_shop_ReturnsObj_Scenario2():
     assert credit_vote_bridgeunit.jaar_type == type_AcctID_str()
     assert credit_vote_bridgeunit.otx2inx == {}
     assert credit_vote_bridgeunit.unknown_word == default_unknown_word()
-    assert credit_vote_bridgeunit.otx_road_delimiter == default_road_delimiter_if_none()
-    assert credit_vote_bridgeunit.inx_road_delimiter == default_road_delimiter_if_none()
+    assert credit_vote_bridgeunit.otx_wall == default_wall_if_none()
+    assert credit_vote_bridgeunit.inx_wall == default_wall_if_none()
     assert credit_vote_bridgeunit.face_id is None
 
 
@@ -293,31 +293,31 @@ def test_BridgeUnit_set_nub_label_SetsAttr():
     assert x_bridgeunit.nub_label == {xio_str: sue_str}
 
 
-def test_BridgeUnit_set_nub_label_RaisesExceptionWhen_road_delimiter_In_otx_label():
+def test_BridgeUnit_set_nub_label_RaisesExceptionWhen_wall_In_otx_label():
     # ESTABLISH
     x_bridgeunit = bridgeunit_shop(None)
-    sue_otx = f"Sue{x_bridgeunit.otx_road_delimiter}"
+    sue_otx = f"Sue{x_bridgeunit.otx_wall}"
     sue_inx = "Sue"
     assert x_bridgeunit.nub_label == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_bridgeunit.set_nub_label(sue_otx, sue_inx)
-    exception_str = f"nub_label cannot have otx_label '{sue_otx}'. It must be not have road_delimiter {x_bridgeunit.otx_road_delimiter}."
+    exception_str = f"nub_label cannot have otx_label '{sue_otx}'. It must be not have wall {x_bridgeunit.otx_wall}."
     assert str(excinfo.value) == exception_str
 
 
-def test_BridgeUnit_set_nub_label_RaisesExceptionWhen_road_delimiter_In_inx_label():
+def test_BridgeUnit_set_nub_label_RaisesExceptionWhen_wall_In_inx_label():
     # ESTABLISH
     x_bridgeunit = bridgeunit_shop(None)
-    sue_inx = f"Sue{x_bridgeunit.otx_road_delimiter}"
+    sue_inx = f"Sue{x_bridgeunit.otx_wall}"
     sue_otx = "Sue"
     assert x_bridgeunit.nub_label == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_bridgeunit.set_nub_label(sue_otx, sue_inx)
-    exception_str = f"nub_label cannot have inx_label '{sue_inx}'. It must be not have road_delimiter {x_bridgeunit.inx_road_delimiter}."
+    exception_str = f"nub_label cannot have inx_label '{sue_inx}'. It must be not have wall {x_bridgeunit.inx_wall}."
     assert str(excinfo.value) == exception_str
 
 

@@ -60,7 +60,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario0_OneFiscalID(brick_env_setup_c
         fund_coin=x_fund_coin,
         penny=x_penny,
         respect_bit=x_respect_bit,
-        road_delimiter=slash_text,
+        wall=slash_text,
         timeline=creg_timelineunit,
     )
     music23_fiscalunit.add_purviewepisode(
@@ -131,7 +131,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario1_TwoFiscalIDs(
         fund_coin=x_fund_coin,
         penny=x_penny,
         respect_bit=x_respect_bit,
-        road_delimiter=slash_text,
+        wall=slash_text,
         timeline=creg_timelineunit,
     )
     five_timelineunit = timelineunit_shop(get_five_config())
@@ -142,7 +142,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario1_TwoFiscalIDs(
         fund_coin=x_fund_coin,
         penny=x_penny,
         respect_bit=x_respect_bit,
-        road_delimiter=",",
+        wall=",",
         timeline=five_timelineunit,
     )
     assert x_fiscalunits

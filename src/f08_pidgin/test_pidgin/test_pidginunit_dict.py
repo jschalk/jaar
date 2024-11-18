@@ -1,4 +1,4 @@
-from src.f01_road.road import default_road_delimiter_if_none
+from src.f01_road.road import default_wall_if_none
 from src.f04_gift.atom_config import road_str, type_AcctID_str, type_GroupID_str
 from src.f08_pidgin.pidgin import (
     pidginunit_shop,
@@ -28,8 +28,8 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     assert sue_dict
     assert sue_dict.get("face_id") == sue_str
     assert sue_dict.get("event_id") == sue_pidginunit.event_id
-    assert sue_dict.get("otx_road_delimiter") == default_road_delimiter_if_none()
-    assert sue_dict.get("inx_road_delimiter") == default_road_delimiter_if_none()
+    assert sue_dict.get("otx_wall") == default_wall_if_none()
+    assert sue_dict.get("inx_wall") == default_wall_if_none()
     assert sue_dict.get("unknown_word") == default_unknown_word()
     assert sue_dict.get("bridgeunits")
     x_bridgeunits = sue_dict.get("bridgeunits")
@@ -51,10 +51,10 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownAcctId"
-    slash_otx_road_delimiter = "/"
-    colon_inx_road_delimiter = ":"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
     sue_pidginunit = pidginunit_shop(
-        sue_str, 0, slash_otx_road_delimiter, colon_inx_road_delimiter, x_unknown_word
+        sue_str, 0, slash_otx_wall, colon_inx_wall, x_unknown_word
     )
     sue_pidginunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
     sue_pidginunit.set_bridgeunit(get_slash_groupid_bridgeunit())
@@ -65,8 +65,8 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
 
     # THEN
     assert sue_dict.get("face_id") == sue_str
-    assert sue_dict.get("otx_road_delimiter") == slash_otx_road_delimiter
-    assert sue_dict.get("inx_road_delimiter") == colon_inx_road_delimiter
+    assert sue_dict.get("otx_wall") == slash_otx_wall
+    assert sue_dict.get("inx_wall") == colon_inx_wall
     assert sue_dict.get("unknown_word") == x_unknown_word
     assert sue_dict.get("bridgeunits")
     x_bridgeunits = sue_dict.get("bridgeunits")
@@ -92,7 +92,7 @@ def test_PidginUnit_get_json_ReturnsObj():
 
     # THEN
     assert sue_json.find("bridgeunits") == 5
-    assert sue_json.find("otx_road_delimiter") == 254
+    assert sue_json.find("otx_wall") == 244
 
 
 def test_get_pidginunit_from_dict_ReturnsObj():
@@ -100,13 +100,13 @@ def test_get_pidginunit_from_dict_ReturnsObj():
     sue_str = "Sue"
     sue_event_id = 77
     x_unknown_word = "UnknownAcctId"
-    slash_otx_road_delimiter = "/"
-    colon_inx_road_delimiter = ":"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
     sue_pidginunit = pidginunit_shop(
         sue_str,
         sue_event_id,
-        slash_otx_road_delimiter,
-        colon_inx_road_delimiter,
+        slash_otx_wall,
+        colon_inx_wall,
         x_unknown_word,
     )
     sue_pidginunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
@@ -120,8 +120,8 @@ def test_get_pidginunit_from_dict_ReturnsObj():
     assert gen_pidginunit
     assert gen_pidginunit.face_id == sue_str
     assert gen_pidginunit.event_id == sue_event_id
-    assert gen_pidginunit.otx_road_delimiter == slash_otx_road_delimiter
-    assert gen_pidginunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert gen_pidginunit.otx_wall == slash_otx_wall
+    assert gen_pidginunit.inx_wall == colon_inx_wall
     assert gen_pidginunit.unknown_word == x_unknown_word
     x_bridgeunits = gen_pidginunit.bridgeunits
     assert len(x_bridgeunits) == 3
@@ -138,13 +138,13 @@ def test_get_pidginunit_from_json_ReturnsObj():
     sue_str = "Sue"
     sue_event_id = 77
     x_unknown_word = "UnknownAcctId"
-    slash_otx_road_delimiter = "/"
-    colon_inx_road_delimiter = ":"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
     sue_pidginunit = pidginunit_shop(
         sue_str,
         sue_event_id,
-        slash_otx_road_delimiter,
-        colon_inx_road_delimiter,
+        slash_otx_wall,
+        colon_inx_wall,
         x_unknown_word,
     )
     sue_pidginunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
@@ -158,8 +158,8 @@ def test_get_pidginunit_from_json_ReturnsObj():
     assert gen_pidginunit
     assert gen_pidginunit.face_id == sue_str
     assert gen_pidginunit.event_id == sue_event_id
-    assert gen_pidginunit.otx_road_delimiter == slash_otx_road_delimiter
-    assert gen_pidginunit.inx_road_delimiter == colon_inx_road_delimiter
+    assert gen_pidginunit.otx_wall == slash_otx_wall
+    assert gen_pidginunit.inx_wall == colon_inx_wall
     assert gen_pidginunit.unknown_word == x_unknown_word
     x_bridgeunits = gen_pidginunit.bridgeunits
     assert len(x_bridgeunits) == 3

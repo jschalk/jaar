@@ -85,12 +85,12 @@ def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
 def get_pidgin_core_report_df(pidgin_dataframe: DataFrame) -> DataFrame:
     pidgin_core_columns = [
         "face_id",
-        "otx_road_delimiter",
-        "inx_road_delimiter",
+        "otx_wall",
+        "inx_wall",
         "unknown_word",
     ]
     pidgin_core_df = DataFrame([], columns=pidgin_core_columns)
-    core_attrs = ["otx_road_delimiter", "inx_road_delimiter", "unknown_word"]
+    core_attrs = ["otx_wall", "inx_wall", "unknown_word"]
     pidgin_agg_df = pidgin_dataframe.groupby("face_id").apply(
         lambda x: {col: x[col].unique().tolist() for col in core_attrs}
     )
