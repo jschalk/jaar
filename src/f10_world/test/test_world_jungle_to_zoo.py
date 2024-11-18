@@ -196,7 +196,7 @@ def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnly
     assert get_sheet_names(zoo_file_path) == ["zoo_staging", "zoo_agg"]
 
 
-def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0(
+def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -233,7 +233,7 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0(
     fizz_world.zoo_staging_to_zoo_agg()
 
     # WHEN
-    fizz_world.otx_to_otx_events()
+    fizz_world.zoo_agg_to_zoo_events()
 
     # THEN
     gen_otx_events_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_events")
@@ -252,7 +252,7 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario0(
     assert get_sheet_names(zoo_file_path) == ["zoo_staging", "zoo_agg", "zoo_events"]
 
 
-def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario1(
+def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -291,7 +291,7 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario1(
     fizz_world.zoo_staging_to_zoo_agg()
 
     # WHEN
-    fizz_world.otx_to_otx_events()
+    fizz_world.zoo_agg_to_zoo_events()
 
     # THEN
     gen_otx_events_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_events")
@@ -313,7 +313,7 @@ def test_WorldUnit_otx_to_otx_events_CreatesSheets_Scenario1(
     assert gen_otx_events_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
 
 
-def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario0(
+def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -349,13 +349,13 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario0(
         df1.to_excel(writer, sheet_name="example1_br00003")
     fizz_world.jungle_to_zoo_staging()
     fizz_world.zoo_staging_to_zoo_agg()
-    fizz_world.otx_to_otx_events()
+    fizz_world.zoo_agg_to_zoo_events()
     events_file_name = "events.xlsx"
     events_file_path = create_path(fizz_world._zoo_dir, events_file_name)
     assert os_path_exists(events_file_path) is False
 
     # WHEN
-    fizz_world.otx_events_to_events_log()
+    fizz_world.zoo_events_to_events_log()
 
     # THEN
     assert os_path_exists(events_file_path)
@@ -393,7 +393,7 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario0(
     assert get_sheet_names(events_file_path) == ["events_log"]
 
 
-def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario1_MultipleBricks(
+def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario1_MultipleBricks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -440,13 +440,13 @@ def test_WorldUnit_otx_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
         b5_df.to_excel(writer, sheet_name="example2_br00005")
     fizz_world.jungle_to_zoo_staging()
     fizz_world.zoo_staging_to_zoo_agg()
-    fizz_world.otx_to_otx_events()
+    fizz_world.zoo_agg_to_zoo_events()
     events_file_name = "events.xlsx"
     events_file_path = create_path(fizz_world._zoo_dir, events_file_name)
     assert os_path_exists(events_file_path) is False
 
     # WHEN
-    fizz_world.otx_events_to_events_log()
+    fizz_world.zoo_events_to_events_log()
 
     # THEN
     assert os_path_exists(events_file_path)
@@ -670,7 +670,7 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
     assert pidgen_brick_filenames == {"br00040.xlsx", "br00041.xlsx", "br00113.xlsx"}
 
 
-def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario0_SingleBrick(
+def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario0_SingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -701,14 +701,14 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario0_SingleBrick(
     with ExcelWriter(br00113_file_path) as writer:
         br00113_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
-    fizz_world.otx_to_otx_events()
-    fizz_world.otx_events_to_events_log()
+    fizz_world.zoo_agg_to_zoo_events()
+    fizz_world.zoo_events_to_events_log()
     fizz_world.events_log_to_events_agg()
     fizz_world.set_events_from_events_agg()
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.otx_to_otxinx_staging()
+    fizz_world.zoo_agg_to_otxinx_staging()
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -739,7 +739,7 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario0_SingleBrick(
     assert get_sheet_names(pidgin_path) == [otxinx_staging_str]
 
 
-def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario1_MultipleBricksFiles(
+def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario1_MultipleBricksFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -793,14 +793,14 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario1_MultipleBricksFil
     with ExcelWriter(br00040_file_path) as writer:
         br00040_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
-    fizz_world.otx_to_otx_events()
-    fizz_world.otx_events_to_events_log()
+    fizz_world.zoo_agg_to_zoo_events()
+    fizz_world.zoo_events_to_events_log()
     fizz_world.events_log_to_events_agg()
     fizz_world.set_events_from_events_agg()
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.otx_to_otxinx_staging()
+    fizz_world.zoo_agg_to_otxinx_staging()
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -836,7 +836,7 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario1_MultipleBricksFil
     assert get_sheet_names(pidgin_path) == [otxinx_staging_str]
 
 
-def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -890,15 +890,15 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_events_
         br00040_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     assert fizz_world.events == {}
-    fizz_world.otx_to_otx_events()
-    fizz_world.otx_events_to_events_log()
+    fizz_world.zoo_agg_to_zoo_events()
+    fizz_world.zoo_events_to_events_log()
     fizz_world.events_log_to_events_agg()
     fizz_world.set_events_from_events_agg()
     assert fizz_world.events == {event2: sue_str, event5: sue_str}
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.otx_to_otxinx_staging()
+    fizz_world.zoo_agg_to_otxinx_staging()
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -930,7 +930,7 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_events_
     assert get_sheet_names(pidgin_path) == [otxinx_staging_str]
 
 
-# def test_WorldUnit_otx_to_otxinx_staging_CreatesFile(env_dir_setup_cleanup):
+# def test_WorldUnit_zoo_agg_to_otxinx_staging_CreatesFile(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_world = worldunit_shop("fizz")
 #     bob_str = "Bob"
@@ -966,15 +966,15 @@ def test_WorldUnit_otx_to_otxinx_staging_CreatesFile_Scenario2_WorldUnit_events_
 #         br00113_df.to_excel(writer, sheet_name="zoo_agg", index=False)
 #     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
 #     assert fizz_world.events == {}
-#     fizz_world.otx_to_otx_events()
-#     fizz_world.otx_events_to_events_log()
+#     fizz_world.zoo_agg_to_zoo_events()
+#     fizz_world.zoo_events_to_events_log()
 #     fizz_world.events_log_to_events_agg()
 #     fizz_world.set_events_from_events_agg()
 #     assert fizz_world.events == {event1: sue_str}
 #     assert os_path_exists(pidgin_path) is False
 
 #     # WHEN
-#     fizz_world.otx_to_otxinx_staging()
+#     fizz_world.zoo_agg_to_otxinx_staging()
 
 #     # THEN
 #     assert os_path_exists(pidgin_path)
