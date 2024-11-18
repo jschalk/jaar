@@ -172,8 +172,9 @@ class OtxEventsToEventsLogTransformer:
 
 
 class OtxToOtx2InxPiginTransformer:
-    def __init__(self, zoo_dir: str):
+    def __init__(self, zoo_dir: str, legitmate_events: set[TimeLinePoint]):
         self.zoo_dir = zoo_dir
+        self.legitmate_events = legitmate_events
 
     def transform(self):
         otx2inx_bricks = get_brick_category_ref().get("bridge_otx2inx")
@@ -186,42 +187,53 @@ class OtxToOtx2InxPiginTransformer:
             brick_file_name = f"{brick_number}.xlsx"
             zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
-                otx_df = pandas_read_excel(zoo_brick_path, sheet_name="otx")
-                otx2inx_missing_cols = set(otx2inx_columns).difference(otx_df.columns)
-
-                for index, x_row in otx_df.iterrows():
-                    event_id = x_row["event_id"]
-                    face_id = x_row["face_id"]
-                    jaar_type = x_row["jaar_type"]
-                    otx_word = x_row["otx_word"]
-                    otx_road_delimiter = None
-                    if "otx_road_delimiter" not in otx2inx_missing_cols:
-                        otx_road_delimiter = x_row["otx_road_delimiter"]
-                    inx_word = None
-                    if "inx_word" not in otx2inx_missing_cols:
-                        inx_word = x_row["inx_word"]
-                    inx_road_delimiter = None
-                    if "inx_road_delimiter" not in otx2inx_missing_cols:
-                        inx_road_delimiter = x_row["inx_road_delimiter"]
-                    unknown_word = None
-                    if "unknown_word" not in otx2inx_missing_cols:
-                        unknown_word = x_row["unknown_word"]
-                    df_len = len(otx2inx_df.index)
-                    otx2inx_df.loc[df_len] = [
-                        brick_number,
-                        face_id,
-                        event_id,
-                        jaar_type,
-                        otx_word,
-                        inx_word,
-                        otx_road_delimiter,
-                        inx_road_delimiter,
-                        unknown_word,
-                    ]
+                self.insert_legitmate_brick_otx2inx(
+                    brick_number, zoo_brick_path, otx2inx_columns, otx2inx_df
+                )
 
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
         with ExcelWriter(pidgin_file_path) as writer:
             otx2inx_df.to_excel(writer, sheet_name="otx2inx_staging", index=False)
+
+    def insert_legitmate_brick_otx2inx(
+        self,
+        brick_number: str,
+        zoo_brick_path: str,
+        otx2inx_columns: list[str],
+        otx2inx_df: DataFrame,
+    ):
+        otx_df = pandas_read_excel(zoo_brick_path, sheet_name="otx")
+        otx2inx_missing_cols = set(otx2inx_columns).difference(otx_df.columns)
+        for index, x_row in otx_df.iterrows():
+            event_id = x_row["event_id"]
+            if event_id in self.legitmate_events:
+                face_id = x_row["face_id"]
+                jaar_type = x_row["jaar_type"]
+                otx_word = x_row["otx_word"]
+                df_len = len(otx2inx_df.index)
+                otx_road_delimiter = None
+                if "otx_road_delimiter" not in otx2inx_missing_cols:
+                    otx_road_delimiter = x_row["otx_road_delimiter"]
+                inx_word = None
+                if "inx_word" not in otx2inx_missing_cols:
+                    inx_word = x_row["inx_word"]
+                inx_road_delimiter = None
+                if "inx_road_delimiter" not in otx2inx_missing_cols:
+                    inx_road_delimiter = x_row["inx_road_delimiter"]
+                unknown_word = None
+                if "unknown_word" not in otx2inx_missing_cols:
+                    unknown_word = x_row["unknown_word"]
+                otx2inx_df.loc[df_len] = [
+                    brick_number,
+                    face_id,
+                    event_id,
+                    jaar_type,
+                    otx_word,
+                    inx_word,
+                    otx_road_delimiter,
+                    inx_road_delimiter,
+                    unknown_word,
+                ]
 
 
 @dataclass
@@ -358,7 +370,8 @@ class WorldUnit:
                 self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
 
     def otx_to_otxinx_staging(self):
-        transformer = OtxToOtx2InxPiginTransformer(self._zoo_dir)
+        legitmate_events = set(self.events.keys())
+        transformer = OtxToOtx2InxPiginTransformer(self._zoo_dir, legitmate_events)
         transformer.transform()
 
     def get_dict(self) -> dict:
