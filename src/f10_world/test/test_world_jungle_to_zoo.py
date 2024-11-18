@@ -978,8 +978,8 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario0_SingleBrick(
     # THEN
     assert os_path_exists(pidgin_path)
     nub_staging_str = "nub_staging"
-    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=nub_staging_str)
-    otx2inx_file_columns = [
+    gen_nub_df = pandas_read_excel(pidgin_path, sheet_name=nub_staging_str)
+    nub_file_columns = [
         "src_brick",
         face_id_str(),
         event_id_str(),
@@ -990,17 +990,17 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario0_SingleBrick(
         inx_road_delimiter_str(),
         unknown_word_str(),
     ]
-    assert list(gen_otx2inx_df.columns) == otx2inx_file_columns
-    assert len(gen_otx2inx_df) == 2
+    assert list(gen_nub_df.columns) == nub_file_columns
+    assert len(gen_nub_df) == 2
     bx = "br00114"
-    e1_otx2inx0 = [bx, sue_str, event7, roadnode, yao_str, yao_inx, None, None, None]
-    e1_otx2inx1 = [bx, sue_str, event7, roadnode, bob_str, bob_inx, None, None, None]
-    e1_otx2inx_rows = [e1_otx2inx0, e1_otx2inx1]
-    e1_otx2inx_df = DataFrame(e1_otx2inx_rows, columns=otx2inx_file_columns)
-    assert len(gen_otx2inx_df) == len(e1_otx2inx_df)
-    print(f"{gen_otx2inx_df.to_csv()=}")
-    print(f" {e1_otx2inx_df.to_csv()=}")
-    assert gen_otx2inx_df.to_csv(index=False) == e1_otx2inx_df.to_csv(index=False)
+    e1_nub0 = [bx, sue_str, event7, roadnode, yao_str, yao_inx, None, None, None]
+    e1_nub1 = [bx, sue_str, event7, roadnode, bob_str, bob_inx, None, None, None]
+    e1_nub_rows = [e1_nub0, e1_nub1]
+    e1_nub_df = DataFrame(e1_nub_rows, columns=nub_file_columns)
+    assert len(gen_nub_df) == len(e1_nub_df)
+    print(f"{gen_nub_df.to_csv()=}")
+    print(f" {e1_nub_df.to_csv()=}")
+    assert gen_nub_df.to_csv(index=False) == e1_nub_df.to_csv(index=False)
     assert get_sheet_names(pidgin_path) == [nub_staging_str]
 
 
@@ -1070,8 +1070,8 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario1_MultipleBricksFi
     # THEN
     assert os_path_exists(pidgin_path)
     nub_staging_str = "nub_staging"
-    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=nub_staging_str)
-    otx2inx_file_columns = [
+    gen_nub_df = pandas_read_excel(pidgin_path, sheet_name=nub_staging_str)
+    nub_file_columns = [
         "src_brick",
         face_id_str(),
         event_id_str(),
@@ -1082,22 +1082,22 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario1_MultipleBricksFi
         inx_road_delimiter_str(),
         unknown_word_str(),
     ]
-    assert list(gen_otx2inx_df.columns) == otx2inx_file_columns
-    assert len(gen_otx2inx_df) == 5
+    assert list(gen_nub_df.columns) == nub_file_columns
+    assert len(gen_nub_df) == 5
     b3 = "br00114"
     b4 = "br00041"
-    e1_otx2inx3 = [b4, sue_str, event2, roadnode, sue_str, sue_str, rdx, rdx, ukx]
-    e1_otx2inx4 = [b4, sue_str, event5, roadnode, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_otx2inx5 = [b4, yao_str, event7, roadnode, yao_str, yao_inx, rdx, rdx, ukx]
-    e1_otx2inx0 = [b3, sue_str, event1, roadnode, yao_str, yao_inx, None, None, None]
-    e1_otx2inx1 = [b3, sue_str, event1, roadnode, bob_str, bob_inx, None, None, None]
+    e1_nub3 = [b4, sue_str, event2, roadnode, sue_str, sue_str, rdx, rdx, ukx]
+    e1_nub4 = [b4, sue_str, event5, roadnode, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_nub5 = [b4, yao_str, event7, roadnode, yao_str, yao_inx, rdx, rdx, ukx]
+    e1_nub0 = [b3, sue_str, event1, roadnode, yao_str, yao_inx, None, None, None]
+    e1_nub1 = [b3, sue_str, event1, roadnode, bob_str, bob_inx, None, None, None]
 
-    e1_otx2inx_rows = [e1_otx2inx3, e1_otx2inx4, e1_otx2inx5, e1_otx2inx0, e1_otx2inx1]
-    e1_otx2inx_df = DataFrame(e1_otx2inx_rows, columns=otx2inx_file_columns)
-    assert len(gen_otx2inx_df) == len(e1_otx2inx_df)
-    print(f"{gen_otx2inx_df.to_csv()=}")
-    print(f" {e1_otx2inx_df.to_csv()=}")
-    assert gen_otx2inx_df.to_csv(index=False) == e1_otx2inx_df.to_csv(index=False)
+    e1_nub_rows = [e1_nub3, e1_nub4, e1_nub5, e1_nub0, e1_nub1]
+    e1_nub_df = DataFrame(e1_nub_rows, columns=nub_file_columns)
+    assert len(gen_nub_df) == len(e1_nub_df)
+    print(f"{gen_nub_df.to_csv()=}")
+    print(f" {e1_nub_df.to_csv()=}")
+    assert gen_nub_df.to_csv(index=False) == e1_nub_df.to_csv(index=False)
     assert get_sheet_names(pidgin_path) == [nub_staging_str]
 
 
@@ -1168,8 +1168,8 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
     # THEN
     assert os_path_exists(pidgin_path)
     nub_staging_str = "nub_staging"
-    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=nub_staging_str)
-    otx2inx_file_columns = [
+    gen_nub_df = pandas_read_excel(pidgin_path, sheet_name=nub_staging_str)
+    nub_file_columns = [
         "src_brick",
         face_id_str(),
         event_id_str(),
@@ -1180,16 +1180,57 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
         inx_road_delimiter_str(),
         unknown_word_str(),
     ]
-    assert list(gen_otx2inx_df.columns) == otx2inx_file_columns
-    assert len(gen_otx2inx_df) == 2
+    assert list(gen_nub_df.columns) == nub_file_columns
+    assert len(gen_nub_df) == 2
     b3 = "br00114"
     b4 = "br00041"
-    e1_otx2inx3 = [b4, sue_str, event2, roadnode, sue_str, sue_str, rdx, rdx, ukx]
-    e1_otx2inx4 = [b4, sue_str, event5, roadnode, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_otx2inx_rows = [e1_otx2inx3, e1_otx2inx4]
-    e1_otx2inx_df = DataFrame(e1_otx2inx_rows, columns=otx2inx_file_columns)
-    assert len(gen_otx2inx_df) == len(e1_otx2inx_df)
-    print(f"{gen_otx2inx_df.to_csv()=}")
-    print(f" {e1_otx2inx_df.to_csv()=}")
-    assert gen_otx2inx_df.to_csv(index=False) == e1_otx2inx_df.to_csv(index=False)
+    e1_nub3 = [b4, sue_str, event2, roadnode, sue_str, sue_str, rdx, rdx, ukx]
+    e1_nub4 = [b4, sue_str, event5, roadnode, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_nub_rows = [e1_nub3, e1_nub4]
+    e1_nub_df = DataFrame(e1_nub_rows, columns=nub_file_columns)
+    assert len(gen_nub_df) == len(e1_nub_df)
+    print(f"{gen_nub_df.to_csv()=}")
+    print(f" {e1_nub_df.to_csv()=}")
+    assert gen_nub_df.to_csv(index=False) == e1_nub_df.to_csv(index=False)
     assert get_sheet_names(pidgin_path) == [nub_staging_str]
+
+
+# def test_WorldUnit_get_nub_core_report_ReturnsObj(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     fizz_world = worldunit_shop("fizz")
+#     bob_str = "Bob"
+#     sue_str = "Sue"
+#     yao_str = "Yao"
+#     yao_inx = "Yaoito"
+#     bob_inx = "Bobito"
+#     rdx = ":"
+#     ukx = "Unknown"
+#     event1 = 1
+#     event2 = 2
+#     event5 = 5
+#     event7 = 7
+#     roadnode = "RoadNode"
+#     # THEN
+#     nub_file_columns = [
+#         "src_brick",
+#         face_id_str(),
+#         event_id_str(),
+#         jaar_type_str(),
+#         otx_label_str(),
+#         inx_label_str(),
+#         otx_road_delimiter_str(),
+#         inx_road_delimiter_str(),
+#         unknown_word_str(),
+#     ]
+#     b3 = "br00114"
+#     b4 = "br00041"
+#     e1_nub3 = [b4, sue_str, event2, roadnode, sue_str, sue_str, rdx, rdx, ukx]
+#     e1_nub4 = [b4, sue_str, event5, roadnode, bob_str, bob_inx, rdx, rdx, ukx]
+#     e1_nub5 = [b4, yao_str, event7, roadnode, yao_str, yao_inx, rdx, rdx, ukx]
+#     e1_nub0 = [b3, sue_str, event1, roadnode, yao_str, yao_inx, None, None, None]
+#     e1_nub1 = [b3, sue_str, event1, roadnode, bob_str, bob_inx, None, None, None]
+#     e1_nub_rows = [e1_nub3, e1_nub4, e1_nub5, e1_nub0, e1_nub1]
+#     e1_nub_df = DataFrame(e1_nub_rows, columns=nub_file_columns)
+#     print(f" {e1_nub_df.to_csv()=}")
