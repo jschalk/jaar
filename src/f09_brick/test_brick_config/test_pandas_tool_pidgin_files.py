@@ -207,7 +207,7 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
     assert br00040_file_name in x_pidgen_brick_filenames
     assert br00041_file_name in x_pidgen_brick_filenames
     assert br00042_file_name not in x_pidgen_brick_filenames
-    assert len(x_pidgen_brick_filenames) == 3
+    assert len(x_pidgen_brick_filenames) == 4
 
 
 # def test_get_pidgen_brick_format_filenames_ReturnsObj():

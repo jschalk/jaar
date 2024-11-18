@@ -212,6 +212,10 @@ def brick_format_00113_acct_otx2inx_v0_0_0() -> str:
     return "brick_format_00113_acct_otx2inx_v0_0_0"
 
 
+def brick_format_00114_acct_nub_label_v0_0_0() -> str:
+    return "brick_format_00114_acct_nub_label_v0_0_0"
+
+
 def get_brick_format_filenames() -> set[str]:
     return {
         brick_format_00000_fiscalunit_v0_0_0(),
@@ -238,6 +242,7 @@ def get_brick_format_filenames() -> set[str]:
         brick_format_00040_bridge_otx2inx_v0_0_0(),
         brick_format_00041_bridge_nub_label_v0_0_0(),
         brick_format_00113_acct_otx2inx_v0_0_0(),
+        brick_format_00114_acct_nub_label_v0_0_0(),
     }
 
 
@@ -267,6 +272,7 @@ def get_brick_numbers() -> set[str]:
         "br00040",
         "br00041",
         "br00113",
+        "br00114",
     }
 
 
@@ -303,6 +309,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "inx_road_delimiter,inx_word,jaar_type,otx_road_delimiter,otx_word,unknown_word": brick_format_00040_bridge_otx2inx_v0_0_0(),
         "inx_label,inx_road_delimiter,otx_label,otx_road_delimiter,unknown_word": brick_format_00041_bridge_nub_label_v0_0_0(),
         "acct_id,fiscal_id,inx_word,jaar_type,otx_word,owner_id": brick_format_00113_acct_otx2inx_v0_0_0(),
+        "acct_id,fiscal_id,inx_label,jaar_type,otx_label,owner_id": brick_format_00114_acct_nub_label_v0_0_0(),
     }
 
 
@@ -479,7 +486,7 @@ def get_brick_category_ref() -> dict[str, set[str]]:
         "fiscal_timeline_hour": ["br00003"],
         "fiscal_timeline_month": ["br00004"],
         "fiscal_timeline_weekday": ["br00005"],
-        "bud_acctunit": ["br00011", "br00021", "br00113"],
+        "bud_acctunit": ["br00011", "br00021", "br00113", "br00114"],
         "bud_acct_membership": ["br00012", "br00020"],
         "bud_itemunit": ["br00013", "br00019", "br00028", "br00036"],
         "bud_item_awardlink": ["br00022"],
@@ -490,5 +497,5 @@ def get_brick_category_ref() -> dict[str, set[str]]:
         "bud_item_reasonunit": ["br00027"],
         "budunit": ["br00029"],
         "bridge_otx2inx": ["br00040", "br00113"],
-        "bridge_nub_label": ["br00041"],
+        "bridge_nub_label": ["br00041", "br00114"],
     }
