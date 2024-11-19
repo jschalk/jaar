@@ -1,4 +1,4 @@
-from src.f08_pidgin.bridge import (
+from src.f08_pidgin.bridge_new import (
     GroupBridge,
     groupbridge_shop,
     get_groupbridge_from_dict,
@@ -30,7 +30,7 @@ def test_groupbridge_shop_ReturnsObj_scenario0():
     colon_inx_wall = ":"
 
     # WHEN
-    acct_id_groupbridge = groupbridge_shop(
+    x_groupbridge = groupbridge_shop(
         x_otx2inx=otx2inx,
         x_unknown_word=x_unknown_word,
         x_otx_wall=slash_otx_wall,
@@ -39,11 +39,11 @@ def test_groupbridge_shop_ReturnsObj_scenario0():
     )
 
     # THEN
-    assert acct_id_groupbridge.otx2inx == otx2inx
-    assert acct_id_groupbridge.unknown_word == x_unknown_word
-    assert acct_id_groupbridge.otx_wall == slash_otx_wall
-    assert acct_id_groupbridge.inx_wall == colon_inx_wall
-    assert acct_id_groupbridge.face_id == bob_str
+    assert x_groupbridge.otx2inx == otx2inx
+    assert x_groupbridge.unknown_word == x_unknown_word
+    assert x_groupbridge.otx_wall == slash_otx_wall
+    assert x_groupbridge.inx_wall == colon_inx_wall
+    assert x_groupbridge.face_id == bob_str
 
 
 def test_GroupBridge_set_all_otx2inx_SetsAttr():
@@ -51,15 +51,15 @@ def test_GroupBridge_set_all_otx2inx_SetsAttr():
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    acct_id_groupbridge = groupbridge_shop()
+    x_groupbridge = groupbridge_shop()
     x_otx2inx = {xio_str: sue_str, zia_str: zia_str}
-    assert acct_id_groupbridge.otx2inx != x_otx2inx
+    assert x_groupbridge.otx2inx != x_otx2inx
 
     # WHEN
-    acct_id_groupbridge.set_all_otx2inx(x_otx2inx)
+    x_groupbridge.set_all_otx2inx(x_otx2inx)
 
     # THEN
-    assert acct_id_groupbridge.otx2inx == x_otx2inx
+    assert x_groupbridge.otx2inx == x_otx2inx
 
 
 def test_GroupBridge_set_all_otx2inx_RaisesErrorIf_unknown_word_IsKeyIn_otx2inx():
@@ -68,13 +68,13 @@ def test_GroupBridge_set_all_otx2inx_RaisesErrorIf_unknown_word_IsKeyIn_otx2inx(
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_groupbridge = groupbridge_shop(None, x_unknown_word=x_unknown_word)
+    x_groupbridge = groupbridge_shop(x_unknown_word=x_unknown_word)
     x_otx2inx = {xio_str: sue_str, x_unknown_word: zia_str}
-    assert acct_id_groupbridge.otx2inx != x_otx2inx
+    assert x_groupbridge.otx2inx != x_otx2inx
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        acct_id_groupbridge.set_all_otx2inx(x_otx2inx, True)
+        x_groupbridge.set_all_otx2inx(x_otx2inx, True)
     exception_str = f"otx2inx cannot have unknown_word '{x_unknown_word}' in any str. Affected keys include ['{x_unknown_word}']."
     assert str(excinfo.value) == exception_str
 
@@ -207,7 +207,7 @@ def test_GroupBridge_unknown_word_in_otx2inx_ReturnsObj():
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    x_groupbridge = groupbridge_shop(None, x_unknown_word=x_unknown_word)
+    x_groupbridge = groupbridge_shop(x_unknown_word=x_unknown_word)
     x_groupbridge.set_otx2inx(xio_str, sue_str)
     assert x_groupbridge._unknown_word_in_otx2inx() is False
 
@@ -224,24 +224,24 @@ def test_GroupBridge_reveal_inx_ReturnsObjAndSetsAttr_group_id():
     otx_r_wall = "/"
     swim_otx = f"swim{otx_r_wall}"
     climb_otx = f"climb{otx_r_wall}_{inx_r_wall}"
-    group_id_groupbridge = groupbridge_shop(otx_r_wall, inx_r_wall)
-    group_id_groupbridge.otx_exists(swim_otx) is False
-    group_id_groupbridge.otx_exists(climb_otx) is False
+    x_groupbridge = groupbridge_shop(otx_r_wall, inx_r_wall)
+    x_groupbridge.otx_exists(swim_otx) is False
+    x_groupbridge.otx_exists(climb_otx) is False
 
     # WHEN
     swim_inx = f"swim{inx_r_wall}"
-    assert group_id_groupbridge.reveal_inx(swim_otx) == swim_inx
+    assert x_groupbridge.reveal_inx(swim_otx) == swim_inx
 
     # THEN
-    assert group_id_groupbridge.otx_exists(swim_otx)
-    assert group_id_groupbridge.otx_exists(climb_otx) is False
-    assert group_id_groupbridge._get_inx_value(swim_otx) == swim_inx
+    assert x_groupbridge.otx_exists(swim_otx)
+    assert x_groupbridge.otx_exists(climb_otx) is False
+    assert x_groupbridge._get_inx_value(swim_otx) == swim_inx
 
     # WHEN
-    assert group_id_groupbridge.reveal_inx(climb_otx) is None
+    assert x_groupbridge.reveal_inx(climb_otx) is None
     # THEN
-    assert group_id_groupbridge.otx_exists(swim_otx)
-    assert group_id_groupbridge.otx_exists(climb_otx) is False
+    assert x_groupbridge.otx_exists(swim_otx)
+    assert x_groupbridge.otx_exists(climb_otx) is False
 
 
 def test_GroupBridge_get_dict_ReturnsObj():
@@ -345,3 +345,67 @@ def test_get_groupbridge_from_json_ReturnsObj():
 
     # THEN
     assert x_groupbridge == x_groupbridge
+
+
+def test_GroupBridge_is_inx_wall_inclusion_correct_ReturnsObj():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    inx_wall = "/"
+    zia_otx = "Zia"
+    zia_inx = f"Zia{inx_wall}"
+    x_groupbridge = groupbridge_shop(x_inx_wall=inx_wall)
+    assert x_groupbridge._is_inx_wall_inclusion_correct()
+
+    # WHEN
+    x_groupbridge.set_otx2inx(zia_otx, zia_inx)
+    # THEN
+    assert x_groupbridge._is_inx_wall_inclusion_correct()
+
+    # WHEN
+    x_groupbridge.set_otx2inx(xio_str, sue_str)
+    # THEN
+    assert x_groupbridge._is_inx_wall_inclusion_correct() is False
+
+
+def test_GroupBridge_is_otx_wall_inclusion_correct_ReturnsObj():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    otx_wall = "/"
+    zia_inx = "Zia"
+    zia_otx = f"Zia{otx_wall}"
+    x_groupbridge = groupbridge_shop(x_otx_wall=otx_wall)
+    assert x_groupbridge._is_otx_wall_inclusion_correct()
+
+    # WHEN
+    x_groupbridge.set_otx2inx(zia_otx, zia_inx)
+    # THEN
+    assert x_groupbridge._is_otx_wall_inclusion_correct()
+
+    # WHEN
+    x_groupbridge.set_otx2inx(xio_str, sue_str)
+    # THEN
+    assert x_groupbridge._is_otx_wall_inclusion_correct() is False
+
+
+def test_GroupBridge_is_valid_ReturnsObj():
+    # ESTABLISH
+    otx_wall = ":"
+    inx_wall = "/"
+    sue_otx = f"Xio{otx_wall}"
+    sue_inx = f"Sue{inx_wall}"
+    zia_otx = "Zia"
+    zia_inx = f"Zia{inx_wall}"
+    x_groupbridge = groupbridge_shop(otx_wall, x_inx_wall=inx_wall)
+    assert x_groupbridge.is_valid()
+
+    # WHEN
+    x_groupbridge.set_otx2inx(sue_otx, sue_inx)
+    # THEN
+    assert x_groupbridge.is_valid()
+
+    # WHEN
+    x_groupbridge.set_otx2inx(zia_otx, zia_inx)
+    # THEN
+    assert x_groupbridge.is_valid() is False

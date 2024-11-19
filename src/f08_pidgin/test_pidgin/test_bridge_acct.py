@@ -1,4 +1,4 @@
-from src.f08_pidgin.bridge import (
+from src.f08_pidgin.bridge_new import (
     AcctBridge,
     acctbridge_shop,
     get_acctbridge_from_dict,
@@ -30,7 +30,7 @@ def test_acctbridge_shop_ReturnsObj_scenario0():
     colon_inx_wall = ":"
 
     # WHEN
-    acct_id_acctbridge = acctbridge_shop(
+    x_acctbridge = acctbridge_shop(
         x_otx2inx=otx2inx,
         x_unknown_word=x_unknown_word,
         x_otx_wall=slash_otx_wall,
@@ -39,11 +39,11 @@ def test_acctbridge_shop_ReturnsObj_scenario0():
     )
 
     # THEN
-    assert acct_id_acctbridge.otx2inx == otx2inx
-    assert acct_id_acctbridge.unknown_word == x_unknown_word
-    assert acct_id_acctbridge.otx_wall == slash_otx_wall
-    assert acct_id_acctbridge.inx_wall == colon_inx_wall
-    assert acct_id_acctbridge.face_id == bob_str
+    assert x_acctbridge.otx2inx == otx2inx
+    assert x_acctbridge.unknown_word == x_unknown_word
+    assert x_acctbridge.otx_wall == slash_otx_wall
+    assert x_acctbridge.inx_wall == colon_inx_wall
+    assert x_acctbridge.face_id == bob_str
 
 
 def test_AcctBridge_set_all_otx2inx_SetsAttr():
@@ -51,15 +51,15 @@ def test_AcctBridge_set_all_otx2inx_SetsAttr():
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    acct_id_acctbridge = acctbridge_shop()
+    x_acctbridge = acctbridge_shop()
     x_otx2inx = {xio_str: sue_str, zia_str: zia_str}
-    assert acct_id_acctbridge.otx2inx != x_otx2inx
+    assert x_acctbridge.otx2inx != x_otx2inx
 
     # WHEN
-    acct_id_acctbridge.set_all_otx2inx(x_otx2inx)
+    x_acctbridge.set_all_otx2inx(x_otx2inx)
 
     # THEN
-    assert acct_id_acctbridge.otx2inx == x_otx2inx
+    assert x_acctbridge.otx2inx == x_otx2inx
 
 
 def test_AcctBridge_set_all_otx2inx_RaisesErrorIf_unknown_word_IsKeyIn_otx2inx():
@@ -68,13 +68,13 @@ def test_AcctBridge_set_all_otx2inx_RaisesErrorIf_unknown_word_IsKeyIn_otx2inx()
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownAcctId"
-    acct_id_acctbridge = acctbridge_shop(None, x_unknown_word=x_unknown_word)
+    x_acctbridge = acctbridge_shop(None, x_unknown_word=x_unknown_word)
     x_otx2inx = {xio_str: sue_str, x_unknown_word: zia_str}
-    assert acct_id_acctbridge.otx2inx != x_otx2inx
+    assert x_acctbridge.otx2inx != x_otx2inx
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        acct_id_acctbridge.set_all_otx2inx(x_otx2inx, True)
+        x_acctbridge.set_all_otx2inx(x_otx2inx, True)
     exception_str = f"otx2inx cannot have unknown_word '{x_unknown_word}' in any str. Affected keys include ['{x_unknown_word}']."
     assert str(excinfo.value) == exception_str
 
@@ -224,24 +224,24 @@ def test_AcctBridge_reveal_inx_ReturnsObjAndSetsAttr_acct_id():
     otx_r_wall = "/"
     swim_otx = f"swim{otx_r_wall}"
     climb_otx = f"climb{otx_r_wall}_{inx_r_wall}"
-    acct_id_acctbridge = acctbridge_shop(otx_r_wall, inx_r_wall)
-    acct_id_acctbridge.otx_exists(swim_otx) is False
-    acct_id_acctbridge.otx_exists(climb_otx) is False
+    x_acctbridge = acctbridge_shop(otx_r_wall, inx_r_wall)
+    x_acctbridge.otx_exists(swim_otx) is False
+    x_acctbridge.otx_exists(climb_otx) is False
 
     # WHEN
     swim_inx = f"swim{inx_r_wall}"
-    assert acct_id_acctbridge.reveal_inx(swim_otx) == swim_inx
+    assert x_acctbridge.reveal_inx(swim_otx) == swim_inx
 
     # THEN
-    assert acct_id_acctbridge.otx_exists(swim_otx)
-    assert acct_id_acctbridge.otx_exists(climb_otx) is False
-    assert acct_id_acctbridge._get_inx_value(swim_otx) == swim_inx
+    assert x_acctbridge.otx_exists(swim_otx)
+    assert x_acctbridge.otx_exists(climb_otx) is False
+    assert x_acctbridge._get_inx_value(swim_otx) == swim_inx
 
     # WHEN
-    assert acct_id_acctbridge.reveal_inx(climb_otx) is None
+    assert x_acctbridge.reveal_inx(climb_otx) is None
     # THEN
-    assert acct_id_acctbridge.otx_exists(swim_otx)
-    assert acct_id_acctbridge.otx_exists(climb_otx) is False
+    assert x_acctbridge.otx_exists(swim_otx)
+    assert x_acctbridge.otx_exists(climb_otx) is False
 
 
 def test_AcctBridge_get_dict_ReturnsObj():
@@ -345,3 +345,73 @@ def test_get_acctbridge_from_json_ReturnsObj():
 
     # THEN
     assert x_acctbridge == roadnode_acctbridge
+
+
+def test_AcctBridge_is_inx_wall_inclusion_correct_ReturnsObj():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    inx_wall = "/"
+    zia_otx = "Zia"
+    zia_inx = f"Zia{inx_wall}"
+    x_acctbridge = acctbridge_shop(x_inx_wall=inx_wall)
+    assert x_acctbridge._is_inx_wall_inclusion_correct()
+
+    # WHEN
+    x_acctbridge.set_otx2inx(xio_str, sue_str)
+    # THEN
+    assert x_acctbridge._is_inx_wall_inclusion_correct()
+
+    # WHEN
+    x_acctbridge.set_otx2inx(zia_otx, zia_inx)
+    # THEN
+    assert x_acctbridge._is_inx_wall_inclusion_correct() is False
+
+
+def test_AcctBridge_is_otx_wall_inclusion_correct_ReturnsObj():
+    # ESTABLISH
+    xio_otx = "Xio"
+    xio_inx = "XioXio"
+    otx_wall = "/"
+    zia_otx = f"Zia{otx_wall}"
+    zia_inx = "Zia"
+    x_acctbridge = acctbridge_shop(x_otx_wall=otx_wall)
+    assert x_acctbridge._is_otx_wall_inclusion_correct()
+
+    # WHEN
+    x_acctbridge.set_otx2inx(xio_otx, xio_inx)
+    # THEN
+    assert x_acctbridge._is_otx_wall_inclusion_correct()
+
+    # WHEN
+    x_acctbridge.set_otx2inx(zia_otx, zia_inx)
+    # THEN
+    assert x_acctbridge._is_otx_wall_inclusion_correct() is False
+
+
+def test_AcctBridge_is_valid_ReturnsObj():
+    # ESTABLISH
+    otx_wall = ":"
+    inx_wall = "/"
+    sue_otx = f"Xio{otx_wall}"
+    sue_with_wall = f"Sue{inx_wall}"
+    sue_without_wall = f"Sue{otx_wall}"
+    zia_otx = "Zia"
+    zia_inx = f"Zia{inx_wall}"
+    x_acctbridge = acctbridge_shop(otx_wall, x_inx_wall=inx_wall)
+    assert x_acctbridge.is_valid()
+
+    # WHEN
+    x_acctbridge.set_otx2inx(sue_otx, sue_with_wall)
+    # THEN
+    assert x_acctbridge.is_valid() is False
+
+    # WHEN
+    x_acctbridge.set_otx2inx(zia_otx, zia_inx)
+    # THEN
+    assert x_acctbridge.is_valid() is False
+
+    # WHEN
+    x_acctbridge.set_otx2inx(sue_otx, sue_without_wall)
+    # THEN
+    assert x_acctbridge.is_valid() is False

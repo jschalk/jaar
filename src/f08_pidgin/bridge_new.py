@@ -97,6 +97,18 @@ class GroupBridge(BridgeCore):
 
         return self._get_inx_value(otx_groupid)
 
+    def _is_inx_wall_inclusion_correct(self):
+        return str_in_all_dict_values(self.inx_wall, self.otx2inx)
+
+    def _is_otx_wall_inclusion_correct(self):
+        return str_in_all_dict_keys(self.otx_wall, self.otx2inx)
+
+    def is_valid(self):
+        return (
+            self._is_otx_wall_inclusion_correct()
+            and self._is_inx_wall_inclusion_correct()
+        )
+
 
 def groupbridge_shop(
     x_otx_wall: str = None,
@@ -162,6 +174,18 @@ class AcctBridge(BridgeCore):
             self.set_otx2inx(otx_acctid, inx_acctid)
 
         return self._get_inx_value(otx_acctid)
+
+    def _is_inx_wall_inclusion_correct(self) -> bool:
+        return not str_in_dict_values(self.inx_wall, self.otx2inx)
+
+    def _is_otx_wall_inclusion_correct(self) -> bool:
+        return not str_in_dict_keys(self.otx_wall, self.otx2inx)
+
+    def is_valid(self) -> bool:
+        return (
+            self._is_inx_wall_inclusion_correct()
+            and self._is_otx_wall_inclusion_correct()
+        )
 
 
 def acctbridge_shop(
@@ -298,33 +322,16 @@ class RoadBridge:
     def _unknown_word_in_otx2inx(self) -> bool:
         return str_in_dict(self.unknown_word, self.otx2inx)
 
-    def _otx_wall_in_otx_words(self) -> bool:
-        return str_in_dict_keys(self.otx_wall, self.otx2inx)
-
-    def _inx_wall_in_otx_words(self) -> bool:
-        return str_in_dict_keys(self.inx_wall, self.otx2inx)
-
-    def _otx_wall_in_inx_words(self) -> bool:
-        return str_in_dict_values(self.otx_wall, self.otx2inx)
-
-    def _inx_wall_in_inx_words(self) -> bool:
-        return str_in_dict_values(self.inx_wall, self.otx2inx)
-
-    def _is_otx_wall_inclusion_correct(self) -> bool:
-        return True
-
-    def _is_inx_wall_inclusion_correct(self) -> bool:
-        return True
-
     def all_otx_parent_roads_exist(self) -> bool:
+        for x_road in self.otx2inx.keys():
+            if is_roadnode(x_road, self.otx_wall) is False:
+                parent_road = get_parent_road(x_road, self.otx_wall)
+                if self.otx_exists(parent_road) is False:
+                    return False
         return True
 
     def is_valid(self) -> bool:
-        return (
-            self._is_otx_wall_inclusion_correct()
-            and self._is_inx_wall_inclusion_correct()
-            and self.all_otx_parent_roads_exist()
-        )
+        return self.all_otx_parent_roads_exist()
 
     def get_dict(self) -> dict:
         return {

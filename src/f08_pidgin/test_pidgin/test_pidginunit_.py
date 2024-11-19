@@ -7,7 +7,7 @@ from src.f04_gift.atom_config import (
     type_RoadNode_str,
     type_RoadUnit_str,
 )
-from src.f08_pidgin.bridge import groupbridge_shop, acctbridge_shop, roadbridge_shop
+from src.f08_pidgin.bridge_new import groupbridge_shop, acctbridge_shop, roadbridge_shop
 from src.f08_pidgin.pidgin import (
     PidginUnit,
     pidginunit_shop,

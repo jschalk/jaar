@@ -1,6 +1,6 @@
 from src.f01_road.road import default_wall_if_none
 from src.f04_gift.atom_config import road_str, type_AcctID_str, type_GroupID_str
-from src.f08_pidgin.bridge import acctbridge_shop, groupbridge_shop, roadbridge_shop
+from src.f08_pidgin.bridge_new import acctbridge_shop, groupbridge_shop, roadbridge_shop
 from src.f08_pidgin.pidgin import (
     pidginunit_shop,
     default_unknown_word,

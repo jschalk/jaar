@@ -1,4 +1,4 @@
-from src.f08_pidgin.bridge import roadbridge_shop
+from src.f08_pidgin.bridge_new import roadbridge_shop
 from src.f08_pidgin.pidgin import pidginunit_shop
 from pytest import raises as pytest_raises
 

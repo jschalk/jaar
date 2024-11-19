@@ -1,5 +1,5 @@
 from src.f01_road.road import default_wall_if_none, create_road
-from src.f08_pidgin.bridge import (
+from src.f08_pidgin.bridge_new import (
     RoadBridge,
     roadbridge_shop,
     default_unknown_word,
@@ -500,3 +500,104 @@ def test_get_roadbridge_from_json_ReturnsObj():
 
     # THEN
     assert x_roadbridge == x_roadbridge
+
+
+def test_RoadBridge_all_otx_parent_roads_exist_ReturnsObj_RoadUnit():
+    # ESTABLISH
+    clean_otx_parent_road = "music45"
+    otx_r_wall = "/"
+    clean_otx_str = "clean"
+    clean_otx_road = f"{clean_otx_parent_road}{otx_r_wall}{clean_otx_str}"
+
+    x_roadbridge = roadbridge_shop(otx_r_wall)
+    assert x_roadbridge.otx_exists(clean_otx_parent_road) is False
+    assert x_roadbridge.otx_exists(clean_otx_road) is False
+    assert x_roadbridge.all_otx_parent_roads_exist()
+
+    # WHEN
+    x_roadbridge.set_otx2inx(clean_otx_road, "any")
+    # THEN
+    assert x_roadbridge.otx_exists(clean_otx_parent_road) is False
+    assert x_roadbridge.otx_exists(clean_otx_road)
+    assert x_roadbridge.all_otx_parent_roads_exist() is False
+
+    # WHEN
+    x_roadbridge.set_otx2inx(clean_otx_parent_road, "any")
+    # THEN
+    assert x_roadbridge.otx_exists(clean_otx_parent_road)
+    assert x_roadbridge.otx_exists(clean_otx_road)
+    assert x_roadbridge.all_otx_parent_roads_exist()
+
+
+def test_RoadBridge_is_valid_ReturnsObj_Scenario0_label_str():
+    # ESTABLISH
+    clean_str = "clean"
+    clean_inx = "propre"
+    otx_wall = "/"
+    casa_otx = f"casa{otx_wall}"
+    casa_inx = "casa"
+    roadnode_roadbridge = roadbridge_shop(otx_wall)
+    assert roadnode_roadbridge.is_valid()
+
+    # WHEN
+    roadnode_roadbridge.set_otx2inx(clean_str, clean_inx)
+    # THEN
+    assert roadnode_roadbridge.is_valid()
+
+    # WHEN
+    roadnode_roadbridge.set_otx2inx(casa_otx, casa_inx)
+    # THEN
+    assert roadnode_roadbridge.is_valid() is False
+
+
+def test_RoadBridge_is_valid_ReturnsObj_Scenario1_road_str():
+    # ESTABLISH
+    music_str = "music45"
+    otx_r_wall = "/"
+    inx_r_wall = ":"
+    clean_otx_str = "clean"
+    clean_otx_road = f"{music_str}{otx_r_wall}{clean_otx_str}"
+    clean_inx_str = "prop"
+    clean_inx_road = f"{music_str}{inx_r_wall}{clean_inx_str}"
+    # casa_otx = f"casa{otx_wall}"
+    # casa_inx = f"casa"
+    x_roadbridge = roadbridge_shop(otx_r_wall, inx_r_wall)
+    x_roadbridge.set_otx2inx(music_str, music_str)
+    assert x_roadbridge.is_valid()
+    assert x_roadbridge.otx2inx_exists(clean_otx_road, clean_inx_road) is False
+
+    # WHEN
+    x_roadbridge.set_otx2inx(clean_otx_road, clean_inx_road)
+    # THEN
+    assert x_roadbridge.is_valid()
+    assert x_roadbridge.otx2inx_exists(clean_otx_road, clean_inx_road)
+
+
+def test_RoadBridge_is_valid_ReturnsObj_Scenario3_RoadUnit():
+    # ESTABLISH
+    clean_otx_parent_road = "music45"
+    otx_r_wall = "/"
+    clean_otx_str = "clean"
+    clean_otx_road = f"{clean_otx_parent_road}{otx_r_wall}{clean_otx_str}"
+
+    x_roadbridge = roadbridge_shop(otx_r_wall)
+    assert x_roadbridge.otx_exists(clean_otx_parent_road) is False
+    assert x_roadbridge.otx_exists(clean_otx_road) is False
+    assert x_roadbridge.all_otx_parent_roads_exist()
+    assert x_roadbridge.is_valid()
+
+    # WHEN
+    x_roadbridge.set_otx2inx(clean_otx_road, "any")
+    # THEN
+    assert x_roadbridge.otx_exists(clean_otx_parent_road) is False
+    assert x_roadbridge.otx_exists(clean_otx_road)
+    assert x_roadbridge.all_otx_parent_roads_exist() is False
+    assert x_roadbridge.is_valid() is False
+
+    # WHEN
+    x_roadbridge.set_otx2inx(clean_otx_parent_road, "any")
+    # THEN
+    assert x_roadbridge.otx_exists(clean_otx_parent_road)
+    assert x_roadbridge.otx_exists(clean_otx_road)
+    assert x_roadbridge.all_otx_parent_roads_exist()
+    assert x_roadbridge.is_valid()
