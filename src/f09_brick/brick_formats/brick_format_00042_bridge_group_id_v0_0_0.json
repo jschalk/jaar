@@ -1,0 +1,29 @@
+{
+    "attributes": {
+        "event_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "inx_wall": {
+            "otx_key": false
+        },
+        "inx_group_id": {
+            "otx_key": false
+        },
+        "otx_wall": {
+            "otx_key": false
+        },
+        "otx_group_id": {
+            "otx_key": true
+        },
+        "unknown_word": {
+            "otx_key": false
+        }
+    },
+    "brick_number": "br00042",
+    "categorys": [
+        "bridge_group_id"
+    ]
+}

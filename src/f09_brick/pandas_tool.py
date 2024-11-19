@@ -127,7 +127,7 @@ def pidgin_single_column_dataframe(
         row_count = len(x_df)
         for cur_row in range(row_count):
             otx_value = x_df.iloc[cur_row][column_name]
-            inx_value = x_bridgeunit.get_create_inx(otx_value)
+            inx_value = x_bridgeunit.reveal_inx(otx_value)
             x_df.at[cur_row, column_name] = inx_value
     return x_df
 

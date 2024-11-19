@@ -1,4 +1,36 @@
 {
+  "bridge_acct_id": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "brick_type": "pidginunit",
+    "build_order": 3,
+    "jkeys": {
+      "event_id": {},
+      "face_id": {},
+      "otx_acct_id": {}
+    },
+    "jvalues": {
+      "inx_acct_id": {},
+      "inx_wall": {},
+      "otx_wall": {},
+      "unknown_word": {}
+    }
+  },
+  "bridge_group_id": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "brick_type": "pidginunit",
+    "build_order": 3,
+    "jkeys": {
+      "event_id": {},
+      "face_id": {},
+      "otx_group_id": {}
+    },
+    "jvalues": {
+      "inx_group_id": {},
+      "inx_wall": {},
+      "otx_wall": {},
+      "unknown_word": {}
+    }
+  },
   "bridge_nub_label": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
@@ -306,8 +338,8 @@
       "monthday_distortion": {},
       "penny": {},
       "respect_bit": {},
-      "wall": {},
       "timeline_label": {},
+      "wall": {},
       "yr1_jan1_offset": {}
     }
   }

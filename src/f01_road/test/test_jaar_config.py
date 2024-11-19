@@ -5,6 +5,7 @@ from src.f01_road.jaar_config import (
     treasury_file_name,
     max_tree_traverse_default,
     default_river_blocks_count,
+    default_unknown_word,
 )
 
 
@@ -31,3 +32,8 @@ def test_max_tree_traverse_default_ReturnsObj() -> str:
 
 def test_default_river_blocks_count_ReturnsObj() -> str:
     assert default_river_blocks_count() == 40
+
+
+def test_default_unknown_word_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert default_unknown_word() == "UNKNOWN"

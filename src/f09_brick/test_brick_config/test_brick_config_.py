@@ -97,10 +97,16 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
     otx_word_str,
     inx_word_str,
+    otx_acct_id_str,
+    inx_acct_id_str,
+    otx_group_id_str,
+    inx_group_id_str,
     otx_label_str,
     inx_label_str,
     bridge_nub_label_str,
     bridge_otx2inx_str,
+    bridge_acct_id_str,
+    bridge_group_id_str,
     get_pidgin_categorys,
     get_pidgin_config_dict,
     get_pidgin_args_category_mapping,
@@ -220,20 +226,24 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[54] == cumlative_day_str()
     assert table_sorting_priority[55] == weekday_label_str()
     assert table_sorting_priority[56] == weekday_order_str()
-    assert table_sorting_priority[57] == otx_word_str()
-    assert table_sorting_priority[58] == inx_word_str()
-    assert table_sorting_priority[59] == otx_label_str()
-    assert table_sorting_priority[60] == inx_label_str()
-    assert table_sorting_priority[61] == otx_wall_str()
-    assert table_sorting_priority[62] == inx_wall_str()
-    assert table_sorting_priority[63] == wall_str()
-    assert table_sorting_priority[64] == unknown_word_str()
-    assert table_sorting_priority[65] == c400_number_str()
-    assert table_sorting_priority[66] == yr1_jan1_offset_str()
-    assert table_sorting_priority[67] == quota_str()
-    assert table_sorting_priority[68] == monthday_distortion_str()
-    assert table_sorting_priority[69] == timeline_label_str()
-    assert len(table_sorting_priority) == 70
+    assert table_sorting_priority[57] == otx_acct_id_str()
+    assert table_sorting_priority[58] == inx_acct_id_str()
+    assert table_sorting_priority[59] == otx_group_id_str()
+    assert table_sorting_priority[60] == inx_group_id_str()
+    assert table_sorting_priority[61] == otx_word_str()
+    assert table_sorting_priority[62] == inx_word_str()
+    assert table_sorting_priority[63] == otx_label_str()
+    assert table_sorting_priority[64] == inx_label_str()
+    assert table_sorting_priority[65] == otx_wall_str()
+    assert table_sorting_priority[66] == inx_wall_str()
+    assert table_sorting_priority[67] == wall_str()
+    assert table_sorting_priority[68] == unknown_word_str()
+    assert table_sorting_priority[69] == c400_number_str()
+    assert table_sorting_priority[70] == yr1_jan1_offset_str()
+    assert table_sorting_priority[71] == quota_str()
+    assert table_sorting_priority[72] == monthday_distortion_str()
+    assert table_sorting_priority[73] == timeline_label_str()
+    assert len(table_sorting_priority) == 74
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
     fiscal_args = set(get_fiscal_args_category_mapping().keys())
@@ -381,7 +391,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert get_atom_categorys().issubset(brick_config_categorys)
     assert get_fiscal_categorys().issubset(brick_config_categorys)
     assert get_pidgin_categorys().issubset(brick_config_categorys)
-    assert len(x_brick_config) == 18
+    assert len(x_brick_config) == 20
     _validate_brick_config(x_brick_config)
 
 
@@ -416,6 +426,8 @@ def _validate_brick_config(x_brick_config: dict):
             fiscalunit_str(),
             bridge_nub_label_str(),
             bridge_otx2inx_str(),
+            bridge_group_id_str(),
+            bridge_acct_id_str(),
         }:
             assert brick_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif brick_category in {fiscal_purview_episode_str(), fiscal_cashbook_str()}:
