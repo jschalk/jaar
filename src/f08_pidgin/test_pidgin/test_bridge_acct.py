@@ -218,7 +218,7 @@ def test_AcctBridge_unknown_word_in_otx2inx_ReturnsObj():
     assert x_acctbridge._unknown_word_in_otx2inx()
 
 
-def test_AcctBridge_get_create_inx_ReturnsObjAndSetsAttr_acct_id():
+def test_AcctBridge_reveal_inx_ReturnsObjAndSetsAttr_acct_id():
     # ESTABLISH
     inx_r_wall = ":"
     otx_r_wall = "/"
@@ -230,7 +230,7 @@ def test_AcctBridge_get_create_inx_ReturnsObjAndSetsAttr_acct_id():
 
     # WHEN
     swim_inx = f"swim{inx_r_wall}"
-    assert acct_id_acctbridge.get_create_inx(swim_otx) == swim_inx
+    assert acct_id_acctbridge.reveal_inx(swim_otx) == swim_inx
 
     # THEN
     assert acct_id_acctbridge.otx_exists(swim_otx)
@@ -238,7 +238,7 @@ def test_AcctBridge_get_create_inx_ReturnsObjAndSetsAttr_acct_id():
     assert acct_id_acctbridge._get_inx_value(swim_otx) == swim_inx
 
     # WHEN
-    assert acct_id_acctbridge.get_create_inx(climb_otx) is None
+    assert acct_id_acctbridge.reveal_inx(climb_otx) is None
     # THEN
     assert acct_id_acctbridge.otx_exists(swim_otx)
     assert acct_id_acctbridge.otx_exists(climb_otx) is False

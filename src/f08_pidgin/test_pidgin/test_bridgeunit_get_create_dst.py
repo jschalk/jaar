@@ -7,7 +7,7 @@ from src.f04_gift.atom_config import (
 from src.f08_pidgin.pidgin import bridgeunit_shop
 
 
-def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label():
+def test_BridgeUnit_reveal_inx_ReturnsObjAndSetsAttr_label():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
@@ -21,25 +21,25 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label():
     assert roadnode_bridgeunit.is_valid()
 
     # WHEN / THEN
-    assert roadnode_bridgeunit.get_create_inx(clean_otx) == clean_inx
-    assert roadnode_bridgeunit.get_create_inx(casa_otx) == casa_inx
+    assert roadnode_bridgeunit.reveal_inx(clean_otx) == clean_inx
+    assert roadnode_bridgeunit.reveal_inx(casa_otx) == casa_inx
     swim_str = "swim"
-    assert roadnode_bridgeunit.get_create_inx(swim_str, False) is None
+    assert roadnode_bridgeunit.reveal_inx(swim_str, False) is None
     assert roadnode_bridgeunit.otx_exists(swim_str) is False
 
     # WHEN
-    assert roadnode_bridgeunit.get_create_inx(swim_str) == swim_str
+    assert roadnode_bridgeunit.reveal_inx(swim_str) == swim_str
     # THEN
     assert roadnode_bridgeunit.otx_exists(swim_str)
 
     # WHEN / THEN
     fail_clean_otx = f"clean{inx_r_wall}"
     assert roadnode_bridgeunit.otx_exists(fail_clean_otx) is False
-    assert roadnode_bridgeunit.get_create_inx(fail_clean_otx) is None
+    assert roadnode_bridgeunit.reveal_inx(fail_clean_otx) is None
     assert roadnode_bridgeunit.otx_exists(fail_clean_otx) is False
 
 
-def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label_With_nub_label():
+def test_BridgeUnit_reveal_inx_ReturnsObjAndSetsAttr_label_With_nub_label():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
@@ -55,7 +55,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label_With_nub_label():
     assert roadnode_bridgeunit.otx2inx_exists(casa_otx, casa_inx) is False
 
     # WHEN
-    generated_inx = roadnode_bridgeunit.get_create_inx(casa_otx)
+    generated_inx = roadnode_bridgeunit.reveal_inx(casa_otx)
 
     # THEN
     assert generated_inx == casa_inx
@@ -64,7 +64,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_label_With_nub_label():
     print(f"{casa_inx=}")
 
 
-def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario0():
+def test_BridgeUnit_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario0():
     # ESTABLISH
     otx_music45_str = "music45"
     otx_r_wall = "/"
@@ -74,7 +74,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario0():
     assert road_bridgeunit.otx2inx_exists(otx_music45_str, otx_music45_str) is False
 
     # WHEN
-    gen_inx_road = road_bridgeunit.get_create_inx(otx_music45_str)
+    gen_inx_road = road_bridgeunit.reveal_inx(otx_music45_str)
 
     # THEN
     assert gen_inx_road == otx_music45_str
@@ -82,7 +82,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario0():
     assert road_bridgeunit.otx2inx_exists(otx_music45_str, otx_music45_str)
 
 
-def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario1():
+def test_BridgeUnit_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -95,7 +95,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     assert road_bridgeunit.otx_exists(clean_otx_road) is False
 
     # WHEN
-    gen_inx_road = road_bridgeunit.get_create_inx(clean_otx_road)
+    gen_inx_road = road_bridgeunit.reveal_inx(clean_otx_road)
 
     # THEN
     assert gen_inx_road is None
@@ -109,7 +109,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     assert road_bridgeunit.otx_exists(clean_otx_road) is False
 
     # WHEN
-    gen_inx_road = road_bridgeunit.get_create_inx(clean_otx_road)
+    gen_inx_road = road_bridgeunit.reveal_inx(clean_otx_road)
 
     # THEN
     assert road_bridgeunit.otx_exists(clean_otx_road)
@@ -117,7 +117,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     assert gen_inx_road == f"{inx_music87_str}{inx_r_wall}{clean_otx_str}"
 
 
-def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_nub_label():
+def test_BridgeUnit_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_nub_label():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -132,7 +132,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_nub
     assert road_bridgeunit.otx_exists(clean_otx_road) is False
 
     # WHEN
-    gen_inx_road = road_bridgeunit.get_create_inx(clean_otx_road)
+    gen_inx_road = road_bridgeunit.reveal_inx(clean_otx_road)
 
     # THEN
     assert gen_inx_road is None
@@ -146,7 +146,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_nub
     assert road_bridgeunit.otx_exists(clean_otx_road) is False
 
     # WHEN
-    gen_inx_road = road_bridgeunit.get_create_inx(clean_otx_road)
+    gen_inx_road = road_bridgeunit.reveal_inx(clean_otx_road)
 
     # THEN
     assert road_bridgeunit.otx2inx_exists(otx_music45_str, inx_music87_str)
@@ -155,7 +155,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_nub
     assert gen_inx_road == f"{inx_music87_str}{inx_r_wall}{clean_inx_str}"
 
 
-def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_group_id():
+def test_BridgeUnit_reveal_inx_ReturnsObjAndSetsAttr_group_id():
     # ESTABLISH
     inx_r_wall = ":"
     otx_r_wall = "/"
@@ -167,7 +167,7 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_group_id():
 
     # WHEN
     swim_inx = f"swim{inx_r_wall}"
-    assert group_id_bridgeunit.get_create_inx(swim_otx) == swim_inx
+    assert group_id_bridgeunit.reveal_inx(swim_otx) == swim_inx
 
     # THEN
     assert group_id_bridgeunit.otx_exists(swim_otx)
@@ -175,13 +175,13 @@ def test_BridgeUnit_get_create_inx_ReturnsObjAndSetsAttr_group_id():
     assert group_id_bridgeunit._get_inx_value(swim_otx) == swim_inx
 
     # WHEN
-    assert group_id_bridgeunit.get_create_inx(climb_otx) is None
+    assert group_id_bridgeunit.reveal_inx(climb_otx) is None
     # THEN
     assert group_id_bridgeunit.otx_exists(swim_otx)
     assert group_id_bridgeunit.otx_exists(climb_otx) is False
 
 
-def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx2inx_RoadNode():
+def test_BridgeUnit_reveal_inx_AddsMissingObjsTo_otx2inx_RoadNode():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
@@ -196,14 +196,14 @@ def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx2inx_RoadNode():
     assert roadnode_bridgeunit.otx_exists(swim_str) is False
 
     # WHEN
-    assert roadnode_bridgeunit.get_create_inx(swim_str, True) == swim_str
+    assert roadnode_bridgeunit.reveal_inx(swim_str, True) == swim_str
 
     # THEN
     assert roadnode_bridgeunit.otx_exists(swim_str)
     assert roadnode_bridgeunit.otx2inx_exists(swim_str, swim_str)
 
 
-def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx2inx_RoadUnit():
+def test_BridgeUnit_reveal_inx_AddsMissingObjsTo_otx2inx_RoadUnit():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -232,7 +232,7 @@ def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx2inx_RoadUnit():
     assert road_bd.otx2inx_exists(sweep_otx_road, sweep_inx_road) is False
 
     # WHEN
-    assert road_bd.get_create_inx(otx_music45_str) == inx_music87_str
+    assert road_bd.reveal_inx(otx_music45_str) == inx_music87_str
     # THEN
     assert road_bd.otx_exists(otx_music45_str)
     assert road_bd.otx_exists(casa_otx_road) is False
@@ -244,7 +244,7 @@ def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx2inx_RoadUnit():
     assert road_bd.otx2inx_exists(sweep_otx_road, sweep_inx_road) is False
 
     # WHEN
-    assert road_bd.get_create_inx(casa_otx_road) == casa_inx_road
+    assert road_bd.reveal_inx(casa_otx_road) == casa_inx_road
     # THEN
     assert road_bd.otx_exists(otx_music45_str)
     assert road_bd.otx_exists(casa_otx_road)
@@ -256,8 +256,8 @@ def test_BridgeUnit_get_create_inx_AddsMissingObjsTo_otx2inx_RoadUnit():
     assert road_bd.otx2inx_exists(sweep_otx_road, sweep_inx_road) is False
 
     # WHEN
-    assert road_bd.get_create_inx(clean_otx_road) == clean_inx_road
-    assert road_bd.get_create_inx(sweep_otx_road) == sweep_inx_road
+    assert road_bd.reveal_inx(clean_otx_road) == clean_inx_road
+    assert road_bd.reveal_inx(sweep_otx_road) == sweep_inx_road
     # THEN
     assert road_bd.otx2inx_exists(otx_music45_str, inx_music87_str)
     assert road_bd.otx2inx_exists(casa_otx_road, casa_inx_road)

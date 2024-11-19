@@ -85,7 +85,7 @@ class GroupBridge(BridgeCore):
     def del_otx2inx(self, otx_groupid: str):
         self.otx2inx.pop(otx_groupid)
 
-    def get_create_inx(self, otx_groupid: str, missing_add: bool = True) -> str:
+    def reveal_inx(self, otx_groupid: str, missing_add: bool = True) -> str:
         if missing_add and self.otx_exists(otx_groupid) is False:
             inx_groupid = copy_copy(otx_groupid)
             if self.inx_wall in otx_groupid:
@@ -151,7 +151,7 @@ class AcctBridge(BridgeCore):
     def del_otx2inx(self, otx_acctid: str):
         self.otx2inx.pop(otx_acctid)
 
-    def get_create_inx(self, otx_acctid: str, missing_add: bool = True) -> str:
+    def reveal_inx(self, otx_acctid: str, missing_add: bool = True) -> str:
         if missing_add and self.otx_exists(otx_acctid) is False:
             inx_acctid = copy_copy(otx_acctid)
             if self.inx_wall in otx_acctid:
@@ -225,10 +225,10 @@ class RoadBridge:
     def _get_inx_value(self, otx_word: str) -> str:
         return self.otx2inx.get(otx_word)
 
-    def get_create_inx(self, otx_word: str, missing_add: bool = True) -> str:
+    def reveal_inx(self, otx_word: str, missing_add: bool = True) -> str:
         if missing_add and self.otx_exists(otx_word) is False:
             inx_word = copy_copy(otx_word)
-            inx_word = self._get_create_roadunit_inx(otx_word)
+            inx_word = self._reveal_roadunit_inx(otx_word)
             # if self.jaar_type in {"RoadNode"}:
             #     if self.inx_wall in otx_word:
             #         return None
@@ -237,7 +237,7 @@ class RoadBridge:
 
         return self._get_inx_value(otx_word)
 
-    def _get_create_roadunit_inx(self, otx_road) -> RoadUnit:
+    def _reveal_roadunit_inx(self, otx_road) -> RoadUnit:
         otx_parent_road = get_parent_road(otx_road, self.otx_wall)
         if self.otx_exists(otx_parent_road) is False and otx_parent_road != "":
             return None

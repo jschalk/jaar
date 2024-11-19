@@ -218,7 +218,7 @@ def test_GroupBridge_unknown_word_in_otx2inx_ReturnsObj():
     assert x_groupbridge._unknown_word_in_otx2inx()
 
 
-def test_GroupBridge_get_create_inx_ReturnsObjAndSetsAttr_group_id():
+def test_GroupBridge_reveal_inx_ReturnsObjAndSetsAttr_group_id():
     # ESTABLISH
     inx_r_wall = ":"
     otx_r_wall = "/"
@@ -230,7 +230,7 @@ def test_GroupBridge_get_create_inx_ReturnsObjAndSetsAttr_group_id():
 
     # WHEN
     swim_inx = f"swim{inx_r_wall}"
-    assert group_id_groupbridge.get_create_inx(swim_otx) == swim_inx
+    assert group_id_groupbridge.reveal_inx(swim_otx) == swim_inx
 
     # THEN
     assert group_id_groupbridge.otx_exists(swim_otx)
@@ -238,7 +238,7 @@ def test_GroupBridge_get_create_inx_ReturnsObjAndSetsAttr_group_id():
     assert group_id_groupbridge._get_inx_value(swim_otx) == swim_inx
 
     # WHEN
-    assert group_id_groupbridge.get_create_inx(climb_otx) is None
+    assert group_id_groupbridge.reveal_inx(climb_otx) is None
     # THEN
     assert group_id_groupbridge.otx_exists(swim_otx)
     assert group_id_groupbridge.otx_exists(climb_otx) is False

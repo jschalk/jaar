@@ -49,7 +49,7 @@ def get_clean_roadunit_bridgeunit() -> BridgeUnit:
     road_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), x_face_id="Sue")
     road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
     road_bridgeunit.set_otx2inx(otx_music45_str, inx_music87_str)
-    road_bridgeunit.get_create_inx(clean_otx_road)
+    road_bridgeunit.reveal_inx(clean_otx_road)
     return road_bridgeunit
 
 
@@ -131,7 +131,7 @@ def get_slash_roadunit_bridgeunit() -> BridgeUnit:
     )
     road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
     road_bridgeunit.set_otx2inx(otx_music45_str, inx_music87_str)
-    road_bridgeunit.get_create_inx(clean_otx_road)
+    road_bridgeunit.reveal_inx(clean_otx_road)
     return road_bridgeunit
 
 
@@ -401,7 +401,7 @@ def get_slash_roadbridge() -> RoadBridge:
     )
     x_roadbridge.set_nub_label(clean_otx_str, clean_inx_str)
     x_roadbridge.set_otx2inx(otx_music45_str, inx_music87_str)
-    x_roadbridge.get_create_inx(clean_otx_road)
+    x_roadbridge.reveal_inx(clean_otx_road)
     return x_roadbridge
 
 

@@ -158,7 +158,7 @@ class PidginUnit:
 
     def is_valid(self) -> bool:
         x_bridgeunits = self.bridgeunits.values()
-        return all(x_bridgeunit.is_valid() is True for x_bridgeunit in x_bridgeunits)
+        return all(x_bridgeunit.is_valid() for x_bridgeunit in x_bridgeunits)
 
     def set_otx2inx(self, x_jaar_type: str, x_otx: str, x_inx: str):
         self.get_bridgeunit(x_jaar_type).set_otx2inx(x_otx, x_inx)
