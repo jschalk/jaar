@@ -7,6 +7,14 @@ from src.f04_gift.atom_config import (
     type_GroupID_str,
     type_RoadNode_str,
 )
+from src.f08_pidgin.bridge import (
+    groupbridge_shop,
+    acctbridge_shop,
+    roadbridge_shop,
+    GroupBridge,
+    AcctBridge,
+    RoadBridge,
+)
 from src.f08_pidgin.pidgin import (
     bridgeunit_shop,
     BridgeUnit,
@@ -340,3 +348,100 @@ def get_casa_maison_road_nub_label_dt() -> DataFrame:
     inx_dt.loc[1] = ["Sue", rt, x_rd, x_rd, uw, casa_otx_str, casa_inx_str]
     inx_dt.loc[2] = ["Sue", rt, x_rd, x_rd, uw, clean_otx_str, clean_inx_str]
     return inx_dt
+
+
+def get_invalid_acctbridge() -> AcctBridge:
+    sue_otx = f"Xio{default_wall_if_none()}"
+    sue_inx = "Sue"
+    zia_otx = "Zia"
+    zia_inx = "Zia"
+    acctbridge = acctbridge_shop(x_face_id="Sue")
+    acctbridge.set_otx2inx(sue_otx, sue_inx)
+    acctbridge.set_otx2inx(zia_otx, zia_inx)
+    return acctbridge
+
+
+def get_invalid_groupbridge() -> GroupBridge:
+    sue_otx = f"Xio{default_wall_if_none()}"
+    sue_inx = f"Sue{default_wall_if_none()}"
+    zia_otx = "Zia"
+    zia_inx = f"Zia{default_wall_if_none()}"
+    x_groupbridge = groupbridge_shop(x_face_id="Sue")
+    x_groupbridge.set_otx2inx(sue_otx, sue_inx)
+    x_groupbridge.set_otx2inx(zia_otx, zia_inx)
+    return x_groupbridge
+
+
+def get_invalid_roadbridge() -> RoadBridge:
+    clean_str = "clean"
+    clean_inx = "propre"
+    casa_otx = f"casa{default_wall_if_none()}"
+    casa_inx = "casa"
+    roadbridge = roadbridge_shop(x_face_id="Sue")
+    roadbridge.set_otx2inx(clean_str, clean_inx)
+    roadbridge.set_otx2inx(casa_otx, casa_inx)
+    return roadbridge
+
+
+def get_slash_roadbridge() -> RoadBridge:
+    otx_music45_str = "music45"
+    inx_music87_str = "music87"
+    clean_otx_str = "clean"
+    clean_inx_str = "prop"
+    x_unknown_word = "UnknownAcctId"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
+    clean_otx_road = f"{otx_music45_str}{slash_otx_wall}{clean_otx_str}"
+    clean_otx_road = f"{otx_music45_str}{colon_inx_wall}{clean_otx_str}"
+    x_roadbridge = roadbridge_shop(
+        x_otx_wall=slash_otx_wall,
+        x_inx_wall=colon_inx_wall,
+        x_unknown_word=x_unknown_word,
+        x_face_id="Sue",
+    )
+    x_roadbridge.set_nub_label(clean_otx_str, clean_inx_str)
+    x_roadbridge.set_otx2inx(otx_music45_str, inx_music87_str)
+    x_roadbridge.get_create_inx(clean_otx_road)
+    return x_roadbridge
+
+
+def get_slash_groupbridge() -> GroupBridge:
+    x_unknown_word = "UnknownAcctId"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
+    swim_otx = f"swim{slash_otx_wall}"
+    swim_inx = f"nage{colon_inx_wall}"
+    climb_otx = f"climb{slash_otx_wall}"
+    climb_inx = f"climb{colon_inx_wall}"
+    x_groupbridge = groupbridge_shop(
+        x_otx_wall=slash_otx_wall,
+        x_inx_wall=colon_inx_wall,
+        x_unknown_word=x_unknown_word,
+        x_face_id="Sue",
+    )
+    x_groupbridge.set_otx2inx(swim_otx, swim_inx)
+    x_groupbridge.set_otx2inx(climb_otx, climb_inx)
+    return x_groupbridge
+
+
+def get_slash_acctbridge() -> AcctBridge:
+    x_unknown_word = "UnknownAcctId"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
+    xio_otx = "Xio"
+    sue_otx = "Sue"
+    bob_otx = "Bob"
+    zia_otx = "Zia"
+    xio_inx = "Xioita"
+    sue_inx = "Suita"
+    bob_inx = "Bobita"
+    x_acctbridge = acctbridge_shop(
+        x_otx_wall=slash_otx_wall,
+        x_inx_wall=colon_inx_wall,
+        x_unknown_word=x_unknown_word,
+        x_face_id="Sue",
+    )
+    x_acctbridge.set_otx2inx(xio_otx, xio_inx)
+    x_acctbridge.set_otx2inx(sue_otx, sue_inx)
+    x_acctbridge.set_otx2inx(bob_otx, bob_inx)
+    return x_acctbridge
