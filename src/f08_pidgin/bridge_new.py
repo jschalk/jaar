@@ -385,3 +385,81 @@ def get_roadbridge_from_dict(x_dict: dict) -> RoadBridge:
 
 def get_roadbridge_from_json(x_json: str) -> RoadBridge:
     return get_roadbridge_from_dict(get_dict_from_json(x_json))
+
+
+class NodeBridge(BridgeCore):
+    def set_otx2inx(self, otx_nodeid: str, inx_nodeid: str):
+        self.otx2inx[otx_nodeid] = inx_nodeid
+
+    def _get_inx_value(self, otx_nodeid: str) -> str:
+        return self.otx2inx.get(otx_nodeid)
+
+    def otx2inx_exists(self, otx_nodeid: str, inx_nodeid: str) -> bool:
+        return self._get_inx_value(otx_nodeid) == inx_nodeid
+
+    def otx_exists(self, otx_nodeid: str) -> bool:
+        return self._get_inx_value(otx_nodeid) != None
+
+    def del_otx2inx(self, otx_nodeid: str):
+        self.otx2inx.pop(otx_nodeid)
+
+    def reveal_inx(self, otx_nodeid: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_nodeid) is False:
+            inx_nodeid = copy_copy(otx_nodeid)
+            if self.inx_wall in otx_nodeid:
+                return None
+            otx_r_wall = self.otx_wall
+            inx_r_wall = self.inx_wall
+            inx_nodeid = inx_nodeid.replace(otx_r_wall, inx_r_wall)
+            self.set_otx2inx(otx_nodeid, inx_nodeid)
+
+        return self._get_inx_value(otx_nodeid)
+
+    def _is_inx_wall_inclusion_correct(self) -> bool:
+        return not str_in_dict_values(self.inx_wall, self.otx2inx)
+
+    def _is_otx_wall_inclusion_correct(self) -> bool:
+        return not str_in_dict_keys(self.otx_wall, self.otx2inx)
+
+    def is_valid(self) -> bool:
+        return (
+            self._is_inx_wall_inclusion_correct()
+            and self._is_otx_wall_inclusion_correct()
+        )
+
+
+def nodebridge_shop(
+    x_otx_wall: str = None,
+    x_inx_wall: str = None,
+    x_otx2inx: dict = None,
+    x_unknown_word: str = None,
+    x_face_id: OwnerID = None,
+) -> NodeBridge:
+    if x_unknown_word is None:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall is None:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall is None:
+        x_inx_wall = default_wall_if_none()
+
+    return NodeBridge(
+        face_id=x_face_id,
+        otx_wall=x_otx_wall,
+        inx_wall=x_inx_wall,
+        unknown_word=x_unknown_word,
+        otx2inx=get_empty_dict_if_none(x_otx2inx),
+    )
+
+
+def get_nodebridge_from_dict(x_dict: dict) -> NodeBridge:
+    return nodebridge_shop(
+        x_face_id=x_dict.get("face_id"),
+        x_otx_wall=x_dict.get("otx_wall"),
+        x_inx_wall=x_dict.get("inx_wall"),
+        x_otx2inx=x_dict.get("otx2inx"),
+        x_unknown_word=x_dict.get("unknown_word"),
+    )
+
+
+def get_nodebridge_from_json(x_json: str) -> NodeBridge:
+    return get_nodebridge_from_dict(get_dict_from_json(x_json))

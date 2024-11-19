@@ -9,12 +9,15 @@ from src.f01_road.road import default_wall_if_none, OwnerID
 from src.f08_pidgin.bridge_new import (
     GroupBridge,
     AcctBridge,
+    NodeBridge,
     RoadBridge,
     groupbridge_shop,
     acctbridge_shop,
+    nodebridge_shop,
     roadbridge_shop,
     get_acctbridge_from_dict,
     get_groupbridge_from_dict,
+    get_nodebridge_from_dict,
     get_roadbridge_from_dict,
 )
 from src.f08_pidgin.bridge_old import (
@@ -62,6 +65,7 @@ class PidginUnit:
     bridgeunits: dict[str, BridgeUnit] = None
     groupbridge: GroupBridge = None
     acctbridge: AcctBridge = None
+    nodebridge: NodeBridge = None
     roadbridge: RoadBridge = None
     unknown_word: str = None
     otx_wall: str = None
@@ -104,6 +108,25 @@ class PidginUnit:
 
     def del_acct_id(self, otx_acct_id: str):
         return self.acctbridge.del_otx2inx(otx_acct_id)
+
+    def set_nodebridge(self, x_nodebridge: NodeBridge):
+        self._check_all_core_attrs_match(x_nodebridge)
+        self.nodebridge = x_nodebridge
+
+    def get_nodebridge(self) -> NodeBridge:
+        return self.nodebridge
+
+    def set_node_id(self, otx_node_id: str, inx_node_id: str):
+        self.nodebridge.set_otx2inx(otx_node_id, inx_node_id)
+
+    def node_id_exists(self, otx_node_id: str, inx_node_id: str):
+        return self.nodebridge.otx2inx_exists(otx_node_id, inx_node_id)
+
+    def _get_inx_node_id(self, otx_node_id: str):
+        return self.nodebridge._get_inx_value(otx_node_id)
+
+    def del_node_id(self, otx_node_id: str):
+        return self.nodebridge.del_otx2inx(otx_node_id)
 
     def set_roadbridge(self, x_roadbridge: RoadBridge):
         self._check_all_core_attrs_match(x_roadbridge)
@@ -193,6 +216,7 @@ class PidginUnit:
             "unknown_word": self.unknown_word,
             "bridgeunits": self.get_bridgeunits_dict(),
             "acctbridge": self.acctbridge.get_dict(),
+            "nodebridge": self.nodebridge.get_dict(),
             "groupbridge": self.groupbridge.get_dict(),
             "roadbridge": self.roadbridge.get_dict(),
         }
@@ -259,6 +283,12 @@ def pidginunit_shop(
             x_face_id=x_face_id,
         ),
         acctbridge=acctbridge_shop(
+            x_otx_wall=x_otx_wall,
+            x_inx_wall=x_inx_wall,
+            x_unknown_word=x_unknown_word,
+            x_face_id=x_face_id,
+        ),
+        nodebridge=nodebridge_shop(
             x_otx_wall=x_otx_wall,
             x_inx_wall=x_inx_wall,
             x_unknown_word=x_unknown_word,

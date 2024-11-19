@@ -7,7 +7,12 @@ from src.f04_gift.atom_config import (
     type_RoadNode_str,
     type_RoadUnit_str,
 )
-from src.f08_pidgin.bridge_new import groupbridge_shop, acctbridge_shop, roadbridge_shop
+from src.f08_pidgin.bridge_new import (
+    groupbridge_shop,
+    acctbridge_shop,
+    nodebridge_shop,
+    roadbridge_shop,
+)
 from src.f08_pidgin.pidgin import (
     PidginUnit,
     pidginunit_shop,
@@ -88,6 +93,7 @@ def test_PidginUnit_Exists():
     assert not x_pidginunit.bridgeunits
     assert not x_pidginunit.groupbridge
     assert not x_pidginunit.acctbridge
+    assert not x_pidginunit.nodebridge
     assert not x_pidginunit.roadbridge
     assert not x_pidginunit.unknown_word
     assert not x_pidginunit.otx_wall
@@ -110,6 +116,7 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.inx_wall == default_wall_if_none()
     assert sue_pidginunit.groupbridge == groupbridge_shop(x_face_id=sue_str)
     assert sue_pidginunit.acctbridge == acctbridge_shop(x_face_id=sue_str)
+    assert sue_pidginunit.nodebridge == nodebridge_shop(x_face_id=sue_str)
     assert sue_pidginunit.roadbridge == roadbridge_shop(x_face_id=sue_str)
 
     acctid_bridgeunit = sue_pidginunit.bridgeunits.get(type_AcctID_str())
