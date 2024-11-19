@@ -23,7 +23,7 @@ from src.f08_pidgin.birdgeunit_old import (
 from dataclasses import dataclass
 
 
-class atom_args_jaar_typeException(Exception):
+class check_attrException(Exception):
     pass
 
 
@@ -65,6 +65,72 @@ class PidginUnit:
     otx_wall: str = None
     inx_wall: str = None
 
+    def set_groupbridge(self, x_groupbridge: GroupBridge):
+        self._check_attr_match("face_id", x_groupbridge)
+        self._check_attr_match("otx_wall", x_groupbridge)
+        self._check_attr_match("inx_wall", x_groupbridge)
+        self._check_attr_match("unknown_word", x_groupbridge)
+        self.groupbridge = x_groupbridge
+
+    def get_groupbridge(self) -> GroupBridge:
+        return self.groupbridge
+
+    def set_group_id(self, otx_group_id: str, inx_group_id: str):
+        self.groupbridge.set_otx2inx(otx_group_id, inx_group_id)
+
+    def group_id_exists(self, otx_group_id: str, inx_group_id: str):
+        return self.groupbridge.otx2inx_exists(otx_group_id, inx_group_id)
+
+    def _get_inx_group_id(self, otx_group_id: str):
+        return self.groupbridge._get_inx_value(otx_group_id)
+
+    def del_group_id(self, otx_group_id: str):
+        return self.groupbridge.del_otx2inx(otx_group_id)
+
+    def set_acctbridge(self, x_acctbridge: AcctBridge):
+        self._check_attr_match("face_id", x_acctbridge)
+        self._check_attr_match("otx_wall", x_acctbridge)
+        self._check_attr_match("inx_wall", x_acctbridge)
+        self._check_attr_match("unknown_word", x_acctbridge)
+        self.acctbridge = x_acctbridge
+
+    def get_acctbridge(self) -> AcctBridge:
+        return self.acctbridge
+
+    def set_acct_id(self, otx_acct_id: str, inx_acct_id: str):
+        self.acctbridge.set_otx2inx(otx_acct_id, inx_acct_id)
+
+    def acct_id_exists(self, otx_acct_id: str, inx_acct_id: str):
+        return self.acctbridge.otx2inx_exists(otx_acct_id, inx_acct_id)
+
+    def _get_inx_acct_id(self, otx_acct_id: str):
+        return self.acctbridge._get_inx_value(otx_acct_id)
+
+    def del_acct_id(self, otx_acct_id: str):
+        return self.acctbridge.del_otx2inx(otx_acct_id)
+
+    def set_roadbridge(self, x_roadbridge: RoadBridge):
+        self._check_attr_match("face_id", x_roadbridge)
+        self._check_attr_match("otx_wall", x_roadbridge)
+        self._check_attr_match("inx_wall", x_roadbridge)
+        self._check_attr_match("unknown_word", x_roadbridge)
+        self.roadbridge = x_roadbridge
+
+    def get_roadbridge(self) -> RoadBridge:
+        return self.roadbridge
+
+    def set_road(self, otx_road: str, inx_road: str):
+        self.roadbridge.set_otx2inx(otx_road, inx_road)
+
+    def road_exists(self, otx_road: str, inx_road: str):
+        return self.roadbridge.otx2inx_exists(otx_road, inx_road)
+
+    def _get_inx_road(self, otx_road: str):
+        return self.roadbridge._get_inx_value(otx_road)
+
+    def del_road(self, otx_road: str):
+        return self.roadbridge.del_otx2inx(otx_road)
+
     def set_bridgeunit(self, x_bridgeunit: BridgeUnit):
         self._check_attr_match("face_id", x_bridgeunit)
         self._check_attr_match("otx_wall", x_bridgeunit)
@@ -85,8 +151,8 @@ class PidginUnit:
         self_attr = getattr(self, attr)
         unit_attr = getattr(bridgeunit, attr)
         if self_attr != unit_attr:
-            exception_str = f"set_bridgeunit Error: BridgeUnit {attr} is '{self_attr}', BridgeUnit is '{unit_attr}'."
-            raise atom_args_jaar_typeException(exception_str)
+            exception_str = f"set_bridgecore Error: BridgeCore {attr} is '{self_attr}', BridgeCore is '{unit_attr}'."
+            raise check_attrException(exception_str)
 
     def get_bridgeunit(self, x_jaar_type: str) -> BridgeUnit:
         if x_jaar_type in {"RoadUnit", "RoadNode"}:

@@ -136,11 +136,7 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
 
     # WHEN
     sue_pidginunit = pidginunit_shop(
-        sue_str,
-        five_event_id,
-        slash_otx_wall,
-        colon_inx_wall,
-        y_uk,
+        sue_str, five_event_id, slash_otx_wall, colon_inx_wall, y_uk
     )
 
     # THEN
@@ -241,7 +237,7 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_otx_wall_IsNotSame()
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgeunit Error: BridgeUnit otx_wall is '{sue_pidginunit.otx_wall}', BridgeUnit is '{slash_otx_wall}'."
+    exception_str = f"set_bridgecore Error: BridgeCore otx_wall is '{sue_pidginunit.otx_wall}', BridgeCore is '{slash_otx_wall}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -261,7 +257,7 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_inx_wall_IsNotSame()
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgeunit Error: BridgeUnit inx_wall is '{sue_pidginunit.inx_wall}', BridgeUnit is '{slash_inx_wall}'."
+    exception_str = f"set_bridgecore Error: BridgeCore inx_wall is '{sue_pidginunit.inx_wall}', BridgeCore is '{slash_inx_wall}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -279,7 +275,7 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_unknown_word_IsNotSa
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgeunit Error: BridgeUnit unknown_word is '{sue_pidginunit.unknown_word}', BridgeUnit is '{casa_unknown_word}'."
+    exception_str = f"set_bridgecore Error: BridgeCore unknown_word is '{sue_pidginunit.unknown_word}', BridgeCore is '{casa_unknown_word}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -295,7 +291,7 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_face_id_IsNotSame():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgeunit Error: BridgeUnit face_id is '{sue_pidginunit.face_id}', BridgeUnit is '{yao_str}'."
+    exception_str = f"set_bridgecore Error: BridgeCore face_id is '{sue_pidginunit.face_id}', BridgeCore is '{yao_str}'."
     assert str(excinfo.value) == exception_str
 
 
