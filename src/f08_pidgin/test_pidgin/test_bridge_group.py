@@ -251,31 +251,31 @@ def test_GroupBridge_get_dict_ReturnsObj():
     sue_str = "Sue"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
-    roadnode_groupbridge = groupbridge_shop(
+    x_groupbridge = groupbridge_shop(
         x_otx_wall=slash_otx_wall,
         x_inx_wall=colon_inx_wall,
         x_face_id=sue_str,
     )
     x1_road_bridge_dict = {
-        "otx_wall": roadnode_groupbridge.otx_wall,
-        "inx_wall": roadnode_groupbridge.inx_wall,
-        "unknown_word": roadnode_groupbridge.unknown_word,
+        "otx_wall": x_groupbridge.otx_wall,
+        "inx_wall": x_groupbridge.inx_wall,
+        "unknown_word": x_groupbridge.unknown_word,
         "otx2inx": {},
-        "face_id": roadnode_groupbridge.face_id,
+        "face_id": x_groupbridge.face_id,
     }
-    assert roadnode_groupbridge.get_dict() == x1_road_bridge_dict
+    assert x_groupbridge.get_dict() == x1_road_bridge_dict
 
     # WHEN
-    roadnode_groupbridge.set_otx2inx(clean_otx, clean_inx)
+    x_groupbridge.set_otx2inx(clean_otx, clean_inx)
     # THEN
     x2_road_bridge_dict = {
-        "otx_wall": roadnode_groupbridge.otx_wall,
-        "inx_wall": roadnode_groupbridge.inx_wall,
-        "unknown_word": roadnode_groupbridge.unknown_word,
+        "otx_wall": x_groupbridge.otx_wall,
+        "inx_wall": x_groupbridge.inx_wall,
+        "unknown_word": x_groupbridge.unknown_word,
         "otx2inx": {clean_otx: clean_inx},
         "face_id": sue_str,
     }
-    assert roadnode_groupbridge.get_dict() == x2_road_bridge_dict
+    assert x_groupbridge.get_dict() == x2_road_bridge_dict
 
 
 def test_GroupBridge_get_json_ReturnsObj():
@@ -286,35 +286,33 @@ def test_GroupBridge_get_json_ReturnsObj():
     casa_otx = "casa1"
     casa_inx = "casa2"
     slash_otx_wall = "/"
-    roadnode_groupbridge = groupbridge_shop(
-        "RoadNode", slash_otx_wall, x_face_id=sue_str
-    )
+    x_groupbridge = groupbridge_shop(slash_otx_wall, x_face_id=sue_str)
     x1_road_bridge_json = f"""{{
   "face_id": "{sue_str}",
-  "inx_wall": "{roadnode_groupbridge.inx_wall}",
+  "inx_wall": "{x_groupbridge.inx_wall}",
   "otx2inx": {{}},
-  "otx_wall": "{roadnode_groupbridge.otx_wall}",
-  "unknown_word": "{roadnode_groupbridge.unknown_word}"
+  "otx_wall": "{x_groupbridge.otx_wall}",
+  "unknown_word": "{x_groupbridge.unknown_word}"
 }}"""
     print(f"           {x1_road_bridge_json=}")
-    print(f"{roadnode_groupbridge.get_json()=}")
-    assert roadnode_groupbridge.get_json() == x1_road_bridge_json
+    print(f"{x_groupbridge.get_json()=}")
+    assert x_groupbridge.get_json() == x1_road_bridge_json
 
     # WHEN
-    roadnode_groupbridge.set_otx2inx(clean_otx, clean_inx)
+    x_groupbridge.set_otx2inx(clean_otx, clean_inx)
     # THEN
     x2_road_bridge_json = f"""{{
   "face_id": "{sue_str}",
-  "inx_wall": "{roadnode_groupbridge.inx_wall}",
+  "inx_wall": "{x_groupbridge.inx_wall}",
   "otx2inx": {{
     "{clean_otx}": "{clean_inx}"
   }},
-  "otx_wall": "{roadnode_groupbridge.otx_wall}",
-  "unknown_word": "{roadnode_groupbridge.unknown_word}"
+  "otx_wall": "{x_groupbridge.otx_wall}",
+  "unknown_word": "{x_groupbridge.unknown_word}"
 }}"""
     print(f"           {x2_road_bridge_json=}")
-    print(f"{roadnode_groupbridge.get_json()=}")
-    assert roadnode_groupbridge.get_json() == x2_road_bridge_json
+    print(f"{x_groupbridge.get_json()=}")
+    assert x_groupbridge.get_json() == x2_road_bridge_json
 
 
 def test_get_groupbridge_from_dict_ReturnsObj():
@@ -323,15 +321,15 @@ def test_get_groupbridge_from_dict_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     slash_otx_wall = "/"
-    roadnode_groupbridge = groupbridge_shop(slash_otx_wall, x_face_id=sue_str)
-    roadnode_groupbridge.set_otx2inx(clean_otx, clean_inx)
+    x_groupbridge = groupbridge_shop(slash_otx_wall, x_face_id=sue_str)
+    x_groupbridge.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
-    gen_groupbridge = get_groupbridge_from_dict(roadnode_groupbridge.get_dict())
+    gen_groupbridge = get_groupbridge_from_dict(x_groupbridge.get_dict())
 
     # THEN
-    assert gen_groupbridge.face_id == roadnode_groupbridge.face_id
-    assert gen_groupbridge == roadnode_groupbridge
+    assert gen_groupbridge.face_id == x_groupbridge.face_id
+    assert gen_groupbridge == x_groupbridge
 
 
 def test_get_groupbridge_from_json_ReturnsObj():
@@ -339,11 +337,11 @@ def test_get_groupbridge_from_json_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     slash_otx_wall = "/"
-    roadnode_groupbridge = groupbridge_shop(slash_otx_wall)
-    roadnode_groupbridge.set_otx2inx(clean_otx, clean_inx)
+    x_groupbridge = groupbridge_shop(slash_otx_wall)
+    x_groupbridge.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
-    x_groupbridge = get_groupbridge_from_json(roadnode_groupbridge.get_json())
+    x_groupbridge = get_groupbridge_from_json(x_groupbridge.get_json())
 
     # THEN
-    assert x_groupbridge == roadnode_groupbridge
+    assert x_groupbridge == x_groupbridge

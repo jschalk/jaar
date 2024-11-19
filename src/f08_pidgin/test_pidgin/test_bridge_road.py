@@ -1,5 +1,11 @@
 from src.f01_road.road import default_wall_if_none, create_road
-from src.f08_pidgin.bridge import RoadBridge, roadbridge_shop, default_unknown_word
+from src.f08_pidgin.bridge import (
+    RoadBridge,
+    roadbridge_shop,
+    default_unknown_word,
+    get_roadbridge_from_dict,
+    get_roadbridge_from_json,
+)
 from pytest import raises as pytest_raises
 
 # from otx.f08_pidgin.examples.pidgin_env import get_test_pidgins_dir, env_dir_setup_cleanup
@@ -421,3 +427,76 @@ def test_RoadBridge_set_nub_label_Edits_otx2inx():
     assert x_roadbridge.otx2inx_exists(casa_otx_road, casa_inx_road)
     assert x_roadbridge.otx2inx_exists(clean_otx_road, menage_inx_road)
     assert x_roadbridge.otx2inx_exists(sweep_otx_road, sweep_menage_inx_road)
+
+
+def test_RoadBridge_get_json_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    clean_otx = "clean"
+    clean_inx = "propre"
+    casa_otx = "casa1"
+    casa_inx = "casa2"
+    slash_otx_wall = "/"
+    x_roadbridge = roadbridge_shop(slash_otx_wall, x_face_id=sue_str)
+    x1_road_bridge_json = f"""{{
+  "face_id": "{sue_str}",
+  "inx_wall": "{x_roadbridge.inx_wall}",
+  "nub_label": {x_roadbridge.nub_label},
+  "otx2inx": {{}},
+  "otx_wall": "{x_roadbridge.otx_wall}",
+  "unknown_word": "{x_roadbridge.unknown_word}"
+}}"""
+    print(f"           {x1_road_bridge_json=}")
+    print(f"{x_roadbridge.get_json()=}")
+    assert x_roadbridge.get_json() == x1_road_bridge_json
+
+    # WHEN
+    x_roadbridge.set_otx2inx(clean_otx, clean_inx)
+    # THEN
+    x2_road_bridge_json = f"""{{
+  "face_id": "{sue_str}",
+  "inx_wall": "{x_roadbridge.inx_wall}",
+  "nub_label": {x_roadbridge.nub_label},
+  "otx2inx": {{
+    "{clean_otx}": "{clean_inx}"
+  }},
+  "otx_wall": "{x_roadbridge.otx_wall}",
+  "unknown_word": "{x_roadbridge.unknown_word}"
+}}"""
+    print(f"           {x2_road_bridge_json=}")
+    print(f"{x_roadbridge.get_json()=}")
+    assert x_roadbridge.get_json() == x2_road_bridge_json
+
+
+def test_get_roadbridge_from_dict_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    clean_otx = "clean"
+    clean_inx = "propre"
+    slash_otx_wall = "/"
+    x_roadbridge = roadbridge_shop(slash_otx_wall, x_face_id=sue_str)
+    x_roadbridge.set_otx2inx(clean_otx, clean_inx)
+    x_roadbridge.set_nub_label("bob", "bobito")
+
+    # WHEN
+    gen_roadbridge = get_roadbridge_from_dict(x_roadbridge.get_dict())
+
+    # THEN
+    assert gen_roadbridge.face_id == x_roadbridge.face_id
+    assert gen_roadbridge == x_roadbridge
+
+
+def test_get_roadbridge_from_json_ReturnsObj():
+    # ESTABLISH
+    clean_otx = "clean"
+    clean_inx = "propre"
+    slash_otx_wall = "/"
+    x_roadbridge = roadbridge_shop(slash_otx_wall)
+    x_roadbridge.set_otx2inx(clean_otx, clean_inx)
+    x_roadbridge.set_nub_label("bob", "bobito")
+
+    # WHEN
+    x_roadbridge = get_roadbridge_from_json(x_roadbridge.get_json())
+
+    # THEN
+    assert x_roadbridge == x_roadbridge

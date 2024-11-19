@@ -363,3 +363,18 @@ def roadbridge_shop(
         nub_label=get_empty_dict_if_none(x_nub_label),
         face_id=x_face_id,
     )
+
+
+def get_roadbridge_from_dict(x_dict: dict) -> RoadBridge:
+    return roadbridge_shop(
+        x_face_id=x_dict.get("face_id"),
+        x_otx_wall=x_dict.get("otx_wall"),
+        x_inx_wall=x_dict.get("inx_wall"),
+        x_otx2inx=x_dict.get("otx2inx"),
+        x_nub_label=x_dict.get("nub_label"),
+        x_unknown_word=x_dict.get("unknown_word"),
+    )
+
+
+def get_roadbridge_from_json(x_json: str) -> RoadBridge:
+    return get_roadbridge_from_dict(get_dict_from_json(x_json))

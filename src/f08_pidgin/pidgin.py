@@ -13,6 +13,9 @@ from src.f08_pidgin.bridge import (
     groupbridge_shop,
     acctbridge_shop,
     roadbridge_shop,
+    get_acctbridge_from_dict,
+    get_groupbridge_from_dict,
+    get_roadbridge_from_dict,
 )
 from src.f08_pidgin.birdgeunit_old import (
     BridgeUnit,
@@ -190,6 +193,9 @@ class PidginUnit:
             "inx_wall": self.inx_wall,
             "unknown_word": self.unknown_word,
             "bridgeunits": self.get_bridgeunits_dict(),
+            "acctbridge": self.acctbridge.get_dict(),
+            "groupbridge": self.groupbridge.get_dict(),
+            "roadbridge": self.roadbridge.get_dict(),
         }
 
     def get_bridgeunits_dict(self) -> dict:
@@ -276,6 +282,9 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         inx_wall=x_dict.get("inx_wall"),
         unknown_word=x_dict.get("unknown_word"),
         bridgeunits=get_bridgeunits_from_dict(x_dict.get("bridgeunits")),
+        acctbridge=get_acctbridge_from_dict(x_dict.get("acctbridge")),
+        groupbridge=get_groupbridge_from_dict(x_dict.get("groupbridge")),
+        roadbridge=get_roadbridge_from_dict(x_dict.get("roadbridge")),
     )
 
 
