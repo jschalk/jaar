@@ -57,7 +57,7 @@ def test_BridgeUnit_get_json_ReturnsObj():
     slash_otx_wall = "/"
     roadnode_bridgeunit = bridgeunit_shop("RoadNode", slash_otx_wall, x_face_id=sue_str)
     x1_road_bridge_json = f"""{{
-  "{"face_id"}": "{sue_str}",
+  "face_id": "{sue_str}",
   "inx_wall": "{roadnode_bridgeunit.inx_wall}",
   "jaar_type": "RoadNode",
   "nub_label": {roadnode_bridgeunit.nub_label},
@@ -74,7 +74,7 @@ def test_BridgeUnit_get_json_ReturnsObj():
     roadnode_bridgeunit.set_nub_label(casa_otx, casa_inx)
     # THEN
     x2_road_bridge_json = f"""{{
-  "{"face_id"}": "{sue_str}",
+  "face_id": "{sue_str}",
   "inx_wall": "{roadnode_bridgeunit.inx_wall}",
   "jaar_type": "RoadNode",
   "nub_label": {{
