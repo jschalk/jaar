@@ -7,6 +7,7 @@ from src.f04_gift.atom_config import (
     type_RoadNode_str,
     type_RoadUnit_str,
 )
+from src.f08_pidgin.bridge import groupbridge_shop, acctbridge_shop, roadbridge_shop
 from src.f08_pidgin.pidgin import (
     PidginUnit,
     pidginunit_shop,
@@ -85,6 +86,9 @@ def test_PidginUnit_Exists():
     # WHEN / THEN
     assert not x_pidginunit.event_id
     assert not x_pidginunit.bridgeunits
+    assert not x_pidginunit.groupbridge
+    assert not x_pidginunit.acctbridge
+    assert not x_pidginunit.roadbridge
     assert not x_pidginunit.unknown_word
     assert not x_pidginunit.otx_wall
     assert not x_pidginunit.inx_wall
@@ -104,6 +108,9 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.unknown_word == default_unknown_word()
     assert sue_pidginunit.otx_wall == default_wall_if_none()
     assert sue_pidginunit.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.groupbridge == groupbridge_shop(x_face_id=sue_str)
+    assert sue_pidginunit.acctbridge == acctbridge_shop(x_face_id=sue_str)
+    assert sue_pidginunit.roadbridge == roadbridge_shop(x_face_id=sue_str)
 
     acctid_bridgeunit = sue_pidginunit.bridgeunits.get(type_AcctID_str())
     assert acctid_bridgeunit.unknown_word == default_unknown_word()
@@ -123,7 +130,7 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     # ESTABLISH
     sue_str = "Sue"
     five_event_id = 5
-    y_unknown_word = "UnknownAcctId"
+    y_uk = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
 
@@ -133,28 +140,37 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
         five_event_id,
         slash_otx_wall,
         colon_inx_wall,
-        y_unknown_word,
+        y_uk,
     )
 
     # THEN
     assert sue_pidginunit.event_id == five_event_id
-    assert sue_pidginunit.unknown_word == y_unknown_word
+    assert sue_pidginunit.unknown_word == y_uk
     assert sue_pidginunit.otx_wall == slash_otx_wall
     assert sue_pidginunit.inx_wall == colon_inx_wall
 
+    x_groupbridge = groupbridge_shop(slash_otx_wall, colon_inx_wall, {}, y_uk, sue_str)
+    x_acctbridge = acctbridge_shop(slash_otx_wall, colon_inx_wall, {}, y_uk, sue_str)
+    x_roadbridge = roadbridge_shop(
+        slash_otx_wall, colon_inx_wall, None, {}, y_uk, sue_str
+    )
+    assert sue_pidginunit.groupbridge == x_groupbridge
+    assert sue_pidginunit.acctbridge == x_acctbridge
+    assert sue_pidginunit.roadbridge == x_roadbridge
+
     assert len(sue_pidginunit.bridgeunits) == 3
     acctid_bridgeunit = sue_pidginunit.bridgeunits.get(type_AcctID_str())
-    assert acctid_bridgeunit.unknown_word == y_unknown_word
+    assert acctid_bridgeunit.unknown_word == y_uk
     assert acctid_bridgeunit.otx_wall == slash_otx_wall
     assert acctid_bridgeunit.inx_wall == colon_inx_wall
     assert acctid_bridgeunit.face_id == sue_str
     groupid_bridgeunit = sue_pidginunit.bridgeunits.get(type_GroupID_str())
-    assert groupid_bridgeunit.unknown_word == y_unknown_word
+    assert groupid_bridgeunit.unknown_word == y_uk
     assert groupid_bridgeunit.otx_wall == slash_otx_wall
     assert groupid_bridgeunit.inx_wall == colon_inx_wall
     assert groupid_bridgeunit.face_id == sue_str
     road_bridgeunit = sue_pidginunit.bridgeunits.get(road_str())
-    assert road_bridgeunit.unknown_word == y_unknown_word
+    assert road_bridgeunit.unknown_word == y_uk
     assert road_bridgeunit.otx_wall == slash_otx_wall
     assert road_bridgeunit.inx_wall == colon_inx_wall
     assert road_bridgeunit.face_id == sue_str

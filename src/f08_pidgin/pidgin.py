@@ -6,6 +6,14 @@ from src.f00_instrument.dict_toolbox import (
 )
 from src.f01_road.finance import TimeLinePoint
 from src.f01_road.road import default_wall_if_none, OwnerID
+from src.f08_pidgin.bridge import (
+    GroupBridge,
+    AcctBridge,
+    RoadBridge,
+    groupbridge_shop,
+    acctbridge_shop,
+    roadbridge_shop,
+)
 from src.f08_pidgin.birdgeunit_old import (
     BridgeUnit,
     bridgeunit_shop,
@@ -50,6 +58,9 @@ class PidginUnit:
     event_id: TimeLinePoint = None
     face_id: OwnerID = None
     bridgeunits: dict[str, BridgeUnit] = None
+    groupbridge: GroupBridge = None
+    acctbridge: AcctBridge = None
+    roadbridge: RoadBridge = None
     unknown_word: str = None
     otx_wall: str = None
     inx_wall: str = None
@@ -176,6 +187,24 @@ def pidginunit_shop(
         otx_wall=x_otx_wall,
         inx_wall=x_inx_wall,
         bridgeunits=x_bridgeunits,
+        groupbridge=groupbridge_shop(
+            x_otx_wall=x_otx_wall,
+            x_inx_wall=x_inx_wall,
+            x_unknown_word=x_unknown_word,
+            x_face_id=x_face_id,
+        ),
+        acctbridge=acctbridge_shop(
+            x_otx_wall=x_otx_wall,
+            x_inx_wall=x_inx_wall,
+            x_unknown_word=x_unknown_word,
+            x_face_id=x_face_id,
+        ),
+        roadbridge=roadbridge_shop(
+            x_otx_wall=x_otx_wall,
+            x_inx_wall=x_inx_wall,
+            x_unknown_word=x_unknown_word,
+            x_face_id=x_face_id,
+        ),
     )
 
 
