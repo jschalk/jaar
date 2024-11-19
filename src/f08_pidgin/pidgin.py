@@ -66,10 +66,7 @@ class PidginUnit:
     inx_wall: str = None
 
     def set_groupbridge(self, x_groupbridge: GroupBridge):
-        self._check_attr_match("face_id", x_groupbridge)
-        self._check_attr_match("otx_wall", x_groupbridge)
-        self._check_attr_match("inx_wall", x_groupbridge)
-        self._check_attr_match("unknown_word", x_groupbridge)
+        self._check_all_core_attrs_match(x_groupbridge)
         self.groupbridge = x_groupbridge
 
     def get_groupbridge(self) -> GroupBridge:
@@ -88,10 +85,7 @@ class PidginUnit:
         return self.groupbridge.del_otx2inx(otx_group_id)
 
     def set_acctbridge(self, x_acctbridge: AcctBridge):
-        self._check_attr_match("face_id", x_acctbridge)
-        self._check_attr_match("otx_wall", x_acctbridge)
-        self._check_attr_match("inx_wall", x_acctbridge)
-        self._check_attr_match("unknown_word", x_acctbridge)
+        self._check_all_core_attrs_match(x_acctbridge)
         self.acctbridge = x_acctbridge
 
     def get_acctbridge(self) -> AcctBridge:
@@ -110,10 +104,7 @@ class PidginUnit:
         return self.acctbridge.del_otx2inx(otx_acct_id)
 
     def set_roadbridge(self, x_roadbridge: RoadBridge):
-        self._check_attr_match("face_id", x_roadbridge)
-        self._check_attr_match("otx_wall", x_roadbridge)
-        self._check_attr_match("inx_wall", x_roadbridge)
-        self._check_attr_match("unknown_word", x_roadbridge)
+        self._check_all_core_attrs_match(x_roadbridge)
         self.roadbridge = x_roadbridge
 
     def get_roadbridge(self) -> RoadBridge:
@@ -132,10 +123,7 @@ class PidginUnit:
         return self.roadbridge.del_otx2inx(otx_road)
 
     def set_bridgeunit(self, x_bridgeunit: BridgeUnit):
-        self._check_attr_match("face_id", x_bridgeunit)
-        self._check_attr_match("otx_wall", x_bridgeunit)
-        self._check_attr_match("inx_wall", x_bridgeunit)
-        self._check_attr_match("unknown_word", x_bridgeunit)
+        self._check_all_core_attrs_match(x_bridgeunit)
 
         x_jaar_type = None
         if x_bridgeunit.jaar_type in {"RoadUnit", "RoadNode"}:
@@ -146,6 +134,12 @@ class PidginUnit:
             x_jaar_type = x_bridgeunit.jaar_type
 
         self.bridgeunits[x_jaar_type] = x_bridgeunit
+
+    def _check_all_core_attrs_match(self, x_bridgecore):
+        self._check_attr_match("face_id", x_bridgecore)
+        self._check_attr_match("otx_wall", x_bridgecore)
+        self._check_attr_match("inx_wall", x_bridgecore)
+        self._check_attr_match("unknown_word", x_bridgecore)
 
     def _check_attr_match(self, attr: str, bridgeunit: BridgeUnit):
         self_attr = getattr(self, attr)
