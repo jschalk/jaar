@@ -1,4 +1,37 @@
 {
+    "bridge_acct_id": {
+        "jkeys": {
+            "otx_acct_id": {}
+        },
+        "jvalues": {
+            "inx_acct_id": {},
+            "inx_wall": {},
+            "otx_wall": {},
+            "unknown_word": {}
+        }
+    },
+    "bridge_group_id": {
+        "jkeys": {
+            "otx_group_id": {}
+        },
+        "jvalues": {
+            "inx_group_id": {},
+            "inx_wall": {},
+            "otx_wall": {},
+            "unknown_word": {}
+        }
+    },
+    "bridge_node": {
+        "jkeys": {
+            "otx_node": {}
+        },
+        "jvalues": {
+            "inx_node": {},
+            "inx_wall": {},
+            "otx_wall": {},
+            "unknown_word": {}
+        }
+    },
     "bridge_nub_label": {
         "jkeys": {
             "jaar_type": {},
@@ -11,28 +44,6 @@
             "unknown_word": {}
         }
     },
-    "bridge_group_id": {
-        "jkeys": {
-            "otx_group_id": {}
-        },
-        "jvalues": {
-            "inx_wall": {},
-            "inx_group_id": {},
-            "otx_wall": {},
-            "unknown_word": {}
-        }
-    },
-    "bridge_acct_id": {
-        "jkeys": {
-            "otx_acct_id": {}
-        },
-        "jvalues": {
-            "inx_wall": {},
-            "inx_acct_id": {},
-            "otx_wall": {},
-            "unknown_word": {}
-        }
-    },
     "bridge_otx2inx": {
         "jkeys": {
             "jaar_type": {},
@@ -41,6 +52,17 @@
         "jvalues": {
             "inx_wall": {},
             "inx_word": {},
+            "otx_wall": {},
+            "unknown_word": {}
+        }
+    },
+    "bridge_road": {
+        "jkeys": {
+            "otx_road": {}
+        },
+        "jvalues": {
+            "inx_road": {},
+            "inx_wall": {},
             "otx_wall": {},
             "unknown_word": {}
         }

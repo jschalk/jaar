@@ -31,6 +31,38 @@
       "unknown_word": {}
     }
   },
+  "bridge_node": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "brick_type": "pidginunit",
+    "build_order": 3,
+    "jkeys": {
+      "event_id": {},
+      "face_id": {},
+      "otx_node": {}
+    },
+    "jvalues": {
+      "inx_node": {},
+      "inx_wall": {},
+      "otx_wall": {},
+      "unknown_word": {}
+    }
+  },
+  "bridge_road": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "brick_type": "pidginunit",
+    "build_order": 3,
+    "jkeys": {
+      "event_id": {},
+      "face_id": {},
+      "otx_road": {}
+    },
+    "jvalues": {
+      "inx_road": {},
+      "inx_wall": {},
+      "otx_wall": {},
+      "unknown_word": {}
+    }
+  },
   "bridge_nub_label": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
