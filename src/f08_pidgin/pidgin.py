@@ -1,3 +1,4 @@
+from src.f01_road.jaar_config import default_unknown_word
 from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
     get_empty_dict_if_none,
@@ -251,10 +252,6 @@ def bridgeunit_shop(
         nub_label=get_empty_dict_if_none(x_nub_label),
         face_id=x_face_id,
     )
-
-
-def default_unknown_word() -> str:
-    return "UNKNOWN"
 
 
 def get_bridgeunit_from_dict(x_dict: dict) -> BridgeUnit:

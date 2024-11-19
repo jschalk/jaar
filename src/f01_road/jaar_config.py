@@ -64,3 +64,7 @@ def get_descending_str() -> str:
 
 def default_river_blocks_count() -> int:
     return 40
+
+
+def default_unknown_word() -> str:
+    return "UNKNOWN"
