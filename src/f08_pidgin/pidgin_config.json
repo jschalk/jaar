@@ -11,6 +11,28 @@
             "unknown_word": {}
         }
     },
+    "bridge_group_id": {
+        "jkeys": {
+            "otx_group_id": {}
+        },
+        "jvalues": {
+            "inx_wall": {},
+            "inx_group_id": {},
+            "otx_wall": {},
+            "unknown_word": {}
+        }
+    },
+    "bridge_acct_id": {
+        "jkeys": {
+            "otx_acct_id": {}
+        },
+        "jvalues": {
+            "inx_wall": {},
+            "inx_acct_id": {},
+            "otx_wall": {},
+            "unknown_word": {}
+        }
+    },
     "bridge_otx2inx": {
         "jkeys": {
             "jaar_type": {},

@@ -18,6 +18,10 @@ from src.f08_pidgin.pidgin_config import (
     event_id_str,
     otx_wall_str,
     inx_wall_str,
+    inx_group_id_str,
+    otx_group_id_str,
+    inx_acct_id_str,
+    otx_acct_id_str,
     inx_word_str,
     otx_word_str,
     inx_label_str,
@@ -26,6 +30,8 @@ from src.f08_pidgin.pidgin_config import (
     nub_label_str,
     otx2inx_str,
     bridge_otx2inx_str,
+    bridge_acct_id_str,
+    bridge_group_id_str,
     bridge_nub_label_str,
 )
 from os import getcwd as os_getcwd
@@ -35,6 +41,10 @@ def test_str_functions_ReturnsObj():
     assert pidginunit_str() == "pidginunit"
     assert otx_wall_str() == "otx_wall"
     assert inx_wall_str() == "inx_wall"
+    assert inx_group_id_str() == "inx_group_id"
+    assert otx_group_id_str() == "otx_group_id"
+    assert inx_acct_id_str() == "inx_acct_id"
+    assert otx_acct_id_str() == "otx_acct_id"
     assert inx_word_str() == "inx_word"
     assert otx_word_str() == "otx_word"
     assert inx_label_str() == "inx_label"
@@ -42,6 +52,8 @@ def test_str_functions_ReturnsObj():
     assert unknown_word_str() == "unknown_word"
     assert nub_label_str() == "nub_label"
     assert otx2inx_str() == "otx2inx"
+    assert bridge_acct_id_str() == "bridge_acct_id"
+    assert bridge_group_id_str() == "bridge_group_id"
     assert bridge_otx2inx_str() == "bridge_otx2inx"
     assert bridge_nub_label_str() == "bridge_nub_label"
     assert event_id_str() == "event_id"
@@ -65,7 +77,7 @@ def test_get_pidgin_config_dict_ReturnsObj():
     pidgin_config_categorys = set(pidgin_config.keys())
     assert bridge_otx2inx_str() in pidgin_config_categorys
     assert bridge_nub_label_str() in pidgin_config_categorys
-    assert len(pidgin_config) == 2
+    assert len(pidgin_config) == 4
 
     _validate_pidgin_config(pidgin_config)
     bridge_otx2inx_dict = pidgin_config.get(bridge_otx2inx_str())
@@ -89,6 +101,10 @@ def _validate_pidgin_config(pidgin_config: dict):
         inx_wall_str(),
         otx_wall_str(),
         jaar_type_str(),
+        inx_group_id_str(),
+        otx_group_id_str(),
+        inx_acct_id_str(),
+        otx_acct_id_str(),
         inx_word_str(),
         otx_word_str(),
         inx_label_str(),
@@ -139,8 +155,8 @@ def test_get_pidgin_args_category_mapping_ReturnsObj():
     pidgin_id_categorys = x_pidgin_args_category_mapping.get(inx_wall_str())
     assert bridge_otx2inx_str() in pidgin_id_categorys
     assert bridge_nub_label_str() in pidgin_id_categorys
-    assert len(pidgin_id_categorys) == 2
-    assert len(x_pidgin_args_category_mapping) == 8
+    assert len(pidgin_id_categorys) == 4
+    assert len(x_pidgin_args_category_mapping) == 12
 
 
 def _get_all_pidgen_config_attrs() -> dict[str, set[str]]:
@@ -157,9 +173,9 @@ def _get_all_pidgen_config_attrs() -> dict[str, set[str]]:
 def test_get_quick_pidgens_column_ref_ReturnsObj():
     # ESTABLISH
     all_pidgen_config_attrs = _get_all_pidgen_config_attrs()
-    print(f"{all_pidgen_config_attrs=}")
+    # print(f"{all_pidgen_config_attrs=}")
 
     # WHEN / THEN
     assert bridge_otx2inx_str() in set(get_quick_pidgens_column_ref().keys())
-    assert len(get_quick_pidgens_column_ref().keys()) == 2
+    assert len(get_quick_pidgens_column_ref().keys()) == 4
     assert get_quick_pidgens_column_ref() == all_pidgen_config_attrs

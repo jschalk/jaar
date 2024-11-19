@@ -38,6 +38,22 @@ def inx_wall_str() -> str:
     return "inx_wall"
 
 
+def inx_group_id_str() -> str:
+    return "inx_group_id"
+
+
+def otx_group_id_str() -> str:
+    return "otx_group_id"
+
+
+def inx_acct_id_str() -> str:
+    return "inx_acct_id"
+
+
+def otx_acct_id_str() -> str:
+    return "otx_acct_id"
+
+
 def inx_word_str() -> str:
     return "inx_word"
 
@@ -68,6 +84,14 @@ def otx2inx_str() -> str:
 
 def bridge_otx2inx_str() -> str:
     return "bridge_otx2inx"
+
+
+def bridge_acct_id_str() -> str:
+    return "bridge_acct_id"
+
+
+def bridge_group_id_str() -> str:
+    return "bridge_group_id"
 
 
 def bridge_nub_label_str() -> str:
@@ -114,6 +138,20 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "inx_label",
             "otx_wall",
             "otx_label",
+        },
+        "bridge_group_id": {
+            "inx_group_id",
+            "unknown_word",
+            "inx_wall",
+            "otx_wall",
+            "otx_group_id",
+        },
+        "bridge_acct_id": {
+            "inx_acct_id",
+            "unknown_word",
+            "inx_wall",
+            "otx_wall",
+            "otx_acct_id",
         },
         "bridge_otx2inx": {
             "inx_word",
