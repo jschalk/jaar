@@ -1,13 +1,12 @@
 from src.f01_road.road import default_wall_if_none
 from src.f04_gift.atom_config import (
     get_atom_args_jaar_types,
-    road_str,
     type_AcctID_str,
     type_GroupID_str,
     type_RoadNode_str,
     type_RoadUnit_str,
 )
-from src.f08_pidgin.bridge_new import (
+from src.f08_pidgin.bridge import (
     groupbridge_shop,
     acctbridge_shop,
     nodebridge_shop,
@@ -16,18 +15,18 @@ from src.f08_pidgin.bridge_new import (
 from src.f08_pidgin.pidgin import (
     PidginUnit,
     pidginunit_shop,
-    bridgeunit_shop,
     default_unknown_word,
     pidginable_jaar_types,
     pidginable_atom_args,
 )
 from src.f08_pidgin.examples.example_pidgins import (
-    get_invalid_acctid_bridgeunit,
-    get_invalid_groupid_bridgeunit,
-    get_invalid_road_bridgeunit,
-    get_clean_roadunit_bridgeunit,
-    get_swim_groupid_bridgeunit,
-    get_suita_acctid_bridgeunit,
+    get_invalid_acctbridge,
+    get_invalid_groupbridge,
+    get_invalid_nodebridge,
+    get_clean_roadbridge,
+    get_clean_nodebridge,
+    get_swim_groupbridge,
+    get_suita_acctbridge,
 )
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -90,7 +89,6 @@ def test_PidginUnit_Exists():
 
     # WHEN / THEN
     assert not x_pidginunit.event_id
-    assert not x_pidginunit.bridgeunits
     assert not x_pidginunit.groupbridge
     assert not x_pidginunit.acctbridge
     assert not x_pidginunit.nodebridge
@@ -118,19 +116,15 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.acctbridge == acctbridge_shop(x_face_id=sue_str)
     assert sue_pidginunit.nodebridge == nodebridge_shop(x_face_id=sue_str)
     assert sue_pidginunit.roadbridge == roadbridge_shop(x_face_id=sue_str)
-
-    acctid_bridgeunit = sue_pidginunit.bridgeunits.get(type_AcctID_str())
-    assert acctid_bridgeunit.unknown_word == default_unknown_word()
-    assert acctid_bridgeunit.otx_wall == default_wall_if_none()
-    assert acctid_bridgeunit.inx_wall == default_wall_if_none()
-    groupid_bridgeunit = sue_pidginunit.bridgeunits.get(type_GroupID_str())
-    assert groupid_bridgeunit.unknown_word == default_unknown_word()
-    assert groupid_bridgeunit.otx_wall == default_wall_if_none()
-    assert groupid_bridgeunit.inx_wall == default_wall_if_none()
-    road_bridgeunit = sue_pidginunit.bridgeunits.get(road_str())
-    assert road_bridgeunit.unknown_word == default_unknown_word()
-    assert road_bridgeunit.otx_wall == default_wall_if_none()
-    assert road_bridgeunit.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.acctbridge.unknown_word == default_unknown_word()
+    assert sue_pidginunit.acctbridge.otx_wall == default_wall_if_none()
+    assert sue_pidginunit.acctbridge.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.groupbridge.unknown_word == default_unknown_word()
+    assert sue_pidginunit.groupbridge.otx_wall == default_wall_if_none()
+    assert sue_pidginunit.groupbridge.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.roadbridge.unknown_word == default_unknown_word()
+    assert sue_pidginunit.roadbridge.otx_wall == default_wall_if_none()
+    assert sue_pidginunit.roadbridge.inx_wall == default_wall_if_none()
 
 
 def test_pidginunit_shop_ReturnsObj_scenario1():
@@ -161,71 +155,52 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     assert sue_pidginunit.acctbridge == x_acctbridge
     assert sue_pidginunit.roadbridge == x_roadbridge
 
-    assert len(sue_pidginunit.bridgeunits) == 3
-    acctid_bridgeunit = sue_pidginunit.bridgeunits.get(type_AcctID_str())
-    assert acctid_bridgeunit.unknown_word == y_uk
-    assert acctid_bridgeunit.otx_wall == slash_otx_wall
-    assert acctid_bridgeunit.inx_wall == colon_inx_wall
-    assert acctid_bridgeunit.face_id == sue_str
-    groupid_bridgeunit = sue_pidginunit.bridgeunits.get(type_GroupID_str())
-    assert groupid_bridgeunit.unknown_word == y_uk
-    assert groupid_bridgeunit.otx_wall == slash_otx_wall
-    assert groupid_bridgeunit.inx_wall == colon_inx_wall
-    assert groupid_bridgeunit.face_id == sue_str
-    road_bridgeunit = sue_pidginunit.bridgeunits.get(road_str())
-    assert road_bridgeunit.unknown_word == y_uk
-    assert road_bridgeunit.otx_wall == slash_otx_wall
-    assert road_bridgeunit.inx_wall == colon_inx_wall
-    assert road_bridgeunit.face_id == sue_str
+    assert sue_pidginunit.acctbridge.unknown_word == y_uk
+    assert sue_pidginunit.acctbridge.otx_wall == slash_otx_wall
+    assert sue_pidginunit.acctbridge.inx_wall == colon_inx_wall
+    assert sue_pidginunit.acctbridge.face_id == sue_str
+    assert sue_pidginunit.groupbridge.unknown_word == y_uk
+    assert sue_pidginunit.groupbridge.otx_wall == slash_otx_wall
+    assert sue_pidginunit.groupbridge.inx_wall == colon_inx_wall
+    assert sue_pidginunit.groupbridge.face_id == sue_str
+    assert sue_pidginunit.nodebridge.unknown_word == y_uk
+    assert sue_pidginunit.nodebridge.otx_wall == slash_otx_wall
+    assert sue_pidginunit.nodebridge.inx_wall == colon_inx_wall
+    assert sue_pidginunit.nodebridge.face_id == sue_str
+    assert sue_pidginunit.roadbridge.unknown_word == y_uk
+    assert sue_pidginunit.roadbridge.otx_wall == slash_otx_wall
+    assert sue_pidginunit.roadbridge.inx_wall == colon_inx_wall
+    assert sue_pidginunit.roadbridge.face_id == sue_str
 
 
 def test_PidginUnit_set_bridgeunit_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), x_face_id=sue_str)
-    acct_id_bridgeunit.set_otx2inx("Bob", "Bob of Portland")
-    assert sue_pidginunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
+    acctbridge = acctbridge_shop(x_face_id=sue_str)
+    acctbridge.set_otx2inx("Bob", "Bob of Portland")
+    assert sue_pidginunit.acctbridge != acctbridge
 
     # WHEN
-    sue_pidginunit.set_bridgeunit(acct_id_bridgeunit)
+    sue_pidginunit.set_acctbridge(acctbridge)
 
     # THEN
-    assert sue_pidginunit.bridgeunits.get(type_AcctID_str()) == acct_id_bridgeunit
+    assert sue_pidginunit.acctbridge == acctbridge
 
 
 def test_PidginUnit_set_bridgeunit_SetsAttr_SpecialCase_RoadUnit():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    road_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), x_face_id=sue_str)
-    road_bridgeunit.set_otx2inx("Bob", "Bob of Portland")
-    assert sue_pidginunit.bridgeunits.get(road_str()) != road_bridgeunit
+    roadbridge = roadbridge_shop(x_face_id=sue_str)
+    roadbridge.set_otx2inx("Bob", "Bob of Portland")
+    assert sue_pidginunit.roadbridge != roadbridge
 
     # WHEN
-    sue_pidginunit.set_bridgeunit(road_bridgeunit)
+    sue_pidginunit.set_roadbridge(roadbridge)
 
     # THEN
-    assert sue_pidginunit.bridgeunits.get(road_str()) == road_bridgeunit
-
-
-def test_PidginUnit_set_bridgeunit_SetsAttr_SpecialCase_RoadNode():
-    # ESTABLISH
-    sue_str = "Sue"
-    sue_pidginunit = pidginunit_shop(sue_str)
-    roadnode_bridgeunit = bridgeunit_shop(type_RoadNode_str(), x_face_id=sue_str)
-    roadnode_bridgeunit.set_otx2inx("Bob", "Bob of Portland")
-    old_roadnode_bridgeunit = copy_deepcopy(roadnode_bridgeunit)
-    assert sue_pidginunit.bridgeunits.get(road_str()) != old_roadnode_bridgeunit
-
-    # WHEN
-    sue_pidginunit.set_bridgeunit(roadnode_bridgeunit)
-
-    # THEN
-    roadunit_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), x_face_id=sue_str)
-    roadunit_bridgeunit.set_otx2inx("Bob", "Bob of Portland")
-    assert sue_pidginunit.bridgeunits.get(road_str()) != old_roadnode_bridgeunit
-    assert sue_pidginunit.bridgeunits.get(road_str()) == roadunit_bridgeunit
+    assert sue_pidginunit.roadbridge == roadbridge
 
 
 def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_otx_wall_IsNotSame():
@@ -233,18 +208,14 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_otx_wall_IsNotSame()
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_otx_wall = "/"
-    acct_id_bridgeunit = bridgeunit_shop(
-        type_AcctID_str(),
-        x_otx_wall=slash_otx_wall,
-        x_face_id=sue_str,
-    )
-    assert sue_pidginunit.otx_wall != acct_id_bridgeunit.otx_wall
-    assert sue_pidginunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
+    acctbridge = acctbridge_shop(x_otx_wall=slash_otx_wall, x_face_id=sue_str)
+    assert sue_pidginunit.otx_wall != acctbridge.otx_wall
+    assert sue_pidginunit.acctbridge != acctbridge
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgecore Error: BridgeCore otx_wall is '{sue_pidginunit.otx_wall}', BridgeCore is '{slash_otx_wall}'."
+        sue_pidginunit.set_acctbridge(acctbridge)
+    exception_str = f"set_bridgecore Error: PidginUnit otx_wall is '{sue_pidginunit.otx_wall}', BridgeCore is '{slash_otx_wall}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -253,18 +224,14 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_inx_wall_IsNotSame()
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_inx_wall = "/"
-    acct_id_bridgeunit = bridgeunit_shop(
-        type_AcctID_str(),
-        x_inx_wall=slash_inx_wall,
-        x_face_id=sue_str,
-    )
-    assert sue_pidginunit.inx_wall != acct_id_bridgeunit.inx_wall
-    assert sue_pidginunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
+    acctbridge = acctbridge_shop(x_inx_wall=slash_inx_wall, x_face_id=sue_str)
+    assert sue_pidginunit.inx_wall != acctbridge.inx_wall
+    assert sue_pidginunit.acctbridge != acctbridge
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgecore Error: BridgeCore inx_wall is '{sue_pidginunit.inx_wall}', BridgeCore is '{slash_inx_wall}'."
+        sue_pidginunit.set_acctbridge(acctbridge)
+    exception_str = f"set_bridgecore Error: PidginUnit inx_wall is '{sue_pidginunit.inx_wall}', BridgeCore is '{slash_inx_wall}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -273,16 +240,14 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_unknown_word_IsNotSa
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
-    acct_id_bridgeunit = bridgeunit_shop(
-        type_AcctID_str(), x_unknown_word=casa_unknown_word, x_face_id=sue_str
-    )
-    assert sue_pidginunit.unknown_word != acct_id_bridgeunit.unknown_word
-    assert sue_pidginunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
+    acctbridge = acctbridge_shop(x_unknown_word=casa_unknown_word, x_face_id=sue_str)
+    assert sue_pidginunit.unknown_word != acctbridge.unknown_word
+    assert sue_pidginunit.acctbridge != acctbridge
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgecore Error: BridgeCore unknown_word is '{sue_pidginunit.unknown_word}', BridgeCore is '{casa_unknown_word}'."
+        sue_pidginunit.set_acctbridge(acctbridge)
+    exception_str = f"set_bridgecore Error: PidginUnit unknown_word is '{sue_pidginunit.unknown_word}', BridgeCore is '{casa_unknown_word}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -291,86 +256,75 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_face_id_IsNotSame():
     sue_str = "Sue"
     yao_str = "Yao"
     sue_pidginunit = pidginunit_shop(sue_str)
-    acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), x_face_id=yao_str)
-    assert sue_pidginunit.face_id != acct_id_bridgeunit.face_id
-    assert sue_pidginunit.bridgeunits.get(type_AcctID_str()) != acct_id_bridgeunit
+    acctbridge = acctbridge_shop(x_face_id=yao_str)
+    assert sue_pidginunit.face_id != acctbridge.face_id
+    assert sue_pidginunit.acctbridge != acctbridge
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_bridgeunit(acct_id_bridgeunit)
-    exception_str = f"set_bridgecore Error: BridgeCore face_id is '{sue_pidginunit.face_id}', BridgeCore is '{yao_str}'."
+        sue_pidginunit.set_acctbridge(acctbridge)
+    exception_str = f"set_bridgecore Error: PidginUnit face_id is '{sue_pidginunit.face_id}', BridgeCore is '{yao_str}'."
     assert str(excinfo.value) == exception_str
 
 
 def test_PidginUnit_get_bridgeunit_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    sue_pidginunit = pidginunit_shop(sue_str)
-    static_acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), x_face_id=sue_str)
-    static_acct_id_bridgeunit.set_otx2inx("Bob", "Bob of Portland")
-    sue_pidginunit.set_bridgeunit(static_acct_id_bridgeunit)
+    sue_pu = pidginunit_shop(sue_str)
+    static_acctbridge = acctbridge_shop(x_face_id=sue_str)
+    static_acctbridge.set_otx2inx("Bob", "Bob of Portland")
+    sue_pu.set_acctbridge(static_acctbridge)
 
-    # WHEN
-    gen_acct_id_bridgeunit = sue_pidginunit.get_bridgeunit(type_AcctID_str())
+    # WHEN / THEN
+    assert sue_pu.get_bridgeunit(type_AcctID_str()) == sue_pu.acctbridge
+    assert sue_pu.get_bridgeunit(type_GroupID_str()) == sue_pu.groupbridge
+    assert sue_pu.get_bridgeunit(type_RoadNode_str()) == sue_pu.nodebridge
+    assert sue_pu.get_bridgeunit(type_RoadUnit_str()) == sue_pu.roadbridge
 
-    # THEN
-    assert gen_acct_id_bridgeunit == static_acct_id_bridgeunit
-
-
-def test_PidginUnit_get_bridgeunit_ReturnsObj_SpecialCase_RoadUnit():
-    # ESTABLISH
-    sue_str = "Sue"
-    sue_pidginunit = pidginunit_shop(sue_str)
-    static_road_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), x_face_id=sue_str)
-    static_road_bridgeunit.set_otx2inx("Bob", "Bob of Portland")
-    sue_pidginunit.set_bridgeunit(static_road_bridgeunit)
-
-    # WHEN
-    gen_road_bridgeunit = sue_pidginunit.get_bridgeunit(type_RoadUnit_str())
-
-    # THEN
-    assert gen_road_bridgeunit == static_road_bridgeunit
+    assert sue_pu.get_bridgeunit(type_AcctID_str()) != sue_pu.roadbridge
+    assert sue_pu.get_bridgeunit(type_GroupID_str()) != sue_pu.roadbridge
+    assert sue_pu.get_bridgeunit(type_RoadNode_str()) != sue_pu.roadbridge
 
 
 def test_PidginUnit_is_valid_ReturnsObj():
     # ESTABLISH
-    invalid_acctid_bridgeunit = get_invalid_acctid_bridgeunit()
-    invalid_groupid_bridgeunit = get_invalid_groupid_bridgeunit()
-    invalid_road_bridgeunit = get_invalid_road_bridgeunit()
-    valid_acctid_bridgeunit = get_suita_acctid_bridgeunit()
-    valid_groupid_bridgeunit = get_swim_groupid_bridgeunit()
-    valid_road_bridgeunit = get_clean_roadunit_bridgeunit()
-    assert valid_acctid_bridgeunit.is_valid()
-    assert valid_groupid_bridgeunit.is_valid()
-    assert valid_road_bridgeunit.is_valid()
-    assert invalid_road_bridgeunit.is_valid() is False
-    assert invalid_groupid_bridgeunit.is_valid() is False
-    assert invalid_acctid_bridgeunit.is_valid() is False
+    invalid_acctbridge = get_invalid_acctbridge()
+    invalid_groupbridge = get_invalid_groupbridge()
+    invalid_nodebridge = get_invalid_nodebridge()
+    valid_acctbridge = get_suita_acctbridge()
+    valid_groupbridge = get_swim_groupbridge()
+    valid_nodebridge = get_clean_roadbridge()
+    assert valid_acctbridge.is_valid()
+    assert valid_groupbridge.is_valid()
+    assert valid_nodebridge.is_valid()
+    assert invalid_nodebridge.is_valid() is False
+    assert invalid_groupbridge.is_valid() is False
+    assert invalid_acctbridge.is_valid() is False
 
     # WHEN / THEN
     sue_pidginunit = pidginunit_shop("Sue")
     assert sue_pidginunit.is_valid()
-    sue_pidginunit.set_bridgeunit(valid_acctid_bridgeunit)
-    sue_pidginunit.set_bridgeunit(valid_groupid_bridgeunit)
-    sue_pidginunit.set_bridgeunit(valid_road_bridgeunit)
+    sue_pidginunit.set_acctbridge(valid_acctbridge)
+    sue_pidginunit.set_groupbridge(valid_groupbridge)
+    sue_pidginunit.set_roadbridge(valid_nodebridge)
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
-    sue_pidginunit.set_bridgeunit(invalid_acctid_bridgeunit)
+    sue_pidginunit.set_acctbridge(invalid_acctbridge)
     assert sue_pidginunit.is_valid() is False
-    sue_pidginunit.set_bridgeunit(valid_acctid_bridgeunit)
+    sue_pidginunit.set_acctbridge(valid_acctbridge)
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
-    sue_pidginunit.set_bridgeunit(invalid_groupid_bridgeunit)
+    sue_pidginunit.set_groupbridge(invalid_groupbridge)
     assert sue_pidginunit.is_valid() is False
-    sue_pidginunit.set_bridgeunit(valid_groupid_bridgeunit)
+    sue_pidginunit.set_groupbridge(valid_groupbridge)
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
-    sue_pidginunit.set_bridgeunit(invalid_road_bridgeunit)
+    sue_pidginunit.set_roadbridge(invalid_nodebridge)
     assert sue_pidginunit.is_valid() is False
-    sue_pidginunit.set_bridgeunit(valid_road_bridgeunit)
+    sue_pidginunit.set_roadbridge(valid_nodebridge)
     assert sue_pidginunit.is_valid()
 
 
@@ -380,14 +334,14 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_type_AcctID_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    acctid_bridgeunit = zia_pidginunit.get_bridgeunit(type_AcctID_str())
-    assert acctid_bridgeunit.otx2inx_exists(sue_otx, sue_inx) is False
+    acctbridge = zia_pidginunit.get_acctbridge()
+    assert acctbridge.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert acctid_bridgeunit.otx2inx_exists(sue_otx, sue_inx)
+    assert acctbridge.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_type_RoadUnit_str():
@@ -396,14 +350,14 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_type_RoadUnit_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    road_bridgeunit = zia_pidginunit.get_bridgeunit(type_RoadUnit_str())
-    assert road_bridgeunit.otx2inx_exists(sue_otx, sue_inx) is False
+    roadbridge = zia_pidginunit.get_roadbridge()
+    assert roadbridge.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_otx2inx(type_RoadUnit_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgeunit.otx2inx_exists(sue_otx, sue_inx)
+    assert roadbridge.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_set_otx2inx_SetsAttr_Scenario2_type_RoadNode_str():
@@ -412,14 +366,14 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario2_type_RoadNode_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    road_bridgeunit = zia_pidginunit.get_bridgeunit(type_RoadNode_str())
-    assert road_bridgeunit.otx2inx_exists(sue_otx, sue_inx) is False
+    roadbridge = zia_pidginunit.get_nodebridge()
+    assert roadbridge.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_otx2inx(type_RoadNode_str(), sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgeunit.otx2inx_exists(sue_otx, sue_inx)
+    assert roadbridge.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_otx2inx_exists_ReturnsObj():
@@ -473,52 +427,20 @@ def test_PidginUnit_del_otx2inx_ReturnsObj():
     assert zia_pidginunit.otx2inx_exists(road_type, zia_str, zia_str)
 
 
-def test_PidginUnit_set_nub_label_SetsAttr_Scenario0_type_AcctID_str():
-    # ESTABLISH
-    zia_str = "Zia"
-    sue_otx = "Sue"
-    sue_inx = "Suita"
-    zia_pidginunit = pidginunit_shop(zia_str)
-    acctid_bridgeunit = zia_pidginunit.get_bridgeunit(type_AcctID_str())
-    assert acctid_bridgeunit.nub_label_exists(sue_otx, sue_inx) is False
-
-    # WHEN
-    zia_pidginunit.set_nub_label(type_AcctID_str(), sue_otx, sue_inx)
-
-    # THEN
-    assert acctid_bridgeunit.nub_label_exists(sue_otx, sue_inx)
-
-
 def test_PidginUnit_set_nub_label_SetsAttr_Scenario1_type_RoadUnit_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    road_bridgeunit = zia_pidginunit.get_bridgeunit(type_RoadUnit_str())
-    assert road_bridgeunit.nub_label_exists(sue_otx, sue_inx) is False
+    roadbridge = zia_pidginunit.get_roadbridge()
+    assert roadbridge.nub_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_nub_label(type_RoadUnit_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_nub_label(sue_otx, sue_inx)
 
     # THEN
-    assert road_bridgeunit.nub_label_exists(sue_otx, sue_inx)
-
-
-def test_PidginUnit_set_nub_label_SetsAttr_Scenario2_type_RoadNode_str():
-    # ESTABLISH
-    zia_str = "Zia"
-    sue_otx = "Sue"
-    sue_inx = "Suita"
-    zia_pidginunit = pidginunit_shop(zia_str)
-    road_bridgeunit = zia_pidginunit.get_bridgeunit(type_RoadNode_str())
-    assert road_bridgeunit.nub_label_exists(sue_otx, sue_inx) is False
-
-    # WHEN
-    zia_pidginunit.set_nub_label(type_RoadNode_str(), sue_otx, sue_inx)
-
-    # THEN
-    assert road_bridgeunit.nub_label_exists(sue_otx, sue_inx)
+    assert roadbridge.nub_label_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_nub_label_exists_ReturnsObj():
@@ -527,15 +449,14 @@ def test_PidginUnit_nub_label_exists_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    road_type = type_RoadNode_str()
-    sue_exists = zia_pidginunit.nub_label_exists(road_type, sue_otx, sue_inx)
+    sue_exists = zia_pidginunit.nub_label_exists(sue_otx, sue_inx)
     assert sue_exists is False
 
     # WHEN
-    zia_pidginunit.set_nub_label(type_RoadNode_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_nub_label(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit.nub_label_exists(road_type, sue_otx, sue_inx)
+    assert zia_pidginunit.nub_label_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_get_nub_inx_label_ReturnsObj():
@@ -544,13 +465,13 @@ def test_PidginUnit_get_nub_inx_label_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_nub_inx_label(type_AcctID_str(), sue_otx) != sue_inx
+    assert zia_pidginunit._get_nub_inx_label(sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_nub_label(type_AcctID_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_nub_label(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit._get_nub_inx_label(type_AcctID_str(), sue_otx) == sue_inx
+    assert zia_pidginunit._get_nub_inx_label(sue_otx) == sue_inx
 
 
 def test_PidginUnit_del_nub_label_ReturnsObj():
@@ -559,16 +480,15 @@ def test_PidginUnit_del_nub_label_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    road_type = type_RoadNode_str()
-    zia_pidginunit.set_nub_label(type_RoadNode_str(), sue_otx, sue_inx)
-    zia_pidginunit.set_nub_label(type_RoadNode_str(), zia_str, zia_str)
-    assert zia_pidginunit.nub_label_exists(road_type, sue_otx, sue_inx)
-    assert zia_pidginunit.nub_label_exists(road_type, zia_str, zia_str)
+    zia_pidginunit.set_nub_label(sue_otx, sue_inx)
+    zia_pidginunit.set_nub_label(zia_str, zia_str)
+    assert zia_pidginunit.nub_label_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.nub_label_exists(zia_str, zia_str)
 
     # WHEN
-    zia_pidginunit.del_nub_label(road_type, sue_otx)
+    zia_pidginunit.del_nub_label(sue_otx)
 
     # THEN
-    sue_exists = zia_pidginunit.nub_label_exists(road_type, sue_otx, sue_inx)
+    sue_exists = zia_pidginunit.nub_label_exists(sue_otx, sue_inx)
     assert sue_exists is False
-    assert zia_pidginunit.nub_label_exists(road_type, zia_str, zia_str)
+    assert zia_pidginunit.nub_label_exists(zia_str, zia_str)

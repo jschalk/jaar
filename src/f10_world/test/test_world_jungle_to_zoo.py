@@ -2,7 +2,6 @@ from src.f00_instrument.file import create_path, create_dir
 from src.f04_gift.atom_config import (
     face_id_str,
     fiscal_id_str,
-    jaar_type_str,
     acct_id_str,
     owner_id_str,
 )
@@ -16,8 +15,8 @@ from src.f08_pidgin.pidgin_config import (
     event_id_str,
     inx_wall_str,
     otx_wall_str,
-    inx_word_str,
-    otx_word_str,
+    inx_acct_id_str,
+    otx_acct_id_str,
     unknown_word_str,
     inx_label_str,
     otx_label_str,
@@ -611,14 +610,17 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
     # THEN
     print(f"need examples for {pidgen_brick_filenames=}")
     assert pidgen_brick_filenames == {
-        "br00040.xlsx",
         "br00041.xlsx",
+        "br00042.xlsx",
+        "br00043.xlsx",
+        "br00044.xlsx",
+        "br00045.xlsx",
         "br00113.xlsx",
         "br00114.xlsx",
     }
 
 
-def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario0_SingleBrick(
+def test_WorldUnit_zoo_agg_to_appt_staging_CreatesFile_Scenario0_SingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -630,7 +632,6 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario0_SingleBrick(
     bob_inx = "Bobito"
     m_str = "music23"
     event7 = 7
-    acctid_str = "AcctID"
     br00113_file_path = create_path(fizz_world._zoo_dir, "br00113.xlsx")
     br00113_columns = [
         face_id_str(),
@@ -638,12 +639,11 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario0_SingleBrick(
         fiscal_id_str(),
         owner_id_str(),
         acct_id_str(),
-        jaar_type_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_acct_id_str(),
+        inx_acct_id_str(),
     ]
-    sue0 = [sue_str, event7, m_str, bob_str, yao_str, acctid_str, yao_str, yao_inx]
-    sue1 = [sue_str, event7, m_str, bob_str, bob_str, acctid_str, bob_str, bob_inx]
+    sue0 = [sue_str, event7, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
     b113_rows = [sue0, sue1]
     br00113_df = DataFrame(b113_rows, columns=br00113_columns)
     with ExcelWriter(br00113_file_path) as writer:
@@ -656,38 +656,37 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario0_SingleBrick(
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.zoo_agg_to_otx2inx_staging()
+    fizz_world.zoo_agg_to_appt_staging()
 
     # THEN
     assert os_path_exists(pidgin_path)
-    otx2inx_staging_str = "otx2inx_staging"
-    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=otx2inx_staging_str)
-    otx2inx_file_columns = [
+    appt_staging_str = "appt_staging"
+    gen_appt_df = pandas_read_excel(pidgin_path, sheet_name=appt_staging_str)
+    appt_file_columns = [
         "src_brick",
         face_id_str(),
         event_id_str(),
-        jaar_type_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_acct_id_str(),
+        inx_acct_id_str(),
         otx_wall_str(),
         inx_wall_str(),
         unknown_word_str(),
     ]
-    assert list(gen_otx2inx_df.columns) == otx2inx_file_columns
-    assert len(gen_otx2inx_df) == 2
+    assert list(gen_appt_df.columns) == appt_file_columns
+    assert len(gen_appt_df) == 2
     bx = "br00113"
-    e1_otx2inx0 = [bx, sue_str, event7, acctid_str, yao_str, yao_inx, None, None, None]
-    e1_otx2inx1 = [bx, sue_str, event7, acctid_str, bob_str, bob_inx, None, None, None]
-    e1_otx2inx_rows = [e1_otx2inx0, e1_otx2inx1]
-    e1_otx2inx_df = DataFrame(e1_otx2inx_rows, columns=otx2inx_file_columns)
-    assert len(gen_otx2inx_df) == len(e1_otx2inx_df)
-    print(f"{gen_otx2inx_df.to_csv()=}")
-    print(f" {e1_otx2inx_df.to_csv()=}")
-    assert gen_otx2inx_df.to_csv(index=False) == e1_otx2inx_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [otx2inx_staging_str]
+    e1_appt0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
+    e1_appt1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
+    e1_appt_rows = [e1_appt0, e1_appt1]
+    e1_appt_df = DataFrame(e1_appt_rows, columns=appt_file_columns)
+    assert len(gen_appt_df) == len(e1_appt_df)
+    print(f"{gen_appt_df.to_csv()=}")
+    print(f" {e1_appt_df.to_csv()=}")
+    assert gen_appt_df.to_csv(index=False) == e1_appt_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [appt_staging_str]
 
 
-def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario1_MultipleBricksFiles(
+def test_WorldUnit_zoo_agg_to_appt_staging_CreatesFile_Scenario1_MultipleBricksFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -704,7 +703,6 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario1_MultipleBric
     event2 = 2
     event5 = 5
     event7 = 7
-    acctid_str = "AcctID"
     br00113_file_path = create_path(fizz_world._zoo_dir, "br00113.xlsx")
     br00113_columns = [
         face_id_str(),
@@ -712,34 +710,32 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario1_MultipleBric
         fiscal_id_str(),
         owner_id_str(),
         acct_id_str(),
-        jaar_type_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_acct_id_str(),
+        inx_acct_id_str(),
     ]
-    br00040_file_path = create_path(fizz_world._zoo_dir, "br00040.xlsx")
-    br00040_columns = [
+    br00043_file_path = create_path(fizz_world._zoo_dir, "br00043.xlsx")
+    br00043_columns = [
         face_id_str(),
         event_id_str(),
-        jaar_type_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_acct_id_str(),
+        inx_acct_id_str(),
         otx_wall_str(),
         inx_wall_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, acctid_str, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, acctid_str, bob_str, bob_inx]
-    sue2 = [sue_str, event2, acctid_str, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, acctid_str, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event7, acctid_str, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
     b113_rows = [sue0, sue1]
     br00113_df = DataFrame(b113_rows, columns=br00113_columns)
     with ExcelWriter(br00113_file_path) as writer:
         br00113_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     b40_rows = [sue2, sue3, yao1]
-    br00040_df = DataFrame(b40_rows, columns=br00040_columns)
-    with ExcelWriter(br00040_file_path) as writer:
-        br00040_df.to_excel(writer, sheet_name="zoo_agg", index=False)
+    br00043_df = DataFrame(b40_rows, columns=br00043_columns)
+    with ExcelWriter(br00043_file_path) as writer:
+        br00043_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     fizz_world.zoo_agg_to_zoo_events()
     fizz_world.zoo_events_to_events_log()
@@ -748,43 +744,42 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario1_MultipleBric
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.zoo_agg_to_otx2inx_staging()
+    fizz_world.zoo_agg_to_appt_staging()
 
     # THEN
     assert os_path_exists(pidgin_path)
-    otx2inx_staging_str = "otx2inx_staging"
-    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=otx2inx_staging_str)
-    otx2inx_file_columns = [
+    appt_staging_str = "appt_staging"
+    gen_appt_df = pandas_read_excel(pidgin_path, sheet_name=appt_staging_str)
+    appt_file_columns = [
         "src_brick",
         face_id_str(),
         event_id_str(),
-        jaar_type_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_acct_id_str(),
+        inx_acct_id_str(),
         otx_wall_str(),
         inx_wall_str(),
         unknown_word_str(),
     ]
-    assert list(gen_otx2inx_df.columns) == otx2inx_file_columns
-    assert len(gen_otx2inx_df) == 5
+    assert list(gen_appt_df.columns) == appt_file_columns
+    assert len(gen_appt_df) == 5
     b3 = "br00113"
-    b4 = "br00040"
-    e1_otx2inx3 = [b4, sue_str, event2, acctid_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_otx2inx4 = [b4, sue_str, event5, acctid_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_otx2inx5 = [b4, yao_str, event7, acctid_str, yao_str, yao_inx, rdx, rdx, ukx]
-    e1_otx2inx0 = [b3, sue_str, event1, acctid_str, yao_str, yao_inx, None, None, None]
-    e1_otx2inx1 = [b3, sue_str, event1, acctid_str, bob_str, bob_inx, None, None, None]
+    b4 = "br00043"
+    e1_appt3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+    e1_appt4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_appt5 = [b4, yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
+    e1_appt0 = [b3, sue_str, event1, yao_str, yao_inx, None, None, None]
+    e1_appt1 = [b3, sue_str, event1, bob_str, bob_inx, None, None, None]
 
-    e1_otx2inx_rows = [e1_otx2inx3, e1_otx2inx4, e1_otx2inx5, e1_otx2inx0, e1_otx2inx1]
-    e1_otx2inx_df = DataFrame(e1_otx2inx_rows, columns=otx2inx_file_columns)
-    assert len(gen_otx2inx_df) == len(e1_otx2inx_df)
-    print(f"{gen_otx2inx_df.to_csv()=}")
-    print(f" {e1_otx2inx_df.to_csv()=}")
-    assert gen_otx2inx_df.to_csv(index=False) == e1_otx2inx_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [otx2inx_staging_str]
+    e1_appt_rows = [e1_appt3, e1_appt4, e1_appt5, e1_appt0, e1_appt1]
+    e1_appt_df = DataFrame(e1_appt_rows, columns=appt_file_columns)
+    assert len(gen_appt_df) == len(e1_appt_df)
+    print(f"{gen_appt_df.to_csv()=}")
+    print(f" {e1_appt_df.to_csv()=}")
+    assert gen_appt_df.to_csv(index=False) == e1_appt_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [appt_staging_str]
 
 
-def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_WorldUnit_zoo_agg_to_appt_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -800,7 +795,6 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario2_WorldUnit_ev
     event1 = 1
     event2 = 2
     event5 = 5
-    acctid_str = "AcctID"
     br00113_file_path = create_path(fizz_world._zoo_dir, "br00113.xlsx")
     br00113_columns = [
         face_id_str(),
@@ -808,34 +802,32 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario2_WorldUnit_ev
         fiscal_id_str(),
         owner_id_str(),
         acct_id_str(),
-        jaar_type_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_acct_id_str(),
+        inx_acct_id_str(),
     ]
-    br00040_file_path = create_path(fizz_world._zoo_dir, "br00040.xlsx")
-    br00040_columns = [
+    br00043_file_path = create_path(fizz_world._zoo_dir, "br00043.xlsx")
+    br00043_columns = [
         face_id_str(),
         event_id_str(),
-        jaar_type_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_acct_id_str(),
+        inx_acct_id_str(),
         otx_wall_str(),
         inx_wall_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, acctid_str, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, acctid_str, bob_str, bob_inx]
-    sue2 = [sue_str, event2, acctid_str, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, acctid_str, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event1, acctid_str, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     b113_rows = [sue0, sue1]
     br00113_df = DataFrame(b113_rows, columns=br00113_columns)
     with ExcelWriter(br00113_file_path) as writer:
         br00113_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     b40_rows = [sue2, sue3, yao1]
-    br00040_df = DataFrame(b40_rows, columns=br00040_columns)
-    with ExcelWriter(br00040_file_path) as writer:
-        br00040_df.to_excel(writer, sheet_name="zoo_agg", index=False)
+    br00043_df = DataFrame(b40_rows, columns=br00043_columns)
+    with ExcelWriter(br00043_file_path) as writer:
+        br00043_df.to_excel(writer, sheet_name="zoo_agg", index=False)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     assert fizz_world.events == {}
     fizz_world.zoo_agg_to_zoo_events()
@@ -846,36 +838,35 @@ def test_WorldUnit_zoo_agg_to_otx2inx_staging_CreatesFile_Scenario2_WorldUnit_ev
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.zoo_agg_to_otx2inx_staging()
+    fizz_world.zoo_agg_to_appt_staging()
 
     # THEN
     assert os_path_exists(pidgin_path)
-    otx2inx_staging_str = "otx2inx_staging"
-    gen_otx2inx_df = pandas_read_excel(pidgin_path, sheet_name=otx2inx_staging_str)
-    otx2inx_file_columns = [
+    appt_staging_str = "appt_staging"
+    gen_appt_df = pandas_read_excel(pidgin_path, sheet_name=appt_staging_str)
+    appt_file_columns = [
         "src_brick",
         face_id_str(),
         event_id_str(),
-        jaar_type_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_acct_id_str(),
+        inx_acct_id_str(),
         otx_wall_str(),
         inx_wall_str(),
         unknown_word_str(),
     ]
-    assert list(gen_otx2inx_df.columns) == otx2inx_file_columns
-    assert len(gen_otx2inx_df) == 2
+    assert list(gen_appt_df.columns) == appt_file_columns
+    assert len(gen_appt_df) == 2
     b3 = "br00113"
-    b4 = "br00040"
-    e1_otx2inx3 = [b4, sue_str, event2, acctid_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_otx2inx4 = [b4, sue_str, event5, acctid_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_otx2inx_rows = [e1_otx2inx3, e1_otx2inx4]
-    e1_otx2inx_df = DataFrame(e1_otx2inx_rows, columns=otx2inx_file_columns)
-    assert len(gen_otx2inx_df) == len(e1_otx2inx_df)
-    print(f"{gen_otx2inx_df.to_csv()=}")
-    print(f" {e1_otx2inx_df.to_csv()=}")
-    assert gen_otx2inx_df.to_csv(index=False) == e1_otx2inx_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [otx2inx_staging_str]
+    b4 = "br00043"
+    e1_appt3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+    e1_appt4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_appt_rows = [e1_appt3, e1_appt4]
+    e1_appt_df = DataFrame(e1_appt_rows, columns=appt_file_columns)
+    assert len(gen_appt_df) == len(e1_appt_df)
+    print(f"{gen_appt_df.to_csv()=}")
+    print(f" {e1_appt_df.to_csv()=}")
+    assert gen_appt_df.to_csv(index=False) == e1_appt_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [appt_staging_str]
 
 
 def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario0_SingleBrick(
@@ -890,7 +881,6 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario0_SingleBrick(
     bob_inx = "Bobito"
     m_str = "music23"
     event7 = 7
-    roadnode = "RoadNode"
     br00114_file_path = create_path(fizz_world._zoo_dir, "br00114.xlsx")
     br00114_columns = [
         face_id_str(),
@@ -898,12 +888,11 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario0_SingleBrick(
         fiscal_id_str(),
         owner_id_str(),
         acct_id_str(),
-        jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
     ]
-    sue0 = [sue_str, event7, m_str, bob_str, yao_str, roadnode, yao_str, yao_inx]
-    sue1 = [sue_str, event7, m_str, bob_str, bob_str, roadnode, bob_str, bob_inx]
+    sue0 = [sue_str, event7, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
     b114_rows = [sue0, sue1]
     br00114_df = DataFrame(b114_rows, columns=br00114_columns)
     with ExcelWriter(br00114_file_path) as writer:
@@ -926,7 +915,6 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario0_SingleBrick(
         "src_brick",
         face_id_str(),
         event_id_str(),
-        jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
         otx_wall_str(),
@@ -936,8 +924,8 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario0_SingleBrick(
     assert list(gen_nub_df.columns) == nub_file_columns
     assert len(gen_nub_df) == 2
     bx = "br00114"
-    e1_nub0 = [bx, sue_str, event7, roadnode, yao_str, yao_inx, None, None, None]
-    e1_nub1 = [bx, sue_str, event7, roadnode, bob_str, bob_inx, None, None, None]
+    e1_nub0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
+    e1_nub1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
     e1_nub_rows = [e1_nub0, e1_nub1]
     e1_nub_df = DataFrame(e1_nub_rows, columns=nub_file_columns)
     assert len(gen_nub_df) == len(e1_nub_df)
@@ -964,7 +952,6 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario1_MultipleBricksFi
     event2 = 2
     event5 = 5
     event7 = 7
-    roadnode = "RoadNode"
     br00114_file_path = create_path(fizz_world._zoo_dir, "br00114.xlsx")
     br00114_columns = [
         face_id_str(),
@@ -972,7 +959,6 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario1_MultipleBricksFi
         fiscal_id_str(),
         owner_id_str(),
         acct_id_str(),
-        jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
     ]
@@ -980,18 +966,17 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario1_MultipleBricksFi
     br00041_columns = [
         face_id_str(),
         event_id_str(),
-        jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
         otx_wall_str(),
         inx_wall_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, roadnode, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, roadnode, bob_str, bob_inx]
-    sue2 = [sue_str, event2, roadnode, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, roadnode, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event7, roadnode, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
     b114_rows = [sue0, sue1]
     br00114_df = DataFrame(b114_rows, columns=br00114_columns)
     with ExcelWriter(br00114_file_path) as writer:
@@ -1018,7 +1003,6 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario1_MultipleBricksFi
         "src_brick",
         face_id_str(),
         event_id_str(),
-        jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
         otx_wall_str(),
@@ -1029,11 +1013,11 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario1_MultipleBricksFi
     assert len(gen_nub_df) == 5
     b3 = "br00114"
     b4 = "br00041"
-    e1_nub3 = [b4, sue_str, event2, roadnode, sue_str, sue_str, rdx, rdx, ukx]
-    e1_nub4 = [b4, sue_str, event5, roadnode, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_nub5 = [b4, yao_str, event7, roadnode, yao_str, yao_inx, rdx, rdx, ukx]
-    e1_nub0 = [b3, sue_str, event1, roadnode, yao_str, yao_inx, None, None, None]
-    e1_nub1 = [b3, sue_str, event1, roadnode, bob_str, bob_inx, None, None, None]
+    e1_nub3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+    e1_nub4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_nub5 = [b4, yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
+    e1_nub0 = [b3, sue_str, event1, yao_str, yao_inx, None, None, None]
+    e1_nub1 = [b3, sue_str, event1, bob_str, bob_inx, None, None, None]
 
     e1_nub_rows = [e1_nub3, e1_nub4, e1_nub5, e1_nub0, e1_nub1]
     e1_nub_df = DataFrame(e1_nub_rows, columns=nub_file_columns)
@@ -1060,7 +1044,6 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
     event1 = 1
     event2 = 2
     event5 = 5
-    roadnode = "RoadNode"
     br00114_file_path = create_path(fizz_world._zoo_dir, "br00114.xlsx")
     br00114_columns = [
         face_id_str(),
@@ -1068,7 +1051,6 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
         fiscal_id_str(),
         owner_id_str(),
         acct_id_str(),
-        jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
     ]
@@ -1076,18 +1058,17 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
     br00041_columns = [
         face_id_str(),
         event_id_str(),
-        jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
         otx_wall_str(),
         inx_wall_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, roadnode, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, roadnode, bob_str, bob_inx]
-    sue2 = [sue_str, event2, roadnode, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, roadnode, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event1, roadnode, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     b114_rows = [sue0, sue1]
     br00114_df = DataFrame(b114_rows, columns=br00114_columns)
     with ExcelWriter(br00114_file_path) as writer:
@@ -1116,7 +1097,6 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
         "src_brick",
         face_id_str(),
         event_id_str(),
-        jaar_type_str(),
         otx_label_str(),
         inx_label_str(),
         otx_wall_str(),
@@ -1127,8 +1107,8 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
     assert len(gen_nub_df) == 2
     b3 = "br00114"
     b4 = "br00041"
-    e1_nub3 = [b4, sue_str, event2, roadnode, sue_str, sue_str, rdx, rdx, ukx]
-    e1_nub4 = [b4, sue_str, event5, roadnode, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_nub3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+    e1_nub4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
     e1_nub_rows = [e1_nub3, e1_nub4]
     e1_nub_df = DataFrame(e1_nub_rows, columns=nub_file_columns)
     assert len(gen_nub_df) == len(e1_nub_df)
@@ -1154,13 +1134,11 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
 #     event2 = 2
 #     event5 = 5
 #     event7 = 7
-#     roadnode = "RoadNode"
 #     # THEN
 #     nub_file_columns = [
 #         "src_brick",
 #         face_id_str(),
 #         event_id_str(),
-#         jaar_type_str(),
 #         otx_label_str(),
 #         inx_label_str(),
 #         otx_wall_str(),
@@ -1169,11 +1147,11 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
 #     ]
 #     b3 = "br00114"
 #     b4 = "br00041"
-#     e1_nub3 = [b4, sue_str, event2, roadnode, sue_str, sue_str, rdx, rdx, ukx]
-#     e1_nub4 = [b4, sue_str, event5, roadnode, bob_str, bob_inx, rdx, rdx, ukx]
-#     e1_nub5 = [b4, yao_str, event7, roadnode, yao_str, yao_inx, rdx, rdx, ukx]
-#     e1_nub0 = [b3, sue_str, event1, roadnode, yao_str, yao_inx, None, None, None]
-#     e1_nub1 = [b3, sue_str, event1, roadnode, bob_str, bob_inx, None, None, None]
+#     e1_nub3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+#     e1_nub4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+#     e1_nub5 = [b4, yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
+#     e1_nub0 = [b3, sue_str, event1, yao_str, yao_inx, None, None, None]
+#     e1_nub1 = [b3, sue_str, event1, bob_str, bob_inx, None, None, None]
 #     e1_nub_rows = [e1_nub3, e1_nub4, e1_nub5, e1_nub0, e1_nub1]
 #     e1_nub_df = DataFrame(e1_nub_rows, columns=nub_file_columns)
 #     print(f" {e1_nub_df.to_csv()=}")

@@ -1,4 +1,4 @@
-from src.f08_pidgin.bridge_new import (
+from src.f08_pidgin.bridge import (
     NodeBridge,
     nodebridge_shop,
     get_nodebridge_from_dict,

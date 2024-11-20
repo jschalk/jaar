@@ -34,24 +34,11 @@
     },
     "bridge_nub_label": {
         "jkeys": {
-            "jaar_type": {},
             "otx_label": {}
         },
         "jvalues": {
             "inx_label": {},
             "inx_wall": {},
-            "otx_wall": {},
-            "unknown_word": {}
-        }
-    },
-    "bridge_otx2inx": {
-        "jkeys": {
-            "jaar_type": {},
-            "otx_word": {}
-        },
-        "jvalues": {
-            "inx_wall": {},
-            "inx_word": {},
             "otx_wall": {},
             "unknown_word": {}
         }

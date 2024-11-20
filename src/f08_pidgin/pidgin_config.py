@@ -70,14 +70,6 @@ def otx_road_str() -> str:
     return "otx_road"
 
 
-def inx_word_str() -> str:
-    return "inx_word"
-
-
-def otx_word_str() -> str:
-    return "otx_word"
-
-
 def inx_label_str() -> str:
     return "inx_label"
 
@@ -156,7 +148,6 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     """for each pidgin_config category contains the associated columns"""
     return {
         "bridge_nub_label": {
-            "jaar_type",
             "unknown_word",
             "inx_wall",
             "inx_label",
@@ -190,13 +181,5 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "inx_wall",
             "otx_wall",
             "otx_road",
-        },
-        "bridge_otx2inx": {
-            "inx_word",
-            "jaar_type",
-            "unknown_word",
-            "inx_wall",
-            "otx_wall",
-            "otx_word",
         },
     }

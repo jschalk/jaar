@@ -1,6 +1,6 @@
 from src.f01_road.road import default_wall_if_none
 from src.f04_gift.atom_config import road_str, type_AcctID_str, type_GroupID_str
-from src.f08_pidgin.bridge_new import acctbridge_shop, groupbridge_shop, roadbridge_shop
+from src.f08_pidgin.bridge import acctbridge_shop, groupbridge_shop, roadbridge_shop
 from src.f08_pidgin.pidgin import (
     pidginunit_shop,
     default_unknown_word,
@@ -8,15 +8,14 @@ from src.f08_pidgin.pidgin import (
     get_pidginunit_from_json,
 )
 from src.f08_pidgin.examples.example_pidgins import (
-    get_clean_roadunit_bridgeunit,
-    get_swim_groupid_bridgeunit,
-    get_suita_acctid_bridgeunit,
-    get_slash_roadunit_bridgeunit,
-    get_slash_groupid_bridgeunit,
-    get_slash_acctid_bridgeunit,
+    get_clean_roadbridge,
+    get_clean_nodebridge,
+    get_swim_groupbridge,
     get_slash_acctbridge,
-    get_slash_roadbridge,
     get_slash_groupbridge,
+    get_slash_nodebridge,
+    get_slash_roadbridge,
+    get_suita_acctbridge,
 )
 
 
@@ -35,22 +34,9 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     assert sue_dict.get("otx_wall") == default_wall_if_none()
     assert sue_dict.get("inx_wall") == default_wall_if_none()
     assert sue_dict.get("unknown_word") == default_unknown_word()
-    assert sue_dict.get("bridgeunits")
-    x_bridgeunits = sue_dict.get("bridgeunits")
-    assert len(x_bridgeunits) == 3
-    assert set(x_bridgeunits.keys()) == {
-        type_AcctID_str(),
-        type_GroupID_str(),
-        road_str(),
-    }
-    acct_id_bridgeunit = sue_pidginunit.get_bridgeunit(type_AcctID_str())
-    group_id_bridgeunit = sue_pidginunit.get_bridgeunit(type_GroupID_str())
-    road_bridgeunit = sue_pidginunit.get_bridgeunit(road_str())
-    assert x_bridgeunits.get(type_AcctID_str()) == acct_id_bridgeunit.get_dict()
-    assert x_bridgeunits.get(type_GroupID_str()) == group_id_bridgeunit.get_dict()
-    assert x_bridgeunits.get(road_str()) == road_bridgeunit.get_dict()
     assert sue_dict.get("acctbridge") == sue_pidginunit.acctbridge.get_dict()
     assert sue_dict.get("groupbridge") == sue_pidginunit.groupbridge.get_dict()
+    assert sue_dict.get("nodebridge") == sue_pidginunit.nodebridge.get_dict()
     assert sue_dict.get("roadbridge") == sue_pidginunit.roadbridge.get_dict()
 
 
@@ -63,9 +49,10 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
     sue_pidginunit = pidginunit_shop(
         sue_str, 0, slash_otx_wall, colon_inx_wall, x_unknown_word
     )
-    sue_pidginunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
-    sue_pidginunit.set_bridgeunit(get_slash_groupid_bridgeunit())
-    sue_pidginunit.set_bridgeunit(get_slash_acctid_bridgeunit())
+    sue_pidginunit.set_acctbridge(get_slash_acctbridge())
+    sue_pidginunit.set_groupbridge(get_slash_groupbridge())
+    sue_pidginunit.set_nodebridge(get_slash_nodebridge())
+    sue_pidginunit.set_roadbridge(get_slash_roadbridge())
 
     # WHEN
     sue_dict = sue_pidginunit.get_dict()
@@ -75,17 +62,9 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
     assert sue_dict.get("otx_wall") == slash_otx_wall
     assert sue_dict.get("inx_wall") == colon_inx_wall
     assert sue_dict.get("unknown_word") == x_unknown_word
-    assert sue_dict.get("bridgeunits")
-    x_bridgeunits = sue_dict.get("bridgeunits")
-    assert len(x_bridgeunits) == 3
-    acct_id_bridgeunit = sue_pidginunit.get_bridgeunit(type_AcctID_str())
-    group_id_bridgeunit = sue_pidginunit.get_bridgeunit(type_GroupID_str())
-    road_bridgeunit = sue_pidginunit.get_bridgeunit(road_str())
-    assert acct_id_bridgeunit.get_dict() == get_slash_acctid_bridgeunit().get_dict()
-    assert group_id_bridgeunit.get_dict() == get_slash_groupid_bridgeunit().get_dict()
-    assert road_bridgeunit.get_dict() == get_slash_roadunit_bridgeunit().get_dict()
     assert sue_dict.get("acctbridge") == sue_pidginunit.acctbridge.get_dict()
     assert sue_dict.get("groupbridge") == sue_pidginunit.groupbridge.get_dict()
+    assert sue_dict.get("nodebridge") == sue_pidginunit.nodebridge.get_dict()
     assert sue_dict.get("roadbridge") == sue_pidginunit.roadbridge.get_dict()
 
 
@@ -93,17 +72,18 @@ def test_PidginUnit_get_json_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    sue_pidginunit.set_bridgeunit(get_clean_roadunit_bridgeunit())
-    sue_pidginunit.set_bridgeunit(get_swim_groupid_bridgeunit())
-    sue_pidginunit.set_bridgeunit(get_suita_acctid_bridgeunit())
+    sue_pidginunit.set_groupbridge(get_swim_groupbridge())
+    sue_pidginunit.set_acctbridge(get_suita_acctbridge())
+    sue_pidginunit.set_nodebridge(get_clean_nodebridge())
+    sue_pidginunit.set_roadbridge(get_clean_roadbridge())
 
     # WHEN
     sue_json = sue_pidginunit.get_json()
 
     # THEN
     print(f"{sue_json=}")
-    assert sue_json.find("bridgeunits") == 141
-    assert sue_json.find("otx_wall") == 87
+    assert sue_json.find("nodebridge") == 460
+    assert sue_json.find("otx_wall") == 159
 
 
 def test_get_pidginunit_from_dict_ReturnsObj():
@@ -120,11 +100,9 @@ def test_get_pidginunit_from_dict_ReturnsObj():
         colon_inx_wall,
         x_unknown_word,
     )
-    sue_pidginunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
-    sue_pidginunit.set_bridgeunit(get_slash_groupid_bridgeunit())
-    sue_pidginunit.set_bridgeunit(get_slash_acctid_bridgeunit())
     sue_pidginunit.set_acctbridge(get_slash_acctbridge())
     sue_pidginunit.set_roadbridge(get_slash_roadbridge())
+    sue_pidginunit.set_nodebridge(get_slash_roadbridge())
     sue_pidginunit.set_groupbridge(get_slash_groupbridge())
 
     # WHEN
@@ -137,15 +115,6 @@ def test_get_pidginunit_from_dict_ReturnsObj():
     assert gen_pidginunit.otx_wall == slash_otx_wall
     assert gen_pidginunit.inx_wall == colon_inx_wall
     assert gen_pidginunit.unknown_word == x_unknown_word
-    x_bridgeunits = gen_pidginunit.bridgeunits
-    assert len(x_bridgeunits) == 3
-    acct_id_bridgeunit = sue_pidginunit.get_bridgeunit(type_AcctID_str())
-    group_id_bridgeunit = sue_pidginunit.get_bridgeunit(type_GroupID_str())
-    road_bridgeunit = sue_pidginunit.get_bridgeunit(road_str())
-    assert acct_id_bridgeunit.get_dict() == get_slash_acctid_bridgeunit().get_dict()
-    assert group_id_bridgeunit.get_dict() == get_slash_groupid_bridgeunit().get_dict()
-    assert road_bridgeunit.get_dict() == get_slash_roadunit_bridgeunit().get_dict()
-
     assert gen_pidginunit.acctbridge == get_slash_acctbridge()
     assert gen_pidginunit.roadbridge == get_slash_roadbridge()
     assert gen_pidginunit.groupbridge == get_slash_groupbridge()
@@ -165,9 +134,9 @@ def test_get_pidginunit_from_json_ReturnsObj():
         colon_inx_wall,
         x_unknown_word,
     )
-    sue_pidginunit.set_bridgeunit(get_slash_roadunit_bridgeunit())
-    sue_pidginunit.set_bridgeunit(get_slash_groupid_bridgeunit())
-    sue_pidginunit.set_bridgeunit(get_slash_acctid_bridgeunit())
+    sue_pidginunit.set_roadbridge(get_slash_roadbridge())
+    sue_pidginunit.set_groupbridge(get_slash_groupbridge())
+    sue_pidginunit.set_acctbridge(get_slash_acctbridge())
 
     # WHEN
     gen_pidginunit = get_pidginunit_from_json(sue_pidginunit.get_json())
@@ -179,11 +148,6 @@ def test_get_pidginunit_from_json_ReturnsObj():
     assert gen_pidginunit.otx_wall == slash_otx_wall
     assert gen_pidginunit.inx_wall == colon_inx_wall
     assert gen_pidginunit.unknown_word == x_unknown_word
-    x_bridgeunits = gen_pidginunit.bridgeunits
-    assert len(x_bridgeunits) == 3
-    acct_id_bridgeunit = sue_pidginunit.get_bridgeunit(type_AcctID_str())
-    group_id_bridgeunit = sue_pidginunit.get_bridgeunit(type_GroupID_str())
-    road_bridgeunit = sue_pidginunit.get_bridgeunit(road_str())
-    assert acct_id_bridgeunit.get_dict() == get_slash_acctid_bridgeunit().get_dict()
-    assert group_id_bridgeunit.get_dict() == get_slash_groupid_bridgeunit().get_dict()
-    assert road_bridgeunit.get_dict() == get_slash_roadunit_bridgeunit().get_dict()
+    assert gen_pidginunit.acctbridge.get_dict() == get_slash_acctbridge().get_dict()
+    assert gen_pidginunit.groupbridge.get_dict() == get_slash_groupbridge().get_dict()
+    assert gen_pidginunit.roadbridge.get_dict() == get_slash_roadbridge().get_dict()

@@ -1,4 +1,4 @@
-from src.f08_pidgin.bridge_new import (
+from src.f08_pidgin.bridge import (
     GroupBridge,
     groupbridge_shop,
     get_groupbridge_from_dict,

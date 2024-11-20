@@ -261,20 +261,20 @@ def test_WorldUnit_load_pidginunit_from_files_SetsAttr(env_dir_setup_cleanup):
     bob3_inx = "Bob3"
     x_world.add_pidginunit(sue_str)
     sue_pidginunit = x_world.get_pidginunit(sue_str)
-    sue_pidginunit.set_otx2inx(road_str(), bob_otx, bob2_inx)
+    sue_pidginunit.set_road(bob_otx, bob2_inx)
     x_world.save_pidginunit_files(sue_str)
-    sue_pidginunit.set_otx2inx(road_str(), bob_otx, bob3_inx)
+    sue_pidginunit.set_road(bob_otx, bob3_inx)
     assert x_world.pidgin_dir_exists(sue_str)
-    assert sue_pidginunit.otx2inx_exists(road_str(), bob_otx, bob2_inx) is False
-    assert sue_pidginunit.otx2inx_exists(road_str(), bob_otx, bob3_inx)
+    assert sue_pidginunit.road_exists(bob_otx, bob2_inx) is False
+    assert sue_pidginunit.road_exists(bob_otx, bob3_inx)
 
     # WHEN
     x_world.load_pidginunit_from_files(sue_str)
 
     # THEN
     after_pidginunit = x_world.get_pidginunit(sue_str)
-    assert after_pidginunit.otx2inx_exists(road_str(), bob_otx, bob2_inx)
-    assert after_pidginunit.otx2inx_exists(road_str(), bob_otx, bob3_inx) is False
+    assert after_pidginunit.road_exists(bob_otx, bob2_inx)
+    assert after_pidginunit.road_exists(bob_otx, bob3_inx) is False
 
 
 def test_WorldUnit_delete_pidginunit_dir_SetsAttrDeletesDir(env_dir_setup_cleanup):

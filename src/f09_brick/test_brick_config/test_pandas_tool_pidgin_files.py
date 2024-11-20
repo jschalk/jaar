@@ -15,9 +15,9 @@ from src.f08_pidgin.examples.example_pidgins import (
     get_casa_maison_pidginunit_set_by_nub_label,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
-    get_clean_roadunit_bridgeunit,
-    get_swim_groupid_bridgeunit,
-    get_suita_acctid_bridgeunit,
+    get_clean_roadbridge,
+    get_swim_groupbridge,
+    get_suita_acctbridge,
     get_suita_acctid_otx_dt,
     get_suita_acctid_inx_dt,
     get_sue_pidginunit,
@@ -38,7 +38,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     sue_inx = "Suita"
     xio_inx = "Xioita"
     sue_pidginunit = pidginunit_shop(sue_otx)
-    sue_pidginunit.set_bridgeunit(get_suita_acctid_bridgeunit())
+    sue_pidginunit.set_acctbridge(get_suita_acctbridge())
     sue_dir = f"{get_test_faces_dir()}/{sue_otx}"
     bridge_filename = "bridge.json"
     pidginunit_file_path = f"{sue_dir}/{bridge_filename}"
@@ -147,7 +147,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
 ):
     # ESTABLISH
     sue_pidginunit = get_casa_maison_pidginunit_set_by_nub_label()
-    sue_pidginunit.set_bridgeunit(get_suita_acctid_bridgeunit())
+    sue_pidginunit.set_acctbridge(get_suita_acctbridge())
     sue_dir = f"{get_test_faces_dir()}/{sue_pidginunit.face_id}"
     bridge_filename = "bridge.json"
     pidginunit_file_path = f"{sue_dir}/{bridge_filename}"
@@ -194,9 +194,9 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
 def test_get_pidgen_brick_format_filenames_ReturnsObj():
     # ESTABLISH
     br00003_file_name = "br00003.xlsx"
-    br00040_file_name = "br00040.xlsx"
     br00041_file_name = "br00041.xlsx"
     br00042_file_name = "br00042.xlsx"
+    br00044_file_name = "br00044.xlsx"
 
     # WHEN
     x_pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
@@ -204,10 +204,10 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
     # THEN
     print(f"{x_pidgen_brick_filenames=}")
     assert br00003_file_name not in x_pidgen_brick_filenames
-    assert br00040_file_name in x_pidgen_brick_filenames
     assert br00041_file_name in x_pidgen_brick_filenames
-    assert br00042_file_name not in x_pidgen_brick_filenames
-    assert len(x_pidgen_brick_filenames) == 4
+    assert br00042_file_name in x_pidgen_brick_filenames
+    assert br00044_file_name in x_pidgen_brick_filenames
+    assert len(x_pidgen_brick_filenames) == 7
 
 
 # def test_get_pidgen_brick_format_filenames_ReturnsObj():

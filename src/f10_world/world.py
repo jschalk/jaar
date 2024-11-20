@@ -172,65 +172,67 @@ class ZooEventsToEventsLogTransformer:
             events_df.to_excel(writer, sheet_name=events_log_str, index=False)
 
 
-class ZooAggToOtx2InxStagingTransformer:
+class ZooAggToApptStagingTransformer:
     def __init__(self, zoo_dir: str, legitmate_events: set[TimeLinePoint]):
         self.zoo_dir = zoo_dir
         self.legitmate_events = legitmate_events
 
     def transform(self):
-        otx2inx_bricks = get_brick_category_ref().get("bridge_otx2inx")
-        otx2inx_columns = get_quick_pidgens_column_ref().get("bridge_otx2inx")
-        otx2inx_columns.update({"face_id", "event_id"})
-        otx2inx_columns = get_new_sorting_columns(otx2inx_columns)
-        otx2inx_columns.insert(0, "src_brick")
-        otx2inx_df = DataFrame(columns=otx2inx_columns)
-        for brick_number in sorted(otx2inx_bricks):
+        appt_bricks = get_brick_category_ref().get("bridge_acct_id")
+        print(f"{appt_bricks=}")
+        print(f"{get_quick_pidgens_column_ref()=}")
+        appt_columns = get_quick_pidgens_column_ref().get("bridge_acct_id")
+        appt_columns.update({"face_id", "event_id"})
+        appt_columns = get_new_sorting_columns(appt_columns)
+        appt_columns.insert(0, "src_brick")
+        appt_df = DataFrame(columns=appt_columns)
+        for brick_number in sorted(appt_bricks):
             brick_file_name = f"{brick_number}.xlsx"
             zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
-                self.insert_legitmate_zoo_agg_otx2inx_atts(
-                    otx2inx_df, brick_number, zoo_brick_path, otx2inx_columns
+                self.insert_legitmate_zoo_agg_appt_atts(
+                    appt_df, brick_number, zoo_brick_path, appt_columns
                 )
 
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
         with ExcelWriter(pidgin_file_path) as writer:
-            otx2inx_df.to_excel(writer, sheet_name="otx2inx_staging", index=False)
+            appt_df.to_excel(writer, sheet_name="appt_staging", index=False)
 
-    def insert_legitmate_zoo_agg_otx2inx_atts(
+    def insert_legitmate_zoo_agg_appt_atts(
         self,
-        otx2inx_df: DataFrame,
+        appt_df: DataFrame,
         brick_number: str,
         zoo_brick_path: str,
-        otx2inx_columns: list[str],
+        appt_columns: list[str],
     ):
         zoo_agg_df = pandas_read_excel(zoo_brick_path, sheet_name="zoo_agg")
-        otx2inx_missing_cols = set(otx2inx_columns).difference(zoo_agg_df.columns)
+        print(f"{zoo_agg_df.columns=}")
+        appt_missing_cols = set(appt_columns).difference(zoo_agg_df.columns)
+
         for index, x_row in zoo_agg_df.iterrows():
             event_id = x_row["event_id"]
             if event_id in self.legitmate_events:
                 face_id = x_row["face_id"]
-                jaar_type = x_row["jaar_type"]
-                otx_word = x_row["otx_word"]
-                df_len = len(otx2inx_df.index)
+                otx_acct_id = x_row["otx_acct_id"]
+                df_len = len(appt_df.index)
                 otx_wall = None
-                if "otx_wall" not in otx2inx_missing_cols:
+                if "otx_wall" not in appt_missing_cols:
                     otx_wall = x_row["otx_wall"]
-                inx_word = None
-                if "inx_word" not in otx2inx_missing_cols:
-                    inx_word = x_row["inx_word"]
+                inx_acct_id = None
+                if "inx_acct_id" not in appt_missing_cols:
+                    inx_acct_id = x_row["inx_acct_id"]
                 inx_wall = None
-                if "inx_wall" not in otx2inx_missing_cols:
+                if "inx_wall" not in appt_missing_cols:
                     inx_wall = x_row["inx_wall"]
                 unknown_word = None
-                if "unknown_word" not in otx2inx_missing_cols:
+                if "unknown_word" not in appt_missing_cols:
                     unknown_word = x_row["unknown_word"]
-                otx2inx_df.loc[df_len] = [
+                appt_df.loc[df_len] = [
                     brick_number,
                     face_id,
                     event_id,
-                    jaar_type,
-                    otx_word,
-                    inx_word,
+                    otx_acct_id,
+                    inx_acct_id,
                     otx_wall,
                     inx_wall,
                     unknown_word,
@@ -276,7 +278,6 @@ class ZooAggToNubStagingTransformer:
             event_id = x_row["event_id"]
             if event_id in self.legitmate_events:
                 face_id = x_row["face_id"]
-                jaar_type = x_row["jaar_type"]
                 otx_label = x_row["otx_label"]
                 df_len = len(nub_df.index)
                 otx_wall = None
@@ -295,7 +296,6 @@ class ZooAggToNubStagingTransformer:
                     brick_number,
                     face_id,
                     event_id,
-                    jaar_type,
                     otx_label,
                     inx_label,
                     otx_wall,
@@ -437,9 +437,9 @@ class WorldUnit:
             if x_note != "invalid because of conflicting event_id":
                 self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
 
-    def zoo_agg_to_otx2inx_staging(self):
+    def zoo_agg_to_appt_staging(self):
         legitmate_events = set(self.events.keys())
-        transformer = ZooAggToOtx2InxStagingTransformer(self._zoo_dir, legitmate_events)
+        transformer = ZooAggToApptStagingTransformer(self._zoo_dir, legitmate_events)
         transformer.transform()
 
     def zoo_agg_to_nub_staging(self):

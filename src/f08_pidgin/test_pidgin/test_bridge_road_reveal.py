@@ -1,5 +1,5 @@
 from src.f01_road.road import create_road
-from src.f08_pidgin.bridge_new import roadbridge_shop
+from src.f08_pidgin.bridge import roadbridge_shop
 
 
 def test_RoadBridge_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario0():

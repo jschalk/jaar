@@ -1,4 +1,4 @@
-from src.f08_pidgin.bridge_new import (
+from src.f08_pidgin.bridge import (
     AcctBridge,
     acctbridge_shop,
     get_acctbridge_from_dict,

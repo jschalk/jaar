@@ -1,5 +1,5 @@
 from src.f01_road.road import default_wall_if_none, create_road
-from src.f08_pidgin.bridge_new import (
+from src.f08_pidgin.bridge import (
     RoadBridge,
     roadbridge_shop,
     default_unknown_word,
