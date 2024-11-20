@@ -243,19 +243,19 @@ class RoadBridge:
             raise set_all_otx2inxException(exception_str)
         self.otx2inx = x_otx2inx
 
-    def set_otx2inx(self, otx_word: str, inx_word: str):
-        self.otx2inx[otx_word] = inx_word
+    def set_otx2inx(self, otx_road: str, inx_road: str):
+        self.otx2inx[otx_road] = inx_road
 
-    def _get_inx_value(self, otx_word: str) -> str:
-        return self.otx2inx.get(otx_word)
+    def _get_inx_value(self, otx_road: str) -> str:
+        return self.otx2inx.get(otx_road)
 
-    def reveal_inx(self, otx_word: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_word) is False:
-            inx_word = copy_copy(otx_word)
-            inx_word = self._reveal_roadunit_inx(otx_word)
-            self.set_otx2inx(otx_word, inx_word)
+    def reveal_inx(self, otx_road: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_road) is False:
+            inx_road = copy_copy(otx_road)
+            inx_road = self._reveal_roadunit_inx(otx_road)
+            self.set_otx2inx(otx_road, inx_road)
 
-        return self._get_inx_value(otx_word)
+        return self._get_inx_value(otx_road)
 
     def _reveal_roadunit_inx(self, otx_road) -> RoadUnit:
         otx_parent_road = get_parent_road(otx_road, self.otx_wall)
@@ -274,14 +274,14 @@ class RoadBridge:
             return self._get_nub_inx_label(x_roadNode)
         return x_roadNode
 
-    def otx2inx_exists(self, otx_word: str, inx_word: str) -> bool:
-        return self._get_inx_value(otx_word) == inx_word
+    def otx2inx_exists(self, otx_road: str, inx_road: str) -> bool:
+        return self._get_inx_value(otx_road) == inx_road
 
-    def otx_exists(self, otx_word: str) -> bool:
-        return self._get_inx_value(otx_word) != None
+    def otx_exists(self, otx_road: str) -> bool:
+        return self._get_inx_value(otx_road) != None
 
-    def del_otx2inx(self, otx_word: str):
-        self.otx2inx.pop(otx_word)
+    def del_otx2inx(self, otx_road: str):
+        self.otx2inx.pop(otx_road)
 
     def set_nub_label(self, otx_label: RoadNode, inx_label: RoadNode):
         if self.otx_wall in otx_label:
