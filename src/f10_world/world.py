@@ -178,56 +178,56 @@ class ZooAggToApptStagingTransformer:
         self.legitmate_events = legitmate_events
 
     def transform(self):
-        appt_bricks = get_brick_category_ref().get("bridge_acct_id")
-        print(f"{appt_bricks=}")
+        acct_bricks = get_brick_category_ref().get("bridge_acct_id")
+        print(f"{acct_bricks=}")
         print(f"{get_quick_pidgens_column_ref()=}")
-        appt_columns = get_quick_pidgens_column_ref().get("bridge_acct_id")
-        appt_columns.update({"face_id", "event_id"})
-        appt_columns = get_new_sorting_columns(appt_columns)
-        appt_columns.insert(0, "src_brick")
-        appt_df = DataFrame(columns=appt_columns)
-        for brick_number in sorted(appt_bricks):
+        acct_columns = get_quick_pidgens_column_ref().get("bridge_acct_id")
+        acct_columns.update({"face_id", "event_id"})
+        acct_columns = get_new_sorting_columns(acct_columns)
+        acct_columns.insert(0, "src_brick")
+        acct_df = DataFrame(columns=acct_columns)
+        for brick_number in sorted(acct_bricks):
             brick_file_name = f"{brick_number}.xlsx"
             zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
-                self.insert_legitmate_zoo_agg_appt_atts(
-                    appt_df, brick_number, zoo_brick_path, appt_columns
+                self.insert_legitmate_zoo_agg_acct_atts(
+                    acct_df, brick_number, zoo_brick_path, acct_columns
                 )
 
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
         with ExcelWriter(pidgin_file_path) as writer:
-            appt_df.to_excel(writer, sheet_name="appt_staging", index=False)
+            acct_df.to_excel(writer, sheet_name="acct_staging", index=False)
 
-    def insert_legitmate_zoo_agg_appt_atts(
+    def insert_legitmate_zoo_agg_acct_atts(
         self,
-        appt_df: DataFrame,
+        acct_df: DataFrame,
         brick_number: str,
         zoo_brick_path: str,
-        appt_columns: list[str],
+        acct_columns: list[str],
     ):
         zoo_agg_df = pandas_read_excel(zoo_brick_path, sheet_name="zoo_agg")
         print(f"{zoo_agg_df.columns=}")
-        appt_missing_cols = set(appt_columns).difference(zoo_agg_df.columns)
+        acct_missing_cols = set(acct_columns).difference(zoo_agg_df.columns)
 
         for index, x_row in zoo_agg_df.iterrows():
             event_id = x_row["event_id"]
             if event_id in self.legitmate_events:
                 face_id = x_row["face_id"]
                 otx_acct_id = x_row["otx_acct_id"]
-                df_len = len(appt_df.index)
+                df_len = len(acct_df.index)
                 otx_wall = None
-                if "otx_wall" not in appt_missing_cols:
+                if "otx_wall" not in acct_missing_cols:
                     otx_wall = x_row["otx_wall"]
                 inx_acct_id = None
-                if "inx_acct_id" not in appt_missing_cols:
+                if "inx_acct_id" not in acct_missing_cols:
                     inx_acct_id = x_row["inx_acct_id"]
                 inx_wall = None
-                if "inx_wall" not in appt_missing_cols:
+                if "inx_wall" not in acct_missing_cols:
                     inx_wall = x_row["inx_wall"]
                 unknown_word = None
-                if "unknown_word" not in appt_missing_cols:
+                if "unknown_word" not in acct_missing_cols:
                     unknown_word = x_row["unknown_word"]
-                appt_df.loc[df_len] = [
+                acct_df.loc[df_len] = [
                     brick_number,
                     face_id,
                     event_id,
@@ -437,7 +437,7 @@ class WorldUnit:
             if x_note != "invalid because of conflicting event_id":
                 self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
 
-    def zoo_agg_to_appt_staging(self):
+    def zoo_agg_to_acct_staging(self):
         legitmate_events = set(self.events.keys())
         transformer = ZooAggToApptStagingTransformer(self._zoo_dir, legitmate_events)
         transformer.transform()

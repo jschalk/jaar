@@ -49,7 +49,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     otx_dir = f"{sue_dir}/otx"
     inx_dir = f"{sue_dir}/inx"
 
-    example_filename = "appt_id_example.csv"
+    example_filename = "acct_id_example.csv"
     otx_file_path = f"{otx_dir}/{example_filename}"
     inx_file_path = f"{inx_dir}/{example_filename}"
     save_dataframe_to_csv(sue_otx_dt, otx_dir, example_filename)
@@ -157,20 +157,20 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     otx_dir = f"{sue_dir}/otx"
     inx_dir = f"{sue_dir}/inx"
 
-    appt_id_filename = "appt_id_example.csv"
-    appt_id_otx_file_path = f"{otx_dir}/{appt_id_filename}"
-    appt_id_inx_file_path = f"{inx_dir}/{appt_id_filename}"
+    acct_id_filename = "acct_id_example.csv"
+    acct_id_otx_file_path = f"{otx_dir}/{acct_id_filename}"
+    acct_id_inx_file_path = f"{inx_dir}/{acct_id_filename}"
     road1_otx_dt = get_casa_maison_road_otx_dt()
     road1_filename = "road1_example.csv"
     road1_otx_file_path = f"{otx_dir}/{road1_filename}"
     road1_inx_file_path = f"{inx_dir}/{road1_filename}"
     save_dataframe_to_csv(road1_otx_dt, otx_dir, road1_filename)
-    save_dataframe_to_csv(sue_otx_dt, otx_dir, appt_id_filename)
+    save_dataframe_to_csv(sue_otx_dt, otx_dir, acct_id_filename)
     assert os_path_exists(road1_otx_file_path)
     assert os_path_exists(road1_inx_file_path) is False
     assert os_path_exists(pidginunit_file_path)
-    assert os_path_exists(appt_id_otx_file_path)
-    assert os_path_exists(appt_id_inx_file_path) is False
+    assert os_path_exists(acct_id_otx_file_path)
+    assert os_path_exists(acct_id_inx_file_path) is False
 
     # WHEN
     move_otx_csvs_to_pidgin_inx(sue_dir)
@@ -179,10 +179,10 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     assert os_path_exists(road1_otx_file_path)
     assert os_path_exists(road1_inx_file_path)
     assert os_path_exists(pidginunit_file_path)
-    assert os_path_exists(appt_id_otx_file_path)
-    assert os_path_exists(appt_id_inx_file_path)
-    appt_inx_dt = open_csv(inx_dir, appt_id_filename)
-    gen_csv = appt_inx_dt.sort_values(acct_id_str()).to_csv(index=False)
+    assert os_path_exists(acct_id_otx_file_path)
+    assert os_path_exists(acct_id_inx_file_path)
+    acct_inx_dt = open_csv(inx_dir, acct_id_filename)
+    gen_csv = acct_inx_dt.sort_values(acct_id_str()).to_csv(index=False)
     sue_inx_dt = get_suita_acctid_inx_dt()
     assert gen_csv == sue_inx_dt.sort_values(acct_id_str()).to_csv(index=False)
 

@@ -120,17 +120,17 @@ class PidginUnit:
     def get_nodebridge(self) -> NodeBridge:
         return self.nodebridge
 
-    def set_node_id(self, otx_node_id: str, inx_node_id: str):
-        self.nodebridge.set_otx2inx(otx_node_id, inx_node_id)
+    def set_node(self, otx_node: str, inx_node: str):
+        self.nodebridge.set_otx2inx(otx_node, inx_node)
 
-    def node_id_exists(self, otx_node_id: str, inx_node_id: str):
-        return self.nodebridge.otx2inx_exists(otx_node_id, inx_node_id)
+    def node_exists(self, otx_node: str, inx_node: str):
+        return self.nodebridge.otx2inx_exists(otx_node, inx_node)
 
-    def _get_inx_node_id(self, otx_node_id: str):
-        return self.nodebridge._get_inx_value(otx_node_id)
+    def _get_inx_node(self, otx_node: str):
+        return self.nodebridge._get_inx_value(otx_node)
 
-    def del_node_id(self, otx_node_id: str):
-        return self.nodebridge.del_otx2inx(otx_node_id)
+    def del_node(self, otx_node: str):
+        return self.nodebridge.del_otx2inx(otx_node)
 
     def set_roadbridge(self, x_roadbridge: RoadBridge):
         self._check_all_core_attrs_match(x_roadbridge)

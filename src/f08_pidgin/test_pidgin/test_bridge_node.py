@@ -218,7 +218,7 @@ def test_NodeBridge_unknown_word_in_otx2inx_ReturnsObj():
     assert x_nodebridge._unknown_word_in_otx2inx()
 
 
-def test_NodeBridge_reveal_inx_ReturnsObjAndSetsAttr_node_id():
+def test_NodeBridge_reveal_inx_ReturnsObjAndSetsAttr_node():
     # ESTABLISH
     inx_r_wall = ":"
     otx_r_wall = "/"
