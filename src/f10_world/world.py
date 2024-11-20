@@ -183,6 +183,12 @@ class ZooAggToStagingTransformer:
             self.jaar_type = "AcctID"
         elif self.pidgin_category == "bridge_group_id":
             self.jaar_type = "GroupID"
+        elif self.pidgin_category == "bridge_node":
+            self.jaar_type = "RoadNode"
+        elif self.pidgin_category == "bridge_road":
+            self.jaar_type = "RoadUnit"
+        else:
+            raise Exception("not given pidgin_category")
 
     def transform(self):
         category_bricks = get_brick_category_ref().get(self.pidgin_category)
@@ -243,12 +249,20 @@ class ZooAggToStagingTransformer:
             return "acct_staging"
         elif self.jaar_type == "GroupID":
             return "group_staging"
+        elif self.jaar_type == "RoadNode":
+            return "node_staging"
+        elif self.jaar_type == "RoadUnit":
+            return "road_staging"
 
     def get_otx_obj(self, x_row) -> str:
         if self.jaar_type == "AcctID":
             return x_row["otx_acct_id"]
         elif self.jaar_type == "GroupID":
             return x_row["otx_group_id"]
+        elif self.jaar_type == "RoadNode":
+            return x_row["otx_node"]
+        elif self.jaar_type == "RoadUnit":
+            return x_row["otx_road"]
         return None
 
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
@@ -256,6 +270,10 @@ class ZooAggToStagingTransformer:
             return x_row["inx_acct_id"]
         elif self.jaar_type == "GroupID" and "inx_group_id" not in missing_col:
             return x_row["inx_group_id"]
+        elif self.jaar_type == "RoadNode" and "inx_node" not in missing_col:
+            return x_row["inx_node"]
+        elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
+            return x_row["inx_road"]
         return None
 
 
@@ -469,7 +487,23 @@ class WorldUnit:
         transformer = ZooAggToStagingTransformer(
             self._zoo_dir, pidgin_cat, legitmate_events
         )
-        # transformer.transform()
+        transformer.transform()
+
+    def zoo_agg_to_node_staging(self):
+        pidgin_cat = "bridge_node"
+        legitmate_events = set(self.events.keys())
+        transformer = ZooAggToStagingTransformer(
+            self._zoo_dir, pidgin_cat, legitmate_events
+        )
+        transformer.transform()
+
+    def zoo_agg_to_road_staging(self):
+        pidgin_cat = "bridge_road"
+        legitmate_events = set(self.events.keys())
+        transformer = ZooAggToStagingTransformer(
+            self._zoo_dir, pidgin_cat, legitmate_events
+        )
+        transformer.transform()
 
     def zoo_agg_to_nub_staging(self):
         legitmate_events = set(self.events.keys())
