@@ -54,12 +54,20 @@ def otx_acct_id_str() -> str:
     return "otx_acct_id"
 
 
-def inx_word_str() -> str:
-    return "inx_word"
+def inx_node_str() -> str:
+    return "inx_node"
 
 
-def otx_word_str() -> str:
-    return "otx_word"
+def otx_node_str() -> str:
+    return "otx_node"
+
+
+def inx_road_str() -> str:
+    return "inx_road"
+
+
+def otx_road_str() -> str:
+    return "otx_road"
 
 
 def inx_label_str() -> str:
@@ -92,6 +100,14 @@ def bridge_acct_id_str() -> str:
 
 def bridge_group_id_str() -> str:
     return "bridge_group_id"
+
+
+def bridge_node_str() -> str:
+    return "bridge_node"
+
+
+def bridge_road_str() -> str:
+    return "bridge_road"
 
 
 def bridge_nub_label_str() -> str:
@@ -132,7 +148,6 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     """for each pidgin_config category contains the associated columns"""
     return {
         "bridge_nub_label": {
-            "jaar_type",
             "unknown_word",
             "inx_wall",
             "inx_label",
@@ -153,12 +168,18 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "otx_wall",
             "otx_acct_id",
         },
-        "bridge_otx2inx": {
-            "inx_word",
-            "jaar_type",
+        "bridge_node": {
+            "inx_node",
             "unknown_word",
             "inx_wall",
             "otx_wall",
-            "otx_word",
+            "otx_node",
+        },
+        "bridge_road": {
+            "inx_road",
+            "unknown_word",
+            "inx_wall",
+            "otx_wall",
+            "otx_road",
         },
     }

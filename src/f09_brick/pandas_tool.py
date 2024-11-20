@@ -7,8 +7,8 @@ from src.f00_instrument.file import (
 )
 from src.f00_instrument.db_toolbox import get_grouping_with_all_values_equal_sql_query
 from src.f04_gift.atom_config import get_atom_args_jaar_types
+from src.f08_pidgin.bridge import BridgeCore
 from src.f08_pidgin.pidgin import (
-    BridgeUnit,
     PidginUnit,
     pidginable_atom_args,
     get_pidginunit_from_json,
@@ -121,7 +121,7 @@ def get_dataframe_pidginable_columns(x_df: DataFrame) -> set[str]:
 
 
 def pidgin_single_column_dataframe(
-    x_df: DataFrame, x_bridgeunit: BridgeUnit, column_name: str
+    x_df: DataFrame, x_bridgeunit: BridgeCore, column_name: str
 ) -> DataFrame:
     if column_name in x_df:
         row_count = len(x_df)
@@ -155,6 +155,9 @@ def move_otx_csvs_to_pidgin_inx(face_dir: str):
 
 
 def _get_pidgen_brick_format_filenames() -> set[str]:
-    brick_numbers = set(get_brick_category_ref().get("bridge_otx2inx"))
+    brick_numbers = set(get_brick_category_ref().get("bridge_acct_id"))
+    brick_numbers.update(set(get_brick_category_ref().get("bridge_group_id")))
+    brick_numbers.update(set(get_brick_category_ref().get("bridge_node")))
+    brick_numbers.update(set(get_brick_category_ref().get("bridge_road")))
     brick_numbers.update(set(get_brick_category_ref().get("bridge_nub_label")))
     return {f"{brick_number}.xlsx" for brick_number in brick_numbers}

@@ -9,24 +9,21 @@
         "inx_wall": {
             "otx_key": false
         },
-        "inx_word": {
+        "inx_node": {
             "otx_key": false
-        },
-        "jaar_type": {
-            "otx_key": true
         },
         "otx_wall": {
             "otx_key": false
         },
-        "otx_word": {
+        "otx_node": {
             "otx_key": true
         },
         "unknown_word": {
             "otx_key": false
         }
     },
-    "brick_number": "br00040",
+    "brick_number": "br00044",
     "categorys": [
-        "bridge_otx2inx"
+        "bridge_node"
     ]
 }

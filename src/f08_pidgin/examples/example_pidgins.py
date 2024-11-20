@@ -7,17 +7,17 @@ from src.f04_gift.atom_config import (
     type_GroupID_str,
     type_RoadNode_str,
 )
-from src.f08_pidgin.bridge_new import (
+from src.f08_pidgin.bridge import (
     groupbridge_shop,
     acctbridge_shop,
+    nodebridge_shop,
     roadbridge_shop,
     GroupBridge,
     AcctBridge,
+    NodeBridge,
     RoadBridge,
 )
 from src.f08_pidgin.pidgin import (
-    bridgeunit_shop,
-    BridgeUnit,
     PidginUnit,
     pidginunit_shop,
     default_unknown_word,
@@ -25,46 +25,43 @@ from src.f08_pidgin.pidgin import (
 from pandas import DataFrame
 
 
-def get_clean_roadnode_bridgeunit() -> BridgeUnit:
+def get_clean_nodebridge() -> NodeBridge:
     clean_otx = "clean"
     clean_inx = "propre"
     casa_otx = "casa1"
     casa_inx = "casa2"
-    slash_otx_wall = "/"
-    roadnode_bridgeunit = bridgeunit_shop(
-        type_RoadNode_str(), slash_otx_wall, x_face_id="Sue"
-    )
-    roadnode_bridgeunit.set_otx2inx(clean_otx, clean_inx)
-    roadnode_bridgeunit.set_otx2inx(casa_otx, casa_inx)
-    return roadnode_bridgeunit
+    nodebridge = nodebridge_shop(x_face_id="Sue")
+    nodebridge.set_otx2inx(clean_otx, clean_inx)
+    nodebridge.set_otx2inx(casa_otx, casa_inx)
+    return nodebridge
 
 
-def get_clean_roadunit_bridgeunit() -> BridgeUnit:
+def get_clean_roadbridge() -> RoadBridge:
     otx_music45_str = "music45"
     inx_music87_str = "music87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     wall = default_wall_if_none()
     clean_otx_road = f"{otx_music45_str}{wall}{clean_otx_str}"
-    road_bridgeunit = bridgeunit_shop(type_RoadUnit_str(), x_face_id="Sue")
+    road_bridgeunit = roadbridge_shop(x_face_id="Sue")
     road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
     road_bridgeunit.set_otx2inx(otx_music45_str, inx_music87_str)
     road_bridgeunit.reveal_inx(clean_otx_road)
     return road_bridgeunit
 
 
-def get_swim_groupid_bridgeunit() -> BridgeUnit:
+def get_swim_groupbridge() -> GroupBridge:
     wall = default_wall_if_none()
     swim_otx = f"swim{wall}"
     swim_inx = f"nage{wall}"
     climb_otx = f"climb{wall}"
-    group_id_bridgeunit = bridgeunit_shop(type_GroupID_str(), x_face_id="Sue")
-    group_id_bridgeunit.set_otx2inx(swim_otx, swim_inx)
-    group_id_bridgeunit.set_otx2inx(climb_otx, climb_otx)
-    return group_id_bridgeunit
+    x_groupbridge = groupbridge_shop(x_face_id="Sue")
+    x_groupbridge.set_otx2inx(swim_otx, swim_inx)
+    x_groupbridge.set_otx2inx(climb_otx, climb_otx)
+    return x_groupbridge
 
 
-def get_suita_acctid_bridgeunit() -> BridgeUnit:
+def get_suita_acctbridge() -> AcctBridge:
     xio_otx = "Xio"
     sue_otx = "Sue"
     bob_otx = "Bob"
@@ -72,47 +69,47 @@ def get_suita_acctid_bridgeunit() -> BridgeUnit:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), x_face_id="Sue")
+    acct_id_bridgeunit = acctbridge_shop(x_face_id="Sue")
     acct_id_bridgeunit.set_otx2inx(xio_otx, xio_inx)
     acct_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
     acct_id_bridgeunit.set_otx2inx(bob_otx, bob_inx)
     return acct_id_bridgeunit
 
 
-def get_invalid_acctid_bridgeunit() -> BridgeUnit:
-    sue_otx = f"Xio{default_wall_if_none()}"
-    sue_inx = "Sue"
-    zia_otx = "Zia"
-    zia_inx = "Zia"
-    group_id_bridgeunit = bridgeunit_shop(type_AcctID_str(), x_face_id="Sue")
-    group_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
-    group_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
-    return group_id_bridgeunit
+# def get_invalid_acctid_bridgeunit() -> BridgeUnit:
+#     sue_otx = f"Xio{default_wall_if_none()}"
+#     sue_inx = "Sue"
+#     zia_otx = "Zia"
+#     zia_inx = "Zia"
+#     x_groupbridge = bridgeunit_shop(type_AcctID_str(), x_face_id="Sue")
+#     x_groupbridge.set_otx2inx(sue_otx, sue_inx)
+#     x_groupbridge.set_otx2inx(zia_otx, zia_inx)
+#     return x_groupbridge
 
 
-def get_invalid_groupid_bridgeunit() -> BridgeUnit:
-    sue_otx = f"Xio{default_wall_if_none()}"
-    sue_inx = f"Sue{default_wall_if_none()}"
-    zia_otx = "Zia"
-    zia_inx = f"Zia{default_wall_if_none()}"
-    group_id_bridgeunit = bridgeunit_shop(type_GroupID_str(), x_face_id="Sue")
-    group_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
-    group_id_bridgeunit.set_otx2inx(zia_otx, zia_inx)
-    return group_id_bridgeunit
+# def get_invalid_groupid_bridgeunit() -> BridgeUnit:
+#     sue_otx = f"Xio{default_wall_if_none()}"
+#     sue_inx = f"Sue{default_wall_if_none()}"
+#     zia_otx = "Zia"
+#     zia_inx = f"Zia{default_wall_if_none()}"
+#     x_groupbridge = bridgeunit_shop(type_GroupID_str(), x_face_id="Sue")
+#     x_groupbridge.set_otx2inx(sue_otx, sue_inx)
+#     x_groupbridge.set_otx2inx(zia_otx, zia_inx)
+#     return x_groupbridge
 
 
-def get_invalid_road_bridgeunit() -> BridgeUnit:
-    clean_str = "clean"
-    clean_inx = "propre"
-    casa_otx = f"casa{default_wall_if_none()}"
-    casa_inx = "casa"
-    roadnode_bridgeunit = bridgeunit_shop(type_RoadNode_str(), x_face_id="Sue")
-    roadnode_bridgeunit.set_otx2inx(clean_str, clean_inx)
-    roadnode_bridgeunit.set_otx2inx(casa_otx, casa_inx)
-    return roadnode_bridgeunit
+# def get_invalid_road_bridgeunit() -> BridgeUnit:
+#     clean_str = "clean"
+#     clean_inx = "propre"
+#     casa_otx = f"casa{default_wall_if_none()}"
+#     casa_inx = "casa"
+#     nodebridge = bridgeunit_shop(type_RoadNode_str(), x_face_id="Sue")
+#     nodebridge.set_otx2inx(clean_str, clean_inx)
+#     nodebridge.set_otx2inx(casa_otx, casa_inx)
+#     return nodebridge
 
 
-def get_slash_roadunit_bridgeunit() -> BridgeUnit:
+def get_slash_roadbridge() -> RoadBridge:
     otx_music45_str = "music45"
     inx_music87_str = "music87"
     clean_otx_str = "clean"
@@ -122,8 +119,7 @@ def get_slash_roadunit_bridgeunit() -> BridgeUnit:
     colon_inx_wall = ":"
     clean_otx_road = f"{otx_music45_str}{slash_otx_wall}{clean_otx_str}"
     clean_otx_road = f"{otx_music45_str}{colon_inx_wall}{clean_otx_str}"
-    road_bridgeunit = bridgeunit_shop(
-        type_RoadUnit_str(),
+    road_bridgeunit = roadbridge_shop(
         x_otx_wall=slash_otx_wall,
         x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
@@ -135,7 +131,7 @@ def get_slash_roadunit_bridgeunit() -> BridgeUnit:
     return road_bridgeunit
 
 
-def get_slash_groupid_bridgeunit() -> BridgeUnit:
+def get_slash_groupbridge() -> GroupBridge:
     x_unknown_word = "UnknownAcctId"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
@@ -143,19 +139,18 @@ def get_slash_groupid_bridgeunit() -> BridgeUnit:
     swim_inx = f"nage{colon_inx_wall}"
     climb_otx = f"climb{slash_otx_wall}"
     climb_inx = f"climb{colon_inx_wall}"
-    group_id_bridgeunit = bridgeunit_shop(
-        type_GroupID_str(),
+    x_groupbridge = groupbridge_shop(
         x_otx_wall=slash_otx_wall,
         x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
     )
-    group_id_bridgeunit.set_otx2inx(swim_otx, swim_inx)
-    group_id_bridgeunit.set_otx2inx(climb_otx, climb_inx)
-    return group_id_bridgeunit
+    x_groupbridge.set_otx2inx(swim_otx, swim_inx)
+    x_groupbridge.set_otx2inx(climb_otx, climb_inx)
+    return x_groupbridge
 
 
-def get_slash_acctid_bridgeunit() -> BridgeUnit:
+def get_slash_acctbridge() -> AcctBridge:
     x_unknown_word = "UnknownAcctId"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
@@ -166,8 +161,7 @@ def get_slash_acctid_bridgeunit() -> BridgeUnit:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_id_bridgeunit = bridgeunit_shop(
-        type_AcctID_str(),
+    acct_id_bridgeunit = acctbridge_shop(
         x_otx_wall=slash_otx_wall,
         x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
@@ -181,9 +175,10 @@ def get_slash_acctid_bridgeunit() -> BridgeUnit:
 
 def get_sue_pidginunit() -> PidginUnit:
     sue_pidginunit = pidginunit_shop("Sue")
-    sue_pidginunit.set_bridgeunit(get_suita_acctid_bridgeunit())
-    sue_pidginunit.set_bridgeunit(get_clean_roadunit_bridgeunit())
-    sue_pidginunit.set_bridgeunit(get_swim_groupid_bridgeunit())
+    sue_pidginunit.set_acctbridge(get_suita_acctbridge())
+    sue_pidginunit.set_groupbridge(get_swim_groupbridge())
+    sue_pidginunit.set_nodebridge(get_clean_nodebridge())
+    sue_pidginunit.set_roadbridge(get_clean_roadbridge())
     return sue_pidginunit
 
 
@@ -229,7 +224,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue")
-    rx = type_RoadNode_str()
+    rx = type_RoadUnit_str()
     sue_pidginunit.set_otx2inx(rx, otx_music45_str, inx_music87_str)
     sue_pidginunit.set_otx2inx(rx, casa_otx_road, casa_inx_road)
     sue_pidginunit.set_otx2inx(rx, clean_otx_road, clean_inx_road)
@@ -253,10 +248,9 @@ def get_casa_maison_pidginunit_set_by_nub_label() -> PidginUnit:
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue")
-    rx = type_RoadNode_str()
-    sue_pidginunit.set_nub_label(rx, otx_music45_str, inx_music87_str)
-    sue_pidginunit.set_nub_label(rx, casa_otx_str, casa_inx_str)
-    sue_pidginunit.set_nub_label(rx, clean_otx_str, clean_inx_str)
+    sue_pidginunit.set_nub_label(otx_music45_str, inx_music87_str)
+    sue_pidginunit.set_nub_label(casa_otx_str, casa_inx_str)
+    sue_pidginunit.set_nub_label(clean_otx_str, clean_inx_str)
     return sue_pidginunit
 
 
@@ -304,19 +298,17 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
     inx_dt = DataFrame(
         columns=[
             "face_id",
-            "jaar_type",
             "otx_wall",
             "inx_wall",
             "unknown_word",
-            "otx_word",
-            "inx_word",
+            "otx_road",
+            "inx_road",
         ]
     )
-    rt = type_RoadUnit_str()
-    inx_dt.loc[0] = ["Sue", rt, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
-    inx_dt.loc[1] = ["Sue", rt, x_rd, x_rd, uw, casa_otx_road, casa_inx_road]
-    inx_dt.loc[2] = ["Sue", rt, x_rd, x_rd, uw, clean_otx_road, clean_inx_road]
-    inx_dt.loc[3] = ["Sue", rt, x_rd, x_rd, uw, sweep_otx_road, sweep_inx_road]
+    inx_dt.loc[0] = ["Sue", x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
+    inx_dt.loc[1] = ["Sue", x_rd, x_rd, uw, casa_otx_road, casa_inx_road]
+    inx_dt.loc[2] = ["Sue", x_rd, x_rd, uw, clean_otx_road, clean_inx_road]
+    inx_dt.loc[3] = ["Sue", x_rd, x_rd, uw, sweep_otx_road, sweep_inx_road]
     return inx_dt
 
 
@@ -335,7 +327,6 @@ def get_casa_maison_road_nub_label_dt() -> DataFrame:
     inx_dt = DataFrame(
         columns=[
             "face_id",
-            "jaar_type",
             "otx_wall",
             "inx_wall",
             "unknown_word",
@@ -343,10 +334,9 @@ def get_casa_maison_road_nub_label_dt() -> DataFrame:
             "inx_label",
         ]
     )
-    rt = type_RoadUnit_str()
-    inx_dt.loc[0] = ["Sue", rt, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
-    inx_dt.loc[1] = ["Sue", rt, x_rd, x_rd, uw, casa_otx_str, casa_inx_str]
-    inx_dt.loc[2] = ["Sue", rt, x_rd, x_rd, uw, clean_otx_str, clean_inx_str]
+    inx_dt.loc[0] = ["Sue", x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
+    inx_dt.loc[1] = ["Sue", x_rd, x_rd, uw, casa_otx_str, casa_inx_str]
+    inx_dt.loc[2] = ["Sue", x_rd, x_rd, uw, clean_otx_str, clean_inx_str]
     return inx_dt
 
 
@@ -372,7 +362,7 @@ def get_invalid_groupbridge() -> GroupBridge:
     return x_groupbridge
 
 
-def get_invalid_roadbridge() -> RoadBridge:
+def get_invalid_nodebridge() -> RoadBridge:
     clean_str = "clean"
     clean_inx = "propre"
     casa_otx = f"casa{default_wall_if_none()}"
@@ -403,6 +393,26 @@ def get_slash_roadbridge() -> RoadBridge:
     x_roadbridge.set_otx2inx(otx_music45_str, inx_music87_str)
     x_roadbridge.reveal_inx(clean_otx_road)
     return x_roadbridge
+
+
+def get_slash_nodebridge() -> NodeBridge:
+    otx_music45_str = "music45"
+    inx_music87_str = "music87"
+    clean_otx_str = "clean"
+    clean_inx_str = "prop"
+    x_unknown_word = "UnknownAcctId"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
+    x_nodebridge = nodebridge_shop(
+        x_otx_wall=slash_otx_wall,
+        x_inx_wall=colon_inx_wall,
+        x_unknown_word=x_unknown_word,
+        x_face_id="Sue",
+    )
+    x_nodebridge.set_otx2inx(otx_music45_str, inx_music87_str)
+    x_nodebridge.set_otx2inx(clean_otx_str, clean_inx_str)
+    x_nodebridge.reveal_inx("running")
+    return x_nodebridge
 
 
 def get_slash_groupbridge() -> GroupBridge:

@@ -18,9 +18,6 @@
         "otx_label": {
             "otx_key": true
         },
-        "jaar_type": {
-            "otx_key": true
-        },
         "owner_id": {
             "otx_key": true
         }

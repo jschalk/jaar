@@ -12,13 +12,10 @@
         "fiscal_id": {
             "otx_key": true
         },
-        "inx_word": {
+        "inx_acct_id": {
             "otx_key": false
         },
-        "otx_word": {
-            "otx_key": true
-        },
-        "jaar_type": {
+        "otx_acct_id": {
             "otx_key": true
         },
         "owner_id": {
@@ -27,7 +24,7 @@
     },
     "brick_number": "br00113",
     "categorys": [
-        "bridge_otx2inx",
+        "bridge_acct_id",
         "bud_acctunit"
     ]
 }
