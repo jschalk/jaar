@@ -1,0 +1,30 @@
+{
+    "attributes": {
+        "acct_id": {
+            "otx_key": true
+        },
+        "event_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "fiscal_id": {
+            "otx_key": true
+        },
+        "inx_node": {
+            "otx_key": false
+        },
+        "otx_node": {
+            "otx_key": true
+        },
+        "owner_id": {
+            "otx_key": true
+        }
+    },
+    "brick_number": "br00116",
+    "categorys": [
+        "bridge_node",
+        "bud_acctunit"
+    ]
+}

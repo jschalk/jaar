@@ -617,4 +617,7 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
         "br00045.xlsx",
         "br00113.xlsx",
         "br00114.xlsx",
+        "br00115.xlsx",
+        "br00116.xlsx",
+        "br00117.xlsx",
     }

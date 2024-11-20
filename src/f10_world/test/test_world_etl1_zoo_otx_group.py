@@ -1,23 +1,23 @@
-from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import (
-    face_id_str,
-    fiscal_id_str,
-    group_id_str,
-    owner_id_str,
-)
-from src.f08_pidgin.pidgin_config import (
-    event_id_str,
-    inx_wall_str,
-    otx_wall_str,
-    inx_group_id_str,
-    otx_group_id_str,
-    unknown_word_str,
-)
-from src.f09_brick.pandas_tool import get_sheet_names
-from src.f10_world.world import worldunit_shop
-from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
-from pandas import DataFrame, ExcelWriter, read_excel as pandas_read_excel
-from os.path import exists as os_path_exists
+# from src.f00_instrument.file import create_path
+# from src.f04_gift.atom_config import (
+#     face_id_str,
+#     fiscal_id_str,
+#     group_id_str,
+#     owner_id_str,
+# )
+# from src.f08_pidgin.pidgin_config import (
+#     event_id_str,
+#     inx_wall_str,
+#     otx_wall_str,
+#     inx_group_id_str,
+#     otx_group_id_str,
+#     unknown_word_str,
+# )
+# from src.f09_brick.pandas_tool import get_sheet_names
+# from src.f10_world.world import worldunit_shop
+# from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
+# from pandas import DataFrame, ExcelWriter, read_excel as pandas_read_excel
+# from os.path import exists as os_path_exists
 
 
 # def test_WorldUnit_zoo_agg_to_group_staging_CreatesFile_Scenario0_SingleBrick(

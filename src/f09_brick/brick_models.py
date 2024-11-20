@@ -341,6 +341,39 @@ class br00114AbstractTable(Base):
     owner_id = Column(String)
 
 
+class br00115AbstractTable(Base):
+    __abstract__ = True
+    face_id = Column(String, primary_key=True)
+    event_id = Column(Integer, primary_key=True)
+    acct_id = Column(String)
+    fiscal_id = Column(String)
+    inx_group_id = Column(String)
+    otx_group_id = Column(String)
+    owner_id = Column(String)
+
+
+class br00116AbstractTable(Base):
+    __abstract__ = True
+    face_id = Column(String, primary_key=True)
+    event_id = Column(Integer, primary_key=True)
+    acct_id = Column(String)
+    fiscal_id = Column(String)
+    inx_node = Column(String)
+    otx_node = Column(String)
+    owner_id = Column(String)
+
+
+class br00117AbstractTable(Base):
+    __abstract__ = True
+    face_id = Column(String, primary_key=True)
+    event_id = Column(Integer, primary_key=True)
+    acct_id = Column(String)
+    fiscal_id = Column(String)
+    inx_road = Column(String)
+    otx_road = Column(String)
+    owner_id = Column(String)
+
+
 class br00000HoldTable(br00000AbstractTable):
     __tablename__ = "br00000_hold"
 
@@ -451,6 +484,18 @@ class br00113HoldTable(br00113AbstractTable):
 
 class br00114HoldTable(br00114AbstractTable):
     __tablename__ = "br00114_hold"
+
+
+class br00115HoldTable(br00115AbstractTable):
+    __tablename__ = "br00115_hold"
+
+
+class br00116HoldTable(br00116AbstractTable):
+    __tablename__ = "br00116_hold"
+
+
+class br00117HoldTable(br00117AbstractTable):
+    __tablename__ = "br00117_hold"
 
 
 class br00000StageTable(br00000AbstractTable):
@@ -649,6 +694,27 @@ class br00114StageTable(br00114AbstractTable):
     src_sheet = Column(String)
 
 
+class br00115StageTable(br00115AbstractTable):
+    __tablename__ = "br00115_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00116StageTable(br00116AbstractTable):
+    __tablename__ = "br00116_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
+class br00117StageTable(br00117AbstractTable):
+    __tablename__ = "br00117_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
 def get_brick_holdtables() -> dict[str, DeclarativeBase]:
     return {
         "br00000": br00000HoldTable,
@@ -679,6 +745,9 @@ def get_brick_holdtables() -> dict[str, DeclarativeBase]:
         "br00045": br00045HoldTable,
         "br00113": br00113HoldTable,
         "br00114": br00114HoldTable,
+        "br00115": br00115HoldTable,
+        "br00116": br00116HoldTable,
+        "br00117": br00117HoldTable,
     }
 
 
@@ -712,4 +781,7 @@ def get_brick_stagetables() -> dict[str, DeclarativeBase]:
         "br00045": br00045StageTable,
         "br00113": br00113StageTable,
         "br00114": br00114StageTable,
+        "br00115": br00115StageTable,
+        "br00116": br00116StageTable,
+        "br00117": br00117StageTable,
     }

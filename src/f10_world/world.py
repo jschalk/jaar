@@ -172,71 +172,91 @@ class ZooEventsToEventsLogTransformer:
             events_df.to_excel(writer, sheet_name=events_log_str, index=False)
 
 
-class ZooAggToApptStagingTransformer:
-    def __init__(self, zoo_dir: str, legitmate_events: set[TimeLinePoint]):
+class ZooAggToStagingTransformer:
+    def __init__(
+        self, zoo_dir: str, pidgin_category: str, legitmate_events: set[TimeLinePoint]
+    ):
         self.zoo_dir = zoo_dir
         self.legitmate_events = legitmate_events
+        self.pidgin_category = pidgin_category
+        if self.pidgin_category == "bridge_acct_id":
+            self.jaar_type = "AcctID"
+        elif self.pidgin_category == "bridge_group_id":
+            self.jaar_type = "GroupID"
 
     def transform(self):
-        acct_bricks = get_brick_category_ref().get("bridge_acct_id")
-        print(f"{acct_bricks=}")
-        print(f"{get_quick_pidgens_column_ref()=}")
-        acct_columns = get_quick_pidgens_column_ref().get("bridge_acct_id")
-        acct_columns.update({"face_id", "event_id"})
-        acct_columns = get_new_sorting_columns(acct_columns)
-        acct_columns.insert(0, "src_brick")
-        acct_df = DataFrame(columns=acct_columns)
-        for brick_number in sorted(acct_bricks):
+        category_bricks = get_brick_category_ref().get(self.pidgin_category)
+        pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
+        pidgin_columns.update({"face_id", "event_id"})
+        pidgin_columns = get_new_sorting_columns(pidgin_columns)
+        pidgin_columns.insert(0, "src_brick")
+        pidgin_df = DataFrame(columns=pidgin_columns)
+        for brick_number in sorted(category_bricks):
             brick_file_name = f"{brick_number}.xlsx"
             zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
-                self.insert_legitmate_zoo_agg_acct_atts(
-                    acct_df, brick_number, zoo_brick_path, acct_columns
+                self.insert_staging_rows(
+                    pidgin_df, brick_number, zoo_brick_path, pidgin_columns
                 )
 
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
         with ExcelWriter(pidgin_file_path) as writer:
-            acct_df.to_excel(writer, sheet_name="acct_staging", index=False)
+            pidgin_df.to_excel(writer, self.get_sheet_staging_name(), index=False)
 
-    def insert_legitmate_zoo_agg_acct_atts(
+    def insert_staging_rows(
         self,
-        acct_df: DataFrame,
+        stage_df: DataFrame,
         brick_number: str,
         zoo_brick_path: str,
-        acct_columns: list[str],
+        df_columns: list[str],
     ):
         zoo_agg_df = pandas_read_excel(zoo_brick_path, sheet_name="zoo_agg")
-        print(f"{zoo_agg_df.columns=}")
-        acct_missing_cols = set(acct_columns).difference(zoo_agg_df.columns)
+        df_missing_cols = set(df_columns).difference(zoo_agg_df.columns)
 
         for index, x_row in zoo_agg_df.iterrows():
             event_id = x_row["event_id"]
             if event_id in self.legitmate_events:
                 face_id = x_row["face_id"]
-                otx_acct_id = x_row["otx_acct_id"]
-                df_len = len(acct_df.index)
                 otx_wall = None
-                if "otx_wall" not in acct_missing_cols:
+                if "otx_wall" not in df_missing_cols:
                     otx_wall = x_row["otx_wall"]
-                inx_acct_id = None
-                if "inx_acct_id" not in acct_missing_cols:
-                    inx_acct_id = x_row["inx_acct_id"]
                 inx_wall = None
-                if "inx_wall" not in acct_missing_cols:
+                if "inx_wall" not in df_missing_cols:
                     inx_wall = x_row["inx_wall"]
                 unknown_word = None
-                if "unknown_word" not in acct_missing_cols:
+                if "unknown_word" not in df_missing_cols:
                     unknown_word = x_row["unknown_word"]
-                acct_df.loc[df_len] = [
+                df_len = len(stage_df.index)
+                stage_df.loc[df_len] = [
                     brick_number,
                     face_id,
                     event_id,
-                    otx_acct_id,
-                    inx_acct_id,
+                    self.get_otx_obj(x_row),
+                    self.get_inx_obj(x_row, df_missing_cols),
                     otx_wall,
                     inx_wall,
                     unknown_word,
                 ]
+
+    def get_sheet_staging_name(self) -> str:
+        if self.jaar_type == "AcctID":
+            return "acct_staging"
+        elif self.jaar_type == "GroupID":
+            return "group_staging"
+
+    def get_otx_obj(self, x_row) -> str:
+        if self.jaar_type == "AcctID":
+            return x_row["otx_acct_id"]
+        elif self.jaar_type == "GroupID":
+            return x_row["otx_group_id"]
+        return None
+
+    def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
+        if self.jaar_type == "AcctID" and "inx_acct_id" not in missing_col:
+            return x_row["inx_acct_id"]
+        elif self.jaar_type == "GroupID" and "inx_group_id" not in missing_col:
+            return x_row["inx_group_id"]
+        return None
 
 
 class ZooAggToNubStagingTransformer:
@@ -253,10 +273,8 @@ class ZooAggToNubStagingTransformer:
         nub_df = DataFrame(columns=nub_columns)
         for brick_number in sorted(nub_bricks):
             brick_file_name = f"{brick_number}.xlsx"
-            print(f"{brick_file_name=}")
             zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
             if os_path_exists(zoo_brick_path):
-                print(f"{brick_file_name=}")
                 self.insert_legitmate_zoo_agg_nub_atts(
                     nub_df, brick_number, zoo_brick_path, nub_columns
                 )
@@ -438,9 +456,20 @@ class WorldUnit:
                 self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
 
     def zoo_agg_to_acct_staging(self):
+        pidgin_cat = "bridge_acct_id"
         legitmate_events = set(self.events.keys())
-        transformer = ZooAggToApptStagingTransformer(self._zoo_dir, legitmate_events)
+        transformer = ZooAggToStagingTransformer(
+            self._zoo_dir, pidgin_cat, legitmate_events
+        )
         transformer.transform()
+
+    def zoo_agg_to_group_staging(self):
+        pidgin_cat = "bridge_group_id"
+        legitmate_events = set(self.events.keys())
+        transformer = ZooAggToStagingTransformer(
+            self._zoo_dir, pidgin_cat, legitmate_events
+        )
+        # transformer.transform()
 
     def zoo_agg_to_nub_staging(self):
         legitmate_events = set(self.events.keys())
