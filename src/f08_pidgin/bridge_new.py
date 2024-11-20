@@ -253,10 +253,6 @@ class RoadBridge:
         if missing_add and self.otx_exists(otx_word) is False:
             inx_word = copy_copy(otx_word)
             inx_word = self._reveal_roadunit_inx(otx_word)
-            # if self.jaar_type in {"RoadNode"}:
-            #     if self.inx_wall in otx_word:
-            #         return None
-            #     inx_word = self._get_nub_roadnode(otx_word)
             self.set_otx2inx(otx_word, inx_word)
 
         return self._get_inx_value(otx_word)
