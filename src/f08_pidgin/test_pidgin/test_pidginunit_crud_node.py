@@ -97,7 +97,7 @@ def test_PidginUnit_get_nodebridge_ReturnsObj():
     assert gen_x_nodebridge == static_x_nodebridge
 
 
-def test_PidginUnit_set_node_id_SetsAttr_Scenario0():
+def test_PidginUnit_set_node_SetsAttr_Scenario0():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -107,58 +107,58 @@ def test_PidginUnit_set_node_id_SetsAttr_Scenario0():
     assert nodeid_nodebridge.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_node_id(sue_otx, sue_inx)
+    zia_pidginunit.set_node(sue_otx, sue_inx)
 
     # THEN
     assert nodeid_nodebridge.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_node_id_exists_ReturnsObj():
+def test_PidginUnit_node_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    assert zia_pidginunit.node_id_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.node_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_node_id(sue_otx, sue_inx)
+    zia_pidginunit.set_node(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit.node_id_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.node_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_get_inx_node_id_ReturnsObj():
+def test_PidginUnit_get_inx_node_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_inx_node_id(sue_otx) != sue_inx
+    assert zia_pidginunit._get_inx_node(sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_node_id(sue_otx, sue_inx)
+    zia_pidginunit.set_node(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit._get_inx_node_id(sue_otx) == sue_inx
+    assert zia_pidginunit._get_inx_node(sue_otx) == sue_inx
 
 
-def test_PidginUnit_del_node_id_ReturnsObj():
+def test_PidginUnit_del_node_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    zia_pidginunit.set_node_id(sue_otx, sue_inx)
-    zia_pidginunit.set_node_id(zia_str, zia_str)
-    assert zia_pidginunit.node_id_exists(sue_otx, sue_inx)
-    assert zia_pidginunit.node_id_exists(zia_str, zia_str)
+    zia_pidginunit.set_node(sue_otx, sue_inx)
+    zia_pidginunit.set_node(zia_str, zia_str)
+    assert zia_pidginunit.node_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.node_exists(zia_str, zia_str)
 
     # WHEN
-    zia_pidginunit.del_node_id(sue_otx)
+    zia_pidginunit.del_node(sue_otx)
 
     # THEN
-    assert zia_pidginunit.node_id_exists(sue_otx, sue_inx) is False
-    assert zia_pidginunit.node_id_exists(zia_str, zia_str)
+    assert zia_pidginunit.node_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.node_exists(zia_str, zia_str)

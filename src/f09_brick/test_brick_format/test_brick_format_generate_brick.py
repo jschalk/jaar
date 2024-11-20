@@ -1,4 +1,3 @@
-from src.f01_road.jaar_refer import sue_str, bob_str, yao_str
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import (

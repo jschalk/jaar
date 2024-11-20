@@ -217,10 +217,10 @@ def _load_roadbridge_from_csv(x_dir, x_roadbridge: RoadBridge) -> RoadBridge:
 def _load_nub_label_from_csv(x_dir, x_roadbridge: RoadBridge) -> RoadBridge:
     nub_label_dt = open_csv(x_dir, "nub_label.csv")
     for table_row in nub_label_dt.to_dict("records"):
-        otx_word_value = table_row.get("otx_label")
-        inx_word_value = table_row.get("inx_label")
-        if x_roadbridge.nub_label_exists(otx_word_value, inx_word_value) is False:
-            x_roadbridge.set_nub_label(otx_word_value, inx_word_value)
+        otx_value = table_row.get("otx_label")
+        inx_value = table_row.get("inx_label")
+        if x_roadbridge.nub_label_exists(otx_value, inx_value) is False:
+            x_roadbridge.set_nub_label(otx_value, inx_value)
     return x_roadbridge
 
 
