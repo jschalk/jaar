@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, create_dir
+from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
     face_id_str,
     fiscal_id_str,
@@ -24,11 +24,12 @@ from src.f08_pidgin.pidgin_config import (
 from src.f09_brick.pandas_tool import (
     _get_pidgen_brick_format_filenames,
     get_sheet_names,
+    upsert_sheet,
 )
 from src.f10_world.world import worldunit_shop, _create_events_agg_df
 from src.f10_world.world_tool import get_all_brick_dataframes
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
-from pandas import DataFrame, ExcelWriter, read_excel as pandas_read_excel
+from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
@@ -72,10 +73,9 @@ def test_WorldUnit_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     br00003_ex1_str = "example1_br00003"
     br00003_ex2_str = "example2_br00003"
     br00003_ex3_str = "example3_br00003"
-    with ExcelWriter(jungle_file_path) as writer:
-        df1.to_excel(writer, sheet_name=br00003_ex1_str, index=False)
-        df2.to_excel(writer, sheet_name=br00003_ex2_str, index=False)
-        df3.to_excel(writer, sheet_name=br00003_ex3_str, index=False)
+    upsert_sheet(jungle_file_path, br00003_ex1_str, df1)
+    upsert_sheet(jungle_file_path, br00003_ex2_str, df2)
+    upsert_sheet(jungle_file_path, br00003_ex3_str, df3)
     assert os_path_exists(zoo_file_path) is False
 
     # WHEN
@@ -123,8 +123,7 @@ def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario0_GroupByWork
     row2 = [sue_str, event_1, music23_str, hour7am, minute_420]
     row3 = [sue_str, event_1, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3], columns=brick_columns)
-    with ExcelWriter(jungle_file_path) as writer:
-        df1.to_excel(writer, sheet_name="example1_br00003")
+    upsert_sheet(jungle_file_path, "example1_br00003", df1)
     fizz_world.jungle_to_zoo_staging()
     zoo__staging_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_staging")
     assert len(zoo__staging_df) == 3
@@ -172,8 +171,7 @@ def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnly
     row2 = [sue_str, event_1, music23_str, hour7am, minute_420]
     row3 = [sue_str, event_1, music23_str, hour7am, minute_480]
     df1 = DataFrame([row1, row2, row3], columns=brick_columns)
-    with ExcelWriter(jungle_file_path) as writer:
-        df1.to_excel(writer, sheet_name="example1_br00003")
+    upsert_sheet(jungle_file_path, "example1_br00003", df1)
     fizz_world.jungle_to_zoo_staging()
     zoo_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_staging")
     assert len(zoo_df) == 3
@@ -226,8 +224,7 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario0(
     row3 = [yao_str, event3, music23_str, hour7am, minute_420]
     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4], columns=brick_columns)
-    with ExcelWriter(jungle_file_path) as writer:
-        df1.to_excel(writer, sheet_name="example1_br00003")
+    upsert_sheet(jungle_file_path, "example1_br00003", df1)
     fizz_world.jungle_to_zoo_staging()
     fizz_world.zoo_staging_to_zoo_agg()
 
@@ -284,8 +281,7 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario1(
     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
     row5 = [bob_str, event3, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
-    with ExcelWriter(jungle_file_path) as writer:
-        df1.to_excel(writer, sheet_name="example1_br00003")
+    upsert_sheet(jungle_file_path, "example1_br00003", df1)
     fizz_world.jungle_to_zoo_staging()
     fizz_world.zoo_staging_to_zoo_agg()
 
@@ -344,8 +340,7 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario0(
     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
     row5 = [bob_str, event3, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
-    with ExcelWriter(jungle_file_path) as writer:
-        df1.to_excel(writer, sheet_name="example1_br00003")
+    upsert_sheet(jungle_file_path, "example1_br00003", df1)
     fizz_world.jungle_to_zoo_staging()
     fizz_world.zoo_staging_to_zoo_agg()
     fizz_world.zoo_agg_to_zoo_events()
@@ -434,9 +429,8 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
     b5_0_row = [event3, bob_str, music23_str, "thu", 1]
     b5_1_row = [event9, yao_str, music23_str, "wed", 0]
     b5_df = DataFrame([b5_0_row, b5_1_row], columns=brick5_columns)
-    with ExcelWriter(jungle_file_path) as writer:
-        b3_df.to_excel(writer, sheet_name="example1_br00003")
-        b5_df.to_excel(writer, sheet_name="example2_br00005")
+    upsert_sheet(jungle_file_path, "example1_br00003", b3_df)
+    upsert_sheet(jungle_file_path, "example1_br00005", b5_df)
     fizz_world.jungle_to_zoo_staging()
     fizz_world.zoo_staging_to_zoo_agg()
     fizz_world.zoo_agg_to_zoo_events()
@@ -523,8 +517,7 @@ def test_WorldUnit_events_log_to_events_agg_CreatesSheets_Scenario0(
     ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
     events_file_path = create_path(zoo_dir, "events.xlsx")
     events_log_str = "events_log"
-    with ExcelWriter(events_file_path) as writer:
-        ex_events_log_df.to_excel(writer, sheet_name=events_log_str, index=False)
+    upsert_sheet(events_file_path, events_log_str, ex_events_log_df)
 
     # WHEN
     fizz_world.events_log_to_events_agg()
@@ -572,8 +565,7 @@ def test_WorldUnit_set_events_from_events_agg_SetsAttr_Scenario0(env_dir_setup_c
     ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
     events_agg_str = "events_agg"
     events_file_path = create_path(zoo_dir, "events.xlsx")
-    with ExcelWriter(events_file_path) as writer:
-        ex_events_agg_df.to_excel(writer, sheet_name=events_agg_str, index=False)
+    upsert_sheet(events_file_path, events_agg_str, ex_events_agg_df)
     assert len(fizz_world.events) != 2
 
     # WHEN
@@ -591,8 +583,7 @@ def test_WorldUnit_set_events_from_events_agg_ClearsAttr(env_dir_setup_cleanup):
     ex_events_agg_df = DataFrame([], columns=events_agg_columns)
     events_agg_str = "events_agg"
     events_file_path = create_path(fizz_world._zoo_dir, "events.xlsx")
-    with ExcelWriter(events_file_path) as writer:
-        ex_events_agg_df.to_excel(writer, sheet_name=events_agg_str, index=False)
+    upsert_sheet(events_file_path, events_agg_str, ex_events_agg_df)
     fizz_world.events = {2: "Sue", 44: "Bob"}
     assert fizz_world.events == {2: "Sue", 44: "Bob"}
 

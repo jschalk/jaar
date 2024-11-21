@@ -29,18 +29,14 @@ from src.f09_brick.brick import get_brickref_obj
 from src.f09_brick.pandas_tool import (
     get_zoo_staging_grouping_with_all_values_equal_df,
     get_new_sorting_columns,
+    upsert_sheet,
 )
 from src.f09_brick.pidgin_toolbox import (
     save_all_csvs_from_pidginunit,
     init_pidginunit_from_dir,
 )
 from src.f10_world.world_tool import get_all_brick_dataframes, _create_events_agg_df
-from pandas import (
-    ExcelWriter,
-    read_excel as pandas_read_excel,
-    concat as pandas_concat,
-    DataFrame,
-)
+from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
 
@@ -76,8 +72,7 @@ class JungleToZooTransformer:
     def _save_to_zoo_staging(self, brick_number: str, dfs: list):
         final_df = pandas_concat(dfs)
         zoo_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
-        with ExcelWriter(zoo_path) as writer:
-            final_df.to_excel(writer, sheet_name="zoo_staging", index=False)
+        upsert_sheet(zoo_path, "zoo_staging", final_df)
 
 
 class ZooStagingToZooAggTransformer:
@@ -90,7 +85,7 @@ class ZooStagingToZooAggTransformer:
             if os_path_exists(zoo_brick_path):
                 zoo_staging_df = pandas_read_excel(zoo_brick_path, "zoo_staging")
                 otx_df = self._group_by_brick_columns(zoo_staging_df, brick_number)
-                self._save_zoo_agg(zoo_brick_path, otx_df)
+                upsert_sheet(zoo_brick_path, "zoo_agg", otx_df)
 
     def _group_by_brick_columns(
         self, zoo_staging_df: DataFrame, brick_number: str
@@ -105,10 +100,6 @@ class ZooStagingToZooAggTransformer:
             zoo_staging_df, required_columns
         )
 
-    def _save_zoo_agg(self, brick_path: str, zoo_staging_df: DataFrame):
-        with ExcelWriter(brick_path, mode="a") as writer:
-            zoo_staging_df.to_excel(writer, sheet_name="zoo_agg", index=False)
-
 
 class ZooAggToZooEventsTransformer:
     def __init__(self, zoo_dir: str):
@@ -120,7 +111,8 @@ class ZooAggToZooEventsTransformer:
             if os_path_exists(zoo_brick_path):
                 zoo_agg_df = pandas_read_excel(zoo_brick_path, "zoo_agg")
                 events_df = self.get_unique_events(zoo_agg_df)
-                self._save_zoo_events(zoo_brick_path, events_df)
+                upsert_sheet(zoo_brick_path, "zoo_events", events_df)
+                # self._save_zoo_events(zoo_brick_path, events_df)
 
     def get_unique_events(self, zoo_agg_df: DataFrame) -> DataFrame:
         events_df = zoo_agg_df[["face_id", "event_id"]].drop_duplicates()
@@ -130,10 +122,6 @@ class ZooAggToZooEventsTransformer:
             .apply(lambda x: "invalid because of conflicting event_id" if x else "")
         )
         return events_df.sort_values(["face_id", "event_id"])
-
-    def _save_zoo_events(self, brick_path: str, events_df: DataFrame):
-        with ExcelWriter(brick_path, mode="a") as writer:
-            events_df.to_excel(writer, sheet_name="zoo_events", index=False)
 
 
 class ZooEventsToEventsLogTransformer:
@@ -168,8 +156,7 @@ class ZooEventsToEventsLogTransformer:
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, events_log_str)
             events_df = pandas_concat([events_log_df, events_df])
-        with ExcelWriter(events_file_path) as writer:
-            events_df.to_excel(writer, sheet_name=events_log_str, index=False)
+        upsert_sheet(events_file_path, events_log_str, events_df)
 
 
 class ZooAggToStagingTransformer:
@@ -183,9 +170,16 @@ class ZooAggToStagingTransformer:
             self.jaar_type = "AcctID"
         elif self.pidgin_category == "bridge_group_id":
             self.jaar_type = "GroupID"
+        elif self.pidgin_category == "bridge_node":
+            self.jaar_type = "RoadNode"
+        elif self.pidgin_category == "bridge_road":
+            self.jaar_type = "RoadUnit"
+        else:
+            raise Exception("not given pidgin_category")
 
     def transform(self):
         category_bricks = get_brick_category_ref().get(self.pidgin_category)
+        print(f"{category_bricks=}")
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
         pidgin_columns.update({"face_id", "event_id"})
         pidgin_columns = get_new_sorting_columns(pidgin_columns)
@@ -200,8 +194,7 @@ class ZooAggToStagingTransformer:
                 )
 
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
-        with ExcelWriter(pidgin_file_path) as writer:
-            pidgin_df.to_excel(writer, self.get_sheet_staging_name(), index=False)
+        upsert_sheet(pidgin_file_path, self.get_sheet_staging_name(), pidgin_df)
 
     def insert_staging_rows(
         self,
@@ -243,12 +236,20 @@ class ZooAggToStagingTransformer:
             return "acct_staging"
         elif self.jaar_type == "GroupID":
             return "group_staging"
+        elif self.jaar_type == "RoadNode":
+            return "node_staging"
+        elif self.jaar_type == "RoadUnit":
+            return "road_staging"
 
     def get_otx_obj(self, x_row) -> str:
         if self.jaar_type == "AcctID":
             return x_row["otx_acct_id"]
         elif self.jaar_type == "GroupID":
             return x_row["otx_group_id"]
+        elif self.jaar_type == "RoadNode":
+            return x_row["otx_node"]
+        elif self.jaar_type == "RoadUnit":
+            return x_row["otx_road"]
         return None
 
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
@@ -256,6 +257,10 @@ class ZooAggToStagingTransformer:
             return x_row["inx_acct_id"]
         elif self.jaar_type == "GroupID" and "inx_group_id" not in missing_col:
             return x_row["inx_group_id"]
+        elif self.jaar_type == "RoadNode" and "inx_node" not in missing_col:
+            return x_row["inx_node"]
+        elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
+            return x_row["inx_road"]
         return None
 
 
@@ -280,8 +285,7 @@ class ZooAggToNubStagingTransformer:
                 )
 
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
-        with ExcelWriter(pidgin_file_path) as writer:
-            nub_df.to_excel(writer, sheet_name="nub_staging", index=False)
+        upsert_sheet(pidgin_file_path, "nub_staging", nub_df)
 
     def insert_legitmate_zoo_agg_nub_atts(
         self,
@@ -443,8 +447,7 @@ class WorldUnit:
         events_file_path = create_path(self._zoo_dir, "events.xlsx")
         events_log_df = pandas_read_excel(events_file_path, "events_log")
         events_agg_df = _create_events_agg_df(events_log_df)
-        with ExcelWriter(events_file_path, mode="a") as writer:
-            events_agg_df.to_excel(writer, sheet_name="events_agg", index=False)
+        upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
     def set_events_from_events_agg(self):
         self.events = {}
@@ -469,7 +472,23 @@ class WorldUnit:
         transformer = ZooAggToStagingTransformer(
             self._zoo_dir, pidgin_cat, legitmate_events
         )
-        # transformer.transform()
+        transformer.transform()
+
+    def zoo_agg_to_node_staging(self):
+        pidgin_cat = "bridge_node"
+        legitmate_events = set(self.events.keys())
+        transformer = ZooAggToStagingTransformer(
+            self._zoo_dir, pidgin_cat, legitmate_events
+        )
+        transformer.transform()
+
+    def zoo_agg_to_road_staging(self):
+        pidgin_cat = "bridge_road"
+        legitmate_events = set(self.events.keys())
+        transformer = ZooAggToStagingTransformer(
+            self._zoo_dir, pidgin_cat, legitmate_events
+        )
+        transformer.transform()
 
     def zoo_agg_to_nub_staging(self):
         legitmate_events = set(self.events.keys())
