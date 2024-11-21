@@ -179,6 +179,7 @@ class ZooAggToStagingTransformer:
 
     def transform(self):
         category_bricks = get_brick_category_ref().get(self.pidgin_category)
+        print(f"{category_bricks=}")
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
         pidgin_columns.update({"face_id", "event_id"})
         pidgin_columns = get_new_sorting_columns(pidgin_columns)
