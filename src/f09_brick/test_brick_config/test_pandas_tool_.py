@@ -1,4 +1,4 @@
-from src.f00_instrument.file import open_file, create_path, create_dir
+from src.f00_instrument.file import open_file, create_path
 from src.f00_instrument.examples.instrument_env import (
     env_dir_setup_cleanup,
     get_instrument_temp_env_dir,
@@ -23,9 +23,12 @@ from src.f09_brick.pandas_tool import (
     get_all_excel_sheet_names,
     get_relevant_columns_dataframe,
     get_zoo_staging_grouping_with_all_values_equal_df,
+    upsert_sheet,
 )
 from os.path import exists as os_path_exists
-from pandas import DataFrame, ExcelWriter
+from pandas import DataFrame, read_excel as pandas_read_excel
+from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
+from pytest import fixture as pytest_fixture
 
 
 def test_get_ordered_csv_ReturnsObj():
@@ -88,6 +91,63 @@ def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(env_dir_setup_c
     assert file_ex02_atom_csv == function_ex02_atom_csv
 
 
+@pytest_fixture
+def sample_dataframe():
+    """Fixture to provide a sample DataFrame."""
+    data = {
+        "Name": ["Alice", "Bob", "Charlie"],
+        "Age": [25, 30, 35],
+        "City": ["New York", "Los Angeles", "Chicago"],
+    }
+    return DataFrame(data)
+
+
+@pytest_fixture
+def temp_excel_file(tmp_path):
+    """Fixture to provide a temporary Excel file path."""
+    return tmp_path / "test_excel.xlsx"
+
+
+def test_create_new_file(temp_excel_file, sample_dataframe):
+    """Test creating a new Excel file with a specified sheet."""
+    upsert_sheet(temp_excel_file, "Sheet1", sample_dataframe)
+    assert os_path_exists(temp_excel_file)
+
+    # Verify the content of the sheet
+    df_read = pandas_read_excel(temp_excel_file, sheet_name="Sheet1")
+    pandas_testing_assert_frame_equal(df_read, sample_dataframe)
+
+
+def test_replace_existing_sheet(temp_excel_file, sample_dataframe):
+    """Test replacing an existing sheet in the Excel file."""
+    # Create the file and write initial data
+    initial_data = DataFrame({"A": [1, 2, 3]})
+    upsert_sheet(temp_excel_file, "Sheet1", initial_data)
+
+    # Replace the sheet with new data
+    upsert_sheet(temp_excel_file, "Sheet1", sample_dataframe)
+
+    # Verify the content of the replaced sheet
+    df_read = pandas_read_excel(temp_excel_file, sheet_name="Sheet1")
+    pandas_testing_assert_frame_equal(df_read, sample_dataframe)
+
+
+def test_add_new_sheet_to_existing_file(temp_excel_file, sample_dataframe):
+    """Test adding a new sheet to an existing Excel file."""
+    # Create the file and write initial data to one sheet
+    initial_data = DataFrame({"A": [1, 2, 3]})
+    upsert_sheet(temp_excel_file, "InitialSheet", initial_data)
+
+    # Add a new sheet with different data
+    upsert_sheet(temp_excel_file, "NewSheet", sample_dataframe)
+
+    # Verify both sheets exist and have correct data
+    df_initial = pandas_read_excel(temp_excel_file, sheet_name="InitialSheet")
+    df_new = pandas_read_excel(temp_excel_file, sheet_name="NewSheet")
+    pandas_testing_assert_frame_equal(df_initial, initial_data)
+    pandas_testing_assert_frame_equal(df_new, sample_dataframe)
+
+
 def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
@@ -98,10 +158,8 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(env_dir_setup_c
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     sheet_name1 = "Sheet1x"
     sheet_name2 = "Sheet2x"
-    create_dir(x_dir)
-    with ExcelWriter(ex_file_path) as writer:
-        df1.to_excel(writer, sheet_name=sheet_name1)
-        df2.to_excel(writer, sheet_name=sheet_name2)
+    upsert_sheet(ex_file_path, sheet_name1, df1)
+    upsert_sheet(ex_file_path, sheet_name2, df2)
 
     # WHEN
     x_sheet_names = get_all_excel_sheet_names(env_dir)
@@ -127,11 +185,9 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     honey_name1 = "honey1x"
     sugar_name1 = f"{sugar_str}2x"
     sugar_name2 = f"honey_{sugar_str}3x"
-    create_dir(x_dir)
-    with ExcelWriter(ex_file_path) as writer:
-        df1.to_excel(writer, sheet_name=honey_name1)
-        df2.to_excel(writer, sheet_name=sugar_name1)
-        df2.to_excel(writer, sheet_name=sugar_name2)
+    upsert_sheet(ex_file_path, honey_name1, df1)
+    upsert_sheet(ex_file_path, sugar_name1, df2)
+    upsert_sheet(ex_file_path, sugar_name2, df2)
 
     # WHEN
     x_sheet_names = get_all_excel_sheet_names(env_dir, sub_strs={sugar_str})

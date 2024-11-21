@@ -1,7 +1,8 @@
-from src.f00_instrument.file import create_path, create_dir
+from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
+from src.f09_brick.pandas_tool import upsert_sheet
 from src.f10_world.world_tool import (
     get_all_excel_bricksheets,
     get_all_brick_dataframes,
@@ -9,7 +10,7 @@ from src.f10_world.world_tool import (
     _create_events_agg_df,
 )
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
-from pandas import DataFrame, ExcelWriter
+from pandas import DataFrame
 
 
 def test_get_all_excel_bricksheets_ReturnsObj_Scenario0_SheetNames():
@@ -23,11 +24,9 @@ def test_get_all_excel_bricksheets_ReturnsObj_Scenario0_SheetNames():
     br00000_str = "br00000"
     br00001_str = "br00001"
     br00002_str = "br00002"
-    create_dir(x_dir)
-    with ExcelWriter(ex_file_path) as writer:
-        df1.to_excel(writer, sheet_name=br00000_str)
-        df2.to_excel(writer, sheet_name=br00001_str)
-        df2.to_excel(writer, sheet_name=br00002_str)
+    upsert_sheet(ex_file_path, br00000_str, df1)
+    upsert_sheet(ex_file_path, br00001_str, df2)
+    upsert_sheet(ex_file_path, br00002_str, df2)
 
     # WHEN
     x_sheet_names = get_all_excel_bricksheets(env_dir)
@@ -53,11 +52,9 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     not_br00000_str = "b00000"
     br00001_str = "example_br00001"
     br00002_str = "example_br00002_example"
-    create_dir(x_dir)
-    with ExcelWriter(ex_file_path) as writer:
-        df1.to_excel(writer, sheet_name=not_br00000_str)
-        df2.to_excel(writer, sheet_name=br00001_str)
-        df2.to_excel(writer, sheet_name=br00002_str)
+    upsert_sheet(ex_file_path, not_br00000_str, df1)
+    upsert_sheet(ex_file_path, br00001_str, df2)
+    upsert_sheet(ex_file_path, br00002_str, df2)
 
     # WHEN
     x_bricksheets = get_all_excel_bricksheets(env_dir)
@@ -109,9 +106,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     df1 = DataFrame([row1, row2], columns=brick_columns)
     br00003_str = "example_br00003"
     br00003_str = "example_br00003"
-    create_dir(x_dir)
-    with ExcelWriter(ex_file_path) as writer:
-        df1.to_excel(writer, sheet_name=br00003_str, index=False)
+    upsert_sheet(ex_file_path, br00003_str, df1)
 
     # WHEN
     x_bricksheets = get_all_brick_dataframes(env_dir)
@@ -159,10 +154,8 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_brick_columns)
     br00003_ex1_str = "example1_br00003"
     br00003_ex2_str = "example2_br00003"
-    create_dir(x_dir)
-    with ExcelWriter(ex_file_path) as writer:
-        df1.to_excel(writer, sheet_name=br00003_ex1_str, index=False)
-        df2.to_excel(writer, sheet_name=br00003_ex2_str, index=False)
+    upsert_sheet(ex_file_path, br00003_ex1_str, df1)
+    upsert_sheet(ex_file_path, br00003_ex2_str, df2)
 
     # WHEN
     x_bricksheets = get_all_brick_dataframes(env_dir)

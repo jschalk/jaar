@@ -13,10 +13,10 @@ from src.f08_pidgin.pidgin_config import (
     otx_group_id_str,
     unknown_word_str,
 )
-from src.f09_brick.pandas_tool import get_sheet_names
+from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet
 from src.f10_world.world import worldunit_shop
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
-from pandas import DataFrame, ExcelWriter, read_excel as pandas_read_excel
+from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
@@ -46,8 +46,7 @@ def test_WorldUnit_zoo_agg_to_group_staging_CreatesFile_Scenario0_SingleBrick(
     sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
     b115_rows = [sue0, sue1]
     br00115_df = DataFrame(b115_rows, columns=br00115_columns)
-    with ExcelWriter(br00115_file_path) as writer:
-        br00115_df.to_excel(writer, sheet_name="zoo_agg", index=False)
+    upsert_sheet(br00115_file_path, "zoo_agg", br00115_df)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     fizz_world.zoo_agg_to_zoo_events()
     fizz_world.zoo_events_to_events_log()
@@ -130,12 +129,10 @@ def test_WorldUnit_zoo_agg_to_group_staging_CreatesFile_Scenario1_MultipleBricks
     yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
     b115_rows = [sue0, sue1]
     br00115_df = DataFrame(b115_rows, columns=br00115_columns)
-    with ExcelWriter(br00115_file_path) as writer:
-        br00115_df.to_excel(writer, sheet_name="zoo_agg", index=False)
+    upsert_sheet(br00115_file_path, "zoo_agg", br00115_df)
     b40_rows = [sue2, sue3, yao1]
     br00043_df = DataFrame(b40_rows, columns=br00043_columns)
-    with ExcelWriter(br00043_file_path) as writer:
-        br00043_df.to_excel(writer, sheet_name="zoo_agg", index=False)
+    upsert_sheet(br00043_file_path, "zoo_agg", br00043_df)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     fizz_world.zoo_agg_to_zoo_events()
     fizz_world.zoo_events_to_events_log()
@@ -222,12 +219,10 @@ def test_WorldUnit_zoo_agg_to_group_staging_CreatesFile_Scenario2_WorldUnit_even
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     b115_rows = [sue0, sue1]
     br00115_df = DataFrame(b115_rows, columns=br00115_columns)
-    with ExcelWriter(br00115_file_path) as writer:
-        br00115_df.to_excel(writer, sheet_name="zoo_agg", index=False)
+    upsert_sheet(br00115_file_path, "zoo_agg", br00115_df)
     b40_rows = [sue2, sue3, yao1]
     br00043_df = DataFrame(b40_rows, columns=br00043_columns)
-    with ExcelWriter(br00043_file_path) as writer:
-        br00043_df.to_excel(writer, sheet_name="zoo_agg", index=False)
+    upsert_sheet(br00043_file_path, "zoo_agg", br00043_df)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     assert fizz_world.events == {}
     fizz_world.zoo_agg_to_zoo_events()

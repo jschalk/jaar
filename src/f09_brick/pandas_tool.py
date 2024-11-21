@@ -1,4 +1,5 @@
 from src.f00_instrument.file import (
+    create_dir,
     save_file,
     create_path,
     get_dir_filenames,
@@ -22,9 +23,11 @@ from pandas import (
     DataFrame,
     read_csv as pandas_read_csv,
     read_sql_query as pandas_read_sql_query,
+    ExcelWriter,
 )
 from openpyxl import load_workbook as openpyxl_load_workbook
 from sqlite3 import connect as sqlite3_connect
+from os.path import exists as os_path_exists, dirname as os_path_dirname
 
 
 def save_dataframe_to_csv(x_df: DataFrame, x_dir: str, x_filename: str):
@@ -161,3 +164,30 @@ def _get_pidgen_brick_format_filenames() -> set[str]:
     brick_numbers.update(set(get_brick_category_ref().get("bridge_road")))
     brick_numbers.update(set(get_brick_category_ref().get("bridge_nub_label")))
     return {f"{brick_number}.xlsx" for brick_number in brick_numbers}
+
+
+def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
+    create_dir(os_path_dirname(file_path))
+    """
+    Updates or creates an Excel sheet with a specified DataFrame.
+
+    Args:
+    - file_path (str): The path to the Excel file.
+    - sheet_name (str): The name of the sheet to update or create.
+    - dataframe (pd.DataFrame): The DataFrame to write to the sheet.
+    """
+    # Check if the file exists
+    if not os_path_exists(file_path):
+        # If file does not exist, create it with the specified sheet
+        with ExcelWriter(file_path, engine="xlsxwriter") as writer:
+            dataframe.to_excel(writer, sheet_name=sheet_name, index=False)
+        return
+
+    # If the file exists, check for the sheet
+    try:
+        with ExcelWriter(
+            file_path, engine="openpyxl", mode="a", if_sheet_exists="replace"
+        ) as writer:
+            dataframe.to_excel(writer, sheet_name=sheet_name, index=False)
+    except Exception as e:
+        print(f"An error occurred: {e}")
