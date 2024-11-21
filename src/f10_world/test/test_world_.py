@@ -1,6 +1,5 @@
 from src.f00_instrument.file import save_file, delete_dir, create_path
 from src.f01_road.finance_tran import timeconversion_shop
-from src.f04_gift.atom_config import road_str
 from src.f08_pidgin.pidgin import pidginunit_shop
 from src.f10_world.world import (
     init_fiscalunits_from_dirs,
@@ -41,11 +40,11 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=get_test_worlds_dir())
-    x_world_dir = f"{get_test_worlds_dir()}/{fizz_str}"
-    x_events_dir = f"{x_world_dir}/events"
-    x_pidgins_dir = f"{x_world_dir}/pidgins"
-    x_jungle_dir = f"{x_world_dir}/jungle"
-    x_zoo_dir = f"{x_world_dir}/zoo"
+    x_world_dir = create_path(get_test_worlds_dir(), fizz_str)
+    x_events_dir = create_path(x_world_dir, "events")
+    x_pidgins_dir = create_path(x_world_dir, "pidgins")
+    x_jungle_dir = create_path(x_world_dir, "jungle")
+    x_zoo_dir = create_path(x_world_dir, "zoo")
 
     assert fizz_world._world_dir is None
     assert fizz_world._events_dir is None
@@ -100,14 +99,15 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     )
 
     # THEN
+    world_dir = create_path(worlds2_dir, x_world.world_id)
     assert x_world.world_id == five_world_id
     assert x_world.worlds_dir == worlds2_dir
     assert x_world.current_time == world2_current_time
     assert x_world.timeconversions == world2timeconversions
     assert x_world.events == {}
     assert x_world.pidgins == world2_pidgins
-    assert x_world._events_dir == f"{worlds2_dir}/{five_world_id}/events"
-    assert x_world._pidgins_dir == f"{worlds2_dir}/{five_world_id}/pidgins"
+    assert x_world._events_dir == create_path(world_dir, "events")
+    assert x_world._pidgins_dir == create_path(world_dir, "pidgins")
     assert x_world._fiscalunits == world2_fiscalunits
 
 
@@ -116,14 +116,15 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     x_world = worldunit_shop()
 
     # THEN
+    world_dir = create_path(get_test_worlds_dir(), x_world.world_id)
     assert x_world.world_id == get_test_world_id()
     assert x_world.worlds_dir == get_test_worlds_dir()
     assert x_world.current_time == 0
     assert x_world.timeconversions == {}
     assert x_world.pidgins == {}
     assert x_world.events == {}
-    assert x_world._events_dir == f"{get_test_worlds_dir()}/{x_world.world_id}/events"
-    assert x_world._pidgins_dir == f"{get_test_worlds_dir()}/{x_world.world_id}/pidgins"
+    assert x_world._events_dir == create_path(world_dir, "events")
+    assert x_world._pidgins_dir == create_path(world_dir, "pidgins")
     assert x_world._fiscalunits == set()
 
 

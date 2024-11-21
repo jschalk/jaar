@@ -1,4 +1,4 @@
-from src.f00_instrument.file import open_file, create_path
+from src.f00_instrument.file import open_file, create_path, get_dir_file_strs
 from src.f00_instrument.examples.instrument_env import (
     env_dir_setup_cleanup,
     get_instrument_temp_env_dir,
@@ -24,11 +24,12 @@ from src.f09_brick.pandas_tool import (
     get_relevant_columns_dataframe,
     get_zoo_staging_grouping_with_all_values_equal_df,
     upsert_sheet,
+    split_excel_into_dirs,
 )
-from os.path import exists as os_path_exists
+from os.path import exists as os_path_exists, join as os_path_join
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
-from pytest import fixture as pytest_fixture
+from pytest import fixture as pytest_fixture, raises as pytest_raises
 
 
 def test_get_ordered_csv_ReturnsObj():
@@ -115,6 +116,7 @@ def test_upsert_sheet_CreatesNewFile(temp_excel_file, sample_dataframe):
 
     # Verify the content of the sheet
     df_read = pandas_read_excel(temp_excel_file, sheet_name="Sheet1")
+    assert list(df_read.columns) != []
     pandas_testing_assert_frame_equal(df_read, sample_dataframe)
 
 
@@ -385,3 +387,130 @@ def test_get_zoo_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_
     assert len(group_by_dataframe) == len(after_df)
     print(f"{group_by_dataframe.columns=}")
     assert group_by_dataframe.to_csv() == after_df.to_csv()
+
+
+@pytest_fixture
+def sample_excel_file(tmp_path):
+    """Fixture to create a sample Excel file for testing."""
+    data = {
+        "ID": [1, 2, 3, 4, 5],
+        "Category": ["A", "B", "A", "C", "B"],
+        "Value": [100, 200, 150, 300, 250],
+    }
+    df = DataFrame(data)
+    file_path = tmp_path / "sample.xlsx"
+    df.to_excel(file_path, index=False)
+    return file_path
+
+
+@pytest_fixture
+def output_dir(tmp_path):
+    """Fixture to provide a temporary output directory."""
+    output_dir = tmp_path / "output"
+    return output_dir
+
+
+def test_split_excel_into_dirs_RaisesErrorWhenColumnIsInvalid(
+    sample_excel_file, output_dir
+):
+    """Test handling of an invalid column."""
+    # ESTABLISH / WHEN / THEN
+    with pytest_raises(ValueError, match="Column 'InvalidColumn' does not exist"):
+        split_excel_into_dirs(
+            sample_excel_file, output_dir, "InvalidColumn", "filename", "sheet5"
+        )
+
+
+def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
+    sample_excel_file, output_dir
+):
+    """Test splitting an Excel file by a valid column."""
+    # ESTABLISH
+    x_filename = "fizz"
+    a_file_path = os_path_join(output_dir, f"A/{x_filename}.xlsx")
+    b_file_path = os_path_join(output_dir, f"B/{x_filename}.xlsx")
+    c_file_path = os_path_join(output_dir, f"C/{x_filename}.xlsx")
+    assert os_path_exists(a_file_path) is False
+    assert os_path_exists(b_file_path) is False
+    assert os_path_exists(c_file_path) is False
+
+    # WHEN
+    split_excel_into_dirs(
+        sample_excel_file, output_dir, "Category", x_filename, "sheet5"
+    )
+
+    # Verify files are created for each unique value in "Category"
+    assert os_path_exists(a_file_path)
+    assert os_path_exists(b_file_path)
+    assert os_path_exists(c_file_path)
+
+    # Verify contents of one of the created files
+    df_a = pandas_read_excel(a_file_path)
+    expected_a = DataFrame({"ID": [1, 3], "Category": ["A", "A"], "Value": [100, 150]})
+    pandas_testing_assert_frame_equal(df_a, expected_a)
+
+
+def test_split_excel_into_dirs_DoesNothingIfColumnIsEmpty(tmp_path, output_dir):
+    """Test handling of an empty column."""
+    # ESTABLISH Create an Excel file with an empty column
+    data = {
+        "ID": [1, 2, 3],
+        "Category": [None, None, None],
+        "Value": [100, 200, 300],
+    }
+    df = DataFrame(data)
+    file_path = tmp_path / "empty_column.xlsx"
+    df.to_excel(file_path, index=False)
+
+    # WHEN
+    x_filename = "fizz"
+    split_excel_into_dirs(file_path, output_dir, "Category", x_filename, "sheet5")
+
+    # THEN Verify that no files are created
+    created_files = list(output_dir.iterdir())
+    print(f"{created_files=}")
+    assert len(created_files) == 0
+
+
+def test_split_excel_into_dirs_DoesCreateDirectoryIfColumnEmpty(
+    sample_excel_file, tmp_path
+):
+    """Test if the output directory is created automatically."""
+    # ESTABLISH
+    output_dir = tmp_path / "nonexistent_output"
+    x_filename = "fizz"
+
+    # WHEN
+    split_excel_into_dirs(
+        sample_excel_file, output_dir, "Category", x_filename, "sheet5"
+    )
+
+    # THEN
+    assert output_dir.exists()
+    print(f"{list(output_dir.iterdir())=}")
+    assert len(list(output_dir.iterdir())) > 0
+
+
+def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
+    """Test handling of invalid characters in unique values for filenames."""
+    # ESTABLISH Create a DataFrame with special characters in the splitting column
+    data = {
+        "ID": [1, 2],
+        "Category": ["A/B", "C\\D"],
+        "Value": [100, 200],
+    }
+    df = DataFrame(data)
+    file_path = tmp_path / "special_chars.xlsx"
+    df.to_excel(file_path, index=False)
+    x_filename = "fizz"
+    b_file_path = os_path_join(output_dir, f"A_B/{x_filename}.xlsx")
+    c_file_path = os_path_join(output_dir, f"C_D/{x_filename}.xlsx")
+    assert os_path_exists(b_file_path) is False
+    assert os_path_exists(c_file_path) is False
+
+    # WHEN
+    split_excel_into_dirs(file_path, output_dir, "Category", x_filename, "sheet5")
+
+    # THEN
+    assert os_path_exists(b_file_path)
+    assert os_path_exists(c_file_path)
