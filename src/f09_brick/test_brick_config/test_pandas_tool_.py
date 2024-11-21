@@ -108,7 +108,7 @@ def temp_excel_file(tmp_path):
     return tmp_path / "test_excel.xlsx"
 
 
-def test_create_new_file(temp_excel_file, sample_dataframe):
+def test_upsert_sheet_CreatesNewFile(temp_excel_file, sample_dataframe):
     """Test creating a new Excel file with a specified sheet."""
     upsert_sheet(temp_excel_file, "Sheet1", sample_dataframe)
     assert os_path_exists(temp_excel_file)
@@ -118,7 +118,7 @@ def test_create_new_file(temp_excel_file, sample_dataframe):
     pandas_testing_assert_frame_equal(df_read, sample_dataframe)
 
 
-def test_replace_existing_sheet(temp_excel_file, sample_dataframe):
+def test_upsert_sheet_ReplacesExistingSheet(temp_excel_file, sample_dataframe):
     """Test replacing an existing sheet in the Excel file."""
     # Create the file and write initial data
     initial_data = DataFrame({"A": [1, 2, 3]})
@@ -132,7 +132,7 @@ def test_replace_existing_sheet(temp_excel_file, sample_dataframe):
     pandas_testing_assert_frame_equal(df_read, sample_dataframe)
 
 
-def test_add_new_sheet_to_existing_file(temp_excel_file, sample_dataframe):
+def test_upsert_sheet_AddNewSheetToExistingFile(temp_excel_file, sample_dataframe):
     """Test adding a new sheet to an existing Excel file."""
     # Create the file and write initial data to one sheet
     initial_data = DataFrame({"A": [1, 2, 3]})
