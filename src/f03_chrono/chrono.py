@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import get_0_if_None, get_dict_from_json
-from src.f00_instrument.file import open_file
+from src.f00_instrument.file import open_file, create_path
 from src.f01_road.road import RoadUnit, TimeLineLabel
 from src.f02_bud.item import (
     itemunit_shop,
@@ -516,7 +516,8 @@ def chronounit_shop(x_budunit: BudUnit, time_range_root_road: str, x_min: int):
 
 
 def config_file_dir() -> str:
-    return f"{os_getcwd()}/src/f03_chrono"
+    src_dir = create_path(os_getcwd(), "src")
+    return create_path(src_dir, "f03_chrono")
 
 
 def get_default_timeline_config_file_name() -> str:

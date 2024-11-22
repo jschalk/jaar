@@ -30,8 +30,8 @@ from copy import deepcopy as copy_deepcopy
 
 def create_path(x_dir: str, filename: str) -> str:
     if not x_dir:
-        return f"/{filename}" if filename else ""
-    return f"{x_dir}/{filename}" if filename else x_dir
+        return f"{filename}" if filename else ""
+    return os_path_join(x_dir, filename) if filename else x_dir
 
 
 def set_dir(x_path: str):

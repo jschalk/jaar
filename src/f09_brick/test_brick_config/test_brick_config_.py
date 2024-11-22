@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import get_json_from_dict
-from src.f00_instrument.file import save_file
+from src.f00_instrument.file import save_file, create_path
 from src.f01_road.finance_tran import quota_str, time_id_str, wall_str
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
@@ -360,7 +360,8 @@ def test_get_brick_config_file_name_ReturnsObj():
 
 
 def test_config_file_dir_ReturnsObj() -> str:
-    assert config_file_dir() == f"{os_getcwd()}/src/f09_brick"
+    src_dir = create_path(os_getcwd(), "src")
+    assert config_file_dir() == create_path(src_dir, "f09_brick")
 
 
 def test_get_brick_config_dict_ReturnsObj():

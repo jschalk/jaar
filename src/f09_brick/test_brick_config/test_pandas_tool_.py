@@ -26,7 +26,7 @@ from src.f09_brick.pandas_tool import (
     upsert_sheet,
     split_excel_into_dirs,
 )
-from os.path import exists as os_path_exists, join as os_path_join
+from os.path import exists as os_path_exists
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from pytest import fixture as pytest_fixture, raises as pytest_raises
@@ -427,9 +427,9 @@ def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
     """Test splitting an Excel file by a valid column."""
     # ESTABLISH
     x_filename = "fizz"
-    a_file_path = os_path_join(output_dir, f"A/{x_filename}.xlsx")
-    b_file_path = os_path_join(output_dir, f"B/{x_filename}.xlsx")
-    c_file_path = os_path_join(output_dir, f"C/{x_filename}.xlsx")
+    a_file_path = create_path(output_dir, f"A/{x_filename}.xlsx")
+    b_file_path = create_path(output_dir, f"B/{x_filename}.xlsx")
+    c_file_path = create_path(output_dir, f"C/{x_filename}.xlsx")
     assert os_path_exists(a_file_path) is False
     assert os_path_exists(b_file_path) is False
     assert os_path_exists(c_file_path) is False
@@ -503,8 +503,8 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
     file_path = tmp_path / "special_chars.xlsx"
     df.to_excel(file_path, index=False)
     x_filename = "fizz"
-    b_file_path = os_path_join(output_dir, f"A_B/{x_filename}.xlsx")
-    c_file_path = os_path_join(output_dir, f"C_D/{x_filename}.xlsx")
+    b_file_path = create_path(output_dir, f"A_B/{x_filename}.xlsx")
+    c_file_path = create_path(output_dir, f"C_D/{x_filename}.xlsx")
     assert os_path_exists(b_file_path) is False
     assert os_path_exists(c_file_path) is False
 

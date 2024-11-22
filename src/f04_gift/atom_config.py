@@ -1,4 +1,4 @@
-from src.f00_instrument.file import open_file, save_file
+from src.f00_instrument.file import open_file, save_file, create_path
 from src.f00_instrument.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
@@ -248,7 +248,8 @@ def get_atom_config_file_name() -> str:
 
 
 def config_file_dir() -> str:
-    return f"{os_getcwd()}/src/f04_gift"
+    src_dir = create_path(os_getcwd(), "src")
+    return create_path(src_dir, "f04_gift")
 
 
 def get_atom_config_dict() -> dict:

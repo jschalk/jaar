@@ -1,3 +1,4 @@
+from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
     jkeys_str,
     jvalues_str,
@@ -73,7 +74,8 @@ def test_get_pidgin_config_file_name_ReturnsObj():
 
 
 def test_config_file_dir_ReturnsObj() -> str:
-    assert config_file_dir() == f"{os_getcwd()}/src/f08_pidgin"
+    src_dir = create_path(os_getcwd(), "src")
+    assert config_file_dir() == create_path(src_dir, "f08_pidgin")
 
 
 def test_get_pidgin_config_dict_ReturnsObj():

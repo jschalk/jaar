@@ -1,3 +1,4 @@
+from src.f00_instrument.file import create_path
 from src.f01_road.finance import default_fund_pool
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.example_listen_buds import (
@@ -30,7 +31,8 @@ def test_HubUnit_timepoint_dir_ReturnsObj():
     one_timepoint_dir = yao_hubunit.timepoint_dir(t88_time_id)
 
     # THEN
-    assert one_timepoint_dir == f"{yao_hubunit.timeline_dir()}/{t88_time_id}"
+    x_timeline_dir = yao_hubunit.timeline_dir()
+    assert one_timepoint_dir == create_path(x_timeline_dir, str(t88_time_id))
 
 
 def test_HubUnit_purview_file_name_ReturnsObj():
@@ -55,9 +57,8 @@ def test_HubUnit_purview_file_path_ReturnsObj():
     t88_purview_file_path = yao_hubunit.purview_file_path(t88_time_id)
 
     # THEN
-    x_file_path = (
-        f"{yao_hubunit.timepoint_dir(t88_time_id)}/{yao_hubunit.purview_file_name()}"
-    )
+    x_timepoint_dir = yao_hubunit.timepoint_dir(t88_time_id)
+    x_file_path = create_path(x_timepoint_dir, yao_hubunit.purview_file_name())
     assert t88_purview_file_path == x_file_path
 
 
@@ -174,9 +175,8 @@ def test_HubUnit_budpoint_file_path_ReturnsObj():
     t88_budpoint_file_path = yao_hubunit.budpoint_file_path(t88_time_id)
 
     # THEN
-    x_file_path = (
-        f"{yao_hubunit.timepoint_dir(t88_time_id)}/{yao_hubunit.budpoint_file_name()}"
-    )
+    x_timepoint_dir = yao_hubunit.timepoint_dir(t88_time_id)
+    x_file_path = create_path(x_timepoint_dir, yao_hubunit.budpoint_file_name())
     assert t88_budpoint_file_path == x_file_path
 
 

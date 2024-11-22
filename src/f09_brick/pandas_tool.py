@@ -29,11 +29,7 @@ from pandas import (
 )
 from openpyxl import load_workbook as openpyxl_load_workbook
 from sqlite3 import connect as sqlite3_connect
-from os.path import (
-    exists as os_path_exists,
-    dirname as os_path_dirname,
-    join as os_path_join,
-)
+from os.path import exists as os_path_exists, dirname as os_path_dirname
 
 
 def save_dataframe_to_csv(x_df: DataFrame, x_dir: str, x_filename: str):
@@ -151,8 +147,8 @@ def pidgin_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
 
 
 def move_otx_csvs_to_pidgin_inx(face_dir: str):
-    otx_dir = f"{face_dir}/otx"
-    inx_dir = f"{face_dir}/inx"
+    otx_dir = create_path(face_dir, "otx")
+    inx_dir = create_path(face_dir, "inx")
     bridge_filename = "bridge.json"
     pidginunit_json = open_file(face_dir, bridge_filename)
     face_pidginunit = get_pidginunit_from_json(pidginunit_json)
@@ -229,10 +225,10 @@ def split_excel_into_dirs(
 
             # Create a safe subdirectory name for the unique value
             safe_value = str(value).replace("/", "_").replace("\\", "_")
-            subdirectory = os_path_join(output_dir, safe_value)
+            subdirectory = create_path(output_dir, safe_value)
             # Create the subdirectory if it doesn't exist
             create_dir(subdirectory)
             # Define the output file path
-            output_file = os_path_join(subdirectory, f"{file_name}.xlsx")
+            output_file = create_path(subdirectory, f"{file_name}.xlsx")
             upsert_sheet(output_file, sheet_name, filtered_df)
             # filtered_df.to_excel(output_file, index=False)

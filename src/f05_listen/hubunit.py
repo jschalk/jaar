@@ -128,28 +128,28 @@ class HubUnit:
         return f_path(self.fiscals_dir, self.fiscal_id)
 
     def owners_dir(self) -> str:
-        return f"{self.fiscal_dir()}/owners"
+        return f_path(self.fiscal_dir(), "owners")
 
     def owner_dir(self) -> str:
         return f_path(self.owners_dir(), self.owner_id)
 
     def keeps_dir(self) -> str:
-        return f"{self.owner_dir()}/keeps"
+        return f_path(self.owner_dir(), "keeps")
 
     def atoms_dir(self) -> str:
-        return f"{self.owner_dir()}/atoms"
+        return f_path(self.owner_dir(), "atoms")
 
     def gifts_dir(self) -> str:
         return f_path(self.owner_dir(), get_gifts_folder())
 
     def voice_dir(self) -> str:
-        return f"{self.owner_dir()}/voice"
+        return f_path(self.owner_dir(), "voice")
 
     def final_dir(self) -> str:
-        return f"{self.owner_dir()}/final"
+        return f_path(self.owner_dir(), "final")
 
     def timeline_dir(self) -> str:
-        return f"{self.owner_dir()}/timeline"
+        return f_path(self.owner_dir(), "timeline")
 
     def voice_file_name(self) -> str:
         return get_json_filename(self.owner_id)
@@ -417,7 +417,7 @@ class HubUnit:
         return self.get_voice_bud()
 
     def timepoint_dir(self, x_time_id: TimeLinePoint) -> str:
-        return f"{self.timeline_dir()}/{x_time_id}"
+        return f_path(self.timeline_dir(), str(x_time_id))
 
     def purview_file_name(self) -> str:
         return "purview.json"
@@ -532,10 +532,10 @@ class HubUnit:
         return f_path(self.dutys_dir(), self.owner_file_name(owner_id))
 
     def job_path(self, owner_id: OwnerID) -> str:
-        return f"{self.jobs_dir()}/{self.owner_file_name(owner_id)}"
+        return f_path(self.jobs_dir(), self.owner_file_name(owner_id))
 
     def grade_path(self, owner_id: OwnerID) -> str:
-        return f"{self.grades_dir()}/{self.owner_file_name(owner_id)}"
+        return f_path(self.grades_dir(), self.owner_file_name(owner_id))
 
     def dutys_dir(self) -> str:
         return get_keep_dutys_dir(self.keep_dir())
@@ -718,4 +718,5 @@ def get_keep_path(x_hubunit: HubUnit, x_road: RoadNode) -> str:
     keep_root = get_rootpart_of_keep_dir()
     x_road = rebuild_road(x_road, x_hubunit.fiscal_id, keep_root)
     x_list = get_all_road_nodes(x_road, x_hubunit.wall)
-    return f"{x_hubunit.keeps_dir()}{get_directory_path(x_list=[*x_list])}"
+    keep_sub_path = get_directory_path(x_list=[*x_list])
+    return f_path(x_hubunit.keeps_dir(), keep_sub_path)

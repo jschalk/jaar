@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
-from src.f00_instrument.file import delete_dir, save_file, open_file
+from src.f00_instrument.file import delete_dir, save_file, open_file, create_path
 from src.f00_instrument.db_toolbox import (
     get_db_tables,
     get_db_columns,
@@ -25,9 +25,9 @@ def test_FiscalUnit_get_journal_db_path_ReturnsCorrectObj():
     x_journal_db_path = music_fiscal.get_journal_db_path()
 
     # THEN
-    x_fiscal_dir = f"{get_test_fiscals_dir()}/{music_str}"
+    x_fiscal_dir = create_path(get_test_fiscals_dir(), music_str)
     journal_file_name = "journal.db"
-    assert x_journal_db_path == f"{x_fiscal_dir}/{journal_file_name}"
+    assert x_journal_db_path == create_path(x_fiscal_dir, journal_file_name)
 
 
 def test_FiscalUnit_create_journal_db_CreatesDBIfDoesNotExist(

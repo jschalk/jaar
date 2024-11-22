@@ -1,3 +1,4 @@
+from src.f00_instrument.file import create_path
 from src.f01_road.road import (
     default_wall_if_none,
     create_road_from_nodes,
@@ -49,13 +50,14 @@ def test_get_keep_path_ReturnsCorrectObj():
     kern_path = get_keep_path(sue_hubunit, kern_road)
 
     # THEN
-    itemroot_dir = f"{sue_hubunit.keeps_dir()}/{get_rootpart_of_keep_dir()}"
+    # itemroot_dir = f"{sue_hubunit.keeps_dir()}/{get_rootpart_of_keep_dir()}"
+    itemroot_dir = create_path(sue_hubunit.keeps_dir(), get_rootpart_of_keep_dir())
     print(f"{kern_road=}")
     print(f"{itemroot_dir=}")
-    assert texas_path == f"{itemroot_dir}/{texas_str}"
-    assert dallas_path == f"{itemroot_dir}/{texas_str}/{dallas_str}"
-    assert elpaso_path == f"{itemroot_dir}/{texas_str}/{elpaso_str}"
-    assert kern_path == f"{itemroot_dir}/{texas_str}/{elpaso_str}/{kern_str}"
+    assert texas_path == create_path(itemroot_dir, texas_str)
+    assert dallas_path == create_path(texas_path, dallas_str)
+    assert elpaso_path == create_path(texas_path, elpaso_str)
+    assert kern_path == create_path(elpaso_path, kern_str)
 
     # WHEN / THEN
     diff_root_texas_road = create_road_from_nodes([peru_str, texas_str])
@@ -133,20 +135,22 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
-    assert x_hubunit.fiscal_dir() == f"{x_fiscals_dir}/{x_fiscal_id}"
-    assert x_hubunit.owners_dir() == f"{x_hubunit.fiscal_dir()}/owners"
-    assert x_hubunit.owner_dir() == f"{x_hubunit.owners_dir()}/{sue_str}"
-    assert x_hubunit.keeps_dir() == f"{x_hubunit.owner_dir()}/keeps"
-    assert x_hubunit.atoms_dir() == f"{x_hubunit.owner_dir()}/atoms"
-    assert x_hubunit.voice_dir() == f"{x_hubunit.owner_dir()}/voice"
-    assert x_hubunit.final_dir() == f"{x_hubunit.owner_dir()}/final"
-    assert x_hubunit.timeline_dir() == f"{x_hubunit.owner_dir()}/timeline"
-    assert x_hubunit.gifts_dir() == f"{x_hubunit.owner_dir()}/{get_gifts_folder()}"
+    assert x_hubunit.fiscal_dir() == create_path(x_fiscals_dir, x_fiscal_id)
+    assert x_hubunit.owners_dir() == create_path(x_hubunit.fiscal_dir(), "owners")
+    assert x_hubunit.owner_dir() == create_path(x_hubunit.owners_dir(), sue_str)
+    assert x_hubunit.keeps_dir() == create_path(x_hubunit.owner_dir(), "keeps")
+    assert x_hubunit.atoms_dir() == create_path(x_hubunit.owner_dir(), "atoms")
+    assert x_hubunit.voice_dir() == create_path(x_hubunit.owner_dir(), "voice")
+    assert x_hubunit.final_dir() == create_path(x_hubunit.owner_dir(), "final")
+    assert x_hubunit.timeline_dir() == create_path(x_hubunit.owner_dir(), "timeline")
+    assert x_hubunit.gifts_dir() == create_path(
+        x_hubunit.owner_dir(), get_gifts_folder()
+    )
     assert x_hubunit.voice_file_name() == f"{sue_str}.json"
-    x_voice_file_path = f"{x_hubunit.voice_dir()}/{x_hubunit.voice_file_name()}"
+    x_voice_file_path = create_path(x_hubunit.voice_dir(), x_hubunit.voice_file_name())
     assert x_hubunit.voice_file_path() == x_voice_file_path
     assert x_hubunit.final_file_name() == f"{sue_str}.json"
-    x_finalpath = f"{x_hubunit.final_dir()}/{x_hubunit.final_file_name()}"
+    x_finalpath = create_path(x_hubunit.final_dir(), x_hubunit.final_file_name())
     assert x_hubunit.final_path() == x_finalpath
 
 
@@ -164,36 +168,42 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     sue_hubunit = hubunit_shop(None, None, sue_str, texas_road)
 
     # THEN
+    x_fiscal_path = create_path(get_test_fiscals_dir(), get_fiscal_id_if_None())
+    x_owners_path = create_path(sue_hubunit.fiscal_dir(), "owners")
+    x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
+    x_jobs_path = create_path(sue_hubunit.keep_dir(), "jobs")
+    x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
+
     assert sue_hubunit.fiscals_dir == get_test_fiscals_dir()
     assert sue_hubunit.fiscal_id == get_fiscal_id_if_None()
-    assert (
-        sue_hubunit.fiscal_dir()
-        == f"{get_test_fiscals_dir()}/{get_fiscal_id_if_None()}"
-    )
+    assert sue_hubunit.fiscal_dir() == x_fiscal_path
     assert sue_hubunit.owner_id == sue_str
     assert sue_hubunit.wall == default_wall_if_none()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_coin == default_fund_coin_if_none()
     assert sue_hubunit.respect_bit == default_respect_bit_if_none()
     assert sue_hubunit.penny == default_penny_if_none()
-    assert sue_hubunit.owners_dir() == f"{sue_hubunit.fiscal_dir()}/owners"
+    assert sue_hubunit.owners_dir() == x_owners_path
     x_hubunit = hubunit_shop(None, None, sue_str)
     assert sue_hubunit.keep_road == texas_road
     assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_road)
     bob_str = "Bob"
-    assert sue_hubunit.dutys_dir() == f"{sue_hubunit.keep_dir()}/dutys"
-    assert sue_hubunit.jobs_dir() == f"{sue_hubunit.keep_dir()}/jobs"
-    assert sue_hubunit.grades_dir() == f"{sue_hubunit.keep_dir()}/grades"
+    assert sue_hubunit.dutys_dir() == x_dutys_path
+    assert sue_hubunit.jobs_dir() == x_jobs_path
+    assert sue_hubunit.grades_dir() == x_grades_path
     sue_dutys_dir = sue_hubunit.dutys_dir()
     sue_jobs_dir = sue_hubunit.jobs_dir()
     sue_grades_dir = sue_hubunit.grades_dir()
-    assert sue_hubunit.duty_path(bob_str) == f"{sue_dutys_dir}/{bob_str}.json"
-    assert sue_hubunit.job_path(bob_str) == f"{sue_jobs_dir}/{bob_str}.json"
-    assert sue_hubunit.grade_path(bob_str) == f"{sue_grades_dir}/{bob_str}.json"
+    x_duty_path = create_path(sue_dutys_dir, f"{bob_str}.json")
+    x_job_path = create_path(sue_jobs_dir, f"{bob_str}.json")
+    x_grade_path = create_path(sue_grades_dir, f"{bob_str}.json")
+    assert sue_hubunit.duty_path(bob_str) == x_duty_path
+    assert sue_hubunit.job_path(bob_str) == x_job_path
+    assert sue_hubunit.grade_path(bob_str) == x_grade_path
     treasury_file_name = "treasury.db"
-    treasury_file_path = f"{sue_hubunit.keep_dir()}/{treasury_file_name}"
+    x_treasury_file_path = create_path(sue_hubunit.keep_dir(), treasury_file_name)
     assert sue_hubunit.treasury_file_name() == treasury_file_name
-    assert sue_hubunit.treasury_db_path() == treasury_file_path
+    assert sue_hubunit.treasury_db_path() == x_treasury_file_path
 
 
 def test_hubunit_shop_RaisesErrorIf_owner_id_Contains_wall():
