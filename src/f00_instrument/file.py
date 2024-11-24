@@ -86,7 +86,7 @@ def open_file(dest_dir: str, file_name: str):
         with open(file_path, "r") as f:
             text_x = f.read()
             f.close()
-    except Exception as e:
+    except (PermissionError, FileNotFoundError, OSError) as e:
         raise CouldNotOpenFileException(
             f"Could not load file {file_path} {e.args}"
         ) from e

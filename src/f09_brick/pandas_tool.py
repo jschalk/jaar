@@ -97,7 +97,6 @@ def get_relevant_columns_dataframe(
     relevant_cols_in_order = [
         r_col for r_col in relevant_columns if r_col in current_relevant_columns
     ]
-    print(f"{relevant_cols_in_order=}")
     return src_df[relevant_cols_in_order]
 
 
@@ -191,8 +190,8 @@ def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
             file_path, engine="openpyxl", mode="a", if_sheet_exists="replace"
         ) as writer:
             dataframe.to_excel(writer, sheet_name=sheet_name, index=False)
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    except (PermissionError, FileNotFoundError, OSError) as e:
+        raise Exception(f"An error occurred: {e}")
 
 
 def split_excel_into_dirs(

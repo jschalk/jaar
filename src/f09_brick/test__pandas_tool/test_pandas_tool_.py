@@ -445,9 +445,17 @@ def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
     assert os_path_exists(c_file_path)
 
     # Verify contents of one of the created files
-    df_a = pandas_read_excel(a_file_path)
+    a_df = pandas_read_excel(a_file_path)
     expected_a = DataFrame({"ID": [1, 3], "Category": ["A", "A"], "Value": [100, 150]})
-    pandas_testing_assert_frame_equal(df_a, expected_a)
+    pandas_testing_assert_frame_equal(a_df, expected_a)
+
+    b_df = pandas_read_excel(b_file_path)
+    b_expected = DataFrame({"ID": [2, 5], "Category": ["B", "B"], "Value": [200, 250]})
+    pandas_testing_assert_frame_equal(b_df, b_expected)
+
+    c_df = pandas_read_excel(c_file_path)
+    c_expected = DataFrame({"ID": [4], "Category": ["C"], "Value": [300]})
+    pandas_testing_assert_frame_equal(c_df, c_expected)
 
 
 def test_split_excel_into_dirs_DoesNothingIfColumnIsEmpty(tmp_path, output_dir):
