@@ -44,8 +44,8 @@ def test_WorldUnit_zoo_agg_to_acct_staging_CreatesFile_Scenario0_SingleBrick(
     ]
     sue0 = [sue_str, event7, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
-    b113_rows = [sue0, sue1]
-    br00113_df = DataFrame(b113_rows, columns=br00113_columns)
+    br00113_rows = [sue0, sue1]
+    br00113_df = DataFrame(br00113_rows, columns=br00113_columns)
     upsert_sheet(br00113_file_path, "zoo_agg", br00113_df)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     fizz_world.zoo_agg_to_zoo_events()
@@ -127,11 +127,11 @@ def test_WorldUnit_zoo_agg_to_acct_staging_CreatesFile_Scenario1_MultipleBricksF
     sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
     sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
     yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
-    b113_rows = [sue0, sue1]
-    br00113_df = DataFrame(b113_rows, columns=br00113_columns)
+    br00113_rows = [sue0, sue1]
+    br00113_df = DataFrame(br00113_rows, columns=br00113_columns)
     upsert_sheet(br00113_file_path, "zoo_agg", br00113_df)
-    b40_rows = [sue2, sue3, yao1]
-    br00043_df = DataFrame(b40_rows, columns=br00043_columns)
+    br00043_df = [sue2, sue3, yao1]
+    br00043_df = DataFrame(br00043_df, columns=br00043_columns)
     upsert_sheet(br00043_file_path, "zoo_agg", br00043_df)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     fizz_world.zoo_agg_to_zoo_events()
@@ -217,11 +217,11 @@ def test_WorldUnit_zoo_agg_to_acct_staging_CreatesFile_Scenario2_WorldUnit_event
     sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
     sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
-    b113_rows = [sue0, sue1]
-    br00113_df = DataFrame(b113_rows, columns=br00113_columns)
+    br00113_rows = [sue0, sue1]
+    br00113_df = DataFrame(br00113_rows, columns=br00113_columns)
     upsert_sheet(br00113_file_path, "zoo_agg", br00113_df)
-    b40_rows = [sue2, sue3, yao1]
-    br00043_df = DataFrame(b40_rows, columns=br00043_columns)
+    br00043_df = [sue2, sue3, yao1]
+    br00043_df = DataFrame(br00043_df, columns=br00043_columns)
     upsert_sheet(br00043_file_path, "zoo_agg", br00043_df)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     assert fizz_world.events == {}
