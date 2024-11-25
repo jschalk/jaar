@@ -138,3 +138,4 @@ cython_debug/
 main_cli_app2.py
 src/keep/examples/keeps/ex4/
 src/keep/examples/keeps/ex6/
+sql_workspace/*
