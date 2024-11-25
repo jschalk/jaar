@@ -1,8 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f00_instrument.examples.instrument_env import (
-    env_dir_setup_cleanup,
-    get_instrument_temp_env_dir,
-)
+from src.f09_brick.examples.brick_env import brick_env_setup_cleanup, brick_fiscals_dir
 from src.f09_brick.pandas_tool import (
     does_sheet_exist,
     upsert_sheet,
@@ -73,9 +70,11 @@ def test_upsert_sheet_AddNewSheetToExistingFile(temp_excel_file, sample_datafram
     pandas_testing_assert_frame_equal(df_new, sample_dataframe)
 
 
-def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(env_dir_setup_cleanup):
+def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(
+    brick_env_setup_cleanup,
+):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = brick_fiscals_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_file_name)
@@ -97,10 +96,10 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(env_dir_setup_c
 
 
 def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
-    env_dir_setup_cleanup,
+    brick_env_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = brick_fiscals_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_file_name)
