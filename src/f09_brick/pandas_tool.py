@@ -194,10 +194,27 @@ def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
         raise Exception(f"An error occurred: {e}")
 
 
-def does_sheet_exist(
-    output_dir: str, column_name: str, file_name: str, sheet_name: str
-):
-    pass
+def sheet_exists(file_path: str, sheet_name: str):
+    """
+    Checks if a specific sheet exists in an Excel workbook.
+
+    Args:
+        file_path (str): Path to the Excel file.
+        sheet_name (str): Name of the sheet to check.
+
+    Returns:
+        bool: True if the sheet exists, False otherwise.
+    """
+    if not os_path_exists(file_path):
+        return False
+
+    try:
+        if sheet_name in set(get_sheet_names(file_path)):
+            return True
+        else:
+            return False
+    except Exception as e:
+        return False
 
 
 def split_excel_into_dirs(

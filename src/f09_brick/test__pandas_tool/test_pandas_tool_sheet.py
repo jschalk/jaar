@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f09_brick.examples.brick_env import brick_env_setup_cleanup, brick_fiscals_dir
 from src.f09_brick.pandas_tool import (
-    does_sheet_exist,
+    sheet_exists,
     upsert_sheet,
     get_all_excel_sheet_names,
     split_excel_into_dirs,
@@ -122,6 +122,40 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     assert (x_dir, ex_file_name, sugar_name1) in x_sheet_names
     assert (x_dir, ex_file_name, sugar_name2) in x_sheet_names
     assert len(x_sheet_names) == 2
+
+
+def test_sheet_exists_ReturnsObj_Scenario1(brick_env_setup_cleanup):
+    # ESTABLISH
+    env_dir = brick_fiscals_dir()
+    x_dir = create_path(env_dir, "examples_folder")
+    ex_file_name = "fizzbuzz.xlsx"
+    ex_file_path = create_path(x_dir, ex_file_name)
+    df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
+    sugar_str = "sugar"
+    honey_name1 = "honey1x"
+    sugar_name1 = f"{sugar_str}2x"
+    sugar_name2 = f"honey_{sugar_str}3x"
+    assert sheet_exists(ex_file_path, honey_name1) is False
+    assert sheet_exists(ex_file_path, sugar_name1) is False
+    assert sheet_exists(ex_file_path, sugar_name2) is False
+
+    # WHEN / THEN
+    upsert_sheet(ex_file_path, honey_name1, df1)
+    assert sheet_exists(ex_file_path, honey_name1)
+    assert sheet_exists(ex_file_path, sugar_name1) is False
+    assert sheet_exists(ex_file_path, sugar_name2) is False
+
+    # WHEN / THEN
+    upsert_sheet(ex_file_path, sugar_name1, df1)
+    assert sheet_exists(ex_file_path, honey_name1)
+    assert sheet_exists(ex_file_path, sugar_name1)
+    assert sheet_exists(ex_file_path, sugar_name2) is False
+
+    # WHEN / THEN
+    upsert_sheet(ex_file_path, sugar_name2, df1)
+    assert sheet_exists(ex_file_path, honey_name1)
+    assert sheet_exists(ex_file_path, sugar_name1)
+    assert sheet_exists(ex_file_path, sugar_name2)
 
 
 @pytest_fixture
