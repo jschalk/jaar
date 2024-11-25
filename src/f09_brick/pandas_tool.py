@@ -194,6 +194,12 @@ def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
         raise Exception(f"An error occurred: {e}")
 
 
+def does_sheet_exist(
+    output_dir: str, column_name: str, file_name: str, sheet_name: str
+):
+    pass
+
+
 def split_excel_into_dirs(
     input_file: str, output_dir: str, column_name: str, file_name: str, sheet_name: str
 ):
