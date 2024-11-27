@@ -36,7 +36,7 @@ from src.f09_brick.pidgin_toolbox import (
     init_pidginunit_from_dir,
 )
 from src.f10_world.world_tool import get_all_brick_dataframes, _create_events_agg_df
-from src.f10_world.pidgin_staging_to_agg import pidginaggbook_shop, PidginCore
+from src.f10_world.pidgin_staging_to_agg import pidginaggbook_shop, PidginRow
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
@@ -348,35 +348,41 @@ class PidginStagingToAggTransformer:
         pidgin_columns = get_new_sorting_columns(pidgin_columns)
         pidgin_agg_df = DataFrame(columns=pidgin_columns)
         self.insert_agg_rows(pidgin_agg_df)
-        upsert_sheet(self.file_path, self.get_sheet_agg_name(), pidgin_agg_df)
+        upsert_sheet(self.file_path, "acct_agg", pidgin_agg_df)
 
-    def insert_agg_rows(self, stage_df: DataFrame):
+    def insert_agg_rows(self, pidgin_agg_df: DataFrame):
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
-        # def get_sheet_staging_name(self) -> str:
-        #     if self.jaar_type == "AcctID":
-        #         return "acct_staging"
-        #     elif self.jaar_type == "GroupID":
-        #         return "group_staging"
-        #     elif self.jaar_type == "RoadNode":
-        #         return "node_staging"
-        #     elif self.jaar_type == "RoadUnit":
-        #         return "road_staging"
-
         staging_df = pandas_read_excel(pidgin_file_path, sheet_name="acct_staging")
 
-        eventaggs = pidginaggbook_shop()
+        x_pidginaggbook = pidginaggbook_shop()
 
         for index, x_row in staging_df.iterrows():
-            x_pidgincore = PidginCore(
+            x_pidgincore = PidginRow(
                 event_id=x_row["event_id"],
                 face_id=x_row["face_id"],
                 otx_wall=x_row["otx_wall"],
                 inx_wall=x_row["inx_wall"],
                 unknown_word=x_row["unknown_word"],
-                otx_obj=self.get_otx_obj(x_row),
-                inx_obj=self.get_inx_obj(x_row),
             )
-            eventaggs.eval_pidgincore(x_pidgincore)
+            x_pidginaggbook.eval_pidginrow(x_pidgincore)
+
+        # for pidginrow in x_pidginaggbook.pidgincores.values():
+        #     df_len = len(staging_df.index)
+        #     pidgin_agg_df.loc[df_len] = [
+        #         face_id,
+        #         event_id,
+        #         self.get_otx_obj(x_row),
+        #         self.get_inx_obj(x_row, df_missing_cols),
+        #         otx_wall,
+        #         inx_wall,
+        #         unknown_word,
+        #     ]
+
+        #         event_id=x_row["event_id"],
+        #         face_id=x_row["face_id"],
+        #         otx_wall=x_row["otx_wall"],
+        #         inx_wall=x_row["inx_wall"],
+        #         unknown_word=x_row["unknown_word"],
 
     def get_otx_obj(self, x_row) -> str:
         if self.jaar_type == "AcctID":
@@ -389,16 +395,26 @@ class PidginStagingToAggTransformer:
             return x_row["otx_road"]
         return None
 
-    def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
-        if self.jaar_type == "AcctID" and "inx_acct_id" not in missing_col:
+    def get_inx_obj(self, x_row) -> str:
+        if self.jaar_type == "AcctID":
             return x_row["inx_acct_id"]
-        elif self.jaar_type == "GroupID" and "inx_group_id" not in missing_col:
+        elif self.jaar_type == "GroupID":
             return x_row["inx_group_id"]
-        elif self.jaar_type == "RoadNode" and "inx_node" not in missing_col:
+        elif self.jaar_type == "RoadNode":
             return x_row["inx_node"]
-        elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
+        elif self.jaar_type == "RoadUnit":
             return x_row["inx_road"]
         return None
+
+    def get_sheet_agg_name(self) -> str:
+        if self.jaar_type == "AcctID":
+            return "acct_agg"
+        elif self.jaar_type == "GroupID":
+            return "group_agg"
+        elif self.jaar_type == "RoadNode":
+            return "node_agg"
+        elif self.jaar_type == "RoadUnit":
+            return "road_agg"
 
 
 @dataclass

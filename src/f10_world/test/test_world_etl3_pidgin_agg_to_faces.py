@@ -62,7 +62,7 @@ from os.path import exists as os_path_exists
 #     sue_otx2inx_file_path = create_path()
 
 #     # WHEN
-#     fizz_world.appt_staging_to_faces()
+#     fizz_world.acct_staging_to_faces()
 
 #     x_filename = "fizz"
 #     a_file_path = create_path(output_dir, f"A/{x_filename}.xlsx")

@@ -92,35 +92,35 @@ def create_pidgincore(
 
 @dataclass
 class PidginAggBook:
-    objs: dict[tuple[str, int], PidginCore] = None
+    pidgincores: dict[tuple[str, int], PidginCore] = None
 
     def _overwrite_pidgincore(self, x_pidgincore: PidginCore):
         x_key = (x_pidgincore.face_id, x_pidgincore.event_id)
-        self.objs[x_key] = x_pidgincore
+        self.pidgincores[x_key] = x_pidgincore
 
     def pidgincore_exists(self, x_key: tuple[str, int]):
-        return self.objs.get(x_key) != None
+        return self.pidgincores.get(x_key) != None
 
     def get_pidgincore(self, x_key: tuple[str, int]) -> PidginCore:
-        return self.objs.get(x_key)
+        return self.pidgincores.get(x_key)
 
     def eval_pidginrow(self, x_pidginrow: PidginRow):
         pidgincore_key = (x_pidginrow.face_id, x_pidginrow.event_id)
         if self.pidgincore_exists(pidgincore_key):
-            pidgincore_val = self.get_pidgincore(pidgincore_key)
-            pidgincore_val.add_otx_wall(x_pidginrow.otx_wall)
-            pidgincore_val.add_inx_wall(x_pidginrow.inx_wall)
-            pidgincore_val.add_unknown_word(x_pidginrow.unknown_word)
+            pidgincore_obj = self.get_pidgincore(pidgincore_key)
+            pidgincore_obj.add_otx_wall(x_pidginrow.otx_wall)
+            pidgincore_obj.add_inx_wall(x_pidginrow.inx_wall)
+            pidgincore_obj.add_unknown_word(x_pidginrow.unknown_word)
         else:
-            pidgincore_val = create_pidgincore(
+            pidgincore_obj = create_pidgincore(
                 face_id=x_pidginrow.face_id,
                 event_id=x_pidginrow.event_id,
                 otx_wall=x_pidginrow.otx_wall,
                 inx_wall=x_pidginrow.inx_wall,
                 unknown_word=x_pidginrow.unknown_word,
             )
-            self.objs[pidgincore_key] = pidgincore_val
+            self.pidgincores[pidgincore_key] = pidgincore_obj
 
 
 def pidginaggbook_shop() -> PidginAggBook:
-    return PidginAggBook(objs={})
+    return PidginAggBook(pidgincores={})

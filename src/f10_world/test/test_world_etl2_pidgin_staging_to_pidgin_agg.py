@@ -21,7 +21,65 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-# def test_WorldUnit_acct_staging_to_faces_CreatesFile_Scenario0_SingleBrick(
+def test_WorldUnit_acct_staging_to_faces_Scenario0_CreatesEmptyFileBecauseOfConflict(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fizz_world = worldunit_shop("fizz")
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    yao_inx = "Yaoito"
+    bob_inx = "Bobito"
+    event7 = 7
+    acct_staging_str = "acct_staging"
+    acct_agg_str = "acct_agg"
+    colon_str = ":"
+    slash_str = "/"
+    acct_file_columns = [
+        "src_brick",
+        face_id_str(),
+        event_id_str(),
+        otx_acct_id_str(),
+        inx_acct_id_str(),
+        otx_wall_str(),
+        inx_wall_str(),
+        unknown_word_str(),
+    ]
+    bx = "br00113"
+    e1_acct0 = [bx, sue_str, event7, yao_str, yao_inx, None, colon_str, None]
+    e1_acct1 = [bx, sue_str, event7, bob_str, bob_inx, None, slash_str, None]
+    e1_acct_rows = [e1_acct0, e1_acct1]
+    staging_acct_df = DataFrame(e1_acct_rows, columns=acct_file_columns)
+    pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
+    upsert_sheet(pidgin_path, acct_staging_str, staging_acct_df)
+    assert os_path_exists(pidgin_path)
+    assert sheet_exists(pidgin_path, acct_staging_str)
+    assert sheet_exists(pidgin_path, "acct_agg") is False
+
+    # WHEN
+    fizz_world.acct_staging_to_acct_agg()
+
+    # THEN
+    assert os_path_exists(pidgin_path)
+    assert sheet_exists(pidgin_path, acct_agg_str)
+    gen_acct_agg_df = pandas_read_excel(pidgin_path, sheet_name=acct_agg_str)
+    acct_file_columns = [
+        face_id_str(),
+        event_id_str(),
+        otx_acct_id_str(),
+        inx_acct_id_str(),
+        otx_wall_str(),
+        inx_wall_str(),
+        unknown_word_str(),
+    ]
+    assert list(gen_acct_agg_df.columns) == acct_file_columns
+    assert len(gen_acct_agg_df) == 0
+    e1_acct_agg_df = DataFrame([], columns=acct_file_columns)
+    pandas_testing_assert_frame_equal(gen_acct_agg_df, e1_acct_agg_df)
+
+
+# def test_WorldUnit_acct_staging_to_faces_CreatesFile_Scenario1_SingleBrick(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -53,7 +111,7 @@ from os.path import exists as os_path_exists
 #     upsert_sheet(pidgin_path, acct_staging_str, staging_acct_df)
 #     assert os_path_exists(pidgin_path)
 #     assert sheet_exists(pidgin_path, acct_staging_str)
-#     assert sheet_exists(pidgin_path, "appt_agg") is False
+#     assert sheet_exists(pidgin_path, "acct_agg") is False
 
 #     # WHEN
 #     fizz_world.acct_staging_to_acct_agg()

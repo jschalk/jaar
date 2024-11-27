@@ -430,7 +430,7 @@ def test_PidginAggBook_Exists():
 
     # THEN
     assert x_pidginaggbook
-    assert x_pidginaggbook.objs is None
+    assert x_pidginaggbook.pidgincores is None
 
 
 def test_eventsaggs_shop_ReturnsObj():
@@ -439,7 +439,7 @@ def test_eventsaggs_shop_ReturnsObj():
 
     # THEN
     assert x_pidginaggbook
-    assert x_pidginaggbook.objs == {}
+    assert x_pidginaggbook.pidgincores == {}
 
 
 def test_PidginAggBook_overwrite_pidgincore_SetsAttr_Scenario0():
@@ -448,14 +448,14 @@ def test_PidginAggBook_overwrite_pidgincore_SetsAttr_Scenario0():
     x_event_id = 55
     sue55_agg = create_pidgincore(sue_str, x_event_id, ";", ":", "uk33")
     x_pidginaggbook = pidginaggbook_shop()
-    assert x_pidginaggbook.objs.get((sue_str, x_event_id)) is None
+    assert x_pidginaggbook.pidgincores.get((sue_str, x_event_id)) is None
 
     # WHEN
     x_pidginaggbook._overwrite_pidgincore(sue55_agg)
 
     # THEN
-    assert x_pidginaggbook.objs.get((sue_str, x_event_id)) != None
-    assert x_pidginaggbook.objs.get((sue_str, x_event_id)) == sue55_agg
+    assert x_pidginaggbook.pidgincores.get((sue_str, x_event_id)) != None
+    assert x_pidginaggbook.pidgincores.get((sue_str, x_event_id)) == sue55_agg
 
 
 def test_PidginAggBook_pidgincore_exists_ReturnsObj():
