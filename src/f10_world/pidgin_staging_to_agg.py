@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class PidginRow:
+class PidginHeartRow:
     face_id: str
     event_id: int
     otx_wall: str
@@ -12,7 +12,7 @@ class PidginRow:
 
 
 @dataclass
-class PidginCore:
+class PidginHeartCore:
     face_id: set[str] = None
     event_id: set[int] = None
     otx_walls: set[str] = None
@@ -53,9 +53,9 @@ class PidginCore:
             and len(self.unknown_words) == 1
         )
 
-    def get_valid_pidginrow(self) -> PidginRow:
+    def get_valid_pidginheartrow(self) -> PidginHeartRow:
         if self.is_valid():
-            return PidginRow(
+            return PidginHeartRow(
                 face_id=self.face_id,
                 event_id=self.event_id,
                 otx_wall=min(self.otx_walls),
@@ -64,14 +64,14 @@ class PidginCore:
             )
 
 
-def pidgincore_shop(
+def pidginheartcore_shop(
     face_id: str,
     event_id: int,
     otx_walls: set[str] = None,
     inx_walls: set[str] = None,
     unknown_words: set[str] = None,
-) -> PidginCore:
-    return PidginCore(
+) -> PidginHeartCore:
+    return PidginHeartCore(
         face_id,
         event_id,
         get_empty_set_if_none(otx_walls),
@@ -80,47 +80,47 @@ def pidgincore_shop(
     )
 
 
-def create_pidgincore(
+def create_pidginheartcore(
     face_id: str, event_id: int, otx_wall: str, inx_wall: str, unknown_word: str
-) -> PidginCore:
-    x_pidgincore = pidgincore_shop(face_id, event_id)
-    x_pidgincore.add_otx_wall(otx_wall)
-    x_pidgincore.add_inx_wall(inx_wall)
-    x_pidgincore.add_unknown_word(unknown_word)
-    return x_pidgincore
+) -> PidginHeartCore:
+    x_pidginheartcore = pidginheartcore_shop(face_id, event_id)
+    x_pidginheartcore.add_otx_wall(otx_wall)
+    x_pidginheartcore.add_inx_wall(inx_wall)
+    x_pidginheartcore.add_unknown_word(unknown_word)
+    return x_pidginheartcore
 
 
 @dataclass
-class PidginAggBook:
-    pidgincores: dict[tuple[str, int], PidginCore] = None
+class PidginHeartBook:
+    pidginheartcores: dict[tuple[str, int], PidginHeartCore] = None
 
-    def _overwrite_pidgincore(self, x_pidgincore: PidginCore):
-        x_key = (x_pidgincore.face_id, x_pidgincore.event_id)
-        self.pidgincores[x_key] = x_pidgincore
+    def _overwrite_pidginheartcore(self, x_pidginheartcore: PidginHeartCore):
+        x_key = (x_pidginheartcore.face_id, x_pidginheartcore.event_id)
+        self.pidginheartcores[x_key] = x_pidginheartcore
 
-    def pidgincore_exists(self, x_key: tuple[str, int]):
-        return self.pidgincores.get(x_key) != None
+    def pidginheartcore_exists(self, x_key: tuple[str, int]):
+        return self.pidginheartcores.get(x_key) != None
 
-    def get_pidgincore(self, x_key: tuple[str, int]) -> PidginCore:
-        return self.pidgincores.get(x_key)
+    def get_pidginheartcore(self, x_key: tuple[str, int]) -> PidginHeartCore:
+        return self.pidginheartcores.get(x_key)
 
-    def eval_pidginrow(self, x_pidginrow: PidginRow):
-        pidgincore_key = (x_pidginrow.face_id, x_pidginrow.event_id)
-        if self.pidgincore_exists(pidgincore_key):
-            pidgincore_obj = self.get_pidgincore(pidgincore_key)
-            pidgincore_obj.add_otx_wall(x_pidginrow.otx_wall)
-            pidgincore_obj.add_inx_wall(x_pidginrow.inx_wall)
-            pidgincore_obj.add_unknown_word(x_pidginrow.unknown_word)
+    def eval_pidginheartrow(self, x_pidginheartrow: PidginHeartRow):
+        pidginheartcore_key = (x_pidginheartrow.face_id, x_pidginheartrow.event_id)
+        if self.pidginheartcore_exists(pidginheartcore_key):
+            pidginheartcore_obj = self.get_pidginheartcore(pidginheartcore_key)
+            pidginheartcore_obj.add_otx_wall(x_pidginheartrow.otx_wall)
+            pidginheartcore_obj.add_inx_wall(x_pidginheartrow.inx_wall)
+            pidginheartcore_obj.add_unknown_word(x_pidginheartrow.unknown_word)
         else:
-            pidgincore_obj = create_pidgincore(
-                face_id=x_pidginrow.face_id,
-                event_id=x_pidginrow.event_id,
-                otx_wall=x_pidginrow.otx_wall,
-                inx_wall=x_pidginrow.inx_wall,
-                unknown_word=x_pidginrow.unknown_word,
+            pidginheartcore_obj = create_pidginheartcore(
+                face_id=x_pidginheartrow.face_id,
+                event_id=x_pidginheartrow.event_id,
+                otx_wall=x_pidginheartrow.otx_wall,
+                inx_wall=x_pidginheartrow.inx_wall,
+                unknown_word=x_pidginheartrow.unknown_word,
             )
-            self.pidgincores[pidgincore_key] = pidgincore_obj
+            self.pidginheartcores[pidginheartcore_key] = pidginheartcore_obj
 
 
-def pidginaggbook_shop() -> PidginAggBook:
-    return PidginAggBook(pidgincores={})
+def pidginheartbook_shop() -> PidginHeartBook:
+    return PidginHeartBook(pidginheartcores={})
