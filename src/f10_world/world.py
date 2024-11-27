@@ -36,6 +36,7 @@ from src.f09_brick.pidgin_toolbox import (
     init_pidginunit_from_dir,
 )
 from src.f10_world.world_tool import get_all_brick_dataframes, _create_events_agg_df
+from src.f10_world.pidgin_staging_to_agg import pidginaggbook_shop, PidginCore
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
@@ -179,7 +180,6 @@ class ZooAggToStagingTransformer:
 
     def transform(self):
         category_bricks = get_brick_category_ref().get(self.pidgin_category)
-        print(f"{category_bricks=}")
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
         pidgin_columns.update({"face_id", "event_id"})
         pidgin_columns = get_new_sorting_columns(pidgin_columns)
@@ -324,6 +324,81 @@ class ZooAggToNubStagingTransformer:
                     inx_wall,
                     unknown_word,
                 ]
+
+
+class PidginStagingToAggTransformer:
+    def __init__(self, zoo_dir: str, pidgin_category: str):
+        self.zoo_dir = zoo_dir
+        self.pidgin_category = pidgin_category
+        self.file_path = create_path(self.zoo_dir, "pidgin.xlsx")
+        if self.pidgin_category == "bridge_acct_id":
+            self.jaar_type = "AcctID"
+        elif self.pidgin_category == "bridge_group_id":
+            self.jaar_type = "GroupID"
+        elif self.pidgin_category == "bridge_node":
+            self.jaar_type = "RoadNode"
+        elif self.pidgin_category == "bridge_road":
+            self.jaar_type = "RoadUnit"
+        else:
+            raise Exception("not given pidgin_category")
+
+    def transform(self):
+        pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
+        pidgin_columns.update({"face_id", "event_id"})
+        pidgin_columns = get_new_sorting_columns(pidgin_columns)
+        pidgin_agg_df = DataFrame(columns=pidgin_columns)
+        self.insert_agg_rows(pidgin_agg_df)
+        upsert_sheet(self.file_path, self.get_sheet_agg_name(), pidgin_agg_df)
+
+    def insert_agg_rows(self, stage_df: DataFrame):
+        pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
+        # def get_sheet_staging_name(self) -> str:
+        #     if self.jaar_type == "AcctID":
+        #         return "acct_staging"
+        #     elif self.jaar_type == "GroupID":
+        #         return "group_staging"
+        #     elif self.jaar_type == "RoadNode":
+        #         return "node_staging"
+        #     elif self.jaar_type == "RoadUnit":
+        #         return "road_staging"
+
+        staging_df = pandas_read_excel(pidgin_file_path, sheet_name="acct_staging")
+
+        eventaggs = pidginaggbook_shop()
+
+        for index, x_row in staging_df.iterrows():
+            x_pidgincore = PidginCore(
+                event_id=x_row["event_id"],
+                face_id=x_row["face_id"],
+                otx_wall=x_row["otx_wall"],
+                inx_wall=x_row["inx_wall"],
+                unknown_word=x_row["unknown_word"],
+                otx_obj=self.get_otx_obj(x_row),
+                inx_obj=self.get_inx_obj(x_row),
+            )
+            eventaggs.eval_pidgincore(x_pidgincore)
+
+    def get_otx_obj(self, x_row) -> str:
+        if self.jaar_type == "AcctID":
+            return x_row["otx_acct_id"]
+        elif self.jaar_type == "GroupID":
+            return x_row["otx_group_id"]
+        elif self.jaar_type == "RoadNode":
+            return x_row["otx_node"]
+        elif self.jaar_type == "RoadUnit":
+            return x_row["otx_road"]
+        return None
+
+    def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
+        if self.jaar_type == "AcctID" and "inx_acct_id" not in missing_col:
+            return x_row["inx_acct_id"]
+        elif self.jaar_type == "GroupID" and "inx_group_id" not in missing_col:
+            return x_row["inx_group_id"]
+        elif self.jaar_type == "RoadNode" and "inx_node" not in missing_col:
+            return x_row["inx_node"]
+        elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
+            return x_row["inx_road"]
+        return None
 
 
 @dataclass
@@ -493,6 +568,11 @@ class WorldUnit:
     def zoo_agg_to_nub_staging(self):
         legitmate_events = set(self.events.keys())
         transformer = ZooAggToNubStagingTransformer(self._zoo_dir, legitmate_events)
+        transformer.transform()
+
+    def acct_staging_to_acct_agg(self):
+        pidgin_cat = "bridge_acct_id"
+        transformer = PidginStagingToAggTransformer(self._zoo_dir, pidgin_cat)
         transformer.transform()
 
     def get_dict(self) -> dict:
