@@ -1,4 +1,4 @@
-from src.f10_world.pidgin_staging_to_agg import (
+from src.f10_world.pidgin_agg import (
     PidginHeartCore,
     PidginHeartBook,
     pidginheartbook_shop,

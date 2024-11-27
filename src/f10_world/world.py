@@ -36,7 +36,11 @@ from src.f09_brick.pidgin_toolbox import (
     init_pidginunit_from_dir,
 )
 from src.f10_world.world_tool import get_all_brick_dataframes, _create_events_agg_df
-from src.f10_world.pidgin_staging_to_agg import pidginheartbook_shop, PidginHeartRow
+from src.f10_world.pidgin_agg import (
+    pidginheartbook_shop,
+    PidginHeartRow,
+    PidginHeartBook,
+)
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
@@ -354,17 +358,7 @@ class PidginStagingToAggTransformer:
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
         staging_df = pandas_read_excel(pidgin_file_path, sheet_name="acct_staging")
 
-        x_pidginheartbook = pidginheartbook_shop()
-
-        for index, x_row in staging_df.iterrows():
-            x_pidginheartcore = PidginHeartRow(
-                event_id=x_row["event_id"],
-                face_id=x_row["face_id"],
-                otx_wall=x_row["otx_wall"],
-                inx_wall=x_row["inx_wall"],
-                unknown_word=x_row["unknown_word"],
-            )
-            x_pidginheartbook.eval_pidginheartrow(x_pidginheartcore)
+        x_pidginheartbook = self.get_pidginheart_validations(staging_df)
 
         # for pidginheartrow in x_pidginheartbook.pidginheartcores.values():
         #     df_len = len(staging_df.index)
@@ -383,6 +377,19 @@ class PidginStagingToAggTransformer:
         #         otx_wall=x_row["otx_wall"],
         #         inx_wall=x_row["inx_wall"],
         #         unknown_word=x_row["unknown_word"],
+
+    def get_pidginheart_validations(self, staging_df: DataFrame) -> PidginHeartBook:
+        x_pidginheartbook = pidginheartbook_shop()
+        for index, x_row in staging_df.iterrows():
+            x_pidginheartcore = PidginHeartRow(
+                event_id=x_row["event_id"],
+                face_id=x_row["face_id"],
+                otx_wall=x_row["otx_wall"],
+                inx_wall=x_row["inx_wall"],
+                unknown_word=x_row["unknown_word"],
+            )
+            x_pidginheartbook.eval_pidginheartrow(x_pidginheartcore)
+        return x_pidginheartbook
 
     def get_otx_obj(self, x_row) -> str:
         if self.jaar_type == "AcctID":
