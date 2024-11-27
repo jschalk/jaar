@@ -277,6 +277,38 @@ def test_create_pidgincore_ReturnsObj():
     assert x_pidgincore.unknown_words == x_unknown_word_set
 
 
+def test_PidginCore_is_valid_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    uk33 = "unknown33"
+
+    # WHEN / THEN
+    x_pidgincore = pidgincore_shop(sue_str, e55)
+    assert x_pidgincore.is_valid() is False
+
+    # WHEN / THEN
+    x_pidgincore = pidgincore_shop(sue_str, e55, {";"}, {":"}, {uk33})
+    assert x_pidgincore.is_valid()
+
+    # WHEN / THEN
+    x_pidgincore = pidgincore_shop(sue_str, e55, {None}, {None}, {None})
+    assert x_pidgincore.is_valid()
+
+    # WHEN / THEN
+    x_pidgincore = pidgincore_shop(sue_str, e55, {":", "/"}, {":"}, {uk33})
+    assert x_pidgincore.is_valid() is False
+
+    # WHEN / THEN
+    x_pidgincore = pidgincore_shop(sue_str, e55, {":"}, {":", "/"}, {uk33})
+    assert x_pidgincore.is_valid() is False
+
+    # WHEN / THEN
+    uk44 = "unknown44"
+    x_pidgincore = pidgincore_shop(sue_str, e55, {":"}, {":"}, {uk33, uk44})
+    assert x_pidgincore.is_valid() is False
+
+
 def test_PidginAggBook_Exists():
     # ESTABLISH / WHEN
     x_pidginaggbook = PidginAggBook()

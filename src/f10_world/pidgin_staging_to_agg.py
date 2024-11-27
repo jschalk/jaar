@@ -37,6 +37,13 @@ class PidginCore:
         elif unknown_word != None:
             self.unknown_words.add(unknown_word)
 
+    def is_valid(self) -> bool:
+        return (
+            len(self.otx_walls) == 1
+            and len(self.inx_walls) == 1
+            and len(self.unknown_words) == 1
+        )
+
 
 def pidgincore_shop(
     face_id: str,
