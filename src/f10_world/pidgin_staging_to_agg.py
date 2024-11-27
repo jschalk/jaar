@@ -3,6 +3,15 @@ from dataclasses import dataclass
 
 
 @dataclass
+class PidginRow:
+    face_id: str
+    event_id: int
+    otx_wall: str
+    inx_wall: str
+    unknown_word: str
+
+
+@dataclass
 class PidginCore:
     face_id: set[str] = None
     event_id: set[int] = None
@@ -44,6 +53,16 @@ class PidginCore:
             and len(self.unknown_words) == 1
         )
 
+    def get_valid_pidginrow(self) -> PidginRow:
+        if self.is_valid():
+            return PidginRow(
+                face_id=self.face_id,
+                event_id=self.event_id,
+                otx_wall=min(self.otx_walls),
+                inx_wall=min(self.inx_walls),
+                unknown_word=min(self.unknown_words),
+            )
+
 
 def pidgincore_shop(
     face_id: str,
@@ -69,15 +88,6 @@ def create_pidgincore(
     x_pidgincore.add_inx_wall(inx_wall)
     x_pidgincore.add_unknown_word(unknown_word)
     return x_pidgincore
-
-
-@dataclass
-class PidginRow:
-    face_id: str
-    event_id: int
-    otx_wall: str
-    inx_wall: str
-    unknown_word: str
 
 
 @dataclass

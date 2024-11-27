@@ -8,6 +8,28 @@ from src.f10_world.pidgin_staging_to_agg import (
 )
 
 
+def test_PidginRow_Exists():
+    # ESTABLISH
+    sue_str = "Sue"
+    x_event_id = 55
+    x_otx_wall = ";"
+    x_inx_wall = ";"
+    x_unknown_word = "unknown33"
+
+    # WHEN
+    sue55_pidginrow = PidginRow(
+        sue_str, x_event_id, x_otx_wall, x_inx_wall, x_unknown_word
+    )
+
+    # THEN
+    assert sue55_pidginrow
+    assert sue55_pidginrow.face_id == sue_str
+    assert sue55_pidginrow.event_id == x_event_id
+    assert sue55_pidginrow.otx_wall == x_otx_wall
+    assert sue55_pidginrow.inx_wall == x_inx_wall
+    assert sue55_pidginrow.unknown_word == x_unknown_word
+
+
 def test_PidginCore_Exists():
     # ESTABLISH
     x_pidgincore = PidginCore()
@@ -309,6 +331,99 @@ def test_PidginCore_is_valid_ReturnsObj():
     assert x_pidgincore.is_valid() is False
 
 
+def test_PidginCore_get_valid_pidginrow_ReturnsObj_Scenario0():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    uk33 = "unknown33"
+
+    # WHEN / THEN
+    x_pidgincore = pidgincore_shop(sue_str, e55)
+    assert x_pidgincore.is_valid() is False
+    assert None == x_pidgincore.get_valid_pidginrow()
+
+
+def test_PidginCore_get_valid_pidginrow_ReturnsObj_Scenario1():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    uk33 = "unknown33"
+
+    # WHEN
+    x_pidgincore = pidgincore_shop(sue_str, e55, {";"}, {":"}, {uk33})
+
+    # THEN
+    assert x_pidgincore.is_valid()
+    assert x_pidgincore.get_valid_pidginrow()
+    s55_pidginrow = x_pidgincore.get_valid_pidginrow()
+    assert s55_pidginrow.face_id == sue_str
+    assert s55_pidginrow.event_id == e55
+    assert s55_pidginrow.otx_wall == ";"
+    assert s55_pidginrow.inx_wall == ":"
+    assert s55_pidginrow.unknown_word == uk33
+
+
+def test_PidginCore_get_valid_pidginrow_ReturnsObj_Scenario2():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    uk33 = "unknown33"
+
+    # WHEN
+    x_pidgincore = pidgincore_shop(sue_str, e55, {None}, {None}, {None})
+    assert x_pidgincore.is_valid()
+    assert x_pidgincore.get_valid_pidginrow()
+    s55_pidginrow = x_pidgincore.get_valid_pidginrow()
+    assert s55_pidginrow.face_id == sue_str
+    assert s55_pidginrow.event_id == e55
+    assert s55_pidginrow.otx_wall is None
+    assert s55_pidginrow.inx_wall is None
+    assert s55_pidginrow.unknown_word is None
+
+
+def test_PidginCore_get_valid_pidginrow_ReturnsObj_Scenario3():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    uk33 = "unknown33"
+
+    # WHEN
+    x_pidgincore = pidgincore_shop(sue_str, e55, {":", "/"}, {":"}, {uk33})
+
+    # THEN
+    assert x_pidgincore.is_valid() is False
+    assert not x_pidgincore.get_valid_pidginrow()
+
+
+def test_PidginCore_get_valid_pidginrow_ReturnsObj_Scenario1():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    uk33 = "unknown33"
+
+    # WHEN
+    x_pidgincore = pidgincore_shop(sue_str, e55, {":"}, {":", "/"}, {uk33})
+
+    # THEN
+    assert x_pidgincore.is_valid() is False
+    assert not x_pidgincore.get_valid_pidginrow()
+
+
+def test_PidginCore_get_valid_pidginrow_ReturnsObj_Scenario1():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    uk33 = "unknown33"
+
+    # WHEN
+    uk44 = "unknown44"
+    x_pidgincore = pidgincore_shop(sue_str, e55, {":"}, {":"}, {uk33, uk44})
+
+    # THEN
+    assert x_pidgincore.is_valid() is False
+    assert not x_pidgincore.get_valid_pidginrow()
+
+
 def test_PidginAggBook_Exists():
     # ESTABLISH / WHEN
     x_pidginaggbook = PidginAggBook()
@@ -373,28 +488,6 @@ def test_PidginAggBook_get_pidgincore_ReturnsObj():
 
     # THEN
     assert gen_pidgincore == sue55_agg
-
-
-def test_PidginRow_Exists():
-    # ESTABLISH
-    sue_str = "Sue"
-    x_event_id = 55
-    x_otx_wall = ";"
-    x_inx_wall = ";"
-    x_unknown_word = "unknown33"
-
-    # WHEN
-    sue55_pidginrow = PidginRow(
-        sue_str, x_event_id, x_otx_wall, x_inx_wall, x_unknown_word
-    )
-
-    # THEN
-    assert sue55_pidginrow
-    assert sue55_pidginrow.face_id == sue_str
-    assert sue55_pidginrow.event_id == x_event_id
-    assert sue55_pidginrow.otx_wall == x_otx_wall
-    assert sue55_pidginrow.inx_wall == x_inx_wall
-    assert sue55_pidginrow.unknown_word == x_unknown_word
 
 
 def test_PidginAggBook_eval_pidginrow_SetsAttr_Scenario0_EmptyDict():
