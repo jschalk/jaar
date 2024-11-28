@@ -51,7 +51,7 @@ def test_WorldUnit_zoo_agg_to_node_staging_CreatesFile_Scenario0_SingleBrick(
     fizz_world.zoo_agg_to_zoo_events()
     fizz_world.zoo_events_to_events_log()
     fizz_world.events_log_to_events_agg()
-    fizz_world.set_events_from_events_agg()
+    fizz_world.set_events_from_events_agg_file()
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
@@ -137,7 +137,7 @@ def test_WorldUnit_zoo_agg_to_node_staging_CreatesFile_Scenario1_MultipleBricksF
     fizz_world.zoo_agg_to_zoo_events()
     fizz_world.zoo_events_to_events_log()
     fizz_world.events_log_to_events_agg()
-    fizz_world.set_events_from_events_agg()
+    fizz_world.set_events_from_events_agg_file()
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
@@ -228,7 +228,7 @@ def test_WorldUnit_zoo_agg_to_node_staging_CreatesFile_Scenario2_WorldUnit_event
     fizz_world.zoo_agg_to_zoo_events()
     fizz_world.zoo_events_to_events_log()
     fizz_world.events_log_to_events_agg()
-    fizz_world.set_events_from_events_agg()
+    fizz_world.set_events_from_events_agg_file()
     assert fizz_world.events == {event2: sue_str, event5: sue_str}
     assert os_path_exists(pidgin_path) is False
 

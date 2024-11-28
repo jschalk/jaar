@@ -54,7 +54,7 @@ from os.path import exists as os_path_exists
 #     fizz_world.zoo_agg_to_zoo_events()
 #     fizz_world.zoo_events_to_events_log()
 #     fizz_world.events_log_to_events_agg()
-#     fizz_world.set_events_from_events_agg()
+#     fizz_world.set_events_from_events_agg_file()
 #     fizz_world.zoo_agg_to_road_staging()
 #     road_staging_str = "road_staging"
 #     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
@@ -126,7 +126,7 @@ from os.path import exists as os_path_exists
 #     fizz_world.zoo_agg_to_zoo_events()
 #     fizz_world.zoo_events_to_events_log()
 #     fizz_world.events_log_to_events_agg()
-#     fizz_world.set_events_from_events_agg()
+#     fizz_world.set_events_from_events_agg_file()
 #     assert os_path_exists(pidgin_path) is False
 
 #     # WHEN
@@ -212,7 +212,7 @@ from os.path import exists as os_path_exists
 #     fizz_world.zoo_agg_to_zoo_events()
 #     fizz_world.zoo_events_to_events_log()
 #     fizz_world.events_log_to_events_agg()
-#     fizz_world.set_events_from_events_agg()
+#     fizz_world.set_events_from_events_agg_file()
 #     assert os_path_exists(pidgin_path) is False
 
 #     # WHEN
@@ -303,7 +303,7 @@ from os.path import exists as os_path_exists
 #     fizz_world.zoo_agg_to_zoo_events()
 #     fizz_world.zoo_events_to_events_log()
 #     fizz_world.events_log_to_events_agg()
-#     fizz_world.set_events_from_events_agg()
+#     fizz_world.set_events_from_events_agg_file()
 #     assert fizz_world.events == {event2: sue_str, event5: sue_str}
 #     assert os_path_exists(pidgin_path) is False
 

@@ -32,8 +32,8 @@ from src.f10_world.transformers import (
     ZooAggToNubStagingTransformer,
     ZooAggToStagingTransformer,
     PidginStagingToAggTransformer,
+    EventsLogToEventsAggTransformer,
 )
-from src.f10_world.world_tool import _create_events_agg_df
 from pandas import read_excel as pandas_read_excel
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
@@ -161,12 +161,10 @@ class WorldUnit:
         transformer.transform()
 
     def events_log_to_events_agg(self):
-        events_file_path = create_path(self._zoo_dir, "events.xlsx")
-        events_log_df = pandas_read_excel(events_file_path, "events_log")
-        events_agg_df = _create_events_agg_df(events_log_df)
-        upsert_sheet(events_file_path, "events_agg", events_agg_df)
+        transformer = EventsLogToEventsAggTransformer(self._zoo_dir)
+        transformer.transform()
 
-    def set_events_from_events_agg(self):
+    def set_events_from_events_agg_file(self):
         self.events = {}
         events_file_path = create_path(self._zoo_dir, "events.xlsx")
         events_agg_df = pandas_read_excel(events_file_path, "events_agg")

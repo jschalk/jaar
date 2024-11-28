@@ -12,7 +12,7 @@ from src.f09_brick.pandas_tool import (
     get_new_sorting_columns,
     upsert_sheet,
 )
-from src.f10_world.world_tool import get_all_brick_dataframes
+from src.f10_world.world_tool import get_all_brick_dataframes, _create_events_agg_df
 from src.f10_world.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
@@ -137,6 +137,17 @@ class ZooEventsToEventsLogTransformer:
             events_log_df = pandas_read_excel(events_file_path, events_log_str)
             events_df = pandas_concat([events_log_df, events_df])
         upsert_sheet(events_file_path, events_log_str, events_df)
+
+
+class EventsLogToEventsAggTransformer:
+    def __init__(self, zoo_dir: str):
+        self.zoo_dir = zoo_dir
+
+    def transform(self):
+        events_file_path = create_path(self.zoo_dir, "events.xlsx")
+        events_log_df = pandas_read_excel(events_file_path, "events_log")
+        events_agg_df = _create_events_agg_df(events_log_df)
+        upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
 class ZooAggToStagingTransformer:
