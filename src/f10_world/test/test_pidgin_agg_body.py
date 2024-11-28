@@ -1,605 +1,392 @@
-# from src.f10_world.pidgin_agg import (
-#     PidginBodyCore,
-#     PidginBodyBook,
-#     pidginBodybook_shop,
-#     pidginBodycore_shop,
-#     create_pidginBodycore,
-#     PidginBodyRow,
-# )
-
-
-# def test_PidginBodyRow_Exists():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     x_event_id = 55
-#     x_otx_wall = ";"
-#     x_inx_wall = ";"
-#     x_unknown_word = "unknown33"
-
-#     # WHEN
-#     sue55_pidginBodyrow = PidginBodyRow(
-#         sue_str, x_event_id, x_otx_wall, x_inx_wall, x_unknown_word
-#     )
-
-#     # THEN
-#     assert sue55_pidginBodyrow
-#     assert sue55_pidginBodyrow.face_id == sue_str
-#     assert sue55_pidginBodyrow.event_id == x_event_id
-#     assert sue55_pidginBodyrow.otx_wall == x_otx_wall
-#     assert sue55_pidginBodyrow.inx_wall == x_inx_wall
-#     assert sue55_pidginBodyrow.unknown_word == x_unknown_word
-
-
-# def test_PidginBodyCore_Exists():
-#     # ESTABLISH
-#     x_pidginBodycore = PidginBodyCore()
-
-#     # THEN
-#     assert x_pidginBodycore
-#     assert x_pidginBodycore.face_id is None
-#     assert x_pidginBodycore.event_id is None
-#     assert x_pidginBodycore.otx_walls is None
-#     assert x_pidginBodycore.inx_walls is None
-#     assert x_pidginBodycore.unknown_words is None
-
-
-# def test_pidginBodycore_shop_ReturnsObj_WithNoValues():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-
-#     # WHEN
-#     x_pidginBodycore = pidginBodycore_shop(x_face_id, x_event_id)
-
-#     # THEN
-#     assert x_pidginBodycore
-#     assert x_pidginBodycore.face_id == x_face_id
-#     assert x_pidginBodycore.event_id == x_event_id
-#     assert x_pidginBodycore.otx_walls == set()
-#     assert x_pidginBodycore.inx_walls == set()
-#     assert x_pidginBodycore.unknown_words == set()
-
-
-# def test_pidginBodycore_shop_ReturnsObj_WithCoreValues():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-#     x_otx_wall_set = {";"}
-#     x_inx_wall_set = {";"}
-#     x_unknown_word_set = {"unknown33"}
-
-#     # WHEN
-#     x_pidginBodycore = pidginBodycore_shop(
-#         x_face_id,
-#         x_event_id,
-#         x_otx_wall_set,
-#         x_inx_wall_set,
-#         x_unknown_word_set,
-#     )
-
-#     # THEN
-#     assert x_pidginBodycore
-#     assert x_pidginBodycore.face_id == x_face_id
-#     assert x_pidginBodycore.event_id == x_event_id
-#     assert x_pidginBodycore.otx_walls == x_otx_wall_set
-#     assert x_pidginBodycore.inx_walls == x_inx_wall_set
-#     assert ";" in x_pidginBodycore.inx_walls
-#     assert x_pidginBodycore.unknown_words == x_unknown_word_set
-
-
-# def test_PidginBodyCore_add_otx_wall_ChangesAttr_Scenario0_AddToEmptySet():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-#     x_pidginBodycore = pidginBodycore_shop(x_face_id, x_event_id)
-#     colon_str = ":"
-#     print(f"{x_pidginBodycore.otx_walls=}")
-#     print(f"{colon_str=}")
-#     assert colon_str not in x_pidginBodycore.otx_walls
-#     assert colon_str not in x_pidginBodycore.inx_walls
-#     assert colon_str not in x_pidginBodycore.unknown_words
-
-#     # WHEN
-#     x_pidginBodycore.add_otx_wall(colon_str)
-
-#     # THEN
-#     assert colon_str in x_pidginBodycore.otx_walls
-#     assert colon_str not in x_pidginBodycore.inx_walls
-#     assert colon_str not in x_pidginBodycore.unknown_words
-
-
-# def test_PidginBodyCore_add_otx_wall_ChangesAttr_Scenario1_AddNoneToEmptySet():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-#     x_pidginBodycore = pidginBodycore_shop(x_face_id, x_event_id)
-#     assert None not in x_pidginBodycore.otx_walls
-#     assert None not in x_pidginBodycore.inx_walls
-#     assert None not in x_pidginBodycore.unknown_words
-
-#     # WHEN
-#     x_pidginBodycore.add_otx_wall(None)
-
-#     # THEN
-#     assert None in x_pidginBodycore.otx_walls
-#     assert None not in x_pidginBodycore.inx_walls
-#     assert None not in x_pidginBodycore.unknown_words
-
-
-# def test_PidginBodyCore_add_otx_wall_ChangesAttr_Scenario2_SetWithNoneChangesWhenNonNoneElementAdded():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-#     x_pidginBodycore = pidginBodycore_shop(x_face_id, x_event_id)
-#     x_pidginBodycore.add_otx_wall(None)
-#     assert None in x_pidginBodycore.otx_walls
-
-#     # WHEN / THEN
-#     x_pidginBodycore.add_otx_wall(None)
-#     assert None in x_pidginBodycore.otx_walls
-
-#     # WHEN / THEN
-#     colon_str = ":"
-#     x_pidginBodycore.add_otx_wall(colon_str)
-#     assert colon_str in x_pidginBodycore.otx_walls
-#     assert None not in x_pidginBodycore.otx_walls
-
-#     # WHEN / THEN
-#     x_pidginBodycore.add_otx_wall(None)
-#     assert colon_str in x_pidginBodycore.otx_walls
-#     assert None not in x_pidginBodycore.otx_walls
-
-
-# def test_PidginBodyCore_add_inx_wall_ChangesAttr_Scenario0_AddToEmptySet():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-#     x_pidginBodycore = pidginBodycore_shop(x_face_id, x_event_id)
-#     colon_str = ":"
-#     assert colon_str not in x_pidginBodycore.otx_walls
-#     assert colon_str not in x_pidginBodycore.inx_walls
-#     assert colon_str not in x_pidginBodycore.unknown_words
-
-#     # WHEN
-#     x_pidginBodycore.add_inx_wall(colon_str)
-
-#     # THEN
-#     assert colon_str not in x_pidginBodycore.otx_walls
-#     assert colon_str in x_pidginBodycore.inx_walls
-#     assert colon_str not in x_pidginBodycore.unknown_words
-
-
-# def test_PidginBodyCore_add_inx_wall_ChangesAttr_Scenario1_AddNoneToEmptySet():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-#     x_pidginBodycore = pidginBodycore_shop(x_face_id, x_event_id)
-#     assert None not in x_pidginBodycore.otx_walls
-#     assert None not in x_pidginBodycore.inx_walls
-#     assert None not in x_pidginBodycore.unknown_words
-
-#     # WHEN
-#     x_pidginBodycore.add_inx_wall(None)
-
-#     # THEN
-#     assert None not in x_pidginBodycore.otx_walls
-#     assert None in x_pidginBodycore.inx_walls
-#     assert None not in x_pidginBodycore.unknown_words
-
-
-# def test_PidginBodyCore_add_inx_wall_ChangesAttr_Scenario2_SetWithNoneChangesWhenNonNoneElementAdded():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-#     x_pidginBodycore = pidginBodycore_shop(x_face_id, x_event_id)
-#     x_pidginBodycore.add_inx_wall(None)
-#     assert None in x_pidginBodycore.inx_walls
-
-#     # WHEN / THEN
-#     x_pidginBodycore.add_inx_wall(None)
-#     assert None in x_pidginBodycore.inx_walls
-
-#     # WHEN / THEN
-#     colon_str = ":"
-#     x_pidginBodycore.add_inx_wall(colon_str)
-#     assert colon_str in x_pidginBodycore.inx_walls
-#     assert None not in x_pidginBodycore.inx_walls
-
-#     # WHEN / THEN
-#     x_pidginBodycore.add_inx_wall(None)
-#     assert colon_str in x_pidginBodycore.inx_walls
-#     assert None not in x_pidginBodycore.inx_walls
-
-
-# def test_PidginBodyCore_add_unknown_word_ChangesAttr_Scenario0_AddToEmptySet():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-#     x_pidginBodycore = pidginBodycore_shop(x_face_id, x_event_id)
-#     colon_str = ":"
-#     assert colon_str not in x_pidginBodycore.otx_walls
-#     assert colon_str not in x_pidginBodycore.inx_walls
-#     assert colon_str not in x_pidginBodycore.unknown_words
-
-#     # WHEN
-#     x_pidginBodycore.add_unknown_word(colon_str)
-
-#     # THEN
-#     assert colon_str not in x_pidginBodycore.otx_walls
-#     assert colon_str not in x_pidginBodycore.inx_walls
-#     assert colon_str in x_pidginBodycore.unknown_words
-
-
-# def test_PidginBodyCore_add_unknown_word_ChangesAttr_Scenario1_AddNoneToEmptySet():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-#     x_pidginBodycore = pidginBodycore_shop(x_face_id, x_event_id)
-#     assert None not in x_pidginBodycore.otx_walls
-#     assert None not in x_pidginBodycore.inx_walls
-#     assert None not in x_pidginBodycore.unknown_words
-
-#     # WHEN
-#     x_pidginBodycore.add_unknown_word(None)
-
-#     # THEN
-#     assert None not in x_pidginBodycore.otx_walls
-#     assert None not in x_pidginBodycore.inx_walls
-#     assert None in x_pidginBodycore.unknown_words
-
-
-# def test_PidginBodyCore_add_unknown_word_ChangesAttr_Scenario2_SetWithNoneChangesWhenNonNoneElementAdded():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-#     x_pidginBodycore = pidginBodycore_shop(x_face_id, x_event_id)
-#     x_pidginBodycore.add_unknown_word(None)
-#     assert None in x_pidginBodycore.unknown_words
-
-#     # WHEN / THEN
-#     x_pidginBodycore.add_unknown_word(None)
-#     assert None in x_pidginBodycore.unknown_words
-
-#     # WHEN / THEN
-#     colon_str = ":"
-#     x_pidginBodycore.add_unknown_word(colon_str)
-#     assert colon_str in x_pidginBodycore.unknown_words
-#     assert None not in x_pidginBodycore.unknown_words
-
-#     # WHEN / THEN
-#     x_pidginBodycore.add_unknown_word(None)
-#     assert colon_str in x_pidginBodycore.unknown_words
-#     assert None not in x_pidginBodycore.unknown_words
-
-
-# def test_create_pidginBodycore_ReturnsObj():
-#     # ESTABLISH
-#     x_face_id = "Sue"
-#     x_event_id = 55
-#     x_otx_wall = ";"
-#     x_inx_wall = ";"
-#     x_unknown_word = "unknown33"
-
-#     # WHEN
-#     x_pidginBodycore = create_pidginBodycore(
-#         x_face_id, x_event_id, x_otx_wall, x_inx_wall, x_unknown_word
-#     )
-
-#     # THEN
-#     x_face_id = x_face_id
-#     x_event_id = x_event_id
-#     x_otx_wall_set = {x_otx_wall}
-#     x_inx_wall_set = {x_inx_wall}
-#     x_unknown_word_set = {x_unknown_word}
-#     assert x_pidginBodycore
-#     assert x_pidginBodycore.face_id == x_face_id
-#     assert x_pidginBodycore.event_id == x_event_id
-#     assert x_pidginBodycore.otx_walls == x_otx_wall_set
-#     assert x_pidginBodycore.inx_walls == x_inx_wall_set
-#     assert x_pidginBodycore.unknown_words == x_unknown_word_set
-
-
-# def test_PidginBodyCore_is_valid_ReturnsObj():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     e55 = 55
-#     uk33 = "unknown33"
-
-#     # WHEN / THEN
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55)
-#     assert x_pidginBodycore.is_valid() is False
-
-#     # WHEN / THEN
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55, {";"}, {":"}, {uk33})
-#     assert x_pidginBodycore.is_valid()
-
-#     # WHEN / THEN
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55, {None}, {None}, {None})
-#     assert x_pidginBodycore.is_valid()
-
-#     # WHEN / THEN
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55, {":", "/"}, {":"}, {uk33})
-#     assert x_pidginBodycore.is_valid() is False
-
-#     # WHEN / THEN
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55, {":"}, {":", "/"}, {uk33})
-#     assert x_pidginBodycore.is_valid() is False
-
-#     # WHEN / THEN
-#     uk44 = "unknown44"
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55, {":"}, {":"}, {uk33, uk44})
-#     assert x_pidginBodycore.is_valid() is False
-
-
-# def test_PidginBodyCore_get_valid_pidginBodyrow_ReturnsObj_Scenario0():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     e55 = 55
-#     uk33 = "unknown33"
-
-#     # WHEN / THEN
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55)
-#     assert x_pidginBodycore.is_valid() is False
-#     assert None == x_pidginBodycore.get_valid_pidginBodyrow()
-
-
-# def test_PidginBodyCore_get_valid_pidginBodyrow_ReturnsObj_Scenario1():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     e55 = 55
-#     uk33 = "unknown33"
-
-#     # WHEN
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55, {";"}, {":"}, {uk33})
-
-#     # THEN
-#     assert x_pidginBodycore.is_valid()
-#     assert x_pidginBodycore.get_valid_pidginBodyrow()
-#     s55_pidginBodyrow = x_pidginBodycore.get_valid_pidginBodyrow()
-#     assert s55_pidginBodyrow.face_id == sue_str
-#     assert s55_pidginBodyrow.event_id == e55
-#     assert s55_pidginBodyrow.otx_wall == ";"
-#     assert s55_pidginBodyrow.inx_wall == ":"
-#     assert s55_pidginBodyrow.unknown_word == uk33
-
-
-# def test_PidginBodyCore_get_valid_pidginBodyrow_ReturnsObj_Scenario2():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     e55 = 55
-#     uk33 = "unknown33"
-
-#     # WHEN
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55, {None}, {None}, {None})
-#     assert x_pidginBodycore.is_valid()
-#     assert x_pidginBodycore.get_valid_pidginBodyrow()
-#     s55_pidginBodyrow = x_pidginBodycore.get_valid_pidginBodyrow()
-#     assert s55_pidginBodyrow.face_id == sue_str
-#     assert s55_pidginBodyrow.event_id == e55
-#     assert s55_pidginBodyrow.otx_wall is None
-#     assert s55_pidginBodyrow.inx_wall is None
-#     assert s55_pidginBodyrow.unknown_word is None
-
-
-# def test_PidginBodyCore_get_valid_pidginBodyrow_ReturnsObj_Scenario3():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     e55 = 55
-#     uk33 = "unknown33"
-
-#     # WHEN
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55, {":", "/"}, {":"}, {uk33})
-
-#     # THEN
-#     assert x_pidginBodycore.is_valid() is False
-#     assert not x_pidginBodycore.get_valid_pidginBodyrow()
-
-
-# def test_PidginBodyCore_get_valid_pidginBodyrow_ReturnsObj_Scenario1():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     e55 = 55
-#     uk33 = "unknown33"
-
-#     # WHEN
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55, {":"}, {":", "/"}, {uk33})
-
-#     # THEN
-#     assert x_pidginBodycore.is_valid() is False
-#     assert not x_pidginBodycore.get_valid_pidginBodyrow()
-
-
-# def test_PidginBodyCore_get_valid_pidginBodyrow_ReturnsObj_Scenario1():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     e55 = 55
-#     uk33 = "unknown33"
-
-#     # WHEN
-#     uk44 = "unknown44"
-#     x_pidginBodycore = pidginBodycore_shop(sue_str, e55, {":"}, {":"}, {uk33, uk44})
-
-#     # THEN
-#     assert x_pidginBodycore.is_valid() is False
-#     assert not x_pidginBodycore.get_valid_pidginBodyrow()
-
-
-# def test_PidginBodyBook_Exists():
-#     # ESTABLISH / WHEN
-#     x_pidginBodybook = PidginBodyBook()
-
-#     # THEN
-#     assert x_pidginBodybook
-#     assert x_pidginBodybook.pidginBodycores is None
-
-
-# def test_eventsaggs_shop_ReturnsObj():
-#     # ESTABLISH / WHEN
-#     x_pidginBodybook = pidginBodybook_shop()
-
-#     # THEN
-#     assert x_pidginBodybook
-#     assert x_pidginBodybook.pidginBodycores == {}
-
-
-# def test_PidginBodyBook_overwrite_pidginBodycore_SetsAttr_Scenario0():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     x_event_id = 55
-#     sue55_agg = create_pidginBodycore(sue_str, x_event_id, ";", ":", "uk33")
-#     x_pidginBodybook = pidginBodybook_shop()
-#     assert x_pidginBodybook.pidginBodycores.get((sue_str, x_event_id)) is None
-
-#     # WHEN
-#     x_pidginBodybook._overwrite_pidginBodycore(sue55_agg)
-
-#     # THEN
-#     assert x_pidginBodybook.pidginBodycores.get((sue_str, x_event_id)) != None
-#     assert x_pidginBodybook.pidginBodycores.get((sue_str, x_event_id)) == sue55_agg
-
-
-# def test_PidginBodyBook_pidginBodycore_exists_ReturnsObj():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     x_event_id = 55
-#     sue55_agg = create_pidginBodycore(sue_str, x_event_id, ";", ":", "uk33")
-#     x_pidginBodybook = pidginBodybook_shop()
-#     assert x_pidginBodybook.pidginBodycore_exists((sue_str, x_event_id)) is False
-
-#     # WHEN
-#     x_pidginBodybook._overwrite_pidginBodycore(sue55_agg)
-
-#     # THEN
-#     assert x_pidginBodybook.pidginBodycore_exists((sue_str, x_event_id))
-
-
-# def test_PidginBodyBook_get_pidginBodycore_ReturnsObj():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     x55_event_id = 55
-#     sue55_agg = create_pidginBodycore(sue_str, x55_event_id, ";", ":", "uk33")
-#     x_pidginBodybook = pidginBodybook_shop()
-#     x_pidginBodybook._overwrite_pidginBodycore(sue55_agg)
-#     sue55_key = (sue_str, x55_event_id)
-#     assert x_pidginBodybook.pidginBodycore_exists(sue55_key)
-
-#     # WHEN
-#     gen_pidginBodycore = x_pidginBodybook.get_pidginBodycore(sue55_key)
-
-#     # THEN
-#     assert gen_pidginBodycore == sue55_agg
-
-
-# def test_PidginBodyBook_eval_pidginBodyrow_SetsAttr_Scenario0_EmptyDict():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     x_event_id = 55
-#     x_otx_wall = ";"
-#     x_inx_wall = ";"
-#     x_unknown_word = "unknown33"
-#     sue55_pidginBodyrow = PidginBodyRow(
-#         sue_str, x_event_id, x_otx_wall, x_inx_wall, x_unknown_word
-#     )
-#     x_pidginBodybook = pidginBodybook_shop()
-#     sue55_key = (sue_str, x_event_id)
-#     assert x_pidginBodybook.pidginBodycore_exists(sue55_key) is False
-
-#     # WHEN
-#     x_pidginBodybook.eval_pidginBodyrow(sue55_pidginBodyrow)
-
-#     # THEN
-#     assert x_pidginBodybook.pidginBodycore_exists(sue55_key)
-#     x_pidginBodycore = x_pidginBodybook.get_pidginBodycore(sue55_key)
-#     assert x_pidginBodycore.face_id == sue_str
-#     assert x_pidginBodycore.event_id == x_event_id
-#     assert x_otx_wall in x_pidginBodycore.otx_walls
-#     assert x_inx_wall in x_pidginBodycore.inx_walls
-#     assert x_unknown_word in x_pidginBodycore.unknown_words
-
-
-# def test_PidginBodyBook_eval_pidginBodyrow_SetsAttr_Scenario0_EmptyDict():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     x_event_id = 55
-#     x_otx_wall = ";"
-#     x_inx_wall = ";"
-#     x_unknown_word = "unknown33"
-#     sue55_pidginBodyrow = PidginBodyRow(
-#         sue_str, x_event_id, x_otx_wall, x_inx_wall, x_unknown_word
-#     )
-#     x_pidginBodybook = pidginBodybook_shop()
-#     sue55_key = (sue_str, x_event_id)
-#     assert x_pidginBodybook.pidginBodycore_exists(sue55_key) is False
-
-#     # WHEN
-#     x_pidginBodybook.eval_pidginBodyrow(sue55_pidginBodyrow)
-
-#     # THEN
-#     assert x_pidginBodybook.pidginBodycore_exists(sue55_key)
-#     x_pidginBodycore = x_pidginBodybook.get_pidginBodycore(sue55_key)
-#     assert x_pidginBodycore.face_id == sue_str
-#     assert x_pidginBodycore.event_id == x_event_id
-#     assert x_otx_wall in x_pidginBodycore.otx_walls
-#     assert x_inx_wall in x_pidginBodycore.inx_walls
-#     assert x_unknown_word in x_pidginBodycore.unknown_words
-
-
-# def test_PidginBodyBook_eval_pidginBodyrow_SetsAttr_Scenario1_MultipleRowsAtSameEvent():
-#     # ESTABLISH
-#     x_pidginBodybook = pidginBodybook_shop()
-#     sue_str = "Sue"
-#     x_event_id = 55
-#     colon_str = ":"
-#     comma_str = ","
-#     x_unk33 = "unknown33"
-#     sue1_pidginBodyrow = PidginBodyRow(
-#         sue_str, x_event_id, colon_str, comma_str, x_unk33
-#     )
-#     x_pidginBodybook.eval_pidginBodyrow(sue1_pidginBodyrow)
-#     sue55_key = (sue_str, x_event_id)
-#     assert x_pidginBodybook.pidginBodycore_exists(sue55_key)
-
-#     # WHEN
-#     slash_str = "/"
-#     semic_str = ";"
-#     x_unk44 = "unknown44"
-#     sue2_pidginBodyrow = PidginBodyRow(
-#         sue_str, x_event_id, slash_str, semic_str, x_unk44
-#     )
-#     x_pidginBodybook.eval_pidginBodyrow(sue2_pidginBodyrow)
-
-#     # THEN
-#     assert x_pidginBodybook.pidginBodycore_exists(sue55_key)
-#     gen_pidginBodycore = x_pidginBodybook.get_pidginBodycore(sue55_key)
-#     assert gen_pidginBodycore.face_id == sue_str
-#     assert gen_pidginBodycore.event_id == x_event_id
-#     assert gen_pidginBodycore.otx_walls == {colon_str, slash_str}
-#     assert gen_pidginBodycore.inx_walls == {comma_str, semic_str}
-#     assert gen_pidginBodycore.unknown_words == {x_unk33, x_unk44}
-
-
-# def test_PidginBodyBook_eval_pidginBodyrow_SetsAttr_Scenario2_NoneElementIsHandledCorrectly():
-#     # ESTABLISH
-#     x_pidginBodybook = pidginBodybook_shop()
-#     sue_str = "Sue"
-#     x_event_id = 55
-#     colon_str = ":"
-#     sue1_pidginBodyrow = PidginBodyRow(sue_str, x_event_id, colon_str, None, None)
-#     x_pidginBodybook.eval_pidginBodyrow(sue1_pidginBodyrow)
-#     sue55_key = (sue_str, x_event_id)
-#     assert x_pidginBodybook.pidginBodycore_exists(sue55_key)
-
-#     # WHEN
-#     slash_str = "/"
-#     x_unk44 = "unknown44"
-#     sue2_pidginBodyrow = PidginBodyRow(sue_str, x_event_id, slash_str, None, x_unk44)
-#     x_pidginBodybook.eval_pidginBodyrow(sue2_pidginBodyrow)
-
-#     # THEN
-#     assert x_pidginBodybook.pidginBodycore_exists(sue55_key)
-#     gen_pidginBodycore = x_pidginBodybook.get_pidginBodycore(sue55_key)
-#     assert gen_pidginBodycore.face_id == sue_str
-#     assert gen_pidginBodycore.event_id == x_event_id
-#     assert gen_pidginBodycore.otx_walls == {colon_str, slash_str}
-#     assert gen_pidginBodycore.inx_walls == {None}
-#     assert gen_pidginBodycore.unknown_words == {x_unk44}
+from src.f10_world.pidgin_agg import (
+    PidginBodyCore,
+    PidginBodyBook,
+    pidginbodybook_shop,
+    pidginbodycore_shop,
+    create_pidginbodycore,
+    PidginBodyRow,
+)
+
+
+def test_PidginBodyRow_Exists():
+    # ESTABLISH
+    sue_str = "Sue"
+    x_event_id = 55
+    x_otx_str = ";"
+    x_inx_str = ";"
+
+    # WHEN
+    sue55_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, x_otx_str, x_inx_str)
+
+    # THEN
+    assert sue55_pidginbodyrow
+    assert sue55_pidginbodyrow.face_id == sue_str
+    assert sue55_pidginbodyrow.event_id == x_event_id
+    assert sue55_pidginbodyrow.otx_str == x_otx_str
+    assert sue55_pidginbodyrow.inx_str == x_inx_str
+
+
+def test_PidginBodyCore_Exists():
+    # ESTABLISH
+    x_pidginbodycore = PidginBodyCore()
+
+    # THEN
+    assert x_pidginbodycore
+    assert x_pidginbodycore.face_id is None
+    assert x_pidginbodycore.event_id is None
+    assert x_pidginbodycore.otx_str is None
+    assert x_pidginbodycore.inx_strs is None
+
+
+def test_pidginbodycore_shop_ReturnsObj_WithNoValues():
+    # ESTABLISH
+    x_face_id = "Sue"
+    x_event_id = 55
+    x_otx_str = "Bob"
+
+    # WHEN
+    x_pidginbodycore = pidginbodycore_shop(x_face_id, x_event_id, x_otx_str)
+
+    # THEN
+    assert x_pidginbodycore
+    assert x_pidginbodycore.face_id == x_face_id
+    assert x_pidginbodycore.event_id == x_event_id
+    assert x_pidginbodycore.otx_str == x_otx_str
+    assert x_pidginbodycore.inx_strs == set()
+
+
+def test_pidginbodycore_shop_ReturnsObj_WithCoreValues():
+    # ESTABLISH
+    x_face_id = "Sue"
+    x_event_id = 55
+    bob_otx = "Bob"
+    bob_inx = "Bobito"
+    inx_str_set = {bob_inx}
+
+    # WHEN
+    x_pidginbodycore = pidginbodycore_shop(x_face_id, x_event_id, bob_otx, inx_str_set)
+
+    # THEN
+    assert x_pidginbodycore
+    assert x_pidginbodycore.face_id == x_face_id
+    assert x_pidginbodycore.event_id == x_event_id
+    assert x_pidginbodycore.otx_str == bob_otx
+    assert x_pidginbodycore.inx_strs == inx_str_set
+    assert bob_inx in x_pidginbodycore.inx_strs
+
+
+def test_PidginBodyCore_add_inx_str_ChangesAttr_Scenario0_AddToEmptySet():
+    # ESTABLISH
+    x_face_id = "Sue"
+    x_event_id = 55
+    bob_otx = "Bob"
+    bob_inx = "Bobito"
+    x_pidginbodycore = pidginbodycore_shop(x_face_id, x_event_id, bob_otx)
+    assert bob_inx not in x_pidginbodycore.inx_strs
+
+    # WHEN
+    x_pidginbodycore.add_inx_str(bob_inx)
+
+    # THEN
+    assert bob_inx in x_pidginbodycore.inx_strs
+
+
+def test_PidginBodyCore_add_inx_str_ChangesAttr_Scenario1_AddNoneToEmptySet():
+    # ESTABLISH
+    x_face_id = "Sue"
+    x_event_id = 55
+    bob_otx = "Bob"
+    x_pidginbodycore = pidginbodycore_shop(x_face_id, x_event_id, bob_otx)
+    assert None not in x_pidginbodycore.inx_strs
+
+    # WHEN
+    x_pidginbodycore.add_inx_str(None)
+
+    # THEN
+    assert None in x_pidginbodycore.inx_strs
+
+
+def test_PidginBodyCore_add_inx_str_ChangesAttr_Scenario2_SetWithNoneChangesWhenNonNoneElementAdded():
+    # ESTABLISH
+    x_face_id = "Sue"
+    x_event_id = 55
+    bob_otx = "Bob"
+    x_pidginbodycore = pidginbodycore_shop(x_face_id, x_event_id, bob_otx)
+    assert None not in x_pidginbodycore.inx_strs
+
+    x_pidginbodycore.add_inx_str(None)
+    assert None in x_pidginbodycore.inx_strs
+
+    # WHEN / THEN
+    x_pidginbodycore.add_inx_str(None)
+    assert None in x_pidginbodycore.inx_strs
+
+    # WHEN / THEN
+    bob_inx = "Bobito"
+    x_pidginbodycore.add_inx_str(bob_inx)
+    assert bob_inx in x_pidginbodycore.inx_strs
+    assert None not in x_pidginbodycore.inx_strs
+
+    # WHEN / THEN
+    x_pidginbodycore.add_inx_str(None)
+    assert bob_inx in x_pidginbodycore.inx_strs
+    assert None not in x_pidginbodycore.inx_strs
+
+
+def test_create_pidginbodycore_ReturnsObj():
+    # ESTABLISH
+    x_face_id = "Sue"
+    x_event_id = 55
+    bob_otx = "Bob"
+    bob_inx = "Bobito"
+
+    # WHEN
+    x_pidginbodycore = create_pidginbodycore(x_face_id, x_event_id, bob_otx, bob_inx)
+
+    # THEN
+    x_face_id = x_face_id
+    x_event_id = x_event_id
+    x_inx_str_set = {bob_inx}
+    assert x_pidginbodycore
+    assert x_pidginbodycore.face_id == x_face_id
+    assert x_pidginbodycore.event_id == x_event_id
+    assert x_pidginbodycore.otx_str == bob_otx
+    assert x_pidginbodycore.inx_strs == x_inx_str_set
+
+
+def test_PidginBodyCore_is_valid_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    bob_otx = "Bob"
+    bob2_inx = "Bobito"
+    bob3_inx = "Bobby"
+
+    # WHEN / THEN
+    x_pidginbodycore = pidginbodycore_shop(sue_str, e55, bob2_inx)
+    assert x_pidginbodycore.is_valid() is False
+
+    # WHEN / THEN
+    x_pidginbodycore = pidginbodycore_shop(sue_str, e55, bob_otx, {bob2_inx})
+    assert x_pidginbodycore.is_valid()
+
+    # WHEN / THEN
+    x_pidginbodycore = pidginbodycore_shop(sue_str, e55, bob_otx, {None})
+    assert x_pidginbodycore.is_valid()
+
+    # WHEN / THEN
+    x_pidginbodycore = pidginbodycore_shop(sue_str, e55, bob_otx, {bob2_inx, bob3_inx})
+    assert x_pidginbodycore.is_valid() is False
+
+
+def test_PidginBodyCore_get_valid_pidginbodyrow_ReturnsObj_Scenario0():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    bob_otx = "Bob"
+
+    # WHEN / THEN
+    x_pidginbodycore = pidginbodycore_shop(sue_str, e55, bob_otx)
+    assert x_pidginbodycore.is_valid() is False
+    assert None == x_pidginbodycore.get_valid_pidginbodyrow()
+
+
+def test_PidginBodyCore_get_valid_pidginbodyrow_ReturnsObj_Scenario1():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    bob_otx = "Bob"
+    bob_inx = "Bobito"
+
+    # WHEN
+    x_pidginbodycore = pidginbodycore_shop(sue_str, e55, bob_otx, {bob_inx})
+
+    # THEN
+    assert x_pidginbodycore.is_valid()
+    assert x_pidginbodycore.get_valid_pidginbodyrow()
+    s55_pidginbodyrow = x_pidginbodycore.get_valid_pidginbodyrow()
+    assert s55_pidginbodyrow.face_id == sue_str
+    assert s55_pidginbodyrow.event_id == e55
+    assert s55_pidginbodyrow.otx_str == bob_otx
+    assert s55_pidginbodyrow.inx_str == bob_inx
+
+
+def test_PidginBodyCore_get_valid_pidginbodyrow_ReturnsObj_Scenario2():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    bob_otx = "Bob"
+
+    # WHEN
+    x_pidginbodycore = pidginbodycore_shop(sue_str, e55, bob_otx, {None})
+    assert x_pidginbodycore.is_valid()
+    assert x_pidginbodycore.get_valid_pidginbodyrow()
+    s55_pidginbodyrow = x_pidginbodycore.get_valid_pidginbodyrow()
+    assert s55_pidginbodyrow.face_id == sue_str
+    assert s55_pidginbodyrow.event_id == e55
+    assert s55_pidginbodyrow.otx_str == bob_otx
+    assert s55_pidginbodyrow.inx_str is None
+
+
+def test_PidginBodyCore_get_valid_pidginbodyrow_ReturnsObj_Scenario3():
+    # ESTABLISH
+    sue_str = "Sue"
+    e55 = 55
+    bob_otx = "Bob"
+    bob2_inx = "Bobito"
+    bob3_inx = "Bobby"
+
+    # WHEN
+    x_pidginbodycore = pidginbodycore_shop(sue_str, e55, bob_otx, {bob2_inx, bob3_inx})
+
+    # THEN
+    assert x_pidginbodycore.is_valid() is False
+    assert not x_pidginbodycore.get_valid_pidginbodyrow()
+
+
+def test_PidginBodyBook_Exists():
+    # ESTABLISH / WHEN
+    x_pidginbodybook = PidginBodyBook()
+
+    # THEN
+    assert x_pidginbodybook
+    assert x_pidginbodybook.pidginbodycores is None
+
+
+def test_eventsaggs_shop_ReturnsObj():
+    # ESTABLISH / WHEN
+    x_pidginbodybook = pidginbodybook_shop()
+
+    # THEN
+    assert x_pidginbodybook
+    assert x_pidginbodybook.pidginbodycores == {}
+
+
+def test_PidginBodyBook_overwrite_pidginbodycore_SetsAttr_Scenario0():
+    # ESTABLISH
+    sue_str = "Sue"
+    x_event_id = 55
+    bob_otx = "Bob"
+    bob2_inx = "Bobito"
+    bob3_inx = "Bobby"
+    sue55_agg = create_pidginbodycore(sue_str, x_event_id, bob_otx, bob2_inx)
+    x_pidginbodybook = pidginbodybook_shop()
+    pidgincore_key = (sue_str, x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodycores.get(pidgincore_key) is None
+
+    # WHEN
+    x_pidginbodybook._overwrite_pidginbodycore(sue55_agg)
+
+    # THEN
+    assert x_pidginbodybook.pidginbodycores.get(pidgincore_key) != None
+    assert x_pidginbodybook.pidginbodycores.get(pidgincore_key) == sue55_agg
+
+
+def test_PidginBodyBook_pidginbodycore_exists_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    x_event_id = 55
+    bob_otx = "Bob"
+    bob2_inx = "Bobito"
+    sue55_agg = create_pidginbodycore(sue_str, x_event_id, bob_otx, bob2_inx)
+    x_pidginbodybook = pidginbodybook_shop()
+    pidgincore_key = (sue_str, x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodycore_exists(pidgincore_key) is False
+
+    # WHEN
+    x_pidginbodybook._overwrite_pidginbodycore(sue55_agg)
+
+    # THEN
+    assert x_pidginbodybook.pidginbodycore_exists(pidgincore_key)
+
+
+def test_PidginBodyBook_get_pidginbodycore_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    x55_event_id = 55
+    bob_otx = "Bob"
+    bob2_inx = "Bobito"
+    sue55_agg = create_pidginbodycore(sue_str, x55_event_id, bob_otx, bob2_inx)
+    x_pidginbodybook = pidginbodybook_shop()
+    x_pidginbodybook._overwrite_pidginbodycore(sue55_agg)
+    sue55_key = (sue_str, x55_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
+
+    # WHEN
+    gen_pidginbodycore = x_pidginbodybook.get_pidginbodycore(sue55_key)
+
+    # THEN
+    assert gen_pidginbodycore == sue55_agg
+
+
+def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario0_EmptyDict():
+    # ESTABLISH
+    sue_str = "Sue"
+    x_event_id = 55
+    bob_otx = "Bob"
+    bob2_inx = "Bobito"
+    sue55_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob2_inx)
+    x_pidginbodybook = pidginbodybook_shop()
+    sue55_key = (sue_str, x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodycore_exists(sue55_key) is False
+
+    # WHEN
+    x_pidginbodybook.eval_pidginbodyrow(sue55_pidginbodyrow)
+
+    # THEN
+    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
+    x_pidginbodycore = x_pidginbodybook.get_pidginbodycore(sue55_key)
+    assert x_pidginbodycore.face_id == sue_str
+    assert x_pidginbodycore.event_id == x_event_id
+    assert bob2_inx in x_pidginbodycore.inx_strs
+
+
+def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario1_MultipleRowsAtSameEvent():
+    # ESTABLISH
+    x_pidginbodybook = pidginbodybook_shop()
+    sue_str = "Sue"
+    x_event_id = 55
+    bob_otx = "Bob"
+    bob2_inx = "Bobito"
+    sue1_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob2_inx)
+    x_pidginbodybook.eval_pidginbodyrow(sue1_pidginbodyrow)
+    sue55_key = (sue_str, x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
+
+    # WHEN
+    bob3_inx = "Bobby"
+    sue2_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob3_inx)
+    x_pidginbodybook.eval_pidginbodyrow(sue2_pidginbodyrow)
+
+    # THEN
+    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
+    gen_pidginbodycore = x_pidginbodybook.get_pidginbodycore(sue55_key)
+    assert gen_pidginbodycore.face_id == sue_str
+    assert gen_pidginbodycore.event_id == x_event_id
+    assert gen_pidginbodycore.otx_str == bob_otx
+    assert gen_pidginbodycore.inx_strs == {bob2_inx, bob3_inx}
+
+
+def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario2_NoneElementIsHandledCorrectly():
+    # ESTABLISH
+    x_pidginbodybook = pidginbodybook_shop()
+    sue_str = "Sue"
+    x_event_id = 55
+    bob_otx = "Bob"
+    bob2_inx = "Bobito"
+    sue1_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob2_inx)
+    x_pidginbodybook.eval_pidginbodyrow(sue1_pidginbodyrow)
+    sue55_key = (sue_str, x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
+
+    # WHEN
+    sue2_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, None)
+    x_pidginbodybook.eval_pidginbodyrow(sue2_pidginbodyrow)
+
+    # THEN
+    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
+    gen_pidginbodycore = x_pidginbodybook.get_pidginbodycore(sue55_key)
+    assert gen_pidginbodycore.face_id == sue_str
+    assert gen_pidginbodycore.event_id == x_event_id
+    assert gen_pidginbodycore.otx_str == bob_otx
+    assert gen_pidginbodycore.inx_strs == {bob2_inx}

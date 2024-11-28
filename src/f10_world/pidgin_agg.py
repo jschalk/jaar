@@ -13,8 +13,8 @@ class PidginHeartRow:
 
 @dataclass
 class PidginHeartCore:
-    face_id: set[str] = None
-    event_id: set[int] = None
+    face_id: str = None
+    event_id: int = None
     otx_walls: set[str] = None
     inx_walls: set[str] = None
     unknown_words: set[str] = None
@@ -124,3 +124,98 @@ class PidginHeartBook:
 
 def pidginheartbook_shop() -> PidginHeartBook:
     return PidginHeartBook(pidginheartcores={})
+
+
+@dataclass
+class PidginBodyRow:
+    face_id: str
+    event_id: int
+    otx_str: str
+    inx_str: str
+
+
+@dataclass
+class PidginBodyCore:
+    face_id: str = None
+    event_id: int = None
+    otx_str: str = None
+    inx_strs: set[str] = None
+
+    def add_inx_str(self, inx_str: str):
+        if None in self.inx_strs and inx_str != None:
+            self.inx_strs.remove(None)
+
+        if inx_str is None and self.inx_strs == set():
+            self.inx_strs.add(inx_str)
+        elif inx_str != None:
+            self.inx_strs.add(inx_str)
+
+    def is_valid(self) -> bool:
+        return len(self.inx_strs) == 1
+
+    def get_valid_pidginbodyrow(self) -> PidginBodyRow:
+        if self.is_valid():
+            return PidginBodyRow(
+                face_id=self.face_id,
+                event_id=self.event_id,
+                otx_str=self.otx_str,
+                inx_str=min(self.inx_strs),
+            )
+
+
+def pidginbodycore_shop(
+    face_id: str,
+    event_id: int,
+    otx_str: str,
+    inx_strs: set[str] = None,
+) -> PidginBodyCore:
+    return PidginBodyCore(face_id, event_id, otx_str, get_empty_set_if_none(inx_strs))
+
+
+def create_pidginbodycore(
+    face_id: str, event_id: int, otx_str: str, inx_str: str
+) -> PidginBodyCore:
+    x_pidginbodycore = pidginbodycore_shop(face_id, event_id, otx_str)
+    x_pidginbodycore.add_inx_str(inx_str)
+    return x_pidginbodycore
+
+
+@dataclass
+class PidginBodyBook:
+    pidginbodycores: dict[tuple[str, int, str], PidginBodyCore] = None
+
+    def _overwrite_pidginbodycore(self, x_pidginbodycore: PidginBodyCore):
+        x_key = (
+            x_pidginbodycore.face_id,
+            x_pidginbodycore.event_id,
+            x_pidginbodycore.otx_str,
+        )
+        self.pidginbodycores[x_key] = x_pidginbodycore
+
+    def pidginbodycore_exists(self, x_key: tuple[str, int]):
+        return self.pidginbodycores.get(x_key) != None
+
+    def get_pidginbodycore(self, x_key: tuple[str, int, str]) -> PidginBodyCore:
+        return self.pidginbodycores.get(x_key)
+
+    def eval_pidginbodyrow(self, x_pidginbodyrow: PidginBodyRow):
+        pidginbodycore_key = (
+            x_pidginbodyrow.face_id,
+            x_pidginbodyrow.event_id,
+            x_pidginbodyrow.otx_str,
+        )
+        if self.pidginbodycore_exists(pidginbodycore_key):
+            pidginbodycore_obj = self.get_pidginbodycore(pidginbodycore_key)
+            pidginbodycore_obj.add_inx_str(x_pidginbodyrow.inx_str)
+        else:
+            pidginbodycore_obj = create_pidginbodycore(
+                face_id=x_pidginbodyrow.face_id,
+                event_id=x_pidginbodyrow.event_id,
+                otx_str=x_pidginbodyrow.otx_str,
+                inx_str=x_pidginbodyrow.inx_str,
+            )
+            self.pidginbodycores[pidginbodycore_key] = pidginbodycore_obj
+
+
+def pidginbodybook_shop() -> PidginBodyBook:
+    return PidginBodyBook(pidginbodycores={})
