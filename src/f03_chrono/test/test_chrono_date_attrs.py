@@ -251,9 +251,9 @@ def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
     assert creg_chronounit._hour == "0-12am"
     assert creg_chronounit._minute == 0
     assert creg_chronounit._year_num == 2000
-    assert five_chronounit._weekday == "Bioday"
+    assert five_chronounit._weekday == "Baileyday"
     assert five_chronounit._monthday == 0
-    assert five_chronounit._month == "Annita"
+    assert five_chronounit._month == "Fresh"
     assert five_chronounit._hour == "0hr"
     assert five_chronounit._minute == 0
     assert five_chronounit._year_num == 5200

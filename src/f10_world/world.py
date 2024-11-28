@@ -40,6 +40,9 @@ from src.f10_world.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
     PidginHeartBook,
+    pidginbodybook_shop,
+    PidginBodyRow,
+    PidginBodyBook,
 )
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from dataclasses import dataclass
@@ -359,7 +362,7 @@ class PidginStagingToAggTransformer:
         staging_df = pandas_read_excel(pidgin_file_path, sheet_name="acct_staging")
 
         x_pidginheartbook = self.get_pidginheart_validations(staging_df)
-
+        # pidginbodybook_shop()
         # for pidginheartrow in x_pidginheartbook.pidginheartcores.values():
         #     df_len = len(staging_df.index)
         #     pidgin_agg_df.loc[df_len] = [

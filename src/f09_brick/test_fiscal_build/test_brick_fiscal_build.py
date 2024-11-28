@@ -169,5 +169,6 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario1_TwoFiscalIDs(
     jeffy45_timeline = jeffy45_fiscalunit.timeline
     assert five_fiscalunit.timeline.hours_config == jeffy45_timeline.hours_config
     assert five_fiscalunit.timeline.weekdays_config == jeffy45_timeline.weekdays_config
+    assert five_fiscalunit.timeline.months_config == jeffy45_timeline.months_config
     assert five_fiscalunit.timeline == jeffy45_timeline
     # assert five_fiscalunit == jeffy45_fiscalunit
