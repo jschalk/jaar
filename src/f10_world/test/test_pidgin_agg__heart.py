@@ -448,14 +448,14 @@ def test_PidginHeartBook_overwrite_pidginheartcore_SetsAttr_Scenario0():
     x_event_id = 55
     sue55_agg = create_pidginheartcore(sue_str, x_event_id, ";", ":", "uk33")
     x_pidginheartbook = pidginheartbook_shop()
-    assert x_pidginheartbook.pidginheartcores.get((sue_str, x_event_id)) is None
+    assert x_pidginheartbook.pidginheartcores.get(x_event_id) is None
 
     # WHEN
     x_pidginheartbook._overwrite_pidginheartcore(sue55_agg)
 
     # THEN
-    assert x_pidginheartbook.pidginheartcores.get((sue_str, x_event_id)) != None
-    assert x_pidginheartbook.pidginheartcores.get((sue_str, x_event_id)) == sue55_agg
+    assert x_pidginheartbook.pidginheartcores.get(x_event_id) != None
+    assert x_pidginheartbook.pidginheartcores.get(x_event_id) == sue55_agg
 
 
 def test_PidginHeartBook_pidginheartcore_exists_ReturnsObj():
@@ -464,13 +464,13 @@ def test_PidginHeartBook_pidginheartcore_exists_ReturnsObj():
     x_event_id = 55
     sue55_agg = create_pidginheartcore(sue_str, x_event_id, ";", ":", "uk33")
     x_pidginheartbook = pidginheartbook_shop()
-    assert x_pidginheartbook.pidginheartcore_exists((sue_str, x_event_id)) is False
+    assert x_pidginheartbook.pidginheartcore_exists(x_event_id) is False
 
     # WHEN
     x_pidginheartbook._overwrite_pidginheartcore(sue55_agg)
 
     # THEN
-    assert x_pidginheartbook.pidginheartcore_exists((sue_str, x_event_id))
+    assert x_pidginheartbook.pidginheartcore_exists(x_event_id)
 
 
 def test_PidginHeartBook_get_pidginheartcore_ReturnsObj():
@@ -480,11 +480,10 @@ def test_PidginHeartBook_get_pidginheartcore_ReturnsObj():
     sue55_agg = create_pidginheartcore(sue_str, x55_event_id, ";", ":", "uk33")
     x_pidginheartbook = pidginheartbook_shop()
     x_pidginheartbook._overwrite_pidginheartcore(sue55_agg)
-    sue55_key = (sue_str, x55_event_id)
-    assert x_pidginheartbook.pidginheartcore_exists(sue55_key)
+    assert x_pidginheartbook.pidginheartcore_exists(x55_event_id)
 
     # WHEN
-    gen_pidginheartcore = x_pidginheartbook.get_pidginheartcore(sue55_key)
+    gen_pidginheartcore = x_pidginheartbook.get_pidginheartcore(x55_event_id)
 
     # THEN
     assert gen_pidginheartcore == sue55_agg
@@ -501,15 +500,14 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario0_EmptyDict():
         sue_str, x_event_id, x_otx_wall, x_inx_wall, x_unknown_word
     )
     x_pidginheartbook = pidginheartbook_shop()
-    sue55_key = (sue_str, x_event_id)
-    assert x_pidginheartbook.pidginheartcore_exists(sue55_key) is False
+    assert x_pidginheartbook.pidginheartcore_exists(x_event_id) is False
 
     # WHEN
     x_pidginheartbook.eval_pidginheartrow(sue55_pidginheartrow)
 
     # THEN
-    assert x_pidginheartbook.pidginheartcore_exists(sue55_key)
-    x_pidginheartcore = x_pidginheartbook.get_pidginheartcore(sue55_key)
+    assert x_pidginheartbook.pidginheartcore_exists(x_event_id)
+    x_pidginheartcore = x_pidginheartbook.get_pidginheartcore(x_event_id)
     assert x_pidginheartcore.face_id == sue_str
     assert x_pidginheartcore.event_id == x_event_id
     assert x_otx_wall in x_pidginheartcore.otx_walls
@@ -528,15 +526,14 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario0_EmptyDict():
         sue_str, x_event_id, x_otx_wall, x_inx_wall, x_unknown_word
     )
     x_pidginheartbook = pidginheartbook_shop()
-    sue55_key = (sue_str, x_event_id)
-    assert x_pidginheartbook.pidginheartcore_exists(sue55_key) is False
+    assert x_pidginheartbook.pidginheartcore_exists(x_event_id) is False
 
     # WHEN
     x_pidginheartbook.eval_pidginheartrow(sue55_pidginheartrow)
 
     # THEN
-    assert x_pidginheartbook.pidginheartcore_exists(sue55_key)
-    x_pidginheartcore = x_pidginheartbook.get_pidginheartcore(sue55_key)
+    assert x_pidginheartbook.pidginheartcore_exists(x_event_id)
+    x_pidginheartcore = x_pidginheartbook.get_pidginheartcore(x_event_id)
     assert x_pidginheartcore.face_id == sue_str
     assert x_pidginheartcore.event_id == x_event_id
     assert x_otx_wall in x_pidginheartcore.otx_walls
@@ -556,8 +553,7 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario1_MultipleRowsAtSa
         sue_str, x_event_id, colon_str, comma_str, x_unk33
     )
     x_pidginheartbook.eval_pidginheartrow(sue1_pidginheartrow)
-    sue55_key = (sue_str, x_event_id)
-    assert x_pidginheartbook.pidginheartcore_exists(sue55_key)
+    assert x_pidginheartbook.pidginheartcore_exists(x_event_id)
 
     # WHEN
     slash_str = "/"
@@ -569,8 +565,8 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario1_MultipleRowsAtSa
     x_pidginheartbook.eval_pidginheartrow(sue2_pidginheartrow)
 
     # THEN
-    assert x_pidginheartbook.pidginheartcore_exists(sue55_key)
-    gen_pidginheartcore = x_pidginheartbook.get_pidginheartcore(sue55_key)
+    assert x_pidginheartbook.pidginheartcore_exists(x_event_id)
+    gen_pidginheartcore = x_pidginheartbook.get_pidginheartcore(x_event_id)
     assert gen_pidginheartcore.face_id == sue_str
     assert gen_pidginheartcore.event_id == x_event_id
     assert gen_pidginheartcore.otx_walls == {colon_str, slash_str}
@@ -586,8 +582,7 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario2_NoneElementIsHan
     colon_str = ":"
     sue1_pidginheartrow = PidginHeartRow(sue_str, x_event_id, colon_str, None, None)
     x_pidginheartbook.eval_pidginheartrow(sue1_pidginheartrow)
-    sue55_key = (sue_str, x_event_id)
-    assert x_pidginheartbook.pidginheartcore_exists(sue55_key)
+    assert x_pidginheartbook.pidginheartcore_exists(x_event_id)
 
     # WHEN
     slash_str = "/"
@@ -596,8 +591,8 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario2_NoneElementIsHan
     x_pidginheartbook.eval_pidginheartrow(sue2_pidginheartrow)
 
     # THEN
-    assert x_pidginheartbook.pidginheartcore_exists(sue55_key)
-    gen_pidginheartcore = x_pidginheartbook.get_pidginheartcore(sue55_key)
+    assert x_pidginheartbook.pidginheartcore_exists(x_event_id)
+    gen_pidginheartcore = x_pidginheartbook.get_pidginheartcore(x_event_id)
     assert gen_pidginheartcore.face_id == sue_str
     assert gen_pidginheartcore.event_id == x_event_id
     assert gen_pidginheartcore.otx_walls == {colon_str, slash_str}

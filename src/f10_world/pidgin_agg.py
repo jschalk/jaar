@@ -92,22 +92,20 @@ def create_pidginheartcore(
 
 @dataclass
 class PidginHeartBook:
-    pidginheartcores: dict[tuple[str, int], PidginHeartCore] = None
+    pidginheartcores: dict[int, PidginHeartCore] = None
 
     def _overwrite_pidginheartcore(self, x_pidginheartcore: PidginHeartCore):
-        x_key = (x_pidginheartcore.face_id, x_pidginheartcore.event_id)
-        self.pidginheartcores[x_key] = x_pidginheartcore
+        self.pidginheartcores[x_pidginheartcore.event_id] = x_pidginheartcore
 
-    def pidginheartcore_exists(self, x_key: tuple[str, int]):
-        return self.pidginheartcores.get(x_key) != None
+    def pidginheartcore_exists(self, event_id: int):
+        return self.pidginheartcores.get(event_id) != None
 
-    def get_pidginheartcore(self, x_key: tuple[str, int]) -> PidginHeartCore:
-        return self.pidginheartcores.get(x_key)
+    def get_pidginheartcore(self, event_id: int) -> PidginHeartCore:
+        return self.pidginheartcores.get(event_id)
 
     def eval_pidginheartrow(self, x_pidginheartrow: PidginHeartRow):
-        pidginheartcore_key = (x_pidginheartrow.face_id, x_pidginheartrow.event_id)
-        if self.pidginheartcore_exists(pidginheartcore_key):
-            pidginheartcore_obj = self.get_pidginheartcore(pidginheartcore_key)
+        if self.pidginheartcore_exists(x_pidginheartrow.event_id):
+            pidginheartcore_obj = self.get_pidginheartcore(x_pidginheartrow.event_id)
             pidginheartcore_obj.add_otx_wall(x_pidginheartrow.otx_wall)
             pidginheartcore_obj.add_inx_wall(x_pidginheartrow.inx_wall)
             pidginheartcore_obj.add_unknown_word(x_pidginheartrow.unknown_word)
@@ -119,7 +117,7 @@ class PidginHeartBook:
                 inx_wall=x_pidginheartrow.inx_wall,
                 unknown_word=x_pidginheartrow.unknown_word,
             )
-            self.pidginheartcores[pidginheartcore_key] = pidginheartcore_obj
+            self.pidginheartcores[x_pidginheartrow.event_id] = pidginheartcore_obj
 
 
 def pidginheartbook_shop() -> PidginHeartBook:
@@ -182,28 +180,20 @@ def create_pidginbodycore(
 
 @dataclass
 class PidginBodyBook:
-    pidginbodycores: dict[tuple[str, int, str], PidginBodyCore] = None
+    pidginbodycores: dict[tuple[int, str], PidginBodyCore] = None
 
     def _overwrite_pidginbodycore(self, x_pidginbodycore: PidginBodyCore):
-        x_key = (
-            x_pidginbodycore.face_id,
-            x_pidginbodycore.event_id,
-            x_pidginbodycore.otx_str,
-        )
+        x_key = (x_pidginbodycore.event_id, x_pidginbodycore.otx_str)
         self.pidginbodycores[x_key] = x_pidginbodycore
 
-    def pidginbodycore_exists(self, x_key: tuple[str, int]):
-        return self.pidginbodycores.get(x_key) != None
+    def pidginbodycore_exists(self, event_id_otx: tuple[int, str]):
+        return self.pidginbodycores.get(event_id_otx) != None
 
-    def get_pidginbodycore(self, x_key: tuple[str, int, str]) -> PidginBodyCore:
-        return self.pidginbodycores.get(x_key)
+    def get_pidginbodycore(self, event_id_otx: tuple[int, str]) -> PidginBodyCore:
+        return self.pidginbodycores.get(event_id_otx)
 
     def eval_pidginbodyrow(self, x_pidginbodyrow: PidginBodyRow):
-        pidginbodycore_key = (
-            x_pidginbodyrow.face_id,
-            x_pidginbodyrow.event_id,
-            x_pidginbodyrow.otx_str,
-        )
+        pidginbodycore_key = (x_pidginbodyrow.event_id, x_pidginbodyrow.otx_str)
         if self.pidginbodycore_exists(pidginbodycore_key):
             pidginbodycore_obj = self.get_pidginbodycore(pidginbodycore_key)
             pidginbodycore_obj.add_inx_str(x_pidginbodyrow.inx_str)

@@ -271,7 +271,7 @@ def test_PidginBodyBook_overwrite_pidginbodycore_SetsAttr_Scenario0():
     bob3_inx = "Bobby"
     sue55_agg = create_pidginbodycore(sue_str, x_event_id, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
-    pidgincore_key = (sue_str, x_event_id, bob_otx)
+    pidgincore_key = (x_event_id, bob_otx)
     assert x_pidginbodybook.pidginbodycores.get(pidgincore_key) is None
 
     # WHEN
@@ -290,7 +290,7 @@ def test_PidginBodyBook_pidginbodycore_exists_ReturnsObj():
     bob2_inx = "Bobito"
     sue55_agg = create_pidginbodycore(sue_str, x_event_id, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
-    pidgincore_key = (sue_str, x_event_id, bob_otx)
+    pidgincore_key = (x_event_id, bob_otx)
     assert x_pidginbodybook.pidginbodycore_exists(pidgincore_key) is False
 
     # WHEN
@@ -309,11 +309,11 @@ def test_PidginBodyBook_get_pidginbodycore_ReturnsObj():
     sue55_agg = create_pidginbodycore(sue_str, x55_event_id, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
     x_pidginbodybook._overwrite_pidginbodycore(sue55_agg)
-    sue55_key = (sue_str, x55_event_id, bob_otx)
-    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
+    event_otx_key = (x55_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodycore_exists(event_otx_key)
 
     # WHEN
-    gen_pidginbodycore = x_pidginbodybook.get_pidginbodycore(sue55_key)
+    gen_pidginbodycore = x_pidginbodybook.get_pidginbodycore(event_otx_key)
 
     # THEN
     assert gen_pidginbodycore == sue55_agg
@@ -327,15 +327,15 @@ def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario0_EmptyDict():
     bob2_inx = "Bobito"
     sue55_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
-    sue55_key = (sue_str, x_event_id, bob_otx)
-    assert x_pidginbodybook.pidginbodycore_exists(sue55_key) is False
+    event_otx_key = (x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodycore_exists(event_otx_key) is False
 
     # WHEN
     x_pidginbodybook.eval_pidginbodyrow(sue55_pidginbodyrow)
 
     # THEN
-    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
-    x_pidginbodycore = x_pidginbodybook.get_pidginbodycore(sue55_key)
+    assert x_pidginbodybook.pidginbodycore_exists(event_otx_key)
+    x_pidginbodycore = x_pidginbodybook.get_pidginbodycore(event_otx_key)
     assert x_pidginbodycore.face_id == sue_str
     assert x_pidginbodycore.event_id == x_event_id
     assert bob2_inx in x_pidginbodycore.inx_strs
@@ -350,8 +350,8 @@ def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario1_MultipleRowsAtSame
     bob2_inx = "Bobito"
     sue1_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob2_inx)
     x_pidginbodybook.eval_pidginbodyrow(sue1_pidginbodyrow)
-    sue55_key = (sue_str, x_event_id, bob_otx)
-    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
+    event_otx_key = (x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodycore_exists(event_otx_key)
 
     # WHEN
     bob3_inx = "Bobby"
@@ -359,8 +359,8 @@ def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario1_MultipleRowsAtSame
     x_pidginbodybook.eval_pidginbodyrow(sue2_pidginbodyrow)
 
     # THEN
-    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
-    gen_pidginbodycore = x_pidginbodybook.get_pidginbodycore(sue55_key)
+    assert x_pidginbodybook.pidginbodycore_exists(event_otx_key)
+    gen_pidginbodycore = x_pidginbodybook.get_pidginbodycore(event_otx_key)
     assert gen_pidginbodycore.face_id == sue_str
     assert gen_pidginbodycore.event_id == x_event_id
     assert gen_pidginbodycore.otx_str == bob_otx
@@ -376,16 +376,16 @@ def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario2_NoneElementIsHandl
     bob2_inx = "Bobito"
     sue1_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob2_inx)
     x_pidginbodybook.eval_pidginbodyrow(sue1_pidginbodyrow)
-    sue55_key = (sue_str, x_event_id, bob_otx)
-    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
+    event_otx_key = (x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodycore_exists(event_otx_key)
 
     # WHEN
     sue2_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, None)
     x_pidginbodybook.eval_pidginbodyrow(sue2_pidginbodyrow)
 
     # THEN
-    assert x_pidginbodybook.pidginbodycore_exists(sue55_key)
-    gen_pidginbodycore = x_pidginbodybook.get_pidginbodycore(sue55_key)
+    assert x_pidginbodybook.pidginbodycore_exists(event_otx_key)
+    gen_pidginbodycore = x_pidginbodybook.get_pidginbodycore(event_otx_key)
     assert gen_pidginbodycore.face_id == sue_str
     assert gen_pidginbodycore.event_id == x_event_id
     assert gen_pidginbodycore.otx_str == bob_otx
