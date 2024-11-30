@@ -344,9 +344,9 @@ class PidginStagingToAggTransformer:
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
         staging_df = pandas_read_excel(pidgin_file_path, sheet_name="acct_staging")
 
-        x_pidginheartbook = self.get_pidginheart_validations(staging_df)
+        x_pidginbodybook = self.get_validated_pidginbody(staging_df)
         # pidginbodybook_shop()
-        # for pidginheartrow in x_pidginheartbook.pidginheartcores.values():
+        # for pidginheartrow in x_pidginheartbook.pidginheartunits.values():
         #     df_len = len(staging_df.index)
         #     pidgin_agg_df.loc[df_len] = [
         #         face_id,
@@ -364,17 +364,30 @@ class PidginStagingToAggTransformer:
         #         inx_wall=x_row["inx_wall"],
         #         unknown_word=x_row["unknown_word"],
 
-    def get_pidginheart_validations(self, staging_df: DataFrame) -> PidginHeartBook:
+    def get_validated_pidginbody(self, staging_df: DataFrame) -> PidginHeartBook:
+        x_pidginheartbook = self.get_validated_pidginheart(staging_df)
+        x_pidginbodybook = pidginbodybook_shop()
+        for index, x_row in staging_df.iterrows():
+            x_pidginbodyrow = PidginBodyRow(
+                event_id=x_row["event_id"],
+                face_id=x_row["face_id"],
+                otx_str=self.get_otx_obj(x_row),
+                inx_str=self.get_otx_obj(x_row),
+            )
+            x_pidginbodybook.eval_pidginbodyrow(x_pidginbodyrow)
+        return x_pidginbodybook
+
+    def get_validated_pidginheart(self, staging_df: DataFrame) -> PidginHeartBook:
         x_pidginheartbook = pidginheartbook_shop()
         for index, x_row in staging_df.iterrows():
-            x_pidginheartcore = PidginHeartRow(
+            x_pidginheartrow = PidginHeartRow(
                 event_id=x_row["event_id"],
                 face_id=x_row["face_id"],
                 otx_wall=x_row["otx_wall"],
                 inx_wall=x_row["inx_wall"],
                 unknown_word=x_row["unknown_word"],
             )
-            x_pidginheartbook.eval_pidginheartrow(x_pidginheartcore)
+            x_pidginheartbook.eval_pidginheartrow(x_pidginheartrow)
         return x_pidginheartbook
 
     def get_otx_obj(self, x_row) -> str:
