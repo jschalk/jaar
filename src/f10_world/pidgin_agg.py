@@ -225,6 +225,18 @@ class PidginBodyBook:
             )
             self.pidginbodyunits[pidginbodyunit_key] = pidginbodyunit_obj
 
+    def add_pidginheartrow(
+        self,
+        face_id: str,
+        event_id: int,
+        otx_wall: str,
+        inx_wall: str,
+        unknown_word: str,
+    ):
+        self.pidginheartbook.add_pidginheartrow(
+            face_id, event_id, otx_wall, inx_wall, unknown_word
+        )
+
 
 def pidginbodybook_shop(pidginheartbook: PidginHeartBook = None) -> PidginBodyBook:
     if pidginheartbook is None:

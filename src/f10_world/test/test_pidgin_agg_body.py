@@ -268,11 +268,11 @@ def test_pidginbodybook_shop_ReturnsObj():
 
 def test_pidginbodybook_shop_ReturnsObj_WithValues():
     # ESTABLISH
-    x_pidginheartbook = pidginheartbook_shop()
     sue_str = "Sue"
     x_event_id = 55
     colon_str = ":"
     uk44 = "unknown44"
+    x_pidginheartbook = pidginheartbook_shop()
     x_pidginheartbook.add_pidginheartrow(sue_str, x_event_id, colon_str, None, uk44)
 
     # WHEN
@@ -282,6 +282,28 @@ def test_pidginbodybook_shop_ReturnsObj_WithValues():
     assert x_pidginbodybook
     assert x_pidginbodybook.pidginheartbook.pidginheartunit_exists(x_event_id)
     assert x_pidginbodybook.pidginheartbook == x_pidginheartbook
+    assert x_pidginbodybook.pidginbodyunits == {}
+
+
+def test_PidginBodyBook_add_pidginheartrow_SetsAttr():
+    # ESTABLISH
+    sue_str = "Sue"
+    x_event_id = 55
+    colon_str = ":"
+    uk44 = "unknown44"
+    x_pidginbodybook = pidginbodybook_shop()
+    assert x_pidginbodybook.pidginheartbook.event_id_is_valid(x_event_id) is False
+
+    # WHEN
+    x_pidginbodybook.add_pidginheartrow(sue_str, x_event_id, colon_str, None, uk44)
+
+    # THEN
+    assert x_pidginbodybook
+    assert x_pidginbodybook.pidginheartbook.event_id_is_valid(x_event_id)
+    assert x_pidginbodybook.pidginheartbook.pidginheartunit_exists(x_event_id)
+    y_pidginheartbook = pidginheartbook_shop()
+    y_pidginheartbook.add_pidginheartrow(sue_str, x_event_id, colon_str, None, uk44)
+    assert x_pidginbodybook.pidginheartbook == y_pidginheartbook
     assert x_pidginbodybook.pidginbodyunits == {}
 
 
