@@ -213,17 +213,18 @@ class PidginBodyBook:
 
     def eval_pidginbodyrow(self, x_pidginbodyrow: PidginBodyRow):
         pidginbodyunit_key = (x_pidginbodyrow.event_id, x_pidginbodyrow.otx_str)
-        if self.pidginbodyunit_exists(pidginbodyunit_key):
-            pidginbodyunit_obj = self.get_pidginbodyunit(pidginbodyunit_key)
-            pidginbodyunit_obj.add_inx_str(x_pidginbodyrow.inx_str)
-        else:
-            pidginbodyunit_obj = create_pidginbodyunit(
-                face_id=x_pidginbodyrow.face_id,
-                event_id=x_pidginbodyrow.event_id,
-                otx_str=x_pidginbodyrow.otx_str,
-                inx_str=x_pidginbodyrow.inx_str,
-            )
-            self.pidginbodyunits[pidginbodyunit_key] = pidginbodyunit_obj
+        if self.heart_is_valid(x_pidginbodyrow.event_id):
+            if self.pidginbodyunit_exists(pidginbodyunit_key):
+                pidginbodyunit_obj = self.get_pidginbodyunit(pidginbodyunit_key)
+                pidginbodyunit_obj.add_inx_str(x_pidginbodyrow.inx_str)
+            else:
+                pidginbodyunit_obj = create_pidginbodyunit(
+                    face_id=x_pidginbodyrow.face_id,
+                    event_id=x_pidginbodyrow.event_id,
+                    otx_str=x_pidginbodyrow.otx_str,
+                    inx_str=x_pidginbodyrow.inx_str,
+                )
+                self.pidginbodyunits[pidginbodyunit_key] = pidginbodyunit_obj
 
     def add_pidginheartrow(
         self,
@@ -236,6 +237,9 @@ class PidginBodyBook:
         self.pidginheartbook.add_pidginheartrow(
             face_id, event_id, otx_wall, inx_wall, unknown_word
         )
+
+    def heart_is_valid(self, event_id: int) -> bool:
+        return self.pidginheartbook.event_id_is_valid(event_id)
 
 
 def pidginbodybook_shop(pidginheartbook: PidginHeartBook = None) -> PidginBodyBook:
