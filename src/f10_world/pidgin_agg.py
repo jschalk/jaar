@@ -1,4 +1,5 @@
 from src.f00_instrument.dict_toolbox import get_empty_set_if_none
+from src.f09_brick.pandas_tool import if_nan_return_None
 from dataclasses import dataclass
 
 
@@ -20,6 +21,8 @@ class PidginHeartUnit:
     unknown_words: set[str] = None
 
     def add_otx_wall(self, otx_wall: str):
+        otx_wall = if_nan_return_None(otx_wall)
+
         if None in self.otx_walls and otx_wall != None:
             self.otx_walls.remove(None)
 
@@ -29,6 +32,8 @@ class PidginHeartUnit:
             self.otx_walls.add(otx_wall)
 
     def add_inx_wall(self, inx_wall: str):
+        inx_wall = if_nan_return_None(inx_wall)
+
         if None in self.inx_walls and inx_wall != None:
             self.inx_walls.remove(None)
 
@@ -38,6 +43,8 @@ class PidginHeartUnit:
             self.inx_walls.add(inx_wall)
 
     def add_unknown_word(self, unknown_word: str):
+        unknown_word = if_nan_return_None(unknown_word)
+
         if None in self.unknown_words and unknown_word != None:
             self.unknown_words.remove(None)
 
@@ -84,6 +91,9 @@ def create_pidginheartunit(
     face_id: str, event_id: int, otx_wall: str, inx_wall: str, unknown_word: str
 ) -> PidginHeartUnit:
     x_pidginheartunit = pidginheartunit_shop(face_id, event_id)
+    print(f"{otx_wall=} {type(otx_wall)=}")
+    print(f"{inx_wall=} {type(inx_wall)=}")
+    print(f"{unknown_word=} {type(unknown_word)=}")
     x_pidginheartunit.add_otx_wall(otx_wall)
     x_pidginheartunit.add_inx_wall(inx_wall)
     x_pidginheartunit.add_unknown_word(unknown_word)
@@ -201,21 +211,45 @@ class PidginBodyBook:
     pidginheartbook: PidginHeartBook = None
     pidginbodyunits: dict[tuple[int, str], PidginBodyUnit] = None
 
+    def get_valid_pidginbodylists(
+        self,
+    ) -> list[list[str, int, str, str, str, str, str]]:
+        x_list = []
+        for x_pidginbodyunit in self.pidginbodyunits.values():
+            if x_pidginbodyunit.is_valid():
+                x_pidginheartunit = self.pidginheartbook.get_pidginheartunit(
+                    x_pidginbodyunit.event_id
+                )
+                x_pidginheartrow = x_pidginheartunit.get_valid_pidginheartrow()
+
+                x_pidginbodylist = [
+                    x_pidginbodyunit.face_id,
+                    x_pidginbodyunit.event_id,
+                    x_pidginbodyunit.otx_str,
+                    min(x_pidginbodyunit.inx_strs),
+                    x_pidginheartrow.otx_wall,
+                    x_pidginheartrow.inx_wall,
+                    x_pidginheartrow.unknown_word,
+                ]
+                x_list.append(x_pidginbodylist)
+        return x_list
+
     def _overwrite_pidginbodyunit(self, x_pidginbodyunit: PidginBodyUnit):
         x_key = (x_pidginbodyunit.event_id, x_pidginbodyunit.otx_str)
         self.pidginbodyunits[x_key] = x_pidginbodyunit
 
-    def pidginbodyunit_exists(self, event_id_otx: tuple[int, str]):
-        return self.pidginbodyunits.get(event_id_otx) != None
+    def pidginbodyunit_exists(self, event_id: int, otx_str: str):
+        return self.pidginbodyunits.get((event_id, otx_str)) != None
 
-    def get_pidginbodyunit(self, event_id_otx: tuple[int, str]) -> PidginBodyUnit:
-        return self.pidginbodyunits.get(event_id_otx)
+    def get_pidginbodyunit(self, event_id: int, otx_str: str) -> PidginBodyUnit:
+        return self.pidginbodyunits.get((event_id, otx_str))
 
     def eval_pidginbodyrow(self, x_pidginbodyrow: PidginBodyRow):
-        pidginbodyunit_key = (x_pidginbodyrow.event_id, x_pidginbodyrow.otx_str)
-        if self.heart_is_valid(x_pidginbodyrow.event_id):
-            if self.pidginbodyunit_exists(pidginbodyunit_key):
-                pidginbodyunit_obj = self.get_pidginbodyunit(pidginbodyunit_key)
+        x_event_id = x_pidginbodyrow.event_id
+        x_otx_str = x_pidginbodyrow.otx_str
+        if self.heart_is_valid(x_event_id):
+            if self.pidginbodyunit_exists(x_event_id, x_otx_str):
+                pidginbodyunit_obj = self.get_pidginbodyunit(x_event_id, x_otx_str)
                 pidginbodyunit_obj.add_inx_str(x_pidginbodyrow.inx_str)
             else:
                 pidginbodyunit_obj = create_pidginbodyunit(
@@ -224,6 +258,7 @@ class PidginBodyBook:
                     otx_str=x_pidginbodyrow.otx_str,
                     inx_str=x_pidginbodyrow.inx_str,
                 )
+                pidginbodyunit_key = (x_event_id, x_otx_str)
                 self.pidginbodyunits[pidginbodyunit_key] = pidginbodyunit_obj
 
     def add_pidginheartrow(
@@ -240,6 +275,11 @@ class PidginBodyBook:
 
     def heart_is_valid(self, event_id: int) -> bool:
         return self.pidginheartbook.event_id_is_valid(event_id)
+
+    def body_is_valid(self, event_id: int, otx_str: str) -> bool:
+        if self.pidginbodyunit_exists(event_id, otx_str):
+            return self.get_pidginbodyunit(event_id, otx_str).is_valid()
+        return False
 
 
 def pidginbodybook_shop(pidginheartbook: PidginHeartBook = None) -> PidginBodyBook:

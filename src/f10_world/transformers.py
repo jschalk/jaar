@@ -25,6 +25,10 @@ from pandas import read_excel as pandas_read_excel, concat as pandas_concat, Dat
 from os.path import exists as os_path_exists
 
 
+class not_given_pidgin_category_Exception(Exception):
+    pass
+
+
 class JungleToZooTransformer:
     def __init__(self, jungle_dir: str, zoo_dir: str):
         self.jungle_dir = jungle_dir
@@ -166,7 +170,7 @@ class ZooAggToStagingTransformer:
         elif self.pidgin_category == "bridge_road":
             self.jaar_type = "RoadUnit"
         else:
-            raise Exception("not given pidgin_category")
+            raise not_given_pidgin_category_Exception("not given pidgin_category")
 
     def transform(self):
         category_bricks = get_brick_category_ref().get(self.pidgin_category)
@@ -330,7 +334,7 @@ class PidginStagingToAggTransformer:
         elif self.pidgin_category == "bridge_road":
             self.jaar_type = "RoadUnit"
         else:
-            raise Exception("not given pidgin_category")
+            raise not_given_pidgin_category_Exception("not given pidgin_category")
 
     def transform(self):
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
@@ -343,36 +347,23 @@ class PidginStagingToAggTransformer:
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
         staging_df = pandas_read_excel(pidgin_file_path, sheet_name="acct_staging")
+        print(f"{staging_df=}")
 
-        x_pidginbodybook = self.get_validated_pidginbody(staging_df)
-        # pidginbodybook_shop()
-        # for pidginheartrow in x_pidginheartbook.pidginheartunits.values():
-        #     df_len = len(staging_df.index)
-        #     pidgin_agg_df.loc[df_len] = [
-        #         face_id,
-        #         event_id,
-        #         self.get_otx_obj(x_row),
-        #         self.get_inx_obj(x_row, df_missing_cols),
-        #         otx_wall,
-        #         inx_wall,
-        #         unknown_word,
-        #     ]
+        x_pidginbodybook = self.get_validated_pidginbodybook(staging_df)
+        print(f"{x_pidginbodybook=}")
+        for pidginbodylist in x_pidginbodybook.get_valid_pidginbodylists():
+            print(f"{len(pidgin_agg_df)=} {pidgin_agg_df.index=} {pidginbodylist=}")
+            pidgin_agg_df.loc[len(pidgin_agg_df)] = pidginbodylist
 
-        #         event_id=x_row["event_id"],
-        #         face_id=x_row["face_id"],
-        #         otx_wall=x_row["otx_wall"],
-        #         inx_wall=x_row["inx_wall"],
-        #         unknown_word=x_row["unknown_word"],
-
-    def get_validated_pidginbody(self, staging_df: DataFrame) -> PidginHeartBook:
+    def get_validated_pidginbodybook(self, staging_df: DataFrame) -> PidginBodyBook:
         x_pidginheartbook = self.get_validated_pidginheart(staging_df)
-        x_pidginbodybook = pidginbodybook_shop()
+        x_pidginbodybook = pidginbodybook_shop(x_pidginheartbook)
         for index, x_row in staging_df.iterrows():
             x_pidginbodyrow = PidginBodyRow(
                 event_id=x_row["event_id"],
                 face_id=x_row["face_id"],
                 otx_str=self.get_otx_obj(x_row),
-                inx_str=self.get_otx_obj(x_row),
+                inx_str=self.get_inx_obj(x_row),
             )
             x_pidginbodybook.eval_pidginbodyrow(x_pidginbodyrow)
         return x_pidginbodybook

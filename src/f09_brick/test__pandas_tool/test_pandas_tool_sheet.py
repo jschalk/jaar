@@ -5,11 +5,13 @@ from src.f09_brick.pandas_tool import (
     upsert_sheet,
     get_all_excel_sheet_names,
     split_excel_into_dirs,
+    if_nan_return_None,
 )
 from pytest import fixture as pytest_fixture, raises as pytest_raises
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
+from numpy import nan as numpy_nan, float64
 
 
 @pytest_fixture
@@ -175,8 +177,7 @@ def sample_excel_file(tmp_path):
 @pytest_fixture
 def output_dir(tmp_path):
     """Fixture to provide a temporary output directory."""
-    output_dir = tmp_path / "output"
-    return output_dir
+    return tmp_path / "output"
 
 
 def test_split_excel_into_dirs_RaisesErrorWhenColumnIsInvalid(
@@ -246,7 +247,7 @@ def test_split_excel_into_dirs_DoesNothingIfColumnIsEmpty(tmp_path, output_dir):
     # THEN Verify that no files are created
     created_files = list(output_dir.iterdir())
     print(f"{created_files=}")
-    assert len(created_files) == 0
+    assert not created_files
 
 
 def test_split_excel_into_dirs_DoesCreateDirectoryIfColumnEmpty(
@@ -265,7 +266,7 @@ def test_split_excel_into_dirs_DoesCreateDirectoryIfColumnEmpty(
     # THEN
     assert output_dir.exists()
     print(f"{list(output_dir.iterdir())=}")
-    assert len(list(output_dir.iterdir())) > 0
+    assert list(output_dir.iterdir())
 
 
 def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
@@ -291,3 +292,31 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
     # THEN
     assert os_path_exists(b_file_path)
     assert os_path_exists(c_file_path)
+
+
+def test_if_nan_return_None_ReturnsObj(brick_env_setup_cleanup):
+    # ESTABLISH
+    ex1_df = DataFrame([["yao", None]], columns=["face_id", "example_col"])
+    ex1_sheet_name = "ex1"
+    ex1_file_name = "ex1.xlsx"
+    ex1_path = create_path(brick_fiscals_dir(), ex1_file_name)
+    upsert_sheet(ex1_path, ex1_sheet_name, ex1_df)
+    gen_df = pandas_read_excel(ex1_path, sheet_name=ex1_sheet_name)
+    nan_example = gen_df["example_col"][0]
+    print(f"{nan_example=}")
+    print(f"{type(nan_example)=}")
+
+    # WHEN / THEN
+    assert if_nan_return_None(None) is None
+    assert if_nan_return_None("example") == "example"
+    assert if_nan_return_None(33) == 33
+    assert if_nan_return_None(nan_example) is None
+
+    # ALSO
+    print(f"{type(numpy_nan)=}")
+    print(f"{type(nan_example)=}")
+    print(f"{type(float64(None))=}")
+    print(f"{float64(None)=}")
+    print(f"  {nan_example=}")
+    # assert float64(None) == nan_example
+    # assert numpy_nan == nan_example

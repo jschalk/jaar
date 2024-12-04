@@ -174,31 +174,19 @@ class WorldUnit:
                 self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
 
     def zoo_agg_to_acct_staging(self):
-        pidgin_cat = "bridge_acct_id"
-        legitmate_events = set(self.events.keys())
-        transformer = ZooAggToStagingTransformer(
-            self._zoo_dir, pidgin_cat, legitmate_events
-        )
-        transformer.transform()
+        self.zoo_agg_to_pidgin_staging("bridge_acct_id")
 
     def zoo_agg_to_group_staging(self):
-        pidgin_cat = "bridge_group_id"
-        legitmate_events = set(self.events.keys())
-        transformer = ZooAggToStagingTransformer(
-            self._zoo_dir, pidgin_cat, legitmate_events
-        )
-        transformer.transform()
+        self.zoo_agg_to_pidgin_staging("bridge_group_id")
 
     def zoo_agg_to_node_staging(self):
-        pidgin_cat = "bridge_node"
-        legitmate_events = set(self.events.keys())
-        transformer = ZooAggToStagingTransformer(
-            self._zoo_dir, pidgin_cat, legitmate_events
-        )
-        transformer.transform()
+        self.zoo_agg_to_pidgin_staging("bridge_node")
 
     def zoo_agg_to_road_staging(self):
-        pidgin_cat = "bridge_road"
+        self.zoo_agg_to_pidgin_staging("bridge_road")
+
+    def zoo_agg_to_pidgin_staging(self, arg0):
+        pidgin_cat = arg0
         legitmate_events = set(self.events.keys())
         transformer = ZooAggToStagingTransformer(
             self._zoo_dir, pidgin_cat, legitmate_events

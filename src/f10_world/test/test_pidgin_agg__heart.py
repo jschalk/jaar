@@ -150,6 +150,23 @@ def test_PidginHeartUnit_add_otx_wall_ChangesAttr_Scenario2_SetWithNoneChangesWh
     assert None not in x_pidginheartunit.otx_walls
 
 
+def test_PidginHeartUnit_add_otx_wall_ChangesAttr_Scenario3_NumpyType():
+    # ESTABLISH
+    x_face_id = "Sue"
+    x_event_id = 55
+    x_pidginheartunit = pidginheartunit_shop(x_face_id, x_event_id)
+
+    # WHEN / THEN
+    x_pidginheartunit.add_otx_wall(float("nan"))
+    assert None in x_pidginheartunit.otx_walls
+    assert len(x_pidginheartunit.otx_walls) == 1
+
+    # WHEN / THEN
+    x_pidginheartunit.add_otx_wall(float("nan"))
+    assert None in x_pidginheartunit.otx_walls
+    assert len(x_pidginheartunit.otx_walls) == 1
+
+
 def test_PidginHeartUnit_add_inx_wall_ChangesAttr_Scenario0_AddToEmptySet():
     # ESTABLISH
     x_face_id = "Sue"
@@ -211,6 +228,23 @@ def test_PidginHeartUnit_add_inx_wall_ChangesAttr_Scenario2_SetWithNoneChangesWh
     assert None not in x_pidginheartunit.inx_walls
 
 
+def test_PidginHeartUnit_add_inx_wall_ChangesAttr_Scenario3_NumpyType():
+    # ESTABLISH
+    x_face_id = "Sue"
+    x_event_id = 55
+    x_pidginheartunit = pidginheartunit_shop(x_face_id, x_event_id)
+
+    # WHEN / THEN
+    x_pidginheartunit.add_inx_wall(float("nan"))
+    assert None in x_pidginheartunit.inx_walls
+    assert len(x_pidginheartunit.inx_walls) == 1
+
+    # WHEN / THEN
+    x_pidginheartunit.add_inx_wall(float("nan"))
+    assert None in x_pidginheartunit.inx_walls
+    assert len(x_pidginheartunit.inx_walls) == 1
+
+
 def test_PidginHeartUnit_add_unknown_word_ChangesAttr_Scenario0_AddToEmptySet():
     # ESTABLISH
     x_face_id = "Sue"
@@ -270,6 +304,23 @@ def test_PidginHeartUnit_add_unknown_word_ChangesAttr_Scenario2_SetWithNoneChang
     x_pidginheartunit.add_unknown_word(None)
     assert colon_str in x_pidginheartunit.unknown_words
     assert None not in x_pidginheartunit.unknown_words
+
+
+def test_PidginHeartUnit_add_unknown_word_ChangesAttr_Scenario3_NumpyType():
+    # ESTABLISH
+    x_face_id = "Sue"
+    x_event_id = 55
+    x_pidginheartunit = pidginheartunit_shop(x_face_id, x_event_id)
+
+    # WHEN / THEN
+    x_pidginheartunit.add_unknown_word(float("nan"))
+    assert None in x_pidginheartunit.unknown_words
+    assert len(x_pidginheartunit.unknown_words) == 1
+
+    # WHEN / THEN
+    x_pidginheartunit.add_unknown_word(float("nan"))
+    assert None in x_pidginheartunit.unknown_words
+    assert len(x_pidginheartunit.unknown_words) == 1
 
 
 def test_create_pidginheartunit_ReturnsObj():

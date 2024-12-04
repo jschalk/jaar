@@ -120,6 +120,7 @@ def test_WorldUnit_acct_staging_to_faces_CreatesFile_Scenario1_SingleBrick(
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, acct_agg_str)
     gen_acct_agg_df = pandas_read_excel(pidgin_path, sheet_name=acct_agg_str)
+    print(f"{gen_acct_agg_df=}")
     acct_file_columns = [
         face_id_str(),
         event_id_str(),
@@ -131,8 +132,9 @@ def test_WorldUnit_acct_staging_to_faces_CreatesFile_Scenario1_SingleBrick(
     ]
     assert list(gen_acct_agg_df.columns) == acct_file_columns
     assert len(gen_acct_agg_df) == 2
-    e1_acct0 = [sue_str, event7, yao_str, yao_inx, None, None, None]
-    e1_acct1 = [sue_str, event7, bob_str, bob_inx, None, None, None]
+    x_nan = float("nan")
+    e1_acct0 = [sue_str, event7, yao_str, yao_inx, x_nan, x_nan, x_nan]
+    e1_acct1 = [sue_str, event7, bob_str, bob_inx, x_nan, x_nan, x_nan]
     e1_acct_rows = [e1_acct0, e1_acct1]
     e1_acct_agg_df = DataFrame(e1_acct_rows, columns=acct_file_columns)
     pandas_testing_assert_frame_equal(gen_acct_agg_df, e1_acct_agg_df)

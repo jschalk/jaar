@@ -167,7 +167,12 @@ def _get_pidgen_brick_format_filenames() -> set[str]:
     return {f"{brick_number}.xlsx" for brick_number in brick_numbers}
 
 
+class pandas_tools_ExcelWriterException(Exception):
+    pass
+
+
 def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
+    # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
     create_dir(os_path_dirname(file_path))
     """
     Updates or creates an Excel sheet with a specified DataFrame.
@@ -191,7 +196,7 @@ def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
         ) as writer:
             dataframe.to_excel(writer, sheet_name=sheet_name, index=False)
     except (PermissionError, FileNotFoundError, OSError) as e:
-        raise Exception(f"An error occurred: {e}")
+        raise pandas_tools_ExcelWriterException(f"An error occurred: {e}") from e
 
 
 def sheet_exists(file_path: str, sheet_name: str):
@@ -209,10 +214,7 @@ def sheet_exists(file_path: str, sheet_name: str):
         return False
 
     try:
-        if sheet_name in set(get_sheet_names(file_path)):
-            return True
-        else:
-            return False
+        return sheet_name in set(get_sheet_names(file_path))
     except Exception as e:
         return False
 
@@ -254,3 +256,9 @@ def split_excel_into_dirs(
             output_file = create_path(subdirectory, f"{file_name}.xlsx")
             upsert_sheet(output_file, sheet_name, filtered_df)
             # filtered_df.to_excel(output_file, index=False)
+
+
+def if_nan_return_None(x_obj: any) -> any:
+    # sourcery skip: equality-identity, remove-redundant-if
+    # If the value is NaN, the comparison value != value
+    return None if x_obj != x_obj else x_obj
