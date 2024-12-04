@@ -1,4 +1,4 @@
-from src.f00_instrument.file import open_file
+from src.f00_instrument.file import open_file, create_path
 from src.f00_instrument.dict_toolbox import get_dict_from_json
 from src.f01_road.jaar_config import get_json_filename
 from src.f02_bud.bud_tool import budunit_str
@@ -13,7 +13,8 @@ def get_brick_config_file_name() -> str:
 
 
 def config_file_dir() -> str:
-    return f"{os_getcwd()}/src/f09_brick"
+    src_dir = create_path(os_getcwd(), "src")
+    return create_path(src_dir, "f09_brick")
 
 
 def get_brick_config_dict() -> dict:
@@ -93,7 +94,7 @@ def get_allowed_curds() -> set[str]:
 
 
 def get_brick_formats_dir() -> str:
-    return f"{src_brick_dir()}/brick_formats"
+    return create_path(src_brick_dir(), "brick_formats")
 
 
 # def brick_format_00000_fiscalunit_v0_0_0()->str: return "brick_format_00000_fiscalunit_v0_0_0"

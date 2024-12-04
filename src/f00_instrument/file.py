@@ -30,8 +30,8 @@ from copy import deepcopy as copy_deepcopy
 
 def create_path(x_dir: str, filename: str) -> str:
     if not x_dir:
-        return f"/{filename}" if filename else ""
-    return f"{x_dir}/{filename}" if filename else x_dir
+        return f"{filename}" if filename else ""
+    return os_path_join(x_dir, filename) if filename else x_dir
 
 
 def set_dir(x_path: str):
@@ -86,7 +86,7 @@ def open_file(dest_dir: str, file_name: str):
         with open(file_path, "r") as f:
             text_x = f.read()
             f.close()
-    except Exception as e:
+    except (PermissionError, FileNotFoundError, OSError) as e:
         raise CouldNotOpenFileException(
             f"Could not load file {file_path} {e.args}"
         ) from e

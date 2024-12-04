@@ -225,21 +225,21 @@ def get_ex2_br00004_df() -> DataFrame:
     x_df.loc[9] = [MUSIC23_STR, "December", 306]
     x_df.loc[10] = [MUSIC23_STR, "January", 337]
     x_df.loc[11] = [MUSIC23_STR, "February", 365]
-    x_df.loc[12] = (JEFFY45_STR, "Annita", 25)
-    x_df.loc[13] = (JEFFY45_STR, "Bailey", 50)
-    x_df.loc[14] = (JEFFY45_STR, "Cimon", 75)
-    x_df.loc[15] = (JEFFY45_STR, "Dragon", 100)
-    x_df.loc[16] = (JEFFY45_STR, "Elon", 125)
-    x_df.loc[17] = (JEFFY45_STR, "Fresh", 150)
-    x_df.loc[18] = (JEFFY45_STR, "Giraffe", 175)
-    x_df.loc[19] = (JEFFY45_STR, "Holocene", 200)
-    x_df.loc[20] = (JEFFY45_STR, "Iguana", 225)
-    x_df.loc[21] = (JEFFY45_STR, "Jinping", 250)
-    x_df.loc[22] = (JEFFY45_STR, "Keel", 275)
-    x_df.loc[23] = (JEFFY45_STR, "Lebron", 300)
-    x_df.loc[24] = (JEFFY45_STR, "Mikayla", 325)
-    x_df.loc[25] = (JEFFY45_STR, "Ninon", 350)
-    x_df.loc[26] = [JEFFY45_STR, "Obama", 365]
+    x_df.loc[12] = (JEFFY45_STR, "Fresh", 25)
+    x_df.loc[13] = (JEFFY45_STR, "Geo", 50)
+    x_df.loc[14] = (JEFFY45_STR, "Holocene", 75)
+    x_df.loc[15] = (JEFFY45_STR, "Iguana", 100)
+    x_df.loc[16] = (JEFFY45_STR, "Jinping", 125)
+    x_df.loc[17] = (JEFFY45_STR, "Keel", 150)
+    x_df.loc[18] = (JEFFY45_STR, "Lebron", 175)
+    x_df.loc[19] = (JEFFY45_STR, "Mikayla", 200)
+    x_df.loc[20] = (JEFFY45_STR, "Ninon", 225)
+    x_df.loc[21] = (JEFFY45_STR, "Obama", 250)
+    x_df.loc[22] = (JEFFY45_STR, "Preston", 275)
+    x_df.loc[23] = (JEFFY45_STR, "Quorum", 300)
+    x_df.loc[24] = (JEFFY45_STR, "RioGrande", 325)
+    x_df.loc[25] = (JEFFY45_STR, "Simon", 350)
+    x_df.loc[26] = [JEFFY45_STR, "Trump", 365]
     return x_df
 
 
@@ -254,9 +254,9 @@ def get_ex2_br00005_df() -> DataFrame:
     x_df.loc[4] = [MUSIC23_STR, "Sunday", 4]
     x_df.loc[5] = [MUSIC23_STR, "Monday", 5]
     x_df.loc[6] = [MUSIC23_STR, "Tuesday", 6]
-    x_df.loc[7] = [JEFFY45_STR, "Airday", 0]
-    x_df.loc[8] = [JEFFY45_STR, "Bioday", 1]
+    x_df.loc[7] = [JEFFY45_STR, "Anaday", 0]
+    x_df.loc[8] = [JEFFY45_STR, "Baileyday", 1]
     x_df.loc[9] = [JEFFY45_STR, "Chiday", 2]
     x_df.loc[10] = [JEFFY45_STR, "Danceday", 3]
-    x_df.loc[11] = [JEFFY45_STR, "Ellday", 4]
+    x_df.loc[11] = [JEFFY45_STR, "Elonday", 4]
     return x_df

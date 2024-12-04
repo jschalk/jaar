@@ -1,3 +1,4 @@
+from src.f00_instrument.file import create_path
 from src.f01_road.finance import (
     default_fund_coin_if_none,
     default_respect_bit_if_none,
@@ -110,11 +111,11 @@ def test_FiscalUnit_set_fiscal_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanu
     # ESTABLISH
     music_str = "music"
     music_fiscal = FiscalUnit(fiscal_id=music_str, fiscals_dir=get_test_fiscals_dir())
-    x_fiscal_dir = f"{get_test_fiscals_dir()}/{music_str}"
-    x_owners_dir = f"{x_fiscal_dir}/owners"
-    x_gifts_dir = f"{x_fiscal_dir}/{get_gifts_folder()}"
+    x_fiscal_dir = create_path(get_test_fiscals_dir(), music_str)
+    x_owners_dir = create_path(x_fiscal_dir, "owners")
+    x_gifts_dir = create_path(x_fiscal_dir, get_gifts_folder())
     journal_file_name = "journal.db"
-    journal_file_path = f"{x_fiscal_dir}/{journal_file_name}"
+    journal_file_path = create_path(x_fiscal_dir, journal_file_name)
 
     assert music_fiscal._fiscal_dir is None
     assert music_fiscal._owners_dir is None
@@ -150,8 +151,8 @@ def test_fiscalunit_shop_SetsFiscalsDirs(env_dir_setup_cleanup):
 
     # THEN
     assert music_fiscal.fiscal_id == music_str
-    assert music_fiscal._fiscal_dir == f"{get_test_fiscals_dir()}/{music_str}"
-    assert music_fiscal._owners_dir == f"{music_fiscal._fiscal_dir}/owners"
+    assert music_fiscal._fiscal_dir == create_path(get_test_fiscals_dir(), music_str)
+    assert music_fiscal._owners_dir == create_path(music_fiscal._fiscal_dir, "owners")
 
 
 def test_FiscalUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanup):

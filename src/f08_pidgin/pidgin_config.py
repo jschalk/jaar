@@ -1,11 +1,12 @@
-from src.f00_instrument.file import open_file
+from src.f00_instrument.file import open_file, create_path
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
 from src.f04_gift.atom_config import jkeys_str, jvalues_str
 from os import getcwd as os_getcwd
 
 
 def config_file_dir() -> str:
-    return f"{os_getcwd()}/src/f08_pidgin"
+    src_dir = create_path(os_getcwd(), "src")
+    return create_path(src_dir, "f08_pidgin")
 
 
 def get_pidgin_config_file_name() -> str:

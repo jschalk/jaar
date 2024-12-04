@@ -1,33 +1,18 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import (
-    face_id_str,
-    fiscal_id_str,
-    acct_id_str,
-    owner_id_str,
-)
+from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import (
     cumlative_minute_str,
     hour_label_str,
     weekday_label_str,
     weekday_order_str,
 )
-from src.f08_pidgin.pidgin_config import (
-    event_id_str,
-    inx_wall_str,
-    otx_wall_str,
-    inx_acct_id_str,
-    otx_acct_id_str,
-    unknown_word_str,
-    inx_label_str,
-    otx_label_str,
-)
+from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import (
     _get_pidgen_brick_format_filenames,
     get_sheet_names,
     upsert_sheet,
 )
-from src.f10_world.world import worldunit_shop, _create_events_agg_df
-from src.f10_world.world_tool import get_all_brick_dataframes
+from src.f10_world.world import worldunit_shop
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
@@ -543,7 +528,9 @@ def test_WorldUnit_events_log_to_events_agg_CreatesSheets_Scenario0(
     assert get_sheet_names(events_file_path) == ["events_log", "events_agg"]
 
 
-def test_WorldUnit_set_events_from_events_agg_SetsAttr_Scenario0(env_dir_setup_cleanup):
+def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str)
@@ -569,14 +556,14 @@ def test_WorldUnit_set_events_from_events_agg_SetsAttr_Scenario0(env_dir_setup_c
     assert len(fizz_world.events) != 2
 
     # WHEN
-    fizz_world.set_events_from_events_agg()
+    fizz_world.set_events_from_events_agg_file()
 
     # THEN
     assert len(fizz_world.events) == 2
     assert fizz_world.events == {event3: bob_str, event9: yao_str}
 
 
-def test_WorldUnit_set_events_from_events_agg_ClearsAttr(env_dir_setup_cleanup):
+def test_WorldUnit_set_events_from_events_agg_file_ClearsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     events_agg_columns = [face_id_str(), event_id_str(), "note"]
@@ -588,7 +575,7 @@ def test_WorldUnit_set_events_from_events_agg_ClearsAttr(env_dir_setup_cleanup):
     assert fizz_world.events == {2: "Sue", 44: "Bob"}
 
     # WHEN
-    fizz_world.set_events_from_events_agg()
+    fizz_world.set_events_from_events_agg_file()
 
     # THEN
     assert not fizz_world.events

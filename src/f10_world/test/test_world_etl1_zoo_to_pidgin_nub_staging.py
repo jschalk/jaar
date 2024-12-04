@@ -44,14 +44,14 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario0_SingleBrick(
     ]
     sue0 = [sue_str, event7, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
-    b114_rows = [sue0, sue1]
-    br00114_df = DataFrame(b114_rows, columns=br00114_columns)
+    br00114_rows = [sue0, sue1]
+    br00114_df = DataFrame(br00114_rows, columns=br00114_columns)
     upsert_sheet(br00114_file_path, "zoo_agg", br00114_df)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     fizz_world.zoo_agg_to_zoo_events()
     fizz_world.zoo_events_to_events_log()
     fizz_world.events_log_to_events_agg()
-    fizz_world.set_events_from_events_agg()
+    fizz_world.set_events_from_events_agg_file()
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
@@ -127,17 +127,17 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario1_MultipleBricksFi
     sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
     sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
     yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
-    b114_rows = [sue0, sue1]
-    br00114_df = DataFrame(b114_rows, columns=br00114_columns)
+    br00114_rows = [sue0, sue1]
+    br00114_df = DataFrame(br00114_rows, columns=br00114_columns)
     upsert_sheet(br00114_file_path, "zoo_agg", br00114_df)
-    b41_rows = [sue2, sue3, yao1]
-    br00041_df = DataFrame(b41_rows, columns=br00041_columns)
+    br00041_rows = [sue2, sue3, yao1]
+    br00041_df = DataFrame(br00041_rows, columns=br00041_columns)
     upsert_sheet(br00041_file_path, "zoo_agg", br00041_df)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     fizz_world.zoo_agg_to_zoo_events()
     fizz_world.zoo_events_to_events_log()
     fizz_world.events_log_to_events_agg()
-    fizz_world.set_events_from_events_agg()
+    fizz_world.set_events_from_events_agg_file()
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
@@ -217,18 +217,18 @@ def test_WorldUnit_zoo_agg_to_nub_staging_CreatesFile_Scenario2_WorldUnit_events
     sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
     sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
-    b114_rows = [sue0, sue1]
-    br00114_df = DataFrame(b114_rows, columns=br00114_columns)
+    br00114_rows = [sue0, sue1]
+    br00114_df = DataFrame(br00114_rows, columns=br00114_columns)
     upsert_sheet(br00114_file_path, "zoo_agg", br00114_df)
-    b41_rows = [sue2, sue3, yao1]
-    br00041_df = DataFrame(b41_rows, columns=br00041_columns)
+    br00041_rows = [sue2, sue3, yao1]
+    br00041_df = DataFrame(br00041_rows, columns=br00041_columns)
     upsert_sheet(br00041_file_path, "zoo_agg", br00041_df)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     assert fizz_world.events == {}
     fizz_world.zoo_agg_to_zoo_events()
     fizz_world.zoo_events_to_events_log()
     fizz_world.events_log_to_events_agg()
-    fizz_world.set_events_from_events_agg()
+    fizz_world.set_events_from_events_agg_file()
     assert fizz_world.events == {event2: sue_str, event5: sue_str}
     assert os_path_exists(pidgin_path) is False
 

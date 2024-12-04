@@ -61,9 +61,9 @@ class PidginUnit:
     acctbridge: AcctBridge = None
     nodebridge: NodeBridge = None
     roadbridge: RoadBridge = None
-    unknown_word: str = None
-    otx_wall: str = None
-    inx_wall: str = None
+    unknown_word: str = None  # pidginunit heart
+    otx_wall: str = None  # pidginunit heart
+    inx_wall: str = None  # pidginunit heart
 
     def set_groupbridge(self, x_groupbridge: GroupBridge):
         self._check_all_core_attrs_match(x_groupbridge)

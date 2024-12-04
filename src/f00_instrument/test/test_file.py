@@ -21,21 +21,21 @@ from src.f00_instrument.examples.instrument_env import (
 )
 from pytest import raises as pytest_raises
 from platform import system as platform_system
-from os.path import exists as os_path_exist
+from os.path import exists as os_path_exist, join as os_path_join
 
 
 def test_create_path_ReturnsObj():
     # ESTABLISH
     obj_filename = "obj.json"
-    x_dir = ("src/_instrument",)
+    x_dir = os_path_join("src", "_instrument")
     x_file_name = "examples"
 
     # WHEN / THEN
     assert create_path(None, None) == ""
     assert create_path(None, "") == ""
-    assert create_path(None, obj_filename) == f"/{obj_filename}"
+    assert create_path(None, obj_filename) == obj_filename
     assert create_path(x_dir, None) == x_dir
-    assert create_path(x_dir, x_file_name) == f"{x_dir}/{x_file_name}"
+    assert create_path(x_dir, x_file_name) == os_path_join(x_dir, x_file_name)
 
 
 def test_create_dir_SetsFile(env_dir_setup_cleanup):
@@ -389,10 +389,10 @@ def test_get_directory_path_ReturnsCorrectObj():
 
     # THEN
     assert "" == get_directory_path()
-    assert texas_path == f"/{texas_str}"
-    assert dallas_path == f"/{texas_str}/{dallas_str}"
-    assert elpaso_path == f"/{texas_str}/{elpaso_str}"
-    assert kern_path == f"/{texas_str}/{elpaso_str}/{kern_str}"
+    assert texas_path == f"{texas_str}"
+    assert dallas_path == create_path(texas_str, dallas_str)
+    assert elpaso_path == create_path(texas_str, elpaso_str)
+    assert kern_path == create_path(elpaso_path, kern_str)
 
 
 def test_is_path_valid_ReturnsCorrectObj():

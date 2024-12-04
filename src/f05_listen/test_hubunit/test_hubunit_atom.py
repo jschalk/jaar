@@ -1,4 +1,4 @@
-from src.f00_instrument.file import get_dir_file_strs
+from src.f00_instrument.file import get_dir_file_strs, create_path
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.example_listen_atoms import (
     get_atom_example_factunit_knee,
@@ -38,7 +38,8 @@ def test_HubUnit_atom_file_path_ReturnsCorrectObj():
 
     # THEN
     one_atom_file_name = yao_hubunit.atom_file_name(one_int)
-    assert one_atom_file_path == f"{yao_hubunit.atoms_dir()}/{one_atom_file_name}"
+    expected_path = create_path(yao_hubunit.atoms_dir(), one_atom_file_name)
+    assert one_atom_file_path == expected_path
 
 
 def test_HubUnit_save_valid_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):

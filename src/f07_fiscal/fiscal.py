@@ -1,4 +1,4 @@
-from src.f00_instrument.file import set_dir, delete_dir, get_dir_file_strs
+from src.f00_instrument.file import set_dir, delete_dir, get_dir_file_strs, create_path
 from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
     get_dict_from_json,
@@ -91,16 +91,16 @@ class FiscalUnit:
 
     # directory setup
     def _set_fiscal_dirs(self, in_memory_journal: bool = None):
-        self._fiscal_dir = f"{self.fiscals_dir}/{self.fiscal_id}"
-        self._owners_dir = f"{self._fiscal_dir}/owners"
-        self._gifts_dir = f"{self._fiscal_dir}/{get_gifts_folder()}"
+        self._fiscal_dir = create_path(self.fiscals_dir, self.fiscal_id)
+        self._owners_dir = create_path(self._fiscal_dir, "owners")
+        self._gifts_dir = create_path(self._fiscal_dir, get_gifts_folder())
         set_dir(x_path=self._fiscal_dir)
         set_dir(x_path=self._owners_dir)
         set_dir(x_path=self._gifts_dir)
         self._create_journal_db(in_memory=in_memory_journal)
 
     def _get_owner_dir(self, owner_id):
-        return f"{self._owners_dir}/{owner_id}"
+        return create_path(self._owners_dir, owner_id)
 
     def _get_owner_folder_names(self) -> set:
         owners = get_dir_file_strs(
@@ -124,7 +124,8 @@ class FiscalUnit:
 
     # database
     def get_journal_db_path(self) -> str:
-        return f"{self.fiscals_dir}/{self.fiscal_id}/journal.db"
+        fiscal_dir = create_path(self.fiscals_dir, f"{self.fiscal_id}")
+        return create_path(fiscal_dir, "journal.db")
 
     def _create_journal_db(
         self, in_memory: bool = None, overwrite: bool = None

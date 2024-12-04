@@ -200,17 +200,12 @@ def test_create_timeline_config_ReturnsObj():
     five_yr1_jan1_offset = 1683037440 + 440640  # 3200 years + JanLen + FebLen
     five_hour_length = 60
     five_month_length = 25
-    five_weekday_list = ["Airday", "Bioday", "Chiday", "Danceday", "Ellday"]
+    five_weekday_list = ["Anaday", "Baileyday", "Chiday", "Danceday", "Elonday"]
     # months = ["B", "C", "E", "G", "H", "I", "K", "L", "N", "P", "Q", "R", "T", "U", "W"]
     # c_mons = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"]
     five_months_list = [
-        "Annita",
-        "Bailey",
-        "Cimon",
-        "Dragon",
-        "Elon",
         "Fresh",
-        "Giraffe",
+        "Geo",
         "Holocene",
         "Iguana",
         "Jinping",
@@ -219,6 +214,11 @@ def test_create_timeline_config_ReturnsObj():
         "Mikayla",
         "Ninon",
         "Obama",
+        "Preston",
+        "Quorum",
+        "RioGrande",
+        "Simon",
+        "Trump",
     ]
     assert len(five_months_list) == 15
     calc_months_day_length = (len(five_months_list) - 1) * five_month_length
@@ -244,13 +244,13 @@ def test_create_timeline_config_ReturnsObj():
     x_months_config = five_dict.get(months_config_str())
     gen_months = [mon_config[0] for mon_config in x_months_config]
     assert gen_months == five_months_list
-    assert x_months_config[0][0] == "Annita"
+    assert x_months_config[0][0] == "Fresh"
     assert x_months_config[0][1] == 25
-    assert x_months_config[6][0] == "Giraffe"
+    assert x_months_config[6][0] == "Lebron"
     assert x_months_config[6][1] == 175
-    assert x_months_config[13][0] == "Ninon"
+    assert x_months_config[13][0] == "Simon"
     assert x_months_config[13][1] == 350
-    assert x_months_config[14][0] == "Obama"
+    assert x_months_config[14][0] == "Trump"
     assert x_months_config[14][1] == 365
     x_hours_config = five_dict.get(hours_config_str())
     assert len(x_hours_config) == 24

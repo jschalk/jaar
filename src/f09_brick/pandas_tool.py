@@ -19,11 +19,13 @@ from src.f09_brick.brick_config import (
     get_brick_category_ref,
     get_brick_format_filename,
 )
+from numpy import float64, nan as numpy_nan
 from pandas import (
     DataFrame,
     read_csv as pandas_read_csv,
     read_sql_query as pandas_read_sql_query,
     ExcelWriter,
+    read_excel as pandas_read_excel,
 )
 from openpyxl import load_workbook as openpyxl_load_workbook
 from sqlite3 import connect as sqlite3_connect
@@ -95,7 +97,6 @@ def get_relevant_columns_dataframe(
     relevant_cols_in_order = [
         r_col for r_col in relevant_columns if r_col in current_relevant_columns
     ]
-    print(f"{relevant_cols_in_order=}")
     return src_df[relevant_cols_in_order]
 
 
@@ -145,8 +146,8 @@ def pidgin_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
 
 
 def move_otx_csvs_to_pidgin_inx(face_dir: str):
-    otx_dir = f"{face_dir}/otx"
-    inx_dir = f"{face_dir}/inx"
+    otx_dir = create_path(face_dir, "otx")
+    inx_dir = create_path(face_dir, "inx")
     bridge_filename = "bridge.json"
     pidginunit_json = open_file(face_dir, bridge_filename)
     face_pidginunit = get_pidginunit_from_json(pidginunit_json)
@@ -166,7 +167,12 @@ def _get_pidgen_brick_format_filenames() -> set[str]:
     return {f"{brick_number}.xlsx" for brick_number in brick_numbers}
 
 
+class pandas_tools_ExcelWriterException(Exception):
+    pass
+
+
 def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
+    # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
     create_dir(os_path_dirname(file_path))
     """
     Updates or creates an Excel sheet with a specified DataFrame.
@@ -189,5 +195,70 @@ def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
             file_path, engine="openpyxl", mode="a", if_sheet_exists="replace"
         ) as writer:
             dataframe.to_excel(writer, sheet_name=sheet_name, index=False)
+    except (PermissionError, FileNotFoundError, OSError) as e:
+        raise pandas_tools_ExcelWriterException(f"An error occurred: {e}") from e
+
+
+def sheet_exists(file_path: str, sheet_name: str):
+    """
+    Checks if a specific sheet exists in an Excel workbook.
+
+    Args:
+        file_path (str): Path to the Excel file.
+        sheet_name (str): Name of the sheet to check.
+
+    Returns:
+        bool: True if the sheet exists, False otherwise.
+    """
+    if not os_path_exists(file_path):
+        return False
+
+    try:
+        return sheet_name in set(get_sheet_names(file_path))
     except Exception as e:
-        print(f"An error occurred: {e}")
+        return False
+
+
+def split_excel_into_dirs(
+    input_file: str, output_dir: str, column_name: str, file_name: str, sheet_name: str
+):
+    """
+    Splits an Excel file into multiple Excel files, each containing rows
+    corresponding to a unique value in the specified column.
+
+    Args:
+        input_file (str): Path to the input Excel file.
+        output_dir (str): Directory where the output files will be saved.
+        column_name (str): Column to split by unique values.
+    """
+    # Create the output directory if it doesn't exist
+    create_dir(output_dir)
+    df = pandas_read_excel(input_file)
+
+    # Check if the column exists
+    if column_name not in df.columns:
+        raise ValueError(f"Column '{column_name}' does not exist in the input file.")
+
+    # Group by unique values in the column
+    unique_values = df[column_name].unique()
+
+    for value in unique_values:
+        if float64 != type(value):
+            # Filter rows for the current unique value
+            filtered_df = df[df[column_name] == value]
+
+            # Create a safe subdirectory name for the unique value
+            safe_value = str(value).replace("/", "_").replace("\\", "_")
+            subdirectory = create_path(output_dir, safe_value)
+            # Create the subdirectory if it doesn't exist
+            create_dir(subdirectory)
+            # Define the output file path
+            output_file = create_path(subdirectory, f"{file_name}.xlsx")
+            upsert_sheet(output_file, sheet_name, filtered_df)
+            # filtered_df.to_excel(output_file, index=False)
+
+
+def if_nan_return_None(x_obj: any) -> any:
+    # sourcery skip: equality-identity, remove-redundant-if
+    # If the value is NaN, the comparison value != value
+    return None if x_obj != x_obj else x_obj

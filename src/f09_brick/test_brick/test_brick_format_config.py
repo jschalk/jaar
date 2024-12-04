@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import create_sorted_concatenated_str
-from src.f00_instrument.file import get_dir_file_strs
+from src.f00_instrument.file import get_dir_file_strs, create_path
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_gift.atom_config import (
     face_id_str,
@@ -74,7 +74,7 @@ def test_get_brick_formats_dir_ReturnsObj():
     brick_dir = get_brick_formats_dir()
     # THEN
     print(f"{brick_dir=}")
-    assert brick_dir == f"{(src_brick_dir())}/brick_formats"
+    assert brick_dir == create_path(src_brick_dir(), "brick_formats")
 
 
 def test_get_brickref_obj_ReturnsObj():

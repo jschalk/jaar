@@ -1,3 +1,4 @@
+from src.f00_instrument.file import create_path
 from src.f03_chrono.chrono import (
     c400_number_str,
     timeline_label_str,
@@ -71,7 +72,8 @@ def test_get_fiscal_config_file_name_ReturnsObj():
 
 
 def test_config_file_dir_ReturnsObj() -> str:
-    assert config_file_dir() == f"{os_getcwd()}/src/f07_fiscal"
+    src_dir = create_path(os_getcwd(), "src")
+    assert config_file_dir() == create_path(src_dir, "f07_fiscal")
 
 
 def test_get_fiscal_config_dict_ReturnsObj():

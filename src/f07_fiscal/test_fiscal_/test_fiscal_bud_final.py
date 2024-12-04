@@ -1,3 +1,4 @@
+from src.f00_instrument.file import create_path
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
@@ -16,7 +17,12 @@ def test_FiscalUnit_generate_final_bud_Sets_final_BudFile(env_dir_setup_cleanup)
     music_fiscal = fiscalunit_shop(music_str, get_test_fiscals_dir(), True)
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(None, music_str, sue_str, None)
-    x_sue_final_path = f"{music_fiscal._owners_dir}/{sue_str}/final/{sue_str}.json"
+
+    x_sue_owner_dir = create_path(music_fiscal._owners_dir, sue_str)
+    x_final_dir = create_path(x_sue_owner_dir, "final")
+    x_sue_final_path = create_path(x_final_dir, f"{sue_str}.json")
+    print(f"        {x_sue_final_path=}")
+    print(f"{sue_hubunit.final_path()=}")
     assert os_path_exists(x_sue_final_path) is False
     music_fiscal.init_owner_keeps(sue_str)
     assert sue_hubunit.final_path() == x_sue_final_path
