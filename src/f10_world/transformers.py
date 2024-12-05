@@ -213,6 +213,30 @@ class EventsLogToEventsAggTransformer:
         upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
+def zoo_agg_single_to_pidgin_staging(
+    pidgin_category: str, legitimate_events: set[int], zoo_dir: str
+):
+    x_events = legitimate_events
+    transformer = ZooAggToStagingTransformer(zoo_dir, pidgin_category, x_events)
+    transformer.transform()
+
+
+def zoo_agg_to_pidgin_acct_staging(legitimate_events: set[str], zoo_dir: str):
+    zoo_agg_single_to_pidgin_staging("bridge_acct_id", legitimate_events, zoo_dir)
+
+
+def zoo_agg_to_pidgin_group_staging(legitimate_events: set[str], zoo_dir: str):
+    zoo_agg_single_to_pidgin_staging("bridge_group_id", legitimate_events, zoo_dir)
+
+
+def zoo_agg_to_pidgin_node_staging(legitimate_events: set[str], zoo_dir: str):
+    zoo_agg_single_to_pidgin_staging("bridge_node", legitimate_events, zoo_dir)
+
+
+def zoo_agg_to_pidgin_road_staging(legitimate_events: set[str], zoo_dir: str):
+    zoo_agg_single_to_pidgin_staging("bridge_road", legitimate_events, zoo_dir)
+
+
 class ZooAggToStagingTransformer:
     def __init__(
         self, zoo_dir: str, pidgin_category: str, legitmate_events: set[TimeLinePoint]

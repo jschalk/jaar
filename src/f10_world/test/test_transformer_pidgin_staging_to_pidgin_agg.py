@@ -28,7 +28,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_etl_pidgin_acct_staging_to_acct_aggScenario0_CreatesEmptyFileBecauseOfConflict(
+def test_etl_pidgin_acct_staging_to_acct_agg_Scenario0_CreatesEmptyFileBecauseOfConflict(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -86,7 +86,7 @@ def test_etl_pidgin_acct_staging_to_acct_aggScenario0_CreatesEmptyFileBecauseOfC
     pandas_testing_assert_frame_equal(gen_acct_agg_df, e1_acct_agg_df)
 
 
-def test_WorldUnit_acct_staging_to_acct_agg_CreatesFile_Scenario1_SingleBrick(
+def test_etl_pidgin_acct_staging_to_acct_agg_Scenario1_CreatesFileFromSingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -147,7 +147,7 @@ def test_WorldUnit_acct_staging_to_acct_agg_CreatesFile_Scenario1_SingleBrick(
     pandas_testing_assert_frame_equal(gen_acct_agg_df, e1_acct_agg_df)
 
 
-def test_WorldUnit_group_staging_to_group_agg_CreatesFile_Scenario1_SingleBrick(
+def test_etl_pidgin_group_staging_to_group_agg_Scenario0_CreatesFileFromSingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -208,7 +208,7 @@ def test_WorldUnit_group_staging_to_group_agg_CreatesFile_Scenario1_SingleBrick(
     pandas_testing_assert_frame_equal(gen_group_agg_df, e1_group_agg_df)
 
 
-def test_WorldUnit_road_staging_to_road_agg_CreatesFile_Scenario1_SingleBrick(
+def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -269,7 +269,7 @@ def test_WorldUnit_road_staging_to_road_agg_CreatesFile_Scenario1_SingleBrick(
     pandas_testing_assert_frame_equal(gen_road_agg_df, e1_road_agg_df)
 
 
-def test_WorldUnit_node_staging_to_node_agg_CreatesFile_Scenario1_SingleBrick(
+def test_etl_pidgin_node_staging_to_node_agg_Scenario0_CreatesFileFromSingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -330,7 +330,7 @@ def test_WorldUnit_node_staging_to_node_agg_CreatesFile_Scenario1_SingleBrick(
     pandas_testing_assert_frame_equal(gen_node_agg_df, e1_node_agg_df)
 
 
-def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCategorys(
+def test_etl_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
