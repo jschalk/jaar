@@ -167,28 +167,37 @@ def test_get_default_face_id_ReturnsObj():
     assert get_default_face_id() == "Face1234"
 
 
-def test_create_road_ReturnsCorrectRoadUnitWith_wall():
+def test_create_road_ReturnsObj_Scenario0():
     # ESTABLISH
     rose_str = "rose"
     semicolon_wall = ";"
+    assert semicolon_wall == default_wall_if_none()
     semicolon_wall_rose_road = f"{root_label()}{semicolon_wall}{rose_str}"
+
+    # WHEN / THEN
     assert create_road(root_label(), rose_str) == semicolon_wall_rose_road
 
-    # WHEN
+
+def test_create_road_ReturnsObj_Scenario1():
+    # ESTABLISH
+    rose_str = "rose"
     slash_wall = "/"
     slash_wall_rose_road = f"{root_label()}{slash_wall}{rose_str}"
-    generated_rose_road = create_road(root_label(), rose_str, wall=slash_wall)
-
-    # THEN
-    assert generated_rose_road != semicolon_wall_rose_road
-    assert generated_rose_road == slash_wall_rose_road
 
     # WHEN
-    brackets_road = create_road(root_label(), rose_str, wall=slash_wall)
-
+    generated_rose_road = create_road(root_label(), rose_str, wall=slash_wall)
     # THEN
-    assert generated_rose_road == brackets_road
-    assert slash_wall_rose_road == brackets_road
+    assert generated_rose_road == slash_wall_rose_road
+
+
+def test_create_road_ReturnsObj_Scenario2():
+    # ESTABLISH
+    rose_str = "rose"
+    slash_wall = "/"
+    slash_wall_rose_road = f"{root_label()}{slash_wall}{rose_str}"
+
+    # WHEN / THEN
+    assert create_road(root_label(), rose_str, slash_wall) == slash_wall_rose_road
 
 
 def test_combine_road_ReturnsObj_Scenario0_default_wall():
