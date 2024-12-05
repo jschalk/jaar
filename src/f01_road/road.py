@@ -10,6 +10,9 @@ class IdeaUnit(str):
     """A string presentation of a tree node. Nodes cannot contain RoadUnit wall"""
 
     def is_idea(self, wall: str = None) -> bool:
+        return len(self) > 0 and self.is_wall_in_str(wall)
+
+    def is_wall_in_str(self, wall: str = None) -> bool:
         return self.find(default_wall_if_none(wall)) == -1
 
 
@@ -218,17 +221,37 @@ def create_road_from_ideas(ideas: list[IdeaUnit], wall: str = None) -> RoadUnit:
     return default_wall_if_none(wall).join(ideas)
 
 
+class wall_in_idea_Exception(Exception):
+    pass
+
+
 def create_road(
     parent_road: RoadUnit, terminus_idea: IdeaUnit = None, wall: str = None
 ) -> RoadUnit:
+
     if terminus_idea is None:
         return RoadUnit(parent_road)
-    else:
-        return RoadUnit(
-            terminus_idea
-            if parent_road in {"", None}
-            else f"{parent_road}{default_wall_if_none(wall)}{terminus_idea}"
-        )
+    x_wall = default_wall_if_none(wall)
+    terminus_idea = IdeaUnit(terminus_idea)
+    if terminus_idea.is_idea(x_wall) is False:
+        raise wall_in_idea_Exception(f"wall '{x_wall}' is in {terminus_idea}")
+
+    return RoadUnit(
+        terminus_idea
+        if parent_road in {"", None}
+        else f"{parent_road}{x_wall}{terminus_idea}"
+    )
+
+
+def combine_roads(
+    parent_road: RoadUnit, ancestor_road: RoadUnit, wall: str = None
+) -> RoadUnit:
+    if parent_road in {""}:
+        return ancestor_road
+    parent_road_ideas = get_all_road_ideas(parent_road, wall)
+    ancestor_road_ideas = get_all_road_ideas(ancestor_road, wall)
+    parent_road_ideas.extend(ancestor_road_ideas)
+    return create_road_from_ideas(parent_road_ideas, wall)
 
 
 def get_diff_road(x_road: RoadUnit, sub_road: RoadUnit, wall: str = None):

@@ -18,7 +18,7 @@ from src.f01_road.road import (
     create_road_from_ideas,
     get_terminus_idea,
     get_parent_road,
-    create_road,
+    combine_roads,
     is_ideaunit,
     RoadUnit,
     IdeaUnit,
@@ -267,7 +267,9 @@ class RoadBridge:
             inx_parent_road = ""
         else:
             inx_parent_road = self._get_inx_value(otx_parent_road)
-        return create_road(inx_parent_road, otx_terminus, self.inx_wall)
+        x_road = combine_roads(inx_parent_road, otx_terminus, self.inx_wall)
+        print(f"{x_road=}")
+        return x_road
 
     def _get_nub_ideaunit(self, x_ideaUnit: IdeaUnit) -> IdeaUnit:
         if self.nub_otx_label_exists(x_ideaUnit):

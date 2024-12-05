@@ -6,22 +6,22 @@ from src.f01_road.road import (
     RoadUnit,
     DoarUnit,
     GroupID,
+    create_road,
+    create_road_from_ideas,
+    create_road_without_root_idea,
+    combine_roads,
     rebuild_road,
     is_sub_road,
     get_all_road_ideas,
     get_terminus_idea,
     find_replace_road_key_dict,
     get_parent_road,
-    create_road_without_root_idea,
     get_root_idea_from_road,
     road_validate,
     get_ancestor_roads,
     get_forefather_roads,
     get_default_fiscal_id_ideaunit as root_label,
-    create_road_from_ideas,
-    create_road,
     get_diff_road,
-    create_road,
     is_heir_road,
     default_wall_if_none,
     replace_wall,
@@ -91,14 +91,23 @@ def test_IdeaUnit_exists():
     assert inspect_getdoc(x_road) == doc_str
 
 
-def test_IdeaUnit_is_idea_ReturnsCorrectBool():
+def test_IdeaUnit_is_idea_ReturnsObj_Scenario0():
     # WHEN / THEN
-    assert IdeaUnit("").is_idea()
+    assert IdeaUnit("").is_idea() is False
+    assert IdeaUnit("A").is_idea()
 
     # WHEN / THEN
     x_s = default_wall_if_none()
     x_ideaunit = IdeaUnit(f"casa{x_s}kitchen")
     assert x_ideaunit.is_idea() is False
+
+
+def test_IdeaUnit_is_idea_ReturnsObj_Scenario1():
+    # ESTABLISH / WHEN / THEN
+    slash_str = "/"
+    x_ideaunit = IdeaUnit(f"casa{slash_str}kitchen")
+    assert x_ideaunit.is_idea()
+    assert x_ideaunit.is_idea(slash_str) is False
 
 
 def test_RoadUnit_exists():
@@ -158,6 +167,79 @@ def test_get_default_face_id_ReturnsObj():
     assert get_default_face_id() == "Face1234"
 
 
+def test_create_road_ReturnsCorrectRoadUnitWith_wall():
+    # ESTABLISH
+    rose_str = "rose"
+    semicolon_wall = ";"
+    semicolon_wall_rose_road = f"{root_label()}{semicolon_wall}{rose_str}"
+    assert create_road(root_label(), rose_str) == semicolon_wall_rose_road
+
+    # WHEN
+    slash_wall = "/"
+    slash_wall_rose_road = f"{root_label()}{slash_wall}{rose_str}"
+    generated_rose_road = create_road(root_label(), rose_str, wall=slash_wall)
+
+    # THEN
+    assert generated_rose_road != semicolon_wall_rose_road
+    assert generated_rose_road == slash_wall_rose_road
+
+    # WHEN
+    brackets_road = create_road(root_label(), rose_str, wall=slash_wall)
+
+    # THEN
+    assert generated_rose_road == brackets_road
+    assert slash_wall_rose_road == brackets_road
+
+
+def test_combine_road_ReturnsObj_Scenario0_default_wall():
+    # ESTABLISH
+    rose_str = "rose"
+    rose_road = create_road(root_label(), rose_str)
+    casa_str = "casa"
+    clean_str = "clean"
+    clean_road = create_road(casa_str, clean_str)
+
+    # WHEN
+    gen_clean_road = combine_roads(rose_road, clean_road)
+
+    # THEN
+    example1_casa_road = create_road(rose_road, casa_str)
+    example1_clean_road = create_road(example1_casa_road, clean_str)
+    assert gen_clean_road == example1_clean_road
+
+
+def test_combine_road_ReturnsObj_Scenario1_():
+    # ESTABLISH
+    slash_str = "/"
+    rose_str = "rose"
+    rose_road = create_road(root_label(), rose_str, slash_str)
+    casa_str = "casa"
+    clean_str = "clean"
+    clean_road = create_road(casa_str, clean_str, slash_str)
+
+    # WHEN
+    gen_clean_road = combine_roads(rose_road, clean_road, slash_str)
+
+    # THEN
+    example1_casa_road = create_road(rose_road, casa_str, slash_str)
+    example1_clean_road = create_road(example1_casa_road, clean_str, slash_str)
+    assert gen_clean_road == example1_clean_road
+
+
+def test_combine_road_ReturnsObj_Scenario1_():
+    # ESTABLISH
+    slash_str = "/"
+    casa_str = "casa"
+
+    # WHEN
+    gen_casa_road = combine_roads("", casa_str, slash_str)
+
+    # THEN
+    example1_casa_road = create_road("", casa_str, slash_str)
+    assert gen_casa_road == example1_casa_road
+    assert gen_casa_road == casa_str
+
+
 def test_road_is_sub_road_correctlyReturnsBool():
     # WHEN
     casa_str = "casa"
@@ -189,30 +271,6 @@ def test_road_road_validate_correctlyReturnsRoadUnit():
     assert road_validate(f"clean{x_s}fun", x_s, _fiscal_id) == fun_road
     assert road_validate("clean", x_s, _fiscal_id) == _fiscal_id
     assert road_validate(f"AA{x_s}casa", x_s, _fiscal_id) == casa_road
-
-
-def test_road_create_road_ReturnsCorrectRoadUnitWith_wall():
-    # ESTABLISH
-    rose_str = "rose"
-    semicolon_wall = ";"
-    semicolon_wall_rose_road = f"{root_label()}{semicolon_wall}{rose_str}"
-    assert create_road(root_label(), rose_str) == semicolon_wall_rose_road
-
-    # WHEN
-    slash_wall = "/"
-    slash_wall_rose_road = f"{root_label()}{slash_wall}{rose_str}"
-    generated_rose_road = create_road(root_label(), rose_str, wall=slash_wall)
-
-    # THEN
-    assert generated_rose_road != semicolon_wall_rose_road
-    assert generated_rose_road == slash_wall_rose_road
-
-    # WHEN
-    brackets_road = create_road(root_label(), rose_str, wall=slash_wall)
-
-    # THEN
-    assert generated_rose_road == brackets_road
-    assert slash_wall_rose_road == brackets_road
 
 
 def test_road_rebuild_road_ReturnsCorrectRoadUnit():
@@ -504,7 +562,7 @@ def test_is_ideaunit_ReturnsObj():
     x_s = default_wall_if_none()
 
     # WHEN / THEN
-    assert is_ideaunit("", x_wall=x_s)
+    assert is_ideaunit("", x_wall=x_s) is False
     assert is_ideaunit("casa", x_wall=x_s)
     assert not is_ideaunit(f"ZZ{x_s}casa", x_s)
     assert not is_ideaunit(RoadUnit(f"ZZ{x_s}casa"), x_s)
