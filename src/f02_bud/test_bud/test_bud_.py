@@ -7,7 +7,7 @@ from src.f01_road.finance import (
 )
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f01_road.road import (
-    get_default_fiscal_id_roadnode as root_label,
+    get_default_fiscal_id_ideaunit as root_label,
     default_wall_if_none,
 )
 from src.f02_bud.origin import originunit_shop
@@ -184,11 +184,11 @@ def test_BudUnit_set_wall_CorrectlySetsAttr():
     assert sue_bud._wall == slash_wall
 
     # WHEN
-    at_node_wall = "@"
-    sue_bud.set_wall(new_wall=at_node_wall)
+    at_idea_wall = "@"
+    sue_bud.set_wall(new_wall=at_idea_wall)
 
     # THEN
-    assert sue_bud._wall == at_node_wall
+    assert sue_bud._wall == at_idea_wall
 
 
 def test_BudUnit_make_road_ReturnsCorrectObj():

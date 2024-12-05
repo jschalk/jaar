@@ -11,18 +11,18 @@ from pytest import raises as pytest_raises
 def test_BudUnit_set_item_RaisesErrorWhen_parent_road_IsInvalid():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
-    invalid_rootnode_swim_road = "swimming"
-    assert invalid_rootnode_swim_road != zia_bud._fiscal_id
+    invalid_rootidea_swim_road = "swimming"
+    assert invalid_rootidea_swim_road != zia_bud._fiscal_id
     casa_str = "casa"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_item(
-            itemunit_shop(casa_str), parent_road=invalid_rootnode_swim_road
+            itemunit_shop(casa_str), parent_road=invalid_rootidea_swim_road
         )
     assert (
         str(excinfo.value)
-        == f"set_item failed because parent_road '{invalid_rootnode_swim_road}' has an invalid root node"
+        == f"set_item failed because parent_road '{invalid_rootidea_swim_road}' has an invalid root idea"
     )
 
 
@@ -45,7 +45,7 @@ def test_BudUnit_set_item_RaisesErrorWhen_parent_road_ItemDoesNotExist():
     )
 
 
-def test_BudUnit_set_item_RaisesErrorWhen_label_IsNotNode():
+def test_BudUnit_set_item_RaisesErrorWhen_label_IsNotIdea():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     swim_road = zia_bud.make_l1_road("swimming")
@@ -58,7 +58,7 @@ def test_BudUnit_set_item_RaisesErrorWhen_label_IsNotNode():
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_item(itemunit_shop(run_road), parent_road=swim_road)
     assert (
-        str(excinfo.value) == f"set_item failed because '{run_road}' is not a RoadNode."
+        str(excinfo.value) == f"set_item failed because '{run_road}' is not a IdeaUnit."
     )
 
 

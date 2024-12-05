@@ -21,12 +21,12 @@
             "unknown_word": {}
         }
     },
-    "bridge_node": {
+    "bridge_idea": {
         "jkeys": {
-            "otx_node": {}
+            "otx_idea": {}
         },
         "jvalues": {
-            "inx_node": {},
+            "inx_idea": {},
             "inx_wall": {},
             "otx_wall": {},
             "unknown_word": {}

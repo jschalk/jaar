@@ -536,18 +536,18 @@ def test_RoadBridge_is_valid_ReturnsObj_Scenario0_label_str():
     otx_wall = "/"
     casa_otx = f"casa{otx_wall}"
     casa_inx = "casa"
-    roadnode_roadbridge = roadbridge_shop(otx_wall)
-    assert roadnode_roadbridge.is_valid()
+    ideaunit_roadbridge = roadbridge_shop(otx_wall)
+    assert ideaunit_roadbridge.is_valid()
 
     # WHEN
-    roadnode_roadbridge.set_otx2inx(clean_str, clean_inx)
+    ideaunit_roadbridge.set_otx2inx(clean_str, clean_inx)
     # THEN
-    assert roadnode_roadbridge.is_valid()
+    assert ideaunit_roadbridge.is_valid()
 
     # WHEN
-    roadnode_roadbridge.set_otx2inx(casa_otx, casa_inx)
+    ideaunit_roadbridge.set_otx2inx(casa_otx, casa_inx)
     # THEN
-    assert roadnode_roadbridge.is_valid() is False
+    assert ideaunit_roadbridge.is_valid() is False
 
 
 def test_RoadBridge_is_valid_ReturnsObj_Scenario1_road_str():

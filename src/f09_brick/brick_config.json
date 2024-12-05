@@ -31,17 +31,17 @@
       "unknown_word": {}
     }
   },
-  "bridge_node": {
+  "bridge_idea": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 2,
     "jkeys": {
       "event_id": {},
       "face_id": {},
-      "otx_node": {}
+      "otx_idea": {}
     },
     "jvalues": {
-      "inx_node": {},
+      "inx_idea": {},
       "inx_wall": {},
       "otx_wall": {},
       "unknown_word": {}

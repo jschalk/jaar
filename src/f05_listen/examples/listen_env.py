@@ -1,7 +1,7 @@
 from src.f00_instrument.file import delete_dir
 from src.f01_road.road import (
-    create_road_from_nodes,
-    get_default_fiscal_id_roadnode,
+    create_road_from_ideas,
+    get_default_fiscal_id_ideaunit,
     RoadUnit,
 )
 from src.f05_listen.hubunit import HubUnit, hubunit_shop
@@ -29,15 +29,15 @@ def env_dir_setup_cleanup():
 
 
 def get_texas_road() -> RoadUnit:
-    fiscal_id = get_default_fiscal_id_roadnode()
+    fiscal_id = get_default_fiscal_id_ideaunit()
     nation_str = "nation-state"
     usa_str = "USA"
     texas_str = "Texas"
-    return create_road_from_nodes([fiscal_id, nation_str, usa_str, texas_str])
+    return create_road_from_ideas([fiscal_id, nation_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
-    fiscal_id = get_default_fiscal_id_roadnode()
+    fiscal_id = get_default_fiscal_id_ideaunit()
     return hubunit_shop(
         get_listen_temp_env_dir(),
         fiscal_id,
@@ -48,15 +48,15 @@ def get_texas_hubunit() -> HubUnit:
 
 
 def get_dakota_road() -> RoadUnit:
-    fiscal_id = get_default_fiscal_id_roadnode()
+    fiscal_id = get_default_fiscal_id_ideaunit()
     nation_str = "nation-state"
     usa_str = "USA"
     dakota_str = "Dakota"
-    return create_road_from_nodes([fiscal_id, nation_str, usa_str, dakota_str])
+    return create_road_from_ideas([fiscal_id, nation_str, usa_str, dakota_str])
 
 
 def get_dakota_hubunit() -> HubUnit:
-    fiscal_id = get_default_fiscal_id_roadnode()
+    fiscal_id = get_default_fiscal_id_ideaunit()
     return hubunit_shop(
         get_listen_temp_env_dir(),
         fiscal_id,

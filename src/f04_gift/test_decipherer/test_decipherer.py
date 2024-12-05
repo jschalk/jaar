@@ -90,7 +90,7 @@ def test_Decipherer_get_in_acct_id_ReturnsObj_NotEqual():
     assert sue_str == music_decipherer.get_in_acct_id(susan_str)
 
 
-def test_Decipherer_decipher_acct_id_ReturnsObjWithNoDeltas():
+def test_Decipherer_decipher_acct_id_ReturnsObjWithIdealtas():
     # ESTABLISH
     yao_str = "Yao"
     x_category = bud_acctunit_str()

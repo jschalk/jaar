@@ -348,8 +348,8 @@ from os.path import exists as os_path_exists
 # #     otx_group_id_str,
 # #     inx_road_str,
 # #     otx_road_str,
-# #     inx_node_str,
-# #     otx_node_str,
+# #     inx_idea_str,
+# #     otx_idea_str,
 # #     unknown_word_str,
 # # )
 # # from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
@@ -601,7 +601,7 @@ from os.path import exists as os_path_exists
 # #     pandas_testing_assert_frame_equal(gen_road_agg_df, e1_road_agg_df)
 
 
-# # def test_WorldUnit_node_staging_to_node_agg_CreatesFile_Scenario1_SingleBrick(
+# # def test_WorldUnit_idea_staging_to_idea_agg_CreatesFile_Scenario1_SingleBrick(
 # #     env_dir_setup_cleanup,
 # # ):
 # #     # ESTABLISH
@@ -612,54 +612,54 @@ from os.path import exists as os_path_exists
 # #     run_str = "Run"
 # #     run_inx = "Running"
 # #     event7 = 7
-# #     node_staging_str = "node_staging"
-# #     node_agg_str = "node_agg"
-# #     node_file_columns = [
+# #     idea_staging_str = "idea_staging"
+# #     idea_agg_str = "idea_agg"
+# #     idea_file_columns = [
 # #         "src_brick",
 # #         face_id_str(),
 # #         event_id_str(),
-# #         otx_node_str(),
-# #         inx_node_str(),
+# #         otx_idea_str(),
+# #         inx_idea_str(),
 # #         otx_wall_str(),
 # #         inx_wall_str(),
 # #         unknown_word_str(),
 # #     ]
 # #     bx = "br00xxx"
-# #     e1_node0 = [bx, sue_str, event7, jog_str, jog_inx, None, None, None]
-# #     e1_node1 = [bx, sue_str, event7, run_str, run_inx, None, None, None]
-# #     e1_node_rows = [e1_node0, e1_node1]
-# #     staging_node_df = DataFrame(e1_node_rows, columns=node_file_columns)
+# #     e1_idea0 = [bx, sue_str, event7, jog_str, jog_inx, None, None, None]
+# #     e1_idea1 = [bx, sue_str, event7, run_str, run_inx, None, None, None]
+# #     e1_idea_rows = [e1_idea0, e1_idea1]
+# #     staging_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
 # #     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
-# #     upsert_sheet(pidgin_path, node_staging_str, staging_node_df)
+# #     upsert_sheet(pidgin_path, idea_staging_str, staging_idea_df)
 # #     assert os_path_exists(pidgin_path)
-# #     assert sheet_exists(pidgin_path, node_staging_str)
-# #     assert sheet_exists(pidgin_path, node_agg_str) is False
+# #     assert sheet_exists(pidgin_path, idea_staging_str)
+# #     assert sheet_exists(pidgin_path, idea_agg_str) is False
 
 # #     # WHEN
-# #     fizz_world.node_staging_to_node_agg()
+# #     fizz_world.idea_staging_to_idea_agg()
 
 # #     # THEN
 # #     assert os_path_exists(pidgin_path)
-# #     assert sheet_exists(pidgin_path, node_agg_str)
-# #     gen_node_agg_df = pandas_read_excel(pidgin_path, sheet_name=node_agg_str)
-# #     print(f"{gen_node_agg_df=}")
-# #     node_file_columns = [
+# #     assert sheet_exists(pidgin_path, idea_agg_str)
+# #     gen_idea_agg_df = pandas_read_excel(pidgin_path, sheet_name=idea_agg_str)
+# #     print(f"{gen_idea_agg_df=}")
+# #     idea_file_columns = [
 # #         face_id_str(),
 # #         event_id_str(),
-# #         otx_node_str(),
-# #         inx_node_str(),
+# #         otx_idea_str(),
+# #         inx_idea_str(),
 # #         otx_wall_str(),
 # #         inx_wall_str(),
 # #         unknown_word_str(),
 # #     ]
-# #     assert list(gen_node_agg_df.columns) == node_file_columns
-# #     assert len(gen_node_agg_df) == 2
+# #     assert list(gen_idea_agg_df.columns) == idea_file_columns
+# #     assert len(gen_idea_agg_df) == 2
 # #     x_nan = float("nan")
-# #     e1_node0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
-# #     e1_node1 = [sue_str, event7, run_str, run_inx, x_nan, x_nan, x_nan]
-# #     e1_node_rows = [e1_node0, e1_node1]
-# #     e1_node_agg_df = DataFrame(e1_node_rows, columns=node_file_columns)
-# #     pandas_testing_assert_frame_equal(gen_node_agg_df, e1_node_agg_df)
+# #     e1_idea0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
+# #     e1_idea1 = [sue_str, event7, run_str, run_inx, x_nan, x_nan, x_nan]
+# #     e1_idea_rows = [e1_idea0, e1_idea1]
+# #     e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
+# #     pandas_testing_assert_frame_equal(gen_idea_agg_df, e1_idea_agg_df)
 
 
 # # # def test_WorldUnit_zoo_agg_to_acct_staging_CreatesFile_Scenario1_MultipleBricksFiles(

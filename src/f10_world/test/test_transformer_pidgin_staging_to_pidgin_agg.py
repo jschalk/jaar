@@ -10,15 +10,15 @@ from src.f08_pidgin.pidgin_config import (
     otx_group_id_str,
     inx_road_str,
     otx_road_str,
-    inx_node_str,
-    otx_node_str,
+    inx_idea_str,
+    otx_idea_str,
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
 from src.f10_world.transformers import (
     etl_pidgin_acct_staging_to_acct_agg,
     etl_pidgin_group_staging_to_group_agg,
-    etl_pidgin_node_staging_to_node_agg,
+    etl_pidgin_idea_staging_to_idea_agg,
     etl_pidgin_road_staging_to_road_agg,
     etl_pidgin_staging_to_agg,
 )
@@ -269,7 +269,7 @@ def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleBric
     pandas_testing_assert_frame_equal(gen_road_agg_df, e1_road_agg_df)
 
 
-def test_etl_pidgin_node_staging_to_node_agg_Scenario0_CreatesFileFromSingleBrick(
+def test_etl_pidgin_idea_staging_to_idea_agg_Scenario0_CreatesFileFromSingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -279,55 +279,55 @@ def test_etl_pidgin_node_staging_to_node_agg_Scenario0_CreatesFileFromSingleBric
     t6am_otx = "T6am"
     t6am_inx = "T600"
     event7 = 7
-    node_staging_str = "node_staging"
-    node_agg_str = "node_agg"
-    node_file_columns = [
+    idea_staging_str = "idea_staging"
+    idea_agg_str = "idea_agg"
+    idea_file_columns = [
         "src_brick",
         face_id_str(),
         event_id_str(),
-        otx_node_str(),
-        inx_node_str(),
+        otx_idea_str(),
+        inx_idea_str(),
         otx_wall_str(),
         inx_wall_str(),
         unknown_word_str(),
     ]
     bx = "br00xxx"
-    e1_node0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
-    e1_node1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
-    e1_node_rows = [e1_node0, e1_node1]
-    staging_node_df = DataFrame(e1_node_rows, columns=node_file_columns)
+    e1_idea0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
+    e1_idea1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
+    e1_idea_rows = [e1_idea0, e1_idea1]
+    staging_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
     x_zoo_dir = get_test_worlds_dir()
     pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
-    upsert_sheet(pidgin_path, node_staging_str, staging_node_df)
+    upsert_sheet(pidgin_path, idea_staging_str, staging_idea_df)
     assert os_path_exists(pidgin_path)
-    assert sheet_exists(pidgin_path, node_staging_str)
-    assert sheet_exists(pidgin_path, node_agg_str) is False
+    assert sheet_exists(pidgin_path, idea_staging_str)
+    assert sheet_exists(pidgin_path, idea_agg_str) is False
 
     # WHEN
-    etl_pidgin_node_staging_to_node_agg(x_zoo_dir)
+    etl_pidgin_idea_staging_to_idea_agg(x_zoo_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    assert sheet_exists(pidgin_path, node_agg_str)
-    gen_node_agg_df = pandas_read_excel(pidgin_path, sheet_name=node_agg_str)
-    print(f"{gen_node_agg_df=}")
-    node_file_columns = [
+    assert sheet_exists(pidgin_path, idea_agg_str)
+    gen_idea_agg_df = pandas_read_excel(pidgin_path, sheet_name=idea_agg_str)
+    print(f"{gen_idea_agg_df=}")
+    idea_file_columns = [
         face_id_str(),
         event_id_str(),
-        otx_node_str(),
-        inx_node_str(),
+        otx_idea_str(),
+        inx_idea_str(),
         otx_wall_str(),
         inx_wall_str(),
         unknown_word_str(),
     ]
-    assert list(gen_node_agg_df.columns) == node_file_columns
-    assert len(gen_node_agg_df) == 2
+    assert list(gen_idea_agg_df.columns) == idea_file_columns
+    assert len(gen_idea_agg_df) == 2
     x_nan = float("nan")
-    e1_node0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
-    e1_node1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
-    e1_node_rows = [e1_node0, e1_node1]
-    e1_node_agg_df = DataFrame(e1_node_rows, columns=node_file_columns)
-    pandas_testing_assert_frame_equal(gen_node_agg_df, e1_node_agg_df)
+    e1_idea0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
+    e1_idea1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
+    e1_idea_rows = [e1_idea0, e1_idea1]
+    e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
+    pandas_testing_assert_frame_equal(gen_idea_agg_df, e1_idea_agg_df)
 
 
 def test_etl_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
@@ -409,39 +409,39 @@ def test_etl_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
     t6am_otx = "T6am"
     t6am_inx = "T600"
     event7 = 7
-    node_staging_str = "node_staging"
-    node_agg_str = "node_agg"
-    node_file_columns = [
+    idea_staging_str = "idea_staging"
+    idea_agg_str = "idea_agg"
+    idea_file_columns = [
         "src_brick",
         face_id_str(),
         event_id_str(),
-        otx_node_str(),
-        inx_node_str(),
+        otx_idea_str(),
+        inx_idea_str(),
         otx_wall_str(),
         inx_wall_str(),
         unknown_word_str(),
     ]
     bx = "br00xxx"
-    e1_node0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
-    e1_node1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
-    e1_node_rows = [e1_node0, e1_node1]
-    staging_node_df = DataFrame(e1_node_rows, columns=node_file_columns)
+    e1_idea0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
+    e1_idea1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
+    e1_idea_rows = [e1_idea0, e1_idea1]
+    staging_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
 
     x_zoo_dir = get_test_worlds_dir()
     pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, acct_staging_str, staging_acct_df)
     upsert_sheet(pidgin_path, group_staging_str, staging_group_df)
     upsert_sheet(pidgin_path, road_staging_str, staging_road_df)
-    upsert_sheet(pidgin_path, node_staging_str, staging_node_df)
+    upsert_sheet(pidgin_path, idea_staging_str, staging_idea_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, acct_staging_str)
     assert sheet_exists(pidgin_path, group_staging_str)
     assert sheet_exists(pidgin_path, road_staging_str)
-    assert sheet_exists(pidgin_path, node_staging_str)
+    assert sheet_exists(pidgin_path, idea_staging_str)
     assert sheet_exists(pidgin_path, "acct_agg") is False
     assert sheet_exists(pidgin_path, group_agg_str) is False
     assert sheet_exists(pidgin_path, road_agg_str) is False
-    assert sheet_exists(pidgin_path, node_agg_str) is False
+    assert sheet_exists(pidgin_path, idea_agg_str) is False
 
     # WHEN
     etl_pidgin_staging_to_agg(x_zoo_dir)
@@ -451,11 +451,11 @@ def test_etl_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
     assert sheet_exists(pidgin_path, acct_agg_str)
     assert sheet_exists(pidgin_path, group_agg_str)
     assert sheet_exists(pidgin_path, road_agg_str)
-    assert sheet_exists(pidgin_path, node_agg_str)
+    assert sheet_exists(pidgin_path, idea_agg_str)
     gen_acct_agg_df = pandas_read_excel(pidgin_path, sheet_name=acct_agg_str)
     gen_group_agg_df = pandas_read_excel(pidgin_path, sheet_name=group_agg_str)
     gen_road_agg_df = pandas_read_excel(pidgin_path, sheet_name=road_agg_str)
-    gen_node_agg_df = pandas_read_excel(pidgin_path, sheet_name=node_agg_str)
+    gen_idea_agg_df = pandas_read_excel(pidgin_path, sheet_name=idea_agg_str)
 
     acct_file_columns = [
         face_id_str(),
@@ -506,23 +506,23 @@ def test_etl_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
     e1_road_rows = [e1_road0, e1_road1]
     e1_road_agg_df = DataFrame(e1_road_rows, columns=road_file_columns)
 
-    node_file_columns = [
+    idea_file_columns = [
         face_id_str(),
         event_id_str(),
-        otx_node_str(),
-        inx_node_str(),
+        otx_idea_str(),
+        inx_idea_str(),
         otx_wall_str(),
         inx_wall_str(),
         unknown_word_str(),
     ]
-    assert list(gen_node_agg_df.columns) == node_file_columns
-    assert len(gen_node_agg_df) == 2
-    e1_node0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
-    e1_node1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
-    e1_node_rows = [e1_node0, e1_node1]
-    e1_node_agg_df = DataFrame(e1_node_rows, columns=node_file_columns)
+    assert list(gen_idea_agg_df.columns) == idea_file_columns
+    assert len(gen_idea_agg_df) == 2
+    e1_idea0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
+    e1_idea1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
+    e1_idea_rows = [e1_idea0, e1_idea1]
+    e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
 
     pandas_testing_assert_frame_equal(gen_acct_agg_df, e1_acct_agg_df)
     pandas_testing_assert_frame_equal(gen_group_agg_df, e1_group_agg_df)
     pandas_testing_assert_frame_equal(gen_road_agg_df, e1_road_agg_df)
-    pandas_testing_assert_frame_equal(gen_node_agg_df, e1_node_agg_df)
+    pandas_testing_assert_frame_equal(gen_idea_agg_df, e1_idea_agg_df)

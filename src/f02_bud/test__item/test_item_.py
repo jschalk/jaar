@@ -1,6 +1,6 @@
 from src.f01_road.finance import default_fund_coin_if_none
 from src.f01_road.road import (
-    get_default_fiscal_id_roadnode as root_label,
+    get_default_fiscal_id_ideaunit as root_label,
     create_road,
     default_wall_if_none,
 )

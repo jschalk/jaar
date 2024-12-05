@@ -41,11 +41,11 @@ from src.f01_road.finance_tran import (
 from src.f01_road.road import (
     OwnerID,
     FiscalID,
-    RoadNode,
+    IdeaUnit,
     RoadUnit,
     rebuild_road,
-    get_all_road_nodes,
-    validate_roadnode,
+    get_all_road_ideas,
+    validate_ideaunit,
     default_wall_if_none,
 )
 from src.f02_bud.bud import (
@@ -703,7 +703,7 @@ def hubunit_shop(
     return HubUnit(
         fiscals_dir=fiscals_dir,
         fiscal_id=fiscal_id,
-        owner_id=validate_roadnode(owner_id, wall),
+        owner_id=validate_ideaunit(owner_id, wall),
         keep_road=keep_road,
         wall=default_wall_if_none(wall),
         fund_pool=validate_fund_pool(fund_pool),
@@ -714,9 +714,9 @@ def hubunit_shop(
     )
 
 
-def get_keep_path(x_hubunit: HubUnit, x_road: RoadNode) -> str:
+def get_keep_path(x_hubunit: HubUnit, x_road: IdeaUnit) -> str:
     keep_root = get_rootpart_of_keep_dir()
     x_road = rebuild_road(x_road, x_hubunit.fiscal_id, keep_root)
-    x_list = get_all_road_nodes(x_road, x_hubunit.wall)
+    x_list = get_all_road_ideas(x_road, x_hubunit.wall)
     keep_sub_path = get_directory_path(x_list=[*x_list])
     return f_path(x_hubunit.keeps_dir(), keep_sub_path)

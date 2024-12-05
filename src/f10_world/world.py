@@ -34,7 +34,7 @@ from src.f10_world.transformers import (
     zoo_agg_single_to_pidgin_staging,
     zoo_agg_to_pidgin_acct_staging,
     zoo_agg_to_pidgin_group_staging,
-    zoo_agg_to_pidgin_node_staging,
+    zoo_agg_to_pidgin_idea_staging,
     zoo_agg_to_pidgin_road_staging,
     EventsLogToEventsAggTransformer,
 )
@@ -169,9 +169,9 @@ class WorldUnit:
         legitimate_events = set(self.events.keys())
         zoo_agg_to_pidgin_group_staging(legitimate_events, self._zoo_dir)
 
-    def zoo_agg_to_node_staging(self):
+    def zoo_agg_to_idea_staging(self):
         legitimate_events = set(self.events.keys())
-        zoo_agg_to_pidgin_node_staging(legitimate_events, self._zoo_dir)
+        zoo_agg_to_pidgin_idea_staging(legitimate_events, self._zoo_dir)
 
     def zoo_agg_to_road_staging(self):
         legitimate_events = set(self.events.keys())

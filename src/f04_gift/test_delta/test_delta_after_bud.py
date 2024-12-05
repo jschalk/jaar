@@ -1,4 +1,4 @@
-from src.f01_road.road import get_terminus_node, get_parent_road
+from src.f01_road.road import get_terminus_idea, get_parent_road
 from src.f02_bud.group import awardlink_shop
 from src.f02_bud.reason_item import factunit_shop
 from src.f02_bud.item import itemunit_shop
@@ -335,7 +335,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_itemunit():
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_delete())
     delete_disc_atomunit.set_jkey(
-        label_str(), get_terminus_node(disc_road, before_sue_budunit._wall)
+        label_str(), get_terminus_idea(disc_road, before_sue_budunit._wall)
     )
     print(f"{disc_road=}")
     delete_disc_atomunit.set_jkey(

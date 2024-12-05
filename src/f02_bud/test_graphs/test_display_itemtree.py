@@ -16,30 +16,30 @@ from src.f02_bud.bud_graphics import (
 
 
 def test_display_itemtree_Scenario0(graphics_bool):
-    # a_bud = get_1node_bud()
-    # a_bud = get_2node_bud()
-    # a_bud = get_3node_bud()
-    # a_bud = get_5nodeHG_bud()
-    # a_bud = get_7nodeJRoot_bud()
+    # a_bud = get_1idea_bud()
+    # a_bud = get_2idea_bud()
+    # a_bud = get_3idea_bud()
+    # a_bud = get_5ideaHG_bud()
+    # a_bud = get_7ideaJRoot_bud()
     a_bud = get_budunit_with_4_levels()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
-    print(f"Bud {a_bud._fiscal_id}: Nodes ({len(a_bud._item_dict)})")
+    print(f"Bud {a_bud._fiscal_id}: Ideas ({len(a_bud._item_dict)})")
 
     # WHEN / THEN
     x_fig = display_itemtree(a_bud, graphics_bool)
 
 
 def test_display_itemtree_Scenario1_shows_Tasks(graphics_bool):
-    # a_bud = get_1node_bud()
-    # a_bud = get_2node_bud()
-    # a_bud = get_3node_bud()
-    # a_bud = get_5nodeHG_bud()
-    # a_bud = get_7nodeJRoot_bud()
+    # a_bud = get_1idea_bud()
+    # a_bud = get_2idea_bud()
+    # a_bud = get_3idea_bud()
+    # a_bud = get_5ideaHG_bud()
+    # a_bud = get_7ideaJRoot_bud()
     a_bud = get_budunit_laundry_example1()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
-    print(f"Bud {a_bud._fiscal_id}: Nodes ({len(a_bud._item_dict)})")
+    print(f"Bud {a_bud._fiscal_id}: Ideas ({len(a_bud._item_dict)})")
 
     # WHEN / THEN
     display_itemtree(a_bud, mode="Task", graphics_bool=graphics_bool)

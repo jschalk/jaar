@@ -63,8 +63,8 @@ def type_RoadUnit_str() -> str:
     return "RoadUnit"
 
 
-def type_RoadNode_str() -> str:
-    return "RoadNode"
+def type_IdeaUnit_str() -> str:
+    return "IdeaUnit"
 
 
 def nullable_str() -> str:
@@ -293,7 +293,7 @@ def get_allowed_jaar_types() -> set[str]:
         "float",
         "GroupID",
         "int",
-        "RoadNode",
+        "IdeaUnit",
         "RoadUnit",
         "TimeLinePoint",
     }
@@ -324,7 +324,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
         "gogo_want": "float",
         "group_id": "GroupID",
         "healer_id": "GroupID",
-        "label": "RoadNode",
+        "label": "IdeaUnit",
         "mass": "int",
         "max_tree_traverse": "int",
         "morph": "bool",

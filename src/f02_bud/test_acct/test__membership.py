@@ -93,7 +93,7 @@ def test_membership_shop_ReturnsCorrectObjAttr_acct_id():
     assert swim_membership._acct_id == yao_str
 
 
-# def test_MemberShip_set_group_id_RaisesErrorIf_group_id_IsNotAcctIDAndIsRoadNode():
+# def test_MemberShip_set_group_id_RaisesErrorIf_group_id_IsNotAcctIDAndIsIdeaUnit():
 #     # ESTABLISH
 #     slash_str = "/"
 #     # bob_str = f"Bob{slash_str}Texas"
@@ -106,7 +106,7 @@ def test_membership_shop_ReturnsCorrectObjAttr_acct_id():
 #         membership_shop(swim_str, _acct_id=bob_str, _wall=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{swim_str}' needs to not be a RoadNode. Must contain wall: '{slash_str}'"
+#         == f"'{swim_str}' needs to not be a IdeaUnit. Must contain wall: '{slash_str}'"
 #     )
 
 

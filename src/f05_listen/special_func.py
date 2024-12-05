@@ -1,4 +1,4 @@
-from src.f01_road.road import RoadUnit, get_terminus_node, get_parent_road, GroupID
+from src.f01_road.road import RoadUnit, get_terminus_idea, get_parent_road, GroupID
 from src.f02_bud.bud import BudUnit
 from src.f05_listen.hubunit import HubUnit
 from copy import deepcopy as copy_deepcopy
@@ -10,7 +10,7 @@ def create_pledge(
     x_teamlink: GroupID = None,
     reason_premise: RoadUnit = None,
 ):
-    if pledge_road is not None and get_terminus_node(pledge_road) != "":
+    if pledge_road is not None and get_terminus_idea(pledge_road) != "":
         x_item = x_bud.get_item_obj(pledge_road, if_missing_create=True)
         x_item.pledge = True
         x_item.teamunit.set_teamlink(x_teamlink)

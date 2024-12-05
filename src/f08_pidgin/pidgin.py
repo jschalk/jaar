@@ -9,15 +9,15 @@ from src.f01_road.road import default_wall_if_none, OwnerID
 from src.f08_pidgin.bridge import (
     GroupBridge,
     AcctBridge,
-    NodeBridge,
+    IdeaBridge,
     RoadBridge,
     groupbridge_shop,
     acctbridge_shop,
-    nodebridge_shop,
+    ideabridge_shop,
     roadbridge_shop,
     get_acctbridge_from_dict,
     get_groupbridge_from_dict,
-    get_nodebridge_from_dict,
+    get_ideabridge_from_dict,
     get_roadbridge_from_dict,
 )
 from dataclasses import dataclass
@@ -28,7 +28,7 @@ class check_attrException(Exception):
 
 
 def pidginable_jaar_types() -> set:
-    return {"AcctID", "GroupID", "RoadNode", "RoadUnit"}
+    return {"AcctID", "GroupID", "IdeaUnit", "RoadUnit"}
 
 
 def pidginable_atom_args() -> set:
@@ -59,7 +59,7 @@ class PidginUnit:
     face_id: OwnerID = None
     groupbridge: GroupBridge = None
     acctbridge: AcctBridge = None
-    nodebridge: NodeBridge = None
+    ideabridge: IdeaBridge = None
     roadbridge: RoadBridge = None
     unknown_word: str = None  # pidginunit heart
     otx_wall: str = None  # pidginunit heart
@@ -89,8 +89,8 @@ class PidginUnit:
             return self.acctbridge
         elif x_jaar_type == "GroupID":
             return self.groupbridge
-        elif x_jaar_type == "RoadNode":
-            return self.nodebridge
+        elif x_jaar_type == "IdeaUnit":
+            return self.ideabridge
         elif x_jaar_type == "RoadUnit":
             return self.roadbridge
 
@@ -113,24 +113,24 @@ class PidginUnit:
     def del_acct_id(self, otx_acct_id: str):
         return self.acctbridge.del_otx2inx(otx_acct_id)
 
-    def set_nodebridge(self, x_nodebridge: NodeBridge):
-        self._check_all_core_attrs_match(x_nodebridge)
-        self.nodebridge = x_nodebridge
+    def set_ideabridge(self, x_ideabridge: IdeaBridge):
+        self._check_all_core_attrs_match(x_ideabridge)
+        self.ideabridge = x_ideabridge
 
-    def get_nodebridge(self) -> NodeBridge:
-        return self.nodebridge
+    def get_ideabridge(self) -> IdeaBridge:
+        return self.ideabridge
 
-    def set_node(self, otx_node: str, inx_node: str):
-        self.nodebridge.set_otx2inx(otx_node, inx_node)
+    def set_idea(self, otx_idea: str, inx_idea: str):
+        self.ideabridge.set_otx2inx(otx_idea, inx_idea)
 
-    def node_exists(self, otx_node: str, inx_node: str):
-        return self.nodebridge.otx2inx_exists(otx_node, inx_node)
+    def idea_exists(self, otx_idea: str, inx_idea: str):
+        return self.ideabridge.otx2inx_exists(otx_idea, inx_idea)
 
-    def _get_inx_node(self, otx_node: str):
-        return self.nodebridge._get_inx_value(otx_node)
+    def _get_inx_idea(self, otx_idea: str):
+        return self.ideabridge._get_inx_value(otx_idea)
 
-    def del_node(self, otx_node: str):
-        return self.nodebridge.del_otx2inx(otx_node)
+    def del_idea(self, otx_idea: str):
+        return self.ideabridge.del_otx2inx(otx_idea)
 
     def set_roadbridge(self, x_roadbridge: RoadBridge):
         self._check_all_core_attrs_match(x_roadbridge)
@@ -168,7 +168,7 @@ class PidginUnit:
         return (
             self.acctbridge.is_valid()
             and self.groupbridge.is_valid()
-            and self.nodebridge.is_valid()
+            and self.ideabridge.is_valid()
             and self.roadbridge.is_valid()
         )
 
@@ -177,8 +177,8 @@ class PidginUnit:
             self.acctbridge.set_otx2inx(x_otx, x_inx)
         elif x_jaar_type == "GroupID":
             self.groupbridge.set_otx2inx(x_otx, x_inx)
-        elif x_jaar_type == "RoadNode":
-            self.nodebridge.set_otx2inx(x_otx, x_inx)
+        elif x_jaar_type == "IdeaUnit":
+            self.ideabridge.set_otx2inx(x_otx, x_inx)
         elif x_jaar_type == "RoadUnit":
             self.roadbridge.set_otx2inx(x_otx, x_inx)
 
@@ -187,8 +187,8 @@ class PidginUnit:
             return self.acctbridge._get_inx_value(x_otx)
         elif x_jaar_type == "GroupID":
             return self.groupbridge._get_inx_value(x_otx)
-        elif x_jaar_type == "RoadNode":
-            return self.nodebridge._get_inx_value(x_otx)
+        elif x_jaar_type == "IdeaUnit":
+            return self.ideabridge._get_inx_value(x_otx)
         elif x_jaar_type == "RoadUnit":
             return self.roadbridge._get_inx_value(x_otx)
 
@@ -197,8 +197,8 @@ class PidginUnit:
             return self.acctbridge.otx2inx_exists(x_otx, x_inx)
         elif x_jaar_type == "GroupID":
             return self.groupbridge.otx2inx_exists(x_otx, x_inx)
-        elif x_jaar_type == "RoadNode":
-            return self.nodebridge.otx2inx_exists(x_otx, x_inx)
+        elif x_jaar_type == "IdeaUnit":
+            return self.ideabridge.otx2inx_exists(x_otx, x_inx)
         elif x_jaar_type == "RoadUnit":
             return self.roadbridge.otx2inx_exists(x_otx, x_inx)
 
@@ -207,8 +207,8 @@ class PidginUnit:
             self.acctbridge.del_otx2inx(x_otx)
         elif x_jaar_type == "GroupID":
             self.groupbridge.del_otx2inx(x_otx)
-        elif x_jaar_type == "RoadNode":
-            self.nodebridge.del_otx2inx(x_otx)
+        elif x_jaar_type == "IdeaUnit":
+            self.ideabridge.del_otx2inx(x_otx)
         elif x_jaar_type == "RoadUnit":
             self.roadbridge.del_otx2inx(x_otx)
 
@@ -232,7 +232,7 @@ class PidginUnit:
             "inx_wall": self.inx_wall,
             "unknown_word": self.unknown_word,
             "acctbridge": self.acctbridge.get_dict(),
-            "nodebridge": self.nodebridge.get_dict(),
+            "ideabridge": self.ideabridge.get_dict(),
             "groupbridge": self.groupbridge.get_dict(),
             "roadbridge": self.roadbridge.get_dict(),
         }
@@ -273,7 +273,7 @@ def pidginunit_shop(
             x_unknown_word=x_unknown_word,
             x_face_id=x_face_id,
         ),
-        nodebridge=nodebridge_shop(
+        ideabridge=ideabridge_shop(
             x_otx_wall=x_otx_wall,
             x_inx_wall=x_inx_wall,
             x_unknown_word=x_unknown_word,

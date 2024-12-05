@@ -301,9 +301,9 @@ class br00044AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
     event_id = Column(Integer, primary_key=True)
-    inx_node = Column(String)
+    inx_idea = Column(String)
     inx_wall = Column(String)
-    otx_node = Column(String)
+    otx_idea = Column(String)
     otx_wall = Column(String)
     unknown_word = Column(String)
 
@@ -358,8 +358,8 @@ class br00116AbstractTable(Base):
     event_id = Column(Integer, primary_key=True)
     acct_id = Column(String)
     fiscal_id = Column(String)
-    inx_node = Column(String)
-    otx_node = Column(String)
+    inx_idea = Column(String)
+    otx_idea = Column(String)
     owner_id = Column(String)
 
 

@@ -6,17 +6,17 @@
         "face_id": {
             "otx_key": true
         },
+        "inx_idea": {
+            "otx_key": false
+        },
         "inx_wall": {
             "otx_key": false
         },
-        "inx_node": {
-            "otx_key": false
+        "otx_idea": {
+            "otx_key": true
         },
         "otx_wall": {
             "otx_key": false
-        },
-        "otx_node": {
-            "otx_key": true
         },
         "unknown_word": {
             "otx_key": false
@@ -24,6 +24,6 @@
     },
     "brick_number": "br00044",
     "categorys": [
-        "bridge_node"
+        "bridge_idea"
     ]
 }

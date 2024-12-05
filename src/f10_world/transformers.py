@@ -34,8 +34,8 @@ def get_jaar_type(pidgin_category: str) -> str:
         return "AcctID"
     elif pidgin_category == "bridge_group_id":
         return "GroupID"
-    elif pidgin_category == "bridge_node":
-        return "RoadNode"
+    elif pidgin_category == "bridge_idea":
+        return "IdeaUnit"
     elif pidgin_category == "bridge_road":
         return "RoadUnit"
     else:
@@ -47,8 +47,8 @@ def get_sheet_stage_name(jaar_type) -> str:
         return "acct_staging"
     elif jaar_type == "GroupID":
         return "group_staging"
-    elif jaar_type == "RoadNode":
-        return "node_staging"
+    elif jaar_type == "IdeaUnit":
+        return "idea_staging"
     elif jaar_type == "RoadUnit":
         return "road_staging"
 
@@ -58,8 +58,8 @@ def get_sheet_agg_name(jaar_type) -> str:
         return "acct_agg"
     elif jaar_type == "GroupID":
         return "group_agg"
-    elif jaar_type == "RoadNode":
-        return "node_agg"
+    elif jaar_type == "IdeaUnit":
+        return "idea_agg"
     elif jaar_type == "RoadUnit":
         return "road_agg"
 
@@ -69,8 +69,8 @@ def get_otx_obj(jaar_type, x_row) -> str:
         return x_row["otx_acct_id"]
     elif jaar_type == "GroupID":
         return x_row["otx_group_id"]
-    elif jaar_type == "RoadNode":
-        return x_row["otx_node"]
+    elif jaar_type == "IdeaUnit":
+        return x_row["otx_idea"]
     elif jaar_type == "RoadUnit":
         return x_row["otx_road"]
     return None
@@ -81,8 +81,8 @@ def get_inx_obj(jaar_type, x_row) -> str:
         return x_row["inx_acct_id"]
     elif jaar_type == "GroupID":
         return x_row["inx_group_id"]
-    elif jaar_type == "RoadNode":
-        return x_row["inx_node"]
+    elif jaar_type == "IdeaUnit":
+        return x_row["inx_idea"]
     elif jaar_type == "RoadUnit":
         return x_row["inx_road"]
     return None
@@ -229,8 +229,8 @@ def zoo_agg_to_pidgin_group_staging(legitimate_events: set[str], zoo_dir: str):
     zoo_agg_single_to_pidgin_staging("bridge_group_id", legitimate_events, zoo_dir)
 
 
-def zoo_agg_to_pidgin_node_staging(legitimate_events: set[str], zoo_dir: str):
-    zoo_agg_single_to_pidgin_staging("bridge_node", legitimate_events, zoo_dir)
+def zoo_agg_to_pidgin_idea_staging(legitimate_events: set[str], zoo_dir: str):
+    zoo_agg_single_to_pidgin_staging("bridge_idea", legitimate_events, zoo_dir)
 
 
 def zoo_agg_to_pidgin_road_staging(legitimate_events: set[str], zoo_dir: str):
@@ -304,8 +304,8 @@ class ZooAggToStagingTransformer:
             return x_row["inx_acct_id"]
         elif self.jaar_type == "GroupID" and "inx_group_id" not in missing_col:
             return x_row["inx_group_id"]
-        elif self.jaar_type == "RoadNode" and "inx_node" not in missing_col:
-            return x_row["inx_node"]
+        elif self.jaar_type == "IdeaUnit" and "inx_idea" not in missing_col:
+            return x_row["inx_idea"]
         elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
             return x_row["inx_road"]
         return None
@@ -385,8 +385,8 @@ def etl_pidgin_road_staging_to_road_agg(zoo_dir: str):
     etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_road")
 
 
-def etl_pidgin_node_staging_to_node_agg(zoo_dir: str):
-    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_node")
+def etl_pidgin_idea_staging_to_idea_agg(zoo_dir: str):
+    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_idea")
 
 
 def etl_pidgin_single_staging_to_agg(zoo_dir: str, bridge_category: str):
@@ -398,7 +398,7 @@ def etl_pidgin_staging_to_agg(zoo_dir):
     etl_pidgin_acct_staging_to_acct_agg(zoo_dir)
     etl_pidgin_group_staging_to_group_agg(zoo_dir)
     etl_pidgin_road_staging_to_road_agg(zoo_dir)
-    etl_pidgin_node_staging_to_node_agg(zoo_dir)
+    etl_pidgin_idea_staging_to_idea_agg(zoo_dir)
 
 
 class PidginStagingToAggTransformer:

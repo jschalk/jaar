@@ -47,7 +47,7 @@
                 "jaar_type": "FiscalID"
             },
             "hour_label": {
-                "jaar_type": "RoadNode"
+                "jaar_type": "IdeaUnit"
             }
         },
         "jvalues": {
@@ -62,7 +62,7 @@
                 "jaar_type": "FiscalID"
             },
             "month_label": {
-                "jaar_type": "RoadNode"
+                "jaar_type": "IdeaUnit"
             }
         },
         "jvalues": {
@@ -77,7 +77,7 @@
                 "jaar_type": "FiscalID"
             },
             "weekday_label": {
-                "jaar_type": "RoadNode"
+                "jaar_type": "IdeaUnit"
             }
         },
         "jvalues": {
@@ -110,11 +110,11 @@
             "respect_bit": {
                 "jaar_type": "float"
             },
+            "timeline_label": {
+                "jaar_type": "IdeaUnit"
+            },
             "wall": {
                 "jaar_type": "str"
-            },
-            "timeline_label": {
-                "jaar_type": "RoadNode"
             },
             "yr1_jan1_offset": {
                 "jaar_type": "int"

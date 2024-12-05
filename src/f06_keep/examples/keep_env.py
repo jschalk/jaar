@@ -1,5 +1,5 @@
 from src.f00_instrument.file import delete_dir, copy_dir
-from src.f01_road.road import create_road_from_nodes, RoadUnit
+from src.f01_road.road import create_road_from_ideas, RoadUnit
 from src.f05_listen.hubunit import hubunit_shop, HubUnit
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
@@ -33,7 +33,7 @@ def get_texas_road() -> RoadUnit:
     naton_str = "nation-state"
     usa_str = "usa"
     texas_str = "texas"
-    return create_road_from_nodes([naton_str, usa_str, texas_str])
+    return create_road_from_ideas([naton_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:

@@ -2,14 +2,14 @@ from src.f02_bud.bud import BudUnit, budunit_shop, itemunit_shop, FiscalID
 from src.f06_keep.examples.keep_env import temp_fiscal_id
 
 
-def get_1node_bud() -> BudUnit:
+def get_1idea_bud() -> BudUnit:
     x_bud = budunit_shop("A")
     x_bud.set_fiscal_id(temp_fiscal_id())
     x_bud.settle_bud()
     return x_bud
 
 
-def get_Jnode2node_bud() -> BudUnit:
+def get_Jidea2idea_bud() -> BudUnit:
     x_bud = budunit_shop("J")
     x_bud.set_fiscal_id(temp_fiscal_id())
     x_bud.set_l1_item(itemunit_shop("A"))
@@ -17,7 +17,7 @@ def get_Jnode2node_bud() -> BudUnit:
     return x_bud
 
 
-def get_2node_bud(fiscal_id: FiscalID = None) -> BudUnit:
+def get_2idea_bud(fiscal_id: FiscalID = None) -> BudUnit:
     if fiscal_id is None:
         fiscal_id = temp_fiscal_id()
     a_str = "A"
@@ -30,7 +30,7 @@ def get_2node_bud(fiscal_id: FiscalID = None) -> BudUnit:
     return x_bud
 
 
-def get_3node_bud() -> BudUnit:
+def get_3idea_bud() -> BudUnit:
     a_str = "A"
     x_bud = budunit_shop(a_str)
     x_bud.set_fiscal_id(temp_fiscal_id())
@@ -40,7 +40,7 @@ def get_3node_bud() -> BudUnit:
     return x_bud
 
 
-def get_3node_D_E_F_bud() -> BudUnit:
+def get_3idea_D_E_F_bud() -> BudUnit:
     d_str = "D"
     x_bud = budunit_shop(d_str)
     x_bud.set_fiscal_id(temp_fiscal_id())
@@ -50,7 +50,7 @@ def get_3node_D_E_F_bud() -> BudUnit:
     return x_bud
 
 
-def get_6node_bud() -> BudUnit:
+def get_6idea_bud() -> BudUnit:
     x_bud = budunit_shop("A")
     x_bud.set_fiscal_id(temp_fiscal_id())
     x_bud.set_l1_item(itemunit_shop("B"))
@@ -63,7 +63,7 @@ def get_6node_bud() -> BudUnit:
     return x_bud
 
 
-def get_7nodeInsertH_bud() -> BudUnit:
+def get_7ideaInsertH_bud() -> BudUnit:
     x_bud = budunit_shop("A")
     x_bud.set_fiscal_id(temp_fiscal_id())
     x_bud.set_l1_item(itemunit_shop("B"))
@@ -77,7 +77,7 @@ def get_7nodeInsertH_bud() -> BudUnit:
     return x_bud
 
 
-def get_5nodeHG_bud() -> BudUnit:
+def get_5ideaHG_bud() -> BudUnit:
     x_bud = budunit_shop("A")
     x_bud.set_fiscal_id(temp_fiscal_id())
     x_bud.set_l1_item(itemunit_shop("B"))
@@ -89,7 +89,7 @@ def get_5nodeHG_bud() -> BudUnit:
     return x_bud
 
 
-def get_7nodeJRoot_bud() -> BudUnit:
+def get_7ideaJRoot_bud() -> BudUnit:
     x_bud = budunit_shop("J")
     x_bud.set_fiscal_id(temp_fiscal_id())
     x_bud.set_l1_item(itemunit_shop("A"))

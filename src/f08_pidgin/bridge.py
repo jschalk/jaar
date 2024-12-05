@@ -14,14 +14,14 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.finance import TimeLinePoint
 from src.f01_road.road import (
     default_wall_if_none,
-    get_all_road_nodes,
-    create_road_from_nodes,
-    get_terminus_node,
+    get_all_road_ideas,
+    create_road_from_ideas,
+    get_terminus_idea,
     get_parent_road,
     create_road,
-    is_roadnode,
+    is_ideaunit,
     RoadUnit,
-    RoadNode,
+    IdeaUnit,
     OwnerID,
 )
 from dataclasses import dataclass
@@ -261,18 +261,18 @@ class RoadBridge:
         otx_parent_road = get_parent_road(otx_road, self.otx_wall)
         if self.otx_exists(otx_parent_road) is False and otx_parent_road != "":
             return None
-        otx_terminus = get_terminus_node(otx_road, self.otx_wall)
-        otx_terminus = self._get_nub_roadnode(otx_terminus)
+        otx_terminus = get_terminus_idea(otx_road, self.otx_wall)
+        otx_terminus = self._get_nub_ideaunit(otx_terminus)
         if otx_parent_road == "":
             inx_parent_road = ""
         else:
             inx_parent_road = self._get_inx_value(otx_parent_road)
         return create_road(inx_parent_road, otx_terminus, self.inx_wall)
 
-    def _get_nub_roadnode(self, x_roadNode: RoadNode) -> RoadNode:
-        if self.nub_otx_label_exists(x_roadNode):
-            return self._get_nub_inx_label(x_roadNode)
-        return x_roadNode
+    def _get_nub_ideaunit(self, x_ideaUnit: IdeaUnit) -> IdeaUnit:
+        if self.nub_otx_label_exists(x_ideaUnit):
+            return self._get_nub_inx_label(x_ideaUnit)
+        return x_ideaUnit
 
     def otx2inx_exists(self, otx_road: str, inx_road: str) -> bool:
         return self._get_inx_value(otx_road) == inx_road
@@ -283,7 +283,7 @@ class RoadBridge:
     def del_otx2inx(self, otx_road: str):
         self.otx2inx.pop(otx_road)
 
-    def set_nub_label(self, otx_label: RoadNode, inx_label: RoadNode):
+    def set_nub_label(self, otx_label: IdeaUnit, inx_label: IdeaUnit):
         if self.otx_wall in otx_label:
             exception_str = f"nub_label cannot have otx_label '{otx_label}'. It must be not have wall {self.otx_wall}."
             raise set_nub_label_Exception(exception_str)
@@ -296,23 +296,23 @@ class RoadBridge:
 
     def _set_new_nub_label_to_otx_inx(self, otx_label, inx_label):
         for otx_road, inx_road in self.otx2inx.items():
-            otx_roadnodes = get_all_road_nodes(otx_road, self.otx_wall)
-            inx_roadnodes = get_all_road_nodes(inx_road, self.inx_wall)
-            for x_count, otx_roadnode in enumerate(otx_roadnodes):
-                if otx_roadnode == otx_label:
-                    inx_roadnodes[x_count] = inx_label
-            self.set_otx2inx(otx_road, create_road_from_nodes(inx_roadnodes))
+            otx_ideaunits = get_all_road_ideas(otx_road, self.otx_wall)
+            inx_ideaunits = get_all_road_ideas(inx_road, self.inx_wall)
+            for x_count, otx_ideaunit in enumerate(otx_ideaunits):
+                if otx_ideaunit == otx_label:
+                    inx_ideaunits[x_count] = inx_label
+            self.set_otx2inx(otx_road, create_road_from_ideas(inx_ideaunits))
 
-    def _get_nub_inx_label(self, otx_label: RoadNode) -> RoadNode:
+    def _get_nub_inx_label(self, otx_label: IdeaUnit) -> IdeaUnit:
         return self.nub_label.get(otx_label)
 
-    def nub_label_exists(self, otx_label: RoadNode, inx_label: RoadNode) -> bool:
+    def nub_label_exists(self, otx_label: IdeaUnit, inx_label: IdeaUnit) -> bool:
         return self._get_nub_inx_label(otx_label) == inx_label
 
-    def nub_otx_label_exists(self, otx_label: RoadNode) -> bool:
+    def nub_otx_label_exists(self, otx_label: IdeaUnit) -> bool:
         return self._get_nub_inx_label(otx_label) != None
 
-    def del_nub_label(self, otx_label: RoadNode) -> bool:
+    def del_nub_label(self, otx_label: IdeaUnit) -> bool:
         self.nub_label.pop(otx_label)
 
     def _unknown_word_in_otx2inx(self) -> bool:
@@ -320,7 +320,7 @@ class RoadBridge:
 
     def all_otx_parent_roads_exist(self) -> bool:
         for x_road in self.otx2inx.keys():
-            if is_roadnode(x_road, self.otx_wall) is False:
+            if is_ideaunit(x_road, self.otx_wall) is False:
                 parent_road = get_parent_road(x_road, self.otx_wall)
                 if self.otx_exists(parent_road) is False:
                     return False
@@ -383,33 +383,33 @@ def get_roadbridge_from_json(x_json: str) -> RoadBridge:
     return get_roadbridge_from_dict(get_dict_from_json(x_json))
 
 
-class NodeBridge(BridgeCore):
-    def set_otx2inx(self, otx_nodeid: str, inx_nodeid: str):
-        self.otx2inx[otx_nodeid] = inx_nodeid
+class IdeaBridge(BridgeCore):
+    def set_otx2inx(self, otx_ideaid: str, inx_ideaid: str):
+        self.otx2inx[otx_ideaid] = inx_ideaid
 
-    def _get_inx_value(self, otx_nodeid: str) -> str:
-        return self.otx2inx.get(otx_nodeid)
+    def _get_inx_value(self, otx_ideaid: str) -> str:
+        return self.otx2inx.get(otx_ideaid)
 
-    def otx2inx_exists(self, otx_nodeid: str, inx_nodeid: str) -> bool:
-        return self._get_inx_value(otx_nodeid) == inx_nodeid
+    def otx2inx_exists(self, otx_ideaid: str, inx_ideaid: str) -> bool:
+        return self._get_inx_value(otx_ideaid) == inx_ideaid
 
-    def otx_exists(self, otx_nodeid: str) -> bool:
-        return self._get_inx_value(otx_nodeid) != None
+    def otx_exists(self, otx_ideaid: str) -> bool:
+        return self._get_inx_value(otx_ideaid) != None
 
-    def del_otx2inx(self, otx_nodeid: str):
-        self.otx2inx.pop(otx_nodeid)
+    def del_otx2inx(self, otx_ideaid: str):
+        self.otx2inx.pop(otx_ideaid)
 
-    def reveal_inx(self, otx_nodeid: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_nodeid) is False:
-            inx_nodeid = copy_copy(otx_nodeid)
-            if self.inx_wall in otx_nodeid:
+    def reveal_inx(self, otx_ideaid: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_ideaid) is False:
+            inx_ideaid = copy_copy(otx_ideaid)
+            if self.inx_wall in otx_ideaid:
                 return None
             otx_r_wall = self.otx_wall
             inx_r_wall = self.inx_wall
-            inx_nodeid = inx_nodeid.replace(otx_r_wall, inx_r_wall)
-            self.set_otx2inx(otx_nodeid, inx_nodeid)
+            inx_ideaid = inx_ideaid.replace(otx_r_wall, inx_r_wall)
+            self.set_otx2inx(otx_ideaid, inx_ideaid)
 
-        return self._get_inx_value(otx_nodeid)
+        return self._get_inx_value(otx_ideaid)
 
     def _is_inx_wall_inclusion_correct(self) -> bool:
         return not str_in_dict_values(self.inx_wall, self.otx2inx)
@@ -424,13 +424,13 @@ class NodeBridge(BridgeCore):
         )
 
 
-def nodebridge_shop(
+def ideabridge_shop(
     x_otx_wall: str = None,
     x_inx_wall: str = None,
     x_otx2inx: dict = None,
     x_unknown_word: str = None,
     x_face_id: OwnerID = None,
-) -> NodeBridge:
+) -> IdeaBridge:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
     if x_otx_wall is None:
@@ -438,7 +438,7 @@ def nodebridge_shop(
     if x_inx_wall is None:
         x_inx_wall = default_wall_if_none()
 
-    return NodeBridge(
+    return IdeaBridge(
         face_id=x_face_id,
         otx_wall=x_otx_wall,
         inx_wall=x_inx_wall,
@@ -447,8 +447,8 @@ def nodebridge_shop(
     )
 
 
-def get_nodebridge_from_dict(x_dict: dict) -> NodeBridge:
-    return nodebridge_shop(
+def get_ideabridge_from_dict(x_dict: dict) -> IdeaBridge:
+    return ideabridge_shop(
         x_face_id=x_dict.get("face_id"),
         x_otx_wall=x_dict.get("otx_wall"),
         x_inx_wall=x_dict.get("inx_wall"),
@@ -457,5 +457,5 @@ def get_nodebridge_from_dict(x_dict: dict) -> NodeBridge:
     )
 
 
-def get_nodebridge_from_json(x_json: str) -> NodeBridge:
-    return get_nodebridge_from_dict(get_dict_from_json(x_json))
+def get_ideabridge_from_json(x_json: str) -> IdeaBridge:
+    return get_ideabridge_from_dict(get_dict_from_json(x_json))

@@ -23,8 +23,8 @@ from src.f08_pidgin.pidgin_config import (
     otx_group_id_str,
     inx_acct_id_str,
     otx_acct_id_str,
-    inx_node_str,
-    otx_node_str,
+    inx_idea_str,
+    otx_idea_str,
     inx_road_str,
     otx_road_str,
     inx_label_str,
@@ -35,7 +35,7 @@ from src.f08_pidgin.pidgin_config import (
     bridge_otx2inx_str,
     bridge_acct_id_str,
     bridge_group_id_str,
-    bridge_node_str,
+    bridge_idea_str,
     bridge_road_str,
     bridge_nub_label_str,
 )
@@ -50,8 +50,8 @@ def test_str_functions_ReturnsObj():
     assert otx_group_id_str() == "otx_group_id"
     assert inx_acct_id_str() == "inx_acct_id"
     assert otx_acct_id_str() == "otx_acct_id"
-    assert inx_node_str() == "inx_node"
-    assert otx_node_str() == "otx_node"
+    assert inx_idea_str() == "inx_idea"
+    assert otx_idea_str() == "otx_idea"
     assert inx_road_str() == "inx_road"
     assert otx_road_str() == "otx_road"
     assert inx_label_str() == "inx_label"
@@ -61,7 +61,7 @@ def test_str_functions_ReturnsObj():
     assert otx2inx_str() == "otx2inx"
     assert bridge_acct_id_str() == "bridge_acct_id"
     assert bridge_group_id_str() == "bridge_group_id"
-    assert bridge_node_str() == "bridge_node"
+    assert bridge_idea_str() == "bridge_idea"
     assert bridge_road_str() == "bridge_road"
     assert bridge_otx2inx_str() == "bridge_otx2inx"
     assert bridge_nub_label_str() == "bridge_nub_label"
@@ -87,7 +87,7 @@ def test_get_pidgin_config_dict_ReturnsObj():
     pidgin_config_categorys = set(pidgin_config.keys())
     assert bridge_acct_id_str() in pidgin_config_categorys
     assert bridge_group_id_str() in pidgin_config_categorys
-    assert bridge_node_str() in pidgin_config_categorys
+    assert bridge_idea_str() in pidgin_config_categorys
     assert bridge_road_str() in pidgin_config_categorys
     assert bridge_nub_label_str() in pidgin_config_categorys
     assert len(pidgin_config) == 5
@@ -117,8 +117,8 @@ def _validate_pidgin_config(pidgin_config: dict):
         otx_group_id_str(),
         inx_acct_id_str(),
         otx_acct_id_str(),
-        inx_node_str(),
-        otx_node_str(),
+        inx_idea_str(),
+        otx_idea_str(),
         inx_road_str(),
         otx_road_str(),
         inx_label_str(),
@@ -153,7 +153,7 @@ def test_get_pidgin_categorys_ReturnsObj():
     # THEN
     assert bridge_acct_id_str() in pidgin_config_categorys
     assert bridge_group_id_str() in pidgin_config_categorys
-    assert bridge_node_str() in pidgin_config_categorys
+    assert bridge_idea_str() in pidgin_config_categorys
     assert bridge_road_str() in pidgin_config_categorys
     assert bridge_nub_label_str() in pidgin_config_categorys
     assert len(pidgin_config_categorys) == 5

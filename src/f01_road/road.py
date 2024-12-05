@@ -6,31 +6,31 @@ class InvalidRoadUnitException(Exception):
     pass
 
 
-class RoadNode(str):
+class IdeaUnit(str):
     """A string presentation of a tree node. Nodes cannot contain RoadUnit wall"""
 
-    def is_node(self, wall: str = None) -> bool:
+    def is_idea(self, wall: str = None) -> bool:
         return self.find(default_wall_if_none(wall)) == -1
 
 
-class FiscalID(RoadNode):  # Created to help track the concept
+class FiscalID(IdeaUnit):  # Created to help track the concept
     pass
 
 
-class OwnerID(RoadNode):  # Created to help track the concept
-    """Must be node thus not include road wall"""
+class OwnerID(IdeaUnit):  # Created to help track the concept
+    """Must be idea thus not include road wall"""
 
     pass
 
 
 class HealerID(OwnerID):
-    """A RoadNode used to identify a Problem's Healer"""
+    """A IdeaUnit used to identify a Problem's Healer"""
 
     pass
 
 
 class OwnerID(HealerID):
-    """A RoadNode used to identify a BudUnit's owner_id"""
+    """A IdeaUnit used to identify a BudUnit's owner_id"""
 
     pass
 
@@ -41,20 +41,20 @@ class AcctID(OwnerID):  # Created to help track the concept
     pass
 
 
-class TimeLineLabel(RoadNode):
-    "TimeLineLabel is required for every TimeLineUnit. It is a RoadNode that must not container the wall."
+class TimeLineLabel(IdeaUnit):
+    "TimeLineLabel is required for every TimeLineUnit. It is a IdeaUnit that must not container the wall."
 
     pass
 
 
 class RoadUnit(str):
-    """A string presentation of a tree path. RoadNodes are seperated by road wall"""
+    """A string presentation of a tree path. IdeaUnits are seperated by road wall"""
 
     pass
 
 
 class DoarUnit(str):
-    """DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. RoadNodes are seperated by road wall."""
+    """DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. IdeaUnits are seperated by road wall."""
 
     pass
 
@@ -123,47 +123,47 @@ def find_replace_road_key_dict(
     return dict_x
 
 
-def get_all_road_nodes(road: RoadUnit, wall: str = None) -> list[RoadNode]:
+def get_all_road_ideas(road: RoadUnit, wall: str = None) -> list[IdeaUnit]:
     return road.split(default_wall_if_none(wall))
 
 
-def get_terminus_node(road: RoadUnit, wall: str = None) -> RoadNode:
-    return get_all_road_nodes(road=road, wall=wall)[-1]
+def get_terminus_idea(road: RoadUnit, wall: str = None) -> IdeaUnit:
+    return get_all_road_ideas(road=road, wall=wall)[-1]
 
 
 def get_parent_road(
     road: RoadUnit, wall: str = None
-) -> RoadUnit:  # road without terminus node
-    parent_nodes = get_all_road_nodes(road=road, wall=wall)[:-1]
-    return create_road_from_nodes(parent_nodes, wall=wall)
+) -> RoadUnit:  # road without terminus idea
+    parent_ideas = get_all_road_ideas(road=road, wall=wall)[:-1]
+    return create_road_from_ideas(parent_ideas, wall=wall)
 
 
-def create_road_without_root_node(
+def create_road_without_root_idea(
     road: RoadUnit, wall: str = None
-) -> RoadUnit:  # road without terminus nodef
+) -> RoadUnit:  # road without terminus ideaf
     if road[:1] == default_wall_if_none(wall):
         raise InvalidRoadUnitException(
-            f"Cannot create_road_without_root_node of '{road}' because it has no root node."
+            f"Cannot create_road_without_root_idea of '{road}' because it has no root idea."
         )
-    road_without_root_node = create_road_from_nodes(get_all_road_nodes(road=road)[1:])
-    return f"{default_wall_if_none(wall)}{road_without_root_node}"
+    road_without_root_idea = create_road_from_ideas(get_all_road_ideas(road=road)[1:])
+    return f"{default_wall_if_none(wall)}{road_without_root_idea}"
 
 
-def get_root_node_from_road(road: RoadUnit, wall: str = None) -> RoadNode:
-    return get_all_road_nodes(road=road, wall=wall)[0]
+def get_root_idea_from_road(road: RoadUnit, wall: str = None) -> IdeaUnit:
+    return get_all_road_ideas(road=road, wall=wall)[0]
 
 
-def road_validate(road: RoadUnit, wall: str, root_node: RoadNode) -> RoadUnit:
+def road_validate(road: RoadUnit, wall: str, root_idea: IdeaUnit) -> RoadUnit:
     if road == "" or road is None:
         return RoadUnit("")
-    x_root = get_root_node_from_road(road, wall)
+    x_root = get_root_idea_from_road(road, wall)
     return (
         rebuild_road(
             subj_road=road,
             old_road=x_root,
-            new_road=root_node,
+            new_road=root_idea,
         )
-        if x_root != root_node
+        if x_root != root_idea
         else road
     )
 
@@ -171,13 +171,13 @@ def road_validate(road: RoadUnit, wall: str, root_node: RoadNode) -> RoadUnit:
 def get_ancestor_roads(road: RoadUnit) -> list[RoadUnit]:
     if road is None:
         return []
-    nodes = get_all_road_nodes(road)
-    temp_road = nodes.pop(0)
+    ideas = get_all_road_ideas(road)
+    temp_road = ideas.pop(0)
 
     temp_roads = [temp_road]
-    if nodes != []:
-        while nodes != []:
-            temp_road = create_road(temp_road, nodes.pop(0))
+    if ideas != []:
+        while ideas != []:
+            temp_road = create_road(temp_road, ideas.pop(0))
             temp_roads.append(temp_road)
 
     x_roads = []
@@ -210,24 +210,24 @@ def get_forefather_roads(road: RoadUnit) -> dict[RoadUnit]:
     return {a_road: None for a_road in ancestor_roads}
 
 
-def get_default_fiscal_id_roadnode() -> FiscalID:
+def get_default_fiscal_id_ideaunit() -> FiscalID:
     return "ZZ"
 
 
-def create_road_from_nodes(nodes: list[RoadNode], wall: str = None) -> RoadUnit:
-    return default_wall_if_none(wall).join(nodes)
+def create_road_from_ideas(ideas: list[IdeaUnit], wall: str = None) -> RoadUnit:
+    return default_wall_if_none(wall).join(ideas)
 
 
 def create_road(
-    parent_road: RoadUnit, terminus_node: RoadNode = None, wall: str = None
+    parent_road: RoadUnit, terminus_idea: IdeaUnit = None, wall: str = None
 ) -> RoadUnit:
-    if terminus_node is None:
+    if terminus_idea is None:
         return RoadUnit(parent_road)
     else:
         return RoadUnit(
-            terminus_node
+            terminus_idea
             if parent_road in {"", None}
-            else f"{parent_road}{default_wall_if_none(wall)}{terminus_node}"
+            else f"{parent_road}{default_wall_if_none(wall)}{terminus_idea}"
         )
 
 
@@ -252,36 +252,36 @@ def replace_wall(road: RoadUnit, old_wall: str, new_wall: str):
     return road.replace(old_wall, new_wall)
 
 
-class ValidateRoadNodeException(Exception):
+class ValidateIdeaUnitException(Exception):
     pass
 
 
-def is_roadnode(x_roadnode: RoadNode, x_wall: str):
-    x_roadnode = RoadNode(x_roadnode)
-    return x_roadnode.is_node(wall=x_wall)
+def is_ideaunit(x_ideaunit: IdeaUnit, x_wall: str):
+    x_ideaunit = IdeaUnit(x_ideaunit)
+    return x_ideaunit.is_idea(wall=x_wall)
 
 
-def validate_roadnode(
-    x_roadnode: RoadNode, x_wall: str, not_roadnode_required: bool = False
+def validate_ideaunit(
+    x_ideaunit: IdeaUnit, x_wall: str, not_ideaunit_required: bool = False
 ):
-    if is_roadnode(x_roadnode, x_wall) and not_roadnode_required:
-        raise ValidateRoadNodeException(
-            f"'{x_roadnode}' needs to not be a RoadNode. Must contain wall: '{x_wall}'"
+    if is_ideaunit(x_ideaunit, x_wall) and not_ideaunit_required:
+        raise ValidateIdeaUnitException(
+            f"'{x_ideaunit}' needs to not be a IdeaUnit. Must contain wall: '{x_wall}'"
         )
-    elif is_roadnode(x_roadnode, x_wall) is False and not not_roadnode_required:
-        raise ValidateRoadNodeException(
-            f"'{x_roadnode}' needs to be a RoadNode. Cannot contain wall: '{x_wall}'"
+    elif is_ideaunit(x_ideaunit, x_wall) is False and not not_ideaunit_required:
+        raise ValidateIdeaUnitException(
+            f"'{x_ideaunit}' needs to be a IdeaUnit. Cannot contain wall: '{x_wall}'"
         )
 
-    return x_roadnode
+    return x_ideaunit
 
 
 def roadunit_valid_dir_path(x_roadunit: RoadUnit, wall: str) -> bool:
-    x_road_nodes = get_all_road_nodes(x_roadunit, wall)
+    x_road_ideas = get_all_road_ideas(x_roadunit, wall)
     slash_str = "/"
-    x_road_os_path = create_road_from_nodes(x_road_nodes, wall=slash_str)
+    x_road_os_path = create_road_from_ideas(x_road_ideas, wall=slash_str)
     parts = pathlib_Path(x_road_os_path).parts
-    if len(parts) != len(x_road_nodes):
+    if len(parts) != len(x_road_ideas):
         return False
 
     return is_path_valid(x_road_os_path)
@@ -289,8 +289,8 @@ def roadunit_valid_dir_path(x_roadunit: RoadUnit, wall: str) -> bool:
 
 def get_road_from_doar(x_doarunit: DoarUnit, wall: str = None) -> RoadUnit:
     x_wall = default_wall_if_none(wall)
-    doar_nodes = get_all_road_nodes(x_doarunit, x_wall)
-    return RoadUnit(create_road_from_nodes(doar_nodes[::-1], x_wall))
+    doar_ideas = get_all_road_ideas(x_doarunit, x_wall)
+    return RoadUnit(create_road_from_ideas(doar_ideas[::-1], x_wall))
 
 
 def get_doar_from_road(x_roadunit: RoadUnit, wall: str = None) -> DoarUnit:

@@ -4,7 +4,7 @@ from src.f02_bud.examples.example_buds import (
     get_budunit_with_4_levels_and_2reasons_2facts,
 )
 from pytest import raises as pytest_raises
-from src.f01_road.road import get_default_fiscal_id_roadnode as root_label
+from src.f01_road.road import get_default_fiscal_id_ideaunit as root_label
 
 
 def test_BudUnit_edit_item_label_FailsWhenItemDoesNotExist():

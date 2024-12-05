@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_fiscal_id_roadnode
+from src.f01_road.road import get_default_fiscal_id_ideaunit
 from src.f01_road.finance_tran import TimeConversion, timeconversion_shop
 
 
@@ -29,5 +29,5 @@ def test_timeconversion_shop_ReturnObj_EmtpyParameters():
     x_timeconversion = timeconversion_shop()
 
     # THEN
-    assert x_timeconversion.fiscal_id == get_default_fiscal_id_roadnode()
+    assert x_timeconversion.fiscal_id == get_default_fiscal_id_ideaunit()
     assert x_timeconversion.addin == 0

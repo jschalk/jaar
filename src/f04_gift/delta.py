@@ -6,7 +6,7 @@ from src.f00_instrument.dict_toolbox import (
     get_all_nondictionary_objs,
     get_0_if_None,
 )
-from src.f01_road.road import RoadUnit, get_terminus_node, get_parent_road
+from src.f01_road.road import RoadUnit, get_terminus_idea, get_parent_road
 from src.f02_bud.reason_item import FactUnit, ReasonUnit
 from src.f02_bud.acct import MemberShip, AcctID, AcctUnit
 from src.f02_bud.group import MemberShip, GroupID
@@ -530,7 +530,7 @@ class DeltaUnit:
     def add_atomunit_item_deletes(self, before_bud: BudUnit, delete_item_roads: set):
         for delete_item_road in delete_item_roads:
             x_parent_road = get_parent_road(delete_item_road, before_bud._wall)
-            x_label = get_terminus_node(delete_item_road, before_bud._wall)
+            x_label = get_terminus_idea(delete_item_road, before_bud._wall)
             x_atomunit = atomunit_shop(bud_itemunit_str(), atom_delete())
             x_atomunit.set_jkey(parent_road_str(), x_parent_road)
             x_atomunit.set_jkey(label_str(), x_label)

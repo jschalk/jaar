@@ -308,7 +308,7 @@
         "jkeys": {
             "label": {
                 "column_order": 1,
-                "jaar_type": "RoadNode",
+                "jaar_type": "IdeaUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
