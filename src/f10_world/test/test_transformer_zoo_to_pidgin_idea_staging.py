@@ -14,17 +14,16 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet
-from src.f10_world.world import worldunit_shop
+from src.f10_world.transformers import etl_zoo_agg_to_pidgin_idea_staging
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario0_SingleBrick(
+def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario0_SingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -32,7 +31,8 @@ def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario0_SingleBrick(
     bob_inx = "Bobito"
     m_str = "music23"
     event7 = 7
-    br00116_file_path = create_path(fizz_world._zoo_dir, "br00116.xlsx")
+    x_zoo_dir = get_test_worlds_dir()
+    br00116_file_path = create_path(x_zoo_dir, "br00116.xlsx")
     br00116_columns = [
         face_id_str(),
         event_id_str(),
@@ -47,15 +47,11 @@ def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario0_SingleBrick(
     br00116_rows = [sue0, sue1]
     br00116_df = DataFrame(br00116_rows, columns=br00116_columns)
     upsert_sheet(br00116_file_path, "zoo_agg", br00116_df)
-    pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
-    fizz_world.zoo_agg_to_zoo_events()
-    fizz_world.zoo_events_to_events_log()
-    fizz_world.events_log_to_events_agg()
-    fizz_world.set_events_from_events_agg_file()
+    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.zoo_agg_to_idea_staging()
+    etl_zoo_agg_to_pidgin_idea_staging({event7}, x_zoo_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -85,11 +81,10 @@ def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario0_SingleBrick(
     assert get_sheet_names(pidgin_path) == [idea_staging_str]
 
 
-def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario1_MultipleBricksFiles(
+def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBricksFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -102,7 +97,8 @@ def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario1_MultipleBricksF
     event2 = 2
     event5 = 5
     event7 = 7
-    br00116_file_path = create_path(fizz_world._zoo_dir, "br00116.xlsx")
+    x_zoo_dir = get_test_worlds_dir()
+    br00116_file_path = create_path(x_zoo_dir, "br00116.xlsx")
     br00116_columns = [
         face_id_str(),
         event_id_str(),
@@ -112,7 +108,7 @@ def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario1_MultipleBricksF
         otx_idea_str(),
         inx_idea_str(),
     ]
-    br00044_file_path = create_path(fizz_world._zoo_dir, "br00044.xlsx")
+    br00044_file_path = create_path(x_zoo_dir, "br00044.xlsx")
     br00044_columns = [
         face_id_str(),
         event_id_str(),
@@ -133,15 +129,12 @@ def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario1_MultipleBricksF
     br00044_rows = [sue2, sue3, yao1]
     br00044_df = DataFrame(br00044_rows, columns=br00044_columns)
     upsert_sheet(br00044_file_path, "zoo_agg", br00044_df)
-    pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
-    fizz_world.zoo_agg_to_zoo_events()
-    fizz_world.zoo_events_to_events_log()
-    fizz_world.events_log_to_events_agg()
-    fizz_world.set_events_from_events_agg_file()
+    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.zoo_agg_to_idea_staging()
+    legitimate_events = {event1, event2, event5, event7}
+    etl_zoo_agg_to_pidgin_idea_staging(legitimate_events, x_zoo_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -176,11 +169,10 @@ def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario1_MultipleBricksF
     assert get_sheet_names(pidgin_path) == [idea_staging_str]
 
 
-def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -192,7 +184,8 @@ def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario2_WorldUnit_event
     event1 = 1
     event2 = 2
     event5 = 5
-    br00116_file_path = create_path(fizz_world._zoo_dir, "br00116.xlsx")
+    x_zoo_dir = get_test_worlds_dir()
+    br00116_file_path = create_path(x_zoo_dir, "br00116.xlsx")
     br00116_columns = [
         face_id_str(),
         event_id_str(),
@@ -202,7 +195,7 @@ def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario2_WorldUnit_event
         otx_idea_str(),
         inx_idea_str(),
     ]
-    br00044_file_path = create_path(fizz_world._zoo_dir, "br00044.xlsx")
+    br00044_file_path = create_path(x_zoo_dir, "br00044.xlsx")
     br00044_columns = [
         face_id_str(),
         event_id_str(),
@@ -223,17 +216,12 @@ def test_WorldUnit_zoo_agg_to_idea_staging_CreatesFile_Scenario2_WorldUnit_event
     br00044_rows = [sue2, sue3, yao1]
     br00044_df = DataFrame(br00044_rows, columns=br00044_columns)
     upsert_sheet(br00044_file_path, "zoo_agg", br00044_df)
-    pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
-    assert fizz_world.events == {}
-    fizz_world.zoo_agg_to_zoo_events()
-    fizz_world.zoo_events_to_events_log()
-    fizz_world.events_log_to_events_agg()
-    fizz_world.set_events_from_events_agg_file()
-    assert fizz_world.events == {event2: sue_str, event5: sue_str}
+    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
+    legitimate_events = {event2, event5}
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.zoo_agg_to_idea_staging()
+    etl_zoo_agg_to_pidgin_idea_staging(legitimate_events, x_zoo_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)

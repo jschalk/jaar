@@ -221,20 +221,25 @@ def zoo_agg_single_to_pidgin_staging(
     transformer.transform()
 
 
-def zoo_agg_to_pidgin_acct_staging(legitimate_events: set[str], zoo_dir: str):
+def etl_zoo_agg_to_pidgin_acct_staging(legitimate_events: set[str], zoo_dir: str):
     zoo_agg_single_to_pidgin_staging("bridge_acct_id", legitimate_events, zoo_dir)
 
 
-def zoo_agg_to_pidgin_group_staging(legitimate_events: set[str], zoo_dir: str):
+def etl_zoo_agg_to_pidgin_group_staging(legitimate_events: set[str], zoo_dir: str):
     zoo_agg_single_to_pidgin_staging("bridge_group_id", legitimate_events, zoo_dir)
 
 
-def zoo_agg_to_pidgin_idea_staging(legitimate_events: set[str], zoo_dir: str):
+def etl_zoo_agg_to_pidgin_idea_staging(legitimate_events: set[str], zoo_dir: str):
     zoo_agg_single_to_pidgin_staging("bridge_idea", legitimate_events, zoo_dir)
 
 
-def zoo_agg_to_pidgin_road_staging(legitimate_events: set[str], zoo_dir: str):
+def etl_zoo_agg_to_pidgin_road_staging(legitimate_events: set[str], zoo_dir: str):
     zoo_agg_single_to_pidgin_staging("bridge_road", legitimate_events, zoo_dir)
+
+
+def etl_zoo_agg_to_nub_road_staging(legitimate_events: set[str], zoo_dir: str):
+    transformer = ZooAggToNubStagingTransformer(zoo_dir, legitimate_events)
+    transformer.transform()
 
 
 class ZooAggToStagingTransformer:

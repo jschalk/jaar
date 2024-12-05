@@ -1,12 +1,5 @@
 from src.f01_road.road import default_wall_if_none, create_road
-from src.f04_gift.atom_config import (
-    acct_id_str,
-    base_str,
-    type_RoadUnit_str,
-    type_AcctID_str,
-    type_GroupID_str,
-    type_IdeaUnit_str,
-)
+from src.f04_gift.atom_config import acct_id_str, base_str, type_RoadUnit_str
 from src.f08_pidgin.bridge import (
     groupbridge_shop,
     acctbridge_shop,
