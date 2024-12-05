@@ -203,6 +203,11 @@ class WorldUnit:
         transformer = PidginStagingToAggTransformer(self._zoo_dir, pidgin_cat)
         transformer.transform()
 
+    def group_staging_to_group_agg(self):
+        pidgin_cat = "bridge_group_id"
+        transformer = PidginStagingToAggTransformer(self._zoo_dir, pidgin_cat)
+        transformer.transform()
+
     def get_dict(self) -> dict:
         return {
             "world_id": self.world_id,

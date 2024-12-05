@@ -11,6 +11,8 @@ from src.f08_pidgin.pidgin_config import (
     otx_wall_str,
     inx_acct_id_str,
     otx_acct_id_str,
+    inx_group_id_str,
+    otx_group_id_str,
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
@@ -138,6 +140,67 @@ def test_WorldUnit_acct_staging_to_faces_CreatesFile_Scenario1_SingleBrick(
     e1_acct_rows = [e1_acct0, e1_acct1]
     e1_acct_agg_df = DataFrame(e1_acct_rows, columns=acct_file_columns)
     pandas_testing_assert_frame_equal(gen_acct_agg_df, e1_acct_agg_df)
+
+
+def test_WorldUnit_group_staging_to_faces_CreatesFile_Scenario1_SingleBrick(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fizz_world = worldunit_shop("fizz")
+    sue_str = "Sue"
+    jog_str = "Jog"
+    jog_inx = "Yogging"
+    run_str = "Run"
+    run_inx = "Running"
+    event7 = 7
+    group_staging_str = "group_staging"
+    group_agg_str = "group_agg"
+    group_file_columns = [
+        "src_brick",
+        face_id_str(),
+        event_id_str(),
+        otx_group_id_str(),
+        inx_group_id_str(),
+        otx_wall_str(),
+        inx_wall_str(),
+        unknown_word_str(),
+    ]
+    bx = "br00113"
+    e1_group0 = [bx, sue_str, event7, jog_str, jog_inx, None, None, None]
+    e1_group1 = [bx, sue_str, event7, run_str, run_inx, None, None, None]
+    e1_group_rows = [e1_group0, e1_group1]
+    staging_group_df = DataFrame(e1_group_rows, columns=group_file_columns)
+    pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
+    upsert_sheet(pidgin_path, group_staging_str, staging_group_df)
+    assert os_path_exists(pidgin_path)
+    assert sheet_exists(pidgin_path, group_staging_str)
+    assert sheet_exists(pidgin_path, group_agg_str) is False
+
+    # WHEN
+    fizz_world.group_staging_to_group_agg()
+
+    # THEN
+    assert os_path_exists(pidgin_path)
+    assert sheet_exists(pidgin_path, group_agg_str)
+    gen_group_agg_df = pandas_read_excel(pidgin_path, sheet_name=group_agg_str)
+    print(f"{gen_group_agg_df=}")
+    group_file_columns = [
+        face_id_str(),
+        event_id_str(),
+        otx_group_id_str(),
+        inx_group_id_str(),
+        otx_wall_str(),
+        inx_wall_str(),
+        unknown_word_str(),
+    ]
+    assert list(gen_group_agg_df.columns) == group_file_columns
+    assert len(gen_group_agg_df) == 2
+    x_nan = float("nan")
+    e1_group0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
+    e1_group1 = [sue_str, event7, run_str, run_inx, x_nan, x_nan, x_nan]
+    e1_group_rows = [e1_group0, e1_group1]
+    e1_group_agg_df = DataFrame(e1_group_rows, columns=group_file_columns)
+    pandas_testing_assert_frame_equal(gen_group_agg_df, e1_group_agg_df)
 
 
 # def test_WorldUnit_zoo_agg_to_acct_staging_CreatesFile_Scenario1_MultipleBricksFiles(

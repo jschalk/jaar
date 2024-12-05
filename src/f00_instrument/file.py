@@ -80,6 +80,7 @@ class CouldNotOpenFileException(Exception):
 
 
 def open_file(dest_dir: str, file_name: str):
+    # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
     file_path = create_path(dest_dir, file_name)
     text_x = ""
     try:
