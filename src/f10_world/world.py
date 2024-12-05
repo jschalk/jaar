@@ -30,7 +30,11 @@ from src.f10_world.transformers import (
     ZooEventsToEventsLogTransformer,
     ZooAggToNubStagingTransformer,
     ZooAggToStagingTransformer,
-    PidginStagingToAggTransformer,
+    etl_pidgin_staging_to_agg,
+    etl_pidgin_acct_staging_to_acct_agg,
+    etl_pidgin_group_staging_to_group_agg,
+    etl_pidgin_node_staging_to_node_agg,
+    etl_pidgin_road_staging_to_road_agg,
     EventsLogToEventsAggTransformer,
 )
 from pandas import read_excel as pandas_read_excel
@@ -108,22 +112,6 @@ class WorldUnit:
     def _delete_pidginunit_dir(self, event_id: TimeLinePoint):
         delete_dir(self._pidgin_dir(event_id))
 
-    # def get_db_path(self) -> str:
-    #     return create_path(self._world_dir, "wrd.db")
-
-    # def _create_wrd_db(self):
-    #     engine = create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
-    #     brick_modelsBase.metadata.create_all(engine)
-    #     engine.dispose()
-
-    # def db_exists(self) -> bool:
-    #     return os_path_exists(self.get_db_path())
-
-    # def get_db_engine(self) -> Engine:
-    #     if self.db_exists() is False:
-    #         self._create_wrd_db()
-    #     return create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
-
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._events_dir = create_path(self._world_dir, "events")
@@ -184,11 +172,10 @@ class WorldUnit:
     def zoo_agg_to_road_staging(self):
         self.zoo_agg_to_pidgin_staging("bridge_road")
 
-    def zoo_agg_to_pidgin_staging(self, arg0):
-        pidgin_cat = arg0
+    def zoo_agg_to_pidgin_staging(self, pidgin_category: str):
         legitmate_events = set(self.events.keys())
         transformer = ZooAggToStagingTransformer(
-            self._zoo_dir, pidgin_cat, legitmate_events
+            self._zoo_dir, pidgin_category, legitmate_events
         )
         transformer.transform()
 
@@ -197,21 +184,8 @@ class WorldUnit:
         transformer = ZooAggToNubStagingTransformer(self._zoo_dir, legitmate_events)
         transformer.transform()
 
-    def acct_staging_to_acct_agg(self):
-        transformer = PidginStagingToAggTransformer(self._zoo_dir, "bridge_acct_id")
-        transformer.transform()
-
-    def group_staging_to_group_agg(self):
-        transformer = PidginStagingToAggTransformer(self._zoo_dir, "bridge_group_id")
-        transformer.transform()
-
-    def road_staging_to_road_agg(self):
-        transformer = PidginStagingToAggTransformer(self._zoo_dir, "bridge_road")
-        transformer.transform()
-
-    def node_staging_to_node_agg(self):
-        transformer = PidginStagingToAggTransformer(self._zoo_dir, "bridge_node")
-        transformer.transform()
+    def pidgin_staging_to_agg(self):
+        etl_pidgin_staging_to_agg(self._zoo_dir)
 
     def get_dict(self) -> dict:
         return {

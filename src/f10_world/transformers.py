@@ -349,6 +349,34 @@ class ZooAggToNubStagingTransformer:
                 ]
 
 
+def etl_pidgin_acct_staging_to_acct_agg(zoo_dir: str):
+    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_acct_id")
+
+
+def etl_pidgin_group_staging_to_group_agg(zoo_dir: str):
+    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_group_id")
+
+
+def etl_pidgin_road_staging_to_road_agg(zoo_dir: str):
+    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_road")
+
+
+def etl_pidgin_node_staging_to_node_agg(zoo_dir: str):
+    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_node")
+
+
+def etl_pidgin_single_staging_to_agg(zoo_dir: str, bridge_category: str):
+    transformer = PidginStagingToAggTransformer(zoo_dir, bridge_category)
+    transformer.transform()
+
+
+def etl_pidgin_staging_to_agg(zoo_dir):
+    etl_pidgin_acct_staging_to_acct_agg(zoo_dir)
+    etl_pidgin_group_staging_to_group_agg(zoo_dir)
+    etl_pidgin_road_staging_to_road_agg(zoo_dir)
+    etl_pidgin_node_staging_to_node_agg(zoo_dir)
+
+
 class PidginStagingToAggTransformer:
     def __init__(self, zoo_dir: str, pidgin_category: str):
         self.zoo_dir = zoo_dir
