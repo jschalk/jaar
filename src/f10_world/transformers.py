@@ -242,6 +242,14 @@ def etl_zoo_agg_to_nub_road_staging(legitimate_events: set[str], zoo_dir: str):
     transformer.transform()
 
 
+def etl_zoo_agg_to_pidgin_staging(legitimate_events: set[str], zoo_dir: str):
+    etl_zoo_agg_to_pidgin_acct_staging(legitimate_events, zoo_dir)
+    etl_zoo_agg_to_pidgin_group_staging(legitimate_events, zoo_dir)
+    etl_zoo_agg_to_pidgin_idea_staging(legitimate_events, zoo_dir)
+    etl_zoo_agg_to_pidgin_road_staging(legitimate_events, zoo_dir)
+    etl_zoo_agg_to_nub_road_staging(legitimate_events, zoo_dir)
+
+
 class ZooAggToStagingTransformer:
     def __init__(
         self, zoo_dir: str, pidgin_category: str, legitmate_events: set[TimeLinePoint]
