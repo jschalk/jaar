@@ -1,7 +1,7 @@
 from src.f00_instrument.file import get_dir_file_strs
 from src.f04_gift.atom_config import (
     type_AcctID_str,
-    type_RoadNode_str,
+    type_IdeaUnit_str,
     type_RoadUnit_str,
     type_GroupID_str,
     road_str,
@@ -26,18 +26,18 @@ from src.f08_pidgin.examples.example_pidgins import (
 from src.f09_brick.pidgin_toolbox import (
     get_bridge_acct_dt_columns,
     get_bridge_group_dt_columns,
-    get_bridge_node_dt_columns,
+    get_bridge_idea_dt_columns,
     get_bridge_road_dt_columns,
     get_nub_label_columns,
     create_bridge_acct_dt,
     create_bridge_group_dt,
-    create_bridge_node_dt,
+    create_bridge_idea_dt,
     create_bridge_road_dt,
     create_nub_label_dt,
     save_all_csvs_from_pidginunit,
     _load_acctbridge_from_csv,
     _load_groupbridge_from_csv,
-    _load_nodebridge_from_csv,
+    _load_ideabridge_from_csv,
     _load_roadbridge_from_csv,
     _load_nub_label_from_csv,
     _save_nub_label_csv,
@@ -83,20 +83,20 @@ def test_get_bridge_group_dt_columns_ReturnsObj():
     assert set(get_bridge_group_dt_columns()).issubset(set(sorting_columns()))
 
 
-def test_get_bridge_node_dt_columns_ReturnsObj():
+def test_get_bridge_idea_dt_columns_ReturnsObj():
     # ESTABLISH / WHEN /THEN
-    assert get_bridge_node_dt_columns()
-    assert len(get_bridge_node_dt_columns()) == 6
+    assert get_bridge_idea_dt_columns()
+    assert len(get_bridge_idea_dt_columns()) == 6
     static_list = [
         face_id_str(),
         "otx_wall",
         "inx_wall",
         "unknown_word",
-        "otx_node",
-        "inx_node",
+        "otx_idea",
+        "inx_idea",
     ]
-    assert get_bridge_node_dt_columns() == static_list
-    assert set(get_bridge_node_dt_columns()).issubset(set(sorting_columns()))
+    assert get_bridge_idea_dt_columns() == static_list
+    assert set(get_bridge_idea_dt_columns()).issubset(set(sorting_columns()))
 
 
 def test_get_bridge_road_dt_columns_ReturnsObj():
@@ -179,17 +179,17 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     bridge_dir = get_test_faces_dir()
     acct_filename = "acct.csv"
     group_filename = "group.csv"
-    node_filename = "node.csv"
+    idea_filename = "idea.csv"
     road_filename = "road.csv"
     nub_label_filename = "nub_label.csv"
     acct_csv_path = f"{bridge_dir}/{acct_filename}"
     group_csv_path = f"{bridge_dir}/{group_filename}"
-    node_csv_path = f"{bridge_dir}/{node_filename}"
+    idea_csv_path = f"{bridge_dir}/{idea_filename}"
     road_csv_path = f"{bridge_dir}/{road_filename}"
     nub_label_csv_path = f"{bridge_dir}/{nub_label_filename}"
     assert os_path_exists(acct_csv_path) is False
     assert os_path_exists(group_csv_path) is False
-    assert os_path_exists(node_csv_path) is False
+    assert os_path_exists(idea_csv_path) is False
     assert os_path_exists(road_csv_path) is False
     assert os_path_exists(nub_label_csv_path) is False
     assert len(get_dir_file_strs(bridge_dir)) == 0
@@ -200,7 +200,7 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     # THEN
     assert os_path_exists(acct_csv_path)
     assert os_path_exists(group_csv_path)
-    assert os_path_exists(node_csv_path)
+    assert os_path_exists(idea_csv_path)
     assert os_path_exists(road_csv_path)
     assert os_path_exists(nub_label_csv_path)
     assert len(get_dir_file_strs(bridge_dir)) == 5
@@ -324,6 +324,6 @@ def test_init_pidginunit_from_dir_ReturnsObj(env_dir_setup_cleanup):
     assert len(sue_pidginunit.acctbridge.otx2inx) == 3
     assert gen_pidginunit.acctbridge == sue_pidginunit.acctbridge
     assert gen_pidginunit.groupbridge == sue_pidginunit.groupbridge
-    assert gen_pidginunit.nodebridge == sue_pidginunit.nodebridge
+    assert gen_pidginunit.ideabridge == sue_pidginunit.ideabridge
     assert gen_pidginunit.roadbridge == sue_pidginunit.roadbridge
     assert gen_pidginunit == sue_pidginunit

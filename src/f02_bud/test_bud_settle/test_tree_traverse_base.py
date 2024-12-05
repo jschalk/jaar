@@ -366,10 +366,10 @@ def test_BudUnit_get_item_tree_ordered_road_list_ReturnsCorrectObj():
     assert sue_bud.get_item_tree_ordered_road_list()
 
     # WHEN
-    ordered_node_list = sue_bud.get_item_tree_ordered_road_list()
+    ordered_idea_list = sue_bud.get_item_tree_ordered_road_list()
 
     # THEN
-    assert len(ordered_node_list) == 17
+    assert len(ordered_idea_list) == 17
     x_1st_road_in_ordered_list = sue_bud.get_item_tree_ordered_road_list()[0]
     assert x_1st_road_in_ordered_list == sue_bud._fiscal_id
     x_8th_road_in_ordered_list = sue_bud.get_item_tree_ordered_road_list()[9]

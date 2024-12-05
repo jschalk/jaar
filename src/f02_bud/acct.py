@@ -6,8 +6,8 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.road import (
     AcctID,
     default_wall_if_none,
-    validate_roadnode,
-    is_roadnode,
+    validate_ideaunit,
+    is_ideaunit,
 )
 from src.f01_road.finance import default_respect_bit_if_none, RespectNum, allot_scale
 from src.f02_bud.group import (
@@ -34,7 +34,7 @@ class AcctCore:
     _respect_bit: float = None
 
     def set_acct_id(self, x_acct_id: AcctID):
-        self.acct_id = validate_roadnode(x_acct_id, self._wall)
+        self.acct_id = validate_ideaunit(x_acct_id, self._wall)
 
 
 @dataclass
@@ -162,7 +162,7 @@ class AcctUnit(AcctCore):
 
     def set_membership(self, x_membership: MemberShip):
         x_group_id = x_membership.group_id
-        group_id_is_acct_id = is_roadnode(x_group_id, self._wall)
+        group_id_is_acct_id = is_ideaunit(x_group_id, self._wall)
         if group_id_is_acct_id and self.acct_id != x_group_id:
             raise Bad_acct_idMemberShipException(
                 f"AcctUnit with acct_id='{self.acct_id}' cannot have link to '{x_group_id}'."

@@ -1,9 +1,9 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.road import (
     default_wall_if_none,
-    create_road_from_nodes,
+    create_road_from_ideas,
     create_road,
-    get_default_fiscal_id_roadnode as root_label,
+    get_default_fiscal_id_ideaunit as root_label,
 )
 from src.f01_road.finance import (
     default_respect_bit_if_none,
@@ -38,10 +38,10 @@ def test_get_keep_path_ReturnsCorrectObj():
     elpaso_str = "el paso"
     kern_str = "kern"
     itemroot = get_rootpart_of_keep_dir()
-    texas_road = create_road_from_nodes([itemroot, texas_str])
-    dallas_road = create_road_from_nodes([itemroot, texas_str, dallas_str])
-    elpaso_road = create_road_from_nodes([itemroot, texas_str, elpaso_str])
-    kern_road = create_road_from_nodes([itemroot, texas_str, elpaso_str, kern_str])
+    texas_road = create_road_from_ideas([itemroot, texas_str])
+    dallas_road = create_road_from_ideas([itemroot, texas_str, dallas_str])
+    elpaso_road = create_road_from_ideas([itemroot, texas_str, elpaso_str])
+    kern_road = create_road_from_ideas([itemroot, texas_str, elpaso_str, kern_str])
 
     # WHEN
     texas_path = get_keep_path(sue_hubunit, texas_road)
@@ -60,9 +60,9 @@ def test_get_keep_path_ReturnsCorrectObj():
     assert kern_path == create_path(elpaso_path, kern_str)
 
     # WHEN / THEN
-    diff_root_texas_road = create_road_from_nodes([peru_str, texas_str])
-    diff_root_dallas_road = create_road_from_nodes([peru_str, texas_str, dallas_str])
-    diff_root_elpaso_road = create_road_from_nodes([peru_str, texas_str, elpaso_str])
+    diff_root_texas_road = create_road_from_ideas([peru_str, texas_str])
+    diff_root_dallas_road = create_road_from_ideas([peru_str, texas_str, dallas_str])
+    diff_root_elpaso_road = create_road_from_ideas([peru_str, texas_str, elpaso_str])
     assert texas_path == get_keep_path(sue_hubunit, diff_root_texas_road)
     assert dallas_path == get_keep_path(sue_hubunit, diff_root_dallas_road)
     assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_road)
@@ -216,7 +216,7 @@ def test_hubunit_shop_RaisesErrorIf_owner_id_Contains_wall():
         hubunit_shop(None, None, owner_id=bob_str, wall=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a RoadNode. Cannot contain wall: '{slash_str}'"
+        == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain wall: '{slash_str}'"
     )
 
 

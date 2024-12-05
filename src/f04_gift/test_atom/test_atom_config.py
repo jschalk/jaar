@@ -36,7 +36,7 @@ from src.f04_gift.atom_config import (
     type_AcctID_str,
     type_GroupID_str,
     type_RoadUnit_str,
-    type_RoadNode_str,
+    type_IdeaUnit_str,
     nesting_order_str,
     column_order_str,
     get_sorted_jkey_keys,
@@ -76,7 +76,7 @@ def test_str_functions_ReturnsObj():
     assert type_AcctID_str() == "AcctID"
     assert type_GroupID_str() == "GroupID"
     assert type_RoadUnit_str() == "RoadUnit"
-    assert type_RoadNode_str() == "RoadNode"
+    assert type_IdeaUnit_str() == "IdeaUnit"
     assert road_str() == "road"
     assert acct_id_str() == "acct_id"
     assert awardee_id_str() == "awardee_id"
@@ -558,7 +558,7 @@ def test_get_allowed_jaar_types_ReturnsObj():
         "int",
         type_AcctID_str(),
         type_GroupID_str(),
-        type_RoadNode_str(),
+        type_IdeaUnit_str(),
         type_RoadUnit_str(),
         "float",
         "bool",
@@ -640,7 +640,7 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     assert x_jaar_types.get("gogo_want") == "float"
     assert x_jaar_types.get("group_id") == type_GroupID_str()
     assert x_jaar_types.get("healer_id") == type_GroupID_str()
-    assert x_jaar_types.get("label") == type_RoadNode_str()
+    assert x_jaar_types.get("label") == type_IdeaUnit_str()
     assert x_jaar_types.get("mass") == "int"
     assert x_jaar_types.get("max_tree_traverse") == "int"
     assert x_jaar_types.get("morph") == "bool"

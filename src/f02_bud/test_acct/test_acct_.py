@@ -54,7 +54,7 @@ def test_AcctUnit_set_acct_id_RaisesErrorIfParameterContains_wall():
         acctunit_shop(acct_id=texas_str, _wall=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' needs to be a RoadNode. Cannot contain wall: '{slash_str}'"
+        == f"'{texas_str}' needs to be a IdeaUnit. Cannot contain wall: '{slash_str}'"
     )
 
 

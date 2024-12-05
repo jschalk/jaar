@@ -1,4 +1,4 @@
-from src.f01_road.road import create_road, get_default_fiscal_id_roadnode as root_label
+from src.f01_road.road import create_road, get_default_fiscal_id_ideaunit as root_label
 from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.bud_tool import (
     budunit_str,

@@ -19,7 +19,6 @@ from src.f01_road.road import (
 )
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
-from src.f09_brick.pandas_tool import upsert_sheet
 from src.f09_brick.pidgin_toolbox import (
     save_all_csvs_from_pidginunit,
     init_pidginunit_from_dir,
@@ -31,7 +30,8 @@ from src.f10_world.transformers import (
     ZooEventsToEventsLogTransformer,
     ZooAggToNubStagingTransformer,
     ZooAggToStagingTransformer,
-    PidginStagingToAggTransformer,
+    etl_pidgin_staging_to_agg,
+    etl_zoo_agg_to_pidgin_staging,
     EventsLogToEventsAggTransformer,
 )
 from pandas import read_excel as pandas_read_excel
@@ -109,22 +109,6 @@ class WorldUnit:
     def _delete_pidginunit_dir(self, event_id: TimeLinePoint):
         delete_dir(self._pidgin_dir(event_id))
 
-    # def get_db_path(self) -> str:
-    #     return create_path(self._world_dir, "wrd.db")
-
-    # def _create_wrd_db(self):
-    #     engine = create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
-    #     brick_modelsBase.metadata.create_all(engine)
-    #     engine.dispose()
-
-    # def db_exists(self) -> bool:
-    #     return os_path_exists(self.get_db_path())
-
-    # def get_db_engine(self) -> Engine:
-    #     if self.db_exists() is False:
-    #         self._create_wrd_db()
-    #     return create_engine(f"sqlite:///{self.get_db_path()}", echo=False)
-
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._events_dir = create_path(self._world_dir, "events")
@@ -173,35 +157,12 @@ class WorldUnit:
             if x_note != "invalid because of conflicting event_id":
                 self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
 
-    def zoo_agg_to_acct_staging(self):
-        self.zoo_agg_to_pidgin_staging("bridge_acct_id")
+    def zoo_agg_to_pidgin_staging(self):
+        legitimate_events = set(self.events.keys())
+        etl_zoo_agg_to_pidgin_staging(legitimate_events, self._zoo_dir)
 
-    def zoo_agg_to_group_staging(self):
-        self.zoo_agg_to_pidgin_staging("bridge_group_id")
-
-    def zoo_agg_to_node_staging(self):
-        self.zoo_agg_to_pidgin_staging("bridge_node")
-
-    def zoo_agg_to_road_staging(self):
-        self.zoo_agg_to_pidgin_staging("bridge_road")
-
-    def zoo_agg_to_pidgin_staging(self, arg0):
-        pidgin_cat = arg0
-        legitmate_events = set(self.events.keys())
-        transformer = ZooAggToStagingTransformer(
-            self._zoo_dir, pidgin_cat, legitmate_events
-        )
-        transformer.transform()
-
-    def zoo_agg_to_nub_staging(self):
-        legitmate_events = set(self.events.keys())
-        transformer = ZooAggToNubStagingTransformer(self._zoo_dir, legitmate_events)
-        transformer.transform()
-
-    def acct_staging_to_acct_agg(self):
-        pidgin_cat = "bridge_acct_id"
-        transformer = PidginStagingToAggTransformer(self._zoo_dir, pidgin_cat)
-        transformer.transform()
+    def pidgin_staging_to_agg(self):
+        etl_pidgin_staging_to_agg(self._zoo_dir)
 
     def get_dict(self) -> dict:
         return {

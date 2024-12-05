@@ -23,7 +23,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Un
     assert not root_item._stop_calc
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_DoesNotErrorWhenNoMathNodes():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_DoesNotErrorWhenNoMathIdeas():
     # ESTABLISH
     yao_bud = get_budunit_with_4_levels_and_2reasons()
     root_item = yao_bud.get_item_obj(yao_bud._fiscal_id)
@@ -36,7 +36,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Do
     assert not root_item._gogo_calc
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_SimpleNode():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_SimpleIdea():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_begin = 7
@@ -59,7 +59,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Si
     assert root_item._stop_calc == time0_close
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_NodeWith_denom():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_IdeaWith_denom():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_begin = 6
@@ -91,7 +91,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_No
     assert root_item._stop_calc == 7
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_NodeWith_denom_numor():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_IdeaWith_denom_numor():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_begin = 6
@@ -126,7 +126,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_No
     assert root_item._stop_calc == 42
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_NodeWith_addin():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_IdeaWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_begin = 6
@@ -158,7 +158,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_No
     assert root_item._stop_calc == 25
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_NodeWith_denom_addin():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_IdeaWith_denom_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_begin = 6
@@ -232,7 +232,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     assert yao_bud._range_inheritors == {time1_road: time0_road}
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_NodeWith_denom():
+def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_IdeaWith_denom():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -270,7 +270,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     assert time1_item._stop_calc == 5
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_NodeWith_denom_numor():
+def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_IdeaWith_denom_numor():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -310,7 +310,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     assert time1_item._stop_calc == 15
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_NodeWith_addin():
+def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_IdeaWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -350,7 +350,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     assert time1_item._stop_calc == 12
 
 
-def test_BudUnit_set_itemtree_range_attrs_Sets2LevelsDescendentItem_gogo_calc_stop_calc_NodeWith_addin():
+def test_BudUnit_set_itemtree_range_attrs_Sets2LevelsDescendentItem_gogo_calc_stop_calc_IdeaWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -395,7 +395,7 @@ def test_BudUnit_set_itemtree_range_attrs_Sets2LevelsDescendentItem_gogo_calc_st
     assert yao_bud._range_inheritors == {time1_road: time0_road, time2_road: time0_road}
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_NodeWith_denom_addin():
+def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_IdeaWith_denom_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"

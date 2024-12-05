@@ -7,11 +7,11 @@ from src.f00_instrument.db_toolbox import create_insert_sqlstr, RowData
 from src.f01_road.finance import TimeLinePoint
 from src.f01_road.road import (
     create_road,
-    RoadNode,
+    IdeaUnit,
     RoadUnit,
     GroupID,
     AcctID,
-    is_roadnode,
+    is_ideaunit,
 )
 from src.f02_bud.reason_item import factunit_shop
 from src.f02_bud.acct import acctunit_shop
@@ -678,7 +678,7 @@ class AtomRow:
     gogo_want: float = None
     group_id: GroupID = None
     healer_id: GroupID = None
-    label: RoadNode = None
+    label: IdeaUnit = None
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
@@ -717,8 +717,8 @@ class AtomRow:
                     self.__dict__[x_arg] = GroupID(x_value)
                 elif jaar_type == "RoadUnit":
                     self.__dict__[x_arg] = RoadUnit(x_value)
-                elif jaar_type == "RoadNode":
-                    self.__dict__[x_arg] = RoadNode(x_value)
+                elif jaar_type == "IdeaUnit":
+                    self.__dict__[x_arg] = IdeaUnit(x_value)
                 elif jaar_type == "str":
                     self.__dict__[x_arg] = str(x_value)
                 elif jaar_type == "bool":
@@ -757,7 +757,7 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
     if x_parent_road != None and x_label != None:
         x_atom_reqs[road_str()] = x_bud.make_road(x_parent_road, x_label)
         x_wall = x_bud._wall
-        is_itemroot_road = is_roadnode(x_atom_reqs.get(road_str()), x_wall)
+        is_itemroot_road = is_ideaunit(x_atom_reqs.get(road_str()), x_wall)
         if is_itemroot_road is True:
             return None
 

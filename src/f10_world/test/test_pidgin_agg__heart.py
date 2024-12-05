@@ -446,35 +446,6 @@ def test_PidginHeartUnit_get_valid_pidginheartrow_ReturnsObj_Scenario3():
     assert not x_pidginheartunit.get_valid_pidginheartrow()
 
 
-def test_PidginHeartUnit_get_valid_pidginheartrow_ReturnsObj_Scenario1():
-    # ESTABLISH
-    sue_str = "Sue"
-    e55 = 55
-    uk33 = "unknown33"
-
-    # WHEN
-    x_pidginheartunit = pidginheartunit_shop(sue_str, e55, {":"}, {":", "/"}, {uk33})
-
-    # THEN
-    assert x_pidginheartunit.is_valid() is False
-    assert not x_pidginheartunit.get_valid_pidginheartrow()
-
-
-def test_PidginHeartUnit_get_valid_pidginheartrow_ReturnsObj_Scenario1():
-    # ESTABLISH
-    sue_str = "Sue"
-    e55 = 55
-    uk33 = "unknown33"
-
-    # WHEN
-    uk44 = "unknown44"
-    x_pidginheartunit = pidginheartunit_shop(sue_str, e55, {":"}, {":"}, {uk33, uk44})
-
-    # THEN
-    assert x_pidginheartunit.is_valid() is False
-    assert not x_pidginheartunit.get_valid_pidginheartrow()
-
-
 def test_PidginHeartBook_Exists():
     # ESTABLISH / WHEN
     x_pidginheartbook = PidginHeartBook()

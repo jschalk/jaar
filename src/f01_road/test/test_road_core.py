@@ -1,34 +1,34 @@
 from src.f01_road.road import (
-    RoadNode,
+    IdeaUnit,
     HealerID,
     OwnerID,
     AcctID,
     RoadUnit,
     DoarUnit,
     GroupID,
+    create_road,
+    create_road_from_ideas,
+    create_road_without_root_idea,
+    combine_roads,
     rebuild_road,
     is_sub_road,
-    get_all_road_nodes,
-    get_terminus_node,
+    get_all_road_ideas,
+    get_terminus_idea,
     find_replace_road_key_dict,
     get_parent_road,
-    create_road_without_root_node,
-    get_root_node_from_road,
+    get_root_idea_from_road,
     road_validate,
     get_ancestor_roads,
     get_forefather_roads,
-    get_default_fiscal_id_roadnode as root_label,
-    create_road_from_nodes,
-    create_road,
+    get_default_fiscal_id_ideaunit as root_label,
     get_diff_road,
-    create_road,
     is_heir_road,
     default_wall_if_none,
     replace_wall,
-    validate_roadnode,
+    validate_ideaunit,
     roadunit_valid_dir_path,
     all_roadunits_between,
-    is_roadnode,
+    is_ideaunit,
     WorldID,
     get_default_world_id,
     TimeLineLabel,
@@ -48,7 +48,7 @@ def test_HealerID_exists():
     bob_healer_id = HealerID(bob_str)
     # THEN
     assert bob_healer_id == bob_str
-    doc_str = "A RoadNode used to identify a Problem's Healer"
+    doc_str = "A IdeaUnit used to identify a Problem's Healer"
     assert inspect_getdoc(bob_healer_id) == doc_str
 
 
@@ -59,7 +59,7 @@ def test_OwnerID_exists():
     bob_owner_id = OwnerID(bob_str)
     # THEN
     assert bob_owner_id == bob_str
-    doc_str = "A RoadNode used to identify a BudUnit's owner_id"
+    doc_str = "A IdeaUnit used to identify a BudUnit's owner_id"
     assert inspect_getdoc(bob_owner_id) == doc_str
 
 
@@ -80,25 +80,34 @@ def test_GroupID_exists():
     assert str(type(bikers_group_id)).find("src.f01_road.road.GroupID") > 0
 
 
-def test_RoadNode_exists():
+def test_IdeaUnit_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_road = RoadNode(empty_str)
+    x_road = IdeaUnit(empty_str)
     # THEN
     assert x_road == empty_str
     doc_str = "A string presentation of a tree node. Nodes cannot contain RoadUnit wall"
     assert inspect_getdoc(x_road) == doc_str
 
 
-def test_Roadnode_is_node_ReturnsCorrectBool():
+def test_IdeaUnit_is_idea_ReturnsObj_Scenario0():
     # WHEN / THEN
-    assert RoadNode("").is_node()
+    assert IdeaUnit("").is_idea() is False
+    assert IdeaUnit("A").is_idea()
 
     # WHEN / THEN
     x_s = default_wall_if_none()
-    x_roadnode = RoadNode(f"casa{x_s}kitchen")
-    assert x_roadnode.is_node() is False
+    x_ideaunit = IdeaUnit(f"casa{x_s}kitchen")
+    assert x_ideaunit.is_idea() is False
+
+
+def test_IdeaUnit_is_idea_ReturnsObj_Scenario1():
+    # ESTABLISH / WHEN / THEN
+    slash_str = "/"
+    x_ideaunit = IdeaUnit(f"casa{slash_str}kitchen")
+    assert x_ideaunit.is_idea()
+    assert x_ideaunit.is_idea(slash_str) is False
 
 
 def test_RoadUnit_exists():
@@ -109,7 +118,7 @@ def test_RoadUnit_exists():
     # THEN
     assert x_road == empty_str
     doc_str = (
-        "A string presentation of a tree path. RoadNodes are seperated by road wall"
+        "A string presentation of a tree path. IdeaUnits are seperated by road wall"
     )
     assert inspect_getdoc(x_road) == doc_str
 
@@ -121,7 +130,7 @@ def test_DoarUnit_exists():
     x_road = DoarUnit(empty_str)
     # THEN
     assert x_road == empty_str
-    doc_str = "DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. RoadNodes are seperated by road wall."
+    doc_str = "DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. IdeaUnits are seperated by road wall."
     assert inspect_getdoc(x_road) == doc_str
 
 
@@ -132,7 +141,7 @@ def test_TimeLineLabel_exists():
     x_timelinelabel = TimeLineLabel(empty_str)
     # THEN
     assert x_timelinelabel == empty_str
-    doc_str = "TimeLineLabel is required for every TimeLineUnit. It is a RoadNode that must not container the wall."
+    doc_str = "TimeLineLabel is required for every TimeLineUnit. It is a IdeaUnit that must not container the wall."
     assert inspect_getdoc(x_timelinelabel) == doc_str
 
 
@@ -156,6 +165,88 @@ def test_FaceID_Exists():
 def test_get_default_face_id_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_default_face_id() == "Face1234"
+
+
+def test_create_road_ReturnsObj_Scenario0():
+    # ESTABLISH
+    rose_str = "rose"
+    semicolon_wall = ";"
+    assert semicolon_wall == default_wall_if_none()
+    semicolon_wall_rose_road = f"{root_label()}{semicolon_wall}{rose_str}"
+
+    # WHEN / THEN
+    assert create_road(root_label(), rose_str) == semicolon_wall_rose_road
+
+
+def test_create_road_ReturnsObj_Scenario1():
+    # ESTABLISH
+    rose_str = "rose"
+    slash_wall = "/"
+    slash_wall_rose_road = f"{root_label()}{slash_wall}{rose_str}"
+
+    # WHEN
+    generated_rose_road = create_road(root_label(), rose_str, wall=slash_wall)
+    # THEN
+    assert generated_rose_road == slash_wall_rose_road
+
+
+def test_create_road_ReturnsObj_Scenario2():
+    # ESTABLISH
+    rose_str = "rose"
+    slash_wall = "/"
+    slash_wall_rose_road = f"{root_label()}{slash_wall}{rose_str}"
+
+    # WHEN / THEN
+    assert create_road(root_label(), rose_str, slash_wall) == slash_wall_rose_road
+
+
+def test_combine_road_ReturnsObj_Scenario0_default_wall():
+    # ESTABLISH
+    rose_str = "rose"
+    rose_road = create_road(root_label(), rose_str)
+    casa_str = "casa"
+    clean_str = "clean"
+    clean_road = create_road(casa_str, clean_str)
+
+    # WHEN
+    gen_clean_road = combine_roads(rose_road, clean_road)
+
+    # THEN
+    example1_casa_road = create_road(rose_road, casa_str)
+    example1_clean_road = create_road(example1_casa_road, clean_str)
+    assert gen_clean_road == example1_clean_road
+
+
+def test_combine_road_ReturnsObj_Scenario1_():
+    # ESTABLISH
+    slash_str = "/"
+    rose_str = "rose"
+    rose_road = create_road(root_label(), rose_str, slash_str)
+    casa_str = "casa"
+    clean_str = "clean"
+    clean_road = create_road(casa_str, clean_str, slash_str)
+
+    # WHEN
+    gen_clean_road = combine_roads(rose_road, clean_road, slash_str)
+
+    # THEN
+    example1_casa_road = create_road(rose_road, casa_str, slash_str)
+    example1_clean_road = create_road(example1_casa_road, clean_str, slash_str)
+    assert gen_clean_road == example1_clean_road
+
+
+def test_combine_road_ReturnsObj_Scenario1_():
+    # ESTABLISH
+    slash_str = "/"
+    casa_str = "casa"
+
+    # WHEN
+    gen_casa_road = combine_roads("", casa_str, slash_str)
+
+    # THEN
+    example1_casa_road = create_road("", casa_str, slash_str)
+    assert gen_casa_road == example1_casa_road
+    assert gen_casa_road == casa_str
 
 
 def test_road_is_sub_road_correctlyReturnsBool():
@@ -191,30 +282,6 @@ def test_road_road_validate_correctlyReturnsRoadUnit():
     assert road_validate(f"AA{x_s}casa", x_s, _fiscal_id) == casa_road
 
 
-def test_road_create_road_ReturnsCorrectRoadUnitWith_wall():
-    # ESTABLISH
-    rose_str = "rose"
-    semicolon_wall = ";"
-    semicolon_wall_rose_road = f"{root_label()}{semicolon_wall}{rose_str}"
-    assert create_road(root_label(), rose_str) == semicolon_wall_rose_road
-
-    # WHEN
-    slash_wall = "/"
-    slash_wall_rose_road = f"{root_label()}{slash_wall}{rose_str}"
-    generated_rose_road = create_road(root_label(), rose_str, wall=slash_wall)
-
-    # THEN
-    assert generated_rose_road != semicolon_wall_rose_road
-    assert generated_rose_road == slash_wall_rose_road
-
-    # WHEN
-    brackets_road = create_road(root_label(), rose_str, wall=slash_wall)
-
-    # THEN
-    assert generated_rose_road == brackets_road
-    assert slash_wall_rose_road == brackets_road
-
-
 def test_road_rebuild_road_ReturnsCorrectRoadUnit():
     # ESTABLISH
     casa_str = "casa"
@@ -235,7 +302,7 @@ def test_road_rebuild_road_ReturnsCorrectRoadUnit():
     assert rebuild_road(old_roses_road, "random_str", greenery_road) == old_roses_road
 
 
-def test_road_get_all_road_nodes_ReturnsRoadNodes():
+def test_road_get_all_road_ideas_ReturnsIdeaUnits():
     # ESTABLISH
     x_s = default_wall_if_none()
     casa_str = "casa"
@@ -247,16 +314,16 @@ def test_road_get_all_road_nodes_ReturnsRoadNodes():
 
     # WHEN / THENs
     root_list = [root_label()]
-    assert get_all_road_nodes(road=root_label()) == root_list
+    assert get_all_road_ideas(road=root_label()) == root_list
     casa_list = [root_label(), casa_str]
-    assert get_all_road_nodes(road=casa_road) == casa_list
+    assert get_all_road_ideas(road=casa_road) == casa_list
     bloomers_list = [root_label(), casa_str, bloomers_str]
-    assert get_all_road_nodes(road=bloomers_road) == bloomers_list
+    assert get_all_road_ideas(road=bloomers_road) == bloomers_list
     roses_list = [root_label(), casa_str, bloomers_str, roses_str]
-    assert get_all_road_nodes(road=roses_road) == roses_list
+    assert get_all_road_ideas(road=roses_road) == roses_list
 
 
-def test_road_get_terminus_node_ReturnsRoadNode():
+def test_road_get_terminus_idea_ReturnsIdeaUnit():
     # ESTABLISH
     x_s = default_wall_if_none()
     casa_str = "casa"
@@ -267,13 +334,13 @@ def test_road_get_terminus_node_ReturnsRoadNode():
     roses_road = f"{bloomers_road}{x_s}{roses_str}"
 
     # WHEN / THENs
-    assert get_terminus_node(road=root_label()) == root_label()
-    assert get_terminus_node(road=casa_road) == casa_str
-    assert get_terminus_node(road=bloomers_road) == bloomers_str
-    assert get_terminus_node(road=roses_road) == roses_str
+    assert get_terminus_idea(road=root_label()) == root_label()
+    assert get_terminus_idea(road=casa_road) == casa_str
+    assert get_terminus_idea(road=bloomers_road) == bloomers_str
+    assert get_terminus_idea(road=roses_road) == roses_str
 
 
-def test_road_get_terminus_node_ReturnsRoadNodeWhenNonDefaultwall():
+def test_road_get_terminus_idea_ReturnsIdeaUnitWhenNonDefaultwall():
     # ESTABLISH
     casa_str = "casa"
     bloomers_str = "bloomers"
@@ -284,13 +351,13 @@ def test_road_get_terminus_node_ReturnsRoadNodeWhenNonDefaultwall():
     slash_roses_road = f"{slash_bloomers_road}{slash_str}{roses_str}"
 
     # WHEN / THENs
-    assert get_terminus_node(root_label(), slash_str) == root_label()
-    assert get_terminus_node(slash_casa_road, slash_str) == casa_str
-    assert get_terminus_node(slash_bloomers_road, slash_str) == bloomers_str
-    assert get_terminus_node(slash_roses_road, slash_str) == roses_str
+    assert get_terminus_idea(root_label(), slash_str) == root_label()
+    assert get_terminus_idea(slash_casa_road, slash_str) == casa_str
+    assert get_terminus_idea(slash_bloomers_road, slash_str) == bloomers_str
+    assert get_terminus_idea(slash_roses_road, slash_str) == roses_str
 
 
-def test_road_get_root_node_from_road_ReturnsRoadNode():
+def test_road_get_root_idea_from_road_ReturnsIdeaUnit():
     # ESTABLISH
     casa_str = "casa"
     casa_road = create_road(root_label(), casa_str)
@@ -300,10 +367,10 @@ def test_road_get_root_node_from_road_ReturnsRoadNode():
     roses_road = create_road(casa_str, roses_str)
 
     # WHEN / THENs
-    assert get_root_node_from_road(root_label()) == root_label()
-    assert get_root_node_from_road(casa_road) == root_label()
-    assert get_root_node_from_road(bloomers_road) == root_label()
-    assert get_root_node_from_road(roses_road) == casa_str
+    assert get_root_idea_from_road(root_label()) == root_label()
+    assert get_root_idea_from_road(casa_road) == root_label()
+    assert get_root_idea_from_road(bloomers_road) == root_label()
+    assert get_root_idea_from_road(roses_road) == casa_str
 
 
 def test_road_get_parent_road_ReturnsCorrectObj_Scenario0():
@@ -340,7 +407,7 @@ def test_road_get_parent_road_ReturnsCorrectObj_Scenario1():
     assert get_parent_road(roses_road, x_s) == bloomers_road
 
 
-def test_road_create_road_without_root_node_ReturnsCorrectObj():
+def test_road_create_road_without_root_idea_ReturnsCorrectObj():
     # ESTABLISH
     x_s = default_wall_if_none()
     casa_str = "casa"
@@ -354,18 +421,18 @@ def test_road_create_road_without_root_node_ReturnsCorrectObj():
     roses_without_root_road = f"{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
 
     # WHEN / THENs
-    assert create_road_without_root_node(road=root_label()) == x_s
-    assert create_road_without_root_node(road=casa_road) == casa_without_root_road
+    assert create_road_without_root_idea(road=root_label()) == x_s
+    assert create_road_without_root_idea(road=casa_road) == casa_without_root_road
     assert (
-        create_road_without_root_node(road=bloomers_road) == bloomers_without_root_road
+        create_road_without_root_idea(road=bloomers_road) == bloomers_without_root_road
     )
-    assert create_road_without_root_node(road=roses_road) == roses_without_root_road
-    road_without_node = create_road_without_root_node(road=roses_road)
+    assert create_road_without_root_idea(road=roses_road) == roses_without_root_road
+    road_without_idea = create_road_without_root_idea(road=roses_road)
     with pytest_raises(Exception) as excinfo:
-        create_road_without_root_node(road=road_without_node)
+        create_road_without_root_idea(road=road_without_idea)
     assert (
         str(excinfo.value)
-        == f"Cannot create_road_without_root_node of '{road_without_node}' because it has no root node."
+        == f"Cannot create_road_without_root_idea of '{road_without_idea}' because it has no root idea."
     )
 
 
@@ -455,29 +522,29 @@ def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     assert x_roads == texas_forefather_roads
 
 
-def test_road_get_default_fiscal_id_roadnode_ReturnsCorrectObj():
+def test_road_get_default_fiscal_id_ideaunit_ReturnsCorrectObj():
     assert root_label() == "ZZ"
 
 
-def test_road_create_road_from_nodes_ReturnsCorrectObj():
+def test_road_create_road_from_ideas_ReturnsCorrectObj():
     # ESTABLISH
     x_s = default_wall_if_none()
-    root_list = get_all_road_nodes(root_label())
+    root_list = get_all_road_ideas(root_label())
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
-    casa_list = get_all_road_nodes(casa_road)
+    casa_list = get_all_road_ideas(casa_road)
     bloomers_str = "bloomers"
     bloomers_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}"
-    bloomers_list = get_all_road_nodes(bloomers_road)
+    bloomers_list = get_all_road_ideas(bloomers_road)
     roses_str = "roses"
     roses_road = f"{root_label()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
-    roses_list = get_all_road_nodes(roses_road)
+    roses_list = get_all_road_ideas(roses_road)
 
     # WHEN / THEN
-    assert root_label() == create_road_from_nodes(root_list)
-    assert casa_road == create_road_from_nodes(casa_list)
-    assert bloomers_road == create_road_from_nodes(bloomers_list)
-    assert roses_road == create_road_from_nodes(roses_list)
+    assert root_label() == create_road_from_ideas(root_list)
+    assert casa_road == create_road_from_ideas(casa_list)
+    assert bloomers_road == create_road_from_ideas(bloomers_list)
+    assert roses_road == create_road_from_ideas(roses_list)
 
 
 def test_road_create_road_ReturnsCorrectObj():
@@ -499,16 +566,16 @@ def test_road_create_road_ReturnsCorrectObj():
     assert roses_road == create_road(roses_road, None)
 
 
-def test_is_roadnode_ReturnsObj():
+def test_is_ideaunit_ReturnsObj():
     # ESTABLISH
     x_s = default_wall_if_none()
 
     # WHEN / THEN
-    assert is_roadnode("", x_wall=x_s)
-    assert is_roadnode("casa", x_wall=x_s)
-    assert not is_roadnode(f"ZZ{x_s}casa", x_s)
-    assert not is_roadnode(RoadUnit(f"ZZ{x_s}casa"), x_s)
-    assert is_roadnode(RoadUnit("ZZ"), x_s)
+    assert is_ideaunit("", x_wall=x_s) is False
+    assert is_ideaunit("casa", x_wall=x_s)
+    assert not is_ideaunit(f"ZZ{x_s}casa", x_s)
+    assert not is_ideaunit(RoadUnit(f"ZZ{x_s}casa"), x_s)
+    assert is_ideaunit(RoadUnit("ZZ"), x_s)
 
 
 def test_get_diff_road_ReturnsCorrectObj():
@@ -617,39 +684,39 @@ def test_replace_wall_WhenNewwallIsFirstInRoadUnitRaisesError():
     )
 
 
-def test_validate_roadnode_RaisesErrorWhenNotRoadNode():
+def test_validate_ideaunit_RaisesErrorWhenNotIdeaUnit():
     # ESTABLISH
     bob_str = "Bob, Tom"
     slash_str = "/"
-    assert bob_str == validate_roadnode(bob_str, x_wall=slash_str)
+    assert bob_str == validate_ideaunit(bob_str, x_wall=slash_str)
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_str == validate_roadnode(bob_str, x_wall=comma_str)
+        bob_str == validate_ideaunit(bob_str, x_wall=comma_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a RoadNode. Cannot contain wall: '{comma_str}'"
+        == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain wall: '{comma_str}'"
     )
 
 
-def test_validate_roadnode_RaisesErrorWhenRoadNode():
+def test_validate_ideaunit_RaisesErrorWhenIdeaUnit():
     # ESTABLISH
     slash_str = "/"
     bob_str = f"Bob{slash_str}Tom"
-    assert bob_str == validate_roadnode(
-        bob_str, x_wall=slash_str, not_roadnode_required=True
+    assert bob_str == validate_ideaunit(
+        bob_str, x_wall=slash_str, not_ideaunit_required=True
     )
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_str == validate_roadnode(
-            bob_str, x_wall=comma_str, not_roadnode_required=True
+        bob_str == validate_ideaunit(
+            bob_str, x_wall=comma_str, not_ideaunit_required=True
         )
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to not be a RoadNode. Must contain wall: '{comma_str}'"
+        == f"'{bob_str}' needs to not be a IdeaUnit. Must contain wall: '{comma_str}'"
     )
 
 

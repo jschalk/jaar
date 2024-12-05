@@ -14,9 +14,9 @@ from src.f01_road.finance import (
 from src.f01_road.range_toolbox import get_morphed_rangeunit, RangeUnit
 from src.f01_road.road import (
     RoadUnit,
-    RoadNode,
+    IdeaUnit,
     is_sub_road,
-    get_default_fiscal_id_roadnode as root_label,
+    get_default_fiscal_id_ideaunit as root_label,
     all_roadunits_between,
     create_road as road_create_road,
     default_wall_if_none,
@@ -198,7 +198,7 @@ def itemattrholder_shop(
 
 @dataclass
 class ItemUnit:
-    _label: RoadNode = None
+    _label: IdeaUnit = None
     mass: int = None
     _parent_road: RoadUnit = None
     _root: bool = None
@@ -347,7 +347,7 @@ class ItemUnit:
 
     def get_kids_in_range(
         self, x_gogo: float = None, x_stop: float = None
-    ) -> dict[RoadNode,]:
+    ) -> dict[IdeaUnit,]:
         if x_gogo is None and x_stop is None:
             x_gogo = self.gogo_want
             x_gogo = self.stop_want
@@ -367,7 +367,7 @@ class ItemUnit:
                 x_dict[x_item._label] = x_item
         return x_dict
 
-    def get_obj_key(self) -> RoadNode:
+    def get_obj_key(self) -> IdeaUnit:
         return self._label
 
     def get_road(self) -> RoadUnit:
@@ -701,7 +701,7 @@ class ItemUnit:
         self._kids[item_kid._label] = item_kid
         self._kids = dict(sorted(self._kids.items()))
 
-    def get_kid(self, item_kid_label: RoadNode, if_missing_create=False):
+    def get_kid(self, item_kid_label: IdeaUnit, if_missing_create=False):
         if if_missing_create is False:
             return self._kids.get(item_kid_label)
         try:
@@ -712,7 +712,7 @@ class ItemUnit:
             return_item = self._kids.get(item_kid_label)
         return return_item
 
-    def del_kid(self, item_kid_label: RoadNode):
+    def del_kid(self, item_kid_label: IdeaUnit):
         self._kids.pop(item_kid_label)
 
     def clear_kids(self):
@@ -953,7 +953,7 @@ class ItemUnit:
 
 
 def itemunit_shop(
-    _label: RoadNode = None,
+    _label: IdeaUnit = None,
     _uid: int = None,  # Calculated field?
     _parent_road: RoadUnit = None,
     _kids: dict = None,

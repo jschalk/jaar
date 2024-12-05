@@ -1,8 +1,8 @@
 from src.f01_road.road import (
     RoadUnit,
     create_road,
-    get_default_fiscal_id_roadnode,
-    RoadNode,
+    get_default_fiscal_id_ideaunit,
+    IdeaUnit,
 )
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import BudUnit, budunit_shop
@@ -56,7 +56,7 @@ def run_str():
 
 
 def casa_road() -> RoadUnit:
-    return create_road(get_default_fiscal_id_roadnode(), casa_str())
+    return create_road(get_default_fiscal_id_ideaunit(), casa_str())
 
 
 def cook_road() -> RoadUnit:
@@ -99,7 +99,7 @@ def get_example_yao_bud() -> BudUnit:
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    yao_speaker = budunit_shop(yao_str, get_default_fiscal_id_roadnode())
+    yao_speaker = budunit_shop(yao_str, get_default_fiscal_id_ideaunit())
     yao_speaker.set_item(itemunit_shop(run_str()), casa_road())
     yao_speaker.add_acctunit(yao_str, debtit_belief=10)
     yao_speaker.add_acctunit(zia_str, debtit_belief=30)
@@ -157,34 +157,34 @@ def get_example_yao_job3_speaker() -> BudUnit:
 
 
 def get_usa_road() -> RoadUnit:
-    return create_road(get_default_fiscal_id_roadnode(), "USA")
+    return create_road(get_default_fiscal_id_ideaunit(), "USA")
 
 
-def get_iowa_str() -> RoadNode:
+def get_iowa_str() -> IdeaUnit:
     return "Iowa"
 
 
-def get_ohio_str() -> RoadNode:
+def get_ohio_str() -> IdeaUnit:
     return "Ohio"
 
 
-def get_utah_str() -> RoadNode:
+def get_utah_str() -> IdeaUnit:
     return "Utah"
 
 
-def get_swim_str() -> RoadNode:
+def get_swim_str() -> IdeaUnit:
     return "swim"
 
 
-def get_location_str() -> RoadNode:
+def get_location_str() -> IdeaUnit:
     return "location"
 
 
-def get_in_ocean_str() -> RoadNode:
+def get_in_ocean_str() -> IdeaUnit:
     return "in_ocean"
 
 
-def get_on_land_str() -> RoadNode:
+def get_on_land_str() -> IdeaUnit:
     return "on_land"
 
 
@@ -201,11 +201,11 @@ def get_utah_road() -> RoadUnit:
 
 
 def get_swim_road() -> RoadUnit:
-    return create_road(get_default_fiscal_id_roadnode(), get_swim_str())
+    return create_road(get_default_fiscal_id_ideaunit(), get_swim_str())
 
 
 def get_location_road() -> RoadUnit:
-    return create_road(get_default_fiscal_id_roadnode(), get_location_str())
+    return create_road(get_default_fiscal_id_ideaunit(), get_location_str())
 
 
 def get_in_ocean_road() -> RoadUnit:

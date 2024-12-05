@@ -217,8 +217,8 @@ def brick_format_00043_bridge_acct_id_v0_0_0() -> str:
     return "brick_format_00043_bridge_acct_id_v0_0_0"
 
 
-def brick_format_00044_bridge_node_v0_0_0() -> str:
-    return "brick_format_00044_bridge_node_v0_0_0"
+def brick_format_00044_bridge_idea_v0_0_0() -> str:
+    return "brick_format_00044_bridge_idea_v0_0_0"
 
 
 def brick_format_00045_bridge_road_v0_0_0() -> str:
@@ -237,8 +237,8 @@ def brick_format_00115_group_bridge1_v0_0_0() -> str:
     return "brick_format_00115_group_bridge1_v0_0_0"
 
 
-def brick_format_00116_node_bridge1_v0_0_0() -> str:
-    return "brick_format_00116_node_bridge1_v0_0_0"
+def brick_format_00116_idea_bridge1_v0_0_0() -> str:
+    return "brick_format_00116_idea_bridge1_v0_0_0"
 
 
 def brick_format_00117_road_bridge1_v0_0_0() -> str:
@@ -271,12 +271,12 @@ def get_brick_format_filenames() -> set[str]:
         brick_format_00041_bridge_nub_label_v0_0_0(),
         brick_format_00042_bridge_group_id_v0_0_0(),
         brick_format_00043_bridge_acct_id_v0_0_0(),
-        brick_format_00044_bridge_node_v0_0_0(),
+        brick_format_00044_bridge_idea_v0_0_0(),
         brick_format_00045_bridge_road_v0_0_0(),
         brick_format_00113_acct_bridge1_v0_0_0(),
         brick_format_00114_acct_nub_label_v0_0_0(),
         brick_format_00115_group_bridge1_v0_0_0(),
-        brick_format_00116_node_bridge1_v0_0_0(),
+        brick_format_00116_idea_bridge1_v0_0_0(),
         brick_format_00117_road_bridge1_v0_0_0(),
     }
 
@@ -350,12 +350,12 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "inx_label,inx_wall,otx_label,otx_wall,unknown_word": brick_format_00041_bridge_nub_label_v0_0_0(),
         "inx_group_id,inx_wall,otx_group_id,otx_wall,unknown_word": brick_format_00042_bridge_group_id_v0_0_0(),
         "inx_acct_id,inx_wall,otx_acct_id,otx_wall,unknown_word": brick_format_00043_bridge_acct_id_v0_0_0(),
-        "inx_node,inx_wall,otx_node,otx_wall,unknown_word": brick_format_00044_bridge_node_v0_0_0(),
+        "inx_idea,inx_wall,otx_idea,otx_wall,unknown_word": brick_format_00044_bridge_idea_v0_0_0(),
         "inx_road,inx_wall,otx_road,otx_wall,unknown_word": brick_format_00045_bridge_road_v0_0_0(),
         "acct_id,fiscal_id,inx_acct_id,otx_acct_id,owner_id": brick_format_00113_acct_bridge1_v0_0_0(),
         "acct_id,fiscal_id,inx_label,otx_label,owner_id": brick_format_00114_acct_nub_label_v0_0_0(),
         "acct_id,fiscal_id,inx_group_id,otx_group_id,owner_id": brick_format_00115_group_bridge1_v0_0_0(),
-        "acct_id,fiscal_id,inx_node,otx_node,owner_id": brick_format_00116_node_bridge1_v0_0_0(),
+        "acct_id,fiscal_id,inx_idea,otx_idea,owner_id": brick_format_00116_idea_bridge1_v0_0_0(),
         "acct_id,fiscal_id,inx_road,otx_road,owner_id": brick_format_00117_road_bridge1_v0_0_0(),
     }
 
@@ -433,8 +433,8 @@ def get_brick_elements_sort_order() -> list[str]:
         "cumlative_day",
         "weekday_label",
         "weekday_order",
-        "otx_node",
-        "inx_node",
+        "otx_idea",
+        "inx_idea",
         "otx_road",
         "inx_road",
         "otx_acct_id",
@@ -516,8 +516,8 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "otx_wall": "TEXT",
         "inx_wall": "TEXT",
         "unknown_word": "TEXT",
-        "otx_node": "TEXT",
-        "inx_node": "TEXT",
+        "otx_idea": "TEXT",
+        "inx_idea": "TEXT",
         "otx_road": "TEXT",
         "inx_road": "TEXT",
         "otx_acct_id": "TEXT",
@@ -563,7 +563,7 @@ def get_brick_category_ref() -> dict[str, set[str]]:
         "budunit": ["br00029"],
         "bridge_group_id": ["br00042", "br00115"],
         "bridge_acct_id": ["br00043", "br00113"],
-        "bridge_node": ["br00044", "br00116"],
+        "bridge_idea": ["br00044", "br00116"],
         "bridge_road": ["br00045", "br00117"],
         "bridge_nub_label": ["br00041", "br00114"],
     }

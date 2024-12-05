@@ -94,8 +94,8 @@ from src.f08_pidgin.pidgin_config import (
     otx_wall_str,
     inx_wall_str,
     unknown_word_str,
-    otx_node_str,
-    inx_node_str,
+    otx_idea_str,
+    inx_idea_str,
     otx_road_str,
     inx_road_str,
     otx_acct_id_str,
@@ -108,7 +108,7 @@ from src.f08_pidgin.pidgin_config import (
     bridge_otx2inx_str,
     bridge_acct_id_str,
     bridge_group_id_str,
-    bridge_node_str,
+    bridge_idea_str,
     bridge_road_str,
     get_pidgin_categorys,
     get_pidgin_config_dict,
@@ -228,8 +228,8 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[53] == cumlative_day_str()
     assert table_sorting_priority[54] == weekday_label_str()
     assert table_sorting_priority[55] == weekday_order_str()
-    assert table_sorting_priority[56] == otx_node_str()
-    assert table_sorting_priority[57] == inx_node_str()
+    assert table_sorting_priority[56] == otx_idea_str()
+    assert table_sorting_priority[57] == inx_idea_str()
     assert table_sorting_priority[58] == otx_road_str()
     assert table_sorting_priority[59] == inx_road_str()
     assert table_sorting_priority[60] == otx_acct_id_str()
@@ -391,7 +391,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert bridge_nub_label_str() in brick_config_categorys
     assert bridge_acct_id_str() in brick_config_categorys
     assert bridge_group_id_str() in brick_config_categorys
-    assert bridge_node_str() in brick_config_categorys
+    assert bridge_idea_str() in brick_config_categorys
     assert bridge_road_str() in brick_config_categorys
     assert get_atom_categorys().issubset(brick_config_categorys)
     assert get_fiscal_categorys().issubset(brick_config_categorys)
@@ -433,7 +433,7 @@ def _validate_brick_config(x_brick_config: dict):
             bridge_otx2inx_str(),
             bridge_group_id_str(),
             bridge_acct_id_str(),
-            bridge_node_str(),
+            bridge_idea_str(),
             bridge_road_str(),
         }:
             assert brick_dict.get(allowed_crud_str()) == insert_one_time_str()
@@ -638,7 +638,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     bo = build_order_str()
     # set_brick_config_json(bridge_acct_id_str(), 0)
     # set_brick_config_json(bridge_group_id_str(), 1)
-    # set_brick_config_json(bridge_node_str(), 2)
+    # set_brick_config_json(bridge_idea_str(), 2)
     # set_brick_config_json(bridge_road_str(), 3)
     # set_brick_config_json(bridge_nub_label_str(), 4)
     # set_brick_config_json(fiscalunit_str(), 5)
@@ -663,7 +663,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     # THEN
     assert x_brick_config.get(bridge_acct_id_str()).get(bo) == 0
     assert x_brick_config.get(bridge_group_id_str()).get(bo) == 1
-    assert x_brick_config.get(bridge_node_str()).get(bo) == 2
+    assert x_brick_config.get(bridge_idea_str()).get(bo) == 2
     assert x_brick_config.get(bridge_road_str()).get(bo) == 3
     assert x_brick_config.get(bridge_nub_label_str()).get(bo) == 4
     assert x_brick_config.get(fiscalunit_str()).get(bo) == 5

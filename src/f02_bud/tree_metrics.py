@@ -7,7 +7,7 @@ from dataclasses import dataclass
 
 @dataclass
 class TreeMetrics:
-    node_count: int = None
+    idea_count: int = None
     level_count: dict[int, int] = None
     reason_bases: dict[RoadUnit, int] = None
     awardlinks_metrics: dict[GroupID, AwardLink] = None
@@ -16,7 +16,7 @@ class TreeMetrics:
     all_item_uids_are_unique: bool = None
     last_evaluated_pledge_item_road: RoadUnit = None
 
-    def evaluate_node(
+    def evaluate_idea(
         self,
         level: int,
         reasons: dict[RoadUnit, ReasonUnit],
@@ -25,7 +25,7 @@ class TreeMetrics:
         pledge: bool,
         item_road: RoadUnit,
     ):
-        self.node_count += 1
+        self.idea_count += 1
         self.evaluate_pledge(pledge=pledge, item_road=item_road)
         self.evaluate_level(level=level)
         self.evaluate_reasonunits(reasons=reasons)
@@ -67,7 +67,7 @@ class TreeMetrics:
 
 
 def treemetrics_shop(
-    node_count: int = None,
+    idea_count: int = None,
     level_count: dict[int, int] = None,
     reason_bases: dict[RoadUnit, int] = None,
     awardlinks_metrics: dict[GroupID, AwardLink] = None,
@@ -75,7 +75,7 @@ def treemetrics_shop(
     uid_dict: dict[int, int] = None,
 ) -> TreeMetrics:
     x_treemetrics = TreeMetrics(
-        node_count=get_0_if_None(node_count),
+        idea_count=get_0_if_None(idea_count),
         level_count=get_empty_dict_if_none(level_count),
         reason_bases=get_empty_dict_if_none(reason_bases),
         awardlinks_metrics=get_empty_dict_if_none(awardlinks_metrics),

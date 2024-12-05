@@ -55,12 +55,12 @@ def otx_acct_id_str() -> str:
     return "otx_acct_id"
 
 
-def inx_node_str() -> str:
-    return "inx_node"
+def inx_idea_str() -> str:
+    return "inx_idea"
 
 
-def otx_node_str() -> str:
-    return "otx_node"
+def otx_idea_str() -> str:
+    return "otx_idea"
 
 
 def inx_road_str() -> str:
@@ -103,8 +103,8 @@ def bridge_group_id_str() -> str:
     return "bridge_group_id"
 
 
-def bridge_node_str() -> str:
-    return "bridge_node"
+def bridge_idea_str() -> str:
+    return "bridge_idea"
 
 
 def bridge_road_str() -> str:
@@ -169,12 +169,12 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "otx_wall",
             "otx_acct_id",
         },
-        "bridge_node": {
-            "inx_node",
+        "bridge_idea": {
+            "inx_idea",
             "unknown_word",
             "inx_wall",
             "otx_wall",
-            "otx_node",
+            "otx_idea",
         },
         "bridge_road": {
             "inx_road",

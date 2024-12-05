@@ -4,7 +4,7 @@ from src.f08_pidgin.pidgin import (
     pidginunit_shop,
     AcctBridge,
     GroupBridge,
-    NodeBridge,
+    IdeaBridge,
     RoadBridge,
 )
 from src.f09_brick.pandas_tool import get_ordered_csv, open_csv
@@ -33,14 +33,14 @@ def get_bridge_group_dt_columns() -> list[str]:
     ]
 
 
-def get_bridge_node_dt_columns() -> list[str]:
+def get_bridge_idea_dt_columns() -> list[str]:
     return [
         "face_id",
         "otx_wall",
         "inx_wall",
         "unknown_word",
-        "otx_node",
-        "inx_node",
+        "otx_idea",
+        "inx_idea",
     ]
 
 
@@ -96,19 +96,19 @@ def create_bridge_group_dt(x_bridge: GroupBridge) -> DataFrame:
     return DataFrame(x_rows_list, columns=get_bridge_group_dt_columns())
 
 
-def create_bridge_node_dt(x_bridge: NodeBridge) -> DataFrame:
+def create_bridge_idea_dt(x_bridge: IdeaBridge) -> DataFrame:
     x_rows_list = [
         {
             "face_id": x_bridge.face_id,
             "otx_wall": x_bridge.otx_wall,
             "inx_wall": x_bridge.inx_wall,
             "unknown_word": x_bridge.unknown_word,
-            "otx_node": otx_value,
-            "inx_node": inx_value,
+            "otx_idea": otx_value,
+            "inx_idea": inx_value,
         }
         for otx_value, inx_value in x_bridge.otx2inx.items()
     ]
-    return DataFrame(x_rows_list, columns=get_bridge_node_dt_columns())
+    return DataFrame(x_rows_list, columns=get_bridge_idea_dt_columns())
 
 
 def create_bridge_road_dt(x_bridge: RoadBridge) -> DataFrame:
@@ -144,7 +144,7 @@ def create_nub_label_dt(x_roadbridge: RoadBridge) -> DataFrame:
 def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
     _save_bridge_acct_csv(x_dir, x_pidginunit.acctbridge)
     _save_bridge_group_csv(x_dir, x_pidginunit.groupbridge)
-    _save_bridge_node_csv(x_dir, x_pidginunit.nodebridge)
+    _save_bridge_idea_csv(x_dir, x_pidginunit.ideabridge)
     _save_bridge_road_csv(x_dir, x_pidginunit.roadbridge)
     _save_nub_label_csv(x_dir, x_pidginunit.roadbridge)
 
@@ -159,9 +159,9 @@ def _save_bridge_group_csv(x_dir: str, groupbridge: GroupBridge):
     save_file(x_dir, "group.csv", get_ordered_csv(x_dt))
 
 
-def _save_bridge_node_csv(x_dir: str, nodebridge: NodeBridge):
-    x_dt = create_bridge_node_dt(nodebridge)
-    save_file(x_dir, "node.csv", get_ordered_csv(x_dt))
+def _save_bridge_idea_csv(x_dir: str, ideabridge: IdeaBridge):
+    x_dt = create_bridge_idea_dt(ideabridge)
+    save_file(x_dir, "idea.csv", get_ordered_csv(x_dt))
 
 
 def _save_bridge_road_csv(x_dir: str, roadbridge: RoadBridge):
@@ -194,14 +194,14 @@ def _load_groupbridge_from_csv(x_dir, x_groupbridge: GroupBridge) -> GroupBridge
     return x_groupbridge
 
 
-def _load_nodebridge_from_csv(x_dir, x_nodebridge: NodeBridge) -> NodeBridge:
-    otx2inx_dt = open_csv(x_dir, "node.csv")
+def _load_ideabridge_from_csv(x_dir, x_ideabridge: IdeaBridge) -> IdeaBridge:
+    otx2inx_dt = open_csv(x_dir, "idea.csv")
     for table_row in otx2inx_dt.to_dict("records"):
-        otx_value = table_row.get("otx_node")
-        inx_value = table_row.get("inx_node")
-        if x_nodebridge.otx2inx_exists(otx_value, inx_value) is False:
-            x_nodebridge.set_otx2inx(otx_value, inx_value)
-    return x_nodebridge
+        otx_value = table_row.get("otx_idea")
+        inx_value = table_row.get("inx_idea")
+        if x_ideabridge.otx2inx_exists(otx_value, inx_value) is False:
+            x_ideabridge.set_otx2inx(otx_value, inx_value)
+    return x_ideabridge
 
 
 def _load_roadbridge_from_csv(x_dir, x_roadbridge: RoadBridge) -> RoadBridge:
@@ -267,7 +267,7 @@ def init_pidginunit_from_dir(x_dir: str) -> PidginUnit:
     x_pidginunit = create_dir_valid_empty_pidginunit(x_dir)
     _load_acctbridge_from_csv(x_dir, x_pidginunit.acctbridge)
     _load_groupbridge_from_csv(x_dir, x_pidginunit.groupbridge)
-    _load_nodebridge_from_csv(x_dir, x_pidginunit.nodebridge)
+    _load_ideabridge_from_csv(x_dir, x_pidginunit.ideabridge)
     _load_roadbridge_from_csv(x_dir, x_pidginunit.roadbridge)
     _load_nub_label_from_csv(x_dir, x_pidginunit.roadbridge)
     return x_pidginunit

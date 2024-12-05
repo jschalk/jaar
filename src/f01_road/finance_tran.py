@@ -11,7 +11,7 @@ from src.f00_instrument.dict_toolbox import (
     del_in_nested_dict,
 )
 from src.f01_road.finance import FundNum, TimeLinePoint, default_fund_pool
-from src.f01_road.road import AcctID, OwnerID, FiscalID, get_default_fiscal_id_roadnode
+from src.f01_road.road import AcctID, OwnerID, FiscalID, get_default_fiscal_id_ideaunit
 from dataclasses import dataclass
 
 
@@ -344,7 +344,7 @@ def timeconversion_shop(
     fiscal_id: FiscalID = None, addin: int = None
 ) -> TimeConversion:
     if fiscal_id is None:
-        fiscal_id = get_default_fiscal_id_roadnode()
+        fiscal_id = get_default_fiscal_id_ideaunit()
     if addin is None:
         addin = 0
     return TimeConversion(fiscal_id=fiscal_id, addin=addin)

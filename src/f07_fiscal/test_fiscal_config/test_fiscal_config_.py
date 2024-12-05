@@ -20,7 +20,7 @@ from src.f04_gift.atom_config import (
     jaar_type_str,
     type_AcctID_str,
     type_GroupID_str,
-    type_RoadNode_str,
+    type_IdeaUnit_str,
     type_RoadUnit_str,
 )
 from src.f07_fiscal.fiscal_config import (
@@ -133,7 +133,7 @@ def _validate_fiscal_config(fiscal_config: dict):
         type_RoadUnit_str(),
         type_AcctID_str(),
         type_GroupID_str(),
-        type_RoadNode_str(),
+        type_IdeaUnit_str(),
         "int",
         "TimeLinePoint",
         "FiscalID",

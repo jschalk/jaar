@@ -28,15 +28,15 @@ from src.f01_road.road import (
     all_roadunits_between,
     road_validate,
     rebuild_road,
-    get_terminus_node,
-    get_root_node_from_road,
+    get_terminus_idea,
+    get_root_idea_from_road,
     get_ancestor_roads,
-    get_default_fiscal_id_roadnode,
-    get_all_road_nodes,
+    get_default_fiscal_id_ideaunit,
+    get_all_road_ideas,
     get_forefather_roads,
     create_road,
     default_wall_if_none,
-    RoadNode,
+    IdeaUnit,
     RoadUnit,
     is_string_in_road,
     OwnerID,
@@ -188,17 +188,17 @@ class BudUnit:
     def make_road(
         self,
         parent_road: RoadUnit = None,
-        terminus_node: RoadNode = None,
+        terminus_idea: IdeaUnit = None,
     ) -> RoadUnit:
         x_road = create_road(
             parent_road=parent_road,
-            terminus_node=terminus_node,
+            terminus_idea=terminus_idea,
             wall=self._wall,
         )
         return road_validate(x_road, self._wall, self._fiscal_id)
 
-    def make_l1_road(self, l1_node: RoadNode):
-        return self.make_road(self._fiscal_id, l1_node)
+    def make_l1_road(self, l1_idea: IdeaUnit):
+        return self.make_road(self._fiscal_id, l1_idea)
 
     def set_wall(self, new_wall: str):
         self.settle_bud()
@@ -238,7 +238,7 @@ class BudUnit:
             to_evaluate_hx_dict[x_road] = "to_evaluate"
         evaluated_roads = set()
 
-        # while roads_to_evaluate != [] and count_x <= tree_metrics.node_count:
+        # while roads_to_evaluate != [] and count_x <= tree_metrics.idea_count:
         # Why count_x? because count_x might be wrong thing to measure
         # nice to avoid infinite loops from programming errors though...
         while to_evaluate_list != []:
@@ -497,7 +497,7 @@ class BudUnit:
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
         tree_metrics = treemetrics_shop()
-        tree_metrics.evaluate_node(
+        tree_metrics.evaluate_idea(
             level=self._itemroot._level,
             reasons=self._itemroot.reasonunits,
             awardlinks=self._itemroot.awardlinks,
@@ -517,7 +517,7 @@ class BudUnit:
 
     def _eval_tree_metrics(self, parent_item, item_kid, tree_metrics, x_item_list):
         item_kid._level = parent_item._level + 1
-        tree_metrics.evaluate_node(
+        tree_metrics.evaluate_idea(
             level=item_kid._level,
             reasons=item_kid.reasonunits,
             awardlinks=item_kid.awardlinks,
@@ -569,7 +569,7 @@ class BudUnit:
     def add_item(
         self, item_road: RoadUnit, mass: float = None, pledge: bool = None
     ) -> ItemUnit:
-        x_label = get_terminus_node(item_road, self._wall)
+        x_label = get_terminus_idea(item_road, self._wall)
         x_parent_road = get_parent_road(item_road, self._wall)
         x_itemunit = itemunit_shop(x_label, mass=mass)
         if pledge:
@@ -606,13 +606,13 @@ class BudUnit:
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        if RoadNode(item_kid._label).is_node(self._wall) is False:
-            x_str = f"set_item failed because '{item_kid._label}' is not a RoadNode."
+        if IdeaUnit(item_kid._label).is_idea(self._wall) is False:
+            x_str = f"set_item failed because '{item_kid._label}' is not a IdeaUnit."
             raise InvalidBudException(x_str)
 
-        x_root_node = get_root_node_from_road(parent_road, self._wall)
-        if self._itemroot._label != x_root_node:
-            exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root node"
+        x_root_idea = get_root_idea_from_road(parent_road, self._wall)
+        if self._itemroot._label != x_root_idea:
+            exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root idea"
             raise InvalidBudException(exception_str)
 
         item_kid._wall = self._wall
@@ -691,7 +691,7 @@ class BudUnit:
             if not del_children:
                 self._shift_item_kids(x_road=road)
             parent_item = self.get_item_obj(parent_road)
-            parent_item.del_kid(get_terminus_node(road, self._wall))
+            parent_item.del_kid(get_terminus_idea(road, self._wall))
         self.settle_bud()
 
     def _shift_item_kids(self, x_road: RoadUnit):
@@ -703,7 +703,7 @@ class BudUnit:
     def set_owner_id(self, new_owner_id):
         self._owner_id = new_owner_id
 
-    def edit_item_label(self, old_road: RoadUnit, new_label: RoadNode):
+    def edit_item_label(self, old_road: RoadUnit, new_label: IdeaUnit):
         if self._wall in new_label:
             exception_str = f"Cannot modify '{old_road}' because new_label {new_label} contains wall {self._wall}"
             raise InvalidLabelException(exception_str)
@@ -724,13 +724,13 @@ class BudUnit:
             self._itemroot_find_replace_road(old_road=old_road, new_road=new_road)
 
     def _non_root_item_label_edit(
-        self, old_road: RoadUnit, new_label: RoadNode, parent_road: RoadUnit
+        self, old_road: RoadUnit, new_label: IdeaUnit, parent_road: RoadUnit
     ):
         x_item = self.get_item_obj(old_road)
         x_item.set_label(new_label)
         x_item._parent_road = parent_road
         item_parent = self.get_item_obj(get_parent_road(old_road))
-        item_parent._kids.pop(get_terminus_node(old_road, self._wall))
+        item_parent._kids.pop(get_terminus_idea(old_road, self._wall))
         item_parent._kids[x_item._label] = x_item
 
     def _itemroot_find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
@@ -977,21 +977,21 @@ class BudUnit:
     def item_exists(self, road: RoadUnit) -> bool:
         if road is None:
             return False
-        root_road_label = get_root_node_from_road(road, wall=self._wall)
+        root_road_label = get_root_idea_from_road(road, wall=self._wall)
         if root_road_label != self._itemroot._label:
             return False
 
-        nodes = get_all_road_nodes(road, wall=self._wall)
-        root_road_label = nodes.pop(0)
-        if nodes == []:
+        ideas = get_all_road_ideas(road, wall=self._wall)
+        root_road_label = ideas.pop(0)
+        if ideas == []:
             return True
 
-        item_label = nodes.pop(0)
+        item_label = ideas.pop(0)
         x_item = self._itemroot.get_kid(item_label)
         if x_item is None:
             return False
-        while nodes != []:
-            item_label = nodes.pop(0)
+        while ideas != []:
+            item_label = ideas.pop(0)
             x_item = x_item.get_kid(item_label)
             if x_item is None:
                 return False
@@ -1002,15 +1002,15 @@ class BudUnit:
             raise InvalidBudException("get_item_obj received road=None")
         if self.item_exists(road) is False and not if_missing_create:
             raise InvalidBudException(f"get_item_obj failed. no item at '{road}'")
-        roadnodes = get_all_road_nodes(road, wall=self._wall)
-        if len(roadnodes) == 1:
+        ideaunits = get_all_road_ideas(road, wall=self._wall)
+        if len(ideaunits) == 1:
             return self._itemroot
 
-        roadnodes.pop(0)
-        item_label = roadnodes.pop(0)
+        ideaunits.pop(0)
+        item_label = ideaunits.pop(0)
         x_item = self._itemroot.get_kid(item_label, if_missing_create)
-        while roadnodes != []:
-            x_item = x_item.get_kid(roadnodes.pop(0), if_missing_create)
+        while ideaunits != []:
+            x_item = x_item.get_kid(ideaunits.pop(0), if_missing_create)
 
         return x_item
 
@@ -1315,14 +1315,14 @@ class BudUnit:
         self, no_range_descendants: bool = False
     ) -> list[RoadUnit]:
         item_list = list(self.get_item_dict().values())
-        node_dict = {item.get_road().lower(): item.get_road() for item in item_list}
-        node_lowercase_ordered_list = sorted(list(node_dict))
-        node_orginalcase_ordered_list = [
-            node_dict[node_l] for node_l in node_lowercase_ordered_list
+        idea_dict = {item.get_road().lower(): item.get_road() for item in item_list}
+        idea_lowercase_ordered_list = sorted(list(idea_dict))
+        idea_orginalcase_ordered_list = [
+            idea_dict[idea_l] for idea_l in idea_lowercase_ordered_list
         ]
 
         list_x = []
-        for road in node_orginalcase_ordered_list:
+        for road in idea_orginalcase_ordered_list:
             if not no_range_descendants:
                 list_x.append(road)
             else:
@@ -1407,7 +1407,7 @@ def budunit_shop(
     tally: float = None,
 ) -> BudUnit:
     _owner_id = "" if _owner_id is None else _owner_id
-    _fiscal_id = get_default_fiscal_id_roadnode() if _fiscal_id is None else _fiscal_id
+    _fiscal_id = get_default_fiscal_id_ideaunit() if _fiscal_id is None else _fiscal_id
     x_bud = BudUnit(
         _owner_id=_owner_id,
         tally=get_1_if_None(tally),

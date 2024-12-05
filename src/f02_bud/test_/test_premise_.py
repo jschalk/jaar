@@ -6,7 +6,7 @@ from src.f02_bud.reason_item import (
     premises_get_from_dict,
 )
 from src.f01_road.road import (
-    get_default_fiscal_id_roadnode as root_label,
+    get_default_fiscal_id_ideaunit as root_label,
     create_road,
     find_replace_road_key_dict,
 )

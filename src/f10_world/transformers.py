@@ -29,6 +29,65 @@ class not_given_pidgin_category_Exception(Exception):
     pass
 
 
+def get_jaar_type(pidgin_category: str) -> str:
+    if pidgin_category == "bridge_acct_id":
+        return "AcctID"
+    elif pidgin_category == "bridge_group_id":
+        return "GroupID"
+    elif pidgin_category == "bridge_idea":
+        return "IdeaUnit"
+    elif pidgin_category == "bridge_road":
+        return "RoadUnit"
+    else:
+        raise not_given_pidgin_category_Exception("not given pidgin_category")
+
+
+def get_sheet_stage_name(jaar_type) -> str:
+    if jaar_type == "AcctID":
+        return "acct_staging"
+    elif jaar_type == "GroupID":
+        return "group_staging"
+    elif jaar_type == "IdeaUnit":
+        return "idea_staging"
+    elif jaar_type == "RoadUnit":
+        return "road_staging"
+
+
+def get_sheet_agg_name(jaar_type) -> str:
+    if jaar_type == "AcctID":
+        return "acct_agg"
+    elif jaar_type == "GroupID":
+        return "group_agg"
+    elif jaar_type == "IdeaUnit":
+        return "idea_agg"
+    elif jaar_type == "RoadUnit":
+        return "road_agg"
+
+
+def get_otx_obj(jaar_type, x_row) -> str:
+    if jaar_type == "AcctID":
+        return x_row["otx_acct_id"]
+    elif jaar_type == "GroupID":
+        return x_row["otx_group_id"]
+    elif jaar_type == "IdeaUnit":
+        return x_row["otx_idea"]
+    elif jaar_type == "RoadUnit":
+        return x_row["otx_road"]
+    return None
+
+
+def get_inx_obj(jaar_type, x_row) -> str:
+    if jaar_type == "AcctID":
+        return x_row["inx_acct_id"]
+    elif jaar_type == "GroupID":
+        return x_row["inx_group_id"]
+    elif jaar_type == "IdeaUnit":
+        return x_row["inx_idea"]
+    elif jaar_type == "RoadUnit":
+        return x_row["inx_road"]
+    return None
+
+
 class JungleToZooTransformer:
     def __init__(self, jungle_dir: str, zoo_dir: str):
         self.jungle_dir = jungle_dir
@@ -154,6 +213,43 @@ class EventsLogToEventsAggTransformer:
         upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
+def zoo_agg_single_to_pidgin_staging(
+    pidgin_category: str, legitimate_events: set[int], zoo_dir: str
+):
+    x_events = legitimate_events
+    transformer = ZooAggToStagingTransformer(zoo_dir, pidgin_category, x_events)
+    transformer.transform()
+
+
+def etl_zoo_agg_to_pidgin_acct_staging(legitimate_events: set[str], zoo_dir: str):
+    zoo_agg_single_to_pidgin_staging("bridge_acct_id", legitimate_events, zoo_dir)
+
+
+def etl_zoo_agg_to_pidgin_group_staging(legitimate_events: set[str], zoo_dir: str):
+    zoo_agg_single_to_pidgin_staging("bridge_group_id", legitimate_events, zoo_dir)
+
+
+def etl_zoo_agg_to_pidgin_idea_staging(legitimate_events: set[str], zoo_dir: str):
+    zoo_agg_single_to_pidgin_staging("bridge_idea", legitimate_events, zoo_dir)
+
+
+def etl_zoo_agg_to_pidgin_road_staging(legitimate_events: set[str], zoo_dir: str):
+    zoo_agg_single_to_pidgin_staging("bridge_road", legitimate_events, zoo_dir)
+
+
+def etl_zoo_agg_to_nub_road_staging(legitimate_events: set[str], zoo_dir: str):
+    transformer = ZooAggToNubStagingTransformer(zoo_dir, legitimate_events)
+    transformer.transform()
+
+
+def etl_zoo_agg_to_pidgin_staging(legitimate_events: set[str], zoo_dir: str):
+    etl_zoo_agg_to_pidgin_acct_staging(legitimate_events, zoo_dir)
+    etl_zoo_agg_to_pidgin_group_staging(legitimate_events, zoo_dir)
+    etl_zoo_agg_to_pidgin_idea_staging(legitimate_events, zoo_dir)
+    etl_zoo_agg_to_pidgin_road_staging(legitimate_events, zoo_dir)
+    etl_zoo_agg_to_nub_road_staging(legitimate_events, zoo_dir)
+
+
 class ZooAggToStagingTransformer:
     def __init__(
         self, zoo_dir: str, pidgin_category: str, legitmate_events: set[TimeLinePoint]
@@ -161,16 +257,7 @@ class ZooAggToStagingTransformer:
         self.zoo_dir = zoo_dir
         self.legitmate_events = legitmate_events
         self.pidgin_category = pidgin_category
-        if self.pidgin_category == "bridge_acct_id":
-            self.jaar_type = "AcctID"
-        elif self.pidgin_category == "bridge_group_id":
-            self.jaar_type = "GroupID"
-        elif self.pidgin_category == "bridge_node":
-            self.jaar_type = "RoadNode"
-        elif self.pidgin_category == "bridge_road":
-            self.jaar_type = "RoadUnit"
-        else:
-            raise not_given_pidgin_category_Exception("not given pidgin_category")
+        self.jaar_type = get_jaar_type(pidgin_category)
 
     def transform(self):
         category_bricks = get_brick_category_ref().get(self.pidgin_category)
@@ -188,7 +275,7 @@ class ZooAggToStagingTransformer:
                 )
 
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
-        upsert_sheet(pidgin_file_path, self.get_sheet_staging_name(), pidgin_df)
+        upsert_sheet(pidgin_file_path, get_sheet_stage_name(self.jaar_type), pidgin_df)
 
     def insert_staging_rows(
         self,
@@ -218,41 +305,20 @@ class ZooAggToStagingTransformer:
                     brick_number,
                     face_id,
                     event_id,
-                    self.get_otx_obj(x_row),
+                    get_otx_obj(self.jaar_type, x_row),
                     self.get_inx_obj(x_row, df_missing_cols),
                     otx_wall,
                     inx_wall,
                     unknown_word,
                 ]
 
-    def get_sheet_staging_name(self) -> str:
-        if self.jaar_type == "AcctID":
-            return "acct_staging"
-        elif self.jaar_type == "GroupID":
-            return "group_staging"
-        elif self.jaar_type == "RoadNode":
-            return "node_staging"
-        elif self.jaar_type == "RoadUnit":
-            return "road_staging"
-
-    def get_otx_obj(self, x_row) -> str:
-        if self.jaar_type == "AcctID":
-            return x_row["otx_acct_id"]
-        elif self.jaar_type == "GroupID":
-            return x_row["otx_group_id"]
-        elif self.jaar_type == "RoadNode":
-            return x_row["otx_node"]
-        elif self.jaar_type == "RoadUnit":
-            return x_row["otx_road"]
-        return None
-
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
         if self.jaar_type == "AcctID" and "inx_acct_id" not in missing_col:
             return x_row["inx_acct_id"]
         elif self.jaar_type == "GroupID" and "inx_group_id" not in missing_col:
             return x_row["inx_group_id"]
-        elif self.jaar_type == "RoadNode" and "inx_node" not in missing_col:
-            return x_row["inx_node"]
+        elif self.jaar_type == "IdeaUnit" and "inx_idea" not in missing_col:
+            return x_row["inx_idea"]
         elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
             return x_row["inx_road"]
         return None
@@ -320,21 +386,40 @@ class ZooAggToNubStagingTransformer:
                 ]
 
 
+def etl_pidgin_acct_staging_to_acct_agg(zoo_dir: str):
+    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_acct_id")
+
+
+def etl_pidgin_group_staging_to_group_agg(zoo_dir: str):
+    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_group_id")
+
+
+def etl_pidgin_road_staging_to_road_agg(zoo_dir: str):
+    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_road")
+
+
+def etl_pidgin_idea_staging_to_idea_agg(zoo_dir: str):
+    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_idea")
+
+
+def etl_pidgin_single_staging_to_agg(zoo_dir: str, bridge_category: str):
+    transformer = PidginStagingToAggTransformer(zoo_dir, bridge_category)
+    transformer.transform()
+
+
+def etl_pidgin_staging_to_agg(zoo_dir):
+    etl_pidgin_acct_staging_to_acct_agg(zoo_dir)
+    etl_pidgin_group_staging_to_group_agg(zoo_dir)
+    etl_pidgin_road_staging_to_road_agg(zoo_dir)
+    etl_pidgin_idea_staging_to_idea_agg(zoo_dir)
+
+
 class PidginStagingToAggTransformer:
     def __init__(self, zoo_dir: str, pidgin_category: str):
         self.zoo_dir = zoo_dir
         self.pidgin_category = pidgin_category
         self.file_path = create_path(self.zoo_dir, "pidgin.xlsx")
-        if self.pidgin_category == "bridge_acct_id":
-            self.jaar_type = "AcctID"
-        elif self.pidgin_category == "bridge_group_id":
-            self.jaar_type = "GroupID"
-        elif self.pidgin_category == "bridge_node":
-            self.jaar_type = "RoadNode"
-        elif self.pidgin_category == "bridge_road":
-            self.jaar_type = "RoadUnit"
-        else:
-            raise not_given_pidgin_category_Exception("not given pidgin_category")
+        self.jaar_type = get_jaar_type(self.pidgin_category)
 
     def transform(self):
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
@@ -342,17 +427,14 @@ class PidginStagingToAggTransformer:
         pidgin_columns = get_new_sorting_columns(pidgin_columns)
         pidgin_agg_df = DataFrame(columns=pidgin_columns)
         self.insert_agg_rows(pidgin_agg_df)
-        upsert_sheet(self.file_path, "acct_agg", pidgin_agg_df)
+        upsert_sheet(self.file_path, get_sheet_agg_name(self.jaar_type), pidgin_agg_df)
 
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
         pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
-        staging_df = pandas_read_excel(pidgin_file_path, sheet_name="acct_staging")
-        print(f"{staging_df=}")
-
+        stage_sheet_name = get_sheet_stage_name(self.jaar_type)
+        staging_df = pandas_read_excel(pidgin_file_path, sheet_name=stage_sheet_name)
         x_pidginbodybook = self.get_validated_pidginbodybook(staging_df)
-        print(f"{x_pidginbodybook=}")
         for pidginbodylist in x_pidginbodybook.get_valid_pidginbodylists():
-            print(f"{len(pidgin_agg_df)=} {pidgin_agg_df.index=} {pidginbodylist=}")
             pidgin_agg_df.loc[len(pidgin_agg_df)] = pidginbodylist
 
     def get_validated_pidginbodybook(self, staging_df: DataFrame) -> PidginBodyBook:
@@ -362,8 +444,8 @@ class PidginStagingToAggTransformer:
             x_pidginbodyrow = PidginBodyRow(
                 event_id=x_row["event_id"],
                 face_id=x_row["face_id"],
-                otx_str=self.get_otx_obj(x_row),
-                inx_str=self.get_inx_obj(x_row),
+                otx_str=get_otx_obj(self.jaar_type, x_row),
+                inx_str=get_inx_obj(self.jaar_type, x_row),
             )
             x_pidginbodybook.eval_pidginbodyrow(x_pidginbodyrow)
         return x_pidginbodybook
@@ -380,35 +462,3 @@ class PidginStagingToAggTransformer:
             )
             x_pidginheartbook.eval_pidginheartrow(x_pidginheartrow)
         return x_pidginheartbook
-
-    def get_otx_obj(self, x_row) -> str:
-        if self.jaar_type == "AcctID":
-            return x_row["otx_acct_id"]
-        elif self.jaar_type == "GroupID":
-            return x_row["otx_group_id"]
-        elif self.jaar_type == "RoadNode":
-            return x_row["otx_node"]
-        elif self.jaar_type == "RoadUnit":
-            return x_row["otx_road"]
-        return None
-
-    def get_inx_obj(self, x_row) -> str:
-        if self.jaar_type == "AcctID":
-            return x_row["inx_acct_id"]
-        elif self.jaar_type == "GroupID":
-            return x_row["inx_group_id"]
-        elif self.jaar_type == "RoadNode":
-            return x_row["inx_node"]
-        elif self.jaar_type == "RoadUnit":
-            return x_row["inx_road"]
-        return None
-
-    def get_sheet_agg_name(self) -> str:
-        if self.jaar_type == "AcctID":
-            return "acct_agg"
-        elif self.jaar_type == "GroupID":
-            return "group_agg"
-        elif self.jaar_type == "RoadNode":
-            return "node_agg"
-        elif self.jaar_type == "RoadUnit":
-            return "road_agg"

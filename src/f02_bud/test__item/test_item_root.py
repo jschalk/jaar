@@ -1,5 +1,5 @@
 from src.f02_bud.item import itemunit_shop
-from src.f01_road.road import get_default_fiscal_id_roadnode as root_label
+from src.f01_road.road import get_default_fiscal_id_ideaunit as root_label
 from pytest import raises as pytest_raises
 
 
@@ -15,7 +15,7 @@ def test_itemunit_shop_With_root_TrueReturnsObj():
     assert x_itemroot._root is True
 
 
-def test_ItemUnit_set_label_get_default_fiscal_id_roadnode_DoesNotRaisesError():
+def test_ItemUnit_set_label_get_default_fiscal_id_ideaunit_DoesNotRaisesError():
     # ESTABLISH
     x_itemroot = itemunit_shop(_root=True)
 

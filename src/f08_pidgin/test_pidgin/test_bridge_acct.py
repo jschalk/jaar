@@ -251,31 +251,31 @@ def test_AcctBridge_get_dict_ReturnsObj():
     sue_str = "Sue"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
-    roadnode_acctbridge = acctbridge_shop(
+    ideaunit_acctbridge = acctbridge_shop(
         x_otx_wall=slash_otx_wall,
         x_inx_wall=colon_inx_wall,
         x_face_id=sue_str,
     )
     x1_road_bridge_dict = {
-        "otx_wall": roadnode_acctbridge.otx_wall,
-        "inx_wall": roadnode_acctbridge.inx_wall,
-        "unknown_word": roadnode_acctbridge.unknown_word,
+        "otx_wall": ideaunit_acctbridge.otx_wall,
+        "inx_wall": ideaunit_acctbridge.inx_wall,
+        "unknown_word": ideaunit_acctbridge.unknown_word,
         "otx2inx": {},
-        "face_id": roadnode_acctbridge.face_id,
+        "face_id": ideaunit_acctbridge.face_id,
     }
-    assert roadnode_acctbridge.get_dict() == x1_road_bridge_dict
+    assert ideaunit_acctbridge.get_dict() == x1_road_bridge_dict
 
     # WHEN
-    roadnode_acctbridge.set_otx2inx(clean_otx, clean_inx)
+    ideaunit_acctbridge.set_otx2inx(clean_otx, clean_inx)
     # THEN
     x2_road_bridge_dict = {
-        "otx_wall": roadnode_acctbridge.otx_wall,
-        "inx_wall": roadnode_acctbridge.inx_wall,
-        "unknown_word": roadnode_acctbridge.unknown_word,
+        "otx_wall": ideaunit_acctbridge.otx_wall,
+        "inx_wall": ideaunit_acctbridge.inx_wall,
+        "unknown_word": ideaunit_acctbridge.unknown_word,
         "otx2inx": {clean_otx: clean_inx},
         "face_id": sue_str,
     }
-    assert roadnode_acctbridge.get_dict() == x2_road_bridge_dict
+    assert ideaunit_acctbridge.get_dict() == x2_road_bridge_dict
 
 
 def test_AcctBridge_get_json_ReturnsObj():
@@ -286,33 +286,33 @@ def test_AcctBridge_get_json_ReturnsObj():
     casa_otx = "casa1"
     casa_inx = "casa2"
     slash_otx_wall = "/"
-    roadnode_acctbridge = acctbridge_shop("RoadNode", slash_otx_wall, x_face_id=sue_str)
+    ideaunit_acctbridge = acctbridge_shop("IdeaUnit", slash_otx_wall, x_face_id=sue_str)
     x1_road_bridge_json = f"""{{
   "face_id": "{sue_str}",
-  "inx_wall": "{roadnode_acctbridge.inx_wall}",
+  "inx_wall": "{ideaunit_acctbridge.inx_wall}",
   "otx2inx": {{}},
-  "otx_wall": "{roadnode_acctbridge.otx_wall}",
-  "unknown_word": "{roadnode_acctbridge.unknown_word}"
+  "otx_wall": "{ideaunit_acctbridge.otx_wall}",
+  "unknown_word": "{ideaunit_acctbridge.unknown_word}"
 }}"""
     print(f"           {x1_road_bridge_json=}")
-    print(f"{roadnode_acctbridge.get_json()=}")
-    assert roadnode_acctbridge.get_json() == x1_road_bridge_json
+    print(f"{ideaunit_acctbridge.get_json()=}")
+    assert ideaunit_acctbridge.get_json() == x1_road_bridge_json
 
     # WHEN
-    roadnode_acctbridge.set_otx2inx(clean_otx, clean_inx)
+    ideaunit_acctbridge.set_otx2inx(clean_otx, clean_inx)
     # THEN
     x2_road_bridge_json = f"""{{
   "face_id": "{sue_str}",
-  "inx_wall": "{roadnode_acctbridge.inx_wall}",
+  "inx_wall": "{ideaunit_acctbridge.inx_wall}",
   "otx2inx": {{
     "{clean_otx}": "{clean_inx}"
   }},
-  "otx_wall": "{roadnode_acctbridge.otx_wall}",
-  "unknown_word": "{roadnode_acctbridge.unknown_word}"
+  "otx_wall": "{ideaunit_acctbridge.otx_wall}",
+  "unknown_word": "{ideaunit_acctbridge.unknown_word}"
 }}"""
     print(f"           {x2_road_bridge_json=}")
-    print(f"{roadnode_acctbridge.get_json()=}")
-    assert roadnode_acctbridge.get_json() == x2_road_bridge_json
+    print(f"{ideaunit_acctbridge.get_json()=}")
+    assert ideaunit_acctbridge.get_json() == x2_road_bridge_json
 
 
 def test_get_acctbridge_from_dict_ReturnsObj():
@@ -321,15 +321,15 @@ def test_get_acctbridge_from_dict_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     slash_otx_wall = "/"
-    roadnode_acctbridge = acctbridge_shop(slash_otx_wall, x_face_id=sue_str)
-    roadnode_acctbridge.set_otx2inx(clean_otx, clean_inx)
+    ideaunit_acctbridge = acctbridge_shop(slash_otx_wall, x_face_id=sue_str)
+    ideaunit_acctbridge.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
-    gen_acctbridge = get_acctbridge_from_dict(roadnode_acctbridge.get_dict())
+    gen_acctbridge = get_acctbridge_from_dict(ideaunit_acctbridge.get_dict())
 
     # THEN
-    assert gen_acctbridge.face_id == roadnode_acctbridge.face_id
-    assert gen_acctbridge == roadnode_acctbridge
+    assert gen_acctbridge.face_id == ideaunit_acctbridge.face_id
+    assert gen_acctbridge == ideaunit_acctbridge
 
 
 def test_get_acctbridge_from_json_ReturnsObj():
@@ -337,14 +337,14 @@ def test_get_acctbridge_from_json_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     slash_otx_wall = "/"
-    roadnode_acctbridge = acctbridge_shop(slash_otx_wall)
-    roadnode_acctbridge.set_otx2inx(clean_otx, clean_inx)
+    ideaunit_acctbridge = acctbridge_shop(slash_otx_wall)
+    ideaunit_acctbridge.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
-    x_acctbridge = get_acctbridge_from_json(roadnode_acctbridge.get_json())
+    x_acctbridge = get_acctbridge_from_json(ideaunit_acctbridge.get_json())
 
     # THEN
-    assert x_acctbridge == roadnode_acctbridge
+    assert x_acctbridge == ideaunit_acctbridge
 
 
 def test_AcctBridge_is_inx_wall_inclusion_correct_ReturnsObj():

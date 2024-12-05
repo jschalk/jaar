@@ -1,20 +1,13 @@
 from src.f01_road.road import default_wall_if_none, create_road
-from src.f04_gift.atom_config import (
-    acct_id_str,
-    base_str,
-    type_RoadUnit_str,
-    type_AcctID_str,
-    type_GroupID_str,
-    type_RoadNode_str,
-)
+from src.f04_gift.atom_config import acct_id_str, base_str, type_RoadUnit_str
 from src.f08_pidgin.bridge import (
     groupbridge_shop,
     acctbridge_shop,
-    nodebridge_shop,
+    ideabridge_shop,
     roadbridge_shop,
     GroupBridge,
     AcctBridge,
-    NodeBridge,
+    IdeaBridge,
     RoadBridge,
 )
 from src.f08_pidgin.pidgin import (
@@ -25,15 +18,15 @@ from src.f08_pidgin.pidgin import (
 from pandas import DataFrame
 
 
-def get_clean_nodebridge() -> NodeBridge:
+def get_clean_ideabridge() -> IdeaBridge:
     clean_otx = "clean"
     clean_inx = "propre"
     casa_otx = "casa1"
     casa_inx = "casa2"
-    nodebridge = nodebridge_shop(x_face_id="Sue")
-    nodebridge.set_otx2inx(clean_otx, clean_inx)
-    nodebridge.set_otx2inx(casa_otx, casa_inx)
-    return nodebridge
+    ideabridge = ideabridge_shop(x_face_id="Sue")
+    ideabridge.set_otx2inx(clean_otx, clean_inx)
+    ideabridge.set_otx2inx(casa_otx, casa_inx)
+    return ideabridge
 
 
 def get_clean_roadbridge() -> RoadBridge:
@@ -103,10 +96,10 @@ def get_suita_acctbridge() -> AcctBridge:
 #     clean_inx = "propre"
 #     casa_otx = f"casa{default_wall_if_none()}"
 #     casa_inx = "casa"
-#     nodebridge = bridgeunit_shop(type_RoadNode_str(), x_face_id="Sue")
-#     nodebridge.set_otx2inx(clean_str, clean_inx)
-#     nodebridge.set_otx2inx(casa_otx, casa_inx)
-#     return nodebridge
+#     ideabridge = bridgeunit_shop(type_IdeaUnit_str(), x_face_id="Sue")
+#     ideabridge.set_otx2inx(clean_str, clean_inx)
+#     ideabridge.set_otx2inx(casa_otx, casa_inx)
+#     return ideabridge
 
 
 def get_slash_roadbridge() -> RoadBridge:
@@ -177,7 +170,7 @@ def get_sue_pidginunit() -> PidginUnit:
     sue_pidginunit = pidginunit_shop("Sue")
     sue_pidginunit.set_acctbridge(get_suita_acctbridge())
     sue_pidginunit.set_groupbridge(get_swim_groupbridge())
-    sue_pidginunit.set_nodebridge(get_clean_nodebridge())
+    sue_pidginunit.set_ideabridge(get_clean_ideabridge())
     sue_pidginunit.set_roadbridge(get_clean_roadbridge())
     return sue_pidginunit
 
@@ -362,7 +355,7 @@ def get_invalid_groupbridge() -> GroupBridge:
     return x_groupbridge
 
 
-def get_invalid_nodebridge() -> RoadBridge:
+def get_invalid_ideabridge() -> RoadBridge:
     clean_str = "clean"
     clean_inx = "propre"
     casa_otx = f"casa{default_wall_if_none()}"
@@ -395,7 +388,7 @@ def get_slash_roadbridge() -> RoadBridge:
     return x_roadbridge
 
 
-def get_slash_nodebridge() -> NodeBridge:
+def get_slash_ideabridge() -> IdeaBridge:
     otx_music45_str = "music45"
     inx_music87_str = "music87"
     clean_otx_str = "clean"
@@ -403,16 +396,16 @@ def get_slash_nodebridge() -> NodeBridge:
     x_unknown_word = "UnknownAcctId"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
-    x_nodebridge = nodebridge_shop(
+    x_ideabridge = ideabridge_shop(
         x_otx_wall=slash_otx_wall,
         x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
     )
-    x_nodebridge.set_otx2inx(otx_music45_str, inx_music87_str)
-    x_nodebridge.set_otx2inx(clean_otx_str, clean_inx_str)
-    x_nodebridge.reveal_inx("running")
-    return x_nodebridge
+    x_ideabridge.set_otx2inx(otx_music45_str, inx_music87_str)
+    x_ideabridge.set_otx2inx(clean_otx_str, clean_inx_str)
+    x_ideabridge.reveal_inx("running")
+    return x_ideabridge
 
 
 def get_slash_groupbridge() -> GroupBridge:

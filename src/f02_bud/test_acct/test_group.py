@@ -1,6 +1,6 @@
 from src.f01_road.finance import default_fund_coin_if_none
 from src.f01_road.road import (
-    get_default_fiscal_id_roadnode as root_label,
+    get_default_fiscal_id_ideaunit as root_label,
     create_road,
     default_wall_if_none,
 )
@@ -79,7 +79,7 @@ def test_groupunit_shop_ReturnsCorrectObj_wall():
 #         groupunit_shop(bob_str, _acct_mirror=True, _wall=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{bob_str}' needs to be a RoadNode. Cannot contain wall: '{slash_str}'"
+#         == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain wall: '{slash_str}'"
 #     )
 
 
