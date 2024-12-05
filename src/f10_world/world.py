@@ -19,7 +19,6 @@ from src.f01_road.road import (
 )
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
-from src.f09_brick.pandas_tool import upsert_sheet
 from src.f09_brick.pidgin_toolbox import (
     save_all_csvs_from_pidginunit,
     init_pidginunit_from_dir,
@@ -199,13 +198,19 @@ class WorldUnit:
         transformer.transform()
 
     def acct_staging_to_acct_agg(self):
-        pidgin_cat = "bridge_acct_id"
-        transformer = PidginStagingToAggTransformer(self._zoo_dir, pidgin_cat)
+        transformer = PidginStagingToAggTransformer(self._zoo_dir, "bridge_acct_id")
         transformer.transform()
 
     def group_staging_to_group_agg(self):
-        pidgin_cat = "bridge_group_id"
-        transformer = PidginStagingToAggTransformer(self._zoo_dir, pidgin_cat)
+        transformer = PidginStagingToAggTransformer(self._zoo_dir, "bridge_group_id")
+        transformer.transform()
+
+    def road_staging_to_road_agg(self):
+        transformer = PidginStagingToAggTransformer(self._zoo_dir, "bridge_road")
+        transformer.transform()
+
+    def node_staging_to_node_agg(self):
+        transformer = PidginStagingToAggTransformer(self._zoo_dir, "bridge_node")
         transformer.transform()
 
     def get_dict(self) -> dict:
