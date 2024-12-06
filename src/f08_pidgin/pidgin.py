@@ -261,29 +261,33 @@ def pidginunit_shop(
         unknown_word=x_unknown_word,
         otx_wall=x_otx_wall,
         inx_wall=x_inx_wall,
-        groupbridge=groupbridge_shop(
-            x_otx_wall=x_otx_wall,
-            x_inx_wall=x_inx_wall,
-            x_unknown_word=x_unknown_word,
-            x_face_id=x_face_id,
-        ),
         acctbridge=acctbridge_shop(
+            x_face_id=x_face_id,
+            x_event_id=x_event_id,
             x_otx_wall=x_otx_wall,
             x_inx_wall=x_inx_wall,
             x_unknown_word=x_unknown_word,
+        ),
+        groupbridge=groupbridge_shop(
             x_face_id=x_face_id,
+            x_event_id=x_event_id,
+            x_otx_wall=x_otx_wall,
+            x_inx_wall=x_inx_wall,
+            x_unknown_word=x_unknown_word,
         ),
         ideabridge=ideabridge_shop(
+            x_face_id=x_face_id,
+            x_event_id=x_event_id,
             x_otx_wall=x_otx_wall,
             x_inx_wall=x_inx_wall,
             x_unknown_word=x_unknown_word,
-            x_face_id=x_face_id,
         ),
         roadbridge=roadbridge_shop(
+            x_face_id=x_face_id,
+            x_event_id=x_event_id,
             x_otx_wall=x_otx_wall,
             x_inx_wall=x_inx_wall,
             x_unknown_word=x_unknown_word,
-            x_face_id=x_face_id,
         ),
     )
 

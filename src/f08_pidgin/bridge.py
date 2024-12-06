@@ -9,7 +9,9 @@ from src.f00_instrument.dict_toolbox import (
     str_in_all_dict_values,
     get_json_from_dict,
     get_dict_from_json,
+    get_0_if_None,
 )
+from src.f01_road.finance import TimeLinePoint
 from src.f01_road.road import (
     default_wall_if_none,
     get_all_road_ideas,
@@ -20,7 +22,7 @@ from src.f01_road.road import (
     is_ideaunit,
     RoadUnit,
     IdeaUnit,
-    OwnerID,
+    FaceID,
 )
 from dataclasses import dataclass
 from copy import copy as copy_copy
@@ -36,7 +38,8 @@ class set_nub_label_Exception(Exception):
 
 @dataclass
 class BridgeCore:
-    face_id: OwnerID = None
+    face_id: FaceID = None
+    event_id: TimeLinePoint = None
     otx2inx: dict = None
     unknown_word: str = None
     otx_wall: str = None
@@ -57,6 +60,7 @@ class BridgeCore:
     def get_dict(self) -> dict:
         return {
             "face_id": self.face_id,
+            "event_id": self.event_id,
             "otx_wall": self.otx_wall,
             "inx_wall": self.inx_wall,
             "unknown_word": self.unknown_word,
@@ -65,84 +69,6 @@ class BridgeCore:
 
     def get_json(self) -> str:
         return get_json_from_dict(self.get_dict())
-
-
-class GroupBridge(BridgeCore):
-    def set_otx2inx(self, otx_groupid: str, inx_groupid: str):
-        self.otx2inx[otx_groupid] = inx_groupid
-
-    def _get_inx_value(self, otx_groupid: str) -> str:
-        return self.otx2inx.get(otx_groupid)
-
-    def otx2inx_exists(self, otx_groupid: str, inx_groupid: str) -> bool:
-        return self._get_inx_value(otx_groupid) == inx_groupid
-
-    def otx_exists(self, otx_groupid: str) -> bool:
-        return self._get_inx_value(otx_groupid) != None
-
-    def del_otx2inx(self, otx_groupid: str):
-        self.otx2inx.pop(otx_groupid)
-
-    def reveal_inx(self, otx_groupid: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_groupid) is False:
-            inx_groupid = copy_copy(otx_groupid)
-            if self.inx_wall in otx_groupid:
-                return None
-            otx_r_wall = self.otx_wall
-            inx_r_wall = self.inx_wall
-            inx_groupid = inx_groupid.replace(otx_r_wall, inx_r_wall)
-            self.set_otx2inx(otx_groupid, inx_groupid)
-
-        return self._get_inx_value(otx_groupid)
-
-    def _is_inx_wall_inclusion_correct(self):
-        return str_in_all_dict_values(self.inx_wall, self.otx2inx)
-
-    def _is_otx_wall_inclusion_correct(self):
-        return str_in_all_dict_keys(self.otx_wall, self.otx2inx)
-
-    def is_valid(self):
-        return (
-            self._is_otx_wall_inclusion_correct()
-            and self._is_inx_wall_inclusion_correct()
-        )
-
-
-def groupbridge_shop(
-    x_otx_wall: str = None,
-    x_inx_wall: str = None,
-    x_otx2inx: dict = None,
-    x_unknown_word: str = None,
-    x_face_id: OwnerID = None,
-) -> GroupBridge:
-    if x_unknown_word is None:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall is None:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall is None:
-        x_inx_wall = default_wall_if_none()
-
-    return GroupBridge(
-        face_id=x_face_id,
-        otx_wall=x_otx_wall,
-        inx_wall=x_inx_wall,
-        unknown_word=x_unknown_word,
-        otx2inx=get_empty_dict_if_none(x_otx2inx),
-    )
-
-
-def get_groupbridge_from_dict(x_dict: dict) -> GroupBridge:
-    return groupbridge_shop(
-        x_face_id=x_dict.get("face_id"),
-        x_otx_wall=x_dict.get("otx_wall"),
-        x_inx_wall=x_dict.get("inx_wall"),
-        x_otx2inx=x_dict.get("otx2inx"),
-        x_unknown_word=x_dict.get("unknown_word"),
-    )
-
-
-def get_groupbridge_from_json(x_json: str) -> GroupBridge:
-    return get_groupbridge_from_dict(get_dict_from_json(x_json))
 
 
 class AcctBridge(BridgeCore):
@@ -191,7 +117,8 @@ def acctbridge_shop(
     x_inx_wall: str = None,
     x_otx2inx: dict = None,
     x_unknown_word: str = None,
-    x_face_id: OwnerID = None,
+    x_face_id: FaceID = None,
+    x_event_id: TimeLinePoint = None,
 ) -> AcctBridge:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
@@ -202,6 +129,7 @@ def acctbridge_shop(
 
     return AcctBridge(
         face_id=x_face_id,
+        event_id=get_0_if_None(x_event_id),
         otx_wall=x_otx_wall,
         inx_wall=x_inx_wall,
         unknown_word=x_unknown_word,
@@ -212,6 +140,7 @@ def acctbridge_shop(
 def get_acctbridge_from_dict(x_dict: dict) -> AcctBridge:
     return acctbridge_shop(
         x_face_id=x_dict.get("face_id"),
+        x_event_id=x_dict.get("event_id"),
         x_otx_wall=x_dict.get("otx_wall"),
         x_inx_wall=x_dict.get("inx_wall"),
         x_otx2inx=x_dict.get("otx2inx"),
@@ -223,6 +152,87 @@ def get_acctbridge_from_json(x_json: str) -> AcctBridge:
     return get_acctbridge_from_dict(get_dict_from_json(x_json))
 
 
+class GroupBridge(BridgeCore):
+    def set_otx2inx(self, otx_groupid: str, inx_groupid: str):
+        self.otx2inx[otx_groupid] = inx_groupid
+
+    def _get_inx_value(self, otx_groupid: str) -> str:
+        return self.otx2inx.get(otx_groupid)
+
+    def otx2inx_exists(self, otx_groupid: str, inx_groupid: str) -> bool:
+        return self._get_inx_value(otx_groupid) == inx_groupid
+
+    def otx_exists(self, otx_groupid: str) -> bool:
+        return self._get_inx_value(otx_groupid) != None
+
+    def del_otx2inx(self, otx_groupid: str):
+        self.otx2inx.pop(otx_groupid)
+
+    def reveal_inx(self, otx_groupid: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_groupid) is False:
+            inx_groupid = copy_copy(otx_groupid)
+            if self.inx_wall in otx_groupid:
+                return None
+            otx_r_wall = self.otx_wall
+            inx_r_wall = self.inx_wall
+            inx_groupid = inx_groupid.replace(otx_r_wall, inx_r_wall)
+            self.set_otx2inx(otx_groupid, inx_groupid)
+
+        return self._get_inx_value(otx_groupid)
+
+    def _is_inx_wall_inclusion_correct(self):
+        return str_in_all_dict_values(self.inx_wall, self.otx2inx)
+
+    def _is_otx_wall_inclusion_correct(self):
+        return str_in_all_dict_keys(self.otx_wall, self.otx2inx)
+
+    def is_valid(self):
+        return (
+            self._is_otx_wall_inclusion_correct()
+            and self._is_inx_wall_inclusion_correct()
+        )
+
+
+def groupbridge_shop(
+    x_otx_wall: str = None,
+    x_inx_wall: str = None,
+    x_otx2inx: dict = None,
+    x_unknown_word: str = None,
+    x_face_id: FaceID = None,
+    x_event_id: TimeLinePoint = None,
+) -> GroupBridge:
+    if x_unknown_word is None:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall is None:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall is None:
+        x_inx_wall = default_wall_if_none()
+
+    return GroupBridge(
+        face_id=x_face_id,
+        event_id=get_0_if_None(x_event_id),
+        otx_wall=x_otx_wall,
+        inx_wall=x_inx_wall,
+        unknown_word=x_unknown_word,
+        otx2inx=get_empty_dict_if_none(x_otx2inx),
+    )
+
+
+def get_groupbridge_from_dict(x_dict: dict) -> GroupBridge:
+    return groupbridge_shop(
+        x_face_id=x_dict.get("face_id"),
+        x_event_id=x_dict.get("event_id"),
+        x_otx_wall=x_dict.get("otx_wall"),
+        x_inx_wall=x_dict.get("inx_wall"),
+        x_otx2inx=x_dict.get("otx2inx"),
+        x_unknown_word=x_dict.get("unknown_word"),
+    )
+
+
+def get_groupbridge_from_json(x_json: str) -> GroupBridge:
+    return get_groupbridge_from_dict(get_dict_from_json(x_json))
+
+
 @dataclass
 class RoadBridge:
     otx2inx: dict = None
@@ -230,7 +240,8 @@ class RoadBridge:
     otx_wall: str = None
     inx_wall: str = None
     nub_label: dict = None
-    face_id: OwnerID = None
+    face_id: FaceID = None
+    event_id: TimeLinePoint = None
 
     def set_all_otx2inx(
         self, x_otx2inx: dict, raise_exception_if_invalid: bool = False
@@ -332,6 +343,7 @@ class RoadBridge:
     def get_dict(self) -> dict:
         return {
             "face_id": self.face_id,
+            "event_id": self.event_id,
             "otx_wall": self.otx_wall,
             "inx_wall": self.inx_wall,
             "unknown_word": self.unknown_word,
@@ -349,7 +361,8 @@ def roadbridge_shop(
     x_nub_label: dict = None,
     x_otx2inx: dict = None,
     x_unknown_word: str = None,
-    x_face_id: OwnerID = None,
+    x_face_id: FaceID = None,
+    x_event_id: TimeLinePoint = None,
 ) -> RoadBridge:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
@@ -365,12 +378,14 @@ def roadbridge_shop(
         inx_wall=x_inx_wall,
         nub_label=get_empty_dict_if_none(x_nub_label),
         face_id=x_face_id,
+        event_id=get_0_if_None(x_event_id),
     )
 
 
 def get_roadbridge_from_dict(x_dict: dict) -> RoadBridge:
     return roadbridge_shop(
         x_face_id=x_dict.get("face_id"),
+        x_event_id=x_dict.get("event_id"),
         x_otx_wall=x_dict.get("otx_wall"),
         x_inx_wall=x_dict.get("inx_wall"),
         x_otx2inx=x_dict.get("otx2inx"),
@@ -429,7 +444,8 @@ def ideabridge_shop(
     x_inx_wall: str = None,
     x_otx2inx: dict = None,
     x_unknown_word: str = None,
-    x_face_id: OwnerID = None,
+    x_face_id: FaceID = None,
+    x_event_id: TimeLinePoint = None,
 ) -> IdeaBridge:
     if x_unknown_word is None:
         x_unknown_word = default_unknown_word()
@@ -440,6 +456,7 @@ def ideabridge_shop(
 
     return IdeaBridge(
         face_id=x_face_id,
+        event_id=get_0_if_None(x_event_id),
         otx_wall=x_otx_wall,
         inx_wall=x_inx_wall,
         unknown_word=x_unknown_word,
@@ -450,6 +467,7 @@ def ideabridge_shop(
 def get_ideabridge_from_dict(x_dict: dict) -> IdeaBridge:
     return ideabridge_shop(
         x_face_id=x_dict.get("face_id"),
+        x_event_id=x_dict.get("event_id"),
         x_otx_wall=x_dict.get("otx_wall"),
         x_inx_wall=x_dict.get("inx_wall"),
         x_otx2inx=x_dict.get("otx2inx"),
