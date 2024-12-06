@@ -1,9 +1,4 @@
-from src.f00_instrument.file import (
-    set_dir,
-    create_path,
-    get_dir_file_strs,
-    delete_dir,
-)
+from src.f00_instrument.file import set_dir, create_path, get_dir_file_strs, delete_dir
 from src.f00_instrument.dict_toolbox import (
     get_empty_dict_if_none,
     get_0_if_None,
@@ -50,7 +45,6 @@ class WorldUnit:
     events: dict[TimeLinePoint, AcctID] = None
     pidgins: dict[AcctID, PidginUnit] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
-    _events_dir: str = None
     _pidgins_dir: str = None
     _fiscalunits: set[FiscalID] = None
     _world_dir: str = None
@@ -110,12 +104,10 @@ class WorldUnit:
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
-        self._events_dir = create_path(self._world_dir, "events")
         self._pidgins_dir = create_path(self._world_dir, "pidgins")
         self._jungle_dir = create_path(self._world_dir, "jungle")
         self._zoo_dir = create_path(self._world_dir, "zoo")
         set_dir(self._world_dir)
-        set_dir(self._events_dir)
         set_dir(self._pidgins_dir)
         set_dir(self._jungle_dir)
         set_dir(self._zoo_dir)
