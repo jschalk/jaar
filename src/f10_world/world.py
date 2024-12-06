@@ -27,6 +27,8 @@ from src.f10_world.transformers import (
     etl_zoo_agg_to_pidgin_staging,
     etl_events_log_to_events_agg,
     get_events_dict_from_events_agg_file,
+    etl_pidgin_agg_to_face_dirs,
+    etl_face_pidgins_to_event_pidgins,
 )
 from pandas import read_excel as pandas_read_excel
 from dataclasses import dataclass
@@ -45,7 +47,7 @@ class WorldUnit:
     events: dict[TimeLinePoint, AcctID] = None
     pidgins: dict[AcctID, PidginUnit] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
-    _pidgins_dir: str = None
+    _faces_dir: str = None
     _fiscalunits: set[FiscalID] = None
     _world_dir: str = None
     _jungle_dir: str = None
@@ -82,33 +84,31 @@ class WorldUnit:
     def pidgins_empty(self) -> bool:
         return self.pidgins == {}
 
-    def _pidgin_dir(self, face_id: AcctID) -> str:
-        return create_path(self._pidgins_dir, face_id)
+    def _face_dir(self, face_id: AcctID) -> str:
+        return create_path(self._faces_dir, face_id)
 
     def save_pidginunit_files(self, face_id: AcctID):
         x_pidginunit = self.get_pidginunit(face_id)
-        save_all_csvs_from_pidginunit(self._pidgin_dir(face_id), x_pidginunit)
+        save_all_csvs_from_pidginunit(self._face_dir(face_id), x_pidginunit)
 
     def pidgin_dir_exists(self, face_id: AcctID) -> bool:
-        return os_path_exists(self._pidgin_dir(face_id))
+        return os_path_exists(self._face_dir(face_id))
 
     def _set_all_pidginunits_from_dirs(self):
         self.del_all_pidginunits()
-        for dir_name in get_dir_file_strs(
-            self._pidgins_dir, include_files=False
-        ).keys():
+        for dir_name in get_dir_file_strs(self._faces_dir, include_files=False).keys():
             self.add_pidginunit(dir_name)
 
     def _delete_pidginunit_dir(self, event_id: TimeLinePoint):
-        delete_dir(self._pidgin_dir(event_id))
+        delete_dir(self._face_dir(event_id))
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
-        self._pidgins_dir = create_path(self._world_dir, "pidgins")
+        self._faces_dir = create_path(self._world_dir, "pidgins")
         self._jungle_dir = create_path(self._world_dir, "jungle")
         self._zoo_dir = create_path(self._world_dir, "zoo")
         set_dir(self._world_dir)
-        set_dir(self._pidgins_dir)
+        set_dir(self._faces_dir)
         set_dir(self._jungle_dir)
         set_dir(self._zoo_dir)
 
@@ -116,7 +116,7 @@ class WorldUnit:
         return self.timeconversions
 
     def load_pidginunit_from_files(self, face_id: AcctID):
-        x_pidginunit = init_pidginunit_from_dir(self._pidgin_dir(face_id))
+        x_pidginunit = init_pidginunit_from_dir(self._face_dir(face_id))
         self.set_pidginunit(x_pidginunit)
 
     def jungle_to_zoo_staging(self):
@@ -147,6 +147,15 @@ class WorldUnit:
 
     def pidgin_staging_to_agg(self):
         etl_pidgin_staging_to_agg(self._zoo_dir)
+
+    def pidgin_agg_to_face_dirs(self):
+        etl_pidgin_agg_to_face_dirs(self._zoo_dir, self._faces_dir)
+
+    def pidgin_agg_to_face_dirs(self):
+        etl_pidgin_agg_to_face_dirs(self._zoo_dir, self._faces_dir)
+
+    def face_pidgins_to_event_pidgins(self):
+        etl_face_pidgins_to_event_pidgins(self._faces_dir)
 
     def get_dict(self) -> dict:
         return {

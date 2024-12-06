@@ -1,3 +1,5 @@
+from src.f01_road.jaar_config import default_unknown_word
+from src.f01_road.road import default_wall_if_none
 from src.f08_pidgin.bridge import (
     IdeaBridge,
     ideabridge_shop,
@@ -12,18 +14,33 @@ def test_IdeaBridge_Exists():
     x_ideabridge = IdeaBridge()
 
     # WHEN / THEN
+    assert not x_ideabridge.face_id
+    assert not x_ideabridge.event_id
     assert not x_ideabridge.otx2inx
     assert not x_ideabridge.unknown_word
     assert not x_ideabridge.otx_wall
     assert not x_ideabridge.inx_wall
+
+
+def test_ideabridge_shop_ReturnsObj_scenario0_WithoutParameters():
+    # ESTABLISH / WHEN
+    x_ideabridge = ideabridge_shop()
+
+    # THEN
     assert not x_ideabridge.face_id
+    assert x_ideabridge.event_id == 0
+    assert x_ideabridge.otx2inx == {}
+    assert x_ideabridge.unknown_word == default_unknown_word()
+    assert x_ideabridge.otx_wall == default_wall_if_none()
+    assert x_ideabridge.inx_wall == default_wall_if_none()
 
 
-def test_ideabridge_shop_ReturnsObj_scenario0():
+def test_ideabridge_shop_ReturnsObj_scenario1_WithParameters():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     bob_str = "Bob"
+    event7 = 7
     otx2inx = {xio_str: sue_str}
     x_unknown_word = "UnknownIdeaId"
     slash_otx_wall = "/"
@@ -31,19 +48,21 @@ def test_ideabridge_shop_ReturnsObj_scenario0():
 
     # WHEN
     x_ideabridge = ideabridge_shop(
+        x_face_id=bob_str,
+        x_event_id=event7,
         x_otx2inx=otx2inx,
         x_unknown_word=x_unknown_word,
         x_otx_wall=slash_otx_wall,
         x_inx_wall=colon_inx_wall,
-        x_face_id=bob_str,
     )
 
     # THEN
+    assert x_ideabridge.face_id == bob_str
+    assert x_ideabridge.event_id == event7
     assert x_ideabridge.otx2inx == otx2inx
     assert x_ideabridge.unknown_word == x_unknown_word
     assert x_ideabridge.otx_wall == slash_otx_wall
     assert x_ideabridge.inx_wall == colon_inx_wall
-    assert x_ideabridge.face_id == bob_str
 
 
 def test_IdeaBridge_set_all_otx2inx_SetsAttr():
@@ -249,6 +268,7 @@ def test_IdeaBridge_get_dict_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     sue_str = "Sue"
+    event7 = 7
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     ideaunit_ideabridge = ideabridge_shop(
@@ -262,11 +282,13 @@ def test_IdeaBridge_get_dict_ReturnsObj():
         "unknown_word": ideaunit_ideabridge.unknown_word,
         "otx2inx": {},
         "face_id": ideaunit_ideabridge.face_id,
+        "event_id": ideaunit_ideabridge.event_id,
     }
     assert ideaunit_ideabridge.get_dict() == x1_road_bridge_dict
 
     # WHEN
     ideaunit_ideabridge.set_otx2inx(clean_otx, clean_inx)
+    ideaunit_ideabridge.event_id = event7
     # THEN
     x2_road_bridge_dict = {
         "otx_wall": ideaunit_ideabridge.otx_wall,
@@ -274,6 +296,7 @@ def test_IdeaBridge_get_dict_ReturnsObj():
         "unknown_word": ideaunit_ideabridge.unknown_word,
         "otx2inx": {clean_otx: clean_inx},
         "face_id": sue_str,
+        "event_id": event7,
     }
     assert ideaunit_ideabridge.get_dict() == x2_road_bridge_dict
 
@@ -288,6 +311,7 @@ def test_IdeaBridge_get_json_ReturnsObj():
     slash_otx_wall = "/"
     ideaunit_ideabridge = ideabridge_shop("IdeaUnit", slash_otx_wall, x_face_id=sue_str)
     x1_road_bridge_json = f"""{{
+  "event_id": 0,
   "face_id": "{sue_str}",
   "inx_wall": "{ideaunit_ideabridge.inx_wall}",
   "otx2inx": {{}},
@@ -299,9 +323,12 @@ def test_IdeaBridge_get_json_ReturnsObj():
     assert ideaunit_ideabridge.get_json() == x1_road_bridge_json
 
     # WHEN
+    event7 = 7
     ideaunit_ideabridge.set_otx2inx(clean_otx, clean_inx)
+    ideaunit_ideabridge.event_id = event7
     # THEN
     x2_road_bridge_json = f"""{{
+  "event_id": {event7},
   "face_id": "{sue_str}",
   "inx_wall": "{ideaunit_ideabridge.inx_wall}",
   "otx2inx": {{
@@ -320,8 +347,11 @@ def test_get_ideabridge_from_dict_ReturnsObj():
     sue_str = "Sue"
     clean_otx = "clean"
     clean_inx = "propre"
+    event7 = 7
     slash_otx_wall = "/"
-    ideaunit_ideabridge = ideabridge_shop(slash_otx_wall, x_face_id=sue_str)
+    ideaunit_ideabridge = ideabridge_shop(
+        slash_otx_wall, x_face_id=sue_str, x_event_id=event7
+    )
     ideaunit_ideabridge.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
@@ -329,6 +359,8 @@ def test_get_ideabridge_from_dict_ReturnsObj():
 
     # THEN
     assert gen_ideabridge.face_id == ideaunit_ideabridge.face_id
+    assert gen_ideabridge.event_id == ideaunit_ideabridge.event_id
+    assert gen_ideabridge.event_id == event7
     assert gen_ideabridge == ideaunit_ideabridge
 
 

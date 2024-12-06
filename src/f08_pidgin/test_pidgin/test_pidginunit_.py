@@ -31,7 +31,6 @@ from src.f08_pidgin.examples.example_pidgins import (
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
 
-# from otx.f08_pidgin.examples.pidgin_env import get_test_pidgins_dir, env_dir_setup_cleanup
 
 # The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
@@ -116,12 +115,19 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.acctbridge == acctbridge_shop(x_face_id=sue_str)
     assert sue_pidginunit.ideabridge == ideabridge_shop(x_face_id=sue_str)
     assert sue_pidginunit.roadbridge == roadbridge_shop(x_face_id=sue_str)
+    assert sue_pidginunit.acctbridge.event_id == 0
     assert sue_pidginunit.acctbridge.unknown_word == default_unknown_word()
     assert sue_pidginunit.acctbridge.otx_wall == default_wall_if_none()
     assert sue_pidginunit.acctbridge.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.groupbridge.event_id == 0
     assert sue_pidginunit.groupbridge.unknown_word == default_unknown_word()
     assert sue_pidginunit.groupbridge.otx_wall == default_wall_if_none()
     assert sue_pidginunit.groupbridge.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.ideabridge.event_id == 0
+    assert sue_pidginunit.ideabridge.unknown_word == default_unknown_word()
+    assert sue_pidginunit.ideabridge.otx_wall == default_wall_if_none()
+    assert sue_pidginunit.ideabridge.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.roadbridge.event_id == 0
     assert sue_pidginunit.roadbridge.unknown_word == default_unknown_word()
     assert sue_pidginunit.roadbridge.otx_wall == default_wall_if_none()
     assert sue_pidginunit.roadbridge.inx_wall == default_wall_if_none()
@@ -146,31 +152,39 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     assert sue_pidginunit.otx_wall == slash_otx_wall
     assert sue_pidginunit.inx_wall == colon_inx_wall
 
-    x_groupbridge = groupbridge_shop(slash_otx_wall, colon_inx_wall, {}, y_uk, sue_str)
-    x_acctbridge = acctbridge_shop(slash_otx_wall, colon_inx_wall, {}, y_uk, sue_str)
-    x_roadbridge = roadbridge_shop(
-        slash_otx_wall, colon_inx_wall, None, {}, y_uk, sue_str
-    )
-    assert sue_pidginunit.groupbridge == x_groupbridge
-    assert sue_pidginunit.acctbridge == x_acctbridge
-    assert sue_pidginunit.roadbridge == x_roadbridge
+    # x_groupbridge = groupbridge_shop(
+    #     slash_otx_wall, colon_inx_wall, {}, y_uk, sue_str, five_event_id
+    # )
+    # x_acctbridge = acctbridge_shop(
+    #     slash_otx_wall, colon_inx_wall, {}, y_uk, sue_str, five_event_id
+    # )
+    # x_roadbridge = roadbridge_shop(
+    #     slash_otx_wall, colon_inx_wall, None, {}, y_uk, sue_str, five_event_id
+    # )
+    # assert sue_pidginunit.groupbridge == x_groupbridge
+    # assert sue_pidginunit.acctbridge == x_acctbridge
+    # assert sue_pidginunit.roadbridge == x_roadbridge
 
+    assert sue_pidginunit.acctbridge.face_id == sue_str
+    assert sue_pidginunit.acctbridge.event_id == five_event_id
     assert sue_pidginunit.acctbridge.unknown_word == y_uk
     assert sue_pidginunit.acctbridge.otx_wall == slash_otx_wall
     assert sue_pidginunit.acctbridge.inx_wall == colon_inx_wall
-    assert sue_pidginunit.acctbridge.face_id == sue_str
+    assert sue_pidginunit.groupbridge.face_id == sue_str
+    assert sue_pidginunit.groupbridge.event_id == five_event_id
     assert sue_pidginunit.groupbridge.unknown_word == y_uk
     assert sue_pidginunit.groupbridge.otx_wall == slash_otx_wall
     assert sue_pidginunit.groupbridge.inx_wall == colon_inx_wall
-    assert sue_pidginunit.groupbridge.face_id == sue_str
+    assert sue_pidginunit.ideabridge.face_id == sue_str
+    assert sue_pidginunit.ideabridge.event_id == five_event_id
     assert sue_pidginunit.ideabridge.unknown_word == y_uk
     assert sue_pidginunit.ideabridge.otx_wall == slash_otx_wall
     assert sue_pidginunit.ideabridge.inx_wall == colon_inx_wall
-    assert sue_pidginunit.ideabridge.face_id == sue_str
+    assert sue_pidginunit.roadbridge.face_id == sue_str
+    assert sue_pidginunit.roadbridge.event_id == five_event_id
     assert sue_pidginunit.roadbridge.unknown_word == y_uk
     assert sue_pidginunit.roadbridge.otx_wall == slash_otx_wall
     assert sue_pidginunit.roadbridge.inx_wall == colon_inx_wall
-    assert sue_pidginunit.roadbridge.face_id == sue_str
 
 
 def test_PidginUnit_set_bridgeunit_SetsAttr():

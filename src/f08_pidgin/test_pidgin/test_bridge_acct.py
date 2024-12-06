@@ -1,3 +1,5 @@
+from src.f01_road.jaar_config import default_unknown_word
+from src.f01_road.road import default_wall_if_none
 from src.f08_pidgin.bridge import (
     AcctBridge,
     acctbridge_shop,
@@ -12,38 +14,55 @@ def test_AcctBridge_Exists():
     x_acctbridge = AcctBridge()
 
     # WHEN / THEN
+    assert not x_acctbridge.face_id
+    assert not x_acctbridge.event_id
     assert not x_acctbridge.otx2inx
     assert not x_acctbridge.unknown_word
     assert not x_acctbridge.otx_wall
     assert not x_acctbridge.inx_wall
-    assert not x_acctbridge.face_id
 
 
 def test_acctbridge_shop_ReturnsObj_scenario0():
+    # ESTABLISH / WHEN
+    x_acctbridge = acctbridge_shop()
+
+    # THEN
+    assert not x_acctbridge.face_id
+    assert x_acctbridge.event_id == 0
+    assert x_acctbridge.otx2inx == {}
+    assert x_acctbridge.unknown_word == default_unknown_word()
+    assert x_acctbridge.otx_wall == default_wall_if_none()
+    assert x_acctbridge.inx_wall == default_wall_if_none()
+
+
+def test_acctbridge_shop_ReturnsObj_scenario1_WithParameters():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     bob_str = "Bob"
+    event7 = 7
     otx2inx = {xio_str: sue_str}
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
 
     # WHEN
     x_acctbridge = acctbridge_shop(
+        x_face_id=bob_str,
+        x_event_id=event7,
         x_otx2inx=otx2inx,
         x_unknown_word=x_unknown_word,
         x_otx_wall=slash_otx_wall,
         x_inx_wall=colon_inx_wall,
-        x_face_id=bob_str,
     )
 
     # THEN
+    assert x_acctbridge.face_id == bob_str
+    assert x_acctbridge.event_id == event7
     assert x_acctbridge.otx2inx == otx2inx
     assert x_acctbridge.unknown_word == x_unknown_word
     assert x_acctbridge.otx_wall == slash_otx_wall
     assert x_acctbridge.inx_wall == colon_inx_wall
-    assert x_acctbridge.face_id == bob_str
 
 
 def test_AcctBridge_set_all_otx2inx_SetsAttr():
@@ -67,7 +86,7 @@ def test_AcctBridge_set_all_otx2inx_RaisesErrorIf_unknown_word_IsKeyIn_otx2inx()
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     x_acctbridge = acctbridge_shop(None, x_unknown_word=x_unknown_word)
     x_otx2inx = {xio_str: sue_str, x_unknown_word: zia_str}
     assert x_acctbridge.otx2inx != x_otx2inx
@@ -84,7 +103,7 @@ def test_AcctBridge_set_all_otx2inx_DoesNotRaiseErrorIfParameterSetToTrue():
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     x_acctbridge = acctbridge_shop(None)
     x_otx2inx = {xio_str: sue_str, x_unknown_word: zia_str}
     assert x_acctbridge.otx2inx != x_otx2inx
@@ -206,7 +225,7 @@ def test_AcctBridge_unknown_word_in_otx2inx_ReturnsObj():
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     x_acctbridge = acctbridge_shop(None, x_unknown_word=x_unknown_word)
     x_acctbridge.set_otx2inx(xio_str, sue_str)
     assert x_acctbridge._unknown_word_in_otx2inx() is False
@@ -249,12 +268,14 @@ def test_AcctBridge_get_dict_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     sue_str = "Sue"
+    event7 = 7
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     ideaunit_acctbridge = acctbridge_shop(
         x_otx_wall=slash_otx_wall,
         x_inx_wall=colon_inx_wall,
         x_face_id=sue_str,
+        x_event_id=event7,
     )
     x1_road_bridge_dict = {
         "otx_wall": ideaunit_acctbridge.otx_wall,
@@ -262,6 +283,7 @@ def test_AcctBridge_get_dict_ReturnsObj():
         "unknown_word": ideaunit_acctbridge.unknown_word,
         "otx2inx": {},
         "face_id": ideaunit_acctbridge.face_id,
+        "event_id": ideaunit_acctbridge.event_id,
     }
     assert ideaunit_acctbridge.get_dict() == x1_road_bridge_dict
 
@@ -274,6 +296,7 @@ def test_AcctBridge_get_dict_ReturnsObj():
         "unknown_word": ideaunit_acctbridge.unknown_word,
         "otx2inx": {clean_otx: clean_inx},
         "face_id": sue_str,
+        "event_id": event7,
     }
     assert ideaunit_acctbridge.get_dict() == x2_road_bridge_dict
 
@@ -285,9 +308,11 @@ def test_AcctBridge_get_json_ReturnsObj():
     clean_inx = "propre"
     casa_otx = "casa1"
     casa_inx = "casa2"
+    event7 = 7
     slash_otx_wall = "/"
     ideaunit_acctbridge = acctbridge_shop("IdeaUnit", slash_otx_wall, x_face_id=sue_str)
     x1_road_bridge_json = f"""{{
+  "event_id": 0,
   "face_id": "{sue_str}",
   "inx_wall": "{ideaunit_acctbridge.inx_wall}",
   "otx2inx": {{}},
@@ -300,8 +325,10 @@ def test_AcctBridge_get_json_ReturnsObj():
 
     # WHEN
     ideaunit_acctbridge.set_otx2inx(clean_otx, clean_inx)
+    ideaunit_acctbridge.event_id = event7
     # THEN
     x2_road_bridge_json = f"""{{
+  "event_id": {event7},
   "face_id": "{sue_str}",
   "inx_wall": "{ideaunit_acctbridge.inx_wall}",
   "otx2inx": {{
@@ -321,7 +348,10 @@ def test_get_acctbridge_from_dict_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     slash_otx_wall = "/"
-    ideaunit_acctbridge = acctbridge_shop(slash_otx_wall, x_face_id=sue_str)
+    event7 = 7
+    ideaunit_acctbridge = acctbridge_shop(
+        slash_otx_wall, x_face_id=sue_str, x_event_id=event7
+    )
     ideaunit_acctbridge.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
@@ -329,6 +359,8 @@ def test_get_acctbridge_from_dict_ReturnsObj():
 
     # THEN
     assert gen_acctbridge.face_id == ideaunit_acctbridge.face_id
+    assert gen_acctbridge.event_id == ideaunit_acctbridge.event_id
+    assert gen_acctbridge.event_id == event7
     assert gen_acctbridge == ideaunit_acctbridge
 
 

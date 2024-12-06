@@ -48,7 +48,7 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
 def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     sue_str = "Sue"
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     sue_pidginunit = pidginunit_shop(
@@ -87,15 +87,15 @@ def test_PidginUnit_get_json_ReturnsObj():
 
     # THEN
     print(f"{sue_json=}")
-    assert sue_json.find("ideabridge") == 441
-    assert sue_json.find(otx_wall_str()) == 159
+    assert sue_json.find("ideabridge") == 479
+    assert sue_json.find(otx_wall_str()) == 178
 
 
 def test_get_pidginunit_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_event_id = 77
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     sue_pidginunit = pidginunit_shop(
@@ -129,7 +129,7 @@ def test_get_pidginunit_from_json_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_event_id = 77
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     sue_pidginunit = pidginunit_shop(

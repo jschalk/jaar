@@ -14,6 +14,7 @@ from pandas import DataFrame
 def get_bridge_acct_dt_columns() -> list[str]:
     return [
         "face_id",
+        "event_id",
         "otx_wall",
         "inx_wall",
         "unknown_word",
@@ -25,6 +26,7 @@ def get_bridge_acct_dt_columns() -> list[str]:
 def get_bridge_group_dt_columns() -> list[str]:
     return [
         "face_id",
+        "event_id",
         "otx_wall",
         "inx_wall",
         "unknown_word",
@@ -36,6 +38,7 @@ def get_bridge_group_dt_columns() -> list[str]:
 def get_bridge_idea_dt_columns() -> list[str]:
     return [
         "face_id",
+        "event_id",
         "otx_wall",
         "inx_wall",
         "unknown_word",
@@ -47,6 +50,7 @@ def get_bridge_idea_dt_columns() -> list[str]:
 def get_bridge_road_dt_columns() -> list[str]:
     return [
         "face_id",
+        "event_id",
         "otx_wall",
         "inx_wall",
         "unknown_word",
@@ -58,6 +62,7 @@ def get_bridge_road_dt_columns() -> list[str]:
 def get_nub_label_columns() -> list[str]:
     return [
         "face_id",
+        "event_id",
         "otx_wall",
         "inx_wall",
         "unknown_word",
@@ -69,6 +74,7 @@ def get_nub_label_columns() -> list[str]:
 def create_bridge_acct_dt(x_bridge: AcctBridge) -> DataFrame:
     x_rows_list = [
         {
+            "event_id": x_bridge.event_id,
             "face_id": x_bridge.face_id,
             "otx_wall": x_bridge.otx_wall,
             "inx_wall": x_bridge.inx_wall,
@@ -84,6 +90,7 @@ def create_bridge_acct_dt(x_bridge: AcctBridge) -> DataFrame:
 def create_bridge_group_dt(x_bridge: GroupBridge) -> DataFrame:
     x_rows_list = [
         {
+            "event_id": x_bridge.event_id,
             "face_id": x_bridge.face_id,
             "otx_wall": x_bridge.otx_wall,
             "inx_wall": x_bridge.inx_wall,
@@ -99,6 +106,7 @@ def create_bridge_group_dt(x_bridge: GroupBridge) -> DataFrame:
 def create_bridge_idea_dt(x_bridge: IdeaBridge) -> DataFrame:
     x_rows_list = [
         {
+            "event_id": x_bridge.event_id,
             "face_id": x_bridge.face_id,
             "otx_wall": x_bridge.otx_wall,
             "inx_wall": x_bridge.inx_wall,
@@ -114,6 +122,7 @@ def create_bridge_idea_dt(x_bridge: IdeaBridge) -> DataFrame:
 def create_bridge_road_dt(x_bridge: RoadBridge) -> DataFrame:
     x_rows_list = [
         {
+            "event_id": x_bridge.event_id,
             "face_id": x_bridge.face_id,
             "otx_wall": x_bridge.otx_wall,
             "inx_wall": x_bridge.inx_wall,
@@ -129,6 +138,7 @@ def create_bridge_road_dt(x_bridge: RoadBridge) -> DataFrame:
 def create_nub_label_dt(x_roadbridge: RoadBridge) -> DataFrame:
     x_rows_list = [
         {
+            "event_id": x_roadbridge.event_id,
             "face_id": x_roadbridge.face_id,
             "otx_wall": x_roadbridge.otx_wall,
             "inx_wall": x_roadbridge.inx_wall,
@@ -150,7 +160,10 @@ def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
 
 
 def _save_bridge_acct_csv(x_dir: str, acctbridge: AcctBridge):
+    print(f"{acctbridge=}")
     x_dt = create_bridge_acct_dt(acctbridge)
+    print(f"{x_dt=}")
+    print(f"{get_ordered_csv(x_dt)=}")
     save_file(x_dir, "acct.csv", get_ordered_csv(x_dt))
 
 
@@ -226,18 +239,24 @@ def _load_nub_label_from_csv(x_dir, x_roadbridge: RoadBridge) -> RoadBridge:
 
 def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
     face_id_set = set()
+    event_id_set = set()
     unknown_word_set = set()
     otx_wall_set = set()
     inx_wall_set = set()
     for x_filename in get_dir_file_strs(x_dir).keys():
         x_dt = open_csv(x_dir, x_filename)
+        print(f"huh {x_dt=}")
         face_id_set.update(x_dt.face_id.unique())
+        event_id_set.update(x_dt.event_id.unique())
         unknown_word_set.update(x_dt.unknown_word.unique())
         otx_wall_set.update(x_dt.otx_wall.unique())
         inx_wall_set.update(x_dt.inx_wall.unique())
 
     if len(face_id_set) == 1:
         x_face_id = face_id_set.pop()
+    print(f"{event_id_set=}")
+    if len(event_id_set) == 1:
+        x_event_id = event_id_set.pop()
     if len(unknown_word_set) == 1:
         x_unknown_word = unknown_word_set.pop()
     if len(otx_wall_set) == 1:
@@ -245,18 +264,9 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
     if len(inx_wall_set) == 1:
         x_inx_wall = inx_wall_set.pop()
 
-    # if (
-    #     face_id_set != set()
-    #     or unknown_word_set != set()
-    #     or otx_wall_set != set()
-    #     or inx_wall_set != set()
-    # ):
-    #     raise Exception(
-    #         f"{face_id_set=} {unknown_word_set=}  {otx_wall_set=} {inx_wall_set=}"
-    #     )
-
     return pidginunit_shop(
         x_face_id=x_face_id,
+        x_event_id=x_event_id,
         x_otx_wall=x_otx_wall,
         x_inx_wall=x_inx_wall,
         x_unknown_word=x_unknown_word,

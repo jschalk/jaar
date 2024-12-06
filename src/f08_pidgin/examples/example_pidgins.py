@@ -107,7 +107,7 @@ def get_slash_roadbridge() -> RoadBridge:
     inx_music87_str = "music87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     clean_otx_road = f"{otx_music45_str}{slash_otx_wall}{clean_otx_str}"
@@ -125,7 +125,7 @@ def get_slash_roadbridge() -> RoadBridge:
 
 
 def get_slash_groupbridge() -> GroupBridge:
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     swim_otx = f"swim{slash_otx_wall}"
@@ -144,7 +144,7 @@ def get_slash_groupbridge() -> GroupBridge:
 
 
 def get_slash_acctbridge() -> AcctBridge:
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     xio_otx = "Xio"
@@ -216,7 +216,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
-    sue_pidginunit = pidginunit_shop("Sue")
+    sue_pidginunit = pidginunit_shop("Sue", 7)
     rx = type_RoadUnit_str()
     sue_pidginunit.set_otx2inx(rx, otx_music45_str, inx_music87_str)
     sue_pidginunit.set_otx2inx(rx, casa_otx_road, casa_inx_road)
@@ -240,7 +240,7 @@ def get_casa_maison_pidginunit_set_by_nub_label() -> PidginUnit:
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
-    sue_pidginunit = pidginunit_shop("Sue")
+    sue_pidginunit = pidginunit_shop("Sue", 7)
     sue_pidginunit.set_nub_label(otx_music45_str, inx_music87_str)
     sue_pidginunit.set_nub_label(casa_otx_str, casa_inx_str)
     sue_pidginunit.set_nub_label(clean_otx_str, clean_inx_str)
@@ -286,11 +286,13 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
     clean_otx_road = create_road(casa_otx_road, "clean")
     sweep_otx_road = create_road(clean_otx_road, "sweep")
     x_rd = default_wall_if_none()
+    e7 = 7
     uw = default_unknown_word()
 
     inx_dt = DataFrame(
         columns=[
             "face_id",
+            "event_id",
             "otx_wall",
             "inx_wall",
             "unknown_word",
@@ -298,10 +300,10 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
             "inx_road",
         ]
     )
-    inx_dt.loc[0] = ["Sue", x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
-    inx_dt.loc[1] = ["Sue", x_rd, x_rd, uw, casa_otx_road, casa_inx_road]
-    inx_dt.loc[2] = ["Sue", x_rd, x_rd, uw, clean_otx_road, clean_inx_road]
-    inx_dt.loc[3] = ["Sue", x_rd, x_rd, uw, sweep_otx_road, sweep_inx_road]
+    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
+    inx_dt.loc[1] = ["Sue", e7, x_rd, x_rd, uw, casa_otx_road, casa_inx_road]
+    inx_dt.loc[2] = ["Sue", e7, x_rd, x_rd, uw, clean_otx_road, clean_inx_road]
+    inx_dt.loc[3] = ["Sue", e7, x_rd, x_rd, uw, sweep_otx_road, sweep_inx_road]
     return inx_dt
 
 
@@ -316,10 +318,12 @@ def get_casa_maison_road_nub_label_dt() -> DataFrame:
     sweep_otx_str = "sweep"
     x_rd = default_wall_if_none()
     uw = default_unknown_word()
+    e7 = 7
 
     inx_dt = DataFrame(
         columns=[
             "face_id",
+            "event_id",
             "otx_wall",
             "inx_wall",
             "unknown_word",
@@ -327,9 +331,9 @@ def get_casa_maison_road_nub_label_dt() -> DataFrame:
             "inx_label",
         ]
     )
-    inx_dt.loc[0] = ["Sue", x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
-    inx_dt.loc[1] = ["Sue", x_rd, x_rd, uw, casa_otx_str, casa_inx_str]
-    inx_dt.loc[2] = ["Sue", x_rd, x_rd, uw, clean_otx_str, clean_inx_str]
+    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
+    inx_dt.loc[1] = ["Sue", e7, x_rd, x_rd, uw, casa_otx_str, casa_inx_str]
+    inx_dt.loc[2] = ["Sue", e7, x_rd, x_rd, uw, clean_otx_str, clean_inx_str]
     return inx_dt
 
 
@@ -371,7 +375,7 @@ def get_slash_roadbridge() -> RoadBridge:
     inx_music87_str = "music87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     clean_otx_road = f"{otx_music45_str}{slash_otx_wall}{clean_otx_str}"
@@ -381,6 +385,7 @@ def get_slash_roadbridge() -> RoadBridge:
         x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
+        x_event_id=7,
     )
     x_roadbridge.set_nub_label(clean_otx_str, clean_inx_str)
     x_roadbridge.set_otx2inx(otx_music45_str, inx_music87_str)
@@ -393,7 +398,7 @@ def get_slash_ideabridge() -> IdeaBridge:
     inx_music87_str = "music87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     x_ideabridge = ideabridge_shop(
@@ -401,6 +406,7 @@ def get_slash_ideabridge() -> IdeaBridge:
         x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
+        x_event_id=7,
     )
     x_ideabridge.set_otx2inx(otx_music45_str, inx_music87_str)
     x_ideabridge.set_otx2inx(clean_otx_str, clean_inx_str)
@@ -409,7 +415,7 @@ def get_slash_ideabridge() -> IdeaBridge:
 
 
 def get_slash_groupbridge() -> GroupBridge:
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     swim_otx = f"swim{slash_otx_wall}"
@@ -421,6 +427,7 @@ def get_slash_groupbridge() -> GroupBridge:
         x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
+        x_event_id=7,
     )
     x_groupbridge.set_otx2inx(swim_otx, swim_inx)
     x_groupbridge.set_otx2inx(climb_otx, climb_inx)
@@ -428,7 +435,7 @@ def get_slash_groupbridge() -> GroupBridge:
 
 
 def get_slash_acctbridge() -> AcctBridge:
-    x_unknown_word = "UnknownAcctId"
+    x_unknown_word = "UnknownWord"
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     xio_otx = "Xio"
@@ -443,6 +450,7 @@ def get_slash_acctbridge() -> AcctBridge:
         x_inx_wall=colon_inx_wall,
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
+        x_event_id=7,
     )
     x_acctbridge.set_otx2inx(xio_otx, xio_inx)
     x_acctbridge.set_otx2inx(sue_otx, sue_inx)

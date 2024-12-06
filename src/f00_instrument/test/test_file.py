@@ -36,6 +36,7 @@ def test_create_path_ReturnsObj():
     assert create_path(None, obj_filename) == obj_filename
     assert create_path(x_dir, None) == x_dir
     assert create_path(x_dir, x_file_name) == os_path_join(x_dir, x_file_name)
+    assert create_path(x_dir, 1) == os_path_join(x_dir, str(1))
 
 
 def test_create_dir_SetsFile(env_dir_setup_cleanup):
