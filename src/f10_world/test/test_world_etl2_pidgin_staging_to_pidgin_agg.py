@@ -77,7 +77,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     casa_otx = "fizz,casa"
     casa_inx = "fizz,casaita"
     clean_otx = "fizz,casa,clean"
-    clean_inx = "fizz,casaita,limpo"
+    clean_inx = "fizz,casaita,limpio"
     event7 = 7
     road_staging_str = "road_staging"
     road_agg_str = "road_agg"

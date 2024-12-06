@@ -11,6 +11,8 @@ from src.f09_brick.pandas_tool import (
     get_zoo_staging_grouping_with_all_values_equal_df,
     get_new_sorting_columns,
     upsert_sheet,
+    split_excel_into_dirs,
+    sheet_exists,
 )
 from src.f10_world.world_tool import get_all_brick_dataframes
 from src.f10_world.pidgin_agg import (
@@ -486,3 +488,15 @@ class PidginStagingToAggTransformer:
             )
             x_pidginheartbook.eval_pidginheartrow(x_pidginheartrow)
         return x_pidginheartbook
+
+
+def etl_pidgin_agg_to_face_dirs(zoo_dir: str, faces_dir: str):
+    agg_pidgin = create_path(zoo_dir, "pidgin.xlsx")
+    if sheet_exists(agg_pidgin, "acct_agg"):
+        split_excel_into_dirs(agg_pidgin, faces_dir, "face_id", "pidgin", "acct_agg")
+    if sheet_exists(agg_pidgin, "group_agg"):
+        split_excel_into_dirs(agg_pidgin, faces_dir, "face_id", "pidgin", "group_agg")
+    if sheet_exists(agg_pidgin, "idea_agg"):
+        split_excel_into_dirs(agg_pidgin, faces_dir, "face_id", "pidgin", "idea_agg")
+    if sheet_exists(agg_pidgin, "road_agg"):
+        split_excel_into_dirs(agg_pidgin, faces_dir, "face_id", "pidgin", "road_agg")

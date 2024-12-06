@@ -216,7 +216,7 @@ def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleBric
     casa_otx = "fizz,casa"
     casa_inx = "fizz,casaita"
     clean_otx = "fizz,casa,clean"
-    clean_inx = "fizz,casaita,limpo"
+    clean_inx = "fizz,casaita,limpio"
     event7 = 7
     road_staging_str = "road_staging"
     road_agg_str = "road_agg"
@@ -384,7 +384,7 @@ def test_etl_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
     casa_otx = "fizz,casa"
     casa_inx = "fizz,casaita"
     clean_otx = "fizz,casa,clean"
-    clean_inx = "fizz,casaita,limpo"
+    clean_inx = "fizz,casaita,limpio"
     event7 = 7
     road_staging_str = "road_staging"
     road_agg_str = "road_agg"

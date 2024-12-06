@@ -170,7 +170,7 @@ def sample_excel_file(tmp_path):
     }
     df = DataFrame(data)
     file_path = tmp_path / "sample.xlsx"
-    df.to_excel(file_path, index=False)
+    df.to_excel(file_path, index=False, sheet_name="sheet5")
     return file_path
 
 
@@ -238,7 +238,7 @@ def test_split_excel_into_dirs_DoesNothingIfColumnIsEmpty(tmp_path, output_dir):
     }
     df = DataFrame(data)
     file_path = tmp_path / "empty_column.xlsx"
-    df.to_excel(file_path, index=False)
+    df.to_excel(file_path, index=False, sheet_name="sheet5")
 
     # WHEN
     x_filename = "fizz"
@@ -279,7 +279,7 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
     }
     df = DataFrame(data)
     file_path = tmp_path / "special_chars.xlsx"
-    df.to_excel(file_path, index=False)
+    df.to_excel(file_path, index=False, sheet_name="sheet5")
     x_filename = "fizz"
     b_file_path = create_path(output_dir, f"A_B/{x_filename}.xlsx")
     c_file_path = create_path(output_dir, f"C_D/{x_filename}.xlsx")
