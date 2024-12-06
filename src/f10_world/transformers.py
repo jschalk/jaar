@@ -12,7 +12,7 @@ from src.f09_brick.pandas_tool import (
     get_new_sorting_columns,
     upsert_sheet,
 )
-from src.f10_world.world_tool import get_all_brick_dataframes, _create_events_agg_df
+from src.f10_world.world_tool import get_all_brick_dataframes
 from src.f10_world.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
@@ -200,6 +200,21 @@ class ZooEventsToEventsLogTransformer:
         upsert_sheet(events_file_path, events_log_str, events_df)
 
 
+def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
+    events_agg_df = events_log_df[["face_id", "event_id"]].drop_duplicates()
+    events_agg_df["note"] = (
+        events_agg_df["event_id"]
+        .duplicated(keep=False)
+        .apply(lambda x: "invalid because of conflicting event_id" if x else "")
+    )
+    return events_agg_df.sort_values(["event_id", "face_id"])
+
+
+def etl_events_log_to_events_agg(zoo_dir):
+    transformer = EventsLogToEventsAggTransformer(zoo_dir)
+    transformer.transform()
+
+
 class EventsLogToEventsAggTransformer:
     def __init__(self, zoo_dir: str):
         self.zoo_dir = zoo_dir
@@ -209,6 +224,17 @@ class EventsLogToEventsAggTransformer:
         events_log_df = pandas_read_excel(events_file_path, "events_log")
         events_agg_df = _create_events_agg_df(events_log_df)
         upsert_sheet(events_file_path, "events_agg", events_agg_df)
+
+
+def get_events_dict_from_events_agg_file(zoo_dir) -> dict[int, str]:
+    events_file_path = create_path(zoo_dir, "events.xlsx")
+    events_agg_df = pandas_read_excel(events_file_path, "events_agg")
+    x_dict = {}
+    for index, event_agg_row in events_agg_df.iterrows():
+        x_note = event_agg_row["note"]
+        if x_note != "invalid because of conflicting event_id":
+            x_dict[event_agg_row["event_id"]] = event_agg_row["face_id"]
+    return x_dict
 
 
 def zoo_agg_single_to_pidgin_staging(

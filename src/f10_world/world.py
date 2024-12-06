@@ -28,11 +28,10 @@ from src.f10_world.transformers import (
     ZooStagingToZooAggTransformer,
     ZooAggToZooEventsTransformer,
     ZooEventsToEventsLogTransformer,
-    ZooAggToNubStagingTransformer,
-    ZooAggToStagingTransformer,
     etl_pidgin_staging_to_agg,
     etl_zoo_agg_to_pidgin_staging,
-    EventsLogToEventsAggTransformer,
+    etl_events_log_to_events_agg,
+    get_events_dict_from_events_agg_file,
 )
 from pandas import read_excel as pandas_read_excel
 from dataclasses import dataclass
@@ -145,17 +144,10 @@ class WorldUnit:
         transformer.transform()
 
     def events_log_to_events_agg(self):
-        transformer = EventsLogToEventsAggTransformer(self._zoo_dir)
-        transformer.transform()
+        etl_events_log_to_events_agg(self._zoo_dir)
 
     def set_events_from_events_agg_file(self):
-        self.events = {}
-        events_file_path = create_path(self._zoo_dir, "events.xlsx")
-        events_agg_df = pandas_read_excel(events_file_path, "events_agg")
-        for index, event_agg_row in events_agg_df.iterrows():
-            x_note = event_agg_row["note"]
-            if x_note != "invalid because of conflicting event_id":
-                self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
+        self.events = get_events_dict_from_events_agg_file(self._zoo_dir)
 
     def zoo_agg_to_pidgin_staging(self):
         legitimate_events = set(self.events.keys())
