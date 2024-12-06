@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path
+from src.f00_instrument.file import create_path, get_dir_file_strs
 from src.f01_road.finance_tran import TimeLinePoint
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_brick.brick_config import (
@@ -500,3 +500,25 @@ def etl_pidgin_agg_to_face_dirs(zoo_dir: str, faces_dir: str):
         split_excel_into_dirs(agg_pidgin, faces_dir, "face_id", "pidgin", "idea_agg")
     if sheet_exists(agg_pidgin, "road_agg"):
         split_excel_into_dirs(agg_pidgin, faces_dir, "face_id", "pidgin", "road_agg")
+
+
+def etl_face_pidgin_to_event_pidgins(face_dir: str):
+    pass
+
+
+def etl_face_pidgins_to_event_pidgins(faces_dir: str):
+    face_dirs = get_dir_file_strs(faces_dir, include_dirs=True, include_files=False)
+    for face_dir in face_dirs:
+        face_pidgin_path = create_path(face_dir, "pidgin.xlsx")
+        if sheet_exists(face_pidgin_path, "acct_agg"):
+            split_excel_into_events_dirs(face_pidgin_path, face_dir, "acct_agg")
+        if sheet_exists(face_pidgin_path, "group_agg"):
+            split_excel_into_events_dirs(face_pidgin_path, face_dir, "group_agg")
+        if sheet_exists(face_pidgin_path, "idea_agg"):
+            split_excel_into_events_dirs(face_pidgin_path, face_dir, "idea_agg")
+        if sheet_exists(face_pidgin_path, "road_agg"):
+            split_excel_into_events_dirs(face_pidgin_path, face_dir, "road_agg")
+
+
+def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: str):
+    split_excel_into_dirs(pidgin_file, face_dir, "event_id", "pidgin", sheet_name)

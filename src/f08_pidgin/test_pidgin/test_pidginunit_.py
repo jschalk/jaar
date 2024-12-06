@@ -31,7 +31,6 @@ from src.f08_pidgin.examples.example_pidgins import (
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
 
-# from otx.f08_pidgin.examples.pidgin_env import get_test_pidgins_dir, env_dir_setup_cleanup
 
 # The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
