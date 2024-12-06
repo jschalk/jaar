@@ -1,11 +1,7 @@
 from src.f00_instrument.file import save_file, delete_dir, create_path
 from src.f01_road.finance_tran import timeconversion_shop
 from src.f08_pidgin.pidgin import pidginunit_shop
-from src.f10_world.world import (
-    init_fiscalunits_from_dirs,
-    WorldUnit,
-    worldunit_shop,
-)
+from src.f10_world.world import init_fiscalunits_from_dirs, WorldUnit, worldunit_shop
 from src.f10_world.examples.world_env import (
     get_test_world_id,
     get_test_worlds_dir,
@@ -28,7 +24,6 @@ def test_WorldUnit_Exists():
     assert not x_world.timeconversions
     assert not x_world.events
     assert not x_world.pidgins
-    assert not x_world._events_dir
     assert not x_world._pidgins_dir
     assert not x_world._fiscalunits
     assert not x_world._world_dir
@@ -41,18 +36,15 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     fizz_str = "fizz"
     fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=get_test_worlds_dir())
     x_world_dir = create_path(get_test_worlds_dir(), fizz_str)
-    x_events_dir = create_path(x_world_dir, "events")
     x_pidgins_dir = create_path(x_world_dir, "pidgins")
     x_jungle_dir = create_path(x_world_dir, "jungle")
     x_zoo_dir = create_path(x_world_dir, "zoo")
 
     assert fizz_world._world_dir is None
-    assert fizz_world._events_dir is None
     assert fizz_world._pidgins_dir is None
     assert fizz_world._jungle_dir is None
     assert fizz_world._zoo_dir is None
     assert os_path_exists(x_world_dir) is False
-    assert os_path_exists(x_events_dir) is False
     assert os_path_exists(x_pidgins_dir) is False
     assert os_path_exists(x_jungle_dir) is False
     assert os_path_exists(x_zoo_dir) is False
@@ -62,12 +54,10 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
 
     # THEN
     assert fizz_world._world_dir == x_world_dir
-    assert fizz_world._events_dir == x_events_dir
     assert fizz_world._pidgins_dir == x_pidgins_dir
     assert fizz_world._jungle_dir == x_jungle_dir
     assert fizz_world._zoo_dir == x_zoo_dir
     assert os_path_exists(x_world_dir)
-    assert os_path_exists(x_events_dir)
     assert os_path_exists(x_pidgins_dir)
     assert os_path_exists(x_jungle_dir)
     assert os_path_exists(x_zoo_dir)
@@ -106,7 +96,6 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.timeconversions == world2timeconversions
     assert x_world.events == {}
     assert x_world.pidgins == world2_pidgins
-    assert x_world._events_dir == create_path(world_dir, "events")
     assert x_world._pidgins_dir == create_path(world_dir, "pidgins")
     assert x_world._fiscalunits == world2_fiscalunits
 
@@ -123,7 +112,6 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world.timeconversions == {}
     assert x_world.pidgins == {}
     assert x_world.events == {}
-    assert x_world._events_dir == create_path(world_dir, "events")
     assert x_world._pidgins_dir == create_path(world_dir, "pidgins")
     assert x_world._fiscalunits == set()
 

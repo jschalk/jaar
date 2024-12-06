@@ -1,9 +1,4 @@
-from src.f00_instrument.file import (
-    set_dir,
-    create_path,
-    get_dir_file_strs,
-    delete_dir,
-)
+from src.f00_instrument.file import set_dir, create_path, get_dir_file_strs, delete_dir
 from src.f00_instrument.dict_toolbox import (
     get_empty_dict_if_none,
     get_0_if_None,
@@ -28,11 +23,10 @@ from src.f10_world.transformers import (
     ZooStagingToZooAggTransformer,
     ZooAggToZooEventsTransformer,
     ZooEventsToEventsLogTransformer,
-    ZooAggToNubStagingTransformer,
-    ZooAggToStagingTransformer,
     etl_pidgin_staging_to_agg,
     etl_zoo_agg_to_pidgin_staging,
-    EventsLogToEventsAggTransformer,
+    etl_events_log_to_events_agg,
+    get_events_dict_from_events_agg_file,
 )
 from pandas import read_excel as pandas_read_excel
 from dataclasses import dataclass
@@ -51,7 +45,6 @@ class WorldUnit:
     events: dict[TimeLinePoint, AcctID] = None
     pidgins: dict[AcctID, PidginUnit] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
-    _events_dir: str = None
     _pidgins_dir: str = None
     _fiscalunits: set[FiscalID] = None
     _world_dir: str = None
@@ -111,12 +104,10 @@ class WorldUnit:
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
-        self._events_dir = create_path(self._world_dir, "events")
         self._pidgins_dir = create_path(self._world_dir, "pidgins")
         self._jungle_dir = create_path(self._world_dir, "jungle")
         self._zoo_dir = create_path(self._world_dir, "zoo")
         set_dir(self._world_dir)
-        set_dir(self._events_dir)
         set_dir(self._pidgins_dir)
         set_dir(self._jungle_dir)
         set_dir(self._zoo_dir)
@@ -145,17 +136,10 @@ class WorldUnit:
         transformer.transform()
 
     def events_log_to_events_agg(self):
-        transformer = EventsLogToEventsAggTransformer(self._zoo_dir)
-        transformer.transform()
+        etl_events_log_to_events_agg(self._zoo_dir)
 
     def set_events_from_events_agg_file(self):
-        self.events = {}
-        events_file_path = create_path(self._zoo_dir, "events.xlsx")
-        events_agg_df = pandas_read_excel(events_file_path, "events_agg")
-        for index, event_agg_row in events_agg_df.iterrows():
-            x_note = event_agg_row["note"]
-            if x_note != "invalid because of conflicting event_id":
-                self.set_event(event_agg_row["event_id"], event_agg_row["face_id"])
+        self.events = get_events_dict_from_events_agg_file(self._zoo_dir)
 
     def zoo_agg_to_pidgin_staging(self):
         legitimate_events = set(self.events.keys())

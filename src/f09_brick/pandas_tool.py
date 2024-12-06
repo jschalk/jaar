@@ -233,7 +233,7 @@ def split_excel_into_dirs(
     """
     # Create the output directory if it doesn't exist
     create_dir(output_dir)
-    df = pandas_read_excel(input_file)
+    df = pandas_read_excel(input_file, sheet_name=sheet_name)
 
     # Check if the column exists
     if column_name not in df.columns:
@@ -255,6 +255,7 @@ def split_excel_into_dirs(
             # Define the output file path
             output_file = create_path(subdirectory, f"{file_name}.xlsx")
             upsert_sheet(output_file, sheet_name, filtered_df)
+            print(f"{output_file=} {sheet_name=}")
             # filtered_df.to_excel(output_file, index=False)
 
 

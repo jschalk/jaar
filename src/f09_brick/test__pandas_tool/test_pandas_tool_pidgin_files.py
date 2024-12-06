@@ -9,7 +9,7 @@ from src.f09_brick.pandas_tool import (
 )
 from src.f08_pidgin.examples.pidgin_env import (
     env_dir_setup_cleanup,
-    get_test_faces_dir,
+    get_example_face_dir,
 )
 from src.f08_pidgin.examples.example_pidgins import (
     get_casa_maison_pidginunit_set_by_nub_label,
@@ -39,7 +39,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     xio_inx = "Xioita"
     sue_pidginunit = pidginunit_shop(sue_otx)
     sue_pidginunit.set_acctbridge(get_suita_acctbridge())
-    sue_dir = f"{get_test_faces_dir()}/{sue_otx}"
+    sue_dir = f"{get_example_face_dir()}/{sue_otx}"
     bridge_filename = "bridge.json"
     pidginunit_file_path = f"{sue_dir}/{bridge_filename}"
     print(f"{sue_dir=}")
@@ -104,7 +104,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
     sue_pidginunit = get_casa_maison_pidginunit_set_by_nub_label()
-    sue_dir = f"{get_test_faces_dir()}/{sue_pidginunit.face_id}"
+    sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_id}"
     save_file(sue_dir, "bridge.json", sue_pidginunit.get_json())
     sue_otx_dt = get_casa_maison_road_otx_dt()
     sue_inx_dt = get_casa_maison_road_inx_dt()
@@ -148,7 +148,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     # ESTABLISH
     sue_pidginunit = get_casa_maison_pidginunit_set_by_nub_label()
     sue_pidginunit.set_acctbridge(get_suita_acctbridge())
-    sue_dir = f"{get_test_faces_dir()}/{sue_pidginunit.face_id}"
+    sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_id}"
     bridge_filename = "bridge.json"
     pidginunit_file_path = f"{sue_dir}/{bridge_filename}"
     print(f"{sue_dir=}")
@@ -212,7 +212,7 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
 
 # def test_get_pidgen_brick_format_filenames_ReturnsObj():
 #     # ESTABLISH
-#     env_dir = get_test_faces_dir()
+#     env_dir = get_example_face_dir()
 #     br00003_file_name = "br00003.xlsx"
 #     br00040_file_name = "br00040.xlsx"
 #     br00041_file_name = "br00041.xlsx"

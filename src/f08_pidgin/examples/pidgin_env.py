@@ -6,8 +6,8 @@ def get_test_pidgins_dir():
     return "src/f08_pidgin/examples/fiscals"
 
 
-def get_test_faces_dir():
-    return f"{get_test_pidgins_dir()}/faces"
+def get_example_face_dir():
+    return f"{get_test_pidgins_dir()}/faces/sue"
 
 
 @pytest_fixture()
