@@ -31,7 +31,7 @@ class not_given_pidgin_category_Exception(Exception):
     pass
 
 
-BRIDGES_DICT = {
+BRIDGES_CATEGORYS = {
     "bridge_acct_id": "AcctID",
     "bridge_group_id": "GroupID",
     "bridge_idea": "IdeaUnit",
@@ -67,9 +67,9 @@ JAAR_TYPES = {
 
 
 def get_jaar_type(pidgin_category: str) -> str:
-    if pidgin_category not in BRIDGES_DICT:
+    if pidgin_category not in BRIDGES_CATEGORYS:
         raise not_given_pidgin_category_Exception("not given pidgin_category")
-    return BRIDGES_DICT[pidgin_category]
+    return BRIDGES_CATEGORYS[pidgin_category]
 
 
 def get_sheet_stage_name(jaar_type: str) -> str:
@@ -503,21 +503,22 @@ def etl_pidgin_agg_to_face_dirs(zoo_dir: str, faces_dir: str):
 
 
 def etl_face_pidgin_to_event_pidgins(face_dir: str):
-    pass
+    face_pidgin_path = create_path(face_dir, "pidgin.xlsx")
+    if sheet_exists(face_pidgin_path, "acct_agg"):
+        split_excel_into_events_dirs(face_pidgin_path, face_dir, "acct_agg")
+    if sheet_exists(face_pidgin_path, "group_agg"):
+        split_excel_into_events_dirs(face_pidgin_path, face_dir, "group_agg")
+    if sheet_exists(face_pidgin_path, "road_agg"):
+        split_excel_into_events_dirs(face_pidgin_path, face_dir, "road_agg")
+    if sheet_exists(face_pidgin_path, "idea_agg"):
+        split_excel_into_events_dirs(face_pidgin_path, face_dir, "idea_agg")
 
 
 def etl_face_pidgins_to_event_pidgins(faces_dir: str):
     face_dirs = get_dir_file_strs(faces_dir, include_dirs=True, include_files=False)
-    for face_dir in face_dirs:
-        face_pidgin_path = create_path(face_dir, "pidgin.xlsx")
-        if sheet_exists(face_pidgin_path, "acct_agg"):
-            split_excel_into_events_dirs(face_pidgin_path, face_dir, "acct_agg")
-        if sheet_exists(face_pidgin_path, "group_agg"):
-            split_excel_into_events_dirs(face_pidgin_path, face_dir, "group_agg")
-        if sheet_exists(face_pidgin_path, "idea_agg"):
-            split_excel_into_events_dirs(face_pidgin_path, face_dir, "idea_agg")
-        if sheet_exists(face_pidgin_path, "road_agg"):
-            split_excel_into_events_dirs(face_pidgin_path, face_dir, "road_agg")
+    for face_id_dir in face_dirs.keys():
+        face_dir = create_path(faces_dir, face_id_dir)
+        etl_face_pidgin_to_event_pidgins(face_dir)
 
 
 def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: str):

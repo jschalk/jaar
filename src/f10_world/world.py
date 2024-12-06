@@ -28,6 +28,7 @@ from src.f10_world.transformers import (
     etl_events_log_to_events_agg,
     get_events_dict_from_events_agg_file,
     etl_pidgin_agg_to_face_dirs,
+    etl_face_pidgins_to_event_pidgins,
 )
 from pandas import read_excel as pandas_read_excel
 from dataclasses import dataclass
@@ -149,6 +150,12 @@ class WorldUnit:
 
     def pidgin_agg_to_face_dirs(self):
         etl_pidgin_agg_to_face_dirs(self._zoo_dir, self._faces_dir)
+
+    def pidgin_agg_to_face_dirs(self):
+        etl_pidgin_agg_to_face_dirs(self._zoo_dir, self._faces_dir)
+
+    def face_pidgins_to_event_pidgins(self):
+        etl_face_pidgins_to_event_pidgins(self._faces_dir)
 
     def get_dict(self) -> dict:
         return {
