@@ -200,4 +200,3 @@ def test_etl_pidgin_agg_to_face_dirs_Scenario1_AllBridgeCategorys(
     pandas_testing_assert_frame_equal(gen_sue_group_df, e1_group_agg_df)
     pandas_testing_assert_frame_equal(gen_sue_road_df, e1_road_agg_df)
     pandas_testing_assert_frame_equal(gen_sue_idea_df, e1_idea_agg_df)
-    assert 1 == 2
