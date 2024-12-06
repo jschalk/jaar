@@ -151,9 +151,6 @@ class WorldUnit:
     def pidgin_agg_to_face_dirs(self):
         etl_pidgin_agg_to_face_dirs(self._zoo_dir, self._faces_dir)
 
-    def pidgin_agg_to_face_dirs(self):
-        etl_pidgin_agg_to_face_dirs(self._zoo_dir, self._faces_dir)
-
     def face_pidgins_to_event_pidgins(self):
         etl_face_pidgins_to_event_pidgins(self._faces_dir)
 
