@@ -29,63 +29,61 @@ class not_given_pidgin_category_Exception(Exception):
     pass
 
 
+BRIDGES_DICT = {
+    "bridge_acct_id": "AcctID",
+    "bridge_group_id": "GroupID",
+    "bridge_idea": "IdeaUnit",
+    "bridge_road": "RoadUnit",
+}
+
+JAAR_TYPES = {
+    "AcctID": {
+        "stage": "acct_staging",
+        "agg": "acct_agg",
+        "otx_obj": "otx_acct_id",
+        "inx_obj": "inx_acct_id",
+    },
+    "GroupID": {
+        "stage": "group_staging",
+        "agg": "group_agg",
+        "otx_obj": "otx_group_id",
+        "inx_obj": "inx_group_id",
+    },
+    "IdeaUnit": {
+        "stage": "idea_staging",
+        "agg": "idea_agg",
+        "otx_obj": "otx_idea",
+        "inx_obj": "inx_idea",
+    },
+    "RoadUnit": {
+        "stage": "road_staging",
+        "agg": "road_agg",
+        "otx_obj": "otx_road",
+        "inx_obj": "inx_road",
+    },
+}
+
+
 def get_jaar_type(pidgin_category: str) -> str:
-    if pidgin_category == "bridge_acct_id":
-        return "AcctID"
-    elif pidgin_category == "bridge_group_id":
-        return "GroupID"
-    elif pidgin_category == "bridge_idea":
-        return "IdeaUnit"
-    elif pidgin_category == "bridge_road":
-        return "RoadUnit"
-    else:
+    if pidgin_category not in BRIDGES_DICT:
         raise not_given_pidgin_category_Exception("not given pidgin_category")
+    return BRIDGES_DICT[pidgin_category]
 
 
-def get_sheet_stage_name(jaar_type) -> str:
-    if jaar_type == "AcctID":
-        return "acct_staging"
-    elif jaar_type == "GroupID":
-        return "group_staging"
-    elif jaar_type == "IdeaUnit":
-        return "idea_staging"
-    elif jaar_type == "RoadUnit":
-        return "road_staging"
+def get_sheet_stage_name(jaar_type: str) -> str:
+    return JAAR_TYPES[jaar_type]["stage"]
 
 
-def get_sheet_agg_name(jaar_type) -> str:
-    if jaar_type == "AcctID":
-        return "acct_agg"
-    elif jaar_type == "GroupID":
-        return "group_agg"
-    elif jaar_type == "IdeaUnit":
-        return "idea_agg"
-    elif jaar_type == "RoadUnit":
-        return "road_agg"
+def get_sheet_agg_name(jaar_type: str) -> str:
+    return JAAR_TYPES[jaar_type]["agg"]
 
 
 def get_otx_obj(jaar_type, x_row) -> str:
-    if jaar_type == "AcctID":
-        return x_row["otx_acct_id"]
-    elif jaar_type == "GroupID":
-        return x_row["otx_group_id"]
-    elif jaar_type == "IdeaUnit":
-        return x_row["otx_idea"]
-    elif jaar_type == "RoadUnit":
-        return x_row["otx_road"]
-    return None
+    return x_row[JAAR_TYPES[jaar_type]["otx_obj"]]
 
 
 def get_inx_obj(jaar_type, x_row) -> str:
-    if jaar_type == "AcctID":
-        return x_row["inx_acct_id"]
-    elif jaar_type == "GroupID":
-        return x_row["inx_group_id"]
-    elif jaar_type == "IdeaUnit":
-        return x_row["inx_idea"]
-    elif jaar_type == "RoadUnit":
-        return x_row["inx_road"]
-    return None
+    return x_row[JAAR_TYPES[jaar_type]["inx_obj"]]
 
 
 class JungleToZooTransformer:
