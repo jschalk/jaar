@@ -12,7 +12,7 @@ from src.f04_gift.atom_config import (
 from src.f08_pidgin.pidgin import pidginunit_shop
 from src.f08_pidgin.examples.pidgin_env import (
     env_dir_setup_cleanup,
-    get_test_faces_dir,
+    get_example_face_dir,
 )
 from src.f08_pidgin.examples.example_pidgins import (
     get_casa_maison_pidginunit_set_by_otx2inx,
@@ -176,7 +176,7 @@ def test_create_nub_label_dt_ReturnsObj():
 def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
-    bridge_dir = get_test_faces_dir()
+    bridge_dir = get_example_face_dir()
     acct_filename = "acct.csv"
     group_filename = "group.csv"
     idea_filename = "idea.csv"
@@ -209,7 +209,7 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
 def test_load_acctbridge_from_csv_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
-    bridge_dir = get_test_faces_dir()
+    bridge_dir = get_example_face_dir()
     acct_filename = "acct.csv"
     acct_csv_path = f"{bridge_dir}/{acct_filename}"
     save_all_csvs_from_pidginunit(bridge_dir, sue_pidginunit)
@@ -232,7 +232,7 @@ def test_load_acctbridge_from_csv_SetsAttr(env_dir_setup_cleanup):
 def test_load_groupbridge_from_csv_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
-    bridge_dir = get_test_faces_dir()
+    bridge_dir = get_example_face_dir()
     group_filename = "group.csv"
     group_csv_path = f"{bridge_dir}/{group_filename}"
     save_all_csvs_from_pidginunit(bridge_dir, sue_pidginunit)
@@ -257,7 +257,7 @@ def test_load_nub_label_map_from_csv_SetsAttr(env_dir_setup_cleanup):
     sue_pidginunit = get_casa_maison_pidginunit_set_by_nub_label()
     before_road_bridgeunit = sue_pidginunit.roadbridge
     print(f"{before_road_bridgeunit.nub_label=}")
-    bridge_dir = get_test_faces_dir()
+    bridge_dir = get_example_face_dir()
     nub_filename = "nub_label.csv"
     nub_csv_path = f"{bridge_dir}/{nub_filename}"
     _save_nub_label_csv(bridge_dir, before_road_bridgeunit)
@@ -292,7 +292,7 @@ def test_create_dir_valid_empty_pidginunit_Sets_otx_wall_inx_wall(
         x_unknown_word=x_unknown_word,
     )
     sue_pidginunit.set_acctbridge(get_slash_acctbridge())
-    bridge_dir = get_test_faces_dir()
+    bridge_dir = get_example_face_dir()
     save_all_csvs_from_pidginunit(bridge_dir, sue_pidginunit)
 
     # WHEN
@@ -311,7 +311,7 @@ def test_create_dir_valid_empty_pidginunit_Sets_otx_wall_inx_wall(
 def test_init_pidginunit_from_dir_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
-    bridge_dir = get_test_faces_dir()
+    bridge_dir = get_example_face_dir()
     save_all_csvs_from_pidginunit(bridge_dir, sue_pidginunit)
 
     # WHEN
