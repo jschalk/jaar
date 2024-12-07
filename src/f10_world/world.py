@@ -19,10 +19,10 @@ from src.f09_brick.pidgin_toolbox import (
     init_pidginunit_from_dir,
 )
 from src.f10_world.transformers import (
-    JungleToZooTransformer,
-    ZooStagingToZooAggTransformer,
-    ZooAggToZooEventsTransformer,
-    ZooEventsToEventsLogTransformer,
+    etl_jungle_to_zoo_staging,
+    etl_zoo_staging_to_zoo_agg,
+    etl_zoo_agg_to_zoo_events,
+    etl_zoo_events_to_events_log,
     etl_pidgin_staging_to_agg,
     etl_zoo_agg_to_pidgin_staging,
     etl_events_log_to_events_agg,
@@ -121,20 +121,16 @@ class WorldUnit:
         self.set_pidginunit(x_pidginunit)
 
     def jungle_to_zoo_staging(self):
-        transformer = JungleToZooTransformer(self._jungle_dir, self._zoo_dir)
-        transformer.transform()
+        etl_jungle_to_zoo_staging(self._jungle_dir, self._zoo_dir)
 
     def zoo_staging_to_zoo_agg(self):
-        transformer = ZooStagingToZooAggTransformer(self._zoo_dir)
-        transformer.transform()
+        etl_zoo_staging_to_zoo_agg(self._zoo_dir)
 
     def zoo_agg_to_zoo_events(self):
-        transformer = ZooAggToZooEventsTransformer(self._zoo_dir)
-        transformer.transform()
+        etl_zoo_agg_to_zoo_events(self._zoo_dir)
 
     def zoo_events_to_events_log(self):
-        transformer = ZooEventsToEventsLogTransformer(self._zoo_dir)
-        transformer.transform()
+        etl_zoo_events_to_events_log(self._zoo_dir)
 
     def events_log_to_events_agg(self):
         etl_events_log_to_events_agg(self._zoo_dir)

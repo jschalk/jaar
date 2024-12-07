@@ -3,7 +3,11 @@ from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet
-from src.f10_world.world import worldunit_shop
+from src.f10_world.transformers import (
+    etl_jungle_to_zoo_staging,
+    etl_zoo_staging_to_zoo_agg,
+    etl_zoo_agg_to_zoo_events,
+)
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 
@@ -13,7 +17,6 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario0(
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
     sue_str = "Sue"
     yao_str = "Yao"
     event1 = 1
@@ -24,8 +27,10 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
-    zoo_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
+    jungle_dir = create_path(get_test_worlds_dir(), "jungle")
+    zoo_dir = create_path(get_test_worlds_dir(), "zoo")
+    jungle_file_path = create_path(jungle_dir, ex_file_name)
+    zoo_file_path = create_path(zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -40,11 +45,11 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario0(
     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4], columns=brick_columns)
     upsert_sheet(jungle_file_path, "example1_br00003", df1)
-    fizz_world.jungle_to_zoo_staging()
-    fizz_world.zoo_staging_to_zoo_agg()
+    etl_jungle_to_zoo_staging(jungle_dir, zoo_dir)
+    etl_zoo_staging_to_zoo_agg(zoo_dir)
 
     # WHEN
-    fizz_world.zoo_agg_to_zoo_events()
+    etl_zoo_agg_to_zoo_events(zoo_dir)
 
     # THEN
     gen_otx_events_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_events")
@@ -68,7 +73,6 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario1(
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
@@ -80,8 +84,10 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario1(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
-    zoo_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
+    jungle_dir = create_path(get_test_worlds_dir(), "jungle")
+    zoo_dir = create_path(get_test_worlds_dir(), "zoo")
+    jungle_file_path = create_path(jungle_dir, ex_file_name)
+    zoo_file_path = create_path(zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -97,11 +103,11 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario1(
     row5 = [bob_str, event3, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
     upsert_sheet(jungle_file_path, "example1_br00003", df1)
-    fizz_world.jungle_to_zoo_staging()
-    fizz_world.zoo_staging_to_zoo_agg()
+    etl_jungle_to_zoo_staging(jungle_dir, zoo_dir)
+    etl_zoo_staging_to_zoo_agg(zoo_dir)
 
     # WHEN
-    fizz_world.zoo_agg_to_zoo_events()
+    etl_zoo_agg_to_zoo_events(zoo_dir)
 
     # THEN
     gen_otx_events_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_events")

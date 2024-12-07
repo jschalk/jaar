@@ -92,6 +92,11 @@ def get_inx_obj(jaar_type, x_row) -> str:
     return x_row[JAAR_TYPES[jaar_type]["inx_obj"]]
 
 
+def etl_jungle_to_zoo_staging(jungle_dir: str, zoo_dir: str):
+    transformer = JungleToZooTransformer(jungle_dir, zoo_dir)
+    transformer.transform()
+
+
 class JungleToZooTransformer:
     def __init__(self, jungle_dir: str, zoo_dir: str):
         self.jungle_dir = jungle_dir
@@ -122,6 +127,11 @@ class JungleToZooTransformer:
         upsert_sheet(zoo_path, "zoo_staging", final_df)
 
 
+def etl_zoo_staging_to_zoo_agg(zoo_dir):
+    transformer = ZooStagingToZooAggTransformer(zoo_dir)
+    transformer.transform()
+
+
 class ZooStagingToZooAggTransformer:
     def __init__(self, zoo_dir: str):
         self.zoo_dir = zoo_dir
@@ -148,6 +158,11 @@ class ZooStagingToZooAggTransformer:
         )
 
 
+def etl_zoo_agg_to_zoo_events(zoo_dir):
+    transformer = ZooAggToZooEventsTransformer(zoo_dir)
+    transformer.transform()
+
+
 class ZooAggToZooEventsTransformer:
     def __init__(self, zoo_dir: str):
         self.zoo_dir = zoo_dir
@@ -169,6 +184,11 @@ class ZooAggToZooEventsTransformer:
             .apply(lambda x: "invalid because of conflicting event_id" if x else "")
         )
         return events_df.sort_values(["face_id", "event_id"])
+
+
+def etl_zoo_events_to_events_log(zoo_dir: str):
+    transformer = ZooEventsToEventsLogTransformer(zoo_dir)
+    transformer.transform()
 
 
 class ZooEventsToEventsLogTransformer:
