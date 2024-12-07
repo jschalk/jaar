@@ -21,11 +21,35 @@ from src.f08_pidgin.pidgin_config import (
     otx_group_id_str,
     unknown_word_str,
 )
-from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
+from src.f09_brick.pandas_tool import (
+    upsert_sheet,
+    sheet_exists,
+    _get_pidgen_brick_format_filenames,
+)
 from src.f10_world.world import worldunit_shop
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
+
+
+def test_get_pidgen_brick_format_filenames_ReturnsObj():
+    # ESTABLISH / WHEN
+    pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
+
+    # THEN
+    print(f"need examples for {pidgen_brick_filenames=}")
+    assert pidgen_brick_filenames == {
+        "br00041.xlsx",
+        "br00042.xlsx",
+        "br00043.xlsx",
+        "br00044.xlsx",
+        "br00045.xlsx",
+        "br00113.xlsx",
+        "br00114.xlsx",
+        "br00115.xlsx",
+        "br00116.xlsx",
+        "br00117.xlsx",
+    }
 
 
 def test_WorldUnit_zoo_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):

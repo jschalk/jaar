@@ -42,24 +42,28 @@ JAAR_TYPES = {
     "AcctID": {
         "stage": "acct_staging",
         "agg": "acct_agg",
+        "csv_filename": "acct.csv",
         "otx_obj": "otx_acct_id",
         "inx_obj": "inx_acct_id",
     },
     "GroupID": {
         "stage": "group_staging",
         "agg": "group_agg",
+        "csv_filename": "group.csv",
         "otx_obj": "otx_group_id",
         "inx_obj": "inx_group_id",
     },
     "IdeaUnit": {
         "stage": "idea_staging",
         "agg": "idea_agg",
+        "csv_filename": "idea.csv",
         "otx_obj": "otx_idea",
         "inx_obj": "inx_idea",
     },
     "RoadUnit": {
         "stage": "road_staging",
         "agg": "road_agg",
+        "csv_filename": "road.csv",
         "otx_obj": "otx_road",
         "inx_obj": "inx_road",
     },
@@ -492,26 +496,24 @@ class PidginStagingToAggTransformer:
 
 def etl_pidgin_agg_to_face_dirs(zoo_dir: str, faces_dir: str):
     agg_pidgin = create_path(zoo_dir, "pidgin.xlsx")
-    if sheet_exists(agg_pidgin, "acct_agg"):
-        split_excel_into_dirs(agg_pidgin, faces_dir, "face_id", "pidgin", "acct_agg")
-    if sheet_exists(agg_pidgin, "group_agg"):
-        split_excel_into_dirs(agg_pidgin, faces_dir, "face_id", "pidgin", "group_agg")
-    if sheet_exists(agg_pidgin, "idea_agg"):
-        split_excel_into_dirs(agg_pidgin, faces_dir, "face_id", "pidgin", "idea_agg")
-    if sheet_exists(agg_pidgin, "road_agg"):
-        split_excel_into_dirs(agg_pidgin, faces_dir, "face_id", "pidgin", "road_agg")
+    for jaar_type in JAAR_TYPES.keys():
+        agg_sheet_name = JAAR_TYPES[jaar_type]["agg"]
+        if sheet_exists(agg_pidgin, agg_sheet_name):
+            split_excel_into_dirs(
+                input_file=agg_pidgin,
+                output_dir=faces_dir,
+                column_name="face_id",
+                file_name="pidgin",
+                sheet_name=agg_sheet_name,
+            )
 
 
 def etl_face_pidgin_to_event_pidgins(face_dir: str):
     face_pidgin_path = create_path(face_dir, "pidgin.xlsx")
-    if sheet_exists(face_pidgin_path, "acct_agg"):
-        split_excel_into_events_dirs(face_pidgin_path, face_dir, "acct_agg")
-    if sheet_exists(face_pidgin_path, "group_agg"):
-        split_excel_into_events_dirs(face_pidgin_path, face_dir, "group_agg")
-    if sheet_exists(face_pidgin_path, "road_agg"):
-        split_excel_into_events_dirs(face_pidgin_path, face_dir, "road_agg")
-    if sheet_exists(face_pidgin_path, "idea_agg"):
-        split_excel_into_events_dirs(face_pidgin_path, face_dir, "idea_agg")
+    for jaar_type in JAAR_TYPES.keys():
+        agg_sheet_name = JAAR_TYPES[jaar_type]["agg"]
+        if sheet_exists(face_pidgin_path, agg_sheet_name):
+            split_excel_into_events_dirs(face_pidgin_path, face_dir, agg_sheet_name)
 
 
 def etl_face_pidgins_to_event_pidgins(faces_dir: str):
@@ -523,3 +525,24 @@ def etl_face_pidgins_to_event_pidgins(faces_dir: str):
 
 def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: str):
     split_excel_into_dirs(pidgin_file, face_dir, "event_id", "pidgin", sheet_name)
+
+
+def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
+    event_pidgin_path = create_path(event_pidgin_dir, "pidgin.xlsx")
+    for jaar_type in JAAR_TYPES.keys():
+        agg_sheet_name = JAAR_TYPES[jaar_type]["agg"]
+        csv_filename = JAAR_TYPES[jaar_type]["csv_filename"]
+        if sheet_exists(event_pidgin_path, agg_sheet_name):
+            acct_csv_path = create_path(event_pidgin_dir, csv_filename)
+            acct_df = pandas_read_excel(event_pidgin_path, agg_sheet_name)
+            acct_df.to_csv(acct_csv_path, index=False)
+
+
+def etl_event_pidgins_to_pidgin_csv_files(faces_dir: str):
+    face_dirs = get_dir_file_strs(faces_dir, include_dirs=True, include_files=False)
+    for face_id_dir in face_dirs.keys():
+        face_dir = create_path(faces_dir, face_id_dir)
+        event_dirs = get_dir_file_strs(face_dir, include_dirs=True, include_files=False)
+        for event_dir in event_dirs.keys():
+            event_pidgin_dir = create_path(face_dir, event_dir)
+            event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
