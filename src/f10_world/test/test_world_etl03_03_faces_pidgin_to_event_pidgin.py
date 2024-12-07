@@ -121,13 +121,14 @@ def test_etl_face_pidgins_to_event_pidgins_Scenario0_road_Two_face_ids(
         unknown_word_str(),
     ]
     x_nan = float("nan")
+    z3_road3 = [zia_str, event3, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    zia_road_agg_df = DataFrame([z3_road3], columns=road_file_columns)
+
     e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
     e1_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e1_road2 = [sue_str, event9, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e1_road_rows = [e1_road0, e1_road1, e1_road2]
     sue_road_agg_df = DataFrame(e1_road_rows, columns=road_file_columns)
-    z1_road3 = [zia_str, event3, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    zia_road_agg_df = DataFrame([z1_road3], columns=road_file_columns)
 
     sue_dir = create_path(fizz_world._faces_dir, sue_str)
     zia_dir = create_path(fizz_world._faces_dir, zia_str)
@@ -168,3 +169,19 @@ def test_etl_face_pidgins_to_event_pidgins_Scenario0_road_Two_face_ids(
     assert sheet_exists(event3_pidgin_file_path, road_agg_str)
     assert sheet_exists(event7_pidgin_file_path, road_agg_str)
     assert sheet_exists(event9_pidgin_file_path, road_agg_str)
+    e3_pidgin_road_df = pandas_read_excel(event3_pidgin_file_path, road_agg_str)
+    e7_pidgin_road_df = pandas_read_excel(event7_pidgin_file_path, road_agg_str)
+    e9_pidgin_road_df = pandas_read_excel(event9_pidgin_file_path, road_agg_str)
+
+    expected7_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    expected7_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    expected7_road_rows = [expected7_road0, expected7_road1]
+    expected7_agg_df = DataFrame(expected7_road_rows, columns=road_file_columns)
+
+    expected9_road0 = [sue_str, event9, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    expected9_road_rows = [expected9_road0]
+    expected9_agg_df = DataFrame(expected9_road_rows, columns=road_file_columns)
+
+    pandas_testing_assert_frame_equal(e3_pidgin_road_df, zia_road_agg_df)
+    pandas_testing_assert_frame_equal(e7_pidgin_road_df, expected7_agg_df)
+    pandas_testing_assert_frame_equal(e9_pidgin_road_df, expected9_agg_df)
