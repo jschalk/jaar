@@ -375,3 +375,7 @@ def test_etl_face_pidgins_to_event_pidgins_Scenario0_road_Two_face_ids(
     assert sheet_exists(event3_pidgin_file_path, road_agg_str)
     assert sheet_exists(event7_pidgin_file_path, road_agg_str)
     assert sheet_exists(event9_pidgin_file_path, road_agg_str)
+    gen_e3 = pandas_read_excel(event3_pidgin_file_path, road_agg_str)
+    gen_e7 = pandas_read_excel(event7_pidgin_file_path, road_agg_str)
+    gen_e9 = pandas_read_excel(event9_pidgin_file_path, road_agg_str)
+    pandas_testing_assert_frame_equal(gen_e3, zia_road_agg_df)
