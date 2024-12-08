@@ -572,17 +572,14 @@ def etl_event_pidgins_to_pidgin_csv_files(faces_dir: str):
 
 def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
     pidginunit = init_pidginunit_from_dir(event_dir)
-    # print(f"{pidginunit=}")
-    # print(f"{pidginunit.get_dict()=}")
-    # smaller_dict = pidginunit.get_dict()
-    # print("")
-    # print(f"{smaller_dict.keys()=}")
-    # smaller_dict.pop("acctbridge")
-    # smaller_dict.pop("groupbridge")
-    # smaller_dict.pop("ideabridge")
-    # smaller_dict.pop("roadbridge")
-    # smaller_dict.pop("event_id")
-    # print(f"{smaller_dict=}")
-    # json_dumps(obj=smaller_dict, indent=3, sort_keys=True)
-    # print("small dict successful")
     save_file(event_dir, "pidgin.json", pidginunit.get_json(), replace=True)
+
+
+def etl_event_pidgins_csvs_to_pidgin_jsons(faces_dir: str):
+    face_dirs = get_dir_file_strs(faces_dir, include_dirs=True, include_files=False)
+    for face_id_dir in face_dirs.keys():
+        face_dir = create_path(faces_dir, face_id_dir)
+        event_dirs = get_dir_file_strs(face_dir, include_dirs=True, include_files=False)
+        for event_dir in event_dirs.keys():
+            event_pidgin_dir = create_path(face_dir, event_dir)
+            etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
