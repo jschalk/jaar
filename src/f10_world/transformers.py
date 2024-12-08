@@ -560,14 +560,21 @@ def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
             acct_df.to_csv(acct_csv_path, index=False)
 
 
-def etl_event_pidgins_to_pidgin_csv_files(faces_dir: str):
+def _get_all_faces_dir_event_dirs(faces_dir) -> list[str]:
+    full_event_dirs = []
     face_dirs = get_dir_file_strs(faces_dir, include_dirs=True, include_files=False)
     for face_id_dir in face_dirs.keys():
         face_dir = create_path(faces_dir, face_id_dir)
         event_dirs = get_dir_file_strs(face_dir, include_dirs=True, include_files=False)
-        for event_dir in event_dirs.keys():
-            event_pidgin_dir = create_path(face_dir, event_dir)
-            event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
+        full_event_dirs.extend(
+            create_path(face_dir, event_dir) for event_dir in event_dirs.keys()
+        )
+    return full_event_dirs
+
+
+def etl_event_pidgins_to_pidgin_csv_files(faces_dir: str):
+    for event_pidgin_dir in _get_all_faces_dir_event_dirs(faces_dir):
+        event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
 
 
 def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
@@ -576,10 +583,5 @@ def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
 
 
 def etl_event_pidgins_csvs_to_pidgin_jsons(faces_dir: str):
-    face_dirs = get_dir_file_strs(faces_dir, include_dirs=True, include_files=False)
-    for face_id_dir in face_dirs.keys():
-        face_dir = create_path(faces_dir, face_id_dir)
-        event_dirs = get_dir_file_strs(face_dir, include_dirs=True, include_files=False)
-        for event_dir in event_dirs.keys():
-            event_pidgin_dir = create_path(face_dir, event_dir)
-            etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
+    for event_pidgin_dir in _get_all_faces_dir_event_dirs(faces_dir):
+        etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)

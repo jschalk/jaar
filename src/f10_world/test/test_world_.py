@@ -363,40 +363,6 @@ def test_WorldUnit_delete_pidginunit_dir_SetsAttrDeletesDir(env_dir_setup_cleanu
 #     assert os_path_exists(bob_dir) is False
 
 
-# # def test_WorldUnit_set_all_events_from_dirs_SetsAttr(env_dir_setup_cleanup):
-# #     # ESTABLISH
-# #     x_world = worldunit_shop()
-# #     sue_str = "Sue"
-# #     bob_str = "Bob"
-# #     zia_str = "Zia"
-# #     save_file(f"{x_world._faces_dir}/{sue_str}", "temp.txt", "")
-# #     save_file(f"{x_world._faces_dir}/{bob_str}", "temp.txt", "")
-# #     save_file(f"{x_world._faces_dir}/{zia_str}", "temp.txt", "")
-# #     assert x_world.pidginunit_exists(sue_str) is False
-# #     assert x_world.pidginunit_exists(bob_str) is False
-# #     assert x_world.pidginunit_exists(zia_str) is False
-# #     assert x_world.pidgins_empty()
-
-# #     # WHEN
-# #     x_world._set_all_pidginunits_from_dirs()
-
-# #     # THEN
-# #     assert x_world.pidginunit_exists(sue_str)
-# #     assert x_world.pidginunit_exists(bob_str)
-# #     assert x_world.pidginunit_exists(zia_str)
-# #     assert x_world.pidgins_empty() is False
-
-# #     # WHEN
-# #     delete_dir(f"{x_world._faces_dir}/{zia_str}")
-# #     x_world._set_all_pidginunits_from_dirs()
-
-# #     # THEN
-# #     assert x_world.pidginunit_exists(sue_str)
-# #     assert x_world.pidginunit_exists(bob_str)
-# #     assert x_world.pidginunit_exists(zia_str) is False
-# #     assert x_world.pidgins_empty() is False
-
-
 # def test_WorldUnit_save_pidginunit_ChangesFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     x_world = worldunit_shop()
