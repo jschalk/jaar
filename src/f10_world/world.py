@@ -85,16 +85,16 @@ class WorldUnit:
     def pidgins_empty(self) -> bool:
         return self.pidgins == {}
 
-    def _face_dir(self, face_id: AcctID, event_id: TimeLinePoint) -> str:
+    def _event_dir(self, face_id: AcctID, event_id: TimeLinePoint) -> str:
         face_dir = create_path(self._faces_dir, face_id)
         return create_path(face_dir, event_id)
 
     def save_pidginunit_files(self, face_id: AcctID, event_id: AcctID):
         x_pidginunit = self.get_pidginunit(event_id)
-        save_all_csvs_from_pidginunit(self._face_dir(face_id, event_id), x_pidginunit)
+        save_all_csvs_from_pidginunit(self._event_dir(face_id, event_id), x_pidginunit)
 
     def pidgin_dir_exists(self, face_id: AcctID, event_id: TimeLinePoint) -> bool:
-        return os_path_exists(self._face_dir(face_id, event_id))
+        return os_path_exists(self._event_dir(face_id, event_id))
 
     def _set_all_pidginunits_from_dirs(self):
         self.del_all_pidginunits()
@@ -120,7 +120,7 @@ class WorldUnit:
         return self.timeconversions
 
     def load_pidginunit_from_files(self, face_id: AcctID, event_id: TimeLinePoint):
-        x_pidginunit = init_pidginunit_from_dir(self._face_dir(face_id, event_id))
+        x_pidginunit = init_pidginunit_from_dir(self._event_dir(face_id, event_id))
         self.set_pidginunit(x_pidginunit)
 
     def jungle_to_zoo_staging(self):
