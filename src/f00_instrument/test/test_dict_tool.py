@@ -1,4 +1,5 @@
 from src.f00_instrument.dict_toolbox import (
+    get_0_if_None,
     get_1_if_None,
     add_nested_dict_if_missing,
     set_in_nested_dict,
@@ -31,6 +32,7 @@ from src.f00_instrument.dict_toolbox import (
 )
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
+from numpy import int64 as numpy_int64
 
 
 def test_get_1_if_None():
@@ -38,6 +40,16 @@ def test_get_1_if_None():
     assert get_1_if_None(None) == 1
     assert get_1_if_None(2) == 2
     assert get_1_if_None(-3) == -3
+
+
+def test_get_0_if_None():
+    # ESTABLISH / WHEN / THEN
+    assert get_0_if_None(None) == 0
+    assert get_0_if_None(2) == 2
+    assert get_0_if_None(-3) == -3
+    e7 = numpy_int64(7)
+    assert str(type(get_0_if_None(e7))) != "<class 'numpy.int64'>"
+    assert str(type(get_0_if_None(e7))) == "<class 'int'>"
 
 
 def test_add_nested_dict_if_missing_CorrectAddsDict():

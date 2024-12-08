@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, get_dir_file_strs
+from src.f00_instrument.file import create_path, get_dir_file_strs, save_file
 from src.f01_road.finance_tran import TimeLinePoint
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_brick.brick_config import (
@@ -14,6 +14,7 @@ from src.f09_brick.pandas_tool import (
     split_excel_into_dirs,
     sheet_exists,
 )
+from src.f09_brick.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_world.world_tool import get_all_brick_dataframes
 from src.f10_world.pidgin_agg import (
     pidginheartbook_shop,
@@ -25,6 +26,7 @@ from src.f10_world.pidgin_agg import (
 )
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
+from json import dumps as json_dumps
 
 
 class not_given_pidgin_category_Exception(Exception):
@@ -566,3 +568,21 @@ def etl_event_pidgins_to_pidgin_csv_files(faces_dir: str):
         for event_dir in event_dirs.keys():
             event_pidgin_dir = create_path(face_dir, event_dir)
             event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
+
+
+def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
+    pidginunit = init_pidginunit_from_dir(event_dir)
+    # print(f"{pidginunit=}")
+    # print(f"{pidginunit.get_dict()=}")
+    # smaller_dict = pidginunit.get_dict()
+    # print("")
+    # print(f"{smaller_dict.keys()=}")
+    # smaller_dict.pop("acctbridge")
+    # smaller_dict.pop("groupbridge")
+    # smaller_dict.pop("ideabridge")
+    # smaller_dict.pop("roadbridge")
+    # smaller_dict.pop("event_id")
+    # print(f"{smaller_dict=}")
+    # json_dumps(obj=smaller_dict, indent=3, sort_keys=True)
+    # print("small dict successful")
+    save_file(event_dir, "pidgin.json", pidginunit.get_json(), replace=True)

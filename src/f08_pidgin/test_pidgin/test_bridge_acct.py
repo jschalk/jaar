@@ -7,6 +7,7 @@ from src.f08_pidgin.bridge import (
     get_acctbridge_from_json,
 )
 from pytest import raises as pytest_raises
+from numpy import int64 as numpy_int64
 
 
 def test_AcctBridge_Exists():
@@ -63,6 +64,36 @@ def test_acctbridge_shop_ReturnsObj_scenario1_WithParameters():
     assert x_acctbridge.unknown_word == x_unknown_word
     assert x_acctbridge.otx_wall == slash_otx_wall
     assert x_acctbridge.inx_wall == colon_inx_wall
+
+
+def test_acctbridge_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_float_nan():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    event7 = numpy_int64(7)
+    otx2inx = {xio_str: sue_str}
+    x_nan = float("nan")
+
+    # WHEN
+    x_acctbridge = acctbridge_shop(
+        x_face_id=bob_str,
+        x_event_id=numpy_int64(event7),
+        x_otx2inx=otx2inx,
+        x_unknown_word=x_nan,
+        x_otx_wall=x_nan,
+        x_inx_wall=x_nan,
+    )
+
+    # THEN
+    assert x_acctbridge.face_id == bob_str
+    assert x_acctbridge.event_id == event7
+    assert str(type(x_acctbridge.event_id)) != "<class 'numpy.int64'>"
+    assert str(type(x_acctbridge.event_id)) == "<class 'int'>"
+    assert x_acctbridge.otx2inx == otx2inx
+    assert x_acctbridge.unknown_word == default_unknown_word()
+    assert x_acctbridge.otx_wall == default_wall_if_none()
+    assert x_acctbridge.inx_wall == default_wall_if_none()
 
 
 def test_AcctBridge_set_all_otx2inx_SetsAttr():

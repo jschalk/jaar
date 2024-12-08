@@ -18,7 +18,7 @@ def get_1_if_None(x_obj):
 
 
 def get_0_if_None(x_obj=None):
-    return 0 if x_obj is None else x_obj
+    return 0 if x_obj is None else int(x_obj)
 
 
 def get_empty_list_if_None(x_obj=None):

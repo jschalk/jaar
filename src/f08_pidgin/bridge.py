@@ -126,6 +126,13 @@ def acctbridge_shop(
         x_otx_wall = default_wall_if_none()
     if x_inx_wall is None:
         x_inx_wall = default_wall_if_none()
+    # handle float nan issue
+    if x_unknown_word != x_unknown_word:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall != x_otx_wall:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall != x_inx_wall:
+        x_inx_wall = default_wall_if_none()
 
     return AcctBridge(
         face_id=x_face_id,
@@ -206,6 +213,13 @@ def groupbridge_shop(
     if x_otx_wall is None:
         x_otx_wall = default_wall_if_none()
     if x_inx_wall is None:
+        x_inx_wall = default_wall_if_none()
+    # handle float nan issue
+    if x_unknown_word != x_unknown_word:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall != x_otx_wall:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall != x_inx_wall:
         x_inx_wall = default_wall_if_none()
 
     return GroupBridge(
@@ -370,6 +384,13 @@ def roadbridge_shop(
         x_otx_wall = default_wall_if_none()
     if x_inx_wall is None:
         x_inx_wall = default_wall_if_none()
+    # # handle float nan issue
+    if x_unknown_word != x_unknown_word:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall != x_otx_wall:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall != x_inx_wall:
+        x_inx_wall = default_wall_if_none()
 
     return RoadBridge(
         otx2inx=get_empty_dict_if_none(x_otx2inx),
@@ -452,6 +473,13 @@ def ideabridge_shop(
     if x_otx_wall is None:
         x_otx_wall = default_wall_if_none()
     if x_inx_wall is None:
+        x_inx_wall = default_wall_if_none()
+    # handle float nan issue
+    if x_unknown_word != x_unknown_word:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall != x_otx_wall:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall != x_inx_wall:
         x_inx_wall = default_wall_if_none()
 
     return IdeaBridge(

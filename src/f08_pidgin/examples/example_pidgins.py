@@ -456,3 +456,24 @@ def get_slash_acctbridge() -> AcctBridge:
     x_acctbridge.set_otx2inx(sue_otx, sue_inx)
     x_acctbridge.set_otx2inx(bob_otx, bob_inx)
     return x_acctbridge
+
+
+def get_pidgin_core_attrs_are_none_acctbridge() -> AcctBridge:
+    xio_otx = "Xio"
+    sue_otx = "Sue"
+    bob_otx = "Bob"
+    xio_inx = "Xioita"
+    sue_inx = "Suita"
+    bob_inx = "Bobita"
+    x_nan = float("nan")
+    x_acctbridge = acctbridge_shop(
+        x_face_id="Sue",
+        x_event_id=7,
+        x_otx_wall=x_nan,
+        x_inx_wall=x_nan,
+        x_unknown_word=x_nan,
+    )
+    x_acctbridge.set_otx2inx(xio_otx, xio_inx)
+    x_acctbridge.set_otx2inx(sue_otx, sue_inx)
+    x_acctbridge.set_otx2inx(bob_otx, bob_inx)
+    return x_acctbridge

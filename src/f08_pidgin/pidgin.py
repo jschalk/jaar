@@ -7,6 +7,7 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.finance import TimeLinePoint
 from src.f01_road.road import default_wall_if_none, OwnerID
 from src.f08_pidgin.bridge import (
+    BridgeCore,
     GroupBridge,
     AcctBridge,
     IdeaBridge,
@@ -151,7 +152,7 @@ class PidginUnit:
     def del_road(self, otx_road: str):
         return self.roadbridge.del_otx2inx(otx_road)
 
-    def _check_all_core_attrs_match(self, x_bridgecore):
+    def _check_all_core_attrs_match(self, x_bridgecore: BridgeCore):
         self._check_attr_match("face_id", x_bridgecore)
         self._check_attr_match("otx_wall", x_bridgecore)
         self._check_attr_match("inx_wall", x_bridgecore)
@@ -253,6 +254,13 @@ def pidginunit_shop(
     if x_otx_wall is None:
         x_otx_wall = default_wall_if_none()
     if x_inx_wall is None:
+        x_inx_wall = default_wall_if_none()
+    # to handle float(nan)
+    if x_unknown_word != x_unknown_word:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall != x_otx_wall:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall != x_inx_wall:
         x_inx_wall = default_wall_if_none()
 
     return PidginUnit(

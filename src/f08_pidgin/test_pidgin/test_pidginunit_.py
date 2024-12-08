@@ -187,6 +187,32 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     assert sue_pidginunit.roadbridge.inx_wall == colon_inx_wall
 
 
+def test_pidginunit_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_float_nan():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    event7 = 7
+    otx2inx = {xio_str: sue_str}
+    x_nan = float("nan")
+
+    # WHEN
+    x_pidginunit = pidginunit_shop(
+        x_face_id=bob_str,
+        x_event_id=event7,
+        x_unknown_word=x_nan,
+        x_otx_wall=x_nan,
+        x_inx_wall=x_nan,
+    )
+
+    # THEN
+    assert x_pidginunit.face_id == bob_str
+    assert x_pidginunit.event_id == event7
+    assert x_pidginunit.unknown_word == default_unknown_word()
+    assert x_pidginunit.otx_wall == default_wall_if_none()
+    assert x_pidginunit.inx_wall == default_wall_if_none()
+
+
 def test_PidginUnit_set_bridgeunit_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"

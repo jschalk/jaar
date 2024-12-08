@@ -65,6 +65,34 @@ def test_groupbridge_shop_ReturnsObj_scenario1_WithParameters():
     assert x_groupbridge.inx_wall == colon_inx_wall
 
 
+def test_groupbridge_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_float_nan():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    event7 = 7
+    otx2inx = {xio_str: sue_str}
+    x_nan = float("nan")
+
+    # WHEN
+    x_groupbridge = groupbridge_shop(
+        x_face_id=bob_str,
+        x_event_id=event7,
+        x_otx2inx=otx2inx,
+        x_unknown_word=x_nan,
+        x_otx_wall=x_nan,
+        x_inx_wall=x_nan,
+    )
+
+    # THEN
+    assert x_groupbridge.face_id == bob_str
+    assert x_groupbridge.event_id == event7
+    assert x_groupbridge.otx2inx == otx2inx
+    assert x_groupbridge.unknown_word == default_unknown_word()
+    assert x_groupbridge.otx_wall == default_wall_if_none()
+    assert x_groupbridge.inx_wall == default_wall_if_none()
+
+
 def test_GroupBridge_set_all_otx2inx_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"

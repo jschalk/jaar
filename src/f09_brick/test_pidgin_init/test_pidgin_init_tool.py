@@ -1,4 +1,6 @@
 from src.f00_instrument.file import get_dir_file_strs
+from src.f01_road.jaar_config import default_unknown_word
+from src.f01_road.road import default_wall_if_none
 from src.f04_gift.atom_config import (
     type_AcctID_str,
     type_IdeaUnit_str,
@@ -28,6 +30,7 @@ from src.f08_pidgin.examples.example_pidgins import (
     get_slash_acctbridge,
     get_sue_pidginunit,
     get_casa_maison_pidginunit_set_by_nub_label,
+    get_pidgin_core_attrs_are_none_acctbridge,
 )
 from src.f09_brick.pidgin_toolbox import (
     get_bridge_acct_dt_columns,
@@ -217,7 +220,7 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     assert len(get_dir_file_strs(bridge_dir)) == 5
 
 
-def test_load_acctbridge_from_csv_SetsAttr(env_dir_setup_cleanup):
+def test_load_acctbridge_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
     bridge_dir = get_example_face_dir()
@@ -240,7 +243,26 @@ def test_load_acctbridge_from_csv_SetsAttr(env_dir_setup_cleanup):
     assert ex_acctbridge == sue_acctbridge
 
 
-def test_load_groupbridge_from_csv_SetsAttr(env_dir_setup_cleanup):
+def test_load_acctbridge_from_csv_DoesNothinWhenFileDoesNotExist(env_dir_setup_cleanup):
+    # ESTABLISH
+    bridge_dir = get_example_face_dir()
+    acct_filename = "acct.csv"
+    acct_csv_path = f"{bridge_dir}/{acct_filename}"
+    assert os_path_exists(acct_csv_path) is False
+    empty_pidginunit = pidginunit_shop("Sue")
+    sue_acctbridge = empty_pidginunit.get_bridgeunit(type_AcctID_str())
+    sue_acctbridge.face_id = "Sue"
+    print(f"{empty_pidginunit=} {sue_acctbridge=}")
+    assert len(sue_acctbridge.otx2inx) == 0
+
+    # WHEN
+    sue_acctbridge = _load_acctbridge_from_csv(bridge_dir, sue_acctbridge)
+
+    # THEN
+    assert len(sue_acctbridge.otx2inx) == 0
+
+
+def test_load_groupbridge_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
     bridge_dir = get_example_face_dir()
@@ -261,6 +283,118 @@ def test_load_groupbridge_from_csv_SetsAttr(env_dir_setup_cleanup):
     assert len(sue_groupbridge.otx2inx) == 2
     ex_groupbridge = sue_pidginunit.get_bridgeunit(type_GroupID_str())
     assert ex_groupbridge == sue_groupbridge
+
+
+def test_load_groupbridge_from_csv_DoesNothingWhenFileDoesNotExist(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    bridge_dir = get_example_face_dir()
+    group_filename = "group.csv"
+    group_csv_path = f"{bridge_dir}/{group_filename}"
+    assert os_path_exists(group_csv_path) is False
+    empty_pidginunit = pidginunit_shop("Sue")
+    sue_groupbridge = empty_pidginunit.get_bridgeunit(type_GroupID_str())
+    sue_groupbridge.face_id = "Sue"
+    print(f"{empty_pidginunit=} {sue_groupbridge=}")
+    assert len(sue_groupbridge.otx2inx) == 0
+
+    # WHEN
+    sue_groupbridge = _load_groupbridge_from_csv(bridge_dir, sue_groupbridge)
+
+    # THEN
+    assert len(sue_groupbridge.otx2inx) == 0
+
+
+def test_load_ideabridge_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_pidginunit = get_sue_pidginunit()
+    bridge_dir = get_example_face_dir()
+    idea_filename = "idea.csv"
+    idea_csv_path = f"{bridge_dir}/{idea_filename}"
+    save_all_csvs_from_pidginunit(bridge_dir, sue_pidginunit)
+    assert os_path_exists(idea_csv_path)
+    empty_pidginunit = pidginunit_shop("Sue")
+    sue_ideabridge = empty_pidginunit.get_bridgeunit(type_IdeaUnit_str())
+    sue_ideabridge.face_id = "Sue"
+    print(f"{empty_pidginunit=} {sue_ideabridge=}")
+    assert len(sue_ideabridge.otx2inx) == 0
+
+    # WHEN
+    sue_ideabridge = _load_ideabridge_from_csv(bridge_dir, sue_ideabridge)
+
+    # THEN
+    assert len(sue_ideabridge.otx2inx) == 2
+    ex_ideabridge = sue_pidginunit.get_bridgeunit(type_IdeaUnit_str())
+    assert ex_ideabridge == sue_ideabridge
+
+
+def test_load_ideabridge_from_csv_DoesNothingWhenFileDoesNotExist(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    bridge_dir = get_example_face_dir()
+    idea_filename = "idea.csv"
+    idea_csv_path = f"{bridge_dir}/{idea_filename}"
+    assert os_path_exists(idea_csv_path) is False
+    empty_pidginunit = pidginunit_shop("Sue")
+    sue_ideabridge = empty_pidginunit.get_bridgeunit(type_IdeaUnit_str())
+    sue_ideabridge.face_id = "Sue"
+    print(f"{empty_pidginunit=} {sue_ideabridge=}")
+    assert len(sue_ideabridge.otx2inx) == 0
+
+    # WHEN
+    sue_ideabridge = _load_ideabridge_from_csv(bridge_dir, sue_ideabridge)
+
+    # THEN
+    assert len(sue_ideabridge.otx2inx) == 0
+
+
+def test_load_roadbridge_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_pidginunit = get_sue_pidginunit()
+    bridge_dir = get_example_face_dir()
+    road_filename = "road.csv"
+    road_csv_path = f"{bridge_dir}/{road_filename}"
+    save_all_csvs_from_pidginunit(bridge_dir, sue_pidginunit)
+    assert os_path_exists(road_csv_path)
+    empty_pidginunit = pidginunit_shop("Sue")
+    sue_roadbridge = empty_pidginunit.get_bridgeunit(type_RoadUnit_str())
+    sue_roadbridge.face_id = "Sue"
+    print(f"{empty_pidginunit=} {sue_roadbridge=}")
+    assert len(sue_roadbridge.otx2inx) == 0
+
+    # WHEN
+    sue_roadbridge = _load_roadbridge_from_csv(bridge_dir, sue_roadbridge)
+
+    # THEN
+    assert len(sue_roadbridge.otx2inx) == 2
+    ex_roadbridge = sue_pidginunit.get_bridgeunit(type_RoadUnit_str())
+    assert ex_roadbridge.event_id == sue_roadbridge.event_id
+    assert ex_roadbridge.face_id == sue_roadbridge.face_id
+    assert ex_roadbridge.otx2inx == sue_roadbridge.otx2inx
+    assert ex_roadbridge.nub_label != sue_roadbridge.nub_label
+
+
+def test_load_roadbridge_from_csv_DoesNothingWhenFileDoesNotExist(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    bridge_dir = get_example_face_dir()
+    road_filename = "road.csv"
+    road_csv_path = f"{bridge_dir}/{road_filename}"
+    assert os_path_exists(road_csv_path) is False
+    empty_pidginunit = pidginunit_shop("Sue")
+    sue_roadbridge = empty_pidginunit.get_bridgeunit(type_RoadUnit_str())
+    sue_roadbridge.face_id = "Sue"
+    print(f"{empty_pidginunit=} {sue_roadbridge=}")
+    assert len(sue_roadbridge.otx2inx) == 0
+
+    # WHEN
+    sue_roadbridge = _load_roadbridge_from_csv(bridge_dir, sue_roadbridge)
+
+    # THEN
+    assert len(sue_roadbridge.otx2inx) == 0
 
 
 def test_load_nub_label_map_from_csv_SetsAttr(env_dir_setup_cleanup):
@@ -346,7 +480,6 @@ def test_create_dir_valid_empty_pidginunit_Returns_event_id(
     # THEN
     assert gen_pidginunit.face_id == sue_str
     assert gen_pidginunit.event_id == event7
-    assert gen_pidginunit.unknown_word == x_unknown_word
     assert gen_pidginunit.unknown_word == x_unknown_word
     assert gen_pidginunit.otx_wall == slash_otx_wall
     assert gen_pidginunit.inx_wall == colon_inx_wall

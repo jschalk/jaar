@@ -18,6 +18,24 @@ def test_PidginUnit_set_acctbridge_SetsAttr():
     assert sue_pidginunit.acctbridge == x_acctbridge
 
 
+def test_PidginUnit_set_acctbridge_SetsAttrWhenAttrIs_float_nan():
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_pidginunit = pidginunit_shop(sue_str)
+    x_nan = float("nan")
+    x_acctbridge = acctbridge_shop(
+        x_face_id=sue_str, x_otx_wall=x_nan, x_inx_wall=x_nan, x_unknown_word=x_nan
+    )
+    x_acctbridge.set_otx2inx("Bob", "Bob of Portland")
+    assert sue_pidginunit.acctbridge != x_acctbridge
+
+    # WHEN
+    sue_pidginunit.set_acctbridge(x_acctbridge)
+
+    # THEN
+    assert sue_pidginunit.acctbridge == x_acctbridge
+
+
 def test_PidginUnit_set_acctbridge_RaisesErrorIf_acctbridge_otx_wall_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"

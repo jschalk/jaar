@@ -76,6 +76,34 @@ def test_roadbridge_shop_ReturnsObj_Scenario2():
     assert credit_vote_roadbridge.event_id == 0
 
 
+def test_roadbridge_shop_ReturnsObj_scenario3_PidginCoreAttrAreDefaultWhenGiven_float_nan():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    event7 = 7
+    otx2inx = {xio_str: sue_str}
+    x_nan = float("nan")
+
+    # WHEN
+    x_roadbridge = roadbridge_shop(
+        x_face_id=bob_str,
+        x_event_id=event7,
+        x_otx2inx=otx2inx,
+        x_unknown_word=x_nan,
+        x_otx_wall=x_nan,
+        x_inx_wall=x_nan,
+    )
+
+    # THEN
+    assert x_roadbridge.face_id == bob_str
+    assert x_roadbridge.event_id == event7
+    assert x_roadbridge.otx2inx == otx2inx
+    assert x_roadbridge.unknown_word == default_unknown_word()
+    assert x_roadbridge.otx_wall == default_wall_if_none()
+    assert x_roadbridge.inx_wall == default_wall_if_none()
+
+
 def test_RoadBridge_set_all_otx2inx_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
