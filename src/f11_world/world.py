@@ -106,14 +106,16 @@ class WorldUnit:
         face_dir = create_path(self._faces_dir, face_id)
         delete_dir(create_path(face_dir, event_id))
 
+    def set_jungle_dir(self, x_dir: str):
+        self._jungle_dir = x_dir
+        set_dir(self._jungle_dir)
+
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._faces_dir = create_path(self._world_dir, "faces")
-        self._jungle_dir = create_path(self._world_dir, "jungle")
         self._zoo_dir = create_path(self._world_dir, "zoo")
         set_dir(self._world_dir)
         set_dir(self._faces_dir)
-        set_dir(self._jungle_dir)
         set_dir(self._zoo_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
@@ -173,6 +175,7 @@ class WorldUnit:
 def worldunit_shop(
     world_id: WorldID = None,
     worlds_dir: str = None,
+    jungle_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
     pidgins: dict[AcctID, PidginUnit] = None,
@@ -190,8 +193,12 @@ def worldunit_shop(
         events={},
         pidgins=get_empty_dict_if_None(pidgins),
         _fiscalunits=get_empty_set_if_None(_fiscalunits),
+        _jungle_dir=jungle_dir,
     )
     x_worldunit._set_world_dirs()
+    print(f"{x_worldunit._jungle_dir=}")
+    if not x_worldunit._jungle_dir:
+        x_worldunit.set_jungle_dir(create_path(x_worldunit._world_dir, "jungle"))
     return x_worldunit
 
 
