@@ -37,7 +37,7 @@ def get_clean_roadbridge() -> RoadBridge:
     wall = default_wall_if_none()
     clean_otx_road = f"{otx_music45_str}{wall}{clean_otx_str}"
     road_bridgeunit = roadbridge_shop(x_face_id="Sue")
-    road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
+    road_bridgeunit.set_idea(clean_otx_str, clean_inx_str)
     road_bridgeunit.set_otx2inx(otx_music45_str, inx_music87_str)
     road_bridgeunit.reveal_inx(clean_otx_road)
     return road_bridgeunit
@@ -118,7 +118,7 @@ def get_slash_roadbridge() -> RoadBridge:
         x_unknown_word=x_unknown_word,
         x_face_id="Sue",
     )
-    road_bridgeunit.set_nub_label(clean_otx_str, clean_inx_str)
+    road_bridgeunit.set_idea(clean_otx_str, clean_inx_str)
     road_bridgeunit.set_otx2inx(otx_music45_str, inx_music87_str)
     road_bridgeunit.reveal_inx(clean_otx_road)
     return road_bridgeunit
@@ -172,6 +172,7 @@ def get_sue_pidginunit() -> PidginUnit:
     sue_pidginunit.set_groupbridge(get_swim_groupbridge())
     sue_pidginunit.set_ideabridge(get_clean_ideabridge())
     sue_pidginunit.set_roadbridge(get_clean_roadbridge())
+    sue_pidginunit.roadbridge.ideabridge = get_clean_ideabridge()
     return sue_pidginunit
 
 
@@ -225,7 +226,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     return sue_pidginunit
 
 
-def get_casa_maison_pidginunit_set_by_nub_label() -> PidginUnit:
+def get_casa_maison_pidginunit_set_by_idea() -> PidginUnit:
     otx_music45_str = "music45"
     inx_music87_str = "music87"
     casa_otx_str = "casa"
@@ -241,9 +242,9 @@ def get_casa_maison_pidginunit_set_by_nub_label() -> PidginUnit:
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
-    sue_pidginunit.set_nub_label(otx_music45_str, inx_music87_str)
-    sue_pidginunit.set_nub_label(casa_otx_str, casa_inx_str)
-    sue_pidginunit.set_nub_label(clean_otx_str, clean_inx_str)
+    sue_pidginunit.set_idea(otx_music45_str, inx_music87_str)
+    sue_pidginunit.set_idea(casa_otx_str, casa_inx_str)
+    sue_pidginunit.set_idea(clean_otx_str, clean_inx_str)
     return sue_pidginunit
 
 
@@ -307,7 +308,7 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
     return inx_dt
 
 
-def get_casa_maison_road_nub_label_dt() -> DataFrame:
+def get_casa_maison_idea_dt() -> DataFrame:
     inx_music87_str = "music87"
     casa_inx_str = "maison"
     clean_inx_str = "propre"
@@ -327,8 +328,8 @@ def get_casa_maison_road_nub_label_dt() -> DataFrame:
             "otx_wall",
             "inx_wall",
             "unknown_word",
-            "otx_label",
-            "inx_label",
+            "otx_idea",
+            "inx_idea",
         ]
     )
     inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
@@ -370,29 +371,6 @@ def get_invalid_ideabridge() -> RoadBridge:
     return roadbridge
 
 
-def get_slash_roadbridge() -> RoadBridge:
-    otx_music45_str = "music45"
-    inx_music87_str = "music87"
-    clean_otx_str = "clean"
-    clean_inx_str = "prop"
-    x_unknown_word = "UnknownWord"
-    slash_otx_wall = "/"
-    colon_inx_wall = ":"
-    clean_otx_road = f"{otx_music45_str}{slash_otx_wall}{clean_otx_str}"
-    clean_otx_road = f"{otx_music45_str}{colon_inx_wall}{clean_otx_str}"
-    x_roadbridge = roadbridge_shop(
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
-        x_unknown_word=x_unknown_word,
-        x_face_id="Sue",
-        x_event_id=7,
-    )
-    x_roadbridge.set_nub_label(clean_otx_str, clean_inx_str)
-    x_roadbridge.set_otx2inx(otx_music45_str, inx_music87_str)
-    x_roadbridge.reveal_inx(clean_otx_road)
-    return x_roadbridge
-
-
 def get_slash_ideabridge() -> IdeaBridge:
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -412,6 +390,30 @@ def get_slash_ideabridge() -> IdeaBridge:
     x_ideabridge.set_otx2inx(clean_otx_str, clean_inx_str)
     x_ideabridge.reveal_inx("running")
     return x_ideabridge
+
+
+def get_slash_roadbridge() -> RoadBridge:
+    otx_music45_str = "music45"
+    inx_music87_str = "music87"
+    clean_otx_str = "clean"
+    clean_inx_str = "prop"
+    x_unknown_word = "UnknownWord"
+    slash_otx_wall = "/"
+    colon_inx_wall = ":"
+    clean_otx_road = f"{otx_music45_str}{slash_otx_wall}{clean_otx_str}"
+    clean_otx_road = f"{otx_music45_str}{colon_inx_wall}{clean_otx_str}"
+    x_roadbridge = roadbridge_shop(
+        x_otx_wall=slash_otx_wall,
+        x_inx_wall=colon_inx_wall,
+        x_unknown_word=x_unknown_word,
+        x_face_id="Sue",
+        x_event_id=7,
+        x_ideabridge=get_slash_ideabridge(),
+    )
+    x_roadbridge.set_idea(clean_otx_str, clean_inx_str)
+    x_roadbridge.set_otx2inx(otx_music45_str, inx_music87_str)
+    x_roadbridge.reveal_inx(clean_otx_road)
+    return x_roadbridge
 
 
 def get_slash_groupbridge() -> GroupBridge:

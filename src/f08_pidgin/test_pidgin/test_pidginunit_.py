@@ -467,68 +467,68 @@ def test_PidginUnit_del_otx2inx_ReturnsObj():
     assert zia_pidginunit.otx2inx_exists(road_type, zia_str, zia_str)
 
 
-def test_PidginUnit_set_nub_label_SetsAttr_Scenario1_type_RoadUnit_str():
+def test_PidginUnit_set_idea_SetsAttr_Scenario1_type_RoadUnit_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
     roadbridge = zia_pidginunit.get_roadbridge()
-    assert roadbridge.nub_label_exists(sue_otx, sue_inx) is False
+    assert roadbridge.idea_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_nub_label(sue_otx, sue_inx)
+    zia_pidginunit.set_idea(sue_otx, sue_inx)
 
     # THEN
-    assert roadbridge.nub_label_exists(sue_otx, sue_inx)
+    assert roadbridge.idea_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_nub_label_exists_ReturnsObj():
+def test_PidginUnit_idea_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    sue_exists = zia_pidginunit.nub_label_exists(sue_otx, sue_inx)
+    sue_exists = zia_pidginunit.idea_exists(sue_otx, sue_inx)
     assert sue_exists is False
 
     # WHEN
-    zia_pidginunit.set_nub_label(sue_otx, sue_inx)
+    zia_pidginunit.set_idea(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit.nub_label_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.idea_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_get_nub_inx_label_ReturnsObj():
+def test_PidginUnit_get_inx_idea_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_nub_inx_label(sue_otx) != sue_inx
+    assert zia_pidginunit._get_inx_idea(sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_nub_label(sue_otx, sue_inx)
+    zia_pidginunit.set_idea(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit._get_nub_inx_label(sue_otx) == sue_inx
+    assert zia_pidginunit._get_inx_idea(sue_otx) == sue_inx
 
 
-def test_PidginUnit_del_nub_label_ReturnsObj():
+def test_PidginUnit_del_idea_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    zia_pidginunit.set_nub_label(sue_otx, sue_inx)
-    zia_pidginunit.set_nub_label(zia_str, zia_str)
-    assert zia_pidginunit.nub_label_exists(sue_otx, sue_inx)
-    assert zia_pidginunit.nub_label_exists(zia_str, zia_str)
+    zia_pidginunit.set_idea(sue_otx, sue_inx)
+    zia_pidginunit.set_idea(zia_str, zia_str)
+    assert zia_pidginunit.idea_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.idea_exists(zia_str, zia_str)
 
     # WHEN
-    zia_pidginunit.del_nub_label(sue_otx)
+    zia_pidginunit.del_idea(sue_otx)
 
     # THEN
-    sue_exists = zia_pidginunit.nub_label_exists(sue_otx, sue_inx)
+    sue_exists = zia_pidginunit.idea_exists(sue_otx, sue_inx)
     assert sue_exists is False
-    assert zia_pidginunit.nub_label_exists(zia_str, zia_str)
+    assert zia_pidginunit.idea_exists(zia_str, zia_str)

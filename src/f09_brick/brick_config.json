@@ -47,22 +47,6 @@
       "unknown_word": {}
     }
   },
-  "bridge_nub_label": {
-    "allowed_crud": "INSERT_ONE_TIME",
-    "brick_type": "pidginunit",
-    "build_order": 4,
-    "jkeys": {
-      "event_id": {},
-      "face_id": {},
-      "otx_label": {}
-    },
-    "jvalues": {
-      "inx_label": {},
-      "inx_wall": {},
-      "otx_wall": {},
-      "unknown_word": {}
-    }
-  },
   "bridge_road": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",

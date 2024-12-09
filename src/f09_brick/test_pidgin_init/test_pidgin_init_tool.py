@@ -24,12 +24,12 @@ from src.f08_pidgin.examples.pidgin_env import (
 )
 from src.f08_pidgin.examples.example_pidgins import (
     get_casa_maison_pidginunit_set_by_otx2inx,
-    get_casa_maison_pidginunit_set_by_nub_label,
+    get_casa_maison_pidginunit_set_by_idea,
     get_casa_maison_road_otx2inx_dt,
-    get_casa_maison_road_nub_label_dt,
+    get_casa_maison_idea_dt,
     get_slash_acctbridge,
     get_sue_pidginunit,
-    get_casa_maison_pidginunit_set_by_nub_label,
+    get_casa_maison_pidginunit_set_by_idea,
     get_pidgin_core_attrs_are_none_acctbridge,
 )
 from src.f09_brick.pidgin_toolbox import (
@@ -37,19 +37,17 @@ from src.f09_brick.pidgin_toolbox import (
     get_bridge_group_dt_columns,
     get_bridge_idea_dt_columns,
     get_bridge_road_dt_columns,
-    get_nub_label_columns,
     create_bridge_acct_dt,
     create_bridge_group_dt,
     create_bridge_idea_dt,
     create_bridge_road_dt,
-    create_nub_label_dt,
+    create_bridge_idea_dt,
     save_all_csvs_from_pidginunit,
     _load_acctbridge_from_csv,
     _load_groupbridge_from_csv,
     _load_ideabridge_from_csv,
     _load_roadbridge_from_csv,
-    _load_nub_label_from_csv,
-    _save_nub_label_csv,
+    _save_bridge_idea_csv,
     create_dir_valid_empty_pidginunit,
     init_pidginunit_from_dir,
 )
@@ -148,43 +146,26 @@ def test_create_bridge_road_dt_ReturnsObj():
     assert casa_csv == get_ordered_csv(get_casa_maison_road_otx2inx_dt())
 
 
-def test_get_nub_label_columns_ReturnsObj():
-    # ESTABLISH / WHEN /THEN
-    assert get_nub_label_columns()
-    assert len(get_nub_label_columns()) == 7
-    static_list = [
-        face_id_str(),
-        event_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
-        unknown_word_str(),
-        "otx_label",
-        "inx_label",
-    ]
-    assert get_nub_label_columns() == static_list
-    assert set(get_nub_label_columns()).issubset(set(sorting_columns()))
-
-
-def test_create_nub_label_dt_ReturnsObj():
+def test_create_bridge_idea_dt_ReturnsObj():
     # ESTABLISH
-    casa_pidginunit = get_casa_maison_pidginunit_set_by_nub_label()
-    casa_bridgeunit = casa_pidginunit.get_roadbridge()
+    casa_pidginunit = get_casa_maison_pidginunit_set_by_idea()
+    casa_bridgeunit = casa_pidginunit.get_ideabridge()
 
     # WHEN
-    casa_dataframe = create_nub_label_dt(casa_bridgeunit)
+    casa_dataframe = create_bridge_idea_dt(casa_bridgeunit)
 
     # THEN
-    # print(f"{get_nub_label_columns()=}")
+    # print(f"{get_bridge_idea_dt_columns()=}")
     # print(f"    {list(casa_dataframe.columns)=}")
     # print("")
     # print(f"{casa_dataframe=}")
-    assert list(casa_dataframe.columns) == get_nub_label_columns()
+    assert list(casa_dataframe.columns) == get_bridge_idea_dt_columns()
     assert len(casa_dataframe) == 3
     casa_csv = get_ordered_csv(casa_dataframe)
-    ex_nub_csv = get_ordered_csv(get_casa_maison_road_nub_label_dt())
+    ex_idea_csv = get_ordered_csv(get_casa_maison_idea_dt())
     print(f"       {casa_csv=}")
-    print(f"{ex_nub_csv=}")
-    assert casa_csv == ex_nub_csv
+    print(f"{ex_idea_csv=}")
+    assert casa_csv == ex_idea_csv
 
 
 def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
@@ -195,17 +176,14 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     group_filename = "group.csv"
     idea_filename = "idea.csv"
     road_filename = "road.csv"
-    nub_label_filename = "nub_label.csv"
     acct_csv_path = f"{bridge_dir}/{acct_filename}"
     group_csv_path = f"{bridge_dir}/{group_filename}"
     idea_csv_path = f"{bridge_dir}/{idea_filename}"
     road_csv_path = f"{bridge_dir}/{road_filename}"
-    nub_label_csv_path = f"{bridge_dir}/{nub_label_filename}"
     assert os_path_exists(acct_csv_path) is False
     assert os_path_exists(group_csv_path) is False
     assert os_path_exists(idea_csv_path) is False
     assert os_path_exists(road_csv_path) is False
-    assert os_path_exists(nub_label_csv_path) is False
     assert len(get_dir_file_strs(bridge_dir)) == 0
 
     # WHEN
@@ -216,8 +194,7 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     assert os_path_exists(group_csv_path)
     assert os_path_exists(idea_csv_path)
     assert os_path_exists(road_csv_path)
-    assert os_path_exists(nub_label_csv_path)
-    assert len(get_dir_file_strs(bridge_dir)) == 5
+    assert len(get_dir_file_strs(bridge_dir)) == 4
 
 
 def test_load_acctbridge_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
@@ -373,7 +350,7 @@ def test_load_roadbridge_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     assert ex_roadbridge.event_id == sue_roadbridge.event_id
     assert ex_roadbridge.face_id == sue_roadbridge.face_id
     assert ex_roadbridge.otx2inx == sue_roadbridge.otx2inx
-    assert ex_roadbridge.nub_label != sue_roadbridge.nub_label
+    assert ex_roadbridge.ideabridge != sue_roadbridge.ideabridge
 
 
 def test_load_roadbridge_from_csv_DoesNothingWhenFileDoesNotExist(
@@ -395,32 +372,6 @@ def test_load_roadbridge_from_csv_DoesNothingWhenFileDoesNotExist(
 
     # THEN
     assert len(sue_roadbridge.otx2inx) == 0
-
-
-def test_load_nub_label_map_from_csv_SetsAttr(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_pidginunit = get_casa_maison_pidginunit_set_by_nub_label()
-    before_road_bridgeunit = sue_pidginunit.roadbridge
-    print(f"{before_road_bridgeunit.nub_label=}")
-    bridge_dir = get_example_face_dir()
-    nub_filename = "nub_label.csv"
-    nub_csv_path = f"{bridge_dir}/{nub_filename}"
-    _save_nub_label_csv(bridge_dir, before_road_bridgeunit)
-    assert os_path_exists(nub_csv_path)
-    empty_pidginunit = pidginunit_shop("Sue")
-    empty_road_bridgeunit = empty_pidginunit.roadbridge
-    empty_road_bridgeunit.face_id = "Sue"
-    empty_road_bridgeunit.event_id = 7
-    print(f"{empty_pidginunit=} {empty_road_bridgeunit=}")
-    assert len(empty_road_bridgeunit.nub_label) == 0
-
-    # WHEN
-    gen_bridgeunit = _load_nub_label_from_csv(bridge_dir, empty_road_bridgeunit)
-
-    # THEN
-    assert len(gen_bridgeunit.nub_label) == 3
-    assert gen_bridgeunit == before_road_bridgeunit
-    assert gen_bridgeunit == empty_road_bridgeunit
 
 
 def test_create_dir_valid_empty_pidginunit_Sets_otx_wall_inx_wall(
@@ -506,5 +457,6 @@ def test_init_pidginunit_from_dir_ReturnsObj(env_dir_setup_cleanup):
     assert gen_pidginunit.acctbridge == sue_pidginunit.acctbridge
     assert gen_pidginunit.groupbridge == sue_pidginunit.groupbridge
     assert gen_pidginunit.ideabridge == sue_pidginunit.ideabridge
+    assert gen_pidginunit.roadbridge.ideabridge == sue_pidginunit.roadbridge.ideabridge
     assert gen_pidginunit.roadbridge == sue_pidginunit.roadbridge
     assert gen_pidginunit == sue_pidginunit

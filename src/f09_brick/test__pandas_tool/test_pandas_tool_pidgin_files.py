@@ -12,7 +12,7 @@ from src.f08_pidgin.examples.pidgin_env import (
     get_example_face_dir,
 )
 from src.f08_pidgin.examples.example_pidgins import (
-    get_casa_maison_pidginunit_set_by_nub_label,
+    get_casa_maison_pidginunit_set_by_idea,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
     get_clean_roadbridge,
@@ -103,7 +103,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
-    sue_pidginunit = get_casa_maison_pidginunit_set_by_nub_label()
+    sue_pidginunit = get_casa_maison_pidginunit_set_by_idea()
     sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_id}"
     save_file(sue_dir, "pidgin.json", sue_pidginunit.get_json())
     sue_otx_dt = get_casa_maison_road_otx_dt()
@@ -146,7 +146,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    sue_pidginunit = get_casa_maison_pidginunit_set_by_nub_label()
+    sue_pidginunit = get_casa_maison_pidginunit_set_by_idea()
     sue_pidginunit.set_acctbridge(get_suita_acctbridge())
     sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_id}"
     pidgin_filename = "pidgin.json"
@@ -194,8 +194,8 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
 def test_get_pidgen_brick_format_filenames_ReturnsObj():
     # ESTABLISH
     br00003_file_name = "br00003.xlsx"
-    br00041_file_name = "br00041.xlsx"
     br00042_file_name = "br00042.xlsx"
+    br00043_file_name = "br00043.xlsx"
     br00044_file_name = "br00044.xlsx"
 
     # WHEN
@@ -204,31 +204,7 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
     # THEN
     print(f"{x_pidgen_brick_filenames=}")
     assert br00003_file_name not in x_pidgen_brick_filenames
-    assert br00041_file_name in x_pidgen_brick_filenames
     assert br00042_file_name in x_pidgen_brick_filenames
+    assert br00043_file_name in x_pidgen_brick_filenames
     assert br00044_file_name in x_pidgen_brick_filenames
-    assert len(x_pidgen_brick_filenames) == 10
-
-
-# def test_get_pidgen_brick_format_filenames_ReturnsObj():
-#     # ESTABLISH
-#     env_dir = get_example_face_dir()
-#     br00003_file_name = "br00003.xlsx"
-#     br00040_file_name = "br00040.xlsx"
-#     br00041_file_name = "br00041.xlsx"
-#     br00042_file_name = "br00042.xlsx"
-#     save_file(env_dir, br00003_file_name, "")
-#     save_file(env_dir, br00040_file_name, "")
-#     save_file(env_dir, br00041_file_name, "")
-#     save_file(env_dir, br00042_file_name, "")
-
-#     # WHEN
-#     x_pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
-
-#     # THEN
-#     print(f"{x_pidgen_brick_filenames=}")
-#     assert br00003_file_name not in x_pidgen_brick_filenames
-#     assert br00040_file_name in x_pidgen_brick_filenames
-#     assert br00041_file_name in x_pidgen_brick_filenames
-#     assert br00042_file_name not in x_pidgen_brick_filenames
-#     assert len(x_pidgen_brick_filenames) == 2
+    assert len(x_pidgen_brick_filenames) == 8

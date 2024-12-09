@@ -15,8 +15,6 @@ from src.f08_pidgin.pidgin_config import (
     otx_idea_str,
     inx_road_str,
     otx_road_str,
-    inx_label_str,
-    otx_label_str,
     inx_group_id_str,
     otx_group_id_str,
     unknown_word_str,
@@ -39,13 +37,11 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
     # THEN
     print(f"need examples for {pidgen_brick_filenames=}")
     assert pidgen_brick_filenames == {
-        "br00041.xlsx",
         "br00042.xlsx",
         "br00043.xlsx",
         "br00044.xlsx",
         "br00045.xlsx",
         "br00113.xlsx",
-        "br00114.xlsx",
         "br00115.xlsx",
         "br00116.xlsx",
         "br00117.xlsx",
@@ -130,7 +126,6 @@ def test_WorldUnit_zoo_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
     b40_rows = [sue2, sue3, yao1]
     br00042_df = DataFrame(b40_rows, columns=br00042_columns)
     upsert_sheet(br00042_file_path, "zoo_agg", br00042_df)
-    pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
 
     br00116_file_path = create_path(fizz_world._zoo_dir, "br00116.xlsx")
     br00116_columns = [
@@ -163,40 +158,6 @@ def test_WorldUnit_zoo_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
     br00044_rows = [sue2, sue3, yao1]
     br00044_df = DataFrame(br00044_rows, columns=br00044_columns)
     upsert_sheet(br00044_file_path, "zoo_agg", br00044_df)
-    pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
-
-    br00114_file_path = create_path(fizz_world._zoo_dir, "br00114.xlsx")
-    br00114_columns = [
-        face_id_str(),
-        event_id_str(),
-        fiscal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
-        otx_label_str(),
-        inx_label_str(),
-    ]
-    br00041_file_path = create_path(fizz_world._zoo_dir, "br00041.xlsx")
-    br00041_columns = [
-        face_id_str(),
-        event_id_str(),
-        otx_label_str(),
-        inx_label_str(),
-        otx_wall_str(),
-        inx_wall_str(),
-        unknown_word_str(),
-    ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
-    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
-    br00114_rows = [sue0, sue1]
-    br00114_df = DataFrame(br00114_rows, columns=br00114_columns)
-    upsert_sheet(br00114_file_path, "zoo_agg", br00114_df)
-    br00041_rows = [sue2, sue3, yao1]
-    br00041_df = DataFrame(br00041_rows, columns=br00041_columns)
-    upsert_sheet(br00041_file_path, "zoo_agg", br00041_df)
-    pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
 
     br00117_file_path = create_path(fizz_world._zoo_dir, "br00117.xlsx")
     br00117_columns = [
@@ -229,7 +190,6 @@ def test_WorldUnit_zoo_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
     br00045_rows = [sue2, sue3, yao1]
     br00045_df = DataFrame(br00045_rows, columns=br00045_columns)
     upsert_sheet(br00045_file_path, "zoo_agg", br00045_df)
-    pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
 
     assert fizz_world.events == {}
     fizz_world.zoo_agg_to_zoo_events()
@@ -244,45 +204,19 @@ def test_WorldUnit_zoo_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
 
     # THEN
     assert os_path_exists(pidgin_path)
-    nub_staging_str = "nub_staging"
     group_staging_str = "group_staging"
     acct_staging_str = "acct_staging"
     idea_staging_str = "idea_staging"
     road_staging_str = "road_staging"
     assert sheet_exists(pidgin_path, acct_staging_str)
     assert sheet_exists(pidgin_path, group_staging_str)
-    assert sheet_exists(pidgin_path, nub_staging_str)
     assert sheet_exists(pidgin_path, idea_staging_str)
     assert sheet_exists(pidgin_path, road_staging_str)
 
-    gen_nub_df = pandas_read_excel(pidgin_path, sheet_name=nub_staging_str)
     gen_group_df = pandas_read_excel(pidgin_path, sheet_name=group_staging_str)
     gen_acct_df = pandas_read_excel(pidgin_path, sheet_name=acct_staging_str)
     gen_idea_df = pandas_read_excel(pidgin_path, sheet_name=idea_staging_str)
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
-
-    nub_file_columns = [
-        "src_brick",
-        face_id_str(),
-        event_id_str(),
-        otx_label_str(),
-        inx_label_str(),
-        otx_wall_str(),
-        inx_wall_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_nub_df.columns) == nub_file_columns
-    assert len(gen_nub_df) == 2
-    b3 = "br00114"
-    b4 = "br00041"
-    e1_nub3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_nub4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_nub_rows = [e1_nub3, e1_nub4]
-    e1_nub_df = DataFrame(e1_nub_rows, columns=nub_file_columns)
-    assert len(gen_nub_df) == len(e1_nub_df)
-    print(f"{gen_nub_df.to_csv()=}")
-    print(f" {e1_nub_df.to_csv()=}")
-    assert gen_nub_df.to_csv(index=False) == e1_nub_df.to_csv(index=False)
 
     group_file_columns = [
         "src_brick",

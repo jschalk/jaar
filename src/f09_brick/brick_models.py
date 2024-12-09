@@ -264,17 +264,6 @@ class br00036AbstractTable(Base):
     problem_bool = Column(Integer)
 
 
-class br00041AbstractTable(Base):
-    __abstract__ = True
-    face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
-    inx_label = Column(String)
-    inx_wall = Column(String)
-    otx_label = Column(String)
-    otx_wall = Column(String)
-    unknown_word = Column(String)
-
-
 class br00042AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
@@ -327,17 +316,6 @@ class br00113AbstractTable(Base):
     fiscal_id = Column(String)
     inx_acct_id = Column(String)
     otx_acct_id = Column(String)
-    owner_id = Column(String)
-
-
-class br00114AbstractTable(Base):
-    __abstract__ = True
-    face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
-    acct_id = Column(String)
-    fiscal_id = Column(String)
-    inx_label = Column(String)
-    otx_label = Column(String)
     owner_id = Column(String)
 
 
@@ -458,10 +436,6 @@ class br00036HoldTable(br00036AbstractTable):
     __tablename__ = "br00036_hold"
 
 
-class br00041HoldTable(br00041AbstractTable):
-    __tablename__ = "br00041_hold"
-
-
 class br00042HoldTable(br00042AbstractTable):
     __tablename__ = "br00042_hold"
 
@@ -480,10 +454,6 @@ class br00045HoldTable(br00045AbstractTable):
 
 class br00113HoldTable(br00113AbstractTable):
     __tablename__ = "br00113_hold"
-
-
-class br00114HoldTable(br00114AbstractTable):
-    __tablename__ = "br00114_hold"
 
 
 class br00115HoldTable(br00115AbstractTable):
@@ -645,13 +615,6 @@ class br00036StageTable(br00036AbstractTable):
     src_sheet = Column(String)
 
 
-class br00041StageTable(br00041AbstractTable):
-    __tablename__ = "br00041_stage"
-    src_type = Column(String)
-    src_path = Column(String)
-    src_sheet = Column(String)
-
-
 class br00042StageTable(br00042AbstractTable):
     __tablename__ = "br00042_stage"
     src_type = Column(String)
@@ -682,13 +645,6 @@ class br00045StageTable(br00045AbstractTable):
 
 class br00113StageTable(br00113AbstractTable):
     __tablename__ = "br00113_stage"
-    src_type = Column(String)
-    src_path = Column(String)
-    src_sheet = Column(String)
-
-
-class br00114StageTable(br00114AbstractTable):
-    __tablename__ = "br00114_stage"
     src_type = Column(String)
     src_path = Column(String)
     src_sheet = Column(String)
@@ -738,13 +694,11 @@ def get_brick_holdtables() -> dict[str, DeclarativeBase]:
         "br00028": br00028HoldTable,
         "br00029": br00029HoldTable,
         "br00036": br00036HoldTable,
-        "br00041": br00041HoldTable,
         "br00042": br00042HoldTable,
         "br00043": br00043HoldTable,
         "br00044": br00044HoldTable,
         "br00045": br00045HoldTable,
         "br00113": br00113HoldTable,
-        "br00114": br00114HoldTable,
         "br00115": br00115HoldTable,
         "br00116": br00116HoldTable,
         "br00117": br00117HoldTable,
@@ -774,13 +728,11 @@ def get_brick_stagetables() -> dict[str, DeclarativeBase]:
         "br00028": br00028StageTable,
         "br00029": br00029StageTable,
         "br00036": br00036StageTable,
-        "br00041": br00041StageTable,
         "br00042": br00042StageTable,
         "br00043": br00043StageTable,
         "br00044": br00044StageTable,
         "br00045": br00045StageTable,
         "br00113": br00113StageTable,
-        "br00114": br00114StageTable,
         "br00115": br00115StageTable,
         "br00116": br00116StageTable,
         "br00117": br00117StageTable,
