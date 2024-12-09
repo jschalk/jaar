@@ -3,7 +3,7 @@ from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import upsert_sheet
-from src.f10_world.world_tool import (
+from src.f10_world.brick_collector import (
     get_all_excel_bricksheets,
     get_all_brick_dataframes,
     BrickFileRef,

@@ -15,7 +15,7 @@ from src.f09_brick.pandas_tool import (
     sheet_exists,
 )
 from src.f09_brick.pidgin_toolbox import init_pidginunit_from_dir
-from src.f10_world.world_tool import get_all_brick_dataframes
+from src.f10_world.brick_collector import get_all_brick_dataframes
 from src.f10_world.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
