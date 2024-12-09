@@ -13,11 +13,6 @@ from src.f01_road.road import (
     get_default_world_id,
 )
 from src.f07_fiscal.fiscal import FiscalUnit
-from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
-from src.f09_brick.pidgin_toolbox import (
-    save_all_csvs_from_pidginunit,
-    init_pidginunit_from_dir,
-)
 from src.f10_etl.transformers import (
     etl_jungle_to_zoo_staging,
     etl_zoo_staging_to_zoo_agg,
@@ -32,9 +27,7 @@ from src.f10_etl.transformers import (
     etl_event_pidgins_to_pidgin_csv_files,
     etl_event_pidgins_csvs_to_pidgin_jsons,
 )
-from pandas import read_excel as pandas_read_excel
 from dataclasses import dataclass
-from os.path import exists as os_path_exists
 
 
 def get_default_worlds_dir() -> str:
@@ -47,7 +40,6 @@ class WorldUnit:
     worlds_dir: str = None
     current_time: TimeLinePoint = None
     events: dict[TimeLinePoint, AcctID] = None
-    pidgins: dict[TimeLinePoint, PidginUnit] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _faces_dir: str = None
     _fiscalunits: set[FiscalID] = None
@@ -64,47 +56,9 @@ class WorldUnit:
     def get_event(self, event_id: TimeLinePoint) -> bool:
         return self.events.get(event_id)
 
-    def set_pidginunit(self, x_pidginunit: PidginUnit):
-        self.pidgins[x_pidginunit.event_id] = x_pidginunit
-
-    def add_pidginunit(self, face_id: AcctID, event_id: TimeLinePoint):
-        self.set_pidginunit(pidginunit_shop(face_id, event_id))
-
-    def pidginunit_exists(self, event_id: TimeLinePoint) -> bool:
-        return self.pidgins.get(event_id) != None
-
-    def get_pidginunit(self, event_id: TimeLinePoint) -> PidginUnit:
-        return self.pidgins.get(event_id)
-
-    def del_pidginunit(self, event_id: TimeLinePoint):
-        self.pidgins.pop(event_id)
-
-    def del_all_pidginunits(self):
-        self.pidgins = {}
-
-    def pidgins_empty(self) -> bool:
-        return self.pidgins == {}
-
     def _event_dir(self, face_id: AcctID, event_id: TimeLinePoint) -> str:
         face_dir = create_path(self._faces_dir, face_id)
         return create_path(face_dir, event_id)
-
-    def save_pidginunit_files(self, face_id: AcctID, event_id: AcctID):
-        x_pidginunit = self.get_pidginunit(event_id)
-        save_all_csvs_from_pidginunit(self._event_dir(face_id, event_id), x_pidginunit)
-
-    def pidgin_dir_exists(self, face_id: AcctID, event_id: TimeLinePoint) -> bool:
-        return os_path_exists(self._event_dir(face_id, event_id))
-
-    def _set_all_pidginunits_from_dirs(self):
-        self.del_all_pidginunits()
-        for face_dir in get_dir_file_strs(self._faces_dir, include_files=False).keys():
-            for event_dir in get_dir_file_strs(face_dir, include_files=False).keys():
-                self.add_pidginunit(face_dir, int(event_dir))
-
-    def _delete_pidginunit_dir(self, face_id: AcctID, event_id: TimeLinePoint):
-        face_dir = create_path(self._faces_dir, face_id)
-        delete_dir(create_path(face_dir, event_id))
 
     def set_jungle_dir(self, x_dir: str):
         self._jungle_dir = x_dir
@@ -120,10 +74,6 @@ class WorldUnit:
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
-
-    def load_pidginunit_from_files(self, face_id: AcctID, event_id: TimeLinePoint):
-        x_pidginunit = init_pidginunit_from_dir(self._event_dir(face_id, event_id))
-        self.set_pidginunit(x_pidginunit)
 
     def jungle_to_zoo_staging(self):
         etl_jungle_to_zoo_staging(self._jungle_dir, self._zoo_dir)
@@ -168,7 +118,6 @@ class WorldUnit:
             "current_time": self.current_time,
             "timeconversions": self.get_timeconversions_dict(),
             "events": self.events,
-            "pidgins": self.pidgins,
         }
 
 
@@ -178,7 +127,6 @@ def worldunit_shop(
     jungle_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
-    pidgins: dict[AcctID, PidginUnit] = None,
     _fiscalunits: set[FiscalID] = None,
 ) -> WorldUnit:
     if world_id is None:
@@ -191,7 +139,6 @@ def worldunit_shop(
         current_time=get_0_if_None(current_time),
         timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
-        pidgins=get_empty_dict_if_None(pidgins),
         _fiscalunits=get_empty_set_if_None(_fiscalunits),
         _jungle_dir=jungle_dir,
     )
