@@ -71,20 +71,8 @@ def otx_road_str() -> str:
     return "otx_road"
 
 
-def inx_label_str() -> str:
-    return "inx_label"
-
-
-def otx_label_str() -> str:
-    return "otx_label"
-
-
 def unknown_word_str() -> str:
     return "unknown_word"
-
-
-def nub_label_str() -> str:
-    return "nub_label"
 
 
 def otx2inx_str() -> str:
@@ -109,10 +97,6 @@ def bridge_idea_str() -> str:
 
 def bridge_road_str() -> str:
     return "bridge_road"
-
-
-def bridge_nub_label_str() -> str:
-    return "bridge_nub_label"
 
 
 def get_pidgin_config_jkeys(x_cat: str) -> dict:
@@ -148,13 +132,6 @@ def get_pidgin_args_category_mapping() -> dict[str, str]:
 def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     """for each pidgin_config category contains the associated columns"""
     return {
-        "bridge_nub_label": {
-            "unknown_word",
-            "inx_wall",
-            "inx_label",
-            "otx_wall",
-            "otx_label",
-        },
         "bridge_group_id": {
             "inx_group_id",
             "unknown_word",

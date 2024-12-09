@@ -1,5 +1,6 @@
 from src.f01_road.road import default_wall_if_none, create_road
 from src.f08_pidgin.bridge import (
+    ideabridge_shop,
     RoadBridge,
     roadbridge_shop,
     default_unknown_word,
@@ -29,7 +30,7 @@ def test_RoadBridge_Exists():
     assert not x_roadbridge.unknown_word
     assert not x_roadbridge.otx_wall
     assert not x_roadbridge.inx_wall
-    assert not x_roadbridge.nub_label
+    assert not x_roadbridge.ideabridge
 
 
 def test_roadbridge_shop_ReturnsObj_scenario0():
@@ -44,7 +45,7 @@ def test_roadbridge_shop_ReturnsObj_scenario0():
     colon_inx_wall = ":"
 
     # WHEN
-    acct_id_roadbridge = roadbridge_shop(
+    e7_roadbridge = roadbridge_shop(
         x_face_id=bob_str,
         x_event_id=event7,
         x_otx2inx=otx2inx,
@@ -54,26 +55,66 @@ def test_roadbridge_shop_ReturnsObj_scenario0():
     )
 
     # THEN
-    assert acct_id_roadbridge.face_id == bob_str
-    assert acct_id_roadbridge.event_id == event7
-    assert acct_id_roadbridge.otx2inx == otx2inx
-    assert acct_id_roadbridge.unknown_word == x_unknown_word
-    assert acct_id_roadbridge.otx_wall == slash_otx_wall
-    assert acct_id_roadbridge.inx_wall == colon_inx_wall
-    assert acct_id_roadbridge.nub_label == {}
+    assert e7_roadbridge.face_id == bob_str
+    assert e7_roadbridge.event_id == event7
+    assert e7_roadbridge.otx2inx == otx2inx
+    assert e7_roadbridge.unknown_word == x_unknown_word
+    assert e7_roadbridge.otx_wall == slash_otx_wall
+    assert e7_roadbridge.inx_wall == colon_inx_wall
+    assert e7_roadbridge.ideabridge == ideabridge_shop(
+        x_face_id=bob_str,
+        x_event_id=event7,
+        x_unknown_word=x_unknown_word,
+        x_otx_wall=slash_otx_wall,
+        x_inx_wall=colon_inx_wall,
+    )
 
 
 def test_roadbridge_shop_ReturnsObj_Scenario2():
     # ESTABLISH / WHEN
-    credit_vote_roadbridge = roadbridge_shop()
+    x_roadbridge = roadbridge_shop()
 
     # THEN
-    assert credit_vote_roadbridge.otx2inx == {}
-    assert credit_vote_roadbridge.unknown_word == default_unknown_word()
-    assert credit_vote_roadbridge.otx_wall == default_wall_if_none()
-    assert credit_vote_roadbridge.inx_wall == default_wall_if_none()
-    assert credit_vote_roadbridge.face_id is None
-    assert credit_vote_roadbridge.event_id == 0
+    assert x_roadbridge.otx2inx == {}
+    assert x_roadbridge.unknown_word == default_unknown_word()
+    assert x_roadbridge.otx_wall == default_wall_if_none()
+    assert x_roadbridge.inx_wall == default_wall_if_none()
+    assert x_roadbridge.face_id is None
+    assert x_roadbridge.event_id == 0
+    assert x_roadbridge.ideabridge == ideabridge_shop(
+        x_event_id=0,
+        x_unknown_word=default_unknown_word(),
+        x_otx_wall=default_wall_if_none(),
+        x_inx_wall=default_wall_if_none(),
+    )
+
+
+def test_roadbridge_shop_ReturnsObj_scenario3_PidginCoreAttrAreDefaultWhenGiven_float_nan():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    event7 = 7
+    otx2inx = {xio_str: sue_str}
+    x_nan = float("nan")
+
+    # WHEN
+    x_roadbridge = roadbridge_shop(
+        x_face_id=bob_str,
+        x_event_id=event7,
+        x_otx2inx=otx2inx,
+        x_unknown_word=x_nan,
+        x_otx_wall=x_nan,
+        x_inx_wall=x_nan,
+    )
+
+    # THEN
+    assert x_roadbridge.face_id == bob_str
+    assert x_roadbridge.event_id == event7
+    assert x_roadbridge.otx2inx == otx2inx
+    assert x_roadbridge.unknown_word == default_unknown_word()
+    assert x_roadbridge.otx_wall == default_wall_if_none()
+    assert x_roadbridge.inx_wall == default_wall_if_none()
 
 
 def test_RoadBridge_set_all_otx2inx_SetsAttr():
@@ -248,154 +289,140 @@ def test_RoadBridge_unknown_word_in_otx2inx_ReturnsObj():
     assert x_roadbridge._unknown_word_in_otx2inx()
 
 
-def test_RoadBridge_set_nub_label_SetsAttr():
+def test_RoadBridge_set_idea_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_roadbridge = roadbridge_shop(None)
-    assert x_roadbridge.nub_label == {}
+    assert x_roadbridge.ideabridge.otx2inx == {}
 
     # WHEN
-    x_roadbridge.set_nub_label(xio_str, sue_str)
+    x_roadbridge.set_idea(xio_str, sue_str)
 
     # THEN
-    assert x_roadbridge.nub_label == {xio_str: sue_str}
+    assert x_roadbridge.ideabridge.otx2inx == {xio_str: sue_str}
 
 
-def test_RoadBridge_set_nub_label_SetsAttr():
-    # ESTABLISH
-    xio_str = "Xio"
-    sue_str = "Sue"
-    x_roadbridge = roadbridge_shop(None)
-    assert x_roadbridge.nub_label == {}
-
-    # WHEN
-    x_roadbridge.set_nub_label(xio_str, sue_str)
-
-    # THEN
-    assert x_roadbridge.nub_label == {xio_str: sue_str}
-
-
-def test_RoadBridge_set_nub_label_RaisesExceptionWhen_wall_In_otx_label():
+def test_RoadBridge_set_idea_RaisesExceptionWhen_wall_In_otx_idea():
     # ESTABLISH
     x_roadbridge = roadbridge_shop(None)
     sue_otx = f"Sue{x_roadbridge.otx_wall}"
     sue_inx = "Sue"
-    assert x_roadbridge.nub_label == {}
+    assert x_roadbridge.ideabridge.otx2inx == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_roadbridge.set_nub_label(sue_otx, sue_inx)
-    exception_str = f"nub_label cannot have otx_label '{sue_otx}'. It must be not have wall {x_roadbridge.otx_wall}."
+        x_roadbridge.set_idea(sue_otx, sue_inx)
+    exception_str = f"idea cannot have otx_idea '{sue_otx}'. It must be not have wall {x_roadbridge.otx_wall}."
     assert str(excinfo.value) == exception_str
 
 
-def test_RoadBridge_set_nub_label_RaisesExceptionWhen_wall_In_inx_label():
+def test_RoadBridge_set_idea_RaisesExceptionWhen_wall_In_inx_idea():
     # ESTABLISH
     x_roadbridge = roadbridge_shop(None)
     sue_inx = f"Sue{x_roadbridge.otx_wall}"
     sue_otx = "Sue"
-    assert x_roadbridge.nub_label == {}
+    assert x_roadbridge.ideabridge.otx2inx == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_roadbridge.set_nub_label(sue_otx, sue_inx)
-    exception_str = f"nub_label cannot have inx_label '{sue_inx}'. It must be not have wall {x_roadbridge.inx_wall}."
+        x_roadbridge.set_idea(sue_otx, sue_inx)
+    exception_str = f"idea cannot have inx_idea '{sue_inx}'. It must be not have wall {x_roadbridge.inx_wall}."
     assert str(excinfo.value) == exception_str
 
 
-def test_RoadBridge_get_nub_inx_label_ReturnsObj():
+def test_RoadBridge_get_inx_idea_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_roadbridge = roadbridge_shop(None)
-    assert x_roadbridge._get_nub_inx_label(xio_str) != sue_str
+    assert x_roadbridge._get_inx_idea(xio_str) != sue_str
 
     # WHEN
-    x_roadbridge.set_nub_label(xio_str, sue_str)
+    x_roadbridge.set_idea(xio_str, sue_str)
 
     # THEN
-    assert x_roadbridge._get_nub_inx_label(xio_str) == sue_str
+    assert x_roadbridge._get_inx_idea(xio_str) == sue_str
 
 
-def test_RoadBridge_nub_label_exists_ReturnsObj():
-    # ESTABLISH
-    xio_str = "Xio"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    zia_str = "Zia"
-    x_roadbridge = roadbridge_shop(None)
-    assert x_roadbridge.nub_label_exists(xio_str, sue_str) is False
-    assert x_roadbridge.nub_label_exists(xio_str, zia_str) is False
-    assert x_roadbridge.nub_label_exists(xio_str, bob_str) is False
-    assert x_roadbridge.nub_label_exists(zia_str, zia_str) is False
-
-    # WHEN
-    x_roadbridge.set_nub_label(xio_str, sue_str)
-
-    # THEN
-    assert x_roadbridge.nub_label_exists(xio_str, sue_str)
-    assert x_roadbridge.nub_label_exists(xio_str, zia_str) is False
-    assert x_roadbridge.nub_label_exists(xio_str, bob_str) is False
-    assert x_roadbridge.nub_label_exists(zia_str, zia_str) is False
-
-    # WHEN
-    x_roadbridge.set_nub_label(zia_str, zia_str)
-
-    # THEN
-    assert x_roadbridge.nub_label_exists(xio_str, sue_str)
-    assert x_roadbridge.nub_label_exists(xio_str, zia_str) is False
-    assert x_roadbridge.nub_label_exists(xio_str, bob_str) is False
-    assert x_roadbridge.nub_label_exists(zia_str, zia_str)
-
-
-def test_RoadBridge_nub_otx_label_exists_ReturnsObj():
+def test_RoadBridge_idea_exists_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
     x_roadbridge = roadbridge_shop(None)
-    assert x_roadbridge.nub_otx_label_exists(xio_str) is False
-    assert x_roadbridge.nub_otx_label_exists(sue_str) is False
-    assert x_roadbridge.nub_otx_label_exists(bob_str) is False
-    assert x_roadbridge.nub_otx_label_exists(zia_str) is False
+    assert x_roadbridge.idea_exists(xio_str, sue_str) is False
+    assert x_roadbridge.idea_exists(xio_str, zia_str) is False
+    assert x_roadbridge.idea_exists(xio_str, bob_str) is False
+    assert x_roadbridge.idea_exists(zia_str, zia_str) is False
 
     # WHEN
-    x_roadbridge.set_nub_label(xio_str, sue_str)
+    x_roadbridge.set_idea(xio_str, sue_str)
 
     # THEN
-    assert x_roadbridge.nub_otx_label_exists(xio_str)
-    assert x_roadbridge.nub_otx_label_exists(sue_str) is False
-    assert x_roadbridge.nub_otx_label_exists(bob_str) is False
-    assert x_roadbridge.nub_otx_label_exists(zia_str) is False
+    assert x_roadbridge.idea_exists(xio_str, sue_str)
+    assert x_roadbridge.idea_exists(xio_str, zia_str) is False
+    assert x_roadbridge.idea_exists(xio_str, bob_str) is False
+    assert x_roadbridge.idea_exists(zia_str, zia_str) is False
 
     # WHEN
-    x_roadbridge.set_nub_label(zia_str, zia_str)
+    x_roadbridge.set_idea(zia_str, zia_str)
 
     # THEN
-    assert x_roadbridge.nub_otx_label_exists(xio_str)
-    assert x_roadbridge.nub_otx_label_exists(sue_str) is False
-    assert x_roadbridge.nub_otx_label_exists(bob_str) is False
-    assert x_roadbridge.nub_otx_label_exists(zia_str)
+    assert x_roadbridge.idea_exists(xio_str, sue_str)
+    assert x_roadbridge.idea_exists(xio_str, zia_str) is False
+    assert x_roadbridge.idea_exists(xio_str, bob_str) is False
+    assert x_roadbridge.idea_exists(zia_str, zia_str)
 
 
-def test_RoadBridge_del_nub_label_SetsAttr():
+def test_RoadBridge_otx_idea_exists_ReturnsObj():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    zia_str = "Zia"
+    x_roadbridge = roadbridge_shop(None)
+    assert x_roadbridge.otx_idea_exists(xio_str) is False
+    assert x_roadbridge.otx_idea_exists(sue_str) is False
+    assert x_roadbridge.otx_idea_exists(bob_str) is False
+    assert x_roadbridge.otx_idea_exists(zia_str) is False
+
+    # WHEN
+    x_roadbridge.set_idea(xio_str, sue_str)
+
+    # THEN
+    assert x_roadbridge.otx_idea_exists(xio_str)
+    assert x_roadbridge.otx_idea_exists(sue_str) is False
+    assert x_roadbridge.otx_idea_exists(bob_str) is False
+    assert x_roadbridge.otx_idea_exists(zia_str) is False
+
+    # WHEN
+    x_roadbridge.set_idea(zia_str, zia_str)
+
+    # THEN
+    assert x_roadbridge.otx_idea_exists(xio_str)
+    assert x_roadbridge.otx_idea_exists(sue_str) is False
+    assert x_roadbridge.otx_idea_exists(bob_str) is False
+    assert x_roadbridge.otx_idea_exists(zia_str)
+
+
+def test_RoadBridge_del_idea_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_roadbridge = roadbridge_shop(None)
-    x_roadbridge.set_nub_label(xio_str, sue_str)
-    assert x_roadbridge.nub_label_exists(xio_str, sue_str)
+    x_roadbridge.set_idea(xio_str, sue_str)
+    assert x_roadbridge.idea_exists(xio_str, sue_str)
 
     # WHEN
-    x_roadbridge.del_nub_label(xio_str)
+    x_roadbridge.del_idea(xio_str)
 
     # THEN
-    assert x_roadbridge.nub_label_exists(xio_str, sue_str) is False
+    assert x_roadbridge.idea_exists(xio_str, sue_str) is False
 
 
-def test_RoadBridge_set_nub_label_Edits_otx2inx():
+def test_RoadBridge_set_idea_Edits_otx2inx():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
@@ -422,7 +449,7 @@ def test_RoadBridge_set_nub_label_Edits_otx2inx():
 
     # WHEN
     menage_inx_str = "menage"
-    x_roadbridge.set_nub_label(clean_otx_str, menage_inx_str)
+    x_roadbridge.set_idea(clean_otx_str, menage_inx_str)
 
     # THEN
     menage_inx_road = create_road(casa_inx_road, menage_inx_str)
@@ -446,7 +473,6 @@ def test_RoadBridge_get_json_ReturnsObj():
   "event_id": 0,
   "face_id": "{sue_str}",
   "inx_wall": "{x_roadbridge.inx_wall}",
-  "nub_label": {x_roadbridge.nub_label},
   "otx2inx": {{}},
   "otx_wall": "{x_roadbridge.otx_wall}",
   "unknown_word": "{x_roadbridge.unknown_word}"
@@ -464,7 +490,6 @@ def test_RoadBridge_get_json_ReturnsObj():
   "event_id": {event7},
   "face_id": "{sue_str}",
   "inx_wall": "{x_roadbridge.inx_wall}",
-  "nub_label": {x_roadbridge.nub_label},
   "otx2inx": {{
     "{clean_otx}": "{clean_inx}"
   }},
@@ -485,7 +510,7 @@ def test_get_roadbridge_from_dict_ReturnsObj():
     slash_otx_wall = "/"
     x_roadbridge = roadbridge_shop(slash_otx_wall, x_face_id=sue_str, x_event_id=event7)
     x_roadbridge.set_otx2inx(clean_otx, clean_inx)
-    x_roadbridge.set_nub_label("bob", "bobito")
+    x_roadbridge.set_idea("bob", "bobito")
 
     # WHEN
     gen_roadbridge = get_roadbridge_from_dict(x_roadbridge.get_dict())
@@ -494,7 +519,13 @@ def test_get_roadbridge_from_dict_ReturnsObj():
     assert gen_roadbridge.face_id == x_roadbridge.face_id
     assert gen_roadbridge.event_id == x_roadbridge.event_id
     assert gen_roadbridge.event_id == event7
-    assert gen_roadbridge == x_roadbridge
+    assert gen_roadbridge.ideabridge.face_id == x_roadbridge.ideabridge.face_id
+    assert gen_roadbridge.ideabridge.otx2inx != x_roadbridge.ideabridge.otx2inx
+    assert gen_roadbridge.ideabridge != x_roadbridge.ideabridge
+    assert gen_roadbridge.otx2inx == x_roadbridge.otx2inx
+    assert gen_roadbridge.otx_wall == x_roadbridge.otx_wall
+    assert gen_roadbridge.inx_wall == x_roadbridge.inx_wall
+    assert gen_roadbridge.unknown_word == x_roadbridge.unknown_word
 
 
 def test_get_roadbridge_from_json_ReturnsObj():
@@ -504,7 +535,7 @@ def test_get_roadbridge_from_json_ReturnsObj():
     slash_otx_wall = "/"
     x_roadbridge = roadbridge_shop(slash_otx_wall)
     x_roadbridge.set_otx2inx(clean_otx, clean_inx)
-    x_roadbridge.set_nub_label("bob", "bobito")
+    x_roadbridge.set_idea("bob", "bobito")
 
     # WHEN
     x_roadbridge = get_roadbridge_from_json(x_roadbridge.get_json())

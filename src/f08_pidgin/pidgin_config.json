@@ -32,17 +32,6 @@
             "unknown_word": {}
         }
     },
-    "bridge_nub_label": {
-        "jkeys": {
-            "otx_label": {}
-        },
-        "jvalues": {
-            "inx_label": {},
-            "inx_wall": {},
-            "otx_wall": {},
-            "unknown_word": {}
-        }
-    },
     "bridge_road": {
         "jkeys": {
             "otx_road": {}

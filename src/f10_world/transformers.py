@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, get_dir_file_strs
+from src.f00_instrument.file import create_path, get_dir_file_strs, save_file
 from src.f01_road.finance_tran import TimeLinePoint
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_brick.brick_config import (
@@ -14,6 +14,7 @@ from src.f09_brick.pandas_tool import (
     split_excel_into_dirs,
     sheet_exists,
 )
+from src.f09_brick.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_world.world_tool import get_all_brick_dataframes
 from src.f10_world.pidgin_agg import (
     pidginheartbook_shop,
@@ -25,6 +26,7 @@ from src.f10_world.pidgin_agg import (
 )
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
+from json import dumps as json_dumps
 
 
 class not_given_pidgin_category_Exception(Exception):
@@ -92,6 +94,11 @@ def get_inx_obj(jaar_type, x_row) -> str:
     return x_row[JAAR_TYPES[jaar_type]["inx_obj"]]
 
 
+def etl_jungle_to_zoo_staging(jungle_dir: str, zoo_dir: str):
+    transformer = JungleToZooTransformer(jungle_dir, zoo_dir)
+    transformer.transform()
+
+
 class JungleToZooTransformer:
     def __init__(self, jungle_dir: str, zoo_dir: str):
         self.jungle_dir = jungle_dir
@@ -122,6 +129,11 @@ class JungleToZooTransformer:
         upsert_sheet(zoo_path, "zoo_staging", final_df)
 
 
+def etl_zoo_staging_to_zoo_agg(zoo_dir):
+    transformer = ZooStagingToZooAggTransformer(zoo_dir)
+    transformer.transform()
+
+
 class ZooStagingToZooAggTransformer:
     def __init__(self, zoo_dir: str):
         self.zoo_dir = zoo_dir
@@ -148,6 +160,11 @@ class ZooStagingToZooAggTransformer:
         )
 
 
+def etl_zoo_agg_to_zoo_events(zoo_dir):
+    transformer = ZooAggToZooEventsTransformer(zoo_dir)
+    transformer.transform()
+
+
 class ZooAggToZooEventsTransformer:
     def __init__(self, zoo_dir: str):
         self.zoo_dir = zoo_dir
@@ -169,6 +186,11 @@ class ZooAggToZooEventsTransformer:
             .apply(lambda x: "invalid because of conflicting event_id" if x else "")
         )
         return events_df.sort_values(["face_id", "event_id"])
+
+
+def etl_zoo_events_to_events_log(zoo_dir: str):
+    transformer = ZooEventsToEventsLogTransformer(zoo_dir)
+    transformer.transform()
 
 
 class ZooEventsToEventsLogTransformer:
@@ -267,17 +289,11 @@ def etl_zoo_agg_to_pidgin_road_staging(legitimate_events: set[str], zoo_dir: str
     zoo_agg_single_to_pidgin_staging("bridge_road", legitimate_events, zoo_dir)
 
 
-def etl_zoo_agg_to_nub_road_staging(legitimate_events: set[str], zoo_dir: str):
-    transformer = ZooAggToNubStagingTransformer(zoo_dir, legitimate_events)
-    transformer.transform()
-
-
 def etl_zoo_agg_to_pidgin_staging(legitimate_events: set[str], zoo_dir: str):
     etl_zoo_agg_to_pidgin_acct_staging(legitimate_events, zoo_dir)
     etl_zoo_agg_to_pidgin_group_staging(legitimate_events, zoo_dir)
     etl_zoo_agg_to_pidgin_idea_staging(legitimate_events, zoo_dir)
     etl_zoo_agg_to_pidgin_road_staging(legitimate_events, zoo_dir)
-    etl_zoo_agg_to_nub_road_staging(legitimate_events, zoo_dir)
 
 
 class ZooAggToStagingTransformer:
@@ -352,68 +368,6 @@ class ZooAggToStagingTransformer:
         elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
             return x_row["inx_road"]
         return None
-
-
-class ZooAggToNubStagingTransformer:
-    def __init__(self, zoo_dir: str, legitmate_events: set[TimeLinePoint]):
-        self.zoo_dir = zoo_dir
-        self.legitmate_events = legitmate_events
-
-    def transform(self):
-        nub_bricks = get_brick_category_ref().get("bridge_nub_label")
-        nub_columns = get_quick_pidgens_column_ref().get("bridge_nub_label")
-        nub_columns.update({"face_id", "event_id"})
-        nub_columns = get_new_sorting_columns(nub_columns)
-        nub_columns.insert(0, "src_brick")
-        nub_df = DataFrame(columns=nub_columns)
-        for brick_number in sorted(nub_bricks):
-            brick_file_name = f"{brick_number}.xlsx"
-            zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
-            if os_path_exists(zoo_brick_path):
-                self.insert_legitmate_zoo_agg_nub_atts(
-                    nub_df, brick_number, zoo_brick_path, nub_columns
-                )
-
-        pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
-        upsert_sheet(pidgin_file_path, "nub_staging", nub_df)
-
-    def insert_legitmate_zoo_agg_nub_atts(
-        self,
-        nub_df: DataFrame,
-        brick_number: str,
-        zoo_brick_path: str,
-        nub_columns: list[str],
-    ):
-        zoo_agg_df = pandas_read_excel(zoo_brick_path, sheet_name="zoo_agg")
-        nub_missing_cols = set(nub_columns).difference(zoo_agg_df.columns)
-        for index, x_row in zoo_agg_df.iterrows():
-            event_id = x_row["event_id"]
-            if event_id in self.legitmate_events:
-                face_id = x_row["face_id"]
-                otx_label = x_row["otx_label"]
-                df_len = len(nub_df.index)
-                otx_wall = None
-                if "otx_wall" not in nub_missing_cols:
-                    otx_wall = x_row["otx_wall"]
-                inx_label = None
-                if "inx_label" not in nub_missing_cols:
-                    inx_label = x_row["inx_label"]
-                inx_wall = None
-                if "inx_wall" not in nub_missing_cols:
-                    inx_wall = x_row["inx_wall"]
-                unknown_word = None
-                if "unknown_word" not in nub_missing_cols:
-                    unknown_word = x_row["unknown_word"]
-                nub_df.loc[df_len] = [
-                    brick_number,
-                    face_id,
-                    event_id,
-                    otx_label,
-                    inx_label,
-                    otx_wall,
-                    inx_wall,
-                    unknown_word,
-                ]
 
 
 def etl_pidgin_acct_staging_to_acct_agg(zoo_dir: str):
@@ -538,11 +492,28 @@ def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
             acct_df.to_csv(acct_csv_path, index=False)
 
 
-def etl_event_pidgins_to_pidgin_csv_files(faces_dir: str):
+def _get_all_faces_dir_event_dirs(faces_dir) -> list[str]:
+    full_event_dirs = []
     face_dirs = get_dir_file_strs(faces_dir, include_dirs=True, include_files=False)
     for face_id_dir in face_dirs.keys():
         face_dir = create_path(faces_dir, face_id_dir)
         event_dirs = get_dir_file_strs(face_dir, include_dirs=True, include_files=False)
-        for event_dir in event_dirs.keys():
-            event_pidgin_dir = create_path(face_dir, event_dir)
-            event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
+        full_event_dirs.extend(
+            create_path(face_dir, event_dir) for event_dir in event_dirs.keys()
+        )
+    return full_event_dirs
+
+
+def etl_event_pidgins_to_pidgin_csv_files(faces_dir: str):
+    for event_pidgin_dir in _get_all_faces_dir_event_dirs(faces_dir):
+        event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
+
+
+def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
+    pidginunit = init_pidginunit_from_dir(event_dir)
+    save_file(event_dir, "pidgin.json", pidginunit.get_json(), replace=True)
+
+
+def etl_event_pidgins_csvs_to_pidgin_jsons(faces_dir: str):
+    for event_pidgin_dir in _get_all_faces_dir_event_dirs(faces_dir):
+        etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)

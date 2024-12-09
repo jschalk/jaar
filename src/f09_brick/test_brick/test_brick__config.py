@@ -102,9 +102,6 @@ from src.f08_pidgin.pidgin_config import (
     inx_acct_id_str,
     otx_group_id_str,
     inx_group_id_str,
-    otx_label_str,
-    inx_label_str,
-    bridge_nub_label_str,
     bridge_otx2inx_str,
     bridge_acct_id_str,
     bridge_group_id_str,
@@ -236,18 +233,16 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[61] == inx_acct_id_str()
     assert table_sorting_priority[62] == otx_group_id_str()
     assert table_sorting_priority[63] == inx_group_id_str()
-    assert table_sorting_priority[64] == otx_label_str()
-    assert table_sorting_priority[65] == inx_label_str()
-    assert table_sorting_priority[66] == otx_wall_str()
-    assert table_sorting_priority[67] == inx_wall_str()
-    assert table_sorting_priority[68] == wall_str()
-    assert table_sorting_priority[69] == unknown_word_str()
-    assert table_sorting_priority[70] == c400_number_str()
-    assert table_sorting_priority[71] == yr1_jan1_offset_str()
-    assert table_sorting_priority[72] == quota_str()
-    assert table_sorting_priority[73] == monthday_distortion_str()
-    assert table_sorting_priority[74] == timeline_label_str()
-    assert len(table_sorting_priority) == 75
+    assert table_sorting_priority[64] == otx_wall_str()
+    assert table_sorting_priority[65] == inx_wall_str()
+    assert table_sorting_priority[66] == wall_str()
+    assert table_sorting_priority[67] == unknown_word_str()
+    assert table_sorting_priority[68] == c400_number_str()
+    assert table_sorting_priority[69] == yr1_jan1_offset_str()
+    assert table_sorting_priority[70] == quota_str()
+    assert table_sorting_priority[71] == monthday_distortion_str()
+    assert table_sorting_priority[72] == timeline_label_str()
+    assert len(table_sorting_priority) == 73
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
     fiscal_args = set(get_fiscal_args_category_mapping().keys())
@@ -329,8 +324,6 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(otx_wall_str()) == "TEXT"
     assert sqlite_types.get(inx_wall_str()) == "TEXT"
     assert sqlite_types.get(unknown_word_str()) == "TEXT"
-    assert sqlite_types.get(otx_label_str()) == "TEXT"
-    assert sqlite_types.get(inx_label_str()) == "TEXT"
     assert sqlite_types.get(wall_str()) == "TEXT"
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
@@ -388,7 +381,6 @@ def test_get_brick_config_dict_ReturnsObj():
     assert bud_item_reasonunit_str() in brick_config_categorys
     assert bud_itemunit_str() in brick_config_categorys
     assert budunit_str() in brick_config_categorys
-    assert bridge_nub_label_str() in brick_config_categorys
     assert bridge_acct_id_str() in brick_config_categorys
     assert bridge_group_id_str() in brick_config_categorys
     assert bridge_idea_str() in brick_config_categorys
@@ -396,7 +388,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert get_atom_categorys().issubset(brick_config_categorys)
     assert get_fiscal_categorys().issubset(brick_config_categorys)
     assert get_pidgin_categorys().issubset(brick_config_categorys)
-    assert len(x_brick_config) == 21
+    assert len(x_brick_config) == 20
     _validate_brick_config(x_brick_config)
 
 
@@ -429,7 +421,6 @@ def _validate_brick_config(x_brick_config: dict):
             fiscal_timeline_month_str(),
             fiscal_timeline_weekday_str(),
             fiscalunit_str(),
-            bridge_nub_label_str(),
             bridge_otx2inx_str(),
             bridge_group_id_str(),
             bridge_acct_id_str(),
@@ -640,7 +631,6 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     # set_brick_config_json(bridge_group_id_str(), 1)
     # set_brick_config_json(bridge_idea_str(), 2)
     # set_brick_config_json(bridge_road_str(), 3)
-    # set_brick_config_json(bridge_nub_label_str(), 4)
     # set_brick_config_json(fiscalunit_str(), 5)
     # set_brick_config_json(fiscal_timeline_hour_str(), 6)
     # set_brick_config_json(fiscal_timeline_month_str(), 7)
@@ -665,7 +655,6 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     assert x_brick_config.get(bridge_group_id_str()).get(bo) == 1
     assert x_brick_config.get(bridge_idea_str()).get(bo) == 2
     assert x_brick_config.get(bridge_road_str()).get(bo) == 3
-    assert x_brick_config.get(bridge_nub_label_str()).get(bo) == 4
     assert x_brick_config.get(fiscalunit_str()).get(bo) == 5
     assert x_brick_config.get(fiscal_timeline_hour_str()).get(bo) == 6
     assert x_brick_config.get(fiscal_timeline_month_str()).get(bo) == 7

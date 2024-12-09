@@ -106,8 +106,8 @@ def test_get_pidginunit_from_dict_ReturnsObj():
         x_unknown_word,
     )
     sue_pidginunit.set_acctbridge(get_slash_acctbridge())
-    sue_pidginunit.set_roadbridge(get_slash_roadbridge())
     sue_pidginunit.set_ideabridge(get_slash_ideabridge())
+    sue_pidginunit.set_roadbridge(get_slash_roadbridge())
     sue_pidginunit.set_groupbridge(get_slash_groupbridge())
 
     # WHEN

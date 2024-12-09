@@ -7,6 +7,7 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.finance import TimeLinePoint
 from src.f01_road.road import default_wall_if_none, OwnerID
 from src.f08_pidgin.bridge import (
+    BridgeCore,
     GroupBridge,
     AcctBridge,
     IdeaBridge,
@@ -151,7 +152,7 @@ class PidginUnit:
     def del_road(self, otx_road: str):
         return self.roadbridge.del_otx2inx(otx_road)
 
-    def _check_all_core_attrs_match(self, x_bridgecore):
+    def _check_all_core_attrs_match(self, x_bridgecore: BridgeCore):
         self._check_attr_match("face_id", x_bridgecore)
         self._check_attr_match("otx_wall", x_bridgecore)
         self._check_attr_match("inx_wall", x_bridgecore)
@@ -212,17 +213,17 @@ class PidginUnit:
         elif x_jaar_type == "RoadUnit":
             self.roadbridge.del_otx2inx(x_otx)
 
-    def set_nub_label(self, x_otx: str, x_inx: str):
-        self.roadbridge.set_nub_label(x_otx, x_inx)
+    def set_idea(self, x_otx: str, x_inx: str):
+        self.roadbridge.set_idea(x_otx, x_inx)
 
-    def _get_nub_inx_label(self, x_otx: str) -> str:
-        return self.roadbridge._get_nub_inx_label(x_otx)
+    def _get_inx_idea(self, x_otx: str) -> str:
+        return self.roadbridge._get_inx_idea(x_otx)
 
-    def nub_label_exists(self, x_otx: str, x_inx: str) -> bool:
-        return self.roadbridge.nub_label_exists(x_otx, x_inx)
+    def idea_exists(self, x_otx: str, x_inx: str) -> bool:
+        return self.roadbridge.idea_exists(x_otx, x_inx)
 
-    def del_nub_label(self, x_otx: str):
-        self.roadbridge.del_nub_label(x_otx)
+    def del_idea(self, x_otx: str):
+        self.roadbridge.del_idea(x_otx)
 
     def get_dict(self) -> dict:
         return {
@@ -254,6 +255,43 @@ def pidginunit_shop(
         x_otx_wall = default_wall_if_none()
     if x_inx_wall is None:
         x_inx_wall = default_wall_if_none()
+    # to handle float(nan)
+    if x_unknown_word != x_unknown_word:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall != x_otx_wall:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall != x_inx_wall:
+        x_inx_wall = default_wall_if_none()
+
+    x_acctbridge = acctbridge_shop(
+        x_face_id=x_face_id,
+        x_event_id=x_event_id,
+        x_otx_wall=x_otx_wall,
+        x_inx_wall=x_inx_wall,
+        x_unknown_word=x_unknown_word,
+    )
+    x_groupbridge = groupbridge_shop(
+        x_face_id=x_face_id,
+        x_event_id=x_event_id,
+        x_otx_wall=x_otx_wall,
+        x_inx_wall=x_inx_wall,
+        x_unknown_word=x_unknown_word,
+    )
+    x_ideabridge = ideabridge_shop(
+        x_face_id=x_face_id,
+        x_event_id=x_event_id,
+        x_otx_wall=x_otx_wall,
+        x_inx_wall=x_inx_wall,
+        x_unknown_word=x_unknown_word,
+    )
+    x_roadbridge = roadbridge_shop(
+        x_face_id=x_face_id,
+        x_event_id=x_event_id,
+        x_otx_wall=x_otx_wall,
+        x_inx_wall=x_inx_wall,
+        x_unknown_word=x_unknown_word,
+        x_ideabridge=x_ideabridge,
+    )
 
     return PidginUnit(
         face_id=x_face_id,
@@ -261,47 +299,29 @@ def pidginunit_shop(
         unknown_word=x_unknown_word,
         otx_wall=x_otx_wall,
         inx_wall=x_inx_wall,
-        acctbridge=acctbridge_shop(
-            x_face_id=x_face_id,
-            x_event_id=x_event_id,
-            x_otx_wall=x_otx_wall,
-            x_inx_wall=x_inx_wall,
-            x_unknown_word=x_unknown_word,
-        ),
-        groupbridge=groupbridge_shop(
-            x_face_id=x_face_id,
-            x_event_id=x_event_id,
-            x_otx_wall=x_otx_wall,
-            x_inx_wall=x_inx_wall,
-            x_unknown_word=x_unknown_word,
-        ),
-        ideabridge=ideabridge_shop(
-            x_face_id=x_face_id,
-            x_event_id=x_event_id,
-            x_otx_wall=x_otx_wall,
-            x_inx_wall=x_inx_wall,
-            x_unknown_word=x_unknown_word,
-        ),
-        roadbridge=roadbridge_shop(
-            x_face_id=x_face_id,
-            x_event_id=x_event_id,
-            x_otx_wall=x_otx_wall,
-            x_inx_wall=x_inx_wall,
-            x_unknown_word=x_unknown_word,
-        ),
+        acctbridge=x_acctbridge,
+        groupbridge=x_groupbridge,
+        ideabridge=x_ideabridge,
+        roadbridge=x_roadbridge,
     )
 
 
 def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
+    x_acctbridge = get_acctbridge_from_dict(x_dict.get("acctbridge"))
+    x_groupbridge = get_groupbridge_from_dict(x_dict.get("groupbridge"))
+    x_ideabridge = get_ideabridge_from_dict(x_dict.get("ideabridge"))
+    x_roadbridge = get_roadbridge_from_dict(x_dict.get("roadbridge"))
+    x_roadbridge.ideabridge = x_ideabridge
     return PidginUnit(
         face_id=x_dict.get("face_id"),
         event_id=x_dict.get("event_id"),
         otx_wall=x_dict.get("otx_wall"),
         inx_wall=x_dict.get("inx_wall"),
         unknown_word=x_dict.get("unknown_word"),
-        acctbridge=get_acctbridge_from_dict(x_dict.get("acctbridge")),
-        groupbridge=get_groupbridge_from_dict(x_dict.get("groupbridge")),
-        roadbridge=get_roadbridge_from_dict(x_dict.get("roadbridge")),
+        acctbridge=x_acctbridge,
+        groupbridge=x_groupbridge,
+        ideabridge=x_ideabridge,
+        roadbridge=x_roadbridge,
     )
 
 

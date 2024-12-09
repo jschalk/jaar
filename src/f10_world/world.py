@@ -19,10 +19,10 @@ from src.f09_brick.pidgin_toolbox import (
     init_pidginunit_from_dir,
 )
 from src.f10_world.transformers import (
-    JungleToZooTransformer,
-    ZooStagingToZooAggTransformer,
-    ZooAggToZooEventsTransformer,
-    ZooEventsToEventsLogTransformer,
+    etl_jungle_to_zoo_staging,
+    etl_zoo_staging_to_zoo_agg,
+    etl_zoo_agg_to_zoo_events,
+    etl_zoo_events_to_events_log,
     etl_pidgin_staging_to_agg,
     etl_zoo_agg_to_pidgin_staging,
     etl_events_log_to_events_agg,
@@ -30,6 +30,7 @@ from src.f10_world.transformers import (
     etl_pidgin_agg_to_face_dirs,
     etl_face_pidgins_to_event_pidgins,
     etl_event_pidgins_to_pidgin_csv_files,
+    etl_event_pidgins_csvs_to_pidgin_jsons,
 )
 from pandas import read_excel as pandas_read_excel
 from dataclasses import dataclass
@@ -46,7 +47,7 @@ class WorldUnit:
     worlds_dir: str = None
     current_time: TimeLinePoint = None
     events: dict[TimeLinePoint, AcctID] = None
-    pidgins: dict[AcctID, PidginUnit] = None
+    pidgins: dict[TimeLinePoint, PidginUnit] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _faces_dir: str = None
     _fiscalunits: set[FiscalID] = None
@@ -64,20 +65,19 @@ class WorldUnit:
         return self.events.get(event_id)
 
     def set_pidginunit(self, x_pidginunit: PidginUnit):
-        self.pidgins[x_pidginunit.face_id] = x_pidginunit
+        self.pidgins[x_pidginunit.event_id] = x_pidginunit
 
-    def add_pidginunit(self, face_id: AcctID):
-        x_pidginunit = pidginunit_shop(face_id)
-        self.set_pidginunit(x_pidginunit)
+    def add_pidginunit(self, face_id: AcctID, event_id: TimeLinePoint):
+        self.set_pidginunit(pidginunit_shop(face_id, event_id))
 
-    def pidginunit_exists(self, face_id: AcctID) -> bool:
-        return self.pidgins.get(face_id) != None
+    def pidginunit_exists(self, event_id: TimeLinePoint) -> bool:
+        return self.pidgins.get(event_id) != None
 
-    def get_pidginunit(self, face_id: AcctID) -> PidginUnit:
-        return self.pidgins.get(face_id)
+    def get_pidginunit(self, event_id: TimeLinePoint) -> PidginUnit:
+        return self.pidgins.get(event_id)
 
-    def del_pidginunit(self, face_id: TimeLinePoint):
-        self.pidgins.pop(face_id)
+    def del_pidginunit(self, event_id: TimeLinePoint):
+        self.pidgins.pop(event_id)
 
     def del_all_pidginunits(self):
         self.pidgins = {}
@@ -85,23 +85,26 @@ class WorldUnit:
     def pidgins_empty(self) -> bool:
         return self.pidgins == {}
 
-    def _face_dir(self, face_id: AcctID) -> str:
-        return create_path(self._faces_dir, face_id)
+    def _event_dir(self, face_id: AcctID, event_id: TimeLinePoint) -> str:
+        face_dir = create_path(self._faces_dir, face_id)
+        return create_path(face_dir, event_id)
 
-    def save_pidginunit_files(self, face_id: AcctID):
-        x_pidginunit = self.get_pidginunit(face_id)
-        save_all_csvs_from_pidginunit(self._face_dir(face_id), x_pidginunit)
+    def save_pidginunit_files(self, face_id: AcctID, event_id: AcctID):
+        x_pidginunit = self.get_pidginunit(event_id)
+        save_all_csvs_from_pidginunit(self._event_dir(face_id, event_id), x_pidginunit)
 
-    def pidgin_dir_exists(self, face_id: AcctID) -> bool:
-        return os_path_exists(self._face_dir(face_id))
+    def pidgin_dir_exists(self, face_id: AcctID, event_id: TimeLinePoint) -> bool:
+        return os_path_exists(self._event_dir(face_id, event_id))
 
     def _set_all_pidginunits_from_dirs(self):
         self.del_all_pidginunits()
-        for dir_name in get_dir_file_strs(self._faces_dir, include_files=False).keys():
-            self.add_pidginunit(dir_name)
+        for face_dir in get_dir_file_strs(self._faces_dir, include_files=False).keys():
+            for event_dir in get_dir_file_strs(face_dir, include_files=False).keys():
+                self.add_pidginunit(face_dir, int(event_dir))
 
-    def _delete_pidginunit_dir(self, event_id: TimeLinePoint):
-        delete_dir(self._face_dir(event_id))
+    def _delete_pidginunit_dir(self, face_id: AcctID, event_id: TimeLinePoint):
+        face_dir = create_path(self._faces_dir, face_id)
+        delete_dir(create_path(face_dir, event_id))
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
@@ -116,25 +119,21 @@ class WorldUnit:
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
-    def load_pidginunit_from_files(self, face_id: AcctID):
-        x_pidginunit = init_pidginunit_from_dir(self._face_dir(face_id))
+    def load_pidginunit_from_files(self, face_id: AcctID, event_id: TimeLinePoint):
+        x_pidginunit = init_pidginunit_from_dir(self._event_dir(face_id, event_id))
         self.set_pidginunit(x_pidginunit)
 
     def jungle_to_zoo_staging(self):
-        transformer = JungleToZooTransformer(self._jungle_dir, self._zoo_dir)
-        transformer.transform()
+        etl_jungle_to_zoo_staging(self._jungle_dir, self._zoo_dir)
 
     def zoo_staging_to_zoo_agg(self):
-        transformer = ZooStagingToZooAggTransformer(self._zoo_dir)
-        transformer.transform()
+        etl_zoo_staging_to_zoo_agg(self._zoo_dir)
 
     def zoo_agg_to_zoo_events(self):
-        transformer = ZooAggToZooEventsTransformer(self._zoo_dir)
-        transformer.transform()
+        etl_zoo_agg_to_zoo_events(self._zoo_dir)
 
     def zoo_events_to_events_log(self):
-        transformer = ZooEventsToEventsLogTransformer(self._zoo_dir)
-        transformer.transform()
+        etl_zoo_events_to_events_log(self._zoo_dir)
 
     def events_log_to_events_agg(self):
         etl_events_log_to_events_agg(self._zoo_dir)
@@ -157,6 +156,9 @@ class WorldUnit:
 
     def event_pidgins_to_pidgin_csv_files(self):
         etl_event_pidgins_to_pidgin_csv_files(self._faces_dir)
+
+    def event_pidgins_csvs_to_pidgin_jsons(self):
+        etl_event_pidgins_csvs_to_pidgin_jsons(self._faces_dir)
 
     def get_dict(self) -> dict:
         return {

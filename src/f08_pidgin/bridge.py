@@ -32,7 +32,7 @@ class set_all_otx2inxException(Exception):
     pass
 
 
-class set_nub_label_Exception(Exception):
+class set_idea_Exception(Exception):
     pass
 
 
@@ -126,6 +126,13 @@ def acctbridge_shop(
         x_otx_wall = default_wall_if_none()
     if x_inx_wall is None:
         x_inx_wall = default_wall_if_none()
+    # handle float nan issue
+    if x_unknown_word != x_unknown_word:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall != x_otx_wall:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall != x_inx_wall:
+        x_inx_wall = default_wall_if_none()
 
     return AcctBridge(
         face_id=x_face_id,
@@ -207,6 +214,13 @@ def groupbridge_shop(
         x_otx_wall = default_wall_if_none()
     if x_inx_wall is None:
         x_inx_wall = default_wall_if_none()
+    # handle float nan issue
+    if x_unknown_word != x_unknown_word:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall != x_otx_wall:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall != x_inx_wall:
+        x_inx_wall = default_wall_if_none()
 
     return GroupBridge(
         face_id=x_face_id,
@@ -233,13 +247,101 @@ def get_groupbridge_from_json(x_json: str) -> GroupBridge:
     return get_groupbridge_from_dict(get_dict_from_json(x_json))
 
 
+class IdeaBridge(BridgeCore):
+    def set_otx2inx(self, otx_idea: str, inx_idea: str):
+        self.otx2inx[otx_idea] = inx_idea
+
+    def _get_inx_value(self, otx_idea: str) -> str:
+        return self.otx2inx.get(otx_idea)
+
+    def otx2inx_exists(self, otx_idea: str, inx_idea: str) -> bool:
+        return self._get_inx_value(otx_idea) == inx_idea
+
+    def otx_exists(self, otx_idea: str) -> bool:
+        return self._get_inx_value(otx_idea) != None
+
+    def del_otx2inx(self, otx_idea: str):
+        self.otx2inx.pop(otx_idea)
+
+    def reveal_inx(self, otx_idea: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_idea) is False:
+            inx_idea = copy_copy(otx_idea)
+            if self.inx_wall in otx_idea:
+                return None
+            otx_r_wall = self.otx_wall
+            inx_r_wall = self.inx_wall
+            inx_idea = inx_idea.replace(otx_r_wall, inx_r_wall)
+            self.set_otx2inx(otx_idea, inx_idea)
+
+        return self._get_inx_value(otx_idea)
+
+    def _is_inx_wall_inclusion_correct(self) -> bool:
+        return not str_in_dict_values(self.inx_wall, self.otx2inx)
+
+    def _is_otx_wall_inclusion_correct(self) -> bool:
+        return not str_in_dict_keys(self.otx_wall, self.otx2inx)
+
+    def is_valid(self) -> bool:
+        return (
+            self._is_inx_wall_inclusion_correct()
+            and self._is_otx_wall_inclusion_correct()
+        )
+
+
+def ideabridge_shop(
+    x_otx_wall: str = None,
+    x_inx_wall: str = None,
+    x_otx2inx: dict = None,
+    x_unknown_word: str = None,
+    x_face_id: FaceID = None,
+    x_event_id: TimeLinePoint = None,
+) -> IdeaBridge:
+    if x_unknown_word is None:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall is None:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall is None:
+        x_inx_wall = default_wall_if_none()
+    # handle float nan issue
+    if x_unknown_word != x_unknown_word:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall != x_otx_wall:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall != x_inx_wall:
+        x_inx_wall = default_wall_if_none()
+
+    return IdeaBridge(
+        face_id=x_face_id,
+        event_id=get_0_if_None(x_event_id),
+        otx_wall=x_otx_wall,
+        inx_wall=x_inx_wall,
+        unknown_word=x_unknown_word,
+        otx2inx=get_empty_dict_if_none(x_otx2inx),
+    )
+
+
+def get_ideabridge_from_dict(x_dict: dict) -> IdeaBridge:
+    return ideabridge_shop(
+        x_face_id=x_dict.get("face_id"),
+        x_event_id=x_dict.get("event_id"),
+        x_otx_wall=x_dict.get("otx_wall"),
+        x_inx_wall=x_dict.get("inx_wall"),
+        x_otx2inx=x_dict.get("otx2inx"),
+        x_unknown_word=x_dict.get("unknown_word"),
+    )
+
+
+def get_ideabridge_from_json(x_json: str) -> IdeaBridge:
+    return get_ideabridge_from_dict(get_dict_from_json(x_json))
+
+
 @dataclass
 class RoadBridge:
     otx2inx: dict = None
     unknown_word: str = None
     otx_wall: str = None
     inx_wall: str = None
-    nub_label: dict = None
+    ideabridge: IdeaBridge = None
     face_id: FaceID = None
     event_id: TimeLinePoint = None
 
@@ -271,18 +373,16 @@ class RoadBridge:
         if self.otx_exists(otx_parent_road) is False and otx_parent_road != "":
             return None
         otx_terminus = get_terminus_idea(otx_road, self.otx_wall)
-        otx_terminus = self._get_nub_ideaunit(otx_terminus)
+        otx_terminus = self._get_ideabridge_ideaunit(otx_terminus)
         if otx_parent_road == "":
             inx_parent_road = ""
         else:
             inx_parent_road = self._get_inx_value(otx_parent_road)
-        x_road = combine_roads(inx_parent_road, otx_terminus, self.inx_wall)
-        print(f"{x_road=}")
-        return x_road
+        return combine_roads(inx_parent_road, otx_terminus, self.inx_wall)
 
-    def _get_nub_ideaunit(self, x_ideaUnit: IdeaUnit) -> IdeaUnit:
-        if self.nub_otx_label_exists(x_ideaUnit):
-            return self._get_nub_inx_label(x_ideaUnit)
+    def _get_ideabridge_ideaunit(self, x_ideaUnit: IdeaUnit) -> IdeaUnit:
+        if self.otx_idea_exists(x_ideaUnit):
+            return self.ideabridge.reveal_inx(x_ideaUnit)
         return x_ideaUnit
 
     def otx2inx_exists(self, otx_road: str, inx_road: str) -> bool:
@@ -294,37 +394,37 @@ class RoadBridge:
     def del_otx2inx(self, otx_road: str):
         self.otx2inx.pop(otx_road)
 
-    def set_nub_label(self, otx_label: IdeaUnit, inx_label: IdeaUnit):
-        if self.otx_wall in otx_label:
-            exception_str = f"nub_label cannot have otx_label '{otx_label}'. It must be not have wall {self.otx_wall}."
-            raise set_nub_label_Exception(exception_str)
-        if self.inx_wall in inx_label:
-            exception_str = f"nub_label cannot have inx_label '{inx_label}'. It must be not have wall {self.inx_wall}."
-            raise set_nub_label_Exception(exception_str)
+    def set_idea(self, otx_idea: IdeaUnit, inx_idea: IdeaUnit):
+        if self.otx_wall in otx_idea:
+            exception_str = f"idea cannot have otx_idea '{otx_idea}'. It must be not have wall {self.otx_wall}."
+            raise set_idea_Exception(exception_str)
+        if self.inx_wall in inx_idea:
+            exception_str = f"idea cannot have inx_idea '{inx_idea}'. It must be not have wall {self.inx_wall}."
+            raise set_idea_Exception(exception_str)
 
-        self.nub_label[otx_label] = inx_label
-        self._set_new_nub_label_to_otx_inx(otx_label, inx_label)
+        self.ideabridge.set_otx2inx(otx_idea, inx_idea)
+        self._set_new_idea_to_otx_inx(otx_idea, inx_idea)
 
-    def _set_new_nub_label_to_otx_inx(self, otx_label, inx_label):
+    def _set_new_idea_to_otx_inx(self, otx_idea, inx_idea):
         for otx_road, inx_road in self.otx2inx.items():
             otx_ideaunits = get_all_road_ideas(otx_road, self.otx_wall)
             inx_ideaunits = get_all_road_ideas(inx_road, self.inx_wall)
             for x_count, otx_ideaunit in enumerate(otx_ideaunits):
-                if otx_ideaunit == otx_label:
-                    inx_ideaunits[x_count] = inx_label
+                if otx_ideaunit == otx_idea:
+                    inx_ideaunits[x_count] = inx_idea
             self.set_otx2inx(otx_road, create_road_from_ideas(inx_ideaunits))
 
-    def _get_nub_inx_label(self, otx_label: IdeaUnit) -> IdeaUnit:
-        return self.nub_label.get(otx_label)
+    def _get_inx_idea(self, otx_idea: IdeaUnit) -> IdeaUnit:
+        return self.ideabridge.otx2inx.get(otx_idea)
 
-    def nub_label_exists(self, otx_label: IdeaUnit, inx_label: IdeaUnit) -> bool:
-        return self._get_nub_inx_label(otx_label) == inx_label
+    def idea_exists(self, otx_idea: IdeaUnit, inx_idea: IdeaUnit) -> bool:
+        return self.ideabridge.otx2inx_exists(otx_idea, inx_idea)
 
-    def nub_otx_label_exists(self, otx_label: IdeaUnit) -> bool:
-        return self._get_nub_inx_label(otx_label) != None
+    def otx_idea_exists(self, otx_idea: IdeaUnit) -> bool:
+        return self.ideabridge.otx_exists(otx_idea)
 
-    def del_nub_label(self, otx_label: IdeaUnit) -> bool:
-        self.nub_label.pop(otx_label)
+    def del_idea(self, otx_idea: IdeaUnit) -> bool:
+        self.ideabridge.del_otx2inx(otx_idea)
 
     def _unknown_word_in_otx2inx(self) -> bool:
         return str_in_dict(self.unknown_word, self.otx2inx)
@@ -347,7 +447,6 @@ class RoadBridge:
             "otx_wall": self.otx_wall,
             "inx_wall": self.inx_wall,
             "unknown_word": self.unknown_word,
-            "nub_label": self.nub_label,
             "otx2inx": self.otx2inx,
         }
 
@@ -358,7 +457,7 @@ class RoadBridge:
 def roadbridge_shop(
     x_otx_wall: str = None,
     x_inx_wall: str = None,
-    x_nub_label: dict = None,
+    x_ideabridge: IdeaBridge = None,
     x_otx2inx: dict = None,
     x_unknown_word: str = None,
     x_face_id: FaceID = None,
@@ -370,13 +469,28 @@ def roadbridge_shop(
         x_otx_wall = default_wall_if_none()
     if x_inx_wall is None:
         x_inx_wall = default_wall_if_none()
+    # # handle float nan issue
+    if x_unknown_word != x_unknown_word:
+        x_unknown_word = default_unknown_word()
+    if x_otx_wall != x_otx_wall:
+        x_otx_wall = default_wall_if_none()
+    if x_inx_wall != x_inx_wall:
+        x_inx_wall = default_wall_if_none()
+    if x_ideabridge is None:
+        x_ideabridge = ideabridge_shop(
+            x_otx_wall=x_otx_wall,
+            x_inx_wall=x_inx_wall,
+            x_unknown_word=x_unknown_word,
+            x_face_id=x_face_id,
+            x_event_id=x_event_id,
+        )
 
     return RoadBridge(
         otx2inx=get_empty_dict_if_none(x_otx2inx),
         unknown_word=x_unknown_word,
         otx_wall=x_otx_wall,
         inx_wall=x_inx_wall,
-        nub_label=get_empty_dict_if_none(x_nub_label),
+        ideabridge=x_ideabridge,
         face_id=x_face_id,
         event_id=get_0_if_None(x_event_id),
     )
@@ -389,91 +503,9 @@ def get_roadbridge_from_dict(x_dict: dict) -> RoadBridge:
         x_otx_wall=x_dict.get("otx_wall"),
         x_inx_wall=x_dict.get("inx_wall"),
         x_otx2inx=x_dict.get("otx2inx"),
-        x_nub_label=x_dict.get("nub_label"),
         x_unknown_word=x_dict.get("unknown_word"),
     )
 
 
 def get_roadbridge_from_json(x_json: str) -> RoadBridge:
     return get_roadbridge_from_dict(get_dict_from_json(x_json))
-
-
-class IdeaBridge(BridgeCore):
-    def set_otx2inx(self, otx_ideaid: str, inx_ideaid: str):
-        self.otx2inx[otx_ideaid] = inx_ideaid
-
-    def _get_inx_value(self, otx_ideaid: str) -> str:
-        return self.otx2inx.get(otx_ideaid)
-
-    def otx2inx_exists(self, otx_ideaid: str, inx_ideaid: str) -> bool:
-        return self._get_inx_value(otx_ideaid) == inx_ideaid
-
-    def otx_exists(self, otx_ideaid: str) -> bool:
-        return self._get_inx_value(otx_ideaid) != None
-
-    def del_otx2inx(self, otx_ideaid: str):
-        self.otx2inx.pop(otx_ideaid)
-
-    def reveal_inx(self, otx_ideaid: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_ideaid) is False:
-            inx_ideaid = copy_copy(otx_ideaid)
-            if self.inx_wall in otx_ideaid:
-                return None
-            otx_r_wall = self.otx_wall
-            inx_r_wall = self.inx_wall
-            inx_ideaid = inx_ideaid.replace(otx_r_wall, inx_r_wall)
-            self.set_otx2inx(otx_ideaid, inx_ideaid)
-
-        return self._get_inx_value(otx_ideaid)
-
-    def _is_inx_wall_inclusion_correct(self) -> bool:
-        return not str_in_dict_values(self.inx_wall, self.otx2inx)
-
-    def _is_otx_wall_inclusion_correct(self) -> bool:
-        return not str_in_dict_keys(self.otx_wall, self.otx2inx)
-
-    def is_valid(self) -> bool:
-        return (
-            self._is_inx_wall_inclusion_correct()
-            and self._is_otx_wall_inclusion_correct()
-        )
-
-
-def ideabridge_shop(
-    x_otx_wall: str = None,
-    x_inx_wall: str = None,
-    x_otx2inx: dict = None,
-    x_unknown_word: str = None,
-    x_face_id: FaceID = None,
-    x_event_id: TimeLinePoint = None,
-) -> IdeaBridge:
-    if x_unknown_word is None:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall is None:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall is None:
-        x_inx_wall = default_wall_if_none()
-
-    return IdeaBridge(
-        face_id=x_face_id,
-        event_id=get_0_if_None(x_event_id),
-        otx_wall=x_otx_wall,
-        inx_wall=x_inx_wall,
-        unknown_word=x_unknown_word,
-        otx2inx=get_empty_dict_if_none(x_otx2inx),
-    )
-
-
-def get_ideabridge_from_dict(x_dict: dict) -> IdeaBridge:
-    return ideabridge_shop(
-        x_face_id=x_dict.get("face_id"),
-        x_event_id=x_dict.get("event_id"),
-        x_otx_wall=x_dict.get("otx_wall"),
-        x_inx_wall=x_dict.get("inx_wall"),
-        x_otx2inx=x_dict.get("otx2inx"),
-        x_unknown_word=x_dict.get("unknown_word"),
-    )
-
-
-def get_ideabridge_from_json(x_json: str) -> IdeaBridge:
-    return get_ideabridge_from_dict(get_dict_from_json(x_json))

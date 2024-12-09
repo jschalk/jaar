@@ -134,7 +134,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario1_3Events(env_dir_setup_cleanu
     assert sheet_exists(event9_pidgin_file_path, acct_agg_str)
 
 
-def test_etl_face_pidgin_to_event_pidgins_Scenario3_group(env_dir_setup_cleanup):
+def test_etl_face_pidgin_to_event_pidgins_Scenario2_group(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     event7 = 7
@@ -247,7 +247,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario3_idea(env_dir_setup_cleanup):
     assert sheet_exists(event9_pidgin_file_path, idea_agg_str)
 
 
-def test_etl_face_pidgin_to_event_pidgins_Scenario3_road(env_dir_setup_cleanup):
+def test_etl_face_pidgin_to_event_pidgins_Scenario4_road(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     casa_otx = "fizz,casa"
@@ -375,3 +375,7 @@ def test_etl_face_pidgins_to_event_pidgins_Scenario0_road_Two_face_ids(
     assert sheet_exists(event3_pidgin_file_path, road_agg_str)
     assert sheet_exists(event7_pidgin_file_path, road_agg_str)
     assert sheet_exists(event9_pidgin_file_path, road_agg_str)
+    gen_e3 = pandas_read_excel(event3_pidgin_file_path, road_agg_str)
+    gen_e7 = pandas_read_excel(event7_pidgin_file_path, road_agg_str)
+    gen_e9 = pandas_read_excel(event9_pidgin_file_path, road_agg_str)
+    pandas_testing_assert_frame_equal(gen_e3, zia_road_agg_df)

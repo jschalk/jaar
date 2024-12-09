@@ -148,8 +148,8 @@ def pidgin_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
 def move_otx_csvs_to_pidgin_inx(face_dir: str):
     otx_dir = create_path(face_dir, "otx")
     inx_dir = create_path(face_dir, "inx")
-    bridge_filename = "bridge.json"
-    pidginunit_json = open_file(face_dir, bridge_filename)
+    pidgin_filename = "pidgin.json"
+    pidginunit_json = open_file(face_dir, pidgin_filename)
     face_pidginunit = get_pidginunit_from_json(pidginunit_json)
     otx_dir_files = get_dir_file_strs(otx_dir, delete_extensions=False)
     for x_file_name in otx_dir_files.keys():
@@ -163,7 +163,6 @@ def _get_pidgen_brick_format_filenames() -> set[str]:
     brick_numbers.update(set(get_brick_category_ref().get("bridge_group_id")))
     brick_numbers.update(set(get_brick_category_ref().get("bridge_idea")))
     brick_numbers.update(set(get_brick_category_ref().get("bridge_road")))
-    brick_numbers.update(set(get_brick_category_ref().get("bridge_nub_label")))
     return {f"{brick_number}.xlsx" for brick_number in brick_numbers}
 
 

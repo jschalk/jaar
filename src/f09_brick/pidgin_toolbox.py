@@ -1,4 +1,4 @@
-from src.f00_instrument.file import save_file, get_dir_file_strs
+from src.f00_instrument.file import save_file, get_dir_file_strs, create_path
 from src.f08_pidgin.pidgin import (
     PidginUnit,
     pidginunit_shop,
@@ -9,6 +9,7 @@ from src.f08_pidgin.pidgin import (
 )
 from src.f09_brick.pandas_tool import get_ordered_csv, open_csv
 from pandas import DataFrame
+from os.path import exists as os_path_exists
 
 
 def get_bridge_acct_dt_columns() -> list[str]:
@@ -56,18 +57,6 @@ def get_bridge_road_dt_columns() -> list[str]:
         "unknown_word",
         "otx_road",
         "inx_road",
-    ]
-
-
-def get_nub_label_columns() -> list[str]:
-    return [
-        "face_id",
-        "event_id",
-        "otx_wall",
-        "inx_wall",
-        "unknown_word",
-        "otx_label",
-        "inx_label",
     ]
 
 
@@ -135,35 +124,15 @@ def create_bridge_road_dt(x_bridge: RoadBridge) -> DataFrame:
     return DataFrame(x_rows_list, columns=get_bridge_road_dt_columns())
 
 
-def create_nub_label_dt(x_roadbridge: RoadBridge) -> DataFrame:
-    x_rows_list = [
-        {
-            "event_id": x_roadbridge.event_id,
-            "face_id": x_roadbridge.face_id,
-            "otx_wall": x_roadbridge.otx_wall,
-            "inx_wall": x_roadbridge.inx_wall,
-            "unknown_word": x_roadbridge.unknown_word,
-            "otx_label": otx_value,
-            "inx_label": inx_value,
-        }
-        for otx_value, inx_value in x_roadbridge.nub_label.items()
-    ]
-    return DataFrame(x_rows_list, columns=get_nub_label_columns())
-
-
 def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
     _save_bridge_acct_csv(x_dir, x_pidginunit.acctbridge)
     _save_bridge_group_csv(x_dir, x_pidginunit.groupbridge)
     _save_bridge_idea_csv(x_dir, x_pidginunit.ideabridge)
     _save_bridge_road_csv(x_dir, x_pidginunit.roadbridge)
-    _save_nub_label_csv(x_dir, x_pidginunit.roadbridge)
 
 
 def _save_bridge_acct_csv(x_dir: str, acctbridge: AcctBridge):
-    print(f"{acctbridge=}")
     x_dt = create_bridge_acct_dt(acctbridge)
-    print(f"{x_dt=}")
-    print(f"{get_ordered_csv(x_dt)=}")
     save_file(x_dir, "acct.csv", get_ordered_csv(x_dt))
 
 
@@ -182,58 +151,51 @@ def _save_bridge_road_csv(x_dir: str, roadbridge: RoadBridge):
     save_file(x_dir, "road.csv", get_ordered_csv(x_dt))
 
 
-def _save_nub_label_csv(x_dir, roadbridge: RoadBridge):
-    x_nub_label_dt = create_nub_label_dt(roadbridge)
-    save_file(x_dir, "nub_label.csv", get_ordered_csv(x_nub_label_dt))
-
-
 def _load_acctbridge_from_csv(x_dir, x_acctbridge: AcctBridge) -> AcctBridge:
-    otx2inx_dt = open_csv(x_dir, "acct.csv")
-    for table_row in otx2inx_dt.to_dict("records"):
-        otx_value = table_row.get("otx_acct_id")
-        inx_value = table_row.get("inx_acct_id")
-        if x_acctbridge.otx2inx_exists(otx_value, inx_value) is False:
-            x_acctbridge.set_otx2inx(otx_value, inx_value)
+    acct_filename = "acct.csv"
+    if os_path_exists(create_path(x_dir, acct_filename)):
+        otx2inx_dt = open_csv(x_dir, acct_filename)
+        for table_row in otx2inx_dt.to_dict("records"):
+            otx_value = table_row.get("otx_acct_id")
+            inx_value = table_row.get("inx_acct_id")
+            if x_acctbridge.otx2inx_exists(otx_value, inx_value) is False:
+                x_acctbridge.set_otx2inx(otx_value, inx_value)
     return x_acctbridge
 
 
 def _load_groupbridge_from_csv(x_dir, x_groupbridge: GroupBridge) -> GroupBridge:
-    otx2inx_dt = open_csv(x_dir, "group.csv")
-    for table_row in otx2inx_dt.to_dict("records"):
-        otx_value = table_row.get("otx_group_id")
-        inx_value = table_row.get("inx_group_id")
-        if x_groupbridge.otx2inx_exists(otx_value, inx_value) is False:
-            x_groupbridge.set_otx2inx(otx_value, inx_value)
+    group_filename = "group.csv"
+    if os_path_exists(create_path(x_dir, group_filename)):
+        otx2inx_dt = open_csv(x_dir, group_filename)
+        for table_row in otx2inx_dt.to_dict("records"):
+            otx_value = table_row.get("otx_group_id")
+            inx_value = table_row.get("inx_group_id")
+            if x_groupbridge.otx2inx_exists(otx_value, inx_value) is False:
+                x_groupbridge.set_otx2inx(otx_value, inx_value)
     return x_groupbridge
 
 
 def _load_ideabridge_from_csv(x_dir, x_ideabridge: IdeaBridge) -> IdeaBridge:
-    otx2inx_dt = open_csv(x_dir, "idea.csv")
-    for table_row in otx2inx_dt.to_dict("records"):
-        otx_value = table_row.get("otx_idea")
-        inx_value = table_row.get("inx_idea")
-        if x_ideabridge.otx2inx_exists(otx_value, inx_value) is False:
-            x_ideabridge.set_otx2inx(otx_value, inx_value)
+    idea_filename = "idea.csv"
+    if os_path_exists(create_path(x_dir, idea_filename)):
+        otx2inx_dt = open_csv(x_dir, "idea.csv")
+        for table_row in otx2inx_dt.to_dict("records"):
+            otx_value = table_row.get("otx_idea")
+            inx_value = table_row.get("inx_idea")
+            if x_ideabridge.otx2inx_exists(otx_value, inx_value) is False:
+                x_ideabridge.set_otx2inx(otx_value, inx_value)
     return x_ideabridge
 
 
 def _load_roadbridge_from_csv(x_dir, x_roadbridge: RoadBridge) -> RoadBridge:
-    otx2inx_dt = open_csv(x_dir, "road.csv")
-    for table_row in otx2inx_dt.to_dict("records"):
-        otx_value = table_row.get("otx_road")
-        inx_value = table_row.get("inx_road")
-        if x_roadbridge.otx2inx_exists(otx_value, inx_value) is False:
-            x_roadbridge.set_otx2inx(otx_value, inx_value)
-    return x_roadbridge
-
-
-def _load_nub_label_from_csv(x_dir, x_roadbridge: RoadBridge) -> RoadBridge:
-    nub_label_dt = open_csv(x_dir, "nub_label.csv")
-    for table_row in nub_label_dt.to_dict("records"):
-        otx_value = table_row.get("otx_label")
-        inx_value = table_row.get("inx_label")
-        if x_roadbridge.nub_label_exists(otx_value, inx_value) is False:
-            x_roadbridge.set_nub_label(otx_value, inx_value)
+    road_filename = "road.csv"
+    if os_path_exists(create_path(x_dir, road_filename)):
+        otx2inx_dt = open_csv(x_dir, "road.csv")
+        for table_row in otx2inx_dt.to_dict("records"):
+            otx_value = table_row.get("otx_road")
+            inx_value = table_row.get("inx_road")
+            if x_roadbridge.otx2inx_exists(otx_value, inx_value) is False:
+                x_roadbridge.set_otx2inx(otx_value, inx_value)
     return x_roadbridge
 
 
@@ -245,7 +207,6 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
     inx_wall_set = set()
     for x_filename in get_dir_file_strs(x_dir).keys():
         x_dt = open_csv(x_dir, x_filename)
-        print(f"huh {x_dt=}")
         face_id_set.update(x_dt.face_id.unique())
         event_id_set.update(x_dt.event_id.unique())
         unknown_word_set.update(x_dt.unknown_word.unique())
@@ -279,5 +240,5 @@ def init_pidginunit_from_dir(x_dir: str) -> PidginUnit:
     _load_groupbridge_from_csv(x_dir, x_pidginunit.groupbridge)
     _load_ideabridge_from_csv(x_dir, x_pidginunit.ideabridge)
     _load_roadbridge_from_csv(x_dir, x_pidginunit.roadbridge)
-    _load_nub_label_from_csv(x_dir, x_pidginunit.roadbridge)
+    x_pidginunit.roadbridge.ideabridge = x_pidginunit.ideabridge
     return x_pidginunit
