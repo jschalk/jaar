@@ -2,7 +2,12 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
-from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, zoo_staging_str
+from src.f09_brick.pandas_tool import (
+    get_sheet_names,
+    upsert_sheet,
+    zoo_staging_str,
+    zoo_agg_str,
+)
 from src.f10_world.world import worldunit_shop
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -62,7 +67,7 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario0(
     assert gen_otx_events_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
     assert get_sheet_names(zoo_file_path) == [
         zoo_staging_str(),
-        "zoo_agg",
+        zoo_agg_str(),
         "zoo_events",
     ]
 

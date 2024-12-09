@@ -23,6 +23,7 @@ from src.f09_brick.pandas_tool import (
     upsert_sheet,
     sheet_exists,
     _get_pidgen_brick_format_filenames,
+    zoo_agg_str,
 )
 from src.f10_world.world import worldunit_shop
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -89,10 +90,10 @@ def test_WorldUnit_zoo_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00113_rows = [sue0, sue1]
     br00113_df = DataFrame(br00113_rows, columns=br00113_columns)
-    upsert_sheet(br00113_file_path, "zoo_agg", br00113_df)
+    upsert_sheet(br00113_file_path, zoo_agg_str(), br00113_df)
     br00043_df = [sue2, sue3, yao1]
     br00043_df = DataFrame(br00043_df, columns=br00043_columns)
-    upsert_sheet(br00043_file_path, "zoo_agg", br00043_df)
+    upsert_sheet(br00043_file_path, zoo_agg_str(), br00043_df)
     pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
 
     br00115_file_path = create_path(fizz_world._zoo_dir, "br00115.xlsx")
@@ -122,10 +123,10 @@ def test_WorldUnit_zoo_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00115_rows = [sue0, sue1]
     br00115_df = DataFrame(br00115_rows, columns=br00115_columns)
-    upsert_sheet(br00115_file_path, "zoo_agg", br00115_df)
+    upsert_sheet(br00115_file_path, zoo_agg_str(), br00115_df)
     b40_rows = [sue2, sue3, yao1]
     br00042_df = DataFrame(b40_rows, columns=br00042_columns)
-    upsert_sheet(br00042_file_path, "zoo_agg", br00042_df)
+    upsert_sheet(br00042_file_path, zoo_agg_str(), br00042_df)
 
     br00116_file_path = create_path(fizz_world._zoo_dir, "br00116.xlsx")
     br00116_columns = [
@@ -154,10 +155,10 @@ def test_WorldUnit_zoo_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00116_rows = [sue0, sue1]
     br00116_df = DataFrame(br00116_rows, columns=br00116_columns)
-    upsert_sheet(br00116_file_path, "zoo_agg", br00116_df)
+    upsert_sheet(br00116_file_path, zoo_agg_str(), br00116_df)
     br00044_rows = [sue2, sue3, yao1]
     br00044_df = DataFrame(br00044_rows, columns=br00044_columns)
-    upsert_sheet(br00044_file_path, "zoo_agg", br00044_df)
+    upsert_sheet(br00044_file_path, zoo_agg_str(), br00044_df)
 
     br00117_file_path = create_path(fizz_world._zoo_dir, "br00117.xlsx")
     br00117_columns = [
@@ -186,10 +187,10 @@ def test_WorldUnit_zoo_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
-    upsert_sheet(br00117_file_path, "zoo_agg", br00117_df)
+    upsert_sheet(br00117_file_path, zoo_agg_str(), br00117_df)
     br00045_rows = [sue2, sue3, yao1]
     br00045_df = DataFrame(br00045_rows, columns=br00045_columns)
-    upsert_sheet(br00045_file_path, "zoo_agg", br00045_df)
+    upsert_sheet(br00045_file_path, zoo_agg_str(), br00045_df)
 
     assert fizz_world.events == {}
     fizz_world.zoo_agg_to_zoo_events()

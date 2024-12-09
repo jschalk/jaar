@@ -13,7 +13,7 @@ from src.f08_pidgin.pidgin_config import (
     otx_idea_str,
     unknown_word_str,
 )
-from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet
+from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, zoo_agg_str
 from src.f10_world.transformers import etl_zoo_agg_to_pidgin_idea_staging
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -46,7 +46,7 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario0_SingleBrick(
     sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
     br00116_rows = [sue0, sue1]
     br00116_df = DataFrame(br00116_rows, columns=br00116_columns)
-    upsert_sheet(br00116_file_path, "zoo_agg", br00116_df)
+    upsert_sheet(br00116_file_path, zoo_agg_str(), br00116_df)
     pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     assert os_path_exists(pidgin_path) is False
 
@@ -125,10 +125,10 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBricks
     yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
     br00116_rows = [sue0, sue1]
     br00116_df = DataFrame(br00116_rows, columns=br00116_columns)
-    upsert_sheet(br00116_file_path, "zoo_agg", br00116_df)
+    upsert_sheet(br00116_file_path, zoo_agg_str(), br00116_df)
     br00044_rows = [sue2, sue3, yao1]
     br00044_df = DataFrame(br00044_rows, columns=br00044_columns)
-    upsert_sheet(br00044_file_path, "zoo_agg", br00044_df)
+    upsert_sheet(br00044_file_path, zoo_agg_str(), br00044_df)
     pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     assert os_path_exists(pidgin_path) is False
 
@@ -212,10 +212,10 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario2_WorldUnit_even
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00116_rows = [sue0, sue1]
     br00116_df = DataFrame(br00116_rows, columns=br00116_columns)
-    upsert_sheet(br00116_file_path, "zoo_agg", br00116_df)
+    upsert_sheet(br00116_file_path, zoo_agg_str(), br00116_df)
     br00044_rows = [sue2, sue3, yao1]
     br00044_df = DataFrame(br00044_rows, columns=br00044_columns)
-    upsert_sheet(br00044_file_path, "zoo_agg", br00044_df)
+    upsert_sheet(br00044_file_path, zoo_agg_str(), br00044_df)
     pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     legitimate_events = {event2, event5}
     assert os_path_exists(pidgin_path) is False

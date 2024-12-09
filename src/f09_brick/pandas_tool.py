@@ -104,6 +104,10 @@ def zoo_staging_str():
     return "zoo_staging"
 
 
+def zoo_agg_str():
+    return "zoo_agg"
+
+
 def get_zoo_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, group_by_list: list
 ) -> DataFrame:
@@ -114,10 +118,9 @@ def get_zoo_staging_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        zoo_staging_str = "zoo_staging"
-        x_df.to_sql(zoo_staging_str, conn, index=False)
+        x_df.to_sql(zoo_staging_str(), conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table=zoo_staging_str,
+            x_table=zoo_staging_str(),
             group_by_columns=grouping_columns,
             value_columns=value_columns,
         )

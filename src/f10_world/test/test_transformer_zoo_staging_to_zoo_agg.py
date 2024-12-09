@@ -2,7 +2,12 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
-from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, zoo_staging_str
+from src.f09_brick.pandas_tool import (
+    get_sheet_names,
+    upsert_sheet,
+    zoo_staging_str,
+    zoo_agg_str,
+)
 from src.f10_world.transformers import (
     etl_jungle_to_zoo_staging,
     etl_zoo_staging_to_zoo_agg,
@@ -47,7 +52,7 @@ def test_etl_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     etl_zoo_staging_to_zoo_agg(zoo_dir)
 
     # THEN
-    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_agg")
+    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name=zoo_agg_str())
     ex_otx_df = DataFrame([row1, row2], columns=brick_columns)
     print(f"{gen_otx_df.columns=}")
     assert len(ex_otx_df.columns) == len(gen_otx_df.columns)
@@ -56,7 +61,7 @@ def test_etl_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 2
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(zoo_file_path) == [zoo_staging_str(), "zoo_agg"]
+    assert get_sheet_names(zoo_file_path) == [zoo_staging_str(), zoo_agg_str()]
 
 
 def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
@@ -96,7 +101,7 @@ def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnly
     etl_zoo_staging_to_zoo_agg(zoo_dir)
 
     # THEN
-    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_agg")
+    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name=zoo_agg_str())
     ex_otx_df = DataFrame([row1], columns=brick_columns)
     # print(f"{gen_otx_df.columns=}")
     print(f"{gen_otx_df=}")
@@ -106,4 +111,4 @@ def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnly
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 1
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(zoo_file_path) == [zoo_staging_str(), "zoo_agg"]
+    assert get_sheet_names(zoo_file_path) == [zoo_staging_str(), zoo_agg_str()]

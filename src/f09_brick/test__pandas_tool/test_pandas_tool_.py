@@ -19,6 +19,7 @@ from src.f09_brick.pandas_tool import (
     get_ordered_csv,
     get_relevant_columns_dataframe,
     zoo_staging_str,
+    zoo_agg_str,
     get_zoo_staging_grouping_with_all_values_equal_df,
 )
 from os.path import exists as os_path_exists
@@ -164,6 +165,7 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
 def test_zoo_staging_str_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert zoo_staging_str() == "zoo_staging"
+    assert zoo_agg_str() == "zoo_agg"
 
 
 def test_get_zoo_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
