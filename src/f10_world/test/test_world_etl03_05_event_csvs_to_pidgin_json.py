@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, open_file, save_file
-from src.f01_road.road import default_wall_if_none
-from src.f01_road.jaar_config import default_unknown_word_if_none
+from src.f01_road.road import default_wall_if_None
+from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f04_gift.atom_config import face_id_str, type_RoadUnit_str
 from src.f08_pidgin.pidgin import pidginunit_shop, get_pidginunit_from_json
 from src.f08_pidgin.pidgin_config import (
@@ -81,17 +81,17 @@ def test_WorldUnit_event_pidgins_csvs_to_pidgin_jsons_Scenario0_3Event_road(
     e3_json_pidginunit = get_pidginunit_from_json(open_file(event3_dir, "pidgin.json"))
     assert e3_json_pidginunit.face_id == bob_str
     assert e3_json_pidginunit.event_id == event3
-    assert e3_json_pidginunit.otx_wall == default_wall_if_none()
-    assert e3_json_pidginunit.inx_wall == default_wall_if_none()
-    assert e3_json_pidginunit.unknown_word == default_unknown_word_if_none()
+    assert e3_json_pidginunit.otx_wall == default_wall_if_None()
+    assert e3_json_pidginunit.inx_wall == default_wall_if_None()
+    assert e3_json_pidginunit.unknown_word == default_unknown_word_if_None()
     assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
     assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
     e7_json_pidginunit = get_pidginunit_from_json(open_file(event7_dir, "pidgin.json"))
     assert e7_json_pidginunit.face_id == bob_str
     assert e7_json_pidginunit.event_id == event7
-    assert e7_json_pidginunit.otx_wall == default_wall_if_none()
-    assert e7_json_pidginunit.inx_wall == default_wall_if_none()
-    assert e7_json_pidginunit.unknown_word == default_unknown_word_if_none()
+    assert e7_json_pidginunit.otx_wall == default_wall_if_None()
+    assert e7_json_pidginunit.inx_wall == default_wall_if_None()
+    assert e7_json_pidginunit.unknown_word == default_unknown_word_if_None()
     assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
     assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
 
@@ -124,9 +124,9 @@ def test_WorldUnit_event_pidgins_csvs_to_pidgin_jsons_Scenario0_3Event_road(
 #     json_pidginunit = get_pidginunit_from_json(open_file(event3_dir, "pidgin.json"))
 #     assert json_pidginunit.face_id == bob_str
 #     assert json_pidginunit.event_id == event3
-#     assert json_pidginunit.otx_wall == default_wall_if_none()
-#     assert json_pidginunit.inx_wall == default_wall_if_none()
-#     assert json_pidginunit.unknown_word == default_unknown_word_if_none()
+#     assert json_pidginunit.otx_wall == default_wall_if_None()
+#     assert json_pidginunit.inx_wall == default_wall_if_None()
+#     assert json_pidginunit.unknown_word == default_unknown_word_if_None()
 #     assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
 #     assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
 

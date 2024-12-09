@@ -8,7 +8,7 @@ from src.f00_instrument.file import (
     set_dir,
     get_integer_filenames,
 )
-from src.f00_instrument.dict_toolbox import get_empty_set_if_none
+from src.f00_instrument.dict_toolbox import get_empty_set_if_None
 from src.f00_instrument.db_toolbox import sqlite_connection
 from src.f01_road.jaar_config import (
     dutys_str,
@@ -24,11 +24,11 @@ from src.f01_road.jaar_config import (
     init_gift_id,
 )
 from src.f01_road.finance import (
-    default_fund_coin_if_none,
+    default_fund_coin_if_None,
     validate_fund_pool,
-    default_respect_bit_if_none,
-    default_penny_if_none,
-    default_money_magnitude_if_none,
+    default_respect_bit_if_None,
+    default_penny_if_None,
+    default_money_magnitude_if_None,
     TimeLinePoint,
 )
 from src.f01_road.finance_tran import (
@@ -46,7 +46,7 @@ from src.f01_road.road import (
     rebuild_road,
     get_all_road_ideas,
     validate_ideaunit,
-    default_wall_if_none,
+    default_wall_if_None,
 )
 from src.f02_bud.bud import (
     BudUnit,
@@ -650,9 +650,9 @@ class HubUnit:
             raise get_keep_roadsException(x_str)
         owner_healer_dict = x_voice_bud._healers_dict.get(self.owner_id)
         if owner_healer_dict is None:
-            return get_empty_set_if_none(None)
+            return get_empty_set_if_None(None)
         keep_roads = x_voice_bud._healers_dict.get(self.owner_id).keys()
-        return get_empty_set_if_none(keep_roads)
+        return get_empty_set_if_None(keep_roads)
 
     def save_all_voice_dutys(self):
         voice = self.get_voice_bud()
@@ -705,12 +705,12 @@ def hubunit_shop(
         fiscal_id=fiscal_id,
         owner_id=validate_ideaunit(owner_id, wall),
         keep_road=keep_road,
-        wall=default_wall_if_none(wall),
+        wall=default_wall_if_None(wall),
         fund_pool=validate_fund_pool(fund_pool),
-        fund_coin=default_fund_coin_if_none(fund_coin),
-        respect_bit=default_respect_bit_if_none(respect_bit),
-        penny=default_penny_if_none(penny),
-        keep_point_magnitude=default_money_magnitude_if_none(keep_point_magnitude),
+        fund_coin=default_fund_coin_if_None(fund_coin),
+        respect_bit=default_respect_bit_if_None(respect_bit),
+        penny=default_penny_if_None(penny),
+        keep_point_magnitude=default_money_magnitude_if_None(keep_point_magnitude),
     )
 
 

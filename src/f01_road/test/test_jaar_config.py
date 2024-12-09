@@ -6,7 +6,7 @@ from src.f01_road.jaar_config import (
     max_tree_traverse_default,
     default_river_blocks_count,
     default_unknown_word,
-    default_unknown_word_if_none,
+    default_unknown_word_if_None,
 )
 
 
@@ -40,13 +40,13 @@ def test_default_unknown_word_ReturnsObj():
     assert default_unknown_word() == "UNKNOWN"
 
 
-def test_default_unknown_word_if_none_ReturnsObj():
+def test_default_unknown_word_if_None_ReturnsObj():
     # ESTABLISH
     unknown33_str = "unknown33"
     x_nan = float("nan")
 
     # WHEN / THEN
-    assert default_unknown_word_if_none() == default_unknown_word()
-    assert default_unknown_word_if_none(None) == default_unknown_word()
-    assert default_unknown_word_if_none(unknown33_str) == unknown33_str
-    assert default_unknown_word_if_none(x_nan) == default_unknown_word()
+    assert default_unknown_word_if_None() == default_unknown_word()
+    assert default_unknown_word_if_None(None) == default_unknown_word()
+    assert default_unknown_word_if_None(unknown33_str) == unknown33_str
+    assert default_unknown_word_if_None(x_nan) == default_unknown_word()

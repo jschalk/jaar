@@ -1,14 +1,14 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.road import (
-    default_wall_if_none,
+    default_wall_if_None,
     create_road_from_ideas,
     create_road,
     get_default_fiscal_id_ideaunit as root_label,
 )
 from src.f01_road.finance import (
-    default_respect_bit_if_none,
-    default_penny_if_none,
-    default_fund_coin_if_none,
+    default_respect_bit_if_None,
+    default_penny_if_None,
+    default_fund_coin_if_None,
     validate_fund_pool,
 )
 from src.f01_road.jaar_config import (
@@ -178,11 +178,11 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     assert sue_hubunit.fiscal_id == get_fiscal_id_if_None()
     assert sue_hubunit.fiscal_dir() == x_fiscal_path
     assert sue_hubunit.owner_id == sue_str
-    assert sue_hubunit.wall == default_wall_if_none()
+    assert sue_hubunit.wall == default_wall_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
-    assert sue_hubunit.fund_coin == default_fund_coin_if_none()
-    assert sue_hubunit.respect_bit == default_respect_bit_if_none()
-    assert sue_hubunit.penny == default_penny_if_none()
+    assert sue_hubunit.fund_coin == default_fund_coin_if_None()
+    assert sue_hubunit.respect_bit == default_respect_bit_if_None()
+    assert sue_hubunit.penny == default_penny_if_None()
     assert sue_hubunit.owners_dir() == x_owners_path
     x_hubunit = hubunit_shop(None, None, sue_str)
     assert sue_hubunit.keep_road == texas_road

@@ -431,7 +431,7 @@ def test_ItemUnit_record_active_hx_CorrectlyRecordsHistorry():
     assert clean_item._active_hx == {0: False}
 
 
-def test_ItemUnit_set_teamunit_empty_if_none():
+def test_ItemUnit_set_teamunit_empty_if_None():
     # ESTABLISH
     run_str = "run"
     run_item = itemunit_shop(run_str)
@@ -439,7 +439,7 @@ def test_ItemUnit_set_teamunit_empty_if_none():
     assert run_item.teamunit is None
 
     # WHEN
-    run_item.set_teamunit_empty_if_none()
+    run_item.set_teamunit_empty_if_None()
 
     # THEN
     assert run_item.teamunit is not None

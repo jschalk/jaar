@@ -1,8 +1,8 @@
-from src.f01_road.road import default_wall_if_none
+from src.f01_road.road import default_wall_if_None
 from src.f01_road.finance import (
-    default_fund_coin_if_none,
-    default_respect_bit_if_none,
-    default_penny_if_none,
+    default_fund_coin_if_None,
+    default_respect_bit_if_None,
+    default_penny_if_None,
 )
 from src.f03_chrono.chrono import get_default_timeline_config_dict
 from src.f04_gift.atom_config import fiscal_id_str
@@ -40,10 +40,10 @@ def test_FiscalUnit_get_dict_ReturnsObj():
     assert x_dict.get(fiscal_id_str()) == music_str
     assert x_dict.get("timeline") == get_default_timeline_config_dict()
     assert x_dict.get("current_time") == 0
-    assert x_dict.get("wall") == default_wall_if_none()
-    assert x_dict.get("fund_coin") == default_fund_coin_if_none()
-    assert x_dict.get("respect_bit") == default_respect_bit_if_none()
-    assert x_dict.get("penny") == default_penny_if_none()
+    assert x_dict.get("wall") == default_wall_if_None()
+    assert x_dict.get("fund_coin") == default_fund_coin_if_None()
+    assert x_dict.get("respect_bit") == default_respect_bit_if_None()
+    assert x_dict.get("penny") == default_penny_if_None()
     assert x_dict.get("purviewlogs") == music_fiscal._get_purviewlogs_dict()
     print(f"{ music_fiscal._get_purviewlogs_dict()=}")
     assert list(x_dict.keys()) == [

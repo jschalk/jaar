@@ -1,14 +1,14 @@
 from src.f01_road.finance import (
-    default_respect_bit_if_none,
-    default_penny_if_none,
-    default_fund_coin_if_none,
+    default_respect_bit_if_None,
+    default_penny_if_None,
+    default_fund_coin_if_None,
     validate_fund_pool,
     validate_respect_num,
 )
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f01_road.road import (
     get_default_fiscal_id_ideaunit as root_label,
-    default_wall_if_none,
+    default_wall_if_None,
 )
 from src.f02_bud.origin import originunit_shop
 from pytest import raises as pytest_raises
@@ -115,11 +115,11 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     # THEN
     assert x_bud._owner_id == ""
     assert x_bud._fiscal_id == root_label()
-    assert x_bud._wall == default_wall_if_none()
+    assert x_bud._wall == default_wall_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
-    assert x_bud.fund_coin == default_fund_coin_if_none()
-    assert x_bud.respect_bit == default_respect_bit_if_none()
-    assert x_bud.penny == default_penny_if_none()
+    assert x_bud.fund_coin == default_fund_coin_if_None()
+    assert x_bud.respect_bit == default_respect_bit_if_None()
+    assert x_bud.penny == default_penny_if_None()
     assert x_bud._itemroot._fund_coin == x_bud.fund_coin
     assert x_bud._itemroot._wall == x_bud._wall
     assert x_bud._itemroot._root

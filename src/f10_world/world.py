@@ -1,8 +1,8 @@
 from src.f00_instrument.file import set_dir, create_path, get_dir_file_strs, delete_dir
 from src.f00_instrument.dict_toolbox import (
-    get_empty_dict_if_none,
+    get_empty_dict_if_None,
     get_0_if_None,
-    get_empty_set_if_none,
+    get_empty_set_if_None,
 )
 from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
@@ -186,10 +186,10 @@ def worldunit_shop(
         world_id=world_id,
         worlds_dir=worlds_dir,
         current_time=get_0_if_None(current_time),
-        timeconversions=get_empty_dict_if_none(timeconversions),
+        timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
-        pidgins=get_empty_dict_if_none(pidgins),
-        _fiscalunits=get_empty_set_if_none(_fiscalunits),
+        pidgins=get_empty_dict_if_None(pidgins),
+        _fiscalunits=get_empty_set_if_None(_fiscalunits),
     )
     x_worldunit._set_world_dirs()
     return x_worldunit

@@ -13,7 +13,7 @@ class IdeaUnit(str):
         return len(self) > 0 and self.is_wall_in_str(wall)
 
     def is_wall_in_str(self, wall: str = None) -> bool:
-        return self.find(default_wall_if_none(wall)) == -1
+        return self.find(default_wall_if_None(wall)) == -1
 
 
 class FiscalID(IdeaUnit):  # Created to help track the concept
@@ -82,7 +82,7 @@ def get_default_face_id() -> FaceID:
     return FaceID("Face1234")
 
 
-def default_wall_if_none(wall: any = None) -> str:
+def default_wall_if_None(wall: any = None) -> str:
     if wall != wall:  # float("nan")
         wall = None
     return wall if wall is not None else ";"
@@ -105,7 +105,7 @@ def is_sub_road(ref_road: RoadUnit, sub_road: RoadUnit) -> bool:
 
 
 def is_heir_road(src: RoadUnit, heir: RoadUnit, wall: str = None) -> bool:
-    return src == heir or heir.find(f"{src}{default_wall_if_none(wall)}") == 0
+    return src == heir or heir.find(f"{src}{default_wall_if_None(wall)}") == 0
 
 
 def find_replace_road_key_dict(
@@ -129,7 +129,7 @@ def find_replace_road_key_dict(
 
 
 def get_all_road_ideas(road: RoadUnit, wall: str = None) -> list[IdeaUnit]:
-    return road.split(default_wall_if_none(wall))
+    return road.split(default_wall_if_None(wall))
 
 
 def get_terminus_idea(road: RoadUnit, wall: str = None) -> IdeaUnit:
@@ -146,12 +146,12 @@ def get_parent_road(
 def create_road_without_root_idea(
     road: RoadUnit, wall: str = None
 ) -> RoadUnit:  # road without terminus ideaf
-    if road[:1] == default_wall_if_none(wall):
+    if road[:1] == default_wall_if_None(wall):
         raise InvalidRoadUnitException(
             f"Cannot create_road_without_root_idea of '{road}' because it has no root idea."
         )
     road_without_root_idea = create_road_from_ideas(get_all_road_ideas(road=road)[1:])
-    return f"{default_wall_if_none(wall)}{road_without_root_idea}"
+    return f"{default_wall_if_None(wall)}{road_without_root_idea}"
 
 
 def get_root_idea_from_road(road: RoadUnit, wall: str = None) -> IdeaUnit:
@@ -220,7 +220,7 @@ def get_default_fiscal_id_ideaunit() -> FiscalID:
 
 
 def create_road_from_ideas(ideas: list[IdeaUnit], wall: str = None) -> RoadUnit:
-    return default_wall_if_none(wall).join(ideas)
+    return default_wall_if_None(wall).join(ideas)
 
 
 class wall_in_idea_Exception(Exception):
@@ -233,7 +233,7 @@ def create_road(
 
     if terminus_idea is None:
         return RoadUnit(parent_road)
-    x_wall = default_wall_if_none(wall)
+    x_wall = default_wall_if_None(wall)
     terminus_idea = IdeaUnit(terminus_idea)
     if terminus_idea.is_idea(x_wall) is False:
         raise wall_in_idea_Exception(f"wall '{x_wall}' is in {terminus_idea}")
@@ -257,7 +257,7 @@ def combine_roads(
 
 
 def get_diff_road(x_road: RoadUnit, sub_road: RoadUnit, wall: str = None):
-    sub_road = f"{sub_road}{default_wall_if_none(wall)}"
+    sub_road = f"{sub_road}{default_wall_if_None(wall)}"
     return x_road.replace(sub_road, "")
 
 
@@ -313,7 +313,7 @@ def roadunit_valid_dir_path(x_roadunit: RoadUnit, wall: str) -> bool:
 
 
 def get_road_from_doar(x_doarunit: DoarUnit, wall: str = None) -> RoadUnit:
-    x_wall = default_wall_if_none(wall)
+    x_wall = default_wall_if_None(wall)
     doar_ideas = get_all_road_ideas(x_doarunit, x_wall)
     return RoadUnit(create_road_from_ideas(doar_ideas[::-1], x_wall))
 

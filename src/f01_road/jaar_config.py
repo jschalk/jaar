@@ -70,7 +70,7 @@ def default_unknown_word() -> str:
     return "UNKNOWN"
 
 
-def default_unknown_word_if_none(unknown_word: any = None) -> str:
+def default_unknown_word_if_None(unknown_word: any = None) -> str:
     if unknown_word != unknown_word:
         unknown_word = None
     if unknown_word is None:

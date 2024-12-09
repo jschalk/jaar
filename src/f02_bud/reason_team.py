@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_toolbox import get_empty_set_if_none
+from src.f00_instrument.dict_toolbox import get_empty_set_if_None
 from src.f02_bud.group import GroupUnit, GroupID
 from src.f02_bud.acct import AcctID
 from dataclasses import dataclass
@@ -30,7 +30,7 @@ class TeamUnit:
 
 
 def teamunit_shop(_teamlinks: set[GroupID] = None) -> TeamUnit:
-    return TeamUnit(get_empty_set_if_none(_teamlinks))
+    return TeamUnit(get_empty_set_if_None(_teamlinks))
 
 
 def create_teamunit(teamlink: GroupID):
@@ -119,7 +119,7 @@ class TeamHeir:
 def teamheir_shop(
     _teamlinks: set[GroupID] = None, _owner_id_team: bool = None
 ) -> TeamHeir:
-    _teamlinks = get_empty_set_if_none(_teamlinks)
+    _teamlinks = get_empty_set_if_None(_teamlinks)
     if _owner_id_team is None:
         _owner_id_team = False
 

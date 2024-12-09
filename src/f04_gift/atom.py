@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import (
-    get_empty_dict_if_none,
+    get_empty_dict_if_None,
     get_json_from_dict,
     get_dict_from_json,
 )
@@ -143,7 +143,7 @@ class AtomUnit:
 
     def _get_jvalues_dict(self) -> dict:
         x_key = jvalues_str()
-        return get_empty_dict_if_none(self._get_category_dict().get(x_key))
+        return get_empty_dict_if_None(self._get_category_dict().get(x_key))
 
     def get_nesting_order_args(self) -> list[str]:
         # When ChangUnit places an AtomUnit in a nested dictionary ChangUnit.atomunits
@@ -207,8 +207,8 @@ def atomunit_shop(
         return AtomUnit(
             category=category,
             crud_str=crud_str,
-            jkeys=get_empty_dict_if_none(jkeys),
-            jvalues=get_empty_dict_if_none(jvalues),
+            jkeys=get_empty_dict_if_None(jkeys),
+            jvalues=get_empty_dict_if_None(jvalues),
         )
 
 

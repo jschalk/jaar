@@ -4,9 +4,9 @@ from src.f01_road.road import (
     find_replace_road_key_dict,
     replace_wall,
     is_heir_road,
-    default_wall_if_none,
+    default_wall_if_None,
 )
-from src.f00_instrument.dict_toolbox import get_empty_dict_if_none
+from src.f00_instrument.dict_toolbox import get_empty_dict_if_None
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 
@@ -407,7 +407,7 @@ def premiseunit_shop(
         open=open,
         nigh=nigh,
         divisor=divisor,
-        wall=default_wall_if_none(wall),
+        wall=default_wall_if_None(wall),
     )
 
 
@@ -508,9 +508,9 @@ def reasoncore_shop(
 ):
     return ReasonCore(
         base=base,
-        premises=get_empty_dict_if_none(premises),
+        premises=get_empty_dict_if_None(premises),
         base_item_active_requisite=base_item_active_requisite,
-        wall=default_wall_if_none(wall),
+        wall=default_wall_if_None(wall),
     )
 
 
@@ -537,9 +537,9 @@ def reasonunit_shop(
 ):
     return ReasonUnit(
         base=base,
-        premises=get_empty_dict_if_none(premises),
+        premises=get_empty_dict_if_None(premises),
         base_item_active_requisite=base_item_active_requisite,
-        wall=default_wall_if_none(wall),
+        wall=default_wall_if_None(wall),
     )
 
 
@@ -572,7 +572,7 @@ class ReasonHeir(ReasonCore):
 
     def _get_base_fact(self, factheirs: dict[RoadUnit, FactHeir]) -> FactHeir:
         base_fact = None
-        factheirs = get_empty_dict_if_none(factheirs)
+        factheirs = get_empty_dict_if_None(factheirs)
         for y_factheir in factheirs.values():
             if self.base == y_factheir.base:
                 base_fact = y_factheir
@@ -626,12 +626,12 @@ def reasonheir_shop(
 ):
     return ReasonHeir(
         base=base,
-        premises=get_empty_dict_if_none(premises),
+        premises=get_empty_dict_if_None(premises),
         base_item_active_requisite=base_item_active_requisite,
         _status=_status,
         _task=_task,
         _base_item_active_value=_base_item_active_value,
-        wall=default_wall_if_none(wall),
+        wall=default_wall_if_None(wall),
     )
 
 

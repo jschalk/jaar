@@ -5,11 +5,11 @@ from src.f00_instrument.dict_toolbox import (
 )
 from src.f01_road.road import (
     AcctID,
-    default_wall_if_none,
+    default_wall_if_None,
     validate_ideaunit,
     is_ideaunit,
 )
-from src.f01_road.finance import default_respect_bit_if_none, RespectNum, allot_scale
+from src.f01_road.finance import default_respect_bit_if_None, RespectNum, allot_scale
 from src.f02_bud.group import (
     GroupID,
     MemberShip,
@@ -291,8 +291,8 @@ def acctunit_shop(
         _fund_agenda_take=0,
         _fund_agenda_ratio_give=0,
         _fund_agenda_ratio_take=0,
-        _wall=default_wall_if_none(_wall),
-        _respect_bit=default_respect_bit_if_none(_respect_bit),
+        _wall=default_wall_if_None(_wall),
+        _respect_bit=default_respect_bit_if_None(_respect_bit),
     )
     x_acctunit.set_acct_id(x_acct_id=acct_id)
     return x_acctunit

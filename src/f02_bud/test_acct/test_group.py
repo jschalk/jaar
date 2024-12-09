@@ -1,8 +1,8 @@
-from src.f01_road.finance import default_fund_coin_if_none
+from src.f01_road.finance import default_fund_coin_if_None
 from src.f01_road.road import (
     get_default_fiscal_id_ideaunit as root_label,
     create_road,
-    default_wall_if_none,
+    default_wall_if_None,
 )
 from src.f02_bud.group import membership_shop
 from src.f02_bud.group import groupunit_shop, GroupUnit
@@ -49,8 +49,8 @@ def test_groupunit_shop_ReturnsCorrectObj():
     assert swim_groupunit._fund_agenda_take == 0
     assert swim_groupunit._credor_pool == 0
     assert swim_groupunit._debtor_pool == 0
-    assert swim_groupunit._wall == default_wall_if_none()
-    assert swim_groupunit._fund_coin == default_fund_coin_if_none()
+    assert swim_groupunit._wall == default_wall_if_None()
+    assert swim_groupunit._fund_coin == default_fund_coin_if_None()
 
 
 def test_groupunit_shop_ReturnsCorrectObj_wall():

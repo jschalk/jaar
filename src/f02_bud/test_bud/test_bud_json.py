@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import x_is_json, get_dict_from_json
-from src.f01_road.road import default_wall_if_none
+from src.f01_road.road import default_wall_if_None
 from src.f02_bud.group import awardlink_shop
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.reason_team import teamunit_shop
@@ -442,14 +442,14 @@ def test_budunit_get_from_json_ReturnsCorrectObj_wall_Example():
     # ESTABLISH
     slash_wall = "/"
     before_bob_bud = budunit_shop("Bob", _wall=slash_wall)
-    assert before_bob_bud._wall != default_wall_if_none()
+    assert before_bob_bud._wall != default_wall_if_None()
 
     # WHEN
     bob_json = before_bob_bud.get_json()
     after_bob_bud = budunit_get_from_json(bob_json)
 
     # THEN
-    assert after_bob_bud._wall != default_wall_if_none()
+    assert after_bob_bud._wall != default_wall_if_None()
     assert after_bob_bud._wall == slash_wall
     assert after_bob_bud._wall == before_bob_bud._wall
 

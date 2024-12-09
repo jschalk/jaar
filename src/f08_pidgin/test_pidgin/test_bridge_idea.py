@@ -1,5 +1,5 @@
-from src.f01_road.jaar_config import default_unknown_word_if_none
-from src.f01_road.road import default_wall_if_none
+from src.f01_road.jaar_config import default_unknown_word_if_None
+from src.f01_road.road import default_wall_if_None
 from src.f08_pidgin.bridge import (
     IdeaBridge,
     ideabridge_shop,
@@ -30,9 +30,9 @@ def test_ideabridge_shop_ReturnsObj_scenario0_WithoutParameters():
     assert not x_ideabridge.face_id
     assert x_ideabridge.event_id == 0
     assert x_ideabridge.otx2inx == {}
-    assert x_ideabridge.unknown_word == default_unknown_word_if_none()
-    assert x_ideabridge.otx_wall == default_wall_if_none()
-    assert x_ideabridge.inx_wall == default_wall_if_none()
+    assert x_ideabridge.unknown_word == default_unknown_word_if_None()
+    assert x_ideabridge.otx_wall == default_wall_if_None()
+    assert x_ideabridge.inx_wall == default_wall_if_None()
 
 
 def test_ideabridge_shop_ReturnsObj_scenario1_WithParameters():
@@ -88,9 +88,9 @@ def test_ideabridge_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_
     assert x_ideabridge.face_id == bob_str
     assert x_ideabridge.event_id == event7
     assert x_ideabridge.otx2inx == otx2inx
-    assert x_ideabridge.unknown_word == default_unknown_word_if_none()
-    assert x_ideabridge.otx_wall == default_wall_if_none()
-    assert x_ideabridge.inx_wall == default_wall_if_none()
+    assert x_ideabridge.unknown_word == default_unknown_word_if_None()
+    assert x_ideabridge.otx_wall == default_wall_if_None()
+    assert x_ideabridge.inx_wall == default_wall_if_None()
 
 
 def test_IdeaBridge_set_all_otx2inx_SetsAttr():

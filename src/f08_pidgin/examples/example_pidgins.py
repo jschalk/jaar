@@ -1,5 +1,5 @@
-from src.f01_road.jaar_config import default_unknown_word_if_none
-from src.f01_road.road import default_wall_if_none, create_road
+from src.f01_road.jaar_config import default_unknown_word_if_None
+from src.f01_road.road import default_wall_if_None, create_road
 from src.f04_gift.atom_config import acct_id_str, base_str, type_RoadUnit_str
 from src.f08_pidgin.bridge import (
     groupbridge_shop,
@@ -31,7 +31,7 @@ def get_clean_roadbridge() -> RoadBridge:
     inx_music87_str = "music87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    wall = default_wall_if_none()
+    wall = default_wall_if_None()
     clean_otx_road = f"{otx_music45_str}{wall}{clean_otx_str}"
     road_bridgeunit = roadbridge_shop(x_face_id="Sue")
     road_bridgeunit.set_idea(clean_otx_str, clean_inx_str)
@@ -41,7 +41,7 @@ def get_clean_roadbridge() -> RoadBridge:
 
 
 def get_swim_groupbridge() -> GroupBridge:
-    wall = default_wall_if_none()
+    wall = default_wall_if_None()
     swim_otx = f"swim{wall}"
     swim_inx = f"nage{wall}"
     climb_otx = f"climb{wall}"
@@ -67,7 +67,7 @@ def get_suita_acctbridge() -> AcctBridge:
 
 
 # def get_invalid_acctid_bridgeunit() -> BridgeUnit:
-#     sue_otx = f"Xio{default_wall_if_none()}"
+#     sue_otx = f"Xio{default_wall_if_None()}"
 #     sue_inx = "Sue"
 #     zia_otx = "Zia"
 #     zia_inx = "Zia"
@@ -78,10 +78,10 @@ def get_suita_acctbridge() -> AcctBridge:
 
 
 # def get_invalid_groupid_bridgeunit() -> BridgeUnit:
-#     sue_otx = f"Xio{default_wall_if_none()}"
-#     sue_inx = f"Sue{default_wall_if_none()}"
+#     sue_otx = f"Xio{default_wall_if_None()}"
+#     sue_inx = f"Sue{default_wall_if_None()}"
 #     zia_otx = "Zia"
-#     zia_inx = f"Zia{default_wall_if_none()}"
+#     zia_inx = f"Zia{default_wall_if_None()}"
 #     x_groupbridge = bridgeunit_shop(type_GroupID_str(), x_face_id="Sue")
 #     x_groupbridge.set_otx2inx(sue_otx, sue_inx)
 #     x_groupbridge.set_otx2inx(zia_otx, zia_inx)
@@ -91,7 +91,7 @@ def get_suita_acctbridge() -> AcctBridge:
 # def get_invalid_road_bridgeunit() -> BridgeUnit:
 #     clean_str = "clean"
 #     clean_inx = "propre"
-#     casa_otx = f"casa{default_wall_if_none()}"
+#     casa_otx = f"casa{default_wall_if_None()}"
 #     casa_inx = "casa"
 #     ideabridge = bridgeunit_shop(type_IdeaUnit_str(), x_face_id="Sue")
 #     ideabridge.set_otx2inx(clean_str, clean_inx)
@@ -283,9 +283,9 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
     casa_otx_road = create_road(otx_music45_str, "casa")
     clean_otx_road = create_road(casa_otx_road, "clean")
     sweep_otx_road = create_road(clean_otx_road, "sweep")
-    x_rd = default_wall_if_none()
+    x_rd = default_wall_if_None()
     e7 = 7
-    uw = default_unknown_word_if_none()
+    uw = default_unknown_word_if_None()
 
     inx_dt = DataFrame(
         columns=[
@@ -314,8 +314,8 @@ def get_casa_maison_idea_dt() -> DataFrame:
     casa_otx_str = "casa"
     clean_otx_str = "clean"
     sweep_otx_str = "sweep"
-    x_rd = default_wall_if_none()
-    uw = default_unknown_word_if_none()
+    x_rd = default_wall_if_None()
+    uw = default_unknown_word_if_None()
     e7 = 7
 
     inx_dt = DataFrame(
@@ -336,7 +336,7 @@ def get_casa_maison_idea_dt() -> DataFrame:
 
 
 def get_invalid_acctbridge() -> AcctBridge:
-    sue_otx = f"Xio{default_wall_if_none()}"
+    sue_otx = f"Xio{default_wall_if_None()}"
     sue_inx = "Sue"
     zia_otx = "Zia"
     zia_inx = "Zia"
@@ -347,10 +347,10 @@ def get_invalid_acctbridge() -> AcctBridge:
 
 
 def get_invalid_groupbridge() -> GroupBridge:
-    sue_otx = f"Xio{default_wall_if_none()}"
-    sue_inx = f"Sue{default_wall_if_none()}"
+    sue_otx = f"Xio{default_wall_if_None()}"
+    sue_inx = f"Sue{default_wall_if_None()}"
     zia_otx = "Zia"
-    zia_inx = f"Zia{default_wall_if_none()}"
+    zia_inx = f"Zia{default_wall_if_None()}"
     x_groupbridge = groupbridge_shop(x_face_id="Sue")
     x_groupbridge.set_otx2inx(sue_otx, sue_inx)
     x_groupbridge.set_otx2inx(zia_otx, zia_inx)
@@ -360,7 +360,7 @@ def get_invalid_groupbridge() -> GroupBridge:
 def get_invalid_ideabridge() -> RoadBridge:
     clean_str = "clean"
     clean_inx = "propre"
-    casa_otx = f"casa{default_wall_if_none()}"
+    casa_otx = f"casa{default_wall_if_None()}"
     casa_inx = "casa"
     roadbridge = roadbridge_shop(x_face_id="Sue")
     roadbridge.set_otx2inx(clean_str, clean_inx)

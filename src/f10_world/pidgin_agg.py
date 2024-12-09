@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_toolbox import get_empty_set_if_none
+from src.f00_instrument.dict_toolbox import get_empty_set_if_None
 from src.f09_brick.pandas_tool import if_nan_return_None
 from dataclasses import dataclass
 
@@ -81,9 +81,9 @@ def pidginheartunit_shop(
     return PidginHeartUnit(
         face_id,
         event_id,
-        get_empty_set_if_none(otx_walls),
-        get_empty_set_if_none(inx_walls),
-        get_empty_set_if_none(unknown_words),
+        get_empty_set_if_None(otx_walls),
+        get_empty_set_if_None(inx_walls),
+        get_empty_set_if_None(unknown_words),
     )
 
 
@@ -195,7 +195,7 @@ def pidginbodyunit_shop(
     otx_str: str,
     inx_strs: set[str] = None,
 ) -> PidginBodyUnit:
-    return PidginBodyUnit(face_id, event_id, otx_str, get_empty_set_if_none(inx_strs))
+    return PidginBodyUnit(face_id, event_id, otx_str, get_empty_set_if_None(inx_strs))
 
 
 def create_pidginbodyunit(
