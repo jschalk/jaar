@@ -100,6 +100,10 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
+def zoo_staging_str():
+    return "zoo_staging"
+
+
 def get_zoo_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, group_by_list: list
 ) -> DataFrame:

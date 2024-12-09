@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
-from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet
+from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, zoo_staging_str
 from src.f10_world.transformers import etl_jungle_to_zoo_staging
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -11,7 +11,6 @@ from os.path import exists as os_path_exists
 
 def test_etl_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    fizz_str = "fizz"
     sue_str = "Sue"
     event_1 = 1
     event_2 = 2
@@ -23,7 +22,6 @@ def test_etl_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     jungle_dir = create_path(get_test_worlds_dir(), "jungle")
     zoo_dir = create_path(get_test_worlds_dir(), "zoo")
     jungle_file_path = create_path(jungle_dir, ex_file_name)
-    zoo_file_path = create_path(zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -53,6 +51,7 @@ def test_etl_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     upsert_sheet(jungle_file_path, br00003_ex1_str, df1)
     upsert_sheet(jungle_file_path, br00003_ex2_str, df2)
     upsert_sheet(jungle_file_path, br00003_ex3_str, df3)
+    zoo_file_path = create_path(zoo_dir, "br00003.xlsx")
     assert os_path_exists(zoo_file_path) is False
 
     # WHEN
@@ -61,7 +60,7 @@ def test_etl_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     # THEN
     print(f"{zoo_file_path=}")
     assert os_path_exists(zoo_file_path)
-    x_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_staging")
+    x_df = pandas_read_excel(zoo_file_path, sheet_name=zoo_staging_str())
     assert set(brick_columns).issubset(set(x_df.columns))
     file_dir_str = "file_dir"
     file_name_str = "file_name"
@@ -70,4 +69,4 @@ def test_etl_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     assert file_name_str in set(x_df.columns)
     assert sheet_name_str in set(x_df.columns)
     assert len(x_df) == 5
-    assert get_sheet_names(zoo_file_path) == ["zoo_staging"]
+    assert get_sheet_names(zoo_file_path) == [zoo_staging_str()]

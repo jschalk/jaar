@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
-from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet
+from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, zoo_staging_str
 from src.f10_world.world import worldunit_shop
 from src.f10_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -60,7 +60,7 @@ def test_WorldUnit_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     # THEN
     print(f"{zoo_file_path=}")
     assert os_path_exists(zoo_file_path)
-    x_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_staging")
+    x_df = pandas_read_excel(zoo_file_path, sheet_name=zoo_staging_str())
     assert set(brick_columns).issubset(set(x_df.columns))
     file_dir_str = "file_dir"
     file_name_str = "file_name"
@@ -69,4 +69,4 @@ def test_WorldUnit_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     assert file_name_str in set(x_df.columns)
     assert sheet_name_str in set(x_df.columns)
     assert len(x_df) == 5
-    assert get_sheet_names(zoo_file_path) == ["zoo_staging"]
+    assert get_sheet_names(zoo_file_path) == [zoo_staging_str()]
