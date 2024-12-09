@@ -1,3 +1,4 @@
+from src.f01_road.jaar_config import default_unknown_word_if_none
 from src.f01_road.road import default_wall_if_none
 from src.f04_gift.atom_config import face_id_str
 from src.f08_pidgin.pidgin_config import (
@@ -8,7 +9,6 @@ from src.f08_pidgin.pidgin_config import (
 )
 from src.f08_pidgin.pidgin import (
     pidginunit_shop,
-    default_unknown_word,
     get_pidginunit_from_dict,
     get_pidginunit_from_json,
 )
@@ -38,7 +38,7 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     assert sue_dict.get(event_id_str()) == sue_pidginunit.event_id
     assert sue_dict.get(otx_wall_str()) == default_wall_if_none()
     assert sue_dict.get(inx_wall_str()) == default_wall_if_none()
-    assert sue_dict.get(unknown_word_str()) == default_unknown_word()
+    assert sue_dict.get(unknown_word_str()) == default_unknown_word_if_none()
     assert sue_dict.get("acctbridge") == sue_pidginunit.acctbridge.get_dict()
     assert sue_dict.get("groupbridge") == sue_pidginunit.groupbridge.get_dict()
     assert sue_dict.get("ideabridge") == sue_pidginunit.ideabridge.get_dict()

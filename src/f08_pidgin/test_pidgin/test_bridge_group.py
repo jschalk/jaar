@@ -1,4 +1,4 @@
-from src.f01_road.jaar_config import default_unknown_word
+from src.f01_road.jaar_config import default_unknown_word_if_none
 from src.f01_road.road import default_wall_if_none
 from src.f08_pidgin.bridge import (
     GroupBridge,
@@ -30,7 +30,7 @@ def test_groupbridge_shop_ReturnsObj_scenario0_NoParameters():
     assert not x_groupbridge.face_id
     assert x_groupbridge.event_id == 0
     assert x_groupbridge.otx2inx == {}
-    assert x_groupbridge.unknown_word == default_unknown_word()
+    assert x_groupbridge.unknown_word == default_unknown_word_if_none()
     assert x_groupbridge.otx_wall == default_wall_if_none()
     assert x_groupbridge.inx_wall == default_wall_if_none()
 
@@ -88,7 +88,7 @@ def test_groupbridge_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven
     assert x_groupbridge.face_id == bob_str
     assert x_groupbridge.event_id == event7
     assert x_groupbridge.otx2inx == otx2inx
-    assert x_groupbridge.unknown_word == default_unknown_word()
+    assert x_groupbridge.unknown_word == default_unknown_word_if_none()
     assert x_groupbridge.otx_wall == default_wall_if_none()
     assert x_groupbridge.inx_wall == default_wall_if_none()
 

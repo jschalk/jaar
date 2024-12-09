@@ -1,4 +1,4 @@
-from src.f01_road.jaar_config import default_unknown_word
+from src.f01_road.jaar_config import default_unknown_word_if_none
 from src.f00_instrument.dict_toolbox import (
     get_empty_dict_if_none,
     str_in_dict,
@@ -120,19 +120,9 @@ def acctbridge_shop(
     x_face_id: FaceID = None,
     x_event_id: TimeLinePoint = None,
 ) -> AcctBridge:
-    if x_unknown_word is None:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall is None:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall is None:
-        x_inx_wall = default_wall_if_none()
-    # handle float nan issue
-    if x_unknown_word != x_unknown_word:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall != x_otx_wall:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall != x_inx_wall:
-        x_inx_wall = default_wall_if_none()
+    x_unknown_word = default_unknown_word_if_none(x_unknown_word)
+    x_otx_wall = default_wall_if_none(x_otx_wall)
+    x_inx_wall = default_wall_if_none(x_inx_wall)
 
     return AcctBridge(
         face_id=x_face_id,
@@ -208,19 +198,9 @@ def groupbridge_shop(
     x_face_id: FaceID = None,
     x_event_id: TimeLinePoint = None,
 ) -> GroupBridge:
-    if x_unknown_word is None:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall is None:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall is None:
-        x_inx_wall = default_wall_if_none()
-    # handle float nan issue
-    if x_unknown_word != x_unknown_word:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall != x_otx_wall:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall != x_inx_wall:
-        x_inx_wall = default_wall_if_none()
+    x_unknown_word = default_unknown_word_if_none(x_unknown_word)
+    x_otx_wall = default_wall_if_none(x_otx_wall)
+    x_inx_wall = default_wall_if_none(x_inx_wall)
 
     return GroupBridge(
         face_id=x_face_id,
@@ -296,19 +276,9 @@ def ideabridge_shop(
     x_face_id: FaceID = None,
     x_event_id: TimeLinePoint = None,
 ) -> IdeaBridge:
-    if x_unknown_word is None:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall is None:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall is None:
-        x_inx_wall = default_wall_if_none()
-    # handle float nan issue
-    if x_unknown_word != x_unknown_word:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall != x_otx_wall:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall != x_inx_wall:
-        x_inx_wall = default_wall_if_none()
+    x_unknown_word = default_unknown_word_if_none(x_unknown_word)
+    x_otx_wall = default_wall_if_none(x_otx_wall)
+    x_inx_wall = default_wall_if_none(x_inx_wall)
 
     return IdeaBridge(
         face_id=x_face_id,
@@ -463,19 +433,10 @@ def roadbridge_shop(
     x_face_id: FaceID = None,
     x_event_id: TimeLinePoint = None,
 ) -> RoadBridge:
-    if x_unknown_word is None:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall is None:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall is None:
-        x_inx_wall = default_wall_if_none()
-    # # handle float nan issue
-    if x_unknown_word != x_unknown_word:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall != x_otx_wall:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall != x_inx_wall:
-        x_inx_wall = default_wall_if_none()
+    x_unknown_word = default_unknown_word_if_none(x_unknown_word)
+    x_otx_wall = default_wall_if_none(x_otx_wall)
+    x_inx_wall = default_wall_if_none(x_inx_wall)
+
     if x_ideabridge is None:
         x_ideabridge = ideabridge_shop(
             x_otx_wall=x_otx_wall,

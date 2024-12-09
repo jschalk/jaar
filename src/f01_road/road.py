@@ -82,7 +82,9 @@ def get_default_face_id() -> FaceID:
     return FaceID("Face1234")
 
 
-def default_wall_if_none(wall: str = None) -> str:
+def default_wall_if_none(wall: any = None) -> str:
+    if wall != wall:  # float("nan")
+        wall = None
     return wall if wall is not None else ";"
 
 

@@ -1,3 +1,4 @@
+from src.f01_road.jaar_config import default_unknown_word_if_none
 from src.f01_road.road import default_wall_if_none, create_road
 from src.f04_gift.atom_config import acct_id_str, base_str, type_RoadUnit_str
 from src.f08_pidgin.bridge import (
@@ -10,11 +11,7 @@ from src.f08_pidgin.bridge import (
     IdeaBridge,
     RoadBridge,
 )
-from src.f08_pidgin.pidgin import (
-    PidginUnit,
-    pidginunit_shop,
-    default_unknown_word,
-)
+from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
 from pandas import DataFrame
 
 
@@ -288,7 +285,7 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
     sweep_otx_road = create_road(clean_otx_road, "sweep")
     x_rd = default_wall_if_none()
     e7 = 7
-    uw = default_unknown_word()
+    uw = default_unknown_word_if_none()
 
     inx_dt = DataFrame(
         columns=[
@@ -318,7 +315,7 @@ def get_casa_maison_idea_dt() -> DataFrame:
     clean_otx_str = "clean"
     sweep_otx_str = "sweep"
     x_rd = default_wall_if_none()
-    uw = default_unknown_word()
+    uw = default_unknown_word_if_none()
     e7 = 7
 
     inx_dt = DataFrame(

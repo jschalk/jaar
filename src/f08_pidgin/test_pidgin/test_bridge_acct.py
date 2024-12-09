@@ -1,4 +1,4 @@
-from src.f01_road.jaar_config import default_unknown_word
+from src.f01_road.jaar_config import default_unknown_word_if_none
 from src.f01_road.road import default_wall_if_none
 from src.f08_pidgin.bridge import (
     AcctBridge,
@@ -31,7 +31,7 @@ def test_acctbridge_shop_ReturnsObj_scenario0():
     assert not x_acctbridge.face_id
     assert x_acctbridge.event_id == 0
     assert x_acctbridge.otx2inx == {}
-    assert x_acctbridge.unknown_word == default_unknown_word()
+    assert x_acctbridge.unknown_word == default_unknown_word_if_none()
     assert x_acctbridge.otx_wall == default_wall_if_none()
     assert x_acctbridge.inx_wall == default_wall_if_none()
 
@@ -91,7 +91,7 @@ def test_acctbridge_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_
     assert str(type(x_acctbridge.event_id)) != "<class 'numpy.int64'>"
     assert str(type(x_acctbridge.event_id)) == "<class 'int'>"
     assert x_acctbridge.otx2inx == otx2inx
-    assert x_acctbridge.unknown_word == default_unknown_word()
+    assert x_acctbridge.unknown_word == default_unknown_word_if_none()
     assert x_acctbridge.otx_wall == default_wall_if_none()
     assert x_acctbridge.inx_wall == default_wall_if_none()
 

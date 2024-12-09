@@ -91,6 +91,23 @@ def test_IdeaUnit_exists():
     assert inspect_getdoc(x_road) == doc_str
 
 
+def test_default_wall_if_none_ReturnsObj():
+    # ESTABLISH
+    semicolon_str = ";"
+    slash_str = "/"
+    colon_str = ":"
+    buzz_str = "buzz"
+
+    # WHEN / THEN
+    assert default_wall_if_none() == semicolon_str
+    assert default_wall_if_none(None) == semicolon_str
+    x_nan = float("nan")
+    assert default_wall_if_none(x_nan) == semicolon_str
+    assert default_wall_if_none(slash_str) == slash_str
+    assert default_wall_if_none(colon_str) == colon_str
+    assert default_wall_if_none(buzz_str) == buzz_str
+
+
 def test_IdeaUnit_is_idea_ReturnsObj_Scenario0():
     # WHEN / THEN
     assert IdeaUnit("").is_idea() is False
