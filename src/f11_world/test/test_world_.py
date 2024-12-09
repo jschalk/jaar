@@ -36,7 +36,7 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     fizz_str = "fizz"
     fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=get_test_worlds_dir())
     x_world_dir = create_path(get_test_worlds_dir(), fizz_str)
-    x_faces_dir = create_path(x_world_dir, "pidgins")
+    x_faces_dir = create_path(x_world_dir, "faces")
     x_jungle_dir = create_path(x_world_dir, "jungle")
     x_zoo_dir = create_path(x_world_dir, "zoo")
 
@@ -96,7 +96,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.timeconversions == world2timeconversions
     assert x_world.events == {}
     assert x_world.pidgins == world2_pidgins
-    assert x_world._faces_dir == create_path(world_dir, "pidgins")
+    assert x_world._faces_dir == create_path(world_dir, "faces")
     assert x_world._fiscalunits == world2_fiscalunits
 
 
@@ -112,7 +112,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world.timeconversions == {}
     assert x_world.pidgins == {}
     assert x_world.events == {}
-    assert x_world._faces_dir == create_path(world_dir, "pidgins")
+    assert x_world._faces_dir == create_path(world_dir, "faces")
     assert x_world._fiscalunits == set()
 
 

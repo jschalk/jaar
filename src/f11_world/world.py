@@ -108,7 +108,7 @@ class WorldUnit:
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
-        self._faces_dir = create_path(self._world_dir, "pidgins")
+        self._faces_dir = create_path(self._world_dir, "faces")
         self._jungle_dir = create_path(self._world_dir, "jungle")
         self._zoo_dir = create_path(self._world_dir, "zoo")
         set_dir(self._world_dir)
