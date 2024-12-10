@@ -4,7 +4,7 @@ from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import upsert_sheet, zoo_agg_str, sheet_exists
 from src.f11_world.world import worldunit_shop
-from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
+from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
