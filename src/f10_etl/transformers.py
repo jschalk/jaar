@@ -530,7 +530,7 @@ def etl_event_pidgins_csvs_to_pidgin_jsons(faces_dir: str):
         etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
 
 
-def etl_zoo_agg_to_face_bricks_staging(zoo_dir: str, faces_dir: str):
+def etl_zoo_bricks_to_face_bricks(zoo_dir: str, faces_dir: str):
     for zoo_br_ref in get_existing_excel_brick_file_refs(zoo_dir):
         zoo_brick_path = create_path(zoo_dir, zoo_br_ref.file_name)
         split_excel_into_dirs(
@@ -540,4 +540,17 @@ def etl_zoo_agg_to_face_bricks_staging(zoo_dir: str, faces_dir: str):
             file_name=zoo_br_ref.brick_number,
             sheet_name="zoo_agg",
         )
-        print(f"{zoo_br_ref=}")
+
+
+def etl_face_bricks_to_events_bricks(faces_dir: str):
+    for face_id_dir in get_face_dirs(faces_dir):
+        face_dir = create_path(faces_dir, face_id_dir)
+        for zoo_br_ref in get_existing_excel_brick_file_refs(face_dir):
+            zoo_brick_path = create_path(face_dir, zoo_br_ref.file_name)
+            split_excel_into_dirs(
+                input_file=zoo_brick_path,
+                output_dir=face_dir,
+                column_name="event_id",
+                file_name=zoo_br_ref.brick_number,
+                sheet_name="zoo_agg",
+            )

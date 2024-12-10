@@ -5,7 +5,6 @@ from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import (
     get_sheet_names,
     upsert_sheet,
-    zoo_staging_str,
     zoo_agg_str,
     sheet_exists,
 )
@@ -14,7 +13,7 @@ from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_zoo_agg_to_face_bricks_staging_CreatesOtxSheets_Scenario0_GroupByWorks(
+def test_WorldUnit_zoo_bricks_to_face_bricks_CreatesOtxSheets_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -45,7 +44,7 @@ def test_WorldUnit_zoo_agg_to_face_bricks_staging_CreatesOtxSheets_Scenario0_Gro
     assert sheet_exists(sue_br00003_filepath, zoo_agg_str()) is False
 
     # WHEN
-    fizz_world.zoo_agg_to_face_bricks_staging()
+    fizz_world.zoo_bricks_to_face_bricks()
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, zoo_agg_str())
