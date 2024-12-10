@@ -9,6 +9,7 @@ from src.f09_brick.brick_config import (
 from src.f09_brick.brick import get_brickref_obj
 from src.f09_brick.pandas_tool import (
     get_zoo_staging_grouping_with_all_values_equal_df,
+    _get_pidgen_brick_format_filenames,
     get_new_sorting_columns,
     upsert_sheet,
     split_excel_into_dirs,
@@ -533,13 +534,14 @@ def etl_event_pidgins_csvs_to_pidgin_jsons(faces_dir: str):
 def etl_zoo_bricks_to_face_bricks(zoo_dir: str, faces_dir: str):
     for zoo_br_ref in get_existing_excel_brick_file_refs(zoo_dir):
         zoo_brick_path = create_path(zoo_dir, zoo_br_ref.file_name)
-        split_excel_into_dirs(
-            input_file=zoo_brick_path,
-            output_dir=faces_dir,
-            column_name="face_id",
-            file_name=zoo_br_ref.brick_number,
-            sheet_name="zoo_agg",
-        )
+        if zoo_br_ref.file_name not in _get_pidgen_brick_format_filenames():
+            split_excel_into_dirs(
+                input_file=zoo_brick_path,
+                output_dir=faces_dir,
+                column_name="face_id",
+                file_name=zoo_br_ref.brick_number,
+                sheet_name="zoo_agg",
+            )
 
 
 def etl_face_bricks_to_events_bricks(faces_dir: str):
