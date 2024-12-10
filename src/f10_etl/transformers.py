@@ -15,7 +15,7 @@ from src.f09_brick.pandas_tool import (
     sheet_exists,
 )
 from src.f09_brick.pidgin_toolbox import init_pidginunit_from_dir
-from src.f10_etl.brick_collector import get_all_brick_dataframes
+from src.f10_etl.brick_collector import get_all_brick_dataframes, BrickFileRef
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
@@ -129,6 +129,19 @@ class JungleToZooTransformer:
         upsert_sheet(zoo_path, "zoo_staging", final_df)
 
 
+def get_existing_excel_brick_file_refs(x_dir: str) -> list[BrickFileRef]:
+    existing_excel_brick_filepaths = []
+    for brick_number in sorted(get_brick_numbers()):
+        brick_filename = f"{brick_number}.xlsx"
+        x_brick_path = create_path(x_dir, brick_filename)
+        if os_path_exists(x_brick_path):
+            x_fileref = BrickFileRef(
+                file_dir=x_dir, file_name=brick_filename, brick_number=brick_number
+            )
+            existing_excel_brick_filepaths.append(x_fileref)
+    return existing_excel_brick_filepaths
+
+
 def etl_zoo_staging_to_zoo_agg(zoo_dir):
     transformer = ZooStagingToZooAggTransformer(zoo_dir)
     transformer.transform()
@@ -139,12 +152,11 @@ class ZooStagingToZooAggTransformer:
         self.zoo_dir = zoo_dir
 
     def transform(self):
-        for brick_number in get_brick_numbers():
-            zoo_brick_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
-            if os_path_exists(zoo_brick_path):
-                zoo_staging_df = pandas_read_excel(zoo_brick_path, "zoo_staging")
-                otx_df = self._group_by_brick_columns(zoo_staging_df, brick_number)
-                upsert_sheet(zoo_brick_path, "zoo_agg", otx_df)
+        for br_ref in get_existing_excel_brick_file_refs(self.zoo_dir):
+            zoo_brick_path = create_path(br_ref.file_dir, br_ref.file_name)
+            zoo_staging_df = pandas_read_excel(zoo_brick_path, "zoo_staging")
+            otx_df = self._group_by_brick_columns(zoo_staging_df, br_ref.brick_number)
+            upsert_sheet(zoo_brick_path, "zoo_agg", otx_df)
 
     def _group_by_brick_columns(
         self, zoo_staging_df: DataFrame, brick_number: str
@@ -170,13 +182,11 @@ class ZooAggToZooEventsTransformer:
         self.zoo_dir = zoo_dir
 
     def transform(self):
-        for brick_number in get_brick_numbers():
-            zoo_brick_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
-            if os_path_exists(zoo_brick_path):
-                zoo_agg_df = pandas_read_excel(zoo_brick_path, "zoo_agg")
-                events_df = self.get_unique_events(zoo_agg_df)
-                upsert_sheet(zoo_brick_path, "zoo_events", events_df)
-                # self._save_zoo_events(zoo_brick_path, events_df)
+        for file_ref in get_existing_excel_brick_file_refs(self.zoo_dir):
+            zoo_brick_path = create_path(self.zoo_dir, file_ref.file_name)
+            zoo_agg_df = pandas_read_excel(zoo_brick_path, "zoo_agg")
+            events_df = self.get_unique_events(zoo_agg_df)
+            upsert_sheet(zoo_brick_path, "zoo_events", events_df)
 
     def get_unique_events(self, zoo_agg_df: DataFrame) -> DataFrame:
         events_df = zoo_agg_df[["face_id", "event_id"]].drop_duplicates()
@@ -198,16 +208,14 @@ class ZooEventsToEventsLogTransformer:
         self.zoo_dir = zoo_dir
 
     def transform(self):
-        for brick_number in sorted(get_brick_numbers()):
-            brick_file_name = f"{brick_number}.xlsx"
-            zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
-            if os_path_exists(zoo_brick_path):
-                sheet_name = "zoo_events"
-                otx_events_df = pandas_read_excel(zoo_brick_path, sheet_name)
-                events_log_df = self.get_event_log_df(
-                    otx_events_df, self.zoo_dir, brick_file_name
-                )
-                self._save_events_log_file(events_log_df)
+        sheet_name = "zoo_events"
+        for br_ref in get_existing_excel_brick_file_refs(self.zoo_dir):
+            zoo_brick_path = create_path(self.zoo_dir, br_ref.file_name)
+            otx_events_df = pandas_read_excel(zoo_brick_path, sheet_name)
+            events_log_df = self.get_event_log_df(
+                otx_events_df, self.zoo_dir, br_ref.file_name
+            )
+            self._save_events_log_file(events_log_df)
 
     def get_event_log_df(
         self, otx_events_df: DataFrame, x_dir: str, x_file_name: str
@@ -470,9 +478,13 @@ def etl_face_pidgin_to_event_pidgins(face_dir: str):
             split_excel_into_events_dirs(face_pidgin_path, face_dir, agg_sheet_name)
 
 
-def etl_face_pidgins_to_event_pidgins(faces_dir: str):
+def get_face_dirs(faces_dir: str) -> list[str]:
     face_dirs = get_dir_file_strs(faces_dir, include_dirs=True, include_files=False)
-    for face_id_dir in face_dirs.keys():
+    return list(face_dirs.keys())
+
+
+def etl_face_pidgins_to_event_pidgins(faces_dir: str):
+    for face_id_dir in get_face_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id_dir)
         etl_face_pidgin_to_event_pidgins(face_dir)
 
@@ -494,8 +506,7 @@ def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
 
 def _get_all_faces_dir_event_dirs(faces_dir) -> list[str]:
     full_event_dirs = []
-    face_dirs = get_dir_file_strs(faces_dir, include_dirs=True, include_files=False)
-    for face_id_dir in face_dirs.keys():
+    for face_id_dir in get_face_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id_dir)
         event_dirs = get_dir_file_strs(face_dir, include_dirs=True, include_files=False)
         full_event_dirs.extend(
@@ -517,3 +528,16 @@ def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
 def etl_event_pidgins_csvs_to_pidgin_jsons(faces_dir: str):
     for event_pidgin_dir in _get_all_faces_dir_event_dirs(faces_dir):
         etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
+
+
+def etl_zoo_agg_to_face_bricks_staging(zoo_dir: str, faces_dir: str):
+    for zoo_br_ref in get_existing_excel_brick_file_refs(zoo_dir):
+        zoo_brick_path = create_path(zoo_dir, zoo_br_ref.file_name)
+        split_excel_into_dirs(
+            input_file=zoo_brick_path,
+            output_dir=faces_dir,
+            column_name="face_id",
+            file_name=zoo_br_ref.brick_number,
+            sheet_name="zoo_agg",
+        )
+        print(f"{zoo_br_ref=}")

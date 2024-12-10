@@ -26,6 +26,7 @@ from src.f10_etl.transformers import (
     etl_face_pidgins_to_event_pidgins,
     etl_event_pidgins_to_pidgin_csv_files,
     etl_event_pidgins_csvs_to_pidgin_jsons,
+    etl_zoo_agg_to_face_bricks_staging,
 )
 from dataclasses import dataclass
 
@@ -112,6 +113,9 @@ class WorldUnit:
     def event_pidgins_csvs_to_pidgin_jsons(self):
         etl_event_pidgins_csvs_to_pidgin_jsons(self._faces_dir)
 
+    def zoo_agg_to_face_bricks_staging(self):
+        etl_zoo_agg_to_face_bricks_staging(self._zoo_dir, self._faces_dir)
+
     def get_dict(self) -> dict:
         return {
             "world_id": self.world_id,
@@ -143,7 +147,6 @@ def worldunit_shop(
         _jungle_dir=jungle_dir,
     )
     x_worldunit._set_world_dirs()
-    print(f"{x_worldunit._jungle_dir=}")
     if not x_worldunit._jungle_dir:
         x_worldunit.set_jungle_dir(create_path(x_worldunit._world_dir, "jungle"))
     return x_worldunit
