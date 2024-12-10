@@ -544,7 +544,7 @@ def etl_zoo_bricks_to_face_bricks(zoo_dir: str, faces_dir: str):
             )
 
 
-def etl_face_bricks_to_events_bricks(faces_dir: str):
+def etl_face_bricks_to_event_bricks(faces_dir: str):
     for face_id_dir in get_face_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id_dir)
         for zoo_br_ref in get_existing_excel_brick_file_refs(face_dir):
