@@ -59,7 +59,7 @@ def test_WorldUnit_face_bricks_to_event_bricks_CreatesFaceBrickSheets_Scenario0_
     assert sheet_exists(event9_br00003_filepath, zoo_agg_str()) is False
 
     # WHEN
-    fizz_world.face_bricks_to_events_bricks()
+    fizz_world.face_bricks_to_event_bricks()
 
     # THEN
     assert sheet_exists(event3_br00003_filepath, zoo_agg_str())

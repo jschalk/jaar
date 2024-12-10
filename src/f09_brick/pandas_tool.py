@@ -261,6 +261,7 @@ def split_excel_into_dirs(
             # Define the output file path
             output_file = create_path(subdirectory, f"{file_name}.xlsx")
             upsert_sheet(output_file, sheet_name, filtered_df)
+            print(f"{output_file=} {sheet_name=}")
             # filtered_df.to_excel(output_file, index=False)
 
 
