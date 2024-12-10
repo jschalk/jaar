@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import (
-    get_empty_dict_if_none,
+    get_empty_dict_if_None,
     get_0_if_None,
     get_json_from_dict,
 )
@@ -95,8 +95,8 @@ def rivercycle_shop(
     return RiverCycle(
         hubunit=hubunit,
         number=number,
-        keep_credorledgers=get_empty_dict_if_none(keep_credorledgers),
-        riverbooks=get_empty_dict_if_none(None),
+        keep_credorledgers=get_empty_dict_if_None(keep_credorledgers),
+        riverbooks=get_empty_dict_if_None(None),
     )
 
 

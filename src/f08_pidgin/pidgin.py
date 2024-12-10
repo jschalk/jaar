@@ -1,11 +1,11 @@
-from src.f01_road.jaar_config import default_unknown_word
+from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
     get_json_from_dict,
     get_dict_from_json,
 )
 from src.f01_road.finance import TimeLinePoint
-from src.f01_road.road import default_wall_if_none, OwnerID
+from src.f01_road.road import default_wall_if_None, OwnerID
 from src.f08_pidgin.bridge import (
     BridgeCore,
     GroupBridge,
@@ -249,19 +249,9 @@ def pidginunit_shop(
     x_inx_wall: str = None,
     x_unknown_word: str = None,
 ) -> PidginUnit:
-    if x_unknown_word is None:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall is None:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall is None:
-        x_inx_wall = default_wall_if_none()
-    # to handle float(nan)
-    if x_unknown_word != x_unknown_word:
-        x_unknown_word = default_unknown_word()
-    if x_otx_wall != x_otx_wall:
-        x_otx_wall = default_wall_if_none()
-    if x_inx_wall != x_inx_wall:
-        x_inx_wall = default_wall_if_none()
+    x_unknown_word = default_unknown_word_if_None(x_unknown_word)
+    x_otx_wall = default_wall_if_None(x_otx_wall)
+    x_inx_wall = default_wall_if_None(x_inx_wall)
 
     x_acctbridge = acctbridge_shop(
         x_face_id=x_face_id,

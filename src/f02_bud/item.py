@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import (
-    get_empty_dict_if_none,
+    get_empty_dict_if_None,
     get_0_if_None,
     get_1_if_None,
     get_False_if_None,
@@ -9,7 +9,7 @@ from src.f01_road.finance import (
     FundCoin,
     FundNum,
     allot_scale,
-    default_fund_coin_if_none,
+    default_fund_coin_if_None,
 )
 from src.f01_road.range_toolbox import get_morphed_rangeunit, RangeUnit
 from src.f01_road.road import (
@@ -19,7 +19,7 @@ from src.f01_road.road import (
     get_default_fiscal_id_ideaunit as root_label,
     all_roadunits_between,
     create_road as road_create_road,
-    default_wall_if_none,
+    default_wall_if_None,
     replace_wall,
     FiscalID,
     AcctID,
@@ -263,7 +263,7 @@ class ItemUnit:
             self._active_hx[tree_traverse_count] = now_active
 
     def set_factheirs(self, facts: dict[RoadUnit, FactCore]):
-        facts_dict = get_empty_dict_if_none(facts)
+        facts_dict = get_empty_dict_if_None(facts)
         self._factheirs = {}
         for x_factcore in facts_dict.values():
             self._set_factheir(x_factcore)
@@ -379,12 +379,12 @@ class ItemUnit:
     def clear_descendant_pledge_count(self):
         self._descendant_pledge_count = None
 
-    def set_descendant_pledge_count_zero_if_none(self):
+    def set_descendant_pledge_count_zero_if_None(self):
         if self._descendant_pledge_count is None:
             self._descendant_pledge_count = 0
 
     def add_to_descendant_pledge_count(self, x_int: int):
-        self.set_descendant_pledge_count_zero_if_none()
+        self.set_descendant_pledge_count_zero_if_None()
         self._descendant_pledge_count += x_int
 
     def get_descendant_roads_from_kids(self) -> dict[RoadUnit, int]:
@@ -496,8 +496,8 @@ class ItemUnit:
     def set_wall(self, new_wall: str):
         old_wall = deepcopy(self._wall)
         if old_wall is None:
-            old_wall = default_wall_if_none()
-        self._wall = default_wall_if_none(new_wall)
+            old_wall = default_wall_if_None()
+        self._wall = default_wall_if_None(new_wall)
         if old_wall != self._wall:
             self._find_replace_wall(old_wall)
 
@@ -532,7 +532,7 @@ class ItemUnit:
             new_factunits[new_base_road] = factunit_obj
         self.factunits = new_factunits
 
-    def set_originunit_empty_if_none(self):
+    def set_originunit_empty_if_None(self):
         if self._originunit is None:
             self._originunit = originunit_shop()
 
@@ -932,7 +932,7 @@ class ItemUnit:
             dict_x=self.factunits, old_road=old_road, new_road=new_road
         )
 
-    def set_teamunit_empty_if_none(self):
+    def set_teamunit_empty_if_None(self):
         if self.teamunit is None:
             self.teamunit = teamunit_shop()
 
@@ -1004,17 +1004,17 @@ def itemunit_shop(
         _label=None,
         _uid=_uid,
         _parent_road=_parent_road,
-        _kids=get_empty_dict_if_none(_kids),
+        _kids=get_empty_dict_if_None(_kids),
         mass=get_positive_int(mass),
-        awardlinks=get_empty_dict_if_none(awardlinks),
-        _awardheirs=get_empty_dict_if_none(_awardheirs),
-        _awardlines=get_empty_dict_if_none(_awardlines),
-        reasonunits=get_empty_dict_if_none(reasonunits),
-        _reasonheirs=get_empty_dict_if_none(_reasonheirs),
+        awardlinks=get_empty_dict_if_None(awardlinks),
+        _awardheirs=get_empty_dict_if_None(_awardheirs),
+        _awardlines=get_empty_dict_if_None(_awardlines),
+        reasonunits=get_empty_dict_if_None(reasonunits),
+        _reasonheirs=get_empty_dict_if_None(_reasonheirs),
         teamunit=teamunit,
         _teamheir=_teamheir,
-        factunits=get_empty_dict_if_none(factunits),
-        _factheirs=get_empty_dict_if_none(_factheirs),
+        factunits=get_empty_dict_if_None(factunits),
+        _factheirs=get_empty_dict_if_None(_factheirs),
         healerlink=x_healerlink,
         begin=begin,
         close=close,
@@ -1032,7 +1032,7 @@ def itemunit_shop(
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
-        _fund_coin=default_fund_coin_if_none(_fund_coin),
+        _fund_coin=default_fund_coin_if_None(_fund_coin),
         _fund_onset=_fund_onset,
         _fund_cease=_fund_cease,
         _task=_task,
@@ -1041,16 +1041,16 @@ def itemunit_shop(
         _all_acct_cred=_all_acct_cred,
         _all_acct_debt=_all_acct_debt,
         _is_expanded=_is_expanded,
-        _active_hx=get_empty_dict_if_none(_active_hx),
-        _wall=default_wall_if_none(_wall),
+        _active_hx=get_empty_dict_if_None(_active_hx),
+        _wall=default_wall_if_None(_wall),
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_itemkid._root:
         x_itemkid.set_label(_label=_bud_fiscal_id)
     else:
         x_itemkid.set_label(_label=_label)
-    x_itemkid.set_teamunit_empty_if_none()
-    x_itemkid.set_originunit_empty_if_none()
+    x_itemkid.set_teamunit_empty_if_None()
+    x_itemkid.set_originunit_empty_if_None()
     return x_itemkid
 
 

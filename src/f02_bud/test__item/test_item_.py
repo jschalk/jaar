@@ -1,8 +1,8 @@
-from src.f01_road.finance import default_fund_coin_if_none
+from src.f01_road.finance import default_fund_coin_if_None
 from src.f01_road.road import (
     get_default_fiscal_id_ideaunit as root_label,
     create_road,
-    default_wall_if_none,
+    default_wall_if_None,
 )
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.group import awardlink_shop
@@ -91,7 +91,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit._level is None
     assert x_itemunit._active_hx == {}
     assert x_itemunit._fund_ratio is None
-    assert x_itemunit._fund_coin == default_fund_coin_if_none()
+    assert x_itemunit._fund_coin == default_fund_coin_if_None()
     assert x_itemunit._fund_onset is None
     assert x_itemunit._fund_cease is None
     assert x_itemunit.reasonunits == {}
@@ -99,7 +99,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit.teamunit == teamunit_shop()
     assert x_itemunit._teamheir is None
     assert x_itemunit._originunit == originunit_shop()
-    assert x_itemunit._wall == default_wall_if_none()
+    assert x_itemunit._wall == default_wall_if_None()
     assert x_itemunit._root is False
     assert x_itemunit._all_acct_cred is None
     assert x_itemunit._all_acct_debt is None

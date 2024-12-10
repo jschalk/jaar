@@ -4,13 +4,13 @@ from src.f00_instrument.dict_toolbox import (
     get_1_if_None,
     get_0_if_None,
     get_False_if_None,
-    get_empty_dict_if_none,
+    get_empty_dict_if_None,
 )
 from src.f01_road.finance import (
     valid_finance_ratio,
-    default_respect_bit_if_none,
-    default_penny_if_none,
-    default_fund_coin_if_none,
+    default_respect_bit_if_None,
+    default_penny_if_None,
+    default_fund_coin_if_None,
     validate_fund_pool,
     BitNum,
     RespectNum,
@@ -35,7 +35,7 @@ from src.f01_road.road import (
     get_all_road_ideas,
     get_forefather_roads,
     create_road,
-    default_wall_if_none,
+    default_wall_if_None,
     IdeaUnit,
     RoadUnit,
     is_string_in_road,
@@ -209,7 +209,7 @@ class BudUnit:
                     raise NewWallException(exception_str)
 
             # modify all road attributes in itemunits
-            self._wall = default_wall_if_none(new_wall)
+            self._wall = default_wall_if_None(new_wall)
             for x_item in self._item_dict.values():
                 x_item.set_wall(self._wall)
 
@@ -1412,18 +1412,18 @@ def budunit_shop(
         _owner_id=_owner_id,
         tally=get_1_if_None(tally),
         _fiscal_id=_fiscal_id,
-        _accts=get_empty_dict_if_none(None),
+        _accts=get_empty_dict_if_None(None),
         _groupunits={},
-        _item_dict=get_empty_dict_if_none(None),
-        _keep_dict=get_empty_dict_if_none(None),
-        _healers_dict=get_empty_dict_if_none(None),
-        _wall=default_wall_if_none(_wall),
+        _item_dict=get_empty_dict_if_None(None),
+        _keep_dict=get_empty_dict_if_None(None),
+        _healers_dict=get_empty_dict_if_None(None),
+        _wall=default_wall_if_None(_wall),
         credor_respect=validate_respect_num(),
         debtor_respect=validate_respect_num(),
         fund_pool=validate_fund_pool(fund_pool),
-        fund_coin=default_fund_coin_if_none(fund_coin),
-        respect_bit=default_respect_bit_if_none(respect_bit),
-        penny=default_penny_if_none(penny),
+        fund_coin=default_fund_coin_if_None(fund_coin),
+        respect_bit=default_respect_bit_if_None(respect_bit),
+        penny=default_penny_if_None(penny),
         _keeps_justified=get_False_if_None(),
         _keeps_buildable=get_False_if_None(),
         _sum_healerlink_share=get_0_if_None(),
@@ -1458,15 +1458,15 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud._fiscal_id = obj_from_bud_dict(bud_dict, "_fiscal_id")
     x_bud._itemroot._label = obj_from_bud_dict(bud_dict, "_fiscal_id")
     bud_wall = obj_from_bud_dict(bud_dict, "_wall")
-    x_bud._wall = default_wall_if_none(bud_wall)
+    x_bud._wall = default_wall_if_None(bud_wall)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
-    x_bud.fund_coin = default_fund_coin_if_none(
+    x_bud.fund_coin = default_fund_coin_if_None(
         obj_from_bud_dict(bud_dict, "fund_coin")
     )
-    x_bud.respect_bit = default_respect_bit_if_none(
+    x_bud.respect_bit = default_respect_bit_if_None(
         obj_from_bud_dict(bud_dict, "respect_bit")
     )
-    x_bud.penny = default_penny_if_none(obj_from_bud_dict(bud_dict, "penny"))
+    x_bud.penny = default_penny_if_None(obj_from_bud_dict(bud_dict, "penny"))
     x_bud.credor_respect = obj_from_bud_dict(bud_dict, "credor_respect")
     x_bud.debtor_respect = obj_from_bud_dict(bud_dict, "debtor_respect")
     x_bud._last_gift_id = obj_from_bud_dict(bud_dict, "_last_gift_id")
@@ -1504,7 +1504,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
         _wall=get_obj_from_item_dict(itemroot_dict, "_wall"),
         _bud_fiscal_id=x_bud._fiscal_id,
-        _fund_coin=default_fund_coin_if_none(x_bud.fund_coin),
+        _fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
     create_itemroot_kids_from_dict(x_bud, itemroot_dict)
 

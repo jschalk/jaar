@@ -10,8 +10,8 @@ from src.f01_road.jaar_config import (
     get_test_fiscals_dir,
 )
 from src.f01_road.finance import (
-    default_respect_bit_if_none,
-    default_penny_if_none,
+    default_respect_bit_if_None,
+    default_penny_if_None,
     PennyNum,
     FundCoin,
     BitNum,
@@ -19,7 +19,7 @@ from src.f01_road.finance import (
     FundNum,
 )
 from src.f01_road.road import (
-    default_wall_if_none,
+    default_wall_if_None,
     OwnerID,
     RoadUnit,
     FiscalID,
@@ -395,10 +395,10 @@ def fiscalunit_shop(
         current_time=get_0_if_None(current_time),
         purviewlogs={},
         cashbook=tranbook_shop(fiscal_id),
-        wall=default_wall_if_none(wall),
-        fund_coin=default_respect_bit_if_none(fund_coin),
-        respect_bit=default_respect_bit_if_none(respect_bit),
-        penny=default_penny_if_none(penny),
+        wall=default_wall_if_None(wall),
+        fund_coin=default_respect_bit_if_None(fund_coin),
+        respect_bit=default_respect_bit_if_None(respect_bit),
+        penny=default_penny_if_None(penny),
         _all_tranbook=tranbook_shop(fiscal_id),
     )
     fiscal_x._set_fiscal_dirs(in_memory_journal=in_memory_journal)

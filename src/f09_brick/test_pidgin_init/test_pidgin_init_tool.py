@@ -1,6 +1,4 @@
 from src.f00_instrument.file import get_dir_file_strs
-from src.f01_road.jaar_config import default_unknown_word
-from src.f01_road.road import default_wall_if_none
 from src.f04_gift.atom_config import (
     type_AcctID_str,
     type_IdeaUnit_str,

@@ -1,6 +1,6 @@
 from contextlib import suppress as contextlib_suppress
 from src.f02_bud.acct import AcctID
-from src.f00_instrument.dict_toolbox import get_empty_dict_if_none
+from src.f00_instrument.dict_toolbox import get_empty_dict_if_None
 from dataclasses import dataclass
 
 
@@ -45,7 +45,7 @@ class OriginUnit:
 
 
 def originunit_shop(_originholds: dict[AcctID, OriginHold] = None) -> OriginUnit:
-    return OriginUnit(_originholds=get_empty_dict_if_none(_originholds))
+    return OriginUnit(_originholds=get_empty_dict_if_None(_originholds))
 
 
 def originunit_get_from_dict(x_dict: dict) -> OriginUnit:

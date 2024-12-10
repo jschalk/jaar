@@ -1,15 +1,15 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.finance import (
-    default_fund_coin_if_none,
-    default_respect_bit_if_none,
-    default_penny_if_none,
+    default_fund_coin_if_None,
+    default_respect_bit_if_None,
+    default_penny_if_None,
 )
 from src.f01_road.jaar_config import (
     get_gifts_folder,
     get_json_filename,
     get_test_fiscal_id,
 )
-from src.f01_road.road import default_wall_if_none
+from src.f01_road.road import default_wall_if_None
 from src.f01_road.finance_tran import tranbook_shop
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
@@ -53,10 +53,10 @@ def test_fiscalunit_shop_ReturnsFiscalUnit():
     assert music_fiscal.current_time == 0
     assert music_fiscal.purviewlogs == {}
     assert music_fiscal.cashbook == tranbook_shop(get_test_fiscal_id())
-    assert music_fiscal.wall == default_wall_if_none()
-    assert music_fiscal.fund_coin == default_fund_coin_if_none()
-    assert music_fiscal.respect_bit == default_respect_bit_if_none()
-    assert music_fiscal.penny == default_penny_if_none()
+    assert music_fiscal.wall == default_wall_if_None()
+    assert music_fiscal.fund_coin == default_fund_coin_if_None()
+    assert music_fiscal.respect_bit == default_respect_bit_if_None()
+    assert music_fiscal.penny == default_penny_if_None()
     assert music_fiscal.fiscals_dir == get_test_fiscals_dir()
     # Calculated fields
     assert music_fiscal._owners_dir != None

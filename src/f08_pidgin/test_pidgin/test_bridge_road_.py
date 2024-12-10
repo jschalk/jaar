@@ -1,9 +1,9 @@
-from src.f01_road.road import default_wall_if_none, create_road
+from src.f01_road.jaar_config import default_unknown_word_if_None
+from src.f01_road.road import default_wall_if_None, create_road
 from src.f08_pidgin.bridge import (
     ideabridge_shop,
     RoadBridge,
     roadbridge_shop,
-    default_unknown_word,
     get_roadbridge_from_dict,
     get_roadbridge_from_json,
 )
@@ -14,9 +14,9 @@ from pytest import raises as pytest_raises
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
 
 
-def test_default_unknown_word_ReturnsObj():
+def test_default_unknown_word_if_None_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert default_unknown_word() == "UNKNOWN"
+    assert default_unknown_word_if_None() == "UNKNOWN"
 
 
 def test_RoadBridge_Exists():
@@ -76,16 +76,16 @@ def test_roadbridge_shop_ReturnsObj_Scenario2():
 
     # THEN
     assert x_roadbridge.otx2inx == {}
-    assert x_roadbridge.unknown_word == default_unknown_word()
-    assert x_roadbridge.otx_wall == default_wall_if_none()
-    assert x_roadbridge.inx_wall == default_wall_if_none()
+    assert x_roadbridge.unknown_word == default_unknown_word_if_None()
+    assert x_roadbridge.otx_wall == default_wall_if_None()
+    assert x_roadbridge.inx_wall == default_wall_if_None()
     assert x_roadbridge.face_id is None
     assert x_roadbridge.event_id == 0
     assert x_roadbridge.ideabridge == ideabridge_shop(
         x_event_id=0,
-        x_unknown_word=default_unknown_word(),
-        x_otx_wall=default_wall_if_none(),
-        x_inx_wall=default_wall_if_none(),
+        x_unknown_word=default_unknown_word_if_None(),
+        x_otx_wall=default_wall_if_None(),
+        x_inx_wall=default_wall_if_None(),
     )
 
 
@@ -112,9 +112,9 @@ def test_roadbridge_shop_ReturnsObj_scenario3_PidginCoreAttrAreDefaultWhenGiven_
     assert x_roadbridge.face_id == bob_str
     assert x_roadbridge.event_id == event7
     assert x_roadbridge.otx2inx == otx2inx
-    assert x_roadbridge.unknown_word == default_unknown_word()
-    assert x_roadbridge.otx_wall == default_wall_if_none()
-    assert x_roadbridge.inx_wall == default_wall_if_none()
+    assert x_roadbridge.unknown_word == default_unknown_word_if_None()
+    assert x_roadbridge.otx_wall == default_wall_if_None()
+    assert x_roadbridge.inx_wall == default_wall_if_None()
 
 
 def test_RoadBridge_set_all_otx2inx_SetsAttr():

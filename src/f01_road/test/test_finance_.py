@@ -10,9 +10,9 @@ from src.f01_road.finance import (
     validate_fund_pool,
     default_respect_num,
     validate_respect_num,
-    default_fund_coin_if_none,
-    default_respect_bit_if_none,
-    default_penny_if_none,
+    default_fund_coin_if_None,
+    default_respect_bit_if_None,
+    default_penny_if_None,
     trim_fund_coin_excess,
     trim_bit_excess,
     trim_penny_excess,
@@ -35,12 +35,12 @@ def test_BitNum_exists():
     assert inspect_getdoc(y_BitNum) == inspect_str
 
 
-def test_default_respect_bit_if_none_ReturnsCorrectObj():
+def test_default_respect_bit_if_None_ReturnsCorrectObj():
     # ESTABLISH / WHEN / THEN
-    assert default_respect_bit_if_none() == 1
-    assert default_respect_bit_if_none(None) == 1
-    assert default_respect_bit_if_none(5) == 5
-    assert default_respect_bit_if_none(0.03) == 1
+    assert default_respect_bit_if_None() == 1
+    assert default_respect_bit_if_None(None) == 1
+    assert default_respect_bit_if_None(5) == 5
+    assert default_respect_bit_if_None(0.03) == 1
 
 
 def test_trim_bit_excess_ReturnsCorrectedFloat():
@@ -73,11 +73,11 @@ def test_PennyNum_exists():
     assert inspect_getdoc(y_pennynum) == "Smallest Unit of Money"
 
 
-def test_default_penny_if_none_ReturnsCorrectObj():
+def test_default_penny_if_None_ReturnsCorrectObj():
     # ESTABLISH / WHEN / THEN
-    assert default_penny_if_none() == 1
-    assert default_penny_if_none(5) == 5
-    assert default_penny_if_none(0.03) == 1
+    assert default_penny_if_None() == 1
+    assert default_penny_if_None(5) == 5
+    assert default_penny_if_None(0.03) == 1
 
 
 def test_trim_penny_excess_ReturnsCorrectedFloat():
@@ -120,10 +120,10 @@ def test_validate_fund_pool_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert validate_fund_pool() == default_fund_pool()
     assert validate_fund_pool(None) == default_fund_pool()
-    assert validate_fund_pool(0.5) == default_fund_coin_if_none()
+    assert validate_fund_pool(0.5) == default_fund_coin_if_None()
     assert (
-        validate_fund_pool(default_fund_coin_if_none() - 0.01)
-        == default_fund_coin_if_none()
+        validate_fund_pool(default_fund_coin_if_None() - 0.01)
+        == default_fund_coin_if_None()
     )
     assert validate_fund_pool(1) == 1
     assert validate_fund_pool(25) == 25
@@ -140,11 +140,11 @@ def test_FundCoin_exists():
     assert inspect_getdoc(y_fund_coinnum) == inspect_str
 
 
-def test_default_fund_coin_if_none_ReturnsCorrectObj():
+def test_default_fund_coin_if_None_ReturnsCorrectObj():
     # ESTABLISH / WHEN / THEN
-    assert default_fund_coin_if_none() == 1
-    assert default_fund_coin_if_none(5) == 5
-    assert default_fund_coin_if_none(0.03) == 0.03
+    assert default_fund_coin_if_None() == 1
+    assert default_fund_coin_if_None(5) == 5
+    assert default_fund_coin_if_None(0.03) == 0.03
 
 
 def test_trim_fund_coin_excess_ReturnsCorrectedFloat():
@@ -166,11 +166,11 @@ def test_validate_respect_num_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert validate_respect_num() == default_respect_num()
     assert validate_respect_num(None) == default_respect_num()
-    assert validate_respect_num(0.5) == default_respect_bit_if_none()
+    assert validate_respect_num(0.5) == default_respect_bit_if_None()
     assert validate_respect_num(0.5) == 1
     assert (
-        validate_respect_num(default_fund_coin_if_none() - 0.01)
-        == default_fund_coin_if_none()
+        validate_respect_num(default_fund_coin_if_None() - 0.01)
+        == default_fund_coin_if_None()
     )
     assert validate_respect_num(1) == 1
     assert validate_respect_num(25) == 25

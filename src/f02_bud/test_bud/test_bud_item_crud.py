@@ -1,4 +1,4 @@
-from src.f01_road.road import default_wall_if_none
+from src.f01_road.road import default_wall_if_None
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.examples.example_buds import get_budunit_with_4_levels
 from src.f02_bud.group import awardlink_shop
@@ -157,7 +157,7 @@ def test_BudUnit_add_item_ReturnsObj():
 def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_wall():
     # ESTABLISH
     slash_str = "/"
-    assert slash_str != default_wall_if_none()
+    assert slash_str != default_wall_if_None()
     bob_bud = budunit_shop("Bob", _wall=slash_str)
     casa_str = "casa"
     week_str = "week"

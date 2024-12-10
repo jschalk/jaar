@@ -23,7 +23,7 @@ from src.f01_road.road import (
     get_default_fiscal_id_ideaunit as root_label,
     get_diff_road,
     is_heir_road,
-    default_wall_if_none,
+    default_wall_if_None,
     replace_wall,
     validate_ideaunit,
     roadunit_valid_dir_path,
@@ -91,13 +91,30 @@ def test_IdeaUnit_exists():
     assert inspect_getdoc(x_road) == doc_str
 
 
+def test_default_wall_if_None_ReturnsObj():
+    # ESTABLISH
+    semicolon_str = ";"
+    slash_str = "/"
+    colon_str = ":"
+    buzz_str = "buzz"
+
+    # WHEN / THEN
+    assert default_wall_if_None() == semicolon_str
+    assert default_wall_if_None(None) == semicolon_str
+    x_nan = float("nan")
+    assert default_wall_if_None(x_nan) == semicolon_str
+    assert default_wall_if_None(slash_str) == slash_str
+    assert default_wall_if_None(colon_str) == colon_str
+    assert default_wall_if_None(buzz_str) == buzz_str
+
+
 def test_IdeaUnit_is_idea_ReturnsObj_Scenario0():
     # WHEN / THEN
     assert IdeaUnit("").is_idea() is False
     assert IdeaUnit("A").is_idea()
 
     # WHEN / THEN
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     x_ideaunit = IdeaUnit(f"casa{x_s}kitchen")
     assert x_ideaunit.is_idea() is False
 
@@ -171,7 +188,7 @@ def test_create_road_ReturnsObj_Scenario0():
     # ESTABLISH
     rose_str = "rose"
     semicolon_wall = ";"
-    assert semicolon_wall == default_wall_if_none()
+    assert semicolon_wall == default_wall_if_None()
     semicolon_wall_rose_road = f"{root_label()}{semicolon_wall}{rose_str}"
 
     # WHEN / THEN
@@ -252,11 +269,11 @@ def test_combine_road_ReturnsObj_Scenario1_():
 def test_road_is_sub_road_correctlyReturnsBool():
     # WHEN
     casa_str = "casa"
-    casa_road = f"{root_label()}{default_wall_if_none()}{casa_str}"
+    casa_road = f"{root_label()}{default_wall_if_None()}{casa_str}"
     cleaning_str = "cleaning"
-    cleaning_road = f"{casa_road}{default_wall_if_none()}{cleaning_str}"
+    cleaning_road = f"{casa_road}{default_wall_if_None()}{cleaning_str}"
     laundrys_str = "laundrys"
-    laundrys_road = f"{cleaning_road}{default_wall_if_none()}{laundrys_str}"
+    laundrys_road = f"{cleaning_road}{default_wall_if_None()}{laundrys_str}"
     print(f"{cleaning_road=}")
     print(f"{laundrys_road=}")
 
@@ -267,7 +284,7 @@ def test_road_is_sub_road_correctlyReturnsBool():
 
 
 def test_road_road_validate_correctlyReturnsRoadUnit():
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     _fiscal_id = "x"
     casa_road = f"{_fiscal_id}{x_s}casa"
     clean_road = f"{_fiscal_id}{x_s}clean"
@@ -304,7 +321,7 @@ def test_road_rebuild_road_ReturnsCorrectRoadUnit():
 
 def test_road_get_all_road_ideas_ReturnsIdeaUnits():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -325,7 +342,7 @@ def test_road_get_all_road_ideas_ReturnsIdeaUnits():
 
 def test_road_get_terminus_idea_ReturnsIdeaUnit():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -345,7 +362,7 @@ def test_road_get_terminus_idea_ReturnsIdeaUnitWhenNonDefaultwall():
     casa_str = "casa"
     bloomers_str = "bloomers"
     roses_str = "roses"
-    slash_str = default_wall_if_none()
+    slash_str = default_wall_if_None()
     slash_casa_road = f"{root_label()}{slash_str}{casa_str}"
     slash_bloomers_road = f"{slash_casa_road}{slash_str}{bloomers_str}"
     slash_roses_road = f"{slash_bloomers_road}{slash_str}{roses_str}"
@@ -375,7 +392,7 @@ def test_road_get_root_idea_from_road_ReturnsIdeaUnit():
 
 def test_road_get_parent_road_ReturnsCorrectObj_Scenario0():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -409,7 +426,7 @@ def test_road_get_parent_road_ReturnsCorrectObj_Scenario1():
 
 def test_road_create_road_without_root_idea_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     casa_without_root_road = f"{x_s}{casa_str}"
@@ -449,7 +466,7 @@ class TempTestingObj:
 
 def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     old_seasons_road = f"{root_label()}{x_s}casa{x_s}seasons"
     old_dict_x = {old_seasons_road: TempTestingObj(old_seasons_road)}
     assert old_dict_x.get(old_seasons_road) is not None
@@ -470,7 +487,7 @@ def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
 
 def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     nation_str = "nation-state"
     nation_road = f"{root_label()}{x_s}{nation_str}"
     usa_str = "USA"
@@ -500,7 +517,7 @@ def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
 
 def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     nation_str = "nation-state"
     nation_road = f"{root_label()}{x_s}{nation_str}"
     usa_str = "USA"
@@ -528,7 +545,7 @@ def test_road_get_default_fiscal_id_ideaunit_ReturnsCorrectObj():
 
 def test_road_create_road_from_ideas_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     root_list = get_all_road_ideas(root_label())
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
@@ -549,7 +566,7 @@ def test_road_create_road_from_ideas_ReturnsCorrectObj():
 
 def test_road_create_road_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -568,7 +585,7 @@ def test_road_create_road_ReturnsCorrectObj():
 
 def test_is_ideaunit_ReturnsObj():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
 
     # WHEN / THEN
     assert is_ideaunit("", x_wall=x_s) is False
@@ -580,7 +597,7 @@ def test_is_ideaunit_ReturnsObj():
 
 def test_get_diff_road_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -600,7 +617,7 @@ def test_get_diff_road_ReturnsCorrectObj():
 
 def test_is_heir_road_CorrectlyIdentifiesHeirs():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     usa_str = "USA"
     usa_road = f"{root_label()}{x_s}Nation-States{x_s}{usa_str}"
     texas_str = "Texas"
@@ -623,7 +640,7 @@ def test_replace_wall_ReturnsNewObj():
     # ESTABLISH
     casa_str = "casa"
     gen_casa_road = create_road(root_label(), casa_str)
-    semicolon_wall = default_wall_if_none()
+    semicolon_wall = default_wall_if_None()
     semicolon_wall_casa_road = f"{root_label()}{semicolon_wall}{casa_str}"
     assert semicolon_wall == ";"
     assert gen_casa_road == semicolon_wall_casa_road
@@ -643,7 +660,7 @@ def test_replace_wall_CorrectlyRaisesError():
     # ESTABLISH
     cooker_str = "cooker/cleaner"
     gen_cooker_road = create_road(root_label(), cooker_str)
-    semicolon_wall = default_wall_if_none()
+    semicolon_wall = default_wall_if_None()
     semicolon_wall_cooker_road = f"{root_label()}{semicolon_wall}{cooker_str}"
     assert semicolon_wall == ";"
     assert gen_cooker_road == semicolon_wall_cooker_road
@@ -666,7 +683,7 @@ def test_replace_wall_WhenNewwallIsFirstInRoadUnitRaisesError():
     # ESTABLISH
     cooker_str = "/cooker"
     cleaner_str = "cleaner"
-    semicolon_wall = default_wall_if_none()
+    semicolon_wall = default_wall_if_None()
     semicolon_wall_cooker_road = f"{cooker_str}{semicolon_wall}{cleaner_str}"
     assert semicolon_wall == ";"
 

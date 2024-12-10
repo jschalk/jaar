@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import (
-    get_empty_dict_if_none,
-    get_empty_set_if_none,
+    get_empty_dict_if_None,
+    get_empty_set_if_None,
     get_0_if_None,
     get_json_from_dict,
     get_dict_from_json,
@@ -79,7 +79,7 @@ class TranBook:
         x_blocked_time_ids: set[TimeLinePoint] = None,
         x_current_time: TimeLinePoint = None,
     ):
-        if x_time_id in get_empty_set_if_none(x_blocked_time_ids):
+        if x_time_id in get_empty_set_if_None(x_blocked_time_ids):
             exception_str = (
                 f"Cannot set tranunit for time_id={x_time_id}, timelinepoint is blocked"
             )
@@ -175,7 +175,7 @@ def tranbook_shop(
 ):
     return TranBook(
         fiscal_id=x_fiscal_id,
-        tranunits=get_empty_dict_if_none(x_tranunits),
+        tranunits=get_empty_dict_if_None(x_tranunits),
         _accts_net={},
     )
 
@@ -240,7 +240,7 @@ def purviewepisode_shop(
     return PurviewEpisode(
         time_id=x_time_id,
         quota=x_quota,
-        _net_purviews=get_empty_dict_if_none(net_purviews),
+        _net_purviews=get_empty_dict_if_None(net_purviews),
         _magnitude=get_0_if_None(x_magnitude),
     )
 

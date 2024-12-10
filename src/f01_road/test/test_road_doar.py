@@ -1,6 +1,6 @@
 from src.f01_road.road import (
     get_default_fiscal_id_ideaunit as root_label,
-    default_wall_if_none,
+    default_wall_if_None,
     get_road_from_doar,
     get_doar_from_road,
 )
@@ -8,7 +8,7 @@ from src.f01_road.road import (
 
 def test_get_road_from_doar_ReturnsObj_default_wall():
     # ESTABLISH
-    x_s = default_wall_if_none()
+    x_s = default_wall_if_None()
     casa_str = "casa"
     casa_road = f"{root_label()}{x_s}{casa_str}"
     casa_doar = f"{casa_str}{x_s}{root_label()}"

@@ -1,6 +1,6 @@
 from src.f00_instrument.file import save_file
 from src.f00_instrument.dict_toolbox import (
-    get_empty_dict_if_none,
+    get_empty_dict_if_None,
     get_positive_int,
     get_0_if_None,
     set_in_nested_dict,
@@ -242,8 +242,8 @@ def riverrun_shop(
     x_riverun = RiverRun(
         hubunit=hubunit,
         number=get_0_if_None(number),
-        keep_credorledgers=get_empty_dict_if_none(keep_credorledgers),
-        tax_dues=get_empty_dict_if_none(tax_dues),
+        keep_credorledgers=get_empty_dict_if_None(keep_credorledgers),
+        tax_dues=get_empty_dict_if_None(tax_dues),
         _rivergrades={},
         _grants={},
         _tax_yields={},

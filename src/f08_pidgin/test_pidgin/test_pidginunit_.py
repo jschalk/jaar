@@ -1,4 +1,5 @@
-from src.f01_road.road import default_wall_if_none
+from src.f01_road.jaar_config import default_unknown_word_if_None
+from src.f01_road.road import default_wall_if_None
 from src.f04_gift.atom_config import (
     get_atom_args_jaar_types,
     type_AcctID_str,
@@ -15,7 +16,6 @@ from src.f08_pidgin.bridge import (
 from src.f08_pidgin.pidgin import (
     PidginUnit,
     pidginunit_shop,
-    default_unknown_word,
     pidginable_jaar_types,
     pidginable_atom_args,
 )
@@ -108,29 +108,29 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     # THEN
     assert sue_pidginunit.face_id == sue_str
     assert sue_pidginunit.event_id == 0
-    assert sue_pidginunit.unknown_word == default_unknown_word()
-    assert sue_pidginunit.otx_wall == default_wall_if_none()
-    assert sue_pidginunit.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.otx_wall == default_wall_if_None()
+    assert sue_pidginunit.inx_wall == default_wall_if_None()
     assert sue_pidginunit.groupbridge == groupbridge_shop(x_face_id=sue_str)
     assert sue_pidginunit.acctbridge == acctbridge_shop(x_face_id=sue_str)
     assert sue_pidginunit.ideabridge == ideabridge_shop(x_face_id=sue_str)
     assert sue_pidginunit.roadbridge == roadbridge_shop(x_face_id=sue_str)
     assert sue_pidginunit.acctbridge.event_id == 0
-    assert sue_pidginunit.acctbridge.unknown_word == default_unknown_word()
-    assert sue_pidginunit.acctbridge.otx_wall == default_wall_if_none()
-    assert sue_pidginunit.acctbridge.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.acctbridge.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.acctbridge.otx_wall == default_wall_if_None()
+    assert sue_pidginunit.acctbridge.inx_wall == default_wall_if_None()
     assert sue_pidginunit.groupbridge.event_id == 0
-    assert sue_pidginunit.groupbridge.unknown_word == default_unknown_word()
-    assert sue_pidginunit.groupbridge.otx_wall == default_wall_if_none()
-    assert sue_pidginunit.groupbridge.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.groupbridge.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.groupbridge.otx_wall == default_wall_if_None()
+    assert sue_pidginunit.groupbridge.inx_wall == default_wall_if_None()
     assert sue_pidginunit.ideabridge.event_id == 0
-    assert sue_pidginunit.ideabridge.unknown_word == default_unknown_word()
-    assert sue_pidginunit.ideabridge.otx_wall == default_wall_if_none()
-    assert sue_pidginunit.ideabridge.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.ideabridge.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.ideabridge.otx_wall == default_wall_if_None()
+    assert sue_pidginunit.ideabridge.inx_wall == default_wall_if_None()
     assert sue_pidginunit.roadbridge.event_id == 0
-    assert sue_pidginunit.roadbridge.unknown_word == default_unknown_word()
-    assert sue_pidginunit.roadbridge.otx_wall == default_wall_if_none()
-    assert sue_pidginunit.roadbridge.inx_wall == default_wall_if_none()
+    assert sue_pidginunit.roadbridge.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.roadbridge.otx_wall == default_wall_if_None()
+    assert sue_pidginunit.roadbridge.inx_wall == default_wall_if_None()
 
 
 def test_pidginunit_shop_ReturnsObj_scenario1():
@@ -208,9 +208,9 @@ def test_pidginunit_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_
     # THEN
     assert x_pidginunit.face_id == bob_str
     assert x_pidginunit.event_id == event7
-    assert x_pidginunit.unknown_word == default_unknown_word()
-    assert x_pidginunit.otx_wall == default_wall_if_none()
-    assert x_pidginunit.inx_wall == default_wall_if_none()
+    assert x_pidginunit.unknown_word == default_unknown_word_if_None()
+    assert x_pidginunit.otx_wall == default_wall_if_None()
+    assert x_pidginunit.inx_wall == default_wall_if_None()
 
 
 def test_PidginUnit_set_bridgeunit_SetsAttr():

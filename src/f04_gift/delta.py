@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import (
-    get_empty_dict_if_none,
+    get_empty_dict_if_None,
     get_json_from_dict,
     set_in_nested_dict,
     get_from_nested_dict,
@@ -855,7 +855,7 @@ class DeltaUnit:
 
 def deltaunit_shop(atomunits: dict[str, AtomUnit] = None) -> DeltaUnit:
     return DeltaUnit(
-        atomunits=get_empty_dict_if_none(atomunits),
+        atomunits=get_empty_dict_if_None(atomunits),
         _bud_build_validated=False,
     )
 

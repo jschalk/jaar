@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_toolbox import get_empty_set_if_none
+from src.f00_instrument.dict_toolbox import get_empty_set_if_None
 from src.f01_road.road import GroupID
 from dataclasses import dataclass
 
@@ -24,7 +24,7 @@ class HealerLink:
 
 
 def healerlink_shop(_healer_ids: set[GroupID] = None) -> HealerLink:
-    return HealerLink(_healer_ids=get_empty_set_if_none(_healer_ids))
+    return HealerLink(_healer_ids=get_empty_set_if_None(_healer_ids))
 
 
 def healerlink_get_from_dict(x_dict: dict[str, set]) -> HealerLink:

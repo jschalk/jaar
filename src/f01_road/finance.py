@@ -50,7 +50,7 @@ class get_net_Exception(Exception):
     pass
 
 
-def default_fund_coin_if_none(fund_coin: FundCoin = None) -> FundCoin:
+def default_fund_coin_if_None(fund_coin: FundCoin = None) -> FundCoin:
     return get_1_if_None(fund_coin)
 
 
@@ -68,7 +68,7 @@ def default_fund_pool() -> FundNum:
 
 def validate_fund_pool(x_fund_pool: FundNum = None) -> FundNum:
     x_fund_pool = default_fund_pool() if x_fund_pool is None else x_fund_pool
-    return max(get_1_if_None(x_fund_pool), default_fund_coin_if_none())
+    return max(get_1_if_None(x_fund_pool), default_fund_coin_if_None())
 
 
 def valid_finance_ratio(big_number: float, small_number: float) -> bool:
@@ -77,12 +77,12 @@ def valid_finance_ratio(big_number: float, small_number: float) -> bool:
 
 
 # def validate_fund_pool(x_fund_pool: FundNum = None, x_fund_coin: FundCoin = None) -> int:
-#     x_fund_coin = default_fund_coin_if_none() if x_fund_coin is None else x_fund_coin
+#     x_fund_coin = default_fund_coin_if_None() if x_fund_coin is None else x_fund_coin
 #     x_fund_pool = default_fund_pool() if x_fund_pool is None else x_fund_pool
-#     return max(get_1_if_None(x_fund_pool), default_fund_coin_if_none())
+#     return max(get_1_if_None(x_fund_pool), default_fund_coin_if_None())
 
 
-def default_respect_bit_if_none(bit: BitNum = None) -> BitNum:
+def default_respect_bit_if_None(bit: BitNum = None) -> BitNum:
     return max(get_1_if_None(bit), 1)
 
 
@@ -96,10 +96,10 @@ def default_respect_num() -> RespectNum:
 
 def validate_respect_num(x_respect_num: RespectNum = None) -> RespectNum:
     x_respect_num = default_respect_num() if x_respect_num is None else x_respect_num
-    return max(x_respect_num, default_respect_bit_if_none(x_respect_num))
+    return max(x_respect_num, default_respect_bit_if_None(x_respect_num))
 
 
-def default_penny_if_none(penny: PennyNum = None) -> PennyNum:
+def default_penny_if_None(penny: PennyNum = None) -> PennyNum:
     return max(get_1_if_None(penny), 1)
 
 
@@ -111,7 +111,7 @@ def default_money_magnitude() -> MoneyUnit:
     return 1000000000
 
 
-def default_money_magnitude_if_none(money_magnitude: int = None) -> int:
+def default_money_magnitude_if_None(money_magnitude: int = None) -> int:
     return default_money_magnitude() if money_magnitude is None else money_magnitude
 
 

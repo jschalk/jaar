@@ -1,5 +1,5 @@
-from src.f01_road.road import default_wall_if_none
-from src.f01_road.finance import default_respect_bit_if_none
+from src.f01_road.road import default_wall_if_None
+from src.f01_road.finance import default_respect_bit_if_None
 from src.f02_bud.acct import AcctUnit, acctunit_shop
 from pytest import raises as pytest_raises
 
@@ -81,8 +81,8 @@ def test_acctunit_shop_CorrectlySetsAttributes():
     assert yao_acctunit._fund_agenda_take == 0
     assert yao_acctunit._fund_agenda_ratio_give == 0
     assert yao_acctunit._fund_agenda_ratio_take == 0
-    assert yao_acctunit._wall == default_wall_if_none()
-    assert yao_acctunit._respect_bit == default_respect_bit_if_none()
+    assert yao_acctunit._wall == default_wall_if_None()
+    assert yao_acctunit._respect_bit == default_respect_bit_if_None()
 
 
 def test_acctunit_shop_CorrectlySetsAttributes_wall():
