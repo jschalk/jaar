@@ -28,6 +28,7 @@ from src.f10_etl.transformers import (
     etl_event_pidgins_csvs_to_pidgin_jsons,
     etl_zoo_bricks_to_face_bricks,
     etl_face_bricks_to_event_bricks,
+    etl_event_bricks_to_fiscal_bricks,
 )
 from dataclasses import dataclass
 
@@ -119,6 +120,9 @@ class WorldUnit:
 
     def face_bricks_to_event_bricks(self):
         etl_face_bricks_to_event_bricks(self._faces_dir)
+
+    def event_bricks_to_fiscal_bricks(self):
+        etl_event_bricks_to_fiscal_bricks(self._faces_dir)
 
     def get_dict(self) -> dict:
         return {
