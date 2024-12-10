@@ -5,6 +5,7 @@ from src.f08_pidgin.bridge import (
     ideabridge_shop,
     get_ideabridge_from_dict,
     get_ideabridge_from_json,
+    inherit_ideabridge,
 )
 from pytest import raises as pytest_raises
 
@@ -271,7 +272,7 @@ def test_IdeaBridge_reveal_inx_ReturnsObjAndSetsAttr_idea():
     otx_r_wall = "/"
     swim_otx = f"swim{otx_r_wall}"
     climb_otx = f"climb{otx_r_wall}_{inx_r_wall}"
-    x_ideabridge = ideabridge_shop(otx_r_wall, inx_r_wall)
+    x_ideabridge = ideabridge_shop(x_otx_wall=otx_r_wall, x_inx_wall=inx_r_wall)
     x_ideabridge.otx_exists(swim_otx) is False
     x_ideabridge.otx_exists(climb_otx) is False
 
@@ -299,34 +300,34 @@ def test_IdeaBridge_get_dict_ReturnsObj():
     event7 = 7
     slash_otx_wall = "/"
     colon_inx_wall = ":"
-    ideaunit_ideabridge = ideabridge_shop(
+    x_ideabridge = ideabridge_shop(
+        sue_str,
         x_otx_wall=slash_otx_wall,
         x_inx_wall=colon_inx_wall,
-        x_face_id=sue_str,
     )
     x1_road_bridge_dict = {
-        "otx_wall": ideaunit_ideabridge.otx_wall,
-        "inx_wall": ideaunit_ideabridge.inx_wall,
-        "unknown_word": ideaunit_ideabridge.unknown_word,
+        "otx_wall": x_ideabridge.otx_wall,
+        "inx_wall": x_ideabridge.inx_wall,
+        "unknown_word": x_ideabridge.unknown_word,
         "otx2inx": {},
-        "face_id": ideaunit_ideabridge.face_id,
-        "event_id": ideaunit_ideabridge.event_id,
+        "face_id": x_ideabridge.face_id,
+        "event_id": x_ideabridge.event_id,
     }
-    assert ideaunit_ideabridge.get_dict() == x1_road_bridge_dict
+    assert x_ideabridge.get_dict() == x1_road_bridge_dict
 
     # WHEN
-    ideaunit_ideabridge.set_otx2inx(clean_otx, clean_inx)
-    ideaunit_ideabridge.event_id = event7
+    x_ideabridge.set_otx2inx(clean_otx, clean_inx)
+    x_ideabridge.event_id = event7
     # THEN
     x2_road_bridge_dict = {
-        "otx_wall": ideaunit_ideabridge.otx_wall,
-        "inx_wall": ideaunit_ideabridge.inx_wall,
-        "unknown_word": ideaunit_ideabridge.unknown_word,
+        "otx_wall": x_ideabridge.otx_wall,
+        "inx_wall": x_ideabridge.inx_wall,
+        "unknown_word": x_ideabridge.unknown_word,
         "otx2inx": {clean_otx: clean_inx},
         "face_id": sue_str,
         "event_id": event7,
     }
-    assert ideaunit_ideabridge.get_dict() == x2_road_bridge_dict
+    assert x_ideabridge.get_dict() == x2_road_bridge_dict
 
 
 def test_IdeaBridge_get_json_ReturnsObj():
@@ -337,37 +338,37 @@ def test_IdeaBridge_get_json_ReturnsObj():
     casa_otx = "casa1"
     casa_inx = "casa2"
     slash_otx_wall = "/"
-    ideaunit_ideabridge = ideabridge_shop("IdeaUnit", slash_otx_wall, x_face_id=sue_str)
+    x_ideabridge = ideabridge_shop(sue_str, x_otx_wall=slash_otx_wall)
     x1_road_bridge_json = f"""{{
   "event_id": 0,
   "face_id": "{sue_str}",
-  "inx_wall": "{ideaunit_ideabridge.inx_wall}",
+  "inx_wall": "{x_ideabridge.inx_wall}",
   "otx2inx": {{}},
-  "otx_wall": "{ideaunit_ideabridge.otx_wall}",
-  "unknown_word": "{ideaunit_ideabridge.unknown_word}"
+  "otx_wall": "{x_ideabridge.otx_wall}",
+  "unknown_word": "{x_ideabridge.unknown_word}"
 }}"""
     print(f"           {x1_road_bridge_json=}")
-    print(f"{ideaunit_ideabridge.get_json()=}")
-    assert ideaunit_ideabridge.get_json() == x1_road_bridge_json
+    print(f"{x_ideabridge.get_json()=}")
+    assert x_ideabridge.get_json() == x1_road_bridge_json
 
     # WHEN
     event7 = 7
-    ideaunit_ideabridge.set_otx2inx(clean_otx, clean_inx)
-    ideaunit_ideabridge.event_id = event7
+    x_ideabridge.set_otx2inx(clean_otx, clean_inx)
+    x_ideabridge.event_id = event7
     # THEN
     x2_road_bridge_json = f"""{{
   "event_id": {event7},
   "face_id": "{sue_str}",
-  "inx_wall": "{ideaunit_ideabridge.inx_wall}",
+  "inx_wall": "{x_ideabridge.inx_wall}",
   "otx2inx": {{
     "{clean_otx}": "{clean_inx}"
   }},
-  "otx_wall": "{ideaunit_ideabridge.otx_wall}",
-  "unknown_word": "{ideaunit_ideabridge.unknown_word}"
+  "otx_wall": "{x_ideabridge.otx_wall}",
+  "unknown_word": "{x_ideabridge.unknown_word}"
 }}"""
     print(f"           {x2_road_bridge_json=}")
-    print(f"{ideaunit_ideabridge.get_json()=}")
-    assert ideaunit_ideabridge.get_json() == x2_road_bridge_json
+    print(f"{x_ideabridge.get_json()=}")
+    assert x_ideabridge.get_json() == x2_road_bridge_json
 
 
 def test_get_ideabridge_from_dict_ReturnsObj():
@@ -377,19 +378,17 @@ def test_get_ideabridge_from_dict_ReturnsObj():
     clean_inx = "propre"
     event7 = 7
     slash_otx_wall = "/"
-    ideaunit_ideabridge = ideabridge_shop(
-        slash_otx_wall, x_face_id=sue_str, x_event_id=event7
-    )
-    ideaunit_ideabridge.set_otx2inx(clean_otx, clean_inx)
+    x_ideabridge = ideabridge_shop(sue_str, event7, x_otx_wall=slash_otx_wall)
+    x_ideabridge.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
-    gen_ideabridge = get_ideabridge_from_dict(ideaunit_ideabridge.get_dict())
+    gen_ideabridge = get_ideabridge_from_dict(x_ideabridge.get_dict())
 
     # THEN
-    assert gen_ideabridge.face_id == ideaunit_ideabridge.face_id
-    assert gen_ideabridge.event_id == ideaunit_ideabridge.event_id
+    assert gen_ideabridge.face_id == x_ideabridge.face_id
+    assert gen_ideabridge.event_id == x_ideabridge.event_id
     assert gen_ideabridge.event_id == event7
-    assert gen_ideabridge == ideaunit_ideabridge
+    assert gen_ideabridge == x_ideabridge
 
 
 def test_get_ideabridge_from_json_ReturnsObj():
@@ -397,14 +396,14 @@ def test_get_ideabridge_from_json_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     slash_otx_wall = "/"
-    ideaunit_ideabridge = ideabridge_shop(slash_otx_wall)
-    ideaunit_ideabridge.set_otx2inx(clean_otx, clean_inx)
+    x_ideabridge = ideabridge_shop(slash_otx_wall)
+    x_ideabridge.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
-    x_ideabridge = get_ideabridge_from_json(ideaunit_ideabridge.get_json())
+    x_ideabridge = get_ideabridge_from_json(x_ideabridge.get_json())
 
     # THEN
-    assert x_ideabridge == ideaunit_ideabridge
+    assert x_ideabridge == x_ideabridge
 
 
 def test_IdeaBridge_is_inx_wall_inclusion_correct_ReturnsObj():
@@ -458,7 +457,7 @@ def test_IdeaBridge_is_valid_ReturnsObj():
     sue_without_wall = f"Sue{otx_wall}"
     zia_otx = "Zia"
     zia_inx = f"Zia{inx_wall}"
-    x_ideabridge = ideabridge_shop(otx_wall, x_inx_wall=inx_wall)
+    x_ideabridge = ideabridge_shop(x_otx_wall=otx_wall, x_inx_wall=inx_wall)
     assert x_ideabridge.is_valid()
 
     # WHEN
@@ -475,3 +474,92 @@ def test_IdeaBridge_is_valid_ReturnsObj():
     x_ideabridge.set_otx2inx(sue_otx, sue_without_wall)
     # THEN
     assert x_ideabridge.is_valid() is False
+
+
+def test_inherit_ideabridge_ReturnsObj_Scenario0():
+    # ESTABLISH
+    zia_str = "Zia"
+    old_ideabridge = ideabridge_shop(zia_str, 3)
+    new_ideabridge = ideabridge_shop(zia_str, 5)
+    # WHEN
+    inherit_ideabridge(new_ideabridge, old_ideabridge)
+
+    # THEN
+    assert new_ideabridge
+    assert new_ideabridge == ideabridge_shop(zia_str, 5)
+
+
+def test_inherit_ideabridge_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_wall():
+    # ESTABLISH
+    sue_str = "Sue"
+    slash_otx_wall = "/"
+    old_ideabridge = ideabridge_shop(sue_str, 0, x_otx_wall=slash_otx_wall)
+    new_ideabridge = ideabridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_ideabridge(new_ideabridge, old_ideabridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_ideabridge_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_wall():
+    # ESTABLISH
+    sue_str = "Sue"
+    slash_otx_wall = "/"
+    old_ideabridge = ideabridge_shop(sue_str, 0, x_inx_wall=slash_otx_wall)
+    new_ideabridge = ideabridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_ideabridge(new_ideabridge, old_ideabridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_ideabridge_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_word():
+    # ESTABLISH
+    sue_str = "Sue"
+    x_unknown_word = "UnknownWord"
+    old_ideabridge = ideabridge_shop(sue_str, 0, x_unknown_word=x_unknown_word)
+    new_ideabridge = ideabridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_ideabridge(new_ideabridge, old_ideabridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_ideabridge_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_id():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+    old_ideabridge = ideabridge_shop(sue_str, 0)
+    new_ideabridge = ideabridge_shop(bob_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_ideabridge(new_ideabridge, old_ideabridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_ideabridge_ReturnsObj_Scenario5_RaiseErrorWhenEventIDsOutOfOrder():
+    # ESTABLISH
+    sue_str = "Sue"
+    old_ideabridge = ideabridge_shop(sue_str, 5)
+    new_ideabridge = ideabridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_ideabridge(new_ideabridge, old_ideabridge)
+    assert str(excinfo.value) == "older bridgeunit is not older"
+
+
+def test_inherit_ideabridge_ReturnsObj_Scenario6_inheritFromOld():
+    # ESTABLISH
+    zia_str = "Zia"
+    xio_otx = "Xio"
+    xio_inx = "Xioito"
+    old_ideabridge = ideabridge_shop(zia_str, 3)
+    old_ideabridge.set_otx2inx(xio_otx, xio_inx)
+    new_ideabridge = ideabridge_shop(zia_str, 7)
+    assert new_ideabridge.otx2inx_exists(xio_otx, xio_inx) is False
+
+    # WHEN
+    inherited_ideabridge = inherit_ideabridge(new_ideabridge, old_ideabridge)
+
+    # THEN
+    assert inherited_ideabridge.otx2inx_exists(xio_otx, xio_inx)

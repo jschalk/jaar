@@ -5,6 +5,7 @@ from src.f08_pidgin.bridge import (
     groupbridge_shop,
     get_groupbridge_from_dict,
     get_groupbridge_from_json,
+    inherit_groupbridge,
 )
 from pytest import raises as pytest_raises
 
@@ -271,7 +272,7 @@ def test_GroupBridge_reveal_inx_ReturnsObjAndSetsAttr_group_id():
     otx_r_wall = "/"
     swim_otx = f"swim{otx_r_wall}"
     climb_otx = f"climb{otx_r_wall}_{inx_r_wall}"
-    x_groupbridge = groupbridge_shop(otx_r_wall, inx_r_wall)
+    x_groupbridge = groupbridge_shop(x_otx_wall=otx_r_wall, x_inx_wall=inx_r_wall)
     x_groupbridge.otx_exists(swim_otx) is False
     x_groupbridge.otx_exists(climb_otx) is False
 
@@ -336,7 +337,7 @@ def test_GroupBridge_get_json_ReturnsObj():
     casa_inx = "casa2"
     event7 = 7
     slash_otx_wall = "/"
-    x_groupbridge = groupbridge_shop(slash_otx_wall, x_face_id=sue_str)
+    x_groupbridge = groupbridge_shop(sue_str, x_otx_wall=slash_otx_wall)
     x1_road_bridge_json = f"""{{
   "event_id": 0,
   "face_id": "{sue_str}",
@@ -375,9 +376,7 @@ def test_get_groupbridge_from_dict_ReturnsObj():
     clean_inx = "propre"
     event7 = 7
     slash_otx_wall = "/"
-    x_groupbridge = groupbridge_shop(
-        slash_otx_wall, x_face_id=sue_str, x_event_id=event7
-    )
+    x_groupbridge = groupbridge_shop(sue_str, event7, x_otx_wall=slash_otx_wall)
     x_groupbridge.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
@@ -455,7 +454,7 @@ def test_GroupBridge_is_valid_ReturnsObj():
     sue_inx = f"Sue{inx_wall}"
     zia_otx = "Zia"
     zia_inx = f"Zia{inx_wall}"
-    x_groupbridge = groupbridge_shop(otx_wall, x_inx_wall=inx_wall)
+    x_groupbridge = groupbridge_shop(x_otx_wall=otx_wall, x_inx_wall=inx_wall)
     assert x_groupbridge.is_valid()
 
     # WHEN
@@ -467,3 +466,92 @@ def test_GroupBridge_is_valid_ReturnsObj():
     x_groupbridge.set_otx2inx(zia_otx, zia_inx)
     # THEN
     assert x_groupbridge.is_valid() is False
+
+
+def test_inherit_groupbridge_ReturnsObj_Scenario0():
+    # ESTABLISH
+    zia_str = "Zia"
+    old_groupbridge = groupbridge_shop(zia_str, 3)
+    new_groupbridge = groupbridge_shop(zia_str, 5)
+    # WHEN
+    inherit_groupbridge(new_groupbridge, old_groupbridge)
+
+    # THEN
+    assert new_groupbridge
+    assert new_groupbridge == groupbridge_shop(zia_str, 5)
+
+
+def test_inherit_groupbridge_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_wall():
+    # ESTABLISH
+    sue_str = "Sue"
+    slash_otx_wall = "/"
+    old_groupbridge = groupbridge_shop(sue_str, 0, x_otx_wall=slash_otx_wall)
+    new_groupbridge = groupbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_groupbridge(new_groupbridge, old_groupbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_groupbridge_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_wall():
+    # ESTABLISH
+    sue_str = "Sue"
+    slash_otx_wall = "/"
+    old_groupbridge = groupbridge_shop(sue_str, 0, x_inx_wall=slash_otx_wall)
+    new_groupbridge = groupbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_groupbridge(new_groupbridge, old_groupbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_groupbridge_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_word():
+    # ESTABLISH
+    sue_str = "Sue"
+    x_unknown_word = "UnknownWord"
+    old_groupbridge = groupbridge_shop(sue_str, 0, x_unknown_word=x_unknown_word)
+    new_groupbridge = groupbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_groupbridge(new_groupbridge, old_groupbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_groupbridge_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_id():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+    old_groupbridge = groupbridge_shop(sue_str, 0)
+    new_groupbridge = groupbridge_shop(bob_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_groupbridge(new_groupbridge, old_groupbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_groupbridge_ReturnsObj_Scenario5_RaiseErrorWhenEventIDsOutOfOrder():
+    # ESTABLISH
+    sue_str = "Sue"
+    old_groupbridge = groupbridge_shop(sue_str, 5)
+    new_groupbridge = groupbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_groupbridge(new_groupbridge, old_groupbridge)
+    assert str(excinfo.value) == "older bridgeunit is not older"
+
+
+def test_inherit_groupbridge_ReturnsObj_Scenario6_inheritFromOld():
+    # ESTABLISH
+    zia_str = "Zia"
+    xio_otx = "Xio"
+    xio_inx = "Xioito"
+    old_groupbridge = groupbridge_shop(zia_str, 3)
+    old_groupbridge.set_otx2inx(xio_otx, xio_inx)
+    new_groupbridge = groupbridge_shop(zia_str, 7)
+    assert new_groupbridge.otx2inx_exists(xio_otx, xio_inx) is False
+
+    # WHEN
+    inherited_groupbridge = inherit_groupbridge(new_groupbridge, old_groupbridge)
+
+    # THEN
+    assert inherited_groupbridge.otx2inx_exists(xio_otx, xio_inx)

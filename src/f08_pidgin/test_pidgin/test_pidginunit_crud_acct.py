@@ -121,14 +121,14 @@ def test_PidginUnit_set_acct_id_SetsAttr_Scenario0():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    acctid_acctbridge = zia_pidginunit.get_acctbridge()
-    assert acctid_acctbridge.otx2inx_exists(sue_otx, sue_inx) is False
+    acct_id_acctbridge = zia_pidginunit.get_acctbridge()
+    assert acct_id_acctbridge.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_acct_id(sue_otx, sue_inx)
 
     # THEN
-    assert acctid_acctbridge.otx2inx_exists(sue_otx, sue_inx)
+    assert acct_id_acctbridge.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_acct_id_exists_ReturnsObj():

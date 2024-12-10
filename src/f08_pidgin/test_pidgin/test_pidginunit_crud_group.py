@@ -105,14 +105,14 @@ def test_PidginUnit_set_group_id_SetsAttr_Scenario0():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    acctid_groupbridge = zia_pidginunit.get_groupbridge()
-    assert acctid_groupbridge.otx2inx_exists(sue_otx, sue_inx) is False
+    acct_id_groupbridge = zia_pidginunit.get_groupbridge()
+    assert acct_id_groupbridge.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_group_id(sue_otx, sue_inx)
 
     # THEN
-    assert acctid_groupbridge.otx2inx_exists(sue_otx, sue_inx)
+    assert acct_id_groupbridge.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_group_id_exists_ReturnsObj():

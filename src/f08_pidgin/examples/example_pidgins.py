@@ -66,7 +66,7 @@ def get_suita_acctbridge() -> AcctBridge:
     return acct_id_bridgeunit
 
 
-# def get_invalid_acctid_bridgeunit() -> BridgeUnit:
+# def get_invalid_acct_id_bridgeunit() -> BridgeUnit:
 #     sue_otx = f"Xio{default_wall_if_None()}"
 #     sue_inx = "Sue"
 #     zia_otx = "Zia"
@@ -173,7 +173,7 @@ def get_sue_pidginunit() -> PidginUnit:
     return sue_pidginunit
 
 
-def get_suita_acctid_otx_dt() -> DataFrame:
+def get_suita_acct_id_otx_dt() -> DataFrame:
     xio_otx = "Xio"
     sue_otx = "Sue"
     bob_otx = "Bob"
@@ -186,7 +186,7 @@ def get_suita_acctid_otx_dt() -> DataFrame:
     return otx_dt
 
 
-def get_suita_acctid_inx_dt() -> DataFrame:
+def get_suita_acct_id_inx_dt() -> DataFrame:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"

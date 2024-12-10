@@ -5,6 +5,7 @@ from src.f08_pidgin.bridge import (
     acctbridge_shop,
     get_acctbridge_from_dict,
     get_acctbridge_from_json,
+    inherit_acctbridge,
 )
 from pytest import raises as pytest_raises
 from numpy import int64 as numpy_int64
@@ -274,7 +275,7 @@ def test_AcctBridge_reveal_inx_ReturnsObjAndSetsAttr_acct_id():
     otx_r_wall = "/"
     swim_otx = f"swim{otx_r_wall}"
     climb_otx = f"climb{otx_r_wall}_{inx_r_wall}"
-    x_acctbridge = acctbridge_shop(otx_r_wall, inx_r_wall)
+    x_acctbridge = acctbridge_shop(x_otx_wall=otx_r_wall, x_inx_wall=inx_r_wall)
     x_acctbridge.otx_exists(swim_otx) is False
     x_acctbridge.otx_exists(climb_otx) is False
 
@@ -302,34 +303,34 @@ def test_AcctBridge_get_dict_ReturnsObj():
     event7 = 7
     slash_otx_wall = "/"
     colon_inx_wall = ":"
-    ideaunit_acctbridge = acctbridge_shop(
+    x_acctbridge = acctbridge_shop(
         x_otx_wall=slash_otx_wall,
         x_inx_wall=colon_inx_wall,
         x_face_id=sue_str,
         x_event_id=event7,
     )
     x1_road_bridge_dict = {
-        "otx_wall": ideaunit_acctbridge.otx_wall,
-        "inx_wall": ideaunit_acctbridge.inx_wall,
-        "unknown_word": ideaunit_acctbridge.unknown_word,
+        "otx_wall": x_acctbridge.otx_wall,
+        "inx_wall": x_acctbridge.inx_wall,
+        "unknown_word": x_acctbridge.unknown_word,
         "otx2inx": {},
-        "face_id": ideaunit_acctbridge.face_id,
-        "event_id": ideaunit_acctbridge.event_id,
+        "face_id": x_acctbridge.face_id,
+        "event_id": x_acctbridge.event_id,
     }
-    assert ideaunit_acctbridge.get_dict() == x1_road_bridge_dict
+    assert x_acctbridge.get_dict() == x1_road_bridge_dict
 
     # WHEN
-    ideaunit_acctbridge.set_otx2inx(clean_otx, clean_inx)
+    x_acctbridge.set_otx2inx(clean_otx, clean_inx)
     # THEN
     x2_road_bridge_dict = {
-        "otx_wall": ideaunit_acctbridge.otx_wall,
-        "inx_wall": ideaunit_acctbridge.inx_wall,
-        "unknown_word": ideaunit_acctbridge.unknown_word,
+        "otx_wall": x_acctbridge.otx_wall,
+        "inx_wall": x_acctbridge.inx_wall,
+        "unknown_word": x_acctbridge.unknown_word,
         "otx2inx": {clean_otx: clean_inx},
         "face_id": sue_str,
         "event_id": event7,
     }
-    assert ideaunit_acctbridge.get_dict() == x2_road_bridge_dict
+    assert x_acctbridge.get_dict() == x2_road_bridge_dict
 
 
 def test_AcctBridge_get_json_ReturnsObj():
@@ -341,36 +342,36 @@ def test_AcctBridge_get_json_ReturnsObj():
     casa_inx = "casa2"
     event7 = 7
     slash_otx_wall = "/"
-    ideaunit_acctbridge = acctbridge_shop("IdeaUnit", slash_otx_wall, x_face_id=sue_str)
+    x_acctbridge = acctbridge_shop(sue_str, x_otx_wall=slash_otx_wall)
     x1_road_bridge_json = f"""{{
   "event_id": 0,
   "face_id": "{sue_str}",
-  "inx_wall": "{ideaunit_acctbridge.inx_wall}",
+  "inx_wall": "{x_acctbridge.inx_wall}",
   "otx2inx": {{}},
-  "otx_wall": "{ideaunit_acctbridge.otx_wall}",
-  "unknown_word": "{ideaunit_acctbridge.unknown_word}"
+  "otx_wall": "{x_acctbridge.otx_wall}",
+  "unknown_word": "{x_acctbridge.unknown_word}"
 }}"""
     print(f"           {x1_road_bridge_json=}")
-    print(f"{ideaunit_acctbridge.get_json()=}")
-    assert ideaunit_acctbridge.get_json() == x1_road_bridge_json
+    print(f"{x_acctbridge.get_json()=}")
+    assert x_acctbridge.get_json() == x1_road_bridge_json
 
     # WHEN
-    ideaunit_acctbridge.set_otx2inx(clean_otx, clean_inx)
-    ideaunit_acctbridge.event_id = event7
+    x_acctbridge.set_otx2inx(clean_otx, clean_inx)
+    x_acctbridge.event_id = event7
     # THEN
     x2_road_bridge_json = f"""{{
   "event_id": {event7},
   "face_id": "{sue_str}",
-  "inx_wall": "{ideaunit_acctbridge.inx_wall}",
+  "inx_wall": "{x_acctbridge.inx_wall}",
   "otx2inx": {{
     "{clean_otx}": "{clean_inx}"
   }},
-  "otx_wall": "{ideaunit_acctbridge.otx_wall}",
-  "unknown_word": "{ideaunit_acctbridge.unknown_word}"
+  "otx_wall": "{x_acctbridge.otx_wall}",
+  "unknown_word": "{x_acctbridge.unknown_word}"
 }}"""
     print(f"           {x2_road_bridge_json=}")
-    print(f"{ideaunit_acctbridge.get_json()=}")
-    assert ideaunit_acctbridge.get_json() == x2_road_bridge_json
+    print(f"{x_acctbridge.get_json()=}")
+    assert x_acctbridge.get_json() == x2_road_bridge_json
 
 
 def test_get_acctbridge_from_dict_ReturnsObj():
@@ -380,19 +381,17 @@ def test_get_acctbridge_from_dict_ReturnsObj():
     clean_inx = "propre"
     slash_otx_wall = "/"
     event7 = 7
-    ideaunit_acctbridge = acctbridge_shop(
-        slash_otx_wall, x_face_id=sue_str, x_event_id=event7
-    )
-    ideaunit_acctbridge.set_otx2inx(clean_otx, clean_inx)
+    x_acctbridge = acctbridge_shop(sue_str, event7, x_otx_wall=slash_otx_wall)
+    x_acctbridge.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
-    gen_acctbridge = get_acctbridge_from_dict(ideaunit_acctbridge.get_dict())
+    gen_acctbridge = get_acctbridge_from_dict(x_acctbridge.get_dict())
 
     # THEN
-    assert gen_acctbridge.face_id == ideaunit_acctbridge.face_id
-    assert gen_acctbridge.event_id == ideaunit_acctbridge.event_id
+    assert gen_acctbridge.face_id == x_acctbridge.face_id
+    assert gen_acctbridge.event_id == x_acctbridge.event_id
     assert gen_acctbridge.event_id == event7
-    assert gen_acctbridge == ideaunit_acctbridge
+    assert gen_acctbridge == x_acctbridge
 
 
 def test_get_acctbridge_from_json_ReturnsObj():
@@ -400,14 +399,14 @@ def test_get_acctbridge_from_json_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     slash_otx_wall = "/"
-    ideaunit_acctbridge = acctbridge_shop(slash_otx_wall)
-    ideaunit_acctbridge.set_otx2inx(clean_otx, clean_inx)
+    x_acctbridge = acctbridge_shop(slash_otx_wall)
+    x_acctbridge.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
-    x_acctbridge = get_acctbridge_from_json(ideaunit_acctbridge.get_json())
+    x_acctbridge = get_acctbridge_from_json(x_acctbridge.get_json())
 
     # THEN
-    assert x_acctbridge == ideaunit_acctbridge
+    assert x_acctbridge == x_acctbridge
 
 
 def test_AcctBridge_is_inx_wall_inclusion_correct_ReturnsObj():
@@ -461,7 +460,7 @@ def test_AcctBridge_is_valid_ReturnsObj():
     sue_without_wall = f"Sue{otx_wall}"
     zia_otx = "Zia"
     zia_inx = f"Zia{inx_wall}"
-    x_acctbridge = acctbridge_shop(otx_wall, x_inx_wall=inx_wall)
+    x_acctbridge = acctbridge_shop(x_otx_wall=otx_wall, x_inx_wall=inx_wall)
     assert x_acctbridge.is_valid()
 
     # WHEN
@@ -478,3 +477,92 @@ def test_AcctBridge_is_valid_ReturnsObj():
     x_acctbridge.set_otx2inx(sue_otx, sue_without_wall)
     # THEN
     assert x_acctbridge.is_valid() is False
+
+
+def test_inherit_acctbridge_ReturnsObj_Scenario0():
+    # ESTABLISH
+    zia_str = "Zia"
+    old_acctbridge = acctbridge_shop(zia_str, 3)
+    new_acctbridge = acctbridge_shop(zia_str, 5)
+    # WHEN
+    inherit_acctbridge(new_acctbridge, old_acctbridge)
+
+    # THEN
+    assert new_acctbridge
+    assert new_acctbridge == acctbridge_shop(zia_str, 5)
+
+
+def test_inherit_acctbridge_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_wall():
+    # ESTABLISH
+    sue_str = "Sue"
+    slash_otx_wall = "/"
+    old_acctbridge = acctbridge_shop(sue_str, 0, x_otx_wall=slash_otx_wall)
+    new_acctbridge = acctbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_acctbridge(new_acctbridge, old_acctbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_acctbridge_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_wall():
+    # ESTABLISH
+    sue_str = "Sue"
+    slash_otx_wall = "/"
+    old_acctbridge = acctbridge_shop(sue_str, 0, x_inx_wall=slash_otx_wall)
+    new_acctbridge = acctbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_acctbridge(new_acctbridge, old_acctbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_acctbridge_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_word():
+    # ESTABLISH
+    sue_str = "Sue"
+    x_unknown_word = "UnknownWord"
+    old_acctbridge = acctbridge_shop(sue_str, 0, x_unknown_word=x_unknown_word)
+    new_acctbridge = acctbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_acctbridge(new_acctbridge, old_acctbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_acctbridge_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_id():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+    old_acctbridge = acctbridge_shop(sue_str, 0)
+    new_acctbridge = acctbridge_shop(bob_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_acctbridge(new_acctbridge, old_acctbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_acctbridge_ReturnsObj_Scenario5_RaiseErrorWhenEventIDsOutOfOrder():
+    # ESTABLISH
+    sue_str = "Sue"
+    old_acctbridge = acctbridge_shop(sue_str, 5)
+    new_acctbridge = acctbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_acctbridge(new_acctbridge, old_acctbridge)
+    assert str(excinfo.value) == "older bridgeunit is not older"
+
+
+def test_inherit_acctbridge_ReturnsObj_Scenario6_inheritFromOld():
+    # ESTABLISH
+    zia_str = "Zia"
+    xio_otx = "Xio"
+    xio_inx = "Xioito"
+    old_acctbridge = acctbridge_shop(zia_str, 3)
+    old_acctbridge.set_otx2inx(xio_otx, xio_inx)
+    new_acctbridge = acctbridge_shop(zia_str, 7)
+    assert new_acctbridge.otx2inx_exists(xio_otx, xio_inx) is False
+
+    # WHEN
+    inherited_acctbridge = inherit_acctbridge(new_acctbridge, old_acctbridge)
+
+    # THEN
+    assert inherited_acctbridge.otx2inx_exists(xio_otx, xio_inx)

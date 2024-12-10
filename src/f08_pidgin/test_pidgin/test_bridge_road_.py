@@ -6,6 +6,7 @@ from src.f08_pidgin.bridge import (
     roadbridge_shop,
     get_roadbridge_from_dict,
     get_roadbridge_from_json,
+    inherit_roadbridge,
 )
 from pytest import raises as pytest_raises
 
@@ -468,7 +469,7 @@ def test_RoadBridge_get_json_ReturnsObj():
     casa_otx = "casa1"
     casa_inx = "casa2"
     slash_otx_wall = "/"
-    x_roadbridge = roadbridge_shop(slash_otx_wall, x_face_id=sue_str)
+    x_roadbridge = roadbridge_shop(sue_str, x_otx_wall=slash_otx_wall)
     x1_road_bridge_json = f"""{{
   "event_id": 0,
   "face_id": "{sue_str}",
@@ -508,7 +509,7 @@ def test_get_roadbridge_from_dict_ReturnsObj():
     clean_inx = "propre"
     event7 = 7
     slash_otx_wall = "/"
-    x_roadbridge = roadbridge_shop(slash_otx_wall, x_face_id=sue_str, x_event_id=event7)
+    x_roadbridge = roadbridge_shop(sue_str, event7, x_otx_wall=slash_otx_wall)
     x_roadbridge.set_otx2inx(clean_otx, clean_inx)
     x_roadbridge.set_idea("bob", "bobito")
 
@@ -551,7 +552,7 @@ def test_RoadBridge_all_otx_parent_roads_exist_ReturnsObj_RoadUnit():
     clean_otx_str = "clean"
     clean_otx_road = f"{clean_otx_parent_road}{otx_r_wall}{clean_otx_str}"
 
-    x_roadbridge = roadbridge_shop(otx_r_wall)
+    x_roadbridge = roadbridge_shop(x_otx_wall=otx_r_wall)
     assert x_roadbridge.otx_exists(clean_otx_parent_road) is False
     assert x_roadbridge.otx_exists(clean_otx_road) is False
     assert x_roadbridge.all_otx_parent_roads_exist()
@@ -578,7 +579,7 @@ def test_RoadBridge_is_valid_ReturnsObj_Scenario0_label_str():
     otx_wall = "/"
     casa_otx = f"casa{otx_wall}"
     casa_inx = "casa"
-    ideaunit_roadbridge = roadbridge_shop(otx_wall)
+    ideaunit_roadbridge = roadbridge_shop(x_otx_wall=otx_wall)
     assert ideaunit_roadbridge.is_valid()
 
     # WHEN
@@ -603,7 +604,7 @@ def test_RoadBridge_is_valid_ReturnsObj_Scenario1_road_str():
     clean_inx_road = f"{music_str}{inx_r_wall}{clean_inx_str}"
     # casa_otx = f"casa{otx_wall}"
     # casa_inx = f"casa"
-    x_roadbridge = roadbridge_shop(otx_r_wall, inx_r_wall)
+    x_roadbridge = roadbridge_shop(x_otx_wall=otx_r_wall, x_inx_wall=inx_r_wall)
     x_roadbridge.set_otx2inx(music_str, music_str)
     assert x_roadbridge.is_valid()
     assert x_roadbridge.otx2inx_exists(clean_otx_road, clean_inx_road) is False
@@ -622,7 +623,7 @@ def test_RoadBridge_is_valid_ReturnsObj_Scenario3_RoadUnit():
     clean_otx_str = "clean"
     clean_otx_road = f"{clean_otx_parent_road}{otx_r_wall}{clean_otx_str}"
 
-    x_roadbridge = roadbridge_shop(otx_r_wall)
+    x_roadbridge = roadbridge_shop(x_otx_wall=otx_r_wall)
     assert x_roadbridge.otx_exists(clean_otx_parent_road) is False
     assert x_roadbridge.otx_exists(clean_otx_road) is False
     assert x_roadbridge.all_otx_parent_roads_exist()
@@ -643,3 +644,92 @@ def test_RoadBridge_is_valid_ReturnsObj_Scenario3_RoadUnit():
     assert x_roadbridge.otx_exists(clean_otx_road)
     assert x_roadbridge.all_otx_parent_roads_exist()
     assert x_roadbridge.is_valid()
+
+
+def test_inherit_roadbridge_ReturnsObj_Scenario0():
+    # ESTABLISH
+    zia_str = "Zia"
+    old_roadbridge = roadbridge_shop(zia_str, 3)
+    new_roadbridge = roadbridge_shop(zia_str, 5)
+    # WHEN
+    inherit_roadbridge(new_roadbridge, old_roadbridge)
+
+    # THEN
+    assert new_roadbridge
+    assert new_roadbridge == roadbridge_shop(zia_str, 5)
+
+
+def test_inherit_roadbridge_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_wall():
+    # ESTABLISH
+    sue_str = "Sue"
+    slash_otx_wall = "/"
+    old_roadbridge = roadbridge_shop(sue_str, 0, x_otx_wall=slash_otx_wall)
+    new_roadbridge = roadbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_roadbridge(new_roadbridge, old_roadbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_roadbridge_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_wall():
+    # ESTABLISH
+    sue_str = "Sue"
+    slash_otx_wall = "/"
+    old_roadbridge = roadbridge_shop(sue_str, 0, x_inx_wall=slash_otx_wall)
+    new_roadbridge = roadbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_roadbridge(new_roadbridge, old_roadbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_roadbridge_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_word():
+    # ESTABLISH
+    sue_str = "Sue"
+    x_unknown_word = "UnknownWord"
+    old_roadbridge = roadbridge_shop(sue_str, 0, x_unknown_word=x_unknown_word)
+    new_roadbridge = roadbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_roadbridge(new_roadbridge, old_roadbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_roadbridge_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_id():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+    old_roadbridge = roadbridge_shop(sue_str, 0)
+    new_roadbridge = roadbridge_shop(bob_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_roadbridge(new_roadbridge, old_roadbridge)
+    assert str(excinfo.value) == "Core attributes in conflict"
+
+
+def test_inherit_roadbridge_ReturnsObj_Scenario5_RaiseErrorWhenEventIDsOutOfOrder():
+    # ESTABLISH
+    sue_str = "Sue"
+    old_roadbridge = roadbridge_shop(sue_str, 5)
+    new_roadbridge = roadbridge_shop(sue_str, 1)
+
+    with pytest_raises(Exception) as excinfo:
+        inherit_roadbridge(new_roadbridge, old_roadbridge)
+    assert str(excinfo.value) == "older bridgeunit is not older"
+
+
+def test_inherit_roadbridge_ReturnsObj_Scenario6_inheritFromOld():
+    # ESTABLISH
+    zia_str = "Zia"
+    xio_otx = "Xio"
+    xio_inx = "Xioito"
+    old_roadbridge = roadbridge_shop(zia_str, 3)
+    old_roadbridge.set_otx2inx(xio_otx, xio_inx)
+    new_roadbridge = roadbridge_shop(zia_str, 7)
+    assert new_roadbridge.otx2inx_exists(xio_otx, xio_inx) is False
+
+    # WHEN
+    inherited_roadbridge = inherit_roadbridge(new_roadbridge, old_roadbridge)
+
+    # THEN
+    assert inherited_roadbridge.otx2inx_exists(xio_otx, xio_inx)
