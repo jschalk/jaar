@@ -77,7 +77,7 @@ def get_suita_acctbridge() -> AcctBridge:
 #     return x_groupbridge
 
 
-# def get_invalid_groupid_bridgeunit() -> BridgeUnit:
+# def get_invalid_group_id_bridgeunit() -> BridgeUnit:
 #     sue_otx = f"Xio{default_wall_if_None()}"
 #     sue_inx = f"Sue{default_wall_if_None()}"
 #     zia_otx = "Zia"

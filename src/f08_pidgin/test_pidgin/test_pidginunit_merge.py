@@ -1,25 +1,9 @@
-from src.f01_road.jaar_config import default_unknown_word_if_None
-from src.f01_road.road import default_wall_if_None
-from src.f04_gift.atom_config import face_id_str, type_AcctID_str
-from src.f08_pidgin.pidgin_config import (
-    event_id_str,
-    otx_wall_str,
-    inx_wall_str,
-    unknown_word_str,
-)
-from src.f08_pidgin.pidgin import (
-    pidginunit_shop,
-    get_pidginunit_from_dict,
-    get_pidginunit_from_json,
-    inherit_pidginunit,
-)
+from src.f04_gift.atom_config import type_AcctID_str
+from src.f08_pidgin.pidgin import pidginunit_shop, inherit_pidginunit
 from src.f08_pidgin.examples.example_pidgins import (
     get_clean_roadbridge,
     get_clean_ideabridge,
     get_swim_groupbridge,
-    get_slash_groupbridge,
-    get_slash_ideabridge,
-    get_slash_roadbridge,
     get_suita_acctbridge,
 )
 from pytest import raises as pytest_raises
