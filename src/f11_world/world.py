@@ -14,20 +14,20 @@ from src.f01_road.road import (
 )
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f10_etl.transformers import (
-    etl_jungle_to_zoo_staging,
-    etl_zoo_staging_to_zoo_agg,
-    etl_zoo_agg_to_zoo_valid,
-    etl_zoo_agg_to_zoo_events,
-    etl_zoo_events_to_events_log,
+    etl_farm_to_barn_staging,
+    etl_barn_staging_to_barn_agg,
+    etl_barn_agg_to_barn_valid,
+    etl_barn_agg_to_barn_events,
+    etl_barn_events_to_events_log,
     etl_pidgin_staging_to_agg,
-    etl_zoo_agg_to_pidgin_staging,
+    etl_barn_agg_to_pidgin_staging,
     etl_events_log_to_events_agg,
     get_events_dict_from_events_agg_file,
     etl_pidgin_agg_to_face_dirs,
     etl_face_pidgins_to_event_pidgins,
     etl_event_pidgins_to_pidgin_csv_files,
     etl_event_pidgins_csvs_to_pidgin_jsons,
-    etl_zoo_bricks_to_face_bricks,
+    etl_barn_bricks_to_face_bricks,
     etl_face_bricks_to_event_bricks,
     etl_event_bricks_to_fiscal_bricks,
 )
@@ -48,8 +48,8 @@ class WorldUnit:
     _faces_dir: str = None
     _fiscalunits: set[FiscalID] = None
     _world_dir: str = None
-    _jungle_dir: str = None
-    _zoo_dir: str = None
+    _farm_dir: str = None
+    _barn_dir: str = None
 
     def set_event(self, event_id: TimeLinePoint, face_id: AcctID):
         self.events[event_id] = face_id
@@ -67,50 +67,50 @@ class WorldUnit:
         face_dir = create_path(self._faces_dir, face_id)
         return create_path(face_dir, event_id)
 
-    def set_jungle_dir(self, x_dir: str):
-        self._jungle_dir = x_dir
-        set_dir(self._jungle_dir)
+    def set_farm_dir(self, x_dir: str):
+        self._farm_dir = x_dir
+        set_dir(self._farm_dir)
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._faces_dir = create_path(self._world_dir, "faces")
-        self._zoo_dir = create_path(self._world_dir, "zoo")
+        self._barn_dir = create_path(self._world_dir, "barn")
         set_dir(self._world_dir)
         set_dir(self._faces_dir)
-        set_dir(self._zoo_dir)
+        set_dir(self._barn_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
-    def jungle_to_zoo_staging(self):
-        etl_jungle_to_zoo_staging(self._jungle_dir, self._zoo_dir)
+    def farm_to_barn_staging(self):
+        etl_farm_to_barn_staging(self._farm_dir, self._barn_dir)
 
-    def zoo_staging_to_zoo_agg(self):
-        etl_zoo_staging_to_zoo_agg(self._zoo_dir)
+    def barn_staging_to_barn_agg(self):
+        etl_barn_staging_to_barn_agg(self._barn_dir)
 
-    def zoo_agg_to_zoo_valid(self):
-        etl_zoo_agg_to_zoo_valid(self._zoo_dir, self.legitimate_events())
+    def barn_agg_to_barn_valid(self):
+        etl_barn_agg_to_barn_valid(self._barn_dir, self.legitimate_events())
 
-    def zoo_agg_to_zoo_events(self):
-        etl_zoo_agg_to_zoo_events(self._zoo_dir)
+    def barn_agg_to_barn_events(self):
+        etl_barn_agg_to_barn_events(self._barn_dir)
 
-    def zoo_events_to_events_log(self):
-        etl_zoo_events_to_events_log(self._zoo_dir)
+    def barn_events_to_events_log(self):
+        etl_barn_events_to_events_log(self._barn_dir)
 
     def events_log_to_events_agg(self):
-        etl_events_log_to_events_agg(self._zoo_dir)
+        etl_events_log_to_events_agg(self._barn_dir)
 
     def set_events_from_events_agg_file(self):
-        self.events = get_events_dict_from_events_agg_file(self._zoo_dir)
+        self.events = get_events_dict_from_events_agg_file(self._barn_dir)
 
-    def zoo_agg_to_pidgin_staging(self):
-        etl_zoo_agg_to_pidgin_staging(self.legitimate_events(), self._zoo_dir)
+    def barn_agg_to_pidgin_staging(self):
+        etl_barn_agg_to_pidgin_staging(self.legitimate_events(), self._barn_dir)
 
     def pidgin_staging_to_agg(self):
-        etl_pidgin_staging_to_agg(self._zoo_dir)
+        etl_pidgin_staging_to_agg(self._barn_dir)
 
     def pidgin_agg_to_face_dirs(self):
-        etl_pidgin_agg_to_face_dirs(self._zoo_dir, self._faces_dir)
+        etl_pidgin_agg_to_face_dirs(self._barn_dir, self._faces_dir)
 
     def face_pidgins_to_event_pidgins(self):
         etl_face_pidgins_to_event_pidgins(self._faces_dir)
@@ -121,8 +121,8 @@ class WorldUnit:
     def event_pidgins_csvs_to_pidgin_jsons(self):
         etl_event_pidgins_csvs_to_pidgin_jsons(self._faces_dir)
 
-    def zoo_bricks_to_face_bricks(self):
-        etl_zoo_bricks_to_face_bricks(self._zoo_dir, self._faces_dir)
+    def barn_bricks_to_face_bricks(self):
+        etl_barn_bricks_to_face_bricks(self._barn_dir, self._faces_dir)
 
     def face_bricks_to_event_bricks(self):
         etl_face_bricks_to_event_bricks(self._faces_dir)
@@ -142,7 +142,7 @@ class WorldUnit:
 def worldunit_shop(
     world_id: WorldID = None,
     worlds_dir: str = None,
-    jungle_dir: str = None,
+    farm_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
     _fiscalunits: set[FiscalID] = None,
@@ -158,11 +158,11 @@ def worldunit_shop(
         timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
         _fiscalunits=get_empty_set_if_None(_fiscalunits),
-        _jungle_dir=jungle_dir,
+        _farm_dir=farm_dir,
     )
     x_worldunit._set_world_dirs()
-    if not x_worldunit._jungle_dir:
-        x_worldunit.set_jungle_dir(create_path(x_worldunit._world_dir, "jungle"))
+    if not x_worldunit._farm_dir:
+        x_worldunit.set_farm_dir(create_path(x_worldunit._world_dir, "farm"))
     return x_worldunit
 
 

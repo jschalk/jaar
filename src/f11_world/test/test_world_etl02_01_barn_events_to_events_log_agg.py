@@ -14,7 +14,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario0(
+def test_WorldUnit_barn_events_to_events_log_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -31,7 +31,7 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
+    farm_file_path = create_path(fizz_world._farm_dir, ex_file_name)
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -46,16 +46,16 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario0(
     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
     row5 = [bob_str, event3, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
-    upsert_sheet(jungle_file_path, "example1_br00003", df1)
-    fizz_world.jungle_to_zoo_staging()
-    fizz_world.zoo_staging_to_zoo_agg()
-    fizz_world.zoo_agg_to_zoo_events()
+    upsert_sheet(farm_file_path, "example1_br00003", df1)
+    fizz_world.farm_to_barn_staging()
+    fizz_world.barn_staging_to_barn_agg()
+    fizz_world.barn_agg_to_barn_events()
     events_file_name = "events.xlsx"
-    events_file_path = create_path(fizz_world._zoo_dir, events_file_name)
+    events_file_path = create_path(fizz_world._barn_dir, events_file_name)
     assert os_path_exists(events_file_path) is False
 
     # WHEN
-    fizz_world.zoo_events_to_events_log()
+    fizz_world.barn_events_to_events_log()
 
     # THEN
     assert os_path_exists(events_file_path)
@@ -72,14 +72,14 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario0(
     ]
     invalid_error_str = "invalid because of conflicting event_id"
     invalid_error_str = "invalid because of conflicting event_id"
-    zoo_dir = fizz_world._zoo_dir
+    barn_dir = fizz_world._barn_dir
     src_file_name = "br00003.xlsx"
-    oe_str = "zoo_events"
-    bob_row = [zoo_dir, src_file_name, oe_str, bob_str, event3, ""]
-    sue_row = [zoo_dir, src_file_name, oe_str, sue_str, event1, invalid_error_str]
-    yao1_row = [zoo_dir, src_file_name, oe_str, yao_str, event1, invalid_error_str]
-    yao9_row = [zoo_dir, src_file_name, oe_str, yao_str, event9, ""]
-    # el_rows = [zoo_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
+    oe_str = "barn_events"
+    bob_row = [barn_dir, src_file_name, oe_str, bob_str, event3, ""]
+    sue_row = [barn_dir, src_file_name, oe_str, sue_str, event1, invalid_error_str]
+    yao1_row = [barn_dir, src_file_name, oe_str, yao_str, event1, invalid_error_str]
+    yao9_row = [barn_dir, src_file_name, oe_str, yao_str, event9, ""]
+    # el_rows = [barn_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
     el_rows = [bob_row, sue_row, yao1_row, yao9_row]
     ex_otx_events_df = DataFrame(el_rows, columns=events_otx_columns)
     assert len(gen_events_log_df.columns) == len(ex_otx_events_df.columns)
@@ -93,7 +93,7 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario0(
     assert get_sheet_names(events_file_path) == ["events_log"]
 
 
-def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario1_MultipleBricks(
+def test_WorldUnit_barn_events_to_events_log_CreatesSheets_Scenario1_MultipleBricks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -110,7 +110,7 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
+    farm_file_path = create_path(fizz_world._farm_dir, ex_file_name)
     brick3_columns = [
         face_id_str(),
         event_id_str(),
@@ -135,17 +135,17 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
     b5_0_row = [event3, bob_str, music23_str, "thu", 1]
     b5_1_row = [event9, yao_str, music23_str, "wed", 0]
     b5_df = DataFrame([b5_0_row, b5_1_row], columns=brick5_columns)
-    upsert_sheet(jungle_file_path, "example1_br00003", b3_df)
-    upsert_sheet(jungle_file_path, "example1_br00005", b5_df)
-    fizz_world.jungle_to_zoo_staging()
-    fizz_world.zoo_staging_to_zoo_agg()
-    fizz_world.zoo_agg_to_zoo_events()
+    upsert_sheet(farm_file_path, "example1_br00003", b3_df)
+    upsert_sheet(farm_file_path, "example1_br00005", b5_df)
+    fizz_world.farm_to_barn_staging()
+    fizz_world.barn_staging_to_barn_agg()
+    fizz_world.barn_agg_to_barn_events()
     events_file_name = "events.xlsx"
-    events_file_path = create_path(fizz_world._zoo_dir, events_file_name)
+    events_file_path = create_path(fizz_world._barn_dir, events_file_name)
     assert os_path_exists(events_file_path) is False
 
     # WHEN
-    fizz_world.zoo_events_to_events_log()
+    fizz_world.barn_events_to_events_log()
 
     # THEN
     assert os_path_exists(events_file_path)
@@ -162,17 +162,17 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
     ]
     invalid_error_str = "invalid because of conflicting event_id"
     invalid_error_str = "invalid because of conflicting event_id"
-    zoo_dir = fizz_world._zoo_dir
+    barn_dir = fizz_world._barn_dir
     src3_file_name = "br00003.xlsx"
     src5_file_name = "br00005.xlsx"
-    oe_str = "zoo_events"
-    bob_row = [zoo_dir, src3_file_name, oe_str, bob_str, event3, ""]
-    sue_row = [zoo_dir, src3_file_name, oe_str, sue_str, event1, invalid_error_str]
-    yao1_row = [zoo_dir, src3_file_name, oe_str, yao_str, event1, invalid_error_str]
-    yao9_row = [zoo_dir, src3_file_name, oe_str, yao_str, event9, ""]
-    s5_0_row = [zoo_dir, src5_file_name, oe_str, bob_str, event3, ""]
-    s5_1_row = [zoo_dir, src5_file_name, oe_str, yao_str, event9, ""]
-    # el_rows = [zoo_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
+    oe_str = "barn_events"
+    bob_row = [barn_dir, src3_file_name, oe_str, bob_str, event3, ""]
+    sue_row = [barn_dir, src3_file_name, oe_str, sue_str, event1, invalid_error_str]
+    yao1_row = [barn_dir, src3_file_name, oe_str, yao_str, event1, invalid_error_str]
+    yao9_row = [barn_dir, src3_file_name, oe_str, yao_str, event9, ""]
+    s5_0_row = [barn_dir, src5_file_name, oe_str, bob_str, event3, ""]
+    s5_1_row = [barn_dir, src5_file_name, oe_str, yao_str, event9, ""]
+    # el_rows = [barn_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
     el_rows = [bob_row, sue_row, yao1_row, yao9_row, s5_0_row, s5_1_row]
     ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
     assert len(gen_events_log_df.columns) == len(ex_events_log_df.columns)
