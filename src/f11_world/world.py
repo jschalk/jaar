@@ -30,6 +30,7 @@ from src.f10_etl.transformers import (
     etl_barn_bricks_to_face_bricks,
     etl_face_bricks_to_event_bricks,
     etl_event_bricks_to_fiscal_bricks,
+    get_fiscal_events_by_dirs,
 )
 from dataclasses import dataclass
 
@@ -46,10 +47,11 @@ class WorldUnit:
     events: dict[TimeLinePoint, AcctID] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _faces_dir: str = None
-    _fiscalunits: set[FiscalID] = None
     _world_dir: str = None
     _farm_dir: str = None
     _barn_dir: str = None
+    _fiscalunits: set[FiscalID] = None
+    _fiscal_events: dict[FiscalID, list[TimeLinePoint]] = None
 
     def set_event(self, event_id: TimeLinePoint, face_id: AcctID):
         self.events[event_id] = face_id
@@ -60,12 +62,15 @@ class WorldUnit:
     def get_event(self, event_id: TimeLinePoint) -> bool:
         return self.events.get(event_id)
 
-    def legitimate_events(self) -> set[int]:
+    def legitimate_events(self) -> set[TimeLinePoint]:
         return set(self.events.keys())
 
     def _event_dir(self, face_id: AcctID, event_id: TimeLinePoint) -> str:
         face_dir = create_path(self._faces_dir, face_id)
         return create_path(face_dir, event_id)
+
+    def _set_fiscal_events(self):
+        self._fiscal_events = get_fiscal_events_by_dirs(self._faces_dir)
 
     def set_farm_dir(self, x_dir: str):
         self._farm_dir = x_dir
@@ -129,6 +134,7 @@ class WorldUnit:
 
     def event_bricks_to_fiscal_bricks(self):
         etl_event_bricks_to_fiscal_bricks(self._faces_dir)
+        self._set_fiscal_events()
 
     def get_dict(self) -> dict:
         return {
@@ -159,6 +165,7 @@ def worldunit_shop(
         events={},
         _fiscalunits=get_empty_set_if_None(_fiscalunits),
         _farm_dir=farm_dir,
+        _fiscal_events={},
     )
     x_worldunit._set_world_dirs()
     if not x_worldunit._farm_dir:

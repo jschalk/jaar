@@ -1,14 +1,18 @@
-from src.f00_instrument.file import create_path
+from src.f00_instrument.file import create_path, set_dir
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import upsert_sheet, barn_valid_str, sheet_exists
-from src.f10_etl.transformers import etl_event_bricks_to_fiscal_bricks
+from src.f10_etl.transformers import (
+    etl_event_bricks_to_fiscal_bricks,
+    get_fiscal_events_by_dirs,
+)
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
+from os.path import exists as os_path_exists
 
 
 def test_etl_event_bricks_to_fiscal_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
@@ -95,3 +99,46 @@ def test_etl_event_bricks_to_fiscal_bricks_CreatesFaceBrickSheets_Scenario0_Mult
     pandas_assert_frame_equal(gen_e7_music23_df, example_event7_df)
     pandas_assert_frame_equal(gen_e9_music23_df, expected_e9_music23_df)
     pandas_assert_frame_equal(gen_e9_music55_df, expected_e9_music55_df)
+
+
+def test_get_fiscal_events_by_dirs_SetsAttr(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_str = "Sue"
+    zia_str = "Zia"
+    event3 = 3
+    event7 = 7
+    event9 = 9
+    music23_str = "music23"
+    music55_str = "music55"
+    x_etl_dir = get_test_etl_dir()
+    x_faces_dir = create_path(x_etl_dir, "faces")
+    sue_dir = create_path(x_faces_dir, sue_str)
+    zia_dir = create_path(x_faces_dir, zia_str)
+    event3_dir = create_path(sue_dir, event3)
+    event7_dir = create_path(zia_dir, event7)
+    event9_dir = create_path(zia_dir, event9)
+    e3_music23_dir = create_path(event3_dir, music23_str)
+    e7_music23_dir = create_path(event7_dir, music23_str)
+    e9_music23_dir = create_path(event9_dir, music23_str)
+    e9_music55_dir = create_path(event9_dir, music55_str)
+    set_dir(e3_music23_dir)
+    set_dir(e7_music23_dir)
+    set_dir(e9_music23_dir)
+    set_dir(e9_music55_dir)
+    print(f"{e3_music23_dir=}")
+    print(f"{e7_music23_dir=}")
+    print(f"{e9_music23_dir=}")
+    print(f"{e9_music55_dir=}")
+    assert os_path_exists(e3_music23_dir)
+    assert os_path_exists(e7_music23_dir)
+    assert os_path_exists(e9_music23_dir)
+    assert os_path_exists(e9_music55_dir)
+
+    # WHEN
+    x_fiscal_events = get_fiscal_events_by_dirs(x_faces_dir)
+
+    # THEN
+    assert x_fiscal_events == {
+        music23_str: [event3, event7, event9],
+        music55_str: [event9],
+    }

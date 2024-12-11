@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file
-from src.f01_road.finance_tran import TimeLinePoint
+from src.f01_road.finance_tran import TimeLinePoint, FiscalID
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_brick.brick_config import (
     get_brick_numbers,
@@ -27,6 +27,7 @@ from src.f10_etl.pidgin_agg import (
 )
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
+from os import listdir as os_listdir
 from json import dumps as json_dumps
 
 
@@ -173,13 +174,13 @@ class ZooStagingToZooAggTransformer:
         )
 
 
-def etl_barn_agg_to_barn_valid(barn_dir: str, legitimate_events: set[int]):
+def etl_barn_agg_to_barn_valid(barn_dir: str, legitimate_events: set[TimeLinePoint]):
     transformer = ZooAggToZooValidTransformer(barn_dir, legitimate_events)
     transformer.transform()
 
 
 class ZooAggToZooValidTransformer:
-    def __init__(self, barn_dir: str, legitimate_events: set[int]):
+    def __init__(self, barn_dir: str, legitimate_events: set[TimeLinePoint]):
         self.barn_dir = barn_dir
         self.legitimate_events = legitimate_events
 
@@ -306,30 +307,40 @@ def get_events_dict_from_events_agg_file(barn_dir) -> dict[int, str]:
 
 
 def barn_agg_single_to_pidgin_staging(
-    pidgin_category: str, legitimate_events: set[int], barn_dir: str
+    pidgin_category: str, legitimate_events: set[TimeLinePoint], barn_dir: str
 ):
     x_events = legitimate_events
     transformer = ZooAggToStagingTransformer(barn_dir, pidgin_category, x_events)
     transformer.transform()
 
 
-def etl_barn_agg_to_pidgin_acct_staging(legitimate_events: set[str], barn_dir: str):
+def etl_barn_agg_to_pidgin_acct_staging(
+    legitimate_events: set[TimeLinePoint], barn_dir: str
+):
     barn_agg_single_to_pidgin_staging("bridge_acct_id", legitimate_events, barn_dir)
 
 
-def etl_barn_agg_to_pidgin_group_staging(legitimate_events: set[str], barn_dir: str):
+def etl_barn_agg_to_pidgin_group_staging(
+    legitimate_events: set[TimeLinePoint], barn_dir: str
+):
     barn_agg_single_to_pidgin_staging("bridge_group_id", legitimate_events, barn_dir)
 
 
-def etl_barn_agg_to_pidgin_idea_staging(legitimate_events: set[str], barn_dir: str):
+def etl_barn_agg_to_pidgin_idea_staging(
+    legitimate_events: set[TimeLinePoint], barn_dir: str
+):
     barn_agg_single_to_pidgin_staging("bridge_idea", legitimate_events, barn_dir)
 
 
-def etl_barn_agg_to_pidgin_road_staging(legitimate_events: set[str], barn_dir: str):
+def etl_barn_agg_to_pidgin_road_staging(
+    legitimate_events: set[TimeLinePoint], barn_dir: str
+):
     barn_agg_single_to_pidgin_staging("bridge_road", legitimate_events, barn_dir)
 
 
-def etl_barn_agg_to_pidgin_staging(legitimate_events: set[str], barn_dir: str):
+def etl_barn_agg_to_pidgin_staging(
+    legitimate_events: set[TimeLinePoint], barn_dir: str
+):
     etl_barn_agg_to_pidgin_acct_staging(legitimate_events, barn_dir)
     etl_barn_agg_to_pidgin_group_staging(legitimate_events, barn_dir)
     etl_barn_agg_to_pidgin_idea_staging(legitimate_events, barn_dir)
@@ -510,13 +521,13 @@ def etl_face_pidgin_to_event_pidgins(face_dir: str):
             split_excel_into_events_dirs(face_pidgin_path, face_dir, agg_sheet_name)
 
 
-def get_face_dirs(faces_dir: str) -> list[str]:
-    face_dirs = get_dir_file_strs(faces_dir, include_dirs=True, include_files=False)
-    return list(face_dirs.keys())
+def get_level1_dirs(x_dir: str) -> list[str]:
+    level1_dirs = get_dir_file_strs(x_dir, include_dirs=True, include_files=False)
+    return list(level1_dirs.keys())
 
 
 def etl_face_pidgins_to_event_pidgins(faces_dir: str):
-    for face_id_dir in get_face_dirs(faces_dir):
+    for face_id_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id_dir)
         etl_face_pidgin_to_event_pidgins(face_dir)
 
@@ -538,7 +549,7 @@ def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
 
 def _get_all_faces_dir_event_dirs(faces_dir) -> list[str]:
     full_event_dirs = []
-    for face_id_dir in get_face_dirs(faces_dir):
+    for face_id_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id_dir)
         event_dirs = get_dir_file_strs(face_dir, include_dirs=True, include_files=False)
         full_event_dirs.extend(
@@ -576,7 +587,7 @@ def etl_barn_bricks_to_face_bricks(barn_dir: str, faces_dir: str):
 
 
 def etl_face_bricks_to_event_bricks(faces_dir: str):
-    for face_id_dir in get_face_dirs(faces_dir):
+    for face_id_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id_dir)
         for face_br_ref in get_existing_excel_brick_file_refs(face_dir):
             face_brick_path = create_path(face_dir, face_br_ref.file_name)
@@ -600,3 +611,18 @@ def etl_event_bricks_to_fiscal_bricks(faces_dir: str):
                 file_name=event_br_ref.brick_number,
                 sheet_name="barn_valid",
             )
+
+
+def get_fiscal_events_by_dirs(faces_dir: str) -> dict[FiscalID, set[TimeLinePoint]]:
+    fiscal_events = {}
+    for face_id in get_level1_dirs(faces_dir):
+        face_dir = create_path(faces_dir, face_id)
+        for event_id in get_level1_dirs(face_dir):
+            event_dir = create_path(face_dir, event_id)
+            for fiscal_id in get_level1_dirs(event_dir):
+                if fiscal_events.get(fiscal_id) != None:
+                    events_list = fiscal_events.get(fiscal_id)
+                    events_list.append(int(event_id))
+                else:
+                    fiscal_events[fiscal_id] = [int(event_id)]
+    return fiscal_events
