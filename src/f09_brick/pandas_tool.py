@@ -100,19 +100,19 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def barn_staging_str():
-    return "barn_staging"
+def forge_staging_str():
+    return "forge_staging"
 
 
-def barn_agg_str():
-    return "barn_agg"
+def forge_agg_str():
+    return "forge_agg"
 
 
-def barn_valid_str():
-    return "barn_valid"
+def forge_valid_str():
+    return "forge_valid"
 
 
-def get_barn_staging_grouping_with_all_values_equal_df(
+def get_forge_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, group_by_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
@@ -122,9 +122,9 @@ def get_barn_staging_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql(barn_staging_str(), conn, index=False)
+        x_df.to_sql(forge_staging_str(), conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table=barn_staging_str(),
+            x_table=forge_staging_str(),
             group_by_columns=grouping_columns,
             value_columns=value_columns,
         )

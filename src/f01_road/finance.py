@@ -183,7 +183,7 @@ def _allot_missing_scale(
 def _calc_allot_value(obj, total_credit_belief, scale_number, grain_unit):
     if total_credit_belief == 0:
         return 0
-    # Determine the allot based on credit_belief
+    # calculate the allot based on credit_belief
     allot_amt = (obj / total_credit_belief) * scale_number
     # Adjust to the nearest grain unit
     return round(allot_amt / grain_unit) * grain_unit

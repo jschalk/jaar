@@ -2,17 +2,15 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
-from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, barn_staging_str
-from src.f11_world.world import worldunit_shop
-from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
+from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, forge_staging_str
+from src.f10_etl.transformers import etl_mine_to_forge_staging
+from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_farm_to_barn_staging_CreatesZooFiles(env_dir_setup_cleanup):
+def test_etl_mine_to_forge_staging_CreatesZooFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
     sue_str = "Sue"
     event_1 = 1
     event_2 = 2
@@ -21,8 +19,9 @@ def test_WorldUnit_farm_to_barn_staging_CreatesZooFiles(env_dir_setup_cleanup):
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    farm_file_path = create_path(fizz_world._farm_dir, ex_file_name)
-    barn_file_path = create_path(fizz_world._barn_dir, "br00003.xlsx")
+    mine_dir = create_path(get_test_etl_dir(), "mine")
+    forge_dir = create_path(get_test_etl_dir(), "forge")
+    mine_file_path = create_path(mine_dir, ex_file_name)
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -49,18 +48,19 @@ def test_WorldUnit_farm_to_barn_staging_CreatesZooFiles(env_dir_setup_cleanup):
     br00003_ex1_str = "example1_br00003"
     br00003_ex2_str = "example2_br00003"
     br00003_ex3_str = "example3_br00003"
-    upsert_sheet(farm_file_path, br00003_ex1_str, df1)
-    upsert_sheet(farm_file_path, br00003_ex2_str, df2)
-    upsert_sheet(farm_file_path, br00003_ex3_str, df3)
-    assert os_path_exists(barn_file_path) is False
+    upsert_sheet(mine_file_path, br00003_ex1_str, df1)
+    upsert_sheet(mine_file_path, br00003_ex2_str, df2)
+    upsert_sheet(mine_file_path, br00003_ex3_str, df3)
+    forge_file_path = create_path(forge_dir, "br00003.xlsx")
+    assert os_path_exists(forge_file_path) is False
 
     # WHEN
-    fizz_world.farm_to_barn_staging()
+    etl_mine_to_forge_staging(mine_dir, forge_dir)
 
     # THEN
-    print(f"{barn_file_path=}")
-    assert os_path_exists(barn_file_path)
-    x_df = pandas_read_excel(barn_file_path, sheet_name=barn_staging_str())
+    print(f"{forge_file_path=}")
+    assert os_path_exists(forge_file_path)
+    x_df = pandas_read_excel(forge_file_path, sheet_name=forge_staging_str())
     assert set(brick_columns).issubset(set(x_df.columns))
     file_dir_str = "file_dir"
     file_name_str = "file_name"
@@ -69,4 +69,4 @@ def test_WorldUnit_farm_to_barn_staging_CreatesZooFiles(env_dir_setup_cleanup):
     assert file_name_str in set(x_df.columns)
     assert sheet_name_str in set(x_df.columns)
     assert len(x_df) == 5
-    assert get_sheet_names(barn_file_path) == [barn_staging_str()]
+    assert get_sheet_names(forge_file_path) == [forge_staging_str()]

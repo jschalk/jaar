@@ -13,14 +13,14 @@ from src.f08_pidgin.pidgin_config import (
     otx_road_str,
     unknown_word_str,
 )
-from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, barn_agg_str
-from src.f10_etl.transformers import etl_barn_agg_to_pidgin_road_staging
+from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, forge_agg_str
+from src.f10_etl.transformers import etl_forge_agg_to_pidgin_road_staging
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
+def test_etl_forge_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -31,8 +31,8 @@ def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
     bob_inx = "Bobito"
     m_str = "music23"
     event7 = 7
-    x_barn_dir = get_test_etl_dir()
-    br00117_file_path = create_path(x_barn_dir, "br00117.xlsx")
+    x_forge_dir = get_test_etl_dir()
+    br00117_file_path = create_path(x_forge_dir, "br00117.xlsx")
     br00117_columns = [
         face_id_str(),
         event_id_str(),
@@ -46,12 +46,12 @@ def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
     sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
-    upsert_sheet(br00117_file_path, barn_agg_str(), br00117_df)
-    pidgin_path = create_path(x_barn_dir, "pidgin.xlsx")
+    upsert_sheet(br00117_file_path, forge_agg_str(), br00117_df)
+    pidgin_path = create_path(x_forge_dir, "pidgin.xlsx")
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_barn_agg_to_pidgin_road_staging({event7}, x_barn_dir)
+    etl_forge_agg_to_pidgin_road_staging({event7}, x_forge_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -81,7 +81,7 @@ def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
     assert get_sheet_names(pidgin_path) == [road_staging_str]
 
 
-def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBricksFiles(
+def test_etl_forge_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBricksFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -97,8 +97,8 @@ def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBrick
     event2 = 2
     event5 = 5
     event7 = 7
-    x_barn_dir = get_test_etl_dir()
-    br00117_file_path = create_path(x_barn_dir, "br00117.xlsx")
+    x_forge_dir = get_test_etl_dir()
+    br00117_file_path = create_path(x_forge_dir, "br00117.xlsx")
     br00117_columns = [
         face_id_str(),
         event_id_str(),
@@ -108,7 +108,7 @@ def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBrick
         otx_road_str(),
         inx_road_str(),
     ]
-    br00045_file_path = create_path(x_barn_dir, "br00045.xlsx")
+    br00045_file_path = create_path(x_forge_dir, "br00045.xlsx")
     br00045_columns = [
         face_id_str(),
         event_id_str(),
@@ -125,16 +125,16 @@ def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBrick
     yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
-    upsert_sheet(br00117_file_path, barn_agg_str(), br00117_df)
+    upsert_sheet(br00117_file_path, forge_agg_str(), br00117_df)
     br00045_rows = [sue2, sue3, yao1]
     br00045_df = DataFrame(br00045_rows, columns=br00045_columns)
-    upsert_sheet(br00045_file_path, barn_agg_str(), br00045_df)
-    pidgin_path = create_path(x_barn_dir, "pidgin.xlsx")
+    upsert_sheet(br00045_file_path, forge_agg_str(), br00045_df)
+    pidgin_path = create_path(x_forge_dir, "pidgin.xlsx")
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
     legitimate_events = {event1, event2, event5, event7}
-    etl_barn_agg_to_pidgin_road_staging(legitimate_events, x_barn_dir)
+    etl_forge_agg_to_pidgin_road_staging(legitimate_events, x_forge_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -169,7 +169,7 @@ def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBrick
     assert get_sheet_names(pidgin_path) == [road_staging_str]
 
 
-def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_etl_forge_agg_to_pidgin_road_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -184,8 +184,8 @@ def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario2_WorldUnit_eve
     event1 = 1
     event2 = 2
     event5 = 5
-    x_barn_dir = get_test_etl_dir()
-    br00117_file_path = create_path(x_barn_dir, "br00117.xlsx")
+    x_forge_dir = get_test_etl_dir()
+    br00117_file_path = create_path(x_forge_dir, "br00117.xlsx")
     br00117_columns = [
         face_id_str(),
         event_id_str(),
@@ -195,7 +195,7 @@ def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario2_WorldUnit_eve
         otx_road_str(),
         inx_road_str(),
     ]
-    br00045_file_path = create_path(x_barn_dir, "br00045.xlsx")
+    br00045_file_path = create_path(x_forge_dir, "br00045.xlsx")
     br00045_columns = [
         face_id_str(),
         event_id_str(),
@@ -212,16 +212,16 @@ def test_etl_barn_agg_to_pidgin_road_staging_CreatesFile_Scenario2_WorldUnit_eve
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
-    upsert_sheet(br00117_file_path, barn_agg_str(), br00117_df)
+    upsert_sheet(br00117_file_path, forge_agg_str(), br00117_df)
     br00045_rows = [sue2, sue3, yao1]
     br00045_df = DataFrame(br00045_rows, columns=br00045_columns)
-    upsert_sheet(br00045_file_path, barn_agg_str(), br00045_df)
-    pidgin_path = create_path(x_barn_dir, "pidgin.xlsx")
+    upsert_sheet(br00045_file_path, forge_agg_str(), br00045_df)
+    pidgin_path = create_path(x_forge_dir, "pidgin.xlsx")
     legitimate_events = {event2, event5}
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_barn_agg_to_pidgin_road_staging(legitimate_events, x_barn_dir)
+    etl_forge_agg_to_pidgin_road_staging(legitimate_events, x_forge_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)

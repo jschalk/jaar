@@ -5,18 +5,18 @@ from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import (
     sheet_exists,
     upsert_sheet,
-    barn_agg_str,
-    barn_valid_str,
+    forge_agg_str,
+    forge_valid_str,
 )
-from src.f10_etl.transformers import etl_barn_agg_to_barn_valid
-from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.f11_world.world import worldunit_shop
+from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_barn_agg_to_barn_valid_CreatesSheets_Scenario0(
+def test_WorldUnit_forge_agg_to_forge_valid_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -41,30 +41,35 @@ def test_WorldUnit_barn_agg_to_barn_valid_CreatesSheets_Scenario0(
     row2 = [sue_str, event1, music23_str, hour7am, minute_420]
     row3 = [yao_str, event3, music23_str, hour7am, minute_420]
     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
-    barn_dir = create_path(get_test_etl_dir(), "barn")
-    barn_file_path = create_path(barn_dir, "br00003.xlsx")
-    barn_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
-    upsert_sheet(barn_file_path, barn_agg_str(), barn_agg_df)
+    fizz_world = worldunit_shop("fizz")
+    fizz_world.set_event(event1, sue_str)
+    fizz_world.set_event(event9, yao_str)
     legitimate_events = {event1, event9}
-    assert sheet_exists(barn_file_path, barn_valid_str()) is False
+    assert fizz_world.legitimate_events() == legitimate_events
+    forge_file_path = create_path(fizz_world._forge_dir, "br00003.xlsx")
+    forge_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
+    upsert_sheet(forge_file_path, forge_agg_str(), forge_agg_df)
+    assert sheet_exists(forge_file_path, forge_valid_str()) is False
 
     # WHEN
-    etl_barn_agg_to_barn_valid(barn_dir, legitimate_events)
+    fizz_world.forge_agg_to_forge_valid()
 
     # THEN
-    assert sheet_exists(barn_file_path, barn_valid_str())
-    gen_barn_valid_df = pandas_read_excel(barn_file_path, sheet_name=barn_valid_str())
-    print(f"{gen_barn_valid_df.columns=}")
-    example_barn_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
-    assert len(gen_barn_valid_df.columns) == len(example_barn_valid_df.columns)
-    assert list(gen_barn_valid_df.columns) == list(example_barn_valid_df.columns)
-    assert len(gen_barn_valid_df) > 0
-    assert len(gen_barn_valid_df) == 3
-    assert len(gen_barn_valid_df) == len(example_barn_valid_df)
-    pandas_assert_frame_equal(gen_barn_valid_df, example_barn_valid_df)
+    assert sheet_exists(forge_file_path, forge_valid_str())
+    gen_forge_valid_df = pandas_read_excel(
+        forge_file_path, sheet_name=forge_valid_str()
+    )
+    print(f"{gen_forge_valid_df.columns=}")
+    example_forge_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
+    assert len(gen_forge_valid_df.columns) == len(example_forge_valid_df.columns)
+    assert list(gen_forge_valid_df.columns) == list(example_forge_valid_df.columns)
+    assert len(gen_forge_valid_df) > 0
+    assert len(gen_forge_valid_df) == 3
+    assert len(gen_forge_valid_df) == len(example_forge_valid_df)
+    pandas_assert_frame_equal(gen_forge_valid_df, example_forge_valid_df)
 
 
-# def test_WorldUnit_barn_agg_to_barn_valid_CreatesSheets_Scenario1(
+# def test_WorldUnit_forge_agg_to_forge_valid_CreatesSheets_Scenario1(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -80,10 +85,10 @@ def test_WorldUnit_barn_agg_to_barn_valid_CreatesSheets_Scenario0(
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_file_name = "fizzbuzz.xlsx"
-#     farm_dir = create_path(get_test_etl_dir(), "farm")
-#     barn_dir = create_path(get_test_etl_dir(), "barn")
-#     farm_file_path = create_path(farm_dir, ex_file_name)
-#     barn_file_path = create_path(barn_dir, "br00003.xlsx")
+#     mine_dir = create_path(get_test_etl_dir(), "mine")
+#     forge_dir = create_path(get_test_etl_dir(), "forge")
+#     mine_file_path = create_path(mine_dir, ex_file_name)
+#     forge_file_path = create_path(forge_dir, "br00003.xlsx")
 #     brick_columns = [
 #         face_id_str(),
 #         event_id_str(),
@@ -98,15 +103,15 @@ def test_WorldUnit_barn_agg_to_barn_valid_CreatesSheets_Scenario0(
 #     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
 #     row5 = [bob_str, event3, music23_str, hour7am, minute_420]
 #     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
-#     upsert_sheet(farm_file_path, "example1_br00003", df1)
-#     etl_farm_to_barn_staging(farm_dir, barn_dir)
-#     etl_barn_staging_to_barn_agg(barn_dir)
+#     upsert_sheet(mine_file_path, "example1_br00003", df1)
+#     etl_mine_to_forge_staging(mine_dir, forge_dir)
+#     etl_forge_staging_to_forge_agg(forge_dir)
 
 #     # WHEN
-#     etl_barn_agg_to_barn_valid(barn_dir)
+#     etl_forge_agg_to_forge_valid(forge_dir)
 
 #     # THEN
-#     gen_otx_events_df = pandas_read_excel(barn_file_path, sheet_name="barn_valid")
+#     gen_otx_events_df = pandas_read_excel(forge_file_path, sheet_name="forge_valid")
 #     print(f"{gen_otx_events_df.columns=}")
 #     events_otx_columns = [face_id_str(), event_id_str(), "note"]
 #     bob_row = [bob_str, event3, ""]
