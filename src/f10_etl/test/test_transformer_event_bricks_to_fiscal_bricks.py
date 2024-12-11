@@ -139,6 +139,6 @@ def test_get_fiscal_events_by_dirs_SetsAttr(env_dir_setup_cleanup):
 
     # THEN
     assert x_fiscal_events == {
-        music23_str: [event3, event7, event9],
-        music55_str: [event9],
+        music23_str: {event3, event7, event9},
+        music55_str: {event9},
     }

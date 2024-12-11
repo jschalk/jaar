@@ -136,8 +136,8 @@ def test_WorldUnit_set_fiscal_events_SetsAttr(env_dir_setup_cleanup):
 
     # THEN
     assert fizz_world._fiscal_events == {
-        music23_str: [event3, event7, event9],
-        music55_str: [event9],
+        music23_str: {event3, event7, event9},
+        music55_str: {event9},
     }
 
 
@@ -212,6 +212,6 @@ def test_WorldUnit_event_bricks_to_fiscal_bricks_Sets_fiscal_events(
     assert sheet_exists(e9_music23_br00003_filepath, barn_valid_str())
     assert sheet_exists(e9_music55_br00003_filepath, barn_valid_str())
     assert fizz_world._fiscal_events == {
-        music23_str: [event3, event7, event9],
-        music55_str: [event9],
+        music23_str: {event3, event7, event9},
+        music55_str: {event9},
     }

@@ -622,7 +622,7 @@ def get_fiscal_events_by_dirs(faces_dir: str) -> dict[FiscalID, set[TimeLinePoin
             for fiscal_id in get_level1_dirs(event_dir):
                 if fiscal_events.get(fiscal_id) != None:
                     events_list = fiscal_events.get(fiscal_id)
-                    events_list.append(int(event_id))
+                    events_list.add(int(event_id))
                 else:
-                    fiscal_events[fiscal_id] = [int(event_id)]
+                    fiscal_events[fiscal_id] = {int(event_id)}
     return fiscal_events
