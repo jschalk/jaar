@@ -6,7 +6,7 @@ from src.f00_instrument.dict_toolbox import (
 )
 from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
-    AcctID,
+    FaceID,
     FiscalID,
     WorldID,
     TimeLineLabel,
@@ -31,6 +31,7 @@ from src.f10_etl.transformers import (
     etl_face_bricks_to_event_bricks,
     etl_event_bricks_to_fiscal_bricks,
     get_fiscal_events_by_dirs,
+    get_pidgin_events_by_dirs,
 )
 from dataclasses import dataclass
 
@@ -44,16 +45,17 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     current_time: TimeLinePoint = None
-    events: dict[TimeLinePoint, AcctID] = None
+    events: dict[TimeLinePoint, FaceID] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _faces_dir: str = None
     _world_dir: str = None
     _farm_dir: str = None
     _barn_dir: str = None
     _fiscalunits: set[FiscalID] = None
-    _fiscal_events: dict[FiscalID, list[TimeLinePoint]] = None
+    _fiscal_events: dict[FiscalID, set[TimeLinePoint]] = None
+    _pidgin_events: dict[FaceID, set[TimeLinePoint]] = None
 
-    def set_event(self, event_id: TimeLinePoint, face_id: AcctID):
+    def set_event(self, event_id: TimeLinePoint, face_id: FaceID):
         self.events[event_id] = face_id
 
     def event_exists(self, event_id: TimeLinePoint) -> bool:
@@ -65,12 +67,15 @@ class WorldUnit:
     def legitimate_events(self) -> set[TimeLinePoint]:
         return set(self.events.keys())
 
-    def _event_dir(self, face_id: AcctID, event_id: TimeLinePoint) -> str:
+    def _event_dir(self, face_id: FaceID, event_id: TimeLinePoint) -> str:
         face_dir = create_path(self._faces_dir, face_id)
         return create_path(face_dir, event_id)
 
     def _set_fiscal_events(self):
         self._fiscal_events = get_fiscal_events_by_dirs(self._faces_dir)
+
+    def _set_pidgin_events(self):
+        self._pidgin_events = get_pidgin_events_by_dirs(self._faces_dir)
 
     def set_farm_dir(self, x_dir: str):
         self._farm_dir = x_dir
@@ -125,6 +130,7 @@ class WorldUnit:
 
     def event_pidgins_csvs_to_pidgin_jsons(self):
         etl_event_pidgins_csvs_to_pidgin_jsons(self._faces_dir)
+        self._set_pidgin_events()
 
     def barn_bricks_to_face_bricks(self):
         etl_barn_bricks_to_face_bricks(self._barn_dir, self._faces_dir)
@@ -166,6 +172,7 @@ def worldunit_shop(
         _fiscalunits=get_empty_set_if_None(_fiscalunits),
         _farm_dir=farm_dir,
         _fiscal_events={},
+        _pidgin_events={},
     )
     x_worldunit._set_world_dirs()
     if not x_worldunit._farm_dir:

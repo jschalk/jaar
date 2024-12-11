@@ -1,5 +1,5 @@
 from src.f00_instrument.file import (
-    create_dir,
+    set_dir,
     save_file,
     create_path,
     get_dir_filenames,
@@ -183,7 +183,7 @@ class pandas_tools_ExcelWriterException(Exception):
 
 def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
     # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
-    create_dir(os_path_dirname(file_path))
+    set_dir(os_path_dirname(file_path))
     """
     Updates or creates an Excel sheet with a specified DataFrame.
 
@@ -242,7 +242,7 @@ def split_excel_into_dirs(
         column_name (str): Column to split by unique values.
     """
     # Create the output directory if it doesn't exist
-    create_dir(output_dir)
+    set_dir(output_dir)
     df = pandas_read_excel(input_file, sheet_name=sheet_name)
 
     # Check if the column exists
@@ -261,7 +261,7 @@ def split_excel_into_dirs(
             safe_value = str(value).replace("/", "_").replace("\\", "_")
             subdirectory = create_path(output_dir, safe_value)
             # Create the subdirectory if it doesn't exist
-            create_dir(subdirectory)
+            set_dir(subdirectory)
             # Define the output file path
             output_file = create_path(subdirectory, f"{file_name}.xlsx")
             upsert_sheet(output_file, sheet_name, filtered_df)

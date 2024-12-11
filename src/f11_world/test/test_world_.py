@@ -29,6 +29,7 @@ def test_WorldUnit_Exists():
     assert not x_world._barn_dir
     assert not x_world._fiscalunits
     assert not x_world._fiscal_events
+    assert not x_world._pidgin_events
 
 
 def test_WorldUnit_set_farm_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
@@ -119,6 +120,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world._faces_dir == create_path(world_dir, "faces")
     assert x_world._fiscalunits == world2_fiscalunits
     assert x_world._fiscal_events == {}
+    assert x_world._pidgin_events == {}
 
 
 def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):

@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, open_file, save_file
+from src.f00_instrument.file import create_path, open_file, save_file, set_dir
 from src.f01_road.road import default_wall_if_None
 from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f04_gift.atom_config import face_id_str, type_RoadUnit_str
@@ -22,6 +22,7 @@ from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet, open_csv
 from src.f10_etl.transformers import (
     etl_event_pidgin_csvs_to_pidgin_json,
     etl_event_pidgins_csvs_to_pidgin_jsons,
+    get_pidgin_events_by_dirs,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -172,3 +173,44 @@ def test_etl_event_pidgins_csvs_to_pidgin_jsons_Scenario0_1Event_road(
     # gen_csv_event3_df = open_csv(event7_dir, "road.csv")
     # print(f"{gen_csv_event3_df=}")
     # pandas_testing_assert_frame_equal(gen_csv_event3_df, e7_road_df)
+
+
+def test_get_pidgin_events_by_dirs_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_str = "Sue"
+    zia_str = "Zia"
+    event3 = 3
+    event5 = 3
+    event7 = 7
+    event9 = 9
+
+    faces_dir = get_test_etl_dir()
+    sue_dir = create_path(faces_dir, sue_str)
+    zia_dir = create_path(faces_dir, zia_str)
+    event3_dir = create_path(zia_dir, event3)
+    event5_dir = create_path(sue_dir, event5)
+    event7_dir = create_path(sue_dir, event7)
+    event9_dir = create_path(sue_dir, event9)
+    pidgin_filename = "pidgin.json"
+    event3_pidgin_file_path = create_path(event3_dir, pidgin_filename)
+    event5_pidgin_file_path = create_path(event5_dir, pidgin_filename)
+    event7_pidgin_file_path = create_path(event7_dir, pidgin_filename)
+    event9_pidgin_file_path = create_path(event9_dir, pidgin_filename)
+    save_file(event3_dir, pidgin_filename, "")
+    set_dir(event5_dir)
+    save_file(event7_dir, pidgin_filename, "")
+    save_file(event9_dir, pidgin_filename, "")
+    print(f"{event3_pidgin_file_path=}")
+    print(f"{event5_pidgin_file_path=}")
+    print(f"{event7_pidgin_file_path=}")
+    print(f"{event9_pidgin_file_path=}")
+    assert os_path_exists(event3_pidgin_file_path)
+    assert os_path_exists(event5_pidgin_file_path) is False
+    assert os_path_exists(event7_pidgin_file_path)
+    assert os_path_exists(event9_pidgin_file_path)
+
+    # WHEN
+    pidgin_events = get_pidgin_events_by_dirs(faces_dir)
+
+    # THEN
+    assert pidgin_events == {sue_str: {event7, event9}, zia_str: {event3}}

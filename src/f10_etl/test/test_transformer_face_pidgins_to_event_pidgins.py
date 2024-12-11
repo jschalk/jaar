@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, create_dir, get_dir_filenames
+from src.f00_instrument.file import create_path, set_dir, get_dir_filenames, save_file
 from src.f04_gift.atom_config import face_id_str
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
@@ -45,7 +45,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario0_Nofile(env_dir_setup_cleanup
     assert sheet_exists(face_pidgin_file_path, acct_agg_str) is False
     assert len(get_dir_filenames(sue_face_dir)) == 0
 
-    create_dir(sue_face_dir)
+    set_dir(sue_face_dir)
     assert os_path_exists(sue_face_dir)
     # WHEN
     etl_face_pidgin_to_event_pidgins(sue_face_dir)

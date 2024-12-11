@@ -215,7 +215,6 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
 
     if len(face_id_set) == 1:
         x_face_id = face_id_set.pop()
-    print(f"{event_id_set=}")
     if len(event_id_set) == 1:
         x_event_id = event_id_set.pop()
     if len(unknown_word_set) == 1:

@@ -60,14 +60,9 @@ def copy_dir(src_dir: str, dest_dir: str):
         shutil_copytree(src=src_dir, dst=dest_dir)
 
 
-def create_dir(x_dir: str):
-    if not os_path_exists(x_dir):
-        os_makedirs(x_dir)
-
-
 def save_file(dest_dir: str, file_name: str, file_str: str, replace: bool = None):
     replace = True if replace is None else replace
-    create_dir(dest_dir)
+    set_dir(dest_dir)
     file_path = create_path(dest_dir, file_name)
     if (os_path_exists(file_path) and replace) or os_path_exists(file_path) is False:
         with open(file_path, "w") as f:
@@ -108,7 +103,7 @@ def get_dir_file_strs(
     include_dirs = True if include_dirs is None else include_dirs
     include_files = True if include_files is None else include_files
 
-    create_dir(x_dir)
+    set_dir(x_dir)
     dict_x = {}
     for obj_name in os_listdir(x_dir):
         dict_key = None
