@@ -54,6 +54,8 @@ class WorldUnit:
     _fiscalunits: set[FiscalID] = None
     _fiscal_events: dict[FiscalID, set[TimeLinePoint]] = None
     _pidgin_events: dict[FaceID, set[TimeLinePoint]] = None
+    # _fiscal_pidgins: dict fiscal_id: dict [fiscal_event_id, associated_pidgin_event_id]
+    _fiscal_pidgins: dict[FiscalID, dict[TimeLinePoint, TimeLinePoint]] = None
 
     def set_event(self, event_id: TimeLinePoint, face_id: FaceID):
         self.events[event_id] = face_id
@@ -61,7 +63,7 @@ class WorldUnit:
     def event_exists(self, event_id: TimeLinePoint) -> bool:
         return self.events.get(event_id) != None
 
-    def get_event(self, event_id: TimeLinePoint) -> bool:
+    def get_event(self, event_id: TimeLinePoint) -> FaceID:
         return self.events.get(event_id)
 
     def legitimate_events(self) -> set[TimeLinePoint]:
@@ -76,6 +78,37 @@ class WorldUnit:
 
     def _set_pidgin_events(self):
         self._pidgin_events = get_pidgin_events_by_dirs(self._faces_dir)
+
+    def _set_fiscal_pidgins(self):
+        self._fiscal_pidgins = {}
+        for fiscal_id, fiscal_events in self._fiscal_events.items():
+            self._fiscal_pidgins[fiscal_id] = {}
+            for fiscal_event_id in fiscal_events:
+                self._set_fiscal_pidgin_max_prev_pidgin_event_id(
+                    fiscal_id, fiscal_event_id
+                )
+
+    def _set_fiscal_pidgin_max_prev_pidgin_event_id(
+        self, fiscal_id: FiscalID, fiscal_event_id: TimeLinePoint
+    ):
+        fiscal_face_id = self.events.get(fiscal_event_id)
+        if fiscal_face_id is None:
+            exception_str = (
+                f"fiscal_event_id {fiscal_event_id} does not have associated face_id"
+            )
+            raise Exception(exception_str)
+        face_pidgin_event_ids = self._pidgin_events.get(fiscal_face_id)
+        face_pidgin_event_ids = get_empty_set_if_None(face_pidgin_event_ids)
+        max_prev_pidgin_event_id = max(
+            (
+                pidgin_event_id
+                for pidgin_event_id in face_pidgin_event_ids
+                if pidgin_event_id <= fiscal_event_id
+            ),
+            default=None,
+        )
+        x_pidgins = self._fiscal_pidgins[fiscal_id]
+        x_pidgins[fiscal_event_id] = max_prev_pidgin_event_id
 
     def set_mine_dir(self, x_dir: str):
         self._mine_dir = x_dir
@@ -141,6 +174,7 @@ class WorldUnit:
     def event_bricks_to_fiscal_bricks(self):
         etl_event_bricks_to_fiscal_bricks(self._faces_dir)
         self._set_fiscal_events()
+        self._set_fiscal_pidgins()
 
     def get_dict(self) -> dict:
         return {
@@ -173,6 +207,7 @@ def worldunit_shop(
         _mine_dir=mine_dir,
         _fiscal_events={},
         _pidgin_events={},
+        _fiscal_pidgins={},
     )
     x_worldunit._set_world_dirs()
     if not x_worldunit._mine_dir:

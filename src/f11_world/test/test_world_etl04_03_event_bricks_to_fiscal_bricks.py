@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, set_dir
+from src.f00_instrument.file import create_path, set_dir, save_file
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
@@ -10,6 +10,7 @@ from pandas.testing import (
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
+from pytest import raises as pytest_raises
 
 
 def test_world_event_bricks_to_fiscal_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
@@ -45,6 +46,9 @@ def test_world_event_bricks_to_fiscal_bricks_CreatesFaceBrickSheets_Scenario0_Mu
     example_event9_df = DataFrame([zia1, zia2, zia3], columns=br00003_columns)
     br00003_filename = "br00003.xlsx"
     fizz_world = worldunit_shop("fizz")
+    fizz_world.set_event(event3, sue_str)
+    fizz_world.set_event(event7, zia_str)
+    fizz_world.set_event(event9, zia_str)
     sue_dir = create_path(fizz_world._faces_dir, sue_str)
     zia_dir = create_path(fizz_world._faces_dir, zia_str)
     event3_dir = create_path(sue_dir, event3)
@@ -149,7 +153,182 @@ def test_WorldUnit_set_fiscal_events_SetsAttr(env_dir_setup_cleanup):
     }
 
 
-def test_WorldUnit_event_bricks_to_fiscal_bricks_Sets_fiscal_events(
+def test_WorldUnit_set_fiscal_pidgins_Scenario0_RaisesError():
+    # ESTABLISH
+    sue_str = "Sue"
+    event8 = 8
+    music23_str = "music23"
+    fizz_world = worldunit_shop("fizz")
+    fizz_world._pidgin_events = {sue_str: {event8}}
+    fizz_world._fiscal_events = {music23_str: {event8}}
+    assert fizz_world._fiscal_pidgins == {}
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        fizz_world._set_fiscal_pidgins()
+    exception_str = f"fiscal_event_id {event8} does not have associated face_id"
+    assert str(excinfo.value) == exception_str
+
+
+def test_WorldUnit_set_fiscal_pidgins_Scenario1_SetsAttr():
+    # ESTABLISH
+    sue_str = "Sue"
+    event3 = 3
+    event7 = 7
+    event9 = 9
+    music23_str = "music23"
+    fizz_world = worldunit_shop("fizz")
+    fizz_world.set_event(event3, sue_str)
+    fizz_world.set_event(event7, sue_str)
+    fizz_world.set_event(event9, sue_str)
+    assert fizz_world._pidgin_events == {}
+    assert fizz_world._fiscal_events == {}
+    assert fizz_world._fiscal_pidgins == {}
+
+    # WHEN
+    fizz_world._set_fiscal_pidgins()
+    # THEN
+    assert fizz_world._fiscal_pidgins == {}
+
+    # WHEN
+    fizz_world._pidgin_events = {}
+    fizz_world._fiscal_events = {music23_str: {event3, event7, event9}}
+    fizz_world._set_fiscal_pidgins()
+    # THEN
+    assert fizz_world._fiscal_pidgins == {music23_str: {3: None, 7: None, 9: None}}
+
+    # WHEN
+    fizz_world._pidgin_events = {sue_str: {event3}}
+    fizz_world._fiscal_events = {}
+    fizz_world._set_fiscal_pidgins()
+    # THEN
+    assert fizz_world._fiscal_pidgins == {}
+
+
+def test_WorldUnit_set_fiscal_pidgins_Scenario2_SetsAttr():
+    # ESTABLISH
+    sue_str = "Sue"
+    event3 = 3
+    music23_str = "music23"
+    fizz_world = worldunit_shop("fizz")
+    fizz_world.set_event(event3, sue_str)
+    fizz_world._pidgin_events = {sue_str: {event3}}
+    fizz_world._fiscal_events = {music23_str: {event3}}
+    assert fizz_world._fiscal_pidgins == {}
+
+    # WHEN
+    fizz_world._set_fiscal_pidgins()
+
+    # THEN
+    assert fizz_world._fiscal_pidgins == {music23_str: {event3: event3}}
+
+
+def test_WorldUnit_set_fiscal_pidgins_Scenario3_SetsAttr():
+    # ESTABLISH
+    sue_str = "Sue"
+    zia_str = "Zia"
+    event3 = 3
+    event5 = 5
+    music23_str = "music23"
+    fizz_world = worldunit_shop("fizz")
+    fizz_world.set_event(event3, sue_str)
+    fizz_world.set_event(event5, zia_str)
+    fizz_world._pidgin_events = {sue_str: {event3}}
+    fizz_world._fiscal_events = {music23_str: {event3, event5}}
+    assert fizz_world._fiscal_pidgins == {}
+
+    # WHEN
+    fizz_world._set_fiscal_pidgins()
+
+    # THEN
+    assert fizz_world._fiscal_pidgins == {music23_str: {event3: event3, event5: None}}
+
+
+def test_WorldUnit_set_fiscal_pidgins_Scenario4_SetsAttr():
+    # ESTABLISH
+    sue_str = "Sue"
+    zia_str = "Zia"
+    event3 = 3
+    event5 = 5
+    music23_str = "music23"
+    fizz_world = worldunit_shop("fizz")
+    fizz_world.set_event(event3, sue_str)
+    fizz_world.set_event(event5, zia_str)
+    fizz_world._pidgin_events = {sue_str: {event3}, zia_str: {event5}}
+    fizz_world._fiscal_events = {music23_str: {event3, event5}}
+    assert fizz_world._fiscal_pidgins == {}
+
+    # WHEN
+    fizz_world._set_fiscal_pidgins()
+
+    # THEN
+    assert fizz_world._fiscal_pidgins == {music23_str: {event3: event3, event5: event5}}
+
+
+def test_WorldUnit_set_fiscal_pidgins_Scenario5_SetsAttr():
+    # ESTABLISH
+    sue_str = "Sue"
+    event3 = 3
+    event7 = 7
+    event8 = 8
+    event9 = 9
+    music23_str = "music23"
+    music55_str = "music55"
+    fizz_world = worldunit_shop("fizz")
+    fizz_world.set_event(event3, sue_str)
+    fizz_world.set_event(event7, sue_str)
+    fizz_world.set_event(event8, sue_str)
+    fizz_world.set_event(event9, sue_str)
+    fizz_world._pidgin_events = {sue_str: {event8}}
+    fizz_world._fiscal_events = {
+        music23_str: {event7, event9},
+        music55_str: {event3},
+    }
+    assert fizz_world._fiscal_pidgins == {}
+
+    # WHEN
+    fizz_world._set_fiscal_pidgins()
+
+    # THEN
+    assert fizz_world._fiscal_pidgins == {
+        music23_str: {event7: None, event9: event8},
+        music55_str: {event3: None},
+    }
+
+
+def test_WorldUnit_set_fiscal_pidgins_Scenario6_SetsAttr():
+    # ESTABLISH
+    sue_str = "Sue"
+    zia_str = "Zia"
+    event3 = 3
+    event7 = 7
+    event8 = 8
+    event9 = 9
+    music23_str = "music23"
+    music55_str = "music55"
+    fizz_world = worldunit_shop("fizz")
+    fizz_world.set_event(event3, sue_str)
+    fizz_world.set_event(event7, sue_str)
+    fizz_world.set_event(event8, zia_str)
+    fizz_world.set_event(event9, zia_str)
+    fizz_world._pidgin_events = {sue_str: {event3}, zia_str: {event8}}
+    fizz_world._fiscal_events = {
+        music23_str: {event7, event9},
+        music55_str: {event9},
+    }
+    assert fizz_world._fiscal_pidgins == {}
+
+    # WHEN
+    fizz_world._set_fiscal_pidgins()
+
+    # THEN
+    assert fizz_world._fiscal_pidgins == {
+        music23_str: {event7: event3, event9: event8},
+        music55_str: {event9: event8},
+    }
+
+
+def test_WorldUnit_event_bricks_to_fiscal_bricks_Sets_fiscal_events_And_fiscal_pidgins(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -182,6 +361,9 @@ def test_WorldUnit_event_bricks_to_fiscal_bricks_Sets_fiscal_events(
     example_event9_df = DataFrame([zia1, zia2, zia3], columns=br00003_columns)
     br00003_filename = "br00003.xlsx"
     fizz_world = worldunit_shop("fizz")
+    fizz_world.set_event(event3, sue_str)
+    fizz_world.set_event(event7, zia_str)
+    fizz_world.set_event(event9, zia_str)
     sue_dir = create_path(fizz_world._faces_dir, sue_str)
     zia_dir = create_path(fizz_world._faces_dir, zia_str)
     event3_dir = create_path(sue_dir, event3)
@@ -209,7 +391,9 @@ def test_WorldUnit_event_bricks_to_fiscal_bricks_Sets_fiscal_events(
     assert sheet_exists(e7_music23_br00003_filepath, forge_valid_str()) is False
     assert sheet_exists(e9_music23_br00003_filepath, forge_valid_str()) is False
     assert sheet_exists(e9_music55_br00003_filepath, forge_valid_str()) is False
+    fizz_world._pidgin_events = {zia_str: {event7}}
     assert fizz_world._fiscal_events == {}
+    assert fizz_world._fiscal_pidgins == {}
 
     # WHEN
     fizz_world.event_bricks_to_fiscal_bricks()
@@ -222,4 +406,8 @@ def test_WorldUnit_event_bricks_to_fiscal_bricks_Sets_fiscal_events(
     assert fizz_world._fiscal_events == {
         music23_str: {event3, event7, event9},
         music55_str: {event9},
+    }
+    assert fizz_world._fiscal_pidgins == {
+        music23_str: {event3: None, event7: event7, event9: event7},
+        music55_str: {event9: event7},
     }
