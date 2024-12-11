@@ -99,33 +99,33 @@ def test_DeltaUnit_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
 def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acctunit_str():
     # ESTABLISH
     bob_str = "Bob"
-    farm_deltaunit = deltaunit_shop()
+    x_deltaunit = deltaunit_shop()
     bob_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
     bob_atomunit.set_arg(acct_id_str(), bob_str)
-    assert not farm_deltaunit.atomunit_exists(bob_atomunit)
+    assert not x_deltaunit.atomunit_exists(bob_atomunit)
 
     # WHEN
-    farm_deltaunit.set_atomunit(bob_atomunit)
+    x_deltaunit.set_atomunit(bob_atomunit)
 
     # THEN
-    assert farm_deltaunit.atomunit_exists(bob_atomunit)
+    assert x_deltaunit.atomunit_exists(bob_atomunit)
 
 
 def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acct_membership_str():
     # ESTABLISH
     bob_str = "Bob"
     iowa_str = ";Iowa"
-    farm_deltaunit = deltaunit_shop()
+    x_deltaunit = deltaunit_shop()
     bob_iowa_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
     bob_iowa_atomunit.set_arg(group_id_str(), iowa_str)
     bob_iowa_atomunit.set_arg(acct_id_str(), bob_str)
-    assert not farm_deltaunit.atomunit_exists(bob_iowa_atomunit)
+    assert not x_deltaunit.atomunit_exists(bob_iowa_atomunit)
 
     # WHEN
-    farm_deltaunit.set_atomunit(bob_iowa_atomunit)
+    x_deltaunit.set_atomunit(bob_iowa_atomunit)
 
     # THEN
-    assert farm_deltaunit.atomunit_exists(bob_iowa_atomunit)
+    assert x_deltaunit.atomunit_exists(bob_iowa_atomunit)
 
 
 def test_DeltaUnit_get_atom_ReturnsCorrectObj():
@@ -599,7 +599,7 @@ def test_DeltaUnit_get_json_ReturnsCorrectObj():
 
 def test_DeltaUnit_atomunit_exists_ReturnsCorrectObj():
     # ESTABLISH
-    farm_deltaunit = deltaunit_shop()
+    x_deltaunit = deltaunit_shop()
 
     # WHEN / THEN
     category = bud_acctunit_str()
@@ -607,10 +607,10 @@ def test_DeltaUnit_atomunit_exists_ReturnsCorrectObj():
     zia_atomunit = atomunit_shop(category, atom_insert())
     zia_atomunit.set_arg(acct_id_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
-    assert farm_deltaunit.atomunit_exists(zia_atomunit) is False
+    assert x_deltaunit.atomunit_exists(zia_atomunit) is False
 
     # WHEN
-    farm_deltaunit.set_atomunit(zia_atomunit)
+    x_deltaunit.set_atomunit(zia_atomunit)
 
     # THEN
-    assert farm_deltaunit.atomunit_exists(zia_atomunit)
+    assert x_deltaunit.atomunit_exists(zia_atomunit)

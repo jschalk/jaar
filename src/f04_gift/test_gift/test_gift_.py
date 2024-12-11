@@ -45,17 +45,17 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
     bob_str = "Bob"
 
     # WHEN
-    farm_giftunit = giftunit_shop(owner_id=bob_str)
+    bob_giftunit = giftunit_shop(owner_id=bob_str)
 
     # THEN
-    assert farm_giftunit.fiscal_id == root_label()
-    assert farm_giftunit.owner_id == bob_str
-    assert farm_giftunit._gift_id == 0
-    assert farm_giftunit._face_id is None
-    assert farm_giftunit._deltaunit == deltaunit_shop()
-    assert farm_giftunit._delta_start == 0
-    assert farm_giftunit._gifts_dir is None
-    assert farm_giftunit._atoms_dir is None
+    assert bob_giftunit.fiscal_id == root_label()
+    assert bob_giftunit.owner_id == bob_str
+    assert bob_giftunit._gift_id == 0
+    assert bob_giftunit._face_id is None
+    assert bob_giftunit._deltaunit == deltaunit_shop()
+    assert bob_giftunit._delta_start == 0
+    assert bob_giftunit._gifts_dir is None
+    assert bob_giftunit._atoms_dir is None
 
 
 def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
@@ -70,7 +70,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     music_str = "music"
 
     # WHEN
-    farm_giftunit = giftunit_shop(
+    bob_giftunit = giftunit_shop(
         fiscal_id=music_str,
         owner_id=bob_str,
         _gift_id=bob_gift_id,
@@ -82,14 +82,14 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     )
 
     # THEN
-    assert farm_giftunit.fiscal_id == music_str
-    assert farm_giftunit.owner_id == bob_str
-    assert farm_giftunit._gift_id == bob_gift_id
-    assert farm_giftunit._face_id == sue_str
-    assert farm_giftunit._deltaunit == bob_deltaunit
-    assert farm_giftunit._delta_start == bob_delta_start
-    assert farm_giftunit._gifts_dir == bob_gifts_dir
-    assert farm_giftunit._atoms_dir == bob_atoms_dir
+    assert bob_giftunit.fiscal_id == music_str
+    assert bob_giftunit.owner_id == bob_str
+    assert bob_giftunit._gift_id == bob_gift_id
+    assert bob_giftunit._face_id == sue_str
+    assert bob_giftunit._deltaunit == bob_deltaunit
+    assert bob_giftunit._delta_start == bob_delta_start
+    assert bob_giftunit._gifts_dir == bob_gifts_dir
+    assert bob_giftunit._atoms_dir == bob_atoms_dir
 
 
 def test_giftunit_shop_ReturnsCorrectObjEstablishWithSomeArgs_v1():
@@ -98,108 +98,108 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithSomeArgs_v1():
     yao_str = "Yao"
 
     # WHEN
-    farm_giftunit = giftunit_shop(owner_id=bob_str, _face_id=yao_str)
+    bob_giftunit = giftunit_shop(owner_id=bob_str, _face_id=yao_str)
 
     # THEN
-    assert farm_giftunit.owner_id == bob_str
-    assert farm_giftunit._face_id == yao_str
+    assert bob_giftunit.owner_id == bob_str
+    assert bob_giftunit._face_id == yao_str
 
 
 def test_GiftUnit_set_face_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
-    farm_giftunit = giftunit_shop(owner_id=bob_str)
+    bob_giftunit = giftunit_shop(owner_id=bob_str)
     sue_str = "Sue"
-    assert farm_giftunit._face_id is None
-    assert farm_giftunit._face_id != sue_str
+    assert bob_giftunit._face_id is None
+    assert bob_giftunit._face_id != sue_str
 
     # WHEN
-    farm_giftunit.set_face(sue_str)
+    bob_giftunit.set_face(sue_str)
 
     # THEN
-    assert farm_giftunit._face_id == sue_str
+    assert bob_giftunit._face_id == sue_str
 
 
 def test_GiftUnit_del_face_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
-    farm_giftunit = giftunit_shop(owner_id=bob_str)
+    bob_giftunit = giftunit_shop(owner_id=bob_str)
     yao_str = "Yao"
-    farm_giftunit.set_face(yao_str)
-    assert farm_giftunit._face_id == yao_str
+    bob_giftunit.set_face(yao_str)
+    assert bob_giftunit._face_id == yao_str
 
     # WHEN
-    farm_giftunit.del_face()
+    bob_giftunit.del_face()
 
     # THEN
-    assert farm_giftunit._face_id != yao_str
-    assert farm_giftunit._face_id is None
+    assert bob_giftunit._face_id != yao_str
+    assert bob_giftunit._face_id is None
 
 
 def test_GiftUnit_set_deltaunit_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
-    farm_giftunit = giftunit_shop(owner_id=bob_str)
-    assert farm_giftunit._deltaunit == deltaunit_shop()
+    bob_giftunit = giftunit_shop(owner_id=bob_str)
+    assert bob_giftunit._deltaunit == deltaunit_shop()
 
     # WHEN
-    farm_deltaunit = deltaunit_shop()
-    farm_deltaunit.set_atomunit(get_atom_example_itemunit_sports())
-    farm_giftunit.set_deltaunit(farm_deltaunit)
+    x_deltaunit = deltaunit_shop()
+    x_deltaunit.set_atomunit(get_atom_example_itemunit_sports())
+    bob_giftunit.set_deltaunit(x_deltaunit)
 
     # THEN
-    assert farm_giftunit._deltaunit == farm_deltaunit
+    assert bob_giftunit._deltaunit == x_deltaunit
 
 
 def test_GiftUnit_set_delta_start_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
-    farm_giftunit = giftunit_shop(bob_str)
-    assert farm_giftunit._delta_start == 0
+    bob_giftunit = giftunit_shop(bob_str)
+    assert bob_giftunit._delta_start == 0
 
     # WHEN
-    farm_delta_start = 11
-    farm_giftunit.set_delta_start(farm_delta_start)
+    x_delta_start = 11
+    bob_giftunit.set_delta_start(x_delta_start)
 
     # THEN
-    assert farm_giftunit._delta_start == farm_delta_start
+    assert bob_giftunit._delta_start == x_delta_start
 
 
 def test_GiftUnit_atomunit_exists_ReturnsCorrectObj():
     # ESTABLISH
     bob_str = "Bob"
-    farm_deltaunit = deltaunit_shop()
-    farm_giftunit = giftunit_shop(owner_id=bob_str)
-    farm_giftunit.set_deltaunit(farm_deltaunit)
+    x_deltaunit = deltaunit_shop()
+    bob_giftunit = giftunit_shop(owner_id=bob_str)
+    bob_giftunit.set_deltaunit(x_deltaunit)
 
     # WHEN
     sports_atomunit = get_atom_example_itemunit_sports()
 
     # THEN
-    assert farm_giftunit.atomunit_exists(sports_atomunit) is False
+    assert bob_giftunit.atomunit_exists(sports_atomunit) is False
 
     # WHEN
-    farm_deltaunit.set_atomunit(sports_atomunit)
-    farm_giftunit.set_deltaunit(farm_deltaunit)
+    x_deltaunit.set_atomunit(sports_atomunit)
+    bob_giftunit.set_deltaunit(x_deltaunit)
 
     # THEN
-    assert farm_giftunit.atomunit_exists(sports_atomunit)
+    assert bob_giftunit.atomunit_exists(sports_atomunit)
 
 
 def test_GiftUnit_del_deltaunit_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
-    farm_deltaunit = deltaunit_shop()
-    farm_deltaunit.set_atomunit(get_atom_example_itemunit_sports())
-    farm_giftunit = giftunit_shop(owner_id=bob_str, _deltaunit=farm_deltaunit)
-    assert farm_giftunit._deltaunit != deltaunit_shop()
-    assert farm_giftunit._deltaunit == farm_deltaunit
+    x_deltaunit = deltaunit_shop()
+    x_deltaunit.set_atomunit(get_atom_example_itemunit_sports())
+    bob_giftunit = giftunit_shop(owner_id=bob_str, _deltaunit=x_deltaunit)
+    assert bob_giftunit._deltaunit != deltaunit_shop()
+    assert bob_giftunit._deltaunit == x_deltaunit
 
     # WHEN
-    farm_giftunit.del_deltaunit()
+    bob_giftunit.del_deltaunit()
 
     # THEN
-    assert farm_giftunit._deltaunit == deltaunit_shop()
+    assert bob_giftunit._deltaunit == deltaunit_shop()
 
 
 def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
@@ -207,11 +207,11 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
     bob_str = "Bob"
     sue_str = "Sue"
     music_str = "music"
-    farm_giftunit = giftunit_shop(fiscal_id=music_str, owner_id=bob_str)
-    farm_giftunit.set_face(sue_str)
+    bob_giftunit = giftunit_shop(fiscal_id=music_str, owner_id=bob_str)
+    bob_giftunit.set_face(sue_str)
 
     # WHEN
-    x_dict = farm_giftunit.get_step_dict()
+    x_dict = bob_giftunit.get_step_dict()
 
     # THEN
     assert x_dict.get(fiscal_id_str()) is not None
@@ -231,10 +231,10 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_WithDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
     sue_deltaunit = get_deltaunit_sue_example()
-    farm_giftunit = giftunit_shop(bob_str, _deltaunit=sue_deltaunit)
+    bob_giftunit = giftunit_shop(bob_str, _deltaunit=sue_deltaunit)
 
     # WHEN
-    x_dict = farm_giftunit.get_step_dict()
+    x_dict = bob_giftunit.get_step_dict()
 
     # THEN
     delta_str = "delta"
@@ -253,27 +253,25 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_delta_start():
     # ESTABLISH
     bob_str = "Bob"
     sue_deltaunit = get_deltaunit_sue_example()
-    farm_delta_start = 7
-    farm_giftunit = giftunit_shop(
-        bob_str, _deltaunit=sue_deltaunit, _delta_start=farm_delta_start
+    x_delta_start = 7
+    bob_giftunit = giftunit_shop(
+        bob_str, _deltaunit=sue_deltaunit, _delta_start=x_delta_start
     )
 
     # WHEN
-    x_dict = farm_giftunit.get_step_dict()
+    x_dict = bob_giftunit.get_step_dict()
 
     # THEN
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
-    assert x_dict.get(delta_str) == sue_deltaunit.get_ordered_atomunits(
-        farm_delta_start
-    )
+    assert x_dict.get(delta_str) == sue_deltaunit.get_ordered_atomunits(x_delta_start)
     sue_atomunits_dict = x_dict.get(delta_str)
     print(f"{len(sue_deltaunit.get_sorted_atomunits())=}")
     print(f"{sue_atomunits_dict.keys()=}")
     # print(f"{sue_atomunits_dict.get(0)=}")
-    assert sue_atomunits_dict.get(farm_delta_start + 2) is None
-    assert sue_atomunits_dict.get(farm_delta_start + 0) is not None
-    assert sue_atomunits_dict.get(farm_delta_start + 1) is not None
+    assert sue_atomunits_dict.get(x_delta_start + 2) is None
+    assert sue_atomunits_dict.get(x_delta_start + 0) is not None
+    assert sue_atomunits_dict.get(x_delta_start + 1) is not None
 
 
 def test_GiftUnit_get_delta_atom_numbers_ReturnsCorrectObj():
@@ -281,17 +279,17 @@ def test_GiftUnit_get_delta_atom_numbers_ReturnsCorrectObj():
     bob_str = "Bob"
     yao_str = "Yao"
     sue_deltaunit = get_deltaunit_sue_example()
-    farm_delta_start = 7
-    farm_giftunit = giftunit_shop(bob_str)
-    farm_giftunit.set_deltaunit(sue_deltaunit)
-    farm_giftunit.set_delta_start(farm_delta_start)
-    farm_giftunit.set_face(yao_str)
-    farm_dict = farm_giftunit.get_step_dict()
+    x_delta_start = 7
+    bob_giftunit = giftunit_shop(bob_str)
+    bob_giftunit.set_deltaunit(sue_deltaunit)
+    bob_giftunit.set_delta_start(x_delta_start)
+    bob_giftunit.set_face(yao_str)
+    x_dict = bob_giftunit.get_step_dict()
 
     # WHEN
-    farm_delta_atom_numbers = farm_giftunit.get_delta_atom_numbers(farm_dict)
+    x_delta_atom_numbers = bob_giftunit.get_delta_atom_numbers(x_dict)
     # THEN
-    assert farm_delta_atom_numbers == [farm_delta_start, farm_delta_start + 1]
+    assert x_delta_atom_numbers == [x_delta_start, x_delta_start + 1]
 
 
 def test_GiftUnit_get_deltametric_dict_ReturnsCorrectObj():
@@ -299,14 +297,14 @@ def test_GiftUnit_get_deltametric_dict_ReturnsCorrectObj():
     bob_str = "Bob"
     yao_str = "Yao"
     sue_deltaunit = get_deltaunit_sue_example()
-    farm_delta_start = 7
-    farm_giftunit = giftunit_shop(bob_str)
-    farm_giftunit.set_deltaunit(sue_deltaunit)
-    farm_giftunit.set_delta_start(farm_delta_start)
-    farm_giftunit.set_face(yao_str)
+    x_delta_start = 7
+    bob_giftunit = giftunit_shop(bob_str)
+    bob_giftunit.set_deltaunit(sue_deltaunit)
+    bob_giftunit.set_delta_start(x_delta_start)
+    bob_giftunit.set_face(yao_str)
 
     # WHEN
-    x_dict = farm_giftunit.get_deltametric_dict()
+    x_dict = bob_giftunit.get_deltametric_dict()
 
     # THEN
     assert x_dict.get(owner_id_str()) is not None
@@ -331,15 +329,15 @@ def test_GiftUnit_get_deltametric_json_ReturnsCorrectObj():
     sue_str = "Sue"
     yao_str = "Yao"
     sue_deltaunit = get_deltaunit_sue_example()
-    farm_delta_start = 7
-    farm_giftunit = giftunit_shop(bob_str)
-    farm_giftunit.set_deltaunit(sue_deltaunit)
-    farm_giftunit.set_delta_start(farm_delta_start)
-    farm_giftunit.set_face(sue_str)
-    farm_giftunit.set_face(yao_str)
+    x_delta_start = 7
+    bob_giftunit = giftunit_shop(bob_str)
+    bob_giftunit.set_deltaunit(sue_deltaunit)
+    bob_giftunit.set_delta_start(x_delta_start)
+    bob_giftunit.set_face(sue_str)
+    bob_giftunit.set_face(yao_str)
 
     # WHEN
-    farm_json = farm_giftunit.get_deltametric_json()
+    delta_json = bob_giftunit.get_deltametric_json()
 
     # THEN
-    assert x_is_json(farm_json)
+    assert x_is_json(delta_json)
