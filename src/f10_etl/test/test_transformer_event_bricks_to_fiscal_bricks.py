@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, set_dir
+from src.f00_instrument.file import create_path, set_dir, delete_dir
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
@@ -150,3 +150,16 @@ def test_get_fiscal_events_by_dirs_SetsAttr(env_dir_setup_cleanup):
         music23_str: {event3, event7, event9},
         music55_str: {event9},
     }
+
+    # WHEN
+    delete_dir(e9_music55_dir)
+    assert os_path_exists(e3_music23_dir)
+    assert os_path_exists(e7_music23_dir)
+    assert os_path_exists(e9_music23_dir)
+    assert os_path_exists(e9_music55_dir) is False
+
+    # WHEN
+    x_fiscal_events = get_fiscal_events_by_dirs(x_faces_dir)
+
+    # THEN
+    assert x_fiscal_events == {music23_str: {event3, event7, event9}}

@@ -1,4 +1,10 @@
-from src.f00_instrument.file import create_path, open_file, save_file, set_dir
+from src.f00_instrument.file import (
+    create_path,
+    open_file,
+    save_file,
+    set_dir,
+    delete_dir,
+)
 from src.f01_road.road import default_wall_if_None
 from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f04_gift.atom_config import face_id_str, type_RoadUnit_str
@@ -214,3 +220,16 @@ def test_get_pidgin_events_by_dirs_ReturnsObj(env_dir_setup_cleanup):
 
     # THEN
     assert pidgin_events == {sue_str: {event7, event9}, zia_str: {event3}}
+
+    # WHEN
+    delete_dir(event3_pidgin_file_path)
+    assert os_path_exists(event3_pidgin_file_path) is False
+    assert os_path_exists(event5_pidgin_file_path) is False
+    assert os_path_exists(event7_pidgin_file_path)
+    assert os_path_exists(event9_pidgin_file_path)
+
+    # WHEN
+    pidgin_events = get_pidgin_events_by_dirs(faces_dir)
+
+    # THEN
+    assert pidgin_events == {sue_str: {event7, event9}}
