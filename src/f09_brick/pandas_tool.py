@@ -108,6 +108,10 @@ def zoo_agg_str():
     return "zoo_agg"
 
 
+def zoo_valid_str():
+    return "zoo_valid"
+
+
 def get_zoo_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, group_by_list: list
 ) -> DataFrame:

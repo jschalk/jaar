@@ -16,6 +16,7 @@ from src.f07_fiscal.fiscal import FiscalUnit
 from src.f10_etl.transformers import (
     etl_jungle_to_zoo_staging,
     etl_zoo_staging_to_zoo_agg,
+    etl_zoo_agg_to_zoo_valid,
     etl_zoo_agg_to_zoo_events,
     etl_zoo_events_to_events_log,
     etl_pidgin_staging_to_agg,
@@ -59,6 +60,9 @@ class WorldUnit:
     def get_event(self, event_id: TimeLinePoint) -> bool:
         return self.events.get(event_id)
 
+    def legitimate_events(self) -> set[int]:
+        return set(self.events.keys())
+
     def _event_dir(self, face_id: AcctID, event_id: TimeLinePoint) -> str:
         face_dir = create_path(self._faces_dir, face_id)
         return create_path(face_dir, event_id)
@@ -84,6 +88,9 @@ class WorldUnit:
     def zoo_staging_to_zoo_agg(self):
         etl_zoo_staging_to_zoo_agg(self._zoo_dir)
 
+    def zoo_agg_to_zoo_valid(self):
+        etl_zoo_agg_to_zoo_valid(self._zoo_dir, self.legitimate_events())
+
     def zoo_agg_to_zoo_events(self):
         etl_zoo_agg_to_zoo_events(self._zoo_dir)
 
@@ -97,8 +104,7 @@ class WorldUnit:
         self.events = get_events_dict_from_events_agg_file(self._zoo_dir)
 
     def zoo_agg_to_pidgin_staging(self):
-        legitimate_events = set(self.events.keys())
-        etl_zoo_agg_to_pidgin_staging(legitimate_events, self._zoo_dir)
+        etl_zoo_agg_to_pidgin_staging(self.legitimate_events(), self._zoo_dir)
 
     def pidgin_staging_to_agg(self):
         etl_pidgin_staging_to_agg(self._zoo_dir)

@@ -21,7 +21,6 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
     sue_str = "Sue"
     yao_str = "Yao"
     event1 = 1

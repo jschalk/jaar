@@ -173,6 +173,37 @@ class ZooStagingToZooAggTransformer:
         )
 
 
+def etl_zoo_agg_to_zoo_valid(zoo_dir: str, legitimate_events: set[int]):
+    transformer = ZooAggToZooValidTransformer(zoo_dir, legitimate_events)
+    transformer.transform()
+
+
+class ZooAggToZooValidTransformer:
+    def __init__(self, zoo_dir: str, legitimate_events: set[int]):
+        self.zoo_dir = zoo_dir
+        self.legitimate_events = legitimate_events
+
+    def transform(self):
+        for br_ref in get_existing_excel_brick_file_refs(self.zoo_dir):
+            zoo_brick_path = create_path(br_ref.file_dir, br_ref.file_name)
+            zoo_agg = pandas_read_excel(zoo_brick_path, "zoo_agg")
+            zoo_valid_df = zoo_agg[zoo_agg["event_id"].isin(self.legitimate_events)]
+            upsert_sheet(zoo_brick_path, "zoo_valid", zoo_valid_df)
+
+    # def _group_by_brick_columns(
+    #     self, zoo_staging_df: DataFrame, brick_number: str
+    # ) -> DataFrame:
+    #     brick_filename = get_brick_format_filename(brick_number)
+    #     brickref = get_brickref_obj(brick_filename)
+    #     required_columns = brickref.get_otx_keys_list()
+    #     brick_columns_set = set(brickref._attributes.keys())
+    #     brick_columns_list = get_new_sorting_columns(brick_columns_set)
+    #     zoo_staging_df = zoo_staging_df[brick_columns_list]
+    #     return get_zoo_staging_grouping_with_all_values_equal_df(
+    #         zoo_staging_df, required_columns
+    #     )
+
+
 def etl_zoo_agg_to_zoo_events(zoo_dir):
     transformer = ZooAggToZooEventsTransformer(zoo_dir)
     transformer.transform()
