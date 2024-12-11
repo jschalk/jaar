@@ -571,7 +571,7 @@ def etl_zoo_bricks_to_face_bricks(zoo_dir: str, faces_dir: str):
                 output_dir=faces_dir,
                 column_name="face_id",
                 file_name=zoo_br_ref.brick_number,
-                sheet_name="zoo_agg",
+                sheet_name="zoo_valid",
             )
 
 
@@ -585,13 +585,12 @@ def etl_face_bricks_to_event_bricks(faces_dir: str):
                 output_dir=face_dir,
                 column_name="event_id",
                 file_name=face_br_ref.brick_number,
-                sheet_name="zoo_agg",
+                sheet_name="zoo_valid",
             )
 
 
 def etl_event_bricks_to_fiscal_bricks(faces_dir: str):
     for event_brick_dir in _get_all_faces_dir_event_dirs(faces_dir):
-        print(f"{event_brick_dir=}")
         for event_br_ref in get_existing_excel_brick_file_refs(event_brick_dir):
             event_brick_path = create_path(event_brick_dir, event_br_ref.file_name)
             split_excel_into_dirs(
@@ -599,16 +598,5 @@ def etl_event_bricks_to_fiscal_bricks(faces_dir: str):
                 output_dir=event_brick_dir,
                 column_name="fiscal_id",
                 file_name=event_br_ref.brick_number,
-                sheet_name="zoo_agg",
+                sheet_name="zoo_valid",
             )
-
-        # event_brick_path = create_path(event_dir, event_br_ref.file_name)
-        # split_excel_into_dirs(
-        #     input_file=face_brick_path,
-        #     output_dir=face_dir,
-        #     column_name="event_id",
-        #     file_name=face_br_ref.brick_number,
-        #     sheet_name="zoo_agg",
-        # )
-
-        # print(f"{event_pidgin_dir=}")

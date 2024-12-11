@@ -5,7 +5,7 @@ from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import (
     get_sheet_names,
     upsert_sheet,
-    zoo_agg_str,
+    zoo_valid_str,
     sheet_exists,
 )
 from src.f11_world.world import worldunit_shop
@@ -37,19 +37,21 @@ def test_WorldUnit_zoo_bricks_to_face_bricks_CreatesOtxSheets_Scenario0_GroupByW
     row2 = [sue_str, event3, music23_str, hour7am, minute_420]
     br00003_zoo_agg_df = DataFrame([row1, row2], columns=brick_columns)
     br00003_agg_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
-    upsert_sheet(br00003_agg_file_path, zoo_agg_str(), br00003_zoo_agg_df)
-    assert sheet_exists(br00003_agg_file_path, zoo_agg_str())
+    upsert_sheet(br00003_agg_file_path, zoo_valid_str(), br00003_zoo_agg_df)
+    assert sheet_exists(br00003_agg_file_path, zoo_valid_str())
     sue_dir = create_path(fizz_world._faces_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, "br00003.xlsx")
-    assert sheet_exists(sue_br00003_filepath, zoo_agg_str()) is False
+    assert sheet_exists(sue_br00003_filepath, zoo_valid_str()) is False
 
     # WHEN
     fizz_world.zoo_bricks_to_face_bricks()
 
     # THEN
-    assert sheet_exists(sue_br00003_filepath, zoo_agg_str())
-    assert get_sheet_names(sue_br00003_filepath) == [zoo_agg_str()]
-    sue_br3_agg_df = pandas_read_excel(br00003_agg_file_path, sheet_name=zoo_agg_str())
+    assert sheet_exists(sue_br00003_filepath, zoo_valid_str())
+    assert get_sheet_names(sue_br00003_filepath) == [zoo_valid_str()]
+    sue_br3_agg_df = pandas_read_excel(
+        br00003_agg_file_path, sheet_name=zoo_valid_str()
+    )
     print(f"{sue_br3_agg_df.columns=}")
 
     assert len(sue_br3_agg_df.columns) == len(br00003_zoo_agg_df.columns)
@@ -93,15 +95,15 @@ def test_WorldUnit_zoo_bricks_to_face_bricks_CreatesOtxSheets_Scenario0_GroupByW
 #     br00003_agg_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
 #     zoo_df = pandas_read_excel(br00003_agg_file_path, sheet_name=zoo_staging_str())
 #     assert len(zoo_df) == 4
-#     assert sheet_exists(br00003_agg_file_path, zoo_agg_str()) is False
+#     assert sheet_exists(br00003_agg_file_path, zoo_valid_str()) is False
 
 #     # WHEN
 #     fizz_world.zoo_staging_to_zoo_agg()
 
 #     # THEN
-#     assert sheet_exists(br00003_agg_file_path, zoo_agg_str())
+#     assert sheet_exists(br00003_agg_file_path, zoo_valid_str())
 #     gen_br00003_agg_df = pandas_read_excel(
-#         br00003_agg_file_path, sheet_name=zoo_agg_str()
+#         br00003_agg_file_path, sheet_name=zoo_valid_str()
 #     )
 #     ex_otx_df = DataFrame([row1, row4], columns=brick_columns)
 #     # print(f"{gen_otx_df.columns=}")
@@ -113,6 +115,6 @@ def test_WorldUnit_zoo_bricks_to_face_bricks_CreatesOtxSheets_Scenario0_GroupByW
 #     assert len(gen_br00003_agg_df) == len(ex_otx_df)
 #     assert len(gen_br00003_agg_df) == 2
 #     assert gen_br00003_agg_df.to_csv() == ex_otx_df.to_csv()
-#     assert get_sheet_names(br00003_agg_file_path) == [zoo_staging_str(), zoo_agg_str()]
+#     assert get_sheet_names(br00003_agg_file_path) == [zoo_staging_str(), zoo_valid_str()]
 
 #     assert 1 == 2

@@ -12,7 +12,7 @@ from src.f08_pidgin.pidgin_config import (
 from src.f09_brick.pandas_tool import (
     get_sheet_names,
     upsert_sheet,
-    zoo_agg_str,
+    zoo_valid_str,
     sheet_exists,
 )
 from src.f10_etl.transformers import etl_zoo_bricks_to_face_bricks
@@ -49,18 +49,20 @@ def test_etl_zoo_bricks_to_face_bricks_CreatesFaceBrickSheets_Scenario0_SingleFa
     x_faces_dir = create_path(x_etl_dir, "faces")
     br00003_filename = "br00003.xlsx"
     br00003_agg_file_path = create_path(x_zoo_dir, br00003_filename)
-    upsert_sheet(br00003_agg_file_path, zoo_agg_str(), br00003_zoo_agg_df)
-    assert sheet_exists(br00003_agg_file_path, zoo_agg_str())
+    upsert_sheet(br00003_agg_file_path, zoo_valid_str(), br00003_zoo_agg_df)
+    assert sheet_exists(br00003_agg_file_path, zoo_valid_str())
     sue_dir = create_path(x_faces_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
-    assert sheet_exists(sue_br00003_filepath, zoo_agg_str()) is False
+    assert sheet_exists(sue_br00003_filepath, zoo_valid_str()) is False
 
     # WHEN
     etl_zoo_bricks_to_face_bricks(x_zoo_dir, x_faces_dir)
 
     # THEN
-    assert sheet_exists(sue_br00003_filepath, zoo_agg_str())
-    sue_br3_agg_df = pandas_read_excel(br00003_agg_file_path, sheet_name=zoo_agg_str())
+    assert sheet_exists(sue_br00003_filepath, zoo_valid_str())
+    sue_br3_agg_df = pandas_read_excel(
+        br00003_agg_file_path, sheet_name=zoo_valid_str()
+    )
     print(f"{sue_br3_agg_df.columns=}")
 
     assert len(sue_br3_agg_df.columns) == len(br00003_zoo_agg_df.columns)
@@ -69,7 +71,7 @@ def test_etl_zoo_bricks_to_face_bricks_CreatesFaceBrickSheets_Scenario0_SingleFa
     assert len(sue_br3_agg_df) == len(br00003_zoo_agg_df)
     assert len(sue_br3_agg_df) == 2
     assert sue_br3_agg_df.to_csv() == br00003_zoo_agg_df.to_csv()
-    assert get_sheet_names(sue_br00003_filepath) == [zoo_agg_str()]
+    assert get_sheet_names(sue_br00003_filepath) == [zoo_valid_str()]
 
 
 def test_etl_zoo_bricks_to_face_bricks_CreatesFaceBrickSheets_Scenario1_MultpleFaceIDs(
@@ -101,24 +103,24 @@ def test_etl_zoo_bricks_to_face_bricks_CreatesFaceBrickSheets_Scenario1_MultpleF
     x_faces_dir = create_path(x_etl_dir, "faces")
     br00003_filename = "br00003.xlsx"
     br00003_agg_file_path = create_path(x_zoo_dir, br00003_filename)
-    upsert_sheet(br00003_agg_file_path, zoo_agg_str(), br00003_zoo_agg_df)
+    upsert_sheet(br00003_agg_file_path, zoo_valid_str(), br00003_zoo_agg_df)
     sue_dir = create_path(x_faces_dir, sue_str)
     zia_dir = create_path(x_faces_dir, zia_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     zia_br00003_filepath = create_path(zia_dir, br00003_filename)
-    assert sheet_exists(sue_br00003_filepath, zoo_agg_str()) is False
-    assert sheet_exists(zia_br00003_filepath, zoo_agg_str()) is False
+    assert sheet_exists(sue_br00003_filepath, zoo_valid_str()) is False
+    assert sheet_exists(zia_br00003_filepath, zoo_valid_str()) is False
 
     # WHEN
     etl_zoo_bricks_to_face_bricks(x_zoo_dir, x_faces_dir)
 
     # THEN
-    assert sheet_exists(sue_br00003_filepath, zoo_agg_str())
-    assert sheet_exists(zia_br00003_filepath, zoo_agg_str())
-    assert get_sheet_names(sue_br00003_filepath) == [zoo_agg_str()]
-    assert get_sheet_names(zia_br00003_filepath) == [zoo_agg_str()]
-    sue_br3_agg_df = pandas_read_excel(sue_br00003_filepath, sheet_name=zoo_agg_str())
-    zia_br3_agg_df = pandas_read_excel(zia_br00003_filepath, sheet_name=zoo_agg_str())
+    assert sheet_exists(sue_br00003_filepath, zoo_valid_str())
+    assert sheet_exists(zia_br00003_filepath, zoo_valid_str())
+    assert get_sheet_names(sue_br00003_filepath) == [zoo_valid_str()]
+    assert get_sheet_names(zia_br00003_filepath) == [zoo_valid_str()]
+    sue_br3_agg_df = pandas_read_excel(sue_br00003_filepath, sheet_name=zoo_valid_str())
+    zia_br3_agg_df = pandas_read_excel(zia_br00003_filepath, sheet_name=zoo_valid_str())
     print(f"{sue_br3_agg_df.columns=}")
     print(f"{zia_br3_agg_df.columns=}")
     example_sue_df = DataFrame([sue1, sue2], columns=brick_columns)
@@ -169,24 +171,24 @@ def test_etl_zoo_bricks_to_face_bricks_Scenario2_PidginCategoryBricksAreNotLoade
     br00043_filename = "br00043.xlsx"
     br00003_agg_file_path = create_path(x_zoo_dir, br00003_filename)
     br00043_agg_file_path = create_path(x_zoo_dir, br00043_filename)
-    upsert_sheet(br00003_agg_file_path, zoo_agg_str(), br00003_zoo_agg_df)
-    upsert_sheet(br00043_agg_file_path, zoo_agg_str(), br00043_zoo_agg_df)
-    assert sheet_exists(br00003_agg_file_path, zoo_agg_str())
-    assert sheet_exists(br00043_agg_file_path, zoo_agg_str())
+    upsert_sheet(br00003_agg_file_path, zoo_valid_str(), br00003_zoo_agg_df)
+    upsert_sheet(br00043_agg_file_path, zoo_valid_str(), br00043_zoo_agg_df)
+    assert sheet_exists(br00003_agg_file_path, zoo_valid_str())
+    assert sheet_exists(br00043_agg_file_path, zoo_valid_str())
 
     sue_dir = create_path(x_faces_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     sue_br00043_filepath = create_path(sue_dir, br00043_filename)
-    assert sheet_exists(sue_br00003_filepath, zoo_agg_str()) is False
-    assert sheet_exists(sue_br00043_filepath, zoo_agg_str()) is False
+    assert sheet_exists(sue_br00003_filepath, zoo_valid_str()) is False
+    assert sheet_exists(sue_br00043_filepath, zoo_valid_str()) is False
 
     # WHEN
     etl_zoo_bricks_to_face_bricks(x_zoo_dir, x_faces_dir)
 
     # THEN
-    assert sheet_exists(sue_br00003_filepath, zoo_agg_str())
-    assert sheet_exists(sue_br00043_filepath, zoo_agg_str()) is False
-    sue_br3_agg_df = pandas_read_excel(sue_br00003_filepath, sheet_name=zoo_agg_str())
+    assert sheet_exists(sue_br00003_filepath, zoo_valid_str())
+    assert sheet_exists(sue_br00043_filepath, zoo_valid_str()) is False
+    sue_br3_agg_df = pandas_read_excel(sue_br00003_filepath, sheet_name=zoo_valid_str())
     print(f"{sue_br3_agg_df.columns=}")
     example_sue_df = DataFrame([sue3_0, sue3_1], columns=br00003_columns)
     pandas_assert_frame_equal(sue_br3_agg_df, example_sue_df)
