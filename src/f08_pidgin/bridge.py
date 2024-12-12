@@ -72,32 +72,32 @@ class BridgeCore:
 
 
 class AcctBridge(BridgeCore):
-    def set_otx2inx(self, otx_acctid: str, inx_acctid: str):
-        self.otx2inx[otx_acctid] = inx_acctid
+    def set_otx2inx(self, otx_acct_id: str, inx_acct_id: str):
+        self.otx2inx[otx_acct_id] = inx_acct_id
 
-    def _get_inx_value(self, otx_acctid: str) -> str:
-        return self.otx2inx.get(otx_acctid)
+    def _get_inx_value(self, otx_acct_id: str) -> str:
+        return self.otx2inx.get(otx_acct_id)
 
-    def otx2inx_exists(self, otx_acctid: str, inx_acctid: str) -> bool:
-        return self._get_inx_value(otx_acctid) == inx_acctid
+    def otx2inx_exists(self, otx_acct_id: str, inx_acct_id: str) -> bool:
+        return self._get_inx_value(otx_acct_id) == inx_acct_id
 
-    def otx_exists(self, otx_acctid: str) -> bool:
-        return self._get_inx_value(otx_acctid) != None
+    def otx_exists(self, otx_acct_id: str) -> bool:
+        return self._get_inx_value(otx_acct_id) != None
 
-    def del_otx2inx(self, otx_acctid: str):
-        self.otx2inx.pop(otx_acctid)
+    def del_otx2inx(self, otx_acct_id: str):
+        self.otx2inx.pop(otx_acct_id)
 
-    def reveal_inx(self, otx_acctid: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_acctid) is False:
-            inx_acctid = copy_copy(otx_acctid)
-            if self.inx_wall in otx_acctid:
+    def reveal_inx(self, otx_acct_id: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_acct_id) is False:
+            inx_acct_id = copy_copy(otx_acct_id)
+            if self.inx_wall in otx_acct_id:
                 return None
             otx_r_wall = self.otx_wall
             inx_r_wall = self.inx_wall
-            inx_acctid = inx_acctid.replace(otx_r_wall, inx_r_wall)
-            self.set_otx2inx(otx_acctid, inx_acctid)
+            inx_acct_id = inx_acct_id.replace(otx_r_wall, inx_r_wall)
+            self.set_otx2inx(otx_acct_id, inx_acct_id)
 
-        return self._get_inx_value(otx_acctid)
+        return self._get_inx_value(otx_acct_id)
 
     def _is_inx_wall_inclusion_correct(self) -> bool:
         return not str_in_dict_values(self.inx_wall, self.otx2inx)
@@ -113,12 +113,12 @@ class AcctBridge(BridgeCore):
 
 
 def acctbridge_shop(
+    x_face_id: FaceID = None,
+    x_event_id: TimeLinePoint = None,
     x_otx_wall: str = None,
     x_inx_wall: str = None,
     x_otx2inx: dict = None,
     x_unknown_word: str = None,
-    x_face_id: FaceID = None,
-    x_event_id: TimeLinePoint = None,
 ) -> AcctBridge:
     x_unknown_word = default_unknown_word_if_None(x_unknown_word)
     x_otx_wall = default_wall_if_None(x_otx_wall)
@@ -150,32 +150,32 @@ def get_acctbridge_from_json(x_json: str) -> AcctBridge:
 
 
 class GroupBridge(BridgeCore):
-    def set_otx2inx(self, otx_groupid: str, inx_groupid: str):
-        self.otx2inx[otx_groupid] = inx_groupid
+    def set_otx2inx(self, otx_group_id: str, inx_group_id: str):
+        self.otx2inx[otx_group_id] = inx_group_id
 
-    def _get_inx_value(self, otx_groupid: str) -> str:
-        return self.otx2inx.get(otx_groupid)
+    def _get_inx_value(self, otx_group_id: str) -> str:
+        return self.otx2inx.get(otx_group_id)
 
-    def otx2inx_exists(self, otx_groupid: str, inx_groupid: str) -> bool:
-        return self._get_inx_value(otx_groupid) == inx_groupid
+    def otx2inx_exists(self, otx_group_id: str, inx_group_id: str) -> bool:
+        return self._get_inx_value(otx_group_id) == inx_group_id
 
-    def otx_exists(self, otx_groupid: str) -> bool:
-        return self._get_inx_value(otx_groupid) != None
+    def otx_exists(self, otx_group_id: str) -> bool:
+        return self._get_inx_value(otx_group_id) != None
 
-    def del_otx2inx(self, otx_groupid: str):
-        self.otx2inx.pop(otx_groupid)
+    def del_otx2inx(self, otx_group_id: str):
+        self.otx2inx.pop(otx_group_id)
 
-    def reveal_inx(self, otx_groupid: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_groupid) is False:
-            inx_groupid = copy_copy(otx_groupid)
-            if self.inx_wall in otx_groupid:
+    def reveal_inx(self, otx_group_id: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_group_id) is False:
+            inx_group_id = copy_copy(otx_group_id)
+            if self.inx_wall in otx_group_id:
                 return None
             otx_r_wall = self.otx_wall
             inx_r_wall = self.inx_wall
-            inx_groupid = inx_groupid.replace(otx_r_wall, inx_r_wall)
-            self.set_otx2inx(otx_groupid, inx_groupid)
+            inx_group_id = inx_group_id.replace(otx_r_wall, inx_r_wall)
+            self.set_otx2inx(otx_group_id, inx_group_id)
 
-        return self._get_inx_value(otx_groupid)
+        return self._get_inx_value(otx_group_id)
 
     def _is_inx_wall_inclusion_correct(self):
         return str_in_all_dict_values(self.inx_wall, self.otx2inx)
@@ -191,12 +191,12 @@ class GroupBridge(BridgeCore):
 
 
 def groupbridge_shop(
+    x_face_id: FaceID = None,
+    x_event_id: TimeLinePoint = None,
     x_otx_wall: str = None,
     x_inx_wall: str = None,
     x_otx2inx: dict = None,
     x_unknown_word: str = None,
-    x_face_id: FaceID = None,
-    x_event_id: TimeLinePoint = None,
 ) -> GroupBridge:
     x_unknown_word = default_unknown_word_if_None(x_unknown_word)
     x_otx_wall = default_wall_if_None(x_otx_wall)
@@ -269,12 +269,12 @@ class IdeaBridge(BridgeCore):
 
 
 def ideabridge_shop(
+    x_face_id: FaceID = None,
+    x_event_id: TimeLinePoint = None,
     x_otx_wall: str = None,
     x_inx_wall: str = None,
     x_otx2inx: dict = None,
     x_unknown_word: str = None,
-    x_face_id: FaceID = None,
-    x_event_id: TimeLinePoint = None,
 ) -> IdeaBridge:
     x_unknown_word = default_unknown_word_if_None(x_unknown_word)
     x_otx_wall = default_wall_if_None(x_otx_wall)
@@ -307,13 +307,13 @@ def get_ideabridge_from_json(x_json: str) -> IdeaBridge:
 
 @dataclass
 class RoadBridge:
+    face_id: FaceID = None
+    event_id: TimeLinePoint = None
     otx2inx: dict = None
     unknown_word: str = None
     otx_wall: str = None
     inx_wall: str = None
     ideabridge: IdeaBridge = None
-    face_id: FaceID = None
-    event_id: TimeLinePoint = None
 
     def set_all_otx2inx(
         self, x_otx2inx: dict, raise_exception_if_invalid: bool = False
@@ -425,13 +425,13 @@ class RoadBridge:
 
 
 def roadbridge_shop(
+    x_face_id: FaceID = None,
+    x_event_id: TimeLinePoint = None,
     x_otx_wall: str = None,
     x_inx_wall: str = None,
     x_ideabridge: IdeaBridge = None,
     x_otx2inx: dict = None,
     x_unknown_word: str = None,
-    x_face_id: FaceID = None,
-    x_event_id: TimeLinePoint = None,
 ) -> RoadBridge:
     x_unknown_word = default_unknown_word_if_None(x_unknown_word)
     x_otx_wall = default_wall_if_None(x_otx_wall)
@@ -470,3 +470,43 @@ def get_roadbridge_from_dict(x_dict: dict) -> RoadBridge:
 
 def get_roadbridge_from_json(x_json: str) -> RoadBridge:
     return get_roadbridge_from_dict(get_dict_from_json(x_json))
+
+
+class BridgeCoreAttrConflictException(Exception):
+    pass
+
+
+def _check_core_attributes(new_obj, old_obj):
+    if (
+        old_obj.face_id != new_obj.face_id
+        or old_obj.otx_wall != new_obj.otx_wall
+        or old_obj.inx_wall != new_obj.inx_wall
+        or old_obj.unknown_word != new_obj.unknown_word
+    ):
+        raise BridgeCoreAttrConflictException("Core attributes in conflict")
+    if old_obj.event_id >= new_obj.event_id:
+        raise BridgeCoreAttrConflictException("older bridgeunit is not older")
+
+
+def _inherit_bridgeunit(new, old):
+    _check_core_attributes(new, old)
+    for otx_key, old_inx in old.otx2inx.items():
+        if new.otx_exists(otx_key) is False:
+            new.set_otx2inx(otx_key, old_inx)
+    return new
+
+
+def inherit_acctbridge(new: AcctBridge, old: AcctBridge) -> AcctBridge:
+    return _inherit_bridgeunit(new, old)
+
+
+def inherit_groupbridge(new: GroupBridge, old: GroupBridge) -> GroupBridge:
+    return _inherit_bridgeunit(new, old)
+
+
+def inherit_ideabridge(new: IdeaBridge, old: IdeaBridge) -> IdeaBridge:
+    return _inherit_bridgeunit(new, old)
+
+
+def inherit_roadbridge(new: RoadBridge, old: RoadBridge) -> RoadBridge:
+    return _inherit_bridgeunit(new, old)

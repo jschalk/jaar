@@ -5,18 +5,18 @@ from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import (
     get_sheet_names,
     upsert_sheet,
-    zoo_staging_str,
-    zoo_agg_str,
+    forge_staging_str,
+    forge_agg_str,
 )
 from src.f10_etl.transformers import (
-    etl_jungle_to_zoo_staging,
-    etl_zoo_staging_to_zoo_agg,
+    etl_mine_to_forge_staging,
+    etl_forge_staging_to_forge_agg,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
+def test_etl_forge_staging_to_forge_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -27,10 +27,10 @@ def test_etl_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_dir = create_path(get_test_etl_dir(), "jungle")
-    zoo_dir = create_path(get_test_etl_dir(), "zoo")
-    jungle_file_path = create_path(jungle_dir, ex_file_name)
-    zoo_file_path = create_path(zoo_dir, "br00003.xlsx")
+    mine_dir = create_path(get_test_etl_dir(), "mine")
+    forge_dir = create_path(get_test_etl_dir(), "forge")
+    mine_file_path = create_path(mine_dir, ex_file_name)
+    forge_file_path = create_path(forge_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -43,16 +43,18 @@ def test_etl_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     row2 = [sue_str, event_1, music23_str, hour7am, minute_420]
     row3 = [sue_str, event_1, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3], columns=brick_columns)
-    upsert_sheet(jungle_file_path, "example1_br00003", df1)
-    etl_jungle_to_zoo_staging(jungle_dir, zoo_dir)
-    zoo__staging_df = pandas_read_excel(zoo_file_path, sheet_name=zoo_staging_str())
-    assert len(zoo__staging_df) == 3
+    upsert_sheet(mine_file_path, "example1_br00003", df1)
+    etl_mine_to_forge_staging(mine_dir, forge_dir)
+    forge__staging_df = pandas_read_excel(
+        forge_file_path, sheet_name=forge_staging_str()
+    )
+    assert len(forge__staging_df) == 3
 
     # WHEN
-    etl_zoo_staging_to_zoo_agg(zoo_dir)
+    etl_forge_staging_to_forge_agg(forge_dir)
 
     # THEN
-    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name=zoo_agg_str())
+    gen_otx_df = pandas_read_excel(forge_file_path, sheet_name=forge_agg_str())
     ex_otx_df = DataFrame([row1, row2], columns=brick_columns)
     print(f"{gen_otx_df.columns=}")
     assert len(ex_otx_df.columns) == len(gen_otx_df.columns)
@@ -61,10 +63,10 @@ def test_etl_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 2
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(zoo_file_path) == [zoo_staging_str(), zoo_agg_str()]
+    assert get_sheet_names(forge_file_path) == [forge_staging_str(), forge_agg_str()]
 
 
-def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+def test_WorldUnit_forge_staging_to_forge_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -76,10 +78,10 @@ def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnly
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_dir = create_path(get_test_etl_dir(), "jungle")
-    zoo_dir = create_path(get_test_etl_dir(), "zoo")
-    jungle_file_path = create_path(jungle_dir, ex_file_name)
-    zoo_file_path = create_path(zoo_dir, "br00003.xlsx")
+    mine_dir = create_path(get_test_etl_dir(), "mine")
+    forge_dir = create_path(get_test_etl_dir(), "forge")
+    mine_file_path = create_path(mine_dir, ex_file_name)
+    forge_file_path = create_path(forge_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -92,16 +94,16 @@ def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnly
     row2 = [sue_str, event_1, music23_str, hour7am, minute_420]
     row3 = [sue_str, event_1, music23_str, hour7am, minute_480]
     df1 = DataFrame([row1, row2, row3], columns=brick_columns)
-    upsert_sheet(jungle_file_path, "example1_br00003", df1)
-    etl_jungle_to_zoo_staging(jungle_dir, zoo_dir)
-    zoo_df = pandas_read_excel(zoo_file_path, sheet_name=zoo_staging_str())
-    assert len(zoo_df) == 3
+    upsert_sheet(mine_file_path, "example1_br00003", df1)
+    etl_mine_to_forge_staging(mine_dir, forge_dir)
+    forge_df = pandas_read_excel(forge_file_path, sheet_name=forge_staging_str())
+    assert len(forge_df) == 3
 
     # WHEN
-    etl_zoo_staging_to_zoo_agg(zoo_dir)
+    etl_forge_staging_to_forge_agg(forge_dir)
 
     # THEN
-    gen_otx_df = pandas_read_excel(zoo_file_path, sheet_name=zoo_agg_str())
+    gen_otx_df = pandas_read_excel(forge_file_path, sheet_name=forge_agg_str())
     ex_otx_df = DataFrame([row1], columns=brick_columns)
     # print(f"{gen_otx_df.columns=}")
     print(f"{gen_otx_df=}")
@@ -111,4 +113,4 @@ def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnly
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 1
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(zoo_file_path) == [zoo_staging_str(), zoo_agg_str()]
+    assert get_sheet_names(forge_file_path) == [forge_staging_str(), forge_agg_str()]

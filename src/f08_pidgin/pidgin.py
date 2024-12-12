@@ -20,6 +20,10 @@ from src.f08_pidgin.bridge import (
     get_groupbridge_from_dict,
     get_ideabridge_from_dict,
     get_roadbridge_from_dict,
+    inherit_acctbridge,
+    inherit_groupbridge,
+    inherit_ideabridge,
+    inherit_roadbridge,
 )
 from dataclasses import dataclass
 
@@ -317,3 +321,25 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
 
 def get_pidginunit_from_json(x_json: str) -> PidginUnit:
     return get_pidginunit_from_dict(get_dict_from_json(x_json))
+
+
+class PidginCoreAttrConflictException(Exception):
+    pass
+
+
+def inherit_pidginunit(older: PidginUnit, newer: PidginUnit) -> PidginUnit:
+    if (
+        older.face_id != newer.face_id
+        or older.otx_wall != newer.otx_wall
+        or older.inx_wall != newer.inx_wall
+        or older.unknown_word != newer.unknown_word
+    ):
+        raise PidginCoreAttrConflictException("Core attributes in conflict")
+    if older.event_id >= newer.event_id:
+        raise PidginCoreAttrConflictException("older pidginunit is not older")
+    newer.set_acctbridge(inherit_acctbridge(newer.acctbridge, older.acctbridge))
+    newer.set_groupbridge(inherit_groupbridge(newer.groupbridge, older.groupbridge))
+    newer.set_ideabridge(inherit_ideabridge(newer.ideabridge, older.ideabridge))
+    newer.set_roadbridge(inherit_roadbridge(newer.roadbridge, older.roadbridge))
+
+    return newer

@@ -61,18 +61,18 @@ def test_BudUnit_settle_bud_Sets_itemunit_fund_onset_fund_cease_Scenario1():
     auto_item = itemunit_shop(auto_str, mass=10)
     yao_budunit.set_l1_item(auto_item)
 
-    barn_str = "barn"
-    barn_road = yao_budunit.make_l1_road(barn_str)
-    barn_item = itemunit_shop(barn_str, mass=60)
-    yao_budunit.set_l1_item(barn_item)
+    carn_str = "carn"
+    carn_road = yao_budunit.make_l1_road(carn_str)
+    carn_item = itemunit_shop(carn_str, mass=60)
+    yao_budunit.set_l1_item(carn_item)
     lamb_str = "lambs"
-    lamb_road = yao_budunit.make_road(barn_road, lamb_str)
+    lamb_road = yao_budunit.make_road(carn_road, lamb_str)
     lamb_item = itemunit_shop(lamb_str, mass=1)
-    yao_budunit.set_item(lamb_item, parent_road=barn_road)
+    yao_budunit.set_item(lamb_item, parent_road=carn_road)
     duck_str = "ducks"
-    duck_road = yao_budunit.make_road(barn_road, duck_str)
+    duck_road = yao_budunit.make_road(carn_road, duck_str)
     duck_item = itemunit_shop(duck_str, mass=2)
-    yao_budunit.set_item(duck_item, parent_road=barn_road)
+    yao_budunit.set_item(duck_item, parent_road=carn_road)
 
     coal_str = "coal"
     coal_road = yao_budunit.make_l1_road(coal_str)
@@ -83,8 +83,8 @@ def test_BudUnit_settle_bud_Sets_itemunit_fund_onset_fund_cease_Scenario1():
     assert yao_budunit._itemroot._fund_cease is None
     assert yao_budunit.get_item_obj(auto_road)._fund_onset is None
     assert yao_budunit.get_item_obj(auto_road)._fund_cease is None
-    assert yao_budunit.get_item_obj(barn_road)._fund_onset is None
-    assert yao_budunit.get_item_obj(barn_road)._fund_cease is None
+    assert yao_budunit.get_item_obj(carn_road)._fund_onset is None
+    assert yao_budunit.get_item_obj(carn_road)._fund_cease is None
     assert yao_budunit.get_item_obj(coal_road)._fund_onset is None
     assert yao_budunit.get_item_obj(coal_road)._fund_cease is None
     lamb_before = yao_budunit.get_item_obj(road=lamb_road)
@@ -102,8 +102,8 @@ def test_BudUnit_settle_bud_Sets_itemunit_fund_onset_fund_cease_Scenario1():
     assert yao_budunit._itemroot._fund_cease == default_fund_pool()
     assert yao_budunit.get_item_obj(auto_road)._fund_onset == 0.0
     assert yao_budunit.get_item_obj(auto_road)._fund_cease == default_fund_pool() * 0.1
-    assert yao_budunit.get_item_obj(barn_road)._fund_onset == default_fund_pool() * 0.1
-    assert yao_budunit.get_item_obj(barn_road)._fund_cease == default_fund_pool() * 0.7
+    assert yao_budunit.get_item_obj(carn_road)._fund_onset == default_fund_pool() * 0.1
+    assert yao_budunit.get_item_obj(carn_road)._fund_cease == default_fund_pool() * 0.7
     assert yao_budunit.get_item_obj(coal_road)._fund_onset == default_fund_pool() * 0.7
     assert yao_budunit.get_item_obj(coal_road)._fund_cease == default_fund_pool() * 1.0
 

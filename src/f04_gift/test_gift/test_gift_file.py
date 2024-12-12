@@ -31,13 +31,13 @@ def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     sue_atom6_path = f_path(sue_atoms_dir, six_filename)
     print(f"{sue_atom2_path=}")
     print(f"{sue_atom6_path=}")
-    farm_giftunit = giftunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
+    sue_giftunit = giftunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
     assert os_path_exists(sue_atom2_path) is False
     assert os_path_exists(sue_atom6_path) is False
 
     # WHEN
     sports_atom = get_atom_example_itemunit_sports()
-    farm_giftunit._save_atom_file(two_int, sports_atom)
+    sue_giftunit._save_atom_file(two_int, sports_atom)
 
     # THEN
     assert os_path_exists(sue_atom2_path)
@@ -61,16 +61,16 @@ def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     sue_atom6_path = f_path(sue_atoms_dir, six_filename)
     print(f"{sue_atom2_path=}")
     print(f"{sue_atom6_path=}")
-    farm_giftunit = giftunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
+    sue_giftunit = giftunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
     assert os_path_exists(sue_atom2_path) is False
-    assert farm_giftunit.atom_file_exists(two_int) is False
+    assert sue_giftunit.atom_file_exists(two_int) is False
 
     # WHEN
     sports_atom = get_atom_example_itemunit_sports()
-    farm_giftunit._save_atom_file(two_int, sports_atom)
+    sue_giftunit._save_atom_file(two_int, sports_atom)
 
     # THEN
-    assert farm_giftunit.atom_file_exists(two_int)
+    assert sue_giftunit.atom_file_exists(two_int)
 
 
 def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
@@ -88,13 +88,13 @@ def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
     sue_atom6_path = f_path(sue_atoms_dir, six_filename)
     print(f"{sue_atom2_path=}")
     print(f"{sue_atom6_path=}")
-    farm_giftunit = giftunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
+    sue_giftunit = giftunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
     sports_atom = get_atom_example_itemunit_sports()
-    farm_giftunit._save_atom_file(two_int, sports_atom)
-    assert farm_giftunit.atom_file_exists(two_int)
+    sue_giftunit._save_atom_file(two_int, sports_atom)
+    assert sue_giftunit.atom_file_exists(two_int)
 
     # WHEN
-    file_atom = farm_giftunit._open_atom_file(two_int)
+    file_atom = sue_giftunit._open_atom_file(two_int)
 
     # THEN
     assert file_atom == sports_atom
@@ -116,12 +116,12 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     sue_gift6_path = f_path(sue_gifts_dir, six_filename)
     print(f"{sue_gift2_path=}")
     print(f"{sue_gift6_path=}")
-    farm_giftunit = giftunit_shop(sue_str, None, sue_gift_id, _gifts_dir=sue_gifts_dir)
+    sue_giftunit = giftunit_shop(sue_str, None, sue_gift_id, _gifts_dir=sue_gifts_dir)
     assert os_path_exists(sue_gift2_path) is False
     assert os_path_exists(sue_gift6_path) is False
 
     # WHEN
-    farm_giftunit._save_gift_file()
+    sue_giftunit._save_gift_file()
 
     # THEN
     assert os_path_exists(sue_gift2_path)
@@ -150,15 +150,15 @@ def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     sue_gift6_path = f_path(sue_gifts_dir, six_filename)
     print(f"{sue_gift2_path=}")
     print(f"{sue_gift6_path=}")
-    farm_giftunit = giftunit_shop(sue_str, _gifts_dir=sue_gifts_dir)
+    sue_giftunit = giftunit_shop(sue_str, _gifts_dir=sue_gifts_dir)
     assert os_path_exists(sue_gift2_path) is False
-    assert farm_giftunit.gift_file_exists() is False
+    assert sue_giftunit.gift_file_exists() is False
 
     # WHEN
-    farm_giftunit._save_gift_file()
+    sue_giftunit._save_gift_file()
 
     # THEN
-    assert farm_giftunit.gift_file_exists()
+    assert sue_giftunit.gift_file_exists()
 
 
 def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
@@ -172,30 +172,30 @@ def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
 
     zia_str = "Zia"
     yao_str = "Yao"
-    farm_delta_start = 4
-    farm_giftunit = giftunit_shop(
+    sue_delta_start = 4
+    sue_giftunit = giftunit_shop(
         sue_str, _atoms_dir=sue_atoms_dir, _gifts_dir=sue_gifts_dir
     )
-    farm_giftunit.set_delta_start(farm_delta_start)
-    farm_giftunit.set_face(zia_str)
-    farm_giftunit.set_face(yao_str)
+    sue_giftunit.set_delta_start(sue_delta_start)
+    sue_giftunit.set_face(zia_str)
+    sue_giftunit.set_face(yao_str)
     int4 = 4
     int5 = 5
     sports_atom = get_atom_example_itemunit_sports()
     knee_atom = get_atom_example_itemunit_knee()
-    farm_giftunit._deltaunit.set_atomunit(sports_atom)
-    farm_giftunit._deltaunit.set_atomunit(knee_atom)
-    assert farm_giftunit.gift_file_exists() is False
-    assert farm_giftunit.atom_file_exists(int4) is False
-    assert farm_giftunit.atom_file_exists(int5) is False
+    sue_giftunit._deltaunit.set_atomunit(sports_atom)
+    sue_giftunit._deltaunit.set_atomunit(knee_atom)
+    assert sue_giftunit.gift_file_exists() is False
+    assert sue_giftunit.atom_file_exists(int4) is False
+    assert sue_giftunit.atom_file_exists(int5) is False
 
     # WHEN
-    farm_giftunit.save_files()
+    sue_giftunit.save_files()
 
     # THEN
-    assert farm_giftunit.gift_file_exists()
-    assert farm_giftunit.atom_file_exists(int4)
-    assert farm_giftunit.atom_file_exists(int5)
+    assert sue_giftunit.gift_file_exists()
+    assert sue_giftunit.atom_file_exists(int4)
+    assert sue_giftunit.atom_file_exists(int5)
 
 
 def test_GiftUnit_create_deltaunit_from_atom_files_SetsAttr(env_dir_setup_cleanup):

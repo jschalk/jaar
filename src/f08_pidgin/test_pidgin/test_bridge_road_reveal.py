@@ -7,7 +7,7 @@ def test_RoadBridge_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario0():
     otx_music45_str = "music45"
     otx_r_wall = "/"
     inx_r_wall = ":"
-    road_roadbridge = roadbridge_shop(otx_r_wall, inx_r_wall)
+    road_roadbridge = roadbridge_shop(x_otx_wall=otx_r_wall, x_inx_wall=inx_r_wall)
     assert road_roadbridge.otx_exists(otx_music45_str) is False
     assert road_roadbridge.otx2inx_exists(otx_music45_str, otx_music45_str) is False
 
@@ -28,7 +28,7 @@ def test_RoadBridge_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     inx_r_wall = ":"
     clean_otx_str = "clean"
     clean_otx_road = f"{otx_music45_str}{otx_r_wall}{clean_otx_str}"
-    road_roadbridge = roadbridge_shop(otx_r_wall, inx_r_wall)
+    road_roadbridge = roadbridge_shop(x_otx_wall=otx_r_wall, x_inx_wall=inx_r_wall)
     assert road_roadbridge.otx_exists(otx_music45_str) is False
     assert road_roadbridge.otx_exists(clean_otx_road) is False
 
@@ -64,7 +64,7 @@ def test_RoadBridge_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_idea():
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     clean_otx_road = f"{otx_music45_str}{otx_r_wall}{clean_otx_str}"
-    road_roadbridge = roadbridge_shop(otx_r_wall, inx_r_wall)
+    road_roadbridge = roadbridge_shop(x_otx_wall=otx_r_wall, x_inx_wall=inx_r_wall)
     road_roadbridge.set_idea(clean_otx_str, clean_inx_str)
     assert road_roadbridge.otx_exists(otx_music45_str) is False
     assert road_roadbridge.otx_exists(clean_otx_road) is False

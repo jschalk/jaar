@@ -1,5 +1,5 @@
 from src.f00_instrument.file import (
-    create_dir,
+    set_dir,
     save_file,
     create_path,
     get_dir_filenames,
@@ -100,15 +100,19 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def zoo_staging_str():
-    return "zoo_staging"
+def forge_staging_str():
+    return "forge_staging"
 
 
-def zoo_agg_str():
-    return "zoo_agg"
+def forge_agg_str():
+    return "forge_agg"
 
 
-def get_zoo_staging_grouping_with_all_values_equal_df(
+def forge_valid_str():
+    return "forge_valid"
+
+
+def get_forge_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, group_by_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
@@ -118,9 +122,9 @@ def get_zoo_staging_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql(zoo_staging_str(), conn, index=False)
+        x_df.to_sql(forge_staging_str(), conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table=zoo_staging_str(),
+            x_table=forge_staging_str(),
             group_by_columns=grouping_columns,
             value_columns=value_columns,
         )
@@ -179,7 +183,7 @@ class pandas_tools_ExcelWriterException(Exception):
 
 def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
     # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
-    create_dir(os_path_dirname(file_path))
+    set_dir(os_path_dirname(file_path))
     """
     Updates or creates an Excel sheet with a specified DataFrame.
 
@@ -238,7 +242,7 @@ def split_excel_into_dirs(
         column_name (str): Column to split by unique values.
     """
     # Create the output directory if it doesn't exist
-    create_dir(output_dir)
+    set_dir(output_dir)
     df = pandas_read_excel(input_file, sheet_name=sheet_name)
 
     # Check if the column exists
@@ -257,7 +261,7 @@ def split_excel_into_dirs(
             safe_value = str(value).replace("/", "_").replace("\\", "_")
             subdirectory = create_path(output_dir, safe_value)
             # Create the subdirectory if it doesn't exist
-            create_dir(subdirectory)
+            set_dir(subdirectory)
             # Define the output file path
             output_file = create_path(subdirectory, f"{file_name}.xlsx")
             upsert_sheet(output_file, sheet_name, filtered_df)

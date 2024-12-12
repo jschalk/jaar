@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, get_dir_filenames, create_dir
+from src.f00_instrument.file import create_path, get_dir_filenames
 from src.f04_gift.atom_config import face_id_str
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
@@ -14,7 +14,7 @@ from src.f08_pidgin.pidgin_config import (
     otx_road_str,
     unknown_word_str,
 )
-from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet, open_csv
+from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel

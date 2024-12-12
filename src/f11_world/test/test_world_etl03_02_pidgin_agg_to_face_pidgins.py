@@ -110,7 +110,7 @@ def test_WorldUnit_pidgin_agg_to_face_dirs_Scenario1_AllBridgeCategorys(
     e1_idea_rows = [e1_idea0, e1_idea1]
     e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
 
-    agg_pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
+    agg_pidgin_path = create_path(fizz_world._forge_dir, "pidgin.xlsx")
     upsert_sheet(agg_pidgin_path, acct_agg_str, e1_acct_agg_df)
     upsert_sheet(agg_pidgin_path, group_agg_str, e1_group_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
