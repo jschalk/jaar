@@ -47,12 +47,12 @@ def test_roadbridge_shop_ReturnsObj_scenario0():
 
     # WHEN
     e7_roadbridge = roadbridge_shop(
-        x_face_id=bob_str,
-        x_event_id=event7,
-        x_otx2inx=otx2inx,
-        x_unknown_word=x_unknown_word,
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
+        face_id=bob_str,
+        event_id=event7,
+        otx2inx=otx2inx,
+        unknown_word=x_unknown_word,
+        otx_wall=slash_otx_wall,
+        inx_wall=colon_inx_wall,
     )
 
     # THEN
@@ -63,11 +63,11 @@ def test_roadbridge_shop_ReturnsObj_scenario0():
     assert e7_roadbridge.otx_wall == slash_otx_wall
     assert e7_roadbridge.inx_wall == colon_inx_wall
     assert e7_roadbridge.ideabridge == ideabridge_shop(
-        x_face_id=bob_str,
-        x_event_id=event7,
-        x_unknown_word=x_unknown_word,
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
+        face_id=bob_str,
+        event_id=event7,
+        unknown_word=x_unknown_word,
+        otx_wall=slash_otx_wall,
+        inx_wall=colon_inx_wall,
     )
 
 
@@ -83,10 +83,10 @@ def test_roadbridge_shop_ReturnsObj_Scenario2():
     assert x_roadbridge.face_id is None
     assert x_roadbridge.event_id == 0
     assert x_roadbridge.ideabridge == ideabridge_shop(
-        x_event_id=0,
-        x_unknown_word=default_unknown_word_if_None(),
-        x_otx_wall=default_wall_if_None(),
-        x_inx_wall=default_wall_if_None(),
+        event_id=0,
+        unknown_word=default_unknown_word_if_None(),
+        otx_wall=default_wall_if_None(),
+        inx_wall=default_wall_if_None(),
     )
 
 
@@ -101,12 +101,12 @@ def test_roadbridge_shop_ReturnsObj_scenario3_PidginCoreAttrAreDefaultWhenGiven_
 
     # WHEN
     x_roadbridge = roadbridge_shop(
-        x_face_id=bob_str,
-        x_event_id=event7,
-        x_otx2inx=otx2inx,
-        x_unknown_word=x_nan,
-        x_otx_wall=x_nan,
-        x_inx_wall=x_nan,
+        face_id=bob_str,
+        event_id=event7,
+        otx2inx=otx2inx,
+        unknown_word=x_nan,
+        otx_wall=x_nan,
+        inx_wall=x_nan,
     )
 
     # THEN
@@ -140,7 +140,7 @@ def test_RoadBridge_set_all_otx2inx_RaisesErrorIf_unknown_word_IsKeyIn_otx2inx()
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownWord"
-    acct_id_roadbridge = roadbridge_shop(x_unknown_word=x_unknown_word)
+    acct_id_roadbridge = roadbridge_shop(unknown_word=x_unknown_word)
     x_otx2inx = {xio_str: sue_str, x_unknown_word: zia_str}
     assert acct_id_roadbridge.otx2inx != x_otx2inx
 
@@ -279,7 +279,7 @@ def test_RoadBridge_unknown_word_in_otx2inx_ReturnsObj():
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownWord"
-    x_roadbridge = roadbridge_shop(x_unknown_word=x_unknown_word)
+    x_roadbridge = roadbridge_shop(unknown_word=x_unknown_word)
     x_roadbridge.set_otx2inx(xio_str, sue_str)
     assert x_roadbridge._unknown_word_in_otx2inx() is False
 
@@ -469,7 +469,7 @@ def test_RoadBridge_get_json_ReturnsObj():
     casa_otx = "casa1"
     casa_inx = "casa2"
     slash_otx_wall = "/"
-    x_roadbridge = roadbridge_shop(sue_str, x_otx_wall=slash_otx_wall)
+    x_roadbridge = roadbridge_shop(sue_str, otx_wall=slash_otx_wall)
     x1_road_bridge_json = f"""{{
   "event_id": 0,
   "face_id": "{sue_str}",
@@ -509,7 +509,7 @@ def test_get_roadbridge_from_dict_ReturnsObj():
     clean_inx = "propre"
     event7 = 7
     slash_otx_wall = "/"
-    x_roadbridge = roadbridge_shop(sue_str, event7, x_otx_wall=slash_otx_wall)
+    x_roadbridge = roadbridge_shop(sue_str, event7, otx_wall=slash_otx_wall)
     x_roadbridge.set_otx2inx(clean_otx, clean_inx)
     x_roadbridge.set_idea("bob", "bobito")
 
@@ -552,7 +552,7 @@ def test_RoadBridge_all_otx_parent_roads_exist_ReturnsObj_RoadUnit():
     clean_otx_str = "clean"
     clean_otx_road = f"{clean_otx_parent_road}{otx_r_wall}{clean_otx_str}"
 
-    x_roadbridge = roadbridge_shop(x_otx_wall=otx_r_wall)
+    x_roadbridge = roadbridge_shop(otx_wall=otx_r_wall)
     assert x_roadbridge.otx_exists(clean_otx_parent_road) is False
     assert x_roadbridge.otx_exists(clean_otx_road) is False
     assert x_roadbridge.all_otx_parent_roads_exist()
@@ -579,7 +579,7 @@ def test_RoadBridge_is_valid_ReturnsObj_Scenario0_label_str():
     otx_wall = "/"
     casa_otx = f"casa{otx_wall}"
     casa_inx = "casa"
-    ideaunit_roadbridge = roadbridge_shop(x_otx_wall=otx_wall)
+    ideaunit_roadbridge = roadbridge_shop(otx_wall=otx_wall)
     assert ideaunit_roadbridge.is_valid()
 
     # WHEN
@@ -604,7 +604,7 @@ def test_RoadBridge_is_valid_ReturnsObj_Scenario1_road_str():
     clean_inx_road = f"{music_str}{inx_r_wall}{clean_inx_str}"
     # casa_otx = f"casa{otx_wall}"
     # casa_inx = f"casa"
-    x_roadbridge = roadbridge_shop(x_otx_wall=otx_r_wall, x_inx_wall=inx_r_wall)
+    x_roadbridge = roadbridge_shop(otx_wall=otx_r_wall, inx_wall=inx_r_wall)
     x_roadbridge.set_otx2inx(music_str, music_str)
     assert x_roadbridge.is_valid()
     assert x_roadbridge.otx2inx_exists(clean_otx_road, clean_inx_road) is False
@@ -623,7 +623,7 @@ def test_RoadBridge_is_valid_ReturnsObj_Scenario3_RoadUnit():
     clean_otx_str = "clean"
     clean_otx_road = f"{clean_otx_parent_road}{otx_r_wall}{clean_otx_str}"
 
-    x_roadbridge = roadbridge_shop(x_otx_wall=otx_r_wall)
+    x_roadbridge = roadbridge_shop(otx_wall=otx_r_wall)
     assert x_roadbridge.otx_exists(clean_otx_parent_road) is False
     assert x_roadbridge.otx_exists(clean_otx_road) is False
     assert x_roadbridge.all_otx_parent_roads_exist()
@@ -663,7 +663,7 @@ def test_inherit_roadbridge_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_wal
     # ESTABLISH
     sue_str = "Sue"
     slash_otx_wall = "/"
-    old_roadbridge = roadbridge_shop(sue_str, 0, x_otx_wall=slash_otx_wall)
+    old_roadbridge = roadbridge_shop(sue_str, 0, otx_wall=slash_otx_wall)
     new_roadbridge = roadbridge_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:
@@ -675,7 +675,7 @@ def test_inherit_roadbridge_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_wal
     # ESTABLISH
     sue_str = "Sue"
     slash_otx_wall = "/"
-    old_roadbridge = roadbridge_shop(sue_str, 0, x_inx_wall=slash_otx_wall)
+    old_roadbridge = roadbridge_shop(sue_str, 0, inx_wall=slash_otx_wall)
     new_roadbridge = roadbridge_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:
@@ -687,7 +687,7 @@ def test_inherit_roadbridge_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unkno
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownWord"
-    old_roadbridge = roadbridge_shop(sue_str, 0, x_unknown_word=x_unknown_word)
+    old_roadbridge = roadbridge_shop(sue_str, 0, unknown_word=x_unknown_word)
     new_roadbridge = roadbridge_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:

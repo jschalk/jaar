@@ -27,7 +27,7 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario1_RaiseErrorWhenDiffer
     # ESTABLISH
     sue_str = "Sue"
     slash_otx_wall = "/"
-    old_pidginunit = pidginunit_shop(sue_str, 0, x_otx_wall=slash_otx_wall)
+    old_pidginunit = pidginunit_shop(sue_str, 0, otx_wall=slash_otx_wall)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:
@@ -39,7 +39,7 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario2_RaiseErrorWhenDiffer
     # ESTABLISH
     sue_str = "Sue"
     slash_otx_wall = "/"
-    old_pidginunit = pidginunit_shop(sue_str, 0, x_inx_wall=slash_otx_wall)
+    old_pidginunit = pidginunit_shop(sue_str, 0, inx_wall=slash_otx_wall)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:
@@ -51,7 +51,7 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario3_RaiseErrorWhenDiffer
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownWord"
-    old_pidginunit = pidginunit_shop(sue_str, 0, x_unknown_word=x_unknown_word)
+    old_pidginunit = pidginunit_shop(sue_str, 0, unknown_word=x_unknown_word)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:

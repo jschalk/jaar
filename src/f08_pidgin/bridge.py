@@ -113,35 +113,35 @@ class AcctBridge(BridgeCore):
 
 
 def acctbridge_shop(
-    x_face_id: FaceID = None,
-    x_event_id: TimeLinePoint = None,
-    x_otx_wall: str = None,
-    x_inx_wall: str = None,
-    x_otx2inx: dict = None,
-    x_unknown_word: str = None,
+    face_id: FaceID = None,
+    event_id: TimeLinePoint = None,
+    otx_wall: str = None,
+    inx_wall: str = None,
+    otx2inx: dict = None,
+    unknown_word: str = None,
 ) -> AcctBridge:
-    x_unknown_word = default_unknown_word_if_None(x_unknown_word)
-    x_otx_wall = default_wall_if_None(x_otx_wall)
-    x_inx_wall = default_wall_if_None(x_inx_wall)
+    unknown_word = default_unknown_word_if_None(unknown_word)
+    otx_wall = default_wall_if_None(otx_wall)
+    inx_wall = default_wall_if_None(inx_wall)
 
     return AcctBridge(
-        face_id=x_face_id,
-        event_id=get_0_if_None(x_event_id),
-        otx_wall=x_otx_wall,
-        inx_wall=x_inx_wall,
-        unknown_word=x_unknown_word,
-        otx2inx=get_empty_dict_if_None(x_otx2inx),
+        face_id=face_id,
+        event_id=get_0_if_None(event_id),
+        otx_wall=otx_wall,
+        inx_wall=inx_wall,
+        unknown_word=unknown_word,
+        otx2inx=get_empty_dict_if_None(otx2inx),
     )
 
 
 def get_acctbridge_from_dict(x_dict: dict) -> AcctBridge:
     return acctbridge_shop(
-        x_face_id=x_dict.get("face_id"),
-        x_event_id=x_dict.get("event_id"),
-        x_otx_wall=x_dict.get("otx_wall"),
-        x_inx_wall=x_dict.get("inx_wall"),
-        x_otx2inx=x_dict.get("otx2inx"),
-        x_unknown_word=x_dict.get("unknown_word"),
+        face_id=x_dict.get("face_id"),
+        event_id=x_dict.get("event_id"),
+        otx_wall=x_dict.get("otx_wall"),
+        inx_wall=x_dict.get("inx_wall"),
+        otx2inx=x_dict.get("otx2inx"),
+        unknown_word=x_dict.get("unknown_word"),
     )
 
 
@@ -191,35 +191,35 @@ class GroupBridge(BridgeCore):
 
 
 def groupbridge_shop(
-    x_face_id: FaceID = None,
-    x_event_id: TimeLinePoint = None,
-    x_otx_wall: str = None,
-    x_inx_wall: str = None,
-    x_otx2inx: dict = None,
-    x_unknown_word: str = None,
+    face_id: FaceID = None,
+    event_id: TimeLinePoint = None,
+    otx_wall: str = None,
+    inx_wall: str = None,
+    otx2inx: dict = None,
+    unknown_word: str = None,
 ) -> GroupBridge:
-    x_unknown_word = default_unknown_word_if_None(x_unknown_word)
-    x_otx_wall = default_wall_if_None(x_otx_wall)
-    x_inx_wall = default_wall_if_None(x_inx_wall)
+    unknown_word = default_unknown_word_if_None(unknown_word)
+    otx_wall = default_wall_if_None(otx_wall)
+    inx_wall = default_wall_if_None(inx_wall)
 
     return GroupBridge(
-        face_id=x_face_id,
-        event_id=get_0_if_None(x_event_id),
-        otx_wall=x_otx_wall,
-        inx_wall=x_inx_wall,
-        unknown_word=x_unknown_word,
-        otx2inx=get_empty_dict_if_None(x_otx2inx),
+        face_id=face_id,
+        event_id=get_0_if_None(event_id),
+        otx_wall=otx_wall,
+        inx_wall=inx_wall,
+        unknown_word=unknown_word,
+        otx2inx=get_empty_dict_if_None(otx2inx),
     )
 
 
 def get_groupbridge_from_dict(x_dict: dict) -> GroupBridge:
     return groupbridge_shop(
-        x_face_id=x_dict.get("face_id"),
-        x_event_id=x_dict.get("event_id"),
-        x_otx_wall=x_dict.get("otx_wall"),
-        x_inx_wall=x_dict.get("inx_wall"),
-        x_otx2inx=x_dict.get("otx2inx"),
-        x_unknown_word=x_dict.get("unknown_word"),
+        face_id=x_dict.get("face_id"),
+        event_id=x_dict.get("event_id"),
+        otx_wall=x_dict.get("otx_wall"),
+        inx_wall=x_dict.get("inx_wall"),
+        otx2inx=x_dict.get("otx2inx"),
+        unknown_word=x_dict.get("unknown_word"),
     )
 
 
@@ -269,35 +269,35 @@ class IdeaBridge(BridgeCore):
 
 
 def ideabridge_shop(
-    x_face_id: FaceID = None,
-    x_event_id: TimeLinePoint = None,
-    x_otx_wall: str = None,
-    x_inx_wall: str = None,
-    x_otx2inx: dict = None,
-    x_unknown_word: str = None,
+    face_id: FaceID = None,
+    event_id: TimeLinePoint = None,
+    otx_wall: str = None,
+    inx_wall: str = None,
+    otx2inx: dict = None,
+    unknown_word: str = None,
 ) -> IdeaBridge:
-    x_unknown_word = default_unknown_word_if_None(x_unknown_word)
-    x_otx_wall = default_wall_if_None(x_otx_wall)
-    x_inx_wall = default_wall_if_None(x_inx_wall)
+    unknown_word = default_unknown_word_if_None(unknown_word)
+    otx_wall = default_wall_if_None(otx_wall)
+    inx_wall = default_wall_if_None(inx_wall)
 
     return IdeaBridge(
-        face_id=x_face_id,
-        event_id=get_0_if_None(x_event_id),
-        otx_wall=x_otx_wall,
-        inx_wall=x_inx_wall,
-        unknown_word=x_unknown_word,
-        otx2inx=get_empty_dict_if_None(x_otx2inx),
+        face_id=face_id,
+        event_id=get_0_if_None(event_id),
+        otx_wall=otx_wall,
+        inx_wall=inx_wall,
+        unknown_word=unknown_word,
+        otx2inx=get_empty_dict_if_None(otx2inx),
     )
 
 
 def get_ideabridge_from_dict(x_dict: dict) -> IdeaBridge:
     return ideabridge_shop(
-        x_face_id=x_dict.get("face_id"),
-        x_event_id=x_dict.get("event_id"),
-        x_otx_wall=x_dict.get("otx_wall"),
-        x_inx_wall=x_dict.get("inx_wall"),
-        x_otx2inx=x_dict.get("otx2inx"),
-        x_unknown_word=x_dict.get("unknown_word"),
+        face_id=x_dict.get("face_id"),
+        event_id=x_dict.get("event_id"),
+        otx_wall=x_dict.get("otx_wall"),
+        inx_wall=x_dict.get("inx_wall"),
+        otx2inx=x_dict.get("otx2inx"),
+        unknown_word=x_dict.get("unknown_word"),
     )
 
 
@@ -425,46 +425,46 @@ class RoadBridge:
 
 
 def roadbridge_shop(
-    x_face_id: FaceID = None,
-    x_event_id: TimeLinePoint = None,
-    x_otx_wall: str = None,
-    x_inx_wall: str = None,
+    face_id: FaceID = None,
+    event_id: TimeLinePoint = None,
+    otx_wall: str = None,
+    inx_wall: str = None,
     x_ideabridge: IdeaBridge = None,
-    x_otx2inx: dict = None,
-    x_unknown_word: str = None,
+    otx2inx: dict = None,
+    unknown_word: str = None,
 ) -> RoadBridge:
-    x_unknown_word = default_unknown_word_if_None(x_unknown_word)
-    x_otx_wall = default_wall_if_None(x_otx_wall)
-    x_inx_wall = default_wall_if_None(x_inx_wall)
+    unknown_word = default_unknown_word_if_None(unknown_word)
+    otx_wall = default_wall_if_None(otx_wall)
+    inx_wall = default_wall_if_None(inx_wall)
 
     if x_ideabridge is None:
         x_ideabridge = ideabridge_shop(
-            x_otx_wall=x_otx_wall,
-            x_inx_wall=x_inx_wall,
-            x_unknown_word=x_unknown_word,
-            x_face_id=x_face_id,
-            x_event_id=x_event_id,
+            otx_wall=otx_wall,
+            inx_wall=inx_wall,
+            unknown_word=unknown_word,
+            face_id=face_id,
+            event_id=event_id,
         )
 
     return RoadBridge(
-        otx2inx=get_empty_dict_if_None(x_otx2inx),
-        unknown_word=x_unknown_word,
-        otx_wall=x_otx_wall,
-        inx_wall=x_inx_wall,
+        otx2inx=get_empty_dict_if_None(otx2inx),
+        unknown_word=unknown_word,
+        otx_wall=otx_wall,
+        inx_wall=inx_wall,
         ideabridge=x_ideabridge,
-        face_id=x_face_id,
-        event_id=get_0_if_None(x_event_id),
+        face_id=face_id,
+        event_id=get_0_if_None(event_id),
     )
 
 
 def get_roadbridge_from_dict(x_dict: dict) -> RoadBridge:
     return roadbridge_shop(
-        x_face_id=x_dict.get("face_id"),
-        x_event_id=x_dict.get("event_id"),
-        x_otx_wall=x_dict.get("otx_wall"),
-        x_inx_wall=x_dict.get("inx_wall"),
-        x_otx2inx=x_dict.get("otx2inx"),
-        x_unknown_word=x_dict.get("unknown_word"),
+        face_id=x_dict.get("face_id"),
+        event_id=x_dict.get("event_id"),
+        otx_wall=x_dict.get("otx_wall"),
+        inx_wall=x_dict.get("inx_wall"),
+        otx2inx=x_dict.get("otx2inx"),
+        unknown_word=x_dict.get("unknown_word"),
     )
 
 

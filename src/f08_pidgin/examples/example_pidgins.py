@@ -20,7 +20,7 @@ def get_clean_ideabridge() -> IdeaBridge:
     clean_inx = "propre"
     casa_otx = "casa1"
     casa_inx = "casa2"
-    ideabridge = ideabridge_shop(x_face_id="Sue")
+    ideabridge = ideabridge_shop(face_id="Sue")
     ideabridge.set_otx2inx(clean_otx, clean_inx)
     ideabridge.set_otx2inx(casa_otx, casa_inx)
     return ideabridge
@@ -33,7 +33,7 @@ def get_clean_roadbridge() -> RoadBridge:
     clean_inx_str = "prop"
     wall = default_wall_if_None()
     clean_otx_road = f"{otx_music45_str}{wall}{clean_otx_str}"
-    road_bridgeunit = roadbridge_shop(x_face_id="Sue")
+    road_bridgeunit = roadbridge_shop(face_id="Sue")
     road_bridgeunit.set_idea(clean_otx_str, clean_inx_str)
     road_bridgeunit.set_otx2inx(otx_music45_str, inx_music87_str)
     road_bridgeunit.reveal_inx(clean_otx_road)
@@ -45,7 +45,7 @@ def get_swim_groupbridge() -> GroupBridge:
     swim_otx = f"swim{wall}"
     swim_inx = f"nage{wall}"
     climb_otx = f"climb{wall}"
-    x_groupbridge = groupbridge_shop(x_face_id="Sue")
+    x_groupbridge = groupbridge_shop(face_id="Sue")
     x_groupbridge.set_otx2inx(swim_otx, swim_inx)
     x_groupbridge.set_otx2inx(climb_otx, climb_otx)
     return x_groupbridge
@@ -59,7 +59,7 @@ def get_suita_acctbridge() -> AcctBridge:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_id_bridgeunit = acctbridge_shop(x_face_id="Sue")
+    acct_id_bridgeunit = acctbridge_shop(face_id="Sue")
     acct_id_bridgeunit.set_otx2inx(xio_otx, xio_inx)
     acct_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
     acct_id_bridgeunit.set_otx2inx(bob_otx, bob_inx)
@@ -71,7 +71,7 @@ def get_suita_acctbridge() -> AcctBridge:
 #     sue_inx = "Sue"
 #     zia_otx = "Zia"
 #     zia_inx = "Zia"
-#     x_groupbridge = bridgeunit_shop(type_AcctID_str(), x_face_id="Sue")
+#     x_groupbridge = bridgeunit_shop(type_AcctID_str(), face_id="Sue")
 #     x_groupbridge.set_otx2inx(sue_otx, sue_inx)
 #     x_groupbridge.set_otx2inx(zia_otx, zia_inx)
 #     return x_groupbridge
@@ -82,7 +82,7 @@ def get_suita_acctbridge() -> AcctBridge:
 #     sue_inx = f"Sue{default_wall_if_None()}"
 #     zia_otx = "Zia"
 #     zia_inx = f"Zia{default_wall_if_None()}"
-#     x_groupbridge = bridgeunit_shop(type_GroupID_str(), x_face_id="Sue")
+#     x_groupbridge = bridgeunit_shop(type_GroupID_str(), face_id="Sue")
 #     x_groupbridge.set_otx2inx(sue_otx, sue_inx)
 #     x_groupbridge.set_otx2inx(zia_otx, zia_inx)
 #     return x_groupbridge
@@ -93,7 +93,7 @@ def get_suita_acctbridge() -> AcctBridge:
 #     clean_inx = "propre"
 #     casa_otx = f"casa{default_wall_if_None()}"
 #     casa_inx = "casa"
-#     ideabridge = bridgeunit_shop(type_IdeaUnit_str(), x_face_id="Sue")
+#     ideabridge = bridgeunit_shop(type_IdeaUnit_str(), face_id="Sue")
 #     ideabridge.set_otx2inx(clean_str, clean_inx)
 #     ideabridge.set_otx2inx(casa_otx, casa_inx)
 #     return ideabridge
@@ -110,10 +110,10 @@ def get_slash_roadbridge() -> RoadBridge:
     clean_otx_road = f"{otx_music45_str}{slash_otx_wall}{clean_otx_str}"
     clean_otx_road = f"{otx_music45_str}{colon_inx_wall}{clean_otx_str}"
     road_bridgeunit = roadbridge_shop(
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
-        x_unknown_word=x_unknown_word,
-        x_face_id="Sue",
+        otx_wall=slash_otx_wall,
+        inx_wall=colon_inx_wall,
+        unknown_word=x_unknown_word,
+        face_id="Sue",
     )
     road_bridgeunit.set_idea(clean_otx_str, clean_inx_str)
     road_bridgeunit.set_otx2inx(otx_music45_str, inx_music87_str)
@@ -130,10 +130,10 @@ def get_slash_groupbridge() -> GroupBridge:
     climb_otx = f"climb{slash_otx_wall}"
     climb_inx = f"climb{colon_inx_wall}"
     x_groupbridge = groupbridge_shop(
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
-        x_unknown_word=x_unknown_word,
-        x_face_id="Sue",
+        otx_wall=slash_otx_wall,
+        inx_wall=colon_inx_wall,
+        unknown_word=x_unknown_word,
+        face_id="Sue",
     )
     x_groupbridge.set_otx2inx(swim_otx, swim_inx)
     x_groupbridge.set_otx2inx(climb_otx, climb_inx)
@@ -152,10 +152,10 @@ def get_slash_acctbridge() -> AcctBridge:
     sue_inx = "Suita"
     bob_inx = "Bobita"
     acct_id_bridgeunit = acctbridge_shop(
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
-        x_unknown_word=x_unknown_word,
-        x_face_id="Sue",
+        otx_wall=slash_otx_wall,
+        inx_wall=colon_inx_wall,
+        unknown_word=x_unknown_word,
+        face_id="Sue",
     )
     acct_id_bridgeunit.set_otx2inx(xio_otx, xio_inx)
     acct_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
@@ -340,7 +340,7 @@ def get_invalid_acctbridge() -> AcctBridge:
     sue_inx = "Sue"
     zia_otx = "Zia"
     zia_inx = "Zia"
-    acctbridge = acctbridge_shop(x_face_id="Sue")
+    acctbridge = acctbridge_shop(face_id="Sue")
     acctbridge.set_otx2inx(sue_otx, sue_inx)
     acctbridge.set_otx2inx(zia_otx, zia_inx)
     return acctbridge
@@ -351,7 +351,7 @@ def get_invalid_groupbridge() -> GroupBridge:
     sue_inx = f"Sue{default_wall_if_None()}"
     zia_otx = "Zia"
     zia_inx = f"Zia{default_wall_if_None()}"
-    x_groupbridge = groupbridge_shop(x_face_id="Sue")
+    x_groupbridge = groupbridge_shop(face_id="Sue")
     x_groupbridge.set_otx2inx(sue_otx, sue_inx)
     x_groupbridge.set_otx2inx(zia_otx, zia_inx)
     return x_groupbridge
@@ -362,7 +362,7 @@ def get_invalid_ideabridge() -> RoadBridge:
     clean_inx = "propre"
     casa_otx = f"casa{default_wall_if_None()}"
     casa_inx = "casa"
-    roadbridge = roadbridge_shop(x_face_id="Sue")
+    roadbridge = roadbridge_shop(face_id="Sue")
     roadbridge.set_otx2inx(clean_str, clean_inx)
     roadbridge.set_otx2inx(casa_otx, casa_inx)
     return roadbridge
@@ -377,11 +377,11 @@ def get_slash_ideabridge() -> IdeaBridge:
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     x_ideabridge = ideabridge_shop(
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
-        x_unknown_word=x_unknown_word,
-        x_face_id="Sue",
-        x_event_id=7,
+        otx_wall=slash_otx_wall,
+        inx_wall=colon_inx_wall,
+        unknown_word=x_unknown_word,
+        face_id="Sue",
+        event_id=7,
     )
     x_ideabridge.set_otx2inx(otx_music45_str, inx_music87_str)
     x_ideabridge.set_otx2inx(clean_otx_str, clean_inx_str)
@@ -400,11 +400,11 @@ def get_slash_roadbridge() -> RoadBridge:
     clean_otx_road = f"{otx_music45_str}{slash_otx_wall}{clean_otx_str}"
     clean_otx_road = f"{otx_music45_str}{colon_inx_wall}{clean_otx_str}"
     x_roadbridge = roadbridge_shop(
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
-        x_unknown_word=x_unknown_word,
-        x_face_id="Sue",
-        x_event_id=7,
+        otx_wall=slash_otx_wall,
+        inx_wall=colon_inx_wall,
+        unknown_word=x_unknown_word,
+        face_id="Sue",
+        event_id=7,
         x_ideabridge=get_slash_ideabridge(),
     )
     x_roadbridge.set_idea(clean_otx_str, clean_inx_str)
@@ -422,11 +422,11 @@ def get_slash_groupbridge() -> GroupBridge:
     climb_otx = f"climb{slash_otx_wall}"
     climb_inx = f"climb{colon_inx_wall}"
     x_groupbridge = groupbridge_shop(
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
-        x_unknown_word=x_unknown_word,
-        x_face_id="Sue",
-        x_event_id=7,
+        otx_wall=slash_otx_wall,
+        inx_wall=colon_inx_wall,
+        unknown_word=x_unknown_word,
+        face_id="Sue",
+        event_id=7,
     )
     x_groupbridge.set_otx2inx(swim_otx, swim_inx)
     x_groupbridge.set_otx2inx(climb_otx, climb_inx)
@@ -445,11 +445,11 @@ def get_slash_acctbridge() -> AcctBridge:
     sue_inx = "Suita"
     bob_inx = "Bobita"
     x_acctbridge = acctbridge_shop(
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
-        x_unknown_word=x_unknown_word,
-        x_face_id="Sue",
-        x_event_id=7,
+        otx_wall=slash_otx_wall,
+        inx_wall=colon_inx_wall,
+        unknown_word=x_unknown_word,
+        face_id="Sue",
+        event_id=7,
     )
     x_acctbridge.set_otx2inx(xio_otx, xio_inx)
     x_acctbridge.set_otx2inx(sue_otx, sue_inx)
@@ -466,11 +466,11 @@ def get_pidgin_core_attrs_are_none_acctbridge() -> AcctBridge:
     bob_inx = "Bobita"
     x_nan = float("nan")
     x_acctbridge = acctbridge_shop(
-        x_face_id="Sue",
-        x_event_id=7,
-        x_otx_wall=x_nan,
-        x_inx_wall=x_nan,
-        x_unknown_word=x_nan,
+        face_id="Sue",
+        event_id=7,
+        otx_wall=x_nan,
+        inx_wall=x_nan,
+        unknown_word=x_nan,
     )
     x_acctbridge.set_otx2inx(xio_otx, xio_inx)
     x_acctbridge.set_otx2inx(sue_otx, sue_inx)

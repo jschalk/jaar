@@ -7,7 +7,7 @@ def test_PidginUnit_set_roadbridge_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    x_roadbridge = roadbridge_shop(x_face_id=sue_str)
+    x_roadbridge = roadbridge_shop(face_id=sue_str)
     x_roadbridge.set_otx2inx("Bob", "Bob of Portland")
     assert sue_pidginunit.roadbridge != x_roadbridge
 
@@ -23,7 +23,7 @@ def test_PidginUnit_set_roadbridge_RaisesErrorIf_roadbridge_otx_wall_IsNotSame()
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_otx_wall = "/"
-    x_roadbridge = roadbridge_shop(x_otx_wall=slash_otx_wall, x_face_id=sue_str)
+    x_roadbridge = roadbridge_shop(otx_wall=slash_otx_wall, face_id=sue_str)
     assert sue_pidginunit.otx_wall != x_roadbridge.otx_wall
     assert sue_pidginunit.roadbridge != x_roadbridge
 
@@ -39,7 +39,7 @@ def test_PidginUnit_set_roadbridge_RaisesErrorIf_roadbridge_inx_wall_IsNotSame()
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_inx_wall = "/"
-    x_roadbridge = roadbridge_shop(x_inx_wall=slash_inx_wall, x_face_id=sue_str)
+    x_roadbridge = roadbridge_shop(inx_wall=slash_inx_wall, face_id=sue_str)
     assert sue_pidginunit.inx_wall != x_roadbridge.inx_wall
     assert sue_pidginunit.roadbridge != x_roadbridge
 
@@ -55,7 +55,7 @@ def test_PidginUnit_set_roadbridge_RaisesErrorIf_roadbridge_unknown_word_IsNotSa
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
-    x_roadbridge = roadbridge_shop(x_unknown_word=casa_unknown_word, x_face_id=sue_str)
+    x_roadbridge = roadbridge_shop(unknown_word=casa_unknown_word, face_id=sue_str)
     assert sue_pidginunit.unknown_word != x_roadbridge.unknown_word
     assert sue_pidginunit.roadbridge != x_roadbridge
 
@@ -71,7 +71,7 @@ def test_PidginUnit_set_roadbridge_RaisesErrorIf_roadbridge_face_id_IsNotSame():
     sue_str = "Sue"
     yao_str = "Yao"
     sue_pidginunit = pidginunit_shop(sue_str)
-    x_roadbridge = roadbridge_shop(x_face_id=yao_str)
+    x_roadbridge = roadbridge_shop(face_id=yao_str)
     assert sue_pidginunit.face_id != x_roadbridge.face_id
     assert sue_pidginunit.roadbridge != x_roadbridge
 
@@ -86,7 +86,7 @@ def test_PidginUnit_get_roadbridge_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    static_x_roadbridge = roadbridge_shop(x_face_id=sue_str)
+    static_x_roadbridge = roadbridge_shop(face_id=sue_str)
     static_x_roadbridge.set_otx2inx("Bob", "Bob of Portland")
     sue_pidginunit.set_roadbridge(static_x_roadbridge)
 

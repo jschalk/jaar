@@ -247,52 +247,52 @@ class PidginUnit:
 
 
 def pidginunit_shop(
-    x_face_id: OwnerID,
-    x_event_id: TimeLinePoint = None,
-    x_otx_wall: str = None,
-    x_inx_wall: str = None,
-    x_unknown_word: str = None,
+    face_id: OwnerID,
+    event_id: TimeLinePoint = None,
+    otx_wall: str = None,
+    inx_wall: str = None,
+    unknown_word: str = None,
 ) -> PidginUnit:
-    x_unknown_word = default_unknown_word_if_None(x_unknown_word)
-    x_otx_wall = default_wall_if_None(x_otx_wall)
-    x_inx_wall = default_wall_if_None(x_inx_wall)
+    unknown_word = default_unknown_word_if_None(unknown_word)
+    otx_wall = default_wall_if_None(otx_wall)
+    inx_wall = default_wall_if_None(inx_wall)
 
     x_acctbridge = acctbridge_shop(
-        x_face_id=x_face_id,
-        x_event_id=x_event_id,
-        x_otx_wall=x_otx_wall,
-        x_inx_wall=x_inx_wall,
-        x_unknown_word=x_unknown_word,
+        face_id=face_id,
+        event_id=event_id,
+        otx_wall=otx_wall,
+        inx_wall=inx_wall,
+        unknown_word=unknown_word,
     )
     x_groupbridge = groupbridge_shop(
-        x_face_id=x_face_id,
-        x_event_id=x_event_id,
-        x_otx_wall=x_otx_wall,
-        x_inx_wall=x_inx_wall,
-        x_unknown_word=x_unknown_word,
+        face_id=face_id,
+        event_id=event_id,
+        otx_wall=otx_wall,
+        inx_wall=inx_wall,
+        unknown_word=unknown_word,
     )
     x_ideabridge = ideabridge_shop(
-        x_face_id=x_face_id,
-        x_event_id=x_event_id,
-        x_otx_wall=x_otx_wall,
-        x_inx_wall=x_inx_wall,
-        x_unknown_word=x_unknown_word,
+        face_id=face_id,
+        event_id=event_id,
+        otx_wall=otx_wall,
+        inx_wall=inx_wall,
+        unknown_word=unknown_word,
     )
     x_roadbridge = roadbridge_shop(
-        x_face_id=x_face_id,
-        x_event_id=x_event_id,
-        x_otx_wall=x_otx_wall,
-        x_inx_wall=x_inx_wall,
-        x_unknown_word=x_unknown_word,
+        face_id=face_id,
+        event_id=event_id,
+        otx_wall=otx_wall,
+        inx_wall=inx_wall,
+        unknown_word=unknown_word,
         x_ideabridge=x_ideabridge,
     )
 
     return PidginUnit(
-        face_id=x_face_id,
-        event_id=get_0_if_None(x_event_id),
-        unknown_word=x_unknown_word,
-        otx_wall=x_otx_wall,
-        inx_wall=x_inx_wall,
+        face_id=face_id,
+        event_id=get_0_if_None(event_id),
+        unknown_word=unknown_word,
+        otx_wall=otx_wall,
+        inx_wall=inx_wall,
         acctbridge=x_acctbridge,
         groupbridge=x_groupbridge,
         ideabridge=x_ideabridge,
