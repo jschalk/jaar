@@ -41,6 +41,10 @@ def get_default_worlds_dir() -> str:
     return "src/f11_world/examples/worlds"
 
 
+class _set_fiscal_pidgin_Exception(Exception):
+    pass
+
+
 @dataclass
 class WorldUnit:
     world_id: WorldID = None
@@ -97,7 +101,7 @@ class WorldUnit:
             exception_str = (
                 f"fiscal_event_id {fiscal_event_id} does not have associated face_id"
             )
-            raise Exception(exception_str)
+            raise _set_fiscal_pidgin_Exception(exception_str)
         face_pidgin_event_ids = self._pidgin_events.get(fiscal_face_id)
         face_pidgin_event_ids = get_empty_set_if_None(face_pidgin_event_ids)
         max_prev_pidgin_event_id = max(

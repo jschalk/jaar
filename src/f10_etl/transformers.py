@@ -649,11 +649,11 @@ def get_fiscal_events_by_dirs(faces_dir: str) -> dict[FiscalID, set[TimeLinePoin
         for event_id in get_level1_dirs(face_dir):
             event_dir = create_path(face_dir, event_id)
             for fiscal_id in get_level1_dirs(event_dir):
-                if fiscal_events.get(fiscal_id) != None:
+                if fiscal_events.get(fiscal_id) is None:
+                    fiscal_events[fiscal_id] = {int(event_id)}
+                else:
                     events_list = fiscal_events.get(fiscal_id)
                     events_list.add(int(event_id))
-                else:
-                    fiscal_events[fiscal_id] = {int(event_id)}
     return fiscal_events
 
 
@@ -665,9 +665,9 @@ def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[TimeLinePoint]
             event_dir = create_path(face_dir, event_id)
             pidgin_path = create_path(event_dir, "pidgin.json")
             if os_path_exists(pidgin_path):
-                if pidgin_events.get(face_id) != None:
+                if pidgin_events.get(face_id) is None:
+                    pidgin_events[face_id] = {int(event_id)}
+                else:
                     events_list = pidgin_events.get(face_id)
                     events_list.add(int(event_id))
-                else:
-                    pidgin_events[face_id] = {int(event_id)}
     return pidgin_events
