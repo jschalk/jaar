@@ -1,6 +1,7 @@
 from src.f00_instrument.file import create_path, open_file, save_file
 from src.f04_gift.atom_config import type_AcctID_str
 from src.f08_pidgin.pidgin import pidginunit_shop, get_pidginunit_from_json
+from src.f08_pidgin.pidgin_config import pidgin_filename
 from src.f10_etl.transformers import (
     etl_pidgin_jsons_inherit_younger_pidgins,
 )
@@ -23,11 +24,10 @@ def test_etl_pidgin_jsons_inherit_younger_pidgins_Scenario0_TwoPidginUnitFile(
     bob_dir = create_path(x_faces_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
-    pidgin_filename = "pidgin.json"
-    save_file(event3_dir, pidgin_filename, e3_pidginunit.get_json())
-    save_file(event7_dir, pidgin_filename, e7_pidginunit.get_json())
-    e3_json_file_path = create_path(event3_dir, pidgin_filename)
-    e7_json_file_path = create_path(event7_dir, pidgin_filename)
+    save_file(event3_dir, pidgin_filename(), e3_pidginunit.get_json())
+    save_file(event7_dir, pidgin_filename(), e7_pidginunit.get_json())
+    e3_json_file_path = create_path(event3_dir, pidgin_filename())
+    e7_json_file_path = create_path(event7_dir, pidgin_filename())
     x_pidgin_events = {bob_str: {event7, event3}}
     before_e3_pidgin = get_pidginunit_from_json(open_file(e3_json_file_path))
     before_e7_pidgin = get_pidginunit_from_json(open_file(e7_json_file_path))

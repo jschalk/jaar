@@ -10,6 +10,7 @@ from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f04_gift.atom_config import face_id_str, type_RoadUnit_str
 from src.f08_pidgin.pidgin import pidginunit_shop, get_pidginunit_from_json
 from src.f08_pidgin.pidgin_config import (
+    pidgin_filename,
     event_id_str,
     inx_wall_str,
     otx_wall_str,
@@ -56,7 +57,7 @@ def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_road(
     bob_dir = create_path(get_test_etl_dir(), bob_str)
     event3_dir = create_path(bob_dir, event3)
     save_file(event3_dir, "road.csv", event3_road_csv)
-    pidgin_json_file_path = create_path(event3_dir, "pidgin.json")
+    pidgin_json_file_path = create_path(event3_dir, pidgin_filename())
     assert os_path_exists(pidgin_json_file_path) is False
 
     # WHEN
@@ -64,7 +65,7 @@ def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_road(
 
     # THEN
     assert os_path_exists(pidgin_json_file_path)
-    json_pidginunit = get_pidginunit_from_json(open_file(event3_dir, "pidgin.json"))
+    json_pidginunit = get_pidginunit_from_json(open_file(event3_dir, pidgin_filename()))
     assert json_pidginunit.face_id == bob_str
     assert json_pidginunit.event_id == event3
     assert json_pidginunit.otx_wall == default_wall_if_None()
@@ -112,9 +113,9 @@ def test_etl_event_pidgins_csvs_to_pidgin_jsons_Scenario0_1Event_road(
     save_file(event3_dir, "road.csv", event3_road_csv)
     save_file(event7_dir, "road.csv", event7_road_csv)
     save_file(event9_dir, "road.csv", event9_road_csv)
-    e3_json_file_path = create_path(event3_dir, "pidgin.json")
-    e7_json_file_path = create_path(event7_dir, "pidgin.json")
-    e9_json_file_path = create_path(event9_dir, "pidgin.json")
+    e3_json_file_path = create_path(event3_dir, pidgin_filename())
+    e7_json_file_path = create_path(event7_dir, pidgin_filename())
+    e9_json_file_path = create_path(event9_dir, pidgin_filename())
     assert os_path_exists(e3_json_file_path) is False
     assert os_path_exists(e7_json_file_path) is False
     assert os_path_exists(e9_json_file_path) is False
@@ -126,7 +127,9 @@ def test_etl_event_pidgins_csvs_to_pidgin_jsons_Scenario0_1Event_road(
     assert os_path_exists(e3_json_file_path)
     assert os_path_exists(e7_json_file_path)
     assert os_path_exists(e9_json_file_path)
-    e3_json_pidginunit = get_pidginunit_from_json(open_file(event3_dir, "pidgin.json"))
+    e3_json_pidginunit = get_pidginunit_from_json(
+        open_file(event3_dir, pidgin_filename())
+    )
     assert e3_json_pidginunit.face_id == bob_str
     assert e3_json_pidginunit.event_id == event3
     assert e3_json_pidginunit.otx_wall == default_wall_if_None()
@@ -134,7 +137,9 @@ def test_etl_event_pidgins_csvs_to_pidgin_jsons_Scenario0_1Event_road(
     assert e3_json_pidginunit.unknown_word == default_unknown_word_if_None()
     assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
     assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
-    e7_json_pidginunit = get_pidginunit_from_json(open_file(event7_dir, "pidgin.json"))
+    e7_json_pidginunit = get_pidginunit_from_json(
+        open_file(event7_dir, pidgin_filename())
+    )
     assert e7_json_pidginunit.face_id == bob_str
     assert e7_json_pidginunit.event_id == event7
     assert e7_json_pidginunit.otx_wall == default_wall_if_None()
@@ -197,15 +202,14 @@ def test_get_pidgin_events_by_dirs_ReturnsObj(env_dir_setup_cleanup):
     event5_dir = create_path(sue_dir, event5)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(sue_dir, event9)
-    pidgin_filename = "pidgin.json"
-    event3_pidgin_file_path = create_path(event3_dir, pidgin_filename)
-    event5_pidgin_file_path = create_path(event5_dir, pidgin_filename)
-    event7_pidgin_file_path = create_path(event7_dir, pidgin_filename)
-    event9_pidgin_file_path = create_path(event9_dir, pidgin_filename)
-    save_file(event3_dir, pidgin_filename, "")
+    event3_pidgin_file_path = create_path(event3_dir, pidgin_filename())
+    event5_pidgin_file_path = create_path(event5_dir, pidgin_filename())
+    event7_pidgin_file_path = create_path(event7_dir, pidgin_filename())
+    event9_pidgin_file_path = create_path(event9_dir, pidgin_filename())
+    save_file(event3_dir, pidgin_filename(), "")
     set_dir(event5_dir)
-    save_file(event7_dir, pidgin_filename, "")
-    save_file(event9_dir, pidgin_filename, "")
+    save_file(event7_dir, pidgin_filename(), "")
+    save_file(event9_dir, pidgin_filename(), "")
     print(f"{event3_pidgin_file_path=}")
     print(f"{event5_pidgin_file_path=}")
     print(f"{event7_pidgin_file_path=}")

@@ -27,6 +27,10 @@ def pidginunit_str() -> str:
     return "pidginunit"
 
 
+def pidgin_filename() -> str:
+    return "pidgin.json"
+
+
 def event_id_str() -> str:
     return "event_id"
 
