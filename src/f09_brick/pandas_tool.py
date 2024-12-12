@@ -36,7 +36,7 @@ def save_dataframe_to_csv(x_df: DataFrame, x_dir: str, x_filename: str):
     save_file(x_dir, x_filename, get_ordered_csv(x_df))
 
 
-def get_new_sorting_columns(
+def get_sorting_columns(
     existing_columns: set[str], sorting_columns: list[str] = None
 ) -> list[str]:
     if sorting_columns is None:
@@ -48,7 +48,7 @@ def get_new_sorting_columns(
 
 
 def get_ordered_csv(x_df: DataFrame, sorting_columns: list[str] = None) -> str:
-    new_sorting_columns = get_new_sorting_columns(set(x_df.columns), sorting_columns)
+    new_sorting_columns = get_sorting_columns(set(x_df.columns), sorting_columns)
     x_df.sort_values(new_sorting_columns, inplace=True)
     x_df.reset_index(inplace=True)
     x_df.drop(columns=["index"], inplace=True)
@@ -116,7 +116,7 @@ def get_forge_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, group_by_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
-    grouping_columns = get_new_sorting_columns(df_columns, group_by_list)
+    grouping_columns = get_sorting_columns(df_columns, group_by_list)
     value_columns = df_columns.difference(grouping_columns)
 
     if grouping_columns == []:
@@ -135,7 +135,7 @@ def get_dataframe_pidginable_columns(x_df: DataFrame) -> set[str]:
     return {x_column for x_column in x_df.columns if x_column in pidginable_atom_args()}
 
 
-def pidgin_single_column_dataframe(
+def translate_single_column_dataframe(
     x_df: DataFrame, x_bridgeunit: BridgeCore, column_name: str
 ) -> DataFrame:
     if column_name in x_df:
@@ -147,13 +147,14 @@ def pidgin_single_column_dataframe(
     return x_df
 
 
-def pidgin_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
+def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
     column_names = set(x_df.columns)
     pidginable_columns = column_names.intersection(pidginable_atom_args())
+    print(f"{pidginable_columns=}")
     for pidginable_column in pidginable_columns:
         jaar_type = get_atom_args_jaar_types().get(pidginable_column)
         x_bridgeunit = x_pidginunit.get_bridgeunit(jaar_type)
-        pidgin_single_column_dataframe(x_df, x_bridgeunit, pidginable_column)
+        translate_single_column_dataframe(x_df, x_bridgeunit, pidginable_column)
 
 
 def move_otx_csvs_to_pidgin_inx(face_dir: str):
@@ -165,7 +166,7 @@ def move_otx_csvs_to_pidgin_inx(face_dir: str):
     otx_dir_files = get_dir_file_strs(otx_dir, delete_extensions=False)
     for x_file_name in otx_dir_files.keys():
         x_df = open_csv(otx_dir, x_file_name)
-        pidgin_all_columns_dataframe(x_df, face_pidginunit)
+        translate_all_columns_dataframe(x_df, face_pidginunit)
         save_dataframe_to_csv(x_df, inx_dir, x_file_name)
 
 

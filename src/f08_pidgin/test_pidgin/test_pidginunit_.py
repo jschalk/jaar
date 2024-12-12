@@ -6,6 +6,16 @@ from src.f04_gift.atom_config import (
     type_GroupID_str,
     type_IdeaUnit_str,
     type_RoadUnit_str,
+    acct_id_str,
+    awardee_id_str,
+    road_str,
+    parent_road_str,
+    label_str,
+    healer_id_str,
+    base_str,
+    group_id_str,
+    owner_id_str,
+    team_id_str,
 )
 from src.f08_pidgin.bridge import (
     groupbridge_shop,
@@ -58,17 +68,17 @@ def test_pidginable_atom_args_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert len(pidginable_atom_args()) == 11
     assert pidginable_atom_args() == {
-        "acct_id",
-        "awardee_id",
-        "road",
-        "parent_road",
-        "label",
-        "healer_id",
-        "need",
-        "base",
+        acct_id_str(),
+        awardee_id_str(),
+        base_str(),
+        group_id_str(),
+        healer_id_str(),
+        label_str(),
+        parent_road_str(),
         "pick",
-        "group_id",
-        "team_id",
+        "need",
+        road_str(),
+        team_id_str(),
     }
 
     print(f"{pidginable_jaar_types()=}")
