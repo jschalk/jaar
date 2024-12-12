@@ -118,3 +118,29 @@ def get_fiscal_args_category_mapping() -> dict[str, str]:
                 x_category_set.add(fiscal_category)
                 x_dict[x_arg] = x_category_set
     return x_dict
+
+
+def get_fiscal_args_jaar_types() -> dict[str, str]:
+    return {
+        "acct_id": "AcctID",
+        "amount": "float",
+        "c400_number": "int",
+        "cumlative_day": "int",
+        "cumlative_minute": "int",
+        "current_time": "int",
+        "hour_label": "IdeaUnit",
+        "fiscal_id": "IdeaUnit",
+        "fund_coin": "float",
+        "month_label": "IdeaUnit",
+        "monthday_distortion": "int",
+        "penny": "float",
+        "owner_id": "AcctID",
+        "quota": "int",
+        "respect_bit": "float",
+        "time_id": "TimeLinePoint",
+        "timeline_label": "IdeaUnit",
+        "weekday_label": "IdeaUnit",
+        "weekday_order": "int",
+        "wall": "str",
+        "yr1_jan1_offset": "int",
+    }

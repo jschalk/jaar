@@ -31,6 +31,7 @@ from src.f10_etl.transformers import (
     etl_forge_bricks_to_face_bricks,
     etl_face_bricks_to_event_bricks,
     etl_event_bricks_to_fiscal_bricks,
+    etl_fiscal_bricks_to_fiscal_inx,
     get_fiscal_events_by_dirs,
     get_pidgin_events_by_dirs,
 )
@@ -39,6 +40,10 @@ from dataclasses import dataclass
 
 def get_default_worlds_dir() -> str:
     return "src/f11_world/examples/worlds"
+
+
+class _set_fiscal_pidgin_Exception(Exception):
+    pass
 
 
 @dataclass
@@ -97,7 +102,7 @@ class WorldUnit:
             exception_str = (
                 f"fiscal_event_id {fiscal_event_id} does not have associated face_id"
             )
-            raise Exception(exception_str)
+            raise _set_fiscal_pidgin_Exception(exception_str)
         face_pidgin_event_ids = self._pidgin_events.get(fiscal_face_id)
         face_pidgin_event_ids = get_empty_set_if_None(face_pidgin_event_ids)
         max_prev_pidgin_event_id = max(
@@ -179,6 +184,10 @@ class WorldUnit:
         etl_event_bricks_to_fiscal_bricks(self._faces_dir)
         self._set_fiscal_events()
         self._set_fiscal_pidgins()
+
+    def fiscal_bricks_to_fiscal_inx(self):
+        fpidgins = self._fiscal_pidgins
+        etl_fiscal_bricks_to_fiscal_inx(self._faces_dir, self.events, fpidgins)
 
     def get_dict(self) -> dict:
         return {

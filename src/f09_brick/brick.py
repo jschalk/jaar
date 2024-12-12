@@ -22,7 +22,7 @@ from src.f09_brick.brick_config import (
     attributes_str,
     get_brick_format_headers,
 )
-from src.f09_brick.pandas_tool import save_dataframe_to_csv, get_new_sorting_columns
+from src.f09_brick.pandas_tool import save_dataframe_to_csv, get_sorting_columns
 from pandas import DataFrame
 from csv import reader as csv_reader
 from dataclasses import dataclass
@@ -38,7 +38,7 @@ class BrickRef:
         self._attributes[x_attribute] = {"otx_key": otx_key}
 
     def get_headers_list(self) -> list[str]:
-        return get_new_sorting_columns(self._attributes)
+        return get_sorting_columns(self._attributes)
 
     def get_otx_keys_list(self) -> list[str]:
         x_set = {
@@ -46,7 +46,7 @@ class BrickRef:
             for x_attr, otx_dict in self._attributes.items()
             if otx_dict.get("otx_key") is True
         }
-        return get_new_sorting_columns(x_set)
+        return get_sorting_columns(x_set)
 
     def get_otx_values_list(self) -> list[str]:
         x_set = {
@@ -54,7 +54,7 @@ class BrickRef:
             for x_attr, otx_dict in self._attributes.items()
             if otx_dict.get("otx_key") is False
         }
-        return get_new_sorting_columns(x_set)
+        return get_sorting_columns(x_set)
 
 
 def brickref_shop(x_brick_name: str, x_categorys: list[str]) -> BrickRef:

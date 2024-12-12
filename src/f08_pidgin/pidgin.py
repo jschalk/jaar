@@ -40,15 +40,22 @@ def pidginable_atom_args() -> set:
     return {
         "acct_id",
         "awardee_id",
-        "road",
-        "parent_road",
-        "label",
-        "healer_id",
-        "need",
         "base",
-        "pick",
+        "face_id",
+        "fiscal_id",
         "group_id",
+        "healer_id",
+        "hour_label",
+        "label",
+        "month_label",
+        "parent_road",
+        "pick",
+        "need",
+        "owner_id",
+        "road",
         "team_id",
+        "timeline_label",
+        "weekday_label",
     }
 
 

@@ -4,6 +4,7 @@ from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f04_gift.atom_config import face_id_str, type_AcctID_str
 from src.f08_pidgin.pidgin import pidginunit_shop, get_pidginunit_from_json
 from src.f08_pidgin.pidgin_config import (
+    pidgin_filename,
     event_id_str,
     inx_wall_str,
     otx_wall_str,
@@ -24,6 +25,7 @@ from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
+from pathlib import Path
 
 
 def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario0_NoPidginUnitFiles(
@@ -32,12 +34,19 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario0_NoPidginUnitFi
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     assert fizz_world._pidgin_events == {}
+    faces_dir = Path(fizz_world._faces_dir)
+    before_files = {f for f in faces_dir.glob("**/*") if f.is_file()}
 
     # WHEN
     fizz_world.pidgin_jsons_inherit_younger_pidgins()
 
     # THEN nothing changes, no errors raised
     assert fizz_world._pidgin_events == {}
+
+    # Verify no files were created or modified
+    final_files = {f for f in faces_dir.glob("**/*") if f.is_file()}
+    state_change_str = "File system state changed during test execution"
+    assert before_files == final_files, state_change_str
 
 
 def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario1_OnePidginUnitFile(
@@ -53,12 +62,11 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario1_OnePidginUnitF
     e3_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
     bob_dir = create_path(fizz_world._faces_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
-    pidgin_filename = "pidgin.json"
-    save_file(event3_dir, pidgin_filename, e3_pidginunit.get_json())
-    e3_json_file_path = create_path(event3_dir, pidgin_filename)
+    save_file(event3_dir, pidgin_filename(), e3_pidginunit.get_json())
+    e3_json_file_path = create_path(event3_dir, pidgin_filename())
     assert os_path_exists(e3_json_file_path)
     fizz_world._pidgin_events = {bob_str: {event3}}
-    file_e3_pidgin_json = open_file(event3_dir, pidgin_filename)
+    file_e3_pidgin_json = open_file(event3_dir, pidgin_filename())
     assert get_pidginunit_from_json(file_e3_pidgin_json) == e3_pidginunit
 
     # WHEN
@@ -84,16 +92,15 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
     bob_dir = create_path(fizz_world._faces_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
-    pidgin_filename = "pidgin.json"
-    save_file(event3_dir, pidgin_filename, e3_pidginunit.get_json())
-    save_file(event7_dir, pidgin_filename, e7_pidginunit.get_json())
-    e3_json_file_path = create_path(event3_dir, pidgin_filename)
-    e7_json_file_path = create_path(event7_dir, pidgin_filename)
+    save_file(event3_dir, pidgin_filename(), e3_pidginunit.get_json())
+    save_file(event7_dir, pidgin_filename(), e7_pidginunit.get_json())
+    e3_json_file_path = create_path(event3_dir, pidgin_filename())
+    e7_json_file_path = create_path(event7_dir, pidgin_filename())
     assert os_path_exists(e3_json_file_path)
     assert os_path_exists(e7_json_file_path)
     fizz_world._pidgin_events = {bob_str: {event3, event7}}
-    file_e3_pidgin_json = open_file(event3_dir, pidgin_filename)
-    file_e7_pidgin_json = open_file(event7_dir, pidgin_filename)
+    file_e3_pidgin_json = open_file(event3_dir, pidgin_filename())
+    file_e7_pidgin_json = open_file(event7_dir, pidgin_filename())
     before_e3_pidgin = get_pidginunit_from_json(file_e3_pidgin_json)
     before_e7_pidgin = get_pidginunit_from_json(file_e7_pidgin_json)
     assert before_e3_pidgin == e3_pidginunit
@@ -126,9 +133,9 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     event3_dir = create_path(bob_dir, event3)
 #     event7_dir = create_path(bob_dir, event7)
 #     event9_dir = create_path(zia_dir, event9)
-#     e3_json_file_path = create_path(event3_dir, "pidgin.json")
-#     e7_json_file_path = create_path(event7_dir, "pidgin.json")
-#     e9_json_file_path = create_path(event9_dir, "pidgin.json")
+#     e3_json_file_path = create_path(event3_dir, pidgin_filename())
+#     e7_json_file_path = create_path(event7_dir, pidgin_filename())
+#     e9_json_file_path = create_path(event9_dir, pidgin_filename())
 #     assert os_path_exists(e3_json_file_path) is False
 #     assert os_path_exists(e7_json_file_path) is False
 #     assert os_path_exists(e9_json_file_path) is False
@@ -140,7 +147,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     assert os_path_exists(e3_json_file_path)
 #     assert os_path_exists(e7_json_file_path)
 #     assert os_path_exists(e9_json_file_path)
-#     e3_json_pidginunit = get_pidginunit_from_json(open_file(event3_dir, "pidgin.json"))
+#     e3_json_pidginunit = get_pidginunit_from_json(open_file(event3_dir, pidgin_filename()))
 #     assert e3_json_pidginunit.face_id == bob_str
 #     assert e3_json_pidginunit.event_id == event3
 #     assert e3_json_pidginunit.otx_wall == default_wall_if_None()
@@ -148,7 +155,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     assert e3_json_pidginunit.unknown_word == default_unknown_word_if_None()
 #     assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
 #     assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
-#     e7_json_pidginunit = get_pidginunit_from_json(open_file(event7_dir, "pidgin.json"))
+#     e7_json_pidginunit = get_pidginunit_from_json(open_file(event7_dir, pidgin_filename()))
 #     assert e7_json_pidginunit.face_id == bob_str
 #     assert e7_json_pidginunit.event_id == event7
 #     assert e7_json_pidginunit.otx_wall == default_wall_if_None()
@@ -175,7 +182,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 # #     bob_dir = create_path(get_test_worlds_dir(), bob_str)
 # #     event3_dir = create_path(bob_dir, event3)
 # #     save_file(event3_dir, "road.csv", event3_road_csv)
-# #     pidgin_json_file_path = create_path(event3_dir, "pidgin.json")
+# #     pidgin_json_file_path = create_path(event3_dir, pidgin_filename())
 # #     assert os_path_exists(pidgin_json_file_path) is False
 
 # #     # WHEN
@@ -183,7 +190,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 
 # #     # THEN
 # #     assert os_path_exists(pidgin_json_file_path)
-# #     json_pidginunit = get_pidginunit_from_json(open_file(event3_dir, "pidgin.json"))
+# #     json_pidginunit = get_pidginunit_from_json(open_file(event3_dir, pidgin_filename()))
 # #     assert json_pidginunit.face_id == bob_str
 # #     assert json_pidginunit.event_id == event3
 # #     assert json_pidginunit.otx_wall == default_wall_if_None()
@@ -245,15 +252,14 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     event5_dir = create_path(sue_dir, event5)
 #     event7_dir = create_path(sue_dir, event7)
 #     event9_dir = create_path(sue_dir, event9)
-#     pidgin_filename = "pidgin.json"
-#     event3_pidgin_file_path = create_path(event3_dir, pidgin_filename)
-#     event5_pidgin_file_path = create_path(event5_dir, pidgin_filename)
-#     event7_pidgin_file_path = create_path(event7_dir, pidgin_filename)
-#     event9_pidgin_file_path = create_path(event9_dir, pidgin_filename)
-#     save_file(event3_dir, pidgin_filename, "")
+#     event3_pidgin_file_path = create_path(event3_dir, pidgin_filename())
+#     event5_pidgin_file_path = create_path(event5_dir, pidgin_filename())
+#     event7_pidgin_file_path = create_path(event7_dir, pidgin_filename())
+#     event9_pidgin_file_path = create_path(event9_dir, pidgin_filename())
+#     save_file(event3_dir, pidgin_filename(), "")
 #     set_dir(event5_dir)
-#     save_file(event7_dir, pidgin_filename, "")
-#     save_file(event9_dir, pidgin_filename, "")
+#     save_file(event7_dir, pidgin_filename(), "")
+#     save_file(event9_dir, pidgin_filename(), "")
 #     print(f"{event3_pidgin_file_path=}")
 #     print(f"{event5_pidgin_file_path=}")
 #     print(f"{event7_pidgin_file_path=}")
@@ -308,9 +314,9 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     save_file(event3_dir, "road.csv", event3_road_csv)
 #     save_file(event7_dir, "road.csv", event7_road_csv)
 #     save_file(event9_dir, "road.csv", event9_road_csv)
-#     e3_json_file_path = create_path(event3_dir, "pidgin.json")
-#     e7_json_file_path = create_path(event7_dir, "pidgin.json")
-#     e9_json_file_path = create_path(event9_dir, "pidgin.json")
+#     e3_json_file_path = create_path(event3_dir, pidgin_filename())
+#     e7_json_file_path = create_path(event7_dir, pidgin_filename())
+#     e9_json_file_path = create_path(event9_dir, pidgin_filename())
 #     assert os_path_exists(e3_json_file_path) is False
 #     assert os_path_exists(e7_json_file_path) is False
 #     assert os_path_exists(e9_json_file_path) is False

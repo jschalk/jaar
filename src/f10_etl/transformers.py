@@ -10,12 +10,13 @@ from src.f09_brick.brick_config import (
 )
 from src.f09_brick.brick import get_brickref_obj
 from src.f09_brick.pandas_tool import (
-    get_forge_staging_grouping_with_all_values_equal_df,
-    _get_pidgen_brick_format_filenames,
-    get_new_sorting_columns,
+    get_sorting_columns,
     upsert_sheet,
     split_excel_into_dirs,
     sheet_exists,
+    _get_pidgen_brick_format_filenames,
+    get_forge_staging_grouping_with_all_values_equal_df,
+    translate_all_columns_dataframe,
 )
 from src.f09_brick.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.brick_collector import get_all_brick_dataframes, BrickFileRef
@@ -29,8 +30,6 @@ from src.f10_etl.pidgin_agg import (
 )
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
-from os import listdir as os_listdir
-from json import dumps as json_dumps
 
 
 class not_given_pidgin_category_Exception(Exception):
@@ -169,7 +168,7 @@ class ZooStagingToZooAggTransformer:
         brickref = get_brickref_obj(brick_filename)
         required_columns = brickref.get_otx_keys_list()
         brick_columns_set = set(brickref._attributes.keys())
-        brick_columns_list = get_new_sorting_columns(brick_columns_set)
+        brick_columns_list = get_sorting_columns(brick_columns_set)
         forge_staging_df = forge_staging_df[brick_columns_list]
         return get_forge_staging_grouping_with_all_values_equal_df(
             forge_staging_df, required_columns
@@ -202,7 +201,7 @@ class ZooAggToZooValidTransformer:
     #     brickref = get_brickref_obj(brick_filename)
     #     required_columns = brickref.get_otx_keys_list()
     #     brick_columns_set = set(brickref._attributes.keys())
-    #     brick_columns_list = get_new_sorting_columns(brick_columns_set)
+    #     brick_columns_list = get_sorting_columns(brick_columns_set)
     #     forge_staging_df = forge_staging_df[brick_columns_list]
     #     return get_forge_staging_grouping_with_all_values_equal_df(
     #         forge_staging_df, required_columns
@@ -364,7 +363,7 @@ class ZooAggToStagingTransformer:
         category_bricks = get_brick_category_ref().get(self.pidgin_category)
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
         pidgin_columns.update({"face_id", "event_id"})
-        pidgin_columns = get_new_sorting_columns(pidgin_columns)
+        pidgin_columns = get_sorting_columns(pidgin_columns)
         pidgin_columns.insert(0, "src_brick")
         pidgin_df = DataFrame(columns=pidgin_columns)
         for brick_number in sorted(category_bricks):
@@ -463,7 +462,7 @@ class PidginStagingToAggTransformer:
     def transform(self):
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
         pidgin_columns.update({"face_id", "event_id"})
-        pidgin_columns = get_new_sorting_columns(pidgin_columns)
+        pidgin_columns = get_sorting_columns(pidgin_columns)
         pidgin_agg_df = DataFrame(columns=pidgin_columns)
         self.insert_agg_rows(pidgin_agg_df)
         upsert_sheet(self.file_path, get_sheet_agg_name(self.jaar_type), pidgin_agg_df)
@@ -583,18 +582,15 @@ def etl_pidgin_jsons_inherit_younger_pidgins(
     old_pidginunit = None
     for face_id, pidgin_event_ids in pidgin_events.items():
         for pidgin_event_id in pidgin_event_ids:
-            new_pidgin_path = _get_pidgin_face_path(faces_dir, face_id, pidgin_event_id)
+            new_pidgin_path = get_event_pidgin_path(faces_dir, face_id, pidgin_event_id)
             new_pidginunit = get_pidginunit_from_json(open_file(new_pidgin_path))
             if old_pidginunit != None:
                 new_pidginunit = inherit_pidginunit(old_pidginunit, new_pidginunit)
                 save_file(new_pidgin_path, None, new_pidginunit.get_json())
-                print(f"{face_id=} {new_pidgin_path=}")
-                print(f"{new_pidginunit.acctbridge=}")
-                print(f"{new_pidginunit.get_json()=}")
             old_pidginunit = new_pidginunit
 
 
-def _get_pidgin_face_path(
+def get_event_pidgin_path(
     faces_dir: str, face_id: FaceID, pidgin_event_id: TimeLinePoint
 ):
     face_dir = create_path(faces_dir, face_id)
@@ -649,11 +645,11 @@ def get_fiscal_events_by_dirs(faces_dir: str) -> dict[FiscalID, set[TimeLinePoin
         for event_id in get_level1_dirs(face_dir):
             event_dir = create_path(face_dir, event_id)
             for fiscal_id in get_level1_dirs(event_dir):
-                if fiscal_events.get(fiscal_id) != None:
+                if fiscal_events.get(fiscal_id) is None:
+                    fiscal_events[fiscal_id] = {int(event_id)}
+                else:
                     events_list = fiscal_events.get(fiscal_id)
                     events_list.add(int(event_id))
-                else:
-                    fiscal_events[fiscal_id] = {int(event_id)}
     return fiscal_events
 
 
@@ -665,9 +661,38 @@ def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[TimeLinePoint]
             event_dir = create_path(face_dir, event_id)
             pidgin_path = create_path(event_dir, "pidgin.json")
             if os_path_exists(pidgin_path):
-                if pidgin_events.get(face_id) != None:
+                if pidgin_events.get(face_id) is None:
+                    pidgin_events[face_id] = {int(event_id)}
+                else:
                     events_list = pidgin_events.get(face_id)
                     events_list.add(int(event_id))
-                else:
-                    pidgin_events[face_id] = {int(event_id)}
     return pidgin_events
+
+
+class etl_fiscal_bricks_to_fiscal_inx_Exception(Exception):
+    pass
+
+
+def etl_fiscal_bricks_to_fiscal_inx(
+    faces_dir: str,
+    events: dict[TimeLinePoint, FaceID],
+    fiscal_pidgins: dict[FiscalID, dict[TimeLinePoint, TimeLinePoint]],
+):
+    for fiscal_id, events_pidgins in fiscal_pidgins.items():
+        for fiscal_event_id, pidgin_event_id in events_pidgins.items():
+            fiscal_face_id = events.get(fiscal_event_id)
+            pidgin_face_id = events.get(pidgin_event_id)
+            if fiscal_face_id != pidgin_face_id:
+                exception_str = "etl_fiscal_bricks_to_fiscal_inx error"
+                raise etl_fiscal_bricks_to_fiscal_inx_Exception(exception_str)
+            face_dir = create_path(faces_dir, pidgin_face_id)
+            pidgin_event_dir = create_path(face_dir, pidgin_event_id)
+            fiscal_event_dir = create_path(face_dir, fiscal_event_id)
+            fiscal_dir = create_path(fiscal_event_dir, fiscal_id)
+            pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
+            x_pidginunit = get_pidginunit_from_json(open_file(pidgin_path))
+            for fiscal_br_ref in get_existing_excel_brick_file_refs(fiscal_dir):
+                br_path = create_path(fiscal_br_ref.file_dir, fiscal_br_ref.file_name)
+                br_df = pandas_read_excel(br_path, "forge_valid")
+                translate_all_columns_dataframe(br_df, x_pidginunit)
+                upsert_sheet(br_path, "forge_inx", br_df)

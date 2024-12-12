@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, set_dir, save_file
+from src.f00_instrument.file import create_path, set_dir
 from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
@@ -64,39 +64,31 @@ def test_world_event_bricks_to_fiscal_bricks_CreatesFaceBrickSheets_Scenario0_Mu
     e7_music23_dir = create_path(event7_dir, music23_str)
     e9_music23_dir = create_path(event9_dir, music23_str)
     e9_music55_dir = create_path(event9_dir, music55_str)
-    e3_music23_br00003_filepath = create_path(e3_music23_dir, br00003_filename)
-    e7_music23_br00003_filepath = create_path(e7_music23_dir, br00003_filename)
-    e9_music23_br00003_filepath = create_path(e9_music23_dir, br00003_filename)
-    e9_music55_br00003_filepath = create_path(e9_music55_dir, br00003_filename)
-    print(f"{e3_music23_br00003_filepath=}")
-    print(f"{e7_music23_br00003_filepath=}")
-    print(f"{e9_music23_br00003_filepath=}")
-    print(f"{e9_music55_br00003_filepath=}")
-    assert sheet_exists(e3_music23_br00003_filepath, forge_valid_str()) is False
-    assert sheet_exists(e7_music23_br00003_filepath, forge_valid_str()) is False
-    assert sheet_exists(e9_music23_br00003_filepath, forge_valid_str()) is False
-    assert sheet_exists(e9_music55_br00003_filepath, forge_valid_str()) is False
+    e3_music23_br00003_path = create_path(e3_music23_dir, br00003_filename)
+    e7_music23_br00003_path = create_path(e7_music23_dir, br00003_filename)
+    e9_music23_br00003_path = create_path(e9_music23_dir, br00003_filename)
+    e9_music55_br00003_path = create_path(e9_music55_dir, br00003_filename)
+    print(f"{e3_music23_br00003_path=}")
+    print(f"{e7_music23_br00003_path=}")
+    print(f"{e9_music23_br00003_path=}")
+    print(f"{e9_music55_br00003_path=}")
+    assert sheet_exists(e3_music23_br00003_path, forge_valid_str()) is False
+    assert sheet_exists(e7_music23_br00003_path, forge_valid_str()) is False
+    assert sheet_exists(e9_music23_br00003_path, forge_valid_str()) is False
+    assert sheet_exists(e9_music55_br00003_path, forge_valid_str()) is False
 
     # WHEN
     fizz_world.event_bricks_to_fiscal_bricks()
 
     # THEN
-    assert sheet_exists(e7_music23_br00003_filepath, forge_valid_str())
-    assert sheet_exists(e3_music23_br00003_filepath, forge_valid_str())
-    assert sheet_exists(e9_music23_br00003_filepath, forge_valid_str())
-    assert sheet_exists(e9_music55_br00003_filepath, forge_valid_str())
-    gen_e3_music23_df = pandas_read_excel(
-        e3_music23_br00003_filepath, forge_valid_str()
-    )
-    gen_e7_music23_df = pandas_read_excel(
-        e7_music23_br00003_filepath, forge_valid_str()
-    )
-    gen_e9_music23_df = pandas_read_excel(
-        e9_music23_br00003_filepath, forge_valid_str()
-    )
-    gen_e9_music55_df = pandas_read_excel(
-        e9_music55_br00003_filepath, forge_valid_str()
-    )
+    assert sheet_exists(e7_music23_br00003_path, forge_valid_str())
+    assert sheet_exists(e3_music23_br00003_path, forge_valid_str())
+    assert sheet_exists(e9_music23_br00003_path, forge_valid_str())
+    assert sheet_exists(e9_music55_br00003_path, forge_valid_str())
+    gen_e3_music23_df = pandas_read_excel(e3_music23_br00003_path, forge_valid_str())
+    gen_e7_music23_df = pandas_read_excel(e7_music23_br00003_path, forge_valid_str())
+    gen_e9_music23_df = pandas_read_excel(e9_music23_br00003_path, forge_valid_str())
+    gen_e9_music55_df = pandas_read_excel(e9_music55_br00003_path, forge_valid_str())
     expected_e9_music23_df = DataFrame([zia1, zia2], columns=br00003_columns)
     expected_e9_music55_df = DataFrame([zia3], columns=br00003_columns)
     print("gen_e9_music55_df")

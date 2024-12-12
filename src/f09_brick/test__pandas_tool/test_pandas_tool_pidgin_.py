@@ -8,8 +8,8 @@
 # )
 # from src.f08_pidgin.pidgin import bridgeunit_shop, pidginunit_shop
 # from src.f09_brick.pandas_tool import (
-#     pidgin_single_column_dataframe,
-#     pidgin_all_columns_dataframe,
+#     translate_single_column_dataframe,
+#     translate_all_columns_dataframe,
 #     get_dataframe_pidginable_columns,
 # )
 # from src.f08_pidgin.examples.example_pidgins import (
@@ -36,19 +36,19 @@
 #     assert get_dataframe_pidginable_columns(x_dt) == {acct_id_str()}
 
 
-# def test_pidgin_single_column_dataframe_ReturnsObj_Scenario0_AcctID_EmptyDataFrame():
+# def test_translate_single_column_dataframe_ReturnsObj_Scenario0_AcctID_EmptyDataFrame():
 #     # ESTABLISH
 #     acct_id_bridgeunit = bridgeunit_shop("acct_id")
 #     empty_dt = DataFrame(columns=[acct_id_str()])
 
 #     # WHEN
-#     gen_dt = pidgin_single_column_dataframe(empty_dt, acct_id_bridgeunit, acct_id_str())
+#     gen_dt = translate_single_column_dataframe(empty_dt, acct_id_bridgeunit, acct_id_str())
 
 #     # THEN
 #     assert gen_dt.to_csv() == empty_dt.to_csv()
 
 
-# def test_pidgin_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5rows():
+# def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5rows():
 #     # ESTABLISH
 #     xio_otx = "Xio"
 #     sue_otx = "Sue"
@@ -71,7 +71,7 @@
 #     print(f"{otx_dt=}")
 
 #     # WHEN
-#     pidgin_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
+#     translate_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
 
 #     # THEN
 #     assert otx_dt.iloc[0][acct_id_str()] == zia_otx
@@ -87,7 +87,7 @@
 #     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-# def test_pidgin_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5rowsMultipleColumns():
+# def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5rowsMultipleColumns():
 #     # ESTABLISH
 #     xio_otx = "Xio"
 #     sue_otx = "Sue"
@@ -110,7 +110,7 @@
 #     print(f"{otx_dt=}")
 
 #     # WHEN
-#     pidgin_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
+#     translate_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
 
 #     # THEN
 #     assert otx_dt.iloc[0][acct_id_str()] == zia_otx
@@ -126,7 +126,7 @@
 #     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-# def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
+# def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
 #     # ESTABLISH
 #     yao_str = "Yao"
 #     xio_otx = "Xio"
@@ -150,7 +150,7 @@
 #     print(f"{otx_dt=}")
 
 #     # WHEN
-#     pidgin_all_columns_dataframe(otx_dt, yao_pidginunit)
+#     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
 #     # THEN
 #     assert otx_dt.iloc[0][acct_id_str()] == zia_otx
@@ -166,7 +166,7 @@
 #     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-# def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_pidginunit_set_by_otx2inx():
+# def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_RodeUnit_get_casa_maison_pidginunit_set_by_otx2inx():
 #     # ESTABLISH
 #     otx_music45_str = "music45"
 #     inx_music87_str = "music87"
@@ -191,7 +191,7 @@
 #     print(f"{otx_dt=}")
 
 #     # WHEN
-#     pidgin_all_columns_dataframe(otx_dt, yao_pidginunit)
+#     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
 #     # THEN
 #     assert otx_dt.iloc[0][base_str()] == inx_music87_str
@@ -205,7 +205,7 @@
 #     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-# def test_pidgin_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_casa_maison_pidginunit_set_by_idea():
+# def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_casa_maison_pidginunit_set_by_idea():
 #     # ESTABLISH
 #     otx_music45_str = "music45"
 #     inx_music87_str = "music87"
@@ -232,7 +232,7 @@
 #     print("")
 
 #     # WHEN
-#     pidgin_all_columns_dataframe(otx_dt, yao_pidginunit)
+#     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
 #     # THEN
 #     print("")

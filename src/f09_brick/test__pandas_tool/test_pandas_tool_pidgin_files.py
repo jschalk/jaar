@@ -1,12 +1,8 @@
 from src.f00_instrument.file import save_file
 from src.f01_road.road import create_road
 from src.f04_gift.atom_config import acct_id_str, base_str
-from src.f09_brick.pandas_tool import save_dataframe_to_csv, open_csv
 from src.f08_pidgin.pidgin import pidginunit_shop
-from src.f09_brick.pandas_tool import (
-    move_otx_csvs_to_pidgin_inx,
-    _get_pidgen_brick_format_filenames,
-)
+from src.f08_pidgin.pidgin_config import pidgin_filename
 from src.f08_pidgin.examples.pidgin_env import (
     env_dir_setup_cleanup,
     get_example_face_dir,
@@ -21,6 +17,12 @@ from src.f08_pidgin.examples.example_pidgins import (
     get_suita_acct_id_otx_dt,
     get_suita_acct_id_inx_dt,
     get_sue_pidginunit,
+)
+from src.f09_brick.pandas_tool import (
+    save_dataframe_to_csv,
+    open_csv,
+    move_otx_csvs_to_pidgin_inx,
+    _get_pidgen_brick_format_filenames,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame
@@ -40,10 +42,9 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     sue_pidginunit = pidginunit_shop(sue_otx)
     sue_pidginunit.set_acctbridge(get_suita_acctbridge())
     sue_dir = f"{get_example_face_dir()}/{sue_otx}"
-    pidgin_filename = "pidgin.json"
-    pidginunit_file_path = f"{sue_dir}/{pidgin_filename}"
+    pidginunit_file_path = f"{sue_dir}/{pidgin_filename()}"
     print(f"{sue_dir=}")
-    save_file(sue_dir, pidgin_filename, sue_pidginunit.get_json())
+    save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
     sue_otx_dt = get_suita_acct_id_otx_dt()
     sue_inx_dt = get_suita_acct_id_inx_dt()
     otx_dir = f"{sue_dir}/otx"
@@ -105,7 +106,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
 
     sue_pidginunit = get_casa_maison_pidginunit_set_by_idea()
     sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_id}"
-    save_file(sue_dir, "pidgin.json", sue_pidginunit.get_json())
+    save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
     sue_otx_dt = get_casa_maison_road_otx_dt()
     sue_inx_dt = get_casa_maison_road_inx_dt()
     otx_dir = f"{sue_dir}/otx"
@@ -149,10 +150,9 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     sue_pidginunit = get_casa_maison_pidginunit_set_by_idea()
     sue_pidginunit.set_acctbridge(get_suita_acctbridge())
     sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_id}"
-    pidgin_filename = "pidgin.json"
-    pidginunit_file_path = f"{sue_dir}/{pidgin_filename}"
+    pidginunit_file_path = f"{sue_dir}/{pidgin_filename()}"
     print(f"{sue_dir=}")
-    save_file(sue_dir, pidgin_filename, sue_pidginunit.get_json())
+    save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
     sue_otx_dt = get_suita_acct_id_otx_dt()
     otx_dir = f"{sue_dir}/otx"
     inx_dir = f"{sue_dir}/inx"

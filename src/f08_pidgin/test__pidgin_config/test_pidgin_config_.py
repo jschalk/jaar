@@ -16,6 +16,7 @@ from src.f08_pidgin.pidgin_config import (
     get_pidgin_args_category_mapping,
     get_quick_pidgens_column_ref,
     pidginunit_str,
+    pidgin_filename,
     event_id_str,
     otx_wall_str,
     inx_wall_str,
@@ -40,6 +41,7 @@ from os import getcwd as os_getcwd
 
 def test_str_functions_ReturnsObj():
     assert pidginunit_str() == "pidginunit"
+    assert pidgin_filename() == "pidgin.json"
     assert otx_wall_str() == "otx_wall"
     assert inx_wall_str() == "inx_wall"
     assert inx_group_id_str() == "inx_group_id"
