@@ -24,8 +24,10 @@ def test_WorldUnit_fiscal_bricks_to_fiscal_inx_Scenario0_MultpleFaceIDs_CreatesF
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    sue_str = "Sue"
-    zia_str = "Zia"
+    sue_otx = "Sue"
+    sue_inx = "Suzy"
+    zia_otx = "Zia"
+    zia_inx = "Ziata"
     bob_otx = "Bob"
     yao_otx = "Yao"
     event3 = 3
@@ -41,13 +43,13 @@ def test_WorldUnit_fiscal_bricks_to_fiscal_inx_Scenario0_MultpleFaceIDs_CreatesF
     ]
     music23_str = "music23"
     music55_str = "music55"
-    sue0 = [sue_str, event3, music23_str, bob_otx, bob_otx]
-    sue1 = [sue_str, event3, music23_str, yao_otx, bob_otx]
-    sue2 = [sue_str, event3, music23_str, yao_otx, yao_otx]
-    zia0 = [zia_str, event7, music23_str, bob_otx, bob_otx]
-    zia1 = [zia_str, event9, music23_str, yao_otx, bob_otx]
-    zia2 = [zia_str, event9, music23_str, yao_otx, yao_otx]
-    zia3 = [zia_str, event9, music55_str, bob_otx, yao_otx]
+    sue0 = [sue_otx, event3, music23_str, bob_otx, bob_otx]
+    sue1 = [sue_otx, event3, music23_str, yao_otx, bob_otx]
+    sue2 = [sue_otx, event3, music23_str, yao_otx, yao_otx]
+    zia0 = [zia_otx, event7, music23_str, bob_otx, bob_otx]
+    zia1 = [zia_otx, event9, music23_str, yao_otx, bob_otx]
+    zia2 = [zia_otx, event9, music23_str, yao_otx, yao_otx]
+    zia3 = [zia_otx, event9, music55_str, bob_otx, yao_otx]
     bob0_inx = "Bobby"
     bob1_inx = "Bobito"
     bob2_inx = "Bobbie"
@@ -61,17 +63,17 @@ def test_WorldUnit_fiscal_bricks_to_fiscal_inx_Scenario0_MultpleFaceIDs_CreatesF
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz")
     fizz_world.events = {
-        event3: sue_str,
-        event7: zia_str,
-        event8: zia_str,
-        event9: zia_str,
+        event3: sue_otx,
+        event7: zia_otx,
+        event8: zia_otx,
+        event9: zia_otx,
     }
     fizz_world._fiscal_pidgins = {
         music23_str: {event3: event3, event7: event7, event9: event8},
         music55_str: {event9: event8},
     }
-    sue_dir = create_path(fizz_world._faces_dir, sue_str)
-    zia_dir = create_path(fizz_world._faces_dir, zia_str)
+    sue_dir = create_path(fizz_world._faces_dir, sue_otx)
+    zia_dir = create_path(fizz_world._faces_dir, zia_otx)
     event3_dir = create_path(sue_dir, event3)
     event7_dir = create_path(zia_dir, event7)
     event8_dir = create_path(zia_dir, event8)
@@ -93,13 +95,16 @@ def test_WorldUnit_fiscal_bricks_to_fiscal_inx_Scenario0_MultpleFaceIDs_CreatesF
     upsert_sheet(e9_music23_br00011_path, forge_valid_str(), e9_music23_df)
     upsert_sheet(e9_music55_br00011_path, forge_valid_str(), e9_music55_df)
     forge_inx_str = "forge_inx"
-    e3_pidginunit = pidginunit_shop(sue_str, event3)
-    e7_pidginunit = pidginunit_shop(zia_str, event7)
-    e9_pidginunit = pidginunit_shop(zia_str, event9)
+    e3_pidginunit = pidginunit_shop(sue_otx, event3)
+    e7_pidginunit = pidginunit_shop(zia_otx, event7)
+    e9_pidginunit = pidginunit_shop(zia_otx, event9)
+    e3_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
     e3_pidginunit.set_otx2inx(type_AcctID_str(), bob_otx, bob0_inx)
     e3_pidginunit.set_otx2inx(type_AcctID_str(), yao_otx, yao0_inx)
+    e7_pidginunit.set_otx2inx(type_AcctID_str(), zia_otx, zia_inx)
     e7_pidginunit.set_otx2inx(type_AcctID_str(), bob_otx, bob1_inx)
     e7_pidginunit.set_otx2inx(type_AcctID_str(), yao_otx, yao1_inx)
+    e9_pidginunit.set_otx2inx(type_AcctID_str(), zia_otx, zia_inx)
     e9_pidginunit.set_otx2inx(type_AcctID_str(), bob_otx, bob2_inx)
     e9_pidginunit.set_otx2inx(type_AcctID_str(), yao_otx, yao2_inx)
     save_file(event3_dir, pidgin_filename(), e3_pidginunit.get_json())
@@ -122,13 +127,13 @@ def test_WorldUnit_fiscal_bricks_to_fiscal_inx_Scenario0_MultpleFaceIDs_CreatesF
     e7_m23_inx_df = pandas_read_excel(e7_music23_br00011_path, sheet_name=forge_inx_str)
     e9_m23_inx_df = pandas_read_excel(e9_music23_br00011_path, sheet_name=forge_inx_str)
     e9_m55_inx_df = pandas_read_excel(e9_music55_br00011_path, sheet_name=forge_inx_str)
-    sue_i0 = [sue_str, event3, music23_str, bob_otx, bob0_inx]  # bob0_inx
-    sue_i1 = [sue_str, event3, music23_str, yao_otx, bob0_inx]  # yao0_inx
-    sue_i2 = [sue_str, event3, music23_str, yao_otx, yao0_inx]  # yao0_inx
-    zia_i0 = [zia_str, event7, music23_str, bob_otx, bob1_inx]  # bob1_inx
-    zia_i1 = [zia_str, event9, music23_str, yao_otx, bob2_inx]  # yao2_inx
-    zia_i2 = [zia_str, event9, music23_str, yao_otx, yao2_inx]  # yao2_inx
-    zia_i3 = [zia_str, event9, music55_str, bob_otx, yao2_inx]  # bob2_inx
+    sue_i0 = [sue_inx, event3, music23_str, bob0_inx, bob0_inx]
+    sue_i1 = [sue_inx, event3, music23_str, yao0_inx, bob0_inx]
+    sue_i2 = [sue_inx, event3, music23_str, yao0_inx, yao0_inx]
+    zia_i0 = [zia_inx, event7, music23_str, bob1_inx, bob1_inx]
+    zia_i1 = [zia_inx, event9, music23_str, yao2_inx, bob2_inx]
+    zia_i2 = [zia_inx, event9, music23_str, yao2_inx, yao2_inx]
+    zia_i3 = [zia_inx, event9, music55_str, bob2_inx, yao2_inx]
     example_e3_m23_inx_df = DataFrame([sue_i0, sue_i1, sue_i2], columns=br00011_columns)
     example_e7_m23_inx_df = DataFrame([zia_i0], columns=br00011_columns)
     example_e9_m23_inx_df = DataFrame([zia_i1, zia_i2], columns=br00011_columns)

@@ -669,6 +669,10 @@ def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[TimeLinePoint]
     return pidgin_events
 
 
+class etl_fiscal_bricks_to_fiscal_inx_Exception(Exception):
+    pass
+
+
 def etl_fiscal_bricks_to_fiscal_inx(
     faces_dir: str,
     events: dict[TimeLinePoint, FaceID],
@@ -679,7 +683,8 @@ def etl_fiscal_bricks_to_fiscal_inx(
             fiscal_face_id = events.get(fiscal_event_id)
             pidgin_face_id = events.get(pidgin_event_id)
             if fiscal_face_id != pidgin_face_id:
-                raise Exception("etl_fiscal_bricks_to_fiscal_inx error")
+                exception_str = "etl_fiscal_bricks_to_fiscal_inx error"
+                raise etl_fiscal_bricks_to_fiscal_inx_Exception(exception_str)
             face_dir = create_path(faces_dir, pidgin_face_id)
             pidgin_event_dir = create_path(face_dir, pidgin_event_id)
             fiscal_event_dir = create_path(face_dir, fiscal_event_id)
@@ -689,42 +694,5 @@ def etl_fiscal_bricks_to_fiscal_inx(
             for fiscal_br_ref in get_existing_excel_brick_file_refs(fiscal_dir):
                 br_path = create_path(fiscal_br_ref.file_dir, fiscal_br_ref.file_name)
                 br_df = pandas_read_excel(br_path, "forge_valid")
-                print(f"{br_path=}")
-                print(f"before {br_df=}")
                 translate_all_columns_dataframe(br_df, x_pidginunit)
-                print(f"After  {br_df=}")
                 upsert_sheet(br_path, "forge_inx", br_df)
-
-    # for face_id in get_level1_dirs(faces_dir):
-    #     face_dir = create_path(faces_dir, face_id)
-    #     for event_id in get_level1_dirs(face_dir):
-    #         event_dir = create_path(face_dir, event_id)
-    #         for fiscal_id in get_level1_dirs(event_dir):
-    #             fiscal_dir = create_path(event_dir, fiscal_id)
-    #             for fiscal_br_ref in get_existing_excel_brick_file_refs(fiscal_dir):
-    #                 print(f"{fiscal_br_ref=}")
-
-    #             print(f"{fiscal_dir=}")
-
-    # for event_brick_dir in _get_all_faces_dir_event_dirs(faces_dir):
-    #     for event_br_ref in get_existing_excel_brick_file_refs(event_brick_dir):
-    #         event_brick_path = create_path(event_brick_dir, event_br_ref.file_name)
-    # split_excel_into_dirs(
-    #     input_file=event_brick_path,
-    #     output_dir=event_brick_dir,
-    #     column_name="fiscal_id",
-    #     file_name=event_br_ref.brick_number,
-    #     sheet_name="forge_valid",
-    # )
-
-    # for face_id, pidgin_event_ids in pidgin_events.items():
-    #     for pidgin_event_id in pidgin_event_ids:
-    #         new_pidgin_path = get_event_pidgin_path(faces_dir, face_id, pidgin_event_id)
-    #         new_pidginunit = get_pidginunit_from_json(open_file(new_pidgin_path))
-    #         if old_pidginunit != None:
-    #             new_pidginunit = inherit_pidginunit(old_pidginunit, new_pidginunit)
-    #             save_file(new_pidgin_path, None, new_pidginunit.get_json())
-    #             print(f"{face_id=} {new_pidgin_path=}")
-    #             print(f"{new_pidginunit.acctbridge=}")
-    #             print(f"{new_pidginunit.get_json()=}")
-    #         old_pidginunit = new_pidginunit

@@ -7,13 +7,13 @@ from src.f00_instrument.file import (
     open_file,
 )
 from src.f00_instrument.db_toolbox import get_grouping_with_all_values_equal_sql_query
-from src.f04_gift.atom_config import get_atom_args_jaar_types
 from src.f08_pidgin.bridge import BridgeCore
 from src.f08_pidgin.pidgin import (
     PidginUnit,
     pidginable_atom_args,
     get_pidginunit_from_json,
 )
+from src.f08_pidgin.pidgin_config import get_pidgin_args_jaar_types
 from src.f09_brick.brick_config import (
     get_brick_elements_sort_order,
     get_brick_category_ref,
@@ -150,9 +150,8 @@ def translate_single_column_dataframe(
 def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
     column_names = set(x_df.columns)
     pidginable_columns = column_names.intersection(pidginable_atom_args())
-    print(f"{pidginable_columns=}")
     for pidginable_column in pidginable_columns:
-        jaar_type = get_atom_args_jaar_types().get(pidginable_column)
+        jaar_type = get_pidgin_args_jaar_types().get(pidginable_column)
         x_bridgeunit = x_pidginunit.get_bridgeunit(jaar_type)
         translate_single_column_dataframe(x_df, x_bridgeunit, pidginable_column)
 
@@ -266,7 +265,6 @@ def split_excel_into_dirs(
             # Define the output file path
             output_file = create_path(subdirectory, f"{file_name}.xlsx")
             upsert_sheet(output_file, sheet_name, filtered_df)
-            print(f"{output_file=} {sheet_name=}")
             # filtered_df.to_excel(output_file, index=False)
 
 

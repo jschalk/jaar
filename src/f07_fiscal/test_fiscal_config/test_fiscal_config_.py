@@ -22,6 +22,7 @@ from src.f04_gift.atom_config import (
     type_GroupID_str,
     type_IdeaUnit_str,
     type_RoadUnit_str,
+    get_allowed_jaar_types,
 )
 from src.f07_fiscal.fiscal_config import (
     config_file_dir,
@@ -44,6 +45,7 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_month_str,
     fiscal_timeline_weekday_str,
     get_fiscal_categorys,
+    get_fiscal_args_jaar_types,
 )
 from os import getcwd as os_getcwd
 
@@ -129,17 +131,8 @@ def test_get_fiscal_config_dict_ReturnsObj():
 
 
 def _validate_fiscal_config(fiscal_config: dict):
-    accepted_jaar_typees = {
-        type_RoadUnit_str(),
-        type_AcctID_str(),
-        type_GroupID_str(),
-        type_IdeaUnit_str(),
-        "int",
-        "TimeLinePoint",
-        "FiscalID",
-        "float",
-        "str",
-    }
+    accepted_jaar_typees = get_allowed_jaar_types()
+    accepted_jaar_typees.add("str")
 
     # for every fiscal_format file there exists a unique fiscal_number always with leading zeros to make 5 digits
     for fiscal_categorys, cat_dict in fiscal_config.items():
@@ -194,3 +187,42 @@ def test_get_fiscal_args_category_mapping_ReturnsObj():
     assert fiscalunit_str() in fiscal_id_categorys
     assert len(fiscal_id_categorys) == 6
     assert len(x_fiscal_args_category_mapping) == 21
+
+
+def get_jaar_type(x_category: str, x_arg: str) -> str:
+    fiscal_config_dict = get_fiscal_config_dict()
+    category_dict = fiscal_config_dict.get(x_category)
+    optional_dict = category_dict.get(jvalues_str())
+    required_dict = category_dict.get(jkeys_str())
+    arg_dict = {}
+    if optional_dict.get(x_arg):
+        arg_dict = category_dict.get(jvalues_str()).get(x_arg)
+    if required_dict.get(x_arg):
+        arg_dict = required_dict.get(x_arg)
+    return arg_dict.get(jaar_type_str())
+
+
+def all_args_jaar_types_are_correct(x_jaar_types) -> bool:
+    x_fiscal_args_category_mapping = get_fiscal_args_category_mapping()
+    x_sorted_jaar_types = sorted(list(x_jaar_types.keys()))
+    for x_fiscal_arg in x_sorted_jaar_types:
+        x_categorys = list(x_fiscal_args_category_mapping.get(x_fiscal_arg))
+        x_category = x_categorys[0]
+        x_jaar_type = get_jaar_type(x_category, x_fiscal_arg)
+        print(
+            f"assert x_jaar_types.get({x_fiscal_arg}) == {x_jaar_type} {x_jaar_types.get(x_fiscal_arg)=}"
+        )
+        if x_jaar_types.get(x_fiscal_arg) != x_jaar_type:
+            return False
+    return True
+
+
+def test_get_fiscal_args_jaar_types_ReturnsObj():
+    # ESTABLISH / WHEN
+    fiscal_args_jaar_types = get_fiscal_args_jaar_types()
+
+    # THEN
+    fiscal_args_from_categorys = set(get_fiscal_args_category_mapping().keys())
+    print(f"{fiscal_args_from_categorys=}")
+    assert set(fiscal_args_jaar_types.keys()) == fiscal_args_from_categorys
+    assert all_args_jaar_types_are_correct(fiscal_args_jaar_types)

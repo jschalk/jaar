@@ -41,14 +41,21 @@ def pidginable_atom_args() -> set:
         "acct_id",
         "awardee_id",
         "base",
+        "face_id",
+        "fiscal_id",
         "group_id",
         "healer_id",
+        "hour_label",
         "label",
-        "need",
+        "month_label",
         "parent_road",
         "pick",
+        "need",
+        "owner_id",
         "road",
         "team_id",
+        "timeline_label",
+        "weekday_label",
     }
 
 

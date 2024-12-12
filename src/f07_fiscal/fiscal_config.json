@@ -5,7 +5,7 @@
                 "jaar_type": "AcctID"
             },
             "fiscal_id": {
-                "jaar_type": "FiscalID"
+                "jaar_type": "IdeaUnit"
             },
             "owner_id": {
                 "jaar_type": "AcctID"
@@ -26,7 +26,7 @@
                 "jaar_type": "AcctID"
             },
             "fiscal_id": {
-                "jaar_type": "FiscalID"
+                "jaar_type": "IdeaUnit"
             },
             "owner_id": {
                 "jaar_type": "AcctID"
@@ -44,7 +44,7 @@
     "fiscal_timeline_hour": {
         "jkeys": {
             "fiscal_id": {
-                "jaar_type": "FiscalID"
+                "jaar_type": "IdeaUnit"
             },
             "hour_label": {
                 "jaar_type": "IdeaUnit"
@@ -59,7 +59,7 @@
     "fiscal_timeline_month": {
         "jkeys": {
             "fiscal_id": {
-                "jaar_type": "FiscalID"
+                "jaar_type": "IdeaUnit"
             },
             "month_label": {
                 "jaar_type": "IdeaUnit"
@@ -74,7 +74,7 @@
     "fiscal_timeline_weekday": {
         "jkeys": {
             "fiscal_id": {
-                "jaar_type": "FiscalID"
+                "jaar_type": "IdeaUnit"
             },
             "weekday_label": {
                 "jaar_type": "IdeaUnit"
@@ -96,7 +96,7 @@
                 "jaar_type": "int"
             },
             "fiscal_id": {
-                "jaar_type": "FiscalID"
+                "jaar_type": "IdeaUnit"
             },
             "fund_coin": {
                 "jaar_type": "float"
