@@ -27,6 +27,7 @@ from src.f10_etl.transformers import (
     etl_face_pidgins_to_event_pidgins,
     etl_event_pidgins_to_pidgin_csv_files,
     etl_event_pidgins_csvs_to_pidgin_jsons,
+    etl_pidgin_jsons_inherit_younger_pidgins,
     etl_forge_bricks_to_face_bricks,
     etl_face_bricks_to_event_bricks,
     etl_event_bricks_to_fiscal_bricks,
@@ -154,6 +155,9 @@ class WorldUnit:
 
     def pidgin_agg_to_face_dirs(self):
         etl_pidgin_agg_to_face_dirs(self._forge_dir, self._faces_dir)
+
+    def pidgin_jsons_inherit_younger_pidgins(self):
+        etl_pidgin_jsons_inherit_younger_pidgins(self._faces_dir, self._pidgin_events)
 
     def face_pidgins_to_event_pidgins(self):
         etl_face_pidgins_to_event_pidgins(self._faces_dir)

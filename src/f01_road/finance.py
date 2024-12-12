@@ -235,11 +235,11 @@ def get_net(x_give: float, x_take: float) -> float:
     x_take = get_0_if_None(x_take)
     if x_give < 0 or x_take < 0:
         if x_give < 0 and x_take >= 0:
-            parameters_text = f"get_net x_give={x_give}."
+            parameters_str = f"get_net x_give={x_give}."
         elif x_give >= 0:
-            parameters_text = f"get_net x_take={x_take}."
+            parameters_str = f"get_net x_take={x_take}."
         else:
-            parameters_text = f"get_net x_give={x_give} and x_take={x_take}."
-        exception_str = f"{parameters_text} Only non-negative numbers allowed."
+            parameters_str = f"get_net x_give={x_give} and x_take={x_take}."
+        exception_str = f"{parameters_str} Only non-negative numbers allowed."
         raise get_net_Exception(exception_str)
     return x_give - x_take

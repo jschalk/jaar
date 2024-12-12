@@ -553,10 +553,10 @@ def test_get_positional_dict_ReturnsObj():
 
 def test_add_headers_to_csv_ReturnsObj():
     # ESTABLISH
-    swim_text = "swim"
-    six_text = "six"
-    seven_text = "seven"
-    headers = [swim_text, six_text, seven_text]
+    swim_str = "swim"
+    six_str = "six"
+    seven_str = "seven"
+    headers = [swim_str, six_str, seven_str]
     headerless_csv = """Bob,13,29
 Sue,11,23
 Yao,41,37
@@ -571,7 +571,7 @@ Yao,41,37
     assert gen_csv
     assert (
         gen_csv
-        == f"""{swim_text},{six_text},{seven_text}
+        == f"""{swim_str},{six_str},{seven_str}
 {headerless_csv}"""
     )
 

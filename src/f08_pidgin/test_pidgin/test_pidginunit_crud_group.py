@@ -7,7 +7,7 @@ def test_PidginUnit_set_groupbridge_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    x_groupbridge = groupbridge_shop(x_face_id=sue_str)
+    x_groupbridge = groupbridge_shop(face_id=sue_str)
     x_groupbridge.set_otx2inx("Bob", "Bob of Portland")
     assert sue_pidginunit.groupbridge != x_groupbridge
 
@@ -23,7 +23,7 @@ def test_PidginUnit_set_groupbridge_RaisesErrorIf_groupbridge_otx_wall_IsNotSame
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_otx_wall = "/"
-    x_groupbridge = groupbridge_shop(x_otx_wall=slash_otx_wall, x_face_id=sue_str)
+    x_groupbridge = groupbridge_shop(otx_wall=slash_otx_wall, face_id=sue_str)
     assert sue_pidginunit.otx_wall != x_groupbridge.otx_wall
     assert sue_pidginunit.groupbridge != x_groupbridge
 
@@ -39,7 +39,7 @@ def test_PidginUnit_set_groupbridge_RaisesErrorIf_groupbridge_inx_wall_IsNotSame
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_inx_wall = "/"
-    x_groupbridge = groupbridge_shop(x_inx_wall=slash_inx_wall, x_face_id=sue_str)
+    x_groupbridge = groupbridge_shop(inx_wall=slash_inx_wall, face_id=sue_str)
     assert sue_pidginunit.inx_wall != x_groupbridge.inx_wall
     assert sue_pidginunit.groupbridge != x_groupbridge
 
@@ -55,9 +55,7 @@ def test_PidginUnit_set_groupbridge_RaisesErrorIf_groupbridge_unknown_word_IsNot
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
-    x_groupbridge = groupbridge_shop(
-        x_unknown_word=casa_unknown_word, x_face_id=sue_str
-    )
+    x_groupbridge = groupbridge_shop(unknown_word=casa_unknown_word, face_id=sue_str)
     assert sue_pidginunit.unknown_word != x_groupbridge.unknown_word
     assert sue_pidginunit.groupbridge != x_groupbridge
 
@@ -73,7 +71,7 @@ def test_PidginUnit_set_groupbridge_RaisesErrorIf_groupbridge_face_id_IsNotSame(
     sue_str = "Sue"
     yao_str = "Yao"
     sue_pidginunit = pidginunit_shop(sue_str)
-    x_groupbridge = groupbridge_shop(x_face_id=yao_str)
+    x_groupbridge = groupbridge_shop(face_id=yao_str)
     assert sue_pidginunit.face_id != x_groupbridge.face_id
     assert sue_pidginunit.groupbridge != x_groupbridge
 
@@ -88,7 +86,7 @@ def test_PidginUnit_get_groupbridge_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    static_x_groupbridge = groupbridge_shop(x_face_id=sue_str)
+    static_x_groupbridge = groupbridge_shop(face_id=sue_str)
     static_x_groupbridge.set_otx2inx("Bob", "Bob of Portland")
     sue_pidginunit.set_groupbridge(static_x_groupbridge)
 

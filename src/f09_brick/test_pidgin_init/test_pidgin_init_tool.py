@@ -381,10 +381,10 @@ def test_create_dir_valid_empty_pidginunit_Sets_otx_wall_inx_wall(
     slash_otx_wall = "/"
     colon_inx_wall = ":"
     sue_pidginunit = pidginunit_shop(
-        x_face_id=sue_str,
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
-        x_unknown_word=x_unknown_word,
+        face_id=sue_str,
+        otx_wall=slash_otx_wall,
+        inx_wall=colon_inx_wall,
+        unknown_word=x_unknown_word,
     )
     sue_pidginunit.set_acctbridge(get_slash_acctbridge())
     bridge_dir = get_example_face_dir()
@@ -413,11 +413,11 @@ def test_create_dir_valid_empty_pidginunit_Returns_event_id(
     colon_inx_wall = ":"
     event7 = 7
     sue_pidginunit = pidginunit_shop(
-        x_face_id=sue_str,
-        x_event_id=event7,
-        x_otx_wall=slash_otx_wall,
-        x_inx_wall=colon_inx_wall,
-        x_unknown_word=x_unknown_word,
+        face_id=sue_str,
+        event_id=event7,
+        otx_wall=slash_otx_wall,
+        inx_wall=colon_inx_wall,
+        unknown_word=x_unknown_word,
     )
     sue_pidginunit.set_acctbridge(get_slash_acctbridge())
     bridge_dir = get_example_face_dir()

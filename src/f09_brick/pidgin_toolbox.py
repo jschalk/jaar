@@ -214,22 +214,22 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
         inx_wall_set.update(x_dt.inx_wall.unique())
 
     if len(face_id_set) == 1:
-        x_face_id = face_id_set.pop()
+        face_id = face_id_set.pop()
     if len(event_id_set) == 1:
-        x_event_id = event_id_set.pop()
+        event_id = event_id_set.pop()
     if len(unknown_word_set) == 1:
-        x_unknown_word = unknown_word_set.pop()
+        unknown_word = unknown_word_set.pop()
     if len(otx_wall_set) == 1:
-        x_otx_wall = otx_wall_set.pop()
+        otx_wall = otx_wall_set.pop()
     if len(inx_wall_set) == 1:
-        x_inx_wall = inx_wall_set.pop()
+        inx_wall = inx_wall_set.pop()
 
     return pidginunit_shop(
-        x_face_id=x_face_id,
-        x_event_id=x_event_id,
-        x_otx_wall=x_otx_wall,
-        x_inx_wall=x_inx_wall,
-        x_unknown_word=x_unknown_word,
+        face_id=face_id,
+        event_id=event_id,
+        otx_wall=otx_wall,
+        inx_wall=inx_wall,
+        unknown_word=unknown_word,
     )
 
 

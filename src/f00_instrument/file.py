@@ -60,7 +60,7 @@ def copy_dir(src_dir: str, dest_dir: str):
         shutil_copytree(src=src_dir, dst=dest_dir)
 
 
-def save_file(dest_dir: str, file_name: str, file_str: str, replace: bool = None):
+def save_file(dest_dir: str, file_name: str, file_str: str, replace: bool = True):
     replace = True if replace is None else replace
     set_dir(dest_dir)
     file_path = create_path(dest_dir, file_name)
@@ -74,19 +74,19 @@ class CouldNotOpenFileException(Exception):
     pass
 
 
-def open_file(dest_dir: str, file_name: str):
+def open_file(dest_dir: str, file_name: str = None):
     # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
     file_path = create_path(dest_dir, file_name)
-    text_x = ""
+    x_str = ""
     try:
         with open(file_path, "r") as f:
-            text_x = f.read()
+            x_str = f.read()
             f.close()
     except (PermissionError, FileNotFoundError, OSError) as e:
         raise CouldNotOpenFileException(
             f"Could not load file {file_path} {e.args}"
         ) from e
-    return text_x
+    return x_str
 
 
 def count_files(dir_path: str) -> int:

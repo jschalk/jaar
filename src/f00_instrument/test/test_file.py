@@ -122,6 +122,7 @@ def test_open_file_OpensFilesCorrectlyWithOnly_dest_dir(
     # WHEN / THEN
     assert open_file(dest_dir=x1_file_path, file_name=None) == x1_file_str
     assert open_file(dest_dir=x2_file_path, file_name=None) == x2_file_str
+    assert open_file(dest_dir=x2_file_path) == x2_file_str
 
 
 def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):
@@ -296,7 +297,7 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegers_v0(env_dir_setup_clean
     env_dir = get_instrument_temp_env_dir()
     x1_file_name = "1.json"
     x2_file_name = "2.json"
-    x_file_str = "file text"
+    x_file_str = "file strs"
     save_file(env_dir, x1_file_name, x_file_str)
     save_file(env_dir, x2_file_name, x_file_str)
 
@@ -318,7 +319,7 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegersWithCorrectExtension(
     x2_file_name = "2.json"
     txt1_file_name = "1.txt"
     txt3_file_name = "3.txt"
-    x_file_str = "file text"
+    x_file_str = "file strs"
     save_file(env_dir, z_file_name, x_file_str)
     save_file(env_dir, x1_file_name, x_file_str)
     save_file(env_dir, x2_file_name, x_file_str)
@@ -348,7 +349,7 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegersGreaterThan_min_integer
     x3_file_name = "3.json"
     txt1_file_name = "1.txt"
     txt3_file_name = "3.txt"
-    x_file_str = "file text"
+    x_file_str = "file str"
     save_file(env_dir, z_file_name, x_file_str)
     save_file(env_dir, x1_file_name, x_file_str)
     save_file(env_dir, x2_file_name, x_file_str)

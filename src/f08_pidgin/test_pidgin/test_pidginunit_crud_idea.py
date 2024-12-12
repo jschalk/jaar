@@ -7,7 +7,7 @@ def test_PidginUnit_set_ideabridge_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    x_ideabridge = ideabridge_shop(x_face_id=sue_str)
+    x_ideabridge = ideabridge_shop(face_id=sue_str)
     x_ideabridge.set_otx2inx("Bob", "Bob of Portland")
     assert sue_pidginunit.ideabridge != x_ideabridge
 
@@ -23,7 +23,7 @@ def test_PidginUnit_set_ideabridge_RaisesErrorIf_ideabridge_otx_wall_IsNotSame()
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_otx_wall = "/"
-    x_ideabridge = ideabridge_shop(x_otx_wall=slash_otx_wall, x_face_id=sue_str)
+    x_ideabridge = ideabridge_shop(otx_wall=slash_otx_wall, face_id=sue_str)
     assert sue_pidginunit.otx_wall != x_ideabridge.otx_wall
     assert sue_pidginunit.ideabridge != x_ideabridge
 
@@ -39,7 +39,7 @@ def test_PidginUnit_set_ideabridge_RaisesErrorIf_ideabridge_inx_wall_IsNotSame()
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_inx_wall = "/"
-    x_ideabridge = ideabridge_shop(x_inx_wall=slash_inx_wall, x_face_id=sue_str)
+    x_ideabridge = ideabridge_shop(inx_wall=slash_inx_wall, face_id=sue_str)
     assert sue_pidginunit.inx_wall != x_ideabridge.inx_wall
     assert sue_pidginunit.ideabridge != x_ideabridge
 
@@ -55,7 +55,7 @@ def test_PidginUnit_set_ideabridge_RaisesErrorIf_ideabridge_unknown_word_IsNotSa
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
-    x_ideabridge = ideabridge_shop(x_unknown_word=casa_unknown_word, x_face_id=sue_str)
+    x_ideabridge = ideabridge_shop(unknown_word=casa_unknown_word, face_id=sue_str)
     assert sue_pidginunit.unknown_word != x_ideabridge.unknown_word
     assert sue_pidginunit.ideabridge != x_ideabridge
 
@@ -71,7 +71,7 @@ def test_PidginUnit_set_ideabridge_RaisesErrorIf_ideabridge_face_id_IsNotSame():
     sue_str = "Sue"
     yao_str = "Yao"
     sue_pidginunit = pidginunit_shop(sue_str)
-    x_ideabridge = ideabridge_shop(x_face_id=yao_str)
+    x_ideabridge = ideabridge_shop(face_id=yao_str)
     assert sue_pidginunit.face_id != x_ideabridge.face_id
     assert sue_pidginunit.ideabridge != x_ideabridge
 
@@ -86,7 +86,7 @@ def test_PidginUnit_get_ideabridge_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    static_x_ideabridge = ideabridge_shop(x_face_id=sue_str)
+    static_x_ideabridge = ideabridge_shop(face_id=sue_str)
     static_x_ideabridge.set_otx2inx("Bob", "Bob of Portland")
     sue_pidginunit.set_ideabridge(static_x_ideabridge)
 

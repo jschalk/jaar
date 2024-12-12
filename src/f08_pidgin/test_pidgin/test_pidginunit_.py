@@ -111,10 +111,10 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.unknown_word == default_unknown_word_if_None()
     assert sue_pidginunit.otx_wall == default_wall_if_None()
     assert sue_pidginunit.inx_wall == default_wall_if_None()
-    assert sue_pidginunit.groupbridge == groupbridge_shop(x_face_id=sue_str)
-    assert sue_pidginunit.acctbridge == acctbridge_shop(x_face_id=sue_str)
-    assert sue_pidginunit.ideabridge == ideabridge_shop(x_face_id=sue_str)
-    assert sue_pidginunit.roadbridge == roadbridge_shop(x_face_id=sue_str)
+    assert sue_pidginunit.groupbridge == groupbridge_shop(face_id=sue_str)
+    assert sue_pidginunit.acctbridge == acctbridge_shop(face_id=sue_str)
+    assert sue_pidginunit.ideabridge == ideabridge_shop(face_id=sue_str)
+    assert sue_pidginunit.roadbridge == roadbridge_shop(face_id=sue_str)
     assert sue_pidginunit.acctbridge.event_id == 0
     assert sue_pidginunit.acctbridge.unknown_word == default_unknown_word_if_None()
     assert sue_pidginunit.acctbridge.otx_wall == default_wall_if_None()
@@ -198,11 +198,11 @@ def test_pidginunit_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_
 
     # WHEN
     x_pidginunit = pidginunit_shop(
-        x_face_id=bob_str,
-        x_event_id=event7,
-        x_unknown_word=x_nan,
-        x_otx_wall=x_nan,
-        x_inx_wall=x_nan,
+        face_id=bob_str,
+        event_id=event7,
+        unknown_word=x_nan,
+        otx_wall=x_nan,
+        inx_wall=x_nan,
     )
 
     # THEN
@@ -217,7 +217,7 @@ def test_PidginUnit_set_bridgeunit_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    acctbridge = acctbridge_shop(x_face_id=sue_str)
+    acctbridge = acctbridge_shop(face_id=sue_str)
     acctbridge.set_otx2inx("Bob", "Bob of Portland")
     assert sue_pidginunit.acctbridge != acctbridge
 
@@ -232,7 +232,7 @@ def test_PidginUnit_set_bridgeunit_SetsAttr_SpecialCase_RoadUnit():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    roadbridge = roadbridge_shop(x_face_id=sue_str)
+    roadbridge = roadbridge_shop(face_id=sue_str)
     roadbridge.set_otx2inx("Bob", "Bob of Portland")
     assert sue_pidginunit.roadbridge != roadbridge
 
@@ -248,7 +248,7 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_otx_wall_IsNotSame()
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_otx_wall = "/"
-    acctbridge = acctbridge_shop(x_otx_wall=slash_otx_wall, x_face_id=sue_str)
+    acctbridge = acctbridge_shop(otx_wall=slash_otx_wall, face_id=sue_str)
     assert sue_pidginunit.otx_wall != acctbridge.otx_wall
     assert sue_pidginunit.acctbridge != acctbridge
 
@@ -264,7 +264,7 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_inx_wall_IsNotSame()
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_inx_wall = "/"
-    acctbridge = acctbridge_shop(x_inx_wall=slash_inx_wall, x_face_id=sue_str)
+    acctbridge = acctbridge_shop(inx_wall=slash_inx_wall, face_id=sue_str)
     assert sue_pidginunit.inx_wall != acctbridge.inx_wall
     assert sue_pidginunit.acctbridge != acctbridge
 
@@ -280,7 +280,7 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_unknown_word_IsNotSa
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
-    acctbridge = acctbridge_shop(x_unknown_word=casa_unknown_word, x_face_id=sue_str)
+    acctbridge = acctbridge_shop(unknown_word=casa_unknown_word, face_id=sue_str)
     assert sue_pidginunit.unknown_word != acctbridge.unknown_word
     assert sue_pidginunit.acctbridge != acctbridge
 
@@ -296,7 +296,7 @@ def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_face_id_IsNotSame():
     sue_str = "Sue"
     yao_str = "Yao"
     sue_pidginunit = pidginunit_shop(sue_str)
-    acctbridge = acctbridge_shop(x_face_id=yao_str)
+    acctbridge = acctbridge_shop(face_id=yao_str)
     assert sue_pidginunit.face_id != acctbridge.face_id
     assert sue_pidginunit.acctbridge != acctbridge
 
@@ -311,7 +311,7 @@ def test_PidginUnit_get_bridgeunit_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_pu = pidginunit_shop(sue_str)
-    static_acctbridge = acctbridge_shop(x_face_id=sue_str)
+    static_acctbridge = acctbridge_shop(face_id=sue_str)
     static_acctbridge.set_otx2inx("Bob", "Bob of Portland")
     sue_pu.set_acctbridge(static_acctbridge)
 
