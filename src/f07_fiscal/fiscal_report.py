@@ -1,4 +1,3 @@
-from src.f04_gift.atom_config import acct_id_str, owner_id_str
 from src.f02_bud.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
@@ -17,15 +16,15 @@ def get_fiscal_voices_accts_dataframe(x_fiscal: FiscalUnit) -> DataFrame:
         voice_bud = x_hubunit.get_voice_bud()
         voice_bud.settle_bud()
         df = get_bud_acctunits_dataframe(voice_bud)
-        df.insert(0, owner_id_str(), voice_bud._owner_id)
+        df.insert(0, "owner_id", voice_bud._owner_id)
         voice_dfs.append(df)
     return pandas_concat(voice_dfs, ignore_index=True)
 
 
 def get_fiscal_voices_accts_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
     column_header_list = [
-        owner_id_str(),
-        acct_id_str(),
+        "owner_id",
+        "acct_id",
         "credit_belief",
         "debtit_belief",
         "_fund_give",
@@ -73,15 +72,15 @@ def get_fiscal_finals_accts_dataframe(x_fiscal: FiscalUnit) -> DataFrame:
         final_bud = x_hubunit.get_final_bud()
         final_bud.settle_bud()
         final_df = get_bud_acctunits_dataframe(final_bud)
-        final_df.insert(0, owner_id_str(), final_bud._owner_id)
+        final_df.insert(0, "owner_id", final_bud._owner_id)
         final_dfs.append(final_df)
     return pandas_concat(final_dfs, ignore_index=True)
 
 
 def get_fiscal_finals_accts_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
     column_header_list = [
-        owner_id_str(),
-        acct_id_str(),
+        "owner_id",
+        "acct_id",
         "credit_belief",
         "debtit_belief",
         "_fund_give",
@@ -135,7 +134,7 @@ def get_fiscal_voices_agenda_dataframe(x_fiscal: FiscalUnit) -> DataFrame:
 
 def get_fiscal_voices_agenda_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
     column_header_list = [
-        owner_id_str(),
+        "owner_id",
         "fund_ratio",
         "_label",
         "_parent_road",
@@ -194,7 +193,7 @@ def get_fiscal_finals_agenda_dataframe(x_fiscal: FiscalUnit) -> DataFrame:
 
 def get_fiscal_finals_agenda_plotly_fig(x_fiscal: FiscalUnit) -> plotly_Figure:
     column_header_list = [
-        owner_id_str(),
+        "owner_id",
         "fund_ratio",
         "_label",
         "_parent_road",

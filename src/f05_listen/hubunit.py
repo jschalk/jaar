@@ -11,8 +11,6 @@ from src.f00_instrument.file import (
 from src.f00_instrument.dict_toolbox import get_empty_set_if_None
 from src.f00_instrument.db_toolbox import sqlite_connection
 from src.f01_road.jaar_config import (
-    dutys_str,
-    jobs_str,
     grades_folder,
     get_rootpart_of_keep_dir,
     treasury_file_name,
@@ -100,11 +98,11 @@ class calc_timepoint_purview_Exception(Exception):
 
 
 def get_keep_dutys_dir(x_keep_dir: str) -> str:
-    return f_path(x_keep_dir, dutys_str())
+    return f_path(x_keep_dir, "dutys")
 
 
 def get_keep_jobs_dir(x_keep_dir: str) -> str:
-    return f_path(x_keep_dir, jobs_str())
+    return f_path(x_keep_dir, "jobs")
 
 
 def get_keep_grades_dir(x_keep_dir: str) -> str:

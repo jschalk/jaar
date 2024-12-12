@@ -1,6 +1,5 @@
 from src.f00_instrument.file import open_file, create_path
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
-from src.f04_gift.atom_config import jkeys_str, jvalues_str
 from os import getcwd as os_getcwd
 
 
@@ -91,12 +90,12 @@ def get_fiscal_categorys() -> set[str]:
 
 
 def get_fiscal_config_jkeys(x_cat: str) -> dict:
-    jkeys_key_list = [x_cat, jkeys_str()]
+    jkeys_key_list = [x_cat, "jkeys"]
     return get_from_nested_dict(get_fiscal_config_dict(), jkeys_key_list)
 
 
 def get_fiscal_config_jvalues(x_cat: str) -> dict:
-    jvalues_key_list = [x_cat, jvalues_str()]
+    jvalues_key_list = [x_cat, "jvalues"]
     return get_from_nested_dict(get_fiscal_config_dict(), jvalues_key_list)
 
 

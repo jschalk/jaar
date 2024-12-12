@@ -2,7 +2,6 @@ from src.f00_instrument.file import save_file, open_file, create_path
 from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
 from src.f01_road.jaar_config import get_init_gift_id_if_None, get_json_filename
 from src.f01_road.road import OwnerID, FiscalID, get_default_fiscal_id_ideaunit
-from src.f04_gift.atom_config import fiscal_id_str, owner_id_str
 from src.f04_gift.atom import AtomUnit, get_from_json as atomunit_get_from_json
 from src.f04_gift.delta import DeltaUnit, deltaunit_shop
 from dataclasses import dataclass
@@ -40,8 +39,8 @@ class GiftUnit:
 
     def get_step_dict(self) -> dict[str, any]:
         return {
-            fiscal_id_str(): self.fiscal_id,
-            owner_id_str(): self.owner_id,
+            "fiscal_id": self.fiscal_id,
+            "owner_id": self.owner_id,
             "face_id": self._face_id,
             "delta": self._deltaunit.get_ordered_atomunits(self._delta_start),
         }
@@ -53,7 +52,7 @@ class GiftUnit:
     def get_deltametric_dict(self) -> dict:
         x_dict = self.get_step_dict()
         return {
-            owner_id_str(): x_dict.get(owner_id_str()),
+            "owner_id": x_dict.get("owner_id"),
             "face_id": x_dict.get("face_id"),
             "delta_atom_numbers": self.get_delta_atom_numbers(x_dict),
         }
@@ -134,8 +133,8 @@ def create_giftunit_from_files(
 ) -> GiftUnit:
     gift_filename = get_json_filename(gift_id)
     gift_dict = get_dict_from_json(open_file(gifts_dir, gift_filename))
-    x_owner_id = gift_dict.get(owner_id_str())
-    x_fiscal_id = gift_dict.get(fiscal_id_str())
+    x_owner_id = gift_dict.get("owner_id")
+    x_fiscal_id = gift_dict.get("fiscal_id")
     x_face_id = gift_dict.get("face_id")
     delta_atom_numbers_list = gift_dict.get("delta_atom_numbers")
     x_giftunit = giftunit_shop(
