@@ -76,54 +76,54 @@ def test_PurviewEpisode_set_net_purview_SetsAttr():
     assert yao_purviewepisode._net_purviews == {}
 
     # WHEN
-    sue_text = "Sue"
+    sue_str = "Sue"
     sue_purview = -44
-    yao_purviewepisode.set_net_purview(sue_text, sue_purview)
+    yao_purviewepisode.set_net_purview(sue_str, sue_purview)
 
     # THEN
     assert yao_purviewepisode._net_purviews != {}
-    assert yao_purviewepisode._net_purviews.get(sue_text) == sue_purview
+    assert yao_purviewepisode._net_purviews.get(sue_str) == sue_purview
 
 
 def test_PurviewEpisode_net_purview_exists_ReturnsObj():
     # ESTABLISH
     yao_purviewepisode = purviewepisode_shop("yao", 33)
-    sue_text = "Sue"
+    sue_str = "Sue"
     sue_purview = -44
-    assert yao_purviewepisode.net_purview_exists(sue_text) is False
+    assert yao_purviewepisode.net_purview_exists(sue_str) is False
 
     # WHEN
-    yao_purviewepisode.set_net_purview(sue_text, sue_purview)
+    yao_purviewepisode.set_net_purview(sue_str, sue_purview)
 
     # THEN
-    assert yao_purviewepisode.net_purview_exists(sue_text)
+    assert yao_purviewepisode.net_purview_exists(sue_str)
 
 
 def test_PurviewEpisode_get_net_purview_ReturnsObj():
     # ESTABLISH
     yao_purviewepisode = purviewepisode_shop("yao", 33)
-    sue_text = "Sue"
+    sue_str = "Sue"
     sue_purview = -44
-    yao_purviewepisode.set_net_purview(sue_text, sue_purview)
+    yao_purviewepisode.set_net_purview(sue_str, sue_purview)
 
     # WHEN / THEN
-    assert yao_purviewepisode.get_net_purview(sue_text)
-    assert yao_purviewepisode.get_net_purview(sue_text) == sue_purview
+    assert yao_purviewepisode.get_net_purview(sue_str)
+    assert yao_purviewepisode.get_net_purview(sue_str) == sue_purview
 
 
 def test_PurviewEpisode_del_net_purview_SetsAttr():
     # ESTABLISH
     yao_purviewepisode = purviewepisode_shop("yao", 33)
-    sue_text = "Sue"
+    sue_str = "Sue"
     sue_purview = -44
-    yao_purviewepisode.set_net_purview(sue_text, sue_purview)
-    assert yao_purviewepisode.net_purview_exists(sue_text)
+    yao_purviewepisode.set_net_purview(sue_str, sue_purview)
+    assert yao_purviewepisode.net_purview_exists(sue_str)
 
     # WHEN
-    yao_purviewepisode.del_net_purview(sue_text)
+    yao_purviewepisode.del_net_purview(sue_str)
 
     # THEN
-    assert yao_purviewepisode.net_purview_exists(sue_text) is False
+    assert yao_purviewepisode.net_purview_exists(sue_str) is False
 
 
 def test_PurviewEpisode_get_dict_ReturnsObj():

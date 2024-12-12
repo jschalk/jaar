@@ -94,10 +94,10 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     example_mine_dir = f"{get_test_worlds_dir()}/example_mine"
     five_world_id = "five"
     world2_current_time = 55
-    music_text = "music45"
+    music_str = "music45"
     sue_str = "Sue"
     bob_str = "Bob"
-    world2timeconversions = {music_text: timeconversion_shop(music_text)}
+    world2timeconversions = {music_str: timeconversion_shop(music_str)}
     world2_fiscalunits = {"music45"}
 
     # WHEN

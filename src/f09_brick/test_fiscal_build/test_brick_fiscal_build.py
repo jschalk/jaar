@@ -33,7 +33,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario0_OneFiscalID(brick_env_setup_c
     x_penny = 77
     x_fiscals_dir = f"{brick_fiscals_dir()}/fizz"
     music23_str = "music23"
-    slash_text = "/"
+    slash_str = "/"
 
     # WHEN
     x_fiscalunits = fiscal_build_from_df(
@@ -60,7 +60,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario0_OneFiscalID(brick_env_setup_c
         fund_coin=x_fund_coin,
         penny=x_penny,
         respect_bit=x_respect_bit,
-        wall=slash_text,
+        wall=slash_str,
         timeline=creg_timelineunit,
     )
     music23_fiscalunit.add_purviewepisode(
@@ -106,7 +106,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario1_TwoFiscalIDs(
     x_penny = 77
     x_fiscals_dir = f"{brick_fiscals_dir()}/fizz"
     music23_str = "music23"
-    slash_text = "/"
+    slash_str = "/"
 
     # WHEN
     x_fiscalunits = fiscal_build_from_df(
@@ -131,7 +131,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario1_TwoFiscalIDs(
         fund_coin=x_fund_coin,
         penny=x_penny,
         respect_bit=x_respect_bit,
-        wall=slash_text,
+        wall=slash_str,
         timeline=creg_timelineunit,
     )
     five_timelineunit = timelineunit_shop(get_five_config())

@@ -1,6 +1,7 @@
-from src.f00_instrument.file import create_path, get_dir_file_strs, save_file
+from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
 from src.f01_road.finance_tran import TimeLinePoint, FiscalID
 from src.f01_road.road import FaceID
+from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_brick.brick_config import (
     get_brick_numbers,
@@ -574,6 +575,31 @@ def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
 def etl_event_pidgins_csvs_to_pidgin_jsons(faces_dir: str):
     for event_pidgin_dir in _get_all_faces_dir_event_dirs(faces_dir):
         etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
+
+
+def etl_pidgin_jsons_inherit_younger_pidgins(
+    faces_dir: str, pidgin_events: dict[FaceID, set[TimeLinePoint]]
+):
+    old_pidginunit = None
+    for face_id, pidgin_event_ids in pidgin_events.items():
+        for pidgin_event_id in pidgin_event_ids:
+            new_pidgin_path = _get_pidgin_face_path(faces_dir, face_id, pidgin_event_id)
+            new_pidginunit = get_pidginunit_from_json(open_file(new_pidgin_path))
+            if old_pidginunit != None:
+                new_pidginunit = inherit_pidginunit(old_pidginunit, new_pidginunit)
+                save_file(new_pidgin_path, None, new_pidginunit.get_json())
+                print(f"{face_id=} {new_pidgin_path=}")
+                print(f"{new_pidginunit.acctbridge=}")
+                print(f"{new_pidginunit.get_json()=}")
+            old_pidginunit = new_pidginunit
+
+
+def _get_pidgin_face_path(
+    faces_dir: str, face_id: FaceID, pidgin_event_id: TimeLinePoint
+):
+    face_dir = create_path(faces_dir, face_id)
+    event_dir = create_path(face_dir, pidgin_event_id)
+    return create_path(event_dir, "pidgin.json")
 
 
 def etl_forge_bricks_to_face_bricks(forge_dir: str, faces_dir: str):

@@ -651,54 +651,54 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 #     assert yao_tranbook._net_purviews == {}
 
 #     # WHEN
-#     sue_text = "Sue"
+#     sue_str = "Sue"
 #     sue_purview = -44
-#     yao_tranbook.set_net_purview(sue_text, sue_purview)
+#     yao_tranbook.set_net_purview(sue_str, sue_purview)
 
 #     # THEN
 #     assert yao_tranbook._net_purviews != {}
-#     assert yao_tranbook._net_purviews.get(sue_text) == sue_purview
+#     assert yao_tranbook._net_purviews.get(sue_str) == sue_purview
 
 
 # def test_TranBook_net_purview_exists_ReturnsObj():
 #     # ESTABLISH
 #     yao_tranbook = tranbook_shop("yao", 33)
-#     sue_text = "Sue"
+#     sue_str = "Sue"
 #     sue_purview = -44
-#     assert yao_tranbook.net_purview_exists(sue_text) is False
+#     assert yao_tranbook.net_purview_exists(sue_str) is False
 
 #     # WHEN
-#     yao_tranbook.set_net_purview(sue_text, sue_purview)
+#     yao_tranbook.set_net_purview(sue_str, sue_purview)
 
 #     # THEN
-#     assert yao_tranbook.net_purview_exists(sue_text)
+#     assert yao_tranbook.net_purview_exists(sue_str)
 
 
 # def test_TranBook_get_net_purview_ReturnsObj():
 #     # ESTABLISH
 #     yao_tranbook = tranbook_shop("yao", 33)
-#     sue_text = "Sue"
+#     sue_str = "Sue"
 #     sue_purview = -44
-#     yao_tranbook.set_net_purview(sue_text, sue_purview)
+#     yao_tranbook.set_net_purview(sue_str, sue_purview)
 
 #     # WHEN / THEN
-#     assert yao_tranbook.get_net_purview(sue_text)
-#     assert yao_tranbook.get_net_purview(sue_text) == sue_purview
+#     assert yao_tranbook.get_net_purview(sue_str)
+#     assert yao_tranbook.get_net_purview(sue_str) == sue_purview
 
 
 # def test_TranBook_del_net_purview_SetsAttr():
 #     # ESTABLISH
 #     yao_tranbook = tranbook_shop("yao", 33)
-#     sue_text = "Sue"
+#     sue_str = "Sue"
 #     sue_purview = -44
-#     yao_tranbook.set_net_purview(sue_text, sue_purview)
-#     assert yao_tranbook.net_purview_exists(sue_text)
+#     yao_tranbook.set_net_purview(sue_str, sue_purview)
+#     assert yao_tranbook.net_purview_exists(sue_str)
 
 #     # WHEN
-#     yao_tranbook.del_net_purview(sue_text)
+#     yao_tranbook.del_net_purview(sue_str)
 
 #     # THEN
-#     assert yao_tranbook.net_purview_exists(sue_text) is False
+#     assert yao_tranbook.net_purview_exists(sue_str) is False
 
 
 # def test_TranBook_get_dict_ReturnsObj():
