@@ -25,6 +25,7 @@ from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
+from pathlib import Path
 
 
 def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario0_NoPidginUnitFiles(
@@ -33,7 +34,8 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario0_NoPidginUnitFi
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     assert fizz_world._pidgin_events == {}
-    before_files = {f for f in fizz_world._faces_dir.glob("**/*") if f.is_file()}
+    faces_dir = Path(fizz_world._faces_dir)
+    before_files = {f for f in faces_dir.glob("**/*") if f.is_file()}
 
     # WHEN
     fizz_world.pidgin_jsons_inherit_younger_pidgins()
@@ -42,7 +44,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario0_NoPidginUnitFi
     assert fizz_world._pidgin_events == {}
 
     # Verify no files were created or modified
-    final_files = {f for f in fizz_world._faces_dir.glob("**/*") if f.is_file()}
+    final_files = {f for f in faces_dir.glob("**/*") if f.is_file()}
     state_change_str = "File system state changed during test execution"
     assert before_files == final_files, state_change_str
 
