@@ -18,24 +18,10 @@ from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.group import awardlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import BudUnit
-from src.f02_bud.bud_tool import (
-    bud_attr_exists,
-    budunit_str,
-    bud_acctunit_str,
-    bud_acct_membership_str,
-    bud_itemunit_str,
-    bud_item_awardlink_str,
-    bud_item_reasonunit_str,
-    bud_item_reason_premiseunit_str,
-    bud_item_teamlink_str,
-    bud_item_healerlink_str,
-    bud_item_factunit_str,
-    bud_get_obj,
-)
+from src.f02_bud.bud_tool import bud_attr_exists, bud_get_obj
 from src.f04_gift.atom_config import (
     get_category_from_dict,
     get_atom_config_jkeys,
-    get_atom_categorys,
     atom_delete,
     atom_insert,
     atom_update,
@@ -46,35 +32,6 @@ from src.f04_gift.atom_config import (
     get_atom_config_args,
     get_sorted_jkey_keys,
     get_atom_args_jaar_types,
-    nesting_order_str,
-    jkeys_str,
-    jvalues_str,
-    category_str,
-    crud_str_str,
-    acct_id_str,
-    awardee_id_str,
-    group_id_str,
-    healer_id_str,
-    parent_road_str,
-    road_str,
-    label_str,
-    pledge_str,
-    addin_str,
-    begin_str,
-    close_str,
-    denom_str,
-    numor_str,
-    morph_str,
-    gogo_want_str,
-    stop_want_str,
-    mass_str,
-    credit_vote_str,
-    debtit_vote_str,
-    credit_belief_str,
-    debtit_belief_str,
-    fopen_str,
-    fnigh_str,
-    base_item_active_requisite_str,
     CRUD_command,
 )
 from dataclasses import dataclass
@@ -139,10 +96,10 @@ class AtomUnit:
         return self._get_category_dict().get(self.crud_str)
 
     def _get_jkeys_dict(self) -> dict:
-        return self._get_category_dict().get(jkeys_str())
+        return self._get_category_dict().get("jkeys")
 
     def _get_jvalues_dict(self) -> dict:
-        x_key = jvalues_str()
+        x_key = "jvalues"
         return get_empty_dict_if_None(self._get_category_dict().get(x_key))
 
     def get_nesting_order_args(self) -> list[str]:
@@ -187,10 +144,10 @@ class AtomUnit:
         jkeys_dict = self.get_jkeys_dict()
         jvalues_dict = self.get_jvalues_dict()
         return {
-            category_str(): self.category,
-            crud_str_str(): self.crud_str,
-            jkeys_str(): jkeys_dict,
-            jvalues_str(): jvalues_dict,
+            "category": self.category,
+            "crud": self.crud_str,
+            "jkeys": jkeys_dict,
+            "jvalues": jvalues_dict,
         }
 
     def get_json(self) -> str:
@@ -214,10 +171,10 @@ def atomunit_shop(
 
 def get_from_json(x_str: str) -> AtomUnit:
     x_dict = get_dict_from_json(x_str)
-    x_atom = atomunit_shop(x_dict[category_str()], x_dict[crud_str_str()])
-    for x_key, x_value in x_dict[jkeys_str()].items():
+    x_atom = atomunit_shop(x_dict["category"], x_dict["crud"])
+    for x_key, x_value in x_dict["jkeys"].items():
         x_atom.set_jkey(x_key, x_value)
-    for x_key, x_value in x_dict[jvalues_str()].items():
+    for x_key, x_value in x_dict["jvalues"].items():
         x_atom.set_jvalue(x_key, x_value)
     return x_atom
 
@@ -253,35 +210,35 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
 
 
 def _modify_bud_acct_membership_delete(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value(acct_id_str())
-    x_group_id = x_atom.get_value(group_id_str())
+    x_acct_id = x_atom.get_value("acct_id")
+    x_group_id = x_atom.get_value("group_id")
     x_bud.get_acct(x_acct_id).delete_membership(x_group_id)
 
 
 def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value(acct_id_str())
-    x_group_id = x_atom.get_value(group_id_str())
+    x_acct_id = x_atom.get_value("acct_id")
+    x_group_id = x_atom.get_value("group_id")
     x_acctunit = x_bud.get_acct(x_acct_id)
     x_membership = x_acctunit.get_membership(x_group_id)
-    x_credit_vote = x_atom.get_value(credit_vote_str())
-    x_debtit_vote = x_atom.get_value(debtit_vote_str())
+    x_credit_vote = x_atom.get_value("credit_vote")
+    x_debtit_vote = x_atom.get_value("debtit_vote")
     x_membership.set_credit_vote(x_credit_vote)
     x_membership.set_debtit_vote(x_debtit_vote)
 
 
 def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value(acct_id_str())
-    x_group_id = x_atom.get_value(group_id_str())
-    x_credit_vote = x_atom.get_value(credit_vote_str())
-    x_debtit_vote = x_atom.get_value(debtit_vote_str())
+    x_acct_id = x_atom.get_value("acct_id")
+    x_group_id = x_atom.get_value("group_id")
+    x_credit_vote = x_atom.get_value("credit_vote")
+    x_debtit_vote = x_atom.get_value("debtit_vote")
     x_acctunit = x_bud.get_acct(x_acct_id)
     x_acctunit.add_membership(x_group_id, x_credit_vote, x_debtit_vote)
 
 
 def _modify_bud_itemunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     item_road = create_road(
-        x_atom.get_value(parent_road_str()),
-        x_atom.get_value(label_str()),
+        x_atom.get_value("parent_road"),
+        x_atom.get_value("label"),
         wall=x_bud._wall,
     )
     x_bud.del_item_obj(item_road, del_children=x_atom.get_value("del_children"))
@@ -289,39 +246,39 @@ def _modify_bud_itemunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_itemunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     item_road = create_road(
-        x_atom.get_value(parent_road_str()),
-        x_atom.get_value(label_str()),
+        x_atom.get_value("parent_road"),
+        x_atom.get_value("label"),
         wall=x_bud._wall,
     )
     x_bud.edit_item_attr(
         road=item_road,
-        addin=x_atom.get_value(addin_str()),
-        begin=x_atom.get_value(begin_str()),
-        gogo_want=x_atom.get_value(gogo_want_str()),
-        stop_want=x_atom.get_value(stop_want_str()),
-        close=x_atom.get_value(close_str()),
-        denom=x_atom.get_value(denom_str()),
-        numor=x_atom.get_value(numor_str()),
-        morph=x_atom.get_value(morph_str()),
-        mass=x_atom.get_value(mass_str()),
-        pledge=x_atom.get_value(pledge_str()),
+        addin=x_atom.get_value("addin"),
+        begin=x_atom.get_value("begin"),
+        gogo_want=x_atom.get_value("gogo_want"),
+        stop_want=x_atom.get_value("stop_want"),
+        close=x_atom.get_value("close"),
+        denom=x_atom.get_value("denom"),
+        numor=x_atom.get_value("numor"),
+        morph=x_atom.get_value("morph"),
+        mass=x_atom.get_value("mass"),
+        pledge=x_atom.get_value("pledge"),
     )
 
 
 def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_item(
         item_kid=itemunit_shop(
-            _label=x_atom.get_value(label_str()),
-            addin=x_atom.get_value(addin_str()),
-            begin=x_atom.get_value(begin_str()),
-            close=x_atom.get_value(close_str()),
-            gogo_want=x_atom.get_value(gogo_want_str()),
-            stop_want=x_atom.get_value(stop_want_str()),
-            denom=x_atom.get_value(denom_str()),
-            numor=x_atom.get_value(numor_str()),
-            pledge=x_atom.get_value(pledge_str()),
+            _label=x_atom.get_value("label"),
+            addin=x_atom.get_value("addin"),
+            begin=x_atom.get_value("begin"),
+            close=x_atom.get_value("close"),
+            gogo_want=x_atom.get_value("gogo_want"),
+            stop_want=x_atom.get_value("stop_want"),
+            denom=x_atom.get_value("denom"),
+            numor=x_atom.get_value("numor"),
+            pledge=x_atom.get_value("pledge"),
         ),
-        parent_road=x_atom.get_value(parent_road_str()),
+        parent_road=x_atom.get_value("parent_road"),
         create_missing_items=False,
         get_rid_of_missing_awardlinks_awardee_ids=False,
         create_missing_ancestors=False,
@@ -331,13 +288,13 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_item_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_item_attr(
         road=x_atom.get_value("road"),
-        awardlink_del=x_atom.get_value(awardee_id_str()),
+        awardlink_del=x_atom.get_value("awardee_id"),
     )
 
 
 def _modify_bud_item_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_item = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_awardlink = x_item.awardlinks.get(x_atom.get_value(awardee_id_str()))
+    x_awardlink = x_item.awardlinks.get(x_atom.get_value("awardee_id"))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -366,8 +323,8 @@ def _modify_bud_item_factunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_factunit = x_itemunit.factunits.get(x_atom.get_value("base"))
     x_factunit.set_attr(
         pick=x_atom.get_value("pick"),
-        fopen=x_atom.get_value(fopen_str()),
-        fnigh=x_atom.get_value(fnigh_str()),
+        fopen=x_atom.get_value("fopen"),
+        fnigh=x_atom.get_value("fnigh"),
     )
     # x_itemunit.set_factunit(x_factunit)
 
@@ -378,8 +335,8 @@ def _modify_bud_item_factunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         factunit=factunit_shop(
             base=x_atom.get_value("base"),
             pick=x_atom.get_value("pick"),
-            fopen=x_atom.get_value(fopen_str()),
-            fnigh=x_atom.get_value(fnigh_str()),
+            fopen=x_atom.get_value("fopen"),
+            fnigh=x_atom.get_value("fnigh"),
         ),
     )
 
@@ -394,7 +351,7 @@ def _modify_bud_item_reasonunit_update(x_bud: BudUnit, x_atom: AtomUnit):
         road=x_atom.get_value("road"),
         reason_base=x_atom.get_value("base"),
         reason_base_item_active_requisite=x_atom.get_value(
-            base_item_active_requisite_str()
+            "base_item_active_requisite"
         ),
     )
 
@@ -404,7 +361,7 @@ def _modify_bud_item_reasonunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         road=x_atom.get_value("road"),
         reason_base=x_atom.get_value("base"),
         reason_base_item_active_requisite=x_atom.get_value(
-            base_item_active_requisite_str()
+            "base_item_active_requisite"
         ),
     )
 
@@ -451,32 +408,32 @@ def _modify_bud_item_teamlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_item_healerlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.healerlink.del_healer_id(x_atom.get_value(healer_id_str()))
+    x_itemunit.healerlink.del_healer_id(x_atom.get_value("healer_id"))
 
 
 def _modify_bud_item_healerlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.healerlink.set_healer_id(x_atom.get_value(healer_id_str()))
+    x_itemunit.healerlink.set_healer_id(x_atom.get_value("healer_id"))
 
 
 def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
-    x_bud.del_acctunit(x_atom.get_value(acct_id_str()))
+    x_bud.del_acctunit(x_atom.get_value("acct_id"))
 
 
 def _modify_bud_acctunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_acctunit(
-        acct_id=x_atom.get_value(acct_id_str()),
-        credit_belief=x_atom.get_value(credit_belief_str()),
-        debtit_belief=x_atom.get_value(debtit_belief_str()),
+        acct_id=x_atom.get_value("acct_id"),
+        credit_belief=x_atom.get_value("credit_belief"),
+        debtit_belief=x_atom.get_value("debtit_belief"),
     )
 
 
 def _modify_bud_acctunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_acctunit(
         acctunit_shop(
-            acct_id=x_atom.get_value(acct_id_str()),
-            credit_belief=x_atom.get_value(credit_belief_str()),
-            debtit_belief=x_atom.get_value(debtit_belief_str()),
+            acct_id=x_atom.get_value("acct_id"),
+            credit_belief=x_atom.get_value("credit_belief"),
+            debtit_belief=x_atom.get_value("debtit_belief"),
         )
     )
 
@@ -564,30 +521,30 @@ def _modify_bud_acctunit(x_bud: BudUnit, x_atom: AtomUnit):
 
 
 def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
-    if x_atom.category == budunit_str():
+    if x_atom.category == "budunit":
         _modify_bud_budunit(x_bud, x_atom)
-    elif x_atom.category == bud_acct_membership_str():
+    elif x_atom.category == "bud_acct_membership":
         _modify_bud_acct_membership(x_bud, x_atom)
-    elif x_atom.category == bud_itemunit_str():
+    elif x_atom.category == "bud_itemunit":
         _modify_bud_itemunit(x_bud, x_atom)
-    elif x_atom.category == bud_item_awardlink_str():
+    elif x_atom.category == "bud_item_awardlink":
         _modify_bud_item_awardlink(x_bud, x_atom)
-    elif x_atom.category == bud_item_factunit_str():
+    elif x_atom.category == "bud_item_factunit":
         _modify_bud_item_factunit(x_bud, x_atom)
-    elif x_atom.category == bud_item_reasonunit_str():
+    elif x_atom.category == "bud_item_reasonunit":
         _modify_bud_item_reasonunit(x_bud, x_atom)
-    elif x_atom.category == bud_item_reason_premiseunit_str():
+    elif x_atom.category == "bud_item_reason_premiseunit":
         _modify_bud_item_reason_premiseunit(x_bud, x_atom)
-    elif x_atom.category == bud_item_healerlink_str():
+    elif x_atom.category == "bud_item_healerlink":
         _modify_bud_item_healerlink(x_bud, x_atom)
-    elif x_atom.category == bud_item_teamlink_str():
+    elif x_atom.category == "bud_item_teamlink":
         _modify_bud_item_teamlink(x_bud, x_atom)
-    elif x_atom.category == bud_acctunit_str():
+    elif x_atom.category == "bud_acctunit":
         _modify_bud_acctunit(x_bud, x_atom)
 
 
 def jvalues_different(category: str, x_obj: any, y_obj: any) -> bool:
-    if category == budunit_str():
+    if category == "budunit":
         return (
             x_obj.tally != y_obj.tally
             or x_obj.max_tree_traverse != y_obj.max_tree_traverse
@@ -597,15 +554,15 @@ def jvalues_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.fund_pool != y_obj.fund_pool
             or x_obj.fund_coin != y_obj.fund_coin
         )
-    elif category in {bud_acct_membership_str()}:
+    elif category in {"bud_acct_membership"}:
         return (x_obj.credit_vote != y_obj.credit_vote) or (
             x_obj.debtit_vote != y_obj.debtit_vote
         )
-    elif category in {bud_item_awardlink_str()}:
+    elif category in {"bud_item_awardlink"}:
         return (x_obj.give_force != y_obj.give_force) or (
             x_obj.take_force != y_obj.take_force
         )
-    elif category == bud_itemunit_str():
+    elif category == "bud_itemunit":
         return (
             x_obj.addin != y_obj.addin
             or x_obj.begin != y_obj.begin
@@ -616,21 +573,21 @@ def jvalues_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.mass != y_obj.mass
             or x_obj.pledge != y_obj.pledge
         )
-    elif category == bud_item_factunit_str():
+    elif category == "bud_item_factunit":
         return (
             (x_obj.pick != y_obj.pick)
             or (x_obj.open != y_obj.open)
             or (x_obj.nigh != y_obj.nigh)
         )
-    elif category == bud_item_reasonunit_str():
+    elif category == "bud_item_reasonunit":
         return x_obj.base_item_active_requisite != y_obj.base_item_active_requisite
-    elif category == bud_item_reason_premiseunit_str():
+    elif category == "bud_item_reason_premiseunit":
         return (
             x_obj.open != y_obj.open
             or x_obj.nigh != y_obj.nigh
             or x_obj.divisor != y_obj.divisor
         )
-    elif category == bud_acctunit_str():
+    elif category == "bud_acctunit":
         return (x_obj.credit_belief != y_obj.credit_belief) or (
             x_obj.debtit_belief != y_obj.debtit_belief
         )
@@ -752,12 +709,12 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
     x_category = x_atom.category
     config_req_args = get_atom_config_jkeys(x_category)
     x_atom_reqs = {req_arg: x_atom.get_value(req_arg) for req_arg in config_req_args}
-    x_parent_road = x_atom_reqs.get(parent_road_str())
-    x_label = x_atom_reqs.get(label_str())
+    x_parent_road = x_atom_reqs.get("parent_road")
+    x_label = x_atom_reqs.get("label")
     if x_parent_road != None and x_label != None:
-        x_atom_reqs[road_str()] = x_bud.make_road(x_parent_road, x_label)
+        x_atom_reqs["road"] = x_bud.make_road(x_parent_road, x_label)
         x_wall = x_bud._wall
-        is_itemroot_road = is_ideaunit(x_atom_reqs.get(road_str()), x_wall)
+        is_itemroot_road = is_ideaunit(x_atom_reqs.get("road"), x_wall)
         if is_itemroot_road is True:
             return None
 

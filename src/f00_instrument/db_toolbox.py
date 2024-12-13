@@ -181,9 +181,7 @@ def _get_grouping_select_clause(
 
 
 def _remove_comma_at_end(x_str: str) -> str:
-    if x_str[len(x_str) - 1 : len(x_str)] == ",":
-        x_str = x_str[0:-1]
-    return x_str
+    return x_str.removesuffix(",")
 
 
 def _get_grouping_groupby_clause(group_by_columns: list[str]) -> str:
@@ -194,15 +192,14 @@ def _get_grouping_groupby_clause(group_by_columns: list[str]) -> str:
 
 
 def _get_having_equal_value_clause(value_columns: list[str]) -> str:
-    if value_columns == []:
+    if not value_columns:
         return ""
-    else:
-        having_clause = "HAVING"
-        for value_column in value_columns:
-            if having_clause != "HAVING":
-                having_clause += f" AND"
-            having_clause += f" MIN({value_column}) = MAX({value_column})"
-        return _remove_comma_at_end(having_clause)
+    having_clause = "HAVING"
+    for value_column in value_columns:
+        if having_clause != "HAVING":
+            having_clause += " AND"
+        having_clause += f" MIN({value_column}) = MAX({value_column})"
+    return _remove_comma_at_end(having_clause)
 
 
 def get_groupby_sql_query(

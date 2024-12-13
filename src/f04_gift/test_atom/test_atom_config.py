@@ -28,7 +28,7 @@ from src.f04_gift.atom_config import (
     jkeys_str,
     jvalues_str,
     category_str,
-    crud_str_str,
+    crud_str,
     normal_table_name_str,
     normal_specs_str,
     sqlite_datatype_str,
@@ -82,7 +82,7 @@ def test_str_functions_ReturnsObj():
     assert awardee_id_str() == "awardee_id"
     assert group_id_str() == "group_id"
     assert team_id_str() == "team_id"
-    assert crud_str_str() == "crud_str"
+    assert crud_str() == "crud"
     assert begin_str() == "begin"
     assert close_str() == "close"
     assert addin_str() == "addin"

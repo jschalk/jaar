@@ -91,8 +91,8 @@ def category_str() -> str:
     return "category"
 
 
-def crud_str_str() -> str:
-    return "crud_str"
+def crud_str() -> str:
+    return "crud"
 
 
 def face_id_str() -> str:

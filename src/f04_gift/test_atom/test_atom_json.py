@@ -4,7 +4,9 @@ from src.f04_gift.atom_config import (
     jkeys_str,
     jvalues_str,
     category_str,
-    crud_str_str,
+    crud_str,
+    road_str,
+    base_str,
 )
 from src.f04_gift.atom import (
     atomunit_shop,
@@ -23,17 +25,13 @@ def test_AtomUnit_get_dict_ReturnsCorrectObj():
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
     x_category = bud_item_factunit_str()
-    road_str = "road"
-    base_str = "base"
-    open_str = "open"
-    nigh_str = "nigh"
     knee_open = 7
     knee_nigh = 13
     insert_factunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_factunit_atomunit.set_jkey(road_str, ball_road)
-    insert_factunit_atomunit.set_jkey(base_str, knee_road)
-    insert_factunit_atomunit.set_jvalue(open_str, knee_open)
-    insert_factunit_atomunit.set_jvalue(nigh_str, knee_nigh)
+    insert_factunit_atomunit.set_jkey(road_str(), ball_road)
+    insert_factunit_atomunit.set_jkey(base_str(), knee_road)
+    insert_factunit_atomunit.set_jvalue("open", knee_open)
+    insert_factunit_atomunit.set_jvalue("nigh", knee_nigh)
 
     # WHEN
     atom_dict = insert_factunit_atomunit.get_dict()
@@ -41,9 +39,9 @@ def test_AtomUnit_get_dict_ReturnsCorrectObj():
     # THEN
     assert atom_dict == {
         category_str(): x_category,
-        crud_str_str(): atom_insert(),
-        jkeys_str(): {road_str: ball_road, base_str: knee_road},
-        jvalues_str(): {open_str: knee_open, nigh_str: knee_nigh},
+        crud_str(): atom_insert(),
+        jkeys_str(): {road_str(): ball_road, base_str(): knee_road},
+        jvalues_str(): {"open": knee_open, "nigh": knee_nigh},
     }
 
 
