@@ -116,7 +116,9 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     sue_gift6_path = f_path(sue_gifts_dir, six_filename)
     print(f"{sue_gift2_path=}")
     print(f"{sue_gift6_path=}")
-    sue_giftunit = giftunit_shop(sue_str, None, sue_gift_id, _gifts_dir=sue_gifts_dir)
+    sue_giftunit = giftunit_shop(
+        sue_str, None, None, sue_gift_id, _gifts_dir=sue_gifts_dir
+    )
     assert os_path_exists(sue_gift2_path) is False
     assert os_path_exists(sue_gift6_path) is False
 
@@ -264,5 +266,5 @@ def test_create_giftunit_from_files_ReturnsCorrectObj(env_dir_setup_cleanup):
 
     # THEN
     assert src_sue_giftunit.owner_id == new_sue_giftunit.owner_id
-    assert src_sue_giftunit._face_id == new_sue_giftunit._face_id
+    assert src_sue_giftunit.face_id == new_sue_giftunit.face_id
     assert src_sue_giftunit._deltaunit == new_sue_giftunit._deltaunit

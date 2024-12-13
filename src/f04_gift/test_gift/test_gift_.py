@@ -30,14 +30,14 @@ def test_GiftUnit_exists():
     x_giftunit = GiftUnit()
 
     # THEN
-    assert x_giftunit.fiscal_id is None
-    assert x_giftunit.owner_id is None
-    assert x_giftunit._gift_id is None
-    assert x_giftunit._face_id is None
-    assert x_giftunit._deltaunit is None
-    assert x_giftunit._delta_start is None
-    assert x_giftunit._gifts_dir is None
-    assert x_giftunit._atoms_dir is None
+    assert not x_giftunit.face_id
+    assert not x_giftunit.fiscal_id
+    assert not x_giftunit.owner_id
+    assert not x_giftunit._gift_id
+    assert not x_giftunit._deltaunit
+    assert not x_giftunit._delta_start
+    assert not x_giftunit._gifts_dir
+    assert not x_giftunit._atoms_dir
 
 
 def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
@@ -48,14 +48,14 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
     bob_giftunit = giftunit_shop(owner_id=bob_str)
 
     # THEN
+    assert not bob_giftunit.face_id
     assert bob_giftunit.fiscal_id == root_label()
     assert bob_giftunit.owner_id == bob_str
     assert bob_giftunit._gift_id == 0
-    assert bob_giftunit._face_id is None
     assert bob_giftunit._deltaunit == deltaunit_shop()
     assert bob_giftunit._delta_start == 0
-    assert bob_giftunit._gifts_dir is None
-    assert bob_giftunit._atoms_dir is None
+    assert not bob_giftunit._gifts_dir
+    assert not bob_giftunit._atoms_dir
 
 
 def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
@@ -71,10 +71,10 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
 
     # WHEN
     bob_giftunit = giftunit_shop(
-        fiscal_id=music_str,
+        face_id=sue_str,
         owner_id=bob_str,
+        fiscal_id=music_str,
         _gift_id=bob_gift_id,
-        _face_id=sue_str,
         _deltaunit=bob_deltaunit,
         _delta_start=bob_delta_start,
         _gifts_dir=bob_gifts_dir,
@@ -82,10 +82,10 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     )
 
     # THEN
-    assert bob_giftunit.fiscal_id == music_str
+    assert bob_giftunit.face_id == sue_str
     assert bob_giftunit.owner_id == bob_str
+    assert bob_giftunit.fiscal_id == music_str
     assert bob_giftunit._gift_id == bob_gift_id
-    assert bob_giftunit._face_id == sue_str
     assert bob_giftunit._deltaunit == bob_deltaunit
     assert bob_giftunit._delta_start == bob_delta_start
     assert bob_giftunit._gifts_dir == bob_gifts_dir
@@ -98,11 +98,11 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithSomeArgs_v1():
     yao_str = "Yao"
 
     # WHEN
-    bob_giftunit = giftunit_shop(owner_id=bob_str, _face_id=yao_str)
+    bob_giftunit = giftunit_shop(owner_id=bob_str, face_id=yao_str)
 
     # THEN
     assert bob_giftunit.owner_id == bob_str
-    assert bob_giftunit._face_id == yao_str
+    assert bob_giftunit.face_id == yao_str
 
 
 def test_GiftUnit_set_face_SetsAttribute():
@@ -110,14 +110,14 @@ def test_GiftUnit_set_face_SetsAttribute():
     bob_str = "Bob"
     bob_giftunit = giftunit_shop(owner_id=bob_str)
     sue_str = "Sue"
-    assert bob_giftunit._face_id is None
-    assert bob_giftunit._face_id != sue_str
+    assert bob_giftunit.face_id is None
+    assert bob_giftunit.face_id != sue_str
 
     # WHEN
     bob_giftunit.set_face(sue_str)
 
     # THEN
-    assert bob_giftunit._face_id == sue_str
+    assert bob_giftunit.face_id == sue_str
 
 
 def test_GiftUnit_del_face_SetsAttribute():
@@ -126,14 +126,14 @@ def test_GiftUnit_del_face_SetsAttribute():
     bob_giftunit = giftunit_shop(owner_id=bob_str)
     yao_str = "Yao"
     bob_giftunit.set_face(yao_str)
-    assert bob_giftunit._face_id == yao_str
+    assert bob_giftunit.face_id == yao_str
 
     # WHEN
     bob_giftunit.del_face()
 
     # THEN
-    assert bob_giftunit._face_id != yao_str
-    assert bob_giftunit._face_id is None
+    assert bob_giftunit.face_id != yao_str
+    assert bob_giftunit.face_id is None
 
 
 def test_GiftUnit_set_deltaunit_SetsAttribute():
