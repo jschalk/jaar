@@ -6,7 +6,7 @@ from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
 
 
-def test_create_legible_list_ReturnsObjEstablishWithEmptyDelta():
+def test_create_legible_list_ReturnsObjEstablishWithEmptyDeltaUnit():
     # ESTABLISH / WHEN
     x_deltaunit = deltaunit_shop()
     sue_bud = budunit_shop("Sue")

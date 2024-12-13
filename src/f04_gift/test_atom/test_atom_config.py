@@ -142,7 +142,7 @@ def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
     return True
 
 
-def test_get_atom_config_dict_EveryCrudOperationHasDeltaOrderGroup():
+def test_get_atom_config_dict_EveryCrudOperationHasDeltaUnitOrderGroup():
     # ESTABLISH
     atom_order_str = "atom_order"
     mog = atom_order_str

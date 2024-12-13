@@ -227,7 +227,7 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
     assert x_dict.get(delta_str) == {}
 
 
-def test_GiftUnit_get_step_dict_ReturnsCorrectObj_WithDeltaPopulated():
+def test_GiftUnit_get_step_dict_ReturnsObj_WithDeltaUnitPopulated():
     # ESTABLISH
     bob_str = "Bob"
     sue_deltaunit = get_deltaunit_sue_example()
