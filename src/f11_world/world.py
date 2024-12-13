@@ -31,7 +31,6 @@ from src.f10_etl.transformers import (
     etl_forge_bricks_to_otx_face_bricks,
     etl_face_bricks_to_event_bricks,
     etl_event_bricks_to_fiscal_bricks,
-    etl_fiscal_bricks_to_fiscal_inx,
     get_fiscal_events_by_dirs,
     get_pidgin_events_by_dirs,
 )
@@ -189,10 +188,6 @@ class WorldUnit:
         etl_event_bricks_to_fiscal_bricks(self._faces_otx_dir)
         self._set_fiscal_events()
         self._set_fiscal_pidgins()
-
-    def fiscal_bricks_to_fiscal_inx(self):
-        fpidgins = self._fiscal_pidgins
-        etl_fiscal_bricks_to_fiscal_inx(self._faces_otx_dir, self.events, fpidgins)
 
     def get_dict(self) -> dict:
         return {

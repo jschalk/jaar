@@ -667,32 +667,3 @@ def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[TimeLinePoint]
                     events_list = pidgin_events.get(face_id)
                     events_list.add(int(event_id))
     return pidgin_events
-
-
-class etl_fiscal_bricks_to_fiscal_inx_Exception(Exception):
-    pass
-
-
-def etl_fiscal_bricks_to_fiscal_inx(
-    faces_dir: str,
-    events: dict[TimeLinePoint, FaceID],
-    fiscal_pidgins: dict[FiscalID, dict[TimeLinePoint, TimeLinePoint]],
-):
-    for fiscal_id, events_pidgins in fiscal_pidgins.items():
-        for fiscal_event_id, pidgin_event_id in events_pidgins.items():
-            fiscal_face_id = events.get(fiscal_event_id)
-            pidgin_face_id = events.get(pidgin_event_id)
-            if fiscal_face_id != pidgin_face_id:
-                exception_str = "etl_fiscal_bricks_to_fiscal_inx error"
-                raise etl_fiscal_bricks_to_fiscal_inx_Exception(exception_str)
-            face_dir = create_path(faces_dir, pidgin_face_id)
-            pidgin_event_dir = create_path(face_dir, pidgin_event_id)
-            fiscal_event_dir = create_path(face_dir, fiscal_event_id)
-            fiscal_dir = create_path(fiscal_event_dir, fiscal_id)
-            pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
-            x_pidginunit = get_pidginunit_from_json(open_file(pidgin_path))
-            for fiscal_br_ref in get_existing_excel_brick_file_refs(fiscal_dir):
-                br_path = create_path(fiscal_br_ref.file_dir, fiscal_br_ref.file_name)
-                br_df = pandas_read_excel(br_path, "forge_valid")
-                translate_all_columns_dataframe(br_df, x_pidginunit)
-                upsert_sheet(br_path, "forge_inx", br_df)
