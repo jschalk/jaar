@@ -12,9 +12,6 @@ from src.f02_bud.bud_tool import (
     bud_item_factunit_str,
 )
 from src.f04_gift.atom_config import (
-    atom_insert,
-    atom_delete,
-    atom_update,
     get_atom_categorys,
     is_atom_category,
     get_atom_config_dict,
@@ -22,78 +19,101 @@ from src.f04_gift.atom_config import (
     get_allowed_jaar_types,
     get_atom_args_jaar_types,
     get_atom_order as q_order,
+    get_sorted_jkey_keys,
     set_mog,
     get_flattened_atom_table_build,
     get_normalized_bud_table_build,
+    acct_id_str,
+    addin_str,
+    atom_insert,
+    atom_delete,
+    atom_update,
+    awardee_id_str,
+    base_str,
+    begin_str,
+    category_str,
+    close_str,
+    column_order_str,
+    credit_belief_str,
+    credor_respect_str,
+    credit_vote_str,
+    crud_str,
+    debtit_belief_str,
+    debtor_respect_str,
+    debtit_vote_str,
+    denom_str,
+    fnigh_str,
+    fopen_str,
+    fund_coin_str,
+    gogo_want_str,
+    group_id_str,
+    healer_id_str,
+    jaar_type_str,
     jkeys_str,
     jvalues_str,
-    category_str,
-    crud_str,
-    normal_table_name_str,
-    normal_specs_str,
-    sqlite_datatype_str,
-    jaar_type_str,
-    type_AcctID_str,
-    type_GroupID_str,
-    type_RoadUnit_str,
-    type_IdeaUnit_str,
-    nesting_order_str,
-    column_order_str,
-    get_sorted_jkey_keys,
-    parent_road_str,
-    road_str,
-    acct_id_str,
-    awardee_id_str,
-    group_id_str,
-    team_id_str,
-    begin_str,
-    close_str,
-    addin_str,
-    numor_str,
-    denom_str,
     morph_str,
-    gogo_want_str,
-    stop_want_str,
-    base_str,
-    fund_coin_str,
+    nesting_order_str,
+    normal_specs_str,
+    normal_table_name_str,
+    numor_str,
+    parent_road_str,
     penny_str,
     respect_bit_str,
+    road_str,
+    sqlite_datatype_str,
+    stop_want_str,
+    team_id_str,
+    type_AcctID_str,
+    type_GroupID_str,
+    type_IdeaUnit_str,
+    type_RoadUnit_str,
 )
 
 
 def test_str_functions_ReturnsObj():
-    assert jkeys_str() == "jkeys"
-    assert jvalues_str() == "jvalues"
-    assert column_order_str() == "column_order"
-    assert category_str() == "category"
+    assert acct_id_str() == "acct_id"
+    assert addin_str() == "addin"
     assert atom_insert() == "INSERT"
     assert atom_update() == "UPDATE"
     assert atom_delete() == "DELETE"
-    assert nesting_order_str() == "nesting_order"
-    assert sqlite_datatype_str() == "sqlite_datatype"
-    assert jaar_type_str() == "jaar_type"
-    assert parent_road_str() == "parent_road"
-    assert type_AcctID_str() == "AcctID"
-    assert type_GroupID_str() == "GroupID"
-    assert type_RoadUnit_str() == "RoadUnit"
-    assert type_IdeaUnit_str() == "IdeaUnit"
-    assert road_str() == "road"
-    assert acct_id_str() == "acct_id"
     assert awardee_id_str() == "awardee_id"
-    assert group_id_str() == "group_id"
-    assert team_id_str() == "team_id"
-    assert crud_str() == "crud"
+    assert base_str() == "base"
     assert begin_str() == "begin"
+    assert category_str() == "category"
     assert close_str() == "close"
-    assert addin_str() == "addin"
-    assert numor_str() == "numor"
+    assert column_order_str() == "column_order"
+    assert credit_belief_str() == "credit_belief"
+    assert credor_respect_str() == "credor_respect"
+    assert credit_vote_str() == "credit_vote"
+    assert crud_str() == "crud"
+    assert debtit_belief_str() == "debtit_belief"
+    assert debtor_respect_str() == "debtor_respect"
+    assert debtit_vote_str() == "debtit_vote"
     assert denom_str() == "denom"
-    assert morph_str() == "morph"
-    assert gogo_want_str() == "gogo_want"
-    assert stop_want_str() == "stop_want"
+    assert fnigh_str() == "fnigh"
+    assert fopen_str() == "fopen"
     assert fund_coin_str() == "fund_coin"
+    assert gogo_want_str() == "gogo_want"
+    assert group_id_str() == "group_id"
+    assert jaar_type_str() == "jaar_type"
+    assert jkeys_str() == "jkeys"
+    assert jvalues_str() == "jvalues"
+    assert morph_str() == "morph"
+    assert nesting_order_str() == "nesting_order"
+    assert normal_specs_str() == "normal_specs"
+    assert normal_table_name_str() == "normal_table_name"
+    assert numor_str() == "numor"
+    assert parent_road_str() == "parent_road"
     assert penny_str() == "penny"
     assert respect_bit_str() == "respect_bit"
+    assert road_str() == "road"
+    assert sqlite_datatype_str() == "sqlite_datatype"
+    assert stop_want_str() == "stop_want"
+    assert team_id_str() == "team_id"
+    assert type_AcctID_str() == "AcctID"
+    assert type_GroupID_str() == "GroupID"
+    assert type_IdeaUnit_str() == "IdeaUnit"
+    assert type_RoadUnit_str() == "RoadUnit"
 
 
 def test_atom_config_HasCorrect_category():
@@ -473,12 +493,12 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert len(budunit_columns) == 10
     assert budunit_columns.get("uid") is not None
     assert budunit_columns.get("max_tree_traverse") is not None
-    assert budunit_columns.get("credor_respect") is not None
-    assert budunit_columns.get("debtor_respect") is not None
+    assert budunit_columns.get(credor_respect_str()) is not None
+    assert budunit_columns.get(debtor_respect_str()) is not None
     assert budunit_columns.get("fund_pool") is not None
-    assert budunit_columns.get("fund_coin") is not None
-    assert budunit_columns.get("respect_bit") is not None
-    assert budunit_columns.get("penny") is not None
+    assert budunit_columns.get(fund_coin_str()) is not None
+    assert budunit_columns.get(respect_bit_str()) is not None
+    assert budunit_columns.get(penny_str()) is not None
     assert budunit_columns.get("purview_time_id") is not None
     assert budunit_columns.get("tally") is not None
 
@@ -487,8 +507,8 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert len(acctunit_columns) == 4
     assert acctunit_columns.get("uid") is not None
     assert acctunit_columns.get(acct_id_str()) is not None
-    assert acctunit_columns.get("credit_belief") is not None
-    assert acctunit_columns.get("debtit_belief") is not None
+    assert acctunit_columns.get(credit_belief_str()) is not None
+    assert acctunit_columns.get(debtit_belief_str()) is not None
 
     acct_id_dict = acctunit_columns.get(acct_id_str())
     assert len(acct_id_dict) == 2
@@ -616,48 +636,48 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     x_jaar_types = get_atom_args_jaar_types()
 
     # THEN
-    assert x_jaar_types.get("acct_id") == type_AcctID_str()
-    assert x_jaar_types.get("addin") == "float"
-    assert x_jaar_types.get("awardee_id") == type_GroupID_str()
-    assert x_jaar_types.get("base") == type_RoadUnit_str()
+    assert x_jaar_types.get(acct_id_str()) == type_AcctID_str()
+    assert x_jaar_types.get(addin_str()) == "float"
+    assert x_jaar_types.get(awardee_id_str()) == type_GroupID_str()
+    assert x_jaar_types.get(base_str()) == type_RoadUnit_str()
     assert x_jaar_types.get("base_item_active_requisite") == "bool"
-    assert x_jaar_types.get("begin") == "float"
-    assert x_jaar_types.get("respect_bit") == "float"
-    assert x_jaar_types.get("close") == "float"
-    assert x_jaar_types.get("credit_belief") == "int"
-    assert x_jaar_types.get("credit_vote") == "int"
-    assert x_jaar_types.get("credor_respect") == "int"
-    assert x_jaar_types.get("debtit_belief") == "int"
-    assert x_jaar_types.get("debtit_vote") == "int"
-    assert x_jaar_types.get("debtor_respect") == "int"
-    assert x_jaar_types.get("denom") == "int"
+    assert x_jaar_types.get(begin_str()) == "float"
+    assert x_jaar_types.get(respect_bit_str()) == "float"
+    assert x_jaar_types.get(close_str()) == "float"
+    assert x_jaar_types.get(credit_belief_str()) == "int"
+    assert x_jaar_types.get(credit_vote_str()) == "int"
+    assert x_jaar_types.get(credor_respect_str()) == "int"
+    assert x_jaar_types.get(debtit_belief_str()) == "int"
+    assert x_jaar_types.get(debtit_vote_str()) == "int"
+    assert x_jaar_types.get(debtor_respect_str()) == "int"
+    assert x_jaar_types.get(denom_str()) == "int"
     assert x_jaar_types.get("divisor") == "int"
-    assert x_jaar_types.get("fnigh") == "float"
-    assert x_jaar_types.get("fopen") == "float"
-    assert x_jaar_types.get("fund_coin") == "float"
+    assert x_jaar_types.get(fnigh_str()) == "float"
+    assert x_jaar_types.get(fopen_str()) == "float"
+    assert x_jaar_types.get(fund_coin_str()) == "float"
     assert x_jaar_types.get("fund_pool") == "float"
     assert x_jaar_types.get("give_force") == "float"
-    assert x_jaar_types.get("gogo_want") == "float"
-    assert x_jaar_types.get("group_id") == type_GroupID_str()
-    assert x_jaar_types.get("healer_id") == type_GroupID_str()
+    assert x_jaar_types.get(gogo_want_str()) == "float"
+    assert x_jaar_types.get(group_id_str()) == type_GroupID_str()
+    assert x_jaar_types.get(healer_id_str()) == type_GroupID_str()
     assert x_jaar_types.get("label") == type_IdeaUnit_str()
     assert x_jaar_types.get("mass") == "int"
     assert x_jaar_types.get("max_tree_traverse") == "int"
-    assert x_jaar_types.get("morph") == "bool"
+    assert x_jaar_types.get(morph_str()) == "bool"
     assert x_jaar_types.get("need") == type_RoadUnit_str()
     assert x_jaar_types.get("nigh") == "float"
-    assert x_jaar_types.get("numor") == "int"
+    assert x_jaar_types.get(numor_str()) == "int"
     assert x_jaar_types.get("open") == "float"
-    assert x_jaar_types.get("parent_road") == type_RoadUnit_str()
-    assert x_jaar_types.get("penny") == "float"
+    assert x_jaar_types.get(parent_road_str()) == type_RoadUnit_str()
+    assert x_jaar_types.get(penny_str()) == "float"
     assert x_jaar_types.get("pick") == type_RoadUnit_str()
     assert x_jaar_types.get("pledge") == "bool"
     assert x_jaar_types.get("problem_bool") == "bool"
     assert x_jaar_types.get("purview_time_id") == "TimeLinePoint"
-    assert x_jaar_types.get("road") == type_RoadUnit_str()
-    assert x_jaar_types.get("stop_want") == "float"
+    assert x_jaar_types.get(road_str()) == type_RoadUnit_str()
+    assert x_jaar_types.get(stop_want_str()) == "float"
     assert x_jaar_types.get("take_force") == "float"
     assert x_jaar_types.get("tally") == "int"
-    assert x_jaar_types.get("team_id") == type_GroupID_str()
+    assert x_jaar_types.get(team_id_str()) == type_GroupID_str()
     assert x_jaar_types.keys() == get_atom_args_category_mapping().keys()
     assert all_atom_args_jaar_types_are_correct(x_jaar_types)
