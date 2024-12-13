@@ -58,14 +58,14 @@ def test_etl_fiscal_bricks_to_fiscal_inx_Scenario0_MultpleFaceIDs_CreatesFiscalI
     e9_music23_df = DataFrame([zia1, zia2], columns=br00011_columns)
     e9_music55_df = DataFrame([zia3], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
-    x_faces_dir = create_path(get_test_etl_dir(), "faces")
+    x_faces_otx_dir = create_path(get_test_etl_dir(), "faces_otx")
     x_events = {event3: sue_otx, event7: zia_otx, event8: zia_otx, event9: zia_otx}
     x_fiscal_pidgins = {
         music23_str: {event3: event3, event7: event7, event9: event8},
         music55_str: {event9: event8},
     }
-    sue_dir = create_path(x_faces_dir, sue_otx)
-    zia_dir = create_path(x_faces_dir, zia_otx)
+    sue_dir = create_path(x_faces_otx_dir, sue_otx)
+    zia_dir = create_path(x_faces_otx_dir, zia_otx)
     event3_dir = create_path(sue_dir, event3)
     event7_dir = create_path(zia_dir, event7)
     event8_dir = create_path(zia_dir, event8)
@@ -108,7 +108,7 @@ def test_etl_fiscal_bricks_to_fiscal_inx_Scenario0_MultpleFaceIDs_CreatesFiscalI
     assert sheet_exists(e9_music55_br00011_path, forge_inx_str) is False
 
     # WHEN
-    etl_fiscal_bricks_to_fiscal_inx(x_faces_dir, x_events, x_fiscal_pidgins)
+    etl_fiscal_bricks_to_fiscal_inx(x_faces_otx_dir, x_events, x_fiscal_pidgins)
 
     # THEN
     assert sheet_exists(e7_music23_br00011_path, forge_inx_str)

@@ -23,7 +23,8 @@ def test_WorldUnit_Exists():
     assert not x_world.current_time
     assert not x_world.timeconversions
     assert not x_world.events
-    assert not x_world._faces_dir
+    assert not x_world._faces_otx_dir
+    assert not x_world._faces_inx_dir
     assert not x_world._world_dir
     assert not x_world._mine_dir
     assert not x_world._forge_dir
@@ -40,7 +41,7 @@ def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     x_mine_dir = create_path(x_example_dir, "mine")
 
     assert fizz_world._world_dir is None
-    assert fizz_world._faces_dir is None
+    assert fizz_world._faces_otx_dir is None
     assert fizz_world._mine_dir is None
     assert fizz_world._forge_dir is None
     assert os_path_exists(x_mine_dir) is False
@@ -50,7 +51,7 @@ def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
 
     # THEN
     assert fizz_world._world_dir is None
-    assert fizz_world._faces_dir is None
+    assert fizz_world._faces_otx_dir is None
     assert fizz_world._mine_dir == x_mine_dir
     assert fizz_world._forge_dir is None
     assert os_path_exists(x_mine_dir)
@@ -61,16 +62,19 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     fizz_str = "fizz"
     fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=get_test_worlds_dir())
     x_world_dir = create_path(get_test_worlds_dir(), fizz_str)
-    x_faces_dir = create_path(x_world_dir, "faces")
+    x_faces_otx_dir = create_path(x_world_dir, "faces_otx")
+    x_faces_inx_dir = create_path(x_world_dir, "faces_inx")
     x_mine_dir = create_path(x_world_dir, "mine")
     x_forge_dir = create_path(x_world_dir, "forge")
 
-    assert fizz_world._world_dir is None
-    assert fizz_world._faces_dir is None
-    assert fizz_world._mine_dir is None
-    assert fizz_world._forge_dir is None
+    assert not fizz_world._world_dir
+    assert not fizz_world._faces_otx_dir
+    assert not fizz_world._faces_inx_dir
+    assert not fizz_world._mine_dir
+    assert not fizz_world._forge_dir
     assert os_path_exists(x_world_dir) is False
-    assert os_path_exists(x_faces_dir) is False
+    assert os_path_exists(x_faces_otx_dir) is False
+    assert os_path_exists(x_faces_inx_dir) is False
     assert os_path_exists(x_mine_dir) is False
     assert os_path_exists(x_forge_dir) is False
 
@@ -79,11 +83,13 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
 
     # THEN
     assert fizz_world._world_dir == x_world_dir
-    assert fizz_world._faces_dir == x_faces_dir
+    assert fizz_world._faces_otx_dir == x_faces_otx_dir
+    assert fizz_world._faces_inx_dir == x_faces_inx_dir
     assert fizz_world._mine_dir is None
     assert fizz_world._forge_dir == x_forge_dir
     assert os_path_exists(x_world_dir)
-    assert os_path_exists(x_faces_dir)
+    assert os_path_exists(x_faces_otx_dir)
+    assert os_path_exists(x_faces_inx_dir)
     assert os_path_exists(x_mine_dir) is False
     assert os_path_exists(x_forge_dir)
 
@@ -118,7 +124,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.current_time == world2_current_time
     assert x_world.timeconversions == world2timeconversions
     assert x_world.events == {}
-    assert x_world._faces_dir == create_path(world_dir, "faces")
+    assert x_world._faces_otx_dir == create_path(world_dir, "faces_otx")
     assert x_world._fiscalunits == world2_fiscalunits
     assert x_world._fiscal_events == {}
     assert x_world._pidgin_events == {}
@@ -137,7 +143,8 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world.timeconversions == {}
     assert x_world.events == {}
     assert x_world._mine_dir == create_path(x_world._world_dir, "mine")
-    assert x_world._faces_dir == create_path(world_dir, "faces")
+    assert x_world._faces_otx_dir == create_path(world_dir, "faces_otx")
+    assert x_world._faces_inx_dir == create_path(world_dir, "faces_inx")
     assert x_world._fiscalunits == set()
 
 
@@ -148,8 +155,8 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
 #     bob_str = "Bob"
 #     x_world.add_pidginunit(sue_str)
 #     x_world.add_pidginunit(bob_str)
-#     sue_dir = create_path(x_world._faces_dir, sue_str)
-#     bob_dir = create_path(x_world._faces_dir, bob_str)
+#     sue_dir = create_path(x_world._faces_otx_dir, sue_str)
+#     bob_dir = create_path(x_world._faces_otx_dir, bob_str)
 #     assert os_path_exists(sue_dir) is False
 #     assert os_path_exists(bob_dir) is False
 
@@ -167,9 +174,9 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
 #     sue_str = "Sue"
 #     bob_str = "Bob"
 #     zia_str = "Zia"
-#     save_file(f"{x_world._faces_dir}/{sue_str}", "temp.txt", "")
-#     save_file(f"{x_world._faces_dir}/{bob_str}", "temp.txt", "")
-#     save_file(f"{x_world._faces_dir}/{zia_str}", "temp.txt", "")
+#     save_file(f"{x_world._faces_otx_dir}/{sue_str}", "temp.txt", "")
+#     save_file(f"{x_world._faces_otx_dir}/{bob_str}", "temp.txt", "")
+#     save_file(f"{x_world._faces_otx_dir}/{zia_str}", "temp.txt", "")
 #     assert x_world.pidginunit_exists(sue_str) is False
 #     assert x_world.pidginunit_exists(bob_str) is False
 #     assert x_world.pidginunit_exists(zia_str) is False
@@ -185,7 +192,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
 #     assert x_world.pidgins_empty() is False
 
 #     # WHEN
-#     delete_dir(f"{x_world._faces_dir}/{zia_str}")
+#     delete_dir(f"{x_world._faces_otx_dir}/{zia_str}")
 #     x_world._set_all_pidginunits_from_dirs()
 
 #     # THEN

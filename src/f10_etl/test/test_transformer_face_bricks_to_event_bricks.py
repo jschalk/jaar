@@ -40,10 +40,10 @@ def test_etl_face_bricks_to_event_bricks_CreatesFaceBrickSheets_Scenario0_Multpl
     example_sue_df = DataFrame([sue0, sue1], columns=brick_columns)
     example_zia_df = DataFrame([zia0, zia1, zia2], columns=brick_columns)
     x_etl_dir = get_test_etl_dir()
-    x_faces_dir = create_path(x_etl_dir, "faces")
+    x_faces_otx_dir = create_path(x_etl_dir, "faces_otx")
     br00003_filename = "br00003.xlsx"
-    sue_dir = create_path(x_faces_dir, sue_str)
-    zia_dir = create_path(x_faces_dir, zia_str)
+    sue_dir = create_path(x_faces_otx_dir, sue_str)
+    zia_dir = create_path(x_faces_otx_dir, zia_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     zia_br00003_filepath = create_path(zia_dir, br00003_filename)
     upsert_sheet(sue_br00003_filepath, forge_valid_str(), example_sue_df)
@@ -60,7 +60,7 @@ def test_etl_face_bricks_to_event_bricks_CreatesFaceBrickSheets_Scenario0_Multpl
     assert sheet_exists(event9_br00003_filepath, forge_valid_str()) is False
 
     # WHEN
-    etl_face_bricks_to_event_bricks(x_faces_dir)
+    etl_face_bricks_to_event_bricks(x_faces_otx_dir)
 
     # THEN
     assert sheet_exists(event3_br00003_filepath, forge_valid_str())

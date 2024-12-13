@@ -104,9 +104,9 @@ def test_etl_event_pidgins_csvs_to_pidgin_jsons_Scenario0_1Event_road(
 "{zia_str}",{event9},"{casa_otx}","{casa_inx}",,,
 "{zia_str}",{event9},"{clean_otx}","{clean_inx}",,,
 """
-    x_faces_dir = create_path(get_test_etl_dir(), "faces")
-    bob_dir = create_path(x_faces_dir, bob_str)
-    zia_dir = create_path(x_faces_dir, bob_str)
+    x_faces_otx_dir = create_path(get_test_etl_dir(), "faces_otx")
+    bob_dir = create_path(x_faces_otx_dir, bob_str)
+    zia_dir = create_path(x_faces_otx_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
     event9_dir = create_path(zia_dir, event9)
@@ -121,7 +121,7 @@ def test_etl_event_pidgins_csvs_to_pidgin_jsons_Scenario0_1Event_road(
     assert os_path_exists(e9_json_file_path) is False
 
     # WHEN
-    etl_event_pidgins_csvs_to_pidgin_jsons(x_faces_dir)
+    etl_event_pidgins_csvs_to_pidgin_jsons(x_faces_otx_dir)
 
     # THEN
     assert os_path_exists(e3_json_file_path)
@@ -148,8 +148,8 @@ def test_etl_event_pidgins_csvs_to_pidgin_jsons_Scenario0_1Event_road(
     assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
     assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
 
-    # bob_dir = create_path(fizz_world._faces_dir, bob_str)
-    # zia_dir = create_path(fizz_world._faces_dir, zia_str)
+    # bob_dir = create_path(fizz_world._faces_otx_dir, bob_str)
+    # zia_dir = create_path(fizz_world._faces_otx_dir, zia_str)
     # event3_dir = create_path(bob_dir, event3)
     # event7_dir = create_path(bob_dir, event7)
     # event9_dir = create_path(zia_dir, event9)

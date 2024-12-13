@@ -28,7 +28,7 @@ from src.f10_etl.transformers import (
     etl_event_pidgins_to_pidgin_csv_files,
     etl_event_pidgins_csvs_to_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
-    etl_forge_bricks_to_face_bricks,
+    etl_forge_bricks_to_otx_face_bricks,
     etl_face_bricks_to_event_bricks,
     etl_event_bricks_to_fiscal_bricks,
     etl_fiscal_bricks_to_fiscal_inx,
@@ -53,7 +53,8 @@ class WorldUnit:
     current_time: TimeLinePoint = None
     events: dict[TimeLinePoint, FaceID] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
-    _faces_dir: str = None
+    _faces_otx_dir: str = None
+    _faces_inx_dir: str = None
     _world_dir: str = None
     _mine_dir: str = None
     _forge_dir: str = None
@@ -76,14 +77,14 @@ class WorldUnit:
         return set(self.events.keys())
 
     def _event_dir(self, face_id: FaceID, event_id: TimeLinePoint) -> str:
-        face_dir = create_path(self._faces_dir, face_id)
+        face_dir = create_path(self._faces_otx_dir, face_id)
         return create_path(face_dir, event_id)
 
     def _set_fiscal_events(self):
-        self._fiscal_events = get_fiscal_events_by_dirs(self._faces_dir)
+        self._fiscal_events = get_fiscal_events_by_dirs(self._faces_otx_dir)
 
     def _set_pidgin_events(self):
-        self._pidgin_events = get_pidgin_events_by_dirs(self._faces_dir)
+        self._pidgin_events = get_pidgin_events_by_dirs(self._faces_otx_dir)
 
     def _set_fiscal_pidgins(self):
         self._fiscal_pidgins = {}
@@ -122,10 +123,12 @@ class WorldUnit:
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
-        self._faces_dir = create_path(self._world_dir, "faces")
+        self._faces_otx_dir = create_path(self._world_dir, "faces_otx")
+        self._faces_inx_dir = create_path(self._world_dir, "faces_inx")
         self._forge_dir = create_path(self._world_dir, "forge")
         set_dir(self._world_dir)
-        set_dir(self._faces_dir)
+        set_dir(self._faces_otx_dir)
+        set_dir(self._faces_inx_dir)
         set_dir(self._forge_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
@@ -159,35 +162,37 @@ class WorldUnit:
         etl_pidgin_staging_to_agg(self._forge_dir)
 
     def pidgin_agg_to_face_dirs(self):
-        etl_pidgin_agg_to_face_dirs(self._forge_dir, self._faces_dir)
+        etl_pidgin_agg_to_face_dirs(self._forge_dir, self._faces_otx_dir)
 
     def pidgin_jsons_inherit_younger_pidgins(self):
-        etl_pidgin_jsons_inherit_younger_pidgins(self._faces_dir, self._pidgin_events)
+        etl_pidgin_jsons_inherit_younger_pidgins(
+            self._faces_otx_dir, self._pidgin_events
+        )
 
     def face_pidgins_to_event_pidgins(self):
-        etl_face_pidgins_to_event_pidgins(self._faces_dir)
+        etl_face_pidgins_to_event_pidgins(self._faces_otx_dir)
 
     def event_pidgins_to_pidgin_csv_files(self):
-        etl_event_pidgins_to_pidgin_csv_files(self._faces_dir)
+        etl_event_pidgins_to_pidgin_csv_files(self._faces_otx_dir)
 
     def event_pidgins_csvs_to_pidgin_jsons(self):
-        etl_event_pidgins_csvs_to_pidgin_jsons(self._faces_dir)
+        etl_event_pidgins_csvs_to_pidgin_jsons(self._faces_otx_dir)
         self._set_pidgin_events()
 
-    def forge_bricks_to_face_bricks(self):
-        etl_forge_bricks_to_face_bricks(self._forge_dir, self._faces_dir)
+    def forge_bricks_to_otx_face_bricks(self):
+        etl_forge_bricks_to_otx_face_bricks(self._forge_dir, self._faces_otx_dir)
 
     def face_bricks_to_event_bricks(self):
-        etl_face_bricks_to_event_bricks(self._faces_dir)
+        etl_face_bricks_to_event_bricks(self._faces_otx_dir)
 
     def event_bricks_to_fiscal_bricks(self):
-        etl_event_bricks_to_fiscal_bricks(self._faces_dir)
+        etl_event_bricks_to_fiscal_bricks(self._faces_otx_dir)
         self._set_fiscal_events()
         self._set_fiscal_pidgins()
 
     def fiscal_bricks_to_fiscal_inx(self):
         fpidgins = self._fiscal_pidgins
-        etl_fiscal_bricks_to_fiscal_inx(self._faces_dir, self.events, fpidgins)
+        etl_fiscal_bricks_to_fiscal_inx(self._faces_otx_dir, self.events, fpidgins)
 
     def get_dict(self) -> dict:
         return {

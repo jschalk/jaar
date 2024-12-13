@@ -62,9 +62,9 @@ def test_WorldUnit_event_pidgins_to_pidgin_csv_files_Scenario0_3Event_road(
     e9_road_df = DataFrame(e9_road_rows, columns=road_file_columns)
 
     fizz_world = worldunit_shop("Fizz")
-    bob_dir = create_path(fizz_world._faces_dir, bob_str)
-    sue_dir = create_path(fizz_world._faces_dir, sue_str)
-    zia_dir = create_path(fizz_world._faces_dir, zia_str)
+    bob_dir = create_path(fizz_world._faces_otx_dir, bob_str)
+    sue_dir = create_path(fizz_world._faces_otx_dir, sue_str)
+    zia_dir = create_path(fizz_world._faces_otx_dir, zia_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(zia_dir, event9)

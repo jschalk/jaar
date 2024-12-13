@@ -13,7 +13,7 @@ from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_forge_bricks_to_face_bricks_CreatesOtxSheets_Scenario0_GroupByWorks(
+def test_WorldUnit_forge_bricks_to_otx_face_bricks_CreatesOtxSheets_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -39,12 +39,12 @@ def test_WorldUnit_forge_bricks_to_face_bricks_CreatesOtxSheets_Scenario0_GroupB
     br00003_agg_file_path = create_path(fizz_world._forge_dir, "br00003.xlsx")
     upsert_sheet(br00003_agg_file_path, forge_valid_str(), br00003_forge_agg_df)
     assert sheet_exists(br00003_agg_file_path, forge_valid_str())
-    sue_dir = create_path(fizz_world._faces_dir, sue_str)
+    sue_dir = create_path(fizz_world._faces_otx_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, "br00003.xlsx")
     assert sheet_exists(sue_br00003_filepath, forge_valid_str()) is False
 
     # WHEN
-    fizz_world.forge_bricks_to_face_bricks()
+    fizz_world.forge_bricks_to_otx_face_bricks()
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, forge_valid_str())

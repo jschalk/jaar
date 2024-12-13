@@ -550,7 +550,7 @@ def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
             acct_df.to_csv(acct_csv_path, index=False)
 
 
-def _get_all_faces_dir_event_dirs(faces_dir) -> list[str]:
+def _get_all_faces_otx_dir_event_dirs(faces_dir) -> list[str]:
     full_event_dirs = []
     for face_id_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id_dir)
@@ -562,7 +562,7 @@ def _get_all_faces_dir_event_dirs(faces_dir) -> list[str]:
 
 
 def etl_event_pidgins_to_pidgin_csv_files(faces_dir: str):
-    for event_pidgin_dir in _get_all_faces_dir_event_dirs(faces_dir):
+    for event_pidgin_dir in _get_all_faces_otx_dir_event_dirs(faces_dir):
         event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
 
 
@@ -572,7 +572,7 @@ def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
 
 
 def etl_event_pidgins_csvs_to_pidgin_jsons(faces_dir: str):
-    for event_pidgin_dir in _get_all_faces_dir_event_dirs(faces_dir):
+    for event_pidgin_dir in _get_all_faces_otx_dir_event_dirs(faces_dir):
         etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
 
 
@@ -598,7 +598,7 @@ def get_event_pidgin_path(
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_forge_bricks_to_face_bricks(forge_dir: str, faces_dir: str):
+def etl_forge_bricks_to_otx_face_bricks(forge_dir: str, faces_dir: str):
     for forge_br_ref in get_existing_excel_brick_file_refs(forge_dir):
         forge_brick_path = create_path(forge_dir, forge_br_ref.file_name)
         if forge_br_ref.file_name not in _get_pidgen_brick_format_filenames():
@@ -626,7 +626,7 @@ def etl_face_bricks_to_event_bricks(faces_dir: str):
 
 
 def etl_event_bricks_to_fiscal_bricks(faces_dir: str):
-    for event_brick_dir in _get_all_faces_dir_event_dirs(faces_dir):
+    for event_brick_dir in _get_all_faces_otx_dir_event_dirs(faces_dir):
         for event_br_ref in get_existing_excel_brick_file_refs(event_brick_dir):
             event_brick_path = create_path(event_brick_dir, event_br_ref.file_name)
             split_excel_into_dirs(

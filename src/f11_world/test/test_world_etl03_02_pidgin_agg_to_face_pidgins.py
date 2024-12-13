@@ -120,7 +120,7 @@ def test_WorldUnit_pidgin_agg_to_face_dirs_Scenario1_AllBridgeCategorys(
     fizz_world.pidgin_agg_to_face_dirs()
 
     # THEN
-    sue_dir = create_path(fizz_world._faces_dir, sue_str)
+    sue_dir = create_path(fizz_world._faces_otx_dir, sue_str)
     assert os_path_exists(sue_dir)
     sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
     assert os_path_exists(sue_pidgin_file_path)

@@ -72,8 +72,8 @@ def test_WorldUnit_fiscal_bricks_to_fiscal_inx_Scenario0_MultpleFaceIDs_CreatesF
         music23_str: {event3: event3, event7: event7, event9: event8},
         music55_str: {event9: event8},
     }
-    sue_dir = create_path(fizz_world._faces_dir, sue_otx)
-    zia_dir = create_path(fizz_world._faces_dir, zia_otx)
+    sue_dir = create_path(fizz_world._faces_otx_dir, sue_otx)
+    zia_dir = create_path(fizz_world._faces_otx_dir, zia_otx)
     event3_dir = create_path(sue_dir, event3)
     event7_dir = create_path(zia_dir, event7)
     event8_dir = create_path(zia_dir, event8)
