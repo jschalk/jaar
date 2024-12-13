@@ -31,7 +31,6 @@ def test_WorldUnit_Exists():
     assert not x_world._fiscalunits
     assert not x_world._fiscal_events
     assert not x_world._pidgin_events
-    assert not x_world._fiscal_pidgins
 
 
 def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
@@ -85,7 +84,7 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     assert fizz_world._world_dir == x_world_dir
     assert fizz_world._faces_otx_dir == x_faces_otx_dir
     assert fizz_world._faces_inx_dir == x_faces_inx_dir
-    assert fizz_world._mine_dir is None
+    assert not fizz_world._mine_dir
     assert fizz_world._forge_dir == x_forge_dir
     assert os_path_exists(x_world_dir)
     assert os_path_exists(x_faces_otx_dir)
@@ -101,8 +100,6 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     five_world_id = "five"
     world2_current_time = 55
     music_str = "music45"
-    sue_str = "Sue"
-    bob_str = "Bob"
     world2timeconversions = {music_str: timeconversion_shop(music_str)}
     world2_fiscalunits = {"music45"}
 
@@ -128,7 +125,6 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world._fiscalunits == world2_fiscalunits
     assert x_world._fiscal_events == {}
     assert x_world._pidgin_events == {}
-    assert x_world._fiscal_pidgins == {}
 
 
 def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):

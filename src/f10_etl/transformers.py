@@ -625,19 +625,6 @@ def etl_face_bricks_to_event_bricks(faces_dir: str):
             )
 
 
-def etl_event_bricks_to_fiscal_bricks(faces_dir: str):
-    for event_brick_dir in _get_all_faces_otx_dir_event_dirs(faces_dir):
-        for event_br_ref in get_existing_excel_brick_file_refs(event_brick_dir):
-            event_brick_path = create_path(event_brick_dir, event_br_ref.file_name)
-            split_excel_into_dirs(
-                input_file=event_brick_path,
-                output_dir=event_brick_dir,
-                column_name="fiscal_id",
-                file_name=event_br_ref.brick_number,
-                sheet_name="forge_valid",
-            )
-
-
 def get_fiscal_events_by_dirs(faces_dir: str) -> dict[FiscalID, set[TimeLinePoint]]:
     fiscal_events = {}
     for face_id in get_level1_dirs(faces_dir):
