@@ -136,7 +136,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     assert sheet_exists(pidgin_path, idea_agg_str) is False
 
     # WHEN
-    fizz_world.pidgin_staging_to_agg()
+    fizz_world.zoo_pidgin_staging_to_agg()
 
     # THEN
     assert os_path_exists(pidgin_path)

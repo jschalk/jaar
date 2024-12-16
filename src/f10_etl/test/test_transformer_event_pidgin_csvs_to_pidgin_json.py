@@ -28,7 +28,7 @@ from src.f09_brick.pidgin_toolbox import init_pidginunit_from_dir
 from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet, open_csv
 from src.f10_etl.transformers import (
     etl_event_pidgin_csvs_to_pidgin_json,
-    etl_event_pidgins_csvs_to_pidgin_jsons,
+    etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons,
     get_pidgin_events_by_dirs,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -75,7 +75,7 @@ def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_road(
     assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
 
 
-def test_etl_event_pidgins_csvs_to_pidgin_jsons_Scenario0_1Event_road(
+def test_etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons_Scenario0_1Event_road(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -121,7 +121,7 @@ def test_etl_event_pidgins_csvs_to_pidgin_jsons_Scenario0_1Event_road(
     assert os_path_exists(e9_json_file_path) is False
 
     # WHEN
-    etl_event_pidgins_csvs_to_pidgin_jsons(x_faces_otx_dir)
+    etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(x_faces_otx_dir)
 
     # THEN
     assert os_path_exists(e3_json_file_path)
@@ -171,7 +171,7 @@ def test_etl_event_pidgins_csvs_to_pidgin_jsons_Scenario0_1Event_road(
     # assert os_path_exists(event9_road_csv_file_path) is False
 
     # # WHEN
-    # fizz_world.event_pidgins_to_pidgin_csv_files()
+    # fizz_world.bow_event_pidgins_to_bow_pidgin_csv_files()
 
     # # THEN
     # assert os_path_exists(event3_road_csv_file_path)

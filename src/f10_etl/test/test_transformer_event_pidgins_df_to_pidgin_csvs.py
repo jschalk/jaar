@@ -17,7 +17,7 @@ from src.f08_pidgin.pidgin_config import (
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists, open_csv
 from src.f10_etl.transformers import (
     event_pidgin_to_pidgin_csv_files,
-    etl_event_pidgins_to_pidgin_csv_files,
+    etl_bow_event_pidgins_to_bow_pidgin_csv_files,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -151,7 +151,7 @@ def test_event_pidgin_to_pidgin_csv_files_Scenario2_1Event_road(env_dir_setup_cl
     pandas_testing_assert_frame_equal(gen_event3_csv_df, e7_road_df)
 
 
-def test_etl_event_pidgins_to_pidgin_csv_files_Scenario0_3Event_road(
+def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -215,7 +215,7 @@ def test_etl_event_pidgins_to_pidgin_csv_files_Scenario0_3Event_road(
     assert os_path_exists(event9_road_csv_file_path) is False
 
     # WHEN
-    etl_event_pidgins_to_pidgin_csv_files(faces_dir)
+    etl_bow_event_pidgins_to_bow_pidgin_csv_files(faces_dir)
 
     # THEN
     assert os_path_exists(event3_road_csv_file_path)
@@ -464,7 +464,7 @@ def test_etl_event_pidgins_to_pidgin_csv_files_Scenario0_3Event_road(
 #     assert sheet_exists(event9_pidgin_file_path, road_agg_str)
 
 
-# def test_etl_face_pidgins_to_event_pidgins_Scenario0_road_Two_face_ids(
+# def test_etl_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face_ids(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -523,7 +523,7 @@ def test_etl_event_pidgins_to_pidgin_csv_files_Scenario0_3Event_road(
 #     assert sheet_exists(event9_pidgin_file_path, road_agg_str) is False
 
 #     # WHEN
-#     etl_face_pidgins_to_event_pidgins(faces_dir)
+#     etl_bow_face_pidgins_to_bow_event_pidgins(faces_dir)
 
 #     # THEN
 #     assert os_path_exists(event3_dir)

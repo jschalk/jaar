@@ -8,7 +8,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_events_log_to_events_agg_CreatesSheets_Scenario0(
+def test_WorldUnit_zoo_events_log_to_events_agg_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -48,7 +48,7 @@ def test_WorldUnit_events_log_to_events_agg_CreatesSheets_Scenario0(
     upsert_sheet(events_file_path, events_log_str, ex_events_log_df)
 
     # WHEN
-    fizz_world.events_log_to_events_agg()
+    fizz_world.zoo_events_log_to_events_agg()
 
     # THEN
     e3_row = [bob_str, event3, ""]

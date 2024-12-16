@@ -19,14 +19,14 @@ from src.f10_etl.transformers import (
     etl_zoo_agg_to_zoo_valid,
     etl_zoo_agg_to_zoo_events,
     etl_zoo_events_to_events_log,
-    etl_pidgin_staging_to_agg,
+    etl_zoo_pidgin_staging_to_agg,
     etl_zoo_agg_to_pidgin_staging,
-    etl_events_log_to_events_agg,
+    etl_zoo_events_log_to_events_agg,
     get_events_dict_from_events_agg_file,
-    etl_pidgin_agg_to_face_dirs,
-    etl_face_pidgins_to_event_pidgins,
-    etl_event_pidgins_to_pidgin_csv_files,
-    etl_event_pidgins_csvs_to_pidgin_jsons,
+    etl_zoo_pidgin_agg_to_bow_face_dirs,
+    etl_bow_face_pidgins_to_bow_event_pidgins,
+    etl_bow_event_pidgins_to_bow_pidgin_csv_files,
+    etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
     etl_zoo_bricks_to_otx_face_bricks,
     etl_face_bricks_to_event_bricks,
@@ -114,8 +114,8 @@ class WorldUnit:
     def zoo_events_to_events_log(self):
         etl_zoo_events_to_events_log(self._zoo_dir)
 
-    def events_log_to_events_agg(self):
-        etl_events_log_to_events_agg(self._zoo_dir)
+    def zoo_events_log_to_events_agg(self):
+        etl_zoo_events_log_to_events_agg(self._zoo_dir)
 
     def set_events_from_events_agg_file(self):
         self.events = get_events_dict_from_events_agg_file(self._zoo_dir)
@@ -123,25 +123,25 @@ class WorldUnit:
     def zoo_agg_to_pidgin_staging(self):
         etl_zoo_agg_to_pidgin_staging(self.legitimate_events(), self._zoo_dir)
 
-    def pidgin_staging_to_agg(self):
-        etl_pidgin_staging_to_agg(self._zoo_dir)
+    def zoo_pidgin_staging_to_agg(self):
+        etl_zoo_pidgin_staging_to_agg(self._zoo_dir)
 
-    def pidgin_agg_to_face_dirs(self):
-        etl_pidgin_agg_to_face_dirs(self._zoo_dir, self._faces_otx_dir)
+    def zoo_pidgin_agg_to_bow_face_dirs(self):
+        etl_zoo_pidgin_agg_to_bow_face_dirs(self._zoo_dir, self._faces_otx_dir)
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
             self._faces_otx_dir, self._pidgin_events
         )
 
-    def face_pidgins_to_event_pidgins(self):
-        etl_face_pidgins_to_event_pidgins(self._faces_otx_dir)
+    def bow_face_pidgins_to_bow_event_pidgins(self):
+        etl_bow_face_pidgins_to_bow_event_pidgins(self._faces_otx_dir)
 
-    def event_pidgins_to_pidgin_csv_files(self):
-        etl_event_pidgins_to_pidgin_csv_files(self._faces_otx_dir)
+    def bow_event_pidgins_to_bow_pidgin_csv_files(self):
+        etl_bow_event_pidgins_to_bow_pidgin_csv_files(self._faces_otx_dir)
 
-    def event_pidgins_csvs_to_pidgin_jsons(self):
-        etl_event_pidgins_csvs_to_pidgin_jsons(self._faces_otx_dir)
+    def bow_event_pidgins_csvs_to_bow_pidgin_jsons(self):
+        etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(self._faces_otx_dir)
         self._set_pidgin_events()
 
     def zoo_bricks_to_otx_face_bricks(self):

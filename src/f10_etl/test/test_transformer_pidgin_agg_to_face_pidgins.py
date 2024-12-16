@@ -15,14 +15,14 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
-from src.f10_etl.transformers import etl_pidgin_agg_to_face_dirs
+from src.f10_etl.transformers import etl_zoo_pidgin_agg_to_bow_face_dirs
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
 
 
-def test_etl_pidgin_agg_to_face_dirs_Scenario0_Two_face_ids(
+def test_etl_zoo_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_ids(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -59,7 +59,7 @@ def test_etl_pidgin_agg_to_face_dirs_Scenario0_Two_face_ids(
     faces_dir = create_path(get_test_etl_dir(), "faces_otx")
 
     # WHEN
-    etl_pidgin_agg_to_face_dirs(zoo_dir, faces_dir)
+    etl_zoo_pidgin_agg_to_bow_face_dirs(zoo_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
@@ -82,7 +82,7 @@ def test_etl_pidgin_agg_to_face_dirs_Scenario0_Two_face_ids(
     pandas_testing_assert_frame_equal(gen_zia_acct_df, e1_zia_acct_agg_df)
 
 
-def test_etl_pidgin_agg_to_face_dirs_Scenario1_AllBridgeCategorys(
+def test_etl_zoo_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -179,7 +179,7 @@ def test_etl_pidgin_agg_to_face_dirs_Scenario1_AllBridgeCategorys(
     faces_dir = create_path(get_test_etl_dir(), "faces_otx")
 
     # WHEN
-    etl_pidgin_agg_to_face_dirs(zoo_dir, faces_dir)
+    etl_zoo_pidgin_agg_to_bow_face_dirs(zoo_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)

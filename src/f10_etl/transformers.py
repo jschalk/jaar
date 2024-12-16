@@ -280,7 +280,7 @@ def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
     return events_agg_df.sort_values(["event_id", "face_id"])
 
 
-def etl_events_log_to_events_agg(zoo_dir):
+def etl_zoo_events_log_to_events_agg(zoo_dir):
     transformer = EventsLogToEventsAggTransformer(zoo_dir)
     transformer.transform()
 
@@ -441,7 +441,7 @@ def etl_pidgin_single_staging_to_agg(zoo_dir: str, bridge_category: str):
     transformer.transform()
 
 
-def etl_pidgin_staging_to_agg(zoo_dir):
+def etl_zoo_pidgin_staging_to_agg(zoo_dir):
     etl_pidgin_acct_staging_to_acct_agg(zoo_dir)
     etl_pidgin_group_staging_to_group_agg(zoo_dir)
     etl_pidgin_road_staging_to_road_agg(zoo_dir)
@@ -498,7 +498,7 @@ class PidginStagingToAggTransformer:
         return x_pidginheartbook
 
 
-def etl_pidgin_agg_to_face_dirs(zoo_dir: str, faces_dir: str):
+def etl_zoo_pidgin_agg_to_bow_face_dirs(zoo_dir: str, faces_dir: str):
     agg_pidgin = create_path(zoo_dir, "pidgin.xlsx")
     for jaar_type in JAAR_TYPES.keys():
         agg_sheet_name = JAAR_TYPES[jaar_type]["agg"]
@@ -525,7 +525,7 @@ def get_level1_dirs(x_dir: str) -> list[str]:
     return list(level1_dirs.keys())
 
 
-def etl_face_pidgins_to_event_pidgins(faces_dir: str):
+def etl_bow_face_pidgins_to_bow_event_pidgins(faces_dir: str):
     for face_id_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id_dir)
         etl_face_pidgin_to_event_pidgins(face_dir)
@@ -557,7 +557,7 @@ def _get_all_faces_otx_dir_event_dirs(faces_dir) -> list[str]:
     return full_event_dirs
 
 
-def etl_event_pidgins_to_pidgin_csv_files(faces_dir: str):
+def etl_bow_event_pidgins_to_bow_pidgin_csv_files(faces_dir: str):
     for event_pidgin_dir in _get_all_faces_otx_dir_event_dirs(faces_dir):
         event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
 
@@ -567,7 +567,7 @@ def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
     save_file(event_dir, "pidgin.json", pidginunit.get_json(), replace=True)
 
 
-def etl_event_pidgins_csvs_to_pidgin_jsons(faces_dir: str):
+def etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(faces_dir: str):
     for event_pidgin_dir in _get_all_faces_otx_dir_event_dirs(faces_dir):
         etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
 

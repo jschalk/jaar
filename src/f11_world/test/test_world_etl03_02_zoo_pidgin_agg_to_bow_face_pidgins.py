@@ -22,7 +22,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_pidgin_agg_to_face_dirs_Scenario1_AllBridgeCategorys(
+def test_WorldUnit_zoo_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -117,7 +117,7 @@ def test_WorldUnit_pidgin_agg_to_face_dirs_Scenario1_AllBridgeCategorys(
     upsert_sheet(agg_pidgin_path, idea_agg_str, e1_idea_agg_df)
 
     # WHEN
-    fizz_world.pidgin_agg_to_face_dirs()
+    fizz_world.zoo_pidgin_agg_to_bow_face_dirs()
 
     # THEN
     sue_dir = create_path(fizz_world._faces_otx_dir, sue_str)

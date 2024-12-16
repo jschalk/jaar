@@ -141,7 +141,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     assert os_path_exists(e9_json_file_path) is False
 
 #     # WHEN
-#     fizz_world.event_pidgins_csvs_to_pidgin_jsons()
+#     fizz_world.bow_event_pidgins_csvs_to_bow_pidgin_jsons()
 
 #     # THEN
 #     assert os_path_exists(e3_json_file_path)
@@ -165,7 +165,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
 
 
-# # def test_WorldUnit_event_pidgins_to_pidgin_csv_files_Scenario0_1Event_road(
+# # def test_WorldUnit_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_1Event_road(
 # #     env_dir_setup_cleanup,
 # # ):
 # #     # ESTABLISH
@@ -222,7 +222,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 # #     # assert os_path_exists(event9_road_csv_file_path) is False
 
 # #     # # WHEN
-# #     # fizz_world.event_pidgins_to_pidgin_csv_files()
+# #     # fizz_world.bow_event_pidgins_to_bow_pidgin_csv_files()
 
 # #     # # THEN
 # #     # assert os_path_exists(event3_road_csv_file_path)
@@ -280,7 +280,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     }
 
 
-# def test_WorldUnit_face_pidgins_to_event_pidgins_SetsAttr_pidgin_events(
+# def test_WorldUnit_bow_face_pidgins_to_bow_event_pidgins_SetsAttr_pidgin_events(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -323,7 +323,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     assert fizz_world._pidgin_events == {}
 
 #     # WHEN
-#     fizz_world.event_pidgins_csvs_to_pidgin_jsons()
+#     fizz_world.bow_event_pidgins_csvs_to_bow_pidgin_jsons()
 
 #     # THEN
 #     assert os_path_exists(e3_json_file_path)

@@ -20,7 +20,7 @@ from src.f10_etl.transformers import (
     etl_pidgin_group_staging_to_group_agg,
     etl_pidgin_idea_staging_to_idea_agg,
     etl_pidgin_road_staging_to_road_agg,
-    etl_pidgin_staging_to_agg,
+    etl_zoo_pidgin_staging_to_agg,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -330,7 +330,7 @@ def test_etl_pidgin_idea_staging_to_idea_agg_Scenario0_CreatesFileFromSingleBric
     pandas_testing_assert_frame_equal(gen_idea_agg_df, e1_idea_agg_df)
 
 
-def test_etl_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
+def test_etl_zoo_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -444,7 +444,7 @@ def test_etl_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
     assert sheet_exists(pidgin_path, idea_agg_str) is False
 
     # WHEN
-    etl_pidgin_staging_to_agg(x_zoo_dir)
+    etl_zoo_pidgin_staging_to_agg(x_zoo_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)

@@ -4,7 +4,7 @@ from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet
 from src.f10_etl.transformers import (
     _create_events_agg_df,
-    etl_events_log_to_events_agg,
+    etl_zoo_events_log_to_events_agg,
     get_events_dict_from_events_agg_file,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -66,7 +66,7 @@ def test_create_events_agg_df_ReturnsObj(
     assert gen_events_agg_df.to_csv(index=False) == ex_events_agg_df.to_csv(index=False)
 
 
-def test_WorldUnit_events_log_to_events_agg_CreatesSheets_Scenario0(
+def test_WorldUnit_zoo_events_log_to_events_agg_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -105,7 +105,7 @@ def test_WorldUnit_events_log_to_events_agg_CreatesSheets_Scenario0(
     upsert_sheet(events_file_path, events_log_str, ex_events_log_df)
 
     # WHEN
-    etl_events_log_to_events_agg(zoo_dir)
+    etl_zoo_events_log_to_events_agg(zoo_dir)
 
     # THEN
     e3_row = [bob_str, event3, ""]
