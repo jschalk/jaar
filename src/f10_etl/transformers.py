@@ -650,3 +650,9 @@ def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[TimeLinePoint]
                     events_list = pidgin_events.get(face_id)
                     events_list.add(int(event_id))
     return pidgin_events
+
+
+def etl_otx_event_bricks_to_inx_events(
+    faces_otx_dir: str, event_pidgins: dict[FaceID, set[TimeLinePoint]]
+):
+    pass
