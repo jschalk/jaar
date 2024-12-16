@@ -6,7 +6,6 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.finance import allot_scale
 from src.f01_road.road import AcctID, OwnerID
 from src.f02_bud.bud import BudUnit
-from src.f04_gift.atom_config import fiscal_id_str
 from src.f05_listen.hubunit import HubUnit
 from dataclasses import dataclass
 
@@ -159,7 +158,7 @@ class RiverGrade:
 
     def get_dict(self) -> dict:
         return {
-            fiscal_id_str(): self.hubunit.fiscal_id,
+            "fiscal_id": self.hubunit.fiscal_id,
             "healer_id": self.hubunit.owner_id,
             "keep_road": self.hubunit.keep_road,
             "tax_bill_amount": self.tax_bill_amount,

@@ -2138,8 +2138,8 @@
             "No Movie playing": {
                 "_is_expanded": false,
                 "_kids": {
-                    "Big Lewbowski": {
-                        "_label": "Big Lewbowski",
+                    "Big Lewbwski": {
+                        "_label": "Big Lewbwski",
                         "_uid": 273,
                         "mass": 1
                     },
@@ -2208,8 +2208,8 @@
                             "music;No Movie playing": {
                                 "base": "music;No Movie playing",
                                 "premises": {
-                                    "music;No Movie playing,Big Lewbowski": {
-                                        "need": "music;No Movie playing,Big Lewbowski"
+                                    "music;No Movie playing,Big Lewbwski": {
+                                        "need": "music;No Movie playing,Big Lewbwski"
                                     }
                                 }
                             }

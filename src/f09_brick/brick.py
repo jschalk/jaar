@@ -11,15 +11,12 @@ from src.f01_road.road import FiscalID, OwnerID
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import timelineunit_shop
 from src.f04_gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
-from src.f04_gift.atom_config import fiscal_id_str, owner_id_str, pledge_str
 from src.f04_gift.delta import deltaunit_shop, get_categorys_cruds_deltaunit, DeltaUnit
 from src.f04_gift.gift import giftunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fiscal.fiscal import fiscalunit_shop, FiscalUnit
 from src.f09_brick.brick_config import (
     get_brickref_from_file,
-    categorys_str,
-    attributes_str,
     get_brick_format_headers,
 )
 from src.f09_brick.pandas_tool import save_dataframe_to_csv, get_sorting_columns
@@ -63,8 +60,8 @@ def brickref_shop(x_brick_name: str, x_categorys: list[str]) -> BrickRef:
 
 def get_brickref_obj(brick_name: str) -> BrickRef:
     brickref_dict = get_brickref_from_file(brick_name)
-    x_brickref = brickref_shop(brick_name, brickref_dict.get(categorys_str()))
-    x_brickref._attributes = brickref_dict.get(attributes_str())
+    x_brickref = brickref_shop(brick_name, brickref_dict.get("categorys"))
+    x_brickref._attributes = brickref_dict.get("attributes")
     return x_brickref
 
 
@@ -113,9 +110,9 @@ def _create_d2_list(
     for x_atomunit in sorted_atomunits:
         d1_list = []
         for x_attribute in x_brickref.get_headers_list():
-            if x_attribute == fiscal_id_str():
+            if x_attribute == "fiscal_id":
                 d1_list.append(x_fiscal_id)
-            elif x_attribute == owner_id_str():
+            elif x_attribute == "owner_id":
                 d1_list.append(x_owner_id)
             else:
                 d1_list.append(x_atomunit.get_value(x_attribute))
@@ -124,9 +121,9 @@ def _create_d2_list(
 
 
 def _delta_all_pledge_values(d2_list: list[list], x_brickref: BrickRef) -> list[list]:
-    if pledge_str() in x_brickref._attributes:
+    if "pledge" in x_brickref._attributes:
         for x_count, x_header in enumerate(x_brickref.get_headers_list()):
-            if x_header == pledge_str():
+            if x_header == "pledge":
                 pledge_column_number = x_count
         for x_row in d2_list:
             if x_row[pledge_column_number] is True:

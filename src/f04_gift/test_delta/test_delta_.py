@@ -424,6 +424,7 @@ def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scena
     x_atomunit.set_arg(acct_id_str(), zia_str)
     x_atomunit.set_arg(credit_belief_str(), "70 is the number")
     sue_deltaunit.set_atomunit(x_atomunit)
+    print(f"{sue_deltaunit=}")
 
     # WHEN / THEN
     assert bud_built_from_delta_is_valid(sue_deltaunit) is False

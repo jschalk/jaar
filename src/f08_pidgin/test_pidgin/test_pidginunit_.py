@@ -12,11 +12,14 @@ from src.f04_gift.atom_config import (
     base_str,
     face_id_str,
     fiscal_id_str,
+    fund_coin_str,
     healer_id_str,
     group_id_str,
     label_str,
     parent_road_str,
+    penny_str,
     owner_id_str,
+    respect_bit_str,
     road_str,
     team_id_str,
 )
@@ -128,10 +131,10 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert atom_args.issubset(pidgin_args)
     assert fiscal_args.issubset(pidgin_args)
     assert atom_args.intersection(fiscal_args) == {
-        "acct_id",
-        "fund_coin",
-        "penny",
-        "respect_bit",
+        acct_id_str(),
+        fund_coin_str(),
+        penny_str(),
+        respect_bit_str(),
     }
     assert atom_args.union(fiscal_args) != pidgin_args
     assert atom_args.union(fiscal_args).union({"face_id"}) == pidgin_args

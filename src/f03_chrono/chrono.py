@@ -49,7 +49,8 @@ class C400Constants:
 
 
 def get_c400_constants() -> C400Constants:
-    c400_dict = get_dict_from_json(open_file("src/f03_chrono/", "c400_constants.json"))
+    c400_constants_path = create_path("src/f03_chrono/", "c400_constants.json")
+    c400_dict = get_dict_from_json(open_file(c400_constants_path))
     return C400Constants(
         day_length=c400_dict.get(f"{day_str()}_length"),
         c400_leap_length=c400_dict.get(f"{c400_leap_str()}_length"),

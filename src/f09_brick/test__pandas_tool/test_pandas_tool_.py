@@ -18,10 +18,10 @@ from src.f09_brick.pandas_tool import (
     save_dataframe_to_csv,
     get_ordered_csv,
     get_relevant_columns_dataframe,
-    forge_staging_str,
-    forge_agg_str,
-    forge_valid_str,
-    get_forge_staging_grouping_with_all_values_equal_df,
+    zoo_staging_str,
+    zoo_agg_str,
+    zoo_valid_str,
+    get_zoo_staging_grouping_with_all_values_equal_df,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame
@@ -163,20 +163,20 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     assert relevant_dataframe.columns.to_list() == [acct_id_str(), group_id_str()]
 
 
-def test_forge_staging_str_ReturnsObj():
+def test_zoo_staging_str_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert forge_staging_str() == "forge_staging"
-    assert forge_agg_str() == "forge_agg"
-    assert forge_valid_str() == "forge_valid"
+    assert zoo_staging_str() == "zoo_staging"
+    assert zoo_agg_str() == "zoo_agg"
+    assert zoo_valid_str() == "zoo_valid"
 
 
-def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
+def test_get_zoo_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
     # ESTABLISH
     df1 = DataFrame([[]], columns=[])
     group_by_list = [group_id_str(), acct_id_str()]
 
     # WHEN
-    group_by_dataframe = get_forge_staging_grouping_with_all_values_equal_df(
+    group_by_dataframe = get_zoo_staging_grouping_with_all_values_equal_df(
         df1, group_by_list
     )
 
@@ -187,7 +187,7 @@ def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     assert group_by_dataframe.columns.to_list() == []
 
 
-def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_GroupBySingleColumn():
+def test_get_zoo_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_GroupBySingleColumn():
     # ESTABLISH
     df_columns = [group_id_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
@@ -195,7 +195,7 @@ def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     group_by_list = [group_id_str()]
 
     # WHEN
-    group_by_dataframe = get_forge_staging_grouping_with_all_values_equal_df(
+    group_by_dataframe = get_zoo_staging_grouping_with_all_values_equal_df(
         df1, group_by_list
     )
     print(f"{group_by_dataframe=}")
@@ -210,7 +210,7 @@ def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     assert group_by_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_GroupByExtraColumns():
+def test_get_zoo_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_id_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
@@ -218,7 +218,7 @@ def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     group_by_list = [group_id_str(), acct_id_str()]
 
     # WHEN
-    group_by_dataframe = get_forge_staging_grouping_with_all_values_equal_df(
+    group_by_dataframe = get_zoo_staging_grouping_with_all_values_equal_df(
         df1, group_by_list
     )
     print(f"{group_by_dataframe=}")
@@ -233,7 +233,7 @@ def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     assert group_by_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_GroupByExtraColumns():
+def test_get_zoo_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_id_str(), credor_respect_str(), "column3"]
     before_df_values = [["AA0", "BB0", "CC0"], ["AA0", "BB0", "CC0"]]
@@ -241,7 +241,7 @@ def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     group_by_list = [group_id_str(), acct_id_str(), credor_respect_str()]
 
     # WHEN
-    group_by_dataframe = get_forge_staging_grouping_with_all_values_equal_df(
+    group_by_dataframe = get_zoo_staging_grouping_with_all_values_equal_df(
         df1, group_by_list
     )
     print(f"{group_by_dataframe=}")
@@ -256,7 +256,7 @@ def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     assert group_by_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_GroupByExtraColumns():
+def test_get_zoo_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_id_str(), credor_respect_str(), "column3"]
     before_df_values = [
@@ -268,7 +268,7 @@ def test_get_forge_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     group_by_list = [group_id_str(), acct_id_str(), credor_respect_str()]
 
     # WHEN
-    group_by_dataframe = get_forge_staging_grouping_with_all_values_equal_df(
+    group_by_dataframe = get_zoo_staging_grouping_with_all_values_equal_df(
         df1, group_by_list
     )
     print(f"{group_by_dataframe=}")

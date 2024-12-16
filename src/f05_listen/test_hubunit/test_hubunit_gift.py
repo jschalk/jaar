@@ -273,7 +273,7 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhenNogiftFilesE
     assert sue_giftunit._gift_id == init_gift_id()
     assert sue_giftunit._gift_id == 0
     assert sue_giftunit._gift_id == sue_hubunit._get_next_gift_file_number()
-    assert sue_giftunit._face_id is None
+    assert sue_giftunit.face_id is None
     assert sue_giftunit._atoms_dir == sue_hubunit.atoms_dir()
     assert sue_giftunit._gifts_dir == sue_hubunit.gifts_dir()
 
@@ -300,7 +300,7 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhengiftFilesExi
     assert sue_giftunit._gift_id == init_gift_id() + 1
     assert sue_giftunit._gift_id == 1
     assert sue_giftunit._gift_id == sue_hubunit._get_next_gift_file_number()
-    assert sue_giftunit._face_id is None
+    assert sue_giftunit.face_id is None
     assert sue_giftunit._atoms_dir == sue_hubunit.atoms_dir()
     assert sue_giftunit._gifts_dir == sue_hubunit.gifts_dir()
 
@@ -327,9 +327,9 @@ def test_HubUnit_get_giftunit_ReturnsCorrectObjWhenFilesDoesExist(
     # THEN
     assert y0_giftunit is not None
     assert y1_giftunit is not None
-    assert yao_str in y0_giftunit._face_id
-    assert bob_str not in y0_giftunit._face_id
-    assert bob_str in y1_giftunit._face_id
+    assert yao_str in y0_giftunit.face_id
+    assert bob_str not in y0_giftunit.face_id
+    assert bob_str in y1_giftunit.face_id
 
 
 def test_HubUnit_get_giftunit_RaisesExceptionWhenFileDoesNotExist(

@@ -22,7 +22,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_pidgin_agg_to_face_dirs_Scenario1_AllBridgeCategorys(
+def test_WorldUnit_zoo_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -110,17 +110,17 @@ def test_WorldUnit_pidgin_agg_to_face_dirs_Scenario1_AllBridgeCategorys(
     e1_idea_rows = [e1_idea0, e1_idea1]
     e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
 
-    agg_pidgin_path = create_path(fizz_world._forge_dir, "pidgin.xlsx")
+    agg_pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
     upsert_sheet(agg_pidgin_path, acct_agg_str, e1_acct_agg_df)
     upsert_sheet(agg_pidgin_path, group_agg_str, e1_group_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
     upsert_sheet(agg_pidgin_path, idea_agg_str, e1_idea_agg_df)
 
     # WHEN
-    fizz_world.pidgin_agg_to_face_dirs()
+    fizz_world.zoo_pidgin_agg_to_bow_face_dirs()
 
     # THEN
-    sue_dir = create_path(fizz_world._faces_dir, sue_str)
+    sue_dir = create_path(fizz_world._faces_otx_dir, sue_str)
     assert os_path_exists(sue_dir)
     sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
     assert os_path_exists(sue_pidgin_file_path)

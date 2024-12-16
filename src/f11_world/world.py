@@ -1,4 +1,4 @@
-from src.f00_instrument.file import set_dir, create_path, get_dir_file_strs, delete_dir
+from src.f00_instrument.file import set_dir, create_path
 from src.f00_instrument.dict_toolbox import (
     get_empty_dict_if_None,
     get_0_if_None,
@@ -7,6 +7,7 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
     FaceID,
+    EventID,
     FiscalID,
     WorldID,
     TimeLineLabel,
@@ -14,24 +15,22 @@ from src.f01_road.road import (
 )
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f10_etl.transformers import (
-    etl_mine_to_forge_staging,
-    etl_forge_staging_to_forge_agg,
-    etl_forge_agg_to_forge_valid,
-    etl_forge_agg_to_forge_events,
-    etl_forge_events_to_events_log,
-    etl_pidgin_staging_to_agg,
-    etl_forge_agg_to_pidgin_staging,
-    etl_events_log_to_events_agg,
+    etl_jungle_to_zoo_staging,
+    etl_zoo_staging_to_zoo_agg,
+    etl_zoo_agg_to_zoo_valid,
+    etl_zoo_agg_to_zoo_events,
+    etl_zoo_events_to_events_log,
+    etl_zoo_pidgin_staging_to_agg,
+    etl_zoo_agg_to_pidgin_staging,
+    etl_zoo_events_log_to_events_agg,
     get_events_dict_from_events_agg_file,
-    etl_pidgin_agg_to_face_dirs,
-    etl_face_pidgins_to_event_pidgins,
-    etl_event_pidgins_to_pidgin_csv_files,
-    etl_event_pidgins_csvs_to_pidgin_jsons,
+    etl_zoo_pidgin_agg_to_bow_face_dirs,
+    etl_bow_face_pidgins_to_bow_event_pidgins,
+    etl_bow_event_pidgins_to_bow_pidgin_csv_files,
+    etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
-    etl_forge_bricks_to_face_bricks,
-    etl_face_bricks_to_event_bricks,
-    etl_event_bricks_to_fiscal_bricks,
-    etl_fiscal_bricks_to_fiscal_inx,
+    etl_zoo_bricks_to_bow_face_bricks,
+    etl_bow_face_bricks_to_bow_event_otx_bricks,
     get_fiscal_events_by_dirs,
     get_pidgin_events_by_dirs,
 )
@@ -51,143 +50,106 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     current_time: TimeLinePoint = None
-    events: dict[TimeLinePoint, FaceID] = None
+    events: dict[EventID, FaceID] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
-    _faces_dir: str = None
+    _faces_otx_dir: str = None
+    _faces_inx_dir: str = None
     _world_dir: str = None
-    _mine_dir: str = None
-    _forge_dir: str = None
+    _jungle_dir: str = None
+    _zoo_dir: str = None
     _fiscalunits: set[FiscalID] = None
-    _fiscal_events: dict[FiscalID, set[TimeLinePoint]] = None
-    _pidgin_events: dict[FaceID, set[TimeLinePoint]] = None
-    # _fiscal_pidgins: dict fiscal_id: dict [fiscal_event_id, associated_pidgin_event_id]
-    _fiscal_pidgins: dict[FiscalID, dict[TimeLinePoint, TimeLinePoint]] = None
+    _fiscal_events: dict[FiscalID, set[EventID]] = None
+    _pidgin_events: dict[FaceID, set[EventID]] = None
 
-    def set_event(self, event_id: TimeLinePoint, face_id: FaceID):
+    def set_event(self, event_id: EventID, face_id: FaceID):
         self.events[event_id] = face_id
 
-    def event_exists(self, event_id: TimeLinePoint) -> bool:
+    def event_exists(self, event_id: EventID) -> bool:
         return self.events.get(event_id) != None
 
-    def get_event(self, event_id: TimeLinePoint) -> FaceID:
+    def get_event(self, event_id: EventID) -> FaceID:
         return self.events.get(event_id)
 
-    def legitimate_events(self) -> set[TimeLinePoint]:
+    def legitimate_events(self) -> set[EventID]:
         return set(self.events.keys())
 
-    def _event_dir(self, face_id: FaceID, event_id: TimeLinePoint) -> str:
-        face_dir = create_path(self._faces_dir, face_id)
+    def _event_dir(self, face_id: FaceID, event_id: EventID) -> str:
+        face_dir = create_path(self._faces_otx_dir, face_id)
         return create_path(face_dir, event_id)
 
     def _set_fiscal_events(self):
-        self._fiscal_events = get_fiscal_events_by_dirs(self._faces_dir)
+        self._fiscal_events = get_fiscal_events_by_dirs(self._faces_otx_dir)
 
     def _set_pidgin_events(self):
-        self._pidgin_events = get_pidgin_events_by_dirs(self._faces_dir)
+        self._pidgin_events = get_pidgin_events_by_dirs(self._faces_otx_dir)
 
-    def _set_fiscal_pidgins(self):
-        self._fiscal_pidgins = {}
-        for fiscal_id, fiscal_events in self._fiscal_events.items():
-            self._fiscal_pidgins[fiscal_id] = {}
-            for fiscal_event_id in fiscal_events:
-                self._set_fiscal_pidgin_max_prev_pidgin_event_id(
-                    fiscal_id, fiscal_event_id
-                )
-
-    def _set_fiscal_pidgin_max_prev_pidgin_event_id(
-        self, fiscal_id: FiscalID, fiscal_event_id: TimeLinePoint
-    ):
-        fiscal_face_id = self.events.get(fiscal_event_id)
-        if fiscal_face_id is None:
-            exception_str = (
-                f"fiscal_event_id {fiscal_event_id} does not have associated face_id"
-            )
-            raise _set_fiscal_pidgin_Exception(exception_str)
-        face_pidgin_event_ids = self._pidgin_events.get(fiscal_face_id)
-        face_pidgin_event_ids = get_empty_set_if_None(face_pidgin_event_ids)
-        max_prev_pidgin_event_id = max(
-            (
-                pidgin_event_id
-                for pidgin_event_id in face_pidgin_event_ids
-                if pidgin_event_id <= fiscal_event_id
-            ),
-            default=None,
-        )
-        x_pidgins = self._fiscal_pidgins[fiscal_id]
-        x_pidgins[fiscal_event_id] = max_prev_pidgin_event_id
-
-    def set_mine_dir(self, x_dir: str):
-        self._mine_dir = x_dir
-        set_dir(self._mine_dir)
+    def set_jungle_dir(self, x_dir: str):
+        self._jungle_dir = x_dir
+        set_dir(self._jungle_dir)
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
-        self._faces_dir = create_path(self._world_dir, "faces")
-        self._forge_dir = create_path(self._world_dir, "forge")
+        self._faces_otx_dir = create_path(self._world_dir, "faces_otx")
+        self._faces_inx_dir = create_path(self._world_dir, "faces_inx")
+        self._zoo_dir = create_path(self._world_dir, "zoo")
         set_dir(self._world_dir)
-        set_dir(self._faces_dir)
-        set_dir(self._forge_dir)
+        set_dir(self._faces_otx_dir)
+        set_dir(self._faces_inx_dir)
+        set_dir(self._zoo_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
-    def mine_to_forge_staging(self):
-        etl_mine_to_forge_staging(self._mine_dir, self._forge_dir)
+    def jungle_to_zoo_staging(self):
+        etl_jungle_to_zoo_staging(self._jungle_dir, self._zoo_dir)
 
-    def forge_staging_to_forge_agg(self):
-        etl_forge_staging_to_forge_agg(self._forge_dir)
+    def zoo_staging_to_zoo_agg(self):
+        etl_zoo_staging_to_zoo_agg(self._zoo_dir)
 
-    def forge_agg_to_forge_valid(self):
-        etl_forge_agg_to_forge_valid(self._forge_dir, self.legitimate_events())
+    def zoo_agg_to_zoo_valid(self):
+        etl_zoo_agg_to_zoo_valid(self._zoo_dir, self.legitimate_events())
 
-    def forge_agg_to_forge_events(self):
-        etl_forge_agg_to_forge_events(self._forge_dir)
+    def zoo_agg_to_zoo_events(self):
+        etl_zoo_agg_to_zoo_events(self._zoo_dir)
 
-    def forge_events_to_events_log(self):
-        etl_forge_events_to_events_log(self._forge_dir)
+    def zoo_events_to_events_log(self):
+        etl_zoo_events_to_events_log(self._zoo_dir)
 
-    def events_log_to_events_agg(self):
-        etl_events_log_to_events_agg(self._forge_dir)
+    def zoo_events_log_to_events_agg(self):
+        etl_zoo_events_log_to_events_agg(self._zoo_dir)
 
     def set_events_from_events_agg_file(self):
-        self.events = get_events_dict_from_events_agg_file(self._forge_dir)
+        self.events = get_events_dict_from_events_agg_file(self._zoo_dir)
 
-    def forge_agg_to_pidgin_staging(self):
-        etl_forge_agg_to_pidgin_staging(self.legitimate_events(), self._forge_dir)
+    def zoo_agg_to_pidgin_staging(self):
+        etl_zoo_agg_to_pidgin_staging(self.legitimate_events(), self._zoo_dir)
 
-    def pidgin_staging_to_agg(self):
-        etl_pidgin_staging_to_agg(self._forge_dir)
+    def zoo_pidgin_staging_to_agg(self):
+        etl_zoo_pidgin_staging_to_agg(self._zoo_dir)
 
-    def pidgin_agg_to_face_dirs(self):
-        etl_pidgin_agg_to_face_dirs(self._forge_dir, self._faces_dir)
+    def zoo_pidgin_agg_to_bow_face_dirs(self):
+        etl_zoo_pidgin_agg_to_bow_face_dirs(self._zoo_dir, self._faces_otx_dir)
 
     def pidgin_jsons_inherit_younger_pidgins(self):
-        etl_pidgin_jsons_inherit_younger_pidgins(self._faces_dir, self._pidgin_events)
+        etl_pidgin_jsons_inherit_younger_pidgins(
+            self._faces_otx_dir, self._pidgin_events
+        )
 
-    def face_pidgins_to_event_pidgins(self):
-        etl_face_pidgins_to_event_pidgins(self._faces_dir)
+    def bow_face_pidgins_to_bow_event_pidgins(self):
+        etl_bow_face_pidgins_to_bow_event_pidgins(self._faces_otx_dir)
 
-    def event_pidgins_to_pidgin_csv_files(self):
-        etl_event_pidgins_to_pidgin_csv_files(self._faces_dir)
+    def bow_event_pidgins_to_bow_pidgin_csv_files(self):
+        etl_bow_event_pidgins_to_bow_pidgin_csv_files(self._faces_otx_dir)
 
-    def event_pidgins_csvs_to_pidgin_jsons(self):
-        etl_event_pidgins_csvs_to_pidgin_jsons(self._faces_dir)
+    def bow_event_pidgins_csvs_to_bow_pidgin_jsons(self):
+        etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(self._faces_otx_dir)
         self._set_pidgin_events()
 
-    def forge_bricks_to_face_bricks(self):
-        etl_forge_bricks_to_face_bricks(self._forge_dir, self._faces_dir)
+    def zoo_bricks_to_bow_face_bricks(self):
+        etl_zoo_bricks_to_bow_face_bricks(self._zoo_dir, self._faces_otx_dir)
 
-    def face_bricks_to_event_bricks(self):
-        etl_face_bricks_to_event_bricks(self._faces_dir)
-
-    def event_bricks_to_fiscal_bricks(self):
-        etl_event_bricks_to_fiscal_bricks(self._faces_dir)
-        self._set_fiscal_events()
-        self._set_fiscal_pidgins()
-
-    def fiscal_bricks_to_fiscal_inx(self):
-        fpidgins = self._fiscal_pidgins
-        etl_fiscal_bricks_to_fiscal_inx(self._faces_dir, self.events, fpidgins)
+    def bow_face_bricks_to_bow_event_otx_bricks(self):
+        etl_bow_face_bricks_to_bow_event_otx_bricks(self._faces_otx_dir)
 
     def get_dict(self) -> dict:
         return {
@@ -201,7 +163,7 @@ class WorldUnit:
 def worldunit_shop(
     world_id: WorldID = None,
     worlds_dir: str = None,
-    mine_dir: str = None,
+    jungle_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
     _fiscalunits: set[FiscalID] = None,
@@ -217,14 +179,13 @@ def worldunit_shop(
         timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
         _fiscalunits=get_empty_set_if_None(_fiscalunits),
-        _mine_dir=mine_dir,
+        _jungle_dir=jungle_dir,
         _fiscal_events={},
         _pidgin_events={},
-        _fiscal_pidgins={},
     )
     x_worldunit._set_world_dirs()
-    if not x_worldunit._mine_dir:
-        x_worldunit.set_mine_dir(create_path(x_worldunit._world_dir, "mine"))
+    if not x_worldunit._jungle_dir:
+        x_worldunit.set_jungle_dir(create_path(x_worldunit._world_dir, "jungle"))
     return x_worldunit
 
 

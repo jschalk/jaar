@@ -34,7 +34,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario0_NoPidginUnitFi
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     assert fizz_world._pidgin_events == {}
-    faces_dir = Path(fizz_world._faces_dir)
+    faces_dir = Path(fizz_world._faces_otx_dir)
     before_files = {f for f in faces_dir.glob("**/*") if f.is_file()}
 
     # WHEN
@@ -60,7 +60,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario1_OnePidginUnitF
     sue_otx = "Sue"
     sue_inx = "Suzy"
     e3_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
-    bob_dir = create_path(fizz_world._faces_dir, bob_str)
+    bob_dir = create_path(fizz_world._faces_otx_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
     save_file(event3_dir, pidgin_filename(), e3_pidginunit.get_json())
     e3_json_file_path = create_path(event3_dir, pidgin_filename())
@@ -89,7 +89,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
     sue_otx = "Sue"
     sue_inx = "Suzy"
     e3_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
-    bob_dir = create_path(fizz_world._faces_dir, bob_str)
+    bob_dir = create_path(fizz_world._faces_otx_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
     save_file(event3_dir, pidgin_filename(), e3_pidginunit.get_json())
@@ -128,8 +128,8 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     event9 = 9
 #     pidginunit_shop()
 #     fizz_world = worldunit_shop("fizz")
-#     bob_dir = create_path(fizz_world._faces_dir, bob_str)
-#     zia_dir = create_path(fizz_world._faces_dir, bob_str)
+#     bob_dir = create_path(fizz_world._faces_otx_dir, bob_str)
+#     zia_dir = create_path(fizz_world._faces_otx_dir, bob_str)
 #     event3_dir = create_path(bob_dir, event3)
 #     event7_dir = create_path(bob_dir, event7)
 #     event9_dir = create_path(zia_dir, event9)
@@ -141,7 +141,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     assert os_path_exists(e9_json_file_path) is False
 
 #     # WHEN
-#     fizz_world.event_pidgins_csvs_to_pidgin_jsons()
+#     fizz_world.bow_event_pidgins_csvs_to_bow_pidgin_jsons()
 
 #     # THEN
 #     assert os_path_exists(e3_json_file_path)
@@ -165,7 +165,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
 
 
-# # def test_WorldUnit_event_pidgins_to_pidgin_csv_files_Scenario0_1Event_road(
+# # def test_WorldUnit_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_1Event_road(
 # #     env_dir_setup_cleanup,
 # # ):
 # #     # ESTABLISH
@@ -199,8 +199,8 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 # #     assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
 # #     assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
 
-# #     # bob_dir = create_path(fizz_world._faces_dir, bob_str)
-# #     # zia_dir = create_path(fizz_world._faces_dir, zia_str)
+# #     # bob_dir = create_path(fizz_world._faces_otx_dir, bob_str)
+# #     # zia_dir = create_path(fizz_world._faces_otx_dir, zia_str)
 # #     # event3_dir = create_path(bob_dir, event3)
 # #     # event7_dir = create_path(bob_dir, event7)
 # #     # event9_dir = create_path(zia_dir, event9)
@@ -222,7 +222,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 # #     # assert os_path_exists(event9_road_csv_file_path) is False
 
 # #     # # WHEN
-# #     # fizz_world.event_pidgins_to_pidgin_csv_files()
+# #     # fizz_world.bow_event_pidgins_to_bow_pidgin_csv_files()
 
 # #     # # THEN
 # #     # assert os_path_exists(event3_road_csv_file_path)
@@ -246,8 +246,8 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     event7 = 7
 #     event9 = 9
 #     fizz_world = worldunit_shop("fizz")
-#     sue_dir = create_path(fizz_world._faces_dir, sue_str)
-#     zia_dir = create_path(fizz_world._faces_dir, zia_str)
+#     sue_dir = create_path(fizz_world._faces_otx_dir, sue_str)
+#     zia_dir = create_path(fizz_world._faces_otx_dir, zia_str)
 #     event3_dir = create_path(zia_dir, event3)
 #     event5_dir = create_path(sue_dir, event5)
 #     event7_dir = create_path(sue_dir, event7)
@@ -280,7 +280,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     }
 
 
-# def test_WorldUnit_face_pidgins_to_event_pidgins_SetsAttr_pidgin_events(
+# def test_WorldUnit_bow_face_pidgins_to_bow_event_pidgins_SetsAttr_pidgin_events(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -306,8 +306,8 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 # "{zia_str}",{event9},"{clean_otx}","{clean_inx}",,,
 # """
 #     fizz_world = worldunit_shop("fizz")
-#     bob_dir = create_path(fizz_world._faces_dir, bob_str)
-#     zia_dir = create_path(fizz_world._faces_dir, zia_str)
+#     bob_dir = create_path(fizz_world._faces_otx_dir, bob_str)
+#     zia_dir = create_path(fizz_world._faces_otx_dir, zia_str)
 #     event3_dir = create_path(bob_dir, event3)
 #     event7_dir = create_path(bob_dir, event7)
 #     event9_dir = create_path(zia_dir, event9)
@@ -323,7 +323,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     assert fizz_world._pidgin_events == {}
 
 #     # WHEN
-#     fizz_world.event_pidgins_csvs_to_pidgin_jsons()
+#     fizz_world.bow_event_pidgins_csvs_to_bow_pidgin_jsons()
 
 #     # THEN
 #     assert os_path_exists(e3_json_file_path)

@@ -91,9 +91,7 @@ def add_atom_rect(fig: plotly_Figure, atomplotyshape: AtomPlotlyShape):
     shape_x1 = home_form_x0 + (home_width * atomplotyshape.level_width1)
     shape_y0 = level_bump + atomplotyshape.base_h
     shape_y1 = level_bump + atomplotyshape.base_h + 0.05
-    x_color = "RoyalBlue"
-    if atomplotyshape.color is not None:
-        x_color = atomplotyshape.color
+    x_color = "RoyalBlue" if atomplotyshape.color is None else atomplotyshape.color
     fig.add_shape(
         type="rect",
         xref="paper",
