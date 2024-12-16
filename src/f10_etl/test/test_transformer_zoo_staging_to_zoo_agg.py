@@ -9,7 +9,7 @@ from src.f09_brick.pandas_tool import (
     zoo_agg_str,
 )
 from src.f10_etl.transformers import (
-    etl_mine_to_zoo_staging,
+    etl_jungle_to_zoo_staging,
     etl_zoo_staging_to_zoo_agg,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -27,9 +27,9 @@ def test_etl_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    mine_dir = create_path(get_test_etl_dir(), "mine")
+    jungle_dir = create_path(get_test_etl_dir(), "jungle")
     zoo_dir = create_path(get_test_etl_dir(), "zoo")
-    mine_file_path = create_path(mine_dir, ex_file_name)
+    jungle_file_path = create_path(jungle_dir, ex_file_name)
     zoo_file_path = create_path(zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
@@ -43,8 +43,8 @@ def test_etl_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     row2 = [sue_str, event_1, music23_str, hour7am, minute_420]
     row3 = [sue_str, event_1, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3], columns=brick_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    etl_mine_to_zoo_staging(mine_dir, zoo_dir)
+    upsert_sheet(jungle_file_path, "example1_br00003", df1)
+    etl_jungle_to_zoo_staging(jungle_dir, zoo_dir)
     zoo__staging_df = pandas_read_excel(zoo_file_path, sheet_name=zoo_staging_str())
     assert len(zoo__staging_df) == 3
 
@@ -76,9 +76,9 @@ def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnly
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    mine_dir = create_path(get_test_etl_dir(), "mine")
+    jungle_dir = create_path(get_test_etl_dir(), "jungle")
     zoo_dir = create_path(get_test_etl_dir(), "zoo")
-    mine_file_path = create_path(mine_dir, ex_file_name)
+    jungle_file_path = create_path(jungle_dir, ex_file_name)
     zoo_file_path = create_path(zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
@@ -92,8 +92,8 @@ def test_WorldUnit_zoo_staging_to_zoo_agg_CreatesOtxSheets_Scenario1_GroupByOnly
     row2 = [sue_str, event_1, music23_str, hour7am, minute_420]
     row3 = [sue_str, event_1, music23_str, hour7am, minute_480]
     df1 = DataFrame([row1, row2, row3], columns=brick_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    etl_mine_to_zoo_staging(mine_dir, zoo_dir)
+    upsert_sheet(jungle_file_path, "example1_br00003", df1)
+    etl_jungle_to_zoo_staging(jungle_dir, zoo_dir)
     zoo_df = pandas_read_excel(zoo_file_path, sheet_name=zoo_staging_str())
     assert len(zoo_df) == 3
 

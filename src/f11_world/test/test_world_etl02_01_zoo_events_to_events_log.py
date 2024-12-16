@@ -31,7 +31,7 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    mine_file_path = create_path(fizz_world._mine_dir, ex_file_name)
+    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -46,8 +46,8 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario0(
     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
     row5 = [bob_str, event3, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    fizz_world.mine_to_zoo_staging()
+    upsert_sheet(jungle_file_path, "example1_br00003", df1)
+    fizz_world.jungle_to_zoo_staging()
     fizz_world.zoo_staging_to_zoo_agg()
     fizz_world.zoo_agg_to_zoo_events()
     events_file_name = "events.xlsx"
@@ -110,7 +110,7 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    mine_file_path = create_path(fizz_world._mine_dir, ex_file_name)
+    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
     brick3_columns = [
         face_id_str(),
         event_id_str(),
@@ -135,9 +135,9 @@ def test_WorldUnit_zoo_events_to_events_log_CreatesSheets_Scenario1_MultipleBric
     b5_0_row = [event3, bob_str, music23_str, "thu", 1]
     b5_1_row = [event9, yao_str, music23_str, "wed", 0]
     b5_df = DataFrame([b5_0_row, b5_1_row], columns=brick5_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", b3_df)
-    upsert_sheet(mine_file_path, "example1_br00005", b5_df)
-    fizz_world.mine_to_zoo_staging()
+    upsert_sheet(jungle_file_path, "example1_br00003", b3_df)
+    upsert_sheet(jungle_file_path, "example1_br00005", b5_df)
+    fizz_world.jungle_to_zoo_staging()
     fizz_world.zoo_staging_to_zoo_agg()
     fizz_world.zoo_agg_to_zoo_events()
     events_file_name = "events.xlsx"

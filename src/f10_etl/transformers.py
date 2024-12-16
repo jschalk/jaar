@@ -97,23 +97,23 @@ def get_inx_obj(jaar_type, x_row) -> str:
     return x_row[JAAR_TYPES[jaar_type]["inx_obj"]]
 
 
-def etl_mine_to_zoo_staging(mine_dir: str, zoo_dir: str):
-    transformer = JungleToZooTransformer(mine_dir, zoo_dir)
+def etl_jungle_to_zoo_staging(jungle_dir: str, zoo_dir: str):
+    transformer = JungleToZooTransformer(jungle_dir, zoo_dir)
     transformer.transform()
 
 
 class JungleToZooTransformer:
-    def __init__(self, mine_dir: str, zoo_dir: str):
-        self.mine_dir = mine_dir
+    def __init__(self, jungle_dir: str, zoo_dir: str):
+        self.jungle_dir = jungle_dir
         self.zoo_dir = zoo_dir
 
     def transform(self):
-        for brick_number, dfs in self._group_mine_data().items():
+        for brick_number, dfs in self._group_jungle_data().items():
             self._save_to_zoo_staging(brick_number, dfs)
 
-    def _group_mine_data(self):
+    def _group_jungle_data(self):
         grouped_data = {}
-        for ref in get_all_brick_dataframes(self.mine_dir):
+        for ref in get_all_brick_dataframes(self.jungle_dir):
             df = self._read_and_tag_dataframe(ref)
             grouped_data.setdefault(ref.brick_number, []).append(df)
         return grouped_data

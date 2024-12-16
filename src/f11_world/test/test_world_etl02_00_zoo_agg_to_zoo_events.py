@@ -29,7 +29,7 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    mine_file_path = create_path(fizz_world._mine_dir, ex_file_name)
+    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
     zoo_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
@@ -44,8 +44,8 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario0(
     row3 = [yao_str, event3, music23_str, hour7am, minute_420]
     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4], columns=brick_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    fizz_world.mine_to_zoo_staging()
+    upsert_sheet(jungle_file_path, "example1_br00003", df1)
+    fizz_world.jungle_to_zoo_staging()
     fizz_world.zoo_staging_to_zoo_agg()
 
     # WHEN
@@ -89,7 +89,7 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario1(
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    mine_file_path = create_path(fizz_world._mine_dir, ex_file_name)
+    jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
     zoo_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
@@ -105,8 +105,8 @@ def test_WorldUnit_zoo_agg_to_zoo_events_CreatesSheets_Scenario1(
     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
     row5 = [bob_str, event3, music23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    fizz_world.mine_to_zoo_staging()
+    upsert_sheet(jungle_file_path, "example1_br00003", df1)
+    fizz_world.jungle_to_zoo_staging()
     fizz_world.zoo_staging_to_zoo_agg()
 
     # WHEN

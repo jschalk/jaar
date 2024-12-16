@@ -26,34 +26,34 @@ def test_WorldUnit_Exists():
     assert not x_world._faces_otx_dir
     assert not x_world._faces_inx_dir
     assert not x_world._world_dir
-    assert not x_world._mine_dir
+    assert not x_world._jungle_dir
     assert not x_world._zoo_dir
     assert not x_world._fiscalunits
     assert not x_world._fiscal_events
     assert not x_world._pidgin_events
 
 
-def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
+def test_WorldUnit_set_jungle_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = WorldUnit("fizz")
     x_example_dir = create_path(get_test_worlds_dir(), "example_dir")
-    x_mine_dir = create_path(x_example_dir, "mine")
+    x_jungle_dir = create_path(x_example_dir, "jungle")
 
     assert fizz_world._world_dir is None
     assert fizz_world._faces_otx_dir is None
-    assert fizz_world._mine_dir is None
+    assert fizz_world._jungle_dir is None
     assert fizz_world._zoo_dir is None
-    assert os_path_exists(x_mine_dir) is False
+    assert os_path_exists(x_jungle_dir) is False
 
     # WHEN
-    fizz_world.set_mine_dir(x_mine_dir)
+    fizz_world.set_jungle_dir(x_jungle_dir)
 
     # THEN
     assert fizz_world._world_dir is None
     assert fizz_world._faces_otx_dir is None
-    assert fizz_world._mine_dir == x_mine_dir
+    assert fizz_world._jungle_dir == x_jungle_dir
     assert fizz_world._zoo_dir is None
-    assert os_path_exists(x_mine_dir)
+    assert os_path_exists(x_jungle_dir)
 
 
 def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
@@ -63,18 +63,18 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     x_world_dir = create_path(get_test_worlds_dir(), fizz_str)
     x_faces_otx_dir = create_path(x_world_dir, "faces_otx")
     x_faces_inx_dir = create_path(x_world_dir, "faces_inx")
-    x_mine_dir = create_path(x_world_dir, "mine")
+    x_jungle_dir = create_path(x_world_dir, "jungle")
     x_zoo_dir = create_path(x_world_dir, "zoo")
 
     assert not fizz_world._world_dir
     assert not fizz_world._faces_otx_dir
     assert not fizz_world._faces_inx_dir
-    assert not fizz_world._mine_dir
+    assert not fizz_world._jungle_dir
     assert not fizz_world._zoo_dir
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_faces_otx_dir) is False
     assert os_path_exists(x_faces_inx_dir) is False
-    assert os_path_exists(x_mine_dir) is False
+    assert os_path_exists(x_jungle_dir) is False
     assert os_path_exists(x_zoo_dir) is False
 
     # WHEN
@@ -84,19 +84,19 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     assert fizz_world._world_dir == x_world_dir
     assert fizz_world._faces_otx_dir == x_faces_otx_dir
     assert fizz_world._faces_inx_dir == x_faces_inx_dir
-    assert not fizz_world._mine_dir
+    assert not fizz_world._jungle_dir
     assert fizz_world._zoo_dir == x_zoo_dir
     assert os_path_exists(x_world_dir)
     assert os_path_exists(x_faces_otx_dir)
     assert os_path_exists(x_faces_inx_dir)
-    assert os_path_exists(x_mine_dir) is False
+    assert os_path_exists(x_jungle_dir) is False
     assert os_path_exists(x_zoo_dir)
 
 
 def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     # ESTABLISH
     worlds2_dir = f"{get_test_worlds_dir()}/worlds2"
-    example_mine_dir = f"{get_test_worlds_dir()}/example_mine"
+    example_jungle_dir = f"{get_test_worlds_dir()}/example_jungle"
     five_world_id = "five"
     world2_current_time = 55
     music_str = "music45"
@@ -107,7 +107,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     x_world = worldunit_shop(
         world_id=five_world_id,
         worlds_dir=worlds2_dir,
-        mine_dir=example_mine_dir,
+        jungle_dir=example_jungle_dir,
         current_time=world2_current_time,
         timeconversions=world2timeconversions,
         _fiscalunits=world2_fiscalunits,
@@ -117,7 +117,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     world_dir = create_path(worlds2_dir, x_world.world_id)
     assert x_world.world_id == five_world_id
     assert x_world.worlds_dir == worlds2_dir
-    assert x_world._mine_dir == example_mine_dir
+    assert x_world._jungle_dir == example_jungle_dir
     assert x_world.current_time == world2_current_time
     assert x_world.timeconversions == world2timeconversions
     assert x_world.events == {}
@@ -138,7 +138,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world.current_time == 0
     assert x_world.timeconversions == {}
     assert x_world.events == {}
-    assert x_world._mine_dir == create_path(x_world._world_dir, "mine")
+    assert x_world._jungle_dir == create_path(x_world._world_dir, "jungle")
     assert x_world._faces_otx_dir == create_path(world_dir, "faces_otx")
     assert x_world._faces_inx_dir == create_path(world_dir, "faces_inx")
     assert x_world._fiscalunits == set()

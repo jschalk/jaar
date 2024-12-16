@@ -14,7 +14,7 @@ from src.f01_road.road import (
 )
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f10_etl.transformers import (
-    etl_mine_to_zoo_staging,
+    etl_jungle_to_zoo_staging,
     etl_zoo_staging_to_zoo_agg,
     etl_zoo_agg_to_zoo_valid,
     etl_zoo_agg_to_zoo_events,
@@ -54,7 +54,7 @@ class WorldUnit:
     _faces_otx_dir: str = None
     _faces_inx_dir: str = None
     _world_dir: str = None
-    _mine_dir: str = None
+    _jungle_dir: str = None
     _zoo_dir: str = None
     _fiscalunits: set[FiscalID] = None
     _fiscal_events: dict[FiscalID, set[TimeLinePoint]] = None
@@ -82,9 +82,9 @@ class WorldUnit:
     def _set_pidgin_events(self):
         self._pidgin_events = get_pidgin_events_by_dirs(self._faces_otx_dir)
 
-    def set_mine_dir(self, x_dir: str):
-        self._mine_dir = x_dir
-        set_dir(self._mine_dir)
+    def set_jungle_dir(self, x_dir: str):
+        self._jungle_dir = x_dir
+        set_dir(self._jungle_dir)
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
@@ -99,8 +99,8 @@ class WorldUnit:
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
-    def mine_to_zoo_staging(self):
-        etl_mine_to_zoo_staging(self._mine_dir, self._zoo_dir)
+    def jungle_to_zoo_staging(self):
+        etl_jungle_to_zoo_staging(self._jungle_dir, self._zoo_dir)
 
     def zoo_staging_to_zoo_agg(self):
         etl_zoo_staging_to_zoo_agg(self._zoo_dir)
@@ -162,7 +162,7 @@ class WorldUnit:
 def worldunit_shop(
     world_id: WorldID = None,
     worlds_dir: str = None,
-    mine_dir: str = None,
+    jungle_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
     _fiscalunits: set[FiscalID] = None,
@@ -178,13 +178,13 @@ def worldunit_shop(
         timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
         _fiscalunits=get_empty_set_if_None(_fiscalunits),
-        _mine_dir=mine_dir,
+        _jungle_dir=jungle_dir,
         _fiscal_events={},
         _pidgin_events={},
     )
     x_worldunit._set_world_dirs()
-    if not x_worldunit._mine_dir:
-        x_worldunit.set_mine_dir(create_path(x_worldunit._world_dir, "mine"))
+    if not x_worldunit._jungle_dir:
+        x_worldunit.set_jungle_dir(create_path(x_worldunit._world_dir, "jungle"))
     return x_worldunit
 
 
