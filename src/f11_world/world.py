@@ -15,21 +15,21 @@ from src.f01_road.road import (
 )
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f10_etl.transformers import (
-    etl_ocean_to_zoo_staging,
-    etl_zoo_staging_to_zoo_agg,
-    etl_zoo_agg_to_zoo_valid,
-    etl_zoo_agg_to_zoo_events,
-    etl_zoo_events_to_events_log,
-    etl_zoo_pidgin_staging_to_agg,
-    etl_zoo_agg_to_pidgin_staging,
-    etl_zoo_events_log_to_events_agg,
+    etl_ocean_to_fish_staging,
+    etl_fish_staging_to_fish_agg,
+    etl_fish_agg_to_fish_valid,
+    etl_fish_agg_to_fish_events,
+    etl_fish_events_to_events_log,
+    etl_fish_pidgin_staging_to_agg,
+    etl_fish_agg_to_pidgin_staging,
+    etl_fish_events_log_to_events_agg,
     get_events_dict_from_events_agg_file,
-    etl_zoo_pidgin_agg_to_bow_face_dirs,
+    etl_fish_pidgin_agg_to_bow_face_dirs,
     etl_bow_face_pidgins_to_bow_event_pidgins,
     etl_bow_event_pidgins_to_bow_pidgin_csv_files,
     etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
-    etl_zoo_bricks_to_bow_face_bricks,
+    etl_fish_bricks_to_bow_face_bricks,
     etl_bow_face_bricks_to_bow_event_otx_bricks,
     get_fiscal_events_by_dirs,
     get_pidgin_events_by_dirs,
@@ -56,7 +56,7 @@ class WorldUnit:
     _faces_inx_dir: str = None
     _world_dir: str = None
     _ocean_dir: str = None
-    _zoo_dir: str = None
+    _fish_dir: str = None
     _fiscalunits: set[FiscalID] = None
     _fiscal_events: dict[FiscalID, set[EventID]] = None
     _pidgin_events: dict[FaceID, set[EventID]] = None
@@ -91,44 +91,44 @@ class WorldUnit:
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._faces_otx_dir = create_path(self._world_dir, "faces_otx")
         self._faces_inx_dir = create_path(self._world_dir, "faces_inx")
-        self._zoo_dir = create_path(self._world_dir, "zoo")
+        self._fish_dir = create_path(self._world_dir, "fish")
         set_dir(self._world_dir)
         set_dir(self._faces_otx_dir)
         set_dir(self._faces_inx_dir)
-        set_dir(self._zoo_dir)
+        set_dir(self._fish_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
-    def ocean_to_zoo_staging(self):
-        etl_ocean_to_zoo_staging(self._ocean_dir, self._zoo_dir)
+    def ocean_to_fish_staging(self):
+        etl_ocean_to_fish_staging(self._ocean_dir, self._fish_dir)
 
-    def zoo_staging_to_zoo_agg(self):
-        etl_zoo_staging_to_zoo_agg(self._zoo_dir)
+    def fish_staging_to_fish_agg(self):
+        etl_fish_staging_to_fish_agg(self._fish_dir)
 
-    def zoo_agg_to_zoo_valid(self):
-        etl_zoo_agg_to_zoo_valid(self._zoo_dir, self.legitimate_events())
+    def fish_agg_to_fish_valid(self):
+        etl_fish_agg_to_fish_valid(self._fish_dir, self.legitimate_events())
 
-    def zoo_agg_to_zoo_events(self):
-        etl_zoo_agg_to_zoo_events(self._zoo_dir)
+    def fish_agg_to_fish_events(self):
+        etl_fish_agg_to_fish_events(self._fish_dir)
 
-    def zoo_events_to_events_log(self):
-        etl_zoo_events_to_events_log(self._zoo_dir)
+    def fish_events_to_events_log(self):
+        etl_fish_events_to_events_log(self._fish_dir)
 
-    def zoo_events_log_to_events_agg(self):
-        etl_zoo_events_log_to_events_agg(self._zoo_dir)
+    def fish_events_log_to_events_agg(self):
+        etl_fish_events_log_to_events_agg(self._fish_dir)
 
     def set_events_from_events_agg_file(self):
-        self.events = get_events_dict_from_events_agg_file(self._zoo_dir)
+        self.events = get_events_dict_from_events_agg_file(self._fish_dir)
 
-    def zoo_agg_to_pidgin_staging(self):
-        etl_zoo_agg_to_pidgin_staging(self.legitimate_events(), self._zoo_dir)
+    def fish_agg_to_pidgin_staging(self):
+        etl_fish_agg_to_pidgin_staging(self.legitimate_events(), self._fish_dir)
 
-    def zoo_pidgin_staging_to_agg(self):
-        etl_zoo_pidgin_staging_to_agg(self._zoo_dir)
+    def fish_pidgin_staging_to_agg(self):
+        etl_fish_pidgin_staging_to_agg(self._fish_dir)
 
-    def zoo_pidgin_agg_to_bow_face_dirs(self):
-        etl_zoo_pidgin_agg_to_bow_face_dirs(self._zoo_dir, self._faces_otx_dir)
+    def fish_pidgin_agg_to_bow_face_dirs(self):
+        etl_fish_pidgin_agg_to_bow_face_dirs(self._fish_dir, self._faces_otx_dir)
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
@@ -145,8 +145,8 @@ class WorldUnit:
         etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(self._faces_otx_dir)
         self._set_pidgin_events()
 
-    def zoo_bricks_to_bow_face_bricks(self):
-        etl_zoo_bricks_to_bow_face_bricks(self._zoo_dir, self._faces_otx_dir)
+    def fish_bricks_to_bow_face_bricks(self):
+        etl_fish_bricks_to_bow_face_bricks(self._fish_dir, self._faces_otx_dir)
 
     def bow_face_bricks_to_bow_event_otx_bricks(self):
         etl_bow_face_bricks_to_bow_event_otx_bricks(self._faces_otx_dir)

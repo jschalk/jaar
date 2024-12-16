@@ -120,7 +120,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     e1_idea_rows = [e1_idea0, e1_idea1]
     staging_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
 
-    pidgin_path = create_path(fizz_world._zoo_dir, "pidgin.xlsx")
+    pidgin_path = create_path(fizz_world._fish_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, acct_staging_str, staging_acct_df)
     upsert_sheet(pidgin_path, group_staging_str, staging_group_df)
     upsert_sheet(pidgin_path, road_staging_str, staging_road_df)
@@ -136,7 +136,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     assert sheet_exists(pidgin_path, idea_agg_str) is False
 
     # WHEN
-    fizz_world.zoo_pidgin_staging_to_agg()
+    fizz_world.fish_pidgin_staging_to_agg()
 
     # THEN
     assert os_path_exists(pidgin_path)
