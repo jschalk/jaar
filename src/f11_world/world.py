@@ -14,13 +14,13 @@ from src.f01_road.road import (
 )
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f10_etl.transformers import (
-    etl_mine_to_forge_staging,
-    etl_forge_staging_to_forge_agg,
-    etl_forge_agg_to_forge_valid,
-    etl_forge_agg_to_forge_events,
-    etl_forge_events_to_events_log,
+    etl_mine_to_zoo_staging,
+    etl_zoo_staging_to_zoo_agg,
+    etl_zoo_agg_to_zoo_valid,
+    etl_zoo_agg_to_zoo_events,
+    etl_zoo_events_to_events_log,
     etl_pidgin_staging_to_agg,
-    etl_forge_agg_to_pidgin_staging,
+    etl_zoo_agg_to_pidgin_staging,
     etl_events_log_to_events_agg,
     get_events_dict_from_events_agg_file,
     etl_pidgin_agg_to_face_dirs,
@@ -28,7 +28,7 @@ from src.f10_etl.transformers import (
     etl_event_pidgins_to_pidgin_csv_files,
     etl_event_pidgins_csvs_to_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
-    etl_forge_bricks_to_otx_face_bricks,
+    etl_zoo_bricks_to_otx_face_bricks,
     etl_face_bricks_to_event_bricks,
     get_fiscal_events_by_dirs,
     get_pidgin_events_by_dirs,
@@ -55,7 +55,7 @@ class WorldUnit:
     _faces_inx_dir: str = None
     _world_dir: str = None
     _mine_dir: str = None
-    _forge_dir: str = None
+    _zoo_dir: str = None
     _fiscalunits: set[FiscalID] = None
     _fiscal_events: dict[FiscalID, set[TimeLinePoint]] = None
     _pidgin_events: dict[FaceID, set[TimeLinePoint]] = None
@@ -90,44 +90,44 @@ class WorldUnit:
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._faces_otx_dir = create_path(self._world_dir, "faces_otx")
         self._faces_inx_dir = create_path(self._world_dir, "faces_inx")
-        self._forge_dir = create_path(self._world_dir, "forge")
+        self._zoo_dir = create_path(self._world_dir, "zoo")
         set_dir(self._world_dir)
         set_dir(self._faces_otx_dir)
         set_dir(self._faces_inx_dir)
-        set_dir(self._forge_dir)
+        set_dir(self._zoo_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
-    def mine_to_forge_staging(self):
-        etl_mine_to_forge_staging(self._mine_dir, self._forge_dir)
+    def mine_to_zoo_staging(self):
+        etl_mine_to_zoo_staging(self._mine_dir, self._zoo_dir)
 
-    def forge_staging_to_forge_agg(self):
-        etl_forge_staging_to_forge_agg(self._forge_dir)
+    def zoo_staging_to_zoo_agg(self):
+        etl_zoo_staging_to_zoo_agg(self._zoo_dir)
 
-    def forge_agg_to_forge_valid(self):
-        etl_forge_agg_to_forge_valid(self._forge_dir, self.legitimate_events())
+    def zoo_agg_to_zoo_valid(self):
+        etl_zoo_agg_to_zoo_valid(self._zoo_dir, self.legitimate_events())
 
-    def forge_agg_to_forge_events(self):
-        etl_forge_agg_to_forge_events(self._forge_dir)
+    def zoo_agg_to_zoo_events(self):
+        etl_zoo_agg_to_zoo_events(self._zoo_dir)
 
-    def forge_events_to_events_log(self):
-        etl_forge_events_to_events_log(self._forge_dir)
+    def zoo_events_to_events_log(self):
+        etl_zoo_events_to_events_log(self._zoo_dir)
 
     def events_log_to_events_agg(self):
-        etl_events_log_to_events_agg(self._forge_dir)
+        etl_events_log_to_events_agg(self._zoo_dir)
 
     def set_events_from_events_agg_file(self):
-        self.events = get_events_dict_from_events_agg_file(self._forge_dir)
+        self.events = get_events_dict_from_events_agg_file(self._zoo_dir)
 
-    def forge_agg_to_pidgin_staging(self):
-        etl_forge_agg_to_pidgin_staging(self.legitimate_events(), self._forge_dir)
+    def zoo_agg_to_pidgin_staging(self):
+        etl_zoo_agg_to_pidgin_staging(self.legitimate_events(), self._zoo_dir)
 
     def pidgin_staging_to_agg(self):
-        etl_pidgin_staging_to_agg(self._forge_dir)
+        etl_pidgin_staging_to_agg(self._zoo_dir)
 
     def pidgin_agg_to_face_dirs(self):
-        etl_pidgin_agg_to_face_dirs(self._forge_dir, self._faces_otx_dir)
+        etl_pidgin_agg_to_face_dirs(self._zoo_dir, self._faces_otx_dir)
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
@@ -144,8 +144,8 @@ class WorldUnit:
         etl_event_pidgins_csvs_to_pidgin_jsons(self._faces_otx_dir)
         self._set_pidgin_events()
 
-    def forge_bricks_to_otx_face_bricks(self):
-        etl_forge_bricks_to_otx_face_bricks(self._forge_dir, self._faces_otx_dir)
+    def zoo_bricks_to_otx_face_bricks(self):
+        etl_zoo_bricks_to_otx_face_bricks(self._zoo_dir, self._faces_otx_dir)
 
     def face_bricks_to_event_bricks(self):
         etl_face_bricks_to_event_bricks(self._faces_otx_dir)

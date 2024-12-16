@@ -52,14 +52,14 @@ def test_etl_pidgin_agg_to_face_dirs_Scenario0_Two_face_ids(
     acct_rows = [acct0, acct1, acct2, acct3]
     e1_acct_agg_df = DataFrame(acct_rows, columns=acct_file_columns)
 
-    forge_dir = create_path(get_test_etl_dir(), "forge")
-    agg_pidgin_path = create_path(forge_dir, "pidgin.xlsx")
+    zoo_dir = create_path(get_test_etl_dir(), "zoo")
+    agg_pidgin_path = create_path(zoo_dir, "pidgin.xlsx")
     upsert_sheet(agg_pidgin_path, acct_agg_str, e1_acct_agg_df)
 
     faces_dir = create_path(get_test_etl_dir(), "faces_otx")
 
     # WHEN
-    etl_pidgin_agg_to_face_dirs(forge_dir, faces_dir)
+    etl_pidgin_agg_to_face_dirs(zoo_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
@@ -169,8 +169,8 @@ def test_etl_pidgin_agg_to_face_dirs_Scenario1_AllBridgeCategorys(
     e1_idea_rows = [e1_idea0, e1_idea1]
     e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
 
-    forge_dir = create_path(get_test_etl_dir(), "forge")
-    agg_pidgin_path = create_path(forge_dir, "pidgin.xlsx")
+    zoo_dir = create_path(get_test_etl_dir(), "zoo")
+    agg_pidgin_path = create_path(zoo_dir, "pidgin.xlsx")
     upsert_sheet(agg_pidgin_path, acct_agg_str, e1_acct_agg_df)
     upsert_sheet(agg_pidgin_path, group_agg_str, e1_group_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
@@ -179,7 +179,7 @@ def test_etl_pidgin_agg_to_face_dirs_Scenario1_AllBridgeCategorys(
     faces_dir = create_path(get_test_etl_dir(), "faces_otx")
 
     # WHEN
-    etl_pidgin_agg_to_face_dirs(forge_dir, faces_dir)
+    etl_pidgin_agg_to_face_dirs(zoo_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)

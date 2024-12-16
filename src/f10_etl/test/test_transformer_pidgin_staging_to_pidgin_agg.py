@@ -57,15 +57,15 @@ def test_etl_pidgin_acct_staging_to_acct_agg_Scenario0_CreatesEmptyFileBecauseOf
     e1_acct1 = [bx, sue_str, event7, bob_str, bob_inx, None, slash_str, None]
     e1_acct_rows = [e1_acct0, e1_acct1]
     staging_acct_df = DataFrame(e1_acct_rows, columns=acct_file_columns)
-    x_forge_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_forge_dir, "pidgin.xlsx")
+    x_zoo_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, acct_staging_str, staging_acct_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, acct_staging_str)
     assert sheet_exists(pidgin_path, "acct_agg") is False
 
     # WHEN
-    etl_pidgin_acct_staging_to_acct_agg(x_forge_dir)
+    etl_pidgin_acct_staging_to_acct_agg(x_zoo_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -113,15 +113,15 @@ def test_etl_pidgin_acct_staging_to_acct_agg_Scenario1_CreatesFileFromSingleBric
     e1_acct1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
     e1_acct_rows = [e1_acct0, e1_acct1]
     staging_acct_df = DataFrame(e1_acct_rows, columns=acct_file_columns)
-    x_forge_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_forge_dir, "pidgin.xlsx")
+    x_zoo_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, acct_staging_str, staging_acct_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, acct_staging_str)
     assert sheet_exists(pidgin_path, "acct_agg") is False
 
     # WHEN
-    etl_pidgin_acct_staging_to_acct_agg(x_forge_dir)
+    etl_pidgin_acct_staging_to_acct_agg(x_zoo_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -174,15 +174,15 @@ def test_etl_pidgin_group_staging_to_group_agg_Scenario0_CreatesFileFromSingleBr
     e1_group1 = [bx, sue_str, event7, run_str, run_inx, None, None, None]
     e1_group_rows = [e1_group0, e1_group1]
     staging_group_df = DataFrame(e1_group_rows, columns=group_file_columns)
-    x_forge_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_forge_dir, "pidgin.xlsx")
+    x_zoo_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, group_staging_str, staging_group_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, group_staging_str)
     assert sheet_exists(pidgin_path, group_agg_str) is False
 
     # WHEN
-    etl_pidgin_group_staging_to_group_agg(x_forge_dir)
+    etl_pidgin_group_staging_to_group_agg(x_zoo_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -235,15 +235,15 @@ def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleBric
     e1_road1 = [bx, sue_str, event7, clean_otx, clean_inx, None, None, None]
     e1_road_rows = [e1_road0, e1_road1]
     staging_road_df = DataFrame(e1_road_rows, columns=road_file_columns)
-    x_forge_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_forge_dir, "pidgin.xlsx")
+    x_zoo_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, road_staging_str, staging_road_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, road_staging_str)
     assert sheet_exists(pidgin_path, road_agg_str) is False
 
     # WHEN
-    etl_pidgin_road_staging_to_road_agg(x_forge_dir)
+    etl_pidgin_road_staging_to_road_agg(x_zoo_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -296,15 +296,15 @@ def test_etl_pidgin_idea_staging_to_idea_agg_Scenario0_CreatesFileFromSingleBric
     e1_idea1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
     e1_idea_rows = [e1_idea0, e1_idea1]
     staging_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
-    x_forge_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_forge_dir, "pidgin.xlsx")
+    x_zoo_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, idea_staging_str, staging_idea_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, idea_staging_str)
     assert sheet_exists(pidgin_path, idea_agg_str) is False
 
     # WHEN
-    etl_pidgin_idea_staging_to_idea_agg(x_forge_dir)
+    etl_pidgin_idea_staging_to_idea_agg(x_zoo_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -427,8 +427,8 @@ def test_etl_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
     e1_idea_rows = [e1_idea0, e1_idea1]
     staging_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
 
-    x_forge_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_forge_dir, "pidgin.xlsx")
+    x_zoo_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, acct_staging_str, staging_acct_df)
     upsert_sheet(pidgin_path, group_staging_str, staging_group_df)
     upsert_sheet(pidgin_path, road_staging_str, staging_road_df)
@@ -444,7 +444,7 @@ def test_etl_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
     assert sheet_exists(pidgin_path, idea_agg_str) is False
 
     # WHEN
-    etl_pidgin_staging_to_agg(x_forge_dir)
+    etl_pidgin_staging_to_agg(x_zoo_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
