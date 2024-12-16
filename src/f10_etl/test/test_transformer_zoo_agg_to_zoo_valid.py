@@ -80,9 +80,9 @@ def test_WorldUnit_zoo_agg_to_zoo_valid_CreatesSheets_Scenario0(
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_file_name = "fizzbuzz.xlsx"
-#     jungle_dir = create_path(get_test_etl_dir(), "jungle")
+#     ocean_dir = create_path(get_test_etl_dir(), "ocean")
 #     zoo_dir = create_path(get_test_etl_dir(), "zoo")
-#     jungle_file_path = create_path(jungle_dir, ex_file_name)
+#     ocean_file_path = create_path(ocean_dir, ex_file_name)
 #     zoo_file_path = create_path(zoo_dir, "br00003.xlsx")
 #     brick_columns = [
 #         face_id_str(),
@@ -98,8 +98,8 @@ def test_WorldUnit_zoo_agg_to_zoo_valid_CreatesSheets_Scenario0(
 #     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
 #     row5 = [bob_str, event3, music23_str, hour7am, minute_420]
 #     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
-#     upsert_sheet(jungle_file_path, "example1_br00003", df1)
-#     etl_jungle_to_zoo_staging(jungle_dir, zoo_dir)
+#     upsert_sheet(ocean_file_path, "example1_br00003", df1)
+#     etl_ocean_to_zoo_staging(ocean_dir, zoo_dir)
 #     etl_zoo_staging_to_zoo_agg(zoo_dir)
 
 #     # WHEN

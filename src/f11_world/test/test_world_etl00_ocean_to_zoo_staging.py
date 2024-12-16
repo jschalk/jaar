@@ -3,14 +3,16 @@ from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, zoo_staging_str
-from src.f10_etl.transformers import etl_jungle_to_zoo_staging
-from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.f11_world.world import worldunit_shop
+from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
+def test_WorldUnit_ocean_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     # ESTABLISH
+    fizz_str = "fizz"
+    fizz_world = worldunit_shop(fizz_str)
     sue_str = "Sue"
     event_1 = 1
     event_2 = 2
@@ -19,9 +21,8 @@ def test_etl_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     hour6am = "6am"
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
-    jungle_dir = create_path(get_test_etl_dir(), "jungle")
-    zoo_dir = create_path(get_test_etl_dir(), "zoo")
-    jungle_file_path = create_path(jungle_dir, ex_file_name)
+    ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
+    zoo_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
         event_id_str(),
@@ -48,14 +49,13 @@ def test_etl_jungle_to_zoo_staging_CreatesZooFiles(env_dir_setup_cleanup):
     br00003_ex1_str = "example1_br00003"
     br00003_ex2_str = "example2_br00003"
     br00003_ex3_str = "example3_br00003"
-    upsert_sheet(jungle_file_path, br00003_ex1_str, df1)
-    upsert_sheet(jungle_file_path, br00003_ex2_str, df2)
-    upsert_sheet(jungle_file_path, br00003_ex3_str, df3)
-    zoo_file_path = create_path(zoo_dir, "br00003.xlsx")
+    upsert_sheet(ocean_file_path, br00003_ex1_str, df1)
+    upsert_sheet(ocean_file_path, br00003_ex2_str, df2)
+    upsert_sheet(ocean_file_path, br00003_ex3_str, df3)
     assert os_path_exists(zoo_file_path) is False
 
     # WHEN
-    etl_jungle_to_zoo_staging(jungle_dir, zoo_dir)
+    fizz_world.ocean_to_zoo_staging()
 
     # THEN
     print(f"{zoo_file_path=}")

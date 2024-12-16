@@ -76,7 +76,7 @@ def test_WorldUnit_zoo_bricks_to_bow_face_bricks_CreatesOtxSheets_Scenario0_Grou
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_file_name = "fizzbuzz.xlsx"
-#     jungle_file_path = create_path(fizz_world._jungle_dir, ex_file_name)
+#     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
 #     brick_columns = [
 #         face_id_str(),
 #         event_id_str(),
@@ -90,8 +90,8 @@ def test_WorldUnit_zoo_bricks_to_bow_face_bricks_CreatesOtxSheets_Scenario0_Grou
 #     row3 = [sue_str, event3, music23_str, hour7am, minute_480]
 #     row4 = [sue_str, event7, music23_str, hour7am, minute_480]
 #     df1 = DataFrame([row1, row2, row3, row4], columns=brick_columns)
-#     upsert_sheet(jungle_file_path, "example1_br00003", df1)
-#     fizz_world.jungle_to_zoo_staging()
+#     upsert_sheet(ocean_file_path, "example1_br00003", df1)
+#     fizz_world.ocean_to_zoo_staging()
 #     br00003_agg_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
 #     zoo_df = pandas_read_excel(br00003_agg_file_path, sheet_name=zoo_staging_str())
 #     assert len(zoo_df) == 4
