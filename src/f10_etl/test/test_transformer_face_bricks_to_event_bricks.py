@@ -3,7 +3,7 @@ from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import upsert_sheet, zoo_valid_str, sheet_exists
-from src.f10_etl.transformers import etl_face_bricks_to_event_bricks
+from src.f10_etl.transformers import etl_bow_face_bricks_to_bow_event_otx_bricks
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
@@ -11,7 +11,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_face_bricks_to_event_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
+def test_etl_bow_face_bricks_to_bow_event_otx_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -60,7 +60,7 @@ def test_etl_face_bricks_to_event_bricks_CreatesFaceBrickSheets_Scenario0_Multpl
     assert sheet_exists(event9_br00003_filepath, zoo_valid_str()) is False
 
     # WHEN
-    etl_face_bricks_to_event_bricks(x_faces_otx_dir)
+    etl_bow_face_bricks_to_bow_event_otx_bricks(x_faces_otx_dir)
 
     # THEN
     assert sheet_exists(event3_br00003_filepath, zoo_valid_str())

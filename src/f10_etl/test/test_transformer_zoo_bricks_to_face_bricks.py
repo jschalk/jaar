@@ -15,7 +15,7 @@ from src.f09_brick.pandas_tool import (
     zoo_valid_str,
     sheet_exists,
 )
-from src.f10_etl.transformers import etl_zoo_bricks_to_otx_face_bricks
+from src.f10_etl.transformers import etl_zoo_bricks_to_bow_face_bricks
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
@@ -23,7 +23,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_zoo_bricks_to_otx_face_bricks_CreatesFaceBrickSheets_Scenario0_SingleFaceID(
+def test_etl_zoo_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario0_SingleFaceID(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -56,7 +56,7 @@ def test_etl_zoo_bricks_to_otx_face_bricks_CreatesFaceBrickSheets_Scenario0_Sing
     assert sheet_exists(sue_br00003_filepath, zoo_valid_str()) is False
 
     # WHEN
-    etl_zoo_bricks_to_otx_face_bricks(x_zoo_dir, x_faces_otx_dir)
+    etl_zoo_bricks_to_bow_face_bricks(x_zoo_dir, x_faces_otx_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, zoo_valid_str())
@@ -74,7 +74,7 @@ def test_etl_zoo_bricks_to_otx_face_bricks_CreatesFaceBrickSheets_Scenario0_Sing
     assert get_sheet_names(sue_br00003_filepath) == [zoo_valid_str()]
 
 
-def test_etl_zoo_bricks_to_otx_face_bricks_CreatesFaceBrickSheets_Scenario1_MultpleFaceIDs(
+def test_etl_zoo_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario1_MultpleFaceIDs(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -112,7 +112,7 @@ def test_etl_zoo_bricks_to_otx_face_bricks_CreatesFaceBrickSheets_Scenario1_Mult
     assert sheet_exists(zia_br00003_filepath, zoo_valid_str()) is False
 
     # WHEN
-    etl_zoo_bricks_to_otx_face_bricks(x_zoo_dir, x_faces_otx_dir)
+    etl_zoo_bricks_to_bow_face_bricks(x_zoo_dir, x_faces_otx_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, zoo_valid_str())
@@ -129,7 +129,7 @@ def test_etl_zoo_bricks_to_otx_face_bricks_CreatesFaceBrickSheets_Scenario1_Mult
     pandas_assert_frame_equal(zia_br3_agg_df, example_zia_df)
 
 
-def test_etl_zoo_bricks_to_otx_face_bricks_Scenario2_PidginCategoryBricksAreNotLoaded(
+def test_etl_zoo_bricks_to_bow_face_bricks_Scenario2_PidginCategoryBricksAreNotLoaded(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -183,7 +183,7 @@ def test_etl_zoo_bricks_to_otx_face_bricks_Scenario2_PidginCategoryBricksAreNotL
     assert sheet_exists(sue_br00043_filepath, zoo_valid_str()) is False
 
     # WHEN
-    etl_zoo_bricks_to_otx_face_bricks(x_zoo_dir, x_faces_otx_dir)
+    etl_zoo_bricks_to_bow_face_bricks(x_zoo_dir, x_faces_otx_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, zoo_valid_str())

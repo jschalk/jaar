@@ -11,7 +11,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_face_bricks_to_event_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
+def test_WorldUnit_bow_face_bricks_to_bow_event_otx_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -59,7 +59,7 @@ def test_WorldUnit_face_bricks_to_event_bricks_CreatesFaceBrickSheets_Scenario0_
     assert sheet_exists(event9_br00003_filepath, zoo_valid_str()) is False
 
     # WHEN
-    fizz_world.face_bricks_to_event_bricks()
+    fizz_world.bow_face_bricks_to_bow_event_otx_bricks()
 
     # THEN
     assert sheet_exists(event3_br00003_filepath, zoo_valid_str())

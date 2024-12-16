@@ -28,8 +28,8 @@ from src.f10_etl.transformers import (
     etl_bow_event_pidgins_to_bow_pidgin_csv_files,
     etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
-    etl_zoo_bricks_to_otx_face_bricks,
-    etl_face_bricks_to_event_bricks,
+    etl_zoo_bricks_to_bow_face_bricks,
+    etl_bow_face_bricks_to_bow_event_otx_bricks,
     get_fiscal_events_by_dirs,
     get_pidgin_events_by_dirs,
 )
@@ -144,11 +144,11 @@ class WorldUnit:
         etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(self._faces_otx_dir)
         self._set_pidgin_events()
 
-    def zoo_bricks_to_otx_face_bricks(self):
-        etl_zoo_bricks_to_otx_face_bricks(self._zoo_dir, self._faces_otx_dir)
+    def zoo_bricks_to_bow_face_bricks(self):
+        etl_zoo_bricks_to_bow_face_bricks(self._zoo_dir, self._faces_otx_dir)
 
-    def face_bricks_to_event_bricks(self):
-        etl_face_bricks_to_event_bricks(self._faces_otx_dir)
+    def bow_face_bricks_to_bow_event_otx_bricks(self):
+        etl_bow_face_bricks_to_bow_event_otx_bricks(self._faces_otx_dir)
 
     def get_dict(self) -> dict:
         return {

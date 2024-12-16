@@ -594,7 +594,7 @@ def get_event_pidgin_path(
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_zoo_bricks_to_otx_face_bricks(zoo_dir: str, faces_dir: str):
+def etl_zoo_bricks_to_bow_face_bricks(zoo_dir: str, faces_dir: str):
     for zoo_br_ref in get_existing_excel_brick_file_refs(zoo_dir):
         zoo_brick_path = create_path(zoo_dir, zoo_br_ref.file_name)
         if zoo_br_ref.file_name not in _get_pidgen_brick_format_filenames():
@@ -607,7 +607,7 @@ def etl_zoo_bricks_to_otx_face_bricks(zoo_dir: str, faces_dir: str):
             )
 
 
-def etl_face_bricks_to_event_bricks(faces_dir: str):
+def etl_bow_face_bricks_to_bow_event_otx_bricks(faces_dir: str):
     for face_id_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id_dir)
         for face_br_ref in get_existing_excel_brick_file_refs(face_dir):
