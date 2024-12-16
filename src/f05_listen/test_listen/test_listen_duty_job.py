@@ -180,8 +180,8 @@ def get_location_str() -> IdeaUnit:
     return "location"
 
 
-def get_in_ocean_str() -> IdeaUnit:
-    return "in_ocean"
+def get_in_mer_str() -> IdeaUnit:
+    return "in_mer"
 
 
 def get_on_land_str() -> IdeaUnit:
@@ -208,8 +208,8 @@ def get_location_road() -> RoadUnit:
     return create_road(get_default_fiscal_id_ideaunit(), get_location_str())
 
 
-def get_in_ocean_road() -> RoadUnit:
-    return create_road(get_location_road(), get_in_ocean_str())
+def get_in_mer_road() -> RoadUnit:
+    return create_road(get_location_road(), get_in_mer_str())
 
 
 def get_on_land_road() -> RoadUnit:
@@ -277,10 +277,10 @@ def get_example_yao_voice_with_3_healers():
 #     yao_voice0 = get_example_yao_voice_with_3_healers()
 #     yao_voice0.del_item_obj(run_road())
 #     yao_voice0.set_l1_item(itemunit_shop(get_location_str()))
-#     yao_voice0.set_item(itemunit_shop(get_in_ocean_str()), get_location_road())
+#     yao_voice0.set_item(itemunit_shop(get_in_mer_str()), get_location_road())
 #     yao_voice0.set_item(itemunit_shop(get_on_land_str()), get_location_road())
 #     yao_voice0.set_l1_item(itemunit_shop(get_swim_str(), pledge=True))
-#     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
+#     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_mer_road())
 #     yao_voice0.settle_bud()
 #     assert yao_voice0._keep_dict.get(get_iowa_road())
 #     assert yao_voice0._keep_dict.get(get_ohio_road())
@@ -350,11 +350,11 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
 
     yao_voice0 = get_example_yao_voice_with_3_healers()
     yao_voice0.set_l1_item(itemunit_shop(get_location_str()))
-    yao_voice0.set_item(itemunit_shop(get_in_ocean_str()), get_location_road())
+    yao_voice0.set_item(itemunit_shop(get_in_mer_str()), get_location_road())
     yao_voice0.set_item(itemunit_shop(get_on_land_str()), get_location_road())
     yao_voice0.set_l1_item(itemunit_shop(get_swim_str(), pledge=True))
-    yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_ocean_road())
-    yao_voice0.set_fact(get_location_road(), get_in_ocean_road())
+    yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_mer_road())
+    yao_voice0.set_fact(get_location_road(), get_in_mer_road())
     print(f"{yao_voice0.get_fact(get_location_road())=}")
     yao_voice0.del_item_obj(run_road())
     assert yao_voice0._keep_dict.get(get_iowa_road())
@@ -413,10 +413,10 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert yao_final.item_exists(clean_road()) is False
     assert yao_final.item_exists(run_road()) is False
     assert yao_final.item_exists(get_swim_road())
-    assert yao_final.item_exists(get_in_ocean_road())
+    assert yao_final.item_exists(get_in_mer_road())
     assert yao_final.item_exists(get_on_land_road()) is False
     assert yao_final.get_fact(get_location_road()) is not None
-    assert yao_final.get_fact(get_location_road()).pick == get_in_ocean_road()
+    assert yao_final.get_fact(get_location_road()).pick == get_in_mer_road()
     assert len(yao_final.get_agenda_dict()) == 1
     assert len(yao_final._itemroot.factunits) == 1
     assert yao_final != yao_voice0
