@@ -11,7 +11,6 @@ from src.f00_instrument.dict_toolbox import (
     get_dict_from_json,
     get_0_if_None,
 )
-from src.f01_road.finance import TimeLinePoint
 from src.f01_road.road import (
     default_wall_if_None,
     get_all_road_ideas,
@@ -23,6 +22,7 @@ from src.f01_road.road import (
     RoadUnit,
     IdeaUnit,
     FaceID,
+    EventID,
 )
 from dataclasses import dataclass
 from copy import copy as copy_copy
@@ -39,7 +39,7 @@ class set_idea_Exception(Exception):
 @dataclass
 class BridgeCore:
     face_id: FaceID = None
-    event_id: TimeLinePoint = None
+    event_id: EventID = None
     otx2inx: dict = None
     unknown_word: str = None
     otx_wall: str = None
@@ -114,7 +114,7 @@ class AcctBridge(BridgeCore):
 
 def acctbridge_shop(
     face_id: FaceID = None,
-    event_id: TimeLinePoint = None,
+    event_id: EventID = None,
     otx_wall: str = None,
     inx_wall: str = None,
     otx2inx: dict = None,
@@ -192,7 +192,7 @@ class GroupBridge(BridgeCore):
 
 def groupbridge_shop(
     face_id: FaceID = None,
-    event_id: TimeLinePoint = None,
+    event_id: EventID = None,
     otx_wall: str = None,
     inx_wall: str = None,
     otx2inx: dict = None,
@@ -270,7 +270,7 @@ class IdeaBridge(BridgeCore):
 
 def ideabridge_shop(
     face_id: FaceID = None,
-    event_id: TimeLinePoint = None,
+    event_id: EventID = None,
     otx_wall: str = None,
     inx_wall: str = None,
     otx2inx: dict = None,
@@ -308,7 +308,7 @@ def get_ideabridge_from_json(x_json: str) -> IdeaBridge:
 @dataclass
 class RoadBridge:
     face_id: FaceID = None
-    event_id: TimeLinePoint = None
+    event_id: EventID = None
     otx2inx: dict = None
     unknown_word: str = None
     otx_wall: str = None
@@ -426,7 +426,7 @@ class RoadBridge:
 
 def roadbridge_shop(
     face_id: FaceID = None,
-    event_id: TimeLinePoint = None,
+    event_id: EventID = None,
     otx_wall: str = None,
     inx_wall: str = None,
     x_ideabridge: IdeaBridge = None,

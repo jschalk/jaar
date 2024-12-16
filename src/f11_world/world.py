@@ -7,6 +7,7 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
     FaceID,
+    EventID,
     FiscalID,
     WorldID,
     TimeLineLabel,
@@ -49,7 +50,7 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     current_time: TimeLinePoint = None
-    events: dict[TimeLinePoint, FaceID] = None
+    events: dict[EventID, FaceID] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _faces_otx_dir: str = None
     _faces_inx_dir: str = None
@@ -57,22 +58,22 @@ class WorldUnit:
     _jungle_dir: str = None
     _zoo_dir: str = None
     _fiscalunits: set[FiscalID] = None
-    _fiscal_events: dict[FiscalID, set[TimeLinePoint]] = None
-    _pidgin_events: dict[FaceID, set[TimeLinePoint]] = None
+    _fiscal_events: dict[FiscalID, set[EventID]] = None
+    _pidgin_events: dict[FaceID, set[EventID]] = None
 
-    def set_event(self, event_id: TimeLinePoint, face_id: FaceID):
+    def set_event(self, event_id: EventID, face_id: FaceID):
         self.events[event_id] = face_id
 
-    def event_exists(self, event_id: TimeLinePoint) -> bool:
+    def event_exists(self, event_id: EventID) -> bool:
         return self.events.get(event_id) != None
 
-    def get_event(self, event_id: TimeLinePoint) -> FaceID:
+    def get_event(self, event_id: EventID) -> FaceID:
         return self.events.get(event_id)
 
-    def legitimate_events(self) -> set[TimeLinePoint]:
+    def legitimate_events(self) -> set[EventID]:
         return set(self.events.keys())
 
-    def _event_dir(self, face_id: FaceID, event_id: TimeLinePoint) -> str:
+    def _event_dir(self, face_id: FaceID, event_id: EventID) -> str:
         face_dir = create_path(self._faces_otx_dir, face_id)
         return create_path(face_dir, event_id)
 

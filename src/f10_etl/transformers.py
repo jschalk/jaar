@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f01_road.finance_tran import TimeLinePoint, FiscalID
-from src.f01_road.road import FaceID
+from src.f01_road.finance_tran import FiscalID
+from src.f01_road.road import FaceID, EventID
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_brick.brick_config import (
@@ -175,13 +175,13 @@ class ZooStagingToZooAggTransformer:
         )
 
 
-def etl_zoo_agg_to_zoo_valid(zoo_dir: str, legitimate_events: set[TimeLinePoint]):
+def etl_zoo_agg_to_zoo_valid(zoo_dir: str, legitimate_events: set[EventID]):
     transformer = ZooAggToZooValidTransformer(zoo_dir, legitimate_events)
     transformer.transform()
 
 
 class ZooAggToZooValidTransformer:
-    def __init__(self, zoo_dir: str, legitimate_events: set[TimeLinePoint]):
+    def __init__(self, zoo_dir: str, legitimate_events: set[EventID]):
         self.zoo_dir = zoo_dir
         self.legitimate_events = legitimate_events
 
@@ -308,38 +308,30 @@ def get_events_dict_from_events_agg_file(zoo_dir) -> dict[int, str]:
 
 
 def zoo_agg_single_to_pidgin_staging(
-    pidgin_category: str, legitimate_events: set[TimeLinePoint], zoo_dir: str
+    pidgin_category: str, legitimate_events: set[EventID], zoo_dir: str
 ):
     x_events = legitimate_events
     transformer = ZooAggToStagingTransformer(zoo_dir, pidgin_category, x_events)
     transformer.transform()
 
 
-def etl_zoo_agg_to_pidgin_acct_staging(
-    legitimate_events: set[TimeLinePoint], zoo_dir: str
-):
+def etl_zoo_agg_to_pidgin_acct_staging(legitimate_events: set[EventID], zoo_dir: str):
     zoo_agg_single_to_pidgin_staging("bridge_acct_id", legitimate_events, zoo_dir)
 
 
-def etl_zoo_agg_to_pidgin_group_staging(
-    legitimate_events: set[TimeLinePoint], zoo_dir: str
-):
+def etl_zoo_agg_to_pidgin_group_staging(legitimate_events: set[EventID], zoo_dir: str):
     zoo_agg_single_to_pidgin_staging("bridge_group_id", legitimate_events, zoo_dir)
 
 
-def etl_zoo_agg_to_pidgin_idea_staging(
-    legitimate_events: set[TimeLinePoint], zoo_dir: str
-):
+def etl_zoo_agg_to_pidgin_idea_staging(legitimate_events: set[EventID], zoo_dir: str):
     zoo_agg_single_to_pidgin_staging("bridge_idea", legitimate_events, zoo_dir)
 
 
-def etl_zoo_agg_to_pidgin_road_staging(
-    legitimate_events: set[TimeLinePoint], zoo_dir: str
-):
+def etl_zoo_agg_to_pidgin_road_staging(legitimate_events: set[EventID], zoo_dir: str):
     zoo_agg_single_to_pidgin_staging("bridge_road", legitimate_events, zoo_dir)
 
 
-def etl_zoo_agg_to_pidgin_staging(legitimate_events: set[TimeLinePoint], zoo_dir: str):
+def etl_zoo_agg_to_pidgin_staging(legitimate_events: set[EventID], zoo_dir: str):
     etl_zoo_agg_to_pidgin_acct_staging(legitimate_events, zoo_dir)
     etl_zoo_agg_to_pidgin_group_staging(legitimate_events, zoo_dir)
     etl_zoo_agg_to_pidgin_idea_staging(legitimate_events, zoo_dir)
@@ -348,7 +340,7 @@ def etl_zoo_agg_to_pidgin_staging(legitimate_events: set[TimeLinePoint], zoo_dir
 
 class ZooAggToStagingTransformer:
     def __init__(
-        self, zoo_dir: str, pidgin_category: str, legitmate_events: set[TimeLinePoint]
+        self, zoo_dir: str, pidgin_category: str, legitmate_events: set[EventID]
     ):
         self.zoo_dir = zoo_dir
         self.legitmate_events = legitmate_events
@@ -573,7 +565,7 @@ def etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(faces_dir: str):
 
 
 def etl_pidgin_jsons_inherit_younger_pidgins(
-    faces_dir: str, pidgin_events: dict[FaceID, set[TimeLinePoint]]
+    faces_dir: str, pidgin_events: dict[FaceID, set[EventID]]
 ):
     old_pidginunit = None
     for face_id, pidgin_event_ids in pidgin_events.items():
@@ -586,9 +578,7 @@ def etl_pidgin_jsons_inherit_younger_pidgins(
             old_pidginunit = new_pidginunit
 
 
-def get_event_pidgin_path(
-    faces_dir: str, face_id: FaceID, pidgin_event_id: TimeLinePoint
-):
+def get_event_pidgin_path(faces_dir: str, face_id: FaceID, pidgin_event_id: EventID):
     face_dir = create_path(faces_dir, face_id)
     event_dir = create_path(face_dir, pidgin_event_id)
     return create_path(event_dir, "pidgin.json")
@@ -621,7 +611,7 @@ def etl_bow_face_bricks_to_bow_event_otx_bricks(faces_dir: str):
             )
 
 
-def get_fiscal_events_by_dirs(faces_dir: str) -> dict[FiscalID, set[TimeLinePoint]]:
+def get_fiscal_events_by_dirs(faces_dir: str) -> dict[FiscalID, set[EventID]]:
     fiscal_events = {}
     for face_id in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id)
@@ -636,7 +626,7 @@ def get_fiscal_events_by_dirs(faces_dir: str) -> dict[FiscalID, set[TimeLinePoin
     return fiscal_events
 
 
-def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[TimeLinePoint]]:
+def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[EventID]]:
     pidgin_events = {}
     for face_id in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id)
@@ -653,6 +643,6 @@ def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[TimeLinePoint]
 
 
 def etl_otx_event_bricks_to_inx_events(
-    faces_otx_dir: str, event_pidgins: dict[FaceID, set[TimeLinePoint]]
+    faces_otx_dir: str, event_pidgins: dict[FaceID, set[EventID]]
 ):
     pass

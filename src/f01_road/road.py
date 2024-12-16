@@ -82,6 +82,10 @@ def get_default_face_id() -> FaceID:
     return FaceID("Face1234")
 
 
+class EventID(int):
+    pass
+
+
 def default_wall_if_None(wall: any = None) -> str:
     if wall != wall:  # float("nan")
         wall = None

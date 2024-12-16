@@ -4,8 +4,7 @@ from src.f00_instrument.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
 )
-from src.f01_road.finance import TimeLinePoint
-from src.f01_road.road import default_wall_if_None, OwnerID
+from src.f01_road.road import default_wall_if_None, OwnerID, EventID
 from src.f08_pidgin.bridge import (
     BridgeCore,
     GroupBridge,
@@ -67,7 +66,7 @@ class PidginUnit:
     Contains a bridgeunit for each translatable type: RoadUnit, AcctID, GroupID...
     """
 
-    event_id: TimeLinePoint = None
+    event_id: EventID = None
     face_id: OwnerID = None
     groupbridge: GroupBridge = None
     acctbridge: AcctBridge = None
@@ -255,7 +254,7 @@ class PidginUnit:
 
 def pidginunit_shop(
     face_id: OwnerID,
-    event_id: TimeLinePoint = None,
+    event_id: EventID = None,
     otx_wall: str = None,
     inx_wall: str = None,
     unknown_word: str = None,
