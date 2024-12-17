@@ -100,19 +100,19 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def zoo_staging_str():
-    return "zoo_staging"
+def fish_staging_str():
+    return "fish_staging"
 
 
-def zoo_agg_str():
-    return "zoo_agg"
+def fish_agg_str():
+    return "fish_agg"
 
 
-def zoo_valid_str():
-    return "zoo_valid"
+def fish_valid_str():
+    return "fish_valid"
 
 
-def get_zoo_staging_grouping_with_all_values_equal_df(
+def get_fish_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, group_by_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
@@ -122,9 +122,9 @@ def get_zoo_staging_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql(zoo_staging_str(), conn, index=False)
+        x_df.to_sql(fish_staging_str(), conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table=zoo_staging_str(),
+            x_table=fish_staging_str(),
             group_by_columns=grouping_columns,
             value_columns=value_columns,
         )
@@ -157,16 +157,16 @@ def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
 
 
 def move_otx_csvs_to_pidgin_inx(face_dir: str):
-    otx_dir = create_path(face_dir, "otx")
-    inx_dir = create_path(face_dir, "inx")
+    bow_dir = create_path(face_dir, "bow")
+    dek_dir = create_path(face_dir, "dek")
     pidgin_filename = "pidgin.json"
     pidginunit_json = open_file(face_dir, pidgin_filename)
     face_pidginunit = get_pidginunit_from_json(pidginunit_json)
-    otx_dir_files = get_dir_file_strs(otx_dir, delete_extensions=False)
-    for x_file_name in otx_dir_files.keys():
-        x_df = open_csv(otx_dir, x_file_name)
+    bow_dir_files = get_dir_file_strs(bow_dir, delete_extensions=False)
+    for x_file_name in bow_dir_files.keys():
+        x_df = open_csv(bow_dir, x_file_name)
         translate_all_columns_dataframe(x_df, face_pidginunit)
-        save_dataframe_to_csv(x_df, inx_dir, x_file_name)
+        save_dataframe_to_csv(x_df, dek_dir, x_file_name)
 
 
 def _get_pidgen_brick_format_filenames() -> set[str]:

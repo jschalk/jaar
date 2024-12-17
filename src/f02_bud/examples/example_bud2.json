@@ -7,10 +7,10 @@
                     "debtit_vote": 1,
                     "group_id": ";Everyone"
                 },
-                ";OceanVista Apt": {
+                ";MerVista Apt": {
                     "credit_vote": 1,
                     "debtit_vote": 1,
-                    "group_id": ";OceanVista Apt"
+                    "group_id": ";MerVista Apt"
                 },
                 "A a ron Jones": {
                     "credit_vote": 1,
@@ -181,10 +181,10 @@
                     "debtit_vote": 1,
                     "group_id": ";Everyone"
                 },
-                ";OceanVista Apt": {
+                ";MerVista Apt": {
                     "credit_vote": 1,
                     "debtit_vote": 1,
-                    "group_id": ";OceanVista Apt"
+                    "group_id": ";MerVista Apt"
                 },
                 "Jacque Chirac": {
                     "credit_vote": 1,
@@ -301,10 +301,10 @@
                     "debtit_vote": 1,
                     "group_id": ";Everyone"
                 },
-                ";OceanVista Apt": {
+                ";MerVista Apt": {
                     "credit_vote": 1,
                     "debtit_vote": 1,
-                    "group_id": ";OceanVista Apt"
+                    "group_id": ";MerVista Apt"
                 },
                 "Norberto": {
                     "credit_vote": 1,
@@ -2538,8 +2538,8 @@
                         "_label": "Housing",
                         "_uid": 180,
                         "awardlinks": {
-                            ";OceanVista Apt": {
-                                "awardee_id": ";OceanVista Apt",
+                            ";MerVista Apt": {
+                                "awardee_id": ";MerVista Apt",
                                 "give_force": 1.0,
                                 "take_force": 1
                             }

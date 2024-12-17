@@ -15,7 +15,7 @@ from src.f09_brick.pandas_tool import (
     split_excel_into_dirs,
     sheet_exists,
     _get_pidgen_brick_format_filenames,
-    get_zoo_staging_grouping_with_all_values_equal_df,
+    get_fish_staging_grouping_with_all_values_equal_df,
     translate_all_columns_dataframe,
 )
 from src.f09_brick.pidgin_toolbox import init_pidginunit_from_dir
@@ -30,6 +30,7 @@ from src.f10_etl.pidgin_agg import (
 )
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
+from functools import reduce as functools_reduce
 
 
 class not_given_pidgin_category_Exception(Exception):
@@ -97,23 +98,23 @@ def get_inx_obj(jaar_type, x_row) -> str:
     return x_row[JAAR_TYPES[jaar_type]["inx_obj"]]
 
 
-def etl_jungle_to_zoo_staging(jungle_dir: str, zoo_dir: str):
-    transformer = JungleToZooTransformer(jungle_dir, zoo_dir)
+def etl_ocean_to_fish_staging(ocean_dir: str, fish_dir: str):
+    transformer = OceanToFishTransformer(ocean_dir, fish_dir)
     transformer.transform()
 
 
-class JungleToZooTransformer:
-    def __init__(self, jungle_dir: str, zoo_dir: str):
-        self.jungle_dir = jungle_dir
-        self.zoo_dir = zoo_dir
+class OceanToFishTransformer:
+    def __init__(self, ocean_dir: str, fish_dir: str):
+        self.ocean_dir = ocean_dir
+        self.fish_dir = fish_dir
 
     def transform(self):
-        for brick_number, dfs in self._group_jungle_data().items():
-            self._save_to_zoo_staging(brick_number, dfs)
+        for brick_number, dfs in self._group_ocean_data().items():
+            self._save_to_fish_staging(brick_number, dfs)
 
-    def _group_jungle_data(self):
+    def _group_ocean_data(self):
         grouped_data = {}
-        for ref in get_all_brick_dataframes(self.jungle_dir):
+        for ref in get_all_brick_dataframes(self.ocean_dir):
             df = self._read_and_tag_dataframe(ref)
             grouped_data.setdefault(ref.brick_number, []).append(df)
         return grouped_data
@@ -126,10 +127,10 @@ class JungleToZooTransformer:
         df["sheet_name"] = ref.sheet_name
         return df
 
-    def _save_to_zoo_staging(self, brick_number: str, dfs: list):
+    def _save_to_fish_staging(self, brick_number: str, dfs: list):
         final_df = pandas_concat(dfs)
-        zoo_path = create_path(self.zoo_dir, f"{brick_number}.xlsx")
-        upsert_sheet(zoo_path, "zoo_staging", final_df)
+        fish_path = create_path(self.fish_dir, f"{brick_number}.xlsx")
+        upsert_sheet(fish_path, "fish_staging", final_df)
 
 
 def get_existing_excel_brick_file_refs(x_dir: str) -> list[BrickFileRef]:
@@ -145,85 +146,85 @@ def get_existing_excel_brick_file_refs(x_dir: str) -> list[BrickFileRef]:
     return existing_excel_brick_filepaths
 
 
-def etl_zoo_staging_to_zoo_agg(zoo_dir):
-    transformer = ZooStagingToZooAggTransformer(zoo_dir)
+def etl_fish_staging_to_fish_agg(fish_dir):
+    transformer = FishStagingToFishAggTransformer(fish_dir)
     transformer.transform()
 
 
-class ZooStagingToZooAggTransformer:
-    def __init__(self, zoo_dir: str):
-        self.zoo_dir = zoo_dir
+class FishStagingToFishAggTransformer:
+    def __init__(self, fish_dir: str):
+        self.fish_dir = fish_dir
 
     def transform(self):
-        for br_ref in get_existing_excel_brick_file_refs(self.zoo_dir):
-            zoo_brick_path = create_path(br_ref.file_dir, br_ref.file_name)
-            zoo_staging_df = pandas_read_excel(zoo_brick_path, "zoo_staging")
-            otx_df = self._group_by_brick_columns(zoo_staging_df, br_ref.brick_number)
-            upsert_sheet(zoo_brick_path, "zoo_agg", otx_df)
+        for br_ref in get_existing_excel_brick_file_refs(self.fish_dir):
+            fish_brick_path = create_path(br_ref.file_dir, br_ref.file_name)
+            fish_staging_df = pandas_read_excel(fish_brick_path, "fish_staging")
+            otx_df = self._group_by_brick_columns(fish_staging_df, br_ref.brick_number)
+            upsert_sheet(fish_brick_path, "fish_agg", otx_df)
 
     def _group_by_brick_columns(
-        self, zoo_staging_df: DataFrame, brick_number: str
+        self, fish_staging_df: DataFrame, brick_number: str
     ) -> DataFrame:
         brick_filename = get_brick_format_filename(brick_number)
         brickref = get_brickref_obj(brick_filename)
         required_columns = brickref.get_otx_keys_list()
         brick_columns_set = set(brickref._attributes.keys())
         brick_columns_list = get_sorting_columns(brick_columns_set)
-        zoo_staging_df = zoo_staging_df[brick_columns_list]
-        return get_zoo_staging_grouping_with_all_values_equal_df(
-            zoo_staging_df, required_columns
+        fish_staging_df = fish_staging_df[brick_columns_list]
+        return get_fish_staging_grouping_with_all_values_equal_df(
+            fish_staging_df, required_columns
         )
 
 
-def etl_zoo_agg_to_zoo_valid(zoo_dir: str, legitimate_events: set[EventID]):
-    transformer = ZooAggToZooValidTransformer(zoo_dir, legitimate_events)
+def etl_fish_agg_to_fish_valid(fish_dir: str, legitimate_events: set[EventID]):
+    transformer = FishAggToFishValidTransformer(fish_dir, legitimate_events)
     transformer.transform()
 
 
-class ZooAggToZooValidTransformer:
-    def __init__(self, zoo_dir: str, legitimate_events: set[EventID]):
-        self.zoo_dir = zoo_dir
+class FishAggToFishValidTransformer:
+    def __init__(self, fish_dir: str, legitimate_events: set[EventID]):
+        self.fish_dir = fish_dir
         self.legitimate_events = legitimate_events
 
     def transform(self):
-        for br_ref in get_existing_excel_brick_file_refs(self.zoo_dir):
-            zoo_brick_path = create_path(br_ref.file_dir, br_ref.file_name)
-            zoo_agg = pandas_read_excel(zoo_brick_path, "zoo_agg")
-            zoo_valid_df = zoo_agg[zoo_agg["event_id"].isin(self.legitimate_events)]
-            upsert_sheet(zoo_brick_path, "zoo_valid", zoo_valid_df)
+        for br_ref in get_existing_excel_brick_file_refs(self.fish_dir):
+            fish_brick_path = create_path(br_ref.file_dir, br_ref.file_name)
+            fish_agg = pandas_read_excel(fish_brick_path, "fish_agg")
+            fish_valid_df = fish_agg[fish_agg["event_id"].isin(self.legitimate_events)]
+            upsert_sheet(fish_brick_path, "fish_valid", fish_valid_df)
 
     # def _group_by_brick_columns(
-    #     self, zoo_staging_df: DataFrame, brick_number: str
+    #     self, fish_staging_df: DataFrame, brick_number: str
     # ) -> DataFrame:
     #     brick_filename = get_brick_format_filename(brick_number)
     #     brickref = get_brickref_obj(brick_filename)
     #     required_columns = brickref.get_otx_keys_list()
     #     brick_columns_set = set(brickref._attributes.keys())
     #     brick_columns_list = get_sorting_columns(brick_columns_set)
-    #     zoo_staging_df = zoo_staging_df[brick_columns_list]
-    #     return get_zoo_staging_grouping_with_all_values_equal_df(
-    #         zoo_staging_df, required_columns
+    #     fish_staging_df = fish_staging_df[brick_columns_list]
+    #     return get_fish_staging_grouping_with_all_values_equal_df(
+    #         fish_staging_df, required_columns
     #     )
 
 
-def etl_zoo_agg_to_zoo_events(zoo_dir):
-    transformer = ZooAggToZooEventsTransformer(zoo_dir)
+def etl_fish_agg_to_fish_events(fish_dir):
+    transformer = FishAggToFishEventsTransformer(fish_dir)
     transformer.transform()
 
 
-class ZooAggToZooEventsTransformer:
-    def __init__(self, zoo_dir: str):
-        self.zoo_dir = zoo_dir
+class FishAggToFishEventsTransformer:
+    def __init__(self, fish_dir: str):
+        self.fish_dir = fish_dir
 
     def transform(self):
-        for file_ref in get_existing_excel_brick_file_refs(self.zoo_dir):
-            zoo_brick_path = create_path(self.zoo_dir, file_ref.file_name)
-            zoo_agg_df = pandas_read_excel(zoo_brick_path, "zoo_agg")
-            events_df = self.get_unique_events(zoo_agg_df)
-            upsert_sheet(zoo_brick_path, "zoo_events", events_df)
+        for file_ref in get_existing_excel_brick_file_refs(self.fish_dir):
+            fish_brick_path = create_path(self.fish_dir, file_ref.file_name)
+            fish_agg_df = pandas_read_excel(fish_brick_path, "fish_agg")
+            events_df = self.get_unique_events(fish_agg_df)
+            upsert_sheet(fish_brick_path, "fish_events", events_df)
 
-    def get_unique_events(self, zoo_agg_df: DataFrame) -> DataFrame:
-        events_df = zoo_agg_df[["face_id", "event_id"]].drop_duplicates()
+    def get_unique_events(self, fish_agg_df: DataFrame) -> DataFrame:
+        events_df = fish_agg_df[["face_id", "event_id"]].drop_duplicates()
         events_df["note"] = (
             events_df["event_id"]
             .duplicated(keep=False)
@@ -232,22 +233,22 @@ class ZooAggToZooEventsTransformer:
         return events_df.sort_values(["face_id", "event_id"])
 
 
-def etl_zoo_events_to_events_log(zoo_dir: str):
-    transformer = ZooEventsToEventsLogTransformer(zoo_dir)
+def etl_fish_events_to_events_log(fish_dir: str):
+    transformer = FishEventsToEventsLogTransformer(fish_dir)
     transformer.transform()
 
 
-class ZooEventsToEventsLogTransformer:
-    def __init__(self, zoo_dir: str):
-        self.zoo_dir = zoo_dir
+class FishEventsToEventsLogTransformer:
+    def __init__(self, fish_dir: str):
+        self.fish_dir = fish_dir
 
     def transform(self):
-        sheet_name = "zoo_events"
-        for br_ref in get_existing_excel_brick_file_refs(self.zoo_dir):
-            zoo_brick_path = create_path(self.zoo_dir, br_ref.file_name)
-            otx_events_df = pandas_read_excel(zoo_brick_path, sheet_name)
+        sheet_name = "fish_events"
+        for br_ref in get_existing_excel_brick_file_refs(self.fish_dir):
+            fish_brick_path = create_path(self.fish_dir, br_ref.file_name)
+            otx_events_df = pandas_read_excel(fish_brick_path, sheet_name)
             events_log_df = self.get_event_log_df(
-                otx_events_df, self.zoo_dir, br_ref.file_name
+                otx_events_df, self.fish_dir, br_ref.file_name
             )
             self._save_events_log_file(events_log_df)
 
@@ -256,13 +257,13 @@ class ZooEventsToEventsLogTransformer:
     ) -> DataFrame:
         otx_events_df[["file_dir"]] = x_dir
         otx_events_df[["file_name"]] = x_file_name
-        otx_events_df[["sheet_name"]] = "zoo_events"
+        otx_events_df[["sheet_name"]] = "fish_events"
         cols = ["file_dir", "file_name", "sheet_name", "face_id", "event_id", "note"]
         otx_events_df = otx_events_df[cols]
         return otx_events_df
 
     def _save_events_log_file(self, events_df: DataFrame):
-        events_file_path = create_path(self.zoo_dir, "events.xlsx")
+        events_file_path = create_path(self.fish_dir, "events.xlsx")
         events_log_str = "events_log"
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, events_log_str)
@@ -280,24 +281,24 @@ def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
     return events_agg_df.sort_values(["event_id", "face_id"])
 
 
-def etl_zoo_events_log_to_events_agg(zoo_dir):
-    transformer = EventsLogToEventsAggTransformer(zoo_dir)
+def etl_fish_events_log_to_events_agg(fish_dir):
+    transformer = EventsLogToEventsAggTransformer(fish_dir)
     transformer.transform()
 
 
 class EventsLogToEventsAggTransformer:
-    def __init__(self, zoo_dir: str):
-        self.zoo_dir = zoo_dir
+    def __init__(self, fish_dir: str):
+        self.fish_dir = fish_dir
 
     def transform(self):
-        events_file_path = create_path(self.zoo_dir, "events.xlsx")
+        events_file_path = create_path(self.fish_dir, "events.xlsx")
         events_log_df = pandas_read_excel(events_file_path, "events_log")
         events_agg_df = _create_events_agg_df(events_log_df)
         upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
-def get_events_dict_from_events_agg_file(zoo_dir) -> dict[int, str]:
-    events_file_path = create_path(zoo_dir, "events.xlsx")
+def get_events_dict_from_events_agg_file(fish_dir) -> dict[int, str]:
+    events_file_path = create_path(fish_dir, "events.xlsx")
     events_agg_df = pandas_read_excel(events_file_path, "events_agg")
     x_dict = {}
     for index, event_agg_row in events_agg_df.iterrows():
@@ -307,42 +308,44 @@ def get_events_dict_from_events_agg_file(zoo_dir) -> dict[int, str]:
     return x_dict
 
 
-def zoo_agg_single_to_pidgin_staging(
-    pidgin_category: str, legitimate_events: set[EventID], zoo_dir: str
+def fish_agg_single_to_pidgin_staging(
+    pidgin_category: str, legitimate_events: set[EventID], fish_dir: str
 ):
     x_events = legitimate_events
-    transformer = ZooAggToStagingTransformer(zoo_dir, pidgin_category, x_events)
+    transformer = FishAggToStagingTransformer(fish_dir, pidgin_category, x_events)
     transformer.transform()
 
 
-def etl_zoo_agg_to_pidgin_acct_staging(legitimate_events: set[EventID], zoo_dir: str):
-    zoo_agg_single_to_pidgin_staging("bridge_acct_id", legitimate_events, zoo_dir)
+def etl_fish_agg_to_pidgin_acct_staging(legitimate_events: set[EventID], fish_dir: str):
+    fish_agg_single_to_pidgin_staging("bridge_acct_id", legitimate_events, fish_dir)
 
 
-def etl_zoo_agg_to_pidgin_group_staging(legitimate_events: set[EventID], zoo_dir: str):
-    zoo_agg_single_to_pidgin_staging("bridge_group_id", legitimate_events, zoo_dir)
+def etl_fish_agg_to_pidgin_group_staging(
+    legitimate_events: set[EventID], fish_dir: str
+):
+    fish_agg_single_to_pidgin_staging("bridge_group_id", legitimate_events, fish_dir)
 
 
-def etl_zoo_agg_to_pidgin_idea_staging(legitimate_events: set[EventID], zoo_dir: str):
-    zoo_agg_single_to_pidgin_staging("bridge_idea", legitimate_events, zoo_dir)
+def etl_fish_agg_to_pidgin_idea_staging(legitimate_events: set[EventID], fish_dir: str):
+    fish_agg_single_to_pidgin_staging("bridge_idea", legitimate_events, fish_dir)
 
 
-def etl_zoo_agg_to_pidgin_road_staging(legitimate_events: set[EventID], zoo_dir: str):
-    zoo_agg_single_to_pidgin_staging("bridge_road", legitimate_events, zoo_dir)
+def etl_fish_agg_to_pidgin_road_staging(legitimate_events: set[EventID], fish_dir: str):
+    fish_agg_single_to_pidgin_staging("bridge_road", legitimate_events, fish_dir)
 
 
-def etl_zoo_agg_to_pidgin_staging(legitimate_events: set[EventID], zoo_dir: str):
-    etl_zoo_agg_to_pidgin_acct_staging(legitimate_events, zoo_dir)
-    etl_zoo_agg_to_pidgin_group_staging(legitimate_events, zoo_dir)
-    etl_zoo_agg_to_pidgin_idea_staging(legitimate_events, zoo_dir)
-    etl_zoo_agg_to_pidgin_road_staging(legitimate_events, zoo_dir)
+def etl_fish_agg_to_pidgin_staging(legitimate_events: set[EventID], fish_dir: str):
+    etl_fish_agg_to_pidgin_acct_staging(legitimate_events, fish_dir)
+    etl_fish_agg_to_pidgin_group_staging(legitimate_events, fish_dir)
+    etl_fish_agg_to_pidgin_idea_staging(legitimate_events, fish_dir)
+    etl_fish_agg_to_pidgin_road_staging(legitimate_events, fish_dir)
 
 
-class ZooAggToStagingTransformer:
+class FishAggToStagingTransformer:
     def __init__(
-        self, zoo_dir: str, pidgin_category: str, legitmate_events: set[EventID]
+        self, fish_dir: str, pidgin_category: str, legitmate_events: set[EventID]
     ):
-        self.zoo_dir = zoo_dir
+        self.fish_dir = fish_dir
         self.legitmate_events = legitmate_events
         self.pidgin_category = pidgin_category
         self.jaar_type = get_jaar_type(pidgin_category)
@@ -356,26 +359,26 @@ class ZooAggToStagingTransformer:
         pidgin_df = DataFrame(columns=pidgin_columns)
         for brick_number in sorted(category_bricks):
             brick_file_name = f"{brick_number}.xlsx"
-            zoo_brick_path = create_path(self.zoo_dir, brick_file_name)
-            if os_path_exists(zoo_brick_path):
+            fish_brick_path = create_path(self.fish_dir, brick_file_name)
+            if os_path_exists(fish_brick_path):
                 self.insert_staging_rows(
-                    pidgin_df, brick_number, zoo_brick_path, pidgin_columns
+                    pidgin_df, brick_number, fish_brick_path, pidgin_columns
                 )
 
-        pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
+        pidgin_file_path = create_path(self.fish_dir, "pidgin.xlsx")
         upsert_sheet(pidgin_file_path, get_sheet_stage_name(self.jaar_type), pidgin_df)
 
     def insert_staging_rows(
         self,
         stage_df: DataFrame,
         brick_number: str,
-        zoo_brick_path: str,
+        fish_brick_path: str,
         df_columns: list[str],
     ):
-        zoo_agg_df = pandas_read_excel(zoo_brick_path, sheet_name="zoo_agg")
-        df_missing_cols = set(df_columns).difference(zoo_agg_df.columns)
+        fish_agg_df = pandas_read_excel(fish_brick_path, sheet_name="fish_agg")
+        df_missing_cols = set(df_columns).difference(fish_agg_df.columns)
 
-        for index, x_row in zoo_agg_df.iterrows():
+        for index, x_row in fish_agg_df.iterrows():
             event_id = x_row["event_id"]
             if event_id in self.legitmate_events:
                 face_id = x_row["face_id"]
@@ -412,39 +415,39 @@ class ZooAggToStagingTransformer:
         return None
 
 
-def etl_pidgin_acct_staging_to_acct_agg(zoo_dir: str):
-    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_acct_id")
+def etl_pidgin_acct_staging_to_acct_agg(fish_dir: str):
+    etl_pidgin_single_staging_to_agg(fish_dir, "bridge_acct_id")
 
 
-def etl_pidgin_group_staging_to_group_agg(zoo_dir: str):
-    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_group_id")
+def etl_pidgin_group_staging_to_group_agg(fish_dir: str):
+    etl_pidgin_single_staging_to_agg(fish_dir, "bridge_group_id")
 
 
-def etl_pidgin_road_staging_to_road_agg(zoo_dir: str):
-    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_road")
+def etl_pidgin_road_staging_to_road_agg(fish_dir: str):
+    etl_pidgin_single_staging_to_agg(fish_dir, "bridge_road")
 
 
-def etl_pidgin_idea_staging_to_idea_agg(zoo_dir: str):
-    etl_pidgin_single_staging_to_agg(zoo_dir, "bridge_idea")
+def etl_pidgin_idea_staging_to_idea_agg(fish_dir: str):
+    etl_pidgin_single_staging_to_agg(fish_dir, "bridge_idea")
 
 
-def etl_pidgin_single_staging_to_agg(zoo_dir: str, bridge_category: str):
-    transformer = PidginStagingToAggTransformer(zoo_dir, bridge_category)
+def etl_pidgin_single_staging_to_agg(fish_dir: str, bridge_category: str):
+    transformer = PidginStagingToAggTransformer(fish_dir, bridge_category)
     transformer.transform()
 
 
-def etl_zoo_pidgin_staging_to_agg(zoo_dir):
-    etl_pidgin_acct_staging_to_acct_agg(zoo_dir)
-    etl_pidgin_group_staging_to_group_agg(zoo_dir)
-    etl_pidgin_road_staging_to_road_agg(zoo_dir)
-    etl_pidgin_idea_staging_to_idea_agg(zoo_dir)
+def etl_fish_pidgin_staging_to_agg(fish_dir):
+    etl_pidgin_acct_staging_to_acct_agg(fish_dir)
+    etl_pidgin_group_staging_to_group_agg(fish_dir)
+    etl_pidgin_road_staging_to_road_agg(fish_dir)
+    etl_pidgin_idea_staging_to_idea_agg(fish_dir)
 
 
 class PidginStagingToAggTransformer:
-    def __init__(self, zoo_dir: str, pidgin_category: str):
-        self.zoo_dir = zoo_dir
+    def __init__(self, fish_dir: str, pidgin_category: str):
+        self.fish_dir = fish_dir
         self.pidgin_category = pidgin_category
-        self.file_path = create_path(self.zoo_dir, "pidgin.xlsx")
+        self.file_path = create_path(self.fish_dir, "pidgin.xlsx")
         self.jaar_type = get_jaar_type(self.pidgin_category)
 
     def transform(self):
@@ -456,7 +459,7 @@ class PidginStagingToAggTransformer:
         upsert_sheet(self.file_path, get_sheet_agg_name(self.jaar_type), pidgin_agg_df)
 
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
-        pidgin_file_path = create_path(self.zoo_dir, "pidgin.xlsx")
+        pidgin_file_path = create_path(self.fish_dir, "pidgin.xlsx")
         stage_sheet_name = get_sheet_stage_name(self.jaar_type)
         staging_df = pandas_read_excel(pidgin_file_path, sheet_name=stage_sheet_name)
         x_pidginbodybook = self.get_validated_pidginbodybook(staging_df)
@@ -490,8 +493,8 @@ class PidginStagingToAggTransformer:
         return x_pidginheartbook
 
 
-def etl_zoo_pidgin_agg_to_bow_face_dirs(zoo_dir: str, faces_dir: str):
-    agg_pidgin = create_path(zoo_dir, "pidgin.xlsx")
+def etl_fish_pidgin_agg_to_bow_face_dirs(fish_dir: str, faces_dir: str):
+    agg_pidgin = create_path(fish_dir, "pidgin.xlsx")
     for jaar_type in JAAR_TYPES.keys():
         agg_sheet_name = JAAR_TYPES[jaar_type]["agg"]
         if sheet_exists(agg_pidgin, agg_sheet_name):
@@ -538,7 +541,7 @@ def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
             acct_df.to_csv(acct_csv_path, index=False)
 
 
-def _get_all_faces_otx_dir_event_dirs(faces_dir) -> list[str]:
+def _get_all_faces_bow_dir_event_dirs(faces_dir) -> list[str]:
     full_event_dirs = []
     for face_id_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id_dir)
@@ -550,7 +553,7 @@ def _get_all_faces_otx_dir_event_dirs(faces_dir) -> list[str]:
 
 
 def etl_bow_event_pidgins_to_bow_pidgin_csv_files(faces_dir: str):
-    for event_pidgin_dir in _get_all_faces_otx_dir_event_dirs(faces_dir):
+    for event_pidgin_dir in _get_all_faces_bow_dir_event_dirs(faces_dir):
         event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
 
 
@@ -560,7 +563,7 @@ def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
 
 
 def etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(faces_dir: str):
-    for event_pidgin_dir in _get_all_faces_otx_dir_event_dirs(faces_dir):
+    for event_pidgin_dir in _get_all_faces_bow_dir_event_dirs(faces_dir):
         etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
 
 
@@ -584,16 +587,16 @@ def get_event_pidgin_path(faces_dir: str, face_id: FaceID, pidgin_event_id: Even
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_zoo_bricks_to_bow_face_bricks(zoo_dir: str, faces_dir: str):
-    for zoo_br_ref in get_existing_excel_brick_file_refs(zoo_dir):
-        zoo_brick_path = create_path(zoo_dir, zoo_br_ref.file_name)
-        if zoo_br_ref.file_name not in _get_pidgen_brick_format_filenames():
+def etl_fish_bricks_to_bow_face_bricks(fish_dir: str, faces_dir: str):
+    for fish_br_ref in get_existing_excel_brick_file_refs(fish_dir):
+        fish_brick_path = create_path(fish_dir, fish_br_ref.file_name)
+        if fish_br_ref.file_name not in _get_pidgen_brick_format_filenames():
             split_excel_into_dirs(
-                input_file=zoo_brick_path,
+                input_file=fish_brick_path,
                 output_dir=faces_dir,
                 column_name="face_id",
-                file_name=zoo_br_ref.brick_number,
-                sheet_name="zoo_valid",
+                file_name=fish_br_ref.brick_number,
+                sheet_name="fish_valid",
             )
 
 
@@ -607,7 +610,7 @@ def etl_bow_face_bricks_to_bow_event_otx_bricks(faces_dir: str):
                 output_dir=face_dir,
                 column_name="event_id",
                 file_name=face_br_ref.brick_number,
-                sheet_name="zoo_valid",
+                sheet_name="fish_valid",
             )
 
 
@@ -642,7 +645,29 @@ def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[EventID]]:
     return pidgin_events
 
 
-def etl_otx_event_bricks_to_inx_events(
-    faces_otx_dir: str, event_pidgins: dict[FaceID, set[EventID]]
+def get_most_recent_event_id(event_set: set[EventID], max_event_id: EventID) -> EventID:
+    recent_event_ids = [e_id for e_id in event_set if e_id <= max_event_id]
+    return max(recent_event_ids, default=None)
+
+
+def etl_bow_event_bricks_to_inx_events(
+    faces_bow_dir: str, event_pidgins: dict[FaceID, set[EventID]]
 ):
-    pass
+
+    for face_id in get_level1_dirs(faces_bow_dir):
+        face_pidgin_events = event_pidgins.get(face_id)
+        face_dir = create_path(faces_bow_dir, face_id)
+        for event_id in get_level1_dirs(face_dir):
+            event_dir = create_path(face_dir, event_id)
+            pidgin_event_id = get_most_recent_event_id(
+                face_pidgin_events, int(event_id)
+            )
+            pidgin_event_dir = create_path(face_dir, pidgin_event_id)
+            pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
+            x_pidginunit = get_pidginunit_from_json(open_file(pidgin_path))
+            for event_br_ref in get_existing_excel_brick_file_refs(event_dir):
+                event_brick_path = create_path(event_dir, event_br_ref.file_name)
+                print(f"{event_brick_path}")
+                brick_df = pandas_read_excel(event_brick_path, "fish_valid")
+                translate_all_columns_dataframe(brick_df, x_pidginunit)
+                upsert_sheet(event_brick_path, "inx", brick_df)

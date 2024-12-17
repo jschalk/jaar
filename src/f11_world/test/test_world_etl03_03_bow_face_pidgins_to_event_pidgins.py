@@ -54,8 +54,8 @@ def test_WorldUnit_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face
     zia_road_agg_df = DataFrame([z1_road3], columns=road_file_columns)
 
     fizz_world = worldunit_shop("fizz")
-    sue_dir = create_path(fizz_world._faces_otx_dir, sue_str)
-    zia_dir = create_path(fizz_world._faces_otx_dir, zia_str)
+    sue_dir = create_path(fizz_world._faces_bow_dir, sue_str)
+    zia_dir = create_path(fizz_world._faces_bow_dir, zia_str)
     event3_dir = create_path(zia_dir, event3)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(sue_dir, event9)

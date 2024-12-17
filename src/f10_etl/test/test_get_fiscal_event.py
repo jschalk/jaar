@@ -14,9 +14,9 @@ def test_get_fiscal_events_by_dirs_SetsAttr(env_dir_setup_cleanup):
     music23_str = "music23"
     music55_str = "music55"
     x_etl_dir = get_test_etl_dir()
-    x_faces_otx_dir = create_path(x_etl_dir, "faces_otx")
-    sue_dir = create_path(x_faces_otx_dir, sue_str)
-    zia_dir = create_path(x_faces_otx_dir, zia_str)
+    x_faces_bow_dir = create_path(x_etl_dir, "faces_bow")
+    sue_dir = create_path(x_faces_bow_dir, sue_str)
+    zia_dir = create_path(x_faces_bow_dir, zia_str)
     event3_dir = create_path(sue_dir, event3)
     event7_dir = create_path(zia_dir, event7)
     event9_dir = create_path(zia_dir, event9)
@@ -38,7 +38,7 @@ def test_get_fiscal_events_by_dirs_SetsAttr(env_dir_setup_cleanup):
     assert os_path_exists(e9_music55_dir)
 
     # WHEN
-    x_fiscal_events = get_fiscal_events_by_dirs(x_faces_otx_dir)
+    x_fiscal_events = get_fiscal_events_by_dirs(x_faces_bow_dir)
 
     # THEN
     assert x_fiscal_events == {
@@ -54,7 +54,7 @@ def test_get_fiscal_events_by_dirs_SetsAttr(env_dir_setup_cleanup):
     assert os_path_exists(e9_music55_dir) is False
 
     # WHEN
-    x_fiscal_events = get_fiscal_events_by_dirs(x_faces_otx_dir)
+    x_fiscal_events = get_fiscal_events_by_dirs(x_faces_bow_dir)
 
     # THEN
     assert x_fiscal_events == {music23_str: {event3, event7, event9}}

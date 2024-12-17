@@ -13,14 +13,14 @@ from src.f08_pidgin.pidgin_config import (
     otx_idea_str,
     unknown_word_str,
 )
-from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, zoo_agg_str
-from src.f10_etl.transformers import etl_zoo_agg_to_pidgin_idea_staging
+from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, fish_agg_str
+from src.f10_etl.transformers import etl_fish_agg_to_pidgin_idea_staging
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario0_SingleBrick(
+def test_etl_fish_agg_to_pidgin_idea_staging_CreatesFile_Scenario0_SingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -31,8 +31,8 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario0_SingleBrick(
     bob_inx = "Bobito"
     m_str = "music23"
     event7 = 7
-    x_zoo_dir = get_test_etl_dir()
-    br00116_file_path = create_path(x_zoo_dir, "br00116.xlsx")
+    x_fish_dir = get_test_etl_dir()
+    br00116_file_path = create_path(x_fish_dir, "br00116.xlsx")
     br00116_columns = [
         face_id_str(),
         event_id_str(),
@@ -46,12 +46,12 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario0_SingleBrick(
     sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
     br00116_rows = [sue0, sue1]
     br00116_df = DataFrame(br00116_rows, columns=br00116_columns)
-    upsert_sheet(br00116_file_path, zoo_agg_str(), br00116_df)
-    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
+    upsert_sheet(br00116_file_path, fish_agg_str(), br00116_df)
+    pidgin_path = create_path(x_fish_dir, "pidgin.xlsx")
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_zoo_agg_to_pidgin_idea_staging({event7}, x_zoo_dir)
+    etl_fish_agg_to_pidgin_idea_staging({event7}, x_fish_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -81,7 +81,7 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario0_SingleBrick(
     assert get_sheet_names(pidgin_path) == [idea_staging_str]
 
 
-def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBricksFiles(
+def test_etl_fish_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBricksFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -97,8 +97,8 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBricks
     event2 = 2
     event5 = 5
     event7 = 7
-    x_zoo_dir = get_test_etl_dir()
-    br00116_file_path = create_path(x_zoo_dir, "br00116.xlsx")
+    x_fish_dir = get_test_etl_dir()
+    br00116_file_path = create_path(x_fish_dir, "br00116.xlsx")
     br00116_columns = [
         face_id_str(),
         event_id_str(),
@@ -108,7 +108,7 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBricks
         otx_idea_str(),
         inx_idea_str(),
     ]
-    br00044_file_path = create_path(x_zoo_dir, "br00044.xlsx")
+    br00044_file_path = create_path(x_fish_dir, "br00044.xlsx")
     br00044_columns = [
         face_id_str(),
         event_id_str(),
@@ -125,16 +125,16 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBricks
     yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
     br00116_rows = [sue0, sue1]
     br00116_df = DataFrame(br00116_rows, columns=br00116_columns)
-    upsert_sheet(br00116_file_path, zoo_agg_str(), br00116_df)
+    upsert_sheet(br00116_file_path, fish_agg_str(), br00116_df)
     br00044_rows = [sue2, sue3, yao1]
     br00044_df = DataFrame(br00044_rows, columns=br00044_columns)
-    upsert_sheet(br00044_file_path, zoo_agg_str(), br00044_df)
-    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
+    upsert_sheet(br00044_file_path, fish_agg_str(), br00044_df)
+    pidgin_path = create_path(x_fish_dir, "pidgin.xlsx")
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
     legitimate_events = {event1, event2, event5, event7}
-    etl_zoo_agg_to_pidgin_idea_staging(legitimate_events, x_zoo_dir)
+    etl_fish_agg_to_pidgin_idea_staging(legitimate_events, x_fish_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -169,7 +169,7 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBricks
     assert get_sheet_names(pidgin_path) == [idea_staging_str]
 
 
-def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_etl_fish_agg_to_pidgin_idea_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -184,8 +184,8 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario2_WorldUnit_even
     event1 = 1
     event2 = 2
     event5 = 5
-    x_zoo_dir = get_test_etl_dir()
-    br00116_file_path = create_path(x_zoo_dir, "br00116.xlsx")
+    x_fish_dir = get_test_etl_dir()
+    br00116_file_path = create_path(x_fish_dir, "br00116.xlsx")
     br00116_columns = [
         face_id_str(),
         event_id_str(),
@@ -195,7 +195,7 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario2_WorldUnit_even
         otx_idea_str(),
         inx_idea_str(),
     ]
-    br00044_file_path = create_path(x_zoo_dir, "br00044.xlsx")
+    br00044_file_path = create_path(x_fish_dir, "br00044.xlsx")
     br00044_columns = [
         face_id_str(),
         event_id_str(),
@@ -212,16 +212,16 @@ def test_etl_zoo_agg_to_pidgin_idea_staging_CreatesFile_Scenario2_WorldUnit_even
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00116_rows = [sue0, sue1]
     br00116_df = DataFrame(br00116_rows, columns=br00116_columns)
-    upsert_sheet(br00116_file_path, zoo_agg_str(), br00116_df)
+    upsert_sheet(br00116_file_path, fish_agg_str(), br00116_df)
     br00044_rows = [sue2, sue3, yao1]
     br00044_df = DataFrame(br00044_rows, columns=br00044_columns)
-    upsert_sheet(br00044_file_path, zoo_agg_str(), br00044_df)
-    pidgin_path = create_path(x_zoo_dir, "pidgin.xlsx")
+    upsert_sheet(br00044_file_path, fish_agg_str(), br00044_df)
+    pidgin_path = create_path(x_fish_dir, "pidgin.xlsx")
     legitimate_events = {event2, event5}
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_zoo_agg_to_pidgin_idea_staging(legitimate_events, x_zoo_dir)
+    etl_fish_agg_to_pidgin_idea_staging(legitimate_events, x_fish_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)

@@ -5,18 +5,18 @@ from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import (
     sheet_exists,
     upsert_sheet,
-    zoo_agg_str,
-    zoo_valid_str,
+    fish_agg_str,
+    fish_valid_str,
 )
-from src.f11_world.world import worldunit_shop
-from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
+from src.f10_etl.transformers import etl_fish_agg_to_fish_valid
+from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_zoo_agg_to_zoo_valid_CreatesSheets_Scenario0(
+def test_WorldUnit_fish_agg_to_fish_valid_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -41,33 +41,30 @@ def test_WorldUnit_zoo_agg_to_zoo_valid_CreatesSheets_Scenario0(
     row2 = [sue_str, event1, music23_str, hour7am, minute_420]
     row3 = [yao_str, event3, music23_str, hour7am, minute_420]
     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
-    fizz_world = worldunit_shop("fizz")
-    fizz_world.set_event(event1, sue_str)
-    fizz_world.set_event(event9, yao_str)
+    fish_dir = create_path(get_test_etl_dir(), "fish")
+    fish_file_path = create_path(fish_dir, "br00003.xlsx")
+    fish_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
+    upsert_sheet(fish_file_path, fish_agg_str(), fish_agg_df)
     legitimate_events = {event1, event9}
-    assert fizz_world.legitimate_events() == legitimate_events
-    zoo_file_path = create_path(fizz_world._zoo_dir, "br00003.xlsx")
-    zoo_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
-    upsert_sheet(zoo_file_path, zoo_agg_str(), zoo_agg_df)
-    assert sheet_exists(zoo_file_path, zoo_valid_str()) is False
+    assert sheet_exists(fish_file_path, fish_valid_str()) is False
 
     # WHEN
-    fizz_world.zoo_agg_to_zoo_valid()
+    etl_fish_agg_to_fish_valid(fish_dir, legitimate_events)
 
     # THEN
-    assert sheet_exists(zoo_file_path, zoo_valid_str())
-    gen_zoo_valid_df = pandas_read_excel(zoo_file_path, sheet_name=zoo_valid_str())
-    print(f"{gen_zoo_valid_df.columns=}")
-    example_zoo_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
-    assert len(gen_zoo_valid_df.columns) == len(example_zoo_valid_df.columns)
-    assert list(gen_zoo_valid_df.columns) == list(example_zoo_valid_df.columns)
-    assert len(gen_zoo_valid_df) > 0
-    assert len(gen_zoo_valid_df) == 3
-    assert len(gen_zoo_valid_df) == len(example_zoo_valid_df)
-    pandas_assert_frame_equal(gen_zoo_valid_df, example_zoo_valid_df)
+    assert sheet_exists(fish_file_path, fish_valid_str())
+    gen_fish_valid_df = pandas_read_excel(fish_file_path, sheet_name=fish_valid_str())
+    print(f"{gen_fish_valid_df.columns=}")
+    example_fish_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
+    assert len(gen_fish_valid_df.columns) == len(example_fish_valid_df.columns)
+    assert list(gen_fish_valid_df.columns) == list(example_fish_valid_df.columns)
+    assert len(gen_fish_valid_df) > 0
+    assert len(gen_fish_valid_df) == 3
+    assert len(gen_fish_valid_df) == len(example_fish_valid_df)
+    pandas_assert_frame_equal(gen_fish_valid_df, example_fish_valid_df)
 
 
-# def test_WorldUnit_zoo_agg_to_zoo_valid_CreatesSheets_Scenario1(
+# def test_WorldUnit_fish_agg_to_fish_valid_CreatesSheets_Scenario1(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -83,10 +80,10 @@ def test_WorldUnit_zoo_agg_to_zoo_valid_CreatesSheets_Scenario0(
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_file_name = "fizzbuzz.xlsx"
-#     jungle_dir = create_path(get_test_etl_dir(), "jungle")
-#     zoo_dir = create_path(get_test_etl_dir(), "zoo")
-#     jungle_file_path = create_path(jungle_dir, ex_file_name)
-#     zoo_file_path = create_path(zoo_dir, "br00003.xlsx")
+#     ocean_dir = create_path(get_test_etl_dir(), "ocean")
+#     fish_dir = create_path(get_test_etl_dir(), "fish")
+#     ocean_file_path = create_path(ocean_dir, ex_file_name)
+#     fish_file_path = create_path(fish_dir, "br00003.xlsx")
 #     brick_columns = [
 #         face_id_str(),
 #         event_id_str(),
@@ -101,15 +98,15 @@ def test_WorldUnit_zoo_agg_to_zoo_valid_CreatesSheets_Scenario0(
 #     row4 = [yao_str, event9, music23_str, hour7am, minute_420]
 #     row5 = [bob_str, event3, music23_str, hour7am, minute_420]
 #     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
-#     upsert_sheet(jungle_file_path, "example1_br00003", df1)
-#     etl_jungle_to_zoo_staging(jungle_dir, zoo_dir)
-#     etl_zoo_staging_to_zoo_agg(zoo_dir)
+#     upsert_sheet(ocean_file_path, "example1_br00003", df1)
+#     etl_ocean_to_fish_staging(ocean_dir, fish_dir)
+#     etl_fish_staging_to_fish_agg(fish_dir)
 
 #     # WHEN
-#     etl_zoo_agg_to_zoo_valid(zoo_dir)
+#     etl_fish_agg_to_fish_valid(fish_dir)
 
 #     # THEN
-#     gen_otx_events_df = pandas_read_excel(zoo_file_path, sheet_name="zoo_valid")
+#     gen_otx_events_df = pandas_read_excel(fish_file_path, sheet_name="fish_valid")
 #     print(f"{gen_otx_events_df.columns=}")
 #     events_otx_columns = [face_id_str(), event_id_str(), "note"]
 #     bob_row = [bob_str, event3, ""]

@@ -15,14 +15,14 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
-from src.f10_etl.transformers import etl_zoo_pidgin_agg_to_bow_face_dirs
+from src.f10_etl.transformers import etl_fish_pidgin_agg_to_bow_face_dirs
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
 
 
-def test_etl_zoo_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_ids(
+def test_etl_fish_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_ids(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -52,14 +52,14 @@ def test_etl_zoo_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_ids(
     acct_rows = [acct0, acct1, acct2, acct3]
     e1_acct_agg_df = DataFrame(acct_rows, columns=acct_file_columns)
 
-    zoo_dir = create_path(get_test_etl_dir(), "zoo")
-    agg_pidgin_path = create_path(zoo_dir, "pidgin.xlsx")
+    fish_dir = create_path(get_test_etl_dir(), "fish")
+    agg_pidgin_path = create_path(fish_dir, "pidgin.xlsx")
     upsert_sheet(agg_pidgin_path, acct_agg_str, e1_acct_agg_df)
 
-    faces_dir = create_path(get_test_etl_dir(), "faces_otx")
+    faces_dir = create_path(get_test_etl_dir(), "faces_bow")
 
     # WHEN
-    etl_zoo_pidgin_agg_to_bow_face_dirs(zoo_dir, faces_dir)
+    etl_fish_pidgin_agg_to_bow_face_dirs(fish_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
@@ -82,7 +82,7 @@ def test_etl_zoo_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_ids(
     pandas_testing_assert_frame_equal(gen_zia_acct_df, e1_zia_acct_agg_df)
 
 
-def test_etl_zoo_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
+def test_etl_fish_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -169,17 +169,17 @@ def test_etl_zoo_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
     e1_idea_rows = [e1_idea0, e1_idea1]
     e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
 
-    zoo_dir = create_path(get_test_etl_dir(), "zoo")
-    agg_pidgin_path = create_path(zoo_dir, "pidgin.xlsx")
+    fish_dir = create_path(get_test_etl_dir(), "fish")
+    agg_pidgin_path = create_path(fish_dir, "pidgin.xlsx")
     upsert_sheet(agg_pidgin_path, acct_agg_str, e1_acct_agg_df)
     upsert_sheet(agg_pidgin_path, group_agg_str, e1_group_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
     upsert_sheet(agg_pidgin_path, idea_agg_str, e1_idea_agg_df)
 
-    faces_dir = create_path(get_test_etl_dir(), "faces_otx")
+    faces_dir = create_path(get_test_etl_dir(), "faces_bow")
 
     # WHEN
-    etl_zoo_pidgin_agg_to_bow_face_dirs(zoo_dir, faces_dir)
+    etl_fish_pidgin_agg_to_bow_face_dirs(fish_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
