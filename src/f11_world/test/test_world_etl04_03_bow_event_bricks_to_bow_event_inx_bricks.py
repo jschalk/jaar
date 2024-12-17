@@ -18,7 +18,52 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_bow_event_bricks_to_fish_events_Scenario0_MultpleFaceIDs_CreatesEventInxSheets(
+def test_etl_bow_event_bricks_to_fish_events_Scenario0_NoPidginUnit(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_otx = "Sue"
+    bob_otx = "Bob"
+    yao_otx = "Yao"
+    event3 = 3
+    br00011_columns = [
+        face_id_str(),
+        event_id_str(),
+        fiscal_id_str(),
+        owner_id_str(),
+        acct_id_str(),
+    ]
+    music23_str = "music23"
+    sue0 = [sue_otx, event3, music23_str, bob_otx, bob_otx]
+    sue1 = [sue_otx, event3, music23_str, yao_otx, bob_otx]
+    sue2 = [sue_otx, event3, music23_str, yao_otx, yao_otx]
+    e3_music23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
+    br00011_filename = "br00011.xlsx"
+    fizz_world = worldunit_shop("fizz")
+    fizz_world._pidgin_events = {}
+    sue_bow_dir = create_path(fizz_world._faces_bow_dir, sue_otx)
+    bow_e3_dir = create_path(sue_bow_dir, event3)
+    fish_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
+    print(f"{fish_e3_br00011_path=}")
+    upsert_sheet(fish_e3_br00011_path, fish_valid_str(), e3_music23_df)
+    print(f"{fish_valid_str()=}")
+    inx_str = "inx"
+    assert sheet_exists(fish_e3_br00011_path, inx_str) is False
+
+    # WHEN
+    fizz_world.bow_event_bricks_to_inx_events()
+
+    # THEN
+    assert sheet_exists(fish_e3_br00011_path, inx_str)
+    e3_inx_df = pandas_read_excel(fish_e3_br00011_path, sheet_name=inx_str)
+    sue_i0 = [sue_otx, event3, music23_str, bob_otx, bob_otx]
+    sue_i1 = [sue_otx, event3, music23_str, yao_otx, bob_otx]
+    sue_i2 = [sue_otx, event3, music23_str, yao_otx, yao_otx]
+    example_e3_inx_df = DataFrame([sue_i0, sue_i1, sue_i2], columns=br00011_columns)
+    pandas_assert_frame_equal(e3_inx_df, example_e3_inx_df)
+
+
+def test_etl_bow_event_bricks_to_fish_events_Scenario1_MultpleFaceIDs_CreatesEventInxSheets(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

@@ -148,6 +148,9 @@ def translate_single_column_dataframe(
 
 
 def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
+    if x_pidginunit is None:
+        return None
+
     column_names = set(x_df.columns)
     pidginable_columns = column_names.intersection(pidginable_atom_args())
     for pidginable_column in pidginable_columns:

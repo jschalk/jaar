@@ -653,21 +653,21 @@ def get_most_recent_event_id(event_set: set[EventID], max_event_id: EventID) -> 
 def etl_bow_event_bricks_to_inx_events(
     faces_bow_dir: str, event_pidgins: dict[FaceID, set[EventID]]
 ):
-
     for face_id in get_level1_dirs(faces_bow_dir):
         face_pidgin_events = event_pidgins.get(face_id)
+        if face_pidgin_events is None:
+            face_pidgin_events = set()
         face_dir = create_path(faces_bow_dir, face_id)
         for event_id in get_level1_dirs(face_dir):
+            event_id = int(event_id)
             event_dir = create_path(face_dir, event_id)
-            pidgin_event_id = get_most_recent_event_id(
-                face_pidgin_events, int(event_id)
-            )
-            pidgin_event_dir = create_path(face_dir, pidgin_event_id)
-            pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
-            x_pidginunit = get_pidginunit_from_json(open_file(pidgin_path))
+            pidgin_event_id = get_most_recent_event_id(face_pidgin_events, event_id)
             for event_br_ref in get_existing_excel_brick_file_refs(event_dir):
                 event_brick_path = create_path(event_dir, event_br_ref.file_name)
-                print(f"{event_brick_path}")
                 brick_df = pandas_read_excel(event_brick_path, "fish_valid")
-                translate_all_columns_dataframe(brick_df, x_pidginunit)
+                if pidgin_event_id != None:
+                    pidgin_event_dir = create_path(face_dir, pidgin_event_id)
+                    pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
+                    x_pidginunit = get_pidginunit_from_json(open_file(pidgin_path))
+                    translate_all_columns_dataframe(brick_df, x_pidginunit)
                 upsert_sheet(event_brick_path, "inx", brick_df)
