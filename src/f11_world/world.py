@@ -52,8 +52,8 @@ class WorldUnit:
     current_time: TimeLinePoint = None
     events: dict[EventID, FaceID] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
-    _faces_otx_dir: str = None
-    _faces_inx_dir: str = None
+    _faces_bow_dir: str = None
+    _faces_dek_dir: str = None
     _world_dir: str = None
     _ocean_dir: str = None
     _fish_dir: str = None
@@ -74,14 +74,14 @@ class WorldUnit:
         return set(self.events.keys())
 
     def _event_dir(self, face_id: FaceID, event_id: EventID) -> str:
-        face_dir = create_path(self._faces_otx_dir, face_id)
+        face_dir = create_path(self._faces_bow_dir, face_id)
         return create_path(face_dir, event_id)
 
     def _set_fiscal_events(self):
-        self._fiscal_events = get_fiscal_events_by_dirs(self._faces_otx_dir)
+        self._fiscal_events = get_fiscal_events_by_dirs(self._faces_bow_dir)
 
     def _set_pidgin_events(self):
-        self._pidgin_events = get_pidgin_events_by_dirs(self._faces_otx_dir)
+        self._pidgin_events = get_pidgin_events_by_dirs(self._faces_bow_dir)
 
     def set_ocean_dir(self, x_dir: str):
         self._ocean_dir = x_dir
@@ -89,12 +89,12 @@ class WorldUnit:
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
-        self._faces_otx_dir = create_path(self._world_dir, "faces_otx")
-        self._faces_inx_dir = create_path(self._world_dir, "faces_inx")
+        self._faces_bow_dir = create_path(self._world_dir, "faces_bow")
+        self._faces_dek_dir = create_path(self._world_dir, "faces_dek")
         self._fish_dir = create_path(self._world_dir, "fish")
         set_dir(self._world_dir)
-        set_dir(self._faces_otx_dir)
-        set_dir(self._faces_inx_dir)
+        set_dir(self._faces_bow_dir)
+        set_dir(self._faces_dek_dir)
         set_dir(self._fish_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
@@ -128,28 +128,28 @@ class WorldUnit:
         etl_fish_pidgin_staging_to_agg(self._fish_dir)
 
     def fish_pidgin_agg_to_bow_face_dirs(self):
-        etl_fish_pidgin_agg_to_bow_face_dirs(self._fish_dir, self._faces_otx_dir)
+        etl_fish_pidgin_agg_to_bow_face_dirs(self._fish_dir, self._faces_bow_dir)
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
-            self._faces_otx_dir, self._pidgin_events
+            self._faces_bow_dir, self._pidgin_events
         )
 
     def bow_face_pidgins_to_bow_event_pidgins(self):
-        etl_bow_face_pidgins_to_bow_event_pidgins(self._faces_otx_dir)
+        etl_bow_face_pidgins_to_bow_event_pidgins(self._faces_bow_dir)
 
     def bow_event_pidgins_to_bow_pidgin_csv_files(self):
-        etl_bow_event_pidgins_to_bow_pidgin_csv_files(self._faces_otx_dir)
+        etl_bow_event_pidgins_to_bow_pidgin_csv_files(self._faces_bow_dir)
 
     def bow_event_pidgins_csvs_to_bow_pidgin_jsons(self):
-        etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(self._faces_otx_dir)
+        etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(self._faces_bow_dir)
         self._set_pidgin_events()
 
     def fish_bricks_to_bow_face_bricks(self):
-        etl_fish_bricks_to_bow_face_bricks(self._fish_dir, self._faces_otx_dir)
+        etl_fish_bricks_to_bow_face_bricks(self._fish_dir, self._faces_bow_dir)
 
     def bow_face_bricks_to_bow_event_otx_bricks(self):
-        etl_bow_face_bricks_to_bow_event_otx_bricks(self._faces_otx_dir)
+        etl_bow_face_bricks_to_bow_event_otx_bricks(self._faces_bow_dir)
 
     def get_dict(self) -> dict:
         return {

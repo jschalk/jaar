@@ -56,7 +56,7 @@ def test_etl_fish_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_ids(
     agg_pidgin_path = create_path(fish_dir, "pidgin.xlsx")
     upsert_sheet(agg_pidgin_path, acct_agg_str, e1_acct_agg_df)
 
-    faces_dir = create_path(get_test_etl_dir(), "faces_otx")
+    faces_dir = create_path(get_test_etl_dir(), "faces_bow")
 
     # WHEN
     etl_fish_pidgin_agg_to_bow_face_dirs(fish_dir, faces_dir)
@@ -176,7 +176,7 @@ def test_etl_fish_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
     upsert_sheet(agg_pidgin_path, idea_agg_str, e1_idea_agg_df)
 
-    faces_dir = create_path(get_test_etl_dir(), "faces_otx")
+    faces_dir = create_path(get_test_etl_dir(), "faces_bow")
 
     # WHEN
     etl_fish_pidgin_agg_to_bow_face_dirs(fish_dir, faces_dir)

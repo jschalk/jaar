@@ -40,10 +40,10 @@ def test_etl_bow_face_bricks_to_bow_event_otx_bricks_CreatesFaceBrickSheets_Scen
     example_sue_df = DataFrame([sue0, sue1], columns=brick_columns)
     example_zia_df = DataFrame([zia0, zia1, zia2], columns=brick_columns)
     x_etl_dir = get_test_etl_dir()
-    x_faces_otx_dir = create_path(x_etl_dir, "faces_otx")
+    x_faces_bow_dir = create_path(x_etl_dir, "faces_bow")
     br00003_filename = "br00003.xlsx"
-    sue_dir = create_path(x_faces_otx_dir, sue_str)
-    zia_dir = create_path(x_faces_otx_dir, zia_str)
+    sue_dir = create_path(x_faces_bow_dir, sue_str)
+    zia_dir = create_path(x_faces_bow_dir, zia_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     zia_br00003_filepath = create_path(zia_dir, br00003_filename)
     upsert_sheet(sue_br00003_filepath, fish_valid_str(), example_sue_df)
@@ -60,7 +60,7 @@ def test_etl_bow_face_bricks_to_bow_event_otx_bricks_CreatesFaceBrickSheets_Scen
     assert sheet_exists(event9_br00003_filepath, fish_valid_str()) is False
 
     # WHEN
-    etl_bow_face_bricks_to_bow_event_otx_bricks(x_faces_otx_dir)
+    etl_bow_face_bricks_to_bow_event_otx_bricks(x_faces_bow_dir)
 
     # THEN
     assert sheet_exists(event3_br00003_filepath, fish_valid_str())

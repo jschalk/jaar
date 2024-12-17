@@ -39,7 +39,7 @@ def test_WorldUnit_fish_bricks_to_bow_face_bricks_CreatesOtxSheets_Scenario0_Gro
     br00003_agg_file_path = create_path(fizz_world._fish_dir, "br00003.xlsx")
     upsert_sheet(br00003_agg_file_path, fish_valid_str(), br00003_fish_agg_df)
     assert sheet_exists(br00003_agg_file_path, fish_valid_str())
-    sue_dir = create_path(fizz_world._faces_otx_dir, sue_str)
+    sue_dir = create_path(fizz_world._faces_bow_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, "br00003.xlsx")
     assert sheet_exists(sue_br00003_filepath, fish_valid_str()) is False
 

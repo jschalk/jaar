@@ -46,17 +46,17 @@ def test_etl_fish_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario0_Sin
     br00003_fish_agg_df = DataFrame([row1, row2], columns=brick_columns)
     x_etl_dir = get_test_etl_dir()
     x_fish_dir = create_path(x_etl_dir, "fish")
-    x_faces_otx_dir = create_path(x_etl_dir, "faces_otx")
+    x_faces_bow_dir = create_path(x_etl_dir, "faces_bow")
     br00003_filename = "br00003.xlsx"
     br00003_agg_file_path = create_path(x_fish_dir, br00003_filename)
     upsert_sheet(br00003_agg_file_path, fish_valid_str(), br00003_fish_agg_df)
     assert sheet_exists(br00003_agg_file_path, fish_valid_str())
-    sue_dir = create_path(x_faces_otx_dir, sue_str)
+    sue_dir = create_path(x_faces_bow_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     assert sheet_exists(sue_br00003_filepath, fish_valid_str()) is False
 
     # WHEN
-    etl_fish_bricks_to_bow_face_bricks(x_fish_dir, x_faces_otx_dir)
+    etl_fish_bricks_to_bow_face_bricks(x_fish_dir, x_faces_bow_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, fish_valid_str())
@@ -100,19 +100,19 @@ def test_etl_fish_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario1_Mul
     br00003_fish_agg_df = DataFrame([sue1, sue2, zia3], columns=brick_columns)
     x_etl_dir = get_test_etl_dir()
     x_fish_dir = create_path(x_etl_dir, "fish")
-    x_faces_otx_dir = create_path(x_etl_dir, "faces_otx")
+    x_faces_bow_dir = create_path(x_etl_dir, "faces_bow")
     br00003_filename = "br00003.xlsx"
     br00003_agg_file_path = create_path(x_fish_dir, br00003_filename)
     upsert_sheet(br00003_agg_file_path, fish_valid_str(), br00003_fish_agg_df)
-    sue_dir = create_path(x_faces_otx_dir, sue_str)
-    zia_dir = create_path(x_faces_otx_dir, zia_str)
+    sue_dir = create_path(x_faces_bow_dir, sue_str)
+    zia_dir = create_path(x_faces_bow_dir, zia_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     zia_br00003_filepath = create_path(zia_dir, br00003_filename)
     assert sheet_exists(sue_br00003_filepath, fish_valid_str()) is False
     assert sheet_exists(zia_br00003_filepath, fish_valid_str()) is False
 
     # WHEN
-    etl_fish_bricks_to_bow_face_bricks(x_fish_dir, x_faces_otx_dir)
+    etl_fish_bricks_to_bow_face_bricks(x_fish_dir, x_faces_bow_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, fish_valid_str())
@@ -170,7 +170,7 @@ def test_etl_fish_bricks_to_bow_face_bricks_Scenario2_PidginCategoryBricksAreNot
 
     x_etl_dir = get_test_etl_dir()
     x_fish_dir = create_path(x_etl_dir, "fish")
-    x_faces_otx_dir = create_path(x_etl_dir, "faces_otx")
+    x_faces_bow_dir = create_path(x_etl_dir, "faces_bow")
     br00003_filename = "br00003.xlsx"
     br00043_filename = "br00043.xlsx"
     br00003_agg_file_path = create_path(x_fish_dir, br00003_filename)
@@ -180,14 +180,14 @@ def test_etl_fish_bricks_to_bow_face_bricks_Scenario2_PidginCategoryBricksAreNot
     assert sheet_exists(br00003_agg_file_path, fish_valid_str())
     assert sheet_exists(br00043_agg_file_path, fish_valid_str())
 
-    sue_dir = create_path(x_faces_otx_dir, sue_str)
+    sue_dir = create_path(x_faces_bow_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     sue_br00043_filepath = create_path(sue_dir, br00043_filename)
     assert sheet_exists(sue_br00003_filepath, fish_valid_str()) is False
     assert sheet_exists(sue_br00043_filepath, fish_valid_str()) is False
 
     # WHEN
-    etl_fish_bricks_to_bow_face_bricks(x_fish_dir, x_faces_otx_dir)
+    etl_fish_bricks_to_bow_face_bricks(x_fish_dir, x_faces_bow_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, fish_valid_str())

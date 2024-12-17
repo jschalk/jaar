@@ -23,8 +23,8 @@ def test_WorldUnit_Exists():
     assert not x_world.current_time
     assert not x_world.timeconversions
     assert not x_world.events
-    assert not x_world._faces_otx_dir
-    assert not x_world._faces_inx_dir
+    assert not x_world._faces_bow_dir
+    assert not x_world._faces_dek_dir
     assert not x_world._world_dir
     assert not x_world._ocean_dir
     assert not x_world._fish_dir
@@ -40,7 +40,7 @@ def test_WorldUnit_set_ocean_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     x_ocean_dir = create_path(x_example_dir, "ocean")
 
     assert fizz_world._world_dir is None
-    assert fizz_world._faces_otx_dir is None
+    assert fizz_world._faces_bow_dir is None
     assert fizz_world._ocean_dir is None
     assert fizz_world._fish_dir is None
     assert os_path_exists(x_ocean_dir) is False
@@ -50,7 +50,7 @@ def test_WorldUnit_set_ocean_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
 
     # THEN
     assert fizz_world._world_dir is None
-    assert fizz_world._faces_otx_dir is None
+    assert fizz_world._faces_bow_dir is None
     assert fizz_world._ocean_dir == x_ocean_dir
     assert fizz_world._fish_dir is None
     assert os_path_exists(x_ocean_dir)
@@ -61,19 +61,19 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     fizz_str = "fizz"
     fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=get_test_worlds_dir())
     x_world_dir = create_path(get_test_worlds_dir(), fizz_str)
-    x_faces_otx_dir = create_path(x_world_dir, "faces_otx")
-    x_faces_inx_dir = create_path(x_world_dir, "faces_inx")
+    x_faces_bow_dir = create_path(x_world_dir, "faces_bow")
+    x_faces_dek_dir = create_path(x_world_dir, "faces_dek")
     x_ocean_dir = create_path(x_world_dir, "ocean")
     x_fish_dir = create_path(x_world_dir, "fish")
 
     assert not fizz_world._world_dir
-    assert not fizz_world._faces_otx_dir
-    assert not fizz_world._faces_inx_dir
+    assert not fizz_world._faces_bow_dir
+    assert not fizz_world._faces_dek_dir
     assert not fizz_world._ocean_dir
     assert not fizz_world._fish_dir
     assert os_path_exists(x_world_dir) is False
-    assert os_path_exists(x_faces_otx_dir) is False
-    assert os_path_exists(x_faces_inx_dir) is False
+    assert os_path_exists(x_faces_bow_dir) is False
+    assert os_path_exists(x_faces_dek_dir) is False
     assert os_path_exists(x_ocean_dir) is False
     assert os_path_exists(x_fish_dir) is False
 
@@ -82,13 +82,13 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
 
     # THEN
     assert fizz_world._world_dir == x_world_dir
-    assert fizz_world._faces_otx_dir == x_faces_otx_dir
-    assert fizz_world._faces_inx_dir == x_faces_inx_dir
+    assert fizz_world._faces_bow_dir == x_faces_bow_dir
+    assert fizz_world._faces_dek_dir == x_faces_dek_dir
     assert not fizz_world._ocean_dir
     assert fizz_world._fish_dir == x_fish_dir
     assert os_path_exists(x_world_dir)
-    assert os_path_exists(x_faces_otx_dir)
-    assert os_path_exists(x_faces_inx_dir)
+    assert os_path_exists(x_faces_bow_dir)
+    assert os_path_exists(x_faces_dek_dir)
     assert os_path_exists(x_ocean_dir) is False
     assert os_path_exists(x_fish_dir)
 
@@ -121,7 +121,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.current_time == world2_current_time
     assert x_world.timeconversions == world2timeconversions
     assert x_world.events == {}
-    assert x_world._faces_otx_dir == create_path(world_dir, "faces_otx")
+    assert x_world._faces_bow_dir == create_path(world_dir, "faces_bow")
     assert x_world._fiscalunits == world2_fiscalunits
     assert x_world._fiscal_events == {}
     assert x_world._pidgin_events == {}
@@ -139,8 +139,8 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world.timeconversions == {}
     assert x_world.events == {}
     assert x_world._ocean_dir == create_path(x_world._world_dir, "ocean")
-    assert x_world._faces_otx_dir == create_path(world_dir, "faces_otx")
-    assert x_world._faces_inx_dir == create_path(world_dir, "faces_inx")
+    assert x_world._faces_bow_dir == create_path(world_dir, "faces_bow")
+    assert x_world._faces_dek_dir == create_path(world_dir, "faces_dek")
     assert x_world._fiscalunits == set()
 
 
@@ -151,8 +151,8 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
 #     bob_str = "Bob"
 #     x_world.add_pidginunit(sue_str)
 #     x_world.add_pidginunit(bob_str)
-#     sue_dir = create_path(x_world._faces_otx_dir, sue_str)
-#     bob_dir = create_path(x_world._faces_otx_dir, bob_str)
+#     sue_dir = create_path(x_world._faces_bow_dir, sue_str)
+#     bob_dir = create_path(x_world._faces_bow_dir, bob_str)
 #     assert os_path_exists(sue_dir) is False
 #     assert os_path_exists(bob_dir) is False
 
@@ -170,9 +170,9 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
 #     sue_str = "Sue"
 #     bob_str = "Bob"
 #     zia_str = "Zia"
-#     save_file(f"{x_world._faces_otx_dir}/{sue_str}", "temp.txt", "")
-#     save_file(f"{x_world._faces_otx_dir}/{bob_str}", "temp.txt", "")
-#     save_file(f"{x_world._faces_otx_dir}/{zia_str}", "temp.txt", "")
+#     save_file(f"{x_world._faces_bow_dir}/{sue_str}", "temp.txt", "")
+#     save_file(f"{x_world._faces_bow_dir}/{bob_str}", "temp.txt", "")
+#     save_file(f"{x_world._faces_bow_dir}/{zia_str}", "temp.txt", "")
 #     assert x_world.pidginunit_exists(sue_str) is False
 #     assert x_world.pidginunit_exists(bob_str) is False
 #     assert x_world.pidginunit_exists(zia_str) is False
@@ -188,7 +188,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
 #     assert x_world.pidgins_empty() is False
 
 #     # WHEN
-#     delete_dir(f"{x_world._faces_otx_dir}/{zia_str}")
+#     delete_dir(f"{x_world._faces_bow_dir}/{zia_str}")
 #     x_world._set_all_pidginunits_from_dirs()
 
 #     # THEN

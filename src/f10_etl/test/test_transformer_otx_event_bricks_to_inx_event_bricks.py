@@ -60,13 +60,13 @@
 #     e9_music23_df = DataFrame([zia1, zia2, zia3], columns=br00011_columns)
 #     br00011_filename = "br00011.xlsx"
 #     x_event_pidgins = {event3: event3, event7: event7, event9: event8}
-#     x_faces_otx_dir = create_path(get_test_etl_dir(), "faces_otx")
-#     sue_otx_dir = create_path(x_faces_otx_dir, sue_otx)
-#     zia_otx_dir = create_path(x_faces_otx_dir, zia_otx)
-#     otx_e3_dir = create_path(sue_otx_dir, event3)
-#     otx_e7_dir = create_path(zia_otx_dir, event7)
-#     otx_e8_dir = create_path(zia_otx_dir, event8)
-#     otx_e9_dir = create_path(zia_otx_dir, event9)
+#     x_faces_bow_dir = create_path(get_test_etl_dir(), "faces_bow")
+#     sue_bow_dir = create_path(x_faces_bow_dir, sue_otx)
+#     zia_bow_dir = create_path(x_faces_bow_dir, zia_otx)
+#     otx_e3_dir = create_path(sue_bow_dir, event3)
+#     otx_e7_dir = create_path(zia_bow_dir, event7)
+#     otx_e8_dir = create_path(zia_bow_dir, event8)
+#     otx_e9_dir = create_path(zia_bow_dir, event9)
 #     fish_e3_br00011_path = create_path(otx_e3_dir, br00011_filename)
 #     fish_e7_br00011_path = create_path(otx_e7_dir, br00011_filename)
 #     fish_e9_br00011_path = create_path(otx_e9_dir, br00011_filename)
@@ -94,13 +94,13 @@
 #     save_file(otx_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
 #     save_file(otx_e8_dir, pidgin_filename(), e9_pidginunit.get_json())
 
-#     x_faces_inx_dir = create_path(get_test_etl_dir(), "faces_otx")
-#     sue_inx_dir = create_path(x_faces_inx_dir, sue_otx)
-#     zia_inx_dir = create_path(x_faces_inx_dir, zia_otx)
-#     otx_e3_dir = create_path(sue_inx_dir, event3)
-#     otx_e7_dir = create_path(zia_inx_dir, event7)
-#     otx_e8_dir = create_path(zia_inx_dir, event8)
-#     otx_e9_dir = create_path(zia_inx_dir, event9)
+#     x_faces_dek_dir = create_path(get_test_etl_dir(), "faces_bow")
+#     sue_dek_dir = create_path(x_faces_dek_dir, sue_otx)
+#     zia_dek_dir = create_path(x_faces_dek_dir, zia_otx)
+#     otx_e3_dir = create_path(sue_dek_dir, event3)
+#     otx_e7_dir = create_path(zia_dek_dir, event7)
+#     otx_e8_dir = create_path(zia_dek_dir, event8)
+#     otx_e9_dir = create_path(zia_dek_dir, event9)
 #     inx_e3_br00011_path = create_path(otx_e3_dir, br00011_filename)
 #     inx_e7_br00011_path = create_path(otx_e7_dir, br00011_filename)
 #     inx_e9_br00011_path = create_path(otx_e9_dir, br00011_filename)
@@ -109,7 +109,7 @@
 #     assert sheet_exists(inx_e9_br00011_path, fish_inx_str) is False
 
 #     # WHEN
-#     etl_otx_event_bricks_to_inx_events(x_faces_otx_dir, x_event_pidgins)
+#     etl_otx_event_bricks_to_inx_events(x_faces_bow_dir, x_event_pidgins)
 
 #     # THEN
 #     assert sheet_exists(inx_e3_br00011_path, fish_inx_str)

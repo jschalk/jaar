@@ -540,7 +540,7 @@ def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
             acct_df.to_csv(acct_csv_path, index=False)
 
 
-def _get_all_faces_otx_dir_event_dirs(faces_dir) -> list[str]:
+def _get_all_faces_bow_dir_event_dirs(faces_dir) -> list[str]:
     full_event_dirs = []
     for face_id_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id_dir)
@@ -552,7 +552,7 @@ def _get_all_faces_otx_dir_event_dirs(faces_dir) -> list[str]:
 
 
 def etl_bow_event_pidgins_to_bow_pidgin_csv_files(faces_dir: str):
-    for event_pidgin_dir in _get_all_faces_otx_dir_event_dirs(faces_dir):
+    for event_pidgin_dir in _get_all_faces_bow_dir_event_dirs(faces_dir):
         event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
 
 
@@ -562,7 +562,7 @@ def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
 
 
 def etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(faces_dir: str):
-    for event_pidgin_dir in _get_all_faces_otx_dir_event_dirs(faces_dir):
+    for event_pidgin_dir in _get_all_faces_bow_dir_event_dirs(faces_dir):
         etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
 
 
@@ -645,6 +645,6 @@ def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[EventID]]:
 
 
 def etl_otx_event_bricks_to_inx_events(
-    faces_otx_dir: str, event_pidgins: dict[FaceID, set[EventID]]
+    faces_bow_dir: str, event_pidgins: dict[FaceID, set[EventID]]
 ):
     pass

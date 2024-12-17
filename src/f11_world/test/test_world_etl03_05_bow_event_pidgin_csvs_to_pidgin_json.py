@@ -57,8 +57,8 @@ def test_WorldUnit_bow_event_pidgins_csvs_to_bow_pidgin_jsons_Scenario0_3Event_r
 "{zia_str}",{event9},"{clean_otx}","{clean_inx}",,,
 """
     fizz_world = worldunit_shop("fizz")
-    bob_dir = create_path(fizz_world._faces_otx_dir, bob_str)
-    zia_dir = create_path(fizz_world._faces_otx_dir, bob_str)
+    bob_dir = create_path(fizz_world._faces_bow_dir, bob_str)
+    zia_dir = create_path(fizz_world._faces_bow_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
     event9_dir = create_path(zia_dir, event9)
@@ -135,8 +135,8 @@ def test_WorldUnit_bow_event_pidgins_csvs_to_bow_pidgin_jsons_Scenario0_3Event_r
 #     assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
 #     assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
 
-#     # bob_dir = create_path(fizz_world._faces_otx_dir, bob_str)
-#     # zia_dir = create_path(fizz_world._faces_otx_dir, zia_str)
+#     # bob_dir = create_path(fizz_world._faces_bow_dir, bob_str)
+#     # zia_dir = create_path(fizz_world._faces_bow_dir, zia_str)
 #     # event3_dir = create_path(bob_dir, event3)
 #     # event7_dir = create_path(bob_dir, event7)
 #     # event9_dir = create_path(zia_dir, event9)
@@ -182,8 +182,8 @@ def test_WorldUnit_set_pidgin_events_SetsAttr(env_dir_setup_cleanup):
     event7 = 7
     event9 = 9
     fizz_world = worldunit_shop("fizz")
-    sue_dir = create_path(fizz_world._faces_otx_dir, sue_str)
-    zia_dir = create_path(fizz_world._faces_otx_dir, zia_str)
+    sue_dir = create_path(fizz_world._faces_bow_dir, sue_str)
+    zia_dir = create_path(fizz_world._faces_bow_dir, zia_str)
     event3_dir = create_path(zia_dir, event3)
     event5_dir = create_path(sue_dir, event5)
     event7_dir = create_path(sue_dir, event7)
@@ -242,8 +242,8 @@ def test_WorldUnit_bow_face_pidgins_to_bow_event_pidgins_SetsAttr_pidgin_events(
 "{zia_str}",{event9},"{clean_otx}","{clean_inx}",,,
 """
     fizz_world = worldunit_shop("fizz")
-    bob_dir = create_path(fizz_world._faces_otx_dir, bob_str)
-    zia_dir = create_path(fizz_world._faces_otx_dir, zia_str)
+    bob_dir = create_path(fizz_world._faces_bow_dir, bob_str)
+    zia_dir = create_path(fizz_world._faces_bow_dir, zia_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
     event9_dir = create_path(zia_dir, event9)

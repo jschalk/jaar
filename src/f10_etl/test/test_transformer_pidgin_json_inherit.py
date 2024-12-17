@@ -20,8 +20,8 @@ def test_etl_pidgin_jsons_inherit_younger_pidgins_Scenario0_TwoPidginUnitFile(
     sue_otx = "Sue"
     sue_inx = "Suzy"
     e3_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
-    x_faces_otx_dir = get_test_etl_dir()
-    bob_dir = create_path(x_faces_otx_dir, bob_str)
+    x_faces_bow_dir = get_test_etl_dir()
+    bob_dir = create_path(x_faces_bow_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
     save_file(event3_dir, pidgin_filename(), e3_pidginunit.get_json())
@@ -36,7 +36,7 @@ def test_etl_pidgin_jsons_inherit_younger_pidgins_Scenario0_TwoPidginUnitFile(
     assert before_e7_pidgin.otx2inx_exists(type_AcctID_str(), sue_otx, sue_inx) is False
 
     # WHEN
-    etl_pidgin_jsons_inherit_younger_pidgins(x_faces_otx_dir, x_pidgin_events)
+    etl_pidgin_jsons_inherit_younger_pidgins(x_faces_bow_dir, x_pidgin_events)
 
     # THEN
     after_e3_pidgin = get_pidginunit_from_json(open_file(e3_json_file_path))
