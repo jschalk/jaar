@@ -31,6 +31,7 @@ from src.f10_etl.transformers import (
     etl_pidgin_jsons_inherit_younger_pidgins,
     etl_fish_bricks_to_bow_face_bricks,
     etl_bow_face_bricks_to_bow_event_otx_bricks,
+    etl_bow_event_bricks_to_inx_events,
     get_fiscal_events_by_dirs,
     get_pidgin_events_by_dirs,
 )
@@ -150,6 +151,9 @@ class WorldUnit:
 
     def bow_face_bricks_to_bow_event_otx_bricks(self):
         etl_bow_face_bricks_to_bow_event_otx_bricks(self._faces_bow_dir)
+
+    def bow_event_bricks_to_inx_events(self):
+        etl_bow_event_bricks_to_inx_events(self._faces_bow_dir, self._pidgin_events)
 
     def get_dict(self) -> dict:
         return {
