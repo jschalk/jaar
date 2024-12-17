@@ -9,7 +9,7 @@
 # )
 # from src.f08_pidgin.pidgin_config import event_id_str, pidgin_filename
 # from src.f08_pidgin.pidgin import pidginunit_shop
-# from src.f09_brick.pandas_tool import upsert_sheet, forge_valid_str, sheet_exists
+# from src.f09_brick.pandas_tool import upsert_sheet, fish_valid_str, sheet_exists
 # from src.f10_etl.transformers import etl_otx_event_bricks_to_inx_events
 # from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 # from pandas.testing import (
@@ -67,16 +67,16 @@
 #     otx_e7_dir = create_path(zia_otx_dir, event7)
 #     otx_e8_dir = create_path(zia_otx_dir, event8)
 #     otx_e9_dir = create_path(zia_otx_dir, event9)
-#     forge_e3_br00011_path = create_path(otx_e3_dir, br00011_filename)
-#     forge_e7_br00011_path = create_path(otx_e7_dir, br00011_filename)
-#     forge_e9_br00011_path = create_path(otx_e9_dir, br00011_filename)
-#     print(f"{forge_e3_br00011_path=}")
-#     print(f"{forge_e7_br00011_path=}")
-#     print(f"{forge_e9_br00011_path=}")
-#     upsert_sheet(forge_e3_br00011_path, forge_valid_str(), e3_music23_df)
-#     upsert_sheet(forge_e7_br00011_path, forge_valid_str(), e7_music23_df)
-#     upsert_sheet(forge_e9_br00011_path, forge_valid_str(), e9_music23_df)
-#     forge_inx_str = "forge_inx"
+#     fish_e3_br00011_path = create_path(otx_e3_dir, br00011_filename)
+#     fish_e7_br00011_path = create_path(otx_e7_dir, br00011_filename)
+#     fish_e9_br00011_path = create_path(otx_e9_dir, br00011_filename)
+#     print(f"{fish_e3_br00011_path=}")
+#     print(f"{fish_e7_br00011_path=}")
+#     print(f"{fish_e9_br00011_path=}")
+#     upsert_sheet(fish_e3_br00011_path, fish_valid_str(), e3_music23_df)
+#     upsert_sheet(fish_e7_br00011_path, fish_valid_str(), e7_music23_df)
+#     upsert_sheet(fish_e9_br00011_path, fish_valid_str(), e9_music23_df)
+#     fish_inx_str = "fish_inx"
 #     e3_pidginunit = pidginunit_shop(sue_otx, event3)
 #     e7_pidginunit = pidginunit_shop(zia_otx, event7)
 #     e9_pidginunit = pidginunit_shop(zia_otx, event9)
@@ -104,20 +104,20 @@
 #     inx_e3_br00011_path = create_path(otx_e3_dir, br00011_filename)
 #     inx_e7_br00011_path = create_path(otx_e7_dir, br00011_filename)
 #     inx_e9_br00011_path = create_path(otx_e9_dir, br00011_filename)
-#     assert sheet_exists(inx_e3_br00011_path, forge_inx_str) is False
-#     assert sheet_exists(inx_e7_br00011_path, forge_inx_str) is False
-#     assert sheet_exists(inx_e9_br00011_path, forge_inx_str) is False
+#     assert sheet_exists(inx_e3_br00011_path, fish_inx_str) is False
+#     assert sheet_exists(inx_e7_br00011_path, fish_inx_str) is False
+#     assert sheet_exists(inx_e9_br00011_path, fish_inx_str) is False
 
 #     # WHEN
 #     etl_otx_event_bricks_to_inx_events(x_faces_otx_dir, x_event_pidgins)
 
 #     # THEN
-#     assert sheet_exists(inx_e3_br00011_path, forge_inx_str)
-#     assert sheet_exists(inx_e7_br00011_path, forge_inx_str)
-#     assert sheet_exists(inx_e9_br00011_path, forge_inx_str)
-#     e3_inx_df = pandas_read_excel(inx_e3_br00011_path, sheet_name=forge_inx_str)
-#     e7_inx_df = pandas_read_excel(inx_e7_br00011_path, sheet_name=forge_inx_str)
-#     e9_inx_df = pandas_read_excel(inx_e9_br00011_path, sheet_name=forge_inx_str)
+#     assert sheet_exists(inx_e3_br00011_path, fish_inx_str)
+#     assert sheet_exists(inx_e7_br00011_path, fish_inx_str)
+#     assert sheet_exists(inx_e9_br00011_path, fish_inx_str)
+#     e3_inx_df = pandas_read_excel(inx_e3_br00011_path, sheet_name=fish_inx_str)
+#     e7_inx_df = pandas_read_excel(inx_e7_br00011_path, sheet_name=fish_inx_str)
+#     e9_inx_df = pandas_read_excel(inx_e9_br00011_path, sheet_name=fish_inx_str)
 #     sue_i0 = [sue_inx, event3, music23_str, bob0_inx, bob0_inx]
 #     sue_i1 = [sue_inx, event3, music23_str, yao0_inx, bob0_inx]
 #     sue_i2 = [sue_inx, event3, music23_str, yao0_inx, yao0_inx]
