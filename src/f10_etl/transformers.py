@@ -679,7 +679,6 @@ def etl_bow_inx_event_bricks_to_dek_faces(faces_bow_dir: str, faces_dek_dir: str
         for event_id in get_level1_dirs(face_dir):
             event_id = int(event_id)
             event_dir = create_path(face_dir, event_id)
-            print(f"{event_dir=} {faces_dek_dir=}")
             for event_br_ref in get_existing_excel_brick_file_refs(event_dir):
                 event_brick_path = create_path(event_dir, event_br_ref.file_name)
                 split_excel_into_dirs(
@@ -689,3 +688,17 @@ def etl_bow_inx_event_bricks_to_dek_faces(faces_bow_dir: str, faces_dek_dir: str
                     file_name=event_br_ref.brick_number,
                     sheet_name="inx",
                 )
+
+
+def etl_dek_face_bricks_to_dek_event_bricks(faces_dek_dir: str):
+    for face_id_dir in get_level1_dirs(faces_dek_dir):
+        face_dir = create_path(faces_dek_dir, face_id_dir)
+        for face_br_ref in get_existing_excel_brick_file_refs(face_dir):
+            face_brick_path = create_path(face_dir, face_br_ref.file_name)
+            split_excel_into_dirs(
+                input_file=face_brick_path,
+                output_dir=face_dir,
+                column_name="event_id",
+                file_name=face_br_ref.brick_number,
+                sheet_name="inx",
+            )

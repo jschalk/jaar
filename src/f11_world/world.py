@@ -33,6 +33,7 @@ from src.f10_etl.transformers import (
     etl_bow_face_bricks_to_bow_event_otx_bricks,
     etl_bow_event_bricks_to_inx_events,
     etl_bow_inx_event_bricks_to_dek_faces,
+    etl_dek_face_bricks_to_dek_event_bricks,
     get_fiscal_events_by_dirs,
     get_pidgin_events_by_dirs,
 )
@@ -158,6 +159,9 @@ class WorldUnit:
 
     def bow_inx_event_bricks_to_dek_faces(self):
         etl_bow_inx_event_bricks_to_dek_faces(self._faces_bow_dir, self._faces_dek_dir)
+
+    def dek_face_bricks_to_dek_event_bricks(self):
+        etl_dek_face_bricks_to_dek_event_bricks(self._faces_dek_dir)
 
     def get_dict(self) -> dict:
         return {
