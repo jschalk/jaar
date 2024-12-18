@@ -671,3 +671,21 @@ def etl_bow_event_bricks_to_inx_events(
                     x_pidginunit = get_pidginunit_from_json(open_file(pidgin_path))
                     translate_all_columns_dataframe(brick_df, x_pidginunit)
                 upsert_sheet(event_brick_path, "inx", brick_df)
+
+
+def etl_bow_inx_event_bricks_to_dek_faces(faces_bow_dir: str, faces_dek_dir: str):
+    for face_id in get_level1_dirs(faces_bow_dir):
+        face_dir = create_path(faces_bow_dir, face_id)
+        for event_id in get_level1_dirs(face_dir):
+            event_id = int(event_id)
+            event_dir = create_path(face_dir, event_id)
+            print(f"{event_dir=} {faces_dek_dir=}")
+            for event_br_ref in get_existing_excel_brick_file_refs(event_dir):
+                event_brick_path = create_path(event_dir, event_br_ref.file_name)
+                split_excel_into_dirs(
+                    input_file=event_brick_path,
+                    output_dir=faces_dek_dir,
+                    column_name="face_id",
+                    file_name=event_br_ref.brick_number,
+                    sheet_name="inx",
+                )
