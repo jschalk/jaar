@@ -31,7 +31,7 @@ def test_get_most_recent_event_id_ReturnsObj():
     assert get_most_recent_event_id({0, 1, 7}, 5) == 1
 
 
-def test_etl_bow_event_bricks_to_fish_events_Scenario0_NoPidginUnit():
+def test_etl_bow_event_bricks_to_inx_events_Scenario0_NoPidginUnit():
     # ESTABLISH
     sue_otx = "Sue"
     bob_otx = "Bob"
@@ -74,7 +74,7 @@ def test_etl_bow_event_bricks_to_fish_events_Scenario0_NoPidginUnit():
     pandas_assert_frame_equal(e3_inx_df, example_e3_inx_df)
 
 
-def test_etl_bow_event_bricks_to_fish_events_Scenario1_MultpleFaceIDs_CreatesEventInxSheets(
+def test_etl_bow_event_bricks_to_inx_events_Scenario1_MultpleFaceIDs_CreatesEventInxSheets(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
