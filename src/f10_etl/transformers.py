@@ -702,3 +702,20 @@ def etl_dek_face_bricks_to_dek_event_bricks(faces_dek_dir: str):
                 file_name=face_br_ref.brick_number,
                 sheet_name="inx",
             )
+
+
+def etl_dek_event_bricks_to_fiscal_bricks(faces_dek_dir: str):
+    for face_id in get_level1_dirs(faces_dek_dir):
+        face_dir = create_path(faces_dek_dir, face_id)
+        for event_id in get_level1_dirs(face_dir):
+            event_id = int(event_id)
+            event_dir = create_path(face_dir, event_id)
+            for event_br_ref in get_existing_excel_brick_file_refs(event_dir):
+                event_brick_path = create_path(event_dir, event_br_ref.file_name)
+                split_excel_into_dirs(
+                    input_file=event_brick_path,
+                    output_dir=event_dir,
+                    column_name="fiscal_id",
+                    file_name=event_br_ref.brick_number,
+                    sheet_name="inx",
+                )

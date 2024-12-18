@@ -29,13 +29,14 @@ from src.f10_etl.transformers import (
     etl_bow_event_pidgins_to_bow_pidgin_csv_files,
     etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
+    get_fiscal_events_by_dirs,
+    get_pidgin_events_by_dirs,
     etl_fish_bricks_to_bow_face_bricks,
     etl_bow_face_bricks_to_bow_event_otx_bricks,
     etl_bow_event_bricks_to_inx_events,
     etl_bow_inx_event_bricks_to_dek_faces,
     etl_dek_face_bricks_to_dek_event_bricks,
-    get_fiscal_events_by_dirs,
-    get_pidgin_events_by_dirs,
+    etl_dek_event_bricks_to_fiscal_bricks,
 )
 from dataclasses import dataclass
 
@@ -162,6 +163,9 @@ class WorldUnit:
 
     def dek_face_bricks_to_dek_event_bricks(self):
         etl_dek_face_bricks_to_dek_event_bricks(self._faces_dek_dir)
+
+    def dek_event_bricks_to_fiscal_bricks(self):
+        etl_dek_event_bricks_to_fiscal_bricks(self._faces_dek_dir)
 
     def get_dict(self) -> dict:
         return {
