@@ -6,7 +6,7 @@ from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_
 from pandas import DataFrame
 
 
-def test_ocean_to_fish_staging_PidginsAll(env_dir_setup_cleanup):
+def test_ocean_to_boat_staging_PidginsAll(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_test_worlds_dir()
     x_dir = create_path(env_dir, "examples_folder")

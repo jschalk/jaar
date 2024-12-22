@@ -9,7 +9,7 @@ from src.f04_gift.atom_config import (
 )
 from src.f08_pidgin.pidgin_config import event_id_str, pidgin_filename
 from src.f08_pidgin.pidgin import pidginunit_shop
-from src.f09_brick.pandas_tool import upsert_sheet, fish_valid_str, sheet_exists
+from src.f09_brick.pandas_tool import upsert_sheet, boat_valid_str, sheet_exists
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas.testing import (
@@ -18,7 +18,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_bow_event_bricks_to_fish_events_Scenario0_NoPidginUnit(
+def test_etl_bow_event_bricks_to_boat_events_Scenario0_NoPidginUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -43,19 +43,19 @@ def test_etl_bow_event_bricks_to_fish_events_Scenario0_NoPidginUnit(
     fizz_world._pidgin_events = {}
     sue_bow_dir = create_path(fizz_world._faces_bow_dir, sue_otx)
     bow_e3_dir = create_path(sue_bow_dir, event3)
-    fish_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
-    print(f"{fish_e3_br00011_path=}")
-    upsert_sheet(fish_e3_br00011_path, fish_valid_str(), e3_music23_df)
-    print(f"{fish_valid_str()=}")
+    boat_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
+    print(f"{boat_e3_br00011_path=}")
+    upsert_sheet(boat_e3_br00011_path, boat_valid_str(), e3_music23_df)
+    print(f"{boat_valid_str()=}")
     inx_str = "inx"
-    assert sheet_exists(fish_e3_br00011_path, inx_str) is False
+    assert sheet_exists(boat_e3_br00011_path, inx_str) is False
 
     # WHEN
     fizz_world.bow_event_bricks_to_inx_events()
 
     # THEN
-    assert sheet_exists(fish_e3_br00011_path, inx_str)
-    e3_inx_df = pandas_read_excel(fish_e3_br00011_path, sheet_name=inx_str)
+    assert sheet_exists(boat_e3_br00011_path, inx_str)
+    e3_inx_df = pandas_read_excel(boat_e3_br00011_path, sheet_name=inx_str)
     sue_i0 = [sue_otx, event3, music23_str, bob_otx, bob_otx]
     sue_i1 = [sue_otx, event3, music23_str, yao_otx, bob_otx]
     sue_i2 = [sue_otx, event3, music23_str, yao_otx, yao_otx]
@@ -63,7 +63,7 @@ def test_etl_bow_event_bricks_to_fish_events_Scenario0_NoPidginUnit(
     pandas_assert_frame_equal(e3_inx_df, example_e3_inx_df)
 
 
-def test_etl_bow_event_bricks_to_fish_events_Scenario1_MultpleFaceIDs_CreatesEventInxSheets(
+def test_etl_bow_event_bricks_to_boat_events_Scenario1_MultpleFaceIDs_CreatesEventInxSheets(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -110,16 +110,16 @@ def test_etl_bow_event_bricks_to_fish_events_Scenario1_MultpleFaceIDs_CreatesEve
     bow_e3_dir = create_path(sue_bow_dir, event3)
     bow_e7_dir = create_path(zia_bow_dir, event7)
     bow_e9_dir = create_path(zia_bow_dir, event9)
-    fish_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
-    fish_e7_br00011_path = create_path(bow_e7_dir, br00011_filename)
-    fish_e9_br00011_path = create_path(bow_e9_dir, br00011_filename)
-    print(f"{fish_e3_br00011_path=}")
-    print(f"{fish_e7_br00011_path=}")
-    print(f"{fish_e9_br00011_path=}")
-    upsert_sheet(fish_e3_br00011_path, fish_valid_str(), e3_music23_df)
-    upsert_sheet(fish_e7_br00011_path, fish_valid_str(), e7_music23_df)
-    upsert_sheet(fish_e9_br00011_path, fish_valid_str(), e9_music23_df)
-    print(f"{fish_valid_str()=}")
+    boat_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
+    boat_e7_br00011_path = create_path(bow_e7_dir, br00011_filename)
+    boat_e9_br00011_path = create_path(bow_e9_dir, br00011_filename)
+    print(f"{boat_e3_br00011_path=}")
+    print(f"{boat_e7_br00011_path=}")
+    print(f"{boat_e9_br00011_path=}")
+    upsert_sheet(boat_e3_br00011_path, boat_valid_str(), e3_music23_df)
+    upsert_sheet(boat_e7_br00011_path, boat_valid_str(), e7_music23_df)
+    upsert_sheet(boat_e9_br00011_path, boat_valid_str(), e9_music23_df)
+    print(f"{boat_valid_str()=}")
     inx_str = "inx"
     e3_pidginunit = pidginunit_shop(sue_otx, event3)
     e7_pidginunit = pidginunit_shop(zia_otx, event7)
@@ -137,20 +137,20 @@ def test_etl_bow_event_bricks_to_fish_events_Scenario1_MultpleFaceIDs_CreatesEve
     save_file(bow_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
     save_file(bow_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
     save_file(bow_e9_dir, pidgin_filename(), e9_pidginunit.get_json())
-    assert sheet_exists(fish_e3_br00011_path, inx_str) is False
-    assert sheet_exists(fish_e7_br00011_path, inx_str) is False
-    assert sheet_exists(fish_e9_br00011_path, inx_str) is False
+    assert sheet_exists(boat_e3_br00011_path, inx_str) is False
+    assert sheet_exists(boat_e7_br00011_path, inx_str) is False
+    assert sheet_exists(boat_e9_br00011_path, inx_str) is False
 
     # WHEN
     fizz_world.bow_event_bricks_to_inx_events()
 
     # THEN
-    assert sheet_exists(fish_e3_br00011_path, inx_str)
-    assert sheet_exists(fish_e7_br00011_path, inx_str)
-    assert sheet_exists(fish_e9_br00011_path, inx_str)
-    e3_inx_df = pandas_read_excel(fish_e3_br00011_path, sheet_name=inx_str)
-    e7_inx_df = pandas_read_excel(fish_e7_br00011_path, sheet_name=inx_str)
-    e9_inx_df = pandas_read_excel(fish_e9_br00011_path, sheet_name=inx_str)
+    assert sheet_exists(boat_e3_br00011_path, inx_str)
+    assert sheet_exists(boat_e7_br00011_path, inx_str)
+    assert sheet_exists(boat_e9_br00011_path, inx_str)
+    e3_inx_df = pandas_read_excel(boat_e3_br00011_path, sheet_name=inx_str)
+    e7_inx_df = pandas_read_excel(boat_e7_br00011_path, sheet_name=inx_str)
+    e9_inx_df = pandas_read_excel(boat_e9_br00011_path, sheet_name=inx_str)
     sue_i0 = [sue_inx, event3, music23_str, bob0_inx, bob0_inx]
     sue_i1 = [sue_inx, event3, music23_str, yao0_inx, bob0_inx]
     sue_i2 = [sue_inx, event3, music23_str, yao0_inx, yao0_inx]

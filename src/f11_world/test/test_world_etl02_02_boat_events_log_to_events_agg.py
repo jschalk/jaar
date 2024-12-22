@@ -8,7 +8,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_fish_events_log_to_events_agg_CreatesSheets_Scenario0(
+def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -30,25 +30,25 @@ def test_WorldUnit_fish_events_log_to_events_agg_CreatesSheets_Scenario0(
     ]
     invalid_error_str = "invalid because of conflicting event_id"
     invalid_error_str = "invalid because of conflicting event_id"
-    fish_dir = fizz_world._fish_dir
+    boat_dir = fizz_world._boat_dir
     src3_file_name = "br00003.xlsx"
     src5_file_name = "br00005.xlsx"
-    oe_str = "fish_events"
-    bob_row = [fish_dir, src3_file_name, oe_str, bob_str, event3, ""]
-    sue_row = [fish_dir, src3_file_name, oe_str, sue_str, event1, invalid_error_str]
-    yao1_row = [fish_dir, src3_file_name, oe_str, yao_str, event1, invalid_error_str]
-    yao9_row = [fish_dir, src3_file_name, oe_str, yao_str, event9, ""]
-    s5_0_row = [fish_dir, src5_file_name, oe_str, bob_str, event3, ""]
-    s5_1_row = [fish_dir, src5_file_name, oe_str, yao_str, event9, ""]
-    # el_rows = [fish_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
+    oe_str = "boat_events"
+    bob_row = [boat_dir, src3_file_name, oe_str, bob_str, event3, ""]
+    sue_row = [boat_dir, src3_file_name, oe_str, sue_str, event1, invalid_error_str]
+    yao1_row = [boat_dir, src3_file_name, oe_str, yao_str, event1, invalid_error_str]
+    yao9_row = [boat_dir, src3_file_name, oe_str, yao_str, event9, ""]
+    s5_0_row = [boat_dir, src5_file_name, oe_str, bob_str, event3, ""]
+    s5_1_row = [boat_dir, src5_file_name, oe_str, yao_str, event9, ""]
+    # el_rows = [boat_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
     el_rows = [bob_row, sue_row, yao1_row, yao9_row, s5_0_row, s5_1_row]
     ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
-    events_file_path = create_path(fish_dir, "events.xlsx")
+    events_file_path = create_path(boat_dir, "events.xlsx")
     events_log_str = "events_log"
     upsert_sheet(events_file_path, events_log_str, ex_events_log_df)
 
     # WHEN
-    fizz_world.fish_events_log_to_events_agg()
+    fizz_world.boat_events_log_to_events_agg()
 
     # THEN
     e3_row = [bob_str, event3, ""]
@@ -85,7 +85,7 @@ def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
     event9 = 9
     invalid_error_str = "invalid because of conflicting event_id"
     invalid_error_str = "invalid because of conflicting event_id"
-    fish_dir = fizz_world._fish_dir
+    boat_dir = fizz_world._boat_dir
     e3_row = [bob_str, event3, ""]
     e1_sue_row = [sue_str, event1, invalid_error_str]
     e1_yao_row = [yao_str, event1, invalid_error_str]
@@ -94,7 +94,7 @@ def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
     events_agg_columns = [face_id_str(), event_id_str(), "note"]
     ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
     events_agg_str = "events_agg"
-    events_file_path = create_path(fish_dir, "events.xlsx")
+    events_file_path = create_path(boat_dir, "events.xlsx")
     upsert_sheet(events_file_path, events_agg_str, ex_events_agg_df)
     assert len(fizz_world.events) != 2
 
@@ -112,7 +112,7 @@ def test_WorldUnit_set_events_from_events_agg_file_ClearsAttr(env_dir_setup_clea
     events_agg_columns = [face_id_str(), event_id_str(), "note"]
     ex_events_agg_df = DataFrame([], columns=events_agg_columns)
     events_agg_str = "events_agg"
-    events_file_path = create_path(fizz_world._fish_dir, "events.xlsx")
+    events_file_path = create_path(fizz_world._boat_dir, "events.xlsx")
     upsert_sheet(events_file_path, events_agg_str, ex_events_agg_df)
     fizz_world.events = {2: "Sue", 44: "Bob"}
     assert fizz_world.events == {2: "Sue", 44: "Bob"}

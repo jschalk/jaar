@@ -100,19 +100,19 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def fish_staging_str():
-    return "fish_staging"
+def boat_staging_str():
+    return "boat_staging"
 
 
-def fish_agg_str():
-    return "fish_agg"
+def boat_agg_str():
+    return "boat_agg"
 
 
-def fish_valid_str():
-    return "fish_valid"
+def boat_valid_str():
+    return "boat_valid"
 
 
-def get_fish_staging_grouping_with_all_values_equal_df(
+def get_boat_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, group_by_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
@@ -122,9 +122,9 @@ def get_fish_staging_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql(fish_staging_str(), conn, index=False)
+        x_df.to_sql(boat_staging_str(), conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table=fish_staging_str(),
+            x_table=boat_staging_str(),
             group_by_columns=grouping_columns,
             value_columns=value_columns,
         )
