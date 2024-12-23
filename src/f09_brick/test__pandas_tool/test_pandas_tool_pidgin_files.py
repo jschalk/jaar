@@ -23,6 +23,7 @@ from src.f09_brick.pandas_tool import (
     open_csv,
     move_otx_csvs_to_pidgin_inx,
     _get_pidgen_brick_format_filenames,
+    _get_fiscal_brick_format_filenames,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame
@@ -208,3 +209,28 @@ def test_get_pidgen_brick_format_filenames_ReturnsObj():
     assert br00043_file_name in x_pidgen_brick_filenames
     assert br00044_file_name in x_pidgen_brick_filenames
     assert len(x_pidgen_brick_filenames) == 8
+
+
+def test_get_fiscal_brick_format_filenames_ReturnsObj():
+    # ESTABLISH
+    br00000_file_name = "br00000.xlsx"
+    br00001_file_name = "br00001.xlsx"
+    br00002_file_name = "br00002.xlsx"
+    br00003_file_name = "br00003.xlsx"
+    br00004_file_name = "br00004.xlsx"
+    br00005_file_name = "br00005.xlsx"
+    br00042_file_name = "br00042.xlsx"
+
+    # WHEN
+    x_pidgen_brick_filenames = _get_fiscal_brick_format_filenames()
+
+    # THEN
+    print(f"{x_pidgen_brick_filenames=}")
+    assert br00000_file_name in x_pidgen_brick_filenames
+    assert br00001_file_name in x_pidgen_brick_filenames
+    assert br00002_file_name in x_pidgen_brick_filenames
+    assert br00003_file_name in x_pidgen_brick_filenames
+    assert br00004_file_name in x_pidgen_brick_filenames
+    assert br00005_file_name in x_pidgen_brick_filenames
+    assert br00042_file_name not in x_pidgen_brick_filenames
+    assert len(x_pidgen_brick_filenames) == 6

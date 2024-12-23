@@ -180,6 +180,16 @@ def _get_pidgen_brick_format_filenames() -> set[str]:
     return {f"{brick_number}.xlsx" for brick_number in brick_numbers}
 
 
+def _get_fiscal_brick_format_filenames() -> set[str]:
+    brick_numbers = set(get_brick_category_ref().get("fiscalunit"))
+    brick_numbers.update(set(get_brick_category_ref().get("fiscal_cashbook")))
+    brick_numbers.update(set(get_brick_category_ref().get("fiscal_purview_episode")))
+    brick_numbers.update(set(get_brick_category_ref().get("fiscal_timeline_hour")))
+    brick_numbers.update(set(get_brick_category_ref().get("fiscal_timeline_month")))
+    brick_numbers.update(set(get_brick_category_ref().get("fiscal_timeline_weekday")))
+    return {f"{brick_number}.xlsx" for brick_number in brick_numbers}
+
+
 class pandas_tools_ExcelWriterException(Exception):
     pass
 
