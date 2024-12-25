@@ -198,7 +198,7 @@ def test_create_timeline_config_ReturnsObj():
     # ESTABLISH
     five_c400_count = 25
     five_yr1_jan1_offset = 1683037440 + 440640  # 3200 years + JanLen + FebLen
-    five_hour_length = 144
+    five_hour_length = 72
     five_month_length = 25
     five_weekday_list = ["Anaday", "Baileyday", "Chiday", "Danceday", "Elonday"]
     # months = ["B", "C", "E", "G", "H", "I", "K", "L", "N", "P", "Q", "R", "T", "U", "W"]
@@ -253,9 +253,9 @@ def test_create_timeline_config_ReturnsObj():
     assert x_months_config[14][0] == "Trump"
     assert x_months_config[14][1] == 365
     x_hours_config = five_dict.get(hours_config_str())
-    assert len(x_hours_config) == 10
-    assert x_hours_config[0] == ["0hr", 144]
-    assert x_hours_config[4] == ["4hr", 720]
+    assert len(x_hours_config) == 20
+    assert x_hours_config[0] == ["0hr", 72]
+    assert x_hours_config[4] == ["4hr", 360]
     assert five_dict.get(yr1_jan1_offset_str()) == five_yr1_jan1_offset
 
     # five_file_name = f"timeline_config_{five_str()}.json"
@@ -263,6 +263,7 @@ def test_create_timeline_config_ReturnsObj():
     # save_file(chrono_examples_dir(), five_file_name, five_file_str)
     x_five_config = get_example_timeline_config(five_str())
     assert validate_timeline_config(x_five_config)
+    assert x_five_config.get(hours_config_str()) == x_hours_config
     assert x_five_config == five_dict
 
 
