@@ -8,7 +8,7 @@ from src.f04_gift.atom_config import (
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
 from src.f10_etl.transformers import (
-    etl_bow_inx_event_bricks_to_dek_faces,
+    etl_bow_inx_event_bricks_to_aft_faces,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
@@ -44,24 +44,24 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario0():
     inx_str = "inx"
     upsert_sheet(bow_e3_br00011_path, inx_str, e3_music23_df)
     assert sheet_exists(bow_e3_br00011_path, inx_str)
-    dek_dir = create_path(get_test_etl_dir(), "faces_dek")
-    dek_sue_dir = create_path(dek_dir, sue_inx)
-    dek_br00011_path = create_path(dek_sue_dir, br00011_filename)
+    aft_dir = create_path(get_test_etl_dir(), "faces_aft")
+    aft_sue_dir = create_path(aft_dir, sue_inx)
+    aft_br00011_path = create_path(aft_sue_dir, br00011_filename)
     print(f"{bow_e3_br00011_path=}")
-    print(f"{dek_br00011_path=}")
-    assert sheet_exists(dek_br00011_path, inx_str) is False
+    print(f"{aft_br00011_path=}")
+    assert sheet_exists(aft_br00011_path, inx_str) is False
 
     # WHEN
-    etl_bow_inx_event_bricks_to_dek_faces(bow_dir, dek_dir)
+    etl_bow_inx_event_bricks_to_aft_faces(bow_dir, aft_dir)
 
     # THEN
-    assert sheet_exists(dek_br00011_path, inx_str)
-    dek_e3_df = pandas_read_excel(dek_br00011_path, sheet_name=inx_str)
+    assert sheet_exists(aft_br00011_path, inx_str)
+    aft_e3_df = pandas_read_excel(aft_br00011_path, sheet_name=inx_str)
     # sue_i0 = [sue_inx, event3, music23_str, bob_inx, bob_inx]
     # sue_i1 = [sue_inx, event3, music23_str, yao_inx, bob_inx]
     # sue_i2 = [sue_inx, event3, music23_str, yao_inx, yao_inx]
     # example_e3_inx_df = DataFrame([sue_i0, sue_i1, sue_i2], columns=br00011_columns)
-    pandas_assert_frame_equal(dek_e3_df, e3_music23_df)
+    pandas_assert_frame_equal(aft_e3_df, e3_music23_df)
 
 
 # def test_etl_bow_event_bricks_to_boat_events_Scenario1_MultpleFaceIDs_CreatesEventInxSheets(
@@ -143,7 +143,7 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario0():
 #     assert sheet_exists(boat_e9_br00011_path, inx_str) is False
 
 #     # WHEN
-#     etl_bow_inx_event_bricks_to_dek_faces(x_bow_dir, x_event_pidgins)
+#     etl_bow_inx_event_bricks_to_aft_faces(x_bow_dir, x_event_pidgins)
 
 #     # THEN
 #     assert sheet_exists(boat_e3_br00011_path, inx_str)

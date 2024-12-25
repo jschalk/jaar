@@ -15,7 +15,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_bow_inx_event_bricks_to_dek_faces_Scenario0(env_dir_setup_cleanup):
+def test_bow_inx_event_bricks_to_aft_faces_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     sue_otx = "Sue"
     sue_inx = "Suzy"
@@ -42,16 +42,16 @@ def test_bow_inx_event_bricks_to_dek_faces_Scenario0(env_dir_setup_cleanup):
     inx_str = "inx"
     upsert_sheet(bow_e3_br00011_path, inx_str, e3_music23_df)
     assert sheet_exists(bow_e3_br00011_path, inx_str)
-    dek_sue_dir = create_path(fizz_world._faces_dek_dir, sue_inx)
-    dek_br00011_path = create_path(dek_sue_dir, br00011_filename)
+    aft_sue_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    aft_br00011_path = create_path(aft_sue_dir, br00011_filename)
     print(f"{bow_e3_br00011_path=}")
-    print(f"{dek_br00011_path=}")
-    assert sheet_exists(dek_br00011_path, inx_str) is False
+    print(f"{aft_br00011_path=}")
+    assert sheet_exists(aft_br00011_path, inx_str) is False
 
     # WHEN
-    fizz_world.bow_inx_event_bricks_to_dek_faces()
+    fizz_world.bow_inx_event_bricks_to_aft_faces()
 
     # THEN
-    assert sheet_exists(dek_br00011_path, inx_str)
-    dek_e3_df = pandas_read_excel(dek_br00011_path, sheet_name=inx_str)
-    pandas_assert_frame_equal(dek_e3_df, e3_music23_df)
+    assert sheet_exists(aft_br00011_path, inx_str)
+    aft_e3_df = pandas_read_excel(aft_br00011_path, sheet_name=inx_str)
+    pandas_assert_frame_equal(aft_e3_df, e3_music23_df)

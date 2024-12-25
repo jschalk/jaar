@@ -161,7 +161,7 @@ def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
 
 def move_otx_csvs_to_pidgin_inx(face_dir: str):
     bow_dir = create_path(face_dir, "bow")
-    dek_dir = create_path(face_dir, "dek")
+    aft_dir = create_path(face_dir, "aft")
     pidgin_filename = "pidgin.json"
     pidginunit_json = open_file(face_dir, pidgin_filename)
     face_pidginunit = get_pidginunit_from_json(pidginunit_json)
@@ -169,7 +169,7 @@ def move_otx_csvs_to_pidgin_inx(face_dir: str):
     for x_file_name in bow_dir_files.keys():
         x_df = open_csv(bow_dir, x_file_name)
         translate_all_columns_dataframe(x_df, face_pidginunit)
-        save_dataframe_to_csv(x_df, dek_dir, x_file_name)
+        save_dataframe_to_csv(x_df, aft_dir, x_file_name)
 
 
 def _get_pidgen_brick_format_filenames() -> set[str]:

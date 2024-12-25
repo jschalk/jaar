@@ -34,9 +34,9 @@ from src.f10_etl.transformers import (
     etl_boat_bricks_to_bow_face_bricks,
     etl_bow_face_bricks_to_bow_event_otx_bricks,
     etl_bow_event_bricks_to_inx_events,
-    etl_bow_inx_event_bricks_to_dek_faces,
-    etl_dek_face_bricks_to_dek_event_bricks,
-    etl_dek_event_bricks_to_fiscal_bricks,
+    etl_bow_inx_event_bricks_to_aft_faces,
+    etl_aft_face_bricks_to_aft_event_bricks,
+    etl_aft_event_bricks_to_fiscal_bricks,
 )
 from dataclasses import dataclass
 
@@ -57,7 +57,7 @@ class WorldUnit:
     events: dict[EventID, FaceID] = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _faces_bow_dir: str = None
-    _faces_dek_dir: str = None
+    _faces_aft_dir: str = None
     _world_dir: str = None
     _ocean_dir: str = None
     _boat_dir: str = None
@@ -94,11 +94,11 @@ class WorldUnit:
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._faces_bow_dir = create_path(self._world_dir, "faces_bow")
-        self._faces_dek_dir = create_path(self._world_dir, "faces_dek")
+        self._faces_aft_dir = create_path(self._world_dir, "faces_aft")
         self._boat_dir = create_path(self._world_dir, "boat")
         set_dir(self._world_dir)
         set_dir(self._faces_bow_dir)
-        set_dir(self._faces_dek_dir)
+        set_dir(self._faces_aft_dir)
         set_dir(self._boat_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
@@ -158,14 +158,14 @@ class WorldUnit:
     def bow_event_bricks_to_inx_events(self):
         etl_bow_event_bricks_to_inx_events(self._faces_bow_dir, self._pidgin_events)
 
-    def bow_inx_event_bricks_to_dek_faces(self):
-        etl_bow_inx_event_bricks_to_dek_faces(self._faces_bow_dir, self._faces_dek_dir)
+    def bow_inx_event_bricks_to_aft_faces(self):
+        etl_bow_inx_event_bricks_to_aft_faces(self._faces_bow_dir, self._faces_aft_dir)
 
-    def dek_face_bricks_to_dek_event_bricks(self):
-        etl_dek_face_bricks_to_dek_event_bricks(self._faces_dek_dir)
+    def aft_face_bricks_to_aft_event_bricks(self):
+        etl_aft_face_bricks_to_aft_event_bricks(self._faces_aft_dir)
 
-    def dek_event_bricks_to_fiscal_bricks(self):
-        etl_dek_event_bricks_to_fiscal_bricks(self._faces_dek_dir)
+    def aft_event_bricks_to_fiscal_bricks(self):
+        etl_aft_event_bricks_to_fiscal_bricks(self._faces_aft_dir)
 
     def get_dict(self) -> dict:
         return {

@@ -3,7 +3,7 @@ from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
-from src.f10_etl.transformers import etl_dek_face_bricks_to_dek_event_bricks
+from src.f10_etl.transformers import etl_aft_face_bricks_to_aft_event_bricks
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
@@ -11,7 +11,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_dek_face_bricks_to_dek_event_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
+def test_WorldUnit_aft_face_bricks_to_aft_event_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -39,10 +39,10 @@ def test_WorldUnit_dek_face_bricks_to_dek_event_bricks_CreatesFaceBrickSheets_Sc
     zia2 = [zia_str, event9, music23_str, hour7am, minute_420]
     example_sue_df = DataFrame([sue0, sue1], columns=brick_columns)
     example_zia_df = DataFrame([zia0, zia1, zia2], columns=brick_columns)
-    faces_dek_dir = create_path(get_test_etl_dir(), "faces_dek")
+    faces_aft_dir = create_path(get_test_etl_dir(), "faces_aft")
     br00003_filename = "br00003.xlsx"
-    sue_dir = create_path(faces_dek_dir, sue_str)
-    zia_dir = create_path(faces_dek_dir, zia_str)
+    sue_dir = create_path(faces_aft_dir, sue_str)
+    zia_dir = create_path(faces_aft_dir, zia_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     zia_br00003_filepath = create_path(zia_dir, br00003_filename)
     upsert_sheet(sue_br00003_filepath, "inx", example_sue_df)
@@ -59,7 +59,7 @@ def test_WorldUnit_dek_face_bricks_to_dek_event_bricks_CreatesFaceBrickSheets_Sc
     assert sheet_exists(event9_br00003_filepath, "inx") is False
 
     # WHEN
-    etl_dek_face_bricks_to_dek_event_bricks(faces_dek_dir)
+    etl_aft_face_bricks_to_aft_event_bricks(faces_aft_dir)
 
     # THEN
     assert sheet_exists(event3_br00003_filepath, "inx")

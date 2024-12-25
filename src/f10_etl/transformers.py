@@ -673,7 +673,7 @@ def etl_bow_event_bricks_to_inx_events(
                 upsert_sheet(event_brick_path, "inx", brick_df)
 
 
-def etl_bow_inx_event_bricks_to_dek_faces(faces_bow_dir: str, faces_dek_dir: str):
+def etl_bow_inx_event_bricks_to_aft_faces(faces_bow_dir: str, faces_aft_dir: str):
     for face_id in get_level1_dirs(faces_bow_dir):
         face_dir = create_path(faces_bow_dir, face_id)
         for event_id in get_level1_dirs(face_dir):
@@ -683,16 +683,16 @@ def etl_bow_inx_event_bricks_to_dek_faces(faces_bow_dir: str, faces_dek_dir: str
                 event_brick_path = create_path(event_dir, event_br_ref.file_name)
                 split_excel_into_dirs(
                     input_file=event_brick_path,
-                    output_dir=faces_dek_dir,
+                    output_dir=faces_aft_dir,
                     column_name="face_id",
                     file_name=event_br_ref.brick_number,
                     sheet_name="inx",
                 )
 
 
-def etl_dek_face_bricks_to_dek_event_bricks(faces_dek_dir: str):
-    for face_id_dir in get_level1_dirs(faces_dek_dir):
-        face_dir = create_path(faces_dek_dir, face_id_dir)
+def etl_aft_face_bricks_to_aft_event_bricks(faces_aft_dir: str):
+    for face_id_dir in get_level1_dirs(faces_aft_dir):
+        face_dir = create_path(faces_aft_dir, face_id_dir)
         for face_br_ref in get_existing_excel_brick_file_refs(face_dir):
             face_brick_path = create_path(face_dir, face_br_ref.file_name)
             split_excel_into_dirs(
@@ -704,9 +704,9 @@ def etl_dek_face_bricks_to_dek_event_bricks(faces_dek_dir: str):
             )
 
 
-def etl_dek_event_bricks_to_fiscal_bricks(faces_dek_dir: str):
-    for face_id in get_level1_dirs(faces_dek_dir):
-        face_dir = create_path(faces_dek_dir, face_id)
+def etl_aft_event_bricks_to_fiscal_bricks(faces_aft_dir: str):
+    for face_id in get_level1_dirs(faces_aft_dir):
+        face_dir = create_path(faces_aft_dir, face_id)
         for event_id in get_level1_dirs(face_dir):
             event_id = int(event_id)
             event_dir = create_path(face_dir, event_id)

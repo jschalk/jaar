@@ -3,15 +3,15 @@ from src.f04_gift.atom_config import face_id_str, fiscal_id_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
-from src.f11_world.world import worldunit_shop
-from src.f11_world.examples.world_env import env_dir_setup_cleanup
+from src.f10_etl.transformers import etl_aft_event_bricks_to_fiscal_bricks
+from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_dek_event_bricks_to_fiscal_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
+def test_WorldUnit_aft_event_bricks_to_fiscal_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -41,10 +41,10 @@ def test_WorldUnit_dek_event_bricks_to_fiscal_bricks_CreatesFaceBrickSheets_Scen
     example_event3_df = DataFrame([sue0, sue1], columns=brick_columns)
     example_event7_df = DataFrame([zia0], columns=brick_columns)
     example_event9_df = DataFrame([zia1, zia2], columns=brick_columns)
-    fizz_world = worldunit_shop("fizz")
     br00003_filename = "br00003.xlsx"
-    sue_dir = create_path(fizz_world._faces_dek_dir, sue_str)
-    zia_dir = create_path(fizz_world._faces_dek_dir, zia_str)
+    x_faces_aft_dir = get_test_etl_dir()
+    sue_dir = create_path(x_faces_aft_dir, sue_str)
+    zia_dir = create_path(x_faces_aft_dir, zia_str)
     event3_dir = create_path(sue_dir, event3)
     event7_dir = create_path(zia_dir, event7)
     event9_dir = create_path(zia_dir, event9)
@@ -68,7 +68,7 @@ def test_WorldUnit_dek_event_bricks_to_fiscal_bricks_CreatesFaceBrickSheets_Scen
     assert sheet_exists(e9_m55_br00003_filepath, "inx") is False
 
     # WHEN
-    fizz_world.dek_event_bricks_to_fiscal_bricks()
+    etl_aft_event_bricks_to_fiscal_bricks(x_faces_aft_dir)
 
     # THEN
     assert sheet_exists(e3_m23_br00003_filepath, "inx")
@@ -87,5 +87,3 @@ def test_WorldUnit_dek_event_bricks_to_fiscal_bricks_CreatesFaceBrickSheets_Scen
     pandas_assert_frame_equal(gen_e7_m23_df, example_e7_m23_df)
     pandas_assert_frame_equal(gen_e9_m23_df, example_e9_m23_df)
     pandas_assert_frame_equal(gen_e9_m55_df, example_e9_m55_df)
-
-    # TODO confirm dek_event_bricks_to_fiscal_bricks
