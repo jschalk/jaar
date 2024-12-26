@@ -115,6 +115,69 @@ def test_BudUnit_settle_bud_Sets_itemunit_fund_onset_fund_cease_Scenario1():
     assert lamb_after._fund_cease == default_fund_pool() * 0.7
 
 
+def test_BudUnit_settle_bud_Sets_itemunit_fund_onset_fund_cease_Scenario2_DifferentOrderOfItems():
+    # ESTABLISH
+    yao_budunit = budunit_shop("Yao", tally=10)
+
+    auto_str = "auto"
+    auto_road = yao_budunit.make_l1_road(auto_str)
+    auto_item = itemunit_shop(auto_str, mass=10)
+    yao_budunit.set_l1_item(auto_item)
+
+    yarn_str = "yarn"
+    yarn_road = yao_budunit.make_l1_road(yarn_str)
+    yarn_item = itemunit_shop(yarn_str, mass=60)
+    yao_budunit.set_l1_item(yarn_item)
+    lamb_str = "lambs"
+    lamb_road = yao_budunit.make_road(yarn_road, lamb_str)
+    lamb_item = itemunit_shop(lamb_str, mass=1)
+    yao_budunit.set_item(lamb_item, parent_road=yarn_road)
+    duck_str = "ducks"
+    duck_road = yao_budunit.make_road(yarn_road, duck_str)
+    duck_item = itemunit_shop(duck_str, mass=2)
+    yao_budunit.set_item(duck_item, parent_road=yarn_road)
+
+    coal_str = "coal"
+    coal_road = yao_budunit.make_l1_road(coal_str)
+    coal_item = itemunit_shop(coal_str, mass=30)
+    yao_budunit.set_l1_item(coal_item)
+
+    assert yao_budunit._itemroot._fund_onset is None
+    assert yao_budunit._itemroot._fund_cease is None
+    assert yao_budunit.get_item_obj(auto_road)._fund_onset is None
+    assert yao_budunit.get_item_obj(auto_road)._fund_cease is None
+    assert yao_budunit.get_item_obj(yarn_road)._fund_onset is None
+    assert yao_budunit.get_item_obj(yarn_road)._fund_cease is None
+    assert yao_budunit.get_item_obj(coal_road)._fund_onset is None
+    assert yao_budunit.get_item_obj(coal_road)._fund_cease is None
+    lamb_before = yao_budunit.get_item_obj(road=lamb_road)
+    assert lamb_before._fund_onset is None
+    assert lamb_before._fund_cease is None
+    duck_before = yao_budunit.get_item_obj(road=duck_road)
+    assert duck_before._fund_onset is None
+    assert duck_before._fund_cease is None
+
+    # WHEN
+    yao_budunit.settle_bud()
+
+    # THEN
+    assert yao_budunit._itemroot._fund_onset == 0.0
+    assert yao_budunit._itemroot._fund_cease == default_fund_pool()
+    assert yao_budunit.get_item_obj(auto_road)._fund_onset == 0.0
+    assert yao_budunit.get_item_obj(auto_road)._fund_cease == default_fund_pool() * 0.1
+    assert yao_budunit.get_item_obj(coal_road)._fund_onset == default_fund_pool() * 0.1
+    assert yao_budunit.get_item_obj(coal_road)._fund_cease == default_fund_pool() * 0.4
+    assert yao_budunit.get_item_obj(yarn_road)._fund_onset == default_fund_pool() * 0.4
+    assert yao_budunit.get_item_obj(yarn_road)._fund_cease == default_fund_pool() * 1.0
+
+    duck_after = yao_budunit.get_item_obj(road=duck_road)
+    assert duck_after._fund_onset == default_fund_pool() * 0.4
+    assert duck_after._fund_cease == default_fund_pool() * 0.8
+    lamb_after = yao_budunit.get_item_obj(road=lamb_road)
+    assert lamb_after._fund_onset == default_fund_pool() * 0.8
+    assert lamb_after._fund_cease == default_fund_pool() * 1.0
+
+
 def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeItemsOfZero_massScenario0():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
