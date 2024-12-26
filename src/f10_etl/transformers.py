@@ -268,7 +268,7 @@ class boatEventsToEventsLogTransformer:
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, events_log_str)
             events_df = pandas_concat([events_log_df, events_df])
-        upsert_sheet(events_file_path, events_log_str, events_df)
+        upsert_sheet(events_file_path, events_log_str, events_df, replace=True)
 
 
 def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:

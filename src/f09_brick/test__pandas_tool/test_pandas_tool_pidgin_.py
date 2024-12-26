@@ -277,7 +277,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
 
     # THEN
     print("")
-    print(f"After  {otx_dt=}")
+    print(f"after  {otx_dt=}")
     assert otx_dt.iloc[0][base_str()] == inx_music87_str
     assert otx_dt.iloc[1][base_str()] == casa_inx_road
     assert otx_dt.iloc[2][base_str()] == clean_inx_road

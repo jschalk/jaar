@@ -177,6 +177,10 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
     ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
     assert len(gen_events_log_df.columns) == len(ex_events_log_df.columns)
     assert list(gen_events_log_df.columns) == list(ex_events_log_df.columns)
+    print(f"{gen_events_log_df=}\n")
+    print(f" {ex_events_log_df=}\n\n")
+    print(f"{gen_events_log_df.to_csv(index=False)=}")
+    print(f" {ex_events_log_df.to_csv(index=False)=}")
     assert len(gen_events_log_df) > 0
     assert len(gen_events_log_df) == 6
     assert len(gen_events_log_df) == len(ex_events_log_df)
