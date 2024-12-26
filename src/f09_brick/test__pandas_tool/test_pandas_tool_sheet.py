@@ -6,12 +6,75 @@ from src.f09_brick.pandas_tool import (
     get_all_excel_sheet_names,
     split_excel_into_dirs,
     if_nan_return_None,
+    append_df_to_excel,
 )
 from pytest import fixture as pytest_fixture, raises as pytest_raises
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
+from openpyxl import load_workbook
 from os.path import exists as os_path_exists
 from numpy import nan as numpy_nan, float64
+
+
+def test_append_df_to_excel_CreatesSheet(brick_env_setup_cleanup):
+    # ESTABLISH
+    test_file = create_path(brick_fiscals_dir(), "test.xlsx")
+    append_data = {
+        "Name": ["Alice", "Bob"],
+        "Age": [25, 30],
+        "City": ["New York", "Los Angeles"],
+    }
+    append_df = DataFrame(append_data)
+    assert os_path_exists(test_file) is False
+
+    # WHEN
+    append_df_to_excel(file_path=test_file, sheet_name="Sheet1", dataframe=append_df)
+
+    # THEN
+    assert os_path_exists(test_file)
+    workbook = load_workbook(test_file)
+    sheet = workbook["Sheet1"]
+    rows = list(sheet.iter_rows(values_only=True))
+    expected_rows = [
+        ("Name", "Age", "City"),
+        ("Alice", 25, "New York"),
+        ("Bob", 30, "Los Angeles"),
+    ]
+    assert rows == expected_rows
+
+
+def test_append_df_to_excel_AppendsToSheet(brick_env_setup_cleanup):
+    # ESTABLISH
+    test_file = create_path(brick_fiscals_dir(), "test.xlsx")
+    initial_data = {
+        "Name": ["John", "Doe"],
+        "Age": [40, 50],
+        "City": ["Boston", "Chicago"],
+    }
+    append_data = {
+        "Name": ["Alice", "Bob"],
+        "Age": [25, 30],
+        "City": ["New York", "Los Angeles"],
+    }
+    initial_df = DataFrame(initial_data)
+    append_df = DataFrame(append_data)
+    initial_df.to_excel(test_file, index=False, sheet_name="Sheet1")
+
+    # WHEN
+    append_df_to_excel(file_path=test_file, sheet_name="Sheet1", dataframe=append_df)
+
+    # THEN
+    workbook = load_workbook(test_file)
+    sheet = workbook["Sheet1"]
+    rows = list(sheet.iter_rows(values_only=True))
+    expected_rows = [
+        ("Name", "Age", "City"),
+        ("John", 40, "Boston"),
+        ("Doe", 50, "Chicago"),
+        ("Alice", 25, "New York"),
+        ("Bob", 30, "Los Angeles"),
+    ]
+    assert rows == expected_rows
 
 
 @pytest_fixture
@@ -49,7 +112,7 @@ def test_upsert_sheet_ReplacesExistingSheet(temp_excel_file, sample_dataframe):
     upsert_sheet(temp_excel_file, "Sheet1", initial_data)
 
     # WHEN Replace the sheet with new data
-    upsert_sheet(temp_excel_file, "Sheet1", sample_dataframe)
+    upsert_sheet(temp_excel_file, "Sheet1", sample_dataframe, replace=True)
 
     # THEN Verify the content of the replaced sheet
     df_read = pandas_read_excel(temp_excel_file, sheet_name="Sheet1")
@@ -63,7 +126,7 @@ def test_upsert_sheet_AddNewSheetToExistingFile(temp_excel_file, sample_datafram
     upsert_sheet(temp_excel_file, "InitialSheet", initial_data)
 
     # WHEN Add a new sheet with different data
-    upsert_sheet(temp_excel_file, "NewSheet", sample_dataframe)
+    upsert_sheet(temp_excel_file, "NewSheet", sample_dataframe, replace=True)
 
     # THEN Verify both sheets exist and have correct data
     df_initial = pandas_read_excel(temp_excel_file, sheet_name="InitialSheet")

@@ -100,19 +100,19 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def fish_staging_str():
-    return "fish_staging"
+def boat_staging_str():
+    return "boat_staging"
 
 
-def fish_agg_str():
-    return "fish_agg"
+def boat_agg_str():
+    return "boat_agg"
 
 
-def fish_valid_str():
-    return "fish_valid"
+def boat_valid_str():
+    return "boat_valid"
 
 
-def get_fish_staging_grouping_with_all_values_equal_df(
+def get_boat_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, group_by_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
@@ -122,9 +122,9 @@ def get_fish_staging_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql(fish_staging_str(), conn, index=False)
+        x_df.to_sql(boat_staging_str(), conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table=fish_staging_str(),
+            x_table=boat_staging_str(),
             group_by_columns=grouping_columns,
             value_columns=value_columns,
         )
@@ -148,6 +148,9 @@ def translate_single_column_dataframe(
 
 
 def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
+    if x_pidginunit is None:
+        return None
+
     column_names = set(x_df.columns)
     pidginable_columns = column_names.intersection(pidginable_atom_args())
     for pidginable_column in pidginable_columns:
@@ -158,7 +161,7 @@ def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
 
 def move_otx_csvs_to_pidgin_inx(face_dir: str):
     bow_dir = create_path(face_dir, "bow")
-    dek_dir = create_path(face_dir, "dek")
+    aft_dir = create_path(face_dir, "aft")
     pidgin_filename = "pidgin.json"
     pidginunit_json = open_file(face_dir, pidgin_filename)
     face_pidginunit = get_pidginunit_from_json(pidginunit_json)
@@ -166,7 +169,7 @@ def move_otx_csvs_to_pidgin_inx(face_dir: str):
     for x_file_name in bow_dir_files.keys():
         x_df = open_csv(bow_dir, x_file_name)
         translate_all_columns_dataframe(x_df, face_pidginunit)
-        save_dataframe_to_csv(x_df, dek_dir, x_file_name)
+        save_dataframe_to_csv(x_df, aft_dir, x_file_name)
 
 
 def _get_pidgen_brick_format_filenames() -> set[str]:
@@ -177,11 +180,58 @@ def _get_pidgen_brick_format_filenames() -> set[str]:
     return {f"{brick_number}.xlsx" for brick_number in brick_numbers}
 
 
+def _get_fiscal_brick_format_filenames() -> set[str]:
+    brick_numbers = set(get_brick_category_ref().get("fiscalunit"))
+    brick_numbers.update(set(get_brick_category_ref().get("fiscal_cashbook")))
+    brick_numbers.update(set(get_brick_category_ref().get("fiscal_purview_episode")))
+    brick_numbers.update(set(get_brick_category_ref().get("fiscal_timeline_hour")))
+    brick_numbers.update(set(get_brick_category_ref().get("fiscal_timeline_month")))
+    brick_numbers.update(set(get_brick_category_ref().get("fiscal_timeline_weekday")))
+    return {f"{brick_number}.xlsx" for brick_number in brick_numbers}
+
+
+def append_df_to_excel(file_path: str, sheet_name: str, dataframe: DataFrame):
+    try:
+        # Load the existing workbook
+        workbook = openpyxl_load_workbook(file_path)
+
+        # Check if the sheet exists, if not create it
+        if sheet_name not in workbook.sheetnames:
+            workbook.create_sheet(sheet_name)
+            sheet = workbook[sheet_name]
+            # Add column names to the new sheet
+            for col_num, column_title in enumerate(dataframe.columns, 1):
+                sheet.cell(row=1, column=col_num, value=column_title)
+            start_row = 2  # Start appending data from the second row
+        else:
+            sheet = workbook[sheet_name]
+            start_row = sheet.max_row + 1
+
+        # Convert the DataFrame to a list of rows
+        rows = dataframe.to_dict(orient="split")["data"]
+
+        # Append the rows to the sheet
+        for i, row in enumerate(rows, start_row):
+            for j, value in enumerate(row, 1):  # 1-based index for Excel
+                sheet.cell(row=i, column=j, value=value)
+
+        # Save changes to the workbook
+        workbook.save(file_path)
+        # prt("Data appended successfully!")
+
+    except FileNotFoundError:
+        # If the file doesn't exist, create a new one
+        # prt(f"{file_path} not found. Creating a new Excel file.")
+        dataframe.to_excel(file_path, index=False, sheet_name=sheet_name)
+
+
 class pandas_tools_ExcelWriterException(Exception):
     pass
 
 
-def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
+def upsert_sheet(
+    file_path: str, sheet_name: str, dataframe: DataFrame, replace: bool = False
+):
     # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
     set_dir(os_path_dirname(file_path))
     """
@@ -201,10 +251,14 @@ def upsert_sheet(file_path: str, sheet_name: str, dataframe: DataFrame):
 
     # If the file exists, check for the sheet
     try:
-        with ExcelWriter(
-            file_path, engine="openpyxl", mode="a", if_sheet_exists="replace"
-        ) as writer:
-            dataframe.to_excel(writer, sheet_name=sheet_name, index=False)
+        if replace:
+            with ExcelWriter(
+                file_path, engine="openpyxl", mode="a", if_sheet_exists="replace"
+            ) as writer:
+                dataframe.to_excel(writer, sheet_name=sheet_name, index=False)
+        else:
+            append_df_to_excel(file_path, sheet_name, dataframe)
+
     except (PermissionError, FileNotFoundError, OSError) as e:
         raise pandas_tools_ExcelWriterException(f"An error occurred: {e}") from e
 
@@ -265,7 +319,6 @@ def split_excel_into_dirs(
             # Define the output file path
             output_file = create_path(subdirectory, f"{file_name}.xlsx")
             upsert_sheet(output_file, sheet_name, filtered_df)
-            # filtered_df.to_excel(output_file, index=False)
 
 
 def if_nan_return_None(x_obj: any) -> any:

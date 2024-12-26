@@ -216,13 +216,13 @@ def test_bud_edit_item_label_ModifiesItemReasonUnitsScenario1():
     # WHEN
     # for key_x, reason_x in casa_item.reasonunits.items():
     #     print(f"Before {key_x=} {reason_x.base=}")
-    print(f"BEFORE {wednesday_item._label=}")
-    print(f"BEFORE {wednesday_item._parent_road=}")
+    print(f"before {wednesday_item._label=}")
+    print(f"before {wednesday_item._parent_road=}")
     sue_bud.edit_item_label(old_road=old_weekday_road, new_label=new_weekday_str)
     # for key_x, reason_x in casa_item.reasonunits.items():
-    #     print(f"AFTER {key_x=} {reason_x.base=}")
-    print(f"AFTER {wednesday_item._label=}")
-    print(f"AFTER {wednesday_item._parent_road=}")
+    #     print(f"after {key_x=} {reason_x.base=}")
+    print(f"after  {wednesday_item._label=}")
+    print(f"after  {wednesday_item._parent_road=}")
 
     # THEN
     assert casa_item.reasonunits.get(new_weekday_road) is not None
