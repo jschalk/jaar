@@ -517,7 +517,7 @@ def etl_face_pidgin_to_event_pidgins(face_dir: str):
 
 def get_level1_dirs(x_dir: str) -> list[str]:
     level1_dirs = get_dir_file_strs(x_dir, include_dirs=True, include_files=False)
-    return list(level1_dirs.keys())
+    return sorted(list(level1_dirs.keys()))
 
 
 def etl_bow_face_pidgins_to_bow_event_pidgins(faces_dir: str):
@@ -676,6 +676,7 @@ def etl_bow_event_bricks_to_inx_events(
 def etl_bow_inx_event_bricks_to_aft_faces(faces_bow_dir: str, faces_aft_dir: str):
     for face_id in get_level1_dirs(faces_bow_dir):
         face_dir = create_path(faces_bow_dir, face_id)
+        print(f"{get_level1_dirs(face_dir)=}")
         for event_id in get_level1_dirs(face_dir):
             event_id = int(event_id)
             event_dir = create_path(face_dir, event_id)
