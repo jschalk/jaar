@@ -91,8 +91,8 @@ def test_bow_inx_event_bricks_to_aft_faces_Scenario1(env_dir_setup_cleanup):
     upsert_sheet(bow_e7_br00011_path, inx_str, e7_music23_df)
     assert sheet_exists(bow_e3_br00011_path, inx_str)
     assert sheet_exists(bow_e7_br00011_path, inx_str)
-    aft_sue_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
-    aft_br00011_path = create_path(aft_sue_dir, br00011_filename)
+    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    aft_br00011_path = create_path(sue_aft_dir, br00011_filename)
     print(f"{bow_e3_br00011_path=}")
     print(f"{aft_br00011_path=}")
     assert sheet_exists(aft_br00011_path, inx_str) is False
@@ -104,4 +104,5 @@ def test_bow_inx_event_bricks_to_aft_faces_Scenario1(env_dir_setup_cleanup):
     assert sheet_exists(aft_br00011_path, inx_str)
     sue_music23_df = DataFrame([sue0, sue1, sue2, sue3], columns=br00011_columns)
     aft_sue_df = pandas_read_excel(aft_br00011_path, sheet_name=inx_str)
+    print(f"{aft_sue_df=}")
     pandas_assert_frame_equal(aft_sue_df, sue_music23_df)
