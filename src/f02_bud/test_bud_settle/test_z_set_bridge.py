@@ -8,7 +8,7 @@ from pytest import raises as pytest_raises
 
 def test_BudUnit_set_deal_id_CorrectlySetsAttr():
     # ESTABLISH
-    x_deal_id = "music45"
+    x_deal_id = "accord45"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str)
     assert sue_bud._deal_id == root_lx()
@@ -62,7 +62,7 @@ def test_bud_set_deal_id_CorrectlySetsAttr():
     assert yao_bud._deal_id == yao_bud._deal_id
 
     # WHEN
-    x_deal_id = "music45"
+    x_deal_id = "accord45"
     yao_bud.set_deal_id(deal_id=x_deal_id)
 
     # THEN

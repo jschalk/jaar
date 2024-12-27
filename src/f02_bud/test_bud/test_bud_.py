@@ -177,7 +177,7 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
 
 def test_BudUnit_set_bridge_CorrectlySetsAttr():
     # ESTABLISH
-    x_deal_id = "music45"
+    x_deal_id = "accord45"
     slash_bridge = "/"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str, x_deal_id, _bridge=slash_bridge)
@@ -193,7 +193,7 @@ def test_BudUnit_set_bridge_CorrectlySetsAttr():
 
 def test_BudUnit_make_road_ReturnsCorrectObj():
     # ESTABLISH
-    x_deal_id = "music45"
+    x_deal_id = "accord45"
     slash_bridge = "/"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str, x_deal_id, _bridge=slash_bridge)

@@ -39,8 +39,8 @@ def test_make_deltaunit_Arg_brick_format_00021_bud_acctunit_v0_0_0():
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -78,8 +78,8 @@ def test_make_deltaunit_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     sue_budunit.add_acctunit(sue_str)
     sue_budunit.add_acctunit(bob_str)
     sue_budunit.add_acctunit(yao_str)
@@ -147,8 +147,8 @@ def test_make_deltaunit_Arg_brick_format_00013_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31
@@ -202,8 +202,8 @@ def test_make_deltaunit_Arg_brick_format_00013_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31

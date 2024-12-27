@@ -102,7 +102,7 @@ def test_HubUnit_RaisesError_keep_road_DoesNotExist():
 def test_hubunit_shop_ReturnsCorrectObj():
     # ESTABLISH
     x_deals_dir = "src/f07_deal/examples"
-    x_deal_id = "music"
+    x_deal_id = "accord"
     sue_str = "Sue"
     x_bridge = "/"
     x_fund_pool = 13000

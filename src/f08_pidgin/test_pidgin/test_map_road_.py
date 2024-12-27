@@ -425,12 +425,12 @@ def test_RoadMap_del_idea_SetsAttr():
 
 def test_RoadMap_set_idea_Edits_otx2inx():
     # ESTABLISH
-    otx_music45_str = "music45"
-    inx_music87_str = "music87"
+    otx_accord45_str = "accord45"
+    inx_accord87_str = "accord87"
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_road = create_road(otx_music45_str, casa_otx_str)
-    casa_inx_road = create_road(inx_music87_str, casa_inx_str)
+    casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
+    casa_inx_road = create_road(inx_accord87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_road = create_road(casa_otx_road, clean_otx_str)
@@ -439,11 +439,11 @@ def test_RoadMap_set_idea_Edits_otx2inx():
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
     x_roadmap = roadmap_shop()
-    x_roadmap.set_otx2inx(otx_music45_str, inx_music87_str)
+    x_roadmap.set_otx2inx(otx_accord45_str, inx_accord87_str)
     x_roadmap.set_otx2inx(casa_otx_road, casa_inx_road)
     x_roadmap.set_otx2inx(clean_otx_road, clean_inx_road)
     x_roadmap.set_otx2inx(sweep_otx_road, sweep_inx_road)
-    assert x_roadmap.otx2inx_exists(otx_music45_str, inx_music87_str)
+    assert x_roadmap.otx2inx_exists(otx_accord45_str, inx_accord87_str)
     assert x_roadmap.otx2inx_exists(casa_otx_road, casa_inx_road)
     assert x_roadmap.otx2inx_exists(clean_otx_road, clean_inx_road)
     assert x_roadmap.otx2inx_exists(sweep_otx_road, sweep_inx_road)
@@ -455,7 +455,7 @@ def test_RoadMap_set_idea_Edits_otx2inx():
     # THEN
     menage_inx_road = create_road(casa_inx_road, menage_inx_str)
     sweep_menage_inx_road = create_road(menage_inx_road, sweep_str)
-    assert x_roadmap.otx2inx_exists(otx_music45_str, inx_music87_str)
+    assert x_roadmap.otx2inx_exists(otx_accord45_str, inx_accord87_str)
     assert x_roadmap.otx2inx_exists(casa_otx_road, casa_inx_road)
     assert x_roadmap.otx2inx_exists(clean_otx_road, menage_inx_road)
     assert x_roadmap.otx2inx_exists(sweep_otx_road, sweep_menage_inx_road)
@@ -547,7 +547,7 @@ def test_get_roadmap_from_json_ReturnsObj():
 
 def test_RoadMap_all_otx_parent_roads_exist_ReturnsObj_RoadUnit():
     # ESTABLISH
-    clean_otx_parent_road = "music45"
+    clean_otx_parent_road = "accord45"
     otx_r_bridge = "/"
     clean_otx_str = "clean"
     clean_otx_road = f"{clean_otx_parent_road}{otx_r_bridge}{clean_otx_str}"
@@ -595,17 +595,17 @@ def test_RoadMap_is_valid_ReturnsObj_Scenario0_lx_str():
 
 def test_RoadMap_is_valid_ReturnsObj_Scenario1_road_str():
     # ESTABLISH
-    music_str = "music45"
+    accord_str = "accord45"
     otx_r_bridge = "/"
     inx_r_bridge = ":"
     clean_otx_str = "clean"
-    clean_otx_road = f"{music_str}{otx_r_bridge}{clean_otx_str}"
+    clean_otx_road = f"{accord_str}{otx_r_bridge}{clean_otx_str}"
     clean_inx_str = "prop"
-    clean_inx_road = f"{music_str}{inx_r_bridge}{clean_inx_str}"
+    clean_inx_road = f"{accord_str}{inx_r_bridge}{clean_inx_str}"
     # casa_otx = f"casa{otx_bridge}"
     # casa_inx = f"casa"
     x_roadmap = roadmap_shop(otx_bridge=otx_r_bridge, inx_bridge=inx_r_bridge)
-    x_roadmap.set_otx2inx(music_str, music_str)
+    x_roadmap.set_otx2inx(accord_str, accord_str)
     assert x_roadmap.is_valid()
     assert x_roadmap.otx2inx_exists(clean_otx_road, clean_inx_road) is False
 
@@ -618,7 +618,7 @@ def test_RoadMap_is_valid_ReturnsObj_Scenario1_road_str():
 
 def test_RoadMap_is_valid_ReturnsObj_Scenario3_RoadUnit():
     # ESTABLISH
-    clean_otx_parent_road = "music45"
+    clean_otx_parent_road = "accord45"
     otx_r_bridge = "/"
     clean_otx_str = "clean"
     clean_otx_road = f"{clean_otx_parent_road}{otx_r_bridge}{clean_otx_str}"

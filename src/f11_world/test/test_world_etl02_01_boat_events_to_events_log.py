@@ -39,12 +39,12 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
         hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event1, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event1, music23_str, hour7am, minute_420]
-    row3 = [yao_str, event1, music23_str, hour7am, minute_420]
-    row4 = [yao_str, event9, music23_str, hour7am, minute_420]
-    row5 = [bob_str, event3, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    row1 = [sue_str, event1, accord23_str, hour6am, minute_360]
+    row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
+    row3 = [yao_str, event1, accord23_str, hour7am, minute_420]
+    row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
+    row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", df1)
     fizz_world.ocean_to_boat_staging()
@@ -125,15 +125,15 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
         weekday_label_str(),
         weekday_order_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event1, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event1, music23_str, hour7am, minute_420]
-    row3 = [yao_str, event1, music23_str, hour7am, minute_420]
-    row4 = [yao_str, event9, music23_str, hour7am, minute_420]
-    row5 = [bob_str, event3, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    row1 = [sue_str, event1, accord23_str, hour6am, minute_360]
+    row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
+    row3 = [yao_str, event1, accord23_str, hour7am, minute_420]
+    row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
+    row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     b3_df = DataFrame([row1, row2, row3, row4, row5], columns=brick3_columns)
-    b5_0_row = [event3, bob_str, music23_str, "thu", 1]
-    b5_1_row = [event9, yao_str, music23_str, "wed", 0]
+    b5_0_row = [event3, bob_str, accord23_str, "thu", 1]
+    b5_1_row = [event9, yao_str, accord23_str, "wed", 0]
     b5_df = DataFrame([b5_0_row, b5_1_row], columns=brick5_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", b3_df)
     upsert_sheet(ocean_file_path, "example1_br00005", b5_df)

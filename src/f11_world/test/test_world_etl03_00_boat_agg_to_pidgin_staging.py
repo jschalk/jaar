@@ -59,7 +59,7 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    m_str = "music23"
+    m_str = "accord23"
     event1 = 1
     event2 = 2
     event5 = 5

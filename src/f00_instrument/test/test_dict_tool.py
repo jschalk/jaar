@@ -365,9 +365,9 @@ def test_extract_csv_headers_ReturnsObj_empty_list():
 def test_extract_csv_headers_ReturnsObj():
     # ESTABLISH
     x_csv = """x_id,y_id,w_id,u_id,z_id
-music,Sue,Bob,13,29
-music,Sue,Sue,11,23
-music,Sue,Yao,41,37
+accord,Sue,Bob,13,29
+accord,Sue,Sue,11,23
+accord,Sue,Yao,41,37
 """
 
     # WHEN
@@ -391,9 +391,9 @@ music,Sue,Yao,41,37
 def test_extract_csv_headers_RemovesHeaders_csv():
     # ESTABLISH
     x_csv = """x_id,y_id,w_id,u_id,z_id
-music,Sue,Bob,13,29
-music,Sue,Sue,11,23
-music,Sue,Yao,41,37
+accord,Sue,Bob,13,29
+accord,Sue,Sue,11,23
+accord,Sue,Yao,41,37
 """
 
     # WHEN
@@ -401,9 +401,9 @@ music,Sue,Yao,41,37
 
     # THEN
     print(f"{new_csv=}")
-    headerless_csv = """music,Sue,Bob,13,29
-music,Sue,Sue,11,23
-music,Sue,Yao,41,37
+    headerless_csv = """accord,Sue,Bob,13,29
+accord,Sue,Sue,11,23
+accord,Sue,Yao,41,37
 """
     assert new_csv == headerless_csv
 
@@ -421,7 +421,7 @@ def test_get_csv_column1_column2_metrics_ReturnsObj_empty_dict():
 
 def test_get_csv_column1_column2_metrics_ReturnsObj_Scenario1():
     # ESTABLISH
-    x_id = "music56"
+    x_id = "accord56"
     y_id = "Yao"
     headerless_csv = f"""{x_id},{y_id},Bob,13,29
 """
@@ -435,7 +435,7 @@ def test_get_csv_column1_column2_metrics_ReturnsObj_Scenario1():
 
 def test_get_csv_column1_column2_metrics_ReturnsObj_Scenario2():
     # ESTABLISH
-    x_id = "music56"
+    x_id = "accord56"
     sue_str = "Sue"
     bob_str = "Bob"
     headerless_csv = f"""{x_id},{sue_str},Bob,13,29
@@ -457,7 +457,7 @@ def test_get_csv_column1_column2_metrics_ReturnsObj_Scenario2():
 
 def test_create_l2nested_csv_dict_ReturnsObj_Scenario0():
     # ESTABLISH
-    x_id = "music56"
+    x_id = "accord56"
     sue_str = "Sue"
     bob_str = "Bob"
     headerless_csv = f""",,{x_id},{sue_str},Bob,13,29
@@ -492,15 +492,15 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario0():
 
 def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
     # ESTABLISH
-    music3_id = "music3"
-    music4_id = "music4"
+    accord3_id = "accord3"
+    accord4_id = "accord4"
     sue_str = "Sue"
     bob_str = "Bob"
-    headerless_csv = f""",,{music3_id},{sue_str},Bob,13,29
-,,{music4_id},{sue_str},Sue,11,23
-,,{music4_id},{sue_str},Yao,41,37
-,,{music4_id},{sue_str},Zia,41,37
-,,{music4_id},{bob_str},Yao,41,37
+    headerless_csv = f""",,{accord3_id},{sue_str},Bob,13,29
+,,{accord4_id},{sue_str},Sue,11,23
+,,{accord4_id},{sue_str},Yao,41,37
+,,{accord4_id},{sue_str},Zia,41,37
+,,{accord4_id},{bob_str},Yao,41,37
 """
 
     # WHEN
@@ -508,33 +508,33 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
 
     # THEN
     # print(f"{u_dict=}")
-    music3_sue_csv = f""",,{music3_id},{sue_str},Bob,13,29
+    accord3_sue_csv = f""",,{accord3_id},{sue_str},Bob,13,29
 """
-    music4_sue_csv = f""",,{music4_id},{sue_str},Sue,11,23
-,,{music4_id},{sue_str},Yao,41,37
-,,{music4_id},{sue_str},Zia,41,37
+    accord4_sue_csv = f""",,{accord4_id},{sue_str},Sue,11,23
+,,{accord4_id},{sue_str},Yao,41,37
+,,{accord4_id},{sue_str},Zia,41,37
 """
-    static_bob_csv = f""",,{music4_id},{bob_str},Yao,41,37
+    static_bob_csv = f""",,{accord4_id},{bob_str},Yao,41,37
 """
-    music3_dict = tiered_dict.get(music3_id)
-    music4_dict = tiered_dict.get(music4_id)
-    assert music3_dict
-    assert music4_dict
-    assert list(music3_dict.keys()) == [sue_str]
-    assert list(music4_dict.keys()) == [sue_str, bob_str]
-    generated_bob_csv = music4_dict.get(bob_str)
+    accord3_dict = tiered_dict.get(accord3_id)
+    accord4_dict = tiered_dict.get(accord4_id)
+    assert accord3_dict
+    assert accord4_dict
+    assert list(accord3_dict.keys()) == [sue_str]
+    assert list(accord4_dict.keys()) == [sue_str, bob_str]
+    generated_bob_csv = accord4_dict.get(bob_str)
     assert generated_bob_csv == static_bob_csv
-    generated3_sue_csv = music3_dict.get(sue_str)
-    generated4_sue_csv = music4_dict.get(sue_str)
+    generated3_sue_csv = accord3_dict.get(sue_str)
+    generated4_sue_csv = accord4_dict.get(sue_str)
     print(f"{generated3_sue_csv=}")
     print(f"{generated4_sue_csv=}")
-    assert generated3_sue_csv == music3_sue_csv
-    assert generated4_sue_csv == music4_sue_csv
-    owner_id3_csv_dict = {sue_str: music3_sue_csv}
-    owner_id4_csv_dict = {sue_str: music4_sue_csv, bob_str: static_bob_csv}
+    assert generated3_sue_csv == accord3_sue_csv
+    assert generated4_sue_csv == accord4_sue_csv
+    owner_id3_csv_dict = {sue_str: accord3_sue_csv}
+    owner_id4_csv_dict = {sue_str: accord4_sue_csv, bob_str: static_bob_csv}
     assert tiered_dict == {
-        music3_id: owner_id3_csv_dict,
-        music4_id: owner_id4_csv_dict,
+        accord3_id: owner_id3_csv_dict,
+        accord4_id: owner_id4_csv_dict,
     }
 
 

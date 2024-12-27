@@ -40,9 +40,9 @@ def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario0_Sin
         hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event3, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event3, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    row1 = [sue_str, event3, accord23_str, hour6am, minute_360]
+    row2 = [sue_str, event3, accord23_str, hour7am, minute_420]
     br00003_boat_agg_df = DataFrame([row1, row2], columns=brick_columns)
     x_etl_dir = get_test_etl_dir()
     x_boat_dir = create_path(x_etl_dir, "boat")
@@ -93,10 +93,10 @@ def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario1_Mul
         hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    sue1 = [sue_str, event3, music23_str, hour6am, minute_360]
-    sue2 = [sue_str, event3, music23_str, hour7am, minute_420]
-    zia3 = [zia_str, event7, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    sue1 = [sue_str, event3, accord23_str, hour6am, minute_360]
+    sue2 = [sue_str, event3, accord23_str, hour7am, minute_420]
+    zia3 = [zia_str, event7, accord23_str, hour7am, minute_420]
     br00003_boat_agg_df = DataFrame([sue1, sue2, zia3], columns=brick_columns)
     x_etl_dir = get_test_etl_dir()
     x_boat_dir = create_path(x_etl_dir, "boat")
@@ -150,9 +150,9 @@ def test_etl_boat_bricks_to_bow_face_bricks_Scenario2_PidginCategoryBricksAreNot
         hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    sue3_0 = [sue_str, event3, music23_str, hour6am, minute_360]
-    sue3_1 = [sue_str, event3, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    sue3_0 = [sue_str, event3, accord23_str, hour6am, minute_360]
+    sue3_1 = [sue_str, event3, accord23_str, hour7am, minute_420]
     br00003_boat_agg_df = DataFrame([sue3_0, sue3_1], columns=br00003_columns)
 
     br00043_columns = [

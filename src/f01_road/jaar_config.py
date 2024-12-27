@@ -1,5 +1,5 @@
 def get_test_deal_id():
-    return "music_45"
+    return "accord_45"
 
 
 def get_deal_id_if_None(deal_id: str = None):

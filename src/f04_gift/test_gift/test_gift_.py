@@ -67,13 +67,13 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     bob_delta_start = 6
     bob_gifts_dir = "exampletext7"
     bob_atoms_dir = "exampletext9"
-    music_str = "music"
+    accord_str = "accord"
 
     # WHEN
     bob_giftunit = giftunit_shop(
         face_id=sue_str,
         owner_id=bob_str,
-        deal_id=music_str,
+        deal_id=accord_str,
         _gift_id=bob_gift_id,
         _deltaunit=bob_deltaunit,
         _delta_start=bob_delta_start,
@@ -84,7 +84,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     # THEN
     assert bob_giftunit.face_id == sue_str
     assert bob_giftunit.owner_id == bob_str
-    assert bob_giftunit.deal_id == music_str
+    assert bob_giftunit.deal_id == accord_str
     assert bob_giftunit._gift_id == bob_gift_id
     assert bob_giftunit._deltaunit == bob_deltaunit
     assert bob_giftunit._delta_start == bob_delta_start
@@ -206,8 +206,8 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
-    music_str = "music"
-    bob_giftunit = giftunit_shop(deal_id=music_str, owner_id=bob_str)
+    accord_str = "accord"
+    bob_giftunit = giftunit_shop(deal_id=accord_str, owner_id=bob_str)
     bob_giftunit.set_face(sue_str)
 
     # WHEN
@@ -215,7 +215,7 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
 
     # THEN
     assert x_dict.get(deal_id_str()) is not None
-    assert x_dict.get(deal_id_str()) == music_str
+    assert x_dict.get(deal_id_str()) == accord_str
     assert x_dict.get(owner_id_str()) is not None
     assert x_dict.get(owner_id_str()) == bob_str
     assert x_dict.get(face_id_str()) is not None

@@ -91,12 +91,12 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    otx_music45_str = "music45"
-    inx_music87_str = "music87"
+    otx_accord45_str = "accord45"
+    inx_accord87_str = "accord87"
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_road = create_road(otx_music45_str, casa_otx_str)
-    casa_inx_road = create_road(inx_music87_str, casa_inx_str)
+    casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
+    casa_inx_road = create_road(inx_accord87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_road = create_road(casa_otx_road, clean_otx_str)
@@ -129,7 +129,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     print(f"{sue_otx_dt=} \n")
     print(f"{sue_inx_dt=} \n")
     gen_inx_dt = open_csv(aft_dir, example_filename)
-    assert gen_inx_dt.iloc[0][base_str()] == inx_music87_str
+    assert gen_inx_dt.iloc[0][base_str()] == inx_accord87_str
     assert gen_inx_dt.iloc[1][base_str()] == casa_inx_road
     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()
     assert gen_inx_dt.iloc[0][base_str()] == sue_inx_dt.iloc[0][base_str()]

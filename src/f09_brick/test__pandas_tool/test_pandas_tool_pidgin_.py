@@ -206,12 +206,12 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctID():
 
 def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_casa_maison_pidginunit_set_by_otx2inx():
     # ESTABLISH
-    otx_music45_str = "music45"
-    inx_music87_str = "music87"
+    otx_accord45_str = "accord45"
+    inx_accord87_str = "accord87"
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_road = create_road(otx_music45_str, casa_otx_str)
-    casa_inx_road = create_road(inx_music87_str, casa_inx_str)
+    casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
+    casa_inx_road = create_road(inx_accord87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_road = create_road(casa_otx_road, clean_otx_str)
@@ -222,7 +222,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     yao_pidginunit = get_casa_maison_pidginunit_set_by_otx2inx()
     otx_dt = get_casa_maison_road_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][base_str()] == otx_music45_str
+    assert otx_dt.iloc[0][base_str()] == otx_accord45_str
     assert otx_dt.iloc[1][base_str()] == casa_otx_road
     assert otx_dt.iloc[2][base_str()] == clean_otx_road
     assert otx_dt.iloc[3][base_str()] == sweep_otx_road
@@ -232,7 +232,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
-    assert otx_dt.iloc[0][base_str()] == inx_music87_str
+    assert otx_dt.iloc[0][base_str()] == inx_accord87_str
     assert otx_dt.iloc[1][base_str()] == casa_inx_road
     assert otx_dt.iloc[2][base_str()] == clean_inx_road
     assert otx_dt.iloc[3][base_str()] == sweep_inx_road
@@ -246,12 +246,12 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
 
 def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_get_casa_maison_pidginunit_set_by_idea():
     # ESTABLISH
-    otx_music45_str = "music45"
-    inx_music87_str = "music87"
+    otx_accord45_str = "accord45"
+    inx_accord87_str = "accord87"
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_road = create_road(otx_music45_str, casa_otx_str)
-    casa_inx_road = create_road(inx_music87_str, casa_inx_str)
+    casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
+    casa_inx_road = create_road(inx_accord87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_road = create_road(casa_otx_road, clean_otx_str)
@@ -263,7 +263,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # print(f"{yao_pidginunit=}")
     otx_dt = get_casa_maison_road_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][base_str()] == otx_music45_str
+    assert otx_dt.iloc[0][base_str()] == otx_accord45_str
     assert otx_dt.iloc[1][base_str()] == casa_otx_road
     assert otx_dt.iloc[2][base_str()] == clean_otx_road
     assert otx_dt.iloc[3][base_str()] == sweep_otx_road
@@ -276,7 +276,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # THEN
     print("")
     print(f"after  {otx_dt=}")
-    assert otx_dt.iloc[0][base_str()] == inx_music87_str
+    assert otx_dt.iloc[0][base_str()] == inx_accord87_str
     assert otx_dt.iloc[1][base_str()] == casa_inx_road
     assert otx_dt.iloc[2][base_str()] == clean_inx_road
     assert otx_dt.iloc[3][base_str()] == sweep_inx_road

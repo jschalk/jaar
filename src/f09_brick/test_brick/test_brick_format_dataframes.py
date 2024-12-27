@@ -45,8 +45,8 @@ def test_create_brick_df_Arg_brick_format_00021_bud_acctunit_v0_0_0():
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -59,19 +59,19 @@ def test_create_brick_df_Arg_brick_format_00021_bud_acctunit_v0_0_0():
     array_headers = list(acct_dataframe.columns)
     acct_brickref = get_brickref_obj(x_brick_name)
     assert array_headers == acct_brickref.get_headers_list()
-    assert acct_dataframe.loc[0, deal_id_str()] == music_deal_id
+    assert acct_dataframe.loc[0, deal_id_str()] == accord_deal_id
     assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[0, acct_id_str()] == bob_str
     assert acct_dataframe.loc[0, debtit_belief_str()] == bob_debtit_belief
     assert acct_dataframe.loc[0, credit_belief_str()] == bob_credit_belief
 
-    assert acct_dataframe.loc[1, deal_id_str()] == music_deal_id
+    assert acct_dataframe.loc[1, deal_id_str()] == accord_deal_id
     assert acct_dataframe.loc[1, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[1, acct_id_str()] == sue_str
     assert acct_dataframe.loc[1, debtit_belief_str()] == sue_debtit_belief
     assert acct_dataframe.loc[1, credit_belief_str()] == sue_credit_belief
 
-    assert acct_dataframe.loc[2, deal_id_str()] == music_deal_id
+    assert acct_dataframe.loc[2, deal_id_str()] == accord_deal_id
     assert acct_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
     assert acct_dataframe.loc[2, acct_id_str()] == yao_str
     assert acct_dataframe.loc[2, debtit_belief_str()] == yao_debtit_belief
@@ -85,8 +85,8 @@ def test_create_brick_df_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     sue_budunit.add_acctunit(sue_str)
     sue_budunit.add_acctunit(bob_str)
     sue_budunit.add_acctunit(yao_str)
@@ -117,28 +117,28 @@ def test_create_brick_df_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     acct_brickref = get_brickref_obj(x_brick_name)
     print(f"{len(membership_dataframe)=}")
     assert array_headers == acct_brickref.get_headers_list()
-    assert membership_dataframe.loc[0, deal_id_str()] == music_deal_id
+    assert membership_dataframe.loc[0, deal_id_str()] == accord_deal_id
     assert membership_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert membership_dataframe.loc[0, acct_id_str()] == bob_str
     assert membership_dataframe.loc[0, group_id_str()] == iowa_str
     assert membership_dataframe.loc[0, credit_vote_str()] == bob_iowa_credit_w
     assert membership_dataframe.loc[0, debtit_vote_str()] == bob_iowa_debtit_w
 
-    assert membership_dataframe.loc[2, deal_id_str()] == music_deal_id
+    assert membership_dataframe.loc[2, deal_id_str()] == accord_deal_id
     assert membership_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
     assert membership_dataframe.loc[2, acct_id_str()] == sue_str
     assert membership_dataframe.loc[2, group_id_str()] == iowa_str
     assert membership_dataframe.loc[2, credit_vote_str()] == sue_iowa_credit_w
     assert membership_dataframe.loc[2, debtit_vote_str()] == sue_iowa_debtit_w
 
-    assert membership_dataframe.loc[4, deal_id_str()] == music_deal_id
+    assert membership_dataframe.loc[4, deal_id_str()] == accord_deal_id
     assert membership_dataframe.loc[4, owner_id_str()] == sue_budunit._owner_id
     assert membership_dataframe.loc[4, acct_id_str()] == yao_str
     assert membership_dataframe.loc[4, group_id_str()] == iowa_str
     assert membership_dataframe.loc[4, credit_vote_str()] == yao_iowa_credit_w
     assert membership_dataframe.loc[4, debtit_vote_str()] == yao_iowa_debtit_w
 
-    assert membership_dataframe.loc[5, deal_id_str()] == music_deal_id
+    assert membership_dataframe.loc[5, deal_id_str()] == accord_deal_id
     assert membership_dataframe.loc[5, owner_id_str()] == sue_budunit._owner_id
     assert membership_dataframe.loc[5, acct_id_str()] == yao_str
     assert membership_dataframe.loc[5, group_id_str()] == ohio_str
@@ -150,8 +150,8 @@ def test_create_brick_df_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
 def test_create_brick_df_Arg_brick_format_00013_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31
@@ -170,14 +170,14 @@ def test_create_brick_df_Arg_brick_format_00013_itemunit_v0_0_0():
 
     assert itemunit_format.loc[0, owner_id_str()] == sue_budunit._owner_id
     assert itemunit_format.loc[0, pledge_str()] == ""
-    assert itemunit_format.loc[0, deal_id_str()] == music_deal_id
+    assert itemunit_format.loc[0, deal_id_str()] == accord_deal_id
     assert itemunit_format.loc[0, lx_str()] == casa_str
     assert itemunit_format.loc[0, mass_str()] == casa_mass
-    assert itemunit_format.loc[0, parent_road_str()] == music_deal_id
+    assert itemunit_format.loc[0, parent_road_str()] == accord_deal_id
 
     assert itemunit_format.loc[1, owner_id_str()] == sue_budunit._owner_id
     assert itemunit_format.loc[1, pledge_str()] == "Yes"
-    assert itemunit_format.loc[1, deal_id_str()] == music_deal_id
+    assert itemunit_format.loc[1, deal_id_str()] == accord_deal_id
     assert itemunit_format.loc[1, parent_road_str()] == casa_road
     assert itemunit_format.loc[1, lx_str()] == clean_str
     assert itemunit_format.loc[1, mass_str()] == 1
@@ -186,7 +186,7 @@ def test_create_brick_df_Arg_brick_format_00013_itemunit_v0_0_0():
 
 def test_save_brick_csv_Arg_brick_format_00019_itemunit_v0_0_0():
     # ESTABLISH
-    sue_budunit = budunit_shop("Sue", "music56")
+    sue_budunit = budunit_shop("Sue", "accord56")
     sue_budunit = add_time_creg_itemunit(sue_budunit)
     sue_budunit = add_time_five_itemunit(sue_budunit)
     x_brick_name = brick_format_00019_itemunit_v0_0_0()
@@ -217,8 +217,8 @@ def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -234,9 +234,9 @@ def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     # THEN
     assert os_path_exists(csv_example_path)
     sue1_acct_example_csv = """face_id,event_id,deal_id,owner_id,acct_id,credit_belief,debtit_belief
-,,music56,Sue,Bob,13,29
-,,music56,Sue,Sue,11,23
-,,music56,Sue,Yao,41,37
+,,accord56,Sue,Bob,13,29
+,,accord56,Sue,Sue,11,23
+,,accord56,Sue,Yao,41,37
 """
     brick_file_str = open_file(brick_deals_dir(), acct_filename)
     print(f"      {brick_file_str=}")
@@ -251,10 +251,10 @@ def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     # THEN
     assert os_path_exists(csv_example_path)
     sue2_acct_example_csv = """face_id,event_id,deal_id,owner_id,acct_id,credit_belief,debtit_belief
-,,music56,Sue,Bob,13,29
-,,music56,Sue,Sue,11,23
-,,music56,Sue,Yao,41,37
-,,music56,Sue,Zia,1,1
+,,accord56,Sue,Bob,13,29
+,,accord56,Sue,Sue,11,23
+,,accord56,Sue,Yao,41,37
+,,accord56,Sue,Zia,1,1
 """
     assert open_file(brick_deals_dir(), acct_filename) == sue2_acct_example_csv
 
@@ -263,8 +263,8 @@ def test_save_brick_csv_Arg_brick_format_00013_itemunit_v0_0_0(brick_env_setup_c
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31

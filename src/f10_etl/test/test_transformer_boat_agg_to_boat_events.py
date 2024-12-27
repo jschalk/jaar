@@ -42,11 +42,11 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
         hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event1, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event1, music23_str, hour7am, minute_420]
-    row3 = [yao_str, event3, music23_str, hour7am, minute_420]
-    row4 = [yao_str, event9, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    row1 = [sue_str, event1, accord23_str, hour6am, minute_360]
+    row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
+    row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
+    row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4], columns=brick_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", df1)
     etl_ocean_to_boat_staging(ocean_dir, boat_dir)
@@ -103,12 +103,12 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario1(
         hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event1, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event1, music23_str, hour7am, minute_420]
-    row3 = [yao_str, event1, music23_str, hour7am, minute_420]
-    row4 = [yao_str, event9, music23_str, hour7am, minute_420]
-    row5 = [bob_str, event3, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    row1 = [sue_str, event1, accord23_str, hour6am, minute_360]
+    row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
+    row3 = [yao_str, event1, accord23_str, hour7am, minute_420]
+    row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
+    row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", df1)
     etl_ocean_to_boat_staging(ocean_dir, boat_dir)

@@ -29,18 +29,18 @@ def test_bow_inx_event_bricks_to_aft_faces_Scenario0(env_dir_setup_cleanup):
         owner_id_str(),
         acct_id_str(),
     ]
-    music23_str = "music23"
-    sue0 = [sue_inx, event3, music23_str, bob_inx, bob_inx]
-    sue1 = [sue_inx, event3, music23_str, yao_inx, bob_inx]
-    sue2 = [sue_inx, event3, music23_str, yao_inx, yao_inx]
-    e3_music23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
+    accord23_str = "accord23"
+    sue0 = [sue_inx, event3, accord23_str, bob_inx, bob_inx]
+    sue1 = [sue_inx, event3, accord23_str, yao_inx, bob_inx]
+    sue2 = [sue_inx, event3, accord23_str, yao_inx, yao_inx]
+    e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz")
     bow_sue_dir = create_path(fizz_world._faces_bow_dir, sue_otx)
     bow_e3_dir = create_path(bow_sue_dir, event3)
     bow_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
     inx_str = "inx"
-    upsert_sheet(bow_e3_br00011_path, inx_str, e3_music23_df)
+    upsert_sheet(bow_e3_br00011_path, inx_str, e3_accord23_df)
     assert sheet_exists(bow_e3_br00011_path, inx_str)
     aft_sue_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
     aft_br00011_path = create_path(aft_sue_dir, br00011_filename)
@@ -54,7 +54,7 @@ def test_bow_inx_event_bricks_to_aft_faces_Scenario0(env_dir_setup_cleanup):
     # THEN
     assert sheet_exists(aft_br00011_path, inx_str)
     aft_e3_df = pandas_read_excel(aft_br00011_path, sheet_name=inx_str)
-    pandas_assert_frame_equal(aft_e3_df, e3_music23_df)
+    pandas_assert_frame_equal(aft_e3_df, e3_accord23_df)
 
 
 def test_bow_inx_event_bricks_to_aft_faces_Scenario1(env_dir_setup_cleanup):
@@ -72,13 +72,13 @@ def test_bow_inx_event_bricks_to_aft_faces_Scenario1(env_dir_setup_cleanup):
         owner_id_str(),
         acct_id_str(),
     ]
-    music23_str = "music23"
-    sue0 = [sue_inx, event3, music23_str, bob_inx, bob_inx]
-    sue1 = [sue_inx, event3, music23_str, yao_inx, bob_inx]
-    sue2 = [sue_inx, event3, music23_str, yao_inx, yao_inx]
-    sue3 = [sue_inx, event7, music23_str, yao_inx, yao_inx]
-    e3_music23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
-    e7_music23_df = DataFrame([sue3], columns=br00011_columns)
+    accord23_str = "accord23"
+    sue0 = [sue_inx, event3, accord23_str, bob_inx, bob_inx]
+    sue1 = [sue_inx, event3, accord23_str, yao_inx, bob_inx]
+    sue2 = [sue_inx, event3, accord23_str, yao_inx, yao_inx]
+    sue3 = [sue_inx, event7, accord23_str, yao_inx, yao_inx]
+    e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
+    e7_accord23_df = DataFrame([sue3], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz")
     bow_sue_dir = create_path(fizz_world._faces_bow_dir, sue_otx)
@@ -87,8 +87,8 @@ def test_bow_inx_event_bricks_to_aft_faces_Scenario1(env_dir_setup_cleanup):
     bow_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
     bow_e7_br00011_path = create_path(bow_e7_dir, br00011_filename)
     inx_str = "inx"
-    upsert_sheet(bow_e3_br00011_path, inx_str, e3_music23_df)
-    upsert_sheet(bow_e7_br00011_path, inx_str, e7_music23_df)
+    upsert_sheet(bow_e3_br00011_path, inx_str, e3_accord23_df)
+    upsert_sheet(bow_e7_br00011_path, inx_str, e7_accord23_df)
     assert sheet_exists(bow_e3_br00011_path, inx_str)
     assert sheet_exists(bow_e7_br00011_path, inx_str)
     sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
@@ -102,7 +102,7 @@ def test_bow_inx_event_bricks_to_aft_faces_Scenario1(env_dir_setup_cleanup):
 
     # THEN
     assert sheet_exists(aft_br00011_path, inx_str)
-    sue_music23_df = DataFrame([sue0, sue1, sue2, sue3], columns=br00011_columns)
+    sue_accord23_df = DataFrame([sue0, sue1, sue2, sue3], columns=br00011_columns)
     aft_sue_df = pandas_read_excel(aft_br00011_path, sheet_name=inx_str)
     print(f"{aft_sue_df=}")
-    pandas_assert_frame_equal(aft_sue_df, sue_music23_df)
+    pandas_assert_frame_equal(aft_sue_df, sue_accord23_df)

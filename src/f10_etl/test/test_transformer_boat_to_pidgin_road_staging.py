@@ -29,7 +29,7 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
     yao_str = "Yao"
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
-    m_str = "music23"
+    m_str = "accord23"
     event7 = 7
     x_boat_dir = get_test_etl_dir()
     br00117_file_path = create_path(x_boat_dir, "br00117.xlsx")
@@ -92,7 +92,7 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBrick
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    m_str = "music23"
+    m_str = "accord23"
     event1 = 1
     event2 = 2
     event5 = 5
@@ -180,7 +180,7 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario2_WorldUnit_eve
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    m_str = "music23"
+    m_str = "accord23"
     event1 = 1
     event2 = 2
     event5 = 5

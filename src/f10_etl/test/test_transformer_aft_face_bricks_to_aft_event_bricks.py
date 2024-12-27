@@ -31,12 +31,12 @@ def test_WorldUnit_aft_face_bricks_to_aft_event_bricks_CreatesFaceBrickSheets_Sc
         hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    sue0 = [sue_str, event3, music23_str, hour6am, minute_360]
-    sue1 = [sue_str, event3, music23_str, hour7am, minute_420]
-    zia0 = [zia_str, event7, music23_str, hour7am, minute_420]
-    zia1 = [zia_str, event9, music23_str, hour6am, minute_360]
-    zia2 = [zia_str, event9, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    sue0 = [sue_str, event3, accord23_str, hour6am, minute_360]
+    sue1 = [sue_str, event3, accord23_str, hour7am, minute_420]
+    zia0 = [zia_str, event7, accord23_str, hour7am, minute_420]
+    zia1 = [zia_str, event9, accord23_str, hour6am, minute_360]
+    zia2 = [zia_str, event9, accord23_str, hour7am, minute_420]
     example_sue_df = DataFrame([sue0, sue1], columns=brick_columns)
     example_zia_df = DataFrame([zia0, zia1, zia2], columns=brick_columns)
     faces_aft_dir = create_path(get_test_etl_dir(), "faces_aft")

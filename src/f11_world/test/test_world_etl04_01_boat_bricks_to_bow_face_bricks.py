@@ -32,9 +32,9 @@ def test_WorldUnit_boat_bricks_to_bow_face_bricks_CreatesOtxSheets_Scenario0_Gro
         hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event3, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event3, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    row1 = [sue_str, event3, accord23_str, hour6am, minute_360]
+    row2 = [sue_str, event3, accord23_str, hour7am, minute_420]
     br00003_boat_agg_df = DataFrame([row1, row2], columns=brick_columns)
     br00003_agg_file_path = create_path(fizz_world._boat_dir, "br00003.xlsx")
     upsert_sheet(br00003_agg_file_path, boat_valid_str(), br00003_boat_agg_df)
@@ -84,11 +84,11 @@ def test_WorldUnit_boat_bricks_to_bow_face_bricks_CreatesOtxSheets_Scenario0_Gro
 #         hour_idea_str(),
 #         cumlative_minute_str(),
 #     ]
-#     music23_str = "music23"
-#     row1 = [sue_str, event3, music23_str, hour6am, minute_360]
-#     row2 = [sue_str, event3, music23_str, hour7am, minute_420]
-#     row3 = [sue_str, event3, music23_str, hour7am, minute_480]
-#     row4 = [sue_str, event7, music23_str, hour7am, minute_480]
+#     accord23_str = "accord23"
+#     row1 = [sue_str, event3, accord23_str, hour6am, minute_360]
+#     row2 = [sue_str, event3, accord23_str, hour7am, minute_420]
+#     row3 = [sue_str, event3, accord23_str, hour7am, minute_480]
+#     row4 = [sue_str, event7, accord23_str, hour7am, minute_480]
 #     df1 = DataFrame([row1, row2, row3, row4], columns=brick_columns)
 #     upsert_sheet(ocean_file_path, "example1_br00003", df1)
 #     fizz_world.ocean_to_boat_staging()

@@ -30,18 +30,18 @@ def test_WorldUnit_ocean_to_boat_staging_CreatesboatFiles(env_dir_setup_cleanup)
         deal_id_str(),
         hour_idea_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event_1, minute_360, music23_str, hour6am]
-    row2 = [sue_str, event_1, minute_420, music23_str, hour7am]
-    row3 = [sue_str, event_2, minute_420, music23_str, hour7am]
+    accord23_str = "accord23"
+    row1 = [sue_str, event_1, minute_360, accord23_str, hour6am]
+    row2 = [sue_str, event_1, minute_420, accord23_str, hour7am]
+    row3 = [sue_str, event_2, minute_420, accord23_str, hour7am]
     incomplete_brick_columns = [
         face_id_str(),
         event_id_str(),
         cumlative_minute_str(),
         deal_id_str(),
     ]
-    incom_row1 = [sue_str, event_1, minute_360, music23_str]
-    incom_row2 = [sue_str, event_1, minute_420, music23_str]
+    incom_row1 = [sue_str, event_1, minute_360, accord23_str]
+    incom_row2 = [sue_str, event_1, minute_420, accord23_str]
 
     df1 = DataFrame([row1, row2], columns=brick_columns)
     df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_brick_columns)

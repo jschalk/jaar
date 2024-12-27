@@ -31,13 +31,13 @@ def test_WorldUnit_aft_event_bricks_to_deal_bricks_CreatesFaceBrickSheets_Scenar
         hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    music55_str = "music55"
-    sue0 = [sue_str, event3, music23_str, hour6am, minute_360]
-    sue1 = [sue_str, event3, music23_str, hour7am, minute_420]
-    zia0 = [zia_str, event7, music23_str, hour7am, minute_420]
-    zia1 = [zia_str, event9, music23_str, hour6am, minute_360]
-    zia2 = [zia_str, event9, music55_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    accord55_str = "accord55"
+    sue0 = [sue_str, event3, accord23_str, hour6am, minute_360]
+    sue1 = [sue_str, event3, accord23_str, hour7am, minute_420]
+    zia0 = [zia_str, event7, accord23_str, hour7am, minute_420]
+    zia1 = [zia_str, event9, accord23_str, hour6am, minute_360]
+    zia2 = [zia_str, event9, accord55_str, hour7am, minute_420]
     example_event3_df = DataFrame([sue0, sue1], columns=brick_columns)
     example_event7_df = DataFrame([zia0], columns=brick_columns)
     example_event9_df = DataFrame([zia1, zia2], columns=brick_columns)
@@ -54,10 +54,10 @@ def test_WorldUnit_aft_event_bricks_to_deal_bricks_CreatesFaceBrickSheets_Scenar
     upsert_sheet(event3_br00003_filepath, "inx", example_event3_df)
     upsert_sheet(event7_br00003_filepath, "inx", example_event7_df)
     upsert_sheet(event9_br00003_filepath, "inx", example_event9_df)
-    e3_m23_dir = create_path(event3_dir, music23_str)
-    e7_m23_dir = create_path(event7_dir, music23_str)
-    e9_m23_dir = create_path(event9_dir, music23_str)
-    e9_m55_dir = create_path(event9_dir, music55_str)
+    e3_m23_dir = create_path(event3_dir, accord23_str)
+    e7_m23_dir = create_path(event7_dir, accord23_str)
+    e9_m23_dir = create_path(event9_dir, accord23_str)
+    e9_m55_dir = create_path(event9_dir, accord55_str)
     e3_m23_br00003_filepath = create_path(e3_m23_dir, br00003_filename)
     e7_m23_br00003_filepath = create_path(e7_m23_dir, br00003_filename)
     e9_m23_br00003_filepath = create_path(e9_m23_dir, br00003_filename)

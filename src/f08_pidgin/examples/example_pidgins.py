@@ -27,15 +27,15 @@ def get_clean_ideamap() -> IdeaMap:
 
 
 def get_clean_roadmap() -> RoadMap:
-    otx_music45_str = "music45"
-    inx_music87_str = "music87"
+    otx_accord45_str = "accord45"
+    inx_accord87_str = "accord87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     bridge = default_bridge_if_None()
-    clean_otx_road = f"{otx_music45_str}{bridge}{clean_otx_str}"
+    clean_otx_road = f"{otx_accord45_str}{bridge}{clean_otx_str}"
     road_mapunit = roadmap_shop(face_id="Sue")
     road_mapunit.set_idea(clean_otx_str, clean_inx_str)
-    road_mapunit.set_otx2inx(otx_music45_str, inx_music87_str)
+    road_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
     road_mapunit.reveal_inx(clean_otx_road)
     return road_mapunit
 
@@ -100,15 +100,15 @@ def get_suita_acctmap() -> AcctMap:
 
 
 def get_slash_roadmap() -> RoadMap:
-    otx_music45_str = "music45"
-    inx_music87_str = "music87"
+    otx_accord45_str = "accord45"
+    inx_accord87_str = "accord87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
-    clean_otx_road = f"{otx_music45_str}{slash_otx_bridge}{clean_otx_str}"
-    clean_otx_road = f"{otx_music45_str}{colon_inx_bridge}{clean_otx_str}"
+    clean_otx_road = f"{otx_accord45_str}{slash_otx_bridge}{clean_otx_str}"
+    clean_otx_road = f"{otx_accord45_str}{colon_inx_bridge}{clean_otx_str}"
     road_mapunit = roadmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
@@ -116,7 +116,7 @@ def get_slash_roadmap() -> RoadMap:
         face_id="Sue",
     )
     road_mapunit.set_idea(clean_otx_str, clean_inx_str)
-    road_mapunit.set_otx2inx(otx_music45_str, inx_music87_str)
+    road_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
     road_mapunit.reveal_inx(clean_otx_road)
     return road_mapunit
 
@@ -200,12 +200,12 @@ def get_suita_acct_id_inx_dt() -> DataFrame:
 
 
 def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
-    otx_music45_str = "music45"
-    inx_music87_str = "music87"
+    otx_accord45_str = "accord45"
+    inx_accord87_str = "accord87"
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_road = create_road(otx_music45_str, casa_otx_str)
-    casa_inx_road = create_road(inx_music87_str, casa_inx_str)
+    casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
+    casa_inx_road = create_road(inx_accord87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_road = create_road(casa_otx_road, clean_otx_str)
@@ -216,7 +216,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
     rx = type_RoadUnit_str()
-    sue_pidginunit.set_otx2inx(rx, otx_music45_str, inx_music87_str)
+    sue_pidginunit.set_otx2inx(rx, otx_accord45_str, inx_accord87_str)
     sue_pidginunit.set_otx2inx(rx, casa_otx_road, casa_inx_road)
     sue_pidginunit.set_otx2inx(rx, clean_otx_road, clean_inx_road)
     sue_pidginunit.set_otx2inx(rx, sweep_otx_road, sweep_inx_road)
@@ -224,12 +224,12 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
 
 
 def get_casa_maison_pidginunit_set_by_idea() -> PidginUnit:
-    otx_music45_str = "music45"
-    inx_music87_str = "music87"
+    otx_accord45_str = "accord45"
+    inx_accord87_str = "accord87"
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_road = create_road(otx_music45_str, casa_otx_str)
-    casa_inx_road = create_road(inx_music87_str, casa_inx_str)
+    casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
+    casa_inx_road = create_road(inx_accord87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_road = create_road(casa_otx_road, clean_otx_str)
@@ -239,22 +239,22 @@ def get_casa_maison_pidginunit_set_by_idea() -> PidginUnit:
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
-    sue_pidginunit.set_idea(otx_music45_str, inx_music87_str)
+    sue_pidginunit.set_idea(otx_accord45_str, inx_accord87_str)
     sue_pidginunit.set_idea(casa_otx_str, casa_inx_str)
     sue_pidginunit.set_idea(clean_otx_str, clean_inx_str)
     return sue_pidginunit
 
 
 def get_casa_maison_road_otx_dt() -> DataFrame:
-    otx_music45_str = "music45"
+    otx_accord45_str = "accord45"
     casa_otx_str = "casa"
-    casa_otx_road = create_road(otx_music45_str, casa_otx_str)
+    casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
     clean_otx_str = "clean"
     clean_otx_road = create_road(casa_otx_road, clean_otx_str)
     sweep_str = "sweep"
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     otx_dt = DataFrame(columns=[base_str()])
-    otx_dt.loc[0, base_str()] = otx_music45_str
+    otx_dt.loc[0, base_str()] = otx_accord45_str
     otx_dt.loc[1, base_str()] = casa_otx_road
     otx_dt.loc[2, base_str()] = clean_otx_road
     otx_dt.loc[3, base_str()] = sweep_otx_road
@@ -262,12 +262,12 @@ def get_casa_maison_road_otx_dt() -> DataFrame:
 
 
 def get_casa_maison_road_inx_dt() -> DataFrame:
-    inx_music87_str = "music87"
-    casa_inx_road = create_road(inx_music87_str, "maison")
+    inx_accord87_str = "accord87"
+    casa_inx_road = create_road(inx_accord87_str, "maison")
     clean_inx_road = create_road(casa_inx_road, "propre")
     sweep_inx_road = create_road(clean_inx_road, "sweep")
     inx_dt = DataFrame(columns=[base_str()])
-    inx_dt.loc[0, base_str()] = inx_music87_str
+    inx_dt.loc[0, base_str()] = inx_accord87_str
     inx_dt.loc[1, base_str()] = casa_inx_road
     inx_dt.loc[2, base_str()] = clean_inx_road
     inx_dt.loc[3, base_str()] = sweep_inx_road
@@ -275,12 +275,12 @@ def get_casa_maison_road_inx_dt() -> DataFrame:
 
 
 def get_casa_maison_road_otx2inx_dt() -> DataFrame:
-    inx_music87_str = "music87"
-    casa_inx_road = create_road(inx_music87_str, "maison")
+    inx_accord87_str = "accord87"
+    casa_inx_road = create_road(inx_accord87_str, "maison")
     clean_inx_road = create_road(casa_inx_road, "propre")
     sweep_inx_road = create_road(clean_inx_road, "sweep")
-    otx_music45_str = "music45"
-    casa_otx_road = create_road(otx_music45_str, "casa")
+    otx_accord45_str = "accord45"
+    casa_otx_road = create_road(otx_accord45_str, "casa")
     clean_otx_road = create_road(casa_otx_road, "clean")
     sweep_otx_road = create_road(clean_otx_road, "sweep")
     x_rd = default_bridge_if_None()
@@ -298,7 +298,7 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
             "inx_road",
         ]
     )
-    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
+    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_accord45_str, inx_accord87_str]
     inx_dt.loc[1] = ["Sue", e7, x_rd, x_rd, uw, casa_otx_road, casa_inx_road]
     inx_dt.loc[2] = ["Sue", e7, x_rd, x_rd, uw, clean_otx_road, clean_inx_road]
     inx_dt.loc[3] = ["Sue", e7, x_rd, x_rd, uw, sweep_otx_road, sweep_inx_road]
@@ -306,11 +306,11 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
 
 
 def get_casa_maison_idea_dt() -> DataFrame:
-    inx_music87_str = "music87"
+    inx_accord87_str = "accord87"
     casa_inx_str = "maison"
     clean_inx_str = "propre"
     sweep_inx_str = "sweep"
-    otx_music45_str = "music45"
+    otx_accord45_str = "accord45"
     casa_otx_str = "casa"
     clean_otx_str = "clean"
     sweep_otx_str = "sweep"
@@ -329,7 +329,7 @@ def get_casa_maison_idea_dt() -> DataFrame:
             "inx_idea",
         ]
     )
-    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_music45_str, inx_music87_str]
+    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_accord45_str, inx_accord87_str]
     inx_dt.loc[1] = ["Sue", e7, x_rd, x_rd, uw, casa_otx_str, casa_inx_str]
     inx_dt.loc[2] = ["Sue", e7, x_rd, x_rd, uw, clean_otx_str, clean_inx_str]
     return inx_dt
@@ -369,8 +369,8 @@ def get_invalid_ideamap() -> RoadMap:
 
 
 def get_slash_ideamap() -> IdeaMap:
-    otx_music45_str = "music45"
-    inx_music87_str = "music87"
+    otx_accord45_str = "accord45"
+    inx_accord87_str = "accord87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     x_unknown_word = "UnknownWord"
@@ -383,22 +383,22 @@ def get_slash_ideamap() -> IdeaMap:
         face_id="Sue",
         event_id=7,
     )
-    x_ideamap.set_otx2inx(otx_music45_str, inx_music87_str)
+    x_ideamap.set_otx2inx(otx_accord45_str, inx_accord87_str)
     x_ideamap.set_otx2inx(clean_otx_str, clean_inx_str)
     x_ideamap.reveal_inx("running")
     return x_ideamap
 
 
 def get_slash_roadmap() -> RoadMap:
-    otx_music45_str = "music45"
-    inx_music87_str = "music87"
+    otx_accord45_str = "accord45"
+    inx_accord87_str = "accord87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
-    clean_otx_road = f"{otx_music45_str}{slash_otx_bridge}{clean_otx_str}"
-    clean_otx_road = f"{otx_music45_str}{colon_inx_bridge}{clean_otx_str}"
+    clean_otx_road = f"{otx_accord45_str}{slash_otx_bridge}{clean_otx_str}"
+    clean_otx_road = f"{otx_accord45_str}{colon_inx_bridge}{clean_otx_str}"
     x_roadmap = roadmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
@@ -408,7 +408,7 @@ def get_slash_roadmap() -> RoadMap:
         x_ideamap=get_slash_ideamap(),
     )
     x_roadmap.set_idea(clean_otx_str, clean_inx_str)
-    x_roadmap.set_otx2inx(otx_music45_str, inx_music87_str)
+    x_roadmap.set_otx2inx(otx_accord45_str, inx_accord87_str)
     x_roadmap.reveal_inx(clean_otx_road)
     return x_roadmap
 

@@ -7,11 +7,11 @@ from src.f07_deal.examples.deal_env import get_test_deals_dir
 
 # def create_example_deal1(graphics_bool) -> DealUnit:
 #     # ESTABLISH
-#     music_str = "music"
-#     music_deal = dealunit_shop(music_str, get_test_deals_dir(), in_memory_journal=True)
+#     accord_str = "accord"
+#     accord_deal = dealunit_shop(accord_str, get_test_deals_dir(), in_memory_journal=True)
 #     yao_str = "Yao"
-#     music_deal.init_owner_keeps(yao_str)
-#     yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
+#     accord_deal.init_owner_keeps(yao_str)
+#     yao_hubunit = hubunit_shop(None, accord_str, yao_str, None)
 #     yao_voice_bud = yao_hubunit.get_voice_bud()
 
 #     yao_voice_bud.set_credor_respect(101)
@@ -46,24 +46,26 @@ from src.f07_deal.examples.deal_env import get_test_deals_dir
 #     yao_hubunit.create_voice_treasury_db_files()
 
 #     # WHEN
-#     music_deal._set_all_healer_dutys(yao_str)
+#     accord_deal._set_all_healer_dutys(yao_str)
 
-#     return music_deal
+#     return accord_deal
 
 
 def create_example_deal2() -> DealUnit:
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(music_str, get_test_deals_dir(), in_memory_journal=True)
+    accord_str = "accord"
+    accord_deal = dealunit_shop(
+        accord_str, get_test_deals_dir(), in_memory_journal=True
+    )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_deal.init_owner_keeps(yao_str)
-    yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
-    wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
-    zia_hubunit = hubunit_shop(None, music_str, zia_str, None)
-    music_deal.init_owner_keeps(wei_str)
-    music_deal.init_owner_keeps(zia_str)
+    accord_deal.init_owner_keeps(yao_str)
+    yao_hubunit = hubunit_shop(None, accord_str, yao_str, None)
+    wei_hubunit = hubunit_shop(None, accord_str, wei_str, None)
+    zia_hubunit = hubunit_shop(None, accord_str, zia_str, None)
+    accord_deal.init_owner_keeps(wei_str)
+    accord_deal.init_owner_keeps(zia_str)
     yao_voice_bud = yao_hubunit.get_voice_bud()
     wei_voice_bud = wei_hubunit.get_voice_bud()
     zia_voice_bud = zia_hubunit.get_voice_bud()
@@ -109,26 +111,28 @@ def create_example_deal2() -> DealUnit:
     yao_hubunit.create_voice_treasury_db_files()
     wei_hubunit.create_voice_treasury_db_files()
     zia_hubunit.create_voice_treasury_db_files()
-    music_deal._set_all_healer_dutys(yao_str)
-    music_deal._set_all_healer_dutys(wei_str)
-    music_deal._set_all_healer_dutys(zia_str)
+    accord_deal._set_all_healer_dutys(yao_str)
+    accord_deal._set_all_healer_dutys(wei_str)
+    accord_deal._set_all_healer_dutys(zia_str)
 
-    return music_deal
+    return accord_deal
 
 
 def create_example_deal3() -> DealUnit:
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(music_str, get_test_deals_dir(), in_memory_journal=True)
+    accord_str = "accord"
+    accord_deal = dealunit_shop(
+        accord_str, get_test_deals_dir(), in_memory_journal=True
+    )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_deal.init_owner_keeps(yao_str)
-    music_deal.init_owner_keeps(wei_str)
-    music_deal.init_owner_keeps(zia_str)
-    yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
-    wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
-    zia_hubunit = hubunit_shop(None, music_str, zia_str, None)
+    accord_deal.init_owner_keeps(yao_str)
+    accord_deal.init_owner_keeps(wei_str)
+    accord_deal.init_owner_keeps(zia_str)
+    yao_hubunit = hubunit_shop(None, accord_str, yao_str, None)
+    wei_hubunit = hubunit_shop(None, accord_str, wei_str, None)
+    zia_hubunit = hubunit_shop(None, accord_str, zia_str, None)
     yao_voice_bud = yao_hubunit.get_voice_bud()
     wei_voice_bud = wei_hubunit.get_voice_bud()
     zia_voice_bud = zia_hubunit.get_voice_bud()
@@ -158,22 +162,24 @@ def create_example_deal3() -> DealUnit:
     wei_hubunit.save_voice_bud(wei_voice_bud)
     zia_hubunit.save_voice_bud(zia_voice_bud)
 
-    return music_deal
+    return accord_deal
 
 
 def create_example_deal4() -> DealUnit:
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(music_str, get_test_deals_dir(), in_memory_journal=True)
+    accord_str = "accord"
+    accord_deal = dealunit_shop(
+        accord_str, get_test_deals_dir(), in_memory_journal=True
+    )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    music_deal.init_owner_keeps(yao_str)
-    music_deal.init_owner_keeps(wei_str)
-    music_deal.init_owner_keeps(zia_str)
-    yao_hubunit = hubunit_shop(None, music_str, yao_str, None)
-    wei_hubunit = hubunit_shop(None, music_str, wei_str, None)
-    zia_hubunit = hubunit_shop(None, music_str, zia_str, None)
+    accord_deal.init_owner_keeps(yao_str)
+    accord_deal.init_owner_keeps(wei_str)
+    accord_deal.init_owner_keeps(zia_str)
+    yao_hubunit = hubunit_shop(None, accord_str, yao_str, None)
+    wei_hubunit = hubunit_shop(None, accord_str, wei_str, None)
+    zia_hubunit = hubunit_shop(None, accord_str, zia_str, None)
     yao_voice_bud = yao_hubunit.get_voice_bud()
     wei_voice_bud = wei_hubunit.get_voice_bud()
     zia_voice_bud = zia_hubunit.get_voice_bud()
@@ -240,4 +246,4 @@ def create_example_deal4() -> DealUnit:
     wei_hubunit.save_voice_bud(wei_voice_bud)
     zia_hubunit.save_voice_bud(zia_voice_bud)
 
-    return music_deal
+    return accord_deal
