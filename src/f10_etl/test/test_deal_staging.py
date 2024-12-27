@@ -3,7 +3,7 @@ from src.f01_road.finance_tran import quota_str, time_id_str, bridge_str
 from src.f03_chrono.chrono import (
     c400_number_str,
     monthday_distortion_str,
-    timeline_lx_str,
+    timeline_idea_str,
     yr1_jan1_offset_str,
 )
 from src.f04_gift.atom_config import (
@@ -18,11 +18,11 @@ from src.f04_gift.atom_config import (
 from src.f07_deal.deal_config import (
     current_time_str,
     amount_str,
-    month_lx_str,
-    hour_lx_str,
+    month_idea_str,
+    hour_idea_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_lx_str,
+    weekday_label_str,
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import event_id_str
@@ -43,12 +43,12 @@ from copy import copy as copy_copy
 #     "br00042.xlsx",
 # }
 
-# br00000 deal_id c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_lx,yr1_jan1_offset
+# br00000 deal_id c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
 # br00001 deal_id owner_id,acct_id,time_id,quota
 # br00002 deal_id owner_id,acct_id,time_id,amount
-# br00003 deal_id hour_lx,cumlative_minute
-# br00004 deal_id month_lx,cumlative_day
-# br00005 deal_id weekday_lx,weekday_order
+# br00003 deal_id hour_idea,cumlative_minute
+# br00004 deal_id month_idea,cumlative_day
+# br00005 deal_id weekday_label,weekday_order
 
 
 def test_create_init_deal_staging_files_CreatesFiles(env_dir_setup_cleanup):
@@ -119,7 +119,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
             penny_str(),
             respect_bit_str(),
             bridge_str(),
-            timeline_lx_str(),
+            timeline_idea_str(),
             yr1_jan1_offset_str(),
         ]
     )
@@ -129,9 +129,9 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
     expected_br2_columns.extend(
         [owner_id_str(), acct_id_str(), time_id_str(), amount_str()]
     )
-    expected_br3_columns.extend([hour_lx_str(), cumlative_minute_str()])
-    expected_br4_columns.extend([month_lx_str(), cumlative_day_str()])
-    expected_br5_columns.extend([weekday_lx_str(), weekday_order_str()])
+    expected_br3_columns.extend([hour_idea_str(), cumlative_minute_str()])
+    expected_br4_columns.extend([month_idea_str(), cumlative_day_str()])
+    expected_br5_columns.extend([weekday_label_str(), weekday_order_str()])
 
     print(f"{list(br00000_df.columns)=}")
     assert list(br00000_df.columns) == expected_br0_columns
@@ -407,7 +407,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 
 # from src.f00_instrument.file import create_path
 # from src.f04_gift.atom_config import face_id_str, deal_id_str
-# from src.f07_deal.deal_config import cumlative_minute_str, hour_lx_str
+# from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
 # from src.f08_pidgin.pidgin_config import event_id_str
 # from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
 # from src.f11_world.world import worldunit_shop
@@ -435,7 +435,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 #         face_id_str(),
 #         event_id_str(),
 #         deal_id_str(),
-#         hour_lx_str(),
+#         hour_idea_str(),
 #         cumlative_minute_str(),
 #     ]
 #     music23_str = "music23"

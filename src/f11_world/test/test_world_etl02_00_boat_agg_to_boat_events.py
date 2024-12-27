@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, deal_id_str
-from src.f07_deal.deal_config import cumlative_minute_str, hour_lx_str
+from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import (
     get_sheet_names,
@@ -35,7 +35,7 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
         face_id_str(),
         event_id_str(),
         deal_id_str(),
-        hour_lx_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
     music23_str = "music23"
@@ -95,7 +95,7 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario1(
         face_id_str(),
         event_id_str(),
         deal_id_str(),
-        hour_lx_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
     music23_str = "music23"

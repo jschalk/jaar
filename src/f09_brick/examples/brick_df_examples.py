@@ -7,7 +7,7 @@ JEFFY45_STR = "jeffy45"
 
 def get_ex1_br00000_df() -> DataFrame:
     """brick_format_00000_dealunit_v0_0_0
-    c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_lx,yr1_jan1_offset
+    c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
@@ -19,7 +19,7 @@ def get_ex1_br00000_df() -> DataFrame:
             "penny",
             "respect_bit",
             "bridge",
-            "timeline_lx",
+            "timeline_idea",
             "yr1_jan1_offset",
         ]
     )
@@ -45,8 +45,8 @@ def get_ex1_br00002_df() -> DataFrame:
 
 def get_ex1_br00003_df() -> DataFrame:
     """brick_format_00003_deal_timeline_hour_v0_0_0
-    cumlative_minute,deal_id,hour_lx"""
-    x_df = DataFrame(columns=["deal_id", "hour_lx", "cumlative_minute"])
+    cumlative_minute,deal_id,hour_idea"""
+    x_df = DataFrame(columns=["deal_id", "hour_idea", "cumlative_minute"])
     x_df.loc[0] = [MUSIC23_STR, "0-12am", 60]
     x_df.loc[1] = [MUSIC23_STR, "1-1am", 120]
     x_df.loc[2] = [MUSIC23_STR, "2-2am", 180]
@@ -76,8 +76,8 @@ def get_ex1_br00003_df() -> DataFrame:
 
 def get_ex1_br00004_df() -> DataFrame:
     """brick_format_00004_deal_timeline_month_v0_0_0
-    cumlative_day,deal_id,month_lx"""
-    x_df = DataFrame(columns=["deal_id", "month_lx", "cumlative_day"])
+    cumlative_day,deal_id,month_idea"""
+    x_df = DataFrame(columns=["deal_id", "month_idea", "cumlative_day"])
     x_df.loc[0] = [MUSIC23_STR, "March", 31]
     x_df.loc[1] = [MUSIC23_STR, "April", 61]
     x_df.loc[2] = [MUSIC23_STR, "May", 92]
@@ -95,8 +95,8 @@ def get_ex1_br00004_df() -> DataFrame:
 
 def get_ex1_br00005_df() -> DataFrame:
     """brick_format_00005_deal_timeline_weekday_v0_0_0
-    deal_id,weekday_lx,weekday_order"""
-    x_df = DataFrame(columns=["deal_id", "weekday_lx", "weekday_order"])
+    deal_id,weekday_label,weekday_order"""
+    x_df = DataFrame(columns=["deal_id", "weekday_label", "weekday_order"])
     x_df.loc[0] = [MUSIC23_STR, "Wednesday", 0]
     x_df.loc[1] = [MUSIC23_STR, "Thursday", 1]
     x_df.loc[2] = [MUSIC23_STR, "Friday", 2]
@@ -109,7 +109,7 @@ def get_ex1_br00005_df() -> DataFrame:
 
 def get_ex2_br00000_df() -> DataFrame:
     """brick_format_00000_dealunit_v0_0_0
-    c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_lx,yr1_jan1_offset
+    c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
@@ -121,7 +121,7 @@ def get_ex2_br00000_df() -> DataFrame:
             "penny",
             "respect_bit",
             "bridge",
-            "timeline_lx",
+            "timeline_idea",
             "yr1_jan1_offset",
         ]
     )
@@ -156,8 +156,8 @@ def get_ex2_br00002_df() -> DataFrame:
 
 def get_ex2_br00003_df() -> DataFrame:
     """brick_format_00003_deal_timeline_hour_v0_0_0
-    cumlative_minute,deal_id,hour_lx"""
-    x_df = DataFrame(columns=["deal_id", "hour_lx", "cumlative_minute"])
+    cumlative_minute,deal_id,hour_idea"""
+    x_df = DataFrame(columns=["deal_id", "hour_idea", "cumlative_minute"])
     x_df.loc[0] = [MUSIC23_STR, "0-12am", 60]
     x_df.loc[1] = [MUSIC23_STR, "1-1am", 120]
     x_df.loc[2] = [MUSIC23_STR, "2-2am", 180]
@@ -207,8 +207,8 @@ def get_ex2_br00003_df() -> DataFrame:
 
 def get_ex2_br00004_df() -> DataFrame:
     """brick_format_00004_deal_timeline_month_v0_0_0
-    cumlative_day,deal_id,month_lx"""
-    x_df = DataFrame(columns=["deal_id", "month_lx", "cumlative_day"])
+    cumlative_day,deal_id,month_idea"""
+    x_df = DataFrame(columns=["deal_id", "month_idea", "cumlative_day"])
     x_df.loc[0] = [MUSIC23_STR, "March", 31]
     x_df.loc[1] = [MUSIC23_STR, "April", 61]
     x_df.loc[2] = [MUSIC23_STR, "May", 92]
@@ -241,8 +241,8 @@ def get_ex2_br00004_df() -> DataFrame:
 
 def get_ex2_br00005_df() -> DataFrame:
     """brick_format_00005_deal_timeline_weekday_v0_0_0
-    deal_id,weekday_lx,weekday_order"""
-    x_df = DataFrame(columns=["deal_id", "weekday_lx", "weekday_order"])
+    deal_id,weekday_label,weekday_order"""
+    x_df = DataFrame(columns=["deal_id", "weekday_label", "weekday_order"])
     x_df.loc[0] = [MUSIC23_STR, "Wednesday", 0]
     x_df.loc[1] = [MUSIC23_STR, "Thursday", 1]
     x_df.loc[2] = [MUSIC23_STR, "Friday", 2]

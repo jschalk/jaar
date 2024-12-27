@@ -18,7 +18,7 @@ from src.f03_chrono.chrono import (
     weekdays_config_str,
     months_config_str,
     monthday_distortion_str,
-    timeline_lx_str,
+    timeline_idea_str,
     c400_number_str,
     yr1_jan1_offset_str,
     validate_timeline_config,
@@ -86,7 +86,7 @@ def test_str_functions_ReturnsObj():
     assert weekdays_config_str() == "weekdays_config"
     assert months_config_str() == "months_config"
     assert monthday_distortion_str() == "monthday_distortion"
-    assert timeline_lx_str() == "timeline_lx"
+    assert timeline_idea_str() == "timeline_idea"
     assert c400_number_str() == "c400_number"
     assert yr1_jan1_offset_str() == "yr1_jan1_offset"
 
@@ -124,7 +124,7 @@ def test_validate_timeline_config_ReturnsObj_CheckEachElementIsNecessary():
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(timeline_lx_str())
+    creg_config.pop(timeline_idea_str())
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
@@ -227,7 +227,7 @@ def test_create_timeline_config_ReturnsObj():
 
     # WHEN
     five_dict = create_timeline_config(
-        timeline_lx=five_str(),
+        timeline_idea=five_str(),
         c400_count=five_c400_count,
         hour_length=five_hour_length,
         month_length=five_month_length,
@@ -238,7 +238,7 @@ def test_create_timeline_config_ReturnsObj():
 
     # THEN
     assert validate_timeline_config(five_dict)
-    assert five_dict.get(timeline_lx_str()) == five_str()
+    assert five_dict.get(timeline_idea_str()) == five_str()
     assert five_dict.get(c400_number_str()) == five_c400_count
     assert five_dict.get(weekdays_config_str()) == five_weekday_list
     x_months_config = five_dict.get(months_config_str())
@@ -318,7 +318,7 @@ def test_TimeLineUnit_Exists():
     assert not x_timelineunit.hours_config
     assert not x_timelineunit.months_config
     assert not x_timelineunit.monthday_distortion
-    assert not x_timelineunit.timeline_lx
+    assert not x_timelineunit.timeline_idea
     assert not x_timelineunit.weekdays_config
     assert not x_timelineunit.yr1_jan1_offset
 
@@ -334,7 +334,7 @@ def test_timelineunit_shop_ReturnsObj_Default():
     creg_c400_number = creg_config.get(c400_number_str())
     creg_hours_config = creg_config.get(hours_config_str())
     creg_months_config = creg_config.get(months_config_str())
-    creg_timeline_lx = creg_config.get(timeline_lx_str())
+    creg_timeline_idea = creg_config.get(timeline_idea_str())
     creg_weekdays_config = creg_config.get(weekdays_config_str())
     creg_monthday_distortion = creg_config.get(monthday_distortion_str())
     creg_yr1_jan1_offset = creg_config.get(yr1_jan1_offset_str())
@@ -344,7 +344,7 @@ def test_timelineunit_shop_ReturnsObj_Default():
     assert x_timelineunit.hours_config == creg_hours_config
     assert x_timelineunit.months_config == creg_months_config
     assert x_timelineunit.monthday_distortion == creg_monthday_distortion
-    assert x_timelineunit.timeline_lx == creg_timeline_lx
+    assert x_timelineunit.timeline_idea == creg_timeline_idea
     assert x_timelineunit.weekdays_config == creg_weekdays_config
     assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset
 

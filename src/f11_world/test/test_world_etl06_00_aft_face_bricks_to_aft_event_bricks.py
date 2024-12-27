@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, deal_id_str
-from src.f07_deal.deal_config import cumlative_minute_str, hour_lx_str
+from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
 from src.f11_world.world import worldunit_shop
@@ -28,7 +28,7 @@ def test_WorldUnit_aft_face_bricks_to_aft_event_bricks_CreatesFaceBrickSheets_Sc
         face_id_str(),
         event_id_str(),
         deal_id_str(),
-        hour_lx_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
     music23_str = "music23"

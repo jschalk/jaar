@@ -19,7 +19,7 @@ class br00000AbstractTable(Base):
     penny = Column(Float)
     respect_bit = Column(Float)
     bridge = Column(String)
-    timeline_lx = Column(String)
+    timeline_idea = Column(String)
     yr1_jan1_offset = Column(Integer)
 
 
@@ -51,7 +51,7 @@ class br00003AbstractTable(Base):
     event_id = Column(Integer, primary_key=True)
     cumlative_minute = Column(Integer)
     deal_id = Column(String)
-    hour_lx = Column(String)
+    hour_idea = Column(String)
 
 
 class br00004AbstractTable(Base):
@@ -60,7 +60,7 @@ class br00004AbstractTable(Base):
     event_id = Column(Integer, primary_key=True)
     cumlative_day = Column(Integer)
     deal_id = Column(String)
-    month_lx = Column(String)
+    month_idea = Column(String)
 
 
 class br00005AbstractTable(Base):
@@ -69,7 +69,7 @@ class br00005AbstractTable(Base):
     event_id = Column(Integer, primary_key=True)
     weekday_order = Column(Integer)
     deal_id = Column(String)
-    weekday_lx = Column(String)
+    weekday_label = Column(String)
 
 
 class br00011AbstractTable(Base):

@@ -2,8 +2,8 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, deal_id_str
 from src.f07_deal.deal_config import (
     cumlative_minute_str,
-    hour_lx_str,
-    weekday_lx_str,
+    hour_idea_str,
+    weekday_label_str,
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import event_id_str
@@ -36,7 +36,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
         face_id_str(),
         event_id_str(),
         deal_id_str(),
-        hour_lx_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
     music23_str = "music23"
@@ -115,14 +115,14 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
         face_id_str(),
         event_id_str(),
         deal_id_str(),
-        hour_lx_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
     brick5_columns = [
         event_id_str(),
         face_id_str(),
         deal_id_str(),
-        weekday_lx_str(),
+        weekday_label_str(),
         weekday_order_str(),
     ]
     music23_str = "music23"

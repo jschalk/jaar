@@ -44,17 +44,17 @@ def pidginable_atom_args() -> set:
         "deal_id",
         "group_id",
         "healer_id",
-        "hour_lx",
+        "hour_idea",
         "lx",
-        "month_lx",
+        "month_idea",
         "parent_road",
         "pick",
         "need",
         "owner_id",
         "road",
         "team_id",
-        "timeline_lx",
-        "weekday_lx",
+        "timeline_idea",
+        "weekday_label",
     }
 
 

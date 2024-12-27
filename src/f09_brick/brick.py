@@ -232,7 +232,7 @@ def deal_build_from_df(
             "hours_config": deal_hours_dict.get(x_deal_id),
             "months_config": deal_months_dict.get(x_deal_id),
             "monthday_distortion": row["monthday_distortion"],
-            "timeline_lx": row["timeline_lx"],
+            "timeline_idea": row["timeline_idea"],
             "weekdays_config": deal_weekdays_dict.get(x_deal_id),
             "yr1_jan1_offset": row["yr1_jan1_offset"],
         }
@@ -259,7 +259,7 @@ def _get_deal_hours_dict(br00003_df: DataFrame) -> dict[str, list[str, str]]:
     for y_deal_id in br00003_df.deal_id.unique():
         query_str = f"deal_id == '{y_deal_id}'"
         x_hours_list = [
-            [row["hour_lx"], row["cumlative_minute"]]
+            [row["hour_idea"], row["cumlative_minute"]]
             for index, row in br00003_df.query(query_str).iterrows()
         ]
         deal_hours_dict[y_deal_id] = x_hours_list
@@ -271,7 +271,7 @@ def _get_deal_months_dict(br00004_df: DataFrame) -> dict[str, list[str, str]]:
     for y_deal_id in br00004_df.deal_id.unique():
         query_str = f"deal_id == '{y_deal_id}'"
         x_months_list = [
-            [row["month_lx"], row["cumlative_day"]]
+            [row["month_idea"], row["cumlative_day"]]
             for index, row in br00004_df.query(query_str).iterrows()
         ]
         deal_months_dict[y_deal_id] = x_months_list
@@ -283,7 +283,8 @@ def _get_deal_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
     for y_deal_id in br00005_df.deal_id.unique():
         query_str = f"deal_id == '{y_deal_id}'"
         x_weekdays_list = [
-            row["weekday_lx"] for index, row in br00005_df.query(query_str).iterrows()
+            row["weekday_label"]
+            for index, row in br00005_df.query(query_str).iterrows()
         ]
         deal_weekdays_dict[y_deal_id] = x_weekdays_list
     return deal_weekdays_dict

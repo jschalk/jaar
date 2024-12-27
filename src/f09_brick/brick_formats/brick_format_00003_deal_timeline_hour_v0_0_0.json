@@ -12,7 +12,7 @@
         "deal_id": {
             "otx_key": true
         },
-        "hour_lx": {
+        "hour_idea": {
             "otx_key": true
         }
     },

@@ -16,7 +16,7 @@ from src.f02_bud.bud_tool import (
 from src.f03_chrono.chrono import (
     c400_number_str,
     monthday_distortion_str,
-    timeline_lx_str,
+    timeline_idea_str,
     yr1_jan1_offset_str,
 )
 from src.f04_gift.atom_config import (
@@ -81,11 +81,11 @@ from src.f07_deal.deal_config import (
     deal_timeline_weekday_str,
     current_time_str,
     amount_str,
-    month_lx_str,
-    hour_lx_str,
+    month_idea_str,
+    hour_idea_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_lx_str,
+    weekday_label_str,
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import (
@@ -219,11 +219,11 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[47] == respect_bit_str()
     assert table_sorting_priority[48] == current_time_str()
     assert table_sorting_priority[49] == amount_str()
-    assert table_sorting_priority[50] == month_lx_str()
-    assert table_sorting_priority[51] == hour_lx_str()
+    assert table_sorting_priority[50] == month_idea_str()
+    assert table_sorting_priority[51] == hour_idea_str()
     assert table_sorting_priority[52] == cumlative_minute_str()
     assert table_sorting_priority[53] == cumlative_day_str()
-    assert table_sorting_priority[54] == weekday_lx_str()
+    assert table_sorting_priority[54] == weekday_label_str()
     assert table_sorting_priority[55] == weekday_order_str()
     assert table_sorting_priority[56] == otx_idea_str()
     assert table_sorting_priority[57] == inx_idea_str()
@@ -241,7 +241,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[69] == yr1_jan1_offset_str()
     assert table_sorting_priority[70] == quota_str()
     assert table_sorting_priority[71] == monthday_distortion_str()
-    assert table_sorting_priority[72] == timeline_lx_str()
+    assert table_sorting_priority[72] == timeline_idea_str()
     assert len(table_sorting_priority) == 73
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
@@ -315,11 +315,11 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(respect_bit_str()) == "REAL"
     assert sqlite_types.get(current_time_str()) == "INTEGER"
     assert sqlite_types.get(amount_str()) == "REAL"
-    assert sqlite_types.get(month_lx_str()) == "TEXT"
-    assert sqlite_types.get(hour_lx_str()) == "TEXT"
+    assert sqlite_types.get(month_idea_str()) == "TEXT"
+    assert sqlite_types.get(hour_idea_str()) == "TEXT"
     assert sqlite_types.get(cumlative_minute_str()) == "INTEGER"
     assert sqlite_types.get(cumlative_day_str()) == "INTEGER"
-    assert sqlite_types.get(weekday_lx_str()) == "TEXT"
+    assert sqlite_types.get(weekday_label_str()) == "TEXT"
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
     assert sqlite_types.get(otx_bridge_str()) == "TEXT"
     assert sqlite_types.get(inx_bridge_str()) == "TEXT"
@@ -329,7 +329,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(quota_str()) == "REAL"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
-    assert sqlite_types.get(timeline_lx_str()) == "TEXT"
+    assert sqlite_types.get(timeline_idea_str()) == "TEXT"
 
 
 def test_get_allowed_curds_ReturnObj():
@@ -690,7 +690,7 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
         penny_str(),
         respect_bit_str(),
         bridge_str(),
-        timeline_lx_str(),
+        timeline_idea_str(),
         yr1_jan1_offset_str(),
     }
 

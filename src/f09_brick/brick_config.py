@@ -314,12 +314,12 @@ def get_brick_format_filename(brick_number: str) -> str:
 
 def get_brick_format_headers() -> dict[str, list[str]]:
     return {
-        "bridge,c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,timeline_lx,yr1_jan1_offset": brick_format_00000_dealunit_v0_0_0(),
+        "bridge,c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,timeline_idea,yr1_jan1_offset": brick_format_00000_dealunit_v0_0_0(),
         "acct_id,deal_id,owner_id,quota,time_id": brick_format_00001_deal_purview_episode_v0_0_0(),
         "acct_id,amount,deal_id,owner_id,time_id": brick_format_00002_deal_cashbook_v0_0_0(),
-        "cumlative_minute,deal_id,hour_lx": brick_format_00003_deal_timeline_hour_v0_0_0(),
-        "cumlative_day,deal_id,month_lx": brick_format_00004_deal_timeline_month_v0_0_0(),
-        "deal_id,weekday_lx,weekday_order": brick_format_00005_deal_timeline_weekday_v0_0_0(),
+        "cumlative_minute,deal_id,hour_idea": brick_format_00003_deal_timeline_hour_v0_0_0(),
+        "cumlative_day,deal_id,month_idea": brick_format_00004_deal_timeline_month_v0_0_0(),
+        "deal_id,weekday_label,weekday_order": brick_format_00005_deal_timeline_weekday_v0_0_0(),
         "acct_id,deal_id,owner_id": brick_format_00011_acct_v0_0_0(),
         "acct_id,deal_id,group_id,owner_id": brick_format_00012_membership_v0_0_0(),
         "deal_id,lx,mass,owner_id,parent_road,pledge": brick_format_00013_itemunit_v0_0_0(),
@@ -413,11 +413,11 @@ def get_brick_elements_sort_order() -> list[str]:
         "respect_bit",
         "current_time",
         "amount",
-        "month_lx",
-        "hour_lx",
+        "month_idea",
+        "hour_idea",
         "cumlative_minute",
         "cumlative_day",
-        "weekday_lx",
+        "weekday_label",
         "weekday_order",
         "otx_idea",
         "inx_idea",
@@ -435,7 +435,7 @@ def get_brick_elements_sort_order() -> list[str]:
         "yr1_jan1_offset",
         "quota",
         "monthday_distortion",
-        "timeline_lx",
+        "timeline_idea",
     ]
 
 
@@ -491,11 +491,11 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "respect_bit": "REAL",
         "current_time": "INTEGER",
         "amount": "REAL",
-        "month_lx": "TEXT",
-        "hour_lx": "TEXT",
+        "month_idea": "TEXT",
+        "hour_idea": "TEXT",
         "cumlative_minute": "INTEGER",
         "cumlative_day": "INTEGER",
-        "weekday_lx": "TEXT",
+        "weekday_label": "TEXT",
         "weekday_order": "INTEGER",
         "otx_bridge": "TEXT",
         "inx_bridge": "TEXT",
@@ -513,7 +513,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "yr1_jan1_offset": "INTEGER",
         "quota": "REAL",
         "monthday_distortion": "INTEGER",
-        "timeline_lx": "TEXT",
+        "timeline_idea": "TEXT",
     }
 
 

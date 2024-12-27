@@ -40,7 +40,7 @@
         ["Trump", 365]
     ],
     "monthday_distortion": 0,
-    "timeline_lx": "five",
+    "timeline_idea": "five",
     "weekdays_config": ["Anaday", "Baileyday", "Chiday", "Danceday", "Elonday"],
     "yr1_jan1_offset": 1683478080
 }

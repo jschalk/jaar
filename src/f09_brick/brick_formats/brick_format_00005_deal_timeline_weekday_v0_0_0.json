@@ -9,7 +9,7 @@
         "deal_id": {
             "otx_key": true
         },
-        "weekday_lx": {
+        "weekday_label": {
             "otx_key": true
         },
         "weekday_order": {

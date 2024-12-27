@@ -282,7 +282,7 @@
       "event_id": {},
       "face_id": {},
       "deal_id": {},
-      "hour_lx": {},
+      "hour_idea": {},
       "time_id": {}
     },
     "jvalues": {
@@ -297,7 +297,7 @@
       "event_id": {},
       "face_id": {},
       "deal_id": {},
-      "month_lx": {},
+      "month_idea": {},
       "time_id": {}
     },
     "jvalues": {
@@ -313,7 +313,7 @@
       "face_id": {},
       "deal_id": {},
       "time_id": {},
-      "weekday_lx": {}
+      "weekday_label": {}
     },
     "jvalues": {
       "weekday_order": {}
@@ -336,7 +336,7 @@
       "monthday_distortion": {},
       "penny": {},
       "respect_bit": {},
-      "timeline_lx": {},
+      "timeline_idea": {},
       "bridge": {},
       "yr1_jan1_offset": {}
     }
