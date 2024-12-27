@@ -516,8 +516,11 @@ def etl_face_pidgin_to_event_pidgins(face_dir: str):
 
 
 def get_level1_dirs(x_dir: str) -> list[str]:
-    level1_dirs = get_dir_file_strs(x_dir, include_dirs=True, include_files=False)
-    return sorted(list(level1_dirs.keys()))
+    try:
+        level1_dirs = get_dir_file_strs(x_dir, include_dirs=True, include_files=False)
+        return sorted(list(level1_dirs.keys()))
+    except Exception:
+        return []
 
 
 def etl_bow_face_pidgins_to_bow_event_pidgins(faces_dir: str):
