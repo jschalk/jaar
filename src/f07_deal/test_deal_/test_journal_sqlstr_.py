@@ -105,8 +105,8 @@ def test_get_road_ref_table_create_sqlstr_ReturnsCorrectStr():
     example_sqlstr = """
 CREATE TABLE IF NOT EXISTS road_ref (
   road VARCHAR(255) NOT NULL
-, wall VARCHAR(255) NOT NULL
-, UNIQUE(road, wall)
+, bridge VARCHAR(255) NOT NULL
+, UNIQUE(road, bridge)
 )
 ;"""
     assert example_sqlstr == get_road_ref_table_create_sqlstr()
@@ -116,14 +116,14 @@ def test_get_road_ref_table_single_insert_sqlstr_ReturnsCorrectStr():
     # ESTABLISH
     music_str = "Music"
     slash_str = "/"
-    texas_road = create_road(music_str, "texas", wall=slash_str)
+    texas_road = create_road(music_str, "texas", bridge=slash_str)
 
     # WHEN
     generate_sqlstr = get_road_ref_table_single_insert_sqlstr(texas_road, slash_str)
 
     # THEN
     example_sqlstr = f"""
-INSERT OR IGNORE INTO road_ref (road, wall) 
+INSERT OR IGNORE INTO road_ref (road, bridge) 
 VALUES (
   '{texas_road}'
 , '{slash_str}'
@@ -136,7 +136,7 @@ def test_get_road_ref_table_row_id_select_sqlstr_ReturnsCorrectStr():
     # ESTABLISH
     music_str = "Music"
     slash_str = "/"
-    texas_road = create_road(music_str, "texas", wall=slash_str)
+    texas_road = create_road(music_str, "texas", bridge=slash_str)
 
     # WHEN
     generate_sqlstr = get_road_ref_table_row_id_select_sqlstr(texas_road, slash_str)
@@ -145,7 +145,7 @@ def test_get_road_ref_table_row_id_select_sqlstr_ReturnsCorrectStr():
     example_sqlstr = f"""
 SELECT rowid FROM road_ref  
 WHERE road = '{texas_road}' 
-  AND wall = '{slash_str}'
+  AND bridge = '{slash_str}'
 )
 ;"""
     assert example_sqlstr == generate_sqlstr

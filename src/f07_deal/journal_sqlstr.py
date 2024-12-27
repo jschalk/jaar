@@ -128,27 +128,27 @@ def get_road_ref_table_create_sqlstr() -> str:
     return """
 CREATE TABLE IF NOT EXISTS road_ref (
   road VARCHAR(255) NOT NULL
-, wall VARCHAR(255) NOT NULL
-, UNIQUE(road, wall)
+, bridge VARCHAR(255) NOT NULL
+, UNIQUE(road, bridge)
 )
 ;"""
 
 
-def get_road_ref_table_single_insert_sqlstr(road: RoadUnit, wall: str) -> str:
+def get_road_ref_table_single_insert_sqlstr(road: RoadUnit, bridge: str) -> str:
     return f"""
-INSERT OR IGNORE INTO road_ref (road, wall) 
+INSERT OR IGNORE INTO road_ref (road, bridge) 
 VALUES (
   '{road}'
-, '{wall}'
+, '{bridge}'
 )
 ;"""
 
 
-def get_road_ref_table_row_id_select_sqlstr(road: RoadUnit, wall: str) -> str:
+def get_road_ref_table_row_id_select_sqlstr(road: RoadUnit, bridge: str) -> str:
     return f"""
 SELECT rowid FROM road_ref  
 WHERE road = '{road}' 
-  AND wall = '{wall}'
+  AND bridge = '{bridge}'
 )
 ;"""
 

@@ -138,6 +138,6 @@ def get_deal_args_jaar_types() -> dict[str, str]:
         "timeline_lx": "IdeaUnit",
         "weekday_lx": "IdeaUnit",
         "weekday_order": "int",
-        "wall": "str",
+        "bridge": "str",
         "yr1_jan1_offset": "int",
     }

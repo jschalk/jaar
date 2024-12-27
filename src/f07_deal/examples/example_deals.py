@@ -39,7 +39,7 @@ from src.f07_deal.examples.deal_env import get_test_deals_dir
 #         deal_id=yao_hubunit.deal_id,
 #         owner_id=yao_hubunit.owner_id,
 #         keep_road=None,
-#         wall=yao_hubunit.wall,
+#         bridge=yao_hubunit.bridge,
 #         respect_bit=yao_hubunit.respect_bit,
 #     )
 #     x_hubunit.save_voice_bud(yao_voice_bud)

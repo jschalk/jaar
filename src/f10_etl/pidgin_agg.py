@@ -7,8 +7,8 @@ from dataclasses import dataclass
 class PidginHeartRow:
     face_id: str
     event_id: int
-    otx_wall: str
-    inx_wall: str
+    otx_bridge: str
+    inx_bridge: str
     unknown_word: str
 
 
@@ -16,31 +16,31 @@ class PidginHeartRow:
 class PidginHeartUnit:
     face_id: str = None
     event_id: int = None
-    otx_walls: set[str] = None
-    inx_walls: set[str] = None
+    otx_bridges: set[str] = None
+    inx_bridges: set[str] = None
     unknown_words: set[str] = None
 
-    def add_otx_wall(self, otx_wall: str):
-        otx_wall = if_nan_return_None(otx_wall)
+    def add_otx_bridge(self, otx_bridge: str):
+        otx_bridge = if_nan_return_None(otx_bridge)
 
-        if None in self.otx_walls and otx_wall != None:
-            self.otx_walls.remove(None)
+        if None in self.otx_bridges and otx_bridge != None:
+            self.otx_bridges.remove(None)
 
-        if otx_wall is None and self.otx_walls == set():
-            self.otx_walls.add(otx_wall)
-        elif otx_wall != None:
-            self.otx_walls.add(otx_wall)
+        if otx_bridge is None and self.otx_bridges == set():
+            self.otx_bridges.add(otx_bridge)
+        elif otx_bridge != None:
+            self.otx_bridges.add(otx_bridge)
 
-    def add_inx_wall(self, inx_wall: str):
-        inx_wall = if_nan_return_None(inx_wall)
+    def add_inx_bridge(self, inx_bridge: str):
+        inx_bridge = if_nan_return_None(inx_bridge)
 
-        if None in self.inx_walls and inx_wall != None:
-            self.inx_walls.remove(None)
+        if None in self.inx_bridges and inx_bridge != None:
+            self.inx_bridges.remove(None)
 
-        if inx_wall is None and self.inx_walls == set():
-            self.inx_walls.add(inx_wall)
-        elif inx_wall != None:
-            self.inx_walls.add(inx_wall)
+        if inx_bridge is None and self.inx_bridges == set():
+            self.inx_bridges.add(inx_bridge)
+        elif inx_bridge != None:
+            self.inx_bridges.add(inx_bridge)
 
     def add_unknown_word(self, unknown_word: str):
         unknown_word = if_nan_return_None(unknown_word)
@@ -55,8 +55,8 @@ class PidginHeartUnit:
 
     def is_valid(self) -> bool:
         return (
-            len(self.otx_walls) == 1
-            and len(self.inx_walls) == 1
+            len(self.otx_bridges) == 1
+            and len(self.inx_bridges) == 1
             and len(self.unknown_words) == 1
         )
 
@@ -65,8 +65,8 @@ class PidginHeartUnit:
             return PidginHeartRow(
                 face_id=self.face_id,
                 event_id=self.event_id,
-                otx_wall=min(self.otx_walls),
-                inx_wall=min(self.inx_walls),
+                otx_bridge=min(self.otx_bridges),
+                inx_bridge=min(self.inx_bridges),
                 unknown_word=min(self.unknown_words),
             )
 
@@ -74,28 +74,28 @@ class PidginHeartUnit:
 def pidginheartunit_shop(
     face_id: str,
     event_id: int,
-    otx_walls: set[str] = None,
-    inx_walls: set[str] = None,
+    otx_bridges: set[str] = None,
+    inx_bridges: set[str] = None,
     unknown_words: set[str] = None,
 ) -> PidginHeartUnit:
     return PidginHeartUnit(
         face_id,
         event_id,
-        get_empty_set_if_None(otx_walls),
-        get_empty_set_if_None(inx_walls),
+        get_empty_set_if_None(otx_bridges),
+        get_empty_set_if_None(inx_bridges),
         get_empty_set_if_None(unknown_words),
     )
 
 
 def create_pidginheartunit(
-    face_id: str, event_id: int, otx_wall: str, inx_wall: str, unknown_word: str
+    face_id: str, event_id: int, otx_bridge: str, inx_bridge: str, unknown_word: str
 ) -> PidginHeartUnit:
     x_pidginheartunit = pidginheartunit_shop(face_id, event_id)
-    print(f"{otx_wall=} {type(otx_wall)=}")
-    print(f"{inx_wall=} {type(inx_wall)=}")
+    print(f"{otx_bridge=} {type(otx_bridge)=}")
+    print(f"{inx_bridge=} {type(inx_bridge)=}")
     print(f"{unknown_word=} {type(unknown_word)=}")
-    x_pidginheartunit.add_otx_wall(otx_wall)
-    x_pidginheartunit.add_inx_wall(inx_wall)
+    x_pidginheartunit.add_otx_bridge(otx_bridge)
+    x_pidginheartunit.add_inx_bridge(inx_bridge)
     x_pidginheartunit.add_unknown_word(unknown_word)
     return x_pidginheartunit
 
@@ -116,15 +116,15 @@ class PidginHeartBook:
     def eval_pidginheartrow(self, x_pidginheartrow: PidginHeartRow):
         if self.pidginheartunit_exists(x_pidginheartrow.event_id):
             pidginheartunit_obj = self.get_pidginheartunit(x_pidginheartrow.event_id)
-            pidginheartunit_obj.add_otx_wall(x_pidginheartrow.otx_wall)
-            pidginheartunit_obj.add_inx_wall(x_pidginheartrow.inx_wall)
+            pidginheartunit_obj.add_otx_bridge(x_pidginheartrow.otx_bridge)
+            pidginheartunit_obj.add_inx_bridge(x_pidginheartrow.inx_bridge)
             pidginheartunit_obj.add_unknown_word(x_pidginheartrow.unknown_word)
         else:
             pidginheartunit_obj = create_pidginheartunit(
                 face_id=x_pidginheartrow.face_id,
                 event_id=x_pidginheartrow.event_id,
-                otx_wall=x_pidginheartrow.otx_wall,
-                inx_wall=x_pidginheartrow.inx_wall,
+                otx_bridge=x_pidginheartrow.otx_bridge,
+                inx_bridge=x_pidginheartrow.inx_bridge,
                 unknown_word=x_pidginheartrow.unknown_word,
             )
             self.pidginheartunits[x_pidginheartrow.event_id] = pidginheartunit_obj
@@ -133,12 +133,12 @@ class PidginHeartBook:
         self,
         face_id: str,
         event_id: int,
-        otx_wall: str,
-        inx_wall: str,
+        otx_bridge: str,
+        inx_bridge: str,
         unknown_word: str,
     ):
         x_pidginheartrow = PidginHeartRow(
-            face_id, event_id, otx_wall, inx_wall, unknown_word
+            face_id, event_id, otx_bridge, inx_bridge, unknown_word
         )
         self.eval_pidginheartrow(x_pidginheartrow)
 
@@ -227,8 +227,8 @@ class PidginBodyBook:
                     x_pidginbodyunit.event_id,
                     x_pidginbodyunit.otx_str,
                     min(x_pidginbodyunit.inx_strs),
-                    x_pidginheartrow.otx_wall,
-                    x_pidginheartrow.inx_wall,
+                    x_pidginheartrow.otx_bridge,
+                    x_pidginheartrow.inx_bridge,
                     x_pidginheartrow.unknown_word,
                 ]
                 x_list.append(x_pidginbodylist)
@@ -265,12 +265,12 @@ class PidginBodyBook:
         self,
         face_id: str,
         event_id: int,
-        otx_wall: str,
-        inx_wall: str,
+        otx_bridge: str,
+        inx_bridge: str,
         unknown_word: str,
     ):
         self.pidginheartbook.add_pidginheartrow(
-            face_id, event_id, otx_wall, inx_wall, unknown_word
+            face_id, event_id, otx_bridge, inx_bridge, unknown_word
         )
 
     def heart_is_valid(self, event_id: int) -> bool:

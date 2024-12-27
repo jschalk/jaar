@@ -239,7 +239,7 @@ def _modify_bud_itemunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     item_road = create_road(
         x_atom.get_value("parent_road"),
         x_atom.get_value("lx"),
-        wall=x_bud._wall,
+        bridge=x_bud._bridge,
     )
     x_bud.del_item_obj(item_road, del_children=x_atom.get_value("del_children"))
 
@@ -248,7 +248,7 @@ def _modify_bud_itemunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     item_road = create_road(
         x_atom.get_value("parent_road"),
         x_atom.get_value("lx"),
-        wall=x_bud._wall,
+        bridge=x_bud._bridge,
     )
     x_bud.edit_item_attr(
         road=item_road,
@@ -713,8 +713,8 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
     x_lx = x_atom_reqs.get("lx")
     if x_parent_road != None and x_lx != None:
         x_atom_reqs["road"] = x_bud.make_road(x_parent_road, x_lx)
-        x_wall = x_bud._wall
-        is_itemroot_road = is_ideaunit(x_atom_reqs.get("road"), x_wall)
+        x_bridge = x_bud._bridge
+        is_itemroot_road = is_ideaunit(x_atom_reqs.get("road"), x_bridge)
         if is_itemroot_road is True:
             return None
 

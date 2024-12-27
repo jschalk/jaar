@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_1_if_None, get_dict_from_json
 from src.f01_road.finance import allot_scale, FundCoin, default_fund_coin_if_None
-from src.f01_road.road import GroupID, AcctID, default_wall_if_None
+from src.f01_road.road import GroupID, AcctID, default_bridge_if_None
 from dataclasses import dataclass
 
 
@@ -178,7 +178,7 @@ def awardline_shop(awardee_id: GroupID, _fund_give: float, _fund_take: float):
 @dataclass
 class GroupUnit(GroupCore):
     _memberships: dict[AcctID, MemberShip] = None  # set by BudUnit.set_acctunit()
-    _wall: str = None  # calculated by BudUnit
+    _bridge: str = None  # calculated by BudUnit
     # calculated by BudUnit.settle_bud()
     _fund_give: float = None
     _fund_take: float = None
@@ -246,7 +246,7 @@ class GroupUnit(GroupCore):
 
 
 def groupunit_shop(
-    group_id: GroupID, _wall: str = None, _fund_coin: FundCoin = None
+    group_id: GroupID, _bridge: str = None, _fund_coin: FundCoin = None
 ) -> GroupUnit:
     return GroupUnit(
         group_id=group_id,
@@ -257,7 +257,7 @@ def groupunit_shop(
         _fund_agenda_take=0,
         _credor_pool=0,
         _debtor_pool=0,
-        _wall=default_wall_if_None(_wall),
+        _bridge=default_bridge_if_None(_bridge),
         _fund_coin=default_fund_coin_if_None(_fund_coin),
     )
     # x_groupunit.set_group_id(group_id=group_id)

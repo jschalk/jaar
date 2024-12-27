@@ -2,7 +2,7 @@ from src.f01_road.finance import default_fund_coin_if_None
 from src.f01_road.road import (
     get_default_deal_id_ideaunit as root_lx,
     create_road,
-    default_wall_if_None,
+    default_bridge_if_None,
 )
 from src.f02_bud.group import membership_shop
 from src.f02_bud.group import groupunit_shop, GroupUnit
@@ -24,7 +24,7 @@ def test_GroupUnit_exists():
     assert swim_groupunit._fund_agenda_take is None
     assert swim_groupunit._credor_pool is None
     assert swim_groupunit._debtor_pool is None
-    assert swim_groupunit._wall is None
+    assert swim_groupunit._bridge is None
     assert swim_groupunit._fund_coin is None
 
 
@@ -49,11 +49,11 @@ def test_groupunit_shop_ReturnsCorrectObj():
     assert swim_groupunit._fund_agenda_take == 0
     assert swim_groupunit._credor_pool == 0
     assert swim_groupunit._debtor_pool == 0
-    assert swim_groupunit._wall == default_wall_if_None()
+    assert swim_groupunit._bridge == default_bridge_if_None()
     assert swim_groupunit._fund_coin == default_fund_coin_if_None()
 
 
-def test_groupunit_shop_ReturnsCorrectObj_wall():
+def test_groupunit_shop_ReturnsCorrectObj_bridge():
     # ESTABLISH
     swim_str = "/swimmers"
     slash_str = "/"
@@ -61,25 +61,25 @@ def test_groupunit_shop_ReturnsCorrectObj_wall():
 
     # WHEN
     swim_groupunit = groupunit_shop(
-        group_id=swim_str, _wall=slash_str, _fund_coin=x_fund_coin
+        group_id=swim_str, _bridge=slash_str, _fund_coin=x_fund_coin
     )
 
     # THEN
-    assert swim_groupunit._wall == slash_str
+    assert swim_groupunit._bridge == slash_str
     assert swim_groupunit._fund_coin == x_fund_coin
 
 
-# def test_GroupUnit_set_group_id_RaisesErrorIfParameterContains_wall_And_acct_mirror_True():
+# def test_GroupUnit_set_group_id_RaisesErrorIfParameterContains_bridge_And_acct_mirror_True():
 #     # ESTABLISH
 #     slash_str = "/"
 #     bob_str = f"Bob{slash_str}Texas"
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         groupunit_shop(bob_str, _acct_mirror=True, _wall=slash_str)
+#         groupunit_shop(bob_str, _acct_mirror=True, _bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain wall: '{slash_str}'"
+#         == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain bridge: '{slash_str}'"
 #     )
 
 

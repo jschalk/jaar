@@ -18,7 +18,7 @@ class br00000AbstractTable(Base):
     monthday_distortion = Column(Integer)
     penny = Column(Float)
     respect_bit = Column(Float)
-    wall = Column(String)
+    bridge = Column(String)
     timeline_lx = Column(String)
     yr1_jan1_offset = Column(Integer)
 
@@ -269,9 +269,9 @@ class br00042AbstractTable(Base):
     face_id = Column(String, primary_key=True)
     event_id = Column(Integer, primary_key=True)
     inx_group_id = Column(String)
-    inx_wall = Column(String)
+    inx_bridge = Column(String)
     otx_group_id = Column(String)
-    otx_wall = Column(String)
+    otx_bridge = Column(String)
     unknown_word = Column(String)
 
 
@@ -280,9 +280,9 @@ class br00043AbstractTable(Base):
     face_id = Column(String, primary_key=True)
     event_id = Column(Integer, primary_key=True)
     inx_acct_id = Column(String)
-    inx_wall = Column(String)
+    inx_bridge = Column(String)
     otx_acct_id = Column(String)
-    otx_wall = Column(String)
+    otx_bridge = Column(String)
     unknown_word = Column(String)
 
 
@@ -291,9 +291,9 @@ class br00044AbstractTable(Base):
     face_id = Column(String, primary_key=True)
     event_id = Column(Integer, primary_key=True)
     inx_idea = Column(String)
-    inx_wall = Column(String)
+    inx_bridge = Column(String)
     otx_idea = Column(String)
-    otx_wall = Column(String)
+    otx_bridge = Column(String)
     unknown_word = Column(String)
 
 
@@ -302,9 +302,9 @@ class br00045AbstractTable(Base):
     face_id = Column(String, primary_key=True)
     event_id = Column(Integer, primary_key=True)
     inx_road = Column(String)
-    inx_wall = Column(String)
+    inx_bridge = Column(String)
     otx_road = Column(String)
-    otx_wall = Column(String)
+    otx_bridge = Column(String)
     unknown_word = Column(String)
 
 

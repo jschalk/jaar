@@ -21,7 +21,7 @@ def create_init_deal_staging_files(dir: str):
         "monthday_distortion",
         "penny",
         "respect_bit",
-        "wall",
+        "bridge",
         "timeline_lx",
         "yr1_jan1_offset",
     ]

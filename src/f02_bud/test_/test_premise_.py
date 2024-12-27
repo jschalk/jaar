@@ -29,7 +29,7 @@ def test_PremiseUnit_Exists():
     assert email_premise.divisor is None
     assert email_premise._status is None
     assert email_premise._task is None
-    assert email_premise.wall is None
+    assert email_premise.bridge is None
 
 
 def test_premiseunit_shop_ReturnsCorrectObj():
@@ -140,25 +140,25 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineage():
     assert sea_premise.is_in_lineage(fact_pick=seaside_fact.pick) is False
 
 
-def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultWall():
+def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultBridge():
     # ESTABLISH
     slash_str = "/"
-    nation_road = create_road(root_lx(), "Nation-States", wall=slash_str)
-    usa_road = create_road(nation_road, "USA", wall=slash_str)
-    texas_road = create_road(usa_road, "Texas", wall=slash_str)
-    idaho_road = create_road(usa_road, "Idaho", wall=slash_str)
+    nation_road = create_road(root_lx(), "Nation-States", bridge=slash_str)
+    usa_road = create_road(nation_road, "USA", bridge=slash_str)
+    texas_road = create_road(usa_road, "Texas", bridge=slash_str)
+    idaho_road = create_road(usa_road, "Idaho", bridge=slash_str)
 
     # WHEN
     texas_fact = factheir_shop(base=usa_road, pick=texas_road)
 
     # THEN
-    texas_premise = premiseunit_shop(need=texas_road, wall=slash_str)
+    texas_premise = premiseunit_shop(need=texas_road, bridge=slash_str)
     assert texas_premise.is_in_lineage(fact_pick=texas_fact.pick)
 
-    idaho_premise = premiseunit_shop(need=idaho_road, wall=slash_str)
+    idaho_premise = premiseunit_shop(need=idaho_road, bridge=slash_str)
     assert idaho_premise.is_in_lineage(fact_pick=texas_fact.pick) is False
 
-    usa_premise = premiseunit_shop(need=usa_road, wall=slash_str)
+    usa_premise = premiseunit_shop(need=usa_road, bridge=slash_str)
     print(f"  {usa_premise.need=}")
     print(f"{texas_fact.pick=}")
     assert usa_premise.is_in_lineage(fact_pick=texas_fact.pick)
@@ -167,12 +167,12 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultWall(
     # "earth,sea"
     # "earth,seaside"
     # "earth,seaside,beach"
-    sea_road = create_road("earth", "sea", wall=slash_str)
-    seaside_road = create_road("earth", "seaside", wall=slash_str)
-    seaside_beach_road = create_road(seaside_road, "beach", wall=slash_str)
+    sea_road = create_road("earth", "sea", bridge=slash_str)
+    seaside_road = create_road("earth", "seaside", bridge=slash_str)
+    seaside_beach_road = create_road(seaside_road, "beach", bridge=slash_str)
 
     # WHEN
-    sea_premise = premiseunit_shop(need=sea_road, wall=slash_str)
+    sea_premise = premiseunit_shop(need=sea_road, bridge=slash_str)
 
     # THEN
     sea_fact = factheir_shop(base=sea_road, pick=sea_road)
@@ -741,25 +741,25 @@ def test_PremiseUnits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
     assert weekday_premise == premiseunit_shop(weekday_road)
 
 
-def test_PremiseUnitsUnit_set_wall_SetsAttrsCorrectly():
+def test_PremiseUnitsUnit_set_bridge_SetsAttrsCorrectly():
     # ESTABLISH
     week_str = "weekday"
     sun_str = "Sunday"
     slash_str = "/"
-    slash_week_road = create_road(root_lx(), week_str, wall=slash_str)
-    slash_sun_road = create_road(slash_week_road, sun_str, wall=slash_str)
-    sun_premiseunit = premiseunit_shop(slash_sun_road, wall=slash_str)
-    assert sun_premiseunit.wall == slash_str
+    slash_week_road = create_road(root_lx(), week_str, bridge=slash_str)
+    slash_sun_road = create_road(slash_week_road, sun_str, bridge=slash_str)
+    sun_premiseunit = premiseunit_shop(slash_sun_road, bridge=slash_str)
+    assert sun_premiseunit.bridge == slash_str
     assert sun_premiseunit.need == slash_sun_road
 
     # WHEN
     star_str = "*"
-    sun_premiseunit.set_wall(new_wall=star_str)
+    sun_premiseunit.set_bridge(new_bridge=star_str)
 
     # THEN
-    assert sun_premiseunit.wall == star_str
-    star_week_road = create_road(root_lx(), week_str, wall=star_str)
-    star_sun_road = create_road(star_week_road, sun_str, wall=star_str)
+    assert sun_premiseunit.bridge == star_str
+    star_week_road = create_road(root_lx(), week_str, bridge=star_str)
+    star_sun_road = create_road(star_week_road, sun_str, bridge=star_str)
     assert sun_premiseunit.need == star_sun_road
 
 

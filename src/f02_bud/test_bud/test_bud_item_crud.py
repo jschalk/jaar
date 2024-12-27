@@ -1,4 +1,4 @@
-from src.f01_road.road import default_wall_if_None
+from src.f01_road.road import default_bridge_if_None
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.examples.example_buds import get_budunit_with_4_levels
 from src.f02_bud.group import awardlink_shop
@@ -108,7 +108,7 @@ def test_BudUnit_add_item_SetsAttr_Scenario0():
     # ESTABLISH
     bob_str = "Bob"
     slash_str = "/"
-    bob_budunit = budunit_shop(bob_str, _wall=slash_str)
+    bob_budunit = budunit_shop(bob_str, _bridge=slash_str)
     casa_road = bob_budunit.make_l1_road("casa")
     assert not bob_budunit.item_exists(casa_road)
 
@@ -118,7 +118,7 @@ def test_BudUnit_add_item_SetsAttr_Scenario0():
     # THEN
     assert bob_budunit.item_exists(casa_road)
     casa_itemunit = bob_budunit.get_item_obj(casa_road)
-    assert casa_itemunit._wall == bob_budunit._wall
+    assert casa_itemunit._bridge == bob_budunit._bridge
     assert not casa_itemunit.pledge
 
 
@@ -154,11 +154,11 @@ def test_BudUnit_add_item_ReturnsObj():
     assert casa_itemunit.mass == casa_mass
 
 
-def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_wall():
+def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_bridge():
     # ESTABLISH
     slash_str = "/"
-    assert slash_str != default_wall_if_None()
-    bob_bud = budunit_shop("Bob", _wall=slash_str)
+    assert slash_str != default_bridge_if_None()
+    bob_bud = budunit_shop("Bob", _bridge=slash_str)
     casa_str = "casa"
     week_str = "week"
     wed_str = "Wednesday"
@@ -171,8 +171,8 @@ def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_wall():
     print(f"{bob_bud._itemroot._kids.keys()=}")
     assert len(bob_bud._itemroot._kids) == 2
     wed_item = bob_bud.get_item_obj(wed_road)
-    assert wed_item._wall == slash_str
-    assert wed_item._wall == bob_bud._wall
+    assert wed_item._bridge == slash_str
+    assert wed_item._bridge == bob_bud._bridge
 
     # WHEN
     bob_bud.edit_item_attr(casa_road, reason_base=week_road, reason_premise=wed_road)

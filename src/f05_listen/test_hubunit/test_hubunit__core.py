@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.road import (
-    default_wall_if_None,
+    default_bridge_if_None,
     create_road_from_ideas,
     create_road,
     get_default_deal_id_ideaunit as root_lx,
@@ -77,7 +77,7 @@ def test_HubUnit_Exists():
     assert x_hubunit.deal_id is None
     assert x_hubunit.owner_id is None
     assert x_hubunit.keep_road is None
-    assert x_hubunit.wall is None
+    assert x_hubunit.bridge is None
     assert x_hubunit.fund_pool is None
     assert x_hubunit.fund_coin is None
     assert x_hubunit.respect_bit is None
@@ -104,7 +104,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     x_deals_dir = "src/f07_deal/examples"
     x_deal_id = "music"
     sue_str = "Sue"
-    x_wall = "/"
+    x_bridge = "/"
     x_fund_pool = 13000
     x_fund_coin = 13
     x_respect_bit = 9
@@ -117,7 +117,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
         deal_id=x_deal_id,
         owner_id=sue_str,
         keep_road=None,
-        wall=x_wall,
+        bridge=x_bridge,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
         respect_bit=x_respect_bit,
@@ -129,7 +129,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.deals_dir == x_deals_dir
     assert x_hubunit.deal_id == x_deal_id
     assert x_hubunit.owner_id == sue_str
-    assert x_hubunit.wall == x_wall
+    assert x_hubunit.bridge == x_bridge
     assert x_hubunit.fund_pool == x_fund_pool
     assert x_hubunit.fund_coin == x_fund_coin
     assert x_hubunit.respect_bit == x_respect_bit
@@ -178,7 +178,7 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     assert sue_hubunit.deal_id == get_deal_id_if_None()
     assert sue_hubunit.deal_dir() == x_deal_path
     assert sue_hubunit.owner_id == sue_str
-    assert sue_hubunit.wall == default_wall_if_None()
+    assert sue_hubunit.bridge == default_bridge_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_coin == default_fund_coin_if_None()
     assert sue_hubunit.respect_bit == default_respect_bit_if_None()
@@ -206,17 +206,17 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     assert sue_hubunit.treasury_db_path() == x_treasury_file_path
 
 
-def test_hubunit_shop_RaisesErrorIf_owner_id_Contains_wall():
+def test_hubunit_shop_RaisesErrorIf_owner_id_Contains_bridge():
     # ESTABLISH
     slash_str = "/"
     bob_str = f"Bob{slash_str}Sue"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        hubunit_shop(None, None, owner_id=bob_str, wall=slash_str)
+        hubunit_shop(None, None, owner_id=bob_str, bridge=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain wall: '{slash_str}'"
+        == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain bridge: '{slash_str}'"
     )
 
 

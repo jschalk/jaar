@@ -12,7 +12,7 @@ def test_create_legible_list_ReturnsObj_item_teamlink_INSERT():
     category = bud_item_teamlink_str()
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    team_id_value = f"{sue_bud._wall}Swimmers"
+    team_id_value = f"{sue_bud._bridge}Swimmers"
     swim_atomunit = atomunit_shop(category, atom_insert())
     swim_atomunit.set_arg(road_str(), road_value)
     swim_atomunit.set_arg(team_id_str(), team_id_value)
@@ -35,7 +35,7 @@ def test_create_legible_list_ReturnsObj_item_teamlink_DELETE():
     category = bud_item_teamlink_str()
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    team_id_value = f"{sue_bud._wall}Swimmers"
+    team_id_value = f"{sue_bud._bridge}Swimmers"
     swim_atomunit = atomunit_shop(category, atom_delete())
     swim_atomunit.set_arg(road_str(), road_value)
     swim_atomunit.set_arg(team_id_str(), team_id_value)

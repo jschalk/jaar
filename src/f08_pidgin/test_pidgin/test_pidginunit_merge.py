@@ -23,11 +23,11 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario0_EmptyPidginUnits():
     assert merged_pidginunit == new_pidginunit
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_wall():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_bridge():
     # ESTABLISH
     sue_str = "Sue"
-    slash_otx_wall = "/"
-    old_pidginunit = pidginunit_shop(sue_str, 0, otx_wall=slash_otx_wall)
+    slash_otx_bridge = "/"
+    old_pidginunit = pidginunit_shop(sue_str, 0, otx_bridge=slash_otx_bridge)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:
@@ -35,11 +35,11 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario1_RaiseErrorWhenDiffer
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_wall():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_bridge():
     # ESTABLISH
     sue_str = "Sue"
-    slash_otx_wall = "/"
-    old_pidginunit = pidginunit_shop(sue_str, 0, inx_wall=slash_otx_wall)
+    slash_otx_bridge = "/"
+    old_pidginunit = pidginunit_shop(sue_str, 0, inx_bridge=slash_otx_bridge)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:

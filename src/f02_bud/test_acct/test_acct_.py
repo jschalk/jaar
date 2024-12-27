@@ -1,4 +1,4 @@
-from src.f01_road.road import default_wall_if_None
+from src.f01_road.road import default_bridge_if_None
 from src.f01_road.finance import default_respect_bit_if_None
 from src.f02_bud.acct import AcctUnit, acctunit_shop
 from pytest import raises as pytest_raises
@@ -28,7 +28,7 @@ def test_AcctUnit_exists():
     assert bob_acctunit._fund_take is None
     assert bob_acctunit._fund_agenda_give is None
     assert bob_acctunit._fund_agenda_take is None
-    assert bob_acctunit._wall is None
+    assert bob_acctunit._bridge is None
     assert bob_acctunit._respect_bit is None
 
 
@@ -44,17 +44,17 @@ def test_AcctUnit_set_acct_id_CorrectlySetsAttr():
     assert x_acctunit.acct_id == bob_str
 
 
-def test_AcctUnit_set_acct_id_RaisesErrorIfParameterContains_wall():
+def test_AcctUnit_set_acct_id_RaisesErrorIfParameterContains_bridge():
     # ESTABLISH
     slash_str = "/"
     texas_str = f"Texas{slash_str}Arkansas"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        acctunit_shop(acct_id=texas_str, _wall=slash_str)
+        acctunit_shop(acct_id=texas_str, _bridge=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' needs to be a IdeaUnit. Cannot contain wall: '{slash_str}'"
+        == f"'{texas_str}' needs to be a IdeaUnit. Cannot contain bridge: '{slash_str}'"
     )
 
 
@@ -81,19 +81,19 @@ def test_acctunit_shop_CorrectlySetsAttributes():
     assert yao_acctunit._fund_agenda_take == 0
     assert yao_acctunit._fund_agenda_ratio_give == 0
     assert yao_acctunit._fund_agenda_ratio_take == 0
-    assert yao_acctunit._wall == default_wall_if_None()
+    assert yao_acctunit._bridge == default_bridge_if_None()
     assert yao_acctunit._respect_bit == default_respect_bit_if_None()
 
 
-def test_acctunit_shop_CorrectlySetsAttributes_wall():
+def test_acctunit_shop_CorrectlySetsAttributes_bridge():
     # ESTABLISH
     slash_str = "/"
 
     # WHEN
-    yao_acctunit = acctunit_shop("Yao", _wall=slash_str)
+    yao_acctunit = acctunit_shop("Yao", _bridge=slash_str)
 
     # THEN
-    assert yao_acctunit._wall == slash_str
+    assert yao_acctunit._bridge == slash_str
 
 
 def test_acctunit_shop_CorrectlySetsAttributes_respect_bit():

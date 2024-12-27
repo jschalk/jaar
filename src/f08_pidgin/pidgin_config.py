@@ -35,12 +35,12 @@ def event_id_str() -> str:
     return "event_id"
 
 
-def otx_wall_str() -> str:
-    return "otx_wall"
+def otx_bridge_str() -> str:
+    return "otx_bridge"
 
 
-def inx_wall_str() -> str:
-    return "inx_wall"
+def inx_bridge_str() -> str:
+    return "inx_bridge"
 
 
 def inx_group_id_str() -> str:
@@ -194,7 +194,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "timeline_lx": "IdeaUnit",
         "weekday_lx": "IdeaUnit",
         "weekday_order": "int",
-        "wall": "str",
+        "bridge": "str",
         "yr1_jan1_offset": "int",
     }
 
@@ -205,29 +205,29 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
         "map_group_id": {
             "inx_group_id",
             "unknown_word",
-            "inx_wall",
-            "otx_wall",
+            "inx_bridge",
+            "otx_bridge",
             "otx_group_id",
         },
         "map_acct_id": {
             "inx_acct_id",
             "unknown_word",
-            "inx_wall",
-            "otx_wall",
+            "inx_bridge",
+            "otx_bridge",
             "otx_acct_id",
         },
         "map_idea": {
             "inx_idea",
             "unknown_word",
-            "inx_wall",
-            "otx_wall",
+            "inx_bridge",
+            "otx_bridge",
             "otx_idea",
         },
         "map_road": {
             "inx_road",
             "unknown_word",
-            "inx_wall",
-            "otx_wall",
+            "inx_bridge",
+            "otx_bridge",
             "otx_road",
         },
     }

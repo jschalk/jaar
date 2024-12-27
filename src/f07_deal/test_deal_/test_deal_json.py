@@ -1,4 +1,4 @@
-from src.f01_road.road import default_wall_if_None
+from src.f01_road.road import default_bridge_if_None
 from src.f01_road.finance import (
     default_fund_coin_if_None,
     default_respect_bit_if_None,
@@ -40,7 +40,7 @@ def test_DealUnit_get_dict_ReturnsObj():
     assert x_dict.get(deal_id_str()) == music_str
     assert x_dict.get("timeline") == get_default_timeline_config_dict()
     assert x_dict.get("current_time") == 0
-    assert x_dict.get("wall") == default_wall_if_None()
+    assert x_dict.get("bridge") == default_bridge_if_None()
     assert x_dict.get("fund_coin") == default_fund_coin_if_None()
     assert x_dict.get("respect_bit") == default_respect_bit_if_None()
     assert x_dict.get("penny") == default_penny_if_None()
@@ -51,7 +51,7 @@ def test_DealUnit_get_dict_ReturnsObj():
         "timeline",
         "current_time",
         "purviewlogs",
-        "wall",
+        "bridge",
         "fund_coin",
         "respect_bit",
         "penny",
@@ -90,7 +90,7 @@ def test_get_from_dict_ReturnsDealUnit():
     sue_timeline_lx = "sue casa"
     music_deal.timeline.timeline_lx = sue_timeline_lx
     sue_current_time = 23
-    sue_wall = "/"
+    sue_bridge = "/"
     sue_fund_coin = 0.3
     sue_respect_bit = 0.5
     sue_penny = 0.8
@@ -106,7 +106,7 @@ def test_get_from_dict_ReturnsDealUnit():
     music_deal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
     music_deal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
     music_deal.current_time = sue_current_time
-    music_deal.wall = sue_wall
+    music_deal.bridge = sue_bridge
     music_deal.fund_coin = sue_fund_coin
     music_deal.respect_bit = sue_respect_bit
     music_deal.penny = sue_penny
@@ -119,7 +119,7 @@ def test_get_from_dict_ReturnsDealUnit():
     assert x_deal.deal_id == music_str
     assert x_deal.timeline.timeline_lx == sue_timeline_lx
     assert x_deal.current_time == sue_current_time
-    assert x_deal.wall == sue_wall
+    assert x_deal.bridge == sue_bridge
     assert x_deal.fund_coin == sue_fund_coin
     assert x_deal.respect_bit == sue_respect_bit
     assert x_deal.penny == sue_penny
@@ -135,7 +135,7 @@ def test_get_from_json_ReturnsDealUnit():
     sue_timeline_lx = "sue casa"
     music_deal.timeline.timeline_lx = sue_timeline_lx
     sue_current_time = 23
-    sue_wall = "/"
+    sue_bridge = "/"
     sue_fund_coin = 0.3
     sue_respect_bit = 0.5
     sue_penny = 0.8
@@ -151,7 +151,7 @@ def test_get_from_json_ReturnsDealUnit():
     music_deal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
     music_deal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
     music_deal.current_time = sue_current_time
-    music_deal.wall = sue_wall
+    music_deal.bridge = sue_bridge
     music_deal.fund_coin = sue_fund_coin
     music_deal.respect_bit = sue_respect_bit
     music_deal.penny = sue_penny
@@ -164,7 +164,7 @@ def test_get_from_json_ReturnsDealUnit():
     assert x_deal.deal_id == music_str
     assert x_deal.timeline.timeline_lx == sue_timeline_lx
     assert x_deal.current_time == sue_current_time
-    assert x_deal.wall == sue_wall
+    assert x_deal.bridge == sue_bridge
     assert x_deal.fund_coin == sue_fund_coin
     assert x_deal.respect_bit == sue_respect_bit
     assert x_deal.penny == sue_penny

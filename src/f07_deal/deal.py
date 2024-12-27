@@ -19,7 +19,7 @@ from src.f01_road.finance import (
     FundNum,
 )
 from src.f01_road.road import (
-    default_wall_if_None,
+    default_bridge_if_None,
     OwnerID,
     RoadUnit,
     DealID,
@@ -79,7 +79,7 @@ class DealUnit:
     current_time: int = None
     purviewlogs: dict[OwnerID, PurviewLog] = None
     cashbook: TranBook = None
-    wall: str = None
+    bridge: str = None
     fund_coin: FundCoin = None
     respect_bit: BitNum = None
     penny: PennyNum = None
@@ -116,7 +116,7 @@ class DealUnit:
                 deal_id=self.deal_id,
                 owner_id=x_owner_id,
                 keep_road=None,
-                wall=self.wall,
+                bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
             for x_owner_id in x_owner_ids
@@ -164,7 +164,7 @@ class DealUnit:
             deal_id=self.deal_id,
             deals_dir=self.deals_dir,
             keep_road=None,
-            wall=self.wall,
+            bridge=self.bridge,
             respect_bit=self.respect_bit,
         )
 
@@ -186,7 +186,7 @@ class DealUnit:
                 healer_id,
                 keep_road=None,
                 # "duty_job",
-                wall=self.wall,
+                bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
             for keep_road in healer_dict.keys():
@@ -215,7 +215,7 @@ class DealUnit:
                 owner_id=healer_id,
                 keep_road=None,
                 # "duty_job",
-                wall=self.wall,
+                bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
             healer_hubunit.create_voice_treasury_db_files()
@@ -226,7 +226,7 @@ class DealUnit:
                     owner_id=healer_id,
                     keep_road=keep_road,
                     # "duty_job",
-                    wall=self.wall,
+                    bridge=self.bridge,
                     respect_bit=self.respect_bit,
                 )
                 keep_hubunit.save_duty_bud(x_voice)
@@ -288,7 +288,7 @@ class DealUnit:
             "timeline": self.timeline.get_dict(),
             "current_time": self.current_time,
             "purviewlogs": self._get_purviewlogs_dict(),
-            "wall": self.wall,
+            "bridge": self.bridge,
             "fund_coin": self.fund_coin,
             "respect_bit": self.respect_bit,
             "penny": self.penny,
@@ -378,7 +378,7 @@ def dealunit_shop(
     timeline: TimeLineUnit = None,
     current_time: int = None,
     in_memory_journal: bool = None,
-    wall: str = None,
+    bridge: str = None,
     fund_coin: float = None,
     respect_bit: float = None,
     penny: float = None,
@@ -395,7 +395,7 @@ def dealunit_shop(
         current_time=get_0_if_None(current_time),
         purviewlogs={},
         cashbook=tranbook_shop(deal_id),
-        wall=default_wall_if_None(wall),
+        bridge=default_bridge_if_None(bridge),
         fund_coin=default_respect_bit_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
         penny=default_penny_if_None(penny),
@@ -414,7 +414,7 @@ def get_from_dict(deal_dict: dict) -> DealUnit:
     x_deal = dealunit_shop(x_deal_id, None)
     x_deal.timeline = timelineunit_shop(deal_dict.get("timeline"))
     x_deal.current_time = deal_dict.get("current_time")
-    x_deal.wall = deal_dict.get("wall")
+    x_deal.bridge = deal_dict.get("bridge")
     x_deal.fund_coin = deal_dict.get("fund_coin")
     x_deal.respect_bit = deal_dict.get("respect_bit")
     x_deal.penny = deal_dict.get("penny")

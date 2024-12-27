@@ -1,14 +1,14 @@
 from src.f01_road.road import (
     get_default_deal_id_ideaunit as root_lx,
-    default_wall_if_None,
+    default_bridge_if_None,
     get_road_from_doar,
     get_doar_from_road,
 )
 
 
-def test_get_road_from_doar_ReturnsObj_default_wall():
+def test_get_road_from_doar_ReturnsObj_default_bridge():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     casa_str = "casa"
     casa_road = f"{root_lx()}{x_s}{casa_str}"
     casa_doar = f"{casa_str}{x_s}{root_lx()}"
@@ -27,7 +27,7 @@ def test_get_road_from_doar_ReturnsObj_default_wall():
     assert get_road_from_doar(roses_road) == roses_doar
 
 
-def test_get_road_from_doar_ReturnsObj_Not_default_wall():
+def test_get_road_from_doar_ReturnsObj_Not_default_bridge():
     # ESTABLISH
     x_s = "/"
     casa_str = "casa"
@@ -48,7 +48,7 @@ def test_get_road_from_doar_ReturnsObj_Not_default_wall():
     assert get_road_from_doar(roses_road, x_s) == roses_doar
 
 
-def test_get_doar_from_road_ReturnsObj_Not_default_wall():
+def test_get_doar_from_road_ReturnsObj_Not_default_bridge():
     # ESTABLISH
     x_s = "/"
     casa_str = "casa"

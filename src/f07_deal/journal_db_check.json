@@ -30,7 +30,7 @@
         },
         "road_ref": {
             "columns": {
-                "wall": {},
+                "bridge": {},
                 "road": {}
             }
         }

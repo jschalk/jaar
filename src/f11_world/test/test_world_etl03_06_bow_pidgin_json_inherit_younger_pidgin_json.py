@@ -1,13 +1,13 @@
 from src.f00_instrument.file import create_path, open_file, save_file, set_dir
-from src.f01_road.road import default_wall_if_None
+from src.f01_road.road import default_bridge_if_None
 from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f04_gift.atom_config import face_id_str, type_AcctID_str
 from src.f08_pidgin.pidgin import pidginunit_shop, get_pidginunit_from_json
 from src.f08_pidgin.pidgin_config import (
     pidgin_filename,
     event_id_str,
-    inx_wall_str,
-    otx_wall_str,
+    inx_bridge_str,
+    otx_bridge_str,
     inx_acct_id_str,
     otx_acct_id_str,
     inx_group_id_str,
@@ -150,16 +150,16 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     e3_json_pidginunit = get_pidginunit_from_json(open_file(event3_dir, pidgin_filename()))
 #     assert e3_json_pidginunit.face_id == bob_str
 #     assert e3_json_pidginunit.event_id == event3
-#     assert e3_json_pidginunit.otx_wall == default_wall_if_None()
-#     assert e3_json_pidginunit.inx_wall == default_wall_if_None()
+#     assert e3_json_pidginunit.otx_bridge == default_bridge_if_None()
+#     assert e3_json_pidginunit.inx_bridge == default_bridge_if_None()
 #     assert e3_json_pidginunit.unknown_word == default_unknown_word_if_None()
 #     assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
 #     assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
 #     e7_json_pidginunit = get_pidginunit_from_json(open_file(event7_dir, pidgin_filename()))
 #     assert e7_json_pidginunit.face_id == bob_str
 #     assert e7_json_pidginunit.event_id == event7
-#     assert e7_json_pidginunit.otx_wall == default_wall_if_None()
-#     assert e7_json_pidginunit.inx_wall == default_wall_if_None()
+#     assert e7_json_pidginunit.otx_bridge == default_bridge_if_None()
+#     assert e7_json_pidginunit.inx_bridge == default_bridge_if_None()
 #     assert e7_json_pidginunit.unknown_word == default_unknown_word_if_None()
 #     assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
 #     assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
@@ -178,7 +178,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 # #     event3 = 3
 # #     event7 = 7
 # #     event9 = 9
-# #     event3_road_csv = 'face_id,event_id,otx_road,inx_road,otx_wall,inx_wall,unknown_word\nBob,3,"fizz,casa","fizz,casaita",,,\nBob,3,"fizz,casa,clean","fizz,casaita,limpio",,,\n'
+# #     event3_road_csv = 'face_id,event_id,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word\nBob,3,"fizz,casa","fizz,casaita",,,\nBob,3,"fizz,casa,clean","fizz,casaita,limpio",,,\n'
 # #     bob_dir = create_path(get_test_worlds_dir(), bob_str)
 # #     event3_dir = create_path(bob_dir, event3)
 # #     save_file(event3_dir, "road.csv", event3_road_csv)
@@ -193,8 +193,8 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 # #     json_pidginunit = get_pidginunit_from_json(open_file(event3_dir, pidgin_filename()))
 # #     assert json_pidginunit.face_id == bob_str
 # #     assert json_pidginunit.event_id == event3
-# #     assert json_pidginunit.otx_wall == default_wall_if_None()
-# #     assert json_pidginunit.inx_wall == default_wall_if_None()
+# #     assert json_pidginunit.otx_bridge == default_bridge_if_None()
+# #     assert json_pidginunit.inx_bridge == default_bridge_if_None()
 # #     assert json_pidginunit.unknown_word == default_unknown_word_if_None()
 # #     assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
 # #     assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
@@ -293,15 +293,15 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
 #     event3 = 3
 #     event7 = 7
 #     event9 = 9
-#     event3_road_csv = f"""face_id,event_id,otx_road,inx_road,otx_wall,inx_wall,unknown_word
+#     event3_road_csv = f"""face_id,event_id,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
 # "{bob_str}",{event3},"{casa_otx}","{casa_inx}",,,
 # "{bob_str}",{event3},"{clean_otx}","{clean_inx}",,,
 # """
-#     event7_road_csv = f"""face_id,event_id,otx_road,inx_road,otx_wall,inx_wall,unknown_word
+#     event7_road_csv = f"""face_id,event_id,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
 # "{bob_str}",{event7},"{casa_otx}","{casa_inx}",,,
 # "{bob_str}",{event7},"{clean_otx}","{clean_inx}",,,
 # """
-#     event9_road_csv = f"""face_id,event_id,otx_road,inx_road,otx_wall,inx_wall,unknown_word
+#     event9_road_csv = f"""face_id,event_id,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
 # "{zia_str}",{event9},"{casa_otx}","{casa_inx}",,,
 # "{zia_str}",{event9},"{clean_otx}","{clean_inx}",,,
 # """

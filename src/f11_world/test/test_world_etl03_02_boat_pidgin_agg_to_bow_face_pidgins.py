@@ -2,8 +2,8 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
-    inx_wall_str,
-    otx_wall_str,
+    inx_bridge_str,
+    otx_bridge_str,
     inx_acct_id_str,
     otx_acct_id_str,
     inx_group_id_str,
@@ -40,8 +40,8 @@ def test_WorldUnit_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")
@@ -61,8 +61,8 @@ def test_WorldUnit_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
         event_id_str(),
         otx_group_id_str(),
         inx_group_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     e1_group0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
@@ -81,8 +81,8 @@ def test_WorldUnit_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
         event_id_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
@@ -101,8 +101,8 @@ def test_WorldUnit_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
         event_id_str(),
         otx_idea_str(),
         inx_idea_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     e1_idea0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]

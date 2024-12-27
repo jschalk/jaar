@@ -77,7 +77,7 @@ def test_bud_set_deal_id_CorrectlySetsAttr():
     assert swim_item._parent_road == new_casa_road
 
 
-def test_bud_set_wall_RaisesErrorIfNew_wall_IsAnItem_lx():
+def test_bud_set_bridge_RaisesErrorIfNew_bridge_IsAnItem_lx():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     print(f"{zia_bud.max_tree_traverse=}")
@@ -92,14 +92,14 @@ def test_bud_set_wall_RaisesErrorIfNew_wall_IsAnItem_lx():
     casa_road = zia_bud.make_road(casa_road, casa_str)
     print(f"{casa_road=}")
     with pytest_raises(Exception) as excinfo:
-        zia_bud.set_wall(slash_str)
+        zia_bud.set_bridge(slash_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify wall to '{slash_str}' because it exists an item lx '{casa_road}'"
+        == f"Cannot modify bridge to '{slash_str}' because it exists an item lx '{casa_road}'"
     )
 
 
-def test_bud_set_wall_CorrectlyModifies_parent_road():
+def test_bud_set_bridge_CorrectlyModifies_parent_road():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -110,7 +110,7 @@ def test_bud_set_wall_CorrectlyModifies_parent_road():
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
     cook_item = zia_bud.get_item_obj(semicolon_cook_road)
     semicolon_str = ";"
-    assert zia_bud._wall == semicolon_str
+    assert zia_bud._bridge == semicolon_str
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
     # print(f"{zia_bud._deal_id=} {zia_bud._itemroot._lx=} {casa_road=}")
     # print(f"{cook_item._parent_road=} {cook_item._lx=}")
@@ -120,17 +120,17 @@ def test_bud_set_wall_CorrectlyModifies_parent_road():
 
     # WHEN
     slash_str = "/"
-    zia_bud.set_wall(slash_str)
+    zia_bud.set_bridge(slash_str)
 
     # THEN
     assert cook_item.get_road() != semicolon_cook_road
     zia_deal_id = zia_bud._deal_id
-    slash_casa_road = create_road(zia_deal_id, casa_str, wall=slash_str)
-    slash_cook_road = create_road(slash_casa_road, cook_str, wall=slash_str)
+    slash_casa_road = create_road(zia_deal_id, casa_str, bridge=slash_str)
+    slash_cook_road = create_road(slash_casa_road, cook_str, bridge=slash_str)
     assert cook_item.get_road() == slash_cook_road
 
 
-def test_bud_set_wall_CorrectlyModifiesReasonUnit():
+def test_bud_set_bridge_CorrectlyModifiesReasonUnit():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -152,7 +152,7 @@ def test_bud_set_wall_CorrectlyModifiesReasonUnit():
 
     # WHEN
     slash_str = "/"
-    zia_bud.set_wall(slash_str)
+    zia_bud.set_bridge(slash_str)
 
     # THEN
     slash_time_road = zia_bud.make_l1_road(time_str)
@@ -169,7 +169,7 @@ def test_bud_set_wall_CorrectlyModifiesReasonUnit():
     assert gen_time_reasonunit.premises.get(semicolon_8am_road) is None
 
 
-def test_bud_set_wall_CorrectlyModifiesFactUnit():
+def test_bud_set_bridge_CorrectlyModifiesFactUnit():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -189,7 +189,7 @@ def test_bud_set_wall_CorrectlyModifiesFactUnit():
 
     # WHEN
     slash_str = "/"
-    zia_bud.set_wall(slash_str)
+    zia_bud.set_bridge(slash_str)
 
     # THEN
     slash_time_road = zia_bud.make_l1_road(time_str)

@@ -113,7 +113,7 @@
             "timeline_lx": {
                 "jaar_type": "IdeaUnit"
             },
-            "wall": {
+            "bridge": {
                 "jaar_type": "str"
             },
             "yr1_jan1_offset": {

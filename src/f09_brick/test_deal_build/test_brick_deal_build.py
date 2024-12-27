@@ -60,7 +60,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario0_OneDealID(brick_env_setup_clean
         fund_coin=x_fund_coin,
         penny=x_penny,
         respect_bit=x_respect_bit,
-        wall=slash_str,
+        bridge=slash_str,
         timeline=creg_timelineunit,
     )
     music23_dealunit.add_purviewepisode(
@@ -131,7 +131,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario1_TwoDealIDs(
         fund_coin=x_fund_coin,
         penny=x_penny,
         respect_bit=x_respect_bit,
-        wall=slash_str,
+        bridge=slash_str,
         timeline=creg_timelineunit,
     )
     five_timelineunit = timelineunit_shop(get_five_config())
@@ -142,7 +142,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario1_TwoDealIDs(
         fund_coin=x_fund_coin,
         penny=x_penny,
         respect_bit=x_respect_bit,
-        wall=",",
+        bridge=",",
         timeline=five_timelineunit,
     )
     assert x_dealunits

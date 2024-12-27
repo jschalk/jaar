@@ -382,12 +382,12 @@ class boatAggToStagingTransformer:
             event_id = x_row["event_id"]
             if event_id in self.legitmate_events:
                 face_id = x_row["face_id"]
-                otx_wall = None
-                if "otx_wall" not in df_missing_cols:
-                    otx_wall = x_row["otx_wall"]
-                inx_wall = None
-                if "inx_wall" not in df_missing_cols:
-                    inx_wall = x_row["inx_wall"]
+                otx_bridge = None
+                if "otx_bridge" not in df_missing_cols:
+                    otx_bridge = x_row["otx_bridge"]
+                inx_bridge = None
+                if "inx_bridge" not in df_missing_cols:
+                    inx_bridge = x_row["inx_bridge"]
                 unknown_word = None
                 if "unknown_word" not in df_missing_cols:
                     unknown_word = x_row["unknown_word"]
@@ -398,8 +398,8 @@ class boatAggToStagingTransformer:
                     event_id,
                     get_otx_obj(self.jaar_type, x_row),
                     self.get_inx_obj(x_row, df_missing_cols),
-                    otx_wall,
-                    inx_wall,
+                    otx_bridge,
+                    inx_bridge,
                     unknown_word,
                 ]
 
@@ -485,8 +485,8 @@ class PidginStagingToAggTransformer:
             x_pidginheartrow = PidginHeartRow(
                 event_id=x_row["event_id"],
                 face_id=x_row["face_id"],
-                otx_wall=x_row["otx_wall"],
-                inx_wall=x_row["inx_wall"],
+                otx_bridge=x_row["otx_bridge"],
+                inx_bridge=x_row["inx_bridge"],
                 unknown_word=x_row["unknown_word"],
             )
             x_pidginheartbook.eval_pidginheartrow(x_pidginheartrow)

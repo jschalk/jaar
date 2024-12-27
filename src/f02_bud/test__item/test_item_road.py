@@ -129,7 +129,7 @@ def test_ItemUnit_get_obj_key_ReturnsCorrectInfo():
     assert red_item.get_obj_key() == red_str
 
 
-def test_ItemUnit_set_wall_CorrectlyModifiesReasonRoadUnits():
+def test_ItemUnit_set_bridge_CorrectlyModifiesReasonRoadUnits():
     # ESTABLISH
     casa_str = "casa"
     casa_item = itemunit_shop(casa_str)
@@ -137,7 +137,7 @@ def test_ItemUnit_set_wall_CorrectlyModifiesReasonRoadUnits():
 
     # WHEN
     slash_str = "/"
-    casa_item.set_wall(slash_str)
+    casa_item.set_bridge(slash_str)
 
     # THEN
-    assert casa_item._wall == slash_str
+    assert casa_item._bridge == slash_str

@@ -23,8 +23,8 @@ from src.f01_road.road import (
     get_default_deal_id_ideaunit as root_lx,
     get_diff_road,
     is_heir_road,
-    default_wall_if_None,
-    replace_wall,
+    default_bridge_if_None,
+    replace_bridge,
     validate_ideaunit,
     roadunit_valid_dir_path,
     all_roadunits_between,
@@ -88,11 +88,13 @@ def test_IdeaUnit_exists():
     x_road = IdeaUnit(empty_str)
     # THEN
     assert x_road == empty_str
-    doc_str = "A string presentation of a tree node. Nodes cannot contain RoadUnit wall"
+    doc_str = (
+        "A string presentation of a tree node. Nodes cannot contain RoadUnit bridge"
+    )
     assert inspect_getdoc(x_road) == doc_str
 
 
-def test_default_wall_if_None_ReturnsObj():
+def test_default_bridge_if_None_ReturnsObj():
     # ESTABLISH
     semicolon_str = ";"
     slash_str = "/"
@@ -100,13 +102,13 @@ def test_default_wall_if_None_ReturnsObj():
     buzz_str = "buzz"
 
     # WHEN / THEN
-    assert default_wall_if_None() == semicolon_str
-    assert default_wall_if_None(None) == semicolon_str
+    assert default_bridge_if_None() == semicolon_str
+    assert default_bridge_if_None(None) == semicolon_str
     x_nan = float("nan")
-    assert default_wall_if_None(x_nan) == semicolon_str
-    assert default_wall_if_None(slash_str) == slash_str
-    assert default_wall_if_None(colon_str) == colon_str
-    assert default_wall_if_None(buzz_str) == buzz_str
+    assert default_bridge_if_None(x_nan) == semicolon_str
+    assert default_bridge_if_None(slash_str) == slash_str
+    assert default_bridge_if_None(colon_str) == colon_str
+    assert default_bridge_if_None(buzz_str) == buzz_str
 
 
 def test_IdeaUnit_is_idea_ReturnsObj_Scenario0():
@@ -115,7 +117,7 @@ def test_IdeaUnit_is_idea_ReturnsObj_Scenario0():
     assert IdeaUnit("A").is_idea()
 
     # WHEN / THEN
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     x_ideaunit = IdeaUnit(f"casa{x_s}kitchen")
     assert x_ideaunit.is_idea() is False
 
@@ -136,7 +138,7 @@ def test_RoadUnit_exists():
     # THEN
     assert x_road == empty_str
     doc_str = (
-        "A string presentation of a tree path. IdeaUnits are seperated by road wall"
+        "A string presentation of a tree path. IdeaUnits are seperated by road bridge"
     )
     assert inspect_getdoc(x_road) == doc_str
 
@@ -148,7 +150,7 @@ def test_DoarUnit_exists():
     x_road = DoarUnit(empty_str)
     # THEN
     assert x_road == empty_str
-    doc_str = "DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. IdeaUnits are seperated by road wall."
+    doc_str = "DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. IdeaUnits are seperated by road bridge."
     assert inspect_getdoc(x_road) == doc_str
 
 
@@ -159,7 +161,7 @@ def test_TimeLineIdea_exists():
     x_timelineidea = TimeLineIdea(empty_str)
     # THEN
     assert x_timelineidea == empty_str
-    doc_str = "TimeLineIdea is required for every TimeLineUnit. It is a IdeaUnit that must not container the wall."
+    doc_str = "TimeLineIdea is required for every TimeLineUnit. It is a IdeaUnit that must not container the bridge."
     assert inspect_getdoc(x_timelineidea) == doc_str
 
 
@@ -195,37 +197,37 @@ def test_EventID_Exists():
 def test_create_road_ReturnsObj_Scenario0():
     # ESTABLISH
     rose_str = "rose"
-    semicolon_wall = ";"
-    assert semicolon_wall == default_wall_if_None()
-    semicolon_wall_rose_road = f"{root_lx()}{semicolon_wall}{rose_str}"
+    semicolon_bridge = ";"
+    assert semicolon_bridge == default_bridge_if_None()
+    semicolon_bridge_rose_road = f"{root_lx()}{semicolon_bridge}{rose_str}"
 
     # WHEN / THEN
-    assert create_road(root_lx(), rose_str) == semicolon_wall_rose_road
+    assert create_road(root_lx(), rose_str) == semicolon_bridge_rose_road
 
 
 def test_create_road_ReturnsObj_Scenario1():
     # ESTABLISH
     rose_str = "rose"
-    slash_wall = "/"
-    slash_wall_rose_road = f"{root_lx()}{slash_wall}{rose_str}"
+    slash_bridge = "/"
+    slash_bridge_rose_road = f"{root_lx()}{slash_bridge}{rose_str}"
 
     # WHEN
-    generated_rose_road = create_road(root_lx(), rose_str, wall=slash_wall)
+    generated_rose_road = create_road(root_lx(), rose_str, bridge=slash_bridge)
     # THEN
-    assert generated_rose_road == slash_wall_rose_road
+    assert generated_rose_road == slash_bridge_rose_road
 
 
 def test_create_road_ReturnsObj_Scenario2():
     # ESTABLISH
     rose_str = "rose"
-    slash_wall = "/"
-    slash_wall_rose_road = f"{root_lx()}{slash_wall}{rose_str}"
+    slash_bridge = "/"
+    slash_bridge_rose_road = f"{root_lx()}{slash_bridge}{rose_str}"
 
     # WHEN / THEN
-    assert create_road(root_lx(), rose_str, slash_wall) == slash_wall_rose_road
+    assert create_road(root_lx(), rose_str, slash_bridge) == slash_bridge_rose_road
 
 
-def test_combine_road_ReturnsObj_Scenario0_default_wall():
+def test_combine_road_ReturnsObj_Scenario0_default_bridge():
     # ESTABLISH
     rose_str = "rose"
     rose_road = create_road(root_lx(), rose_str)
@@ -277,11 +279,11 @@ def test_combine_road_ReturnsObj_Scenario1_():
 def test_road_is_sub_road_correctlyReturnsBool():
     # WHEN
     casa_str = "casa"
-    casa_road = f"{root_lx()}{default_wall_if_None()}{casa_str}"
+    casa_road = f"{root_lx()}{default_bridge_if_None()}{casa_str}"
     cleaning_str = "cleaning"
-    cleaning_road = f"{casa_road}{default_wall_if_None()}{cleaning_str}"
+    cleaning_road = f"{casa_road}{default_bridge_if_None()}{cleaning_str}"
     laundrys_str = "laundrys"
-    laundrys_road = f"{cleaning_road}{default_wall_if_None()}{laundrys_str}"
+    laundrys_road = f"{cleaning_road}{default_bridge_if_None()}{laundrys_str}"
     print(f"{cleaning_road=}")
     print(f"{laundrys_road=}")
 
@@ -292,7 +294,7 @@ def test_road_is_sub_road_correctlyReturnsBool():
 
 
 def test_road_road_validate_correctlyReturnsRoadUnit():
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     _deal_id = "x"
     casa_road = f"{_deal_id}{x_s}casa"
     clean_road = f"{_deal_id}{x_s}clean"
@@ -329,7 +331,7 @@ def test_road_rebuild_road_ReturnsCorrectRoadUnit():
 
 def test_road_get_all_road_ideas_ReturnsIdeaUnits():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     casa_str = "casa"
     casa_road = f"{root_lx()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -350,7 +352,7 @@ def test_road_get_all_road_ideas_ReturnsIdeaUnits():
 
 def test_road_get_terminus_idea_ReturnsIdeaUnit():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     casa_str = "casa"
     casa_road = f"{root_lx()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -365,12 +367,12 @@ def test_road_get_terminus_idea_ReturnsIdeaUnit():
     assert get_terminus_idea(road=roses_road) == roses_str
 
 
-def test_road_get_terminus_idea_ReturnsIdeaUnitWhenNonDefaultwall():
+def test_road_get_terminus_idea_ReturnsIdeaUnitWhenNonDefaultbridge():
     # ESTABLISH
     casa_str = "casa"
     bloomers_str = "bloomers"
     roses_str = "roses"
-    slash_str = default_wall_if_None()
+    slash_str = default_bridge_if_None()
     slash_casa_road = f"{root_lx()}{slash_str}{casa_str}"
     slash_bloomers_road = f"{slash_casa_road}{slash_str}{bloomers_str}"
     slash_roses_road = f"{slash_bloomers_road}{slash_str}{roses_str}"
@@ -400,7 +402,7 @@ def test_road_get_root_idea_from_road_ReturnsIdeaUnit():
 
 def test_road_get_parent_road_ReturnsCorrectObj_Scenario0():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     casa_str = "casa"
     casa_road = f"{root_lx()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -434,7 +436,7 @@ def test_road_get_parent_road_ReturnsCorrectObj_Scenario1():
 
 def test_road_create_road_without_root_idea_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     casa_str = "casa"
     casa_road = f"{root_lx()}{x_s}{casa_str}"
     casa_without_root_road = f"{x_s}{casa_str}"
@@ -474,7 +476,7 @@ class TempTestingObj:
 
 def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     old_seasons_road = f"{root_lx()}{x_s}casa{x_s}seasons"
     old_dict_x = {old_seasons_road: TempTestingObj(old_seasons_road)}
     assert old_dict_x.get(old_seasons_road) is not None
@@ -495,7 +497,7 @@ def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
 
 def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     nation_str = "nation-state"
     nation_road = f"{root_lx()}{x_s}{nation_str}"
     usa_str = "USA"
@@ -525,7 +527,7 @@ def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
 
 def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     nation_str = "nation-state"
     nation_road = f"{root_lx()}{x_s}{nation_str}"
     usa_str = "USA"
@@ -553,7 +555,7 @@ def test_road_get_default_deal_id_ideaunit_ReturnsCorrectObj():
 
 def test_road_create_road_from_ideas_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     root_list = get_all_road_ideas(root_lx())
     casa_str = "casa"
     casa_road = f"{root_lx()}{x_s}{casa_str}"
@@ -574,7 +576,7 @@ def test_road_create_road_from_ideas_ReturnsCorrectObj():
 
 def test_road_create_road_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     casa_str = "casa"
     casa_road = f"{root_lx()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -593,11 +595,11 @@ def test_road_create_road_ReturnsCorrectObj():
 
 def test_is_ideaunit_ReturnsObj():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
 
     # WHEN / THEN
-    assert is_ideaunit("", x_wall=x_s) is False
-    assert is_ideaunit("casa", x_wall=x_s)
+    assert is_ideaunit("", x_bridge=x_s) is False
+    assert is_ideaunit("casa", x_bridge=x_s)
     assert not is_ideaunit(f"ZZ{x_s}casa", x_s)
     assert not is_ideaunit(RoadUnit(f"ZZ{x_s}casa"), x_s)
     assert is_ideaunit(RoadUnit("ZZ"), x_s)
@@ -605,7 +607,7 @@ def test_is_ideaunit_ReturnsObj():
 
 def test_get_diff_road_ReturnsCorrectObj():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     casa_str = "casa"
     casa_road = f"{root_lx()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -625,7 +627,7 @@ def test_get_diff_road_ReturnsCorrectObj():
 
 def test_is_heir_road_CorrectlyIdentifiesHeirs():
     # ESTABLISH
-    x_s = default_wall_if_None()
+    x_s = default_bridge_if_None()
     usa_str = "USA"
     usa_road = f"{root_lx()}{x_s}Nation-States{x_s}{usa_str}"
     texas_str = "Texas"
@@ -644,68 +646,68 @@ def test_is_heir_road_CorrectlyIdentifiesHeirs():
     assert is_heir_road(src=f"earth{x_s}sea", heir=f"earth{x_s}seaside") is False
 
 
-def test_replace_wall_ReturnsNewObj():
+def test_replace_bridge_ReturnsNewObj():
     # ESTABLISH
     casa_str = "casa"
     gen_casa_road = create_road(root_lx(), casa_str)
-    semicolon_wall = default_wall_if_None()
-    semicolon_wall_casa_road = f"{root_lx()}{semicolon_wall}{casa_str}"
-    assert semicolon_wall == ";"
-    assert gen_casa_road == semicolon_wall_casa_road
+    semicolon_bridge = default_bridge_if_None()
+    semicolon_bridge_casa_road = f"{root_lx()}{semicolon_bridge}{casa_str}"
+    assert semicolon_bridge == ";"
+    assert gen_casa_road == semicolon_bridge_casa_road
 
     # WHEN
-    slash_wall = "/"
-    gen_casa_road = replace_wall(
-        gen_casa_road, old_wall=semicolon_wall, new_wall=slash_wall
+    slash_bridge = "/"
+    gen_casa_road = replace_bridge(
+        gen_casa_road, old_bridge=semicolon_bridge, new_bridge=slash_bridge
     )
 
     # THEN
-    slash_wall_casa_road = f"{root_lx()}{slash_wall}{casa_str}"
-    assert gen_casa_road == slash_wall_casa_road
+    slash_bridge_casa_road = f"{root_lx()}{slash_bridge}{casa_str}"
+    assert gen_casa_road == slash_bridge_casa_road
 
 
-def test_replace_wall_CorrectlyRaisesError():
+def test_replace_bridge_CorrectlyRaisesError():
     # ESTABLISH
     cooker_str = "cooker/cleaner"
     gen_cooker_road = create_road(root_lx(), cooker_str)
-    semicolon_wall = default_wall_if_None()
-    semicolon_wall_cooker_road = f"{root_lx()}{semicolon_wall}{cooker_str}"
-    assert semicolon_wall == ";"
-    assert gen_cooker_road == semicolon_wall_cooker_road
+    semicolon_bridge = default_bridge_if_None()
+    semicolon_bridge_cooker_road = f"{root_lx()}{semicolon_bridge}{cooker_str}"
+    assert semicolon_bridge == ";"
+    assert gen_cooker_road == semicolon_bridge_cooker_road
 
     # WHEN / THEN
-    slash_wall = "/"
+    slash_bridge = "/"
     with pytest_raises(Exception) as excinfo:
-        gen_cooker_road = replace_wall(
+        gen_cooker_road = replace_bridge(
             gen_cooker_road,
-            old_wall=semicolon_wall,
-            new_wall=slash_wall,
+            old_bridge=semicolon_bridge,
+            new_bridge=slash_bridge,
         )
     assert (
         str(excinfo.value)
-        == f"Cannot replace_wall '{semicolon_wall}' with '{slash_wall}' because the new one exists in road '{gen_cooker_road}'."
+        == f"Cannot replace_bridge '{semicolon_bridge}' with '{slash_bridge}' because the new one exists in road '{gen_cooker_road}'."
     )
 
 
-def test_replace_wall_WhenNewwallIsFirstInRoadUnitRaisesError():
+def test_replace_bridge_WhenNewbridgeIsFirstInRoadUnitRaisesError():
     # ESTABLISH
     cooker_str = "/cooker"
     cleaner_str = "cleaner"
-    semicolon_wall = default_wall_if_None()
-    semicolon_wall_cooker_road = f"{cooker_str}{semicolon_wall}{cleaner_str}"
-    assert semicolon_wall == ";"
+    semicolon_bridge = default_bridge_if_None()
+    semicolon_bridge_cooker_road = f"{cooker_str}{semicolon_bridge}{cleaner_str}"
+    assert semicolon_bridge == ";"
 
     # WHEN / THEN
-    slash_wall = "/"
+    slash_bridge = "/"
     with pytest_raises(Exception) as excinfo:
-        semicolon_wall_cooker_road = replace_wall(
-            semicolon_wall_cooker_road,
-            old_wall=semicolon_wall,
-            new_wall=slash_wall,
+        semicolon_bridge_cooker_road = replace_bridge(
+            semicolon_bridge_cooker_road,
+            old_bridge=semicolon_bridge,
+            new_bridge=slash_bridge,
         )
     assert (
         str(excinfo.value)
-        == f"Cannot replace_wall '{semicolon_wall}' with '{slash_wall}' because the new one exists in road '{semicolon_wall_cooker_road}'."
+        == f"Cannot replace_bridge '{semicolon_bridge}' with '{slash_bridge}' because the new one exists in road '{semicolon_bridge_cooker_road}'."
     )
 
 
@@ -713,15 +715,15 @@ def test_validate_ideaunit_RaisesErrorWhenNotIdeaUnit():
     # ESTABLISH
     bob_str = "Bob, Tom"
     slash_str = "/"
-    assert bob_str == validate_ideaunit(bob_str, x_wall=slash_str)
+    assert bob_str == validate_ideaunit(bob_str, x_bridge=slash_str)
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_str == validate_ideaunit(bob_str, x_wall=comma_str)
+        bob_str == validate_ideaunit(bob_str, x_bridge=comma_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain wall: '{comma_str}'"
+        == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain bridge: '{comma_str}'"
     )
 
 
@@ -730,27 +732,27 @@ def test_validate_ideaunit_RaisesErrorWhenIdeaUnit():
     slash_str = "/"
     bob_str = f"Bob{slash_str}Tom"
     assert bob_str == validate_ideaunit(
-        bob_str, x_wall=slash_str, not_ideaunit_required=True
+        bob_str, x_bridge=slash_str, not_ideaunit_required=True
     )
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
         bob_str == validate_ideaunit(
-            bob_str, x_wall=comma_str, not_ideaunit_required=True
+            bob_str, x_bridge=comma_str, not_ideaunit_required=True
         )
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to not be a IdeaUnit. Must contain wall: '{comma_str}'"
+        == f"'{bob_str}' needs to not be a IdeaUnit. Must contain bridge: '{comma_str}'"
     )
 
 
-def test_roadunit_valid_dir_path_ReturnsCorrectObj_simple_wall():
+def test_roadunit_valid_dir_path_ReturnsCorrectObj_simple_bridge():
     # ESTABLISH
     comma_str = ","
     # WHEN / THEN
-    assert roadunit_valid_dir_path("run", wall=comma_str)
-    assert roadunit_valid_dir_path("run,sport", wall=comma_str)
+    assert roadunit_valid_dir_path("run", bridge=comma_str)
+    assert roadunit_valid_dir_path("run,sport", bridge=comma_str)
     print(f"{platform_system()=}")
     sport_question_valid_bool = roadunit_valid_dir_path("run,sport?", comma_str)
     assert (
@@ -758,41 +760,41 @@ def test_roadunit_valid_dir_path_ReturnsCorrectObj_simple_wall():
     ) or platform_system() == "Linux"
 
 
-def test_roadunit_valid_dir_path_ReturnsCorrectObj_complicated_wall():
+def test_roadunit_valid_dir_path_ReturnsCorrectObj_complicated_bridge():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"
     run_str = "run,"
     lap_str = "lap"
-    sport_road = create_road(sport_str, wall=question_str)
-    run_road = create_road(sport_road, run_str, wall=question_str)
-    lap_road = create_road(run_road, lap_str, wall=question_str)
+    sport_road = create_road(sport_str, bridge=question_str)
+    run_road = create_road(sport_road, run_str, bridge=question_str)
+    lap_road = create_road(run_road, lap_str, bridge=question_str)
     assert lap_road == f"{sport_road}?{run_str}?{lap_str}"
 
-    assert roadunit_valid_dir_path(sport_road, wall=question_str)
-    assert roadunit_valid_dir_path(run_road, wall=question_str)
-    assert roadunit_valid_dir_path(lap_road, wall=question_str)
+    assert roadunit_valid_dir_path(sport_road, bridge=question_str)
+    assert roadunit_valid_dir_path(run_road, bridge=question_str)
+    assert roadunit_valid_dir_path(lap_road, bridge=question_str)
     assert (
         platform_system() == "Windows"
-        and roadunit_valid_dir_path(lap_road, wall=",") is False
+        and roadunit_valid_dir_path(lap_road, bridge=",") is False
     ) or platform_system() == "Linux"
 
 
-def test_roadunit_valid_dir_path_ReturnsCorrectObjWhereSlashNotwallEdgeCases():
+def test_roadunit_valid_dir_path_ReturnsCorrectObjWhereSlashNotbridgeEdgeCases():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"
     run_str = "run/swim"
     lap_str = "lap"
-    sport_road = create_road(sport_str, wall=question_str)
-    run_road = create_road(sport_road, run_str, wall=question_str)
-    lap_road = create_road(run_road, lap_str, wall=question_str)
+    sport_road = create_road(sport_str, bridge=question_str)
+    run_road = create_road(sport_road, run_str, bridge=question_str)
+    lap_road = create_road(run_road, lap_str, bridge=question_str)
     assert lap_road == f"{sport_road}?{run_str}?{lap_str}"
 
-    assert roadunit_valid_dir_path(sport_road, wall=question_str)
-    assert roadunit_valid_dir_path(run_road, wall=question_str) is False
-    assert roadunit_valid_dir_path(lap_road, wall=question_str) is False
-    assert roadunit_valid_dir_path(lap_road, wall=",") is False
+    assert roadunit_valid_dir_path(sport_road, bridge=question_str)
+    assert roadunit_valid_dir_path(run_road, bridge=question_str) is False
+    assert roadunit_valid_dir_path(lap_road, bridge=question_str) is False
+    assert roadunit_valid_dir_path(lap_road, bridge=",") is False
 
 
 def test_all_roadunits_between_ReturnsObj():

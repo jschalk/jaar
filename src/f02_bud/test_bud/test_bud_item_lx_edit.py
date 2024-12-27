@@ -254,7 +254,7 @@ def test_bud_set_owner_id_CorrectlyModifiesBoth():
     assert sue_bud._itemroot._lx == sue_bud._deal_id
 
 
-def test_bud_edit_item_lx_RaisesErrorIfwallIsInIdea():
+def test_bud_edit_item_lx_RaisesErrorIfbridgeIsInIdea():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     old_weekday_str = "weekdays"
@@ -266,5 +266,5 @@ def test_bud_edit_item_lx_RaisesErrorIfwallIsInIdea():
         sue_bud.edit_item_lx(old_road=old_weekday_road, new_lx=new_weekday_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify '{old_weekday_road}' because new_lx {new_weekday_str} contains wall {sue_bud._wall}"
+        == f"Cannot modify '{old_weekday_road}' because new_lx {new_weekday_str} contains bridge {sue_bud._bridge}"
     )

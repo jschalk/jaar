@@ -9,13 +9,13 @@
         "inx_idea": {
             "otx_key": false
         },
-        "inx_wall": {
+        "inx_bridge": {
             "otx_key": false
         },
         "otx_idea": {
             "otx_key": true
         },
-        "otx_wall": {
+        "otx_bridge": {
             "otx_key": false
         },
         "unknown_word": {

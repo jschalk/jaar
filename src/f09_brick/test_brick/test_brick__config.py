@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_json_from_dict
 from src.f00_instrument.file import save_file, create_path
-from src.f01_road.finance_tran import quota_str, time_id_str, wall_str
+from src.f01_road.finance_tran import quota_str, time_id_str, bridge_str
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
     bud_acctunit_str,
@@ -91,8 +91,8 @@ from src.f07_deal.deal_config import (
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
     pidginunit_str,
-    otx_wall_str,
-    inx_wall_str,
+    otx_bridge_str,
+    inx_bridge_str,
     unknown_word_str,
     otx_idea_str,
     inx_idea_str,
@@ -233,9 +233,9 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[61] == inx_acct_id_str()
     assert table_sorting_priority[62] == otx_group_id_str()
     assert table_sorting_priority[63] == inx_group_id_str()
-    assert table_sorting_priority[64] == otx_wall_str()
-    assert table_sorting_priority[65] == inx_wall_str()
-    assert table_sorting_priority[66] == wall_str()
+    assert table_sorting_priority[64] == otx_bridge_str()
+    assert table_sorting_priority[65] == inx_bridge_str()
+    assert table_sorting_priority[66] == bridge_str()
     assert table_sorting_priority[67] == unknown_word_str()
     assert table_sorting_priority[68] == c400_number_str()
     assert table_sorting_priority[69] == yr1_jan1_offset_str()
@@ -321,10 +321,10 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(cumlative_day_str()) == "INTEGER"
     assert sqlite_types.get(weekday_lx_str()) == "TEXT"
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
-    assert sqlite_types.get(otx_wall_str()) == "TEXT"
-    assert sqlite_types.get(inx_wall_str()) == "TEXT"
+    assert sqlite_types.get(otx_bridge_str()) == "TEXT"
+    assert sqlite_types.get(inx_bridge_str()) == "TEXT"
     assert sqlite_types.get(unknown_word_str()) == "TEXT"
-    assert sqlite_types.get(wall_str()) == "TEXT"
+    assert sqlite_types.get(bridge_str()) == "TEXT"
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(quota_str()) == "REAL"
@@ -689,7 +689,7 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),
-        wall_str(),
+        bridge_str(),
         timeline_lx_str(),
         yr1_jan1_offset_str(),
     }

@@ -19,7 +19,7 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_With_base_item_ac
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_str = "base"
-    base_value = f"{sue_bud._wall}Swimmers"
+    base_value = f"{sue_bud._bridge}Swimmers"
     base_item_active_requisite_value = True
     swim_atomunit = atomunit_shop(category, atom_insert())
     swim_atomunit.set_arg(road_str, road_value)
@@ -48,7 +48,7 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_Without_base_item
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_str = "base"
-    base_value = f"{sue_bud._wall}Swimmers"
+    base_value = f"{sue_bud._bridge}Swimmers"
     swim_atomunit = atomunit_shop(category, atom_insert())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(base_str, base_value)
@@ -70,7 +70,7 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_
     sue_bud = budunit_shop("Sue")
     category = bud_item_reasonunit_str()
     base_str = "base"
-    base_value = f"{sue_bud._wall}Swimmers"
+    base_value = f"{sue_bud._bridge}Swimmers"
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -99,7 +99,7 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_
     sue_bud = budunit_shop("Sue")
     category = bud_item_reasonunit_str()
     base_str = "base"
-    base_value = f"{sue_bud._wall}Swimmers"
+    base_value = f"{sue_bud._bridge}Swimmers"
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -127,7 +127,7 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_DELETE():
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_str = "base"
-    base_value = f"{sue_bud._wall}Swimmers"
+    base_value = f"{sue_bud._bridge}Swimmers"
     swim_atomunit = atomunit_shop(category, atom_delete())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(base_str, base_value)

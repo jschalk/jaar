@@ -5,9 +5,9 @@ from src.f08_pidgin.map import roadmap_shop
 def test_RoadMap_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario0():
     # ESTABLISH
     otx_music45_str = "music45"
-    otx_r_wall = "/"
-    inx_r_wall = ":"
-    road_roadmap = roadmap_shop(otx_wall=otx_r_wall, inx_wall=inx_r_wall)
+    otx_r_bridge = "/"
+    inx_r_bridge = ":"
+    road_roadmap = roadmap_shop(otx_bridge=otx_r_bridge, inx_bridge=inx_r_bridge)
     assert road_roadmap.otx_exists(otx_music45_str) is False
     assert road_roadmap.otx2inx_exists(otx_music45_str, otx_music45_str) is False
 
@@ -24,11 +24,11 @@ def test_RoadMap_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
-    otx_r_wall = "/"
-    inx_r_wall = ":"
+    otx_r_bridge = "/"
+    inx_r_bridge = ":"
     clean_otx_str = "clean"
-    clean_otx_road = f"{otx_music45_str}{otx_r_wall}{clean_otx_str}"
-    road_roadmap = roadmap_shop(otx_wall=otx_r_wall, inx_wall=inx_r_wall)
+    clean_otx_road = f"{otx_music45_str}{otx_r_bridge}{clean_otx_str}"
+    road_roadmap = roadmap_shop(otx_bridge=otx_r_bridge, inx_bridge=inx_r_bridge)
     assert road_roadmap.otx_exists(otx_music45_str) is False
     assert road_roadmap.otx_exists(clean_otx_road) is False
 
@@ -52,19 +52,19 @@ def test_RoadMap_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     # THEN
     assert road_roadmap.otx_exists(clean_otx_road)
     assert road_roadmap.otx2inx_exists(clean_otx_road, gen_inx_road)
-    assert gen_inx_road == f"{inx_music87_str}{inx_r_wall}{clean_otx_str}"
+    assert gen_inx_road == f"{inx_music87_str}{inx_r_bridge}{clean_otx_str}"
 
 
 def test_RoadMap_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_idea():
     # ESTABLISH
     otx_music45_str = "music45"
     inx_music87_str = "music87"
-    otx_r_wall = "/"
-    inx_r_wall = ":"
+    otx_r_bridge = "/"
+    inx_r_bridge = ":"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    clean_otx_road = f"{otx_music45_str}{otx_r_wall}{clean_otx_str}"
-    road_roadmap = roadmap_shop(otx_wall=otx_r_wall, inx_wall=inx_r_wall)
+    clean_otx_road = f"{otx_music45_str}{otx_r_bridge}{clean_otx_str}"
+    road_roadmap = roadmap_shop(otx_bridge=otx_r_bridge, inx_bridge=inx_r_bridge)
     road_roadmap.set_idea(clean_otx_str, clean_inx_str)
     assert road_roadmap.otx_exists(otx_music45_str) is False
     assert road_roadmap.otx_exists(clean_otx_road) is False
@@ -90,7 +90,7 @@ def test_RoadMap_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_idea():
     assert road_roadmap.otx2inx_exists(otx_music45_str, inx_music87_str)
     assert road_roadmap.otx_exists(clean_otx_road)
     assert road_roadmap.otx2inx_exists(clean_otx_road, gen_inx_road)
-    assert gen_inx_road == f"{inx_music87_str}{inx_r_wall}{clean_inx_str}"
+    assert gen_inx_road == f"{inx_music87_str}{inx_r_bridge}{clean_inx_str}"
 
 
 def test_RoadMap_reveal_inx_AddsMissingObjsTo_otx2inx_RoadUnit():

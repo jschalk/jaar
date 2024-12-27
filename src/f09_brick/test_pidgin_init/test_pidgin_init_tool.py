@@ -11,8 +11,8 @@ from src.f04_gift.atom_config import (
 )
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
-    otx_wall_str,
-    inx_wall_str,
+    otx_bridge_str,
+    inx_bridge_str,
     unknown_word_str,
 )
 from src.f08_pidgin.pidgin import pidginunit_shop
@@ -63,8 +63,8 @@ def test_get_map_acct_dt_columns_ReturnsObj():
     static_list = [
         face_id_str(),
         event_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
         "otx_acct_id",
         "inx_acct_id",
@@ -80,8 +80,8 @@ def test_get_map_group_dt_columns_ReturnsObj():
     static_list = [
         face_id_str(),
         event_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
         "otx_group_id",
         "inx_group_id",
@@ -97,8 +97,8 @@ def test_get_map_idea_dt_columns_ReturnsObj():
     static_list = [
         face_id_str(),
         event_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
         "otx_idea",
         "inx_idea",
@@ -114,8 +114,8 @@ def test_get_map_road_dt_columns_ReturnsObj():
     static_list = [
         face_id_str(),
         event_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
         "otx_road",
         "inx_road",
@@ -372,18 +372,18 @@ def test_load_roadmap_from_csv_DoesNothingWhenFileDoesNotExist(
     assert len(sue_roadmap.otx2inx) == 0
 
 
-def test_create_dir_valid_empty_pidginunit_Sets_otx_wall_inx_wall(
+def test_create_dir_valid_empty_pidginunit_Sets_otx_bridge_inx_bridge(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownWord"
-    slash_otx_wall = "/"
-    colon_inx_wall = ":"
+    slash_otx_bridge = "/"
+    colon_inx_bridge = ":"
     sue_pidginunit = pidginunit_shop(
         face_id=sue_str,
-        otx_wall=slash_otx_wall,
-        inx_wall=colon_inx_wall,
+        otx_bridge=slash_otx_bridge,
+        inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
     )
     sue_pidginunit.set_acctmap(get_slash_acctmap())
@@ -395,12 +395,12 @@ def test_create_dir_valid_empty_pidginunit_Sets_otx_wall_inx_wall(
 
     # # THEN
     assert gen_pidginunit.unknown_word == x_unknown_word
-    assert gen_pidginunit.otx_wall == slash_otx_wall
-    assert gen_pidginunit.inx_wall == colon_inx_wall
+    assert gen_pidginunit.otx_bridge == slash_otx_bridge
+    assert gen_pidginunit.inx_bridge == colon_inx_bridge
     gen_mapunit = gen_pidginunit.get_mapunit(type_AcctID_str())
     assert gen_mapunit.unknown_word == x_unknown_word
-    assert gen_mapunit.otx_wall == slash_otx_wall
-    assert gen_mapunit.inx_wall == colon_inx_wall
+    assert gen_mapunit.otx_bridge == slash_otx_bridge
+    assert gen_mapunit.inx_bridge == colon_inx_bridge
 
 
 def test_create_dir_valid_empty_pidginunit_Returns_event_id(
@@ -409,14 +409,14 @@ def test_create_dir_valid_empty_pidginunit_Returns_event_id(
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownWord"
-    slash_otx_wall = "/"
-    colon_inx_wall = ":"
+    slash_otx_bridge = "/"
+    colon_inx_bridge = ":"
     event7 = 7
     sue_pidginunit = pidginunit_shop(
         face_id=sue_str,
         event_id=event7,
-        otx_wall=slash_otx_wall,
-        inx_wall=colon_inx_wall,
+        otx_bridge=slash_otx_bridge,
+        inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
     )
     sue_pidginunit.set_acctmap(get_slash_acctmap())
@@ -430,12 +430,12 @@ def test_create_dir_valid_empty_pidginunit_Returns_event_id(
     assert gen_pidginunit.face_id == sue_str
     assert gen_pidginunit.event_id == event7
     assert gen_pidginunit.unknown_word == x_unknown_word
-    assert gen_pidginunit.otx_wall == slash_otx_wall
-    assert gen_pidginunit.inx_wall == colon_inx_wall
+    assert gen_pidginunit.otx_bridge == slash_otx_bridge
+    assert gen_pidginunit.inx_bridge == colon_inx_bridge
     gen_mapunit = gen_pidginunit.get_mapunit(type_AcctID_str())
     assert gen_mapunit.unknown_word == x_unknown_word
-    assert gen_mapunit.otx_wall == slash_otx_wall
-    assert gen_mapunit.inx_wall == colon_inx_wall
+    assert gen_mapunit.otx_bridge == slash_otx_bridge
+    assert gen_mapunit.inx_bridge == colon_inx_bridge
 
 
 def test_init_pidginunit_from_dir_ReturnsObj(env_dir_setup_cleanup):

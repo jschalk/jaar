@@ -7,8 +7,8 @@ from src.f04_gift.atom_config import (
 )
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
-    inx_wall_str,
-    otx_wall_str,
+    inx_bridge_str,
+    otx_bridge_str,
     inx_acct_id_str,
     otx_acct_id_str,
     inx_idea_str,
@@ -79,8 +79,8 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -112,8 +112,8 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
         event_id_str(),
         otx_group_id_str(),
         inx_group_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -144,8 +144,8 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
         event_id_str(),
         otx_idea_str(),
         inx_idea_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -176,8 +176,8 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
         event_id_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -225,8 +225,8 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
         event_id_str(),
         otx_group_id_str(),
         inx_group_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_group_df.columns) == group_file_columns
@@ -248,8 +248,8 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_acct_df.columns) == acct_file_columns
@@ -271,8 +271,8 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
         event_id_str(),
         otx_idea_str(),
         inx_idea_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_idea_df.columns) == idea_file_columns
@@ -294,8 +294,8 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
         event_id_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_road_df.columns) == road_file_columns

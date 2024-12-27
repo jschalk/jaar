@@ -2,8 +2,8 @@ from src.f00_instrument.file import create_path, set_dir, get_dir_filenames, sav
 from src.f04_gift.atom_config import face_id_str
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
-    inx_wall_str,
-    otx_wall_str,
+    inx_bridge_str,
+    otx_bridge_str,
     inx_acct_id_str,
     otx_acct_id_str,
     inx_group_id_str,
@@ -82,8 +82,8 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario1_3Events(env_dir_setup_cleanu
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")
@@ -148,8 +148,8 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario2_group(env_dir_setup_cleanup)
         event_id_str(),
         otx_group_id_str(),
         inx_group_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")
@@ -205,8 +205,8 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario3_idea(env_dir_setup_cleanup):
         event_id_str(),
         otx_idea_str(),
         inx_idea_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")
@@ -261,8 +261,8 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario4_road(env_dir_setup_cleanup):
         event_id_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")
@@ -322,8 +322,8 @@ def test_etl_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face_ids(
         event_id_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")

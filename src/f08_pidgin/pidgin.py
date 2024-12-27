@@ -4,7 +4,7 @@ from src.f00_instrument.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
 )
-from src.f01_road.road import default_wall_if_None, OwnerID, EventID
+from src.f01_road.road import default_bridge_if_None, OwnerID, EventID
 from src.f08_pidgin.map import (
     MapCore,
     GroupMap,
@@ -73,8 +73,8 @@ class PidginUnit:
     ideamap: IdeaMap = None
     roadmap: RoadMap = None
     unknown_word: str = None  # pidginunit heart
-    otx_wall: str = None  # pidginunit heart
-    inx_wall: str = None  # pidginunit heart
+    otx_bridge: str = None  # pidginunit heart
+    inx_bridge: str = None  # pidginunit heart
 
     def set_groupmap(self, x_groupmap: GroupMap):
         self._check_all_core_attrs_match(x_groupmap)
@@ -164,8 +164,8 @@ class PidginUnit:
 
     def _check_all_core_attrs_match(self, x_mapcore: MapCore):
         self._check_attr_match("face_id", x_mapcore)
-        self._check_attr_match("otx_wall", x_mapcore)
-        self._check_attr_match("inx_wall", x_mapcore)
+        self._check_attr_match("otx_bridge", x_mapcore)
+        self._check_attr_match("inx_bridge", x_mapcore)
         self._check_attr_match("unknown_word", x_mapcore)
 
     def _check_attr_match(self, attr: str, mapcore):
@@ -239,8 +239,8 @@ class PidginUnit:
         return {
             "face_id": self.face_id,
             "event_id": self.event_id,
-            "otx_wall": self.otx_wall,
-            "inx_wall": self.inx_wall,
+            "otx_bridge": self.otx_bridge,
+            "inx_bridge": self.inx_bridge,
             "unknown_word": self.unknown_word,
             "acctmap": self.acctmap.get_dict(),
             "ideamap": self.ideamap.get_dict(),
@@ -255,40 +255,40 @@ class PidginUnit:
 def pidginunit_shop(
     face_id: OwnerID,
     event_id: EventID = None,
-    otx_wall: str = None,
-    inx_wall: str = None,
+    otx_bridge: str = None,
+    inx_bridge: str = None,
     unknown_word: str = None,
 ) -> PidginUnit:
     unknown_word = default_unknown_word_if_None(unknown_word)
-    otx_wall = default_wall_if_None(otx_wall)
-    inx_wall = default_wall_if_None(inx_wall)
+    otx_bridge = default_bridge_if_None(otx_bridge)
+    inx_bridge = default_bridge_if_None(inx_bridge)
 
     x_acctmap = acctmap_shop(
         face_id=face_id,
         event_id=event_id,
-        otx_wall=otx_wall,
-        inx_wall=inx_wall,
+        otx_bridge=otx_bridge,
+        inx_bridge=inx_bridge,
         unknown_word=unknown_word,
     )
     x_groupmap = groupmap_shop(
         face_id=face_id,
         event_id=event_id,
-        otx_wall=otx_wall,
-        inx_wall=inx_wall,
+        otx_bridge=otx_bridge,
+        inx_bridge=inx_bridge,
         unknown_word=unknown_word,
     )
     x_ideamap = ideamap_shop(
         face_id=face_id,
         event_id=event_id,
-        otx_wall=otx_wall,
-        inx_wall=inx_wall,
+        otx_bridge=otx_bridge,
+        inx_bridge=inx_bridge,
         unknown_word=unknown_word,
     )
     x_roadmap = roadmap_shop(
         face_id=face_id,
         event_id=event_id,
-        otx_wall=otx_wall,
-        inx_wall=inx_wall,
+        otx_bridge=otx_bridge,
+        inx_bridge=inx_bridge,
         unknown_word=unknown_word,
         x_ideamap=x_ideamap,
     )
@@ -297,8 +297,8 @@ def pidginunit_shop(
         face_id=face_id,
         event_id=get_0_if_None(event_id),
         unknown_word=unknown_word,
-        otx_wall=otx_wall,
-        inx_wall=inx_wall,
+        otx_bridge=otx_bridge,
+        inx_bridge=inx_bridge,
         acctmap=x_acctmap,
         groupmap=x_groupmap,
         ideamap=x_ideamap,
@@ -315,8 +315,8 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
     return PidginUnit(
         face_id=x_dict.get("face_id"),
         event_id=x_dict.get("event_id"),
-        otx_wall=x_dict.get("otx_wall"),
-        inx_wall=x_dict.get("inx_wall"),
+        otx_bridge=x_dict.get("otx_bridge"),
+        inx_bridge=x_dict.get("inx_bridge"),
         unknown_word=x_dict.get("unknown_word"),
         acctmap=x_acctmap,
         groupmap=x_groupmap,
@@ -336,8 +336,8 @@ class PidginCoreAttrConflictException(Exception):
 def inherit_pidginunit(older: PidginUnit, newer: PidginUnit) -> PidginUnit:
     if (
         older.face_id != newer.face_id
-        or older.otx_wall != newer.otx_wall
-        or older.inx_wall != newer.inx_wall
+        or older.otx_bridge != newer.otx_bridge
+        or older.inx_bridge != newer.inx_bridge
         or older.unknown_word != newer.unknown_word
     ):
         raise PidginCoreAttrConflictException("Core attributes in conflict")

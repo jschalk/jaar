@@ -7,8 +7,8 @@ from src.f04_gift.atom_config import (
 )
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
-    inx_wall_str,
-    otx_wall_str,
+    inx_bridge_str,
+    otx_bridge_str,
     inx_acct_id_str,
     otx_acct_id_str,
     unknown_word_str,
@@ -64,8 +64,8 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario0_SingleBrick(
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_acct_df.columns) == acct_file_columns
@@ -115,8 +115,8 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario1_MultipleBrick
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -147,8 +147,8 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario1_MultipleBrick
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_acct_df.columns) == acct_file_columns
@@ -202,8 +202,8 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario2_WorldUnit_eve
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -234,8 +234,8 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario2_WorldUnit_eve
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_acct_df.columns) == acct_file_columns

@@ -115,7 +115,7 @@ def test_get_deal_config_dict_ReturnsObj():
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),
-        "wall",
+        "bridge",
         timeline_lx_str(),
         yr1_jan1_offset_str(),
     }

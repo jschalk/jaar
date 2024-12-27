@@ -1,5 +1,5 @@
 from src.f01_road.jaar_config import default_unknown_word_if_None
-from src.f01_road.road import default_wall_if_None
+from src.f01_road.road import default_bridge_if_None
 from src.f08_pidgin.map import (
     GroupMap,
     groupmap_shop,
@@ -19,8 +19,8 @@ def test_GroupMap_Exists():
     assert not x_groupmap.event_id
     assert not x_groupmap.otx2inx
     assert not x_groupmap.unknown_word
-    assert not x_groupmap.otx_wall
-    assert not x_groupmap.inx_wall
+    assert not x_groupmap.otx_bridge
+    assert not x_groupmap.inx_bridge
 
 
 def test_groupmap_shop_ReturnsObj_scenario0_NoParameters():
@@ -32,8 +32,8 @@ def test_groupmap_shop_ReturnsObj_scenario0_NoParameters():
     assert x_groupmap.event_id == 0
     assert x_groupmap.otx2inx == {}
     assert x_groupmap.unknown_word == default_unknown_word_if_None()
-    assert x_groupmap.otx_wall == default_wall_if_None()
-    assert x_groupmap.inx_wall == default_wall_if_None()
+    assert x_groupmap.otx_bridge == default_bridge_if_None()
+    assert x_groupmap.inx_bridge == default_bridge_if_None()
 
 
 def test_groupmap_shop_ReturnsObj_scenario1_WithParameters():
@@ -44,8 +44,8 @@ def test_groupmap_shop_ReturnsObj_scenario1_WithParameters():
     event7 = 7
     otx2inx = {xio_str: sue_str}
     x_unknown_word = "UnknownWord"
-    slash_otx_wall = "/"
-    colon_inx_wall = ":"
+    slash_otx_bridge = "/"
+    colon_inx_bridge = ":"
 
     # WHEN
     x_groupmap = groupmap_shop(
@@ -53,8 +53,8 @@ def test_groupmap_shop_ReturnsObj_scenario1_WithParameters():
         event_id=event7,
         otx2inx=otx2inx,
         unknown_word=x_unknown_word,
-        otx_wall=slash_otx_wall,
-        inx_wall=colon_inx_wall,
+        otx_bridge=slash_otx_bridge,
+        inx_bridge=colon_inx_bridge,
     )
 
     # THEN
@@ -62,8 +62,8 @@ def test_groupmap_shop_ReturnsObj_scenario1_WithParameters():
     assert x_groupmap.event_id == event7
     assert x_groupmap.otx2inx == otx2inx
     assert x_groupmap.unknown_word == x_unknown_word
-    assert x_groupmap.otx_wall == slash_otx_wall
-    assert x_groupmap.inx_wall == colon_inx_wall
+    assert x_groupmap.otx_bridge == slash_otx_bridge
+    assert x_groupmap.inx_bridge == colon_inx_bridge
 
 
 def test_groupmap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_float_nan():
@@ -81,8 +81,8 @@ def test_groupmap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_fl
         event_id=event7,
         otx2inx=otx2inx,
         unknown_word=x_nan,
-        otx_wall=x_nan,
-        inx_wall=x_nan,
+        otx_bridge=x_nan,
+        inx_bridge=x_nan,
     )
 
     # THEN
@@ -90,8 +90,8 @@ def test_groupmap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_fl
     assert x_groupmap.event_id == event7
     assert x_groupmap.otx2inx == otx2inx
     assert x_groupmap.unknown_word == default_unknown_word_if_None()
-    assert x_groupmap.otx_wall == default_wall_if_None()
-    assert x_groupmap.inx_wall == default_wall_if_None()
+    assert x_groupmap.otx_bridge == default_bridge_if_None()
+    assert x_groupmap.inx_bridge == default_bridge_if_None()
 
 
 def test_GroupMap_set_all_otx2inx_SetsAttr():
@@ -268,16 +268,16 @@ def test_GroupMap_unknown_word_in_otx2inx_ReturnsObj():
 
 def test_GroupMap_reveal_inx_ReturnsObjAndSetsAttr_group_id():
     # ESTABLISH
-    inx_r_wall = ":"
-    otx_r_wall = "/"
-    swim_otx = f"swim{otx_r_wall}"
-    climb_otx = f"climb{otx_r_wall}_{inx_r_wall}"
-    x_groupmap = groupmap_shop(otx_wall=otx_r_wall, inx_wall=inx_r_wall)
+    inx_r_bridge = ":"
+    otx_r_bridge = "/"
+    swim_otx = f"swim{otx_r_bridge}"
+    climb_otx = f"climb{otx_r_bridge}_{inx_r_bridge}"
+    x_groupmap = groupmap_shop(otx_bridge=otx_r_bridge, inx_bridge=inx_r_bridge)
     x_groupmap.otx_exists(swim_otx) is False
     x_groupmap.otx_exists(climb_otx) is False
 
     # WHEN
-    swim_inx = f"swim{inx_r_wall}"
+    swim_inx = f"swim{inx_r_bridge}"
     assert x_groupmap.reveal_inx(swim_otx) == swim_inx
 
     # THEN
@@ -297,16 +297,16 @@ def test_GroupMap_get_dict_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     sue_str = "Sue"
-    slash_otx_wall = "/"
-    colon_inx_wall = ":"
+    slash_otx_bridge = "/"
+    colon_inx_bridge = ":"
     x_groupmap = groupmap_shop(
-        otx_wall=slash_otx_wall,
-        inx_wall=colon_inx_wall,
+        otx_bridge=slash_otx_bridge,
+        inx_bridge=colon_inx_bridge,
         face_id=sue_str,
     )
     x1_road_map_dict = {
-        "otx_wall": x_groupmap.otx_wall,
-        "inx_wall": x_groupmap.inx_wall,
+        "otx_bridge": x_groupmap.otx_bridge,
+        "inx_bridge": x_groupmap.inx_bridge,
         "unknown_word": x_groupmap.unknown_word,
         "otx2inx": {},
         "event_id": x_groupmap.event_id,
@@ -318,8 +318,8 @@ def test_GroupMap_get_dict_ReturnsObj():
     x_groupmap.set_otx2inx(clean_otx, clean_inx)
     # THEN
     x2_road_map_dict = {
-        "otx_wall": x_groupmap.otx_wall,
-        "inx_wall": x_groupmap.inx_wall,
+        "otx_bridge": x_groupmap.otx_bridge,
+        "inx_bridge": x_groupmap.inx_bridge,
         "unknown_word": x_groupmap.unknown_word,
         "otx2inx": {clean_otx: clean_inx},
         "event_id": x_groupmap.event_id,
@@ -336,14 +336,14 @@ def test_GroupMap_get_json_ReturnsObj():
     casa_otx = "casa1"
     casa_inx = "casa2"
     event7 = 7
-    slash_otx_wall = "/"
-    x_groupmap = groupmap_shop(sue_str, otx_wall=slash_otx_wall)
+    slash_otx_bridge = "/"
+    x_groupmap = groupmap_shop(sue_str, otx_bridge=slash_otx_bridge)
     x1_road_map_json = f"""{{
   "event_id": 0,
   "face_id": "{sue_str}",
-  "inx_wall": "{x_groupmap.inx_wall}",
+  "inx_bridge": "{x_groupmap.inx_bridge}",
   "otx2inx": {{}},
-  "otx_wall": "{x_groupmap.otx_wall}",
+  "otx_bridge": "{x_groupmap.otx_bridge}",
   "unknown_word": "{x_groupmap.unknown_word}"
 }}"""
     print(f"           {x1_road_map_json=}")
@@ -357,11 +357,11 @@ def test_GroupMap_get_json_ReturnsObj():
     x2_road_map_json = f"""{{
   "event_id": {event7},
   "face_id": "{sue_str}",
-  "inx_wall": "{x_groupmap.inx_wall}",
+  "inx_bridge": "{x_groupmap.inx_bridge}",
   "otx2inx": {{
     "{clean_otx}": "{clean_inx}"
   }},
-  "otx_wall": "{x_groupmap.otx_wall}",
+  "otx_bridge": "{x_groupmap.otx_bridge}",
   "unknown_word": "{x_groupmap.unknown_word}"
 }}"""
     print(f"           {x2_road_map_json=}")
@@ -375,8 +375,8 @@ def test_get_groupmap_from_dict_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     event7 = 7
-    slash_otx_wall = "/"
-    x_groupmap = groupmap_shop(sue_str, event7, otx_wall=slash_otx_wall)
+    slash_otx_bridge = "/"
+    x_groupmap = groupmap_shop(sue_str, event7, otx_bridge=slash_otx_bridge)
     x_groupmap.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
@@ -393,8 +393,8 @@ def test_get_groupmap_from_json_ReturnsObj():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
-    slash_otx_wall = "/"
-    x_groupmap = groupmap_shop(slash_otx_wall)
+    slash_otx_bridge = "/"
+    x_groupmap = groupmap_shop(slash_otx_bridge)
     x_groupmap.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
@@ -404,57 +404,57 @@ def test_get_groupmap_from_json_ReturnsObj():
     assert x_groupmap == x_groupmap
 
 
-def test_GroupMap_is_inx_wall_inclusion_correct_ReturnsObj():
+def test_GroupMap_is_inx_bridge_inclusion_correct_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
-    inx_wall = "/"
+    inx_bridge = "/"
     zia_otx = "Zia"
-    zia_inx = f"Zia{inx_wall}"
-    x_groupmap = groupmap_shop(inx_wall=inx_wall)
-    assert x_groupmap._is_inx_wall_inclusion_correct()
+    zia_inx = f"Zia{inx_bridge}"
+    x_groupmap = groupmap_shop(inx_bridge=inx_bridge)
+    assert x_groupmap._is_inx_bridge_inclusion_correct()
 
     # WHEN
     x_groupmap.set_otx2inx(zia_otx, zia_inx)
     # THEN
-    assert x_groupmap._is_inx_wall_inclusion_correct()
+    assert x_groupmap._is_inx_bridge_inclusion_correct()
 
     # WHEN
     x_groupmap.set_otx2inx(xio_str, sue_str)
     # THEN
-    assert x_groupmap._is_inx_wall_inclusion_correct() is False
+    assert x_groupmap._is_inx_bridge_inclusion_correct() is False
 
 
-def test_GroupMap_is_otx_wall_inclusion_correct_ReturnsObj():
+def test_GroupMap_is_otx_bridge_inclusion_correct_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
-    otx_wall = "/"
+    otx_bridge = "/"
     zia_inx = "Zia"
-    zia_otx = f"Zia{otx_wall}"
-    x_groupmap = groupmap_shop(otx_wall=otx_wall)
-    assert x_groupmap._is_otx_wall_inclusion_correct()
+    zia_otx = f"Zia{otx_bridge}"
+    x_groupmap = groupmap_shop(otx_bridge=otx_bridge)
+    assert x_groupmap._is_otx_bridge_inclusion_correct()
 
     # WHEN
     x_groupmap.set_otx2inx(zia_otx, zia_inx)
     # THEN
-    assert x_groupmap._is_otx_wall_inclusion_correct()
+    assert x_groupmap._is_otx_bridge_inclusion_correct()
 
     # WHEN
     x_groupmap.set_otx2inx(xio_str, sue_str)
     # THEN
-    assert x_groupmap._is_otx_wall_inclusion_correct() is False
+    assert x_groupmap._is_otx_bridge_inclusion_correct() is False
 
 
 def test_GroupMap_is_valid_ReturnsObj():
     # ESTABLISH
-    otx_wall = ":"
-    inx_wall = "/"
-    sue_otx = f"Xio{otx_wall}"
-    sue_inx = f"Sue{inx_wall}"
+    otx_bridge = ":"
+    inx_bridge = "/"
+    sue_otx = f"Xio{otx_bridge}"
+    sue_inx = f"Sue{inx_bridge}"
     zia_otx = "Zia"
-    zia_inx = f"Zia{inx_wall}"
-    x_groupmap = groupmap_shop(otx_wall=otx_wall, inx_wall=inx_wall)
+    zia_inx = f"Zia{inx_bridge}"
+    x_groupmap = groupmap_shop(otx_bridge=otx_bridge, inx_bridge=inx_bridge)
     assert x_groupmap.is_valid()
 
     # WHEN
@@ -481,11 +481,11 @@ def test_inherit_groupmap_ReturnsObj_Scenario0():
     assert new_groupmap == groupmap_shop(zia_str, 5)
 
 
-def test_inherit_groupmap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_wall():
+def test_inherit_groupmap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_bridge():
     # ESTABLISH
     sue_str = "Sue"
-    slash_otx_wall = "/"
-    old_groupmap = groupmap_shop(sue_str, 0, otx_wall=slash_otx_wall)
+    slash_otx_bridge = "/"
+    old_groupmap = groupmap_shop(sue_str, 0, otx_bridge=slash_otx_bridge)
     new_groupmap = groupmap_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:
@@ -493,11 +493,11 @@ def test_inherit_groupmap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_wall(
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_inherit_groupmap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_wall():
+def test_inherit_groupmap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_bridge():
     # ESTABLISH
     sue_str = "Sue"
-    slash_otx_wall = "/"
-    old_groupmap = groupmap_shop(sue_str, 0, inx_wall=slash_otx_wall)
+    slash_otx_bridge = "/"
+    old_groupmap = groupmap_shop(sue_str, 0, inx_bridge=slash_otx_bridge)
     new_groupmap = groupmap_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:

@@ -5,8 +5,8 @@
         },
         "jvalues": {
             "inx_acct_id": {},
-            "inx_wall": {},
-            "otx_wall": {},
+            "inx_bridge": {},
+            "otx_bridge": {},
             "unknown_word": {}
         }
     },
@@ -16,8 +16,8 @@
         },
         "jvalues": {
             "inx_group_id": {},
-            "inx_wall": {},
-            "otx_wall": {},
+            "inx_bridge": {},
+            "otx_bridge": {},
             "unknown_word": {}
         }
     },
@@ -27,8 +27,8 @@
         },
         "jvalues": {
             "inx_idea": {},
-            "inx_wall": {},
-            "otx_wall": {},
+            "inx_bridge": {},
+            "otx_bridge": {},
             "unknown_word": {}
         }
     },
@@ -38,8 +38,8 @@
         },
         "jvalues": {
             "inx_road": {},
-            "inx_wall": {},
-            "otx_wall": {},
+            "inx_bridge": {},
+            "otx_bridge": {},
             "unknown_word": {}
         }
     }

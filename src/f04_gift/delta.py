@@ -490,8 +490,8 @@ class DeltaUnit:
 
     def add_atomunit_item_deletes(self, before_bud: BudUnit, delete_item_roads: set):
         for delete_item_road in delete_item_roads:
-            x_parent_road = get_parent_road(delete_item_road, before_bud._wall)
-            x_lx = get_terminus_idea(delete_item_road, before_bud._wall)
+            x_parent_road = get_parent_road(delete_item_road, before_bud._bridge)
+            x_lx = get_terminus_idea(delete_item_road, before_bud._bridge)
             x_atomunit = atomunit_shop("bud_itemunit", atom_delete())
             x_atomunit.set_jkey("parent_road", x_parent_road)
             x_atomunit.set_jkey("lx", x_lx)

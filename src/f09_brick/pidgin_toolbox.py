@@ -16,8 +16,8 @@ def get_map_acct_dt_columns() -> list[str]:
     return [
         "face_id",
         "event_id",
-        "otx_wall",
-        "inx_wall",
+        "otx_bridge",
+        "inx_bridge",
         "unknown_word",
         "otx_acct_id",
         "inx_acct_id",
@@ -28,8 +28,8 @@ def get_map_group_dt_columns() -> list[str]:
     return [
         "face_id",
         "event_id",
-        "otx_wall",
-        "inx_wall",
+        "otx_bridge",
+        "inx_bridge",
         "unknown_word",
         "otx_group_id",
         "inx_group_id",
@@ -40,8 +40,8 @@ def get_map_idea_dt_columns() -> list[str]:
     return [
         "face_id",
         "event_id",
-        "otx_wall",
-        "inx_wall",
+        "otx_bridge",
+        "inx_bridge",
         "unknown_word",
         "otx_idea",
         "inx_idea",
@@ -52,8 +52,8 @@ def get_map_road_dt_columns() -> list[str]:
     return [
         "face_id",
         "event_id",
-        "otx_wall",
-        "inx_wall",
+        "otx_bridge",
+        "inx_bridge",
         "unknown_word",
         "otx_road",
         "inx_road",
@@ -65,8 +65,8 @@ def create_map_acct_dt(x_map: AcctMap) -> DataFrame:
         {
             "event_id": x_map.event_id,
             "face_id": x_map.face_id,
-            "otx_wall": x_map.otx_wall,
-            "inx_wall": x_map.inx_wall,
+            "otx_bridge": x_map.otx_bridge,
+            "inx_bridge": x_map.inx_bridge,
             "unknown_word": x_map.unknown_word,
             "otx_acct_id": otx_value,
             "inx_acct_id": inx_value,
@@ -81,8 +81,8 @@ def create_map_group_dt(x_map: GroupMap) -> DataFrame:
         {
             "event_id": x_map.event_id,
             "face_id": x_map.face_id,
-            "otx_wall": x_map.otx_wall,
-            "inx_wall": x_map.inx_wall,
+            "otx_bridge": x_map.otx_bridge,
+            "inx_bridge": x_map.inx_bridge,
             "unknown_word": x_map.unknown_word,
             "otx_group_id": otx_value,
             "inx_group_id": inx_value,
@@ -97,8 +97,8 @@ def create_map_idea_dt(x_map: IdeaMap) -> DataFrame:
         {
             "event_id": x_map.event_id,
             "face_id": x_map.face_id,
-            "otx_wall": x_map.otx_wall,
-            "inx_wall": x_map.inx_wall,
+            "otx_bridge": x_map.otx_bridge,
+            "inx_bridge": x_map.inx_bridge,
             "unknown_word": x_map.unknown_word,
             "otx_idea": otx_value,
             "inx_idea": inx_value,
@@ -113,8 +113,8 @@ def create_map_road_dt(x_map: RoadMap) -> DataFrame:
         {
             "event_id": x_map.event_id,
             "face_id": x_map.face_id,
-            "otx_wall": x_map.otx_wall,
-            "inx_wall": x_map.inx_wall,
+            "otx_bridge": x_map.otx_bridge,
+            "inx_bridge": x_map.inx_bridge,
             "unknown_word": x_map.unknown_word,
             "otx_road": otx_value,
             "inx_road": inx_value,
@@ -203,15 +203,15 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
     face_id_set = set()
     event_id_set = set()
     unknown_word_set = set()
-    otx_wall_set = set()
-    inx_wall_set = set()
+    otx_bridge_set = set()
+    inx_bridge_set = set()
     for x_filename in get_dir_file_strs(x_dir).keys():
         x_dt = open_csv(x_dir, x_filename)
         face_id_set.update(x_dt.face_id.unique())
         event_id_set.update(x_dt.event_id.unique())
         unknown_word_set.update(x_dt.unknown_word.unique())
-        otx_wall_set.update(x_dt.otx_wall.unique())
-        inx_wall_set.update(x_dt.inx_wall.unique())
+        otx_bridge_set.update(x_dt.otx_bridge.unique())
+        inx_bridge_set.update(x_dt.inx_bridge.unique())
 
     if len(face_id_set) == 1:
         face_id = face_id_set.pop()
@@ -219,16 +219,16 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
         event_id = event_id_set.pop()
     if len(unknown_word_set) == 1:
         unknown_word = unknown_word_set.pop()
-    if len(otx_wall_set) == 1:
-        otx_wall = otx_wall_set.pop()
-    if len(inx_wall_set) == 1:
-        inx_wall = inx_wall_set.pop()
+    if len(otx_bridge_set) == 1:
+        otx_bridge = otx_bridge_set.pop()
+    if len(inx_bridge_set) == 1:
+        inx_bridge = inx_bridge_set.pop()
 
     return pidginunit_shop(
         face_id=face_id,
         event_id=event_id,
-        otx_wall=otx_wall,
-        inx_wall=inx_wall,
+        otx_bridge=otx_bridge,
+        inx_bridge=inx_bridge,
         unknown_word=unknown_word,
     )
 

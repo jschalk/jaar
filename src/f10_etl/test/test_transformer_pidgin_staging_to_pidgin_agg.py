@@ -2,8 +2,8 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
-    inx_wall_str,
-    otx_wall_str,
+    inx_bridge_str,
+    otx_bridge_str,
     inx_acct_id_str,
     otx_acct_id_str,
     inx_group_id_str,
@@ -48,8 +48,8 @@ def test_etl_pidgin_acct_staging_to_acct_agg_Scenario0_CreatesEmptyFileBecauseOf
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     bx = "br00xxx"
@@ -76,8 +76,8 @@ def test_etl_pidgin_acct_staging_to_acct_agg_Scenario0_CreatesEmptyFileBecauseOf
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_acct_agg_df.columns) == acct_file_columns
@@ -104,8 +104,8 @@ def test_etl_pidgin_acct_staging_to_acct_agg_Scenario1_CreatesFileFromSingleBric
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     bx = "br00xxx"
@@ -133,8 +133,8 @@ def test_etl_pidgin_acct_staging_to_acct_agg_Scenario1_CreatesFileFromSingleBric
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_acct_agg_df.columns) == acct_file_columns
@@ -165,8 +165,8 @@ def test_etl_pidgin_group_staging_to_group_agg_Scenario0_CreatesFileFromSingleBr
         event_id_str(),
         otx_group_id_str(),
         inx_group_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     bx = "br00xxx"
@@ -194,8 +194,8 @@ def test_etl_pidgin_group_staging_to_group_agg_Scenario0_CreatesFileFromSingleBr
         event_id_str(),
         otx_group_id_str(),
         inx_group_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_group_agg_df.columns) == group_file_columns
@@ -226,8 +226,8 @@ def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleBric
         event_id_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     bx = "br00xxx"
@@ -255,8 +255,8 @@ def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleBric
         event_id_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_road_agg_df.columns) == road_file_columns
@@ -287,8 +287,8 @@ def test_etl_pidgin_idea_staging_to_idea_agg_Scenario0_CreatesFileFromSingleBric
         event_id_str(),
         otx_idea_str(),
         inx_idea_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     bx = "br00xxx"
@@ -316,8 +316,8 @@ def test_etl_pidgin_idea_staging_to_idea_agg_Scenario0_CreatesFileFromSingleBric
         event_id_str(),
         otx_idea_str(),
         inx_idea_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_idea_agg_df.columns) == idea_file_columns
@@ -348,8 +348,8 @@ def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     bx = "br00xxx"
@@ -371,8 +371,8 @@ def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
         event_id_str(),
         otx_group_id_str(),
         inx_group_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     bx = "br00xxx"
@@ -394,8 +394,8 @@ def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
         event_id_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     bx = "br00xxx"
@@ -417,8 +417,8 @@ def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
         event_id_str(),
         otx_idea_str(),
         inx_idea_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     bx = "br00xxx"
@@ -462,8 +462,8 @@ def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
         event_id_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_acct_agg_df.columns) == acct_file_columns
@@ -479,8 +479,8 @@ def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
         event_id_str(),
         otx_group_id_str(),
         inx_group_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_group_agg_df.columns) == group_file_columns
@@ -495,8 +495,8 @@ def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
         event_id_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_road_agg_df.columns) == road_file_columns
@@ -511,8 +511,8 @@ def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
         event_id_str(),
         otx_idea_str(),
         inx_idea_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_idea_agg_df.columns) == idea_file_columns

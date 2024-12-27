@@ -3,9 +3,9 @@ from src.f04_gift.atom_config import face_id_str, deal_id_str
 from src.f07_deal.deal_config import cumlative_minute_str, hour_lx_str
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
-    inx_wall_str,
+    inx_bridge_str,
     inx_acct_id_str,
-    otx_wall_str,
+    otx_bridge_str,
     otx_acct_id_str,
     unknown_word_str,
 )
@@ -158,9 +158,9 @@ def test_etl_boat_bricks_to_bow_face_bricks_Scenario2_PidginCategoryBricksAreNot
     br00043_columns = [
         face_id_str(),
         event_id_str(),
-        inx_wall_str(),
+        inx_bridge_str(),
         inx_acct_id_str(),
-        otx_wall_str(),
+        otx_bridge_str(),
         otx_acct_id_str(),
         unknown_word_str(),
     ]

@@ -8,7 +8,7 @@ from src.f01_road.finance import (
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f01_road.road import (
     get_default_deal_id_ideaunit as root_lx,
-    default_wall_if_None,
+    default_bridge_if_None,
 )
 from src.f02_bud.origin import originunit_shop
 from pytest import raises as pytest_raises
@@ -26,7 +26,7 @@ def test_BudUnit_Exists():
     assert x_bud._accts is None
     assert x_bud._itemroot is None
     assert x_bud.max_tree_traverse is None
-    assert x_bud._wall is None
+    assert x_bud._bridge is None
     assert x_bud.fund_pool is None
     assert x_bud.fund_coin is None
     assert x_bud.respect_bit is None
@@ -56,7 +56,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
     iowa_deal_id = "Iowa"
-    slash_wall = "/"
+    slash_bridge = "/"
     x_fund_pool = 555
     x_fund_coin = 7
     x_respect_bit = 5
@@ -66,7 +66,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     x_bud = budunit_shop(
         _owner_id=sue_str,
         _deal_id=iowa_deal_id,
-        _wall=slash_wall,
+        _bridge=slash_bridge,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
         respect_bit=x_respect_bit,
@@ -81,7 +81,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud._accts == {}
     assert x_bud._itemroot is not None
     assert x_bud.max_tree_traverse == 3
-    assert x_bud._wall == slash_wall
+    assert x_bud._bridge == slash_bridge
     assert x_bud.fund_pool == x_fund_pool
     assert x_bud.fund_coin == x_fund_coin
     assert x_bud.respect_bit == x_respect_bit
@@ -115,18 +115,18 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     # THEN
     assert x_bud._owner_id == ""
     assert x_bud._deal_id == root_lx()
-    assert x_bud._wall == default_wall_if_None()
+    assert x_bud._bridge == default_bridge_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_None()
     assert x_bud.respect_bit == default_respect_bit_if_None()
     assert x_bud.penny == default_penny_if_None()
     assert x_bud._itemroot._fund_coin == x_bud.fund_coin
-    assert x_bud._itemroot._wall == x_bud._wall
+    assert x_bud._itemroot._bridge == x_bud._bridge
     assert x_bud._itemroot._root
     assert x_bud._itemroot._uid == 1
     assert x_bud._itemroot._level == 0
     assert x_bud._itemroot._bud_deal_id == x_bud._deal_id
-    assert x_bud._itemroot._wall == x_bud._wall
+    assert x_bud._itemroot._bridge == x_bud._bridge
     assert x_bud._itemroot._parent_road == ""
 
 
@@ -175,28 +175,28 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     )
 
 
-def test_BudUnit_set_wall_CorrectlySetsAttr():
+def test_BudUnit_set_bridge_CorrectlySetsAttr():
     # ESTABLISH
     x_deal_id = "music45"
-    slash_wall = "/"
+    slash_bridge = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_deal_id, _wall=slash_wall)
-    assert sue_bud._wall == slash_wall
+    sue_bud = budunit_shop(sue_str, x_deal_id, _bridge=slash_bridge)
+    assert sue_bud._bridge == slash_bridge
 
     # WHEN
-    at_idea_wall = "@"
-    sue_bud.set_wall(new_wall=at_idea_wall)
+    at_idea_bridge = "@"
+    sue_bud.set_bridge(new_bridge=at_idea_bridge)
 
     # THEN
-    assert sue_bud._wall == at_idea_wall
+    assert sue_bud._bridge == at_idea_bridge
 
 
 def test_BudUnit_make_road_ReturnsCorrectObj():
     # ESTABLISH
     x_deal_id = "music45"
-    slash_wall = "/"
+    slash_bridge = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_deal_id, _wall=slash_wall)
+    sue_bud = budunit_shop(sue_str, x_deal_id, _bridge=slash_bridge)
     casa_str = "casa"
     v1_casa_road = sue_bud.make_l1_road(casa_str)
 

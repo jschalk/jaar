@@ -18,35 +18,35 @@ def test_PidginUnit_set_roadmap_SetsAttr():
     assert sue_pidginunit.roadmap == x_roadmap
 
 
-def test_PidginUnit_set_roadmap_RaisesErrorIf_roadmap_otx_wall_IsNotSame():
+def test_PidginUnit_set_roadmap_RaisesErrorIf_roadmap_otx_bridge_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    slash_otx_wall = "/"
-    x_roadmap = roadmap_shop(otx_wall=slash_otx_wall, face_id=sue_str)
-    assert sue_pidginunit.otx_wall != x_roadmap.otx_wall
+    slash_otx_bridge = "/"
+    x_roadmap = roadmap_shop(otx_bridge=slash_otx_bridge, face_id=sue_str)
+    assert sue_pidginunit.otx_bridge != x_roadmap.otx_bridge
     assert sue_pidginunit.roadmap != x_roadmap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_roadmap(x_roadmap)
-    exception_str = f"set_mapcore Error: PidginUnit otx_wall is '{sue_pidginunit.otx_wall}', MapCore is '{slash_otx_wall}'."
+    exception_str = f"set_mapcore Error: PidginUnit otx_bridge is '{sue_pidginunit.otx_bridge}', MapCore is '{slash_otx_bridge}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_roadmap_RaisesErrorIf_roadmap_inx_wall_IsNotSame():
+def test_PidginUnit_set_roadmap_RaisesErrorIf_roadmap_inx_bridge_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    slash_inx_wall = "/"
-    x_roadmap = roadmap_shop(inx_wall=slash_inx_wall, face_id=sue_str)
-    assert sue_pidginunit.inx_wall != x_roadmap.inx_wall
+    slash_inx_bridge = "/"
+    x_roadmap = roadmap_shop(inx_bridge=slash_inx_bridge, face_id=sue_str)
+    assert sue_pidginunit.inx_bridge != x_roadmap.inx_bridge
     assert sue_pidginunit.roadmap != x_roadmap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_roadmap(x_roadmap)
-    exception_str = f"set_mapcore Error: PidginUnit inx_wall is '{sue_pidginunit.inx_wall}', MapCore is '{slash_inx_wall}'."
+    exception_str = f"set_mapcore Error: PidginUnit inx_bridge is '{sue_pidginunit.inx_bridge}', MapCore is '{slash_inx_bridge}'."
     assert str(excinfo.value) == exception_str
 
 

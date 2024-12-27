@@ -9,7 +9,7 @@ from src.f01_road.jaar_config import (
     get_json_filename,
     get_test_deal_id,
 )
-from src.f01_road.road import default_wall_if_None
+from src.f01_road.road import default_bridge_if_None
 from src.f01_road.finance_tran import tranbook_shop
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
@@ -31,7 +31,7 @@ def test_DealUnit_Exists(env_dir_setup_cleanup):
     assert not music_deal.current_time
     assert not music_deal.purviewlogs
     assert not music_deal.cashbook
-    assert not music_deal.wall
+    assert not music_deal.bridge
     assert not music_deal.fund_coin
     assert not music_deal.respect_bit
     assert not music_deal.penny
@@ -53,7 +53,7 @@ def test_dealunit_shop_ReturnsDealUnit():
     assert music_deal.current_time == 0
     assert music_deal.purviewlogs == {}
     assert music_deal.cashbook == tranbook_shop(get_test_deal_id())
-    assert music_deal.wall == default_wall_if_None()
+    assert music_deal.bridge == default_bridge_if_None()
     assert music_deal.fund_coin == default_fund_coin_if_None()
     assert music_deal.respect_bit == default_respect_bit_if_None()
     assert music_deal.penny == default_penny_if_None()
@@ -78,7 +78,7 @@ def test_dealunit_shop_ReturnsDealUnitWith_deals_dir(env_dir_setup_cleanup):
     assert music_deal._gifts_dir is not None
 
 
-def test_dealunit_shop_ReturnsDealUnitWith_wall(env_dir_setup_cleanup):
+def test_dealunit_shop_ReturnsDealUnitWith_bridge(env_dir_setup_cleanup):
     # ESTABLISH
     music_str = "music"
     slash_str = "/"
@@ -93,7 +93,7 @@ def test_dealunit_shop_ReturnsDealUnitWith_wall(env_dir_setup_cleanup):
         deals_dir=get_test_deals_dir(),
         current_time=x_current_time,
         in_memory_journal=True,
-        wall=slash_str,
+        bridge=slash_str,
         fund_coin=x_fund_coin,
         respect_bit=x_respect_bit,
         penny=x_penny,
@@ -101,7 +101,7 @@ def test_dealunit_shop_ReturnsDealUnitWith_wall(env_dir_setup_cleanup):
 
     # THEN
     assert music_deal.current_time == x_current_time
-    assert music_deal.wall == slash_str
+    assert music_deal.bridge == slash_str
     assert music_deal.fund_coin == x_fund_coin
     assert music_deal.respect_bit == x_respect_bit
     assert music_deal.penny == x_penny
@@ -162,7 +162,7 @@ def test_DealUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanu
     music_deal = dealunit_shop(
         music_str,
         get_test_deals_dir(),
-        wall=slash_str,
+        bridge=slash_str,
         fund_coin=x_fund_coin,
         respect_bit=x_respect_bit,
         in_memory_journal=True,
@@ -294,7 +294,7 @@ def test_DealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
         deal_id=music_deal.deal_id,
         owner_id=sue_str,
         keep_road=None,
-        wall=music_deal.wall,
+        bridge=music_deal.bridge,
         fund_coin=music_deal.fund_coin,
         respect_bit=music_deal.respect_bit,
     )
@@ -303,7 +303,7 @@ def test_DealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
         deal_id=music_deal.deal_id,
         owner_id=yao_str,
         keep_road=None,
-        wall=music_deal.wall,
+        bridge=music_deal.bridge,
         fund_coin=music_deal.fund_coin,
         respect_bit=music_deal.respect_bit,
     )

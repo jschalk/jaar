@@ -21,7 +21,7 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
         deal_id(),
         sue_str,
         keep_road=None,
-        wall=slash_str,
+        bridge=slash_str,
         fund_pool=x_fund_pool,
         fund_coin=pnine_float,
         respect_bit=pnine_float,
@@ -34,7 +34,7 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
     # THEN
     assert sue_default_voice._deal_id == sue_hubunit.deal_id
     assert sue_default_voice._owner_id == sue_hubunit.owner_id
-    assert sue_default_voice._wall == sue_hubunit.wall
+    assert sue_default_voice._bridge == sue_hubunit.bridge
     assert sue_default_voice.fund_pool == sue_hubunit.fund_pool
     assert sue_default_voice.fund_coin == sue_hubunit.fund_coin
     assert sue_default_voice.respect_bit == sue_hubunit.respect_bit

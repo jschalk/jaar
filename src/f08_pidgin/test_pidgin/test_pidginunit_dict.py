@@ -1,10 +1,10 @@
 from src.f01_road.jaar_config import default_unknown_word_if_None
-from src.f01_road.road import default_wall_if_None
+from src.f01_road.road import default_bridge_if_None
 from src.f04_gift.atom_config import face_id_str
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
-    otx_wall_str,
-    inx_wall_str,
+    otx_bridge_str,
+    inx_bridge_str,
     unknown_word_str,
 )
 from src.f08_pidgin.pidgin import (
@@ -36,8 +36,8 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     assert sue_dict
     assert sue_dict.get(face_id_str()) == sue_str
     assert sue_dict.get(event_id_str()) == sue_pidginunit.event_id
-    assert sue_dict.get(otx_wall_str()) == default_wall_if_None()
-    assert sue_dict.get(inx_wall_str()) == default_wall_if_None()
+    assert sue_dict.get(otx_bridge_str()) == default_bridge_if_None()
+    assert sue_dict.get(inx_bridge_str()) == default_bridge_if_None()
     assert sue_dict.get(unknown_word_str()) == default_unknown_word_if_None()
     assert sue_dict.get("acctmap") == sue_pidginunit.acctmap.get_dict()
     assert sue_dict.get("groupmap") == sue_pidginunit.groupmap.get_dict()
@@ -49,10 +49,10 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_word = "UnknownWord"
-    slash_otx_wall = "/"
-    colon_inx_wall = ":"
+    slash_otx_bridge = "/"
+    colon_inx_bridge = ":"
     sue_pidginunit = pidginunit_shop(
-        sue_str, 0, slash_otx_wall, colon_inx_wall, x_unknown_word
+        sue_str, 0, slash_otx_bridge, colon_inx_bridge, x_unknown_word
     )
     sue_pidginunit.set_acctmap(get_slash_acctmap())
     sue_pidginunit.set_groupmap(get_slash_groupmap())
@@ -64,8 +64,8 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
 
     # THEN
     assert sue_dict.get(face_id_str()) == sue_str
-    assert sue_dict.get(otx_wall_str()) == slash_otx_wall
-    assert sue_dict.get(inx_wall_str()) == colon_inx_wall
+    assert sue_dict.get(otx_bridge_str()) == slash_otx_bridge
+    assert sue_dict.get(inx_bridge_str()) == colon_inx_bridge
     assert sue_dict.get(unknown_word_str()) == x_unknown_word
     assert sue_dict.get("acctmap") == sue_pidginunit.acctmap.get_dict()
     assert sue_dict.get("groupmap") == sue_pidginunit.groupmap.get_dict()
@@ -87,8 +87,8 @@ def test_PidginUnit_get_json_ReturnsObj():
 
     # THEN
     print(f"{sue_json=}")
-    assert sue_json.find("ideamap") == 473
-    assert sue_json.find(otx_wall_str()) == 175
+    assert sue_json.find("ideamap") == 481
+    assert sue_json.find(otx_bridge_str()) == 177
 
 
 def test_get_pidginunit_from_dict_ReturnsObj():
@@ -96,13 +96,13 @@ def test_get_pidginunit_from_dict_ReturnsObj():
     sue_str = "Sue"
     sue_event_id = 77
     x_unknown_word = "UnknownWord"
-    slash_otx_wall = "/"
-    colon_inx_wall = ":"
+    slash_otx_bridge = "/"
+    colon_inx_bridge = ":"
     sue_pidginunit = pidginunit_shop(
         sue_str,
         sue_event_id,
-        slash_otx_wall,
-        colon_inx_wall,
+        slash_otx_bridge,
+        colon_inx_bridge,
         x_unknown_word,
     )
     sue_pidginunit.set_acctmap(get_slash_acctmap())
@@ -117,8 +117,8 @@ def test_get_pidginunit_from_dict_ReturnsObj():
     assert gen_pidginunit
     assert gen_pidginunit.face_id == sue_str
     assert gen_pidginunit.event_id == sue_event_id
-    assert gen_pidginunit.otx_wall == slash_otx_wall
-    assert gen_pidginunit.inx_wall == colon_inx_wall
+    assert gen_pidginunit.otx_bridge == slash_otx_bridge
+    assert gen_pidginunit.inx_bridge == colon_inx_bridge
     assert gen_pidginunit.unknown_word == x_unknown_word
     assert gen_pidginunit.acctmap == get_slash_acctmap()
     assert gen_pidginunit.roadmap == get_slash_roadmap()
@@ -130,13 +130,13 @@ def test_get_pidginunit_from_json_ReturnsObj():
     sue_str = "Sue"
     sue_event_id = 77
     x_unknown_word = "UnknownWord"
-    slash_otx_wall = "/"
-    colon_inx_wall = ":"
+    slash_otx_bridge = "/"
+    colon_inx_bridge = ":"
     sue_pidginunit = pidginunit_shop(
         sue_str,
         sue_event_id,
-        slash_otx_wall,
-        colon_inx_wall,
+        slash_otx_bridge,
+        colon_inx_bridge,
         x_unknown_word,
     )
     sue_pidginunit.set_groupmap(get_slash_groupmap())
@@ -150,8 +150,8 @@ def test_get_pidginunit_from_json_ReturnsObj():
     assert gen_pidginunit
     assert gen_pidginunit.face_id == sue_str
     assert gen_pidginunit.event_id == sue_event_id
-    assert gen_pidginunit.otx_wall == slash_otx_wall
-    assert gen_pidginunit.inx_wall == colon_inx_wall
+    assert gen_pidginunit.otx_bridge == slash_otx_bridge
+    assert gen_pidginunit.inx_bridge == colon_inx_bridge
     assert gen_pidginunit.unknown_word == x_unknown_word
     assert gen_pidginunit.acctmap.get_dict() == get_slash_acctmap().get_dict()
     assert gen_pidginunit.groupmap.get_dict() == get_slash_groupmap().get_dict()

@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import x_is_json, get_dict_from_json
-from src.f01_road.road import default_wall_if_None
+from src.f01_road.road import default_bridge_if_None
 from src.f02_bud.group import awardlink_shop
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.reason_team import teamunit_shop
@@ -57,7 +57,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict["fund_pool"] == yao_fund_pool
     assert bud_dict["fund_coin"] == yao_fund_coin
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
-    assert bud_dict["_wall"] == yao_bud._wall
+    assert bud_dict["_bridge"] == yao_bud._bridge
     assert bud_dict["credor_respect"] == yao_bud.credor_respect
     assert bud_dict["debtor_respect"] == yao_bud.debtor_respect
     assert bud_dict["_last_gift_id"] == yao_bud._last_gift_id
@@ -249,7 +249,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["max_tree_traverse"] == 2
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
-    assert bud_dict["_wall"] == yao_bud._wall
+    assert bud_dict["_bridge"] == yao_bud._bridge
 
     x_itemroot = yao_bud._itemroot
     itemroot_dict = bud_dict.get("_itemroot")
@@ -365,7 +365,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_bud.penny == zia_bud.penny
     assert json_bud.max_tree_traverse == 23
     assert json_bud.max_tree_traverse == zia_bud.max_tree_traverse
-    assert json_bud._wall == zia_bud._wall
+    assert json_bud._bridge == zia_bud._bridge
     assert json_bud.credor_respect == zia_bud.credor_respect
     assert json_bud.debtor_respect == zia_bud.debtor_respect
     assert json_bud.credor_respect == zia_credor_respect
@@ -438,26 +438,26 @@ def test_budunit_get_from_json_ReturnsCorrectItemRoot():
     assert json_itemroot.stop_want == zia_stop_want
 
 
-def test_budunit_get_from_json_ReturnsCorrectObj_wall_Example():
+def test_budunit_get_from_json_ReturnsCorrectObj_bridge_Example():
     # ESTABLISH
-    slash_wall = "/"
-    before_bob_bud = budunit_shop("Bob", _wall=slash_wall)
-    assert before_bob_bud._wall != default_wall_if_None()
+    slash_bridge = "/"
+    before_bob_bud = budunit_shop("Bob", _bridge=slash_bridge)
+    assert before_bob_bud._bridge != default_bridge_if_None()
 
     # WHEN
     bob_json = before_bob_bud.get_json()
     after_bob_bud = budunit_get_from_json(bob_json)
 
     # THEN
-    assert after_bob_bud._wall != default_wall_if_None()
-    assert after_bob_bud._wall == slash_wall
-    assert after_bob_bud._wall == before_bob_bud._wall
+    assert after_bob_bud._bridge != default_bridge_if_None()
+    assert after_bob_bud._bridge == slash_bridge
+    assert after_bob_bud._bridge == before_bob_bud._bridge
 
 
-def test_budunit_get_from_json_ReturnsCorrectObj_wall_AcctExample():
+def test_budunit_get_from_json_ReturnsCorrectObj_bridge_AcctExample():
     # ESTABLISH
-    slash_wall = "/"
-    before_bob_bud = budunit_shop("Bob", _wall=slash_wall)
+    slash_bridge = "/"
+    before_bob_bud = budunit_shop("Bob", _bridge=slash_bridge)
     bob_str = ",Bob"
     before_bob_bud.add_acctunit(bob_str)
     assert before_bob_bud.acct_exists(bob_str)
@@ -468,15 +468,15 @@ def test_budunit_get_from_json_ReturnsCorrectObj_wall_AcctExample():
 
     # THEN
     after_bob_acctunit = after_bob_bud.get_acct(bob_str)
-    assert after_bob_acctunit._wall == slash_wall
+    assert after_bob_acctunit._bridge == slash_bridge
 
 
-def test_budunit_get_from_json_ReturnsCorrectObj_wall_GroupExample():
+def test_budunit_get_from_json_ReturnsCorrectObj_bridge_GroupExample():
     # ESTABLISH
-    slash_wall = "/"
-    before_bob_bud = budunit_shop("Bob", _wall=slash_wall)
+    slash_bridge = "/"
+    before_bob_bud = budunit_shop("Bob", _bridge=slash_bridge)
     yao_str = "Yao"
-    swim_str = f"{slash_wall}Swimmers"
+    swim_str = f"{slash_bridge}Swimmers"
     before_bob_bud.add_acctunit(yao_str)
     yao_acctunit = before_bob_bud.get_acct(yao_str)
     yao_acctunit.add_membership(swim_str)
@@ -487,7 +487,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_wall_GroupExample():
 
     # THEN
     after_yao_acctunit = after_bob_bud.get_acct(yao_str)
-    assert after_yao_acctunit._wall == slash_wall
+    assert after_yao_acctunit._bridge == slash_bridge
 
 
 def test_budunit_get_from_json_ExportsBudUnit_mass():

@@ -27,8 +27,8 @@ def time_id_str() -> str:
     return "time_id"
 
 
-def wall_str() -> str:
-    return "wall"
+def bridge_str() -> str:
+    return "bridge"
 
 
 def quota_str() -> str:

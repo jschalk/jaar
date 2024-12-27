@@ -44,7 +44,7 @@ from src.f01_road.road import (
     rebuild_road,
     get_all_road_ideas,
     validate_ideaunit,
-    default_wall_if_None,
+    default_bridge_if_None,
 )
 from src.f02_bud.bud import (
     BudUnit,
@@ -115,7 +115,7 @@ class HubUnit:
     deals_dir: str = None
     deal_id: str = None
     keep_road: RoadUnit = None
-    wall: str = None
+    bridge: str = None
     fund_pool: float = None
     fund_coin: float = None
     respect_bit: float = None
@@ -203,7 +203,7 @@ class HubUnit:
         x_budunit = budunit_shop(
             _owner_id=self.owner_id,
             _deal_id=self.deal_id,
-            _wall=self.wall,
+            _bridge=self.bridge,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,
             respect_bit=self.respect_bit,
@@ -607,7 +607,7 @@ class HubUnit:
             deals_dir=self.deals_dir,
             deal_id=self.deal_id,
             owner_id=speaker_id,
-            wall=self.wall,
+            bridge=self.bridge,
             respect_bit=self.respect_bit,
         )
         return speaker_hubunit.get_final_bud()
@@ -628,7 +628,7 @@ class HubUnit:
             deal_id=self.deal_id,
             owner_id=healer_id,
             keep_road=self.keep_road,
-            wall=self.wall,
+            bridge=self.bridge,
             respect_bit=self.respect_bit,
         )
         return speaker_hubunit.get_job_bud(speaker_id)
@@ -688,7 +688,7 @@ def hubunit_shop(
     deal_id: DealID,
     owner_id: OwnerID = None,
     keep_road: RoadUnit = None,
-    wall: str = None,
+    bridge: str = None,
     fund_pool: float = None,
     fund_coin: float = None,
     respect_bit: float = None,
@@ -701,9 +701,9 @@ def hubunit_shop(
     return HubUnit(
         deals_dir=deals_dir,
         deal_id=deal_id,
-        owner_id=validate_ideaunit(owner_id, wall),
+        owner_id=validate_ideaunit(owner_id, bridge),
         keep_road=keep_road,
-        wall=default_wall_if_None(wall),
+        bridge=default_bridge_if_None(bridge),
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
@@ -715,6 +715,6 @@ def hubunit_shop(
 def get_keep_path(x_hubunit: HubUnit, x_road: IdeaUnit) -> str:
     keep_root = get_rootpart_of_keep_dir()
     x_road = rebuild_road(x_road, x_hubunit.deal_id, keep_root)
-    x_list = get_all_road_ideas(x_road, x_hubunit.wall)
+    x_list = get_all_road_ideas(x_road, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])
     return f_path(x_hubunit.keeps_dir(), keep_sub_path)
