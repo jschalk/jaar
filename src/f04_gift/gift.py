@@ -1,7 +1,7 @@
 from src.f00_instrument.file import save_file, open_file, create_path
 from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
 from src.f01_road.jaar_config import get_init_gift_id_if_None, get_json_filename
-from src.f01_road.road import FaceID, OwnerID, dealID, get_default_deal_id_ideaunit
+from src.f01_road.road import FaceID, OwnerID, DealID, get_default_deal_id_ideaunit
 from src.f04_gift.atom import AtomUnit, get_from_json as atomunit_get_from_json
 from src.f04_gift.delta import DeltaUnit, deltaunit_shop
 from dataclasses import dataclass
@@ -11,7 +11,7 @@ from os.path import exists as os_path_exists
 @dataclass
 class GiftUnit:
     face_id: FaceID = None
-    deal_id: dealID = None
+    deal_id: DealID = None
     owner_id: OwnerID = None
     _gift_id: int = None
     _deltaunit: DeltaUnit = None
@@ -104,7 +104,7 @@ class GiftUnit:
 def giftunit_shop(
     owner_id: OwnerID,
     face_id: FaceID = None,
-    deal_id: dealID = None,
+    deal_id: DealID = None,
     _gift_id: int = None,
     _deltaunit: DeltaUnit = None,
     _delta_start: int = None,

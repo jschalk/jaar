@@ -99,7 +99,7 @@ def test_load_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_csvToVoice(
     print(f"{csv_example_path}")
     save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), acct_filename)
     sue_hubunit = hubunit_shop(brick_deals_dir(), music_deal_id, owner_id=sue_str)
-    # Open dealUnit and confirm voice BudUnit does not exist
+    # Open DealUnit and confirm voice BudUnit does not exist
     assert not sue_hubunit.voice_file_exists()
 
     # WHEN
@@ -150,7 +150,7 @@ def test_load_brick_csv_csvToVoice(
     print(f"{csv_example_path}")
     save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), acct_filename)
     sue_hubunit = hubunit_shop(brick_deals_dir(), music_deal_id, owner_id=sue_str)
-    # Open dealUnit and confirm voice BudUnit does not exist
+    # Open DealUnit and confirm voice BudUnit does not exist
     assert not sue_hubunit.voice_file_exists()
 
     # WHEN
@@ -200,7 +200,7 @@ def test_load_brick_csv_csvToVoice(
 #     sue_hubunit.save_voice_bud(old_sue_voice)
 
 #     sue_hubunit.initialize_gift_voice_files()
-#     # Open dealUnit and confirm voice BudUnit does not exist
+#     # Open DealUnit and confirm voice BudUnit does not exist
 #     assert sue_hubunit.voice_file_exists()
 #     assert sue_hubunit.get_voice_bud().acct_exists(sue_str)
 #     assert not sue_hubunit.get_voice_bud().acct_exists(bob_str)

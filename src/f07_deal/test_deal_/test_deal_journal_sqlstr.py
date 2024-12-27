@@ -12,7 +12,7 @@
 # from pytest import raises as pytest_raises
 
 
-# def test_dealUnit_get_atom_hx_table_insert_sqlstr_CorrectlyInsertsIntoDatabase(
+# def test_DealUnit_get_atom_hx_table_insert_sqlstr_CorrectlyInsertsIntoDatabase(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH

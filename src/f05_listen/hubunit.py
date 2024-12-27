@@ -38,7 +38,7 @@ from src.f01_road.finance_tran import (
 )
 from src.f01_road.road import (
     OwnerID,
-    dealID,
+    DealID,
     IdeaUnit,
     RoadUnit,
     rebuild_road,
@@ -685,7 +685,7 @@ class HubUnit:
 
 def hubunit_shop(
     deals_dir: str,
-    deal_id: dealID,
+    deal_id: DealID,
     owner_id: OwnerID = None,
     keep_road: RoadUnit = None,
     wall: str = None,

@@ -1,5 +1,5 @@
 from src.f01_road.jaar_config import get_deal_id_if_None
-from src.f01_road.road import dealID
+from src.f01_road.road import DealID
 from src.f02_bud.bud_tool import bud_acctunit_str, bud_itemunit_str
 from src.f04_gift.atom_config import acct_id_str, parent_road_str, label_str
 from src.f04_gift.atom import (
@@ -12,7 +12,7 @@ from src.f04_gift.atom import (
 from src.f04_gift.delta import DeltaUnit, deltaunit_shop
 
 
-def get_atom_example_itemunit_sports(deal_id: dealID = None) -> AtomUnit:
+def get_atom_example_itemunit_sports(deal_id: DealID = None) -> AtomUnit:
     deal_id = get_deal_id_if_None(deal_id)
     sports_str = "sports"
     x_category = bud_itemunit_str()

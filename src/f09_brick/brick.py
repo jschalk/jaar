@@ -7,14 +7,14 @@ from src.f00_instrument.dict_toolbox import (
     get_positional_dict,
     add_headers_to_csv,
 )
-from src.f01_road.road import dealID, OwnerID
+from src.f01_road.road import DealID, OwnerID
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import timelineunit_shop
 from src.f04_gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
 from src.f04_gift.delta import deltaunit_shop, get_categorys_cruds_deltaunit, DeltaUnit
 from src.f04_gift.gift import giftunit_shop
 from src.f05_listen.hubunit import hubunit_shop
-from src.f07_deal.deal import dealunit_shop, dealUnit
+from src.f07_deal.deal import dealunit_shop, DealUnit
 from src.f09_brick.brick_config import (
     get_brickref_from_file,
     get_brick_format_headers,
@@ -103,7 +103,7 @@ def _get_sorted_atom_insert_atomunits(
 def _create_d2_list(
     sorted_atomunits: list[AtomUnit],
     x_brickref: BrickRef,
-    x_deal_id: dealID,
+    x_deal_id: DealID,
     x_owner_id: OwnerID,
 ):
     d2_list = []
@@ -173,7 +173,7 @@ def make_deltaunit(x_csv: str) -> DeltaUnit:
 
 
 def _load_individual_brick_csv(
-    complete_csv: str, deals_dir: str, x_deal_id: dealID, x_owner_id: OwnerID
+    complete_csv: str, deals_dir: str, x_deal_id: DealID, x_owner_id: OwnerID
 ):
     x_hubunit = hubunit_shop(deals_dir, x_deal_id, x_owner_id)
     x_hubunit.initialize_gift_voice_files()
@@ -198,13 +198,13 @@ def load_brick_csv(deals_dir: str, x_file_dir: str, x_filename: str):
 
 def get_csv_deal_id_owner_id_metrics(
     headerless_csv: str, delimiter: str = None
-) -> dict[dealID, dict[OwnerID, int]]:
+) -> dict[DealID, dict[OwnerID, int]]:
     return get_csv_column1_column2_metrics(headerless_csv, delimiter)
 
 
 def deal_id_owner_id_nested_csv_dict(
     headerless_csv: str, delimiter: str = None
-) -> dict[dealID, dict[OwnerID, str]]:
+) -> dict[DealID, dict[OwnerID, str]]:
     return create_l2nested_csv_dict(headerless_csv, delimiter)
 
 
@@ -219,7 +219,7 @@ def deal_build_from_df(
     x_respect_bit,
     x_penny,
     x_deals_dir,
-) -> dict[dealID, dealUnit]:
+) -> dict[DealID, DealUnit]:
     deal_hours_dict = _get_deal_hours_dict(br00003_df)
     deal_months_dict = _get_deal_months_dict(br00004_df)
     deal_weekdays_dict = _get_deal_weekdays_dict(br00005_df)
@@ -290,7 +290,7 @@ def _get_deal_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
     return deal_weekdays_dict
 
 
-def _add_purviewepisode(x_dealunit: dealUnit, br00001_df: DataFrame):
+def _add_purviewepisode(x_dealunit: DealUnit, br00001_df: DataFrame):
     query_str = f"deal_id == '{x_dealunit.deal_id}'"
     for index, row in br00001_df.query(query_str).iterrows():
         x_dealunit.add_purviewepisode(
@@ -301,7 +301,7 @@ def _add_purviewepisode(x_dealunit: dealUnit, br00001_df: DataFrame):
         )
 
 
-def _add_cashpurchase(x_dealunit: dealUnit, br00002_df: DataFrame):
+def _add_cashpurchase(x_dealunit: DealUnit, br00002_df: DataFrame):
     query_str = f"deal_id == '{x_dealunit.deal_id}'"
     for index, row in br00002_df.query(query_str).iterrows():
         x_dealunit.add_cashpurchase(

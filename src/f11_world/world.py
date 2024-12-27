@@ -8,12 +8,12 @@ from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
     FaceID,
     EventID,
-    dealID,
+    DealID,
     WorldID,
     TimeLineLabel,
     get_default_world_id,
 )
-from src.f07_deal.deal import dealUnit
+from src.f07_deal.deal import DealUnit
 from src.f10_etl.transformers import (
     etl_ocean_to_boat_staging,
     etl_boat_staging_to_boat_agg,
@@ -60,7 +60,7 @@ class WorldUnit:
     _world_dir: str = None
     _ocean_dir: str = None
     _boat_dir: str = None
-    _dealunits: set[dealID] = None
+    _dealunits: set[DealID] = None
     _pidgin_events: dict[FaceID, set[EventID]] = None
 
     def set_event(self, event_id: EventID, face_id: FaceID):
@@ -177,7 +177,7 @@ def worldunit_shop(
     ocean_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
-    _dealunits: set[dealID] = None,
+    _dealunits: set[DealID] = None,
 ) -> WorldUnit:
     if world_id is None:
         world_id = get_default_world_id()
@@ -199,5 +199,5 @@ def worldunit_shop(
     return x_worldunit
 
 
-def init_dealunits_from_dirs(x_dirs: list[str]) -> list[dealUnit]:
+def init_dealunits_from_dirs(x_dirs: list[str]) -> list[DealUnit]:
     return []

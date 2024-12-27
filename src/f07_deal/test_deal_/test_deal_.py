@@ -15,7 +15,7 @@ from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f03_chrono.chrono import timelineunit_shop
 from src.f05_listen.hubunit import hubunit_shop
-from src.f07_deal.deal import dealUnit, dealunit_shop
+from src.f07_deal.deal import DealUnit, dealunit_shop
 from src.f07_deal.examples.deal_env import (
     get_test_deals_dir,
     env_dir_setup_cleanup,
@@ -23,9 +23,9 @@ from src.f07_deal.examples.deal_env import (
 from os.path import exists as os_path_exists, isdir as os_path_isdir
 
 
-def test_dealUnit_Exists(env_dir_setup_cleanup):
+def test_DealUnit_Exists(env_dir_setup_cleanup):
     music_str = "music"
-    music_deal = dealUnit()
+    music_deal = DealUnit()
     assert not music_deal.deal_id
     assert not music_deal.timeline
     assert not music_deal.current_time
@@ -43,7 +43,7 @@ def test_dealUnit_Exists(env_dir_setup_cleanup):
     assert not music_deal._all_tranbook
 
 
-def test_dealunit_shop_ReturnsdealUnit():
+def test_dealunit_shop_ReturnsDealUnit():
     # ESTABLISH / WHEN
     music_deal = dealunit_shop()
 
@@ -64,7 +64,7 @@ def test_dealunit_shop_ReturnsdealUnit():
     assert music_deal._all_tranbook == tranbook_shop(get_test_deal_id())
 
 
-def test_dealunit_shop_ReturnsdealUnitWith_deals_dir(env_dir_setup_cleanup):
+def test_dealunit_shop_ReturnsDealUnitWith_deals_dir(env_dir_setup_cleanup):
     # ESTABLISH
     music_str = "music"
 
@@ -78,7 +78,7 @@ def test_dealunit_shop_ReturnsdealUnitWith_deals_dir(env_dir_setup_cleanup):
     assert music_deal._gifts_dir is not None
 
 
-def test_dealunit_shop_ReturnsdealUnitWith_wall(env_dir_setup_cleanup):
+def test_dealunit_shop_ReturnsDealUnitWith_wall(env_dir_setup_cleanup):
     # ESTABLISH
     music_str = "music"
     slash_str = "/"
@@ -107,10 +107,10 @@ def test_dealunit_shop_ReturnsdealUnitWith_wall(env_dir_setup_cleanup):
     assert music_deal.penny == x_penny
 
 
-def test_dealUnit_set_deal_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
+def test_DealUnit_set_deal_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     music_str = "music"
-    music_deal = dealUnit(deal_id=music_str, deals_dir=get_test_deals_dir())
+    music_deal = DealUnit(deal_id=music_str, deals_dir=get_test_deals_dir())
     x_deal_dir = create_path(get_test_deals_dir(), music_str)
     x_owners_dir = create_path(x_deal_dir, "owners")
     x_gifts_dir = create_path(x_deal_dir, get_gifts_folder())
@@ -153,7 +153,7 @@ def test_dealunit_shop_SetsdealsDirs(env_dir_setup_cleanup):
     assert music_deal._owners_dir == create_path(music_deal._deal_dir, "owners")
 
 
-def test_dealUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanup):
+def test_DealUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     music_str = "music"
     slash_str = "/"
@@ -181,7 +181,7 @@ def test_dealUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanu
     assert os_path_exists(sue_hubunit.final_path())
 
 
-def test_dealUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_DealUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir(), in_memory_journal=True)
@@ -201,7 +201,7 @@ def test_dealUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_clea
     assert gen_sue_voice.acct_exists(bob_str)
 
 
-def test_dealUnit__set_all_healer_dutys_CorrectlySetsdutys(
+def test_DealUnit__set_all_healer_dutys_CorrectlySetsdutys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -274,7 +274,7 @@ def test_dealUnit__set_all_healer_dutys_CorrectlySetsdutys(
     assert os_path_exists(yao_dallas_yao_duty_file_path)
 
 
-def test_dealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_DealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     music_deal = dealunit_shop("music", get_test_deals_dir(), in_memory_journal=True)
     sue_str = "Sue"

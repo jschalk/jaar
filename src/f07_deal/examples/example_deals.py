@@ -1,11 +1,11 @@
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f05_listen.hubunit import hubunit_shop
-from src.f07_deal.deal import dealUnit, dealunit_shop
+from src.f07_deal.deal import DealUnit, dealunit_shop
 from src.f07_deal.examples.deal_env import get_test_deals_dir
 
 
-# def create_example_deal1(graphics_bool) -> dealUnit:
+# def create_example_deal1(graphics_bool) -> DealUnit:
 #     # ESTABLISH
 #     music_str = "music"
 #     music_deal = dealunit_shop(music_str, get_test_deals_dir(), in_memory_journal=True)
@@ -51,7 +51,7 @@ from src.f07_deal.examples.deal_env import get_test_deals_dir
 #     return music_deal
 
 
-def create_example_deal2() -> dealUnit:
+def create_example_deal2() -> DealUnit:
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir(), in_memory_journal=True)
@@ -116,7 +116,7 @@ def create_example_deal2() -> dealUnit:
     return music_deal
 
 
-def create_example_deal3() -> dealUnit:
+def create_example_deal3() -> DealUnit:
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir(), in_memory_journal=True)
@@ -161,7 +161,7 @@ def create_example_deal3() -> dealUnit:
     return music_deal
 
 
-def create_example_deal4() -> dealUnit:
+def create_example_deal4() -> DealUnit:
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir(), in_memory_journal=True)

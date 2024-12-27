@@ -17,7 +17,7 @@ from src.f07_deal.examples.deal_env import (
 )
 
 
-def test_dealUnit_get_dict_ReturnsObj():
+def test_DealUnit_get_dict_ReturnsObj():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir())
@@ -58,7 +58,7 @@ def test_dealUnit_get_dict_ReturnsObj():
     ]
 
 
-def test_dealUnit_get_json_ReturnsObj():
+def test_DealUnit_get_json_ReturnsObj():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir())
@@ -83,7 +83,7 @@ def test_dealUnit_get_json_ReturnsObj():
     assert x_json.find("deal_id") > 0
 
 
-def test_get_from_dict_ReturnsdealUnit():
+def test_get_from_dict_ReturnsDealUnit():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str)
@@ -128,7 +128,7 @@ def test_get_from_dict_ReturnsdealUnit():
     assert x_deal == music_deal
 
 
-def test_get_from_json_ReturnsdealUnit():
+def test_get_from_json_ReturnsDealUnit():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str)

@@ -20,7 +20,7 @@ from src.f09_brick.brick import deal_build_from_df
 
 
 # given a dataframe, build a deal unit
-def test_deal_build_from_df_ReturnsObj_Scenario0_OnedealID(brick_env_setup_cleanup):
+def test_deal_build_from_df_ReturnsObj_Scenario0_OneDealID(brick_env_setup_cleanup):
     # ESTABLISH
     br00000_df = get_ex1_br00000_df()
     br00001_df = get_ex1_br00001_df()
@@ -91,7 +91,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario0_OnedealID(brick_env_setup_clean
 
 
 # given a dataframe, build a deal unit
-def test_deal_build_from_df_ReturnsObj_Scenario1_TwodealIDs(
+def test_deal_build_from_df_ReturnsObj_Scenario1_TwoDealIDs(
     brick_env_setup_cleanup,
 ):
     # ESTABLISH

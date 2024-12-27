@@ -1,4 +1,4 @@
-from src.f02_bud.bud import BudUnit, budunit_shop, itemunit_shop, dealID
+from src.f02_bud.bud import BudUnit, budunit_shop, itemunit_shop, DealID
 from src.f06_keep.examples.keep_env import temp_deal_id
 
 
@@ -17,7 +17,7 @@ def get_Jidea2idea_bud() -> BudUnit:
     return x_bud
 
 
-def get_2idea_bud(deal_id: dealID = None) -> BudUnit:
+def get_2idea_bud(deal_id: DealID = None) -> BudUnit:
     if deal_id is None:
         deal_id = temp_deal_id()
     a_str = "A"

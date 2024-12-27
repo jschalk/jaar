@@ -22,7 +22,7 @@ from src.f01_road.road import (
     default_wall_if_None,
     OwnerID,
     RoadUnit,
-    dealID,
+    DealID,
     AcctID,
 )
 from src.f02_bud.bud import BudUnit
@@ -62,7 +62,7 @@ class set_current_time_Exception(Exception):
 
 
 @dataclass
-class dealUnit:
+class DealUnit:
     """Data pipelines:
     pipeline1: gifts->voice
     pipeline2: voice->dutys
@@ -73,7 +73,7 @@ class dealUnit:
     pipeline7: gifts->final (could be 5 of 6)
     """
 
-    deal_id: dealID = None
+    deal_id: DealID = None
     deals_dir: str = None
     timeline: TimeLineUnit = None
     current_time: int = None
@@ -275,7 +275,7 @@ class dealUnit:
         allow_prev_to_current_time_entry: bool = False,
     ):
         if x_time_id < self.current_time and allow_prev_to_current_time_entry is False:
-            exception_str = f"Cannot set purviewepisode because time_id {x_time_id} is less than dealUnit.current_time {self.current_time}."
+            exception_str = f"Cannot set purviewepisode because time_id {x_time_id} is less than DealUnit.current_time {self.current_time}."
             raise purviewepisode_Exception(exception_str)
         if self.purviewlog_exists(x_owner_id) is False:
             self.set_purviewlog(purviewlog_shop(x_owner_id))
@@ -373,7 +373,7 @@ class dealUnit:
 
 
 def dealunit_shop(
-    deal_id: dealID = None,
+    deal_id: DealID = None,
     deals_dir: str = None,
     timeline: TimeLineUnit = None,
     current_time: int = None,
@@ -382,13 +382,13 @@ def dealunit_shop(
     fund_coin: float = None,
     respect_bit: float = None,
     penny: float = None,
-) -> dealUnit:
+) -> DealUnit:
     if timeline is None:
         timeline = timelineunit_shop()
     deal_id = get_deal_id_if_None(deal_id)
     if deals_dir is None:
         deals_dir = get_test_deals_dir()
-    deal_x = dealUnit(
+    deal_x = DealUnit(
         deal_id=deal_id,
         deals_dir=deals_dir,
         timeline=timeline,
@@ -405,11 +405,11 @@ def dealunit_shop(
     return deal_x
 
 
-def get_from_json(x_deal_json: str) -> dealUnit:
+def get_from_json(x_deal_json: str) -> DealUnit:
     return get_from_dict(get_dict_from_json(x_deal_json))
 
 
-def get_from_dict(deal_dict: dict) -> dealUnit:
+def get_from_dict(deal_dict: dict) -> DealUnit:
     x_deal_id = deal_dict.get("deal_id")
     x_deal = dealunit_shop(x_deal_id, None)
     x_deal.timeline = timelineunit_shop(deal_dict.get("timeline"))
