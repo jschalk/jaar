@@ -82,7 +82,7 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_ids(
     pandas_testing_assert_frame_equal(gen_zia_acct_df, e1_zia_acct_agg_df)
 
 
-def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
+def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     base_str,
     type_AcctID_str,
 )
-from src.f08_pidgin.bridge import acctbridge_shop
+from src.f08_pidgin.map import acctmap_shop
 from src.f08_pidgin.pidgin import pidginunit_shop
 from src.f09_brick.pandas_tool import (
     translate_single_column_dataframe,
@@ -40,13 +40,11 @@ def test_get_dataframe_pidginable_columns_ReturnsObj():
 
 def test_translate_single_column_dataframe_ReturnsObj_Scenario0_AcctID_EmptyDataFrame():
     # ESTABLISH
-    acct_id_bridgeunit = acctbridge_shop()
+    acct_id_mapunit = acctmap_shop()
     empty_dt = DataFrame(columns=[acct_id_str()])
 
     # WHEN
-    gen_dt = translate_single_column_dataframe(
-        empty_dt, acct_id_bridgeunit, acct_id_str()
-    )
+    gen_dt = translate_single_column_dataframe(empty_dt, acct_id_mapunit, acct_id_str())
 
     # THEN
     pandas_assert_frame_equal(gen_dt, empty_dt)
@@ -61,10 +59,10 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_id_bridgeunit = acctbridge_shop()
-    acct_id_bridgeunit.set_otx2inx(xio_otx, xio_inx)
-    acct_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
-    acct_id_bridgeunit.set_otx2inx(bob_otx, bob_inx)
+    acct_id_mapunit = acctmap_shop()
+    acct_id_mapunit.set_otx2inx(xio_otx, xio_inx)
+    acct_id_mapunit.set_otx2inx(sue_otx, sue_inx)
+    acct_id_mapunit.set_otx2inx(bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[acct_id_str()])
     otx_dt.loc[0] = [zia_otx]
     otx_dt.loc[1] = [sue_otx]
@@ -75,7 +73,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5
     print(f"{otx_dt=}")
 
     # WHEN
-    translate_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
+    translate_single_column_dataframe(otx_dt, acct_id_mapunit, acct_id_str())
 
     # THEN
     assert otx_dt.iloc[0][acct_id_str()] == zia_otx
@@ -101,10 +99,10 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_id_bridgeunit = acctbridge_shop()
-    acct_id_bridgeunit.set_otx2inx(xio_otx, xio_inx)
-    acct_id_bridgeunit.set_otx2inx(sue_otx, sue_inx)
-    acct_id_bridgeunit.set_otx2inx(bob_otx, bob_inx)
+    acct_id_mapunit = acctmap_shop()
+    acct_id_mapunit.set_otx2inx(xio_otx, xio_inx)
+    acct_id_mapunit.set_otx2inx(sue_otx, sue_inx)
+    acct_id_mapunit.set_otx2inx(bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[deal_id_str(), acct_id_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
@@ -115,7 +113,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5
     print(f"{otx_dt=}")
 
     # WHEN
-    translate_single_column_dataframe(otx_dt, acct_id_bridgeunit, acct_id_str())
+    translate_single_column_dataframe(otx_dt, acct_id_mapunit, acct_id_str())
 
     # THEN
     assert otx_dt.iloc[0][acct_id_str()] == zia_otx

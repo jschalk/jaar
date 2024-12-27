@@ -102,11 +102,11 @@ from src.f08_pidgin.pidgin_config import (
     inx_acct_id_str,
     otx_group_id_str,
     inx_group_id_str,
-    bridge_otx2inx_str,
-    bridge_acct_id_str,
-    bridge_group_id_str,
-    bridge_idea_str,
-    bridge_road_str,
+    map_otx2inx_str,
+    map_acct_id_str,
+    map_group_id_str,
+    map_idea_str,
+    map_road_str,
     get_pidgin_categorys,
     get_pidgin_config_dict,
     get_pidgin_args_category_mapping,
@@ -381,10 +381,10 @@ def test_get_brick_config_dict_ReturnsObj():
     assert bud_item_reasonunit_str() in brick_config_categorys
     assert bud_itemunit_str() in brick_config_categorys
     assert budunit_str() in brick_config_categorys
-    assert bridge_acct_id_str() in brick_config_categorys
-    assert bridge_group_id_str() in brick_config_categorys
-    assert bridge_idea_str() in brick_config_categorys
-    assert bridge_road_str() in brick_config_categorys
+    assert map_acct_id_str() in brick_config_categorys
+    assert map_group_id_str() in brick_config_categorys
+    assert map_idea_str() in brick_config_categorys
+    assert map_road_str() in brick_config_categorys
     assert get_atom_categorys().issubset(brick_config_categorys)
     assert get_deal_categorys().issubset(brick_config_categorys)
     assert get_pidgin_categorys().issubset(brick_config_categorys)
@@ -421,11 +421,11 @@ def _validate_brick_config(x_brick_config: dict):
             deal_timeline_month_str(),
             deal_timeline_weekday_str(),
             dealunit_str(),
-            bridge_otx2inx_str(),
-            bridge_group_id_str(),
-            bridge_acct_id_str(),
-            bridge_idea_str(),
-            bridge_road_str(),
+            map_otx2inx_str(),
+            map_group_id_str(),
+            map_acct_id_str(),
+            map_idea_str(),
+            map_road_str(),
         }:
             assert brick_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif brick_category in {deal_purview_episode_str(), deal_cashbook_str()}:
@@ -627,10 +627,10 @@ def set_brick_config_json(category: str, build_order: int):
 def test_get_brick_config_dict_ReturnsObj_build_order():
     # ESTABLISH / WHEN
     bo = build_order_str()
-    # set_brick_config_json(bridge_acct_id_str(), 0)
-    # set_brick_config_json(bridge_group_id_str(), 1)
-    # set_brick_config_json(bridge_idea_str(), 2)
-    # set_brick_config_json(bridge_road_str(), 3)
+    # set_brick_config_json(map_acct_id_str(), 0)
+    # set_brick_config_json(map_group_id_str(), 1)
+    # set_brick_config_json(map_idea_str(), 2)
+    # set_brick_config_json(map_road_str(), 3)
     # set_brick_config_json(dealunit_str(), 5)
     # set_brick_config_json(deal_timeline_hour_str(), 6)
     # set_brick_config_json(deal_timeline_month_str(), 7)
@@ -651,10 +651,10 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     x_brick_config = get_brick_config_dict()
 
     # THEN
-    assert x_brick_config.get(bridge_acct_id_str()).get(bo) == 0
-    assert x_brick_config.get(bridge_group_id_str()).get(bo) == 1
-    assert x_brick_config.get(bridge_idea_str()).get(bo) == 2
-    assert x_brick_config.get(bridge_road_str()).get(bo) == 3
+    assert x_brick_config.get(map_acct_id_str()).get(bo) == 0
+    assert x_brick_config.get(map_group_id_str()).get(bo) == 1
+    assert x_brick_config.get(map_idea_str()).get(bo) == 2
+    assert x_brick_config.get(map_road_str()).get(bo) == 3
     assert x_brick_config.get(dealunit_str()).get(bo) == 5
     assert x_brick_config.get(deal_timeline_hour_str()).get(bo) == 6
     assert x_brick_config.get(deal_timeline_month_str()).get(bo) == 7

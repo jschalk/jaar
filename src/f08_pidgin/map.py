@@ -37,7 +37,7 @@ class set_idea_Exception(Exception):
 
 
 @dataclass
-class BridgeCore:
+class MapCore:
     face_id: FaceID = None
     event_id: EventID = None
     otx2inx: dict = None
@@ -71,7 +71,7 @@ class BridgeCore:
         return get_json_from_dict(self.get_dict())
 
 
-class AcctBridge(BridgeCore):
+class AcctMap(MapCore):
     def set_otx2inx(self, otx_acct_id: str, inx_acct_id: str):
         self.otx2inx[otx_acct_id] = inx_acct_id
 
@@ -112,19 +112,19 @@ class AcctBridge(BridgeCore):
         )
 
 
-def acctbridge_shop(
+def acctmap_shop(
     face_id: FaceID = None,
     event_id: EventID = None,
     otx_wall: str = None,
     inx_wall: str = None,
     otx2inx: dict = None,
     unknown_word: str = None,
-) -> AcctBridge:
+) -> AcctMap:
     unknown_word = default_unknown_word_if_None(unknown_word)
     otx_wall = default_wall_if_None(otx_wall)
     inx_wall = default_wall_if_None(inx_wall)
 
-    return AcctBridge(
+    return AcctMap(
         face_id=face_id,
         event_id=get_0_if_None(event_id),
         otx_wall=otx_wall,
@@ -134,8 +134,8 @@ def acctbridge_shop(
     )
 
 
-def get_acctbridge_from_dict(x_dict: dict) -> AcctBridge:
-    return acctbridge_shop(
+def get_acctmap_from_dict(x_dict: dict) -> AcctMap:
+    return acctmap_shop(
         face_id=x_dict.get("face_id"),
         event_id=x_dict.get("event_id"),
         otx_wall=x_dict.get("otx_wall"),
@@ -145,11 +145,11 @@ def get_acctbridge_from_dict(x_dict: dict) -> AcctBridge:
     )
 
 
-def get_acctbridge_from_json(x_json: str) -> AcctBridge:
-    return get_acctbridge_from_dict(get_dict_from_json(x_json))
+def get_acctmap_from_json(x_json: str) -> AcctMap:
+    return get_acctmap_from_dict(get_dict_from_json(x_json))
 
 
-class GroupBridge(BridgeCore):
+class GroupMap(MapCore):
     def set_otx2inx(self, otx_group_id: str, inx_group_id: str):
         self.otx2inx[otx_group_id] = inx_group_id
 
@@ -190,19 +190,19 @@ class GroupBridge(BridgeCore):
         )
 
 
-def groupbridge_shop(
+def groupmap_shop(
     face_id: FaceID = None,
     event_id: EventID = None,
     otx_wall: str = None,
     inx_wall: str = None,
     otx2inx: dict = None,
     unknown_word: str = None,
-) -> GroupBridge:
+) -> GroupMap:
     unknown_word = default_unknown_word_if_None(unknown_word)
     otx_wall = default_wall_if_None(otx_wall)
     inx_wall = default_wall_if_None(inx_wall)
 
-    return GroupBridge(
+    return GroupMap(
         face_id=face_id,
         event_id=get_0_if_None(event_id),
         otx_wall=otx_wall,
@@ -212,8 +212,8 @@ def groupbridge_shop(
     )
 
 
-def get_groupbridge_from_dict(x_dict: dict) -> GroupBridge:
-    return groupbridge_shop(
+def get_groupmap_from_dict(x_dict: dict) -> GroupMap:
+    return groupmap_shop(
         face_id=x_dict.get("face_id"),
         event_id=x_dict.get("event_id"),
         otx_wall=x_dict.get("otx_wall"),
@@ -223,11 +223,11 @@ def get_groupbridge_from_dict(x_dict: dict) -> GroupBridge:
     )
 
 
-def get_groupbridge_from_json(x_json: str) -> GroupBridge:
-    return get_groupbridge_from_dict(get_dict_from_json(x_json))
+def get_groupmap_from_json(x_json: str) -> GroupMap:
+    return get_groupmap_from_dict(get_dict_from_json(x_json))
 
 
-class IdeaBridge(BridgeCore):
+class IdeaMap(MapCore):
     def set_otx2inx(self, otx_idea: str, inx_idea: str):
         self.otx2inx[otx_idea] = inx_idea
 
@@ -268,19 +268,19 @@ class IdeaBridge(BridgeCore):
         )
 
 
-def ideabridge_shop(
+def ideamap_shop(
     face_id: FaceID = None,
     event_id: EventID = None,
     otx_wall: str = None,
     inx_wall: str = None,
     otx2inx: dict = None,
     unknown_word: str = None,
-) -> IdeaBridge:
+) -> IdeaMap:
     unknown_word = default_unknown_word_if_None(unknown_word)
     otx_wall = default_wall_if_None(otx_wall)
     inx_wall = default_wall_if_None(inx_wall)
 
-    return IdeaBridge(
+    return IdeaMap(
         face_id=face_id,
         event_id=get_0_if_None(event_id),
         otx_wall=otx_wall,
@@ -290,8 +290,8 @@ def ideabridge_shop(
     )
 
 
-def get_ideabridge_from_dict(x_dict: dict) -> IdeaBridge:
-    return ideabridge_shop(
+def get_ideamap_from_dict(x_dict: dict) -> IdeaMap:
+    return ideamap_shop(
         face_id=x_dict.get("face_id"),
         event_id=x_dict.get("event_id"),
         otx_wall=x_dict.get("otx_wall"),
@@ -301,19 +301,19 @@ def get_ideabridge_from_dict(x_dict: dict) -> IdeaBridge:
     )
 
 
-def get_ideabridge_from_json(x_json: str) -> IdeaBridge:
-    return get_ideabridge_from_dict(get_dict_from_json(x_json))
+def get_ideamap_from_json(x_json: str) -> IdeaMap:
+    return get_ideamap_from_dict(get_dict_from_json(x_json))
 
 
 @dataclass
-class RoadBridge:
+class RoadMap:
     face_id: FaceID = None
     event_id: EventID = None
     otx2inx: dict = None
     unknown_word: str = None
     otx_wall: str = None
     inx_wall: str = None
-    ideabridge: IdeaBridge = None
+    ideamap: IdeaMap = None
 
     def set_all_otx2inx(
         self, x_otx2inx: dict, raise_exception_if_invalid: bool = False
@@ -343,16 +343,16 @@ class RoadBridge:
         if self.otx_exists(otx_parent_road) is False and otx_parent_road != "":
             return None
         otx_terminus = get_terminus_idea(otx_road, self.otx_wall)
-        otx_terminus = self._get_ideabridge_ideaunit(otx_terminus)
+        otx_terminus = self._get_ideamap_ideaunit(otx_terminus)
         if otx_parent_road == "":
             inx_parent_road = ""
         else:
             inx_parent_road = self._get_inx_value(otx_parent_road)
         return combine_roads(inx_parent_road, otx_terminus, self.inx_wall)
 
-    def _get_ideabridge_ideaunit(self, x_ideaUnit: IdeaUnit) -> IdeaUnit:
+    def _get_ideamap_ideaunit(self, x_ideaUnit: IdeaUnit) -> IdeaUnit:
         if self.otx_idea_exists(x_ideaUnit):
-            return self.ideabridge.reveal_inx(x_ideaUnit)
+            return self.ideamap.reveal_inx(x_ideaUnit)
         return x_ideaUnit
 
     def otx2inx_exists(self, otx_road: str, inx_road: str) -> bool:
@@ -372,7 +372,7 @@ class RoadBridge:
             exception_str = f"idea cannot have inx_idea '{inx_idea}'. It must be not have wall {self.inx_wall}."
             raise set_idea_Exception(exception_str)
 
-        self.ideabridge.set_otx2inx(otx_idea, inx_idea)
+        self.ideamap.set_otx2inx(otx_idea, inx_idea)
         self._set_new_idea_to_otx_inx(otx_idea, inx_idea)
 
     def _set_new_idea_to_otx_inx(self, otx_idea, inx_idea):
@@ -385,16 +385,16 @@ class RoadBridge:
             self.set_otx2inx(otx_road, create_road_from_ideas(inx_ideaunits))
 
     def _get_inx_idea(self, otx_idea: IdeaUnit) -> IdeaUnit:
-        return self.ideabridge.otx2inx.get(otx_idea)
+        return self.ideamap.otx2inx.get(otx_idea)
 
     def idea_exists(self, otx_idea: IdeaUnit, inx_idea: IdeaUnit) -> bool:
-        return self.ideabridge.otx2inx_exists(otx_idea, inx_idea)
+        return self.ideamap.otx2inx_exists(otx_idea, inx_idea)
 
     def otx_idea_exists(self, otx_idea: IdeaUnit) -> bool:
-        return self.ideabridge.otx_exists(otx_idea)
+        return self.ideamap.otx_exists(otx_idea)
 
     def del_idea(self, otx_idea: IdeaUnit) -> bool:
-        self.ideabridge.del_otx2inx(otx_idea)
+        self.ideamap.del_otx2inx(otx_idea)
 
     def _unknown_word_in_otx2inx(self) -> bool:
         return str_in_dict(self.unknown_word, self.otx2inx)
@@ -424,21 +424,21 @@ class RoadBridge:
         return get_json_from_dict(self.get_dict())
 
 
-def roadbridge_shop(
+def roadmap_shop(
     face_id: FaceID = None,
     event_id: EventID = None,
     otx_wall: str = None,
     inx_wall: str = None,
-    x_ideabridge: IdeaBridge = None,
+    x_ideamap: IdeaMap = None,
     otx2inx: dict = None,
     unknown_word: str = None,
-) -> RoadBridge:
+) -> RoadMap:
     unknown_word = default_unknown_word_if_None(unknown_word)
     otx_wall = default_wall_if_None(otx_wall)
     inx_wall = default_wall_if_None(inx_wall)
 
-    if x_ideabridge is None:
-        x_ideabridge = ideabridge_shop(
+    if x_ideamap is None:
+        x_ideamap = ideamap_shop(
             otx_wall=otx_wall,
             inx_wall=inx_wall,
             unknown_word=unknown_word,
@@ -446,19 +446,19 @@ def roadbridge_shop(
             event_id=event_id,
         )
 
-    return RoadBridge(
+    return RoadMap(
         otx2inx=get_empty_dict_if_None(otx2inx),
         unknown_word=unknown_word,
         otx_wall=otx_wall,
         inx_wall=inx_wall,
-        ideabridge=x_ideabridge,
+        ideamap=x_ideamap,
         face_id=face_id,
         event_id=get_0_if_None(event_id),
     )
 
 
-def get_roadbridge_from_dict(x_dict: dict) -> RoadBridge:
-    return roadbridge_shop(
+def get_roadmap_from_dict(x_dict: dict) -> RoadMap:
+    return roadmap_shop(
         face_id=x_dict.get("face_id"),
         event_id=x_dict.get("event_id"),
         otx_wall=x_dict.get("otx_wall"),
@@ -468,11 +468,11 @@ def get_roadbridge_from_dict(x_dict: dict) -> RoadBridge:
     )
 
 
-def get_roadbridge_from_json(x_json: str) -> RoadBridge:
-    return get_roadbridge_from_dict(get_dict_from_json(x_json))
+def get_roadmap_from_json(x_json: str) -> RoadMap:
+    return get_roadmap_from_dict(get_dict_from_json(x_json))
 
 
-class BridgeCoreAttrConflictException(Exception):
+class MapCoreAttrConflictException(Exception):
     pass
 
 
@@ -483,12 +483,12 @@ def _check_core_attributes(new_obj, old_obj):
         or old_obj.inx_wall != new_obj.inx_wall
         or old_obj.unknown_word != new_obj.unknown_word
     ):
-        raise BridgeCoreAttrConflictException("Core attributes in conflict")
+        raise MapCoreAttrConflictException("Core attributes in conflict")
     if old_obj.event_id >= new_obj.event_id:
-        raise BridgeCoreAttrConflictException("older bridgeunit is not older")
+        raise MapCoreAttrConflictException("older mapunit is not older")
 
 
-def _inherit_bridgeunit(new, old):
+def _inherit_mapunit(new, old):
     _check_core_attributes(new, old)
     for otx_key, old_inx in old.otx2inx.items():
         if new.otx_exists(otx_key) is False:
@@ -496,17 +496,17 @@ def _inherit_bridgeunit(new, old):
     return new
 
 
-def inherit_acctbridge(new: AcctBridge, old: AcctBridge) -> AcctBridge:
-    return _inherit_bridgeunit(new, old)
+def inherit_acctmap(new: AcctMap, old: AcctMap) -> AcctMap:
+    return _inherit_mapunit(new, old)
 
 
-def inherit_groupbridge(new: GroupBridge, old: GroupBridge) -> GroupBridge:
-    return _inherit_bridgeunit(new, old)
+def inherit_groupmap(new: GroupMap, old: GroupMap) -> GroupMap:
+    return _inherit_mapunit(new, old)
 
 
-def inherit_ideabridge(new: IdeaBridge, old: IdeaBridge) -> IdeaBridge:
-    return _inherit_bridgeunit(new, old)
+def inherit_ideamap(new: IdeaMap, old: IdeaMap) -> IdeaMap:
+    return _inherit_mapunit(new, old)
 
 
-def inherit_roadbridge(new: RoadBridge, old: RoadBridge) -> RoadBridge:
-    return _inherit_bridgeunit(new, old)
+def inherit_roadmap(new: RoadMap, old: RoadMap) -> RoadMap:
+    return _inherit_mapunit(new, old)

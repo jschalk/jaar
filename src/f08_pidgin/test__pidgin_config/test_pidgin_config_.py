@@ -30,11 +30,11 @@ from src.f08_pidgin.pidgin_config import (
     otx_road_str,
     unknown_word_str,
     otx2inx_str,
-    bridge_otx2inx_str,
-    bridge_acct_id_str,
-    bridge_group_id_str,
-    bridge_idea_str,
-    bridge_road_str,
+    map_otx2inx_str,
+    map_acct_id_str,
+    map_group_id_str,
+    map_idea_str,
+    map_road_str,
 )
 from os import getcwd as os_getcwd
 
@@ -54,11 +54,11 @@ def test_str_functions_ReturnsObj():
     assert otx_road_str() == "otx_road"
     assert unknown_word_str() == "unknown_word"
     assert otx2inx_str() == "otx2inx"
-    assert bridge_acct_id_str() == "bridge_acct_id"
-    assert bridge_group_id_str() == "bridge_group_id"
-    assert bridge_idea_str() == "bridge_idea"
-    assert bridge_road_str() == "bridge_road"
-    assert bridge_otx2inx_str() == "bridge_otx2inx"
+    assert map_acct_id_str() == "map_acct_id"
+    assert map_group_id_str() == "map_group_id"
+    assert map_idea_str() == "map_idea"
+    assert map_road_str() == "map_road"
+    assert map_otx2inx_str() == "map_otx2inx"
     assert event_id_str() == "event_id"
 
 
@@ -79,19 +79,19 @@ def test_get_pidgin_config_dict_ReturnsObj():
     # THEN
     assert pidgin_config
     pidgin_config_categorys = set(pidgin_config.keys())
-    assert bridge_acct_id_str() in pidgin_config_categorys
-    assert bridge_group_id_str() in pidgin_config_categorys
-    assert bridge_idea_str() in pidgin_config_categorys
-    assert bridge_road_str() in pidgin_config_categorys
+    assert map_acct_id_str() in pidgin_config_categorys
+    assert map_group_id_str() in pidgin_config_categorys
+    assert map_idea_str() in pidgin_config_categorys
+    assert map_road_str() in pidgin_config_categorys
     assert len(pidgin_config) == 4
 
     _validate_pidgin_config(pidgin_config)
-    bridge_road_dict = pidgin_config.get(bridge_road_str())
-    bridge_idea_dict = pidgin_config.get(bridge_idea_str())
-    assert len(bridge_road_dict.get(jkeys_str())) == 1
-    assert len(bridge_idea_dict.get(jkeys_str())) == 1
-    assert len(bridge_road_dict.get(jvalues_str())) == 4
-    assert len(bridge_idea_dict.get(jvalues_str())) == 4
+    map_road_dict = pidgin_config.get(map_road_str())
+    map_idea_dict = pidgin_config.get(map_idea_str())
+    assert len(map_road_dict.get(jkeys_str())) == 1
+    assert len(map_idea_dict.get(jkeys_str())) == 1
+    assert len(map_road_dict.get(jvalues_str())) == 4
+    assert len(map_idea_dict.get(jvalues_str())) == 4
 
     # assert gen_jvalues == x_pidginunit_jvalues
     # assert len(pidginunit_dict.get(jvalues_str())) == 9
@@ -142,10 +142,10 @@ def test_get_pidgin_categorys_ReturnsObj():
     pidgin_config_categorys = get_pidgin_categorys()
 
     # THEN
-    assert bridge_acct_id_str() in pidgin_config_categorys
-    assert bridge_group_id_str() in pidgin_config_categorys
-    assert bridge_idea_str() in pidgin_config_categorys
-    assert bridge_road_str() in pidgin_config_categorys
+    assert map_acct_id_str() in pidgin_config_categorys
+    assert map_group_id_str() in pidgin_config_categorys
+    assert map_idea_str() in pidgin_config_categorys
+    assert map_road_str() in pidgin_config_categorys
     assert len(pidgin_config_categorys) == 4
 
 
@@ -157,7 +157,7 @@ def test_get_pidgin_args_category_mapping_ReturnsObj():
     # THEN
     assert x_pidgin_args_category_mapping
     assert x_pidgin_args_category_mapping.get(otx_road_str())
-    x_categorys = {bridge_road_str()}
+    x_categorys = {map_road_str()}
     assert x_pidgin_args_category_mapping.get(otx_road_str()) == x_categorys
     assert x_pidgin_args_category_mapping.get(inx_wall_str())
     pidgin_id_categorys = x_pidgin_args_category_mapping.get(inx_wall_str())
@@ -182,6 +182,6 @@ def test_get_quick_pidgens_column_ref_ReturnsObj():
     # print(f"{all_pidgen_config_attrs=}")
 
     # WHEN / THEN
-    assert bridge_road_str() in set(get_quick_pidgens_column_ref().keys())
+    assert map_road_str() in set(get_quick_pidgens_column_ref().keys())
     assert len(get_quick_pidgens_column_ref().keys()) == 4
     assert get_quick_pidgens_column_ref() == all_pidgen_config_attrs

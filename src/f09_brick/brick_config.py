@@ -201,40 +201,40 @@ def brick_format_00029_budunit_v0_0_0() -> str:
     return "brick_format_00029_budunit_v0_0_0"
 
 
-def brick_format_00040_bridge_otx2inx_v0_0_0() -> str:
-    return "brick_format_00040_bridge_otx2inx_v0_0_0"
+def brick_format_00040_map_otx2inx_v0_0_0() -> str:
+    return "brick_format_00040_map_otx2inx_v0_0_0"
 
 
-def brick_format_00042_bridge_group_id_v0_0_0() -> str:
-    return "brick_format_00042_bridge_group_id_v0_0_0"
+def brick_format_00042_map_group_id_v0_0_0() -> str:
+    return "brick_format_00042_map_group_id_v0_0_0"
 
 
-def brick_format_00043_bridge_acct_id_v0_0_0() -> str:
-    return "brick_format_00043_bridge_acct_id_v0_0_0"
+def brick_format_00043_map_acct_id_v0_0_0() -> str:
+    return "brick_format_00043_map_acct_id_v0_0_0"
 
 
-def brick_format_00044_bridge_idea_v0_0_0() -> str:
-    return "brick_format_00044_bridge_idea_v0_0_0"
+def brick_format_00044_map_idea_v0_0_0() -> str:
+    return "brick_format_00044_map_idea_v0_0_0"
 
 
-def brick_format_00045_bridge_road_v0_0_0() -> str:
-    return "brick_format_00045_bridge_road_v0_0_0"
+def brick_format_00045_map_road_v0_0_0() -> str:
+    return "brick_format_00045_map_road_v0_0_0"
 
 
-def brick_format_00113_acct_bridge1_v0_0_0() -> str:
-    return "brick_format_00113_acct_bridge1_v0_0_0"
+def brick_format_00113_acct_map1_v0_0_0() -> str:
+    return "brick_format_00113_acct_map1_v0_0_0"
 
 
-def brick_format_00115_group_bridge1_v0_0_0() -> str:
-    return "brick_format_00115_group_bridge1_v0_0_0"
+def brick_format_00115_group_map1_v0_0_0() -> str:
+    return "brick_format_00115_group_map1_v0_0_0"
 
 
-def brick_format_00116_idea_bridge1_v0_0_0() -> str:
-    return "brick_format_00116_idea_bridge1_v0_0_0"
+def brick_format_00116_idea_map1_v0_0_0() -> str:
+    return "brick_format_00116_idea_map1_v0_0_0"
 
 
-def brick_format_00117_road_bridge1_v0_0_0() -> str:
-    return "brick_format_00117_road_bridge1_v0_0_0"
+def brick_format_00117_road_map1_v0_0_0() -> str:
+    return "brick_format_00117_road_map1_v0_0_0"
 
 
 def get_brick_format_filenames() -> set[str]:
@@ -260,14 +260,14 @@ def get_brick_format_filenames() -> set[str]:
         brick_format_00028_bud_itemunit_v0_0_0(),
         brick_format_00029_budunit_v0_0_0(),
         brick_format_00036_problem_healer_v0_0_0(),
-        brick_format_00042_bridge_group_id_v0_0_0(),
-        brick_format_00043_bridge_acct_id_v0_0_0(),
-        brick_format_00044_bridge_idea_v0_0_0(),
-        brick_format_00045_bridge_road_v0_0_0(),
-        brick_format_00113_acct_bridge1_v0_0_0(),
-        brick_format_00115_group_bridge1_v0_0_0(),
-        brick_format_00116_idea_bridge1_v0_0_0(),
-        brick_format_00117_road_bridge1_v0_0_0(),
+        brick_format_00042_map_group_id_v0_0_0(),
+        brick_format_00043_map_acct_id_v0_0_0(),
+        brick_format_00044_map_idea_v0_0_0(),
+        brick_format_00045_map_road_v0_0_0(),
+        brick_format_00113_acct_map1_v0_0_0(),
+        brick_format_00115_group_map1_v0_0_0(),
+        brick_format_00116_idea_map1_v0_0_0(),
+        brick_format_00117_road_map1_v0_0_0(),
     }
 
 
@@ -335,14 +335,14 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "addin,begin,close,deal_id,denom,gogo_want,lx,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
         "credor_respect,deal_id,debtor_respect,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,purview_time_id,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
         "deal_id,healer_id,lx,owner_id,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
-        "inx_group_id,inx_wall,otx_group_id,otx_wall,unknown_word": brick_format_00042_bridge_group_id_v0_0_0(),
-        "inx_acct_id,inx_wall,otx_acct_id,otx_wall,unknown_word": brick_format_00043_bridge_acct_id_v0_0_0(),
-        "inx_idea,inx_wall,otx_idea,otx_wall,unknown_word": brick_format_00044_bridge_idea_v0_0_0(),
-        "inx_road,inx_wall,otx_road,otx_wall,unknown_word": brick_format_00045_bridge_road_v0_0_0(),
-        "acct_id,deal_id,inx_acct_id,otx_acct_id,owner_id": brick_format_00113_acct_bridge1_v0_0_0(),
-        "acct_id,deal_id,inx_group_id,otx_group_id,owner_id": brick_format_00115_group_bridge1_v0_0_0(),
-        "acct_id,deal_id,inx_idea,otx_idea,owner_id": brick_format_00116_idea_bridge1_v0_0_0(),
-        "acct_id,deal_id,inx_road,otx_road,owner_id": brick_format_00117_road_bridge1_v0_0_0(),
+        "inx_group_id,inx_wall,otx_group_id,otx_wall,unknown_word": brick_format_00042_map_group_id_v0_0_0(),
+        "inx_acct_id,inx_wall,otx_acct_id,otx_wall,unknown_word": brick_format_00043_map_acct_id_v0_0_0(),
+        "inx_idea,inx_wall,otx_idea,otx_wall,unknown_word": brick_format_00044_map_idea_v0_0_0(),
+        "inx_road,inx_wall,otx_road,otx_wall,unknown_word": brick_format_00045_map_road_v0_0_0(),
+        "acct_id,deal_id,inx_acct_id,otx_acct_id,owner_id": brick_format_00113_acct_map1_v0_0_0(),
+        "acct_id,deal_id,inx_group_id,otx_group_id,owner_id": brick_format_00115_group_map1_v0_0_0(),
+        "acct_id,deal_id,inx_idea,otx_idea,owner_id": brick_format_00116_idea_map1_v0_0_0(),
+        "acct_id,deal_id,inx_road,otx_road,owner_id": brick_format_00117_road_map1_v0_0_0(),
     }
 
 
@@ -542,8 +542,8 @@ def get_brick_category_ref() -> dict[str, set[str]]:
         "bud_item_reason_premiseunit": ["br00026"],
         "bud_item_reasonunit": ["br00027"],
         "budunit": ["br00029"],
-        "bridge_group_id": ["br00042", "br00115"],
-        "bridge_acct_id": ["br00043", "br00113"],
-        "bridge_idea": ["br00044", "br00116"],
-        "bridge_road": ["br00045", "br00117"],
+        "map_group_id": ["br00042", "br00115"],
+        "map_acct_id": ["br00043", "br00113"],
+        "map_idea": ["br00044", "br00116"],
+        "map_road": ["br00045", "br00117"],
     }

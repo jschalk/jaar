@@ -1,10 +1,10 @@
 from src.f04_gift.atom_config import type_AcctID_str
 from src.f08_pidgin.pidgin import pidginunit_shop, inherit_pidginunit
 from src.f08_pidgin.examples.example_pidgins import (
-    get_clean_roadbridge,
-    get_clean_ideabridge,
-    get_swim_groupbridge,
-    get_suita_acctbridge,
+    get_clean_roadmap,
+    get_clean_ideamap,
+    get_swim_groupmap,
+    get_suita_acctmap,
 )
 from pytest import raises as pytest_raises
 
@@ -82,50 +82,50 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario5_RaiseErrorWhenEventI
     assert str(excinfo.value) == "older pidginunit is not older"
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_acctbridge_Inherited():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_acctmap_Inherited():
     # ESTABLISH
     sue_str = "Sue"
     event1 = 1
     old_pidginunit = pidginunit_shop(sue_str, 0)
-    old_pidginunit.set_acctbridge(get_suita_acctbridge())
-    old_pidginunit.set_groupbridge(get_swim_groupbridge())
-    old_pidginunit.set_ideabridge(get_clean_ideabridge())
-    old_pidginunit.set_roadbridge(get_clean_roadbridge())
+    old_pidginunit.set_acctmap(get_suita_acctmap())
+    old_pidginunit.set_groupmap(get_swim_groupmap())
+    old_pidginunit.set_ideamap(get_clean_ideamap())
+    old_pidginunit.set_roadmap(get_clean_roadmap())
     new_pidginunit = pidginunit_shop(sue_str, event1)
-    assert new_pidginunit.acctbridge != get_suita_acctbridge()
+    assert new_pidginunit.acctmap != get_suita_acctmap()
 
     # WHEN
     merged_pidginunit = inherit_pidginunit(old_pidginunit, new_pidginunit)
 
     # THEN
     assert merged_pidginunit
-    merged_acctbrigde = get_suita_acctbridge()
+    merged_acctbrigde = get_suita_acctmap()
     merged_acctbrigde.event_id = event1
-    assert merged_pidginunit.acctbridge == merged_acctbrigde
-    merged_groupbrigde = get_swim_groupbridge()
+    assert merged_pidginunit.acctmap == merged_acctbrigde
+    merged_groupbrigde = get_swim_groupmap()
     merged_groupbrigde.event_id = event1
-    assert merged_pidginunit.groupbridge == merged_groupbrigde
-    merged_ideabrigde = get_clean_ideabridge()
+    assert merged_pidginunit.groupmap == merged_groupbrigde
+    merged_ideabrigde = get_clean_ideamap()
     merged_ideabrigde.event_id = event1
-    assert merged_pidginunit.ideabridge == merged_ideabrigde
-    merged_roadbrigde = get_clean_roadbridge()
+    assert merged_pidginunit.ideamap == merged_ideabrigde
+    merged_roadbrigde = get_clean_roadmap()
     merged_roadbrigde.event_id = event1
-    merged_roadbrigde.ideabridge = merged_ideabrigde
-    assert merged_pidginunit.roadbridge == merged_roadbrigde
+    merged_roadbrigde.ideamap = merged_ideabrigde
+    assert merged_pidginunit.roadmap == merged_roadbrigde
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_acctbridge_Inherited():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_acctmap_Inherited():
     # ESTABLISH
     sue_str = "Sue"
     event1 = 1
     old_pidginunit = pidginunit_shop(sue_str, 0)
-    old_pidginunit.set_acctbridge(get_suita_acctbridge())
-    old_pidginunit.set_groupbridge(get_swim_groupbridge())
+    old_pidginunit.set_acctmap(get_suita_acctmap())
+    old_pidginunit.set_groupmap(get_swim_groupmap())
     new_pidginunit = pidginunit_shop(sue_str, event1)
     bob_otx = "Bob"
     bob_inx = "Bobby"
     new_pidginunit.set_otx2inx(type_AcctID_str(), bob_otx, bob_inx)
-    assert new_pidginunit.acctbridge != get_suita_acctbridge()
+    assert new_pidginunit.acctmap != get_suita_acctmap()
     assert new_pidginunit.acct_id_exists(bob_otx, bob_inx)
 
     # WHEN
@@ -134,10 +134,10 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_acctbridge_Inherited
     # THEN
     assert merged_pidginunit
     assert new_pidginunit.acct_id_exists(bob_otx, bob_inx)
-    merged_acctbrigde = get_suita_acctbridge()
+    merged_acctbrigde = get_suita_acctmap()
     merged_acctbrigde.event_id = event1
     merged_acctbrigde.set_otx2inx(bob_otx, bob_inx)
-    assert merged_pidginunit.acctbridge == merged_acctbrigde
-    merged_groupbrigde = get_swim_groupbridge()
+    assert merged_pidginunit.acctmap == merged_acctbrigde
+    merged_groupbrigde = get_swim_groupmap()
     merged_groupbrigde.event_id = event1
-    assert merged_pidginunit.groupbridge == merged_groupbrigde
+    assert merged_pidginunit.groupmap == merged_groupbrigde

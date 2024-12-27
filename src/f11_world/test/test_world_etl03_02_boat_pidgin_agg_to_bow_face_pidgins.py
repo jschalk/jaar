@@ -22,7 +22,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
+def test_WorldUnit_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

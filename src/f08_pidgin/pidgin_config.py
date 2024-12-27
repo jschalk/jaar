@@ -83,24 +83,24 @@ def otx2inx_str() -> str:
     return "otx2inx"
 
 
-def bridge_otx2inx_str() -> str:
-    return "bridge_otx2inx"
+def map_otx2inx_str() -> str:
+    return "map_otx2inx"
 
 
-def bridge_acct_id_str() -> str:
-    return "bridge_acct_id"
+def map_acct_id_str() -> str:
+    return "map_acct_id"
 
 
-def bridge_group_id_str() -> str:
-    return "bridge_group_id"
+def map_group_id_str() -> str:
+    return "map_group_id"
 
 
-def bridge_idea_str() -> str:
-    return "bridge_idea"
+def map_idea_str() -> str:
+    return "map_idea"
 
 
-def bridge_road_str() -> str:
-    return "bridge_road"
+def map_road_str() -> str:
+    return "map_road"
 
 
 def get_pidgin_config_jkeys(x_cat: str) -> dict:
@@ -202,28 +202,28 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
 def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     """for each pidgin_config category contains the associated columns"""
     return {
-        "bridge_group_id": {
+        "map_group_id": {
             "inx_group_id",
             "unknown_word",
             "inx_wall",
             "otx_wall",
             "otx_group_id",
         },
-        "bridge_acct_id": {
+        "map_acct_id": {
             "inx_acct_id",
             "unknown_word",
             "inx_wall",
             "otx_wall",
             "otx_acct_id",
         },
-        "bridge_idea": {
+        "map_idea": {
             "inx_idea",
             "unknown_word",
             "inx_wall",
             "otx_wall",
             "otx_idea",
         },
-        "bridge_road": {
+        "map_road": {
             "inx_road",
             "unknown_word",
             "inx_wall",

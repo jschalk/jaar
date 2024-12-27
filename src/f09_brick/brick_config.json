@@ -1,5 +1,5 @@
 {
-  "bridge_acct_id": {
+  "map_acct_id": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 0,
@@ -15,7 +15,7 @@
       "unknown_word": {}
     }
   },
-  "bridge_group_id": {
+  "map_group_id": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 1,
@@ -31,7 +31,7 @@
       "unknown_word": {}
     }
   },
-  "bridge_idea": {
+  "map_idea": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 2,
@@ -47,7 +47,7 @@
       "unknown_word": {}
     }
   },
-  "bridge_road": {
+  "map_road": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 3,

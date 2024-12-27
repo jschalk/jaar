@@ -9,21 +9,21 @@
         "inx_wall": {
             "otx_key": false
         },
-        "inx_acct_id": {
+        "inx_road": {
             "otx_key": false
         },
         "otx_wall": {
             "otx_key": false
         },
-        "otx_acct_id": {
+        "otx_road": {
             "otx_key": true
         },
         "unknown_word": {
             "otx_key": false
         }
     },
-    "brick_number": "br00043",
+    "brick_number": "br00045",
     "categorys": [
-        "bridge_acct_id"
+        "map_road"
     ]
 }

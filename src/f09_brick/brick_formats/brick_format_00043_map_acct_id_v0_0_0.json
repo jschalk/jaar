@@ -9,21 +9,21 @@
         "inx_wall": {
             "otx_key": false
         },
-        "inx_group_id": {
+        "inx_acct_id": {
             "otx_key": false
         },
         "otx_wall": {
             "otx_key": false
         },
-        "otx_group_id": {
+        "otx_acct_id": {
             "otx_key": true
         },
         "unknown_word": {
             "otx_key": false
         }
     },
-    "brick_number": "br00042",
+    "brick_number": "br00043",
     "categorys": [
-        "bridge_group_id"
+        "map_acct_id"
     ]
 }

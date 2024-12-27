@@ -37,11 +37,11 @@ class not_given_pidgin_category_Exception(Exception):
     pass
 
 
-BRIDGES_CATEGORYS = {
-    "bridge_acct_id": "AcctID",
-    "bridge_group_id": "GroupID",
-    "bridge_idea": "IdeaUnit",
-    "bridge_road": "RoadUnit",
+MAPS_CATEGORYS = {
+    "map_acct_id": "AcctID",
+    "map_group_id": "GroupID",
+    "map_idea": "IdeaUnit",
+    "map_road": "RoadUnit",
 }
 
 JAAR_TYPES = {
@@ -77,9 +77,9 @@ JAAR_TYPES = {
 
 
 def get_jaar_type(pidgin_category: str) -> str:
-    if pidgin_category not in BRIDGES_CATEGORYS:
+    if pidgin_category not in MAPS_CATEGORYS:
         raise not_given_pidgin_category_Exception("not given pidgin_category")
-    return BRIDGES_CATEGORYS[pidgin_category]
+    return MAPS_CATEGORYS[pidgin_category]
 
 
 def get_sheet_stage_name(jaar_type: str) -> str:
@@ -317,21 +317,21 @@ def boat_agg_single_to_pidgin_staging(
 
 
 def etl_boat_agg_to_pidgin_acct_staging(legitimate_events: set[EventID], boat_dir: str):
-    boat_agg_single_to_pidgin_staging("bridge_acct_id", legitimate_events, boat_dir)
+    boat_agg_single_to_pidgin_staging("map_acct_id", legitimate_events, boat_dir)
 
 
 def etl_boat_agg_to_pidgin_group_staging(
     legitimate_events: set[EventID], boat_dir: str
 ):
-    boat_agg_single_to_pidgin_staging("bridge_group_id", legitimate_events, boat_dir)
+    boat_agg_single_to_pidgin_staging("map_group_id", legitimate_events, boat_dir)
 
 
 def etl_boat_agg_to_pidgin_idea_staging(legitimate_events: set[EventID], boat_dir: str):
-    boat_agg_single_to_pidgin_staging("bridge_idea", legitimate_events, boat_dir)
+    boat_agg_single_to_pidgin_staging("map_idea", legitimate_events, boat_dir)
 
 
 def etl_boat_agg_to_pidgin_road_staging(legitimate_events: set[EventID], boat_dir: str):
-    boat_agg_single_to_pidgin_staging("bridge_road", legitimate_events, boat_dir)
+    boat_agg_single_to_pidgin_staging("map_road", legitimate_events, boat_dir)
 
 
 def etl_boat_agg_to_pidgin_staging(legitimate_events: set[EventID], boat_dir: str):
@@ -416,23 +416,23 @@ class boatAggToStagingTransformer:
 
 
 def etl_pidgin_acct_staging_to_acct_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "bridge_acct_id")
+    etl_pidgin_single_staging_to_agg(boat_dir, "map_acct_id")
 
 
 def etl_pidgin_group_staging_to_group_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "bridge_group_id")
+    etl_pidgin_single_staging_to_agg(boat_dir, "map_group_id")
 
 
 def etl_pidgin_road_staging_to_road_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "bridge_road")
+    etl_pidgin_single_staging_to_agg(boat_dir, "map_road")
 
 
 def etl_pidgin_idea_staging_to_idea_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "bridge_idea")
+    etl_pidgin_single_staging_to_agg(boat_dir, "map_idea")
 
 
-def etl_pidgin_single_staging_to_agg(boat_dir: str, bridge_category: str):
-    transformer = PidginStagingToAggTransformer(boat_dir, bridge_category)
+def etl_pidgin_single_staging_to_agg(boat_dir: str, map_category: str):
+    transformer = PidginStagingToAggTransformer(boat_dir, map_category)
     transformer.transform()
 
 

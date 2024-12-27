@@ -1,5 +1,5 @@
 {
-    "bridge_acct_id": {
+    "map_acct_id": {
         "jkeys": {
             "otx_acct_id": {}
         },
@@ -10,7 +10,7 @@
             "unknown_word": {}
         }
     },
-    "bridge_group_id": {
+    "map_group_id": {
         "jkeys": {
             "otx_group_id": {}
         },
@@ -21,7 +21,7 @@
             "unknown_word": {}
         }
     },
-    "bridge_idea": {
+    "map_idea": {
         "jkeys": {
             "otx_idea": {}
         },
@@ -32,7 +32,7 @@
             "unknown_word": {}
         }
     },
-    "bridge_road": {
+    "map_road": {
         "jkeys": {
             "otx_road": {}
         },

@@ -29,11 +29,11 @@ from src.f07_deal.deal_config import (
     month_lx_str,
     hour_lx_str,
 )
-from src.f08_pidgin.bridge import (
-    groupbridge_shop,
-    acctbridge_shop,
-    ideabridge_shop,
-    roadbridge_shop,
+from src.f08_pidgin.map import (
+    groupmap_shop,
+    acctmap_shop,
+    ideamap_shop,
+    roadmap_shop,
 )
 from src.f08_pidgin.pidgin_config import get_pidgin_args_jaar_types
 from src.f08_pidgin.pidgin import (
@@ -43,13 +43,13 @@ from src.f08_pidgin.pidgin import (
     pidginable_atom_args,
 )
 from src.f08_pidgin.examples.example_pidgins import (
-    get_invalid_acctbridge,
-    get_invalid_groupbridge,
-    get_invalid_ideabridge,
-    get_clean_roadbridge,
-    get_clean_ideabridge,
-    get_swim_groupbridge,
-    get_suita_acctbridge,
+    get_invalid_acctmap,
+    get_invalid_groupmap,
+    get_invalid_ideamap,
+    get_clean_roadmap,
+    get_clean_ideamap,
+    get_swim_groupmap,
+    get_suita_acctmap,
 )
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -222,10 +222,10 @@ def test_PidginUnit_Exists():
 
     # WHEN / THEN
     assert not x_pidginunit.event_id
-    assert not x_pidginunit.groupbridge
-    assert not x_pidginunit.acctbridge
-    assert not x_pidginunit.ideabridge
-    assert not x_pidginunit.roadbridge
+    assert not x_pidginunit.groupmap
+    assert not x_pidginunit.acctmap
+    assert not x_pidginunit.ideamap
+    assert not x_pidginunit.roadmap
     assert not x_pidginunit.unknown_word
     assert not x_pidginunit.otx_wall
     assert not x_pidginunit.inx_wall
@@ -245,26 +245,26 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.unknown_word == default_unknown_word_if_None()
     assert sue_pidginunit.otx_wall == default_wall_if_None()
     assert sue_pidginunit.inx_wall == default_wall_if_None()
-    assert sue_pidginunit.groupbridge == groupbridge_shop(face_id=sue_str)
-    assert sue_pidginunit.acctbridge == acctbridge_shop(face_id=sue_str)
-    assert sue_pidginunit.ideabridge == ideabridge_shop(face_id=sue_str)
-    assert sue_pidginunit.roadbridge == roadbridge_shop(face_id=sue_str)
-    assert sue_pidginunit.acctbridge.event_id == 0
-    assert sue_pidginunit.acctbridge.unknown_word == default_unknown_word_if_None()
-    assert sue_pidginunit.acctbridge.otx_wall == default_wall_if_None()
-    assert sue_pidginunit.acctbridge.inx_wall == default_wall_if_None()
-    assert sue_pidginunit.groupbridge.event_id == 0
-    assert sue_pidginunit.groupbridge.unknown_word == default_unknown_word_if_None()
-    assert sue_pidginunit.groupbridge.otx_wall == default_wall_if_None()
-    assert sue_pidginunit.groupbridge.inx_wall == default_wall_if_None()
-    assert sue_pidginunit.ideabridge.event_id == 0
-    assert sue_pidginunit.ideabridge.unknown_word == default_unknown_word_if_None()
-    assert sue_pidginunit.ideabridge.otx_wall == default_wall_if_None()
-    assert sue_pidginunit.ideabridge.inx_wall == default_wall_if_None()
-    assert sue_pidginunit.roadbridge.event_id == 0
-    assert sue_pidginunit.roadbridge.unknown_word == default_unknown_word_if_None()
-    assert sue_pidginunit.roadbridge.otx_wall == default_wall_if_None()
-    assert sue_pidginunit.roadbridge.inx_wall == default_wall_if_None()
+    assert sue_pidginunit.groupmap == groupmap_shop(face_id=sue_str)
+    assert sue_pidginunit.acctmap == acctmap_shop(face_id=sue_str)
+    assert sue_pidginunit.ideamap == ideamap_shop(face_id=sue_str)
+    assert sue_pidginunit.roadmap == roadmap_shop(face_id=sue_str)
+    assert sue_pidginunit.acctmap.event_id == 0
+    assert sue_pidginunit.acctmap.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.acctmap.otx_wall == default_wall_if_None()
+    assert sue_pidginunit.acctmap.inx_wall == default_wall_if_None()
+    assert sue_pidginunit.groupmap.event_id == 0
+    assert sue_pidginunit.groupmap.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.groupmap.otx_wall == default_wall_if_None()
+    assert sue_pidginunit.groupmap.inx_wall == default_wall_if_None()
+    assert sue_pidginunit.ideamap.event_id == 0
+    assert sue_pidginunit.ideamap.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.ideamap.otx_wall == default_wall_if_None()
+    assert sue_pidginunit.ideamap.inx_wall == default_wall_if_None()
+    assert sue_pidginunit.roadmap.event_id == 0
+    assert sue_pidginunit.roadmap.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.roadmap.otx_wall == default_wall_if_None()
+    assert sue_pidginunit.roadmap.inx_wall == default_wall_if_None()
 
 
 def test_pidginunit_shop_ReturnsObj_scenario1():
@@ -286,39 +286,39 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     assert sue_pidginunit.otx_wall == slash_otx_wall
     assert sue_pidginunit.inx_wall == colon_inx_wall
 
-    # x_groupbridge = groupbridge_shop(
+    # x_groupmap = groupmap_shop(
     #     slash_otx_wall, colon_inx_wall, {}, y_uk, sue_str, five_event_id
     # )
-    # x_acctbridge = acctbridge_shop(
+    # x_acctmap = acctmap_shop(
     #     slash_otx_wall, colon_inx_wall, {}, y_uk, sue_str, five_event_id
     # )
-    # x_roadbridge = roadbridge_shop(
+    # x_roadmap = roadmap_shop(
     #     slash_otx_wall, colon_inx_wall, None, {}, y_uk, sue_str, five_event_id
     # )
-    # assert sue_pidginunit.groupbridge == x_groupbridge
-    # assert sue_pidginunit.acctbridge == x_acctbridge
-    # assert sue_pidginunit.roadbridge == x_roadbridge
+    # assert sue_pidginunit.groupmap == x_groupmap
+    # assert sue_pidginunit.acctmap == x_acctmap
+    # assert sue_pidginunit.roadmap == x_roadmap
 
-    assert sue_pidginunit.acctbridge.face_id == sue_str
-    assert sue_pidginunit.acctbridge.event_id == five_event_id
-    assert sue_pidginunit.acctbridge.unknown_word == y_uk
-    assert sue_pidginunit.acctbridge.otx_wall == slash_otx_wall
-    assert sue_pidginunit.acctbridge.inx_wall == colon_inx_wall
-    assert sue_pidginunit.groupbridge.face_id == sue_str
-    assert sue_pidginunit.groupbridge.event_id == five_event_id
-    assert sue_pidginunit.groupbridge.unknown_word == y_uk
-    assert sue_pidginunit.groupbridge.otx_wall == slash_otx_wall
-    assert sue_pidginunit.groupbridge.inx_wall == colon_inx_wall
-    assert sue_pidginunit.ideabridge.face_id == sue_str
-    assert sue_pidginunit.ideabridge.event_id == five_event_id
-    assert sue_pidginunit.ideabridge.unknown_word == y_uk
-    assert sue_pidginunit.ideabridge.otx_wall == slash_otx_wall
-    assert sue_pidginunit.ideabridge.inx_wall == colon_inx_wall
-    assert sue_pidginunit.roadbridge.face_id == sue_str
-    assert sue_pidginunit.roadbridge.event_id == five_event_id
-    assert sue_pidginunit.roadbridge.unknown_word == y_uk
-    assert sue_pidginunit.roadbridge.otx_wall == slash_otx_wall
-    assert sue_pidginunit.roadbridge.inx_wall == colon_inx_wall
+    assert sue_pidginunit.acctmap.face_id == sue_str
+    assert sue_pidginunit.acctmap.event_id == five_event_id
+    assert sue_pidginunit.acctmap.unknown_word == y_uk
+    assert sue_pidginunit.acctmap.otx_wall == slash_otx_wall
+    assert sue_pidginunit.acctmap.inx_wall == colon_inx_wall
+    assert sue_pidginunit.groupmap.face_id == sue_str
+    assert sue_pidginunit.groupmap.event_id == five_event_id
+    assert sue_pidginunit.groupmap.unknown_word == y_uk
+    assert sue_pidginunit.groupmap.otx_wall == slash_otx_wall
+    assert sue_pidginunit.groupmap.inx_wall == colon_inx_wall
+    assert sue_pidginunit.ideamap.face_id == sue_str
+    assert sue_pidginunit.ideamap.event_id == five_event_id
+    assert sue_pidginunit.ideamap.unknown_word == y_uk
+    assert sue_pidginunit.ideamap.otx_wall == slash_otx_wall
+    assert sue_pidginunit.ideamap.inx_wall == colon_inx_wall
+    assert sue_pidginunit.roadmap.face_id == sue_str
+    assert sue_pidginunit.roadmap.event_id == five_event_id
+    assert sue_pidginunit.roadmap.unknown_word == y_uk
+    assert sue_pidginunit.roadmap.otx_wall == slash_otx_wall
+    assert sue_pidginunit.roadmap.inx_wall == colon_inx_wall
 
 
 def test_pidginunit_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_float_nan():
@@ -347,158 +347,158 @@ def test_pidginunit_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_
     assert x_pidginunit.inx_wall == default_wall_if_None()
 
 
-def test_PidginUnit_set_bridgeunit_SetsAttr():
+def test_PidginUnit_set_mapunit_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    acctbridge = acctbridge_shop(face_id=sue_str)
-    acctbridge.set_otx2inx("Bob", "Bob of Portland")
-    assert sue_pidginunit.acctbridge != acctbridge
+    acctmap = acctmap_shop(face_id=sue_str)
+    acctmap.set_otx2inx("Bob", "Bob of Portland")
+    assert sue_pidginunit.acctmap != acctmap
 
     # WHEN
-    sue_pidginunit.set_acctbridge(acctbridge)
+    sue_pidginunit.set_acctmap(acctmap)
 
     # THEN
-    assert sue_pidginunit.acctbridge == acctbridge
+    assert sue_pidginunit.acctmap == acctmap
 
 
-def test_PidginUnit_set_bridgeunit_SetsAttr_SpecialCase_RoadUnit():
+def test_PidginUnit_set_mapunit_SetsAttr_SpecialCase_RoadUnit():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    roadbridge = roadbridge_shop(face_id=sue_str)
-    roadbridge.set_otx2inx("Bob", "Bob of Portland")
-    assert sue_pidginunit.roadbridge != roadbridge
+    roadmap = roadmap_shop(face_id=sue_str)
+    roadmap.set_otx2inx("Bob", "Bob of Portland")
+    assert sue_pidginunit.roadmap != roadmap
 
     # WHEN
-    sue_pidginunit.set_roadbridge(roadbridge)
+    sue_pidginunit.set_roadmap(roadmap)
 
     # THEN
-    assert sue_pidginunit.roadbridge == roadbridge
+    assert sue_pidginunit.roadmap == roadmap
 
 
-def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_otx_wall_IsNotSame():
+def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_otx_wall_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_otx_wall = "/"
-    acctbridge = acctbridge_shop(otx_wall=slash_otx_wall, face_id=sue_str)
-    assert sue_pidginunit.otx_wall != acctbridge.otx_wall
-    assert sue_pidginunit.acctbridge != acctbridge
+    acctmap = acctmap_shop(otx_wall=slash_otx_wall, face_id=sue_str)
+    assert sue_pidginunit.otx_wall != acctmap.otx_wall
+    assert sue_pidginunit.acctmap != acctmap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_acctbridge(acctbridge)
-    exception_str = f"set_bridgecore Error: PidginUnit otx_wall is '{sue_pidginunit.otx_wall}', BridgeCore is '{slash_otx_wall}'."
+        sue_pidginunit.set_acctmap(acctmap)
+    exception_str = f"set_mapcore Error: PidginUnit otx_wall is '{sue_pidginunit.otx_wall}', MapCore is '{slash_otx_wall}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_inx_wall_IsNotSame():
+def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_inx_wall_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_inx_wall = "/"
-    acctbridge = acctbridge_shop(inx_wall=slash_inx_wall, face_id=sue_str)
-    assert sue_pidginunit.inx_wall != acctbridge.inx_wall
-    assert sue_pidginunit.acctbridge != acctbridge
+    acctmap = acctmap_shop(inx_wall=slash_inx_wall, face_id=sue_str)
+    assert sue_pidginunit.inx_wall != acctmap.inx_wall
+    assert sue_pidginunit.acctmap != acctmap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_acctbridge(acctbridge)
-    exception_str = f"set_bridgecore Error: PidginUnit inx_wall is '{sue_pidginunit.inx_wall}', BridgeCore is '{slash_inx_wall}'."
+        sue_pidginunit.set_acctmap(acctmap)
+    exception_str = f"set_mapcore Error: PidginUnit inx_wall is '{sue_pidginunit.inx_wall}', MapCore is '{slash_inx_wall}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_unknown_word_IsNotSame():
+def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_unknown_word_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
-    acctbridge = acctbridge_shop(unknown_word=casa_unknown_word, face_id=sue_str)
-    assert sue_pidginunit.unknown_word != acctbridge.unknown_word
-    assert sue_pidginunit.acctbridge != acctbridge
+    acctmap = acctmap_shop(unknown_word=casa_unknown_word, face_id=sue_str)
+    assert sue_pidginunit.unknown_word != acctmap.unknown_word
+    assert sue_pidginunit.acctmap != acctmap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_acctbridge(acctbridge)
-    exception_str = f"set_bridgecore Error: PidginUnit unknown_word is '{sue_pidginunit.unknown_word}', BridgeCore is '{casa_unknown_word}'."
+        sue_pidginunit.set_acctmap(acctmap)
+    exception_str = f"set_mapcore Error: PidginUnit unknown_word is '{sue_pidginunit.unknown_word}', MapCore is '{casa_unknown_word}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_bridgeunit_RaisesErrorIf_bridgeunit_face_id_IsNotSame():
+def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_face_id_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
     sue_pidginunit = pidginunit_shop(sue_str)
-    acctbridge = acctbridge_shop(face_id=yao_str)
-    assert sue_pidginunit.face_id != acctbridge.face_id
-    assert sue_pidginunit.acctbridge != acctbridge
+    acctmap = acctmap_shop(face_id=yao_str)
+    assert sue_pidginunit.face_id != acctmap.face_id
+    assert sue_pidginunit.acctmap != acctmap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_acctbridge(acctbridge)
-    exception_str = f"set_bridgecore Error: PidginUnit face_id is '{sue_pidginunit.face_id}', BridgeCore is '{yao_str}'."
+        sue_pidginunit.set_acctmap(acctmap)
+    exception_str = f"set_mapcore Error: PidginUnit face_id is '{sue_pidginunit.face_id}', MapCore is '{yao_str}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_get_bridgeunit_ReturnsObj():
+def test_PidginUnit_get_mapunit_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_pu = pidginunit_shop(sue_str)
-    static_acctbridge = acctbridge_shop(face_id=sue_str)
-    static_acctbridge.set_otx2inx("Bob", "Bob of Portland")
-    sue_pu.set_acctbridge(static_acctbridge)
+    static_acctmap = acctmap_shop(face_id=sue_str)
+    static_acctmap.set_otx2inx("Bob", "Bob of Portland")
+    sue_pu.set_acctmap(static_acctmap)
 
     # WHEN / THEN
-    assert sue_pu.get_bridgeunit(type_AcctID_str()) == sue_pu.acctbridge
-    assert sue_pu.get_bridgeunit(type_GroupID_str()) == sue_pu.groupbridge
-    assert sue_pu.get_bridgeunit(type_IdeaUnit_str()) == sue_pu.ideabridge
-    assert sue_pu.get_bridgeunit(type_RoadUnit_str()) == sue_pu.roadbridge
+    assert sue_pu.get_mapunit(type_AcctID_str()) == sue_pu.acctmap
+    assert sue_pu.get_mapunit(type_GroupID_str()) == sue_pu.groupmap
+    assert sue_pu.get_mapunit(type_IdeaUnit_str()) == sue_pu.ideamap
+    assert sue_pu.get_mapunit(type_RoadUnit_str()) == sue_pu.roadmap
 
-    assert sue_pu.get_bridgeunit(type_AcctID_str()) != sue_pu.roadbridge
-    assert sue_pu.get_bridgeunit(type_GroupID_str()) != sue_pu.roadbridge
-    assert sue_pu.get_bridgeunit(type_IdeaUnit_str()) != sue_pu.roadbridge
+    assert sue_pu.get_mapunit(type_AcctID_str()) != sue_pu.roadmap
+    assert sue_pu.get_mapunit(type_GroupID_str()) != sue_pu.roadmap
+    assert sue_pu.get_mapunit(type_IdeaUnit_str()) != sue_pu.roadmap
 
 
 def test_PidginUnit_is_valid_ReturnsObj():
     # ESTABLISH
-    invalid_acctbridge = get_invalid_acctbridge()
-    invalid_groupbridge = get_invalid_groupbridge()
-    invalid_ideabridge = get_invalid_ideabridge()
-    valid_acctbridge = get_suita_acctbridge()
-    valid_groupbridge = get_swim_groupbridge()
-    valid_ideabridge = get_clean_roadbridge()
-    assert valid_acctbridge.is_valid()
-    assert valid_groupbridge.is_valid()
-    assert valid_ideabridge.is_valid()
-    assert invalid_ideabridge.is_valid() is False
-    assert invalid_groupbridge.is_valid() is False
-    assert invalid_acctbridge.is_valid() is False
+    invalid_acctmap = get_invalid_acctmap()
+    invalid_groupmap = get_invalid_groupmap()
+    invalid_ideamap = get_invalid_ideamap()
+    valid_acctmap = get_suita_acctmap()
+    valid_groupmap = get_swim_groupmap()
+    valid_ideamap = get_clean_roadmap()
+    assert valid_acctmap.is_valid()
+    assert valid_groupmap.is_valid()
+    assert valid_ideamap.is_valid()
+    assert invalid_ideamap.is_valid() is False
+    assert invalid_groupmap.is_valid() is False
+    assert invalid_acctmap.is_valid() is False
 
     # WHEN / THEN
     sue_pidginunit = pidginunit_shop("Sue")
     assert sue_pidginunit.is_valid()
-    sue_pidginunit.set_acctbridge(valid_acctbridge)
-    sue_pidginunit.set_groupbridge(valid_groupbridge)
-    sue_pidginunit.set_roadbridge(valid_ideabridge)
+    sue_pidginunit.set_acctmap(valid_acctmap)
+    sue_pidginunit.set_groupmap(valid_groupmap)
+    sue_pidginunit.set_roadmap(valid_ideamap)
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
-    sue_pidginunit.set_acctbridge(invalid_acctbridge)
+    sue_pidginunit.set_acctmap(invalid_acctmap)
     assert sue_pidginunit.is_valid() is False
-    sue_pidginunit.set_acctbridge(valid_acctbridge)
+    sue_pidginunit.set_acctmap(valid_acctmap)
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
-    sue_pidginunit.set_groupbridge(invalid_groupbridge)
+    sue_pidginunit.set_groupmap(invalid_groupmap)
     assert sue_pidginunit.is_valid() is False
-    sue_pidginunit.set_groupbridge(valid_groupbridge)
+    sue_pidginunit.set_groupmap(valid_groupmap)
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
-    sue_pidginunit.set_roadbridge(invalid_ideabridge)
+    sue_pidginunit.set_roadmap(invalid_ideamap)
     assert sue_pidginunit.is_valid() is False
-    sue_pidginunit.set_roadbridge(valid_ideabridge)
+    sue_pidginunit.set_roadmap(valid_ideamap)
     assert sue_pidginunit.is_valid()
 
 
@@ -508,14 +508,14 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_type_AcctID_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    acctbridge = zia_pidginunit.get_acctbridge()
-    assert acctbridge.otx2inx_exists(sue_otx, sue_inx) is False
+    acctmap = zia_pidginunit.get_acctmap()
+    assert acctmap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
 
     # THEN
-    assert acctbridge.otx2inx_exists(sue_otx, sue_inx)
+    assert acctmap.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_type_RoadUnit_str():
@@ -524,14 +524,14 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_type_RoadUnit_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    roadbridge = zia_pidginunit.get_roadbridge()
-    assert roadbridge.otx2inx_exists(sue_otx, sue_inx) is False
+    roadmap = zia_pidginunit.get_roadmap()
+    assert roadmap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_otx2inx(type_RoadUnit_str(), sue_otx, sue_inx)
 
     # THEN
-    assert roadbridge.otx2inx_exists(sue_otx, sue_inx)
+    assert roadmap.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_set_otx2inx_SetsAttr_Scenario2_type_IdeaUnit_str():
@@ -540,14 +540,14 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario2_type_IdeaUnit_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    roadbridge = zia_pidginunit.get_ideabridge()
-    assert roadbridge.otx2inx_exists(sue_otx, sue_inx) is False
+    roadmap = zia_pidginunit.get_ideamap()
+    assert roadmap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_otx2inx(type_IdeaUnit_str(), sue_otx, sue_inx)
 
     # THEN
-    assert roadbridge.otx2inx_exists(sue_otx, sue_inx)
+    assert roadmap.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_otx2inx_exists_ReturnsObj():
@@ -607,14 +607,14 @@ def test_PidginUnit_set_idea_SetsAttr_Scenario1_type_RoadUnit_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    roadbridge = zia_pidginunit.get_roadbridge()
-    assert roadbridge.idea_exists(sue_otx, sue_inx) is False
+    roadmap = zia_pidginunit.get_roadmap()
+    assert roadmap.idea_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_idea(sue_otx, sue_inx)
 
     # THEN
-    assert roadbridge.idea_exists(sue_otx, sue_inx)
+    assert roadmap.idea_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_idea_exists_ReturnsObj():

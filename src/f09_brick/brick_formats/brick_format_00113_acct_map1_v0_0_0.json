@@ -12,19 +12,19 @@
         "deal_id": {
             "otx_key": true
         },
-        "inx_idea": {
+        "inx_acct_id": {
             "otx_key": false
         },
-        "otx_idea": {
+        "otx_acct_id": {
             "otx_key": true
         },
         "owner_id": {
             "otx_key": true
         }
     },
-    "brick_number": "br00116",
+    "brick_number": "br00113",
     "categorys": [
-        "bridge_idea",
+        "map_acct_id",
         "bud_acctunit"
     ]
 }
