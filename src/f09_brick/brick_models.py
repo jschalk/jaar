@@ -19,7 +19,7 @@ class br00000AbstractTable(Base):
     penny = Column(Float)
     respect_bit = Column(Float)
     wall = Column(String)
-    timeline_label = Column(String)
+    timeline_lx = Column(String)
     yr1_jan1_offset = Column(Integer)
 
 
@@ -51,7 +51,7 @@ class br00003AbstractTable(Base):
     event_id = Column(Integer, primary_key=True)
     cumlative_minute = Column(Integer)
     deal_id = Column(String)
-    hour_label = Column(String)
+    hour_lx = Column(String)
 
 
 class br00004AbstractTable(Base):
@@ -60,7 +60,7 @@ class br00004AbstractTable(Base):
     event_id = Column(Integer, primary_key=True)
     cumlative_day = Column(Integer)
     deal_id = Column(String)
-    month_label = Column(String)
+    month_lx = Column(String)
 
 
 class br00005AbstractTable(Base):
@@ -69,7 +69,7 @@ class br00005AbstractTable(Base):
     event_id = Column(Integer, primary_key=True)
     weekday_order = Column(Integer)
     deal_id = Column(String)
-    weekday_label = Column(String)
+    weekday_lx = Column(String)
 
 
 class br00011AbstractTable(Base):
@@ -96,7 +96,7 @@ class br00013AbstractTable(Base):
     face_id = Column(String, primary_key=True)
     event_id = Column(Integer, primary_key=True)
     deal_id = Column(String)
-    label = Column(String)
+    lx = Column(String)
     mass = Column(Float)
     owner_id = Column(String)
     parent_road = Column(String)
@@ -113,7 +113,7 @@ class br00019AbstractTable(Base):
     denom = Column(Float)
     deal_id = Column(String)
     gogo_want = Column(Float)
-    label = Column(String)
+    lx = Column(String)
     morph = Column(Integer)
     numor = Column(Float)
     owner_id = Column(String)
@@ -224,7 +224,7 @@ class br00028AbstractTable(Base):
     denom = Column(Float)
     deal_id = Column(String)
     gogo_want = Column(Float)
-    label = Column(String)
+    lx = Column(String)
     mass = Column(Float)
     morph = Column(Integer)
     numor = Column(Float)
@@ -258,7 +258,7 @@ class br00036AbstractTable(Base):
     event_id = Column(Integer, primary_key=True)
     deal_id = Column(String)
     healer_id = Column(String)
-    label = Column(String)
+    lx = Column(String)
     owner_id = Column(String)
     parent_road = Column(String)
     problem_bool = Column(Integer)

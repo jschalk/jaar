@@ -323,7 +323,7 @@ class DeltaUnit:
             insert_itemunit = after_bud.get_item_obj(insert_item_road)
             x_atomunit = atomunit_shop("bud_itemunit", atom_insert())
             x_atomunit.set_jkey("parent_road", insert_itemunit._parent_road)
-            x_atomunit.set_jkey("label", insert_itemunit._label)
+            x_atomunit.set_jkey("lx", insert_itemunit._lx)
             x_atomunit.set_jvalue("addin", insert_itemunit.addin)
             x_atomunit.set_jvalue("begin", insert_itemunit.begin)
             x_atomunit.set_jvalue("close", insert_itemunit.close)
@@ -364,7 +364,7 @@ class DeltaUnit:
             if jvalues_different("bud_itemunit", before_itemunit, after_itemunit):
                 x_atomunit = atomunit_shop("bud_itemunit", atom_update())
                 x_atomunit.set_jkey("parent_road", after_itemunit._parent_road)
-                x_atomunit.set_jkey("label", after_itemunit._label)
+                x_atomunit.set_jkey("lx", after_itemunit._lx)
                 if before_itemunit.addin != after_itemunit.addin:
                     x_atomunit.set_jvalue("addin", after_itemunit.addin)
                 if before_itemunit.begin != after_itemunit.begin:
@@ -491,10 +491,10 @@ class DeltaUnit:
     def add_atomunit_item_deletes(self, before_bud: BudUnit, delete_item_roads: set):
         for delete_item_road in delete_item_roads:
             x_parent_road = get_parent_road(delete_item_road, before_bud._wall)
-            x_label = get_terminus_idea(delete_item_road, before_bud._wall)
+            x_lx = get_terminus_idea(delete_item_road, before_bud._wall)
             x_atomunit = atomunit_shop("bud_itemunit", atom_delete())
             x_atomunit.set_jkey("parent_road", x_parent_road)
-            x_atomunit.set_jkey("label", x_label)
+            x_atomunit.set_jkey("lx", x_lx)
             self.set_atomunit(x_atomunit)
 
             delete_itemunit = before_bud.get_item_obj(delete_item_road)

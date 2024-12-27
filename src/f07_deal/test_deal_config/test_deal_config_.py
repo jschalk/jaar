@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f03_chrono.chrono import (
     c400_number_str,
-    timeline_label_str,
+    timeline_lx_str,
     yr1_jan1_offset_str,
     monthday_distortion_str,
 )
@@ -31,11 +31,11 @@ from src.f07_deal.deal_config import (
     get_deal_args_category_mapping,
     current_time_str,
     amount_str,
-    month_label_str,
-    hour_label_str,
+    month_lx_str,
+    hour_lx_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_label_str,
+    weekday_lx_str,
     weekday_order_str,
     dealunit_str,
     deal_purviewlog_str,
@@ -53,11 +53,11 @@ from os import getcwd as os_getcwd
 def test_str_functions_ReturnsObj():
     assert current_time_str() == "current_time"
     assert amount_str() == "amount"
-    assert month_label_str() == "month_label"
-    assert hour_label_str() == "hour_label"
+    assert month_lx_str() == "month_lx"
+    assert hour_lx_str() == "hour_lx"
     assert cumlative_minute_str() == "cumlative_minute"
     assert cumlative_day_str() == "cumlative_day"
-    assert weekday_label_str() == "weekday_label"
+    assert weekday_lx_str() == "weekday_lx"
     assert weekday_order_str() == "weekday_order"
     assert dealunit_str() == "dealunit"
     assert deal_purviewlog_str() == "deal_purviewlog"
@@ -116,7 +116,7 @@ def test_get_deal_config_dict_ReturnsObj():
         penny_str(),
         respect_bit_str(),
         "wall",
-        timeline_label_str(),
+        timeline_lx_str(),
         yr1_jan1_offset_str(),
     }
     print(f"{dealunit_dict.get(jvalues_str()).keys()=}")

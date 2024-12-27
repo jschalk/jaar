@@ -23,7 +23,7 @@ from src.f04_gift.atom_config import (
     team_id_str,
     healer_id_str,
     parent_road_str,
-    label_str,
+    lx_str,
     pledge_str,
     begin_str,
     close_str,
@@ -393,12 +393,12 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_delete():
     x_keylist = [atom_delete(), bud_itemunit_str(), ball_road, street_str]
     street_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == ball_road
-    assert street_atomunit.get_value(label_str()) == street_str
+    assert street_atomunit.get_value(lx_str()) == street_str
 
     x_keylist = [atom_delete(), bud_itemunit_str(), sports_road, ball_str]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == sports_road
-    assert ball_atomunit.get_value(label_str()) == ball_str
+    assert ball_atomunit.get_value(lx_str()) == ball_str
 
     print(f"{get_atomunit_total_count(sue_deltaunit)=}")
     assert get_atomunit_total_count(sue_deltaunit) == 2
@@ -447,7 +447,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_insert():
     x_keylist = [atom_insert(), bud_itemunit_str(), sports_road, disc_str]
     street_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == sports_road
-    assert street_atomunit.get_value(label_str()) == disc_str
+    assert street_atomunit.get_value(lx_str()) == disc_str
 
     x_keylist = [
         atom_insert(),
@@ -456,7 +456,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_insert():
         music_str,
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value(label_str()) == music_str
+    assert ball_atomunit.get_value(lx_str()) == music_str
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._deal_id
     assert ball_atomunit.get_value(begin_str()) == music_begin
     assert ball_atomunit.get_value(close_str()) == music_close
@@ -516,7 +516,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_update():
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._deal_id
-    assert ball_atomunit.get_value(label_str()) == music_str
+    assert ball_atomunit.get_value(lx_str()) == music_str
     assert ball_atomunit.get_value(begin_str()) == after_music_begin
     assert ball_atomunit.get_value(close_str()) == after_music_close
     assert ball_atomunit.get_value(mass_str()) == after_music_mass

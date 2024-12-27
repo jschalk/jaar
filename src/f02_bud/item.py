@@ -16,7 +16,7 @@ from src.f01_road.road import (
     RoadUnit,
     IdeaUnit,
     is_sub_road,
-    get_default_deal_id_ideaunit as root_label,
+    get_default_deal_id_ideaunit as root_lx,
     all_roadunits_between,
     create_road as road_create_road,
     default_wall_if_None,
@@ -198,7 +198,7 @@ def itemattrholder_shop(
 
 @dataclass
 class ItemUnit:
-    _label: IdeaUnit = None
+    _lx: IdeaUnit = None
     mass: int = None
     _parent_road: RoadUnit = None
     _root: bool = None
@@ -364,17 +364,17 @@ class ItemUnit:
             both_in_range = x_gogo <= x_item._gogo_calc and x_stop >= x_item._stop_calc
 
             if x_gogo_in_range or x_stop_in_range or both_in_range:
-                x_dict[x_item._label] = x_item
+                x_dict[x_item._lx] = x_item
         return x_dict
 
     def get_obj_key(self) -> IdeaUnit:
-        return self._label
+        return self._lx
 
     def get_road(self) -> RoadUnit:
         if self._parent_road in (None, ""):
-            return road_create_road(self._label, wall=self._wall)
+            return road_create_road(self._lx, wall=self._wall)
         else:
-            return road_create_road(self._parent_road, self._label, wall=self._wall)
+            return road_create_road(self._parent_road, self._lx, wall=self._wall)
 
     def clear_descendant_pledge_count(self):
         self._descendant_pledge_count = None
@@ -477,21 +477,21 @@ class ItemUnit:
     def clear_awardlines(self):
         self._awardlines = {}
 
-    def set_label(self, _label: str):
+    def set_lx(self, _lx: str):
         if (
             self._root
-            and _label is not None
-            and _label != self._bud_deal_id
+            and _lx is not None
+            and _lx != self._bud_deal_id
             and self._bud_deal_id is not None
         ):
             raise Item_root_IdeaNotEmptyException(
                 f"Cannot set itemroot to string different than '{self._bud_deal_id}'"
             )
         elif self._root and self._bud_deal_id is None:
-            self._label = root_label()
-        # elif _label is not None:
+            self._lx = root_lx()
+        # elif _lx is not None:
         else:
-            self._label = _label
+            self._lx = _lx
 
     def set_wall(self, new_wall: str):
         old_wall = deepcopy(self._wall)
@@ -698,22 +698,22 @@ class ItemUnit:
         reason_unit.del_premise(premise=premise)
 
     def add_kid(self, item_kid):
-        self._kids[item_kid._label] = item_kid
+        self._kids[item_kid._lx] = item_kid
         self._kids = dict(sorted(self._kids.items()))
 
-    def get_kid(self, item_kid_label: IdeaUnit, if_missing_create=False):
+    def get_kid(self, item_kid_lx: IdeaUnit, if_missing_create=False):
         if if_missing_create is False:
-            return self._kids.get(item_kid_label)
+            return self._kids.get(item_kid_lx)
         try:
-            return self._kids[item_kid_label]
+            return self._kids[item_kid_lx]
         except Exception:
             KeyError
-            self.add_kid(itemunit_shop(item_kid_label))
-            return_item = self._kids.get(item_kid_label)
+            self.add_kid(itemunit_shop(item_kid_lx))
+            return_item = self._kids.get(item_kid_lx)
         return return_item
 
-    def del_kid(self, item_kid_label: IdeaUnit):
-        self._kids.pop(item_kid_label)
+    def del_kid(self, item_kid_lx: IdeaUnit):
+        self._kids.pop(item_kid_lx)
 
     def clear_kids(self):
         self._kids = {}
@@ -877,8 +877,8 @@ class ItemUnit:
     def get_dict(self) -> dict[str, str]:
         x_dict = {"mass": self.mass}
 
-        if self._label is not None:
-            x_dict["_label"] = self._label
+        if self._lx is not None:
+            x_dict["_lx"] = self._lx
         if self._uid is not None:
             x_dict["_uid"] = self._uid
         if self._kids not in [{}, None]:
@@ -953,7 +953,7 @@ class ItemUnit:
 
 
 def itemunit_shop(
-    _label: IdeaUnit = None,
+    _lx: IdeaUnit = None,
     _uid: int = None,  # Calculated field?
     _parent_road: RoadUnit = None,
     _kids: dict = None,
@@ -997,11 +997,11 @@ def itemunit_shop(
     _wall: str = None,
     _healerlink_ratio: float = None,
 ) -> ItemUnit:
-    _bud_deal_id = root_label() if _bud_deal_id is None else _bud_deal_id
+    _bud_deal_id = root_lx() if _bud_deal_id is None else _bud_deal_id
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_itemkid = ItemUnit(
-        _label=None,
+        _lx=None,
         _uid=_uid,
         _parent_road=_parent_road,
         _kids=get_empty_dict_if_None(_kids),
@@ -1046,9 +1046,9 @@ def itemunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_itemkid._root:
-        x_itemkid.set_label(_label=_bud_deal_id)
+        x_itemkid.set_lx(_lx=_bud_deal_id)
     else:
-        x_itemkid.set_label(_label=_label)
+        x_itemkid.set_lx(_lx=_lx)
     x_itemkid.set_teamunit_empty_if_None()
     x_itemkid.set_originunit_empty_if_None()
     return x_itemkid

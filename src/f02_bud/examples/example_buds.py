@@ -400,7 +400,7 @@ def from_list_get_active(
 
     active = temp_item._active
     print(
-        f"Set active: {item._label=} {active} {active_true_count=} {active_false_count=}"
+        f"Set active: {item._lx=} {active} {active_true_count=} {active_false_count=}"
     )
 
     return active

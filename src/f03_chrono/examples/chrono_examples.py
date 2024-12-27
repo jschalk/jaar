@@ -11,7 +11,7 @@ from src.f03_chrono.chrono import (
     hours_config_str,
     weekdays_config_str,
     months_config_str,
-    timeline_label_str,
+    timeline_lx_str,
     yr1_jan1_offset_str,
     c400_number_str,
     chronounit_shop,
@@ -44,8 +44,8 @@ def get_squirt_config() -> dict:
     return get_example_timeline_config("squirt")
 
 
-def get_example_timeline_config(timeline_label: str) -> dict:
-    x_file_name = f"timeline_config_{timeline_label}.json"
+def get_example_timeline_config(timeline_lx: str) -> dict:
+    x_file_name = f"timeline_config_{timeline_lx}.json"
     return get_dict_from_json(open_file(chrono_examples_dir(), x_file_name))
 
 
@@ -95,10 +95,10 @@ def creg_weekday_itemunits() -> dict[str, ItemUnit]:
 
 
 def get_cregtime_str():
-    return get_creg_config().get(timeline_label_str())
+    return get_creg_config().get(timeline_lx_str())
 
 
-def creg_hour_label(x_int: int) -> str:
+def creg_hour_lx(x_int: int) -> str:
     return creg_hours_list()[x_int][0]
 
 

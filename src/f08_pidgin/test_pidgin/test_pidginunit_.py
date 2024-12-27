@@ -1,6 +1,6 @@
 from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.road import default_wall_if_None
-from src.f03_chrono.chrono import timeline_label_str
+from src.f03_chrono.chrono import timeline_lx_str
 from src.f04_gift.atom_config import (
     get_atom_args_jaar_types,
     type_AcctID_str,
@@ -15,7 +15,7 @@ from src.f04_gift.atom_config import (
     fund_coin_str,
     healer_id_str,
     group_id_str,
-    label_str,
+    lx_str,
     parent_road_str,
     penny_str,
     owner_id_str,
@@ -25,9 +25,9 @@ from src.f04_gift.atom_config import (
 )
 from src.f07_deal.deal_config import (
     get_deal_args_jaar_types,
-    weekday_label_str,
-    month_label_str,
-    hour_label_str,
+    weekday_lx_str,
+    month_lx_str,
+    hour_lx_str,
 )
 from src.f08_pidgin.bridge import (
     groupbridge_shop,
@@ -92,11 +92,11 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("gogo_want") == "float"
     assert pidgin_args_jaar_types.get("group_id") == type_GroupID_str()
     assert pidgin_args_jaar_types.get("healer_id") == type_GroupID_str()
-    assert pidgin_args_jaar_types.get("hour_label") == type_IdeaUnit_str()
-    assert pidgin_args_jaar_types.get("label") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("hour_lx") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("lx") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("mass") == "int"
     assert pidgin_args_jaar_types.get("max_tree_traverse") == "int"
-    assert pidgin_args_jaar_types.get("month_label") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("month_lx") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("monthday_distortion") == "int"
     assert pidgin_args_jaar_types.get("morph") == "bool"
     assert pidgin_args_jaar_types.get("need") == type_RoadUnit_str()
@@ -118,8 +118,8 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("tally") == "int"
     assert pidgin_args_jaar_types.get("team_id") == type_GroupID_str()
     assert pidgin_args_jaar_types.get("time_id") == "TimeLinePoint"
-    assert pidgin_args_jaar_types.get("timeline_label") == type_IdeaUnit_str()
-    assert pidgin_args_jaar_types.get("weekday_label") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("timeline_lx") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("weekday_lx") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("weekday_order") == "int"
     assert pidgin_args_jaar_types.get("wall") == "str"
     assert pidgin_args_jaar_types.get("yr1_jan1_offset") == "int"
@@ -191,17 +191,17 @@ def test_pidginable_atom_args_ReturnsObj():
         deal_id_str(),
         group_id_str(),
         healer_id_str(),
-        hour_label_str(),
-        label_str(),
-        month_label_str(),
+        hour_lx_str(),
+        lx_str(),
+        month_lx_str(),
         parent_road_str(),
         "pick",
         "need",
         owner_id_str(),
         road_str(),
         team_id_str(),
-        timeline_label_str(),
-        weekday_label_str(),
+        timeline_lx_str(),
+        weekday_lx_str(),
     }
 
     print(f"{pidginable_jaar_types()=}")

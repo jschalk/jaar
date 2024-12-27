@@ -136,7 +136,7 @@ def get_deal_voices_agenda_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
         "fund_ratio",
-        "_label",
+        "_lx",
         "_parent_road",
         "begin",
         "close",
@@ -155,7 +155,7 @@ def get_deal_voices_agenda_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
             values=[
                 df.owner_id,
                 df.fund_ratio,
-                df._label,
+                df._lx,
                 df._parent_road,
                 df.begin,
                 df.close,
@@ -195,7 +195,7 @@ def get_deal_finals_agenda_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
         "fund_ratio",
-        "_label",
+        "_lx",
         "_parent_road",
         "begin",
         "close",
@@ -214,7 +214,7 @@ def get_deal_finals_agenda_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
             values=[
                 df.owner_id,
                 df.fund_ratio,
-                df._label,
+                df._lx,
                 df._parent_road,
                 df.begin,
                 df.close,

@@ -11,12 +11,12 @@ def amount_str() -> str:
     return "amount"
 
 
-def month_label_str() -> str:
-    return "month_label"
+def month_lx_str() -> str:
+    return "month_lx"
 
 
-def hour_label_str() -> str:
-    return "hour_label"
+def hour_lx_str() -> str:
+    return "hour_lx"
 
 
 def cumlative_minute_str() -> str:
@@ -27,8 +27,8 @@ def cumlative_day_str() -> str:
     return "cumlative_day"
 
 
-def weekday_label_str() -> str:
-    return "weekday_label"
+def weekday_lx_str() -> str:
+    return "weekday_lx"
 
 
 def weekday_order_str() -> str:
@@ -125,18 +125,18 @@ def get_deal_args_jaar_types() -> dict[str, str]:
         "cumlative_day": "int",
         "cumlative_minute": "int",
         "current_time": "int",
-        "hour_label": "IdeaUnit",
+        "hour_lx": "IdeaUnit",
         "deal_id": "IdeaUnit",
         "fund_coin": "float",
-        "month_label": "IdeaUnit",
+        "month_lx": "IdeaUnit",
         "monthday_distortion": "int",
         "penny": "float",
         "owner_id": "AcctID",
         "quota": "int",
         "respect_bit": "float",
         "time_id": "TimeLinePoint",
-        "timeline_label": "IdeaUnit",
-        "weekday_label": "IdeaUnit",
+        "timeline_lx": "IdeaUnit",
+        "weekday_lx": "IdeaUnit",
         "weekday_order": "int",
         "wall": "str",
         "yr1_jan1_offset": "int",

@@ -37,7 +37,7 @@ from src.f03_chrono.examples.chrono_examples import (
     get_thu,
     get_fri,
     get_sat,
-    creg_hour_label,
+    creg_hour_lx,
     cregtime_itemunit,
     creg_weekday_itemunits,
     creg_str,
@@ -367,30 +367,30 @@ def test_add_time_creg_itemunit_ReturnsObjWith_hours():
     creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
     day_road = sue_budunit.make_road(creg_road, day_str())
     hour_road = sue_budunit.make_road(day_road, hour_str())
-    hr_00_road = sue_budunit.make_road(day_road, creg_hour_label(0))
-    hr_01_road = sue_budunit.make_road(day_road, creg_hour_label(1))
-    hr_02_road = sue_budunit.make_road(day_road, creg_hour_label(2))
-    hr_03_road = sue_budunit.make_road(day_road, creg_hour_label(3))
-    hr_04_road = sue_budunit.make_road(day_road, creg_hour_label(4))
-    hr_05_road = sue_budunit.make_road(day_road, creg_hour_label(5))
-    hr_06_road = sue_budunit.make_road(day_road, creg_hour_label(6))
-    hr_07_road = sue_budunit.make_road(day_road, creg_hour_label(7))
-    hr_08_road = sue_budunit.make_road(day_road, creg_hour_label(8))
-    hr_09_road = sue_budunit.make_road(day_road, creg_hour_label(9))
-    hr_10_road = sue_budunit.make_road(day_road, creg_hour_label(10))
-    hr_11_road = sue_budunit.make_road(day_road, creg_hour_label(11))
-    hr_12_road = sue_budunit.make_road(day_road, creg_hour_label(12))
-    hr_13_road = sue_budunit.make_road(day_road, creg_hour_label(13))
-    hr_14_road = sue_budunit.make_road(day_road, creg_hour_label(14))
-    hr_15_road = sue_budunit.make_road(day_road, creg_hour_label(15))
-    hr_16_road = sue_budunit.make_road(day_road, creg_hour_label(16))
-    hr_17_road = sue_budunit.make_road(day_road, creg_hour_label(17))
-    hr_18_road = sue_budunit.make_road(day_road, creg_hour_label(18))
-    hr_19_road = sue_budunit.make_road(day_road, creg_hour_label(19))
-    hr_20_road = sue_budunit.make_road(day_road, creg_hour_label(20))
-    hr_21_road = sue_budunit.make_road(day_road, creg_hour_label(21))
-    hr_22_road = sue_budunit.make_road(day_road, creg_hour_label(22))
-    hr_23_road = sue_budunit.make_road(day_road, creg_hour_label(23))
+    hr_00_road = sue_budunit.make_road(day_road, creg_hour_lx(0))
+    hr_01_road = sue_budunit.make_road(day_road, creg_hour_lx(1))
+    hr_02_road = sue_budunit.make_road(day_road, creg_hour_lx(2))
+    hr_03_road = sue_budunit.make_road(day_road, creg_hour_lx(3))
+    hr_04_road = sue_budunit.make_road(day_road, creg_hour_lx(4))
+    hr_05_road = sue_budunit.make_road(day_road, creg_hour_lx(5))
+    hr_06_road = sue_budunit.make_road(day_road, creg_hour_lx(6))
+    hr_07_road = sue_budunit.make_road(day_road, creg_hour_lx(7))
+    hr_08_road = sue_budunit.make_road(day_road, creg_hour_lx(8))
+    hr_09_road = sue_budunit.make_road(day_road, creg_hour_lx(9))
+    hr_10_road = sue_budunit.make_road(day_road, creg_hour_lx(10))
+    hr_11_road = sue_budunit.make_road(day_road, creg_hour_lx(11))
+    hr_12_road = sue_budunit.make_road(day_road, creg_hour_lx(12))
+    hr_13_road = sue_budunit.make_road(day_road, creg_hour_lx(13))
+    hr_14_road = sue_budunit.make_road(day_road, creg_hour_lx(14))
+    hr_15_road = sue_budunit.make_road(day_road, creg_hour_lx(15))
+    hr_16_road = sue_budunit.make_road(day_road, creg_hour_lx(16))
+    hr_17_road = sue_budunit.make_road(day_road, creg_hour_lx(17))
+    hr_18_road = sue_budunit.make_road(day_road, creg_hour_lx(18))
+    hr_19_road = sue_budunit.make_road(day_road, creg_hour_lx(19))
+    hr_20_road = sue_budunit.make_road(day_road, creg_hour_lx(20))
+    hr_21_road = sue_budunit.make_road(day_road, creg_hour_lx(21))
+    hr_22_road = sue_budunit.make_road(day_road, creg_hour_lx(22))
+    hr_23_road = sue_budunit.make_road(day_road, creg_hour_lx(23))
 
     print(f"{day_road=}")
     print(f"{hr_00_road=}")
@@ -667,7 +667,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
 
     print(f"{sweep_item.get_road()=}")
     assert sue_bud.get_item_obj(sweep_road) is not None
-    assert sue_bud.get_item_obj(sweep_road)._label == sweep_str
+    assert sue_bud.get_item_obj(sweep_road)._lx == sweep_str
     assert sue_bud.get_item_obj(sweep_road).pledge
     assert len(sue_bud.get_item_obj(sweep_road).reasonunits) == 2
     assert sue_bud.get_item_obj(clean_things_road) is not None
@@ -720,8 +720,8 @@ def test_ItemCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     # )
     # print(f"{laundry_reasonheir.base=} {laundry_premise=}")
     # for x_itemunit in sue_bud._item_dict.values():
-    #     if x_itemunit._label in [laundry_str]:
-    #         print(f"{x_itemunit._label=} {x_itemunit.begin=} {x_itemunit.close=}")
+    #     if x_itemunit._lx in [laundry_str]:
+    #         print(f"{x_itemunit._lx=} {x_itemunit.begin=} {x_itemunit.close=}")
     #         print(f"{x_itemunit._kids.keys()=}")
 
     # WHEN
@@ -742,8 +742,8 @@ def test_ItemCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     #     f"{laundry_item._active=} {laundry_premise.nigh=} {laundry_factheir.fnigh % 10080=}"
     # )
     # for x_itemunit in sue_bud._item_dict.values():
-    #     if x_itemunit._label in [laundry_str]:
-    #         print(f"{x_itemunit._label=} {x_itemunit.begin=} {x_itemunit.close=}")
+    #     if x_itemunit._lx in [laundry_str]:
+    #         print(f"{x_itemunit._lx=} {x_itemunit.begin=} {x_itemunit.close=}")
     #         print(f"{x_itemunit._kids.keys()=}")
     #         creg_factheir = x_itemunit._factheirs.get(cregtime_road)
     #         print(f"{creg_factheir.fopen % 10080=}")

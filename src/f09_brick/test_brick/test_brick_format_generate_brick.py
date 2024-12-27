@@ -12,7 +12,7 @@ from src.f04_gift.atom_config import (
     group_id_str,
     parent_road_str,
     pledge_str,
-    label_str,
+    lx_str,
     mass_str,
     debtit_belief_str,
     credit_belief_str,
@@ -166,14 +166,14 @@ def test_make_deltaunit_Arg_brick_format_00013_itemunit_v0_0_0():
     # THEN
     casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     casa_atomunit.set_arg(parent_road_str(), sue_budunit._deal_id)
-    casa_atomunit.set_arg(label_str(), casa_str)
+    casa_atomunit.set_arg(lx_str(), casa_str)
     casa_atomunit.set_arg(pledge_str(), False)
     casa_atomunit.set_arg(mass_str(), casa_mass)
     print(f"{casa_atomunit=}")
     assert casa_atomunit.get_value(mass_str()) == casa_mass
     clean_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     clean_atomunit.set_arg(parent_road_str(), casa_road)
-    clean_atomunit.set_arg(label_str(), clean_str)
+    clean_atomunit.set_arg(lx_str(), clean_str)
     clean_atomunit.set_arg(pledge_str(), True)
     clean_atomunit.set_arg(mass_str(), 1)
     assert itemunit_changunit.atomunit_exists(casa_atomunit)
@@ -221,14 +221,14 @@ def test_make_deltaunit_Arg_brick_format_00013_itemunit_v0_0_0():
     # THEN
     casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     casa_atomunit.set_arg(parent_road_str(), sue_budunit._deal_id)
-    casa_atomunit.set_arg(label_str(), casa_str)
+    casa_atomunit.set_arg(lx_str(), casa_str)
     casa_atomunit.set_arg(pledge_str(), False)
     casa_atomunit.set_arg(mass_str(), casa_mass)
     print(f"{casa_atomunit=}")
     assert casa_atomunit.get_value(mass_str()) == casa_mass
     clean_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     clean_atomunit.set_arg(parent_road_str(), casa_road)
-    clean_atomunit.set_arg(label_str(), clean_str)
+    clean_atomunit.set_arg(lx_str(), clean_str)
     clean_atomunit.set_arg(pledge_str(), True)
     clean_atomunit.set_arg(mass_str(), 1)
     assert itemunit_changunit.atomunit_exists(casa_atomunit)

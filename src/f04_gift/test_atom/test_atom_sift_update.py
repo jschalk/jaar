@@ -21,7 +21,7 @@ from src.f04_gift.atom_config import (
     group_id_str,
     healer_id_str,
     parent_road_str,
-    label_str,
+    lx_str,
     road_str,
     base_str,
     debtit_belief_str,
@@ -51,7 +51,7 @@ def test_sift_atom_ReturnsNoneIfGivenAtomUnitIsUPDATE():
     sue_bud.add_item(casa_road)
     casa_atom = atomunit_shop(bud_itemunit_str(), atom_update())
     casa_atom.set_arg(parent_road_str(), sue_bud._deal_id)
-    casa_atom.set_arg(label_str(), casa_str)
+    casa_atom.set_arg(lx_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN
     new_casa_atom = sift_atomunit(sue_bud, casa_atom)
@@ -171,7 +171,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_itemunit():
     sue_stop_want = 107
     old_casa_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     old_casa_atom.set_arg(parent_road_str(), sue_bud._deal_id)
-    old_casa_atom.set_arg(label_str(), casa_str)
+    old_casa_atom.set_arg(lx_str(), casa_str)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)
     old_casa_atom.set_arg(close_str(), sue_close)

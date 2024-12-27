@@ -205,7 +205,7 @@ class BudUnit:
         if self._wall != new_wall:
             for x_item_road in self._item_dict.keys():
                 if is_string_in_road(new_wall, x_item_road):
-                    exception_str = f"Cannot modify wall to '{new_wall}' because it exists an item label '{x_item_road}'"
+                    exception_str = f"Cannot modify wall to '{new_wall}' because it exists an item lx '{x_item_road}'"
                     raise NewWallException(exception_str)
 
             # modify all road attributes in itemunits
@@ -219,7 +219,7 @@ class BudUnit:
         for item_obj in self._item_dict.values():
             item_obj._bud_deal_id = deal_id
         self._deal_id = deal_id
-        self.edit_item_label(old_road=old_deal_id, new_label=self._deal_id)
+        self.edit_item_lx(old_road=old_deal_id, new_lx=self._deal_id)
         self.settle_bud()
 
     def set_max_tree_traverse(self, x_int: int):
@@ -569,9 +569,9 @@ class BudUnit:
     def add_item(
         self, item_road: RoadUnit, mass: float = None, pledge: bool = None
     ) -> ItemUnit:
-        x_label = get_terminus_idea(item_road, self._wall)
+        x_lx = get_terminus_idea(item_road, self._wall)
         x_parent_road = get_parent_road(item_road, self._wall)
-        x_itemunit = itemunit_shop(x_label, mass=mass)
+        x_itemunit = itemunit_shop(x_lx, mass=mass)
         if pledge:
             x_itemunit.pledge = True
         self.set_item(x_itemunit, x_parent_road)
@@ -606,12 +606,12 @@ class BudUnit:
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        if IdeaUnit(item_kid._label).is_idea(self._wall) is False:
-            x_str = f"set_item failed because '{item_kid._label}' is not a IdeaUnit."
+        if IdeaUnit(item_kid._lx).is_idea(self._wall) is False:
+            x_str = f"set_item failed because '{item_kid._lx}' is not a IdeaUnit."
             raise InvalidBudException(x_str)
 
         x_root_idea = get_root_idea_from_road(parent_road, self._wall)
-        if self._itemroot._label != x_root_idea:
+        if self._itemroot._lx != x_root_idea:
             exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root idea"
             raise InvalidBudException(exception_str)
 
@@ -633,14 +633,14 @@ class BudUnit:
             parent_road_item
         parent_road_item.add_kid(item_kid)
 
-        kid_road = self.make_road(parent_road, item_kid._label)
+        kid_road = self.make_road(parent_road, item_kid._lx)
         if adoptees is not None:
             mass_sum = 0
-            for adoptee_label in adoptees:
-                adoptee_road = self.make_road(parent_road, adoptee_label)
+            for adoptee_lx in adoptees:
+                adoptee_road = self.make_road(parent_road, adoptee_lx)
                 adoptee_item = self.get_item_obj(adoptee_road)
                 mass_sum += adoptee_item.mass
-                new_adoptee_parent_road = self.make_road(kid_road, adoptee_label)
+                new_adoptee_parent_road = self.make_road(kid_road, adoptee_lx)
                 self.set_item(adoptee_item, new_adoptee_parent_road)
                 self.edit_item_attr(new_adoptee_parent_road, mass=adoptee_item.mass)
                 self.del_item_obj(adoptee_road)
@@ -703,35 +703,35 @@ class BudUnit:
     def set_owner_id(self, new_owner_id):
         self._owner_id = new_owner_id
 
-    def edit_item_label(self, old_road: RoadUnit, new_label: IdeaUnit):
-        if self._wall in new_label:
-            exception_str = f"Cannot modify '{old_road}' because new_label {new_label} contains wall {self._wall}"
+    def edit_item_lx(self, old_road: RoadUnit, new_lx: IdeaUnit):
+        if self._wall in new_lx:
+            exception_str = f"Cannot modify '{old_road}' because new_lx {new_lx} contains wall {self._wall}"
             raise InvalidIdeaException(exception_str)
         if self.item_exists(old_road) is False:
             raise InvalidBudException(f"Item {old_road=} does not exist")
 
         parent_road = get_parent_road(road=old_road)
         new_road = (
-            self.make_road(new_label)
+            self.make_road(new_lx)
             if parent_road == ""
-            else self.make_road(parent_road, new_label)
+            else self.make_road(parent_road, new_lx)
         )
         if old_road != new_road:
             if parent_road == "":
-                self._itemroot.set_label(new_label)
+                self._itemroot.set_lx(new_lx)
             else:
-                self._non_root_item_label_edit(old_road, new_label, parent_road)
+                self._non_root_item_lx_edit(old_road, new_lx, parent_road)
             self._itemroot_find_replace_road(old_road=old_road, new_road=new_road)
 
-    def _non_root_item_label_edit(
-        self, old_road: RoadUnit, new_label: IdeaUnit, parent_road: RoadUnit
+    def _non_root_item_lx_edit(
+        self, old_road: RoadUnit, new_lx: IdeaUnit, parent_road: RoadUnit
     ):
         x_item = self.get_item_obj(old_road)
-        x_item.set_label(new_label)
+        x_item.set_lx(new_lx)
         x_item._parent_road = parent_road
         item_parent = self.get_item_obj(get_parent_road(old_road))
         item_parent._kids.pop(get_terminus_idea(old_road, self._wall))
-        item_parent._kids[x_item._label] = x_item
+        item_parent._kids[x_item._lx] = x_item
 
     def _itemroot_find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
         self._itemroot.find_replace_road(old_road=old_road, new_road=new_road)
@@ -977,22 +977,22 @@ class BudUnit:
     def item_exists(self, road: RoadUnit) -> bool:
         if road is None:
             return False
-        root_road_label = get_root_idea_from_road(road, wall=self._wall)
-        if root_road_label != self._itemroot._label:
+        root_road_lx = get_root_idea_from_road(road, wall=self._wall)
+        if root_road_lx != self._itemroot._lx:
             return False
 
         ideas = get_all_road_ideas(road, wall=self._wall)
-        root_road_label = ideas.pop(0)
+        root_road_lx = ideas.pop(0)
         if ideas == []:
             return True
 
-        item_label = ideas.pop(0)
-        x_item = self._itemroot.get_kid(item_label)
+        item_lx = ideas.pop(0)
+        x_item = self._itemroot.get_kid(item_lx)
         if x_item is None:
             return False
         while ideas != []:
-            item_label = ideas.pop(0)
-            x_item = x_item.get_kid(item_label)
+            item_lx = ideas.pop(0)
+            x_item = x_item.get_kid(item_lx)
             if x_item is None:
                 return False
         return True
@@ -1007,8 +1007,8 @@ class BudUnit:
             return self._itemroot
 
         ideaunits.pop(0)
-        item_label = ideaunits.pop(0)
-        x_item = self._itemroot.get_kid(item_label, if_missing_create)
+        item_lx = ideaunits.pop(0)
+        x_item = self._itemroot.get_kid(item_lx, if_missing_create)
         while ideaunits != []:
             x_item = x_item.get_kid(ideaunits.pop(0), if_missing_create)
 
@@ -1248,10 +1248,10 @@ class BudUnit:
             for x_item in parent_item._kids.values():
                 if fund_onset is None:
                     fund_onset = parent_item._fund_onset
-                    fund_cease = fund_onset + alloted_fund_num.get(x_item._label)
+                    fund_cease = fund_onset + alloted_fund_num.get(x_item._lx)
                 else:
                     fund_onset = fund_cease
-                    fund_cease += alloted_fund_num.get(x_item._label)
+                    fund_cease += alloted_fund_num.get(x_item._lx)
                 x_item.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
                 cache_item_list.append(x_item)
 
@@ -1456,7 +1456,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
     x_bud._deal_id = obj_from_bud_dict(bud_dict, "_deal_id")
-    x_bud._itemroot._label = obj_from_bud_dict(bud_dict, "_deal_id")
+    x_bud._itemroot._lx = obj_from_bud_dict(bud_dict, "_deal_id")
     bud_wall = obj_from_bud_dict(bud_dict, "_wall")
     x_bud._wall = default_wall_if_None(bud_wall)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
@@ -1483,7 +1483,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     itemroot_dict = bud_dict.get("_itemroot")
     x_bud._itemroot = itemunit_shop(
         _root=True,
-        _label=x_bud._deal_id,
+        _lx=x_bud._deal_id,
         _parent_road="",
         _level=0,
         _uid=get_obj_from_item_dict(itemroot_dict, "_uid"),
@@ -1522,11 +1522,11 @@ def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
         # for every kid dict, set parent_road in dict, add to to_evaluate_list
         for kid_dict in get_obj_from_item_dict(item_dict, "_kids").values():
             parent_road = get_obj_from_item_dict(item_dict, parent_road_str)
-            kid_label = get_obj_from_item_dict(item_dict, "_label")
-            kid_dict[parent_road_str] = x_bud.make_road(parent_road, kid_label)
+            kid_lx = get_obj_from_item_dict(item_dict, "_lx")
+            kid_dict[parent_road_str] = x_bud.make_road(parent_road, kid_lx)
             to_evaluate_item_dicts.append(kid_dict)
         x_itemkid = itemunit_shop(
-            _label=get_obj_from_item_dict(item_dict, "_label"),
+            _lx=get_obj_from_item_dict(item_dict, "_lx"),
             mass=get_obj_from_item_dict(item_dict, "mass"),
             _uid=get_obj_from_item_dict(item_dict, "_uid"),
             begin=get_obj_from_item_dict(item_dict, "begin"),

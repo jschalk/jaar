@@ -68,8 +68,8 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     x_itemroot = yao_bud._itemroot
     itemroot_dict = bud_dict["_itemroot"]
     _kids = "_kids"
-    assert x_itemroot._label == yao_bud._deal_id
-    assert itemroot_dict["_label"] == x_itemroot._label
+    assert x_itemroot._lx == yao_bud._deal_id
+    assert itemroot_dict["_lx"] == x_itemroot._lx
     assert itemroot_dict["mass"] == x_itemroot.mass
     assert len(itemroot_dict[_kids]) == len(x_itemroot._kids)
 
@@ -312,7 +312,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     shave_item_y1._originunit.set_originhold(acct_id="Sue", importance=4.3)
     shave_item_y1.problem_bool = True
     # print(f"{shave_road=}")
-    # print(f"{json_shave_item._label=} {json_shave_item._parent_road=}")
+    # print(f"{json_shave_item._lx=} {json_shave_item._parent_road=}")
 
     sue_str = "Sue"
     zia_bud.add_acctunit(acct_id=sue_str, credit_belief=199, debtit_belief=199)
@@ -533,7 +533,7 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     assert ccn_dict_of_obj.get(x3_bud._owner_id) is not None
 
     ccn2_bud = ccn_dict_of_obj.get(x2_bud._owner_id)
-    assert ccn2_bud._itemroot._label == x2_bud._itemroot._label
+    assert ccn2_bud._itemroot._lx == x2_bud._itemroot._lx
     assert ccn2_bud._itemroot._parent_road == x2_bud._itemroot._parent_road
     assert ccn2_bud._itemroot._fund_coin == x2_bud._itemroot._fund_coin
     shave_road = ccn2_bud.make_l1_road("shave")

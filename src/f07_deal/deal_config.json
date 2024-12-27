@@ -46,7 +46,7 @@
             "deal_id": {
                 "jaar_type": "IdeaUnit"
             },
-            "hour_label": {
+            "hour_lx": {
                 "jaar_type": "IdeaUnit"
             }
         },
@@ -61,7 +61,7 @@
             "deal_id": {
                 "jaar_type": "IdeaUnit"
             },
-            "month_label": {
+            "month_lx": {
                 "jaar_type": "IdeaUnit"
             }
         },
@@ -76,7 +76,7 @@
             "deal_id": {
                 "jaar_type": "IdeaUnit"
             },
-            "weekday_label": {
+            "weekday_lx": {
                 "jaar_type": "IdeaUnit"
             }
         },
@@ -110,7 +110,7 @@
             "respect_bit": {
                 "jaar_type": "float"
             },
-            "timeline_label": {
+            "timeline_lx": {
                 "jaar_type": "IdeaUnit"
             },
             "wall": {

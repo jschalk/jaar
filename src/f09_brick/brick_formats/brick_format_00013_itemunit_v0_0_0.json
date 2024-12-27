@@ -9,7 +9,7 @@
         "deal_id": {
             "otx_key": true
         },
-        "label": {
+        "lx": {
             "otx_key": true
         },
         "mass": {

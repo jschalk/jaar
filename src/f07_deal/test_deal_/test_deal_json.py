@@ -87,8 +87,8 @@ def test_get_from_dict_ReturnsDealUnit():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str)
-    sue_timeline_label = "sue casa"
-    music_deal.timeline.timeline_label = sue_timeline_label
+    sue_timeline_lx = "sue casa"
+    music_deal.timeline.timeline_lx = sue_timeline_lx
     sue_current_time = 23
     sue_wall = "/"
     sue_fund_coin = 0.3
@@ -117,7 +117,7 @@ def test_get_from_dict_ReturnsDealUnit():
 
     # THEN
     assert x_deal.deal_id == music_str
-    assert x_deal.timeline.timeline_label == sue_timeline_label
+    assert x_deal.timeline.timeline_lx == sue_timeline_lx
     assert x_deal.current_time == sue_current_time
     assert x_deal.wall == sue_wall
     assert x_deal.fund_coin == sue_fund_coin
@@ -132,8 +132,8 @@ def test_get_from_json_ReturnsDealUnit():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str)
-    sue_timeline_label = "sue casa"
-    music_deal.timeline.timeline_label = sue_timeline_label
+    sue_timeline_lx = "sue casa"
+    music_deal.timeline.timeline_lx = sue_timeline_lx
     sue_current_time = 23
     sue_wall = "/"
     sue_fund_coin = 0.3
@@ -162,7 +162,7 @@ def test_get_from_json_ReturnsDealUnit():
 
     # THEN
     assert x_deal.deal_id == music_str
-    assert x_deal.timeline.timeline_label == sue_timeline_label
+    assert x_deal.timeline.timeline_lx == sue_timeline_lx
     assert x_deal.current_time == sue_current_time
     assert x_deal.wall == sue_wall
     assert x_deal.fund_coin == sue_fund_coin

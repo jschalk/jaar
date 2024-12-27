@@ -20,7 +20,7 @@ from src.f04_gift.atom_config import (
     team_id_str,
     healer_id_str,
     parent_road_str,
-    label_str,
+    lx_str,
     road_str,
     base_str,
 )
@@ -89,16 +89,16 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_itemunit():
 
     root_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     root_atom.set_arg(parent_road_str(), "")
-    root_atom.set_arg(label_str(), sue_bud._deal_id)
+    root_atom.set_arg(lx_str(), sue_bud._deal_id)
     casa_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     casa_atom.set_arg(parent_road_str(), sue_bud._deal_id)
-    casa_atom.set_arg(label_str(), casa_str)
+    casa_atom.set_arg(lx_str(), casa_str)
     clean_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     clean_atom.set_arg(parent_road_str(), casa_road)
-    clean_atom.set_arg(label_str(), clean_str)
+    clean_atom.set_arg(lx_str(), clean_str)
     sweep_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     sweep_atom.set_arg(parent_road_str(), clean_road)
-    sweep_atom.set_arg(label_str(), sweep_str)
+    sweep_atom.set_arg(lx_str(), sweep_str)
     assert not sift_atomunit(sue_bud, root_atom)
     assert sift_atomunit(sue_bud, casa_atom)
     assert sift_atomunit(sue_bud, clean_atom)

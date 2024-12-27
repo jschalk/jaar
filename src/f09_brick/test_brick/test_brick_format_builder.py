@@ -3,7 +3,7 @@ from src.f00_instrument.file import save_file
 from src.f02_bud.bud_tool import bud_itemunit_str
 from src.f04_gift.atom_config import (
     parent_road_str,
-    label_str,
+    lx_str,
     gogo_want_str,
     deal_id_str,
     owner_id_str,
@@ -49,7 +49,7 @@ def test_create_categorys_brick_format_dict_ReturnObj(rebuild_bool):
     assert deal_id_str() in bud_itemunit_attributes
     assert owner_id_str() in bud_itemunit_attributes
     assert parent_road_str() in bud_itemunit_attributes
-    assert label_str() in bud_itemunit_attributes
+    assert lx_str() in bud_itemunit_attributes
     assert gogo_want_str() in bud_itemunit_attributes
 
     rebuild_format_jsons(rebuild_bool)

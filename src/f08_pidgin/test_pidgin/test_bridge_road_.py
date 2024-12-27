@@ -572,7 +572,7 @@ def test_RoadBridge_all_otx_parent_roads_exist_ReturnsObj_RoadUnit():
     assert x_roadbridge.all_otx_parent_roads_exist()
 
 
-def test_RoadBridge_is_valid_ReturnsObj_Scenario0_label_str():
+def test_RoadBridge_is_valid_ReturnsObj_Scenario0_lx_str():
     # ESTABLISH
     clean_str = "clean"
     clean_inx = "propre"

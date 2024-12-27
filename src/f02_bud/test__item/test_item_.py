@@ -1,6 +1,6 @@
 from src.f01_road.finance import default_fund_coin_if_None
 from src.f01_road.road import (
-    get_default_deal_id_ideaunit as root_label,
+    get_default_deal_id_ideaunit as root_lx,
     create_road,
     default_wall_if_None,
 )
@@ -16,7 +16,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit
     assert x_itemunit._kids is None
     assert x_itemunit.mass is None
-    assert x_itemunit._label is None
+    assert x_itemunit._lx is None
     assert x_itemunit._uid is None
     assert x_itemunit.reasonunits is None
     assert x_itemunit._reasonheirs is None  # calculated field
@@ -67,8 +67,8 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit
     assert x_itemunit._kids == {}
     assert x_itemunit.mass == 1
-    assert x_itemunit._label is None
-    assert x_itemunit._bud_deal_id == root_label()
+    assert x_itemunit._lx is None
+    assert x_itemunit._bud_deal_id == root_lx()
     assert x_itemunit._uid is None
     assert x_itemunit.begin is None
     assert x_itemunit.close is None
@@ -158,7 +158,7 @@ def test_itemunit_shop_ReturnsObjWith_awardlinks():
 
     # WHEN
     sport_str = "sport"
-    sport_item = itemunit_shop(_label=sport_str, awardlinks=x_awardlinks)
+    sport_item = itemunit_shop(_lx=sport_str, awardlinks=x_awardlinks)
 
     # THEN
     assert sport_item.awardlinks == x_awardlinks
@@ -183,11 +183,11 @@ def test_itemunit_shop_ReturnsObjWithParameters():
 def test_ItemUnit_get_obj_key_ReturnsCorrectObj():
     # ESTABLISH
     round_str = "round_things"
-    round_road = create_road(root_label(), round_str)
+    round_road = create_road(root_lx(), round_str)
     ball_str = "ball"
 
     # WHEN
-    ball_item = itemunit_shop(_label=ball_str, _parent_road=round_road)
+    ball_item = itemunit_shop(_lx=ball_str, _parent_road=round_road)
 
     # THEN
     assert ball_item.get_obj_key() == ball_str
@@ -197,7 +197,7 @@ def test_ItemUnit_get_road_ReturnsCorrectObj():
     # ESTABLISH
     round_str = "round_things"
     slash_str = "/"
-    round_road = create_road(root_label(), round_str, wall=slash_str)
+    round_road = create_road(root_lx(), round_str, wall=slash_str)
     ball_str = "ball"
 
     # WHEN
@@ -212,13 +212,13 @@ def test_ItemUnit_set_parent_road_SetsAttr():
     # ESTABLISH
     round_str = "round_things"
     slash_str = "/"
-    round_road = create_road(root_label(), round_str, wall=slash_str)
+    round_road = create_road(root_lx(), round_str, wall=slash_str)
     ball_str = "ball"
     ball_item = itemunit_shop(ball_str, _parent_road=round_road, _wall=slash_str)
     assert ball_item._parent_road == round_road
 
     # WHEN
-    sports_road = create_road(root_label(), "sports", wall=slash_str)
+    sports_road = create_road(root_lx(), "sports", wall=slash_str)
     ball_item.set_parent_road(parent_road=sports_road)
 
     # THEN

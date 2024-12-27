@@ -8,11 +8,11 @@ from src.f04_gift.atom_config import (
 from src.f07_deal.deal_config import (
     current_time_str,
     amount_str,
-    month_label_str,
-    hour_label_str,
+    month_lx_str,
+    hour_lx_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_label_str,
+    weekday_lx_str,
     weekday_order_str,
     deal_purviewlog_str,
     deal_purview_episode_str,
@@ -33,12 +33,12 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-# br00000 deal_id c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,wall,timeline_label,yr1_jan1_offset
+# br00000 deal_id c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,wall,timeline_lx,yr1_jan1_offset
 # br00001 deal_id owner_id,acct_id,time_id,quota
 # br00002 deal_id owner_id,acct_id,time_id,amount
-# br00003 deal_id hour_label,cumlative_minute
-# br00004 deal_id month_label,cumlative_day
-# br00005 deal_id weekday_label,weekday_order
+# br00003 deal_id hour_lx,cumlative_minute
+# br00004 deal_id month_lx,cumlative_day
+# br00005 deal_id weekday_lx,weekday_order
 
 
 # def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup):
@@ -80,7 +80,7 @@ from os.path import exists as os_path_exists
 #             penny_str(),
 #             respect_bit_str(),
 #             wall_str(),
-#             timeline_label_str(),
+#             timeline_lx_str(),
 #             yr1_jan1_offset_str(),
 #         ]
 #     )
@@ -90,9 +90,9 @@ from os.path import exists as os_path_exists
 #     expected_br2_columns.extend(
 #         [owner_id_str(), acct_id_str(), time_id_str(), amount_str()]
 #     )
-#     expected_br3_columns.extend([hour_label_str(), cumlative_minute_str()])
-#     expected_br4_columns.extend([month_label_str(), cumlative_day_str()])
-#     expected_br5_columns.extend([weekday_label_str(), weekday_order_str()])
+#     expected_br3_columns.extend([hour_lx_str(), cumlative_minute_str()])
+#     expected_br4_columns.extend([month_lx_str(), cumlative_day_str()])
+#     expected_br5_columns.extend([weekday_lx_str(), weekday_order_str()])
 
 #     print(f"{list(br00000_df.columns)=}")
 #     assert list(br00000_df.columns) == expected_br0_columns
@@ -368,7 +368,7 @@ from os.path import exists as os_path_exists
 
 # from src.f00_instrument.file import create_path
 # from src.f04_gift.atom_config import face_id_str, deal_id_str
-# from src.f07_deal.deal_config import cumlative_minute_str, hour_label_str
+# from src.f07_deal.deal_config import cumlative_minute_str, hour_lx_str
 # from src.f08_pidgin.pidgin_config import event_id_str
 # from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
 # from src.f11_world.world import worldunit_shop
@@ -396,7 +396,7 @@ from os.path import exists as os_path_exists
 #         face_id_str(),
 #         event_id_str(),
 #         deal_id_str(),
-#         hour_label_str(),
+#         hour_lx_str(),
 #         cumlative_minute_str(),
 #     ]
 #     music23_str = "music23"

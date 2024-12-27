@@ -7,7 +7,7 @@ from src.f01_road.finance import (
 )
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f01_road.road import (
-    get_default_deal_id_ideaunit as root_label,
+    get_default_deal_id_ideaunit as root_lx,
     default_wall_if_None,
 )
 from src.f02_bud.origin import originunit_shop
@@ -114,7 +114,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
 
     # THEN
     assert x_bud._owner_id == ""
-    assert x_bud._deal_id == root_label()
+    assert x_bud._deal_id == root_lx()
     assert x_bud._wall == default_wall_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_None()

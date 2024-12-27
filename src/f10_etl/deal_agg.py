@@ -22,7 +22,7 @@ def create_init_deal_staging_files(dir: str):
         "penny",
         "respect_bit",
         "wall",
-        "timeline_label",
+        "timeline_lx",
         "yr1_jan1_offset",
     ]
     br00001_columns = [
@@ -47,21 +47,21 @@ def create_init_deal_staging_files(dir: str):
         "face_id",
         "event_id",
         "deal_id",
-        "hour_label",
+        "hour_lx",
         "cumlative_minute",
     ]
     br00004_columns = [
         "face_id",
         "event_id",
         "deal_id",
-        "month_label",
+        "month_lx",
         "cumlative_day",
     ]
     br00005_columns = [
         "face_id",
         "event_id",
         "deal_id",
-        "weekday_label",
+        "weekday_lx",
         "weekday_order",
     ]
     br00000_df = DataFrame([], columns=br00000_columns)

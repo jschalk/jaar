@@ -1,4 +1,4 @@
-from src.f01_road.road import create_road, get_default_deal_id_ideaunit as root_label
+from src.f01_road.road import create_road, get_default_deal_id_ideaunit as root_lx
 from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.bud_tool import (
     budunit_str,
@@ -15,7 +15,7 @@ from src.f04_gift.atom_config import (
     awardee_id_str,
     group_id_str,
     parent_road_str,
-    label_str,
+    lx_str,
     credit_belief_str,
     debtit_belief_str,
 )
@@ -342,16 +342,16 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj():
 
 def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
     # ESTABLISH
-    x_deal_id = root_label()
+    x_deal_id = root_lx()
     sports_str = "sports"
     sports_road = create_road(x_deal_id, sports_str)
     knee_str = "knee"
     x_category = bud_itemunit_str()
     sports_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    sports_insert_itemunit_atomunit.set_jkey(label_str(), sports_str)
+    sports_insert_itemunit_atomunit.set_jkey(lx_str(), sports_str)
     sports_insert_itemunit_atomunit.set_jkey(parent_road_str(), x_deal_id)
     knee_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    knee_insert_itemunit_atomunit.set_jkey(label_str(), knee_str)
+    knee_insert_itemunit_atomunit.set_jkey(lx_str(), knee_str)
     knee_insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(knee_insert_itemunit_atomunit)
@@ -375,7 +375,7 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
 
 def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     # ESTABLISH
-    x_deal_id = root_label()
+    x_deal_id = root_lx()
     sports_str = "sports"
     sports_road = create_road(x_deal_id, sports_str)
     knee_str = "knee"
