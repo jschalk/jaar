@@ -614,21 +614,6 @@ def etl_bow_face_bricks_to_bow_event_otx_bricks(faces_dir: str):
             )
 
 
-def get_fiscal_events_by_dirs(faces_dir: str) -> dict[FiscalID, set[EventID]]:
-    fiscal_events = {}
-    for face_id in get_level1_dirs(faces_dir):
-        face_dir = create_path(faces_dir, face_id)
-        for event_id in get_level1_dirs(face_dir):
-            event_dir = create_path(face_dir, event_id)
-            for fiscal_id in get_level1_dirs(event_dir):
-                if fiscal_events.get(fiscal_id) is None:
-                    fiscal_events[fiscal_id] = {int(event_id)}
-                else:
-                    events_list = fiscal_events.get(fiscal_id)
-                    events_list.add(int(event_id))
-    return fiscal_events
-
-
 def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[EventID]]:
     pidgin_events = {}
     for face_id in get_level1_dirs(faces_dir):
