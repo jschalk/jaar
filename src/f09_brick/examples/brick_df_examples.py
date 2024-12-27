@@ -6,14 +6,14 @@ JEFFY45_STR = "jeffy45"
 
 
 def get_ex1_br00000_df() -> DataFrame:
-    """brick_format_00000_fiscalunit_v0_0_0
-    c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,wall,timeline_label,yr1_jan1_offset
+    """brick_format_00000_dealunit_v0_0_0
+    c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,wall,timeline_label,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
             "current_time",
-            "fiscal_id",
+            "deal_id",
             "fund_coin",
             "monthday_distortion",
             "penny",
@@ -28,25 +28,25 @@ def get_ex1_br00000_df() -> DataFrame:
 
 
 def get_ex1_br00001_df() -> DataFrame:
-    """brick_format_00001_fiscal_purview_episode_v0_0_0
-    acct_id,fiscal_id,owner_id,quota,time_id"""
-    x_df = DataFrame(columns=["acct_id", "fiscal_id", "owner_id", "quota", "time_id"])
+    """brick_format_00001_deal_purview_episode_v0_0_0
+    acct_id,deal_id,owner_id,quota,time_id"""
+    x_df = DataFrame(columns=["acct_id", "deal_id", "owner_id", "quota", "time_id"])
     x_df.loc[0] = ["Bob", MUSIC23_STR, "Sue", 445, 777]
     return x_df
 
 
 def get_ex1_br00002_df() -> DataFrame:
-    """brick_format_00002_fiscal_cashbook_v0_0_0
-    acct_id,amount,fiscal_id,owner_id,time_id"""
-    x_df = DataFrame(columns=["acct_id", "amount", "fiscal_id", "owner_id", "time_id"])
+    """brick_format_00002_deal_cashbook_v0_0_0
+    acct_id,amount,deal_id,owner_id,time_id"""
+    x_df = DataFrame(columns=["acct_id", "amount", "deal_id", "owner_id", "time_id"])
     x_df.loc[0] = ["Bob", 888, MUSIC23_STR, "Zia", 777]
     return x_df
 
 
 def get_ex1_br00003_df() -> DataFrame:
-    """brick_format_00003_fiscal_timeline_hour_v0_0_0
-    cumlative_minute,fiscal_id,hour_label"""
-    x_df = DataFrame(columns=["fiscal_id", "hour_label", "cumlative_minute"])
+    """brick_format_00003_deal_timeline_hour_v0_0_0
+    cumlative_minute,deal_id,hour_label"""
+    x_df = DataFrame(columns=["deal_id", "hour_label", "cumlative_minute"])
     x_df.loc[0] = [MUSIC23_STR, "0-12am", 60]
     x_df.loc[1] = [MUSIC23_STR, "1-1am", 120]
     x_df.loc[2] = [MUSIC23_STR, "2-2am", 180]
@@ -75,9 +75,9 @@ def get_ex1_br00003_df() -> DataFrame:
 
 
 def get_ex1_br00004_df() -> DataFrame:
-    """brick_format_00004_fiscal_timeline_month_v0_0_0
-    cumlative_day,fiscal_id,month_label"""
-    x_df = DataFrame(columns=["fiscal_id", "month_label", "cumlative_day"])
+    """brick_format_00004_deal_timeline_month_v0_0_0
+    cumlative_day,deal_id,month_label"""
+    x_df = DataFrame(columns=["deal_id", "month_label", "cumlative_day"])
     x_df.loc[0] = [MUSIC23_STR, "March", 31]
     x_df.loc[1] = [MUSIC23_STR, "April", 61]
     x_df.loc[2] = [MUSIC23_STR, "May", 92]
@@ -94,9 +94,9 @@ def get_ex1_br00004_df() -> DataFrame:
 
 
 def get_ex1_br00005_df() -> DataFrame:
-    """brick_format_00005_fiscal_timeline_weekday_v0_0_0
-    fiscal_id,weekday_label,weekday_order"""
-    x_df = DataFrame(columns=["fiscal_id", "weekday_label", "weekday_order"])
+    """brick_format_00005_deal_timeline_weekday_v0_0_0
+    deal_id,weekday_label,weekday_order"""
+    x_df = DataFrame(columns=["deal_id", "weekday_label", "weekday_order"])
     x_df.loc[0] = [MUSIC23_STR, "Wednesday", 0]
     x_df.loc[1] = [MUSIC23_STR, "Thursday", 1]
     x_df.loc[2] = [MUSIC23_STR, "Friday", 2]
@@ -108,14 +108,14 @@ def get_ex1_br00005_df() -> DataFrame:
 
 
 def get_ex2_br00000_df() -> DataFrame:
-    """brick_format_00000_fiscalunit_v0_0_0
-    c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,wall,timeline_label,yr1_jan1_offset
+    """brick_format_00000_dealunit_v0_0_0
+    c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,wall,timeline_label,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
             "current_time",
-            "fiscal_id",
+            "deal_id",
             "fund_coin",
             "monthday_distortion",
             "penny",
@@ -131,9 +131,9 @@ def get_ex2_br00000_df() -> DataFrame:
 
 
 def get_ex2_br00001_df() -> DataFrame:
-    """brick_format_00001_fiscal_purview_episode_v0_0_0
-    acct_id,fiscal_id,owner_id,quota,time_id"""
-    x_df = DataFrame(columns=["acct_id", "fiscal_id", "owner_id", "quota", "time_id"])
+    """brick_format_00001_deal_purview_episode_v0_0_0
+    acct_id,deal_id,owner_id,quota,time_id"""
+    x_df = DataFrame(columns=["acct_id", "deal_id", "owner_id", "quota", "time_id"])
     x_df.loc[0] = ["Bob", MUSIC23_STR, "Sue", 445, 777]
     x_df.loc[1] = ["Yao", MUSIC23_STR, "Bob", 332, 999]
     x_df.loc[2] = ["Bob", MUSIC23_STR, "Yao", 700, 222]
@@ -143,9 +143,9 @@ def get_ex2_br00001_df() -> DataFrame:
 
 
 def get_ex2_br00002_df() -> DataFrame:
-    """brick_format_00002_fiscal_cashbook_v0_0_0
-    acct_id,amount,fiscal_id,owner_id,time_id"""
-    x_df = DataFrame(columns=["acct_id", "amount", "fiscal_id", "owner_id", "time_id"])
+    """brick_format_00002_deal_cashbook_v0_0_0
+    acct_id,amount,deal_id,owner_id,time_id"""
+    x_df = DataFrame(columns=["acct_id", "amount", "deal_id", "owner_id", "time_id"])
     x_df.loc[0] = ["Bob", 888, MUSIC23_STR, "Zia", 777]
     x_df.loc[1] = ["Zia", 234, MUSIC23_STR, "Sue", 999]
     x_df.loc[2] = ["Zia", 888, MUSIC23_STR, "Bob", 777]
@@ -155,9 +155,9 @@ def get_ex2_br00002_df() -> DataFrame:
 
 
 def get_ex2_br00003_df() -> DataFrame:
-    """brick_format_00003_fiscal_timeline_hour_v0_0_0
-    cumlative_minute,fiscal_id,hour_label"""
-    x_df = DataFrame(columns=["fiscal_id", "hour_label", "cumlative_minute"])
+    """brick_format_00003_deal_timeline_hour_v0_0_0
+    cumlative_minute,deal_id,hour_label"""
+    x_df = DataFrame(columns=["deal_id", "hour_label", "cumlative_minute"])
     x_df.loc[0] = [MUSIC23_STR, "0-12am", 60]
     x_df.loc[1] = [MUSIC23_STR, "1-1am", 120]
     x_df.loc[2] = [MUSIC23_STR, "2-2am", 180]
@@ -206,9 +206,9 @@ def get_ex2_br00003_df() -> DataFrame:
 
 
 def get_ex2_br00004_df() -> DataFrame:
-    """brick_format_00004_fiscal_timeline_month_v0_0_0
-    cumlative_day,fiscal_id,month_label"""
-    x_df = DataFrame(columns=["fiscal_id", "month_label", "cumlative_day"])
+    """brick_format_00004_deal_timeline_month_v0_0_0
+    cumlative_day,deal_id,month_label"""
+    x_df = DataFrame(columns=["deal_id", "month_label", "cumlative_day"])
     x_df.loc[0] = [MUSIC23_STR, "March", 31]
     x_df.loc[1] = [MUSIC23_STR, "April", 61]
     x_df.loc[2] = [MUSIC23_STR, "May", 92]
@@ -240,9 +240,9 @@ def get_ex2_br00004_df() -> DataFrame:
 
 
 def get_ex2_br00005_df() -> DataFrame:
-    """brick_format_00005_fiscal_timeline_weekday_v0_0_0
-    fiscal_id,weekday_label,weekday_order"""
-    x_df = DataFrame(columns=["fiscal_id", "weekday_label", "weekday_order"])
+    """brick_format_00005_deal_timeline_weekday_v0_0_0
+    deal_id,weekday_label,weekday_order"""
+    x_df = DataFrame(columns=["deal_id", "weekday_label", "weekday_order"])
     x_df.loc[0] = [MUSIC23_STR, "Wednesday", 0]
     x_df.loc[1] = [MUSIC23_STR, "Thursday", 1]
     x_df.loc[2] = [MUSIC23_STR, "Friday", 2]

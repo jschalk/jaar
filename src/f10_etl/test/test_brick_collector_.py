@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str, fiscal_id_str
-from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
+from src.f04_gift.atom_config import face_id_str, deal_id_str
+from src.f07_deal.deal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import upsert_sheet
 from src.f10_etl.brick_collector import (
@@ -98,7 +98,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
         face_id_str(),
         event_id_str(),
         cumlative_minute_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         hour_label_str(),
     ]
     row1 = [sue_str, event_1, minute_360, music23_str, hour6am]
@@ -137,7 +137,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         face_id_str(),
         event_id_str(),
         cumlative_minute_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         hour_label_str(),
     ]
     row1 = [sue_str, event_1, minute_360, music23_str, hour6am]
@@ -146,7 +146,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         face_id_str(),
         event_id_str(),
         cumlative_minute_str(),
-        fiscal_id_str(),
+        deal_id_str(),
     ]
     incom_row1 = [sue_str, event_1, minute_360, music23_str]
     incom_row2 = [sue_str, event_1, minute_420, music23_str]

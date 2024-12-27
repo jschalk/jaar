@@ -1,0 +1,23 @@
+{
+    "attributes": {
+        "event_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "deal_id": {
+            "otx_key": true
+        },
+        "weekday_label": {
+            "otx_key": true
+        },
+        "weekday_order": {
+            "otx_key": false
+        }
+    },
+    "brick_number": "br00005",
+    "categorys": [
+        "deal_timeline_weekday"
+    ]
+}

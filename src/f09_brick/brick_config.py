@@ -2,7 +2,7 @@ from src.f00_instrument.file import open_file, create_path
 from src.f00_instrument.dict_toolbox import get_dict_from_json
 from src.f01_road.jaar_config import get_json_filename
 from src.f02_bud.bud_tool import budunit_str
-from src.f07_fiscal.fiscal_config import fiscalunit_str
+from src.f07_deal.deal_config import dealunit_str
 from src.f08_pidgin.pidgin_config import pidginunit_str
 from src.f09_brick.examples.brick_env import src_brick_dir
 from os import getcwd as os_getcwd
@@ -32,7 +32,7 @@ def brick_type_str() -> str:
 
 
 def get_brick_types() -> set[str]:
-    return {budunit_str(), fiscalunit_str(), pidginunit_str()}
+    return {budunit_str(), dealunit_str(), pidginunit_str()}
 
 
 def allowed_crud_str() -> str:
@@ -97,36 +97,36 @@ def get_brick_formats_dir() -> str:
     return create_path(src_brick_dir(), "brick_formats")
 
 
-# def brick_format_00000_fiscalunit_v0_0_0()->str: return "brick_format_00000_fiscalunit_v0_0_0"
-# def brick_format_00001_fiscal_purview_episode_v0_0_0()->str: return "brick_format_00001_fiscal_purview_episode_v0_0_0"
-# def brick_format_00002_fiscal_cashbook_v0_0_0()->str: return "brick_format_00002_fiscal_cashbook_v0_0_0"
-# def brick_format_00003_fiscal_timeline_hour_v0_0_0()->str: return "brick_format_00003_fiscal_timeline_hour_v0_0_0"
-# def brick_format_00004_fiscal_timeline_month_v0_0_0()->str: return "brick_format_00004_fiscal_timeline_month_v0_0_0"
-# def brick_format_00005_fiscal_timeline_weekday_v0_0_0()->str: return "brick_format_00005_fiscal_timeline_weekday_v0_0_0"
+# def brick_format_00000_dealunit_v0_0_0()->str: return "brick_format_00000_dealunit_v0_0_0"
+# def brick_format_00001_deal_purview_episode_v0_0_0()->str: return "brick_format_00001_deal_purview_episode_v0_0_0"
+# def brick_format_00002_deal_cashbook_v0_0_0()->str: return "brick_format_00002_deal_cashbook_v0_0_0"
+# def brick_format_00003_deal_timeline_hour_v0_0_0()->str: return "brick_format_00003_deal_timeline_hour_v0_0_0"
+# def brick_format_00004_deal_timeline_month_v0_0_0()->str: return "brick_format_00004_deal_timeline_month_v0_0_0"
+# def brick_format_00005_deal_timeline_weekday_v0_0_0()->str: return "brick_format_00005_deal_timeline_weekday_v0_0_0"
 
 
-def brick_format_00000_fiscalunit_v0_0_0() -> str:
-    return "brick_format_00000_fiscalunit_v0_0_0"
+def brick_format_00000_dealunit_v0_0_0() -> str:
+    return "brick_format_00000_dealunit_v0_0_0"
 
 
-def brick_format_00001_fiscal_purview_episode_v0_0_0() -> str:
-    return "brick_format_00001_fiscal_purview_episode_v0_0_0"
+def brick_format_00001_deal_purview_episode_v0_0_0() -> str:
+    return "brick_format_00001_deal_purview_episode_v0_0_0"
 
 
-def brick_format_00002_fiscal_cashbook_v0_0_0() -> str:
-    return "brick_format_00002_fiscal_cashbook_v0_0_0"
+def brick_format_00002_deal_cashbook_v0_0_0() -> str:
+    return "brick_format_00002_deal_cashbook_v0_0_0"
 
 
-def brick_format_00003_fiscal_timeline_hour_v0_0_0() -> str:
-    return "brick_format_00003_fiscal_timeline_hour_v0_0_0"
+def brick_format_00003_deal_timeline_hour_v0_0_0() -> str:
+    return "brick_format_00003_deal_timeline_hour_v0_0_0"
 
 
-def brick_format_00004_fiscal_timeline_month_v0_0_0() -> str:
-    return "brick_format_00004_fiscal_timeline_month_v0_0_0"
+def brick_format_00004_deal_timeline_month_v0_0_0() -> str:
+    return "brick_format_00004_deal_timeline_month_v0_0_0"
 
 
-def brick_format_00005_fiscal_timeline_weekday_v0_0_0() -> str:
-    return "brick_format_00005_fiscal_timeline_weekday_v0_0_0"
+def brick_format_00005_deal_timeline_weekday_v0_0_0() -> str:
+    return "brick_format_00005_deal_timeline_weekday_v0_0_0"
 
 
 def brick_format_00011_acct_v0_0_0() -> str:
@@ -239,12 +239,12 @@ def brick_format_00117_road_bridge1_v0_0_0() -> str:
 
 def get_brick_format_filenames() -> set[str]:
     return {
-        brick_format_00000_fiscalunit_v0_0_0(),
-        brick_format_00001_fiscal_purview_episode_v0_0_0(),
-        brick_format_00002_fiscal_cashbook_v0_0_0(),
-        brick_format_00003_fiscal_timeline_hour_v0_0_0(),
-        brick_format_00004_fiscal_timeline_month_v0_0_0(),
-        brick_format_00005_fiscal_timeline_weekday_v0_0_0(),
+        brick_format_00000_dealunit_v0_0_0(),
+        brick_format_00001_deal_purview_episode_v0_0_0(),
+        brick_format_00002_deal_cashbook_v0_0_0(),
+        brick_format_00003_deal_timeline_hour_v0_0_0(),
+        brick_format_00004_deal_timeline_month_v0_0_0(),
+        brick_format_00005_deal_timeline_weekday_v0_0_0(),
         brick_format_00011_acct_v0_0_0(),
         brick_format_00012_membership_v0_0_0(),
         brick_format_00013_itemunit_v0_0_0(),
@@ -314,35 +314,35 @@ def get_brick_format_filename(brick_number: str) -> str:
 
 def get_brick_format_headers() -> dict[str, list[str]]:
     return {
-        "c400_number,current_time,fiscal_id,fund_coin,monthday_distortion,penny,respect_bit,timeline_label,wall,yr1_jan1_offset": brick_format_00000_fiscalunit_v0_0_0(),
-        "acct_id,fiscal_id,owner_id,quota,time_id": brick_format_00001_fiscal_purview_episode_v0_0_0(),
-        "acct_id,amount,fiscal_id,owner_id,time_id": brick_format_00002_fiscal_cashbook_v0_0_0(),
-        "cumlative_minute,fiscal_id,hour_label": brick_format_00003_fiscal_timeline_hour_v0_0_0(),
-        "cumlative_day,fiscal_id,month_label": brick_format_00004_fiscal_timeline_month_v0_0_0(),
-        "fiscal_id,weekday_label,weekday_order": brick_format_00005_fiscal_timeline_weekday_v0_0_0(),
-        "acct_id,fiscal_id,owner_id": brick_format_00011_acct_v0_0_0(),
-        "acct_id,fiscal_id,group_id,owner_id": brick_format_00012_membership_v0_0_0(),
-        "fiscal_id,label,mass,owner_id,parent_road,pledge": brick_format_00013_itemunit_v0_0_0(),
-        "addin,begin,close,denom,fiscal_id,gogo_want,label,morph,numor,owner_id,parent_road,stop_want": brick_format_00019_itemunit_v0_0_0(),
-        "acct_id,credit_vote,debtit_vote,fiscal_id,group_id,owner_id": brick_format_00020_bud_acct_membership_v0_0_0(),
-        "acct_id,credit_belief,debtit_belief,fiscal_id,owner_id": brick_format_00021_bud_acctunit_v0_0_0(),
-        "awardee_id,fiscal_id,give_force,owner_id,road,take_force": brick_format_00022_bud_item_awardlink_v0_0_0(),
-        "base,fiscal_id,fnigh,fopen,owner_id,pick,road": brick_format_00023_bud_item_factunit_v0_0_0(),
-        "fiscal_id,owner_id,road,team_id": brick_format_00024_bud_item_teamlink_v0_0_0(),
-        "fiscal_id,healer_id,owner_id,road": brick_format_00025_bud_item_healerlink_v0_0_0(),
-        "base,divisor,fiscal_id,need,nigh,open,owner_id,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
-        "base,base_item_active_requisite,fiscal_id,owner_id,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),
-        "addin,begin,close,denom,fiscal_id,gogo_want,label,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
-        "credor_respect,debtor_respect,fiscal_id,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,purview_time_id,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
-        "fiscal_id,healer_id,label,owner_id,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
+        "c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,timeline_label,wall,yr1_jan1_offset": brick_format_00000_dealunit_v0_0_0(),
+        "acct_id,deal_id,owner_id,quota,time_id": brick_format_00001_deal_purview_episode_v0_0_0(),
+        "acct_id,amount,deal_id,owner_id,time_id": brick_format_00002_deal_cashbook_v0_0_0(),
+        "cumlative_minute,deal_id,hour_label": brick_format_00003_deal_timeline_hour_v0_0_0(),
+        "cumlative_day,deal_id,month_label": brick_format_00004_deal_timeline_month_v0_0_0(),
+        "deal_id,weekday_label,weekday_order": brick_format_00005_deal_timeline_weekday_v0_0_0(),
+        "acct_id,deal_id,owner_id": brick_format_00011_acct_v0_0_0(),
+        "acct_id,deal_id,group_id,owner_id": brick_format_00012_membership_v0_0_0(),
+        "deal_id,label,mass,owner_id,parent_road,pledge": brick_format_00013_itemunit_v0_0_0(),
+        "addin,begin,close,deal_id,denom,gogo_want,label,morph,numor,owner_id,parent_road,stop_want": brick_format_00019_itemunit_v0_0_0(),
+        "acct_id,credit_vote,deal_id,debtit_vote,group_id,owner_id": brick_format_00020_bud_acct_membership_v0_0_0(),
+        "acct_id,credit_belief,deal_id,debtit_belief,owner_id": brick_format_00021_bud_acctunit_v0_0_0(),
+        "awardee_id,deal_id,give_force,owner_id,road,take_force": brick_format_00022_bud_item_awardlink_v0_0_0(),
+        "base,deal_id,fnigh,fopen,owner_id,pick,road": brick_format_00023_bud_item_factunit_v0_0_0(),
+        "deal_id,owner_id,road,team_id": brick_format_00024_bud_item_teamlink_v0_0_0(),
+        "deal_id,healer_id,owner_id,road": brick_format_00025_bud_item_healerlink_v0_0_0(),
+        "base,deal_id,divisor,need,nigh,open,owner_id,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
+        "base,base_item_active_requisite,deal_id,owner_id,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),
+        "addin,begin,close,deal_id,denom,gogo_want,label,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
+        "credor_respect,deal_id,debtor_respect,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,purview_time_id,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
+        "deal_id,healer_id,label,owner_id,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
         "inx_group_id,inx_wall,otx_group_id,otx_wall,unknown_word": brick_format_00042_bridge_group_id_v0_0_0(),
         "inx_acct_id,inx_wall,otx_acct_id,otx_wall,unknown_word": brick_format_00043_bridge_acct_id_v0_0_0(),
         "inx_idea,inx_wall,otx_idea,otx_wall,unknown_word": brick_format_00044_bridge_idea_v0_0_0(),
         "inx_road,inx_wall,otx_road,otx_wall,unknown_word": brick_format_00045_bridge_road_v0_0_0(),
-        "acct_id,fiscal_id,inx_acct_id,otx_acct_id,owner_id": brick_format_00113_acct_bridge1_v0_0_0(),
-        "acct_id,fiscal_id,inx_group_id,otx_group_id,owner_id": brick_format_00115_group_bridge1_v0_0_0(),
-        "acct_id,fiscal_id,inx_idea,otx_idea,owner_id": brick_format_00116_idea_bridge1_v0_0_0(),
-        "acct_id,fiscal_id,inx_road,otx_road,owner_id": brick_format_00117_road_bridge1_v0_0_0(),
+        "acct_id,deal_id,inx_acct_id,otx_acct_id,owner_id": brick_format_00113_acct_bridge1_v0_0_0(),
+        "acct_id,deal_id,inx_group_id,otx_group_id,owner_id": brick_format_00115_group_bridge1_v0_0_0(),
+        "acct_id,deal_id,inx_idea,otx_idea,owner_id": brick_format_00116_idea_bridge1_v0_0_0(),
+        "acct_id,deal_id,inx_road,otx_road,owner_id": brick_format_00117_road_bridge1_v0_0_0(),
     }
 
 
@@ -365,7 +365,7 @@ def get_brick_elements_sort_order() -> list[str]:
     return [
         "face_id",
         "event_id",
-        "fiscal_id",
+        "deal_id",
         "owner_id",
         "acct_id",
         "group_id",
@@ -443,7 +443,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
     return {
         "face_id": "TEXT",
         "event_id": "INTEGER",
-        "fiscal_id": "TEXT",
+        "deal_id": "TEXT",
         "owner_id": "TEXT",
         "acct_id": "TEXT",
         "group_id": "TEXT",
@@ -519,12 +519,12 @@ def get_brick_sqlite_type() -> dict[str, str]:
 
 def get_brick_category_ref() -> dict[str, set[str]]:
     return {
-        "fiscalunit": ["br00000"],
-        "fiscal_purview_episode": ["br00001"],
-        "fiscal_cashbook": ["br00002"],
-        "fiscal_timeline_hour": ["br00003"],
-        "fiscal_timeline_month": ["br00004"],
-        "fiscal_timeline_weekday": ["br00005"],
+        "dealunit": ["br00000"],
+        "deal_purview_episode": ["br00001"],
+        "deal_cashbook": ["br00002"],
+        "deal_timeline_hour": ["br00003"],
+        "deal_timeline_month": ["br00004"],
+        "deal_timeline_weekday": ["br00005"],
         "bud_acctunit": [
             "br00011",
             "br00021",

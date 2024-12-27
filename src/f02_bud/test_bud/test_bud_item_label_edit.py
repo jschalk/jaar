@@ -4,7 +4,7 @@ from src.f02_bud.examples.example_buds import (
     get_budunit_with_4_levels_and_2reasons_2facts,
 )
 from pytest import raises as pytest_raises
-from src.f01_road.road import get_default_fiscal_id_ideaunit as root_label
+from src.f01_road.road import get_default_deal_id_ideaunit as root_label
 
 
 def test_BudUnit_edit_item_label_FailsWhenItemDoesNotExist():
@@ -24,7 +24,7 @@ def test_BudUnit_edit_item_label_FailsWhenItemDoesNotExist():
     assert str(excinfo.value) == f"Item old_road='{no_item_road}' does not exist"
 
 
-def test_BudUnit_edit_item_label_RaisesErrorForLevel0ItemWhen_fiscal_id_isNone():
+def test_BudUnit_edit_item_label_RaisesErrorForLevel0ItemWhen_deal_id_isNone():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(_owner_id=yao_str)
@@ -36,30 +36,30 @@ def test_BudUnit_edit_item_label_RaisesErrorForLevel0ItemWhen_fiscal_id_isNone()
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=casa_road)
     assert yao_bud._owner_id == yao_str
-    assert yao_bud._itemroot._label == yao_bud._fiscal_id
+    assert yao_bud._itemroot._label == yao_bud._deal_id
     casa_item = yao_bud.get_item_obj(casa_road)
-    assert casa_item._parent_road == yao_bud._fiscal_id
+    assert casa_item._parent_road == yao_bud._deal_id
     swim_item = yao_bud.get_item_obj(swim_road)
     assert swim_item._parent_road == casa_road
 
     # WHEN
     moon_str = "moon"
-    yao_bud.edit_item_label(old_road=yao_bud._fiscal_id, new_label=moon_str)
+    yao_bud.edit_item_label(old_road=yao_bud._deal_id, new_label=moon_str)
 
     # THEN
     # with pytest_raises(Exception) as excinfo:
     #     moon_str = "moon"
-    #     yao_bud.edit_item_label(old_road=yao_bud._fiscal_id, new_label=moon_str)
+    #     yao_bud.edit_item_label(old_road=yao_bud._deal_id, new_label=moon_str)
     # assert (
     #     str(excinfo.value)
-    #     == f"Cannot set itemroot to string other than '{yao_bud._fiscal_id}'"
+    #     == f"Cannot set itemroot to string other than '{yao_bud._deal_id}'"
     # )
 
     assert yao_bud._itemroot._label != moon_str
-    assert yao_bud._itemroot._label == yao_bud._fiscal_id
+    assert yao_bud._itemroot._label == yao_bud._deal_id
 
 
-def test_BudUnit_edit_item_label_RaisesErrorForLevel0When_fiscal_id_IsDifferent():
+def test_BudUnit_edit_item_label_RaisesErrorForLevel0When_deal_id_IsDifferent():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(_owner_id=yao_str)
@@ -70,11 +70,11 @@ def test_BudUnit_edit_item_label_RaisesErrorForLevel0When_fiscal_id_IsDifferent(
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=casa_road)
     sun_str = "sun"
-    yao_bud._fiscal_id = sun_str
-    yao_bud._itemroot._bud_fiscal_id = sun_str
+    yao_bud._deal_id = sun_str
+    yao_bud._itemroot._bud_deal_id = sun_str
     assert yao_bud._owner_id == yao_str
-    assert yao_bud._fiscal_id == sun_str
-    assert yao_bud._itemroot._bud_fiscal_id == sun_str
+    assert yao_bud._deal_id == sun_str
+    assert yao_bud._itemroot._bud_deal_id == sun_str
     assert yao_bud._itemroot._label == root_label()
     casa_item = yao_bud.get_item_obj(casa_road)
     assert casa_item._parent_road == root_label()
@@ -239,7 +239,7 @@ def test_bud_set_owner_id_CorrectlyModifiesBoth():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     assert sue_bud._owner_id == "Sue"
-    assert sue_bud._itemroot._label == sue_bud._fiscal_id
+    assert sue_bud._itemroot._label == sue_bud._deal_id
     # mid_label1 = "Yao"
     # sue_bud.edit_item_label(old_road=old_label, new_label=mid_label1)
     # assert sue_bud._owner_id == old_label
@@ -251,7 +251,7 @@ def test_bud_set_owner_id_CorrectlyModifiesBoth():
 
     # THEN
     assert sue_bud._owner_id == bob_str
-    assert sue_bud._itemroot._label == sue_bud._fiscal_id
+    assert sue_bud._itemroot._label == sue_bud._deal_id
 
 
 def test_bud_edit_item_label_RaisesErrorIfwallIsInLabel():

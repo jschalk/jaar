@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str, fiscal_id_str
-from src.f07_fiscal.fiscal_config import (
+from src.f04_gift.atom_config import face_id_str, deal_id_str
+from src.f07_deal.deal_config import (
     cumlative_minute_str,
     hour_label_str,
     weekday_label_str,
@@ -35,7 +35,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
     brick_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         hour_label_str(),
         cumlative_minute_str(),
     ]
@@ -114,14 +114,14 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
     brick3_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         hour_label_str(),
         cumlative_minute_str(),
     ]
     brick5_columns = [
         event_id_str(),
         face_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         weekday_label_str(),
         weekday_order_str(),
     ]

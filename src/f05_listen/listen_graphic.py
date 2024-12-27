@@ -52,7 +52,7 @@ def get_listen_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
                 x=[4.0, 4.0],
                 y=[9.0, 8.75],
                 text=[
-                    "Fiscality Bud Listening Structures",
+                    "deality Bud Listening Structures",
                     "The voice bud listens to other's final buds and builds a new bud from itself and others",
                 ],
                 mode="text",

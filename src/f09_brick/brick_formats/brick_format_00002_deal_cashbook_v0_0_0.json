@@ -1,0 +1,29 @@
+{
+    "attributes": {
+        "acct_id": {
+            "otx_key": true
+        },
+        "amount": {
+            "otx_key": false
+        },
+        "event_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "deal_id": {
+            "otx_key": true
+        },
+        "owner_id": {
+            "otx_key": true
+        },
+        "time_id": {
+            "otx_key": true
+        }
+    },
+    "brick_number": "br00002",
+    "categorys": [
+        "deal_cashbook"
+    ]
+}

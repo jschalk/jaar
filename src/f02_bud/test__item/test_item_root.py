@@ -1,5 +1,5 @@
 from src.f02_bud.item import itemunit_shop
-from src.f01_road.road import get_default_fiscal_id_ideaunit as root_label
+from src.f01_road.road import get_default_deal_id_ideaunit as root_label
 from pytest import raises as pytest_raises
 
 
@@ -15,7 +15,7 @@ def test_itemunit_shop_With_root_TrueReturnsObj():
     assert x_itemroot._root is True
 
 
-def test_ItemUnit_set_label_get_default_fiscal_id_ideaunit_DoesNotRaisesError():
+def test_ItemUnit_set_label_get_default_deal_id_ideaunit_DoesNotRaisesError():
     # ESTABLISH
     x_itemroot = itemunit_shop(_root=True)
 
@@ -29,7 +29,7 @@ def test_ItemUnit_set_label_get_default_fiscal_id_ideaunit_DoesNotRaisesError():
 def test_ItemUnit_set_label_DoesNotRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_itemroot = itemunit_shop(_root=True, _bud_fiscal_id=el_paso_str)
+    x_itemroot = itemunit_shop(_root=True, _bud_deal_id=el_paso_str)
 
     # WHEN
     x_itemroot.set_label(_label=el_paso_str)
@@ -41,7 +41,7 @@ def test_ItemUnit_set_label_DoesNotRaisesError():
 def test_ItemUnit_set_label_DoesRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_itemroot = itemunit_shop(_root=True, _bud_fiscal_id=el_paso_str)
+    x_itemroot = itemunit_shop(_root=True, _bud_deal_id=el_paso_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -53,7 +53,7 @@ def test_ItemUnit_set_label_DoesRaisesError():
     )
 
 
-def test_ItemUnit_set_label_RaisesErrorWhen_bud_fiscal_id_IsNone():
+def test_ItemUnit_set_label_RaisesErrorWhen_bud_deal_id_IsNone():
     # ESTABLISH
     x_itemroot = itemunit_shop(_root=True)
 

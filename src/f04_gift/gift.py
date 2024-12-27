@@ -1,7 +1,7 @@
 from src.f00_instrument.file import save_file, open_file, create_path
 from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
 from src.f01_road.jaar_config import get_init_gift_id_if_None, get_json_filename
-from src.f01_road.road import FaceID, OwnerID, FiscalID, get_default_fiscal_id_ideaunit
+from src.f01_road.road import FaceID, OwnerID, dealID, get_default_deal_id_ideaunit
 from src.f04_gift.atom import AtomUnit, get_from_json as atomunit_get_from_json
 from src.f04_gift.delta import DeltaUnit, deltaunit_shop
 from dataclasses import dataclass
@@ -11,7 +11,7 @@ from os.path import exists as os_path_exists
 @dataclass
 class GiftUnit:
     face_id: FaceID = None
-    fiscal_id: FiscalID = None
+    deal_id: dealID = None
     owner_id: OwnerID = None
     _gift_id: int = None
     _deltaunit: DeltaUnit = None
@@ -40,7 +40,7 @@ class GiftUnit:
     def get_step_dict(self) -> dict[str, any]:
         return {
             "face_id": self.face_id,
-            "fiscal_id": self.fiscal_id,
+            "deal_id": self.deal_id,
             "owner_id": self.owner_id,
             "delta": self._deltaunit.get_ordered_atomunits(self._delta_start),
         }
@@ -104,7 +104,7 @@ class GiftUnit:
 def giftunit_shop(
     owner_id: OwnerID,
     face_id: FaceID = None,
-    fiscal_id: FiscalID = None,
+    deal_id: dealID = None,
     _gift_id: int = None,
     _deltaunit: DeltaUnit = None,
     _delta_start: int = None,
@@ -112,11 +112,11 @@ def giftunit_shop(
     _atoms_dir: str = None,
 ):
     _deltaunit = deltaunit_shop() if _deltaunit is None else _deltaunit
-    fiscal_id = get_default_fiscal_id_ideaunit() if fiscal_id is None else fiscal_id
+    deal_id = get_default_deal_id_ideaunit() if deal_id is None else deal_id
     x_giftunit = GiftUnit(
         face_id=face_id,
         owner_id=owner_id,
-        fiscal_id=fiscal_id,
+        deal_id=deal_id,
         _gift_id=get_init_gift_id_if_None(_gift_id),
         _deltaunit=_deltaunit,
         _gifts_dir=_gifts_dir,
@@ -134,13 +134,13 @@ def create_giftunit_from_files(
     gift_filename = get_json_filename(gift_id)
     gift_dict = get_dict_from_json(open_file(gifts_dir, gift_filename))
     x_owner_id = gift_dict.get("owner_id")
-    x_fiscal_id = gift_dict.get("fiscal_id")
+    x_deal_id = gift_dict.get("deal_id")
     x_face_id = gift_dict.get("face_id")
     delta_atom_numbers_list = gift_dict.get("delta_atom_numbers")
     x_giftunit = giftunit_shop(
         face_id=x_face_id,
         owner_id=x_owner_id,
-        fiscal_id=x_fiscal_id,
+        deal_id=x_deal_id,
         _gift_id=gift_id,
         _atoms_dir=atoms_dir,
     )

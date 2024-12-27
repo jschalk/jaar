@@ -5,7 +5,7 @@ from src.f04_gift.atom_config import (
     parent_road_str,
     label_str,
     gogo_want_str,
-    fiscal_id_str,
+    deal_id_str,
     owner_id_str,
     get_atom_config_args,
 )
@@ -23,7 +23,7 @@ def create_categorys_brick_format_dict() -> dict:
     for brick_category, category_dict in get_brick_config_dict().items():
         if category_dict.get("brick_type") == "budunit":
             brick_filename = f"brick_format_{x_count:05}_{brick_category}_v0_0_0.json"
-            attributes_set = {fiscal_id_str(), owner_id_str()}
+            attributes_set = {deal_id_str(), owner_id_str()}
             args_dict = get_atom_config_args(brick_category)
             attributes_set.update(set(args_dict.keys()))
 
@@ -46,7 +46,7 @@ def test_create_categorys_brick_format_dict_ReturnObj(rebuild_bool):
     assert bud_itemunit_dict.get(categorys_str()) == [bud_itemunit_str()]
     assert bud_itemunit_dict.get(attributes_str())
     bud_itemunit_attributes = bud_itemunit_dict.get(attributes_str())
-    assert fiscal_id_str() in bud_itemunit_attributes
+    assert deal_id_str() in bud_itemunit_attributes
     assert owner_id_str() in bud_itemunit_attributes
     assert parent_road_str() in bud_itemunit_attributes
     assert label_str() in bud_itemunit_attributes

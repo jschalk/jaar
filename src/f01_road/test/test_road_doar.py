@@ -1,5 +1,5 @@
 from src.f01_road.road import (
-    get_default_fiscal_id_ideaunit as root_label,
+    get_default_deal_id_ideaunit as root_label,
     default_wall_if_None,
     get_road_from_doar,
     get_doar_from_road,

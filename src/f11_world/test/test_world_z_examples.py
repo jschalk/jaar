@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import fiscal_id_str, acct_id_str
+from src.f04_gift.atom_config import deal_id_str, acct_id_str
 from src.f09_brick.pandas_tool import upsert_sheet
 from src.f10_etl.brick_collector import get_all_excel_bricksheets
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -15,7 +15,7 @@ def test_ocean_to_boat_staging_PidginsAll(env_dir_setup_cleanup):
     music_str = "music23"
     sue_str = "Sue"
     event_id = 55
-    df1 = DataFrame([[music_str, sue_str]], columns=[fiscal_id_str(), acct_id_str()])
+    df1 = DataFrame([[music_str, sue_str]], columns=[deal_id_str(), acct_id_str()])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     br00000_str = "br00000"
     br00001_str = "br00001"

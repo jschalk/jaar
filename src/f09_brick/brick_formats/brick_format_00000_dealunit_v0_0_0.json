@@ -1,0 +1,44 @@
+{
+    "attributes": {
+        "c400_number": {
+            "otx_key": false
+        },
+        "current_time": {
+            "otx_key": false
+        },
+        "event_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "deal_id": {
+            "otx_key": true
+        },
+        "fund_coin": {
+            "otx_key": false
+        },
+        "monthday_distortion": {
+            "otx_key": false
+        },
+        "penny": {
+            "otx_key": false
+        },
+        "respect_bit": {
+            "otx_key": false
+        },
+        "wall": {
+            "otx_key": false
+        },
+        "timeline_label": {
+            "otx_key": false
+        },
+        "yr1_jan1_offset": {
+            "otx_key": false
+        }
+    },
+    "brick_number": "br00000",
+    "categorys": [
+        "dealunit"
+    ]
+}

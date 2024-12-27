@@ -1,0 +1,23 @@
+{
+    "attributes": {
+        "cumlative_minute": {
+            "otx_key": false
+        },
+        "event_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "deal_id": {
+            "otx_key": true
+        },
+        "hour_label": {
+            "otx_key": true
+        }
+    },
+    "brick_number": "br00003",
+    "categorys": [
+        "deal_timeline_hour"
+    ]
+}

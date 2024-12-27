@@ -12,7 +12,7 @@ from pytest import raises as pytest_raises
 
 
 # The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
-# initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
+# initialize dealunits and output acct metrics such as calendars, financial status, healer status
 
 
 def test_default_unknown_word_if_None_ReturnsObj():

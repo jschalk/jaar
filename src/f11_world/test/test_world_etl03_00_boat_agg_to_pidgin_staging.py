@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
     face_id_str,
-    fiscal_id_str,
+    deal_id_str,
     acct_id_str,
     owner_id_str,
 )
@@ -67,7 +67,7 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     br00113_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         owner_id_str(),
         acct_id_str(),
         otx_acct_id_str(),
@@ -100,7 +100,7 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     br00115_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         owner_id_str(),
         acct_id_str(),
         otx_group_id_str(),
@@ -132,7 +132,7 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     br00116_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         owner_id_str(),
         acct_id_str(),
         otx_idea_str(),
@@ -164,7 +164,7 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     br00117_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         owner_id_str(),
         acct_id_str(),
         otx_road_str(),

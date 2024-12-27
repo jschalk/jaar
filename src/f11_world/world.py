@@ -8,12 +8,12 @@ from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
     FaceID,
     EventID,
-    FiscalID,
+    dealID,
     WorldID,
     TimeLineLabel,
     get_default_world_id,
 )
-from src.f07_fiscal.fiscal import FiscalUnit
+from src.f07_deal.deal import dealUnit
 from src.f10_etl.transformers import (
     etl_ocean_to_boat_staging,
     etl_boat_staging_to_boat_agg,
@@ -35,7 +35,7 @@ from src.f10_etl.transformers import (
     etl_bow_event_bricks_to_inx_events,
     etl_bow_inx_event_bricks_to_aft_faces,
     etl_aft_face_bricks_to_aft_event_bricks,
-    etl_aft_event_bricks_to_fiscal_bricks,
+    etl_aft_event_bricks_to_deal_bricks,
 )
 from dataclasses import dataclass
 
@@ -44,7 +44,7 @@ def get_default_worlds_dir() -> str:
     return "src/f11_world/examples/worlds"
 
 
-class _set_fiscal_pidgin_Exception(Exception):
+class _set_deal_pidgin_Exception(Exception):
     pass
 
 
@@ -60,7 +60,7 @@ class WorldUnit:
     _world_dir: str = None
     _ocean_dir: str = None
     _boat_dir: str = None
-    _fiscalunits: set[FiscalID] = None
+    _dealunits: set[dealID] = None
     _pidgin_events: dict[FaceID, set[EventID]] = None
 
     def set_event(self, event_id: EventID, face_id: FaceID):
@@ -159,8 +159,8 @@ class WorldUnit:
     def aft_face_bricks_to_aft_event_bricks(self):
         etl_aft_face_bricks_to_aft_event_bricks(self._faces_aft_dir)
 
-    def aft_event_bricks_to_fiscal_bricks(self):
-        etl_aft_event_bricks_to_fiscal_bricks(self._faces_aft_dir)
+    def aft_event_bricks_to_deal_bricks(self):
+        etl_aft_event_bricks_to_deal_bricks(self._faces_aft_dir)
 
     def get_dict(self) -> dict:
         return {
@@ -177,7 +177,7 @@ def worldunit_shop(
     ocean_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineLabel, TimeConversion] = None,
-    _fiscalunits: set[FiscalID] = None,
+    _dealunits: set[dealID] = None,
 ) -> WorldUnit:
     if world_id is None:
         world_id = get_default_world_id()
@@ -189,7 +189,7 @@ def worldunit_shop(
         current_time=get_0_if_None(current_time),
         timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
-        _fiscalunits=get_empty_set_if_None(_fiscalunits),
+        _dealunits=get_empty_set_if_None(_dealunits),
         _ocean_dir=ocean_dir,
         _pidgin_events={},
     )
@@ -199,5 +199,5 @@ def worldunit_shop(
     return x_worldunit
 
 
-def init_fiscalunits_from_dirs(x_dirs: list[str]) -> list[FiscalUnit]:
+def init_dealunits_from_dirs(x_dirs: list[str]) -> list[dealUnit]:
     return []

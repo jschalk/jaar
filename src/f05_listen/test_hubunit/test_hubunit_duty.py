@@ -1,6 +1,6 @@
 from src.f01_road.road import (
     create_road,
-    get_default_fiscal_id_ideaunit as root_label,
+    get_default_deal_id_ideaunit as root_label,
 )
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.example_listen_buds import get_budunit_with_4_levels
