@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_fiscal_id_ideaunit as root_label, create_road
+from src.f01_road.road import get_default_deal_id_ideaunit as root_label, create_road
 from src.f02_bud.item import itemunit_shop
 from pytest import raises as pytest_raises
 

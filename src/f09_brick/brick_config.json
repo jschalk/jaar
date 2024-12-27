@@ -71,7 +71,7 @@
       "acct_id": {},
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "group_id": {},
       "time_id": {}
     },
@@ -88,7 +88,7 @@
       "acct_id": {},
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "time_id": {}
     },
     "jvalues": {
@@ -104,7 +104,7 @@
       "awardee_id": {},
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "road": {},
       "time_id": {}
     },
@@ -121,7 +121,7 @@
       "base": {},
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "road": {},
       "time_id": {}
     },
@@ -138,7 +138,7 @@
     "jkeys": {
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "healer_id": {},
       "road": {},
       "time_id": {}
@@ -153,7 +153,7 @@
       "base": {},
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "need": {},
       "road": {},
       "time_id": {}
@@ -172,7 +172,7 @@
       "base": {},
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "road": {},
       "time_id": {}
     },
@@ -187,7 +187,7 @@
     "jkeys": {
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "road": {},
       "team_id": {},
       "time_id": {}
@@ -201,7 +201,7 @@
     "jkeys": {
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "label": {},
       "parent_road": {},
       "time_id": {}
@@ -227,7 +227,7 @@
     "jkeys": {
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "time_id": {}
     },
     "jvalues": {
@@ -242,15 +242,15 @@
       "tally": {}
     }
   },
-  "fiscal_cashbook": {
+  "deal_cashbook": {
     "allowed_crud": "INSERT_MULITPLE",
-    "brick_type": "fiscalunit",
+    "brick_type": "dealunit",
     "build_order": 21,
     "jkeys": {
       "acct_id": {},
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "owner_id": {},
       "time_id": {}
     },
@@ -258,15 +258,15 @@
       "amount": {}
     }
   },
-  "fiscal_purview_episode": {
+  "deal_purview_episode": {
     "allowed_crud": "INSERT_MULITPLE",
-    "brick_type": "fiscalunit",
+    "brick_type": "dealunit",
     "build_order": 20,
     "jkeys": {
       "acct_id": {},
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "owner_id": {},
       "time_id": {}
     },
@@ -274,14 +274,14 @@
       "quota": {}
     }
   },
-  "fiscal_timeline_hour": {
+  "deal_timeline_hour": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "brick_type": "fiscalunit",
+    "brick_type": "dealunit",
     "build_order": 6,
     "jkeys": {
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "hour_label": {},
       "time_id": {}
     },
@@ -289,14 +289,14 @@
       "cumlative_minute": {}
     }
   },
-  "fiscal_timeline_month": {
+  "deal_timeline_month": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "brick_type": "fiscalunit",
+    "brick_type": "dealunit",
     "build_order": 7,
     "jkeys": {
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "month_label": {},
       "time_id": {}
     },
@@ -304,14 +304,14 @@
       "cumlative_day": {}
     }
   },
-  "fiscal_timeline_weekday": {
+  "deal_timeline_weekday": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "brick_type": "fiscalunit",
+    "brick_type": "dealunit",
     "build_order": 8,
     "jkeys": {
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "time_id": {},
       "weekday_label": {}
     },
@@ -319,14 +319,14 @@
       "weekday_order": {}
     }
   },
-  "fiscalunit": {
+  "dealunit": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "brick_type": "fiscalunit",
+    "brick_type": "dealunit",
     "build_order": 5,
     "jkeys": {
       "event_id": {},
       "face_id": {},
-      "fiscal_id": {},
+      "deal_id": {},
       "time_id": {}
     },
     "jvalues": {

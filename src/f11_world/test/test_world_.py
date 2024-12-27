@@ -1,7 +1,7 @@
 from src.f00_instrument.file import save_file, delete_dir, create_path
 from src.f01_road.finance_tran import timeconversion_shop
 from src.f08_pidgin.pidgin import pidginunit_shop
-from src.f11_world.world import init_fiscalunits_from_dirs, WorldUnit, worldunit_shop
+from src.f11_world.world import init_dealunits_from_dirs, WorldUnit, worldunit_shop
 from src.f11_world.examples.world_env import (
     get_test_world_id,
     get_test_worlds_dir,
@@ -10,7 +10,7 @@ from src.f11_world.examples.world_env import (
 from os.path import exists as os_path_exists
 
 # The goal of the world function is to allow a single command, pointing at a bunch of directories
-# initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
+# initialize dealunits and output acct metrics such as calendars, financial status, healer status
 
 
 def test_WorldUnit_Exists():
@@ -28,7 +28,7 @@ def test_WorldUnit_Exists():
     assert not x_world._world_dir
     assert not x_world._ocean_dir
     assert not x_world._boat_dir
-    assert not x_world._fiscalunits
+    assert not x_world._dealunits
     assert not x_world._pidgin_events
 
 
@@ -100,7 +100,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     world2_current_time = 55
     music_str = "music45"
     world2timeconversions = {music_str: timeconversion_shop(music_str)}
-    world2_fiscalunits = {"music45"}
+    world2_dealunits = {"music45"}
 
     # WHEN
     x_world = worldunit_shop(
@@ -109,7 +109,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
         ocean_dir=example_ocean_dir,
         current_time=world2_current_time,
         timeconversions=world2timeconversions,
-        _fiscalunits=world2_fiscalunits,
+        _dealunits=world2_dealunits,
     )
 
     # THEN
@@ -121,7 +121,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.timeconversions == world2timeconversions
     assert x_world.events == {}
     assert x_world._faces_bow_dir == create_path(world_dir, "faces_bow")
-    assert x_world._fiscalunits == world2_fiscalunits
+    assert x_world._dealunits == world2_dealunits
     assert x_world._pidgin_events == {}
 
 
@@ -139,7 +139,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world._ocean_dir == create_path(x_world._world_dir, "ocean")
     assert x_world._faces_bow_dir == create_path(world_dir, "faces_bow")
     assert x_world._faces_aft_dir == create_path(world_dir, "faces_aft")
-    assert x_world._fiscalunits == set()
+    assert x_world._dealunits == set()
 
 
 # def test_WorldUnit_open_event_from_files_ReturnsObj(env_dir_setup_cleanup):
@@ -196,15 +196,15 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
 #     assert x_world.pidgins_empty() is False
 
 
-def test_init_fiscalunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
+def test_init_dealunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     x_dir = get_test_worlds_dir()
 
     # WHEN
-    x_fiscalunits = init_fiscalunits_from_dirs([])
+    x_dealunits = init_dealunits_from_dirs([])
 
     # THEN
-    assert x_fiscalunits == []
+    assert x_dealunits == []
 
 
 def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):

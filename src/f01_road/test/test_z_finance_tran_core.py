@@ -46,7 +46,7 @@ def test_TranBook_Exists():
 
     # THEN
     assert x_tranbook
-    assert not x_tranbook.fiscal_id
+    assert not x_tranbook.deal_id
     assert not x_tranbook.tranunits
     assert not x_tranbook._accts_net
 
@@ -65,7 +65,7 @@ def test_tranbook_shop_WithParametersReturnsObj():
 
     # THEN
     assert x_tranbook
-    assert x_tranbook.fiscal_id == music23_str
+    assert x_tranbook.deal_id == music23_str
     assert x_tranbook.tranunits == x_tranunits
     assert x_tranbook._accts_net == {}
 
@@ -79,7 +79,7 @@ def test_tranbook_shop_WithoutParametersReturnsObj():
 
     # THEN
     assert x_tranbook
-    assert x_tranbook.fiscal_id == music23_str
+    assert x_tranbook.deal_id == music23_str
     assert x_tranbook.tranunits == {}
     assert x_tranbook._accts_net == {}
 

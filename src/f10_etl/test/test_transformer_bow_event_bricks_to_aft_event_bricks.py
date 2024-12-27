@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
     acct_id_str,
     face_id_str,
-    fiscal_id_str,
+    deal_id_str,
     owner_id_str,
 )
 from src.f08_pidgin.pidgin_config import event_id_str
@@ -27,7 +27,7 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario0():
     br00011_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         owner_id_str(),
         acct_id_str(),
     ]
@@ -80,7 +80,7 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario0():
 #     br00011_columns = [
 #         face_id_str(),
 #         event_id_str(),
-#         fiscal_id_str(),
+#         deal_id_str(),
 #         owner_id_str(),
 #         acct_id_str(),
 #     ]

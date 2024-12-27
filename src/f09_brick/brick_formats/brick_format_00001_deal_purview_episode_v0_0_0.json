@@ -1,0 +1,29 @@
+{
+    "attributes": {
+        "acct_id": {
+            "otx_key": true
+        },
+        "event_id": {
+            "otx_key": true
+        },
+        "face_id": {
+            "otx_key": true
+        },
+        "deal_id": {
+            "otx_key": true
+        },
+        "owner_id": {
+            "otx_key": true
+        },
+        "quota": {
+            "otx_key": false
+        },
+        "time_id": {
+            "otx_key": true
+        }
+    },
+    "brick_number": "br00001",
+    "categorys": [
+        "deal_purview_episode"
+    ]
+}

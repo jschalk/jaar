@@ -1,13 +1,13 @@
-def get_test_fiscal_id():
+def get_test_deal_id():
     return "music_45"
 
 
-def get_fiscal_id_if_None(fiscal_id: str = None):
-    return get_test_fiscal_id() if fiscal_id is None else fiscal_id
+def get_deal_id_if_None(deal_id: str = None):
+    return get_test_deal_id() if deal_id is None else deal_id
 
 
-def get_test_fiscals_dir():
-    return "src/f07_fiscal/examples/fiscals"
+def get_test_deals_dir():
+    return "src/f07_deal/examples/deals"
 
 
 def get_gifts_folder() -> str:

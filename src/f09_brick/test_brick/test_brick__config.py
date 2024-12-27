@@ -31,7 +31,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_update,
     face_id_str,
-    fiscal_id_str,
+    deal_id_str,
     owner_id_str,
     acct_id_str,
     group_id_str,
@@ -68,17 +68,17 @@ from src.f04_gift.atom_config import (
     take_force_str,
 )
 
-from src.f07_fiscal.fiscal_config import (
-    get_fiscal_args_category_mapping,
-    get_fiscal_config_dict,
-    get_fiscal_categorys,
-    fiscalunit_str,
-    fiscal_purviewlog_str,
-    fiscal_purview_episode_str,
-    fiscal_cashbook_str,
-    fiscal_timeline_hour_str,
-    fiscal_timeline_month_str,
-    fiscal_timeline_weekday_str,
+from src.f07_deal.deal_config import (
+    get_deal_args_category_mapping,
+    get_deal_config_dict,
+    get_deal_categorys,
+    dealunit_str,
+    deal_purviewlog_str,
+    deal_purview_episode_str,
+    deal_cashbook_str,
+    deal_timeline_hour_str,
+    deal_timeline_month_str,
+    deal_timeline_weekday_str,
     current_time_str,
     amount_str,
     month_label_str,
@@ -161,7 +161,7 @@ def test_str_functions_ReturnObj():
     assert delete_insert_str() == "DELETE_INSERT"
     assert delete_update_str() == "DELETE_UPDATE"
 
-    assert get_brick_types() == {budunit_str(), fiscalunit_str(), pidginunit_str()}
+    assert get_brick_types() == {budunit_str(), dealunit_str(), pidginunit_str()}
 
 
 def test_get_brick_elements_sort_order_ReturnsObj():
@@ -171,7 +171,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     # THEN
     assert table_sorting_priority[0] == face_id_str()
     assert table_sorting_priority[1] == event_id_str()
-    assert table_sorting_priority[2] == fiscal_id_str()
+    assert table_sorting_priority[2] == deal_id_str()
     assert table_sorting_priority[3] == owner_id_str()
     assert table_sorting_priority[4] == acct_id_str()
     assert table_sorting_priority[5] == group_id_str()
@@ -245,18 +245,18 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert len(table_sorting_priority) == 73
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
-    fiscal_args = set(get_fiscal_args_category_mapping().keys())
-    print(f"{fiscal_args=}")
-    print(f"{fiscal_args.difference(set(table_sorting_priority))=}")
-    assert fiscal_args.issubset(set(table_sorting_priority))
+    deal_args = set(get_deal_args_category_mapping().keys())
+    print(f"{deal_args=}")
+    print(f"{deal_args.difference(set(table_sorting_priority))=}")
+    assert deal_args.issubset(set(table_sorting_priority))
     pidgin_args = set(get_pidgin_args_category_mapping().keys())
     assert pidgin_args.issubset(set(table_sorting_priority))
-    atom_fiscal_pidgin_args = atom_args
-    atom_fiscal_pidgin_args.update(fiscal_args)
-    atom_fiscal_pidgin_args.update(pidgin_args)
+    atom_deal_pidgin_args = atom_args
+    atom_deal_pidgin_args.update(deal_args)
+    atom_deal_pidgin_args.update(pidgin_args)
     table_sorting_priority.remove(event_id_str())
     table_sorting_priority.remove(face_id_str())
-    assert atom_fiscal_pidgin_args == set(table_sorting_priority)
+    assert atom_deal_pidgin_args == set(table_sorting_priority)
 
 
 def test_get_brick_sqlite_type_ReturnsObj():
@@ -267,7 +267,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert set(sqlite_types.keys()) == set(get_brick_elements_sort_order())
     assert sqlite_types.get(face_id_str()) == "TEXT"
     assert sqlite_types.get(event_id_str()) == "INTEGER"
-    assert sqlite_types.get(fiscal_id_str()) == "TEXT"
+    assert sqlite_types.get(deal_id_str()) == "TEXT"
     assert sqlite_types.get(owner_id_str()) == "TEXT"
     assert sqlite_types.get(acct_id_str()) == "TEXT"
     assert sqlite_types.get(group_id_str()) == "TEXT"
@@ -364,13 +364,13 @@ def test_get_brick_config_dict_ReturnsObj():
     # THEN
     assert x_brick_config
     brick_config_categorys = set(x_brick_config.keys())
-    assert fiscalunit_str() in brick_config_categorys
-    assert fiscal_purviewlog_str() not in brick_config_categorys
-    assert fiscal_purview_episode_str() in brick_config_categorys
-    assert fiscal_cashbook_str() in brick_config_categorys
-    assert fiscal_timeline_hour_str() in brick_config_categorys
-    assert fiscal_timeline_month_str() in brick_config_categorys
-    assert fiscal_timeline_weekday_str() in brick_config_categorys
+    assert dealunit_str() in brick_config_categorys
+    assert deal_purviewlog_str() not in brick_config_categorys
+    assert deal_purview_episode_str() in brick_config_categorys
+    assert deal_cashbook_str() in brick_config_categorys
+    assert deal_timeline_hour_str() in brick_config_categorys
+    assert deal_timeline_month_str() in brick_config_categorys
+    assert deal_timeline_weekday_str() in brick_config_categorys
     assert bud_acct_membership_str() in brick_config_categorys
     assert bud_acctunit_str() in brick_config_categorys
     assert bud_item_awardlink_str() in brick_config_categorys
@@ -386,7 +386,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert bridge_idea_str() in brick_config_categorys
     assert bridge_road_str() in brick_config_categorys
     assert get_atom_categorys().issubset(brick_config_categorys)
-    assert get_fiscal_categorys().issubset(brick_config_categorys)
+    assert get_deal_categorys().issubset(brick_config_categorys)
     assert get_pidgin_categorys().issubset(brick_config_categorys)
     assert len(x_brick_config) == 20
     _validate_brick_config(x_brick_config)
@@ -394,7 +394,7 @@ def test_get_brick_config_dict_ReturnsObj():
 
 def _validate_brick_config(x_brick_config: dict):
     atom_config_dict = get_atom_config_dict()
-    fiscal_config_dict = get_fiscal_config_dict()
+    deal_config_dict = get_deal_config_dict()
     pidgin_config_dict = get_pidgin_config_dict()
     # for every brick_format file there exists a unique brick_number always with leading zeros to make 5 digits
     for brick_category, brick_dict in x_brick_config.items():
@@ -409,18 +409,18 @@ def _validate_brick_config(x_brick_config: dict):
         assert brick_dict.get(normal_specs_str()) is None
         if brick_dict.get(brick_type_str()) == budunit_str():
             sub_category = atom_config_dict.get(brick_category)
-        elif brick_dict.get(brick_type_str()) == fiscalunit_str():
-            sub_category = fiscal_config_dict.get(brick_category)
+        elif brick_dict.get(brick_type_str()) == dealunit_str():
+            sub_category = deal_config_dict.get(brick_category)
         elif brick_dict.get(brick_type_str()) == pidginunit_str():
             sub_category = pidgin_config_dict.get(brick_category)
 
         assert brick_dict.get(allowed_crud_str()) in get_allowed_curds()
 
         if brick_category in {
-            fiscal_timeline_hour_str(),
-            fiscal_timeline_month_str(),
-            fiscal_timeline_weekday_str(),
-            fiscalunit_str(),
+            deal_timeline_hour_str(),
+            deal_timeline_month_str(),
+            deal_timeline_weekday_str(),
+            dealunit_str(),
             bridge_otx2inx_str(),
             bridge_group_id_str(),
             bridge_acct_id_str(),
@@ -428,7 +428,7 @@ def _validate_brick_config(x_brick_config: dict):
             bridge_road_str(),
         }:
             assert brick_dict.get(allowed_crud_str()) == insert_one_time_str()
-        elif brick_category in {fiscal_purview_episode_str(), fiscal_cashbook_str()}:
+        elif brick_category in {deal_purview_episode_str(), deal_cashbook_str()}:
             assert brick_dict.get(allowed_crud_str()) == insert_mulitple_str()
         elif (
             sub_category.get(atom_update()) != None
@@ -483,8 +483,8 @@ def _validate_brick_config(x_brick_config: dict):
         assert sub_jkeys_keys.issubset(brick_jkeys_keys)
 
         sub_jvalues_keys = set(sub_category.get(jvalues_str()).keys())
-        if fiscal_id_str() in sub_jvalues_keys:
-            sub_jvalues_keys.remove(fiscal_id_str())
+        if deal_id_str() in sub_jvalues_keys:
+            sub_jvalues_keys.remove(deal_id_str())
 
         brick_jvalues_dict = brick_dict.get(jvalues_str())
         brick_jvalues_keys = set(brick_jvalues_dict.keys())
@@ -494,9 +494,9 @@ def _validate_brick_config(x_brick_config: dict):
 
         assert face_id_str() in brick_jkeys_keys
         assert event_id_str() in brick_jkeys_keys
-        assert fiscal_id_str() not in brick_jvalues_keys
+        assert deal_id_str() not in brick_jvalues_keys
         if brick_dict.get(brick_type_str()) != pidginunit_str():
-            assert fiscal_id_str() in brick_jkeys_keys
+            assert deal_id_str() in brick_jkeys_keys
             assert time_id_str() in brick_jkeys_keys
 
         # sort_list = get_brick_elements_sort_order()
@@ -545,7 +545,7 @@ def test_get_brick_format_filenames_ReturnsObj():
 def _validate_brick_format_files(brick_filenames: set[str]):
     valid_brick_categorys = set()
     valid_brick_categorys.update(get_atom_categorys())
-    valid_brick_categorys.update(get_fiscal_categorys())
+    valid_brick_categorys.update(get_deal_categorys())
     valid_brick_categorys.update(get_pidgin_categorys())
     config_dict = get_brick_config_dict()
 
@@ -631,10 +631,10 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     # set_brick_config_json(bridge_group_id_str(), 1)
     # set_brick_config_json(bridge_idea_str(), 2)
     # set_brick_config_json(bridge_road_str(), 3)
-    # set_brick_config_json(fiscalunit_str(), 5)
-    # set_brick_config_json(fiscal_timeline_hour_str(), 6)
-    # set_brick_config_json(fiscal_timeline_month_str(), 7)
-    # set_brick_config_json(fiscal_timeline_weekday_str(), 8)
+    # set_brick_config_json(dealunit_str(), 5)
+    # set_brick_config_json(deal_timeline_hour_str(), 6)
+    # set_brick_config_json(deal_timeline_month_str(), 7)
+    # set_brick_config_json(deal_timeline_weekday_str(), 8)
     # set_brick_config_json(bud_acct_membership_str(), 9)
     # set_brick_config_json(bud_acctunit_str(), 10)
     # set_brick_config_json(bud_item_awardlink_str(), 11)
@@ -645,8 +645,8 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     # set_brick_config_json(bud_item_reasonunit_str(), 17)
     # set_brick_config_json(bud_itemunit_str(), 18)
     # set_brick_config_json(budunit_str(), 19)
-    # set_brick_config_json(fiscal_purview_episode_str(), 20)
-    # set_brick_config_json(fiscal_cashbook_str(), 21)
+    # set_brick_config_json(deal_purview_episode_str(), 20)
+    # set_brick_config_json(deal_cashbook_str(), 21)
 
     x_brick_config = get_brick_config_dict()
 
@@ -655,10 +655,10 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     assert x_brick_config.get(bridge_group_id_str()).get(bo) == 1
     assert x_brick_config.get(bridge_idea_str()).get(bo) == 2
     assert x_brick_config.get(bridge_road_str()).get(bo) == 3
-    assert x_brick_config.get(fiscalunit_str()).get(bo) == 5
-    assert x_brick_config.get(fiscal_timeline_hour_str()).get(bo) == 6
-    assert x_brick_config.get(fiscal_timeline_month_str()).get(bo) == 7
-    assert x_brick_config.get(fiscal_timeline_weekday_str()).get(bo) == 8
+    assert x_brick_config.get(dealunit_str()).get(bo) == 5
+    assert x_brick_config.get(deal_timeline_hour_str()).get(bo) == 6
+    assert x_brick_config.get(deal_timeline_month_str()).get(bo) == 7
+    assert x_brick_config.get(deal_timeline_weekday_str()).get(bo) == 8
     assert x_brick_config.get(bud_acct_membership_str()).get(bo) == 9
     assert x_brick_config.get(bud_acctunit_str()).get(bo) == 10
     assert x_brick_config.get(bud_item_awardlink_str()).get(bo) == 11
@@ -669,8 +669,8 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     assert x_brick_config.get(bud_item_reasonunit_str()).get(bo) == 17
     assert x_brick_config.get(bud_itemunit_str()).get(bo) == 18
     assert x_brick_config.get(budunit_str()).get(bo) == 19
-    assert x_brick_config.get(fiscal_purview_episode_str()).get(bo) == 20
-    assert x_brick_config.get(fiscal_cashbook_str()).get(bo) == 21
+    assert x_brick_config.get(deal_purview_episode_str()).get(bo) == 20
+    assert x_brick_config.get(deal_cashbook_str()).get(bo) == 21
 
 
 def test_get_quick_bricks_column_ref_ReturnsObj():
@@ -684,7 +684,7 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
         event_id_str(),
         c400_number_str(),
         current_time_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),

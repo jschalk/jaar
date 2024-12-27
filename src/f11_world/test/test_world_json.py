@@ -34,13 +34,13 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     world2_current_time = 55
     music_str = "music45"
     world2_timeconversions = {music_str: timeconversion_shop(music_str)}
-    world2_fiscalunits = {"music45"}
+    world2_dealunits = {"music45"}
     x_world = worldunit_shop(
         world_id=five_world_id,
         worlds_dir=worlds2_dir,
         current_time=world2_current_time,
         timeconversions=world2_timeconversions,
-        _fiscalunits=world2_fiscalunits,
+        _dealunits=world2_dealunits,
     )
 
     # WHEN

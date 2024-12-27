@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str, fiscal_id_str
-from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
+from src.f04_gift.atom_config import face_id_str, deal_id_str
+from src.f07_deal.deal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import (
     event_id_str,
     inx_wall_str,
@@ -36,7 +36,7 @@ def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario0_Sin
     brick_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         hour_label_str(),
         cumlative_minute_str(),
     ]
@@ -89,7 +89,7 @@ def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario1_Mul
     brick_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         hour_label_str(),
         cumlative_minute_str(),
     ]
@@ -146,7 +146,7 @@ def test_etl_boat_bricks_to_bow_face_bricks_Scenario2_PidginCategoryBricksAreNot
     br00003_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         hour_label_str(),
         cumlative_minute_str(),
     ]

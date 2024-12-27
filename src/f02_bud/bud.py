@@ -31,7 +31,7 @@ from src.f01_road.road import (
     get_terminus_idea,
     get_root_idea_from_road,
     get_ancestor_roads,
-    get_default_fiscal_id_ideaunit,
+    get_default_deal_id_ideaunit,
     get_all_road_ideas,
     get_forefather_roads,
     create_road,
@@ -42,7 +42,7 @@ from src.f01_road.road import (
     OwnerID,
     AcctID,
     HealerID,
-    FiscalID,
+    dealID,
     roadunit_valid_dir_path,
 )
 from src.f02_bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
@@ -117,7 +117,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 
 @dataclass
 class BudUnit:
-    _fiscal_id: FiscalID = None
+    _deal_id: dealID = None
     _owner_id: OwnerID = None
     _last_gift_id: int = None
     tally: float = None
@@ -195,10 +195,10 @@ class BudUnit:
             terminus_idea=terminus_idea,
             wall=self._wall,
         )
-        return road_validate(x_road, self._wall, self._fiscal_id)
+        return road_validate(x_road, self._wall, self._deal_id)
 
     def make_l1_road(self, l1_idea: IdeaUnit):
-        return self.make_road(self._fiscal_id, l1_idea)
+        return self.make_road(self._deal_id, l1_idea)
 
     def set_wall(self, new_wall: str):
         self.settle_bud()
@@ -213,13 +213,13 @@ class BudUnit:
             for x_item in self._item_dict.values():
                 x_item.set_wall(self._wall)
 
-    def set_fiscal_id(self, fiscal_id: str):
-        old_fiscal_id = copy_deepcopy(self._fiscal_id)
+    def set_deal_id(self, deal_id: str):
+        old_deal_id = copy_deepcopy(self._deal_id)
         self.settle_bud()
         for item_obj in self._item_dict.values():
-            item_obj._bud_fiscal_id = fiscal_id
-        self._fiscal_id = fiscal_id
-        self.edit_item_label(old_road=old_fiscal_id, new_label=self._fiscal_id)
+            item_obj._bud_deal_id = deal_id
+        self._deal_id = deal_id
+        self.edit_item_label(old_road=old_deal_id, new_label=self._deal_id)
         self.settle_bud()
 
     def set_max_tree_traverse(self, x_int: int):
@@ -413,7 +413,7 @@ class BudUnit:
         return all_group_ids.difference(x_acctunit_group_ids)
 
     def _is_item_rangeroot(self, item_road: RoadUnit) -> bool:
-        if self._fiscal_id == item_road:
+        if self._deal_id == item_road:
             raise InvalidBudException(
                 "its difficult to foresee a scenario where itemroot is rangeroot"
             )
@@ -444,7 +444,7 @@ class BudUnit:
             self._create_itemkid_if_empty(road=pick)
 
         fact_base_item = self.get_item_obj(base)
-        x_itemroot = self.get_item_obj(self._fiscal_id)
+        x_itemroot = self.get_item_obj(self._deal_id)
         x_fopen = None
         if fnigh is not None and fopen is None:
             x_fopen = x_itemroot.factunits.get(base).fopen
@@ -588,7 +588,7 @@ class BudUnit:
     ):
         self.set_item(
             item_kid=item_kid,
-            parent_road=self._fiscal_id,
+            parent_road=self._deal_id,
             create_missing_items=create_missing_items,
             get_rid_of_missing_awardlinks_awardee_ids=get_rid_of_missing_awardlinks_awardee_ids,
             adoptees=adoptees,
@@ -616,8 +616,8 @@ class BudUnit:
             raise InvalidBudException(exception_str)
 
         item_kid._wall = self._wall
-        if item_kid._bud_fiscal_id != self._fiscal_id:
-            item_kid._bud_fiscal_id = self._fiscal_id
+        if item_kid._bud_deal_id != self._deal_id:
+            item_kid._bud_deal_id = self._deal_id
         if item_kid._fund_coin != self.fund_coin:
             item_kid._fund_coin = self.fund_coin
         if not get_rid_of_missing_awardlinks_awardee_ids:
@@ -1027,7 +1027,7 @@ class BudUnit:
         return [self.get_item_obj(x_item_road) for x_item_road in item_roads]
 
     def _set_item_dict(self):
-        item_list = [self.get_item_obj(self._fiscal_id)]
+        item_list = [self.get_item_obj(self._deal_id)]
         while item_list != []:
             x_item = item_list.pop()
             x_item.clear_gogo_calc_stop_calc()
@@ -1363,7 +1363,7 @@ class BudUnit:
             "respect_bit": self.respect_bit,
             "penny": self.penny,
             "_owner_id": self._owner_id,
-            "_fiscal_id": self._fiscal_id,
+            "_deal_id": self._deal_id,
             "max_tree_traverse": self.max_tree_traverse,
             "_wall": self._wall,
             "_itemroot": self._itemroot.get_dict(),
@@ -1398,7 +1398,7 @@ class BudUnit:
 
 def budunit_shop(
     _owner_id: OwnerID = None,
-    _fiscal_id: FiscalID = None,
+    _deal_id: dealID = None,
     _wall: str = None,
     fund_pool: FundNum = None,
     fund_coin: FundCoin = None,
@@ -1407,11 +1407,11 @@ def budunit_shop(
     tally: float = None,
 ) -> BudUnit:
     _owner_id = "" if _owner_id is None else _owner_id
-    _fiscal_id = get_default_fiscal_id_ideaunit() if _fiscal_id is None else _fiscal_id
+    _deal_id = get_default_deal_id_ideaunit() if _deal_id is None else _deal_id
     x_bud = BudUnit(
         _owner_id=_owner_id,
         tally=get_1_if_None(tally),
-        _fiscal_id=_fiscal_id,
+        _deal_id=_deal_id,
         _accts=get_empty_dict_if_None(None),
         _groupunits={},
         _item_dict=get_empty_dict_if_None(None),
@@ -1435,7 +1435,7 @@ def budunit_shop(
         _root=True,
         _uid=1,
         _level=0,
-        _bud_fiscal_id=x_bud._fiscal_id,
+        _bud_deal_id=x_bud._deal_id,
         _wall=x_bud._wall,
         _fund_coin=x_bud.fund_coin,
         _parent_road="",
@@ -1455,8 +1455,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_owner_id(obj_from_bud_dict(bud_dict, "_owner_id"))
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
-    x_bud._fiscal_id = obj_from_bud_dict(bud_dict, "_fiscal_id")
-    x_bud._itemroot._label = obj_from_bud_dict(bud_dict, "_fiscal_id")
+    x_bud._deal_id = obj_from_bud_dict(bud_dict, "_deal_id")
+    x_bud._itemroot._label = obj_from_bud_dict(bud_dict, "_deal_id")
     bud_wall = obj_from_bud_dict(bud_dict, "_wall")
     x_bud._wall = default_wall_if_None(bud_wall)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
@@ -1483,7 +1483,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     itemroot_dict = bud_dict.get("_itemroot")
     x_bud._itemroot = itemunit_shop(
         _root=True,
-        _label=x_bud._fiscal_id,
+        _label=x_bud._deal_id,
         _parent_road="",
         _level=0,
         _uid=get_obj_from_item_dict(itemroot_dict, "_uid"),
@@ -1503,7 +1503,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
         _wall=get_obj_from_item_dict(itemroot_dict, "_wall"),
-        _bud_fiscal_id=x_bud._fiscal_id,
+        _bud_deal_id=x_bud._deal_id,
         _fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
     create_itemroot_kids_from_dict(x_bud, itemroot_dict)
@@ -1514,7 +1514,7 @@ def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
     parent_road_str = "parent_road"
     # for every kid dict, set parent_road in dict, add to to_evaluate_list
     for x_dict in get_obj_from_item_dict(itemroot_dict, "_kids").values():
-        x_dict[parent_road_str] = x_bud._fiscal_id
+        x_dict[parent_road_str] = x_bud._deal_id
         to_evaluate_item_dicts.append(x_dict)
 
     while to_evaluate_item_dicts != []:

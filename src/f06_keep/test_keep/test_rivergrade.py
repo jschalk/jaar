@@ -1,4 +1,4 @@
-from src.f04_gift.atom_config import fiscal_id_str
+from src.f04_gift.atom_config import deal_id_str
 from src.f06_keep.examples.example_credorledgers import example_yao_hubunit
 from src.f06_keep.rivercycle import RiverGrade, rivergrade_shop
 
@@ -173,7 +173,7 @@ def test_RiverGrade_get_dict_ReturnsCorrectObj():
     rivergrade_dict = x_rivergrade.get_dict()
 
     # THEN
-    assert rivergrade_dict.get(fiscal_id_str()) == yao_hubunit.fiscal_id
+    assert rivergrade_dict.get(deal_id_str()) == yao_hubunit.deal_id
     assert rivergrade_dict.get("healer_id") == yao_hubunit.owner_id
     assert rivergrade_dict.get("keep_road") == yao_hubunit.keep_road
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount
@@ -211,10 +211,10 @@ def test_RiverGrade_get_json_ReturnsCorrectObj():
   "credor_count": 103,
   "credor_rank_num": null,
   "credor_rank_percent": null,
+  "deal_id": "ex_keep04",
   "debtor_count": 101,
   "debtor_rank_num": null,
   "debtor_rank_percent": null,
-  "fiscal_id": "ex_keep04",
   "grant_amount": null,
   "healer_id": "Yao",
   "keep_road": null,

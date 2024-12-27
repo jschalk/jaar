@@ -627,12 +627,12 @@ def test_PurviewLog_get_tranbook_ReturnsObj():
     }
 
     # WHEN
-    x_fiscal_id = "fiscal_id_x"
-    sue_tranbook = sue_purviewlog.get_tranbook(x_fiscal_id)
+    x_deal_id = "deal_id_x"
+    sue_tranbook = sue_purviewlog.get_tranbook(x_deal_id)
 
     # THEN
     assert sue_tranbook
-    assert sue_tranbook.fiscal_id == x_fiscal_id
+    assert sue_tranbook.deal_id == x_deal_id
     assert sue_tranbook.tranunit_exists(sue_str, zia_str, x7_time_id)
     assert sue_tranbook.tranunit_exists(sue_str, bob_str, x4_time_id)
     assert sue_tranbook.get_amount(sue_str, zia_str, x7_time_id) == zia_net_purview

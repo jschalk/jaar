@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f01_road.finance_tran import FiscalID
+from src.f01_road.finance_tran import dealID
 from src.f01_road.road import FaceID, EventID
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -692,7 +692,7 @@ def etl_aft_face_bricks_to_aft_event_bricks(faces_aft_dir: str):
             )
 
 
-def etl_aft_event_bricks_to_fiscal_bricks(faces_aft_dir: str):
+def etl_aft_event_bricks_to_deal_bricks(faces_aft_dir: str):
     for face_id in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_id)
         for event_id in get_level1_dirs(face_dir):
@@ -703,7 +703,7 @@ def etl_aft_event_bricks_to_fiscal_bricks(faces_aft_dir: str):
                 split_excel_into_dirs(
                     input_file=event_brick_path,
                     output_dir=event_dir,
-                    column_name="fiscal_id",
+                    column_name="deal_id",
                     file_name=event_br_ref.brick_number,
                     sheet_name="inx",
                 )

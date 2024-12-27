@@ -156,7 +156,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "denom": "int",
         "divisor": "int",
         "face_id": "AcctID",
-        "fiscal_id": "IdeaUnit",
+        "deal_id": "IdeaUnit",
         "fnigh": "float",
         "fopen": "float",
         "fund_coin": "float",

@@ -16,12 +16,12 @@ from src.f01_road.road import (
     RoadUnit,
     IdeaUnit,
     is_sub_road,
-    get_default_fiscal_id_ideaunit as root_label,
+    get_default_deal_id_ideaunit as root_label,
     all_roadunits_between,
     create_road as road_create_road,
     default_wall_if_None,
     replace_wall,
-    FiscalID,
+    dealID,
     AcctID,
     GroupID,
     RoadUnit,
@@ -203,7 +203,7 @@ class ItemUnit:
     _parent_road: RoadUnit = None
     _root: bool = None
     _kids: dict[RoadUnit,] = None
-    _bud_fiscal_id: FiscalID = None
+    _bud_deal_id: dealID = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupID, AwardLink] = None
     reasonunits: dict[RoadUnit, ReasonUnit] = None
@@ -481,13 +481,13 @@ class ItemUnit:
         if (
             self._root
             and _label is not None
-            and _label != self._bud_fiscal_id
-            and self._bud_fiscal_id is not None
+            and _label != self._bud_deal_id
+            and self._bud_deal_id is not None
         ):
             raise Item_root_LabelNotEmptyException(
-                f"Cannot set itemroot to string different than '{self._bud_fiscal_id}'"
+                f"Cannot set itemroot to string different than '{self._bud_deal_id}'"
             )
-        elif self._root and self._bud_fiscal_id is None:
+        elif self._root and self._bud_deal_id is None:
             self._label = root_label()
         # elif _label is not None:
         else:
@@ -979,7 +979,7 @@ def itemunit_shop(
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
-    _bud_fiscal_id: FiscalID = None,
+    _bud_deal_id: dealID = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
@@ -997,7 +997,7 @@ def itemunit_shop(
     _wall: str = None,
     _healerlink_ratio: float = None,
 ) -> ItemUnit:
-    _bud_fiscal_id = root_label() if _bud_fiscal_id is None else _bud_fiscal_id
+    _bud_deal_id = root_label() if _bud_deal_id is None else _bud_deal_id
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_itemkid = ItemUnit(
@@ -1028,7 +1028,7 @@ def itemunit_shop(
         problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
         _root=get_False_if_None(_root),
-        _bud_fiscal_id=_bud_fiscal_id,
+        _bud_deal_id=_bud_deal_id,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
@@ -1046,7 +1046,7 @@ def itemunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_itemkid._root:
-        x_itemkid.set_label(_label=_bud_fiscal_id)
+        x_itemkid.set_label(_label=_bud_deal_id)
     else:
         x_itemkid.set_label(_label=_label)
     x_itemkid.set_teamunit_empty_if_None()

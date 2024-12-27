@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
     face_id_str,
-    fiscal_id_str,
+    deal_id_str,
     acct_id_str,
     owner_id_str,
 )
@@ -36,7 +36,7 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario0_SingleBrick(
     br00113_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         owner_id_str(),
         acct_id_str(),
         otx_acct_id_str(),
@@ -103,7 +103,7 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario1_MultipleBrick
     br00113_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         owner_id_str(),
         acct_id_str(),
         otx_acct_id_str(),
@@ -190,7 +190,7 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario2_WorldUnit_eve
     br00113_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         owner_id_str(),
         acct_id_str(),
         otx_acct_id_str(),

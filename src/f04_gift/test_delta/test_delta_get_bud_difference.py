@@ -452,12 +452,12 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_insert():
     x_keylist = [
         atom_insert(),
         bud_itemunit_str(),
-        after_sue_bud._fiscal_id,
+        after_sue_bud._deal_id,
         music_str,
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(label_str()) == music_str
-    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._fiscal_id
+    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._deal_id
     assert ball_atomunit.get_value(begin_str()) == music_begin
     assert ball_atomunit.get_value(close_str()) == music_close
     assert ball_atomunit.get_value(mass_str()) == music_mass
@@ -511,11 +511,11 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_update():
     x_keylist = [
         atom_update(),
         bud_itemunit_str(),
-        after_sue_bud._fiscal_id,
+        after_sue_bud._deal_id,
         music_str,
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._fiscal_id
+    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._deal_id
     assert ball_atomunit.get_value(label_str()) == music_str
     assert ball_atomunit.get_value(begin_str()) == after_music_begin
     assert ball_atomunit.get_value(close_str()) == after_music_close

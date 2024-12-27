@@ -1,5 +1,5 @@
 from src.f00_instrument.file import open_file, save_file, delete_dir
-from src.f01_road.road import get_default_fiscal_id_ideaunit as root_label
+from src.f01_road.road import get_default_deal_id_ideaunit as root_label
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.listen_env import (
@@ -91,7 +91,7 @@ def test_HubUnit_initialize_final_file_CorrectlySavesFile(env_dir_setup_cleanup)
 
     # THEN
     final_bud = sue_hubunit.get_final_bud()
-    assert final_bud._fiscal_id == root_label()
+    assert final_bud._deal_id == root_label()
     assert final_bud._owner_id == sue_str
     bob_str = "Bob"
     assert final_bud.acct_exists(bob_str) is False
@@ -116,7 +116,7 @@ def test_HubUnit_initialize_final_file_CorrectlyDoesNotOverwrite(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_fiscal_dir = f"{env_dir()}/{root_label()}"
+    sue_deal_dir = f"{env_dir()}/{root_label()}"
     sue_fund_pool = 50000
     sue_fund_coin = 5
     sue_bit = 25
@@ -149,15 +149,15 @@ def test_HubUnit_initialize_final_file_CorrectlyDoesNotOverwrite(
     # THEN
     assert sue_hubunit.final_file_exists()
 
-    sue_fiscal_dir = f"{env_dir()}/{root_label()}"
-    sue_owners_dir = f"{sue_fiscal_dir}/owners"
+    sue_deal_dir = f"{env_dir()}/{root_label()}"
+    sue_owners_dir = f"{sue_deal_dir}/owners"
     sue_owner_dir = f"{sue_owners_dir}/{sue_str}"
     sue_final_dir = f"{sue_owner_dir}/final"
     sue_final_file_name = f"{sue_str}.json"
     final_file_str = open_file(dest_dir=sue_final_dir, file_name=sue_final_file_name)
     print(f"{final_file_str=}")
     final_bud = budunit_get_from_json(final_file_str)
-    assert final_bud._fiscal_id == root_label()
+    assert final_bud._deal_id == root_label()
     assert final_bud._owner_id == sue_str
     assert final_bud.fund_pool == sue_fund_pool
     assert final_bud.fund_coin == sue_fund_coin
@@ -168,7 +168,7 @@ def test_HubUnit_initialize_final_file_CreatesDirsAndFiles(env_dir_setup_cleanup
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_label(), sue_str, None)
-    delete_dir(sue_hubunit.fiscal_dir())
+    delete_dir(sue_hubunit.deal_dir())
     assert os_path_exists(sue_hubunit.final_path()) is False
 
     # WHEN

@@ -7,7 +7,7 @@ from src.f01_road.finance import (
 )
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f01_road.road import (
-    get_default_fiscal_id_ideaunit as root_label,
+    get_default_deal_id_ideaunit as root_label,
     default_wall_if_None,
 )
 from src.f02_bud.origin import originunit_shop
@@ -20,7 +20,7 @@ def test_BudUnit_Exists():
 
     # THEN
     assert x_bud
-    assert x_bud._fiscal_id is None
+    assert x_bud._deal_id is None
     assert x_bud._owner_id is None
     assert x_bud.tally is None
     assert x_bud._accts is None
@@ -55,7 +55,7 @@ def test_BudUnit_Exists():
 def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
-    iowa_fiscal_id = "Iowa"
+    iowa_deal_id = "Iowa"
     slash_wall = "/"
     x_fund_pool = 555
     x_fund_coin = 7
@@ -65,7 +65,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # WHEN
     x_bud = budunit_shop(
         _owner_id=sue_str,
-        _fiscal_id=iowa_fiscal_id,
+        _deal_id=iowa_deal_id,
         _wall=slash_wall,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
@@ -76,7 +76,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # THEN
     assert x_bud
     assert x_bud._owner_id == sue_str
-    assert x_bud._fiscal_id == iowa_fiscal_id
+    assert x_bud._deal_id == iowa_deal_id
     assert x_bud.tally == 1
     assert x_bud._accts == {}
     assert x_bud._itemroot is not None
@@ -114,7 +114,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
 
     # THEN
     assert x_bud._owner_id == ""
-    assert x_bud._fiscal_id == root_label()
+    assert x_bud._deal_id == root_label()
     assert x_bud._wall == default_wall_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_None()
@@ -125,7 +125,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_bud._itemroot._root
     assert x_bud._itemroot._uid == 1
     assert x_bud._itemroot._level == 0
-    assert x_bud._itemroot._bud_fiscal_id == x_bud._fiscal_id
+    assert x_bud._itemroot._bud_deal_id == x_bud._deal_id
     assert x_bud._itemroot._wall == x_bud._wall
     assert x_bud._itemroot._parent_road == ""
 
@@ -177,10 +177,10 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
 
 def test_BudUnit_set_wall_CorrectlySetsAttr():
     # ESTABLISH
-    x_fiscal_id = "music45"
+    x_deal_id = "music45"
     slash_wall = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_fiscal_id, _wall=slash_wall)
+    sue_bud = budunit_shop(sue_str, x_deal_id, _wall=slash_wall)
     assert sue_bud._wall == slash_wall
 
     # WHEN
@@ -193,10 +193,10 @@ def test_BudUnit_set_wall_CorrectlySetsAttr():
 
 def test_BudUnit_make_road_ReturnsCorrectObj():
     # ESTABLISH
-    x_fiscal_id = "music45"
+    x_deal_id = "music45"
     slash_wall = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_fiscal_id, _wall=slash_wall)
+    sue_bud = budunit_shop(sue_str, x_deal_id, _wall=slash_wall)
     casa_str = "casa"
     v1_casa_road = sue_bud.make_l1_road(casa_str)
 

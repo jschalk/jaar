@@ -1,6 +1,6 @@
 from src.f00_instrument.file import open_file, create_path, get_dir_file_strs
 from src.f04_gift.atom_config import acct_id_str, group_id_str, credor_respect_str
-from src.f09_brick.examples.brick_env import brick_env_setup_cleanup, brick_fiscals_dir
+from src.f09_brick.examples.brick_env import brick_env_setup_cleanup, brick_deals_dir
 from src.f09_brick.examples.examples_pandas import (
     get_empty_dataframe,
     get_small_example01_csv,
@@ -55,7 +55,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(
     brick_env_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = brick_fiscals_dir()
+    env_dir = brick_deals_dir()
     small_dt = get_small_example01_dataframe()
     ex_file_name = "fizzbuzz.csv"
     ex_file_path = create_path(env_dir, ex_file_name)
@@ -74,7 +74,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(
     brick_env_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = brick_fiscals_dir()
+    env_dir = brick_deals_dir()
     atom_example_dt = get_ex02_atom_dataframe()
     ex_file_name = "atom_example.csv"
 

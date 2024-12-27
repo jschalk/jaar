@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str, fiscal_id_str
-from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_label_str
+from src.f04_gift.atom_config import face_id_str, deal_id_str
+from src.f07_deal.deal_config import cumlative_minute_str, hour_label_str
 from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import (
     sheet_exists,
@@ -32,7 +32,7 @@ def test_WorldUnit_boat_agg_to_boat_valid_CreatesSheets_Scenario0(
     br00003_columns = [
         face_id_str(),
         event_id_str(),
-        fiscal_id_str(),
+        deal_id_str(),
         hour_label_str(),
         cumlative_minute_str(),
     ]
@@ -90,7 +90,7 @@ def test_WorldUnit_boat_agg_to_boat_valid_CreatesSheets_Scenario0(
 #     brick_columns = [
 #         face_id_str(),
 #         event_id_str(),
-#         fiscal_id_str(),
+#         deal_id_str(),
 #         hour_label_str(),
 #         cumlative_minute_str(),
 #     ]
