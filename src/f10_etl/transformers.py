@@ -519,7 +519,7 @@ def get_level1_dirs(x_dir: str) -> list[str]:
     try:
         level1_dirs = get_dir_file_strs(x_dir, include_dirs=True, include_files=False)
         return sorted(list(level1_dirs.keys()))
-    except Exception:
+    except OSError as e:
         return []
 
 
