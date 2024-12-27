@@ -676,7 +676,6 @@ def etl_bow_event_bricks_to_inx_events(
 def etl_bow_inx_event_bricks_to_aft_faces(faces_bow_dir: str, faces_aft_dir: str):
     for face_id in get_level1_dirs(faces_bow_dir):
         face_dir = create_path(faces_bow_dir, face_id)
-        print(f"{get_level1_dirs(face_dir)=}")
         for event_id in get_level1_dirs(face_dir):
             event_id = int(event_id)
             event_dir = create_path(face_dir, event_id)
