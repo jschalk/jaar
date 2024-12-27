@@ -29,7 +29,6 @@ from src.f10_etl.transformers import (
     etl_bow_event_pidgins_to_bow_pidgin_csv_files,
     etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
-    get_fiscal_events_by_dirs,
     get_pidgin_events_by_dirs,
     etl_boat_bricks_to_bow_face_bricks,
     etl_bow_face_bricks_to_bow_event_otx_bricks,
@@ -62,7 +61,6 @@ class WorldUnit:
     _ocean_dir: str = None
     _boat_dir: str = None
     _fiscalunits: set[FiscalID] = None
-    _fiscal_events: dict[FiscalID, set[EventID]] = None
     _pidgin_events: dict[FaceID, set[EventID]] = None
 
     def set_event(self, event_id: EventID, face_id: FaceID):
@@ -80,9 +78,6 @@ class WorldUnit:
     def _event_dir(self, face_id: FaceID, event_id: EventID) -> str:
         face_dir = create_path(self._faces_bow_dir, face_id)
         return create_path(face_dir, event_id)
-
-    def _set_fiscal_events(self):
-        self._fiscal_events = get_fiscal_events_by_dirs(self._faces_bow_dir)
 
     def _set_pidgin_events(self):
         self._pidgin_events = get_pidgin_events_by_dirs(self._faces_bow_dir)
@@ -196,7 +191,6 @@ def worldunit_shop(
         events={},
         _fiscalunits=get_empty_set_if_None(_fiscalunits),
         _ocean_dir=ocean_dir,
-        _fiscal_events={},
         _pidgin_events={},
     )
     x_worldunit._set_world_dirs()

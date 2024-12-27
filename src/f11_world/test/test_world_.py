@@ -29,7 +29,6 @@ def test_WorldUnit_Exists():
     assert not x_world._ocean_dir
     assert not x_world._boat_dir
     assert not x_world._fiscalunits
-    assert not x_world._fiscal_events
     assert not x_world._pidgin_events
 
 
@@ -123,7 +122,6 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.events == {}
     assert x_world._faces_bow_dir == create_path(world_dir, "faces_bow")
     assert x_world._fiscalunits == world2_fiscalunits
-    assert x_world._fiscal_events == {}
     assert x_world._pidgin_events == {}
 
 

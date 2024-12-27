@@ -1,6 +1,33 @@
 from src.f10_etl.transformers import get_level1_dirs
+from pathlib import Path
 from os import mkdir as os_mkdir
-from pytest import fixture as pytest_fixture
+from pytest import fixture as pytest_fixture, raises as pytest_raises
+
+
+def test_get_level1_dirs_EmptyDirectory(tmp_path):
+    # ESTABLISH
+    test_dir = tmp_path
+
+    # WHEN
+    result = get_level1_dirs(test_dir)
+
+    # THEN
+    expected_dirs = []
+    assert_fail_str = f"Expected empty list for empty directory, but got {result}"
+    assert result == expected_dirs, assert_fail_str
+
+
+def test_get_level1_dirs_NonExistentDirectory():
+    # ESTABLISH
+    test_dir = Path("/non/existent/directory")
+
+    # WHEN
+    result = get_level1_dirs(test_dir)
+
+    # WHEN/THEN
+    expected_dirs = []
+    assert_fail_str = f"Expected empty list for empty directory, but got {result}"
+    assert result == expected_dirs, assert_fail_str
 
 
 @pytest_fixture
