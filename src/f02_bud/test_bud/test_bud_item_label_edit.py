@@ -254,7 +254,7 @@ def test_bud_set_owner_id_CorrectlyModifiesBoth():
     assert sue_bud._itemroot._label == sue_bud._deal_id
 
 
-def test_bud_edit_item_label_RaisesErrorIfwallIsInLabel():
+def test_bud_edit_item_label_RaisesErrorIfwallIsInIdea():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     old_weekday_str = "weekdays"

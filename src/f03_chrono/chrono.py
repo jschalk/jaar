@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_0_if_None, get_dict_from_json
 from src.f00_instrument.file import open_file, create_path
-from src.f01_road.road import RoadUnit, TimeLineLabel
+from src.f01_road.road import RoadUnit, TimeLineIdea
 from src.f02_bud.item import (
     itemunit_shop,
     ItemUnit,
@@ -191,7 +191,7 @@ def create_week_itemunits(x_weekdays_list) -> dict[str, ItemUnit]:
     }
 
 
-def new_timeline_itemunit(timeline_label: TimeLineLabel, c400_count: int) -> ItemUnit:
+def new_timeline_itemunit(timeline_label: TimeLineIdea, c400_count: int) -> ItemUnit:
     timeline_length = c400_count * get_c400_constants().c400_leap_length
     return itemunit_shop(timeline_label, begin=0, close=timeline_length)
 
@@ -231,7 +231,7 @@ def add_itemunits(
 def add_stan_itemunits(
     x_budunit: BudUnit,
     time_road: RoadUnit,
-    timeline_label: TimeLineLabel,
+    timeline_label: TimeLineIdea,
     timeline_c400_count: int,
 ):
     time_road = x_budunit.make_l1_road(time_str())
@@ -349,7 +349,7 @@ def _duplicate_exists(config_element: list) -> bool:
 
 
 def create_timeline_config(
-    timeline_label: TimeLineLabel,
+    timeline_label: TimeLineIdea,
     c400_count: int,
     hour_length: int,
     month_length: int,
@@ -536,7 +536,7 @@ class TimeLineUnit:
     hours_config: list[list[str, int]] = None
     months_config: list[list[str, int]] = None
     monthday_distortion: int = None
-    timeline_label: TimeLineLabel = None
+    timeline_label: TimeLineIdea = None
     weekdays_config: list[str] = None
     yr1_jan1_offset: int = None
 

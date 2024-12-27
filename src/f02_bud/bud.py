@@ -79,7 +79,7 @@ class InvalidBudException(Exception):
     pass
 
 
-class InvalidLabelException(Exception):
+class InvalidIdeaException(Exception):
     pass
 
 
@@ -706,7 +706,7 @@ class BudUnit:
     def edit_item_label(self, old_road: RoadUnit, new_label: IdeaUnit):
         if self._wall in new_label:
             exception_str = f"Cannot modify '{old_road}' because new_label {new_label} contains wall {self._wall}"
-            raise InvalidLabelException(exception_str)
+            raise InvalidIdeaException(exception_str)
         if self.item_exists(old_road) is False:
             raise InvalidBudException(f"Item {old_road=} does not exist")
 

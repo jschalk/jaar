@@ -31,7 +31,7 @@ from src.f01_road.road import (
     is_ideaunit,
     WorldID,
     get_default_world_id,
-    TimeLineLabel,
+    TimeLineIdea,
     FaceID,
     get_default_face_id,
     EventID,
@@ -152,14 +152,14 @@ def test_DoarUnit_exists():
     assert inspect_getdoc(x_road) == doc_str
 
 
-def test_TimeLineLabel_exists():
+def test_TimeLineIdea_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_timelinelabel = TimeLineLabel(empty_str)
+    x_timelinelabel = TimeLineIdea(empty_str)
     # THEN
     assert x_timelinelabel == empty_str
-    doc_str = "TimeLineLabel is required for every TimeLineUnit. It is a IdeaUnit that must not container the wall."
+    doc_str = "TimeLineIdea is required for every TimeLineUnit. It is a IdeaUnit that must not container the wall."
     assert inspect_getdoc(x_timelinelabel) == doc_str
 
 

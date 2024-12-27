@@ -44,8 +44,8 @@ class AcctID(OwnerID):  # Created to help track the concept
     pass
 
 
-class TimeLineLabel(IdeaUnit):
-    "TimeLineLabel is required for every TimeLineUnit. It is a IdeaUnit that must not container the wall."
+class TimeLineIdea(IdeaUnit):
+    "TimeLineIdea is required for every TimeLineUnit. It is a IdeaUnit that must not container the wall."
 
     pass
 

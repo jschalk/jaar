@@ -74,7 +74,7 @@ class ItemGetDescendantsException(Exception):
     pass
 
 
-class Item_root_LabelNotEmptyException(Exception):
+class Item_root_IdeaNotEmptyException(Exception):
     pass
 
 
@@ -484,7 +484,7 @@ class ItemUnit:
             and _label != self._bud_deal_id
             and self._bud_deal_id is not None
         ):
-            raise Item_root_LabelNotEmptyException(
+            raise Item_root_IdeaNotEmptyException(
                 f"Cannot set itemroot to string different than '{self._bud_deal_id}'"
             )
         elif self._root and self._bud_deal_id is None:

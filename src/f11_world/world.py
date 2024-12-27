@@ -10,7 +10,7 @@ from src.f01_road.road import (
     EventID,
     DealID,
     WorldID,
-    TimeLineLabel,
+    TimeLineIdea,
     get_default_world_id,
 )
 from src.f07_deal.deal import DealUnit
@@ -54,7 +54,7 @@ class WorldUnit:
     worlds_dir: str = None
     current_time: TimeLinePoint = None
     events: dict[EventID, FaceID] = None
-    timeconversions: dict[TimeLineLabel, TimeConversion] = None
+    timeconversions: dict[TimeLineIdea, TimeConversion] = None
     _faces_bow_dir: str = None
     _faces_aft_dir: str = None
     _world_dir: str = None
@@ -96,7 +96,7 @@ class WorldUnit:
         set_dir(self._faces_aft_dir)
         set_dir(self._boat_dir)
 
-    def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
+    def get_timeconversions_dict(self) -> dict[TimeLineIdea, TimeConversion]:
         return self.timeconversions
 
     def ocean_to_boat_staging(self):
@@ -176,7 +176,7 @@ def worldunit_shop(
     worlds_dir: str = None,
     ocean_dir: str = None,
     current_time: TimeLinePoint = None,
-    timeconversions: dict[TimeLineLabel, TimeConversion] = None,
+    timeconversions: dict[TimeLineIdea, TimeConversion] = None,
     _dealunits: set[DealID] = None,
 ) -> WorldUnit:
     if world_id is None:
