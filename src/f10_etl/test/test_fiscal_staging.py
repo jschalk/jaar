@@ -1,9 +1,19 @@
 from src.f00_instrument.file import create_path
+from src.f01_road.finance_tran import quota_str, time_id_str, wall_str
+from src.f03_chrono.chrono import (
+    c400_number_str,
+    monthday_distortion_str,
+    timeline_label_str,
+    yr1_jan1_offset_str,
+)
 from src.f04_gift.atom_config import (
     face_id_str,
     fiscal_id_str,
     acct_id_str,
     owner_id_str,
+    fund_coin_str,
+    penny_str,
+    respect_bit_str,
 )
 from src.f07_fiscal.fiscal_config import (
     current_time_str,
@@ -21,17 +31,18 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_month_str,
     fiscal_timeline_weekday_str,
 )
+from src.f08_pidgin.pidgin_config import event_id_str
 from src.f09_brick.pandas_tool import (
     upsert_sheet,
     sheet_exists,
     _get_fiscal_brick_format_filenames,
     boat_agg_str,
 )
-from src.f11_world.world import worldunit_shop
-from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
+from src.f10_etl.fiscal_agg import create_init_fiscal_staging_files
+from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
-
+from copy import copy as copy_copy
 
 # _get_fiscal_brick_format_filenames == {
 #     "br00000.xlsx",
@@ -53,7 +64,7 @@ from os.path import exists as os_path_exists
 
 def test_create_init_fiscal_staging_files_CreatesFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    x_dir = get_test_worlds_dir()
+    x_dir = get_test_etl_dir()
     staging_str = "staging"
     br00000_path = create_path(x_dir, "br00000.xlsx")
     br00001_path = create_path(x_dir, "br00001.xlsx")
@@ -69,7 +80,7 @@ def test_create_init_fiscal_staging_files_CreatesFiles(env_dir_setup_cleanup):
     assert sheet_exists(br00005_path, staging_str) is False
 
     # WHEN
-    create_init_fiscal_staging_files()
+    create_init_fiscal_staging_files(x_dir)
 
     # THEN
     assert sheet_exists(br00000_path, staging_str)
@@ -78,6 +89,68 @@ def test_create_init_fiscal_staging_files_CreatesFiles(env_dir_setup_cleanup):
     assert sheet_exists(br00003_path, staging_str)
     assert sheet_exists(br00004_path, staging_str)
     assert sheet_exists(br00005_path, staging_str)
+
+
+def test_create_init_fiscal_staging_files_HasCorrectColumns(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_dir = get_test_etl_dir()
+
+    # WHEN
+    create_init_fiscal_staging_files(x_dir)
+
+    # THEN
+    staging_str = "staging"
+    br00000_path = create_path(x_dir, "br00000.xlsx")
+    br00001_path = create_path(x_dir, "br00001.xlsx")
+    br00002_path = create_path(x_dir, "br00002.xlsx")
+    br00003_path = create_path(x_dir, "br00003.xlsx")
+    br00004_path = create_path(x_dir, "br00004.xlsx")
+    br00005_path = create_path(x_dir, "br00005.xlsx")
+
+    br00000_df = pandas_read_excel(br00000_path, sheet_name=staging_str)
+    br00001_df = pandas_read_excel(br00001_path, sheet_name=staging_str)
+    br00002_df = pandas_read_excel(br00002_path, sheet_name=staging_str)
+    br00003_df = pandas_read_excel(br00003_path, sheet_name=staging_str)
+    br00004_df = pandas_read_excel(br00004_path, sheet_name=staging_str)
+    br00005_df = pandas_read_excel(br00005_path, sheet_name=staging_str)
+
+    common_cols = [face_id_str(), event_id_str(), fiscal_id_str()]
+    expected_br0_columns = copy_copy(common_cols)
+    expected_br1_columns = copy_copy(common_cols)
+    expected_br2_columns = copy_copy(common_cols)
+    expected_br3_columns = copy_copy(common_cols)
+    expected_br4_columns = copy_copy(common_cols)
+    expected_br5_columns = copy_copy(common_cols)
+    expected_br0_columns.extend(
+        [
+            c400_number_str(),
+            current_time_str(),
+            fund_coin_str(),
+            monthday_distortion_str(),
+            penny_str(),
+            respect_bit_str(),
+            wall_str(),
+            timeline_label_str(),
+            yr1_jan1_offset_str(),
+        ]
+    )
+    expected_br1_columns.extend(
+        [owner_id_str(), acct_id_str(), time_id_str(), quota_str()]
+    )
+    expected_br2_columns.extend(
+        [owner_id_str(), acct_id_str(), time_id_str(), amount_str()]
+    )
+    expected_br3_columns.extend([hour_label_str(), cumlative_minute_str()])
+    expected_br4_columns.extend([month_label_str(), cumlative_day_str()])
+    expected_br5_columns.extend([weekday_label_str(), weekday_order_str()])
+
+    print(f"{list(br00000_df.columns)=}")
+    assert list(br00000_df.columns) == expected_br0_columns
+    assert list(br00001_df.columns) == expected_br1_columns
+    assert list(br00002_df.columns) == expected_br2_columns
+    assert list(br00003_df.columns) == expected_br3_columns
+    assert list(br00004_df.columns) == expected_br4_columns
+    assert list(br00005_df.columns) == expected_br5_columns
 
 
 # def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
