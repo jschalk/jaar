@@ -11,7 +11,7 @@ from src.f07_deal.examples.deal_env import (
 from os.path import exists as os_path_exists
 
 
-def test_dealUnit_generate_final_bud_Sets_final_BudFile(env_dir_setup_cleanup):
+def test_DealUnit_generate_final_bud_Sets_final_BudFile(env_dir_setup_cleanup):
     # ESTABLISH
     music_str = "Music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir(), True)
@@ -37,7 +37,7 @@ def test_dealUnit_generate_final_bud_Sets_final_BudFile(env_dir_setup_cleanup):
     assert sue_final._owner_id == example_bud._owner_id
 
 
-def test_dealUnit_generate_final_bud_ReturnsRegeneratedObj(env_dir_setup_cleanup):
+def test_DealUnit_generate_final_bud_ReturnsRegeneratedObj(env_dir_setup_cleanup):
     # ESTABLISH
     music_deal = dealunit_shop("music", get_test_deals_dir(), True)
     sue_str = "Sue"
@@ -56,7 +56,7 @@ def test_dealUnit_generate_final_bud_ReturnsRegeneratedObj(env_dir_setup_cleanup
     assert after_sue_bud.acct_exists(bob_str) is False
 
 
-def test_dealUnit_generate_final_bud_SetsCorrectFileWithout_healerlink(
+def test_DealUnit_generate_final_bud_SetsCorrectFileWithout_healerlink(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -80,7 +80,7 @@ def test_dealUnit_generate_final_bud_SetsCorrectFileWithout_healerlink(
     assert after_bob_final_bud.acct_exists(sue_str)
 
 
-def test_dealUnit_generate_final_bud_SetsFileWith_healerlink(env_dir_setup_cleanup):
+def test_DealUnit_generate_final_bud_SetsFileWith_healerlink(env_dir_setup_cleanup):
     # ESTABLISH
     music_deal = dealunit_shop("music", get_test_deals_dir(), True)
 
@@ -108,7 +108,7 @@ def test_dealUnit_generate_final_bud_SetsFileWith_healerlink(env_dir_setup_clean
     assert after_bob_final_bud.acct_exists(bob_str)
 
 
-def test_dealUnit_generate_all_final_buds_SetsCorrectFiles(
+def test_DealUnit_generate_all_final_buds_SetsCorrectFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

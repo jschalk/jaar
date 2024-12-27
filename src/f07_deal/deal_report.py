@@ -2,12 +2,12 @@ from src.f02_bud.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
 )
-from src.f07_deal.deal import dealUnit
+from src.f07_deal.deal import DealUnit
 from pandas import DataFrame, concat as pandas_concat
 from plotly.graph_objects import Figure as plotly_Figure, Table as plotly_Table
 
 
-def get_deal_voices_accts_dataframe(x_deal: dealUnit) -> DataFrame:
+def get_deal_voices_accts_dataframe(x_deal: DealUnit) -> DataFrame:
     # get list of all owner paths
     owner_hubunits = x_deal.get_owner_hubunits()
     # for all owners get voice
@@ -21,7 +21,7 @@ def get_deal_voices_accts_dataframe(x_deal: dealUnit) -> DataFrame:
     return pandas_concat(voice_dfs, ignore_index=True)
 
 
-def get_deal_voices_accts_plotly_fig(x_deal: dealUnit) -> plotly_Figure:
+def get_deal_voices_accts_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
         "acct_id",
@@ -63,7 +63,7 @@ def get_deal_voices_accts_plotly_fig(x_deal: dealUnit) -> plotly_Figure:
     return fig
 
 
-def get_deal_finals_accts_dataframe(x_deal: dealUnit) -> DataFrame:
+def get_deal_finals_accts_dataframe(x_deal: DealUnit) -> DataFrame:
     # get list of all owner paths
     owner_hubunits = x_deal.get_owner_hubunits()
     # for all owners get final
@@ -77,7 +77,7 @@ def get_deal_finals_accts_dataframe(x_deal: dealUnit) -> DataFrame:
     return pandas_concat(final_dfs, ignore_index=True)
 
 
-def get_deal_finals_accts_plotly_fig(x_deal: dealUnit) -> plotly_Figure:
+def get_deal_finals_accts_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
         "acct_id",
@@ -119,7 +119,7 @@ def get_deal_finals_accts_plotly_fig(x_deal: dealUnit) -> plotly_Figure:
     return fig
 
 
-def get_deal_voices_agenda_dataframe(x_deal: dealUnit) -> DataFrame:
+def get_deal_voices_agenda_dataframe(x_deal: DealUnit) -> DataFrame:
     # get list of all owner paths
     owner_hubunits = x_deal.get_owner_hubunits()
     # for all owners get voice
@@ -132,7 +132,7 @@ def get_deal_voices_agenda_dataframe(x_deal: dealUnit) -> DataFrame:
     return pandas_concat(voice_dfs, ignore_index=True)
 
 
-def get_deal_voices_agenda_plotly_fig(x_deal: dealUnit) -> plotly_Figure:
+def get_deal_voices_agenda_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
         "fund_ratio",
@@ -178,7 +178,7 @@ def get_deal_voices_agenda_plotly_fig(x_deal: dealUnit) -> plotly_Figure:
     return fig
 
 
-def get_deal_finals_agenda_dataframe(x_deal: dealUnit) -> DataFrame:
+def get_deal_finals_agenda_dataframe(x_deal: DealUnit) -> DataFrame:
     # get list of all owner paths
     owner_hubunits = x_deal.get_owner_hubunits()
     # for all owners get final
@@ -191,7 +191,7 @@ def get_deal_finals_agenda_dataframe(x_deal: dealUnit) -> DataFrame:
     return pandas_concat(final_dfs, ignore_index=True)
 
 
-def get_deal_finals_agenda_plotly_fig(x_deal: dealUnit) -> plotly_Figure:
+def get_deal_finals_agenda_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
     column_header_list = [
         "owner_id",
         "fund_ratio",

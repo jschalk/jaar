@@ -7,7 +7,7 @@ from src.f00_instrument.db_toolbox import (
     check_table_column_existence,
 )
 from src.f01_road.jaar_config import get_deal_id_if_None
-from src.f07_deal.deal import dealUnit, dealunit_shop
+from src.f07_deal.deal import DealUnit, dealunit_shop
 from src.f07_deal.examples.deal_env import (
     get_test_deals_dir,
     env_dir_setup_cleanup,
@@ -16,10 +16,10 @@ from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 
 
-def test_dealUnit_get_journal_db_path_ReturnsCorrectObj():
+def test_DealUnit_get_journal_db_path_ReturnsCorrectObj():
     # ESTABLISH
     music_str = "music"
-    music_deal = dealUnit(deal_id=music_str, deals_dir=get_test_deals_dir())
+    music_deal = DealUnit(deal_id=music_str, deals_dir=get_test_deals_dir())
 
     # WHEN
     x_journal_db_path = music_deal.get_journal_db_path()
@@ -30,7 +30,7 @@ def test_dealUnit_get_journal_db_path_ReturnsCorrectObj():
     assert x_journal_db_path == create_path(x_deal_dir, journal_file_name)
 
 
-def test_dealUnit_create_journal_db_CreatesDBIfDoesNotExist(
+def test_DealUnit_create_journal_db_CreatesDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -47,7 +47,7 @@ def test_dealUnit_create_journal_db_CreatesDBIfDoesNotExist(
     assert os_path_exists(music_deal.get_journal_db_path())
 
 
-def test_dealUnit_create_journal_db_DoesNotOverWriteDBIfExists(
+def test_DealUnit_create_journal_db_DoesNotOverWriteDBIfExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -75,7 +75,7 @@ def test_dealUnit_create_journal_db_DoesNotOverWriteDBIfExists(
     # assert open_file(music_deal._deal_dir, file_name=db_file) != x_file_str
 
 
-def test_dealUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
+def test_DealUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(
@@ -94,11 +94,11 @@ def test_dealUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
     assert os_path_exists(music_deal.get_journal_db_path()) is False
 
 
-def test_dealUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
+def test_DealUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH create deal
-    x_deal = dealUnit(get_deal_id_if_None(), get_test_deals_dir())
+    x_deal = DealUnit(get_deal_id_if_None(), get_test_deals_dir())
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         check_connection(x_deal.get_journal_conn())

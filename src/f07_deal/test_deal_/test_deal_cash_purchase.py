@@ -3,7 +3,7 @@ from src.f07_deal.deal import dealunit_shop
 from pytest import raises as pytest_raises
 
 
-def test_dealUnit_set_cashpurchase_SetsAttr():
+def test_DealUnit_set_cashpurchase_SetsAttr():
     # ESTABLISH
     t6606_current_time = 6606
     x_deal = dealunit_shop(current_time=t6606_current_time)
@@ -21,7 +21,7 @@ def test_dealUnit_set_cashpurchase_SetsAttr():
     assert x_deal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
-def test_dealUnit_add_cashpurchase_SetsAttr():
+def test_DealUnit_add_cashpurchase_SetsAttr():
     # ESTABLISH
     t6606_current_time = 6606
     x_deal = dealunit_shop(current_time=t6606_current_time)
@@ -38,7 +38,7 @@ def test_dealUnit_add_cashpurchase_SetsAttr():
     assert x_deal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
-def test_dealUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_id_GreaterThanOrEqual_current_time():
+def test_DealUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_id_GreaterThanOrEqual_current_time():
     # ESTABLISH
     t6606_current_time = 6606
     x_deal = dealunit_shop(current_time=t6606_current_time)
@@ -75,7 +75,7 @@ def test_dealUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_id_GreaterThanO
     assert str(excinfo.value) == exception_str
 
 
-def test_dealUnit_set_cashpurchase_RaisesErrorWhenPurviewEpisodeHas_time_id():
+def test_DealUnit_set_cashpurchase_RaisesErrorWhenPurviewEpisodeHas_time_id():
     # ESTABLISH
     x_deal = dealunit_shop(current_time=0)
     sue_str = "Sue"
@@ -95,7 +95,7 @@ def test_dealUnit_set_cashpurchase_RaisesErrorWhenPurviewEpisodeHas_time_id():
     assert str(excinfo.value) == exception_str
 
 
-def test_dealUnit_cashpurchase_exists_ReturnsObj():
+def test_DealUnit_cashpurchase_exists_ReturnsObj():
     # ESTABLISH
     x_deal = dealunit_shop(current_time=6606)
     sue_str = "Sue"
@@ -111,7 +111,7 @@ def test_dealUnit_cashpurchase_exists_ReturnsObj():
     assert x_deal.cashpurchase_exists(sue_str, bob_str, t55_t)
 
 
-def test_dealUnit_get_cashpurchase_ReturnsObj():
+def test_DealUnit_get_cashpurchase_ReturnsObj():
     # ESTABLISH
     x_deal = dealunit_shop(current_time=6606)
     sue_str = "Sue"
@@ -130,7 +130,7 @@ def test_dealUnit_get_cashpurchase_ReturnsObj():
     assert sue_gen_cashpurchase == sue_bob_t55_tranunit
 
 
-def test_dealUnit_del_cashpurchase_SetsAttr():
+def test_DealUnit_del_cashpurchase_SetsAttr():
     # ESTABLISH
     x_deal = dealunit_shop(current_time=6606)
     sue_str = "Sue"
@@ -147,7 +147,7 @@ def test_dealUnit_del_cashpurchase_SetsAttr():
     assert x_deal.cashpurchase_exists(sue_str, bob_str, t55_t) is False
 
 
-def test_dealUnit_set_current_time_SetsAttr():
+def test_DealUnit_set_current_time_SetsAttr():
     # ESTABLISH
     t6606_current_time = 6606
     x_deal = dealunit_shop(current_time=t6606_current_time)
@@ -166,7 +166,7 @@ def test_dealUnit_set_current_time_SetsAttr():
     assert x_deal.current_time == t4404_current_time
 
 
-def test_dealUnit_set_current_time_RaisesErrorWhen_cashpurchase_ExistsWithGreatertime_id():
+def test_DealUnit_set_current_time_RaisesErrorWhen_cashpurchase_ExistsWithGreatertime_id():
     # ESTABLISH
     t6606_current_time = 6606
     x_deal = dealunit_shop(current_time=t6606_current_time)
@@ -188,7 +188,7 @@ def test_dealUnit_set_current_time_RaisesErrorWhen_cashpurchase_ExistsWithGreate
     assert x_deal.current_time == t6606_current_time
 
 
-def test_dealUnit_set_all_tranbook_SetsAttr():
+def test_DealUnit_set_all_tranbook_SetsAttr():
     # ESTABLISH
     x_deal = dealunit_shop(current_time=10101)
     sue_str = "Sue"

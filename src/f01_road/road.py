@@ -16,7 +16,7 @@ class IdeaUnit(str):
         return self.find(default_wall_if_None(wall)) == -1
 
 
-class dealID(IdeaUnit):  # Created to help track the concept
+class DealID(IdeaUnit):  # Created to help track the concept
     pass
 
 
@@ -219,7 +219,7 @@ def get_forefather_roads(road: RoadUnit) -> dict[RoadUnit]:
     return {a_road: None for a_road in ancestor_roads}
 
 
-def get_default_deal_id_ideaunit() -> dealID:
+def get_default_deal_id_ideaunit() -> DealID:
     return "ZZ"
 
 

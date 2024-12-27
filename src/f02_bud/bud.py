@@ -42,7 +42,7 @@ from src.f01_road.road import (
     OwnerID,
     AcctID,
     HealerID,
-    dealID,
+    DealID,
     roadunit_valid_dir_path,
 )
 from src.f02_bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
@@ -117,7 +117,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 
 @dataclass
 class BudUnit:
-    _deal_id: dealID = None
+    _deal_id: DealID = None
     _owner_id: OwnerID = None
     _last_gift_id: int = None
     tally: float = None
@@ -1398,7 +1398,7 @@ class BudUnit:
 
 def budunit_shop(
     _owner_id: OwnerID = None,
-    _deal_id: dealID = None,
+    _deal_id: DealID = None,
     _wall: str = None,
     fund_pool: FundNum = None,
     fund_coin: FundCoin = None,

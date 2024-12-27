@@ -21,7 +21,7 @@ from src.f01_road.road import (
     create_road as road_create_road,
     default_wall_if_None,
     replace_wall,
-    dealID,
+    DealID,
     AcctID,
     GroupID,
     RoadUnit,
@@ -203,7 +203,7 @@ class ItemUnit:
     _parent_road: RoadUnit = None
     _root: bool = None
     _kids: dict[RoadUnit,] = None
-    _bud_deal_id: dealID = None
+    _bud_deal_id: DealID = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupID, AwardLink] = None
     reasonunits: dict[RoadUnit, ReasonUnit] = None
@@ -979,7 +979,7 @@ def itemunit_shop(
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
-    _bud_deal_id: dealID = None,
+    _bud_deal_id: DealID = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,

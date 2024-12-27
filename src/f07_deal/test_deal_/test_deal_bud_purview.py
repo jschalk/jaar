@@ -4,7 +4,7 @@ from src.f07_deal.examples.deal_env import get_test_deals_dir
 from pytest import raises as pytest_raises
 
 
-def test_dealUnit_set_purviewlog_SetsAttr():
+def test_DealUnit_set_purviewlog_SetsAttr():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir())
@@ -20,7 +20,7 @@ def test_dealUnit_set_purviewlog_SetsAttr():
     assert music_deal.purviewlogs.get(sue_str) == sue_purviewlog
 
 
-def test_dealUnit_purviewlog_exists_ReturnsObj():
+def test_DealUnit_purviewlog_exists_ReturnsObj():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir())
@@ -35,7 +35,7 @@ def test_dealUnit_purviewlog_exists_ReturnsObj():
     assert music_deal.purviewlog_exists(sue_str)
 
 
-def test_dealUnit_get_purviewlog_ReturnsObj():
+def test_DealUnit_get_purviewlog_ReturnsObj():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir())
@@ -52,7 +52,7 @@ def test_dealUnit_get_purviewlog_ReturnsObj():
     assert sue_purviewlog == sue_gen_purviewlog
 
 
-def test_dealUnit_del_purviewlog_SetsAttr():
+def test_DealUnit_del_purviewlog_SetsAttr():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir())
@@ -68,7 +68,7 @@ def test_dealUnit_del_purviewlog_SetsAttr():
     assert music_deal.purviewlog_exists(sue_str) is False
 
 
-def test_dealUnit_add_purviewepisode_SetsAttr():
+def test_DealUnit_add_purviewepisode_SetsAttr():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir())
@@ -98,7 +98,7 @@ def test_dealUnit_add_purviewepisode_SetsAttr():
     assert music_deal.get_purviewlog(bob_str) == bob_purviewlog
 
 
-def test_dealUnit_get_purviewlogs_time_ids_ReturnsObj():
+def test_DealUnit_get_purviewlogs_time_ids_ReturnsObj():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir())
@@ -122,7 +122,7 @@ def test_dealUnit_get_purviewlogs_time_ids_ReturnsObj():
     assert music_deal.get_purviewlogs_time_ids() == all_time_ids
 
 
-def test_dealUnit_add_purviewepisode_RaisesErrorWhenPurview_time_id_IsLessThan_current_time():
+def test_DealUnit_add_purviewepisode_RaisesErrorWhenPurview_time_id_IsLessThan_current_time():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir())
@@ -143,11 +143,11 @@ def test_dealUnit_add_purviewepisode_RaisesErrorWhenPurview_time_id_IsLessThan_c
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         music_deal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
-    exception_str = f"Cannot set purviewepisode because time_id {sue_x4_time_id} is less than dealUnit.current_time {music_current_time}."
+    exception_str = f"Cannot set purviewepisode because time_id {sue_x4_time_id} is less than DealUnit.current_time {music_current_time}."
     assert str(excinfo.value) == exception_str
 
 
-def test_dealUnit_add_purviewepisode_DoesNotRaiseError_allow_prev_to_current_time_entry_IsTrue():
+def test_DealUnit_add_purviewepisode_DoesNotRaiseError_allow_prev_to_current_time_entry_IsTrue():
     # ESTABLISH
     music_str = "music"
     music_deal = dealunit_shop(music_str, get_test_deals_dir())

@@ -11,7 +11,7 @@ from src.f00_instrument.dict_toolbox import (
     del_in_nested_dict,
 )
 from src.f01_road.finance import FundNum, TimeLinePoint, default_fund_pool
-from src.f01_road.road import AcctID, OwnerID, dealID, get_default_deal_id_ideaunit
+from src.f01_road.road import AcctID, OwnerID, DealID, get_default_deal_id_ideaunit
 from dataclasses import dataclass
 
 
@@ -51,7 +51,7 @@ def tranunit_shop(
 
 @dataclass
 class TranBook:
-    deal_id: dealID = None
+    deal_id: DealID = None
     tranunits: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None
     _accts_net: dict[OwnerID, dict[AcctID, FundNum]] = None
 
@@ -165,12 +165,12 @@ class TranBook:
 
     # def get_dict(
     #     self,
-    # ) -> dict[dealID, dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]]]:
+    # ) -> dict[DealID, dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]]]:
     #     return {"deal_id": self.deal_id}
 
 
 def tranbook_shop(
-    x_deal_id: dealID,
+    x_deal_id: DealID,
     x_tranunits: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None,
 ):
     return TranBook(
@@ -290,7 +290,7 @@ class PurviewLog:
     def get_time_ids(self) -> set[TimeLinePoint]:
         return set(self.episodes.keys())
 
-    def get_tranbook(self, deal_id: dealID) -> TranBook:
+    def get_tranbook(self, deal_id: DealID) -> TranBook:
         x_tranbook = tranbook_shop(deal_id)
         for x_time_id, x_episode in self.episodes.items():
             for dst_acct_id, x_quota in x_episode._net_purviews.items():
@@ -340,7 +340,7 @@ class TimeConversion:
     addin: str = None
 
 
-def timeconversion_shop(deal_id: dealID = None, addin: int = None) -> TimeConversion:
+def timeconversion_shop(deal_id: DealID = None, addin: int = None) -> TimeConversion:
     if deal_id is None:
         deal_id = get_default_deal_id_ideaunit()
     if addin is None:
