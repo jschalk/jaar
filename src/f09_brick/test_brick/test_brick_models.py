@@ -98,7 +98,7 @@ def test_Base_create_all_CreatesTables_Scenario0_InMemory():
 
 def test_Base_create_all_CreatesTables_Scenario1_File(brick_env_setup_cleanup):
     # ESTABLISH
-    engine = create_engine(f"sqlite:///{brick_examples_dir()}mydatabase3.db")
+    engine = create_engine(f"sqlite:///{brick_examples_dir()}/mydatabase3.db")
 
     # WHEN
     Base.metadata.create_all(engine)
