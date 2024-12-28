@@ -115,7 +115,7 @@ def _add_and_replace_itemunit_masss(
 def get_debtors_roll(x_duty: BudUnit) -> list[AcctUnit]:
     return [
         x_acctunit
-        for x_acctunit in x_duty._accts.values()
+        for x_acctunit in x_duty.accts.values()
         if x_acctunit.debtit_belief != 0
     ]
 

@@ -50,7 +50,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     assert yao_empty_job.debtor_respect != yao_voice.debtor_respect
     assert yao_empty_job.debtor_respect == validate_respect_num()
     yao_empty_job.settle_bud()
-    assert yao_empty_job._accts == {}
+    assert yao_empty_job.accts == {}
 
 
 def test_create_listen_basis_ReturnsCorrectObj():

@@ -25,7 +25,7 @@ def test_sift_deltaunit_ReturnsObjWithoutUnecessaryINSERT_bud_acctunit():
     accts_deltaunit.set_atomunit(yao_atom)
     accts_deltaunit.set_atomunit(zia_atom)
     assert len(accts_deltaunit.get_sorted_atomunits()) == 3
-    assert len(sue_bud._accts) == 2
+    assert len(sue_bud.accts) == 2
 
     # WHEN
     new_deltaunit = sift_deltaunit(accts_deltaunit, sue_bud)

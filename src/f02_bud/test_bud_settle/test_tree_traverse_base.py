@@ -251,7 +251,7 @@ def test_BudUnit_settle_bud_SetsItemUnitAttr_awardlinks():
     sue_bud.add_acctunit(zia_str)
     sue_bud.add_acctunit(Xio_str)
 
-    assert len(sue_bud._accts) == 3
+    assert len(sue_bud.accts) == 3
     assert len(sue_bud.get_acctunit_group_labels_dict()) == 3
     swim_str = "swim"
     sue_bud.set_l1_item(itemunit_shop(swim_str))

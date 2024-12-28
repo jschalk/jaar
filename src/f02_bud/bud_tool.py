@@ -215,7 +215,7 @@ def get_bud_purview_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]
 
     x_list = [
         [x_acct.acct_name, x_acct._fund_take, x_acct._fund_give]
-        for x_acct in x_bud._accts.values()
+        for x_acct in x_bud.accts.values()
     ]
     x_list.sort(key=lambda y: y[0], reverse=False)
     return x_list
@@ -234,7 +234,7 @@ def get_bud_settle_acct_net_dict(
         x_bud.settle_bud()
 
     x_dict = {}
-    for x_acct in x_bud._accts.values():
+    for x_acct in x_bud.accts.values():
         settle_net = get_net(x_acct._fund_give, x_acct._fund_take)
         if settle_net != 0:
             x_dict[x_acct.acct_name] = settle_net

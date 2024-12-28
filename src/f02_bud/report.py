@@ -4,7 +4,7 @@ from pandas import DataFrame
 
 
 def get_bud_acctunits_dataframe(x_bud: BudUnit) -> DataFrame:
-    if x_bud._accts == {}:
+    if x_bud.accts == {}:
         return DataFrame(
             columns=[
                 "acct_name",

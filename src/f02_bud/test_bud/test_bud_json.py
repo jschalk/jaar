@@ -61,7 +61,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict["credor_respect"] == yao_bud.credor_respect
     assert bud_dict["debtor_respect"] == yao_bud.debtor_respect
     assert bud_dict["_last_gift_id"] == yao_bud._last_gift_id
-    assert len(bud_dict["_accts"]) == len(yao_bud._accts)
+    assert len(bud_dict["_accts"]) == len(yao_bud.accts)
     assert len(bud_dict["_accts"]) != 12
     assert bud_dict.get("_groups") is None
 
@@ -281,8 +281,8 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     anna_str = "Anna"
     anna_acctunit = yao_bud.get_acct(anna_str)
     assert anna_acctunit.get_membership(";Family").credit_vote == 6.2
-    assert yao_bud._accts is not None
-    assert len(yao_bud._accts) == 22
+    assert yao_bud.accts is not None
+    assert len(yao_bud.accts) == 22
 
 
 def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():

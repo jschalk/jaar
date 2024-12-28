@@ -1041,7 +1041,7 @@ def clear_all_acctunits_groupunits_fund_agenda_give_take(x_bud: BudUnit):
         #     print(f"{groupunit_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.debtit_belief=} {membership__fund_take:t:.6f} {membership_x.} ")
 
     # DELETE bud_agenda_debt and bud_agenda_cred
-    for x_acctunit in x_bud._accts.values():
+    for x_acctunit in x_bud.accts.values():
         x_acctunit.clear_fund_give_take()
 
 
@@ -1071,7 +1071,7 @@ class AcctAgendaMetrics:
     sum_agenda_ratio_debt: float = 0
 
     def set_sums(self, x_bud: BudUnit):
-        for acctunit in x_bud._accts.values():
+        for acctunit in x_bud.accts.values():
             self.sum_agenda_cred += acctunit._fund_agenda_give
             self.sum_agenda_debt += acctunit._fund_agenda_take
             self.sum_agenda_ratio_cred += acctunit._fund_agenda_ratio_give
@@ -1122,7 +1122,7 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     agenda_dict = yao_bud.get_agenda_dict()
     # for item_road in yao_bud._item_dict.keys():
     #     print(f"{item_road=}")
-    # for x_acct in yao_bud._accts.values():
+    # for x_acct in yao_bud.accts.values():
     #     for x_membership in x_acct._memberships.values():
     #         print(f"{x_membership.group_label=}")
 
@@ -1190,7 +1190,7 @@ def all_acctunits_have_legitimate_values(x_bud: BudUnit):
             or acctunit._fund_take is None
             or acctunit._fund_take in [0.8, 0.1]
         )
-        for acctunit in x_bud._accts.values()
+        for acctunit in x_bud.accts.values()
     )
 
 

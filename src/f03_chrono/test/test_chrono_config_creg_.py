@@ -613,7 +613,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
 
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    assert len(sue_bud._accts) == 0
+    assert len(sue_bud.accts) == 0
     assert len(sue_bud.get_acctunit_group_labels_dict()) == 0
 
     clean_things_str = "cleaning things"
@@ -651,7 +651,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     awardlink_z = awardlink_shop(awardee_label=family_str)
     sweep_item.set_awardlink(awardlink_z)
 
-    assert len(sue_bud._accts) == 0
+    assert len(sue_bud.accts) == 0
     assert len(sue_bud.get_acctunit_group_labels_dict()) == 0
     assert len(sue_bud._itemroot._kids) == 1
     assert sue_bud.get_item_obj(daytime_road).denom == 1440

@@ -121,7 +121,7 @@ class BudUnit:
     owner_name: OwnerName = None
     _last_gift_id: int = None
     tally: float = None
-    _accts: dict[AcctName, AcctUnit] = None
+    accts: dict[AcctName, AcctUnit] = None
     _itemroot: ItemUnit = None
     max_tree_traverse: int = None
     _bridge: str = None
@@ -333,7 +333,7 @@ class BudUnit:
         )
 
     def del_acctunit(self, acct_name: str):
-        self._accts.pop(acct_name)
+        self.accts.pop(acct_name)
 
     def add_acctunit(
         self, acct_name: AcctName, credit_belief: int = None, debtit_belief: int = None
@@ -349,7 +349,7 @@ class BudUnit:
             x_acctunit._respect_bit = self.respect_bit
         if auto_set_membership and x_acctunit.memberships_exist() is False:
             x_acctunit.add_membership(x_acctunit.acct_name)
-        self._accts[x_acctunit.acct_name] = x_acctunit
+        self.accts[x_acctunit.acct_name] = x_acctunit
 
     def acct_exists(self, acct_name: AcctName) -> bool:
         return self.get_acct(acct_name) is not None
@@ -357,7 +357,7 @@ class BudUnit:
     def edit_acctunit(
         self, acct_name: AcctName, credit_belief: int = None, debtit_belief: int = None
     ):
-        if self._accts.get(acct_name) is None:
+        if self.accts.get(acct_name) is None:
             raise AcctMissingException(f"AcctUnit '{acct_name}' does not exist.")
         x_acctunit = self.get_acct(acct_name)
         if credit_belief is not None:
@@ -367,15 +367,15 @@ class BudUnit:
         self.set_acctunit(x_acctunit)
 
     def clear_acctunits_memberships(self):
-        for x_acctunit in self._accts.values():
+        for x_acctunit in self.accts.values():
             x_acctunit.clear_memberships()
 
     def get_acct(self, acct_name: AcctName) -> AcctUnit:
-        return self._accts.get(acct_name)
+        return self.accts.get(acct_name)
 
     def get_acctunit_group_labels_dict(self) -> dict[GroupLabel, set[AcctName]]:
         x_dict = {}
-        for x_acctunit in self._accts.values():
+        for x_acctunit in self.accts.values():
             for x_group_label in x_acctunit._memberships.keys():
                 acct_name_set = x_dict.get(x_group_label)
                 if acct_name_set is None:
@@ -397,7 +397,7 @@ class BudUnit:
 
     def create_symmetry_groupunit(self, x_group_label: GroupLabel) -> GroupUnit:
         x_groupunit = groupunit_shop(x_group_label)
-        for x_acctunit in self._accts.values():
+        for x_acctunit in self.accts.values():
             x_membership = membership_shop(
                 group_label=x_group_label,
                 credit_vote=x_acctunit.credit_belief,
@@ -880,7 +880,7 @@ class BudUnit:
     ) -> tuple[dict[str:float], dict[str:float]]:
         credit_ledger = {}
         debtit_ledger = {}
-        for x_acctunit in self._accts.values():
+        for x_acctunit in self.accts.values():
             credit_ledger[x_acctunit.acct_name] = x_acctunit.credit_belief
             debtit_ledger[x_acctunit.acct_name] = x_acctunit.debtit_belief
         return credit_ledger, debtit_ledger
@@ -889,10 +889,10 @@ class BudUnit:
         self._add_to_acctunits_fund_give_take(self._offtrack_fund)
 
     def get_acctunits_credit_belief_sum(self) -> float:
-        return sum(acctunit.get_credit_belief() for acctunit in self._accts.values())
+        return sum(acctunit.get_credit_belief() for acctunit in self.accts.values())
 
     def get_acctunits_debtit_belief_sum(self) -> float:
-        return sum(acctunit.get_debtit_belief() for acctunit in self._accts.values())
+        return sum(acctunit.get_debtit_belief() for acctunit in self.accts.values())
 
     def _add_to_acctunits_fund_give_take(self, item_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
@@ -961,10 +961,10 @@ class BudUnit:
         x_acctunit_debtit_belief_sum = self.get_acctunits_debtit_belief_sum()
         fund_agenda_ratio_give_sum = 0
         fund_agenda_ratio_take_sum = 0
-        for x_acctunit in self._accts.values():
+        for x_acctunit in self.accts.values():
             fund_agenda_ratio_give_sum += x_acctunit._fund_agenda_give
             fund_agenda_ratio_take_sum += x_acctunit._fund_agenda_take
-        for x_acctunit in self._accts.values():
+        for x_acctunit in self.accts.values():
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
@@ -973,7 +973,7 @@ class BudUnit:
             )
 
     def _reset_acctunit_fund_give_take(self):
-        for acctunit in self._accts.values():
+        for acctunit in self.accts.values():
             acctunit.clear_fund_give_take()
 
     def item_exists(self, road: RoadUnit) -> bool:
@@ -1350,8 +1350,8 @@ class BudUnit:
 
     def get_acctunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {}
-        if self._accts is not None:
-            for acct_name, acct_obj in self._accts.items():
+        if self.accts is not None:
+            for acct_name, acct_obj in self.accts.items():
                 x_dict[acct_name] = acct_obj.get_dict(all_attrs)
         return x_dict
 
@@ -1414,7 +1414,7 @@ def budunit_shop(
         owner_name=owner_name,
         tally=get_1_if_None(tally),
         deal_idea=deal_idea,
-        _accts=get_empty_dict_if_None(None),
+        accts=get_empty_dict_if_None(None),
         _groupunits={},
         _item_dict=get_empty_dict_if_None(None),
         _keep_dict=get_empty_dict_if_None(None),

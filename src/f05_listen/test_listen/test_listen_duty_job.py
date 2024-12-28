@@ -317,7 +317,7 @@ def get_example_yao_voice_with_3_healers():
 
 #     yao_final = yao_iowa_hubunit.get_final_bud()
 #     yao_final.settle_bud()
-#     assert yao_final._accts.keys() == yao_voice0._accts.keys()
+#     assert yao_final.accts.keys() == yao_voice0.accts.keys()
 #     assert yao_final.get_acct(yao_str)._irrational_debtit_belief == 0
 #     yao_final_accts = yao_final.get_dict().get("_accts")
 #     yao_voice0_accts = yao_voice0.get_dict().get("_accts")
@@ -394,7 +394,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
 
     yao_final = yao_iowa_hubunit.get_final_bud()
     yao_final.settle_bud()
-    assert yao_final._accts.keys() == yao_voice0._accts.keys()
+    assert yao_final.accts.keys() == yao_voice0.accts.keys()
     assert yao_final.get_acct(yao_str)._irrational_debtit_belief == 0
     yao_final_accts = yao_final.get_dict().get("_accts")
     yao_voice0_accts = yao_voice0.get_dict().get("_accts")

@@ -156,8 +156,8 @@ class DeltaUnit:
         self.set_atomunit(x_atomunit)
 
     def add_atomunits_accts(self, before_bud: BudUnit, after_bud: BudUnit):
-        before_acct_names = set(before_bud._accts.keys())
-        after_acct_names = set(after_bud._accts.keys())
+        before_acct_names = set(before_bud.accts.keys())
+        after_acct_names = set(after_bud.accts.keys())
 
         self.add_atomunit_acctunit_inserts(
             after_bud=after_bud,
