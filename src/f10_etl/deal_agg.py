@@ -25,6 +25,7 @@ def create_init_deal_prime_files(dir: str):
         "bridge",
         "timeline_idea",
         "yr1_jan1_offset",
+        "note",
     ]
     deal_purview_episode_columns = [
         "source_br",
@@ -35,6 +36,7 @@ def create_init_deal_prime_files(dir: str):
         "acct_name",
         "time_int",
         "quota",
+        "note",
     ]
     deal_cashbook_columns = [
         "source_br",
@@ -45,6 +47,7 @@ def create_init_deal_prime_files(dir: str):
         "acct_name",
         "time_int",
         "amount",
+        "note",
     ]
     deal_timeline_hour_columns = [
         "source_br",
@@ -53,6 +56,7 @@ def create_init_deal_prime_files(dir: str):
         "deal_idea",
         "hour_idea",
         "cumlative_minute",
+        "note",
     ]
     deal_timeline_month_columns = [
         "source_br",
@@ -61,6 +65,7 @@ def create_init_deal_prime_files(dir: str):
         "deal_idea",
         "month_idea",
         "cumlative_day",
+        "note",
     ]
     deal_timeline_weekday_columns = [
         "source_br",
@@ -69,13 +74,8 @@ def create_init_deal_prime_files(dir: str):
         "deal_idea",
         "weekday_idea",
         "weekday_order",
+        "note",
     ]
-    dealunit_columns.extend(["note"])
-    deal_purview_episode_columns.extend(["note"])
-    deal_cashbook_columns.extend(["note"])
-    deal_timeline_hour_columns.extend(["note"])
-    deal_timeline_month_columns.extend(["note"])
-    deal_timeline_weekday_columns.extend(["note"])
     dealunit_df = DataFrame([], columns=dealunit_columns)
     deal_purview_episode_df = DataFrame([], columns=deal_purview_episode_columns)
     deal_cashbook_df = DataFrame([], columns=deal_cashbook_columns)
