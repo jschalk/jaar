@@ -282,17 +282,20 @@ class DealUnit:
         x_purviewlog = self.get_purviewlog(x_owner_name)
         x_purviewlog.add_episode(x_time_int, x_money_magnitude)
 
-    def get_dict(self) -> dict:
-        return {
+    def get_dict(self, include_cashbook: bool = True) -> dict:
+        x_dict = {
             "deal_idea": self.deal_idea,
-            "timeline": self.timeline.get_dict(),
-            "current_time": self.current_time,
-            "purviewlogs": self._get_purviewlogs_dict(),
             "bridge": self.bridge,
+            "current_time": self.current_time,
             "fund_coin": self.fund_coin,
-            "respect_bit": self.respect_bit,
             "penny": self.penny,
+            "purviewlogs": self._get_purviewlogs_dict(),
+            "respect_bit": self.respect_bit,
+            "timeline": self.timeline.get_dict(),
         }
+        if include_cashbook:
+            x_dict["cashbook"] = self.cashbook.get_dict()
+        return x_dict
 
     def get_json(self) -> str:
         return get_json_from_dict(self.get_dict())

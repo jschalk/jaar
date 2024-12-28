@@ -3,8 +3,20 @@ from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_
 from os import getcwd as os_getcwd
 
 
+def timeline_str() -> str:
+    return "timeline"
+
+
 def current_time_str() -> str:
     return "current_time"
+
+
+def purviewlogs_str() -> str:
+    return "purviewlogs"
+
+
+def cashbook_str() -> str:
+    return "cashbook"
 
 
 def amount_str() -> str:

@@ -4,12 +4,24 @@ from src.f01_road.finance import (
     default_respect_bit_if_None,
     default_penny_if_None,
 )
+from src.f01_road.finance_tran import bridge_str
 from src.f03_chrono.chrono import get_default_timeline_config_dict
-from src.f04_gift.atom_config import deal_idea_str
+from src.f04_gift.atom_config import (
+    deal_idea_str,
+    fund_coin_str,
+    respect_bit_str,
+    penny_str,
+)
 from src.f07_deal.deal import (
     dealunit_shop,
     get_from_dict as dealunit_get_from_dict,
     get_from_json as dealunit_get_from_json,
+)
+from src.f07_deal.deal_config import (
+    timeline_str,
+    current_time_str,
+    purviewlogs_str,
+    cashbook_str,
 )
 from src.f07_deal.examples.deal_env import (
     get_test_deals_dir,
@@ -17,45 +29,80 @@ from src.f07_deal.examples.deal_env import (
 )
 
 
-def test_DealUnit_get_dict_ReturnsObj():
+def test_DealUnit_get_dict_ReturnsObjWith_cashbook():
     # ESTABLISH
     accord_str = "accord"
     accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord_current_time_int = 23
     bob_str = "Bob"
     bob_x0_time_int = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_int = 4
+    sue_x4_time_int = 404
     sue_x4_magnitude = 55
-    sue_x7_time_int = 7
+    sue_x7_time_int = 505
     sue_x7_magnitude = 66
+    cash_time_int = 15
+    bob_sue_amount = 30000
+    accord_deal.set_current_time(accord_current_time_int)
     accord_deal.add_purviewepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
     accord_deal.add_purviewepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
     accord_deal.add_purviewepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
+    accord_deal.add_cashpurchase(
+        x_owner_name=bob_str,
+        x_acct_name=sue_str,
+        x_time_int=cash_time_int,
+        x_amount=bob_sue_amount,
+    )
 
     # WHEN
     x_dict = accord_deal.get_dict()
 
     # THEN
-    assert x_dict.get(deal_idea_str()) == accord_str
-    assert x_dict.get("timeline") == get_default_timeline_config_dict()
-    assert x_dict.get("current_time") == 0
-    assert x_dict.get("bridge") == default_bridge_if_None()
-    assert x_dict.get("fund_coin") == default_fund_coin_if_None()
-    assert x_dict.get("respect_bit") == default_respect_bit_if_None()
-    assert x_dict.get("penny") == default_penny_if_None()
-    assert x_dict.get("purviewlogs") == accord_deal._get_purviewlogs_dict()
     print(f"{ accord_deal._get_purviewlogs_dict()=}")
-    assert list(x_dict.keys()) == [
-        "deal_idea",
-        "timeline",
-        "current_time",
-        "purviewlogs",
-        "bridge",
-        "fund_coin",
-        "respect_bit",
-        "penny",
-    ]
+    print(f"{ accord_deal.cashbook.get_dict()=}")
+    assert x_dict.get(deal_idea_str()) == accord_str
+    assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
+    assert x_dict.get(current_time_str()) == accord_current_time_int
+    assert x_dict.get(bridge_str()) == default_bridge_if_None()
+    assert x_dict.get(fund_coin_str()) == default_fund_coin_if_None()
+    assert x_dict.get(respect_bit_str()) == default_respect_bit_if_None()
+    assert x_dict.get(penny_str()) == default_penny_if_None()
+    assert x_dict.get(purviewlogs_str()) == accord_deal._get_purviewlogs_dict()
+    assert x_dict.get(cashbook_str()) == accord_deal.cashbook.get_dict()
+    assert set(x_dict.keys()) == {
+        deal_idea_str(),
+        timeline_str(),
+        current_time_str(),
+        purviewlogs_str(),
+        bridge_str(),
+        fund_coin_str(),
+        respect_bit_str(),
+        penny_str(),
+        cashbook_str(),
+    }
+
+
+def test_DealUnit_get_dict_ReturnsObjWithOut_cashbook():
+    # ESTABLISH
+    accord_str = "accord"
+    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+
+    # WHEN
+    x_dict = accord_deal.get_dict(include_cashbook=False)
+
+    # THEN
+    assert not x_dict.get(cashbook_str())
+    assert set(x_dict.keys()) == {
+        deal_idea_str(),
+        timeline_str(),
+        current_time_str(),
+        purviewlogs_str(),
+        bridge_str(),
+        fund_coin_str(),
+        respect_bit_str(),
+        penny_str(),
+    }
 
 
 def test_DealUnit_get_json_ReturnsObj():
@@ -80,7 +127,7 @@ def test_DealUnit_get_json_ReturnsObj():
     # THEN
     print(f"{x_json=}")
     assert x_json
-    assert x_json.find("deal_idea") > 0
+    assert x_json.find(deal_idea_str()) > 0
 
 
 def test_get_from_dict_ReturnsDealUnit():
