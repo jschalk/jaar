@@ -20,7 +20,7 @@ def test_create_legible_list_ReturnsObj_item_awardlink_INSERT():
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    awardee_label_value = f"{sue_bud._bridge}Swimmers"
+    awardee_label_value = f"{sue_bud.bridge}Swimmers"
     give_force_value = 81
     take_force_value = 43
     swim_atomunit = atomunit_shop(category, atom_insert())
@@ -46,7 +46,7 @@ def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_give_force_take_fo
     sue_bud = budunit_shop("Sue")
 
     category = bud_item_awardlink_str()
-    awardee_label_value = f"{sue_bud._bridge}Swimmers"
+    awardee_label_value = f"{sue_bud.bridge}Swimmers"
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -74,7 +74,7 @@ def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_give_force():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = bud_item_awardlink_str()
-    awardee_label_value = f"{sue_bud._bridge}Swimmers"
+    awardee_label_value = f"{sue_bud.bridge}Swimmers"
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -100,7 +100,7 @@ def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_take_force():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     category = bud_item_awardlink_str()
-    awardee_label_value = f"{sue_bud._bridge}Swimmers"
+    awardee_label_value = f"{sue_bud.bridge}Swimmers"
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
@@ -130,7 +130,7 @@ def test_create_legible_list_ReturnsObj_item_awardlink_DELETE():
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    awardee_label_value = f"{sue_bud._bridge}Swimmers"
+    awardee_label_value = f"{sue_bud.bridge}Swimmers"
     swim_atomunit = atomunit_shop(category, atom_delete())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(awardee_label_str(), awardee_label_value)

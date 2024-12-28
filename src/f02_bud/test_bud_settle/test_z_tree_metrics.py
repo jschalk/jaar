@@ -8,7 +8,7 @@ from src.f01_road.road import create_road_from_ideas
 
 def test_BudUnit_get_tree_metrics_exists():
     # ESTABLISH
-    zia_bud = budunit_shop(_owner_name="Zia")
+    zia_bud = budunit_shop(owner_name="Zia")
 
     # WHEN
     zia_bud_tree_metrics = zia_bud.get_tree_metrics()
@@ -65,7 +65,7 @@ def test_BudUnit_get_tree_set_all_item_uids_unique():
 def test_BudUnit_set_all_item_uids_unique_SetsUIDsCorrectly():
     # ESTABLISH
     zia_str = "Zia"
-    zia_bud = budunit_shop(_owner_name=zia_str)
+    zia_bud = budunit_shop(owner_name=zia_str)
     swim_str = "swim"
     sports_str = "sports"
     zia_bud.set_l1_item(itemunit_shop(swim_str, _uid=None))
@@ -100,7 +100,7 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_ItemRoadUnit():
     # WHEN / THEN
     train_road = create_road_from_ideas(
         [
-            yao_bud._deal_idea,
+            yao_bud.deal_idea,
             "ACME",
             "ACME Employee Responsiblities",
             "Know Abuse Deterrence and Reporting guildlines",
@@ -163,9 +163,9 @@ def test_BudUnit_3AdvocatesNoitemunit_shop():
     zia_budunit.set_acctunit(yao_acctunit)
     zia_budunit.set_acctunit(sue_acctunit)
     zia_budunit.set_acctunit(zia_acctunit)
-    zia_budunit._itemroot.set_awardlink(awardlink_shop(yao_str, give_force=10))
-    zia_budunit._itemroot.set_awardlink(awardlink_shop(sue_str, give_force=10))
-    zia_budunit._itemroot.set_awardlink(awardlink_shop(zia_str, give_force=10))
+    zia_budunit.itemroot.set_awardlink(awardlink_shop(yao_str, give_force=10))
+    zia_budunit.itemroot.set_awardlink(awardlink_shop(sue_str, give_force=10))
+    zia_budunit.itemroot.set_awardlink(awardlink_shop(zia_str, give_force=10))
 
     # WHEN
     assert zia_budunit.get_awardlinks_metrics() is not None

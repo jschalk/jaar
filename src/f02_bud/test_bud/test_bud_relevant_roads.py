@@ -25,13 +25,13 @@ def test_BudUnit_get_relevant_roads_RootRoadUnitReturnsOnlyItself():
     sue_bud = get_budunit_with_4_levels()
 
     # WHEN
-    root_dict = {sue_bud._deal_idea: -1}
+    root_dict = {sue_bud.deal_idea: -1}
     relevant_roads = sue_bud._get_relevant_roads(root_dict)
 
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 1
-    assert relevant_roads == {sue_bud._deal_idea}
+    assert relevant_roads == {sue_bud.deal_idea}
 
 
 def test_BudUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
@@ -49,12 +49,12 @@ def test_BudUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 3
-    assert relevant_roads == {sue_bud._deal_idea, sun_road, week_road}
+    assert relevant_roads == {sue_bud.deal_idea, sun_road, week_road}
 
 
 def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     # ESTABLISH
-    sue_bud = budunit_shop(_owner_name="Sue")
+    sue_bud = budunit_shop(owner_name="Sue")
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
     floor_str = "mop floor"
@@ -65,7 +65,7 @@ def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     unim_str = "unimportant"
     unim_road = sue_bud.make_l1_road(unim_str)
     unim_item = itemunit_shop(unim_str)
-    sue_bud.set_item(unim_item, parent_road=sue_bud._deal_idea)
+    sue_bud.set_item(unim_item, parent_road=sue_bud.deal_idea)
 
     status_str = "cleaniness status"
     status_road = sue_bud.make_road(casa_road, status_str)
@@ -82,7 +82,7 @@ def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     # THEN
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 4
-    assert relevant_roads == {sue_bud._deal_idea, casa_road, status_road, floor_road}
+    assert relevant_roads == {sue_bud.deal_idea, casa_road, status_road, floor_road}
     assert unim_road not in relevant_roads
 
 
@@ -124,7 +124,7 @@ def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
     assert moderately_road in relevant_roads
     assert very_much_road in relevant_roads
     assert relevant_roads == {
-        x_bud._deal_idea,
+        x_bud.deal_idea,
         casa_road,
         status_road,
         floor_road,
@@ -139,7 +139,7 @@ def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
 def test_BudUnit_get_relevant_roads_ReturnSimple():
     # ESTABLISH
     yao_str = "Yao"
-    yao_bud = budunit_shop(_owner_name=yao_str)
+    yao_bud = budunit_shop(owner_name=yao_str)
     min_range_x_str = "a_minute_range"
     min_range_x_road = yao_bud.make_l1_road(min_range_x_str)
     min_range_item = itemunit_shop(min_range_x_str, begin=0, close=2880)
@@ -172,7 +172,7 @@ def test_BudUnit_get_relevant_roads_ReturnSimple():
     assert day_distance_road not in relevant_roads
     assert hour_distance_road not in relevant_roads
     assert min_days_road in relevant_roads
-    assert yao_bud._deal_idea in relevant_roads
+    assert yao_bud.deal_idea in relevant_roads
     # min_days_item = yao_bud.get_item_obj(min_days_road)
 
 

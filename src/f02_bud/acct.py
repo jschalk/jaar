@@ -39,7 +39,7 @@ class AcctCore:
 
 @dataclass
 class AcctUnit(AcctCore):
-    """This represents the BudUnit._owner_name's opinion of the AcctUnit.acct_name
+    """This represents the budunit.owner_name's opinion of the AcctUnit.acct_name
     AcctUnit.credit_belief represents how much credit_belief the _owner_name projects to the acct_name
     AcctUnit.debtit_belief represents how much debtit_belief the _owner_name projects to the acct_name
     """

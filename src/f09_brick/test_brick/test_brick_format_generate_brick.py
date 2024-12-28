@@ -165,7 +165,7 @@ def test_make_deltaunit_Arg_brick_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    casa_atomunit.set_arg(parent_road_str(), sue_budunit._deal_idea)
+    casa_atomunit.set_arg(parent_road_str(), sue_budunit.deal_idea)
     casa_atomunit.set_arg(idee_str(), casa_str)
     casa_atomunit.set_arg(pledge_str(), False)
     casa_atomunit.set_arg(mass_str(), casa_mass)
@@ -220,7 +220,7 @@ def test_make_deltaunit_Arg_brick_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    casa_atomunit.set_arg(parent_road_str(), sue_budunit._deal_idea)
+    casa_atomunit.set_arg(parent_road_str(), sue_budunit.deal_idea)
     casa_atomunit.set_arg(idee_str(), casa_str)
     casa_atomunit.set_arg(pledge_str(), False)
     casa_atomunit.set_arg(mass_str(), casa_mass)

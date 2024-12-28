@@ -11,17 +11,17 @@ def test_BudUnit_set_acctunit_SetObjCorrectly():
     yao_acctunit.add_membership(yao_str)
     deepcopy_yao_acctunit = copy_deepcopy(yao_acctunit)
     slash_str = "/"
-    bob_bud = budunit_shop("Bob", _bridge=slash_str)
+    bob_bud = budunit_shop("Bob", bridge=slash_str)
 
     # WHEN
     bob_bud.set_acctunit(yao_acctunit)
 
     # THEN
-    assert bob_bud._accts.get(yao_str)._bridge == slash_str
+    assert bob_bud.accts.get(yao_str)._bridge == slash_str
     x_accts = {yao_acctunit.acct_name: deepcopy_yao_acctunit}
-    assert bob_bud._accts != x_accts
-    deepcopy_yao_acctunit._bridge = bob_bud._bridge
-    assert bob_bud._accts == x_accts
+    assert bob_bud.accts != x_accts
+    deepcopy_yao_acctunit._bridge = bob_bud.bridge
+    assert bob_bud.accts == x_accts
 
 
 def test_BudUnit_set_acct_DoesNotSet_acct_name_membership():
@@ -90,11 +90,11 @@ def test_BudUnit_add_acctunit_CorrectlySets_accts():
     yao_bud.add_acctunit(xio_str, credit_belief=17)
 
     # THEN
-    assert len(yao_bud._accts) == 3
+    assert len(yao_bud.accts) == 3
     assert len(yao_bud.get_acctunit_group_labels_dict()) == 3
-    assert yao_bud._accts.get(xio_str).credit_belief == 17
-    assert yao_bud._accts.get(sue_str).debtit_belief == 5
-    assert yao_bud._accts.get(xio_str)._respect_bit == x_respect_bit
+    assert yao_bud.accts.get(xio_str).credit_belief == 17
+    assert yao_bud.accts.get(sue_str).debtit_belief == 5
+    assert yao_bud.accts.get(xio_str)._respect_bit == x_respect_bit
 
 
 def test_BudUnit_acct_exists_ReturnsObj():
@@ -194,5 +194,5 @@ def test_BudUnit_get_acct_ReturnsCorrectObj():
     sue_acct = yao_bud.get_acct(sue_str)
 
     # THEN
-    assert zia_acct == yao_bud._accts.get(zia_str)
-    assert sue_acct == yao_bud._accts.get(sue_str)
+    assert zia_acct == yao_bud.accts.get(zia_str)
+    assert sue_acct == yao_bud.accts.get(sue_str)

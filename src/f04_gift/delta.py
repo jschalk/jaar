@@ -121,7 +121,7 @@ class DeltaUnit:
         return get_from_nested_dict(self.atomunits, x_keylist)
 
     def add_all_atomunits(self, after_bud: BudUnit):
-        before_bud = budunit_shop(after_bud._owner_name, after_bud._deal_idea)
+        before_bud = budunit_shop(after_bud.owner_name, after_bud.deal_idea)
         self.add_all_different_atomunits(before_bud, after_bud)
 
     def add_all_different_atomunits(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -156,8 +156,8 @@ class DeltaUnit:
         self.set_atomunit(x_atomunit)
 
     def add_atomunits_accts(self, before_bud: BudUnit, after_bud: BudUnit):
-        before_acct_names = set(before_bud._accts.keys())
-        after_acct_names = set(after_bud._accts.keys())
+        before_acct_names = set(before_bud.accts.keys())
+        after_acct_names = set(after_bud.accts.keys())
 
         self.add_atomunit_acctunit_inserts(
             after_bud=after_bud,
@@ -500,8 +500,8 @@ class DeltaUnit:
 
     def add_atomunit_item_deletes(self, before_bud: BudUnit, delete_item_roads: set):
         for delete_item_road in delete_item_roads:
-            x_parent_road = get_parent_road(delete_item_road, before_bud._bridge)
-            x_idee = get_terminus_idea(delete_item_road, before_bud._bridge)
+            x_parent_road = get_parent_road(delete_item_road, before_bud.bridge)
+            x_idee = get_terminus_idea(delete_item_road, before_bud.bridge)
             x_atomunit = atomunit_shop("bud_itemunit", atom_delete())
             x_atomunit.set_jkey("parent_road", x_parent_road)
             x_atomunit.set_jkey("idee", x_idee)

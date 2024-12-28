@@ -22,7 +22,7 @@ def test_HubUnit_get_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_owner
 
     # THEN
     assert perspective_budunit.get_dict() != bob_budunit.get_dict()
-    assert perspective_budunit._owner_name == sue_str
+    assert perspective_budunit.owner_name == sue_str
     perspective_budunit.set_owner_name(bob_str)
     assert perspective_budunit.get_dict() == bob_budunit.get_dict()
 
@@ -44,7 +44,7 @@ def test_HubUnit_get_dw_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_ow
     perspective_budunit = sue_hubunit.get_dw_perspective_bud(bob_str)
 
     # THEN
-    assert perspective_budunit._owner_name == sue_str
+    assert perspective_budunit.owner_name == sue_str
     assert perspective_budunit.get_dict() != bob_budunit.get_dict()
     perspective_budunit.set_owner_name(bob_str)
     assert perspective_budunit.get_dict() == bob_budunit.get_dict()
@@ -73,7 +73,7 @@ def test_HubUnit_rj_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_owner_
     perspective_budunit = sue_hubunit.rj_perspective_bud(bob_str, yao_str)
 
     # THEN
-    assert perspective_budunit._owner_name == sue_str
+    assert perspective_budunit.owner_name == sue_str
     assert perspective_budunit.get_dict() != yao_budunit.get_dict()
     perspective_budunit.set_owner_name(yao_str)
     assert perspective_budunit.get_dict() == yao_budunit.get_dict()

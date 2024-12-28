@@ -601,7 +601,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     sue_bud.set_fact(
         base=cregtime_road, pick=cregtime_road, fopen=open_x2, fnigh=nigh_x2
     )
-    print(f"YAYA {sue_bud._itemroot.factunits=}")
+    print(f"YAYA {sue_bud.itemroot.factunits=}")
 
     # THEN
     agenda_dict = sue_bud.get_agenda_dict()
@@ -613,7 +613,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
 
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    assert len(sue_bud._accts) == 0
+    assert len(sue_bud.accts) == 0
     assert len(sue_bud.get_acctunit_group_labels_dict()) == 0
 
     clean_things_str = "cleaning things"
@@ -651,9 +651,9 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     awardlink_z = awardlink_shop(awardee_label=family_str)
     sweep_item.set_awardlink(awardlink_z)
 
-    assert len(sue_bud._accts) == 0
+    assert len(sue_bud.accts) == 0
     assert len(sue_bud.get_acctunit_group_labels_dict()) == 0
-    assert len(sue_bud._itemroot._kids) == 1
+    assert len(sue_bud.itemroot._kids) == 1
     assert sue_bud.get_item_obj(daytime_road).denom == 1440
     assert sue_bud.get_item_obj(daytime_road).morph
     print(f"{sweep_item.get_road()=}")
@@ -662,7 +662,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     sue_bud.set_dominate_pledge_item(item_kid=sweep_item)
 
     # THEN
-    # for item_kid in sue_bud._itemroot._kids.keys():
+    # for item_kid in sue_bud.itemroot._kids.keys():
     #     print(f"  {item_kid=}")
 
     print(f"{sweep_item.get_road()=}")
@@ -676,7 +676,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert len(sue_bud.get_acctunit_group_labels_dict()) == 0
     assert sue_bud.get_acctunit_group_labels_dict().get(family_str) is None
 
-    assert len(sue_bud._itemroot._kids) == 3
+    assert len(sue_bud.itemroot._kids) == 3
 
 
 def test_ItemCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_SettingError():  # https://github.com/jschalk/jaar/issues/69

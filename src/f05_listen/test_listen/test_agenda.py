@@ -17,7 +17,7 @@ def test_listen_to_speaker_agenda_RaisesErrorIfPoolIsNotSet():
         listen_to_speaker_agenda(yao_budunit, zia_budunit)
     assert (
         str(excinfo.value)
-        == f"listener '{yao_str}' bud is assumed to have {zia_budunit._owner_name} acctunit."
+        == f"listener '{yao_str}' bud is assumed to have {zia_budunit.owner_name} acctunit."
     )
 
 

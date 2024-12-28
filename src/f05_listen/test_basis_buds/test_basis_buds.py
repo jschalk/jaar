@@ -13,7 +13,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     yao_str = "Yao"
     slash_str = "/"
     penny_float = 0.7
-    yao_voice = budunit_shop(yao_str, _bridge=slash_str, penny=penny_float)
+    yao_voice = budunit_shop(yao_str, bridge=slash_str, penny=penny_float)
     yao_voice.set_l1_item(itemunit_shop("Iowa"))
     zia_str = "Zia"
     zia_credit_belief = 47
@@ -35,12 +35,12 @@ def test_create_empty_bud_ReturnsCorrectObj():
     yao_empty_job = create_empty_bud(yao_voice, x_owner_name=zia_str)
 
     # THEN
-    assert yao_empty_job._owner_name != yao_voice._owner_name
-    assert yao_empty_job._owner_name == zia_str
-    assert yao_empty_job._deal_idea == yao_voice._deal_idea
+    assert yao_empty_job.owner_name != yao_voice.owner_name
+    assert yao_empty_job.owner_name == zia_str
+    assert yao_empty_job.deal_idea == yao_voice.deal_idea
     assert yao_empty_job._last_gift_id is None
     assert yao_empty_job.get_acctunits_dict() == {}
-    assert yao_empty_job._bridge == yao_voice._bridge
+    assert yao_empty_job.bridge == yao_voice.bridge
     assert yao_empty_job.fund_pool == yao_voice.fund_pool
     assert yao_empty_job.fund_coin == yao_voice.fund_coin
     assert yao_empty_job.respect_bit == yao_voice.respect_bit
@@ -50,14 +50,14 @@ def test_create_empty_bud_ReturnsCorrectObj():
     assert yao_empty_job.debtor_respect != yao_voice.debtor_respect
     assert yao_empty_job.debtor_respect == validate_respect_num()
     yao_empty_job.settle_bud()
-    assert yao_empty_job._accts == {}
+    assert yao_empty_job.accts == {}
 
 
 def test_create_listen_basis_ReturnsCorrectObj():
     # ESTABLISH
     yao_str = "Yao"
     slash_str = "/"
-    yao_duty = budunit_shop(yao_str, _bridge=slash_str)
+    yao_duty = budunit_shop(yao_str, bridge=slash_str)
     yao_duty.set_l1_item(itemunit_shop("Iowa"))
     zia_str = "Zia"
     zia_credit_belief = 47
@@ -79,11 +79,11 @@ def test_create_listen_basis_ReturnsCorrectObj():
     yao_basis_job = create_listen_basis(yao_duty)
 
     # THEN
-    assert yao_basis_job._owner_name == yao_duty._owner_name
-    assert yao_basis_job._deal_idea == yao_duty._deal_idea
+    assert yao_basis_job.owner_name == yao_duty.owner_name
+    assert yao_basis_job.deal_idea == yao_duty.deal_idea
     assert yao_basis_job._last_gift_id == yao_duty._last_gift_id
     assert yao_basis_job.get_acctunits_dict() == yao_duty.get_acctunits_dict()
-    assert yao_basis_job._bridge == yao_duty._bridge
+    assert yao_basis_job.bridge == yao_duty.bridge
     assert yao_basis_job.fund_pool == yao_duty.fund_pool
     assert yao_basis_job.fund_coin == yao_duty.fund_coin
     assert yao_basis_job.respect_bit == yao_duty.respect_bit
@@ -130,11 +130,11 @@ def test_get_default_final_bud_ReturnsCorrectObj():
 
     # THEN
     default_final_bud.settle_bud()
-    assert default_final_bud._owner_name == sue_budunit._owner_name
-    assert default_final_bud._owner_name == sue_str
-    assert default_final_bud._deal_idea == sue_budunit._deal_idea
-    assert default_final_bud._deal_idea == blue_str
-    assert default_final_bud._bridge == slash_str
+    assert default_final_bud.owner_name == sue_budunit.owner_name
+    assert default_final_bud.owner_name == sue_str
+    assert default_final_bud.deal_idea == sue_budunit.deal_idea
+    assert default_final_bud.deal_idea == blue_str
+    assert default_final_bud.bridge == slash_str
     assert default_final_bud.fund_pool == sue_acct_pool
     assert default_final_bud.fund_coin == x_fund_coin
     assert default_final_bud.respect_bit == x_respect_bit

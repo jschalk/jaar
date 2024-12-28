@@ -560,7 +560,7 @@
             "debtit_belief": 1
         }
     },
-    "_deal_idea": "accord45",
+    "deal_idea": "accord45",
     "_itemroot": {
         "_kids": {
             "ACME": {
@@ -4623,7 +4623,7 @@
     "_originunit": {
         "_originholds": {}
     },
-    "_owner_name": "Yao",
+    "owner_name": "Yao",
     "_bridge": ";",
     "mass": 1,
     "max_tree_traverse": 2,

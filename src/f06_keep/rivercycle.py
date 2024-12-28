@@ -13,7 +13,7 @@ from dataclasses import dataclass
 def get_credorledger(x_bud: BudUnit) -> dict[AcctName, float]:
     return {
         acctunit.acct_name: acctunit.credit_belief
-        for acctunit in x_bud._accts.values()
+        for acctunit in x_bud.accts.values()
         if acctunit.credit_belief > 0
     }
 
@@ -21,7 +21,7 @@ def get_credorledger(x_bud: BudUnit) -> dict[AcctName, float]:
 def get_debtorledger(x_bud: BudUnit) -> dict[AcctName, float]:
     return {
         acctunit.acct_name: acctunit.debtit_belief
-        for acctunit in x_bud._accts.values()
+        for acctunit in x_bud.accts.values()
         if acctunit.debtit_belief > 0
     }
 

@@ -220,8 +220,8 @@ def get_yao_ohio_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
         deals_dir=env_dir(),
-        deal_idea=yao_bud._deal_idea,
-        owner_name=yao_bud._owner_name,
+        deal_idea=yao_bud.deal_idea,
+        owner_name=yao_bud.owner_name,
         keep_road=get_ohio_road(),
         # pipeline_voice_final_str(),
     )
@@ -231,8 +231,8 @@ def get_yao_iowa_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
         deals_dir=env_dir(),
-        deal_idea=yao_bud._deal_idea,
-        owner_name=yao_bud._owner_name,
+        deal_idea=yao_bud.deal_idea,
+        owner_name=yao_bud.owner_name,
         keep_road=get_iowa_road(),
         # pipeline_voice_final_str(),
     )
@@ -242,7 +242,7 @@ def get_zia_utah_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
         deals_dir=env_dir(),
-        deal_idea=yao_bud._deal_idea,
+        deal_idea=yao_bud.deal_idea,
         owner_name="Zia",
         keep_road=get_utah_road(),
         # pipeline_voice_final_str(),
@@ -288,7 +288,7 @@ def get_example_yao_voice_with_3_healers():
 #     assert len(yao_voice0._keep_dict) == 3
 #     print(f"{yao_voice0._item_dict.keys()=}")
 
-#     yao_str = yao_voice0._owner_name
+#     yao_str = yao_voice0.owner_name
 #     yao_job1 = get_example_yao_job1_speaker()
 #     yao_job2 = get_example_yao_job2_speaker()
 #     yao_job3 = get_example_yao_job3_speaker()
@@ -317,7 +317,7 @@ def get_example_yao_voice_with_3_healers():
 
 #     yao_final = yao_iowa_hubunit.get_final_bud()
 #     yao_final.settle_bud()
-#     assert yao_final._accts.keys() == yao_voice0._accts.keys()
+#     assert yao_final.accts.keys() == yao_voice0.accts.keys()
 #     assert yao_final.get_acct(yao_str)._irrational_debtit_belief == 0
 #     yao_final_accts = yao_final.get_dict().get("_accts")
 #     yao_voice0_accts = yao_voice0.get_dict().get("_accts")
@@ -335,7 +335,7 @@ def get_example_yao_voice_with_3_healers():
 #     assert yao_final.item_exists(cook_road())
 #     assert yao_final.item_exists(clean_road())
 #     assert yao_final.item_exists(run_road()) is False
-#     assert len(yao_final._itemroot.factunits) == 2
+#     assert len(yao_final.itemroot.factunits) == 2
 #     assert yao_final != yao_voice0
 
 
@@ -364,7 +364,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert len(yao_voice0._keep_dict) == 3
     # print(f"{yao_voice0._item_dict.keys()=}")
 
-    yao_str = yao_voice0._owner_name
+    yao_str = yao_voice0.owner_name
     yao_job1 = get_example_yao_job1_speaker()
     yao_job2 = get_example_yao_job2_speaker()
     yao_job3 = get_example_yao_job3_speaker()
@@ -394,7 +394,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
 
     yao_final = yao_iowa_hubunit.get_final_bud()
     yao_final.settle_bud()
-    assert yao_final._accts.keys() == yao_voice0._accts.keys()
+    assert yao_final.accts.keys() == yao_voice0.accts.keys()
     assert yao_final.get_acct(yao_str)._irrational_debtit_belief == 0
     yao_final_accts = yao_final.get_dict().get("_accts")
     yao_voice0_accts = yao_voice0.get_dict().get("_accts")
@@ -418,7 +418,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert yao_final.get_fact(get_location_road()) is not None
     assert yao_final.get_fact(get_location_road()).pick == get_in_mer_road()
     assert len(yao_final.get_agenda_dict()) == 1
-    assert len(yao_final._itemroot.factunits) == 1
+    assert len(yao_final.itemroot.factunits) == 1
     assert yao_final != yao_voice0
 
 
@@ -436,6 +436,6 @@ def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
     # ESTABLISH
     assert sue_texas_hubunit.job_file_exists(yao_str)
     yao_job = sue_texas_hubunit.get_job_bud(yao_str)
-    assert yao_job._owner_name is not None
-    assert yao_job._owner_name == yao_str
+    assert yao_job.owner_name is not None
+    assert yao_job.owner_name == yao_str
     assert yao_job.get_dict() == yao_duty.get_dict()

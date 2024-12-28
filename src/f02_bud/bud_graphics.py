@@ -83,9 +83,9 @@ def _add_individual_trace(
 def _create_itemunit_traces(
     trace_list, anno_list, x_bud: BudUnit, source_y: float, mode: str
 ):
-    items = [x_bud._itemroot]
+    items = [x_bud.itemroot]
     y_itemunit_y_coordinate_dict = {None: 0}
-    prev_road = x_bud._itemroot.get_road()
+    prev_road = x_bud.itemroot.get_road()
     source_y = 0
     while items != []:
         x_item = items.pop(-1)
@@ -181,7 +181,7 @@ def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"OwnerName '{x_bud._owner_name}' bud accts metrics"
+    fig_title = f"OwnerName '{x_bud.owner_name}' bud accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
@@ -215,7 +215,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"OwnerName '{x_bud._owner_name}' bud agenda"
+    fig_title = f"OwnerName '{x_bud.owner_name}' bud agenda"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)

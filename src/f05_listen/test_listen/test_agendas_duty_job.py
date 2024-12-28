@@ -109,8 +109,8 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJobBudWithDetailsDecidedBy_
     assert bob_cook_itemunit != zia_cook_itemunit
     assert len(zia_cook_itemunit.reasonunits) == 1
     assert len(bob_cook_itemunit.reasonunits) == 0
-    zia_str = zia_job._owner_name
-    bob_str = bob_job._owner_name
+    zia_str = zia_job.owner_name
+    bob_str = bob_job.owner_name
     sue_dakota_hubunit = get_dakota_hubunit()
     sue_dakota_hubunit.save_job_bud(zia_job)
     sue_dakota_hubunit.save_job_bud(bob_job)

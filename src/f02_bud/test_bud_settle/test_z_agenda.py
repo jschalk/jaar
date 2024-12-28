@@ -109,7 +109,7 @@ def test_BudUnit_get_agenda_dict_With7amItemExample():
     x_bud.set_fact(day24hr_road, day24hr_road, day24hr_open, day24hr_nigh, True)
 
     # THEN
-    print(x_bud._itemroot.factunits[day24hr_road])
+    print(x_bud.itemroot.factunits[day24hr_road])
     print(x_bud.get_item_obj(clean_road).reasonunits)
     print(x_bud.get_item_obj(clean_road)._active)
     agenda_dict = x_bud.get_agenda_dict()
@@ -126,7 +126,7 @@ def test_budunit_v001_AgendaExists():
     min_road = yao_bud.make_l1_road(min_str)
     yao_bud.set_fact(base=min_road, pick=min_road, fopen=0, fnigh=1399)
     assert yao_bud
-    # for item_kid in yao_bud._itemroot._kids.values():
+    # for item_kid in yao_bud.itemroot._kids.values():
     #     # print(item_kid._idee)
     #     assert str(type(item_kid)) != "<class 'str'>"
     #     assert item_kid.pledge is not None
@@ -272,7 +272,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     )
     zia_bud.set_fact(base=day_road, pick=day_road, fopen=30, fnigh=87)
     zia_bud.get_agenda_dict()
-    run_reasonunits = zia_bud._itemroot._kids[run_str].reasonunits[day_road]
+    run_reasonunits = zia_bud.itemroot._kids[run_str].reasonunits[day_road]
     print(f"{run_reasonunits=}")
     print(f"{run_reasonunits.premises[day_road]._status=}")
     print(f"{run_reasonunits.premises[day_road]._task=}")

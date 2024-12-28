@@ -27,7 +27,7 @@ def test_BudUnit_edit_item_idee_FailsWhenItemDoesNotExist():
 def test_BudUnit_edit_item_idee_RaisesErrorForLevel0ItemWhen_deal_idea_isNone():
     # ESTABLISH
     yao_str = "Yao"
-    yao_bud = budunit_shop(_owner_name=yao_str)
+    yao_bud = budunit_shop(owner_name=yao_str)
 
     casa_str = "casa"
     casa_road = yao_bud.make_l1_road(casa_str)
@@ -35,34 +35,34 @@ def test_BudUnit_edit_item_idee_RaisesErrorForLevel0ItemWhen_deal_idea_isNone():
     swim_road = yao_bud.make_road(casa_road, swim_str)
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=casa_road)
-    assert yao_bud._owner_name == yao_str
-    assert yao_bud._itemroot._idee == yao_bud._deal_idea
+    assert yao_bud.owner_name == yao_str
+    assert yao_bud.itemroot._idee == yao_bud.deal_idea
     casa_item = yao_bud.get_item_obj(casa_road)
-    assert casa_item._parent_road == yao_bud._deal_idea
+    assert casa_item._parent_road == yao_bud.deal_idea
     swim_item = yao_bud.get_item_obj(swim_road)
     assert swim_item._parent_road == casa_road
 
     # WHEN
     moon_str = "moon"
-    yao_bud.edit_item_idee(old_road=yao_bud._deal_idea, new_idee=moon_str)
+    yao_bud.edit_item_idee(old_road=yao_bud.deal_idea, new_idee=moon_str)
 
     # THEN
     # with pytest_raises(Exception) as excinfo:
     #     moon_str = "moon"
-    #     yao_bud.edit_item_idee(old_road=yao_bud._deal_idea, new_idee=moon_str)
+    #     yao_bud.edit_item_idee(old_road=yao_bud.deal_idea, new_idee=moon_str)
     # assert (
     #     str(excinfo.value)
-    #     == f"Cannot set itemroot to string other than '{yao_bud._deal_idea}'"
+    #     == f"Cannot set itemroot to string other than '{yao_bud.deal_idea}'"
     # )
 
-    assert yao_bud._itemroot._idee != moon_str
-    assert yao_bud._itemroot._idee == yao_bud._deal_idea
+    assert yao_bud.itemroot._idee != moon_str
+    assert yao_bud.itemroot._idee == yao_bud.deal_idea
 
 
 def test_BudUnit_edit_item_idee_RaisesErrorForLevel0When_deal_idea_IsDifferent():
     # ESTABLISH
     yao_str = "Yao"
-    yao_bud = budunit_shop(_owner_name=yao_str)
+    yao_bud = budunit_shop(owner_name=yao_str)
     casa_str = "casa"
     casa_road = yao_bud.make_l1_road(casa_str)
     swim_str = "swim"
@@ -70,12 +70,12 @@ def test_BudUnit_edit_item_idee_RaisesErrorForLevel0When_deal_idea_IsDifferent()
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=casa_road)
     sun_str = "sun"
-    yao_bud._deal_idea = sun_str
-    yao_bud._itemroot._bud_deal_idea = sun_str
-    assert yao_bud._owner_name == yao_str
-    assert yao_bud._deal_idea == sun_str
-    assert yao_bud._itemroot._bud_deal_idea == sun_str
-    assert yao_bud._itemroot._idee == root_idea()
+    yao_bud.deal_idea = sun_str
+    yao_bud.itemroot._bud_deal_idea = sun_str
+    assert yao_bud.owner_name == yao_str
+    assert yao_bud.deal_idea == sun_str
+    assert yao_bud.itemroot._bud_deal_idea == sun_str
+    assert yao_bud.itemroot._idee == root_idea()
     casa_item = yao_bud.get_item_obj(casa_road)
     assert casa_item._parent_road == root_idea()
     swim_item = yao_bud.get_item_obj(swim_road)
@@ -125,8 +125,8 @@ def test_BudUnit_find_replace_road_CorrectlyModifies_kids_Scenario1():
     yao_bud.edit_item_idee(old_road=old_casa_road, new_idee=new_casa_str)
 
     # THEN
-    assert yao_bud._itemroot._kids.get(new_casa_str) is not None
-    assert yao_bud._itemroot._kids.get(old_casa_str) is None
+    assert yao_bud.itemroot._kids.get(new_casa_str) is not None
+    assert yao_bud.itemroot._kids.get(old_casa_str) is None
 
     assert r_item_bloomers._parent_road == new_casa_road
     assert r_item_bloomers._kids.get(roses_str) is not None
@@ -162,8 +162,8 @@ def test_bud_edit_item_idee_Modifies_factunits():
     yao_bud.set_fact(base=old_water_road, pick=old_rain_road)
 
     item_x = yao_bud.get_item_obj(roses_road)
-    assert yao_bud._itemroot.factunits[old_water_road] is not None
-    old_water_rain_factunit = yao_bud._itemroot.factunits[old_water_road]
+    assert yao_bud.itemroot.factunits[old_water_road] is not None
+    old_water_rain_factunit = yao_bud.itemroot.factunits[old_water_road]
     assert old_water_rain_factunit.base == old_water_road
     assert old_water_rain_factunit.pick == old_rain_road
 
@@ -171,20 +171,20 @@ def test_bud_edit_item_idee_Modifies_factunits():
     new_water_str = "h2o"
     new_water_road = yao_bud.make_l1_road(new_water_str)
     yao_bud.set_l1_item(itemunit_shop(new_water_str))
-    assert yao_bud._itemroot.factunits.get(new_water_road) is None
+    assert yao_bud.itemroot.factunits.get(new_water_road) is None
     yao_bud.edit_item_idee(old_road=old_water_road, new_idee=new_water_str)
 
     # THEN
-    assert yao_bud._itemroot.factunits.get(old_water_road) is None
-    assert yao_bud._itemroot.factunits.get(new_water_road) is not None
-    new_water_rain_factunit = yao_bud._itemroot.factunits[new_water_road]
+    assert yao_bud.itemroot.factunits.get(old_water_road) is None
+    assert yao_bud.itemroot.factunits.get(new_water_road) is not None
+    new_water_rain_factunit = yao_bud.itemroot.factunits[new_water_road]
     assert new_water_rain_factunit.base == new_water_road
     new_rain_road = yao_bud.make_road(new_water_road, rain_str)
     assert new_water_rain_factunit.pick == new_rain_road
 
-    assert yao_bud._itemroot.factunits.get(new_water_road)
-    factunit_obj = yao_bud._itemroot.factunits.get(new_water_road)
-    # for factunit_key, factunit_obj in yao_bud._itemroot.factunits.items():
+    assert yao_bud.itemroot.factunits.get(new_water_road)
+    factunit_obj = yao_bud.itemroot.factunits.get(new_water_road)
+    # for factunit_key, factunit_obj in yao_bud.itemroot.factunits.items():
     #     assert factunit_key == new_water_road
     assert factunit_obj.base == new_water_road
     assert factunit_obj.pick == new_rain_road
@@ -238,20 +238,20 @@ def test_bud_edit_item_idee_ModifiesItemReasonUnitsScenario1():
 def test_bud_set_owner_name_CorrectlyModifiesBoth():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
-    assert sue_bud._owner_name == "Sue"
-    assert sue_bud._itemroot._idee == sue_bud._deal_idea
+    assert sue_bud.owner_name == "Sue"
+    assert sue_bud.itemroot._idee == sue_bud.deal_idea
     # mid_idee1 = "Yao"
     # sue_bud.edit_item_idee(old_road=old_idee, new_idee=mid_idee1)
-    # assert sue_bud._owner_name == old_idee
-    # assert sue_bud._itemroot._idee == mid_idee1
+    # assert sue_bud.owner_name == old_idee
+    # assert sue_bud.itemroot._idee == mid_idee1
 
     # WHEN
     bob_str = "Bob"
     sue_bud.set_owner_name(new_owner_name=bob_str)
 
     # THEN
-    assert sue_bud._owner_name == bob_str
-    assert sue_bud._itemroot._idee == sue_bud._deal_idea
+    assert sue_bud.owner_name == bob_str
+    assert sue_bud.itemroot._idee == sue_bud.deal_idea
 
 
 def test_bud_edit_item_idee_RaisesErrorIfbridgeIsInIdea():
@@ -266,5 +266,5 @@ def test_bud_edit_item_idee_RaisesErrorIfbridgeIsInIdea():
         sue_bud.edit_item_idee(old_road=old_weekday_road, new_idee=new_weekday_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify '{old_weekday_road}' because new_idee {new_weekday_str} contains bridge {sue_bud._bridge}"
+        == f"Cannot modify '{old_weekday_road}' because new_idee {new_weekday_str} contains bridge {sue_bud.bridge}"
     )

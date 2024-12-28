@@ -32,9 +32,9 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
     sue_default_voice = sue_hubunit.default_voice_bud()
 
     # THEN
-    assert sue_default_voice._deal_idea == sue_hubunit.deal_idea
-    assert sue_default_voice._owner_name == sue_hubunit.owner_name
-    assert sue_default_voice._bridge == sue_hubunit.bridge
+    assert sue_default_voice.deal_idea == sue_hubunit.deal_idea
+    assert sue_default_voice.owner_name == sue_hubunit.owner_name
+    assert sue_default_voice.bridge == sue_hubunit.bridge
     assert sue_default_voice.fund_pool == sue_hubunit.fund_pool
     assert sue_default_voice.fund_coin == sue_hubunit.fund_coin
     assert sue_default_voice.respect_bit == sue_hubunit.respect_bit
@@ -155,8 +155,8 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesvoiceFileAndGiftFile(
 
     # THEN
     voice_bud = sue_hubunit.get_voice_bud()
-    assert voice_bud._deal_idea == deal_idea()
-    assert voice_bud._owner_name == sue_str
+    assert voice_bud.deal_idea == deal_idea()
+    assert voice_bud.owner_name == sue_str
     assert voice_bud.respect_bit == seven_int
     assert os_path_exists(init_gift_file_path)
 
@@ -180,8 +180,8 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlyvoiceFile(
 
     # THEN
     voice_bud = sue_hubunit.get_voice_bud()
-    assert voice_bud._deal_idea == deal_idea()
-    assert voice_bud._owner_name == sue_str
+    assert voice_bud.deal_idea == deal_idea()
+    assert voice_bud.owner_name == sue_str
     assert voice_bud.respect_bit == seven_int
     assert os_path_exists(init_gift_file_path)
 
@@ -207,8 +207,8 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlygiftFile(
     sue_hubunit.initialize_gift_voice_files()
 
     # THEN
-    assert sue_voice_bud._deal_idea == deal_idea()
-    assert sue_voice_bud._owner_name == sue_str
+    assert sue_voice_bud.deal_idea == deal_idea()
+    assert sue_voice_bud.owner_name == sue_str
     assert sue_voice_bud.respect_bit == seven_int
     assert sue_voice_bud.acct_exists(bob_str)
     assert os_path_exists(init_gift_file_path)
@@ -223,7 +223,7 @@ def test_HubUnit_append_gifts_to_voice_file_AddsgiftsTovoiceFile(
     sue_hubunit.initialize_gift_voice_files()
     sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
     voice_bud = sue_hubunit.get_voice_bud()
-    print(f"{voice_bud._deal_idea=}")
+    print(f"{voice_bud.deal_idea=}")
     sports_str = "sports"
     sports_road = voice_bud.make_l1_road(sports_str)
     knee_str = "knee"

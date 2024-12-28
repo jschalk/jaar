@@ -25,9 +25,9 @@ def test_bud_itemroot_teamunit_CorrectlySets_item_teamheir():
     x_teamunit = teamunit_shop()
 
     yao_bud = budunit_shop("Yao")
-    yao_bud.edit_item_attr(teamunit=x_teamunit, road=yao_bud._deal_idea)
-    assert yao_bud._itemroot.teamunit == x_teamunit
-    assert yao_bud._itemroot._teamheir is None
+    yao_bud.edit_item_attr(teamunit=x_teamunit, road=yao_bud.deal_idea)
+    assert yao_bud.itemroot.teamunit == x_teamunit
+    assert yao_bud.itemroot._teamheir is None
 
     # WHEN
     yao_bud.settle_bud()
@@ -37,8 +37,8 @@ def test_bud_itemroot_teamunit_CorrectlySets_item_teamheir():
     x_teamheir.set_teamlinks(
         parent_teamheir=None, teamunit=x_teamunit, bud_groupunits=None
     )
-    assert yao_bud._itemroot._teamheir is not None
-    assert yao_bud._itemroot._teamheir == x_teamheir
+    assert yao_bud.itemroot._teamheir is not None
+    assert yao_bud.itemroot._teamheir == x_teamheir
 
 
 def test_bud_itemkid_teamunit_EmptyCorrectlySets_item_teamheir():
@@ -68,7 +68,7 @@ def test_bud_itemkid_teamunit_EmptyCorrectlySets_item_teamheir():
         teamunit=x_teamunit,
         bud_groupunits=bob_bud._groupunits,
     )
-    x_teamheir.set_owner_name_team(bob_bud._groupunits, bob_bud._owner_name)
+    x_teamheir.set_owner_name_team(bob_bud._groupunits, bob_bud.owner_name)
     print(f"{x_teamheir._owner_name_team=}")
     assert run_item._teamheir._owner_name_team == x_teamheir._owner_name_team
     assert run_item._teamheir == x_teamheir
@@ -101,7 +101,7 @@ def test_bud_itemkid_teamunit_EmptyCorrectlySets_item_teamheir():
         teamunit=x_teamunit,
         bud_groupunits=bob_bud._groupunits,
     )
-    x_teamheir.set_owner_name_team(bob_bud._groupunits, bob_bud._owner_name)
+    x_teamheir.set_owner_name_team(bob_bud._groupunits, bob_bud.owner_name)
     print(f"{x_teamheir._owner_name_team=}")
     assert run_item._teamheir._owner_name_team == x_teamheir._owner_name_team
     assert run_item._teamheir == x_teamheir
@@ -161,8 +161,8 @@ def test_BudUnit__get_cleaned_awardlinks_item_CorrectlyCleansItem_Teamunit():
     casa_road = sue1_bud.make_l1_road(casa_str)
     swim_str = "swim"
     swim_road = sue1_bud.make_l1_road(swim_str)
-    sue1_bud.set_item(itemunit_shop(casa_str), parent_road=sue1_bud._deal_idea)
-    sue1_bud.set_item(itemunit_shop(swim_str), parent_road=sue1_bud._deal_idea)
+    sue1_bud.set_item(itemunit_shop(casa_str), parent_road=sue1_bud.deal_idea)
+    sue1_bud.set_item(itemunit_shop(swim_str), parent_road=sue1_bud.deal_idea)
     swim_teamunit = teamunit_shop()
     swim_teamunit.set_teamlink(team_label=xia_str)
     swim_teamunit.set_teamlink(team_label=zoa_str)
@@ -194,8 +194,8 @@ def test_BudUnit_set_item_CorrectlyCleansItem_awardlinks():
     casa_road = sue1_bud.make_l1_road(casa_str)
     swim_str = "swim"
     swim_road = sue1_bud.make_l1_road(swim_str)
-    sue1_bud.set_item(itemunit_shop(casa_str), parent_road=sue1_bud._deal_idea)
-    sue1_bud.set_item(itemunit_shop(swim_str), parent_road=sue1_bud._deal_idea)
+    sue1_bud.set_item(itemunit_shop(casa_str), parent_road=sue1_bud.deal_idea)
+    sue1_bud.set_item(itemunit_shop(swim_str), parent_road=sue1_bud.deal_idea)
     swim_teamunit = teamunit_shop()
     swim_teamunit.set_teamlink(team_label=xia_str)
     swim_teamunit.set_teamlink(team_label=zoa_str)

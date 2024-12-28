@@ -144,7 +144,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v1(
     assert new_yao_job.get_missing_fact_bases().get(eat_road()) is None
     listen_to_agendas_duty_job(new_yao_job, sue_texas_hubunit)
     print(f"{new_yao_job.get_missing_fact_bases().keys()=}")
-    print(f"{new_yao_job._itemroot.factunits.keys()=}")
+    print(f"{new_yao_job.itemroot.factunits.keys()=}")
     assert new_yao_job.get_missing_fact_bases().get(eat_road()) is not None
 
     # WHEN
@@ -191,14 +191,14 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 ):
     # ESTABLISH
     zia_job = get_example_zia_speaker()
-    zia_str = zia_job._owner_name
+    zia_str = zia_job.owner_name
     zia_job.set_fact(eat_road(), eat_road())
     assert zia_job.get_fact(eat_road()).pick == eat_road()
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_job_bud(zia_job)
 
     bob_job = get_example_bob_speaker()
-    bob_str = bob_job._owner_name
+    bob_str = bob_job.owner_name
     assert bob_job.get_fact(eat_road()).pick == hungry_road()
     sue_texas_hubunit.save_job_bud(bob_job)
 
@@ -212,7 +212,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
     assert new_yao_job1.get_missing_fact_bases().get(eat_road()) is None
     listen_to_agendas_duty_job(new_yao_job1, sue_texas_hubunit)
     print(f"{new_yao_job1.get_missing_fact_bases().keys()=}")
-    print(f"{new_yao_job1._itemroot.factunits.keys()=}")
+    print(f"{new_yao_job1.itemroot.factunits.keys()=}")
     assert new_yao_job1.get_missing_fact_bases().get(eat_road()) is not None
 
     # WHEN

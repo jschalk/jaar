@@ -12,7 +12,7 @@ def test_BudUnit_set_item_RaisesErrorWhen_parent_road_IsInvalid():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     invalid_rootidea_swim_road = "swimming"
-    assert invalid_rootidea_swim_road != zia_bud._deal_idea
+    assert invalid_rootidea_swim_road != zia_bud.deal_idea
     casa_str = "casa"
 
     # WHEN / THEN
@@ -66,14 +66,14 @@ def test_BudUnit_set_item_CorrectlySetsAttr():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     casa_str = "casa"
-    assert not zia_bud._itemroot._kids.get(casa_str)
+    assert not zia_bud.itemroot._kids.get(casa_str)
 
     # WHEN
-    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud._deal_idea)
+    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.deal_idea)
 
     # THEN
-    print(f"{zia_bud._itemroot._kids.keys()=}")
-    assert zia_bud._itemroot._kids.get(casa_str)
+    print(f"{zia_bud.itemroot._kids.keys()=}")
+    assert zia_bud.itemroot._kids.get(casa_str)
 
 
 def test_BudUnit_item_exists_ReturnsObj():
@@ -84,7 +84,7 @@ def test_BudUnit_item_exists_ReturnsObj():
     assert zia_bud.item_exists(casa_road) is False
 
     # WHEN
-    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud._deal_idea)
+    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.deal_idea)
 
     # THEN
     assert zia_bud.item_exists(casa_road)
@@ -95,20 +95,20 @@ def test_BudUnit_set_l1_item_CorrectlySetsAttr():
     zia_bud = budunit_shop("Zia")
     casa_str = "casa"
     casa_road = zia_bud.make_l1_road(casa_str)
-    assert not zia_bud._itemroot._kids.get(casa_road)
+    assert not zia_bud.itemroot._kids.get(casa_road)
 
     # WHEN
     zia_bud.set_l1_item(itemunit_shop(casa_str))
 
     # THEN
-    assert not zia_bud._itemroot._kids.get(casa_road)
+    assert not zia_bud.itemroot._kids.get(casa_road)
 
 
 def test_BudUnit_add_item_SetsAttr_Scenario0():
     # ESTABLISH
     bob_str = "Bob"
     slash_str = "/"
-    bob_budunit = budunit_shop(bob_str, _bridge=slash_str)
+    bob_budunit = budunit_shop(bob_str, bridge=slash_str)
     casa_road = bob_budunit.make_l1_road("casa")
     assert not bob_budunit.item_exists(casa_road)
 
@@ -118,7 +118,7 @@ def test_BudUnit_add_item_SetsAttr_Scenario0():
     # THEN
     assert bob_budunit.item_exists(casa_road)
     casa_itemunit = bob_budunit.get_item_obj(casa_road)
-    assert casa_itemunit._bridge == bob_budunit._bridge
+    assert casa_itemunit._bridge == bob_budunit.bridge
     assert not casa_itemunit.pledge
 
 
@@ -158,7 +158,7 @@ def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_bridge():
     # ESTABLISH
     slash_str = "/"
     assert slash_str != default_bridge_if_None()
-    bob_bud = budunit_shop("Bob", _bridge=slash_str)
+    bob_bud = budunit_shop("Bob", bridge=slash_str)
     casa_str = "casa"
     week_str = "week"
     wed_str = "Wednesday"
@@ -168,11 +168,11 @@ def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_bridge():
     bob_bud.set_l1_item(itemunit_shop(casa_str))
     bob_bud.set_l1_item(itemunit_shop(week_str))
     bob_bud.set_item(itemunit_shop(wed_str), week_road)
-    print(f"{bob_bud._itemroot._kids.keys()=}")
-    assert len(bob_bud._itemroot._kids) == 2
+    print(f"{bob_bud.itemroot._kids.keys()=}")
+    assert len(bob_bud.itemroot._kids) == 2
     wed_item = bob_bud.get_item_obj(wed_road)
     assert wed_item._bridge == slash_str
-    assert wed_item._bridge == bob_bud._bridge
+    assert wed_item._bridge == bob_bud.bridge
 
     # WHEN
     bob_bud.edit_item_attr(casa_road, reason_base=week_road, reason_premise=wed_road)
@@ -203,7 +203,7 @@ def test_BudUnit_set_item_CanCreateMissingItemUnits():
 def test_BudUnit_del_item_obj_Level0CannotBeDeleted():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_road = sue_bud._deal_idea
+    root_road = sue_bud.deal_idea
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -253,7 +253,7 @@ def test_BudUnit_del_item_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sunday_road = sue_bud.make_l1_road(sun_str)
     assert sue_bud.get_item_obj(new_sunday_road)
     new_sunday_item = sue_bud.get_item_obj(new_sunday_road)
-    assert new_sunday_item._parent_road == sue_bud._deal_idea
+    assert new_sunday_item._parent_road == sue_bud.deal_idea
 
 
 def test_BudUnit_del_item_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -327,115 +327,115 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
     print(f"{casa_road=}")
-    old_mass = sue_bud._itemroot._kids[casa_str].mass
+    old_mass = sue_bud.itemroot._kids[casa_str].mass
     assert old_mass == 30
     sue_bud.edit_item_attr(road=casa_road, mass=23)
-    new_mass = sue_bud._itemroot._kids[casa_str].mass
+    new_mass = sue_bud.itemroot._kids[casa_str].mass
     assert new_mass == 23
 
     # uid: int = None,
-    sue_bud._itemroot._kids[casa_str]._uid = 34
-    x_uid = sue_bud._itemroot._kids[casa_str]._uid
+    sue_bud.itemroot._kids[casa_str]._uid = 34
+    x_uid = sue_bud.itemroot._kids[casa_str]._uid
     assert x_uid == 34
     sue_bud.edit_item_attr(road=casa_road, uid=23)
-    uid_new = sue_bud._itemroot._kids[casa_str]._uid
+    uid_new = sue_bud.itemroot._kids[casa_str]._uid
     assert uid_new == 23
 
     # begin: float = None,
     # close: float = None,
-    sue_bud._itemroot._kids[casa_str].begin = 39
-    x_begin = sue_bud._itemroot._kids[casa_str].begin
+    sue_bud.itemroot._kids[casa_str].begin = 39
+    x_begin = sue_bud.itemroot._kids[casa_str].begin
     assert x_begin == 39
-    sue_bud._itemroot._kids[casa_str].close = 43
-    x_close = sue_bud._itemroot._kids[casa_str].close
+    sue_bud.itemroot._kids[casa_str].close = 43
+    x_close = sue_bud.itemroot._kids[casa_str].close
     assert x_close == 43
     sue_bud.edit_item_attr(road=casa_road, begin=25, close=29)
-    assert sue_bud._itemroot._kids[casa_str].begin == 25
-    assert sue_bud._itemroot._kids[casa_str].close == 29
+    assert sue_bud.itemroot._kids[casa_str].begin == 25
+    assert sue_bud.itemroot._kids[casa_str].close == 29
 
     # gogo_want: float = None,
     # stop_want: float = None,
-    sue_bud._itemroot._kids[casa_str].gogo_want = 439
-    x_gogo_want = sue_bud._itemroot._kids[casa_str].gogo_want
+    sue_bud.itemroot._kids[casa_str].gogo_want = 439
+    x_gogo_want = sue_bud.itemroot._kids[casa_str].gogo_want
     assert x_gogo_want == 439
-    sue_bud._itemroot._kids[casa_str].stop_want = 443
-    x_stop_want = sue_bud._itemroot._kids[casa_str].stop_want
+    sue_bud.itemroot._kids[casa_str].stop_want = 443
+    x_stop_want = sue_bud.itemroot._kids[casa_str].stop_want
     assert x_stop_want == 443
     sue_bud.edit_item_attr(road=casa_road, gogo_want=425, stop_want=429)
-    assert sue_bud._itemroot._kids[casa_str].gogo_want == 425
-    assert sue_bud._itemroot._kids[casa_str].stop_want == 429
+    assert sue_bud.itemroot._kids[casa_str].gogo_want == 425
+    assert sue_bud.itemroot._kids[casa_str].stop_want == 429
 
     # factunit: factunit_shop = None,
-    # sue_bud._itemroot._kids[casa_str].factunits = None
-    assert sue_bud._itemroot._kids[casa_str].factunits == {}
+    # sue_bud.itemroot._kids[casa_str].factunits = None
+    assert sue_bud.itemroot._kids[casa_str].factunits == {}
     wkdays_road = sue_bud.make_l1_road("weekdays")
     fact_road = sue_bud.make_road(wkdays_road, "Sunday")
     factunit_x = factunit_shop(base=fact_road, pick=fact_road)
 
-    casa_factunits = sue_bud._itemroot._kids[casa_str].factunits
+    casa_factunits = sue_bud.itemroot._kids[casa_str].factunits
     print(f"{casa_factunits=}")
     sue_bud.edit_item_attr(road=casa_road, factunit=factunit_x)
-    casa_factunits = sue_bud._itemroot._kids[casa_str].factunits
+    casa_factunits = sue_bud.itemroot._kids[casa_str].factunits
     print(f"{casa_factunits=}")
-    assert sue_bud._itemroot._kids[casa_str].factunits == {factunit_x.base: factunit_x}
+    assert sue_bud.itemroot._kids[casa_str].factunits == {factunit_x.base: factunit_x}
 
     # _descendant_pledge_count: int = None,
-    sue_bud._itemroot._kids[casa_str]._descendant_pledge_count = 81
-    x_descendant_pledge_count = sue_bud._itemroot._kids[
+    sue_bud.itemroot._kids[casa_str]._descendant_pledge_count = 81
+    x_descendant_pledge_count = sue_bud.itemroot._kids[
         casa_str
     ]._descendant_pledge_count
     assert x_descendant_pledge_count == 81
     sue_bud.edit_item_attr(road=casa_road, descendant_pledge_count=67)
-    _descendant_pledge_count_new = sue_bud._itemroot._kids[
+    _descendant_pledge_count_new = sue_bud.itemroot._kids[
         casa_str
     ]._descendant_pledge_count
     assert _descendant_pledge_count_new == 67
 
     # _all_acct_cred: bool = None,
-    sue_bud._itemroot._kids[casa_str]._all_acct_cred = 74
-    x_all_acct_cred = sue_bud._itemroot._kids[casa_str]._all_acct_cred
+    sue_bud.itemroot._kids[casa_str]._all_acct_cred = 74
+    x_all_acct_cred = sue_bud.itemroot._kids[casa_str]._all_acct_cred
     assert x_all_acct_cred == 74
     sue_bud.edit_item_attr(road=casa_road, all_acct_cred=59)
-    _all_acct_cred_new = sue_bud._itemroot._kids[casa_str]._all_acct_cred
+    _all_acct_cred_new = sue_bud.itemroot._kids[casa_str]._all_acct_cred
     assert _all_acct_cred_new == 59
 
     # _all_acct_debt: bool = None,
-    sue_bud._itemroot._kids[casa_str]._all_acct_debt = 74
-    x_all_acct_debt = sue_bud._itemroot._kids[casa_str]._all_acct_debt
+    sue_bud.itemroot._kids[casa_str]._all_acct_debt = 74
+    x_all_acct_debt = sue_bud.itemroot._kids[casa_str]._all_acct_debt
     assert x_all_acct_debt == 74
     sue_bud.edit_item_attr(road=casa_road, all_acct_debt=59)
-    _all_acct_debt_new = sue_bud._itemroot._kids[casa_str]._all_acct_debt
+    _all_acct_debt_new = sue_bud.itemroot._kids[casa_str]._all_acct_debt
     assert _all_acct_debt_new == 59
 
     # _awardlink: dict = None,
-    sue_bud._itemroot._kids[casa_str].awardlinks = {
+    sue_bud.itemroot._kids[casa_str].awardlinks = {
         "fun": awardlink_shop(awardee_label="fun", give_force=1, take_force=7)
     }
-    _awardlinks = sue_bud._itemroot._kids[casa_str].awardlinks
+    _awardlinks = sue_bud.itemroot._kids[casa_str].awardlinks
     assert _awardlinks == {
         "fun": awardlink_shop(awardee_label="fun", give_force=1, take_force=7)
     }
     x_awardlink = awardlink_shop(awardee_label="fun", give_force=4, take_force=8)
     sue_bud.edit_item_attr(road=casa_road, awardlink=x_awardlink)
-    assert sue_bud._itemroot._kids[casa_str].awardlinks == {"fun": x_awardlink}
+    assert sue_bud.itemroot._kids[casa_str].awardlinks == {"fun": x_awardlink}
 
     # _is_expanded: dict = None,
-    sue_bud._itemroot._kids[casa_str]._is_expanded = "what"
-    _is_expanded = sue_bud._itemroot._kids[casa_str]._is_expanded
+    sue_bud.itemroot._kids[casa_str]._is_expanded = "what"
+    _is_expanded = sue_bud.itemroot._kids[casa_str]._is_expanded
     assert _is_expanded == "what"
     sue_bud.edit_item_attr(road=casa_road, is_expanded=True)
-    assert sue_bud._itemroot._kids[casa_str]._is_expanded is True
+    assert sue_bud.itemroot._kids[casa_str]._is_expanded is True
 
     # pledge: dict = None,
-    sue_bud._itemroot._kids[casa_str].pledge = "funfun3"
-    pledge = sue_bud._itemroot._kids[casa_str].pledge
+    sue_bud.itemroot._kids[casa_str].pledge = "funfun3"
+    pledge = sue_bud.itemroot._kids[casa_str].pledge
     assert pledge == "funfun3"
     sue_bud.edit_item_attr(road=casa_road, pledge=True)
-    assert sue_bud._itemroot._kids[casa_str].pledge is True
+    assert sue_bud.itemroot._kids[casa_str].pledge is True
 
     # _healerlink:
-    sue_bud._itemroot._kids[casa_str].healerlink = "fun3rol"
-    src_healerlink = sue_bud._itemroot._kids[casa_str].healerlink
+    sue_bud.itemroot._kids[casa_str].healerlink = "fun3rol"
+    src_healerlink = sue_bud.itemroot._kids[casa_str].healerlink
     assert src_healerlink == "fun3rol"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -443,15 +443,15 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     sue_bud.add_acctunit(sue_str)
     sue_bud.add_acctunit(yao_str)
     sue_bud.edit_item_attr(road=casa_road, healerlink=x_healerlink)
-    assert sue_bud._itemroot._kids[casa_str].healerlink == x_healerlink
+    assert sue_bud.itemroot._kids[casa_str].healerlink == x_healerlink
 
     # _problem_bool: bool
-    sue_bud._itemroot._kids[casa_str].problem_bool = "fun3rol"
-    src_problem_bool = sue_bud._itemroot._kids[casa_str].problem_bool
+    sue_bud.itemroot._kids[casa_str].problem_bool = "fun3rol"
+    src_problem_bool = sue_bud.itemroot._kids[casa_str].problem_bool
     assert src_problem_bool == "fun3rol"
     x_problem_bool = True
     sue_bud.edit_item_attr(road=casa_road, problem_bool=x_problem_bool)
-    assert sue_bud._itemroot._kids[casa_str].problem_bool == x_problem_bool
+    assert sue_bud.itemroot._kids[casa_str].problem_bool == x_problem_bool
 
 
 def test_BudUnit_edit_item_attr_RaisesErrorWhen_healerlink_healer_names_DoNotExist():
@@ -489,7 +489,7 @@ def test_BudUnit_set_item_MustReorderKidsDictToBeAlphabetical():
     bob_bud.set_l1_item(itemunit_shop(swim_str))
 
     # WHEN
-    item_list = list(bob_bud._itemroot._kids.values())
+    item_list = list(bob_bud.itemroot._kids.values())
 
     # THEN
     assert item_list[0]._idee == casa_str
@@ -682,7 +682,7 @@ def test_BudUnit_edit_item_attr_DeletesItemUnit_awardlinks():
     yao_bud.edit_item_attr(swim_road, awardlink=awardlink_Xio)
 
     assert len(swim_item.awardlinks) == 3
-    assert len(yao_bud._itemroot._kids[swim_str].awardlinks) == 3
+    assert len(yao_bud.itemroot._kids[swim_str].awardlinks) == 3
 
     # WHEN
     yao_bud.edit_item_attr(swim_road, awardlink_del=yao_str)
@@ -693,7 +693,7 @@ def test_BudUnit_edit_item_attr_DeletesItemUnit_awardlinks():
     print(f"{swim_item.awardlinks=}")
     print(f"{swim_item._awardheirs=}")
 
-    assert len(yao_bud._itemroot._kids[swim_str].awardlinks) == 2
+    assert len(yao_bud.itemroot._kids[swim_str].awardlinks) == 2
 
 
 def test_BudUnit__get_cleaned_awardlinks_item_CorrectlyRemovesItem_awardlinks():
@@ -782,11 +782,11 @@ def test_BudUnit_get_item_obj_ReturnsItem():
     assert week_item._idee == week_str
 
     # WHEN
-    root_item = sue_bud.get_item_obj(road=sue_bud._deal_idea)
+    root_item = sue_bud.get_item_obj(road=sue_bud.deal_idea)
 
     # THEN
     assert root_item is not None
-    assert root_item._idee == sue_bud._deal_idea
+    assert root_item._idee == sue_bud.deal_idea
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"
@@ -824,7 +824,7 @@ def test_BudUnit_item_exists_ReturnsCorrectBool():
     # WHEN / THEN
     assert sue_bud.item_exists("") is False
     assert sue_bud.item_exists(None) is False
-    assert sue_bud.item_exists(sue_bud._deal_idea)
+    assert sue_bud.item_exists(sue_bud.deal_idea)
     assert sue_bud.item_exists(cat_road)
     assert sue_bud.item_exists(week_road)
     assert sue_bud.item_exists(casa_road)
@@ -869,8 +869,8 @@ def test_BudUnit_set_offtrack_fund_ReturnsObj():
     casa_item = itemunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_item = itemunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_item = itemunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_item._parent_road = bob_budunit._deal_idea
-    week_item._parent_road = bob_budunit._deal_idea
+    casa_item._parent_road = bob_budunit.deal_idea
+    week_item._parent_road = bob_budunit.deal_idea
     wed_item._parent_road = week_road
     bob_budunit.set_l1_item(casa_item)
     bob_budunit.set_l1_item(week_item)
@@ -926,8 +926,8 @@ def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_item = itemunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_item = itemunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_item = itemunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_item._parent_road = bob_budunit._deal_idea
-    week_item._parent_road = bob_budunit._deal_idea
+    casa_item._parent_road = bob_budunit.deal_idea
+    week_item._parent_road = bob_budunit.deal_idea
     wed_item._parent_road = week_road
     bob_budunit.set_l1_item(casa_item)
     bob_budunit.set_l1_item(week_item)

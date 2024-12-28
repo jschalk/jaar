@@ -187,9 +187,9 @@ class HubUnit:
         return open_file(self.voice_dir(), self.voice_file_name())
 
     def save_voice_bud(self, x_bud: BudUnit):
-        if x_bud._owner_name != self.owner_name:
+        if x_bud.owner_name != self.owner_name:
             raise Invalid_voice_Exception(
-                f"BudUnit with owner_name '{x_bud._owner_name}' cannot be saved as owner_name '{self.owner_name}''s voice bud."
+                f"BudUnit with owner_name '{x_bud.owner_name}' cannot be saved as owner_name '{self.owner_name}''s voice bud."
             )
         self.save_file_voice(x_bud.get_json(), True)
 
@@ -201,9 +201,9 @@ class HubUnit:
 
     def default_voice_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
-            _owner_name=self.owner_name,
-            _deal_idea=self.deal_idea,
-            _bridge=self.bridge,
+            owner_name=self.owner_name,
+            deal_idea=self.deal_idea,
+            bridge=self.bridge,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,
             respect_bit=self.respect_bit,
@@ -551,17 +551,17 @@ class HubUnit:
             return []
 
     def save_duty_bud(self, x_bud: BudUnit):
-        x_file_name = self.owner_file_name(x_bud._owner_name)
+        x_file_name = self.owner_file_name(x_bud.owner_name)
         save_file(self.dutys_dir(), x_file_name, x_bud.get_json())
 
     def save_job_bud(self, x_bud: BudUnit):
-        x_file_name = self.owner_file_name(x_bud._owner_name)
+        x_file_name = self.owner_file_name(x_bud.owner_name)
         save_file(self.jobs_dir(), x_file_name, x_bud.get_json())
 
     def save_final_bud(self, x_bud: BudUnit):
-        if x_bud._owner_name != self.owner_name:
+        if x_bud.owner_name != self.owner_name:
             raise Invalid_final_Exception(
-                f"BudUnit with owner_name '{x_bud._owner_name}' cannot be saved as owner_name '{self.owner_name}''s final bud."
+                f"BudUnit with owner_name '{x_bud.owner_name}' cannot be saved as owner_name '{self.owner_name}''s final bud."
             )
         self.save_file_final(x_bud.get_json(), True)
 

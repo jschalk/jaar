@@ -102,10 +102,10 @@ def test_BudUnit_settle_bud_CorrectlySets_item_dict():
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_item = sue_budunit.get_item_obj(casa_road)
-    print(f"{sue_budunit._owner_name=} {len(casa_item.reasonunits)=}")
+    print(f"{sue_budunit.owner_name=} {len(casa_item.reasonunits)=}")
     # print(f"{casa_item.reasonunits=}")
-    print(f"{sue_budunit._owner_name=} {len(sue_budunit._itemroot.factunits)=}")
-    # print(f"{sue_budunit._itemroot.factunits=}")
+    print(f"{sue_budunit.owner_name=} {len(sue_budunit.itemroot.factunits)=}")
+    # print(f"{sue_budunit.itemroot.factunits=}")
 
     sue_budunit.settle_bud()
     assert sue_budunit._item_dict
@@ -156,7 +156,7 @@ def test_BudUnit_settle_bud_CorrectlySets_item_dict():
     # THEN
     casa_item = sue_budunit._item_dict.get(casa_road)
     print(f"\nlook at {casa_item.get_road()=}")
-    assert casa_item._parent_road == sue_budunit._deal_idea
+    assert casa_item._parent_road == sue_budunit.deal_idea
     assert casa_item._kids == {}
     assert casa_item.mass == 30
     assert casa_item._idee == casa_str
@@ -251,13 +251,13 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     # set facts as 8am to 10am
     day24hr_open = 8.0
     day24hr_nigh = 10.0
-    print(sue_budunit._itemroot.factunits[day24hr_road])
+    print(sue_budunit.itemroot.factunits[day24hr_road])
     sue_budunit.set_fact(
         base=day24hr_base, pick=day24hr_pick, fopen=day24hr_open, fnigh=day24hr_nigh
     )
-    print(sue_budunit._itemroot.factunits[day24hr_road])
-    print(sue_budunit._itemroot._kids[house_str]._kids[clean_str].reasonunits)
-    # sue_budunit._itemroot._kids["housemanagement"]._kids[clean_str]._active = None
+    print(sue_budunit.itemroot.factunits[day24hr_road])
+    print(sue_budunit.itemroot._kids[house_str]._kids[clean_str].reasonunits)
+    # sue_budunit.itemroot._kids["housemanagement"]._kids[clean_str]._active = None
 
     # THEN
     sue_budunit.settle_bud()
@@ -281,7 +281,7 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     # ESTABLISH
     yao_budunit = budunit_v001()
     print(f"{yao_budunit.get_reason_bases()=}")
-    # day_hour = f"{yao_budunit._deal_idea},day_hour"
+    # day_hour = f"{yao_budunit.deal_idea},day_hour"
     # yao_budunit.set_fact(base=day_hour, pick=day_hour, open=0, nigh=23)
     day_min_str = "day_minute"
     day_min_road = yao_budunit.make_l1_road(day_min_str)
@@ -299,16 +299,16 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     inter_road = yao_budunit.make_l1_road(inter_str)
     yao_budunit.set_fact(base=inter_road, pick=inter_road)
     assert yao_budunit is not None
-    # print(f"{yao_budunit._owner_name=}")
-    # print(f"{len(yao_budunit._itemroot._kids)=}")
+    # print(f"{yao_budunit.owner_name=}")
+    # print(f"{len(yao_budunit.itemroot._kids)=}")
     ulty_str = "Ultimate Frisbee"
     ulty_road = yao_budunit.make_l1_road(ulty_str)
 
-    # if yao_budunit._itemroot._kids["Ultimate Frisbee"]._idee == "Ultimate Frisbee":
-    assert yao_budunit._itemroot._kids[ulty_str].reasonunits is not None
-    assert yao_budunit._owner_name is not None
+    # if yao_budunit.itemroot._kids["Ultimate Frisbee"]._idee == "Ultimate Frisbee":
+    assert yao_budunit.itemroot._kids[ulty_str].reasonunits is not None
+    assert yao_budunit.owner_name is not None
 
-    # for fact in yao_budunit._itemroot.factunits.values():
+    # for fact in yao_budunit.itemroot.factunits.values():
     #     print(f"{fact=}")
 
     # WHEN
@@ -398,7 +398,7 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
     }
     mt_reasonunit = reasonunit_shop(week_road, premises=mt_premises)
     mt_reasonheir = reasonheir_shop(week_road, premises=mt_premises, _status=False)
-    x_itemroot = yao_budunit.get_item_obj(yao_budunit._deal_idea)
+    x_itemroot = yao_budunit.get_item_obj(yao_budunit.deal_idea)
     x_itemroot.set_reasonunit(reason=mt_reasonunit)
     # print(f"{yao_budunit.reasonunits[week_road].base=}")
     # print(f"{yao_budunit.reasonunits[week_road].premises[mon_road].need=}")
@@ -440,11 +440,11 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
 
     # assert YR.get_active(road=bird_item, item_dict=item_dict) is True
 
-    # yao_budunit.set_fact(base=f"{yao_budunit._deal_idea},weekdays", pick=f"{yao_budunit._deal_idea},weekdays,Tuesday")
+    # yao_budunit.set_fact(base=f"{yao_budunit.deal_idea},weekdays", pick=f"{yao_budunit.deal_idea},weekdays,Tuesday")
     # item_dict = yao_budunit.get_item_dict()
     # assert YR.get_active(road=bird_item, item_dict=item_dict) is True
 
-    # yao_budunit.set_fact(base=f"{yao_budunit._deal_idea},weekdays", pick=f"{yao_budunit._deal_idea},weekdays,Wednesday")
+    # yao_budunit.set_fact(base=f"{yao_budunit.deal_idea},weekdays", pick=f"{yao_budunit.deal_idea},weekdays,Wednesday")
     # item_dict = yao_budunit.get_item_dict()
     # assert YR.get_active(road=bird_item, item_dict=item_dict) is False
 
@@ -510,7 +510,7 @@ def test_BudUnit_settle_bud_CorrectlySetsItemUnitsActiveWithEvery6WeeksReason_bu
     print(
         f"Nation-states set and also fact set: {ced_week_base=} with {ced_week_open=} and {ced_week_open=}"
     )
-    print(f"{yao_budunit._itemroot.factunits=}")
+    print(f"{yao_budunit.itemroot.factunits=}")
     yao_budunit.settle_bud()
 
     # THEN
@@ -614,7 +614,7 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsCorrectObj_budunit_v001():
 
     # THEN
     print(f"{len(item_dict)=}")
-    print(f"{len(yao_budunit._itemroot.factunits)=}")
+    print(f"{len(yao_budunit.itemroot.factunits)=}")
     assert from_list_get_active(mat_road, yao_budunit._item_dict)
 
 

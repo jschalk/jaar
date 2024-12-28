@@ -335,12 +335,12 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_itemunit():
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_delete())
     delete_disc_atomunit.set_jkey(
-        idee_str(), get_terminus_idea(disc_road, before_sue_budunit._bridge)
+        idee_str(), get_terminus_idea(disc_road, before_sue_budunit.bridge)
     )
     print(f"{disc_road=}")
     delete_disc_atomunit.set_jkey(
         parent_road_str(),
-        get_parent_road(disc_road, before_sue_budunit._bridge),
+        get_parent_road(disc_road, before_sue_budunit.bridge),
     )
     print(f"{delete_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
