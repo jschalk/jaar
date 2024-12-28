@@ -274,7 +274,7 @@ class DealUnit:
         x_money_magnitude: int,
         allow_prev_to_current_time_entry: bool = False,
     ):
-        if x_time_int < self.current_time and allow_prev_to_current_time_entry is False:
+        if x_time_int < self.current_time and not allow_prev_to_current_time_entry:
             exception_str = f"Cannot set purviewepisode because time_int {x_time_int} is less than DealUnit.current_time {self.current_time}."
             raise purviewepisode_Exception(exception_str)
         if self.purviewlog_exists(x_owner_name) is False:
