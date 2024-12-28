@@ -55,8 +55,8 @@ def type_AcctName_str() -> str:
     return "AcctName"
 
 
-def type_GroupID_str() -> str:
-    return "GroupID"
+def type_GroupLabel_str() -> str:
+    return "GroupLabel"
 
 
 def type_RoadUnit_str() -> str:
@@ -131,8 +131,8 @@ def acct_name_str() -> str:
     return "acct_name"
 
 
-def awardee_id_str() -> str:
-    return "awardee_id"
+def awardee_label_str() -> str:
+    return "awardee_label"
 
 
 def give_force_str() -> str:
@@ -143,12 +143,12 @@ def take_force_str() -> str:
     return "take_force"
 
 
-def group_id_str() -> str:
-    return "group_id"
+def group_label_str() -> str:
+    return "group_label"
 
 
-def team_id_str() -> str:
-    return "team_id"
+def team_label_str() -> str:
+    return "team_label"
 
 
 def healer_name_str() -> str:
@@ -291,7 +291,7 @@ def get_allowed_jaar_types() -> set[str]:
         "AcctName",
         "bool",
         "float",
-        "GroupID",
+        "GroupLabel",
         "int",
         "IdeaUnit",
         "RoadUnit",
@@ -303,7 +303,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
     return {
         "acct_name": "AcctName",
         "addin": "float",
-        "awardee_id": "GroupID",
+        "awardee_label": "GroupLabel",
         "base": "RoadUnit",
         "base_item_active_requisite": "bool",
         "begin": "float",
@@ -322,7 +322,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",
-        "group_id": "GroupID",
+        "group_label": "GroupLabel",
         "healer_name": "AcctName",
         "idee": "IdeaUnit",
         "mass": "int",
@@ -343,7 +343,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_id": "GroupID",
+        "team_label": "GroupLabel",
     }
 
 

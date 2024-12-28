@@ -9,7 +9,7 @@ from src.f02_bud.examples.example_buds import budunit_v001
 from src.f04_gift.atom_config import (
     atom_insert,
     acct_name_str,
-    group_id_str,
+    group_label_str,
     parent_road_str,
     pledge_str,
     idee_str,
@@ -115,10 +115,10 @@ def test_make_deltaunit_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     bob_iowa_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
     yao_iowa_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
     yao_ohio_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    sue_iowa_atomunit.set_arg(group_id_str(), iowa_str)
-    bob_iowa_atomunit.set_arg(group_id_str(), iowa_str)
-    yao_iowa_atomunit.set_arg(group_id_str(), iowa_str)
-    yao_ohio_atomunit.set_arg(group_id_str(), ohio_str)
+    sue_iowa_atomunit.set_arg(group_label_str(), iowa_str)
+    bob_iowa_atomunit.set_arg(group_label_str(), iowa_str)
+    yao_iowa_atomunit.set_arg(group_label_str(), iowa_str)
+    yao_ohio_atomunit.set_arg(group_label_str(), ohio_str)
     sue_iowa_atomunit.set_arg(acct_name_str(), sue_str)
     bob_iowa_atomunit.set_arg(acct_name_str(), bob_str)
     yao_iowa_atomunit.set_arg(acct_name_str(), yao_str)

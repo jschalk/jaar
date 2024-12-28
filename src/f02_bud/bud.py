@@ -48,7 +48,7 @@ from src.f01_road.road import (
 from src.f02_bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
 from src.f02_bud.group import (
     AwardLink,
-    GroupID,
+    GroupLabel,
     GroupUnit,
     groupunit_shop,
     membership_shop,
@@ -107,7 +107,7 @@ class _last_gift_idException(Exception):
     pass
 
 
-class healerlink_group_id_Exception(Exception):
+class healerlink_group_label_Exception(Exception):
     pass
 
 
@@ -142,7 +142,7 @@ class BudUnit:
     _keeps_justified: bool = None
     _keeps_buildable: bool = None
     _sum_healerlink_share: float = None
-    _groupunits: dict[GroupID, GroupUnit] = None
+    _groupunits: dict[GroupLabel, GroupUnit] = None
     _offtrack_kids_mass_set: set[RoadUnit] = None
     _offtrack_fund: float = None
     _reason_bases: set[RoadUnit] = None
@@ -290,28 +290,28 @@ class BudUnit:
         all_items_set = set(self.get_item_tree_ordered_road_list())
         return all_items_set == all_items_set.intersection(pledge_item_assoc_set)
 
-    def get_awardlinks_metrics(self) -> dict[GroupID, AwardLink]:
+    def get_awardlinks_metrics(self) -> dict[GroupLabel, AwardLink]:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
 
     def add_to_groupunit_fund_give_fund_take(
         self,
-        group_id: GroupID,
+        group_label: GroupLabel,
         awardheir_fund_give: float,
         awardheir_fund_take: float,
     ):
-        x_groupunit = self.get_groupunit(group_id)
+        x_groupunit = self.get_groupunit(group_label)
         if x_groupunit is not None:
             x_groupunit._fund_give += awardheir_fund_give
             x_groupunit._fund_take += awardheir_fund_take
 
     def add_to_groupunit_fund_agenda_give_take(
         self,
-        group_id: GroupID,
+        group_label: GroupLabel,
         awardline_fund_give: float,
         awardline_fund_take: float,
     ):
-        x_groupunit = self.get_groupunit(group_id)
+        x_groupunit = self.get_groupunit(group_label)
         if awardline_fund_give is not None and awardline_fund_take is not None:
             x_groupunit._fund_agenda_give += awardline_fund_give
             x_groupunit._fund_agenda_take += awardline_fund_take
@@ -373,33 +373,33 @@ class BudUnit:
     def get_acct(self, acct_name: AcctName) -> AcctUnit:
         return self._accts.get(acct_name)
 
-    def get_acctunit_group_ids_dict(self) -> dict[GroupID, set[AcctName]]:
+    def get_acctunit_group_labels_dict(self) -> dict[GroupLabel, set[AcctName]]:
         x_dict = {}
         for x_acctunit in self._accts.values():
-            for x_group_id in x_acctunit._memberships.keys():
-                acct_name_set = x_dict.get(x_group_id)
+            for x_group_label in x_acctunit._memberships.keys():
+                acct_name_set = x_dict.get(x_group_label)
                 if acct_name_set is None:
-                    x_dict[x_group_id] = {x_acctunit.acct_name}
+                    x_dict[x_group_label] = {x_acctunit.acct_name}
                 else:
                     acct_name_set.add(x_acctunit.acct_name)
-                    x_dict[x_group_id] = acct_name_set
+                    x_dict[x_group_label] = acct_name_set
         return x_dict
 
     def set_groupunit(self, x_groupunit: GroupUnit):
         x_groupunit._fund_coin = self.fund_coin
-        self._groupunits[x_groupunit.group_id] = x_groupunit
+        self._groupunits[x_groupunit.group_label] = x_groupunit
 
-    def groupunit_exists(self, group_id: GroupID) -> bool:
-        return self._groupunits.get(group_id) is not None
+    def groupunit_exists(self, group_label: GroupLabel) -> bool:
+        return self._groupunits.get(group_label) is not None
 
-    def get_groupunit(self, x_group_id: GroupID) -> GroupUnit:
-        return self._groupunits.get(x_group_id)
+    def get_groupunit(self, x_group_label: GroupLabel) -> GroupUnit:
+        return self._groupunits.get(x_group_label)
 
-    def create_symmetry_groupunit(self, x_group_id: GroupID) -> GroupUnit:
-        x_groupunit = groupunit_shop(x_group_id)
+    def create_symmetry_groupunit(self, x_group_label: GroupLabel) -> GroupUnit:
+        x_groupunit = groupunit_shop(x_group_label)
         for x_acctunit in self._accts.values():
             x_membership = membership_shop(
-                group_id=x_group_id,
+                group_label=x_group_label,
                 credit_vote=x_acctunit.credit_belief,
                 debtit_vote=x_acctunit.debtit_belief,
                 _acct_name=x_acctunit.acct_name,
@@ -407,10 +407,10 @@ class BudUnit:
             x_groupunit.set_membership(x_membership)
         return x_groupunit
 
-    def get_tree_traverse_generated_groupunits(self) -> set[GroupID]:
-        x_acctunit_group_ids = set(self.get_acctunit_group_ids_dict().keys())
-        all_group_ids = set(self._groupunits.keys())
-        return all_group_ids.difference(x_acctunit_group_ids)
+    def get_tree_traverse_generated_groupunits(self) -> set[GroupLabel]:
+        x_acctunit_group_labels = set(self.get_acctunit_group_labels_dict().keys())
+        all_group_labels = set(self._groupunits.keys())
+        return all_group_labels.difference(x_acctunit_group_labels)
 
     def _is_item_rangeroot(self, item_road: RoadUnit) -> bool:
         if self._deal_idea == item_road:
@@ -581,7 +581,7 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         create_missing_items: bool = None,
-        get_rid_of_missing_awardlinks_awardee_ids: bool = None,
+        get_rid_of_missing_awardlinks_awardee_labels: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
@@ -590,7 +590,7 @@ class BudUnit:
             item_kid=item_kid,
             parent_road=self._deal_idea,
             create_missing_items=create_missing_items,
-            get_rid_of_missing_awardlinks_awardee_ids=get_rid_of_missing_awardlinks_awardee_ids,
+            get_rid_of_missing_awardlinks_awardee_labels=get_rid_of_missing_awardlinks_awardee_labels,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
@@ -600,7 +600,7 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         parent_road: RoadUnit,
-        get_rid_of_missing_awardlinks_awardee_ids: bool = None,
+        get_rid_of_missing_awardlinks_awardee_labels: bool = None,
         create_missing_items: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
@@ -620,7 +620,7 @@ class BudUnit:
             item_kid._bud_deal_idea = self._deal_idea
         if item_kid._fund_coin != self.fund_coin:
             item_kid._fund_coin = self.fund_coin
-        if not get_rid_of_missing_awardlinks_awardee_ids:
+        if not get_rid_of_missing_awardlinks_awardee_labels:
             item_kid = self._get_cleaned_awardlinks_item(item_kid)
         item_kid.set_parent_road(parent_road=parent_road)
 
@@ -653,21 +653,23 @@ class BudUnit:
 
     def _get_cleaned_awardlinks_item(self, x_item: ItemUnit) -> ItemUnit:
         _awardlinks_to_delete = [
-            _awardlink_awardee_id
-            for _awardlink_awardee_id in x_item.awardlinks.keys()
-            if self.get_acctunit_group_ids_dict().get(_awardlink_awardee_id) is None
+            _awardlink_awardee_label
+            for _awardlink_awardee_label in x_item.awardlinks.keys()
+            if self.get_acctunit_group_labels_dict().get(_awardlink_awardee_label)
+            is None
         ]
-        for _awardlink_awardee_id in _awardlinks_to_delete:
-            x_item.awardlinks.pop(_awardlink_awardee_id)
+        for _awardlink_awardee_label in _awardlinks_to_delete:
+            x_item.awardlinks.pop(_awardlink_awardee_label)
 
         if x_item.teamunit is not None:
             _teamlinks_to_delete = [
-                _teamlink_team_id
-                for _teamlink_team_id in x_item.teamunit._teamlinks
-                if self.get_acctunit_group_ids_dict().get(_teamlink_team_id) is None
+                _teamlink_team_label
+                for _teamlink_team_label in x_item.teamunit._teamlinks
+                if self.get_acctunit_group_labels_dict().get(_teamlink_team_label)
+                is None
             ]
-            for _teamlink_team_id in _teamlinks_to_delete:
-                x_item.teamunit.del_teamlink(_teamlink_team_id)
+            for _teamlink_team_label in _teamlinks_to_delete:
+                x_item.teamunit.del_teamlink(_teamlink_team_label)
         return x_item
 
     def _create_missing_items(self, road):
@@ -807,15 +809,15 @@ class BudUnit:
         all_acct_cred: bool = None,
         all_acct_debt: bool = None,
         awardlink: AwardLink = None,
-        awardlink_del: GroupID = None,
+        awardlink_del: GroupLabel = None,
         is_expanded: bool = None,
         problem_bool: bool = None,
     ):
         if healerlink is not None:
             for x_healer_name in healerlink._healer_names:
-                if self.get_acctunit_group_ids_dict().get(x_healer_name) is None:
-                    exception_str = f"Item cannot edit healerlink because group_id '{x_healer_name}' does not exist as group in Bud"
-                    raise healerlink_group_id_Exception(exception_str)
+                if self.get_acctunit_group_labels_dict().get(x_healer_name) is None:
+                    exception_str = f"Item cannot edit healerlink because group_label '{x_healer_name}' does not exist as group in Bud"
+                    raise healerlink_group_label_Exception(exception_str)
 
         x_itemattrholder = itemattrholder_shop(
             mass=mass,
@@ -914,13 +916,13 @@ class BudUnit:
         for groupunit_obj in self._groupunits.values():
             groupunit_obj.clear_fund_give_take()
 
-    def _set_groupunits_fund_share(self, awardheirs: dict[GroupID, AwardLink]):
+    def _set_groupunits_fund_share(self, awardheirs: dict[GroupLabel, AwardLink]):
         for awardlink_obj in awardheirs.values():
-            x_awardee_id = awardlink_obj.awardee_id
-            if not self.groupunit_exists(x_awardee_id):
-                self.set_groupunit(self.create_symmetry_groupunit(x_awardee_id))
+            x_awardee_label = awardlink_obj.awardee_label
+            if not self.groupunit_exists(x_awardee_label):
+                self.set_groupunit(self.create_symmetry_groupunit(x_awardee_label))
             self.add_to_groupunit_fund_give_fund_take(
-                group_id=awardlink_obj.awardee_id,
+                group_label=awardlink_obj.awardee_label,
                 awardheir_fund_give=awardlink_obj._fund_give,
                 awardheir_fund_take=awardlink_obj._fund_take,
             )
@@ -935,7 +937,7 @@ class BudUnit:
                 if item.awardheir_exists():
                     for x_awardline in item._awardlines.values():
                         self.add_to_groupunit_fund_agenda_give_take(
-                            group_id=x_awardline.awardee_id,
+                            group_label=x_awardline.awardee_label,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
@@ -1155,10 +1157,10 @@ class BudUnit:
 
     def _create_groupunits_metrics(self):
         self._groupunits = {}
-        for group_id, acct_name_set in self.get_acctunit_group_ids_dict().items():
-            x_groupunit = groupunit_shop(group_id, _bridge=self._bridge)
+        for group_label, acct_name_set in self.get_acctunit_group_labels_dict().items():
+            x_groupunit = groupunit_shop(group_label, _bridge=self._bridge)
             for x_acct_name in acct_name_set:
-                x_membership = self.get_acct(x_acct_name).get_membership(group_id)
+                x_membership = self.get_acct(x_acct_name).get_membership(group_label)
                 x_groupunit.set_membership(x_membership)
                 self.set_groupunit(x_groupunit)
 
@@ -1385,7 +1387,7 @@ class BudUnit:
         self.set_item(
             item_kid=item_kid,
             parent_road=self.make_road(item_kid._parent_road),
-            get_rid_of_missing_awardlinks_awardee_ids=True,
+            get_rid_of_missing_awardlinks_awardee_labels=True,
             create_missing_items=True,
         )
 

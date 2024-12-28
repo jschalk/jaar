@@ -5,7 +5,7 @@ from src.f01_road.road import (
     AcctName,
     RoadUnit,
     DoarUnit,
-    GroupID,
+    GroupLabel,
     create_road,
     create_road_from_ideas,
     create_road_without_root_idea,
@@ -75,10 +75,10 @@ def test_AcctName_exists():
     assert inspect_getdoc(bob_acct_name) == doc_str
 
 
-def test_GroupID_exists():
-    bikers_group_id = GroupID("bikers")
-    assert bikers_group_id is not None
-    assert str(type(bikers_group_id)).find("src.f01_road.road.GroupID") > 0
+def test_GroupLabel_exists():
+    bikers_group_label = GroupLabel("bikers")
+    assert bikers_group_label is not None
+    assert str(type(bikers_group_label)).find("src.f01_road.road.GroupLabel") > 0
 
 
 def test_IdeaUnit_exists():

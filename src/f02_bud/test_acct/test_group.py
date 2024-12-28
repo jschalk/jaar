@@ -13,10 +13,10 @@ def test_GroupUnit_exists():
     # ESTABLISH
     swim_str = ";swimmers"
     # WHEN
-    swim_groupunit = GroupUnit(group_id=swim_str)
+    swim_groupunit = GroupUnit(group_label=swim_str)
     # THEN
     assert swim_groupunit is not None
-    assert swim_groupunit.group_id == swim_str
+    assert swim_groupunit.group_label == swim_str
     assert swim_groupunit._memberships is None
     assert swim_groupunit._fund_give is None
     assert swim_groupunit._fund_take is None
@@ -35,13 +35,13 @@ def test_groupunit_shop_ReturnsCorrectObj():
     usa_road = create_road(nation_road, "USA")
 
     # WHEN
-    swim_groupunit = groupunit_shop(group_id=swim_str)
+    swim_groupunit = groupunit_shop(group_label=swim_str)
 
     # THEN
     print(f"{swim_str}")
     assert swim_groupunit is not None
-    assert swim_groupunit.group_id is not None
-    assert swim_groupunit.group_id == swim_str
+    assert swim_groupunit.group_label is not None
+    assert swim_groupunit.group_label == swim_str
     assert swim_groupunit._memberships == {}
     assert swim_groupunit._fund_give == 0
     assert swim_groupunit._fund_take == 0
@@ -61,7 +61,7 @@ def test_groupunit_shop_ReturnsCorrectObj_bridge():
 
     # WHEN
     swim_groupunit = groupunit_shop(
-        group_id=swim_str, _bridge=slash_str, _fund_coin=x_fund_coin
+        group_label=swim_str, _bridge=slash_str, _fund_coin=x_fund_coin
     )
 
     # THEN
@@ -69,7 +69,7 @@ def test_groupunit_shop_ReturnsCorrectObj_bridge():
     assert swim_groupunit._fund_coin == x_fund_coin
 
 
-# def test_GroupUnit_set_group_id_RaisesErrorIfParameterContains_bridge_And_acct_mirror_True():
+# def test_GroupUnit_set_group_label_RaisesErrorIfParameterContains_bridge_And_acct_mirror_True():
 #     # ESTABLISH
 #     slash_str = "/"
 #     bob_str = f"Bob{slash_str}Texas"
@@ -137,7 +137,7 @@ def test_GroupUnit_set_membership_SetsAttr_credor_pool_debtor_pool():
     assert ohio_groupunit._debtor_pool == 8800
 
 
-def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_id_IsWrong():
+def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_label_IsWrong():
     # ESTABLISH
     yao_str = "Yao"
     ohio_str = ";Ohio"
@@ -154,7 +154,7 @@ def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_id_IsWrong():
         iowa_groupunit.set_membership(yao_ohio_membership)
     assert (
         str(excinfo.value)
-        == f"GroupUnit.group_id={iowa_str} cannot set membership.group_id={ohio_str}"
+        == f"GroupUnit.group_label={iowa_str} cannot set membership.group_label={ohio_str}"
     )
 
 
@@ -169,5 +169,5 @@ def test_GroupUnit_set_membership_RaisesErrorIf_acct_name_IsNone():
         ohio_groupunit.set_membership(yao_ohio_membership)
     assert (
         str(excinfo.value)
-        == f"membership group_id={ohio_str} cannot be set when _acct_name is None."
+        == f"membership group_label={ohio_str} cannot be set when _acct_name is None."
     )

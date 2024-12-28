@@ -34,13 +34,13 @@ from src.f04_gift.atom_config import (
     deal_idea_str,
     owner_name_str,
     acct_name_str,
-    group_id_str,
+    group_label_str,
     parent_road_str,
     idee_str,
     road_str,
     base_str,
-    team_id_str,
-    awardee_id_str,
+    team_label_str,
+    awardee_label_str,
     healer_name_str,
     numor_str,
     denom_str,
@@ -100,11 +100,11 @@ from src.f08_pidgin.pidgin_config import (
     inx_road_str,
     otx_name_str,
     inx_name_str,
-    otx_group_id_str,
-    inx_group_id_str,
+    otx_group_label_str,
+    inx_group_label_str,
     map_otx2inx_str,
     map_name_str,
-    map_group_id_str,
+    map_group_label_str,
     map_idea_str,
     map_road_str,
     get_pidgin_categorys,
@@ -174,15 +174,15 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[2] == deal_idea_str()
     assert table_sorting_priority[3] == owner_name_str()
     assert table_sorting_priority[4] == acct_name_str()
-    assert table_sorting_priority[5] == group_id_str()
+    assert table_sorting_priority[5] == group_label_str()
     assert table_sorting_priority[6] == parent_road_str()
     assert table_sorting_priority[7] == idee_str()
     assert table_sorting_priority[8] == road_str()
     assert table_sorting_priority[9] == base_str()
     assert table_sorting_priority[10] == "need"
     assert table_sorting_priority[11] == "pick"
-    assert table_sorting_priority[12] == team_id_str()
-    assert table_sorting_priority[13] == awardee_id_str()
+    assert table_sorting_priority[12] == team_label_str()
+    assert table_sorting_priority[13] == awardee_label_str()
     assert table_sorting_priority[14] == healer_name_str()
     assert table_sorting_priority[15] == time_int_str()
     assert table_sorting_priority[16] == begin_str()
@@ -231,8 +231,8 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[59] == inx_road_str()
     assert table_sorting_priority[60] == otx_name_str()
     assert table_sorting_priority[61] == inx_name_str()
-    assert table_sorting_priority[62] == otx_group_id_str()
-    assert table_sorting_priority[63] == inx_group_id_str()
+    assert table_sorting_priority[62] == otx_group_label_str()
+    assert table_sorting_priority[63] == inx_group_label_str()
     assert table_sorting_priority[64] == otx_bridge_str()
     assert table_sorting_priority[65] == inx_bridge_str()
     assert table_sorting_priority[66] == bridge_str()
@@ -270,15 +270,15 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(deal_idea_str()) == "TEXT"
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
-    assert sqlite_types.get(group_id_str()) == "TEXT"
+    assert sqlite_types.get(group_label_str()) == "TEXT"
     assert sqlite_types.get(parent_road_str()) == "TEXT"
     assert sqlite_types.get(idee_str()) == "TEXT"
     assert sqlite_types.get(road_str()) == "TEXT"
     assert sqlite_types.get(base_str()) == "TEXT"
     assert sqlite_types.get("need") == "TEXT"
     assert sqlite_types.get("pick") == "TEXT"
-    assert sqlite_types.get(team_id_str()) == "TEXT"
-    assert sqlite_types.get(awardee_id_str()) == "TEXT"
+    assert sqlite_types.get(team_label_str()) == "TEXT"
+    assert sqlite_types.get(awardee_label_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(time_int_str()) == "INTEGER"
     assert sqlite_types.get(begin_str()) == "REAL"
@@ -382,7 +382,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert bud_itemunit_str() in brick_config_categorys
     assert budunit_str() in brick_config_categorys
     assert map_name_str() in brick_config_categorys
-    assert map_group_id_str() in brick_config_categorys
+    assert map_group_label_str() in brick_config_categorys
     assert map_idea_str() in brick_config_categorys
     assert map_road_str() in brick_config_categorys
     assert get_atom_categorys().issubset(brick_config_categorys)
@@ -422,7 +422,7 @@ def _validate_brick_config(x_brick_config: dict):
             deal_timeline_weekday_str(),
             dealunit_str(),
             map_otx2inx_str(),
-            map_group_id_str(),
+            map_group_label_str(),
             map_name_str(),
             map_idea_str(),
             map_road_str(),
@@ -628,7 +628,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     # ESTABLISH / WHEN
     bo = build_order_str()
     # set_brick_config_json(map_name_str(), 0)
-    # set_brick_config_json(map_group_id_str(), 1)
+    # set_brick_config_json(map_group_label_str(), 1)
     # set_brick_config_json(map_idea_str(), 2)
     # set_brick_config_json(map_road_str(), 3)
     # set_brick_config_json(dealunit_str(), 5)
@@ -652,7 +652,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
 
     # THEN
     assert x_brick_config.get(map_name_str()).get(bo) == 0
-    assert x_brick_config.get(map_group_id_str()).get(bo) == 1
+    assert x_brick_config.get(map_group_label_str()).get(bo) == 1
     assert x_brick_config.get(map_idea_str()).get(bo) == 2
     assert x_brick_config.get(map_road_str()).get(bo) == 3
     assert x_brick_config.get(dealunit_str()).get(bo) == 5

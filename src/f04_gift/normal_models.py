@@ -32,7 +32,7 @@ class AcctUnitTable(Base):
 class MemberShipTable(Base):
     __tablename__ = "membership"
     uid = Column(Integer, primary_key=True)
-    group_id = Column(String)
+    group_label = Column(String)
     acct_name = Column(String)
     credit_vote = Column(Integer)
     debtit_vote = Column(Integer)
@@ -59,7 +59,7 @@ class ItemTable(Base):
 class AwardLinkTable(Base):
     __tablename__ = "awardlink"
     uid = Column(Integer, primary_key=True)
-    awardee_id = Column(String)
+    awardee_label = Column(String)
     road = Column(String)
     give_force = Column(Float)
     take_force = Column(Float)
@@ -87,7 +87,7 @@ class PremiseTable(Base):
 class TeamLinkTable(Base):
     __tablename__ = "teamlink"
     uid = Column(Integer, primary_key=True)
-    team_id = Column(String)
+    team_label = Column(String)
     road = Column(String)
 
 

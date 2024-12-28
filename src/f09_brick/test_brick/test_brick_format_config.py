@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     deal_idea_str,
     owner_name_str,
     acct_name_str,
-    group_id_str,
+    group_label_str,
     parent_road_str,
     idee_str,
     mass_str,
@@ -235,7 +235,7 @@ def test_get_brickref_obj_HasCorrectAttrs_brick_format_00020_bud_acct_membership
     assert headers_list[2] == deal_idea_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
-    assert headers_list[5] == group_id_str()
+    assert headers_list[5] == group_label_str()
     assert headers_list[6] == credit_vote_str()
     assert headers_list[7] == debtit_vote_str()
 

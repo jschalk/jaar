@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import get_empty_dict_if_None, get_0_if_None
-from src.f01_road.road import GroupID
+from src.f01_road.road import GroupLabel
 from src.f02_bud.reason_item import ReasonUnit, RoadUnit
 from src.f02_bud.group import AwardLink
 from dataclasses import dataclass
@@ -10,7 +10,7 @@ class TreeMetrics:
     idea_count: int = None
     level_count: dict[int, int] = None
     reason_bases: dict[RoadUnit, int] = None
-    awardlinks_metrics: dict[GroupID, AwardLink] = None
+    awardlinks_metrics: dict[GroupLabel, AwardLink] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
     all_item_uids_are_unique: bool = None
@@ -20,7 +20,7 @@ class TreeMetrics:
         self,
         level: int,
         reasons: dict[RoadUnit, ReasonUnit],
-        awardlinks: dict[GroupID, AwardLink],
+        awardlinks: dict[GroupLabel, AwardLink],
         uid: int,
         pledge: bool,
         item_road: RoadUnit,
@@ -50,10 +50,10 @@ class TreeMetrics:
             else:
                 self.reason_bases[reason.base] = self.reason_bases[reason.base] + 1
 
-    def evaluate_awardlinks(self, awardlinks: dict[GroupID, AwardLink]):
+    def evaluate_awardlinks(self, awardlinks: dict[GroupLabel, AwardLink]):
         if awardlinks is not None:
             for awardlink in awardlinks.values():
-                self.awardlinks_metrics[awardlink.awardee_id] = awardlink
+                self.awardlinks_metrics[awardlink.awardee_label] = awardlink
 
     def evaluate_uid_max(self, uid):
         if uid is not None and self.uid_max < uid:
@@ -70,7 +70,7 @@ def treemetrics_shop(
     idea_count: int = None,
     level_count: dict[int, int] = None,
     reason_bases: dict[RoadUnit, int] = None,
-    awardlinks_metrics: dict[GroupID, AwardLink] = None,
+    awardlinks_metrics: dict[GroupLabel, AwardLink] = None,
     uid_max: int = None,
     uid_dict: dict[int, int] = None,
 ) -> TreeMetrics:

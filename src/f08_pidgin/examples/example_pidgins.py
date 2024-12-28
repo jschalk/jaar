@@ -77,12 +77,12 @@ def get_suita_acctmap() -> AcctMap:
 #     return x_groupmap
 
 
-# def get_invalid_group_id_mapunit() -> MapUnit:
+# def get_invalid_group_label_mapunit() -> MapUnit:
 #     sue_otx = f"Xio{default_bridge_if_None()}"
 #     sue_inx = f"Sue{default_bridge_if_None()}"
 #     zia_otx = "Zia"
 #     zia_inx = f"Zia{default_bridge_if_None()}"
-#     x_groupmap = mapunit_shop(type_GroupID_str(), face_name="Sue")
+#     x_groupmap = mapunit_shop(type_GroupLabel_str(), face_name="Sue")
 #     x_groupmap.set_otx2inx(sue_otx, sue_inx)
 #     x_groupmap.set_otx2inx(zia_otx, zia_inx)
 #     return x_groupmap

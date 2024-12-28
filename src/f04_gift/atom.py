@@ -9,7 +9,7 @@ from src.f01_road.road import (
     create_road,
     IdeaUnit,
     RoadUnit,
-    GroupID,
+    GroupLabel,
     AcctName,
     is_ideaunit,
 )
@@ -211,15 +211,15 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_acct_membership_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_name = x_atom.get_value("acct_name")
-    x_group_id = x_atom.get_value("group_id")
-    x_bud.get_acct(x_acct_name).delete_membership(x_group_id)
+    x_group_label = x_atom.get_value("group_label")
+    x_bud.get_acct(x_acct_name).delete_membership(x_group_label)
 
 
 def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_name = x_atom.get_value("acct_name")
-    x_group_id = x_atom.get_value("group_id")
+    x_group_label = x_atom.get_value("group_label")
     x_acctunit = x_bud.get_acct(x_acct_name)
-    x_membership = x_acctunit.get_membership(x_group_id)
+    x_membership = x_acctunit.get_membership(x_group_label)
     x_credit_vote = x_atom.get_value("credit_vote")
     x_debtit_vote = x_atom.get_value("debtit_vote")
     x_membership.set_credit_vote(x_credit_vote)
@@ -228,11 +228,11 @@ def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_acct_name = x_atom.get_value("acct_name")
-    x_group_id = x_atom.get_value("group_id")
+    x_group_label = x_atom.get_value("group_label")
     x_credit_vote = x_atom.get_value("credit_vote")
     x_debtit_vote = x_atom.get_value("debtit_vote")
     x_acctunit = x_bud.get_acct(x_acct_name)
-    x_acctunit.add_membership(x_group_id, x_credit_vote, x_debtit_vote)
+    x_acctunit.add_membership(x_group_label, x_credit_vote, x_debtit_vote)
 
 
 def _modify_bud_itemunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -280,7 +280,7 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         ),
         parent_road=x_atom.get_value("parent_road"),
         create_missing_items=False,
-        get_rid_of_missing_awardlinks_awardee_ids=False,
+        get_rid_of_missing_awardlinks_awardee_labels=False,
         create_missing_ancestors=False,
     )
 
@@ -288,13 +288,13 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_item_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_item_attr(
         road=x_atom.get_value("road"),
-        awardlink_del=x_atom.get_value("awardee_id"),
+        awardlink_del=x_atom.get_value("awardee_label"),
     )
 
 
 def _modify_bud_item_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_item = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_awardlink = x_item.awardlinks.get(x_atom.get_value("awardee_id"))
+    x_awardlink = x_item.awardlinks.get(x_atom.get_value("awardee_label"))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -306,7 +306,7 @@ def _modify_bud_item_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_item_awardlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
-        awardee_id=x_atom.get_value("awardee_id"),
+        awardee_label=x_atom.get_value("awardee_label"),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
@@ -398,12 +398,12 @@ def _modify_bud_item_reason_premiseunit_insert(x_bud: BudUnit, x_atom: AtomUnit)
 
 def _modify_bud_item_teamlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.teamunit.del_teamlink(team_id=x_atom.get_value("team_id"))
+    x_itemunit.teamunit.del_teamlink(team_label=x_atom.get_value("team_label"))
 
 
 def _modify_bud_item_teamlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.teamunit.set_teamlink(team_id=x_atom.get_value("team_id"))
+    x_itemunit.teamunit.set_teamlink(team_label=x_atom.get_value("team_label"))
 
 
 def _modify_bud_item_healerlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -613,7 +613,7 @@ class AtomRow:
     _crud_command: CRUD_command = None
     acct_name: AcctName = None
     addin: float = None
-    awardee_id: GroupID = None
+    awardee_label: GroupLabel = None
     base: RoadUnit = None
     base_item_active_requisite: bool = None
     begin: float = None
@@ -633,8 +633,8 @@ class AtomRow:
     fund_pool: float = None
     give_force: float = None
     gogo_want: float = None
-    group_id: GroupID = None
-    healer_name: GroupID = None
+    group_label: GroupLabel = None
+    healer_name: GroupLabel = None
     idee: IdeaUnit = None
     mass: int = None
     max_tree_traverse: int = None
@@ -653,7 +653,7 @@ class AtomRow:
     stop_want: float = None
     take_force: float = None
     tally: int = None
-    team_id: int = None
+    team_label: int = None
 
     def set_atom_category(self, atom_category: str):
         self._atom_categorys.add(atom_category)
@@ -670,8 +670,8 @@ class AtomRow:
             if x_value != None:
                 if jaar_type == "AcctName":
                     self.__dict__[x_arg] = AcctName(x_value)
-                elif jaar_type == "GroupID":
-                    self.__dict__[x_arg] = GroupID(x_value)
+                elif jaar_type == "GroupLabel":
+                    self.__dict__[x_arg] = GroupLabel(x_value)
                 elif jaar_type == "RoadUnit":
                     self.__dict__[x_arg] = RoadUnit(x_value)
                 elif jaar_type == "IdeaUnit":

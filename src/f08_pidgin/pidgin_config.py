@@ -43,12 +43,12 @@ def inx_bridge_str() -> str:
     return "inx_bridge"
 
 
-def inx_group_id_str() -> str:
-    return "inx_group_id"
+def inx_group_label_str() -> str:
+    return "inx_group_label"
 
 
-def otx_group_id_str() -> str:
-    return "otx_group_id"
+def otx_group_label_str() -> str:
+    return "otx_group_label"
 
 
 def inx_name_str() -> str:
@@ -91,8 +91,8 @@ def map_name_str() -> str:
     return "map_name"
 
 
-def map_group_id_str() -> str:
-    return "map_group_id"
+def map_group_label_str() -> str:
+    return "map_group_label"
 
 
 def map_idea_str() -> str:
@@ -138,7 +138,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "acct_name": "AcctName",
         "addin": "float",
         "amount": "float",
-        "awardee_id": "GroupID",
+        "awardee_label": "GroupLabel",
         "base": "RoadUnit",
         "base_item_active_requisite": "bool",
         "begin": "float",
@@ -163,7 +163,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",
-        "group_id": "GroupID",
+        "group_label": "GroupLabel",
         "healer_name": "AcctName",
         "hour_idea": "IdeaUnit",
         "idee": "IdeaUnit",
@@ -189,7 +189,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_id": "GroupID",
+        "team_label": "GroupLabel",
         "time_int": "TimeLinePoint",
         "timeline_idea": "IdeaUnit",
         "weekday_idea": "IdeaUnit",
@@ -202,12 +202,12 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
 def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     """for each pidgin_config category contains the associated columns"""
     return {
-        "map_group_id": {
-            "inx_group_id",
+        "map_group_label": {
+            "inx_group_label",
             "unknown_word",
             "inx_bridge",
             "otx_bridge",
-            "otx_group_id",
+            "otx_group_label",
         },
         "map_name": {
             "inx_name",

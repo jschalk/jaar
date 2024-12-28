@@ -11,7 +11,7 @@ from src.f01_road.road import (
 )
 from src.f01_road.finance import default_respect_bit_if_None, RespectNum, allot_scale
 from src.f02_bud.group import (
-    GroupID,
+    GroupLabel,
     MemberShip,
     memberships_get_from_dict,
     membership_shop,
@@ -153,32 +153,32 @@ class AcctUnit(AcctCore):
 
     def add_membership(
         self,
-        group_id: GroupID,
+        group_label: GroupLabel,
         credit_vote: float = None,
         debtit_vote: float = None,
     ):
-        x_membership = membership_shop(group_id, credit_vote, debtit_vote)
+        x_membership = membership_shop(group_label, credit_vote, debtit_vote)
         self.set_membership(x_membership)
 
     def set_membership(self, x_membership: MemberShip):
-        x_group_id = x_membership.group_id
-        group_id_is_acct_name = is_ideaunit(x_group_id, self._bridge)
-        if group_id_is_acct_name and self.acct_name != x_group_id:
+        x_group_label = x_membership.group_label
+        group_label_is_acct_name = is_ideaunit(x_group_label, self._bridge)
+        if group_label_is_acct_name and self.acct_name != x_group_label:
             raise Bad_acct_nameMemberShipException(
-                f"AcctUnit with acct_name='{self.acct_name}' cannot have link to '{x_group_id}'."
+                f"AcctUnit with acct_name='{self.acct_name}' cannot have link to '{x_group_label}'."
             )
 
         x_membership._acct_name = self.acct_name
-        self._memberships[x_membership.group_id] = x_membership
+        self._memberships[x_membership.group_label] = x_membership
 
-    def get_membership(self, group_id: GroupID) -> MemberShip:
-        return self._memberships.get(group_id)
+    def get_membership(self, group_label: GroupLabel) -> MemberShip:
+        return self._memberships.get(group_label)
 
-    def membership_exists(self, group_id: GroupID) -> bool:
-        return self._memberships.get(group_id) is not None
+    def membership_exists(self, group_label: GroupLabel) -> bool:
+        return self._memberships.get(group_label) is not None
 
-    def delete_membership(self, group_id: GroupID):
-        return self._memberships.pop(group_id)
+    def delete_membership(self, group_label: GroupLabel):
+        return self._memberships.pop(group_label)
 
     def memberships_exist(self):
         return len(self._memberships) != 0
@@ -189,27 +189,27 @@ class AcctUnit(AcctCore):
     def set_credor_pool(self, credor_pool: RespectNum):
         self._credor_pool = credor_pool
         ledger_dict = {
-            x_membership.group_id: x_membership.credit_vote
+            x_membership.group_label: x_membership.credit_vote
             for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._credor_pool, self._respect_bit)
-        for x_group_id, group_credor_pool in allot_dict.items():
-            self.get_membership(x_group_id)._credor_pool = group_credor_pool
+        for x_group_label, group_credor_pool in allot_dict.items():
+            self.get_membership(x_group_label)._credor_pool = group_credor_pool
 
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self._debtor_pool = debtor_pool
         ledger_dict = {
-            x_membership.group_id: x_membership.debtit_vote
+            x_membership.group_label: x_membership.debtit_vote
             for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._respect_bit)
-        for x_group_id, group_debtor_pool in allot_dict.items():
-            self.get_membership(x_group_id)._debtor_pool = group_debtor_pool
+        for x_group_label, group_debtor_pool in allot_dict.items():
+            self.get_membership(x_group_label)._debtor_pool = group_debtor_pool
 
     def get_memberships_dict(self) -> dict:
         return {
-            x_membership.group_id: {
-                "group_id": x_membership.group_id,
+            x_membership.group_label: {
+                "group_label": x_membership.group_label,
                 "credit_vote": x_membership.credit_vote,
                 "debtit_vote": x_membership.debtit_vote,
             }

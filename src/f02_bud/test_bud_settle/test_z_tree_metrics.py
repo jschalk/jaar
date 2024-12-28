@@ -175,9 +175,9 @@ def test_BudUnit_3AdvocatesNoitemunit_shop():
     yao_awardlink = accts_metrics[yao_str]
     sue_awardlink = accts_metrics[sue_str]
     zia_awardlink = accts_metrics[zia_str]
-    assert yao_awardlink.awardee_id is not None
-    assert sue_awardlink.awardee_id is not None
-    assert zia_awardlink.awardee_id is not None
-    assert yao_awardlink.awardee_id == yao_str
-    assert sue_awardlink.awardee_id == sue_str
-    assert zia_awardlink.awardee_id == zia_str
+    assert yao_awardlink.awardee_label is not None
+    assert sue_awardlink.awardee_label is not None
+    assert zia_awardlink.awardee_label is not None
+    assert yao_awardlink.awardee_label == yao_str
+    assert sue_awardlink.awardee_label == sue_str
+    assert zia_awardlink.awardee_label == zia_str

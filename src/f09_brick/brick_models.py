@@ -86,7 +86,7 @@ class br00012AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     acct_name = Column(String)
-    group_id = Column(String)
+    group_label = Column(String)
     deal_idea = Column(String)
     owner_name = Column(String)
 
@@ -129,7 +129,7 @@ class br00020AbstractTable(Base):
     credit_vote = Column(Float)
     debtit_vote = Column(Float)
     deal_idea = Column(String)
-    group_id = Column(String)
+    group_label = Column(String)
     owner_name = Column(String)
 
 
@@ -148,7 +148,7 @@ class br00022AbstractTable(Base):
     __abstract__ = True
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
-    awardee_id = Column(String)
+    awardee_label = Column(String)
     deal_idea = Column(String)
     give_force = Column(Float)
     owner_name = Column(String)
@@ -176,7 +176,7 @@ class br00024AbstractTable(Base):
     deal_idea = Column(String)
     owner_name = Column(String)
     road = Column(String)
-    team_id = Column(String)
+    team_label = Column(String)
 
 
 class br00025AbstractTable(Base):
@@ -268,9 +268,9 @@ class br00042AbstractTable(Base):
     __abstract__ = True
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
-    inx_group_id = Column(String)
+    inx_group_label = Column(String)
     inx_bridge = Column(String)
-    otx_group_id = Column(String)
+    otx_group_label = Column(String)
     otx_bridge = Column(String)
     unknown_word = Column(String)
 
@@ -325,8 +325,8 @@ class br00115AbstractTable(Base):
     event_int = Column(Integer, primary_key=True)
     acct_name = Column(String)
     deal_idea = Column(String)
-    inx_group_id = Column(String)
-    otx_group_id = Column(String)
+    inx_group_label = Column(String)
+    otx_group_label = Column(String)
     owner_name = Column(String)
 
 

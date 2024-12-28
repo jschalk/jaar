@@ -1,7 +1,7 @@
 from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import bud_acctunit_str, bud_acct_membership_str
 from src.f04_gift.atom import atom_insert, atomunit_shop
-from src.f04_gift.atom_config import acct_name_str, group_id_str
+from src.f04_gift.atom_config import acct_name_str, group_label_str
 from src.f04_gift.delta import deltaunit_shop, sift_deltaunit
 
 
@@ -51,13 +51,13 @@ def test_sift_ReturnsObjWithoutUnecessaryINSERT_bud_acct_membership():
     accts_deltaunit = deltaunit_shop()
     bob_run_atom = atomunit_shop(bud_acct_membership_str(), atom_insert())
     bob_run_atom.set_arg(acct_name_str(), bob_str)
-    bob_run_atom.set_arg(group_id_str(), run_str)
+    bob_run_atom.set_arg(group_label_str(), run_str)
     yao_run_atom = atomunit_shop(bud_acct_membership_str(), atom_insert())
     yao_run_atom.set_arg(acct_name_str(), yao_str)
-    yao_run_atom.set_arg(group_id_str(), run_str)
+    yao_run_atom.set_arg(group_label_str(), run_str)
     zia_run_atom = atomunit_shop(bud_acct_membership_str(), atom_insert())
     zia_run_atom.set_arg(acct_name_str(), zia_str)
-    zia_run_atom.set_arg(group_id_str(), run_str)
+    zia_run_atom.set_arg(group_label_str(), run_str)
     accts_deltaunit.set_atomunit(bob_run_atom)
     accts_deltaunit.set_atomunit(yao_run_atom)
     accts_deltaunit.set_atomunit(zia_run_atom)

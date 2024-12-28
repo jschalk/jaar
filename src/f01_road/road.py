@@ -62,7 +62,7 @@ class DoarUnit(str):
     pass
 
 
-class GroupID(str):  # Created to help track the concept
+class GroupLabel(str):  # Created to help track the concept
     pass
 
 

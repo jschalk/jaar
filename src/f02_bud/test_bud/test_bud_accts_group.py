@@ -2,7 +2,7 @@ from src.f02_bud.group import groupunit_shop
 from src.f02_bud.bud import budunit_shop
 
 
-def test_BudUnit_get_acctunit_group_ids_dict_ReturnsObj():
+def test_BudUnit_get_acctunit_group_labels_dict_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -20,18 +20,18 @@ def test_BudUnit_get_acctunit_group_ids_dict_ReturnsObj():
     zia_acctunit.add_membership(swim_str)
 
     # WHEN
-    group_ids_dict = bob_bud.get_acctunit_group_ids_dict()
+    group_labels_dict = bob_bud.get_acctunit_group_labels_dict()
 
     # THEN
-    print(f"{group_ids_dict=}")
-    all_group_ids = {yao_str, sue_str, zia_str, run_str, swim_str}
-    assert set(group_ids_dict.keys()) == all_group_ids
-    assert set(group_ids_dict.keys()) != {swim_str, run_str}
-    assert group_ids_dict.get(swim_str) == {zia_str}
-    assert group_ids_dict.get(run_str) == {zia_str, sue_str}
-    assert group_ids_dict.get(yao_str) == {yao_str}
-    assert group_ids_dict.get(sue_str) == {sue_str}
-    assert group_ids_dict.get(zia_str) == {zia_str}
+    print(f"{group_labels_dict=}")
+    all_group_labels = {yao_str, sue_str, zia_str, run_str, swim_str}
+    assert set(group_labels_dict.keys()) == all_group_labels
+    assert set(group_labels_dict.keys()) != {swim_str, run_str}
+    assert group_labels_dict.get(swim_str) == {zia_str}
+    assert group_labels_dict.get(run_str) == {zia_str, sue_str}
+    assert group_labels_dict.get(yao_str) == {yao_str}
+    assert group_labels_dict.get(sue_str) == {sue_str}
+    assert group_labels_dict.get(zia_str) == {zia_str}
 
 
 def test_BudUnit_set_groupunit_SetsAttr_Scenario0():
@@ -103,7 +103,7 @@ def test_BudUnit_create_symmetry_groupunit_ReturnsObj():
     xio_groupunit = yao_bud.create_symmetry_groupunit(xio_str)
 
     # THEN
-    assert xio_groupunit.group_id == xio_str
+    assert xio_groupunit.group_label == xio_str
     assert xio_groupunit.membership_exists(yao_str)
     assert xio_groupunit.membership_exists(zia_str)
     assert len(xio_groupunit._memberships) == 2

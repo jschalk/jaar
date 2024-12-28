@@ -15,8 +15,8 @@ from src.f08_pidgin.pidgin_config import (
     otx_idea_str,
     inx_road_str,
     otx_road_str,
-    inx_group_id_str,
-    otx_group_id_str,
+    inx_group_label_str,
+    otx_group_label_str,
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import (
@@ -103,15 +103,15 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
         deal_idea_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_group_id_str(),
-        inx_group_id_str(),
+        otx_group_label_str(),
+        inx_group_label_str(),
     ]
     br00042_file_path = create_path(fizz_world._boat_dir, "br00042.xlsx")
     br00042_columns = [
         face_name_str(),
         event_int_str(),
-        otx_group_id_str(),
-        inx_group_id_str(),
+        otx_group_label_str(),
+        inx_group_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -223,8 +223,8 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
         "src_brick",
         face_name_str(),
         event_int_str(),
-        otx_group_id_str(),
-        inx_group_id_str(),
+        otx_group_label_str(),
+        inx_group_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),

@@ -20,7 +20,7 @@ def test_AcctUnit_set_membership_SetsAttr_memberships():
     # THEN
     assert len(yao_acctunit._memberships) == 1
     run_membership = yao_acctunit._memberships.get(run_str)
-    assert run_membership.group_id == run_str
+    assert run_membership.group_label == run_str
     assert run_membership.credit_vote == run_credit_vote
     assert run_membership.debtit_vote == run_debtit_vote
     assert run_membership._acct_name == yao_str
@@ -41,13 +41,13 @@ def test_AcctUnit_set_membership_SetsMultipleAttr():
 
     # THEN
     yao_memberships = {
-        run_membership.group_id: run_membership,
-        fly_membership.group_id: fly_membership,
+        run_membership.group_label: run_membership,
+        fly_membership.group_label: fly_membership,
     }
     assert yao_acctunit._memberships == yao_memberships
 
 
-def test_AcctUnit_set_membership_RaisesErrorIf_group_idIsAcctNameAndNotAcctUnit_acct_name():
+def test_AcctUnit_set_membership_RaisesErrorIf_group_labelIsAcctNameAndNotAcctUnit_acct_name():
     # ESTABLISH
     yao_str = "Yao"
     yao_acctunit = acctunit_shop(yao_str)
@@ -127,8 +127,8 @@ def test_AcctUnit_del_membership_SetsAttrCorrectly():
     run_membership = membership_shop(run_str)
     fly_membership = membership_shop(fly_str)
     yao_memberships = {
-        run_membership.group_id: run_membership,
-        fly_membership.group_id: fly_membership,
+        run_membership.group_label: run_membership,
+        fly_membership.group_label: fly_membership,
     }
     yao_acctunit = acctunit_shop("Yao")
     yao_acctunit.set_membership(run_membership)
@@ -151,8 +151,8 @@ def test_AcctUnit_clear_memberships_SetsAttrCorrectly():
     run_membership = membership_shop(run_str)
     fly_membership = membership_shop(fly_str)
     yao_memberships = {
-        run_membership.group_id: run_membership,
-        fly_membership.group_id: fly_membership,
+        run_membership.group_label: run_membership,
+        fly_membership.group_label: fly_membership,
     }
     yao_acctunit = acctunit_shop("Yao")
     yao_acctunit.set_membership(run_membership)

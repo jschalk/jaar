@@ -1,6 +1,6 @@
 from src.f02_bud.group import (
     GroupCore,
-    GroupID,
+    GroupLabel,
     membership_shop,
     MemberShip,
     membership_get_from_dict,
@@ -17,19 +17,19 @@ from src.f00_instrument.dict_toolbox import x_is_json, get_json_from_dict
 from pytest import raises as pytest_raises
 
 
-def test_GroupID_exists():
-    ohio_group_id = GroupID(",ohio")
-    assert ohio_group_id is not None
+def test_GroupLabel_exists():
+    ohio_group_label = GroupLabel(",ohio")
+    assert ohio_group_label is not None
 
 
 def test_GroupCore_exists():
     # ESTABLISH
     swim_str = ";swimmers"
     # WHEN
-    swim_groupcore = GroupCore(group_id=swim_str)
+    swim_groupcore = GroupCore(group_label=swim_str)
     # THEN
     assert swim_groupcore is not None
-    assert swim_groupcore.group_id == swim_str
+    assert swim_groupcore.group_label == swim_str
 
 
 def test_MemberShip_exists():
@@ -37,10 +37,10 @@ def test_MemberShip_exists():
     swim_str = ",swim"
 
     # WHEN
-    swim_membership = MemberShip(group_id=swim_str)
+    swim_membership = MemberShip(group_label=swim_str)
 
     # THEN
-    assert swim_membership.group_id == swim_str
+    assert swim_membership.group_label == swim_str
     assert swim_membership.credit_vote == 1.0
     assert swim_membership.debtit_vote == 1.0
     assert swim_membership._credor_pool is None
@@ -62,7 +62,7 @@ def test_membership_shop_ReturnsCorrectObj():
 
     # WHEN
     swim_membership = membership_shop(
-        group_id=swim_str,
+        group_label=swim_str,
         credit_vote=swim_credit_vote,
         debtit_vote=swim_debtit_vote,
     )
@@ -93,7 +93,7 @@ def test_membership_shop_ReturnsCorrectObjAttr_acct_name():
     assert swim_membership._acct_name == yao_str
 
 
-# def test_MemberShip_set_group_id_RaisesErrorIf_group_id_IsNotAcctNameAndIsIdeaUnit():
+# def test_MemberShip_set_group_label_RaisesErrorIf_group_label_IsNotAcctNameAndIsIdeaUnit():
 #     # ESTABLISH
 #     slash_str = "/"
 #     # bob_str = f"Bob{slash_str}Texas"
@@ -186,7 +186,7 @@ def test_MemberShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
     swim_credit_vote = 3.0
     swim_debtit_vote = 5.0
     swim_membership = membership_shop(
-        group_id=swim_str,
+        group_label=swim_str,
         credit_vote=swim_credit_vote,
         debtit_vote=swim_debtit_vote,
     )
@@ -199,7 +199,7 @@ def test_MemberShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # THEN
     assert swim_dict is not None
     assert swim_dict == {
-        "group_id": swim_membership.group_id,
+        "group_label": swim_membership.group_label,
         "credit_vote": swim_membership.credit_vote,
         "debtit_vote": swim_membership.debtit_vote,
     }
@@ -212,7 +212,7 @@ def test_membership_get_from_dict_ReturnsObj():
     swim_debtit_vote = 5.0
     yao_str = "Yao"
     before_swim_membership = membership_shop(
-        group_id=swim_str,
+        group_label=swim_str,
         credit_vote=swim_credit_vote,
         debtit_vote=swim_debtit_vote,
         _acct_name=yao_str,
@@ -224,7 +224,7 @@ def test_membership_get_from_dict_ReturnsObj():
 
     # THEN
     assert before_swim_membership == after_swim_membership
-    assert after_swim_membership.group_id == swim_str
+    assert after_swim_membership.group_label == swim_str
 
 
 def test_memberships_get_from_dict_ReturnsObj():
@@ -234,7 +234,7 @@ def test_memberships_get_from_dict_ReturnsObj():
     swim_debtit_vote = 5.0
     yao_str = "Yao"
     before_swim_membership = membership_shop(
-        group_id=swim_str,
+        group_label=swim_str,
         credit_vote=swim_credit_vote,
         debtit_vote=swim_debtit_vote,
         _acct_name=yao_str,
@@ -285,10 +285,10 @@ def test_AwardLink_exists():
     bikers_str = "bikers"
 
     # WHEN
-    bikers_awardlink = AwardLink(awardee_id=bikers_str)
+    bikers_awardlink = AwardLink(awardee_label=bikers_str)
 
     # THEN
-    assert bikers_awardlink.awardee_id == bikers_str
+    assert bikers_awardlink.awardee_label == bikers_str
     assert bikers_awardlink.give_force == 1.0
     assert bikers_awardlink.take_force == 1.0
 
@@ -301,7 +301,7 @@ def test_awardlink_shop_ReturnsCorrectObj():
 
     # WHEN
     bikers_awardlink = awardlink_shop(
-        awardee_id=bikers_str,
+        awardee_label=bikers_str,
         give_force=bikers_give_force,
         take_force=bikers_take_force,
     )
@@ -316,7 +316,7 @@ def test_AwardHeir_exists():
     x_awardheir = AwardHeir()
 
     # THEN
-    assert not x_awardheir.awardee_id
+    assert not x_awardheir.awardee_label
     assert x_awardheir.give_force == 1.0
     assert x_awardheir.take_force == 1.0
     assert not x_awardheir._fund_give
@@ -331,13 +331,13 @@ def test_awardheir_shop_ReturnsObj():
 
     # WHEN
     x_awardheir = awardheir_shop(
-        awardee_id=bikers_str,
+        awardee_label=bikers_str,
         give_force=bikers_give_force,
         take_force=bikers_take_force,
     )
 
     # WHEN
-    assert x_awardheir.awardee_id == bikers_str
+    assert x_awardheir.awardee_label == bikers_str
     assert x_awardheir.give_force == bikers_give_force
     assert x_awardheir.take_force == bikers_take_force
 
@@ -348,7 +348,7 @@ def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     bikers_give_force = 3.0
     bikers_take_force = 5.0
     bikers_awardlink = awardlink_shop(
-        awardee_id=bikers_str,
+        awardee_label=bikers_str,
         give_force=bikers_give_force,
         take_force=bikers_take_force,
     )
@@ -361,7 +361,7 @@ def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # THEN
     assert biker_dict is not None
     assert biker_dict == {
-        "awardee_id": bikers_awardlink.awardee_id,
+        "awardee_label": bikers_awardlink.awardee_label,
         "give_force": bikers_awardlink.give_force,
         "take_force": bikers_awardlink.take_force,
     }
@@ -371,10 +371,10 @@ def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
     # ESTABLISH
     teacher_str = "teachers"
     teacher_awardlink = awardlink_shop(
-        awardee_id=teacher_str, give_force=103, take_force=155
+        awardee_label=teacher_str, give_force=103, take_force=155
     )
     teacher_dict = teacher_awardlink.get_dict()
-    awardlinks_dict = {teacher_awardlink.awardee_id: teacher_dict}
+    awardlinks_dict = {teacher_awardlink.awardee_label: teacher_dict}
 
     teachers_json = get_json_from_dict(awardlinks_dict)
     assert teachers_json is not None
@@ -385,7 +385,7 @@ def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
 
     # THEN
     assert awardlinks_obj_dict is not None
-    teachers_obj_check_dict = {teacher_awardlink.awardee_id: teacher_awardlink}
+    teachers_obj_check_dict = {teacher_awardlink.awardee_label: teacher_awardlink}
     print(f"    {awardlinks_obj_dict=}")
     print(f"{teachers_obj_check_dict=}")
     assert awardlinks_obj_dict == teachers_obj_check_dict
@@ -399,13 +399,13 @@ def test_AwardLine_exists():
 
     # WHEN
     bikers_awardline = AwardLine(
-        awardee_id=bikers_str,
+        awardee_label=bikers_str,
         _fund_give=bikers_fund_give,
         _fund_take=bikers_fund_take,
     )
 
     # THEN
-    assert bikers_awardline.awardee_id == bikers_str
+    assert bikers_awardline.awardee_label == bikers_str
     assert bikers_awardline._fund_give == bikers_fund_give
     assert bikers_awardline._fund_take == bikers_fund_take
 
@@ -419,13 +419,13 @@ def test_awardline_shop_ReturnsCorrectObj_exists():
 
     # WHEN
     biker_awardline = awardline_shop(
-        awardee_id=bikers_str,
+        awardee_label=bikers_str,
         _fund_give=bikers_fund_give,
         _fund_take=bikers_fund_take,
     )
 
     assert biker_awardline is not None
-    assert biker_awardline.awardee_id == bikers_str
+    assert biker_awardline.awardee_label == bikers_str
     assert biker_awardline._fund_give == bikers_fund_give
     assert biker_awardline._fund_take == bikers_fund_take
 
@@ -434,9 +434,9 @@ def test_AwardLine_add_fund_give_take_CorrectlyModifiesAttr():
     # ESTABLISH
     bikers_str = "bikers"
     bikers_awardline = awardline_shop(
-        awardee_id=bikers_str, _fund_give=0.33, _fund_take=0.55
+        awardee_label=bikers_str, _fund_give=0.33, _fund_take=0.55
     )
-    assert bikers_awardline.awardee_id == bikers_str
+    assert bikers_awardline.awardee_label == bikers_str
     assert bikers_awardline._fund_give == 0.33
     assert bikers_awardline._fund_take == 0.55
 

@@ -266,7 +266,7 @@ def test_GroupMap_unknown_word_in_otx2inx_ReturnsObj():
     assert x_groupmap._unknown_word_in_otx2inx()
 
 
-def test_GroupMap_reveal_inx_ReturnsObjAndSetsAttr_group_id():
+def test_GroupMap_reveal_inx_ReturnsObjAndSetsAttr_group_label():
     # ESTABLISH
     inx_r_bridge = ":"
     otx_r_bridge = "/"

@@ -3,11 +3,11 @@ from src.f04_gift.atom_config import (
     type_AcctName_str,
     type_IdeaUnit_str,
     type_RoadUnit_str,
-    type_GroupID_str,
+    type_GroupLabel_str,
     road_str,
     face_name_str,
     type_AcctName_str,
-    type_GroupID_str,
+    type_GroupLabel_str,
 )
 from src.f08_pidgin.pidgin_config import (
     event_int_str,
@@ -83,8 +83,8 @@ def test_get_map_group_dt_columns_ReturnsObj():
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
-        "otx_group_id",
-        "inx_group_id",
+        "otx_group_label",
+        "inx_group_label",
     ]
     assert get_map_group_dt_columns() == static_list
     assert set(get_map_group_dt_columns()).issubset(set(sorting_columns()))
@@ -246,7 +246,7 @@ def test_load_groupmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(group_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_groupmap = empty_pidginunit.get_mapunit(type_GroupID_str())
+    sue_groupmap = empty_pidginunit.get_mapunit(type_GroupLabel_str())
     sue_groupmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_groupmap=}")
     assert len(sue_groupmap.otx2inx) == 0
@@ -256,7 +256,7 @@ def test_load_groupmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 
     # THEN
     assert len(sue_groupmap.otx2inx) == 2
-    ex_groupmap = sue_pidginunit.get_mapunit(type_GroupID_str())
+    ex_groupmap = sue_pidginunit.get_mapunit(type_GroupLabel_str())
     assert ex_groupmap == sue_groupmap
 
 
@@ -269,7 +269,7 @@ def test_load_groupmap_from_csv_DoesNothingWhenFileDoesNotExist(
     group_csv_path = f"{map_dir}/{group_filename}"
     assert os_path_exists(group_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_groupmap = empty_pidginunit.get_mapunit(type_GroupID_str())
+    sue_groupmap = empty_pidginunit.get_mapunit(type_GroupLabel_str())
     sue_groupmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_groupmap=}")
     assert len(sue_groupmap.otx2inx) == 0

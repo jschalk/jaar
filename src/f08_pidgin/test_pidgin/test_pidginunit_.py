@@ -4,24 +4,24 @@ from src.f03_chrono.chrono import timeline_idea_str
 from src.f04_gift.atom_config import (
     get_atom_args_jaar_types,
     type_AcctName_str,
-    type_GroupID_str,
+    type_GroupLabel_str,
     type_IdeaUnit_str,
     type_RoadUnit_str,
     acct_name_str,
-    awardee_id_str,
+    awardee_label_str,
     base_str,
     face_name_str,
     deal_idea_str,
     fund_coin_str,
     healer_name_str,
-    group_id_str,
+    group_label_str,
     idee_str,
     parent_road_str,
     penny_str,
     owner_name_str,
     respect_bit_str,
     road_str,
-    team_id_str,
+    team_label_str,
 )
 from src.f07_deal.deal_config import (
     get_deal_args_jaar_types,
@@ -65,7 +65,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("acct_name") == type_AcctName_str()
     assert pidgin_args_jaar_types.get("addin") == "float"
     assert pidgin_args_jaar_types.get("amount") == "float"
-    assert pidgin_args_jaar_types.get("awardee_id") == type_GroupID_str()
+    assert pidgin_args_jaar_types.get("awardee_label") == type_GroupLabel_str()
     assert pidgin_args_jaar_types.get("base") == type_RoadUnit_str()
     assert pidgin_args_jaar_types.get("base_item_active_requisite") == "bool"
     assert pidgin_args_jaar_types.get("begin") == "float"
@@ -90,7 +90,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("fund_pool") == "float"
     assert pidgin_args_jaar_types.get("give_force") == "float"
     assert pidgin_args_jaar_types.get("gogo_want") == "float"
-    assert pidgin_args_jaar_types.get("group_id") == type_GroupID_str()
+    assert pidgin_args_jaar_types.get("group_label") == type_GroupLabel_str()
     assert pidgin_args_jaar_types.get("healer_name") == type_AcctName_str()
     assert pidgin_args_jaar_types.get("hour_idea") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("idee") == type_IdeaUnit_str()
@@ -116,7 +116,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("stop_want") == "float"
     assert pidgin_args_jaar_types.get("take_force") == "float"
     assert pidgin_args_jaar_types.get("tally") == "int"
-    assert pidgin_args_jaar_types.get("team_id") == type_GroupID_str()
+    assert pidgin_args_jaar_types.get("team_label") == type_GroupLabel_str()
     assert pidgin_args_jaar_types.get("time_int") == "TimeLinePoint"
     assert pidgin_args_jaar_types.get("timeline_idea") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("weekday_idea") == type_IdeaUnit_str()
@@ -170,7 +170,7 @@ def test_pidginable_jaar_types_ReturnsObj():
     assert len(x_pidginable_jaar_types) == 4
     assert x_pidginable_jaar_types == {
         type_AcctName_str(),
-        type_GroupID_str(),
+        type_GroupLabel_str(),
         type_IdeaUnit_str(),
         type_RoadUnit_str(),
     }
@@ -185,11 +185,11 @@ def test_pidginable_atom_args_ReturnsObj():
     assert len(pidginable_atom_args()) == 18
     assert pidginable_atom_args() == {
         acct_name_str(),
-        awardee_id_str(),
+        awardee_label_str(),
         base_str(),
         face_name_str(),
         deal_idea_str(),
-        group_id_str(),
+        group_label_str(),
         healer_name_str(),
         hour_idea_str(),
         idee_str(),
@@ -199,7 +199,7 @@ def test_pidginable_atom_args_ReturnsObj():
         "need",
         owner_name_str(),
         road_str(),
-        team_id_str(),
+        team_label_str(),
         timeline_idea_str(),
         weekday_idea_str(),
     }
@@ -451,12 +451,12 @@ def test_PidginUnit_get_mapunit_ReturnsObj():
 
     # WHEN / THEN
     assert sue_pu.get_mapunit(type_AcctName_str()) == sue_pu.acctmap
-    assert sue_pu.get_mapunit(type_GroupID_str()) == sue_pu.groupmap
+    assert sue_pu.get_mapunit(type_GroupLabel_str()) == sue_pu.groupmap
     assert sue_pu.get_mapunit(type_IdeaUnit_str()) == sue_pu.ideamap
     assert sue_pu.get_mapunit(type_RoadUnit_str()) == sue_pu.roadmap
 
     assert sue_pu.get_mapunit(type_AcctName_str()) != sue_pu.roadmap
-    assert sue_pu.get_mapunit(type_GroupID_str()) != sue_pu.roadmap
+    assert sue_pu.get_mapunit(type_GroupLabel_str()) != sue_pu.roadmap
     assert sue_pu.get_mapunit(type_IdeaUnit_str()) != sue_pu.roadmap
 
 

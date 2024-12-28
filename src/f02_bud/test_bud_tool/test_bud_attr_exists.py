@@ -54,7 +54,7 @@ def test_bud_acct_membership_exists_ReturnsObj():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    jkeys = {"acct_name": yao_str, "group_id": swim_str}
+    jkeys = {"acct_name": yao_str, "group_label": swim_str}
 
     # WHEN / THEN
     assert not bud_acct_membership_exists(None, {})
@@ -129,9 +129,9 @@ def test_bud_item_awardlink_exists_ReturnsObj():
     root_road = sue_bud._deal_idea
     swim_str = "Swim"
     root_road = sue_bud._deal_idea
-    root_jkeys = {"road": root_road, "awardee_id": swim_str}
-    casa_jkeys = {"road": casa_road, "awardee_id": swim_str}
-    clean_jkeys = {"road": clean_road, "awardee_id": swim_str}
+    root_jkeys = {"road": root_road, "awardee_label": swim_str}
+    casa_jkeys = {"road": casa_road, "awardee_label": swim_str}
+    clean_jkeys = {"road": clean_road, "awardee_label": swim_str}
 
     # WHEN / THEN
     assert not bud_item_awardlink_exists(None, {})
@@ -232,9 +232,9 @@ def test_bud_item_teamlink_exists_ReturnsObj():
     clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._deal_idea
     swim_str = "Swim"
-    root_jkeys = {"road": root_road, "team_id": swim_str}
-    casa_jkeys = {"road": casa_road, "team_id": swim_str}
-    clean_jkeys = {"road": clean_road, "team_id": swim_str}
+    root_jkeys = {"road": root_road, "team_label": swim_str}
+    casa_jkeys = {"road": casa_road, "team_label": swim_str}
+    clean_jkeys = {"road": clean_road, "team_label": swim_str}
 
     # WHEN / THEN
     assert not bud_item_teamlink_exists(None, {})
@@ -342,7 +342,7 @@ def test_bud_attr_exists_ReturnsObj_bud_acct_membership():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    x_jkeys = {"acct_name": yao_str, "group_id": swim_str}
+    x_jkeys = {"acct_name": yao_str, "group_label": swim_str}
     x_category = bud_acct_membership_str()
 
     # WHEN / THEN
@@ -419,9 +419,9 @@ def test_bud_attr_exists_ReturnsObj_bud_item_awardlink():
     root_road = sue_bud._deal_idea
     swim_str = "Swim"
     x_category = bud_item_awardlink_str()
-    root_jkeys = {"road": root_road, "awardee_id": swim_str}
-    casa_jkeys = {"road": casa_road, "awardee_id": swim_str}
-    clean_jkeys = {"road": clean_road, "awardee_id": swim_str}
+    root_jkeys = {"road": root_road, "awardee_label": swim_str}
+    casa_jkeys = {"road": casa_road, "awardee_label": swim_str}
+    clean_jkeys = {"road": clean_road, "awardee_label": swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})
@@ -522,9 +522,9 @@ def test_bud_attr_exists_ReturnsObj_bud_item_teamlink():
     root_road = sue_bud._deal_idea
     swim_str = "Swim"
     x_category = bud_item_teamlink_str()
-    root_jkeys = {"road": root_road, "team_id": swim_str}
-    casa_jkeys = {"road": casa_road, "team_id": swim_str}
-    clean_jkeys = {"road": clean_road, "team_id": swim_str}
+    root_jkeys = {"road": root_road, "team_label": swim_str}
+    casa_jkeys = {"road": casa_road, "team_label": swim_str}
+    clean_jkeys = {"road": clean_road, "team_label": swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})

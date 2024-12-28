@@ -37,7 +37,7 @@ def test_AtomRow_exists():
     assert x_atomrow.fund_pool is None
     assert x_atomrow.give_force is None
     assert x_atomrow.gogo_want is None
-    assert x_atomrow.group_id is None
+    assert x_atomrow.group_label is None
     assert x_atomrow.healer_name is None
     assert x_atomrow.idee is None
     assert x_atomrow.mass is None

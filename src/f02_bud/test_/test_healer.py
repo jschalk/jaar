@@ -36,7 +36,7 @@ def test_healerlink_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
     assert x_healerlink._healer_names == set()
 
 
-def test_HealerLink_get_dict_ReturnsCorrectDictWithSingleGroup_id():
+def test_HealerLink_get_dict_ReturnsCorrectDictWithSingle_group_label():
     # ESTABLISH
     bob_healer_name = "Bob"
     run_healer_names = {bob_healer_name}

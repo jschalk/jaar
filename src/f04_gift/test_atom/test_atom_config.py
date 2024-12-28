@@ -28,7 +28,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     atom_update,
-    awardee_id_str,
+    awardee_label_str,
     base_str,
     begin_str,
     category_str,
@@ -46,7 +46,7 @@ from src.f04_gift.atom_config import (
     fopen_str,
     fund_coin_str,
     gogo_want_str,
-    group_id_str,
+    group_label_str,
     healer_name_str,
     jaar_type_str,
     jkeys_str,
@@ -62,9 +62,9 @@ from src.f04_gift.atom_config import (
     road_str,
     sqlite_datatype_str,
     stop_want_str,
-    team_id_str,
+    team_label_str,
     type_AcctName_str,
-    type_GroupID_str,
+    type_GroupLabel_str,
     type_IdeaUnit_str,
     type_RoadUnit_str,
 )
@@ -76,7 +76,7 @@ def test_str_functions_ReturnsObj():
     assert atom_insert() == "INSERT"
     assert atom_update() == "UPDATE"
     assert atom_delete() == "DELETE"
-    assert awardee_id_str() == "awardee_id"
+    assert awardee_label_str() == "awardee_label"
     assert base_str() == "base"
     assert begin_str() == "begin"
     assert category_str() == "category"
@@ -94,7 +94,7 @@ def test_str_functions_ReturnsObj():
     assert fopen_str() == "fopen"
     assert fund_coin_str() == "fund_coin"
     assert gogo_want_str() == "gogo_want"
-    assert group_id_str() == "group_id"
+    assert group_label_str() == "group_label"
     assert jaar_type_str() == "jaar_type"
     assert jkeys_str() == "jkeys"
     assert jvalues_str() == "jvalues"
@@ -109,9 +109,9 @@ def test_str_functions_ReturnsObj():
     assert road_str() == "road"
     assert sqlite_datatype_str() == "sqlite_datatype"
     assert stop_want_str() == "stop_want"
-    assert team_id_str() == "team_id"
+    assert team_label_str() == "team_label"
     assert type_AcctName_str() == "AcctName"
-    assert type_GroupID_str() == "GroupID"
+    assert type_GroupLabel_str() == "GroupLabel"
     assert type_IdeaUnit_str() == "IdeaUnit"
     assert type_RoadUnit_str() == "RoadUnit"
 
@@ -361,8 +361,8 @@ def unique_jkeys():
             new_jkey_keys.remove(base_str())
         if acct_name_str() in new_jkey_keys:
             new_jkey_keys.remove(acct_name_str())
-        if group_id_str() in new_jkey_keys:
-            new_jkey_keys.remove(group_id_str())
+        if group_label_str() in new_jkey_keys:
+            new_jkey_keys.remove(group_label_str())
         print(f"{atom_category} {new_jkey_keys=}")
         jkey_key_count += len(new_jkey_keys)
         jkey_keys.update(new_jkey_keys)
@@ -577,7 +577,7 @@ def test_get_allowed_jaar_types_ReturnsObj():
     x_allowed_jaar_types = {
         "int",
         type_AcctName_str(),
-        type_GroupID_str(),
+        type_GroupLabel_str(),
         type_IdeaUnit_str(),
         type_RoadUnit_str(),
         "float",
@@ -638,7 +638,7 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     # THEN
     assert x_jaar_types.get(acct_name_str()) == type_AcctName_str()
     assert x_jaar_types.get(addin_str()) == "float"
-    assert x_jaar_types.get(awardee_id_str()) == type_GroupID_str()
+    assert x_jaar_types.get(awardee_label_str()) == type_GroupLabel_str()
     assert x_jaar_types.get(base_str()) == type_RoadUnit_str()
     assert x_jaar_types.get("base_item_active_requisite") == "bool"
     assert x_jaar_types.get(begin_str()) == "float"
@@ -658,7 +658,7 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     assert x_jaar_types.get("fund_pool") == "float"
     assert x_jaar_types.get("give_force") == "float"
     assert x_jaar_types.get(gogo_want_str()) == "float"
-    assert x_jaar_types.get(group_id_str()) == type_GroupID_str()
+    assert x_jaar_types.get(group_label_str()) == type_GroupLabel_str()
     assert x_jaar_types.get(healer_name_str()) == type_AcctName_str()
     assert x_jaar_types.get("idee") == type_IdeaUnit_str()
     assert x_jaar_types.get("mass") == "int"
@@ -678,6 +678,6 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     assert x_jaar_types.get(stop_want_str()) == "float"
     assert x_jaar_types.get("take_force") == "float"
     assert x_jaar_types.get("tally") == "int"
-    assert x_jaar_types.get(team_id_str()) == type_GroupID_str()
+    assert x_jaar_types.get(team_label_str()) == type_GroupLabel_str()
     assert x_jaar_types.keys() == get_atom_args_category_mapping().keys()
     assert all_atom_args_jaar_types_are_correct(x_jaar_types)
