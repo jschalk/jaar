@@ -266,5 +266,5 @@ def test_bud_edit_item_idee_RaisesErrorIfbridgeIsInIdea():
         sue_bud.edit_item_idee(old_road=old_weekday_road, new_idee=new_weekday_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify '{old_weekday_road}' because new_idee {new_weekday_str} contains bridge {sue_bud._bridge}"
+        == f"Cannot modify '{old_weekday_road}' because new_idee {new_weekday_str} contains bridge {sue_bud.bridge}"
     )

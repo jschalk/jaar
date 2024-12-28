@@ -11,7 +11,7 @@ def test_BudUnit_set_acctunit_SetObjCorrectly():
     yao_acctunit.add_membership(yao_str)
     deepcopy_yao_acctunit = copy_deepcopy(yao_acctunit)
     slash_str = "/"
-    bob_bud = budunit_shop("Bob", _bridge=slash_str)
+    bob_bud = budunit_shop("Bob", bridge=slash_str)
 
     # WHEN
     bob_bud.set_acctunit(yao_acctunit)
@@ -20,7 +20,7 @@ def test_BudUnit_set_acctunit_SetObjCorrectly():
     assert bob_bud.accts.get(yao_str)._bridge == slash_str
     x_accts = {yao_acctunit.acct_name: deepcopy_yao_acctunit}
     assert bob_bud.accts != x_accts
-    deepcopy_yao_acctunit._bridge = bob_bud._bridge
+    deepcopy_yao_acctunit._bridge = bob_bud.bridge
     assert bob_bud.accts == x_accts
 
 

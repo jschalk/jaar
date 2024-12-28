@@ -34,7 +34,7 @@ def test_HubUnit_default_voice_bud_ReturnsCorrectObj():
     # THEN
     assert sue_default_voice.deal_idea == sue_hubunit.deal_idea
     assert sue_default_voice.owner_name == sue_hubunit.owner_name
-    assert sue_default_voice._bridge == sue_hubunit.bridge
+    assert sue_default_voice.bridge == sue_hubunit.bridge
     assert sue_default_voice.fund_pool == sue_hubunit.fund_pool
     assert sue_default_voice.fund_coin == sue_hubunit.fund_coin
     assert sue_default_voice.respect_bit == sue_hubunit.respect_bit

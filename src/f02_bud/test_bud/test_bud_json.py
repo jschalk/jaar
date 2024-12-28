@@ -57,7 +57,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict["fund_pool"] == yao_fund_pool
     assert bud_dict["fund_coin"] == yao_fund_coin
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
-    assert bud_dict["_bridge"] == yao_bud._bridge
+    assert bud_dict["_bridge"] == yao_bud.bridge
     assert bud_dict["credor_respect"] == yao_bud.credor_respect
     assert bud_dict["debtor_respect"] == yao_bud.debtor_respect
     assert bud_dict["_last_gift_id"] == yao_bud._last_gift_id
@@ -249,7 +249,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["max_tree_traverse"] == 2
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
-    assert bud_dict["_bridge"] == yao_bud._bridge
+    assert bud_dict["_bridge"] == yao_bud.bridge
 
     x_itemroot = yao_bud.itemroot
     itemroot_dict = bud_dict.get("_itemroot")
@@ -365,7 +365,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_bud.penny == zia_bud.penny
     assert json_bud.max_tree_traverse == 23
     assert json_bud.max_tree_traverse == zia_bud.max_tree_traverse
-    assert json_bud._bridge == zia_bud._bridge
+    assert json_bud.bridge == zia_bud.bridge
     assert json_bud.credor_respect == zia_bud.credor_respect
     assert json_bud.debtor_respect == zia_bud.debtor_respect
     assert json_bud.credor_respect == zia_credor_respect
@@ -441,23 +441,23 @@ def test_budunit_get_from_json_ReturnsCorrectItemRoot():
 def test_budunit_get_from_json_ReturnsCorrectObj_bridge_Example():
     # ESTABLISH
     slash_bridge = "/"
-    before_bob_bud = budunit_shop("Bob", _bridge=slash_bridge)
-    assert before_bob_bud._bridge != default_bridge_if_None()
+    before_bob_bud = budunit_shop("Bob", bridge=slash_bridge)
+    assert before_bob_bud.bridge != default_bridge_if_None()
 
     # WHEN
     bob_json = before_bob_bud.get_json()
     after_bob_bud = budunit_get_from_json(bob_json)
 
     # THEN
-    assert after_bob_bud._bridge != default_bridge_if_None()
-    assert after_bob_bud._bridge == slash_bridge
-    assert after_bob_bud._bridge == before_bob_bud._bridge
+    assert after_bob_bud.bridge != default_bridge_if_None()
+    assert after_bob_bud.bridge == slash_bridge
+    assert after_bob_bud.bridge == before_bob_bud.bridge
 
 
 def test_budunit_get_from_json_ReturnsCorrectObj_bridge_AcctExample():
     # ESTABLISH
     slash_bridge = "/"
-    before_bob_bud = budunit_shop("Bob", _bridge=slash_bridge)
+    before_bob_bud = budunit_shop("Bob", bridge=slash_bridge)
     bob_str = ",Bob"
     before_bob_bud.add_acctunit(bob_str)
     assert before_bob_bud.acct_exists(bob_str)
@@ -474,7 +474,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_bridge_AcctExample():
 def test_budunit_get_from_json_ReturnsCorrectObj_bridge_GroupExample():
     # ESTABLISH
     slash_bridge = "/"
-    before_bob_bud = budunit_shop("Bob", _bridge=slash_bridge)
+    before_bob_bud = budunit_shop("Bob", bridge=slash_bridge)
     yao_str = "Yao"
     swim_str = f"{slash_bridge}Swimmers"
     before_bob_bud.add_acctunit(yao_str)

@@ -53,13 +53,13 @@ def test_BudUnit_edit_item_attr_reasonunit_CorrectlySets_bridge():
     casa_item = sue_bud.get_item_obj(casa_road)
     week_reasonunit = casa_item.reasonunits.get(week_road)
     assert week_reasonunit.bridge != slash_str
-    assert week_reasonunit.bridge == sue_bud._bridge
+    assert week_reasonunit.bridge == sue_bud.bridge
 
 
 def test_BudUnit_edit_item_attr_reason_base_CorrectlySets_bridge():
     # ESTABLISH
     slash_str = "/"
-    bob_bud = budunit_shop("Bob", _bridge=slash_str)
+    bob_bud = budunit_shop("Bob", bridge=slash_str)
     casa_str = "casa"
     week_str = "week"
     wed_str = "Wednesday"
@@ -72,7 +72,7 @@ def test_BudUnit_edit_item_attr_reason_base_CorrectlySets_bridge():
     print(f"{bob_bud.itemroot._kids.keys()=}")
     wed_item = bob_bud.get_item_obj(wed_road)
     assert wed_item._bridge == slash_str
-    assert wed_item._bridge == bob_bud._bridge
+    assert wed_item._bridge == bob_bud.bridge
 
     # WHEN
     bob_bud.edit_item_attr(casa_road, reason_base=week_road, reason_premise=wed_road)
@@ -82,7 +82,7 @@ def test_BudUnit_edit_item_attr_reason_base_CorrectlySets_bridge():
     assert casa_item._bridge == slash_str
     week_reasonunit = casa_item.reasonunits.get(week_road)
     assert week_reasonunit.bridge != ","
-    assert week_reasonunit.bridge == bob_bud._bridge
+    assert week_reasonunit.bridge == bob_bud.bridge
 
 
 def test_BudUnit_set_reasonunits_status():

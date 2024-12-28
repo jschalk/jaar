@@ -203,7 +203,7 @@ class HubUnit:
         x_budunit = budunit_shop(
             owner_name=self.owner_name,
             deal_idea=self.deal_idea,
-            _bridge=self.bridge,
+            bridge=self.bridge,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,
             respect_bit=self.respect_bit,

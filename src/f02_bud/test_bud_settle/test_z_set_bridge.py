@@ -110,7 +110,7 @@ def test_bud_set_bridge_CorrectlyModifies_parent_road():
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
     cook_item = zia_bud.get_item_obj(semicolon_cook_road)
     semicolon_str = ";"
-    assert zia_bud._bridge == semicolon_str
+    assert zia_bud.bridge == semicolon_str
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
     # print(f"{zia_bud.deal_idea=} {zia_bud.itemroot._idee=} {casa_road=}")
     # print(f"{cook_item._parent_road=} {cook_item._idee=}")

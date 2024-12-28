@@ -124,7 +124,7 @@ class BudUnit:
     accts: dict[AcctName, AcctUnit] = None
     itemroot: ItemUnit = None
     max_tree_traverse: int = None
-    _bridge: str = None
+    bridge: str = None
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
     penny: PennyNum = None
@@ -193,25 +193,25 @@ class BudUnit:
         x_road = create_road(
             parent_road=parent_road,
             terminus_idea=terminus_idea,
-            bridge=self._bridge,
+            bridge=self.bridge,
         )
-        return road_validate(x_road, self._bridge, self.deal_idea)
+        return road_validate(x_road, self.bridge, self.deal_idea)
 
     def make_l1_road(self, l1_idea: IdeaUnit):
         return self.make_road(self.deal_idea, l1_idea)
 
     def set_bridge(self, new_bridge: str):
         self.settle_bud()
-        if self._bridge != new_bridge:
+        if self.bridge != new_bridge:
             for x_item_road in self._item_dict.keys():
                 if is_string_in_road(new_bridge, x_item_road):
                     exception_str = f"Cannot modify bridge to '{new_bridge}' because it exists an item idee '{x_item_road}'"
                     raise NewBridgeException(exception_str)
 
             # modify all road attributes in itemunits
-            self._bridge = default_bridge_if_None(new_bridge)
+            self.bridge = default_bridge_if_None(new_bridge)
             for x_item in self._item_dict.values():
-                x_item.set_bridge(self._bridge)
+                x_item.set_bridge(self.bridge)
 
     def set_deal_idea(self, deal_idea: str):
         old_deal_idea = copy_deepcopy(self.deal_idea)
@@ -338,13 +338,13 @@ class BudUnit:
     def add_acctunit(
         self, acct_name: AcctName, credit_belief: int = None, debtit_belief: int = None
     ):
-        x_bridge = self._bridge
+        x_bridge = self.bridge
         acctunit = acctunit_shop(acct_name, credit_belief, debtit_belief, x_bridge)
         self.set_acctunit(acctunit)
 
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
-        if x_acctunit._bridge != self._bridge:
-            x_acctunit._bridge = self._bridge
+        if x_acctunit._bridge != self.bridge:
+            x_acctunit._bridge = self.bridge
         if x_acctunit._respect_bit != self.respect_bit:
             x_acctunit._respect_bit = self.respect_bit
         if auto_set_membership and x_acctunit.memberships_exist() is False:
@@ -569,8 +569,8 @@ class BudUnit:
     def add_item(
         self, item_road: RoadUnit, mass: float = None, pledge: bool = None
     ) -> ItemUnit:
-        x_idee = get_terminus_idea(item_road, self._bridge)
-        x_parent_road = get_parent_road(item_road, self._bridge)
+        x_idee = get_terminus_idea(item_road, self.bridge)
+        x_parent_road = get_parent_road(item_road, self.bridge)
         x_itemunit = itemunit_shop(x_idee, mass=mass)
         if pledge:
             x_itemunit.pledge = True
@@ -606,16 +606,16 @@ class BudUnit:
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        if IdeaUnit(item_kid._idee).is_idea(self._bridge) is False:
+        if IdeaUnit(item_kid._idee).is_idea(self.bridge) is False:
             x_str = f"set_item failed because '{item_kid._idee}' is not a IdeaUnit."
             raise InvalidBudException(x_str)
 
-        x_root_idea = get_root_idea_from_road(parent_road, self._bridge)
+        x_root_idea = get_root_idea_from_road(parent_road, self.bridge)
         if self.itemroot._idee != x_root_idea:
             exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root idea"
             raise InvalidBudException(exception_str)
 
-        item_kid._bridge = self._bridge
+        item_kid._bridge = self.bridge
         if item_kid._bud_deal_idea != self.deal_idea:
             item_kid._bud_deal_idea = self.deal_idea
         if item_kid._fund_coin != self.fund_coin:
@@ -693,7 +693,7 @@ class BudUnit:
             if not del_children:
                 self._shift_item_kids(x_road=road)
             parent_item = self.get_item_obj(parent_road)
-            parent_item.del_kid(get_terminus_idea(road, self._bridge))
+            parent_item.del_kid(get_terminus_idea(road, self.bridge))
         self.settle_bud()
 
     def _shift_item_kids(self, x_road: RoadUnit):
@@ -706,8 +706,8 @@ class BudUnit:
         self.owner_name = new_owner_name
 
     def edit_item_idee(self, old_road: RoadUnit, new_idee: IdeaUnit):
-        if self._bridge in new_idee:
-            exception_str = f"Cannot modify '{old_road}' because new_idee {new_idee} contains bridge {self._bridge}"
+        if self.bridge in new_idee:
+            exception_str = f"Cannot modify '{old_road}' because new_idee {new_idee} contains bridge {self.bridge}"
             raise InvalidIdeaException(exception_str)
         if self.item_exists(old_road) is False:
             raise InvalidBudException(f"Item {old_road=} does not exist")
@@ -732,7 +732,7 @@ class BudUnit:
         x_item.set_idee(new_idee)
         x_item._parent_road = parent_road
         item_parent = self.get_item_obj(get_parent_road(old_road))
-        item_parent._kids.pop(get_terminus_idea(old_road, self._bridge))
+        item_parent._kids.pop(get_terminus_idea(old_road, self.bridge))
         item_parent._kids[x_item._idee] = x_item
 
     def _itemroot_find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
@@ -979,11 +979,11 @@ class BudUnit:
     def item_exists(self, road: RoadUnit) -> bool:
         if road is None:
             return False
-        root_road_idee = get_root_idea_from_road(road, bridge=self._bridge)
+        root_road_idee = get_root_idea_from_road(road, bridge=self.bridge)
         if root_road_idee != self.itemroot._idee:
             return False
 
-        ideas = get_all_road_ideas(road, bridge=self._bridge)
+        ideas = get_all_road_ideas(road, bridge=self.bridge)
         root_road_idee = ideas.pop(0)
         if ideas == []:
             return True
@@ -1004,7 +1004,7 @@ class BudUnit:
             raise InvalidBudException("get_item_obj received road=None")
         if self.item_exists(road) is False and not if_missing_create:
             raise InvalidBudException(f"get_item_obj failed. no item at '{road}'")
-        ideaunits = get_all_road_ideas(road, bridge=self._bridge)
+        ideaunits = get_all_road_ideas(road, bridge=self.bridge)
         if len(ideaunits) == 1:
             return self.itemroot
 
@@ -1158,7 +1158,7 @@ class BudUnit:
     def _create_groupunits_metrics(self):
         self._groupunits = {}
         for group_label, acct_name_set in self.get_acctunit_group_labels_dict().items():
-            x_groupunit = groupunit_shop(group_label, _bridge=self._bridge)
+            x_groupunit = groupunit_shop(group_label, _bridge=self.bridge)
             for x_acct_name in acct_name_set:
                 x_membership = self.get_acct(x_acct_name).get_membership(group_label)
                 x_groupunit.set_membership(x_membership)
@@ -1305,7 +1305,7 @@ class BudUnit:
 
     def _get_buildable_keeps(self) -> bool:
         return all(
-            roadunit_valid_dir_path(keep_road, self._bridge) != False
+            roadunit_valid_dir_path(keep_road, self.bridge) != False
             for keep_road in self._keep_dict.keys()
         )
 
@@ -1367,7 +1367,7 @@ class BudUnit:
             "owner_name": self.owner_name,
             "deal_idea": self.deal_idea,
             "max_tree_traverse": self.max_tree_traverse,
-            "_bridge": self._bridge,
+            "_bridge": self.bridge,
             "_itemroot": self.itemroot.get_dict(),
         }
         if self.credor_respect is not None:
@@ -1401,7 +1401,7 @@ class BudUnit:
 def budunit_shop(
     owner_name: OwnerName = None,
     deal_idea: DealIdea = None,
-    _bridge: str = None,
+    bridge: str = None,
     fund_pool: FundNum = None,
     fund_coin: FundCoin = None,
     respect_bit: BitNum = None,
@@ -1416,16 +1416,16 @@ def budunit_shop(
         deal_idea=deal_idea,
         accts=get_empty_dict_if_None(None),
         _groupunits={},
-        _item_dict=get_empty_dict_if_None(None),
-        _keep_dict=get_empty_dict_if_None(None),
-        _healers_dict=get_empty_dict_if_None(None),
-        _bridge=default_bridge_if_None(_bridge),
+        bridge=default_bridge_if_None(bridge),
         credor_respect=validate_respect_num(),
         debtor_respect=validate_respect_num(),
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
         penny=default_penny_if_None(penny),
+        _item_dict=get_empty_dict_if_None(None),
+        _keep_dict=get_empty_dict_if_None(None),
+        _healers_dict=get_empty_dict_if_None(None),
         _keeps_justified=get_False_if_None(),
         _keeps_buildable=get_False_if_None(),
         _sum_healerlink_share=get_0_if_None(),
@@ -1438,7 +1438,7 @@ def budunit_shop(
         _uid=1,
         _level=0,
         _bud_deal_idea=x_bud.deal_idea,
-        _bridge=x_bud._bridge,
+        _bridge=x_bud.bridge,
         _fund_coin=x_bud.fund_coin,
         _parent_road="",
     )
@@ -1460,7 +1460,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.deal_idea = obj_from_bud_dict(bud_dict, "deal_idea")
     x_bud.itemroot._idee = obj_from_bud_dict(bud_dict, "deal_idea")
     bud_bridge = obj_from_bud_dict(bud_dict, "_bridge")
-    x_bud._bridge = default_bridge_if_None(bud_bridge)
+    x_bud.bridge = default_bridge_if_None(bud_bridge)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
     x_bud.fund_coin = default_fund_coin_if_None(
         obj_from_bud_dict(bud_dict, "fund_coin")
@@ -1472,7 +1472,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.credor_respect = obj_from_bud_dict(bud_dict, "credor_respect")
     x_bud.debtor_respect = obj_from_bud_dict(bud_dict, "debtor_respect")
     x_bud._last_gift_id = obj_from_bud_dict(bud_dict, "_last_gift_id")
-    x_bridge = x_bud._bridge
+    x_bridge = x_bud.bridge
     x_accts = obj_from_bud_dict(bud_dict, "_accts", x_bridge).values()
     for x_acctunit in x_accts:
         x_bud.set_acctunit(x_acctunit)

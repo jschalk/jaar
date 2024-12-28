@@ -108,7 +108,7 @@ def test_BudUnit_add_item_SetsAttr_Scenario0():
     # ESTABLISH
     bob_str = "Bob"
     slash_str = "/"
-    bob_budunit = budunit_shop(bob_str, _bridge=slash_str)
+    bob_budunit = budunit_shop(bob_str, bridge=slash_str)
     casa_road = bob_budunit.make_l1_road("casa")
     assert not bob_budunit.item_exists(casa_road)
 
@@ -118,7 +118,7 @@ def test_BudUnit_add_item_SetsAttr_Scenario0():
     # THEN
     assert bob_budunit.item_exists(casa_road)
     casa_itemunit = bob_budunit.get_item_obj(casa_road)
-    assert casa_itemunit._bridge == bob_budunit._bridge
+    assert casa_itemunit._bridge == bob_budunit.bridge
     assert not casa_itemunit.pledge
 
 
@@ -158,7 +158,7 @@ def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_bridge():
     # ESTABLISH
     slash_str = "/"
     assert slash_str != default_bridge_if_None()
-    bob_bud = budunit_shop("Bob", _bridge=slash_str)
+    bob_bud = budunit_shop("Bob", bridge=slash_str)
     casa_str = "casa"
     week_str = "week"
     wed_str = "Wednesday"
@@ -172,7 +172,7 @@ def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_bridge():
     assert len(bob_bud.itemroot._kids) == 2
     wed_item = bob_bud.get_item_obj(wed_road)
     assert wed_item._bridge == slash_str
-    assert wed_item._bridge == bob_bud._bridge
+    assert wed_item._bridge == bob_bud.bridge
 
     # WHEN
     bob_bud.edit_item_attr(casa_road, reason_base=week_road, reason_premise=wed_road)
