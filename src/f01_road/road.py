@@ -219,7 +219,7 @@ def get_forefather_roads(road: RoadUnit) -> dict[RoadUnit]:
     return {a_road: None for a_road in ancestor_roads}
 
 
-def get_default_deal_idea_ideaunit() -> DealIdea:
+def get_default_deal_idea() -> DealIdea:
     return "ZZ"
 
 

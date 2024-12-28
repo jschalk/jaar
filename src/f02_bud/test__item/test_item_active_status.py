@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_deal_idea_ideaunit as root_lx, create_road
+from src.f01_road.road import get_default_deal_idea as root_idea, create_road
 from src.f02_bud.group import awardheir_shop, awardlink_shop
 from src.f02_bud.reason_item import (
     reasonunit_shop,
@@ -29,7 +29,7 @@ def test_ItemUnit_clear_all_acct_cred_debt_ClearsCorrectly():
 def test_ItemUnit_get_fund_share_ReturnsObj():
     # ESTABLISH
     texas_str = "texas"
-    texas_item = itemunit_shop(texas_str, root_lx())
+    texas_item = itemunit_shop(texas_str, root_idea())
 
     # WHEN / THEN
     assert texas_item.get_fund_share() == 0
@@ -207,18 +207,18 @@ def test_ItemUnit_set_range_factheirs_SetsAttrNoParameters():
 def test_ItemUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
     week_str = "week"
-    week_road = create_road(root_lx(), week_str)
+    week_road = create_road(root_idea(), week_str)
     week_open = 3
     week_nigh = 7
     week_addin = 10
-    week_item = itemunit_shop(week_str, _parent_road=root_lx(), addin=week_addin)
+    week_item = itemunit_shop(week_str, _parent_road=root_idea(), addin=week_addin)
     week_factheir = factheir_shop(week_road, week_road, week_open, week_nigh)
     tue_str = "Tue"
     tue_road = create_road(week_road, tue_str)
     tue_addin = 100
     tue_item = itemunit_shop(tue_str, _parent_road=week_road, addin=tue_addin)
     ball_str = "ball"
-    ball_road = create_road(root_lx(), ball_str)
+    ball_road = create_road(root_idea(), ball_str)
     ball_item = itemunit_shop(ball_str)
     ball_item._set_factheir(week_factheir)
     tue_reasonheirs = {tue_road: reasonheir_shop(tue_road, None, False)}

@@ -354,7 +354,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     assert sue_bud._itemroot._awardheirs.get(sue_str) is not None
     assert sue_bud._itemroot._awardheirs.get(sue_str).awardee_id == sue_str
     assert sue_bud._itemroot._awardlines != {}
-    root_item = sue_bud.get_item_obj(road=sue_bud._itemroot._lx)
+    root_item = sue_bud.get_item_obj(road=sue_bud._itemroot._idee)
     sue_awardline = sue_bud._itemroot._awardlines.get(sue_str)
     print(f"{sue_awardline._fund_give=} {root_item._fund_ratio=} ")
     print(f"  {sue_awardline._fund_take=} {root_item._fund_ratio=} ")
@@ -1269,7 +1269,7 @@ def test_BudUnit_settle_bud_CreatesGroupUnitWith_budunit_v001():
     assert len(db_item.awardlinks) == 3
     # for item_key in item_dict:
     #     print(f"{item_key=}")
-    #     if item._lx == "D&B":
-    #         print(f"{item._lx=} {item.awardlinks=}")
+    #     if item._idee == "D&B":
+    #         print(f"{item._idee=} {item.awardlinks=}")
     #         db_awardlink_len = len(item.awardlinks)
     # assert db_awardlink_len == 3

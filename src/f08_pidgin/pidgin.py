@@ -45,7 +45,7 @@ def pidginable_atom_args() -> set:
         "group_id",
         "healer_name",
         "hour_idea",
-        "lx",
+        "idee",
         "month_idea",
         "parent_road",
         "pick",

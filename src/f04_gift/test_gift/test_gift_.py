@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import x_is_json
 from src.f01_road.jaar_config import init_gift_id, get_gifts_folder
-from src.f01_road.road import get_default_deal_idea_ideaunit as root_lx
+from src.f01_road.road import get_default_deal_idea as root_idea
 from src.f04_gift.atom_config import deal_idea_str, owner_name_str, face_name_str
 from src.f04_gift.delta import deltaunit_shop
 from src.f04_gift.gift import GiftUnit, giftunit_shop, get_init_gift_id_if_None
@@ -49,7 +49,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
 
     # THEN
     assert not bob_giftunit.face_name
-    assert bob_giftunit.deal_idea == root_lx()
+    assert bob_giftunit.deal_idea == root_idea()
     assert bob_giftunit.owner_name == bob_str
     assert bob_giftunit._gift_id == 0
     assert bob_giftunit._deltaunit == deltaunit_shop()

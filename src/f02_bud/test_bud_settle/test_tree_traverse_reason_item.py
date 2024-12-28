@@ -241,8 +241,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     a4_bud = get_budunit_with_4_levels()
     casa_str = "casa"
     casa_road = a4_bud.make_l1_road(casa_str)
-    week_lx = "weekdays"
-    week_road = a4_bud.make_l1_road(week_lx)
+    week_idee = "weekdays"
+    week_road = a4_bud.make_l1_road(week_idee)
     wed_str = "Wednesday"
     wed_road = a4_bud.make_road(week_road, wed_str)
 

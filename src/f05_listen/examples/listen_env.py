@@ -1,7 +1,7 @@
 from src.f00_instrument.file import delete_dir
 from src.f01_road.road import (
     create_road_from_ideas,
-    get_default_deal_idea_ideaunit,
+    get_default_deal_idea,
     RoadUnit,
 )
 from src.f05_listen.hubunit import HubUnit, hubunit_shop
@@ -29,7 +29,7 @@ def env_dir_setup_cleanup():
 
 
 def get_texas_road() -> RoadUnit:
-    deal_idea = get_default_deal_idea_ideaunit()
+    deal_idea = get_default_deal_idea()
     nation_str = "nation-state"
     usa_str = "USA"
     texas_str = "Texas"
@@ -37,7 +37,7 @@ def get_texas_road() -> RoadUnit:
 
 
 def get_texas_hubunit() -> HubUnit:
-    deal_idea = get_default_deal_idea_ideaunit()
+    deal_idea = get_default_deal_idea()
     return hubunit_shop(
         get_listen_temp_env_dir(),
         deal_idea,
@@ -48,7 +48,7 @@ def get_texas_hubunit() -> HubUnit:
 
 
 def get_dakota_road() -> RoadUnit:
-    deal_idea = get_default_deal_idea_ideaunit()
+    deal_idea = get_default_deal_idea()
     nation_str = "nation-state"
     usa_str = "USA"
     dakota_str = "Dakota"
@@ -56,7 +56,7 @@ def get_dakota_road() -> RoadUnit:
 
 
 def get_dakota_hubunit() -> HubUnit:
-    deal_idea = get_default_deal_idea_ideaunit()
+    deal_idea = get_default_deal_idea()
     return hubunit_shop(
         get_listen_temp_env_dir(),
         deal_idea,

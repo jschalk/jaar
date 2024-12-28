@@ -3,7 +3,7 @@ from src.f01_road.road import (
     default_bridge_if_None,
     create_road_from_ideas,
     create_road,
-    get_default_deal_idea_ideaunit as root_lx,
+    get_default_deal_idea as root_idea,
 )
 from src.f01_road.finance import (
     default_respect_bit_if_None,
@@ -158,7 +158,7 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -298,7 +298,7 @@ def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit._owner_name
-    deal_idea = root_lx()
+    deal_idea = root_idea()
     sue_hubunit = hubunit_shop(env_dir(), deal_idea, sue_str, None)
 
     print(f"{sue_hubunit.voice_file_path()=}")
@@ -317,7 +317,7 @@ def test_HubUnit_save_voice_bud_RaisesErrorWhenBud_final_id_IsWrong(
     # ESTABLISH
     sue_str = "Sue"
 
-    deal_idea = root_lx()
+    deal_idea = root_idea()
     sue_hubunit = hubunit_shop(env_dir(), deal_idea, sue_str, None)
 
     # WHEN / THEN
@@ -335,7 +335,7 @@ def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit._owner_name
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -352,7 +352,7 @@ def test_HubUnit_save_final_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit._owner_name
 
-    deal_idea = root_lx()
+    deal_idea = root_idea()
     sue_hubunit = hubunit_shop(env_dir(), deal_idea, sue_str, None)
 
     print(f"{sue_hubunit.final_path()=}")
@@ -370,7 +370,7 @@ def test_HubUnit_get_final_bud_OpensFile(env_dir_setup_cleanup):
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit._owner_name
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -398,7 +398,7 @@ def test_HubUnit_save_final_bud_RaisesErrorWhenBud_final_id_IsWrong(
     # ESTABLISH
     sue_str = "Sue"
 
-    deal_idea = root_lx()
+    deal_idea = root_idea()
     sue_hubunit = hubunit_shop(env_dir(), deal_idea, sue_str, None)
 
     # WHEN / THEN

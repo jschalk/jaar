@@ -45,7 +45,7 @@ def test_BudUnit_set_item_RaisesErrorWhen_parent_road_ItemDoesNotExist():
     )
 
 
-def test_BudUnit_set_item_RaisesErrorWhen_lx_IsNotIdea():
+def test_BudUnit_set_item_RaisesErrorWhen_idee_IsNotIdea():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     swim_road = zia_bud.make_l1_road("swimming")
@@ -150,7 +150,7 @@ def test_BudUnit_add_item_ReturnsObj():
     casa_itemunit = bob_budunit.add_item(casa_road, mass=casa_mass)
 
     # THEN
-    assert casa_itemunit._lx == "casa"
+    assert casa_itemunit._idee == "casa"
     assert casa_itemunit.mass == casa_mass
 
 
@@ -492,7 +492,7 @@ def test_BudUnit_set_item_MustReorderKidsDictToBeAlphabetical():
     item_list = list(bob_bud._itemroot._kids.values())
 
     # THEN
-    assert item_list[0]._lx == casa_str
+    assert item_list[0]._idee == casa_str
 
 
 def test_BudUnit_set_item_adoptee_RaisesErrorIfAdopteeItemDoesNotHaveCorrectParent():
@@ -689,7 +689,7 @@ def test_BudUnit_edit_item_attr_DeletesItemUnit_awardlinks():
 
     # THEN
     swim_item = yao_bud.get_item_obj(swim_road)
-    print(f"{swim_item._lx=}")
+    print(f"{swim_item._idee=}")
     print(f"{swim_item.awardlinks=}")
     print(f"{swim_item._awardheirs=}")
 
@@ -770,7 +770,7 @@ def test_BudUnit_get_item_obj_ReturnsItem():
 
     # THEN
     assert brazil_item is not None
-    assert brazil_item._lx == brazil_str
+    assert brazil_item._idee == brazil_str
 
     # WHEN
     week_str = "weekdays"
@@ -779,14 +779,14 @@ def test_BudUnit_get_item_obj_ReturnsItem():
 
     # THEN
     assert week_item is not None
-    assert week_item._lx == week_str
+    assert week_item._idee == week_str
 
     # WHEN
     root_item = sue_bud.get_item_obj(road=sue_bud._deal_idea)
 
     # THEN
     assert root_item is not None
-    assert root_item._lx == sue_bud._deal_idea
+    assert root_item._idee == sue_bud._deal_idea
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"

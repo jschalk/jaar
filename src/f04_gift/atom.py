@@ -238,7 +238,7 @@ def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_itemunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     item_road = create_road(
         x_atom.get_value("parent_road"),
-        x_atom.get_value("lx"),
+        x_atom.get_value("idee"),
         bridge=x_bud._bridge,
     )
     x_bud.del_item_obj(item_road, del_children=x_atom.get_value("del_children"))
@@ -247,7 +247,7 @@ def _modify_bud_itemunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_itemunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     item_road = create_road(
         x_atom.get_value("parent_road"),
-        x_atom.get_value("lx"),
+        x_atom.get_value("idee"),
         bridge=x_bud._bridge,
     )
     x_bud.edit_item_attr(
@@ -268,7 +268,7 @@ def _modify_bud_itemunit_update(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_item(
         item_kid=itemunit_shop(
-            _lx=x_atom.get_value("lx"),
+            _idee=x_atom.get_value("idee"),
             addin=x_atom.get_value("addin"),
             begin=x_atom.get_value("begin"),
             close=x_atom.get_value("close"),
@@ -635,7 +635,7 @@ class AtomRow:
     gogo_want: float = None
     group_id: GroupID = None
     healer_name: GroupID = None
-    lx: IdeaUnit = None
+    idee: IdeaUnit = None
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
@@ -684,8 +684,8 @@ class AtomRow:
                     self.__dict__[x_arg] = int(x_value)
                 elif jaar_type == "float":
                     self.__dict__[x_arg] = float(x_value)
-        if self.lx != None and self.parent_road != None and self.road == None:
-            self.road = create_road(self.parent_road, self.lx)
+        if self.idee != None and self.parent_road != None and self.road == None:
+            self.road = create_road(self.parent_road, self.idee)
 
     def get_atomunits(self) -> list[AtomUnit]:
         self._set_jaar_types()
@@ -710,9 +710,9 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
     config_req_args = get_atom_config_jkeys(x_category)
     x_atom_reqs = {req_arg: x_atom.get_value(req_arg) for req_arg in config_req_args}
     x_parent_road = x_atom_reqs.get("parent_road")
-    x_lx = x_atom_reqs.get("lx")
-    if x_parent_road != None and x_lx != None:
-        x_atom_reqs["road"] = x_bud.make_road(x_parent_road, x_lx)
+    x_idee = x_atom_reqs.get("idee")
+    if x_parent_road != None and x_idee != None:
+        x_atom_reqs["road"] = x_bud.make_road(x_parent_road, x_idee)
         x_bridge = x_bud._bridge
         is_itemroot_road = is_ideaunit(x_atom_reqs.get("road"), x_bridge)
         if is_itemroot_road is True:

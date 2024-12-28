@@ -1,7 +1,7 @@
 from src.f01_road.road import (
     RoadUnit,
     create_road,
-    get_default_deal_idea_ideaunit,
+    get_default_deal_idea,
     IdeaUnit,
 )
 from src.f02_bud.item import itemunit_shop
@@ -56,7 +56,7 @@ def run_str():
 
 
 def casa_road() -> RoadUnit:
-    return create_road(get_default_deal_idea_ideaunit(), casa_str())
+    return create_road(get_default_deal_idea(), casa_str())
 
 
 def cook_road() -> RoadUnit:
@@ -99,7 +99,7 @@ def get_example_yao_bud() -> BudUnit:
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    yao_speaker = budunit_shop(yao_str, get_default_deal_idea_ideaunit())
+    yao_speaker = budunit_shop(yao_str, get_default_deal_idea())
     yao_speaker.set_item(itemunit_shop(run_str()), casa_road())
     yao_speaker.add_acctunit(yao_str, debtit_belief=10)
     yao_speaker.add_acctunit(zia_str, debtit_belief=30)
@@ -157,7 +157,7 @@ def get_example_yao_job3_speaker() -> BudUnit:
 
 
 def get_usa_road() -> RoadUnit:
-    return create_road(get_default_deal_idea_ideaunit(), "USA")
+    return create_road(get_default_deal_idea(), "USA")
 
 
 def get_iowa_str() -> IdeaUnit:
@@ -201,11 +201,11 @@ def get_utah_road() -> RoadUnit:
 
 
 def get_swim_road() -> RoadUnit:
-    return create_road(get_default_deal_idea_ideaunit(), get_swim_str())
+    return create_road(get_default_deal_idea(), get_swim_str())
 
 
 def get_location_road() -> RoadUnit:
-    return create_road(get_default_deal_idea_ideaunit(), get_location_str())
+    return create_road(get_default_deal_idea(), get_location_str())
 
 
 def get_in_mer_road() -> RoadUnit:

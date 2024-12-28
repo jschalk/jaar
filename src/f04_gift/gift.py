@@ -5,7 +5,7 @@ from src.f01_road.road import (
     FaceName,
     OwnerName,
     DealIdea,
-    get_default_deal_idea_ideaunit,
+    get_default_deal_idea,
 )
 from src.f04_gift.atom import AtomUnit, get_from_json as atomunit_get_from_json
 from src.f04_gift.delta import DeltaUnit, deltaunit_shop
@@ -117,7 +117,7 @@ def giftunit_shop(
     _atoms_dir: str = None,
 ):
     _deltaunit = deltaunit_shop() if _deltaunit is None else _deltaunit
-    deal_idea = get_default_deal_idea_ideaunit() if deal_idea is None else deal_idea
+    deal_idea = get_default_deal_idea() if deal_idea is None else deal_idea
     x_giftunit = GiftUnit(
         face_name=face_name,
         owner_name=owner_name,

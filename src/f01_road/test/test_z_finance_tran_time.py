@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_deal_idea_ideaunit
+from src.f01_road.road import get_default_deal_idea
 from src.f01_road.finance_tran import TimeConversion, timeconversion_shop
 
 
@@ -29,5 +29,5 @@ def test_timeconversion_shop_ReturnObj_EmtpyParameters():
     x_timeconversion = timeconversion_shop()
 
     # THEN
-    assert x_timeconversion.deal_idea == get_default_deal_idea_ideaunit()
+    assert x_timeconversion.deal_idea == get_default_deal_idea()
     assert x_timeconversion.addin == 0

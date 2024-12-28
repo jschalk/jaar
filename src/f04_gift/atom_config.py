@@ -183,8 +183,8 @@ def parent_road_str() -> str:
     return "parent_road"
 
 
-def lx_str() -> str:
-    return "lx"
+def idee_str() -> str:
+    return "idee"
 
 
 def mass_str() -> str:
@@ -324,7 +324,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
         "gogo_want": "float",
         "group_id": "GroupID",
         "healer_name": "AcctName",
-        "lx": "IdeaUnit",
+        "idee": "IdeaUnit",
         "mass": "int",
         "max_tree_traverse": "int",
         "morph": "bool",

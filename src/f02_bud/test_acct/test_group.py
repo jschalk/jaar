@@ -1,6 +1,6 @@
 from src.f01_road.finance import default_fund_coin_if_None
 from src.f01_road.road import (
-    get_default_deal_idea_ideaunit as root_lx,
+    get_default_deal_idea as root_idea,
     create_road,
     default_bridge_if_None,
 )
@@ -31,7 +31,7 @@ def test_GroupUnit_exists():
 def test_groupunit_shop_ReturnsCorrectObj():
     # ESTABLISH
     swim_str = ";swimmers"
-    nation_road = create_road(root_lx(), "nation-states")
+    nation_road = create_road(root_idea(), "nation-states")
     usa_road = create_road(nation_road, "USA")
 
     # WHEN

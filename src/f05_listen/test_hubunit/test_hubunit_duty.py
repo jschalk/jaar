@@ -1,6 +1,6 @@
 from src.f01_road.road import (
     create_road,
-    get_default_deal_idea_ideaunit as root_lx,
+    get_default_deal_idea as root_idea,
 )
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.example_listen_buds import get_budunit_with_4_levels
@@ -16,7 +16,7 @@ def test_HubUnit_create_keep_dir_if_missing_CreatesDirectory(env_dir_setup_clean
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -35,7 +35,7 @@ def test_HubUnit_save_duty_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -57,7 +57,7 @@ def test_HubUnit_duty_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -79,7 +79,7 @@ def test_HubUnit_get_duty_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -115,7 +115,7 @@ def test_HubUnit_save_job_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -137,7 +137,7 @@ def test_HubUnit_job_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -159,7 +159,7 @@ def test_HubUnit_get_job_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -178,7 +178,7 @@ def test_HubUnit_get_job_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"

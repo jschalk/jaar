@@ -7,7 +7,7 @@ from src.f01_road.finance import (
 )
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f01_road.road import (
-    get_default_deal_idea_ideaunit as root_lx,
+    get_default_deal_idea as root_idea,
     default_bridge_if_None,
 )
 from src.f02_bud.origin import originunit_shop
@@ -114,7 +114,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
 
     # THEN
     assert x_bud._owner_name == ""
-    assert x_bud._deal_idea == root_lx()
+    assert x_bud._deal_idea == root_idea()
     assert x_bud._bridge == default_bridge_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_None()

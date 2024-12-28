@@ -14,7 +14,7 @@ from src.f05_listen.examples.example_listen_purviews import (
 )
 from src.f05_listen.examples.listen_env import (
     get_listen_temp_env_dir as deals_dir,
-    get_default_deal_idea_ideaunit as deal_idea,
+    get_default_deal_idea as deal_idea,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists

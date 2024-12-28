@@ -660,7 +660,7 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     assert x_jaar_types.get(gogo_want_str()) == "float"
     assert x_jaar_types.get(group_id_str()) == type_GroupID_str()
     assert x_jaar_types.get(healer_name_str()) == type_AcctName_str()
-    assert x_jaar_types.get("lx") == type_IdeaUnit_str()
+    assert x_jaar_types.get("idee") == type_IdeaUnit_str()
     assert x_jaar_types.get("mass") == "int"
     assert x_jaar_types.get("max_tree_traverse") == "int"
     assert x_jaar_types.get(morph_str()) == "bool"

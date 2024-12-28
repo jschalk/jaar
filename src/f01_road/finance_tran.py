@@ -15,7 +15,7 @@ from src.f01_road.road import (
     AcctName,
     OwnerName,
     DealIdea,
-    get_default_deal_idea_ideaunit,
+    get_default_deal_idea,
 )
 from dataclasses import dataclass
 
@@ -353,7 +353,7 @@ def timeconversion_shop(
     deal_idea: DealIdea = None, addin: int = None
 ) -> TimeConversion:
     if deal_idea is None:
-        deal_idea = get_default_deal_idea_ideaunit()
+        deal_idea = get_default_deal_idea()
     if addin is None:
         addin = 0
     return TimeConversion(deal_idea=deal_idea, addin=addin)

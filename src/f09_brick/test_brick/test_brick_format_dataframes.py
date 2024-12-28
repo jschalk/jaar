@@ -11,7 +11,7 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     group_id_str,
     parent_road_str,
-    lx_str,
+    idee_str,
     mass_str,
     pledge_str,
     debtit_belief_str,
@@ -171,7 +171,7 @@ def test_create_brick_df_Arg_brick_format_00013_itemunit_v0_0_0():
     assert itemunit_format.loc[0, owner_name_str()] == sue_budunit._owner_name
     assert itemunit_format.loc[0, pledge_str()] == ""
     assert itemunit_format.loc[0, deal_idea_str()] == accord_deal_idea
-    assert itemunit_format.loc[0, lx_str()] == casa_str
+    assert itemunit_format.loc[0, idee_str()] == casa_str
     assert itemunit_format.loc[0, mass_str()] == casa_mass
     assert itemunit_format.loc[0, parent_road_str()] == accord_deal_idea
 
@@ -179,7 +179,7 @@ def test_create_brick_df_Arg_brick_format_00013_itemunit_v0_0_0():
     assert itemunit_format.loc[1, pledge_str()] == "Yes"
     assert itemunit_format.loc[1, deal_idea_str()] == accord_deal_idea
     assert itemunit_format.loc[1, parent_road_str()] == casa_road
-    assert itemunit_format.loc[1, lx_str()] == clean_str
+    assert itemunit_format.loc[1, idee_str()] == clean_str
     assert itemunit_format.loc[1, mass_str()] == 1
     assert len(itemunit_format) == 2
 
