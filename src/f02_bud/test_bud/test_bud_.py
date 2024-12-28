@@ -35,7 +35,7 @@ def test_BudUnit_Exists():
     assert x_bud.penny is None
     assert x_bud.purview_time_int is None
     assert x_bud.last_gift_id is None
-    assert x_bud._originunit is None
+    assert x_bud.originunit is None
     # calculated attr
     assert x_bud._item_dict is None
     assert x_bud._keep_dict is None
@@ -90,8 +90,8 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud.debtor_respect == validate_respect_num()
     assert not x_bud.purview_time_int
     assert not x_bud.last_gift_id
+    assert x_bud.originunit == originunit_shop()
     # calculated attr
-    assert x_bud._originunit == originunit_shop()
     assert x_bud._item_dict == {}
     assert x_bud._keep_dict == {}
     assert x_bud._healers_dict == {}

@@ -29,7 +29,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     time_minute = yao_bud.make_l1_road("day_minute")
     yao_bud.set_fact(base=time_minute, pick=time_minute, fopen=0, fnigh=1440)
     yao_str = "Yao"
-    yao_bud._originunit.set_originhold(yao_str, 1)
+    yao_bud.originunit.set_originhold(yao_str, 1)
     yao_fund_pool = 23000
     yao_bud.fund_pool = yao_fund_pool
     yao_fund_coin = 23
@@ -57,23 +57,23 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict["fund_pool"] == yao_fund_pool
     assert bud_dict["fund_coin"] == yao_fund_coin
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
-    assert bud_dict["_bridge"] == yao_bud.bridge
+    assert bud_dict["bridge"] == yao_bud.bridge
     assert bud_dict["credor_respect"] == yao_bud.credor_respect
     assert bud_dict["debtor_respect"] == yao_bud.debtor_respect
-    assert bud_dict["_last_gift_id"] == yao_bud.last_gift_id
-    assert len(bud_dict["_accts"]) == len(yao_bud.accts)
-    assert len(bud_dict["_accts"]) != 12
+    assert bud_dict["last_gift_id"] == yao_bud.last_gift_id
+    assert len(bud_dict["accts"]) == len(yao_bud.accts)
+    assert len(bud_dict["accts"]) != 12
     assert bud_dict.get("_groups") is None
 
     x_itemroot = yao_bud.itemroot
-    itemroot_dict = bud_dict["_itemroot"]
+    itemroot_dict = bud_dict["itemroot"]
     _kids = "_kids"
     assert x_itemroot._idee == yao_bud.deal_idea
     assert itemroot_dict["_idee"] == x_itemroot._idee
     assert itemroot_dict["mass"] == x_itemroot.mass
     assert len(itemroot_dict[_kids]) == len(x_itemroot._kids)
 
-    originunit_str = "_originunit"
+    originunit_str = "originunit"
     day_hour_originunit_dict = itemroot_dict[_kids][day_hour_str][originunit_str]
     assert day_hour_originunit_dict == day_hour_item._originunit.get_dict()
     originholds_str = "_originholds"
@@ -99,7 +99,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemroot_teamunit():
 
     # WHEN
     bud_dict = sue_bud.get_dict()
-    itemroot_dict = bud_dict.get("_itemroot")
+    itemroot_dict = bud_dict.get("itemroot")
 
     # THEN
     assert itemroot_dict["teamunit"] == x_teamunit.get_dict()
@@ -122,7 +122,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemroot_healerlink():
 
     # WHEN
     bud_dict = sue_bud.get_dict()
-    itemroot_dict = bud_dict.get("_itemroot")
+    itemroot_dict = bud_dict.get("itemroot")
 
     # THEN
     assert itemroot_dict["healerlink"] == run_healerlink.get_dict()
@@ -146,7 +146,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemkid_TeamUnit():
 
     # WHEN
     bud_dict = sue_bud.get_dict()
-    itemroot_dict = bud_dict.get("_itemroot")
+    itemroot_dict = bud_dict.get("itemroot")
 
     # THEN
     _kids = "_kids"
@@ -204,10 +204,10 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     #     bud_dict["_debtor_respect"]
     # assert str(excinfo.value) == "'_debtor_respect'"
     with pytest_raises(Exception) as excinfo:
-        bud_dict["_last_gift_id"]
+        bud_dict["last_gift_id"]
 
     x_itemroot = zia_bud.itemroot
-    itemroot_dict = bud_dict.get("_itemroot")
+    itemroot_dict = bud_dict.get("itemroot")
 
     assert len(itemroot_dict[_kids]) == len(x_itemroot._kids)
 
@@ -237,7 +237,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     yao_bud.edit_item_attr(road=factunit_x.base, factunit=factunit_x)
     yao_bud.set_max_tree_traverse(2)
     yao_str = "Yao"
-    yao_bud._originunit.set_originhold(yao_str, 1)
+    yao_bud.originunit.set_originhold(yao_str, 1)
 
     # WHEN
     bud_dict = get_dict_from_json(yao_bud.get_json())
@@ -249,10 +249,10 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["max_tree_traverse"] == 2
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
-    assert bud_dict["_bridge"] == yao_bud.bridge
+    assert bud_dict["bridge"] == yao_bud.bridge
 
     x_itemroot = yao_bud.itemroot
-    itemroot_dict = bud_dict.get("_itemroot")
+    itemroot_dict = bud_dict.get("itemroot")
     assert len(itemroot_dict[_kids]) == len(x_itemroot._kids)
 
     kids = itemroot_dict[_kids]
@@ -274,7 +274,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     ulti_reasonunits_dict = itemroot_dict[_kids][ulti_str][_reasonunits]
     assert len(cont_reasonunits_dict) == len(cont_item.reasonunits)
     assert len(ulti_reasonunits_dict) == len(ulti_item.reasonunits)
-    originunit_str = "_originunit"
+    originunit_str = "originunit"
     originholds_str = "_originholds"
     assert len(bud_dict[originunit_str][originholds_str])
 
@@ -342,7 +342,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     shave_item.stop_want = zia_stop_want
 
     yao_str = "Yao"
-    zia_bud._originunit.set_originhold(yao_str, 1)
+    zia_bud.originunit.set_originhold(yao_str, 1)
     override_str = "override"
 
     # WHEN
@@ -412,8 +412,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_shave_item.gogo_want == zia_shave_item.gogo_want
     assert json_shave_item.stop_want == zia_shave_item.stop_want
 
-    assert len(json_bud._originunit._originholds) == 1
-    assert json_bud._originunit == zia_bud._originunit
+    assert len(json_bud.originunit._originholds) == 1
+    assert json_bud.originunit == zia_bud.originunit
 
 
 def test_budunit_get_from_json_ReturnsCorrectItemRoot():

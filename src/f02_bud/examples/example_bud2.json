@@ -1,5 +1,5 @@
 {
-    "_accts": {
+    "accts": {
         "A a ron Jones": {
             "_memberships": {
                 ";Everyone": {
@@ -561,7 +561,7 @@
         }
     },
     "deal_idea": "A",
-    "_itemroot": {
+    "itemroot": {
         "_kids": {
             "ACME": {
                 "_is_expanded": false,
@@ -5421,11 +5421,11 @@
         },
         "mass": 1
     },
-    "_originunit": {
+    "originunit": {
         "_originholds": {}
     },
     "owner_name": "Bob",
-    "_bridge": ";",
+    "bridge": ";",
     "mass": 1,
     "max_tree_traverse": 20,
     "penny": 1,
