@@ -91,7 +91,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("give_force") == "float"
     assert pidgin_args_jaar_types.get("gogo_want") == "float"
     assert pidgin_args_jaar_types.get("group_id") == type_GroupID_str()
-    assert pidgin_args_jaar_types.get("healer_name") == type_GroupID_str()
+    assert pidgin_args_jaar_types.get("healer_name") == type_AcctName_str()
     assert pidgin_args_jaar_types.get("hour_idea") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("lx") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("mass") == "int"

@@ -167,7 +167,7 @@
         "jkeys": {
             "healer_name": {
                 "column_order": 1,
-                "jaar_type": "GroupID",
+                "jaar_type": "AcctName",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },

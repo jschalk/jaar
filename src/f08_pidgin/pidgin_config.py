@@ -164,7 +164,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "give_force": "float",
         "gogo_want": "float",
         "group_id": "GroupID",
-        "healer_name": "GroupID",
+        "healer_name": "AcctName",
         "hour_idea": "IdeaUnit",
         "lx": "IdeaUnit",
         "mass": "int",
