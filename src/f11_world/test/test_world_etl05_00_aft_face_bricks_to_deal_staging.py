@@ -41,12 +41,12 @@ from os.path import exists as os_path_exists
 # br00005 deal_idea weekday_idea,weekday_order
 
 
-# def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup):
+# def test_create_init_deal_prime_files_HasCorrectColumns(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     x_dir = get_test_etl_dir()
 
 #     # WHEN
-#     create_init_deal_staging_files(x_dir)
+#     create_init_deal_prime_files(x_dir)
 
 #     # THEN
 #     staging_str = "staging"
