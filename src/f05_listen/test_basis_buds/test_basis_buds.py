@@ -38,7 +38,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     assert yao_empty_job.owner_name != yao_voice.owner_name
     assert yao_empty_job.owner_name == zia_str
     assert yao_empty_job.deal_idea == yao_voice.deal_idea
-    assert yao_empty_job._last_gift_id is None
+    assert yao_empty_job.last_gift_id is None
     assert yao_empty_job.get_acctunits_dict() == {}
     assert yao_empty_job.bridge == yao_voice.bridge
     assert yao_empty_job.fund_pool == yao_voice.fund_pool
@@ -81,7 +81,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     # THEN
     assert yao_basis_job.owner_name == yao_duty.owner_name
     assert yao_basis_job.deal_idea == yao_duty.deal_idea
-    assert yao_basis_job._last_gift_id == yao_duty._last_gift_id
+    assert yao_basis_job.last_gift_id == yao_duty.last_gift_id
     assert yao_basis_job.get_acctunits_dict() == yao_duty.get_acctunits_dict()
     assert yao_basis_job.bridge == yao_duty.bridge
     assert yao_basis_job.fund_pool == yao_duty.fund_pool

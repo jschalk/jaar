@@ -469,7 +469,7 @@ def test_HubUnit_merge_any_gifts_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
     sue_hubunit = hubunit_shop(env_dir(), deal_idea(), sue_str)
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     voice_bud = sue_hubunit.get_voice_bud()
-    voice_bud._last_gift_id is None
+    voice_bud.last_gift_id is None
 
     # WHEN
     new_bud = sue_hubunit._merge_any_gifts(voice_bud)

@@ -60,7 +60,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict["_bridge"] == yao_bud.bridge
     assert bud_dict["credor_respect"] == yao_bud.credor_respect
     assert bud_dict["debtor_respect"] == yao_bud.debtor_respect
-    assert bud_dict["_last_gift_id"] == yao_bud._last_gift_id
+    assert bud_dict["_last_gift_id"] == yao_bud.last_gift_id
     assert len(bud_dict["_accts"]) == len(yao_bud.accts)
     assert len(bud_dict["_accts"]) != 12
     assert bud_dict.get("_groups") is None
@@ -370,8 +370,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert json_bud.debtor_respect == zia_bud.debtor_respect
     assert json_bud.credor_respect == zia_credor_respect
     assert json_bud.debtor_respect == zia_debtor_respect
-    assert json_bud._last_gift_id == zia_bud._last_gift_id
-    assert json_bud._last_gift_id == zia_last_gift_id
+    assert json_bud.last_gift_id == zia_bud.last_gift_id
+    assert json_bud.last_gift_id == zia_last_gift_id
     # assert json_bud._groups == zia_bud._groups
 
     json_itemroot = json_bud.itemroot

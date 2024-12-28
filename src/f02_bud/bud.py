@@ -119,19 +119,19 @@ class _gogo_calc_stop_calc_Exception(Exception):
 class BudUnit:
     deal_idea: DealIdea = None
     owner_name: OwnerName = None
-    _last_gift_id: int = None
-    tally: float = None
     accts: dict[AcctName, AcctUnit] = None
     itemroot: ItemUnit = None
-    max_tree_traverse: int = None
-    bridge: str = None
+    purview_time_int: TimeLinePoint = None
+    tally: float = None
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
     penny: PennyNum = None
-    respect_bit: BitNum = None
     credor_respect: RespectNum = None
     debtor_respect: RespectNum = None
-    purview_time_int: TimeLinePoint = None
+    respect_bit: BitNum = None
+    bridge: str = None
+    max_tree_traverse: int = None
+    last_gift_id: int = None
     _originunit: OriginUnit = None  # In job buds this shows source
     # settle_bud Calculated field begin
     _item_dict: dict[RoadUnit, ItemUnit] = None
@@ -150,13 +150,13 @@ class BudUnit:
     # settle_bud Calculated field end
 
     def del_last_gift_id(self):
-        self._last_gift_id = None
+        self.last_gift_id = None
 
     def set_last_gift_id(self, x_last_gift_id: int):
-        if self._last_gift_id is not None and x_last_gift_id < self._last_gift_id:
-            exception_str = f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self._last_gift_id}."
+        if self.last_gift_id is not None and x_last_gift_id < self.last_gift_id:
+            exception_str = f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self.last_gift_id}."
             raise _last_gift_idException(exception_str)
-        self._last_gift_id = x_last_gift_id
+        self.last_gift_id = x_last_gift_id
 
     def set_purview_time_int(self, x_purview_time_int: TimeLinePoint):
         self.purview_time_int = x_purview_time_int
@@ -1374,8 +1374,8 @@ class BudUnit:
             x_dict["credor_respect"] = self.credor_respect
         if self.debtor_respect is not None:
             x_dict["debtor_respect"] = self.debtor_respect
-        if self._last_gift_id is not None:
-            x_dict["_last_gift_id"] = self._last_gift_id
+        if self.last_gift_id is not None:
+            x_dict["_last_gift_id"] = self.last_gift_id
 
         return x_dict
 
@@ -1471,7 +1471,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.penny = default_penny_if_None(obj_from_bud_dict(bud_dict, "penny"))
     x_bud.credor_respect = obj_from_bud_dict(bud_dict, "credor_respect")
     x_bud.debtor_respect = obj_from_bud_dict(bud_dict, "debtor_respect")
-    x_bud._last_gift_id = obj_from_bud_dict(bud_dict, "_last_gift_id")
+    x_bud.last_gift_id = obj_from_bud_dict(bud_dict, "_last_gift_id")
     x_bridge = x_bud.bridge
     x_accts = obj_from_bud_dict(bud_dict, "_accts", x_bridge).values()
     for x_acctunit in x_accts:

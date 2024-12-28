@@ -360,7 +360,7 @@ class HubUnit:
 
     def _merge_any_gifts(self, x_bud: BudUnit) -> BudUnit:
         gifts_dir = self.gifts_dir()
-        gift_ints = get_integer_filenames(gifts_dir, x_bud._last_gift_id)
+        gift_ints = get_integer_filenames(gifts_dir, x_bud.last_gift_id)
         if len(gift_ints) == 0:
             return copy_deepcopy(x_bud)
 
