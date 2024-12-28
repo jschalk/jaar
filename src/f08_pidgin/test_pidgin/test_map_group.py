@@ -16,7 +16,7 @@ def test_GroupMap_Exists():
 
     # WHEN / THEN
     assert not x_groupmap.face_id
-    assert not x_groupmap.event_id
+    assert not x_groupmap.event_int
     assert not x_groupmap.otx2inx
     assert not x_groupmap.unknown_word
     assert not x_groupmap.otx_bridge
@@ -29,7 +29,7 @@ def test_groupmap_shop_ReturnsObj_scenario0_NoParameters():
 
     # THEN
     assert not x_groupmap.face_id
-    assert x_groupmap.event_id == 0
+    assert x_groupmap.event_int == 0
     assert x_groupmap.otx2inx == {}
     assert x_groupmap.unknown_word == default_unknown_word_if_None()
     assert x_groupmap.otx_bridge == default_bridge_if_None()
@@ -50,7 +50,7 @@ def test_groupmap_shop_ReturnsObj_scenario1_WithParameters():
     # WHEN
     x_groupmap = groupmap_shop(
         face_id=bob_str,
-        event_id=event7,
+        event_int=event7,
         otx2inx=otx2inx,
         unknown_word=x_unknown_word,
         otx_bridge=slash_otx_bridge,
@@ -59,7 +59,7 @@ def test_groupmap_shop_ReturnsObj_scenario1_WithParameters():
 
     # THEN
     assert x_groupmap.face_id == bob_str
-    assert x_groupmap.event_id == event7
+    assert x_groupmap.event_int == event7
     assert x_groupmap.otx2inx == otx2inx
     assert x_groupmap.unknown_word == x_unknown_word
     assert x_groupmap.otx_bridge == slash_otx_bridge
@@ -78,7 +78,7 @@ def test_groupmap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_fl
     # WHEN
     x_groupmap = groupmap_shop(
         face_id=bob_str,
-        event_id=event7,
+        event_int=event7,
         otx2inx=otx2inx,
         unknown_word=x_nan,
         otx_bridge=x_nan,
@@ -87,7 +87,7 @@ def test_groupmap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_fl
 
     # THEN
     assert x_groupmap.face_id == bob_str
-    assert x_groupmap.event_id == event7
+    assert x_groupmap.event_int == event7
     assert x_groupmap.otx2inx == otx2inx
     assert x_groupmap.unknown_word == default_unknown_word_if_None()
     assert x_groupmap.otx_bridge == default_bridge_if_None()
@@ -309,7 +309,7 @@ def test_GroupMap_get_dict_ReturnsObj():
         "inx_bridge": x_groupmap.inx_bridge,
         "unknown_word": x_groupmap.unknown_word,
         "otx2inx": {},
-        "event_id": x_groupmap.event_id,
+        "event_int": x_groupmap.event_int,
         "face_id": x_groupmap.face_id,
     }
     assert x_groupmap.get_dict() == x1_road_map_dict
@@ -322,7 +322,7 @@ def test_GroupMap_get_dict_ReturnsObj():
         "inx_bridge": x_groupmap.inx_bridge,
         "unknown_word": x_groupmap.unknown_word,
         "otx2inx": {clean_otx: clean_inx},
-        "event_id": x_groupmap.event_id,
+        "event_int": x_groupmap.event_int,
         "face_id": sue_str,
     }
     assert x_groupmap.get_dict() == x2_road_map_dict
@@ -339,7 +339,7 @@ def test_GroupMap_get_json_ReturnsObj():
     slash_otx_bridge = "/"
     x_groupmap = groupmap_shop(sue_str, otx_bridge=slash_otx_bridge)
     x1_road_map_json = f"""{{
-  "event_id": 0,
+  "event_int": 0,
   "face_id": "{sue_str}",
   "inx_bridge": "{x_groupmap.inx_bridge}",
   "otx2inx": {{}},
@@ -352,10 +352,10 @@ def test_GroupMap_get_json_ReturnsObj():
 
     # WHEN
     x_groupmap.set_otx2inx(clean_otx, clean_inx)
-    x_groupmap.event_id = event7
+    x_groupmap.event_int = event7
     # THEN
     x2_road_map_json = f"""{{
-  "event_id": {event7},
+  "event_int": {event7},
   "face_id": "{sue_str}",
   "inx_bridge": "{x_groupmap.inx_bridge}",
   "otx2inx": {{
@@ -384,8 +384,8 @@ def test_get_groupmap_from_dict_ReturnsObj():
 
     # THEN
     assert gen_groupmap.face_id == x_groupmap.face_id
-    assert gen_groupmap.event_id == x_groupmap.event_id
-    assert gen_groupmap.event_id == event7
+    assert gen_groupmap.event_int == x_groupmap.event_int
+    assert gen_groupmap.event_int == event7
     assert gen_groupmap == x_groupmap
 
 
@@ -529,7 +529,7 @@ def test_inherit_groupmap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_id
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_inherit_groupmap_ReturnsObj_Scenario5_RaiseErrorWhenEventIDsOutOfOrder():
+def test_inherit_groupmap_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder():
     # ESTABLISH
     sue_str = "Sue"
     old_groupmap = groupmap_shop(sue_str, 5)

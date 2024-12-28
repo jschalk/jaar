@@ -17,7 +17,7 @@ class BudTable(Base):
     fund_coin = Column(Float)
     respect_bit = Column(Float)
     penny = Column(Float)
-    purview_time_id = Column(Integer)
+    purview_time_int = Column(Integer)
     tally = Column(Integer)
 
 

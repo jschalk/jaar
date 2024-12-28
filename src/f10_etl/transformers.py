@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
 from src.f01_road.finance_tran import DealID
-from src.f01_road.road import FaceID, EventID
+from src.f01_road.road import FaceID, EventInt
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_brick.brick_config import (
@@ -176,13 +176,13 @@ class boatStagingToboatAggTransformer:
         )
 
 
-def etl_boat_agg_to_boat_valid(boat_dir: str, legitimate_events: set[EventID]):
+def etl_boat_agg_to_boat_valid(boat_dir: str, legitimate_events: set[EventInt]):
     transformer = boatAggToboatValidTransformer(boat_dir, legitimate_events)
     transformer.transform()
 
 
 class boatAggToboatValidTransformer:
-    def __init__(self, boat_dir: str, legitimate_events: set[EventID]):
+    def __init__(self, boat_dir: str, legitimate_events: set[EventInt]):
         self.boat_dir = boat_dir
         self.legitimate_events = legitimate_events
 
@@ -190,7 +190,7 @@ class boatAggToboatValidTransformer:
         for br_ref in get_existing_excel_brick_file_refs(self.boat_dir):
             boat_brick_path = create_path(br_ref.file_dir, br_ref.file_name)
             boat_agg = pandas_read_excel(boat_brick_path, "boat_agg")
-            boat_valid_df = boat_agg[boat_agg["event_id"].isin(self.legitimate_events)]
+            boat_valid_df = boat_agg[boat_agg["event_int"].isin(self.legitimate_events)]
             upsert_sheet(boat_brick_path, "boat_valid", boat_valid_df)
 
     # def _group_by_brick_columns(
@@ -224,13 +224,13 @@ class boatAggToboatEventsTransformer:
             upsert_sheet(boat_brick_path, "boat_events", events_df)
 
     def get_unique_events(self, boat_agg_df: DataFrame) -> DataFrame:
-        events_df = boat_agg_df[["face_id", "event_id"]].drop_duplicates()
+        events_df = boat_agg_df[["face_id", "event_int"]].drop_duplicates()
         events_df["note"] = (
-            events_df["event_id"]
+            events_df["event_int"]
             .duplicated(keep=False)
-            .apply(lambda x: "invalid because of conflicting event_id" if x else "")
+            .apply(lambda x: "invalid because of conflicting event_int" if x else "")
         )
-        return events_df.sort_values(["face_id", "event_id"])
+        return events_df.sort_values(["face_id", "event_int"])
 
 
 def etl_boat_events_to_events_log(boat_dir: str):
@@ -258,7 +258,7 @@ class boatEventsToEventsLogTransformer:
         otx_events_df[["file_dir"]] = x_dir
         otx_events_df[["file_name"]] = x_file_name
         otx_events_df[["sheet_name"]] = "boat_events"
-        cols = ["file_dir", "file_name", "sheet_name", "face_id", "event_id", "note"]
+        cols = ["file_dir", "file_name", "sheet_name", "face_id", "event_int", "note"]
         otx_events_df = otx_events_df[cols]
         return otx_events_df
 
@@ -272,13 +272,13 @@ class boatEventsToEventsLogTransformer:
 
 
 def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
-    events_agg_df = events_log_df[["face_id", "event_id"]].drop_duplicates()
+    events_agg_df = events_log_df[["face_id", "event_int"]].drop_duplicates()
     events_agg_df["note"] = (
-        events_agg_df["event_id"]
+        events_agg_df["event_int"]
         .duplicated(keep=False)
-        .apply(lambda x: "invalid because of conflicting event_id" if x else "")
+        .apply(lambda x: "invalid because of conflicting event_int" if x else "")
     )
-    return events_agg_df.sort_values(["event_id", "face_id"])
+    return events_agg_df.sort_values(["event_int", "face_id"])
 
 
 def etl_boat_events_log_to_events_agg(boat_dir):
@@ -303,38 +303,44 @@ def get_events_dict_from_events_agg_file(boat_dir) -> dict[int, str]:
     x_dict = {}
     for index, event_agg_row in events_agg_df.iterrows():
         x_note = event_agg_row["note"]
-        if x_note != "invalid because of conflicting event_id":
-            x_dict[event_agg_row["event_id"]] = event_agg_row["face_id"]
+        if x_note != "invalid because of conflicting event_int":
+            x_dict[event_agg_row["event_int"]] = event_agg_row["face_id"]
     return x_dict
 
 
 def boat_agg_single_to_pidgin_staging(
-    pidgin_category: str, legitimate_events: set[EventID], boat_dir: str
+    pidgin_category: str, legitimate_events: set[EventInt], boat_dir: str
 ):
     x_events = legitimate_events
     transformer = boatAggToStagingTransformer(boat_dir, pidgin_category, x_events)
     transformer.transform()
 
 
-def etl_boat_agg_to_pidgin_acct_staging(legitimate_events: set[EventID], boat_dir: str):
+def etl_boat_agg_to_pidgin_acct_staging(
+    legitimate_events: set[EventInt], boat_dir: str
+):
     boat_agg_single_to_pidgin_staging("map_acct_id", legitimate_events, boat_dir)
 
 
 def etl_boat_agg_to_pidgin_group_staging(
-    legitimate_events: set[EventID], boat_dir: str
+    legitimate_events: set[EventInt], boat_dir: str
 ):
     boat_agg_single_to_pidgin_staging("map_group_id", legitimate_events, boat_dir)
 
 
-def etl_boat_agg_to_pidgin_idea_staging(legitimate_events: set[EventID], boat_dir: str):
+def etl_boat_agg_to_pidgin_idea_staging(
+    legitimate_events: set[EventInt], boat_dir: str
+):
     boat_agg_single_to_pidgin_staging("map_idea", legitimate_events, boat_dir)
 
 
-def etl_boat_agg_to_pidgin_road_staging(legitimate_events: set[EventID], boat_dir: str):
+def etl_boat_agg_to_pidgin_road_staging(
+    legitimate_events: set[EventInt], boat_dir: str
+):
     boat_agg_single_to_pidgin_staging("map_road", legitimate_events, boat_dir)
 
 
-def etl_boat_agg_to_pidgin_staging(legitimate_events: set[EventID], boat_dir: str):
+def etl_boat_agg_to_pidgin_staging(legitimate_events: set[EventInt], boat_dir: str):
     etl_boat_agg_to_pidgin_acct_staging(legitimate_events, boat_dir)
     etl_boat_agg_to_pidgin_group_staging(legitimate_events, boat_dir)
     etl_boat_agg_to_pidgin_idea_staging(legitimate_events, boat_dir)
@@ -343,7 +349,7 @@ def etl_boat_agg_to_pidgin_staging(legitimate_events: set[EventID], boat_dir: st
 
 class boatAggToStagingTransformer:
     def __init__(
-        self, boat_dir: str, pidgin_category: str, legitmate_events: set[EventID]
+        self, boat_dir: str, pidgin_category: str, legitmate_events: set[EventInt]
     ):
         self.boat_dir = boat_dir
         self.legitmate_events = legitmate_events
@@ -353,7 +359,7 @@ class boatAggToStagingTransformer:
     def transform(self):
         category_bricks = get_brick_category_ref().get(self.pidgin_category)
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
-        pidgin_columns.update({"face_id", "event_id"})
+        pidgin_columns.update({"face_id", "event_int"})
         pidgin_columns = get_sorting_columns(pidgin_columns)
         pidgin_columns.insert(0, "src_brick")
         pidgin_df = DataFrame(columns=pidgin_columns)
@@ -379,8 +385,8 @@ class boatAggToStagingTransformer:
         df_missing_cols = set(df_columns).difference(boat_agg_df.columns)
 
         for index, x_row in boat_agg_df.iterrows():
-            event_id = x_row["event_id"]
-            if event_id in self.legitmate_events:
+            event_int = x_row["event_int"]
+            if event_int in self.legitmate_events:
                 face_id = x_row["face_id"]
                 otx_bridge = None
                 if "otx_bridge" not in df_missing_cols:
@@ -395,7 +401,7 @@ class boatAggToStagingTransformer:
                 stage_df.loc[df_len] = [
                     brick_number,
                     face_id,
-                    event_id,
+                    event_int,
                     get_otx_obj(self.jaar_type, x_row),
                     self.get_inx_obj(x_row, df_missing_cols),
                     otx_bridge,
@@ -452,7 +458,7 @@ class PidginStagingToAggTransformer:
 
     def transform(self):
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
-        pidgin_columns.update({"face_id", "event_id"})
+        pidgin_columns.update({"face_id", "event_int"})
         pidgin_columns = get_sorting_columns(pidgin_columns)
         pidgin_agg_df = DataFrame(columns=pidgin_columns)
         self.insert_agg_rows(pidgin_agg_df)
@@ -471,7 +477,7 @@ class PidginStagingToAggTransformer:
         x_pidginbodybook = pidginbodybook_shop(x_pidginheartbook)
         for index, x_row in staging_df.iterrows():
             x_pidginbodyrow = PidginBodyRow(
-                event_id=x_row["event_id"],
+                event_int=x_row["event_int"],
                 face_id=x_row["face_id"],
                 otx_str=get_otx_obj(self.jaar_type, x_row),
                 inx_str=get_inx_obj(self.jaar_type, x_row),
@@ -483,7 +489,7 @@ class PidginStagingToAggTransformer:
         x_pidginheartbook = pidginheartbook_shop()
         for index, x_row in staging_df.iterrows():
             x_pidginheartrow = PidginHeartRow(
-                event_id=x_row["event_id"],
+                event_int=x_row["event_int"],
                 face_id=x_row["face_id"],
                 otx_bridge=x_row["otx_bridge"],
                 inx_bridge=x_row["inx_bridge"],
@@ -530,7 +536,7 @@ def etl_bow_face_pidgins_to_bow_event_pidgins(faces_dir: str):
 
 
 def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: str):
-    split_excel_into_dirs(pidgin_file, face_dir, "event_id", "pidgin", sheet_name)
+    split_excel_into_dirs(pidgin_file, face_dir, "event_int", "pidgin", sheet_name)
 
 
 def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
@@ -571,12 +577,14 @@ def etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(faces_dir: str):
 
 
 def etl_pidgin_jsons_inherit_younger_pidgins(
-    faces_dir: str, pidgin_events: dict[FaceID, set[EventID]]
+    faces_dir: str, pidgin_events: dict[FaceID, set[EventInt]]
 ):
     old_pidginunit = None
-    for face_id, pidgin_event_ids in pidgin_events.items():
-        for pidgin_event_id in pidgin_event_ids:
-            new_pidgin_path = get_event_pidgin_path(faces_dir, face_id, pidgin_event_id)
+    for face_id, pidgin_event_ints in pidgin_events.items():
+        for pidgin_event_int in pidgin_event_ints:
+            new_pidgin_path = get_event_pidgin_path(
+                faces_dir, face_id, pidgin_event_int
+            )
             new_pidginunit = get_pidginunit_from_json(open_file(new_pidgin_path))
             if old_pidginunit != None:
                 new_pidginunit = inherit_pidginunit(old_pidginunit, new_pidginunit)
@@ -584,9 +592,9 @@ def etl_pidgin_jsons_inherit_younger_pidgins(
             old_pidginunit = new_pidginunit
 
 
-def get_event_pidgin_path(faces_dir: str, face_id: FaceID, pidgin_event_id: EventID):
+def get_event_pidgin_path(faces_dir: str, face_id: FaceID, pidgin_event_int: EventInt):
     face_dir = create_path(faces_dir, face_id)
-    event_dir = create_path(face_dir, pidgin_event_id)
+    event_dir = create_path(face_dir, pidgin_event_int)
     return create_path(event_dir, "pidgin.json")
 
 
@@ -611,50 +619,52 @@ def etl_bow_face_bricks_to_bow_event_otx_bricks(faces_dir: str):
             split_excel_into_dirs(
                 input_file=face_brick_path,
                 output_dir=face_dir,
-                column_name="event_id",
+                column_name="event_int",
                 file_name=face_br_ref.brick_number,
                 sheet_name="boat_valid",
             )
 
 
-def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[EventID]]:
+def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceID, set[EventInt]]:
     pidgin_events = {}
     for face_id in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_id)
-        for event_id in get_level1_dirs(face_dir):
-            event_dir = create_path(face_dir, event_id)
+        for event_int in get_level1_dirs(face_dir):
+            event_dir = create_path(face_dir, event_int)
             pidgin_path = create_path(event_dir, "pidgin.json")
             if os_path_exists(pidgin_path):
                 if pidgin_events.get(face_id) is None:
-                    pidgin_events[face_id] = {int(event_id)}
+                    pidgin_events[face_id] = {int(event_int)}
                 else:
                     events_list = pidgin_events.get(face_id)
-                    events_list.add(int(event_id))
+                    events_list.add(int(event_int))
     return pidgin_events
 
 
-def get_most_recent_event_id(event_set: set[EventID], max_event_id: EventID) -> EventID:
-    recent_event_ids = [e_id for e_id in event_set if e_id <= max_event_id]
-    return max(recent_event_ids, default=None)
+def get_most_recent_event_int(
+    event_set: set[EventInt], max_event_int: EventInt
+) -> EventInt:
+    recent_event_ints = [e_id for e_id in event_set if e_id <= max_event_int]
+    return max(recent_event_ints, default=None)
 
 
 def etl_bow_event_bricks_to_inx_events(
-    faces_bow_dir: str, event_pidgins: dict[FaceID, set[EventID]]
+    faces_bow_dir: str, event_pidgins: dict[FaceID, set[EventInt]]
 ):
     for face_id in get_level1_dirs(faces_bow_dir):
         face_pidgin_events = event_pidgins.get(face_id)
         if face_pidgin_events is None:
             face_pidgin_events = set()
         face_dir = create_path(faces_bow_dir, face_id)
-        for event_id in get_level1_dirs(face_dir):
-            event_id = int(event_id)
-            event_dir = create_path(face_dir, event_id)
-            pidgin_event_id = get_most_recent_event_id(face_pidgin_events, event_id)
+        for event_int in get_level1_dirs(face_dir):
+            event_int = int(event_int)
+            event_dir = create_path(face_dir, event_int)
+            pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
             for event_br_ref in get_existing_excel_brick_file_refs(event_dir):
                 event_brick_path = create_path(event_dir, event_br_ref.file_name)
                 brick_df = pandas_read_excel(event_brick_path, "boat_valid")
-                if pidgin_event_id != None:
-                    pidgin_event_dir = create_path(face_dir, pidgin_event_id)
+                if pidgin_event_int != None:
+                    pidgin_event_dir = create_path(face_dir, pidgin_event_int)
                     pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
                     x_pidginunit = get_pidginunit_from_json(open_file(pidgin_path))
                     translate_all_columns_dataframe(brick_df, x_pidginunit)
@@ -664,9 +674,9 @@ def etl_bow_event_bricks_to_inx_events(
 def etl_bow_inx_event_bricks_to_aft_faces(faces_bow_dir: str, faces_aft_dir: str):
     for face_id in get_level1_dirs(faces_bow_dir):
         face_dir = create_path(faces_bow_dir, face_id)
-        for event_id in get_level1_dirs(face_dir):
-            event_id = int(event_id)
-            event_dir = create_path(face_dir, event_id)
+        for event_int in get_level1_dirs(face_dir):
+            event_int = int(event_int)
+            event_dir = create_path(face_dir, event_int)
             for event_br_ref in get_existing_excel_brick_file_refs(event_dir):
                 event_brick_path = create_path(event_dir, event_br_ref.file_name)
                 split_excel_into_dirs(
@@ -686,7 +696,7 @@ def etl_aft_face_bricks_to_aft_event_bricks(faces_aft_dir: str):
             split_excel_into_dirs(
                 input_file=face_brick_path,
                 output_dir=face_dir,
-                column_name="event_id",
+                column_name="event_int",
                 file_name=face_br_ref.brick_number,
                 sheet_name="inx",
             )
@@ -695,9 +705,9 @@ def etl_aft_face_bricks_to_aft_event_bricks(faces_aft_dir: str):
 def etl_aft_event_bricks_to_deal_bricks(faces_aft_dir: str):
     for face_id in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_id)
-        for event_id in get_level1_dirs(face_dir):
-            event_id = int(event_id)
-            event_dir = create_path(face_dir, event_id)
+        for event_int in get_level1_dirs(face_dir):
+            event_int = int(event_int)
+            event_dir = create_path(face_dir, event_int)
             for event_br_ref in get_existing_excel_brick_file_refs(event_dir):
                 event_brick_path = create_path(event_dir, event_br_ref.file_name)
                 split_excel_into_dirs(

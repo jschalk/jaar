@@ -22,7 +22,7 @@ from src.f01_road.road import (
     RoadUnit,
     IdeaUnit,
     FaceID,
-    EventID,
+    EventInt,
 )
 from dataclasses import dataclass
 from copy import copy as copy_copy
@@ -39,7 +39,7 @@ class set_idea_Exception(Exception):
 @dataclass
 class MapCore:
     face_id: FaceID = None
-    event_id: EventID = None
+    event_int: EventInt = None
     otx2inx: dict = None
     unknown_word: str = None
     otx_bridge: str = None
@@ -60,7 +60,7 @@ class MapCore:
     def get_dict(self) -> dict:
         return {
             "face_id": self.face_id,
-            "event_id": self.event_id,
+            "event_int": self.event_int,
             "otx_bridge": self.otx_bridge,
             "inx_bridge": self.inx_bridge,
             "unknown_word": self.unknown_word,
@@ -114,7 +114,7 @@ class AcctMap(MapCore):
 
 def acctmap_shop(
     face_id: FaceID = None,
-    event_id: EventID = None,
+    event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
     otx2inx: dict = None,
@@ -126,7 +126,7 @@ def acctmap_shop(
 
     return AcctMap(
         face_id=face_id,
-        event_id=get_0_if_None(event_id),
+        event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         unknown_word=unknown_word,
@@ -137,7 +137,7 @@ def acctmap_shop(
 def get_acctmap_from_dict(x_dict: dict) -> AcctMap:
     return acctmap_shop(
         face_id=x_dict.get("face_id"),
-        event_id=x_dict.get("event_id"),
+        event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
         otx2inx=x_dict.get("otx2inx"),
@@ -192,7 +192,7 @@ class GroupMap(MapCore):
 
 def groupmap_shop(
     face_id: FaceID = None,
-    event_id: EventID = None,
+    event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
     otx2inx: dict = None,
@@ -204,7 +204,7 @@ def groupmap_shop(
 
     return GroupMap(
         face_id=face_id,
-        event_id=get_0_if_None(event_id),
+        event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         unknown_word=unknown_word,
@@ -215,7 +215,7 @@ def groupmap_shop(
 def get_groupmap_from_dict(x_dict: dict) -> GroupMap:
     return groupmap_shop(
         face_id=x_dict.get("face_id"),
-        event_id=x_dict.get("event_id"),
+        event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
         otx2inx=x_dict.get("otx2inx"),
@@ -270,7 +270,7 @@ class IdeaMap(MapCore):
 
 def ideamap_shop(
     face_id: FaceID = None,
-    event_id: EventID = None,
+    event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
     otx2inx: dict = None,
@@ -282,7 +282,7 @@ def ideamap_shop(
 
     return IdeaMap(
         face_id=face_id,
-        event_id=get_0_if_None(event_id),
+        event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         unknown_word=unknown_word,
@@ -293,7 +293,7 @@ def ideamap_shop(
 def get_ideamap_from_dict(x_dict: dict) -> IdeaMap:
     return ideamap_shop(
         face_id=x_dict.get("face_id"),
-        event_id=x_dict.get("event_id"),
+        event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
         otx2inx=x_dict.get("otx2inx"),
@@ -308,7 +308,7 @@ def get_ideamap_from_json(x_json: str) -> IdeaMap:
 @dataclass
 class RoadMap:
     face_id: FaceID = None
-    event_id: EventID = None
+    event_int: EventInt = None
     otx2inx: dict = None
     unknown_word: str = None
     otx_bridge: str = None
@@ -413,7 +413,7 @@ class RoadMap:
     def get_dict(self) -> dict:
         return {
             "face_id": self.face_id,
-            "event_id": self.event_id,
+            "event_int": self.event_int,
             "otx_bridge": self.otx_bridge,
             "inx_bridge": self.inx_bridge,
             "unknown_word": self.unknown_word,
@@ -426,7 +426,7 @@ class RoadMap:
 
 def roadmap_shop(
     face_id: FaceID = None,
-    event_id: EventID = None,
+    event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
     x_ideamap: IdeaMap = None,
@@ -443,7 +443,7 @@ def roadmap_shop(
             inx_bridge=inx_bridge,
             unknown_word=unknown_word,
             face_id=face_id,
-            event_id=event_id,
+            event_int=event_int,
         )
 
     return RoadMap(
@@ -453,14 +453,14 @@ def roadmap_shop(
         inx_bridge=inx_bridge,
         ideamap=x_ideamap,
         face_id=face_id,
-        event_id=get_0_if_None(event_id),
+        event_int=get_0_if_None(event_int),
     )
 
 
 def get_roadmap_from_dict(x_dict: dict) -> RoadMap:
     return roadmap_shop(
         face_id=x_dict.get("face_id"),
-        event_id=x_dict.get("event_id"),
+        event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
         otx2inx=x_dict.get("otx2inx"),
@@ -484,7 +484,7 @@ def _check_core_attributes(new_obj, old_obj):
         or old_obj.unknown_word != new_obj.unknown_word
     ):
         raise MapCoreAttrConflictException("Core attributes in conflict")
-    if old_obj.event_id >= new_obj.event_id:
+    if old_obj.event_int >= new_obj.event_int:
         raise MapCoreAttrConflictException("older mapunit is not older")
 
 

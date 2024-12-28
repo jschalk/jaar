@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, deal_id_str
 from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
-from src.f08_pidgin.pidgin_config import event_id_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import (
     get_sheet_names,
     upsert_sheet,
@@ -27,7 +27,7 @@ def test_WorldUnit_boat_bricks_to_bow_face_bricks_CreatesOtxSheets_Scenario0_Gro
     hour7am = "7am"
     brick_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         hour_idea_str(),
         cumlative_minute_str(),
@@ -79,7 +79,7 @@ def test_WorldUnit_boat_bricks_to_bow_face_bricks_CreatesOtxSheets_Scenario0_Gro
 #     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
 #     brick_columns = [
 #         face_id_str(),
-#         event_id_str(),
+#         event_int_str(),
 #         deal_id_str(),
 #         hour_idea_str(),
 #         cumlative_minute_str(),

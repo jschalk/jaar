@@ -3,7 +3,7 @@
         "acct_id": {
             "otx_key": true
         },
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
         "face_id": {
@@ -18,7 +18,7 @@
         "quota": {
             "otx_key": false
         },
-        "time_id": {
+        "time_int": {
             "otx_key": true
         }
     },

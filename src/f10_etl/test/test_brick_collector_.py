@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, deal_id_str
 from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
-from src.f08_pidgin.pidgin_config import event_id_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import upsert_sheet
 from src.f10_etl.brick_collector import (
     get_all_excel_bricksheets,
@@ -96,7 +96,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     ex_file_path = create_path(x_dir, ex_file_name)
     brick_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         cumlative_minute_str(),
         deal_id_str(),
         hour_idea_str(),
@@ -135,7 +135,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     ex_file_path = create_path(x_dir, ex_file_name)
     brick_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         cumlative_minute_str(),
         deal_id_str(),
         hour_idea_str(),
@@ -144,7 +144,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     row2 = [sue_str, event_1, minute_420, accord23_str, hour7am]
     incomplete_brick_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         cumlative_minute_str(),
         deal_id_str(),
     ]

@@ -26,7 +26,7 @@ def test_RoadMap_Exists():
 
     # WHEN / THEN
     assert not x_roadmap.face_id
-    assert not x_roadmap.event_id
+    assert not x_roadmap.event_int
     assert not x_roadmap.otx2inx
     assert not x_roadmap.unknown_word
     assert not x_roadmap.otx_bridge
@@ -48,7 +48,7 @@ def test_roadmap_shop_ReturnsObj_scenario0():
     # WHEN
     e7_roadmap = roadmap_shop(
         face_id=bob_str,
-        event_id=event7,
+        event_int=event7,
         otx2inx=otx2inx,
         unknown_word=x_unknown_word,
         otx_bridge=slash_otx_bridge,
@@ -57,14 +57,14 @@ def test_roadmap_shop_ReturnsObj_scenario0():
 
     # THEN
     assert e7_roadmap.face_id == bob_str
-    assert e7_roadmap.event_id == event7
+    assert e7_roadmap.event_int == event7
     assert e7_roadmap.otx2inx == otx2inx
     assert e7_roadmap.unknown_word == x_unknown_word
     assert e7_roadmap.otx_bridge == slash_otx_bridge
     assert e7_roadmap.inx_bridge == colon_inx_bridge
     assert e7_roadmap.ideamap == ideamap_shop(
         face_id=bob_str,
-        event_id=event7,
+        event_int=event7,
         unknown_word=x_unknown_word,
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
@@ -81,9 +81,9 @@ def test_roadmap_shop_ReturnsObj_Scenario2():
     assert x_roadmap.otx_bridge == default_bridge_if_None()
     assert x_roadmap.inx_bridge == default_bridge_if_None()
     assert x_roadmap.face_id is None
-    assert x_roadmap.event_id == 0
+    assert x_roadmap.event_int == 0
     assert x_roadmap.ideamap == ideamap_shop(
-        event_id=0,
+        event_int=0,
         unknown_word=default_unknown_word_if_None(),
         otx_bridge=default_bridge_if_None(),
         inx_bridge=default_bridge_if_None(),
@@ -102,7 +102,7 @@ def test_roadmap_shop_ReturnsObj_scenario3_PidginCoreAttrAreDefaultWhenGiven_flo
     # WHEN
     x_roadmap = roadmap_shop(
         face_id=bob_str,
-        event_id=event7,
+        event_int=event7,
         otx2inx=otx2inx,
         unknown_word=x_nan,
         otx_bridge=x_nan,
@@ -111,7 +111,7 @@ def test_roadmap_shop_ReturnsObj_scenario3_PidginCoreAttrAreDefaultWhenGiven_flo
 
     # THEN
     assert x_roadmap.face_id == bob_str
-    assert x_roadmap.event_id == event7
+    assert x_roadmap.event_int == event7
     assert x_roadmap.otx2inx == otx2inx
     assert x_roadmap.unknown_word == default_unknown_word_if_None()
     assert x_roadmap.otx_bridge == default_bridge_if_None()
@@ -471,7 +471,7 @@ def test_RoadMap_get_json_ReturnsObj():
     slash_otx_bridge = "/"
     x_roadmap = roadmap_shop(sue_str, otx_bridge=slash_otx_bridge)
     x1_road_map_json = f"""{{
-  "event_id": 0,
+  "event_int": 0,
   "face_id": "{sue_str}",
   "inx_bridge": "{x_roadmap.inx_bridge}",
   "otx2inx": {{}},
@@ -485,10 +485,10 @@ def test_RoadMap_get_json_ReturnsObj():
     # WHEN
     event7 = 7
     x_roadmap.set_otx2inx(clean_otx, clean_inx)
-    x_roadmap.event_id = event7
+    x_roadmap.event_int = event7
     # THEN
     x2_road_map_json = f"""{{
-  "event_id": {event7},
+  "event_int": {event7},
   "face_id": "{sue_str}",
   "inx_bridge": "{x_roadmap.inx_bridge}",
   "otx2inx": {{
@@ -518,8 +518,8 @@ def test_get_roadmap_from_dict_ReturnsObj():
 
     # THEN
     assert gen_roadmap.face_id == x_roadmap.face_id
-    assert gen_roadmap.event_id == x_roadmap.event_id
-    assert gen_roadmap.event_id == event7
+    assert gen_roadmap.event_int == x_roadmap.event_int
+    assert gen_roadmap.event_int == event7
     assert gen_roadmap.ideamap.face_id == x_roadmap.ideamap.face_id
     assert gen_roadmap.ideamap.otx2inx != x_roadmap.ideamap.otx2inx
     assert gen_roadmap.ideamap != x_roadmap.ideamap
@@ -707,7 +707,7 @@ def test_inherit_roadmap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_id(
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_inherit_roadmap_ReturnsObj_Scenario5_RaiseErrorWhenEventIDsOutOfOrder():
+def test_inherit_roadmap_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder():
     # ESTABLISH
     sue_str = "Sue"
     old_roadmap = roadmap_shop(sue_str, 5)

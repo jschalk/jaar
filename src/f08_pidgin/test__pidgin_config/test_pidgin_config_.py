@@ -17,7 +17,7 @@ from src.f08_pidgin.pidgin_config import (
     get_quick_pidgens_column_ref,
     pidginunit_str,
     pidgin_filename,
-    event_id_str,
+    event_int_str,
     otx_bridge_str,
     inx_bridge_str,
     inx_group_id_str,
@@ -59,7 +59,7 @@ def test_str_functions_ReturnsObj():
     assert map_idea_str() == "map_idea"
     assert map_road_str() == "map_road"
     assert map_otx2inx_str() == "map_otx2inx"
-    assert event_id_str() == "event_id"
+    assert event_int_str() == "event_int"
 
 
 def test_get_pidgin_config_file_name_ReturnsObj():

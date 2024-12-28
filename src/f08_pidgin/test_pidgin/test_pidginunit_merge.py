@@ -71,7 +71,7 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario4_RaiseErrorWhenDiffer
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario5_RaiseErrorWhenEventIDsOutOfOrder():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder():
     # ESTABLISH
     sue_str = "Sue"
     old_pidginunit = pidginunit_shop(sue_str, 5)
@@ -100,16 +100,16 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_acctmap_Inherited():
     # THEN
     assert merged_pidginunit
     merged_acctbrigde = get_suita_acctmap()
-    merged_acctbrigde.event_id = event1
+    merged_acctbrigde.event_int = event1
     assert merged_pidginunit.acctmap == merged_acctbrigde
     merged_groupbrigde = get_swim_groupmap()
-    merged_groupbrigde.event_id = event1
+    merged_groupbrigde.event_int = event1
     assert merged_pidginunit.groupmap == merged_groupbrigde
     merged_ideabrigde = get_clean_ideamap()
-    merged_ideabrigde.event_id = event1
+    merged_ideabrigde.event_int = event1
     assert merged_pidginunit.ideamap == merged_ideabrigde
     merged_roadbrigde = get_clean_roadmap()
-    merged_roadbrigde.event_id = event1
+    merged_roadbrigde.event_int = event1
     merged_roadbrigde.ideamap = merged_ideabrigde
     assert merged_pidginunit.roadmap == merged_roadbrigde
 
@@ -135,9 +135,9 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_acctmap_Inherited():
     assert merged_pidginunit
     assert new_pidginunit.acct_id_exists(bob_otx, bob_inx)
     merged_acctbrigde = get_suita_acctmap()
-    merged_acctbrigde.event_id = event1
+    merged_acctbrigde.event_int = event1
     merged_acctbrigde.set_otx2inx(bob_otx, bob_inx)
     assert merged_pidginunit.acctmap == merged_acctbrigde
     merged_groupbrigde = get_swim_groupmap()
-    merged_groupbrigde.event_id = event1
+    merged_groupbrigde.event_int = event1
     assert merged_pidginunit.groupmap == merged_groupbrigde

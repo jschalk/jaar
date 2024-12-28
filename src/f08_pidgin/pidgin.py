@@ -4,7 +4,7 @@ from src.f00_instrument.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
 )
-from src.f01_road.road import default_bridge_if_None, OwnerID, EventID
+from src.f01_road.road import default_bridge_if_None, OwnerID, EventInt
 from src.f08_pidgin.map import (
     MapCore,
     GroupMap,
@@ -66,7 +66,7 @@ class PidginUnit:
     Contains a mapunit for each translatable type: RoadUnit, AcctID, GroupID...
     """
 
-    event_id: EventID = None
+    event_int: EventInt = None
     face_id: OwnerID = None
     groupmap: GroupMap = None
     acctmap: AcctMap = None
@@ -238,7 +238,7 @@ class PidginUnit:
     def get_dict(self) -> dict:
         return {
             "face_id": self.face_id,
-            "event_id": self.event_id,
+            "event_int": self.event_int,
             "otx_bridge": self.otx_bridge,
             "inx_bridge": self.inx_bridge,
             "unknown_word": self.unknown_word,
@@ -254,7 +254,7 @@ class PidginUnit:
 
 def pidginunit_shop(
     face_id: OwnerID,
-    event_id: EventID = None,
+    event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
     unknown_word: str = None,
@@ -265,28 +265,28 @@ def pidginunit_shop(
 
     x_acctmap = acctmap_shop(
         face_id=face_id,
-        event_id=event_id,
+        event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         unknown_word=unknown_word,
     )
     x_groupmap = groupmap_shop(
         face_id=face_id,
-        event_id=event_id,
+        event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         unknown_word=unknown_word,
     )
     x_ideamap = ideamap_shop(
         face_id=face_id,
-        event_id=event_id,
+        event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         unknown_word=unknown_word,
     )
     x_roadmap = roadmap_shop(
         face_id=face_id,
-        event_id=event_id,
+        event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         unknown_word=unknown_word,
@@ -295,7 +295,7 @@ def pidginunit_shop(
 
     return PidginUnit(
         face_id=face_id,
-        event_id=get_0_if_None(event_id),
+        event_int=get_0_if_None(event_int),
         unknown_word=unknown_word,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
@@ -314,7 +314,7 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
     x_roadmap.ideamap = x_ideamap
     return PidginUnit(
         face_id=x_dict.get("face_id"),
-        event_id=x_dict.get("event_id"),
+        event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
         unknown_word=x_dict.get("unknown_word"),
@@ -341,7 +341,7 @@ def inherit_pidginunit(older: PidginUnit, newer: PidginUnit) -> PidginUnit:
         or older.unknown_word != newer.unknown_word
     ):
         raise PidginCoreAttrConflictException("Core attributes in conflict")
-    if older.event_id >= newer.event_id:
+    if older.event_int >= newer.event_int:
         raise PidginCoreAttrConflictException("older pidginunit is not older")
     newer.set_acctmap(inherit_acctmap(newer.acctmap, older.acctmap))
     newer.set_groupmap(inherit_groupmap(newer.groupmap, older.groupmap))

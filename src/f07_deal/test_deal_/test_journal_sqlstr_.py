@@ -219,7 +219,7 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
 ;"""
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    assert generated_sqlstr.find(end_sqlstr) == 5375
+    assert generated_sqlstr.find(end_sqlstr) == 5376
     example_item_reasonunit_str = (
         "item_reasonunit_UPDATE_base_item_active_requisite INTEGER NULL"
     )

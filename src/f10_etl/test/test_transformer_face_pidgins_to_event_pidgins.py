@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path, set_dir, get_dir_filenames, save_file
 from src.f04_gift.atom_config import face_id_str
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
+    event_int_str,
     inx_bridge_str,
     otx_bridge_str,
     inx_acct_id_str,
@@ -79,7 +79,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario1_3Events(env_dir_setup_cleanu
     event9 = 9
     acct_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
         otx_bridge_str(),
@@ -145,7 +145,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario2_group(env_dir_setup_cleanup)
     run_inx = ";Running"
     group_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
         otx_bridge_str(),
@@ -202,7 +202,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario3_idea(env_dir_setup_cleanup):
     event9 = 9
     idea_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
         otx_bridge_str(),
@@ -258,7 +258,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario4_road(env_dir_setup_cleanup):
     event9 = 9
     road_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
         otx_bridge_str(),
@@ -319,7 +319,7 @@ def test_etl_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face_ids(
     event9 = 9
     road_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
         otx_bridge_str(),

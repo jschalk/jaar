@@ -34,7 +34,7 @@ from src.f01_road.road import (
     TimeLineIdea,
     FaceID,
     get_default_face_id,
-    EventID,
+    EventInt,
 )
 from pytest import raises as pytest_raises
 from dataclasses import dataclass
@@ -187,11 +187,11 @@ def test_get_default_face_id_ReturnsObj():
     assert get_default_face_id() == "Face1234"
 
 
-def test_EventID_Exists():
+def test_EventInt_Exists():
     # ESTABLISH / WHEN / THEN
-    assert EventID() == 0
-    assert EventID(12) == 12
-    assert EventID(12.4) == 12
+    assert EventInt() == 0
+    assert EventInt(12) == 12
+    assert EventInt(12.4) == 12
 
 
 def test_create_road_ReturnsObj_Scenario0():

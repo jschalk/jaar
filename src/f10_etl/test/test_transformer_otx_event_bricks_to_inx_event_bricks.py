@@ -7,12 +7,12 @@ from src.f04_gift.atom_config import (
     type_AcctID_str,
     type_IdeaUnit_str,
 )
-from src.f08_pidgin.pidgin_config import event_id_str, pidgin_filename
+from src.f08_pidgin.pidgin_config import event_int_str, pidgin_filename
 from src.f08_pidgin.pidgin import pidginunit_shop
 from src.f09_brick.pandas_tool import upsert_sheet, boat_valid_str, sheet_exists
 from src.f10_etl.transformers import (
     etl_bow_event_bricks_to_inx_events,
-    get_most_recent_event_id,
+    get_most_recent_event_int,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
@@ -21,14 +21,14 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_get_most_recent_event_id_ReturnsObj():
+def test_get_most_recent_event_int_ReturnsObj():
     # ESTABLISH
-    assert get_most_recent_event_id(set(), 5) is None
-    assert get_most_recent_event_id({7}, 5) is None
-    assert get_most_recent_event_id({2}, 5) == 2
-    assert get_most_recent_event_id({1}, 5) == 1
-    assert get_most_recent_event_id({0, 1}, 5) == 1
-    assert get_most_recent_event_id({0, 1, 7}, 5) == 1
+    assert get_most_recent_event_int(set(), 5) is None
+    assert get_most_recent_event_int({7}, 5) is None
+    assert get_most_recent_event_int({2}, 5) == 2
+    assert get_most_recent_event_int({1}, 5) == 1
+    assert get_most_recent_event_int({0, 1}, 5) == 1
+    assert get_most_recent_event_int({0, 1, 7}, 5) == 1
 
 
 def test_etl_bow_event_bricks_to_inx_events_Scenario0_NoPidginUnit():
@@ -39,7 +39,7 @@ def test_etl_bow_event_bricks_to_inx_events_Scenario0_NoPidginUnit():
     event3 = 3
     br00011_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         owner_id_str(),
         acct_id_str(),
@@ -89,7 +89,7 @@ def test_etl_bow_event_bricks_to_inx_events_Scenario1_MultpleFaceIDs_CreatesEven
     event9 = 9
     br00011_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         owner_id_str(),
         acct_id_str(),

@@ -290,7 +290,7 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
     inx_dt = DataFrame(
         columns=[
             "face_id",
-            "event_id",
+            "event_int",
             "otx_bridge",
             "inx_bridge",
             "unknown_word",
@@ -321,7 +321,7 @@ def get_casa_maison_idea_dt() -> DataFrame:
     inx_dt = DataFrame(
         columns=[
             "face_id",
-            "event_id",
+            "event_int",
             "otx_bridge",
             "inx_bridge",
             "unknown_word",
@@ -381,7 +381,7 @@ def get_slash_ideamap() -> IdeaMap:
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
         face_id="Sue",
-        event_id=7,
+        event_int=7,
     )
     x_ideamap.set_otx2inx(otx_accord45_str, inx_accord87_str)
     x_ideamap.set_otx2inx(clean_otx_str, clean_inx_str)
@@ -404,7 +404,7 @@ def get_slash_roadmap() -> RoadMap:
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
         face_id="Sue",
-        event_id=7,
+        event_int=7,
         x_ideamap=get_slash_ideamap(),
     )
     x_roadmap.set_idea(clean_otx_str, clean_inx_str)
@@ -426,7 +426,7 @@ def get_slash_groupmap() -> GroupMap:
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
         face_id="Sue",
-        event_id=7,
+        event_int=7,
     )
     x_groupmap.set_otx2inx(swim_otx, swim_inx)
     x_groupmap.set_otx2inx(climb_otx, climb_inx)
@@ -449,7 +449,7 @@ def get_slash_acctmap() -> AcctMap:
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
         face_id="Sue",
-        event_id=7,
+        event_int=7,
     )
     x_acctmap.set_otx2inx(xio_otx, xio_inx)
     x_acctmap.set_otx2inx(sue_otx, sue_inx)
@@ -467,7 +467,7 @@ def get_pidgin_core_attrs_are_none_acctmap() -> AcctMap:
     x_nan = float("nan")
     x_acctmap = acctmap_shop(
         face_id="Sue",
-        event_id=7,
+        event_int=7,
         otx_bridge=x_nan,
         inx_bridge=x_nan,
         unknown_word=x_nan,

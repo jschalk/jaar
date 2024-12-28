@@ -149,7 +149,7 @@ def save_brick_csv(x_brickname: str, x_budunit: BudUnit, x_dir: str, x_filename:
 def get_csv_brickref(title_row: list[str]) -> BrickRef:
     headers_str = create_sorted_concatenated_str(title_row)
     headers_str = headers_str.replace("face_id,", "")
-    headers_str = headers_str.replace("event_id,", "")
+    headers_str = headers_str.replace("event_int,", "")
     x_brickname = get_brick_format_headers().get(headers_str)
     return get_brickref_obj(x_brickname)
 
@@ -294,7 +294,7 @@ def _add_purviewepisode(x_dealunit: DealUnit, br00001_df: DataFrame):
     for index, row in br00001_df.query(query_str).iterrows():
         x_dealunit.add_purviewepisode(
             x_owner_id=row["owner_id"],
-            x_time_id=row["time_id"],
+            x_time_int=row["time_int"],
             x_money_magnitude=row["quota"],
             allow_prev_to_current_time_entry=True,
         )
@@ -306,6 +306,6 @@ def _add_cashpurchase(x_dealunit: DealUnit, br00002_df: DataFrame):
         x_dealunit.add_cashpurchase(
             x_owner_id=row["owner_id"],
             x_acct_id=row["acct_id"],
-            x_time_id=row["time_id"],
+            x_time_int=row["time_int"],
             x_amount=row["amount"],
         )

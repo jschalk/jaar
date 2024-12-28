@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     owner_id_str,
 )
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
+    event_int_str,
     inx_bridge_str,
     otx_bridge_str,
     inx_idea_str,
@@ -35,7 +35,7 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario0_SingleBrick(
     br00116_file_path = create_path(x_boat_dir, "br00116.xlsx")
     br00116_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         owner_id_str(),
         acct_id_str(),
@@ -60,7 +60,7 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario0_SingleBrick(
     idea_file_columns = [
         "src_brick",
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
         otx_bridge_str(),
@@ -101,7 +101,7 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBrick
     br00116_file_path = create_path(x_boat_dir, "br00116.xlsx")
     br00116_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         owner_id_str(),
         acct_id_str(),
@@ -111,7 +111,7 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBrick
     br00044_file_path = create_path(x_boat_dir, "br00044.xlsx")
     br00044_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
         otx_bridge_str(),
@@ -143,7 +143,7 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBrick
     idea_file_columns = [
         "src_brick",
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
         otx_bridge_str(),
@@ -188,7 +188,7 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario2_WorldUnit_eve
     br00116_file_path = create_path(x_boat_dir, "br00116.xlsx")
     br00116_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         owner_id_str(),
         acct_id_str(),
@@ -198,7 +198,7 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario2_WorldUnit_eve
     br00044_file_path = create_path(x_boat_dir, "br00044.xlsx")
     br00044_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
         otx_bridge_str(),
@@ -230,7 +230,7 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario2_WorldUnit_eve
     idea_file_columns = [
         "src_brick",
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
         otx_bridge_str(),

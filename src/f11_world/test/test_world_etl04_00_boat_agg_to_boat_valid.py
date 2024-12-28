@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, deal_id_str
 from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
-from src.f08_pidgin.pidgin_config import event_id_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import (
     sheet_exists,
     upsert_sheet,
@@ -31,7 +31,7 @@ def test_WorldUnit_boat_agg_to_boat_valid_CreatesSheets_Scenario0(
     hour7am = "7am"
     br00003_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         hour_idea_str(),
         cumlative_minute_str(),
@@ -89,7 +89,7 @@ def test_WorldUnit_boat_agg_to_boat_valid_CreatesSheets_Scenario0(
 #     boat_file_path = create_path(boat_dir, "br00003.xlsx")
 #     brick_columns = [
 #         face_id_str(),
-#         event_id_str(),
+#         event_int_str(),
 #         deal_id_str(),
 #         hour_idea_str(),
 #         cumlative_minute_str(),
@@ -111,10 +111,10 @@ def test_WorldUnit_boat_agg_to_boat_valid_CreatesSheets_Scenario0(
 #     # THEN
 #     gen_otx_events_df = pandas_read_excel(boat_file_path, sheet_name="boat_valid")
 #     print(f"{gen_otx_events_df.columns=}")
-#     events_otx_columns = [face_id_str(), event_id_str(), "note"]
+#     events_otx_columns = [face_id_str(), event_int_str(), "note"]
 #     bob_row = [bob_str, event3, ""]
-#     sue_row = [sue_str, event1, "invalid because of conflicting event_id"]
-#     yao1_row = [yao_str, event1, "invalid because of conflicting event_id"]
+#     sue_row = [sue_str, event1, "invalid because of conflicting event_int"]
+#     yao1_row = [yao_str, event1, "invalid because of conflicting event_int"]
 #     yao9_row = [yao_str, event9, ""]
 #     events_rows = [bob_row, sue_row, yao1_row, yao9_row]
 #     ex_otx_events_df = DataFrame(events_rows, columns=events_otx_columns)

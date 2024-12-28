@@ -82,7 +82,7 @@ def get_default_face_id() -> FaceID:
     return FaceID("Face1234")
 
 
-class EventID(int):
+class EventInt(int):
     pass
 
 

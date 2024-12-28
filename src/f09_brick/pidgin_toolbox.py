@@ -15,7 +15,7 @@ from os.path import exists as os_path_exists
 def get_map_acct_dt_columns() -> list[str]:
     return [
         "face_id",
-        "event_id",
+        "event_int",
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
@@ -27,7 +27,7 @@ def get_map_acct_dt_columns() -> list[str]:
 def get_map_group_dt_columns() -> list[str]:
     return [
         "face_id",
-        "event_id",
+        "event_int",
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
@@ -39,7 +39,7 @@ def get_map_group_dt_columns() -> list[str]:
 def get_map_idea_dt_columns() -> list[str]:
     return [
         "face_id",
-        "event_id",
+        "event_int",
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
@@ -51,7 +51,7 @@ def get_map_idea_dt_columns() -> list[str]:
 def get_map_road_dt_columns() -> list[str]:
     return [
         "face_id",
-        "event_id",
+        "event_int",
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
@@ -63,7 +63,7 @@ def get_map_road_dt_columns() -> list[str]:
 def create_map_acct_dt(x_map: AcctMap) -> DataFrame:
     x_rows_list = [
         {
-            "event_id": x_map.event_id,
+            "event_int": x_map.event_int,
             "face_id": x_map.face_id,
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
@@ -79,7 +79,7 @@ def create_map_acct_dt(x_map: AcctMap) -> DataFrame:
 def create_map_group_dt(x_map: GroupMap) -> DataFrame:
     x_rows_list = [
         {
-            "event_id": x_map.event_id,
+            "event_int": x_map.event_int,
             "face_id": x_map.face_id,
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
@@ -95,7 +95,7 @@ def create_map_group_dt(x_map: GroupMap) -> DataFrame:
 def create_map_idea_dt(x_map: IdeaMap) -> DataFrame:
     x_rows_list = [
         {
-            "event_id": x_map.event_id,
+            "event_int": x_map.event_int,
             "face_id": x_map.face_id,
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
@@ -111,7 +111,7 @@ def create_map_idea_dt(x_map: IdeaMap) -> DataFrame:
 def create_map_road_dt(x_map: RoadMap) -> DataFrame:
     x_rows_list = [
         {
-            "event_id": x_map.event_id,
+            "event_int": x_map.event_int,
             "face_id": x_map.face_id,
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
@@ -201,22 +201,22 @@ def _load_roadmap_from_csv(x_dir, x_roadmap: RoadMap) -> RoadMap:
 
 def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
     face_id_set = set()
-    event_id_set = set()
+    event_int_set = set()
     unknown_word_set = set()
     otx_bridge_set = set()
     inx_bridge_set = set()
     for x_filename in get_dir_file_strs(x_dir).keys():
         x_dt = open_csv(x_dir, x_filename)
         face_id_set.update(x_dt.face_id.unique())
-        event_id_set.update(x_dt.event_id.unique())
+        event_int_set.update(x_dt.event_int.unique())
         unknown_word_set.update(x_dt.unknown_word.unique())
         otx_bridge_set.update(x_dt.otx_bridge.unique())
         inx_bridge_set.update(x_dt.inx_bridge.unique())
 
     if len(face_id_set) == 1:
         face_id = face_id_set.pop()
-    if len(event_id_set) == 1:
-        event_id = event_id_set.pop()
+    if len(event_int_set) == 1:
+        event_int = event_int_set.pop()
     if len(unknown_word_set) == 1:
         unknown_word = unknown_word_set.pop()
     if len(otx_bridge_set) == 1:
@@ -226,7 +226,7 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
 
     return pidginunit_shop(
         face_id=face_id,
-        event_id=event_id,
+        event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         unknown_word=unknown_word,

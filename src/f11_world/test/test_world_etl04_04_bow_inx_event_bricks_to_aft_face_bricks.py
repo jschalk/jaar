@@ -5,7 +5,7 @@ from src.f04_gift.atom_config import (
     deal_id_str,
     owner_id_str,
 )
-from src.f08_pidgin.pidgin_config import event_id_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -24,7 +24,7 @@ def test_bow_inx_event_bricks_to_aft_faces_Scenario0(env_dir_setup_cleanup):
     event3 = 3
     br00011_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         owner_id_str(),
         acct_id_str(),
@@ -67,7 +67,7 @@ def test_bow_inx_event_bricks_to_aft_faces_Scenario1(env_dir_setup_cleanup):
     event7 = 7
     br00011_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         owner_id_str(),
         acct_id_str(),

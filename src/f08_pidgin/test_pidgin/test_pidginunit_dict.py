@@ -2,7 +2,7 @@ from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.road import default_bridge_if_None
 from src.f04_gift.atom_config import face_id_str
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
+    event_int_str,
     otx_bridge_str,
     inx_bridge_str,
     unknown_word_str,
@@ -35,7 +35,7 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     # THEN
     assert sue_dict
     assert sue_dict.get(face_id_str()) == sue_str
-    assert sue_dict.get(event_id_str()) == sue_pidginunit.event_id
+    assert sue_dict.get(event_int_str()) == sue_pidginunit.event_int
     assert sue_dict.get(otx_bridge_str()) == default_bridge_if_None()
     assert sue_dict.get(inx_bridge_str()) == default_bridge_if_None()
     assert sue_dict.get(unknown_word_str()) == default_unknown_word_if_None()
@@ -87,20 +87,20 @@ def test_PidginUnit_get_json_ReturnsObj():
 
     # THEN
     print(f"{sue_json=}")
-    assert sue_json.find("ideamap") == 481
-    assert sue_json.find(otx_bridge_str()) == 177
+    assert sue_json.find("ideamap") == 484
+    assert sue_json.find(otx_bridge_str()) == 178
 
 
 def test_get_pidginunit_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    sue_event_id = 77
+    sue_event_int = 77
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
     sue_pidginunit = pidginunit_shop(
         sue_str,
-        sue_event_id,
+        sue_event_int,
         slash_otx_bridge,
         colon_inx_bridge,
         x_unknown_word,
@@ -116,7 +116,7 @@ def test_get_pidginunit_from_dict_ReturnsObj():
     # THEN
     assert gen_pidginunit
     assert gen_pidginunit.face_id == sue_str
-    assert gen_pidginunit.event_id == sue_event_id
+    assert gen_pidginunit.event_int == sue_event_int
     assert gen_pidginunit.otx_bridge == slash_otx_bridge
     assert gen_pidginunit.inx_bridge == colon_inx_bridge
     assert gen_pidginunit.unknown_word == x_unknown_word
@@ -128,13 +128,13 @@ def test_get_pidginunit_from_dict_ReturnsObj():
 def test_get_pidginunit_from_json_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    sue_event_id = 77
+    sue_event_int = 77
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
     sue_pidginunit = pidginunit_shop(
         sue_str,
-        sue_event_id,
+        sue_event_int,
         slash_otx_bridge,
         colon_inx_bridge,
         x_unknown_word,
@@ -149,7 +149,7 @@ def test_get_pidginunit_from_json_ReturnsObj():
     # THEN
     assert gen_pidginunit
     assert gen_pidginunit.face_id == sue_str
-    assert gen_pidginunit.event_id == sue_event_id
+    assert gen_pidginunit.event_int == sue_event_int
     assert gen_pidginunit.otx_bridge == slash_otx_bridge
     assert gen_pidginunit.inx_bridge == colon_inx_bridge
     assert gen_pidginunit.unknown_word == x_unknown_word

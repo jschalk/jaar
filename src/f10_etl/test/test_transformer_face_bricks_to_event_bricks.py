@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, deal_id_str
 from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
-from src.f08_pidgin.pidgin_config import event_id_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import upsert_sheet, boat_valid_str, sheet_exists
 from src.f10_etl.transformers import etl_bow_face_bricks_to_bow_event_otx_bricks
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -26,7 +26,7 @@ def test_etl_bow_face_bricks_to_bow_event_otx_bricks_CreatesFaceBrickSheets_Scen
     hour7am = "7am"
     brick_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         hour_idea_str(),
         cumlative_minute_str(),

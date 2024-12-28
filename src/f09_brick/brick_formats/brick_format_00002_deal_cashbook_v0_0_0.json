@@ -6,7 +6,7 @@
         "amount": {
             "otx_key": false
         },
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
         "face_id": {
@@ -18,7 +18,7 @@
         "owner_id": {
             "otx_key": true
         },
-        "time_id": {
+        "time_int": {
             "otx_key": true
         }
     },

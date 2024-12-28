@@ -9,7 +9,7 @@
         "debtit_belief": {
             "otx_key": false
         },
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
         "face_id": {

@@ -5,7 +5,7 @@ from src.f04_gift.atom_config import (
     deal_id_str,
     owner_id_str,
 )
-from src.f08_pidgin.pidgin_config import event_id_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
 from src.f10_etl.transformers import (
     etl_bow_inx_event_bricks_to_aft_faces,
@@ -26,7 +26,7 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario0():
     event3 = 3
     br00011_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         owner_id_str(),
         acct_id_str(),
@@ -79,7 +79,7 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario0():
 #     event9 = 9
 #     br00011_columns = [
 #         face_id_str(),
-#         event_id_str(),
+#         event_int_str(),
 #         deal_id_str(),
 #         owner_id_str(),
 #         acct_id_str(),

@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str, deal_id_str
 from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
-from src.f08_pidgin.pidgin_config import event_id_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, boat_staging_str
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -25,7 +25,7 @@ def test_WorldUnit_ocean_to_boat_staging_CreatesboatFiles(env_dir_setup_cleanup)
     boat_file_path = create_path(fizz_world._boat_dir, "br00003.xlsx")
     brick_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         cumlative_minute_str(),
         deal_id_str(),
         hour_idea_str(),
@@ -36,7 +36,7 @@ def test_WorldUnit_ocean_to_boat_staging_CreatesboatFiles(env_dir_setup_cleanup)
     row3 = [sue_str, event_2, minute_420, accord23_str, hour7am]
     incomplete_brick_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         cumlative_minute_str(),
         deal_id_str(),
     ]

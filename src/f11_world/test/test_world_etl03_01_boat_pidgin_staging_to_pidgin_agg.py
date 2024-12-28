@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
+    event_int_str,
     inx_bridge_str,
     otx_bridge_str,
     inx_acct_id_str,
@@ -38,7 +38,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     acct_file_columns = [
         "src_brick",
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
         otx_bridge_str(),
@@ -61,7 +61,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     group_file_columns = [
         "src_brick",
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
         otx_bridge_str(),
@@ -84,7 +84,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     road_file_columns = [
         "src_brick",
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
         otx_bridge_str(),
@@ -107,7 +107,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     idea_file_columns = [
         "src_brick",
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
         otx_bridge_str(),
@@ -151,7 +151,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
 
     acct_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
         otx_bridge_str(),
@@ -168,7 +168,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
 
     group_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
         otx_bridge_str(),
@@ -184,7 +184,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
 
     road_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
         otx_bridge_str(),
@@ -200,7 +200,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
 
     idea_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
         otx_bridge_str(),

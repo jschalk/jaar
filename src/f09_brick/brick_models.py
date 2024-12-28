@@ -10,7 +10,7 @@ class Base(DeclarativeBase):
 class br00000AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     c400_number = Column(Integer)
     current_time = Column(Integer)
     deal_id = Column(String)
@@ -26,29 +26,29 @@ class br00000AbstractTable(Base):
 class br00001AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     acct_id = Column(String)
     deal_id = Column(String)
     owner_id = Column(String)
     quota = Column(Float)
-    time_id = Column(Integer)
+    time_int = Column(Integer)
 
 
 class br00002AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     acct_id = Column(String)
     amount = Column(Float)
     deal_id = Column(String)
     owner_id = Column(String)
-    time_id = Column(Integer)
+    time_int = Column(Integer)
 
 
 class br00003AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     cumlative_minute = Column(Integer)
     deal_id = Column(String)
     hour_idea = Column(String)
@@ -57,7 +57,7 @@ class br00003AbstractTable(Base):
 class br00004AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     cumlative_day = Column(Integer)
     deal_id = Column(String)
     month_idea = Column(String)
@@ -66,7 +66,7 @@ class br00004AbstractTable(Base):
 class br00005AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     weekday_order = Column(Integer)
     deal_id = Column(String)
     weekday_idea = Column(String)
@@ -75,7 +75,7 @@ class br00005AbstractTable(Base):
 class br00011AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     acct_id = Column(String)
     deal_id = Column(String)
     owner_id = Column(String)
@@ -84,7 +84,7 @@ class br00011AbstractTable(Base):
 class br00012AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     acct_id = Column(String)
     group_id = Column(String)
     deal_id = Column(String)
@@ -94,7 +94,7 @@ class br00012AbstractTable(Base):
 class br00013AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     deal_id = Column(String)
     lx = Column(String)
     mass = Column(Float)
@@ -106,7 +106,7 @@ class br00013AbstractTable(Base):
 class br00019AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     addin = Column(Float)
     begin = Column(Float)
     close = Column(Float)
@@ -124,7 +124,7 @@ class br00019AbstractTable(Base):
 class br00020AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     acct_id = Column(String)
     credit_vote = Column(Float)
     debtit_vote = Column(Float)
@@ -136,7 +136,7 @@ class br00020AbstractTable(Base):
 class br00021AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     acct_id = Column(String)
     credit_belief = Column(Float)
     debtit_belief = Column(Float)
@@ -147,7 +147,7 @@ class br00021AbstractTable(Base):
 class br00022AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     awardee_id = Column(String)
     deal_id = Column(String)
     give_force = Column(Float)
@@ -159,7 +159,7 @@ class br00022AbstractTable(Base):
 class br00023AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     base = Column(String)
     deal_id = Column(String)
     fopen = Column(Float)
@@ -172,7 +172,7 @@ class br00023AbstractTable(Base):
 class br00024AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     deal_id = Column(String)
     owner_id = Column(String)
     road = Column(String)
@@ -182,7 +182,7 @@ class br00024AbstractTable(Base):
 class br00025AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     deal_id = Column(String)
     owner_id = Column(String)
     road = Column(String)
@@ -192,7 +192,7 @@ class br00025AbstractTable(Base):
 class br00026AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     base = Column(String)
     divisor = Column(Float)
     deal_id = Column(String)
@@ -206,7 +206,7 @@ class br00026AbstractTable(Base):
 class br00027AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     base = Column(String)
     base_item_active_requisite = Column(String)
     deal_id = Column(String)
@@ -217,7 +217,7 @@ class br00027AbstractTable(Base):
 class br00028AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     addin = Column(Float)
     begin = Column(Float)
     close = Column(Float)
@@ -238,7 +238,7 @@ class br00028AbstractTable(Base):
 class br00029AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     credor_respect = Column(Float)
     debtor_respect = Column(Float)
     deal_id = Column(String)
@@ -247,7 +247,7 @@ class br00029AbstractTable(Base):
     max_tree_traverse = Column(Integer)
     owner_id = Column(String)
     penny = Column(Float)
-    purview_time_id = Column(Integer)
+    purview_time_int = Column(Integer)
     respect_bit = Column(Float)
     tally = Column(Float)
 
@@ -255,7 +255,7 @@ class br00029AbstractTable(Base):
 class br00036AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     deal_id = Column(String)
     healer_id = Column(String)
     lx = Column(String)
@@ -267,7 +267,7 @@ class br00036AbstractTable(Base):
 class br00042AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     inx_group_id = Column(String)
     inx_bridge = Column(String)
     otx_group_id = Column(String)
@@ -278,7 +278,7 @@ class br00042AbstractTable(Base):
 class br00043AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     inx_acct_id = Column(String)
     inx_bridge = Column(String)
     otx_acct_id = Column(String)
@@ -289,7 +289,7 @@ class br00043AbstractTable(Base):
 class br00044AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     inx_idea = Column(String)
     inx_bridge = Column(String)
     otx_idea = Column(String)
@@ -300,7 +300,7 @@ class br00044AbstractTable(Base):
 class br00045AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     inx_road = Column(String)
     inx_bridge = Column(String)
     otx_road = Column(String)
@@ -311,7 +311,7 @@ class br00045AbstractTable(Base):
 class br00113AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     acct_id = Column(String)
     deal_id = Column(String)
     inx_acct_id = Column(String)
@@ -322,7 +322,7 @@ class br00113AbstractTable(Base):
 class br00115AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     acct_id = Column(String)
     deal_id = Column(String)
     inx_group_id = Column(String)
@@ -333,7 +333,7 @@ class br00115AbstractTable(Base):
 class br00116AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     acct_id = Column(String)
     deal_id = Column(String)
     inx_idea = Column(String)
@@ -344,7 +344,7 @@ class br00116AbstractTable(Base):
 class br00117AbstractTable(Base):
     __abstract__ = True
     face_id = Column(String, primary_key=True)
-    event_id = Column(Integer, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
     acct_id = Column(String)
     deal_id = Column(String)
     inx_road = Column(String)

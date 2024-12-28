@@ -31,8 +31,8 @@ def pidgin_filename() -> str:
     return "pidgin.json"
 
 
-def event_id_str() -> str:
-    return "event_id"
+def event_int_str() -> str:
+    return "event_int"
 
 
 def otx_bridge_str() -> str:
@@ -182,7 +182,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "pick": "RoadUnit",
         "pledge": "bool",
         "problem_bool": "bool",
-        "purview_time_id": "TimeLinePoint",
+        "purview_time_int": "TimeLinePoint",
         "quota": "int",
         "respect_bit": "float",
         "road": "RoadUnit",
@@ -190,7 +190,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "take_force": "float",
         "tally": "int",
         "team_id": "GroupID",
-        "time_id": "TimeLinePoint",
+        "time_int": "TimeLinePoint",
         "timeline_idea": "IdeaUnit",
         "weekday_idea": "IdeaUnit",
         "weekday_order": "int",

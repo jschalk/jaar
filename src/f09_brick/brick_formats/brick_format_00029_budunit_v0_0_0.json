@@ -6,7 +6,7 @@
         "debtor_respect": {
             "otx_key": false
         },
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
         "face_id": {
@@ -30,7 +30,7 @@
         "penny": {
             "otx_key": false
         },
-        "purview_time_id": {
+        "purview_time_int": {
             "otx_key": false
         },
         "respect_bit": {

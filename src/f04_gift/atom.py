@@ -201,9 +201,9 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
     x_arg = "respect_bit"
     if x_atom.get_value(x_arg) is not None:
         x_bud.respect_bit = x_atom.get_value(x_arg)
-    x_arg = "purview_time_id"
+    x_arg = "purview_time_int"
     if x_atom.get_value(x_arg) is not None:
-        x_bud.purview_time_id = x_atom.get_value(x_arg)
+        x_bud.purview_time_int = x_atom.get_value(x_arg)
     x_arg = "penny"
     if x_atom.get_value(x_arg) is not None:
         x_bud.penny = x_atom.get_value(x_arg)
@@ -648,7 +648,7 @@ class AtomRow:
     pick: RoadUnit = None
     pledge: bool = None
     problem_bool: bool = None
-    purview_time_id: TimeLinePoint = None
+    purview_time_int: TimeLinePoint = None
     road: RoadUnit = None
     stop_want: float = None
     take_force: float = None

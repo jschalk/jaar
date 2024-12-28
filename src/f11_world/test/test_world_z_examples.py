@@ -14,7 +14,7 @@ def test_ocean_to_boat_staging_PidginsAll(env_dir_setup_cleanup):
     ex_file_path = create_path(x_dir, ex_file_name)
     accord_str = "accord23"
     sue_str = "Sue"
-    event_id = 55
+    event_int = 55
     df1 = DataFrame([[accord_str, sue_str]], columns=[deal_id_str(), acct_id_str()])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     br00000_str = "br00000"

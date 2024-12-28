@@ -134,7 +134,7 @@ def get_deal_args_jaar_types() -> dict[str, str]:
         "owner_id": "AcctID",
         "quota": "int",
         "respect_bit": "float",
-        "time_id": "TimeLinePoint",
+        "time_int": "TimeLinePoint",
         "timeline_idea": "IdeaUnit",
         "weekday_idea": "IdeaUnit",
         "weekday_order": "int",

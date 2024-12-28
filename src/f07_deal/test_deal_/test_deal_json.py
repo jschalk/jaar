@@ -22,16 +22,16 @@ def test_DealUnit_get_dict_ReturnsObj():
     accord_str = "accord"
     accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
     bob_str = "Bob"
-    bob_x0_time_id = 702
+    bob_x0_time_int = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_id = 4
+    sue_x4_time_int = 4
     sue_x4_magnitude = 55
-    sue_x7_time_id = 7
+    sue_x7_time_int = 7
     sue_x7_magnitude = 66
-    accord_deal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
-    accord_deal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
-    accord_deal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+    accord_deal.add_purviewepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
 
     # WHEN
     x_dict = accord_deal.get_dict()
@@ -63,16 +63,16 @@ def test_DealUnit_get_json_ReturnsObj():
     accord_str = "accord"
     accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
     bob_str = "Bob"
-    bob_x0_time_id = 702
+    bob_x0_time_int = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_id = 4
+    sue_x4_time_int = 4
     sue_x4_magnitude = 55
-    sue_x7_time_id = 7
+    sue_x7_time_int = 7
     sue_x7_magnitude = 66
-    accord_deal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
-    accord_deal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
-    accord_deal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+    accord_deal.add_purviewepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
 
     # WHEN
     x_json = accord_deal.get_json()
@@ -95,16 +95,16 @@ def test_get_from_dict_ReturnsDealUnit():
     sue_respect_bit = 0.5
     sue_penny = 0.8
     bob_str = "Bob"
-    bob_x0_time_id = 702
+    bob_x0_time_int = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_id = 4
+    sue_x4_time_int = 4
     sue_x4_magnitude = 55
-    sue_x7_time_id = 7
+    sue_x7_time_int = 7
     sue_x7_magnitude = 66
-    accord_deal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
-    accord_deal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
-    accord_deal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+    accord_deal.add_purviewepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
     accord_deal.current_time = sue_current_time
     accord_deal.bridge = sue_bridge
     accord_deal.fund_coin = sue_fund_coin
@@ -140,16 +140,16 @@ def test_get_from_json_ReturnsDealUnit():
     sue_respect_bit = 0.5
     sue_penny = 0.8
     bob_str = "Bob"
-    bob_x0_time_id = 702
+    bob_x0_time_int = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_id = 4
+    sue_x4_time_int = 4
     sue_x4_magnitude = 55
-    sue_x7_time_id = 7
+    sue_x7_time_int = 7
     sue_x7_magnitude = 66
-    accord_deal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
-    accord_deal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
-    accord_deal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+    accord_deal.add_purviewepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
     accord_deal.current_time = sue_current_time
     accord_deal.bridge = sue_bridge
     accord_deal.fund_coin = sue_fund_coin

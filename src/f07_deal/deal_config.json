@@ -10,7 +10,7 @@
             "owner_id": {
                 "jaar_type": "AcctID"
             },
-            "time_id": {
+            "time_int": {
                 "jaar_type": "TimeLinePoint"
             }
         },
@@ -31,7 +31,7 @@
             "owner_id": {
                 "jaar_type": "AcctID"
             },
-            "time_id": {
+            "time_int": {
                 "jaar_type": "TimeLinePoint"
             }
         },

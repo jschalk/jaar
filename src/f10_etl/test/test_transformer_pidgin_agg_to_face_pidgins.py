@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_id_str
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
+    event_int_str,
     inx_bridge_str,
     otx_bridge_str,
     inx_acct_id_str,
@@ -37,7 +37,7 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_ids(
 
     acct_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
         otx_bridge_str(),
@@ -96,7 +96,7 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
 
     acct_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_acct_id_str(),
         inx_acct_id_str(),
         otx_bridge_str(),
@@ -117,7 +117,7 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     group_agg_str = "group_agg"
     group_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
         otx_bridge_str(),
@@ -137,7 +137,7 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     road_agg_str = "road_agg"
     road_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
         otx_bridge_str(),
@@ -157,7 +157,7 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     idea_agg_str = "idea_agg"
     idea_file_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
         otx_bridge_str(),

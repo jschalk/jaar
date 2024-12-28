@@ -6,7 +6,7 @@ from src.f07_deal.deal_config import (
     weekday_idea_str,
     weekday_order_str,
 )
-from src.f08_pidgin.pidgin_config import event_id_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -34,7 +34,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
     brick_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         hour_idea_str(),
         cumlative_minute_str(),
@@ -67,11 +67,11 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
         "file_name",
         "sheet_name",
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         "note",
     ]
-    invalid_error_str = "invalid because of conflicting event_id"
-    invalid_error_str = "invalid because of conflicting event_id"
+    invalid_error_str = "invalid because of conflicting event_int"
+    invalid_error_str = "invalid because of conflicting event_int"
     boat_dir = fizz_world._boat_dir
     src_file_name = "br00003.xlsx"
     oe_str = "boat_events"
@@ -113,13 +113,13 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
     brick3_columns = [
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         deal_id_str(),
         hour_idea_str(),
         cumlative_minute_str(),
     ]
     brick5_columns = [
-        event_id_str(),
+        event_int_str(),
         face_id_str(),
         deal_id_str(),
         weekday_idea_str(),
@@ -157,11 +157,11 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
         "file_name",
         "sheet_name",
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         "note",
     ]
-    invalid_error_str = "invalid because of conflicting event_id"
-    invalid_error_str = "invalid because of conflicting event_id"
+    invalid_error_str = "invalid because of conflicting event_int"
+    invalid_error_str = "invalid because of conflicting event_int"
     boat_dir = fizz_world._boat_dir
     src3_file_name = "br00003.xlsx"
     src5_file_name = "br00005.xlsx"

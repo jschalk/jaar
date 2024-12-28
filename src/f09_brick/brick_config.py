@@ -315,8 +315,8 @@ def get_brick_format_filename(brick_number: str) -> str:
 def get_brick_format_headers() -> dict[str, list[str]]:
     return {
         "bridge,c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,timeline_idea,yr1_jan1_offset": brick_format_00000_dealunit_v0_0_0(),
-        "acct_id,deal_id,owner_id,quota,time_id": brick_format_00001_deal_purview_episode_v0_0_0(),
-        "acct_id,amount,deal_id,owner_id,time_id": brick_format_00002_deal_cashbook_v0_0_0(),
+        "acct_id,deal_id,owner_id,quota,time_int": brick_format_00001_deal_purview_episode_v0_0_0(),
+        "acct_id,amount,deal_id,owner_id,time_int": brick_format_00002_deal_cashbook_v0_0_0(),
         "cumlative_minute,deal_id,hour_idea": brick_format_00003_deal_timeline_hour_v0_0_0(),
         "cumlative_day,deal_id,month_idea": brick_format_00004_deal_timeline_month_v0_0_0(),
         "deal_id,weekday_idea,weekday_order": brick_format_00005_deal_timeline_weekday_v0_0_0(),
@@ -333,7 +333,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "base,deal_id,divisor,need,nigh,open,owner_id,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
         "base,base_item_active_requisite,deal_id,owner_id,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),
         "addin,begin,close,deal_id,denom,gogo_want,lx,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
-        "credor_respect,deal_id,debtor_respect,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,purview_time_id,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
+        "credor_respect,deal_id,debtor_respect,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,purview_time_int,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
         "deal_id,healer_id,lx,owner_id,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
         "inx_bridge,inx_group_id,otx_bridge,otx_group_id,unknown_word": brick_format_00042_map_group_id_v0_0_0(),
         "inx_acct_id,inx_bridge,otx_acct_id,otx_bridge,unknown_word": brick_format_00043_map_acct_id_v0_0_0(),
@@ -364,7 +364,7 @@ def get_quick_bricks_column_ref() -> dict[str, set[str]]:
 def get_brick_elements_sort_order() -> list[str]:
     return [
         "face_id",
-        "event_id",
+        "event_int",
         "deal_id",
         "owner_id",
         "acct_id",
@@ -378,7 +378,7 @@ def get_brick_elements_sort_order() -> list[str]:
         "team_id",
         "awardee_id",
         "healer_id",
-        "time_id",
+        "time_int",
         "begin",
         "close",
         "addin",
@@ -405,7 +405,7 @@ def get_brick_elements_sort_order() -> list[str]:
         "divisor",
         "pledge",
         "problem_bool",
-        "purview_time_id",
+        "purview_time_int",
         "take_force",
         "tally",
         "fund_coin",
@@ -442,7 +442,7 @@ def get_brick_elements_sort_order() -> list[str]:
 def get_brick_sqlite_type() -> dict[str, str]:
     return {
         "face_id": "TEXT",
-        "event_id": "INTEGER",
+        "event_int": "INTEGER",
         "deal_id": "TEXT",
         "owner_id": "TEXT",
         "acct_id": "TEXT",
@@ -456,7 +456,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "team_id": "TEXT",
         "awardee_id": "TEXT",
         "healer_id": "TEXT",
-        "time_id": "INTEGER",
+        "time_int": "INTEGER",
         "begin": "REAL",
         "close": "REAL",
         "addin": "REAL",
@@ -483,7 +483,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "divisor": "REAL",
         "pledge": "INTEGER",
         "problem_bool": "INTEGER",
-        "purview_time_id": "INTEGER",
+        "purview_time_int": "INTEGER",
         "take_force": "REAL",
         "tally": "REAL",
         "fund_coin": "REAL",

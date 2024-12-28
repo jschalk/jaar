@@ -270,17 +270,17 @@ class DealUnit:
     def add_purviewepisode(
         self,
         x_owner_id: OwnerID,
-        x_time_id: TimeLinePoint,
+        x_time_int: TimeLinePoint,
         x_money_magnitude: int,
         allow_prev_to_current_time_entry: bool = False,
     ):
-        if x_time_id < self.current_time and allow_prev_to_current_time_entry is False:
-            exception_str = f"Cannot set purviewepisode because time_id {x_time_id} is less than DealUnit.current_time {self.current_time}."
+        if x_time_int < self.current_time and allow_prev_to_current_time_entry is False:
+            exception_str = f"Cannot set purviewepisode because time_int {x_time_int} is less than DealUnit.current_time {self.current_time}."
             raise purviewepisode_Exception(exception_str)
         if self.purviewlog_exists(x_owner_id) is False:
             self.set_purviewlog(purviewlog_shop(x_owner_id))
         x_purviewlog = self.get_purviewlog(x_owner_id)
-        x_purviewlog.add_episode(x_time_id, x_money_magnitude)
+        x_purviewlog.add_episode(x_time_int, x_money_magnitude)
 
     def get_dict(self) -> dict:
         return {
@@ -303,16 +303,16 @@ class DealUnit:
             for x_episode in self.purviewlogs.values()
         }
 
-    def get_purviewlogs_time_ids(self) -> set[TimeLinePoint]:
-        all_purviewepisode_time_ids = set()
+    def get_purviewlogs_time_ints(self) -> set[TimeLinePoint]:
+        all_purviewepisode_time_ints = set()
         for x_purviewlog in self.purviewlogs.values():
-            all_purviewepisode_time_ids.update(x_purviewlog.get_time_ids())
-        return all_purviewepisode_time_ids
+            all_purviewepisode_time_ints.update(x_purviewlog.get_time_ints())
+        return all_purviewepisode_time_ints
 
     def set_cashpurchase(self, x_cashpurchase: TranUnit):
         self.cashbook.set_tranunit(
             x_tranunit=x_cashpurchase,
-            x_blocked_time_ids=self.get_purviewlogs_time_ids(),
+            x_blocked_time_ints=self.get_purviewlogs_time_ints(),
             x_current_time=self.current_time,
         )
 
@@ -320,37 +320,37 @@ class DealUnit:
         self,
         x_owner_id: OwnerID,
         x_acct_id: AcctID,
-        x_time_id: TimeLinePoint,
+        x_time_int: TimeLinePoint,
         x_amount: FundNum,
-        x_blocked_time_ids: set[TimeLinePoint] = None,
+        x_blocked_time_ints: set[TimeLinePoint] = None,
         x_current_time: TimeLinePoint = None,
     ):
         self.cashbook.add_tranunit(
             x_owner_id=x_owner_id,
             x_acct_id=x_acct_id,
-            x_time_id=x_time_id,
+            x_time_int=x_time_int,
             x_amount=x_amount,
-            x_blocked_time_ids=x_blocked_time_ids,
+            x_blocked_time_ints=x_blocked_time_ints,
             x_current_time=x_current_time,
         )
 
     def cashpurchase_exists(
-        self, src: AcctID, dst: AcctID, x_time_id: TimeLinePoint
+        self, src: AcctID, dst: AcctID, x_time_int: TimeLinePoint
     ) -> bool:
-        return self.cashbook.tranunit_exists(src, dst, x_time_id)
+        return self.cashbook.tranunit_exists(src, dst, x_time_int)
 
     def get_cashpurchase(
-        self, src: AcctID, dst: AcctID, x_time_id: TimeLinePoint
+        self, src: AcctID, dst: AcctID, x_time_int: TimeLinePoint
     ) -> TranUnit:
-        return self.cashbook.get_tranunit(src, dst, x_time_id)
+        return self.cashbook.get_tranunit(src, dst, x_time_int)
 
-    def del_cashpurchase(self, src: AcctID, dst: AcctID, x_time_id: TimeLinePoint):
-        return self.cashbook.del_tranunit(src, dst, x_time_id)
+    def del_cashpurchase(self, src: AcctID, dst: AcctID, x_time_int: TimeLinePoint):
+        return self.cashbook.del_tranunit(src, dst, x_time_int)
 
     def set_current_time(self, x_current_time: TimeLinePoint):
-        x_time_ids = self.cashbook.get_time_ids()
-        if x_time_ids != set() and max(x_time_ids) >= x_current_time:
-            exception_str = f"Cannot set current_time {x_current_time}, cashpurchase with greater time_id exists"
+        x_time_ints = self.cashbook.get_time_ints()
+        if x_time_ints != set() and max(x_time_ints) >= x_current_time:
+            exception_str = f"Cannot set current_time {x_current_time}, cashpurchase with greater time_int exists"
             raise set_current_time_Exception(exception_str)
         self.current_time = x_current_time
 
@@ -358,9 +358,9 @@ class DealUnit:
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
         x_tranbook = tranbook_shop(self.deal_id, x_tranunits)
         for owner_id, x_purviewlog in self.purviewlogs.items():
-            for x_time_id, x_purviewepisode in x_purviewlog.episodes.items():
+            for x_time_int, x_purviewepisode in x_purviewlog.episodes.items():
                 for acct_id, x_amount in x_purviewepisode._net_purviews.items():
-                    x_tranbook.add_tranunit(owner_id, acct_id, x_time_id, x_amount)
+                    x_tranbook.add_tranunit(owner_id, acct_id, x_time_int, x_amount)
         self._all_tranbook = x_tranbook
 
     # TODO evaluate if this should be used

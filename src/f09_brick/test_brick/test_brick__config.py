@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_json_from_dict
 from src.f00_instrument.file import save_file, create_path
-from src.f01_road.finance_tran import quota_str, time_id_str, bridge_str
+from src.f01_road.finance_tran import quota_str, time_int_str, bridge_str
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
     bud_acctunit_str,
@@ -89,7 +89,7 @@ from src.f07_deal.deal_config import (
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
+    event_int_str,
     pidginunit_str,
     otx_bridge_str,
     inx_bridge_str,
@@ -170,7 +170,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
 
     # THEN
     assert table_sorting_priority[0] == face_id_str()
-    assert table_sorting_priority[1] == event_id_str()
+    assert table_sorting_priority[1] == event_int_str()
     assert table_sorting_priority[2] == deal_id_str()
     assert table_sorting_priority[3] == owner_id_str()
     assert table_sorting_priority[4] == acct_id_str()
@@ -184,7 +184,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[12] == team_id_str()
     assert table_sorting_priority[13] == awardee_id_str()
     assert table_sorting_priority[14] == healer_id_str()
-    assert table_sorting_priority[15] == time_id_str()
+    assert table_sorting_priority[15] == time_int_str()
     assert table_sorting_priority[16] == begin_str()
     assert table_sorting_priority[17] == close_str()
     assert table_sorting_priority[18] == addin_str()
@@ -211,7 +211,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[39] == "divisor"
     assert table_sorting_priority[40] == pledge_str()
     assert table_sorting_priority[41] == "problem_bool"
-    assert table_sorting_priority[42] == "purview_time_id"
+    assert table_sorting_priority[42] == "purview_time_int"
     assert table_sorting_priority[43] == take_force_str()
     assert table_sorting_priority[44] == "tally"
     assert table_sorting_priority[45] == fund_coin_str()
@@ -254,7 +254,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     atom_deal_pidgin_args = atom_args
     atom_deal_pidgin_args.update(deal_args)
     atom_deal_pidgin_args.update(pidgin_args)
-    table_sorting_priority.remove(event_id_str())
+    table_sorting_priority.remove(event_int_str())
     table_sorting_priority.remove(face_id_str())
     assert atom_deal_pidgin_args == set(table_sorting_priority)
 
@@ -266,7 +266,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     # THEN
     assert set(sqlite_types.keys()) == set(get_brick_elements_sort_order())
     assert sqlite_types.get(face_id_str()) == "TEXT"
-    assert sqlite_types.get(event_id_str()) == "INTEGER"
+    assert sqlite_types.get(event_int_str()) == "INTEGER"
     assert sqlite_types.get(deal_id_str()) == "TEXT"
     assert sqlite_types.get(owner_id_str()) == "TEXT"
     assert sqlite_types.get(acct_id_str()) == "TEXT"
@@ -280,7 +280,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(team_id_str()) == "TEXT"
     assert sqlite_types.get(awardee_id_str()) == "TEXT"
     assert sqlite_types.get(healer_id_str()) == "TEXT"
-    assert sqlite_types.get(time_id_str()) == "INTEGER"
+    assert sqlite_types.get(time_int_str()) == "INTEGER"
     assert sqlite_types.get(begin_str()) == "REAL"
     assert sqlite_types.get(close_str()) == "REAL"
     assert sqlite_types.get(addin_str()) == "REAL"
@@ -307,7 +307,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get("divisor") == "REAL"
     assert sqlite_types.get(pledge_str()) == "INTEGER"
     assert sqlite_types.get("problem_bool") == "INTEGER"
-    assert sqlite_types.get("purview_time_id") == "INTEGER"
+    assert sqlite_types.get("purview_time_int") == "INTEGER"
     assert sqlite_types.get(take_force_str()) == "REAL"
     assert sqlite_types.get("tally") == "REAL"
     assert sqlite_types.get(fund_coin_str()) == "REAL"
@@ -493,11 +493,11 @@ def _validate_brick_config(x_brick_config: dict):
         assert sub_jvalues_keys.issubset(brick_jvalues_keys)
 
         assert face_id_str() in brick_jkeys_keys
-        assert event_id_str() in brick_jkeys_keys
+        assert event_int_str() in brick_jkeys_keys
         assert deal_id_str() not in brick_jvalues_keys
         if brick_dict.get(brick_type_str()) != pidginunit_str():
             assert deal_id_str() in brick_jkeys_keys
-            assert time_id_str() in brick_jkeys_keys
+            assert time_int_str() in brick_jkeys_keys
 
         # sort_list = get_brick_elements_sort_order()
         # x_count = 0
@@ -586,7 +586,7 @@ def _validate_brick_format_files(brick_filenames: set[str]):
                     assert attr_in_optional, assert_fail_str
 
     # assert face_id_str() in brick_format_attributes
-    # assert event_id_str() in brick_format_attributes
+    # assert event_int_str() in brick_format_attributes
 
     # confirm every bricknumber is unique
     assert len(brick_numbers_set) == len(brick_filenames)
@@ -681,7 +681,7 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
     assert len(x_brick_quick_column_ref) == len(get_brick_numbers())
     assert x_brick_quick_column_ref.get("br00000") == {
         face_id_str(),
-        event_id_str(),
+        event_int_str(),
         c400_number_str(),
         current_time_str(),
         deal_id_str(),
