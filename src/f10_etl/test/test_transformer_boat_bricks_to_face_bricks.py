@@ -4,9 +4,9 @@ from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
 from src.f08_pidgin.pidgin_config import (
     event_int_str,
     inx_bridge_str,
-    inx_acct_name_str,
+    inx_name_str,
     otx_bridge_str,
-    otx_acct_name_str,
+    otx_name_str,
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import (
@@ -159,9 +159,9 @@ def test_etl_boat_bricks_to_bow_face_bricks_Scenario2_PidginCategoryBricksAreNot
         face_name_str(),
         event_int_str(),
         inx_bridge_str(),
-        inx_acct_name_str(),
+        inx_name_str(),
         otx_bridge_str(),
-        otx_acct_name_str(),
+        otx_name_str(),
         unknown_word_str(),
     ]
     sue43_0 = [sue_str, event3, ":", "Bob", ":", "Bobby", "Unknown"]

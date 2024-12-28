@@ -112,17 +112,17 @@ class PidginUnit:
     def get_acctmap(self) -> AcctMap:
         return self.acctmap
 
-    def set_acct_name(self, otx_acct_name: str, inx_acct_name: str):
-        self.acctmap.set_otx2inx(otx_acct_name, inx_acct_name)
+    def set_acct_name(self, otx_name: str, inx_name: str):
+        self.acctmap.set_otx2inx(otx_name, inx_name)
 
-    def acct_name_exists(self, otx_acct_name: str, inx_acct_name: str):
-        return self.acctmap.otx2inx_exists(otx_acct_name, inx_acct_name)
+    def acct_name_exists(self, otx_name: str, inx_name: str):
+        return self.acctmap.otx2inx_exists(otx_name, inx_name)
 
-    def _get_inx_acct_name(self, otx_acct_name: str):
-        return self.acctmap._get_inx_value(otx_acct_name)
+    def _get_inx_name(self, otx_name: str):
+        return self.acctmap._get_inx_value(otx_name)
 
-    def del_acct_name(self, otx_acct_name: str):
-        return self.acctmap.del_otx2inx(otx_acct_name)
+    def del_acct_name(self, otx_name: str):
+        return self.acctmap.del_otx2inx(otx_name)
 
     def set_ideamap(self, x_ideamap: IdeaMap):
         self._check_all_core_attrs_match(x_ideamap)

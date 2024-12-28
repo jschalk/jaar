@@ -147,19 +147,19 @@ def test_PidginUnit_acct_name_exists_ReturnsObj():
     assert zia_pidginunit.acct_name_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_get_inx_acct_name_ReturnsObj():
+def test_PidginUnit_get_inx_name_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_inx_acct_name(sue_otx) != sue_inx
+    assert zia_pidginunit._get_inx_name(sue_otx) != sue_inx
 
     # WHEN
     zia_pidginunit.set_acct_name(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit._get_inx_acct_name(sue_otx) == sue_inx
+    assert zia_pidginunit._get_inx_name(sue_otx) == sue_inx
 
 
 def test_PidginUnit_del_acct_name_ReturnsObj():

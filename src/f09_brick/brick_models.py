@@ -279,9 +279,9 @@ class br00043AbstractTable(Base):
     __abstract__ = True
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
-    inx_acct_name = Column(String)
+    inx_name = Column(String)
     inx_bridge = Column(String)
-    otx_acct_name = Column(String)
+    otx_name = Column(String)
     otx_bridge = Column(String)
     unknown_word = Column(String)
 
@@ -314,8 +314,8 @@ class br00113AbstractTable(Base):
     event_int = Column(Integer, primary_key=True)
     acct_name = Column(String)
     deal_id = Column(String)
-    inx_acct_name = Column(String)
-    otx_acct_name = Column(String)
+    inx_name = Column(String)
+    otx_name = Column(String)
     owner_name = Column(String)
 
 

@@ -38,7 +38,7 @@ class not_given_pidgin_category_Exception(Exception):
 
 
 MAPS_CATEGORYS = {
-    "map_acct_name": "AcctName",
+    "map_name": "AcctName",
     "map_group_id": "GroupID",
     "map_idea": "IdeaUnit",
     "map_road": "RoadUnit",
@@ -49,8 +49,8 @@ JAAR_TYPES = {
         "stage": "acct_staging",
         "agg": "acct_agg",
         "csv_filename": "acct.csv",
-        "otx_obj": "otx_acct_name",
-        "inx_obj": "inx_acct_name",
+        "otx_obj": "otx_name",
+        "inx_obj": "inx_name",
     },
     "GroupID": {
         "stage": "group_staging",
@@ -319,7 +319,7 @@ def boat_agg_single_to_pidgin_staging(
 def etl_boat_agg_to_pidgin_acct_staging(
     legitimate_events: set[EventInt], boat_dir: str
 ):
-    boat_agg_single_to_pidgin_staging("map_acct_name", legitimate_events, boat_dir)
+    boat_agg_single_to_pidgin_staging("map_name", legitimate_events, boat_dir)
 
 
 def etl_boat_agg_to_pidgin_group_staging(
@@ -410,8 +410,8 @@ class boatAggToStagingTransformer:
                 ]
 
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
-        if self.jaar_type == "AcctName" and "inx_acct_name" not in missing_col:
-            return x_row["inx_acct_name"]
+        if self.jaar_type == "AcctName" and "inx_name" not in missing_col:
+            return x_row["inx_name"]
         elif self.jaar_type == "GroupID" and "inx_group_id" not in missing_col:
             return x_row["inx_group_id"]
         elif self.jaar_type == "IdeaUnit" and "inx_idea" not in missing_col:
@@ -422,7 +422,7 @@ class boatAggToStagingTransformer:
 
 
 def etl_pidgin_acct_staging_to_acct_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "map_acct_name")
+    etl_pidgin_single_staging_to_agg(boat_dir, "map_name")
 
 
 def etl_pidgin_group_staging_to_group_agg(boat_dir: str):

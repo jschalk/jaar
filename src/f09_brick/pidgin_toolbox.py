@@ -19,8 +19,8 @@ def get_map_acct_dt_columns() -> list[str]:
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
-        "otx_acct_name",
-        "inx_acct_name",
+        "otx_name",
+        "inx_name",
     ]
 
 
@@ -68,8 +68,8 @@ def create_map_acct_dt(x_map: AcctMap) -> DataFrame:
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
             "unknown_word": x_map.unknown_word,
-            "otx_acct_name": otx_value,
-            "inx_acct_name": inx_value,
+            "otx_name": otx_value,
+            "inx_name": inx_value,
         }
         for otx_value, inx_value in x_map.otx2inx.items()
     ]
@@ -156,8 +156,8 @@ def _load_acctmap_from_csv(x_dir, x_acctmap: AcctMap) -> AcctMap:
     if os_path_exists(create_path(x_dir, acct_filename)):
         otx2inx_dt = open_csv(x_dir, acct_filename)
         for table_row in otx2inx_dt.to_dict("records"):
-            otx_value = table_row.get("otx_acct_name")
-            inx_value = table_row.get("inx_acct_name")
+            otx_value = table_row.get("otx_name")
+            inx_value = table_row.get("inx_name")
             if x_acctmap.otx2inx_exists(otx_value, inx_value) is False:
                 x_acctmap.set_otx2inx(otx_value, inx_value)
     return x_acctmap

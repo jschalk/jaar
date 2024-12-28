@@ -66,8 +66,8 @@ def test_get_map_acct_dt_columns_ReturnsObj():
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
-        "otx_acct_name",
-        "inx_acct_name",
+        "otx_name",
+        "inx_name",
     ]
     assert get_map_acct_dt_columns() == static_list
     assert set(get_map_acct_dt_columns()).issubset(set(sorting_columns()))

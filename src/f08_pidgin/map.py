@@ -72,32 +72,32 @@ class MapCore:
 
 
 class AcctMap(MapCore):
-    def set_otx2inx(self, otx_acct_name: str, inx_acct_name: str):
-        self.otx2inx[otx_acct_name] = inx_acct_name
+    def set_otx2inx(self, otx_name: str, inx_name: str):
+        self.otx2inx[otx_name] = inx_name
 
-    def _get_inx_value(self, otx_acct_name: str) -> str:
-        return self.otx2inx.get(otx_acct_name)
+    def _get_inx_value(self, otx_name: str) -> str:
+        return self.otx2inx.get(otx_name)
 
-    def otx2inx_exists(self, otx_acct_name: str, inx_acct_name: str) -> bool:
-        return self._get_inx_value(otx_acct_name) == inx_acct_name
+    def otx2inx_exists(self, otx_name: str, inx_name: str) -> bool:
+        return self._get_inx_value(otx_name) == inx_name
 
-    def otx_exists(self, otx_acct_name: str) -> bool:
-        return self._get_inx_value(otx_acct_name) != None
+    def otx_exists(self, otx_name: str) -> bool:
+        return self._get_inx_value(otx_name) != None
 
-    def del_otx2inx(self, otx_acct_name: str):
-        self.otx2inx.pop(otx_acct_name)
+    def del_otx2inx(self, otx_name: str):
+        self.otx2inx.pop(otx_name)
 
-    def reveal_inx(self, otx_acct_name: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_acct_name) is False:
-            inx_acct_name = copy_copy(otx_acct_name)
-            if self.inx_bridge in otx_acct_name:
+    def reveal_inx(self, otx_name: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_name) is False:
+            inx_name = copy_copy(otx_name)
+            if self.inx_bridge in otx_name:
                 return None
             otx_r_bridge = self.otx_bridge
             inx_r_bridge = self.inx_bridge
-            inx_acct_name = inx_acct_name.replace(otx_r_bridge, inx_r_bridge)
-            self.set_otx2inx(otx_acct_name, inx_acct_name)
+            inx_name = inx_name.replace(otx_r_bridge, inx_r_bridge)
+            self.set_otx2inx(otx_name, inx_name)
 
-        return self._get_inx_value(otx_acct_name)
+        return self._get_inx_value(otx_name)
 
     def _is_inx_bridge_inclusion_correct(self) -> bool:
         return not str_in_dict_values(self.inx_bridge, self.otx2inx)

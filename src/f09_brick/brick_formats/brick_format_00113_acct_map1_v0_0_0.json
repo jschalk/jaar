@@ -12,10 +12,10 @@
         "deal_id": {
             "otx_key": true
         },
-        "inx_acct_name": {
+        "inx_name": {
             "otx_key": false
         },
-        "otx_acct_name": {
+        "otx_name": {
             "otx_key": true
         },
         "owner_name": {
@@ -24,7 +24,7 @@
     },
     "brick_number": "br00113",
     "categorys": [
-        "map_acct_name",
+        "map_name",
         "bud_acctunit"
     ]
 }

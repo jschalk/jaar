@@ -51,12 +51,12 @@ def otx_group_id_str() -> str:
     return "otx_group_id"
 
 
-def inx_acct_name_str() -> str:
-    return "inx_acct_name"
+def inx_name_str() -> str:
+    return "inx_name"
 
 
-def otx_acct_name_str() -> str:
-    return "otx_acct_name"
+def otx_name_str() -> str:
+    return "otx_name"
 
 
 def inx_idea_str() -> str:
@@ -87,8 +87,8 @@ def map_otx2inx_str() -> str:
     return "map_otx2inx"
 
 
-def map_acct_name_str() -> str:
-    return "map_acct_name"
+def map_name_str() -> str:
+    return "map_name"
 
 
 def map_group_id_str() -> str:
@@ -209,12 +209,12 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "otx_bridge",
             "otx_group_id",
         },
-        "map_acct_name": {
-            "inx_acct_name",
+        "map_name": {
+            "inx_name",
             "unknown_word",
             "inx_bridge",
             "otx_bridge",
-            "otx_acct_name",
+            "otx_name",
         },
         "map_idea": {
             "inx_idea",

@@ -1,15 +1,15 @@
 {
-  "map_acct_name": {
+  "map_name": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 0,
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "otx_acct_name": {}
+      "otx_name": {}
     },
     "jvalues": {
-      "inx_acct_name": {},
+      "inx_name": {},
       "inx_bridge": {},
       "otx_bridge": {},
       "unknown_word": {}
