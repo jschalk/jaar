@@ -1,6 +1,6 @@
 from src.f01_road.finance import default_fund_coin_if_None
 from src.f01_road.road import (
-    get_default_deal_id_ideaunit as root_lx,
+    get_default_deal_idea_ideaunit as root_lx,
     create_road,
     default_bridge_if_None,
 )

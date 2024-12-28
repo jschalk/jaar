@@ -31,7 +31,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_update,
     face_name_str,
-    deal_id_str,
+    deal_idea_str,
     owner_name_str,
     acct_name_str,
     group_id_str,
@@ -171,7 +171,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     # THEN
     assert table_sorting_priority[0] == face_name_str()
     assert table_sorting_priority[1] == event_int_str()
-    assert table_sorting_priority[2] == deal_id_str()
+    assert table_sorting_priority[2] == deal_idea_str()
     assert table_sorting_priority[3] == owner_name_str()
     assert table_sorting_priority[4] == acct_name_str()
     assert table_sorting_priority[5] == group_id_str()
@@ -267,7 +267,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert set(sqlite_types.keys()) == set(get_brick_elements_sort_order())
     assert sqlite_types.get(face_name_str()) == "TEXT"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
-    assert sqlite_types.get(deal_id_str()) == "TEXT"
+    assert sqlite_types.get(deal_idea_str()) == "TEXT"
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_id_str()) == "TEXT"
@@ -483,8 +483,8 @@ def _validate_brick_config(x_brick_config: dict):
         assert sub_jkeys_keys.issubset(brick_jkeys_keys)
 
         sub_jvalues_keys = set(sub_category.get(jvalues_str()).keys())
-        if deal_id_str() in sub_jvalues_keys:
-            sub_jvalues_keys.remove(deal_id_str())
+        if deal_idea_str() in sub_jvalues_keys:
+            sub_jvalues_keys.remove(deal_idea_str())
 
         brick_jvalues_dict = brick_dict.get(jvalues_str())
         brick_jvalues_keys = set(brick_jvalues_dict.keys())
@@ -494,9 +494,9 @@ def _validate_brick_config(x_brick_config: dict):
 
         assert face_name_str() in brick_jkeys_keys
         assert event_int_str() in brick_jkeys_keys
-        assert deal_id_str() not in brick_jvalues_keys
+        assert deal_idea_str() not in brick_jvalues_keys
         if brick_dict.get(brick_type_str()) != pidginunit_str():
-            assert deal_id_str() in brick_jkeys_keys
+            assert deal_idea_str() in brick_jkeys_keys
             assert time_int_str() in brick_jkeys_keys
 
         # sort_list = get_brick_elements_sort_order()
@@ -684,7 +684,7 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
         event_int_str(),
         c400_number_str(),
         current_time_str(),
-        deal_id_str(),
+        deal_idea_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),

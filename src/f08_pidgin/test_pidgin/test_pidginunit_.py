@@ -11,7 +11,7 @@ from src.f04_gift.atom_config import (
     awardee_id_str,
     base_str,
     face_name_str,
-    deal_id_str,
+    deal_idea_str,
     fund_coin_str,
     healer_name_str,
     group_id_str,
@@ -83,7 +83,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("denom") == "int"
     assert pidgin_args_jaar_types.get("divisor") == "int"
     assert pidgin_args_jaar_types.get("face_name") == type_AcctName_str()
-    assert pidgin_args_jaar_types.get("deal_id") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("deal_idea") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("fnigh") == "float"
     assert pidgin_args_jaar_types.get("fopen") == "float"
     assert pidgin_args_jaar_types.get("fund_coin") == "float"
@@ -188,7 +188,7 @@ def test_pidginable_atom_args_ReturnsObj():
         awardee_id_str(),
         base_str(),
         face_name_str(),
-        deal_id_str(),
+        deal_idea_str(),
         group_id_str(),
         healer_name_str(),
         hour_idea_str(),

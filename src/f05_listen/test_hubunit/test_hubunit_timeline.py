@@ -14,7 +14,7 @@ from src.f05_listen.examples.example_listen_purviews import (
 )
 from src.f05_listen.examples.listen_env import (
     get_listen_temp_env_dir as deals_dir,
-    get_default_deal_id_ideaunit as deal_id,
+    get_default_deal_idea_ideaunit as deal_idea,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -24,7 +24,7 @@ from pytest import raises as pytest_raises
 def test_HubUnit_timepoint_dir_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t88_time_int = 8800
 
     # WHEN
@@ -38,7 +38,7 @@ def test_HubUnit_timepoint_dir_ReturnsObj():
 def test_HubUnit_purview_file_name_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
 
     # WHEN
     x_purview_file_name = yao_hubunit.purview_file_name()
@@ -50,7 +50,7 @@ def test_HubUnit_purview_file_name_ReturnsObj():
 def test_HubUnit_purview_file_path_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t88_time_int = 8800
 
     # WHEN
@@ -65,7 +65,7 @@ def test_HubUnit_purview_file_path_ReturnsObj():
 def test_HubUnit_save_valid_purview_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t55_purview = get_purviewepisode_55_example()
     t55_time_int = t55_purview.time_int
     assert os_path_exists(yao_hubunit.purview_file_path(t55_time_int)) is False
@@ -80,7 +80,7 @@ def test_HubUnit_save_valid_purview_file_SavesFile(env_dir_setup_cleanup):
 def test_HubUnit_save_valid_purview_file_RaisesError(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t_purview = get_purviewepisode_invalid_example()
 
     # WHEN / THEN
@@ -93,7 +93,7 @@ def test_HubUnit_save_valid_purview_file_RaisesError(env_dir_setup_cleanup):
 def test_HubUnit_purview_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t55_purview = get_purviewepisode_55_example()
     t55_time_int = t55_purview.time_int
     assert yao_hubunit.purview_file_exists(t55_time_int) is False
@@ -108,7 +108,7 @@ def test_HubUnit_purview_file_exists_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_get_purview_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t55_purview = get_purviewepisode_55_example()
     t55_time_int = t55_purview.time_int
     yao_hubunit._save_valid_purview_file(t55_purview)
@@ -121,7 +121,7 @@ def test_HubUnit_get_purview_file_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_delete_purview_file_DeletesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t55_purview = get_purviewepisode_55_example()
     t55_time_int = t55_purview.time_int
     yao_hubunit._save_valid_purview_file(t55_purview)
@@ -137,7 +137,7 @@ def test_HubUnit_delete_purview_file_DeletesFile(env_dir_setup_cleanup):
 def test_HubUnit_get_purviewlog_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t55_purview = get_purviewepisode_55_example()
     t66_purview = get_purviewepisode_66_example()
     t55_time_int = t55_purview.time_int
@@ -156,7 +156,7 @@ def test_HubUnit_get_purviewlog_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_budpoint_file_name_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
 
     # WHEN
     x_purview_file_name = yao_hubunit.budpoint_file_name()
@@ -168,7 +168,7 @@ def test_HubUnit_budpoint_file_name_ReturnsObj():
 def test_HubUnit_budpoint_file_path_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t88_time_int = 8800
 
     # WHEN
@@ -183,7 +183,7 @@ def test_HubUnit_budpoint_file_path_ReturnsObj():
 def test_HubUnit_save_valid_budpoint_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t55_budpoint = get_budunit_with_4_levels()
     t55_time_int = 55
     assert os_path_exists(yao_hubunit.budpoint_file_path(t55_time_int)) is False
@@ -198,7 +198,7 @@ def test_HubUnit_save_valid_budpoint_file_SavesFile(env_dir_setup_cleanup):
 def test_HubUnit_save_valid_budpoint_file_RaisesError(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t_budpoint = get_budunit_irrational_example()
     t55_time_int = 55
 
@@ -212,7 +212,7 @@ def test_HubUnit_save_valid_budpoint_file_RaisesError(env_dir_setup_cleanup):
 def test_HubUnit_budpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t55_time_int = 55
     assert yao_hubunit.budpoint_file_exists(t55_time_int) is False
 
@@ -227,7 +227,7 @@ def test_HubUnit_budpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_get_budpoint_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t55_time_int = 55
     t55_budpoint = get_budunit_with_4_levels()
     yao_hubunit._save_valid_budpoint_file(t55_time_int, t55_budpoint)
@@ -243,7 +243,7 @@ def test_HubUnit_get_budpoint_file_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_delete_budpoint_file_DeletesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     t55_time_int = 55
     t55_budpoint = get_budunit_with_4_levels()
     yao_hubunit._save_valid_budpoint_file(t55_time_int, t55_budpoint)
@@ -262,7 +262,7 @@ def test_HubUnit_calc_timepoint_purview_Sets_purview_file_Scenario0(
     # ESTABLISH
     yao_str = "Yao"
     t55_time_int = 55
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     yao_hubunit._save_valid_budpoint_file(t55_time_int, get_budunit_3_acct())
     assert yao_hubunit.budpoint_file_exists(t55_time_int)
     assert yao_hubunit.purview_file_exists(t55_time_int) is False
@@ -289,7 +289,7 @@ def test_HubUnit_calc_timepoint_purview_Sets_purview_file_Scenario1(
     yao_str = "Yao"
     t88_purview = get_purviewepisode_88_example()
     t88_time_int = t88_purview.time_int
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     yao_hubunit._save_valid_budpoint_file(t88_time_int, get_budunit_3_acct())
     yao_hubunit._save_valid_purview_file(t88_purview)
     assert yao_hubunit.budpoint_file_exists(t88_time_int)
@@ -324,7 +324,7 @@ def test_HubUnit_calc_timepoint_purview_RaisesException(env_dir_setup_cleanup):
     yao_str = "Yao"
     t88_purview = get_purviewepisode_88_example()
     t88_time_int = t88_purview.time_int
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     yao_hubunit._save_valid_purview_file(t88_purview)
     assert yao_hubunit.budpoint_file_exists(t88_time_int) is False
     assert yao_hubunit.purview_file_exists(t88_time_int)
@@ -345,7 +345,7 @@ def test_HubUnit_calc_timepoint_purviews_Sets_purview_files_Scenario0(
     t88_purview = get_purviewepisode_88_example()
     t66_time_int = t66_purview.time_int
     t88_time_int = t88_purview.time_int
-    yao_hubunit = hubunit_shop(deals_dir(), deal_id(), yao_str)
+    yao_hubunit = hubunit_shop(deals_dir(), deal_idea(), yao_str)
     yao_hubunit._save_valid_budpoint_file(t66_time_int, get_budunit_3_acct())
     yao_hubunit._save_valid_budpoint_file(t88_time_int, get_budunit_3_acct())
     yao_hubunit._save_valid_purview_file(t66_purview)

@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, deal_id_str
+from src.f04_gift.atom_config import face_name_str, deal_idea_str
 from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import (
@@ -34,7 +34,7 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
     brick_columns = [
         face_name_str(),
         event_int_str(),
-        deal_id_str(),
+        deal_idea_str(),
         hour_idea_str(),
         cumlative_minute_str(),
     ]
@@ -94,7 +94,7 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario1(
     brick_columns = [
         face_name_str(),
         event_int_str(),
-        deal_id_str(),
+        deal_idea_str(),
         hour_idea_str(),
         cumlative_minute_str(),
     ]

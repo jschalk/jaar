@@ -6,7 +6,7 @@ from src.f03_chrono.chrono import (
     monthday_distortion_str,
 )
 from src.f04_gift.atom_config import (
-    deal_id_str,
+    deal_idea_str,
     penny_str,
     fund_coin_str,
     penny_str,
@@ -110,7 +110,7 @@ def test_get_deal_config_dict_ReturnsObj():
     x_dealunit_jvalues = {
         c400_number_str(),
         current_time_str(),
-        deal_id_str(),
+        deal_idea_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),
@@ -182,10 +182,10 @@ def test_get_deal_args_category_mapping_ReturnsObj():
     x_hour = {deal_timeline_hour_str()}
     assert x_deal_args_category_mapping.get(cumlative_minute_str()) == x_hour
     assert x_deal_args_category_mapping.get(fund_coin_str())
-    deal_id_categorys = x_deal_args_category_mapping.get(deal_id_str())
-    assert deal_timeline_hour_str() in deal_id_categorys
-    assert dealunit_str() in deal_id_categorys
-    assert len(deal_id_categorys) == 6
+    deal_idea_categorys = x_deal_args_category_mapping.get(deal_idea_str())
+    assert deal_timeline_hour_str() in deal_idea_categorys
+    assert dealunit_str() in deal_idea_categorys
+    assert len(deal_idea_categorys) == 6
     assert len(x_deal_args_category_mapping) == 21
 
 

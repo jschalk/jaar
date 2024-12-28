@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, deal_id_str
+from src.f04_gift.atom_config import face_name_str, deal_idea_str
 from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
@@ -27,7 +27,7 @@ def test_WorldUnit_aft_face_bricks_to_aft_event_bricks_CreatesFaceBrickSheets_Sc
     brick_columns = [
         face_name_str(),
         event_int_str(),
-        deal_id_str(),
+        deal_idea_str(),
         hour_idea_str(),
         cumlative_minute_str(),
     ]

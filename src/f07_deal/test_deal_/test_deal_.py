@@ -7,7 +7,7 @@ from src.f01_road.finance import (
 from src.f01_road.jaar_config import (
     get_gifts_folder,
     get_json_filename,
-    get_test_deal_id,
+    get_test_deal_idea,
 )
 from src.f01_road.road import default_bridge_if_None
 from src.f01_road.finance_tran import tranbook_shop
@@ -26,7 +26,7 @@ from os.path import exists as os_path_exists, isdir as os_path_isdir
 def test_DealUnit_Exists(env_dir_setup_cleanup):
     accord_str = "accord"
     accord_deal = DealUnit()
-    assert not accord_deal.deal_id
+    assert not accord_deal.deal_idea
     assert not accord_deal.timeline
     assert not accord_deal.current_time
     assert not accord_deal.purviewlogs
@@ -48,11 +48,11 @@ def test_dealunit_shop_ReturnsDealUnit():
     accord_deal = dealunit_shop()
 
     # THEN
-    assert accord_deal.deal_id == get_test_deal_id()
+    assert accord_deal.deal_idea == get_test_deal_idea()
     assert accord_deal.timeline == timelineunit_shop()
     assert accord_deal.current_time == 0
     assert accord_deal.purviewlogs == {}
-    assert accord_deal.cashbook == tranbook_shop(get_test_deal_id())
+    assert accord_deal.cashbook == tranbook_shop(get_test_deal_idea())
     assert accord_deal.bridge == default_bridge_if_None()
     assert accord_deal.fund_coin == default_fund_coin_if_None()
     assert accord_deal.respect_bit == default_respect_bit_if_None()
@@ -61,7 +61,7 @@ def test_dealunit_shop_ReturnsDealUnit():
     # Calculated fields
     assert accord_deal._owners_dir != None
     assert accord_deal._gifts_dir != None
-    assert accord_deal._all_tranbook == tranbook_shop(get_test_deal_id())
+    assert accord_deal._all_tranbook == tranbook_shop(get_test_deal_idea())
 
 
 def test_dealunit_shop_ReturnsDealUnitWith_deals_dir(env_dir_setup_cleanup):
@@ -72,7 +72,7 @@ def test_dealunit_shop_ReturnsDealUnitWith_deals_dir(env_dir_setup_cleanup):
     accord_deal = dealunit_shop(accord_str, deals_dir=get_test_deals_dir())
 
     # THEN
-    assert accord_deal.deal_id == accord_str
+    assert accord_deal.deal_idea == accord_str
     assert accord_deal.deals_dir == get_test_deals_dir()
     assert accord_deal._owners_dir is not None
     assert accord_deal._gifts_dir is not None
@@ -89,7 +89,7 @@ def test_dealunit_shop_ReturnsDealUnitWith_bridge(env_dir_setup_cleanup):
 
     # WHEN
     accord_deal = dealunit_shop(
-        deal_id=accord_str,
+        deal_idea=accord_str,
         deals_dir=get_test_deals_dir(),
         current_time=x_current_time,
         in_memory_journal=True,
@@ -110,7 +110,7 @@ def test_dealunit_shop_ReturnsDealUnitWith_bridge(env_dir_setup_cleanup):
 def test_DealUnit_set_deal_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     accord_str = "accord"
-    accord_deal = DealUnit(deal_id=accord_str, deals_dir=get_test_deals_dir())
+    accord_deal = DealUnit(deal_idea=accord_str, deals_dir=get_test_deals_dir())
     x_deal_dir = create_path(get_test_deals_dir(), accord_str)
     x_owners_dir = create_path(x_deal_dir, "owners")
     x_gifts_dir = create_path(x_deal_dir, get_gifts_folder())
@@ -150,7 +150,7 @@ def test_dealunit_shop_SetsdealsDirs(env_dir_setup_cleanup):
     )
 
     # THEN
-    assert accord_deal.deal_id == accord_str
+    assert accord_deal.deal_idea == accord_str
     assert accord_deal._deal_dir == create_path(get_test_deals_dir(), accord_str)
     assert accord_deal._owners_dir == create_path(accord_deal._deal_dir, "owners")
 
@@ -302,7 +302,7 @@ def test_DealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
     # THEN
     sue_hubunit = hubunit_shop(
         deals_dir=accord_deal.deals_dir,
-        deal_id=accord_deal.deal_id,
+        deal_idea=accord_deal.deal_idea,
         owner_name=sue_str,
         keep_road=None,
         bridge=accord_deal.bridge,
@@ -311,7 +311,7 @@ def test_DealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
     )
     yao_hubunit = hubunit_shop(
         deals_dir=accord_deal.deals_dir,
-        deal_id=accord_deal.deal_id,
+        deal_idea=accord_deal.deal_idea,
         owner_name=yao_str,
         keep_road=None,
         bridge=accord_deal.bridge,

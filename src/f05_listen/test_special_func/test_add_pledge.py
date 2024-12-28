@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_deal_id_ideaunit as root_lx
+from src.f01_road.road import get_default_deal_idea_ideaunit as root_lx
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.special_func import add_voice_pledge, add_voice_fact
 from src.f05_listen.examples.listen_env import (

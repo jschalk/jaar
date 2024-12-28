@@ -15,7 +15,7 @@ from src.f01_road.jaar_config import (
     get_rootpart_of_keep_dir,
     treasury_file_name,
     get_gifts_folder,
-    get_deal_id_if_None,
+    get_deal_idea_if_None,
     get_test_deals_dir,
     get_init_gift_id_if_None,
     get_json_filename,
@@ -38,7 +38,7 @@ from src.f01_road.finance_tran import (
 )
 from src.f01_road.road import (
     OwnerName,
-    DealID,
+    DealIdea,
     IdeaUnit,
     RoadUnit,
     rebuild_road,
@@ -113,7 +113,7 @@ def get_keep_grades_dir(x_keep_dir: str) -> str:
 class HubUnit:
     owner_name: OwnerName = None
     deals_dir: str = None
-    deal_id: str = None
+    deal_idea: str = None
     keep_road: RoadUnit = None
     bridge: str = None
     fund_pool: float = None
@@ -123,7 +123,7 @@ class HubUnit:
     keep_point_magnitude: float = None
 
     def deal_dir(self) -> str:
-        return f_path(self.deals_dir, self.deal_id)
+        return f_path(self.deals_dir, self.deal_idea)
 
     def owners_dir(self) -> str:
         return f_path(self.deal_dir(), "owners")
@@ -202,7 +202,7 @@ class HubUnit:
     def default_voice_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
             _owner_name=self.owner_name,
-            _deal_id=self.deal_id,
+            _deal_idea=self.deal_idea,
             _bridge=self.bridge,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,
@@ -256,7 +256,7 @@ class HubUnit:
         delete_dir(self.atom_file_path(atom_number))
 
     def _get_bud_from_atom_files(self) -> BudUnit:
-        x_bud = budunit_shop(self.owner_name, self.deal_id)
+        x_bud = budunit_shop(self.owner_name, self.deal_idea)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = get_dir_file_strs(self.atoms_dir(), delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
@@ -605,7 +605,7 @@ class HubUnit:
     def dw_speaker_bud(self, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
             deals_dir=self.deals_dir,
-            deal_id=self.deal_id,
+            deal_idea=self.deal_idea,
             owner_name=speaker_id,
             bridge=self.bridge,
             respect_bit=self.respect_bit,
@@ -625,7 +625,7 @@ class HubUnit:
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
             deals_dir=self.deals_dir,
-            deal_id=self.deal_id,
+            deal_idea=self.deal_idea,
             owner_name=healer_name,
             keep_road=self.keep_road,
             bridge=self.bridge,
@@ -687,7 +687,7 @@ class HubUnit:
 
 def hubunit_shop(
     deals_dir: str,
-    deal_id: DealID,
+    deal_idea: DealIdea,
     owner_name: OwnerName = None,
     keep_road: RoadUnit = None,
     bridge: str = None,
@@ -698,11 +698,11 @@ def hubunit_shop(
     keep_point_magnitude: float = None,
 ) -> HubUnit:
     deals_dir = get_test_deals_dir() if deals_dir is None else deals_dir
-    deal_id = get_deal_id_if_None(deal_id)
+    deal_idea = get_deal_idea_if_None(deal_idea)
 
     return HubUnit(
         deals_dir=deals_dir,
-        deal_id=deal_id,
+        deal_idea=deal_idea,
         owner_name=validate_ideaunit(owner_name, bridge),
         keep_road=keep_road,
         bridge=default_bridge_if_None(bridge),
@@ -716,7 +716,7 @@ def hubunit_shop(
 
 def get_keep_path(x_hubunit: HubUnit, x_road: IdeaUnit) -> str:
     keep_root = get_rootpart_of_keep_dir()
-    x_road = rebuild_road(x_road, x_hubunit.deal_id, keep_root)
+    x_road = rebuild_road(x_road, x_hubunit.deal_idea, keep_root)
     x_list = get_all_road_ideas(x_road, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])
     return f_path(x_hubunit.keeps_dir(), keep_sub_path)

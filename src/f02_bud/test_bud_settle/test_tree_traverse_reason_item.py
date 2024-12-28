@@ -423,7 +423,7 @@ def test_BudUnit_ReasonUnits_set_premiseItemWithBeginCloseSetsPremiseOpen_Nigh()
     time_road = sue_bud.make_l1_road(time)
     rus_war = "rus_war"
     rus_war_road = sue_bud.make_road(time_road, rus_war)
-    sue_bud.set_item(itemunit_shop(time, begin=100, close=2000), sue_bud._deal_id)
+    sue_bud.set_item(itemunit_shop(time, begin=100, close=2000), sue_bud._deal_idea)
     sue_bud.set_item(itemunit_shop(rus_war, begin=22, close=34), time_road)
 
     # WHEN
@@ -511,7 +511,7 @@ def test_BudUnit_edit_item_attr_budIsAbleToEdit_base_item_active_requisite_AnyIt
 
     commute_str = "commute to casa"
     commute_road = sue_bud.make_l1_road(commute_str)
-    sue_bud.set_item(itemunit_shop(commute_str), sue_bud._deal_id)
+    sue_bud.set_item(itemunit_shop(commute_str), sue_bud._deal_idea)
     sue_bud.settle_bud()  # set tree metrics
     commute_item = sue_bud.get_item_obj(commute_road)
     assert len(commute_item.reasonunits) == 0
@@ -591,7 +591,7 @@ def test_BudUnit_ReasonUnits_ItemUnit_active_InfluencesReasonUnitStatus():
     # 5.2. item(...,casa).active = False
     commute_str = "commute to casa"
     commute_road = sue_bud.make_l1_road(commute_str)
-    sue_bud.set_item(itemunit_shop(commute_str), sue_bud._deal_id)
+    sue_bud.set_item(itemunit_shop(commute_str), sue_bud._deal_idea)
     sue_bud.edit_item_attr(
         road=commute_road,
         reason_base=casa_road,

@@ -126,7 +126,7 @@ def get_deal_args_jaar_types() -> dict[str, str]:
         "cumlative_minute": "int",
         "current_time": "int",
         "hour_idea": "IdeaUnit",
-        "deal_id": "IdeaUnit",
+        "deal_idea": "IdeaUnit",
         "fund_coin": "float",
         "month_idea": "IdeaUnit",
         "monthday_distortion": "int",

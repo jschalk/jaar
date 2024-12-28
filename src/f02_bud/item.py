@@ -16,12 +16,12 @@ from src.f01_road.road import (
     RoadUnit,
     IdeaUnit,
     is_sub_road,
-    get_default_deal_id_ideaunit as root_lx,
+    get_default_deal_idea_ideaunit as root_lx,
     all_roadunits_between,
     create_road as road_create_road,
     default_bridge_if_None,
     replace_bridge,
-    DealID,
+    DealIdea,
     AcctName,
     GroupID,
     RoadUnit,
@@ -203,7 +203,7 @@ class ItemUnit:
     _parent_road: RoadUnit = None
     _root: bool = None
     _kids: dict[RoadUnit,] = None
-    _bud_deal_id: DealID = None
+    _bud_deal_idea: DealIdea = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupID, AwardLink] = None
     reasonunits: dict[RoadUnit, ReasonUnit] = None
@@ -481,13 +481,13 @@ class ItemUnit:
         if (
             self._root
             and _lx is not None
-            and _lx != self._bud_deal_id
-            and self._bud_deal_id is not None
+            and _lx != self._bud_deal_idea
+            and self._bud_deal_idea is not None
         ):
             raise Item_root_IdeaNotEmptyException(
-                f"Cannot set itemroot to string different than '{self._bud_deal_id}'"
+                f"Cannot set itemroot to string different than '{self._bud_deal_idea}'"
             )
-        elif self._root and self._bud_deal_id is None:
+        elif self._root and self._bud_deal_idea is None:
             self._lx = root_lx()
         # elif _lx is not None:
         else:
@@ -979,7 +979,7 @@ def itemunit_shop(
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
-    _bud_deal_id: DealID = None,
+    _bud_deal_idea: DealIdea = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
@@ -997,7 +997,7 @@ def itemunit_shop(
     _bridge: str = None,
     _healerlink_ratio: float = None,
 ) -> ItemUnit:
-    _bud_deal_id = root_lx() if _bud_deal_id is None else _bud_deal_id
+    _bud_deal_idea = root_lx() if _bud_deal_idea is None else _bud_deal_idea
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_itemkid = ItemUnit(
@@ -1028,7 +1028,7 @@ def itemunit_shop(
         problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
         _root=get_False_if_None(_root),
-        _bud_deal_id=_bud_deal_id,
+        _bud_deal_idea=_bud_deal_idea,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
@@ -1046,7 +1046,7 @@ def itemunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_itemkid._root:
-        x_itemkid.set_lx(_lx=_bud_deal_id)
+        x_itemkid.set_lx(_lx=_bud_deal_idea)
     else:
         x_itemkid.set_lx(_lx=_lx)
     x_itemkid.set_teamunit_empty_if_None()

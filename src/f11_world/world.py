@@ -8,7 +8,7 @@ from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
     FaceName,
     EventInt,
-    DealID,
+    DealIdea,
     WorldID,
     TimeLineIdea,
     get_default_world_id,
@@ -60,7 +60,7 @@ class WorldUnit:
     _world_dir: str = None
     _ocean_dir: str = None
     _boat_dir: str = None
-    _dealunits: set[DealID] = None
+    _dealunits: set[DealIdea] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
     def set_event(self, event_int: EventInt, face_name: FaceName):
@@ -177,7 +177,7 @@ def worldunit_shop(
     ocean_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineIdea, TimeConversion] = None,
-    _dealunits: set[DealID] = None,
+    _dealunits: set[DealIdea] = None,
 ) -> WorldUnit:
     if world_id is None:
         world_id = get_default_world_id()

@@ -99,8 +99,8 @@ def face_name_str() -> str:
     return "face_name"
 
 
-def deal_id_str() -> str:
-    return "deal_id"
+def deal_idea_str() -> str:
+    return "deal_idea"
 
 
 def owner_name_str() -> str:

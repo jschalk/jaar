@@ -1,5 +1,5 @@
 from src.f00_instrument.file import open_file, save_file, delete_dir
-from src.f01_road.road import get_default_deal_id_ideaunit as root_lx
+from src.f01_road.road import get_default_deal_idea_ideaunit as root_lx
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.listen_env import (
@@ -91,7 +91,7 @@ def test_HubUnit_initialize_final_file_CorrectlySavesFile(env_dir_setup_cleanup)
 
     # THEN
     final_bud = sue_hubunit.get_final_bud()
-    assert final_bud._deal_id == root_lx()
+    assert final_bud._deal_idea == root_lx()
     assert final_bud._owner_name == sue_str
     bob_str = "Bob"
     assert final_bud.acct_exists(bob_str) is False
@@ -157,7 +157,7 @@ def test_HubUnit_initialize_final_file_CorrectlyDoesNotOverwrite(
     final_file_str = open_file(dest_dir=sue_final_dir, file_name=sue_final_file_name)
     print(f"{final_file_str=}")
     final_bud = budunit_get_from_json(final_file_str)
-    assert final_bud._deal_id == root_lx()
+    assert final_bud._deal_idea == root_lx()
     assert final_bud._owner_name == sue_str
     assert final_bud.fund_pool == sue_fund_pool
     assert final_bud.fund_coin == sue_fund_coin

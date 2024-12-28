@@ -7,13 +7,13 @@ JEFFY45_STR = "jeffy45"
 
 def get_ex1_br00000_df() -> DataFrame:
     """brick_format_00000_dealunit_v0_0_0
-    c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
+    c400_number,current_time,deal_idea,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
             "current_time",
-            "deal_id",
+            "deal_idea",
             "fund_coin",
             "monthday_distortion",
             "penny",
@@ -29,9 +29,9 @@ def get_ex1_br00000_df() -> DataFrame:
 
 def get_ex1_br00001_df() -> DataFrame:
     """brick_format_00001_deal_purview_episode_v0_0_0
-    acct_name,deal_id,owner_name,quota,time_int"""
+    acct_name,deal_idea,owner_name,quota,time_int"""
     x_df = DataFrame(
-        columns=["acct_name", "deal_id", "owner_name", "quota", "time_int"]
+        columns=["acct_name", "deal_idea", "owner_name", "quota", "time_int"]
     )
     x_df.loc[0] = ["Bob", ACCORD23_STR, "Sue", 445, 777]
     return x_df
@@ -39,9 +39,9 @@ def get_ex1_br00001_df() -> DataFrame:
 
 def get_ex1_br00002_df() -> DataFrame:
     """brick_format_00002_deal_cashbook_v0_0_0
-    acct_name,amount,deal_id,owner_name,time_int"""
+    acct_name,amount,deal_idea,owner_name,time_int"""
     x_df = DataFrame(
-        columns=["acct_name", "amount", "deal_id", "owner_name", "time_int"]
+        columns=["acct_name", "amount", "deal_idea", "owner_name", "time_int"]
     )
     x_df.loc[0] = ["Bob", 888, ACCORD23_STR, "Zia", 777]
     return x_df
@@ -49,8 +49,8 @@ def get_ex1_br00002_df() -> DataFrame:
 
 def get_ex1_br00003_df() -> DataFrame:
     """brick_format_00003_deal_timeline_hour_v0_0_0
-    cumlative_minute,deal_id,hour_idea"""
-    x_df = DataFrame(columns=["deal_id", "hour_idea", "cumlative_minute"])
+    cumlative_minute,deal_idea,hour_idea"""
+    x_df = DataFrame(columns=["deal_idea", "hour_idea", "cumlative_minute"])
     x_df.loc[0] = [ACCORD23_STR, "0-12am", 60]
     x_df.loc[1] = [ACCORD23_STR, "1-1am", 120]
     x_df.loc[2] = [ACCORD23_STR, "2-2am", 180]
@@ -80,8 +80,8 @@ def get_ex1_br00003_df() -> DataFrame:
 
 def get_ex1_br00004_df() -> DataFrame:
     """brick_format_00004_deal_timeline_month_v0_0_0
-    cumlative_day,deal_id,month_idea"""
-    x_df = DataFrame(columns=["deal_id", "month_idea", "cumlative_day"])
+    cumlative_day,deal_idea,month_idea"""
+    x_df = DataFrame(columns=["deal_idea", "month_idea", "cumlative_day"])
     x_df.loc[0] = [ACCORD23_STR, "March", 31]
     x_df.loc[1] = [ACCORD23_STR, "April", 61]
     x_df.loc[2] = [ACCORD23_STR, "May", 92]
@@ -99,8 +99,8 @@ def get_ex1_br00004_df() -> DataFrame:
 
 def get_ex1_br00005_df() -> DataFrame:
     """brick_format_00005_deal_timeline_weekday_v0_0_0
-    deal_id,weekday_idea,weekday_order"""
-    x_df = DataFrame(columns=["deal_id", "weekday_idea", "weekday_order"])
+    deal_idea,weekday_idea,weekday_order"""
+    x_df = DataFrame(columns=["deal_idea", "weekday_idea", "weekday_order"])
     x_df.loc[0] = [ACCORD23_STR, "Wednesday", 0]
     x_df.loc[1] = [ACCORD23_STR, "Thursday", 1]
     x_df.loc[2] = [ACCORD23_STR, "Friday", 2]
@@ -113,13 +113,13 @@ def get_ex1_br00005_df() -> DataFrame:
 
 def get_ex2_br00000_df() -> DataFrame:
     """brick_format_00000_dealunit_v0_0_0
-    c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
+    c400_number,current_time,deal_idea,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
             "current_time",
-            "deal_id",
+            "deal_idea",
             "fund_coin",
             "monthday_distortion",
             "penny",
@@ -136,9 +136,9 @@ def get_ex2_br00000_df() -> DataFrame:
 
 def get_ex2_br00001_df() -> DataFrame:
     """brick_format_00001_deal_purview_episode_v0_0_0
-    acct_name,deal_id,owner_name,quota,time_int"""
+    acct_name,deal_idea,owner_name,quota,time_int"""
     x_df = DataFrame(
-        columns=["acct_name", "deal_id", "owner_name", "quota", "time_int"]
+        columns=["acct_name", "deal_idea", "owner_name", "quota", "time_int"]
     )
     x_df.loc[0] = ["Bob", ACCORD23_STR, "Sue", 445, 777]
     x_df.loc[1] = ["Yao", ACCORD23_STR, "Bob", 332, 999]
@@ -150,9 +150,9 @@ def get_ex2_br00001_df() -> DataFrame:
 
 def get_ex2_br00002_df() -> DataFrame:
     """brick_format_00002_deal_cashbook_v0_0_0
-    acct_name,amount,deal_id,owner_name,time_int"""
+    acct_name,amount,deal_idea,owner_name,time_int"""
     x_df = DataFrame(
-        columns=["acct_name", "amount", "deal_id", "owner_name", "time_int"]
+        columns=["acct_name", "amount", "deal_idea", "owner_name", "time_int"]
     )
     x_df.loc[0] = ["Bob", 888, ACCORD23_STR, "Zia", 777]
     x_df.loc[1] = ["Zia", 234, ACCORD23_STR, "Sue", 999]
@@ -164,8 +164,8 @@ def get_ex2_br00002_df() -> DataFrame:
 
 def get_ex2_br00003_df() -> DataFrame:
     """brick_format_00003_deal_timeline_hour_v0_0_0
-    cumlative_minute,deal_id,hour_idea"""
-    x_df = DataFrame(columns=["deal_id", "hour_idea", "cumlative_minute"])
+    cumlative_minute,deal_idea,hour_idea"""
+    x_df = DataFrame(columns=["deal_idea", "hour_idea", "cumlative_minute"])
     x_df.loc[0] = [ACCORD23_STR, "0-12am", 60]
     x_df.loc[1] = [ACCORD23_STR, "1-1am", 120]
     x_df.loc[2] = [ACCORD23_STR, "2-2am", 180]
@@ -215,8 +215,8 @@ def get_ex2_br00003_df() -> DataFrame:
 
 def get_ex2_br00004_df() -> DataFrame:
     """brick_format_00004_deal_timeline_month_v0_0_0
-    cumlative_day,deal_id,month_idea"""
-    x_df = DataFrame(columns=["deal_id", "month_idea", "cumlative_day"])
+    cumlative_day,deal_idea,month_idea"""
+    x_df = DataFrame(columns=["deal_idea", "month_idea", "cumlative_day"])
     x_df.loc[0] = [ACCORD23_STR, "March", 31]
     x_df.loc[1] = [ACCORD23_STR, "April", 61]
     x_df.loc[2] = [ACCORD23_STR, "May", 92]
@@ -249,8 +249,8 @@ def get_ex2_br00004_df() -> DataFrame:
 
 def get_ex2_br00005_df() -> DataFrame:
     """brick_format_00005_deal_timeline_weekday_v0_0_0
-    deal_id,weekday_idea,weekday_order"""
-    x_df = DataFrame(columns=["deal_id", "weekday_idea", "weekday_order"])
+    deal_idea,weekday_idea,weekday_order"""
+    x_df = DataFrame(columns=["deal_idea", "weekday_idea", "weekday_order"])
     x_df.loc[0] = [ACCORD23_STR, "Wednesday", 0]
     x_df.loc[1] = [ACCORD23_STR, "Thursday", 1]
     x_df.loc[2] = [ACCORD23_STR, "Friday", 2]

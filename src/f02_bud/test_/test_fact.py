@@ -5,7 +5,7 @@ from src.f02_bud.reason_item import (
     FactCore,
     factunits_get_from_dict,
 )
-from src.f01_road.road import get_default_deal_id_ideaunit as root_lx, create_road
+from src.f01_road.road import get_default_deal_idea_ideaunit as root_lx, create_road
 
 
 def test_FactUnit_exists():

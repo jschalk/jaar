@@ -14,7 +14,7 @@ def create_init_deal_staging_files(dir: str):
     br00000_columns = [
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "c400_number",
         "current_time",
         "fund_coin",
@@ -28,7 +28,7 @@ def create_init_deal_staging_files(dir: str):
     br00001_columns = [
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "owner_name",
         "acct_name",
         "time_int",
@@ -37,7 +37,7 @@ def create_init_deal_staging_files(dir: str):
     br00002_columns = [
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "owner_name",
         "acct_name",
         "time_int",
@@ -46,21 +46,21 @@ def create_init_deal_staging_files(dir: str):
     br00003_columns = [
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "hour_idea",
         "cumlative_minute",
     ]
     br00004_columns = [
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "month_idea",
         "cumlative_day",
     ]
     br00005_columns = [
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "weekday_idea",
         "weekday_order",
     ]

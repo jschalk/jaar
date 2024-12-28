@@ -1,6 +1,6 @@
 from src.f01_road.finance import default_fund_coin_if_None
 from src.f01_road.road import (
-    get_default_deal_id_ideaunit as root_lx,
+    get_default_deal_idea_ideaunit as root_lx,
     create_road,
     default_bridge_if_None,
 )
@@ -55,7 +55,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit._fund_onset is None
     assert x_itemunit._fund_cease is None
     assert x_itemunit._root is None
-    assert x_itemunit._bud_deal_id is None
+    assert x_itemunit._bud_deal_idea is None
     assert x_itemunit._healerlink_ratio is None
 
 
@@ -68,7 +68,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit._kids == {}
     assert x_itemunit.mass == 1
     assert x_itemunit._lx is None
-    assert x_itemunit._bud_deal_id == root_lx()
+    assert x_itemunit._bud_deal_idea == root_lx()
     assert x_itemunit._uid is None
     assert x_itemunit.begin is None
     assert x_itemunit.close is None

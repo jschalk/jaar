@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path, save_file
 from src.f04_gift.atom_config import (
     acct_name_str,
     face_name_str,
-    deal_id_str,
+    deal_idea_str,
     owner_name_str,
     type_AcctName_str,
     type_IdeaUnit_str,
@@ -29,7 +29,7 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario0_NoPidginUnit(
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        deal_id_str(),
+        deal_idea_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -79,7 +79,7 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario1_MultpleFaceNames_CreatesE
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        deal_id_str(),
+        deal_idea_str(),
         owner_name_str(),
         acct_name_str(),
     ]

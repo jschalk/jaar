@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, deal_id_str
+from src.f04_gift.atom_config import face_name_str, deal_idea_str
 from src.f07_deal.deal_config import (
     cumlative_minute_str,
     hour_idea_str,
@@ -35,7 +35,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
     brick_columns = [
         face_name_str(),
         event_int_str(),
-        deal_id_str(),
+        deal_idea_str(),
         hour_idea_str(),
         cumlative_minute_str(),
     ]
@@ -114,14 +114,14 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
     brick3_columns = [
         face_name_str(),
         event_int_str(),
-        deal_id_str(),
+        deal_idea_str(),
         hour_idea_str(),
         cumlative_minute_str(),
     ]
     brick5_columns = [
         event_int_str(),
         face_name_str(),
-        deal_id_str(),
+        deal_idea_str(),
         weekday_idea_str(),
         weekday_order_str(),
     ]

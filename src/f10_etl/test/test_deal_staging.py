@@ -8,7 +8,7 @@ from src.f03_chrono.chrono import (
 )
 from src.f04_gift.atom_config import (
     face_name_str,
-    deal_id_str,
+    deal_idea_str,
     acct_name_str,
     owner_name_str,
     fund_coin_str,
@@ -43,12 +43,12 @@ from copy import copy as copy_copy
 #     "br00042.xlsx",
 # }
 
-# br00000 deal_id c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
-# br00001 deal_id owner_name,acct_name,time_int,quota
-# br00002 deal_id owner_name,acct_name,time_int,amount
-# br00003 deal_id hour_idea,cumlative_minute
-# br00004 deal_id month_idea,cumlative_day
-# br00005 deal_id weekday_idea,weekday_order
+# br00000 deal_idea c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
+# br00001 deal_idea owner_name,acct_name,time_int,quota
+# br00002 deal_idea owner_name,acct_name,time_int,amount
+# br00003 deal_idea hour_idea,cumlative_minute
+# br00004 deal_idea month_idea,cumlative_day
+# br00005 deal_idea weekday_idea,weekday_order
 
 
 def test_create_init_deal_staging_files_CreatesFiles(env_dir_setup_cleanup):
@@ -103,7 +103,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
     br00004_df = pandas_read_excel(br00004_path, sheet_name=staging_str)
     br00005_df = pandas_read_excel(br00005_path, sheet_name=staging_str)
 
-    common_cols = [face_name_str(), event_int_str(), deal_id_str()]
+    common_cols = [face_name_str(), event_int_str(), deal_idea_str()]
     expected_br0_columns = copy_copy(common_cols)
     expected_br1_columns = copy_copy(common_cols)
     expected_br2_columns = copy_copy(common_cols)
@@ -160,7 +160,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 #     br00113_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         deal_id_str(),
+#         deal_idea_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #         otx_name_str(),
@@ -193,7 +193,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 #     br00115_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         deal_id_str(),
+#         deal_idea_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #         otx_group_id_str(),
@@ -225,7 +225,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 #     br00116_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         deal_id_str(),
+#         deal_idea_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #         otx_idea_str(),
@@ -257,7 +257,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 #     br00117_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         deal_id_str(),
+#         deal_idea_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #         otx_road_str(),
@@ -406,7 +406,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 
 
 # from src.f00_instrument.file import create_path
-# from src.f04_gift.atom_config import face_name_str, deal_id_str
+# from src.f04_gift.atom_config import face_name_str, deal_idea_str
 # from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
 # from src.f08_pidgin.pidgin_config import event_int_str
 # from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
@@ -434,7 +434,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 #     brick_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         deal_id_str(),
+#         deal_idea_str(),
 #         hour_idea_str(),
 #         cumlative_minute_str(),
 #     ]

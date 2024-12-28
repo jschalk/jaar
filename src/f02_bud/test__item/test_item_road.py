@@ -1,6 +1,6 @@
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.reason_item import reasonunit_shop, premiseunit_shop, factunit_shop
-from src.f01_road.road import get_default_deal_id_ideaunit as root_lx, create_road
+from src.f01_road.road import get_default_deal_idea_ideaunit as root_lx, create_road
 
 
 def test_ItemUnit_find_replace_road_CorrectlyModifies_parent_road():

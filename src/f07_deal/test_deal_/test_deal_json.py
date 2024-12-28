@@ -5,7 +5,7 @@ from src.f01_road.finance import (
     default_penny_if_None,
 )
 from src.f03_chrono.chrono import get_default_timeline_config_dict
-from src.f04_gift.atom_config import deal_id_str
+from src.f04_gift.atom_config import deal_idea_str
 from src.f07_deal.deal import (
     dealunit_shop,
     get_from_dict as dealunit_get_from_dict,
@@ -37,7 +37,7 @@ def test_DealUnit_get_dict_ReturnsObj():
     x_dict = accord_deal.get_dict()
 
     # THEN
-    assert x_dict.get(deal_id_str()) == accord_str
+    assert x_dict.get(deal_idea_str()) == accord_str
     assert x_dict.get("timeline") == get_default_timeline_config_dict()
     assert x_dict.get("current_time") == 0
     assert x_dict.get("bridge") == default_bridge_if_None()
@@ -47,7 +47,7 @@ def test_DealUnit_get_dict_ReturnsObj():
     assert x_dict.get("purviewlogs") == accord_deal._get_purviewlogs_dict()
     print(f"{ accord_deal._get_purviewlogs_dict()=}")
     assert list(x_dict.keys()) == [
-        "deal_id",
+        "deal_idea",
         "timeline",
         "current_time",
         "purviewlogs",
@@ -80,7 +80,7 @@ def test_DealUnit_get_json_ReturnsObj():
     # THEN
     print(f"{x_json=}")
     assert x_json
-    assert x_json.find("deal_id") > 0
+    assert x_json.find("deal_idea") > 0
 
 
 def test_get_from_dict_ReturnsDealUnit():
@@ -116,7 +116,7 @@ def test_get_from_dict_ReturnsDealUnit():
     x_deal = dealunit_get_from_dict(x_dict)
 
     # THEN
-    assert x_deal.deal_id == accord_str
+    assert x_deal.deal_idea == accord_str
     assert x_deal.timeline.timeline_idea == sue_timeline_idea
     assert x_deal.current_time == sue_current_time
     assert x_deal.bridge == sue_bridge
@@ -161,7 +161,7 @@ def test_get_from_json_ReturnsDealUnit():
     x_deal = dealunit_get_from_json(accord_json)
 
     # THEN
-    assert x_deal.deal_id == accord_str
+    assert x_deal.deal_idea == accord_str
     assert x_deal.timeline.timeline_idea == sue_timeline_idea
     assert x_deal.current_time == sue_current_time
     assert x_deal.bridge == sue_bridge

@@ -16,7 +16,7 @@ class IdeaUnit(str):
         return self.find(default_bridge_if_None(bridge)) == -1
 
 
-class DealID(IdeaUnit):  # Created to help track the concept
+class DealIdea(IdeaUnit):  # Created to help track the concept
     pass
 
 
@@ -219,7 +219,7 @@ def get_forefather_roads(road: RoadUnit) -> dict[RoadUnit]:
     return {a_road: None for a_road in ancestor_roads}
 
 
-def get_default_deal_id_ideaunit() -> DealID:
+def get_default_deal_idea_ideaunit() -> DealIdea:
     return "ZZ"
 
 

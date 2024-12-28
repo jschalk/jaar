@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_deal_id_ideaunit as root_lx, create_road
+from src.f01_road.road import get_default_deal_idea_ideaunit as root_lx, create_road
 from src.f02_bud.group import awardheir_shop, awardlink_shop
 from src.f02_bud.reason_item import (
     reasonunit_shop,

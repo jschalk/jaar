@@ -6,7 +6,7 @@ from src.f00_instrument.dict_toolbox import (
 )
 from src.f01_road.jaar_config import (
     get_gifts_folder,
-    get_deal_id_if_None,
+    get_deal_idea_if_None,
     get_test_deals_dir,
 )
 from src.f01_road.finance import (
@@ -22,7 +22,7 @@ from src.f01_road.road import (
     default_bridge_if_None,
     OwnerName,
     RoadUnit,
-    DealID,
+    DealIdea,
     AcctName,
 )
 from src.f02_bud.bud import BudUnit
@@ -73,7 +73,7 @@ class DealUnit:
     pipeline7: gifts->final (could be 5 of 6)
     """
 
-    deal_id: DealID = None
+    deal_idea: DealIdea = None
     deals_dir: str = None
     timeline: TimeLineUnit = None
     current_time: int = None
@@ -91,7 +91,7 @@ class DealUnit:
 
     # directory setup
     def _set_deal_dirs(self, in_memory_journal: bool = None):
-        self._deal_dir = create_path(self.deals_dir, self.deal_id)
+        self._deal_dir = create_path(self.deals_dir, self.deal_idea)
         self._owners_dir = create_path(self._deal_dir, "owners")
         self._gifts_dir = create_path(self._deal_dir, get_gifts_folder())
         set_dir(x_path=self._deal_dir)
@@ -113,7 +113,7 @@ class DealUnit:
         return {
             x_owner_name: hubunit_shop(
                 deals_dir=self.deals_dir,
-                deal_id=self.deal_id,
+                deal_idea=self.deal_idea,
                 owner_name=x_owner_name,
                 keep_road=None,
                 bridge=self.bridge,
@@ -124,7 +124,7 @@ class DealUnit:
 
     # database
     def get_journal_db_path(self) -> str:
-        deal_dir = create_path(self.deals_dir, f"{self.deal_id}")
+        deal_dir = create_path(self.deals_dir, f"{self.deal_idea}")
         return create_path(deal_dir, "journal.db")
 
     def _create_journal_db(
@@ -161,7 +161,7 @@ class DealUnit:
     def _get_hubunit(self, owner_name: OwnerName) -> HubUnit:
         return hubunit_shop(
             owner_name=owner_name,
-            deal_id=self.deal_id,
+            deal_idea=self.deal_idea,
             deals_dir=self.deals_dir,
             keep_road=None,
             bridge=self.bridge,
@@ -182,7 +182,7 @@ class DealUnit:
         for healer_name, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 self.deals_dir,
-                self.deal_id,
+                self.deal_idea,
                 healer_name,
                 keep_road=None,
                 # "duty_job",
@@ -211,7 +211,7 @@ class DealUnit:
         for healer_name, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 deals_dir=self.deals_dir,
-                deal_id=self.deal_id,
+                deal_idea=self.deal_idea,
                 owner_name=healer_name,
                 keep_road=None,
                 # "duty_job",
@@ -222,7 +222,7 @@ class DealUnit:
             for keep_road in healer_dict.keys():
                 keep_hubunit = hubunit_shop(
                     deals_dir=self.deals_dir,
-                    deal_id=self.deal_id,
+                    deal_idea=self.deal_idea,
                     owner_name=healer_name,
                     keep_road=keep_road,
                     # "duty_job",
@@ -284,7 +284,7 @@ class DealUnit:
 
     def get_dict(self) -> dict:
         return {
-            "deal_id": self.deal_id,
+            "deal_idea": self.deal_idea,
             "timeline": self.timeline.get_dict(),
             "current_time": self.current_time,
             "purviewlogs": self._get_purviewlogs_dict(),
@@ -356,7 +356,7 @@ class DealUnit:
 
     def set_all_tranbook(self):
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
-        x_tranbook = tranbook_shop(self.deal_id, x_tranunits)
+        x_tranbook = tranbook_shop(self.deal_idea, x_tranunits)
         for owner_name, x_purviewlog in self.purviewlogs.items():
             for x_time_int, x_purviewepisode in x_purviewlog.episodes.items():
                 for acct_name, x_amount in x_purviewepisode._net_purviews.items():
@@ -366,14 +366,14 @@ class DealUnit:
     # TODO evaluate if this should be used
     # def set_all_tranbook(self):
     #     if not hasattr(self, "_combined_tranbook"):
-    #         self._combined_tranbook = tranbook_shop(self.deal_id, [])
+    #         self._combined_tranbook = tranbook_shop(self.deal_idea, [])
     #     new_tranunits = self.cashbook.get_new_tranunits()
     #     self._combined_tranbook.add_tranunits(new_tranunits)
     #     return self._combined_tranbook
 
 
 def dealunit_shop(
-    deal_id: DealID = None,
+    deal_idea: DealIdea = None,
     deals_dir: str = None,
     timeline: TimeLineUnit = None,
     current_time: int = None,
@@ -385,21 +385,21 @@ def dealunit_shop(
 ) -> DealUnit:
     if timeline is None:
         timeline = timelineunit_shop()
-    deal_id = get_deal_id_if_None(deal_id)
+    deal_idea = get_deal_idea_if_None(deal_idea)
     if deals_dir is None:
         deals_dir = get_test_deals_dir()
     deal_x = DealUnit(
-        deal_id=deal_id,
+        deal_idea=deal_idea,
         deals_dir=deals_dir,
         timeline=timeline,
         current_time=get_0_if_None(current_time),
         purviewlogs={},
-        cashbook=tranbook_shop(deal_id),
+        cashbook=tranbook_shop(deal_idea),
         bridge=default_bridge_if_None(bridge),
         fund_coin=default_respect_bit_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
         penny=default_penny_if_None(penny),
-        _all_tranbook=tranbook_shop(deal_id),
+        _all_tranbook=tranbook_shop(deal_idea),
     )
     deal_x._set_deal_dirs(in_memory_journal=in_memory_journal)
     return deal_x
@@ -410,8 +410,8 @@ def get_from_json(x_deal_json: str) -> DealUnit:
 
 
 def get_from_dict(deal_dict: dict) -> DealUnit:
-    x_deal_id = deal_dict.get("deal_id")
-    x_deal = dealunit_shop(x_deal_id, None)
+    x_deal_idea = deal_dict.get("deal_idea")
+    x_deal = dealunit_shop(x_deal_idea, None)
     x_deal.timeline = timelineunit_shop(deal_dict.get("timeline"))
     x_deal.current_time = deal_dict.get("current_time")
     x_deal.bridge = deal_dict.get("bridge")

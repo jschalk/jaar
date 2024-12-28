@@ -11,7 +11,12 @@ from src.f00_instrument.dict_toolbox import (
     del_in_nested_dict,
 )
 from src.f01_road.finance import FundNum, TimeLinePoint, default_fund_pool
-from src.f01_road.road import AcctName, OwnerName, DealID, get_default_deal_id_ideaunit
+from src.f01_road.road import (
+    AcctName,
+    OwnerName,
+    DealIdea,
+    get_default_deal_idea_ideaunit,
+)
 from dataclasses import dataclass
 
 
@@ -51,7 +56,7 @@ def tranunit_shop(
 
 @dataclass
 class TranBook:
-    deal_id: DealID = None
+    deal_idea: DealIdea = None
     tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None
     _accts_net: dict[OwnerName, dict[AcctName, FundNum]] = None
 
@@ -169,16 +174,16 @@ class TranBook:
 
     # def get_dict(
     #     self,
-    # ) -> dict[DealID, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
-    #     return {"deal_id": self.deal_id}
+    # ) -> dict[DealIdea, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
+    #     return {"deal_idea": self.deal_idea}
 
 
 def tranbook_shop(
-    x_deal_id: DealID,
+    x_deal_idea: DealIdea,
     x_tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None,
 ):
     return TranBook(
-        deal_id=x_deal_id,
+        deal_idea=x_deal_idea,
         tranunits=get_empty_dict_if_None(x_tranunits),
         _accts_net={},
     )
@@ -294,8 +299,8 @@ class PurviewLog:
     def get_time_ints(self) -> set[TimeLinePoint]:
         return set(self.episodes.keys())
 
-    def get_tranbook(self, deal_id: DealID) -> TranBook:
-        x_tranbook = tranbook_shop(deal_id)
+    def get_tranbook(self, deal_idea: DealIdea) -> TranBook:
+        x_tranbook = tranbook_shop(deal_idea)
         for x_time_int, x_episode in self.episodes.items():
             for dst_acct_name, x_quota in x_episode._net_purviews.items():
                 x_tranbook.add_tranunit(
@@ -340,13 +345,15 @@ def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, PurviewEp
 
 @dataclass
 class TimeConversion:
-    deal_id: str = None
+    deal_idea: str = None
     addin: str = None
 
 
-def timeconversion_shop(deal_id: DealID = None, addin: int = None) -> TimeConversion:
-    if deal_id is None:
-        deal_id = get_default_deal_id_ideaunit()
+def timeconversion_shop(
+    deal_idea: DealIdea = None, addin: int = None
+) -> TimeConversion:
+    if deal_idea is None:
+        deal_idea = get_default_deal_idea_ideaunit()
     if addin is None:
         addin = 0
-    return TimeConversion(deal_id=deal_id, addin=addin)
+    return TimeConversion(deal_idea=deal_idea, addin=addin)

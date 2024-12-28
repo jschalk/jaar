@@ -1,5 +1,5 @@
 from src.f01_road.road import (
-    get_default_deal_id_ideaunit as root_lx,
+    get_default_deal_idea_ideaunit as root_lx,
     default_bridge_if_None,
     get_road_from_doar,
     get_doar_from_road,
