@@ -9,13 +9,13 @@
         "inx_bridge": {
             "otx_key": false
         },
-        "inx_group_label": {
+        "inx_label": {
             "otx_key": false
         },
         "otx_bridge": {
             "otx_key": false
         },
-        "otx_group_label": {
+        "otx_label": {
             "otx_key": true
         },
         "unknown_word": {

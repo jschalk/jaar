@@ -12,10 +12,10 @@
         "deal_idea": {
             "otx_key": true
         },
-        "inx_group_label": {
+        "inx_label": {
             "otx_key": false
         },
-        "otx_group_label": {
+        "otx_label": {
             "otx_key": true
         },
         "owner_name": {

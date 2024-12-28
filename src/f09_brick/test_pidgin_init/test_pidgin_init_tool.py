@@ -83,8 +83,8 @@ def test_get_map_group_dt_columns_ReturnsObj():
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
-        "otx_group_label",
-        "inx_group_label",
+        "otx_label",
+        "inx_label",
     ]
     assert get_map_group_dt_columns() == static_list
     assert set(get_map_group_dt_columns()).issubset(set(sorting_columns()))

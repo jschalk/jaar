@@ -83,17 +83,17 @@ class PidginUnit:
     def get_groupmap(self) -> GroupMap:
         return self.groupmap
 
-    def set_group_label(self, otx_group_label: str, inx_group_label: str):
-        self.groupmap.set_otx2inx(otx_group_label, inx_group_label)
+    def set_group_label(self, otx_label: str, inx_label: str):
+        self.groupmap.set_otx2inx(otx_label, inx_label)
 
-    def group_label_exists(self, otx_group_label: str, inx_group_label: str):
-        return self.groupmap.otx2inx_exists(otx_group_label, inx_group_label)
+    def group_label_exists(self, otx_label: str, inx_label: str):
+        return self.groupmap.otx2inx_exists(otx_label, inx_label)
 
-    def _get_inx_group_label(self, otx_group_label: str):
-        return self.groupmap._get_inx_value(otx_group_label)
+    def _get_inx_label(self, otx_label: str):
+        return self.groupmap._get_inx_value(otx_label)
 
-    def del_group_label(self, otx_group_label: str):
-        return self.groupmap.del_otx2inx(otx_group_label)
+    def del_group_label(self, otx_label: str):
+        return self.groupmap.del_otx2inx(otx_label)
 
     def get_mapunit(self, x_jaar_type: str):
         if x_jaar_type == "AcctName":

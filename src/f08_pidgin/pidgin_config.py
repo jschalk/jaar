@@ -43,12 +43,12 @@ def inx_bridge_str() -> str:
     return "inx_bridge"
 
 
-def inx_group_label_str() -> str:
-    return "inx_group_label"
+def inx_label_str() -> str:
+    return "inx_label"
 
 
-def otx_group_label_str() -> str:
-    return "otx_group_label"
+def otx_label_str() -> str:
+    return "otx_label"
 
 
 def inx_name_str() -> str:
@@ -203,11 +203,11 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     """for each pidgin_config category contains the associated columns"""
     return {
         "map_group_label": {
-            "inx_group_label",
+            "inx_label",
             "unknown_word",
             "inx_bridge",
             "otx_bridge",
-            "otx_group_label",
+            "otx_label",
         },
         "map_name": {
             "inx_name",

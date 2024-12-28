@@ -20,8 +20,8 @@ from src.f08_pidgin.pidgin_config import (
     event_int_str,
     otx_bridge_str,
     inx_bridge_str,
-    inx_group_label_str,
-    otx_group_label_str,
+    inx_label_str,
+    otx_label_str,
     inx_name_str,
     otx_name_str,
     inx_idea_str,
@@ -44,8 +44,8 @@ def test_str_functions_ReturnsObj():
     assert pidgin_filename() == "pidgin.json"
     assert otx_bridge_str() == "otx_bridge"
     assert inx_bridge_str() == "inx_bridge"
-    assert inx_group_label_str() == "inx_group_label"
-    assert otx_group_label_str() == "otx_group_label"
+    assert inx_label_str() == "inx_label"
+    assert otx_label_str() == "otx_label"
     assert inx_name_str() == "inx_name"
     assert otx_name_str() == "otx_name"
     assert inx_idea_str() == "inx_idea"
@@ -106,8 +106,8 @@ def _validate_pidgin_config(pidgin_config: dict):
     x_possible_args = {
         inx_bridge_str(),
         otx_bridge_str(),
-        inx_group_label_str(),
-        otx_group_label_str(),
+        inx_label_str(),
+        otx_label_str(),
         inx_name_str(),
         otx_name_str(),
         inx_idea_str(),

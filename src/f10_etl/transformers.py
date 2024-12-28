@@ -56,8 +56,8 @@ JAAR_TYPES = {
         "stage": "group_staging",
         "agg": "group_agg",
         "csv_filename": "group.csv",
-        "otx_obj": "otx_group_label",
-        "inx_obj": "inx_group_label",
+        "otx_obj": "otx_label",
+        "inx_obj": "inx_label",
     },
     "IdeaUnit": {
         "stage": "idea_staging",
@@ -412,8 +412,8 @@ class boatAggToStagingTransformer:
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
         if self.jaar_type == "AcctName" and "inx_name" not in missing_col:
             return x_row["inx_name"]
-        elif self.jaar_type == "GroupLabel" and "inx_group_label" not in missing_col:
-            return x_row["inx_group_label"]
+        elif self.jaar_type == "GroupLabel" and "inx_label" not in missing_col:
+            return x_row["inx_label"]
         elif self.jaar_type == "IdeaUnit" and "inx_idea" not in missing_col:
             return x_row["inx_idea"]
         elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:

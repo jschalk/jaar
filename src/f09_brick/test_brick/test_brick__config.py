@@ -100,8 +100,8 @@ from src.f08_pidgin.pidgin_config import (
     inx_road_str,
     otx_name_str,
     inx_name_str,
-    otx_group_label_str,
-    inx_group_label_str,
+    otx_label_str,
+    inx_label_str,
     map_otx2inx_str,
     map_name_str,
     map_group_label_str,
@@ -231,8 +231,8 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[59] == inx_road_str()
     assert table_sorting_priority[60] == otx_name_str()
     assert table_sorting_priority[61] == inx_name_str()
-    assert table_sorting_priority[62] == otx_group_label_str()
-    assert table_sorting_priority[63] == inx_group_label_str()
+    assert table_sorting_priority[62] == otx_label_str()
+    assert table_sorting_priority[63] == inx_label_str()
     assert table_sorting_priority[64] == otx_bridge_str()
     assert table_sorting_priority[65] == inx_bridge_str()
     assert table_sorting_priority[66] == bridge_str()

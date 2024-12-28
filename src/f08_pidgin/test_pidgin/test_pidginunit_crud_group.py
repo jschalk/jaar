@@ -129,19 +129,19 @@ def test_PidginUnit_group_label_exists_ReturnsObj():
     assert zia_pidginunit.group_label_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_get_inx_group_label_ReturnsObj():
+def test_PidginUnit_get_inx_label_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_inx_group_label(sue_otx) != sue_inx
+    assert zia_pidginunit._get_inx_label(sue_otx) != sue_inx
 
     # WHEN
     zia_pidginunit.set_group_label(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit._get_inx_group_label(sue_otx) == sue_inx
+    assert zia_pidginunit._get_inx_label(sue_otx) == sue_inx
 
 
 def test_PidginUnit_del_group_label_ReturnsObj():

@@ -150,32 +150,32 @@ def get_acctmap_from_json(x_json: str) -> AcctMap:
 
 
 class GroupMap(MapCore):
-    def set_otx2inx(self, otx_group_label: str, inx_group_label: str):
-        self.otx2inx[otx_group_label] = inx_group_label
+    def set_otx2inx(self, otx_label: str, inx_label: str):
+        self.otx2inx[otx_label] = inx_label
 
-    def _get_inx_value(self, otx_group_label: str) -> str:
-        return self.otx2inx.get(otx_group_label)
+    def _get_inx_value(self, otx_label: str) -> str:
+        return self.otx2inx.get(otx_label)
 
-    def otx2inx_exists(self, otx_group_label: str, inx_group_label: str) -> bool:
-        return self._get_inx_value(otx_group_label) == inx_group_label
+    def otx2inx_exists(self, otx_label: str, inx_label: str) -> bool:
+        return self._get_inx_value(otx_label) == inx_label
 
-    def otx_exists(self, otx_group_label: str) -> bool:
-        return self._get_inx_value(otx_group_label) != None
+    def otx_exists(self, otx_label: str) -> bool:
+        return self._get_inx_value(otx_label) != None
 
-    def del_otx2inx(self, otx_group_label: str):
-        self.otx2inx.pop(otx_group_label)
+    def del_otx2inx(self, otx_label: str):
+        self.otx2inx.pop(otx_label)
 
-    def reveal_inx(self, otx_group_label: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_group_label) is False:
-            inx_group_label = copy_copy(otx_group_label)
-            if self.inx_bridge in otx_group_label:
+    def reveal_inx(self, otx_label: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_label) is False:
+            inx_label = copy_copy(otx_label)
+            if self.inx_bridge in otx_label:
                 return None
             otx_r_bridge = self.otx_bridge
             inx_r_bridge = self.inx_bridge
-            inx_group_label = inx_group_label.replace(otx_r_bridge, inx_r_bridge)
-            self.set_otx2inx(otx_group_label, inx_group_label)
+            inx_label = inx_label.replace(otx_r_bridge, inx_r_bridge)
+            self.set_otx2inx(otx_label, inx_label)
 
-        return self._get_inx_value(otx_group_label)
+        return self._get_inx_value(otx_label)
 
     def _is_inx_bridge_inclusion_correct(self):
         return str_in_all_dict_values(self.inx_bridge, self.otx2inx)
