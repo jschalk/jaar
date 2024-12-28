@@ -85,7 +85,7 @@ from src.f07_deal.deal_config import (
     hour_idea_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_label_str,
+    weekday_idea_str,
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import (
@@ -223,7 +223,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[51] == hour_idea_str()
     assert table_sorting_priority[52] == cumlative_minute_str()
     assert table_sorting_priority[53] == cumlative_day_str()
-    assert table_sorting_priority[54] == weekday_label_str()
+    assert table_sorting_priority[54] == weekday_idea_str()
     assert table_sorting_priority[55] == weekday_order_str()
     assert table_sorting_priority[56] == otx_idea_str()
     assert table_sorting_priority[57] == inx_idea_str()
@@ -319,7 +319,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(hour_idea_str()) == "TEXT"
     assert sqlite_types.get(cumlative_minute_str()) == "INTEGER"
     assert sqlite_types.get(cumlative_day_str()) == "INTEGER"
-    assert sqlite_types.get(weekday_label_str()) == "TEXT"
+    assert sqlite_types.get(weekday_idea_str()) == "TEXT"
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
     assert sqlite_types.get(otx_bridge_str()) == "TEXT"
     assert sqlite_types.get(inx_bridge_str()) == "TEXT"

@@ -192,7 +192,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "team_id": "GroupID",
         "time_id": "TimeLinePoint",
         "timeline_idea": "IdeaUnit",
-        "weekday_label": "IdeaUnit",
+        "weekday_idea": "IdeaUnit",
         "weekday_order": "int",
         "bridge": "str",
         "yr1_jan1_offset": "int",

@@ -69,7 +69,7 @@ class br00005AbstractTable(Base):
     event_id = Column(Integer, primary_key=True)
     weekday_order = Column(Integer)
     deal_id = Column(String)
-    weekday_label = Column(String)
+    weekday_idea = Column(String)
 
 
 class br00011AbstractTable(Base):

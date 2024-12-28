@@ -3,7 +3,7 @@ from src.f04_gift.atom_config import face_id_str, deal_id_str
 from src.f07_deal.deal_config import (
     cumlative_minute_str,
     hour_idea_str,
-    weekday_label_str,
+    weekday_idea_str,
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import event_id_str
@@ -122,7 +122,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
         event_id_str(),
         face_id_str(),
         deal_id_str(),
-        weekday_label_str(),
+        weekday_idea_str(),
         weekday_order_str(),
     ]
     accord23_str = "accord23"

@@ -54,7 +54,7 @@ def pidginable_atom_args() -> set:
         "road",
         "team_id",
         "timeline_idea",
-        "weekday_label",
+        "weekday_idea",
     }
 
 

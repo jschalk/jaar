@@ -35,7 +35,7 @@ from src.f07_deal.deal_config import (
     hour_idea_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_label_str,
+    weekday_idea_str,
     weekday_order_str,
     dealunit_str,
     deal_purviewlog_str,
@@ -57,7 +57,7 @@ def test_str_functions_ReturnsObj():
     assert hour_idea_str() == "hour_idea"
     assert cumlative_minute_str() == "cumlative_minute"
     assert cumlative_day_str() == "cumlative_day"
-    assert weekday_label_str() == "weekday_label"
+    assert weekday_idea_str() == "weekday_idea"
     assert weekday_order_str() == "weekday_order"
     assert dealunit_str() == "dealunit"
     assert deal_purviewlog_str() == "deal_purviewlog"

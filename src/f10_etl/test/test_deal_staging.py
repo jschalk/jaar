@@ -22,7 +22,7 @@ from src.f07_deal.deal_config import (
     hour_idea_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_label_str,
+    weekday_idea_str,
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import event_id_str
@@ -48,7 +48,7 @@ from copy import copy as copy_copy
 # br00002 deal_id owner_id,acct_id,time_id,amount
 # br00003 deal_id hour_idea,cumlative_minute
 # br00004 deal_id month_idea,cumlative_day
-# br00005 deal_id weekday_label,weekday_order
+# br00005 deal_id weekday_idea,weekday_order
 
 
 def test_create_init_deal_staging_files_CreatesFiles(env_dir_setup_cleanup):
@@ -131,7 +131,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
     )
     expected_br3_columns.extend([hour_idea_str(), cumlative_minute_str()])
     expected_br4_columns.extend([month_idea_str(), cumlative_day_str()])
-    expected_br5_columns.extend([weekday_label_str(), weekday_order_str()])
+    expected_br5_columns.extend([weekday_idea_str(), weekday_order_str()])
 
     print(f"{list(br00000_df.columns)=}")
     assert list(br00000_df.columns) == expected_br0_columns

@@ -25,7 +25,7 @@ from src.f04_gift.atom_config import (
 )
 from src.f07_deal.deal_config import (
     get_deal_args_jaar_types,
-    weekday_label_str,
+    weekday_idea_str,
     month_idea_str,
     hour_idea_str,
 )
@@ -119,7 +119,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("team_id") == type_GroupID_str()
     assert pidgin_args_jaar_types.get("time_id") == "TimeLinePoint"
     assert pidgin_args_jaar_types.get("timeline_idea") == type_IdeaUnit_str()
-    assert pidgin_args_jaar_types.get("weekday_label") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("weekday_idea") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("weekday_order") == "int"
     assert pidgin_args_jaar_types.get("bridge") == "str"
     assert pidgin_args_jaar_types.get("yr1_jan1_offset") == "int"
@@ -201,7 +201,7 @@ def test_pidginable_atom_args_ReturnsObj():
         road_str(),
         team_id_str(),
         timeline_idea_str(),
-        weekday_label_str(),
+        weekday_idea_str(),
     }
 
     print(f"{pidginable_jaar_types()=}")

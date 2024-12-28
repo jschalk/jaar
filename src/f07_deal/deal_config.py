@@ -27,8 +27,8 @@ def cumlative_day_str() -> str:
     return "cumlative_day"
 
 
-def weekday_label_str() -> str:
-    return "weekday_label"
+def weekday_idea_str() -> str:
+    return "weekday_idea"
 
 
 def weekday_order_str() -> str:
@@ -136,7 +136,7 @@ def get_deal_args_jaar_types() -> dict[str, str]:
         "respect_bit": "float",
         "time_id": "TimeLinePoint",
         "timeline_idea": "IdeaUnit",
-        "weekday_label": "IdeaUnit",
+        "weekday_idea": "IdeaUnit",
         "weekday_order": "int",
         "bridge": "str",
         "yr1_jan1_offset": "int",

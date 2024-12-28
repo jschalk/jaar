@@ -61,7 +61,7 @@ def create_init_deal_staging_files(dir: str):
         "face_id",
         "event_id",
         "deal_id",
-        "weekday_label",
+        "weekday_idea",
         "weekday_order",
     ]
     br00000_df = DataFrame([], columns=br00000_columns)

@@ -283,8 +283,7 @@ def _get_deal_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
     for y_deal_id in br00005_df.deal_id.unique():
         query_str = f"deal_id == '{y_deal_id}'"
         x_weekdays_list = [
-            row["weekday_label"]
-            for index, row in br00005_df.query(query_str).iterrows()
+            row["weekday_idea"] for index, row in br00005_df.query(query_str).iterrows()
         ]
         deal_weekdays_dict[y_deal_id] = x_weekdays_list
     return deal_weekdays_dict

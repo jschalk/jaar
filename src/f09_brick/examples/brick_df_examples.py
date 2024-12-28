@@ -95,8 +95,8 @@ def get_ex1_br00004_df() -> DataFrame:
 
 def get_ex1_br00005_df() -> DataFrame:
     """brick_format_00005_deal_timeline_weekday_v0_0_0
-    deal_id,weekday_label,weekday_order"""
-    x_df = DataFrame(columns=["deal_id", "weekday_label", "weekday_order"])
+    deal_id,weekday_idea,weekday_order"""
+    x_df = DataFrame(columns=["deal_id", "weekday_idea", "weekday_order"])
     x_df.loc[0] = [ACCORD23_STR, "Wednesday", 0]
     x_df.loc[1] = [ACCORD23_STR, "Thursday", 1]
     x_df.loc[2] = [ACCORD23_STR, "Friday", 2]
@@ -241,8 +241,8 @@ def get_ex2_br00004_df() -> DataFrame:
 
 def get_ex2_br00005_df() -> DataFrame:
     """brick_format_00005_deal_timeline_weekday_v0_0_0
-    deal_id,weekday_label,weekday_order"""
-    x_df = DataFrame(columns=["deal_id", "weekday_label", "weekday_order"])
+    deal_id,weekday_idea,weekday_order"""
+    x_df = DataFrame(columns=["deal_id", "weekday_idea", "weekday_order"])
     x_df.loc[0] = [ACCORD23_STR, "Wednesday", 0]
     x_df.loc[1] = [ACCORD23_STR, "Thursday", 1]
     x_df.loc[2] = [ACCORD23_STR, "Friday", 2]
