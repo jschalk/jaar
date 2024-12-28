@@ -51,7 +51,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict is not None
     assert str(type(bud_dict)) == "<class 'dict'>"
     assert bud_dict["_owner_name"] == yao_bud._owner_name
-    assert bud_dict["_deal_idea"] == yao_bud.deal_idea
+    assert bud_dict["deal_idea"] == yao_bud.deal_idea
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["tally"] == bud_tally
     assert bud_dict["fund_pool"] == yao_fund_pool
@@ -189,7 +189,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     bud_dict = get_dict_from_json(x_json)
 
     assert bud_dict["_owner_name"] == zia_bud._owner_name
-    assert bud_dict["_deal_idea"] == zia_bud.deal_idea
+    assert bud_dict["deal_idea"] == zia_bud.deal_idea
     assert bud_dict["tally"] == zia_bud.tally
     assert bud_dict["fund_pool"] == zia_bud.fund_pool
     assert bud_dict["fund_coin"] == zia_bud.fund_coin
@@ -245,7 +245,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     # THEN
     _kids = "_kids"
     assert bud_dict["_owner_name"] == yao_bud._owner_name
-    assert bud_dict["_deal_idea"] == yao_bud.deal_idea
+    assert bud_dict["deal_idea"] == yao_bud.deal_idea
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["max_tree_traverse"] == 2
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse

@@ -560,7 +560,7 @@
             "debtit_belief": 1
         }
     },
-    "_deal_idea": "accord45",
+    "deal_idea": "accord45",
     "_itemroot": {
         "_kids": {
             "ACME": {

@@ -1365,7 +1365,7 @@ class BudUnit:
             "respect_bit": self.respect_bit,
             "penny": self.penny,
             "_owner_name": self._owner_name,
-            "_deal_idea": self.deal_idea,
+            "deal_idea": self.deal_idea,
             "max_tree_traverse": self.max_tree_traverse,
             "_bridge": self._bridge,
             "_itemroot": self._itemroot.get_dict(),
@@ -1457,8 +1457,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_owner_name(obj_from_bud_dict(bud_dict, "_owner_name"))
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
-    x_bud.deal_idea = obj_from_bud_dict(bud_dict, "_deal_idea")
-    x_bud._itemroot._idee = obj_from_bud_dict(bud_dict, "_deal_idea")
+    x_bud.deal_idea = obj_from_bud_dict(bud_dict, "deal_idea")
+    x_bud._itemroot._idee = obj_from_bud_dict(bud_dict, "deal_idea")
     bud_bridge = obj_from_bud_dict(bud_dict, "_bridge")
     x_bud._bridge = default_bridge_if_None(bud_bridge)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
