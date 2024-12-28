@@ -39,7 +39,7 @@ class not_given_pidgin_category_Exception(Exception):
 
 MAPS_CATEGORYS = {
     "map_name": "AcctName",
-    "map_group_label": "GroupLabel",
+    "map_label": "GroupLabel",
     "map_idea": "IdeaUnit",
     "map_road": "RoadUnit",
 }
@@ -325,7 +325,7 @@ def etl_boat_agg_to_pidgin_acct_staging(
 def etl_boat_agg_to_pidgin_group_staging(
     legitimate_events: set[EventInt], boat_dir: str
 ):
-    boat_agg_single_to_pidgin_staging("map_group_label", legitimate_events, boat_dir)
+    boat_agg_single_to_pidgin_staging("map_label", legitimate_events, boat_dir)
 
 
 def etl_boat_agg_to_pidgin_idea_staging(
@@ -426,7 +426,7 @@ def etl_pidgin_acct_staging_to_acct_agg(boat_dir: str):
 
 
 def etl_pidgin_group_staging_to_group_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "map_group_label")
+    etl_pidgin_single_staging_to_agg(boat_dir, "map_label")
 
 
 def etl_pidgin_road_staging_to_road_agg(boat_dir: str):

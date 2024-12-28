@@ -91,8 +91,8 @@ def map_name_str() -> str:
     return "map_name"
 
 
-def map_group_label_str() -> str:
-    return "map_group_label"
+def map_label_str() -> str:
+    return "map_label"
 
 
 def map_idea_str() -> str:
@@ -202,7 +202,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
 def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     """for each pidgin_config category contains the associated columns"""
     return {
-        "map_group_label": {
+        "map_label": {
             "inx_label",
             "unknown_word",
             "inx_bridge",

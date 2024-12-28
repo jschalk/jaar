@@ -104,7 +104,7 @@ from src.f08_pidgin.pidgin_config import (
     inx_label_str,
     map_otx2inx_str,
     map_name_str,
-    map_group_label_str,
+    map_label_str,
     map_idea_str,
     map_road_str,
     get_pidgin_categorys,
@@ -382,7 +382,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert bud_itemunit_str() in brick_config_categorys
     assert budunit_str() in brick_config_categorys
     assert map_name_str() in brick_config_categorys
-    assert map_group_label_str() in brick_config_categorys
+    assert map_label_str() in brick_config_categorys
     assert map_idea_str() in brick_config_categorys
     assert map_road_str() in brick_config_categorys
     assert get_atom_categorys().issubset(brick_config_categorys)
@@ -422,7 +422,7 @@ def _validate_brick_config(x_brick_config: dict):
             deal_timeline_weekday_str(),
             dealunit_str(),
             map_otx2inx_str(),
-            map_group_label_str(),
+            map_label_str(),
             map_name_str(),
             map_idea_str(),
             map_road_str(),
@@ -628,7 +628,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     # ESTABLISH / WHEN
     bo = build_order_str()
     # set_brick_config_json(map_name_str(), 0)
-    # set_brick_config_json(map_group_label_str(), 1)
+    # set_brick_config_json(map_label_str(), 1)
     # set_brick_config_json(map_idea_str(), 2)
     # set_brick_config_json(map_road_str(), 3)
     # set_brick_config_json(dealunit_str(), 5)
@@ -652,7 +652,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
 
     # THEN
     assert x_brick_config.get(map_name_str()).get(bo) == 0
-    assert x_brick_config.get(map_group_label_str()).get(bo) == 1
+    assert x_brick_config.get(map_label_str()).get(bo) == 1
     assert x_brick_config.get(map_idea_str()).get(bo) == 2
     assert x_brick_config.get(map_road_str()).get(bo) == 3
     assert x_brick_config.get(dealunit_str()).get(bo) == 5

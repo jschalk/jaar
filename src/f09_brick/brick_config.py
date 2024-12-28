@@ -205,8 +205,8 @@ def brick_format_00040_map_otx2inx_v0_0_0() -> str:
     return "brick_format_00040_map_otx2inx_v0_0_0"
 
 
-def brick_format_00042_map_group_label_v0_0_0() -> str:
-    return "brick_format_00042_map_group_label_v0_0_0"
+def brick_format_00042_map_label_v0_0_0() -> str:
+    return "brick_format_00042_map_label_v0_0_0"
 
 
 def brick_format_00043_map_name_v0_0_0() -> str:
@@ -260,7 +260,7 @@ def get_brick_format_filenames() -> set[str]:
         brick_format_00028_bud_itemunit_v0_0_0(),
         brick_format_00029_budunit_v0_0_0(),
         brick_format_00036_problem_healer_v0_0_0(),
-        brick_format_00042_map_group_label_v0_0_0(),
+        brick_format_00042_map_label_v0_0_0(),
         brick_format_00043_map_name_v0_0_0(),
         brick_format_00044_map_idea_v0_0_0(),
         brick_format_00045_map_road_v0_0_0(),
@@ -335,7 +335,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "addin,begin,close,deal_idea,denom,gogo_want,idee,mass,morph,numor,owner_name,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
         "credor_respect,deal_idea,debtor_respect,fund_coin,fund_pool,max_tree_traverse,owner_name,penny,purview_time_int,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
         "deal_idea,healer_name,idee,owner_name,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
-        "inx_bridge,inx_label,otx_bridge,otx_label,unknown_word": brick_format_00042_map_group_label_v0_0_0(),
+        "inx_bridge,inx_label,otx_bridge,otx_label,unknown_word": brick_format_00042_map_label_v0_0_0(),
         "inx_bridge,inx_name,otx_bridge,otx_name,unknown_word": brick_format_00043_map_name_v0_0_0(),
         "inx_bridge,inx_idea,otx_bridge,otx_idea,unknown_word": brick_format_00044_map_idea_v0_0_0(),
         "inx_bridge,inx_road,otx_bridge,otx_road,unknown_word": brick_format_00045_map_road_v0_0_0(),
@@ -542,7 +542,7 @@ def get_brick_category_ref() -> dict[str, set[str]]:
         "bud_item_reason_premiseunit": ["br00026"],
         "bud_item_reasonunit": ["br00027"],
         "budunit": ["br00029"],
-        "map_group_label": ["br00042", "br00115"],
+        "map_label": ["br00042", "br00115"],
         "map_name": ["br00043", "br00113"],
         "map_idea": ["br00044", "br00116"],
         "map_road": ["br00045", "br00117"],

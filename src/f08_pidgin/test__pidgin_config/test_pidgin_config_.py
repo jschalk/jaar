@@ -32,7 +32,7 @@ from src.f08_pidgin.pidgin_config import (
     otx2inx_str,
     map_otx2inx_str,
     map_name_str,
-    map_group_label_str,
+    map_label_str,
     map_idea_str,
     map_road_str,
 )
@@ -55,7 +55,7 @@ def test_str_functions_ReturnsObj():
     assert unknown_word_str() == "unknown_word"
     assert otx2inx_str() == "otx2inx"
     assert map_name_str() == "map_name"
-    assert map_group_label_str() == "map_group_label"
+    assert map_label_str() == "map_label"
     assert map_idea_str() == "map_idea"
     assert map_road_str() == "map_road"
     assert map_otx2inx_str() == "map_otx2inx"
@@ -80,7 +80,7 @@ def test_get_pidgin_config_dict_ReturnsObj():
     assert pidgin_config
     pidgin_config_categorys = set(pidgin_config.keys())
     assert map_name_str() in pidgin_config_categorys
-    assert map_group_label_str() in pidgin_config_categorys
+    assert map_label_str() in pidgin_config_categorys
     assert map_idea_str() in pidgin_config_categorys
     assert map_road_str() in pidgin_config_categorys
     assert len(pidgin_config) == 4
@@ -143,7 +143,7 @@ def test_get_pidgin_categorys_ReturnsObj():
 
     # THEN
     assert map_name_str() in pidgin_config_categorys
-    assert map_group_label_str() in pidgin_config_categorys
+    assert map_label_str() in pidgin_config_categorys
     assert map_idea_str() in pidgin_config_categorys
     assert map_road_str() in pidgin_config_categorys
     assert len(pidgin_config_categorys) == 4
