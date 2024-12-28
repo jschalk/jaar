@@ -32,8 +32,8 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     worlds2_dir = create_path(get_test_worlds_dir(), "worlds2")
     five_world_id = "five"
     world2_current_time = 55
-    accord_str = "accord45"
-    world2_timeconversions = {accord_str: timeconversion_shop(accord_str)}
+    accord45_str = "accord45"
+    world2_timeconversions = {accord45_str: timeconversion_shop(accord45_str)}
     world2_dealunits = {"accord45"}
     x_world = worldunit_shop(
         world_id=five_world_id,

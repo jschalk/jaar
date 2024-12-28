@@ -24,7 +24,7 @@ from os.path import exists as os_path_exists, isdir as os_path_isdir
 
 
 def test_DealUnit_Exists(env_dir_setup_cleanup):
-    accord_str = "accord"
+    accord45_str = "accord45"
     accord_deal = DealUnit()
     assert not accord_deal.deal_idea
     assert not accord_deal.timeline
@@ -66,13 +66,13 @@ def test_dealunit_shop_ReturnsDealUnit():
 
 def test_dealunit_shop_ReturnsDealUnitWith_deals_dir(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
 
     # WHEN
-    accord_deal = dealunit_shop(accord_str, deals_dir=get_test_deals_dir())
+    accord_deal = dealunit_shop(accord45_str, deals_dir=get_test_deals_dir())
 
     # THEN
-    assert accord_deal.deal_idea == accord_str
+    assert accord_deal.deal_idea == accord45_str
     assert accord_deal.deals_dir == get_test_deals_dir()
     assert accord_deal._owners_dir is not None
     assert accord_deal._gifts_dir is not None
@@ -80,7 +80,7 @@ def test_dealunit_shop_ReturnsDealUnitWith_deals_dir(env_dir_setup_cleanup):
 
 def test_dealunit_shop_ReturnsDealUnitWith_bridge(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
     slash_str = "/"
     x_fund_coin = 7.0
     x_respect_bit = 9
@@ -89,7 +89,7 @@ def test_dealunit_shop_ReturnsDealUnitWith_bridge(env_dir_setup_cleanup):
 
     # WHEN
     accord_deal = dealunit_shop(
-        deal_idea=accord_str,
+        deal_idea=accord45_str,
         deals_dir=get_test_deals_dir(),
         current_time=x_current_time,
         in_memory_journal=True,
@@ -109,9 +109,9 @@ def test_dealunit_shop_ReturnsDealUnitWith_bridge(env_dir_setup_cleanup):
 
 def test_DealUnit_set_deal_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = DealUnit(deal_idea=accord_str, deals_dir=get_test_deals_dir())
-    x_deal_dir = create_path(get_test_deals_dir(), accord_str)
+    accord45_str = "accord45"
+    accord_deal = DealUnit(deal_idea=accord45_str, deals_dir=get_test_deals_dir())
+    x_deal_dir = create_path(get_test_deals_dir(), accord45_str)
     x_owners_dir = create_path(x_deal_dir, "owners")
     x_gifts_dir = create_path(x_deal_dir, get_gifts_folder())
     journal_file_name = "journal.db"
@@ -142,27 +142,27 @@ def test_DealUnit_set_deal_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
 
 def test_dealunit_shop_SetsdealsDirs(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
 
     # WHEN
     accord_deal = dealunit_shop(
-        accord_str, get_test_deals_dir(), in_memory_journal=True
+        accord45_str, get_test_deals_dir(), in_memory_journal=True
     )
 
     # THEN
-    assert accord_deal.deal_idea == accord_str
-    assert accord_deal._deal_dir == create_path(get_test_deals_dir(), accord_str)
+    assert accord_deal.deal_idea == accord45_str
+    assert accord_deal._deal_dir == create_path(get_test_deals_dir(), accord45_str)
     assert accord_deal._owners_dir == create_path(accord_deal._deal_dir, "owners")
 
 
 def test_DealUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
     slash_str = "/"
     x_fund_coin = 4
     x_respect_bit = 5
     accord_deal = dealunit_shop(
-        accord_str,
+        accord45_str,
         get_test_deals_dir(),
         bridge=slash_str,
         fund_coin=x_fund_coin,
@@ -172,7 +172,7 @@ def test_DealUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanu
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(
         None,
-        accord_str,
+        accord45_str,
         sue_str,
         None,
         respect_bit=x_respect_bit,
@@ -190,13 +190,13 @@ def test_DealUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanu
 
 def test_DealUnit_get_owner_voice_from_file_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
     accord_deal = dealunit_shop(
-        accord_str, get_test_deals_dir(), in_memory_journal=True
+        accord45_str, get_test_deals_dir(), in_memory_journal=True
     )
     sue_str = "Sue"
     accord_deal.init_owner_keeps(sue_str)
-    sue_hubunit = hubunit_shop(None, accord_str, sue_str, None)
+    sue_hubunit = hubunit_shop(None, accord45_str, sue_str, None)
     bob_str = "Bob"
     sue_voice = sue_hubunit.get_voice_bud()
     sue_voice.add_acctunit(bob_str)
@@ -214,16 +214,16 @@ def test_DealUnit__set_all_healer_dutys_CorrectlySetsdutys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
     accord_deal = dealunit_shop(
-        accord_str, get_test_deals_dir(), in_memory_journal=True
+        accord45_str, get_test_deals_dir(), in_memory_journal=True
     )
     sue_str = "Sue"
     yao_str = "Yao"
     accord_deal.init_owner_keeps(sue_str)
     accord_deal.init_owner_keeps(yao_str)
-    sue_hubunit = hubunit_shop(None, accord_str, sue_str, None)
-    yao_hubunit = hubunit_shop(None, accord_str, yao_str, None)
+    sue_hubunit = hubunit_shop(None, accord45_str, sue_str, None)
+    yao_hubunit = hubunit_shop(None, accord45_str, yao_str, None)
     sue_voice_bud = sue_hubunit.get_voice_bud()
     yao_voice_bud = yao_hubunit.get_voice_bud()
 
@@ -253,8 +253,8 @@ def test_DealUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_hubunit.save_voice_bud(yao_voice_bud)
     sue_file_name = get_json_filename(sue_str)
     yao_file_name = get_json_filename(yao_str)
-    sue_dallas_hubunit = hubunit_shop(None, accord_str, sue_str, dallas_road)
-    yao_dallas_hubunit = hubunit_shop(None, accord_str, yao_str, dallas_road)
+    sue_dallas_hubunit = hubunit_shop(None, accord45_str, sue_str, dallas_road)
+    yao_dallas_hubunit = hubunit_shop(None, accord45_str, yao_str, dallas_road)
     sue_dutys_dir = sue_dallas_hubunit.dutys_dir()
     yao_dutys_dir = yao_dallas_hubunit.dutys_dir()
     sue_dallas_sue_duty_file_path = f"{sue_dutys_dir}/{sue_file_name}"
@@ -287,7 +287,9 @@ def test_DealUnit__set_all_healer_dutys_CorrectlySetsdutys(
 
 def test_DealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_deal = dealunit_shop("accord", get_test_deals_dir(), in_memory_journal=True)
+    accord_deal = dealunit_shop(
+        "accord45", get_test_deals_dir(), in_memory_journal=True
+    )
     sue_str = "Sue"
     yao_str = "Yao"
 

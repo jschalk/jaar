@@ -31,8 +31,8 @@ from src.f07_deal.examples.deal_env import (
 
 def test_DealUnit_get_dict_ReturnsObjWith_cashbook():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
     accord_current_time_int = 23
     bob_str = "Bob"
     bob_x0_time_int = 702
@@ -61,7 +61,7 @@ def test_DealUnit_get_dict_ReturnsObjWith_cashbook():
     # THEN
     print(f"{ accord_deal._get_purviewlogs_dict()=}")
     print(f"{ accord_deal.cashbook.get_dict()=}")
-    assert x_dict.get(deal_idea_str()) == accord_str
+    assert x_dict.get(deal_idea_str()) == accord45_str
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
     assert x_dict.get(current_time_str()) == accord_current_time_int
     assert x_dict.get(bridge_str()) == default_bridge_if_None()
@@ -85,8 +85,8 @@ def test_DealUnit_get_dict_ReturnsObjWith_cashbook():
 
 def test_DealUnit_get_dict_ReturnsObjWithOut_cashbook():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
 
     # WHEN
     x_dict = accord_deal.get_dict(include_cashbook=False)
@@ -107,8 +107,8 @@ def test_DealUnit_get_dict_ReturnsObjWithOut_cashbook():
 
 def test_DealUnit_get_json_ReturnsObj():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
     bob_str = "Bob"
     bob_x0_time_int = 702
     bob_x0_magnitude = 33
@@ -132,8 +132,8 @@ def test_DealUnit_get_json_ReturnsObj():
 
 def test_get_from_dict_ReturnsDealUnit():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str)
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str)
     sue_timeline_idea = "sue casa"
     accord_deal.timeline.timeline_idea = sue_timeline_idea
     sue_current_time = 23
@@ -163,7 +163,7 @@ def test_get_from_dict_ReturnsDealUnit():
     x_deal = dealunit_get_from_dict(x_dict)
 
     # THEN
-    assert x_deal.deal_idea == accord_str
+    assert x_deal.deal_idea == accord45_str
     assert x_deal.timeline.timeline_idea == sue_timeline_idea
     assert x_deal.current_time == sue_current_time
     assert x_deal.bridge == sue_bridge
@@ -177,8 +177,8 @@ def test_get_from_dict_ReturnsDealUnit():
 
 def test_get_from_json_ReturnsDealUnit():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str)
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str)
     sue_timeline_idea = "sue casa"
     accord_deal.timeline.timeline_idea = sue_timeline_idea
     sue_current_time = 23
@@ -208,7 +208,7 @@ def test_get_from_json_ReturnsDealUnit():
     x_deal = dealunit_get_from_json(accord_json)
 
     # THEN
-    assert x_deal.deal_idea == accord_str
+    assert x_deal.deal_idea == accord45_str
     assert x_deal.timeline.timeline_idea == sue_timeline_idea
     assert x_deal.current_time == sue_current_time
     assert x_deal.bridge == sue_bridge

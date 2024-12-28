@@ -18,14 +18,14 @@ from pytest import raises as pytest_raises
 
 def test_DealUnit_get_journal_db_path_ReturnsCorrectObj():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = DealUnit(deal_idea=accord_str, deals_dir=get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = DealUnit(deal_idea=accord45_str, deals_dir=get_test_deals_dir())
 
     # WHEN
     x_journal_db_path = accord_deal.get_journal_db_path()
 
     # THEN
-    x_deal_dir = create_path(get_test_deals_dir(), accord_str)
+    x_deal_dir = create_path(get_test_deals_dir(), accord45_str)
     journal_file_name = "journal.db"
     assert x_journal_db_path == create_path(x_deal_dir, journal_file_name)
 
@@ -34,8 +34,8 @@ def test_DealUnit_create_journal_db_CreatesDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(deal_idea=accord_str, deals_dir=get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(deal_idea=accord45_str, deals_dir=get_test_deals_dir())
     assert os_path_exists(accord_deal.get_journal_db_path())
     delete_dir(accord_deal.get_journal_db_path())
     assert os_path_exists(accord_deal.get_journal_db_path()) is False
@@ -51,8 +51,8 @@ def test_DealUnit_create_journal_db_DoesNotOverWriteDBIfExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(deal_idea=accord_str, deals_dir=get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(deal_idea=accord45_str, deals_dir=get_test_deals_dir())
     delete_dir(dir=accord_deal.get_journal_db_path())  # clear out any treasury.db file
     accord_deal._create_journal_db()
     assert os_path_exists(accord_deal.get_journal_db_path())
@@ -77,9 +77,9 @@ def test_DealUnit_create_journal_db_DoesNotOverWriteDBIfExists(
 
 def test_DealUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
     accord_deal = dealunit_shop(
-        deal_idea=accord_str, deals_dir=get_test_deals_dir(), in_memory_journal=True
+        deal_idea=accord45_str, deals_dir=get_test_deals_dir(), in_memory_journal=True
     )
 
     accord_deal._journal_db = None

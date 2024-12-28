@@ -13,10 +13,10 @@ from os.path import exists as os_path_exists
 
 def test_DealUnit_generate_final_bud_Sets_final_BudFile(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir(), True)
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir(), True)
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(None, accord_str, sue_str, None)
+    sue_hubunit = hubunit_shop(None, accord45_str, sue_str, None)
 
     x_sue_owner_dir = create_path(accord_deal._owners_dir, sue_str)
     x_final_dir = create_path(x_sue_owner_dir, "final")
@@ -32,14 +32,14 @@ def test_DealUnit_generate_final_bud_Sets_final_BudFile(env_dir_setup_cleanup):
     sue_final = accord_deal.generate_final_bud(sue_str)
 
     # THEN
-    example_bud = budunit_shop(sue_str, accord_str)
+    example_bud = budunit_shop(sue_str, accord45_str)
     assert sue_final._deal_idea == example_bud._deal_idea
     assert sue_final._owner_name == example_bud._owner_name
 
 
 def test_DealUnit_generate_final_bud_ReturnsRegeneratedObj(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_deal = dealunit_shop("accord", get_test_deals_dir(), True)
+    accord_deal = dealunit_shop("accord45", get_test_deals_dir(), True)
     sue_str = "Sue"
     accord_deal.init_owner_keeps(sue_str)
     sue_hubunit = hubunit_shop(
@@ -62,7 +62,7 @@ def test_DealUnit_generate_final_bud_SetsCorrectFileWithout_healerlink(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    accord_deal = dealunit_shop("accord", get_test_deals_dir(), True)
+    accord_deal = dealunit_shop("accord45", get_test_deals_dir(), True)
     bob_str = "Bob"
     accord_deal.init_owner_keeps(bob_str)
     bob_hubunit = hubunit_shop(
@@ -86,7 +86,7 @@ def test_DealUnit_generate_final_bud_SetsCorrectFileWithout_healerlink(
 
 def test_DealUnit_generate_final_bud_SetsFileWith_healerlink(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_deal = dealunit_shop("accord", get_test_deals_dir(), True)
+    accord_deal = dealunit_shop("accord45", get_test_deals_dir(), True)
 
     bob_str = "Bob"
     accord_deal.init_owner_keeps(bob_str)
@@ -118,7 +118,7 @@ def test_DealUnit_generate_all_final_buds_SetsCorrectFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    accord_deal = dealunit_shop("accord", get_test_deals_dir(), True)
+    accord_deal = dealunit_shop("accord45", get_test_deals_dir(), True)
 
     bob_str = "Bob"
     sue_str = "Sue"

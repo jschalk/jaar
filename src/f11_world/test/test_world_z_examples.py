@@ -12,10 +12,12 @@ def test_ocean_to_boat_staging_PidginsAll(env_dir_setup_cleanup):
     x_dir = create_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_file_name)
-    accord_str = "accord23"
+    accord23_str = "accord23"
     sue_str = "Sue"
     event_int = 55
-    df1 = DataFrame([[accord_str, sue_str]], columns=[deal_idea_str(), acct_name_str()])
+    df1 = DataFrame(
+        [[accord23_str, sue_str]], columns=[deal_idea_str(), acct_name_str()]
+    )
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     br00000_str = "br00000"
     br00001_str = "br00001"
