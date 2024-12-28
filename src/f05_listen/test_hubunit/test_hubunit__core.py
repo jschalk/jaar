@@ -297,7 +297,7 @@ def test_HubUnit_open_file_final_OpensFile(env_dir_setup_cleanup):
 def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit._owner_name
+    sue_str = sue_budunit.owner_name
     deal_idea = root_idea()
     sue_hubunit = hubunit_shop(env_dir(), deal_idea, sue_str, None)
 
@@ -333,7 +333,7 @@ def test_HubUnit_save_voice_bud_RaisesErrorWhenBud_final_id_IsWrong(
 def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit._owner_name
+    sue_str = sue_budunit.owner_name
     nation_str = "nation-state"
     nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
@@ -350,7 +350,7 @@ def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
 def test_HubUnit_save_final_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit._owner_name
+    sue_str = sue_budunit.owner_name
 
     deal_idea = root_idea()
     sue_hubunit = hubunit_shop(env_dir(), deal_idea, sue_str, None)
@@ -368,7 +368,7 @@ def test_HubUnit_save_final_bud_CorrectlySavesFile(env_dir_setup_cleanup):
 def test_HubUnit_get_final_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit._owner_name
+    sue_str = sue_budunit.owner_name
     nation_str = "nation-state"
     nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
@@ -385,7 +385,7 @@ def test_HubUnit_get_final_bud_OpensFile(env_dir_setup_cleanup):
 def test_HubUnit_get_final_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit._owner_name
+    sue_str = sue_budunit.owner_name
     sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
 
     # WHEN / THEN

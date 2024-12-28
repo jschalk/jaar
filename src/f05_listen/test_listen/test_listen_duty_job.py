@@ -221,7 +221,7 @@ def get_yao_ohio_hubunit() -> HubUnit:
     return hubunit_shop(
         deals_dir=env_dir(),
         deal_idea=yao_bud.deal_idea,
-        owner_name=yao_bud._owner_name,
+        owner_name=yao_bud.owner_name,
         keep_road=get_ohio_road(),
         # pipeline_voice_final_str(),
     )
@@ -232,7 +232,7 @@ def get_yao_iowa_hubunit() -> HubUnit:
     return hubunit_shop(
         deals_dir=env_dir(),
         deal_idea=yao_bud.deal_idea,
-        owner_name=yao_bud._owner_name,
+        owner_name=yao_bud.owner_name,
         keep_road=get_iowa_road(),
         # pipeline_voice_final_str(),
     )
@@ -288,7 +288,7 @@ def get_example_yao_voice_with_3_healers():
 #     assert len(yao_voice0._keep_dict) == 3
 #     print(f"{yao_voice0._item_dict.keys()=}")
 
-#     yao_str = yao_voice0._owner_name
+#     yao_str = yao_voice0.owner_name
 #     yao_job1 = get_example_yao_job1_speaker()
 #     yao_job2 = get_example_yao_job2_speaker()
 #     yao_job3 = get_example_yao_job3_speaker()
@@ -364,7 +364,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert len(yao_voice0._keep_dict) == 3
     # print(f"{yao_voice0._item_dict.keys()=}")
 
-    yao_str = yao_voice0._owner_name
+    yao_str = yao_voice0.owner_name
     yao_job1 = get_example_yao_job1_speaker()
     yao_job2 = get_example_yao_job2_speaker()
     yao_job3 = get_example_yao_job3_speaker()
@@ -436,6 +436,6 @@ def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
     # ESTABLISH
     assert sue_texas_hubunit.job_file_exists(yao_str)
     yao_job = sue_texas_hubunit.get_job_bud(yao_str)
-    assert yao_job._owner_name is not None
-    assert yao_job._owner_name == yao_str
+    assert yao_job.owner_name is not None
+    assert yao_job.owner_name == yao_str
     assert yao_job.get_dict() == yao_duty.get_dict()

@@ -102,9 +102,9 @@ def test_BudUnit_settle_bud_CorrectlySets_item_dict():
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_item = sue_budunit.get_item_obj(casa_road)
-    print(f"{sue_budunit._owner_name=} {len(casa_item.reasonunits)=}")
+    print(f"{sue_budunit.owner_name=} {len(casa_item.reasonunits)=}")
     # print(f"{casa_item.reasonunits=}")
-    print(f"{sue_budunit._owner_name=} {len(sue_budunit._itemroot.factunits)=}")
+    print(f"{sue_budunit.owner_name=} {len(sue_budunit._itemroot.factunits)=}")
     # print(f"{sue_budunit._itemroot.factunits=}")
 
     sue_budunit.settle_bud()
@@ -299,14 +299,14 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     inter_road = yao_budunit.make_l1_road(inter_str)
     yao_budunit.set_fact(base=inter_road, pick=inter_road)
     assert yao_budunit is not None
-    # print(f"{yao_budunit._owner_name=}")
+    # print(f"{yao_budunit.owner_name=}")
     # print(f"{len(yao_budunit._itemroot._kids)=}")
     ulty_str = "Ultimate Frisbee"
     ulty_road = yao_budunit.make_l1_road(ulty_str)
 
     # if yao_budunit._itemroot._kids["Ultimate Frisbee"]._idee == "Ultimate Frisbee":
     assert yao_budunit._itemroot._kids[ulty_str].reasonunits is not None
-    assert yao_budunit._owner_name is not None
+    assert yao_budunit.owner_name is not None
 
     # for fact in yao_budunit._itemroot.factunits.values():
     #     print(f"{fact=}")

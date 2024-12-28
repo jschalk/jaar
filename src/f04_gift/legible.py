@@ -227,26 +227,26 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     purview_time_int_value = jvalues.get(purview_time_int_str)
 
     if _max_tree_traverse_value is not None:
-        x_str = f"{x_bud._owner_name}'s maximum number of Bud evaluations set to {_max_tree_traverse_value}"
+        x_str = f"{x_bud.owner_name}'s maximum number of Bud evaluations set to {_max_tree_traverse_value}"
         legible_list.append(x_str)
     if (
         credor_respect_value is not None
         and debtor_respect_value is not None
         and credor_respect_value == debtor_respect_value
     ):
-        x_str = f"{x_bud._owner_name}'s total pool is now {credor_respect_value}"
+        x_str = f"{x_bud.owner_name}'s total pool is now {credor_respect_value}"
         legible_list.append(x_str)
     elif credor_respect_value is not None:
-        x_str = f"{x_bud._owner_name}'s credor pool is now {credor_respect_value}"
+        x_str = f"{x_bud.owner_name}'s credor pool is now {credor_respect_value}"
         legible_list.append(x_str)
     elif debtor_respect_value is not None:
-        x_str = f"{x_bud._owner_name}'s debtor pool is now {debtor_respect_value}"
+        x_str = f"{x_bud.owner_name}'s debtor pool is now {debtor_respect_value}"
         legible_list.append(x_str)
     if _tally_value is not None:
-        x_str = f"{x_bud._owner_name}'s bud tally set to {_tally_value}"
+        x_str = f"{x_bud.owner_name}'s bud tally set to {_tally_value}"
         legible_list.append(x_str)
     if purview_time_int_value is not None:
-        x_str = f"{x_bud._owner_name}'s bud {purview_time_int_str} set to {purview_time_int_value}"
+        x_str = f"{x_bud.owner_name}'s bud {purview_time_int_str} set to {purview_time_int_value}"
         legible_list.append(x_str)
 
 

@@ -60,19 +60,19 @@ def test_create_brick_df_Arg_brick_format_00021_bud_acctunit_v0_0_0():
     acct_brickref = get_brickref_obj(x_brick_name)
     assert array_headers == acct_brickref.get_headers_list()
     assert acct_dataframe.loc[0, deal_idea_str()] == accord_deal_idea
-    assert acct_dataframe.loc[0, owner_name_str()] == sue_budunit._owner_name
+    assert acct_dataframe.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[0, acct_name_str()] == bob_str
     assert acct_dataframe.loc[0, debtit_belief_str()] == bob_debtit_belief
     assert acct_dataframe.loc[0, credit_belief_str()] == bob_credit_belief
 
     assert acct_dataframe.loc[1, deal_idea_str()] == accord_deal_idea
-    assert acct_dataframe.loc[1, owner_name_str()] == sue_budunit._owner_name
+    assert acct_dataframe.loc[1, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[1, acct_name_str()] == sue_str
     assert acct_dataframe.loc[1, debtit_belief_str()] == sue_debtit_belief
     assert acct_dataframe.loc[1, credit_belief_str()] == sue_credit_belief
 
     assert acct_dataframe.loc[2, deal_idea_str()] == accord_deal_idea
-    assert acct_dataframe.loc[2, owner_name_str()] == sue_budunit._owner_name
+    assert acct_dataframe.loc[2, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[2, acct_name_str()] == yao_str
     assert acct_dataframe.loc[2, debtit_belief_str()] == yao_debtit_belief
     assert acct_dataframe.loc[2, credit_belief_str()] == yao_credit_belief
@@ -118,28 +118,28 @@ def test_create_brick_df_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     print(f"{len(membership_dataframe)=}")
     assert array_headers == acct_brickref.get_headers_list()
     assert membership_dataframe.loc[0, deal_idea_str()] == accord_deal_idea
-    assert membership_dataframe.loc[0, owner_name_str()] == sue_budunit._owner_name
+    assert membership_dataframe.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[0, acct_name_str()] == bob_str
     assert membership_dataframe.loc[0, group_label_str()] == iowa_str
     assert membership_dataframe.loc[0, credit_vote_str()] == bob_iowa_credit_w
     assert membership_dataframe.loc[0, debtit_vote_str()] == bob_iowa_debtit_w
 
     assert membership_dataframe.loc[2, deal_idea_str()] == accord_deal_idea
-    assert membership_dataframe.loc[2, owner_name_str()] == sue_budunit._owner_name
+    assert membership_dataframe.loc[2, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[2, acct_name_str()] == sue_str
     assert membership_dataframe.loc[2, group_label_str()] == iowa_str
     assert membership_dataframe.loc[2, credit_vote_str()] == sue_iowa_credit_w
     assert membership_dataframe.loc[2, debtit_vote_str()] == sue_iowa_debtit_w
 
     assert membership_dataframe.loc[4, deal_idea_str()] == accord_deal_idea
-    assert membership_dataframe.loc[4, owner_name_str()] == sue_budunit._owner_name
+    assert membership_dataframe.loc[4, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[4, acct_name_str()] == yao_str
     assert membership_dataframe.loc[4, group_label_str()] == iowa_str
     assert membership_dataframe.loc[4, credit_vote_str()] == yao_iowa_credit_w
     assert membership_dataframe.loc[4, debtit_vote_str()] == yao_iowa_debtit_w
 
     assert membership_dataframe.loc[5, deal_idea_str()] == accord_deal_idea
-    assert membership_dataframe.loc[5, owner_name_str()] == sue_budunit._owner_name
+    assert membership_dataframe.loc[5, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[5, acct_name_str()] == yao_str
     assert membership_dataframe.loc[5, group_label_str()] == ohio_str
     assert membership_dataframe.loc[5, credit_vote_str()] == yao_ohio_credit_w
@@ -168,14 +168,14 @@ def test_create_brick_df_Arg_brick_format_00013_itemunit_v0_0_0():
     array_headers = list(itemunit_format.columns)
     assert array_headers == get_brickref_obj(x_brick_name).get_headers_list()
 
-    assert itemunit_format.loc[0, owner_name_str()] == sue_budunit._owner_name
+    assert itemunit_format.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert itemunit_format.loc[0, pledge_str()] == ""
     assert itemunit_format.loc[0, deal_idea_str()] == accord_deal_idea
     assert itemunit_format.loc[0, idee_str()] == casa_str
     assert itemunit_format.loc[0, mass_str()] == casa_mass
     assert itemunit_format.loc[0, parent_road_str()] == accord_deal_idea
 
-    assert itemunit_format.loc[1, owner_name_str()] == sue_budunit._owner_name
+    assert itemunit_format.loc[1, owner_name_str()] == sue_budunit.owner_name
     assert itemunit_format.loc[1, pledge_str()] == "Yes"
     assert itemunit_format.loc[1, deal_idea_str()] == accord_deal_idea
     assert itemunit_format.loc[1, parent_road_str()] == casa_road

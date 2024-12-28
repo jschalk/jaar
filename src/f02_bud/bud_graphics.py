@@ -181,7 +181,7 @@ def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"OwnerName '{x_bud._owner_name}' bud accts metrics"
+    fig_title = f"OwnerName '{x_bud.owner_name}' bud accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
@@ -215,7 +215,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"OwnerName '{x_bud._owner_name}' bud agenda"
+    fig_title = f"OwnerName '{x_bud.owner_name}' bud agenda"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)

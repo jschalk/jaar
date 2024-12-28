@@ -8,14 +8,14 @@ def _is_empty_bud(x_bud: BudUnit) -> bool:
 
 
 def create_empty_bud(ref_bud: BudUnit, x_owner_name: OwnerName = None) -> BudUnit:
-    x_owner_name = ref_bud._owner_name if x_owner_name is None else x_owner_name
+    x_owner_name = ref_bud.owner_name if x_owner_name is None else x_owner_name
     x_bridge = ref_bud._bridge
     x_fund_pool = ref_bud.fund_pool
     x_fund_coin = ref_bud.fund_coin
     x_respect_bit = ref_bud.respect_bit
     x_penny = ref_bud.penny
     return budunit_shop(
-        _owner_name=x_owner_name,
+        owner_name=x_owner_name,
         deal_idea=ref_bud.deal_idea,
         _bridge=x_bridge,
         fund_pool=x_fund_pool,
@@ -26,7 +26,7 @@ def create_empty_bud(ref_bud: BudUnit, x_owner_name: OwnerName = None) -> BudUni
 
 
 def create_listen_basis(x_duty: BudUnit) -> BudUnit:
-    x_listen = create_empty_bud(x_duty, x_owner_name=x_duty._owner_name)
+    x_listen = create_empty_bud(x_duty, x_owner_name=x_duty.owner_name)
     x_listen._accts = x_duty._accts
     x_listen.set_max_tree_traverse(x_duty.max_tree_traverse)
     if x_duty.credor_respect is not None:

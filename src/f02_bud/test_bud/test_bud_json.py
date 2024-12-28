@@ -50,7 +50,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     # THEN
     assert bud_dict is not None
     assert str(type(bud_dict)) == "<class 'dict'>"
-    assert bud_dict["_owner_name"] == yao_bud._owner_name
+    assert bud_dict["owner_name"] == yao_bud.owner_name
     assert bud_dict["deal_idea"] == yao_bud.deal_idea
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["tally"] == bud_tally
@@ -188,7 +188,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert True == x_is_json(x_json)
     bud_dict = get_dict_from_json(x_json)
 
-    assert bud_dict["_owner_name"] == zia_bud._owner_name
+    assert bud_dict["owner_name"] == zia_bud.owner_name
     assert bud_dict["deal_idea"] == zia_bud.deal_idea
     assert bud_dict["tally"] == zia_bud.tally
     assert bud_dict["fund_pool"] == zia_bud.fund_pool
@@ -244,7 +244,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
 
     # THEN
     _kids = "_kids"
-    assert bud_dict["_owner_name"] == yao_bud._owner_name
+    assert bud_dict["owner_name"] == yao_bud.owner_name
     assert bud_dict["deal_idea"] == yao_bud.deal_idea
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["max_tree_traverse"] == 2
@@ -352,8 +352,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
 
     # THEN
     assert str(type(json_bud)).find(".bud.BudUnit'>") > 0
-    assert json_bud._owner_name is not None
-    assert json_bud._owner_name == zia_bud._owner_name
+    assert json_bud.owner_name is not None
+    assert json_bud.owner_name == zia_bud.owner_name
     assert json_bud.deal_idea == zia_bud.deal_idea
     assert json_bud.fund_pool == zia_fund_pool
     assert json_bud.fund_pool == zia_bud.fund_pool
@@ -514,25 +514,25 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     x1_bud = budunit_v001()
     x2_bud = get_budunit_x1_3levels_1reason_1facts()
     x3_bud = get_budunit_base_time_example()
-    print(f"{x1_bud._owner_name}")
-    print(f"{x2_bud._owner_name}")
-    print(f"{x3_bud._owner_name}")
+    print(f"{x1_bud.owner_name}")
+    print(f"{x2_bud.owner_name}")
+    print(f"{x3_bud.owner_name}")
 
     cn_dict_of_dicts = {
-        x1_bud._owner_name: x1_bud.get_dict(),
-        x2_bud._owner_name: x2_bud.get_dict(),
-        x3_bud._owner_name: x3_bud.get_dict(),
+        x1_bud.owner_name: x1_bud.get_dict(),
+        x2_bud.owner_name: x2_bud.get_dict(),
+        x3_bud.owner_name: x3_bud.get_dict(),
     }
 
     # WHEN
     ccn_dict_of_obj = get_dict_of_bud_from_dict(cn_dict_of_dicts)
 
     # THEN
-    assert ccn_dict_of_obj.get(x1_bud._owner_name) is not None
-    assert ccn_dict_of_obj.get(x2_bud._owner_name) is not None
-    assert ccn_dict_of_obj.get(x3_bud._owner_name) is not None
+    assert ccn_dict_of_obj.get(x1_bud.owner_name) is not None
+    assert ccn_dict_of_obj.get(x2_bud.owner_name) is not None
+    assert ccn_dict_of_obj.get(x3_bud.owner_name) is not None
 
-    ccn2_bud = ccn_dict_of_obj.get(x2_bud._owner_name)
+    ccn2_bud = ccn_dict_of_obj.get(x2_bud.owner_name)
     assert ccn2_bud._itemroot._idee == x2_bud._itemroot._idee
     assert ccn2_bud._itemroot._parent_road == x2_bud._itemroot._parent_road
     assert ccn2_bud._itemroot._fund_coin == x2_bud._itemroot._fund_coin
@@ -543,16 +543,16 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     # assert ccn2_bud._itemroot == x2_bud._itemroot
     assert ccn2_bud.get_dict() == x2_bud.get_dict()
 
-    ccn_bud3 = ccn_dict_of_obj.get(x3_bud._owner_name)
+    ccn_bud3 = ccn_dict_of_obj.get(x3_bud.owner_name)
     assert ccn_bud3.get_dict() == x3_bud.get_dict()
 
-    cc1_item_root = ccn_dict_of_obj.get(x1_bud._owner_name)._itemroot
+    cc1_item_root = ccn_dict_of_obj.get(x1_bud.owner_name)._itemroot
     assert cc1_item_root._originunit == x1_bud._itemroot._originunit
-    ccn_bud1 = ccn_dict_of_obj.get(x1_bud._owner_name)
+    ccn_bud1 = ccn_dict_of_obj.get(x1_bud.owner_name)
     assert ccn_bud1._item_dict == x1_bud._item_dict
     philipa_str = "Philipa"
     ccn_philipa_acctunit = ccn_bud1.get_acct(philipa_str)
     x1_philipa_acctunit = x1_bud.get_acct(philipa_str)
     assert ccn_philipa_acctunit._memberships == x1_philipa_acctunit._memberships
     assert ccn_bud1 == x1_bud
-    assert ccn_dict_of_obj.get(x1_bud._owner_name) == x1_bud
+    assert ccn_dict_of_obj.get(x1_bud.owner_name) == x1_bud

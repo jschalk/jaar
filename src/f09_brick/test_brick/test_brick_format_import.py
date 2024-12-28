@@ -55,19 +55,19 @@ def test_open_csv_ReturnsObj():
     acct_brickref = get_brickref_obj(j1_brickname)
     assert array_headers == acct_brickref.get_headers_list()
     assert acct_dataframe.loc[0, deal_idea_str()] == accord_deal_idea
-    assert acct_dataframe.loc[0, owner_name_str()] == sue_budunit._owner_name
+    assert acct_dataframe.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[0, acct_name_str()] == bob_str
     assert acct_dataframe.loc[0, credit_belief_str()] == bob_credit_belief
     assert acct_dataframe.loc[0, debtit_belief_str()] == bob_debtit_belief
 
     assert acct_dataframe.loc[1, deal_idea_str()] == accord_deal_idea
-    assert acct_dataframe.loc[1, owner_name_str()] == sue_budunit._owner_name
+    assert acct_dataframe.loc[1, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[1, acct_name_str()] == sue_str
     assert acct_dataframe.loc[1, credit_belief_str()] == sue_credit_belief
     assert acct_dataframe.loc[1, debtit_belief_str()] == sue_debtit_belief
 
     assert acct_dataframe.loc[2, deal_idea_str()] == accord_deal_idea
-    assert acct_dataframe.loc[2, owner_name_str()] == sue_budunit._owner_name
+    assert acct_dataframe.loc[2, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[2, acct_name_str()] == yao_str
     assert acct_dataframe.loc[2, credit_belief_str()] == yao_credit_belief
     assert acct_dataframe.loc[2, debtit_belief_str()] == yao_debtit_belief

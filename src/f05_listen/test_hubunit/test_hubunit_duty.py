@@ -98,7 +98,7 @@ def test_HubUnit_delete_duty_file_DeletesBudFile(env_dir_setup_cleanup):
     # ESTABLISH
     texas_hubunit = get_texas_hubunit()
     sue_bud = get_budunit_with_4_levels()
-    sue_str = sue_bud._owner_name
+    sue_str = sue_bud.owner_name
     texas_hubunit.save_duty_bud(sue_bud)
     print(f"{texas_hubunit.duty_path(sue_str)=}")
     duty_path = texas_hubunit.duty_path(sue_str)
@@ -194,7 +194,7 @@ def test_HubUnit_delete_job_file_DeletesBudFile(env_dir_setup_cleanup):
     # ESTABLISH
     texas_hubunit = get_texas_hubunit()
     sue_bud = get_budunit_with_4_levels()
-    sue_str = sue_bud._owner_name
+    sue_str = sue_bud.owner_name
     texas_hubunit.save_job_bud(sue_bud)
     print(f"{texas_hubunit.job_path(sue_str)=}")
     assert texas_hubunit.job_file_exists(sue_str)

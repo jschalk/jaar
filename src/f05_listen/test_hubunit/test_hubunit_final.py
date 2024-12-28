@@ -92,7 +92,7 @@ def test_HubUnit_initialize_final_file_CorrectlySavesFile(env_dir_setup_cleanup)
     # THEN
     final_bud = sue_hubunit.get_final_bud()
     assert final_bud.deal_idea == root_idea()
-    assert final_bud._owner_name == sue_str
+    assert final_bud.owner_name == sue_str
     bob_str = "Bob"
     assert final_bud.acct_exists(bob_str) is False
 
@@ -158,7 +158,7 @@ def test_HubUnit_initialize_final_file_CorrectlyDoesNotOverwrite(
     print(f"{final_file_str=}")
     final_bud = budunit_get_from_json(final_file_str)
     assert final_bud.deal_idea == root_idea()
-    assert final_bud._owner_name == sue_str
+    assert final_bud.owner_name == sue_str
     assert final_bud.fund_pool == sue_fund_pool
     assert final_bud.fund_coin == sue_fund_coin
     assert final_bud.respect_bit == sue_bit

@@ -5424,7 +5424,7 @@
     "_originunit": {
         "_originholds": {}
     },
-    "_owner_name": "Bob",
+    "owner_name": "Bob",
     "_bridge": ";",
     "mass": 1,
     "max_tree_traverse": 20,

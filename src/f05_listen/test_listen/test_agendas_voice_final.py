@@ -110,15 +110,15 @@ def test_listen_to_agendas_voice_final_AddsTasksToBudWithDetailsDecidedBy_debtit
     assert bob_cook_itemunit != zia_cook_itemunit
     assert len(zia_cook_itemunit.reasonunits) == 1
     assert len(bob_cook_itemunit.reasonunits) == 0
-    zia_str = zia_final._owner_name
-    bob_str = bob_final._owner_name
+    zia_str = zia_final.owner_name
+    bob_str = bob_final.owner_name
     zia_hubunit = hubunit_shop(env_dir(), None, zia_str)
     bob_hubunit = hubunit_shop(env_dir(), None, bob_str)
     zia_hubunit.save_final_bud(zia_final)
     bob_hubunit.save_final_bud(bob_final)
 
     yao_voice = get_example_yao_speaker()
-    yao_str = yao_voice._owner_name
+    yao_str = yao_voice.owner_name
     yao_hubunit = hubunit_shop(env_dir(), None, yao_str)
     yao_hubunit.save_voice_bud(yao_voice)
 

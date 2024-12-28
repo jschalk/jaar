@@ -118,7 +118,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 @dataclass
 class BudUnit:
     deal_idea: DealIdea = None
-    _owner_name: OwnerName = None
+    owner_name: OwnerName = None
     _last_gift_id: int = None
     tally: float = None
     _accts: dict[AcctName, AcctUnit] = None
@@ -163,7 +163,7 @@ class BudUnit:
 
     def set_fund_pool(self, x_fund_pool):
         if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:
-            exception_str = f"Bud '{self._owner_name}' cannot set fund_pool='{x_fund_pool}'. It is not divisible by fund_coin '{self.fund_coin}'"
+            exception_str = f"Bud '{self.owner_name}' cannot set fund_pool='{x_fund_pool}'. It is not divisible by fund_coin '{self.fund_coin}'"
             raise _bit_RatioException(exception_str)
 
         self.fund_pool = validate_fund_pool(x_fund_pool)
@@ -175,13 +175,13 @@ class BudUnit:
 
     def set_credor_respect(self, new_credor_respect: int):
         if valid_finance_ratio(new_credor_respect, self.respect_bit) is False:
-            exception_str = f"Bud '{self._owner_name}' cannot set credor_respect='{new_credor_respect}'. It is not divisible by bit '{self.respect_bit}'"
+            exception_str = f"Bud '{self.owner_name}' cannot set credor_respect='{new_credor_respect}'. It is not divisible by bit '{self.respect_bit}'"
             raise _bit_RatioException(exception_str)
         self.credor_respect = new_credor_respect
 
     def set_debtor_respect(self, new_debtor_respect: int):
         if valid_finance_ratio(new_debtor_respect, self.respect_bit) is False:
-            exception_str = f"Bud '{self._owner_name}' cannot set debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self.respect_bit}'"
+            exception_str = f"Bud '{self.owner_name}' cannot set debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self.respect_bit}'"
             raise _bit_RatioException(exception_str)
         self.debtor_respect = new_debtor_respect
 
@@ -703,7 +703,7 @@ class BudUnit:
             self.set_item(kid, parent_road=parent_road)
 
     def set_owner_name(self, new_owner_name):
-        self._owner_name = new_owner_name
+        self.owner_name = new_owner_name
 
     def edit_item_idee(self, old_road: RoadUnit, new_idee: IdeaUnit):
         if self._bridge in new_idee:
@@ -1147,7 +1147,7 @@ class BudUnit:
         x_item.set_reasonheirs(self._item_dict, parent_item._reasonheirs)
         x_item.set_range_factheirs(self._item_dict, self._range_inheritors)
         tt_count = self._tree_traverse_count
-        x_item.set_active_attrs(tt_count, self._groupunits, self._owner_name)
+        x_item.set_active_attrs(tt_count, self._groupunits, self.owner_name)
 
     def _allot_fund_share(self, item: ItemUnit):
         if item.awardheir_exists():
@@ -1229,7 +1229,7 @@ class BudUnit:
             if x_item._root:
                 tt_count = self._tree_traverse_count
                 root_item = self._itemroot
-                root_item.set_active_attrs(tt_count, self._groupunits, self._owner_name)
+                root_item.set_active_attrs(tt_count, self._groupunits, self.owner_name)
             else:
                 parent_item = self.get_item_obj(x_item._parent_road)
                 self._set_kids_active_status_attrs(x_item, parent_item)
@@ -1364,7 +1364,7 @@ class BudUnit:
             "fund_coin": self.fund_coin,
             "respect_bit": self.respect_bit,
             "penny": self.penny,
-            "_owner_name": self._owner_name,
+            "owner_name": self.owner_name,
             "deal_idea": self.deal_idea,
             "max_tree_traverse": self.max_tree_traverse,
             "_bridge": self._bridge,
@@ -1399,7 +1399,7 @@ class BudUnit:
 
 
 def budunit_shop(
-    _owner_name: OwnerName = None,
+    owner_name: OwnerName = None,
     deal_idea: DealIdea = None,
     _bridge: str = None,
     fund_pool: FundNum = None,
@@ -1408,10 +1408,10 @@ def budunit_shop(
     penny: PennyNum = None,
     tally: float = None,
 ) -> BudUnit:
-    _owner_name = "" if _owner_name is None else _owner_name
+    owner_name = "" if owner_name is None else owner_name
     deal_idea = get_default_deal_idea() if deal_idea is None else deal_idea
     x_bud = BudUnit(
-        _owner_name=_owner_name,
+        owner_name=owner_name,
         tally=get_1_if_None(tally),
         deal_idea=deal_idea,
         _accts=get_empty_dict_if_None(None),
@@ -1454,7 +1454,7 @@ def get_from_json(x_bud_json: str) -> BudUnit:
 
 def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud = budunit_shop()
-    x_bud.set_owner_name(obj_from_bud_dict(bud_dict, "_owner_name"))
+    x_bud.set_owner_name(obj_from_bud_dict(bud_dict, "owner_name"))
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
     x_bud.deal_idea = obj_from_bud_dict(bud_dict, "deal_idea")
@@ -1576,7 +1576,7 @@ def get_dict_of_bud_from_dict(x_dict: dict[str, dict]) -> dict[str, BudUnit]:
     budunits = {}
     for budunit_dict in x_dict.values():
         x_bud = get_from_dict(bud_dict=budunit_dict)
-        budunits[x_bud._owner_name] = x_bud
+        budunits[x_bud.owner_name] = x_bud
     return budunits
 
 

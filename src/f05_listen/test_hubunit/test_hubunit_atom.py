@@ -160,7 +160,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsFileWithZeroAtoms(
     yao_bud = yao_hubunit._get_bud_from_atom_files()
 
     # THEN
-    assert yao_bud._owner_name == yao_str
+    assert yao_bud.owner_name == yao_str
     assert yao_bud.deal_idea == yao_hubunit.deal_idea
     assert yao_bud._bridge == yao_hubunit.bridge
     assert yao_bud.fund_pool == yao_hubunit.fund_pool
@@ -183,7 +183,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleItem(
     yao_bud = yao_hubunit._get_bud_from_atom_files()
 
     # THEN
-    assert yao_bud._owner_name == yao_str
+    assert yao_bud.owner_name == yao_str
     assert yao_bud.deal_idea == yao_hubunit.deal_idea
     assert yao_bud._bridge == yao_hubunit.bridge
     sports_str = "sports"
@@ -211,7 +211,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     yao_bud = yao_hubunit._get_bud_from_atom_files()
 
     # THEN
-    assert yao_bud._owner_name == yao_str
+    assert yao_bud.owner_name == yao_str
     assert yao_bud.deal_idea == yao_hubunit.deal_idea
     assert yao_bud._bridge == yao_hubunit.bridge
     sports_str = "sports"

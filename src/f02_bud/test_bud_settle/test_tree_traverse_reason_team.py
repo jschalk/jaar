@@ -68,7 +68,7 @@ def test_bud_itemkid_teamunit_EmptyCorrectlySets_item_teamheir():
         teamunit=x_teamunit,
         bud_groupunits=bob_bud._groupunits,
     )
-    x_teamheir.set_owner_name_team(bob_bud._groupunits, bob_bud._owner_name)
+    x_teamheir.set_owner_name_team(bob_bud._groupunits, bob_bud.owner_name)
     print(f"{x_teamheir._owner_name_team=}")
     assert run_item._teamheir._owner_name_team == x_teamheir._owner_name_team
     assert run_item._teamheir == x_teamheir
@@ -101,7 +101,7 @@ def test_bud_itemkid_teamunit_EmptyCorrectlySets_item_teamheir():
         teamunit=x_teamunit,
         bud_groupunits=bob_bud._groupunits,
     )
-    x_teamheir.set_owner_name_team(bob_bud._groupunits, bob_bud._owner_name)
+    x_teamheir.set_owner_name_team(bob_bud._groupunits, bob_bud.owner_name)
     print(f"{x_teamheir._owner_name_team=}")
     assert run_item._teamheir._owner_name_team == x_teamheir._owner_name_team
     assert run_item._teamheir == x_teamheir

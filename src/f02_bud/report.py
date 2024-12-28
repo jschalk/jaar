@@ -42,7 +42,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
     x_item_list = []
     for x_item in agenda_dict.values():
         item_dict = {
-            "owner_name": x_bud._owner_name,
+            "owner_name": x_bud.owner_name,
             "fund_ratio": x_item._fund_ratio,
             "_idee": x_item._idee,
             "_parent_road": x_item._parent_road,

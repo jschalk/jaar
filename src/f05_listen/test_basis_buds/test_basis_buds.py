@@ -35,8 +35,8 @@ def test_create_empty_bud_ReturnsCorrectObj():
     yao_empty_job = create_empty_bud(yao_voice, x_owner_name=zia_str)
 
     # THEN
-    assert yao_empty_job._owner_name != yao_voice._owner_name
-    assert yao_empty_job._owner_name == zia_str
+    assert yao_empty_job.owner_name != yao_voice.owner_name
+    assert yao_empty_job.owner_name == zia_str
     assert yao_empty_job.deal_idea == yao_voice.deal_idea
     assert yao_empty_job._last_gift_id is None
     assert yao_empty_job.get_acctunits_dict() == {}
@@ -79,7 +79,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     yao_basis_job = create_listen_basis(yao_duty)
 
     # THEN
-    assert yao_basis_job._owner_name == yao_duty._owner_name
+    assert yao_basis_job.owner_name == yao_duty.owner_name
     assert yao_basis_job.deal_idea == yao_duty.deal_idea
     assert yao_basis_job._last_gift_id == yao_duty._last_gift_id
     assert yao_basis_job.get_acctunits_dict() == yao_duty.get_acctunits_dict()
@@ -130,8 +130,8 @@ def test_get_default_final_bud_ReturnsCorrectObj():
 
     # THEN
     default_final_bud.settle_bud()
-    assert default_final_bud._owner_name == sue_budunit._owner_name
-    assert default_final_bud._owner_name == sue_str
+    assert default_final_bud.owner_name == sue_budunit.owner_name
+    assert default_final_bud.owner_name == sue_str
     assert default_final_bud.deal_idea == sue_budunit.deal_idea
     assert default_final_bud.deal_idea == blue_str
     assert default_final_bud._bridge == slash_str

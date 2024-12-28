@@ -16,7 +16,7 @@ def get_deal_voices_accts_dataframe(x_deal: DealUnit) -> DataFrame:
         voice_bud = x_hubunit.get_voice_bud()
         voice_bud.settle_bud()
         df = get_bud_acctunits_dataframe(voice_bud)
-        df.insert(0, "owner_name", voice_bud._owner_name)
+        df.insert(0, "owner_name", voice_bud.owner_name)
         voice_dfs.append(df)
     return pandas_concat(voice_dfs, ignore_index=True)
 
@@ -72,7 +72,7 @@ def get_deal_finals_accts_dataframe(x_deal: DealUnit) -> DataFrame:
         final_bud = x_hubunit.get_final_bud()
         final_bud.settle_bud()
         final_df = get_bud_acctunits_dataframe(final_bud)
-        final_df.insert(0, "owner_name", final_bud._owner_name)
+        final_df.insert(0, "owner_name", final_bud.owner_name)
         final_dfs.append(final_df)
     return pandas_concat(final_dfs, ignore_index=True)
 

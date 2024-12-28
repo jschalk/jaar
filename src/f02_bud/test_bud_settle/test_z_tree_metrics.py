@@ -8,7 +8,7 @@ from src.f01_road.road import create_road_from_ideas
 
 def test_BudUnit_get_tree_metrics_exists():
     # ESTABLISH
-    zia_bud = budunit_shop(_owner_name="Zia")
+    zia_bud = budunit_shop(owner_name="Zia")
 
     # WHEN
     zia_bud_tree_metrics = zia_bud.get_tree_metrics()
@@ -65,7 +65,7 @@ def test_BudUnit_get_tree_set_all_item_uids_unique():
 def test_BudUnit_set_all_item_uids_unique_SetsUIDsCorrectly():
     # ESTABLISH
     zia_str = "Zia"
-    zia_bud = budunit_shop(_owner_name=zia_str)
+    zia_bud = budunit_shop(owner_name=zia_str)
     swim_str = "swim"
     sports_str = "sports"
     zia_bud.set_l1_item(itemunit_shop(swim_str, _uid=None))

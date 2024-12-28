@@ -39,8 +39,8 @@ def test_BudUnit_clear_item_dict_and_bud_obj_settle_attrs_CorrectlySetsAttrs():
     assert sue_bud._item_dict != x_item_dict
     assert sue_bud._item_dict == {sue_bud._itemroot.get_road(): sue_bud._itemroot}
     assert sue_bud._offtrack_kids_mass_set == set()
-    assert sue_bud._reason_bases == set()
-    assert sue_bud._range_inheritors == {}
+    assert not sue_bud._reason_bases
+    assert not sue_bud._range_inheritors
 
 
 def test_BudUnit_clear_item_dict_and_bud_obj_settle_attrs_CorrectlySetsAttrs():
@@ -131,7 +131,7 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
 
 def test_BudUnit_settle_bud_RootOnlyCorrectlySetsDescendantAttributes():
     # ESTABLISH
-    yao_bud = budunit_shop(_owner_name="Yao")
+    yao_bud = budunit_shop(owner_name="Yao")
     assert yao_bud._itemroot._descendant_pledge_count is None
     assert yao_bud._itemroot._all_acct_cred is None
     assert yao_bud._itemroot._all_acct_debt is None

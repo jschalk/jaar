@@ -21,7 +21,7 @@ def test_BudUnit_Exists():
     # THEN
     assert x_bud
     assert x_bud.deal_idea is None
-    assert x_bud._owner_name is None
+    assert x_bud.owner_name is None
     assert x_bud.tally is None
     assert x_bud._accts is None
     assert x_bud._itemroot is None
@@ -64,7 +64,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
 
     # WHEN
     x_bud = budunit_shop(
-        _owner_name=sue_str,
+        owner_name=sue_str,
         deal_idea=iowa_deal_idea,
         _bridge=slash_bridge,
         fund_pool=x_fund_pool,
@@ -75,7 +75,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
 
     # THEN
     assert x_bud
-    assert x_bud._owner_name == sue_str
+    assert x_bud.owner_name == sue_str
     assert x_bud.deal_idea == iowa_deal_idea
     assert x_bud.tally == 1
     assert x_bud._accts == {}
@@ -113,7 +113,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     x_bud = budunit_shop()
 
     # THEN
-    assert x_bud._owner_name == ""
+    assert x_bud.owner_name == ""
     assert x_bud.deal_idea == root_idea()
     assert x_bud._bridge == default_bridge_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
@@ -133,7 +133,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
 def test_BudUnit_set_max_tree_traverse_CorrectlySetsInt():
     # ESTABLISH
     zia_str = "Zia"
-    zia_bud = budunit_shop(_owner_name=zia_str)
+    zia_bud = budunit_shop(owner_name=zia_str)
     assert zia_bud.max_tree_traverse == 3
 
     # WHEN
@@ -146,7 +146,7 @@ def test_BudUnit_set_max_tree_traverse_CorrectlySetsInt():
 def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     # ESTABLISH
     zia_str = "Zia"
-    zia_bud = budunit_shop(_owner_name=zia_str)
+    zia_bud = budunit_shop(owner_name=zia_str)
     assert zia_bud.max_tree_traverse == 3
     zia_tree_traverse = 1
 
@@ -162,7 +162,7 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
 def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     # ESTABLISH
     zia_str = "Zia"
-    zia_bud = budunit_shop(_owner_name=zia_str)
+    zia_bud = budunit_shop(owner_name=zia_str)
     assert zia_bud.max_tree_traverse == 3
 
     # WHEN / THEN
