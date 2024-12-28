@@ -220,7 +220,7 @@ def get_yao_ohio_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
         deals_dir=env_dir(),
-        deal_idea=yao_bud._deal_idea,
+        deal_idea=yao_bud.deal_idea,
         owner_name=yao_bud._owner_name,
         keep_road=get_ohio_road(),
         # pipeline_voice_final_str(),
@@ -231,7 +231,7 @@ def get_yao_iowa_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
         deals_dir=env_dir(),
-        deal_idea=yao_bud._deal_idea,
+        deal_idea=yao_bud.deal_idea,
         owner_name=yao_bud._owner_name,
         keep_road=get_iowa_road(),
         # pipeline_voice_final_str(),
@@ -242,7 +242,7 @@ def get_zia_utah_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
         deals_dir=env_dir(),
-        deal_idea=yao_bud._deal_idea,
+        deal_idea=yao_bud.deal_idea,
         owner_name="Zia",
         keep_road=get_utah_road(),
         # pipeline_voice_final_str(),

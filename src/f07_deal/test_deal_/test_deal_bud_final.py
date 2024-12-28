@@ -33,7 +33,7 @@ def test_DealUnit_generate_final_bud_Sets_final_BudFile(env_dir_setup_cleanup):
 
     # THEN
     example_bud = budunit_shop(sue_str, accord45_str)
-    assert sue_final._deal_idea == example_bud._deal_idea
+    assert sue_final.deal_idea == example_bud.deal_idea
     assert sue_final._owner_name == example_bud._owner_name
 
 

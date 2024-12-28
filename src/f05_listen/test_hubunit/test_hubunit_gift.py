@@ -487,7 +487,7 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_1atom(
     sue_hubunit.save_gift_file(sue_1atomunits_giftunit())
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     voice_bud = sue_hubunit.get_voice_bud()
-    print(f"{voice_bud._deal_idea=}")
+    print(f"{voice_bud.deal_idea=}")
     print(f"{sue_hubunit.deal_idea=}")
     sports_str = "sports"
     sports_road = voice_bud.make_l1_road(sports_str)
@@ -512,7 +512,7 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_2atoms(
     sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     voice_bud = sue_hubunit.get_voice_bud()
-    print(f"{voice_bud._deal_idea=}")
+    print(f"{voice_bud.deal_idea=}")
     sports_str = "sports"
     sports_road = voice_bud.make_l1_road(sports_str)
     knee_str = "knee"

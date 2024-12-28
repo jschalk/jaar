@@ -20,7 +20,7 @@ def test_BudUnit_Exists():
 
     # THEN
     assert x_bud
-    assert x_bud._deal_idea is None
+    assert x_bud.deal_idea is None
     assert x_bud._owner_name is None
     assert x_bud.tally is None
     assert x_bud._accts is None
@@ -65,7 +65,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # WHEN
     x_bud = budunit_shop(
         _owner_name=sue_str,
-        _deal_idea=iowa_deal_idea,
+        deal_idea=iowa_deal_idea,
         _bridge=slash_bridge,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
@@ -76,7 +76,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # THEN
     assert x_bud
     assert x_bud._owner_name == sue_str
-    assert x_bud._deal_idea == iowa_deal_idea
+    assert x_bud.deal_idea == iowa_deal_idea
     assert x_bud.tally == 1
     assert x_bud._accts == {}
     assert x_bud._itemroot is not None
@@ -114,7 +114,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
 
     # THEN
     assert x_bud._owner_name == ""
-    assert x_bud._deal_idea == root_idea()
+    assert x_bud.deal_idea == root_idea()
     assert x_bud._bridge == default_bridge_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_None()
@@ -125,7 +125,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_bud._itemroot._root
     assert x_bud._itemroot._uid == 1
     assert x_bud._itemroot._level == 0
-    assert x_bud._itemroot._bud_deal_idea == x_bud._deal_idea
+    assert x_bud._itemroot._bud_deal_idea == x_bud.deal_idea
     assert x_bud._itemroot._bridge == x_bud._bridge
     assert x_bud._itemroot._parent_road == ""
 

@@ -16,7 +16,7 @@ def create_empty_bud(ref_bud: BudUnit, x_owner_name: OwnerName = None) -> BudUni
     x_penny = ref_bud.penny
     return budunit_shop(
         _owner_name=x_owner_name,
-        _deal_idea=ref_bud._deal_idea,
+        deal_idea=ref_bud.deal_idea,
         _bridge=x_bridge,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,

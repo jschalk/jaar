@@ -81,7 +81,7 @@ def create_brick_df(x_budunit: BudUnit, brick_name: str) -> DataFrame:
     x_deltaunit = deltaunit_shop()
     x_deltaunit.add_all_atomunits(x_budunit)
     x_brickref = get_brickref_obj(brick_name)
-    x_deal_idea = x_budunit._deal_idea
+    x_deal_idea = x_budunit.deal_idea
     x_owner_name = x_budunit._owner_name
     sorted_atomunits = _get_sorted_atom_insert_atomunits(x_deltaunit, x_brickref)
     d2_list = _create_d2_list(sorted_atomunits, x_brickref, x_deal_idea, x_owner_name)

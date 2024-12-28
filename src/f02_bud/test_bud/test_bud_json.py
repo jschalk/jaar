@@ -51,7 +51,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict is not None
     assert str(type(bud_dict)) == "<class 'dict'>"
     assert bud_dict["_owner_name"] == yao_bud._owner_name
-    assert bud_dict["_deal_idea"] == yao_bud._deal_idea
+    assert bud_dict["_deal_idea"] == yao_bud.deal_idea
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["tally"] == bud_tally
     assert bud_dict["fund_pool"] == yao_fund_pool
@@ -68,7 +68,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     x_itemroot = yao_bud._itemroot
     itemroot_dict = bud_dict["_itemroot"]
     _kids = "_kids"
-    assert x_itemroot._idee == yao_bud._deal_idea
+    assert x_itemroot._idee == yao_bud.deal_idea
     assert itemroot_dict["_idee"] == x_itemroot._idee
     assert itemroot_dict["mass"] == x_itemroot.mass
     assert len(itemroot_dict[_kids]) == len(x_itemroot._kids)
@@ -90,8 +90,8 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemroot_teamunit():
     sue_bud = budunit_shop("Sue")
     x_teamunit = teamunit_shop()
     x_teamunit.set_teamlink(team_label=run_str)
-    sue_bud.edit_item_attr(sue_bud._deal_idea, teamunit=x_teamunit)
-    root_item = sue_bud.get_item_obj(sue_bud._deal_idea)
+    sue_bud.edit_item_attr(sue_bud.deal_idea, teamunit=x_teamunit)
+    root_item = sue_bud.get_item_obj(sue_bud.deal_idea)
     x_gogo_want = 5
     x_stop_want = 11
     root_item.gogo_want = x_gogo_want
@@ -118,7 +118,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemroot_healerlink():
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop()
     run_healerlink.set_healer_name(x_healer_name=run_str)
-    sue_bud.edit_item_attr(road=sue_bud._deal_idea, healerlink=run_healerlink)
+    sue_bud.edit_item_attr(road=sue_bud.deal_idea, healerlink=run_healerlink)
 
     # WHEN
     bud_dict = sue_bud.get_dict()
@@ -175,8 +175,8 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     yao_acctunit = zia_bud.get_acct(yao_str)
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop({run_str})
-    zia_bud.edit_item_attr(road=zia_bud._deal_idea, healerlink=run_healerlink)
-    zia_bud.edit_item_attr(road=zia_bud._deal_idea, problem_bool=True)
+    zia_bud.edit_item_attr(road=zia_bud.deal_idea, healerlink=run_healerlink)
+    zia_bud.edit_item_attr(road=zia_bud.deal_idea, problem_bool=True)
 
     # WHEN
     x_json = zia_bud.get_json()
@@ -189,7 +189,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     bud_dict = get_dict_from_json(x_json)
 
     assert bud_dict["_owner_name"] == zia_bud._owner_name
-    assert bud_dict["_deal_idea"] == zia_bud._deal_idea
+    assert bud_dict["_deal_idea"] == zia_bud.deal_idea
     assert bud_dict["tally"] == zia_bud.tally
     assert bud_dict["fund_pool"] == zia_bud.fund_pool
     assert bud_dict["fund_coin"] == zia_bud.fund_coin
@@ -245,7 +245,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     # THEN
     _kids = "_kids"
     assert bud_dict["_owner_name"] == yao_bud._owner_name
-    assert bud_dict["_deal_idea"] == yao_bud._deal_idea
+    assert bud_dict["_deal_idea"] == yao_bud.deal_idea
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["max_tree_traverse"] == 2
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
@@ -325,13 +325,13 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     xio_acctunit.add_membership(run_str)
     run_teamunit = teamunit_shop()
     run_teamunit.set_teamlink(team_label=run_str)
-    zia_bud.edit_item_attr(zia_bud._deal_idea, teamunit=run_teamunit)
+    zia_bud.edit_item_attr(zia_bud.deal_idea, teamunit=run_teamunit)
     xio_teamunit = teamunit_shop()
     xio_teamunit.set_teamlink(team_label=xio_str)
     zia_bud.edit_item_attr(shave_road, teamunit=xio_teamunit)
     zia_bud.edit_item_attr(shave_road, awardlink=awardlink_shop(xio_str))
     zia_bud.edit_item_attr(shave_road, awardlink=awardlink_shop(sue_str))
-    zia_bud.edit_item_attr(zia_bud._deal_idea, awardlink=awardlink_shop(sue_str))
+    zia_bud.edit_item_attr(zia_bud.deal_idea, awardlink=awardlink_shop(sue_str))
     # add healerlink to shave itemunit
     run_healerlink = healerlink_shop({run_str})
     zia_bud.edit_item_attr(shave_road, healerlink=run_healerlink)
@@ -354,7 +354,7 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     assert str(type(json_bud)).find(".bud.BudUnit'>") > 0
     assert json_bud._owner_name is not None
     assert json_bud._owner_name == zia_bud._owner_name
-    assert json_bud._deal_idea == zia_bud._deal_idea
+    assert json_bud.deal_idea == zia_bud.deal_idea
     assert json_bud.fund_pool == zia_fund_pool
     assert json_bud.fund_pool == zia_bud.fund_pool
     assert json_bud.fund_coin == zia_fund_coin
@@ -420,7 +420,7 @@ def test_budunit_get_from_json_ReturnsCorrectItemRoot():
     # ESTABLISH
     zia_bud = get_budunit_x1_3levels_1reason_1facts()
     zia_bud.set_max_tree_traverse(23)
-    # root_item = zia_bud.get_item_obj(zia_bud.get_item_obj(zia_bud._deal_idea))
+    # root_item = zia_bud.get_item_obj(zia_bud.get_item_obj(zia_bud.deal_idea))
     root_item = zia_bud._itemroot
     zia_gogo_want = 75
     zia_stop_want = 77
@@ -433,7 +433,7 @@ def test_budunit_get_from_json_ReturnsCorrectItemRoot():
     json_bud = budunit_get_from_json(x_bud_json=x_json)
 
     # THEN
-    json_itemroot = json_bud.get_item_obj(zia_bud._deal_idea)
+    json_itemroot = json_bud.get_item_obj(zia_bud.deal_idea)
     assert json_itemroot.gogo_want == zia_gogo_want
     assert json_itemroot.stop_want == zia_stop_want
 

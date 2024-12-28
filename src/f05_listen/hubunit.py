@@ -202,7 +202,7 @@ class HubUnit:
     def default_voice_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
             _owner_name=self.owner_name,
-            _deal_idea=self.deal_idea,
+            deal_idea=self.deal_idea,
             _bridge=self.bridge,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,

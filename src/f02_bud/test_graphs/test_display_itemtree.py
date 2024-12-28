@@ -24,7 +24,7 @@ def test_display_itemtree_Scenario0(graphics_bool):
     a_bud = get_budunit_with_4_levels()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
-    print(f"Bud {a_bud._deal_idea}: Ideas ({len(a_bud._item_dict)})")
+    print(f"Bud {a_bud.deal_idea}: Ideas ({len(a_bud._item_dict)})")
 
     # WHEN / THEN
     x_fig = display_itemtree(a_bud, graphics_bool)
@@ -39,7 +39,7 @@ def test_display_itemtree_Scenario1_shows_Tasks(graphics_bool):
     a_bud = get_budunit_laundry_example1()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
-    print(f"Bud {a_bud._deal_idea}: Ideas ({len(a_bud._item_dict)})")
+    print(f"Bud {a_bud.deal_idea}: Ideas ({len(a_bud._item_dict)})")
 
     # WHEN / THEN
     display_itemtree(a_bud, mode="Task", graphics_bool=graphics_bool)
