@@ -6,8 +6,8 @@ from pytest import raises as pytest_raises
 
 def test_DealUnit_set_purviewlog_SetsAttr():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
     assert accord_deal.purviewlogs == {}
 
     # WHEN
@@ -22,8 +22,8 @@ def test_DealUnit_set_purviewlog_SetsAttr():
 
 def test_DealUnit_purviewlog_exists_ReturnsObj():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
     sue_str = "Sue"
     assert accord_deal.purviewlog_exists(sue_str) is False
 
@@ -37,8 +37,8 @@ def test_DealUnit_purviewlog_exists_ReturnsObj():
 
 def test_DealUnit_get_purviewlog_ReturnsObj():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
     accord_deal.set_purviewlog(sue_purviewlog)
@@ -54,8 +54,8 @@ def test_DealUnit_get_purviewlog_ReturnsObj():
 
 def test_DealUnit_del_purviewlog_SetsAttr():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
     accord_deal.set_purviewlog(sue_purviewlog)
@@ -70,8 +70,8 @@ def test_DealUnit_del_purviewlog_SetsAttr():
 
 def test_DealUnit_add_purviewepisode_SetsAttr():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
     assert accord_deal.purviewlogs == {}
 
     # WHEN
@@ -100,8 +100,8 @@ def test_DealUnit_add_purviewepisode_SetsAttr():
 
 def test_DealUnit_get_purviewlogs_time_ints_ReturnsObj():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
     bob_str = "Bob"
     bob_x0_time_int = 702
     bob_x0_magnitude = 33
@@ -124,8 +124,8 @@ def test_DealUnit_get_purviewlogs_time_ints_ReturnsObj():
 
 def test_DealUnit_add_purviewepisode_RaisesErrorWhenPurview_time_int_IsLessThan_current_time():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
     accord_current_time = 606
     accord_deal.current_time = accord_current_time
     bob_str = "Bob"
@@ -149,8 +149,8 @@ def test_DealUnit_add_purviewepisode_RaisesErrorWhenPurview_time_int_IsLessThan_
 
 def test_DealUnit_add_purviewepisode_DoesNotRaiseError_allow_prev_to_current_time_entry_IsTrue():
     # ESTABLISH
-    accord_str = "accord"
-    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord45_str = "accord45"
+    accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
     accord_current_time = 606
     accord_deal.current_time = accord_current_time
     bob_str = "Bob"

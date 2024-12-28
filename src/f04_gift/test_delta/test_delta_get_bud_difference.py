@@ -375,8 +375,8 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_delete():
     before_sue_bud.set_item(itemunit_shop(street_str), ball_road)
     disc_str = "Ultimate Disc"
     disc_road = before_sue_bud.make_road(sports_road, disc_str)
-    accord_str = "accord"
-    before_sue_bud.set_l1_item(itemunit_shop(accord_str))
+    accord45_str = "accord45"
+    before_sue_bud.set_l1_item(itemunit_shop(accord45_str))
     before_sue_bud.set_item(itemunit_shop(disc_str), sports_road)
     # create after without ball_item and street_item
     after_sue_bud = copy_deepcopy(before_sue_bud)
@@ -421,15 +421,15 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_insert():
     disc_str = "Ultimate Disc"
     disc_road = after_sue_bud.make_road(sports_road, disc_str)
     after_sue_bud.set_item(itemunit_shop(disc_str), sports_road)
-    accord_str = "accord"
+    accord45_str = "accord45"
     accord_begin = 34
     accord_close = 78
     accord_mass = 55
     accord_pledge = True
-    accord_road = after_sue_bud.make_l1_road(accord_str)
+    accord_road = after_sue_bud.make_l1_road(accord45_str)
     after_sue_bud.set_l1_item(
         itemunit_shop(
-            accord_str,
+            accord45_str,
             begin=accord_begin,
             close=accord_close,
             mass=accord_mass,
@@ -453,10 +453,10 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_insert():
         atom_insert(),
         bud_itemunit_str(),
         after_sue_bud._deal_idea,
-        accord_str,
+        accord45_str,
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value(idee_str()) == accord_str
+    assert ball_atomunit.get_value(idee_str()) == accord45_str
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._deal_idea
     assert ball_atomunit.get_value(begin_str()) == accord_begin
     assert ball_atomunit.get_value(close_str()) == accord_close
@@ -472,15 +472,15 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_update():
     before_sue_bud = budunit_shop(sue_str)
     sports_str = "sports"
     sports_road = before_sue_bud.make_l1_road(sports_str)
-    accord_str = "accord"
+    accord45_str = "accord45"
     before_accord_begin = 34
     before_accord_close = 78
     before_accord_mass = 55
     before_accord_pledge = True
-    accord_road = before_sue_bud.make_l1_road(accord_str)
+    accord_road = before_sue_bud.make_l1_road(accord45_str)
     before_sue_bud.set_l1_item(
         itemunit_shop(
-            accord_str,
+            accord45_str,
             begin=before_accord_begin,
             close=before_accord_close,
             mass=before_accord_mass,
@@ -512,11 +512,11 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_update():
         atom_update(),
         bud_itemunit_str(),
         after_sue_bud._deal_idea,
-        accord_str,
+        accord45_str,
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._deal_idea
-    assert ball_atomunit.get_value(idee_str()) == accord_str
+    assert ball_atomunit.get_value(idee_str()) == accord45_str
     assert ball_atomunit.get_value(begin_str()) == after_accord_begin
     assert ball_atomunit.get_value(close_str()) == after_accord_close
     assert ball_atomunit.get_value(mass_str()) == after_accord_mass

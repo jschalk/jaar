@@ -114,9 +114,9 @@ CREATE TABLE IF NOT EXISTS road_ref (
 
 def test_get_road_ref_table_single_insert_sqlstr_ReturnsCorrectStr():
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
     slash_str = "/"
-    texas_road = create_road(accord_str, "texas", bridge=slash_str)
+    texas_road = create_road(accord45_str, "texas", bridge=slash_str)
 
     # WHEN
     generate_sqlstr = get_road_ref_table_single_insert_sqlstr(texas_road, slash_str)
@@ -134,9 +134,9 @@ VALUES (
 
 def test_get_road_ref_table_row_id_select_sqlstr_ReturnsCorrectStr():
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
     slash_str = "/"
-    texas_road = create_road(accord_str, "texas", bridge=slash_str)
+    texas_road = create_road(accord45_str, "texas", bridge=slash_str)
 
     # WHEN
     generate_sqlstr = get_road_ref_table_row_id_select_sqlstr(texas_road, slash_str)

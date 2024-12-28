@@ -7,11 +7,11 @@ from src.f07_deal.examples.deal_env import get_test_deals_dir
 
 # def create_example_deal1(graphics_bool) -> DealUnit:
 #     # ESTABLISH
-#     accord_str = "accord"
-#     accord_deal = dealunit_shop(accord_str, get_test_deals_dir(), in_memory_journal=True)
+#     accord45_str = "accord45"
+#     accord_deal = dealunit_shop(accord45_str, get_test_deals_dir(), in_memory_journal=True)
 #     yao_str = "Yao"
 #     accord_deal.init_owner_keeps(yao_str)
-#     yao_hubunit = hubunit_shop(None, accord_str, yao_str, None)
+#     yao_hubunit = hubunit_shop(None, accord45_str, yao_str, None)
 #     yao_voice_bud = yao_hubunit.get_voice_bud()
 
 #     yao_voice_bud.set_credor_respect(101)
@@ -53,17 +53,17 @@ from src.f07_deal.examples.deal_env import get_test_deals_dir
 
 def create_example_deal2() -> DealUnit:
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
     accord_deal = dealunit_shop(
-        accord_str, get_test_deals_dir(), in_memory_journal=True
+        accord45_str, get_test_deals_dir(), in_memory_journal=True
     )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
     accord_deal.init_owner_keeps(yao_str)
-    yao_hubunit = hubunit_shop(None, accord_str, yao_str, None)
-    wei_hubunit = hubunit_shop(None, accord_str, wei_str, None)
-    zia_hubunit = hubunit_shop(None, accord_str, zia_str, None)
+    yao_hubunit = hubunit_shop(None, accord45_str, yao_str, None)
+    wei_hubunit = hubunit_shop(None, accord45_str, wei_str, None)
+    zia_hubunit = hubunit_shop(None, accord45_str, zia_str, None)
     accord_deal.init_owner_keeps(wei_str)
     accord_deal.init_owner_keeps(zia_str)
     yao_voice_bud = yao_hubunit.get_voice_bud()
@@ -120,9 +120,9 @@ def create_example_deal2() -> DealUnit:
 
 def create_example_deal3() -> DealUnit:
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
     accord_deal = dealunit_shop(
-        accord_str, get_test_deals_dir(), in_memory_journal=True
+        accord45_str, get_test_deals_dir(), in_memory_journal=True
     )
     yao_str = "Yao"
     wei_str = "Wei"
@@ -130,9 +130,9 @@ def create_example_deal3() -> DealUnit:
     accord_deal.init_owner_keeps(yao_str)
     accord_deal.init_owner_keeps(wei_str)
     accord_deal.init_owner_keeps(zia_str)
-    yao_hubunit = hubunit_shop(None, accord_str, yao_str, None)
-    wei_hubunit = hubunit_shop(None, accord_str, wei_str, None)
-    zia_hubunit = hubunit_shop(None, accord_str, zia_str, None)
+    yao_hubunit = hubunit_shop(None, accord45_str, yao_str, None)
+    wei_hubunit = hubunit_shop(None, accord45_str, wei_str, None)
+    zia_hubunit = hubunit_shop(None, accord45_str, zia_str, None)
     yao_voice_bud = yao_hubunit.get_voice_bud()
     wei_voice_bud = wei_hubunit.get_voice_bud()
     zia_voice_bud = zia_hubunit.get_voice_bud()
@@ -167,9 +167,9 @@ def create_example_deal3() -> DealUnit:
 
 def create_example_deal4() -> DealUnit:
     # ESTABLISH
-    accord_str = "accord"
+    accord45_str = "accord45"
     accord_deal = dealunit_shop(
-        accord_str, get_test_deals_dir(), in_memory_journal=True
+        accord45_str, get_test_deals_dir(), in_memory_journal=True
     )
     yao_str = "Yao"
     wei_str = "Wei"
@@ -177,9 +177,9 @@ def create_example_deal4() -> DealUnit:
     accord_deal.init_owner_keeps(yao_str)
     accord_deal.init_owner_keeps(wei_str)
     accord_deal.init_owner_keeps(zia_str)
-    yao_hubunit = hubunit_shop(None, accord_str, yao_str, None)
-    wei_hubunit = hubunit_shop(None, accord_str, wei_str, None)
-    zia_hubunit = hubunit_shop(None, accord_str, zia_str, None)
+    yao_hubunit = hubunit_shop(None, accord45_str, yao_str, None)
+    wei_hubunit = hubunit_shop(None, accord45_str, wei_str, None)
+    zia_hubunit = hubunit_shop(None, accord45_str, zia_str, None)
     yao_voice_bud = yao_hubunit.get_voice_bud()
     wei_voice_bud = wei_hubunit.get_voice_bud()
     zia_voice_bud = zia_hubunit.get_voice_bud()

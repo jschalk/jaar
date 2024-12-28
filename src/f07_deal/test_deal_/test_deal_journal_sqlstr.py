@@ -16,8 +16,8 @@
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     accord_str = "accord"
-#     accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+#     accord45_str = "accord45"
+#     accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
 #     # with accord_deal.get_journal_conn() as journal_conn:
 #     #     assert check_table_column_existence({atom_hx_table_name()}, journal_conn)
 #     #     assert get_row_count(journal_conn, atom_hx_table_name()) == 0

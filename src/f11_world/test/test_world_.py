@@ -98,8 +98,8 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     example_ocean_dir = f"{get_test_worlds_dir()}/example_ocean"
     five_world_id = "five"
     world2_current_time = 55
-    accord_str = "accord45"
-    world2timeconversions = {accord_str: timeconversion_shop(accord_str)}
+    accord45_str = "accord45"
+    world2timeconversions = {accord45_str: timeconversion_shop(accord45_str)}
     world2_dealunits = {"accord45"}
 
     # WHEN

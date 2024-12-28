@@ -595,17 +595,17 @@ def test_RoadMap_is_valid_ReturnsObj_Scenario0_idee_str():
 
 def test_RoadMap_is_valid_ReturnsObj_Scenario1_road_str():
     # ESTABLISH
-    accord_str = "accord45"
+    accord45_str = "accord45"
     otx_r_bridge = "/"
     inx_r_bridge = ":"
     clean_otx_str = "clean"
-    clean_otx_road = f"{accord_str}{otx_r_bridge}{clean_otx_str}"
+    clean_otx_road = f"{accord45_str}{otx_r_bridge}{clean_otx_str}"
     clean_inx_str = "prop"
-    clean_inx_road = f"{accord_str}{inx_r_bridge}{clean_inx_str}"
+    clean_inx_road = f"{accord45_str}{inx_r_bridge}{clean_inx_str}"
     # casa_otx = f"casa{otx_bridge}"
     # casa_inx = f"casa"
     x_roadmap = roadmap_shop(otx_bridge=otx_r_bridge, inx_bridge=inx_r_bridge)
-    x_roadmap.set_otx2inx(accord_str, accord_str)
+    x_roadmap.set_otx2inx(accord45_str, accord45_str)
     assert x_roadmap.is_valid()
     assert x_roadmap.otx2inx_exists(clean_otx_road, clean_inx_road) is False
 
