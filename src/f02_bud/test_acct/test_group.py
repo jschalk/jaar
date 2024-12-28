@@ -1,8 +1,8 @@
 from src.f01_road.finance import default_fund_coin_if_None
 from src.f01_road.road import (
-    get_default_deal_id_ideaunit as root_label,
+    get_default_deal_id_ideaunit as root_lx,
     create_road,
-    default_wall_if_None,
+    default_bridge_if_None,
 )
 from src.f02_bud.group import membership_shop
 from src.f02_bud.group import groupunit_shop, GroupUnit
@@ -24,14 +24,14 @@ def test_GroupUnit_exists():
     assert swim_groupunit._fund_agenda_take is None
     assert swim_groupunit._credor_pool is None
     assert swim_groupunit._debtor_pool is None
-    assert swim_groupunit._wall is None
+    assert swim_groupunit._bridge is None
     assert swim_groupunit._fund_coin is None
 
 
 def test_groupunit_shop_ReturnsCorrectObj():
     # ESTABLISH
     swim_str = ";swimmers"
-    nation_road = create_road(root_label(), "nation-states")
+    nation_road = create_road(root_lx(), "nation-states")
     usa_road = create_road(nation_road, "USA")
 
     # WHEN
@@ -49,11 +49,11 @@ def test_groupunit_shop_ReturnsCorrectObj():
     assert swim_groupunit._fund_agenda_take == 0
     assert swim_groupunit._credor_pool == 0
     assert swim_groupunit._debtor_pool == 0
-    assert swim_groupunit._wall == default_wall_if_None()
+    assert swim_groupunit._bridge == default_bridge_if_None()
     assert swim_groupunit._fund_coin == default_fund_coin_if_None()
 
 
-def test_groupunit_shop_ReturnsCorrectObj_wall():
+def test_groupunit_shop_ReturnsCorrectObj_bridge():
     # ESTABLISH
     swim_str = "/swimmers"
     slash_str = "/"
@@ -61,25 +61,25 @@ def test_groupunit_shop_ReturnsCorrectObj_wall():
 
     # WHEN
     swim_groupunit = groupunit_shop(
-        group_id=swim_str, _wall=slash_str, _fund_coin=x_fund_coin
+        group_id=swim_str, _bridge=slash_str, _fund_coin=x_fund_coin
     )
 
     # THEN
-    assert swim_groupunit._wall == slash_str
+    assert swim_groupunit._bridge == slash_str
     assert swim_groupunit._fund_coin == x_fund_coin
 
 
-# def test_GroupUnit_set_group_id_RaisesErrorIfParameterContains_wall_And_acct_mirror_True():
+# def test_GroupUnit_set_group_id_RaisesErrorIfParameterContains_bridge_And_acct_mirror_True():
 #     # ESTABLISH
 #     slash_str = "/"
 #     bob_str = f"Bob{slash_str}Texas"
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         groupunit_shop(bob_str, _acct_mirror=True, _wall=slash_str)
+#         groupunit_shop(bob_str, _acct_mirror=True, _bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain wall: '{slash_str}'"
+#         == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain bridge: '{slash_str}'"
 #     )
 
 
@@ -90,8 +90,8 @@ def test_GroupUnit_set_membership_CorrectlySetsAttr():
     swim_str = ";swimmers"
     yao_swim_membership = membership_shop(swim_str)
     sue_swim_membership = membership_shop(swim_str)
-    yao_swim_membership._acct_id = yao_str
-    sue_swim_membership._acct_id = sue_str
+    yao_swim_membership._acct_name = yao_str
+    sue_swim_membership._acct_name = sue_str
     swimmers_groupunit = groupunit_shop(swim_str)
 
     # WHEN
@@ -100,8 +100,8 @@ def test_GroupUnit_set_membership_CorrectlySetsAttr():
 
     # THEN
     swimmers_memberships = {
-        yao_swim_membership._acct_id: yao_swim_membership,
-        sue_swim_membership._acct_id: sue_swim_membership,
+        yao_swim_membership._acct_name: yao_swim_membership,
+        sue_swim_membership._acct_name: sue_swim_membership,
     }
     assert swimmers_groupunit._memberships == swimmers_memberships
 
@@ -113,9 +113,9 @@ def test_GroupUnit_set_membership_SetsAttr_credor_pool_debtor_pool():
     ohio_str = ";Ohio"
     yao_ohio_membership = membership_shop(ohio_str)
     sue_ohio_membership = membership_shop(ohio_str)
-    yao_ohio_membership._acct_id = yao_str
-    yao_ohio_membership._acct_id = yao_str
-    sue_ohio_membership._acct_id = sue_str
+    yao_ohio_membership._acct_name = yao_str
+    yao_ohio_membership._acct_name = yao_str
+    sue_ohio_membership._acct_name = sue_str
     yao_ohio_membership._credor_pool = 66
     sue_ohio_membership._credor_pool = 22
     yao_ohio_membership._debtor_pool = 6600
@@ -143,8 +143,8 @@ def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_id_IsWrong():
     ohio_str = ";Ohio"
     iowa_str = ";Iowa"
     yao_ohio_membership = membership_shop(ohio_str)
-    yao_ohio_membership._acct_id = yao_str
-    yao_ohio_membership._acct_id = yao_str
+    yao_ohio_membership._acct_name = yao_str
+    yao_ohio_membership._acct_name = yao_str
     yao_ohio_membership._credor_pool = 66
     yao_ohio_membership._debtor_pool = 6600
     iowa_groupunit = groupunit_shop(iowa_str)
@@ -158,16 +158,16 @@ def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_id_IsWrong():
     )
 
 
-def test_GroupUnit_set_membership_RaisesErrorIf_acct_id_IsNone():
+def test_GroupUnit_set_membership_RaisesErrorIf_acct_name_IsNone():
     # ESTABLISH
     ohio_str = ";Ohio"
     ohio_groupunit = groupunit_shop(ohio_str)
     yao_ohio_membership = membership_shop(ohio_str)
-    assert yao_ohio_membership._acct_id is None
+    assert yao_ohio_membership._acct_name is None
 
     with pytest_raises(Exception) as excinfo:
         ohio_groupunit.set_membership(yao_ohio_membership)
     assert (
         str(excinfo.value)
-        == f"membership group_id={ohio_str} cannot be set when _acct_id is None."
+        == f"membership group_id={ohio_str} cannot be set when _acct_name is None."
     )

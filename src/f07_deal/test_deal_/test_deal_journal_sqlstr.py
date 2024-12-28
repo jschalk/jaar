@@ -16,19 +16,19 @@
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     music_str = "music"
-#     music_deal = dealunit_shop(music_str, get_test_deals_dir())
-#     # with music_deal.get_journal_conn() as journal_conn:
+#     accord_str = "accord"
+#     accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+#     # with accord_deal.get_journal_conn() as journal_conn:
 #     #     assert check_table_column_existence({atom_hx_table_name()}, journal_conn)
 #     #     assert get_row_count(journal_conn, atom_hx_table_name()) == 0
 
 #     # WHEN
 #     x_atom = get_atom_example_factunit_knee()
-#     # with music_deal.get_journal_conn() as treasury_conn:
+#     # with accord_deal.get_journal_conn() as treasury_conn:
 #     #     treasury_conn.execute(get_atom_hx_table_insert_sqlstr(x_atom))
 
 #     # THEN
-#     with music_deal.get_journal_conn() as journal_conn:
+#     with accord_deal.get_journal_conn() as journal_conn:
 #         assert get_row_count(journal_conn, atom_hx_table_name()) == 1
 
 #     assert 1 == 2

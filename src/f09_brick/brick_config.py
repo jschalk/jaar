@@ -201,40 +201,40 @@ def brick_format_00029_budunit_v0_0_0() -> str:
     return "brick_format_00029_budunit_v0_0_0"
 
 
-def brick_format_00040_bridge_otx2inx_v0_0_0() -> str:
-    return "brick_format_00040_bridge_otx2inx_v0_0_0"
+def brick_format_00040_map_otx2inx_v0_0_0() -> str:
+    return "brick_format_00040_map_otx2inx_v0_0_0"
 
 
-def brick_format_00042_bridge_group_id_v0_0_0() -> str:
-    return "brick_format_00042_bridge_group_id_v0_0_0"
+def brick_format_00042_map_group_id_v0_0_0() -> str:
+    return "brick_format_00042_map_group_id_v0_0_0"
 
 
-def brick_format_00043_bridge_acct_id_v0_0_0() -> str:
-    return "brick_format_00043_bridge_acct_id_v0_0_0"
+def brick_format_00043_map_name_v0_0_0() -> str:
+    return "brick_format_00043_map_name_v0_0_0"
 
 
-def brick_format_00044_bridge_idea_v0_0_0() -> str:
-    return "brick_format_00044_bridge_idea_v0_0_0"
+def brick_format_00044_map_idea_v0_0_0() -> str:
+    return "brick_format_00044_map_idea_v0_0_0"
 
 
-def brick_format_00045_bridge_road_v0_0_0() -> str:
-    return "brick_format_00045_bridge_road_v0_0_0"
+def brick_format_00045_map_road_v0_0_0() -> str:
+    return "brick_format_00045_map_road_v0_0_0"
 
 
-def brick_format_00113_acct_bridge1_v0_0_0() -> str:
-    return "brick_format_00113_acct_bridge1_v0_0_0"
+def brick_format_00113_acct_map1_v0_0_0() -> str:
+    return "brick_format_00113_acct_map1_v0_0_0"
 
 
-def brick_format_00115_group_bridge1_v0_0_0() -> str:
-    return "brick_format_00115_group_bridge1_v0_0_0"
+def brick_format_00115_group_map1_v0_0_0() -> str:
+    return "brick_format_00115_group_map1_v0_0_0"
 
 
-def brick_format_00116_idea_bridge1_v0_0_0() -> str:
-    return "brick_format_00116_idea_bridge1_v0_0_0"
+def brick_format_00116_idea_map1_v0_0_0() -> str:
+    return "brick_format_00116_idea_map1_v0_0_0"
 
 
-def brick_format_00117_road_bridge1_v0_0_0() -> str:
-    return "brick_format_00117_road_bridge1_v0_0_0"
+def brick_format_00117_road_map1_v0_0_0() -> str:
+    return "brick_format_00117_road_map1_v0_0_0"
 
 
 def get_brick_format_filenames() -> set[str]:
@@ -260,14 +260,14 @@ def get_brick_format_filenames() -> set[str]:
         brick_format_00028_bud_itemunit_v0_0_0(),
         brick_format_00029_budunit_v0_0_0(),
         brick_format_00036_problem_healer_v0_0_0(),
-        brick_format_00042_bridge_group_id_v0_0_0(),
-        brick_format_00043_bridge_acct_id_v0_0_0(),
-        brick_format_00044_bridge_idea_v0_0_0(),
-        brick_format_00045_bridge_road_v0_0_0(),
-        brick_format_00113_acct_bridge1_v0_0_0(),
-        brick_format_00115_group_bridge1_v0_0_0(),
-        brick_format_00116_idea_bridge1_v0_0_0(),
-        brick_format_00117_road_bridge1_v0_0_0(),
+        brick_format_00042_map_group_id_v0_0_0(),
+        brick_format_00043_map_name_v0_0_0(),
+        brick_format_00044_map_idea_v0_0_0(),
+        brick_format_00045_map_road_v0_0_0(),
+        brick_format_00113_acct_map1_v0_0_0(),
+        brick_format_00115_group_map1_v0_0_0(),
+        brick_format_00116_idea_map1_v0_0_0(),
+        brick_format_00117_road_map1_v0_0_0(),
     }
 
 
@@ -314,35 +314,35 @@ def get_brick_format_filename(brick_number: str) -> str:
 
 def get_brick_format_headers() -> dict[str, list[str]]:
     return {
-        "c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,timeline_label,wall,yr1_jan1_offset": brick_format_00000_dealunit_v0_0_0(),
-        "acct_id,deal_id,owner_id,quota,time_id": brick_format_00001_deal_purview_episode_v0_0_0(),
-        "acct_id,amount,deal_id,owner_id,time_id": brick_format_00002_deal_cashbook_v0_0_0(),
-        "cumlative_minute,deal_id,hour_label": brick_format_00003_deal_timeline_hour_v0_0_0(),
-        "cumlative_day,deal_id,month_label": brick_format_00004_deal_timeline_month_v0_0_0(),
-        "deal_id,weekday_label,weekday_order": brick_format_00005_deal_timeline_weekday_v0_0_0(),
-        "acct_id,deal_id,owner_id": brick_format_00011_acct_v0_0_0(),
-        "acct_id,deal_id,group_id,owner_id": brick_format_00012_membership_v0_0_0(),
-        "deal_id,label,mass,owner_id,parent_road,pledge": brick_format_00013_itemunit_v0_0_0(),
-        "addin,begin,close,deal_id,denom,gogo_want,label,morph,numor,owner_id,parent_road,stop_want": brick_format_00019_itemunit_v0_0_0(),
-        "acct_id,credit_vote,deal_id,debtit_vote,group_id,owner_id": brick_format_00020_bud_acct_membership_v0_0_0(),
-        "acct_id,credit_belief,deal_id,debtit_belief,owner_id": brick_format_00021_bud_acctunit_v0_0_0(),
-        "awardee_id,deal_id,give_force,owner_id,road,take_force": brick_format_00022_bud_item_awardlink_v0_0_0(),
-        "base,deal_id,fnigh,fopen,owner_id,pick,road": brick_format_00023_bud_item_factunit_v0_0_0(),
-        "deal_id,owner_id,road,team_id": brick_format_00024_bud_item_teamlink_v0_0_0(),
-        "deal_id,healer_id,owner_id,road": brick_format_00025_bud_item_healerlink_v0_0_0(),
-        "base,deal_id,divisor,need,nigh,open,owner_id,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
-        "base,base_item_active_requisite,deal_id,owner_id,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),
-        "addin,begin,close,deal_id,denom,gogo_want,label,mass,morph,numor,owner_id,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
-        "credor_respect,deal_id,debtor_respect,fund_coin,fund_pool,max_tree_traverse,owner_id,penny,purview_time_id,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
-        "deal_id,healer_id,label,owner_id,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
-        "inx_group_id,inx_wall,otx_group_id,otx_wall,unknown_word": brick_format_00042_bridge_group_id_v0_0_0(),
-        "inx_acct_id,inx_wall,otx_acct_id,otx_wall,unknown_word": brick_format_00043_bridge_acct_id_v0_0_0(),
-        "inx_idea,inx_wall,otx_idea,otx_wall,unknown_word": brick_format_00044_bridge_idea_v0_0_0(),
-        "inx_road,inx_wall,otx_road,otx_wall,unknown_word": brick_format_00045_bridge_road_v0_0_0(),
-        "acct_id,deal_id,inx_acct_id,otx_acct_id,owner_id": brick_format_00113_acct_bridge1_v0_0_0(),
-        "acct_id,deal_id,inx_group_id,otx_group_id,owner_id": brick_format_00115_group_bridge1_v0_0_0(),
-        "acct_id,deal_id,inx_idea,otx_idea,owner_id": brick_format_00116_idea_bridge1_v0_0_0(),
-        "acct_id,deal_id,inx_road,otx_road,owner_id": brick_format_00117_road_bridge1_v0_0_0(),
+        "bridge,c400_number,current_time,deal_id,fund_coin,monthday_distortion,penny,respect_bit,timeline_idea,yr1_jan1_offset": brick_format_00000_dealunit_v0_0_0(),
+        "acct_name,deal_id,owner_name,quota,time_int": brick_format_00001_deal_purview_episode_v0_0_0(),
+        "acct_name,amount,deal_id,owner_name,time_int": brick_format_00002_deal_cashbook_v0_0_0(),
+        "cumlative_minute,deal_id,hour_idea": brick_format_00003_deal_timeline_hour_v0_0_0(),
+        "cumlative_day,deal_id,month_idea": brick_format_00004_deal_timeline_month_v0_0_0(),
+        "deal_id,weekday_idea,weekday_order": brick_format_00005_deal_timeline_weekday_v0_0_0(),
+        "acct_name,deal_id,owner_name": brick_format_00011_acct_v0_0_0(),
+        "acct_name,deal_id,group_id,owner_name": brick_format_00012_membership_v0_0_0(),
+        "deal_id,lx,mass,owner_name,parent_road,pledge": brick_format_00013_itemunit_v0_0_0(),
+        "addin,begin,close,deal_id,denom,gogo_want,lx,morph,numor,owner_name,parent_road,stop_want": brick_format_00019_itemunit_v0_0_0(),
+        "acct_name,credit_vote,deal_id,debtit_vote,group_id,owner_name": brick_format_00020_bud_acct_membership_v0_0_0(),
+        "acct_name,credit_belief,deal_id,debtit_belief,owner_name": brick_format_00021_bud_acctunit_v0_0_0(),
+        "awardee_id,deal_id,give_force,owner_name,road,take_force": brick_format_00022_bud_item_awardlink_v0_0_0(),
+        "base,deal_id,fnigh,fopen,owner_name,pick,road": brick_format_00023_bud_item_factunit_v0_0_0(),
+        "deal_id,owner_name,road,team_id": brick_format_00024_bud_item_teamlink_v0_0_0(),
+        "deal_id,healer_name,owner_name,road": brick_format_00025_bud_item_healerlink_v0_0_0(),
+        "base,deal_id,divisor,need,nigh,open,owner_name,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
+        "base,base_item_active_requisite,deal_id,owner_name,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),
+        "addin,begin,close,deal_id,denom,gogo_want,lx,mass,morph,numor,owner_name,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
+        "credor_respect,deal_id,debtor_respect,fund_coin,fund_pool,max_tree_traverse,owner_name,penny,purview_time_int,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
+        "deal_id,healer_name,lx,owner_name,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
+        "inx_bridge,inx_group_id,otx_bridge,otx_group_id,unknown_word": brick_format_00042_map_group_id_v0_0_0(),
+        "inx_bridge,inx_name,otx_bridge,otx_name,unknown_word": brick_format_00043_map_name_v0_0_0(),
+        "inx_bridge,inx_idea,otx_bridge,otx_idea,unknown_word": brick_format_00044_map_idea_v0_0_0(),
+        "inx_bridge,inx_road,otx_bridge,otx_road,unknown_word": brick_format_00045_map_road_v0_0_0(),
+        "acct_name,deal_id,inx_name,otx_name,owner_name": brick_format_00113_acct_map1_v0_0_0(),
+        "acct_name,deal_id,inx_group_id,otx_group_id,owner_name": brick_format_00115_group_map1_v0_0_0(),
+        "acct_name,deal_id,inx_idea,otx_idea,owner_name": brick_format_00116_idea_map1_v0_0_0(),
+        "acct_name,deal_id,inx_road,otx_road,owner_name": brick_format_00117_road_map1_v0_0_0(),
     }
 
 
@@ -363,22 +363,22 @@ def get_quick_bricks_column_ref() -> dict[str, set[str]]:
 
 def get_brick_elements_sort_order() -> list[str]:
     return [
-        "face_id",
-        "event_id",
+        "face_name",
+        "event_int",
         "deal_id",
-        "owner_id",
-        "acct_id",
+        "owner_name",
+        "acct_name",
         "group_id",
         "parent_road",
-        "label",
+        "lx",
         "road",
         "base",
         "need",
         "pick",
         "team_id",
         "awardee_id",
-        "healer_id",
-        "time_id",
+        "healer_name",
+        "time_int",
         "begin",
         "close",
         "addin",
@@ -405,7 +405,7 @@ def get_brick_elements_sort_order() -> list[str]:
         "divisor",
         "pledge",
         "problem_bool",
-        "purview_time_id",
+        "purview_time_int",
         "take_force",
         "tally",
         "fund_coin",
@@ -413,50 +413,50 @@ def get_brick_elements_sort_order() -> list[str]:
         "respect_bit",
         "current_time",
         "amount",
-        "month_label",
-        "hour_label",
+        "month_idea",
+        "hour_idea",
         "cumlative_minute",
         "cumlative_day",
-        "weekday_label",
+        "weekday_idea",
         "weekday_order",
         "otx_idea",
         "inx_idea",
         "otx_road",
         "inx_road",
-        "otx_acct_id",
-        "inx_acct_id",
+        "otx_name",
+        "inx_name",
         "otx_group_id",
         "inx_group_id",
-        "otx_wall",
-        "inx_wall",
-        "wall",
+        "otx_bridge",
+        "inx_bridge",
+        "bridge",
         "unknown_word",
         "c400_number",
         "yr1_jan1_offset",
         "quota",
         "monthday_distortion",
-        "timeline_label",
+        "timeline_idea",
     ]
 
 
 def get_brick_sqlite_type() -> dict[str, str]:
     return {
-        "face_id": "TEXT",
-        "event_id": "INTEGER",
+        "face_name": "TEXT",
+        "event_int": "INTEGER",
         "deal_id": "TEXT",
-        "owner_id": "TEXT",
-        "acct_id": "TEXT",
+        "owner_name": "TEXT",
+        "acct_name": "TEXT",
         "group_id": "TEXT",
         "parent_road": "TEXT",
-        "label": "TEXT",
+        "lx": "TEXT",
         "road": "TEXT",
         "base": "TEXT",
         "need": "TEXT",
         "pick": "TEXT",
         "team_id": "TEXT",
         "awardee_id": "TEXT",
-        "healer_id": "TEXT",
-        "time_id": "INTEGER",
+        "healer_name": "TEXT",
+        "time_int": "INTEGER",
         "begin": "REAL",
         "close": "REAL",
         "addin": "REAL",
@@ -483,7 +483,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "divisor": "REAL",
         "pledge": "INTEGER",
         "problem_bool": "INTEGER",
-        "purview_time_id": "INTEGER",
+        "purview_time_int": "INTEGER",
         "take_force": "REAL",
         "tally": "REAL",
         "fund_coin": "REAL",
@@ -491,29 +491,29 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "respect_bit": "REAL",
         "current_time": "INTEGER",
         "amount": "REAL",
-        "month_label": "TEXT",
-        "hour_label": "TEXT",
+        "month_idea": "TEXT",
+        "hour_idea": "TEXT",
         "cumlative_minute": "INTEGER",
         "cumlative_day": "INTEGER",
-        "weekday_label": "TEXT",
+        "weekday_idea": "TEXT",
         "weekday_order": "INTEGER",
-        "otx_wall": "TEXT",
-        "inx_wall": "TEXT",
+        "otx_bridge": "TEXT",
+        "inx_bridge": "TEXT",
         "unknown_word": "TEXT",
         "otx_idea": "TEXT",
         "inx_idea": "TEXT",
         "otx_road": "TEXT",
         "inx_road": "TEXT",
-        "otx_acct_id": "TEXT",
-        "inx_acct_id": "TEXT",
+        "otx_name": "TEXT",
+        "inx_name": "TEXT",
         "otx_group_id": "TEXT",
         "inx_group_id": "TEXT",
-        "wall": "TEXT",
+        "bridge": "TEXT",
         "c400_number": "INTEGER",
         "yr1_jan1_offset": "INTEGER",
         "quota": "REAL",
         "monthday_distortion": "INTEGER",
-        "timeline_label": "TEXT",
+        "timeline_idea": "TEXT",
     }
 
 
@@ -542,8 +542,8 @@ def get_brick_category_ref() -> dict[str, set[str]]:
         "bud_item_reason_premiseunit": ["br00026"],
         "bud_item_reasonunit": ["br00027"],
         "budunit": ["br00029"],
-        "bridge_group_id": ["br00042", "br00115"],
-        "bridge_acct_id": ["br00043", "br00113"],
-        "bridge_idea": ["br00044", "br00116"],
-        "bridge_road": ["br00045", "br00117"],
+        "map_group_id": ["br00042", "br00115"],
+        "map_name": ["br00043", "br00113"],
+        "map_idea": ["br00044", "br00116"],
+        "map_road": ["br00045", "br00117"],
     }

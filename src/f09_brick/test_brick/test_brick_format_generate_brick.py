@@ -8,11 +8,11 @@ from src.f02_bud.bud_tool import (
 from src.f02_bud.examples.example_buds import budunit_v001
 from src.f04_gift.atom_config import (
     atom_insert,
-    acct_id_str,
+    acct_name_str,
     group_id_str,
     parent_road_str,
     pledge_str,
-    label_str,
+    lx_str,
     mass_str,
     debtit_belief_str,
     credit_belief_str,
@@ -39,8 +39,8 @@ def test_make_deltaunit_Arg_brick_format_00021_bud_acctunit_v0_0_0():
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -54,12 +54,12 @@ def test_make_deltaunit_Arg_brick_format_00021_bud_acctunit_v0_0_0():
     # THEN
     assert sue_acct_deltaunit
     sue_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
-    sue_atomunit.set_arg(acct_id_str(), sue_str)
+    sue_atomunit.set_arg(acct_name_str(), sue_str)
     sue_atomunit.set_arg(credit_belief_str(), sue_credit_belief)
     sue_atomunit.set_arg(debtit_belief_str(), sue_debtit_belief)
     sue_atomunit.set_atom_order()
     bob_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
-    bob_atomunit.set_arg(acct_id_str(), bob_str)
+    bob_atomunit.set_arg(acct_name_str(), bob_str)
     bob_atomunit.set_arg(credit_belief_str(), bob_credit_belief)
     bob_atomunit.set_arg(debtit_belief_str(), bob_debtit_belief)
     bob_atomunit.set_atom_order()
@@ -78,8 +78,8 @@ def test_make_deltaunit_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     sue_budunit.add_acctunit(sue_str)
     sue_budunit.add_acctunit(bob_str)
     sue_budunit.add_acctunit(yao_str)
@@ -119,10 +119,10 @@ def test_make_deltaunit_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     bob_iowa_atomunit.set_arg(group_id_str(), iowa_str)
     yao_iowa_atomunit.set_arg(group_id_str(), iowa_str)
     yao_ohio_atomunit.set_arg(group_id_str(), ohio_str)
-    sue_iowa_atomunit.set_arg(acct_id_str(), sue_str)
-    bob_iowa_atomunit.set_arg(acct_id_str(), bob_str)
-    yao_iowa_atomunit.set_arg(acct_id_str(), yao_str)
-    yao_ohio_atomunit.set_arg(acct_id_str(), yao_str)
+    sue_iowa_atomunit.set_arg(acct_name_str(), sue_str)
+    bob_iowa_atomunit.set_arg(acct_name_str(), bob_str)
+    yao_iowa_atomunit.set_arg(acct_name_str(), yao_str)
+    yao_ohio_atomunit.set_arg(acct_name_str(), yao_str)
     sue_iowa_atomunit.set_arg(credit_vote_str(), sue_iowa_credit_vote)
     bob_iowa_atomunit.set_arg(credit_vote_str(), bob_iowa_credit_vote)
     yao_iowa_atomunit.set_arg(credit_vote_str(), yao_iowa_credit_vote)
@@ -147,8 +147,8 @@ def test_make_deltaunit_Arg_brick_format_00013_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31
@@ -166,14 +166,14 @@ def test_make_deltaunit_Arg_brick_format_00013_itemunit_v0_0_0():
     # THEN
     casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     casa_atomunit.set_arg(parent_road_str(), sue_budunit._deal_id)
-    casa_atomunit.set_arg(label_str(), casa_str)
+    casa_atomunit.set_arg(lx_str(), casa_str)
     casa_atomunit.set_arg(pledge_str(), False)
     casa_atomunit.set_arg(mass_str(), casa_mass)
     print(f"{casa_atomunit=}")
     assert casa_atomunit.get_value(mass_str()) == casa_mass
     clean_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     clean_atomunit.set_arg(parent_road_str(), casa_road)
-    clean_atomunit.set_arg(label_str(), clean_str)
+    clean_atomunit.set_arg(lx_str(), clean_str)
     clean_atomunit.set_arg(pledge_str(), True)
     clean_atomunit.set_arg(mass_str(), 1)
     assert itemunit_changunit.atomunit_exists(casa_atomunit)
@@ -202,8 +202,8 @@ def test_make_deltaunit_Arg_brick_format_00013_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    music_deal_id = "music56"
-    sue_budunit = budunit_shop(sue_str, music_deal_id)
+    accord_deal_id = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_deal_id)
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31
@@ -221,14 +221,14 @@ def test_make_deltaunit_Arg_brick_format_00013_itemunit_v0_0_0():
     # THEN
     casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     casa_atomunit.set_arg(parent_road_str(), sue_budunit._deal_id)
-    casa_atomunit.set_arg(label_str(), casa_str)
+    casa_atomunit.set_arg(lx_str(), casa_str)
     casa_atomunit.set_arg(pledge_str(), False)
     casa_atomunit.set_arg(mass_str(), casa_mass)
     print(f"{casa_atomunit=}")
     assert casa_atomunit.get_value(mass_str()) == casa_mass
     clean_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
     clean_atomunit.set_arg(parent_road_str(), casa_road)
-    clean_atomunit.set_arg(label_str(), clean_str)
+    clean_atomunit.set_arg(lx_str(), clean_str)
     clean_atomunit.set_arg(pledge_str(), True)
     clean_atomunit.set_arg(mass_str(), 1)
     assert itemunit_changunit.atomunit_exists(casa_atomunit)

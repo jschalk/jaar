@@ -3,7 +3,7 @@ from src.f02_bud.bud import BudUnit, budunit_shop
 
 
 def get_budunit_with_4_levels() -> BudUnit:
-    sue_bud = budunit_shop(_owner_id="Sue", tally=10)
+    sue_bud = budunit_shop(_owner_name="Sue", tally=10)
 
     casa = "casa"
     sue_bud.set_l1_item(itemunit_shop(casa, mass=30, pledge=True))
@@ -66,7 +66,7 @@ def get_budunit_with_4_levels() -> BudUnit:
 
 
 def get_fund_explanation_bud() -> BudUnit:
-    sue_bud = budunit_shop(_owner_id="Sue")
+    sue_bud = budunit_shop(_owner_name="Sue")
 
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)

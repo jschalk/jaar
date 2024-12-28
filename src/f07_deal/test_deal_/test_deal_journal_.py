@@ -18,14 +18,14 @@ from pytest import raises as pytest_raises
 
 def test_DealUnit_get_journal_db_path_ReturnsCorrectObj():
     # ESTABLISH
-    music_str = "music"
-    music_deal = DealUnit(deal_id=music_str, deals_dir=get_test_deals_dir())
+    accord_str = "accord"
+    accord_deal = DealUnit(deal_id=accord_str, deals_dir=get_test_deals_dir())
 
     # WHEN
-    x_journal_db_path = music_deal.get_journal_db_path()
+    x_journal_db_path = accord_deal.get_journal_db_path()
 
     # THEN
-    x_deal_dir = create_path(get_test_deals_dir(), music_str)
+    x_deal_dir = create_path(get_test_deals_dir(), accord_str)
     journal_file_name = "journal.db"
     assert x_journal_db_path == create_path(x_deal_dir, journal_file_name)
 
@@ -34,64 +34,64 @@ def test_DealUnit_create_journal_db_CreatesDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(deal_id=music_str, deals_dir=get_test_deals_dir())
-    assert os_path_exists(music_deal.get_journal_db_path())
-    delete_dir(music_deal.get_journal_db_path())
-    assert os_path_exists(music_deal.get_journal_db_path()) is False
+    accord_str = "accord"
+    accord_deal = dealunit_shop(deal_id=accord_str, deals_dir=get_test_deals_dir())
+    assert os_path_exists(accord_deal.get_journal_db_path())
+    delete_dir(accord_deal.get_journal_db_path())
+    assert os_path_exists(accord_deal.get_journal_db_path()) is False
 
     # WHEN
-    music_deal._create_journal_db()
+    accord_deal._create_journal_db()
 
     # THEN
-    assert os_path_exists(music_deal.get_journal_db_path())
+    assert os_path_exists(accord_deal.get_journal_db_path())
 
 
 def test_DealUnit_create_journal_db_DoesNotOverWriteDBIfExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(deal_id=music_str, deals_dir=get_test_deals_dir())
-    delete_dir(dir=music_deal.get_journal_db_path())  # clear out any treasury.db file
-    music_deal._create_journal_db()
-    assert os_path_exists(music_deal.get_journal_db_path())
+    accord_str = "accord"
+    accord_deal = dealunit_shop(deal_id=accord_str, deals_dir=get_test_deals_dir())
+    delete_dir(dir=accord_deal.get_journal_db_path())  # clear out any treasury.db file
+    accord_deal._create_journal_db()
+    assert os_path_exists(accord_deal.get_journal_db_path())
 
     # SETUP
     x_file_str = "Texas Dallas ElPaso"
     db_file = "journal.db"
-    save_file(music_deal._deal_dir, db_file, file_str=x_file_str, replace=True)
-    assert os_path_exists(music_deal.get_journal_db_path())
-    assert open_file(music_deal._deal_dir, file_name=db_file) == x_file_str
+    save_file(accord_deal._deal_dir, db_file, file_str=x_file_str, replace=True)
+    assert os_path_exists(accord_deal.get_journal_db_path())
+    assert open_file(accord_deal._deal_dir, file_name=db_file) == x_file_str
 
     # WHEN
-    music_deal._create_journal_db()
+    accord_deal._create_journal_db()
     # THEN
-    assert open_file(music_deal._deal_dir, file_name=db_file) == x_file_str
+    assert open_file(accord_deal._deal_dir, file_name=db_file) == x_file_str
 
     # # WHEN
-    # music_deal._create_journal_db(overwrite=True)
+    # accord_deal._create_journal_db(overwrite=True)
     # # THEN
-    # assert open_file(music_deal._deal_dir, file_name=db_file) != x_file_str
+    # assert open_file(accord_deal._deal_dir, file_name=db_file) != x_file_str
 
 
 def test_DealUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(
-        deal_id=music_str, deals_dir=get_test_deals_dir(), in_memory_journal=True
+    accord_str = "accord"
+    accord_deal = dealunit_shop(
+        deal_id=accord_str, deals_dir=get_test_deals_dir(), in_memory_journal=True
     )
 
-    music_deal._journal_db = None
-    assert music_deal._journal_db is None
-    assert os_path_exists(music_deal.get_journal_db_path()) is False
+    accord_deal._journal_db = None
+    assert accord_deal._journal_db is None
+    assert os_path_exists(accord_deal.get_journal_db_path()) is False
 
     # WHEN
-    music_deal._create_journal_db(in_memory=True)
+    accord_deal._create_journal_db(in_memory=True)
 
     # THEN
-    assert music_deal._journal_db is not None
-    assert os_path_exists(music_deal.get_journal_db_path()) is False
+    assert accord_deal._journal_db is not None
+    assert os_path_exists(accord_deal.get_journal_db_path()) is False
 
 
 def test_DealUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(

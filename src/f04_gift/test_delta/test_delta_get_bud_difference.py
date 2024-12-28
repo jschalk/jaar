@@ -16,14 +16,14 @@ from src.f02_bud.bud_tool import (
     bud_item_factunit_str,
 )
 from src.f04_gift.atom_config import (
-    acct_id_str,
+    acct_name_str,
     awardee_id_str,
     group_id_str,
     road_str,
     team_id_str,
-    healer_id_str,
+    healer_name_str,
     parent_road_str,
-    label_str,
+    lx_str,
     pledge_str,
     begin_str,
     close_str,
@@ -110,7 +110,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert(
     sue_insert_dict = sue_deltaunit.atomunits.get(atom_insert())
     sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_str())
     xio_atomunit = sue_acctunit_dict.get(xio_str)
-    assert xio_atomunit.get_value(acct_id_str()) == xio_str
+    assert xio_atomunit.get_value(acct_name_str()) == xio_str
     assert xio_atomunit.get_value("credit_belief") == xio_credit_belief
     assert xio_atomunit.get_value("debtit_belief") == xio_debtit_belief
 
@@ -138,7 +138,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_delete(
     xio_atomunit = get_from_nested_dict(
         sue_deltaunit.atomunits, [atom_delete(), bud_acctunit_str(), xio_str]
     )
-    assert xio_atomunit.get_value(acct_id_str()) == xio_str
+    assert xio_atomunit.get_value(acct_name_str()) == xio_str
 
     print(f"{get_atomunit_total_count(sue_deltaunit)=}")
     print_atomunit_keys(sue_deltaunit)
@@ -163,7 +163,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acctunit_update(
     # THEN
     x_keylist = [atom_update(), bud_acctunit_str(), xio_str]
     xio_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    assert xio_atomunit.get_value(acct_id_str()) == xio_str
+    assert xio_atomunit.get_value(acct_name_str()) == xio_str
     assert xio_atomunit.get_value("credit_belief") == xio_credit_belief
     assert xio_atomunit.get_value("debtit_belief") == xio_debtit_belief
 
@@ -183,9 +183,9 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_a
     x_max_tree_traverse = 66
     x_credor_respect = 770
     x_debtor_respect = 880
-    x_purview_time_id = 990000
+    x_purview_time_int = 990000
     after_sue_bud.tally = x_budunit_tally
-    after_sue_bud.purview_time_id = x_purview_time_id
+    after_sue_bud.purview_time_int = x_purview_time_int
     after_sue_bud.fund_pool = x_fund_pool
     after_sue_bud.fund_coin = x_fund_coin
     after_sue_bud.respect_bit = x_respect_bit
@@ -207,7 +207,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_a
     assert xio_atomunit.get_value("fund_pool") == x_fund_pool
     assert xio_atomunit.get_value("fund_coin") == x_fund_coin
     assert xio_atomunit.get_value("respect_bit") == x_respect_bit
-    assert xio_atomunit.get_value("purview_time_id") == x_purview_time_id
+    assert xio_atomunit.get_value("purview_time_int") == x_purview_time_int
 
     print(f"{get_atomunit_total_count(sue_deltaunit)=}")
     assert get_atomunit_total_count(sue_deltaunit) == 1
@@ -244,17 +244,17 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership_
     # THEN
     x_keylist = [atom_insert(), bud_acctunit_str(), yao_str]
     yao_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    assert yao_atomunit.get_value(acct_id_str()) == yao_str
+    assert yao_atomunit.get_value(acct_name_str()) == yao_str
 
     x_keylist = [atom_insert(), bud_acctunit_str(), zia_str]
     zia_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    assert zia_atomunit.get_value(acct_id_str()) == zia_str
+    assert zia_atomunit.get_value(acct_name_str()) == zia_str
     print(f"\n{sue_deltaunit.atomunits=}")
     # print(f"\n{zia_atomunit=}")
 
     x_keylist = [atom_insert(), bud_acct_membership_str(), zia_str, run_str]
     run_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    assert run_atomunit.get_value(acct_id_str()) == zia_str
+    assert run_atomunit.get_value(acct_name_str()) == zia_str
     assert run_atomunit.get_value(group_id_str()) == run_str
     assert run_atomunit.get_value("credit_vote") == zia_run_credit_w
     assert run_atomunit.get_value("debtit_vote") == zia_run_debtit_w
@@ -293,13 +293,13 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership_
     # THEN
     # x_keylist = [atom_update(), bud_acctunit_str(), xio_str]
     # xio_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    # assert xio_atomunit.get_value(acct_id_str()) == xio_str
+    # assert xio_atomunit.get_value(acct_name_str()) == xio_str
     # print(f"\n{sue_deltaunit.atomunits=}")
     # print(f"\n{xio_atomunit=}")
 
     x_keylist = [atom_update(), bud_acct_membership_str(), xio_str, run_str]
     xio_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    assert xio_atomunit.get_value(acct_id_str()) == xio_str
+    assert xio_atomunit.get_value(acct_name_str()) == xio_str
     assert xio_atomunit.get_value(group_id_str()) == run_str
     assert xio_atomunit.get_value("credit_vote") == after_xio_credit_w
     assert xio_atomunit.get_value("debtit_vote") == after_xio_debtit_w
@@ -350,7 +350,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_acct_membership_
     # THEN
     x_keylist = [atom_delete(), bud_acct_membership_str(), bob_str, fly_str]
     xio_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    assert xio_atomunit.get_value(acct_id_str()) == bob_str
+    assert xio_atomunit.get_value(acct_name_str()) == bob_str
     assert xio_atomunit.get_value(group_id_str()) == fly_str
 
     print(f"{get_atomunit_total_count(sue_deltaunit)=}")
@@ -375,8 +375,8 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_delete():
     before_sue_bud.set_item(itemunit_shop(street_str), ball_road)
     disc_str = "Ultimate Disc"
     disc_road = before_sue_bud.make_road(sports_road, disc_str)
-    music_str = "music"
-    before_sue_bud.set_l1_item(itemunit_shop(music_str))
+    accord_str = "accord"
+    before_sue_bud.set_l1_item(itemunit_shop(accord_str))
     before_sue_bud.set_item(itemunit_shop(disc_str), sports_road)
     # create after without ball_item and street_item
     after_sue_bud = copy_deepcopy(before_sue_bud)
@@ -393,12 +393,12 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_delete():
     x_keylist = [atom_delete(), bud_itemunit_str(), ball_road, street_str]
     street_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == ball_road
-    assert street_atomunit.get_value(label_str()) == street_str
+    assert street_atomunit.get_value(lx_str()) == street_str
 
     x_keylist = [atom_delete(), bud_itemunit_str(), sports_road, ball_str]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == sports_road
-    assert ball_atomunit.get_value(label_str()) == ball_str
+    assert ball_atomunit.get_value(lx_str()) == ball_str
 
     print(f"{get_atomunit_total_count(sue_deltaunit)=}")
     assert get_atomunit_total_count(sue_deltaunit) == 2
@@ -421,19 +421,19 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_insert():
     disc_str = "Ultimate Disc"
     disc_road = after_sue_bud.make_road(sports_road, disc_str)
     after_sue_bud.set_item(itemunit_shop(disc_str), sports_road)
-    music_str = "music"
-    music_begin = 34
-    music_close = 78
-    music_mass = 55
-    music_pledge = True
-    music_road = after_sue_bud.make_l1_road(music_str)
+    accord_str = "accord"
+    accord_begin = 34
+    accord_close = 78
+    accord_mass = 55
+    accord_pledge = True
+    accord_road = after_sue_bud.make_l1_road(accord_str)
     after_sue_bud.set_l1_item(
         itemunit_shop(
-            music_str,
-            begin=music_begin,
-            close=music_close,
-            mass=music_mass,
-            pledge=music_pledge,
+            accord_str,
+            begin=accord_begin,
+            close=accord_close,
+            mass=accord_mass,
+            pledge=accord_pledge,
         )
     )
 
@@ -447,21 +447,21 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_insert():
     x_keylist = [atom_insert(), bud_itemunit_str(), sports_road, disc_str]
     street_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert street_atomunit.get_value(parent_road_str()) == sports_road
-    assert street_atomunit.get_value(label_str()) == disc_str
+    assert street_atomunit.get_value(lx_str()) == disc_str
 
     x_keylist = [
         atom_insert(),
         bud_itemunit_str(),
         after_sue_bud._deal_id,
-        music_str,
+        accord_str,
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value(label_str()) == music_str
+    assert ball_atomunit.get_value(lx_str()) == accord_str
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._deal_id
-    assert ball_atomunit.get_value(begin_str()) == music_begin
-    assert ball_atomunit.get_value(close_str()) == music_close
-    assert ball_atomunit.get_value(mass_str()) == music_mass
-    assert ball_atomunit.get_value(pledge_str()) == music_pledge
+    assert ball_atomunit.get_value(begin_str()) == accord_begin
+    assert ball_atomunit.get_value(close_str()) == accord_close
+    assert ball_atomunit.get_value(mass_str()) == accord_mass
+    assert ball_atomunit.get_value(pledge_str()) == accord_pledge
 
     assert get_atomunit_total_count(sue_deltaunit) == 2
 
@@ -472,33 +472,33 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_update():
     before_sue_bud = budunit_shop(sue_str)
     sports_str = "sports"
     sports_road = before_sue_bud.make_l1_road(sports_str)
-    music_str = "music"
-    before_music_begin = 34
-    before_music_close = 78
-    before_music_mass = 55
-    before_music_pledge = True
-    music_road = before_sue_bud.make_l1_road(music_str)
+    accord_str = "accord"
+    before_accord_begin = 34
+    before_accord_close = 78
+    before_accord_mass = 55
+    before_accord_pledge = True
+    accord_road = before_sue_bud.make_l1_road(accord_str)
     before_sue_bud.set_l1_item(
         itemunit_shop(
-            music_str,
-            begin=before_music_begin,
-            close=before_music_close,
-            mass=before_music_mass,
-            pledge=before_music_pledge,
+            accord_str,
+            begin=before_accord_begin,
+            close=before_accord_close,
+            mass=before_accord_mass,
+            pledge=before_accord_pledge,
         )
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_music_begin = 99
-    after_music_close = 111
-    after_music_mass = 22
-    after_music_pledge = False
+    after_accord_begin = 99
+    after_accord_close = 111
+    after_accord_mass = 22
+    after_accord_pledge = False
     after_sue_bud.edit_item_attr(
-        music_road,
-        begin=after_music_begin,
-        close=after_music_close,
-        mass=after_music_mass,
-        pledge=after_music_pledge,
+        accord_road,
+        begin=after_accord_begin,
+        close=after_accord_close,
+        mass=after_accord_mass,
+        pledge=after_accord_pledge,
     )
 
     # WHEN
@@ -512,15 +512,15 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_update():
         atom_update(),
         bud_itemunit_str(),
         after_sue_bud._deal_id,
-        music_str,
+        accord_str,
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud._deal_id
-    assert ball_atomunit.get_value(label_str()) == music_str
-    assert ball_atomunit.get_value(begin_str()) == after_music_begin
-    assert ball_atomunit.get_value(close_str()) == after_music_close
-    assert ball_atomunit.get_value(mass_str()) == after_music_mass
-    assert ball_atomunit.get_value(pledge_str()) == after_music_pledge
+    assert ball_atomunit.get_value(lx_str()) == accord_str
+    assert ball_atomunit.get_value(begin_str()) == after_accord_begin
+    assert ball_atomunit.get_value(close_str()) == after_accord_close
+    assert ball_atomunit.get_value(mass_str()) == after_accord_mass
+    assert ball_atomunit.get_value(pledge_str()) == after_accord_pledge
 
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
@@ -1215,7 +1215,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_itemunit = after_sue_bud.get_item_obj(ball_road)
-    after_ball_itemunit.healerlink.set_healer_id(xio_str)
+    after_ball_itemunit.healerlink.set_healer_name(xio_str)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -1231,7 +1231,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(healer_id_str()) == xio_str
+    assert ball_atomunit.get_value(healer_name_str()) == xio_str
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
@@ -1249,7 +1249,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
     after_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     after_ball_itemunit = after_sue_bud.get_item_obj(ball_road)
-    after_ball_itemunit.healerlink.set_healer_id(xio_str)
+    after_ball_itemunit.healerlink.set_healer_name(xio_str)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -1266,7 +1266,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist, True)
     assert ball_atomunit
     assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(healer_id_str()) == xio_str
+    assert ball_atomunit.get_value(healer_name_str()) == xio_str
     assert get_atomunit_total_count(sue_deltaunit) == 3
 
 
@@ -1282,11 +1282,11 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
     before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     before_ball_itemunit = before_sue_bud.get_item_obj(ball_road)
-    before_ball_itemunit.healerlink.set_healer_id(xio_str)
+    before_ball_itemunit.healerlink.set_healer_name(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_itemunit = after_sue_bud.get_item_obj(ball_road)
-    after_ball_itemunit.healerlink.del_healer_id(xio_str)
+    after_ball_itemunit.healerlink.del_healer_name(xio_str)
 
     # WHEN
     sue_deltaunit = deltaunit_shop()
@@ -1305,7 +1305,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
     )
     assert ball_atomunit
     assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(healer_id_str()) == xio_str
+    assert ball_atomunit.get_value(healer_name_str()) == xio_str
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
@@ -1321,7 +1321,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
     ball_road = before_sue_bud.make_road(sports_road, ball_str)
     before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     before_ball_itemunit = before_sue_bud.get_item_obj(ball_road)
-    before_ball_itemunit.healerlink.set_healer_id(xio_str)
+    before_ball_itemunit.healerlink.set_healer_name(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_sue_bud.del_item_obj(ball_road)
@@ -1343,7 +1343,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_
     )
     assert ball_atomunit
     assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(healer_id_str()) == xio_str
+    assert ball_atomunit.get_value(healer_name_str()) == xio_str
     assert get_atomunit_total_count(sue_deltaunit) == 2
 
 

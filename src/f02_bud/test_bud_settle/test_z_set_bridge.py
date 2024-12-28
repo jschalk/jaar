@@ -1,4 +1,4 @@
-from src.f01_road.road import create_road, get_default_deal_id_ideaunit as root_label
+from src.f01_road.road import create_road, get_default_deal_id_ideaunit as root_lx
 from src.f02_bud.reason_item import reasonunit_shop, factunit_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
@@ -8,10 +8,10 @@ from pytest import raises as pytest_raises
 
 def test_BudUnit_set_deal_id_CorrectlySetsAttr():
     # ESTABLISH
-    x_deal_id = "music45"
+    x_deal_id = "accord45"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str)
-    assert sue_bud._deal_id == root_label()
+    assert sue_bud._deal_id == root_lx()
 
     # WHEN
     sue_bud.set_deal_id(deal_id=x_deal_id)
@@ -46,15 +46,15 @@ def test_BudUnit_set_item_CorrectlySets_bud_deal_id_AND_fund_coin():
 def test_bud_set_deal_id_CorrectlySetsAttr():
     # ESTABLISH
     yao_str = "Yao"
-    yao_bud = budunit_shop(_owner_id=yao_str)
+    yao_bud = budunit_shop(_owner_name=yao_str)
     casa_str = "casa"
     old_casa_road = yao_bud.make_l1_road(casa_str)
     swim_str = "swim"
     old_swim_road = yao_bud.make_road(old_casa_road, swim_str)
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=old_casa_road)
-    assert yao_bud._owner_id == yao_str
-    assert yao_bud._itemroot._label == yao_bud._deal_id
+    assert yao_bud._owner_name == yao_str
+    assert yao_bud._itemroot._lx == yao_bud._deal_id
     casa_item = yao_bud.get_item_obj(old_casa_road)
     assert casa_item._parent_road == yao_bud._deal_id
     swim_item = yao_bud.get_item_obj(old_swim_road)
@@ -62,7 +62,7 @@ def test_bud_set_deal_id_CorrectlySetsAttr():
     assert yao_bud._deal_id == yao_bud._deal_id
 
     # WHEN
-    x_deal_id = "music45"
+    x_deal_id = "accord45"
     yao_bud.set_deal_id(deal_id=x_deal_id)
 
     # THEN
@@ -70,14 +70,14 @@ def test_bud_set_deal_id_CorrectlySetsAttr():
     swim_str = "swim"
     new_swim_road = yao_bud.make_road(new_casa_road, swim_str)
     assert yao_bud._deal_id == x_deal_id
-    assert yao_bud._itemroot._label == x_deal_id
+    assert yao_bud._itemroot._lx == x_deal_id
     casa_item = yao_bud.get_item_obj(new_casa_road)
     assert casa_item._parent_road == x_deal_id
     swim_item = yao_bud.get_item_obj(new_swim_road)
     assert swim_item._parent_road == new_casa_road
 
 
-def test_bud_set_wall_RaisesErrorIfNew_wall_IsAnItem_label():
+def test_bud_set_bridge_RaisesErrorIfNew_bridge_IsAnItem_lx():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     print(f"{zia_bud.max_tree_traverse=}")
@@ -92,14 +92,14 @@ def test_bud_set_wall_RaisesErrorIfNew_wall_IsAnItem_label():
     casa_road = zia_bud.make_road(casa_road, casa_str)
     print(f"{casa_road=}")
     with pytest_raises(Exception) as excinfo:
-        zia_bud.set_wall(slash_str)
+        zia_bud.set_bridge(slash_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify wall to '{slash_str}' because it exists an item label '{casa_road}'"
+        == f"Cannot modify bridge to '{slash_str}' because it exists an item lx '{casa_road}'"
     )
 
 
-def test_bud_set_wall_CorrectlyModifies_parent_road():
+def test_bud_set_bridge_CorrectlyModifies_parent_road():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -110,27 +110,27 @@ def test_bud_set_wall_CorrectlyModifies_parent_road():
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
     cook_item = zia_bud.get_item_obj(semicolon_cook_road)
     semicolon_str = ";"
-    assert zia_bud._wall == semicolon_str
+    assert zia_bud._bridge == semicolon_str
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
-    # print(f"{zia_bud._deal_id=} {zia_bud._itemroot._label=} {casa_road=}")
-    # print(f"{cook_item._parent_road=} {cook_item._label=}")
+    # print(f"{zia_bud._deal_id=} {zia_bud._itemroot._lx=} {casa_road=}")
+    # print(f"{cook_item._parent_road=} {cook_item._lx=}")
     # semicolon_casa_item = zia_bud.get_item_obj(semicolon_casa_road)
-    # print(f"{semicolon_casa_item._parent_road=} {semicolon_casa_item._label=}")
+    # print(f"{semicolon_casa_item._parent_road=} {semicolon_casa_item._lx=}")
     assert cook_item.get_road() == semicolon_cook_road
 
     # WHEN
     slash_str = "/"
-    zia_bud.set_wall(slash_str)
+    zia_bud.set_bridge(slash_str)
 
     # THEN
     assert cook_item.get_road() != semicolon_cook_road
     zia_deal_id = zia_bud._deal_id
-    slash_casa_road = create_road(zia_deal_id, casa_str, wall=slash_str)
-    slash_cook_road = create_road(slash_casa_road, cook_str, wall=slash_str)
+    slash_casa_road = create_road(zia_deal_id, casa_str, bridge=slash_str)
+    slash_cook_road = create_road(slash_casa_road, cook_str, bridge=slash_str)
     assert cook_item.get_road() == slash_cook_road
 
 
-def test_bud_set_wall_CorrectlyModifiesReasonUnit():
+def test_bud_set_bridge_CorrectlyModifiesReasonUnit():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -152,7 +152,7 @@ def test_bud_set_wall_CorrectlyModifiesReasonUnit():
 
     # WHEN
     slash_str = "/"
-    zia_bud.set_wall(slash_str)
+    zia_bud.set_bridge(slash_str)
 
     # THEN
     slash_time_road = zia_bud.make_l1_road(time_str)
@@ -169,7 +169,7 @@ def test_bud_set_wall_CorrectlyModifiesReasonUnit():
     assert gen_time_reasonunit.premises.get(semicolon_8am_road) is None
 
 
-def test_bud_set_wall_CorrectlyModifiesFactUnit():
+def test_bud_set_bridge_CorrectlyModifiesFactUnit():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -189,7 +189,7 @@ def test_bud_set_wall_CorrectlyModifiesFactUnit():
 
     # WHEN
     slash_str = "/"
-    zia_bud.set_wall(slash_str)
+    zia_bud.set_bridge(slash_str)
 
     # THEN
     slash_time_road = zia_bud.make_l1_road(time_str)

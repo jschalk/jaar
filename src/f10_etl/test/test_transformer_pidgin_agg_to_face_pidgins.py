@@ -1,11 +1,11 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str
+from src.f04_gift.atom_config import face_name_str
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
-    inx_wall_str,
-    otx_wall_str,
-    inx_acct_id_str,
-    otx_acct_id_str,
+    event_int_str,
+    inx_bridge_str,
+    otx_bridge_str,
+    inx_name_str,
+    otx_name_str,
     inx_group_id_str,
     otx_group_id_str,
     inx_road_str,
@@ -22,7 +22,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_ids(
+def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_names(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -36,12 +36,12 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_ids(
     acct_agg_str = "acct_agg"
 
     acct_file_columns = [
-        face_id_str(),
-        event_id_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        face_name_str(),
+        event_int_str(),
+        otx_name_str(),
+        inx_name_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")
@@ -82,7 +82,7 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_ids(
     pandas_testing_assert_frame_equal(gen_zia_acct_df, e1_zia_acct_agg_df)
 
 
-def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
+def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -95,12 +95,12 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
     acct_agg_str = "acct_agg"
 
     acct_file_columns = [
-        face_id_str(),
-        event_id_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        face_name_str(),
+        event_int_str(),
+        otx_name_str(),
+        inx_name_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")
@@ -116,12 +116,12 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
     event7 = 7
     group_agg_str = "group_agg"
     group_file_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     e1_group0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
@@ -136,12 +136,12 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
     event7 = 7
     road_agg_str = "road_agg"
     road_file_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
@@ -156,12 +156,12 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllBridgeCategorys(
     event7 = 7
     idea_agg_str = "idea_agg"
     idea_file_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     e1_idea0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]

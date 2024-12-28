@@ -17,13 +17,13 @@ from src.f04_gift.atom_config import (
     atom_delete,
     atom_insert,
     atom_update,
-    acct_id_str,
+    acct_name_str,
     awardee_id_str,
     group_id_str,
     team_id_str,
-    healer_id_str,
+    healer_name_str,
     parent_road_str,
-    label_str,
+    lx_str,
     base_item_active_requisite_str,
     pledge_str,
     addin_str,
@@ -219,34 +219,34 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     jvalues = x_atom.jvalues
     _tally_str = "tally"
     _max_tree_traverse_str = "max_tree_traverse"
-    purview_time_id_str = "purview_time_id"
+    purview_time_int_str = "purview_time_int"
     _max_tree_traverse_value = jvalues.get(_max_tree_traverse_str)
     credor_respect_value = jvalues.get(credor_respect_str())
     debtor_respect_value = jvalues.get(debtor_respect_str())
     _tally_value = jvalues.get(_tally_str)
-    purview_time_id_value = jvalues.get(purview_time_id_str)
+    purview_time_int_value = jvalues.get(purview_time_int_str)
 
     if _max_tree_traverse_value is not None:
-        x_str = f"{x_bud._owner_id}'s maximum number of Bud evaluations set to {_max_tree_traverse_value}"
+        x_str = f"{x_bud._owner_name}'s maximum number of Bud evaluations set to {_max_tree_traverse_value}"
         legible_list.append(x_str)
     if (
         credor_respect_value is not None
         and debtor_respect_value is not None
         and credor_respect_value == debtor_respect_value
     ):
-        x_str = f"{x_bud._owner_id}'s total pool is now {credor_respect_value}"
+        x_str = f"{x_bud._owner_name}'s total pool is now {credor_respect_value}"
         legible_list.append(x_str)
     elif credor_respect_value is not None:
-        x_str = f"{x_bud._owner_id}'s credor pool is now {credor_respect_value}"
+        x_str = f"{x_bud._owner_name}'s credor pool is now {credor_respect_value}"
         legible_list.append(x_str)
     elif debtor_respect_value is not None:
-        x_str = f"{x_bud._owner_id}'s debtor pool is now {debtor_respect_value}"
+        x_str = f"{x_bud._owner_name}'s debtor pool is now {debtor_respect_value}"
         legible_list.append(x_str)
     if _tally_value is not None:
-        x_str = f"{x_bud._owner_id}'s bud tally set to {_tally_value}"
+        x_str = f"{x_bud._owner_name}'s bud tally set to {_tally_value}"
         legible_list.append(x_str)
-    if purview_time_id_value is not None:
-        x_str = f"{x_bud._owner_id}'s bud {purview_time_id_str} set to {purview_time_id_value}"
+    if purview_time_int_value is not None:
+        x_str = f"{x_bud._owner_name}'s bud {purview_time_int_str} set to {purview_time_int_value}"
         legible_list.append(x_str)
 
 
@@ -254,10 +254,10 @@ def add_bud_acctunit_insert_to_legible_list(
     legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
     for acctunit_atom in acctunit_dict.values():
-        acct_id = acctunit_atom.get_value(acct_id_str())
+        acct_name = acctunit_atom.get_value(acct_name_str())
         credit_belief_value = acctunit_atom.get_value("credit_belief")
         debtit_belief_value = acctunit_atom.get_value("debtit_belief")
-        x_str = f"{acct_id} was added with {credit_belief_value} belief credit and {debtit_belief_value} belief debtit"
+        x_str = f"{acct_name} was added with {credit_belief_value} belief credit and {debtit_belief_value} belief debtit"
         legible_list.append(x_str)
 
 
@@ -265,15 +265,15 @@ def add_bud_acctunit_update_to_legible_list(
     legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
     for acctunit_atom in acctunit_dict.values():
-        acct_id = acctunit_atom.get_value(acct_id_str())
+        acct_name = acctunit_atom.get_value(acct_name_str())
         credit_belief_value = acctunit_atom.get_value("credit_belief")
         debtit_belief_value = acctunit_atom.get_value("debtit_belief")
         if credit_belief_value is not None and debtit_belief_value is not None:
-            x_str = f"{acct_id} now has {credit_belief_value} belief credit and {debtit_belief_value} belief debtit."
+            x_str = f"{acct_name} now has {credit_belief_value} belief credit and {debtit_belief_value} belief debtit."
         elif credit_belief_value is not None:
-            x_str = f"{acct_id} now has {credit_belief_value} belief credit."
+            x_str = f"{acct_name} now has {credit_belief_value} belief credit."
         elif debtit_belief_value is not None:
-            x_str = f"{acct_id} now has {debtit_belief_value} belief debtit."
+            x_str = f"{acct_name} now has {debtit_belief_value} belief debtit."
         legible_list.append(x_str)
 
 
@@ -281,8 +281,8 @@ def add_bud_acctunit_delete_to_legible_list(
     legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
 ):
     for acctunit_atom in acctunit_dict.values():
-        acct_id = acctunit_atom.get_value(acct_id_str())
-        x_str = f"{acct_id} was removed from belief accts."
+        acct_name = acctunit_atom.get_value(acct_name_str())
+        x_str = f"{acct_name} was removed from belief accts."
         legible_list.append(x_str)
 
 
@@ -292,10 +292,10 @@ def add_bud_acct_membership_insert_to_legible_list(
     for acct_membership_dict in acct_membership_insert_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
             group_id = acct_membership_atom.get_value(group_id_str())
-            acct_id = acct_membership_atom.get_value(acct_id_str())
+            acct_name = acct_membership_atom.get_value(acct_name_str())
             credit_vote_value = acct_membership_atom.get_value(credit_vote_str())
             debtit_vote_value = acct_membership_atom.get_value(debtit_vote_str())
-            x_str = f"Group '{group_id}' has new membership {acct_id} with {credit_vote_str()}_value{credit_vote_value} and {debtit_vote_str()}_value={debtit_vote_value}."
+            x_str = f"Group '{group_id}' has new membership {acct_name} with {credit_vote_str()}_value{credit_vote_value} and {debtit_vote_str()}_value={debtit_vote_value}."
             legible_list.append(x_str)
 
 
@@ -305,15 +305,15 @@ def add_bud_acct_membership_update_to_legible_list(
     for acct_membership_dict in acct_membership_update_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
             group_id = acct_membership_atom.get_value(group_id_str())
-            acct_id = acct_membership_atom.get_value(acct_id_str())
+            acct_name = acct_membership_atom.get_value(acct_name_str())
             credit_vote_value = acct_membership_atom.get_value(credit_vote_str())
             debtit_vote_value = acct_membership_atom.get_value(debtit_vote_str())
             if credit_vote_value is not None and debtit_vote_value is not None:
-                x_str = f"Group '{group_id}' membership {acct_id} has new {credit_vote_str()}_value{credit_vote_value} and {debtit_vote_str()}_value={debtit_vote_value}."
+                x_str = f"Group '{group_id}' membership {acct_name} has new {credit_vote_str()}_value{credit_vote_value} and {debtit_vote_str()}_value={debtit_vote_value}."
             elif credit_vote_value is not None:
-                x_str = f"Group '{group_id}' membership {acct_id} has new {credit_vote_str()}_value{credit_vote_value}."
+                x_str = f"Group '{group_id}' membership {acct_name} has new {credit_vote_str()}_value{credit_vote_value}."
             elif debtit_vote_value is not None:
-                x_str = f"Group '{group_id}' membership {acct_id} has new {debtit_vote_str()}_value={debtit_vote_value}."
+                x_str = f"Group '{group_id}' membership {acct_name} has new {debtit_vote_str()}_value={debtit_vote_value}."
             legible_list.append(x_str)
 
 
@@ -323,8 +323,8 @@ def add_bud_acct_membership_delete_to_legible_list(
     for acct_membership_dict in acct_membership_delete_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
             group_id = acct_membership_atom.get_value(group_id_str())
-            acct_id = acct_membership_atom.get_value(acct_id_str())
-            x_str = f"Group '{group_id}' no longer has membership {acct_id}."
+            acct_name = acct_membership_atom.get_value(acct_name_str())
+            x_str = f"Group '{group_id}' no longer has membership {acct_name}."
             legible_list.append(x_str)
 
 
@@ -336,7 +336,7 @@ def add_bud_itemunit_insert_to_legible_list(
     _mass_str = "mass"
     for parent_road_dict in itemunit_insert_dict.values():
         for itemunit_atom in parent_road_dict.values():
-            label_value = itemunit_atom.get_value(label_str())
+            lx_value = itemunit_atom.get_value(lx_str())
             parent_road_value = itemunit_atom.get_value(parent_road_str())
             _addin_value = itemunit_atom.get_value(addin_str())
             _begin_value = itemunit_atom.get_value(begin_str())
@@ -347,9 +347,7 @@ def add_bud_itemunit_insert_to_legible_list(
             _morph_value = itemunit_atom.get_value(_morph_str)
             _mass_value = itemunit_atom.get_value(_mass_str)
             pledge_value = itemunit_atom.get_value(pledge_str())
-            x_str = (
-                f"Created Item '{label_value}' with parent_road {parent_road_value}. "
-            )
+            x_str = f"Created Item '{lx_value}' with parent_road {parent_road_value}. "
             if _addin_value is not None:
                 x_str += f"addin={_addin_value}."
             if _begin_value is not None:
@@ -379,7 +377,7 @@ def add_bud_itemunit_update_to_legible_list(
     _mass_str = "mass"
     for parent_road_dict in itemunit_update_dict.values():
         for itemunit_atom in parent_road_dict.values():
-            label_value = itemunit_atom.get_value(label_str())
+            lx_value = itemunit_atom.get_value(lx_str())
             parent_road_value = itemunit_atom.get_value(parent_road_str())
             addin_value = itemunit_atom.get_value(addin_str())
             begin_value = itemunit_atom.get_value(begin_str())
@@ -390,7 +388,7 @@ def add_bud_itemunit_update_to_legible_list(
             morph_value = itemunit_atom.get_value(morph_str())
             mass_value = itemunit_atom.get_value(_mass_str)
             pledge_value = itemunit_atom.get_value(pledge_str())
-            x_str = f"Item '{label_value}' with parent_road {parent_road_value} set these attributes: "
+            x_str = f"Item '{lx_value}' with parent_road {parent_road_value} set these attributes: "
             if addin_value is not None:
                 x_str += f"addin={addin_value}."
             if begin_value is not None:
@@ -418,9 +416,11 @@ def add_bud_itemunit_delete_to_legible_list(
 ):
     for parent_road_dict in itemunit_delete_dict.values():
         for itemunit_atom in parent_road_dict.values():
-            label_value = itemunit_atom.get_value(label_str())
+            lx_value = itemunit_atom.get_value(lx_str())
             parent_road_value = itemunit_atom.get_value(parent_road_str())
-            x_str = f"Item '{label_value}' with parent_road {parent_road_value} was deleted."
+            x_str = (
+                f"Item '{lx_value}' with parent_road {parent_road_value} was deleted."
+            )
             legible_list.append(x_str)
 
 
@@ -619,9 +619,9 @@ def add_bud_item_healerlink_insert_to_legible_list(
 ):
     for road_dict in item_healerlink_insert_dict.values():
         for item_healerlink_atom in road_dict.values():
-            healer_id_value = item_healerlink_atom.get_value(healer_id_str())
+            healer_name_value = item_healerlink_atom.get_value(healer_name_str())
             road_value = item_healerlink_atom.get_value("road")
-            x_str = f"HealerLink '{healer_id_value}' created for item '{road_value}'."
+            x_str = f"HealerLink '{healer_name_value}' created for item '{road_value}'."
             legible_list.append(x_str)
 
 
@@ -630,9 +630,9 @@ def add_bud_item_healerlink_delete_to_legible_list(
 ):
     for road_dict in item_healerlink_delete_dict.values():
         for item_healerlink_atom in road_dict.values():
-            healer_id_value = item_healerlink_atom.get_value(healer_id_str())
+            healer_name_value = item_healerlink_atom.get_value(healer_name_str())
             road_value = item_healerlink_atom.get_value("road")
-            x_str = f"HealerLink '{healer_id_value}' deleted for item '{road_value}'."
+            x_str = f"HealerLink '{healer_name_value}' deleted for item '{road_value}'."
             legible_list.append(x_str)
 
 

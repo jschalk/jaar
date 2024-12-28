@@ -43,9 +43,9 @@ def _get_color_for_itemunit_trace(x_itemunit: ItemUnit, mode: str) -> str:
     elif mode == "Task":
         return "Red" if x_itemunit.pledge else "Pink"
     elif mode == "Keep":
-        if x_itemunit.problem_bool and x_itemunit.healerlink.any_healer_id_exists():
+        if x_itemunit.problem_bool and x_itemunit.healerlink.any_healer_name_exists():
             return "Purple"
-        elif x_itemunit.healerlink.any_healer_id_exists():
+        elif x_itemunit.healerlink.any_healer_name_exists():
             return "Blue"
         elif x_itemunit.problem_bool:
             return "Red"
@@ -66,7 +66,7 @@ def _add_individual_trace(
             x=[kid_item._level - 1, kid_item._level],
             y=[parent_y, source_y],
             marker_size=_get_dot_diameter(kid_item._fund_ratio),
-            name=kid_item._label,
+            name=kid_item._lx,
             marker_color=_get_color_for_itemunit_trace(kid_item, mode=mode),
         )
     )
@@ -74,7 +74,7 @@ def _add_individual_trace(
         dict(
             x=kid_item._level,
             y=source_y + (_get_dot_diameter(kid_item._fund_ratio) / 150) + 0.002,
-            text=kid_item._label,
+            text=kid_item._lx,
             showarrow=False,
         )
     )
@@ -145,7 +145,7 @@ def display_itemtree(
 
 def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     column_header_list = [
-        "acct_id",
+        "acct_name",
         "_credor_respect",
         "credit_belief",
         "_debtor_respect",
@@ -165,7 +165,7 @@ def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.acct_id,
+                df.acct_name,
                 df._credor_respect,
                 df.credit_belief,
                 df._debtor_respect,
@@ -181,7 +181,7 @@ def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"OwnerID '{x_bud._owner_id}' bud accts metrics"
+    fig_title = f"OwnerName '{x_bud._owner_name}' bud accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
@@ -191,9 +191,9 @@ def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
 
 def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_id",
+        "owner_name",
         "fund_ratio",
-        "_label",
+        "_lx",
         "_parent_road",
     ]
     df = get_bud_agenda_dataframe(x_bud)
@@ -204,9 +204,9 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.owner_id,
+                df.owner_name,
                 df.fund_ratio,
-                df._label,
+                df._lx,
                 df._parent_road,
             ],
             fill_color="lavender",
@@ -215,7 +215,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"OwnerID '{x_bud._owner_id}' bud agenda"
+    fig_title = f"OwnerName '{x_bud._owner_name}' bud agenda"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)

@@ -1,12 +1,12 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str, deal_id_str
-from src.f07_deal.deal_config import cumlative_minute_str, hour_label_str
+from src.f04_gift.atom_config import face_name_str, deal_id_str
+from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
-    inx_wall_str,
-    inx_acct_id_str,
-    otx_wall_str,
-    otx_acct_id_str,
+    event_int_str,
+    inx_bridge_str,
+    inx_name_str,
+    otx_bridge_str,
+    otx_name_str,
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import (
@@ -23,7 +23,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario0_SingleFaceID(
+def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario0_SingleFaceName(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -34,15 +34,15 @@ def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario0_Sin
     hour6am = "6am"
     hour7am = "7am"
     brick_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        hour_label_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event3, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event3, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    row1 = [sue_str, event3, accord23_str, hour6am, minute_360]
+    row2 = [sue_str, event3, accord23_str, hour7am, minute_420]
     br00003_boat_agg_df = DataFrame([row1, row2], columns=brick_columns)
     x_etl_dir = get_test_etl_dir()
     x_boat_dir = create_path(x_etl_dir, "boat")
@@ -74,7 +74,7 @@ def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario0_Sin
     assert get_sheet_names(sue_br00003_filepath) == [boat_valid_str()]
 
 
-def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario1_MultpleFaceIDs(
+def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario1_MultpleFaceNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -87,16 +87,16 @@ def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario1_Mul
     hour6am = "6am"
     hour7am = "7am"
     brick_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        hour_label_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    sue1 = [sue_str, event3, music23_str, hour6am, minute_360]
-    sue2 = [sue_str, event3, music23_str, hour7am, minute_420]
-    zia3 = [zia_str, event7, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    sue1 = [sue_str, event3, accord23_str, hour6am, minute_360]
+    sue2 = [sue_str, event3, accord23_str, hour7am, minute_420]
+    zia3 = [zia_str, event7, accord23_str, hour7am, minute_420]
     br00003_boat_agg_df = DataFrame([sue1, sue2, zia3], columns=brick_columns)
     x_etl_dir = get_test_etl_dir()
     x_boat_dir = create_path(x_etl_dir, "boat")
@@ -144,24 +144,24 @@ def test_etl_boat_bricks_to_bow_face_bricks_Scenario2_PidginCategoryBricksAreNot
     hour6am = "6am"
     hour7am = "7am"
     br00003_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        hour_label_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    sue3_0 = [sue_str, event3, music23_str, hour6am, minute_360]
-    sue3_1 = [sue_str, event3, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    sue3_0 = [sue_str, event3, accord23_str, hour6am, minute_360]
+    sue3_1 = [sue_str, event3, accord23_str, hour7am, minute_420]
     br00003_boat_agg_df = DataFrame([sue3_0, sue3_1], columns=br00003_columns)
 
     br00043_columns = [
-        face_id_str(),
-        event_id_str(),
-        inx_wall_str(),
-        inx_acct_id_str(),
-        otx_wall_str(),
-        otx_acct_id_str(),
+        face_name_str(),
+        event_int_str(),
+        inx_bridge_str(),
+        inx_name_str(),
+        otx_bridge_str(),
+        otx_name_str(),
         unknown_word_str(),
     ]
     sue43_0 = [sue_str, event3, ":", "Bob", ":", "Bobby", "Unknown"]

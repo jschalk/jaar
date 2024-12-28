@@ -3,10 +3,10 @@
         "base": {
             "otx_key": true
         },
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "deal_id": {
@@ -18,7 +18,7 @@
         "fopen": {
             "otx_key": false
         },
-        "owner_id": {
+        "owner_name": {
             "otx_key": true
         },
         "pick": {

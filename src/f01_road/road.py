@@ -7,57 +7,57 @@ class InvalidRoadUnitException(Exception):
 
 
 class IdeaUnit(str):
-    """A string presentation of a tree node. Nodes cannot contain RoadUnit wall"""
+    """A string presentation of a tree node. Nodes cannot contain RoadUnit bridge"""
 
-    def is_idea(self, wall: str = None) -> bool:
-        return len(self) > 0 and self.is_wall_in_str(wall)
+    def is_idea(self, bridge: str = None) -> bool:
+        return len(self) > 0 and self.is_bridge_in_str(bridge)
 
-    def is_wall_in_str(self, wall: str = None) -> bool:
-        return self.find(default_wall_if_None(wall)) == -1
+    def is_bridge_in_str(self, bridge: str = None) -> bool:
+        return self.find(default_bridge_if_None(bridge)) == -1
 
 
 class DealID(IdeaUnit):  # Created to help track the concept
     pass
 
 
-class OwnerID(IdeaUnit):  # Created to help track the concept
-    """Must be idea thus not include road wall"""
+class OwnerName(IdeaUnit):  # Created to help track the concept
+    """Must be idea thus not include road bridge"""
 
     pass
 
 
-class HealerID(OwnerID):
+class HealerName(OwnerName):
     """A IdeaUnit used to identify a Problem's Healer"""
 
     pass
 
 
-class OwnerID(HealerID):
-    """A IdeaUnit used to identify a BudUnit's owner_id"""
+class OwnerName(HealerName):
+    """A IdeaUnit used to identify a BudUnit's owner_name"""
 
     pass
 
 
-class AcctID(OwnerID):  # Created to help track the concept
-    """Every AcctID object is OwnerID, must follow OwnerID format."""
+class AcctName(OwnerName):  # Created to help track the concept
+    """Every AcctName object is OwnerName, must follow OwnerName format."""
 
     pass
 
 
-class TimeLineLabel(IdeaUnit):
-    "TimeLineLabel is required for every TimeLineUnit. It is a IdeaUnit that must not container the wall."
+class TimeLineIdea(IdeaUnit):
+    "TimeLineIdea is required for every TimeLineUnit. It is a IdeaUnit that must not container the bridge."
 
     pass
 
 
 class RoadUnit(str):
-    """A string presentation of a tree path. IdeaUnits are seperated by road wall"""
+    """A string presentation of a tree path. IdeaUnits are seperated by road bridge"""
 
     pass
 
 
 class DoarUnit(str):
-    """DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. IdeaUnits are seperated by road wall."""
+    """DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. IdeaUnits are seperated by road bridge."""
 
     pass
 
@@ -74,22 +74,22 @@ def get_default_world_id() -> WorldID:
     return WorldID("TestingWorld3")
 
 
-class FaceID(str):
+class FaceName(str):
     pass
 
 
-def get_default_face_id() -> FaceID:
-    return FaceID("Face1234")
+def get_default_face_name() -> FaceName:
+    return FaceName("Face1234")
 
 
-class EventID(int):
+class EventInt(int):
     pass
 
 
-def default_wall_if_None(wall: any = None) -> str:
-    if wall != wall:  # float("nan")
-        wall = None
-    return wall if wall is not None else ";"
+def default_bridge_if_None(bridge: any = None) -> str:
+    if bridge != bridge:  # float("nan")
+        bridge = None
+    return bridge if bridge is not None else ";"
 
 
 def rebuild_road(
@@ -108,8 +108,8 @@ def is_sub_road(ref_road: RoadUnit, sub_road: RoadUnit) -> bool:
     return ref_road.find(sub_road) == 0
 
 
-def is_heir_road(src: RoadUnit, heir: RoadUnit, wall: str = None) -> bool:
-    return src == heir or heir.find(f"{src}{default_wall_if_None(wall)}") == 0
+def is_heir_road(src: RoadUnit, heir: RoadUnit, bridge: str = None) -> bool:
+    return src == heir or heir.find(f"{src}{default_bridge_if_None(bridge)}") == 0
 
 
 def find_replace_road_key_dict(
@@ -132,40 +132,40 @@ def find_replace_road_key_dict(
     return dict_x
 
 
-def get_all_road_ideas(road: RoadUnit, wall: str = None) -> list[IdeaUnit]:
-    return road.split(default_wall_if_None(wall))
+def get_all_road_ideas(road: RoadUnit, bridge: str = None) -> list[IdeaUnit]:
+    return road.split(default_bridge_if_None(bridge))
 
 
-def get_terminus_idea(road: RoadUnit, wall: str = None) -> IdeaUnit:
-    return get_all_road_ideas(road=road, wall=wall)[-1]
+def get_terminus_idea(road: RoadUnit, bridge: str = None) -> IdeaUnit:
+    return get_all_road_ideas(road=road, bridge=bridge)[-1]
 
 
 def get_parent_road(
-    road: RoadUnit, wall: str = None
+    road: RoadUnit, bridge: str = None
 ) -> RoadUnit:  # road without terminus idea
-    parent_ideas = get_all_road_ideas(road=road, wall=wall)[:-1]
-    return create_road_from_ideas(parent_ideas, wall=wall)
+    parent_ideas = get_all_road_ideas(road=road, bridge=bridge)[:-1]
+    return create_road_from_ideas(parent_ideas, bridge=bridge)
 
 
 def create_road_without_root_idea(
-    road: RoadUnit, wall: str = None
+    road: RoadUnit, bridge: str = None
 ) -> RoadUnit:  # road without terminus ideaf
-    if road[:1] == default_wall_if_None(wall):
+    if road[:1] == default_bridge_if_None(bridge):
         raise InvalidRoadUnitException(
             f"Cannot create_road_without_root_idea of '{road}' because it has no root idea."
         )
     road_without_root_idea = create_road_from_ideas(get_all_road_ideas(road=road)[1:])
-    return f"{default_wall_if_None(wall)}{road_without_root_idea}"
+    return f"{default_bridge_if_None(bridge)}{road_without_root_idea}"
 
 
-def get_root_idea_from_road(road: RoadUnit, wall: str = None) -> IdeaUnit:
-    return get_all_road_ideas(road=road, wall=wall)[0]
+def get_root_idea_from_road(road: RoadUnit, bridge: str = None) -> IdeaUnit:
+    return get_all_road_ideas(road=road, bridge=bridge)[0]
 
 
-def road_validate(road: RoadUnit, wall: str, root_idea: IdeaUnit) -> RoadUnit:
+def road_validate(road: RoadUnit, bridge: str, root_idea: IdeaUnit) -> RoadUnit:
     if road == "" or road is None:
         return RoadUnit("")
-    x_root = get_root_idea_from_road(road, wall)
+    x_root = get_root_idea_from_road(road, bridge)
     return (
         rebuild_road(
             subj_road=road,
@@ -223,49 +223,49 @@ def get_default_deal_id_ideaunit() -> DealID:
     return "ZZ"
 
 
-def create_road_from_ideas(ideas: list[IdeaUnit], wall: str = None) -> RoadUnit:
-    return default_wall_if_None(wall).join(ideas)
+def create_road_from_ideas(ideas: list[IdeaUnit], bridge: str = None) -> RoadUnit:
+    return default_bridge_if_None(bridge).join(ideas)
 
 
-class wall_in_idea_Exception(Exception):
+class bridge_in_idea_Exception(Exception):
     pass
 
 
 def create_road(
-    parent_road: RoadUnit, terminus_idea: IdeaUnit = None, wall: str = None
+    parent_road: RoadUnit, terminus_idea: IdeaUnit = None, bridge: str = None
 ) -> RoadUnit:
 
     if terminus_idea is None:
         return RoadUnit(parent_road)
-    x_wall = default_wall_if_None(wall)
+    x_bridge = default_bridge_if_None(bridge)
     terminus_idea = IdeaUnit(terminus_idea)
-    if terminus_idea.is_idea(x_wall) is False:
-        raise wall_in_idea_Exception(f"wall '{x_wall}' is in {terminus_idea}")
+    if terminus_idea.is_idea(x_bridge) is False:
+        raise bridge_in_idea_Exception(f"bridge '{x_bridge}' is in {terminus_idea}")
 
     return RoadUnit(
         terminus_idea
         if parent_road in {"", None}
-        else f"{parent_road}{x_wall}{terminus_idea}"
+        else f"{parent_road}{x_bridge}{terminus_idea}"
     )
 
 
 def combine_roads(
-    parent_road: RoadUnit, ancestor_road: RoadUnit, wall: str = None
+    parent_road: RoadUnit, ancestor_road: RoadUnit, bridge: str = None
 ) -> RoadUnit:
     if parent_road in {""}:
         return ancestor_road
-    parent_road_ideas = get_all_road_ideas(parent_road, wall)
-    ancestor_road_ideas = get_all_road_ideas(ancestor_road, wall)
+    parent_road_ideas = get_all_road_ideas(parent_road, bridge)
+    ancestor_road_ideas = get_all_road_ideas(ancestor_road, bridge)
     parent_road_ideas.extend(ancestor_road_ideas)
-    return create_road_from_ideas(parent_road_ideas, wall)
+    return create_road_from_ideas(parent_road_ideas, bridge)
 
 
-def get_diff_road(x_road: RoadUnit, sub_road: RoadUnit, wall: str = None):
-    sub_road = f"{sub_road}{default_wall_if_None(wall)}"
+def get_diff_road(x_road: RoadUnit, sub_road: RoadUnit, bridge: str = None):
+    sub_road = f"{sub_road}{default_bridge_if_None(bridge)}"
     return x_road.replace(sub_road, "")
 
 
-class InvalidwallReplaceException(Exception):
+class InvalidbridgeReplaceException(Exception):
     pass
 
 
@@ -273,42 +273,42 @@ def is_string_in_road(string: str, road: RoadUnit) -> bool:
     return road.find(string) >= 0
 
 
-def replace_wall(road: RoadUnit, old_wall: str, new_wall: str):
-    if is_string_in_road(string=new_wall, road=road):
-        raise InvalidwallReplaceException(
-            f"Cannot replace_wall '{old_wall}' with '{new_wall}' because the new one exists in road '{road}'."
+def replace_bridge(road: RoadUnit, old_bridge: str, new_bridge: str):
+    if is_string_in_road(string=new_bridge, road=road):
+        raise InvalidbridgeReplaceException(
+            f"Cannot replace_bridge '{old_bridge}' with '{new_bridge}' because the new one exists in road '{road}'."
         )
-    return road.replace(old_wall, new_wall)
+    return road.replace(old_bridge, new_bridge)
 
 
 class ValidateIdeaUnitException(Exception):
     pass
 
 
-def is_ideaunit(x_ideaunit: IdeaUnit, x_wall: str):
+def is_ideaunit(x_ideaunit: IdeaUnit, x_bridge: str):
     x_ideaunit = IdeaUnit(x_ideaunit)
-    return x_ideaunit.is_idea(wall=x_wall)
+    return x_ideaunit.is_idea(bridge=x_bridge)
 
 
 def validate_ideaunit(
-    x_ideaunit: IdeaUnit, x_wall: str, not_ideaunit_required: bool = False
+    x_ideaunit: IdeaUnit, x_bridge: str, not_ideaunit_required: bool = False
 ):
-    if is_ideaunit(x_ideaunit, x_wall) and not_ideaunit_required:
+    if is_ideaunit(x_ideaunit, x_bridge) and not_ideaunit_required:
         raise ValidateIdeaUnitException(
-            f"'{x_ideaunit}' needs to not be a IdeaUnit. Must contain wall: '{x_wall}'"
+            f"'{x_ideaunit}' needs to not be a IdeaUnit. Must contain bridge: '{x_bridge}'"
         )
-    elif is_ideaunit(x_ideaunit, x_wall) is False and not not_ideaunit_required:
+    elif is_ideaunit(x_ideaunit, x_bridge) is False and not not_ideaunit_required:
         raise ValidateIdeaUnitException(
-            f"'{x_ideaunit}' needs to be a IdeaUnit. Cannot contain wall: '{x_wall}'"
+            f"'{x_ideaunit}' needs to be a IdeaUnit. Cannot contain bridge: '{x_bridge}'"
         )
 
     return x_ideaunit
 
 
-def roadunit_valid_dir_path(x_roadunit: RoadUnit, wall: str) -> bool:
-    x_road_ideas = get_all_road_ideas(x_roadunit, wall)
+def roadunit_valid_dir_path(x_roadunit: RoadUnit, bridge: str) -> bool:
+    x_road_ideas = get_all_road_ideas(x_roadunit, bridge)
     slash_str = "/"
-    x_road_os_path = create_road_from_ideas(x_road_ideas, wall=slash_str)
+    x_road_os_path = create_road_from_ideas(x_road_ideas, bridge=slash_str)
     parts = pathlib_Path(x_road_os_path).parts
     if len(parts) != len(x_road_ideas):
         return False
@@ -316,11 +316,11 @@ def roadunit_valid_dir_path(x_roadunit: RoadUnit, wall: str) -> bool:
     return is_path_valid(x_road_os_path)
 
 
-def get_road_from_doar(x_doarunit: DoarUnit, wall: str = None) -> RoadUnit:
-    x_wall = default_wall_if_None(wall)
-    doar_ideas = get_all_road_ideas(x_doarunit, x_wall)
-    return RoadUnit(create_road_from_ideas(doar_ideas[::-1], x_wall))
+def get_road_from_doar(x_doarunit: DoarUnit, bridge: str = None) -> RoadUnit:
+    x_bridge = default_bridge_if_None(bridge)
+    doar_ideas = get_all_road_ideas(x_doarunit, x_bridge)
+    return RoadUnit(create_road_from_ideas(doar_ideas[::-1], x_bridge))
 
 
-def get_doar_from_road(x_roadunit: RoadUnit, wall: str = None) -> DoarUnit:
-    return DoarUnit(get_road_from_doar(x_roadunit, wall))
+def get_doar_from_road(x_roadunit: RoadUnit, bridge: str = None) -> DoarUnit:
+    return DoarUnit(get_road_from_doar(x_roadunit, bridge))

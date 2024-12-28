@@ -13,15 +13,15 @@ def test_TimeConversion_Exists():
 
 def test_timeconversion_shop_ReturnObj_WithParameters():
     # ESTABLISH
-    music_deal_id = 91
-    music_addin = 91
+    accord_deal_id = 91
+    accord_addin = 91
 
     # WHEN
-    x_timeconversion = timeconversion_shop(music_deal_id, music_addin)
+    x_timeconversion = timeconversion_shop(accord_deal_id, accord_addin)
 
     # THEN
-    assert x_timeconversion.deal_id == music_deal_id
-    assert x_timeconversion.addin == music_addin
+    assert x_timeconversion.deal_id == accord_deal_id
+    assert x_timeconversion.addin == accord_addin
 
 
 def test_timeconversion_shop_ReturnObj_EmtpyParameters():

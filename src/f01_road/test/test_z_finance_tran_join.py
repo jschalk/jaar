@@ -9,7 +9,7 @@ from pytest import raises as pytest_raises
 
 def test_TranBook_join_SetsAttr():
     # ESTABLISH
-    m23_tranbook = tranbook_shop("music23")
+    m23_tranbook = tranbook_shop("accord23")
     sue_str = "Sue"
     yao_str = "Yao"
     t55_t = 5505
@@ -21,7 +21,7 @@ def test_TranBook_join_SetsAttr():
     bob_str = "Bob"
 
     t55_bob_amount = 600
-    m24_tranbook = tranbook_shop("music24")
+    m24_tranbook = tranbook_shop("accord24")
     m24_tranbook.set_tranunit(tranunit_shop(sue_str, bob_str, t55_t, t55_bob_amount))
 
     assert m23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)

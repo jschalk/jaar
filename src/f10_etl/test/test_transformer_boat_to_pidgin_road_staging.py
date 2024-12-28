@@ -1,14 +1,14 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
-    face_id_str,
+    face_name_str,
     deal_id_str,
-    acct_id_str,
-    owner_id_str,
+    acct_name_str,
+    owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
-    inx_wall_str,
-    otx_wall_str,
+    event_int_str,
+    inx_bridge_str,
+    otx_bridge_str,
     inx_road_str,
     otx_road_str,
     unknown_word_str,
@@ -29,16 +29,16 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
     yao_str = "Yao"
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
-    m_str = "music23"
+    m_str = "accord23"
     event7 = 7
     x_boat_dir = get_test_etl_dir()
     br00117_file_path = create_path(x_boat_dir, "br00117.xlsx")
     br00117_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         otx_road_str(),
         inx_road_str(),
     ]
@@ -59,12 +59,12 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
     road_file_columns = [
         "src_brick",
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_road_df.columns) == road_file_columns
@@ -92,7 +92,7 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBrick
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    m_str = "music23"
+    m_str = "accord23"
     event1 = 1
     event2 = 2
     event5 = 5
@@ -100,22 +100,22 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBrick
     x_boat_dir = get_test_etl_dir()
     br00117_file_path = create_path(x_boat_dir, "br00117.xlsx")
     br00117_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         otx_road_str(),
         inx_road_str(),
     ]
     br00045_file_path = create_path(x_boat_dir, "br00045.xlsx")
     br00045_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -142,12 +142,12 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBrick
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
     road_file_columns = [
         "src_brick",
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_road_df.columns) == road_file_columns
@@ -180,29 +180,29 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario2_WorldUnit_eve
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    m_str = "music23"
+    m_str = "accord23"
     event1 = 1
     event2 = 2
     event5 = 5
     x_boat_dir = get_test_etl_dir()
     br00117_file_path = create_path(x_boat_dir, "br00117.xlsx")
     br00117_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         otx_road_str(),
         inx_road_str(),
     ]
     br00045_file_path = create_path(x_boat_dir, "br00045.xlsx")
     br00045_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -229,12 +229,12 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario2_WorldUnit_eve
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
     road_file_columns = [
         "src_brick",
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_road_df.columns) == road_file_columns

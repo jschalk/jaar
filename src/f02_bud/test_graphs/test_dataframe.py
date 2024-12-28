@@ -25,7 +25,7 @@ def test_get_bud_acctunits_dataframe_ReturnsCorrectDataFrame():
 
     # THEN
     acctunit_colums = {
-        "acct_id",
+        "acct_name",
         "credit_belief",
         "debtit_belief",
         "_memberships",
@@ -51,7 +51,7 @@ def test_get_bud_acctunits_dataframe_ReturnsCorrectEmptyDataFrame():
 
     # THEN
     acctunit_colums = {
-        "acct_id",
+        "acct_name",
         "credit_belief",
         "debtit_belief",
         "_fund_give",
@@ -80,9 +80,9 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectDataFrame():
 
     # THEN
     acctunit_colums = {
-        "owner_id",
+        "owner_name",
         "fund_ratio",
-        "_label",
+        "_lx",
         "_parent_road",
         "begin",
         "close",
@@ -108,9 +108,9 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
 
     # THEN
     acctunit_colums = {
-        "owner_id",
+        "owner_name",
         "fund_ratio",
-        "_label",
+        "_lx",
         "_parent_road",
         "begin",
         "close",

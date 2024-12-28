@@ -31,16 +31,16 @@ def pidgin_filename() -> str:
     return "pidgin.json"
 
 
-def event_id_str() -> str:
-    return "event_id"
+def event_int_str() -> str:
+    return "event_int"
 
 
-def otx_wall_str() -> str:
-    return "otx_wall"
+def otx_bridge_str() -> str:
+    return "otx_bridge"
 
 
-def inx_wall_str() -> str:
-    return "inx_wall"
+def inx_bridge_str() -> str:
+    return "inx_bridge"
 
 
 def inx_group_id_str() -> str:
@@ -51,12 +51,12 @@ def otx_group_id_str() -> str:
     return "otx_group_id"
 
 
-def inx_acct_id_str() -> str:
-    return "inx_acct_id"
+def inx_name_str() -> str:
+    return "inx_name"
 
 
-def otx_acct_id_str() -> str:
-    return "otx_acct_id"
+def otx_name_str() -> str:
+    return "otx_name"
 
 
 def inx_idea_str() -> str:
@@ -83,24 +83,24 @@ def otx2inx_str() -> str:
     return "otx2inx"
 
 
-def bridge_otx2inx_str() -> str:
-    return "bridge_otx2inx"
+def map_otx2inx_str() -> str:
+    return "map_otx2inx"
 
 
-def bridge_acct_id_str() -> str:
-    return "bridge_acct_id"
+def map_name_str() -> str:
+    return "map_name"
 
 
-def bridge_group_id_str() -> str:
-    return "bridge_group_id"
+def map_group_id_str() -> str:
+    return "map_group_id"
 
 
-def bridge_idea_str() -> str:
-    return "bridge_idea"
+def map_idea_str() -> str:
+    return "map_idea"
 
 
-def bridge_road_str() -> str:
-    return "bridge_road"
+def map_road_str() -> str:
+    return "map_road"
 
 
 def get_pidgin_config_jkeys(x_cat: str) -> dict:
@@ -135,7 +135,7 @@ def get_pidgin_args_category_mapping() -> dict[str, str]:
 
 def get_pidgin_args_jaar_types() -> dict[str, str]:
     return {
-        "acct_id": "AcctID",
+        "acct_name": "AcctName",
         "addin": "float",
         "amount": "float",
         "awardee_id": "GroupID",
@@ -155,7 +155,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "debtor_respect": "int",
         "denom": "int",
         "divisor": "int",
-        "face_id": "AcctID",
+        "face_name": "AcctName",
         "deal_id": "IdeaUnit",
         "fnigh": "float",
         "fopen": "float",
@@ -164,25 +164,25 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "give_force": "float",
         "gogo_want": "float",
         "group_id": "GroupID",
-        "healer_id": "GroupID",
-        "hour_label": "IdeaUnit",
-        "label": "IdeaUnit",
+        "healer_name": "GroupID",
+        "hour_idea": "IdeaUnit",
+        "lx": "IdeaUnit",
         "mass": "int",
         "max_tree_traverse": "int",
-        "month_label": "IdeaUnit",
+        "month_idea": "IdeaUnit",
         "monthday_distortion": "int",
         "morph": "bool",
         "need": "RoadUnit",
         "nigh": "float",
         "numor": "int",
-        "owner_id": "AcctID",
+        "owner_name": "AcctName",
         "open": "float",
         "parent_road": "RoadUnit",
         "penny": "float",
         "pick": "RoadUnit",
         "pledge": "bool",
         "problem_bool": "bool",
-        "purview_time_id": "TimeLinePoint",
+        "purview_time_int": "TimeLinePoint",
         "quota": "int",
         "respect_bit": "float",
         "road": "RoadUnit",
@@ -190,11 +190,11 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "take_force": "float",
         "tally": "int",
         "team_id": "GroupID",
-        "time_id": "TimeLinePoint",
-        "timeline_label": "IdeaUnit",
-        "weekday_label": "IdeaUnit",
+        "time_int": "TimeLinePoint",
+        "timeline_idea": "IdeaUnit",
+        "weekday_idea": "IdeaUnit",
         "weekday_order": "int",
-        "wall": "str",
+        "bridge": "str",
         "yr1_jan1_offset": "int",
     }
 
@@ -202,32 +202,32 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
 def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     """for each pidgin_config category contains the associated columns"""
     return {
-        "bridge_group_id": {
+        "map_group_id": {
             "inx_group_id",
             "unknown_word",
-            "inx_wall",
-            "otx_wall",
+            "inx_bridge",
+            "otx_bridge",
             "otx_group_id",
         },
-        "bridge_acct_id": {
-            "inx_acct_id",
+        "map_name": {
+            "inx_name",
             "unknown_word",
-            "inx_wall",
-            "otx_wall",
-            "otx_acct_id",
+            "inx_bridge",
+            "otx_bridge",
+            "otx_name",
         },
-        "bridge_idea": {
+        "map_idea": {
             "inx_idea",
             "unknown_word",
-            "inx_wall",
-            "otx_wall",
+            "inx_bridge",
+            "otx_bridge",
             "otx_idea",
         },
-        "bridge_road": {
+        "map_road": {
             "inx_road",
             "unknown_word",
-            "inx_wall",
-            "otx_wall",
+            "inx_bridge",
+            "otx_bridge",
             "otx_road",
         },
     }

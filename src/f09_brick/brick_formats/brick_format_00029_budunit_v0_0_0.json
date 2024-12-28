@@ -6,10 +6,10 @@
         "debtor_respect": {
             "otx_key": false
         },
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "deal_id": {
@@ -24,13 +24,13 @@
         "max_tree_traverse": {
             "otx_key": false
         },
-        "owner_id": {
+        "owner_name": {
             "otx_key": true
         },
         "penny": {
             "otx_key": false
         },
-        "purview_time_id": {
+        "purview_time_int": {
             "otx_key": false
         },
         "respect_bit": {

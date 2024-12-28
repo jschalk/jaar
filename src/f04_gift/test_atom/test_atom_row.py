@@ -5,7 +5,7 @@ from src.f02_bud.bud_tool import (
     bud_itemunit_str,
     bud_item_healerlink_str,
 )
-from src.f04_gift.atom_config import atom_insert, atom_delete, acct_id_str
+from src.f04_gift.atom_config import atom_insert, atom_delete, acct_name_str
 from src.f04_gift.atom import AtomRow, atomrow_shop, atomunit_shop
 
 
@@ -16,7 +16,7 @@ def test_AtomRow_exists():
     # THEN
     assert x_atomrow._atom_categorys is None
     assert x_atomrow._crud_command is None
-    assert x_atomrow.acct_id is None
+    assert x_atomrow.acct_name is None
     assert x_atomrow.addin is None
     assert x_atomrow.base is None
     assert x_atomrow.base_item_active_requisite is None
@@ -38,8 +38,8 @@ def test_AtomRow_exists():
     assert x_atomrow.give_force is None
     assert x_atomrow.gogo_want is None
     assert x_atomrow.group_id is None
-    assert x_atomrow.healer_id is None
-    assert x_atomrow.label is None
+    assert x_atomrow.healer_name is None
+    assert x_atomrow.lx is None
     assert x_atomrow.mass is None
     assert x_atomrow.max_tree_traverse is None
     assert x_atomrow.morph is None
@@ -52,7 +52,7 @@ def test_AtomRow_exists():
     assert x_atomrow.pick is None
     assert x_atomrow.pledge is None
     assert x_atomrow.problem_bool is None
-    assert x_atomrow.purview_time_id is None
+    assert x_atomrow.purview_time_int is None
     assert x_atomrow.road is None
     assert x_atomrow.stop_want is None
     assert x_atomrow.take_force is None
@@ -118,16 +118,16 @@ def test_AtomRow_set_jaar_types_SetsAttr():
     x_atomrow = atomrow_shop({}, atom_insert())
     x_atomrow.close = "4"
     x_parent_road = "fizz_buzz"
-    x_label = "buzzziy"
+    x_lx = "buzzziy"
     x_morph_str = "True"
     x_morph_bool = True
     x_atomrow.parent_road = x_parent_road
-    x_atomrow.label = x_label
+    x_atomrow.lx = x_lx
     x_atomrow.morph = x_morph_str
     four_int = 4
     assert x_atomrow.close != four_int
     assert x_atomrow.parent_road == x_parent_road
-    assert x_atomrow.label == x_label
+    assert x_atomrow.lx == x_lx
     assert x_atomrow.morph == x_morph_str
     assert not x_atomrow.road
 
@@ -137,16 +137,16 @@ def test_AtomRow_set_jaar_types_SetsAttr():
     # THEN
     assert x_atomrow.close == four_int
     assert x_atomrow.parent_road == x_parent_road
-    assert x_atomrow.label == x_label
+    assert x_atomrow.lx == x_lx
     assert x_atomrow.morph == x_morph_bool
-    assert x_atomrow.road == create_road(x_parent_road, x_label)
+    assert x_atomrow.road == create_road(x_parent_road, x_lx)
 
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario0():
     # ESTABLISH
     x_category = bud_acctunit_str()
     x_atomrow = atomrow_shop({x_category}, atom_insert())
-    x_atomrow.acct_id = "Bob"
+    x_atomrow.acct_name = "Bob"
 
     # WHEN
     x_atomunits = x_atomrow.get_atomunits()
@@ -154,7 +154,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario0():
     # THEN
     assert len(x_atomunits) == 1
     static_atom = atomunit_shop(x_category, atom_insert())
-    static_atom.set_arg(acct_id_str(), "Bob")
+    static_atom.set_arg(acct_name_str(), "Bob")
     assert x_atomunits[0] == static_atom
 
 
@@ -162,7 +162,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
     # ESTABLISH
     x_category = bud_acctunit_str()
     x_atomrow = atomrow_shop({x_category}, atom_insert())
-    x_atomrow.acct_id = "Bob"
+    x_atomrow.acct_name = "Bob"
     x_atomrow.credit_belief = 5
 
     # WHEN
@@ -171,7 +171,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
     # THEN
     assert len(x_atomunits) == 1
     static_atom = atomunit_shop(x_category, atom_insert())
-    static_atom.set_arg(acct_id_str(), "Bob")
+    static_atom.set_arg(acct_name_str(), "Bob")
     static_atom.set_arg("credit_belief", 5)
     assert x_atomunits[0] == static_atom
 
@@ -192,7 +192,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
     # ESTABLISH
     x_category = bud_acctunit_str()
     x_atomrow = atomrow_shop({x_category}, atom_insert())
-    x_atomrow.acct_id = "Bob"
+    x_atomrow.acct_name = "Bob"
     four_str = "4"
     x_atomrow.credit_belief = four_str
 
@@ -202,7 +202,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
     # THEN
     assert len(x_atomunits) == 1
     static_atom = atomunit_shop(x_category, atom_insert())
-    static_atom.set_arg(acct_id_str(), "Bob")
+    static_atom.set_arg(acct_name_str(), "Bob")
     four_int = 4
     static_atom.set_arg("credit_belief", four_int)
     assert x_atomunits[0] == static_atom
@@ -211,7 +211,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
 def test_AtomRow_get_atomunits_ReturnsObjIfCategoryIsCorrect():
     # ESTABLISH
     x_atomrow = atomrow_shop(set(), atom_insert())
-    x_atomrow.acct_id = "Bob"
+    x_atomrow.acct_name = "Bob"
     four_str = "4"
     x_atomrow.credit_belief = four_str
     assert len(x_atomrow.get_atomunits()) == 0
@@ -228,8 +228,8 @@ def test_AtomRow_get_atomunits_ReturnsObjIfCategoryIsCorrect():
 def test_AtomRow_get_atomunits_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     # ESTABLISH
     x_atomrow = atomrow_shop({bud_itemunit_str()}, atom_insert())
-    x_atomrow.parent_road = "music78"
-    x_atomrow.label = "casa"
+    x_atomrow.parent_road = "accord78"
+    x_atomrow.lx = "casa"
     x_atomrow.pledge = False
     assert len(x_atomrow.get_atomunits()) == 1
 
@@ -238,8 +238,8 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_itemunit_INSERT_pledge_False():
 
     # THEN
     static_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    static_atomunit.set_arg("parent_road", "music78")
-    static_atomunit.set_arg("label", "casa")
+    static_atomunit.set_arg("parent_road", "accord78")
+    static_atomunit.set_arg("lx", "casa")
     static_atomunit.set_arg("pledge", False)
     assert x_atomunit == static_atomunit
 
@@ -248,10 +248,10 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     # ESTABLISH
     x_categorys = {bud_itemunit_str(), bud_item_healerlink_str()}
     x_atomrow = atomrow_shop(x_categorys, atom_insert())
-    x_atomrow.parent_road = "music78"
-    x_atomrow.label = "casa"
+    x_atomrow.parent_road = "accord78"
+    x_atomrow.lx = "casa"
     x_atomrow.pledge = False
-    x_atomrow.healer_id = "Bob"
+    x_atomrow.healer_name = "Bob"
 
     # WHEN / THEN
     x_atomunits = x_atomrow.get_atomunits()
@@ -259,11 +259,11 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     # THEN
     assert len(x_atomunits) == 2
     y_item_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    y_item_atomunit.set_arg("parent_road", "music78")
-    y_item_atomunit.set_arg("label", "casa")
+    y_item_atomunit.set_arg("parent_road", "accord78")
+    y_item_atomunit.set_arg("lx", "casa")
     y_item_atomunit.set_arg("pledge", False)
     assert y_item_atomunit in x_atomunits
     healerlink_atomunit = atomunit_shop(bud_item_healerlink_str(), atom_insert())
-    healerlink_atomunit.set_arg("road", "music78;casa")
-    healerlink_atomunit.set_arg("healer_id", "Bob")
+    healerlink_atomunit.set_arg("road", "accord78;casa")
+    healerlink_atomunit.set_arg("healer_name", "Bob")
     assert healerlink_atomunit in x_atomunits

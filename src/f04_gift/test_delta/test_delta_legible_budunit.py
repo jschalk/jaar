@@ -30,26 +30,28 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tally():
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s bud tally set to {tally_int}"
+    x_str = f"{sue_bud._owner_name}'s bud tally set to {tally_int}"
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_purview_time_id():
+def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_purview_time_int():
     # ESTABLISH
     category = budunit_str()
-    purview_time_id_str = "purview_time_id"
-    purview_time_id_int = 55
-    purview_time_id_atomunit = atomunit_shop(category, atom_update())
-    purview_time_id_atomunit.set_arg(purview_time_id_str, purview_time_id_int)
+    purview_time_int_str = "purview_time_int"
+    purview_time_int_int = 55
+    purview_time_int_atomunit = atomunit_shop(category, atom_update())
+    purview_time_int_atomunit.set_arg(purview_time_int_str, purview_time_int_int)
     x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(purview_time_id_atomunit)
+    x_deltaunit.set_atomunit(purview_time_int_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s bud purview_time_id set to {purview_time_id_int}"
+    x_str = (
+        f"{sue_bud._owner_name}'s bud purview_time_int set to {purview_time_int_int}"
+    )
     assert legible_list[0] == x_str
 
 
@@ -70,7 +72,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s credor pool is now {acct_credor_pool_int}"
+    x_str = f"{sue_bud._owner_name}'s credor pool is now {acct_credor_pool_int}"
     assert legible_list[0] == x_str
 
 
@@ -91,7 +93,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s debtor pool is now {acct_debtor_pool_int}"
+    x_str = f"{sue_bud._owner_name}'s debtor pool is now {acct_debtor_pool_int}"
     assert legible_list[0] == x_str
 
 
@@ -112,7 +114,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equ
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s total pool is now {acct_pool_int}"
+    x_str = f"{sue_bud._owner_name}'s total pool is now {acct_pool_int}"
     assert len(legible_list) == 1
     assert legible_list[0] == x_str
 
@@ -134,5 +136,5 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_max_tree_traverse(
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud._owner_id}'s maximum number of Bud evaluations set to {max_tree_traverse_int}"
+    x_str = f"{sue_bud._owner_name}'s maximum number of Bud evaluations set to {max_tree_traverse_int}"
     assert legible_list[0] == x_str

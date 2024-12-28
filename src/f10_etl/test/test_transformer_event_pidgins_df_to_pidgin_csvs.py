@@ -1,11 +1,11 @@
 from src.f00_instrument.file import create_path, set_dir, get_dir_filenames
-from src.f04_gift.atom_config import face_id_str
+from src.f04_gift.atom_config import face_name_str
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
-    inx_wall_str,
-    otx_wall_str,
-    inx_acct_id_str,
-    otx_acct_id_str,
+    event_int_str,
+    inx_bridge_str,
+    otx_bridge_str,
+    inx_name_str,
+    otx_name_str,
     inx_group_id_str,
     otx_group_id_str,
     inx_road_str,
@@ -76,12 +76,12 @@ def test_event_pidgin_to_pidgin_csv_files_Scenario1_1Event_acct(env_dir_setup_cl
     bob2_inx = "Bobby"
     event3 = 3
     acct_file_columns = [
-        face_id_str(),
-        event_id_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        face_name_str(),
+        event_int_str(),
+        otx_name_str(),
+        inx_name_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")
@@ -117,12 +117,12 @@ def test_event_pidgin_to_pidgin_csv_files_Scenario2_1Event_road(env_dir_setup_cl
     clean_inx = "fizz,casaita,limpio"
     event7 = 7
     road_file_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")
@@ -166,12 +166,12 @@ def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
     event7 = 7
     event9 = 9
     road_file_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")
@@ -238,12 +238,12 @@ def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
 #     event7 = 7
 #     event9 = 9
 #     acct_file_columns = [
-#         face_id_str(),
-#         event_id_str(),
-#         otx_acct_id_str(),
-#         inx_acct_id_str(),
-#         otx_wall_str(),
-#         inx_wall_str(),
+#         face_name_str(),
+#         event_int_str(),
+#         otx_name_str(),
+#         inx_name_str(),
+#         otx_bridge_str(),
+#         inx_bridge_str(),
 #         unknown_word_str(),
 #     ]
 #     x_nan = float("nan")
@@ -304,12 +304,12 @@ def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
 #     run_str = ";Run"
 #     run_inx = ";Running"
 #     group_file_columns = [
-#         face_id_str(),
-#         event_id_str(),
+#         face_name_str(),
+#         event_int_str(),
 #         otx_group_id_str(),
 #         inx_group_id_str(),
-#         otx_wall_str(),
-#         inx_wall_str(),
+#         otx_bridge_str(),
+#         inx_bridge_str(),
 #         unknown_word_str(),
 #     ]
 #     x_nan = float("nan")
@@ -361,12 +361,12 @@ def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
 #     event7 = 7
 #     event9 = 9
 #     idea_file_columns = [
-#         face_id_str(),
-#         event_id_str(),
+#         face_name_str(),
+#         event_int_str(),
 #         otx_idea_str(),
 #         inx_idea_str(),
-#         otx_wall_str(),
-#         inx_wall_str(),
+#         otx_bridge_str(),
+#         inx_bridge_str(),
 #         unknown_word_str(),
 #     ]
 #     x_nan = float("nan")
@@ -417,12 +417,12 @@ def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
 #     event7 = 7
 #     event9 = 9
 #     road_file_columns = [
-#         face_id_str(),
-#         event_id_str(),
+#         face_name_str(),
+#         event_int_str(),
 #         otx_road_str(),
 #         inx_road_str(),
-#         otx_wall_str(),
-#         inx_wall_str(),
+#         otx_bridge_str(),
+#         inx_bridge_str(),
 #         unknown_word_str(),
 #     ]
 #     x_nan = float("nan")
@@ -464,7 +464,7 @@ def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
 #     assert sheet_exists(event9_pidgin_file_path, road_agg_str)
 
 
-# def test_etl_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face_ids(
+# def test_etl_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face_names(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -478,12 +478,12 @@ def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
 #     event7 = 7
 #     event9 = 9
 #     road_file_columns = [
-#         face_id_str(),
-#         event_id_str(),
+#         face_name_str(),
+#         event_int_str(),
 #         otx_road_str(),
 #         inx_road_str(),
-#         otx_wall_str(),
-#         inx_wall_str(),
+#         otx_bridge_str(),
+#         inx_bridge_str(),
 #         unknown_word_str(),
 #     ]
 #     x_nan = float("nan")

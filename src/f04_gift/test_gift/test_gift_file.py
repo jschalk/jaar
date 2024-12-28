@@ -1,7 +1,7 @@
 from src.f00_instrument.file import open_file, create_path as f_path
 from src.f00_instrument.dict_toolbox import get_dict_from_json
 from src.f01_road.jaar_config import get_gifts_folder, get_test_deal_id as deal_id
-from src.f04_gift.atom_config import owner_id_str, face_id_str
+from src.f04_gift.atom_config import owner_name_str, face_name_str
 from src.f04_gift.delta import deltaunit_shop
 from src.f04_gift.gift import giftunit_shop, create_giftunit_from_files
 from src.f04_gift.examples.example_atoms import (
@@ -132,8 +132,8 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     gift_file_dict = get_dict_from_json(gift_file_json)
     print(f"{gift_file_dict=}")
     assert gift_file_dict.get("delta_atom_numbers") == []
-    assert gift_file_dict.get(owner_id_str()) == sue_str
-    assert gift_file_dict.get(face_id_str()) is None
+    assert gift_file_dict.get(owner_name_str()) == sue_str
+    assert gift_file_dict.get(face_name_str()) is None
     print(f"{gift_file_dict.keys()=}")
 
 
@@ -265,6 +265,6 @@ def test_create_giftunit_from_files_ReturnsCorrectObj(env_dir_setup_cleanup):
     )
 
     # THEN
-    assert src_sue_giftunit.owner_id == new_sue_giftunit.owner_id
-    assert src_sue_giftunit.face_id == new_sue_giftunit.face_id
+    assert src_sue_giftunit.owner_name == new_sue_giftunit.owner_name
+    assert src_sue_giftunit.face_name == new_sue_giftunit.face_name
     assert src_sue_giftunit._deltaunit == new_sue_giftunit._deltaunit

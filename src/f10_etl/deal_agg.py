@@ -12,8 +12,8 @@ def create_init_deal_staging_files(dir: str):
     br00005_path = create_path(dir, "br00005.xlsx")
 
     br00000_columns = [
-        "face_id",
-        "event_id",
+        "face_name",
+        "event_int",
         "deal_id",
         "c400_number",
         "current_time",
@@ -21,47 +21,47 @@ def create_init_deal_staging_files(dir: str):
         "monthday_distortion",
         "penny",
         "respect_bit",
-        "wall",
-        "timeline_label",
+        "bridge",
+        "timeline_idea",
         "yr1_jan1_offset",
     ]
     br00001_columns = [
-        "face_id",
-        "event_id",
+        "face_name",
+        "event_int",
         "deal_id",
-        "owner_id",
-        "acct_id",
-        "time_id",
+        "owner_name",
+        "acct_name",
+        "time_int",
         "quota",
     ]
     br00002_columns = [
-        "face_id",
-        "event_id",
+        "face_name",
+        "event_int",
         "deal_id",
-        "owner_id",
-        "acct_id",
-        "time_id",
+        "owner_name",
+        "acct_name",
+        "time_int",
         "amount",
     ]
     br00003_columns = [
-        "face_id",
-        "event_id",
+        "face_name",
+        "event_int",
         "deal_id",
-        "hour_label",
+        "hour_idea",
         "cumlative_minute",
     ]
     br00004_columns = [
-        "face_id",
-        "event_id",
+        "face_name",
+        "event_int",
         "deal_id",
-        "month_label",
+        "month_idea",
         "cumlative_day",
     ]
     br00005_columns = [
-        "face_id",
-        "event_id",
+        "face_name",
+        "event_int",
         "deal_id",
-        "weekday_label",
+        "weekday_idea",
         "weekday_order",
     ]
     br00000_df = DataFrame([], columns=br00000_columns)

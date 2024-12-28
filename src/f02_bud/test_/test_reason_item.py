@@ -8,16 +8,16 @@ from src.f02_bud.reason_item import (
     reasons_get_from_dict,
 )
 from src.f01_road.road import (
-    get_default_deal_id_ideaunit as root_label,
+    get_default_deal_id_ideaunit as root_lx,
     create_road,
-    default_wall_if_None,
+    default_bridge_if_None,
 )
 
 
 def test_ReasonCore_attributesExist():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
     wed_str = "wednesday"
     wed_road = create_road(wkday_road, wed_str)
     wed_premise = premiseunit_shop(need=wed_road)
@@ -32,40 +32,40 @@ def test_ReasonCore_attributesExist():
     assert wkday_reason.base == wkday_road
     assert wkday_reason.premises == premises
     assert wkday_reason.base_item_active_requisite is False
-    assert wkday_reason.wall is None
+    assert wkday_reason.bridge is None
 
 
-def test_reasoncore_shop_ReturnsCorrectAttrWith_wall():
+def test_reasoncore_shop_ReturnsCorrectAttrWith_bridge():
     # ESTABLISH
     slash_str = "/"
     casa_str = "casa"
-    casa_road = create_road(root_label(), casa_str, wall=slash_str)
+    casa_road = create_road(root_lx(), casa_str, bridge=slash_str)
     print(f"{casa_road=} ")
 
     # WHEN
-    casa_reason = reasonheir_shop(casa_road, wall=slash_str)
+    casa_reason = reasonheir_shop(casa_road, bridge=slash_str)
 
     # THEN
-    assert casa_reason.wall == slash_str
+    assert casa_reason.bridge == slash_str
 
 
 def test_reasonheir_shop_ReturnsCorrectObj():
     # ESTABLISH
     casa_str = "casa"
-    casa_road = create_road(root_label(), casa_str)
+    casa_road = create_road(root_lx(), casa_str)
 
     # WHEN
     casa_reason = reasonheir_shop(casa_road)
 
     # THEN
     assert casa_reason.premises == {}
-    assert casa_reason.wall == default_wall_if_None()
+    assert casa_reason.bridge == default_bridge_if_None()
 
 
 def test_ReasonHeir_clear_CorrectlyClearsField():
     # ESTABLISH
     casa_str = "casa"
-    casa_road = create_road(root_label(), casa_str)
+    casa_road = create_road(root_lx(), casa_str)
     email_str = "check email"
     email_road = create_road(casa_road, email_str)
     email_premise = premiseunit_shop(need=email_road)
@@ -89,7 +89,7 @@ def test_ReasonHeir_clear_CorrectlyClearsField():
 def test_ReasonHeir_set_status_CorrectlySetsStatus():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
     fri_str = "friday"
     fri_road = create_road(wkday_road, fri_str)
     thu_str = "thursday"
@@ -135,7 +135,7 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
 def test_ReasonHeir_set_status_EmptyFactCorrectlySetsStatus():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
     wed_str = "wednesday"
     wed_road = create_road(wkday_road, wed_str)
     wed_premise = premiseunit_shop(need=wed_road)
@@ -149,7 +149,7 @@ def test_ReasonHeir_set_status_EmptyFactCorrectlySetsStatus():
 def test_ReasonHeir_set_base_item_active_value_Correctly():
     # ESTABLISH
     day_str = "day"
-    day_road = create_road(root_label(), day_str)
+    day_road = create_road(root_lx(), day_str)
     day_reason = reasonheir_shop(base=day_road)
     assert day_reason._base_item_active_value is None
 
@@ -163,7 +163,7 @@ def test_ReasonHeir_set_base_item_active_value_Correctly():
 def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusTrue():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
     week_reason = reasonheir_shop(base=wkday_road, base_item_active_requisite=True)
     week_reason.set_base_item_active_value(bool_x=True)
     assert week_reason._status is None
@@ -178,7 +178,7 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusTrue():
 def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
     wkday_reason = reasonheir_shop(wkday_road, base_item_active_requisite=False)
     wkday_reason.set_base_item_active_value(bool_x=False)
     assert wkday_reason._status is None
@@ -193,7 +193,7 @@ def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
 def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusFalse():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
     wkday_reason = reasonheir_shop(wkday_road, base_item_active_requisite=True)
     wkday_reason.set_base_item_active_value(bool_x=False)
     assert wkday_reason._status is None
@@ -208,7 +208,7 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusFalse():
 def test_ReasonHeir_set_status_BudNoneCorrectlySetsStatusFalse():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
     wkday_reason = reasonheir_shop(wkday_road, base_item_active_requisite=True)
     wkday_reason.set_base_item_active_value(bool_x=None)
     assert wkday_reason._status is None
@@ -223,20 +223,20 @@ def test_ReasonHeir_set_status_BudNoneCorrectlySetsStatusFalse():
 def test_reasonunit_shop_ReturnsCorrectObj():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
 
     # WHEN
     wkday_reasonunit = reasonunit_shop(wkday_road)
 
     # THEN
     assert wkday_reasonunit.premises == {}
-    assert wkday_reasonunit.wall == default_wall_if_None()
+    assert wkday_reasonunit.bridge == default_bridge_if_None()
 
 
 def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
     wed_str = "wednesday"
     wed_road = create_road(wkday_road, wed_str)
     wed_premise = premiseunit_shop(need=wed_road)
@@ -259,7 +259,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():
 def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_base_item_active_requisite():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
     wkday_base_item_active_requisite = True
     wkday_reason = reasonunit_shop(
         wkday_road, base_item_active_requisite=wkday_base_item_active_requisite
@@ -281,7 +281,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_base_item_active_requisite()
 def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoPremisesReasons():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
     wed_str = "wednesday"
     wed_road = create_road(wkday_road, wed_str)
     thu_str = "thursday"
@@ -307,7 +307,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoPremisesReasons():
 def test_reasons_get_from_dict_ReturnsCorrectObj():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_road = create_road(root_label(), wkday_str)
+    wkday_road = create_road(root_lx(), wkday_str)
     wkday_base_item_active_requisite = False
     wkday_reasonunit = reasonunit_shop(
         wkday_road, base_item_active_requisite=wkday_base_item_active_requisite
@@ -333,7 +333,7 @@ def test_reasons_get_from_dict_ReturnsCorrectObj():
 def test_ReasonHeir_correctSetsPledgeState():
     # ESTABLISH
     day_str = "ced_day"
-    day_road = create_road(root_label(), day_str)
+    day_road = create_road(root_lx(), day_str)
     range_3_to_6_premise = premiseunit_shop(need=day_road, open=3, nigh=6)
     range_3_to_6_premises = {range_3_to_6_premise.need: range_3_to_6_premise}
     range_3_to_6_reason = reasonheir_shop(day_road, range_3_to_6_premises)
@@ -367,7 +367,7 @@ def test_ReasonHeir_correctSetsPledgeState():
 def test_ReasonCore_get_premises_count():
     # ESTABLISH
     day_str = "day"
-    day_road = create_road(root_label(), day_str)
+    day_road = create_road(root_lx(), day_str)
 
     # WHEN
     day_reason = reasoncore_shop(base=day_road)
@@ -385,7 +385,7 @@ def test_ReasonCore_get_premises_count():
 def test_ReasonCore_set_premise_CorrectlySetsPremise():
     # ESTABLISH
     day_str = "day"
-    day_road = create_road(root_label(), day_str)
+    day_road = create_road(root_lx(), day_str)
     day_reason = reasoncore_shop(base=day_road)
     assert day_reason.get_premises_count() == 0
 
@@ -402,7 +402,7 @@ def test_ReasonCore_set_premise_CorrectlySetsPremise():
 def test_ReasonCore_premise_exists_ReturnsObj():
     # ESTABLISH
     day_str = "day"
-    day_road = create_road(root_label(), day_str)
+    day_road = create_road(root_lx(), day_str)
     day_reason = reasoncore_shop(base=day_road)
     assert not day_reason.premise_exists(day_road)
 
@@ -415,7 +415,7 @@ def test_ReasonCore_premise_exists_ReturnsObj():
 
 def test_ReasonCore_get_single_premis_ReturnsCorrectObj():
     # ESTABLISH
-    day_road = create_road(root_label(), "day")
+    day_road = create_road(root_lx(), "day")
     day_reason = reasoncore_shop(base=day_road)
     day_reason.set_premise(premise=day_road, open=3, nigh=6)
     day_reason.set_premise(premise=day_road, open=7, nigh=10)
@@ -431,7 +431,7 @@ def test_ReasonCore_get_single_premis_ReturnsCorrectObj():
 def test_ReasonCore_del_premise_CorrectlyDeletesPremise():
     # ESTABLISH
     day_str = "day"
-    day_road = create_road(root_label(), day_str)
+    day_road = create_road(root_lx(), day_str)
     day_reason = reasoncore_shop(base=day_road)
     day_reason.set_premise(premise=day_road, open=3, nigh=6)
     assert day_reason.get_premises_count() == 1
@@ -447,7 +447,7 @@ def test_ReasonCore_find_replace_road_casas():
     # ESTABLISH
     weekday_str = "weekday"
     sunday_str = "Sunday"
-    old_weekday_road = create_road(root_label(), weekday_str)
+    old_weekday_road = create_road(root_lx(), weekday_str)
     old_sunday_road = create_road(old_weekday_road, sunday_str)
     x_reason = reasoncore_shop(base=old_weekday_road)
     x_reason.set_premise(premise=old_sunday_road)
@@ -458,7 +458,7 @@ def test_ReasonCore_find_replace_road_casas():
     assert x_reason.premises.get(old_sunday_road).need == old_sunday_road
 
     # WHEN
-    old_road = root_label()
+    old_road = root_lx()
     new_road = "fun"
     x_reason.find_replace_road(old_road=old_road, new_road=new_road)
     new_weekday_road = create_road(new_road, weekday_str)
@@ -473,27 +473,27 @@ def test_ReasonCore_find_replace_road_casas():
     assert x_reason.premises.get(new_sunday_road).need == new_sunday_road
 
 
-def test_ReasonCore_set_wall_SetsAttrsCorrectly():
+def test_ReasonCore_set_bridge_SetsAttrsCorrectly():
     # ESTABLISH
     week_str = "weekday"
     sun_str = "Sunday"
     slash_str = "/"
-    slash_week_road = create_road(root_label(), week_str, wall=slash_str)
-    slash_sun_road = create_road(slash_week_road, sun_str, wall=slash_str)
-    week_reasonunit = reasoncore_shop(slash_week_road, wall=slash_str)
+    slash_week_road = create_road(root_lx(), week_str, bridge=slash_str)
+    slash_sun_road = create_road(slash_week_road, sun_str, bridge=slash_str)
+    week_reasonunit = reasoncore_shop(slash_week_road, bridge=slash_str)
     week_reasonunit.set_premise(slash_sun_road)
-    assert week_reasonunit.wall == slash_str
+    assert week_reasonunit.bridge == slash_str
     assert week_reasonunit.base == slash_week_road
     assert week_reasonunit.premises.get(slash_sun_road).need == slash_sun_road
 
     # WHEN
     star_str = "*"
-    week_reasonunit.set_wall(new_wall=star_str)
+    week_reasonunit.set_bridge(new_bridge=star_str)
 
     # THEN
-    assert week_reasonunit.wall == star_str
-    star_week_road = create_road(root_label(), week_str, wall=star_str)
-    star_sun_road = create_road(star_week_road, sun_str, wall=star_str)
+    assert week_reasonunit.bridge == star_str
+    star_week_road = create_road(root_lx(), week_str, bridge=star_str)
+    star_sun_road = create_road(star_week_road, sun_str, bridge=star_str)
     assert week_reasonunit.base == star_week_road
     assert week_reasonunit.premises.get(star_sun_road) is not None
     assert week_reasonunit.premises.get(star_sun_road).need == star_sun_road
@@ -502,7 +502,7 @@ def test_ReasonCore_set_wall_SetsAttrsCorrectly():
 def test_ReasonCore_get_obj_key():
     # ESTABLISH
     casa_str = "casa"
-    casa_road = create_road(root_label(), casa_str)
+    casa_road = create_road(root_lx(), casa_str)
     email_str = "check email"
     email_road = create_road(casa_road, email_str)
     email_premise = premiseunit_shop(need=email_road)

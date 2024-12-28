@@ -4,8 +4,8 @@ from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
 )
 from src.f01_road.road import (
-    AcctID,
-    default_wall_if_None,
+    AcctName,
+    default_bridge_if_None,
     validate_ideaunit,
     is_ideaunit,
 )
@@ -23,31 +23,31 @@ class InvalidAcctException(Exception):
     pass
 
 
-class Bad_acct_idMemberShipException(Exception):
+class Bad_acct_nameMemberShipException(Exception):
     pass
 
 
 @dataclass
 class AcctCore:
-    acct_id: AcctID = None
-    _wall: str = None
+    acct_name: AcctName = None
+    _bridge: str = None
     _respect_bit: float = None
 
-    def set_acct_id(self, x_acct_id: AcctID):
-        self.acct_id = validate_ideaunit(x_acct_id, self._wall)
+    def set_acct_name(self, x_acct_name: AcctName):
+        self.acct_name = validate_ideaunit(x_acct_name, self._bridge)
 
 
 @dataclass
 class AcctUnit(AcctCore):
-    """This represents the BudUnit._owner_id's opinion of the AcctUnit.acct_id
-    AcctUnit.credit_belief represents how much credit_belief the _owner_id projects to the acct_id
-    AcctUnit.debtit_belief represents how much debtit_belief the _owner_id projects to the acct_id
+    """This represents the BudUnit._owner_name's opinion of the AcctUnit.acct_name
+    AcctUnit.credit_belief represents how much credit_belief the _owner_name projects to the acct_name
+    AcctUnit.debtit_belief represents how much debtit_belief the _owner_name projects to the acct_name
     """
 
     credit_belief: int = None
     debtit_belief: int = None
     # special attribute: static in bud json, in memory it is deleted after loading and recalculated during saving.
-    _memberships: dict[AcctID, MemberShip] = None
+    _memberships: dict[AcctName, MemberShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
@@ -162,13 +162,13 @@ class AcctUnit(AcctCore):
 
     def set_membership(self, x_membership: MemberShip):
         x_group_id = x_membership.group_id
-        group_id_is_acct_id = is_ideaunit(x_group_id, self._wall)
-        if group_id_is_acct_id and self.acct_id != x_group_id:
-            raise Bad_acct_idMemberShipException(
-                f"AcctUnit with acct_id='{self.acct_id}' cannot have link to '{x_group_id}'."
+        group_id_is_acct_name = is_ideaunit(x_group_id, self._bridge)
+        if group_id_is_acct_name and self.acct_name != x_group_id:
+            raise Bad_acct_nameMemberShipException(
+                f"AcctUnit with acct_name='{self.acct_name}' cannot have link to '{x_group_id}'."
             )
 
-        x_membership._acct_id = self.acct_id
+        x_membership._acct_name = self.acct_name
         self._memberships[x_membership.group_id] = x_membership
 
     def get_membership(self, group_id: GroupID) -> MemberShip:
@@ -218,7 +218,7 @@ class AcctUnit(AcctCore):
 
     def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {
-            "acct_id": self.acct_id,
+            "acct_name": self.acct_name,
             "credit_belief": self.credit_belief,
             "debtit_belief": self.debtit_belief,
             "_memberships": self.get_memberships_dict(),
@@ -247,21 +247,21 @@ def acctunits_get_from_json(acctunits_json: str) -> dict[str, AcctUnit]:
     return acctunits_get_from_dict(x_dict=acctunits_dict)
 
 
-def acctunits_get_from_dict(x_dict: dict, _wall: str = None) -> dict[str, AcctUnit]:
+def acctunits_get_from_dict(x_dict: dict, _bridge: str = None) -> dict[str, AcctUnit]:
     acctunits = {}
     for acctunit_dict in x_dict.values():
-        x_acctunit = acctunit_get_from_dict(acctunit_dict, _wall)
-        acctunits[x_acctunit.acct_id] = x_acctunit
+        x_acctunit = acctunit_get_from_dict(acctunit_dict, _bridge)
+        acctunits[x_acctunit.acct_name] = x_acctunit
     return acctunits
 
 
-def acctunit_get_from_dict(acctunit_dict: dict, _wall: str) -> AcctUnit:
-    x_acct_id = acctunit_dict["acct_id"]
+def acctunit_get_from_dict(acctunit_dict: dict, _bridge: str) -> AcctUnit:
+    x_acct_name = acctunit_dict["acct_name"]
     x_credit_belief = acctunit_dict["credit_belief"]
     x_debtit_belief = acctunit_dict["debtit_belief"]
     x_memberships_dict = acctunit_dict["_memberships"]
-    x_acctunit = acctunit_shop(x_acct_id, x_credit_belief, x_debtit_belief, _wall)
-    x_acctunit._memberships = memberships_get_from_dict(x_memberships_dict, x_acct_id)
+    x_acctunit = acctunit_shop(x_acct_name, x_credit_belief, x_debtit_belief, _bridge)
+    x_acctunit._memberships = memberships_get_from_dict(x_memberships_dict, x_acct_name)
     _irrational_debtit_belief = acctunit_dict.get("_irrational_debtit_belief", 0)
     _inallocable_debtit_belief = acctunit_dict.get("_inallocable_debtit_belief", 0)
     x_acctunit.add_irrational_debtit_belief(get_0_if_None(_irrational_debtit_belief))
@@ -271,10 +271,10 @@ def acctunit_get_from_dict(acctunit_dict: dict, _wall: str) -> AcctUnit:
 
 
 def acctunit_shop(
-    acct_id: AcctID,
+    acct_name: AcctName,
     credit_belief: int = None,
     debtit_belief: int = None,
-    _wall: str = None,
+    _bridge: str = None,
     _respect_bit: float = None,
 ) -> AcctUnit:
     x_acctunit = AcctUnit(
@@ -291,8 +291,8 @@ def acctunit_shop(
         _fund_agenda_take=0,
         _fund_agenda_ratio_give=0,
         _fund_agenda_ratio_take=0,
-        _wall=default_wall_if_None(_wall),
+        _bridge=default_bridge_if_None(_bridge),
         _respect_bit=default_respect_bit_if_None(_respect_bit),
     )
-    x_acctunit.set_acct_id(x_acct_id=acct_id)
+    x_acctunit.set_acct_name(x_acct_name=acct_name)
     return x_acctunit

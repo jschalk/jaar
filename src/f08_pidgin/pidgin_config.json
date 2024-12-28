@@ -1,45 +1,45 @@
 {
-    "bridge_acct_id": {
+    "map_name": {
         "jkeys": {
-            "otx_acct_id": {}
+            "otx_name": {}
         },
         "jvalues": {
-            "inx_acct_id": {},
-            "inx_wall": {},
-            "otx_wall": {},
+            "inx_name": {},
+            "inx_bridge": {},
+            "otx_bridge": {},
             "unknown_word": {}
         }
     },
-    "bridge_group_id": {
+    "map_group_id": {
         "jkeys": {
             "otx_group_id": {}
         },
         "jvalues": {
             "inx_group_id": {},
-            "inx_wall": {},
-            "otx_wall": {},
+            "inx_bridge": {},
+            "otx_bridge": {},
             "unknown_word": {}
         }
     },
-    "bridge_idea": {
+    "map_idea": {
         "jkeys": {
             "otx_idea": {}
         },
         "jvalues": {
             "inx_idea": {},
-            "inx_wall": {},
-            "otx_wall": {},
+            "inx_bridge": {},
+            "otx_bridge": {},
             "unknown_word": {}
         }
     },
-    "bridge_road": {
+    "map_road": {
         "jkeys": {
             "otx_road": {}
         },
         "jvalues": {
             "inx_road": {},
-            "inx_wall": {},
-            "otx_wall": {},
+            "inx_bridge": {},
+            "otx_bridge": {},
             "unknown_word": {}
         }
     }

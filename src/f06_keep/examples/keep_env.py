@@ -17,7 +17,7 @@ def temp_deals_dir():
     return "src/f06_keep/examples/deals"
 
 
-def temp_owner_id():
+def temp_owner_name():
     return "ex_owner04"
 
 
@@ -38,7 +38,7 @@ def get_texas_road() -> RoadUnit:
 
 def get_texas_hubunit() -> HubUnit:
     return hubunit_shop(
-        temp_deals_dir(), temp_deal_id(), temp_owner_id(), get_texas_road()
+        temp_deals_dir(), temp_deal_id(), temp_owner_name(), get_texas_road()
     )
 
 

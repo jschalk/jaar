@@ -44,7 +44,7 @@ def budunit_v001_with_large_agenda() -> BudUnit:
 
 def budunit_v002() -> BudUnit:
     bob_bud = budunit_get_from_json(open_file(env_dir(), "example_bud2.json"))
-    print(f"{bob_bud._deal_id=} {bob_bud._wall=}")
+    print(f"{bob_bud._deal_id=} {bob_bud._bridge=}")
     return bob_bud
 
 
@@ -400,7 +400,7 @@ def from_list_get_active(
 
     active = temp_item._active
     print(
-        f"Set active: {item._label=} {active} {active_true_count=} {active_false_count=}"
+        f"Set active: {item._lx=} {active} {active_true_count=} {active_false_count=}"
     )
 
     return active

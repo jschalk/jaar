@@ -6,11 +6,11 @@ from src.f00_instrument.dict_toolbox import (
 )
 from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
-    FaceID,
-    EventID,
+    FaceName,
+    EventInt,
     DealID,
     WorldID,
-    TimeLineLabel,
+    TimeLineIdea,
     get_default_world_id,
 )
 from src.f07_deal.deal import DealUnit
@@ -53,31 +53,31 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     current_time: TimeLinePoint = None
-    events: dict[EventID, FaceID] = None
-    timeconversions: dict[TimeLineLabel, TimeConversion] = None
+    events: dict[EventInt, FaceName] = None
+    timeconversions: dict[TimeLineIdea, TimeConversion] = None
     _faces_bow_dir: str = None
     _faces_aft_dir: str = None
     _world_dir: str = None
     _ocean_dir: str = None
     _boat_dir: str = None
     _dealunits: set[DealID] = None
-    _pidgin_events: dict[FaceID, set[EventID]] = None
+    _pidgin_events: dict[FaceName, set[EventInt]] = None
 
-    def set_event(self, event_id: EventID, face_id: FaceID):
-        self.events[event_id] = face_id
+    def set_event(self, event_int: EventInt, face_name: FaceName):
+        self.events[event_int] = face_name
 
-    def event_exists(self, event_id: EventID) -> bool:
-        return self.events.get(event_id) != None
+    def event_exists(self, event_int: EventInt) -> bool:
+        return self.events.get(event_int) != None
 
-    def get_event(self, event_id: EventID) -> FaceID:
-        return self.events.get(event_id)
+    def get_event(self, event_int: EventInt) -> FaceName:
+        return self.events.get(event_int)
 
-    def legitimate_events(self) -> set[EventID]:
+    def legitimate_events(self) -> set[EventInt]:
         return set(self.events.keys())
 
-    def _event_dir(self, face_id: FaceID, event_id: EventID) -> str:
-        face_dir = create_path(self._faces_bow_dir, face_id)
-        return create_path(face_dir, event_id)
+    def _event_dir(self, face_name: FaceName, event_int: EventInt) -> str:
+        face_dir = create_path(self._faces_bow_dir, face_name)
+        return create_path(face_dir, event_int)
 
     def _set_pidgin_events(self):
         self._pidgin_events = get_pidgin_events_by_dirs(self._faces_bow_dir)
@@ -96,7 +96,7 @@ class WorldUnit:
         set_dir(self._faces_aft_dir)
         set_dir(self._boat_dir)
 
-    def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
+    def get_timeconversions_dict(self) -> dict[TimeLineIdea, TimeConversion]:
         return self.timeconversions
 
     def ocean_to_boat_staging(self):
@@ -176,7 +176,7 @@ def worldunit_shop(
     worlds_dir: str = None,
     ocean_dir: str = None,
     current_time: TimeLinePoint = None,
-    timeconversions: dict[TimeLineLabel, TimeConversion] = None,
+    timeconversions: dict[TimeLineIdea, TimeConversion] = None,
     _dealunits: set[DealID] = None,
 ) -> WorldUnit:
     if world_id is None:

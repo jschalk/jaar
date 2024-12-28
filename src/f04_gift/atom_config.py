@@ -51,8 +51,8 @@ def jaar_type_str() -> str:
     return "jaar_type"
 
 
-def type_AcctID_str() -> str:
-    return "AcctID"
+def type_AcctName_str() -> str:
+    return "AcctName"
 
 
 def type_GroupID_str() -> str:
@@ -95,16 +95,16 @@ def crud_str() -> str:
     return "crud"
 
 
-def face_id_str() -> str:
-    return "face_id"
+def face_name_str() -> str:
+    return "face_name"
 
 
 def deal_id_str() -> str:
     return "deal_id"
 
 
-def owner_id_str() -> str:
-    return "owner_id"
+def owner_name_str() -> str:
+    return "owner_name"
 
 
 def credor_respect_str() -> str:
@@ -127,8 +127,8 @@ def respect_bit_str() -> str:
     return "respect_bit"
 
 
-def acct_id_str() -> str:
-    return "acct_id"
+def acct_name_str() -> str:
+    return "acct_name"
 
 
 def awardee_id_str() -> str:
@@ -151,8 +151,8 @@ def team_id_str() -> str:
     return "team_id"
 
 
-def healer_id_str() -> str:
-    return "healer_id"
+def healer_name_str() -> str:
+    return "healer_name"
 
 
 def acct_pool_str() -> str:
@@ -183,8 +183,8 @@ def parent_road_str() -> str:
     return "parent_road"
 
 
-def label_str() -> str:
-    return "label"
+def lx_str() -> str:
+    return "lx"
 
 
 def mass_str() -> str:
@@ -288,7 +288,7 @@ def get_atom_args_category_mapping() -> dict[str, set[str]]:
 
 def get_allowed_jaar_types() -> set[str]:
     return {
-        "AcctID",
+        "AcctName",
         "bool",
         "float",
         "GroupID",
@@ -301,7 +301,7 @@ def get_allowed_jaar_types() -> set[str]:
 
 def get_atom_args_jaar_types() -> dict[str, str]:
     return {
-        "acct_id": "AcctID",
+        "acct_name": "AcctName",
         "addin": "float",
         "awardee_id": "GroupID",
         "base": "RoadUnit",
@@ -323,8 +323,8 @@ def get_atom_args_jaar_types() -> dict[str, str]:
         "give_force": "float",
         "gogo_want": "float",
         "group_id": "GroupID",
-        "healer_id": "GroupID",
-        "label": "IdeaUnit",
+        "healer_name": "GroupID",
+        "lx": "IdeaUnit",
         "mass": "int",
         "max_tree_traverse": "int",
         "morph": "bool",
@@ -337,7 +337,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
         "pick": "RoadUnit",
         "pledge": "bool",
         "problem_bool": "bool",
-        "purview_time_id": "TimeLinePoint",
+        "purview_time_int": "TimeLinePoint",
         "respect_bit": "float",
         "road": "RoadUnit",
         "stop_want": "float",

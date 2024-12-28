@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "acct_id": {
+        "acct_name": {
             "otx_key": true
         },
         "credit_vote": {
@@ -9,10 +9,10 @@
         "debtit_vote": {
             "otx_key": false
         },
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "deal_id": {
@@ -21,7 +21,7 @@
         "group_id": {
             "otx_key": true
         },
-        "owner_id": {
+        "owner_name": {
             "otx_key": true
         }
     },

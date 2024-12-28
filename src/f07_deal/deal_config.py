@@ -11,12 +11,12 @@ def amount_str() -> str:
     return "amount"
 
 
-def month_label_str() -> str:
-    return "month_label"
+def month_idea_str() -> str:
+    return "month_idea"
 
 
-def hour_label_str() -> str:
-    return "hour_label"
+def hour_idea_str() -> str:
+    return "hour_idea"
 
 
 def cumlative_minute_str() -> str:
@@ -27,8 +27,8 @@ def cumlative_day_str() -> str:
     return "cumlative_day"
 
 
-def weekday_label_str() -> str:
-    return "weekday_label"
+def weekday_idea_str() -> str:
+    return "weekday_idea"
 
 
 def weekday_order_str() -> str:
@@ -119,25 +119,25 @@ def get_deal_args_category_mapping() -> dict[str, str]:
 
 def get_deal_args_jaar_types() -> dict[str, str]:
     return {
-        "acct_id": "AcctID",
+        "acct_name": "AcctName",
         "amount": "float",
         "c400_number": "int",
         "cumlative_day": "int",
         "cumlative_minute": "int",
         "current_time": "int",
-        "hour_label": "IdeaUnit",
+        "hour_idea": "IdeaUnit",
         "deal_id": "IdeaUnit",
         "fund_coin": "float",
-        "month_label": "IdeaUnit",
+        "month_idea": "IdeaUnit",
         "monthday_distortion": "int",
         "penny": "float",
-        "owner_id": "AcctID",
+        "owner_name": "AcctName",
         "quota": "int",
         "respect_bit": "float",
-        "time_id": "TimeLinePoint",
-        "timeline_label": "IdeaUnit",
-        "weekday_label": "IdeaUnit",
+        "time_int": "TimeLinePoint",
+        "timeline_idea": "IdeaUnit",
+        "weekday_idea": "IdeaUnit",
         "weekday_order": "int",
-        "wall": "str",
+        "bridge": "str",
         "yr1_jan1_offset": "int",
     }

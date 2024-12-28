@@ -41,7 +41,7 @@
         ["February", 365]
     ],
     "monthday_distortion": 1,
-    "timeline_label": "creg",
+    "timeline_idea": "creg",
     "weekdays_config": [
         "Wednesday",
         "Thursday",

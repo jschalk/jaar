@@ -13,17 +13,17 @@ from src.f10_etl.pidgin_agg import (
 def test_PidginBodyRow_Exists():
     # ESTABLISH
     sue_str = "Sue"
-    x_event_id = 55
+    x_event_int = 55
     x_otx_str = ";"
     x_inx_str = ";"
 
     # WHEN
-    sue55_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, x_otx_str, x_inx_str)
+    sue55_pidginbodyrow = PidginBodyRow(sue_str, x_event_int, x_otx_str, x_inx_str)
 
     # THEN
     assert sue55_pidginbodyrow
-    assert sue55_pidginbodyrow.face_id == sue_str
-    assert sue55_pidginbodyrow.event_id == x_event_id
+    assert sue55_pidginbodyrow.face_name == sue_str
+    assert sue55_pidginbodyrow.event_int == x_event_int
     assert sue55_pidginbodyrow.otx_str == x_otx_str
     assert sue55_pidginbodyrow.inx_str == x_inx_str
 
@@ -34,44 +34,46 @@ def test_PidginBodyUnit_Exists():
 
     # THEN
     assert x_pidginbodyunit
-    assert x_pidginbodyunit.face_id is None
-    assert x_pidginbodyunit.event_id is None
+    assert x_pidginbodyunit.face_name is None
+    assert x_pidginbodyunit.event_int is None
     assert x_pidginbodyunit.otx_str is None
     assert x_pidginbodyunit.inx_strs is None
 
 
 def test_pidginbodyunit_shop_ReturnsObj_WithNoValues():
     # ESTABLISH
-    x_face_id = "Sue"
-    x_event_id = 55
+    x_face_name = "Sue"
+    x_event_int = 55
     x_otx_str = "Bob"
 
     # WHEN
-    x_pidginbodyunit = pidginbodyunit_shop(x_face_id, x_event_id, x_otx_str)
+    x_pidginbodyunit = pidginbodyunit_shop(x_face_name, x_event_int, x_otx_str)
 
     # THEN
     assert x_pidginbodyunit
-    assert x_pidginbodyunit.face_id == x_face_id
-    assert x_pidginbodyunit.event_id == x_event_id
+    assert x_pidginbodyunit.face_name == x_face_name
+    assert x_pidginbodyunit.event_int == x_event_int
     assert x_pidginbodyunit.otx_str == x_otx_str
     assert x_pidginbodyunit.inx_strs == set()
 
 
 def test_pidginbodyunit_shop_ReturnsObj_WithUnitValues():
     # ESTABLISH
-    x_face_id = "Sue"
-    x_event_id = 55
+    x_face_name = "Sue"
+    x_event_int = 55
     bob_otx = "Bob"
     bob_inx = "Bobito"
     inx_str_set = {bob_inx}
 
     # WHEN
-    x_pidginbodyunit = pidginbodyunit_shop(x_face_id, x_event_id, bob_otx, inx_str_set)
+    x_pidginbodyunit = pidginbodyunit_shop(
+        x_face_name, x_event_int, bob_otx, inx_str_set
+    )
 
     # THEN
     assert x_pidginbodyunit
-    assert x_pidginbodyunit.face_id == x_face_id
-    assert x_pidginbodyunit.event_id == x_event_id
+    assert x_pidginbodyunit.face_name == x_face_name
+    assert x_pidginbodyunit.event_int == x_event_int
     assert x_pidginbodyunit.otx_str == bob_otx
     assert x_pidginbodyunit.inx_strs == inx_str_set
     assert bob_inx in x_pidginbodyunit.inx_strs
@@ -79,11 +81,11 @@ def test_pidginbodyunit_shop_ReturnsObj_WithUnitValues():
 
 def test_PidginBodyUnit_add_inx_str_ChangesAttr_Scenario0_AddToEmptySet():
     # ESTABLISH
-    x_face_id = "Sue"
-    x_event_id = 55
+    x_face_name = "Sue"
+    x_event_int = 55
     bob_otx = "Bob"
     bob_inx = "Bobito"
-    x_pidginbodyunit = pidginbodyunit_shop(x_face_id, x_event_id, bob_otx)
+    x_pidginbodyunit = pidginbodyunit_shop(x_face_name, x_event_int, bob_otx)
     assert bob_inx not in x_pidginbodyunit.inx_strs
 
     # WHEN
@@ -95,10 +97,10 @@ def test_PidginBodyUnit_add_inx_str_ChangesAttr_Scenario0_AddToEmptySet():
 
 def test_PidginBodyUnit_add_inx_str_ChangesAttr_Scenario1_AddNoneToEmptySet():
     # ESTABLISH
-    x_face_id = "Sue"
-    x_event_id = 55
+    x_face_name = "Sue"
+    x_event_int = 55
     bob_otx = "Bob"
-    x_pidginbodyunit = pidginbodyunit_shop(x_face_id, x_event_id, bob_otx)
+    x_pidginbodyunit = pidginbodyunit_shop(x_face_name, x_event_int, bob_otx)
     assert None not in x_pidginbodyunit.inx_strs
 
     # WHEN
@@ -110,10 +112,10 @@ def test_PidginBodyUnit_add_inx_str_ChangesAttr_Scenario1_AddNoneToEmptySet():
 
 def test_PidginBodyUnit_add_inx_str_ChangesAttr_Scenario2_SetWithNoneChangesWhenNonNoneElementAdded():
     # ESTABLISH
-    x_face_id = "Sue"
-    x_event_id = 55
+    x_face_name = "Sue"
+    x_event_int = 55
     bob_otx = "Bob"
-    x_pidginbodyunit = pidginbodyunit_shop(x_face_id, x_event_id, bob_otx)
+    x_pidginbodyunit = pidginbodyunit_shop(x_face_name, x_event_int, bob_otx)
     assert None not in x_pidginbodyunit.inx_strs
 
     x_pidginbodyunit.add_inx_str(None)
@@ -137,21 +139,21 @@ def test_PidginBodyUnit_add_inx_str_ChangesAttr_Scenario2_SetWithNoneChangesWhen
 
 def test_create_pidginbodyunit_ReturnsObj():
     # ESTABLISH
-    x_face_id = "Sue"
-    x_event_id = 55
+    x_face_name = "Sue"
+    x_event_int = 55
     bob_otx = "Bob"
     bob_inx = "Bobito"
 
     # WHEN
-    x_pidginbodyunit = create_pidginbodyunit(x_face_id, x_event_id, bob_otx, bob_inx)
+    x_pidginbodyunit = create_pidginbodyunit(x_face_name, x_event_int, bob_otx, bob_inx)
 
     # THEN
-    x_face_id = x_face_id
-    x_event_id = x_event_id
+    x_face_name = x_face_name
+    x_event_int = x_event_int
     x_inx_str_set = {bob_inx}
     assert x_pidginbodyunit
-    assert x_pidginbodyunit.face_id == x_face_id
-    assert x_pidginbodyunit.event_id == x_event_id
+    assert x_pidginbodyunit.face_name == x_face_name
+    assert x_pidginbodyunit.event_int == x_event_int
     assert x_pidginbodyunit.otx_str == bob_otx
     assert x_pidginbodyunit.inx_strs == x_inx_str_set
 
@@ -207,8 +209,8 @@ def test_PidginBodyUnit_get_valid_pidginbodyrow_ReturnsObj_Scenario1():
     assert x_pidginbodyunit.is_valid()
     assert x_pidginbodyunit.get_valid_pidginbodyrow()
     s55_pidginbodyrow = x_pidginbodyunit.get_valid_pidginbodyrow()
-    assert s55_pidginbodyrow.face_id == sue_str
-    assert s55_pidginbodyrow.event_id == e55
+    assert s55_pidginbodyrow.face_name == sue_str
+    assert s55_pidginbodyrow.event_int == e55
     assert s55_pidginbodyrow.otx_str == bob_otx
     assert s55_pidginbodyrow.inx_str == bob_inx
 
@@ -224,8 +226,8 @@ def test_PidginBodyUnit_get_valid_pidginbodyrow_ReturnsObj_Scenario2():
     assert x_pidginbodyunit.is_valid()
     assert x_pidginbodyunit.get_valid_pidginbodyrow()
     s55_pidginbodyrow = x_pidginbodyunit.get_valid_pidginbodyrow()
-    assert s55_pidginbodyrow.face_id == sue_str
-    assert s55_pidginbodyrow.event_id == e55
+    assert s55_pidginbodyrow.face_name == sue_str
+    assert s55_pidginbodyrow.event_int == e55
     assert s55_pidginbodyrow.otx_str == bob_otx
     assert s55_pidginbodyrow.inx_str is None
 
@@ -269,18 +271,18 @@ def test_pidginbodybook_shop_ReturnsObj():
 def test_pidginbodybook_shop_ReturnsObj_WithValues():
     # ESTABLISH
     sue_str = "Sue"
-    x_event_id = 55
+    x_event_int = 55
     colon_str = ":"
     uk44 = "unknown44"
     x_pidginheartbook = pidginheartbook_shop()
-    x_pidginheartbook.add_pidginheartrow(sue_str, x_event_id, colon_str, None, uk44)
+    x_pidginheartbook.add_pidginheartrow(sue_str, x_event_int, colon_str, None, uk44)
 
     # WHEN
     x_pidginbodybook = pidginbodybook_shop(x_pidginheartbook)
 
     # THEN
     assert x_pidginbodybook
-    assert x_pidginbodybook.pidginheartbook.pidginheartunit_exists(x_event_id)
+    assert x_pidginbodybook.pidginheartbook.pidginheartunit_exists(x_event_int)
     assert x_pidginbodybook.pidginheartbook == x_pidginheartbook
     assert x_pidginbodybook.pidginbodyunits == {}
 
@@ -288,21 +290,21 @@ def test_pidginbodybook_shop_ReturnsObj_WithValues():
 def test_PidginBodyBook_add_pidginheartrow_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
-    x_event_id = 55
+    x_event_int = 55
     colon_str = ":"
     uk44 = "unknown44"
     x_pidginbodybook = pidginbodybook_shop()
-    assert x_pidginbodybook.pidginheartbook.event_id_is_valid(x_event_id) is False
+    assert x_pidginbodybook.pidginheartbook.event_int_is_valid(x_event_int) is False
 
     # WHEN
-    x_pidginbodybook.add_pidginheartrow(sue_str, x_event_id, colon_str, None, uk44)
+    x_pidginbodybook.add_pidginheartrow(sue_str, x_event_int, colon_str, None, uk44)
 
     # THEN
     assert x_pidginbodybook
-    assert x_pidginbodybook.pidginheartbook.event_id_is_valid(x_event_id)
-    assert x_pidginbodybook.pidginheartbook.pidginheartunit_exists(x_event_id)
+    assert x_pidginbodybook.pidginheartbook.event_int_is_valid(x_event_int)
+    assert x_pidginbodybook.pidginheartbook.pidginheartunit_exists(x_event_int)
     y_pidginheartbook = pidginheartbook_shop()
-    y_pidginheartbook.add_pidginheartrow(sue_str, x_event_id, colon_str, None, uk44)
+    y_pidginheartbook.add_pidginheartrow(sue_str, x_event_int, colon_str, None, uk44)
     assert x_pidginbodybook.pidginheartbook == y_pidginheartbook
     assert x_pidginbodybook.pidginbodyunits == {}
 
@@ -310,37 +312,37 @@ def test_PidginBodyBook_add_pidginheartrow_SetsAttr():
 def test_PidginBodyBook_heart_is_valid_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    x44_event_id = 44
-    x55_event_id = 55
+    x44_event_int = 44
+    x55_event_int = 55
     colon_str = ":"
     uk44 = "unknown44"
     x_pidginbodybook = pidginbodybook_shop()
-    assert x_pidginbodybook.pidginheartbook.event_id_is_valid(x44_event_id) is False
-    assert x_pidginbodybook.pidginheartbook.event_id_is_valid(x55_event_id) is False
-    assert x_pidginbodybook.heart_is_valid(x44_event_id) is False
-    assert x_pidginbodybook.heart_is_valid(x55_event_id) is False
+    assert x_pidginbodybook.pidginheartbook.event_int_is_valid(x44_event_int) is False
+    assert x_pidginbodybook.pidginheartbook.event_int_is_valid(x55_event_int) is False
+    assert x_pidginbodybook.heart_is_valid(x44_event_int) is False
+    assert x_pidginbodybook.heart_is_valid(x55_event_int) is False
 
     # WHEN
-    x_pidginbodybook.add_pidginheartrow(sue_str, x55_event_id, colon_str, None, uk44)
+    x_pidginbodybook.add_pidginheartrow(sue_str, x55_event_int, colon_str, None, uk44)
 
     # THEN
     assert x_pidginbodybook
-    assert x_pidginbodybook.pidginheartbook.event_id_is_valid(x44_event_id) is False
-    assert x_pidginbodybook.pidginheartbook.event_id_is_valid(x55_event_id)
-    assert x_pidginbodybook.heart_is_valid(x44_event_id) is False
-    assert x_pidginbodybook.heart_is_valid(x55_event_id)
+    assert x_pidginbodybook.pidginheartbook.event_int_is_valid(x44_event_int) is False
+    assert x_pidginbodybook.pidginheartbook.event_int_is_valid(x55_event_int)
+    assert x_pidginbodybook.heart_is_valid(x44_event_int) is False
+    assert x_pidginbodybook.heart_is_valid(x55_event_int)
 
 
 def test_PidginBodyBook_overwrite_pidginbodyunit_SetsAttr_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
-    x_event_id = 55
+    x_event_int = 55
     bob_otx = "Bob"
     bob2_inx = "Bobito"
     bob3_inx = "Bobby"
-    sue55_agg = create_pidginbodyunit(sue_str, x_event_id, bob_otx, bob2_inx)
+    sue55_agg = create_pidginbodyunit(sue_str, x_event_int, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
-    pidginbody_key = (x_event_id, bob_otx)
+    pidginbody_key = (x_event_int, bob_otx)
     assert x_pidginbodybook.pidginbodyunits.get(pidginbody_key) is None
 
     # WHEN
@@ -354,33 +356,33 @@ def test_PidginBodyBook_overwrite_pidginbodyunit_SetsAttr_Scenario0():
 def test_PidginBodyBook_pidginbodyunit_exists_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    x_event_id = 55
+    x_event_int = 55
     bob_otx = "Bob"
     bob2_inx = "Bobito"
-    sue55_agg = create_pidginbodyunit(sue_str, x_event_id, bob_otx, bob2_inx)
+    sue55_agg = create_pidginbodyunit(sue_str, x_event_int, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx) is False
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx) is False
 
     # WHEN
     x_pidginbodybook._overwrite_pidginbodyunit(sue55_agg)
 
     # THEN
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx)
 
 
 def test_PidginBodyBook_get_pidginbodyunit_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    x55_event_id = 55
+    x55_event_int = 55
     bob_otx = "Bob"
     bob2_inx = "Bobito"
-    sue55_agg = create_pidginbodyunit(sue_str, x55_event_id, bob_otx, bob2_inx)
+    sue55_agg = create_pidginbodyunit(sue_str, x55_event_int, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
     x_pidginbodybook._overwrite_pidginbodyunit(sue55_agg)
-    assert x_pidginbodybook.pidginbodyunit_exists(x55_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodyunit_exists(x55_event_int, bob_otx)
 
     # WHEN
-    gen_pidginbodyunit = x_pidginbodybook.get_pidginbodyunit(x55_event_id, bob_otx)
+    gen_pidginbodyunit = x_pidginbodybook.get_pidginbodyunit(x55_event_int, bob_otx)
 
     # THEN
     assert gen_pidginbodyunit == sue55_agg
@@ -389,41 +391,41 @@ def test_PidginBodyBook_get_pidginbodyunit_ReturnsObj():
 def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario0_EmptyDictNoHeart():
     # ESTABLISH
     sue_str = "Sue"
-    x_event_id = 55
+    x_event_int = 55
     bob_otx = "Bob"
     bob2_inx = "Bobito"
-    sue55_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob2_inx)
+    sue55_pidginbodyrow = PidginBodyRow(sue_str, x_event_int, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
-    assert x_pidginbodybook.heart_is_valid(x_event_id) is False
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx) is False
+    assert x_pidginbodybook.heart_is_valid(x_event_int) is False
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx) is False
 
     # WHEN
     x_pidginbodybook.eval_pidginbodyrow(sue55_pidginbodyrow)
 
     # THEN
-    assert x_pidginbodybook.heart_is_valid(x_event_id) is False
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx) is False
+    assert x_pidginbodybook.heart_is_valid(x_event_int) is False
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx) is False
 
 
 def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario1_EmptyDict():
     # ESTABLISH
     sue_str = "Sue"
-    x_event_id = 55
+    x_event_int = 55
     bob_otx = "Bob"
     bob2_inx = "Bobito"
-    sue55_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob2_inx)
+    sue55_pidginbodyrow = PidginBodyRow(sue_str, x_event_int, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
-    x_pidginbodybook.add_pidginheartrow(sue_str, x_event_id, ";", ";", "uk")
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx) is False
+    x_pidginbodybook.add_pidginheartrow(sue_str, x_event_int, ";", ";", "uk")
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx) is False
 
     # WHEN
     x_pidginbodybook.eval_pidginbodyrow(sue55_pidginbodyrow)
 
     # THEN
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx)
-    x_pidginbodyunit = x_pidginbodybook.get_pidginbodyunit(x_event_id, bob_otx)
-    assert x_pidginbodyunit.face_id == sue_str
-    assert x_pidginbodyunit.event_id == x_event_id
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx)
+    x_pidginbodyunit = x_pidginbodybook.get_pidginbodyunit(x_event_int, bob_otx)
+    assert x_pidginbodyunit.face_name == sue_str
+    assert x_pidginbodyunit.event_int == x_event_int
     assert bob2_inx in x_pidginbodyunit.inx_strs
 
 
@@ -431,25 +433,25 @@ def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario2_MultipleRowsAtSame
     # ESTABLISH
     x_pidginbodybook = pidginbodybook_shop()
     sue_str = "Sue"
-    x_event_id = 55
+    x_event_int = 55
     bob_otx = "Bob"
     bob2_inx = "Bobito"
-    sue1_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob2_inx)
-    x_pidginbodybook.add_pidginheartrow(sue_str, x_event_id, None, None, None)
-    assert x_pidginbodybook.heart_is_valid(x_event_id)
+    sue1_pidginbodyrow = PidginBodyRow(sue_str, x_event_int, bob_otx, bob2_inx)
+    x_pidginbodybook.add_pidginheartrow(sue_str, x_event_int, None, None, None)
+    assert x_pidginbodybook.heart_is_valid(x_event_int)
     x_pidginbodybook.eval_pidginbodyrow(sue1_pidginbodyrow)
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx)
 
     # WHEN
     bob3_inx = "Bobby"
-    sue2_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob3_inx)
+    sue2_pidginbodyrow = PidginBodyRow(sue_str, x_event_int, bob_otx, bob3_inx)
     x_pidginbodybook.eval_pidginbodyrow(sue2_pidginbodyrow)
 
     # THEN
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx)
-    gen_pidginbodyunit = x_pidginbodybook.get_pidginbodyunit(x_event_id, bob_otx)
-    assert gen_pidginbodyunit.face_id == sue_str
-    assert gen_pidginbodyunit.event_id == x_event_id
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx)
+    gen_pidginbodyunit = x_pidginbodybook.get_pidginbodyunit(x_event_int, bob_otx)
+    assert gen_pidginbodyunit.face_name == sue_str
+    assert gen_pidginbodyunit.event_int == x_event_int
     assert gen_pidginbodyunit.otx_str == bob_otx
     assert gen_pidginbodyunit.inx_strs == {bob2_inx, bob3_inx}
 
@@ -458,24 +460,24 @@ def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario3_NoneElementIsHandl
     # ESTABLISH
     x_pidginbodybook = pidginbodybook_shop()
     sue_str = "Sue"
-    x_event_id = 55
+    x_event_int = 55
     bob_otx = "Bob"
     bob2_inx = "Bobito"
-    sue1_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob2_inx)
-    x_pidginbodybook.add_pidginheartrow(sue_str, x_event_id, None, None, None)
-    assert x_pidginbodybook.heart_is_valid(x_event_id)
+    sue1_pidginbodyrow = PidginBodyRow(sue_str, x_event_int, bob_otx, bob2_inx)
+    x_pidginbodybook.add_pidginheartrow(sue_str, x_event_int, None, None, None)
+    assert x_pidginbodybook.heart_is_valid(x_event_int)
     x_pidginbodybook.eval_pidginbodyrow(sue1_pidginbodyrow)
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx)
 
     # WHEN
-    sue2_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, None)
+    sue2_pidginbodyrow = PidginBodyRow(sue_str, x_event_int, bob_otx, None)
     x_pidginbodybook.eval_pidginbodyrow(sue2_pidginbodyrow)
 
     # THEN
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx)
-    gen_pidginbodyunit = x_pidginbodybook.get_pidginbodyunit(x_event_id, bob_otx)
-    assert gen_pidginbodyunit.face_id == sue_str
-    assert gen_pidginbodyunit.event_id == x_event_id
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx)
+    gen_pidginbodyunit = x_pidginbodybook.get_pidginbodyunit(x_event_int, bob_otx)
+    assert gen_pidginbodyunit.face_name == sue_str
+    assert gen_pidginbodyunit.event_int == x_event_int
     assert gen_pidginbodyunit.otx_str == bob_otx
     assert gen_pidginbodyunit.inx_strs == {bob2_inx}
 
@@ -483,76 +485,76 @@ def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario3_NoneElementIsHandl
 def test_PidginBodyBook_body_is_valid_SetsAttr_Scenario0_Single():
     # ESTABLISH
     sue_str = "Sue"
-    x_event_id = 55
+    x_event_int = 55
     bob_otx = "Bob"
     bob2_inx = "Bobito"
-    sue55_pidginbodyrow = PidginBodyRow(sue_str, x_event_id, bob_otx, bob2_inx)
+    sue55_pidginbodyrow = PidginBodyRow(sue_str, x_event_int, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
-    x_pidginbodybook.add_pidginheartrow(sue_str, x_event_id, ";", ";", "uk")
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx) is False
-    assert x_pidginbodybook.body_is_valid(x_event_id, bob_otx) is False
+    x_pidginbodybook.add_pidginheartrow(sue_str, x_event_int, ";", ";", "uk")
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx) is False
+    assert x_pidginbodybook.body_is_valid(x_event_int, bob_otx) is False
 
     # WHEN
     x_pidginbodybook.eval_pidginbodyrow(sue55_pidginbodyrow)
 
     # THEN
-    assert x_pidginbodybook.pidginbodyunit_exists(x_event_id, bob_otx)
-    assert x_pidginbodybook.body_is_valid(x_event_id, bob_otx)
+    assert x_pidginbodybook.pidginbodyunit_exists(x_event_int, bob_otx)
+    assert x_pidginbodybook.body_is_valid(x_event_int, bob_otx)
 
 
 def test_PidginBodyBook_body_is_valid_SetsAttr_Scenario1_Multiple():
     # ESTABLISH
     sue_str = "Sue"
-    x44_event_id = 44
-    x55_event_id = 55
+    x44_event_int = 44
+    x55_event_int = 55
     bob_otx = "Bob"
     bob2_inx = "Bobito"
-    sue44_pidginbodyrow = PidginBodyRow(sue_str, x44_event_id, bob_otx, bob2_inx)
-    sue55_pidginbodyrow = PidginBodyRow(sue_str, x55_event_id, bob_otx, bob2_inx)
+    sue44_pidginbodyrow = PidginBodyRow(sue_str, x44_event_int, bob_otx, bob2_inx)
+    sue55_pidginbodyrow = PidginBodyRow(sue_str, x55_event_int, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
-    x_pidginbodybook.add_pidginheartrow(sue_str, x44_event_id, ";", ";", "uk")
-    x_pidginbodybook.add_pidginheartrow(sue_str, x55_event_id, ";", ";", "uk")
-    assert x_pidginbodybook.body_is_valid(x44_event_id, bob_otx) is False
-    assert x_pidginbodybook.body_is_valid(x55_event_id, bob_otx) is False
+    x_pidginbodybook.add_pidginheartrow(sue_str, x44_event_int, ";", ";", "uk")
+    x_pidginbodybook.add_pidginheartrow(sue_str, x55_event_int, ";", ";", "uk")
+    assert x_pidginbodybook.body_is_valid(x44_event_int, bob_otx) is False
+    assert x_pidginbodybook.body_is_valid(x55_event_int, bob_otx) is False
 
     # WHEN /  THEN
     x_pidginbodybook.eval_pidginbodyrow(sue44_pidginbodyrow)
-    assert x_pidginbodybook.body_is_valid(x44_event_id, bob_otx)
-    assert x_pidginbodybook.body_is_valid(x55_event_id, bob_otx) is False
+    assert x_pidginbodybook.body_is_valid(x44_event_int, bob_otx)
+    assert x_pidginbodybook.body_is_valid(x55_event_int, bob_otx) is False
 
     # WHEN /  THEN
     x_pidginbodybook.eval_pidginbodyrow(sue55_pidginbodyrow)
     print(f"{x_pidginbodybook.pidginbodyunits=}")
-    assert x_pidginbodybook.body_is_valid(x44_event_id, bob_otx)
-    assert x_pidginbodybook.body_is_valid(x55_event_id, bob_otx)
+    assert x_pidginbodybook.body_is_valid(x44_event_int, bob_otx)
+    assert x_pidginbodybook.body_is_valid(x55_event_int, bob_otx)
 
 
 def test_PidginBodyBook_body_is_valid_SetsAttr_Scenario2_InvalidPidginUnit():
     # ESTABLISH
     sue_str = "Sue"
-    x44_event_id = 44
-    x55_event_id = 55
+    x44_event_int = 44
+    x55_event_int = 55
     bob_otx = "Bob"
     bob2_inx = "Bobito"
-    sue44_pidginbodyrow = PidginBodyRow(sue_str, x44_event_id, bob_otx, bob2_inx)
-    sue55_pidginbodyrow = PidginBodyRow(sue_str, x55_event_id, bob_otx, bob2_inx)
+    sue44_pidginbodyrow = PidginBodyRow(sue_str, x44_event_int, bob_otx, bob2_inx)
+    sue55_pidginbodyrow = PidginBodyRow(sue_str, x55_event_int, bob_otx, bob2_inx)
     x_pidginbodybook = pidginbodybook_shop()
-    x_pidginbodybook.add_pidginheartrow(sue_str, x44_event_id, ";", ";", "uk")
-    x_pidginbodybook.add_pidginheartrow(sue_str, x55_event_id, ";", ";", "uk")
+    x_pidginbodybook.add_pidginheartrow(sue_str, x44_event_int, ";", ";", "uk")
+    x_pidginbodybook.add_pidginheartrow(sue_str, x55_event_int, ";", ";", "uk")
     x_pidginbodybook.eval_pidginbodyrow(sue44_pidginbodyrow)
     x_pidginbodybook.eval_pidginbodyrow(sue55_pidginbodyrow)
     print(f"{x_pidginbodybook.pidginbodyunits=}")
-    assert x_pidginbodybook.body_is_valid(x44_event_id, bob_otx)
-    assert x_pidginbodybook.body_is_valid(x55_event_id, bob_otx)
+    assert x_pidginbodybook.body_is_valid(x44_event_int, bob_otx)
+    assert x_pidginbodybook.body_is_valid(x55_event_int, bob_otx)
 
     # WHEN
     bob3_inx = "Bobby"
-    sue2_pidginbodyrow = PidginBodyRow(sue_str, x55_event_id, bob_otx, bob3_inx)
+    sue2_pidginbodyrow = PidginBodyRow(sue_str, x55_event_int, bob_otx, bob3_inx)
     x_pidginbodybook.eval_pidginbodyrow(sue2_pidginbodyrow)
 
     # THEN
-    assert x_pidginbodybook.body_is_valid(x44_event_id, bob_otx)
-    assert x_pidginbodybook.body_is_valid(x55_event_id, bob_otx) is False
+    assert x_pidginbodybook.body_is_valid(x44_event_int, bob_otx)
+    assert x_pidginbodybook.body_is_valid(x55_event_int, bob_otx) is False
 
 
 def test_PidginBodyBook_get_valid_pidginbodylists_ReturnsObj_Scenario0_Empty():

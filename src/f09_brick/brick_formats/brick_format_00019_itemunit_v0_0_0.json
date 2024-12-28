@@ -12,10 +12,10 @@
         "denom": {
             "otx_key": false
         },
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "deal_id": {
@@ -24,7 +24,7 @@
         "gogo_want": {
             "otx_key": false
         },
-        "label": {
+        "lx": {
             "otx_key": true
         },
         "morph": {
@@ -33,7 +33,7 @@
         "numor": {
             "otx_key": false
         },
-        "owner_id": {
+        "owner_name": {
             "otx_key": true
         },
         "parent_road": {

@@ -7,7 +7,7 @@ from src.f02_bud.bud_tool import (
 from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
-    acct_id_str,
+    acct_name_str,
     group_id_str,
     credit_belief_str,
     debtit_belief_str,
@@ -35,7 +35,7 @@ def test_atomunit_shop_ReturnsCorrectObj():
     bob_acctunit = acctunit_shop(bob_str, bob_credit_belief, bob_debtit_belief)
     cw_str = "_credit_belief"
     dw_str = "_debtit_belief"
-    bob_required_dict = {acct_id_str(): "huh"}
+    bob_required_dict = {acct_name_str(): "huh"}
     bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_acctunit.get_dict().get(dw_str)
     acctunit_str = bud_acctunit_str()
@@ -64,10 +64,10 @@ def test_AtomUnit_set_jkey_CorrectlySetsAttr():
     assert acctunit_atomunit.jkeys == {}
 
     # WHEN
-    acctunit_atomunit.set_jkey(x_key=acct_id_str(), x_value=bob_str)
+    acctunit_atomunit.set_jkey(x_key=acct_name_str(), x_value=bob_str)
 
     # THEN
-    assert acctunit_atomunit.jkeys == {acct_id_str(): bob_str}
+    assert acctunit_atomunit.jkeys == {acct_name_str(): bob_str}
 
 
 def test_AtomUnit_set_jvalue_CorrectlySetsAttr():
@@ -78,10 +78,10 @@ def test_AtomUnit_set_jvalue_CorrectlySetsAttr():
     assert acctunit_atomunit.jvalues == {}
 
     # WHEN
-    acctunit_atomunit.set_jvalue(x_key=acct_id_str(), x_value=bob_str)
+    acctunit_atomunit.set_jvalue(x_key=acct_name_str(), x_value=bob_str)
 
     # THEN
-    assert acctunit_atomunit.jvalues == {acct_id_str(): bob_str}
+    assert acctunit_atomunit.jvalues == {acct_name_str(): bob_str}
 
 
 def test_AtomUnit_get_value_ReturnsCorrectObj():
@@ -89,10 +89,10 @@ def test_AtomUnit_get_value_ReturnsCorrectObj():
     bob_str = "Bob"
     acctunit_str = bud_acctunit_str()
     acctunit_atomunit = atomunit_shop(acctunit_str, atom_insert())
-    acctunit_atomunit.set_jkey(x_key=acct_id_str(), x_value=bob_str)
+    acctunit_atomunit.set_jkey(x_key=acct_name_str(), x_value=bob_str)
 
     # WHEN / THEN
-    assert acctunit_atomunit.get_value(acct_id_str()) == bob_str
+    assert acctunit_atomunit.get_value(acct_name_str()) == bob_str
 
 
 def test_AtomUnit_is_jvalues_valid_ReturnsCorrectBoolean():
@@ -144,7 +144,7 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
     assert bob_insert_atomunit.is_valid() is False
 
     # WHEN
-    bob_insert_atomunit.set_jkey(acct_id_str(), bob_str)
+    bob_insert_atomunit.set_jkey(acct_name_str(), bob_str)
 
     # THEN
     assert bob_insert_atomunit.is_jkeys_valid()
@@ -189,9 +189,9 @@ def test_AtomUnit_get_value_ReturnsObj():
     cw_str = credit_belief_str()
     dw_str = debtit_belief_str()
     print(f"{bob_acctunit.get_dict()=}")
-    # bob_acctunit_dict = {acct_id_str(): bob_acctunit.get_dict().get(acct_id_str())}
+    # bob_acctunit_dict = {acct_name_str(): bob_acctunit.get_dict().get(acct_name_str())}
     # print(f"{bob_acctunit_dict=}")
-    bob_insert_atomunit.set_jkey(acct_id_str(), bob_str)
+    bob_insert_atomunit.set_jkey(acct_name_str(), bob_str)
     bob_insert_atomunit.set_jvalue(cw_str, bob_acctunit.get_dict().get(cw_str))
     bob_insert_atomunit.set_jvalue(dw_str, bob_acctunit.get_dict().get(dw_str))
     assert bob_insert_atomunit.is_valid()
@@ -214,7 +214,7 @@ def test_AtomUnit_is_valid_ReturnsCorrectBoolean_AcctUnit_DELETE():
     assert bob_delete_atomunit.is_valid() is False
 
     # WHEN
-    bob_delete_atomunit.set_jkey(acct_id_str(), bob_str)
+    bob_delete_atomunit.set_jkey(acct_name_str(), bob_str)
 
     # THEN
     assert bob_delete_atomunit.is_jkeys_valid()
@@ -246,7 +246,7 @@ def test_AtomUnit_set_atom_order_SetCorrectAttr():
     bob_insert_atomunit = atomunit_shop(acctunit_str, atom_insert())
     cw_str = credit_belief_str()
     dw_str = debtit_belief_str()
-    bob_insert_atomunit.set_jkey(acct_id_str(), bob_str)
+    bob_insert_atomunit.set_jkey(acct_name_str(), bob_str)
     bob_insert_atomunit.set_jvalue(cw_str, bob_credit_belief)
     bob_insert_atomunit.set_jvalue(dw_str, bob_debtit_belief)
     assert bob_insert_atomunit.is_valid()
@@ -267,15 +267,15 @@ def test_AtomUnit_set_arg_SetsAny_jkey_jvalue():
     dw_str = debtit_belief_str()
 
     # WHEN
-    bob_insert_atomunit.set_arg(acct_id_str(), bob_str)
+    bob_insert_atomunit.set_arg(acct_name_str(), bob_str)
     bob_insert_atomunit.set_arg(cw_str, bob_credit_belief)
     bob_insert_atomunit.set_arg(dw_str, bob_debtit_belief)
 
     # THEN
-    assert bob_insert_atomunit.get_value(acct_id_str()) == bob_str
+    assert bob_insert_atomunit.get_value(acct_name_str()) == bob_str
     assert bob_insert_atomunit.get_value(cw_str) == bob_credit_belief
     assert bob_insert_atomunit.get_value(dw_str) == bob_debtit_belief
-    assert bob_insert_atomunit.get_value(acct_id_str()) == bob_str
+    assert bob_insert_atomunit.get_value(acct_name_str()) == bob_str
     assert bob_insert_atomunit.is_valid()
 
 
@@ -283,7 +283,7 @@ def test_AtomUnit_get_nesting_order_args_ReturnsObj_bud_acctunit():
     # ESTABLISH
     sue_str = "Sue"
     sue_insert_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
-    sue_insert_atomunit.set_arg(acct_id_str(), sue_str)
+    sue_insert_atomunit.set_arg(acct_name_str(), sue_str)
     print(f"{sue_insert_atomunit.jkeys=}")
 
     # WHEN / THEN
@@ -297,7 +297,7 @@ def test_AtomUnit_get_nesting_order_args_ReturnsObj_bud_acct_membership():
     iowa_str = ";Iowa"
     sue_insert_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
     sue_insert_atomunit.set_arg(group_id_str(), iowa_str)
-    sue_insert_atomunit.set_arg(acct_id_str(), sue_str)
+    sue_insert_atomunit.set_arg(acct_name_str(), sue_str)
     print(f"{sue_insert_atomunit.jkeys=}")
 
     # WHEN / THEN

@@ -23,9 +23,9 @@ def test_get_delta_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
 CREATE TABLE IF NOT EXISTS delta_mstr (
-  author_owner_id VARCHAR(255) NOT NULL
+  author_owner_name VARCHAR(255) NOT NULL
 , author_delta_number INT NOT NULL
-, UNIQUE(author_owner_id, author_delta_number)
+, UNIQUE(author_owner_name, author_delta_number)
 )
 ;"""
     assert example_sqlstr == get_delta_table_create_sqlstr()
@@ -50,9 +50,9 @@ def test_get_gift_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
 CREATE TABLE IF NOT EXISTS gift_mstr (
-  author_owner_id VARCHAR(255) NOT NULL
+  author_owner_name VARCHAR(255) NOT NULL
 , author_gift_number INT NOT NULL
-, UNIQUE(author_owner_id, author_gift_number)
+, UNIQUE(author_owner_name, author_gift_number)
 )
 ;"""
     assert example_sqlstr == get_gift_table_create_sqlstr()
@@ -93,8 +93,8 @@ def test_get_owner_mstr_table_create_sqlstr_ReturnsCorrectStr():
     example_sqlstr = """
 CREATE TABLE owner_mstr
 (
-  owner_id VARCHAR(255) NOT NULL
-, UNIQUE(owner_id)
+  owner_name VARCHAR(255) NOT NULL
+, UNIQUE(owner_name)
 )
 ;"""
     assert example_sqlstr == get_owner_mstr_table_create_sqlstr()
@@ -105,8 +105,8 @@ def test_get_road_ref_table_create_sqlstr_ReturnsCorrectStr():
     example_sqlstr = """
 CREATE TABLE IF NOT EXISTS road_ref (
   road VARCHAR(255) NOT NULL
-, wall VARCHAR(255) NOT NULL
-, UNIQUE(road, wall)
+, bridge VARCHAR(255) NOT NULL
+, UNIQUE(road, bridge)
 )
 ;"""
     assert example_sqlstr == get_road_ref_table_create_sqlstr()
@@ -114,16 +114,16 @@ CREATE TABLE IF NOT EXISTS road_ref (
 
 def test_get_road_ref_table_single_insert_sqlstr_ReturnsCorrectStr():
     # ESTABLISH
-    music_str = "Music"
+    accord_str = "accord"
     slash_str = "/"
-    texas_road = create_road(music_str, "texas", wall=slash_str)
+    texas_road = create_road(accord_str, "texas", bridge=slash_str)
 
     # WHEN
     generate_sqlstr = get_road_ref_table_single_insert_sqlstr(texas_road, slash_str)
 
     # THEN
     example_sqlstr = f"""
-INSERT OR IGNORE INTO road_ref (road, wall) 
+INSERT OR IGNORE INTO road_ref (road, bridge) 
 VALUES (
   '{texas_road}'
 , '{slash_str}'
@@ -134,9 +134,9 @@ VALUES (
 
 def test_get_road_ref_table_row_id_select_sqlstr_ReturnsCorrectStr():
     # ESTABLISH
-    music_str = "Music"
+    accord_str = "accord"
     slash_str = "/"
-    texas_road = create_road(music_str, "texas", wall=slash_str)
+    texas_road = create_road(accord_str, "texas", bridge=slash_str)
 
     # WHEN
     generate_sqlstr = get_road_ref_table_row_id_select_sqlstr(texas_road, slash_str)
@@ -145,7 +145,7 @@ def test_get_road_ref_table_row_id_select_sqlstr_ReturnsCorrectStr():
     example_sqlstr = f"""
 SELECT rowid FROM road_ref  
 WHERE road = '{texas_road}' 
-  AND wall = '{slash_str}'
+  AND bridge = '{slash_str}'
 )
 ;"""
     assert example_sqlstr == generate_sqlstr
@@ -158,7 +158,7 @@ def test_get_atom_hx_table_create_sqlstr_ReturnsCorrectStr():
     # THEN
     begin_sqlstr = """
 CREATE TABLE IF NOT EXISTS atom_hx (
-  owner_id VARCHAR(255) NOT NULL"""
+  owner_name VARCHAR(255) NOT NULL"""
     end_sqlstr = """)
 ;"""
 
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS atom_hx (
         "item_reasonunit_UPDATE_base_item_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_item_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_item_reasonunit_str) == 3417
+    assert generated_sqlstr.find(example_item_reasonunit_str) == 3435
 
 
 def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
@@ -213,18 +213,18 @@ def test_get_atom_mstr_table_create_sqlstr_ReturnsCorrectStr():
     # THEN
     begin_sqlstr = """
 CREATE TABLE IF NOT EXISTS atom_mstr (
-  owner_id VARCHAR(255) NOT NULL
+  owner_name VARCHAR(255) NOT NULL
 , atom_hx_row_id INT NOT NULL"""
     end_sqlstr = """)
 ;"""
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    assert generated_sqlstr.find(end_sqlstr) == 5384
+    assert generated_sqlstr.find(end_sqlstr) == 5394
     example_item_reasonunit_str = (
         "item_reasonunit_UPDATE_base_item_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_item_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_item_reasonunit_str) == 3449
+    assert generated_sqlstr.find(example_item_reasonunit_str) == 3467
 
 
 def test_get_create_table_if_not_exist_sqlstrs_HasCorrectNumberOfNumber():

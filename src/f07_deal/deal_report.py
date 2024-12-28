@@ -16,15 +16,15 @@ def get_deal_voices_accts_dataframe(x_deal: DealUnit) -> DataFrame:
         voice_bud = x_hubunit.get_voice_bud()
         voice_bud.settle_bud()
         df = get_bud_acctunits_dataframe(voice_bud)
-        df.insert(0, "owner_id", voice_bud._owner_id)
+        df.insert(0, "owner_name", voice_bud._owner_name)
         voice_dfs.append(df)
     return pandas_concat(voice_dfs, ignore_index=True)
 
 
 def get_deal_voices_accts_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_id",
-        "acct_id",
+        "owner_name",
+        "acct_name",
         "credit_belief",
         "debtit_belief",
         "_fund_give",
@@ -40,8 +40,8 @@ def get_deal_voices_accts_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.owner_id,
-                df.acct_id,
+                df.owner_name,
+                df.acct_name,
                 df.credit_belief,
                 df.debtit_belief,
                 df._fund_give,
@@ -72,15 +72,15 @@ def get_deal_finals_accts_dataframe(x_deal: DealUnit) -> DataFrame:
         final_bud = x_hubunit.get_final_bud()
         final_bud.settle_bud()
         final_df = get_bud_acctunits_dataframe(final_bud)
-        final_df.insert(0, "owner_id", final_bud._owner_id)
+        final_df.insert(0, "owner_name", final_bud._owner_name)
         final_dfs.append(final_df)
     return pandas_concat(final_dfs, ignore_index=True)
 
 
 def get_deal_finals_accts_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_id",
-        "acct_id",
+        "owner_name",
+        "acct_name",
         "credit_belief",
         "debtit_belief",
         "_fund_give",
@@ -96,8 +96,8 @@ def get_deal_finals_accts_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.owner_id,
-                df.acct_id,
+                df.owner_name,
+                df.acct_name,
                 df.credit_belief,
                 df.debtit_belief,
                 df._fund_give,
@@ -134,9 +134,9 @@ def get_deal_voices_agenda_dataframe(x_deal: DealUnit) -> DataFrame:
 
 def get_deal_voices_agenda_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_id",
+        "owner_name",
         "fund_ratio",
-        "_label",
+        "_lx",
         "_parent_road",
         "begin",
         "close",
@@ -153,9 +153,9 @@ def get_deal_voices_agenda_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.owner_id,
+                df.owner_name,
                 df.fund_ratio,
-                df._label,
+                df._lx,
                 df._parent_road,
                 df.begin,
                 df.close,
@@ -193,9 +193,9 @@ def get_deal_finals_agenda_dataframe(x_deal: DealUnit) -> DataFrame:
 
 def get_deal_finals_agenda_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_id",
+        "owner_name",
         "fund_ratio",
-        "_label",
+        "_lx",
         "_parent_road",
         "begin",
         "close",
@@ -212,9 +212,9 @@ def get_deal_finals_agenda_plotly_fig(x_deal: DealUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.owner_id,
+                df.owner_name,
                 df.fund_ratio,
-                df._label,
+                df._lx,
                 df._parent_road,
                 df.begin,
                 df.close,

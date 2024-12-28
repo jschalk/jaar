@@ -6,10 +6,10 @@
         "current_time": {
             "otx_key": false
         },
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "deal_id": {
@@ -27,10 +27,10 @@
         "respect_bit": {
             "otx_key": false
         },
-        "wall": {
+        "bridge": {
             "otx_key": false
         },
-        "timeline_label": {
+        "timeline_idea": {
             "otx_key": false
         },
         "yr1_jan1_offset": {

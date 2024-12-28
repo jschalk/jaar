@@ -6,46 +6,46 @@ from pytest import raises as pytest_raises
 
 def test_DealUnit_set_purviewlog_SetsAttr():
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(music_str, get_test_deals_dir())
-    assert music_deal.purviewlogs == {}
+    accord_str = "accord"
+    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    assert accord_deal.purviewlogs == {}
 
     # WHEN
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
-    music_deal.set_purviewlog(sue_purviewlog)
+    accord_deal.set_purviewlog(sue_purviewlog)
 
     # THEN
-    assert music_deal.purviewlogs != {}
-    assert music_deal.purviewlogs.get(sue_str) == sue_purviewlog
+    assert accord_deal.purviewlogs != {}
+    assert accord_deal.purviewlogs.get(sue_str) == sue_purviewlog
 
 
 def test_DealUnit_purviewlog_exists_ReturnsObj():
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(music_str, get_test_deals_dir())
+    accord_str = "accord"
+    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
     sue_str = "Sue"
-    assert music_deal.purviewlog_exists(sue_str) is False
+    assert accord_deal.purviewlog_exists(sue_str) is False
 
     # WHEN
     sue_purviewlog = purviewlog_shop(sue_str)
-    music_deal.set_purviewlog(sue_purviewlog)
+    accord_deal.set_purviewlog(sue_purviewlog)
 
     # THEN
-    assert music_deal.purviewlog_exists(sue_str)
+    assert accord_deal.purviewlog_exists(sue_str)
 
 
 def test_DealUnit_get_purviewlog_ReturnsObj():
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(music_str, get_test_deals_dir())
+    accord_str = "accord"
+    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
-    music_deal.set_purviewlog(sue_purviewlog)
-    assert music_deal.purviewlog_exists(sue_str)
+    accord_deal.set_purviewlog(sue_purviewlog)
+    assert accord_deal.purviewlog_exists(sue_str)
 
     # WHEN
-    sue_gen_purviewlog = music_deal.get_purviewlog(sue_str)
+    sue_gen_purviewlog = accord_deal.get_purviewlog(sue_str)
 
     # THEN
     assert sue_purviewlog
@@ -54,133 +54,133 @@ def test_DealUnit_get_purviewlog_ReturnsObj():
 
 def test_DealUnit_del_purviewlog_SetsAttr():
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(music_str, get_test_deals_dir())
+    accord_str = "accord"
+    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
-    music_deal.set_purviewlog(sue_purviewlog)
-    assert music_deal.purviewlog_exists(sue_str)
+    accord_deal.set_purviewlog(sue_purviewlog)
+    assert accord_deal.purviewlog_exists(sue_str)
 
     # WHEN
-    music_deal.del_purviewlog(sue_str)
+    accord_deal.del_purviewlog(sue_str)
 
     # THEN
-    assert music_deal.purviewlog_exists(sue_str) is False
+    assert accord_deal.purviewlog_exists(sue_str) is False
 
 
 def test_DealUnit_add_purviewepisode_SetsAttr():
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(music_str, get_test_deals_dir())
-    assert music_deal.purviewlogs == {}
+    accord_str = "accord"
+    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    assert accord_deal.purviewlogs == {}
 
     # WHEN
     bob_str = "Bob"
-    bob_x0_time_id = 702
+    bob_x0_time_int = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_id = 4
+    sue_x4_time_int = 4
     sue_x4_magnitude = 55
-    sue_x7_time_id = 7
+    sue_x7_time_int = 7
     sue_x7_magnitude = 66
-    music_deal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
-    music_deal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
-    music_deal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+    accord_deal.add_purviewepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
 
     # THEN
-    assert music_deal.purviewlogs != {}
+    assert accord_deal.purviewlogs != {}
     sue_purviewlog = purviewlog_shop(sue_str)
-    sue_purviewlog.add_episode(sue_x4_time_id, sue_x4_magnitude)
-    sue_purviewlog.add_episode(sue_x7_time_id, sue_x7_magnitude)
+    sue_purviewlog.add_episode(sue_x4_time_int, sue_x4_magnitude)
+    sue_purviewlog.add_episode(sue_x7_time_int, sue_x7_magnitude)
     bob_purviewlog = purviewlog_shop(bob_str)
-    bob_purviewlog.add_episode(bob_x0_time_id, bob_x0_magnitude)
-    assert music_deal.get_purviewlog(sue_str) == sue_purviewlog
-    assert music_deal.get_purviewlog(bob_str) == bob_purviewlog
+    bob_purviewlog.add_episode(bob_x0_time_int, bob_x0_magnitude)
+    assert accord_deal.get_purviewlog(sue_str) == sue_purviewlog
+    assert accord_deal.get_purviewlog(bob_str) == bob_purviewlog
 
 
-def test_DealUnit_get_purviewlogs_time_ids_ReturnsObj():
+def test_DealUnit_get_purviewlogs_time_ints_ReturnsObj():
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(music_str, get_test_deals_dir())
+    accord_str = "accord"
+    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
     bob_str = "Bob"
-    bob_x0_time_id = 702
+    bob_x0_time_int = 702
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_id = 4
+    sue_x4_time_int = 4
     sue_x4_magnitude = 55
-    sue_x7_time_id = 7
+    sue_x7_time_int = 7
     sue_x7_magnitude = 66
-    assert music_deal.get_purviewlogs_time_ids() == set()
+    assert accord_deal.get_purviewlogs_time_ints() == set()
 
     # WHEN
-    music_deal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
-    music_deal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
-    music_deal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+    accord_deal.add_purviewepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
 
     # THEN
-    all_time_ids = {bob_x0_time_id, sue_x4_time_id, sue_x7_time_id}
-    assert music_deal.get_purviewlogs_time_ids() == all_time_ids
+    all_time_ints = {bob_x0_time_int, sue_x4_time_int, sue_x7_time_int}
+    assert accord_deal.get_purviewlogs_time_ints() == all_time_ints
 
 
-def test_DealUnit_add_purviewepisode_RaisesErrorWhenPurview_time_id_IsLessThan_current_time():
+def test_DealUnit_add_purviewepisode_RaisesErrorWhenPurview_time_int_IsLessThan_current_time():
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(music_str, get_test_deals_dir())
-    music_current_time = 606
-    music_deal.current_time = music_current_time
+    accord_str = "accord"
+    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord_current_time = 606
+    accord_deal.current_time = accord_current_time
     bob_str = "Bob"
-    bob_x0_time_id = 707
+    bob_x0_time_int = 707
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_id = 404
+    sue_x4_time_int = 404
     sue_x4_magnitude = 55
-    sue_x7_time_id = 808
+    sue_x7_time_int = 808
     sue_x7_magnitude = 66
-    assert music_deal.get_purviewlogs_time_ids() == set()
-    music_deal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
-    music_deal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+    assert accord_deal.get_purviewlogs_time_ints() == set()
+    accord_deal.add_purviewepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        music_deal.add_purviewepisode(sue_str, sue_x4_time_id, sue_x4_magnitude)
-    exception_str = f"Cannot set purviewepisode because time_id {sue_x4_time_id} is less than DealUnit.current_time {music_current_time}."
+        accord_deal.add_purviewepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    exception_str = f"Cannot set purviewepisode because time_int {sue_x4_time_int} is less than DealUnit.current_time {accord_current_time}."
     assert str(excinfo.value) == exception_str
 
 
 def test_DealUnit_add_purviewepisode_DoesNotRaiseError_allow_prev_to_current_time_entry_IsTrue():
     # ESTABLISH
-    music_str = "music"
-    music_deal = dealunit_shop(music_str, get_test_deals_dir())
-    music_current_time = 606
-    music_deal.current_time = music_current_time
+    accord_str = "accord"
+    accord_deal = dealunit_shop(accord_str, get_test_deals_dir())
+    accord_current_time = 606
+    accord_deal.current_time = accord_current_time
     bob_str = "Bob"
-    bob_x0_time_id = 707
+    bob_x0_time_int = 707
     bob_x0_magnitude = 33
     sue_str = "Sue"
-    sue_x4_time_id = 404
+    sue_x4_time_int = 404
     sue_x4_magnitude = 55
-    sue_x7_time_id = 808
+    sue_x7_time_int = 808
     sue_x7_magnitude = 66
-    assert music_deal.get_purviewlogs_time_ids() == set()
-    music_deal.add_purviewepisode(bob_str, bob_x0_time_id, bob_x0_magnitude)
-    music_deal.add_purviewepisode(sue_str, sue_x7_time_id, sue_x7_magnitude)
+    assert accord_deal.get_purviewlogs_time_ints() == set()
+    accord_deal.add_purviewepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_deal.add_purviewepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
 
     sue_purviewlog = purviewlog_shop(sue_str)
-    sue_purviewlog.add_episode(sue_x4_time_id, sue_x4_magnitude)
-    sue_purviewlog.add_episode(sue_x7_time_id, sue_x7_magnitude)
-    assert music_deal.get_purviewlog(sue_str) != sue_purviewlog
+    sue_purviewlog.add_episode(sue_x4_time_int, sue_x4_magnitude)
+    sue_purviewlog.add_episode(sue_x7_time_int, sue_x7_magnitude)
+    assert accord_deal.get_purviewlog(sue_str) != sue_purviewlog
 
     # WHEN
-    music_deal.add_purviewepisode(
-        x_owner_id=sue_str,
-        x_time_id=sue_x4_time_id,
+    accord_deal.add_purviewepisode(
+        x_owner_name=sue_str,
+        x_time_int=sue_x4_time_int,
         x_money_magnitude=sue_x4_magnitude,
         allow_prev_to_current_time_entry=True,
     )
 
     # THEN
-    assert music_deal.purviewlogs != {}
-    assert music_deal.get_purviewlog(sue_str) == sue_purviewlog
+    assert accord_deal.purviewlogs != {}
+    assert accord_deal.get_purviewlog(sue_str) == sue_purviewlog
     bob_purviewlog = purviewlog_shop(bob_str)
-    bob_purviewlog.add_episode(bob_x0_time_id, bob_x0_magnitude)
-    assert music_deal.get_purviewlog(bob_str) == bob_purviewlog
+    bob_purviewlog.add_episode(bob_x0_time_int, bob_x0_magnitude)
+    assert accord_deal.get_purviewlog(bob_str) == bob_purviewlog

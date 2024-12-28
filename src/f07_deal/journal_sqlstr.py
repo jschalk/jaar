@@ -20,7 +20,7 @@ def get_atom_hx_table_create_sqlstr() -> str:
     """Create table that hold atom_hx."""
     x_str = f"""
 CREATE TABLE IF NOT EXISTS {atom_hx_table_name()} (
-  owner_id VARCHAR(255) NOT NULL"""
+  owner_name VARCHAR(255) NOT NULL"""
 
     for x_key, x_value in get_flattened_atom_table_build().items():
         if x_value == "TEXT":
@@ -41,7 +41,7 @@ def get_atom_mstr_table_create_sqlstr() -> str:
     """Create table that holds atomunits."""
     x_str = f"""
 CREATE TABLE IF NOT EXISTS {atom_mstr_table_name()} (
-  owner_id VARCHAR(255) NOT NULL
+  owner_name VARCHAR(255) NOT NULL
 , {atom_hx_table_name()}_row_id INT NOT NULL"""
 
     for x_key, x_value in get_flattened_atom_table_build().items():
@@ -71,9 +71,9 @@ CREATE TABLE atom2delta
 def get_delta_table_create_sqlstr() -> str:
     return """
 CREATE TABLE IF NOT EXISTS delta_mstr (
-  author_owner_id VARCHAR(255) NOT NULL
+  author_owner_name VARCHAR(255) NOT NULL
 , author_delta_number INT NOT NULL
-, UNIQUE(author_owner_id, author_delta_number)
+, UNIQUE(author_owner_name, author_delta_number)
 )
 ;"""
 
@@ -94,9 +94,9 @@ CREATE TABLE delta2gift
 def get_gift_table_create_sqlstr() -> str:
     return """
 CREATE TABLE IF NOT EXISTS gift_mstr (
-  author_owner_id VARCHAR(255) NOT NULL
+  author_owner_name VARCHAR(255) NOT NULL
 , author_gift_number INT NOT NULL
-, UNIQUE(author_owner_id, author_gift_number)
+, UNIQUE(author_owner_name, author_gift_number)
 )
 ;"""
 
@@ -118,8 +118,8 @@ def get_owner_mstr_table_create_sqlstr() -> str:
     return """
 CREATE TABLE owner_mstr
 (
-  owner_id VARCHAR(255) NOT NULL
-, UNIQUE(owner_id)
+  owner_name VARCHAR(255) NOT NULL
+, UNIQUE(owner_name)
 )
 ;"""
 
@@ -128,27 +128,27 @@ def get_road_ref_table_create_sqlstr() -> str:
     return """
 CREATE TABLE IF NOT EXISTS road_ref (
   road VARCHAR(255) NOT NULL
-, wall VARCHAR(255) NOT NULL
-, UNIQUE(road, wall)
+, bridge VARCHAR(255) NOT NULL
+, UNIQUE(road, bridge)
 )
 ;"""
 
 
-def get_road_ref_table_single_insert_sqlstr(road: RoadUnit, wall: str) -> str:
+def get_road_ref_table_single_insert_sqlstr(road: RoadUnit, bridge: str) -> str:
     return f"""
-INSERT OR IGNORE INTO road_ref (road, wall) 
+INSERT OR IGNORE INTO road_ref (road, bridge) 
 VALUES (
   '{road}'
-, '{wall}'
+, '{bridge}'
 )
 ;"""
 
 
-def get_road_ref_table_row_id_select_sqlstr(road: RoadUnit, wall: str) -> str:
+def get_road_ref_table_row_id_select_sqlstr(road: RoadUnit, bridge: str) -> str:
     return f"""
 SELECT rowid FROM road_ref  
 WHERE road = '{road}' 
-  AND wall = '{wall}'
+  AND bridge = '{bridge}'
 )
 ;"""
 

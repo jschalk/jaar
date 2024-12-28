@@ -98,9 +98,9 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     example_ocean_dir = f"{get_test_worlds_dir()}/example_ocean"
     five_world_id = "five"
     world2_current_time = 55
-    music_str = "music45"
-    world2timeconversions = {music_str: timeconversion_shop(music_str)}
-    world2_dealunits = {"music45"}
+    accord_str = "accord45"
+    world2timeconversions = {accord_str: timeconversion_shop(accord_str)}
+    world2_dealunits = {"accord45"}
 
     # WHEN
     x_world = worldunit_shop(
@@ -213,38 +213,38 @@ def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):
     assert x_world.events == {}
 
     # WHEN
-    e5_event_id = 5
-    e5_face_id = "Sue"
-    x_world.set_event(e5_event_id, e5_face_id)
+    e5_event_int = 5
+    e5_face_name = "Sue"
+    x_world.set_event(e5_event_int, e5_face_name)
 
     # THEN
     assert x_world.events != {}
-    assert x_world.events == {e5_event_id: e5_face_id}
+    assert x_world.events == {e5_event_int: e5_face_name}
 
 
 def test_WorldUnit_event_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
-    e5_event_id = 5
-    e5_face_id = "Sue"
-    assert x_world.event_exists(e5_event_id) is False
+    e5_event_int = 5
+    e5_face_name = "Sue"
+    assert x_world.event_exists(e5_event_int) is False
 
     # WHEN
-    x_world.set_event(e5_event_id, e5_face_id)
+    x_world.set_event(e5_event_int, e5_face_name)
 
     # THEN
-    assert x_world.event_exists(e5_event_id)
+    assert x_world.event_exists(e5_event_int)
 
 
 def test_WorldUnit_get_event_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
-    e5_event_id = 5
-    e5_face_id = "Sue"
-    assert x_world.get_event(e5_event_id) is None
+    e5_event_int = 5
+    e5_face_name = "Sue"
+    assert x_world.get_event(e5_event_int) is None
 
     # WHEN
-    x_world.set_event(e5_event_id, e5_face_id)
+    x_world.set_event(e5_event_int, e5_face_name)
 
     # THEN
-    assert x_world.get_event(e5_event_id) == e5_face_id
+    assert x_world.get_event(e5_event_int) == e5_face_name

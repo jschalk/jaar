@@ -22,7 +22,7 @@ def get_2idea_bud(deal_id: DealID = None) -> BudUnit:
         deal_id = temp_deal_id()
     a_str = "A"
     b_str = "B"
-    x_bud = budunit_shop(_owner_id=a_str)
+    x_bud = budunit_shop(_owner_name=a_str)
     x_bud.set_deal_id(deal_id)
     item_b = itemunit_shop(b_str)
     x_bud.set_item(item_b, parent_road=temp_deal_id())

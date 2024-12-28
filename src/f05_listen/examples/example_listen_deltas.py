@@ -1,7 +1,7 @@
 from src.f01_road.jaar_config import get_deal_id_if_None
 from src.f01_road.road import DealID
 from src.f02_bud.bud_tool import bud_acctunit_str, bud_itemunit_str
-from src.f04_gift.atom_config import acct_id_str, parent_road_str, label_str
+from src.f04_gift.atom_config import acct_name_str, parent_road_str, lx_str
 from src.f04_gift.atom import (
     AtomUnit,
     atom_delete,
@@ -17,7 +17,7 @@ def get_atom_example_itemunit_sports(deal_id: DealID = None) -> AtomUnit:
     sports_str = "sports"
     x_category = bud_itemunit_str()
     insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_itemunit_atomunit.set_jkey(label_str(), sports_str)
+    insert_itemunit_atomunit.set_jkey(lx_str(), sports_str)
     insert_itemunit_atomunit.set_jkey(parent_road_str(), deal_id)
     return insert_itemunit_atomunit
 
@@ -34,7 +34,7 @@ def get_deltaunit_sue_example() -> DeltaUnit:
     category = bud_acctunit_str()
     sue_str = "Sue"
     sue_atomunit = atomunit_shop(category, atom_delete())
-    sue_atomunit.set_jkey(acct_id_str(), sue_str)
+    sue_atomunit.set_jkey(acct_name_str(), sue_str)
     sue_deltaunit.set_atomunit(sue_atomunit)
     return sue_deltaunit
 
@@ -57,7 +57,7 @@ def get_deltaunit_example1() -> DeltaUnit:
     category = bud_acctunit_str()
     sue_str = "Sue"
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_jkey(acct_id_str(), sue_str)
+    x_atomunit.set_jkey(acct_name_str(), sue_str)
     sue_deltaunit.set_atomunit(x_atomunit)
     return sue_deltaunit
 
@@ -73,6 +73,6 @@ def get_deltaunit_example2() -> DeltaUnit:
     category = bud_acctunit_str()
     sue_str = "Sue"
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_jkey(acct_id_str(), sue_str)
+    x_atomunit.set_jkey(acct_name_str(), sue_str)
     sue_deltaunit.set_atomunit(x_atomunit)
     return sue_deltaunit

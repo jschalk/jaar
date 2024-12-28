@@ -7,7 +7,7 @@ from src.f00_instrument.file import (
     open_file,
 )
 from src.f00_instrument.db_toolbox import get_grouping_with_all_values_equal_sql_query
-from src.f08_pidgin.bridge import BridgeCore
+from src.f08_pidgin.map import MapCore
 from src.f08_pidgin.pidgin import (
     PidginUnit,
     pidginable_atom_args,
@@ -136,13 +136,13 @@ def get_dataframe_pidginable_columns(x_df: DataFrame) -> set[str]:
 
 
 def translate_single_column_dataframe(
-    x_df: DataFrame, x_bridgeunit: BridgeCore, column_name: str
+    x_df: DataFrame, x_mapunit: MapCore, column_name: str
 ) -> DataFrame:
     if column_name in x_df:
         row_count = len(x_df)
         for cur_row in range(row_count):
             otx_value = x_df.iloc[cur_row][column_name]
-            inx_value = x_bridgeunit.reveal_inx(otx_value)
+            inx_value = x_mapunit.reveal_inx(otx_value)
             x_df.at[cur_row, column_name] = inx_value
     return x_df
 
@@ -155,8 +155,8 @@ def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
     pidginable_columns = column_names.intersection(pidginable_atom_args())
     for pidginable_column in pidginable_columns:
         jaar_type = get_pidgin_args_jaar_types().get(pidginable_column)
-        x_bridgeunit = x_pidginunit.get_bridgeunit(jaar_type)
-        translate_single_column_dataframe(x_df, x_bridgeunit, pidginable_column)
+        x_mapunit = x_pidginunit.get_mapunit(jaar_type)
+        translate_single_column_dataframe(x_df, x_mapunit, pidginable_column)
 
 
 def move_otx_csvs_to_pidgin_inx(face_dir: str):
@@ -173,10 +173,10 @@ def move_otx_csvs_to_pidgin_inx(face_dir: str):
 
 
 def _get_pidgen_brick_format_filenames() -> set[str]:
-    brick_numbers = set(get_brick_category_ref().get("bridge_acct_id"))
-    brick_numbers.update(set(get_brick_category_ref().get("bridge_group_id")))
-    brick_numbers.update(set(get_brick_category_ref().get("bridge_idea")))
-    brick_numbers.update(set(get_brick_category_ref().get("bridge_road")))
+    brick_numbers = set(get_brick_category_ref().get("map_name"))
+    brick_numbers.update(set(get_brick_category_ref().get("map_group_id")))
+    brick_numbers.update(set(get_brick_category_ref().get("map_idea")))
+    brick_numbers.update(set(get_brick_category_ref().get("map_road")))
     return {f"{brick_number}.xlsx" for brick_number in brick_numbers}
 
 

@@ -16,12 +16,12 @@ from src.f02_bud.bud_tool import (
 )
 from src.f04_gift.atom import atom_insert, atom_update, atomunit_shop, sift_atomunit
 from src.f04_gift.atom_config import (
-    acct_id_str,
+    acct_name_str,
     awardee_id_str,
     group_id_str,
-    healer_id_str,
+    healer_name_str,
     parent_road_str,
-    label_str,
+    lx_str,
     road_str,
     base_str,
     debtit_belief_str,
@@ -51,7 +51,7 @@ def test_sift_atom_ReturnsNoneIfGivenAtomUnitIsUPDATE():
     sue_bud.add_item(casa_road)
     casa_atom = atomunit_shop(bud_itemunit_str(), atom_update())
     casa_atom.set_arg(parent_road_str(), sue_bud._deal_id)
-    casa_atom.set_arg(label_str(), casa_str)
+    casa_atom.set_arg(lx_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN
     new_casa_atom = sift_atomunit(sue_bud, casa_atom)
@@ -70,7 +70,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
     sue_fund_pool = 69
     sue_max_tree_traverse = 72
     sue_penny = 2
-    sue_purview_time_id = 9990000
+    sue_purview_time_int = 9990000
     sue_tally = 100
     zia_atom = atomunit_shop(budunit_str(), atom_insert())
     zia_atom.set_arg("respect_bit", sue_bit)
@@ -80,7 +80,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
     zia_atom.set_arg("fund_pool", sue_fund_pool)
     zia_atom.set_arg("max_tree_traverse", sue_max_tree_traverse)
     zia_atom.set_arg("penny", sue_penny)
-    zia_atom.set_arg("purview_time_id", sue_purview_time_id)
+    zia_atom.set_arg("purview_time_int", sue_purview_time_int)
     zia_atom.set_arg("tally", sue_tally)
 
     # WHEN
@@ -99,7 +99,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
         "fund_pool": sue_fund_pool,
         "max_tree_traverse": sue_max_tree_traverse,
         "penny": sue_penny,
-        "purview_time_id": sue_purview_time_id,
+        "purview_time_int": sue_purview_time_int,
         "tally": sue_tally,
     }
 
@@ -112,7 +112,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acctunit():
     sue_bud.add_acctunit(zia_str)
 
     zia_atom = atomunit_shop(bud_acctunit_str(), atom_insert())
-    zia_atom.set_arg(acct_id_str(), zia_str)
+    zia_atom.set_arg(acct_name_str(), zia_str)
     zia_atom.set_arg(debtit_belief_str(), zia_debtit_belief)
 
     # WHEN
@@ -136,7 +136,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acct_membership():
     sue_bud.get_acct(zia_str).add_membership(run_str)
 
     zia_atom = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    zia_atom.set_arg(acct_id_str(), zia_str)
+    zia_atom.set_arg(acct_name_str(), zia_str)
     zia_atom.set_arg(group_id_str(), run_str)
     zia_atom.set_arg(debtit_vote_str(), zia_run_debtit_vote)
 
@@ -171,7 +171,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_itemunit():
     sue_stop_want = 107
     old_casa_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     old_casa_atom.set_arg(parent_road_str(), sue_bud._deal_id)
-    old_casa_atom.set_arg(label_str(), casa_str)
+    old_casa_atom.set_arg(lx_str(), casa_str)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)
     old_casa_atom.set_arg(close_str(), sue_close)

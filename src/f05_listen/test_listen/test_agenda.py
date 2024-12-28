@@ -17,7 +17,7 @@ def test_listen_to_speaker_agenda_RaisesErrorIfPoolIsNotSet():
         listen_to_speaker_agenda(yao_budunit, zia_budunit)
     assert (
         str(excinfo.value)
-        == f"listener '{yao_str}' bud is assumed to have {zia_budunit._owner_id} acctunit."
+        == f"listener '{yao_str}' bud is assumed to have {zia_budunit._owner_name} acctunit."
     )
 
 
@@ -53,7 +53,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleTaskBud():
     zia_budunit.set_l1_item(zia_clean_itemunit)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
-    zia_yao_budunit.set_owner_id(yao_str)
+    zia_yao_budunit.set_owner_name(yao_str)
     assert len(zia_yao_budunit.get_agenda_dict()) == 1
     print(f"{zia_yao_budunit.get_agenda_dict()=}")
 
@@ -87,7 +87,7 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskBud():
     zia_budunit.set_item(zia_clean_itemunit, casa_road)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
-    zia_yao_budunit.set_owner_id(yao_str)
+    zia_yao_budunit.set_owner_name(yao_str)
     assert len(zia_yao_budunit.get_agenda_dict()) == 1
     print(f"{zia_yao_budunit.get_agenda_dict()=}")
 
@@ -136,7 +136,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaItemsLevel2TaskBud():
     zia_budunit.set_l1_item(yao_fly_itemunit)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
-    zia_yao_budunit.set_owner_id(yao_str)
+    zia_yao_budunit.set_owner_name(yao_str)
     assert len(zia_yao_budunit.get_agenda_dict()) == 3
 
     # WHEN
@@ -196,7 +196,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaItemsLevel2TaskBudWhereAnItemUni
     zia_budunit.set_l1_item(yao_fly_itemunit)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
-    zia_yao_budunit.set_owner_id(yao_str)
+    zia_yao_budunit.set_owner_name(yao_str)
     assert len(zia_yao_budunit.get_agenda_dict()) == 3
 
     # WHEN

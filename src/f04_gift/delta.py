@@ -8,7 +8,7 @@ from src.f00_instrument.dict_toolbox import (
 )
 from src.f01_road.road import RoadUnit, get_terminus_idea, get_parent_road
 from src.f02_bud.reason_item import FactUnit, ReasonUnit
-from src.f02_bud.acct import MemberShip, AcctID, AcctUnit
+from src.f02_bud.acct import MemberShip, AcctName, AcctUnit
 from src.f02_bud.group import MemberShip, GroupID
 from src.f02_bud.item import ItemUnit
 from src.f02_bud.bud import BudUnit, budunit_shop
@@ -121,7 +121,7 @@ class DeltaUnit:
         return get_from_nested_dict(self.atomunits, x_keylist)
 
     def add_all_atomunits(self, after_bud: BudUnit):
-        before_bud = budunit_shop(after_bud._owner_id, after_bud._deal_id)
+        before_bud = budunit_shop(after_bud._owner_name, after_bud._deal_id)
         self.add_all_different_atomunits(before_bud, after_bud)
 
     def add_all_different_atomunits(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -149,35 +149,35 @@ class DeltaUnit:
             x_atomunit.set_jvalue("fund_pool", after_bud.fund_pool)
         if before_bud.fund_coin != after_bud.fund_coin:
             x_atomunit.set_jvalue("fund_coin", after_bud.fund_coin)
-        if before_bud.purview_time_id != after_bud.purview_time_id:
-            x_atomunit.set_jvalue("purview_time_id", after_bud.purview_time_id)
+        if before_bud.purview_time_int != after_bud.purview_time_int:
+            x_atomunit.set_jvalue("purview_time_int", after_bud.purview_time_int)
         if before_bud.respect_bit != after_bud.respect_bit:
             x_atomunit.set_jvalue("respect_bit", after_bud.respect_bit)
         self.set_atomunit(x_atomunit)
 
     def add_atomunits_accts(self, before_bud: BudUnit, after_bud: BudUnit):
-        before_acct_ids = set(before_bud._accts.keys())
-        after_acct_ids = set(after_bud._accts.keys())
+        before_acct_names = set(before_bud._accts.keys())
+        after_acct_names = set(after_bud._accts.keys())
 
         self.add_atomunit_acctunit_inserts(
             after_bud=after_bud,
-            insert_acct_ids=after_acct_ids.difference(before_acct_ids),
+            insert_acct_names=after_acct_names.difference(before_acct_names),
         )
         self.add_atomunit_acctunit_deletes(
             before_bud=before_bud,
-            delete_acct_ids=before_acct_ids.difference(after_acct_ids),
+            delete_acct_names=before_acct_names.difference(after_acct_names),
         )
         self.add_atomunit_acctunit_updates(
             before_bud=before_bud,
             after_bud=after_bud,
-            update_acct_ids=before_acct_ids.intersection(after_acct_ids),
+            update_acct_names=before_acct_names.intersection(after_acct_names),
         )
 
-    def add_atomunit_acctunit_inserts(self, after_bud: BudUnit, insert_acct_ids: set):
-        for insert_acct_id in insert_acct_ids:
-            insert_acctunit = after_bud.get_acct(insert_acct_id)
+    def add_atomunit_acctunit_inserts(self, after_bud: BudUnit, insert_acct_names: set):
+        for insert_acct_name in insert_acct_names:
+            insert_acctunit = after_bud.get_acct(insert_acct_name)
             x_atomunit = atomunit_shop("bud_acctunit", atom_insert())
-            x_atomunit.set_jkey("acct_id", insert_acctunit.acct_id)
+            x_atomunit.set_jkey("acct_name", insert_acctunit.acct_name)
             if insert_acctunit.credit_belief is not None:
                 x_atomunit.set_jvalue("credit_belief", insert_acctunit.credit_belief)
             if insert_acctunit.debtit_belief is not None:
@@ -190,14 +190,14 @@ class DeltaUnit:
             )
 
     def add_atomunit_acctunit_updates(
-        self, before_bud: BudUnit, after_bud: BudUnit, update_acct_ids: set
+        self, before_bud: BudUnit, after_bud: BudUnit, update_acct_names: set
     ):
-        for acct_id in update_acct_ids:
-            after_acctunit = after_bud.get_acct(acct_id)
-            before_acctunit = before_bud.get_acct(acct_id)
+        for acct_name in update_acct_names:
+            after_acctunit = after_bud.get_acct(acct_name)
+            before_acctunit = before_bud.get_acct(acct_name)
             if jvalues_different("bud_acctunit", after_acctunit, before_acctunit):
                 x_atomunit = atomunit_shop("bud_acctunit", atom_update())
-                x_atomunit.set_jkey("acct_id", after_acctunit.acct_id)
+                x_atomunit.set_jkey("acct_name", after_acctunit.acct_name)
                 if before_acctunit.credit_belief != after_acctunit.credit_belief:
                     x_atomunit.set_jvalue("credit_belief", after_acctunit.credit_belief)
                 if before_acctunit.debtit_belief != after_acctunit.debtit_belief:
@@ -207,18 +207,20 @@ class DeltaUnit:
                 after_acctunit=after_acctunit, before_acctunit=before_acctunit
             )
 
-    def add_atomunit_acctunit_deletes(self, before_bud: BudUnit, delete_acct_ids: set):
-        for delete_acct_id in delete_acct_ids:
+    def add_atomunit_acctunit_deletes(
+        self, before_bud: BudUnit, delete_acct_names: set
+    ):
+        for delete_acct_name in delete_acct_names:
             x_atomunit = atomunit_shop("bud_acctunit", atom_delete())
-            x_atomunit.set_jkey("acct_id", delete_acct_id)
+            x_atomunit.set_jkey("acct_name", delete_acct_name)
             self.set_atomunit(x_atomunit)
-            delete_acctunit = before_bud.get_acct(delete_acct_id)
+            delete_acctunit = before_bud.get_acct(delete_acct_name)
             non_mirror_group_ids = {
                 x_group_id
                 for x_group_id in delete_acctunit._memberships.keys()
-                if x_group_id != delete_acct_id
+                if x_group_id != delete_acct_name
             }
-            self.add_atomunit_memberships_delete(delete_acct_id, non_mirror_group_ids)
+            self.add_atomunit_memberships_delete(delete_acct_name, non_mirror_group_ids)
 
     def add_atomunit_acctunit_update_memberships(
         self, after_acctunit: AcctUnit, before_acctunit: AcctUnit
@@ -227,13 +229,13 @@ class DeltaUnit:
         before_group_ids = {
             x_group_id
             for x_group_id in before_acctunit._memberships.keys()
-            if x_group_id != before_acctunit.acct_id
+            if x_group_id != before_acctunit.acct_name
         }
         # after_non_mirror_group_ids
         after_group_ids = {
             x_group_id
             for x_group_id in after_acctunit._memberships.keys()
-            if x_group_id != after_acctunit.acct_id
+            if x_group_id != after_acctunit.acct_name
         }
 
         self.add_atomunit_memberships_inserts(
@@ -242,19 +244,19 @@ class DeltaUnit:
         )
 
         self.add_atomunit_memberships_delete(
-            before_acct_id=after_acctunit.acct_id,
+            before_acct_name=after_acctunit.acct_name,
             before_group_ids=before_group_ids.difference(after_group_ids),
         )
 
         update_group_ids = before_group_ids.intersection(after_group_ids)
-        for update_acct_id in update_group_ids:
-            before_membership = before_acctunit.get_membership(update_acct_id)
-            after_membership = after_acctunit.get_membership(update_acct_id)
+        for update_acct_name in update_group_ids:
+            before_membership = before_acctunit.get_membership(update_acct_name)
+            after_membership = after_acctunit.get_membership(update_acct_name)
             if jvalues_different(
                 "bud_acct_membership", before_membership, after_membership
             ):
                 self.add_atomunit_membership_update(
-                    acct_id=after_acctunit.acct_id,
+                    acct_name=after_acctunit.acct_name,
                     before_membership=before_membership,
                     after_membership=after_membership,
                 )
@@ -264,11 +266,11 @@ class DeltaUnit:
         after_acctunit: AcctUnit,
         insert_membership_group_ids: list[GroupID],
     ):
-        after_acct_id = after_acctunit.acct_id
+        after_acct_name = after_acctunit.acct_name
         for insert_group_id in insert_membership_group_ids:
             after_membership = after_acctunit.get_membership(insert_group_id)
             x_atomunit = atomunit_shop("bud_acct_membership", atom_insert())
-            x_atomunit.set_jkey("acct_id", after_acct_id)
+            x_atomunit.set_jkey("acct_name", after_acct_name)
             x_atomunit.set_jkey("group_id", after_membership.group_id)
             if after_membership.credit_vote is not None:
                 x_atomunit.set_jvalue("credit_vote", after_membership.credit_vote)
@@ -278,12 +280,12 @@ class DeltaUnit:
 
     def add_atomunit_membership_update(
         self,
-        acct_id: AcctID,
+        acct_name: AcctName,
         before_membership: MemberShip,
         after_membership: MemberShip,
     ):
         x_atomunit = atomunit_shop("bud_acct_membership", atom_update())
-        x_atomunit.set_jkey("acct_id", acct_id)
+        x_atomunit.set_jkey("acct_name", acct_name)
         x_atomunit.set_jkey("group_id", after_membership.group_id)
         if after_membership.credit_vote != before_membership.credit_vote:
             x_atomunit.set_jvalue("credit_vote", after_membership.credit_vote)
@@ -292,11 +294,11 @@ class DeltaUnit:
         self.set_atomunit(x_atomunit)
 
     def add_atomunit_memberships_delete(
-        self, before_acct_id: AcctID, before_group_ids: GroupID
+        self, before_acct_name: AcctName, before_group_ids: GroupID
     ):
         for delete_group_id in before_group_ids:
             x_atomunit = atomunit_shop("bud_acct_membership", atom_delete())
-            x_atomunit.set_jkey("acct_id", before_acct_id)
+            x_atomunit.set_jkey("acct_name", before_acct_name)
             x_atomunit.set_jkey("group_id", delete_group_id)
             self.set_atomunit(x_atomunit)
 
@@ -323,7 +325,7 @@ class DeltaUnit:
             insert_itemunit = after_bud.get_item_obj(insert_item_road)
             x_atomunit = atomunit_shop("bud_itemunit", atom_insert())
             x_atomunit.set_jkey("parent_road", insert_itemunit._parent_road)
-            x_atomunit.set_jkey("label", insert_itemunit._label)
+            x_atomunit.set_jkey("lx", insert_itemunit._lx)
             x_atomunit.set_jvalue("addin", insert_itemunit.addin)
             x_atomunit.set_jvalue("begin", insert_itemunit.begin)
             x_atomunit.set_jvalue("close", insert_itemunit.close)
@@ -352,7 +354,7 @@ class DeltaUnit:
             )
             self.add_atomunit_item_healerlink_insert(
                 item_road=insert_item_road,
-                insert_healerlink_healer_ids=insert_itemunit.healerlink._healer_ids,
+                insert_healerlink_healer_names=insert_itemunit.healerlink._healer_names,
             )
 
     def add_atomunit_item_updates(
@@ -364,7 +366,7 @@ class DeltaUnit:
             if jvalues_different("bud_itemunit", before_itemunit, after_itemunit):
                 x_atomunit = atomunit_shop("bud_itemunit", atom_update())
                 x_atomunit.set_jkey("parent_road", after_itemunit._parent_road)
-                x_atomunit.set_jkey("label", after_itemunit._label)
+                x_atomunit.set_jkey("lx", after_itemunit._lx)
                 if before_itemunit.addin != after_itemunit.addin:
                     x_atomunit.set_jvalue("addin", after_itemunit.addin)
                 if before_itemunit.begin != after_itemunit.begin:
@@ -473,28 +475,32 @@ class DeltaUnit:
             )
 
             # insert / update / delete healerlinks
-            before_healerlinks_healer_ids = set(before_itemunit.healerlink._healer_ids)
-            after_healerlinks_healer_ids = set(after_itemunit.healerlink._healer_ids)
+            before_healerlinks_healer_names = set(
+                before_itemunit.healerlink._healer_names
+            )
+            after_healerlinks_healer_names = set(
+                after_itemunit.healerlink._healer_names
+            )
             self.add_atomunit_item_healerlink_insert(
                 item_road=item_road,
-                insert_healerlink_healer_ids=after_healerlinks_healer_ids.difference(
-                    before_healerlinks_healer_ids
+                insert_healerlink_healer_names=after_healerlinks_healer_names.difference(
+                    before_healerlinks_healer_names
                 ),
             )
             self.add_atomunit_item_healerlink_deletes(
                 item_road=item_road,
-                delete_healerlink_healer_ids=before_healerlinks_healer_ids.difference(
-                    after_healerlinks_healer_ids
+                delete_healerlink_healer_names=before_healerlinks_healer_names.difference(
+                    after_healerlinks_healer_names
                 ),
             )
 
     def add_atomunit_item_deletes(self, before_bud: BudUnit, delete_item_roads: set):
         for delete_item_road in delete_item_roads:
-            x_parent_road = get_parent_road(delete_item_road, before_bud._wall)
-            x_label = get_terminus_idea(delete_item_road, before_bud._wall)
+            x_parent_road = get_parent_road(delete_item_road, before_bud._bridge)
+            x_lx = get_terminus_idea(delete_item_road, before_bud._bridge)
             x_atomunit = atomunit_shop("bud_itemunit", atom_delete())
             x_atomunit.set_jkey("parent_road", x_parent_road)
-            x_atomunit.set_jkey("label", x_label)
+            x_atomunit.set_jkey("lx", x_lx)
             self.set_atomunit(x_atomunit)
 
             delete_itemunit = before_bud.get_item_obj(delete_item_road)
@@ -517,7 +523,7 @@ class DeltaUnit:
             )
             self.add_atomunit_item_healerlink_deletes(
                 item_road=delete_item_road,
-                delete_healerlink_healer_ids=delete_itemunit.healerlink._healer_ids,
+                delete_healerlink_healer_names=delete_itemunit.healerlink._healer_names,
             )
 
     def add_atomunit_item_reasonunit_inserts(
@@ -686,21 +692,21 @@ class DeltaUnit:
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_healerlink_insert(
-        self, item_road: RoadUnit, insert_healerlink_healer_ids: set
+        self, item_road: RoadUnit, insert_healerlink_healer_names: set
     ):
-        for insert_healerlink_healer_id in insert_healerlink_healer_ids:
+        for insert_healerlink_healer_name in insert_healerlink_healer_names:
             x_atomunit = atomunit_shop("bud_item_healerlink", atom_insert())
             x_atomunit.set_jkey("road", item_road)
-            x_atomunit.set_jkey("healer_id", insert_healerlink_healer_id)
+            x_atomunit.set_jkey("healer_name", insert_healerlink_healer_name)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_healerlink_deletes(
-        self, item_road: RoadUnit, delete_healerlink_healer_ids: set
+        self, item_road: RoadUnit, delete_healerlink_healer_names: set
     ):
-        for delete_healerlink_healer_id in delete_healerlink_healer_ids:
+        for delete_healerlink_healer_name in delete_healerlink_healer_names:
             x_atomunit = atomunit_shop("bud_item_healerlink", atom_delete())
             x_atomunit.set_jkey("road", item_road)
-            x_atomunit.set_jkey("healer_id", delete_healerlink_healer_id)
+            x_atomunit.set_jkey("healer_name", delete_healerlink_healer_name)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_awardlink_inserts(

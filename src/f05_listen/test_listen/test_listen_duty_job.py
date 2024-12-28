@@ -221,7 +221,7 @@ def get_yao_ohio_hubunit() -> HubUnit:
     return hubunit_shop(
         deals_dir=env_dir(),
         deal_id=yao_bud._deal_id,
-        owner_id=yao_bud._owner_id,
+        owner_name=yao_bud._owner_name,
         keep_road=get_ohio_road(),
         # pipeline_voice_final_str(),
     )
@@ -232,7 +232,7 @@ def get_yao_iowa_hubunit() -> HubUnit:
     return hubunit_shop(
         deals_dir=env_dir(),
         deal_id=yao_bud._deal_id,
-        owner_id=yao_bud._owner_id,
+        owner_name=yao_bud._owner_name,
         keep_road=get_iowa_road(),
         # pipeline_voice_final_str(),
     )
@@ -243,7 +243,7 @@ def get_zia_utah_hubunit() -> HubUnit:
     return hubunit_shop(
         deals_dir=env_dir(),
         deal_id=yao_bud._deal_id,
-        owner_id="Zia",
+        owner_name="Zia",
         keep_road=get_utah_road(),
         # pipeline_voice_final_str(),
     )
@@ -251,15 +251,15 @@ def get_zia_utah_hubunit() -> HubUnit:
 
 def get_example_yao_voice_with_3_healers():
     yao_voice = get_example_yao_bud()
-    yao_str = yao_voice.get_acct("Yao").acct_id
-    bob_str = yao_voice.get_acct("Bob").acct_id
-    zia_str = yao_voice.get_acct("Zia").acct_id
+    yao_str = yao_voice.get_acct("Yao").acct_name
+    bob_str = yao_voice.get_acct("Bob").acct_name
+    zia_str = yao_voice.get_acct("Zia").acct_name
     iowa_item = itemunit_shop(get_iowa_str(), problem_bool=True)
     ohio_item = itemunit_shop(get_ohio_str(), problem_bool=True)
     utah_item = itemunit_shop(get_utah_str(), problem_bool=True)
-    iowa_item.healerlink.set_healer_id(get_yao_iowa_hubunit().owner_id)
-    ohio_item.healerlink.set_healer_id(get_yao_ohio_hubunit().owner_id)
-    utah_item.healerlink.set_healer_id(get_zia_utah_hubunit().owner_id)
+    iowa_item.healerlink.set_healer_name(get_yao_iowa_hubunit().owner_name)
+    ohio_item.healerlink.set_healer_name(get_yao_ohio_hubunit().owner_name)
+    utah_item.healerlink.set_healer_name(get_zia_utah_hubunit().owner_name)
     yao_voice.set_item(iowa_item, get_usa_road())
     yao_voice.set_item(ohio_item, get_usa_road())
     yao_voice.set_item(utah_item, get_usa_road())
@@ -288,7 +288,7 @@ def get_example_yao_voice_with_3_healers():
 #     assert len(yao_voice0._keep_dict) == 3
 #     print(f"{yao_voice0._item_dict.keys()=}")
 
-#     yao_str = yao_voice0._owner_id
+#     yao_str = yao_voice0._owner_name
 #     yao_job1 = get_example_yao_job1_speaker()
 #     yao_job2 = get_example_yao_job2_speaker()
 #     yao_job3 = get_example_yao_job3_speaker()
@@ -364,7 +364,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert len(yao_voice0._keep_dict) == 3
     # print(f"{yao_voice0._item_dict.keys()=}")
 
-    yao_str = yao_voice0._owner_id
+    yao_str = yao_voice0._owner_name
     yao_job1 = get_example_yao_job1_speaker()
     yao_job2 = get_example_yao_job2_speaker()
     yao_job3 = get_example_yao_job3_speaker()
@@ -436,6 +436,6 @@ def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
     # ESTABLISH
     assert sue_texas_hubunit.job_file_exists(yao_str)
     yao_job = sue_texas_hubunit.get_job_bud(yao_str)
-    assert yao_job._owner_id is not None
-    assert yao_job._owner_id == yao_str
+    assert yao_job._owner_name is not None
+    assert yao_job._owner_name == yao_str
     assert yao_job.get_dict() == yao_duty.get_dict()

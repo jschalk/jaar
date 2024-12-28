@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_json_from_dict
 from src.f00_instrument.file import save_file, create_path
-from src.f01_road.finance_tran import quota_str, time_id_str, wall_str
+from src.f01_road.finance_tran import quota_str, time_int_str, bridge_str
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
     bud_acctunit_str,
@@ -16,7 +16,7 @@ from src.f02_bud.bud_tool import (
 from src.f03_chrono.chrono import (
     c400_number_str,
     monthday_distortion_str,
-    timeline_label_str,
+    timeline_idea_str,
     yr1_jan1_offset_str,
 )
 from src.f04_gift.atom_config import (
@@ -30,18 +30,18 @@ from src.f04_gift.atom_config import (
     atom_delete,
     atom_insert,
     atom_update,
-    face_id_str,
+    face_name_str,
     deal_id_str,
-    owner_id_str,
-    acct_id_str,
+    owner_name_str,
+    acct_name_str,
     group_id_str,
     parent_road_str,
-    label_str,
+    lx_str,
     road_str,
     base_str,
     team_id_str,
     awardee_id_str,
-    healer_id_str,
+    healer_name_str,
     numor_str,
     denom_str,
     addin_str,
@@ -81,32 +81,32 @@ from src.f07_deal.deal_config import (
     deal_timeline_weekday_str,
     current_time_str,
     amount_str,
-    month_label_str,
-    hour_label_str,
+    month_idea_str,
+    hour_idea_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_label_str,
+    weekday_idea_str,
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
+    event_int_str,
     pidginunit_str,
-    otx_wall_str,
-    inx_wall_str,
+    otx_bridge_str,
+    inx_bridge_str,
     unknown_word_str,
     otx_idea_str,
     inx_idea_str,
     otx_road_str,
     inx_road_str,
-    otx_acct_id_str,
-    inx_acct_id_str,
+    otx_name_str,
+    inx_name_str,
     otx_group_id_str,
     inx_group_id_str,
-    bridge_otx2inx_str,
-    bridge_acct_id_str,
-    bridge_group_id_str,
-    bridge_idea_str,
-    bridge_road_str,
+    map_otx2inx_str,
+    map_name_str,
+    map_group_id_str,
+    map_idea_str,
+    map_road_str,
     get_pidgin_categorys,
     get_pidgin_config_dict,
     get_pidgin_args_category_mapping,
@@ -169,22 +169,22 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     table_sorting_priority = get_brick_elements_sort_order()
 
     # THEN
-    assert table_sorting_priority[0] == face_id_str()
-    assert table_sorting_priority[1] == event_id_str()
+    assert table_sorting_priority[0] == face_name_str()
+    assert table_sorting_priority[1] == event_int_str()
     assert table_sorting_priority[2] == deal_id_str()
-    assert table_sorting_priority[3] == owner_id_str()
-    assert table_sorting_priority[4] == acct_id_str()
+    assert table_sorting_priority[3] == owner_name_str()
+    assert table_sorting_priority[4] == acct_name_str()
     assert table_sorting_priority[5] == group_id_str()
     assert table_sorting_priority[6] == parent_road_str()
-    assert table_sorting_priority[7] == label_str()
+    assert table_sorting_priority[7] == lx_str()
     assert table_sorting_priority[8] == road_str()
     assert table_sorting_priority[9] == base_str()
     assert table_sorting_priority[10] == "need"
     assert table_sorting_priority[11] == "pick"
     assert table_sorting_priority[12] == team_id_str()
     assert table_sorting_priority[13] == awardee_id_str()
-    assert table_sorting_priority[14] == healer_id_str()
-    assert table_sorting_priority[15] == time_id_str()
+    assert table_sorting_priority[14] == healer_name_str()
+    assert table_sorting_priority[15] == time_int_str()
     assert table_sorting_priority[16] == begin_str()
     assert table_sorting_priority[17] == close_str()
     assert table_sorting_priority[18] == addin_str()
@@ -211,7 +211,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[39] == "divisor"
     assert table_sorting_priority[40] == pledge_str()
     assert table_sorting_priority[41] == "problem_bool"
-    assert table_sorting_priority[42] == "purview_time_id"
+    assert table_sorting_priority[42] == "purview_time_int"
     assert table_sorting_priority[43] == take_force_str()
     assert table_sorting_priority[44] == "tally"
     assert table_sorting_priority[45] == fund_coin_str()
@@ -219,29 +219,29 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[47] == respect_bit_str()
     assert table_sorting_priority[48] == current_time_str()
     assert table_sorting_priority[49] == amount_str()
-    assert table_sorting_priority[50] == month_label_str()
-    assert table_sorting_priority[51] == hour_label_str()
+    assert table_sorting_priority[50] == month_idea_str()
+    assert table_sorting_priority[51] == hour_idea_str()
     assert table_sorting_priority[52] == cumlative_minute_str()
     assert table_sorting_priority[53] == cumlative_day_str()
-    assert table_sorting_priority[54] == weekday_label_str()
+    assert table_sorting_priority[54] == weekday_idea_str()
     assert table_sorting_priority[55] == weekday_order_str()
     assert table_sorting_priority[56] == otx_idea_str()
     assert table_sorting_priority[57] == inx_idea_str()
     assert table_sorting_priority[58] == otx_road_str()
     assert table_sorting_priority[59] == inx_road_str()
-    assert table_sorting_priority[60] == otx_acct_id_str()
-    assert table_sorting_priority[61] == inx_acct_id_str()
+    assert table_sorting_priority[60] == otx_name_str()
+    assert table_sorting_priority[61] == inx_name_str()
     assert table_sorting_priority[62] == otx_group_id_str()
     assert table_sorting_priority[63] == inx_group_id_str()
-    assert table_sorting_priority[64] == otx_wall_str()
-    assert table_sorting_priority[65] == inx_wall_str()
-    assert table_sorting_priority[66] == wall_str()
+    assert table_sorting_priority[64] == otx_bridge_str()
+    assert table_sorting_priority[65] == inx_bridge_str()
+    assert table_sorting_priority[66] == bridge_str()
     assert table_sorting_priority[67] == unknown_word_str()
     assert table_sorting_priority[68] == c400_number_str()
     assert table_sorting_priority[69] == yr1_jan1_offset_str()
     assert table_sorting_priority[70] == quota_str()
     assert table_sorting_priority[71] == monthday_distortion_str()
-    assert table_sorting_priority[72] == timeline_label_str()
+    assert table_sorting_priority[72] == timeline_idea_str()
     assert len(table_sorting_priority) == 73
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
@@ -254,8 +254,8 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     atom_deal_pidgin_args = atom_args
     atom_deal_pidgin_args.update(deal_args)
     atom_deal_pidgin_args.update(pidgin_args)
-    table_sorting_priority.remove(event_id_str())
-    table_sorting_priority.remove(face_id_str())
+    table_sorting_priority.remove(event_int_str())
+    table_sorting_priority.remove(face_name_str())
     assert atom_deal_pidgin_args == set(table_sorting_priority)
 
 
@@ -265,22 +265,22 @@ def test_get_brick_sqlite_type_ReturnsObj():
 
     # THEN
     assert set(sqlite_types.keys()) == set(get_brick_elements_sort_order())
-    assert sqlite_types.get(face_id_str()) == "TEXT"
-    assert sqlite_types.get(event_id_str()) == "INTEGER"
+    assert sqlite_types.get(face_name_str()) == "TEXT"
+    assert sqlite_types.get(event_int_str()) == "INTEGER"
     assert sqlite_types.get(deal_id_str()) == "TEXT"
-    assert sqlite_types.get(owner_id_str()) == "TEXT"
-    assert sqlite_types.get(acct_id_str()) == "TEXT"
+    assert sqlite_types.get(owner_name_str()) == "TEXT"
+    assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_id_str()) == "TEXT"
     assert sqlite_types.get(parent_road_str()) == "TEXT"
-    assert sqlite_types.get(label_str()) == "TEXT"
+    assert sqlite_types.get(lx_str()) == "TEXT"
     assert sqlite_types.get(road_str()) == "TEXT"
     assert sqlite_types.get(base_str()) == "TEXT"
     assert sqlite_types.get("need") == "TEXT"
     assert sqlite_types.get("pick") == "TEXT"
     assert sqlite_types.get(team_id_str()) == "TEXT"
     assert sqlite_types.get(awardee_id_str()) == "TEXT"
-    assert sqlite_types.get(healer_id_str()) == "TEXT"
-    assert sqlite_types.get(time_id_str()) == "INTEGER"
+    assert sqlite_types.get(healer_name_str()) == "TEXT"
+    assert sqlite_types.get(time_int_str()) == "INTEGER"
     assert sqlite_types.get(begin_str()) == "REAL"
     assert sqlite_types.get(close_str()) == "REAL"
     assert sqlite_types.get(addin_str()) == "REAL"
@@ -307,7 +307,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get("divisor") == "REAL"
     assert sqlite_types.get(pledge_str()) == "INTEGER"
     assert sqlite_types.get("problem_bool") == "INTEGER"
-    assert sqlite_types.get("purview_time_id") == "INTEGER"
+    assert sqlite_types.get("purview_time_int") == "INTEGER"
     assert sqlite_types.get(take_force_str()) == "REAL"
     assert sqlite_types.get("tally") == "REAL"
     assert sqlite_types.get(fund_coin_str()) == "REAL"
@@ -315,21 +315,21 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(respect_bit_str()) == "REAL"
     assert sqlite_types.get(current_time_str()) == "INTEGER"
     assert sqlite_types.get(amount_str()) == "REAL"
-    assert sqlite_types.get(month_label_str()) == "TEXT"
-    assert sqlite_types.get(hour_label_str()) == "TEXT"
+    assert sqlite_types.get(month_idea_str()) == "TEXT"
+    assert sqlite_types.get(hour_idea_str()) == "TEXT"
     assert sqlite_types.get(cumlative_minute_str()) == "INTEGER"
     assert sqlite_types.get(cumlative_day_str()) == "INTEGER"
-    assert sqlite_types.get(weekday_label_str()) == "TEXT"
+    assert sqlite_types.get(weekday_idea_str()) == "TEXT"
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
-    assert sqlite_types.get(otx_wall_str()) == "TEXT"
-    assert sqlite_types.get(inx_wall_str()) == "TEXT"
+    assert sqlite_types.get(otx_bridge_str()) == "TEXT"
+    assert sqlite_types.get(inx_bridge_str()) == "TEXT"
     assert sqlite_types.get(unknown_word_str()) == "TEXT"
-    assert sqlite_types.get(wall_str()) == "TEXT"
+    assert sqlite_types.get(bridge_str()) == "TEXT"
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(quota_str()) == "REAL"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
-    assert sqlite_types.get(timeline_label_str()) == "TEXT"
+    assert sqlite_types.get(timeline_idea_str()) == "TEXT"
 
 
 def test_get_allowed_curds_ReturnObj():
@@ -381,10 +381,10 @@ def test_get_brick_config_dict_ReturnsObj():
     assert bud_item_reasonunit_str() in brick_config_categorys
     assert bud_itemunit_str() in brick_config_categorys
     assert budunit_str() in brick_config_categorys
-    assert bridge_acct_id_str() in brick_config_categorys
-    assert bridge_group_id_str() in brick_config_categorys
-    assert bridge_idea_str() in brick_config_categorys
-    assert bridge_road_str() in brick_config_categorys
+    assert map_name_str() in brick_config_categorys
+    assert map_group_id_str() in brick_config_categorys
+    assert map_idea_str() in brick_config_categorys
+    assert map_road_str() in brick_config_categorys
     assert get_atom_categorys().issubset(brick_config_categorys)
     assert get_deal_categorys().issubset(brick_config_categorys)
     assert get_pidgin_categorys().issubset(brick_config_categorys)
@@ -421,11 +421,11 @@ def _validate_brick_config(x_brick_config: dict):
             deal_timeline_month_str(),
             deal_timeline_weekday_str(),
             dealunit_str(),
-            bridge_otx2inx_str(),
-            bridge_group_id_str(),
-            bridge_acct_id_str(),
-            bridge_idea_str(),
-            bridge_road_str(),
+            map_otx2inx_str(),
+            map_group_id_str(),
+            map_name_str(),
+            map_idea_str(),
+            map_road_str(),
         }:
             assert brick_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif brick_category in {deal_purview_episode_str(), deal_cashbook_str()}:
@@ -492,12 +492,12 @@ def _validate_brick_config(x_brick_config: dict):
         # print(f"{brick_jvalues_keys=}")
         assert sub_jvalues_keys.issubset(brick_jvalues_keys)
 
-        assert face_id_str() in brick_jkeys_keys
-        assert event_id_str() in brick_jkeys_keys
+        assert face_name_str() in brick_jkeys_keys
+        assert event_int_str() in brick_jkeys_keys
         assert deal_id_str() not in brick_jvalues_keys
         if brick_dict.get(brick_type_str()) != pidginunit_str():
             assert deal_id_str() in brick_jkeys_keys
-            assert time_id_str() in brick_jkeys_keys
+            assert time_int_str() in brick_jkeys_keys
 
         # sort_list = get_brick_elements_sort_order()
         # x_count = 0
@@ -585,8 +585,8 @@ def _validate_brick_format_files(brick_filenames: set[str]):
                 elif attr_in_keys:
                     assert attr_in_optional, assert_fail_str
 
-    # assert face_id_str() in brick_format_attributes
-    # assert event_id_str() in brick_format_attributes
+    # assert face_name_str() in brick_format_attributes
+    # assert event_int_str() in brick_format_attributes
 
     # confirm every bricknumber is unique
     assert len(brick_numbers_set) == len(brick_filenames)
@@ -627,10 +627,10 @@ def set_brick_config_json(category: str, build_order: int):
 def test_get_brick_config_dict_ReturnsObj_build_order():
     # ESTABLISH / WHEN
     bo = build_order_str()
-    # set_brick_config_json(bridge_acct_id_str(), 0)
-    # set_brick_config_json(bridge_group_id_str(), 1)
-    # set_brick_config_json(bridge_idea_str(), 2)
-    # set_brick_config_json(bridge_road_str(), 3)
+    # set_brick_config_json(map_name_str(), 0)
+    # set_brick_config_json(map_group_id_str(), 1)
+    # set_brick_config_json(map_idea_str(), 2)
+    # set_brick_config_json(map_road_str(), 3)
     # set_brick_config_json(dealunit_str(), 5)
     # set_brick_config_json(deal_timeline_hour_str(), 6)
     # set_brick_config_json(deal_timeline_month_str(), 7)
@@ -651,10 +651,10 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     x_brick_config = get_brick_config_dict()
 
     # THEN
-    assert x_brick_config.get(bridge_acct_id_str()).get(bo) == 0
-    assert x_brick_config.get(bridge_group_id_str()).get(bo) == 1
-    assert x_brick_config.get(bridge_idea_str()).get(bo) == 2
-    assert x_brick_config.get(bridge_road_str()).get(bo) == 3
+    assert x_brick_config.get(map_name_str()).get(bo) == 0
+    assert x_brick_config.get(map_group_id_str()).get(bo) == 1
+    assert x_brick_config.get(map_idea_str()).get(bo) == 2
+    assert x_brick_config.get(map_road_str()).get(bo) == 3
     assert x_brick_config.get(dealunit_str()).get(bo) == 5
     assert x_brick_config.get(deal_timeline_hour_str()).get(bo) == 6
     assert x_brick_config.get(deal_timeline_month_str()).get(bo) == 7
@@ -680,8 +680,8 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
     # THEN
     assert len(x_brick_quick_column_ref) == len(get_brick_numbers())
     assert x_brick_quick_column_ref.get("br00000") == {
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         c400_number_str(),
         current_time_str(),
         deal_id_str(),
@@ -689,8 +689,8 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),
-        wall_str(),
-        timeline_label_str(),
+        bridge_str(),
+        timeline_idea_str(),
         yr1_jan1_offset_str(),
     }
 

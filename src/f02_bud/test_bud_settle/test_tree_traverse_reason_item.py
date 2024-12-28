@@ -34,7 +34,7 @@ def test_BudUnit_ReasonUnits_create():
     assert casa_item.reasonunits[weekday_road] == casa_wk_reason
 
 
-def test_BudUnit_edit_item_attr_reasonunit_CorrectlySets_wall():
+def test_BudUnit_edit_item_attr_reasonunit_CorrectlySets_bridge():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     casa_road = sue_bud.make_l1_road("casa")
@@ -42,9 +42,9 @@ def test_BudUnit_edit_item_attr_reasonunit_CorrectlySets_wall():
     wed_road = sue_bud.make_road(week_road, "Wednesday")
 
     slash_str = "/"
-    before_week_reason = reasonunit_shop(week_road, wall=slash_str)
+    before_week_reason = reasonunit_shop(week_road, bridge=slash_str)
     before_week_reason.set_premise(wed_road)
-    assert before_week_reason.wall == slash_str
+    assert before_week_reason.bridge == slash_str
 
     # WHEN
     sue_bud.edit_item_attr(casa_road, reason=before_week_reason)
@@ -52,14 +52,14 @@ def test_BudUnit_edit_item_attr_reasonunit_CorrectlySets_wall():
     # THEN
     casa_item = sue_bud.get_item_obj(casa_road)
     week_reasonunit = casa_item.reasonunits.get(week_road)
-    assert week_reasonunit.wall != slash_str
-    assert week_reasonunit.wall == sue_bud._wall
+    assert week_reasonunit.bridge != slash_str
+    assert week_reasonunit.bridge == sue_bud._bridge
 
 
-def test_BudUnit_edit_item_attr_reason_base_CorrectlySets_wall():
+def test_BudUnit_edit_item_attr_reason_base_CorrectlySets_bridge():
     # ESTABLISH
     slash_str = "/"
-    bob_bud = budunit_shop("Bob", _wall=slash_str)
+    bob_bud = budunit_shop("Bob", _bridge=slash_str)
     casa_str = "casa"
     week_str = "week"
     wed_str = "Wednesday"
@@ -71,18 +71,18 @@ def test_BudUnit_edit_item_attr_reason_base_CorrectlySets_wall():
     bob_bud.set_item(itemunit_shop(wed_str), week_road)
     print(f"{bob_bud._itemroot._kids.keys()=}")
     wed_item = bob_bud.get_item_obj(wed_road)
-    assert wed_item._wall == slash_str
-    assert wed_item._wall == bob_bud._wall
+    assert wed_item._bridge == slash_str
+    assert wed_item._bridge == bob_bud._bridge
 
     # WHEN
     bob_bud.edit_item_attr(casa_road, reason_base=week_road, reason_premise=wed_road)
 
     # THEN
     casa_item = bob_bud.get_item_obj(casa_road)
-    assert casa_item._wall == slash_str
+    assert casa_item._bridge == slash_str
     week_reasonunit = casa_item.reasonunits.get(week_road)
-    assert week_reasonunit.wall != ","
-    assert week_reasonunit.wall == bob_bud._wall
+    assert week_reasonunit.bridge != ","
+    assert week_reasonunit.bridge == bob_bud._bridge
 
 
 def test_BudUnit_set_reasonunits_status():
@@ -241,8 +241,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     a4_bud = get_budunit_with_4_levels()
     casa_str = "casa"
     casa_road = a4_bud.make_l1_road(casa_str)
-    week_label = "weekdays"
-    week_road = a4_bud.make_l1_road(week_label)
+    week_lx = "weekdays"
+    week_road = a4_bud.make_l1_road(week_lx)
     wed_str = "Wednesday"
     wed_road = a4_bud.make_road(week_road, wed_str)
 

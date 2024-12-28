@@ -23,7 +23,7 @@ from src.f04_gift.atom_config import (
     set_mog,
     get_flattened_atom_table_build,
     get_normalized_bud_table_build,
-    acct_id_str,
+    acct_name_str,
     addin_str,
     atom_insert,
     atom_delete,
@@ -47,7 +47,7 @@ from src.f04_gift.atom_config import (
     fund_coin_str,
     gogo_want_str,
     group_id_str,
-    healer_id_str,
+    healer_name_str,
     jaar_type_str,
     jkeys_str,
     jvalues_str,
@@ -63,7 +63,7 @@ from src.f04_gift.atom_config import (
     sqlite_datatype_str,
     stop_want_str,
     team_id_str,
-    type_AcctID_str,
+    type_AcctName_str,
     type_GroupID_str,
     type_IdeaUnit_str,
     type_RoadUnit_str,
@@ -71,7 +71,7 @@ from src.f04_gift.atom_config import (
 
 
 def test_str_functions_ReturnsObj():
-    assert acct_id_str() == "acct_id"
+    assert acct_name_str() == "acct_name"
     assert addin_str() == "addin"
     assert atom_insert() == "INSERT"
     assert atom_update() == "UPDATE"
@@ -110,7 +110,7 @@ def test_str_functions_ReturnsObj():
     assert sqlite_datatype_str() == "sqlite_datatype"
     assert stop_want_str() == "stop_want"
     assert team_id_str() == "team_id"
-    assert type_AcctID_str() == "AcctID"
+    assert type_AcctName_str() == "AcctName"
     assert type_GroupID_str() == "GroupID"
     assert type_IdeaUnit_str() == "IdeaUnit"
     assert type_RoadUnit_str() == "RoadUnit"
@@ -359,8 +359,8 @@ def unique_jkeys():
             new_jkey_keys.remove(road_str())
         if base_str() in new_jkey_keys:
             new_jkey_keys.remove(base_str())
-        if acct_id_str() in new_jkey_keys:
-            new_jkey_keys.remove(acct_id_str())
+        if acct_name_str() in new_jkey_keys:
+            new_jkey_keys.remove(acct_name_str())
         if group_id_str() in new_jkey_keys:
             new_jkey_keys.remove(group_id_str())
         print(f"{atom_category} {new_jkey_keys=}")
@@ -386,7 +386,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_bud_acctunit():
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_category)
 
     # THEN
-    assert x_sorted_jkey_keys == [acct_id_str()]
+    assert x_sorted_jkey_keys == [acct_name_str()]
 
 
 def test_get_sorted_jkey_keys_ReturnsObj_bud_item_reason_premiseunit():
@@ -499,23 +499,23 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert budunit_columns.get(fund_coin_str()) is not None
     assert budunit_columns.get(respect_bit_str()) is not None
     assert budunit_columns.get(penny_str()) is not None
-    assert budunit_columns.get("purview_time_id") is not None
+    assert budunit_columns.get("purview_time_int") is not None
     assert budunit_columns.get("tally") is not None
 
     assert len(cat_acctunit) == 2
     acctunit_columns = cat_acctunit.get(columns_str)
     assert len(acctunit_columns) == 4
     assert acctunit_columns.get("uid") is not None
-    assert acctunit_columns.get(acct_id_str()) is not None
+    assert acctunit_columns.get(acct_name_str()) is not None
     assert acctunit_columns.get(credit_belief_str()) is not None
     assert acctunit_columns.get(debtit_belief_str()) is not None
 
-    acct_id_dict = acctunit_columns.get(acct_id_str())
-    assert len(acct_id_dict) == 2
-    assert acct_id_dict.get(sqlite_datatype_str()) == "TEXT"
-    assert acct_id_dict.get("nullable") is False
+    acct_name_dict = acctunit_columns.get(acct_name_str())
+    assert len(acct_name_dict) == 2
+    assert acct_name_dict.get(sqlite_datatype_str()) == "TEXT"
+    assert acct_name_dict.get("nullable") is False
     debtit_belief_dict = acctunit_columns.get("debtit_belief")
-    assert len(acct_id_dict) == 2
+    assert len(acct_name_dict) == 2
     assert debtit_belief_dict.get(sqlite_datatype_str()) == "INTEGER"
     assert debtit_belief_dict.get("nullable") is True
 
@@ -568,7 +568,7 @@ def get_jaar_type(x_category: str, x_arg: str) -> str:
 
 def test_get_jaar_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_jaar_type(bud_acctunit_str(), acct_id_str()) == type_AcctID_str()
+    assert get_jaar_type(bud_acctunit_str(), acct_name_str()) == type_AcctName_str()
     assert get_jaar_type(bud_itemunit_str(), gogo_want_str()) == "float"
 
 
@@ -576,7 +576,7 @@ def test_get_allowed_jaar_types_ReturnsObj():
     # ESTABLISH
     x_allowed_jaar_types = {
         "int",
-        type_AcctID_str(),
+        type_AcctName_str(),
         type_GroupID_str(),
         type_IdeaUnit_str(),
         type_RoadUnit_str(),
@@ -636,7 +636,7 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     x_jaar_types = get_atom_args_jaar_types()
 
     # THEN
-    assert x_jaar_types.get(acct_id_str()) == type_AcctID_str()
+    assert x_jaar_types.get(acct_name_str()) == type_AcctName_str()
     assert x_jaar_types.get(addin_str()) == "float"
     assert x_jaar_types.get(awardee_id_str()) == type_GroupID_str()
     assert x_jaar_types.get(base_str()) == type_RoadUnit_str()
@@ -659,8 +659,8 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     assert x_jaar_types.get("give_force") == "float"
     assert x_jaar_types.get(gogo_want_str()) == "float"
     assert x_jaar_types.get(group_id_str()) == type_GroupID_str()
-    assert x_jaar_types.get(healer_id_str()) == type_GroupID_str()
-    assert x_jaar_types.get("label") == type_IdeaUnit_str()
+    assert x_jaar_types.get(healer_name_str()) == type_GroupID_str()
+    assert x_jaar_types.get("lx") == type_IdeaUnit_str()
     assert x_jaar_types.get("mass") == "int"
     assert x_jaar_types.get("max_tree_traverse") == "int"
     assert x_jaar_types.get(morph_str()) == "bool"
@@ -673,7 +673,7 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     assert x_jaar_types.get("pick") == type_RoadUnit_str()
     assert x_jaar_types.get("pledge") == "bool"
     assert x_jaar_types.get("problem_bool") == "bool"
-    assert x_jaar_types.get("purview_time_id") == "TimeLinePoint"
+    assert x_jaar_types.get("purview_time_int") == "TimeLinePoint"
     assert x_jaar_types.get(road_str()) == type_RoadUnit_str()
     assert x_jaar_types.get(stop_want_str()) == "float"
     assert x_jaar_types.get("take_force") == "float"

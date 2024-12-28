@@ -1,5 +1,5 @@
 from src.f00_instrument.plotly_toolbox import conditional_fig_show
-from src.f04_gift.atom_config import acct_id_str, owner_id_str
+from src.f04_gift.atom_config import acct_name_str, owner_name_str
 from src.f07_deal.deal_report import (
     get_deal_voices_accts_dataframe,
     get_deal_voices_accts_plotly_fig,
@@ -22,15 +22,15 @@ def test_get_deal_voices_accts_dataframe_ReturnsCorrectObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_deal = create_example_deal2()
+    accord_deal = create_example_deal2()
 
     # WHEN
-    x_df = get_deal_voices_accts_dataframe(music_deal)
+    x_df = get_deal_voices_accts_dataframe(accord_deal)
 
     # THEN
     acctunit_colums = {
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         "credit_belief",
         "debtit_belief",
         "_memberships",
@@ -52,10 +52,10 @@ def test_get_deal_voices_accts_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_deal = create_example_deal2()
+    accord_deal = create_example_deal2()
 
     # WHEN
-    x_fig = get_deal_voices_accts_plotly_fig(music_deal)
+    x_fig = get_deal_voices_accts_plotly_fig(accord_deal)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
@@ -65,16 +65,16 @@ def test_get_deal_finals_accts_dataframe_ReturnsCorrectObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_deal = create_example_deal2()
-    music_deal.generate_all_final_buds()
+    accord_deal = create_example_deal2()
+    accord_deal.generate_all_final_buds()
 
     # WHEN
-    x_df = get_deal_finals_accts_dataframe(music_deal)
+    x_df = get_deal_finals_accts_dataframe(accord_deal)
 
     # THEN
     acctunit_colums = {
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         "credit_belief",
         "debtit_belief",
         "_memberships",
@@ -97,11 +97,11 @@ def test_get_deal_finals_accts_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_deal = create_example_deal2()
-    music_deal.generate_all_final_buds()
+    accord_deal = create_example_deal2()
+    accord_deal.generate_all_final_buds()
 
     # WHEN
-    x_fig = get_deal_finals_accts_plotly_fig(music_deal)
+    x_fig = get_deal_finals_accts_plotly_fig(accord_deal)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
@@ -111,16 +111,16 @@ def test_get_deal_voices_agenda_dataframe_ReturnsCorrectObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_deal = create_example_deal3()
+    accord_deal = create_example_deal3()
 
     # WHEN
-    x_df = get_deal_voices_agenda_dataframe(music_deal)
+    x_df = get_deal_voices_agenda_dataframe(accord_deal)
 
     # THEN
     agenda_colums = {
-        owner_id_str(),
+        owner_name_str(),
         "fund_ratio",
-        "_label",
+        "_lx",
         "_parent_road",
         "begin",
         "close",
@@ -140,10 +140,10 @@ def test_get_deal_voices_agenda_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_deal = create_example_deal3()
+    accord_deal = create_example_deal3()
 
     # WHEN
-    x_fig = get_deal_voices_agenda_plotly_fig(music_deal)
+    x_fig = get_deal_voices_agenda_plotly_fig(accord_deal)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
@@ -151,17 +151,17 @@ def test_get_deal_voices_agenda_plotly_fig_DisplaysCorrectInfo(
 
 def test_get_deal_finals_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    music_deal = create_example_deal4()
-    music_deal.generate_all_final_buds()
+    accord_deal = create_example_deal4()
+    accord_deal.generate_all_final_buds()
 
     # WHEN
-    x_df = get_deal_finals_agenda_dataframe(music_deal)
+    x_df = get_deal_finals_agenda_dataframe(accord_deal)
 
     # THEN
     agenda_colums = {
-        owner_id_str(),
+        owner_name_str(),
         "fund_ratio",
-        "_label",
+        "_lx",
         "_parent_road",
         "begin",
         "close",
@@ -181,11 +181,11 @@ def test_get_deal_finals_agenda_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    music_deal = create_example_deal4()
-    music_deal.generate_all_final_buds()
+    accord_deal = create_example_deal4()
+    accord_deal.generate_all_final_buds()
 
     # WHEN
-    x_fig = get_deal_finals_agenda_plotly_fig(music_deal)
+    x_fig = get_deal_finals_agenda_plotly_fig(accord_deal)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)

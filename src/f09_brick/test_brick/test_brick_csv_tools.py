@@ -1,17 +1,17 @@
 from src.f00_instrument.dict_toolbox import extract_csv_headers
-from src.f04_gift.atom_config import acct_id_str, deal_id_str, owner_id_str
+from src.f04_gift.atom_config import acct_name_str, deal_id_str, owner_name_str
 from src.f09_brick.brick import (
-    get_csv_deal_id_owner_id_metrics,
-    deal_id_owner_id_nested_csv_dict,
+    get_csv_deal_id_owner_name_metrics,
+    deal_id_owner_name_nested_csv_dict,
 )
 
 
 def test_extract_csv_headers_ReturnsObj():
     # ESTABLISH
-    x_csv = """deal_id,owner_id,acct_id,credit_belief,debtit_belief
-music56,Sue,Bob,13,29
-music56,Sue,Sue,11,23
-music56,Sue,Yao,41,37
+    x_csv = """deal_id,owner_name,acct_name,credit_belief,debtit_belief
+accord56,Sue,Bob,13,29
+accord56,Sue,Sue,11,23
+accord56,Sue,Yao,41,37
 """
 
     # WHEN
@@ -22,8 +22,8 @@ music56,Sue,Yao,41,37
     debtit_belief_str = "debtit_belief"
     assert x_headers == [
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         credit_belief_str,
         debtit_belief_str,
     ]
@@ -31,10 +31,10 @@ music56,Sue,Yao,41,37
 
 def test_extract_csv_headers_RemovesHeaders_csv():
     # ESTABLISH
-    x_csv = """deal_id,owner_id,acct_id,credit_belief,debtit_belief
-music56,Sue,Bob,13,29
-music56,Sue,Sue,11,23
-music56,Sue,Yao,41,37
+    x_csv = """deal_id,owner_name,acct_name,credit_belief,debtit_belief
+accord56,Sue,Bob,13,29
+accord56,Sue,Sue,11,23
+accord56,Sue,Yao,41,37
 """
 
     # WHEN
@@ -42,65 +42,65 @@ music56,Sue,Yao,41,37
 
     # THEN
     print(f"{new_csv=}")
-    headerless_csv = """music56,Sue,Bob,13,29
-music56,Sue,Sue,11,23
-music56,Sue,Yao,41,37
+    headerless_csv = """accord56,Sue,Bob,13,29
+accord56,Sue,Sue,11,23
+accord56,Sue,Yao,41,37
 """
     assert new_csv == headerless_csv
 
 
-def test_get_csv_deal_id_owner_id_metrics_ReturnsObj_Scenario2():
+def test_get_csv_deal_id_owner_name_metrics_ReturnsObj_Scenario2():
     # ESTABLISH
-    music_deal_id = "music56"
+    accord_deal_id = "accord56"
     sue_str = "Sue"
     bob_str = "Bob"
-    headerless_csv = f"""{music_deal_id},{sue_str},Bob,13,29
-{music_deal_id},{sue_str},Sue,11,23
-{music_deal_id},{sue_str},Yao,41,37
-{music_deal_id},{sue_str},Zia,41,37
-{music_deal_id},{bob_str},Yao,41,37
+    headerless_csv = f"""{accord_deal_id},{sue_str},Bob,13,29
+{accord_deal_id},{sue_str},Sue,11,23
+{accord_deal_id},{sue_str},Yao,41,37
+{accord_deal_id},{sue_str},Zia,41,37
+{accord_deal_id},{bob_str},Yao,41,37
 """
 
     # WHEN
-    u_dict = get_csv_deal_id_owner_id_metrics(headerless_csv=headerless_csv)
+    u_dict = get_csv_deal_id_owner_name_metrics(headerless_csv=headerless_csv)
 
     # THEN
     # print(f"{u_dict=}")
 
-    assert u_dict != {music_deal_id: {sue_str: 1}}
-    assert u_dict == {music_deal_id: {sue_str: 4, bob_str: 1}}
+    assert u_dict != {accord_deal_id: {sue_str: 1}}
+    assert u_dict == {accord_deal_id: {sue_str: 4, bob_str: 1}}
 
 
-def test_deal_id_owner_id_nested_csv_dict_ReturnsObj_Scenario0():
+def test_deal_id_owner_name_nested_csv_dict_ReturnsObj_Scenario0():
     # ESTABLISH
-    music_deal_id = "music56"
+    accord_deal_id = "accord56"
     sue_str = "Sue"
     bob_str = "Bob"
-    headerless_csv = f"""face_x,event_x,{music_deal_id},{sue_str},Bob,13,29
-,,{music_deal_id},{sue_str},Sue,11,23
-,,{music_deal_id},{sue_str},Yao,41,37
-,,{music_deal_id},{sue_str},Zia,41,37
-,,{music_deal_id},{bob_str},Yao,41,37
+    headerless_csv = f"""face_x,event_x,{accord_deal_id},{sue_str},Bob,13,29
+,,{accord_deal_id},{sue_str},Sue,11,23
+,,{accord_deal_id},{sue_str},Yao,41,37
+,,{accord_deal_id},{sue_str},Zia,41,37
+,,{accord_deal_id},{bob_str},Yao,41,37
 """
 
     # WHEN
-    u_dict = deal_id_owner_id_nested_csv_dict(headerless_csv=headerless_csv)
+    u_dict = deal_id_owner_name_nested_csv_dict(headerless_csv=headerless_csv)
 
     # THEN
     # print(f"{u_dict=}")
-    static_sue_csv = f"""face_x,event_x,{music_deal_id},{sue_str},Bob,13,29
-,,{music_deal_id},{sue_str},Sue,11,23
-,,{music_deal_id},{sue_str},Yao,41,37
-,,{music_deal_id},{sue_str},Zia,41,37
+    static_sue_csv = f"""face_x,event_x,{accord_deal_id},{sue_str},Bob,13,29
+,,{accord_deal_id},{sue_str},Sue,11,23
+,,{accord_deal_id},{sue_str},Yao,41,37
+,,{accord_deal_id},{sue_str},Zia,41,37
 """
-    static_bob_csv = f""",,{music_deal_id},{bob_str},Yao,41,37
+    static_bob_csv = f""",,{accord_deal_id},{bob_str},Yao,41,37
 """
-    generated_owner_id_dict = u_dict.get(music_deal_id)
-    assert generated_owner_id_dict
-    assert list(generated_owner_id_dict.keys()) == [sue_str, bob_str]
-    generated_bob_csv = generated_owner_id_dict.get(bob_str)
+    generated_owner_name_dict = u_dict.get(accord_deal_id)
+    assert generated_owner_name_dict
+    assert list(generated_owner_name_dict.keys()) == [sue_str, bob_str]
+    generated_bob_csv = generated_owner_name_dict.get(bob_str)
     assert generated_bob_csv == static_bob_csv
-    generated_sue_csv = generated_owner_id_dict.get(sue_str)
+    generated_sue_csv = generated_owner_name_dict.get(sue_str)
     assert generated_sue_csv == static_sue_csv
-    owner_id_csv_dict = {sue_str: static_sue_csv, bob_str: static_bob_csv}
-    assert u_dict == {music_deal_id: owner_id_csv_dict}
+    owner_name_csv_dict = {sue_str: static_sue_csv, bob_str: static_bob_csv}
+    assert u_dict == {accord_deal_id: owner_name_csv_dict}

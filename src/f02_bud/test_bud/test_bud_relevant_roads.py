@@ -54,7 +54,7 @@ def test_BudUnit_get_relevant_roads_SimpleReturnsOnlyAncestors():
 
 def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
     # ESTABLISH
-    sue_bud = budunit_shop(_owner_id="Sue")
+    sue_bud = budunit_shop(_owner_name="Sue")
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
     floor_str = "mop floor"
@@ -139,7 +139,7 @@ def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
 def test_BudUnit_get_relevant_roads_ReturnSimple():
     # ESTABLISH
     yao_str = "Yao"
-    yao_bud = budunit_shop(_owner_id=yao_str)
+    yao_bud = budunit_shop(_owner_name=yao_str)
     min_range_x_str = "a_minute_range"
     min_range_x_road = yao_bud.make_l1_road(min_range_x_str)
     min_range_item = itemunit_shop(min_range_x_str, begin=0, close=2880)

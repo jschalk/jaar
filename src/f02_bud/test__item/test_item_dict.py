@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_deal_id_ideaunit as root_label, create_road
+from src.f01_road.road import get_default_deal_id_ideaunit as root_lx, create_road
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.group import awardlink_shop
 from src.f02_bud.reason_item import (
@@ -50,13 +50,13 @@ def test_get_obj_from_item_dict_ReturnsCorrect_HealerLink():
     # WHEN
     sue_str = "Sue"
     zia_str = "Zia"
-    healerlink_dict = {"healerlink_healer_ids": [sue_str, zia_str]}
+    healerlink_dict = {"healerlink_healer_names": [sue_str, zia_str]}
     itemunit_dict = {healerlink_key: healerlink_dict}
 
     # THEN
     static_healerlink = healerlink_shop()
-    static_healerlink.set_healer_id(x_healer_id=sue_str)
-    static_healerlink.set_healer_id(x_healer_id=zia_str)
+    static_healerlink.set_healer_name(x_healer_name=sue_str)
+    static_healerlink.set_healer_name(x_healer_name=zia_str)
     assert get_obj_from_item_dict(itemunit_dict, healerlink_key) is not None
     assert get_obj_from_item_dict(itemunit_dict, healerlink_key) == static_healerlink
 
@@ -64,11 +64,11 @@ def test_get_obj_from_item_dict_ReturnsCorrect_HealerLink():
 def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     # ESTABLISH
     week_str = "weekdays"
-    week_road = create_road(root_label(), week_str)
+    week_road = create_road(root_lx(), week_str)
     wed_str = "Wednesday"
     wed_road = create_road(week_road, wed_str)
     states_str = "nation-state"
-    states_road = create_road(root_label(), states_str)
+    states_road = create_road(root_lx(), states_str)
     usa_str = "USA"
     usa_road = create_road(states_road, usa_str)
 
@@ -127,14 +127,14 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     sue_teamunit = teamunit_shop({sue_str: -1, yao_str: -1})
     yao_healerlink = healerlink_shop({yao_str})
     casa_str = "casa"
-    casa_road = create_road(root_label(), casa_str)
+    casa_road = create_road(root_lx(), casa_str)
     x_problem_bool = True
     casa_item = itemunit_shop(
         _parent_road=casa_road,
         _kids=None,
         awardlinks=biker_and_flyer_awardlinks,
         mass=30,
-        _label=casa_str,
+        _lx=casa_str,
         _level=1,
         reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
@@ -146,8 +146,8 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     )
     factunit_x = factunit_shop(base=week_road, pick=week_road, fopen=5, fnigh=59)
     casa_item.set_factunit(factunit=factunit_x)
-    casa_item._originunit.set_originhold(acct_id="Ray", importance=None)
-    casa_item._originunit.set_originhold(acct_id="Lei", importance=4)
+    casa_item._originunit.set_originhold(acct_name="Ray", importance=None)
+    casa_item._originunit.set_originhold(acct_name="Lei", importance=4)
     x_begin = 11
     x_close = 12
     x_addin = 13
@@ -181,7 +181,7 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["healerlink"] == yao_healerlink.get_dict()
     assert casa_dict["_originunit"] == casa_item.get_originunit_dict()
     assert casa_dict["mass"] == casa_item.mass
-    assert casa_dict["_label"] == casa_item._label
+    assert casa_dict["_lx"] == casa_item._lx
     assert casa_dict["_uid"] == casa_item._uid
     assert casa_dict["begin"] == casa_item.begin
     assert casa_dict["close"] == casa_item.close
@@ -218,7 +218,7 @@ def test_ItemUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     ignore_str = "ignore"
 
     a_str = "a"
-    a_road = create_road(root_label(), a_str)
+    a_road = create_road(root_lx(), a_str)
     casa_item.set_factunit(factunit_shop(a_road, a_road))
 
     yao_str = "Yao"

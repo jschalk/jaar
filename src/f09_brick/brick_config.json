@@ -1,65 +1,65 @@
 {
-  "bridge_acct_id": {
+  "map_name": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 0,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
-      "otx_acct_id": {}
+      "event_int": {},
+      "face_name": {},
+      "otx_name": {}
     },
     "jvalues": {
-      "inx_acct_id": {},
-      "inx_wall": {},
-      "otx_wall": {},
+      "inx_name": {},
+      "inx_bridge": {},
+      "otx_bridge": {},
       "unknown_word": {}
     }
   },
-  "bridge_group_id": {
+  "map_group_id": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 1,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "otx_group_id": {}
     },
     "jvalues": {
       "inx_group_id": {},
-      "inx_wall": {},
-      "otx_wall": {},
+      "inx_bridge": {},
+      "otx_bridge": {},
       "unknown_word": {}
     }
   },
-  "bridge_idea": {
+  "map_idea": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 2,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "otx_idea": {}
     },
     "jvalues": {
       "inx_idea": {},
-      "inx_wall": {},
-      "otx_wall": {},
+      "inx_bridge": {},
+      "otx_bridge": {},
       "unknown_word": {}
     }
   },
-  "bridge_road": {
+  "map_road": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 3,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "otx_road": {}
     },
     "jvalues": {
       "inx_road": {},
-      "inx_wall": {},
-      "otx_wall": {},
+      "inx_bridge": {},
+      "otx_bridge": {},
       "unknown_word": {}
     }
   },
@@ -68,12 +68,12 @@
     "brick_type": "budunit",
     "build_order": 9,
     "jkeys": {
-      "acct_id": {},
-      "event_id": {},
-      "face_id": {},
+      "acct_name": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
       "group_id": {},
-      "time_id": {}
+      "time_int": {}
     },
     "jvalues": {
       "credit_vote": {},
@@ -85,11 +85,11 @@
     "brick_type": "budunit",
     "build_order": 10,
     "jkeys": {
-      "acct_id": {},
-      "event_id": {},
-      "face_id": {},
+      "acct_name": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
-      "time_id": {}
+      "time_int": {}
     },
     "jvalues": {
       "credit_belief": {},
@@ -102,11 +102,11 @@
     "build_order": 11,
     "jkeys": {
       "awardee_id": {},
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
       "road": {},
-      "time_id": {}
+      "time_int": {}
     },
     "jvalues": {
       "give_force": {},
@@ -119,11 +119,11 @@
     "build_order": 12,
     "jkeys": {
       "base": {},
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
       "road": {},
-      "time_id": {}
+      "time_int": {}
     },
     "jvalues": {
       "fnigh": {},
@@ -136,12 +136,12 @@
     "brick_type": "budunit",
     "build_order": 15,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
-      "healer_id": {},
+      "healer_name": {},
       "road": {},
-      "time_id": {}
+      "time_int": {}
     },
     "jvalues": {}
   },
@@ -151,12 +151,12 @@
     "build_order": 16,
     "jkeys": {
       "base": {},
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
       "need": {},
       "road": {},
-      "time_id": {}
+      "time_int": {}
     },
     "jvalues": {
       "divisor": {},
@@ -170,11 +170,11 @@
     "build_order": 17,
     "jkeys": {
       "base": {},
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
       "road": {},
-      "time_id": {}
+      "time_int": {}
     },
     "jvalues": {
       "base_item_active_requisite": {}
@@ -185,12 +185,12 @@
     "brick_type": "budunit",
     "build_order": 14,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
       "road": {},
       "team_id": {},
-      "time_id": {}
+      "time_int": {}
     },
     "jvalues": {}
   },
@@ -199,12 +199,12 @@
     "brick_type": "budunit",
     "build_order": 18,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
-      "label": {},
+      "lx": {},
       "parent_road": {},
-      "time_id": {}
+      "time_int": {}
     },
     "jvalues": {
       "addin": {},
@@ -225,10 +225,10 @@
     "brick_type": "budunit",
     "build_order": 19,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
-      "time_id": {}
+      "time_int": {}
     },
     "jvalues": {
       "credor_respect": {},
@@ -237,7 +237,7 @@
       "fund_pool": {},
       "max_tree_traverse": {},
       "penny": {},
-      "purview_time_id": {},
+      "purview_time_int": {},
       "respect_bit": {},
       "tally": {}
     }
@@ -247,12 +247,12 @@
     "brick_type": "dealunit",
     "build_order": 21,
     "jkeys": {
-      "acct_id": {},
-      "event_id": {},
-      "face_id": {},
+      "acct_name": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
-      "owner_id": {},
-      "time_id": {}
+      "owner_name": {},
+      "time_int": {}
     },
     "jvalues": {
       "amount": {}
@@ -263,12 +263,12 @@
     "brick_type": "dealunit",
     "build_order": 20,
     "jkeys": {
-      "acct_id": {},
-      "event_id": {},
-      "face_id": {},
+      "acct_name": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
-      "owner_id": {},
-      "time_id": {}
+      "owner_name": {},
+      "time_int": {}
     },
     "jvalues": {
       "quota": {}
@@ -279,11 +279,11 @@
     "brick_type": "dealunit",
     "build_order": 6,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
-      "hour_label": {},
-      "time_id": {}
+      "hour_idea": {},
+      "time_int": {}
     },
     "jvalues": {
       "cumlative_minute": {}
@@ -294,11 +294,11 @@
     "brick_type": "dealunit",
     "build_order": 7,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
-      "month_label": {},
-      "time_id": {}
+      "month_idea": {},
+      "time_int": {}
     },
     "jvalues": {
       "cumlative_day": {}
@@ -309,11 +309,11 @@
     "brick_type": "dealunit",
     "build_order": 8,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
-      "time_id": {},
-      "weekday_label": {}
+      "time_int": {},
+      "weekday_idea": {}
     },
     "jvalues": {
       "weekday_order": {}
@@ -324,10 +324,10 @@
     "brick_type": "dealunit",
     "build_order": 5,
     "jkeys": {
-      "event_id": {},
-      "face_id": {},
+      "event_int": {},
+      "face_name": {},
       "deal_id": {},
-      "time_id": {}
+      "time_int": {}
     },
     "jvalues": {
       "c400_number": {},
@@ -336,8 +336,8 @@
       "monthday_distortion": {},
       "penny": {},
       "respect_bit": {},
-      "timeline_label": {},
-      "wall": {},
+      "timeline_idea": {},
+      "bridge": {},
       "yr1_jan1_offset": {}
     }
   }

@@ -16,13 +16,13 @@ from src.f01_road.road import (
     RoadUnit,
     IdeaUnit,
     is_sub_road,
-    get_default_deal_id_ideaunit as root_label,
+    get_default_deal_id_ideaunit as root_lx,
     all_roadunits_between,
     create_road as road_create_road,
-    default_wall_if_None,
-    replace_wall,
+    default_bridge_if_None,
+    replace_bridge,
     DealID,
-    AcctID,
+    AcctName,
     GroupID,
     RoadUnit,
     rebuild_road,
@@ -74,7 +74,7 @@ class ItemGetDescendantsException(Exception):
     pass
 
 
-class Item_root_LabelNotEmptyException(Exception):
+class Item_root_IdeaNotEmptyException(Exception):
     pass
 
 
@@ -198,7 +198,7 @@ def itemattrholder_shop(
 
 @dataclass
 class ItemUnit:
-    _label: IdeaUnit = None
+    _lx: IdeaUnit = None
     mass: int = None
     _parent_road: RoadUnit = None
     _root: bool = None
@@ -221,7 +221,7 @@ class ItemUnit:
     pledge: bool = None
     _originunit: OriginUnit = None
     problem_bool: bool = None
-    _wall: str = None
+    _bridge: str = None
     _is_expanded: bool = None
     # Calculated fields
     _active: bool = None
@@ -364,17 +364,17 @@ class ItemUnit:
             both_in_range = x_gogo <= x_item._gogo_calc and x_stop >= x_item._stop_calc
 
             if x_gogo_in_range or x_stop_in_range or both_in_range:
-                x_dict[x_item._label] = x_item
+                x_dict[x_item._lx] = x_item
         return x_dict
 
     def get_obj_key(self) -> IdeaUnit:
-        return self._label
+        return self._lx
 
     def get_road(self) -> RoadUnit:
         if self._parent_road in (None, ""):
-            return road_create_road(self._label, wall=self._wall)
+            return road_create_road(self._lx, bridge=self._bridge)
         else:
-            return road_create_road(self._parent_road, self._label, wall=self._wall)
+            return road_create_road(self._parent_road, self._lx, bridge=self._bridge)
 
     def clear_descendant_pledge_count(self):
         self._descendant_pledge_count = None
@@ -477,56 +477,56 @@ class ItemUnit:
     def clear_awardlines(self):
         self._awardlines = {}
 
-    def set_label(self, _label: str):
+    def set_lx(self, _lx: str):
         if (
             self._root
-            and _label is not None
-            and _label != self._bud_deal_id
+            and _lx is not None
+            and _lx != self._bud_deal_id
             and self._bud_deal_id is not None
         ):
-            raise Item_root_LabelNotEmptyException(
+            raise Item_root_IdeaNotEmptyException(
                 f"Cannot set itemroot to string different than '{self._bud_deal_id}'"
             )
         elif self._root and self._bud_deal_id is None:
-            self._label = root_label()
-        # elif _label is not None:
+            self._lx = root_lx()
+        # elif _lx is not None:
         else:
-            self._label = _label
+            self._lx = _lx
 
-    def set_wall(self, new_wall: str):
-        old_wall = deepcopy(self._wall)
-        if old_wall is None:
-            old_wall = default_wall_if_None()
-        self._wall = default_wall_if_None(new_wall)
-        if old_wall != self._wall:
-            self._find_replace_wall(old_wall)
+    def set_bridge(self, new_bridge: str):
+        old_bridge = deepcopy(self._bridge)
+        if old_bridge is None:
+            old_bridge = default_bridge_if_None()
+        self._bridge = default_bridge_if_None(new_bridge)
+        if old_bridge != self._bridge:
+            self._find_replace_bridge(old_bridge)
 
-    def _find_replace_wall(self, old_wall):
-        self._parent_road = replace_wall(self._parent_road, old_wall, self._wall)
+    def _find_replace_bridge(self, old_bridge):
+        self._parent_road = replace_bridge(self._parent_road, old_bridge, self._bridge)
 
         new_reasonunits = {}
         for reasonunit_road, reasonunit_obj in self.reasonunits.items():
-            new_reasonunit_road = replace_wall(
+            new_reasonunit_road = replace_bridge(
                 road=reasonunit_road,
-                old_wall=old_wall,
-                new_wall=self._wall,
+                old_bridge=old_bridge,
+                new_bridge=self._bridge,
             )
-            reasonunit_obj.set_wall(self._wall)
+            reasonunit_obj.set_bridge(self._bridge)
             new_reasonunits[new_reasonunit_road] = reasonunit_obj
         self.reasonunits = new_reasonunits
 
         new_factunits = {}
         for factunit_road, factunit_obj in self.factunits.items():
-            new_base_road = replace_wall(
+            new_base_road = replace_bridge(
                 road=factunit_road,
-                old_wall=old_wall,
-                new_wall=self._wall,
+                old_bridge=old_bridge,
+                new_bridge=self._bridge,
             )
             factunit_obj.base = new_base_road
-            new_pick_road = replace_wall(
+            new_pick_road = replace_bridge(
                 road=factunit_obj.pick,
-                old_wall=old_wall,
-                new_wall=self._wall,
+                old_bridge=old_bridge,
+                new_bridge=self._bridge,
             )
             factunit_obj.set_attr(pick=new_pick_road)
             new_factunits[new_base_road] = factunit_obj
@@ -672,7 +672,7 @@ class ItemUnit:
         try:
             x_reasonunit = self.reasonunits[base]
         except Exception:
-            x_reasonunit = reasonunit_shop(base, wall=self._wall)
+            x_reasonunit = reasonunit_shop(base, bridge=self._bridge)
             self.reasonunits[base] = x_reasonunit
         return x_reasonunit
 
@@ -698,22 +698,22 @@ class ItemUnit:
         reason_unit.del_premise(premise=premise)
 
     def add_kid(self, item_kid):
-        self._kids[item_kid._label] = item_kid
+        self._kids[item_kid._lx] = item_kid
         self._kids = dict(sorted(self._kids.items()))
 
-    def get_kid(self, item_kid_label: IdeaUnit, if_missing_create=False):
+    def get_kid(self, item_kid_lx: IdeaUnit, if_missing_create=False):
         if if_missing_create is False:
-            return self._kids.get(item_kid_label)
+            return self._kids.get(item_kid_lx)
         try:
-            return self._kids[item_kid_label]
+            return self._kids[item_kid_lx]
         except Exception:
             KeyError
-            self.add_kid(itemunit_shop(item_kid_label))
-            return_item = self._kids.get(item_kid_label)
+            self.add_kid(itemunit_shop(item_kid_lx))
+            return_item = self._kids.get(item_kid_lx)
         return return_item
 
-    def del_kid(self, item_kid_label: IdeaUnit):
-        self._kids.pop(item_kid_label)
+    def del_kid(self, item_kid_lx: IdeaUnit):
+        self._kids.pop(item_kid_lx)
 
     def clear_kids(self):
         self._kids = {}
@@ -737,7 +737,7 @@ class ItemUnit:
         return self.awardlinks.get(x_awardee_id) != None
 
     def set_reasonunit(self, reason: ReasonUnit):
-        reason.wall = self._wall
+        reason.bridge = self._bridge
         self.reasonunits[reason.base] = reason
 
     def reasonunit_exists(self, x_base: RoadUnit) -> bool:
@@ -755,10 +755,10 @@ class ItemUnit:
         self,
         tree_traverse_count: int,
         bud_groupunits: dict[GroupID, GroupUnit] = None,
-        bud_owner_id: AcctID = None,
+        bud_owner_name: AcctName = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active_bool(bud_groupunits, bud_owner_id)
+        self._active = self._create_active_bool(bud_groupunits, bud_owner_name)
         self._set_item_task()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
@@ -774,18 +774,18 @@ class ItemUnit:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
     def _create_active_bool(
-        self, bud_groupunits: dict[GroupID, GroupUnit], bud_owner_id: AcctID
+        self, bud_groupunits: dict[GroupID, GroupUnit], bud_owner_name: AcctName
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
         if (
             active_bool
             and bud_groupunits != {}
-            and bud_owner_id is not None
+            and bud_owner_name is not None
             and self._teamheir._teamlinks != {}
         ):
-            self._teamheir.set_owner_id_team(bud_groupunits, bud_owner_id)
-            if self._teamheir._owner_id_team is False:
+            self._teamheir.set_owner_name_team(bud_groupunits, bud_owner_name)
+            if self._teamheir._owner_name_team is False:
                 active_bool = False
         return active_bool
 
@@ -877,8 +877,8 @@ class ItemUnit:
     def get_dict(self) -> dict[str, str]:
         x_dict = {"mass": self.mass}
 
-        if self._label is not None:
-            x_dict["_label"] = self._label
+        if self._lx is not None:
+            x_dict["_lx"] = self._lx
         if self._uid is not None:
             x_dict["_uid"] = self._uid
         if self._kids not in [{}, None]:
@@ -953,7 +953,7 @@ class ItemUnit:
 
 
 def itemunit_shop(
-    _label: IdeaUnit = None,
+    _lx: IdeaUnit = None,
     _uid: int = None,  # Calculated field?
     _parent_road: RoadUnit = None,
     _kids: dict = None,
@@ -994,14 +994,14 @@ def itemunit_shop(
     _all_acct_debt: bool = None,
     _is_expanded: bool = True,
     _active_hx: dict[int, bool] = None,
-    _wall: str = None,
+    _bridge: str = None,
     _healerlink_ratio: float = None,
 ) -> ItemUnit:
-    _bud_deal_id = root_label() if _bud_deal_id is None else _bud_deal_id
+    _bud_deal_id = root_lx() if _bud_deal_id is None else _bud_deal_id
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_itemkid = ItemUnit(
-        _label=None,
+        _lx=None,
         _uid=_uid,
         _parent_road=_parent_road,
         _kids=get_empty_dict_if_None(_kids),
@@ -1042,13 +1042,13 @@ def itemunit_shop(
         _all_acct_debt=_all_acct_debt,
         _is_expanded=_is_expanded,
         _active_hx=get_empty_dict_if_None(_active_hx),
-        _wall=default_wall_if_None(_wall),
+        _bridge=default_bridge_if_None(_bridge),
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_itemkid._root:
-        x_itemkid.set_label(_label=_bud_deal_id)
+        x_itemkid.set_lx(_lx=_bud_deal_id)
     else:
-        x_itemkid.set_label(_label=_label)
+        x_itemkid.set_lx(_lx=_lx)
     x_itemkid.set_teamunit_empty_if_None()
     x_itemkid.set_originunit_empty_if_None()
     return x_itemkid

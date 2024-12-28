@@ -27,7 +27,7 @@ def test_bud_acctunit_get_obj_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_bud = budunit_shop("Sue")
-    jkeys = {"acct_id": yao_str}
+    jkeys = {"acct_name": yao_str}
     sue_bud.add_acctunit(yao_str)
 
     # WHEN
@@ -42,7 +42,7 @@ def test_bud_acct_membership_get_obj_ReturnsObj():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    jkeys = {"acct_id": yao_str, "group_id": swim_str}
+    jkeys = {"acct_name": yao_str, "group_id": swim_str}
     sue_bud.add_acctunit(yao_str)
     sue_bud.get_acct(yao_str).add_membership(swim_str)
 
@@ -151,7 +151,7 @@ def test_bud_get_obj_ReturnsObj_BudUnit():
     # ESTABLISH
     yao_str = "Yao"
     sue_bud = budunit_shop("Sue")
-    jkeys = {"acct_id": yao_str}
+    jkeys = {"acct_name": yao_str}
     sue_bud.add_acctunit(yao_str)
 
     # WHEN
@@ -165,7 +165,7 @@ def test_bud_get_obj_ReturnsObj_bud_acctunit_get_obj():
     # ESTABLISH
     yao_str = "Yao"
     sue_bud = budunit_shop("Sue")
-    jkeys = {"acct_id": yao_str}
+    jkeys = {"acct_name": yao_str}
     sue_bud.add_acctunit(yao_str)
 
     # WHEN
@@ -180,7 +180,7 @@ def test_bud_get_obj_ReturnsObj_bud_acct_membership_get_obj():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    jkeys = {"acct_id": yao_str, "group_id": swim_str}
+    jkeys = {"acct_name": yao_str, "group_id": swim_str}
     sue_bud.add_acctunit(yao_str)
     sue_bud.get_acct(yao_str).add_membership(swim_str)
 

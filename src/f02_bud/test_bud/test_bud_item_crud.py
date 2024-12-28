@@ -1,4 +1,4 @@
-from src.f01_road.road import default_wall_if_None
+from src.f01_road.road import default_bridge_if_None
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.examples.example_buds import get_budunit_with_4_levels
 from src.f02_bud.group import awardlink_shop
@@ -45,7 +45,7 @@ def test_BudUnit_set_item_RaisesErrorWhen_parent_road_ItemDoesNotExist():
     )
 
 
-def test_BudUnit_set_item_RaisesErrorWhen_label_IsNotIdea():
+def test_BudUnit_set_item_RaisesErrorWhen_lx_IsNotIdea():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     swim_road = zia_bud.make_l1_road("swimming")
@@ -108,7 +108,7 @@ def test_BudUnit_add_item_SetsAttr_Scenario0():
     # ESTABLISH
     bob_str = "Bob"
     slash_str = "/"
-    bob_budunit = budunit_shop(bob_str, _wall=slash_str)
+    bob_budunit = budunit_shop(bob_str, _bridge=slash_str)
     casa_road = bob_budunit.make_l1_road("casa")
     assert not bob_budunit.item_exists(casa_road)
 
@@ -118,7 +118,7 @@ def test_BudUnit_add_item_SetsAttr_Scenario0():
     # THEN
     assert bob_budunit.item_exists(casa_road)
     casa_itemunit = bob_budunit.get_item_obj(casa_road)
-    assert casa_itemunit._wall == bob_budunit._wall
+    assert casa_itemunit._bridge == bob_budunit._bridge
     assert not casa_itemunit.pledge
 
 
@@ -150,15 +150,15 @@ def test_BudUnit_add_item_ReturnsObj():
     casa_itemunit = bob_budunit.add_item(casa_road, mass=casa_mass)
 
     # THEN
-    assert casa_itemunit._label == "casa"
+    assert casa_itemunit._lx == "casa"
     assert casa_itemunit.mass == casa_mass
 
 
-def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_wall():
+def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_bridge():
     # ESTABLISH
     slash_str = "/"
-    assert slash_str != default_wall_if_None()
-    bob_bud = budunit_shop("Bob", _wall=slash_str)
+    assert slash_str != default_bridge_if_None()
+    bob_bud = budunit_shop("Bob", _bridge=slash_str)
     casa_str = "casa"
     week_str = "week"
     wed_str = "Wednesday"
@@ -171,8 +171,8 @@ def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_wall():
     print(f"{bob_bud._itemroot._kids.keys()=}")
     assert len(bob_bud._itemroot._kids) == 2
     wed_item = bob_bud.get_item_obj(wed_road)
-    assert wed_item._wall == slash_str
-    assert wed_item._wall == bob_bud._wall
+    assert wed_item._bridge == slash_str
+    assert wed_item._bridge == bob_bud._bridge
 
     # WHEN
     bob_bud.edit_item_attr(casa_road, reason_base=week_road, reason_premise=wed_road)
@@ -454,7 +454,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     assert sue_bud._itemroot._kids[casa_str].problem_bool == x_problem_bool
 
 
-def test_BudUnit_edit_item_attr_RaisesErrorWhen_healerlink_healer_ids_DoNotExist():
+def test_BudUnit_edit_item_attr_RaisesErrorWhen_healerlink_healer_names_DoNotExist():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     casa_str = "casa"
@@ -492,7 +492,7 @@ def test_BudUnit_set_item_MustReorderKidsDictToBeAlphabetical():
     item_list = list(bob_bud._itemroot._kids.values())
 
     # THEN
-    assert item_list[0]._label == casa_str
+    assert item_list[0]._lx == casa_str
 
 
 def test_BudUnit_set_item_adoptee_RaisesErrorIfAdopteeItemDoesNotHaveCorrectParent():
@@ -689,7 +689,7 @@ def test_BudUnit_edit_item_attr_DeletesItemUnit_awardlinks():
 
     # THEN
     swim_item = yao_bud.get_item_obj(swim_road)
-    print(f"{swim_item._label=}")
+    print(f"{swim_item._lx=}")
     print(f"{swim_item.awardlinks=}")
     print(f"{swim_item._awardheirs=}")
 
@@ -770,7 +770,7 @@ def test_BudUnit_get_item_obj_ReturnsItem():
 
     # THEN
     assert brazil_item is not None
-    assert brazil_item._label == brazil_str
+    assert brazil_item._lx == brazil_str
 
     # WHEN
     week_str = "weekdays"
@@ -779,14 +779,14 @@ def test_BudUnit_get_item_obj_ReturnsItem():
 
     # THEN
     assert week_item is not None
-    assert week_item._label == week_str
+    assert week_item._lx == week_str
 
     # WHEN
     root_item = sue_bud.get_item_obj(road=sue_bud._deal_id)
 
     # THEN
     assert root_item is not None
-    assert root_item._label == sue_bud._deal_id
+    assert root_item._lx == sue_bud._deal_id
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"

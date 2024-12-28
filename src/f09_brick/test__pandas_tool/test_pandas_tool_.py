@@ -1,5 +1,5 @@
 from src.f00_instrument.file import open_file, create_path, get_dir_file_strs
-from src.f04_gift.atom_config import acct_id_str, group_id_str, credor_respect_str
+from src.f04_gift.atom_config import acct_name_str, group_id_str, credor_respect_str
 from src.f09_brick.examples.brick_env import brick_env_setup_cleanup, brick_deals_dir
 from src.f09_brick.examples.examples_pandas import (
     get_empty_dataframe,
@@ -151,7 +151,7 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario3_ColumnOrderCorrect(
 
 def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect():
     # ESTABLISH
-    df1 = DataFrame([["AAA", "BBB"]], columns=[group_id_str(), acct_id_str()])
+    df1 = DataFrame([["AAA", "BBB"]], columns=[group_id_str(), acct_name_str()])
 
     # WHEN
     relevant_dataframe = get_relevant_columns_dataframe(df1)
@@ -159,8 +159,8 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     # THEN
     assert relevant_dataframe is not None
     print(f"{relevant_dataframe.columns=}")
-    assert relevant_dataframe.columns.to_list()[0] == acct_id_str()
-    assert relevant_dataframe.columns.to_list() == [acct_id_str(), group_id_str()]
+    assert relevant_dataframe.columns.to_list()[0] == acct_name_str()
+    assert relevant_dataframe.columns.to_list() == [acct_name_str(), group_id_str()]
 
 
 def test_boat_staging_str_ReturnsObj():
@@ -173,7 +173,7 @@ def test_boat_staging_str_ReturnsObj():
 def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
     # ESTABLISH
     df1 = DataFrame([[]], columns=[])
-    group_by_list = [group_id_str(), acct_id_str()]
+    group_by_list = [group_id_str(), acct_name_str()]
 
     # WHEN
     group_by_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
@@ -215,7 +215,7 @@ def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario2
     df_columns = [group_id_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
     df1 = DataFrame(before_df_values, columns=df_columns)
-    group_by_list = [group_id_str(), acct_id_str()]
+    group_by_list = [group_id_str(), acct_name_str()]
 
     # WHEN
     group_by_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
@@ -238,7 +238,7 @@ def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario3
     df_columns = [group_id_str(), credor_respect_str(), "column3"]
     before_df_values = [["AA0", "BB0", "CC0"], ["AA0", "BB0", "CC0"]]
     df1 = DataFrame(before_df_values, columns=df_columns)
-    group_by_list = [group_id_str(), acct_id_str(), credor_respect_str()]
+    group_by_list = [group_id_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
     group_by_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
@@ -265,7 +265,7 @@ def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario4
         ["DD0", "EE0", "FF0"],
     ]
     df1 = DataFrame(before_df_values, columns=df_columns)
-    group_by_list = [group_id_str(), acct_id_str(), credor_respect_str()]
+    group_by_list = [group_id_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
     group_by_dataframe = get_boat_staging_grouping_with_all_values_equal_df(

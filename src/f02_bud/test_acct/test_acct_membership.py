@@ -23,7 +23,7 @@ def test_AcctUnit_set_membership_SetsAttr_memberships():
     assert run_membership.group_id == run_str
     assert run_membership.credit_vote == run_credit_vote
     assert run_membership.debtit_vote == run_debtit_vote
-    assert run_membership._acct_id == yao_str
+    assert run_membership._acct_name == yao_str
 
 
 def test_AcctUnit_set_membership_SetsMultipleAttr():
@@ -47,7 +47,7 @@ def test_AcctUnit_set_membership_SetsMultipleAttr():
     assert yao_acctunit._memberships == yao_memberships
 
 
-def test_AcctUnit_set_membership_RaisesErrorIf_group_idIsAcctIDAndNotAcctUnit_acct_id():
+def test_AcctUnit_set_membership_RaisesErrorIf_group_idIsAcctNameAndNotAcctUnit_acct_name():
     # ESTABLISH
     yao_str = "Yao"
     yao_acctunit = acctunit_shop(yao_str)
@@ -58,7 +58,7 @@ def test_AcctUnit_set_membership_RaisesErrorIf_group_idIsAcctIDAndNotAcctUnit_ac
         yao_acctunit.set_membership(bob_membership)
     assert (
         str(excinfo.value)
-        == f"AcctUnit with acct_id='{yao_str}' cannot have link to '{bob_str}'."
+        == f"AcctUnit with acct_name='{yao_str}' cannot have link to '{bob_str}'."
     )
 
 

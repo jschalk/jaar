@@ -3,16 +3,16 @@
         "cumlative_minute": {
             "otx_key": false
         },
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "deal_id": {
             "otx_key": true
         },
-        "hour_label": {
+        "hour_idea": {
             "otx_key": true
         }
     },

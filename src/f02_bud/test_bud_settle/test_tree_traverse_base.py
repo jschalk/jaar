@@ -131,7 +131,7 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
 
 def test_BudUnit_settle_bud_RootOnlyCorrectlySetsDescendantAttributes():
     # ESTABLISH
-    yao_bud = budunit_shop(_owner_id="Yao")
+    yao_bud = budunit_shop(_owner_name="Yao")
     assert yao_bud._itemroot._descendant_pledge_count is None
     assert yao_bud._itemroot._all_acct_cred is None
     assert yao_bud._itemroot._all_acct_debt is None
@@ -207,7 +207,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     vacuum_item = itemunit_shop(vacuum_str, pledge=True)
     sue_bud.set_item(vacuum_item, parent_road=casa_road)
 
-    sue_bud.add_acctunit(acct_id=sue_str)
+    sue_bud.add_acctunit(acct_name=sue_str)
     x_awardlink = awardlink_shop(awardee_id=sue_str)
 
     sue_bud._itemroot._kids[casa_str]._kids[email_str].set_awardlink(

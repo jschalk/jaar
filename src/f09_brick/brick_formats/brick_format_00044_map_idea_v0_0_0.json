@@ -1,21 +1,21 @@
 {
     "attributes": {
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "inx_idea": {
             "otx_key": false
         },
-        "inx_wall": {
+        "inx_bridge": {
             "otx_key": false
         },
         "otx_idea": {
             "otx_key": true
         },
-        "otx_wall": {
+        "otx_bridge": {
             "otx_key": false
         },
         "unknown_word": {
@@ -24,6 +24,6 @@
     },
     "brick_number": "br00044",
     "categorys": [
-        "bridge_idea"
+        "map_idea"
     ]
 }

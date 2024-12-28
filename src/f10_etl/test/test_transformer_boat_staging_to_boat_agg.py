@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str, deal_id_str
-from src.f07_deal.deal_config import cumlative_minute_str, hour_label_str
-from src.f08_pidgin.pidgin_config import event_id_str
+from src.f04_gift.atom_config import face_name_str, deal_id_str
+from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import (
     get_sheet_names,
     upsert_sheet,
@@ -32,16 +32,16 @@ def test_etl_boat_staging_to_boat_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     ocean_file_path = create_path(ocean_dir, ex_file_name)
     boat_file_path = create_path(boat_dir, "br00003.xlsx")
     brick_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        hour_label_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event_1, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event_1, music23_str, hour7am, minute_420]
-    row3 = [sue_str, event_1, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    row1 = [sue_str, event_1, accord23_str, hour6am, minute_360]
+    row2 = [sue_str, event_1, accord23_str, hour7am, minute_420]
+    row3 = [sue_str, event_1, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3], columns=brick_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", df1)
     etl_ocean_to_boat_staging(ocean_dir, boat_dir)
@@ -81,16 +81,16 @@ def test_WorldUnit_boat_staging_to_boat_agg_CreatesOtxSheets_Scenario1_GroupByOn
     ocean_file_path = create_path(ocean_dir, ex_file_name)
     boat_file_path = create_path(boat_dir, "br00003.xlsx")
     brick_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        hour_label_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event_1, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event_1, music23_str, hour7am, minute_420]
-    row3 = [sue_str, event_1, music23_str, hour7am, minute_480]
+    accord23_str = "accord23"
+    row1 = [sue_str, event_1, accord23_str, hour6am, minute_360]
+    row2 = [sue_str, event_1, accord23_str, hour7am, minute_420]
+    row3 = [sue_str, event_1, accord23_str, hour7am, minute_480]
     df1 = DataFrame([row1, row2, row3], columns=brick_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", df1)
     etl_ocean_to_boat_staging(ocean_dir, boat_dir)

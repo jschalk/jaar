@@ -1,4 +1,4 @@
-from src.f01_road.road import create_road, get_default_deal_id_ideaunit as root_label
+from src.f01_road.road import create_road, get_default_deal_id_ideaunit as root_lx
 from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.bud_tool import (
     budunit_str,
@@ -11,11 +11,11 @@ from src.f04_gift.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
-    acct_id_str,
+    acct_name_str,
     awardee_id_str,
     group_id_str,
     parent_road_str,
-    label_str,
+    lx_str,
     credit_belief_str,
     debtit_belief_str,
 )
@@ -101,7 +101,7 @@ def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acctunit_str():
     bob_str = "Bob"
     x_deltaunit = deltaunit_shop()
     bob_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
-    bob_atomunit.set_arg(acct_id_str(), bob_str)
+    bob_atomunit.set_arg(acct_name_str(), bob_str)
     assert not x_deltaunit.atomunit_exists(bob_atomunit)
 
     # WHEN
@@ -118,7 +118,7 @@ def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acct_membership_str():
     x_deltaunit = deltaunit_shop()
     bob_iowa_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
     bob_iowa_atomunit.set_arg(group_id_str(), iowa_str)
-    bob_iowa_atomunit.set_arg(acct_id_str(), bob_str)
+    bob_iowa_atomunit.set_arg(acct_name_str(), bob_str)
     assert not x_deltaunit.atomunit_exists(bob_iowa_atomunit)
 
     # WHEN
@@ -184,7 +184,7 @@ def test_DeltaUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
     cw_str = credit_belief_str()
     dw_str = debtit_belief_str()
     print(f"{bob_acctunit.get_dict()=}")
-    bob_required_dict = {acct_id_str(): bob_acctunit.get_dict().get(acct_id_str())}
+    bob_required_dict = {acct_name_str(): bob_acctunit.get_dict().get(acct_name_str())}
     bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_acctunit.get_dict().get(dw_str)
     print(f"{bob_required_dict=}")
@@ -342,16 +342,16 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj():
 
 def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
     # ESTABLISH
-    x_deal_id = root_label()
+    x_deal_id = root_lx()
     sports_str = "sports"
     sports_road = create_road(x_deal_id, sports_str)
     knee_str = "knee"
     x_category = bud_itemunit_str()
     sports_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    sports_insert_itemunit_atomunit.set_jkey(label_str(), sports_str)
+    sports_insert_itemunit_atomunit.set_jkey(lx_str(), sports_str)
     sports_insert_itemunit_atomunit.set_jkey(parent_road_str(), x_deal_id)
     knee_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    knee_insert_itemunit_atomunit.set_jkey(label_str(), knee_str)
+    knee_insert_itemunit_atomunit.set_jkey(lx_str(), knee_str)
     knee_insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(knee_insert_itemunit_atomunit)
@@ -375,7 +375,7 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
 
 def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     # ESTABLISH
-    x_deal_id = root_label()
+    x_deal_id = root_lx()
     sports_str = "sports"
     sports_road = create_road(x_deal_id, sports_str)
     knee_str = "knee"
@@ -421,7 +421,7 @@ def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scena
     category = bud_acctunit_str()
     zia_str = "Zia"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg(acct_id_str(), zia_str)
+    x_atomunit.set_arg(acct_name_str(), zia_str)
     x_atomunit.set_arg(credit_belief_str(), "70 is the number")
     sue_deltaunit.set_atomunit(x_atomunit)
     print(f"{sue_deltaunit=}")
@@ -436,7 +436,7 @@ def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scena
     # WHEN
     yao_str = "Yao"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg(acct_id_str(), yao_str)
+    x_atomunit.set_arg(acct_name_str(), yao_str)
     x_atomunit.set_arg(credit_belief_str(), 30)
     sue_deltaunit.set_atomunit(x_atomunit)
 
@@ -446,7 +446,7 @@ def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scena
     # WHEN
     bob_str = "Bob"
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_arg(acct_id_str(), bob_str)
+    x_atomunit.set_arg(acct_name_str(), bob_str)
     x_atomunit.set_arg(credit_belief_str(), "70 is the number")
     sue_deltaunit.set_atomunit(x_atomunit)
 
@@ -464,14 +464,14 @@ def test_DeltaUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStarti
     category = bud_acctunit_str()
     zia_str = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
-    zia_atomunit.set_arg(acct_id_str(), zia_str)
+    zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_deltaunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_deltaunit.set_atomunit(yao_atomunit)
 
@@ -503,14 +503,14 @@ def test_DeltaUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStarting
     category = bud_acctunit_str()
     zia_str = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
-    zia_atomunit.set_arg(acct_id_str(), zia_str)
+    zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_deltaunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_deltaunit.set_atomunit(yao_atomunit)
 
@@ -542,14 +542,14 @@ def test_DeltaUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumbe
     category = bud_acctunit_str()
     zia_str = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
-    zia_atomunit.set_arg(acct_id_str(), zia_str)
+    zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_deltaunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_deltaunit.set_atomunit(yao_atomunit)
 
@@ -581,12 +581,12 @@ def test_DeltaUnit_get_json_ReturnsCorrectObj():
     category = bud_acctunit_str()
     zia_str = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
-    zia_atomunit.set_arg(acct_id_str(), zia_str)
+    zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_deltaunit.set_atomunit(zia_atomunit)
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_deltaunit.set_atomunit(yao_atomunit)
 
@@ -606,7 +606,7 @@ def test_DeltaUnit_atomunit_exists_ReturnsCorrectObj():
     category = bud_acctunit_str()
     zia_str = "Zia"
     zia_atomunit = atomunit_shop(category, atom_insert())
-    zia_atomunit.set_arg(acct_id_str(), zia_str)
+    zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
     assert x_deltaunit.atomunit_exists(zia_atomunit) is False
 

@@ -14,13 +14,13 @@ from src.f02_bud.bud_tool import (
 )
 from src.f04_gift.atom import atom_insert, atomunit_shop, sift_atomunit
 from src.f04_gift.atom_config import (
-    acct_id_str,
+    acct_name_str,
     awardee_id_str,
     group_id_str,
     team_id_str,
-    healer_id_str,
+    healer_name_str,
     parent_road_str,
-    label_str,
+    lx_str,
     road_str,
     base_str,
 )
@@ -34,9 +34,9 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_acctunit():
     sue_bud.add_acctunit(zia_str)
 
     bob_atom = atomunit_shop(bud_acctunit_str(), atom_insert())
-    bob_atom.set_arg(acct_id_str(), bob_str)
+    bob_atom.set_arg(acct_name_str(), bob_str)
     zia_atom = atomunit_shop(bud_acctunit_str(), atom_insert())
-    zia_atom.set_arg(acct_id_str(), zia_str)
+    zia_atom.set_arg(acct_name_str(), zia_str)
 
     # WHEN
     new_bob_atomunit = sift_atomunit(sue_bud, bob_atom)
@@ -61,10 +61,10 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_acct_membership():
     print(f"{yao_acctunit._memberships.keys()=}")
 
     bob_run_atom = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    bob_run_atom.set_arg(acct_id_str(), bob_str)
+    bob_run_atom.set_arg(acct_name_str(), bob_str)
     bob_run_atom.set_arg(group_id_str(), run_str)
     yao_run_atom = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    yao_run_atom.set_arg(acct_id_str(), yao_str)
+    yao_run_atom.set_arg(acct_name_str(), yao_str)
     yao_run_atom.set_arg(group_id_str(), run_str)
 
     # WHEN
@@ -89,16 +89,16 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_itemunit():
 
     root_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     root_atom.set_arg(parent_road_str(), "")
-    root_atom.set_arg(label_str(), sue_bud._deal_id)
+    root_atom.set_arg(lx_str(), sue_bud._deal_id)
     casa_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     casa_atom.set_arg(parent_road_str(), sue_bud._deal_id)
-    casa_atom.set_arg(label_str(), casa_str)
+    casa_atom.set_arg(lx_str(), casa_str)
     clean_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     clean_atom.set_arg(parent_road_str(), casa_road)
-    clean_atom.set_arg(label_str(), clean_str)
+    clean_atom.set_arg(lx_str(), clean_str)
     sweep_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     sweep_atom.set_arg(parent_road_str(), clean_road)
-    sweep_atom.set_arg(label_str(), sweep_str)
+    sweep_atom.set_arg(lx_str(), sweep_str)
     assert not sift_atomunit(sue_bud, root_atom)
     assert sift_atomunit(sue_bud, casa_atom)
     assert sift_atomunit(sue_bud, clean_atom)
@@ -277,24 +277,24 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_item_healerlink():
 
     casa_swim_atom = atomunit_shop(bud_item_healerlink_str(), atom_insert())
     casa_swim_atom.set_arg(road_str(), casa_road)
-    casa_swim_atom.set_arg(healer_id_str(), swim_str)
+    casa_swim_atom.set_arg(healer_name_str(), swim_str)
     clean_swim_atom = atomunit_shop(bud_item_healerlink_str(), atom_insert())
     clean_swim_atom.set_arg(road_str(), clean_road)
-    clean_swim_atom.set_arg(healer_id_str(), swim_str)
+    clean_swim_atom.set_arg(healer_name_str(), swim_str)
     sue_bud.add_item(casa_road)
     sue_bud.add_item(clean_road)
     assert sift_atomunit(sue_bud, casa_swim_atom)
     assert sift_atomunit(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_item_obj(casa_road).healerlink.set_healer_id(swim_str)
+    sue_bud.get_item_obj(casa_road).healerlink.set_healer_name(swim_str)
 
     # THEN
     assert not sift_atomunit(sue_bud, casa_swim_atom)
     assert sift_atomunit(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_item_obj(clean_road).healerlink.set_healer_id(swim_str)
+    sue_bud.get_item_obj(clean_road).healerlink.set_healer_name(swim_str)
     # THEN
     assert not sift_atomunit(sue_bud, casa_swim_atom)
     assert not sift_atomunit(sue_bud, clean_swim_atom)

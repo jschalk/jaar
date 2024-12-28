@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str, deal_id_str
-from src.f07_deal.deal_config import cumlative_minute_str, hour_label_str
-from src.f08_pidgin.pidgin_config import event_id_str
+from src.f04_gift.atom_config import face_name_str, deal_id_str
+from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
 from src.f10_etl.transformers import etl_aft_face_bricks_to_aft_event_bricks
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -11,7 +11,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_aft_face_bricks_to_aft_event_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
+def test_WorldUnit_aft_face_bricks_to_aft_event_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -25,18 +25,18 @@ def test_WorldUnit_aft_face_bricks_to_aft_event_bricks_CreatesFaceBrickSheets_Sc
     hour6am = "6am"
     hour7am = "7am"
     brick_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        hour_label_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    sue0 = [sue_str, event3, music23_str, hour6am, minute_360]
-    sue1 = [sue_str, event3, music23_str, hour7am, minute_420]
-    zia0 = [zia_str, event7, music23_str, hour7am, minute_420]
-    zia1 = [zia_str, event9, music23_str, hour6am, minute_360]
-    zia2 = [zia_str, event9, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    sue0 = [sue_str, event3, accord23_str, hour6am, minute_360]
+    sue1 = [sue_str, event3, accord23_str, hour7am, minute_420]
+    zia0 = [zia_str, event7, accord23_str, hour7am, minute_420]
+    zia1 = [zia_str, event9, accord23_str, hour6am, minute_360]
+    zia2 = [zia_str, event9, accord23_str, hour7am, minute_420]
     example_sue_df = DataFrame([sue0, sue1], columns=brick_columns)
     example_zia_df = DataFrame([zia0, zia1, zia2], columns=brick_columns)
     faces_aft_dir = create_path(get_test_etl_dir(), "faces_aft")

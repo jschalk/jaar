@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_empty_set_if_None
 from src.f02_bud.group import GroupUnit, GroupID
-from src.f02_bud.acct import AcctID
+from src.f02_bud.acct import AcctName
 from dataclasses import dataclass
 
 
@@ -42,7 +42,7 @@ def create_teamunit(teamlink: GroupID):
 @dataclass
 class TeamHeir:
     _teamlinks: set[GroupID]
-    _owner_id_team: bool
+    _owner_name_team: bool
 
     def _get_all_accts(
         self,
@@ -57,21 +57,23 @@ class TeamHeir:
     def is_empty(self) -> bool:
         return self._teamlinks == set()
 
-    def set_owner_id_team(
-        self, bud_groupunits: dict[GroupID, GroupUnit], bud_owner_id: AcctID
+    def set_owner_name_team(
+        self, bud_groupunits: dict[GroupID, GroupUnit], bud_owner_name: AcctName
     ):
-        self._owner_id_team = self.get_owner_id_team_bool(bud_groupunits, bud_owner_id)
+        self._owner_name_team = self.get_owner_name_team_bool(
+            bud_groupunits, bud_owner_name
+        )
 
-    def get_owner_id_team_bool(
-        self, bud_groupunits: dict[GroupID, GroupUnit], bud_owner_id: AcctID
+    def get_owner_name_team_bool(
+        self, bud_groupunits: dict[GroupID, GroupUnit], bud_owner_name: AcctName
     ) -> bool:
         if self._teamlinks == set():
             return True
 
         for x_team_id, x_groupunit in bud_groupunits.items():
             if x_team_id in self._teamlinks:
-                for x_acct_id in x_groupunit._memberships.keys():
-                    if x_acct_id == bud_owner_id:
+                for x_acct_name in x_groupunit._memberships.keys():
+                    if x_acct_name == bud_owner_name:
                         return True
         return False
 
@@ -117,13 +119,13 @@ class TeamHeir:
 
 
 def teamheir_shop(
-    _teamlinks: set[GroupID] = None, _owner_id_team: bool = None
+    _teamlinks: set[GroupID] = None, _owner_name_team: bool = None
 ) -> TeamHeir:
     _teamlinks = get_empty_set_if_None(_teamlinks)
-    if _owner_id_team is None:
-        _owner_id_team = False
+    if _owner_name_team is None:
+        _owner_name_team = False
 
-    return TeamHeir(_teamlinks=_teamlinks, _owner_id_team=_owner_id_team)
+    return TeamHeir(_teamlinks=_teamlinks, _owner_name_team=_owner_name_team)
 
 
 def teamunit_get_from_dict(teamunit_dict: dict) -> TeamUnit:

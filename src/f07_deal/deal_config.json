@@ -1,16 +1,16 @@
 {
     "deal_cashbook": {
         "jkeys": {
-            "acct_id": {
-                "jaar_type": "AcctID"
+            "acct_name": {
+                "jaar_type": "AcctName"
             },
             "deal_id": {
                 "jaar_type": "IdeaUnit"
             },
-            "owner_id": {
-                "jaar_type": "AcctID"
+            "owner_name": {
+                "jaar_type": "AcctName"
             },
-            "time_id": {
+            "time_int": {
                 "jaar_type": "TimeLinePoint"
             }
         },
@@ -22,16 +22,16 @@
     },
     "deal_purview_episode": {
         "jkeys": {
-            "acct_id": {
-                "jaar_type": "AcctID"
+            "acct_name": {
+                "jaar_type": "AcctName"
             },
             "deal_id": {
                 "jaar_type": "IdeaUnit"
             },
-            "owner_id": {
-                "jaar_type": "AcctID"
+            "owner_name": {
+                "jaar_type": "AcctName"
             },
-            "time_id": {
+            "time_int": {
                 "jaar_type": "TimeLinePoint"
             }
         },
@@ -46,7 +46,7 @@
             "deal_id": {
                 "jaar_type": "IdeaUnit"
             },
-            "hour_label": {
+            "hour_idea": {
                 "jaar_type": "IdeaUnit"
             }
         },
@@ -61,7 +61,7 @@
             "deal_id": {
                 "jaar_type": "IdeaUnit"
             },
-            "month_label": {
+            "month_idea": {
                 "jaar_type": "IdeaUnit"
             }
         },
@@ -76,7 +76,7 @@
             "deal_id": {
                 "jaar_type": "IdeaUnit"
             },
-            "weekday_label": {
+            "weekday_idea": {
                 "jaar_type": "IdeaUnit"
             }
         },
@@ -110,10 +110,10 @@
             "respect_bit": {
                 "jaar_type": "float"
             },
-            "timeline_label": {
+            "timeline_idea": {
                 "jaar_type": "IdeaUnit"
             },
-            "wall": {
+            "bridge": {
                 "jaar_type": "str"
             },
             "yr1_jan1_offset": {

@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_deal_id_ideaunit as root_label, create_road
+from src.f01_road.road import get_default_deal_id_ideaunit as root_lx, create_road
 from src.f02_bud.item import itemunit_shop
 from pytest import raises as pytest_raises
 
@@ -51,7 +51,7 @@ def test_get_kids_in_range_EmptyParametersReturnsAll_kids():
 def test_ItemUnit_get_descendants_ReturnsNoRoadUnits():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_item = itemunit_shop(nation_str, _parent_road=root_label())
+    nation_item = itemunit_shop(nation_str, _parent_road=root_lx())
 
     # WHEN
     nation_descendants = nation_item.get_descendant_roads_from_kids()
@@ -63,8 +63,8 @@ def test_ItemUnit_get_descendants_ReturnsNoRoadUnits():
 def test_ItemUnit_get_descendants_Returns3DescendantsRoadUnits():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_label(), nation_str)
-    nation_item = itemunit_shop(nation_str, _parent_road=root_label())
+    nation_road = create_road(root_lx(), nation_str)
+    nation_item = itemunit_shop(nation_str, _parent_road=root_lx())
 
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
@@ -94,8 +94,8 @@ def test_ItemUnit_get_descendants_Returns3DescendantsRoadUnits():
 def test_ItemUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_label(), nation_str)
-    nation_item = itemunit_shop(nation_str, _parent_road=root_label())
+    nation_road = create_road(root_lx(), nation_str)
+    nation_item = itemunit_shop(nation_str, _parent_road=root_lx())
     nation_item.add_kid(nation_item)
     max_count = 1000
 
@@ -111,8 +111,8 @@ def test_ItemUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
 def test_ItemUnit_clear_kids_CorrectlySetsAttr():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_label(), nation_str)
-    nation_item = itemunit_shop(nation_str, _parent_road=root_label())
+    nation_road = create_road(root_lx(), nation_str)
+    nation_item = itemunit_shop(nation_str, _parent_road=root_lx())
     nation_item.add_kid(itemunit_shop("USA", _parent_road=nation_road))
     nation_item.add_kid(itemunit_shop("France", _parent_road=nation_road))
     assert len(nation_item._kids) == 2
@@ -127,8 +127,8 @@ def test_ItemUnit_clear_kids_CorrectlySetsAttr():
 def test_ItemUnit_get_kid_ReturnsCorrectObj():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_label(), nation_str)
-    nation_item = itemunit_shop(nation_str, _parent_road=root_label())
+    nation_road = create_road(root_lx(), nation_str)
+    nation_item = itemunit_shop(nation_str, _parent_road=root_lx())
 
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
@@ -143,14 +143,14 @@ def test_ItemUnit_get_kid_ReturnsCorrectObj():
     france_item = nation_item.get_kid(france_str)
 
     # THEN
-    assert france_item._label == france_str
+    assert france_item._lx == france_str
 
 
 def test_ItemUnit_del_kid_CorrectModifiesAttr():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_label(), nation_str)
-    nation_item = itemunit_shop(nation_str, _parent_road=root_label())
+    nation_road = create_road(root_lx(), nation_str)
+    nation_item = itemunit_shop(nation_str, _parent_road=root_lx())
 
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
@@ -171,8 +171,8 @@ def test_ItemUnit_del_kid_CorrectModifiesAttr():
 def test_ItemUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_label(), nation_str)
-    nation_item = itemunit_shop(nation_str, _parent_road=root_label())
+    nation_road = create_road(root_lx(), nation_str)
+    nation_item = itemunit_shop(nation_str, _parent_road=root_lx())
     usa_str = "USA"
     usa_item = itemunit_shop(usa_str, _parent_road=nation_road)
     nation_item.add_kid(usa_item)
@@ -187,8 +187,8 @@ def test_ItemUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
 def test_ItemUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_label(), nation_str)
-    nation_item = itemunit_shop(nation_str, _parent_road=root_label())
+    nation_road = create_road(root_lx(), nation_str)
+    nation_item = itemunit_shop(nation_str, _parent_road=root_lx())
     usa_str = "USA"
     usa_item = itemunit_shop(usa_str, mass=0, _parent_road=nation_road)
     nation_item.add_kid(usa_item)

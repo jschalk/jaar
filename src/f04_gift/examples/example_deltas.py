@@ -1,5 +1,5 @@
 from src.f02_bud.bud_tool import budunit_str, bud_acctunit_str
-from src.f04_gift.atom_config import atom_delete, atom_update, acct_id_str
+from src.f04_gift.atom_config import atom_delete, atom_update, acct_name_str
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.delta import DeltaUnit, deltaunit_shop
 
@@ -15,7 +15,7 @@ def get_deltaunit_sue_example() -> DeltaUnit:
     category = bud_acctunit_str()
     sue_str = "Sue"
     sue_atomunit = atomunit_shop(category, atom_delete())
-    sue_atomunit.set_jkey(acct_id_str(), sue_str)
+    sue_atomunit.set_jkey(acct_name_str(), sue_str)
     sue_deltaunit.set_atomunit(sue_atomunit)
     return sue_deltaunit
 
@@ -32,13 +32,13 @@ def get_deltaunit_example1() -> DeltaUnit:
     x_atomunit.set_jvalue(x_attribute, 77)
     x_attribute = "debtor_respect"
     x_atomunit.set_jvalue(x_attribute, 88)
-    x_attribute = "purview_time_id"
+    x_attribute = "purview_time_int"
     x_atomunit.set_jvalue(x_attribute, 990000)
     sue_deltaunit.set_atomunit(x_atomunit)
 
     category = bud_acctunit_str()
     zia_str = "Zia"
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_jkey(acct_id_str(), zia_str)
+    x_atomunit.set_jkey(acct_name_str(), zia_str)
     sue_deltaunit.set_atomunit(x_atomunit)
     return sue_deltaunit

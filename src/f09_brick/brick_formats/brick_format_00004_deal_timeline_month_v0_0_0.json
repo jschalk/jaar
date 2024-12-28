@@ -3,16 +3,16 @@
         "cumlative_day": {
             "otx_key": false
         },
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "deal_id": {
             "otx_key": true
         },
-        "month_label": {
+        "month_idea": {
             "otx_key": true
         }
     },

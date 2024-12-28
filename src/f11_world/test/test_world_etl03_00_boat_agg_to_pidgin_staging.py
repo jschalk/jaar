@@ -1,16 +1,16 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
-    face_id_str,
+    face_name_str,
     deal_id_str,
-    acct_id_str,
-    owner_id_str,
+    acct_name_str,
+    owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
-    inx_wall_str,
-    otx_wall_str,
-    inx_acct_id_str,
-    otx_acct_id_str,
+    event_int_str,
+    inx_bridge_str,
+    otx_bridge_str,
+    inx_name_str,
+    otx_name_str,
     inx_idea_str,
     otx_idea_str,
     inx_road_str,
@@ -59,28 +59,28 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    m_str = "music23"
+    m_str = "accord23"
     event1 = 1
     event2 = 2
     event5 = 5
     br00113_file_path = create_path(fizz_world._boat_dir, "br00113.xlsx")
     br00113_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
+        otx_name_str(),
+        inx_name_str(),
     ]
     br00043_file_path = create_path(fizz_world._boat_dir, "br00043.xlsx")
     br00043_columns = [
-        face_id_str(),
-        event_id_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        face_name_str(),
+        event_int_str(),
+        otx_name_str(),
+        inx_name_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -98,22 +98,22 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
 
     br00115_file_path = create_path(fizz_world._boat_dir, "br00115.xlsx")
     br00115_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         otx_group_id_str(),
         inx_group_id_str(),
     ]
     br00042_file_path = create_path(fizz_world._boat_dir, "br00042.xlsx")
     br00042_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -130,22 +130,22 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
 
     br00116_file_path = create_path(fizz_world._boat_dir, "br00116.xlsx")
     br00116_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         otx_idea_str(),
         inx_idea_str(),
     ]
     br00044_file_path = create_path(fizz_world._boat_dir, "br00044.xlsx")
     br00044_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -162,22 +162,22 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
 
     br00117_file_path = create_path(fizz_world._boat_dir, "br00117.xlsx")
     br00117_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         otx_road_str(),
         inx_road_str(),
     ]
     br00045_file_path = create_path(fizz_world._boat_dir, "br00045.xlsx")
     br00045_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
@@ -221,12 +221,12 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
 
     group_file_columns = [
         "src_brick",
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_group_df.columns) == group_file_columns
@@ -244,12 +244,12 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
 
     acct_file_columns = [
         "src_brick",
-        face_id_str(),
-        event_id_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        face_name_str(),
+        event_int_str(),
+        otx_name_str(),
+        inx_name_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_acct_df.columns) == acct_file_columns
@@ -267,12 +267,12 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
 
     idea_file_columns = [
         "src_brick",
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_idea_df.columns) == idea_file_columns
@@ -290,12 +290,12 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
 
     road_file_columns = [
         "src_brick",
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     assert list(gen_road_df.columns) == road_file_columns

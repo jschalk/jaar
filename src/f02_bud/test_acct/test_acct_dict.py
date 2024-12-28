@@ -67,7 +67,7 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     print(f"{bl_dict=}")
     assert x_dict is not None
     assert x_dict == {
-        "acct_id": bob_str,
+        "acct_name": bob_str,
         "credit_belief": bob_credit_belief,
         "debtit_belief": bob_debtit_belief,
         "_memberships": {
@@ -118,7 +118,7 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     print(f"{x_dict=}")
     assert x_dict is not None
     assert x_dict == {
-        "acct_id": bob_str,
+        "acct_name": bob_str,
         "credit_belief": bob_credit_belief,
         "debtit_belief": bob_debtit_belief,
         "_memberships": bob_acctunit.get_memberships_dict(),
@@ -189,11 +189,11 @@ def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsNone()
     assert len(x_dict.keys()) == 10
 
 
-def test_acctunit_get_from_dict_ReturnsCorrectObjWith_wall():
+def test_acctunit_get_from_dict_ReturnsCorrectObjWith_bridge():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    before_yao_acctunit = acctunit_shop(yao_str, _wall=slash_str)
+    before_yao_acctunit = acctunit_shop(yao_str, _bridge=slash_str)
     yao_dict = before_yao_acctunit.get_dict()
 
     # WHEN
@@ -201,14 +201,14 @@ def test_acctunit_get_from_dict_ReturnsCorrectObjWith_wall():
 
     # THEN
     assert before_yao_acctunit == after_yao_acctunit
-    assert after_yao_acctunit._wall == slash_str
+    assert after_yao_acctunit._bridge == slash_str
 
 
 def test_acctunit_get_from_dict_Returns_memberships():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    before_yao_acctunit = acctunit_shop(yao_str, _wall=slash_str)
+    before_yao_acctunit = acctunit_shop(yao_str, _bridge=slash_str)
     ohio_str = f"{slash_str}ohio"
     iowa_str = f"{slash_str}iowa"
     ohio_credit_vote = 90
@@ -227,14 +227,14 @@ def test_acctunit_get_from_dict_Returns_memberships():
     # THEN
     assert before_yao_acctunit._memberships == after_yao_acctunit._memberships
     assert before_yao_acctunit == after_yao_acctunit
-    assert after_yao_acctunit._wall == slash_str
+    assert after_yao_acctunit._bridge == slash_str
 
 
-def test_acctunits_get_from_dict_ReturnsCorrectObjWith_wall():
+def test_acctunits_get_from_dict_ReturnsCorrectObjWith_bridge():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    yao_acctunit = acctunit_shop(yao_str, _wall=slash_str)
+    yao_acctunit = acctunit_shop(yao_str, _bridge=slash_str)
     yao_dict = yao_acctunit.get_dict()
     x_acctunits_dict = {yao_str: yao_dict}
 
@@ -243,7 +243,7 @@ def test_acctunits_get_from_dict_ReturnsCorrectObjWith_wall():
 
     # THEN
     assert x_acctunits_objs.get(yao_str) == yao_acctunit
-    assert x_acctunits_objs.get(yao_str)._wall == slash_str
+    assert x_acctunits_objs.get(yao_str)._bridge == slash_str
 
 
 def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteData():
@@ -255,7 +255,7 @@ def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
     yao_inallocable_debtit_belief = 97
     yao_json_dict = {
         yao_str: {
-            "acct_id": yao_str,
+            "acct_name": yao_str,
             "credit_belief": yao_credit_belief,
             "debtit_belief": yao_debtit_belief,
             "_memberships": {},
@@ -273,7 +273,7 @@ def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
     assert yao_obj_dict[yao_str] is not None
     yao_acctunit = yao_obj_dict[yao_str]
 
-    assert yao_acctunit.acct_id == yao_str
+    assert yao_acctunit.acct_name == yao_str
     assert yao_acctunit.credit_belief == yao_credit_belief
     assert yao_acctunit.debtit_belief == yao_debtit_belief
     assert yao_acctunit._irrational_debtit_belief == yao_irrational_debtit_belief

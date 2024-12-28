@@ -1,7 +1,7 @@
 from src.f00_instrument.dict_toolbox import x_is_json
 from src.f01_road.jaar_config import init_gift_id, get_gifts_folder
-from src.f01_road.road import get_default_deal_id_ideaunit as root_label
-from src.f04_gift.atom_config import deal_id_str, owner_id_str, face_id_str
+from src.f01_road.road import get_default_deal_id_ideaunit as root_lx
+from src.f04_gift.atom_config import deal_id_str, owner_name_str, face_name_str
 from src.f04_gift.delta import deltaunit_shop
 from src.f04_gift.gift import GiftUnit, giftunit_shop, get_init_gift_id_if_None
 from src.f04_gift.examples.example_atoms import get_atom_example_itemunit_sports
@@ -30,9 +30,9 @@ def test_GiftUnit_exists():
     x_giftunit = GiftUnit()
 
     # THEN
-    assert not x_giftunit.face_id
+    assert not x_giftunit.face_name
     assert not x_giftunit.deal_id
-    assert not x_giftunit.owner_id
+    assert not x_giftunit.owner_name
     assert not x_giftunit._gift_id
     assert not x_giftunit._deltaunit
     assert not x_giftunit._delta_start
@@ -45,12 +45,12 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
     bob_str = "Bob"
 
     # WHEN
-    bob_giftunit = giftunit_shop(owner_id=bob_str)
+    bob_giftunit = giftunit_shop(owner_name=bob_str)
 
     # THEN
-    assert not bob_giftunit.face_id
-    assert bob_giftunit.deal_id == root_label()
-    assert bob_giftunit.owner_id == bob_str
+    assert not bob_giftunit.face_name
+    assert bob_giftunit.deal_id == root_lx()
+    assert bob_giftunit.owner_name == bob_str
     assert bob_giftunit._gift_id == 0
     assert bob_giftunit._deltaunit == deltaunit_shop()
     assert bob_giftunit._delta_start == 0
@@ -67,13 +67,13 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     bob_delta_start = 6
     bob_gifts_dir = "exampletext7"
     bob_atoms_dir = "exampletext9"
-    music_str = "music"
+    accord_str = "accord"
 
     # WHEN
     bob_giftunit = giftunit_shop(
-        face_id=sue_str,
-        owner_id=bob_str,
-        deal_id=music_str,
+        face_name=sue_str,
+        owner_name=bob_str,
+        deal_id=accord_str,
         _gift_id=bob_gift_id,
         _deltaunit=bob_deltaunit,
         _delta_start=bob_delta_start,
@@ -82,9 +82,9 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     )
 
     # THEN
-    assert bob_giftunit.face_id == sue_str
-    assert bob_giftunit.owner_id == bob_str
-    assert bob_giftunit.deal_id == music_str
+    assert bob_giftunit.face_name == sue_str
+    assert bob_giftunit.owner_name == bob_str
+    assert bob_giftunit.deal_id == accord_str
     assert bob_giftunit._gift_id == bob_gift_id
     assert bob_giftunit._deltaunit == bob_deltaunit
     assert bob_giftunit._delta_start == bob_delta_start
@@ -98,48 +98,48 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithSomeArgs_v1():
     yao_str = "Yao"
 
     # WHEN
-    bob_giftunit = giftunit_shop(owner_id=bob_str, face_id=yao_str)
+    bob_giftunit = giftunit_shop(owner_name=bob_str, face_name=yao_str)
 
     # THEN
-    assert bob_giftunit.owner_id == bob_str
-    assert bob_giftunit.face_id == yao_str
+    assert bob_giftunit.owner_name == bob_str
+    assert bob_giftunit.face_name == yao_str
 
 
 def test_GiftUnit_set_face_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
-    bob_giftunit = giftunit_shop(owner_id=bob_str)
+    bob_giftunit = giftunit_shop(owner_name=bob_str)
     sue_str = "Sue"
-    assert bob_giftunit.face_id is None
-    assert bob_giftunit.face_id != sue_str
+    assert bob_giftunit.face_name is None
+    assert bob_giftunit.face_name != sue_str
 
     # WHEN
     bob_giftunit.set_face(sue_str)
 
     # THEN
-    assert bob_giftunit.face_id == sue_str
+    assert bob_giftunit.face_name == sue_str
 
 
 def test_GiftUnit_del_face_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
-    bob_giftunit = giftunit_shop(owner_id=bob_str)
+    bob_giftunit = giftunit_shop(owner_name=bob_str)
     yao_str = "Yao"
     bob_giftunit.set_face(yao_str)
-    assert bob_giftunit.face_id == yao_str
+    assert bob_giftunit.face_name == yao_str
 
     # WHEN
     bob_giftunit.del_face()
 
     # THEN
-    assert bob_giftunit.face_id != yao_str
-    assert bob_giftunit.face_id is None
+    assert bob_giftunit.face_name != yao_str
+    assert bob_giftunit.face_name is None
 
 
 def test_GiftUnit_set_deltaunit_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
-    bob_giftunit = giftunit_shop(owner_id=bob_str)
+    bob_giftunit = giftunit_shop(owner_name=bob_str)
     assert bob_giftunit._deltaunit == deltaunit_shop()
 
     # WHEN
@@ -169,7 +169,7 @@ def test_GiftUnit_atomunit_exists_ReturnsCorrectObj():
     # ESTABLISH
     bob_str = "Bob"
     x_deltaunit = deltaunit_shop()
-    bob_giftunit = giftunit_shop(owner_id=bob_str)
+    bob_giftunit = giftunit_shop(owner_name=bob_str)
     bob_giftunit.set_deltaunit(x_deltaunit)
 
     # WHEN
@@ -191,7 +191,7 @@ def test_GiftUnit_del_deltaunit_SetsAttribute():
     bob_str = "Bob"
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(get_atom_example_itemunit_sports())
-    bob_giftunit = giftunit_shop(owner_id=bob_str, _deltaunit=x_deltaunit)
+    bob_giftunit = giftunit_shop(owner_name=bob_str, _deltaunit=x_deltaunit)
     assert bob_giftunit._deltaunit != deltaunit_shop()
     assert bob_giftunit._deltaunit == x_deltaunit
 
@@ -206,8 +206,8 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
-    music_str = "music"
-    bob_giftunit = giftunit_shop(deal_id=music_str, owner_id=bob_str)
+    accord_str = "accord"
+    bob_giftunit = giftunit_shop(deal_id=accord_str, owner_name=bob_str)
     bob_giftunit.set_face(sue_str)
 
     # WHEN
@@ -215,11 +215,11 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
 
     # THEN
     assert x_dict.get(deal_id_str()) is not None
-    assert x_dict.get(deal_id_str()) == music_str
-    assert x_dict.get(owner_id_str()) is not None
-    assert x_dict.get(owner_id_str()) == bob_str
-    assert x_dict.get(face_id_str()) is not None
-    assert x_dict.get(face_id_str()) == sue_str
+    assert x_dict.get(deal_id_str()) == accord_str
+    assert x_dict.get(owner_name_str()) is not None
+    assert x_dict.get(owner_name_str()) == bob_str
+    assert x_dict.get(face_name_str()) is not None
+    assert x_dict.get(face_name_str()) == sue_str
 
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
@@ -307,11 +307,11 @@ def test_GiftUnit_get_deltametric_dict_ReturnsCorrectObj():
     x_dict = bob_giftunit.get_deltametric_dict()
 
     # THEN
-    assert x_dict.get(owner_id_str()) is not None
-    assert x_dict.get(owner_id_str()) == bob_str
+    assert x_dict.get(owner_name_str()) is not None
+    assert x_dict.get(owner_name_str()) == bob_str
 
-    assert x_dict.get(face_id_str()) is not None
-    assert x_dict.get(face_id_str()) == yao_str
+    assert x_dict.get(face_name_str()) is not None
+    assert x_dict.get(face_name_str()) == yao_str
 
     delta_atom_numbers_str = "delta_atom_numbers"
     assert x_dict.get(delta_atom_numbers_str) is not None

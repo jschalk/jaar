@@ -1,21 +1,21 @@
 {
     "attributes": {
-        "event_id": {
+        "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "deal_id": {
             "otx_key": true
         },
-        "label": {
+        "lx": {
             "otx_key": true
         },
         "mass": {
             "otx_key": false
         },
-        "owner_id": {
+        "owner_name": {
             "otx_key": true
         },
         "parent_road": {

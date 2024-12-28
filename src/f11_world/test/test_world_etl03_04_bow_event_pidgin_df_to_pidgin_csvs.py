@@ -1,11 +1,11 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str
+from src.f04_gift.atom_config import face_name_str
 from src.f08_pidgin.pidgin_config import (
-    event_id_str,
-    inx_wall_str,
-    otx_wall_str,
-    inx_acct_id_str,
-    otx_acct_id_str,
+    event_int_str,
+    inx_bridge_str,
+    otx_bridge_str,
+    inx_name_str,
+    otx_name_str,
     inx_group_id_str,
     otx_group_id_str,
     inx_idea_str,
@@ -37,12 +37,12 @@ def test_WorldUnit_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_ro
     event7 = 7
     event9 = 9
     road_file_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         otx_road_str(),
         inx_road_str(),
-        otx_wall_str(),
-        inx_wall_str(),
+        otx_bridge_str(),
+        inx_bridge_str(),
         unknown_word_str(),
     ]
     x_nan = float("nan")

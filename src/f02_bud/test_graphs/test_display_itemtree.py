@@ -82,7 +82,7 @@ def test_get_bud_agenda_plotly_fig_DisplaysCorrectInfo(graphics_bool):
 
 def test_BudUnit_fund_flow(graphics_bool):
     # ESTABLISH
-    sue_bud = budunit_shop(_owner_id="Sue")
+    sue_bud = budunit_shop(_owner_name="Sue")
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
     cat_str = "cat status"

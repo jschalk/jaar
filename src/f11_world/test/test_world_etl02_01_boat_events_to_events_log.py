@@ -1,12 +1,12 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str, deal_id_str
+from src.f04_gift.atom_config import face_name_str, deal_id_str
 from src.f07_deal.deal_config import (
     cumlative_minute_str,
-    hour_label_str,
-    weekday_label_str,
+    hour_idea_str,
+    weekday_idea_str,
     weekday_order_str,
 )
-from src.f08_pidgin.pidgin_config import event_id_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -33,18 +33,18 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
     ex_file_name = "fizzbuzz.xlsx"
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
     brick_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        hour_label_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event1, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event1, music23_str, hour7am, minute_420]
-    row3 = [yao_str, event1, music23_str, hour7am, minute_420]
-    row4 = [yao_str, event9, music23_str, hour7am, minute_420]
-    row5 = [bob_str, event3, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    row1 = [sue_str, event1, accord23_str, hour6am, minute_360]
+    row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
+    row3 = [yao_str, event1, accord23_str, hour7am, minute_420]
+    row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
+    row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", df1)
     fizz_world.ocean_to_boat_staging()
@@ -66,12 +66,12 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
         "file_dir",
         "file_name",
         "sheet_name",
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         "note",
     ]
-    invalid_error_str = "invalid because of conflicting event_id"
-    invalid_error_str = "invalid because of conflicting event_id"
+    invalid_error_str = "invalid because of conflicting event_int"
+    invalid_error_str = "invalid because of conflicting event_int"
     boat_dir = fizz_world._boat_dir
     src_file_name = "br00003.xlsx"
     oe_str = "boat_events"
@@ -112,28 +112,28 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
     ex_file_name = "fizzbuzz.xlsx"
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
     brick3_columns = [
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         deal_id_str(),
-        hour_label_str(),
+        hour_idea_str(),
         cumlative_minute_str(),
     ]
     brick5_columns = [
-        event_id_str(),
-        face_id_str(),
+        event_int_str(),
+        face_name_str(),
         deal_id_str(),
-        weekday_label_str(),
+        weekday_idea_str(),
         weekday_order_str(),
     ]
-    music23_str = "music23"
-    row1 = [sue_str, event1, music23_str, hour6am, minute_360]
-    row2 = [sue_str, event1, music23_str, hour7am, minute_420]
-    row3 = [yao_str, event1, music23_str, hour7am, minute_420]
-    row4 = [yao_str, event9, music23_str, hour7am, minute_420]
-    row5 = [bob_str, event3, music23_str, hour7am, minute_420]
+    accord23_str = "accord23"
+    row1 = [sue_str, event1, accord23_str, hour6am, minute_360]
+    row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
+    row3 = [yao_str, event1, accord23_str, hour7am, minute_420]
+    row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
+    row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     b3_df = DataFrame([row1, row2, row3, row4, row5], columns=brick3_columns)
-    b5_0_row = [event3, bob_str, music23_str, "thu", 1]
-    b5_1_row = [event9, yao_str, music23_str, "wed", 0]
+    b5_0_row = [event3, bob_str, accord23_str, "thu", 1]
+    b5_1_row = [event9, yao_str, accord23_str, "wed", 0]
     b5_df = DataFrame([b5_0_row, b5_1_row], columns=brick5_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", b3_df)
     upsert_sheet(ocean_file_path, "example1_br00005", b5_df)
@@ -156,12 +156,12 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
         "file_dir",
         "file_name",
         "sheet_name",
-        face_id_str(),
-        event_id_str(),
+        face_name_str(),
+        event_int_str(),
         "note",
     ]
-    invalid_error_str = "invalid because of conflicting event_id"
-    invalid_error_str = "invalid because of conflicting event_id"
+    invalid_error_str = "invalid because of conflicting event_int"
+    invalid_error_str = "invalid because of conflicting event_int"
     boat_dir = fizz_world._boat_dir
     src3_file_name = "br00003.xlsx"
     src5_file_name = "br00005.xlsx"

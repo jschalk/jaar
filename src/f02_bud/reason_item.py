@@ -2,9 +2,9 @@ from src.f01_road.road import (
     RoadUnit,
     rebuild_road,
     find_replace_road_key_dict,
-    replace_wall,
+    replace_bridge,
     is_heir_road,
-    default_wall_if_None,
+    default_bridge_if_None,
 )
 from src.f00_instrument.dict_toolbox import get_empty_dict_if_None
 from copy import deepcopy as copy_deepcopy
@@ -284,7 +284,7 @@ class PremiseUnit:
     divisor: int = None
     _status: bool = None
     _task: bool = None
-    wall: str = None
+    bridge: str = None
 
     def get_obj_key(self):
         return self.need
@@ -304,15 +304,17 @@ class PremiseUnit:
     def clear_status(self):
         self._status = None
 
-    def set_wall(self, new_wall: str):
-        old_wall = copy_deepcopy(self.wall)
-        self.wall = new_wall
-        self.need = replace_wall(road=self.need, old_wall=old_wall, new_wall=self.wall)
+    def set_bridge(self, new_bridge: str):
+        old_bridge = copy_deepcopy(self.bridge)
+        self.bridge = new_bridge
+        self.need = replace_bridge(
+            road=self.need, old_bridge=old_bridge, new_bridge=self.bridge
+        )
 
     def is_in_lineage(self, fact_pick: RoadUnit):
         return is_heir_road(
-            src=self.need, heir=fact_pick, wall=self.wall
-        ) or is_heir_road(src=fact_pick, heir=self.need, wall=self.wall)
+            src=self.need, heir=fact_pick, bridge=self.bridge
+        ) or is_heir_road(src=fact_pick, heir=self.need, bridge=self.bridge)
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
@@ -400,14 +402,14 @@ def premiseunit_shop(
     open: float = None,
     nigh: float = None,
     divisor: float = None,
-    wall: str = None,
+    bridge: str = None,
 ) -> PremiseUnit:
     return PremiseUnit(
         need=need,
         open=open,
         nigh=nigh,
         divisor=divisor,
-        wall=default_wall_if_None(wall),
+        bridge=default_bridge_if_None(bridge),
     )
 
 
@@ -442,21 +444,21 @@ class ReasonCore:
     base: RoadUnit
     premises: dict[RoadUnit, PremiseUnit]
     base_item_active_requisite: bool = None
-    wall: str = None
+    bridge: str = None
 
-    def set_wall(self, new_wall: str):
-        old_wall = copy_deepcopy(self.wall)
-        self.wall = new_wall
-        self.base = replace_wall(self.base, old_wall, new_wall)
+    def set_bridge(self, new_bridge: str):
+        old_bridge = copy_deepcopy(self.bridge)
+        self.bridge = new_bridge
+        self.base = replace_bridge(self.base, old_bridge, new_bridge)
 
         new_premises = {}
         for premise_road, premise_obj in self.premises.items():
-            new_premise_road = replace_wall(
+            new_premise_road = replace_bridge(
                 road=premise_road,
-                old_wall=old_wall,
-                new_wall=self.wall,
+                old_bridge=old_bridge,
+                new_bridge=self.bridge,
             )
-            premise_obj.set_wall(self.wall)
+            premise_obj.set_bridge(self.bridge)
             new_premises[new_premise_road] = premise_obj
         self.premises = new_premises
 
@@ -478,7 +480,7 @@ class ReasonCore:
             open=open,
             nigh=nigh,
             divisor=divisor,
-            wall=self.wall,
+            bridge=self.bridge,
         )
 
     def premise_exists(self, x_need: RoadUnit) -> bool:
@@ -504,13 +506,13 @@ def reasoncore_shop(
     base: RoadUnit,
     premises: dict[RoadUnit, PremiseUnit] = None,
     base_item_active_requisite: bool = None,
-    wall: str = None,
+    bridge: str = None,
 ):
     return ReasonCore(
         base=base,
         premises=get_empty_dict_if_None(premises),
         base_item_active_requisite=base_item_active_requisite,
-        wall=default_wall_if_None(wall),
+        bridge=default_bridge_if_None(bridge),
     )
 
 
@@ -533,13 +535,13 @@ def reasonunit_shop(
     base: RoadUnit,
     premises: dict[RoadUnit, PremiseUnit] = None,
     base_item_active_requisite: bool = None,
-    wall: str = None,
+    bridge: str = None,
 ):
     return ReasonUnit(
         base=base,
         premises=get_empty_dict_if_None(premises),
         base_item_active_requisite=base_item_active_requisite,
-        wall=default_wall_if_None(wall),
+        bridge=default_bridge_if_None(bridge),
     )
 
 
@@ -622,7 +624,7 @@ def reasonheir_shop(
     _status: bool = None,
     _task: bool = None,
     _base_item_active_value: bool = None,
-    wall: str = None,
+    bridge: str = None,
 ):
     return ReasonHeir(
         base=base,
@@ -631,7 +633,7 @@ def reasonheir_shop(
         _status=_status,
         _task=_task,
         _base_item_active_value=_base_item_active_value,
-        wall=default_wall_if_None(wall),
+        bridge=default_bridge_if_None(bridge),
     )
 
 
