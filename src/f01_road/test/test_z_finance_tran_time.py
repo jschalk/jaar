@@ -7,13 +7,13 @@ def test_TimeConversion_Exists():
     x_timeconversion = TimeConversion()
 
     # THEN
-    assert x_timeconversion.deal_idea is None
-    assert x_timeconversion.addin is None
+    assert not x_timeconversion.deal_idea
+    assert not x_timeconversion.addin
 
 
 def test_timeconversion_shop_ReturnObj_WithParameters():
     # ESTABLISH
-    accord_deal_idea = 91
+    accord_deal_idea = "accord34"
     accord_addin = 91
 
     # WHEN

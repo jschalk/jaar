@@ -603,25 +603,32 @@ def test_TranBook_get_accts_csv_ReturnsObj():
     assert accord23_accts_net_csv == example_csv
 
 
-# def test_TranBook_get_dict_ReturnsObj():
-#     # ESTABLISH
-#     accord23_str = "accord23"
-#     x_timelinepoint = 5505
-#     x_fundnum = -45
-#     sue_str = "Sue"
-#     yao_str = "Yao"
-#     x_tranunits = {sue_str: {yao_str: {x_timelinepoint: x_fundnum}}}
-#     x_tranbook = tranbook_shop(accord23_str, x_tranunits)
+def test_TranBook_get_dict_ReturnsObj():
+    # ESTABLISH
+    accord23_str = "accord23"
+    x_timelinepoint = 5505
+    x_fundnum = -45
+    sue_str = "Sue"
+    yao_str = "Yao"
+    all_tranunits = {sue_str: {yao_str: {x_timelinepoint: x_fundnum}}}
+    x_tranbook = tranbook_shop(accord23_str, all_tranunits)
 
-#     # WHEN
-#     x_dict = x_tranbook.get_dict()
+    # WHEN
+    x_dict = x_tranbook.get_dict()
 
-#     # THEN
-#     assert x_dict
-#     assert "accord23_str" in x_dict.keys()
-#     accord23_dict = x_dict.get(accord23_str)
-#     assert accord23_dict
-#     assert accord23_dict == x_tranunits
+    # THEN
+    deal_idea_str = "deal_idea"
+    tranunits_str = "tranunits"
+    assert x_dict
+    assert deal_idea_str in x_dict.keys()
+    assert x_dict.get(deal_idea_str) == accord23_str
+    assert tranunits_str in x_dict.keys()
+    tranunits_dict = x_dict.get(tranunits_str)
+    assert tranunits_dict.get(sue_str)
+    sue_trans_dict = tranunits_dict.get(sue_str)
+    assert sue_trans_dict.get(yao_str)
+    assert sue_trans_dict.get(yao_str) == {x_timelinepoint: x_fundnum}
+    assert tranunits_dict == all_tranunits
 
 
 # def test_tranbook_shop_ReturnsObjWith_net_purviews():

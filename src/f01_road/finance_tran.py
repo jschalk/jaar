@@ -154,12 +154,6 @@ class TranBook:
     def get_accts_net_csv(self) -> str:
         return create_csv(self._get_accts_headers(), self._get_accts_net_array())
 
-    # def join(self, x_tranbook):
-    #     for src_acct_name, dst_dict in x_tranbook.tranunits.items():
-    #         for dst_acct_name, time_int_dict in dst_dict.items():
-    #             for x_time_int, x_amount in time_int_dict.items():
-    #                 self.add_tranunit(src_acct_name, dst_acct_name, x_time_int, x_amount)
-
     def join(self, x_tranbook):
         sorted_tranunits = sorted(
             x_tranbook.tranunits.items(),
@@ -172,10 +166,10 @@ class TranBook:
                         src_acct_name, dst_acct_name, x_time_int, x_amount
                     )
 
-    # def get_dict(
-    #     self,
-    # ) -> dict[DealIdea, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
-    #     return {"deal_idea": self.deal_idea}
+    def get_dict(
+        self,
+    ) -> dict[DealIdea, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
+        return {"deal_idea": self.deal_idea, "tranunits": self.tranunits}
 
 
 def tranbook_shop(
