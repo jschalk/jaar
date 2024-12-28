@@ -83,9 +83,9 @@ def _add_individual_trace(
 def _create_itemunit_traces(
     trace_list, anno_list, x_bud: BudUnit, source_y: float, mode: str
 ):
-    items = [x_bud._itemroot]
+    items = [x_bud.itemroot]
     y_itemunit_y_coordinate_dict = {None: 0}
-    prev_road = x_bud._itemroot.get_road()
+    prev_road = x_bud.itemroot.get_road()
     source_y = 0
     while items != []:
         x_item = items.pop(-1)

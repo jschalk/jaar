@@ -49,15 +49,15 @@ def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
     sweep_item.stop_want = sweep_stop_want
     zia_bud.set_item(clean_item, parent_road=casa_road)
     zia_bud.set_fact(base=clean_road, pick=clean_road, fopen=1, fnigh=5)
-    assert zia_bud._itemroot._factheirs == {}
+    assert zia_bud.itemroot._factheirs == {}
 
     # WHEN
     zia_bud.settle_bud()
 
     # THEN
-    assert zia_bud._itemroot._factheirs != {}
+    assert zia_bud.itemroot._factheirs != {}
     clean_factheir = factheir_shop(clean_road, clean_road, 1.0, 5.0)
-    assert zia_bud._itemroot._factheirs == {clean_factheir.base: clean_factheir}
+    assert zia_bud.itemroot._factheirs == {clean_factheir.base: clean_factheir}
 
 
 def test_BudUnit_settle_bud_RaisesErrorIfNonRangeRootHasFactUnit():
@@ -224,7 +224,7 @@ def test_BudUnit_settle_bud_SetsTaskAsComplete():
     yao_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
     mail_str = "obtain mail"
     assert yao_bud is not None
-    assert len(yao_bud._itemroot._kids[mail_str].reasonunits) == 1
+    assert len(yao_bud.itemroot._kids[mail_str].reasonunits) == 1
     item_dict = yao_bud.get_item_dict()
     mail_item = item_dict.get(yao_bud.make_l1_road(mail_str))
     hour_str = "hour"

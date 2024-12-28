@@ -26,8 +26,8 @@ def test_bud_itemroot_teamunit_CorrectlySets_item_teamheir():
 
     yao_bud = budunit_shop("Yao")
     yao_bud.edit_item_attr(teamunit=x_teamunit, road=yao_bud.deal_idea)
-    assert yao_bud._itemroot.teamunit == x_teamunit
-    assert yao_bud._itemroot._teamheir is None
+    assert yao_bud.itemroot.teamunit == x_teamunit
+    assert yao_bud.itemroot._teamheir is None
 
     # WHEN
     yao_bud.settle_bud()
@@ -37,8 +37,8 @@ def test_bud_itemroot_teamunit_CorrectlySets_item_teamheir():
     x_teamheir.set_teamlinks(
         parent_teamheir=None, teamunit=x_teamunit, bud_groupunits=None
     )
-    assert yao_bud._itemroot._teamheir is not None
-    assert yao_bud._itemroot._teamheir == x_teamheir
+    assert yao_bud.itemroot._teamheir is not None
+    assert yao_bud.itemroot._teamheir == x_teamheir
 
 
 def test_bud_itemkid_teamunit_EmptyCorrectlySets_item_teamheir():

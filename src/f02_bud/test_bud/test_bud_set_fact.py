@@ -15,7 +15,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     sunday_road = sue_bud.make_road(weekday_road, "Sunday")
     sunday_bud_fact = factunit_shop(base=weekday_road, pick=sunday_road)
     print(sunday_bud_fact)
-    x_itemroot = sue_bud._itemroot
+    x_itemroot = sue_bud.itemroot
     x_itemroot.factunits = {sunday_bud_fact.base: sunday_bud_fact}
     assert x_itemroot.factunits is not None
     x_itemroot.factunits = {}
@@ -56,7 +56,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_2():
 
     # THEN
     sunday_bud_fact = factunit_shop(base=weekday_road, pick=sunday_road)
-    x_itemroot = sue_bud._itemroot
+    x_itemroot = sue_bud.itemroot
     assert x_itemroot.factunits == {sunday_bud_fact.base: sunday_bud_fact}
 
 
@@ -70,7 +70,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_pick_IsNone():
 
     # THEN
     sunday_bud_fact = factunit_shop(weekday_road, weekday_road, 5, 7)
-    x_itemroot = sue_bud._itemroot
+    x_itemroot = sue_bud.itemroot
     assert x_itemroot.factunits == {sunday_bud_fact.base: sunday_bud_fact}
 
 
@@ -79,7 +79,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_open_IsNone():
     sue_bud = get_budunit_with_4_levels()
     weekday_road = sue_bud.make_l1_road("weekdays")
     sue_bud.set_fact(base=weekday_road, fopen=5, fnigh=7)
-    x_itemroot = sue_bud._itemroot
+    x_itemroot = sue_bud.itemroot
     x7_factunit = factunit_shop(weekday_road, weekday_road, 5, 7)
     assert x_itemroot.factunits.get(weekday_road) == x7_factunit
 
@@ -106,7 +106,7 @@ def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactItemIs
     a1e1st_item = itemunit_shop(a1e1st_str, begin=20, close=30)
     bob_bud.set_item(a1e1st_item, parent_road=a1st_road)
     a1e1_road = bob_bud.make_road(a1st_road, a1e1st_str)
-    assert bob_bud._itemroot.factunits in (None, {})
+    assert bob_bud.itemroot.factunits in (None, {})
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -122,7 +122,7 @@ def test_BudUnit_del_fact_CorrectlyModifiesAttr():
     sunday_road = sue_bud.make_road(weekday_road, "Sunday")
     sue_bud.set_fact(base=weekday_road, pick=sunday_road)
     sunday_bud_fact = factunit_shop(base=weekday_road, pick=sunday_road)
-    x_itemroot = sue_bud._itemroot
+    x_itemroot = sue_bud.itemroot
     assert x_itemroot.factunits == {sunday_bud_fact.base: sunday_bud_fact}
 
     # WHEN
@@ -145,7 +145,7 @@ def test_BudUnit_get_fact_ReturnsFactUnit():
     generated_situations_base = sue_bud.get_fact(situations_road)
 
     # THEN
-    static_situations_base = sue_bud._itemroot.factunits.get(situations_road)
+    static_situations_base = sue_bud.itemroot.factunits.get(situations_road)
     assert generated_situations_base == static_situations_base
 
 
@@ -164,8 +164,8 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     # sue_bud.edit_item_attr(road=c_road, reason_base=time_road, reason_premise=time_road, reason_premise_open=5, reason_premise_nigh=10)
 
     sue_bud.set_fact(base=time_road, pick=time_road, fopen=5, fnigh=10)
-    print(f"Establish a single ranged fact {sue_bud._itemroot.factunits=}")
-    assert len(sue_bud._itemroot.factunits) == 1
+    print(f"Establish a single ranged fact {sue_bud.itemroot.factunits=}")
+    assert len(sue_bud.itemroot.factunits) == 1
 
     # WHEN / THEN
     assert len(sue_bud._get_rangeroot_factunits()) == 1
@@ -176,8 +176,8 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     sue_bud.set_l1_item(place_item)
     place_road = sue_bud.make_l1_road(place_str)
     sue_bud.set_fact(base=place_road, pick=place_road, fopen=5, fnigh=10)
-    print(f"When one ranged fact added {sue_bud._itemroot.factunits=}")
-    assert len(sue_bud._itemroot.factunits) == 2
+    print(f"When one ranged fact added {sue_bud.itemroot.factunits=}")
+    assert len(sue_bud.itemroot.factunits) == 2
 
     # THEN
     assert len(sue_bud._get_rangeroot_factunits()) == 2
@@ -187,8 +187,8 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     sue_bud.set_l1_item(itemunit_shop(mood))
     m_road = sue_bud.make_l1_road(mood)
     sue_bud.set_fact(base=m_road, pick=m_road)
-    print(f"When one non-ranged_fact added {sue_bud._itemroot.factunits=}")
-    assert len(sue_bud._itemroot.factunits) == 3
+    print(f"When one non-ranged_fact added {sue_bud.itemroot.factunits=}")
+    assert len(sue_bud.itemroot.factunits) == 3
 
     # THEN
     assert len(sue_bud._get_rangeroot_factunits()) == 2
@@ -210,9 +210,9 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     sue_bud.set_fact(base=time_road, pick=time_road, fopen=5, fnigh=10)
     sue_bud.set_fact(base=m_x_road, pick=sue_bud.make_road(m_x_road, happy))
     print(
-        f"Establish a root ranged fact and non-range fact:\n{sue_bud._itemroot.factunits=}"
+        f"Establish a root ranged fact and non-range fact:\n{sue_bud.itemroot.factunits=}"
     )
-    assert len(sue_bud._itemroot.factunits) == 2
+    assert len(sue_bud.itemroot.factunits) == 2
 
     # WHEN / THEN
     assert len(sue_bud._get_rangeroot_factunits()) == 1
@@ -226,12 +226,12 @@ def test_BudUnit_set_fact_create_missing_items_CreatesBaseAndFact():
     situations_road = sue_bud.make_l1_road(situations_str)
     climate_str = "climate"
     climate_road = sue_bud.make_road(situations_road, climate_str)
-    assert sue_bud._itemroot.get_kid(situations_str) is None
+    assert sue_bud.itemroot.get_kid(situations_str) is None
 
     # WHEN
     sue_bud.set_fact(situations_road, climate_road, create_missing_items=True)
 
     # THEN
-    assert sue_bud._itemroot.get_kid(situations_str) is not None
+    assert sue_bud.itemroot.get_kid(situations_str) is not None
     assert sue_bud.get_item_obj(situations_road) is not None
     assert sue_bud.get_item_obj(climate_road) is not None

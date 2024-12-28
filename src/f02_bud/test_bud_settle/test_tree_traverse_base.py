@@ -37,7 +37,7 @@ def test_BudUnit_clear_item_dict_and_bud_obj_settle_attrs_CorrectlySetsAttrs():
     assert sue_bud._tree_traverse_count != x_tree_traverse_count
     assert sue_bud._tree_traverse_count == 0
     assert sue_bud._item_dict != x_item_dict
-    assert sue_bud._item_dict == {sue_bud._itemroot.get_road(): sue_bud._itemroot}
+    assert sue_bud._item_dict == {sue_bud.itemroot.get_road(): sue_bud.itemroot}
     assert sue_bud._offtrack_kids_mass_set == set()
     assert not sue_bud._reason_bases
     assert not sue_bud._range_inheritors
@@ -83,9 +83,9 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     mon_str = "Monday"
     mon_road = sue_bud.make_road(week_road, mon_str)
     mon_item = sue_bud.get_item_obj(mon_road)
-    assert sue_bud._itemroot._descendant_pledge_count is None
-    assert sue_bud._itemroot._all_acct_cred is None
-    assert sue_bud._itemroot._all_acct_debt is None
+    assert sue_bud.itemroot._descendant_pledge_count is None
+    assert sue_bud.itemroot._all_acct_cred is None
+    assert sue_bud.itemroot._all_acct_debt is None
     assert casa_item._descendant_pledge_count is None
     assert casa_item._all_acct_cred is None
     assert casa_item._all_acct_debt is None
@@ -93,9 +93,9 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     assert mon_item._all_acct_cred is None
     assert mon_item._all_acct_debt is None
 
-    sue_bud._itemroot._descendant_pledge_count = -2
-    sue_bud._itemroot._all_acct_cred = -2
-    sue_bud._itemroot._all_acct_debt = -2
+    sue_bud.itemroot._descendant_pledge_count = -2
+    sue_bud.itemroot._all_acct_cred = -2
+    sue_bud.itemroot._all_acct_debt = -2
     casa_item._descendant_pledge_count = -2
     casa_item._all_acct_cred = -2
     casa_item._all_acct_debt = -2
@@ -103,9 +103,9 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     mon_item._all_acct_cred = -2
     mon_item._all_acct_debt = -2
 
-    assert sue_bud._itemroot._descendant_pledge_count == -2
-    assert sue_bud._itemroot._all_acct_cred == -2
-    assert sue_bud._itemroot._all_acct_debt == -2
+    assert sue_bud.itemroot._descendant_pledge_count == -2
+    assert sue_bud.itemroot._all_acct_cred == -2
+    assert sue_bud.itemroot._all_acct_debt == -2
     assert casa_item._descendant_pledge_count == -2
     assert casa_item._all_acct_cred == -2
     assert casa_item._all_acct_debt == -2
@@ -117,7 +117,7 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud._itemroot._descendant_pledge_count == 2
+    assert sue_bud.itemroot._descendant_pledge_count == 2
     assert casa_item._descendant_pledge_count == 0
     assert mon_item._descendant_pledge_count == 0
 
@@ -125,24 +125,24 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     assert mon_item._all_acct_debt is True
     assert casa_item._all_acct_cred is True
     assert casa_item._all_acct_debt is True
-    assert sue_bud._itemroot._all_acct_cred is True
-    assert sue_bud._itemroot._all_acct_debt is True
+    assert sue_bud.itemroot._all_acct_cred is True
+    assert sue_bud.itemroot._all_acct_debt is True
 
 
 def test_BudUnit_settle_bud_RootOnlyCorrectlySetsDescendantAttributes():
     # ESTABLISH
     yao_bud = budunit_shop(owner_name="Yao")
-    assert yao_bud._itemroot._descendant_pledge_count is None
-    assert yao_bud._itemroot._all_acct_cred is None
-    assert yao_bud._itemroot._all_acct_debt is None
+    assert yao_bud.itemroot._descendant_pledge_count is None
+    assert yao_bud.itemroot._all_acct_cred is None
+    assert yao_bud.itemroot._all_acct_debt is None
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert yao_bud._itemroot._descendant_pledge_count == 0
-    assert yao_bud._itemroot._all_acct_cred is True
-    assert yao_bud._itemroot._all_acct_debt is True
+    assert yao_bud.itemroot._descendant_pledge_count == 0
+    assert yao_bud.itemroot._all_acct_cred is True
+    assert yao_bud.itemroot._all_acct_debt is True
 
 
 def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
@@ -210,7 +210,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     sue_bud.add_acctunit(acct_name=sue_str)
     x_awardlink = awardlink_shop(awardee_label=sue_str)
 
-    sue_bud._itemroot._kids[casa_str]._kids[email_str].set_awardlink(
+    sue_bud.itemroot._kids[casa_str]._kids[email_str].set_awardlink(
         awardlink=x_awardlink
     )
     # print(sue_bud._kids[casa_str]._kids[email_str])
@@ -222,16 +222,16 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     # print(sue_bud._kids[casa_str]._kids[email_str]._awardlink)
 
     # THEN
-    assert sue_bud._itemroot._all_acct_cred is False
-    assert sue_bud._itemroot._all_acct_debt is False
-    casa_item = sue_bud._itemroot._kids[casa_str]
+    assert sue_bud.itemroot._all_acct_cred is False
+    assert sue_bud.itemroot._all_acct_debt is False
+    casa_item = sue_bud.itemroot._kids[casa_str]
     assert casa_item._all_acct_cred is False
     assert casa_item._all_acct_debt is False
     assert casa_item._kids[email_str]._all_acct_cred is False
     assert casa_item._kids[email_str]._all_acct_debt is False
     assert casa_item._kids[vacuum_str]._all_acct_cred is True
     assert casa_item._kids[vacuum_str]._all_acct_debt is True
-    week_item = sue_bud._itemroot._kids[week_str]
+    week_item = sue_bud.itemroot._kids[week_str]
     assert week_item._all_acct_cred is True
     assert week_item._all_acct_debt is True
     assert week_item._kids[mon_str]._all_acct_cred is True
@@ -265,8 +265,8 @@ def test_BudUnit_settle_bud_SetsItemUnitAttr_awardlinks():
 
     street_str = "streets"
     sue_bud.set_item(itemunit_shop(street_str), parent_road=swim_road)
-    assert sue_bud._itemroot.awardlinks in (None, {})
-    assert len(sue_bud._itemroot._kids[swim_str].awardlinks) == 3
+    assert sue_bud.itemroot.awardlinks in (None, {})
+    assert len(sue_bud.itemroot._kids[swim_str].awardlinks) == 3
 
     # WHEN
     sue_bud.settle_bud()
@@ -285,7 +285,7 @@ def test_BudUnit_settle_bud_SetsItemUnitAttr_awardlinks():
     print(f"{swim_item.awardlinks}")
     print(f"{swim_item._awardheirs}")
     print(f"{swim_item._awardheirs}")
-    assert len(sue_bud._itemroot._kids["swim"]._awardheirs) == 3
+    assert len(sue_bud.itemroot._kids["swim"]._awardheirs) == 3
 
 
 def test_BudUnit_settle_bud_TreeTraverseSetsClearsAwardLineestorsCorrectly():
@@ -293,26 +293,26 @@ def test_BudUnit_settle_bud_TreeTraverseSetsClearsAwardLineestorsCorrectly():
     sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
     # item tree has no awardlinks
-    assert sue_bud._itemroot._awardlines == {}
-    sue_bud._itemroot._awardlines = {1: "testtest"}
-    assert sue_bud._itemroot._awardlines != {}
+    assert sue_bud.itemroot._awardlines == {}
+    sue_bud.itemroot._awardlines = {1: "testtest"}
+    assert sue_bud.itemroot._awardlines != {}
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    assert not sue_bud._itemroot._awardlines
+    assert not sue_bud.itemroot._awardlines
 
     # WHEN
     # test for level 1 and level n
     casa_str = "casa"
-    casa_item = sue_bud._itemroot._kids[casa_str]
+    casa_item = sue_bud.itemroot._kids[casa_str]
     casa_item._awardlines = {1: "testtest"}
     assert casa_item._awardlines != {}
     sue_bud.settle_bud()
 
     # THEN
-    assert not sue_bud._itemroot._kids[casa_str]._awardlines
+    assert not sue_bud.itemroot._kids[casa_str]._awardlines
 
 
 def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():

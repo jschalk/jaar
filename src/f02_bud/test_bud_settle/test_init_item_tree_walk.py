@@ -158,6 +158,6 @@ def test_get_sorted_item_list_ReturnsObj():
     # THEN
     assert x_sorted_item_list is not None
     assert len(x_sorted_item_list) == 17
-    assert x_sorted_item_list[0] == sue_bud._itemroot
+    assert x_sorted_item_list[0] == sue_bud.itemroot
     assert x_sorted_item_list[1] == sue_bud.get_item_obj(casa_road)
     assert x_sorted_item_list[11] == sue_bud.get_item_obj(mon_road)

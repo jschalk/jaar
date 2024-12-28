@@ -69,7 +69,7 @@ def test_BudUnit_edit_item_attr_reason_base_CorrectlySets_bridge():
     bob_bud.set_l1_item(itemunit_shop(casa_str))
     bob_bud.set_l1_item(itemunit_shop(week_str))
     bob_bud.set_item(itemunit_shop(wed_str), week_road)
-    print(f"{bob_bud._itemroot._kids.keys()=}")
+    print(f"{bob_bud.itemroot._kids.keys()=}")
     wed_item = bob_bud.get_item_obj(wed_road)
     assert wed_item._bridge == slash_str
     assert wed_item._bridge == bob_bud._bridge
@@ -202,7 +202,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     a4_bud.settle_bud()
 
     # THEN
-    casa_item = a4_bud._itemroot._kids[casa_str]
+    casa_item = a4_bud.itemroot._kids[casa_str]
     rla_item = casa_item._kids[rla_str]
     cost_item = rla_item._kids[cost_str]
 
@@ -265,11 +265,11 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     cost_road = a4_bud.make_road(rla_road, cost_str)
     a4_bud.set_item(itemunit_shop(cost_str), parent_road=cost_road)
 
-    casa_item = a4_bud._itemroot.get_kid(casa_str)
+    casa_item = a4_bud.itemroot.get_kid(casa_str)
     rla_item = casa_item.get_kid(rla_str)
     cost_item = rla_item.get_kid(cost_str)
 
-    assert a4_bud._itemroot._reasonheirs == {}
+    assert a4_bud.itemroot._reasonheirs == {}
     assert casa_item._reasonheirs == {}
     assert rla_item._reasonheirs == {}
     assert cost_item._reasonheirs == {}
@@ -278,7 +278,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     a4_bud.settle_bud()
 
     # THEN
-    assert a4_bud._itemroot._reasonheirs == {}  # casa_wk_built_reasonheir
+    assert a4_bud.itemroot._reasonheirs == {}  # casa_wk_built_reasonheir
 
     # 1
     assert casa_item._reasonheirs[week_road] == casa_wk_built_reasonheir

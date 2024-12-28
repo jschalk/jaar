@@ -335,7 +335,7 @@ def get_example_yao_voice_with_3_healers():
 #     assert yao_final.item_exists(cook_road())
 #     assert yao_final.item_exists(clean_road())
 #     assert yao_final.item_exists(run_road()) is False
-#     assert len(yao_final._itemroot.factunits) == 2
+#     assert len(yao_final.itemroot.factunits) == 2
 #     assert yao_final != yao_voice0
 
 
@@ -418,7 +418,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert yao_final.get_fact(get_location_road()) is not None
     assert yao_final.get_fact(get_location_road()).pick == get_in_mer_road()
     assert len(yao_final.get_agenda_dict()) == 1
-    assert len(yao_final._itemroot.factunits) == 1
+    assert len(yao_final.itemroot.factunits) == 1
     assert yao_final != yao_voice0
 
 

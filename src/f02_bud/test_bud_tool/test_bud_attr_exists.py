@@ -141,7 +141,7 @@ def test_bud_item_awardlink_exists_ReturnsObj():
     assert not bud_item_awardlink_exists(sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud._itemroot.set_awardlink(awardlink_shop(swim_str))
+    sue_bud.itemroot.set_awardlink(awardlink_shop(swim_str))
 
     # THEN
     assert not bud_item_awardlink_exists(sue_bud, {})
@@ -172,7 +172,7 @@ def test_bud_item_reasonunit_exists_ReturnsObj():
 
     # WHEN
     sue_bud.add_item(week_road)
-    sue_bud._itemroot.set_reasonunit(reasonunit_shop(week_road))
+    sue_bud.itemroot.set_reasonunit(reasonunit_shop(week_road))
 
     # THEN
     assert not bud_item_reasonunit_exists(sue_bud, {})
@@ -204,7 +204,7 @@ def test_bud_item_reason_premiseunit_exists_ReturnsObj():
 
     # WHEN
     sue_bud.add_item(week_road)
-    sue_bud._itemroot.set_reasonunit(reasonunit_shop(week_road))
+    sue_bud.itemroot.set_reasonunit(reasonunit_shop(week_road))
 
     # THEN
     assert not premiseunit_exists(sue_bud, {})
@@ -214,7 +214,7 @@ def test_bud_item_reason_premiseunit_exists_ReturnsObj():
 
     # WHEN
     sue_bud.add_item(thur_road)
-    sue_bud._itemroot.get_reasonunit(week_road).set_premise(thur_road)
+    sue_bud.itemroot.get_reasonunit(week_road).set_premise(thur_road)
 
     # THEN
     assert not premiseunit_exists(sue_bud, {})
@@ -244,7 +244,7 @@ def test_bud_item_teamlink_exists_ReturnsObj():
     assert not bud_item_teamlink_exists(sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud._itemroot.teamunit.set_teamlink(swim_str)
+    sue_bud.itemroot.teamunit.set_teamlink(swim_str)
 
     # THEN
     assert not bud_item_teamlink_exists(sue_bud, {})
@@ -274,7 +274,7 @@ def test_bud_item_healerlink_exists_ReturnsObj():
     assert not bud_item_healerlink_exists(sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud._itemroot.healerlink.set_healer_name(swim_str)
+    sue_bud.itemroot.healerlink.set_healer_name(swim_str)
 
     # THEN
     assert not bud_item_healerlink_exists(sue_bud, {})
@@ -305,7 +305,7 @@ def test_bud_item_factunit_exists_ReturnsObj():
 
     # WHEN
     sue_bud.add_item(week_road)
-    sue_bud._itemroot.set_factunit(factunit_shop(week_road))
+    sue_bud.itemroot.set_factunit(factunit_shop(week_road))
 
     # THEN
     assert not bud_item_factunit_exists(sue_bud, {})
@@ -431,7 +431,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_awardlink():
     assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud._itemroot.set_awardlink(awardlink_shop(swim_str))
+    sue_bud.itemroot.set_awardlink(awardlink_shop(swim_str))
 
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, {})
@@ -463,7 +463,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_reasonunit():
 
     # WHEN
     sue_bud.add_item(week_road)
-    sue_bud._itemroot.set_reasonunit(reasonunit_shop(week_road))
+    sue_bud.itemroot.set_reasonunit(reasonunit_shop(week_road))
 
     # THEN
     assert bud_attr_exists(x_category, sue_bud, root_jkeys)
@@ -495,7 +495,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_reason_premiseunit():
 
     # WHEN
     sue_bud.add_item(week_road)
-    sue_bud._itemroot.set_reasonunit(reasonunit_shop(week_road))
+    sue_bud.itemroot.set_reasonunit(reasonunit_shop(week_road))
 
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, root_jkeys)
@@ -504,7 +504,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_reason_premiseunit():
 
     # WHEN
     sue_bud.add_item(thur_road)
-    sue_bud._itemroot.get_reasonunit(week_road).set_premise(thur_road)
+    sue_bud.itemroot.get_reasonunit(week_road).set_premise(thur_road)
 
     # THEN
     assert bud_attr_exists(x_category, sue_bud, root_jkeys)
@@ -534,7 +534,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_teamlink():
     assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud._itemroot.teamunit.set_teamlink(swim_str)
+    sue_bud.itemroot.teamunit.set_teamlink(swim_str)
 
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, {})
@@ -565,7 +565,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_healerlink():
     assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud._itemroot.healerlink.set_healer_name(swim_str)
+    sue_bud.itemroot.healerlink.set_healer_name(swim_str)
 
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, {})
@@ -597,7 +597,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_factunit():
 
     # WHEN
     sue_bud.add_item(week_road)
-    sue_bud._itemroot.set_factunit(factunit_shop(week_road))
+    sue_bud.itemroot.set_factunit(factunit_shop(week_road))
 
     # THEN
     assert bud_attr_exists(x_category, sue_bud, root_jkeys)

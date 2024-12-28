@@ -24,7 +24,7 @@ def test_BudUnit_Exists():
     assert x_bud.owner_name is None
     assert x_bud.tally is None
     assert x_bud.accts is None
-    assert x_bud._itemroot is None
+    assert x_bud.itemroot is None
     assert x_bud.max_tree_traverse is None
     assert x_bud._bridge is None
     assert x_bud.fund_pool is None
@@ -49,7 +49,7 @@ def test_BudUnit_Exists():
     assert x_bud._offtrack_fund is None
     assert x_bud._reason_bases is None
     assert x_bud._range_inheritors is None
-    assert str(type(x_bud._itemroot)).find("None") == 8
+    assert str(type(x_bud.itemroot)).find("None") == 8
 
 
 def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
@@ -79,7 +79,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud.deal_idea == iowa_deal_idea
     assert x_bud.tally == 1
     assert x_bud.accts == {}
-    assert x_bud._itemroot is not None
+    assert x_bud.itemroot is not None
     assert x_bud.max_tree_traverse == 3
     assert x_bud._bridge == slash_bridge
     assert x_bud.fund_pool == x_fund_pool
@@ -104,8 +104,8 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert not x_bud._offtrack_fund
     assert x_bud._reason_bases == set()
     assert x_bud._range_inheritors == {}
-    print(f"{type(x_bud._itemroot)=}") == 0
-    assert str(type(x_bud._itemroot)).find(".item.ItemUnit'>") > 0
+    print(f"{type(x_bud.itemroot)=}") == 0
+    assert str(type(x_bud.itemroot)).find(".item.ItemUnit'>") > 0
 
 
 def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
@@ -120,14 +120,14 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_bud.fund_coin == default_fund_coin_if_None()
     assert x_bud.respect_bit == default_respect_bit_if_None()
     assert x_bud.penny == default_penny_if_None()
-    assert x_bud._itemroot._fund_coin == x_bud.fund_coin
-    assert x_bud._itemroot._bridge == x_bud._bridge
-    assert x_bud._itemroot._root
-    assert x_bud._itemroot._uid == 1
-    assert x_bud._itemroot._level == 0
-    assert x_bud._itemroot._bud_deal_idea == x_bud.deal_idea
-    assert x_bud._itemroot._bridge == x_bud._bridge
-    assert x_bud._itemroot._parent_road == ""
+    assert x_bud.itemroot._fund_coin == x_bud.fund_coin
+    assert x_bud.itemroot._bridge == x_bud._bridge
+    assert x_bud.itemroot._root
+    assert x_bud.itemroot._uid == 1
+    assert x_bud.itemroot._level == 0
+    assert x_bud.itemroot._bud_deal_idea == x_bud.deal_idea
+    assert x_bud.itemroot._bridge == x_bud._bridge
+    assert x_bud.itemroot._parent_road == ""
 
 
 def test_BudUnit_set_max_tree_traverse_CorrectlySetsInt():
