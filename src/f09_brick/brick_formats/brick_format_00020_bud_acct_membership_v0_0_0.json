@@ -15,10 +15,10 @@
         "face_name": {
             "otx_key": true
         },
-        "deal_id": {
+        "deal_idea": {
             "otx_key": true
         },
-        "group_id": {
+        "group_label": {
             "otx_key": true
         },
         "owner_name": {

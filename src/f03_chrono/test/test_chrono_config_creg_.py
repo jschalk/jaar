@@ -614,7 +614,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     assert len(sue_bud._accts) == 0
-    assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
+    assert len(sue_bud.get_acctunit_group_labels_dict()) == 0
 
     clean_things_str = "cleaning things"
     clean_things_road = sue_bud.make_l1_road(clean_things_str)
@@ -648,11 +648,11 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     sweep_item.set_reasonunit(reason=daytime_reason)
 
     family_str = ",family"
-    awardlink_z = awardlink_shop(awardee_id=family_str)
+    awardlink_z = awardlink_shop(awardee_label=family_str)
     sweep_item.set_awardlink(awardlink_z)
 
     assert len(sue_bud._accts) == 0
-    assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
+    assert len(sue_bud.get_acctunit_group_labels_dict()) == 0
     assert len(sue_bud._itemroot._kids) == 1
     assert sue_bud.get_item_obj(daytime_road).denom == 1440
     assert sue_bud.get_item_obj(daytime_road).morph
@@ -667,14 +667,14 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
 
     print(f"{sweep_item.get_road()=}")
     assert sue_bud.get_item_obj(sweep_road) is not None
-    assert sue_bud.get_item_obj(sweep_road)._lx == sweep_str
+    assert sue_bud.get_item_obj(sweep_road)._idee == sweep_str
     assert sue_bud.get_item_obj(sweep_road).pledge
     assert len(sue_bud.get_item_obj(sweep_road).reasonunits) == 2
     assert sue_bud.get_item_obj(clean_things_road) is not None
     assert sue_bud.get_item_obj(cookery_room_road) is not None
     assert sue_bud.get_item_obj(cookery_dirty_road) is not None
-    assert len(sue_bud.get_acctunit_group_ids_dict()) == 0
-    assert sue_bud.get_acctunit_group_ids_dict().get(family_str) is None
+    assert len(sue_bud.get_acctunit_group_labels_dict()) == 0
+    assert sue_bud.get_acctunit_group_labels_dict().get(family_str) is None
 
     assert len(sue_bud._itemroot._kids) == 3
 
@@ -720,8 +720,8 @@ def test_ItemCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     # )
     # print(f"{laundry_reasonheir.base=} {laundry_premise=}")
     # for x_itemunit in sue_bud._item_dict.values():
-    #     if x_itemunit._lx in [laundry_str]:
-    #         print(f"{x_itemunit._lx=} {x_itemunit.begin=} {x_itemunit.close=}")
+    #     if x_itemunit._idee in [laundry_str]:
+    #         print(f"{x_itemunit._idee=} {x_itemunit.begin=} {x_itemunit.close=}")
     #         print(f"{x_itemunit._kids.keys()=}")
 
     # WHEN
@@ -742,8 +742,8 @@ def test_ItemCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_Setting
     #     f"{laundry_item._active=} {laundry_premise.nigh=} {laundry_factheir.fnigh % 10080=}"
     # )
     # for x_itemunit in sue_bud._item_dict.values():
-    #     if x_itemunit._lx in [laundry_str]:
-    #         print(f"{x_itemunit._lx=} {x_itemunit.begin=} {x_itemunit.close=}")
+    #     if x_itemunit._idee in [laundry_str]:
+    #         print(f"{x_itemunit._idee=} {x_itemunit.begin=} {x_itemunit.close=}")
     #         print(f"{x_itemunit._kids.keys()=}")
     #         creg_factheir = x_itemunit._factheirs.get(cregtime_road)
     #         print(f"{creg_factheir.fopen % 10080=}")

@@ -572,7 +572,7 @@ def test_RoadMap_all_otx_parent_roads_exist_ReturnsObj_RoadUnit():
     assert x_roadmap.all_otx_parent_roads_exist()
 
 
-def test_RoadMap_is_valid_ReturnsObj_Scenario0_lx_str():
+def test_RoadMap_is_valid_ReturnsObj_Scenario0_idee_str():
     # ESTABLISH
     clean_str = "clean"
     clean_inx = "propre"

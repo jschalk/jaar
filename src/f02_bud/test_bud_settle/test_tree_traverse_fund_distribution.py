@@ -341,7 +341,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     sue_str = "Sue"
     week_str = "weekdays"
     nation_str = "nation-state"
-    sue_awardlink = awardlink_shop(awardee_id=sue_str)
+    sue_awardlink = awardlink_shop(awardee_label=sue_str)
     sue_bud.add_acctunit(acct_name=sue_str)
     sue_bud._itemroot.set_awardlink(awardlink=sue_awardlink)
     # item tree has awardlines
@@ -352,9 +352,9 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
 
     # THEN
     assert sue_bud._itemroot._awardheirs.get(sue_str) is not None
-    assert sue_bud._itemroot._awardheirs.get(sue_str).awardee_id == sue_str
+    assert sue_bud._itemroot._awardheirs.get(sue_str).awardee_label == sue_str
     assert sue_bud._itemroot._awardlines != {}
-    root_item = sue_bud.get_item_obj(road=sue_bud._itemroot._lx)
+    root_item = sue_bud.get_item_obj(road=sue_bud._itemroot._idee)
     sue_awardline = sue_bud._itemroot._awardlines.get(sue_str)
     print(f"{sue_awardline._fund_give=} {root_item._fund_ratio=} ")
     print(f"  {sue_awardline._fund_take=} {root_item._fund_ratio=} ")
@@ -385,7 +385,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     assert round(sue_awardline._fund_give, 15) == default_fund_pool()
     assert round(sue_awardline._fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(sue_str, default_fund_pool(), default_fund_pool())
-    assert sue_bud._itemroot._awardlines == {x_awardline.awardee_id: x_awardline}
+    assert sue_bud._itemroot._awardlines == {x_awardline.awardee_label: x_awardline}
 
 
 def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootItemUnitFromNonRootItemUnit():
@@ -395,7 +395,7 @@ def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootItemUnitFromNonRoo
     sue_str = "Sue"
     sue_bud.add_acctunit(sue_str)
     casa_road = sue_bud.make_l1_road("casa")
-    sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(awardee_id=sue_str))
+    sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(awardee_label=sue_str))
     assert sue_bud._itemroot._awardlines == {}
 
     # WHEN
@@ -405,14 +405,14 @@ def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootItemUnitFromNonRoo
     assert sue_bud._itemroot._awardlines != {}
     print(f"{sue_bud._itemroot._awardlines=}")
     x_awardline = awardline_shop(
-        awardee_id=sue_str,
+        awardee_label=sue_str,
         _fund_give=0.230769231 * default_fund_pool(),
         _fund_take=0.230769231 * default_fund_pool(),
     )
-    assert sue_bud._itemroot._awardlines == {x_awardline.awardee_id: x_awardline}
+    assert sue_bud._itemroot._awardlines == {x_awardline.awardee_label: x_awardline}
     casa_itemunit = sue_bud.get_item_obj(casa_road)
     assert casa_itemunit._awardlines != {}
-    assert casa_itemunit._awardlines == {x_awardline.awardee_id: x_awardline}
+    assert casa_itemunit._awardlines == {x_awardline.awardee_label: x_awardline}
 
 
 def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_take():
@@ -428,11 +428,11 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_t
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    x_itemroot = sue_bud.get_item_obj(sue_bud._deal_id)
+    x_itemroot = sue_bud.get_item_obj(sue_bud._deal_idea)
     x_itemroot.set_awardlink(awardlink=yao_awardlink)
     x_itemroot.set_awardlink(awardlink=zia_awardlink)
     x_itemroot.set_awardlink(awardlink=xio_awardlink)
-    assert len(sue_bud.get_acctunit_group_ids_dict()) == 3
+    assert len(sue_bud.get_acctunit_group_labels_dict()) == 3
 
     # WHEN
     sue_bud.settle_bud()
@@ -459,7 +459,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_t
     sue_awardlink = awardlink_shop(sue_str, give_force=37)
     x_itemroot.set_awardlink(sue_awardlink)
     assert len(x_itemroot.awardlinks) == 4
-    assert len(sue_bud.get_acctunit_group_ids_dict()) == 4
+    assert len(sue_bud.get_acctunit_group_labels_dict()) == 4
 
     # WHEN
     sue_bud.settle_bud()
@@ -506,7 +506,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsGroupUnit_fund_give_fund_take
     swim_item.set_awardlink(yao_awardlink)
     swim_item.set_awardlink(zia_awardlink)
     swim_item.set_awardlink(xio_awardlink)
-    assert len(x_bud.get_acctunit_group_ids_dict()) == 3
+    assert len(x_bud.get_acctunit_group_labels_dict()) == 3
 
     # WHEN
     x_bud.settle_bud()
@@ -552,7 +552,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     swim_item.set_awardlink(yao_awardlink)
     swim_item.set_awardlink(zia_awardlink)
     swim_item.set_awardlink(xio_awardlink)
-    assert len(x_bud.get_acctunit_group_ids_dict()) == 2
+    assert len(x_bud.get_acctunit_group_labels_dict()) == 2
 
     # WHEN
     x_bud.settle_bud()
@@ -561,7 +561,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     yao_groupunit = x_bud.get_groupunit(yao_str)
     zia_groupunit = x_bud.get_groupunit(zia_str)
     xio_groupunit = x_bud.get_groupunit(xio_str)
-    assert len(x_bud.get_acctunit_group_ids_dict()) != len(x_bud._groupunits)
+    assert len(x_bud.get_acctunit_group_labels_dict()) != len(x_bud._groupunits)
     assert yao_groupunit._fund_give == 0.5 * default_fund_pool()
     assert yao_groupunit._fund_take == 0.75 * default_fund_pool()
     assert zia_groupunit._fund_give == 0.25 * default_fund_pool()
@@ -607,7 +607,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_fu
     x_bud.settle_bud()
 
     # THEN
-    x_itemroot = x_bud.get_item_obj(x_bud._deal_id)
+    x_itemroot = x_bud.get_item_obj(x_bud._deal_idea)
     with pytest_raises(Exception) as excinfo:
         x_itemroot.awardlinks[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
@@ -670,7 +670,7 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
 
     # THEN
     print(f"{item_dict.keys()=}")
-    item_bob = item_dict.get(sue_bud._deal_id)
+    item_bob = item_dict.get(sue_bud._deal_idea)
     assert len(item_bob._awardheirs) == 3
 
     bheir_yao = item_bob._awardheirs.get(yao_str)
@@ -718,9 +718,9 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
-    yao_bud.edit_item_attr(yao_bud._deal_id, awardlink=sue_awardlink)
-    yao_bud.edit_item_attr(yao_bud._deal_id, awardlink=bob_awardlink)
-    yao_bud.edit_item_attr(yao_bud._deal_id, awardlink=zia_awardlink)
+    yao_bud.edit_item_attr(yao_bud._deal_idea, awardlink=sue_awardlink)
+    yao_bud.edit_item_attr(yao_bud._deal_idea, awardlink=bob_awardlink)
+    yao_bud.edit_item_attr(yao_bud._deal_idea, awardlink=zia_awardlink)
 
     sue_acctunit = yao_bud.get_acct(sue_str)
     bob_acctunit = yao_bud.get_acct(bob_str)
@@ -982,14 +982,14 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     swim_item.set_awardlink(yao_awardlink)
     swim_item.set_awardlink(zia_awardlink)
     swim_item.set_awardlink(xio_awardlink)
-    assert len(bob_bud.get_acctunit_group_ids_dict()) == 2
+    assert len(bob_bud.get_acctunit_group_labels_dict()) == 2
 
     # WHEN
     bob_bud.settle_bud()
 
     # THEN
     xio_groupunit = bob_bud.get_groupunit(xio_str)
-    assert len(bob_bud.get_acctunit_group_ids_dict()) != len(bob_bud._groupunits)
+    assert len(bob_bud.get_acctunit_group_labels_dict()) != len(bob_bud._groupunits)
     assert not bob_bud.acct_exists(xio_str)
     yao_acctunit = bob_bud.get_acct(yao_str)
     zia_acctunit = bob_bud.get_acct(zia_str)
@@ -1124,7 +1124,7 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     #     print(f"{item_road=}")
     # for x_acct in yao_bud._accts.values():
     #     for x_membership in x_acct._memberships.values():
-    #         print(f"{x_membership.group_id=}")
+    #         print(f"{x_membership.group_label=}")
 
     # THEN
     assert len(agenda_dict) == 63
@@ -1269,7 +1269,7 @@ def test_BudUnit_settle_bud_CreatesGroupUnitWith_budunit_v001():
     assert len(db_item.awardlinks) == 3
     # for item_key in item_dict:
     #     print(f"{item_key=}")
-    #     if item._lx == "D&B":
-    #         print(f"{item._lx=} {item.awardlinks=}")
+    #     if item._idee == "D&B":
+    #         print(f"{item._idee=} {item.awardlinks=}")
     #         db_awardlink_len = len(item.awardlinks)
     # assert db_awardlink_len == 3

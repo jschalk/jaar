@@ -54,7 +54,7 @@ def test_bud_acct_membership_exists_ReturnsObj():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    jkeys = {"acct_name": yao_str, "group_id": swim_str}
+    jkeys = {"acct_name": yao_str, "group_label": swim_str}
 
     # WHEN / THEN
     assert not bud_acct_membership_exists(None, {})
@@ -86,7 +86,7 @@ def test_bud_itemunit_exists_ReturnsObj():
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
     sweep_road = sue_bud.make_road(clean_road, "sweep")
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     root_jkeys = {"road": root_road}
     casa_jkeys = {"road": casa_road}
     clean_jkeys = {"road": clean_road}
@@ -126,12 +126,12 @@ def test_bud_item_awardlink_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     swim_str = "Swim"
-    root_road = sue_bud._deal_id
-    root_jkeys = {"road": root_road, "awardee_id": swim_str}
-    casa_jkeys = {"road": casa_road, "awardee_id": swim_str}
-    clean_jkeys = {"road": clean_road, "awardee_id": swim_str}
+    root_road = sue_bud._deal_idea
+    root_jkeys = {"road": root_road, "awardee_label": swim_str}
+    casa_jkeys = {"road": casa_road, "awardee_label": swim_str}
+    clean_jkeys = {"road": clean_road, "awardee_label": swim_str}
 
     # WHEN / THEN
     assert not bud_item_awardlink_exists(None, {})
@@ -156,7 +156,7 @@ def test_bud_item_reasonunit_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     root_jkeys = {"road": root_road, "base": week_road}
@@ -187,7 +187,7 @@ def test_bud_item_reason_premiseunit_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     thur_road = sue_bud.make_road(week_road, "thur")
@@ -230,11 +230,11 @@ def test_bud_item_teamlink_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     swim_str = "Swim"
-    root_jkeys = {"road": root_road, "team_id": swim_str}
-    casa_jkeys = {"road": casa_road, "team_id": swim_str}
-    clean_jkeys = {"road": clean_road, "team_id": swim_str}
+    root_jkeys = {"road": root_road, "team_label": swim_str}
+    casa_jkeys = {"road": casa_road, "team_label": swim_str}
+    clean_jkeys = {"road": clean_road, "team_label": swim_str}
 
     # WHEN / THEN
     assert not bud_item_teamlink_exists(None, {})
@@ -260,7 +260,7 @@ def test_bud_item_healerlink_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     swim_str = "Swim"
     root_jkeys = {"road": root_road, "healer_name": swim_str}
     casa_jkeys = {"road": casa_road, "healer_name": swim_str}
@@ -289,7 +289,7 @@ def test_bud_item_factunit_exists_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     root_jkeys = {"road": root_road, "base": week_road}
@@ -342,7 +342,7 @@ def test_bud_attr_exists_ReturnsObj_bud_acct_membership():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    x_jkeys = {"acct_name": yao_str, "group_id": swim_str}
+    x_jkeys = {"acct_name": yao_str, "group_label": swim_str}
     x_category = bud_acct_membership_str()
 
     # WHEN / THEN
@@ -375,7 +375,7 @@ def test_bud_attr_exists_ReturnsObj_bud_itemunit():
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
     sweep_road = sue_bud.make_road(clean_road, "sweep")
-    x_parent_road = sue_bud._deal_id
+    x_parent_road = sue_bud._deal_idea
     root_jkeys = {"road": x_parent_road}
     casa_jkeys = {"road": casa_road}
     clean_jkeys = {"road": clean_road}
@@ -416,12 +416,12 @@ def test_bud_attr_exists_ReturnsObj_bud_item_awardlink():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     swim_str = "Swim"
     x_category = bud_item_awardlink_str()
-    root_jkeys = {"road": root_road, "awardee_id": swim_str}
-    casa_jkeys = {"road": casa_road, "awardee_id": swim_str}
-    clean_jkeys = {"road": clean_road, "awardee_id": swim_str}
+    root_jkeys = {"road": root_road, "awardee_label": swim_str}
+    casa_jkeys = {"road": casa_road, "awardee_label": swim_str}
+    clean_jkeys = {"road": clean_road, "awardee_label": swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})
@@ -446,7 +446,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_reasonunit():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     x_category = bud_item_reasonunit_str()
@@ -477,7 +477,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_reason_premiseunit():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     thur_road = sue_bud.make_road(week_road, "thur")
@@ -519,12 +519,12 @@ def test_bud_attr_exists_ReturnsObj_bud_item_teamlink():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     swim_str = "Swim"
     x_category = bud_item_teamlink_str()
-    root_jkeys = {"road": root_road, "team_id": swim_str}
-    casa_jkeys = {"road": casa_road, "team_id": swim_str}
-    clean_jkeys = {"road": clean_road, "team_id": swim_str}
+    root_jkeys = {"road": root_road, "team_label": swim_str}
+    casa_jkeys = {"road": casa_road, "team_label": swim_str}
+    clean_jkeys = {"road": clean_road, "team_label": swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})
@@ -550,7 +550,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_healerlink():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     swim_str = "Swim"
     x_category = bud_item_healerlink_str()
     root_jkeys = {"road": root_road, "healer_name": swim_str}
@@ -580,7 +580,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_factunit():
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
     clean_road = sue_bud.make_road(casa_road, clean_str)
-    root_road = sue_bud._deal_id
+    root_road = sue_bud._deal_idea
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     x_category = bud_item_factunit_str()

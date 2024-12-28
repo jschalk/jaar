@@ -6,7 +6,7 @@ from src.f03_chrono.chrono import (
     monthday_distortion_str,
 )
 from src.f04_gift.atom_config import (
-    deal_id_str,
+    deal_idea_str,
     penny_str,
     fund_coin_str,
     penny_str,
@@ -18,10 +18,6 @@ from src.f04_gift.atom_config import (
     atom_delete,
     normal_specs_str,
     jaar_type_str,
-    type_AcctName_str,
-    type_GroupID_str,
-    type_IdeaUnit_str,
-    type_RoadUnit_str,
     get_allowed_jaar_types,
 )
 from src.f07_deal.deal_config import (
@@ -30,13 +26,7 @@ from src.f07_deal.deal_config import (
     get_deal_config_dict,
     get_deal_args_category_mapping,
     current_time_str,
-    amount_str,
-    month_idea_str,
-    hour_idea_str,
     cumlative_minute_str,
-    cumlative_day_str,
-    weekday_idea_str,
-    weekday_order_str,
     dealunit_str,
     deal_purviewlog_str,
     deal_purview_episode_str,
@@ -48,24 +38,6 @@ from src.f07_deal.deal_config import (
     get_deal_args_jaar_types,
 )
 from os import getcwd as os_getcwd
-
-
-def test_str_functions_ReturnsObj():
-    assert current_time_str() == "current_time"
-    assert amount_str() == "amount"
-    assert month_idea_str() == "month_idea"
-    assert hour_idea_str() == "hour_idea"
-    assert cumlative_minute_str() == "cumlative_minute"
-    assert cumlative_day_str() == "cumlative_day"
-    assert weekday_idea_str() == "weekday_idea"
-    assert weekday_order_str() == "weekday_order"
-    assert dealunit_str() == "dealunit"
-    assert deal_purviewlog_str() == "deal_purviewlog"
-    assert deal_purview_episode_str() == "deal_purview_episode"
-    assert deal_cashbook_str() == "deal_cashbook"
-    assert deal_timeline_hour_str() == "deal_timeline_hour"
-    assert deal_timeline_month_str() == "deal_timeline_month"
-    assert deal_timeline_weekday_str() == "deal_timeline_weekday"
 
 
 def test_get_deal_config_file_name_ReturnsObj():
@@ -110,7 +82,7 @@ def test_get_deal_config_dict_ReturnsObj():
     x_dealunit_jvalues = {
         c400_number_str(),
         current_time_str(),
-        deal_id_str(),
+        deal_idea_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),
@@ -182,10 +154,10 @@ def test_get_deal_args_category_mapping_ReturnsObj():
     x_hour = {deal_timeline_hour_str()}
     assert x_deal_args_category_mapping.get(cumlative_minute_str()) == x_hour
     assert x_deal_args_category_mapping.get(fund_coin_str())
-    deal_id_categorys = x_deal_args_category_mapping.get(deal_id_str())
-    assert deal_timeline_hour_str() in deal_id_categorys
-    assert dealunit_str() in deal_id_categorys
-    assert len(deal_id_categorys) == 6
+    deal_idea_categorys = x_deal_args_category_mapping.get(deal_idea_str())
+    assert deal_timeline_hour_str() in deal_idea_categorys
+    assert dealunit_str() in deal_idea_categorys
+    assert len(deal_idea_categorys) == 6
     assert len(x_deal_args_category_mapping) == 21
 
 

@@ -9,13 +9,13 @@
         "face_name": {
             "otx_key": true
         },
-        "deal_id": {
+        "deal_idea": {
             "otx_key": true
         },
-        "inx_group_id": {
+        "inx_label": {
             "otx_key": false
         },
-        "otx_group_id": {
+        "otx_label": {
             "otx_key": true
         },
         "owner_name": {
@@ -24,7 +24,7 @@
     },
     "brick_number": "br00115",
     "categorys": [
-        "map_group_id",
+        "map_label",
         "bud_acctunit"
     ]
 }

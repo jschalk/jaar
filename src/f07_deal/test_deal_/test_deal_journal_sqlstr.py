@@ -3,7 +3,7 @@
 # from src.f07_deal.journal_sqlstr import get_atom_hx_table_insert_sqlstr
 # from src.f07_deal.deal import dealunit_shop
 # from src.f07_deal.examples.deal_env import (
-#     get_test_deal_id,
+#     get_test_deal_idea,
 #     get_test_deals_dir,
 #     env_dir_setup_cleanup,
 # )

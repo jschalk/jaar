@@ -1,7 +1,7 @@
-from src.f01_road.jaar_config import get_deal_id_if_None
-from src.f01_road.road import DealID
+from src.f01_road.jaar_config import get_deal_idea_if_None
+from src.f01_road.road import DealIdea
 from src.f02_bud.bud_tool import bud_acctunit_str, bud_itemunit_str
-from src.f04_gift.atom_config import acct_name_str, parent_road_str, lx_str
+from src.f04_gift.atom_config import acct_name_str, parent_road_str, idee_str
 from src.f04_gift.atom import (
     AtomUnit,
     atom_delete,
@@ -12,13 +12,13 @@ from src.f04_gift.atom import (
 from src.f04_gift.delta import DeltaUnit, deltaunit_shop
 
 
-def get_atom_example_itemunit_sports(deal_id: DealID = None) -> AtomUnit:
-    deal_id = get_deal_id_if_None(deal_id)
+def get_atom_example_itemunit_sports(deal_idea: DealIdea = None) -> AtomUnit:
+    deal_idea = get_deal_idea_if_None(deal_idea)
     sports_str = "sports"
     x_category = bud_itemunit_str()
     insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    insert_itemunit_atomunit.set_jkey(lx_str(), sports_str)
-    insert_itemunit_atomunit.set_jkey(parent_road_str(), deal_id)
+    insert_itemunit_atomunit.set_jkey(idee_str(), sports_str)
+    insert_itemunit_atomunit.set_jkey(parent_road_str(), deal_idea)
     return insert_itemunit_atomunit
 
 

@@ -1,9 +1,9 @@
-def get_test_deal_id():
+def get_test_deal_idea():
     return "accord_45"
 
 
-def get_deal_id_if_None(deal_id: str = None):
-    return get_test_deal_id() if deal_id is None else deal_id
+def get_deal_idea_if_None(deal_idea: str = None):
+    return get_test_deal_idea() if deal_idea is None else deal_idea
 
 
 def get_test_deals_dir():

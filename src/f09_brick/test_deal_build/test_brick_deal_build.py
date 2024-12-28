@@ -20,7 +20,7 @@ from src.f09_brick.brick import deal_build_from_df
 
 
 # given a dataframe, build a deal unit
-def test_deal_build_from_df_ReturnsObj_Scenario0_OneDealID(brick_env_setup_cleanup):
+def test_deal_build_from_df_ReturnsObj_Scenario0_OneDealIdea(brick_env_setup_cleanup):
     # ESTABLISH
     br00000_df = get_ex1_br00000_df()
     br00001_df = get_ex1_br00001_df()
@@ -55,7 +55,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario0_OneDealID(brick_env_setup_clean
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
     accord23_dealunit = dealunit_shop(
         current_time=5500,
-        deal_id=accord23_str,
+        deal_idea=accord23_str,
         deals_dir=x_deals_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
@@ -79,7 +79,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario0_OneDealID(brick_env_setup_clean
     assert gen_dealunit.fund_coin == x_fund_coin
     assert gen_dealunit.respect_bit == x_respect_bit
     assert gen_dealunit.penny == x_penny
-    assert gen_dealunit.deal_id == accord23_str
+    assert gen_dealunit.deal_idea == accord23_str
     assert gen_dealunit.deals_dir == x_deals_dir
     assert gen_dealunit.timeline == accord23_dealunit.timeline
     assert gen_dealunit.purviewlogs == accord23_dealunit.purviewlogs
@@ -91,7 +91,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario0_OneDealID(brick_env_setup_clean
 
 
 # given a dataframe, build a deal unit
-def test_deal_build_from_df_ReturnsObj_Scenario1_TwoDealIDs(
+def test_deal_build_from_df_ReturnsObj_Scenario1_TwoDealIdeas(
     brick_env_setup_cleanup,
 ):
     # ESTABLISH
@@ -126,7 +126,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario1_TwoDealIDs(
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
     accord23_dealunit = dealunit_shop(
         current_time=5500,
-        deal_id=accord23_str,
+        deal_idea=accord23_str,
         deals_dir=x_deals_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
@@ -137,7 +137,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario1_TwoDealIDs(
     five_timelineunit = timelineunit_shop(get_five_config())
     jeffy45_dealunit = dealunit_shop(
         current_time=444,
-        deal_id="jeffy45",
+        deal_idea="jeffy45",
         deals_dir=x_deals_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
@@ -151,7 +151,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario1_TwoDealIDs(
     assert creg_dealunit.fund_coin == x_fund_coin
     assert creg_dealunit.respect_bit == x_respect_bit
     assert creg_dealunit.penny == x_penny
-    assert creg_dealunit.deal_id == accord23_str
+    assert creg_dealunit.deal_idea == accord23_str
     assert creg_dealunit.deals_dir == x_deals_dir
     assert creg_dealunit.timeline == accord23_dealunit.timeline
     assert len(creg_dealunit.purviewlogs) == 3
@@ -162,7 +162,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario1_TwoDealIDs(
     assert five_dealunit.fund_coin == x_fund_coin
     assert five_dealunit.respect_bit == x_respect_bit
     assert five_dealunit.penny == x_penny
-    assert five_dealunit.deal_id == "jeffy45"
+    assert five_dealunit.deal_idea == "jeffy45"
     assert five_dealunit.deals_dir == x_deals_dir
     assert len(five_dealunit.purviewlogs) == 2
     assert len(five_dealunit.cashbook.tranunits) == 1

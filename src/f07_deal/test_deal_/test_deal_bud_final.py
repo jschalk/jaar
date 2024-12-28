@@ -33,7 +33,7 @@ def test_DealUnit_generate_final_bud_Sets_final_BudFile(env_dir_setup_cleanup):
 
     # THEN
     example_bud = budunit_shop(sue_str, accord_str)
-    assert sue_final._deal_id == example_bud._deal_id
+    assert sue_final._deal_idea == example_bud._deal_idea
     assert sue_final._owner_name == example_bud._owner_name
 
 
@@ -43,7 +43,7 @@ def test_DealUnit_generate_final_bud_ReturnsRegeneratedObj(env_dir_setup_cleanup
     sue_str = "Sue"
     accord_deal.init_owner_keeps(sue_str)
     sue_hubunit = hubunit_shop(
-        accord_deal.deals_dir, accord_deal.deal_id, sue_str, None
+        accord_deal.deals_dir, accord_deal.deal_idea, sue_str, None
     )
     before_sue_bud = sue_hubunit.get_final_bud()
     bob_str = "Bob"
@@ -66,7 +66,7 @@ def test_DealUnit_generate_final_bud_SetsCorrectFileWithout_healerlink(
     bob_str = "Bob"
     accord_deal.init_owner_keeps(bob_str)
     bob_hubunit = hubunit_shop(
-        accord_deal.deals_dir, accord_deal.deal_id, bob_str, None
+        accord_deal.deals_dir, accord_deal.deal_idea, bob_str, None
     )
     before_bob_final_bud = accord_deal.generate_final_bud(bob_str)
     sue_str = "Sue"
@@ -91,7 +91,7 @@ def test_DealUnit_generate_final_bud_SetsFileWith_healerlink(env_dir_setup_clean
     bob_str = "Bob"
     accord_deal.init_owner_keeps(bob_str)
     bob_hubunit = hubunit_shop(
-        accord_deal.deals_dir, accord_deal.deal_id, bob_str, None
+        accord_deal.deals_dir, accord_deal.deal_idea, bob_str, None
     )
     after_bob_final_bud = accord_deal.generate_final_bud(bob_str)
     assert after_bob_final_bud.acct_exists(bob_str) is False
@@ -124,9 +124,9 @@ def test_DealUnit_generate_all_final_buds_SetsCorrectFiles(
     sue_str = "Sue"
     accord_deal.init_owner_keeps(bob_str)
     deals_dir = accord_deal.deals_dir
-    bob_hubunit = hubunit_shop(deals_dir, accord_deal.deal_id, bob_str, None)
+    bob_hubunit = hubunit_shop(deals_dir, accord_deal.deal_idea, bob_str, None)
     accord_deal.init_owner_keeps(sue_str)
-    sue_hubunit = hubunit_shop(deals_dir, accord_deal.deal_id, sue_str, None)
+    sue_hubunit = hubunit_shop(deals_dir, accord_deal.deal_idea, sue_str, None)
     bob_voice_bud = accord_deal.generate_final_bud(bob_str)
     sue_voice_bud = accord_deal.generate_final_bud(sue_str)
 

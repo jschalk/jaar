@@ -36,7 +36,7 @@ from src.f07_deal.examples.deal_env import get_test_deals_dir
 #     display_itemtree(yao_voice_bud.settle_bud(), mode="Keep", graphics_bool=graphics_bool)
 #     x_hubunit = hubunit_shop(
 #         deals_dir=yao_hubunit.deals_dir,
-#         deal_id=yao_hubunit.deal_id,
+#         deal_idea=yao_hubunit.deal_idea,
 #         owner_name=yao_hubunit.owner_name,
 #         keep_road=None,
 #         bridge=yao_hubunit.bridge,

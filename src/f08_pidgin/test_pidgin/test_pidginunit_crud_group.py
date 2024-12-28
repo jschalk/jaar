@@ -97,7 +97,7 @@ def test_PidginUnit_get_groupmap_ReturnsObj():
     assert gen_x_groupmap == static_x_groupmap
 
 
-def test_PidginUnit_set_group_id_SetsAttr_Scenario0():
+def test_PidginUnit_set_group_label_SetsAttr_Scenario0():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -107,58 +107,58 @@ def test_PidginUnit_set_group_id_SetsAttr_Scenario0():
     assert acct_name_groupmap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_group_id(sue_otx, sue_inx)
+    zia_pidginunit.set_group_label(sue_otx, sue_inx)
 
     # THEN
     assert acct_name_groupmap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_group_id_exists_ReturnsObj():
+def test_PidginUnit_group_label_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    assert zia_pidginunit.group_id_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.group_label_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_group_id(sue_otx, sue_inx)
+    zia_pidginunit.set_group_label(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit.group_id_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.group_label_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_get_inx_group_id_ReturnsObj():
+def test_PidginUnit_get_inx_label_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_inx_group_id(sue_otx) != sue_inx
+    assert zia_pidginunit._get_inx_label(sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_group_id(sue_otx, sue_inx)
+    zia_pidginunit.set_group_label(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit._get_inx_group_id(sue_otx) == sue_inx
+    assert zia_pidginunit._get_inx_label(sue_otx) == sue_inx
 
 
-def test_PidginUnit_del_group_id_ReturnsObj():
+def test_PidginUnit_del_group_label_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    zia_pidginunit.set_group_id(sue_otx, sue_inx)
-    zia_pidginunit.set_group_id(zia_str, zia_str)
-    assert zia_pidginunit.group_id_exists(sue_otx, sue_inx)
-    assert zia_pidginunit.group_id_exists(zia_str, zia_str)
+    zia_pidginunit.set_group_label(sue_otx, sue_inx)
+    zia_pidginunit.set_group_label(zia_str, zia_str)
+    assert zia_pidginunit.group_label_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.group_label_exists(zia_str, zia_str)
 
     # WHEN
-    zia_pidginunit.del_group_id(sue_otx)
+    zia_pidginunit.del_group_label(sue_otx)
 
     # THEN
-    assert zia_pidginunit.group_id_exists(sue_otx, sue_inx) is False
-    assert zia_pidginunit.group_id_exists(zia_str, zia_str)
+    assert zia_pidginunit.group_label_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.group_label_exists(zia_str, zia_str)

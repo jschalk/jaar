@@ -197,7 +197,7 @@ def new_timeline_itemunit(timeline_idea: TimeLineIdea, c400_count: int) -> ItemU
 
 
 def add_newtimeline_itemunit(x_budunit: BudUnit, timeline_config: dict):
-    x_lx = timeline_config.get(timeline_idea_str())
+    x_idee = timeline_config.get(timeline_idea_str())
     x_c400_count = timeline_config.get(c400_number_str())
     x_months = timeline_config.get(months_config_str())
     x_mday = timeline_config.get(monthday_distortion_str())
@@ -206,12 +206,12 @@ def add_newtimeline_itemunit(x_budunit: BudUnit, timeline_config: dict):
     x_yr1_jan1_offset = timeline_config.get(yr1_jan1_offset_str())
 
     time_road = x_budunit.make_l1_road(time_str())
-    new_road = x_budunit.make_road(time_road, x_lx)
+    new_road = x_budunit.make_road(time_road, x_idee)
     day_road = x_budunit.make_road(new_road, day_str())
     week_road = x_budunit.make_road(new_road, week_str())
     year_road = get_year_road(x_budunit, new_road)
 
-    add_stan_itemunits(x_budunit, time_road, x_lx, x_c400_count)
+    add_stan_itemunits(x_budunit, time_road, x_idee, x_c400_count)
     add_itemunits(x_budunit, day_road, create_hour_itemunits(x_hours_list))
     add_itemunits(x_budunit, new_road, create_week_itemunits(x_wkdays_list))
     add_itemunits(x_budunit, week_road, create_weekday_itemunits(x_wkdays_list))

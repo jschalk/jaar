@@ -8,7 +8,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     acct_name_str,
-    group_id_str,
+    group_label_str,
     credit_belief_str,
     debtit_belief_str,
 )
@@ -296,7 +296,7 @@ def test_AtomUnit_get_nesting_order_args_ReturnsObj_bud_acct_membership():
     sue_str = "Sue"
     iowa_str = ";Iowa"
     sue_insert_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    sue_insert_atomunit.set_arg(group_id_str(), iowa_str)
+    sue_insert_atomunit.set_arg(group_label_str(), iowa_str)
     sue_insert_atomunit.set_arg(acct_name_str(), sue_str)
     print(f"{sue_insert_atomunit.jkeys=}")
 

@@ -66,7 +66,7 @@ def test_BudUnit_get_agenda_dict_WithLargeBud_fund():
 
     casa_str = "casa"
     print(f"{agenda_dict.keys()=} {x_bud.make_l1_road(casa_str)=}")
-    print(f"{agenda_dict.get(x_bud.make_l1_road(casa_str))._lx=}")
+    print(f"{agenda_dict.get(x_bud.make_l1_road(casa_str))._idee=}")
     assert agenda_dict.get(x_bud.make_l1_road(casa_str))._fund_ratio
 
 
@@ -82,12 +82,12 @@ def test_BudUnit_get_agenda_dict_WithNo7amItemExample():
     assert len(agenda_dict) == 1
     clean_str = "clean table"
     print(f"{agenda_dict.keys()=} {x_bud.make_l1_road(clean_str)=}")
-    # print(f"{agenda_dict[0]._lx=}")
+    # print(f"{agenda_dict[0]._idee=}")
     assert len(agenda_dict) == 1
 
     cat_str = "cat have dinner"
     cat_agenda_item = agenda_dict.get(x_bud.make_l1_road(cat_str))
-    assert cat_agenda_item._lx != clean_str
+    assert cat_agenda_item._idee != clean_str
 
 
 def test_BudUnit_get_agenda_dict_With7amItemExample():
@@ -116,7 +116,7 @@ def test_BudUnit_get_agenda_dict_With7amItemExample():
     print(f"{len(agenda_dict)=} {agenda_dict.keys()=}")
     assert len(agenda_dict) == 6
     clean_item = agenda_dict.get(clean_road)
-    assert clean_item._lx == clean_str
+    assert clean_item._idee == clean_str
 
 
 def test_budunit_v001_AgendaExists():
@@ -127,7 +127,7 @@ def test_budunit_v001_AgendaExists():
     yao_bud.set_fact(base=min_road, pick=min_road, fopen=0, fnigh=1399)
     assert yao_bud
     # for item_kid in yao_bud._itemroot._kids.values():
-    #     # print(item_kid._lx)
+    #     # print(item_kid._idee)
     #     assert str(type(item_kid)) != "<class 'str'>"
     #     assert item_kid.pledge is not None
 
@@ -233,7 +233,7 @@ def test_BudUnit_get_agenda_dict_BudUnitCanCleanOnBase_budunit_v001_with_large_a
 
     # for agenda_item in yao_bud.get_agenda_dict():
     #     print(
-    #         f"{agenda_item._parent_road=} {agenda_item._lx} {len(agenda_item.reasonunits)=}"
+    #         f"{agenda_item._parent_road=} {agenda_item._idee} {len(agenda_item.reasonunits)=}"
     #     )
     #     for reason in agenda_item.reasonunits.values():
     #         if reason.base == weekdays:
@@ -362,11 +362,11 @@ def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
     #         assert item._active in (True, False)
     #     assert item.pledge in (True, False)
     #     # if item._active:
-    #     #     print(item._lx)
+    #     #     print(item._idee)
     #     if item.pledge:
     #         pledge_true_count += 1
     #         # if item.pledge is False:
-    #         #     print(f"pledge is false {item._lx}")
+    #         #     print(f"pledge is false {item._idee}")
     #         # for reason in item.reasonunits.values():
     #         #     assert reason._status in (True, False)
     # assert pledge_true_count > 0
@@ -401,7 +401,7 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     # for item_x in yao_bud.get_agenda_dict():
     #     # if item_x._task != True:
     #     #     print(f"{len(pledge_item_list)=} {item_x._task=} {item_x.get_road()}")
-    #     if item_x._lx == night_lx:
+    #     if item_x._idee == night_idee:
     #         night_item = item_x
     #         print(f"{item_x.get_road()=}")
 
@@ -452,7 +452,7 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
     sue_str = "Sue"
     yao_bud.add_acctunit(sue_str)
     teamunit_sue = teamunit_shop()
-    teamunit_sue.set_teamlink(team_id=sue_str)
+    teamunit_sue.set_teamlink(team_label=sue_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
@@ -464,7 +464,7 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
     # WHEN
     yao_bud.add_acctunit(yao_str)
     teamunit_yao = teamunit_shop()
-    teamunit_yao.set_teamlink(team_id=yao_str)
+    teamunit_yao.set_teamlink(team_label=yao_str)
 
     # WHEN
     yao_bud.edit_item_attr(road=casa_road, teamunit=teamunit_yao)
@@ -473,7 +473,7 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # agenda_dict = yao_bud.get_agenda_dict()
-    # print(f"{agenda_dict[0]._lx=}")
+    # print(f"{agenda_dict[0]._idee=}")
 
 
 def test_BudUnit_get_agenda_dict_IsSetByTeamUnit_2AcctGroup():
@@ -492,7 +492,7 @@ def test_BudUnit_get_agenda_dict_IsSetByTeamUnit_2AcctGroup():
     sue_acctunit.add_membership(run_str)
 
     run_teamunit = teamunit_shop()
-    run_teamunit.set_teamlink(team_id=run_str)
+    run_teamunit.set_teamlink(team_label=run_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN

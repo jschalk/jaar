@@ -4,7 +4,7 @@
             "acct_name": {
                 "jaar_type": "AcctName"
             },
-            "deal_id": {
+            "deal_idea": {
                 "jaar_type": "IdeaUnit"
             },
             "owner_name": {
@@ -25,7 +25,7 @@
             "acct_name": {
                 "jaar_type": "AcctName"
             },
-            "deal_id": {
+            "deal_idea": {
                 "jaar_type": "IdeaUnit"
             },
             "owner_name": {
@@ -43,7 +43,7 @@
     },
     "deal_timeline_hour": {
         "jkeys": {
-            "deal_id": {
+            "deal_idea": {
                 "jaar_type": "IdeaUnit"
             },
             "hour_idea": {
@@ -58,7 +58,7 @@
     },
     "deal_timeline_month": {
         "jkeys": {
-            "deal_id": {
+            "deal_idea": {
                 "jaar_type": "IdeaUnit"
             },
             "month_idea": {
@@ -73,7 +73,7 @@
     },
     "deal_timeline_weekday": {
         "jkeys": {
-            "deal_id": {
+            "deal_idea": {
                 "jaar_type": "IdeaUnit"
             },
             "weekday_idea": {
@@ -95,7 +95,7 @@
             "current_time": {
                 "jaar_type": "int"
             },
-            "deal_id": {
+            "deal_idea": {
                 "jaar_type": "IdeaUnit"
             },
             "fund_coin": {

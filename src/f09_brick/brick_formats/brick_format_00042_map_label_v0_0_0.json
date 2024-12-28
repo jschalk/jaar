@@ -9,13 +9,13 @@
         "inx_bridge": {
             "otx_key": false
         },
-        "inx_group_id": {
+        "inx_label": {
             "otx_key": false
         },
         "otx_bridge": {
             "otx_key": false
         },
-        "otx_group_id": {
+        "otx_label": {
             "otx_key": true
         },
         "unknown_word": {
@@ -24,6 +24,6 @@
     },
     "brick_number": "br00042",
     "categorys": [
-        "map_group_id"
+        "map_label"
     ]
 }

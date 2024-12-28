@@ -31,8 +31,8 @@ def get_map_group_dt_columns() -> list[str]:
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
-        "otx_group_id",
-        "inx_group_id",
+        "otx_label",
+        "inx_label",
     ]
 
 
@@ -84,8 +84,8 @@ def create_map_group_dt(x_map: GroupMap) -> DataFrame:
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
             "unknown_word": x_map.unknown_word,
-            "otx_group_id": otx_value,
-            "inx_group_id": inx_value,
+            "otx_label": otx_value,
+            "inx_label": inx_value,
         }
         for otx_value, inx_value in x_map.otx2inx.items()
     ]
@@ -168,8 +168,8 @@ def _load_groupmap_from_csv(x_dir, x_groupmap: GroupMap) -> GroupMap:
     if os_path_exists(create_path(x_dir, group_filename)):
         otx2inx_dt = open_csv(x_dir, group_filename)
         for table_row in otx2inx_dt.to_dict("records"):
-            otx_value = table_row.get("otx_group_id")
-            inx_value = table_row.get("inx_group_id")
+            otx_value = table_row.get("otx_label")
+            inx_value = table_row.get("inx_label")
             if x_groupmap.otx2inx_exists(otx_value, inx_value) is False:
                 x_groupmap.set_otx2inx(otx_value, inx_value)
     return x_groupmap

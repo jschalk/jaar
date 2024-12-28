@@ -18,12 +18,12 @@ from src.f02_bud.bud_tool import (
 from src.f04_gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
 from src.f04_gift.atom_config import (
     acct_name_str,
-    awardee_id_str,
-    group_id_str,
-    team_id_str,
+    awardee_label_str,
+    group_label_str,
+    team_label_str,
     healer_name_str,
     parent_road_str,
-    lx_str,
+    idee_str,
     base_item_active_requisite_str,
     pledge_str,
     begin_str,
@@ -224,17 +224,17 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_membership():
     yao_acctunit.add_membership(fly_str)
     zia_acctunit.add_membership(fly_str)
     bob_acctunit.add_membership(fly_str)
-    before_group_ids_dict = before_sue_budunit.get_acctunit_group_ids_dict()
-    assert len(before_group_ids_dict.get(run_str)) == 2
-    assert len(before_group_ids_dict.get(fly_str)) == 3
+    before_group_labels_dict = before_sue_budunit.get_acctunit_group_labels_dict()
+    assert len(before_group_labels_dict.get(run_str)) == 2
+    assert len(before_group_labels_dict.get(fly_str)) == 3
 
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_delete())
-    yao_atomunit.set_jkey(group_id_str(), run_str)
+    yao_atomunit.set_jkey(group_label_str(), run_str)
     yao_atomunit.set_jkey(acct_name_str(), yao_str)
     # print(f"{yao_atomunit=}")
     zia_atomunit = atomunit_shop(bud_acct_membership_str(), atom_delete())
-    zia_atomunit.set_jkey(group_id_str(), fly_str)
+    zia_atomunit.set_jkey(group_label_str(), fly_str)
     zia_atomunit.set_jkey(acct_name_str(), zia_str)
     # print(f"{zia_atomunit=}")
     sue_deltaunit = deltaunit_shop()
@@ -243,9 +243,9 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_membership():
     after_sue_budunit = sue_deltaunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    after_group_ids_dict = after_sue_budunit.get_acctunit_group_ids_dict()
-    assert len(after_group_ids_dict.get(run_str)) == 1
-    assert len(after_group_ids_dict.get(fly_str)) == 2
+    after_group_labels_dict = after_sue_budunit.get_acctunit_group_labels_dict()
+    assert len(after_group_labels_dict.get(run_str)) == 1
+    assert len(after_group_labels_dict.get(fly_str)) == 2
 
 
 def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership():
@@ -261,12 +261,12 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership():
     run_str = ";runners"
     zia_acctunit = before_sue_budunit.get_acct(zia_str)
     zia_acctunit.add_membership(run_str)
-    before_group_ids = before_sue_budunit.get_acctunit_group_ids_dict()
-    assert len(before_group_ids.get(run_str)) == 1
+    before_group_labels = before_sue_budunit.get_acctunit_group_labels_dict()
+    assert len(before_group_labels.get(run_str)) == 1
 
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    yao_atomunit.set_jkey(group_id_str(), run_str)
+    yao_atomunit.set_jkey(group_label_str(), run_str)
     yao_atomunit.set_jkey(acct_name_str(), yao_str)
     yao_run_credit_vote = 17
     yao_atomunit.set_jvalue("credit_vote", yao_run_credit_vote)
@@ -276,8 +276,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership():
     after_sue_budunit = sue_deltaunit.get_edited_bud(before_sue_budunit)
 
     # THEN
-    after_group_ids = after_sue_budunit.get_acctunit_group_ids_dict()
-    assert len(after_group_ids.get(run_str)) == 2
+    after_group_labels = after_sue_budunit.get_acctunit_group_labels_dict()
+    assert len(after_group_labels.get(run_str)) == 2
     after_yao_acctunit = after_sue_budunit.get_acct(yao_str)
     after_yao_run_membership = after_yao_acctunit.get_membership(run_str)
     assert after_yao_run_membership is not None
@@ -300,7 +300,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership():
 
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_update())
-    yao_atomunit.set_jkey(group_id_str(), run_str)
+    yao_atomunit.set_jkey(group_label_str(), run_str)
     yao_atomunit.set_jkey(acct_name_str(), yao_str)
     new_yao_run_credit_vote = 7
     new_yao_run_debtit_vote = 11
@@ -335,7 +335,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_itemunit():
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_delete())
     delete_disc_atomunit.set_jkey(
-        lx_str(), get_terminus_idea(disc_road, before_sue_budunit._bridge)
+        idee_str(), get_terminus_idea(disc_road, before_sue_budunit._bridge)
     )
     print(f"{disc_road=}")
     delete_disc_atomunit.set_jkey(
@@ -374,7 +374,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_itemunit():
     # x_numor = 10
     x_pledge = True
     insert_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    insert_disc_atomunit.set_jkey(lx_str(), disc_str)
+    insert_disc_atomunit.set_jkey(idee_str(), disc_str)
     insert_disc_atomunit.set_jkey(parent_road_str(), sports_road)
     # insert_disc_atomunit.set_jvalue(addin_str(), x_addin)
     # insert_disc_atomunit.set_jvalue(begin_str(), x_begin)
@@ -417,7 +417,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_itemunit_Simp
     x_stop_want = 1333
     x_pledge = True
     insert_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_update())
-    insert_disc_atomunit.set_jkey(lx_str(), ball_str)
+    insert_disc_atomunit.set_jkey(idee_str(), ball_str)
     insert_disc_atomunit.set_jkey(parent_road_str(), sports_road)
     # insert_disc_atomunit.set_jvalue(addin_str(), x_addin)
     insert_disc_atomunit.set_jvalue(begin_str(), x_begin)
@@ -487,7 +487,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_awardlin
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_delete())
     delete_disc_atomunit.set_jkey("road", disc_road)
-    delete_disc_atomunit.set_jkey(awardee_id_str(), fly_str)
+    delete_disc_atomunit.set_jkey(awardee_label_str(), fly_str)
     print(f"{delete_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(delete_disc_atomunit)
@@ -525,7 +525,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_awardlin
     x_take_force = 66
     update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_update())
     update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(awardee_id_str(), run_str)
+    update_disc_atomunit.set_jkey(awardee_label_str(), run_str)
     update_disc_atomunit.set_jvalue(give_force_str(), x_give_force)
     update_disc_atomunit.set_jvalue(take_force_str(), x_take_force)
     # print(f"{update_disc_atomunit=}")
@@ -564,7 +564,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_awardlin
     x_take_force = 66
     update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_insert())
     update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(awardee_id_str(), run_str)
+    update_disc_atomunit.set_jkey(awardee_label_str(), run_str)
     update_disc_atomunit.set_jvalue(give_force_str(), x_give_force)
     update_disc_atomunit.set_jvalue(take_force_str(), x_take_force)
     # print(f"{update_disc_atomunit=}")
@@ -1010,7 +1010,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_teamlink
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_insert())
     update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(team_id_str(), yao_str)
+    update_disc_atomunit.set_jkey(team_label_str(), yao_str)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
     after_sue_au = sue_deltaunit.get_edited_bud(before_sue_au)
@@ -1040,7 +1040,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_teamlink
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_delete())
     update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(team_id_str(), yao_str)
+    update_disc_atomunit.set_jkey(team_label_str(), yao_str)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
     print(f"{before_sue_au.get_item_obj(ball_road).teamunit=}")

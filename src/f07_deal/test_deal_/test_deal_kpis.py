@@ -120,7 +120,7 @@ def test_get_deal_voices_agenda_dataframe_ReturnsCorrectObj(
     agenda_colums = {
         owner_name_str(),
         "fund_ratio",
-        "_lx",
+        "_idee",
         "_parent_road",
         "begin",
         "close",
@@ -161,7 +161,7 @@ def test_get_deal_finals_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanu
     agenda_colums = {
         owner_name_str(),
         "fund_ratio",
-        "_lx",
+        "_idee",
         "_parent_road",
         "begin",
         "close",

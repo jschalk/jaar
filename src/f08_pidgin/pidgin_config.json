@@ -10,12 +10,12 @@
             "unknown_word": {}
         }
     },
-    "map_group_id": {
+    "map_label": {
         "jkeys": {
-            "otx_group_id": {}
+            "otx_label": {}
         },
         "jvalues": {
-            "inx_group_id": {},
+            "inx_label": {},
             "inx_bridge": {},
             "otx_bridge": {},
             "unknown_word": {}

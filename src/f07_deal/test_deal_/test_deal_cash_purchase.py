@@ -230,7 +230,7 @@ def test_DealUnit_set_all_tranbook_SetsAttr():
     sue_x40000_episode.set_net_purview(bob_str, bob_net_purview)
     sue_x70000_episode.set_net_purview(zia_str, zia_net_purview)
 
-    assert x_deal._all_tranbook == tranbook_shop(x_deal.deal_id)
+    assert x_deal._all_tranbook == tranbook_shop(x_deal.deal_idea)
     assert x_deal.cashpurchase_exists(sue_str, bob_str, t55_t)
     assert x_deal.cashpurchase_exists(yao_str, bob_str, t66_t)
     assert x_deal.cashpurchase_exists(yao_str, sue_str, t77_t)

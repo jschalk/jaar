@@ -5,12 +5,12 @@ from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 
 
-def temp_deal_id():
+def temp_deal_idea():
     return "ex_keep04"
 
 
 def temp_deal_dir():
-    return f"{temp_deals_dir()}/{temp_deal_id()}"
+    return f"{temp_deals_dir()}/{temp_deal_idea()}"
 
 
 def temp_deals_dir():
@@ -38,7 +38,7 @@ def get_texas_road() -> RoadUnit:
 
 def get_texas_hubunit() -> HubUnit:
     return hubunit_shop(
-        temp_deals_dir(), temp_deal_id(), temp_owner_name(), get_texas_road()
+        temp_deals_dir(), temp_deal_idea(), temp_owner_name(), get_texas_road()
     )
 
 
@@ -46,14 +46,14 @@ class InvalidkeepCopyException(Exception):
     pass
 
 
-def copy_evaluation_keep(src_deal_id: str, dest_deal_id: str):
+def copy_evaluation_keep(src_deal_idea: str, dest_deal_idea: str):
     base_dir = "src/keep/examples/keeps"
-    new_dir = f"{base_dir}/{dest_deal_id}"
+    new_dir = f"{base_dir}/{dest_deal_idea}"
     if os_path_exists(new_dir):
         raise InvalidkeepCopyException(
             f"Cannot copy keep to '{new_dir}' directory because '{new_dir}' exists."
         )
     # base_dir = keep_obj.hubunit.keep_dir()
-    src_dir = f"{base_dir}/{src_deal_id}"
-    dest_dir = f"{base_dir}/{dest_deal_id}"
+    src_dir = f"{base_dir}/{src_deal_idea}"
+    dest_dir = f"{base_dir}/{dest_deal_idea}"
     copy_dir(src_dir=src_dir, dest_dir=dest_dir)

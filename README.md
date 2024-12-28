@@ -125,11 +125,11 @@ screenshots and elucidatory text.)
 PUT conflicts in 
 
 x_dict = {
-    "bud_acct_membership":          {"jkeys": {"acct_name","group_id"},       "jvalues": {"credit_vote","debtit_vote"},
+    "bud_acct_membership":          {"jkeys": {"acct_name","group_label"},       "jvalues": {"credit_vote","debtit_vote"},
     "bud_acctunit":                 {"jkeys": {"acct_name",},                 "jvalues": {"credit_belief","debtit_belief"},
 each brick will either have bud_acctunit as a category or not. that will decide if the atom is created. 
-    "bud_item_awardlink":           {"jkeys": {"road","group_id",},         "jvalues": {"give_force","take_force"},
-    "bud_item_teamlink":            {"jkeys": {"road","group_id",},         "jvalues",
+    "bud_item_awardlink":           {"jkeys": {"road","group_label",},         "jvalues": {"give_force","take_force"},
+    "bud_item_teamlink":            {"jkeys": {"road","group_label",},         "jvalues",
 each brick will either have bud_item_teamlink as a category or not. that will decide if the atom is created. 
     "bud_item_factunit":            {"jkeys": {"road","base",},             "jvalues": {"fnigh","fopen","pick",},},
 each brick will either have bud_item_factunit as a category or not. Would be nice if pick was required...not required for delete

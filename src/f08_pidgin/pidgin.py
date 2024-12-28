@@ -32,27 +32,27 @@ class check_attrException(Exception):
 
 
 def pidginable_jaar_types() -> set:
-    return {"AcctName", "GroupID", "IdeaUnit", "RoadUnit"}
+    return {"AcctName", "GroupLabel", "IdeaUnit", "RoadUnit"}
 
 
 def pidginable_atom_args() -> set:
     return {
         "acct_name",
-        "awardee_id",
+        "awardee_label",
         "base",
         "face_name",
-        "deal_id",
-        "group_id",
+        "deal_idea",
+        "group_label",
         "healer_name",
         "hour_idea",
-        "lx",
+        "idee",
         "month_idea",
         "parent_road",
         "pick",
         "need",
         "owner_name",
         "road",
-        "team_id",
+        "team_label",
         "timeline_idea",
         "weekday_idea",
     }
@@ -63,7 +63,7 @@ class PidginUnit:
     """Per face object that translates any translatable str.
     otx is the reference for the outside, what the face says
     inx is the reference for the inside, what the same inteprets from the face
-    Contains a mapunit for each translatable type: RoadUnit, AcctName, GroupID...
+    Contains a mapunit for each translatable type: RoadUnit, AcctName, GroupLabel...
     """
 
     event_int: EventInt = None
@@ -83,22 +83,22 @@ class PidginUnit:
     def get_groupmap(self) -> GroupMap:
         return self.groupmap
 
-    def set_group_id(self, otx_group_id: str, inx_group_id: str):
-        self.groupmap.set_otx2inx(otx_group_id, inx_group_id)
+    def set_group_label(self, otx_label: str, inx_label: str):
+        self.groupmap.set_otx2inx(otx_label, inx_label)
 
-    def group_id_exists(self, otx_group_id: str, inx_group_id: str):
-        return self.groupmap.otx2inx_exists(otx_group_id, inx_group_id)
+    def group_label_exists(self, otx_label: str, inx_label: str):
+        return self.groupmap.otx2inx_exists(otx_label, inx_label)
 
-    def _get_inx_group_id(self, otx_group_id: str):
-        return self.groupmap._get_inx_value(otx_group_id)
+    def _get_inx_label(self, otx_label: str):
+        return self.groupmap._get_inx_value(otx_label)
 
-    def del_group_id(self, otx_group_id: str):
-        return self.groupmap.del_otx2inx(otx_group_id)
+    def del_group_label(self, otx_label: str):
+        return self.groupmap.del_otx2inx(otx_label)
 
     def get_mapunit(self, x_jaar_type: str):
         if x_jaar_type == "AcctName":
             return self.acctmap
-        elif x_jaar_type == "GroupID":
+        elif x_jaar_type == "GroupLabel":
             return self.groupmap
         elif x_jaar_type == "IdeaUnit":
             return self.ideamap
@@ -186,7 +186,7 @@ class PidginUnit:
     def set_otx2inx(self, x_jaar_type: str, x_otx: str, x_inx: str):
         if x_jaar_type == "AcctName":
             self.acctmap.set_otx2inx(x_otx, x_inx)
-        elif x_jaar_type == "GroupID":
+        elif x_jaar_type == "GroupLabel":
             self.groupmap.set_otx2inx(x_otx, x_inx)
         elif x_jaar_type == "IdeaUnit":
             self.ideamap.set_otx2inx(x_otx, x_inx)
@@ -196,7 +196,7 @@ class PidginUnit:
     def _get_inx_value(self, x_jaar_type: str, x_otx: str) -> str:
         if x_jaar_type == "AcctName":
             return self.acctmap._get_inx_value(x_otx)
-        elif x_jaar_type == "GroupID":
+        elif x_jaar_type == "GroupLabel":
             return self.groupmap._get_inx_value(x_otx)
         elif x_jaar_type == "IdeaUnit":
             return self.ideamap._get_inx_value(x_otx)
@@ -206,7 +206,7 @@ class PidginUnit:
     def otx2inx_exists(self, x_jaar_type: str, x_otx: str, x_inx: str) -> bool:
         if x_jaar_type == "AcctName":
             return self.acctmap.otx2inx_exists(x_otx, x_inx)
-        elif x_jaar_type == "GroupID":
+        elif x_jaar_type == "GroupLabel":
             return self.groupmap.otx2inx_exists(x_otx, x_inx)
         elif x_jaar_type == "IdeaUnit":
             return self.ideamap.otx2inx_exists(x_otx, x_inx)
@@ -216,7 +216,7 @@ class PidginUnit:
     def del_otx2inx(self, x_jaar_type: str, x_otx: str):
         if x_jaar_type == "AcctName":
             self.acctmap.del_otx2inx(x_otx)
-        elif x_jaar_type == "GroupID":
+        elif x_jaar_type == "GroupLabel":
             self.groupmap.del_otx2inx(x_otx)
         elif x_jaar_type == "IdeaUnit":
             self.ideamap.del_otx2inx(x_otx)

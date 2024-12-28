@@ -7,7 +7,7 @@ from src.f01_road.finance import (
 )
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f01_road.road import (
-    get_default_deal_id_ideaunit as root_lx,
+    get_default_deal_idea as root_idea,
     default_bridge_if_None,
 )
 from src.f02_bud.origin import originunit_shop
@@ -20,7 +20,7 @@ def test_BudUnit_Exists():
 
     # THEN
     assert x_bud
-    assert x_bud._deal_id is None
+    assert x_bud._deal_idea is None
     assert x_bud._owner_name is None
     assert x_bud.tally is None
     assert x_bud._accts is None
@@ -55,7 +55,7 @@ def test_BudUnit_Exists():
 def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
-    iowa_deal_id = "Iowa"
+    iowa_deal_idea = "Iowa"
     slash_bridge = "/"
     x_fund_pool = 555
     x_fund_coin = 7
@@ -65,7 +65,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # WHEN
     x_bud = budunit_shop(
         _owner_name=sue_str,
-        _deal_id=iowa_deal_id,
+        _deal_idea=iowa_deal_idea,
         _bridge=slash_bridge,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
@@ -76,7 +76,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # THEN
     assert x_bud
     assert x_bud._owner_name == sue_str
-    assert x_bud._deal_id == iowa_deal_id
+    assert x_bud._deal_idea == iowa_deal_idea
     assert x_bud.tally == 1
     assert x_bud._accts == {}
     assert x_bud._itemroot is not None
@@ -114,7 +114,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
 
     # THEN
     assert x_bud._owner_name == ""
-    assert x_bud._deal_id == root_lx()
+    assert x_bud._deal_idea == root_idea()
     assert x_bud._bridge == default_bridge_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_None()
@@ -125,7 +125,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_bud._itemroot._root
     assert x_bud._itemroot._uid == 1
     assert x_bud._itemroot._level == 0
-    assert x_bud._itemroot._bud_deal_id == x_bud._deal_id
+    assert x_bud._itemroot._bud_deal_idea == x_bud._deal_idea
     assert x_bud._itemroot._bridge == x_bud._bridge
     assert x_bud._itemroot._parent_road == ""
 
@@ -177,10 +177,10 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
 
 def test_BudUnit_set_bridge_CorrectlySetsAttr():
     # ESTABLISH
-    x_deal_id = "accord45"
+    x_deal_idea = "accord45"
     slash_bridge = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_deal_id, _bridge=slash_bridge)
+    sue_bud = budunit_shop(sue_str, x_deal_idea, _bridge=slash_bridge)
     assert sue_bud._bridge == slash_bridge
 
     # WHEN
@@ -193,10 +193,10 @@ def test_BudUnit_set_bridge_CorrectlySetsAttr():
 
 def test_BudUnit_make_road_ReturnsCorrectObj():
     # ESTABLISH
-    x_deal_id = "accord45"
+    x_deal_idea = "accord45"
     slash_bridge = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_deal_id, _bridge=slash_bridge)
+    sue_bud = budunit_shop(sue_str, x_deal_idea, _bridge=slash_bridge)
     casa_str = "casa"
     v1_casa_road = sue_bud.make_l1_road(casa_str)
 

@@ -59,10 +59,10 @@ def bud_acctunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 def bud_acct_membership_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_acct_name = jkeys.get("acct_name")
-    x_group_id = jkeys.get("group_id")
+    x_group_label = jkeys.get("group_label")
     return bool(
         bud_acctunit_exists(x_bud, jkeys)
-        and x_bud.get_acct(x_acct_name).membership_exists(x_group_id)
+        and x_bud.get_acct(x_acct_name).membership_exists(x_group_label)
     )
 
 
@@ -72,11 +72,11 @@ def bud_itemunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 
 def bud_item_awardlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_awardee_id = jkeys.get("awardee_id")
+    x_awardee_label = jkeys.get("awardee_label")
     x_road = jkeys.get("road")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).awardlink_exists(x_awardee_id)
+        and x_bud.get_item_obj(x_road).awardlink_exists(x_awardee_label)
     )
 
 
@@ -100,11 +100,11 @@ def bud_item_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) ->
 
 
 def bud_item_teamlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_team_id = jkeys.get("team_id")
+    x_team_label = jkeys.get("team_label")
     x_road = jkeys.get("road")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_team_id)
+        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_team_label)
     )
 
 
@@ -156,8 +156,8 @@ def bud_acctunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AcctUnit:
 
 def bud_acct_membership_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> MemberShip:
     x_acct_name = jkeys.get("acct_name")
-    x_group_id = jkeys.get("group_id")
-    return x_bud.get_acct(x_acct_name).get_membership(x_group_id)
+    x_group_label = jkeys.get("group_label")
+    return x_bud.get_acct(x_acct_name).get_membership(x_group_label)
 
 
 def bud_itemunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ItemUnit:
@@ -167,8 +167,8 @@ def bud_itemunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ItemUnit:
 
 def bud_item_awardlink_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AwardLink:
     x_road = jkeys.get("road")
-    x_awardee_id = jkeys.get("awardee_id")
-    return x_bud.get_item_obj(x_road).get_awardlink(x_awardee_id)
+    x_awardee_label = jkeys.get("awardee_label")
+    return x_bud.get_item_obj(x_road).get_awardlink(x_awardee_label)
 
 
 def bud_item_reasonunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ReasonUnit:

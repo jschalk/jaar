@@ -1,5 +1,5 @@
 from src.f02_bud.bud_tool import bud_acctunit_str
-from src.f04_gift.atom_config import acct_name_str, group_id_str, road_str, base_str
+from src.f04_gift.atom_config import acct_name_str, group_label_str, road_str, base_str
 from src.f09_brick.brick import BrickRef, brickref_shop
 
 
@@ -58,13 +58,13 @@ def test_BrickRef_get_headers_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
     x3_brickref = brickref_shop("0003", bud_acctunit_str())
-    x3_brickref.set_attribute(group_id_str(), True)
+    x3_brickref.set_attribute(group_label_str(), True)
 
     # WHEN
     x_headers_list = x3_brickref.get_headers_list()
 
     # THEN
-    assert x_headers_list == [group_id_str()]
+    assert x_headers_list == [group_label_str()]
 
 
 def test_BrickRef_get_headers_list_ReturnsObj_Scenario2():
@@ -72,14 +72,14 @@ def test_BrickRef_get_headers_list_ReturnsObj_Scenario2():
 
     x3_brickref = brickref_shop("0003", bud_acctunit_str())
     x3_brickref.set_attribute(road_str(), True)
-    x3_brickref.set_attribute(group_id_str(), False)
+    x3_brickref.set_attribute(group_label_str(), False)
     x3_brickref.set_attribute(acct_name_str(), True)
 
     # WHEN
     x_headers_list = x3_brickref.get_headers_list()
 
     # THEN
-    assert x_headers_list == [acct_name_str(), group_id_str(), road_str()]
+    assert x_headers_list == [acct_name_str(), group_label_str(), road_str()]
 
 
 def test_BrickRef_get_otx_keys_list_ReturnsObj_Scenario0():
@@ -97,13 +97,13 @@ def test_BrickRef_get_otx_keys_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
     x3_brickref = brickref_shop("0003", bud_acctunit_str())
-    x3_brickref.set_attribute(group_id_str(), True)
+    x3_brickref.set_attribute(group_label_str(), True)
 
     # WHEN
     x_otx_keys_list = x3_brickref.get_otx_keys_list()
 
     # THEN
-    assert x_otx_keys_list == [group_id_str()]
+    assert x_otx_keys_list == [group_label_str()]
 
 
 def test_BrickRef_get_otx_keys_list_ReturnsObj_Scenario2():
@@ -111,7 +111,7 @@ def test_BrickRef_get_otx_keys_list_ReturnsObj_Scenario2():
 
     x3_brickref = brickref_shop("0003", bud_acctunit_str())
     x3_brickref.set_attribute(road_str(), True)
-    x3_brickref.set_attribute(group_id_str(), False)
+    x3_brickref.set_attribute(group_label_str(), False)
     x3_brickref.set_attribute(acct_name_str(), True)
 
     # WHEN
@@ -136,7 +136,7 @@ def test_BrickRef_get_otx_values_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
     x3_brickref = brickref_shop("0003", bud_acctunit_str())
-    x3_brickref.set_attribute(group_id_str(), True)
+    x3_brickref.set_attribute(group_label_str(), True)
 
     # WHEN
     x_otx_values_list = x3_brickref.get_otx_values_list()
@@ -150,7 +150,7 @@ def test_BrickRef_get_otx_values_list_ReturnsObj_Scenario2():
 
     x3_brickref = brickref_shop("0003", bud_acctunit_str())
     x3_brickref.set_attribute(road_str(), True)
-    x3_brickref.set_attribute(group_id_str(), False)
+    x3_brickref.set_attribute(group_label_str(), False)
     x3_brickref.set_attribute(base_str(), False)
     x3_brickref.set_attribute(acct_name_str(), False)
 
@@ -158,4 +158,4 @@ def test_BrickRef_get_otx_values_list_ReturnsObj_Scenario2():
     x_otx_values_list = x3_brickref.get_otx_values_list()
 
     # THEN
-    assert x_otx_values_list == [acct_name_str(), group_id_str(), base_str()]
+    assert x_otx_values_list == [acct_name_str(), group_label_str(), base_str()]

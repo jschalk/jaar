@@ -1,6 +1,6 @@
 from src.f00_instrument.file import open_file, create_path as f_path
 from src.f00_instrument.dict_toolbox import get_dict_from_json
-from src.f01_road.jaar_config import get_gifts_folder, get_test_deal_id as deal_id
+from src.f01_road.jaar_config import get_gifts_folder, get_test_deal_idea as deal_idea
 from src.f04_gift.atom_config import owner_name_str, face_name_str
 from src.f04_gift.delta import deltaunit_shop
 from src.f04_gift.gift import giftunit_shop, create_giftunit_from_files
@@ -18,7 +18,7 @@ from os.path import exists as os_path_exists
 
 def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_deal_dir = f_path(deals_dir(), deal_id())
+    x_deal_dir = f_path(deals_dir(), deal_idea())
     x_owners_dir = f_path(x_deal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
@@ -48,7 +48,7 @@ def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_deal_dir = f_path(deals_dir(), deal_id())
+    x_deal_dir = f_path(deals_dir(), deal_idea())
     x_owners_dir = f_path(x_deal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
@@ -75,7 +75,7 @@ def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_deal_dir = f_path(deals_dir(), deal_id())
+    x_deal_dir = f_path(deals_dir(), deal_idea())
     x_owners_dir = f_path(x_deal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
@@ -102,7 +102,7 @@ def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_deal_dir = f_path(deals_dir(), deal_id())
+    x_deal_dir = f_path(deals_dir(), deal_idea())
     x_owners_dir = f_path(x_deal_dir, "owners")
     sue_str = "Sue"
     sue_gift_id = 2
@@ -139,7 +139,7 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_deal_dir = f_path(deals_dir(), deal_id())
+    x_deal_dir = f_path(deals_dir(), deal_idea())
     x_owners_dir = f_path(x_deal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
@@ -165,7 +165,7 @@ def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    x_deal_dir = f_path(deals_dir(), deal_id())
+    x_deal_dir = f_path(deals_dir(), deal_idea())
     x_owners_dir = f_path(x_deal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
@@ -202,7 +202,7 @@ def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
 
 def test_GiftUnit_create_deltaunit_from_atom_files_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
-    x_deal_dir = f_path(deals_dir(), deal_id())
+    x_deal_dir = f_path(deals_dir(), deal_idea())
     x_owners_dir = f_path(x_deal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
@@ -235,7 +235,7 @@ def test_GiftUnit_create_deltaunit_from_atom_files_SetsAttr(env_dir_setup_cleanu
 
 def test_create_giftunit_from_files_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_deal_dir = f_path(deals_dir(), deal_id())
+    x_deal_dir = f_path(deals_dir(), deal_idea())
     x_owners_dir = f_path(x_deal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)

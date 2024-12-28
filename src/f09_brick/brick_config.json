@@ -15,17 +15,17 @@
       "unknown_word": {}
     }
   },
-  "map_group_id": {
+  "map_label": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 1,
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "otx_group_id": {}
+      "otx_label": {}
     },
     "jvalues": {
-      "inx_group_id": {},
+      "inx_label": {},
       "inx_bridge": {},
       "otx_bridge": {},
       "unknown_word": {}
@@ -71,8 +71,8 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
-      "group_id": {},
+      "deal_idea": {},
+      "group_label": {},
       "time_int": {}
     },
     "jvalues": {
@@ -88,7 +88,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "time_int": {}
     },
     "jvalues": {
@@ -101,10 +101,10 @@
     "brick_type": "budunit",
     "build_order": 11,
     "jkeys": {
-      "awardee_id": {},
+      "awardee_label": {},
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "road": {},
       "time_int": {}
     },
@@ -121,7 +121,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "road": {},
       "time_int": {}
     },
@@ -138,7 +138,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "healer_name": {},
       "road": {},
       "time_int": {}
@@ -153,7 +153,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "need": {},
       "road": {},
       "time_int": {}
@@ -172,7 +172,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "road": {},
       "time_int": {}
     },
@@ -187,9 +187,9 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "road": {},
-      "team_id": {},
+      "team_label": {},
       "time_int": {}
     },
     "jvalues": {}
@@ -201,8 +201,8 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
-      "lx": {},
+      "deal_idea": {},
+      "idee": {},
       "parent_road": {},
       "time_int": {}
     },
@@ -227,7 +227,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "time_int": {}
     },
     "jvalues": {
@@ -250,7 +250,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "owner_name": {},
       "time_int": {}
     },
@@ -266,7 +266,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "owner_name": {},
       "time_int": {}
     },
@@ -281,7 +281,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "hour_idea": {},
       "time_int": {}
     },
@@ -296,7 +296,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "month_idea": {},
       "time_int": {}
     },
@@ -311,7 +311,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "time_int": {},
       "weekday_idea": {}
     },
@@ -326,7 +326,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_id": {},
+      "deal_idea": {},
       "time_int": {}
     },
     "jvalues": {

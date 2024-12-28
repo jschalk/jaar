@@ -1,4 +1,4 @@
-from src.f01_road.road import RoadUnit, create_road, get_default_deal_id_ideaunit
+from src.f01_road.road import RoadUnit, create_road, get_default_deal_idea
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop, BudUnit
 
@@ -32,7 +32,7 @@ def run_str():
 
 
 def casa_road() -> RoadUnit:
-    return create_road(get_default_deal_id_ideaunit(), casa_str())
+    return create_road(get_default_deal_idea(), casa_str())
 
 
 def cook_road() -> RoadUnit:

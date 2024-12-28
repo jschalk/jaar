@@ -3,7 +3,7 @@ from src.f01_road.road import (
     default_bridge_if_None,
     create_road_from_ideas,
     create_road,
-    get_default_deal_id_ideaunit as root_lx,
+    get_default_deal_idea as root_idea,
 )
 from src.f01_road.finance import (
     default_respect_bit_if_None,
@@ -15,7 +15,7 @@ from src.f01_road.jaar_config import (
     get_gifts_folder,
     get_test_deals_dir,
     get_rootpart_of_keep_dir,
-    get_deal_id_if_None,
+    get_deal_idea_if_None,
 )
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.hubunit import HubUnit, hubunit_shop, get_keep_path
@@ -32,7 +32,7 @@ def test_get_keep_path_ReturnsCorrectObj():
     # ESTABLISH
     sue_str = "Sue"
     peru_str = "peru"
-    sue_hubunit = hubunit_shop(None, deal_id=peru_str, owner_name=sue_str)
+    sue_hubunit = hubunit_shop(None, deal_idea=peru_str, owner_name=sue_str)
     texas_str = "texas"
     dallas_str = "dallas"
     elpaso_str = "el paso"
@@ -74,7 +74,7 @@ def test_HubUnit_Exists():
 
     # THEN
     assert x_hubunit.deals_dir is None
-    assert x_hubunit.deal_id is None
+    assert x_hubunit.deal_idea is None
     assert x_hubunit.owner_name is None
     assert x_hubunit.keep_road is None
     assert x_hubunit.bridge is None
@@ -102,7 +102,7 @@ def test_HubUnit_RaisesError_keep_road_DoesNotExist():
 def test_hubunit_shop_ReturnsCorrectObj():
     # ESTABLISH
     x_deals_dir = "src/f07_deal/examples"
-    x_deal_id = "accord"
+    x_deal_idea = "accord"
     sue_str = "Sue"
     x_bridge = "/"
     x_fund_pool = 13000
@@ -114,7 +114,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     # WHEN
     x_hubunit = hubunit_shop(
         deals_dir=x_deals_dir,
-        deal_id=x_deal_id,
+        deal_idea=x_deal_idea,
         owner_name=sue_str,
         keep_road=None,
         bridge=x_bridge,
@@ -127,7 +127,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
 
     # THEN
     assert x_hubunit.deals_dir == x_deals_dir
-    assert x_hubunit.deal_id == x_deal_id
+    assert x_hubunit.deal_idea == x_deal_idea
     assert x_hubunit.owner_name == sue_str
     assert x_hubunit.bridge == x_bridge
     assert x_hubunit.fund_pool == x_fund_pool
@@ -135,7 +135,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
-    assert x_hubunit.deal_dir() == create_path(x_deals_dir, x_deal_id)
+    assert x_hubunit.deal_dir() == create_path(x_deals_dir, x_deal_idea)
     assert x_hubunit.owners_dir() == create_path(x_hubunit.deal_dir(), "owners")
     assert x_hubunit.owner_dir() == create_path(x_hubunit.owners_dir(), sue_str)
     assert x_hubunit.keeps_dir() == create_path(x_hubunit.owner_dir(), "keeps")
@@ -158,7 +158,7 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -168,14 +168,14 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     sue_hubunit = hubunit_shop(None, None, sue_str, texas_road)
 
     # THEN
-    x_deal_path = create_path(get_test_deals_dir(), get_deal_id_if_None())
+    x_deal_path = create_path(get_test_deals_dir(), get_deal_idea_if_None())
     x_owners_path = create_path(sue_hubunit.deal_dir(), "owners")
     x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
     x_jobs_path = create_path(sue_hubunit.keep_dir(), "jobs")
     x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
 
     assert sue_hubunit.deals_dir == get_test_deals_dir()
-    assert sue_hubunit.deal_id == get_deal_id_if_None()
+    assert sue_hubunit.deal_idea == get_deal_idea_if_None()
     assert sue_hubunit.deal_dir() == x_deal_path
     assert sue_hubunit.owner_name == sue_str
     assert sue_hubunit.bridge == default_bridge_if_None()
@@ -298,8 +298,8 @@ def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit._owner_name
-    deal_id = root_lx()
-    sue_hubunit = hubunit_shop(env_dir(), deal_id, sue_str, None)
+    deal_idea = root_idea()
+    sue_hubunit = hubunit_shop(env_dir(), deal_idea, sue_str, None)
 
     print(f"{sue_hubunit.voice_file_path()=}")
     assert sue_hubunit.voice_file_exists() is False
@@ -317,8 +317,8 @@ def test_HubUnit_save_voice_bud_RaisesErrorWhenBud_final_id_IsWrong(
     # ESTABLISH
     sue_str = "Sue"
 
-    deal_id = root_lx()
-    sue_hubunit = hubunit_shop(env_dir(), deal_id, sue_str, None)
+    deal_idea = root_idea()
+    sue_hubunit = hubunit_shop(env_dir(), deal_idea, sue_str, None)
 
     # WHEN / THEN
     yao_str = "Yao"
@@ -335,7 +335,7 @@ def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit._owner_name
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -352,8 +352,8 @@ def test_HubUnit_save_final_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit._owner_name
 
-    deal_id = root_lx()
-    sue_hubunit = hubunit_shop(env_dir(), deal_id, sue_str, None)
+    deal_idea = root_idea()
+    sue_hubunit = hubunit_shop(env_dir(), deal_idea, sue_str, None)
 
     print(f"{sue_hubunit.final_path()=}")
     assert sue_hubunit.final_file_exists() is False
@@ -370,7 +370,7 @@ def test_HubUnit_get_final_bud_OpensFile(env_dir_setup_cleanup):
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit._owner_name
     nation_str = "nation-state"
-    nation_road = create_road(root_lx(), nation_str)
+    nation_road = create_road(root_idea(), nation_str)
     usa_str = "USA"
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
@@ -398,8 +398,8 @@ def test_HubUnit_save_final_bud_RaisesErrorWhenBud_final_id_IsWrong(
     # ESTABLISH
     sue_str = "Sue"
 
-    deal_id = root_lx()
-    sue_hubunit = hubunit_shop(env_dir(), deal_id, sue_str, None)
+    deal_idea = root_idea()
+    sue_hubunit = hubunit_shop(env_dir(), deal_idea, sue_str, None)
 
     # WHEN / THEN
     yao_str = "Yao"

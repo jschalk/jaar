@@ -18,13 +18,13 @@
         "face_name": {
             "otx_key": true
         },
-        "deal_id": {
+        "deal_idea": {
             "otx_key": true
         },
         "gogo_want": {
             "otx_key": false
         },
-        "lx": {
+        "idee": {
             "otx_key": true
         },
         "mass": {

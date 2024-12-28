@@ -3,18 +3,19 @@ from src.f09_brick.pandas_tool import upsert_sheet
 from pandas import DataFrame
 
 
-def create_init_deal_staging_files(dir: str):
-    br00000_path = create_path(dir, "br00000.xlsx")
-    br00001_path = create_path(dir, "br00001.xlsx")
-    br00002_path = create_path(dir, "br00002.xlsx")
-    br00003_path = create_path(dir, "br00003.xlsx")
-    br00004_path = create_path(dir, "br00004.xlsx")
-    br00005_path = create_path(dir, "br00005.xlsx")
+def create_init_deal_prime_files(dir: str):
+    dealunit_path = create_path(dir, "dealunit.xlsx")
+    deal_purview_episode_path = create_path(dir, "deal_purview_episode.xlsx")
+    deal_cashbook_path = create_path(dir, "deal_cashbook.xlsx")
+    deal_timeline_hour_path = create_path(dir, "deal_timeline_hour.xlsx")
+    deal_timeline_month_path = create_path(dir, "deal_timeline_month.xlsx")
+    deal_timeline_weekday_path = create_path(dir, "deal_timeline_weekday.xlsx")
 
-    br00000_columns = [
+    dealunit_columns = [
+        "source_br",
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "c400_number",
         "current_time",
         "fund_coin",
@@ -24,56 +25,82 @@ def create_init_deal_staging_files(dir: str):
         "bridge",
         "timeline_idea",
         "yr1_jan1_offset",
+        "note",
     ]
-    br00001_columns = [
+    deal_purview_episode_columns = [
+        "source_br",
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "owner_name",
         "acct_name",
         "time_int",
         "quota",
+        "note",
     ]
-    br00002_columns = [
+    deal_cashbook_columns = [
+        "source_br",
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "owner_name",
         "acct_name",
         "time_int",
         "amount",
+        "note",
     ]
-    br00003_columns = [
+    deal_timeline_hour_columns = [
+        "source_br",
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "hour_idea",
         "cumlative_minute",
+        "note",
     ]
-    br00004_columns = [
+    deal_timeline_month_columns = [
+        "source_br",
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "month_idea",
         "cumlative_day",
+        "note",
     ]
-    br00005_columns = [
+    deal_timeline_weekday_columns = [
+        "source_br",
         "face_name",
         "event_int",
-        "deal_id",
+        "deal_idea",
         "weekday_idea",
         "weekday_order",
+        "note",
     ]
-    br00000_df = DataFrame([], columns=br00000_columns)
-    br00001_df = DataFrame([], columns=br00001_columns)
-    br00002_df = DataFrame([], columns=br00002_columns)
-    br00003_df = DataFrame([], columns=br00003_columns)
-    br00004_df = DataFrame([], columns=br00004_columns)
-    br00005_df = DataFrame([], columns=br00005_columns)
+    dealunit_df = DataFrame([], columns=dealunit_columns)
+    deal_purview_episode_df = DataFrame([], columns=deal_purview_episode_columns)
+    deal_cashbook_df = DataFrame([], columns=deal_cashbook_columns)
+    deal_timeline_hour_df = DataFrame([], columns=deal_timeline_hour_columns)
+    deal_timeline_month_df = DataFrame([], columns=deal_timeline_month_columns)
+    deal_timeline_weekday_df = DataFrame([], columns=deal_timeline_weekday_columns)
 
-    upsert_sheet(br00000_path, "staging", br00000_df)
-    upsert_sheet(br00001_path, "staging", br00001_df)
-    upsert_sheet(br00002_path, "staging", br00002_df)
-    upsert_sheet(br00003_path, "staging", br00003_df)
-    upsert_sheet(br00004_path, "staging", br00004_df)
-    upsert_sheet(br00005_path, "staging", br00005_df)
+    upsert_sheet(dealunit_path, "staging", dealunit_df)
+    upsert_sheet(deal_purview_episode_path, "staging", deal_purview_episode_df)
+    upsert_sheet(deal_cashbook_path, "staging", deal_cashbook_df)
+    upsert_sheet(deal_timeline_hour_path, "staging", deal_timeline_hour_df)
+    upsert_sheet(deal_timeline_month_path, "staging", deal_timeline_month_df)
+    upsert_sheet(deal_timeline_weekday_path, "staging", deal_timeline_weekday_df)
+
+    drop_list = ["source_br", "face_name", "event_int", "note"]
+    dealunit_df.drop(columns=drop_list, axis=1, inplace=True)
+    deal_purview_episode_df.drop(columns=drop_list, axis=1, inplace=True)
+    deal_cashbook_df.drop(columns=drop_list, axis=1, inplace=True)
+    deal_timeline_hour_df.drop(columns=drop_list, axis=1, inplace=True)
+    deal_timeline_month_df.drop(columns=drop_list, axis=1, inplace=True)
+    deal_timeline_weekday_df.drop(columns=drop_list, axis=1, inplace=True)
+
+    upsert_sheet(dealunit_path, "agg", dealunit_df)
+    upsert_sheet(deal_purview_episode_path, "agg", deal_purview_episode_df)
+    upsert_sheet(deal_cashbook_path, "agg", deal_cashbook_df)
+    upsert_sheet(deal_timeline_hour_path, "agg", deal_timeline_hour_df)
+    upsert_sheet(deal_timeline_month_path, "agg", deal_timeline_month_df)
+    upsert_sheet(deal_timeline_weekday_path, "agg", deal_timeline_weekday_df)

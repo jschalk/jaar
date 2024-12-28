@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f01_road.finance_tran import DealID
+from src.f01_road.finance_tran import DealIdea
 from src.f01_road.road import FaceName, EventInt
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -39,7 +39,7 @@ class not_given_pidgin_category_Exception(Exception):
 
 MAPS_CATEGORYS = {
     "map_name": "AcctName",
-    "map_group_id": "GroupID",
+    "map_label": "GroupLabel",
     "map_idea": "IdeaUnit",
     "map_road": "RoadUnit",
 }
@@ -52,12 +52,12 @@ JAAR_TYPES = {
         "otx_obj": "otx_name",
         "inx_obj": "inx_name",
     },
-    "GroupID": {
+    "GroupLabel": {
         "stage": "group_staging",
         "agg": "group_agg",
         "csv_filename": "group.csv",
-        "otx_obj": "otx_group_id",
-        "inx_obj": "inx_group_id",
+        "otx_obj": "otx_label",
+        "inx_obj": "inx_label",
     },
     "IdeaUnit": {
         "stage": "idea_staging",
@@ -325,7 +325,7 @@ def etl_boat_agg_to_pidgin_acct_staging(
 def etl_boat_agg_to_pidgin_group_staging(
     legitimate_events: set[EventInt], boat_dir: str
 ):
-    boat_agg_single_to_pidgin_staging("map_group_id", legitimate_events, boat_dir)
+    boat_agg_single_to_pidgin_staging("map_label", legitimate_events, boat_dir)
 
 
 def etl_boat_agg_to_pidgin_idea_staging(
@@ -412,8 +412,8 @@ class boatAggToStagingTransformer:
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
         if self.jaar_type == "AcctName" and "inx_name" not in missing_col:
             return x_row["inx_name"]
-        elif self.jaar_type == "GroupID" and "inx_group_id" not in missing_col:
-            return x_row["inx_group_id"]
+        elif self.jaar_type == "GroupLabel" and "inx_label" not in missing_col:
+            return x_row["inx_label"]
         elif self.jaar_type == "IdeaUnit" and "inx_idea" not in missing_col:
             return x_row["inx_idea"]
         elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
@@ -426,7 +426,7 @@ def etl_pidgin_acct_staging_to_acct_agg(boat_dir: str):
 
 
 def etl_pidgin_group_staging_to_group_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "map_group_id")
+    etl_pidgin_single_staging_to_agg(boat_dir, "map_label")
 
 
 def etl_pidgin_road_staging_to_road_agg(boat_dir: str):
@@ -715,7 +715,7 @@ def etl_aft_event_bricks_to_deal_bricks(faces_aft_dir: str):
                 split_excel_into_dirs(
                     input_file=event_brick_path,
                     output_dir=event_dir,
-                    column_name="deal_id",
+                    column_name="deal_idea",
                     file_name=event_br_ref.brick_number,
                     sheet_name="inx",
                 )

@@ -6,13 +6,13 @@
         "face_name": {
             "otx_key": true
         },
-        "deal_id": {
+        "deal_idea": {
             "otx_key": true
         },
         "healer_name": {
             "otx_key": true
         },
-        "lx": {
+        "idee": {
             "otx_key": true
         },
         "owner_name": {

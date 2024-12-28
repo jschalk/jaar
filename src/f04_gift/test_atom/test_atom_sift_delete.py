@@ -15,12 +15,12 @@ from src.f02_bud.bud_tool import (
 from src.f04_gift.atom import atom_delete, atomunit_shop, sift_atomunit
 from src.f04_gift.atom_config import (
     acct_name_str,
-    awardee_id_str,
-    group_id_str,
-    team_id_str,
+    awardee_label_str,
+    group_label_str,
+    team_label_str,
     healer_name_str,
     parent_road_str,
-    lx_str,
+    idee_str,
     road_str,
     base_str,
 )
@@ -62,10 +62,10 @@ def test_sift_atom_ReturnsObj_AtomUnit_DELETE_bud_acct_membership():
 
     bob_run_atom = atomunit_shop(bud_acct_membership_str(), atom_delete())
     bob_run_atom.set_arg(acct_name_str(), bob_str)
-    bob_run_atom.set_arg(group_id_str(), run_str)
+    bob_run_atom.set_arg(group_label_str(), run_str)
     yao_run_atom = atomunit_shop(bud_acct_membership_str(), atom_delete())
     yao_run_atom.set_arg(acct_name_str(), yao_str)
-    yao_run_atom.set_arg(group_id_str(), run_str)
+    yao_run_atom.set_arg(group_label_str(), run_str)
 
     # WHEN
     new_bob_run_atomunit = sift_atomunit(sue_bud, bob_run_atom)
@@ -89,16 +89,16 @@ def test_sift_atom_ReturnsObj_AtomUnit_DELETE_bud_itemunit():
 
     root_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
     root_atom.set_arg(parent_road_str(), "")
-    root_atom.set_arg(lx_str(), sue_bud._deal_id)
+    root_atom.set_arg(idee_str(), sue_bud._deal_idea)
     casa_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
-    casa_atom.set_arg(parent_road_str(), sue_bud._deal_id)
-    casa_atom.set_arg(lx_str(), casa_str)
+    casa_atom.set_arg(parent_road_str(), sue_bud._deal_idea)
+    casa_atom.set_arg(idee_str(), casa_str)
     clean_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
     clean_atom.set_arg(parent_road_str(), casa_road)
-    clean_atom.set_arg(lx_str(), clean_str)
+    clean_atom.set_arg(idee_str(), clean_str)
     sweep_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
     sweep_atom.set_arg(parent_road_str(), clean_road)
-    sweep_atom.set_arg(lx_str(), sweep_str)
+    sweep_atom.set_arg(idee_str(), sweep_str)
     assert not sift_atomunit(sue_bud, root_atom)
     assert not sift_atomunit(sue_bud, casa_atom)
     assert not sift_atomunit(sue_bud, clean_atom)
@@ -132,14 +132,14 @@ def test_sift_atom_SetsDeltaUnitAtomUnit_bud_itemunit():
     sweep_road = sue_bud.make_road(clean_road, sweep_str)
 
     casa_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
-    casa_atom.set_arg(parent_road_str(), sue_bud._deal_id)
-    casa_atom.set_arg(lx_str(), casa_str)
+    casa_atom.set_arg(parent_road_str(), sue_bud._deal_idea)
+    casa_atom.set_arg(idee_str(), casa_str)
     clean_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
     clean_atom.set_arg(parent_road_str(), casa_road)
-    clean_atom.set_arg(lx_str(), clean_str)
+    clean_atom.set_arg(idee_str(), clean_str)
     sweep_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
     sweep_atom.set_arg(parent_road_str(), clean_road)
-    sweep_atom.set_arg(lx_str(), sweep_str)
+    sweep_atom.set_arg(idee_str(), sweep_str)
     assert not sift_atomunit(sue_bud, casa_atom)
     assert not sift_atomunit(sue_bud, clean_atom)
     assert not sift_atomunit(sue_bud, sweep_atom)
@@ -170,10 +170,10 @@ def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_awardlink():
 
     casa_swim_atom = atomunit_shop(bud_item_awardlink_str(), atom_delete())
     casa_swim_atom.set_arg(road_str(), casa_road)
-    casa_swim_atom.set_arg(awardee_id_str(), swim_str)
+    casa_swim_atom.set_arg(awardee_label_str(), swim_str)
     clean_swim_atom = atomunit_shop(bud_item_awardlink_str(), atom_delete())
     clean_swim_atom.set_arg(road_str(), clean_road)
-    clean_swim_atom.set_arg(awardee_id_str(), swim_str)
+    clean_swim_atom.set_arg(awardee_label_str(), swim_str)
     sue_bud.add_item(casa_road)
     sue_bud.add_item(clean_road)
     assert not sift_atomunit(sue_bud, casa_swim_atom)
@@ -283,10 +283,10 @@ def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_teamlink():
 
     casa_swim_atom = atomunit_shop(bud_item_teamlink_str(), atom_delete())
     casa_swim_atom.set_arg(road_str(), casa_road)
-    casa_swim_atom.set_arg(team_id_str(), swim_str)
+    casa_swim_atom.set_arg(team_label_str(), swim_str)
     clean_swim_atom = atomunit_shop(bud_item_teamlink_str(), atom_delete())
     clean_swim_atom.set_arg(road_str(), clean_road)
-    clean_swim_atom.set_arg(team_id_str(), swim_str)
+    clean_swim_atom.set_arg(team_label_str(), swim_str)
     sue_bud.add_item(casa_road)
     sue_bud.add_item(clean_road)
     assert not sift_atomunit(sue_bud, casa_swim_atom)

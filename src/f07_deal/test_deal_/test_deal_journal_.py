@@ -6,7 +6,7 @@ from src.f00_instrument.db_toolbox import (
     check_connection,
     check_table_column_existence,
 )
-from src.f01_road.jaar_config import get_deal_id_if_None
+from src.f01_road.jaar_config import get_deal_idea_if_None
 from src.f07_deal.deal import DealUnit, dealunit_shop
 from src.f07_deal.examples.deal_env import (
     get_test_deals_dir,
@@ -19,7 +19,7 @@ from pytest import raises as pytest_raises
 def test_DealUnit_get_journal_db_path_ReturnsCorrectObj():
     # ESTABLISH
     accord_str = "accord"
-    accord_deal = DealUnit(deal_id=accord_str, deals_dir=get_test_deals_dir())
+    accord_deal = DealUnit(deal_idea=accord_str, deals_dir=get_test_deals_dir())
 
     # WHEN
     x_journal_db_path = accord_deal.get_journal_db_path()
@@ -35,7 +35,7 @@ def test_DealUnit_create_journal_db_CreatesDBIfDoesNotExist(
 ):
     # ESTABLISH
     accord_str = "accord"
-    accord_deal = dealunit_shop(deal_id=accord_str, deals_dir=get_test_deals_dir())
+    accord_deal = dealunit_shop(deal_idea=accord_str, deals_dir=get_test_deals_dir())
     assert os_path_exists(accord_deal.get_journal_db_path())
     delete_dir(accord_deal.get_journal_db_path())
     assert os_path_exists(accord_deal.get_journal_db_path()) is False
@@ -52,7 +52,7 @@ def test_DealUnit_create_journal_db_DoesNotOverWriteDBIfExists(
 ):
     # ESTABLISH
     accord_str = "accord"
-    accord_deal = dealunit_shop(deal_id=accord_str, deals_dir=get_test_deals_dir())
+    accord_deal = dealunit_shop(deal_idea=accord_str, deals_dir=get_test_deals_dir())
     delete_dir(dir=accord_deal.get_journal_db_path())  # clear out any treasury.db file
     accord_deal._create_journal_db()
     assert os_path_exists(accord_deal.get_journal_db_path())
@@ -79,7 +79,7 @@ def test_DealUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
     # ESTABLISH
     accord_str = "accord"
     accord_deal = dealunit_shop(
-        deal_id=accord_str, deals_dir=get_test_deals_dir(), in_memory_journal=True
+        deal_idea=accord_str, deals_dir=get_test_deals_dir(), in_memory_journal=True
     )
 
     accord_deal._journal_db = None
@@ -98,7 +98,7 @@ def test_DealUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH create deal
-    x_deal = DealUnit(get_deal_id_if_None(), get_test_deals_dir())
+    x_deal = DealUnit(get_deal_idea_if_None(), get_test_deals_dir())
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         check_connection(x_deal.get_journal_conn())
@@ -113,7 +113,7 @@ def test_DealUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
 
 def test_deal_set_deal_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
     # ESTABLISH create deal
-    x_deal = dealunit_shop(get_deal_id_if_None(), get_test_deals_dir())
+    x_deal = dealunit_shop(get_deal_idea_if_None(), get_test_deals_dir())
 
     # WHEN
     x_deal._set_deal_dirs(in_memory_journal=True)

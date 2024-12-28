@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
     face_name_str,
-    deal_id_str,
+    deal_idea_str,
     acct_name_str,
     owner_name_str,
 )
@@ -9,8 +9,8 @@ from src.f08_pidgin.pidgin_config import (
     event_int_str,
     inx_bridge_str,
     otx_bridge_str,
-    inx_group_id_str,
-    otx_group_id_str,
+    inx_label_str,
+    otx_label_str,
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, boat_agg_str
@@ -36,11 +36,11 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario0_SingleBrick(
     br00115_columns = [
         face_name_str(),
         event_int_str(),
-        deal_id_str(),
+        deal_idea_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_group_id_str(),
-        inx_group_id_str(),
+        otx_label_str(),
+        inx_label_str(),
     ]
     sue0 = [sue_str, event7, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -62,8 +62,8 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario0_SingleBrick(
         "src_brick",
         face_name_str(),
         event_int_str(),
-        otx_group_id_str(),
-        inx_group_id_str(),
+        otx_label_str(),
+        inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -103,18 +103,18 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario1_MultipleBric
     br00115_columns = [
         face_name_str(),
         event_int_str(),
-        deal_id_str(),
+        deal_idea_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_group_id_str(),
-        inx_group_id_str(),
+        otx_label_str(),
+        inx_label_str(),
     ]
     br00042_file_path = create_path(x_boat_dir, "br00042.xlsx")
     br00042_columns = [
         face_name_str(),
         event_int_str(),
-        otx_group_id_str(),
-        inx_group_id_str(),
+        otx_label_str(),
+        inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -145,8 +145,8 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario1_MultipleBric
         "src_brick",
         face_name_str(),
         event_int_str(),
-        otx_group_id_str(),
-        inx_group_id_str(),
+        otx_label_str(),
+        inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -190,18 +190,18 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario2_WorldUnit_ev
     br00115_columns = [
         face_name_str(),
         event_int_str(),
-        deal_id_str(),
+        deal_idea_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_group_id_str(),
-        inx_group_id_str(),
+        otx_label_str(),
+        inx_label_str(),
     ]
     br00042_file_path = create_path(x_boat_dir, "br00042.xlsx")
     br00042_columns = [
         face_name_str(),
         event_int_str(),
-        otx_group_id_str(),
-        inx_group_id_str(),
+        otx_label_str(),
+        inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -232,8 +232,8 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario2_WorldUnit_ev
         "src_brick",
         face_name_str(),
         event_int_str(),
-        otx_group_id_str(),
-        inx_group_id_str(),
+        otx_label_str(),
+        inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
