@@ -11,7 +11,7 @@ from src.f00_instrument.dict_toolbox import (
     del_in_nested_dict,
 )
 from src.f01_road.finance import FundNum, TimeLinePoint, default_fund_pool
-from src.f01_road.road import AcctID, OwnerID, DealID, get_default_deal_id_ideaunit
+from src.f01_road.road import AcctName, OwnerName, DealID, get_default_deal_id_ideaunit
 from dataclasses import dataclass
 
 
@@ -37,14 +37,14 @@ def quota_str() -> str:
 
 @dataclass
 class TranUnit:
-    src: AcctID = None
-    dst: AcctID = None
+    src: AcctName = None
+    dst: AcctName = None
     time_int: TimeLinePoint = None
     amount: FundNum = None
 
 
 def tranunit_shop(
-    src: AcctID, dst: AcctID, time_int: TimeLinePoint, amount: FundNum
+    src: AcctName, dst: AcctName, time_int: TimeLinePoint, amount: FundNum
 ) -> TranUnit:
     return TranUnit(src=src, dst=dst, time_int=time_int, amount=amount)
 
@@ -52,8 +52,8 @@ def tranunit_shop(
 @dataclass
 class TranBook:
     deal_id: DealID = None
-    tranunits: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None
-    _accts_net: dict[OwnerID, dict[AcctID, FundNum]] = None
+    tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None
+    _accts_net: dict[OwnerName, dict[AcctName, FundNum]] = None
 
     def set_tranunit(
         self,
@@ -62,8 +62,8 @@ class TranBook:
         x_current_time: TimeLinePoint = None,
     ):
         self.add_tranunit(
-            x_owner_id=x_tranunit.src,
-            x_acct_id=x_tranunit.dst,
+            x_owner_name=x_tranunit.src,
+            x_acct_name=x_tranunit.dst,
             x_time_int=x_tranunit.time_int,
             x_amount=x_tranunit.amount,
             x_blocked_time_ints=x_blocked_time_ints,
@@ -72,8 +72,8 @@ class TranBook:
 
     def add_tranunit(
         self,
-        x_owner_id: OwnerID,
-        x_acct_id: AcctID,
+        x_owner_name: OwnerName,
+        x_acct_name: AcctName,
         x_time_int: TimeLinePoint,
         x_amount: FundNum,
         x_blocked_time_ints: set[TimeLinePoint] = None,
@@ -85,26 +85,28 @@ class TranBook:
         if x_current_time != None and x_time_int >= x_current_time:
             exception_str = f"Cannot set tranunit for time_int={x_time_int}, timelinepoint is greater than current time={x_current_time}"
             raise time_int_Exception(exception_str)
-        x_keylist = [x_owner_id, x_acct_id, x_time_int]
+        x_keylist = [x_owner_name, x_acct_name, x_time_int]
         set_in_nested_dict(self.tranunits, x_keylist, x_amount)
 
     def tranunit_exists(
-        self, src: AcctID, dst: AcctID, time_int: TimeLinePoint
+        self, src: AcctName, dst: AcctName, time_int: TimeLinePoint
     ) -> bool:
         return get_from_nested_dict(self.tranunits, [src, dst, time_int], True) != None
 
     def get_tranunit(
-        self, src: AcctID, dst: AcctID, time_int: TimeLinePoint
+        self, src: AcctName, dst: AcctName, time_int: TimeLinePoint
     ) -> TranUnit:
         x_amount = get_from_nested_dict(self.tranunits, [src, dst, time_int], True)
         if x_amount != None:
             return tranunit_shop(src, dst, time_int, x_amount)
 
-    def get_amount(self, src: AcctID, dst: AcctID, time_int: TimeLinePoint) -> TranUnit:
+    def get_amount(
+        self, src: AcctName, dst: AcctName, time_int: TimeLinePoint
+    ) -> TranUnit:
         return get_from_nested_dict(self.tranunits, [src, dst, time_int], True)
 
     def del_tranunit(
-        self, src: AcctID, dst: AcctID, time_int: TimeLinePoint
+        self, src: AcctName, dst: AcctName, time_int: TimeLinePoint
     ) -> TranUnit:
         x_keylist = [src, dst, time_int]
         if exists_in_nested_dict(self.tranunits, x_keylist):
@@ -117,61 +119,63 @@ class TranBook:
                 x_set.update(set(time_int_dict.keys()))
         return x_set
 
-    def get_owners_accts_net(self) -> dict[OwnerID, dict[AcctID, FundNum]]:
+    def get_owners_accts_net(self) -> dict[OwnerName, dict[AcctName, FundNum]]:
         owners_accts_net_dict = {}
-        for owner_id, owner_dict in self.tranunits.items():
-            for acct_id, acct_dict in owner_dict.items():
-                if owners_accts_net_dict.get(owner_id) is None:
-                    owners_accts_net_dict[owner_id] = {}
-                owner_net_dict = owners_accts_net_dict.get(owner_id)
-                owner_net_dict[acct_id] = sum(acct_dict.values())
+        for owner_name, owner_dict in self.tranunits.items():
+            for acct_name, acct_dict in owner_dict.items():
+                if owners_accts_net_dict.get(owner_name) is None:
+                    owners_accts_net_dict[owner_name] = {}
+                owner_net_dict = owners_accts_net_dict.get(owner_name)
+                owner_net_dict[acct_name] = sum(acct_dict.values())
         return owners_accts_net_dict
 
-    def get_accts_net_dict(self) -> dict[AcctID, FundNum]:
+    def get_accts_net_dict(self) -> dict[AcctName, FundNum]:
         accts_net_dict = {}
         for owner_dict in self.tranunits.values():
-            for acct_id, acct_dict in sorted(owner_dict.items()):
-                if accts_net_dict.get(acct_id) is None:
-                    accts_net_dict[acct_id] = sum(acct_dict.values())
+            for acct_name, acct_dict in sorted(owner_dict.items()):
+                if accts_net_dict.get(acct_name) is None:
+                    accts_net_dict[acct_name] = sum(acct_dict.values())
                 else:
-                    accts_net_dict[acct_id] += sum(acct_dict.values())
+                    accts_net_dict[acct_name] += sum(acct_dict.values())
         return accts_net_dict
 
     def _get_accts_headers(self) -> list:
-        return ["acct_id", "net_amount"]
+        return ["acct_name", "net_amount"]
 
     def _get_accts_net_array(self) -> list[list]:
         x_items = self.get_accts_net_dict().items()
-        return [[acct_id, net_amount] for acct_id, net_amount in x_items]
+        return [[acct_name, net_amount] for acct_name, net_amount in x_items]
 
     def get_accts_net_csv(self) -> str:
         return create_csv(self._get_accts_headers(), self._get_accts_net_array())
 
     # def join(self, x_tranbook):
-    #     for src_acct_id, dst_dict in x_tranbook.tranunits.items():
-    #         for dst_acct_id, time_int_dict in dst_dict.items():
+    #     for src_acct_name, dst_dict in x_tranbook.tranunits.items():
+    #         for dst_acct_name, time_int_dict in dst_dict.items():
     #             for x_time_int, x_amount in time_int_dict.items():
-    #                 self.add_tranunit(src_acct_id, dst_acct_id, x_time_int, x_amount)
+    #                 self.add_tranunit(src_acct_name, dst_acct_name, x_time_int, x_amount)
 
     def join(self, x_tranbook):
         sorted_tranunits = sorted(
             x_tranbook.tranunits.items(),
             key=lambda x: next(iter(next(iter(x[1].values())).keys())),
         )
-        for src_acct_id, dst_dict in sorted_tranunits:
-            for dst_acct_id, time_int_dict in dst_dict.items():
+        for src_acct_name, dst_dict in sorted_tranunits:
+            for dst_acct_name, time_int_dict in dst_dict.items():
                 for x_time_int, x_amount in time_int_dict.items():
-                    self.add_tranunit(src_acct_id, dst_acct_id, x_time_int, x_amount)
+                    self.add_tranunit(
+                        src_acct_name, dst_acct_name, x_time_int, x_amount
+                    )
 
     # def get_dict(
     #     self,
-    # ) -> dict[DealID, dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]]]:
+    # ) -> dict[DealID, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
     #     return {"deal_id": self.deal_id}
 
 
 def tranbook_shop(
     x_deal_id: DealID,
-    x_tranunits: dict[OwnerID, dict[AcctID, dict[TimeLinePoint, FundNum]]] = None,
+    x_tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None,
 ):
     return TranBook(
         deal_id=x_deal_id,
@@ -193,19 +197,19 @@ class PurviewEpisode:
     time_int: TimeLinePoint = None
     quota: FundNum = None
     _magnitude: FundNum = None
-    _net_purviews: dict[AcctID, FundNum] = None
+    _net_purviews: dict[AcctName, FundNum] = None
 
-    def set_net_purview(self, x_acct_id: AcctID, net_purview: FundNum):
-        self._net_purviews[x_acct_id] = net_purview
+    def set_net_purview(self, x_acct_name: AcctName, net_purview: FundNum):
+        self._net_purviews[x_acct_name] = net_purview
 
-    def net_purview_exists(self, x_acct_id: AcctID) -> bool:
-        return self._net_purviews.get(x_acct_id) != None
+    def net_purview_exists(self, x_acct_name: AcctName) -> bool:
+        return self._net_purviews.get(x_acct_name) != None
 
-    def get_net_purview(self, x_acct_id: AcctID) -> FundNum:
-        return self._net_purviews.get(x_acct_id)
+    def get_net_purview(self, x_acct_name: AcctName) -> FundNum:
+        return self._net_purviews.get(x_acct_name)
 
-    def del_net_purview(self, x_acct_id: AcctID):
-        self._net_purviews.pop(x_acct_id)
+    def del_net_purview(self, x_acct_name: AcctName):
+        self._net_purviews.pop(x_acct_name)
 
     def calc_magnitude(self):
         net_purviews = self._net_purviews.values()
@@ -231,7 +235,7 @@ class PurviewEpisode:
 def purviewepisode_shop(
     x_time_int: TimeLinePoint,
     x_quota: FundNum = None,
-    net_purviews: dict[AcctID, FundNum] = None,
+    net_purviews: dict[AcctName, FundNum] = None,
     x_magnitude: FundNum = None,
 ) -> PurviewEpisode:
     if x_quota is None:
@@ -247,7 +251,7 @@ def purviewepisode_shop(
 
 @dataclass
 class PurviewLog:
-    owner_id: OwnerID = None
+    owner_name: OwnerName = None
     episodes: dict[TimeLinePoint, PurviewEpisode] = None
     _sum_purviewepisode_quota: FundNum = None
     _sum_acct_purviews: int = None
@@ -271,15 +275,15 @@ class PurviewLog:
 
     def get_2d_array(self) -> list[list]:
         return [
-            [self.owner_id, x_episode.time_int, x_episode.quota]
+            [self.owner_name, x_episode.time_int, x_episode.quota]
             for x_episode in self.episodes.values()
         ]
 
     def get_headers(self) -> list:
-        return ["owner_id", "time_int", "quota"]
+        return ["owner_name", "time_int", "quota"]
 
     def get_dict(self) -> dict:
-        return {"owner_id": self.owner_id, "episodes": self._get_episodes_dict()}
+        return {"owner_name": self.owner_name, "episodes": self._get_episodes_dict()}
 
     def _get_episodes_dict(self) -> dict:
         return {
@@ -293,18 +297,18 @@ class PurviewLog:
     def get_tranbook(self, deal_id: DealID) -> TranBook:
         x_tranbook = tranbook_shop(deal_id)
         for x_time_int, x_episode in self.episodes.items():
-            for dst_acct_id, x_quota in x_episode._net_purviews.items():
+            for dst_acct_name, x_quota in x_episode._net_purviews.items():
                 x_tranbook.add_tranunit(
-                    x_owner_id=self.owner_id,
-                    x_acct_id=dst_acct_id,
+                    x_owner_name=self.owner_name,
+                    x_acct_name=dst_acct_name,
                     x_time_int=x_time_int,
                     x_amount=x_quota,
                 )
         return x_tranbook
 
 
-def purviewlog_shop(owner_id: OwnerID) -> PurviewLog:
-    return PurviewLog(owner_id=owner_id, episodes={}, _sum_acct_purviews={})
+def purviewlog_shop(owner_name: OwnerName) -> PurviewLog:
+    return PurviewLog(owner_name=owner_name, episodes={}, _sum_acct_purviews={})
 
 
 def get_purviewepisode_from_dict(x_dict: dict) -> PurviewEpisode:
@@ -320,8 +324,8 @@ def get_purviewepisode_from_json(x_json: str) -> PurviewEpisode:
 
 
 def get_purviewlog_from_dict(x_dict: dict) -> PurviewLog:
-    x_owner_id = x_dict.get("owner_id")
-    x_purviewlog = purviewlog_shop(x_owner_id)
+    x_owner_name = x_dict.get("owner_name")
+    x_purviewlog = purviewlog_shop(x_owner_name)
     x_purviewlog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
     return x_purviewlog
 

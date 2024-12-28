@@ -7,10 +7,10 @@ def test_OriginHold_exists():
     bob_importance = 4
 
     # WHEN
-    originhold_x = OriginHold(acct_id=bob_str, importance=bob_importance)
+    originhold_x = OriginHold(acct_name=bob_str, importance=bob_importance)
 
     # THEN
-    assert originhold_x.acct_id == bob_str
+    assert originhold_x.acct_name == bob_str
     assert originhold_x.importance == bob_importance
 
 
@@ -20,10 +20,10 @@ def test_originhold_shop_ReturnsCorrectObj():
     bob_importance = 4
 
     # WHEN
-    originhold_x = originhold_shop(acct_id=bob_str, importance=bob_importance)
+    originhold_x = originhold_shop(acct_name=bob_str, importance=bob_importance)
 
     # THEN
-    assert originhold_x.acct_id == bob_str
+    assert originhold_x.acct_name == bob_str
     assert originhold_x.importance == bob_importance
 
 
@@ -32,17 +32,17 @@ def test_originhold_shop_ImportanceIsNot_Reason():
     bob_str = "Bob"
 
     # WHEN
-    originhold_x = originhold_shop(acct_id=bob_str)
+    originhold_x = originhold_shop(acct_name=bob_str)
 
     # THEN
-    assert originhold_x.acct_id == bob_str
+    assert originhold_x.acct_name == bob_str
     assert originhold_x.importance == 1
 
 
 def test_OriginHold_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     bob_str = "Bob"
-    bob_originhold = originhold_shop(acct_id=bob_str)
+    bob_originhold = originhold_shop(acct_name=bob_str)
 
     # WHEN
     x_dict = bob_originhold.get_dict()
@@ -50,7 +50,7 @@ def test_OriginHold_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # THEN
     print(f"{x_dict=}")
     assert x_dict is not None
-    assert x_dict == {"acct_id": bob_str, "importance": 1}
+    assert x_dict == {"acct_name": bob_str, "importance": 1}
 
 
 def test_OriginUnit_exists():
@@ -77,11 +77,11 @@ def test_originunit_set_originhold_CorrectlySetsOriginHold():
     # WHEN
     yao_str = "Yao"
     yao_importance = 3
-    originunit_x.set_originhold(acct_id=yao_str, importance=yao_importance)
+    originunit_x.set_originhold(acct_name=yao_str, importance=yao_importance)
 
     # THEN
     assert originunit_x._originholds.get(yao_str) is not None
-    assert originunit_x._originholds.get(yao_str).acct_id == yao_str
+    assert originunit_x._originholds.get(yao_str).acct_name == yao_str
     assert originunit_x._originholds.get(yao_str).importance == yao_importance
 
 
@@ -90,12 +90,12 @@ def test_originunit_del_originhold_CorrectlyDeletesOriginHold():
     originunit_x = originunit_shop()
     yao_str = "Yao"
     yao_importance = 3
-    originunit_x.set_originhold(acct_id=yao_str, importance=yao_importance)
+    originunit_x.set_originhold(acct_name=yao_str, importance=yao_importance)
     assert originunit_x._originholds.get(yao_str) is not None
-    assert originunit_x._originholds.get(yao_str).acct_id == yao_str
+    assert originunit_x._originholds.get(yao_str).acct_name == yao_str
 
     # WHEN
-    originunit_x.del_originhold(acct_id=yao_str)
+    originunit_x.del_originhold(acct_name=yao_str)
 
     # THEN
     assert originunit_x._originholds.get(yao_str) is None
@@ -104,16 +104,16 @@ def test_originunit_del_originhold_CorrectlyDeletesOriginHold():
 def test_OriginUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     bob_str = "Bob"
-    bob_originhold = originhold_shop(acct_id=bob_str)
+    bob_originhold = originhold_shop(acct_name=bob_str)
     bob_ol_dict = bob_originhold.get_dict()
     sue_str = "Sue"
     sue_importance = 4
-    sue_originhold = originhold_shop(acct_id=sue_str, importance=sue_importance)
+    sue_originhold = originhold_shop(acct_name=sue_str, importance=sue_importance)
     sue_ol_dict = sue_originhold.get_dict()
 
     originunit_x = originunit_shop()
-    originunit_x.set_originhold(acct_id=bob_str, importance=None)
-    originunit_x.set_originhold(acct_id=sue_str, importance=sue_importance)
+    originunit_x.set_originhold(acct_name=bob_str, importance=None)
+    originunit_x.set_originhold(acct_name=sue_str, importance=sue_importance)
 
     # WHEN
     x_dict = originunit_x.get_dict()

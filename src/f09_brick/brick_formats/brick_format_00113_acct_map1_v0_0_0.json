@@ -1,30 +1,30 @@
 {
     "attributes": {
-        "acct_id": {
+        "acct_name": {
             "otx_key": true
         },
         "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "deal_id": {
             "otx_key": true
         },
-        "inx_acct_id": {
+        "inx_acct_name": {
             "otx_key": false
         },
-        "otx_acct_id": {
+        "otx_acct_name": {
             "otx_key": true
         },
-        "owner_id": {
+        "owner_name": {
             "otx_key": true
         }
     },
     "brick_number": "br00113",
     "categorys": [
-        "map_acct_id",
+        "map_acct_name",
         "bud_acctunit"
     ]
 }

@@ -7,7 +7,7 @@ def test_PidginUnit_set_groupmap_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    x_groupmap = groupmap_shop(face_id=sue_str)
+    x_groupmap = groupmap_shop(face_name=sue_str)
     x_groupmap.set_otx2inx("Bob", "Bob of Portland")
     assert sue_pidginunit.groupmap != x_groupmap
 
@@ -23,7 +23,7 @@ def test_PidginUnit_set_groupmap_RaisesErrorIf_groupmap_otx_bridge_IsNotSame():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_otx_bridge = "/"
-    x_groupmap = groupmap_shop(otx_bridge=slash_otx_bridge, face_id=sue_str)
+    x_groupmap = groupmap_shop(otx_bridge=slash_otx_bridge, face_name=sue_str)
     assert sue_pidginunit.otx_bridge != x_groupmap.otx_bridge
     assert sue_pidginunit.groupmap != x_groupmap
 
@@ -39,7 +39,7 @@ def test_PidginUnit_set_groupmap_RaisesErrorIf_groupmap_inx_bridge_IsNotSame():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_inx_bridge = "/"
-    x_groupmap = groupmap_shop(inx_bridge=slash_inx_bridge, face_id=sue_str)
+    x_groupmap = groupmap_shop(inx_bridge=slash_inx_bridge, face_name=sue_str)
     assert sue_pidginunit.inx_bridge != x_groupmap.inx_bridge
     assert sue_pidginunit.groupmap != x_groupmap
 
@@ -55,7 +55,7 @@ def test_PidginUnit_set_groupmap_RaisesErrorIf_groupmap_unknown_word_IsNotSame()
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
-    x_groupmap = groupmap_shop(unknown_word=casa_unknown_word, face_id=sue_str)
+    x_groupmap = groupmap_shop(unknown_word=casa_unknown_word, face_name=sue_str)
     assert sue_pidginunit.unknown_word != x_groupmap.unknown_word
     assert sue_pidginunit.groupmap != x_groupmap
 
@@ -66,19 +66,19 @@ def test_PidginUnit_set_groupmap_RaisesErrorIf_groupmap_unknown_word_IsNotSame()
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_groupmap_RaisesErrorIf_groupmap_face_id_IsNotSame():
+def test_PidginUnit_set_groupmap_RaisesErrorIf_groupmap_face_name_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
     sue_pidginunit = pidginunit_shop(sue_str)
-    x_groupmap = groupmap_shop(face_id=yao_str)
-    assert sue_pidginunit.face_id != x_groupmap.face_id
+    x_groupmap = groupmap_shop(face_name=yao_str)
+    assert sue_pidginunit.face_name != x_groupmap.face_name
     assert sue_pidginunit.groupmap != x_groupmap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_groupmap(x_groupmap)
-    exception_str = f"set_mapcore Error: PidginUnit face_id is '{sue_pidginunit.face_id}', MapCore is '{yao_str}'."
+    exception_str = f"set_mapcore Error: PidginUnit face_name is '{sue_pidginunit.face_name}', MapCore is '{yao_str}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -86,7 +86,7 @@ def test_PidginUnit_get_groupmap_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    static_x_groupmap = groupmap_shop(face_id=sue_str)
+    static_x_groupmap = groupmap_shop(face_name=sue_str)
     static_x_groupmap.set_otx2inx("Bob", "Bob of Portland")
     sue_pidginunit.set_groupmap(static_x_groupmap)
 
@@ -103,14 +103,14 @@ def test_PidginUnit_set_group_id_SetsAttr_Scenario0():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    acct_id_groupmap = zia_pidginunit.get_groupmap()
-    assert acct_id_groupmap.otx2inx_exists(sue_otx, sue_inx) is False
+    acct_name_groupmap = zia_pidginunit.get_groupmap()
+    assert acct_name_groupmap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_group_id(sue_otx, sue_inx)
 
     # THEN
-    assert acct_id_groupmap.otx2inx_exists(sue_otx, sue_inx)
+    assert acct_name_groupmap.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_group_id_exists_ReturnsObj():

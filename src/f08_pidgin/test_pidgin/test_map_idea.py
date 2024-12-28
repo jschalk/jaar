@@ -15,7 +15,7 @@ def test_IdeaMap_Exists():
     x_ideamap = IdeaMap()
 
     # WHEN / THEN
-    assert not x_ideamap.face_id
+    assert not x_ideamap.face_name
     assert not x_ideamap.event_int
     assert not x_ideamap.otx2inx
     assert not x_ideamap.unknown_word
@@ -28,7 +28,7 @@ def test_ideamap_shop_ReturnsObj_scenario0_WithoutParameters():
     x_ideamap = ideamap_shop()
 
     # THEN
-    assert not x_ideamap.face_id
+    assert not x_ideamap.face_name
     assert x_ideamap.event_int == 0
     assert x_ideamap.otx2inx == {}
     assert x_ideamap.unknown_word == default_unknown_word_if_None()
@@ -49,7 +49,7 @@ def test_ideamap_shop_ReturnsObj_scenario1_WithParameters():
 
     # WHEN
     x_ideamap = ideamap_shop(
-        face_id=bob_str,
+        face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
         unknown_word=x_unknown_word,
@@ -58,7 +58,7 @@ def test_ideamap_shop_ReturnsObj_scenario1_WithParameters():
     )
 
     # THEN
-    assert x_ideamap.face_id == bob_str
+    assert x_ideamap.face_name == bob_str
     assert x_ideamap.event_int == event7
     assert x_ideamap.otx2inx == otx2inx
     assert x_ideamap.unknown_word == x_unknown_word
@@ -77,7 +77,7 @@ def test_ideamap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_flo
 
     # WHEN
     x_ideamap = ideamap_shop(
-        face_id=bob_str,
+        face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
         unknown_word=x_nan,
@@ -86,7 +86,7 @@ def test_ideamap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_flo
     )
 
     # THEN
-    assert x_ideamap.face_id == bob_str
+    assert x_ideamap.face_name == bob_str
     assert x_ideamap.event_int == event7
     assert x_ideamap.otx2inx == otx2inx
     assert x_ideamap.unknown_word == default_unknown_word_if_None()
@@ -310,7 +310,7 @@ def test_IdeaMap_get_dict_ReturnsObj():
         "inx_bridge": x_ideamap.inx_bridge,
         "unknown_word": x_ideamap.unknown_word,
         "otx2inx": {},
-        "face_id": x_ideamap.face_id,
+        "face_name": x_ideamap.face_name,
         "event_int": x_ideamap.event_int,
     }
     assert x_ideamap.get_dict() == x1_road_map_dict
@@ -324,7 +324,7 @@ def test_IdeaMap_get_dict_ReturnsObj():
         "inx_bridge": x_ideamap.inx_bridge,
         "unknown_word": x_ideamap.unknown_word,
         "otx2inx": {clean_otx: clean_inx},
-        "face_id": sue_str,
+        "face_name": sue_str,
         "event_int": event7,
     }
     assert x_ideamap.get_dict() == x2_road_map_dict
@@ -341,7 +341,7 @@ def test_IdeaMap_get_json_ReturnsObj():
     x_ideamap = ideamap_shop(sue_str, otx_bridge=slash_otx_bridge)
     x1_road_map_json = f"""{{
   "event_int": 0,
-  "face_id": "{sue_str}",
+  "face_name": "{sue_str}",
   "inx_bridge": "{x_ideamap.inx_bridge}",
   "otx2inx": {{}},
   "otx_bridge": "{x_ideamap.otx_bridge}",
@@ -358,7 +358,7 @@ def test_IdeaMap_get_json_ReturnsObj():
     # THEN
     x2_road_map_json = f"""{{
   "event_int": {event7},
-  "face_id": "{sue_str}",
+  "face_name": "{sue_str}",
   "inx_bridge": "{x_ideamap.inx_bridge}",
   "otx2inx": {{
     "{clean_otx}": "{clean_inx}"
@@ -385,7 +385,7 @@ def test_get_ideamap_from_dict_ReturnsObj():
     gen_ideamap = get_ideamap_from_dict(x_ideamap.get_dict())
 
     # THEN
-    assert gen_ideamap.face_id == x_ideamap.face_id
+    assert gen_ideamap.face_name == x_ideamap.face_name
     assert gen_ideamap.event_int == x_ideamap.event_int
     assert gen_ideamap.event_int == event7
     assert gen_ideamap == x_ideamap
@@ -525,7 +525,7 @@ def test_inherit_ideamap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_inherit_ideamap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_id():
+def test_inherit_ideamap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_name():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"

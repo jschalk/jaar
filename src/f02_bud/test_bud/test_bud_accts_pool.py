@@ -36,7 +36,7 @@ def test_BudUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
 def test_BudUnit_set_debtor_respect_CorrectlySetsInt():
     # ESTABLISH
     zia_str = "Zia"
-    zia_bud = budunit_shop(_owner_id=zia_str)
+    zia_bud = budunit_shop(_owner_name=zia_str)
     zia_debtor_respect = 13
     assert zia_bud.debtor_respect != zia_debtor_respect
 

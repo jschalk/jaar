@@ -21,7 +21,7 @@ from src.f01_road.road import (
     is_ideaunit,
     RoadUnit,
     IdeaUnit,
-    FaceID,
+    FaceName,
     EventInt,
 )
 from dataclasses import dataclass
@@ -38,7 +38,7 @@ class set_idea_Exception(Exception):
 
 @dataclass
 class MapCore:
-    face_id: FaceID = None
+    face_name: FaceName = None
     event_int: EventInt = None
     otx2inx: dict = None
     unknown_word: str = None
@@ -59,7 +59,7 @@ class MapCore:
 
     def get_dict(self) -> dict:
         return {
-            "face_id": self.face_id,
+            "face_name": self.face_name,
             "event_int": self.event_int,
             "otx_bridge": self.otx_bridge,
             "inx_bridge": self.inx_bridge,
@@ -72,32 +72,32 @@ class MapCore:
 
 
 class AcctMap(MapCore):
-    def set_otx2inx(self, otx_acct_id: str, inx_acct_id: str):
-        self.otx2inx[otx_acct_id] = inx_acct_id
+    def set_otx2inx(self, otx_acct_name: str, inx_acct_name: str):
+        self.otx2inx[otx_acct_name] = inx_acct_name
 
-    def _get_inx_value(self, otx_acct_id: str) -> str:
-        return self.otx2inx.get(otx_acct_id)
+    def _get_inx_value(self, otx_acct_name: str) -> str:
+        return self.otx2inx.get(otx_acct_name)
 
-    def otx2inx_exists(self, otx_acct_id: str, inx_acct_id: str) -> bool:
-        return self._get_inx_value(otx_acct_id) == inx_acct_id
+    def otx2inx_exists(self, otx_acct_name: str, inx_acct_name: str) -> bool:
+        return self._get_inx_value(otx_acct_name) == inx_acct_name
 
-    def otx_exists(self, otx_acct_id: str) -> bool:
-        return self._get_inx_value(otx_acct_id) != None
+    def otx_exists(self, otx_acct_name: str) -> bool:
+        return self._get_inx_value(otx_acct_name) != None
 
-    def del_otx2inx(self, otx_acct_id: str):
-        self.otx2inx.pop(otx_acct_id)
+    def del_otx2inx(self, otx_acct_name: str):
+        self.otx2inx.pop(otx_acct_name)
 
-    def reveal_inx(self, otx_acct_id: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_acct_id) is False:
-            inx_acct_id = copy_copy(otx_acct_id)
-            if self.inx_bridge in otx_acct_id:
+    def reveal_inx(self, otx_acct_name: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_acct_name) is False:
+            inx_acct_name = copy_copy(otx_acct_name)
+            if self.inx_bridge in otx_acct_name:
                 return None
             otx_r_bridge = self.otx_bridge
             inx_r_bridge = self.inx_bridge
-            inx_acct_id = inx_acct_id.replace(otx_r_bridge, inx_r_bridge)
-            self.set_otx2inx(otx_acct_id, inx_acct_id)
+            inx_acct_name = inx_acct_name.replace(otx_r_bridge, inx_r_bridge)
+            self.set_otx2inx(otx_acct_name, inx_acct_name)
 
-        return self._get_inx_value(otx_acct_id)
+        return self._get_inx_value(otx_acct_name)
 
     def _is_inx_bridge_inclusion_correct(self) -> bool:
         return not str_in_dict_values(self.inx_bridge, self.otx2inx)
@@ -113,7 +113,7 @@ class AcctMap(MapCore):
 
 
 def acctmap_shop(
-    face_id: FaceID = None,
+    face_name: FaceName = None,
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
@@ -125,7 +125,7 @@ def acctmap_shop(
     inx_bridge = default_bridge_if_None(inx_bridge)
 
     return AcctMap(
-        face_id=face_id,
+        face_name=face_name,
         event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
@@ -136,7 +136,7 @@ def acctmap_shop(
 
 def get_acctmap_from_dict(x_dict: dict) -> AcctMap:
     return acctmap_shop(
-        face_id=x_dict.get("face_id"),
+        face_name=x_dict.get("face_name"),
         event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
@@ -191,7 +191,7 @@ class GroupMap(MapCore):
 
 
 def groupmap_shop(
-    face_id: FaceID = None,
+    face_name: FaceName = None,
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
@@ -203,7 +203,7 @@ def groupmap_shop(
     inx_bridge = default_bridge_if_None(inx_bridge)
 
     return GroupMap(
-        face_id=face_id,
+        face_name=face_name,
         event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
@@ -214,7 +214,7 @@ def groupmap_shop(
 
 def get_groupmap_from_dict(x_dict: dict) -> GroupMap:
     return groupmap_shop(
-        face_id=x_dict.get("face_id"),
+        face_name=x_dict.get("face_name"),
         event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
@@ -269,7 +269,7 @@ class IdeaMap(MapCore):
 
 
 def ideamap_shop(
-    face_id: FaceID = None,
+    face_name: FaceName = None,
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
@@ -281,7 +281,7 @@ def ideamap_shop(
     inx_bridge = default_bridge_if_None(inx_bridge)
 
     return IdeaMap(
-        face_id=face_id,
+        face_name=face_name,
         event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
@@ -292,7 +292,7 @@ def ideamap_shop(
 
 def get_ideamap_from_dict(x_dict: dict) -> IdeaMap:
     return ideamap_shop(
-        face_id=x_dict.get("face_id"),
+        face_name=x_dict.get("face_name"),
         event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
@@ -307,7 +307,7 @@ def get_ideamap_from_json(x_json: str) -> IdeaMap:
 
 @dataclass
 class RoadMap:
-    face_id: FaceID = None
+    face_name: FaceName = None
     event_int: EventInt = None
     otx2inx: dict = None
     unknown_word: str = None
@@ -412,7 +412,7 @@ class RoadMap:
 
     def get_dict(self) -> dict:
         return {
-            "face_id": self.face_id,
+            "face_name": self.face_name,
             "event_int": self.event_int,
             "otx_bridge": self.otx_bridge,
             "inx_bridge": self.inx_bridge,
@@ -425,7 +425,7 @@ class RoadMap:
 
 
 def roadmap_shop(
-    face_id: FaceID = None,
+    face_name: FaceName = None,
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
@@ -442,7 +442,7 @@ def roadmap_shop(
             otx_bridge=otx_bridge,
             inx_bridge=inx_bridge,
             unknown_word=unknown_word,
-            face_id=face_id,
+            face_name=face_name,
             event_int=event_int,
         )
 
@@ -452,14 +452,14 @@ def roadmap_shop(
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         ideamap=x_ideamap,
-        face_id=face_id,
+        face_name=face_name,
         event_int=get_0_if_None(event_int),
     )
 
 
 def get_roadmap_from_dict(x_dict: dict) -> RoadMap:
     return roadmap_shop(
-        face_id=x_dict.get("face_id"),
+        face_name=x_dict.get("face_name"),
         event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
@@ -478,7 +478,7 @@ class MapCoreAttrConflictException(Exception):
 
 def _check_core_attributes(new_obj, old_obj):
     if (
-        old_obj.face_id != new_obj.face_id
+        old_obj.face_name != new_obj.face_name
         or old_obj.otx_bridge != new_obj.otx_bridge
         or old_obj.inx_bridge != new_obj.inx_bridge
         or old_obj.unknown_word != new_obj.unknown_word

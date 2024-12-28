@@ -2,10 +2,10 @@ from src.f00_instrument.dict_toolbox import create_sorted_concatenated_str
 from src.f00_instrument.file import get_dir_file_strs, create_path
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_gift.atom_config import (
-    face_id_str,
+    face_name_str,
     deal_id_str,
-    owner_id_str,
-    acct_id_str,
+    owner_name_str,
+    acct_name_str,
     group_id_str,
     parent_road_str,
     lx_str,
@@ -55,7 +55,7 @@ from src.f09_brick.examples.brick_env import src_brick_dir
 
 def test_config_str_functions_ReturnObjs():
     # ESTABLISH / WHEN / THEN
-    assert acct_id_str() == "acct_id"
+    assert acct_name_str() == "acct_name"
     assert acct_pool_str() == "acct_pool"
     assert debtit_belief_str() == "debtit_belief"
     assert credit_belief_str() == "credit_belief"
@@ -98,11 +98,11 @@ def test_get_headers_list_ReturnsObj():
     # THEN
     # print(f"{format_00001_headers=}")
     assert format_00021_headers == [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         credit_belief_str(),
         debtit_belief_str(),
     ]
@@ -111,7 +111,7 @@ def test_get_headers_list_ReturnsObj():
 def get_sorted_headers(brick_filename):
     x_brickref = get_brickref_from_file(brick_filename)
     brick_attributes = set(x_brickref.get(attributes_str()).keys())
-    brick_attributes.remove(face_id_str())
+    brick_attributes.remove(face_name_str())
     brick_attributes.remove(event_int_str())
     return create_sorted_concatenated_str(list(brick_attributes))
 
@@ -120,12 +120,12 @@ def test_get_sorted_headers_ReturnsObj():
     # ESTABLISH / WHEN
     headers = get_sorted_headers(brick_format_00021_bud_acctunit_v0_0_0())
     # THEN
-    assert headers == "acct_id,credit_belief,deal_id,debtit_belief,owner_id"
+    assert headers == "acct_name,credit_belief,deal_id,debtit_belief,owner_name"
 
     # ESTABLISH / WHEN
     headers = get_sorted_headers(brick_format_00019_itemunit_v0_0_0())
     # THEN
-    item_headers_str = "addin,begin,close,deal_id,denom,gogo_want,lx,morph,numor,owner_id,parent_road,stop_want"
+    item_headers_str = "addin,begin,close,deal_id,denom,gogo_want,lx,morph,numor,owner_name,parent_road,stop_want"
     assert headers == item_headers_str
 
 
@@ -202,20 +202,20 @@ def test_get_brickref_obj_HasCorrectAttrs_brick_format_00021_bud_acctunit_v0_0_0
     # THEN
     assert len(format_00001_brickref._attributes) == 7
     assert format_00001_brickref._attributes == {
-        "acct_id": {"otx_key": True},
+        "acct_name": {"otx_key": True},
         "credit_belief": {"otx_key": False},
         "debtit_belief": {"otx_key": False},
         "event_int": {"otx_key": True},
-        "face_id": {"otx_key": True},
+        "face_name": {"otx_key": True},
         "deal_id": {"otx_key": True},
-        "owner_id": {"otx_key": True},
+        "owner_name": {"otx_key": True},
     }
     headers_list = format_00001_brickref.get_headers_list()
-    assert headers_list[0] == face_id_str()
+    assert headers_list[0] == face_name_str()
     assert headers_list[1] == event_int_str()
     assert headers_list[2] == deal_id_str()
-    assert headers_list[3] == owner_id_str()
-    assert headers_list[4] == acct_id_str()
+    assert headers_list[3] == owner_name_str()
+    assert headers_list[4] == acct_name_str()
     assert headers_list[5] == credit_belief_str()
     assert headers_list[6] == debtit_belief_str()
 
@@ -230,11 +230,11 @@ def test_get_brickref_obj_HasCorrectAttrs_brick_format_00020_bud_acct_membership
     # THEN
     assert len(format_00021_brickref._attributes) == 8
     headers_list = format_00021_brickref.get_headers_list()
-    assert headers_list[0] == face_id_str()
+    assert headers_list[0] == face_name_str()
     assert headers_list[1] == event_int_str()
     assert headers_list[2] == deal_id_str()
-    assert headers_list[3] == owner_id_str()
-    assert headers_list[4] == acct_id_str()
+    assert headers_list[3] == owner_name_str()
+    assert headers_list[4] == acct_name_str()
     assert headers_list[5] == group_id_str()
     assert headers_list[6] == credit_vote_str()
     assert headers_list[7] == debtit_vote_str()
@@ -250,10 +250,10 @@ def test_get_brickref_obj_HasCorrectAttrs_brick_format_00013_itemunit_v0_0_0():
     # THEN
     assert len(format_00003_brickref._attributes) == 8
     headers_list = format_00003_brickref.get_headers_list()
-    assert headers_list[0] == face_id_str()
+    assert headers_list[0] == face_name_str()
     assert headers_list[1] == event_int_str()
     assert headers_list[2] == deal_id_str()
-    assert headers_list[3] == owner_id_str()
+    assert headers_list[3] == owner_name_str()
     assert headers_list[4] == parent_road_str()
     assert headers_list[5] == lx_str()
     assert headers_list[6] == mass_str()
@@ -270,10 +270,10 @@ def test_get_brickref_obj_HasCorrectAttrs_brick_format_00019_itemunit_v0_0_0():
     # THEN
     assert len(format_00019_brickref._attributes) == 14
     headers_list = format_00019_brickref.get_headers_list()
-    assert headers_list[0] == face_id_str()
+    assert headers_list[0] == face_name_str()
     assert headers_list[1] == event_int_str()
     assert headers_list[2] == deal_id_str()
-    assert headers_list[3] == owner_id_str()
+    assert headers_list[3] == owner_name_str()
     assert headers_list[4] == parent_road_str()
     assert headers_list[5] == lx_str()
     assert headers_list[6] == begin_str()

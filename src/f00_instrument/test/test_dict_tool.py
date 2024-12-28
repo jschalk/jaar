@@ -479,15 +479,15 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario0():
 """
     static_bob_csv = f""",,{x_id},{bob_str},Yao,41,37
 """
-    generated_owner_id_dict = u_dict.get(x_id)
-    assert generated_owner_id_dict
-    assert list(generated_owner_id_dict.keys()) == [sue_str, bob_str]
-    generated_bob_csv = generated_owner_id_dict.get(bob_str)
+    generated_owner_name_dict = u_dict.get(x_id)
+    assert generated_owner_name_dict
+    assert list(generated_owner_name_dict.keys()) == [sue_str, bob_str]
+    generated_bob_csv = generated_owner_name_dict.get(bob_str)
     assert generated_bob_csv == static_bob_csv
-    generated_sue_csv = generated_owner_id_dict.get(sue_str)
+    generated_sue_csv = generated_owner_name_dict.get(sue_str)
     assert generated_sue_csv == static_sue_csv
-    owner_id_csv_dict = {sue_str: static_sue_csv, bob_str: static_bob_csv}
-    assert u_dict == {x_id: owner_id_csv_dict}
+    owner_name_csv_dict = {sue_str: static_sue_csv, bob_str: static_bob_csv}
+    assert u_dict == {x_id: owner_name_csv_dict}
 
 
 def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
@@ -530,11 +530,11 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
     print(f"{generated4_sue_csv=}")
     assert generated3_sue_csv == accord3_sue_csv
     assert generated4_sue_csv == accord4_sue_csv
-    owner_id3_csv_dict = {sue_str: accord3_sue_csv}
-    owner_id4_csv_dict = {sue_str: accord4_sue_csv, bob_str: static_bob_csv}
+    owner_name3_csv_dict = {sue_str: accord3_sue_csv}
+    owner_name4_csv_dict = {sue_str: accord4_sue_csv, bob_str: static_bob_csv}
     assert tiered_dict == {
-        accord3_id: owner_id3_csv_dict,
-        accord4_id: owner_id4_csv_dict,
+        accord3_id: owner_name3_csv_dict,
+        accord4_id: owner_name4_csv_dict,
     }
 
 

@@ -39,9 +39,9 @@ from src.f01_road.road import (
     IdeaUnit,
     RoadUnit,
     is_string_in_road,
-    OwnerID,
-    AcctID,
-    HealerID,
+    OwnerName,
+    AcctName,
+    HealerName,
     DealID,
     roadunit_valid_dir_path,
 )
@@ -118,10 +118,10 @@ class _gogo_calc_stop_calc_Exception(Exception):
 @dataclass
 class BudUnit:
     _deal_id: DealID = None
-    _owner_id: OwnerID = None
+    _owner_name: OwnerName = None
     _last_gift_id: int = None
     tally: float = None
-    _accts: dict[AcctID, AcctUnit] = None
+    _accts: dict[AcctName, AcctUnit] = None
     _itemroot: ItemUnit = None
     max_tree_traverse: int = None
     _bridge: str = None
@@ -136,7 +136,7 @@ class BudUnit:
     # settle_bud Calculated field begin
     _item_dict: dict[RoadUnit, ItemUnit] = None
     _keep_dict: dict[RoadUnit, ItemUnit] = None
-    _healers_dict: dict[HealerID, dict[RoadUnit, ItemUnit]] = None
+    _healers_dict: dict[HealerName, dict[RoadUnit, ItemUnit]] = None
     _tree_traverse_count: int = None
     _rational: bool = None
     _keeps_justified: bool = None
@@ -163,7 +163,7 @@ class BudUnit:
 
     def set_fund_pool(self, x_fund_pool):
         if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:
-            exception_str = f"Bud '{self._owner_id}' cannot set fund_pool='{x_fund_pool}'. It is not divisible by fund_coin '{self.fund_coin}'"
+            exception_str = f"Bud '{self._owner_name}' cannot set fund_pool='{x_fund_pool}'. It is not divisible by fund_coin '{self.fund_coin}'"
             raise _bit_RatioException(exception_str)
 
         self.fund_pool = validate_fund_pool(x_fund_pool)
@@ -175,13 +175,13 @@ class BudUnit:
 
     def set_credor_respect(self, new_credor_respect: int):
         if valid_finance_ratio(new_credor_respect, self.respect_bit) is False:
-            exception_str = f"Bud '{self._owner_id}' cannot set credor_respect='{new_credor_respect}'. It is not divisible by bit '{self.respect_bit}'"
+            exception_str = f"Bud '{self._owner_name}' cannot set credor_respect='{new_credor_respect}'. It is not divisible by bit '{self.respect_bit}'"
             raise _bit_RatioException(exception_str)
         self.credor_respect = new_credor_respect
 
     def set_debtor_respect(self, new_debtor_respect: int):
         if valid_finance_ratio(new_debtor_respect, self.respect_bit) is False:
-            exception_str = f"Bud '{self._owner_id}' cannot set debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self.respect_bit}'"
+            exception_str = f"Bud '{self._owner_name}' cannot set debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self.respect_bit}'"
             raise _bit_RatioException(exception_str)
         self.debtor_respect = new_debtor_respect
 
@@ -318,13 +318,13 @@ class BudUnit:
 
     def add_to_acctunit_fund_give_take(
         self,
-        acctunit_acct_id: AcctID,
+        acctunit_acct_name: AcctName,
         fund_give,
         fund_take: float,
         fund_agenda_give: float,
         fund_agenda_take: float,
     ):
-        x_acctunit = self.get_acct(acctunit_acct_id)
+        x_acctunit = self.get_acct(acctunit_acct_name)
         x_acctunit.add_fund_give_take(
             fund_give=fund_give,
             fund_take=fund_take,
@@ -332,14 +332,14 @@ class BudUnit:
             fund_agenda_take=fund_agenda_take,
         )
 
-    def del_acctunit(self, acct_id: str):
-        self._accts.pop(acct_id)
+    def del_acctunit(self, acct_name: str):
+        self._accts.pop(acct_name)
 
     def add_acctunit(
-        self, acct_id: AcctID, credit_belief: int = None, debtit_belief: int = None
+        self, acct_name: AcctName, credit_belief: int = None, debtit_belief: int = None
     ):
         x_bridge = self._bridge
-        acctunit = acctunit_shop(acct_id, credit_belief, debtit_belief, x_bridge)
+        acctunit = acctunit_shop(acct_name, credit_belief, debtit_belief, x_bridge)
         self.set_acctunit(acctunit)
 
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
@@ -348,18 +348,18 @@ class BudUnit:
         if x_acctunit._respect_bit != self.respect_bit:
             x_acctunit._respect_bit = self.respect_bit
         if auto_set_membership and x_acctunit.memberships_exist() is False:
-            x_acctunit.add_membership(x_acctunit.acct_id)
-        self._accts[x_acctunit.acct_id] = x_acctunit
+            x_acctunit.add_membership(x_acctunit.acct_name)
+        self._accts[x_acctunit.acct_name] = x_acctunit
 
-    def acct_exists(self, acct_id: AcctID) -> bool:
-        return self.get_acct(acct_id) is not None
+    def acct_exists(self, acct_name: AcctName) -> bool:
+        return self.get_acct(acct_name) is not None
 
     def edit_acctunit(
-        self, acct_id: AcctID, credit_belief: int = None, debtit_belief: int = None
+        self, acct_name: AcctName, credit_belief: int = None, debtit_belief: int = None
     ):
-        if self._accts.get(acct_id) is None:
-            raise AcctMissingException(f"AcctUnit '{acct_id}' does not exist.")
-        x_acctunit = self.get_acct(acct_id)
+        if self._accts.get(acct_name) is None:
+            raise AcctMissingException(f"AcctUnit '{acct_name}' does not exist.")
+        x_acctunit = self.get_acct(acct_name)
         if credit_belief is not None:
             x_acctunit.set_credit_belief(credit_belief)
         if debtit_belief is not None:
@@ -370,19 +370,19 @@ class BudUnit:
         for x_acctunit in self._accts.values():
             x_acctunit.clear_memberships()
 
-    def get_acct(self, acct_id: AcctID) -> AcctUnit:
-        return self._accts.get(acct_id)
+    def get_acct(self, acct_name: AcctName) -> AcctUnit:
+        return self._accts.get(acct_name)
 
-    def get_acctunit_group_ids_dict(self) -> dict[GroupID, set[AcctID]]:
+    def get_acctunit_group_ids_dict(self) -> dict[GroupID, set[AcctName]]:
         x_dict = {}
         for x_acctunit in self._accts.values():
             for x_group_id in x_acctunit._memberships.keys():
-                acct_id_set = x_dict.get(x_group_id)
-                if acct_id_set is None:
-                    x_dict[x_group_id] = {x_acctunit.acct_id}
+                acct_name_set = x_dict.get(x_group_id)
+                if acct_name_set is None:
+                    x_dict[x_group_id] = {x_acctunit.acct_name}
                 else:
-                    acct_id_set.add(x_acctunit.acct_id)
-                    x_dict[x_group_id] = acct_id_set
+                    acct_name_set.add(x_acctunit.acct_name)
+                    x_dict[x_group_id] = acct_name_set
         return x_dict
 
     def set_groupunit(self, x_groupunit: GroupUnit):
@@ -402,7 +402,7 @@ class BudUnit:
                 group_id=x_group_id,
                 credit_vote=x_acctunit.credit_belief,
                 debtit_vote=x_acctunit.debtit_belief,
-                _acct_id=x_acctunit.acct_id,
+                _acct_name=x_acctunit.acct_name,
             )
             x_groupunit.set_membership(x_membership)
         return x_groupunit
@@ -700,8 +700,8 @@ class BudUnit:
         for kid in d_temp_item._kids.values():
             self.set_item(kid, parent_road=parent_road)
 
-    def set_owner_id(self, new_owner_id):
-        self._owner_id = new_owner_id
+    def set_owner_name(self, new_owner_name):
+        self._owner_name = new_owner_name
 
     def edit_item_lx(self, old_road: RoadUnit, new_lx: IdeaUnit):
         if self._bridge in new_lx:
@@ -812,9 +812,9 @@ class BudUnit:
         problem_bool: bool = None,
     ):
         if healerlink is not None:
-            for x_healer_id in healerlink._healer_ids:
-                if self.get_acctunit_group_ids_dict().get(x_healer_id) is None:
-                    exception_str = f"Item cannot edit healerlink because group_id '{x_healer_id}' does not exist as group in Bud"
+            for x_healer_name in healerlink._healer_names:
+                if self.get_acctunit_group_ids_dict().get(x_healer_name) is None:
+                    exception_str = f"Item cannot edit healerlink because group_id '{x_healer_name}' does not exist as group in Bud"
                     raise healerlink_group_id_Exception(exception_str)
 
         x_itemattrholder = itemattrholder_shop(
@@ -879,8 +879,8 @@ class BudUnit:
         credit_ledger = {}
         debtit_ledger = {}
         for x_acctunit in self._accts.values():
-            credit_ledger[x_acctunit.acct_id] = x_acctunit.credit_belief
-            debtit_ledger[x_acctunit.acct_id] = x_acctunit.debtit_belief
+            credit_ledger[x_acctunit.acct_name] = x_acctunit.credit_belief
+            debtit_ledger[x_acctunit.acct_name] = x_acctunit.debtit_belief
         return credit_ledger, debtit_ledger
 
     def _allot_offtrack_fund(self):
@@ -896,19 +896,19 @@ class BudUnit:
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
         fund_give_allot = allot_scale(credor_ledger, item_fund_share, self.fund_coin)
         fund_take_allot = allot_scale(debtor_ledger, item_fund_share, self.fund_coin)
-        for x_acct_id, acct_fund_give in fund_give_allot.items():
-            self.get_acct(x_acct_id).add_fund_give(acct_fund_give)
-        for x_acct_id, acct_fund_take in fund_take_allot.items():
-            self.get_acct(x_acct_id).add_fund_take(acct_fund_take)
+        for x_acct_name, acct_fund_give in fund_give_allot.items():
+            self.get_acct(x_acct_name).add_fund_give(acct_fund_give)
+        for x_acct_name, acct_fund_take in fund_take_allot.items():
+            self.get_acct(x_acct_name).add_fund_take(acct_fund_take)
 
     def _add_to_acctunits_fund_agenda_give_take(self, item_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
         fund_give_allot = allot_scale(credor_ledger, item_fund_share, self.fund_coin)
         fund_take_allot = allot_scale(debtor_ledger, item_fund_share, self.fund_coin)
-        for x_acct_id, acct_fund_give in fund_give_allot.items():
-            self.get_acct(x_acct_id).add_fund_agenda_give(acct_fund_give)
-        for x_acct_id, acct_fund_take in fund_take_allot.items():
-            self.get_acct(x_acct_id).add_fund_agenda_take(acct_fund_take)
+        for x_acct_name, acct_fund_give in fund_give_allot.items():
+            self.get_acct(x_acct_name).add_fund_agenda_give(acct_fund_give)
+        for x_acct_name, acct_fund_take in fund_take_allot.items():
+            self.get_acct(x_acct_name).add_fund_agenda_take(acct_fund_take)
 
     def _reset_groupunits_fund_give_take(self):
         for groupunit_obj in self._groupunits.values():
@@ -947,7 +947,7 @@ class BudUnit:
             x_groupunit._set_membership_fund_give_fund_take()
             for x_membership in x_groupunit._memberships.values():
                 self.add_to_acctunit_fund_give_take(
-                    acctunit_acct_id=x_membership._acct_id,
+                    acctunit_acct_name=x_membership._acct_name,
                     fund_give=x_membership._fund_give,
                     fund_take=x_membership._fund_take,
                     fund_agenda_give=x_membership._fund_agenda_give,
@@ -1122,7 +1122,7 @@ class BudUnit:
             x_item_obj._all_acct_cred = group_everyone
             x_item_obj._all_acct_debt = group_everyone
 
-            if x_item_obj.healerlink.any_healer_id_exists():
+            if x_item_obj.healerlink.any_healer_name_exists():
                 keep_justified_by_problem = False
                 healerlink_count += 1
                 self._sum_healerlink_share += x_item_obj.get_fund_share()
@@ -1145,7 +1145,7 @@ class BudUnit:
         x_item.set_reasonheirs(self._item_dict, parent_item._reasonheirs)
         x_item.set_range_factheirs(self._item_dict, self._range_inheritors)
         tt_count = self._tree_traverse_count
-        x_item.set_active_attrs(tt_count, self._groupunits, self._owner_id)
+        x_item.set_active_attrs(tt_count, self._groupunits, self._owner_name)
 
     def _allot_fund_share(self, item: ItemUnit):
         if item.awardheir_exists():
@@ -1155,10 +1155,10 @@ class BudUnit:
 
     def _create_groupunits_metrics(self):
         self._groupunits = {}
-        for group_id, acct_id_set in self.get_acctunit_group_ids_dict().items():
+        for group_id, acct_name_set in self.get_acctunit_group_ids_dict().items():
             x_groupunit = groupunit_shop(group_id, _bridge=self._bridge)
-            for x_acct_id in acct_id_set:
-                x_membership = self.get_acct(x_acct_id).get_membership(group_id)
+            for x_acct_name in acct_name_set:
+                x_membership = self.get_acct(x_acct_name).get_membership(group_id)
                 x_groupunit.set_membership(x_membership)
                 self.set_groupunit(x_groupunit)
 
@@ -1168,10 +1168,10 @@ class BudUnit:
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
         credor_allot = allot_scale(credor_ledger, self.credor_respect, self.respect_bit)
         debtor_allot = allot_scale(debtor_ledger, self.debtor_respect, self.respect_bit)
-        for x_acct_id, acct_credor_pool in credor_allot.items():
-            self.get_acct(x_acct_id).set_credor_pool(acct_credor_pool)
-        for x_acct_id, acct_debtor_pool in debtor_allot.items():
-            self.get_acct(x_acct_id).set_debtor_pool(acct_debtor_pool)
+        for x_acct_name, acct_credor_pool in credor_allot.items():
+            self.get_acct(x_acct_name).set_credor_pool(acct_credor_pool)
+        for x_acct_name, acct_debtor_pool in debtor_allot.items():
+            self.get_acct(x_acct_name).set_debtor_pool(acct_debtor_pool)
         self._create_groupunits_metrics()
         self._reset_acctunit_fund_give_take()
 
@@ -1227,7 +1227,7 @@ class BudUnit:
             if x_item._root:
                 tt_count = self._tree_traverse_count
                 root_item = self._itemroot
-                root_item.set_active_attrs(tt_count, self._groupunits, self._owner_id)
+                root_item.set_active_attrs(tt_count, self._groupunits, self._owner_name)
             else:
                 parent_item = self.get_item_obj(x_item._parent_road)
                 self._set_kids_active_status_attrs(x_item, parent_item)
@@ -1285,19 +1285,19 @@ class BudUnit:
             else:
                 x_sum = self._sum_healerlink_share
                 x_item._healerlink_ratio = x_item.get_fund_share() / x_sum
-            if self._keeps_justified and x_item.healerlink.any_healer_id_exists():
+            if self._keeps_justified and x_item.healerlink.any_healer_name_exists():
                 self._keep_dict[x_item.get_road()] = x_item
 
-    def _get_healers_dict(self) -> dict[HealerID, dict[RoadUnit, ItemUnit]]:
+    def _get_healers_dict(self) -> dict[HealerName, dict[RoadUnit, ItemUnit]]:
         _healers_dict = {}
         for x_keep_road, x_keep_item in self._keep_dict.items():
-            for x_healer_id in x_keep_item.healerlink._healer_ids:
-                x_groupunit = self.get_groupunit(x_healer_id)
-                for x_acct_id in x_groupunit._memberships.keys():
-                    if _healers_dict.get(x_acct_id) is None:
-                        _healers_dict[x_acct_id] = {x_keep_road: x_keep_item}
+            for x_healer_name in x_keep_item.healerlink._healer_names:
+                x_groupunit = self.get_groupunit(x_healer_name)
+                for x_acct_name in x_groupunit._memberships.keys():
+                    if _healers_dict.get(x_acct_name) is None:
+                        _healers_dict[x_acct_name] = {x_keep_road: x_keep_item}
                     else:
-                        healer_dict = _healers_dict.get(x_acct_id)
+                        healer_dict = _healers_dict.get(x_acct_name)
                         healer_dict[x_keep_road] = x_keep_item
         return _healers_dict
 
@@ -1349,8 +1349,8 @@ class BudUnit:
     def get_acctunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {}
         if self._accts is not None:
-            for acct_id, acct_obj in self._accts.items():
-                x_dict[acct_id] = acct_obj.get_dict(all_attrs)
+            for acct_name, acct_obj in self._accts.items():
+                x_dict[acct_name] = acct_obj.get_dict(all_attrs)
         return x_dict
 
     def get_dict(self) -> dict[str, str]:
@@ -1362,7 +1362,7 @@ class BudUnit:
             "fund_coin": self.fund_coin,
             "respect_bit": self.respect_bit,
             "penny": self.penny,
-            "_owner_id": self._owner_id,
+            "_owner_name": self._owner_name,
             "_deal_id": self._deal_id,
             "max_tree_traverse": self.max_tree_traverse,
             "_bridge": self._bridge,
@@ -1397,7 +1397,7 @@ class BudUnit:
 
 
 def budunit_shop(
-    _owner_id: OwnerID = None,
+    _owner_name: OwnerName = None,
     _deal_id: DealID = None,
     _bridge: str = None,
     fund_pool: FundNum = None,
@@ -1406,10 +1406,10 @@ def budunit_shop(
     penny: PennyNum = None,
     tally: float = None,
 ) -> BudUnit:
-    _owner_id = "" if _owner_id is None else _owner_id
+    _owner_name = "" if _owner_name is None else _owner_name
     _deal_id = get_default_deal_id_ideaunit() if _deal_id is None else _deal_id
     x_bud = BudUnit(
-        _owner_id=_owner_id,
+        _owner_name=_owner_name,
         tally=get_1_if_None(tally),
         _deal_id=_deal_id,
         _accts=get_empty_dict_if_None(None),
@@ -1452,7 +1452,7 @@ def get_from_json(x_bud_json: str) -> BudUnit:
 
 def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud = budunit_shop()
-    x_bud.set_owner_id(obj_from_bud_dict(bud_dict, "_owner_id"))
+    x_bud.set_owner_name(obj_from_bud_dict(bud_dict, "_owner_name"))
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
     x_bud._deal_id = obj_from_bud_dict(bud_dict, "_deal_id")
@@ -1574,7 +1574,7 @@ def get_dict_of_bud_from_dict(x_dict: dict[str, dict]) -> dict[str, BudUnit]:
     budunits = {}
     for budunit_dict in x_dict.values():
         x_bud = get_from_dict(bud_dict=budunit_dict)
-        budunits[x_bud._owner_id] = x_bud
+        budunits[x_bud._owner_name] = x_bud
     return budunits
 
 

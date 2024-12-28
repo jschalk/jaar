@@ -1,5 +1,10 @@
 from src.f02_bud.bud_tool import bud_acctunit_str
-from src.f04_gift.atom_config import atom_update, atom_insert, atom_delete, acct_id_str
+from src.f04_gift.atom_config import (
+    atom_update,
+    atom_insert,
+    atom_delete,
+    acct_name_str,
+)
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.delta import deltaunit_shop
 from src.f04_gift.legible import create_legible_list
@@ -15,7 +20,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     debtit_belief_value = 43
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str, credit_belief_value)
     yao_atomunit.set_arg(debtit_belief_str, debtit_belief_value)
     # print(f"{yao_atomunit=}")
@@ -41,7 +46,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT_belief():
     debtit_belief_value = 43
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(category, atom_insert())
-    yao_atomunit.set_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str, credit_belief_value)
     yao_atomunit.set_arg(debtit_belief_str, debtit_belief_value)
     # print(f"{yao_atomunit=}")
@@ -67,7 +72,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_belief_debtit_bel
     debtit_belief_value = 43
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(category, atom_update())
-    yao_atomunit.set_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str, credit_belief_value)
     yao_atomunit.set_arg(debtit_belief_str, debtit_belief_value)
     # print(f"{yao_atomunit=}")
@@ -91,7 +96,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_belief():
     credit_belief_value = 81
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(category, atom_update())
-    yao_atomunit.set_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str, credit_belief_value)
     # print(f"{yao_atomunit=}")
     x_deltaunit = deltaunit_shop()
@@ -114,7 +119,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_belief():
     debtit_belief_value = 43
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(category, atom_update())
-    yao_atomunit.set_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(debtit_belief_str, debtit_belief_value)
     # print(f"{yao_atomunit=}")
     x_deltaunit = deltaunit_shop()
@@ -135,7 +140,7 @@ def test_create_legible_list_ReturnsObj_acctunit_DELETE():
     category = bud_acctunit_str()
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(category, atom_delete())
-    yao_atomunit.set_arg(acct_id_str(), yao_str)
+    yao_atomunit.set_arg(acct_name_str(), yao_str)
     # print(f"{yao_atomunit=}")
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(yao_atomunit)

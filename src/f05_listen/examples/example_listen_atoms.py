@@ -10,7 +10,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_update,
     atom_delete,
-    acct_id_str,
+    acct_name_str,
     parent_road_str,
     lx_str,
     fopen_str,
@@ -92,6 +92,6 @@ def get_deltaunit_sue_example() -> DeltaUnit:
     category = bud_acctunit_str()
     sue_str = "Sue"
     sue_atomunit = atomunit_shop(category, atom_delete())
-    sue_atomunit.set_jkey(acct_id_str(), sue_str)
+    sue_atomunit.set_jkey(acct_name_str(), sue_str)
     sue_deltaunit.set_atomunit(sue_atomunit)
     return sue_deltaunit

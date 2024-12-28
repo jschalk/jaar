@@ -10,7 +10,7 @@ from src.f01_road.road import (
     IdeaUnit,
     RoadUnit,
     GroupID,
-    AcctID,
+    AcctName,
     is_ideaunit,
 )
 from src.f02_bud.reason_item import factunit_shop
@@ -210,15 +210,15 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
 
 
 def _modify_bud_acct_membership_delete(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value("acct_id")
+    x_acct_name = x_atom.get_value("acct_name")
     x_group_id = x_atom.get_value("group_id")
-    x_bud.get_acct(x_acct_id).delete_membership(x_group_id)
+    x_bud.get_acct(x_acct_name).delete_membership(x_group_id)
 
 
 def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value("acct_id")
+    x_acct_name = x_atom.get_value("acct_name")
     x_group_id = x_atom.get_value("group_id")
-    x_acctunit = x_bud.get_acct(x_acct_id)
+    x_acctunit = x_bud.get_acct(x_acct_name)
     x_membership = x_acctunit.get_membership(x_group_id)
     x_credit_vote = x_atom.get_value("credit_vote")
     x_debtit_vote = x_atom.get_value("debtit_vote")
@@ -227,11 +227,11 @@ def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: AtomUnit):
 
 
 def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
-    x_acct_id = x_atom.get_value("acct_id")
+    x_acct_name = x_atom.get_value("acct_name")
     x_group_id = x_atom.get_value("group_id")
     x_credit_vote = x_atom.get_value("credit_vote")
     x_debtit_vote = x_atom.get_value("debtit_vote")
-    x_acctunit = x_bud.get_acct(x_acct_id)
+    x_acctunit = x_bud.get_acct(x_acct_name)
     x_acctunit.add_membership(x_group_id, x_credit_vote, x_debtit_vote)
 
 
@@ -408,21 +408,21 @@ def _modify_bud_item_teamlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_item_healerlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.healerlink.del_healer_id(x_atom.get_value("healer_id"))
+    x_itemunit.healerlink.del_healer_name(x_atom.get_value("healer_name"))
 
 
 def _modify_bud_item_healerlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.healerlink.set_healer_id(x_atom.get_value("healer_id"))
+    x_itemunit.healerlink.set_healer_name(x_atom.get_value("healer_name"))
 
 
 def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
-    x_bud.del_acctunit(x_atom.get_value("acct_id"))
+    x_bud.del_acctunit(x_atom.get_value("acct_name"))
 
 
 def _modify_bud_acctunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_acctunit(
-        acct_id=x_atom.get_value("acct_id"),
+        acct_name=x_atom.get_value("acct_name"),
         credit_belief=x_atom.get_value("credit_belief"),
         debtit_belief=x_atom.get_value("debtit_belief"),
     )
@@ -431,7 +431,7 @@ def _modify_bud_acctunit_update(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_acctunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_acctunit(
         acctunit_shop(
-            acct_id=x_atom.get_value("acct_id"),
+            acct_name=x_atom.get_value("acct_name"),
             credit_belief=x_atom.get_value("credit_belief"),
             debtit_belief=x_atom.get_value("debtit_belief"),
         )
@@ -611,7 +611,7 @@ def get_atomunit_from_rowdata(x_rowdata: RowData) -> AtomUnit:
 class AtomRow:
     _atom_categorys: set[str] = None
     _crud_command: CRUD_command = None
-    acct_id: AcctID = None
+    acct_name: AcctName = None
     addin: float = None
     awardee_id: GroupID = None
     base: RoadUnit = None
@@ -634,7 +634,7 @@ class AtomRow:
     give_force: float = None
     gogo_want: float = None
     group_id: GroupID = None
-    healer_id: GroupID = None
+    healer_name: GroupID = None
     lx: IdeaUnit = None
     mass: int = None
     max_tree_traverse: int = None
@@ -668,8 +668,8 @@ class AtomRow:
         for x_arg, jaar_type in get_atom_args_jaar_types().items():
             x_value = self.__dict__.get(x_arg)
             if x_value != None:
-                if jaar_type == "AcctID":
-                    self.__dict__[x_arg] = AcctID(x_value)
+                if jaar_type == "AcctName":
+                    self.__dict__[x_arg] = AcctName(x_value)
                 elif jaar_type == "GroupID":
                     self.__dict__[x_arg] = GroupID(x_value)
                 elif jaar_type == "RoadUnit":

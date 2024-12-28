@@ -25,7 +25,7 @@ def test_RoadMap_Exists():
     x_roadmap = RoadMap()
 
     # WHEN / THEN
-    assert not x_roadmap.face_id
+    assert not x_roadmap.face_name
     assert not x_roadmap.event_int
     assert not x_roadmap.otx2inx
     assert not x_roadmap.unknown_word
@@ -47,7 +47,7 @@ def test_roadmap_shop_ReturnsObj_scenario0():
 
     # WHEN
     e7_roadmap = roadmap_shop(
-        face_id=bob_str,
+        face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
         unknown_word=x_unknown_word,
@@ -56,14 +56,14 @@ def test_roadmap_shop_ReturnsObj_scenario0():
     )
 
     # THEN
-    assert e7_roadmap.face_id == bob_str
+    assert e7_roadmap.face_name == bob_str
     assert e7_roadmap.event_int == event7
     assert e7_roadmap.otx2inx == otx2inx
     assert e7_roadmap.unknown_word == x_unknown_word
     assert e7_roadmap.otx_bridge == slash_otx_bridge
     assert e7_roadmap.inx_bridge == colon_inx_bridge
     assert e7_roadmap.ideamap == ideamap_shop(
-        face_id=bob_str,
+        face_name=bob_str,
         event_int=event7,
         unknown_word=x_unknown_word,
         otx_bridge=slash_otx_bridge,
@@ -80,7 +80,7 @@ def test_roadmap_shop_ReturnsObj_Scenario2():
     assert x_roadmap.unknown_word == default_unknown_word_if_None()
     assert x_roadmap.otx_bridge == default_bridge_if_None()
     assert x_roadmap.inx_bridge == default_bridge_if_None()
-    assert x_roadmap.face_id is None
+    assert x_roadmap.face_name is None
     assert x_roadmap.event_int == 0
     assert x_roadmap.ideamap == ideamap_shop(
         event_int=0,
@@ -101,7 +101,7 @@ def test_roadmap_shop_ReturnsObj_scenario3_PidginCoreAttrAreDefaultWhenGiven_flo
 
     # WHEN
     x_roadmap = roadmap_shop(
-        face_id=bob_str,
+        face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
         unknown_word=x_nan,
@@ -110,7 +110,7 @@ def test_roadmap_shop_ReturnsObj_scenario3_PidginCoreAttrAreDefaultWhenGiven_flo
     )
 
     # THEN
-    assert x_roadmap.face_id == bob_str
+    assert x_roadmap.face_name == bob_str
     assert x_roadmap.event_int == event7
     assert x_roadmap.otx2inx == otx2inx
     assert x_roadmap.unknown_word == default_unknown_word_if_None()
@@ -123,15 +123,15 @@ def test_RoadMap_set_all_otx2inx_SetsAttr():
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    acct_id_roadmap = roadmap_shop()
+    acct_name_roadmap = roadmap_shop()
     x_otx2inx = {xio_str: sue_str, zia_str: zia_str}
-    assert acct_id_roadmap.otx2inx != x_otx2inx
+    assert acct_name_roadmap.otx2inx != x_otx2inx
 
     # WHEN
-    acct_id_roadmap.set_all_otx2inx(x_otx2inx)
+    acct_name_roadmap.set_all_otx2inx(x_otx2inx)
 
     # THEN
-    assert acct_id_roadmap.otx2inx == x_otx2inx
+    assert acct_name_roadmap.otx2inx == x_otx2inx
 
 
 def test_RoadMap_set_all_otx2inx_RaisesErrorIf_unknown_word_IsKeyIn_otx2inx():
@@ -140,13 +140,13 @@ def test_RoadMap_set_all_otx2inx_RaisesErrorIf_unknown_word_IsKeyIn_otx2inx():
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_word = "UnknownWord"
-    acct_id_roadmap = roadmap_shop(unknown_word=x_unknown_word)
+    acct_name_roadmap = roadmap_shop(unknown_word=x_unknown_word)
     x_otx2inx = {xio_str: sue_str, x_unknown_word: zia_str}
-    assert acct_id_roadmap.otx2inx != x_otx2inx
+    assert acct_name_roadmap.otx2inx != x_otx2inx
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        acct_id_roadmap.set_all_otx2inx(x_otx2inx, True)
+        acct_name_roadmap.set_all_otx2inx(x_otx2inx, True)
     exception_str = f"otx2inx cannot have unknown_word '{x_unknown_word}' in any str. Affected keys include ['{x_unknown_word}']."
     assert str(excinfo.value) == exception_str
 
@@ -472,7 +472,7 @@ def test_RoadMap_get_json_ReturnsObj():
     x_roadmap = roadmap_shop(sue_str, otx_bridge=slash_otx_bridge)
     x1_road_map_json = f"""{{
   "event_int": 0,
-  "face_id": "{sue_str}",
+  "face_name": "{sue_str}",
   "inx_bridge": "{x_roadmap.inx_bridge}",
   "otx2inx": {{}},
   "otx_bridge": "{x_roadmap.otx_bridge}",
@@ -489,7 +489,7 @@ def test_RoadMap_get_json_ReturnsObj():
     # THEN
     x2_road_map_json = f"""{{
   "event_int": {event7},
-  "face_id": "{sue_str}",
+  "face_name": "{sue_str}",
   "inx_bridge": "{x_roadmap.inx_bridge}",
   "otx2inx": {{
     "{clean_otx}": "{clean_inx}"
@@ -517,10 +517,10 @@ def test_get_roadmap_from_dict_ReturnsObj():
     gen_roadmap = get_roadmap_from_dict(x_roadmap.get_dict())
 
     # THEN
-    assert gen_roadmap.face_id == x_roadmap.face_id
+    assert gen_roadmap.face_name == x_roadmap.face_name
     assert gen_roadmap.event_int == x_roadmap.event_int
     assert gen_roadmap.event_int == event7
-    assert gen_roadmap.ideamap.face_id == x_roadmap.ideamap.face_id
+    assert gen_roadmap.ideamap.face_name == x_roadmap.ideamap.face_name
     assert gen_roadmap.ideamap.otx2inx != x_roadmap.ideamap.otx2inx
     assert gen_roadmap.ideamap != x_roadmap.ideamap
     assert gen_roadmap.otx2inx == x_roadmap.otx2inx
@@ -695,7 +695,7 @@ def test_inherit_roadmap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_inherit_roadmap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_id():
+def test_inherit_roadmap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_name():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"

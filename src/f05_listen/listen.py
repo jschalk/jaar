@@ -3,7 +3,7 @@ from src.f01_road.road import (
     get_ancestor_roads,
     RoadUnit,
     get_root_idea_from_road,
-    OwnerID,
+    OwnerName,
 )
 from src.f02_bud.item import ItemUnit
 from src.f02_bud.bud import BudUnit, AcctUnit
@@ -31,21 +31,25 @@ def _ingest_perspective_agenda(listener: BudUnit, agenda: list[ItemUnit]) -> Bud
     return listener
 
 
-def _allocate_irrational_debtit_belief(listener: BudUnit, speaker_owner_id: OwnerID):
-    speaker_acctunit = listener.get_acct(speaker_owner_id)
+def _allocate_irrational_debtit_belief(
+    listener: BudUnit, speaker_owner_name: OwnerName
+):
+    speaker_acctunit = listener.get_acct(speaker_owner_name)
     speaker_debtit_belief = speaker_acctunit.debtit_belief
     speaker_acctunit.add_irrational_debtit_belief(speaker_debtit_belief)
     return listener
 
 
-def _allocate_inallocable_debtit_belief(listener: BudUnit, speaker_owner_id: OwnerID):
-    speaker_acctunit = listener.get_acct(speaker_owner_id)
+def _allocate_inallocable_debtit_belief(
+    listener: BudUnit, speaker_owner_name: OwnerName
+):
+    speaker_acctunit = listener.get_acct(speaker_owner_name)
     speaker_acctunit.add_inallocable_debtit_belief(speaker_acctunit.debtit_belief)
     return listener
 
 
-def get_speaker_perspective(speaker: BudUnit, listener_owner_id: OwnerID):
-    listener_hubunit = hubunit_shop("", "", listener_owner_id)
+def get_speaker_perspective(speaker: BudUnit, listener_owner_name: OwnerName):
+    listener_hubunit = hubunit_shop("", "", listener_owner_name)
     return listener_hubunit.get_perspective_bud(speaker)
 
 
@@ -118,7 +122,7 @@ def get_debtors_roll(x_duty: BudUnit) -> list[AcctUnit]:
 
 def get_ordered_debtors_roll(x_bud: BudUnit) -> list[AcctUnit]:
     accts_ordered_list = get_debtors_roll(x_bud)
-    accts_ordered_list.sort(key=lambda x: (x.debtit_belief, x.acct_id), reverse=True)
+    accts_ordered_list.sort(key=lambda x: (x.debtit_belief, x.acct_name), reverse=True)
     return accts_ordered_list
 
 
@@ -155,30 +159,30 @@ def listen_to_speaker_fact(
 
 
 def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
-    if listener.acct_exists(speaker._owner_id) is False:
+    if listener.acct_exists(speaker._owner_name) is False:
         raise Missing_debtor_respectException(
-            f"listener '{listener._owner_id}' bud is assumed to have {speaker._owner_id} acctunit."
+            f"listener '{listener._owner_name}' bud is assumed to have {speaker._owner_name} acctunit."
         )
-    perspective_bud = get_speaker_perspective(speaker, listener._owner_id)
+    perspective_bud = get_speaker_perspective(speaker, listener._owner_name)
     if perspective_bud._rational is False:
-        return _allocate_irrational_debtit_belief(listener, speaker._owner_id)
+        return _allocate_irrational_debtit_belief(listener, speaker._owner_name)
     if listener.debtor_respect is None:
-        return _allocate_inallocable_debtit_belief(listener, speaker._owner_id)
-    if listener._owner_id != speaker._owner_id:
+        return _allocate_inallocable_debtit_belief(listener, speaker._owner_name)
+    if listener._owner_name != speaker._owner_name:
         agenda = generate_perspective_agenda(perspective_bud)
     else:
         agenda = list(perspective_bud.get_all_pledges().values())
     if len(agenda) == 0:
-        return _allocate_inallocable_debtit_belief(listener, speaker._owner_id)
+        return _allocate_inallocable_debtit_belief(listener, speaker._owner_name)
     return _ingest_perspective_agenda(listener, agenda)
 
 
 def listen_to_agendas_voice_final(listener_final: BudUnit, listener_hubunit: HubUnit):
     for x_acctunit in get_ordered_debtors_roll(listener_final):
-        if x_acctunit.acct_id == listener_final._owner_id:
+        if x_acctunit.acct_name == listener_final._owner_name:
             listen_to_speaker_agenda(listener_final, listener_hubunit.get_voice_bud())
         else:
-            speaker_id = x_acctunit.acct_id
+            speaker_id = x_acctunit.acct_name
             speaker_final = listener_hubunit.dw_speaker_bud(speaker_id)
             if speaker_final is None:
                 speaker_final = create_empty_bud(listener_final, speaker_id)
@@ -186,26 +190,26 @@ def listen_to_agendas_voice_final(listener_final: BudUnit, listener_hubunit: Hub
 
 
 def listen_to_agendas_duty_job(listener_job: BudUnit, healer_hubunit: HubUnit):
-    listener_id = listener_job._owner_id
+    listener_id = listener_job._owner_name
     for x_acctunit in get_ordered_debtors_roll(listener_job):
-        if x_acctunit.acct_id == listener_id:
+        if x_acctunit.acct_name == listener_id:
             listener_duty = healer_hubunit.get_duty_bud(listener_id)
             listen_to_speaker_agenda(listener_job, listener_duty)
         else:
-            speaker_id = x_acctunit.acct_id
-            healer_id = healer_hubunit.owner_id
-            speaker_job = healer_hubunit.rj_speaker_bud(healer_id, speaker_id)
+            speaker_id = x_acctunit.acct_name
+            healer_name = healer_hubunit.owner_name
+            speaker_job = healer_hubunit.rj_speaker_bud(healer_name, speaker_id)
             if speaker_job is None:
                 speaker_job = create_empty_bud(listener_job, speaker_id)
             listen_to_speaker_agenda(listener_job, speaker_job)
 
 
 def listen_to_facts_duty_job(new_job: BudUnit, healer_hubunit: HubUnit):
-    duty = healer_hubunit.get_duty_bud(new_job._owner_id)
+    duty = healer_hubunit.get_duty_bud(new_job._owner_name)
     migrate_all_facts(duty, new_job)
     for x_acctunit in get_ordered_debtors_roll(new_job):
-        if x_acctunit.acct_id != new_job._owner_id:
-            speaker_job = healer_hubunit.get_job_bud(x_acctunit.acct_id)
+        if x_acctunit.acct_name != new_job._owner_name:
+            speaker_job = healer_hubunit.get_job_bud(x_acctunit.acct_name)
             if speaker_job is not None:
                 listen_to_speaker_fact(new_job, speaker_job)
 
@@ -213,8 +217,8 @@ def listen_to_facts_duty_job(new_job: BudUnit, healer_hubunit: HubUnit):
 def listen_to_facts_voice_final(new_final: BudUnit, listener_hubunit: HubUnit):
     migrate_all_facts(listener_hubunit.get_voice_bud(), new_final)
     for x_acctunit in get_ordered_debtors_roll(new_final):
-        speaker_id = x_acctunit.acct_id
-        if speaker_id != new_final._owner_id:
+        speaker_id = x_acctunit.acct_name
+        if speaker_id != new_final._owner_name:
             speaker_final = listener_hubunit.dw_speaker_bud(speaker_id)
             if speaker_final is not None:
                 listen_to_speaker_fact(new_final, speaker_final)
@@ -231,7 +235,7 @@ def listen_to_debtors_roll_voice_final(listener_hubunit: HubUnit) -> BudUnit:
 
 
 def listen_to_debtors_roll_duty_job(
-    healer_hubunit: HubUnit, listener_id: OwnerID
+    healer_hubunit: HubUnit, listener_id: OwnerName
 ) -> BudUnit:
     duty = healer_hubunit.get_duty_bud(listener_id)
     new_duty = create_listen_basis(duty)
@@ -249,10 +253,10 @@ def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
     voice.settle_bud()
     new_final.settle_bud()
 
-    for x_healer_id, keep_dict in voice._healers_dict.items():
-        listener_id = listener_hubunit.owner_id
+    for x_healer_name, keep_dict in voice._healers_dict.items():
+        listener_id = listener_hubunit.owner_name
         healer_hubunit = copy_deepcopy(listener_hubunit)
-        healer_hubunit.owner_id = x_healer_id
+        healer_hubunit.owner_name = x_healer_name
         _pick_keep_jobs_and_listen(listener_id, keep_dict, healer_hubunit, new_final)
 
     if new_final.get_dict() == pre_final_dict:
@@ -264,7 +268,7 @@ def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
 
 
 def _pick_keep_jobs_and_listen(
-    listener_id: OwnerID,
+    listener_id: OwnerName,
     keep_dict: dict[RoadUnit],
     healer_hubunit: HubUnit,
     new_final: BudUnit,
@@ -275,13 +279,13 @@ def _pick_keep_jobs_and_listen(
 
 
 def pick_keep_job_and_listen(
-    listener_owner_id: OwnerID, healer_hubunit: HubUnit, new_final: BudUnit
+    listener_owner_name: OwnerName, healer_hubunit: HubUnit, new_final: BudUnit
 ):
-    listener_id = listener_owner_id
+    listener_id = listener_owner_name
     if healer_hubunit.job_file_exists(listener_id):
         keep_job = healer_hubunit.get_job_bud(listener_id)
     else:
-        keep_job = create_empty_bud(new_final, new_final._owner_id)
+        keep_job = create_empty_bud(new_final, new_final._owner_name)
     listen_to_job_agenda(new_final, keep_job)
 
 
@@ -296,8 +300,8 @@ def listen_to_job_agenda(listener: BudUnit, job: BudUnit):
     listener.settle_bud()
 
 
-def create_job_file_from_duty_file(healer_hubunit: HubUnit, owner_id: OwnerID):
-    x_job = listen_to_debtors_roll_duty_job(healer_hubunit, listener_id=owner_id)
+def create_job_file_from_duty_file(healer_hubunit: HubUnit, owner_name: OwnerName):
+    x_job = listen_to_debtors_roll_duty_job(healer_hubunit, listener_id=owner_name)
     healer_hubunit.save_job_bud(x_job)
 
 

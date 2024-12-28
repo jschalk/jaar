@@ -20,10 +20,10 @@ from src.f01_road.finance import (
 )
 from src.f01_road.road import (
     default_bridge_if_None,
-    OwnerID,
+    OwnerName,
     RoadUnit,
     DealID,
-    AcctID,
+    AcctName,
 )
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
@@ -77,7 +77,7 @@ class DealUnit:
     deals_dir: str = None
     timeline: TimeLineUnit = None
     current_time: int = None
-    purviewlogs: dict[OwnerID, PurviewLog] = None
+    purviewlogs: dict[OwnerName, PurviewLog] = None
     cashbook: TranBook = None
     bridge: str = None
     fund_coin: FundCoin = None
@@ -99,8 +99,8 @@ class DealUnit:
         set_dir(x_path=self._gifts_dir)
         self._create_journal_db(in_memory=in_memory_journal)
 
-    def _get_owner_dir(self, owner_id):
-        return create_path(self._owners_dir, owner_id)
+    def _get_owner_dir(self, owner_name):
+        return create_path(self._owners_dir, owner_name)
 
     def _get_owner_folder_names(self) -> set:
         owners = get_dir_file_strs(
@@ -108,18 +108,18 @@ class DealUnit:
         )
         return set(owners.keys())
 
-    def get_owner_hubunits(self) -> dict[OwnerID:HubUnit]:
-        x_owner_ids = self._get_owner_folder_names()
+    def get_owner_hubunits(self) -> dict[OwnerName:HubUnit]:
+        x_owner_names = self._get_owner_folder_names()
         return {
-            x_owner_id: hubunit_shop(
+            x_owner_name: hubunit_shop(
                 deals_dir=self.deals_dir,
                 deal_id=self.deal_id,
-                owner_id=x_owner_id,
+                owner_name=x_owner_name,
                 keep_road=None,
                 bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
-            for x_owner_id in x_owner_ids
+            for x_owner_name in x_owner_names
         }
 
     # database
@@ -158,9 +158,9 @@ class DealUnit:
             return self._journal_db
 
     # owner management
-    def _get_hubunit(self, owner_id: OwnerID) -> HubUnit:
+    def _get_hubunit(self, owner_name: OwnerName) -> HubUnit:
         return hubunit_shop(
-            owner_id=owner_id,
+            owner_name=owner_name,
             deal_id=self.deal_id,
             deals_dir=self.deals_dir,
             keep_road=None,
@@ -168,22 +168,22 @@ class DealUnit:
             respect_bit=self.respect_bit,
         )
 
-    def init_owner_keeps(self, owner_id: OwnerID):
-        x_hubunit = self._get_hubunit(owner_id)
+    def init_owner_keeps(self, owner_name: OwnerName):
+        x_hubunit = self._get_hubunit(owner_name)
         x_hubunit.initialize_gift_voice_files()
-        x_hubunit.initialize_final_file(self.get_owner_voice_from_file(owner_id))
+        x_hubunit.initialize_final_file(self.get_owner_voice_from_file(owner_name))
 
-    def get_owner_voice_from_file(self, owner_id: OwnerID) -> BudUnit:
-        return self._get_hubunit(owner_id).get_voice_bud()
+    def get_owner_voice_from_file(self, owner_name: OwnerName) -> BudUnit:
+        return self._get_hubunit(owner_name).get_voice_bud()
 
-    def _set_all_healer_dutys(self, owner_id: OwnerID):
-        x_voice = self.get_owner_voice_from_file(owner_id)
+    def _set_all_healer_dutys(self, owner_name: OwnerName):
+        x_voice = self.get_owner_voice_from_file(owner_name)
         x_voice.settle_bud()
-        for healer_id, healer_dict in x_voice._healers_dict.items():
+        for healer_name, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 self.deals_dir,
                 self.deal_id,
-                healer_id,
+                healer_name,
                 keep_road=None,
                 # "duty_job",
                 bridge=self.bridge,
@@ -203,16 +203,16 @@ class DealUnit:
         healer_hubunit.save_duty_bud(voice_bud)
 
     # final bud management
-    def generate_final_bud(self, owner_id: OwnerID) -> BudUnit:
-        listener_hubunit = self._get_hubunit(owner_id)
+    def generate_final_bud(self, owner_name: OwnerName) -> BudUnit:
+        listener_hubunit = self._get_hubunit(owner_name)
         x_voice = listener_hubunit.get_voice_bud()
         x_voice.settle_bud()
         x_final = get_default_final_bud(x_voice)
-        for healer_id, healer_dict in x_voice._healers_dict.items():
+        for healer_name, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 deals_dir=self.deals_dir,
                 deal_id=self.deal_id,
-                owner_id=healer_id,
+                owner_name=healer_name,
                 keep_road=None,
                 # "duty_job",
                 bridge=self.bridge,
@@ -223,15 +223,15 @@ class DealUnit:
                 keep_hubunit = hubunit_shop(
                     deals_dir=self.deals_dir,
                     deal_id=self.deal_id,
-                    owner_id=healer_id,
+                    owner_name=healer_name,
                     keep_road=keep_road,
                     # "duty_job",
                     bridge=self.bridge,
                     respect_bit=self.respect_bit,
                 )
                 keep_hubunit.save_duty_bud(x_voice)
-                create_job_file_from_duty_file(keep_hubunit, owner_id)
-                x_job = keep_hubunit.get_job_bud(owner_id)
+                create_job_file_from_duty_file(keep_hubunit, owner_name)
+                x_job = keep_hubunit.get_job_bud(owner_name)
                 listen_to_speaker_agenda(x_final, x_job)
 
         # if nothing has come from voice->duty->job->final pipeline use voice->final pipeline
@@ -245,31 +245,31 @@ class DealUnit:
             x_final = x_voice
         listener_hubunit.save_final_bud(x_final)
 
-        return self.get_final_file_bud(owner_id)
+        return self.get_final_file_bud(owner_name)
 
     def generate_all_final_buds(self):
-        for x_owner_id in self._get_owner_folder_names():
-            self.generate_final_bud(x_owner_id)
+        for x_owner_name in self._get_owner_folder_names():
+            self.generate_final_bud(x_owner_name)
 
-    def get_final_file_bud(self, owner_id: OwnerID) -> BudUnit:
-        return self._get_hubunit(owner_id).get_final_bud()
+    def get_final_file_bud(self, owner_name: OwnerName) -> BudUnit:
+        return self._get_hubunit(owner_name).get_final_bud()
 
     # purviewlogs
     def set_purviewlog(self, x_purviewlog: PurviewLog):
-        self.purviewlogs[x_purviewlog.owner_id] = x_purviewlog
+        self.purviewlogs[x_purviewlog.owner_name] = x_purviewlog
 
-    def purviewlog_exists(self, x_owner_id: OwnerID) -> bool:
-        return self.purviewlogs.get(x_owner_id) != None
+    def purviewlog_exists(self, x_owner_name: OwnerName) -> bool:
+        return self.purviewlogs.get(x_owner_name) != None
 
-    def get_purviewlog(self, x_owner_id: OwnerID) -> PurviewLog:
-        return self.purviewlogs.get(x_owner_id)
+    def get_purviewlog(self, x_owner_name: OwnerName) -> PurviewLog:
+        return self.purviewlogs.get(x_owner_name)
 
-    def del_purviewlog(self, x_owner_id: OwnerID):
-        self.purviewlogs.pop(x_owner_id)
+    def del_purviewlog(self, x_owner_name: OwnerName):
+        self.purviewlogs.pop(x_owner_name)
 
     def add_purviewepisode(
         self,
-        x_owner_id: OwnerID,
+        x_owner_name: OwnerName,
         x_time_int: TimeLinePoint,
         x_money_magnitude: int,
         allow_prev_to_current_time_entry: bool = False,
@@ -277,9 +277,9 @@ class DealUnit:
         if x_time_int < self.current_time and allow_prev_to_current_time_entry is False:
             exception_str = f"Cannot set purviewepisode because time_int {x_time_int} is less than DealUnit.current_time {self.current_time}."
             raise purviewepisode_Exception(exception_str)
-        if self.purviewlog_exists(x_owner_id) is False:
-            self.set_purviewlog(purviewlog_shop(x_owner_id))
-        x_purviewlog = self.get_purviewlog(x_owner_id)
+        if self.purviewlog_exists(x_owner_name) is False:
+            self.set_purviewlog(purviewlog_shop(x_owner_name))
+        x_purviewlog = self.get_purviewlog(x_owner_name)
         x_purviewlog.add_episode(x_time_int, x_money_magnitude)
 
     def get_dict(self) -> dict:
@@ -299,7 +299,7 @@ class DealUnit:
 
     def _get_purviewlogs_dict(self):
         return {
-            x_episode.owner_id: x_episode.get_dict()
+            x_episode.owner_name: x_episode.get_dict()
             for x_episode in self.purviewlogs.values()
         }
 
@@ -318,16 +318,16 @@ class DealUnit:
 
     def add_cashpurchase(
         self,
-        x_owner_id: OwnerID,
-        x_acct_id: AcctID,
+        x_owner_name: OwnerName,
+        x_acct_name: AcctName,
         x_time_int: TimeLinePoint,
         x_amount: FundNum,
         x_blocked_time_ints: set[TimeLinePoint] = None,
         x_current_time: TimeLinePoint = None,
     ):
         self.cashbook.add_tranunit(
-            x_owner_id=x_owner_id,
-            x_acct_id=x_acct_id,
+            x_owner_name=x_owner_name,
+            x_acct_name=x_acct_name,
             x_time_int=x_time_int,
             x_amount=x_amount,
             x_blocked_time_ints=x_blocked_time_ints,
@@ -335,16 +335,16 @@ class DealUnit:
         )
 
     def cashpurchase_exists(
-        self, src: AcctID, dst: AcctID, x_time_int: TimeLinePoint
+        self, src: AcctName, dst: AcctName, x_time_int: TimeLinePoint
     ) -> bool:
         return self.cashbook.tranunit_exists(src, dst, x_time_int)
 
     def get_cashpurchase(
-        self, src: AcctID, dst: AcctID, x_time_int: TimeLinePoint
+        self, src: AcctName, dst: AcctName, x_time_int: TimeLinePoint
     ) -> TranUnit:
         return self.cashbook.get_tranunit(src, dst, x_time_int)
 
-    def del_cashpurchase(self, src: AcctID, dst: AcctID, x_time_int: TimeLinePoint):
+    def del_cashpurchase(self, src: AcctName, dst: AcctName, x_time_int: TimeLinePoint):
         return self.cashbook.del_tranunit(src, dst, x_time_int)
 
     def set_current_time(self, x_current_time: TimeLinePoint):
@@ -357,10 +357,10 @@ class DealUnit:
     def set_all_tranbook(self):
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
         x_tranbook = tranbook_shop(self.deal_id, x_tranunits)
-        for owner_id, x_purviewlog in self.purviewlogs.items():
+        for owner_name, x_purviewlog in self.purviewlogs.items():
             for x_time_int, x_purviewepisode in x_purviewlog.episodes.items():
-                for acct_id, x_amount in x_purviewepisode._net_purviews.items():
-                    x_tranbook.add_tranunit(owner_id, acct_id, x_time_int, x_amount)
+                for acct_name, x_amount in x_purviewepisode._net_purviews.items():
+                    x_tranbook.add_tranunit(owner_name, acct_name, x_time_int, x_amount)
         self._all_tranbook = x_tranbook
 
     # TODO evaluate if this should be used
@@ -422,8 +422,8 @@ def get_from_dict(deal_dict: dict) -> DealUnit:
     return x_deal
 
 
-def _get_purviewlogs_from_dict(purviewlogs_dict: dict) -> dict[OwnerID, PurviewLog]:
+def _get_purviewlogs_from_dict(purviewlogs_dict: dict) -> dict[OwnerName, PurviewLog]:
     return {
-        x_owner_id: get_purviewlog_from_dict(purviewlog_dict)
-        for x_owner_id, purviewlog_dict in purviewlogs_dict.items()
+        x_owner_name: get_purviewlog_from_dict(purviewlog_dict)
+        for x_owner_name, purviewlog_dict in purviewlogs_dict.items()
     }

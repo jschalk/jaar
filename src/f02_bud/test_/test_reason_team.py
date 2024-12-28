@@ -117,91 +117,93 @@ def test_TeamUnit_del_teamlink_CorrectlyDeletes_teamlinks_v1():
 def test_TeamHeir_exists():
     # ESTABLISH
     x_teamlinks = {1}
-    _owner_id_x_teamunit = True
+    _owner_name_x_teamunit = True
 
     # WHEN
-    x_teamheir = TeamHeir(_teamlinks=x_teamlinks, _owner_id_team=_owner_id_x_teamunit)
-
-    # THEN
-    assert x_teamheir
-    assert x_teamheir._teamlinks == x_teamlinks
-    assert x_teamheir._owner_id_team == _owner_id_x_teamunit
-
-
-def test_teamheir_shop_ReturnsCorrectWithCorrectAttributes_v1():
-    # ESTABLISH
-    x_teamlinks = {1}
-    _owner_id_x_teamunit = "example"
-
-    # WHEN
-    x_teamheir = teamheir_shop(
-        _teamlinks=x_teamlinks, _owner_id_team=_owner_id_x_teamunit
+    x_teamheir = TeamHeir(
+        _teamlinks=x_teamlinks, _owner_name_team=_owner_name_x_teamunit
     )
 
     # THEN
     assert x_teamheir
     assert x_teamheir._teamlinks == x_teamlinks
-    assert x_teamheir._owner_id_team == _owner_id_x_teamunit
+    assert x_teamheir._owner_name_team == _owner_name_x_teamunit
 
 
-def test_TeamHeir_set_owner_id_team_CorrectlySetsAttribute_Emptyx_teamlinks():
+def test_teamheir_shop_ReturnsCorrectWithCorrectAttributes_v1():
+    # ESTABLISH
+    x_teamlinks = {1}
+    _owner_name_x_teamunit = "example"
+
+    # WHEN
+    x_teamheir = teamheir_shop(
+        _teamlinks=x_teamlinks, _owner_name_team=_owner_name_x_teamunit
+    )
+
+    # THEN
+    assert x_teamheir
+    assert x_teamheir._teamlinks == x_teamlinks
+    assert x_teamheir._owner_name_team == _owner_name_x_teamunit
+
+
+def test_TeamHeir_set_owner_name_team_CorrectlySetsAttribute_Emptyx_teamlinks():
     # ESTABLISH
     x_teamlinks = set()
     x_teamheir = teamheir_shop(_teamlinks=x_teamlinks)
-    assert x_teamheir._owner_id_team is False
+    assert x_teamheir._owner_name_team is False
 
     # WHEN
     bud_groupunits = {}
-    x_teamheir.set_owner_id_team(bud_groupunits, bud_owner_id="")
+    x_teamheir.set_owner_name_team(bud_groupunits, bud_owner_name="")
 
     # THEN
-    assert x_teamheir._owner_id_team
+    assert x_teamheir._owner_name_team
 
 
-def test_TeamHeir_set_owner_id_team_CorrectlySetsAttribute_NonEmptyx_teamlinks_v1():
+def test_TeamHeir_set_owner_name_team_CorrectlySetsAttribute_NonEmptyx_teamlinks_v1():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, _acct_id=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, _acct_id=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, _acct_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, _acct_name=sue_str))
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
-    bud_owner_id = yao_str
+    bud_owner_name = yao_str
 
     x_teamlinks = {yao_str}
     x_teamheir = teamheir_shop(_teamlinks=x_teamlinks)
-    assert x_teamheir._owner_id_team is False
+    assert x_teamheir._owner_name_team is False
 
     # WHEN
-    x_teamheir.set_owner_id_team(x_groupunits, bud_owner_id)
+    x_teamheir.set_owner_name_team(x_groupunits, bud_owner_name)
 
     # THEN
-    assert x_teamheir._owner_id_team
+    assert x_teamheir._owner_name_team
 
 
-def test_TeamHeir_set_owner_id_team_CorrectlySetsAttribute_NonEmptyx_teamlinks_v2():
+def test_TeamHeir_set_owner_name_team_CorrectlySetsAttribute_NonEmptyx_teamlinks_v2():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, _acct_id=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, _acct_id=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, _acct_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, _acct_name=sue_str))
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
     x_teamlinks = {sue_str}
     x_teamheir = teamheir_shop(_teamlinks=x_teamlinks)
     assert yao_groupunit.get_membership(yao_str) is not None
-    assert x_teamheir._owner_id_team is False
+    assert x_teamheir._owner_name_team is False
 
     # WHEN
-    x_teamheir.set_owner_id_team(x_groupunits, yao_str)
+    x_teamheir.set_owner_name_team(x_groupunits, yao_str)
 
     # THEN
-    assert x_teamheir._owner_id_team is False
+    assert x_teamheir._owner_name_team is False
 
 
-def test_TeamHeir_set_owner_id_team_CorrectlySetsAttribute_NonEmptyx_teamlinks_v3():
+def test_TeamHeir_set_owner_name_team_CorrectlySetsAttribute_NonEmptyx_teamlinks_v3():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -209,13 +211,13 @@ def test_TeamHeir_set_owner_id_team_CorrectlySetsAttribute_NonEmptyx_teamlinks_v
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
     bob_groupunit = groupunit_shop(bob_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, _acct_id=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, _acct_id=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, _acct_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, _acct_name=sue_str))
 
     swim_str = ",swim"
     swim_groupunit = groupunit_shop(group_id=swim_str)
-    swim_groupunit.set_membership(membership_shop(swim_str, _acct_id=yao_str))
-    swim_groupunit.set_membership(membership_shop(swim_str, _acct_id=sue_str))
+    swim_groupunit.set_membership(membership_shop(swim_str, _acct_name=yao_str))
+    swim_groupunit.set_membership(membership_shop(swim_str, _acct_name=sue_str))
     x_groupunits = {
         yao_str: yao_groupunit,
         sue_str: sue_groupunit,
@@ -225,16 +227,16 @@ def test_TeamHeir_set_owner_id_team_CorrectlySetsAttribute_NonEmptyx_teamlinks_v
 
     x_teamlinks = {swim_str}
     x_teamheir = teamheir_shop(_teamlinks=x_teamlinks)
-    assert x_teamheir._owner_id_team is False
-    x_teamheir.set_owner_id_team(x_groupunits, bud_owner_id=yao_str)
-    assert x_teamheir._owner_id_team
+    assert x_teamheir._owner_name_team is False
+    x_teamheir.set_owner_name_team(x_groupunits, bud_owner_name=yao_str)
+    assert x_teamheir._owner_name_team
 
     # WHEN
     swim_groupunit.del_membership(yao_str)
-    x_teamheir.set_owner_id_team(x_groupunits, yao_str)
+    x_teamheir.set_owner_name_team(x_groupunits, yao_str)
 
     # THEN
-    assert x_teamheir._owner_id_team is False
+    assert x_teamheir._owner_name_team is False
 
 
 def test_TeamHeir_set_teamlink_TeamUnit_Empty_ParentTeamHeirEmpty():
@@ -342,19 +344,19 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
     sue_groupunit = groupunit_shop(sue_str)
     bob_groupunit = groupunit_shop(bob_str)
     bob_groupunit = groupunit_shop(zia_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, _acct_id=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, _acct_id=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, _acct_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, _acct_name=sue_str))
 
     swim2_str = ",swim2"
     swim2_groupunit = groupunit_shop(group_id=swim2_str)
-    swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_id=yao_str))
-    swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_id=sue_str))
+    swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_name=yao_str))
+    swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_name=sue_str))
 
     swim3_str = ",swim3"
     swim3_groupunit = groupunit_shop(group_id=swim3_str)
-    swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_id=yao_str))
-    swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_id=sue_str))
-    swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_id=zia_str))
+    swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=yao_str))
+    swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=sue_str))
+    swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=zia_str))
 
     x_groupunits = {
         yao_str: yao_groupunit,
@@ -399,14 +401,14 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
 
 #     swim2_str = ",swim2"
 #     swim2_groupunit = groupunit_shop(swim2_str)
-#     swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_id=yao_str))
-#     swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_id=sue_str))
+#     swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_name=yao_str))
+#     swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_name=sue_str))
 
 #     swim3_str = ",swim3"
 #     swim3_groupunit = groupunit_shop(team_id=swim3_str)
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_id=yao_str))
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_id=sue_str))
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_id=zia_str))
+#     swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=yao_str))
+#     swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=sue_str))
+#     swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=zia_str))
 
 #     x_groupunits = {
 #         yao_str: yao_groupunit,

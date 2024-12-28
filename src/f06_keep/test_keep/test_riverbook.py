@@ -13,7 +13,7 @@ def test_RiverBook_Exists():
     x_riverbook = RiverBook()
 
     # THEN
-    assert x_riverbook.owner_id is None
+    assert x_riverbook.owner_name is None
     assert x_riverbook.hubunit is None
     assert x_riverbook._rivergrants is None
 
@@ -28,7 +28,7 @@ def test_riverbook_shop_ReturnsCorrectObj():
     bob_riverbook = riverbook_shop(yao_hubunit, bob_str)
 
     # THEN
-    assert bob_riverbook.owner_id == bob_str
+    assert bob_riverbook.owner_name == bob_str
     assert bob_riverbook.hubunit == yao_hubunit
     assert bob_riverbook._rivergrants == {}
 
@@ -51,6 +51,6 @@ def test_create_riverbook_ReturnsCorrectObj():
 
     # THEN
     assert yao_riverbook.hubunit == yao_hubunit
-    assert yao_riverbook.owner_id == yao_str
+    assert yao_riverbook.owner_name == yao_str
     assert yao_riverbook._rivergrants == {yao_str: 250, sue_str: 250}
     assert sum(yao_riverbook._rivergrants.values()) == yao_book_point_amount

@@ -342,7 +342,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     week_str = "weekdays"
     nation_str = "nation-state"
     sue_awardlink = awardlink_shop(awardee_id=sue_str)
-    sue_bud.add_acctunit(acct_id=sue_str)
+    sue_bud.add_acctunit(acct_name=sue_str)
     sue_bud._itemroot.set_awardlink(awardlink=sue_awardlink)
     # item tree has awardlines
     assert sue_bud._itemroot._awardheirs.get(sue_str) is None

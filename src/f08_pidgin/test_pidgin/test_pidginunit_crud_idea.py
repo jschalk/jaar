@@ -7,7 +7,7 @@ def test_PidginUnit_set_ideamap_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    x_ideamap = ideamap_shop(face_id=sue_str)
+    x_ideamap = ideamap_shop(face_name=sue_str)
     x_ideamap.set_otx2inx("Bob", "Bob of Portland")
     assert sue_pidginunit.ideamap != x_ideamap
 
@@ -23,7 +23,7 @@ def test_PidginUnit_set_ideamap_RaisesErrorIf_ideamap_otx_bridge_IsNotSame():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_otx_bridge = "/"
-    x_ideamap = ideamap_shop(otx_bridge=slash_otx_bridge, face_id=sue_str)
+    x_ideamap = ideamap_shop(otx_bridge=slash_otx_bridge, face_name=sue_str)
     assert sue_pidginunit.otx_bridge != x_ideamap.otx_bridge
     assert sue_pidginunit.ideamap != x_ideamap
 
@@ -39,7 +39,7 @@ def test_PidginUnit_set_ideamap_RaisesErrorIf_ideamap_inx_bridge_IsNotSame():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_inx_bridge = "/"
-    x_ideamap = ideamap_shop(inx_bridge=slash_inx_bridge, face_id=sue_str)
+    x_ideamap = ideamap_shop(inx_bridge=slash_inx_bridge, face_name=sue_str)
     assert sue_pidginunit.inx_bridge != x_ideamap.inx_bridge
     assert sue_pidginunit.ideamap != x_ideamap
 
@@ -55,7 +55,7 @@ def test_PidginUnit_set_ideamap_RaisesErrorIf_ideamap_unknown_word_IsNotSame():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
-    x_ideamap = ideamap_shop(unknown_word=casa_unknown_word, face_id=sue_str)
+    x_ideamap = ideamap_shop(unknown_word=casa_unknown_word, face_name=sue_str)
     assert sue_pidginunit.unknown_word != x_ideamap.unknown_word
     assert sue_pidginunit.ideamap != x_ideamap
 
@@ -66,19 +66,19 @@ def test_PidginUnit_set_ideamap_RaisesErrorIf_ideamap_unknown_word_IsNotSame():
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_ideamap_RaisesErrorIf_ideamap_face_id_IsNotSame():
+def test_PidginUnit_set_ideamap_RaisesErrorIf_ideamap_face_name_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
     sue_pidginunit = pidginunit_shop(sue_str)
-    x_ideamap = ideamap_shop(face_id=yao_str)
-    assert sue_pidginunit.face_id != x_ideamap.face_id
+    x_ideamap = ideamap_shop(face_name=yao_str)
+    assert sue_pidginunit.face_name != x_ideamap.face_name
     assert sue_pidginunit.ideamap != x_ideamap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_ideamap(x_ideamap)
-    exception_str = f"set_mapcore Error: PidginUnit face_id is '{sue_pidginunit.face_id}', MapCore is '{yao_str}'."
+    exception_str = f"set_mapcore Error: PidginUnit face_name is '{sue_pidginunit.face_name}', MapCore is '{yao_str}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -86,7 +86,7 @@ def test_PidginUnit_get_ideamap_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    static_x_ideamap = ideamap_shop(face_id=sue_str)
+    static_x_ideamap = ideamap_shop(face_name=sue_str)
     static_x_ideamap.set_otx2inx("Bob", "Bob of Portland")
     sue_pidginunit.set_ideamap(static_x_ideamap)
 

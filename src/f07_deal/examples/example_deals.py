@@ -37,7 +37,7 @@ from src.f07_deal.examples.deal_env import get_test_deals_dir
 #     x_hubunit = hubunit_shop(
 #         deals_dir=yao_hubunit.deals_dir,
 #         deal_id=yao_hubunit.deal_id,
-#         owner_id=yao_hubunit.owner_id,
+#         owner_name=yao_hubunit.owner_name,
 #         keep_road=None,
 #         bridge=yao_hubunit.bridge,
 #         respect_bit=yao_hubunit.respect_bit,

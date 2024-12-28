@@ -83,7 +83,7 @@ def test_get_bud_purview_csv_ReturnsObj_ScenarioMultipleAcctUnit():
     # THEN
     print(f"{bud_purview_csv_str=}")
     print("")
-    example_csv_str = f"""acct_id,fund_take,fund_give
+    example_csv_str = f"""acct_name,fund_take,fund_give
 {bob_str},{bob_fund_take},{bob_fund_give}
 {yao_str},{yao_fund_take},{yao_fund_give}
 {zia_str},0,0
@@ -103,7 +103,7 @@ def test_get_bud_purview_csv_ReturnsObj_settle_bud_True():
     sue_bud.add_acctunit(bob_str)
     sue_bud.add_acctunit(xio_str)
     sue_bud.add_acctunit(zia_str)
-    empty_purview = f"""acct_id,fund_take,fund_give
+    empty_purview = f"""acct_name,fund_take,fund_give
 {bob_str},0,0
 {xio_str},0,0
 {yao_str},0,0
@@ -119,7 +119,7 @@ def test_get_bud_purview_csv_ReturnsObj_settle_bud_True():
     print("")
     q_fund_give = int(sue_bud.fund_pool * 0.25)
     q_fund_take = int(sue_bud.fund_pool * 0.25)
-    example_csv_str = f"""acct_id,fund_take,fund_give
+    example_csv_str = f"""acct_name,fund_take,fund_give
 {bob_str},{q_fund_take},{q_fund_give}
 {xio_str},{q_fund_take},{q_fund_give}
 {yao_str},{q_fund_take},{q_fund_give}

@@ -1,4 +1,4 @@
-from src.f01_road.road import OwnerID, AcctID
+from src.f01_road.road import OwnerName, AcctName
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.hubunit import HubUnit, hubunit_shop
 from src.f06_keep.examples.keep_env import (
@@ -59,7 +59,7 @@ def example_zia_credorledger() -> dict[str, float]:
     return get_credorledger(zia_bud)
 
 
-def example_yao_bob_zia_credorledgers() -> dict[OwnerID : dict[AcctID, float]]:
+def example_yao_bob_zia_credorledgers() -> dict[OwnerName : dict[AcctName, float]]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
@@ -70,7 +70,7 @@ def example_yao_bob_zia_credorledgers() -> dict[OwnerID : dict[AcctID, float]]:
     }
 
 
-def example_yao_bob_zia_tax_dues() -> dict[AcctID, float]:
+def example_yao_bob_zia_tax_dues() -> dict[AcctName, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"

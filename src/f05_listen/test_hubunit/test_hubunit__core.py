@@ -32,7 +32,7 @@ def test_get_keep_path_ReturnsCorrectObj():
     # ESTABLISH
     sue_str = "Sue"
     peru_str = "peru"
-    sue_hubunit = hubunit_shop(None, deal_id=peru_str, owner_id=sue_str)
+    sue_hubunit = hubunit_shop(None, deal_id=peru_str, owner_name=sue_str)
     texas_str = "texas"
     dallas_str = "dallas"
     elpaso_str = "el paso"
@@ -75,7 +75,7 @@ def test_HubUnit_Exists():
     # THEN
     assert x_hubunit.deals_dir is None
     assert x_hubunit.deal_id is None
-    assert x_hubunit.owner_id is None
+    assert x_hubunit.owner_name is None
     assert x_hubunit.keep_road is None
     assert x_hubunit.bridge is None
     assert x_hubunit.fund_pool is None
@@ -115,7 +115,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     x_hubunit = hubunit_shop(
         deals_dir=x_deals_dir,
         deal_id=x_deal_id,
-        owner_id=sue_str,
+        owner_name=sue_str,
         keep_road=None,
         bridge=x_bridge,
         fund_pool=x_fund_pool,
@@ -128,7 +128,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     # THEN
     assert x_hubunit.deals_dir == x_deals_dir
     assert x_hubunit.deal_id == x_deal_id
-    assert x_hubunit.owner_id == sue_str
+    assert x_hubunit.owner_name == sue_str
     assert x_hubunit.bridge == x_bridge
     assert x_hubunit.fund_pool == x_fund_pool
     assert x_hubunit.fund_coin == x_fund_coin
@@ -177,7 +177,7 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     assert sue_hubunit.deals_dir == get_test_deals_dir()
     assert sue_hubunit.deal_id == get_deal_id_if_None()
     assert sue_hubunit.deal_dir() == x_deal_path
-    assert sue_hubunit.owner_id == sue_str
+    assert sue_hubunit.owner_name == sue_str
     assert sue_hubunit.bridge == default_bridge_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_coin == default_fund_coin_if_None()
@@ -206,14 +206,14 @@ def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
     assert sue_hubunit.treasury_db_path() == x_treasury_file_path
 
 
-def test_hubunit_shop_RaisesErrorIf_owner_id_Contains_bridge():
+def test_hubunit_shop_RaisesErrorIf_owner_name_Contains_bridge():
     # ESTABLISH
     slash_str = "/"
     bob_str = f"Bob{slash_str}Sue"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        hubunit_shop(None, None, owner_id=bob_str, bridge=slash_str)
+        hubunit_shop(None, None, owner_name=bob_str, bridge=slash_str)
     assert (
         str(excinfo.value)
         == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain bridge: '{slash_str}'"
@@ -297,7 +297,7 @@ def test_HubUnit_open_file_final_OpensFile(env_dir_setup_cleanup):
 def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit._owner_id
+    sue_str = sue_budunit._owner_name
     deal_id = root_lx()
     sue_hubunit = hubunit_shop(env_dir(), deal_id, sue_str, None)
 
@@ -326,14 +326,14 @@ def test_HubUnit_save_voice_bud_RaisesErrorWhenBud_final_id_IsWrong(
         sue_hubunit.save_voice_bud(budunit_shop(yao_str))
     assert (
         str(excinfo.value)
-        == f"BudUnit with owner_id '{yao_str}' cannot be saved as owner_id '{sue_str}''s voice bud."
+        == f"BudUnit with owner_name '{yao_str}' cannot be saved as owner_name '{sue_str}''s voice bud."
     )
 
 
 def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit._owner_id
+    sue_str = sue_budunit._owner_name
     nation_str = "nation-state"
     nation_road = create_road(root_lx(), nation_str)
     usa_str = "USA"
@@ -350,7 +350,7 @@ def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
 def test_HubUnit_save_final_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit._owner_id
+    sue_str = sue_budunit._owner_name
 
     deal_id = root_lx()
     sue_hubunit = hubunit_shop(env_dir(), deal_id, sue_str, None)
@@ -368,7 +368,7 @@ def test_HubUnit_save_final_bud_CorrectlySavesFile(env_dir_setup_cleanup):
 def test_HubUnit_get_final_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit._owner_id
+    sue_str = sue_budunit._owner_name
     nation_str = "nation-state"
     nation_road = create_road(root_lx(), nation_str)
     usa_str = "USA"
@@ -385,7 +385,7 @@ def test_HubUnit_get_final_bud_OpensFile(env_dir_setup_cleanup):
 def test_HubUnit_get_final_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit._owner_id
+    sue_str = sue_budunit._owner_name
     sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
 
     # WHEN / THEN
@@ -407,5 +407,5 @@ def test_HubUnit_save_final_bud_RaisesErrorWhenBud_final_id_IsWrong(
         sue_hubunit.save_final_bud(budunit_shop(yao_str))
     assert (
         str(excinfo.value)
-        == f"BudUnit with owner_id '{yao_str}' cannot be saved as owner_id '{sue_str}''s final bud."
+        == f"BudUnit with owner_name '{yao_str}' cannot be saved as owner_name '{sue_str}''s final bud."
     )

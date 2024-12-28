@@ -214,23 +214,23 @@ def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):
 
     # WHEN
     e5_event_int = 5
-    e5_face_id = "Sue"
-    x_world.set_event(e5_event_int, e5_face_id)
+    e5_face_name = "Sue"
+    x_world.set_event(e5_event_int, e5_face_name)
 
     # THEN
     assert x_world.events != {}
-    assert x_world.events == {e5_event_int: e5_face_id}
+    assert x_world.events == {e5_event_int: e5_face_name}
 
 
 def test_WorldUnit_event_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     e5_event_int = 5
-    e5_face_id = "Sue"
+    e5_face_name = "Sue"
     assert x_world.event_exists(e5_event_int) is False
 
     # WHEN
-    x_world.set_event(e5_event_int, e5_face_id)
+    x_world.set_event(e5_event_int, e5_face_name)
 
     # THEN
     assert x_world.event_exists(e5_event_int)
@@ -240,11 +240,11 @@ def test_WorldUnit_get_event_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop()
     e5_event_int = 5
-    e5_face_id = "Sue"
+    e5_face_name = "Sue"
     assert x_world.get_event(e5_event_int) is None
 
     # WHEN
-    x_world.set_event(e5_event_int, e5_face_id)
+    x_world.set_event(e5_event_int, e5_face_name)
 
     # THEN
-    assert x_world.get_event(e5_event_int) == e5_face_id
+    assert x_world.get_event(e5_event_int) == e5_face_name

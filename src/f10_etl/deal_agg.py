@@ -12,7 +12,7 @@ def create_init_deal_staging_files(dir: str):
     br00005_path = create_path(dir, "br00005.xlsx")
 
     br00000_columns = [
-        "face_id",
+        "face_name",
         "event_int",
         "deal_id",
         "c400_number",
@@ -26,39 +26,39 @@ def create_init_deal_staging_files(dir: str):
         "yr1_jan1_offset",
     ]
     br00001_columns = [
-        "face_id",
+        "face_name",
         "event_int",
         "deal_id",
-        "owner_id",
-        "acct_id",
+        "owner_name",
+        "acct_name",
         "time_int",
         "quota",
     ]
     br00002_columns = [
-        "face_id",
+        "face_name",
         "event_int",
         "deal_id",
-        "owner_id",
-        "acct_id",
+        "owner_name",
+        "acct_name",
         "time_int",
         "amount",
     ]
     br00003_columns = [
-        "face_id",
+        "face_name",
         "event_int",
         "deal_id",
         "hour_idea",
         "cumlative_minute",
     ]
     br00004_columns = [
-        "face_id",
+        "face_name",
         "event_int",
         "deal_id",
         "month_idea",
         "cumlative_day",
     ]
     br00005_columns = [
-        "face_id",
+        "face_name",
         "event_int",
         "deal_id",
         "weekday_idea",

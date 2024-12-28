@@ -6,7 +6,7 @@ from src.f00_instrument.dict_toolbox import (
 )
 from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
-    FaceID,
+    FaceName,
     EventInt,
     DealID,
     WorldID,
@@ -53,7 +53,7 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     current_time: TimeLinePoint = None
-    events: dict[EventInt, FaceID] = None
+    events: dict[EventInt, FaceName] = None
     timeconversions: dict[TimeLineIdea, TimeConversion] = None
     _faces_bow_dir: str = None
     _faces_aft_dir: str = None
@@ -61,22 +61,22 @@ class WorldUnit:
     _ocean_dir: str = None
     _boat_dir: str = None
     _dealunits: set[DealID] = None
-    _pidgin_events: dict[FaceID, set[EventInt]] = None
+    _pidgin_events: dict[FaceName, set[EventInt]] = None
 
-    def set_event(self, event_int: EventInt, face_id: FaceID):
-        self.events[event_int] = face_id
+    def set_event(self, event_int: EventInt, face_name: FaceName):
+        self.events[event_int] = face_name
 
     def event_exists(self, event_int: EventInt) -> bool:
         return self.events.get(event_int) != None
 
-    def get_event(self, event_int: EventInt) -> FaceID:
+    def get_event(self, event_int: EventInt) -> FaceName:
         return self.events.get(event_int)
 
     def legitimate_events(self) -> set[EventInt]:
         return set(self.events.keys())
 
-    def _event_dir(self, face_id: FaceID, event_int: EventInt) -> str:
-        face_dir = create_path(self._faces_bow_dir, face_id)
+    def _event_dir(self, face_name: FaceName, event_int: EventInt) -> str:
+        face_dir = create_path(self._faces_bow_dir, face_name)
         return create_path(face_dir, event_int)
 
     def _set_pidgin_events(self):

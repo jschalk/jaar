@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str
+from src.f04_gift.atom_config import face_name_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet
 from src.f10_etl.transformers import (
@@ -26,7 +26,7 @@ def test_create_events_agg_df_ReturnsObj(
         "file_dir",
         "file_name",
         "sheet_name",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         "note",
     ]
@@ -54,7 +54,7 @@ def test_create_events_agg_df_ReturnsObj(
     e1_yao_row = [yao_str, event1, invalid_error_str]
     e9_row = [yao_str, event9, ""]
     el_rows = [e1_sue_row, e1_yao_row, e3_row, e9_row]
-    events_agg_columns = [face_id_str(), event_int_str(), "note"]
+    events_agg_columns = [face_name_str(), event_int_str(), "note"]
     ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
     assert len(gen_events_agg_df.columns) == len(ex_events_agg_df.columns)
     assert list(gen_events_agg_df.columns) == list(ex_events_agg_df.columns)
@@ -81,7 +81,7 @@ def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
         "file_dir",
         "file_name",
         "sheet_name",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         "note",
     ]
@@ -113,7 +113,7 @@ def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
     e1_yao_row = [yao_str, event1, invalid_error_str]
     e9_row = [yao_str, event9, ""]
     el_rows = [e1_sue_row, e1_yao_row, e3_row, e9_row]
-    events_agg_columns = [face_id_str(), event_int_str(), "note"]
+    events_agg_columns = [face_name_str(), event_int_str(), "note"]
     ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
     e_agg = "events_agg"
     gen_events_agg_df = pandas_read_excel(events_file_path, sheet_name=e_agg)
@@ -147,7 +147,7 @@ def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
     e1_yao_row = [yao_str, event1, invalid_error_str]
     e9_row = [yao_str, event9, ""]
     el_rows = [e1_sue_row, e1_yao_row, e3_row, e9_row]
-    events_agg_columns = [face_id_str(), event_int_str(), "note"]
+    events_agg_columns = [face_name_str(), event_int_str(), "note"]
     ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
     events_agg_str = "events_agg"
     events_file_path = create_path(boat_dir, "events.xlsx")

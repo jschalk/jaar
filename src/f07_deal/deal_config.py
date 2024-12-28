@@ -119,7 +119,7 @@ def get_deal_args_category_mapping() -> dict[str, str]:
 
 def get_deal_args_jaar_types() -> dict[str, str]:
     return {
-        "acct_id": "AcctID",
+        "acct_name": "AcctName",
         "amount": "float",
         "c400_number": "int",
         "cumlative_day": "int",
@@ -131,7 +131,7 @@ def get_deal_args_jaar_types() -> dict[str, str]:
         "month_idea": "IdeaUnit",
         "monthday_distortion": "int",
         "penny": "float",
-        "owner_id": "AcctID",
+        "owner_name": "AcctName",
         "quota": "int",
         "respect_bit": "float",
         "time_int": "TimeLinePoint",

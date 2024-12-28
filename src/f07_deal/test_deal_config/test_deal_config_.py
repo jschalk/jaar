@@ -18,7 +18,7 @@ from src.f04_gift.atom_config import (
     atom_delete,
     normal_specs_str,
     jaar_type_str,
-    type_AcctID_str,
+    type_AcctName_str,
     type_GroupID_str,
     type_IdeaUnit_str,
     type_RoadUnit_str,

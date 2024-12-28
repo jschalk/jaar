@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import create_csv
 from src.f01_road.finance import FundNum, get_net
-from src.f01_road.road import AcctID
+from src.f01_road.road import AcctName
 from src.f02_bud.acct import AcctUnit
 from src.f02_bud.group import MemberShip, AwardLink
 from src.f02_bud.item import ItemUnit
@@ -53,16 +53,16 @@ def budunit_exists(x_bud: BudUnit) -> bool:
 
 
 def bud_acctunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_acct_id = jkeys.get("acct_id")
-    return False if x_bud is None else x_bud.acct_exists(x_acct_id)
+    x_acct_name = jkeys.get("acct_name")
+    return False if x_bud is None else x_bud.acct_exists(x_acct_name)
 
 
 def bud_acct_membership_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_acct_id = jkeys.get("acct_id")
+    x_acct_name = jkeys.get("acct_name")
     x_group_id = jkeys.get("group_id")
     return bool(
         bud_acctunit_exists(x_bud, jkeys)
-        and x_bud.get_acct(x_acct_id).membership_exists(x_group_id)
+        and x_bud.get_acct(x_acct_name).membership_exists(x_group_id)
     )
 
 
@@ -109,11 +109,11 @@ def bud_item_teamlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 
 def bud_item_healerlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_healer_id = jkeys.get("healer_id")
+    x_healer_name = jkeys.get("healer_name")
     x_road = jkeys.get("road")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).healerlink.healer_id_exists(x_healer_id)
+        and x_bud.get_item_obj(x_road).healerlink.healer_name_exists(x_healer_name)
     )
 
 
@@ -151,13 +151,13 @@ def bud_attr_exists(x_category: str, x_bud: BudUnit, jkeys: dict[str, any]) -> b
 
 
 def bud_acctunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AcctUnit:
-    return x_bud.get_acct(jkeys.get("acct_id"))
+    return x_bud.get_acct(jkeys.get("acct_name"))
 
 
 def bud_acct_membership_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> MemberShip:
-    x_acct_id = jkeys.get("acct_id")
+    x_acct_name = jkeys.get("acct_name")
     x_group_id = jkeys.get("group_id")
-    return x_bud.get_acct(x_acct_id).get_membership(x_group_id)
+    return x_bud.get_acct(x_acct_name).get_membership(x_group_id)
 
 
 def bud_itemunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ItemUnit:
@@ -214,7 +214,7 @@ def get_bud_purview_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]
         x_bud.settle_bud()
 
     x_list = [
-        [x_acct.acct_id, x_acct._fund_take, x_acct._fund_give]
+        [x_acct.acct_name, x_acct._fund_take, x_acct._fund_give]
         for x_acct in x_bud._accts.values()
     ]
     x_list.sort(key=lambda y: y[0], reverse=False)
@@ -223,13 +223,13 @@ def get_bud_purview_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]
 
 def get_bud_purview_csv(x_bud: BudUnit, settle_bud: bool = None) -> str:
     x_purview_array = get_bud_purview_array(x_bud, settle_bud)
-    x_headers = ["acct_id", "fund_take", "fund_give"]
+    x_headers = ["acct_name", "fund_take", "fund_give"]
     return create_csv(x_headers, x_purview_array)
 
 
 def get_bud_settle_acct_net_dict(
     x_bud: BudUnit, settle_bud: bool = None
-) -> dict[AcctID, FundNum]:
+) -> dict[AcctName, FundNum]:
     if settle_bud:
         x_bud.settle_bud()
 
@@ -237,5 +237,5 @@ def get_bud_settle_acct_net_dict(
     for x_acct in x_bud._accts.values():
         settle_net = get_net(x_acct._fund_give, x_acct._fund_take)
         if settle_net != 0:
-            x_dict[x_acct.acct_id] = settle_net
+            x_dict[x_acct.acct_name] = settle_net
     return x_dict

@@ -1,10 +1,10 @@
 {
-    "map_acct_id": {
+    "map_acct_name": {
         "jkeys": {
-            "otx_acct_id": {}
+            "otx_acct_name": {}
         },
         "jvalues": {
-            "inx_acct_id": {},
+            "inx_acct_name": {},
             "inx_bridge": {},
             "otx_bridge": {},
             "unknown_word": {}

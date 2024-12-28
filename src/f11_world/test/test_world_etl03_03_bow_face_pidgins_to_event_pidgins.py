@@ -1,11 +1,11 @@
 from src.f00_instrument.file import create_path, get_dir_filenames
-from src.f04_gift.atom_config import face_id_str
+from src.f04_gift.atom_config import face_name_str
 from src.f08_pidgin.pidgin_config import (
     event_int_str,
     inx_bridge_str,
     otx_bridge_str,
-    inx_acct_id_str,
-    otx_acct_id_str,
+    inx_acct_name_str,
+    otx_acct_name_str,
     inx_group_id_str,
     otx_group_id_str,
     inx_idea_str,
@@ -22,7 +22,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face_ids(
+def test_WorldUnit_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face_names(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -36,7 +36,7 @@ def test_WorldUnit_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face
     event7 = 7
     event9 = 9
     road_file_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_road_str(),
         inx_road_str(),

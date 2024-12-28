@@ -18,13 +18,13 @@ def test_BudUnit_set_acctunit_SetObjCorrectly():
 
     # THEN
     assert bob_bud._accts.get(yao_str)._bridge == slash_str
-    x_accts = {yao_acctunit.acct_id: deepcopy_yao_acctunit}
+    x_accts = {yao_acctunit.acct_name: deepcopy_yao_acctunit}
     assert bob_bud._accts != x_accts
     deepcopy_yao_acctunit._bridge = bob_bud._bridge
     assert bob_bud._accts == x_accts
 
 
-def test_BudUnit_set_acct_DoesNotSet_acct_id_membership():
+def test_BudUnit_set_acct_DoesNotSet_acct_name_membership():
     # ESTABLISH
     x_respect_bit = 5
     yao_bud = budunit_shop("Yao", respect_bit=x_respect_bit)
@@ -37,7 +37,7 @@ def test_BudUnit_set_acct_DoesNotSet_acct_id_membership():
     assert yao_bud.get_acct(zia_str).get_membership(zia_str) is None
 
 
-def test_BudUnit_set_acct_DoesSet_acct_id_membership():
+def test_BudUnit_set_acct_DoesSet_acct_name_membership():
     # ESTABLISH
     x_respect_bit = 5
     yao_bud = budunit_shop("Yao", respect_bit=x_respect_bit)
@@ -53,7 +53,7 @@ def test_BudUnit_set_acct_DoesSet_acct_id_membership():
     assert zia_zia_membership.debtit_vote == 1
 
 
-def test_BudUnit_set_acct_DoesNotOverRide_acct_id_membership():
+def test_BudUnit_set_acct_DoesNotOverRide_acct_name_membership():
     # ESTABLISH
     x_respect_bit = 5
     yao_bud = budunit_shop("Yao", respect_bit=x_respect_bit)
@@ -171,7 +171,7 @@ def test_BudUnit_edit_acct_CorrectlyUpdatesObj():
     new_zia_credit_belief = 22
     new_zia_debtit_belief = 33
     yao_bud.edit_acctunit(
-        acct_id=zia_str,
+        acct_name=zia_str,
         credit_belief=new_zia_credit_belief,
         debtit_belief=new_zia_debtit_belief,
     )

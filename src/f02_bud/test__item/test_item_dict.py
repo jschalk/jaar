@@ -50,13 +50,13 @@ def test_get_obj_from_item_dict_ReturnsCorrect_HealerLink():
     # WHEN
     sue_str = "Sue"
     zia_str = "Zia"
-    healerlink_dict = {"healerlink_healer_ids": [sue_str, zia_str]}
+    healerlink_dict = {"healerlink_healer_names": [sue_str, zia_str]}
     itemunit_dict = {healerlink_key: healerlink_dict}
 
     # THEN
     static_healerlink = healerlink_shop()
-    static_healerlink.set_healer_id(x_healer_id=sue_str)
-    static_healerlink.set_healer_id(x_healer_id=zia_str)
+    static_healerlink.set_healer_name(x_healer_name=sue_str)
+    static_healerlink.set_healer_name(x_healer_name=zia_str)
     assert get_obj_from_item_dict(itemunit_dict, healerlink_key) is not None
     assert get_obj_from_item_dict(itemunit_dict, healerlink_key) == static_healerlink
 
@@ -146,8 +146,8 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     )
     factunit_x = factunit_shop(base=week_road, pick=week_road, fopen=5, fnigh=59)
     casa_item.set_factunit(factunit=factunit_x)
-    casa_item._originunit.set_originhold(acct_id="Ray", importance=None)
-    casa_item._originunit.set_originhold(acct_id="Lei", importance=4)
+    casa_item._originunit.set_originhold(acct_name="Ray", importance=None)
+    casa_item._originunit.set_originhold(acct_name="Lei", importance=4)
     x_begin = 11
     x_close = 12
     x_addin = 13

@@ -7,8 +7,8 @@ from src.f03_chrono.examples.chrono_examples import (
 )
 from src.f04_gift.atom_config import (
     deal_id_str,
-    owner_id_str,
-    acct_id_str,
+    owner_name_str,
+    acct_name_str,
     group_id_str,
     parent_road_str,
     lx_str,
@@ -60,20 +60,20 @@ def test_create_brick_df_Arg_brick_format_00021_bud_acctunit_v0_0_0():
     acct_brickref = get_brickref_obj(x_brick_name)
     assert array_headers == acct_brickref.get_headers_list()
     assert acct_dataframe.loc[0, deal_id_str()] == accord_deal_id
-    assert acct_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
-    assert acct_dataframe.loc[0, acct_id_str()] == bob_str
+    assert acct_dataframe.loc[0, owner_name_str()] == sue_budunit._owner_name
+    assert acct_dataframe.loc[0, acct_name_str()] == bob_str
     assert acct_dataframe.loc[0, debtit_belief_str()] == bob_debtit_belief
     assert acct_dataframe.loc[0, credit_belief_str()] == bob_credit_belief
 
     assert acct_dataframe.loc[1, deal_id_str()] == accord_deal_id
-    assert acct_dataframe.loc[1, owner_id_str()] == sue_budunit._owner_id
-    assert acct_dataframe.loc[1, acct_id_str()] == sue_str
+    assert acct_dataframe.loc[1, owner_name_str()] == sue_budunit._owner_name
+    assert acct_dataframe.loc[1, acct_name_str()] == sue_str
     assert acct_dataframe.loc[1, debtit_belief_str()] == sue_debtit_belief
     assert acct_dataframe.loc[1, credit_belief_str()] == sue_credit_belief
 
     assert acct_dataframe.loc[2, deal_id_str()] == accord_deal_id
-    assert acct_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
-    assert acct_dataframe.loc[2, acct_id_str()] == yao_str
+    assert acct_dataframe.loc[2, owner_name_str()] == sue_budunit._owner_name
+    assert acct_dataframe.loc[2, acct_name_str()] == yao_str
     assert acct_dataframe.loc[2, debtit_belief_str()] == yao_debtit_belief
     assert acct_dataframe.loc[2, credit_belief_str()] == yao_credit_belief
 
@@ -118,29 +118,29 @@ def test_create_brick_df_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     print(f"{len(membership_dataframe)=}")
     assert array_headers == acct_brickref.get_headers_list()
     assert membership_dataframe.loc[0, deal_id_str()] == accord_deal_id
-    assert membership_dataframe.loc[0, owner_id_str()] == sue_budunit._owner_id
-    assert membership_dataframe.loc[0, acct_id_str()] == bob_str
+    assert membership_dataframe.loc[0, owner_name_str()] == sue_budunit._owner_name
+    assert membership_dataframe.loc[0, acct_name_str()] == bob_str
     assert membership_dataframe.loc[0, group_id_str()] == iowa_str
     assert membership_dataframe.loc[0, credit_vote_str()] == bob_iowa_credit_w
     assert membership_dataframe.loc[0, debtit_vote_str()] == bob_iowa_debtit_w
 
     assert membership_dataframe.loc[2, deal_id_str()] == accord_deal_id
-    assert membership_dataframe.loc[2, owner_id_str()] == sue_budunit._owner_id
-    assert membership_dataframe.loc[2, acct_id_str()] == sue_str
+    assert membership_dataframe.loc[2, owner_name_str()] == sue_budunit._owner_name
+    assert membership_dataframe.loc[2, acct_name_str()] == sue_str
     assert membership_dataframe.loc[2, group_id_str()] == iowa_str
     assert membership_dataframe.loc[2, credit_vote_str()] == sue_iowa_credit_w
     assert membership_dataframe.loc[2, debtit_vote_str()] == sue_iowa_debtit_w
 
     assert membership_dataframe.loc[4, deal_id_str()] == accord_deal_id
-    assert membership_dataframe.loc[4, owner_id_str()] == sue_budunit._owner_id
-    assert membership_dataframe.loc[4, acct_id_str()] == yao_str
+    assert membership_dataframe.loc[4, owner_name_str()] == sue_budunit._owner_name
+    assert membership_dataframe.loc[4, acct_name_str()] == yao_str
     assert membership_dataframe.loc[4, group_id_str()] == iowa_str
     assert membership_dataframe.loc[4, credit_vote_str()] == yao_iowa_credit_w
     assert membership_dataframe.loc[4, debtit_vote_str()] == yao_iowa_debtit_w
 
     assert membership_dataframe.loc[5, deal_id_str()] == accord_deal_id
-    assert membership_dataframe.loc[5, owner_id_str()] == sue_budunit._owner_id
-    assert membership_dataframe.loc[5, acct_id_str()] == yao_str
+    assert membership_dataframe.loc[5, owner_name_str()] == sue_budunit._owner_name
+    assert membership_dataframe.loc[5, acct_name_str()] == yao_str
     assert membership_dataframe.loc[5, group_id_str()] == ohio_str
     assert membership_dataframe.loc[5, credit_vote_str()] == yao_ohio_credit_w
     assert membership_dataframe.loc[5, debtit_vote_str()] == yao_ohio_debtit_w
@@ -168,14 +168,14 @@ def test_create_brick_df_Arg_brick_format_00013_itemunit_v0_0_0():
     array_headers = list(itemunit_format.columns)
     assert array_headers == get_brickref_obj(x_brick_name).get_headers_list()
 
-    assert itemunit_format.loc[0, owner_id_str()] == sue_budunit._owner_id
+    assert itemunit_format.loc[0, owner_name_str()] == sue_budunit._owner_name
     assert itemunit_format.loc[0, pledge_str()] == ""
     assert itemunit_format.loc[0, deal_id_str()] == accord_deal_id
     assert itemunit_format.loc[0, lx_str()] == casa_str
     assert itemunit_format.loc[0, mass_str()] == casa_mass
     assert itemunit_format.loc[0, parent_road_str()] == accord_deal_id
 
-    assert itemunit_format.loc[1, owner_id_str()] == sue_budunit._owner_id
+    assert itemunit_format.loc[1, owner_name_str()] == sue_budunit._owner_name
     assert itemunit_format.loc[1, pledge_str()] == "Yes"
     assert itemunit_format.loc[1, deal_id_str()] == accord_deal_id
     assert itemunit_format.loc[1, parent_road_str()] == casa_road
@@ -233,7 +233,7 @@ def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_acct_example_csv = """face_id,event_int,deal_id,owner_id,acct_id,credit_belief,debtit_belief
+    sue1_acct_example_csv = """face_name,event_int,deal_id,owner_name,acct_name,credit_belief,debtit_belief
 ,,accord56,Sue,Bob,13,29
 ,,accord56,Sue,Sue,11,23
 ,,accord56,Sue,Yao,41,37
@@ -250,7 +250,7 @@ def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_acct_example_csv = """face_id,event_int,deal_id,owner_id,acct_id,credit_belief,debtit_belief
+    sue2_acct_example_csv = """face_name,event_int,deal_id,owner_name,acct_name,credit_belief,debtit_belief
 ,,accord56,Sue,Bob,13,29
 ,,accord56,Sue,Sue,11,23
 ,,accord56,Sue,Yao,41,37

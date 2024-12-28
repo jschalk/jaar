@@ -1,7 +1,7 @@
 from src.f00_instrument.file import save_file, open_file, create_path
 from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
 from src.f01_road.jaar_config import get_init_gift_id_if_None, get_json_filename
-from src.f01_road.road import FaceID, OwnerID, DealID, get_default_deal_id_ideaunit
+from src.f01_road.road import FaceName, OwnerName, DealID, get_default_deal_id_ideaunit
 from src.f04_gift.atom import AtomUnit, get_from_json as atomunit_get_from_json
 from src.f04_gift.delta import DeltaUnit, deltaunit_shop
 from dataclasses import dataclass
@@ -10,20 +10,20 @@ from os.path import exists as os_path_exists
 
 @dataclass
 class GiftUnit:
-    face_id: FaceID = None
+    face_name: FaceName = None
     deal_id: DealID = None
-    owner_id: OwnerID = None
+    owner_name: OwnerName = None
     _gift_id: int = None
     _deltaunit: DeltaUnit = None
     _delta_start: int = None
     _gifts_dir: str = None
     _atoms_dir: str = None
 
-    def set_face(self, x_face_id: FaceID):
-        self.face_id = x_face_id
+    def set_face(self, x_face_name: FaceName):
+        self.face_name = x_face_name
 
     def del_face(self):
-        self.face_id = None
+        self.face_name = None
 
     def set_deltaunit(self, x_deltaunit: DeltaUnit):
         self._deltaunit = x_deltaunit
@@ -39,9 +39,9 @@ class GiftUnit:
 
     def get_step_dict(self) -> dict[str, any]:
         return {
-            "face_id": self.face_id,
+            "face_name": self.face_name,
             "deal_id": self.deal_id,
-            "owner_id": self.owner_id,
+            "owner_name": self.owner_name,
             "delta": self._deltaunit.get_ordered_atomunits(self._delta_start),
         }
 
@@ -52,8 +52,8 @@ class GiftUnit:
     def get_deltametric_dict(self) -> dict:
         x_dict = self.get_step_dict()
         return {
-            "owner_id": x_dict.get("owner_id"),
-            "face_id": x_dict.get("face_id"),
+            "owner_name": x_dict.get("owner_name"),
+            "face_name": x_dict.get("face_name"),
             "delta_atom_numbers": self.get_delta_atom_numbers(x_dict),
         }
 
@@ -102,8 +102,8 @@ class GiftUnit:
 
 
 def giftunit_shop(
-    owner_id: OwnerID,
-    face_id: FaceID = None,
+    owner_name: OwnerName,
+    face_name: FaceName = None,
     deal_id: DealID = None,
     _gift_id: int = None,
     _deltaunit: DeltaUnit = None,
@@ -114,8 +114,8 @@ def giftunit_shop(
     _deltaunit = deltaunit_shop() if _deltaunit is None else _deltaunit
     deal_id = get_default_deal_id_ideaunit() if deal_id is None else deal_id
     x_giftunit = GiftUnit(
-        face_id=face_id,
-        owner_id=owner_id,
+        face_name=face_name,
+        owner_name=owner_name,
         deal_id=deal_id,
         _gift_id=get_init_gift_id_if_None(_gift_id),
         _deltaunit=_deltaunit,
@@ -133,13 +133,13 @@ def create_giftunit_from_files(
 ) -> GiftUnit:
     gift_filename = get_json_filename(gift_id)
     gift_dict = get_dict_from_json(open_file(gifts_dir, gift_filename))
-    x_owner_id = gift_dict.get("owner_id")
+    x_owner_name = gift_dict.get("owner_name")
     x_deal_id = gift_dict.get("deal_id")
-    x_face_id = gift_dict.get("face_id")
+    x_face_name = gift_dict.get("face_name")
     delta_atom_numbers_list = gift_dict.get("delta_atom_numbers")
     x_giftunit = giftunit_shop(
-        face_id=x_face_id,
-        owner_id=x_owner_id,
+        face_name=x_face_name,
+        owner_name=x_owner_name,
         deal_id=x_deal_id,
         _gift_id=gift_id,
         _atoms_dir=atoms_dir,

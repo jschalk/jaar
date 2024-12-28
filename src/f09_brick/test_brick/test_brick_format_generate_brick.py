@@ -8,7 +8,7 @@ from src.f02_bud.bud_tool import (
 from src.f02_bud.examples.example_buds import budunit_v001
 from src.f04_gift.atom_config import (
     atom_insert,
-    acct_id_str,
+    acct_name_str,
     group_id_str,
     parent_road_str,
     pledge_str,
@@ -54,12 +54,12 @@ def test_make_deltaunit_Arg_brick_format_00021_bud_acctunit_v0_0_0():
     # THEN
     assert sue_acct_deltaunit
     sue_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
-    sue_atomunit.set_arg(acct_id_str(), sue_str)
+    sue_atomunit.set_arg(acct_name_str(), sue_str)
     sue_atomunit.set_arg(credit_belief_str(), sue_credit_belief)
     sue_atomunit.set_arg(debtit_belief_str(), sue_debtit_belief)
     sue_atomunit.set_atom_order()
     bob_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
-    bob_atomunit.set_arg(acct_id_str(), bob_str)
+    bob_atomunit.set_arg(acct_name_str(), bob_str)
     bob_atomunit.set_arg(credit_belief_str(), bob_credit_belief)
     bob_atomunit.set_arg(debtit_belief_str(), bob_debtit_belief)
     bob_atomunit.set_atom_order()
@@ -119,10 +119,10 @@ def test_make_deltaunit_Arg_brick_format_00020_bud_acct_membership_v0_0_0():
     bob_iowa_atomunit.set_arg(group_id_str(), iowa_str)
     yao_iowa_atomunit.set_arg(group_id_str(), iowa_str)
     yao_ohio_atomunit.set_arg(group_id_str(), ohio_str)
-    sue_iowa_atomunit.set_arg(acct_id_str(), sue_str)
-    bob_iowa_atomunit.set_arg(acct_id_str(), bob_str)
-    yao_iowa_atomunit.set_arg(acct_id_str(), yao_str)
-    yao_ohio_atomunit.set_arg(acct_id_str(), yao_str)
+    sue_iowa_atomunit.set_arg(acct_name_str(), sue_str)
+    bob_iowa_atomunit.set_arg(acct_name_str(), bob_str)
+    yao_iowa_atomunit.set_arg(acct_name_str(), yao_str)
+    yao_ohio_atomunit.set_arg(acct_name_str(), yao_str)
     sue_iowa_atomunit.set_arg(credit_vote_str(), sue_iowa_credit_vote)
     bob_iowa_atomunit.set_arg(credit_vote_str(), bob_iowa_credit_vote)
     yao_iowa_atomunit.set_arg(credit_vote_str(), yao_iowa_credit_vote)

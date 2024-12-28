@@ -20,12 +20,12 @@
         },
         "gift2owner": {
             "columns": {
-                "owner_id": {}
+                "owner_name": {}
             }
         },
         "owner_mstr": {
             "columns": {
-                "owner_id": {}
+                "owner_name": {}
             }
         },
         "road_ref": {

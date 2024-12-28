@@ -17,11 +17,11 @@ from src.f02_bud.bud_tool import (
 )
 from src.f04_gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
 from src.f04_gift.atom_config import (
-    acct_id_str,
+    acct_name_str,
     awardee_id_str,
     group_id_str,
     team_id_str,
-    healer_id_str,
+    healer_name_str,
     parent_road_str,
     lx_str,
     base_item_active_requisite_str,
@@ -133,7 +133,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_acct():
 
     category = bud_acctunit_str()
     x_atomunit = atomunit_shop(category, atom_delete())
-    x_atomunit.set_jkey(acct_id_str(), zia_str)
+    x_atomunit.set_jkey(acct_name_str(), zia_str)
     sue_deltaunit.set_atomunit(x_atomunit)
 
     # WHEN
@@ -161,7 +161,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_acct():
     # WHEN
     category = bud_acctunit_str()
     x_atomunit = atomunit_shop(category, atom_insert())
-    x_atomunit.set_jkey(acct_id_str(), zia_str)
+    x_atomunit.set_jkey(acct_name_str(), zia_str)
     x_credit_belief = 55
     x_debtit_belief = 66
     x_atomunit.set_jvalue("credit_belief", x_credit_belief)
@@ -192,7 +192,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_acct():
     # WHEN
     category = bud_acctunit_str()
     x_atomunit = atomunit_shop(category, atom_update())
-    x_atomunit.set_jkey(acct_id_str(), yao_str)
+    x_atomunit.set_jkey(acct_name_str(), yao_str)
     yao_credit_belief = 55
     x_atomunit.set_jvalue("credit_belief", yao_credit_belief)
     sue_deltaunit.set_atomunit(x_atomunit)
@@ -231,11 +231,11 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_membership():
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_delete())
     yao_atomunit.set_jkey(group_id_str(), run_str)
-    yao_atomunit.set_jkey(acct_id_str(), yao_str)
+    yao_atomunit.set_jkey(acct_name_str(), yao_str)
     # print(f"{yao_atomunit=}")
     zia_atomunit = atomunit_shop(bud_acct_membership_str(), atom_delete())
     zia_atomunit.set_jkey(group_id_str(), fly_str)
-    zia_atomunit.set_jkey(acct_id_str(), zia_str)
+    zia_atomunit.set_jkey(acct_name_str(), zia_str)
     # print(f"{zia_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(yao_atomunit)
@@ -267,7 +267,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership():
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
     yao_atomunit.set_jkey(group_id_str(), run_str)
-    yao_atomunit.set_jkey(acct_id_str(), yao_str)
+    yao_atomunit.set_jkey(acct_name_str(), yao_str)
     yao_run_credit_vote = 17
     yao_atomunit.set_jvalue("credit_vote", yao_run_credit_vote)
     print(f"{yao_atomunit=}")
@@ -301,7 +301,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership():
     # WHEN
     yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_update())
     yao_atomunit.set_jkey(group_id_str(), run_str)
-    yao_atomunit.set_jkey(acct_id_str(), yao_str)
+    yao_atomunit.set_jkey(acct_name_str(), yao_str)
     new_yao_run_credit_vote = 7
     new_yao_run_debtit_vote = 11
     yao_atomunit.set_jvalue(credit_vote_str(), new_yao_run_credit_vote)
@@ -1063,13 +1063,13 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_healerli
     ball_road = before_sue_au.make_road(sports_road, ball_str)
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     before_ball_itemunit = before_sue_au.get_item_obj(ball_road)
-    assert before_ball_itemunit.healerlink._healer_ids == set()
-    assert not before_ball_itemunit.healerlink.healer_id_exists(yao_str)
+    assert before_ball_itemunit.healerlink._healer_names == set()
+    assert not before_ball_itemunit.healerlink.healer_name_exists(yao_str)
 
     # WHEN
     x_atomunit = atomunit_shop(bud_item_healerlink_str(), atom_insert())
     x_atomunit.set_jkey("road", ball_road)
-    x_atomunit.set_jkey(healer_id_str(), yao_str)
+    x_atomunit.set_jkey(healer_name_str(), yao_str)
     print(f"{x_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(x_atomunit)
@@ -1077,8 +1077,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_healerli
 
     # THEN
     after_ball_itemunit = after_sue_au.get_item_obj(ball_road)
-    assert after_ball_itemunit.healerlink._healer_ids != set()
-    assert after_ball_itemunit.healerlink.healer_id_exists(yao_str)
+    assert after_ball_itemunit.healerlink._healer_names != set()
+    assert after_ball_itemunit.healerlink.healer_name_exists(yao_str)
 
 
 def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_healerlink():
@@ -1093,14 +1093,14 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_healerli
     ball_road = before_sue_au.make_road(sports_road, ball_str)
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     before_ball_itemunit = before_sue_au.get_item_obj(ball_road)
-    before_ball_itemunit.healerlink.set_healer_id(yao_str)
-    assert before_ball_itemunit.healerlink._healer_ids != set()
-    assert before_ball_itemunit.healerlink.healer_id_exists(yao_str)
+    before_ball_itemunit.healerlink.set_healer_name(yao_str)
+    assert before_ball_itemunit.healerlink._healer_names != set()
+    assert before_ball_itemunit.healerlink.healer_name_exists(yao_str)
 
     # WHEN
     x_atomunit = atomunit_shop(bud_item_healerlink_str(), atom_delete())
     x_atomunit.set_jkey("road", ball_road)
-    x_atomunit.set_jkey(healer_id_str(), yao_str)
+    x_atomunit.set_jkey(healer_name_str(), yao_str)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(x_atomunit)
     print(f"{before_sue_au.get_item_obj(ball_road).teamunit=}")
@@ -1108,8 +1108,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_healerli
 
     # THEN
     after_ball_itemunit = after_sue_au.get_item_obj(ball_road)
-    assert after_ball_itemunit.healerlink._healer_ids == set()
-    assert not after_ball_itemunit.healerlink.healer_id_exists(yao_str)
+    assert after_ball_itemunit.healerlink._healer_names == set()
+    assert not after_ball_itemunit.healerlink.healer_name_exists(yao_str)
 
 
 def test_DeltaUnit_get_deltaunit_example1_ContainsAtomUnits():

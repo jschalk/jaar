@@ -8,23 +8,23 @@ def test_RiverGrade_Exists():
     x_rivergrade = RiverGrade()
 
     # THEN
-    #: Healer voice get_acct._debtit_belief (SELECT tax_due_amount FROM acct WHERE acct_id = bob_str)
+    #: Healer voice get_acct._debtit_belief (SELECT tax_due_amount FROM acct WHERE acct_name = bob_str)
     assert x_rivergrade.hubunit is None
-    assert x_rivergrade.acct_id is None
+    assert x_rivergrade.acct_name is None
     assert x_rivergrade.number is None
-    #: Healer voice get_acct._debtit_belief (SELECT tax_due_amount FROM acct WHERE acct_id = bob_str)
+    #: Healer voice get_acct._debtit_belief (SELECT tax_due_amount FROM acct WHERE acct_name = bob_str)
     assert x_rivergrade.tax_bill_amount is None
-    #: Healer voice get_acct._credit_belief (SELECT grant_amount FROM acct WHERE acct_id = bob_str)
+    #: Healer voice get_acct._credit_belief (SELECT grant_amount FROM acct WHERE acct_name = bob_str)
     assert x_rivergrade.grant_amount is None
-    #: SELECT COUNT(*) FROM acct WHERE tax_due_amount > (SELECT tax_due_amount FROM acct WHERE acct_id = bob_str)
+    #: SELECT COUNT(*) FROM acct WHERE tax_due_amount > (SELECT tax_due_amount FROM acct WHERE acct_name = bob_str)
     assert x_rivergrade.debtor_rank_num is None
-    #: SELECT COUNT(*) FROM acct WHERE grant_amount > (SELECT tax_due_amount FROM acct WHERE acct_id = bob_str)
+    #: SELECT COUNT(*) FROM acct WHERE grant_amount > (SELECT tax_due_amount FROM acct WHERE acct_name = bob_str)
     assert x_rivergrade.credor_rank_num is None
-    #: SELECT amount_paid FROM tax_ledger WHERE acct_id = bob_str
+    #: SELECT amount_paid FROM tax_ledger WHERE acct_name = bob_str
     assert x_rivergrade.tax_paid_amount is None
     #: bool (if tax_due_amount == tax_paid_amount)
     assert x_rivergrade.tax_paid_bool is None
-    #: SELECT COUNT(*) FROM acct WHERE tax_paid_amount > (SELECT tax_paid_amount FROM acct WHERE acct_id = bob_str)
+    #: SELECT COUNT(*) FROM acct WHERE tax_paid_amount > (SELECT tax_paid_amount FROM acct WHERE acct_name = bob_str)
     assert x_rivergrade.tax_paid_rank_num is None
     #: tax_paid_rank_num / (SELECT COUNT(*) FROM acct WHERE tax_paid_amount>0)
     assert x_rivergrade.tax_paid_rank_percent is None
@@ -36,9 +36,9 @@ def test_RiverGrade_Exists():
     assert x_rivergrade.debtor_rank_percent is None
     #: credor_rank_num / SELECT COUNT(*) FROM acct WHERE grant_amount > 0
     assert x_rivergrade.credor_rank_percent is None
-    # SELECT COUNT(*) FROM rewards WHERE dst_acct_id = bob_str
+    # SELECT COUNT(*) FROM rewards WHERE dst_acct_name = bob_str
     assert x_rivergrade.rewards_count is None
-    # SELECT SUM(money_amount) FROM rewards WHERE dst_acct_id = bob_str
+    # SELECT SUM(money_amount) FROM rewards WHERE dst_acct_name = bob_str
     assert x_rivergrade.rewards_magnitude is None
 
 
@@ -57,7 +57,7 @@ def test_rivergrade_shop_ReturnsCorrectObjWithArg():
 
     # THEN
     assert x_rivergrade.hubunit == yao_hubunit
-    assert x_rivergrade.acct_id == bob_str
+    assert x_rivergrade.acct_name == bob_str
     assert x_rivergrade.number == ten_int
     assert x_rivergrade.tax_bill_amount is None
     assert x_rivergrade.grant_amount is None
@@ -174,7 +174,7 @@ def test_RiverGrade_get_dict_ReturnsCorrectObj():
 
     # THEN
     assert rivergrade_dict.get(deal_id_str()) == yao_hubunit.deal_id
-    assert rivergrade_dict.get("healer_id") == yao_hubunit.owner_id
+    assert rivergrade_dict.get("healer_name") == yao_hubunit.owner_name
     assert rivergrade_dict.get("keep_road") == yao_hubunit.keep_road
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount
     assert rivergrade_dict.get("grant_amount") == x_grant_amount
@@ -216,7 +216,7 @@ def test_RiverGrade_get_json_ReturnsCorrectObj():
   "debtor_rank_num": null,
   "debtor_rank_percent": null,
   "grant_amount": null,
-  "healer_id": "Yao",
+  "healer_name": "Yao",
   "keep_road": null,
   "rewards_count": null,
   "rewards_magnitude": null,

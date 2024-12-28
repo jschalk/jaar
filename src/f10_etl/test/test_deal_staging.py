@@ -7,10 +7,10 @@ from src.f03_chrono.chrono import (
     yr1_jan1_offset_str,
 )
 from src.f04_gift.atom_config import (
-    face_id_str,
+    face_name_str,
     deal_id_str,
-    acct_id_str,
-    owner_id_str,
+    acct_name_str,
+    owner_name_str,
     fund_coin_str,
     penny_str,
     respect_bit_str,
@@ -44,8 +44,8 @@ from copy import copy as copy_copy
 # }
 
 # br00000 deal_id c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
-# br00001 deal_id owner_id,acct_id,time_int,quota
-# br00002 deal_id owner_id,acct_id,time_int,amount
+# br00001 deal_id owner_name,acct_name,time_int,quota
+# br00002 deal_id owner_name,acct_name,time_int,amount
 # br00003 deal_id hour_idea,cumlative_minute
 # br00004 deal_id month_idea,cumlative_day
 # br00005 deal_id weekday_idea,weekday_order
@@ -103,7 +103,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
     br00004_df = pandas_read_excel(br00004_path, sheet_name=staging_str)
     br00005_df = pandas_read_excel(br00005_path, sheet_name=staging_str)
 
-    common_cols = [face_id_str(), event_int_str(), deal_id_str()]
+    common_cols = [face_name_str(), event_int_str(), deal_id_str()]
     expected_br0_columns = copy_copy(common_cols)
     expected_br1_columns = copy_copy(common_cols)
     expected_br2_columns = copy_copy(common_cols)
@@ -124,10 +124,10 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
         ]
     )
     expected_br1_columns.extend(
-        [owner_id_str(), acct_id_str(), time_int_str(), quota_str()]
+        [owner_name_str(), acct_name_str(), time_int_str(), quota_str()]
     )
     expected_br2_columns.extend(
-        [owner_id_str(), acct_id_str(), time_int_str(), amount_str()]
+        [owner_name_str(), acct_name_str(), time_int_str(), amount_str()]
     )
     expected_br3_columns.extend([hour_idea_str(), cumlative_minute_str()])
     expected_br4_columns.extend([month_idea_str(), cumlative_day_str()])
@@ -158,20 +158,20 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 #     event5 = 5
 #     br00113_file_path = create_path(fizz_world._boat_dir, "br00113.xlsx")
 #     br00113_columns = [
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         deal_id_str(),
-#         owner_id_str(),
-#         acct_id_str(),
-#         otx_acct_id_str(),
-#         inx_acct_id_str(),
+#         owner_name_str(),
+#         acct_name_str(),
+#         otx_acct_name_str(),
+#         inx_acct_name_str(),
 #     ]
 #     br00043_file_path = create_path(fizz_world._boat_dir, "br00043.xlsx")
 #     br00043_columns = [
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
-#         otx_acct_id_str(),
-#         inx_acct_id_str(),
+#         otx_acct_name_str(),
+#         inx_acct_name_str(),
 #         otx_bridge_str(),
 #         inx_bridge_str(),
 #         unknown_word_str(),
@@ -191,17 +191,17 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 
 #     br00115_file_path = create_path(fizz_world._boat_dir, "br00115.xlsx")
 #     br00115_columns = [
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         deal_id_str(),
-#         owner_id_str(),
-#         acct_id_str(),
+#         owner_name_str(),
+#         acct_name_str(),
 #         otx_group_id_str(),
 #         inx_group_id_str(),
 #     ]
 #     br00042_file_path = create_path(fizz_world._boat_dir, "br00042.xlsx")
 #     br00042_columns = [
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         otx_group_id_str(),
 #         inx_group_id_str(),
@@ -223,17 +223,17 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 
 #     br00116_file_path = create_path(fizz_world._boat_dir, "br00116.xlsx")
 #     br00116_columns = [
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         deal_id_str(),
-#         owner_id_str(),
-#         acct_id_str(),
+#         owner_name_str(),
+#         acct_name_str(),
 #         otx_idea_str(),
 #         inx_idea_str(),
 #     ]
 #     br00044_file_path = create_path(fizz_world._boat_dir, "br00044.xlsx")
 #     br00044_columns = [
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         otx_idea_str(),
 #         inx_idea_str(),
@@ -255,17 +255,17 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 
 #     br00117_file_path = create_path(fizz_world._boat_dir, "br00117.xlsx")
 #     br00117_columns = [
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         deal_id_str(),
-#         owner_id_str(),
-#         acct_id_str(),
+#         owner_name_str(),
+#         acct_name_str(),
 #         otx_road_str(),
 #         inx_road_str(),
 #     ]
 #     br00045_file_path = create_path(fizz_world._boat_dir, "br00045.xlsx")
 #     br00045_columns = [
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         otx_road_str(),
 #         inx_road_str(),
@@ -314,7 +314,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 
 #     group_file_columns = [
 #         "src_brick",
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         otx_group_id_str(),
 #         inx_group_id_str(),
@@ -337,10 +337,10 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 
 #     acct_file_columns = [
 #         "src_brick",
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
-#         otx_acct_id_str(),
-#         inx_acct_id_str(),
+#         otx_acct_name_str(),
+#         inx_acct_name_str(),
 #         otx_bridge_str(),
 #         inx_bridge_str(),
 #         unknown_word_str(),
@@ -360,7 +360,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 
 #     idea_file_columns = [
 #         "src_brick",
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         otx_idea_str(),
 #         inx_idea_str(),
@@ -383,7 +383,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 
 #     road_file_columns = [
 #         "src_brick",
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         otx_road_str(),
 #         inx_road_str(),
@@ -406,7 +406,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 
 
 # from src.f00_instrument.file import create_path
-# from src.f04_gift.atom_config import face_id_str, deal_id_str
+# from src.f04_gift.atom_config import face_name_str, deal_id_str
 # from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
 # from src.f08_pidgin.pidgin_config import event_int_str
 # from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
@@ -418,7 +418,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 # from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-# def test_WorldUnit_aft_face_bricks_to_aft_event_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
+# def test_WorldUnit_aft_face_bricks_to_aft_event_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceNames(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -432,7 +432,7 @@ def test_create_init_deal_staging_files_HasCorrectColumns(env_dir_setup_cleanup)
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     brick_columns = [
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         deal_id_str(),
 #         hour_idea_str(),

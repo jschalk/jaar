@@ -37,7 +37,7 @@ from src.f01_road.finance_tran import (
     get_purviewepisode_from_json,
 )
 from src.f01_road.road import (
-    OwnerID,
+    OwnerName,
     DealID,
     IdeaUnit,
     RoadUnit,
@@ -111,7 +111,7 @@ def get_keep_grades_dir(x_keep_dir: str) -> str:
 
 @dataclass
 class HubUnit:
-    owner_id: OwnerID = None
+    owner_name: OwnerName = None
     deals_dir: str = None
     deal_id: str = None
     keep_road: RoadUnit = None
@@ -129,7 +129,7 @@ class HubUnit:
         return f_path(self.deal_dir(), "owners")
 
     def owner_dir(self) -> str:
-        return f_path(self.owners_dir(), self.owner_id)
+        return f_path(self.owners_dir(), self.owner_name)
 
     def keeps_dir(self) -> str:
         return f_path(self.owner_dir(), "keeps")
@@ -150,13 +150,13 @@ class HubUnit:
         return f_path(self.owner_dir(), "timeline")
 
     def voice_file_name(self) -> str:
-        return get_json_filename(self.owner_id)
+        return get_json_filename(self.owner_name)
 
     def voice_file_path(self) -> str:
         return f_path(self.voice_dir(), self.voice_file_name())
 
     def final_file_name(self) -> str:
-        return get_json_filename(self.owner_id)
+        return get_json_filename(self.owner_name)
 
     def final_path(self) -> str:
         return f_path(self.final_dir(), self.final_file_name())
@@ -187,9 +187,9 @@ class HubUnit:
         return open_file(self.voice_dir(), self.voice_file_name())
 
     def save_voice_bud(self, x_bud: BudUnit):
-        if x_bud._owner_id != self.owner_id:
+        if x_bud._owner_name != self.owner_name:
             raise Invalid_voice_Exception(
-                f"BudUnit with owner_id '{x_bud._owner_id}' cannot be saved as owner_id '{self.owner_id}''s voice bud."
+                f"BudUnit with owner_name '{x_bud._owner_name}' cannot be saved as owner_name '{self.owner_name}''s voice bud."
             )
         self.save_file_voice(x_bud.get_json(), True)
 
@@ -201,7 +201,7 @@ class HubUnit:
 
     def default_voice_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
-            _owner_id=self.owner_id,
+            _owner_name=self.owner_name,
             _deal_id=self.deal_id,
             _bridge=self.bridge,
             fund_pool=self.fund_pool,
@@ -256,7 +256,7 @@ class HubUnit:
         delete_dir(self.atom_file_path(atom_number))
 
     def _get_bud_from_atom_files(self) -> BudUnit:
-        x_bud = budunit_shop(self.owner_id, self.deal_id)
+        x_bud = budunit_shop(self.owner_name, self.deal_id)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = get_dir_file_strs(self.atoms_dir(), delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
@@ -297,8 +297,8 @@ class HubUnit:
             x_giftunit._gifts_dir = self.gifts_dir()
         if x_giftunit._gift_id != self._get_next_gift_file_number():
             x_giftunit._gift_id = self._get_next_gift_file_number()
-        if x_giftunit.owner_id != self.owner_id:
-            x_giftunit.owner_id = self.owner_id
+        if x_giftunit.owner_name != self.owner_name:
+            x_giftunit.owner_name = self.owner_name
         if x_giftunit._delta_start != self._get_next_atom_file_number():
             x_giftunit._delta_start = self._get_next_atom_file_number()
         return x_giftunit
@@ -320,9 +320,9 @@ class HubUnit:
             raise SaveGiftFileException(
                 f"GiftUnit file cannot be saved because giftunit._gifts_dir is incorrect: {x_gift._gifts_dir}. It must be {self.gifts_dir()}."
             )
-        if x_gift.owner_id != self.owner_id:
+        if x_gift.owner_name != self.owner_name:
             raise SaveGiftFileException(
-                f"GiftUnit file cannot be saved because giftunit.owner_id is incorrect: {x_gift.owner_id}. It must be {self.owner_id}."
+                f"GiftUnit file cannot be saved because giftunit.owner_name is incorrect: {x_gift.owner_name}. It must be {self.owner_name}."
             )
         gift_filename = self.gift_file_name(x_gift._gift_id)
         if not replace and self.gift_file_exists(x_gift._gift_id):
@@ -337,7 +337,7 @@ class HubUnit:
 
     def _default_giftunit(self) -> GiftUnit:
         return giftunit_shop(
-            owner_id=self.owner_id,
+            owner_name=self.owner_name,
             _gift_id=self._get_next_gift_file_number(),
             _atoms_dir=self.atoms_dir(),
             _gifts_dir=self.gifts_dir(),
@@ -371,7 +371,7 @@ class HubUnit:
 
     def _create_initial_gift_files_from_default(self):
         x_giftunit = giftunit_shop(
-            owner_id=self.owner_id,
+            owner_name=self.owner_name,
             _gift_id=get_init_gift_id_if_None(),
             _gifts_dir=self.gifts_dir(),
             _atoms_dir=self.atoms_dir(),
@@ -444,7 +444,7 @@ class HubUnit:
         delete_dir(self.purview_file_path(x_time_int))
 
     def get_purviewlog(self) -> PurviewLog:
-        x_purviewlog = purviewlog_shop(self.owner_id)
+        x_purviewlog = purviewlog_shop(self.owner_name)
         x_dirs = self._get_timepoint_dirs()
         for x_purview_folder_name in x_dirs:
             x_purviewepisode = self.get_purview_file(x_purview_folder_name)
@@ -510,15 +510,15 @@ class HubUnit:
     def keep_dir(self) -> str:
         if self.keep_road is None:
             raise _keep_roadMissingException(
-                f"HubUnit '{self.owner_id}' cannot save to keep_dir because it does not have keep_road."
+                f"HubUnit '{self.owner_name}' cannot save to keep_dir because it does not have keep_road."
             )
         return get_keep_path(self, self.keep_road)
 
     def create_keep_dir_if_missing(self):
         set_dir(self.keep_dir())
 
-    def owner_file_name(self, owner_id: OwnerID) -> str:
-        return get_json_filename(owner_id)
+    def owner_file_name(self, owner_name: OwnerName) -> str:
+        return get_json_filename(owner_name)
 
     def treasury_file_name(self) -> str:
         return treasury_file_name()
@@ -526,14 +526,14 @@ class HubUnit:
     def treasury_db_path(self) -> str:
         return f_path(self.keep_dir(), treasury_file_name())
 
-    def duty_path(self, owner_id: OwnerID) -> str:
-        return f_path(self.dutys_dir(), self.owner_file_name(owner_id))
+    def duty_path(self, owner_name: OwnerName) -> str:
+        return f_path(self.dutys_dir(), self.owner_file_name(owner_name))
 
-    def job_path(self, owner_id: OwnerID) -> str:
-        return f_path(self.jobs_dir(), self.owner_file_name(owner_id))
+    def job_path(self, owner_name: OwnerName) -> str:
+        return f_path(self.jobs_dir(), self.owner_file_name(owner_name))
 
-    def grade_path(self, owner_id: OwnerID) -> str:
-        return f_path(self.grades_dir(), self.owner_file_name(owner_id))
+    def grade_path(self, owner_name: OwnerName) -> str:
+        return f_path(self.grades_dir(), self.owner_file_name(owner_name))
 
     def dutys_dir(self) -> str:
         return get_keep_dutys_dir(self.keep_dir())
@@ -551,17 +551,17 @@ class HubUnit:
             return []
 
     def save_duty_bud(self, x_bud: BudUnit):
-        x_file_name = self.owner_file_name(x_bud._owner_id)
+        x_file_name = self.owner_file_name(x_bud._owner_name)
         save_file(self.dutys_dir(), x_file_name, x_bud.get_json())
 
     def save_job_bud(self, x_bud: BudUnit):
-        x_file_name = self.owner_file_name(x_bud._owner_id)
+        x_file_name = self.owner_file_name(x_bud._owner_name)
         save_file(self.jobs_dir(), x_file_name, x_bud.get_json())
 
     def save_final_bud(self, x_bud: BudUnit):
-        if x_bud._owner_id != self.owner_id:
+        if x_bud._owner_name != self.owner_name:
             raise Invalid_final_Exception(
-                f"BudUnit with owner_id '{x_bud._owner_id}' cannot be saved as owner_id '{self.owner_id}''s final bud."
+                f"BudUnit with owner_name '{x_bud._owner_name}' cannot be saved as owner_name '{self.owner_name}''s final bud."
             )
         self.save_file_final(x_bud.get_json(), True)
 
@@ -569,22 +569,22 @@ class HubUnit:
         if self.final_file_exists() is False:
             self.save_final_bud(get_default_final_bud(voice))
 
-    def duty_file_exists(self, owner_id: OwnerID) -> bool:
-        return os_path_exists(self.duty_path(owner_id))
+    def duty_file_exists(self, owner_name: OwnerName) -> bool:
+        return os_path_exists(self.duty_path(owner_name))
 
-    def job_file_exists(self, owner_id: OwnerID) -> bool:
-        return os_path_exists(self.job_path(owner_id))
+    def job_file_exists(self, owner_name: OwnerName) -> bool:
+        return os_path_exists(self.job_path(owner_name))
 
-    def get_duty_bud(self, owner_id: OwnerID) -> BudUnit:
-        if self.duty_file_exists(owner_id) is False:
+    def get_duty_bud(self, owner_name: OwnerName) -> BudUnit:
+        if self.duty_file_exists(owner_name) is False:
             return None
-        file_content = open_file(self.dutys_dir(), self.owner_file_name(owner_id))
+        file_content = open_file(self.dutys_dir(), self.owner_file_name(owner_name))
         return budunit_get_from_json(file_content)
 
-    def get_job_bud(self, owner_id: OwnerID) -> BudUnit:
-        if self.job_file_exists(owner_id) is False:
+    def get_job_bud(self, owner_name: OwnerName) -> BudUnit:
+        if self.job_file_exists(owner_name) is False:
             return None
-        file_content = open_file(self.jobs_dir(), self.owner_file_name(owner_id))
+        file_content = open_file(self.jobs_dir(), self.owner_file_name(owner_name))
         return budunit_get_from_json(file_content)
 
     def get_final_bud(self) -> BudUnit:
@@ -593,20 +593,20 @@ class HubUnit:
         file_content = self.open_file_final()
         return budunit_get_from_json(file_content)
 
-    def delete_duty_file(self, owner_id: OwnerID):
-        delete_dir(self.duty_path(owner_id))
+    def delete_duty_file(self, owner_name: OwnerName):
+        delete_dir(self.duty_path(owner_name))
 
-    def delete_job_file(self, owner_id: OwnerID):
-        delete_dir(self.job_path(owner_id))
+    def delete_job_file(self, owner_name: OwnerName):
+        delete_dir(self.job_path(owner_name))
 
     def delete_treasury_db_file(self):
         delete_dir(self.treasury_db_path())
 
-    def dw_speaker_bud(self, speaker_id: OwnerID) -> BudUnit:
+    def dw_speaker_bud(self, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
             deals_dir=self.deals_dir,
             deal_id=self.deal_id,
-            owner_id=speaker_id,
+            owner_name=speaker_id,
             bridge=self.bridge,
             respect_bit=self.respect_bit,
         )
@@ -615,41 +615,43 @@ class HubUnit:
     def get_perspective_bud(self, speaker: BudUnit) -> BudUnit:
         # get copy of bud without any metrics
         perspective_bud = budunit_get_from_json(speaker.get_json())
-        perspective_bud.set_owner_id(self.owner_id)
+        perspective_bud.set_owner_name(self.owner_name)
         perspective_bud.settle_bud()
         return perspective_bud
 
-    def get_dw_perspective_bud(self, speaker_id: OwnerID) -> BudUnit:
+    def get_dw_perspective_bud(self, speaker_id: OwnerName) -> BudUnit:
         return self.get_perspective_bud(self.dw_speaker_bud(speaker_id))
 
-    def rj_speaker_bud(self, healer_id: OwnerID, speaker_id: OwnerID) -> BudUnit:
+    def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
             deals_dir=self.deals_dir,
             deal_id=self.deal_id,
-            owner_id=healer_id,
+            owner_name=healer_name,
             keep_road=self.keep_road,
             bridge=self.bridge,
             respect_bit=self.respect_bit,
         )
         return speaker_hubunit.get_job_bud(speaker_id)
 
-    def rj_perspective_bud(self, healer_id: OwnerID, speaker_id: OwnerID) -> BudUnit:
-        speaker_job = self.rj_speaker_bud(healer_id, speaker_id)
+    def rj_perspective_bud(
+        self, healer_name: OwnerName, speaker_id: OwnerName
+    ) -> BudUnit:
+        speaker_job = self.rj_speaker_bud(healer_name, speaker_id)
         return self.get_perspective_bud(speaker_job)
 
     def get_keep_roads(self) -> set[RoadUnit]:
         x_voice_bud = self.get_voice_bud()
         x_voice_bud.settle_bud()
         if x_voice_bud._keeps_justified is False:
-            x_str = f"Cannot get_keep_roads from '{self.owner_id}' voice bud because 'BudUnit._keeps_justified' is False."
+            x_str = f"Cannot get_keep_roads from '{self.owner_name}' voice bud because 'BudUnit._keeps_justified' is False."
             raise get_keep_roadsException(x_str)
         if x_voice_bud._keeps_buildable is False:
-            x_str = f"Cannot get_keep_roads from '{self.owner_id}' voice bud because 'BudUnit._keeps_buildable' is False."
+            x_str = f"Cannot get_keep_roads from '{self.owner_name}' voice bud because 'BudUnit._keeps_buildable' is False."
             raise get_keep_roadsException(x_str)
-        owner_healer_dict = x_voice_bud._healers_dict.get(self.owner_id)
+        owner_healer_dict = x_voice_bud._healers_dict.get(self.owner_name)
         if owner_healer_dict is None:
             return get_empty_set_if_None(None)
-        keep_roads = x_voice_bud._healers_dict.get(self.owner_id).keys()
+        keep_roads = x_voice_bud._healers_dict.get(self.owner_name).keys()
         return get_empty_set_if_None(keep_roads)
 
     def save_all_voice_dutys(self):
@@ -686,7 +688,7 @@ class HubUnit:
 def hubunit_shop(
     deals_dir: str,
     deal_id: DealID,
-    owner_id: OwnerID = None,
+    owner_name: OwnerName = None,
     keep_road: RoadUnit = None,
     bridge: str = None,
     fund_pool: float = None,
@@ -701,7 +703,7 @@ def hubunit_shop(
     return HubUnit(
         deals_dir=deals_dir,
         deal_id=deal_id,
-        owner_id=validate_ideaunit(owner_id, bridge),
+        owner_name=validate_ideaunit(owner_name, bridge),
         keep_road=keep_road,
         bridge=default_bridge_if_None(bridge),
         fund_pool=validate_fund_pool(fund_pool),

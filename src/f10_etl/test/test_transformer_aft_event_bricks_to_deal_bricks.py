@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str, deal_id_str
+from src.f04_gift.atom_config import face_name_str, deal_id_str
 from src.f07_deal.deal_config import cumlative_minute_str, hour_idea_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
@@ -11,7 +11,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_aft_event_bricks_to_deal_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceIDs(
+def test_WorldUnit_aft_event_bricks_to_deal_bricks_CreatesFaceBrickSheets_Scenario0_MultpleFaceNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -25,7 +25,7 @@ def test_WorldUnit_aft_event_bricks_to_deal_bricks_CreatesFaceBrickSheets_Scenar
     hour6am = "6am"
     hour7am = "7am"
     brick_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
         hour_idea_str(),

@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str, deal_id_str
+from src.f04_gift.atom_config import face_name_str, deal_id_str
 from src.f07_deal.deal_config import (
     cumlative_minute_str,
     hour_idea_str,
@@ -33,7 +33,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
     ex_file_name = "fizzbuzz.xlsx"
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
     brick_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
         hour_idea_str(),
@@ -66,7 +66,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
         "file_dir",
         "file_name",
         "sheet_name",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         "note",
     ]
@@ -112,7 +112,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
     ex_file_name = "fizzbuzz.xlsx"
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
     brick3_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
         hour_idea_str(),
@@ -120,7 +120,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
     ]
     brick5_columns = [
         event_int_str(),
-        face_id_str(),
+        face_name_str(),
         deal_id_str(),
         weekday_idea_str(),
         weekday_order_str(),
@@ -156,7 +156,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
         "file_dir",
         "file_name",
         "sheet_name",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         "note",
     ]

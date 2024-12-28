@@ -1,9 +1,9 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
-    acct_id_str,
-    face_id_str,
+    acct_name_str,
+    face_name_str,
     deal_id_str,
-    owner_id_str,
+    owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
@@ -25,11 +25,11 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario0():
     yao_inx = "Yao"
     event3 = 3
     br00011_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
     ]
     accord23_str = "accord23"
     sue0 = [sue_inx, event3, accord23_str, bob_inx, bob_inx]
@@ -64,7 +64,7 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario0():
     pandas_assert_frame_equal(aft_e3_df, e3_accord23_df)
 
 
-# def test_etl_bow_event_bricks_to_boat_events_Scenario1_MultpleFaceIDs_CreatesEventInxSheets(
+# def test_etl_bow_event_bricks_to_boat_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -78,11 +78,11 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario0():
 #     event7 = 7
 #     event9 = 9
 #     br00011_columns = [
-#         face_id_str(),
+#         face_name_str(),
 #         event_int_str(),
 #         deal_id_str(),
-#         owner_id_str(),
-#         acct_id_str(),
+#         owner_name_str(),
+#         acct_name_str(),
 #     ]
 #     accord23_str = "accord23"
 #     accord55_otx = "accord55"
@@ -125,15 +125,15 @@ def test_etl_bow_event_bricks_to_boat_events_Scenario0():
 #     e3_pidginunit = pidginunit_shop(sue_otx, event3)
 #     e7_pidginunit = pidginunit_shop(zia_otx, event7)
 #     e9_pidginunit = pidginunit_shop(zia_otx, event9)
-#     e3_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
-#     e3_pidginunit.set_otx2inx(type_AcctID_str(), bob_otx, bob0_inx)
-#     e3_pidginunit.set_otx2inx(type_AcctID_str(), yao_otx, yao0_inx)
-#     e7_pidginunit.set_otx2inx(type_AcctID_str(), zia_otx, zia_inx)
-#     e7_pidginunit.set_otx2inx(type_AcctID_str(), bob_otx, bob1_inx)
-#     e7_pidginunit.set_otx2inx(type_AcctID_str(), yao_otx, yao1_inx)
-#     e9_pidginunit.set_otx2inx(type_AcctID_str(), zia_otx, zia_inx)
-#     e9_pidginunit.set_otx2inx(type_AcctID_str(), bob_otx, bob2_inx)
-#     e9_pidginunit.set_otx2inx(type_AcctID_str(), yao_otx, yao2_inx)
+#     e3_pidginunit.set_otx2inx(type_AcctName_str(), sue_otx, sue_inx)
+#     e3_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob0_inx)
+#     e3_pidginunit.set_otx2inx(type_AcctName_str(), yao_otx, yao0_inx)
+#     e7_pidginunit.set_otx2inx(type_AcctName_str(), zia_otx, zia_inx)
+#     e7_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob1_inx)
+#     e7_pidginunit.set_otx2inx(type_AcctName_str(), yao_otx, yao1_inx)
+#     e9_pidginunit.set_otx2inx(type_AcctName_str(), zia_otx, zia_inx)
+#     e9_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob2_inx)
+#     e9_pidginunit.set_otx2inx(type_AcctName_str(), yao_otx, yao2_inx)
 #     e9_pidginunit.set_otx2inx(type_IdeaUnit_str(), accord55_inx, accord55_otx)
 #     save_file(bow_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
 #     save_file(bow_e7_dir, pidgin_filename(), e7_pidginunit.get_json())

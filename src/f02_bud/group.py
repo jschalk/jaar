@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_1_if_None, get_dict_from_json
 from src.f01_road.finance import allot_scale, FundCoin, default_fund_coin_if_None
-from src.f01_road.road import GroupID, AcctID, default_bridge_if_None
+from src.f01_road.road import GroupID, AcctName, default_bridge_if_None
 from dataclasses import dataclass
 
 
@@ -30,7 +30,7 @@ class MemberShip(GroupCore):
     _fund_agenda_take: float = None
     _fund_agenda_ratio_give: float = None
     _fund_agenda_ratio_take: float = None
-    _acct_id: AcctID = None
+    _acct_name: AcctName = None
 
     def set_credit_vote(self, x_credit_vote: float):
         if x_credit_vote is not None:
@@ -60,7 +60,7 @@ def membership_shop(
     group_id: GroupID,
     credit_vote: float = None,
     debtit_vote: float = None,
-    _acct_id: AcctID = None,
+    _acct_name: AcctName = None,
 ) -> MemberShip:
     return MemberShip(
         group_id=group_id,
@@ -68,24 +68,24 @@ def membership_shop(
         debtit_vote=get_1_if_None(debtit_vote),
         _credor_pool=0,
         _debtor_pool=0,
-        _acct_id=_acct_id,
+        _acct_name=_acct_name,
     )
 
 
-def membership_get_from_dict(x_dict: dict, x_acct_id: AcctID) -> MemberShip:
+def membership_get_from_dict(x_dict: dict, x_acct_name: AcctName) -> MemberShip:
     return membership_shop(
         group_id=x_dict.get("group_id"),
         credit_vote=x_dict.get("credit_vote"),
         debtit_vote=x_dict.get("debtit_vote"),
-        _acct_id=x_acct_id,
+        _acct_name=x_acct_name,
     )
 
 
 def memberships_get_from_dict(
-    x_dict: dict, x_acct_id: AcctID
+    x_dict: dict, x_acct_name: AcctName
 ) -> dict[GroupID, MemberShip]:
     return {
-        x_group_id: membership_get_from_dict(x_membership_dict, x_acct_id)
+        x_group_id: membership_get_from_dict(x_membership_dict, x_acct_name)
         for x_group_id, x_membership_dict in x_dict.items()
     }
 
@@ -177,7 +177,7 @@ def awardline_shop(awardee_id: GroupID, _fund_give: float, _fund_take: float):
 
 @dataclass
 class GroupUnit(GroupCore):
-    _memberships: dict[AcctID, MemberShip] = None  # set by BudUnit.set_acctunit()
+    _memberships: dict[AcctName, MemberShip] = None  # set by BudUnit.set_acctunit()
     _bridge: str = None  # calculated by BudUnit
     # calculated by BudUnit.settle_bud()
     _fund_give: float = None
@@ -193,12 +193,12 @@ class GroupUnit(GroupCore):
             raise membership_group_id_Exception(
                 f"GroupUnit.group_id={self.group_id} cannot set membership.group_id={x_membership.group_id}"
             )
-        if x_membership._acct_id is None:
+        if x_membership._acct_name is None:
             raise membership_group_id_Exception(
-                f"membership group_id={x_membership.group_id} cannot be set when _acct_id is None."
+                f"membership group_id={x_membership.group_id} cannot be set when _acct_name is None."
             )
 
-        self._memberships[x_membership._acct_id] = x_membership
+        self._memberships[x_membership._acct_name] = x_membership
         self._add_credor_pool(x_membership._credor_pool)
         self._add_debtor_pool(x_membership._debtor_pool)
 
@@ -208,14 +208,14 @@ class GroupUnit(GroupCore):
     def _add_debtor_pool(self, x_debtor_pool: float):
         self._debtor_pool += x_debtor_pool
 
-    def get_membership(self, x_acct_id: AcctID) -> MemberShip:
-        return self._memberships.get(x_acct_id)
+    def get_membership(self, x_acct_name: AcctName) -> MemberShip:
+        return self._memberships.get(x_acct_name)
 
-    def membership_exists(self, x_acct_id: AcctID) -> bool:
-        return self.get_membership(x_acct_id) is not None
+    def membership_exists(self, x_acct_name: AcctName) -> bool:
+        return self.get_membership(x_acct_name) is not None
 
-    def del_membership(self, acct_id):
-        self._memberships.pop(acct_id)
+    def del_membership(self, acct_name):
+        self._memberships.pop(acct_name)
 
     def clear_fund_give_take(self):
         self._fund_give = 0
@@ -228,21 +228,21 @@ class GroupUnit(GroupCore):
     def _set_membership_fund_give_fund_take(self):
         credit_ledger = {}
         debtit_ledger = {}
-        for x_acct_id, x_membership in self._memberships.items():
-            credit_ledger[x_acct_id] = x_membership.credit_vote
-            debtit_ledger[x_acct_id] = x_membership.debtit_vote
+        for x_acct_name, x_membership in self._memberships.items():
+            credit_ledger[x_acct_name] = x_membership.credit_vote
+            debtit_ledger[x_acct_name] = x_membership.debtit_vote
         fund_give_allot = allot_scale(credit_ledger, self._fund_give, self._fund_coin)
         fund_take_allot = allot_scale(debtit_ledger, self._fund_take, self._fund_coin)
-        for acct_id, x_membership in self._memberships.items():
-            x_membership._fund_give = fund_give_allot.get(acct_id)
-            x_membership._fund_take = fund_take_allot.get(acct_id)
+        for acct_name, x_membership in self._memberships.items():
+            x_membership._fund_give = fund_give_allot.get(acct_name)
+            x_membership._fund_take = fund_take_allot.get(acct_name)
         x_a_give = self._fund_agenda_give
         x_a_take = self._fund_agenda_take
         fund_agenda_give_allot = allot_scale(credit_ledger, x_a_give, self._fund_coin)
         fund_agenda_take_allot = allot_scale(debtit_ledger, x_a_take, self._fund_coin)
-        for acct_id, x_membership in self._memberships.items():
-            x_membership._fund_agenda_give = fund_agenda_give_allot.get(acct_id)
-            x_membership._fund_agenda_take = fund_agenda_take_allot.get(acct_id)
+        for acct_name, x_membership in self._memberships.items():
+            x_membership._fund_agenda_give = fund_agenda_give_allot.get(acct_name)
+            x_membership._fund_agenda_take = fund_agenda_take_allot.get(acct_name)
 
 
 def groupunit_shop(

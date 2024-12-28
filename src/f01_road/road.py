@@ -20,26 +20,26 @@ class DealID(IdeaUnit):  # Created to help track the concept
     pass
 
 
-class OwnerID(IdeaUnit):  # Created to help track the concept
+class OwnerName(IdeaUnit):  # Created to help track the concept
     """Must be idea thus not include road bridge"""
 
     pass
 
 
-class HealerID(OwnerID):
+class HealerName(OwnerName):
     """A IdeaUnit used to identify a Problem's Healer"""
 
     pass
 
 
-class OwnerID(HealerID):
-    """A IdeaUnit used to identify a BudUnit's owner_id"""
+class OwnerName(HealerName):
+    """A IdeaUnit used to identify a BudUnit's owner_name"""
 
     pass
 
 
-class AcctID(OwnerID):  # Created to help track the concept
-    """Every AcctID object is OwnerID, must follow OwnerID format."""
+class AcctName(OwnerName):  # Created to help track the concept
+    """Every AcctName object is OwnerName, must follow OwnerName format."""
 
     pass
 
@@ -74,12 +74,12 @@ def get_default_world_id() -> WorldID:
     return WorldID("TestingWorld3")
 
 
-class FaceID(str):
+class FaceName(str):
     pass
 
 
-def get_default_face_id() -> FaceID:
-    return FaceID("Face1234")
+def get_default_face_name() -> FaceName:
+    return FaceName("Face1234")
 
 
 class EventInt(int):

@@ -30,10 +30,10 @@ from src.f04_gift.atom_config import (
     atom_delete,
     atom_insert,
     atom_update,
-    face_id_str,
+    face_name_str,
     deal_id_str,
-    owner_id_str,
-    acct_id_str,
+    owner_name_str,
+    acct_name_str,
     group_id_str,
     parent_road_str,
     lx_str,
@@ -41,7 +41,7 @@ from src.f04_gift.atom_config import (
     base_str,
     team_id_str,
     awardee_id_str,
-    healer_id_str,
+    healer_name_str,
     numor_str,
     denom_str,
     addin_str,
@@ -98,12 +98,12 @@ from src.f08_pidgin.pidgin_config import (
     inx_idea_str,
     otx_road_str,
     inx_road_str,
-    otx_acct_id_str,
-    inx_acct_id_str,
+    otx_acct_name_str,
+    inx_acct_name_str,
     otx_group_id_str,
     inx_group_id_str,
     map_otx2inx_str,
-    map_acct_id_str,
+    map_acct_name_str,
     map_group_id_str,
     map_idea_str,
     map_road_str,
@@ -169,11 +169,11 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     table_sorting_priority = get_brick_elements_sort_order()
 
     # THEN
-    assert table_sorting_priority[0] == face_id_str()
+    assert table_sorting_priority[0] == face_name_str()
     assert table_sorting_priority[1] == event_int_str()
     assert table_sorting_priority[2] == deal_id_str()
-    assert table_sorting_priority[3] == owner_id_str()
-    assert table_sorting_priority[4] == acct_id_str()
+    assert table_sorting_priority[3] == owner_name_str()
+    assert table_sorting_priority[4] == acct_name_str()
     assert table_sorting_priority[5] == group_id_str()
     assert table_sorting_priority[6] == parent_road_str()
     assert table_sorting_priority[7] == lx_str()
@@ -183,7 +183,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[11] == "pick"
     assert table_sorting_priority[12] == team_id_str()
     assert table_sorting_priority[13] == awardee_id_str()
-    assert table_sorting_priority[14] == healer_id_str()
+    assert table_sorting_priority[14] == healer_name_str()
     assert table_sorting_priority[15] == time_int_str()
     assert table_sorting_priority[16] == begin_str()
     assert table_sorting_priority[17] == close_str()
@@ -229,8 +229,8 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[57] == inx_idea_str()
     assert table_sorting_priority[58] == otx_road_str()
     assert table_sorting_priority[59] == inx_road_str()
-    assert table_sorting_priority[60] == otx_acct_id_str()
-    assert table_sorting_priority[61] == inx_acct_id_str()
+    assert table_sorting_priority[60] == otx_acct_name_str()
+    assert table_sorting_priority[61] == inx_acct_name_str()
     assert table_sorting_priority[62] == otx_group_id_str()
     assert table_sorting_priority[63] == inx_group_id_str()
     assert table_sorting_priority[64] == otx_bridge_str()
@@ -255,7 +255,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     atom_deal_pidgin_args.update(deal_args)
     atom_deal_pidgin_args.update(pidgin_args)
     table_sorting_priority.remove(event_int_str())
-    table_sorting_priority.remove(face_id_str())
+    table_sorting_priority.remove(face_name_str())
     assert atom_deal_pidgin_args == set(table_sorting_priority)
 
 
@@ -265,11 +265,11 @@ def test_get_brick_sqlite_type_ReturnsObj():
 
     # THEN
     assert set(sqlite_types.keys()) == set(get_brick_elements_sort_order())
-    assert sqlite_types.get(face_id_str()) == "TEXT"
+    assert sqlite_types.get(face_name_str()) == "TEXT"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
     assert sqlite_types.get(deal_id_str()) == "TEXT"
-    assert sqlite_types.get(owner_id_str()) == "TEXT"
-    assert sqlite_types.get(acct_id_str()) == "TEXT"
+    assert sqlite_types.get(owner_name_str()) == "TEXT"
+    assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_id_str()) == "TEXT"
     assert sqlite_types.get(parent_road_str()) == "TEXT"
     assert sqlite_types.get(lx_str()) == "TEXT"
@@ -279,7 +279,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get("pick") == "TEXT"
     assert sqlite_types.get(team_id_str()) == "TEXT"
     assert sqlite_types.get(awardee_id_str()) == "TEXT"
-    assert sqlite_types.get(healer_id_str()) == "TEXT"
+    assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(time_int_str()) == "INTEGER"
     assert sqlite_types.get(begin_str()) == "REAL"
     assert sqlite_types.get(close_str()) == "REAL"
@@ -381,7 +381,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert bud_item_reasonunit_str() in brick_config_categorys
     assert bud_itemunit_str() in brick_config_categorys
     assert budunit_str() in brick_config_categorys
-    assert map_acct_id_str() in brick_config_categorys
+    assert map_acct_name_str() in brick_config_categorys
     assert map_group_id_str() in brick_config_categorys
     assert map_idea_str() in brick_config_categorys
     assert map_road_str() in brick_config_categorys
@@ -423,7 +423,7 @@ def _validate_brick_config(x_brick_config: dict):
             dealunit_str(),
             map_otx2inx_str(),
             map_group_id_str(),
-            map_acct_id_str(),
+            map_acct_name_str(),
             map_idea_str(),
             map_road_str(),
         }:
@@ -492,7 +492,7 @@ def _validate_brick_config(x_brick_config: dict):
         # print(f"{brick_jvalues_keys=}")
         assert sub_jvalues_keys.issubset(brick_jvalues_keys)
 
-        assert face_id_str() in brick_jkeys_keys
+        assert face_name_str() in brick_jkeys_keys
         assert event_int_str() in brick_jkeys_keys
         assert deal_id_str() not in brick_jvalues_keys
         if brick_dict.get(brick_type_str()) != pidginunit_str():
@@ -585,7 +585,7 @@ def _validate_brick_format_files(brick_filenames: set[str]):
                 elif attr_in_keys:
                     assert attr_in_optional, assert_fail_str
 
-    # assert face_id_str() in brick_format_attributes
+    # assert face_name_str() in brick_format_attributes
     # assert event_int_str() in brick_format_attributes
 
     # confirm every bricknumber is unique
@@ -627,7 +627,7 @@ def set_brick_config_json(category: str, build_order: int):
 def test_get_brick_config_dict_ReturnsObj_build_order():
     # ESTABLISH / WHEN
     bo = build_order_str()
-    # set_brick_config_json(map_acct_id_str(), 0)
+    # set_brick_config_json(map_acct_name_str(), 0)
     # set_brick_config_json(map_group_id_str(), 1)
     # set_brick_config_json(map_idea_str(), 2)
     # set_brick_config_json(map_road_str(), 3)
@@ -651,7 +651,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     x_brick_config = get_brick_config_dict()
 
     # THEN
-    assert x_brick_config.get(map_acct_id_str()).get(bo) == 0
+    assert x_brick_config.get(map_acct_name_str()).get(bo) == 0
     assert x_brick_config.get(map_group_id_str()).get(bo) == 1
     assert x_brick_config.get(map_idea_str()).get(bo) == 2
     assert x_brick_config.get(map_road_str()).get(bo) == 3
@@ -680,7 +680,7 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
     # THEN
     assert len(x_brick_quick_column_ref) == len(get_brick_numbers())
     assert x_brick_quick_column_ref.get("br00000") == {
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         c400_number_str(),
         current_time_str(),

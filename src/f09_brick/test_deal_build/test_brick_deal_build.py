@@ -64,14 +64,14 @@ def test_deal_build_from_df_ReturnsObj_Scenario0_OneDealID(brick_env_setup_clean
         timeline=creg_timelineunit,
     )
     accord23_dealunit.add_purviewepisode(
-        x_owner_id="Sue",
+        x_owner_name="Sue",
         x_time_int=777,
         x_money_magnitude=445,
         allow_prev_to_current_time_entry=True,
     )
     accord23_dealunit.add_cashpurchase(
-        x_owner_id="Zia",
-        x_acct_id="Bob",
+        x_owner_name="Zia",
+        x_acct_name="Bob",
         x_time_int=777,
         x_amount=888,
     )

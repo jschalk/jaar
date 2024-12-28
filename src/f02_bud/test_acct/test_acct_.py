@@ -14,8 +14,8 @@ def test_AcctUnit_exists():
     # THEN
     print(f"{bob_str}")
     assert bob_acctunit is not None
-    assert bob_acctunit.acct_id is not None
-    assert bob_acctunit.acct_id == bob_str
+    assert bob_acctunit.acct_name is not None
+    assert bob_acctunit.acct_name == bob_str
     assert bob_acctunit.credit_belief is None
     assert bob_acctunit.debtit_belief is None
     # calculated fields
@@ -32,26 +32,26 @@ def test_AcctUnit_exists():
     assert bob_acctunit._respect_bit is None
 
 
-def test_AcctUnit_set_acct_id_CorrectlySetsAttr():
+def test_AcctUnit_set_acct_name_CorrectlySetsAttr():
     # ESTABLISH
     x_acctunit = AcctUnit()
 
     # WHEN
     bob_str = "Bob"
-    x_acctunit.set_acct_id(bob_str)
+    x_acctunit.set_acct_name(bob_str)
 
     # THEN
-    assert x_acctunit.acct_id == bob_str
+    assert x_acctunit.acct_name == bob_str
 
 
-def test_AcctUnit_set_acct_id_RaisesErrorIfParameterContains_bridge():
+def test_AcctUnit_set_acct_name_RaisesErrorIfParameterContains_bridge():
     # ESTABLISH
     slash_str = "/"
     texas_str = f"Texas{slash_str}Arkansas"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        acctunit_shop(acct_id=texas_str, _bridge=slash_str)
+        acctunit_shop(acct_name=texas_str, _bridge=slash_str)
     assert (
         str(excinfo.value)
         == f"'{texas_str}' needs to be a IdeaUnit. Cannot contain bridge: '{slash_str}'"
@@ -63,10 +63,10 @@ def test_acctunit_shop_CorrectlySetsAttributes():
     yao_str = "Yao"
 
     # WHEN
-    yao_acctunit = acctunit_shop(acct_id=yao_str)
+    yao_acctunit = acctunit_shop(acct_name=yao_str)
 
     # THEN
-    assert yao_acctunit.acct_id == yao_str
+    assert yao_acctunit.acct_name == yao_str
     assert yao_acctunit.credit_belief == 1
     assert yao_acctunit.debtit_belief == 1
     # calculated fields

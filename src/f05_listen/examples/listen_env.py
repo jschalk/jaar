@@ -41,7 +41,7 @@ def get_texas_hubunit() -> HubUnit:
     return hubunit_shop(
         get_listen_temp_env_dir(),
         deal_id,
-        owner_id="Sue",
+        owner_name="Sue",
         keep_road=get_texas_road(),
         # pipeline_duty_job_str(),
     )
@@ -60,7 +60,7 @@ def get_dakota_hubunit() -> HubUnit:
     return hubunit_shop(
         get_listen_temp_env_dir(),
         deal_id,
-        owner_id="Sue",
+        owner_name="Sue",
         keep_road=get_dakota_road(),
         # pipeline_duty_job_str(),
     )

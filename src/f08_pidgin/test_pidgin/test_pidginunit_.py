@@ -3,22 +3,22 @@ from src.f01_road.road import default_bridge_if_None
 from src.f03_chrono.chrono import timeline_idea_str
 from src.f04_gift.atom_config import (
     get_atom_args_jaar_types,
-    type_AcctID_str,
+    type_AcctName_str,
     type_GroupID_str,
     type_IdeaUnit_str,
     type_RoadUnit_str,
-    acct_id_str,
+    acct_name_str,
     awardee_id_str,
     base_str,
-    face_id_str,
+    face_name_str,
     deal_id_str,
     fund_coin_str,
-    healer_id_str,
+    healer_name_str,
     group_id_str,
     lx_str,
     parent_road_str,
     penny_str,
-    owner_id_str,
+    owner_name_str,
     respect_bit_str,
     road_str,
     team_id_str,
@@ -62,7 +62,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     pidgin_args_jaar_types = get_pidgin_args_jaar_types()
 
     # THEN
-    assert pidgin_args_jaar_types.get("acct_id") == type_AcctID_str()
+    assert pidgin_args_jaar_types.get("acct_name") == type_AcctName_str()
     assert pidgin_args_jaar_types.get("addin") == "float"
     assert pidgin_args_jaar_types.get("amount") == "float"
     assert pidgin_args_jaar_types.get("awardee_id") == type_GroupID_str()
@@ -82,7 +82,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("debtor_respect") == "int"
     assert pidgin_args_jaar_types.get("denom") == "int"
     assert pidgin_args_jaar_types.get("divisor") == "int"
-    assert pidgin_args_jaar_types.get("face_id") == type_AcctID_str()
+    assert pidgin_args_jaar_types.get("face_name") == type_AcctName_str()
     assert pidgin_args_jaar_types.get("deal_id") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("fnigh") == "float"
     assert pidgin_args_jaar_types.get("fopen") == "float"
@@ -91,7 +91,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("give_force") == "float"
     assert pidgin_args_jaar_types.get("gogo_want") == "float"
     assert pidgin_args_jaar_types.get("group_id") == type_GroupID_str()
-    assert pidgin_args_jaar_types.get("healer_id") == type_GroupID_str()
+    assert pidgin_args_jaar_types.get("healer_name") == type_GroupID_str()
     assert pidgin_args_jaar_types.get("hour_idea") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("lx") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("mass") == "int"
@@ -102,7 +102,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("need") == type_RoadUnit_str()
     assert pidgin_args_jaar_types.get("nigh") == "float"
     assert pidgin_args_jaar_types.get("numor") == "int"
-    assert pidgin_args_jaar_types.get("owner_id") == type_AcctID_str()
+    assert pidgin_args_jaar_types.get("owner_name") == type_AcctName_str()
     assert pidgin_args_jaar_types.get("open") == "float"
     assert pidgin_args_jaar_types.get("parent_road") == type_RoadUnit_str()
     assert pidgin_args_jaar_types.get("penny") == "float"
@@ -131,13 +131,13 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert atom_args.issubset(pidgin_args)
     assert deal_args.issubset(pidgin_args)
     assert atom_args.intersection(deal_args) == {
-        acct_id_str(),
+        acct_name_str(),
         fund_coin_str(),
         penny_str(),
         respect_bit_str(),
     }
     assert atom_args.union(deal_args) != pidgin_args
-    assert atom_args.union(deal_args).union({"face_id"}) == pidgin_args
+    assert atom_args.union(deal_args).union({"face_name"}) == pidgin_args
     assert check_jaar_types_are_correct()
     # assert pidgin_args_jaar_types.keys() == get_atom_args_category_mapping().keys()
     # assert all_atom_args_jaar_types_are_correct(x_jaar_types)
@@ -169,7 +169,7 @@ def test_pidginable_jaar_types_ReturnsObj():
     # THEN
     assert len(x_pidginable_jaar_types) == 4
     assert x_pidginable_jaar_types == {
-        type_AcctID_str(),
+        type_AcctName_str(),
         type_GroupID_str(),
         type_IdeaUnit_str(),
         type_RoadUnit_str(),
@@ -184,20 +184,20 @@ def test_pidginable_atom_args_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert len(pidginable_atom_args()) == 18
     assert pidginable_atom_args() == {
-        acct_id_str(),
+        acct_name_str(),
         awardee_id_str(),
         base_str(),
-        face_id_str(),
+        face_name_str(),
         deal_id_str(),
         group_id_str(),
-        healer_id_str(),
+        healer_name_str(),
         hour_idea_str(),
         lx_str(),
         month_idea_str(),
         parent_road_str(),
         "pick",
         "need",
-        owner_id_str(),
+        owner_name_str(),
         road_str(),
         team_id_str(),
         timeline_idea_str(),
@@ -229,7 +229,7 @@ def test_PidginUnit_Exists():
     assert not x_pidginunit.unknown_word
     assert not x_pidginunit.otx_bridge
     assert not x_pidginunit.inx_bridge
-    assert not x_pidginunit.face_id
+    assert not x_pidginunit.face_name
 
 
 def test_pidginunit_shop_ReturnsObj_scenario0():
@@ -240,15 +240,15 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     sue_pidginunit = pidginunit_shop(sue_str)
 
     # THEN
-    assert sue_pidginunit.face_id == sue_str
+    assert sue_pidginunit.face_name == sue_str
     assert sue_pidginunit.event_int == 0
     assert sue_pidginunit.unknown_word == default_unknown_word_if_None()
     assert sue_pidginunit.otx_bridge == default_bridge_if_None()
     assert sue_pidginunit.inx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.groupmap == groupmap_shop(face_id=sue_str)
-    assert sue_pidginunit.acctmap == acctmap_shop(face_id=sue_str)
-    assert sue_pidginunit.ideamap == ideamap_shop(face_id=sue_str)
-    assert sue_pidginunit.roadmap == roadmap_shop(face_id=sue_str)
+    assert sue_pidginunit.groupmap == groupmap_shop(face_name=sue_str)
+    assert sue_pidginunit.acctmap == acctmap_shop(face_name=sue_str)
+    assert sue_pidginunit.ideamap == ideamap_shop(face_name=sue_str)
+    assert sue_pidginunit.roadmap == roadmap_shop(face_name=sue_str)
     assert sue_pidginunit.acctmap.event_int == 0
     assert sue_pidginunit.acctmap.unknown_word == default_unknown_word_if_None()
     assert sue_pidginunit.acctmap.otx_bridge == default_bridge_if_None()
@@ -299,22 +299,22 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     # assert sue_pidginunit.acctmap == x_acctmap
     # assert sue_pidginunit.roadmap == x_roadmap
 
-    assert sue_pidginunit.acctmap.face_id == sue_str
+    assert sue_pidginunit.acctmap.face_name == sue_str
     assert sue_pidginunit.acctmap.event_int == five_event_int
     assert sue_pidginunit.acctmap.unknown_word == y_uk
     assert sue_pidginunit.acctmap.otx_bridge == slash_otx_bridge
     assert sue_pidginunit.acctmap.inx_bridge == colon_inx_bridge
-    assert sue_pidginunit.groupmap.face_id == sue_str
+    assert sue_pidginunit.groupmap.face_name == sue_str
     assert sue_pidginunit.groupmap.event_int == five_event_int
     assert sue_pidginunit.groupmap.unknown_word == y_uk
     assert sue_pidginunit.groupmap.otx_bridge == slash_otx_bridge
     assert sue_pidginunit.groupmap.inx_bridge == colon_inx_bridge
-    assert sue_pidginunit.ideamap.face_id == sue_str
+    assert sue_pidginunit.ideamap.face_name == sue_str
     assert sue_pidginunit.ideamap.event_int == five_event_int
     assert sue_pidginunit.ideamap.unknown_word == y_uk
     assert sue_pidginunit.ideamap.otx_bridge == slash_otx_bridge
     assert sue_pidginunit.ideamap.inx_bridge == colon_inx_bridge
-    assert sue_pidginunit.roadmap.face_id == sue_str
+    assert sue_pidginunit.roadmap.face_name == sue_str
     assert sue_pidginunit.roadmap.event_int == five_event_int
     assert sue_pidginunit.roadmap.unknown_word == y_uk
     assert sue_pidginunit.roadmap.otx_bridge == slash_otx_bridge
@@ -332,7 +332,7 @@ def test_pidginunit_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_
 
     # WHEN
     x_pidginunit = pidginunit_shop(
-        face_id=bob_str,
+        face_name=bob_str,
         event_int=event7,
         unknown_word=x_nan,
         otx_bridge=x_nan,
@@ -340,7 +340,7 @@ def test_pidginunit_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_
     )
 
     # THEN
-    assert x_pidginunit.face_id == bob_str
+    assert x_pidginunit.face_name == bob_str
     assert x_pidginunit.event_int == event7
     assert x_pidginunit.unknown_word == default_unknown_word_if_None()
     assert x_pidginunit.otx_bridge == default_bridge_if_None()
@@ -351,7 +351,7 @@ def test_PidginUnit_set_mapunit_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    acctmap = acctmap_shop(face_id=sue_str)
+    acctmap = acctmap_shop(face_name=sue_str)
     acctmap.set_otx2inx("Bob", "Bob of Portland")
     assert sue_pidginunit.acctmap != acctmap
 
@@ -366,7 +366,7 @@ def test_PidginUnit_set_mapunit_SetsAttr_SpecialCase_RoadUnit():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    roadmap = roadmap_shop(face_id=sue_str)
+    roadmap = roadmap_shop(face_name=sue_str)
     roadmap.set_otx2inx("Bob", "Bob of Portland")
     assert sue_pidginunit.roadmap != roadmap
 
@@ -382,7 +382,7 @@ def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_otx_bridge_IsNotSame():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_otx_bridge = "/"
-    acctmap = acctmap_shop(otx_bridge=slash_otx_bridge, face_id=sue_str)
+    acctmap = acctmap_shop(otx_bridge=slash_otx_bridge, face_name=sue_str)
     assert sue_pidginunit.otx_bridge != acctmap.otx_bridge
     assert sue_pidginunit.acctmap != acctmap
 
@@ -398,7 +398,7 @@ def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_inx_bridge_IsNotSame():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_inx_bridge = "/"
-    acctmap = acctmap_shop(inx_bridge=slash_inx_bridge, face_id=sue_str)
+    acctmap = acctmap_shop(inx_bridge=slash_inx_bridge, face_name=sue_str)
     assert sue_pidginunit.inx_bridge != acctmap.inx_bridge
     assert sue_pidginunit.acctmap != acctmap
 
@@ -414,7 +414,7 @@ def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_unknown_word_IsNotSame():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
-    acctmap = acctmap_shop(unknown_word=casa_unknown_word, face_id=sue_str)
+    acctmap = acctmap_shop(unknown_word=casa_unknown_word, face_name=sue_str)
     assert sue_pidginunit.unknown_word != acctmap.unknown_word
     assert sue_pidginunit.acctmap != acctmap
 
@@ -425,19 +425,19 @@ def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_unknown_word_IsNotSame():
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_face_id_IsNotSame():
+def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_face_name_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
     sue_pidginunit = pidginunit_shop(sue_str)
-    acctmap = acctmap_shop(face_id=yao_str)
-    assert sue_pidginunit.face_id != acctmap.face_id
+    acctmap = acctmap_shop(face_name=yao_str)
+    assert sue_pidginunit.face_name != acctmap.face_name
     assert sue_pidginunit.acctmap != acctmap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_acctmap(acctmap)
-    exception_str = f"set_mapcore Error: PidginUnit face_id is '{sue_pidginunit.face_id}', MapCore is '{yao_str}'."
+    exception_str = f"set_mapcore Error: PidginUnit face_name is '{sue_pidginunit.face_name}', MapCore is '{yao_str}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -445,17 +445,17 @@ def test_PidginUnit_get_mapunit_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_pu = pidginunit_shop(sue_str)
-    static_acctmap = acctmap_shop(face_id=sue_str)
+    static_acctmap = acctmap_shop(face_name=sue_str)
     static_acctmap.set_otx2inx("Bob", "Bob of Portland")
     sue_pu.set_acctmap(static_acctmap)
 
     # WHEN / THEN
-    assert sue_pu.get_mapunit(type_AcctID_str()) == sue_pu.acctmap
+    assert sue_pu.get_mapunit(type_AcctName_str()) == sue_pu.acctmap
     assert sue_pu.get_mapunit(type_GroupID_str()) == sue_pu.groupmap
     assert sue_pu.get_mapunit(type_IdeaUnit_str()) == sue_pu.ideamap
     assert sue_pu.get_mapunit(type_RoadUnit_str()) == sue_pu.roadmap
 
-    assert sue_pu.get_mapunit(type_AcctID_str()) != sue_pu.roadmap
+    assert sue_pu.get_mapunit(type_AcctName_str()) != sue_pu.roadmap
     assert sue_pu.get_mapunit(type_GroupID_str()) != sue_pu.roadmap
     assert sue_pu.get_mapunit(type_IdeaUnit_str()) != sue_pu.roadmap
 
@@ -502,7 +502,7 @@ def test_PidginUnit_is_valid_ReturnsObj():
     assert sue_pidginunit.is_valid()
 
 
-def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_type_AcctID_str():
+def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_type_AcctName_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -512,7 +512,7 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_type_AcctID_str():
     assert acctmap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(type_AcctName_str(), sue_otx, sue_inx)
 
     # THEN
     assert acctmap.otx2inx_exists(sue_otx, sue_inx)
@@ -572,13 +572,13 @@ def test_PidginUnit_get_inx_value_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_inx_value(type_AcctID_str(), sue_otx) != sue_inx
+    assert zia_pidginunit._get_inx_value(type_AcctName_str(), sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(type_AcctName_str(), sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit._get_inx_value(type_AcctID_str(), sue_otx) == sue_inx
+    assert zia_pidginunit._get_inx_value(type_AcctName_str(), sue_otx) == sue_inx
 
 
 def test_PidginUnit_del_otx2inx_ReturnsObj():

@@ -51,12 +51,12 @@ def otx_group_id_str() -> str:
     return "otx_group_id"
 
 
-def inx_acct_id_str() -> str:
-    return "inx_acct_id"
+def inx_acct_name_str() -> str:
+    return "inx_acct_name"
 
 
-def otx_acct_id_str() -> str:
-    return "otx_acct_id"
+def otx_acct_name_str() -> str:
+    return "otx_acct_name"
 
 
 def inx_idea_str() -> str:
@@ -87,8 +87,8 @@ def map_otx2inx_str() -> str:
     return "map_otx2inx"
 
 
-def map_acct_id_str() -> str:
-    return "map_acct_id"
+def map_acct_name_str() -> str:
+    return "map_acct_name"
 
 
 def map_group_id_str() -> str:
@@ -135,7 +135,7 @@ def get_pidgin_args_category_mapping() -> dict[str, str]:
 
 def get_pidgin_args_jaar_types() -> dict[str, str]:
     return {
-        "acct_id": "AcctID",
+        "acct_name": "AcctName",
         "addin": "float",
         "amount": "float",
         "awardee_id": "GroupID",
@@ -155,7 +155,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "debtor_respect": "int",
         "denom": "int",
         "divisor": "int",
-        "face_id": "AcctID",
+        "face_name": "AcctName",
         "deal_id": "IdeaUnit",
         "fnigh": "float",
         "fopen": "float",
@@ -164,7 +164,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "give_force": "float",
         "gogo_want": "float",
         "group_id": "GroupID",
-        "healer_id": "GroupID",
+        "healer_name": "GroupID",
         "hour_idea": "IdeaUnit",
         "lx": "IdeaUnit",
         "mass": "int",
@@ -175,7 +175,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "need": "RoadUnit",
         "nigh": "float",
         "numor": "int",
-        "owner_id": "AcctID",
+        "owner_name": "AcctName",
         "open": "float",
         "parent_road": "RoadUnit",
         "penny": "float",
@@ -209,12 +209,12 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "otx_bridge",
             "otx_group_id",
         },
-        "map_acct_id": {
-            "inx_acct_id",
+        "map_acct_name": {
+            "inx_acct_name",
             "unknown_word",
             "inx_bridge",
             "otx_bridge",
-            "otx_acct_id",
+            "otx_acct_name",
         },
         "map_idea": {
             "inx_idea",

@@ -1,16 +1,16 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
-    face_id_str,
+    face_name_str,
     deal_id_str,
-    acct_id_str,
-    owner_id_str,
+    acct_name_str,
+    owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import (
     event_int_str,
     inx_bridge_str,
     otx_bridge_str,
-    inx_acct_id_str,
-    otx_acct_id_str,
+    inx_acct_name_str,
+    otx_acct_name_str,
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, boat_agg_str
@@ -34,13 +34,13 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario0_SingleBrick(
     x_boat_dir = get_test_etl_dir()
     br00113_file_path = create_path(x_boat_dir, "br00113.xlsx")
     br00113_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
+        otx_acct_name_str(),
+        inx_acct_name_str(),
     ]
     sue0 = [sue_str, event7, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -60,10 +60,10 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario0_SingleBrick(
     gen_acct_df = pandas_read_excel(pidgin_path, sheet_name=acct_staging_str)
     acct_file_columns = [
         "src_brick",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
+        otx_acct_name_str(),
+        inx_acct_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -101,20 +101,20 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario1_MultipleBrick
     x_boat_dir = get_test_etl_dir()
     br00113_file_path = create_path(x_boat_dir, "br00113.xlsx")
     br00113_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
+        otx_acct_name_str(),
+        inx_acct_name_str(),
     ]
     br00043_file_path = create_path(x_boat_dir, "br00043.xlsx")
     br00043_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
+        otx_acct_name_str(),
+        inx_acct_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -143,10 +143,10 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario1_MultipleBrick
     gen_acct_df = pandas_read_excel(pidgin_path, sheet_name=acct_staging_str)
     acct_file_columns = [
         "src_brick",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
+        otx_acct_name_str(),
+        inx_acct_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -188,20 +188,20 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario2_WorldUnit_eve
     x_boat_dir = get_test_etl_dir()
     br00113_file_path = create_path(x_boat_dir, "br00113.xlsx")
     br00113_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
+        otx_acct_name_str(),
+        inx_acct_name_str(),
     ]
     br00043_file_path = create_path(x_boat_dir, "br00043.xlsx")
     br00043_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
+        otx_acct_name_str(),
+        inx_acct_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -230,10 +230,10 @@ def test_etl_boat_agg_to_pidgin_acct_staging_CreatesFile_Scenario2_WorldUnit_eve
     gen_acct_df = pandas_read_excel(pidgin_path, sheet_name=acct_staging_str)
     acct_file_columns = [
         "src_brick",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
+        otx_acct_name_str(),
+        inx_acct_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),

@@ -172,7 +172,7 @@ def test_DealUnit_add_purviewepisode_DoesNotRaiseError_allow_prev_to_current_tim
 
     # WHEN
     accord_deal.add_purviewepisode(
-        x_owner_id=sue_str,
+        x_owner_name=sue_str,
         x_time_int=sue_x4_time_int,
         x_money_magnitude=sue_x4_magnitude,
         allow_prev_to_current_time_entry=True,

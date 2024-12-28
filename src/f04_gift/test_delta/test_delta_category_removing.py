@@ -1,7 +1,7 @@
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import bud_acctunit_str
-from src.f04_gift.atom_config import acct_id_str
+from src.f04_gift.atom_config import acct_name_str
 from src.f04_gift.atom import atom_insert
 from src.f04_gift.delta import deltaunit_shop, get_categorys_cruds_deltaunit
 
@@ -31,6 +31,6 @@ def test_DeltaUnit_get_categorys_cruds_deltaunit_ReturnsObjWithCorrectCategorysA
     sue_insert_dict = new_deltaunit.atomunits.get(atom_insert())
     sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_str())
     bob_atomunit = sue_acctunit_dict.get(bob_str)
-    assert bob_atomunit.get_value(acct_id_str()) == bob_str
+    assert bob_atomunit.get_value(acct_name_str()) == bob_str
     assert bob_atomunit.get_value("credit_belief") == bob_credit_belief
     assert bob_atomunit.get_value("debtit_belief") == bob_debtit_belief

@@ -79,8 +79,8 @@ fizz0,buzz3,True,20
 
 def get_ex02_atom_dataframe() -> DataFrame:
     ex02_columns = [
-        "healer_id",
-        "acct_id",
+        "healer_name",
+        "acct_name",
         "group_id",
         "team_id",
         "awardee_id",
@@ -108,7 +108,7 @@ def get_ex02_atom_dataframe() -> DataFrame:
 
 
 def get_ex02_atom_csv() -> str:
-    return """healer_id,acct_id,group_id,team_id,awardee_id,parent_road
+    return """healer_name,acct_name,group_id,team_id,awardee_id,parent_road
 ;yao4,sue1,;swim1,;team5,aw1,accord;casa
 ;yao3,sue1,;swim1,;team4,aw1,accord;casa;clean
 ;yao4,sue1,;swim2,;team5,aw1,accord;casa

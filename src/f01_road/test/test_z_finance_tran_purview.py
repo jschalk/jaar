@@ -309,7 +309,7 @@ def test_PurviewLog_Exists():
 
     # THEN
     assert x_purviewlog
-    assert not x_purviewlog.owner_id
+    assert not x_purviewlog.owner_name
     assert not x_purviewlog.episodes
     assert not x_purviewlog._sum_purviewepisode_quota
     assert not x_purviewlog._sum_acct_purviews
@@ -326,7 +326,7 @@ def test_purviewlog_shop_ReturnsObj():
 
     # THEN
     assert x_purviewlog
-    assert x_purviewlog.owner_id == sue_str
+    assert x_purviewlog.owner_name == sue_str
     assert x_purviewlog.episodes == {}
     assert not x_purviewlog._sum_purviewepisode_quota
     assert x_purviewlog._sum_acct_purviews == {}
@@ -475,7 +475,7 @@ def test_PurviewLog_get_headers_ReturnsObj():
     sue_headers_list = sue_purviewlog.get_headers()
 
     # THEN
-    assert sue_headers_list == ["owner_id", "time_int", quota_str()]
+    assert sue_headers_list == ["owner_name", "time_int", quota_str()]
 
 
 def test_PurviewLog_get_dict_ReturnsObj_Scenario0():
@@ -494,7 +494,7 @@ def test_PurviewLog_get_dict_ReturnsObj_Scenario0():
 
     # THEN
     assert sue_episodes_dict == {
-        "owner_id": sue_str,
+        "owner_name": sue_str,
         "episodes": {
             x4_time_int: {quota_str(): x4_quota, "time_int": x4_time_int},
             x7_time_int: {quota_str(): x7_quota, "time_int": x7_time_int},
@@ -507,14 +507,14 @@ def test_get_purviewlog_from_dict_ReturnsObj_Scenario0():
     sue_str = "Sue"
     sue_purviewlog = purviewlog_shop(sue_str)
     sue_episodes_dict = sue_purviewlog.get_dict()
-    assert sue_episodes_dict == {"owner_id": sue_str, "episodes": {}}
+    assert sue_episodes_dict == {"owner_name": sue_str, "episodes": {}}
 
     # WHEN
     x_purviewlog = get_purviewlog_from_dict(sue_episodes_dict)
 
     # THEN
     assert x_purviewlog
-    assert x_purviewlog.owner_id == sue_str
+    assert x_purviewlog.owner_name == sue_str
     assert x_purviewlog.episodes == {}
     assert x_purviewlog.episodes == sue_purviewlog.episodes
     assert x_purviewlog == sue_purviewlog
@@ -532,7 +532,7 @@ def test_get_purviewlog_from_dict_ReturnsObj_Scenario1():
     sue_purviewlog.add_episode(x7_time_int, x7_quota)
     sue_episodes_dict = sue_purviewlog.get_dict()
     assert sue_episodes_dict == {
-        "owner_id": sue_str,
+        "owner_name": sue_str,
         "episodes": {
             x4_time_int: {"time_int": x4_time_int, quota_str(): x4_quota},
             x7_time_int: {"time_int": x7_time_int, quota_str(): x7_quota},
@@ -544,7 +544,7 @@ def test_get_purviewlog_from_dict_ReturnsObj_Scenario1():
 
     # THEN
     assert x_purviewlog
-    assert x_purviewlog.owner_id == sue_str
+    assert x_purviewlog.owner_name == sue_str
     assert x_purviewlog.get_episode(x4_time_int) != None
     assert x_purviewlog.get_episode(x7_time_int) != None
     assert x_purviewlog.episodes == sue_purviewlog.episodes
@@ -568,7 +568,7 @@ def test_get_purviewlog_from_dict_ReturnsObj_Scenario2():
     sue_purviewlog.get_episode(x7_time_int).set_net_purview(zia_str, zia_net_purview)
     sue_episodes_dict = sue_purviewlog.get_dict()
     assert sue_episodes_dict == {
-        "owner_id": sue_str,
+        "owner_name": sue_str,
         "episodes": {
             x4_time_int: {"time_int": x4_time_int, quota_str(): x4_quota},
             x7_time_int: {
@@ -584,7 +584,7 @@ def test_get_purviewlog_from_dict_ReturnsObj_Scenario2():
 
     # THEN
     assert x_purviewlog
-    assert x_purviewlog.owner_id == sue_str
+    assert x_purviewlog.owner_name == sue_str
     assert x_purviewlog.get_episode(x4_time_int) != None
     assert x_purviewlog.get_episode(x7_time_int) != None
     assert x_purviewlog.get_episode(x7_time_int)._net_purviews != {}
@@ -611,7 +611,7 @@ def test_PurviewLog_get_tranbook_ReturnsObj():
     sue_purviewlog.get_episode(x7_time_int).set_net_purview(zia_str, zia_net_purview)
     sue_episodes_dict = sue_purviewlog.get_dict()
     assert sue_episodes_dict == {
-        "owner_id": sue_str,
+        "owner_name": sue_str,
         "episodes": {
             x4_time_int: {
                 "time_int": x4_time_int,

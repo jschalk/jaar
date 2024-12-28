@@ -1,7 +1,7 @@
 from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import bud_acctunit_str, bud_acct_membership_str
 from src.f04_gift.atom import atom_delete, atomunit_shop
-from src.f04_gift.atom_config import acct_id_str, group_id_str
+from src.f04_gift.atom_config import acct_name_str, group_id_str
 from src.f04_gift.delta import deltaunit_shop, sift_deltaunit
 
 
@@ -17,11 +17,11 @@ def test_sift_deltaunit_ReturnsObjWithoutUnecessaryDELETE_bud_acctunit():
 
     accts_deltaunit = deltaunit_shop()
     bob_atom = atomunit_shop(bud_acctunit_str(), atom_delete())
-    bob_atom.set_arg(acct_id_str(), bob_str)
+    bob_atom.set_arg(acct_name_str(), bob_str)
     yao_atom = atomunit_shop(bud_acctunit_str(), atom_delete())
-    yao_atom.set_arg(acct_id_str(), yao_str)
+    yao_atom.set_arg(acct_name_str(), yao_str)
     zia_atom = atomunit_shop(bud_acctunit_str(), atom_delete())
-    zia_atom.set_arg(acct_id_str(), zia_str)
+    zia_atom.set_arg(acct_name_str(), zia_str)
     accts_deltaunit.set_atomunit(bob_atom)
     accts_deltaunit.set_atomunit(yao_atom)
     accts_deltaunit.set_atomunit(zia_atom)
@@ -54,13 +54,13 @@ def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_acct_membership():
 
     accts_deltaunit = deltaunit_shop()
     bob_run_atom = atomunit_shop(bud_acct_membership_str(), atom_delete())
-    bob_run_atom.set_arg(acct_id_str(), bob_str)
+    bob_run_atom.set_arg(acct_name_str(), bob_str)
     bob_run_atom.set_arg(group_id_str(), run_str)
     yao_run_atom = atomunit_shop(bud_acct_membership_str(), atom_delete())
-    yao_run_atom.set_arg(acct_id_str(), yao_str)
+    yao_run_atom.set_arg(acct_name_str(), yao_str)
     yao_run_atom.set_arg(group_id_str(), run_str)
     zia_run_atom = atomunit_shop(bud_acct_membership_str(), atom_delete())
-    zia_run_atom.set_arg(acct_id_str(), zia_str)
+    zia_run_atom.set_arg(acct_name_str(), zia_str)
     zia_run_atom.set_arg(group_id_str(), run_str)
     accts_deltaunit.set_atomunit(bob_run_atom)
     accts_deltaunit.set_atomunit(yao_run_atom)

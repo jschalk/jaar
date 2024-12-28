@@ -34,7 +34,7 @@ def test_DealUnit_generate_final_bud_Sets_final_BudFile(env_dir_setup_cleanup):
     # THEN
     example_bud = budunit_shop(sue_str, accord_str)
     assert sue_final._deal_id == example_bud._deal_id
-    assert sue_final._owner_id == example_bud._owner_id
+    assert sue_final._owner_name == example_bud._owner_name
 
 
 def test_DealUnit_generate_final_bud_ReturnsRegeneratedObj(env_dir_setup_cleanup):

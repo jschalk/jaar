@@ -5,31 +5,31 @@ from dataclasses import dataclass
 
 @dataclass
 class HealerLink:
-    _healer_ids: set[GroupID]
+    _healer_names: set[GroupID]
 
-    def set_healer_id(self, x_healer_id: GroupID):
-        self._healer_ids.add(x_healer_id)
+    def set_healer_name(self, x_healer_name: GroupID):
+        self._healer_names.add(x_healer_name)
 
-    def healer_id_exists(self, x_healer_id: GroupID) -> bool:
-        return x_healer_id in self._healer_ids
+    def healer_name_exists(self, x_healer_name: GroupID) -> bool:
+        return x_healer_name in self._healer_names
 
-    def any_healer_id_exists(self) -> bool:
-        return len(self._healer_ids) > 0
+    def any_healer_name_exists(self) -> bool:
+        return len(self._healer_names) > 0
 
-    def del_healer_id(self, x_healer_id: GroupID):
-        self._healer_ids.remove(x_healer_id)
+    def del_healer_name(self, x_healer_name: GroupID):
+        self._healer_names.remove(x_healer_name)
 
     def get_dict(self):
-        return {"healerlink_healer_ids": list(self._healer_ids)}
+        return {"healerlink_healer_names": list(self._healer_names)}
 
 
-def healerlink_shop(_healer_ids: set[GroupID] = None) -> HealerLink:
-    return HealerLink(_healer_ids=get_empty_set_if_None(_healer_ids))
+def healerlink_shop(_healer_names: set[GroupID] = None) -> HealerLink:
+    return HealerLink(_healer_names=get_empty_set_if_None(_healer_names))
 
 
 def healerlink_get_from_dict(x_dict: dict[str, set]) -> HealerLink:
     x_healerlink = healerlink_shop()
-    if x_dict.get("healerlink_healer_ids") is not None:
-        for x_healer_id in x_dict.get("healerlink_healer_ids"):
-            x_healerlink.set_healer_id(x_healer_id=x_healer_id)
+    if x_dict.get("healerlink_healer_names") is not None:
+        for x_healer_name in x_dict.get("healerlink_healer_names"):
+            x_healerlink.set_healer_name(x_healer_name=x_healer_name)
     return x_healerlink

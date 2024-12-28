@@ -1,14 +1,14 @@
 {
     "deal_cashbook": {
         "jkeys": {
-            "acct_id": {
-                "jaar_type": "AcctID"
+            "acct_name": {
+                "jaar_type": "AcctName"
             },
             "deal_id": {
                 "jaar_type": "IdeaUnit"
             },
-            "owner_id": {
-                "jaar_type": "AcctID"
+            "owner_name": {
+                "jaar_type": "AcctName"
             },
             "time_int": {
                 "jaar_type": "TimeLinePoint"
@@ -22,14 +22,14 @@
     },
     "deal_purview_episode": {
         "jkeys": {
-            "acct_id": {
-                "jaar_type": "AcctID"
+            "acct_name": {
+                "jaar_type": "AcctName"
             },
             "deal_id": {
                 "jaar_type": "IdeaUnit"
             },
-            "owner_id": {
-                "jaar_type": "AcctID"
+            "owner_name": {
+                "jaar_type": "AcctName"
             },
             "time_int": {
                 "jaar_type": "TimeLinePoint"

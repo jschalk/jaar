@@ -1,9 +1,9 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
-    acct_id_str,
-    face_id_str,
+    acct_name_str,
+    face_name_str,
     deal_id_str,
-    owner_id_str,
+    owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
@@ -23,11 +23,11 @@ def test_bow_inx_event_bricks_to_aft_faces_Scenario0(env_dir_setup_cleanup):
     yao_inx = "Yao"
     event3 = 3
     br00011_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
     ]
     accord23_str = "accord23"
     sue0 = [sue_inx, event3, accord23_str, bob_inx, bob_inx]
@@ -66,11 +66,11 @@ def test_bow_inx_event_bricks_to_aft_faces_Scenario1(env_dir_setup_cleanup):
     event3 = 3
     event7 = 7
     br00011_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
     ]
     accord23_str = "accord23"
     sue0 = [sue_inx, event3, accord23_str, bob_inx, bob_inx]

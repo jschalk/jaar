@@ -7,7 +7,7 @@ def get_bud_acctunits_dataframe(x_bud: BudUnit) -> DataFrame:
     if x_bud._accts == {}:
         return DataFrame(
             columns=[
-                "acct_id",
+                "acct_name",
                 "credit_belief",
                 "debtit_belief",
                 "_fund_give",
@@ -27,7 +27,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
     if agenda_dict == {}:
         return DataFrame(
             columns=[
-                "owner_id",
+                "owner_name",
                 "fund_ratio",
                 "_lx",
                 "_parent_road",
@@ -42,7 +42,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
     x_item_list = []
     for x_item in agenda_dict.values():
         item_dict = {
-            "owner_id": x_bud._owner_id,
+            "owner_name": x_bud._owner_name,
             "fund_ratio": x_item._fund_ratio,
             "_lx": x_item._lx,
             "_parent_road": x_item._parent_road,

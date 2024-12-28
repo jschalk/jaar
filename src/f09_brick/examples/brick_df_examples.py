@@ -29,16 +29,20 @@ def get_ex1_br00000_df() -> DataFrame:
 
 def get_ex1_br00001_df() -> DataFrame:
     """brick_format_00001_deal_purview_episode_v0_0_0
-    acct_id,deal_id,owner_id,quota,time_int"""
-    x_df = DataFrame(columns=["acct_id", "deal_id", "owner_id", "quota", "time_int"])
+    acct_name,deal_id,owner_name,quota,time_int"""
+    x_df = DataFrame(
+        columns=["acct_name", "deal_id", "owner_name", "quota", "time_int"]
+    )
     x_df.loc[0] = ["Bob", ACCORD23_STR, "Sue", 445, 777]
     return x_df
 
 
 def get_ex1_br00002_df() -> DataFrame:
     """brick_format_00002_deal_cashbook_v0_0_0
-    acct_id,amount,deal_id,owner_id,time_int"""
-    x_df = DataFrame(columns=["acct_id", "amount", "deal_id", "owner_id", "time_int"])
+    acct_name,amount,deal_id,owner_name,time_int"""
+    x_df = DataFrame(
+        columns=["acct_name", "amount", "deal_id", "owner_name", "time_int"]
+    )
     x_df.loc[0] = ["Bob", 888, ACCORD23_STR, "Zia", 777]
     return x_df
 
@@ -132,8 +136,10 @@ def get_ex2_br00000_df() -> DataFrame:
 
 def get_ex2_br00001_df() -> DataFrame:
     """brick_format_00001_deal_purview_episode_v0_0_0
-    acct_id,deal_id,owner_id,quota,time_int"""
-    x_df = DataFrame(columns=["acct_id", "deal_id", "owner_id", "quota", "time_int"])
+    acct_name,deal_id,owner_name,quota,time_int"""
+    x_df = DataFrame(
+        columns=["acct_name", "deal_id", "owner_name", "quota", "time_int"]
+    )
     x_df.loc[0] = ["Bob", ACCORD23_STR, "Sue", 445, 777]
     x_df.loc[1] = ["Yao", ACCORD23_STR, "Bob", 332, 999]
     x_df.loc[2] = ["Bob", ACCORD23_STR, "Yao", 700, 222]
@@ -144,8 +150,10 @@ def get_ex2_br00001_df() -> DataFrame:
 
 def get_ex2_br00002_df() -> DataFrame:
     """brick_format_00002_deal_cashbook_v0_0_0
-    acct_id,amount,deal_id,owner_id,time_int"""
-    x_df = DataFrame(columns=["acct_id", "amount", "deal_id", "owner_id", "time_int"])
+    acct_name,amount,deal_id,owner_name,time_int"""
+    x_df = DataFrame(
+        columns=["acct_name", "amount", "deal_id", "owner_name", "time_int"]
+    )
     x_df.loc[0] = ["Bob", 888, ACCORD23_STR, "Zia", 777]
     x_df.loc[1] = ["Zia", 234, ACCORD23_STR, "Sue", 999]
     x_df.loc[2] = ["Zia", 888, ACCORD23_STR, "Bob", 777]

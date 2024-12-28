@@ -46,14 +46,14 @@ def test_BudUnit_set_item_CorrectlySets_bud_deal_id_AND_fund_coin():
 def test_bud_set_deal_id_CorrectlySetsAttr():
     # ESTABLISH
     yao_str = "Yao"
-    yao_bud = budunit_shop(_owner_id=yao_str)
+    yao_bud = budunit_shop(_owner_name=yao_str)
     casa_str = "casa"
     old_casa_road = yao_bud.make_l1_road(casa_str)
     swim_str = "swim"
     old_swim_road = yao_bud.make_road(old_casa_road, swim_str)
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=old_casa_road)
-    assert yao_bud._owner_id == yao_str
+    assert yao_bud._owner_name == yao_str
     assert yao_bud._itemroot._lx == yao_bud._deal_id
     casa_item = yao_bud.get_item_obj(old_casa_road)
     assert casa_item._parent_road == yao_bud._deal_id

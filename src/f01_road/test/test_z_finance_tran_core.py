@@ -561,7 +561,7 @@ def test_TranBook_get_accts_headers_ReturnsObj():
     accord23_tranbook = tranbook_shop(accord23_str)
 
     # WHEN / THEN
-    assert accord23_tranbook._get_accts_headers() == ["acct_id", "net_amount"]
+    assert accord23_tranbook._get_accts_headers() == ["acct_name", "net_amount"]
 
 
 def test_TranBook_get_accts_csv_ReturnsObj():
@@ -596,7 +596,7 @@ def test_TranBook_get_accts_csv_ReturnsObj():
 
     # THEN
     assert accord23_accts_net_csv
-    example_csv = f"""acct_id,net_amount
+    example_csv = f"""acct_name,net_amount
 {bob_str},{t55_bob_amount}
 {yao_str},{t55_yao_amount + t66_yao_amount + t77_yao_amount}
 """

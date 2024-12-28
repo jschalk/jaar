@@ -1,10 +1,10 @@
 from src.f01_road.road import create_road
 from src.f04_gift.atom_config import (
-    acct_id_str,
+    acct_name_str,
     deal_id_str,
     credit_belief_str,
     base_str,
-    type_AcctID_str,
+    type_AcctName_str,
 )
 from src.f08_pidgin.map import acctmap_shop
 from src.f08_pidgin.pidgin import pidginunit_shop
@@ -28,29 +28,31 @@ def test_get_dataframe_pidginable_columns_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     x_dt = DataFrame()
     assert get_dataframe_pidginable_columns(x_dt) == set()
-    x_dt = DataFrame(columns=[acct_id_str()])
-    assert get_dataframe_pidginable_columns(x_dt) == {acct_id_str()}
-    x_dt = DataFrame(columns=[acct_id_str(), credit_belief_str()])
-    assert get_dataframe_pidginable_columns(x_dt) == {acct_id_str()}
-    x_dt = DataFrame(columns=[base_str(), acct_id_str(), credit_belief_str()])
-    assert get_dataframe_pidginable_columns(x_dt) == {acct_id_str(), base_str()}
-    x_dt = DataFrame(columns=["calc_swim", acct_id_str(), credit_belief_str()])
-    assert get_dataframe_pidginable_columns(x_dt) == {acct_id_str()}
+    x_dt = DataFrame(columns=[acct_name_str()])
+    assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str()}
+    x_dt = DataFrame(columns=[acct_name_str(), credit_belief_str()])
+    assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str()}
+    x_dt = DataFrame(columns=[base_str(), acct_name_str(), credit_belief_str()])
+    assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str(), base_str()}
+    x_dt = DataFrame(columns=["calc_swim", acct_name_str(), credit_belief_str()])
+    assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str()}
 
 
-def test_translate_single_column_dataframe_ReturnsObj_Scenario0_AcctID_EmptyDataFrame():
+def test_translate_single_column_dataframe_ReturnsObj_Scenario0_AcctName_EmptyDataFrame():
     # ESTABLISH
-    acct_id_mapunit = acctmap_shop()
-    empty_dt = DataFrame(columns=[acct_id_str()])
+    acct_name_mapunit = acctmap_shop()
+    empty_dt = DataFrame(columns=[acct_name_str()])
 
     # WHEN
-    gen_dt = translate_single_column_dataframe(empty_dt, acct_id_mapunit, acct_id_str())
+    gen_dt = translate_single_column_dataframe(
+        empty_dt, acct_name_mapunit, acct_name_str()
+    )
 
     # THEN
     pandas_assert_frame_equal(gen_dt, empty_dt)
 
 
-def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5rows():
+def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctName_5rows():
     # ESTABLISH
     xio_otx = "Xio"
     sue_otx = "Sue"
@@ -59,11 +61,11 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_id_mapunit = acctmap_shop()
-    acct_id_mapunit.set_otx2inx(xio_otx, xio_inx)
-    acct_id_mapunit.set_otx2inx(sue_otx, sue_inx)
-    acct_id_mapunit.set_otx2inx(bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[acct_id_str()])
+    acct_name_mapunit = acctmap_shop()
+    acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
+    acct_name_mapunit.set_otx2inx(sue_otx, sue_inx)
+    acct_name_mapunit.set_otx2inx(bob_otx, bob_inx)
+    otx_dt = DataFrame(columns=[acct_name_str()])
     otx_dt.loc[0] = [zia_otx]
     otx_dt.loc[1] = [sue_otx]
     otx_dt.loc[2] = [bob_otx]
@@ -73,13 +75,13 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5
     print(f"{otx_dt=}")
 
     # WHEN
-    translate_single_column_dataframe(otx_dt, acct_id_mapunit, acct_id_str())
+    translate_single_column_dataframe(otx_dt, acct_name_mapunit, acct_name_str())
 
     # THEN
-    assert otx_dt.iloc[0][acct_id_str()] == zia_otx
-    assert otx_dt.iloc[1][acct_id_str()] == sue_inx
+    assert otx_dt.iloc[0][acct_name_str()] == zia_otx
+    assert otx_dt.iloc[1][acct_name_str()] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[acct_id_str()])
+    inx_dt = DataFrame(columns=[acct_name_str()])
     inx_dt.loc[0] = zia_otx
     inx_dt.loc[1] = sue_inx
     inx_dt.loc[2] = bob_inx
@@ -90,7 +92,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctID_5
     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5rowsMultipleColumns():
+def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctName_5rowsMultipleColumns():
     # ESTABLISH
     xio_otx = "Xio"
     sue_otx = "Sue"
@@ -99,11 +101,11 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_id_mapunit = acctmap_shop()
-    acct_id_mapunit.set_otx2inx(xio_otx, xio_inx)
-    acct_id_mapunit.set_otx2inx(sue_otx, sue_inx)
-    acct_id_mapunit.set_otx2inx(bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[deal_id_str(), acct_id_str(), credit_belief_str()])
+    acct_name_mapunit = acctmap_shop()
+    acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
+    acct_name_mapunit.set_otx2inx(sue_otx, sue_inx)
+    acct_name_mapunit.set_otx2inx(bob_otx, bob_inx)
+    otx_dt = DataFrame(columns=[deal_id_str(), acct_name_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -113,13 +115,13 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5
     print(f"{otx_dt=}")
 
     # WHEN
-    translate_single_column_dataframe(otx_dt, acct_id_mapunit, acct_id_str())
+    translate_single_column_dataframe(otx_dt, acct_name_mapunit, acct_name_str())
 
     # THEN
-    assert otx_dt.iloc[0][acct_id_str()] == zia_otx
-    assert otx_dt.iloc[1][acct_id_str()] == sue_inx
+    assert otx_dt.iloc[0][acct_name_str()] == zia_otx
+    assert otx_dt.iloc[1][acct_name_str()] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[deal_id_str(), acct_id_str(), credit_belief_str()])
+    inx_dt = DataFrame(columns=[deal_id_str(), acct_name_str(), credit_belief_str()])
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_inx, 12]
     inx_dt.loc[2] = ["ZZ", bob_inx, 12]
@@ -130,13 +132,13 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctID_5
     pandas_assert_frame_equal(otx_dt, inx_dt)
 
 
-def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
+def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctName():
     # ESTABLISH
     xio_otx = "Xio"
     sue_otx = "Sue"
     bob_otx = "Bob"
     zia_otx = "Zia"
-    otx_dt = DataFrame(columns=[deal_id_str(), acct_id_str(), credit_belief_str()])
+    otx_dt = DataFrame(columns=[deal_id_str(), acct_name_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -149,10 +151,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     translate_all_columns_dataframe(otx_dt, None)
 
     # THEN
-    assert otx_dt.iloc[0][acct_id_str()] == zia_otx
-    assert otx_dt.iloc[1][acct_id_str()] == sue_otx
+    assert otx_dt.iloc[0][acct_name_str()] == zia_otx
+    assert otx_dt.iloc[1][acct_name_str()] == sue_otx
     pandas_assert_frame_equal(otx_dt, old_otx_dt)
-    inx_dt = DataFrame(columns=[deal_id_str(), acct_id_str(), credit_belief_str()])
+    inx_dt = DataFrame(columns=[deal_id_str(), acct_name_str(), credit_belief_str()])
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_otx, 12]
     inx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -163,7 +165,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctID():
     pandas_assert_frame_equal(otx_dt, inx_dt)
 
 
-def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctID():
+def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctName():
     # ESTABLISH
     yao_str = "Yao"
     xio_otx = "Xio"
@@ -174,10 +176,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctID():
     sue_inx = "Suita"
     bob_inx = "Bobita"
     yao_pidginunit = pidginunit_shop(yao_str)
-    yao_pidginunit.set_otx2inx(type_AcctID_str(), xio_otx, xio_inx)
-    yao_pidginunit.set_otx2inx(type_AcctID_str(), sue_otx, sue_inx)
-    yao_pidginunit.set_otx2inx(type_AcctID_str(), bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[deal_id_str(), acct_id_str(), credit_belief_str()])
+    yao_pidginunit.set_otx2inx(type_AcctName_str(), xio_otx, xio_inx)
+    yao_pidginunit.set_otx2inx(type_AcctName_str(), sue_otx, sue_inx)
+    yao_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob_inx)
+    otx_dt = DataFrame(columns=[deal_id_str(), acct_name_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -190,10 +192,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctID():
     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
-    assert otx_dt.iloc[0][acct_id_str()] == zia_otx
-    assert otx_dt.iloc[1][acct_id_str()] == sue_inx
+    assert otx_dt.iloc[0][acct_name_str()] == zia_otx
+    assert otx_dt.iloc[1][acct_name_str()] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[deal_id_str(), acct_id_str(), credit_belief_str()])
+    inx_dt = DataFrame(columns=[deal_id_str(), acct_name_str(), credit_belief_str()])
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_inx, 12]
     inx_dt.loc[2] = ["ZZ", bob_inx, 12]

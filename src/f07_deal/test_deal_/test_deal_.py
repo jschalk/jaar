@@ -303,7 +303,7 @@ def test_DealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
     sue_hubunit = hubunit_shop(
         deals_dir=accord_deal.deals_dir,
         deal_id=accord_deal.deal_id,
-        owner_id=sue_str,
+        owner_name=sue_str,
         keep_road=None,
         bridge=accord_deal.bridge,
         fund_coin=accord_deal.fund_coin,
@@ -312,7 +312,7 @@ def test_DealUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
     yao_hubunit = hubunit_shop(
         deals_dir=accord_deal.deals_dir,
         deal_id=accord_deal.deal_id,
-        owner_id=yao_str,
+        owner_name=yao_str,
         keep_road=None,
         bridge=accord_deal.bridge,
         fund_coin=accord_deal.fund_coin,

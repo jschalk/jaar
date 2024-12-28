@@ -69,15 +69,15 @@ def add_river_col(fig, num_dict: dict, point_amt, x0, y0, c_len):
     row_y1 = row_y0 - c_len
     row_len = row_y1 - row_y0
     num_sum = sum(num_dict.values())
-    ratio_dict = {acct_id: acctx / num_sum for acct_id, acctx in num_dict.items()}
+    ratio_dict = {acct_name: acctx / num_sum for acct_name, acctx in num_dict.items()}
     for grantee in num_dict:
         new_y1 = row_y0 + row_len * ratio_dict.get(grantee)
         add_column_rect(fig, x0, row_y0, x0 + 1, new_y1, grantee, None, point_amt)
         row_y0 = new_y1
 
 
-def add_grants_top(fig, grants_dict: dict, t_y0: int, healer_id, point_amt):
-    grants_str = f"{healer_id} Grants"
+def add_grants_top(fig, grants_dict: dict, t_y0: int, healer_name, point_amt):
+    grants_str = f"{healer_name} Grants"
     dy0 = t_y0 - 1.2
     dy1 = t_y0 - 1.6
     dy2 = t_y0 - 2.2
@@ -91,8 +91,8 @@ def add_grants_top(fig, grants_dict: dict, t_y0: int, healer_id, point_amt):
     add_rect_arrow(fig, 1.75, ey1, 1.5, ey0, blue_str())
 
 
-def add_taxs_bottom(fig, taxs_dict, b_y0: int, healer_id: str, point_amt: int):
-    taxs_str = f"{healer_id} Taxs"
+def add_taxs_bottom(fig, taxs_dict, b_y0: int, healer_name: str, point_amt: int):
+    taxs_str = f"{healer_name} Taxs"
     cy0 = b_y0 + 1.2
     cy1 = b_y0 + 1.6
     cy2 = b_y0 + 2.2
@@ -111,12 +111,12 @@ def add_taxs_column(
     taxs_dict,
     b_x0: int,
     b_y0: int,
-    healer_id: str,
+    healer_name: str,
     point_amt: int,
     col_y0: float,
     col_len: float,
 ):
-    taxs_str = f"{healer_id} Taxs"
+    taxs_str = f"{healer_name} Taxs"
     cx0 = b_x0 - 0.2
     cx1 = b_x0 - 0.8
     cx2 = b_x0 - 0.4
@@ -298,9 +298,9 @@ def get_protect_structures0_fig(graphics_bool: bool) -> plotly_Figure:
         m_y0 = 8
         m_y1 = -3
         add_grants_top(
-            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), point_amt=mm
+            fig, grants1_dict(), t_y0=m_y0, healer_name=sue_str(), point_amt=mm
         )
-        add_taxs_bottom(fig, taxs1_dict(), m_y1, healer_id=sue_str(), point_amt=mm)
+        add_taxs_bottom(fig, taxs1_dict(), m_y1, healer_name=sue_str(), point_amt=mm)
         add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
         fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
         fig.add_trace(
@@ -332,9 +332,9 @@ def get_protect_structures1_fig(graphics_bool: bool) -> plotly_Figure:
         m_y0 = 8
         m_y1 = -5
         add_grants_top(
-            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), point_amt=mm
+            fig, grants1_dict(), t_y0=m_y0, healer_name=sue_str(), point_amt=mm
         )
-        add_taxs_bottom(fig, taxs1_dict(), m_y1, healer_id=sue_str(), point_amt=mm)
+        add_taxs_bottom(fig, taxs1_dict(), m_y1, healer_name=sue_str(), point_amt=mm)
 
         y_mid = m_y1 + (m_y0 - m_y1) / 2
         add_rect_arrow(fig, 2, y_mid - 1.5, 2, y_mid + 1.5, green_str())
@@ -371,7 +371,7 @@ def get_protect_structures2_fig(graphics_bool: bool) -> plotly_Figure:
         m_y0 = 8
         m_y1 = -7
         add_grants_top(
-            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), point_amt=mm
+            fig, grants1_dict(), t_y0=m_y0, healer_name=sue_str(), point_amt=mm
         )
         col_y0 = 4
         col_len = 11
@@ -451,7 +451,7 @@ def get_protect_structures3_fig(graphics_bool: bool) -> plotly_Figure:
         m_y0 = 8
         m_y1 = -7
         add_grants_top(
-            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), point_amt=mm
+            fig, grants1_dict(), t_y0=m_y0, healer_name=sue_str(), point_amt=mm
         )
         col_y0 = 2
         col_len = 9
@@ -530,7 +530,7 @@ def get_protect_structures4_fig(graphics_bool: bool) -> plotly_Figure:
         m_y0 = 8
         m_y1 = -7
         add_grants_top(
-            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), point_amt=mm
+            fig, grants1_dict(), t_y0=m_y0, healer_name=sue_str(), point_amt=mm
         )
         tax_x0 = -1
         col_y0 = 2
@@ -581,7 +581,7 @@ def get_protect_structures5_fig(graphics_bool: bool) -> plotly_Figure:
 
         m_y0 = 8
         add_grants_top(
-            fig, grants1_dict(), t_y0=m_y0, healer_id=sue_str(), point_amt=mm
+            fig, grants1_dict(), t_y0=m_y0, healer_name=sue_str(), point_amt=mm
         )
 
         tax_x0 = -1

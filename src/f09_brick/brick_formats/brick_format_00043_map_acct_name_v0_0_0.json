@@ -3,19 +3,19 @@
         "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "inx_bridge": {
             "otx_key": false
         },
-        "inx_acct_id": {
+        "inx_acct_name": {
             "otx_key": false
         },
         "otx_bridge": {
             "otx_key": false
         },
-        "otx_acct_id": {
+        "otx_acct_name": {
             "otx_key": true
         },
         "unknown_word": {
@@ -24,6 +24,6 @@
     },
     "brick_number": "br00043",
     "categorys": [
-        "map_acct_id"
+        "map_acct_name"
     ]
 }

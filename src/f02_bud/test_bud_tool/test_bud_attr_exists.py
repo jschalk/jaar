@@ -36,7 +36,7 @@ def test_bud_acctunit_exists_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_bud = budunit_shop("Sue")
-    jkeys = {"acct_id": yao_str}
+    jkeys = {"acct_name": yao_str}
 
     # WHEN / THEN
     assert not bud_acctunit_exists(None, {})
@@ -54,7 +54,7 @@ def test_bud_acct_membership_exists_ReturnsObj():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    jkeys = {"acct_id": yao_str, "group_id": swim_str}
+    jkeys = {"acct_name": yao_str, "group_id": swim_str}
 
     # WHEN / THEN
     assert not bud_acct_membership_exists(None, {})
@@ -262,9 +262,9 @@ def test_bud_item_healerlink_exists_ReturnsObj():
     clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud._deal_id
     swim_str = "Swim"
-    root_jkeys = {"road": root_road, "healer_id": swim_str}
-    casa_jkeys = {"road": casa_road, "healer_id": swim_str}
-    clean_jkeys = {"road": clean_road, "healer_id": swim_str}
+    root_jkeys = {"road": root_road, "healer_name": swim_str}
+    casa_jkeys = {"road": casa_road, "healer_name": swim_str}
+    clean_jkeys = {"road": clean_road, "healer_name": swim_str}
 
     # WHEN / THEN
     assert not bud_item_healerlink_exists(None, {})
@@ -274,7 +274,7 @@ def test_bud_item_healerlink_exists_ReturnsObj():
     assert not bud_item_healerlink_exists(sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud._itemroot.healerlink.set_healer_id(swim_str)
+    sue_bud._itemroot.healerlink.set_healer_name(swim_str)
 
     # THEN
     assert not bud_item_healerlink_exists(sue_bud, {})
@@ -324,7 +324,7 @@ def test_bud_attr_exists_ReturnsObj_bud_acctunit():
     # ESTABLISH
     yao_str = "Yao"
     sue_bud = budunit_shop("Sue")
-    x_jkeys = {"acct_id": yao_str}
+    x_jkeys = {"acct_name": yao_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(bud_acctunit_str(), None, {})
@@ -342,7 +342,7 @@ def test_bud_attr_exists_ReturnsObj_bud_acct_membership():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    x_jkeys = {"acct_id": yao_str, "group_id": swim_str}
+    x_jkeys = {"acct_name": yao_str, "group_id": swim_str}
     x_category = bud_acct_membership_str()
 
     # WHEN / THEN
@@ -553,9 +553,9 @@ def test_bud_attr_exists_ReturnsObj_bud_item_healerlink():
     root_road = sue_bud._deal_id
     swim_str = "Swim"
     x_category = bud_item_healerlink_str()
-    root_jkeys = {"road": root_road, "healer_id": swim_str}
-    casa_jkeys = {"road": casa_road, "healer_id": swim_str}
-    clean_jkeys = {"road": clean_road, "healer_id": swim_str}
+    root_jkeys = {"road": root_road, "healer_name": swim_str}
+    casa_jkeys = {"road": casa_road, "healer_name": swim_str}
+    clean_jkeys = {"road": clean_road, "healer_name": swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})
@@ -565,7 +565,7 @@ def test_bud_attr_exists_ReturnsObj_bud_item_healerlink():
     assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud._itemroot.healerlink.set_healer_id(swim_str)
+    sue_bud._itemroot.healerlink.set_healer_name(swim_str)
 
     # THEN
     assert not bud_attr_exists(x_category, sue_bud, {})

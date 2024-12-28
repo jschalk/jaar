@@ -75,7 +75,7 @@ def test_HubUnit_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     print(f"{sue_gift2_path=}")
     print(f"{sue_gift0_path=}")
     sue_giftunit = giftunit_shop(
-        owner_id=sue_str,
+        owner_name=sue_str,
         _gift_id=two_int,
         _atoms_dir=sue_hubunit.atoms_dir(),
         _gifts_dir=sue_hubunit.gifts_dir(),
@@ -103,7 +103,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_atoms_dir_IsWrong(
     sue_gift0_path = f"{sue_hubunit.gifts_dir()}/{six_filename}"
     print(f"{sue_gift0_path=}")
     sue_giftunit = giftunit_shop(
-        owner_id=sue_str,
+        owner_name=sue_str,
         _gift_id=x_gift_id,
         _atoms_dir="src/incorrect_directory",
         _gifts_dir=sue_hubunit.gifts_dir(),
@@ -128,7 +128,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_gifts_dir_IsWrong(
     sue_gift0_path = f"{sue_hubunit.gifts_dir()}/{six_filename}"
     print(f"{sue_gift0_path=}")
     sue_giftunit = giftunit_shop(
-        owner_id=sue_str,
+        owner_name=sue_str,
         _gift_id=x_gift_id,
         _atoms_dir=sue_hubunit.atoms_dir(),
         _gifts_dir="src/incorrect_directory",
@@ -143,7 +143,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_gifts_dir_IsWrong(
     )
 
 
-def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_owner_id_IsWrong(
+def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_owner_name_IsWrong(
     env_dir_setup_cleanup,
 ):
     sue_str = "Sue"
@@ -154,7 +154,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_owner_id_IsWrong(
     print(f"{sue_gift0_path=}")
     bob_str = "Bob"
     sue_giftunit = giftunit_shop(
-        owner_id=bob_str,
+        owner_name=bob_str,
         _gift_id=x_gift_id,
         _atoms_dir=sue_hubunit.atoms_dir(),
         _gifts_dir=sue_hubunit.gifts_dir(),
@@ -165,7 +165,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_owner_id_IsWrong(
         sue_hubunit.save_gift_file(sue_giftunit, correct_invalid_attrs=False)
     assert (
         str(excinfo.value)
-        == f"GiftUnit file cannot be saved because giftunit.owner_id is incorrect: {sue_giftunit.owner_id}. It must be {sue_str}."
+        == f"GiftUnit file cannot be saved because giftunit.owner_name is incorrect: {sue_giftunit.owner_name}. It must be {sue_str}."
     )
 
 
@@ -178,7 +178,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIf_replace_IsFalse(
     x_gift_id = 0
     six_filename = get_json_filename(x_gift_id)
     sue_giftunit = giftunit_shop(
-        owner_id=sue_str,
+        owner_name=sue_str,
         _gift_id=x_gift_id,
         _atoms_dir=sue_hubunit.atoms_dir(),
         _gifts_dir=sue_hubunit.gifts_dir(),
@@ -211,7 +211,7 @@ def test_HubUnit_validate_giftunit_ReturnsObjWithAttributesFixed(
 
     # WHEN
     invalid_sue_giftunit = giftunit_shop(
-        owner_id="Bob",
+        owner_name="Bob",
         _gift_id=sue_hubunit._get_next_gift_file_number() - 5,
         _atoms_dir=f"{sue_hubunit.keeps_dir()}/swimming",
         _gifts_dir=f"{sue_hubunit.keeps_dir()}/swimming",
@@ -223,7 +223,7 @@ def test_HubUnit_validate_giftunit_ReturnsObjWithAttributesFixed(
     assert valid_giftunit._gifts_dir == sue_hubunit.gifts_dir()
     assert valid_giftunit._gift_id == sue_hubunit._get_next_gift_file_number()
     correct_sue_giftunit = giftunit_shop(
-        owner_id=sue_str,
+        owner_name=sue_str,
         _gift_id=sue_hubunit._get_next_gift_file_number(),
         _atoms_dir=sue_hubunit.atoms_dir(),
         _gifts_dir=sue_hubunit.gifts_dir(),
@@ -245,7 +245,7 @@ def test_HubUnit_save_gift_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
 
     # WHEN
     invalid_sue_giftunit = giftunit_shop(
-        owner_id="Bob",
+        owner_name="Bob",
         _gift_id=sue_hubunit._get_next_gift_file_number() - 5,
         _atoms_dir=f"{sue_hubunit.keeps_dir()}/swimming",
         _gifts_dir=f"{sue_hubunit.keeps_dir()}/swimming",
@@ -269,11 +269,11 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhenNogiftFilesE
     sue_giftunit = sue_hubunit._default_giftunit()
 
     # THEN
-    assert sue_giftunit.owner_id == sue_str
+    assert sue_giftunit.owner_name == sue_str
     assert sue_giftunit._gift_id == init_gift_id()
     assert sue_giftunit._gift_id == 0
     assert sue_giftunit._gift_id == sue_hubunit._get_next_gift_file_number()
-    assert sue_giftunit.face_id is None
+    assert sue_giftunit.face_name is None
     assert sue_giftunit._atoms_dir == sue_hubunit.atoms_dir()
     assert sue_giftunit._gifts_dir == sue_hubunit.gifts_dir()
 
@@ -296,11 +296,11 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhengiftFilesExi
     sue_giftunit = sue_hubunit._default_giftunit()
 
     # THEN
-    assert sue_giftunit.owner_id == sue_str
+    assert sue_giftunit.owner_name == sue_str
     assert sue_giftunit._gift_id == init_gift_id() + 1
     assert sue_giftunit._gift_id == 1
     assert sue_giftunit._gift_id == sue_hubunit._get_next_gift_file_number()
-    assert sue_giftunit.face_id is None
+    assert sue_giftunit.face_name is None
     assert sue_giftunit._atoms_dir == sue_hubunit.atoms_dir()
     assert sue_giftunit._gifts_dir == sue_hubunit.gifts_dir()
 
@@ -327,9 +327,9 @@ def test_HubUnit_get_giftunit_ReturnsCorrectObjWhenFilesDoesExist(
     # THEN
     assert y0_giftunit is not None
     assert y1_giftunit is not None
-    assert yao_str in y0_giftunit.face_id
-    assert bob_str not in y0_giftunit.face_id
-    assert bob_str in y1_giftunit.face_id
+    assert yao_str in y0_giftunit.face_name
+    assert bob_str not in y0_giftunit.face_name
+    assert bob_str in y1_giftunit.face_name
 
 
 def test_HubUnit_get_giftunit_RaisesExceptionWhenFileDoesNotExist(
@@ -364,7 +364,7 @@ def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
     sue_hubunit = hubunit_shop(env_dir(), deal_id(), sue_str)
     six_int = 6
     sue_giftunit = giftunit_shop(
-        owner_id=sue_str,
+        owner_name=sue_str,
         _gift_id=six_int,
         _atoms_dir=sue_hubunit.atoms_dir(),
         _gifts_dir=sue_hubunit.gifts_dir(),
@@ -419,7 +419,7 @@ def test_HubUnit_save_gift_file_ReturnsValidObj(env_dir_setup_cleanup):
     sue2_giftunit = sue_2atomunits_giftunit()
     sue2_giftunit._atoms_dir = f"{sue_hubunit.keeps_dir()}/swimming"
     sue2_giftunit._gifts_dir = f"{sue_hubunit.keeps_dir()}/swimming"
-    sue2_giftunit.owner_id = "Bob"
+    sue2_giftunit.owner_name = "Bob"
     sue2_giftunit._gift_id = sue_hubunit._get_next_gift_file_number() - 5
     prev_sue2_giftunit = copy_deepcopy(sue2_giftunit)
 
@@ -442,7 +442,7 @@ def test_HubUnit_create_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     print(f"{sue_hubunit.gift_file_path(two_int)=}")
     print(f"{sue_hubunit.gift_file_path(three_int)=}")
     sue_giftunit = giftunit_shop(
-        owner_id=sue_str,
+        owner_name=sue_str,
         _gift_id=two_int,
         _atoms_dir=sue_hubunit.atoms_dir(),
         _gifts_dir=sue_hubunit.gifts_dir(),

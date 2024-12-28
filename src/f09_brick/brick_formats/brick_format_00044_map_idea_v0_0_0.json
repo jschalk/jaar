@@ -3,7 +3,7 @@
         "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "inx_idea": {

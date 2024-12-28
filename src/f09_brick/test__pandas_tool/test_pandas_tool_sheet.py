@@ -359,7 +359,7 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
 
 def test_if_nan_return_None_ReturnsObj(brick_env_setup_cleanup):
     # ESTABLISH
-    ex1_df = DataFrame([["yao", None]], columns=["face_id", "example_col"])
+    ex1_df = DataFrame([["yao", None]], columns=["face_name", "example_col"])
     ex1_sheet_name = "ex1"
     ex1_file_name = "ex1.xlsx"
     ex1_path = create_path(brick_deals_dir(), ex1_file_name)

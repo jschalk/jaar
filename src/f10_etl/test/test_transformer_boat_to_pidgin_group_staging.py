@@ -1,9 +1,9 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
-    face_id_str,
+    face_name_str,
     deal_id_str,
-    acct_id_str,
-    owner_id_str,
+    acct_name_str,
+    owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import (
     event_int_str,
@@ -34,11 +34,11 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario0_SingleBrick(
     x_boat_dir = get_test_etl_dir()
     br00115_file_path = create_path(x_boat_dir, "br00115.xlsx")
     br00115_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         otx_group_id_str(),
         inx_group_id_str(),
     ]
@@ -60,7 +60,7 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario0_SingleBrick(
     gen_group_df = pandas_read_excel(pidgin_path, sheet_name=group_staging_str)
     group_file_columns = [
         "src_brick",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
@@ -101,17 +101,17 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario1_MultipleBric
     x_boat_dir = get_test_etl_dir()
     br00115_file_path = create_path(x_boat_dir, "br00115.xlsx")
     br00115_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         otx_group_id_str(),
         inx_group_id_str(),
     ]
     br00042_file_path = create_path(x_boat_dir, "br00042.xlsx")
     br00042_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
@@ -143,7 +143,7 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario1_MultipleBric
     gen_group_df = pandas_read_excel(pidgin_path, sheet_name=group_staging_str)
     group_file_columns = [
         "src_brick",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
@@ -188,17 +188,17 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario2_WorldUnit_ev
     x_boat_dir = get_test_etl_dir()
     br00115_file_path = create_path(x_boat_dir, "br00115.xlsx")
     br00115_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         deal_id_str(),
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         otx_group_id_str(),
         inx_group_id_str(),
     ]
     br00042_file_path = create_path(x_boat_dir, "br00042.xlsx")
     br00042_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
@@ -230,7 +230,7 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario2_WorldUnit_ev
     gen_group_df = pandas_read_excel(pidgin_path, sheet_name=group_staging_str)
     group_file_columns = [
         "src_brick",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),

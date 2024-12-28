@@ -24,7 +24,7 @@ class BudTable(Base):
 class AcctUnitTable(Base):
     __tablename__ = "acctunit"
     uid = Column(Integer, primary_key=True)
-    acct_id = Column(String)
+    acct_name = Column(String)
     credit_belief = Column(Integer)
     debtit_belief = Column(Integer)
 
@@ -33,7 +33,7 @@ class MemberShipTable(Base):
     __tablename__ = "membership"
     uid = Column(Integer, primary_key=True)
     group_id = Column(String)
-    acct_id = Column(String)
+    acct_name = Column(String)
     credit_vote = Column(Integer)
     debtit_vote = Column(Integer)
 
@@ -94,7 +94,7 @@ class TeamLinkTable(Base):
 class HealerLinkTable(Base):
     __tablename__ = "healerlink"
     uid = Column(Integer, primary_key=True)
-    healer_id = Column(String)
+    healer_name = Column(String)
     road = Column(String)
 
 

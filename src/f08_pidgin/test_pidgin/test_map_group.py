@@ -15,7 +15,7 @@ def test_GroupMap_Exists():
     x_groupmap = GroupMap()
 
     # WHEN / THEN
-    assert not x_groupmap.face_id
+    assert not x_groupmap.face_name
     assert not x_groupmap.event_int
     assert not x_groupmap.otx2inx
     assert not x_groupmap.unknown_word
@@ -28,7 +28,7 @@ def test_groupmap_shop_ReturnsObj_scenario0_NoParameters():
     x_groupmap = groupmap_shop()
 
     # THEN
-    assert not x_groupmap.face_id
+    assert not x_groupmap.face_name
     assert x_groupmap.event_int == 0
     assert x_groupmap.otx2inx == {}
     assert x_groupmap.unknown_word == default_unknown_word_if_None()
@@ -49,7 +49,7 @@ def test_groupmap_shop_ReturnsObj_scenario1_WithParameters():
 
     # WHEN
     x_groupmap = groupmap_shop(
-        face_id=bob_str,
+        face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
         unknown_word=x_unknown_word,
@@ -58,7 +58,7 @@ def test_groupmap_shop_ReturnsObj_scenario1_WithParameters():
     )
 
     # THEN
-    assert x_groupmap.face_id == bob_str
+    assert x_groupmap.face_name == bob_str
     assert x_groupmap.event_int == event7
     assert x_groupmap.otx2inx == otx2inx
     assert x_groupmap.unknown_word == x_unknown_word
@@ -77,7 +77,7 @@ def test_groupmap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_fl
 
     # WHEN
     x_groupmap = groupmap_shop(
-        face_id=bob_str,
+        face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
         unknown_word=x_nan,
@@ -86,7 +86,7 @@ def test_groupmap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_fl
     )
 
     # THEN
-    assert x_groupmap.face_id == bob_str
+    assert x_groupmap.face_name == bob_str
     assert x_groupmap.event_int == event7
     assert x_groupmap.otx2inx == otx2inx
     assert x_groupmap.unknown_word == default_unknown_word_if_None()
@@ -302,7 +302,7 @@ def test_GroupMap_get_dict_ReturnsObj():
     x_groupmap = groupmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
-        face_id=sue_str,
+        face_name=sue_str,
     )
     x1_road_map_dict = {
         "otx_bridge": x_groupmap.otx_bridge,
@@ -310,7 +310,7 @@ def test_GroupMap_get_dict_ReturnsObj():
         "unknown_word": x_groupmap.unknown_word,
         "otx2inx": {},
         "event_int": x_groupmap.event_int,
-        "face_id": x_groupmap.face_id,
+        "face_name": x_groupmap.face_name,
     }
     assert x_groupmap.get_dict() == x1_road_map_dict
 
@@ -323,7 +323,7 @@ def test_GroupMap_get_dict_ReturnsObj():
         "unknown_word": x_groupmap.unknown_word,
         "otx2inx": {clean_otx: clean_inx},
         "event_int": x_groupmap.event_int,
-        "face_id": sue_str,
+        "face_name": sue_str,
     }
     assert x_groupmap.get_dict() == x2_road_map_dict
 
@@ -340,7 +340,7 @@ def test_GroupMap_get_json_ReturnsObj():
     x_groupmap = groupmap_shop(sue_str, otx_bridge=slash_otx_bridge)
     x1_road_map_json = f"""{{
   "event_int": 0,
-  "face_id": "{sue_str}",
+  "face_name": "{sue_str}",
   "inx_bridge": "{x_groupmap.inx_bridge}",
   "otx2inx": {{}},
   "otx_bridge": "{x_groupmap.otx_bridge}",
@@ -356,7 +356,7 @@ def test_GroupMap_get_json_ReturnsObj():
     # THEN
     x2_road_map_json = f"""{{
   "event_int": {event7},
-  "face_id": "{sue_str}",
+  "face_name": "{sue_str}",
   "inx_bridge": "{x_groupmap.inx_bridge}",
   "otx2inx": {{
     "{clean_otx}": "{clean_inx}"
@@ -383,7 +383,7 @@ def test_get_groupmap_from_dict_ReturnsObj():
     gen_groupmap = get_groupmap_from_dict(x_groupmap.get_dict())
 
     # THEN
-    assert gen_groupmap.face_id == x_groupmap.face_id
+    assert gen_groupmap.face_name == x_groupmap.face_name
     assert gen_groupmap.event_int == x_groupmap.event_int
     assert gen_groupmap.event_int == event7
     assert gen_groupmap == x_groupmap
@@ -517,7 +517,7 @@ def test_inherit_groupmap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_inherit_groupmap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_id():
+def test_inherit_groupmap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_name():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"

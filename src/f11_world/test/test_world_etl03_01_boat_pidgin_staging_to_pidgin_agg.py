@@ -1,11 +1,11 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_id_str
+from src.f04_gift.atom_config import face_name_str
 from src.f08_pidgin.pidgin_config import (
     event_int_str,
     inx_bridge_str,
     otx_bridge_str,
-    inx_acct_id_str,
-    otx_acct_id_str,
+    inx_acct_name_str,
+    otx_acct_name_str,
     inx_group_id_str,
     otx_group_id_str,
     inx_road_str,
@@ -37,10 +37,10 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     acct_agg_str = "acct_agg"
     acct_file_columns = [
         "src_brick",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
+        otx_acct_name_str(),
+        inx_acct_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -60,7 +60,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     group_agg_str = "group_agg"
     group_file_columns = [
         "src_brick",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
@@ -83,7 +83,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     road_agg_str = "road_agg"
     road_file_columns = [
         "src_brick",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_road_str(),
         inx_road_str(),
@@ -106,7 +106,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     idea_agg_str = "idea_agg"
     idea_file_columns = [
         "src_brick",
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_idea_str(),
         inx_idea_str(),
@@ -150,10 +150,10 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     gen_idea_agg_df = pandas_read_excel(pidgin_path, sheet_name=idea_agg_str)
 
     acct_file_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
-        otx_acct_id_str(),
-        inx_acct_id_str(),
+        otx_acct_name_str(),
+        inx_acct_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -167,7 +167,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     e1_acct_agg_df = DataFrame(e1_acct_rows, columns=acct_file_columns)
 
     group_file_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_group_id_str(),
         inx_group_id_str(),
@@ -183,7 +183,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     e1_group_agg_df = DataFrame(e1_group_rows, columns=group_file_columns)
 
     road_file_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_road_str(),
         inx_road_str(),
@@ -199,7 +199,7 @@ def test_WorldUnit_pidgin_staging_to_acct_agg_Scenario0_CreatesFileWithAllCatego
     e1_road_agg_df = DataFrame(e1_road_rows, columns=road_file_columns)
 
     idea_file_columns = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_idea_str(),
         inx_idea_str(),

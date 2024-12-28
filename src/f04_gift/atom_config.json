@@ -10,9 +10,9 @@
             "atom_order": 10
         },
         "jkeys": {
-            "acct_id": {
+            "acct_name": {
                 "column_order": 0,
-                "jaar_type": "AcctID",
+                "jaar_type": "AcctName",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
@@ -50,9 +50,9 @@
             "atom_order": 9
         },
         "jkeys": {
-            "acct_id": {
+            "acct_name": {
                 "column_order": 0,
-                "jaar_type": "AcctID",
+                "jaar_type": "AcctName",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -165,7 +165,7 @@
             "atom_order": 5
         },
         "jkeys": {
-            "healer_id": {
+            "healer_name": {
                 "column_order": 1,
                 "jaar_type": "GroupID",
                 "nesting_order": 1,

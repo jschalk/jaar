@@ -1,4 +1,4 @@
-from src.f04_gift.atom_config import type_AcctID_str
+from src.f04_gift.atom_config import type_AcctName_str
 from src.f08_pidgin.pidgin import pidginunit_shop, inherit_pidginunit
 from src.f08_pidgin.examples.example_pidgins import (
     get_clean_roadmap,
@@ -59,7 +59,7 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario3_RaiseErrorWhenDiffer
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_id():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_name():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -124,16 +124,16 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_acctmap_Inherited():
     new_pidginunit = pidginunit_shop(sue_str, event1)
     bob_otx = "Bob"
     bob_inx = "Bobby"
-    new_pidginunit.set_otx2inx(type_AcctID_str(), bob_otx, bob_inx)
+    new_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob_inx)
     assert new_pidginunit.acctmap != get_suita_acctmap()
-    assert new_pidginunit.acct_id_exists(bob_otx, bob_inx)
+    assert new_pidginunit.acct_name_exists(bob_otx, bob_inx)
 
     # WHEN
     merged_pidginunit = inherit_pidginunit(old_pidginunit, new_pidginunit)
 
     # THEN
     assert merged_pidginunit
-    assert new_pidginunit.acct_id_exists(bob_otx, bob_inx)
+    assert new_pidginunit.acct_name_exists(bob_otx, bob_inx)
     merged_acctbrigde = get_suita_acctmap()
     merged_acctbrigde.event_int = event1
     merged_acctbrigde.set_otx2inx(bob_otx, bob_inx)

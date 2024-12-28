@@ -24,7 +24,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     day_hour_str = "day_hour"
     day_hour_road = yao_bud.make_l1_road(day_hour_str)
     day_hour_item = yao_bud.get_item_obj(day_hour_road)
-    day_hour_item._originunit.set_originhold(acct_id="Bob", importance=2)
+    day_hour_item._originunit.set_originhold(acct_name="Bob", importance=2)
     yao_bud.set_fact(base=day_hour_road, pick=day_hour_road, fopen=0, fnigh=23)
     time_minute = yao_bud.make_l1_road("day_minute")
     yao_bud.set_fact(base=time_minute, pick=time_minute, fopen=0, fnigh=1440)
@@ -50,7 +50,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     # THEN
     assert bud_dict is not None
     assert str(type(bud_dict)) == "<class 'dict'>"
-    assert bud_dict["_owner_id"] == yao_bud._owner_id
+    assert bud_dict["_owner_name"] == yao_bud._owner_name
     assert bud_dict["_deal_id"] == yao_bud._deal_id
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["tally"] == bud_tally
@@ -80,7 +80,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     yao_bud_originhold = bud_dict[originunit_str][originholds_str][yao_str]
     print(f"{yao_bud_originhold=}")
     assert yao_bud_originhold
-    assert yao_bud_originhold["acct_id"] == yao_str
+    assert yao_bud_originhold["acct_name"] == yao_str
     assert yao_bud_originhold["importance"] == 1
 
 
@@ -117,7 +117,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemroot_healerlink():
     yao_acctunit = sue_bud.get_acct(yao_str)
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop()
-    run_healerlink.set_healer_id(x_healer_id=run_str)
+    run_healerlink.set_healer_name(x_healer_name=run_str)
     sue_bud.edit_item_attr(road=sue_bud._deal_id, healerlink=run_healerlink)
 
     # WHEN
@@ -188,7 +188,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert True == x_is_json(x_json)
     bud_dict = get_dict_from_json(x_json)
 
-    assert bud_dict["_owner_id"] == zia_bud._owner_id
+    assert bud_dict["_owner_name"] == zia_bud._owner_name
     assert bud_dict["_deal_id"] == zia_bud._deal_id
     assert bud_dict["tally"] == zia_bud.tally
     assert bud_dict["fund_pool"] == zia_bud.fund_pool
@@ -220,7 +220,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     itemroot_healerlink = itemroot_dict["healerlink"]
     print(f"{itemroot_healerlink=}")
     assert len(itemroot_healerlink) == 1
-    assert x_itemroot.healerlink.any_healer_id_exists()
+    assert x_itemroot.healerlink.any_healer_name_exists()
     assert x_itemroot.problem_bool
 
 
@@ -244,7 +244,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
 
     # THEN
     _kids = "_kids"
-    assert bud_dict["_owner_id"] == yao_bud._owner_id
+    assert bud_dict["_owner_name"] == yao_bud._owner_name
     assert bud_dict["_deal_id"] == yao_bud._deal_id
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["max_tree_traverse"] == 2
@@ -309,15 +309,15 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
     shave_str = "shave"
     shave_road = zia_bud.make_l1_road(shave_str)
     shave_item_y1 = zia_bud.get_item_obj(shave_road)
-    shave_item_y1._originunit.set_originhold(acct_id="Sue", importance=4.3)
+    shave_item_y1._originunit.set_originhold(acct_name="Sue", importance=4.3)
     shave_item_y1.problem_bool = True
     # print(f"{shave_road=}")
     # print(f"{json_shave_item._lx=} {json_shave_item._parent_road=}")
 
     sue_str = "Sue"
-    zia_bud.add_acctunit(acct_id=sue_str, credit_belief=199, debtit_belief=199)
+    zia_bud.add_acctunit(acct_name=sue_str, credit_belief=199, debtit_belief=199)
     xio_str = "Xio"
-    zia_bud.add_acctunit(acct_id=xio_str)
+    zia_bud.add_acctunit(acct_name=xio_str)
     run_str = ";runners"
     sue_acctunit = zia_bud.get_acct(sue_str)
     xio_acctunit = zia_bud.get_acct(xio_str)
@@ -352,8 +352,8 @@ def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
 
     # THEN
     assert str(type(json_bud)).find(".bud.BudUnit'>") > 0
-    assert json_bud._owner_id is not None
-    assert json_bud._owner_id == zia_bud._owner_id
+    assert json_bud._owner_name is not None
+    assert json_bud._owner_name == zia_bud._owner_name
     assert json_bud._deal_id == zia_bud._deal_id
     assert json_bud.fund_pool == zia_fund_pool
     assert json_bud.fund_pool == zia_bud.fund_pool
@@ -514,25 +514,25 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     x1_bud = budunit_v001()
     x2_bud = get_budunit_x1_3levels_1reason_1facts()
     x3_bud = get_budunit_base_time_example()
-    print(f"{x1_bud._owner_id}")
-    print(f"{x2_bud._owner_id}")
-    print(f"{x3_bud._owner_id}")
+    print(f"{x1_bud._owner_name}")
+    print(f"{x2_bud._owner_name}")
+    print(f"{x3_bud._owner_name}")
 
     cn_dict_of_dicts = {
-        x1_bud._owner_id: x1_bud.get_dict(),
-        x2_bud._owner_id: x2_bud.get_dict(),
-        x3_bud._owner_id: x3_bud.get_dict(),
+        x1_bud._owner_name: x1_bud.get_dict(),
+        x2_bud._owner_name: x2_bud.get_dict(),
+        x3_bud._owner_name: x3_bud.get_dict(),
     }
 
     # WHEN
     ccn_dict_of_obj = get_dict_of_bud_from_dict(cn_dict_of_dicts)
 
     # THEN
-    assert ccn_dict_of_obj.get(x1_bud._owner_id) is not None
-    assert ccn_dict_of_obj.get(x2_bud._owner_id) is not None
-    assert ccn_dict_of_obj.get(x3_bud._owner_id) is not None
+    assert ccn_dict_of_obj.get(x1_bud._owner_name) is not None
+    assert ccn_dict_of_obj.get(x2_bud._owner_name) is not None
+    assert ccn_dict_of_obj.get(x3_bud._owner_name) is not None
 
-    ccn2_bud = ccn_dict_of_obj.get(x2_bud._owner_id)
+    ccn2_bud = ccn_dict_of_obj.get(x2_bud._owner_name)
     assert ccn2_bud._itemroot._lx == x2_bud._itemroot._lx
     assert ccn2_bud._itemroot._parent_road == x2_bud._itemroot._parent_road
     assert ccn2_bud._itemroot._fund_coin == x2_bud._itemroot._fund_coin
@@ -543,16 +543,16 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     # assert ccn2_bud._itemroot == x2_bud._itemroot
     assert ccn2_bud.get_dict() == x2_bud.get_dict()
 
-    ccn_bud3 = ccn_dict_of_obj.get(x3_bud._owner_id)
+    ccn_bud3 = ccn_dict_of_obj.get(x3_bud._owner_name)
     assert ccn_bud3.get_dict() == x3_bud.get_dict()
 
-    cc1_item_root = ccn_dict_of_obj.get(x1_bud._owner_id)._itemroot
+    cc1_item_root = ccn_dict_of_obj.get(x1_bud._owner_name)._itemroot
     assert cc1_item_root._originunit == x1_bud._itemroot._originunit
-    ccn_bud1 = ccn_dict_of_obj.get(x1_bud._owner_id)
+    ccn_bud1 = ccn_dict_of_obj.get(x1_bud._owner_name)
     assert ccn_bud1._item_dict == x1_bud._item_dict
     philipa_str = "Philipa"
     ccn_philipa_acctunit = ccn_bud1.get_acct(philipa_str)
     x1_philipa_acctunit = x1_bud.get_acct(philipa_str)
     assert ccn_philipa_acctunit._memberships == x1_philipa_acctunit._memberships
     assert ccn_bud1 == x1_bud
-    assert ccn_dict_of_obj.get(x1_bud._owner_id) == x1_bud
+    assert ccn_dict_of_obj.get(x1_bud._owner_name) == x1_bud

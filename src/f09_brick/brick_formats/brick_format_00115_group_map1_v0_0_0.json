@@ -1,12 +1,12 @@
 {
     "attributes": {
-        "acct_id": {
+        "acct_name": {
             "otx_key": true
         },
         "event_int": {
             "otx_key": true
         },
-        "face_id": {
+        "face_name": {
             "otx_key": true
         },
         "deal_id": {
@@ -18,7 +18,7 @@
         "otx_group_id": {
             "otx_key": true
         },
-        "owner_id": {
+        "owner_name": {
             "otx_key": true
         }
     },

@@ -1,8 +1,8 @@
 from src.f01_road.road import (
     IdeaUnit,
-    HealerID,
-    OwnerID,
-    AcctID,
+    HealerName,
+    OwnerName,
+    AcctName,
     RoadUnit,
     DoarUnit,
     GroupID,
@@ -32,8 +32,8 @@ from src.f01_road.road import (
     WorldID,
     get_default_world_id,
     TimeLineIdea,
-    FaceID,
-    get_default_face_id,
+    FaceName,
+    get_default_face_name,
     EventInt,
 )
 from pytest import raises as pytest_raises
@@ -42,37 +42,37 @@ from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 
 
-def test_HealerID_exists():
+def test_HealerName_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_healer_id = HealerID(bob_str)
+    bob_healer_name = HealerName(bob_str)
     # THEN
-    assert bob_healer_id == bob_str
+    assert bob_healer_name == bob_str
     doc_str = "A IdeaUnit used to identify a Problem's Healer"
-    assert inspect_getdoc(bob_healer_id) == doc_str
+    assert inspect_getdoc(bob_healer_name) == doc_str
 
 
-def test_OwnerID_exists():
+def test_OwnerName_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_owner_id = OwnerID(bob_str)
+    bob_owner_name = OwnerName(bob_str)
     # THEN
-    assert bob_owner_id == bob_str
-    doc_str = "A IdeaUnit used to identify a BudUnit's owner_id"
-    assert inspect_getdoc(bob_owner_id) == doc_str
+    assert bob_owner_name == bob_str
+    doc_str = "A IdeaUnit used to identify a BudUnit's owner_name"
+    assert inspect_getdoc(bob_owner_name) == doc_str
 
 
-def test_AcctID_exists():
+def test_AcctName_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_acct_id = AcctID(bob_str)
+    bob_acct_name = AcctName(bob_str)
     # THEN
-    assert bob_acct_id == bob_str
-    doc_str = "Every AcctID object is OwnerID, must follow OwnerID format."
-    assert inspect_getdoc(bob_acct_id) == doc_str
+    assert bob_acct_name == bob_str
+    doc_str = "Every AcctName object is OwnerName, must follow OwnerName format."
+    assert inspect_getdoc(bob_acct_name) == doc_str
 
 
 def test_GroupID_exists():
@@ -176,15 +176,15 @@ def test_get_default_world_id_ReturnsObj():
     assert get_default_world_id() == "TestingWorld3"
 
 
-def test_FaceID_Exists():
+def test_FaceName_Exists():
     # ESTABLISH / WHEN / THEN
-    assert FaceID() == ""
-    assert FaceID("cookie") == "cookie"
+    assert FaceName() == ""
+    assert FaceName("cookie") == "cookie"
 
 
-def test_get_default_face_id_ReturnsObj():
+def test_get_default_face_name_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_default_face_id() == "Face1234"
+    assert get_default_face_name() == "Face1234"
 
 
 def test_EventInt_Exists():

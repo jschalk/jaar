@@ -67,7 +67,7 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     print(f"{bl_dict=}")
     assert x_dict is not None
     assert x_dict == {
-        "acct_id": bob_str,
+        "acct_name": bob_str,
         "credit_belief": bob_credit_belief,
         "debtit_belief": bob_debtit_belief,
         "_memberships": {
@@ -118,7 +118,7 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     print(f"{x_dict=}")
     assert x_dict is not None
     assert x_dict == {
-        "acct_id": bob_str,
+        "acct_name": bob_str,
         "credit_belief": bob_credit_belief,
         "debtit_belief": bob_debtit_belief,
         "_memberships": bob_acctunit.get_memberships_dict(),
@@ -255,7 +255,7 @@ def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
     yao_inallocable_debtit_belief = 97
     yao_json_dict = {
         yao_str: {
-            "acct_id": yao_str,
+            "acct_name": yao_str,
             "credit_belief": yao_credit_belief,
             "debtit_belief": yao_debtit_belief,
             "_memberships": {},
@@ -273,7 +273,7 @@ def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteDa
     assert yao_obj_dict[yao_str] is not None
     yao_acctunit = yao_obj_dict[yao_str]
 
-    assert yao_acctunit.acct_id == yao_str
+    assert yao_acctunit.acct_name == yao_str
     assert yao_acctunit.credit_belief == yao_credit_belief
     assert yao_acctunit.debtit_belief == yao_debtit_belief
     assert yao_acctunit._irrational_debtit_belief == yao_irrational_debtit_belief

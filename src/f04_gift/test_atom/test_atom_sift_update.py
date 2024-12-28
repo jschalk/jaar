@@ -16,10 +16,10 @@ from src.f02_bud.bud_tool import (
 )
 from src.f04_gift.atom import atom_insert, atom_update, atomunit_shop, sift_atomunit
 from src.f04_gift.atom_config import (
-    acct_id_str,
+    acct_name_str,
     awardee_id_str,
     group_id_str,
-    healer_id_str,
+    healer_name_str,
     parent_road_str,
     lx_str,
     road_str,
@@ -112,7 +112,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acctunit():
     sue_bud.add_acctunit(zia_str)
 
     zia_atom = atomunit_shop(bud_acctunit_str(), atom_insert())
-    zia_atom.set_arg(acct_id_str(), zia_str)
+    zia_atom.set_arg(acct_name_str(), zia_str)
     zia_atom.set_arg(debtit_belief_str(), zia_debtit_belief)
 
     # WHEN
@@ -136,7 +136,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_acct_membership():
     sue_bud.get_acct(zia_str).add_membership(run_str)
 
     zia_atom = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    zia_atom.set_arg(acct_id_str(), zia_str)
+    zia_atom.set_arg(acct_name_str(), zia_str)
     zia_atom.set_arg(group_id_str(), run_str)
     zia_atom.set_arg(debtit_vote_str(), zia_run_debtit_vote)
 

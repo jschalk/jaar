@@ -1,12 +1,12 @@
 from src.f00_instrument.file import get_dir_file_strs
 from src.f04_gift.atom_config import (
-    type_AcctID_str,
+    type_AcctName_str,
     type_IdeaUnit_str,
     type_RoadUnit_str,
     type_GroupID_str,
     road_str,
-    face_id_str,
-    type_AcctID_str,
+    face_name_str,
+    type_AcctName_str,
     type_GroupID_str,
 )
 from src.f08_pidgin.pidgin_config import (
@@ -61,13 +61,13 @@ def test_get_map_acct_dt_columns_ReturnsObj():
     assert get_map_acct_dt_columns()
     assert len(get_map_acct_dt_columns()) == 7
     static_list = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
-        "otx_acct_id",
-        "inx_acct_id",
+        "otx_acct_name",
+        "inx_acct_name",
     ]
     assert get_map_acct_dt_columns() == static_list
     assert set(get_map_acct_dt_columns()).issubset(set(sorting_columns()))
@@ -78,7 +78,7 @@ def test_get_map_group_dt_columns_ReturnsObj():
     assert get_map_group_dt_columns()
     assert len(get_map_group_dt_columns()) == 7
     static_list = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_bridge_str(),
         inx_bridge_str(),
@@ -95,7 +95,7 @@ def test_get_map_idea_dt_columns_ReturnsObj():
     assert get_map_idea_dt_columns()
     assert len(get_map_idea_dt_columns()) == 7
     static_list = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_bridge_str(),
         inx_bridge_str(),
@@ -112,7 +112,7 @@ def test_get_map_road_dt_columns_ReturnsObj():
     assert get_map_road_dt_columns()
     assert len(get_map_road_dt_columns()) == 7
     static_list = [
-        face_id_str(),
+        face_name_str(),
         event_int_str(),
         otx_bridge_str(),
         inx_bridge_str(),
@@ -204,8 +204,8 @@ def test_load_acctmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(acct_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_acctmap = empty_pidginunit.get_mapunit(type_AcctID_str())
-    sue_acctmap.face_id = "Sue"
+    sue_acctmap = empty_pidginunit.get_mapunit(type_AcctName_str())
+    sue_acctmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_acctmap=}")
     assert len(sue_acctmap.otx2inx) == 0
 
@@ -214,7 +214,7 @@ def test_load_acctmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 
     # THEN
     assert len(sue_acctmap.otx2inx) == 3
-    ex_acctmap = sue_pidginunit.get_mapunit(type_AcctID_str())
+    ex_acctmap = sue_pidginunit.get_mapunit(type_AcctName_str())
     assert ex_acctmap == sue_acctmap
 
 
@@ -225,8 +225,8 @@ def test_load_acctmap_from_csv_DoesNothinWhenFileDoesNotExist(env_dir_setup_clea
     acct_csv_path = f"{map_dir}/{acct_filename}"
     assert os_path_exists(acct_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_acctmap = empty_pidginunit.get_mapunit(type_AcctID_str())
-    sue_acctmap.face_id = "Sue"
+    sue_acctmap = empty_pidginunit.get_mapunit(type_AcctName_str())
+    sue_acctmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_acctmap=}")
     assert len(sue_acctmap.otx2inx) == 0
 
@@ -247,7 +247,7 @@ def test_load_groupmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     assert os_path_exists(group_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
     sue_groupmap = empty_pidginunit.get_mapunit(type_GroupID_str())
-    sue_groupmap.face_id = "Sue"
+    sue_groupmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_groupmap=}")
     assert len(sue_groupmap.otx2inx) == 0
 
@@ -270,7 +270,7 @@ def test_load_groupmap_from_csv_DoesNothingWhenFileDoesNotExist(
     assert os_path_exists(group_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
     sue_groupmap = empty_pidginunit.get_mapunit(type_GroupID_str())
-    sue_groupmap.face_id = "Sue"
+    sue_groupmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_groupmap=}")
     assert len(sue_groupmap.otx2inx) == 0
 
@@ -291,7 +291,7 @@ def test_load_ideamap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     assert os_path_exists(idea_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
     sue_ideamap = empty_pidginunit.get_mapunit(type_IdeaUnit_str())
-    sue_ideamap.face_id = "Sue"
+    sue_ideamap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_ideamap=}")
     assert len(sue_ideamap.otx2inx) == 0
 
@@ -314,7 +314,7 @@ def test_load_ideamap_from_csv_DoesNothingWhenFileDoesNotExist(
     assert os_path_exists(idea_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
     sue_ideamap = empty_pidginunit.get_mapunit(type_IdeaUnit_str())
-    sue_ideamap.face_id = "Sue"
+    sue_ideamap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_ideamap=}")
     assert len(sue_ideamap.otx2inx) == 0
 
@@ -335,7 +335,7 @@ def test_load_roadmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     assert os_path_exists(road_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
     sue_roadmap = empty_pidginunit.get_mapunit(type_RoadUnit_str())
-    sue_roadmap.face_id = "Sue"
+    sue_roadmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_roadmap=}")
     assert len(sue_roadmap.otx2inx) == 0
 
@@ -346,7 +346,7 @@ def test_load_roadmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     assert len(sue_roadmap.otx2inx) == 2
     ex_roadmap = sue_pidginunit.get_mapunit(type_RoadUnit_str())
     assert ex_roadmap.event_int == sue_roadmap.event_int
-    assert ex_roadmap.face_id == sue_roadmap.face_id
+    assert ex_roadmap.face_name == sue_roadmap.face_name
     assert ex_roadmap.otx2inx == sue_roadmap.otx2inx
     assert ex_roadmap.ideamap != sue_roadmap.ideamap
 
@@ -361,7 +361,7 @@ def test_load_roadmap_from_csv_DoesNothingWhenFileDoesNotExist(
     assert os_path_exists(road_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
     sue_roadmap = empty_pidginunit.get_mapunit(type_RoadUnit_str())
-    sue_roadmap.face_id = "Sue"
+    sue_roadmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_roadmap=}")
     assert len(sue_roadmap.otx2inx) == 0
 
@@ -381,7 +381,7 @@ def test_create_dir_valid_empty_pidginunit_Sets_otx_bridge_inx_bridge(
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
     sue_pidginunit = pidginunit_shop(
-        face_id=sue_str,
+        face_name=sue_str,
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
@@ -397,7 +397,7 @@ def test_create_dir_valid_empty_pidginunit_Sets_otx_bridge_inx_bridge(
     assert gen_pidginunit.unknown_word == x_unknown_word
     assert gen_pidginunit.otx_bridge == slash_otx_bridge
     assert gen_pidginunit.inx_bridge == colon_inx_bridge
-    gen_mapunit = gen_pidginunit.get_mapunit(type_AcctID_str())
+    gen_mapunit = gen_pidginunit.get_mapunit(type_AcctName_str())
     assert gen_mapunit.unknown_word == x_unknown_word
     assert gen_mapunit.otx_bridge == slash_otx_bridge
     assert gen_mapunit.inx_bridge == colon_inx_bridge
@@ -413,7 +413,7 @@ def test_create_dir_valid_empty_pidginunit_Returns_event_int(
     colon_inx_bridge = ":"
     event7 = 7
     sue_pidginunit = pidginunit_shop(
-        face_id=sue_str,
+        face_name=sue_str,
         event_int=event7,
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
@@ -427,12 +427,12 @@ def test_create_dir_valid_empty_pidginunit_Returns_event_int(
     gen_pidginunit = create_dir_valid_empty_pidginunit(map_dir)
 
     # THEN
-    assert gen_pidginunit.face_id == sue_str
+    assert gen_pidginunit.face_name == sue_str
     assert gen_pidginunit.event_int == event7
     assert gen_pidginunit.unknown_word == x_unknown_word
     assert gen_pidginunit.otx_bridge == slash_otx_bridge
     assert gen_pidginunit.inx_bridge == colon_inx_bridge
-    gen_mapunit = gen_pidginunit.get_mapunit(type_AcctID_str())
+    gen_mapunit = gen_pidginunit.get_mapunit(type_AcctName_str())
     assert gen_mapunit.unknown_word == x_unknown_word
     assert gen_mapunit.otx_bridge == slash_otx_bridge
     assert gen_mapunit.inx_bridge == colon_inx_bridge

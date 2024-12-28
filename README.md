@@ -125,8 +125,8 @@ screenshots and elucidatory text.)
 PUT conflicts in 
 
 x_dict = {
-    "bud_acct_membership":          {"jkeys": {"acct_id","group_id"},       "jvalues": {"credit_vote","debtit_vote"},
-    "bud_acctunit":                 {"jkeys": {"acct_id",},                 "jvalues": {"credit_belief","debtit_belief"},
+    "bud_acct_membership":          {"jkeys": {"acct_name","group_id"},       "jvalues": {"credit_vote","debtit_vote"},
+    "bud_acctunit":                 {"jkeys": {"acct_name",},                 "jvalues": {"credit_belief","debtit_belief"},
 each brick will either have bud_acctunit as a category or not. that will decide if the atom is created. 
     "bud_item_awardlink":           {"jkeys": {"road","group_id",},         "jvalues": {"give_force","take_force"},
     "bud_item_teamlink":            {"jkeys": {"road","group_id",},         "jvalues",

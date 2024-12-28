@@ -1,5 +1,5 @@
 from src.f00_instrument.plotly_toolbox import conditional_fig_show
-from src.f04_gift.atom_config import acct_id_str, owner_id_str
+from src.f04_gift.atom_config import acct_name_str, owner_name_str
 from src.f07_deal.deal_report import (
     get_deal_voices_accts_dataframe,
     get_deal_voices_accts_plotly_fig,
@@ -29,8 +29,8 @@ def test_get_deal_voices_accts_dataframe_ReturnsCorrectObj(
 
     # THEN
     acctunit_colums = {
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         "credit_belief",
         "debtit_belief",
         "_memberships",
@@ -73,8 +73,8 @@ def test_get_deal_finals_accts_dataframe_ReturnsCorrectObj(
 
     # THEN
     acctunit_colums = {
-        owner_id_str(),
-        acct_id_str(),
+        owner_name_str(),
+        acct_name_str(),
         "credit_belief",
         "debtit_belief",
         "_memberships",
@@ -118,7 +118,7 @@ def test_get_deal_voices_agenda_dataframe_ReturnsCorrectObj(
 
     # THEN
     agenda_colums = {
-        owner_id_str(),
+        owner_name_str(),
         "fund_ratio",
         "_lx",
         "_parent_road",
@@ -159,7 +159,7 @@ def test_get_deal_finals_agenda_dataframe_ReturnsCorrectObj(env_dir_setup_cleanu
 
     # THEN
     agenda_colums = {
-        owner_id_str(),
+        owner_name_str(),
         "fund_ratio",
         "_lx",
         "_parent_road",

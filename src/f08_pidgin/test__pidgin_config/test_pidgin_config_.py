@@ -22,8 +22,8 @@ from src.f08_pidgin.pidgin_config import (
     inx_bridge_str,
     inx_group_id_str,
     otx_group_id_str,
-    inx_acct_id_str,
-    otx_acct_id_str,
+    inx_acct_name_str,
+    otx_acct_name_str,
     inx_idea_str,
     otx_idea_str,
     inx_road_str,
@@ -31,7 +31,7 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
     otx2inx_str,
     map_otx2inx_str,
-    map_acct_id_str,
+    map_acct_name_str,
     map_group_id_str,
     map_idea_str,
     map_road_str,
@@ -46,15 +46,15 @@ def test_str_functions_ReturnsObj():
     assert inx_bridge_str() == "inx_bridge"
     assert inx_group_id_str() == "inx_group_id"
     assert otx_group_id_str() == "otx_group_id"
-    assert inx_acct_id_str() == "inx_acct_id"
-    assert otx_acct_id_str() == "otx_acct_id"
+    assert inx_acct_name_str() == "inx_acct_name"
+    assert otx_acct_name_str() == "otx_acct_name"
     assert inx_idea_str() == "inx_idea"
     assert otx_idea_str() == "otx_idea"
     assert inx_road_str() == "inx_road"
     assert otx_road_str() == "otx_road"
     assert unknown_word_str() == "unknown_word"
     assert otx2inx_str() == "otx2inx"
-    assert map_acct_id_str() == "map_acct_id"
+    assert map_acct_name_str() == "map_acct_name"
     assert map_group_id_str() == "map_group_id"
     assert map_idea_str() == "map_idea"
     assert map_road_str() == "map_road"
@@ -79,7 +79,7 @@ def test_get_pidgin_config_dict_ReturnsObj():
     # THEN
     assert pidgin_config
     pidgin_config_categorys = set(pidgin_config.keys())
-    assert map_acct_id_str() in pidgin_config_categorys
+    assert map_acct_name_str() in pidgin_config_categorys
     assert map_group_id_str() in pidgin_config_categorys
     assert map_idea_str() in pidgin_config_categorys
     assert map_road_str() in pidgin_config_categorys
@@ -108,8 +108,8 @@ def _validate_pidgin_config(pidgin_config: dict):
         otx_bridge_str(),
         inx_group_id_str(),
         otx_group_id_str(),
-        inx_acct_id_str(),
-        otx_acct_id_str(),
+        inx_acct_name_str(),
+        otx_acct_name_str(),
         inx_idea_str(),
         otx_idea_str(),
         inx_road_str(),
@@ -142,7 +142,7 @@ def test_get_pidgin_categorys_ReturnsObj():
     pidgin_config_categorys = get_pidgin_categorys()
 
     # THEN
-    assert map_acct_id_str() in pidgin_config_categorys
+    assert map_acct_name_str() in pidgin_config_categorys
     assert map_group_id_str() in pidgin_config_categorys
     assert map_idea_str() in pidgin_config_categorys
     assert map_road_str() in pidgin_config_categorys

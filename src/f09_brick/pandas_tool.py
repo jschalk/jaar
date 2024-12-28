@@ -173,7 +173,7 @@ def move_otx_csvs_to_pidgin_inx(face_dir: str):
 
 
 def _get_pidgen_brick_format_filenames() -> set[str]:
-    brick_numbers = set(get_brick_category_ref().get("map_acct_id"))
+    brick_numbers = set(get_brick_category_ref().get("map_acct_name"))
     brick_numbers.update(set(get_brick_category_ref().get("map_group_id")))
     brick_numbers.update(set(get_brick_category_ref().get("map_idea")))
     brick_numbers.update(set(get_brick_category_ref().get("map_road")))

@@ -1,6 +1,6 @@
 from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.road import default_bridge_if_None, create_road
-from src.f04_gift.atom_config import acct_id_str, base_str, type_RoadUnit_str
+from src.f04_gift.atom_config import acct_name_str, base_str, type_RoadUnit_str
 from src.f08_pidgin.map import (
     groupmap_shop,
     acctmap_shop,
@@ -20,7 +20,7 @@ def get_clean_ideamap() -> IdeaMap:
     clean_inx = "propre"
     casa_otx = "casa1"
     casa_inx = "casa2"
-    ideamap = ideamap_shop(face_id="Sue")
+    ideamap = ideamap_shop(face_name="Sue")
     ideamap.set_otx2inx(clean_otx, clean_inx)
     ideamap.set_otx2inx(casa_otx, casa_inx)
     return ideamap
@@ -33,7 +33,7 @@ def get_clean_roadmap() -> RoadMap:
     clean_inx_str = "prop"
     bridge = default_bridge_if_None()
     clean_otx_road = f"{otx_accord45_str}{bridge}{clean_otx_str}"
-    road_mapunit = roadmap_shop(face_id="Sue")
+    road_mapunit = roadmap_shop(face_name="Sue")
     road_mapunit.set_idea(clean_otx_str, clean_inx_str)
     road_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
     road_mapunit.reveal_inx(clean_otx_road)
@@ -45,7 +45,7 @@ def get_swim_groupmap() -> GroupMap:
     swim_otx = f"swim{bridge}"
     swim_inx = f"nage{bridge}"
     climb_otx = f"climb{bridge}"
-    x_groupmap = groupmap_shop(face_id="Sue")
+    x_groupmap = groupmap_shop(face_name="Sue")
     x_groupmap.set_otx2inx(swim_otx, swim_inx)
     x_groupmap.set_otx2inx(climb_otx, climb_otx)
     return x_groupmap
@@ -59,19 +59,19 @@ def get_suita_acctmap() -> AcctMap:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_id_mapunit = acctmap_shop(face_id="Sue")
-    acct_id_mapunit.set_otx2inx(xio_otx, xio_inx)
-    acct_id_mapunit.set_otx2inx(sue_otx, sue_inx)
-    acct_id_mapunit.set_otx2inx(bob_otx, bob_inx)
-    return acct_id_mapunit
+    acct_name_mapunit = acctmap_shop(face_name="Sue")
+    acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
+    acct_name_mapunit.set_otx2inx(sue_otx, sue_inx)
+    acct_name_mapunit.set_otx2inx(bob_otx, bob_inx)
+    return acct_name_mapunit
 
 
-# def get_invalid_acct_id_mapunit() -> MapUnit:
+# def get_invalid_acct_name_mapunit() -> MapUnit:
 #     sue_otx = f"Xio{default_bridge_if_None()}"
 #     sue_inx = "Sue"
 #     zia_otx = "Zia"
 #     zia_inx = "Zia"
-#     x_groupmap = mapunit_shop(type_AcctID_str(), face_id="Sue")
+#     x_groupmap = mapunit_shop(type_AcctName_str(), face_name="Sue")
 #     x_groupmap.set_otx2inx(sue_otx, sue_inx)
 #     x_groupmap.set_otx2inx(zia_otx, zia_inx)
 #     return x_groupmap
@@ -82,7 +82,7 @@ def get_suita_acctmap() -> AcctMap:
 #     sue_inx = f"Sue{default_bridge_if_None()}"
 #     zia_otx = "Zia"
 #     zia_inx = f"Zia{default_bridge_if_None()}"
-#     x_groupmap = mapunit_shop(type_GroupID_str(), face_id="Sue")
+#     x_groupmap = mapunit_shop(type_GroupID_str(), face_name="Sue")
 #     x_groupmap.set_otx2inx(sue_otx, sue_inx)
 #     x_groupmap.set_otx2inx(zia_otx, zia_inx)
 #     return x_groupmap
@@ -93,7 +93,7 @@ def get_suita_acctmap() -> AcctMap:
 #     clean_inx = "propre"
 #     casa_otx = f"casa{default_bridge_if_None()}"
 #     casa_inx = "casa"
-#     ideamap = mapunit_shop(type_IdeaUnit_str(), face_id="Sue")
+#     ideamap = mapunit_shop(type_IdeaUnit_str(), face_name="Sue")
 #     ideamap.set_otx2inx(clean_str, clean_inx)
 #     ideamap.set_otx2inx(casa_otx, casa_inx)
 #     return ideamap
@@ -113,7 +113,7 @@ def get_slash_roadmap() -> RoadMap:
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
-        face_id="Sue",
+        face_name="Sue",
     )
     road_mapunit.set_idea(clean_otx_str, clean_inx_str)
     road_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
@@ -133,7 +133,7 @@ def get_slash_groupmap() -> GroupMap:
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
-        face_id="Sue",
+        face_name="Sue",
     )
     x_groupmap.set_otx2inx(swim_otx, swim_inx)
     x_groupmap.set_otx2inx(climb_otx, climb_inx)
@@ -151,16 +151,16 @@ def get_slash_acctmap() -> AcctMap:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_id_mapunit = acctmap_shop(
+    acct_name_mapunit = acctmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
-        face_id="Sue",
+        face_name="Sue",
     )
-    acct_id_mapunit.set_otx2inx(xio_otx, xio_inx)
-    acct_id_mapunit.set_otx2inx(sue_otx, sue_inx)
-    acct_id_mapunit.set_otx2inx(bob_otx, bob_inx)
-    return acct_id_mapunit
+    acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
+    acct_name_mapunit.set_otx2inx(sue_otx, sue_inx)
+    acct_name_mapunit.set_otx2inx(bob_otx, bob_inx)
+    return acct_name_mapunit
 
 
 def get_sue_pidginunit() -> PidginUnit:
@@ -173,29 +173,29 @@ def get_sue_pidginunit() -> PidginUnit:
     return sue_pidginunit
 
 
-def get_suita_acct_id_otx_dt() -> DataFrame:
+def get_suita_acct_name_otx_dt() -> DataFrame:
     xio_otx = "Xio"
     sue_otx = "Sue"
     bob_otx = "Bob"
     zia_otx = "Zia"
-    otx_dt = DataFrame(columns=[acct_id_str()])
-    otx_dt.loc[0, acct_id_str()] = zia_otx
-    otx_dt.loc[1, acct_id_str()] = sue_otx
-    otx_dt.loc[2, acct_id_str()] = bob_otx
-    otx_dt.loc[3, acct_id_str()] = xio_otx
+    otx_dt = DataFrame(columns=[acct_name_str()])
+    otx_dt.loc[0, acct_name_str()] = zia_otx
+    otx_dt.loc[1, acct_name_str()] = sue_otx
+    otx_dt.loc[2, acct_name_str()] = bob_otx
+    otx_dt.loc[3, acct_name_str()] = xio_otx
     return otx_dt
 
 
-def get_suita_acct_id_inx_dt() -> DataFrame:
+def get_suita_acct_name_inx_dt() -> DataFrame:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
     zia_otx = "Zia"
-    inx_dt = DataFrame(columns=[acct_id_str()])
-    inx_dt.loc[0, acct_id_str()] = xio_inx
-    inx_dt.loc[1, acct_id_str()] = sue_inx
-    inx_dt.loc[2, acct_id_str()] = bob_inx
-    inx_dt.loc[3, acct_id_str()] = zia_otx
+    inx_dt = DataFrame(columns=[acct_name_str()])
+    inx_dt.loc[0, acct_name_str()] = xio_inx
+    inx_dt.loc[1, acct_name_str()] = sue_inx
+    inx_dt.loc[2, acct_name_str()] = bob_inx
+    inx_dt.loc[3, acct_name_str()] = zia_otx
     return inx_dt
 
 
@@ -289,7 +289,7 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
 
     inx_dt = DataFrame(
         columns=[
-            "face_id",
+            "face_name",
             "event_int",
             "otx_bridge",
             "inx_bridge",
@@ -320,7 +320,7 @@ def get_casa_maison_idea_dt() -> DataFrame:
 
     inx_dt = DataFrame(
         columns=[
-            "face_id",
+            "face_name",
             "event_int",
             "otx_bridge",
             "inx_bridge",
@@ -340,7 +340,7 @@ def get_invalid_acctmap() -> AcctMap:
     sue_inx = "Sue"
     zia_otx = "Zia"
     zia_inx = "Zia"
-    acctmap = acctmap_shop(face_id="Sue")
+    acctmap = acctmap_shop(face_name="Sue")
     acctmap.set_otx2inx(sue_otx, sue_inx)
     acctmap.set_otx2inx(zia_otx, zia_inx)
     return acctmap
@@ -351,7 +351,7 @@ def get_invalid_groupmap() -> GroupMap:
     sue_inx = f"Sue{default_bridge_if_None()}"
     zia_otx = "Zia"
     zia_inx = f"Zia{default_bridge_if_None()}"
-    x_groupmap = groupmap_shop(face_id="Sue")
+    x_groupmap = groupmap_shop(face_name="Sue")
     x_groupmap.set_otx2inx(sue_otx, sue_inx)
     x_groupmap.set_otx2inx(zia_otx, zia_inx)
     return x_groupmap
@@ -362,7 +362,7 @@ def get_invalid_ideamap() -> RoadMap:
     clean_inx = "propre"
     casa_otx = f"casa{default_bridge_if_None()}"
     casa_inx = "casa"
-    roadmap = roadmap_shop(face_id="Sue")
+    roadmap = roadmap_shop(face_name="Sue")
     roadmap.set_otx2inx(clean_str, clean_inx)
     roadmap.set_otx2inx(casa_otx, casa_inx)
     return roadmap
@@ -380,7 +380,7 @@ def get_slash_ideamap() -> IdeaMap:
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
-        face_id="Sue",
+        face_name="Sue",
         event_int=7,
     )
     x_ideamap.set_otx2inx(otx_accord45_str, inx_accord87_str)
@@ -403,7 +403,7 @@ def get_slash_roadmap() -> RoadMap:
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
-        face_id="Sue",
+        face_name="Sue",
         event_int=7,
         x_ideamap=get_slash_ideamap(),
     )
@@ -425,7 +425,7 @@ def get_slash_groupmap() -> GroupMap:
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
-        face_id="Sue",
+        face_name="Sue",
         event_int=7,
     )
     x_groupmap.set_otx2inx(swim_otx, swim_inx)
@@ -448,7 +448,7 @@ def get_slash_acctmap() -> AcctMap:
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
-        face_id="Sue",
+        face_name="Sue",
         event_int=7,
     )
     x_acctmap.set_otx2inx(xio_otx, xio_inx)
@@ -466,7 +466,7 @@ def get_pidgin_core_attrs_are_none_acctmap() -> AcctMap:
     bob_inx = "Bobita"
     x_nan = float("nan")
     x_acctmap = acctmap_shop(
-        face_id="Sue",
+        face_name="Sue",
         event_int=7,
         otx_bridge=x_nan,
         inx_bridge=x_nan,

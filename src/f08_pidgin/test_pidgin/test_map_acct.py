@@ -16,7 +16,7 @@ def test_AcctMap_Exists():
     x_acctmap = AcctMap()
 
     # WHEN / THEN
-    assert not x_acctmap.face_id
+    assert not x_acctmap.face_name
     assert not x_acctmap.event_int
     assert not x_acctmap.otx2inx
     assert not x_acctmap.unknown_word
@@ -29,7 +29,7 @@ def test_acctmap_shop_ReturnsObj_scenario0():
     x_acctmap = acctmap_shop()
 
     # THEN
-    assert not x_acctmap.face_id
+    assert not x_acctmap.face_name
     assert x_acctmap.event_int == 0
     assert x_acctmap.otx2inx == {}
     assert x_acctmap.unknown_word == default_unknown_word_if_None()
@@ -50,7 +50,7 @@ def test_acctmap_shop_ReturnsObj_scenario1_WithParameters():
 
     # WHEN
     x_acctmap = acctmap_shop(
-        face_id=bob_str,
+        face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
         unknown_word=x_unknown_word,
@@ -59,7 +59,7 @@ def test_acctmap_shop_ReturnsObj_scenario1_WithParameters():
     )
 
     # THEN
-    assert x_acctmap.face_id == bob_str
+    assert x_acctmap.face_name == bob_str
     assert x_acctmap.event_int == event7
     assert x_acctmap.otx2inx == otx2inx
     assert x_acctmap.unknown_word == x_unknown_word
@@ -78,7 +78,7 @@ def test_acctmap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_flo
 
     # WHEN
     x_acctmap = acctmap_shop(
-        face_id=bob_str,
+        face_name=bob_str,
         event_int=numpy_int64(event7),
         otx2inx=otx2inx,
         unknown_word=x_nan,
@@ -87,7 +87,7 @@ def test_acctmap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_flo
     )
 
     # THEN
-    assert x_acctmap.face_id == bob_str
+    assert x_acctmap.face_name == bob_str
     assert x_acctmap.event_int == event7
     assert str(type(x_acctmap.event_int)) != "<class 'numpy.int64'>"
     assert str(type(x_acctmap.event_int)) == "<class 'int'>"
@@ -269,7 +269,7 @@ def test_AcctMap_unknown_word_in_otx2inx_ReturnsObj():
     assert x_acctmap._unknown_word_in_otx2inx()
 
 
-def test_AcctMap_reveal_inx_ReturnsObjAndSetsAttr_acct_id():
+def test_AcctMap_reveal_inx_ReturnsObjAndSetsAttr_acct_name():
     # ESTABLISH
     inx_r_bridge = ":"
     otx_r_bridge = "/"
@@ -306,7 +306,7 @@ def test_AcctMap_get_dict_ReturnsObj():
     x_acctmap = acctmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
-        face_id=sue_str,
+        face_name=sue_str,
         event_int=event7,
     )
     x1_road_map_dict = {
@@ -314,7 +314,7 @@ def test_AcctMap_get_dict_ReturnsObj():
         "inx_bridge": x_acctmap.inx_bridge,
         "unknown_word": x_acctmap.unknown_word,
         "otx2inx": {},
-        "face_id": x_acctmap.face_id,
+        "face_name": x_acctmap.face_name,
         "event_int": x_acctmap.event_int,
     }
     assert x_acctmap.get_dict() == x1_road_map_dict
@@ -327,7 +327,7 @@ def test_AcctMap_get_dict_ReturnsObj():
         "inx_bridge": x_acctmap.inx_bridge,
         "unknown_word": x_acctmap.unknown_word,
         "otx2inx": {clean_otx: clean_inx},
-        "face_id": sue_str,
+        "face_name": sue_str,
         "event_int": event7,
     }
     assert x_acctmap.get_dict() == x2_road_map_dict
@@ -345,7 +345,7 @@ def test_AcctMap_get_json_ReturnsObj():
     x_acctmap = acctmap_shop(sue_str, otx_bridge=slash_otx_bridge)
     x1_road_map_json = f"""{{
   "event_int": 0,
-  "face_id": "{sue_str}",
+  "face_name": "{sue_str}",
   "inx_bridge": "{x_acctmap.inx_bridge}",
   "otx2inx": {{}},
   "otx_bridge": "{x_acctmap.otx_bridge}",
@@ -361,7 +361,7 @@ def test_AcctMap_get_json_ReturnsObj():
     # THEN
     x2_road_map_json = f"""{{
   "event_int": {event7},
-  "face_id": "{sue_str}",
+  "face_name": "{sue_str}",
   "inx_bridge": "{x_acctmap.inx_bridge}",
   "otx2inx": {{
     "{clean_otx}": "{clean_inx}"
@@ -388,7 +388,7 @@ def test_get_acctmap_from_dict_ReturnsObj():
     gen_acctmap = get_acctmap_from_dict(x_acctmap.get_dict())
 
     # THEN
-    assert gen_acctmap.face_id == x_acctmap.face_id
+    assert gen_acctmap.face_name == x_acctmap.face_name
     assert gen_acctmap.event_int == x_acctmap.event_int
     assert gen_acctmap.event_int == event7
     assert gen_acctmap == x_acctmap
@@ -528,7 +528,7 @@ def test_inherit_acctmap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_inherit_acctmap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_id():
+def test_inherit_acctmap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_name():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
