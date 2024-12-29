@@ -245,7 +245,9 @@ def test_create_init_deal_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanu
     assert list(deal_weekday_df.columns) == expected_deal_weekday_columns
 
 
-def test_create_init_deal_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanup):
+def test_create_dealunit_jsons_from_prime_files_Scenario0_MinimumDealUnit(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     deals_dir = create_path(get_test_etl_dir(), "deals")
     create_init_deal_prime_files(deals_dir)
