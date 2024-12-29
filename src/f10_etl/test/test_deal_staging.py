@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path
+from src.f00_instrument.file import create_path, open_file
 from src.f01_road.finance_tran import quota_str, time_int_str, bridge_str
 from src.f03_chrono.chrono import (
     c400_number_str,
@@ -15,6 +15,7 @@ from src.f04_gift.atom_config import (
     penny_str,
     respect_bit_str,
 )
+from src.f07_deal.deal import get_from_json as deal_get_from_json, dealunit_shop
 from src.f07_deal.deal_config import (
     current_time_str,
     amount_str,
@@ -26,8 +27,11 @@ from src.f07_deal.deal_config import (
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_brick.pandas_tool import sheet_exists
-from src.f10_etl.deal_agg import create_init_deal_prime_files
+from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet
+from src.f10_etl.deal_agg import (
+    create_init_deal_prime_files,
+    create_dealunit_jsons_from_prime_files,
+)
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
@@ -239,6 +243,57 @@ def test_create_init_deal_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanu
     assert list(deal_hour_df.columns) == expected_deal_hour_columns
     assert list(deal_month_df.columns) == expected_deal_month_columns
     assert list(deal_weekday_df.columns) == expected_deal_weekday_columns
+
+
+def test_create_init_deal_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanup):
+    # ESTABLISH
+    deals_dir = create_path(get_test_etl_dir(), "deals")
+    create_init_deal_prime_files(deals_dir)
+    agg_str = "agg"
+    dealunit_path = create_path(deals_dir, "dealunit.xlsx")
+    dealunit_columns = [
+        deal_idea_str(),
+        c400_number_str(),
+        current_time_str(),
+        fund_coin_str(),
+        monthday_distortion_str(),
+        penny_str(),
+        respect_bit_str(),
+        bridge_str(),
+        timeline_idea_str(),
+        yr1_jan1_offset_str(),
+    ]
+    accord56_deal_idea_str = "accord56"
+    accord56 = [
+        accord56_deal_idea_str,
+        "",  # accord56_c400_number_str,
+        "",  # accord56_current_time_str,
+        "",  # accord56_fund_coin_str,
+        "",  # accord56_monthday_distortion_str,
+        "",  # accord56_penny_str,
+        "",  # accord56_respect_bit_str,
+        "",  # accord56_bridge_str,
+        "",  # accord56_timeline_idea_str,
+        "",  # accord56_yr1_jan1_offset_str,
+    ]
+    dealunit_rows = [accord56]
+    dealunit_df = DataFrame(dealunit_rows, columns=dealunit_columns)
+    upsert_sheet(dealunit_path, agg_str, dealunit_df)
+    deal_jsons_dir = create_path(deals_dir, "deal_jsons")
+    accord56_path = create_path(deal_jsons_dir, "accord56.json")
+    assert os_path_exists(accord56_path) is False
+
+    # WHEN
+    create_dealunit_jsons_from_prime_files(deals_dir=deals_dir)
+
+    # THEN
+    assert os_path_exists(accord56_path)
+    accord56_dealunit = deal_get_from_json(open_file(accord56_path))
+    assert accord56_dealunit
+    assert accord56_dealunit.deal_idea == accord56_deal_idea_str
+    expected_dealunit = dealunit_shop(accord56_deal_idea_str)
+    assert accord56_dealunit.timeline == expected_dealunit.timeline
+    assert accord56_dealunit == expected_dealunit
 
 
 # def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
