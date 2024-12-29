@@ -325,3 +325,11 @@ def if_nan_return_None(x_obj: any) -> any:
     # sourcery skip: equality-identity, remove-redundant-if
     # If the value is NaN, the comparison value != value
     return None if x_obj != x_obj else x_obj
+
+
+def dataframe_to_dict(x_df: DataFrame, key_column: str) -> dict:
+    x_dict = x_df.to_dict(orient="records")
+    x_dict = {record[key_column]: record for record in x_dict}
+    for x_value in x_dict.values():
+        x_value.pop("id")
+    return x_dict
