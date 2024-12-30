@@ -31,6 +31,8 @@ from src.f07_deal.deal_config import (
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet
 from src.f10_etl.deal_agg import (
+    DealPrimeFilePaths,
+    DealPrimeColumns,
     create_init_deal_prime_files,
     create_dealunit_jsons_from_prime_files,
 )
@@ -48,205 +50,101 @@ from copy import copy as copy_copy
 # br00005 deal_idea weekday_idea,weekday_order
 
 
-def test_create_init_deal_prime_files_CreatesFiles_staging(env_dir_setup_cleanup):
-    # ESTABLISH
-    x_dir = get_test_etl_dir()
-    staging_str = "staging"
-    dealunit_path = create_path(x_dir, "dealunit.xlsx")
-    deal_purview_path = create_path(x_dir, "deal_purview_episode.xlsx")
-    deal_cashbook_path = create_path(x_dir, "deal_cashbook.xlsx")
-    deal_hour_path = create_path(x_dir, "deal_timeline_hour.xlsx")
-    deal_month_path = create_path(x_dir, "deal_timeline_month.xlsx")
-    deal_weekday_path = create_path(x_dir, "deal_timeline_weekday.xlsx")
-    assert sheet_exists(dealunit_path, staging_str) is False
-    assert sheet_exists(deal_purview_path, staging_str) is False
-    assert sheet_exists(deal_cashbook_path, staging_str) is False
-    assert sheet_exists(deal_hour_path, staging_str) is False
-    assert sheet_exists(deal_month_path, staging_str) is False
-    assert sheet_exists(deal_weekday_path, staging_str) is False
-
-    # WHEN
-    create_init_deal_prime_files(x_dir)
-
-    # THEN
-    assert sheet_exists(dealunit_path, staging_str)
-    assert sheet_exists(deal_purview_path, staging_str)
-    assert sheet_exists(deal_cashbook_path, staging_str)
-    assert sheet_exists(deal_hour_path, staging_str)
-    assert sheet_exists(deal_month_path, staging_str)
-    assert sheet_exists(deal_weekday_path, staging_str)
-
-
-def test_create_init_deal_prime_files_HasCorrectColumns_staging(env_dir_setup_cleanup):
+def test_DealPrimeFilePaths_Exists():
     # ESTABLISH
     x_dir = get_test_etl_dir()
 
     # WHEN
-    create_init_deal_prime_files(x_dir)
+    x_dealprimefilepaths = DealPrimeFilePaths(x_dir)
 
     # THEN
-    staging_str = "staging"
-    dealunit_path = create_path(x_dir, "dealunit.xlsx")
-    deal_purview_path = create_path(x_dir, "deal_purview_episode.xlsx")
-    deal_cashbook_path = create_path(x_dir, "deal_cashbook.xlsx")
-    deal_hour_path = create_path(x_dir, "deal_timeline_hour.xlsx")
-    deal_month_path = create_path(x_dir, "deal_timeline_month.xlsx")
-    deal_weekday_path = create_path(x_dir, "deal_timeline_weekday.xlsx")
-
-    dealunit_df = pandas_read_excel(dealunit_path, sheet_name=staging_str)
-    deal_purview_df = pandas_read_excel(deal_purview_path, sheet_name=staging_str)
-    deal_cashbook_df = pandas_read_excel(deal_cashbook_path, sheet_name=staging_str)
-    deal_hour_df = pandas_read_excel(deal_hour_path, sheet_name=staging_str)
-    deal_month_df = pandas_read_excel(deal_month_path, sheet_name=staging_str)
-    deal_weekday_df = pandas_read_excel(deal_weekday_path, sheet_name=staging_str)
-
-    common_cols = ["source_br", face_name_str(), event_int_str(), deal_idea_str()]
-    expected_dealunit_columns = copy_copy(common_cols)
-    expected_deal_purview_columns = copy_copy(common_cols)
-    expected_deal_cashbook_columns = copy_copy(common_cols)
-    expected_deal_hour_columns = copy_copy(common_cols)
-    expected_deal_month_columns = copy_copy(common_cols)
-    expected_deal_weekday_columns = copy_copy(common_cols)
-    expected_dealunit_columns.extend(
-        [
-            c400_number_str(),
-            current_time_str(),
-            fund_coin_str(),
-            monthday_distortion_str(),
-            penny_str(),
-            respect_bit_str(),
-            bridge_str(),
-            timeline_idea_str(),
-            yr1_jan1_offset_str(),
-        ]
-    )
-    expected_deal_purview_columns.extend(
-        [owner_name_str(), acct_name_str(), time_int_str(), quota_str()]
-    )
-    expected_deal_cashbook_columns.extend(
-        [owner_name_str(), acct_name_str(), time_int_str(), amount_str()]
-    )
-    expected_deal_hour_columns.extend([hour_idea_str(), cumlative_minute_str()])
-    expected_deal_month_columns.extend([month_idea_str(), cumlative_day_str()])
-    expected_deal_weekday_columns.extend([weekday_idea_str(), weekday_order_str()])
-
-    note_column = ["note"]
-    expected_dealunit_columns.extend(note_column)
-    expected_deal_purview_columns.extend(note_column)
-    expected_deal_cashbook_columns.extend(note_column)
-    expected_deal_hour_columns.extend(note_column)
-    expected_deal_month_columns.extend(note_column)
-    expected_deal_weekday_columns.extend(note_column)
-
-    print(f"{list(dealunit_df.columns)=}")
-    assert list(dealunit_df.columns) == expected_dealunit_columns
-    assert list(deal_purview_df.columns) == expected_deal_purview_columns
-    assert list(deal_cashbook_df.columns) == expected_deal_cashbook_columns
-    assert list(deal_hour_df.columns) == expected_deal_hour_columns
-    assert list(deal_month_df.columns) == expected_deal_month_columns
-    assert list(deal_weekday_df.columns) == expected_deal_weekday_columns
+    x_dealunit_path = create_path(x_dir, "dealunit.xlsx")
+    x_deal_purview_path = create_path(x_dir, "deal_purview_episode.xlsx")
+    x_deal_cashbook_path = create_path(x_dir, "deal_cashbook.xlsx")
+    x_deal_hour_path = create_path(x_dir, "deal_timeline_hour.xlsx")
+    x_deal_month_path = create_path(x_dir, "deal_timeline_month.xlsx")
+    x_deal_weekday_path = create_path(x_dir, "deal_timeline_weekday.xlsx")
+    assert x_dealprimefilepaths
+    assert x_dealprimefilepaths.dealunit_path == x_dealunit_path
+    assert x_dealprimefilepaths.deal_purview_path == x_deal_purview_path
+    assert x_dealprimefilepaths.deal_cashbook_path == x_deal_cashbook_path
+    assert x_dealprimefilepaths.deal_hour_path == x_deal_hour_path
+    assert x_dealprimefilepaths.deal_month_path == x_deal_month_path
+    assert x_dealprimefilepaths.deal_weekday_path == x_deal_weekday_path
 
 
-def test_create_init_deal_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
-    # ESTABLISH
-    x_dir = get_test_etl_dir()
-    agg_str = "agg"
-    dealunit_path = create_path(x_dir, "dealunit.xlsx")
-    deal_purview_path = create_path(x_dir, "deal_purview_episode.xlsx")
-    deal_cashbook_path = create_path(x_dir, "deal_cashbook.xlsx")
-    deal_hour_path = create_path(x_dir, "deal_timeline_hour.xlsx")
-    deal_month_path = create_path(x_dir, "deal_timeline_month.xlsx")
-    deal_weekday_path = create_path(x_dir, "deal_timeline_weekday.xlsx")
-    assert sheet_exists(dealunit_path, agg_str) is False
-    assert sheet_exists(deal_purview_path, agg_str) is False
-    assert sheet_exists(deal_cashbook_path, agg_str) is False
-    assert sheet_exists(deal_hour_path, agg_str) is False
-    assert sheet_exists(deal_month_path, agg_str) is False
-    assert sheet_exists(deal_weekday_path, agg_str) is False
-
-    # WHEN
-    create_init_deal_prime_files(x_dir)
+def test_DealPrimeColumns_Exists():
+    # ESTABLISH / WHEN
+    x_dealprimecolumns = DealPrimeColumns()
 
     # THEN
-    assert sheet_exists(dealunit_path, agg_str)
-    assert sheet_exists(deal_purview_path, agg_str)
-    assert sheet_exists(deal_cashbook_path, agg_str)
-    assert sheet_exists(deal_hour_path, agg_str)
-    assert sheet_exists(deal_month_path, agg_str)
-    assert sheet_exists(deal_weekday_path, agg_str)
+    assert x_dealprimecolumns.dealunit_staging_columns == [
+        "source_br",
+        face_name_str(),
+        event_int_str(),
+        deal_idea_str(),
+        c400_number_str(),
+        current_time_str(),
+        fund_coin_str(),
+        monthday_distortion_str(),
+        penny_str(),
+        respect_bit_str(),
+        bridge_str(),
+        timeline_idea_str(),
+        yr1_jan1_offset_str(),
+        "note",
+    ]
+    assert x_dealprimecolumns.deal_purview_staging_columns == [
+        "source_br",
+        face_name_str(),
+        event_int_str(),
+        deal_idea_str(),
+        owner_name_str(),
+        acct_name_str(),
+        time_int_str(),
+        quota_str(),
+        "note",
+    ]
+    assert x_dealprimecolumns.deal_cashbook_staging_columns == [
+        "source_br",
+        face_name_str(),
+        event_int_str(),
+        deal_idea_str(),
+        owner_name_str(),
+        acct_name_str(),
+        time_int_str(),
+        amount_str(),
+        "note",
+    ]
+    assert x_dealprimecolumns.deal_hour_staging_columns == [
+        "source_br",
+        face_name_str(),
+        event_int_str(),
+        deal_idea_str(),
+        hour_idea_str(),
+        cumlative_minute_str(),
+        "note",
+    ]
+    assert x_dealprimecolumns.deal_month_staging_columns == [
+        "source_br",
+        face_name_str(),
+        event_int_str(),
+        deal_idea_str(),
+        month_idea_str(),
+        cumlative_day_str(),
+        "note",
+    ]
+    assert x_dealprimecolumns.deal_weekday_staging_columns == [
+        "source_br",
+        face_name_str(),
+        event_int_str(),
+        deal_idea_str(),
+        weekday_idea_str(),
+        weekday_order_str(),
+        "note",
+    ]
 
-
-def test_create_init_deal_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanup):
-    # ESTABLISH
-    x_dir = get_test_etl_dir()
-
-    # WHEN
-    create_init_deal_prime_files(x_dir)
-
-    # THEN
-    agg_str = "agg"
-    dealunit_path = create_path(x_dir, "dealunit.xlsx")
-    deal_purview_path = create_path(x_dir, "deal_purview_episode.xlsx")
-    deal_cashbook_path = create_path(x_dir, "deal_cashbook.xlsx")
-    deal_hour_path = create_path(x_dir, "deal_timeline_hour.xlsx")
-    deal_month_path = create_path(x_dir, "deal_timeline_month.xlsx")
-    deal_weekday_path = create_path(x_dir, "deal_timeline_weekday.xlsx")
-
-    dealunit_df = pandas_read_excel(dealunit_path, sheet_name=agg_str)
-    deal_purview_df = pandas_read_excel(deal_purview_path, sheet_name=agg_str)
-    deal_cashbook_df = pandas_read_excel(deal_cashbook_path, sheet_name=agg_str)
-    deal_hour_df = pandas_read_excel(deal_hour_path, sheet_name=agg_str)
-    deal_month_df = pandas_read_excel(deal_month_path, sheet_name=agg_str)
-    deal_weekday_df = pandas_read_excel(deal_weekday_path, sheet_name=agg_str)
-
-    common_cols = [deal_idea_str()]
-    expected_dealunit_columns = copy_copy(common_cols)
-    expected_deal_purview_columns = copy_copy(common_cols)
-    expected_deal_cashbook_columns = copy_copy(common_cols)
-    expected_deal_hour_columns = copy_copy(common_cols)
-    expected_deal_month_columns = copy_copy(common_cols)
-    expected_deal_weekday_columns = copy_copy(common_cols)
-    expected_dealunit_columns.extend(
-        [
-            c400_number_str(),
-            current_time_str(),
-            fund_coin_str(),
-            monthday_distortion_str(),
-            penny_str(),
-            respect_bit_str(),
-            bridge_str(),
-            timeline_idea_str(),
-            yr1_jan1_offset_str(),
-        ]
-    )
-    expected_deal_purview_columns.extend(
-        [owner_name_str(), acct_name_str(), time_int_str(), quota_str()]
-    )
-    expected_deal_cashbook_columns.extend(
-        [owner_name_str(), acct_name_str(), time_int_str(), amount_str()]
-    )
-    expected_deal_hour_columns.extend([hour_idea_str(), cumlative_minute_str()])
-    expected_deal_month_columns.extend([month_idea_str(), cumlative_day_str()])
-    expected_deal_weekday_columns.extend([weekday_idea_str(), weekday_order_str()])
-
-    print(f"{list(dealunit_df.columns)=}")
-    assert list(dealunit_df.columns) == expected_dealunit_columns
-    assert list(deal_purview_df.columns) == expected_deal_purview_columns
-    assert list(deal_cashbook_df.columns) == expected_deal_cashbook_columns
-    assert list(deal_hour_df.columns) == expected_deal_hour_columns
-    assert list(deal_month_df.columns) == expected_deal_month_columns
-    assert list(deal_weekday_df.columns) == expected_deal_weekday_columns
-
-
-def test_create_dealunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParameters(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    deals_dir = create_path(get_test_etl_dir(), "deals")
-    create_init_deal_prime_files(deals_dir)
-    agg_str = "agg"
-    dealunit_path = create_path(deals_dir, "dealunit.xlsx")
-    dealunit_columns = [
+    assert x_dealprimecolumns.dealunit_agg_columns == [
         deal_idea_str(),
         c400_number_str(),
         current_time_str(),
@@ -258,6 +156,148 @@ def test_create_dealunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParame
         timeline_idea_str(),
         yr1_jan1_offset_str(),
     ]
+    assert x_dealprimecolumns.deal_purview_agg_columns == [
+        deal_idea_str(),
+        owner_name_str(),
+        acct_name_str(),
+        time_int_str(),
+        quota_str(),
+    ]
+    assert x_dealprimecolumns.deal_cashbook_agg_columns == [
+        deal_idea_str(),
+        owner_name_str(),
+        acct_name_str(),
+        time_int_str(),
+        amount_str(),
+    ]
+    assert x_dealprimecolumns.deal_hour_agg_columns == [
+        deal_idea_str(),
+        hour_idea_str(),
+        cumlative_minute_str(),
+    ]
+    assert x_dealprimecolumns.deal_month_agg_columns == [
+        deal_idea_str(),
+        month_idea_str(),
+        cumlative_day_str(),
+    ]
+    assert x_dealprimecolumns.deal_weekday_agg_columns == [
+        deal_idea_str(),
+        weekday_idea_str(),
+        weekday_order_str(),
+    ]
+
+
+def test_create_init_deal_prime_files_CreatesFiles_staging(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_dir = get_test_etl_dir()
+    staging_str = "staging"
+    xp = DealPrimeFilePaths(x_dir)
+    assert sheet_exists(xp.dealunit_path, staging_str) is False
+    assert sheet_exists(xp.deal_purview_path, staging_str) is False
+    assert sheet_exists(xp.deal_cashbook_path, staging_str) is False
+    assert sheet_exists(xp.deal_hour_path, staging_str) is False
+    assert sheet_exists(xp.deal_month_path, staging_str) is False
+    assert sheet_exists(xp.deal_weekday_path, staging_str) is False
+
+    # WHEN
+    create_init_deal_prime_files(x_dir)
+
+    # THEN
+    assert sheet_exists(xp.dealunit_path, staging_str)
+    assert sheet_exists(xp.deal_purview_path, staging_str)
+    assert sheet_exists(xp.deal_cashbook_path, staging_str)
+    assert sheet_exists(xp.deal_hour_path, staging_str)
+    assert sheet_exists(xp.deal_month_path, staging_str)
+    assert sheet_exists(xp.deal_weekday_path, staging_str)
+
+
+def test_create_init_deal_prime_files_HasCorrectColumns_staging(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_dir = get_test_etl_dir()
+
+    # WHEN
+    create_init_deal_prime_files(x_dir)
+
+    # THEN
+    staging_str = "staging"
+    xp = DealPrimeFilePaths(x_dir)
+    dealunit_df = pandas_read_excel(xp.dealunit_path, sheet_name=staging_str)
+    deal_purview_df = pandas_read_excel(xp.deal_purview_path, sheet_name=staging_str)
+    deal_cashbook_df = pandas_read_excel(xp.deal_cashbook_path, sheet_name=staging_str)
+    deal_hour_df = pandas_read_excel(xp.deal_hour_path, sheet_name=staging_str)
+    deal_month_df = pandas_read_excel(xp.deal_month_path, sheet_name=staging_str)
+    deal_weekday_df = pandas_read_excel(xp.deal_weekday_path, sheet_name=staging_str)
+
+    expected_cols = DealPrimeColumns()
+    print(f"{list(dealunit_df.columns)=}")
+    assert list(dealunit_df.columns) == expected_cols.dealunit_staging_columns
+    assert list(deal_purview_df.columns) == expected_cols.deal_purview_staging_columns
+    assert list(deal_cashbook_df.columns) == expected_cols.deal_cashbook_staging_columns
+    assert list(deal_hour_df.columns) == expected_cols.deal_hour_staging_columns
+    assert list(deal_month_df.columns) == expected_cols.deal_month_staging_columns
+    assert list(deal_weekday_df.columns) == expected_cols.deal_weekday_staging_columns
+
+
+def test_create_init_deal_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_dir = get_test_etl_dir()
+    agg_str = "agg"
+    xp = DealPrimeFilePaths(x_dir)
+    assert sheet_exists(xp.dealunit_path, agg_str) is False
+    assert sheet_exists(xp.deal_purview_path, agg_str) is False
+    assert sheet_exists(xp.deal_cashbook_path, agg_str) is False
+    assert sheet_exists(xp.deal_hour_path, agg_str) is False
+    assert sheet_exists(xp.deal_month_path, agg_str) is False
+    assert sheet_exists(xp.deal_weekday_path, agg_str) is False
+
+    # WHEN
+    create_init_deal_prime_files(x_dir)
+
+    # THEN
+    assert sheet_exists(xp.dealunit_path, agg_str)
+    assert sheet_exists(xp.deal_purview_path, agg_str)
+    assert sheet_exists(xp.deal_cashbook_path, agg_str)
+    assert sheet_exists(xp.deal_hour_path, agg_str)
+    assert sheet_exists(xp.deal_month_path, agg_str)
+    assert sheet_exists(xp.deal_weekday_path, agg_str)
+
+
+def test_create_init_deal_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_dir = get_test_etl_dir()
+
+    # WHEN
+    create_init_deal_prime_files(x_dir)
+
+    # THEN
+    agg_str = "agg"
+    xp = DealPrimeFilePaths(x_dir)
+    dealunit_df = pandas_read_excel(xp.dealunit_path, sheet_name=agg_str)
+    deal_purview_df = pandas_read_excel(xp.deal_purview_path, sheet_name=agg_str)
+    deal_cashbook_df = pandas_read_excel(xp.deal_cashbook_path, sheet_name=agg_str)
+    deal_hour_df = pandas_read_excel(xp.deal_hour_path, sheet_name=agg_str)
+    deal_month_df = pandas_read_excel(xp.deal_month_path, sheet_name=agg_str)
+    deal_weekday_df = pandas_read_excel(xp.deal_weekday_path, sheet_name=agg_str)
+
+    expected_cols = DealPrimeColumns()
+    print(f"{list(dealunit_df.columns)=}")
+    assert list(dealunit_df.columns) == expected_cols.dealunit_agg_columns
+    assert list(deal_purview_df.columns) == expected_cols.deal_purview_agg_columns
+    assert list(deal_cashbook_df.columns) == expected_cols.deal_cashbook_agg_columns
+    assert list(deal_hour_df.columns) == expected_cols.deal_hour_agg_columns
+    assert list(deal_month_df.columns) == expected_cols.deal_month_agg_columns
+    assert list(deal_weekday_df.columns) == expected_cols.deal_weekday_agg_columns
+
+
+def test_create_dealunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParameters(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    deals_dir = create_path(get_test_etl_dir(), "deals")
+    create_init_deal_prime_files(deals_dir)
+    xp = DealPrimeFilePaths(deals_dir)
+    xc = DealPrimeColumns()
+    agg_str = "agg"
     accord56_deal_idea_str = "accord56"
     accord56 = [
         accord56_deal_idea_str,
@@ -272,8 +312,8 @@ def test_create_dealunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParame
         "",  # accord56_yr1_jan1_offset_str,
     ]
     dealunit_rows = [accord56]
-    dealunit_df = DataFrame(dealunit_rows, columns=dealunit_columns)
-    upsert_sheet(dealunit_path, agg_str, dealunit_df)
+    dealunit_df = DataFrame(dealunit_rows, columns=xc.dealunit_agg_columns)
+    upsert_sheet(xp.dealunit_path, agg_str, dealunit_df)
     deal_jsons_dir = create_path(deals_dir, "deal_jsons")
     accord56_path = create_path(deal_jsons_dir, "accord56.json")
     assert os_path_exists(accord56_path) is False
@@ -297,20 +337,9 @@ def test_create_dealunit_jsons_from_prime_files_Scenario1_PartialTimeLineUnitPar
     # ESTABLISH
     deals_dir = create_path(get_test_etl_dir(), "deals")
     create_init_deal_prime_files(deals_dir)
+    xp = DealPrimeFilePaths(deals_dir)
+    xc = DealPrimeColumns()
     agg_str = "agg"
-    dealunit_path = create_path(deals_dir, "dealunit.xlsx")
-    dealunit_columns = [
-        deal_idea_str(),
-        c400_number_str(),
-        current_time_str(),
-        fund_coin_str(),
-        monthday_distortion_str(),
-        penny_str(),
-        respect_bit_str(),
-        bridge_str(),
-        timeline_idea_str(),
-        yr1_jan1_offset_str(),
-    ]
     accord56_deal_idea = "accord56"
     accord56_c400_number = 9
     accord56_timeline_idea = "timelineX3"
@@ -328,8 +357,8 @@ def test_create_dealunit_jsons_from_prime_files_Scenario1_PartialTimeLineUnitPar
         accord56_yr1_jan1_offset,
     ]
     dealunit_rows = [accord56]
-    dealunit_df = DataFrame(dealunit_rows, columns=dealunit_columns)
-    upsert_sheet(dealunit_path, agg_str, dealunit_df)
+    dealunit_df = DataFrame(dealunit_rows, columns=xc.dealunit_agg_columns)
+    upsert_sheet(xp.dealunit_path, agg_str, dealunit_df)
     deal_jsons_dir = create_path(deals_dir, "deal_jsons")
     accord56_path = create_path(deal_jsons_dir, "accord56.json")
     assert os_path_exists(accord56_path) is False
