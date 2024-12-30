@@ -372,9 +372,7 @@ def get_str_in_sub_dict(x_str: str, x_dict: dict[str, str]) -> dict[str, str]:
     }
 
 
-# def get_sorted_list_of_dict_keys(x_dict: dict[str]) -> dict[str, str]:
-#     return {
-#         x_key: x_value
-#         for x_key, x_value in x_dict.items()
-#         if x_str in x_key or x_str in x_value
-#     }
+def get_sorted_list_of_dict_keys(
+    x_dict: dict[any, dict], nested_value_key: str
+) -> list[str]:
+    return sorted(x_dict.keys(), key=lambda k: x_dict[k][nested_value_key])
