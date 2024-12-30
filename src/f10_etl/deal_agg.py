@@ -181,11 +181,11 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
             deal_idea=deal_attrs.get("deal_idea"),
             deals_dir=None,
             timeline=timelineunit_shop(timeline_config),
-            current_time=None,
-            bridge=None,
-            fund_coin=None,
-            respect_bit=None,
-            penny=None,
+            current_time=if_nan_return_None(deal_attrs.get("current_time")),
+            bridge=deal_attrs.get("bridge"),
+            fund_coin=if_nan_return_None(deal_attrs.get("fund_coin")),
+            penny=if_nan_return_None(deal_attrs.get("penny")),
+            respect_bit=if_nan_return_None(deal_attrs.get("respect_bit")),
         )
         dealunits[dealunit.deal_idea] = dealunit
     deal_jsons_dir = create_path(deals_dir, "deal_jsons")

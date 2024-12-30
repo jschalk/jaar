@@ -331,7 +331,65 @@ def test_create_dealunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParame
     assert accord56_dealunit == expected_dealunit
 
 
-def test_create_dealunit_jsons_from_prime_files_Scenario1_PartialTimeLineUnitParameters(
+def test_create_dealunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineUnitParameters(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    deals_dir = create_path(get_test_etl_dir(), "deals")
+    create_init_deal_prime_files(deals_dir)
+    xp = DealPrimeFilePaths(deals_dir)
+    xc = DealPrimeColumns()
+    agg_str = "agg"
+    accord56_deal_idea_str = "accord56"
+    accord56_current_time = 77
+    accord56_fund_coin = 3
+    accord56_penny = 2
+    accord56_respect_bit = 55
+    accord56_bridge = "/"
+    accord56 = [
+        accord56_deal_idea_str,
+        "",  # accord56_c400_number_str,
+        accord56_current_time,
+        accord56_fund_coin,
+        "",  # accord56_monthday_distortion_str,
+        accord56_penny,
+        accord56_respect_bit,
+        accord56_bridge,
+        "",  # accord56_timeline_idea_str,
+        "",  # accord56_yr1_jan1_offset_str,
+    ]
+    dealunit_rows = [accord56]
+    dealunit_df = DataFrame(dealunit_rows, columns=xc.dealunit_agg_columns)
+    upsert_sheet(xp.dealunit_path, agg_str, dealunit_df)
+    deal_jsons_dir = create_path(deals_dir, "deal_jsons")
+    accord56_path = create_path(deal_jsons_dir, "accord56.json")
+    assert os_path_exists(accord56_path) is False
+
+    # WHEN
+    create_dealunit_jsons_from_prime_files(deals_dir=deals_dir)
+
+    # THEN
+    assert os_path_exists(accord56_path)
+    accord56_dealunit = deal_get_from_json(open_file(accord56_path))
+    assert accord56_dealunit
+    assert accord56_dealunit.deal_idea == accord56_deal_idea_str
+    assert accord56_dealunit.current_time == accord56_current_time
+    assert accord56_dealunit.fund_coin == accord56_fund_coin
+    assert accord56_dealunit.penny == accord56_penny
+    assert accord56_dealunit.respect_bit == accord56_respect_bit
+    assert accord56_dealunit.bridge == accord56_bridge
+    default_dealunit = dealunit_shop(accord56_deal_idea_str)
+    assert accord56_dealunit.timeline == default_dealunit.timeline
+    assert accord56_dealunit.deal_idea == accord56_deal_idea_str
+    assert accord56_dealunit.current_time != default_dealunit.current_time
+    assert accord56_dealunit.fund_coin != default_dealunit.fund_coin
+    assert accord56_dealunit.penny != default_dealunit.penny
+    assert accord56_dealunit.respect_bit != default_dealunit.respect_bit
+    assert accord56_dealunit.bridge != default_dealunit.bridge
+    assert accord56_dealunit != default_dealunit
+
+
+def test_create_dealunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitParameters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
