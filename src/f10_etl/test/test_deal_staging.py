@@ -5,6 +5,8 @@ from src.f03_chrono.chrono import (
     monthday_distortion_str,
     timeline_idea_str,
     yr1_jan1_offset_str,
+    timelineunit_shop,
+    create_timeline_config,
 )
 from src.f04_gift.atom_config import (
     face_name_str,
@@ -37,15 +39,6 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 from copy import copy as copy_copy
 
-# _get_deal_brick_format_filenames == {
-#     "br00000.xlsx",dealunit_str
-#     "br00001.xlsx",deal_purviewlog_str
-#     "br00002.xlsx",deal_cashbook_str
-#     "br00003.xlsx",deal_hour_str
-#     "br00004.xlsx",deal_month_str
-#     "br00005.xlsx",deal_weekday_str
-#     "br00042.xlsx",
-# }
 
 # br00000 deal_idea c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
 # br00001 deal_idea owner_name,acct_name,time_int,quota
@@ -245,7 +238,7 @@ def test_create_init_deal_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanu
     assert list(deal_weekday_df.columns) == expected_deal_weekday_columns
 
 
-def test_create_dealunit_jsons_from_prime_files_Scenario0_MinimumDealUnit(
+def test_create_dealunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParameters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -294,6 +287,73 @@ def test_create_dealunit_jsons_from_prime_files_Scenario0_MinimumDealUnit(
     assert accord56_dealunit
     assert accord56_dealunit.deal_idea == accord56_deal_idea_str
     expected_dealunit = dealunit_shop(accord56_deal_idea_str)
+    assert accord56_dealunit.timeline == expected_dealunit.timeline
+    assert accord56_dealunit == expected_dealunit
+
+
+def test_create_dealunit_jsons_from_prime_files_Scenario1_PartialTimeLineUnitParameters(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    deals_dir = create_path(get_test_etl_dir(), "deals")
+    create_init_deal_prime_files(deals_dir)
+    agg_str = "agg"
+    dealunit_path = create_path(deals_dir, "dealunit.xlsx")
+    dealunit_columns = [
+        deal_idea_str(),
+        c400_number_str(),
+        current_time_str(),
+        fund_coin_str(),
+        monthday_distortion_str(),
+        penny_str(),
+        respect_bit_str(),
+        bridge_str(),
+        timeline_idea_str(),
+        yr1_jan1_offset_str(),
+    ]
+    accord56_deal_idea = "accord56"
+    accord56_c400_number = 9
+    accord56_timeline_idea = "timelineX3"
+    accord56_yr1_jan1_offset = 555
+    accord56 = [
+        accord56_deal_idea,
+        accord56_c400_number,
+        "",  # current_time_str(),
+        "",  # fund_coin_str(),
+        "",  # monthday_distortion_str(),
+        "",  # penny_str(),
+        "",  # respect_bit_str(),
+        "",  # bridge_str(),
+        accord56_timeline_idea,
+        accord56_yr1_jan1_offset,
+    ]
+    dealunit_rows = [accord56]
+    dealunit_df = DataFrame(dealunit_rows, columns=dealunit_columns)
+    upsert_sheet(dealunit_path, agg_str, dealunit_df)
+    deal_jsons_dir = create_path(deals_dir, "deal_jsons")
+    accord56_path = create_path(deal_jsons_dir, "accord56.json")
+    assert os_path_exists(accord56_path) is False
+
+    # WHEN
+    create_dealunit_jsons_from_prime_files(deals_dir=deals_dir)
+
+    # THEN
+    assert os_path_exists(accord56_path)
+    accord56_dealunit = deal_get_from_json(open_file(accord56_path))
+    assert accord56_dealunit
+    assert accord56_dealunit.deal_idea == accord56_deal_idea
+    expected_timeline_config = create_timeline_config(
+        timeline_idea=accord56_timeline_idea,
+        c400_count=accord56_c400_number,
+        yr1_jan1_offset=accord56_yr1_jan1_offset,
+    )
+    expected_timelineunit = timelineunit_shop(expected_timeline_config)
+    expected_dealunit = dealunit_shop(
+        accord56_deal_idea, timeline=expected_timelineunit
+    )
+    assert accord56_dealunit.timeline.timeline_idea == accord56_timeline_idea
+    assert accord56_dealunit.timeline.c400_number == accord56_c400_number
+    assert accord56_dealunit.timeline == expected_timelineunit
     assert accord56_dealunit.timeline == expected_dealunit.timeline
     assert accord56_dealunit == expected_dealunit
 

@@ -1,6 +1,11 @@
 from src.f00_instrument.file import create_path, save_file
+from src.f03_chrono.chrono import create_timeline_config, timelineunit_shop
 from src.f07_deal.deal import dealunit_shop
-from src.f09_brick.pandas_tool import upsert_sheet, dataframe_to_dict
+from src.f09_brick.pandas_tool import (
+    upsert_sheet,
+    dataframe_to_dict,
+    if_nan_return_None,
+)
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
@@ -162,10 +167,20 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
     deal_weekday_dict = dataframe_to_dict(deal_weekday_df, "deal_idea")
     dealunits = {}
     for deal_attrs in dealunit_dict.values():
+        timeline_config = create_timeline_config(
+            timeline_idea=if_nan_return_None(deal_attrs.get("timeline_idea")),
+            c400_count=if_nan_return_None(deal_attrs.get("c400_number")),
+            hour_length=None,
+            month_length=None,
+            weekday_list=None,
+            months_list=None,
+            monthday_distortion=None,
+            yr1_jan1_offset=if_nan_return_None(deal_attrs.get("yr1_jan1_offset")),
+        )
         dealunit = dealunit_shop(
             deal_idea=deal_attrs.get("deal_idea"),
-            deals_dir=deals_dir,
-            timeline=None,
+            deals_dir=None,
+            timeline=timelineunit_shop(timeline_config),
             current_time=None,
             bridge=None,
             fund_coin=None,

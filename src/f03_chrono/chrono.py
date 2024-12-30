@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_toolbox import get_0_if_None, get_dict_from_json
+from src.f00_instrument.dict_toolbox import get_1_if_None, get_dict_from_json
 from src.f00_instrument.file import open_file, create_path
 from src.f01_road.road import RoadUnit, TimeLineIdea
 from src.f02_bud.item import (
@@ -335,6 +335,7 @@ def validate_timeline_config(config_dict: dict) -> bool:
         elif config_key in len_elements and len(config_element) == 0:
             return False
         elif config_key in {weekdays_config_str()}:
+            print(f"{config_element=}")
             if _duplicate_exists(config_element):
                 return False
         elif config_key in {months_config_str(), hours_config_str()}:
@@ -345,32 +346,108 @@ def validate_timeline_config(config_dict: dict) -> bool:
 
 
 def _duplicate_exists(config_element: list) -> bool:
+    print(f"{config_element=}")
     return len(config_element) != len(set(config_element))
 
 
+def get_default_hours_config() -> list[list[str, int]]:
+    return [
+        ["0-12am", 60],
+        ["1-1am", 120],
+        ["2-2am", 180],
+        ["3-3am", 240],
+        ["4-4am", 300],
+        ["5-5am", 360],
+        ["6-6am", 420],
+        ["7-7am", 480],
+        ["8-8am", 540],
+        ["9-9am", 600],
+        ["10-10am", 660],
+        ["11-11am", 720],
+        ["12-12pm", 780],
+        ["13-1pm", 840],
+        ["14-2pm", 900],
+        ["15-3pm", 960],
+        ["16-4pm", 1020],
+        ["17-5pm", 1080],
+        ["18-6pm", 1140],
+        ["19-7pm", 1200],
+        ["20-8pm", 1260],
+        ["21-9pm", 1320],
+        ["22-10pm", 1380],
+        ["23-11pm", 1440],
+    ]
+
+
+def get_default_months_config() -> list[list[str, int]]:
+    return [
+        ["March", 31],
+        ["April", 61],
+        ["May", 92],
+        ["June", 122],
+        ["July", 153],
+        ["August", 184],
+        ["September", 214],
+        ["October", 245],
+        ["November", 275],
+        ["December", 306],
+        ["January", 337],
+        ["February", 365],
+    ]
+
+
+def get_default_weekdays_config() -> list[list[str, int]]:
+    return [
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+        "Monday",
+        "Tuesday",
+    ]
+
+
 def create_timeline_config(
-    timeline_idea: TimeLineIdea,
-    c400_count: int,
-    hour_length: int,
-    month_length: int,
-    weekday_list: list[str],
-    months_list: list[str],
+    timeline_idea: TimeLineIdea = None,
+    c400_count: int = None,
+    hour_length: int = None,
+    month_length: int = None,
+    weekday_list: list[str] = None,
+    months_list: list[str] = None,
     monthday_distortion: int = None,
     yr1_jan1_offset: int = None,
 ) -> dict:
-    months_range = range(len(months_list))
-    month_config = [_month_config(x, months_list, month_length) for x in months_range]
-    hours_count = round(1440 / hour_length)
-    hours_range = range(hours_count)
-    hour_config = [_hour_config(x, hours_count, hour_length) for x in hours_range]
+    if timeline_idea is None:
+        timeline_idea = "creg"
+    if c400_count is None:
+        c400_count = 7
+    if yr1_jan1_offset is None:
+        yr1_jan1_offset = 440640
+
+    if hour_length:
+        hours_count = round(1440 / hour_length)
+        hours_range = range(hours_count)
+        hour_config = [_hour_config(x, hours_count, hour_length) for x in hours_range]
+    else:
+        hour_config = get_default_hours_config()
+    if not weekday_list:
+        weekday_list = get_default_weekdays_config()
+    if months_list:
+        months_range = range(len(months_list))
+        month_config = [
+            _month_config(x, months_list, month_length) for x in months_range
+        ]
+    else:
+        month_config = get_default_months_config()
     return {
         hours_config_str(): hour_config,
         weekdays_config_str(): weekday_list,
         months_config_str(): month_config,
         timeline_idea_str(): timeline_idea,
         c400_number_str(): c400_count,
-        monthday_distortion_str(): get_0_if_None(monthday_distortion),
-        yr1_jan1_offset_str(): get_0_if_None(yr1_jan1_offset),
+        monthday_distortion_str(): get_1_if_None(monthday_distortion),
+        yr1_jan1_offset_str(): yr1_jan1_offset,
     }
 
 
