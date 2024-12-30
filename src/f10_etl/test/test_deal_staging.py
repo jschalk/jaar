@@ -324,9 +324,12 @@ def test_create_dealunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParame
     # THEN
     assert os_path_exists(accord56_path)
     accord56_dealunit = deal_get_from_json(open_file(accord56_path))
+    accord56_dealunit.deals_dir = deals_dir
+    accord56_dealunit._set_deal_dirs()
     assert accord56_dealunit
     assert accord56_dealunit.deal_idea == accord56_deal_idea_str
-    expected_dealunit = dealunit_shop(accord56_deal_idea_str)
+    assert accord56_dealunit.deals_dir == deals_dir
+    expected_dealunit = dealunit_shop(accord56_deal_idea_str, deals_dir)
     assert accord56_dealunit.timeline == expected_dealunit.timeline
     assert accord56_dealunit == expected_dealunit
 

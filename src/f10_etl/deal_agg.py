@@ -177,9 +177,10 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
             monthday_distortion=None,
             yr1_jan1_offset=if_nan_return_None(deal_attrs.get("yr1_jan1_offset")),
         )
+        print(f"{deals_dir=}")
         dealunit = dealunit_shop(
             deal_idea=deal_attrs.get("deal_idea"),
-            deals_dir=None,
+            deals_dir=deals_dir,
             timeline=timelineunit_shop(timeline_config),
             current_time=if_nan_return_None(deal_attrs.get("current_time")),
             bridge=deal_attrs.get("bridge"),
