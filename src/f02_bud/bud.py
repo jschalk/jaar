@@ -877,7 +877,7 @@ class BudUnit:
 
     def get_credit_ledger_debtit_ledger(
         self,
-    ) -> tuple[dict[str:float], dict[str:float]]:
+    ) -> tuple[dict[str, float], dict[str, float]]:
         credit_ledger = {}
         debtit_ledger = {}
         for x_acctunit in self.accts.values():
