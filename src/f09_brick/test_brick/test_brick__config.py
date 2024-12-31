@@ -75,7 +75,7 @@ from src.f07_deal.deal_config import (
     dealunit_str,
     deal_turnlog_str,
     deal_turn_episode_str,
-    deal_bankbook_str,
+    deal_cashbook_str,
     deal_timeline_hour_str,
     deal_timeline_month_str,
     deal_timeline_weekday_str,
@@ -367,7 +367,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert dealunit_str() in brick_config_categorys
     assert deal_turnlog_str() not in brick_config_categorys
     assert deal_turn_episode_str() in brick_config_categorys
-    assert deal_bankbook_str() in brick_config_categorys
+    assert deal_cashbook_str() in brick_config_categorys
     assert deal_timeline_hour_str() in brick_config_categorys
     assert deal_timeline_month_str() in brick_config_categorys
     assert deal_timeline_weekday_str() in brick_config_categorys
@@ -428,7 +428,7 @@ def _validate_brick_config(x_brick_config: dict):
             map_road_str(),
         }:
             assert brick_dict.get(allowed_crud_str()) == insert_one_time_str()
-        elif brick_category in {deal_turn_episode_str(), deal_bankbook_str()}:
+        elif brick_category in {deal_turn_episode_str(), deal_cashbook_str()}:
             assert brick_dict.get(allowed_crud_str()) == insert_mulitple_str()
         elif (
             sub_category.get(atom_update()) != None
@@ -650,7 +650,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     # set_brick_config_json(bud_itemunit_str(), 18)
     # set_brick_config_json(budunit_str(), 19)
     # set_brick_config_json(deal_turn_episode_str(), 20)
-    # set_brick_config_json(deal_bankbook_str(), 21)
+    # set_brick_config_json(deal_cashbook_str(), 21)
 
     x_brick_config = get_brick_config_dict()
 
@@ -674,7 +674,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     assert x_brick_config.get(bud_itemunit_str()).get(bo) == 18
     assert x_brick_config.get(budunit_str()).get(bo) == 19
     assert x_brick_config.get(deal_turn_episode_str()).get(bo) == 20
-    assert x_brick_config.get(deal_bankbook_str()).get(bo) == 21
+    assert x_brick_config.get(deal_cashbook_str()).get(bo) == 21
 
 
 def test_get_quick_bricks_column_ref_ReturnsObj():

@@ -38,7 +38,7 @@ def get_ex1_br00001_df() -> DataFrame:
 
 
 def get_ex1_br00002_df() -> DataFrame:
-    """brick_format_00002_deal_bankbook_v0_0_0
+    """brick_format_00002_deal_cashbook_v0_0_0
     acct_name,amount,deal_idea,owner_name,time_int"""
     x_df = DataFrame(
         columns=["acct_name", "amount", "deal_idea", "owner_name", "time_int"]
@@ -149,7 +149,7 @@ def get_ex2_br00001_df() -> DataFrame:
 
 
 def get_ex2_br00002_df() -> DataFrame:
-    """brick_format_00002_deal_bankbook_v0_0_0
+    """brick_format_00002_deal_cashbook_v0_0_0
     acct_name,amount,deal_idea,owner_name,time_int"""
     x_df = DataFrame(
         columns=["acct_name", "amount", "deal_idea", "owner_name", "time_int"]

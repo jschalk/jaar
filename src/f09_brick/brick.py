@@ -252,7 +252,7 @@ def deal_build_from_df(
         )
         dealunit_dict[x_dealunit.deal_idea] = x_dealunit
         _add_turnepisodes_from_df(x_dealunit, br00001_df)
-        _add_bankpurchases_from_df(x_dealunit, br00002_df)
+        _add_cashpurchases_from_df(x_dealunit, br00002_df)
     return dealunit_dict
 
 
@@ -302,10 +302,10 @@ def _add_turnepisodes_from_df(x_dealunit: DealUnit, br00001_df: DataFrame):
         )
 
 
-def _add_bankpurchases_from_df(x_dealunit: DealUnit, br00002_df: DataFrame):
+def _add_cashpurchases_from_df(x_dealunit: DealUnit, br00002_df: DataFrame):
     query_str = f"deal_idea == '{x_dealunit.deal_idea}'"
     for index, row in br00002_df.query(query_str).iterrows():
-        x_dealunit.add_bankpurchase(
+        x_dealunit.add_cashpurchase(
             x_owner_name=row["owner_name"],
             x_acct_name=row["acct_name"],
             x_time_int=row["time_int"],

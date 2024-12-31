@@ -21,7 +21,7 @@ from src.f07_deal.deal_config import (
     timeline_str,
     current_time_str,
     turnlogs_str,
-    bankbook_str,
+    cashbook_str,
 )
 from src.f07_deal.examples.deal_env import (
     get_test_deals_dir,
@@ -29,7 +29,7 @@ from src.f07_deal.examples.deal_env import (
 )
 
 
-def test_DealUnit_get_dict_ReturnsObjWith_bankbook():
+def test_DealUnit_get_dict_ReturnsObjWith_cashbook():
     # ESTABLISH
     accord45_str = "accord45"
     accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
@@ -42,16 +42,16 @@ def test_DealUnit_get_dict_ReturnsObjWith_bankbook():
     sue_x4_magnitude = 55
     sue_x7_time_int = 505
     sue_x7_magnitude = 66
-    bank_time_int = 15
+    cash_time_int = 15
     bob_sue_amount = 30000
     accord_deal.set_current_time(accord_current_time_int)
     accord_deal.add_turnepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
     accord_deal.add_turnepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
     accord_deal.add_turnepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
-    accord_deal.add_bankpurchase(
+    accord_deal.add_cashpurchase(
         x_owner_name=bob_str,
         x_acct_name=sue_str,
-        x_time_int=bank_time_int,
+        x_time_int=cash_time_int,
         x_amount=bob_sue_amount,
     )
 
@@ -60,7 +60,7 @@ def test_DealUnit_get_dict_ReturnsObjWith_bankbook():
 
     # THEN
     print(f"{ accord_deal._get_turnlogs_dict()=}")
-    print(f"{ accord_deal.bankbook.get_dict()=}")
+    print(f"{ accord_deal.cashbook.get_dict()=}")
     assert x_dict.get(deal_idea_str()) == accord45_str
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
     assert x_dict.get(current_time_str()) == accord_current_time_int
@@ -69,7 +69,7 @@ def test_DealUnit_get_dict_ReturnsObjWith_bankbook():
     assert x_dict.get(respect_bit_str()) == default_respect_bit_if_None()
     assert x_dict.get(penny_str()) == default_penny_if_None()
     assert x_dict.get(turnlogs_str()) == accord_deal._get_turnlogs_dict()
-    assert x_dict.get(bankbook_str()) == accord_deal.bankbook.get_dict()
+    assert x_dict.get(cashbook_str()) == accord_deal.cashbook.get_dict()
     assert set(x_dict.keys()) == {
         deal_idea_str(),
         timeline_str(),
@@ -79,20 +79,20 @@ def test_DealUnit_get_dict_ReturnsObjWith_bankbook():
         fund_coin_str(),
         respect_bit_str(),
         penny_str(),
-        bankbook_str(),
+        cashbook_str(),
     }
 
 
-def test_DealUnit_get_dict_ReturnsObjWithOut_bankbook():
+def test_DealUnit_get_dict_ReturnsObjWithOut_cashbook():
     # ESTABLISH
     accord45_str = "accord45"
     accord_deal = dealunit_shop(accord45_str, get_test_deals_dir())
 
     # WHEN
-    x_dict = accord_deal.get_dict(include_bankbook=False)
+    x_dict = accord_deal.get_dict(include_cashbook=False)
 
     # THEN
-    assert not x_dict.get(bankbook_str())
+    assert not x_dict.get(cashbook_str())
     assert set(x_dict.keys()) == {
         deal_idea_str(),
         timeline_str(),
@@ -149,7 +149,7 @@ def test_get_from_dict_ReturnsDealUnit():
     sue_x4_magnitude = 55
     sue_x7_time_int = 7
     sue_x7_magnitude = 66
-    bank_time_int = 15
+    cash_time_int = 15
     bob_sue_amount = 30000
     accord_deal.add_turnepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
     accord_deal.add_turnepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
@@ -159,10 +159,10 @@ def test_get_from_dict_ReturnsDealUnit():
     accord_deal.fund_coin = sue_fund_coin
     accord_deal.respect_bit = sue_respect_bit
     accord_deal.penny = sue_penny
-    accord_deal.add_bankpurchase(
+    accord_deal.add_cashpurchase(
         x_owner_name=bob_str,
         x_acct_name=sue_str,
-        x_time_int=bank_time_int,
+        x_time_int=cash_time_int,
         x_amount=bob_sue_amount,
     )
     x_dict = accord_deal.get_dict()
@@ -179,7 +179,7 @@ def test_get_from_dict_ReturnsDealUnit():
     assert x_deal.respect_bit == sue_respect_bit
     assert x_deal.penny == sue_penny
     assert x_deal.turnlogs == accord_deal.turnlogs
-    assert x_deal.bankbook == accord_deal.bankbook
+    assert x_deal.cashbook == accord_deal.cashbook
     assert x_deal.deals_dir == accord_deal.deals_dir
     assert x_deal == accord_deal
 
