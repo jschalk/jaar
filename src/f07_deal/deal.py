@@ -19,6 +19,7 @@ from src.f01_road.finance import (
     TimeLinePoint,
     FundNum,
 )
+from src.f01_road.finance_tran import get_tranbook_from_dict
 from src.f01_road.road import (
     default_bridge_if_None,
     OwnerName,
@@ -423,6 +424,7 @@ def get_from_dict(deal_dict: dict) -> DealUnit:
     x_deal.respect_bit = deal_dict.get("respect_bit")
     x_deal.penny = deal_dict.get("penny")
     x_deal.turnlogs = _get_turnlogs_from_dict(deal_dict.get("turnlogs"))
+    x_deal.cashbook = get_tranbook_from_dict(deal_dict.get("cashbook"))
     return x_deal
 
 

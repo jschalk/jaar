@@ -335,7 +335,6 @@ def validate_timeline_config(config_dict: dict) -> bool:
         elif config_key in len_elements and len(config_element) == 0:
             return False
         elif config_key in {weekdays_config_str()}:
-            print(f"{config_element=}")
             if _duplicate_exists(config_element):
                 return False
         elif config_key in {months_config_str(), hours_config_str()}:
@@ -346,7 +345,6 @@ def validate_timeline_config(config_dict: dict) -> bool:
 
 
 def _duplicate_exists(config_element: list) -> bool:
-    print(f"{config_element=}")
     return len(config_element) != len(set(config_element))
 
 

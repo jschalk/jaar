@@ -8,6 +8,7 @@ from src.f03_chrono.chrono import (
     validate_timeline_config,
 )
 from src.f07_deal.deal import dealunit_shop
+from src.f09_brick.brick import _add_cashpurchases_from_df, _add_turnepisodes_from_df
 from src.f09_brick.pandas_tool import (
     upsert_sheet,
     dataframe_to_dict,
@@ -168,7 +169,7 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
     deal_weekday_df = pandas_read_excel(xp.deal_weekday_path, "agg")
     dealunits_dict = dataframe_to_dict(dealunit_df, ["deal_idea"])
     deals_turn_dict = dataframe_to_dict(deal_turn_df, ["deal_idea"])
-    deals_cashbook_dict = dataframe_to_dict(deal_cashbook_df, ["deal_idea"])
+    # deals_cashbook_dict = dataframe_to_dict(deal_cashbook_df, ["deal_idea", "owner_name", "acct_name"])
     deals_hour_dict = dataframe_to_dict(deal_hour_df, ["deal_idea", "hour_idea"])
     deals_month_dict = dataframe_to_dict(deal_month_df, ["deal_idea", "month_idea"])
     weekday_keys = ["deal_idea", "weekday_idea"]
@@ -200,8 +201,6 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
         if validate_timeline_config(timeline_config) is False:
             raise ValueError(f"Invalid timeline_config: {timeline_config=}")
 
-        # Create cashbook TranBook
-
         dealunit = dealunit_shop(
             deal_idea=x_deal_idea,
             deals_dir=deals_dir,
@@ -212,8 +211,8 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
             penny=if_nan_return_None(deal_attrs.get("penny")),
             respect_bit=if_nan_return_None(deal_attrs.get("respect_bit")),
         )
-        # dealunit.cashbook
-        # dealunit.turnbook
+        _add_cashpurchases_from_df(dealunit, deal_cashbook_df)
+        # _add_turnepisodes_from_df(dealunit, deal_cashbook_df)
         dealunits[dealunit.deal_idea] = dealunit
     deal_jsons_dir = create_path(deals_dir, "deal_jsons")
     for dealunit in dealunits.values():

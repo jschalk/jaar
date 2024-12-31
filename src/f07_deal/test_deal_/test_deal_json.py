@@ -149,6 +149,8 @@ def test_get_from_dict_ReturnsDealUnit():
     sue_x4_magnitude = 55
     sue_x7_time_int = 7
     sue_x7_magnitude = 66
+    cash_time_int = 15
+    bob_sue_amount = 30000
     accord_deal.add_turnepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
     accord_deal.add_turnepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
     accord_deal.add_turnepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
@@ -157,6 +159,12 @@ def test_get_from_dict_ReturnsDealUnit():
     accord_deal.fund_coin = sue_fund_coin
     accord_deal.respect_bit = sue_respect_bit
     accord_deal.penny = sue_penny
+    accord_deal.add_cashpurchase(
+        x_owner_name=bob_str,
+        x_acct_name=sue_str,
+        x_time_int=cash_time_int,
+        x_amount=bob_sue_amount,
+    )
     x_dict = accord_deal.get_dict()
 
     # WHEN
@@ -171,6 +179,7 @@ def test_get_from_dict_ReturnsDealUnit():
     assert x_deal.respect_bit == sue_respect_bit
     assert x_deal.penny == sue_penny
     assert x_deal.turnlogs == accord_deal.turnlogs
+    assert x_deal.cashbook == accord_deal.cashbook
     assert x_deal.deals_dir == accord_deal.deals_dir
     assert x_deal == accord_deal
 

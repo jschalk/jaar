@@ -183,12 +183,15 @@ def tranbook_shop(
     )
 
 
-def get_tranbook_from_dict():
-    pass
-
-
-def get_tranbook_from_json():
-    pass
+def get_tranbook_from_dict(x_dict: dict) -> TranBook:
+    x_tranunits = x_dict.get("tranunits")
+    new_tranunits = {}
+    for x_owner_name, x_acct_dict in x_tranunits.items():
+        for x_acct_name, x_time_int_dict in x_acct_dict.items():
+            for x_time_int, x_amount in x_time_int_dict.items():
+                x_key_list = [x_owner_name, x_acct_name, int(x_time_int)]
+                set_in_nested_dict(new_tranunits, x_key_list, x_amount)
+    return tranbook_shop(x_dict.get("deal_idea"), new_tranunits)
 
 
 @dataclass

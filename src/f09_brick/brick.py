@@ -251,8 +251,8 @@ def deal_build_from_df(
             penny=x_penny,
         )
         dealunit_dict[x_dealunit.deal_idea] = x_dealunit
-        _add_turnepisode(x_dealunit, br00001_df)
-        _add_cashpurchase(x_dealunit, br00002_df)
+        _add_turnepisodes_from_df(x_dealunit, br00001_df)
+        _add_cashpurchases_from_df(x_dealunit, br00002_df)
     return dealunit_dict
 
 
@@ -291,7 +291,7 @@ def _get_deal_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
     return deal_weekdays_dict
 
 
-def _add_turnepisode(x_dealunit: DealUnit, br00001_df: DataFrame):
+def _add_turnepisodes_from_df(x_dealunit: DealUnit, br00001_df: DataFrame):
     query_str = f"deal_idea == '{x_dealunit.deal_idea}'"
     for index, row in br00001_df.query(query_str).iterrows():
         x_dealunit.add_turnepisode(
@@ -302,7 +302,7 @@ def _add_turnepisode(x_dealunit: DealUnit, br00001_df: DataFrame):
         )
 
 
-def _add_cashpurchase(x_dealunit: DealUnit, br00002_df: DataFrame):
+def _add_cashpurchases_from_df(x_dealunit: DealUnit, br00002_df: DataFrame):
     query_str = f"deal_idea == '{x_dealunit.deal_idea}'"
     for index, row in br00002_df.query(query_str).iterrows():
         x_dealunit.add_cashpurchase(
