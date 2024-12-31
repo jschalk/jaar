@@ -20,7 +20,7 @@
             }
         }
     },
-    "deal_purview_episode": {
+    "deal_turn_episode": {
         "jkeys": {
             "acct_name": {
                 "jaar_type": "AcctName"

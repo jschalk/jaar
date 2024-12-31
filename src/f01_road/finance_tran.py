@@ -192,37 +192,37 @@ def get_tranbook_from_json():
 
 
 @dataclass
-class PurviewEpisode:
+class TurnEpisode:
     time_int: TimeLinePoint = None
     quota: FundNum = None
     _magnitude: FundNum = None
-    _net_purviews: dict[AcctName, FundNum] = None
+    _net_turns: dict[AcctName, FundNum] = None
 
-    def set_net_purview(self, x_acct_name: AcctName, net_purview: FundNum):
-        self._net_purviews[x_acct_name] = net_purview
+    def set_net_turn(self, x_acct_name: AcctName, net_turn: FundNum):
+        self._net_turns[x_acct_name] = net_turn
 
-    def net_purview_exists(self, x_acct_name: AcctName) -> bool:
-        return self._net_purviews.get(x_acct_name) != None
+    def net_turn_exists(self, x_acct_name: AcctName) -> bool:
+        return self._net_turns.get(x_acct_name) != None
 
-    def get_net_purview(self, x_acct_name: AcctName) -> FundNum:
-        return self._net_purviews.get(x_acct_name)
+    def get_net_turn(self, x_acct_name: AcctName) -> FundNum:
+        return self._net_turns.get(x_acct_name)
 
-    def del_net_purview(self, x_acct_name: AcctName):
-        self._net_purviews.pop(x_acct_name)
+    def del_net_turn(self, x_acct_name: AcctName):
+        self._net_turns.pop(x_acct_name)
 
     def calc_magnitude(self):
-        net_purviews = self._net_purviews.values()
-        x_cred_sum = sum(net_purview for net_purview in net_purviews if net_purview > 0)
-        x_debt_sum = sum(net_purview for net_purview in net_purviews if net_purview < 0)
+        net_turns = self._net_turns.values()
+        x_cred_sum = sum(net_turn for net_turn in net_turns if net_turn > 0)
+        x_debt_sum = sum(net_turn for net_turn in net_turns if net_turn < 0)
         if x_cred_sum + x_debt_sum != 0:
-            exception_str = f"magnitude cannot be calculated: debt_purview={x_debt_sum}, cred_purview={x_cred_sum}"
+            exception_str = f"magnitude cannot be calculated: debt_turn={x_debt_sum}, cred_turn={x_cred_sum}"
             raise calc_magnitudeException(exception_str)
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
         x_dict = {"time_int": self.time_int, "quota": self.quota}
-        if self._net_purviews:
-            x_dict["net_purviews"] = self._net_purviews
+        if self._net_turns:
+            x_dict["net_turns"] = self._net_turns
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
         return x_dict
@@ -231,42 +231,42 @@ class PurviewEpisode:
         return get_json_from_dict(self.get_dict())
 
 
-def purviewepisode_shop(
+def turnepisode_shop(
     x_time_int: TimeLinePoint,
     x_quota: FundNum = None,
-    net_purviews: dict[AcctName, FundNum] = None,
+    net_turns: dict[AcctName, FundNum] = None,
     x_magnitude: FundNum = None,
-) -> PurviewEpisode:
+) -> TurnEpisode:
     if x_quota is None:
         x_quota = default_fund_pool()
 
-    return PurviewEpisode(
+    return TurnEpisode(
         time_int=x_time_int,
         quota=x_quota,
-        _net_purviews=get_empty_dict_if_None(net_purviews),
+        _net_turns=get_empty_dict_if_None(net_turns),
         _magnitude=get_0_if_None(x_magnitude),
     )
 
 
 @dataclass
-class PurviewLog:
+class TurnLog:
     owner_name: OwnerName = None
-    episodes: dict[TimeLinePoint, PurviewEpisode] = None
-    _sum_purviewepisode_quota: FundNum = None
-    _sum_acct_purviews: int = None
+    episodes: dict[TimeLinePoint, TurnEpisode] = None
+    _sum_turnepisode_quota: FundNum = None
+    _sum_acct_turns: int = None
     _time_int_min: TimeLinePoint = None
     _time_int_max: TimeLinePoint = None
 
-    def set_episode(self, x_episode: PurviewEpisode):
+    def set_episode(self, x_episode: TurnEpisode):
         self.episodes[x_episode.time_int] = x_episode
 
     def add_episode(self, x_time_int: TimeLinePoint, x_quota: FundNum):
-        self.set_episode(purviewepisode_shop(x_time_int, x_quota))
+        self.set_episode(turnepisode_shop(x_time_int, x_quota))
 
     def episode_exists(self, x_time_int: TimeLinePoint) -> bool:
         return self.episodes.get(x_time_int) != None
 
-    def get_episode(self, x_time_int: TimeLinePoint) -> PurviewEpisode:
+    def get_episode(self, x_time_int: TimeLinePoint) -> TurnEpisode:
         return self.episodes.get(x_time_int)
 
     def del_episode(self, x_time_int: TimeLinePoint):
@@ -296,7 +296,7 @@ class PurviewLog:
     def get_tranbook(self, deal_idea: DealIdea) -> TranBook:
         x_tranbook = tranbook_shop(deal_idea)
         for x_time_int, x_episode in self.episodes.items():
-            for dst_acct_name, x_quota in x_episode._net_purviews.items():
+            for dst_acct_name, x_quota in x_episode._net_turns.items():
                 x_tranbook.add_tranunit(
                     x_owner_name=self.owner_name,
                     x_acct_name=dst_acct_name,
@@ -306,34 +306,34 @@ class PurviewLog:
         return x_tranbook
 
 
-def purviewlog_shop(owner_name: OwnerName) -> PurviewLog:
-    return PurviewLog(owner_name=owner_name, episodes={}, _sum_acct_purviews={})
+def turnlog_shop(owner_name: OwnerName) -> TurnLog:
+    return TurnLog(owner_name=owner_name, episodes={}, _sum_acct_turns={})
 
 
-def get_purviewepisode_from_dict(x_dict: dict) -> PurviewEpisode:
+def get_turnepisode_from_dict(x_dict: dict) -> TurnEpisode:
     x_time_int = x_dict.get("time_int")
     x_quota = x_dict.get("quota")
-    x_net_purviews = x_dict.get("net_purviews")
+    x_net_turns = x_dict.get("net_turns")
     x_magnitude = x_dict.get("magnitude")
-    return purviewepisode_shop(x_time_int, x_quota, x_net_purviews, x_magnitude)
+    return turnepisode_shop(x_time_int, x_quota, x_net_turns, x_magnitude)
 
 
-def get_purviewepisode_from_json(x_json: str) -> PurviewEpisode:
-    return get_purviewepisode_from_dict(get_dict_from_json(x_json))
+def get_turnepisode_from_json(x_json: str) -> TurnEpisode:
+    return get_turnepisode_from_dict(get_dict_from_json(x_json))
 
 
-def get_purviewlog_from_dict(x_dict: dict) -> PurviewLog:
+def get_turnlog_from_dict(x_dict: dict) -> TurnLog:
     x_owner_name = x_dict.get("owner_name")
-    x_purviewlog = purviewlog_shop(x_owner_name)
-    x_purviewlog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
-    return x_purviewlog
+    x_turnlog = turnlog_shop(x_owner_name)
+    x_turnlog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
+    return x_turnlog
 
 
-def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, PurviewEpisode]:
+def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, TurnEpisode]:
     x_dict = {}
     for x_episode_dict in episodes_dict.values():
-        x_purview_episode = get_purviewepisode_from_dict(x_episode_dict)
-        x_dict[x_purview_episode.time_int] = x_purview_episode
+        x_turn_episode = get_turnepisode_from_dict(x_episode_dict)
+        x_dict[x_turn_episode.time_int] = x_turn_episode
     return x_dict
 
 

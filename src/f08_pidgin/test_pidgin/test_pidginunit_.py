@@ -109,7 +109,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("pick") == type_RoadUnit_str()
     assert pidgin_args_jaar_types.get("pledge") == "bool"
     assert pidgin_args_jaar_types.get("problem_bool") == "bool"
-    assert pidgin_args_jaar_types.get("purview_time_int") == "TimeLinePoint"
+    assert pidgin_args_jaar_types.get("turn_time_int") == "TimeLinePoint"
     assert pidgin_args_jaar_types.get("quota") == "int"
     assert pidgin_args_jaar_types.get("respect_bit") == "float"
     assert pidgin_args_jaar_types.get("road") == type_RoadUnit_str()

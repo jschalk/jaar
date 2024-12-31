@@ -34,22 +34,22 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tally():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_purview_time_int():
+def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_turn_time_int():
     # ESTABLISH
     category = budunit_str()
-    purview_time_int_str = "purview_time_int"
-    purview_time_int_int = 55
-    purview_time_int_atomunit = atomunit_shop(category, atom_update())
-    purview_time_int_atomunit.set_arg(purview_time_int_str, purview_time_int_int)
+    turn_time_int_str = "turn_time_int"
+    turn_time_int_int = 55
+    turn_time_int_atomunit = atomunit_shop(category, atom_update())
+    turn_time_int_atomunit.set_arg(turn_time_int_str, turn_time_int_int)
     x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(purview_time_int_atomunit)
+    x_deltaunit.set_atomunit(turn_time_int_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud.owner_name}'s bud purview_time_int set to {purview_time_int_int}"
+    x_str = f"{sue_bud.owner_name}'s bud turn_time_int set to {turn_time_int_int}"
     assert legible_list[0] == x_str
 
 

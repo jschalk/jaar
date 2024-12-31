@@ -1,30 +1,30 @@
 from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import (
-    get_bud_purview_array,
-    get_bud_purview_csv,
+    get_bud_turn_array,
+    get_bud_turn_csv,
     get_bud_settle_acct_net_dict,
 )
 
 
-def test_get_bud_purview_array_ReturnsObj_ScenarioZeroAcctUnits():
+def test_get_bud_turn_array_ReturnsObj_ScenarioZeroAcctUnits():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
 
     # WHEN / THEN
-    assert get_bud_purview_array(sue_bud) == []
+    assert get_bud_turn_array(sue_bud) == []
 
 
-def test_get_bud_purview_array_ReturnsObj_ScenarioSingleAcctUnit():
+def test_get_bud_turn_array_ReturnsObj_ScenarioSingleAcctUnit():
     # ESTABLISH
     yao_str = "Yao"
     sue_bud = budunit_shop("Sue")
     sue_bud.add_acctunit(yao_str)
 
     # WHEN / THEN
-    assert len(get_bud_purview_array(sue_bud)) == 1
+    assert len(get_bud_turn_array(sue_bud)) == 1
 
 
-def test_get_bud_purview_array_ReturnsObj_ScenarioMultipleAcctUnit():
+def test_get_bud_turn_array_ReturnsObj_ScenarioMultipleAcctUnit():
     # ESTABLISH
     yao_str = "Yao"
     yao_fund_give = 17
@@ -43,23 +43,23 @@ def test_get_bud_purview_array_ReturnsObj_ScenarioMultipleAcctUnit():
     sue_bud.get_acct(bob_str)._fund_take = bob_fund_take
 
     # WHEN
-    bud_purview_array = get_bud_purview_array(sue_bud)
+    bud_turn_array = get_bud_turn_array(sue_bud)
 
     # THEN
-    assert len(bud_purview_array) == 3
-    assert bud_purview_array[0][0] == bob_str
-    assert bud_purview_array[1][0] == yao_str
-    assert bud_purview_array[2][0] == zia_str
-    assert len(bud_purview_array[0]) == 3
-    assert len(bud_purview_array[1]) == 3
-    assert len(bud_purview_array[2]) == 3
-    assert bud_purview_array[0][1] == bob_fund_take
-    assert bud_purview_array[0][2] == bob_fund_give
-    assert bud_purview_array[1][1] == yao_fund_take
-    assert bud_purview_array[1][2] == yao_fund_give
+    assert len(bud_turn_array) == 3
+    assert bud_turn_array[0][0] == bob_str
+    assert bud_turn_array[1][0] == yao_str
+    assert bud_turn_array[2][0] == zia_str
+    assert len(bud_turn_array[0]) == 3
+    assert len(bud_turn_array[1]) == 3
+    assert len(bud_turn_array[2]) == 3
+    assert bud_turn_array[0][1] == bob_fund_take
+    assert bud_turn_array[0][2] == bob_fund_give
+    assert bud_turn_array[1][1] == yao_fund_take
+    assert bud_turn_array[1][2] == yao_fund_give
 
 
-def test_get_bud_purview_csv_ReturnsObj_ScenarioMultipleAcctUnit():
+def test_get_bud_turn_csv_ReturnsObj_ScenarioMultipleAcctUnit():
     # ESTABLISH
     yao_str = "Yao"
     yao_fund_give = 17
@@ -78,10 +78,10 @@ def test_get_bud_purview_csv_ReturnsObj_ScenarioMultipleAcctUnit():
     sue_bud.get_acct(bob_str)._fund_take = bob_fund_take
 
     # WHEN
-    bud_purview_csv_str = get_bud_purview_csv(sue_bud)
+    bud_turn_csv_str = get_bud_turn_csv(sue_bud)
 
     # THEN
-    print(f"{bud_purview_csv_str=}")
+    print(f"{bud_turn_csv_str=}")
     print("")
     example_csv_str = f"""acct_name,fund_take,fund_give
 {bob_str},{bob_fund_take},{bob_fund_give}
@@ -89,10 +89,10 @@ def test_get_bud_purview_csv_ReturnsObj_ScenarioMultipleAcctUnit():
 {zia_str},0,0
 """
     print(f"{example_csv_str=}")
-    assert bud_purview_csv_str == example_csv_str
+    assert bud_turn_csv_str == example_csv_str
 
 
-def test_get_bud_purview_csv_ReturnsObj_settle_bud_True():
+def test_get_bud_turn_csv_ReturnsObj_settle_bud_True():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_str = "Yao"
@@ -103,19 +103,19 @@ def test_get_bud_purview_csv_ReturnsObj_settle_bud_True():
     sue_bud.add_acctunit(bob_str)
     sue_bud.add_acctunit(xio_str)
     sue_bud.add_acctunit(zia_str)
-    empty_purview = f"""acct_name,fund_take,fund_give
+    empty_turn = f"""acct_name,fund_take,fund_give
 {bob_str},0,0
 {xio_str},0,0
 {yao_str},0,0
 {zia_str},0,0
 """
-    assert empty_purview == get_bud_purview_csv(sue_bud)
+    assert empty_turn == get_bud_turn_csv(sue_bud)
 
     # WHEN
-    bud_purview_csv_str = get_bud_purview_csv(sue_bud, settle_bud=True)
+    bud_turn_csv_str = get_bud_turn_csv(sue_bud, settle_bud=True)
 
     # THEN
-    print(f"{bud_purview_csv_str=}")
+    print(f"{bud_turn_csv_str=}")
     print("")
     q_fund_give = int(sue_bud.fund_pool * 0.25)
     q_fund_take = int(sue_bud.fund_pool * 0.25)
@@ -126,10 +126,10 @@ def test_get_bud_purview_csv_ReturnsObj_settle_bud_True():
 {zia_str},{q_fund_take},{q_fund_give}
 """
     print(f"{example_csv_str=}")
-    assert bud_purview_csv_str == example_csv_str
+    assert bud_turn_csv_str == example_csv_str
 
 
-def test_get_bud_net_purview_dict_ReturnsObj_ScenarioMultipleAcctUnit():
+def test_get_bud_net_turn_dict_ReturnsObj_ScenarioMultipleAcctUnit():
     # ESTABLISH
     yao_str = "Yao"
     yao_fund_give = 42
@@ -148,20 +148,20 @@ def test_get_bud_net_purview_dict_ReturnsObj_ScenarioMultipleAcctUnit():
     sue_bud.get_acct(bob_str)._fund_take = bob_fund_take
 
     # WHEN
-    bud_net_purview_dict = get_bud_settle_acct_net_dict(sue_bud)
+    bud_net_turn_dict = get_bud_settle_acct_net_dict(sue_bud)
 
     # THEN
-    print(f"{bud_net_purview_dict=}")
+    print(f"{bud_net_turn_dict=}")
     print("")
-    example_net_purview_dict = {
+    example_net_turn_dict = {
         bob_str: bob_fund_give - bob_fund_take,
         yao_str: yao_fund_give - yao_fund_take,
     }
-    print(f"{example_net_purview_dict=}")
-    assert example_net_purview_dict == bud_net_purview_dict
+    print(f"{example_net_turn_dict=}")
+    assert example_net_turn_dict == bud_net_turn_dict
 
 
-def test_get_bud_purview_csv_ReturnsObj_settle_bud_True():
+def test_get_bud_turn_csv_ReturnsObj_settle_bud_True():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_str = "Yao"
@@ -180,14 +180,14 @@ def test_get_bud_purview_csv_ReturnsObj_settle_bud_True():
     # THEN
     print(f"{sue_bud_settle_net_dict=}")
     print("")
-    example_net_purview_dict = {
+    example_net_turn_dict = {
         bob_str: -216666667,
         yao_str: 316666667,
         xio_str: -100000000,
     }
-    print(f"{example_net_purview_dict=}")
+    print(f"{example_net_turn_dict=}")
     assert sue_bud_settle_net_dict.get(yao_str) != None
     assert sue_bud_settle_net_dict.get(bob_str) != None
     assert sue_bud_settle_net_dict.get(xio_str) != None
     assert sue_bud_settle_net_dict.get(zia_str) is None
-    assert sue_bud_settle_net_dict == example_net_purview_dict
+    assert sue_bud_settle_net_dict == example_net_turn_dict

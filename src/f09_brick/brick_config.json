@@ -237,7 +237,7 @@
       "fund_pool": {},
       "max_tree_traverse": {},
       "penny": {},
-      "purview_time_int": {},
+      "turn_time_int": {},
       "respect_bit": {},
       "tally": {}
     }
@@ -258,7 +258,7 @@
       "amount": {}
     }
   },
-  "deal_purview_episode": {
+  "deal_turn_episode": {
     "allowed_crud": "INSERT_MULITPLE",
     "brick_type": "dealunit",
     "build_order": 20,

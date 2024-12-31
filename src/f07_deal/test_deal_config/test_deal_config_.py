@@ -28,8 +28,8 @@ from src.f07_deal.deal_config import (
     current_time_str,
     cumlative_minute_str,
     dealunit_str,
-    deal_purviewlog_str,
-    deal_purview_episode_str,
+    deal_turnlog_str,
+    deal_turn_episode_str,
     deal_cashbook_str,
     deal_timeline_hour_str,
     deal_timeline_month_str,
@@ -58,8 +58,8 @@ def test_get_deal_config_dict_ReturnsObj():
     assert deal_config
     deal_config_categorys = set(deal_config.keys())
     assert dealunit_str() in deal_config_categorys
-    assert deal_purviewlog_str() not in deal_config_categorys
-    assert deal_purview_episode_str() in deal_config_categorys
+    assert deal_turnlog_str() not in deal_config_categorys
+    assert deal_turn_episode_str() in deal_config_categorys
     assert deal_cashbook_str() in deal_config_categorys
     assert deal_timeline_hour_str() in deal_config_categorys
     assert deal_timeline_month_str() in deal_config_categorys
@@ -67,13 +67,13 @@ def test_get_deal_config_dict_ReturnsObj():
     assert len(deal_config) == 6
     _validate_deal_config(deal_config)
     dealunit_dict = deal_config.get(dealunit_str())
-    deal_purview_episode_dict = deal_config.get(deal_purview_episode_str())
+    deal_turn_episode_dict = deal_config.get(deal_turn_episode_str())
     deal_cashbook_dict = deal_config.get(deal_cashbook_str())
     deal_timeline_hour_dict = deal_config.get(deal_timeline_hour_str())
     deal_timeline_month_dict = deal_config.get(deal_timeline_month_str())
     deal_timeline_weekday_dict = deal_config.get(deal_timeline_weekday_str())
     assert len(dealunit_dict.get(jkeys_str())) == 0
-    assert len(deal_purview_episode_dict.get(jkeys_str())) == 4
+    assert len(deal_turn_episode_dict.get(jkeys_str())) == 4
     assert len(deal_cashbook_dict.get(jkeys_str())) == 4
     assert len(deal_timeline_hour_dict.get(jkeys_str())) == 2
     assert len(deal_timeline_month_dict.get(jkeys_str())) == 2
@@ -95,7 +95,7 @@ def test_get_deal_config_dict_ReturnsObj():
     gen_jvalues = set(dealunit_dict.get(jvalues_str()).keys())
     assert gen_jvalues == x_dealunit_jvalues
     assert len(dealunit_dict.get(jvalues_str())) == 10
-    assert len(deal_purview_episode_dict.get(jvalues_str())) == 1
+    assert len(deal_turn_episode_dict.get(jvalues_str())) == 1
     assert len(deal_cashbook_dict.get(jvalues_str())) == 1
     assert len(deal_timeline_hour_dict.get(jvalues_str())) == 1
     assert len(deal_timeline_month_dict.get(jvalues_str())) == 1
@@ -136,8 +136,8 @@ def test_get_deal_categorys_ReturnsObj():
 
     # THEN
     assert dealunit_str() in deal_config_categorys
-    assert deal_purviewlog_str() not in deal_config_categorys
-    assert deal_purview_episode_str() in deal_config_categorys
+    assert deal_turnlog_str() not in deal_config_categorys
+    assert deal_turn_episode_str() in deal_config_categorys
     assert deal_cashbook_str() in deal_config_categorys
     assert deal_timeline_hour_str() in deal_config_categorys
     assert deal_timeline_month_str() in deal_config_categorys

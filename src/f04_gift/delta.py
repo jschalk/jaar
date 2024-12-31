@@ -149,8 +149,8 @@ class DeltaUnit:
             x_atomunit.set_jvalue("fund_pool", after_bud.fund_pool)
         if before_bud.fund_coin != after_bud.fund_coin:
             x_atomunit.set_jvalue("fund_coin", after_bud.fund_coin)
-        if before_bud.purview_time_int != after_bud.purview_time_int:
-            x_atomunit.set_jvalue("purview_time_int", after_bud.purview_time_int)
+        if before_bud.turn_time_int != after_bud.turn_time_int:
+            x_atomunit.set_jvalue("turn_time_int", after_bud.turn_time_int)
         if before_bud.respect_bit != after_bud.respect_bit:
             x_atomunit.set_jvalue("respect_bit", after_bud.respect_bit)
         self.set_atomunit(x_atomunit)
