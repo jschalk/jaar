@@ -499,7 +499,7 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert budunit_columns.get(fund_coin_str()) is not None
     assert budunit_columns.get(respect_bit_str()) is not None
     assert budunit_columns.get(penny_str()) is not None
-    assert budunit_columns.get("pact_time_int") is not None
+    assert budunit_columns.get("deal_time_int") is not None
     assert budunit_columns.get("tally") is not None
 
     assert len(cat_acctunit) == 2
@@ -673,7 +673,7 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     assert x_jaar_types.get("pick") == type_RoadUnit_str()
     assert x_jaar_types.get("pledge") == "bool"
     assert x_jaar_types.get("problem_bool") == "bool"
-    assert x_jaar_types.get("pact_time_int") == "TimeLinePoint"
+    assert x_jaar_types.get("deal_time_int") == "TimeLinePoint"
     assert x_jaar_types.get(road_str()) == type_RoadUnit_str()
     assert x_jaar_types.get(stop_want_str()) == "float"
     assert x_jaar_types.get("take_force") == "float"

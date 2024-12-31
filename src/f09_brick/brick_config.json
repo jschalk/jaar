@@ -227,7 +227,7 @@
       "fund_pool": {},
       "max_tree_traverse": {},
       "penny": {},
-      "pact_time_int": {},
+      "deal_time_int": {},
       "respect_bit": {},
       "tally": {}
     }
@@ -248,7 +248,7 @@
       "amount": {}
     }
   },
-  "gov_pact_episode": {
+  "gov_deal_episode": {
     "allowed_crud": "INSERT_MULITPLE",
     "brick_type": "govunit",
     "build_order": 20,

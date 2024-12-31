@@ -8,7 +8,7 @@ from src.f03_chrono.chrono import (
     validate_timeline_config,
 )
 from src.f07_gov.gov import govunit_shop
-from src.f09_brick.brick import _add_cashpurchases_from_df, _add_pactepisodes_from_df
+from src.f09_brick.brick import _add_cashpurchases_from_df, _add_dealepisodes_from_df
 from src.f09_brick.pandas_tool import (
     upsert_sheet,
     dataframe_to_dict,
@@ -20,7 +20,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 class GovPrimeFilePaths:
     def __init__(self, govs_dir: str):
         self.govunit_path = create_path(govs_dir, "govunit.xlsx")
-        self.gov_pact_path = create_path(govs_dir, "gov_pact_episode.xlsx")
+        self.gov_deal_path = create_path(govs_dir, "gov_deal_episode.xlsx")
         self.gov_cashbook_path = create_path(govs_dir, "gov_cashbook.xlsx")
         self.gov_hour_path = create_path(govs_dir, "gov_timeline_hour.xlsx")
         self.gov_month_path = create_path(govs_dir, "gov_timeline_month.xlsx")
@@ -45,7 +45,7 @@ class GovPrimeColumns:
             "yr1_jan1_offset",
             "note",
         ]
-        self.gov_pact_staging_columns = [
+        self.gov_deal_staging_columns = [
             "source_br",
             "face_name",
             "event_int",
@@ -107,7 +107,7 @@ class GovPrimeColumns:
             "timeline_idea",
             "yr1_jan1_offset",
         ]
-        self.gov_pact_agg_columns = [
+        self.gov_deal_agg_columns = [
             "gov_idea",
             "owner_name",
             "acct_name",
@@ -130,28 +130,28 @@ def create_init_gov_prime_files(govs_dir: str):
     xp = GovPrimeFilePaths(govs_dir)
     xc = GovPrimeColumns()
     stage_govunit_df = DataFrame([], columns=xc.govunit_staging_columns)
-    stage_gov_pact_df = DataFrame([], columns=xc.gov_pact_staging_columns)
+    stage_gov_deal_df = DataFrame([], columns=xc.gov_deal_staging_columns)
     stage_gov_cashbook_df = DataFrame([], columns=xc.gov_cashbook_staging_columns)
     stage_gov_hour_df = DataFrame([], columns=xc.gov_hour_staging_columns)
     stage_gov_month_df = DataFrame([], columns=xc.gov_month_staging_columns)
     stage_gov_weekday_df = DataFrame([], columns=xc.gov_weekday_staging_columns)
 
     upsert_sheet(xp.govunit_path, "staging", stage_govunit_df)
-    upsert_sheet(xp.gov_pact_path, "staging", stage_gov_pact_df)
+    upsert_sheet(xp.gov_deal_path, "staging", stage_gov_deal_df)
     upsert_sheet(xp.gov_cashbook_path, "staging", stage_gov_cashbook_df)
     upsert_sheet(xp.gov_hour_path, "staging", stage_gov_hour_df)
     upsert_sheet(xp.gov_month_path, "staging", stage_gov_month_df)
     upsert_sheet(xp.gov_weekday_path, "staging", stage_gov_weekday_df)
 
     agg_govunit_df = DataFrame([], columns=xc.govunit_agg_columns)
-    agg_gov_pact_df = DataFrame([], columns=xc.gov_pact_agg_columns)
+    agg_gov_deal_df = DataFrame([], columns=xc.gov_deal_agg_columns)
     agg_gov_cashbook_df = DataFrame([], columns=xc.gov_cashbook_agg_columns)
     agg_gov_hour_df = DataFrame([], columns=xc.gov_hour_agg_columns)
     agg_gov_month_df = DataFrame([], columns=xc.gov_month_agg_columns)
     agg_gov_weekday_df = DataFrame([], columns=xc.gov_weekday_agg_columns)
 
     upsert_sheet(xp.govunit_path, "agg", agg_govunit_df)
-    upsert_sheet(xp.gov_pact_path, "agg", agg_gov_pact_df)
+    upsert_sheet(xp.gov_deal_path, "agg", agg_gov_deal_df)
     upsert_sheet(xp.gov_cashbook_path, "agg", agg_gov_cashbook_df)
     upsert_sheet(xp.gov_hour_path, "agg", agg_gov_hour_df)
     upsert_sheet(xp.gov_month_path, "agg", agg_gov_month_df)
@@ -162,13 +162,13 @@ def create_govunit_jsons_from_prime_files(govs_dir: str):
     xp = GovPrimeFilePaths(govs_dir)
     xc = GovPrimeColumns()
     govunit_df = pandas_read_excel(xp.govunit_path, "agg")
-    gov_pact_df = pandas_read_excel(xp.gov_pact_path, "agg")
+    gov_deal_df = pandas_read_excel(xp.gov_deal_path, "agg")
     gov_cashbook_df = pandas_read_excel(xp.gov_cashbook_path, "agg")
     gov_hour_df = pandas_read_excel(xp.gov_hour_path, "agg")
     gov_month_df = pandas_read_excel(xp.gov_month_path, "agg")
     gov_weekday_df = pandas_read_excel(xp.gov_weekday_path, "agg")
     govunits_dict = dataframe_to_dict(govunit_df, ["gov_idea"])
-    govs_pact_dict = dataframe_to_dict(gov_pact_df, ["gov_idea"])
+    govs_deal_dict = dataframe_to_dict(gov_deal_df, ["gov_idea"])
     # govs_cashbook_dict = dataframe_to_dict(gov_cashbook_df, ["gov_idea", "owner_name", "acct_name"])
     govs_hour_dict = dataframe_to_dict(gov_hour_df, ["gov_idea", "hour_idea"])
     govs_month_dict = dataframe_to_dict(gov_month_df, ["gov_idea", "month_idea"])
@@ -212,7 +212,7 @@ def create_govunit_jsons_from_prime_files(govs_dir: str):
             respect_bit=if_nan_return_None(gov_attrs.get("respect_bit")),
         )
         _add_cashpurchases_from_df(govunit, gov_cashbook_df)
-        # _add_pactepisodes_from_df(govunit, gov_cashbook_df)
+        # _add_dealepisodes_from_df(govunit, gov_cashbook_df)
         govunits[govunit.gov_idea] = govunit
     gov_jsons_dir = create_path(govs_dir, "gov_jsons")
     for govunit in govunits.values():

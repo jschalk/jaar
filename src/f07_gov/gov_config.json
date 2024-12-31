@@ -65,7 +65,7 @@
             }
         }
     },
-    "gov_pact_episode": {
+    "gov_deal_episode": {
         "jkeys": {
             "gov_idea": {
                 "jaar_type": "IdeaUnit"

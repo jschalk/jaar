@@ -73,8 +73,8 @@ from src.f07_gov.gov_config import (
     get_gov_config_dict,
     get_gov_categorys,
     govunit_str,
-    gov_pactlog_str,
-    gov_pact_episode_str,
+    gov_deallog_str,
+    gov_deal_episode_str,
     gov_cashbook_str,
     gov_timeline_hour_str,
     gov_timeline_month_str,
@@ -211,7 +211,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[39] == "divisor"
     assert table_sorting_priority[40] == pledge_str()
     assert table_sorting_priority[41] == "problem_bool"
-    assert table_sorting_priority[42] == "pact_time_int"
+    assert table_sorting_priority[42] == "deal_time_int"
     assert table_sorting_priority[43] == take_force_str()
     assert table_sorting_priority[44] == "tally"
     assert table_sorting_priority[45] == fund_coin_str()
@@ -307,7 +307,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get("divisor") == "REAL"
     assert sqlite_types.get(pledge_str()) == "INTEGER"
     assert sqlite_types.get("problem_bool") == "INTEGER"
-    assert sqlite_types.get("pact_time_int") == "INTEGER"
+    assert sqlite_types.get("deal_time_int") == "INTEGER"
     assert sqlite_types.get(take_force_str()) == "REAL"
     assert sqlite_types.get("tally") == "REAL"
     assert sqlite_types.get(fund_coin_str()) == "REAL"
@@ -365,8 +365,8 @@ def test_get_brick_config_dict_ReturnsObj():
     assert x_brick_config
     brick_config_categorys = set(x_brick_config.keys())
     assert govunit_str() in brick_config_categorys
-    assert gov_pactlog_str() not in brick_config_categorys
-    assert gov_pact_episode_str() in brick_config_categorys
+    assert gov_deallog_str() not in brick_config_categorys
+    assert gov_deal_episode_str() in brick_config_categorys
     assert gov_cashbook_str() in brick_config_categorys
     assert gov_timeline_hour_str() in brick_config_categorys
     assert gov_timeline_month_str() in brick_config_categorys
@@ -428,7 +428,7 @@ def _validate_brick_config(x_brick_config: dict):
             map_road_str(),
         }:
             assert brick_dict.get(allowed_crud_str()) == insert_one_time_str()
-        elif brick_category in {gov_pact_episode_str(), gov_cashbook_str()}:
+        elif brick_category in {gov_deal_episode_str(), gov_cashbook_str()}:
             assert brick_dict.get(allowed_crud_str()) == insert_mulitple_str()
         elif (
             sub_category.get(atom_update()) != None
@@ -649,7 +649,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     # set_brick_config_json(bud_item_reasonunit_str(), 17)
     # set_brick_config_json(bud_itemunit_str(), 18)
     # set_brick_config_json(budunit_str(), 19)
-    # set_brick_config_json(gov_pact_episode_str(), 20)
+    # set_brick_config_json(gov_deal_episode_str(), 20)
     # set_brick_config_json(gov_cashbook_str(), 21)
 
     x_brick_config = get_brick_config_dict()
@@ -673,7 +673,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     assert x_brick_config.get(bud_item_reasonunit_str()).get(bo) == 17
     assert x_brick_config.get(bud_itemunit_str()).get(bo) == 18
     assert x_brick_config.get(budunit_str()).get(bo) == 19
-    assert x_brick_config.get(gov_pact_episode_str()).get(bo) == 20
+    assert x_brick_config.get(gov_deal_episode_str()).get(bo) == 20
     assert x_brick_config.get(gov_cashbook_str()).get(bo) == 21
 
 

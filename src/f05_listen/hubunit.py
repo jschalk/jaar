@@ -30,11 +30,11 @@ from src.f01_road.finance import (
     TimeLinePoint,
 )
 from src.f01_road.finance_tran import (
-    PactEpisode,
-    pactepisode_shop,
-    PactLog,
-    pactlog_shop,
-    get_pactepisode_from_json,
+    DealEpisode,
+    dealepisode_shop,
+    DealLog,
+    deallog_shop,
+    get_dealepisode_from_json,
 )
 from src.f01_road.road import (
     OwnerName,
@@ -93,7 +93,7 @@ class _save_valid_budpoint_Exception(Exception):
     pass
 
 
-class calc_timepoint_pact_Exception(Exception):
+class calc_timepoint_deal_Exception(Exception):
     pass
 
 
@@ -417,39 +417,39 @@ class HubUnit:
     def timepoint_dir(self, x_time_int: TimeLinePoint) -> str:
         return f_path(self.timeline_dir(), str(x_time_int))
 
-    def pact_file_name(self) -> str:
-        return "pact.json"
+    def deal_file_name(self) -> str:
+        return "deal.json"
 
-    def pact_file_path(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_int), self.pact_file_name())
+    def deal_file_path(self, x_time_int: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_time_int), self.deal_file_name())
 
-    def _save_valid_pact_file(self, x_pact: PactEpisode):
-        x_pact.calc_magnitude()
+    def _save_valid_deal_file(self, x_deal: DealEpisode):
+        x_deal.calc_magnitude()
         save_file(
-            self.timepoint_dir(x_pact.time_int),
-            self.pact_file_name(),
-            x_pact.get_json(),
+            self.timepoint_dir(x_deal.time_int),
+            self.deal_file_name(),
+            x_deal.get_json(),
             replace=True,
         )
 
-    def pact_file_exists(self, x_time_int: TimeLinePoint) -> bool:
-        return os_path_exists(self.pact_file_path(x_time_int))
+    def deal_file_exists(self, x_time_int: TimeLinePoint) -> bool:
+        return os_path_exists(self.deal_file_path(x_time_int))
 
-    def get_pact_file(self, x_time_int: TimeLinePoint) -> PactEpisode:
-        if self.pact_file_exists(x_time_int):
-            x_json = open_file(self.timepoint_dir(x_time_int), self.pact_file_name())
-            return get_pactepisode_from_json(x_json)
+    def get_deal_file(self, x_time_int: TimeLinePoint) -> DealEpisode:
+        if self.deal_file_exists(x_time_int):
+            x_json = open_file(self.timepoint_dir(x_time_int), self.deal_file_name())
+            return get_dealepisode_from_json(x_json)
 
-    def delete_pact_file(self, x_time_int: TimeLinePoint):
-        delete_dir(self.pact_file_path(x_time_int))
+    def delete_deal_file(self, x_time_int: TimeLinePoint):
+        delete_dir(self.deal_file_path(x_time_int))
 
-    def get_pactlog(self) -> PactLog:
-        x_pactlog = pactlog_shop(self.owner_name)
+    def get_deallog(self) -> DealLog:
+        x_deallog = deallog_shop(self.owner_name)
         x_dirs = self._get_timepoint_dirs()
-        for x_pact_folder_name in x_dirs:
-            x_pactepisode = self.get_pact_file(x_pact_folder_name)
-            x_pactlog.set_episode(x_pactepisode)
-        return x_pactlog
+        for x_deal_folder_name in x_dirs:
+            x_dealepisode = self.get_deal_file(x_deal_folder_name)
+            x_deallog.set_episode(x_dealepisode)
+        return x_deallog
 
     def _get_timepoint_dirs(self) -> list[str]:
         x_dict = get_dir_file_strs(
@@ -488,24 +488,24 @@ class HubUnit:
     def delete_budpoint_file(self, x_time_int: TimeLinePoint):
         delete_dir(self.budpoint_file_path(x_time_int))
 
-    def calc_timepoint_pact(self, x_time_int: TimeLinePoint):
+    def calc_timepoint_deal(self, x_time_int: TimeLinePoint):
         if self.budpoint_file_exists(x_time_int) is False:
-            exception_str = f"Cannot calculate timepoint {x_time_int} pacts without saved BudPoint file"
-            raise calc_timepoint_pact_Exception(exception_str)
+            exception_str = f"Cannot calculate timepoint {x_time_int} deals without saved BudPoint file"
+            raise calc_timepoint_deal_Exception(exception_str)
         x_budpoint = self.get_budpoint_file(x_time_int)
-        if self.pact_file_exists(x_time_int):
-            x_pactepisode = self.get_pact_file(x_time_int)
-            x_budpoint.set_fund_pool(x_pactepisode.quota)
+        if self.deal_file_exists(x_time_int):
+            x_dealepisode = self.get_deal_file(x_time_int)
+            x_budpoint.set_fund_pool(x_dealepisode.quota)
         else:
-            x_pactepisode = pactepisode_shop(x_time_int)
-        x_net_pacts = get_bud_settle_acct_net_dict(x_budpoint, True)
-        x_pactepisode._net_pacts = x_net_pacts
+            x_dealepisode = dealepisode_shop(x_time_int)
+        x_net_deals = get_bud_settle_acct_net_dict(x_budpoint, True)
+        x_dealepisode._net_deals = x_net_deals
         self._save_valid_budpoint_file(x_time_int, x_budpoint)
-        self._save_valid_pact_file(x_pactepisode)
+        self._save_valid_deal_file(x_dealepisode)
 
-    def calc_timepoint_pacts(self):
+    def calc_timepoint_deals(self):
         for x_timepoint in self._get_timepoint_dirs():
-            self.calc_timepoint_pact(x_timepoint)
+            self.calc_timepoint_deal(x_timepoint)
 
     def keep_dir(self) -> str:
         if self.keep_road is None:

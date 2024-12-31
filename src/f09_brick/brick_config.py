@@ -98,7 +98,7 @@ def get_brick_formats_dir() -> str:
 
 
 # def brick_format_00000_govunit_v0_0_0()->str: return "brick_format_00000_govunit_v0_0_0"
-# def brick_format_00001_gov_pact_episode_v0_0_0()->str: return "brick_format_00001_gov_pact_episode_v0_0_0"
+# def brick_format_00001_gov_deal_episode_v0_0_0()->str: return "brick_format_00001_gov_deal_episode_v0_0_0"
 # def brick_format_00002_gov_cashbook_v0_0_0()->str: return "brick_format_00002_gov_cashbook_v0_0_0"
 # def brick_format_00003_gov_timeline_hour_v0_0_0()->str: return "brick_format_00003_gov_timeline_hour_v0_0_0"
 # def brick_format_00004_gov_timeline_month_v0_0_0()->str: return "brick_format_00004_gov_timeline_month_v0_0_0"
@@ -109,8 +109,8 @@ def brick_format_00000_govunit_v0_0_0() -> str:
     return "brick_format_00000_govunit_v0_0_0"
 
 
-def brick_format_00001_gov_pact_episode_v0_0_0() -> str:
-    return "brick_format_00001_gov_pact_episode_v0_0_0"
+def brick_format_00001_gov_deal_episode_v0_0_0() -> str:
+    return "brick_format_00001_gov_deal_episode_v0_0_0"
 
 
 def brick_format_00002_gov_cashbook_v0_0_0() -> str:
@@ -240,7 +240,7 @@ def brick_format_00117_road_map1_v0_0_0() -> str:
 def get_brick_format_filenames() -> set[str]:
     return {
         brick_format_00000_govunit_v0_0_0(),
-        brick_format_00001_gov_pact_episode_v0_0_0(),
+        brick_format_00001_gov_deal_episode_v0_0_0(),
         brick_format_00002_gov_cashbook_v0_0_0(),
         brick_format_00003_gov_timeline_hour_v0_0_0(),
         brick_format_00004_gov_timeline_month_v0_0_0(),
@@ -315,7 +315,7 @@ def get_brick_format_filename(brick_number: str) -> str:
 def get_brick_format_headers() -> dict[str, list[str]]:
     return {
         "bridge,c400_number,current_time,fund_coin,gov_idea,monthday_distortion,penny,respect_bit,timeline_idea,yr1_jan1_offset": brick_format_00000_govunit_v0_0_0(),
-        "acct_name,gov_idea,owner_name,quota,time_int": brick_format_00001_gov_pact_episode_v0_0_0(),
+        "acct_name,gov_idea,owner_name,quota,time_int": brick_format_00001_gov_deal_episode_v0_0_0(),
         "acct_name,amount,gov_idea,owner_name,time_int": brick_format_00002_gov_cashbook_v0_0_0(),
         "cumlative_minute,gov_idea,hour_idea": brick_format_00003_gov_timeline_hour_v0_0_0(),
         "cumlative_day,gov_idea,month_idea": brick_format_00004_gov_timeline_month_v0_0_0(),
@@ -333,7 +333,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "base,divisor,gov_idea,need,nigh,open,owner_name,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
         "base,base_item_active_requisite,gov_idea,owner_name,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),
         "addin,begin,close,denom,gogo_want,gov_idea,idee,mass,morph,numor,owner_name,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
-        "credor_respect,debtor_respect,fund_coin,fund_pool,gov_idea,max_tree_traverse,owner_name,pact_time_int,penny,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
+        "credor_respect,deal_time_int,debtor_respect,fund_coin,fund_pool,gov_idea,max_tree_traverse,owner_name,penny,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
         "gov_idea,healer_name,idee,owner_name,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
         "inx_bridge,inx_label,otx_bridge,otx_label,unknown_word": brick_format_00042_map_label_v0_0_0(),
         "inx_bridge,inx_name,otx_bridge,otx_name,unknown_word": brick_format_00043_map_name_v0_0_0(),
@@ -405,7 +405,7 @@ def get_brick_elements_sort_order() -> list[str]:
         "divisor",
         "pledge",
         "problem_bool",
-        "pact_time_int",
+        "deal_time_int",
         "take_force",
         "tally",
         "fund_coin",
@@ -483,7 +483,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "divisor": "REAL",
         "pledge": "INTEGER",
         "problem_bool": "INTEGER",
-        "pact_time_int": "INTEGER",
+        "deal_time_int": "INTEGER",
         "take_force": "REAL",
         "tally": "REAL",
         "fund_coin": "REAL",
@@ -520,7 +520,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
 def get_brick_category_ref() -> dict[str, set[str]]:
     return {
         "govunit": ["br00000"],
-        "gov_pact_episode": ["br00001"],
+        "gov_deal_episode": ["br00001"],
         "gov_cashbook": ["br00002"],
         "gov_timeline_hour": ["br00003"],
         "gov_timeline_month": ["br00004"],
