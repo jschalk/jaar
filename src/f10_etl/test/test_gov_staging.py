@@ -27,6 +27,13 @@ from src.f07_gov.gov_config import (
     cumlative_day_str,
     weekday_idea_str,
     weekday_order_str,
+    gov_cashbook_str,
+    gov_deal_episode_str,
+    gov_timeline_hour_str as gov_hour_str,
+    gov_timeline_month_str as gov_month_str,
+    gov_timeline_weekday_str as gov_weekday_str,
+    govunit_str,
+    get_gov_config_args,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet
@@ -78,113 +85,33 @@ def test_GovPrimeColumns_Exists():
     x_govprimecolumns = GovPrimeColumns()
 
     # THEN
-    assert x_govprimecolumns.govunit_staging_columns == [
-        "source_br",
-        face_name_str(),
-        event_int_str(),
-        gov_idea_str(),
-        c400_number_str(),
-        current_time_str(),
-        fund_coin_str(),
-        monthday_distortion_str(),
-        penny_str(),
-        respect_bit_str(),
-        bridge_str(),
-        timeline_idea_str(),
-        yr1_jan1_offset_str(),
-        "note",
-    ]
-    assert x_govprimecolumns.gov_deal_staging_columns == [
-        "source_br",
-        face_name_str(),
-        event_int_str(),
-        gov_idea_str(),
-        owner_name_str(),
-        acct_name_str(),
-        time_int_str(),
-        quota_str(),
-        "note",
-    ]
-    assert x_govprimecolumns.gov_cashbook_staging_columns == [
-        "source_br",
-        face_name_str(),
-        event_int_str(),
-        gov_idea_str(),
-        owner_name_str(),
-        acct_name_str(),
-        time_int_str(),
-        amount_str(),
-        "note",
-    ]
-    assert x_govprimecolumns.gov_hour_staging_columns == [
-        "source_br",
-        face_name_str(),
-        event_int_str(),
-        gov_idea_str(),
-        hour_idea_str(),
-        cumlative_minute_str(),
-        "note",
-    ]
-    assert x_govprimecolumns.gov_month_staging_columns == [
-        "source_br",
-        face_name_str(),
-        event_int_str(),
-        gov_idea_str(),
-        month_idea_str(),
-        cumlative_day_str(),
-        "note",
-    ]
-    assert x_govprimecolumns.gov_weekday_staging_columns == [
-        "source_br",
-        face_name_str(),
-        event_int_str(),
-        gov_idea_str(),
-        weekday_idea_str(),
-        weekday_order_str(),
-        "note",
-    ]
+    gov_cashbook_args = set(get_gov_config_args(gov_cashbook_str()).keys())
+    gov_deal_episode_args = set(get_gov_config_args(gov_deal_episode_str()).keys())
+    gov_timeline_hour_args = set(get_gov_config_args(gov_hour_str()).keys())
+    gov_timeline_month_args = set(get_gov_config_args(gov_month_str()).keys())
+    gov_timeline_weekday_args = set(get_gov_config_args(gov_weekday_str()).keys())
+    govunit_args = set(get_gov_config_args(govunit_str()).keys())
+    assert set(x_govprimecolumns.gov_cashbook_agg_columns) == gov_cashbook_args
+    assert set(x_govprimecolumns.gov_deal_agg_columns) == gov_deal_episode_args
+    assert set(x_govprimecolumns.gov_hour_agg_columns) == gov_timeline_hour_args
+    assert set(x_govprimecolumns.gov_month_agg_columns) == gov_timeline_month_args
+    assert set(x_govprimecolumns.gov_weekday_agg_columns) == gov_timeline_weekday_args
+    assert set(x_govprimecolumns.govunit_agg_columns) == govunit_args
 
-    assert x_govprimecolumns.govunit_agg_columns == [
-        gov_idea_str(),
-        c400_number_str(),
-        current_time_str(),
-        fund_coin_str(),
-        monthday_distortion_str(),
-        penny_str(),
-        respect_bit_str(),
-        bridge_str(),
-        timeline_idea_str(),
-        yr1_jan1_offset_str(),
-    ]
-    assert x_govprimecolumns.gov_deal_agg_columns == [
-        gov_idea_str(),
-        owner_name_str(),
-        acct_name_str(),
-        time_int_str(),
-        quota_str(),
-    ]
-    assert x_govprimecolumns.gov_cashbook_agg_columns == [
-        gov_idea_str(),
-        owner_name_str(),
-        acct_name_str(),
-        time_int_str(),
-        amount_str(),
-    ]
-    assert x_govprimecolumns.gov_hour_agg_columns == [
-        gov_idea_str(),
-        hour_idea_str(),
-        cumlative_minute_str(),
-    ]
-    assert x_govprimecolumns.gov_month_agg_columns == [
-        gov_idea_str(),
-        month_idea_str(),
-        cumlative_day_str(),
-    ]
-    assert x_govprimecolumns.gov_weekday_agg_columns == [
-        gov_idea_str(),
-        weekday_idea_str(),
-        weekday_order_str(),
-    ]
+    staging_args = {"source_br", face_name_str(), event_int_str(), "note"}
+    gov_cashbook_staging = gov_cashbook_args.union(staging_args)
+    gov_deal_episode_staging = gov_deal_episode_args.union(staging_args)
+    gov_hour_staging = gov_timeline_hour_args.union(staging_args)
+    gov_month_staging = gov_timeline_month_args.union(staging_args)
+    gov_weekday_staging = gov_timeline_weekday_args.union(staging_args)
+    govunit_staging = govunit_args.union(staging_args)
+
+    assert set(x_govprimecolumns.gov_cashbook_staging_columns) == gov_cashbook_staging
+    assert set(x_govprimecolumns.gov_deal_staging_columns) == gov_deal_episode_staging
+    assert set(x_govprimecolumns.gov_hour_staging_columns) == gov_hour_staging
+    assert set(x_govprimecolumns.gov_month_staging_columns) == gov_month_staging
+    assert set(x_govprimecolumns.gov_weekday_staging_columns) == gov_weekday_staging
+    assert set(x_govprimecolumns.govunit_staging_columns) == govunit_staging
 
 
 def test_create_init_gov_prime_files_CreatesFiles_staging(env_dir_setup_cleanup):
@@ -617,51 +544,48 @@ def test_create_govunit_jsons_from_prime_files_Scenario6_gov_cashbook(
     assert accord56_govunit.cashbook == expected_govunit.cashbook
 
 
-# def test_create_govunit_jsons_from_prime_files_Scenario3_gov_deal_episode(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     govs_dir = create_path(get_test_etl_dir(), "govs")
-#     create_init_gov_prime_files(govs_dir)
-#     xp = GovPrimeFilePaths(govs_dir)
-#     xc = GovPrimeColumns()
-#     agg_str = "agg"
-#     accord56_gov_idea = "accord56"
-#     accord56_gov_idea
-#     sue_str = "Sue"
-#     bob_str = "Bob"
-#     t3 = 3
-#     t7 = 7
-#     quota3 = 555
-#     quota7 = 777
-#     accord56_gov_row = [accord56_gov_idea, "", "", "", "", "", "", "", "", ""]
-#     govunit_df = DataFrame([accord56_gov_row], columns=xc.govunit_agg_columns)
-#     a56_deal_t3 = [accord56_gov_idea, sue_str, bob_str, t3, quota3]
-#     a56_deal_t7 = [accord56_gov_idea, sue_str, bob_str, t7, quota7]
-#     a56_deal_rows = [a56_deal_t3, a56_deal_t7]
-#     gov_deal_df = DataFrame(a56_deal_rows, columns=xc.gov_deal_agg_columns)
-#     print(f"{gov_deal_df=}")
-#     upsert_sheet(xp.govunit_path, agg_str, govunit_df)
-#     upsert_sheet(xp.gov_deal_path, agg_str, gov_deal_df)
-#     gov_jsons_dir = create_path(govs_dir, "gov_jsons")
-#     accord56_json_path = create_path(gov_jsons_dir, "accord56.json")
-#     assert os_path_exists(accord56_json_path) is False
+def test_create_govunit_jsons_from_prime_files_Scenario7_gov_deal_episode(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    govs_dir = create_path(get_test_etl_dir(), "govs")
+    create_init_gov_prime_files(govs_dir)
+    xp = GovPrimeFilePaths(govs_dir)
+    xc = GovPrimeColumns()
+    agg_str = "agg"
+    accord56_gov_idea = "accord56"
+    accord56_gov_idea
+    sue_str = "Sue"
+    t3 = 3
+    t7 = 7
+    quota3 = 555
+    quota7 = 777
+    accord56_gov_row = [accord56_gov_idea, "", "", "", "", "", "", "", "", ""]
+    govunit_df = DataFrame([accord56_gov_row], columns=xc.govunit_agg_columns)
+    a56_deal_t3 = [accord56_gov_idea, sue_str, t3, quota3]
+    a56_deal_t7 = [accord56_gov_idea, sue_str, t7, quota7]
+    a56_deal_rows = [a56_deal_t3, a56_deal_t7]
+    gov_deal_df = DataFrame(a56_deal_rows, columns=xc.gov_deal_agg_columns)
+    print(f"{gov_deal_df=}")
+    upsert_sheet(xp.govunit_path, agg_str, govunit_df)
+    upsert_sheet(xp.gov_deal_path, agg_str, gov_deal_df)
+    gov_jsons_dir = create_path(govs_dir, "gov_jsons")
+    accord56_json_path = create_path(gov_jsons_dir, "accord56.json")
+    assert os_path_exists(accord56_json_path) is False
 
-#     # WHEN
-#     create_govunit_jsons_from_prime_files(govs_dir=govs_dir)
+    # WHEN
+    create_govunit_jsons_from_prime_files(govs_dir=govs_dir)
 
-#     # THEN
-#     assert os_path_exists(accord56_json_path)
-#     accord56_govunit = gov_get_from_json(open_file(accord56_json_path))
-#     x_timelineunit = timelineunit_shop(create_timeline_config())
-#     expected_govunit = govunit_shop(accord56_gov_idea, govs_dir, x_timelineunit)
-#     expected_govunit.add_dealepisode(sue_str, t3, quota3)
-#     expected_govunit.add_dealepisode(sue_str, t7, quota7)
-#     print(f"{expected_govunit.deallogs=}")
-#     print(f"{expected_govunit=}")
-#     assert accord56_govunit.deallogs == expected_govunit.deallogs
-#     assert accord56_govunit == expected_govunit
-#     assert 1 == 2
+    # THEN
+    assert os_path_exists(accord56_json_path)
+    accord56_govunit = gov_get_from_json(open_file(accord56_json_path))
+    x_timelineunit = timelineunit_shop(create_timeline_config())
+    expected_govunit = govunit_shop(accord56_gov_idea, govs_dir, x_timelineunit)
+    expected_govunit.add_dealepisode(sue_str, t3, quota3)
+    expected_govunit.add_dealepisode(sue_str, t7, quota7)
+    print(f"{expected_govunit.deallogs=}")
+    print(f"{expected_govunit=}")
+    assert accord56_govunit.deallogs == expected_govunit.deallogs
 
 
 # def test_create_govunit_jsons_from_prime_files_Scenario4_gov_cashbook(env_dir_setup_cleanup):

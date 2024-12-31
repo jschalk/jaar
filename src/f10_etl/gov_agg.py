@@ -51,7 +51,6 @@ class GovPrimeColumns:
             "event_int",
             "gov_idea",
             "owner_name",
-            "acct_name",
             "time_int",
             "quota",
             "note",
@@ -110,7 +109,6 @@ class GovPrimeColumns:
         self.gov_deal_agg_columns = [
             "gov_idea",
             "owner_name",
-            "acct_name",
             "time_int",
             "quota",
         ]
@@ -196,7 +194,6 @@ def create_govunit_jsons_from_prime_files(govs_dir: str):
     gov_month_df = pandas_read_excel(xp.gov_month_path, "agg")
     gov_weekday_df = pandas_read_excel(xp.gov_weekday_path, "agg")
     govunits_dict = dataframe_to_dict(govunit_df, ["gov_idea"])
-    govs_deal_dict = dataframe_to_dict(gov_deal_df, ["gov_idea"])
     govs_hour_dict = dataframe_to_dict(gov_hour_df, ["gov_idea", "hour_idea"])
     govs_month_dict = dataframe_to_dict(gov_month_df, ["gov_idea", "month_idea"])
     weekday_keys = ["gov_idea", "weekday_idea"]
@@ -222,7 +219,7 @@ def create_govunit_jsons_from_prime_files(govs_dir: str):
             respect_bit=if_nan_return_None(gov_attrs.get("respect_bit")),
         )
         _add_cashpurchases_from_df(govunit, gov_cashbook_df)
-        # _add_dealepisodes_from_df(govunit, gov_cashbook_df)
+        _add_dealepisodes_from_df(govunit, gov_deal_df)
         govunits[govunit.gov_idea] = govunit
     gov_jsons_dir = create_path(govs_dir, "gov_jsons")
     for govunit in govunits.values():
