@@ -333,7 +333,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "base,deal_idea,divisor,need,nigh,open,owner_name,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
         "base,base_item_active_requisite,deal_idea,owner_name,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),
         "addin,begin,close,deal_idea,denom,gogo_want,idee,mass,morph,numor,owner_name,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
-        "credor_respect,deal_idea,debtor_respect,fund_coin,fund_pool,pact_time_int,max_tree_traverse,owner_name,penny,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
+        "credor_respect,deal_idea,debtor_respect,fund_coin,fund_pool,max_tree_traverse,owner_name,pact_time_int,penny,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
         "deal_idea,healer_name,idee,owner_name,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
         "inx_bridge,inx_label,otx_bridge,otx_label,unknown_word": brick_format_00042_map_label_v0_0_0(),
         "inx_bridge,inx_name,otx_bridge,otx_name,unknown_word": brick_format_00043_map_name_v0_0_0(),
