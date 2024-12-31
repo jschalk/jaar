@@ -20,7 +20,7 @@ from src.f07_gov.gov import (
 from src.f07_gov.gov_config import (
     timeline_str,
     current_time_str,
-    pactlogs_str,
+    deallogs_str,
     cashbook_str,
 )
 from src.f07_gov.examples.gov_env import (
@@ -45,9 +45,9 @@ def test_GovUnit_get_dict_ReturnsObjWith_cashbook():
     cash_time_int = 15
     bob_sue_amount = 30000
     accord_gov.set_current_time(accord_current_time_int)
-    accord_gov.add_pactepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
-    accord_gov.add_pactepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
-    accord_gov.add_pactepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
+    accord_gov.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_gov.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    accord_gov.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
     accord_gov.add_cashpurchase(
         x_owner_name=bob_str,
         x_acct_name=sue_str,
@@ -59,7 +59,7 @@ def test_GovUnit_get_dict_ReturnsObjWith_cashbook():
     x_dict = accord_gov.get_dict()
 
     # THEN
-    print(f"{ accord_gov._get_pactlogs_dict()=}")
+    print(f"{ accord_gov._get_deallogs_dict()=}")
     print(f"{ accord_gov.cashbook.get_dict()=}")
     assert x_dict.get(gov_idea_str()) == accord45_str
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
@@ -68,13 +68,13 @@ def test_GovUnit_get_dict_ReturnsObjWith_cashbook():
     assert x_dict.get(fund_coin_str()) == default_fund_coin_if_None()
     assert x_dict.get(respect_bit_str()) == default_respect_bit_if_None()
     assert x_dict.get(penny_str()) == default_penny_if_None()
-    assert x_dict.get(pactlogs_str()) == accord_gov._get_pactlogs_dict()
+    assert x_dict.get(deallogs_str()) == accord_gov._get_deallogs_dict()
     assert x_dict.get(cashbook_str()) == accord_gov.cashbook.get_dict()
     assert set(x_dict.keys()) == {
         gov_idea_str(),
         timeline_str(),
         current_time_str(),
-        pactlogs_str(),
+        deallogs_str(),
         bridge_str(),
         fund_coin_str(),
         respect_bit_str(),
@@ -97,7 +97,7 @@ def test_GovUnit_get_dict_ReturnsObjWithOut_cashbook():
         gov_idea_str(),
         timeline_str(),
         current_time_str(),
-        pactlogs_str(),
+        deallogs_str(),
         bridge_str(),
         fund_coin_str(),
         respect_bit_str(),
@@ -117,9 +117,9 @@ def test_GovUnit_get_json_ReturnsObj():
     sue_x4_magnitude = 55
     sue_x7_time_int = 7
     sue_x7_magnitude = 66
-    accord_gov.add_pactepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
-    accord_gov.add_pactepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
-    accord_gov.add_pactepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
+    accord_gov.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_gov.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    accord_gov.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
 
     # WHEN
     x_json = accord_gov.get_json()
@@ -151,9 +151,9 @@ def test_get_from_dict_ReturnsGovUnit():
     sue_x7_magnitude = 66
     cash_time_int = 15
     bob_sue_amount = 30000
-    accord_gov.add_pactepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
-    accord_gov.add_pactepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
-    accord_gov.add_pactepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
+    accord_gov.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_gov.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    accord_gov.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
     accord_gov.current_time = sue_current_time
     accord_gov.bridge = sue_bridge
     accord_gov.fund_coin = sue_fund_coin
@@ -178,7 +178,7 @@ def test_get_from_dict_ReturnsGovUnit():
     assert x_gov.fund_coin == sue_fund_coin
     assert x_gov.respect_bit == sue_respect_bit
     assert x_gov.penny == sue_penny
-    assert x_gov.pactlogs == accord_gov.pactlogs
+    assert x_gov.deallogs == accord_gov.deallogs
     assert x_gov.cashbook == accord_gov.cashbook
     assert x_gov.govs_dir == accord_gov.govs_dir
     assert x_gov == accord_gov
@@ -203,9 +203,9 @@ def test_get_from_json_ReturnsGovUnit():
     sue_x4_magnitude = 55
     sue_x7_time_int = 7
     sue_x7_magnitude = 66
-    accord_gov.add_pactepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
-    accord_gov.add_pactepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
-    accord_gov.add_pactepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
+    accord_gov.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
+    accord_gov.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    accord_gov.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
     accord_gov.current_time = sue_current_time
     accord_gov.bridge = sue_bridge
     accord_gov.fund_coin = sue_fund_coin
@@ -224,6 +224,6 @@ def test_get_from_json_ReturnsGovUnit():
     assert x_gov.fund_coin == sue_fund_coin
     assert x_gov.respect_bit == sue_respect_bit
     assert x_gov.penny == sue_penny
-    assert x_gov.pactlogs == accord_gov.pactlogs
+    assert x_gov.deallogs == accord_gov.deallogs
     assert x_gov.govs_dir == accord_gov.govs_dir
     assert x_gov == accord_gov

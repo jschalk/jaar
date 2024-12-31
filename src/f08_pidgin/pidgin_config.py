@@ -182,7 +182,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "pick": "RoadUnit",
         "pledge": "bool",
         "problem_bool": "bool",
-        "pact_time_int": "TimeLinePoint",
+        "deal_time_int": "TimeLinePoint",
         "quota": "int",
         "respect_bit": "float",
         "road": "RoadUnit",

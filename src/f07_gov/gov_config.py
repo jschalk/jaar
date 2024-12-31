@@ -11,8 +11,8 @@ def current_time_str() -> str:
     return "current_time"
 
 
-def pactlogs_str() -> str:
-    return "pactlogs"
+def deallogs_str() -> str:
+    return "deallogs"
 
 
 def cashbook_str() -> str:
@@ -57,8 +57,8 @@ def config_file_dir() -> str:
 
 
 # def govunit_str()-> str: return "govunit"
-# def gov_pactlog_str()-> str: return "gov_pactlog"
-# def gov_pact_episode_str()-> str: return "gov_pact_episode"
+# def gov_deallog_str()-> str: return "gov_deallog"
+# def gov_deal_episode_str()-> str: return "gov_deal_episode"
 # def gov_cashbook_str()-> str: return "gov_cashbook"
 # def gov_timeline_hour_str()-> str: return "gov_timeline_hour"
 # def gov_timeline_month_str()-> str: return "gov_timeline_month"
@@ -67,12 +67,12 @@ def govunit_str() -> str:
     return "govunit"
 
 
-def gov_pactlog_str() -> str:
-    return "gov_pactlog"
+def gov_deallog_str() -> str:
+    return "gov_deallog"
 
 
-def gov_pact_episode_str() -> str:
-    return "gov_pact_episode"
+def gov_deal_episode_str() -> str:
+    return "gov_deal_episode"
 
 
 def gov_cashbook_str() -> str:

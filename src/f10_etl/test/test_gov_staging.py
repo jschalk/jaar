@@ -59,14 +59,14 @@ def test_GovPrimeFilePaths_Exists():
 
     # THEN
     x_govunit_path = create_path(x_dir, "govunit.xlsx")
-    x_gov_pact_path = create_path(x_dir, "gov_pact_episode.xlsx")
+    x_gov_deal_path = create_path(x_dir, "gov_deal_episode.xlsx")
     x_gov_cashbook_path = create_path(x_dir, "gov_cashbook.xlsx")
     x_gov_hour_path = create_path(x_dir, "gov_timeline_hour.xlsx")
     x_gov_month_path = create_path(x_dir, "gov_timeline_month.xlsx")
     x_gov_weekday_path = create_path(x_dir, "gov_timeline_weekday.xlsx")
     assert x_govprimefilepaths
     assert x_govprimefilepaths.govunit_path == x_govunit_path
-    assert x_govprimefilepaths.gov_pact_path == x_gov_pact_path
+    assert x_govprimefilepaths.gov_deal_path == x_gov_deal_path
     assert x_govprimefilepaths.gov_cashbook_path == x_gov_cashbook_path
     assert x_govprimefilepaths.gov_hour_path == x_gov_hour_path
     assert x_govprimefilepaths.gov_month_path == x_gov_month_path
@@ -94,7 +94,7 @@ def test_GovPrimeColumns_Exists():
         yr1_jan1_offset_str(),
         "note",
     ]
-    assert x_govprimecolumns.gov_pact_staging_columns == [
+    assert x_govprimecolumns.gov_deal_staging_columns == [
         "source_br",
         face_name_str(),
         event_int_str(),
@@ -156,7 +156,7 @@ def test_GovPrimeColumns_Exists():
         timeline_idea_str(),
         yr1_jan1_offset_str(),
     ]
-    assert x_govprimecolumns.gov_pact_agg_columns == [
+    assert x_govprimecolumns.gov_deal_agg_columns == [
         gov_idea_str(),
         owner_name_str(),
         acct_name_str(),
@@ -193,7 +193,7 @@ def test_create_init_gov_prime_files_CreatesFiles_staging(env_dir_setup_cleanup)
     staging_str = "staging"
     xp = GovPrimeFilePaths(x_dir)
     assert sheet_exists(xp.govunit_path, staging_str) is False
-    assert sheet_exists(xp.gov_pact_path, staging_str) is False
+    assert sheet_exists(xp.gov_deal_path, staging_str) is False
     assert sheet_exists(xp.gov_cashbook_path, staging_str) is False
     assert sheet_exists(xp.gov_hour_path, staging_str) is False
     assert sheet_exists(xp.gov_month_path, staging_str) is False
@@ -204,7 +204,7 @@ def test_create_init_gov_prime_files_CreatesFiles_staging(env_dir_setup_cleanup)
 
     # THEN
     assert sheet_exists(xp.govunit_path, staging_str)
-    assert sheet_exists(xp.gov_pact_path, staging_str)
+    assert sheet_exists(xp.gov_deal_path, staging_str)
     assert sheet_exists(xp.gov_cashbook_path, staging_str)
     assert sheet_exists(xp.gov_hour_path, staging_str)
     assert sheet_exists(xp.gov_month_path, staging_str)
@@ -222,7 +222,7 @@ def test_create_init_gov_prime_files_HasCorrectColumns_staging(env_dir_setup_cle
     staging_str = "staging"
     xp = GovPrimeFilePaths(x_dir)
     govunit_df = pandas_read_excel(xp.govunit_path, sheet_name=staging_str)
-    gov_pact_df = pandas_read_excel(xp.gov_pact_path, sheet_name=staging_str)
+    gov_deal_df = pandas_read_excel(xp.gov_deal_path, sheet_name=staging_str)
     gov_cashbook_df = pandas_read_excel(xp.gov_cashbook_path, sheet_name=staging_str)
     gov_hour_df = pandas_read_excel(xp.gov_hour_path, sheet_name=staging_str)
     gov_month_df = pandas_read_excel(xp.gov_month_path, sheet_name=staging_str)
@@ -231,7 +231,7 @@ def test_create_init_gov_prime_files_HasCorrectColumns_staging(env_dir_setup_cle
     expected_cols = GovPrimeColumns()
     print(f"{list(govunit_df.columns)=}")
     assert list(govunit_df.columns) == expected_cols.govunit_staging_columns
-    assert list(gov_pact_df.columns) == expected_cols.gov_pact_staging_columns
+    assert list(gov_deal_df.columns) == expected_cols.gov_deal_staging_columns
     assert list(gov_cashbook_df.columns) == expected_cols.gov_cashbook_staging_columns
     assert list(gov_hour_df.columns) == expected_cols.gov_hour_staging_columns
     assert list(gov_month_df.columns) == expected_cols.gov_month_staging_columns
@@ -244,7 +244,7 @@ def test_create_init_gov_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
     agg_str = "agg"
     xp = GovPrimeFilePaths(x_dir)
     assert sheet_exists(xp.govunit_path, agg_str) is False
-    assert sheet_exists(xp.gov_pact_path, agg_str) is False
+    assert sheet_exists(xp.gov_deal_path, agg_str) is False
     assert sheet_exists(xp.gov_cashbook_path, agg_str) is False
     assert sheet_exists(xp.gov_hour_path, agg_str) is False
     assert sheet_exists(xp.gov_month_path, agg_str) is False
@@ -255,7 +255,7 @@ def test_create_init_gov_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
 
     # THEN
     assert sheet_exists(xp.govunit_path, agg_str)
-    assert sheet_exists(xp.gov_pact_path, agg_str)
+    assert sheet_exists(xp.gov_deal_path, agg_str)
     assert sheet_exists(xp.gov_cashbook_path, agg_str)
     assert sheet_exists(xp.gov_hour_path, agg_str)
     assert sheet_exists(xp.gov_month_path, agg_str)
@@ -273,7 +273,7 @@ def test_create_init_gov_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanup
     agg_str = "agg"
     xp = GovPrimeFilePaths(x_dir)
     govunit_df = pandas_read_excel(xp.govunit_path, sheet_name=agg_str)
-    gov_pact_df = pandas_read_excel(xp.gov_pact_path, sheet_name=agg_str)
+    gov_deal_df = pandas_read_excel(xp.gov_deal_path, sheet_name=agg_str)
     gov_cashbook_df = pandas_read_excel(xp.gov_cashbook_path, sheet_name=agg_str)
     gov_hour_df = pandas_read_excel(xp.gov_hour_path, sheet_name=agg_str)
     gov_month_df = pandas_read_excel(xp.gov_month_path, sheet_name=agg_str)
@@ -282,7 +282,7 @@ def test_create_init_gov_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanup
     expected_cols = GovPrimeColumns()
     print(f"{list(govunit_df.columns)=}")
     assert list(govunit_df.columns) == expected_cols.govunit_agg_columns
-    assert list(gov_pact_df.columns) == expected_cols.gov_pact_agg_columns
+    assert list(gov_deal_df.columns) == expected_cols.gov_deal_agg_columns
     assert list(gov_cashbook_df.columns) == expected_cols.gov_cashbook_agg_columns
     assert list(gov_hour_df.columns) == expected_cols.gov_hour_agg_columns
     assert list(gov_month_df.columns) == expected_cols.gov_month_agg_columns
@@ -617,7 +617,7 @@ def test_create_govunit_jsons_from_prime_files_Scenario6_gov_cashbook(
     assert accord56_govunit.cashbook == expected_govunit.cashbook
 
 
-# def test_create_govunit_jsons_from_prime_files_Scenario3_gov_pact_episode(
+# def test_create_govunit_jsons_from_prime_files_Scenario3_gov_deal_episode(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -636,13 +636,13 @@ def test_create_govunit_jsons_from_prime_files_Scenario6_gov_cashbook(
 #     quota7 = 777
 #     accord56_gov_row = [accord56_gov_idea, "", "", "", "", "", "", "", "", ""]
 #     govunit_df = DataFrame([accord56_gov_row], columns=xc.govunit_agg_columns)
-#     a56_pact_t3 = [accord56_gov_idea, sue_str, bob_str, t3, quota3]
-#     a56_pact_t7 = [accord56_gov_idea, sue_str, bob_str, t7, quota7]
-#     a56_pact_rows = [a56_pact_t3, a56_pact_t7]
-#     gov_pact_df = DataFrame(a56_pact_rows, columns=xc.gov_pact_agg_columns)
-#     print(f"{gov_pact_df=}")
+#     a56_deal_t3 = [accord56_gov_idea, sue_str, bob_str, t3, quota3]
+#     a56_deal_t7 = [accord56_gov_idea, sue_str, bob_str, t7, quota7]
+#     a56_deal_rows = [a56_deal_t3, a56_deal_t7]
+#     gov_deal_df = DataFrame(a56_deal_rows, columns=xc.gov_deal_agg_columns)
+#     print(f"{gov_deal_df=}")
 #     upsert_sheet(xp.govunit_path, agg_str, govunit_df)
-#     upsert_sheet(xp.gov_pact_path, agg_str, gov_pact_df)
+#     upsert_sheet(xp.gov_deal_path, agg_str, gov_deal_df)
 #     gov_jsons_dir = create_path(govs_dir, "gov_jsons")
 #     accord56_json_path = create_path(gov_jsons_dir, "accord56.json")
 #     assert os_path_exists(accord56_json_path) is False
@@ -655,11 +655,11 @@ def test_create_govunit_jsons_from_prime_files_Scenario6_gov_cashbook(
 #     accord56_govunit = gov_get_from_json(open_file(accord56_json_path))
 #     x_timelineunit = timelineunit_shop(create_timeline_config())
 #     expected_govunit = govunit_shop(accord56_gov_idea, govs_dir, x_timelineunit)
-#     expected_govunit.add_pactepisode(sue_str, t3, quota3)
-#     expected_govunit.add_pactepisode(sue_str, t7, quota7)
-#     print(f"{expected_govunit.pactlogs=}")
+#     expected_govunit.add_dealepisode(sue_str, t3, quota3)
+#     expected_govunit.add_dealepisode(sue_str, t7, quota7)
+#     print(f"{expected_govunit.deallogs=}")
 #     print(f"{expected_govunit=}")
-#     assert accord56_govunit.pactlogs == expected_govunit.pactlogs
+#     assert accord56_govunit.deallogs == expected_govunit.deallogs
 #     assert accord56_govunit == expected_govunit
 #     assert 1 == 2
 

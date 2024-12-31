@@ -249,7 +249,7 @@ def gov_build_from_df(
             penny=x_penny,
         )
         govunit_dict[x_govunit.gov_idea] = x_govunit
-        _add_pactepisodes_from_df(x_govunit, br00001_df)
+        _add_dealepisodes_from_df(x_govunit, br00001_df)
         _add_cashpurchases_from_df(x_govunit, br00002_df)
     return govunit_dict
 
@@ -289,10 +289,10 @@ def _get_gov_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
     return gov_weekdays_dict
 
 
-def _add_pactepisodes_from_df(x_govunit: GovUnit, br00001_df: DataFrame):
+def _add_dealepisodes_from_df(x_govunit: GovUnit, br00001_df: DataFrame):
     query_str = f"gov_idea == '{x_govunit.gov_idea}'"
     for index, row in br00001_df.query(query_str).iterrows():
-        x_govunit.add_pactepisode(
+        x_govunit.add_dealepisode(
             x_owner_name=row["owner_name"],
             x_time_int=row["time_int"],
             x_money_magnitude=row["quota"],

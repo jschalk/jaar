@@ -29,7 +29,7 @@ def test_GovUnit_Exists(env_dir_setup_cleanup):
     assert not accord_gov.gov_idea
     assert not accord_gov.timeline
     assert not accord_gov.current_time
-    assert not accord_gov.pactlogs
+    assert not accord_gov.deallogs
     assert not accord_gov.cashbook
     assert not accord_gov.bridge
     assert not accord_gov.fund_coin
@@ -51,7 +51,7 @@ def test_govunit_shop_ReturnsGovUnit():
     assert accord_gov.gov_idea == get_test_gov_idea()
     assert accord_gov.timeline == timelineunit_shop()
     assert accord_gov.current_time == 0
-    assert accord_gov.pactlogs == {}
+    assert accord_gov.deallogs == {}
     assert accord_gov.cashbook == tranbook_shop(get_test_gov_idea())
     assert accord_gov.bridge == default_bridge_if_None()
     assert accord_gov.fund_coin == default_fund_coin_if_None()

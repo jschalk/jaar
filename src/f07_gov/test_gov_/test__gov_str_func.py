@@ -1,7 +1,7 @@
 from src.f07_gov.gov_config import (
     timeline_str,
     current_time_str,
-    pactlogs_str,
+    deallogs_str,
     cashbook_str,
     amount_str,
     month_idea_str,
@@ -11,8 +11,8 @@ from src.f07_gov.gov_config import (
     weekday_idea_str,
     weekday_order_str,
     govunit_str,
-    gov_pactlog_str,
-    gov_pact_episode_str,
+    gov_deallog_str,
+    gov_deal_episode_str,
     gov_cashbook_str,
     gov_timeline_hour_str,
     gov_timeline_month_str,
@@ -23,7 +23,7 @@ from src.f07_gov.gov_config import (
 def test_str_functions_ReturnsObj():
     assert timeline_str() == "timeline"
     assert current_time_str() == "current_time"
-    assert pactlogs_str() == "pactlogs"
+    assert deallogs_str() == "deallogs"
     assert cashbook_str() == "cashbook"
     assert amount_str() == "amount"
     assert month_idea_str() == "month_idea"
@@ -33,8 +33,8 @@ def test_str_functions_ReturnsObj():
     assert weekday_idea_str() == "weekday_idea"
     assert weekday_order_str() == "weekday_order"
     assert govunit_str() == "govunit"
-    assert gov_pactlog_str() == "gov_pactlog"
-    assert gov_pact_episode_str() == "gov_pact_episode"
+    assert gov_deallog_str() == "gov_deallog"
+    assert gov_deal_episode_str() == "gov_deal_episode"
     assert gov_cashbook_str() == "gov_cashbook"
     assert gov_timeline_hour_str() == "gov_timeline_hour"
     assert gov_timeline_month_str() == "gov_timeline_month"

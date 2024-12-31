@@ -714,8 +714,8 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 #     # ESTABLISH
 #     x_time_int = 4
 #     x_amount = 55
-#     x_net_pacts = {"Sue": -57}
-#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_pacts)
+#     x_net_deals = {"Sue": -57}
+#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_deals)
 #     x_json = x_tranbook.get_json()
 
 #     # WHEN
@@ -725,5 +725,5 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 #     assert x_tranbook
 #     assert x_tranbook.time_int == x_time_int
 #     assert x_tranbook.amount == x_amount
-#     assert x_tranbook._net_pacts == x_net_pacts
+#     assert x_tranbook._net_deals == x_net_deals
 #     assert x_tranbook == x_tranbook

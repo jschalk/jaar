@@ -195,37 +195,37 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
 
 
 @dataclass
-class PactEpisode:
+class DealEpisode:
     time_int: TimeLinePoint = None
     quota: FundNum = None
     _magnitude: FundNum = None
-    _net_pacts: dict[AcctName, FundNum] = None
+    _net_deals: dict[AcctName, FundNum] = None
 
-    def set_net_pact(self, x_acct_name: AcctName, net_pact: FundNum):
-        self._net_pacts[x_acct_name] = net_pact
+    def set_net_deal(self, x_acct_name: AcctName, net_deal: FundNum):
+        self._net_deals[x_acct_name] = net_deal
 
-    def net_pact_exists(self, x_acct_name: AcctName) -> bool:
-        return self._net_pacts.get(x_acct_name) != None
+    def net_deal_exists(self, x_acct_name: AcctName) -> bool:
+        return self._net_deals.get(x_acct_name) != None
 
-    def get_net_pact(self, x_acct_name: AcctName) -> FundNum:
-        return self._net_pacts.get(x_acct_name)
+    def get_net_deal(self, x_acct_name: AcctName) -> FundNum:
+        return self._net_deals.get(x_acct_name)
 
-    def del_net_pact(self, x_acct_name: AcctName):
-        self._net_pacts.pop(x_acct_name)
+    def del_net_deal(self, x_acct_name: AcctName):
+        self._net_deals.pop(x_acct_name)
 
     def calc_magnitude(self):
-        net_pacts = self._net_pacts.values()
-        x_cred_sum = sum(net_pact for net_pact in net_pacts if net_pact > 0)
-        x_debt_sum = sum(net_pact for net_pact in net_pacts if net_pact < 0)
+        net_deals = self._net_deals.values()
+        x_cred_sum = sum(net_deal for net_deal in net_deals if net_deal > 0)
+        x_debt_sum = sum(net_deal for net_deal in net_deals if net_deal < 0)
         if x_cred_sum + x_debt_sum != 0:
-            exception_str = f"magnitude cannot be calculated: debt_pact={x_debt_sum}, cred_pact={x_cred_sum}"
+            exception_str = f"magnitude cannot be calculated: debt_deal={x_debt_sum}, cred_deal={x_cred_sum}"
             raise calc_magnitudeException(exception_str)
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
         x_dict = {"time_int": self.time_int, "quota": self.quota}
-        if self._net_pacts:
-            x_dict["net_pacts"] = self._net_pacts
+        if self._net_deals:
+            x_dict["net_deals"] = self._net_deals
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
         return x_dict
@@ -234,42 +234,42 @@ class PactEpisode:
         return get_json_from_dict(self.get_dict())
 
 
-def pactepisode_shop(
+def dealepisode_shop(
     x_time_int: TimeLinePoint,
     x_quota: FundNum = None,
-    net_pacts: dict[AcctName, FundNum] = None,
+    net_deals: dict[AcctName, FundNum] = None,
     x_magnitude: FundNum = None,
-) -> PactEpisode:
+) -> DealEpisode:
     if x_quota is None:
         x_quota = default_fund_pool()
 
-    return PactEpisode(
+    return DealEpisode(
         time_int=x_time_int,
         quota=x_quota,
-        _net_pacts=get_empty_dict_if_None(net_pacts),
+        _net_deals=get_empty_dict_if_None(net_deals),
         _magnitude=get_0_if_None(x_magnitude),
     )
 
 
 @dataclass
-class PactLog:
+class DealLog:
     owner_name: OwnerName = None
-    episodes: dict[TimeLinePoint, PactEpisode] = None
-    _sum_pactepisode_quota: FundNum = None
-    _sum_acct_pacts: int = None
+    episodes: dict[TimeLinePoint, DealEpisode] = None
+    _sum_dealepisode_quota: FundNum = None
+    _sum_acct_deals: int = None
     _time_int_min: TimeLinePoint = None
     _time_int_max: TimeLinePoint = None
 
-    def set_episode(self, x_episode: PactEpisode):
+    def set_episode(self, x_episode: DealEpisode):
         self.episodes[x_episode.time_int] = x_episode
 
     def add_episode(self, x_time_int: TimeLinePoint, x_quota: FundNum):
-        self.set_episode(pactepisode_shop(x_time_int, x_quota))
+        self.set_episode(dealepisode_shop(x_time_int, x_quota))
 
     def episode_exists(self, x_time_int: TimeLinePoint) -> bool:
         return self.episodes.get(x_time_int) != None
 
-    def get_episode(self, x_time_int: TimeLinePoint) -> PactEpisode:
+    def get_episode(self, x_time_int: TimeLinePoint) -> DealEpisode:
         return self.episodes.get(x_time_int)
 
     def del_episode(self, x_time_int: TimeLinePoint):
@@ -299,7 +299,7 @@ class PactLog:
     def get_tranbook(self, gov_idea: GovIdea) -> TranBook:
         x_tranbook = tranbook_shop(gov_idea)
         for x_time_int, x_episode in self.episodes.items():
-            for dst_acct_name, x_quota in x_episode._net_pacts.items():
+            for dst_acct_name, x_quota in x_episode._net_deals.items():
                 x_tranbook.add_tranunit(
                     x_owner_name=self.owner_name,
                     x_acct_name=dst_acct_name,
@@ -309,34 +309,34 @@ class PactLog:
         return x_tranbook
 
 
-def pactlog_shop(owner_name: OwnerName) -> PactLog:
-    return PactLog(owner_name=owner_name, episodes={}, _sum_acct_pacts={})
+def deallog_shop(owner_name: OwnerName) -> DealLog:
+    return DealLog(owner_name=owner_name, episodes={}, _sum_acct_deals={})
 
 
-def get_pactepisode_from_dict(x_dict: dict) -> PactEpisode:
+def get_dealepisode_from_dict(x_dict: dict) -> DealEpisode:
     x_time_int = x_dict.get("time_int")
     x_quota = x_dict.get("quota")
-    x_net_pacts = x_dict.get("net_pacts")
+    x_net_deals = x_dict.get("net_deals")
     x_magnitude = x_dict.get("magnitude")
-    return pactepisode_shop(x_time_int, x_quota, x_net_pacts, x_magnitude)
+    return dealepisode_shop(x_time_int, x_quota, x_net_deals, x_magnitude)
 
 
-def get_pactepisode_from_json(x_json: str) -> PactEpisode:
-    return get_pactepisode_from_dict(get_dict_from_json(x_json))
+def get_dealepisode_from_json(x_json: str) -> DealEpisode:
+    return get_dealepisode_from_dict(get_dict_from_json(x_json))
 
 
-def get_pactlog_from_dict(x_dict: dict) -> PactLog:
+def get_deallog_from_dict(x_dict: dict) -> DealLog:
     x_owner_name = x_dict.get("owner_name")
-    x_pactlog = pactlog_shop(x_owner_name)
-    x_pactlog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
-    return x_pactlog
+    x_deallog = deallog_shop(x_owner_name)
+    x_deallog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
+    return x_deallog
 
 
-def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, PactEpisode]:
+def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, DealEpisode]:
     x_dict = {}
     for x_episode_dict in episodes_dict.values():
-        x_pact_episode = get_pactepisode_from_dict(x_episode_dict)
-        x_dict[x_pact_episode.time_int] = x_pact_episode
+        x_deal_episode = get_dealepisode_from_dict(x_episode_dict)
+        x_dict[x_deal_episode.time_int] = x_deal_episode
     return x_dict
 
 

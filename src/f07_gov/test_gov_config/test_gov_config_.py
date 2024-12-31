@@ -28,8 +28,8 @@ from src.f07_gov.gov_config import (
     current_time_str,
     cumlative_minute_str,
     govunit_str,
-    gov_pactlog_str,
-    gov_pact_episode_str,
+    gov_deallog_str,
+    gov_deal_episode_str,
     gov_cashbook_str,
     gov_timeline_hour_str,
     gov_timeline_month_str,
@@ -58,8 +58,8 @@ def test_get_gov_config_dict_ReturnsObj():
     assert gov_config
     gov_config_categorys = set(gov_config.keys())
     assert govunit_str() in gov_config_categorys
-    assert gov_pactlog_str() not in gov_config_categorys
-    assert gov_pact_episode_str() in gov_config_categorys
+    assert gov_deallog_str() not in gov_config_categorys
+    assert gov_deal_episode_str() in gov_config_categorys
     assert gov_cashbook_str() in gov_config_categorys
     assert gov_timeline_hour_str() in gov_config_categorys
     assert gov_timeline_month_str() in gov_config_categorys
@@ -67,13 +67,13 @@ def test_get_gov_config_dict_ReturnsObj():
     assert len(gov_config) == 6
     _validate_gov_config(gov_config)
     govunit_dict = gov_config.get(govunit_str())
-    gov_pact_episode_dict = gov_config.get(gov_pact_episode_str())
+    gov_deal_episode_dict = gov_config.get(gov_deal_episode_str())
     gov_cashbook_dict = gov_config.get(gov_cashbook_str())
     gov_timeline_hour_dict = gov_config.get(gov_timeline_hour_str())
     gov_timeline_month_dict = gov_config.get(gov_timeline_month_str())
     gov_timeline_weekday_dict = gov_config.get(gov_timeline_weekday_str())
     assert len(govunit_dict.get(jkeys_str())) == 1
-    assert len(gov_pact_episode_dict.get(jkeys_str())) == 3
+    assert len(gov_deal_episode_dict.get(jkeys_str())) == 3
     assert len(gov_cashbook_dict.get(jkeys_str())) == 4
     assert len(gov_timeline_hour_dict.get(jkeys_str())) == 2
     assert len(gov_timeline_month_dict.get(jkeys_str())) == 2
@@ -94,7 +94,7 @@ def test_get_gov_config_dict_ReturnsObj():
     gen_jvalues = set(govunit_dict.get(jvalues_str()).keys())
     assert gen_jvalues == x_govunit_jvalues
     assert len(govunit_dict.get(jvalues_str())) == 9
-    assert len(gov_pact_episode_dict.get(jvalues_str())) == 1
+    assert len(gov_deal_episode_dict.get(jvalues_str())) == 1
     assert len(gov_cashbook_dict.get(jvalues_str())) == 1
     assert len(gov_timeline_hour_dict.get(jvalues_str())) == 1
     assert len(gov_timeline_month_dict.get(jvalues_str())) == 1
@@ -135,8 +135,8 @@ def test_get_gov_categorys_ReturnsObj():
 
     # THEN
     assert govunit_str() in gov_config_categorys
-    assert gov_pactlog_str() not in gov_config_categorys
-    assert gov_pact_episode_str() in gov_config_categorys
+    assert gov_deallog_str() not in gov_config_categorys
+    assert gov_deal_episode_str() in gov_config_categorys
     assert gov_cashbook_str() in gov_config_categorys
     assert gov_timeline_hour_str() in gov_config_categorys
     assert gov_timeline_month_str() in gov_config_categorys

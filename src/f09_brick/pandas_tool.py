@@ -184,7 +184,7 @@ def _get_pidgen_brick_format_filenames() -> set[str]:
 def _get_gov_brick_format_filenames() -> set[str]:
     brick_numbers = set(get_brick_category_ref().get("govunit"))
     brick_numbers.update(set(get_brick_category_ref().get("gov_cashbook")))
-    brick_numbers.update(set(get_brick_category_ref().get("gov_pact_episode")))
+    brick_numbers.update(set(get_brick_category_ref().get("gov_deal_episode")))
     brick_numbers.update(set(get_brick_category_ref().get("gov_timeline_hour")))
     brick_numbers.update(set(get_brick_category_ref().get("gov_timeline_month")))
     brick_numbers.update(set(get_brick_category_ref().get("gov_timeline_weekday")))

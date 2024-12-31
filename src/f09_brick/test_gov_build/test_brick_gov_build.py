@@ -63,7 +63,7 @@ def test_gov_build_from_df_ReturnsObj_Scenario0_OneGovIdea(brick_env_setup_clean
         bridge=slash_str,
         timeline=creg_timelineunit,
     )
-    accord23_govunit.add_pactepisode(
+    accord23_govunit.add_dealepisode(
         x_owner_name="Sue",
         x_time_int=777,
         x_money_magnitude=445,
@@ -82,10 +82,10 @@ def test_gov_build_from_df_ReturnsObj_Scenario0_OneGovIdea(brick_env_setup_clean
     assert gen_govunit.gov_idea == accord23_str
     assert gen_govunit.govs_dir == x_govs_dir
     assert gen_govunit.timeline == accord23_govunit.timeline
-    assert gen_govunit.pactlogs == accord23_govunit.pactlogs
+    assert gen_govunit.deallogs == accord23_govunit.deallogs
     assert gen_govunit.cashbook.tranunits == accord23_govunit.cashbook.tranunits
-    print(f"{gen_govunit.pactlogs=}")
-    assert len(gen_govunit.pactlogs) == 1
+    print(f"{gen_govunit.deallogs=}")
+    assert len(gen_govunit.deallogs) == 1
     assert len(gen_govunit.cashbook.tranunits) == 1
     assert gen_govunit == accord23_govunit
 
@@ -154,7 +154,7 @@ def test_gov_build_from_df_ReturnsObj_Scenario1_TwoGovIdeas(
     assert creg_govunit.gov_idea == accord23_str
     assert creg_govunit.govs_dir == x_govs_dir
     assert creg_govunit.timeline == accord23_govunit.timeline
-    assert len(creg_govunit.pactlogs) == 3
+    assert len(creg_govunit.deallogs) == 3
     assert len(creg_govunit.cashbook.tranunits) == 4
     # assert creg_govunit == accord23_govunit
 
@@ -164,7 +164,7 @@ def test_gov_build_from_df_ReturnsObj_Scenario1_TwoGovIdeas(
     assert five_govunit.penny == x_penny
     assert five_govunit.gov_idea == "jeffy45"
     assert five_govunit.govs_dir == x_govs_dir
-    assert len(five_govunit.pactlogs) == 2
+    assert len(five_govunit.deallogs) == 2
     assert len(five_govunit.cashbook.tranunits) == 1
     jeffy45_timeline = jeffy45_govunit.timeline
     assert five_govunit.timeline.hours_config == jeffy45_timeline.hours_config

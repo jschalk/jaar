@@ -34,22 +34,22 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tally():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_pact_time_int():
+def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_deal_time_int():
     # ESTABLISH
     category = budunit_str()
-    pact_time_int_str = "pact_time_int"
-    pact_time_int_int = 55
-    pact_time_int_atomunit = atomunit_shop(category, atom_update())
-    pact_time_int_atomunit.set_arg(pact_time_int_str, pact_time_int_int)
+    deal_time_int_str = "deal_time_int"
+    deal_time_int_int = 55
+    deal_time_int_atomunit = atomunit_shop(category, atom_update())
+    deal_time_int_atomunit.set_arg(deal_time_int_str, deal_time_int_int)
     x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(pact_time_int_atomunit)
+    x_deltaunit.set_atomunit(deal_time_int_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
     legible_list = create_legible_list(x_deltaunit, sue_bud)
 
     # THEN
-    x_str = f"{sue_bud.owner_name}'s bud pact_time_int set to {pact_time_int_int}"
+    x_str = f"{sue_bud.owner_name}'s bud deal_time_int set to {deal_time_int_int}"
     assert legible_list[0] == x_str
 
 

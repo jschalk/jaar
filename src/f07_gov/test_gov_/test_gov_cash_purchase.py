@@ -75,14 +75,14 @@ def test_GovUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThanO
     assert str(excinfo.value) == exception_str
 
 
-def test_GovUnit_set_cashpurchase_RaisesErrorWhenPactEpisodeHas_time_int():
+def test_GovUnit_set_cashpurchase_RaisesErrorWhenDealEpisodeHas_time_int():
     # ESTABLISH
     x_gov = govunit_shop(current_time=0)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_money_magnitude = 100
-    x_gov.add_pactepisode("yao", t55_t, t55_money_magnitude)
+    x_gov.add_dealepisode("yao", t55_t, t55_money_magnitude)
     t55_amount = 37
     t6606_current_time = 6606
     x_gov.current_time = t6606_current_time
@@ -219,16 +219,16 @@ def test_GovUnit_set_all_tranbook_SetsAttr():
 
     x40000_time_int = 40000
     x70000_time_int = 70000
-    x_gov.add_pactepisode(sue_str, x40000_time_int, 1)
-    x_gov.add_pactepisode(sue_str, x70000_time_int, 1)
+    x_gov.add_dealepisode(sue_str, x40000_time_int, 1)
+    x_gov.add_dealepisode(sue_str, x70000_time_int, 1)
     bob_str = "Bob"
     zia_str = "Zia"
-    zia_net_pact = 887
-    bob_net_pact = 445
-    sue_x40000_episode = x_gov.get_pactlog(sue_str).get_episode(x40000_time_int)
-    sue_x70000_episode = x_gov.get_pactlog(sue_str).get_episode(x70000_time_int)
-    sue_x40000_episode.set_net_pact(bob_str, bob_net_pact)
-    sue_x70000_episode.set_net_pact(zia_str, zia_net_pact)
+    zia_net_deal = 887
+    bob_net_deal = 445
+    sue_x40000_episode = x_gov.get_deallog(sue_str).get_episode(x40000_time_int)
+    sue_x70000_episode = x_gov.get_deallog(sue_str).get_episode(x70000_time_int)
+    sue_x40000_episode.set_net_deal(bob_str, bob_net_deal)
+    sue_x70000_episode.set_net_deal(zia_str, zia_net_deal)
 
     assert x_gov._all_tranbook == tranbook_shop(x_gov.gov_idea)
     assert x_gov.cashpurchase_exists(sue_str, bob_str, t55_t)
@@ -237,9 +237,9 @@ def test_GovUnit_set_all_tranbook_SetsAttr():
     assert x_gov.cashpurchase_exists(sue_str, yao_str, t88_t)
     assert x_gov.cashpurchase_exists(bob_str, sue_str, t99_t)
 
-    assert sue_x40000_episode.net_pact_exists(bob_str)
-    assert sue_x70000_episode.net_pact_exists(zia_str)
-    # x_gov.add_pactepisode()
+    assert sue_x40000_episode.net_deal_exists(bob_str)
+    assert sue_x70000_episode.net_deal_exists(zia_str)
+    # x_gov.add_dealepisode()
 
     # WHEN
     x_gov.set_all_tranbook()
