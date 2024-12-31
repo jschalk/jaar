@@ -531,6 +531,49 @@ def test_create_dealunit_jsons_from_prime_files_Scenario4_deal_timeline_month(
     assert accord56_dealunit.timeline.months_config == x_timelineunit.months_config
 
 
+def test_create_dealunit_jsons_from_prime_files_Scenario5_deal_timeline_hour(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    deals_dir = create_path(get_test_etl_dir(), "deals")
+    create_init_deal_prime_files(deals_dir)
+    xp = DealPrimeFilePaths(deals_dir)
+    xc = DealPrimeColumns()
+    agg_str = "agg"
+    accord56_deal_idea = "accord56"
+    accord56_deal_idea
+    july_str = "July"
+    june_str = "June"
+    accord56_deal_row = [accord56_deal_idea, "", "", "", "", "", "", "", "", ""]
+    dealunit_df = DataFrame([accord56_deal_row], columns=xc.dealunit_agg_columns)
+    a56_june = [accord56_deal_idea, june_str, 150]
+    a56_july = [accord56_deal_idea, july_str, 365]
+    a56_hour_rows = [a56_july, a56_june]
+    a56_hour_df = DataFrame(a56_hour_rows, columns=xc.deal_hour_agg_columns)
+    print(f"{a56_hour_df=}")
+    upsert_sheet(xp.dealunit_path, agg_str, dealunit_df)
+    upsert_sheet(xp.deal_hour_path, agg_str, a56_hour_df)
+    deal_jsons_dir = create_path(deals_dir, "deal_jsons")
+    accord56_json_path = create_path(deal_jsons_dir, "accord56.json")
+    assert os_path_exists(accord56_json_path) is False
+
+    # WHEN
+    create_dealunit_jsons_from_prime_files(deals_dir=deals_dir)
+
+    # THEN
+    assert os_path_exists(accord56_json_path)
+    accord56_dealunit = deal_get_from_json(open_file(accord56_json_path))
+    x_timelineunit = timelineunit_shop(create_timeline_config())
+    expected_dealunit = dealunit_shop(accord56_deal_idea, deals_dir, x_timelineunit)
+    expected_dealunit.timeline.hours_config = [[june_str, 150], [july_str, 365]]
+    print(f"{expected_dealunit.timeline.hours_config=}")
+    assert accord56_dealunit.timeline.hours_config == [
+        [june_str, 150],
+        [july_str, 365],
+    ]
+    assert accord56_dealunit.timeline.hours_config == x_timelineunit.hours_config
+
+
 # def test_create_dealunit_jsons_from_prime_files_Scenario3_deal_purview_episode(
 #     env_dir_setup_cleanup,
 # ):
