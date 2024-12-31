@@ -219,12 +219,12 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     jvalues = x_atom.jvalues
     _tally_str = "tally"
     _max_tree_traverse_str = "max_tree_traverse"
-    turn_time_int_str = "turn_time_int"
+    bank_time_int_str = "bank_time_int"
     _max_tree_traverse_value = jvalues.get(_max_tree_traverse_str)
     credor_respect_value = jvalues.get(credor_respect_str())
     debtor_respect_value = jvalues.get(debtor_respect_str())
     _tally_value = jvalues.get(_tally_str)
-    turn_time_int_value = jvalues.get(turn_time_int_str)
+    bank_time_int_value = jvalues.get(bank_time_int_str)
 
     if _max_tree_traverse_value is not None:
         x_str = f"{x_bud.owner_name}'s maximum number of Bud evaluations set to {_max_tree_traverse_value}"
@@ -245,9 +245,9 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     if _tally_value is not None:
         x_str = f"{x_bud.owner_name}'s bud tally set to {_tally_value}"
         legible_list.append(x_str)
-    if turn_time_int_value is not None:
+    if bank_time_int_value is not None:
         x_str = (
-            f"{x_bud.owner_name}'s bud {turn_time_int_str} set to {turn_time_int_value}"
+            f"{x_bud.owner_name}'s bud {bank_time_int_str} set to {bank_time_int_value}"
         )
         legible_list.append(x_str)
 

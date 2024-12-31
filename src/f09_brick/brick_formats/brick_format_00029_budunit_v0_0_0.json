@@ -30,7 +30,7 @@
         "penny": {
             "otx_key": false
         },
-        "turn_time_int": {
+        "bank_time_int": {
             "otx_key": false
         },
         "respect_bit": {

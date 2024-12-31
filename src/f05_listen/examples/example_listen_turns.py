@@ -1,29 +1,29 @@
-from src.f01_road.finance_tran import turnepisode_shop, TurnEpisode
+from src.f01_road.finance_tran import bankepisode_shop, BankEpisode
 
 
-def get_turnepisode_55_example() -> TurnEpisode:
+def get_bankepisode_55_example() -> BankEpisode:
     x_time_int = 55
-    return turnepisode_shop(x_time_int)
+    return bankepisode_shop(x_time_int)
 
 
-def get_turnepisode_66_example() -> TurnEpisode:
+def get_bankepisode_66_example() -> BankEpisode:
     t66_time_int = 66
-    t66_turnepisode = turnepisode_shop(t66_time_int)
-    t66_turnepisode.set_net_turn("Sue", -5)
-    t66_turnepisode.set_net_turn("Bob", 5)
-    return t66_turnepisode
+    t66_bankepisode = bankepisode_shop(t66_time_int)
+    t66_bankepisode.set_net_bank("Sue", -5)
+    t66_bankepisode.set_net_bank("Bob", 5)
+    return t66_bankepisode
 
 
-def get_turnepisode_88_example() -> TurnEpisode:
+def get_bankepisode_88_example() -> BankEpisode:
     t88_time_int = 88
-    t88_turnepisode = turnepisode_shop(t88_time_int)
-    t88_turnepisode.quota = 800
-    return t88_turnepisode
+    t88_bankepisode = bankepisode_shop(t88_time_int)
+    t88_bankepisode.quota = 800
+    return t88_bankepisode
 
 
-def get_turnepisode_invalid_example() -> TurnEpisode:
+def get_bankepisode_invalid_example() -> BankEpisode:
     t55_time_int = 55
-    t55_turnepisode = turnepisode_shop(t55_time_int)
-    t55_turnepisode.set_net_turn("Sue", -5)
-    t55_turnepisode.set_net_turn("Bob", 3)
-    return t55_turnepisode
+    t55_bankepisode = bankepisode_shop(t55_time_int)
+    t55_bankepisode.set_net_bank("Sue", -5)
+    t55_bankepisode.set_net_bank("Bob", 3)
+    return t55_bankepisode

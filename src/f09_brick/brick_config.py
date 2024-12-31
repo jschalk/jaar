@@ -98,7 +98,7 @@ def get_brick_formats_dir() -> str:
 
 
 # def brick_format_00000_dealunit_v0_0_0()->str: return "brick_format_00000_dealunit_v0_0_0"
-# def brick_format_00001_deal_turn_episode_v0_0_0()->str: return "brick_format_00001_deal_turn_episode_v0_0_0"
+# def brick_format_00001_deal_bank_episode_v0_0_0()->str: return "brick_format_00001_deal_bank_episode_v0_0_0"
 # def brick_format_00002_deal_cashbook_v0_0_0()->str: return "brick_format_00002_deal_cashbook_v0_0_0"
 # def brick_format_00003_deal_timeline_hour_v0_0_0()->str: return "brick_format_00003_deal_timeline_hour_v0_0_0"
 # def brick_format_00004_deal_timeline_month_v0_0_0()->str: return "brick_format_00004_deal_timeline_month_v0_0_0"
@@ -109,8 +109,8 @@ def brick_format_00000_dealunit_v0_0_0() -> str:
     return "brick_format_00000_dealunit_v0_0_0"
 
 
-def brick_format_00001_deal_turn_episode_v0_0_0() -> str:
-    return "brick_format_00001_deal_turn_episode_v0_0_0"
+def brick_format_00001_deal_bank_episode_v0_0_0() -> str:
+    return "brick_format_00001_deal_bank_episode_v0_0_0"
 
 
 def brick_format_00002_deal_cashbook_v0_0_0() -> str:
@@ -240,7 +240,7 @@ def brick_format_00117_road_map1_v0_0_0() -> str:
 def get_brick_format_filenames() -> set[str]:
     return {
         brick_format_00000_dealunit_v0_0_0(),
-        brick_format_00001_deal_turn_episode_v0_0_0(),
+        brick_format_00001_deal_bank_episode_v0_0_0(),
         brick_format_00002_deal_cashbook_v0_0_0(),
         brick_format_00003_deal_timeline_hour_v0_0_0(),
         brick_format_00004_deal_timeline_month_v0_0_0(),
@@ -315,7 +315,7 @@ def get_brick_format_filename(brick_number: str) -> str:
 def get_brick_format_headers() -> dict[str, list[str]]:
     return {
         "bridge,c400_number,current_time,deal_idea,fund_coin,monthday_distortion,penny,respect_bit,timeline_idea,yr1_jan1_offset": brick_format_00000_dealunit_v0_0_0(),
-        "acct_name,deal_idea,owner_name,quota,time_int": brick_format_00001_deal_turn_episode_v0_0_0(),
+        "acct_name,deal_idea,owner_name,quota,time_int": brick_format_00001_deal_bank_episode_v0_0_0(),
         "acct_name,amount,deal_idea,owner_name,time_int": brick_format_00002_deal_cashbook_v0_0_0(),
         "cumlative_minute,deal_idea,hour_idea": brick_format_00003_deal_timeline_hour_v0_0_0(),
         "cumlative_day,deal_idea,month_idea": brick_format_00004_deal_timeline_month_v0_0_0(),
@@ -333,7 +333,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "base,deal_idea,divisor,need,nigh,open,owner_name,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
         "base,base_item_active_requisite,deal_idea,owner_name,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),
         "addin,begin,close,deal_idea,denom,gogo_want,idee,mass,morph,numor,owner_name,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
-        "credor_respect,deal_idea,debtor_respect,fund_coin,fund_pool,max_tree_traverse,owner_name,penny,respect_bit,tally,turn_time_int": brick_format_00029_budunit_v0_0_0(),
+        "credor_respect,deal_idea,debtor_respect,fund_coin,fund_pool,max_tree_traverse,owner_name,penny,respect_bit,tally,bank_time_int": brick_format_00029_budunit_v0_0_0(),
         "deal_idea,healer_name,idee,owner_name,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
         "inx_bridge,inx_label,otx_bridge,otx_label,unknown_word": brick_format_00042_map_label_v0_0_0(),
         "inx_bridge,inx_name,otx_bridge,otx_name,unknown_word": brick_format_00043_map_name_v0_0_0(),
@@ -405,7 +405,7 @@ def get_brick_elements_sort_order() -> list[str]:
         "divisor",
         "pledge",
         "problem_bool",
-        "turn_time_int",
+        "bank_time_int",
         "take_force",
         "tally",
         "fund_coin",
@@ -483,7 +483,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
         "divisor": "REAL",
         "pledge": "INTEGER",
         "problem_bool": "INTEGER",
-        "turn_time_int": "INTEGER",
+        "bank_time_int": "INTEGER",
         "take_force": "REAL",
         "tally": "REAL",
         "fund_coin": "REAL",
@@ -520,7 +520,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
 def get_brick_category_ref() -> dict[str, set[str]]:
     return {
         "dealunit": ["br00000"],
-        "deal_turn_episode": ["br00001"],
+        "deal_bank_episode": ["br00001"],
         "deal_cashbook": ["br00002"],
         "deal_timeline_hour": ["br00003"],
         "deal_timeline_month": ["br00004"],

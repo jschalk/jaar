@@ -1,7 +1,7 @@
 from src.f07_deal.deal_config import (
     timeline_str,
     current_time_str,
-    turnlogs_str,
+    banklogs_str,
     cashbook_str,
     amount_str,
     month_idea_str,
@@ -11,8 +11,8 @@ from src.f07_deal.deal_config import (
     weekday_idea_str,
     weekday_order_str,
     dealunit_str,
-    deal_turnlog_str,
-    deal_turn_episode_str,
+    deal_banklog_str,
+    deal_bank_episode_str,
     deal_cashbook_str,
     deal_timeline_hour_str,
     deal_timeline_month_str,
@@ -23,7 +23,7 @@ from src.f07_deal.deal_config import (
 def test_str_functions_ReturnsObj():
     assert timeline_str() == "timeline"
     assert current_time_str() == "current_time"
-    assert turnlogs_str() == "turnlogs"
+    assert banklogs_str() == "banklogs"
     assert cashbook_str() == "cashbook"
     assert amount_str() == "amount"
     assert month_idea_str() == "month_idea"
@@ -33,8 +33,8 @@ def test_str_functions_ReturnsObj():
     assert weekday_idea_str() == "weekday_idea"
     assert weekday_order_str() == "weekday_order"
     assert dealunit_str() == "dealunit"
-    assert deal_turnlog_str() == "deal_turnlog"
-    assert deal_turn_episode_str() == "deal_turn_episode"
+    assert deal_banklog_str() == "deal_banklog"
+    assert deal_bank_episode_str() == "deal_bank_episode"
     assert deal_cashbook_str() == "deal_cashbook"
     assert deal_timeline_hour_str() == "deal_timeline_hour"
     assert deal_timeline_month_str() == "deal_timeline_month"
