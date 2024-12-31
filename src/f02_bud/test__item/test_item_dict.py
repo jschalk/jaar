@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_deal_idea as root_idea, create_road
+from src.f01_road.road import get_default_gov_idea as root_idea, create_road
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.group import awardlink_shop
 from src.f02_bud.reason_item import (

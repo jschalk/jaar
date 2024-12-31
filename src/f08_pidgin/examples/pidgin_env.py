@@ -3,7 +3,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_example_pidgins_dir():
-    return "src/f08_pidgin/examples/deals"
+    return "src/f08_pidgin/examples/govs"
 
 
 def get_example_face_dir():

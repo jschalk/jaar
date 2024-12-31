@@ -7,14 +7,14 @@ from src.f00_instrument.dict_toolbox import (
     get_positional_dict,
     add_headers_to_csv,
 )
-from src.f01_road.road import DealIdea, OwnerName
+from src.f01_road.road import GovIdea, OwnerName
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import timelineunit_shop
 from src.f04_gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
 from src.f04_gift.delta import deltaunit_shop, get_categorys_cruds_deltaunit, DeltaUnit
 from src.f04_gift.gift import giftunit_shop
 from src.f05_listen.hubunit import hubunit_shop
-from src.f07_deal.deal import dealunit_shop, DealUnit
+from src.f07_gov.gov import govunit_shop, GovUnit
 from src.f09_brick.brick_config import (
     get_brickref_from_file,
     get_brick_format_headers,
@@ -81,10 +81,10 @@ def create_brick_df(x_budunit: BudUnit, brick_name: str) -> DataFrame:
     x_deltaunit = deltaunit_shop()
     x_deltaunit.add_all_atomunits(x_budunit)
     x_brickref = get_brickref_obj(brick_name)
-    x_deal_idea = x_budunit.deal_idea
+    x_gov_idea = x_budunit.gov_idea
     x_owner_name = x_budunit.owner_name
     sorted_atomunits = _get_sorted_atom_insert_atomunits(x_deltaunit, x_brickref)
-    d2_list = _create_d2_list(sorted_atomunits, x_brickref, x_deal_idea, x_owner_name)
+    d2_list = _create_d2_list(sorted_atomunits, x_brickref, x_gov_idea, x_owner_name)
     d2_list = _delta_all_pledge_values(d2_list, x_brickref)
     x_brick = _generate_brick_dataframe(d2_list, brick_name)
     sorting_columns = x_brickref.get_headers_list()
@@ -103,15 +103,15 @@ def _get_sorted_atom_insert_atomunits(
 def _create_d2_list(
     sorted_atomunits: list[AtomUnit],
     x_brickref: BrickRef,
-    x_deal_idea: DealIdea,
+    x_gov_idea: GovIdea,
     x_owner_name: OwnerName,
 ):
     d2_list = []
     for x_atomunit in sorted_atomunits:
         d1_list = []
         for x_attribute in x_brickref.get_headers_list():
-            if x_attribute == "deal_idea":
-                d1_list.append(x_deal_idea)
+            if x_attribute == "gov_idea":
+                d1_list.append(x_gov_idea)
             elif x_attribute == "owner_name":
                 d1_list.append(x_owner_name)
             else:
@@ -173,44 +173,42 @@ def make_deltaunit(x_csv: str) -> DeltaUnit:
 
 
 def _load_individual_brick_csv(
-    complete_csv: str, deals_dir: str, x_deal_idea: DealIdea, x_owner_name: OwnerName
+    complete_csv: str, govs_dir: str, x_gov_idea: GovIdea, x_owner_name: OwnerName
 ):
-    x_hubunit = hubunit_shop(deals_dir, x_deal_idea, x_owner_name)
+    x_hubunit = hubunit_shop(govs_dir, x_gov_idea, x_owner_name)
     x_hubunit.initialize_gift_voice_files()
     x_voice = x_hubunit.get_voice_bud()
     x_deltaunit = make_deltaunit(complete_csv)
     # x_deltaunit = sift_deltaunit(x_deltaunit, x_voice)
-    x_giftunit = giftunit_shop(x_owner_name, x_deal_idea)
+    x_giftunit = giftunit_shop(x_owner_name, x_gov_idea)
     x_giftunit.set_deltaunit(x_deltaunit)
     x_hubunit.save_gift_file(x_giftunit)
     x_hubunit._create_voice_from_gifts()
 
 
-def load_brick_csv(deals_dir: str, x_file_dir: str, x_filename: str):
+def load_brick_csv(govs_dir: str, x_file_dir: str, x_filename: str):
     x_csv = open_file(x_file_dir, x_filename)
     headers_list, headerless_csv = extract_csv_headers(x_csv)
-    nested_csv = deal_idea_owner_name_nested_csv_dict(headerless_csv, delimiter=",")
-    for x_deal_idea, deal_dict in nested_csv.items():
-        for x_owner_name, owner_csv in deal_dict.items():
+    nested_csv = gov_idea_owner_name_nested_csv_dict(headerless_csv, delimiter=",")
+    for x_gov_idea, gov_dict in nested_csv.items():
+        for x_owner_name, owner_csv in gov_dict.items():
             complete_csv = add_headers_to_csv(headers_list, owner_csv)
-            _load_individual_brick_csv(
-                complete_csv, deals_dir, x_deal_idea, x_owner_name
-            )
+            _load_individual_brick_csv(complete_csv, govs_dir, x_gov_idea, x_owner_name)
 
 
-def get_csv_deal_idea_owner_name_metrics(
+def get_csv_gov_idea_owner_name_metrics(
     headerless_csv: str, delimiter: str = None
-) -> dict[DealIdea, dict[OwnerName, int]]:
+) -> dict[GovIdea, dict[OwnerName, int]]:
     return get_csv_column1_column2_metrics(headerless_csv, delimiter)
 
 
-def deal_idea_owner_name_nested_csv_dict(
+def gov_idea_owner_name_nested_csv_dict(
     headerless_csv: str, delimiter: str = None
-) -> dict[DealIdea, dict[OwnerName, str]]:
+) -> dict[GovIdea, dict[OwnerName, str]]:
     return create_l2nested_csv_dict(headerless_csv, delimiter)
 
 
-def deal_build_from_df(
+def gov_build_from_df(
     br00000_df: DataFrame,
     br00001_df: DataFrame,
     br00002_df: DataFrame,
@@ -220,28 +218,28 @@ def deal_build_from_df(
     x_fund_coin,
     x_respect_bit,
     x_penny,
-    x_deals_dir,
-) -> dict[DealIdea, DealUnit]:
-    deal_hours_dict = _get_deal_hours_dict(br00003_df)
-    deal_months_dict = _get_deal_months_dict(br00004_df)
-    deal_weekdays_dict = _get_deal_weekdays_dict(br00005_df)
+    x_govs_dir,
+) -> dict[GovIdea, GovUnit]:
+    gov_hours_dict = _get_gov_hours_dict(br00003_df)
+    gov_months_dict = _get_gov_months_dict(br00004_df)
+    gov_weekdays_dict = _get_gov_weekdays_dict(br00005_df)
 
-    dealunit_dict = {}
+    govunit_dict = {}
     for index, row in br00000_df.iterrows():
-        x_deal_idea = row["deal_idea"]
+        x_gov_idea = row["gov_idea"]
         x_timeline_config = {
             "c400_number": row["c400_number"],
-            "hours_config": deal_hours_dict.get(x_deal_idea),
-            "months_config": deal_months_dict.get(x_deal_idea),
+            "hours_config": gov_hours_dict.get(x_gov_idea),
+            "months_config": gov_months_dict.get(x_gov_idea),
             "monthday_distortion": row["monthday_distortion"],
             "timeline_idea": row["timeline_idea"],
-            "weekdays_config": deal_weekdays_dict.get(x_deal_idea),
+            "weekdays_config": gov_weekdays_dict.get(x_gov_idea),
             "yr1_jan1_offset": row["yr1_jan1_offset"],
         }
         x_timeline = timelineunit_shop(x_timeline_config)
-        x_dealunit = dealunit_shop(
-            deal_idea=x_deal_idea,
-            deals_dir=x_deals_dir,
+        x_govunit = govunit_shop(
+            gov_idea=x_gov_idea,
+            govs_dir=x_govs_dir,
             timeline=x_timeline,
             current_time=row["current_time"],
             # in_memory_journal=row["in_memory_journal"],
@@ -250,51 +248,51 @@ def deal_build_from_df(
             respect_bit=x_respect_bit,
             penny=x_penny,
         )
-        dealunit_dict[x_dealunit.deal_idea] = x_dealunit
-        _add_pactepisodes_from_df(x_dealunit, br00001_df)
-        _add_cashpurchases_from_df(x_dealunit, br00002_df)
-    return dealunit_dict
+        govunit_dict[x_govunit.gov_idea] = x_govunit
+        _add_pactepisodes_from_df(x_govunit, br00001_df)
+        _add_cashpurchases_from_df(x_govunit, br00002_df)
+    return govunit_dict
 
 
-def _get_deal_hours_dict(br00003_df: DataFrame) -> dict[str, list[str, str]]:
-    deal_hours_dict = {}
-    for y_deal_idea in br00003_df.deal_idea.unique():
-        query_str = f"deal_idea == '{y_deal_idea}'"
+def _get_gov_hours_dict(br00003_df: DataFrame) -> dict[str, list[str, str]]:
+    gov_hours_dict = {}
+    for y_gov_idea in br00003_df.gov_idea.unique():
+        query_str = f"gov_idea == '{y_gov_idea}'"
         x_hours_list = [
             [row["hour_idea"], row["cumlative_minute"]]
             for index, row in br00003_df.query(query_str).iterrows()
         ]
-        deal_hours_dict[y_deal_idea] = x_hours_list
-    return deal_hours_dict
+        gov_hours_dict[y_gov_idea] = x_hours_list
+    return gov_hours_dict
 
 
-def _get_deal_months_dict(br00004_df: DataFrame) -> dict[str, list[str, str]]:
-    deal_months_dict = {}
-    for y_deal_idea in br00004_df.deal_idea.unique():
-        query_str = f"deal_idea == '{y_deal_idea}'"
+def _get_gov_months_dict(br00004_df: DataFrame) -> dict[str, list[str, str]]:
+    gov_months_dict = {}
+    for y_gov_idea in br00004_df.gov_idea.unique():
+        query_str = f"gov_idea == '{y_gov_idea}'"
         x_months_list = [
             [row["month_idea"], row["cumlative_day"]]
             for index, row in br00004_df.query(query_str).iterrows()
         ]
-        deal_months_dict[y_deal_idea] = x_months_list
-    return deal_months_dict
+        gov_months_dict[y_gov_idea] = x_months_list
+    return gov_months_dict
 
 
-def _get_deal_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
-    deal_weekdays_dict = {}
-    for y_deal_idea in br00005_df.deal_idea.unique():
-        query_str = f"deal_idea == '{y_deal_idea}'"
+def _get_gov_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
+    gov_weekdays_dict = {}
+    for y_gov_idea in br00005_df.gov_idea.unique():
+        query_str = f"gov_idea == '{y_gov_idea}'"
         x_weekdays_list = [
             row["weekday_idea"] for index, row in br00005_df.query(query_str).iterrows()
         ]
-        deal_weekdays_dict[y_deal_idea] = x_weekdays_list
-    return deal_weekdays_dict
+        gov_weekdays_dict[y_gov_idea] = x_weekdays_list
+    return gov_weekdays_dict
 
 
-def _add_pactepisodes_from_df(x_dealunit: DealUnit, br00001_df: DataFrame):
-    query_str = f"deal_idea == '{x_dealunit.deal_idea}'"
+def _add_pactepisodes_from_df(x_govunit: GovUnit, br00001_df: DataFrame):
+    query_str = f"gov_idea == '{x_govunit.gov_idea}'"
     for index, row in br00001_df.query(query_str).iterrows():
-        x_dealunit.add_pactepisode(
+        x_govunit.add_pactepisode(
             x_owner_name=row["owner_name"],
             x_time_int=row["time_int"],
             x_money_magnitude=row["quota"],
@@ -302,10 +300,10 @@ def _add_pactepisodes_from_df(x_dealunit: DealUnit, br00001_df: DataFrame):
         )
 
 
-def _add_cashpurchases_from_df(x_dealunit: DealUnit, br00002_df: DataFrame):
-    query_str = f"deal_idea == '{x_dealunit.deal_idea}'"
+def _add_cashpurchases_from_df(x_govunit: GovUnit, br00002_df: DataFrame):
+    query_str = f"gov_idea == '{x_govunit.gov_idea}'"
     for index, row in br00002_df.query(query_str).iterrows():
-        x_dealunit.add_cashpurchase(
+        x_govunit.add_cashpurchase(
             x_owner_name=row["owner_name"],
             x_acct_name=row["acct_name"],
             x_time_int=row["time_int"],

@@ -2,7 +2,7 @@ from src.f00_instrument.file import open_file, create_path
 from src.f00_instrument.dict_toolbox import get_dict_from_json
 from src.f01_road.jaar_config import get_json_filename
 from src.f02_bud.bud_tool import budunit_str
-from src.f07_deal.deal_config import dealunit_str
+from src.f07_gov.gov_config import govunit_str
 from src.f08_pidgin.pidgin_config import pidginunit_str
 from src.f09_brick.examples.brick_env import src_brick_dir
 from os import getcwd as os_getcwd
@@ -32,7 +32,7 @@ def brick_type_str() -> str:
 
 
 def get_brick_types() -> set[str]:
-    return {budunit_str(), dealunit_str(), pidginunit_str()}
+    return {budunit_str(), govunit_str(), pidginunit_str()}
 
 
 def allowed_crud_str() -> str:
@@ -97,36 +97,36 @@ def get_brick_formats_dir() -> str:
     return create_path(src_brick_dir(), "brick_formats")
 
 
-# def brick_format_00000_dealunit_v0_0_0()->str: return "brick_format_00000_dealunit_v0_0_0"
-# def brick_format_00001_deal_pact_episode_v0_0_0()->str: return "brick_format_00001_deal_pact_episode_v0_0_0"
-# def brick_format_00002_deal_cashbook_v0_0_0()->str: return "brick_format_00002_deal_cashbook_v0_0_0"
-# def brick_format_00003_deal_timeline_hour_v0_0_0()->str: return "brick_format_00003_deal_timeline_hour_v0_0_0"
-# def brick_format_00004_deal_timeline_month_v0_0_0()->str: return "brick_format_00004_deal_timeline_month_v0_0_0"
-# def brick_format_00005_deal_timeline_weekday_v0_0_0()->str: return "brick_format_00005_deal_timeline_weekday_v0_0_0"
+# def brick_format_00000_govunit_v0_0_0()->str: return "brick_format_00000_govunit_v0_0_0"
+# def brick_format_00001_gov_pact_episode_v0_0_0()->str: return "brick_format_00001_gov_pact_episode_v0_0_0"
+# def brick_format_00002_gov_cashbook_v0_0_0()->str: return "brick_format_00002_gov_cashbook_v0_0_0"
+# def brick_format_00003_gov_timeline_hour_v0_0_0()->str: return "brick_format_00003_gov_timeline_hour_v0_0_0"
+# def brick_format_00004_gov_timeline_month_v0_0_0()->str: return "brick_format_00004_gov_timeline_month_v0_0_0"
+# def brick_format_00005_gov_timeline_weekday_v0_0_0()->str: return "brick_format_00005_gov_timeline_weekday_v0_0_0"
 
 
-def brick_format_00000_dealunit_v0_0_0() -> str:
-    return "brick_format_00000_dealunit_v0_0_0"
+def brick_format_00000_govunit_v0_0_0() -> str:
+    return "brick_format_00000_govunit_v0_0_0"
 
 
-def brick_format_00001_deal_pact_episode_v0_0_0() -> str:
-    return "brick_format_00001_deal_pact_episode_v0_0_0"
+def brick_format_00001_gov_pact_episode_v0_0_0() -> str:
+    return "brick_format_00001_gov_pact_episode_v0_0_0"
 
 
-def brick_format_00002_deal_cashbook_v0_0_0() -> str:
-    return "brick_format_00002_deal_cashbook_v0_0_0"
+def brick_format_00002_gov_cashbook_v0_0_0() -> str:
+    return "brick_format_00002_gov_cashbook_v0_0_0"
 
 
-def brick_format_00003_deal_timeline_hour_v0_0_0() -> str:
-    return "brick_format_00003_deal_timeline_hour_v0_0_0"
+def brick_format_00003_gov_timeline_hour_v0_0_0() -> str:
+    return "brick_format_00003_gov_timeline_hour_v0_0_0"
 
 
-def brick_format_00004_deal_timeline_month_v0_0_0() -> str:
-    return "brick_format_00004_deal_timeline_month_v0_0_0"
+def brick_format_00004_gov_timeline_month_v0_0_0() -> str:
+    return "brick_format_00004_gov_timeline_month_v0_0_0"
 
 
-def brick_format_00005_deal_timeline_weekday_v0_0_0() -> str:
-    return "brick_format_00005_deal_timeline_weekday_v0_0_0"
+def brick_format_00005_gov_timeline_weekday_v0_0_0() -> str:
+    return "brick_format_00005_gov_timeline_weekday_v0_0_0"
 
 
 def brick_format_00011_acct_v0_0_0() -> str:
@@ -239,12 +239,12 @@ def brick_format_00117_road_map1_v0_0_0() -> str:
 
 def get_brick_format_filenames() -> set[str]:
     return {
-        brick_format_00000_dealunit_v0_0_0(),
-        brick_format_00001_deal_pact_episode_v0_0_0(),
-        brick_format_00002_deal_cashbook_v0_0_0(),
-        brick_format_00003_deal_timeline_hour_v0_0_0(),
-        brick_format_00004_deal_timeline_month_v0_0_0(),
-        brick_format_00005_deal_timeline_weekday_v0_0_0(),
+        brick_format_00000_govunit_v0_0_0(),
+        brick_format_00001_gov_pact_episode_v0_0_0(),
+        brick_format_00002_gov_cashbook_v0_0_0(),
+        brick_format_00003_gov_timeline_hour_v0_0_0(),
+        brick_format_00004_gov_timeline_month_v0_0_0(),
+        brick_format_00005_gov_timeline_weekday_v0_0_0(),
         brick_format_00011_acct_v0_0_0(),
         brick_format_00012_membership_v0_0_0(),
         brick_format_00013_itemunit_v0_0_0(),
@@ -314,35 +314,35 @@ def get_brick_format_filename(brick_number: str) -> str:
 
 def get_brick_format_headers() -> dict[str, list[str]]:
     return {
-        "bridge,c400_number,current_time,deal_idea,fund_coin,monthday_distortion,penny,respect_bit,timeline_idea,yr1_jan1_offset": brick_format_00000_dealunit_v0_0_0(),
-        "acct_name,deal_idea,owner_name,quota,time_int": brick_format_00001_deal_pact_episode_v0_0_0(),
-        "acct_name,amount,deal_idea,owner_name,time_int": brick_format_00002_deal_cashbook_v0_0_0(),
-        "cumlative_minute,deal_idea,hour_idea": brick_format_00003_deal_timeline_hour_v0_0_0(),
-        "cumlative_day,deal_idea,month_idea": brick_format_00004_deal_timeline_month_v0_0_0(),
-        "deal_idea,weekday_idea,weekday_order": brick_format_00005_deal_timeline_weekday_v0_0_0(),
-        "acct_name,deal_idea,owner_name": brick_format_00011_acct_v0_0_0(),
-        "acct_name,deal_idea,group_label,owner_name": brick_format_00012_membership_v0_0_0(),
-        "deal_idea,idee,mass,owner_name,parent_road,pledge": brick_format_00013_itemunit_v0_0_0(),
-        "addin,begin,close,deal_idea,denom,gogo_want,idee,morph,numor,owner_name,parent_road,stop_want": brick_format_00019_itemunit_v0_0_0(),
-        "acct_name,credit_vote,deal_idea,debtit_vote,group_label,owner_name": brick_format_00020_bud_acct_membership_v0_0_0(),
-        "acct_name,credit_belief,deal_idea,debtit_belief,owner_name": brick_format_00021_bud_acctunit_v0_0_0(),
-        "awardee_label,deal_idea,give_force,owner_name,road,take_force": brick_format_00022_bud_item_awardlink_v0_0_0(),
-        "base,deal_idea,fnigh,fopen,owner_name,pick,road": brick_format_00023_bud_item_factunit_v0_0_0(),
-        "deal_idea,owner_name,road,team_label": brick_format_00024_bud_item_teamlink_v0_0_0(),
-        "deal_idea,healer_name,owner_name,road": brick_format_00025_bud_item_healerlink_v0_0_0(),
-        "base,deal_idea,divisor,need,nigh,open,owner_name,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
-        "base,base_item_active_requisite,deal_idea,owner_name,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),
-        "addin,begin,close,deal_idea,denom,gogo_want,idee,mass,morph,numor,owner_name,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
-        "credor_respect,deal_idea,debtor_respect,fund_coin,fund_pool,max_tree_traverse,owner_name,pact_time_int,penny,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
-        "deal_idea,healer_name,idee,owner_name,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
+        "bridge,c400_number,current_time,fund_coin,gov_idea,monthday_distortion,penny,respect_bit,timeline_idea,yr1_jan1_offset": brick_format_00000_govunit_v0_0_0(),
+        "acct_name,gov_idea,owner_name,quota,time_int": brick_format_00001_gov_pact_episode_v0_0_0(),
+        "acct_name,amount,gov_idea,owner_name,time_int": brick_format_00002_gov_cashbook_v0_0_0(),
+        "cumlative_minute,gov_idea,hour_idea": brick_format_00003_gov_timeline_hour_v0_0_0(),
+        "cumlative_day,gov_idea,month_idea": brick_format_00004_gov_timeline_month_v0_0_0(),
+        "gov_idea,weekday_idea,weekday_order": brick_format_00005_gov_timeline_weekday_v0_0_0(),
+        "acct_name,gov_idea,owner_name": brick_format_00011_acct_v0_0_0(),
+        "acct_name,gov_idea,group_label,owner_name": brick_format_00012_membership_v0_0_0(),
+        "gov_idea,idee,mass,owner_name,parent_road,pledge": brick_format_00013_itemunit_v0_0_0(),
+        "addin,begin,close,denom,gogo_want,gov_idea,idee,morph,numor,owner_name,parent_road,stop_want": brick_format_00019_itemunit_v0_0_0(),
+        "acct_name,credit_vote,debtit_vote,gov_idea,group_label,owner_name": brick_format_00020_bud_acct_membership_v0_0_0(),
+        "acct_name,credit_belief,debtit_belief,gov_idea,owner_name": brick_format_00021_bud_acctunit_v0_0_0(),
+        "awardee_label,give_force,gov_idea,owner_name,road,take_force": brick_format_00022_bud_item_awardlink_v0_0_0(),
+        "base,fnigh,fopen,gov_idea,owner_name,pick,road": brick_format_00023_bud_item_factunit_v0_0_0(),
+        "gov_idea,owner_name,road,team_label": brick_format_00024_bud_item_teamlink_v0_0_0(),
+        "gov_idea,healer_name,owner_name,road": brick_format_00025_bud_item_healerlink_v0_0_0(),
+        "base,divisor,gov_idea,need,nigh,open,owner_name,road": brick_format_00026_bud_item_reason_premiseunit_v0_0_0(),
+        "base,base_item_active_requisite,gov_idea,owner_name,road": brick_format_00027_bud_item_reasonunit_v0_0_0(),
+        "addin,begin,close,denom,gogo_want,gov_idea,idee,mass,morph,numor,owner_name,parent_road,pledge,problem_bool,stop_want": brick_format_00028_bud_itemunit_v0_0_0(),
+        "credor_respect,debtor_respect,fund_coin,fund_pool,gov_idea,max_tree_traverse,owner_name,pact_time_int,penny,respect_bit,tally": brick_format_00029_budunit_v0_0_0(),
+        "gov_idea,healer_name,idee,owner_name,parent_road,problem_bool": brick_format_00036_problem_healer_v0_0_0(),
         "inx_bridge,inx_label,otx_bridge,otx_label,unknown_word": brick_format_00042_map_label_v0_0_0(),
         "inx_bridge,inx_name,otx_bridge,otx_name,unknown_word": brick_format_00043_map_name_v0_0_0(),
         "inx_bridge,inx_idea,otx_bridge,otx_idea,unknown_word": brick_format_00044_map_idea_v0_0_0(),
         "inx_bridge,inx_road,otx_bridge,otx_road,unknown_word": brick_format_00045_map_road_v0_0_0(),
-        "acct_name,deal_idea,inx_name,otx_name,owner_name": brick_format_00113_acct_map1_v0_0_0(),
-        "acct_name,deal_idea,inx_label,otx_label,owner_name": brick_format_00115_group_map1_v0_0_0(),
-        "acct_name,deal_idea,inx_idea,otx_idea,owner_name": brick_format_00116_idea_map1_v0_0_0(),
-        "acct_name,deal_idea,inx_road,otx_road,owner_name": brick_format_00117_road_map1_v0_0_0(),
+        "acct_name,gov_idea,inx_name,otx_name,owner_name": brick_format_00113_acct_map1_v0_0_0(),
+        "acct_name,gov_idea,inx_label,otx_label,owner_name": brick_format_00115_group_map1_v0_0_0(),
+        "acct_name,gov_idea,inx_idea,otx_idea,owner_name": brick_format_00116_idea_map1_v0_0_0(),
+        "acct_name,gov_idea,inx_road,otx_road,owner_name": brick_format_00117_road_map1_v0_0_0(),
     }
 
 
@@ -365,7 +365,7 @@ def get_brick_elements_sort_order() -> list[str]:
     return [
         "face_name",
         "event_int",
-        "deal_idea",
+        "gov_idea",
         "owner_name",
         "acct_name",
         "group_label",
@@ -443,7 +443,7 @@ def get_brick_sqlite_type() -> dict[str, str]:
     return {
         "face_name": "TEXT",
         "event_int": "INTEGER",
-        "deal_idea": "TEXT",
+        "gov_idea": "TEXT",
         "owner_name": "TEXT",
         "acct_name": "TEXT",
         "group_label": "TEXT",
@@ -519,12 +519,12 @@ def get_brick_sqlite_type() -> dict[str, str]:
 
 def get_brick_category_ref() -> dict[str, set[str]]:
     return {
-        "dealunit": ["br00000"],
-        "deal_pact_episode": ["br00001"],
-        "deal_cashbook": ["br00002"],
-        "deal_timeline_hour": ["br00003"],
-        "deal_timeline_month": ["br00004"],
-        "deal_timeline_weekday": ["br00005"],
+        "govunit": ["br00000"],
+        "gov_pact_episode": ["br00001"],
+        "gov_cashbook": ["br00002"],
+        "gov_timeline_hour": ["br00003"],
+        "gov_timeline_month": ["br00004"],
+        "gov_timeline_weekday": ["br00005"],
         "bud_acctunit": [
             "br00011",
             "br00021",

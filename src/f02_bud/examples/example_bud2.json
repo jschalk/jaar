@@ -560,7 +560,7 @@
             "debtit_belief": 1
         }
     },
-    "deal_idea": "A",
+    "gov_idea": "A",
     "itemroot": {
         "_kids": {
             "ACME": {

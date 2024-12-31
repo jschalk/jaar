@@ -1,13 +1,13 @@
-def get_test_deal_idea():
+def get_test_gov_idea():
     return "accord_45"
 
 
-def get_deal_idea_if_None(deal_idea: str = None):
-    return get_test_deal_idea() if deal_idea is None else deal_idea
+def get_gov_idea_if_None(gov_idea: str = None):
+    return get_test_gov_idea() if gov_idea is None else gov_idea
 
 
-def get_test_deals_dir():
-    return "src/f07_deal/examples/deals"
+def get_test_govs_dir():
+    return "src/f07_gov/examples/govs"
 
 
 def get_gifts_folder() -> str:

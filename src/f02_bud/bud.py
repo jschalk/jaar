@@ -31,7 +31,7 @@ from src.f01_road.road import (
     get_terminus_idea,
     get_root_idea_from_road,
     get_ancestor_roads,
-    get_default_deal_idea,
+    get_default_gov_idea,
     get_all_road_ideas,
     get_forefather_roads,
     create_road,
@@ -42,7 +42,7 @@ from src.f01_road.road import (
     OwnerName,
     AcctName,
     HealerName,
-    DealIdea,
+    GovIdea,
     roadunit_valid_dir_path,
 )
 from src.f02_bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
@@ -117,7 +117,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 
 @dataclass
 class BudUnit:
-    deal_idea: DealIdea = None
+    gov_idea: GovIdea = None
     owner_name: OwnerName = None
     accts: dict[AcctName, AcctUnit] = None
     itemroot: ItemUnit = None
@@ -195,10 +195,10 @@ class BudUnit:
             terminus_idea=terminus_idea,
             bridge=self.bridge,
         )
-        return road_validate(x_road, self.bridge, self.deal_idea)
+        return road_validate(x_road, self.bridge, self.gov_idea)
 
     def make_l1_road(self, l1_idea: IdeaUnit):
-        return self.make_road(self.deal_idea, l1_idea)
+        return self.make_road(self.gov_idea, l1_idea)
 
     def set_bridge(self, new_bridge: str):
         self.settle_bud()
@@ -213,13 +213,13 @@ class BudUnit:
             for x_item in self._item_dict.values():
                 x_item.set_bridge(self.bridge)
 
-    def set_deal_idea(self, deal_idea: str):
-        old_deal_idea = copy_deepcopy(self.deal_idea)
+    def set_gov_idea(self, gov_idea: str):
+        old_gov_idea = copy_deepcopy(self.gov_idea)
         self.settle_bud()
         for item_obj in self._item_dict.values():
-            item_obj._bud_deal_idea = deal_idea
-        self.deal_idea = deal_idea
-        self.edit_item_idee(old_road=old_deal_idea, new_idee=self.deal_idea)
+            item_obj._bud_gov_idea = gov_idea
+        self.gov_idea = gov_idea
+        self.edit_item_idee(old_road=old_gov_idea, new_idee=self.gov_idea)
         self.settle_bud()
 
     def set_max_tree_traverse(self, x_int: int):
@@ -413,7 +413,7 @@ class BudUnit:
         return all_group_labels.difference(x_acctunit_group_labels)
 
     def _is_item_rangeroot(self, item_road: RoadUnit) -> bool:
-        if self.deal_idea == item_road:
+        if self.gov_idea == item_road:
             raise InvalidBudException(
                 "its difficult to foresee a scenario where itemroot is rangeroot"
             )
@@ -444,7 +444,7 @@ class BudUnit:
             self._create_itemkid_if_empty(road=pick)
 
         fact_base_item = self.get_item_obj(base)
-        x_itemroot = self.get_item_obj(self.deal_idea)
+        x_itemroot = self.get_item_obj(self.gov_idea)
         x_fopen = None
         if fnigh is not None and fopen is None:
             x_fopen = x_itemroot.factunits.get(base).fopen
@@ -588,7 +588,7 @@ class BudUnit:
     ):
         self.set_item(
             item_kid=item_kid,
-            parent_road=self.deal_idea,
+            parent_road=self.gov_idea,
             create_missing_items=create_missing_items,
             get_rid_of_missing_awardlinks_awardee_labels=get_rid_of_missing_awardlinks_awardee_labels,
             adoptees=adoptees,
@@ -616,8 +616,8 @@ class BudUnit:
             raise InvalidBudException(exception_str)
 
         item_kid._bridge = self.bridge
-        if item_kid._bud_deal_idea != self.deal_idea:
-            item_kid._bud_deal_idea = self.deal_idea
+        if item_kid._bud_gov_idea != self.gov_idea:
+            item_kid._bud_gov_idea = self.gov_idea
         if item_kid._fund_coin != self.fund_coin:
             item_kid._fund_coin = self.fund_coin
         if not get_rid_of_missing_awardlinks_awardee_labels:
@@ -1029,7 +1029,7 @@ class BudUnit:
         return [self.get_item_obj(x_item_road) for x_item_road in item_roads]
 
     def _set_item_dict(self):
-        item_list = [self.get_item_obj(self.deal_idea)]
+        item_list = [self.get_item_obj(self.gov_idea)]
         while item_list != []:
             x_item = item_list.pop()
             x_item.clear_gogo_calc_stop_calc()
@@ -1365,7 +1365,7 @@ class BudUnit:
             "respect_bit": self.respect_bit,
             "penny": self.penny,
             "owner_name": self.owner_name,
-            "deal_idea": self.deal_idea,
+            "gov_idea": self.gov_idea,
             "max_tree_traverse": self.max_tree_traverse,
             "bridge": self.bridge,
             "itemroot": self.itemroot.get_dict(),
@@ -1400,7 +1400,7 @@ class BudUnit:
 
 def budunit_shop(
     owner_name: OwnerName = None,
-    deal_idea: DealIdea = None,
+    gov_idea: GovIdea = None,
     bridge: str = None,
     fund_pool: FundNum = None,
     fund_coin: FundCoin = None,
@@ -1409,11 +1409,11 @@ def budunit_shop(
     tally: float = None,
 ) -> BudUnit:
     owner_name = "" if owner_name is None else owner_name
-    deal_idea = get_default_deal_idea() if deal_idea is None else deal_idea
+    gov_idea = get_default_gov_idea() if gov_idea is None else gov_idea
     x_bud = BudUnit(
         owner_name=owner_name,
         tally=get_1_if_None(tally),
-        deal_idea=deal_idea,
+        gov_idea=gov_idea,
         accts=get_empty_dict_if_None(None),
         _groupunits={},
         bridge=default_bridge_if_None(bridge),
@@ -1437,7 +1437,7 @@ def budunit_shop(
         _root=True,
         _uid=1,
         _level=0,
-        _bud_deal_idea=x_bud.deal_idea,
+        _bud_gov_idea=x_bud.gov_idea,
         _bridge=x_bud.bridge,
         _fund_coin=x_bud.fund_coin,
         _parent_road="",
@@ -1457,8 +1457,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_owner_name(obj_from_bud_dict(bud_dict, "owner_name"))
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
-    x_bud.deal_idea = obj_from_bud_dict(bud_dict, "deal_idea")
-    x_bud.itemroot._idee = obj_from_bud_dict(bud_dict, "deal_idea")
+    x_bud.gov_idea = obj_from_bud_dict(bud_dict, "gov_idea")
+    x_bud.itemroot._idee = obj_from_bud_dict(bud_dict, "gov_idea")
     bud_bridge = obj_from_bud_dict(bud_dict, "bridge")
     x_bud.bridge = default_bridge_if_None(bud_bridge)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
@@ -1485,7 +1485,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     itemroot_dict = bud_dict.get("itemroot")
     x_bud.itemroot = itemunit_shop(
         _root=True,
-        _idee=x_bud.deal_idea,
+        _idee=x_bud.gov_idea,
         _parent_road="",
         _level=0,
         _uid=get_obj_from_item_dict(itemroot_dict, "_uid"),
@@ -1505,7 +1505,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
         _bridge=get_obj_from_item_dict(itemroot_dict, "bridge"),
-        _bud_deal_idea=x_bud.deal_idea,
+        _bud_gov_idea=x_bud.gov_idea,
         _fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
     create_itemroot_kids_from_dict(x_bud, itemroot_dict)
@@ -1516,7 +1516,7 @@ def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
     parent_road_str = "parent_road"
     # for every kid dict, set parent_road in dict, add to to_evaluate_list
     for x_dict in get_obj_from_item_dict(itemroot_dict, "_kids").values():
-        x_dict[parent_road_str] = x_bud.deal_idea
+        x_dict[parent_road_str] = x_bud.gov_idea
         to_evaluate_item_dicts.append(x_dict)
 
     while to_evaluate_item_dicts != []:

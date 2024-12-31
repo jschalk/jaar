@@ -1,0 +1,29 @@
+{
+    "attributes": {
+        "acct_name": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "gov_idea": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        },
+        "quota": {
+            "otx_key": false
+        },
+        "time_int": {
+            "otx_key": true
+        }
+    },
+    "brick_number": "br00001",
+    "categorys": [
+        "gov_pact_episode"
+    ]
+}

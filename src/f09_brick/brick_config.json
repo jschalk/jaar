@@ -71,7 +71,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "group_label": {}
     },
     "jvalues": {
@@ -87,7 +87,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "deal_idea": {}
+      "gov_idea": {}
     },
     "jvalues": {
       "credit_belief": {},
@@ -102,7 +102,7 @@
       "awardee_label": {},
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "road": {}
     },
     "jvalues": {
@@ -118,7 +118,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "road": {}
     },
     "jvalues": {
@@ -134,7 +134,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "healer_name": {},
       "road": {}
     },
@@ -148,7 +148,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "need": {},
       "road": {}
     },
@@ -166,7 +166,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "road": {}
     },
     "jvalues": {
@@ -180,7 +180,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "road": {},
       "team_label": {}
     },
@@ -193,7 +193,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "idee": {},
       "parent_road": {}
     },
@@ -218,7 +218,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_idea": {}
+      "gov_idea": {}
     },
     "jvalues": {
       "credor_respect": {},
@@ -232,15 +232,15 @@
       "tally": {}
     }
   },
-  "deal_cashbook": {
+  "gov_cashbook": {
     "allowed_crud": "INSERT_MULITPLE",
-    "brick_type": "dealunit",
+    "brick_type": "govunit",
     "build_order": 21,
     "jkeys": {
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "owner_name": {},
       "time_int": {}
     },
@@ -248,14 +248,14 @@
       "amount": {}
     }
   },
-  "deal_pact_episode": {
+  "gov_pact_episode": {
     "allowed_crud": "INSERT_MULITPLE",
-    "brick_type": "dealunit",
+    "brick_type": "govunit",
     "build_order": 20,
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "owner_name": {},
       "time_int": {}
     },
@@ -263,56 +263,56 @@
       "quota": {}
     }
   },
-  "deal_timeline_hour": {
+  "gov_timeline_hour": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "brick_type": "dealunit",
+    "brick_type": "govunit",
     "build_order": 6,
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "hour_idea": {}
     },
     "jvalues": {
       "cumlative_minute": {}
     }
   },
-  "deal_timeline_month": {
+  "gov_timeline_month": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "brick_type": "dealunit",
+    "brick_type": "govunit",
     "build_order": 7,
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "month_idea": {}
     },
     "jvalues": {
       "cumlative_day": {}
     }
   },
-  "deal_timeline_weekday": {
+  "gov_timeline_weekday": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "brick_type": "dealunit",
+    "brick_type": "govunit",
     "build_order": 8,
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
+      "gov_idea": {},
       "weekday_idea": {}
     },
     "jvalues": {
       "weekday_order": {}
     }
   },
-  "dealunit": {
+  "govunit": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "brick_type": "dealunit",
+    "brick_type": "govunit",
     "build_order": 5,
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_idea": {}
+      "gov_idea": {}
     },
     "jvalues": {
       "c400_number": {},

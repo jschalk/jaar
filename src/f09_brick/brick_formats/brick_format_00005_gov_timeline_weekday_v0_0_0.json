@@ -1,0 +1,23 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "gov_idea": {
+            "otx_key": true
+        },
+        "weekday_idea": {
+            "otx_key": true
+        },
+        "weekday_order": {
+            "otx_key": false
+        }
+    },
+    "brick_number": "br00005",
+    "categorys": [
+        "gov_timeline_weekday"
+    ]
+}
