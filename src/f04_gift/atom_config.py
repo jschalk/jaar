@@ -337,7 +337,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
         "pick": "RoadUnit",
         "pledge": "bool",
         "problem_bool": "bool",
-        "bank_time_int": "TimeLinePoint",
+        "pact_time_int": "TimeLinePoint",
         "respect_bit": "float",
         "road": "RoadUnit",
         "stop_want": "float",

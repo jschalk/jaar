@@ -33,7 +33,7 @@ def test_BudUnit_Exists():
     assert x_bud.fund_coin is None
     assert x_bud.respect_bit is None
     assert x_bud.penny is None
-    assert x_bud.bank_time_int is None
+    assert x_bud.pact_time_int is None
     assert x_bud.last_gift_id is None
     assert x_bud.originunit is None
     # calculated attr
@@ -88,7 +88,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud.penny == x_penny
     assert x_bud.credor_respect == validate_respect_num()
     assert x_bud.debtor_respect == validate_respect_num()
-    assert not x_bud.bank_time_int
+    assert not x_bud.pact_time_int
     assert not x_bud.last_gift_id
     assert x_bud.originunit == originunit_shop()
     # calculated attr
@@ -283,18 +283,18 @@ def test_BudUnit_set_fund_pool_RaisesErrorWhenArgIsNotMultiple():
     )
 
 
-def test_BudUnit_set_bank_CorrectlySetsAttr():
+def test_BudUnit_set_pact_CorrectlySetsAttr():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    assert sue_bud.bank_time_int is None
+    assert sue_bud.pact_time_int is None
 
     # WHEN
-    sue_bank = 99000
-    sue_bud.set_bank_time_int(sue_bank)
+    sue_pact = 99000
+    sue_bud.set_pact_time_int(sue_pact)
     # THEN
-    assert sue_bud.bank_time_int == sue_bank
+    assert sue_bud.pact_time_int == sue_pact
 
     # WHEN
-    sue_bud.set_bank_time_int(None)
+    sue_bud.set_pact_time_int(None)
     # THEN
-    assert sue_bud.bank_time_int is None
+    assert sue_bud.pact_time_int is None

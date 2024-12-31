@@ -29,7 +29,7 @@ def test_DealUnit_Exists(env_dir_setup_cleanup):
     assert not accord_deal.deal_idea
     assert not accord_deal.timeline
     assert not accord_deal.current_time
-    assert not accord_deal.banklogs
+    assert not accord_deal.pactlogs
     assert not accord_deal.cashbook
     assert not accord_deal.bridge
     assert not accord_deal.fund_coin
@@ -51,7 +51,7 @@ def test_dealunit_shop_ReturnsDealUnit():
     assert accord_deal.deal_idea == get_test_deal_idea()
     assert accord_deal.timeline == timelineunit_shop()
     assert accord_deal.current_time == 0
-    assert accord_deal.banklogs == {}
+    assert accord_deal.pactlogs == {}
     assert accord_deal.cashbook == tranbook_shop(get_test_deal_idea())
     assert accord_deal.bridge == default_bridge_if_None()
     assert accord_deal.fund_coin == default_fund_coin_if_None()

@@ -65,7 +65,7 @@
             }
         }
     },
-    "deal_bank_episode": {
+    "deal_pact_episode": {
         "jkeys": {
             "deal_idea": {
                 "jaar_type": "IdeaUnit"

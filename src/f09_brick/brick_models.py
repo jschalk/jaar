@@ -247,7 +247,7 @@ class br00029AbstractTable(Base):
     max_tree_traverse = Column(Integer)
     owner_name = Column(String)
     penny = Column(Float)
-    bank_time_int = Column(Integer)
+    pact_time_int = Column(Integer)
     respect_bit = Column(Float)
     tally = Column(Float)
 

@@ -195,37 +195,37 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
 
 
 @dataclass
-class BankEpisode:
+class PactEpisode:
     time_int: TimeLinePoint = None
     quota: FundNum = None
     _magnitude: FundNum = None
-    _net_banks: dict[AcctName, FundNum] = None
+    _net_pacts: dict[AcctName, FundNum] = None
 
-    def set_net_bank(self, x_acct_name: AcctName, net_bank: FundNum):
-        self._net_banks[x_acct_name] = net_bank
+    def set_net_pact(self, x_acct_name: AcctName, net_pact: FundNum):
+        self._net_pacts[x_acct_name] = net_pact
 
-    def net_bank_exists(self, x_acct_name: AcctName) -> bool:
-        return self._net_banks.get(x_acct_name) != None
+    def net_pact_exists(self, x_acct_name: AcctName) -> bool:
+        return self._net_pacts.get(x_acct_name) != None
 
-    def get_net_bank(self, x_acct_name: AcctName) -> FundNum:
-        return self._net_banks.get(x_acct_name)
+    def get_net_pact(self, x_acct_name: AcctName) -> FundNum:
+        return self._net_pacts.get(x_acct_name)
 
-    def del_net_bank(self, x_acct_name: AcctName):
-        self._net_banks.pop(x_acct_name)
+    def del_net_pact(self, x_acct_name: AcctName):
+        self._net_pacts.pop(x_acct_name)
 
     def calc_magnitude(self):
-        net_banks = self._net_banks.values()
-        x_cred_sum = sum(net_bank for net_bank in net_banks if net_bank > 0)
-        x_debt_sum = sum(net_bank for net_bank in net_banks if net_bank < 0)
+        net_pacts = self._net_pacts.values()
+        x_cred_sum = sum(net_pact for net_pact in net_pacts if net_pact > 0)
+        x_debt_sum = sum(net_pact for net_pact in net_pacts if net_pact < 0)
         if x_cred_sum + x_debt_sum != 0:
-            exception_str = f"magnitude cannot be calculated: debt_bank={x_debt_sum}, cred_bank={x_cred_sum}"
+            exception_str = f"magnitude cannot be calculated: debt_pact={x_debt_sum}, cred_pact={x_cred_sum}"
             raise calc_magnitudeException(exception_str)
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
         x_dict = {"time_int": self.time_int, "quota": self.quota}
-        if self._net_banks:
-            x_dict["net_banks"] = self._net_banks
+        if self._net_pacts:
+            x_dict["net_pacts"] = self._net_pacts
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
         return x_dict
@@ -234,42 +234,42 @@ class BankEpisode:
         return get_json_from_dict(self.get_dict())
 
 
-def bankepisode_shop(
+def pactepisode_shop(
     x_time_int: TimeLinePoint,
     x_quota: FundNum = None,
-    net_banks: dict[AcctName, FundNum] = None,
+    net_pacts: dict[AcctName, FundNum] = None,
     x_magnitude: FundNum = None,
-) -> BankEpisode:
+) -> PactEpisode:
     if x_quota is None:
         x_quota = default_fund_pool()
 
-    return BankEpisode(
+    return PactEpisode(
         time_int=x_time_int,
         quota=x_quota,
-        _net_banks=get_empty_dict_if_None(net_banks),
+        _net_pacts=get_empty_dict_if_None(net_pacts),
         _magnitude=get_0_if_None(x_magnitude),
     )
 
 
 @dataclass
-class BankLog:
+class PactLog:
     owner_name: OwnerName = None
-    episodes: dict[TimeLinePoint, BankEpisode] = None
-    _sum_bankepisode_quota: FundNum = None
-    _sum_acct_banks: int = None
+    episodes: dict[TimeLinePoint, PactEpisode] = None
+    _sum_pactepisode_quota: FundNum = None
+    _sum_acct_pacts: int = None
     _time_int_min: TimeLinePoint = None
     _time_int_max: TimeLinePoint = None
 
-    def set_episode(self, x_episode: BankEpisode):
+    def set_episode(self, x_episode: PactEpisode):
         self.episodes[x_episode.time_int] = x_episode
 
     def add_episode(self, x_time_int: TimeLinePoint, x_quota: FundNum):
-        self.set_episode(bankepisode_shop(x_time_int, x_quota))
+        self.set_episode(pactepisode_shop(x_time_int, x_quota))
 
     def episode_exists(self, x_time_int: TimeLinePoint) -> bool:
         return self.episodes.get(x_time_int) != None
 
-    def get_episode(self, x_time_int: TimeLinePoint) -> BankEpisode:
+    def get_episode(self, x_time_int: TimeLinePoint) -> PactEpisode:
         return self.episodes.get(x_time_int)
 
     def del_episode(self, x_time_int: TimeLinePoint):
@@ -299,7 +299,7 @@ class BankLog:
     def get_tranbook(self, deal_idea: DealIdea) -> TranBook:
         x_tranbook = tranbook_shop(deal_idea)
         for x_time_int, x_episode in self.episodes.items():
-            for dst_acct_name, x_quota in x_episode._net_banks.items():
+            for dst_acct_name, x_quota in x_episode._net_pacts.items():
                 x_tranbook.add_tranunit(
                     x_owner_name=self.owner_name,
                     x_acct_name=dst_acct_name,
@@ -309,34 +309,34 @@ class BankLog:
         return x_tranbook
 
 
-def banklog_shop(owner_name: OwnerName) -> BankLog:
-    return BankLog(owner_name=owner_name, episodes={}, _sum_acct_banks={})
+def pactlog_shop(owner_name: OwnerName) -> PactLog:
+    return PactLog(owner_name=owner_name, episodes={}, _sum_acct_pacts={})
 
 
-def get_bankepisode_from_dict(x_dict: dict) -> BankEpisode:
+def get_pactepisode_from_dict(x_dict: dict) -> PactEpisode:
     x_time_int = x_dict.get("time_int")
     x_quota = x_dict.get("quota")
-    x_net_banks = x_dict.get("net_banks")
+    x_net_pacts = x_dict.get("net_pacts")
     x_magnitude = x_dict.get("magnitude")
-    return bankepisode_shop(x_time_int, x_quota, x_net_banks, x_magnitude)
+    return pactepisode_shop(x_time_int, x_quota, x_net_pacts, x_magnitude)
 
 
-def get_bankepisode_from_json(x_json: str) -> BankEpisode:
-    return get_bankepisode_from_dict(get_dict_from_json(x_json))
+def get_pactepisode_from_json(x_json: str) -> PactEpisode:
+    return get_pactepisode_from_dict(get_dict_from_json(x_json))
 
 
-def get_banklog_from_dict(x_dict: dict) -> BankLog:
+def get_pactlog_from_dict(x_dict: dict) -> PactLog:
     x_owner_name = x_dict.get("owner_name")
-    x_banklog = banklog_shop(x_owner_name)
-    x_banklog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
-    return x_banklog
+    x_pactlog = pactlog_shop(x_owner_name)
+    x_pactlog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
+    return x_pactlog
 
 
-def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, BankEpisode]:
+def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, PactEpisode]:
     x_dict = {}
     for x_episode_dict in episodes_dict.values():
-        x_bank_episode = get_bankepisode_from_dict(x_episode_dict)
-        x_dict[x_bank_episode.time_int] = x_bank_episode
+        x_pact_episode = get_pactepisode_from_dict(x_episode_dict)
+        x_dict[x_pact_episode.time_int] = x_pact_episode
     return x_dict
 
 
