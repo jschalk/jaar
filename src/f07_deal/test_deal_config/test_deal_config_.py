@@ -72,8 +72,8 @@ def test_get_deal_config_dict_ReturnsObj():
     deal_timeline_hour_dict = deal_config.get(deal_timeline_hour_str())
     deal_timeline_month_dict = deal_config.get(deal_timeline_month_str())
     deal_timeline_weekday_dict = deal_config.get(deal_timeline_weekday_str())
-    assert len(dealunit_dict.get(jkeys_str())) == 0
-    assert len(deal_turn_episode_dict.get(jkeys_str())) == 4
+    assert len(dealunit_dict.get(jkeys_str())) == 1
+    assert len(deal_turn_episode_dict.get(jkeys_str())) == 3
     assert len(deal_cashbook_dict.get(jkeys_str())) == 4
     assert len(deal_timeline_hour_dict.get(jkeys_str())) == 2
     assert len(deal_timeline_month_dict.get(jkeys_str())) == 2
@@ -82,7 +82,6 @@ def test_get_deal_config_dict_ReturnsObj():
     x_dealunit_jvalues = {
         c400_number_str(),
         current_time_str(),
-        deal_idea_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),
@@ -94,7 +93,7 @@ def test_get_deal_config_dict_ReturnsObj():
     print(f"{dealunit_dict.get(jvalues_str()).keys()=}")
     gen_jvalues = set(dealunit_dict.get(jvalues_str()).keys())
     assert gen_jvalues == x_dealunit_jvalues
-    assert len(dealunit_dict.get(jvalues_str())) == 10
+    assert len(dealunit_dict.get(jvalues_str())) == 9
     assert len(deal_turn_episode_dict.get(jvalues_str())) == 1
     assert len(deal_cashbook_dict.get(jvalues_str())) == 1
     assert len(deal_timeline_hour_dict.get(jvalues_str())) == 1

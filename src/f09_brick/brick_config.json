@@ -72,8 +72,7 @@
       "event_int": {},
       "face_name": {},
       "deal_idea": {},
-      "group_label": {},
-      "time_int": {}
+      "group_label": {}
     },
     "jvalues": {
       "credit_vote": {},
@@ -88,8 +87,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
-      "time_int": {}
+      "deal_idea": {}
     },
     "jvalues": {
       "credit_belief": {},
@@ -105,8 +103,7 @@
       "event_int": {},
       "face_name": {},
       "deal_idea": {},
-      "road": {},
-      "time_int": {}
+      "road": {}
     },
     "jvalues": {
       "give_force": {},
@@ -122,8 +119,7 @@
       "event_int": {},
       "face_name": {},
       "deal_idea": {},
-      "road": {},
-      "time_int": {}
+      "road": {}
     },
     "jvalues": {
       "fnigh": {},
@@ -140,8 +136,7 @@
       "face_name": {},
       "deal_idea": {},
       "healer_name": {},
-      "road": {},
-      "time_int": {}
+      "road": {}
     },
     "jvalues": {}
   },
@@ -155,8 +150,7 @@
       "face_name": {},
       "deal_idea": {},
       "need": {},
-      "road": {},
-      "time_int": {}
+      "road": {}
     },
     "jvalues": {
       "divisor": {},
@@ -173,8 +167,7 @@
       "event_int": {},
       "face_name": {},
       "deal_idea": {},
-      "road": {},
-      "time_int": {}
+      "road": {}
     },
     "jvalues": {
       "base_item_active_requisite": {}
@@ -189,8 +182,7 @@
       "face_name": {},
       "deal_idea": {},
       "road": {},
-      "team_label": {},
-      "time_int": {}
+      "team_label": {}
     },
     "jvalues": {}
   },
@@ -203,8 +195,7 @@
       "face_name": {},
       "deal_idea": {},
       "idee": {},
-      "parent_road": {},
-      "time_int": {}
+      "parent_road": {}
     },
     "jvalues": {
       "addin": {},
@@ -227,8 +218,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
-      "time_int": {}
+      "deal_idea": {}
     },
     "jvalues": {
       "credor_respect": {},
@@ -263,7 +253,6 @@
     "brick_type": "dealunit",
     "build_order": 20,
     "jkeys": {
-      "acct_name": {},
       "event_int": {},
       "face_name": {},
       "deal_idea": {},
@@ -282,8 +271,7 @@
       "event_int": {},
       "face_name": {},
       "deal_idea": {},
-      "hour_idea": {},
-      "time_int": {}
+      "hour_idea": {}
     },
     "jvalues": {
       "cumlative_minute": {}
@@ -297,8 +285,7 @@
       "event_int": {},
       "face_name": {},
       "deal_idea": {},
-      "month_idea": {},
-      "time_int": {}
+      "month_idea": {}
     },
     "jvalues": {
       "cumlative_day": {}
@@ -312,7 +299,6 @@
       "event_int": {},
       "face_name": {},
       "deal_idea": {},
-      "time_int": {},
       "weekday_idea": {}
     },
     "jvalues": {
@@ -326,8 +312,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "deal_idea": {},
-      "time_int": {}
+      "deal_idea": {}
     },
     "jvalues": {
       "c400_number": {},

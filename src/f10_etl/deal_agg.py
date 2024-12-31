@@ -1,5 +1,7 @@
 from src.f00_instrument.file import create_path, save_file
-from src.f00_instrument.dict_toolbox import get_sorted_list_of_dict_keys
+from src.f00_instrument.dict_toolbox import (
+    get_sorted_list_of_dict_keys as get_sorted_list,
+)
 from src.f03_chrono.chrono import (
     create_timeline_config,
     timelineunit_shop,
@@ -174,8 +176,9 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
     dealunits = {}
     for deal_attrs in dealunits_dict.values():
         x_deal_idea = deal_attrs.get("deal_idea")
+        # create TimeLineUnit
         if weekday_dict := deals_weekday_dict.get(x_deal_idea):
-            x_weekday_list = get_sorted_list_of_dict_keys(weekday_dict, "weekday_order")
+            x_weekday_list = get_sorted_list(weekday_dict, "weekday_order")
         else:
             x_weekday_list = None
         timeline_config = create_timeline_config(
@@ -189,17 +192,16 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
             yr1_jan1_offset=if_nan_return_None(deal_attrs.get("yr1_jan1_offset")),
         )
         if month_dict := deals_month_dict.get(x_deal_idea):
-            x_month_list = get_sorted_list_of_dict_keys(
-                month_dict, "cumlative_day", True
-            )
+            x_month_list = get_sorted_list(month_dict, "cumlative_day", True)
             timeline_config["months_config"] = x_month_list
         if hour_dict := deals_hour_dict.get(x_deal_idea):
-            x_hour_list = get_sorted_list_of_dict_keys(
-                hour_dict, "cumlative_minute", True
-            )
+            x_hour_list = get_sorted_list(hour_dict, "cumlative_minute", True)
             timeline_config["hours_config"] = x_hour_list
         if validate_timeline_config(timeline_config) is False:
             raise ValueError(f"Invalid timeline_config: {timeline_config=}")
+
+        # Create cashbook TranBook
+
         dealunit = dealunit_shop(
             deal_idea=x_deal_idea,
             deals_dir=deals_dir,
@@ -210,6 +212,8 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
             penny=if_nan_return_None(deal_attrs.get("penny")),
             respect_bit=if_nan_return_None(deal_attrs.get("respect_bit")),
         )
+        # dealunit.cashbook
+        # dealunit.turnbook
         dealunits[dealunit.deal_idea] = dealunit
     deal_jsons_dir = create_path(deals_dir, "deal_jsons")
     for dealunit in dealunits.values():

@@ -478,11 +478,20 @@ def _validate_brick_config(x_brick_config: dict):
 
         sub_jkeys_keys = set(sub_category.get(jkeys_str()).keys())
         brick_jkeys_keys = set(brick_dict.get(jkeys_str()).keys())
-        print(f"  {sub_jkeys_keys=}")
-        print(f"{brick_jkeys_keys=}")
-        assert sub_jkeys_keys.issubset(brick_jkeys_keys)
+        print(f"    {sub_jkeys_keys=}")
+        print(f"  {brick_jkeys_keys=}")
+        assert face_name_str() in brick_jkeys_keys
+        assert event_int_str() in brick_jkeys_keys
+        if brick_dict.get(brick_type_str()) != pidginunit_str():
+            assert deal_idea_str() in brick_jkeys_keys
+        if brick_dict.get(brick_type_str()) == budunit_str():
+            brick_jkeys_keys.remove(deal_idea_str())
+        brick_jkeys_keys.remove(face_name_str())
+        brick_jkeys_keys.remove(event_int_str())
+        assert sub_jkeys_keys == brick_jkeys_keys
 
         sub_jvalues_keys = set(sub_category.get(jvalues_str()).keys())
+        print(f"  {sub_jvalues_keys=}")
         if deal_idea_str() in sub_jvalues_keys:
             sub_jvalues_keys.remove(deal_idea_str())
 
@@ -490,14 +499,9 @@ def _validate_brick_config(x_brick_config: dict):
         brick_jvalues_keys = set(brick_jvalues_dict.keys())
         # print(f"  {sub_jvalues_keys=}")
         # print(f"{brick_jvalues_keys=}")
-        assert sub_jvalues_keys.issubset(brick_jvalues_keys)
+        assert sub_jvalues_keys == brick_jvalues_keys
 
-        assert face_name_str() in brick_jkeys_keys
-        assert event_int_str() in brick_jkeys_keys
         assert deal_idea_str() not in brick_jvalues_keys
-        if brick_dict.get(brick_type_str()) != pidginunit_str():
-            assert deal_idea_str() in brick_jkeys_keys
-            assert time_int_str() in brick_jkeys_keys
 
         # sort_list = get_brick_elements_sort_order()
         # x_count = 0

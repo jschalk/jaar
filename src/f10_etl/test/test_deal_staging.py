@@ -574,6 +574,53 @@ def test_create_dealunit_jsons_from_prime_files_Scenario5_deal_timeline_hour(
     assert accord56_dealunit.timeline.hours_config == x_timelineunit.hours_config
 
 
+# def test_create_dealunit_jsons_from_prime_files_Scenario3_deal_cashbook(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     deals_dir = create_path(get_test_etl_dir(), "deals")
+#     create_init_deal_prime_files(deals_dir)
+#     xp = DealPrimeFilePaths(deals_dir)
+#     xc = DealPrimeColumns()
+#     agg_str = "agg"
+#     accord56_deal_idea = "accord56"
+#     sue_str = "Sue"
+#     bob_str = "Bob"
+#     t3 = 3
+#     t7 = 7
+#     amount3 = 555
+#     amount7 = 777
+#     accord56_deal_row = [accord56_deal_idea, "", "", "", "", "", "", "", "", ""]
+#     dealunit_df = DataFrame([accord56_deal_row], columns=xc.dealunit_agg_columns)
+#     a56_cashbook_t3 = [accord56_deal_idea, sue_str, bob_str, t3, amount3]
+#     a56_cashbook_t7 = [accord56_deal_idea, sue_str, bob_str, t7, amount7]
+#     a56_cashbook_rows = [a56_cashbook_t3, a56_cashbook_t7]
+#     deal_cashbook_df = DataFrame(
+#         a56_cashbook_rows, columns=xc.deal_cashbook_agg_columns
+#     )
+#     print(f"{deal_cashbook_df=}")
+#     upsert_sheet(xp.dealunit_path, agg_str, dealunit_df)
+#     upsert_sheet(xp.deal_cashbook_path, agg_str, deal_cashbook_df)
+#     deal_jsons_dir = create_path(deals_dir, "deal_jsons")
+#     accord56_json_path = create_path(deal_jsons_dir, "accord56.json")
+#     assert os_path_exists(accord56_json_path) is False
+
+#     # WHEN
+#     create_dealunit_jsons_from_prime_files(deals_dir=deals_dir)
+
+#     # THEN
+#     assert os_path_exists(accord56_json_path)
+#     accord56_dealunit = deal_get_from_json(open_file(accord56_json_path))
+#     x_timelineunit = timelineunit_shop(create_timeline_config())
+#     expected_dealunit = dealunit_shop(accord56_deal_idea, deals_dir, x_timelineunit)
+#     expected_dealunit.add_cashpurchase(sue_str, bob_str, t3, amount3)
+#     expected_dealunit.add_cashpurchase(sue_str, bob_str, t7, amount7)
+#     print(f"{expected_dealunit.cashbook=}")
+#     print(f"{expected_dealunit=}")
+#     assert accord56_dealunit.cashbook == expected_dealunit.cashbook
+#     assert accord56_dealunit == expected_dealunit
+
+
 # def test_create_dealunit_jsons_from_prime_files_Scenario3_deal_turn_episode(
 #     env_dir_setup_cleanup,
 # ):
