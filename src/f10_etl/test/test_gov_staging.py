@@ -1,32 +1,8 @@
 from src.f00_instrument.file import create_path, open_file
-from src.f01_road.finance_tran import quota_str, time_int_str, bridge_str
-from src.f03_chrono.chrono import (
-    c400_number_str,
-    monthday_distortion_str,
-    timeline_idea_str,
-    yr1_jan1_offset_str,
-    timelineunit_shop,
-    create_timeline_config,
-)
-from src.f04_gift.atom_config import (
-    face_name_str,
-    gov_idea_str,
-    acct_name_str,
-    owner_name_str,
-    fund_coin_str,
-    penny_str,
-    respect_bit_str,
-)
+from src.f03_chrono.chrono import timelineunit_shop, create_timeline_config
+from src.f04_gift.atom_config import face_name_str
 from src.f07_gov.gov import get_from_json as gov_get_from_json, govunit_shop
 from src.f07_gov.gov_config import (
-    current_time_str,
-    amount_str,
-    month_idea_str,
-    hour_idea_str,
-    cumlative_minute_str,
-    cumlative_day_str,
-    weekday_idea_str,
-    weekday_order_str,
     gov_cashbook_str,
     gov_deal_episode_str,
     gov_timeline_hour_str as gov_hour_str,
@@ -46,7 +22,6 @@ from src.f10_etl.gov_agg import (
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
-from copy import copy as copy_copy
 
 
 # br00000 gov_idea c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
@@ -105,7 +80,6 @@ def test_GovPrimeColumns_Exists():
     gov_month_staging = gov_timeline_month_args.union(staging_args)
     gov_weekday_staging = gov_timeline_weekday_args.union(staging_args)
     govunit_staging = govunit_args.union(staging_args)
-
     assert set(x_govprimecolumns.gov_cashbook_staging_columns) == gov_cashbook_staging
     assert set(x_govprimecolumns.gov_deal_staging_columns) == gov_deal_episode_staging
     assert set(x_govprimecolumns.gov_hour_staging_columns) == gov_hour_staging
@@ -586,12 +560,6 @@ def test_create_govunit_jsons_from_prime_files_Scenario7_gov_deal_episode(
     print(f"{expected_govunit.deallogs=}")
     print(f"{expected_govunit=}")
     assert accord56_govunit.deallogs == expected_govunit.deallogs
-
-
-# def test_create_govunit_jsons_from_prime_files_Scenario4_gov_cashbook(env_dir_setup_cleanup):
-# def test_create_govunit_jsons_from_prime_files_Scenario5_gov_timeline_hour(env_dir_setup_cleanup):
-# def test_create_govunit_jsons_from_prime_files_Scenario6_gov_timeline_month(env_dir_setup_cleanup):
-# def test_create_govunit_jsons_from_prime_files_Scenario7_gov_timeline_weekday(env_dir_setup_cleanup):
 
 
 # def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):

@@ -133,7 +133,6 @@ def create_init_gov_prime_files(govs_dir: str):
     stage_gov_hour_df = DataFrame([], columns=xc.gov_hour_staging_columns)
     stage_gov_month_df = DataFrame([], columns=xc.gov_month_staging_columns)
     stage_gov_weekday_df = DataFrame([], columns=xc.gov_weekday_staging_columns)
-
     upsert_sheet(xp.govunit_path, "staging", stage_govunit_df)
     upsert_sheet(xp.gov_deal_path, "staging", stage_gov_deal_df)
     upsert_sheet(xp.gov_cashbook_path, "staging", stage_gov_cashbook_df)
@@ -147,7 +146,6 @@ def create_init_gov_prime_files(govs_dir: str):
     agg_gov_hour_df = DataFrame([], columns=xc.gov_hour_agg_columns)
     agg_gov_month_df = DataFrame([], columns=xc.gov_month_agg_columns)
     agg_gov_weekday_df = DataFrame([], columns=xc.gov_weekday_agg_columns)
-
     upsert_sheet(xp.govunit_path, "agg", agg_govunit_df)
     upsert_sheet(xp.gov_deal_path, "agg", agg_gov_deal_df)
     upsert_sheet(xp.gov_cashbook_path, "agg", agg_gov_cashbook_df)
@@ -202,7 +200,7 @@ def create_govunit_jsons_from_prime_files(govs_dir: str):
     for gov_attrs in govunits_dict.values():
         x_gov_idea = gov_attrs.get("gov_idea")
         gov_timelineunit = create_timelineunit_from_prime_data(
-            gov_attrs,
+            gov_attrs=gov_attrs,
             gov_weekday_dict=govs_weekday_dict.get(x_gov_idea),
             gov_month_dict=govs_month_dict.get(x_gov_idea),
             gov_hour_dict=govs_hour_dict.get(x_gov_idea),
