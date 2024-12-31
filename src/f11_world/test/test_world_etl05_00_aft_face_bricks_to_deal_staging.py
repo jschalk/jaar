@@ -16,7 +16,7 @@ from src.f07_deal.deal_config import (
     weekday_order_str,
     deal_turnlog_str,
     deal_turn_episode_str,
-    deal_cashbook_str,
+    deal_bankbook_str,
     deal_timeline_hour_str,
     deal_timeline_month_str,
     deal_timeline_weekday_str,

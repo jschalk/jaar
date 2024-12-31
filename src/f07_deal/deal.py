@@ -55,7 +55,7 @@ class turnepisode_Exception(Exception):
     pass
 
 
-class set_cashpurchase_Exception(Exception):
+class set_bankpurchase_Exception(Exception):
     pass
 
 
@@ -80,7 +80,7 @@ class DealUnit:
     timeline: TimeLineUnit = None
     current_time: int = None
     turnlogs: dict[OwnerName, TurnLog] = None
-    cashbook: TranBook = None
+    bankbook: TranBook = None
     bridge: str = None
     fund_coin: FundCoin = None
     respect_bit: BitNum = None
@@ -284,7 +284,7 @@ class DealUnit:
         x_turnlog = self.get_turnlog(x_owner_name)
         x_turnlog.add_episode(x_time_int, x_money_magnitude)
 
-    def get_dict(self, include_cashbook: bool = True) -> dict:
+    def get_dict(self, include_bankbook: bool = True) -> dict:
         x_dict = {
             "deal_idea": self.deal_idea,
             "bridge": self.bridge,
@@ -295,8 +295,8 @@ class DealUnit:
             "respect_bit": self.respect_bit,
             "timeline": self.timeline.get_dict(),
         }
-        if include_cashbook:
-            x_dict["cashbook"] = self.cashbook.get_dict()
+        if include_bankbook:
+            x_dict["bankbook"] = self.bankbook.get_dict()
         return x_dict
 
     def get_json(self) -> str:
@@ -314,14 +314,14 @@ class DealUnit:
             all_turnepisode_time_ints.update(x_turnlog.get_time_ints())
         return all_turnepisode_time_ints
 
-    def set_cashpurchase(self, x_cashpurchase: TranUnit):
-        self.cashbook.set_tranunit(
-            x_tranunit=x_cashpurchase,
+    def set_bankpurchase(self, x_bankpurchase: TranUnit):
+        self.bankbook.set_tranunit(
+            x_tranunit=x_bankpurchase,
             x_blocked_time_ints=self.get_turnlogs_time_ints(),
             x_current_time=self.current_time,
         )
 
-    def add_cashpurchase(
+    def add_bankpurchase(
         self,
         x_owner_name: OwnerName,
         x_acct_name: AcctName,
@@ -330,7 +330,7 @@ class DealUnit:
         x_blocked_time_ints: set[TimeLinePoint] = None,
         x_current_time: TimeLinePoint = None,
     ):
-        self.cashbook.add_tranunit(
+        self.bankbook.add_tranunit(
             x_owner_name=x_owner_name,
             x_acct_name=x_acct_name,
             x_time_int=x_time_int,
@@ -339,28 +339,28 @@ class DealUnit:
             x_current_time=x_current_time,
         )
 
-    def cashpurchase_exists(
+    def bankpurchase_exists(
         self, src: AcctName, dst: AcctName, x_time_int: TimeLinePoint
     ) -> bool:
-        return self.cashbook.tranunit_exists(src, dst, x_time_int)
+        return self.bankbook.tranunit_exists(src, dst, x_time_int)
 
-    def get_cashpurchase(
+    def get_bankpurchase(
         self, src: AcctName, dst: AcctName, x_time_int: TimeLinePoint
     ) -> TranUnit:
-        return self.cashbook.get_tranunit(src, dst, x_time_int)
+        return self.bankbook.get_tranunit(src, dst, x_time_int)
 
-    def del_cashpurchase(self, src: AcctName, dst: AcctName, x_time_int: TimeLinePoint):
-        return self.cashbook.del_tranunit(src, dst, x_time_int)
+    def del_bankpurchase(self, src: AcctName, dst: AcctName, x_time_int: TimeLinePoint):
+        return self.bankbook.del_tranunit(src, dst, x_time_int)
 
     def set_current_time(self, x_current_time: TimeLinePoint):
-        x_time_ints = self.cashbook.get_time_ints()
+        x_time_ints = self.bankbook.get_time_ints()
         if x_time_ints != set() and max(x_time_ints) >= x_current_time:
-            exception_str = f"Cannot set current_time {x_current_time}, cashpurchase with greater time_int exists"
+            exception_str = f"Cannot set current_time {x_current_time}, bankpurchase with greater time_int exists"
             raise set_current_time_Exception(exception_str)
         self.current_time = x_current_time
 
     def set_all_tranbook(self):
-        x_tranunits = copy_deepcopy(self.cashbook.tranunits)
+        x_tranunits = copy_deepcopy(self.bankbook.tranunits)
         x_tranbook = tranbook_shop(self.deal_idea, x_tranunits)
         for owner_name, x_turnlog in self.turnlogs.items():
             for x_time_int, x_turnepisode in x_turnlog.episodes.items():
@@ -372,7 +372,7 @@ class DealUnit:
     # def set_all_tranbook(self):
     #     if not hasattr(self, "_combined_tranbook"):
     #         self._combined_tranbook = tranbook_shop(self.deal_idea, [])
-    #     new_tranunits = self.cashbook.get_new_tranunits()
+    #     new_tranunits = self.bankbook.get_new_tranunits()
     #     self._combined_tranbook.add_tranunits(new_tranunits)
     #     return self._combined_tranbook
 
@@ -399,7 +399,7 @@ def dealunit_shop(
         timeline=timeline,
         current_time=get_0_if_None(current_time),
         turnlogs={},
-        cashbook=tranbook_shop(deal_idea),
+        bankbook=tranbook_shop(deal_idea),
         bridge=default_bridge_if_None(bridge),
         fund_coin=default_fund_coin_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
@@ -424,7 +424,7 @@ def get_from_dict(deal_dict: dict) -> DealUnit:
     x_deal.respect_bit = deal_dict.get("respect_bit")
     x_deal.penny = deal_dict.get("penny")
     x_deal.turnlogs = _get_turnlogs_from_dict(deal_dict.get("turnlogs"))
-    x_deal.cashbook = get_tranbook_from_dict(deal_dict.get("cashbook"))
+    x_deal.bankbook = get_tranbook_from_dict(deal_dict.get("bankbook"))
     return x_deal
 
 

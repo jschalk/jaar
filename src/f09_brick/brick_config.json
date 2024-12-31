@@ -232,7 +232,7 @@
       "tally": {}
     }
   },
-  "deal_cashbook": {
+  "deal_bankbook": {
     "allowed_crud": "INSERT_MULITPLE",
     "brick_type": "dealunit",
     "build_order": 21,

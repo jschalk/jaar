@@ -99,7 +99,7 @@ def get_brick_formats_dir() -> str:
 
 # def brick_format_00000_dealunit_v0_0_0()->str: return "brick_format_00000_dealunit_v0_0_0"
 # def brick_format_00001_deal_turn_episode_v0_0_0()->str: return "brick_format_00001_deal_turn_episode_v0_0_0"
-# def brick_format_00002_deal_cashbook_v0_0_0()->str: return "brick_format_00002_deal_cashbook_v0_0_0"
+# def brick_format_00002_deal_bankbook_v0_0_0()->str: return "brick_format_00002_deal_bankbook_v0_0_0"
 # def brick_format_00003_deal_timeline_hour_v0_0_0()->str: return "brick_format_00003_deal_timeline_hour_v0_0_0"
 # def brick_format_00004_deal_timeline_month_v0_0_0()->str: return "brick_format_00004_deal_timeline_month_v0_0_0"
 # def brick_format_00005_deal_timeline_weekday_v0_0_0()->str: return "brick_format_00005_deal_timeline_weekday_v0_0_0"
@@ -113,8 +113,8 @@ def brick_format_00001_deal_turn_episode_v0_0_0() -> str:
     return "brick_format_00001_deal_turn_episode_v0_0_0"
 
 
-def brick_format_00002_deal_cashbook_v0_0_0() -> str:
-    return "brick_format_00002_deal_cashbook_v0_0_0"
+def brick_format_00002_deal_bankbook_v0_0_0() -> str:
+    return "brick_format_00002_deal_bankbook_v0_0_0"
 
 
 def brick_format_00003_deal_timeline_hour_v0_0_0() -> str:
@@ -241,7 +241,7 @@ def get_brick_format_filenames() -> set[str]:
     return {
         brick_format_00000_dealunit_v0_0_0(),
         brick_format_00001_deal_turn_episode_v0_0_0(),
-        brick_format_00002_deal_cashbook_v0_0_0(),
+        brick_format_00002_deal_bankbook_v0_0_0(),
         brick_format_00003_deal_timeline_hour_v0_0_0(),
         brick_format_00004_deal_timeline_month_v0_0_0(),
         brick_format_00005_deal_timeline_weekday_v0_0_0(),
@@ -316,7 +316,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
     return {
         "bridge,c400_number,current_time,deal_idea,fund_coin,monthday_distortion,penny,respect_bit,timeline_idea,yr1_jan1_offset": brick_format_00000_dealunit_v0_0_0(),
         "acct_name,deal_idea,owner_name,quota,time_int": brick_format_00001_deal_turn_episode_v0_0_0(),
-        "acct_name,amount,deal_idea,owner_name,time_int": brick_format_00002_deal_cashbook_v0_0_0(),
+        "acct_name,amount,deal_idea,owner_name,time_int": brick_format_00002_deal_bankbook_v0_0_0(),
         "cumlative_minute,deal_idea,hour_idea": brick_format_00003_deal_timeline_hour_v0_0_0(),
         "cumlative_day,deal_idea,month_idea": brick_format_00004_deal_timeline_month_v0_0_0(),
         "deal_idea,weekday_idea,weekday_order": brick_format_00005_deal_timeline_weekday_v0_0_0(),
@@ -521,7 +521,7 @@ def get_brick_category_ref() -> dict[str, set[str]]:
     return {
         "dealunit": ["br00000"],
         "deal_turn_episode": ["br00001"],
-        "deal_cashbook": ["br00002"],
+        "deal_bankbook": ["br00002"],
         "deal_timeline_hour": ["br00003"],
         "deal_timeline_month": ["br00004"],
         "deal_timeline_weekday": ["br00005"],

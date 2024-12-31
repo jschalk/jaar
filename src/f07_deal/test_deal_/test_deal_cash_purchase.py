@@ -3,7 +3,7 @@ from src.f07_deal.deal import dealunit_shop
 from pytest import raises as pytest_raises
 
 
-def test_DealUnit_set_cashpurchase_SetsAttr():
+def test_DealUnit_set_bankpurchase_SetsAttr():
     # ESTABLISH
     t6606_current_time = 6606
     x_deal = dealunit_shop(current_time=t6606_current_time)
@@ -12,16 +12,16 @@ def test_DealUnit_set_cashpurchase_SetsAttr():
     t55_t = 5505
     t55_amount = 37
     sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
-    assert x_deal.cashbook.tranunit_exists(sue_str, bob_str, t55_t) is False
+    assert x_deal.bankbook.tranunit_exists(sue_str, bob_str, t55_t) is False
 
     # WHEN
-    x_deal.set_cashpurchase(sue_bob_t55_tranunit)
+    x_deal.set_bankpurchase(sue_bob_t55_tranunit)
 
     # THEN
-    assert x_deal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
+    assert x_deal.bankbook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
-def test_DealUnit_add_cashpurchase_SetsAttr():
+def test_DealUnit_add_bankpurchase_SetsAttr():
     # ESTABLISH
     t6606_current_time = 6606
     x_deal = dealunit_shop(current_time=t6606_current_time)
@@ -29,16 +29,16 @@ def test_DealUnit_add_cashpurchase_SetsAttr():
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
-    assert x_deal.cashbook.tranunit_exists(sue_str, bob_str, t55_t) is False
+    assert x_deal.bankbook.tranunit_exists(sue_str, bob_str, t55_t) is False
 
     # WHEN
-    x_deal.add_cashpurchase(sue_str, bob_str, x_time_int=t55_t, x_amount=t55_amount)
+    x_deal.add_bankpurchase(sue_str, bob_str, x_time_int=t55_t, x_amount=t55_amount)
 
     # THEN
-    assert x_deal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
+    assert x_deal.bankbook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
-def test_DealUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThanOrEqual_current_time():
+def test_DealUnit_set_bankpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThanOrEqual_current_time():
     # ESTABLISH
     t6606_current_time = 6606
     x_deal = dealunit_shop(current_time=t6606_current_time)
@@ -52,9 +52,9 @@ def test_DealUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThan
     assert sue_bob_t55_tranunit.time_int < x_deal.current_time
 
     # WHEN
-    x_deal.set_cashpurchase(sue_bob_t55_tranunit)
+    x_deal.set_bankpurchase(sue_bob_t55_tranunit)
     # THEN
-    assert x_deal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
+    assert x_deal.bankbook.tranunit_exists(sue_str, bob_str, t55_t)
 
     # ESTABLISH
     t77_t = 7707
@@ -63,19 +63,19 @@ def test_DealUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThan
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_deal.set_cashpurchase(sue_bob_t77_tranunit)
+        x_deal.set_bankpurchase(sue_bob_t77_tranunit)
     exception_str = f"Cannot set tranunit for time_int={t77_t}, timelinepoint is greater than current time={t6606_current_time}"
     assert str(excinfo.value) == exception_str
 
     # WHEN / THEN
     sue_bob_t6606 = tranunit_shop(sue_str, bob_str, t6606_current_time, t77_amount)
     with pytest_raises(Exception) as excinfo:
-        x_deal.set_cashpurchase(sue_bob_t6606)
+        x_deal.set_bankpurchase(sue_bob_t6606)
     exception_str = f"Cannot set tranunit for time_int={t6606_current_time}, timelinepoint is greater than current time={t6606_current_time}"
     assert str(excinfo.value) == exception_str
 
 
-def test_DealUnit_set_cashpurchase_RaisesErrorWhenTurnEpisodeHas_time_int():
+def test_DealUnit_set_bankpurchase_RaisesErrorWhenTurnEpisodeHas_time_int():
     # ESTABLISH
     x_deal = dealunit_shop(current_time=0)
     sue_str = "Sue"
@@ -90,63 +90,63 @@ def test_DealUnit_set_cashpurchase_RaisesErrorWhenTurnEpisodeHas_time_int():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_deal.set_cashpurchase(sue_bob_t55_tranunit)
+        x_deal.set_bankpurchase(sue_bob_t55_tranunit)
     exception_str = (
         f"Cannot set tranunit for time_int={t55_t}, timelinepoint is blocked"
     )
     assert str(excinfo.value) == exception_str
 
 
-def test_DealUnit_cashpurchase_exists_ReturnsObj():
+def test_DealUnit_bankpurchase_exists_ReturnsObj():
     # ESTABLISH
     x_deal = dealunit_shop(current_time=6606)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
-    assert x_deal.cashpurchase_exists(sue_str, bob_str, t55_t) is False
+    assert x_deal.bankpurchase_exists(sue_str, bob_str, t55_t) is False
 
     # WHEN
     t55_amount = 37
-    x_deal.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
+    x_deal.set_bankpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
 
     # THEN
-    assert x_deal.cashpurchase_exists(sue_str, bob_str, t55_t)
+    assert x_deal.bankpurchase_exists(sue_str, bob_str, t55_t)
 
 
-def test_DealUnit_get_cashpurchase_ReturnsObj():
+def test_DealUnit_get_bankpurchase_ReturnsObj():
     # ESTABLISH
     x_deal = dealunit_shop(current_time=6606)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
-    x_deal.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
-    assert x_deal.cashpurchase_exists(sue_str, bob_str, t55_t)
+    x_deal.set_bankpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
+    assert x_deal.bankpurchase_exists(sue_str, bob_str, t55_t)
 
     # WHEN
-    sue_gen_cashpurchase = x_deal.get_cashpurchase(sue_str, bob_str, t55_t)
+    sue_gen_bankpurchase = x_deal.get_bankpurchase(sue_str, bob_str, t55_t)
 
     # THEN
-    assert sue_gen_cashpurchase
+    assert sue_gen_bankpurchase
     sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
-    assert sue_gen_cashpurchase == sue_bob_t55_tranunit
+    assert sue_gen_bankpurchase == sue_bob_t55_tranunit
 
 
-def test_DealUnit_del_cashpurchase_SetsAttr():
+def test_DealUnit_del_bankpurchase_SetsAttr():
     # ESTABLISH
     x_deal = dealunit_shop(current_time=6606)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
-    x_deal.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
-    assert x_deal.cashpurchase_exists(sue_str, bob_str, t55_t)
+    x_deal.set_bankpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
+    assert x_deal.bankpurchase_exists(sue_str, bob_str, t55_t)
 
     # WHEN
-    x_deal.del_cashpurchase(sue_str, bob_str, t55_t)
+    x_deal.del_bankpurchase(sue_str, bob_str, t55_t)
 
     # THEN
-    assert x_deal.cashpurchase_exists(sue_str, bob_str, t55_t) is False
+    assert x_deal.bankpurchase_exists(sue_str, bob_str, t55_t) is False
 
 
 def test_DealUnit_set_current_time_SetsAttr():
@@ -157,7 +157,7 @@ def test_DealUnit_set_current_time_SetsAttr():
     bob_str = "Bob"
     t22_t = 2202
     t22_amount = 27
-    x_deal.set_cashpurchase(tranunit_shop(sue_str, bob_str, t22_t, t22_amount))
+    x_deal.set_bankpurchase(tranunit_shop(sue_str, bob_str, t22_t, t22_amount))
     assert x_deal.current_time == t6606_current_time
 
     # WHEN
@@ -168,7 +168,7 @@ def test_DealUnit_set_current_time_SetsAttr():
     assert x_deal.current_time == t4404_current_time
 
 
-def test_DealUnit_set_current_time_RaisesErrorWhen_cashpurchase_ExistsWithGreatertime_int():
+def test_DealUnit_set_current_time_RaisesErrorWhen_bankpurchase_ExistsWithGreatertime_int():
     # ESTABLISH
     t6606_current_time = 6606
     x_deal = dealunit_shop(current_time=t6606_current_time)
@@ -176,14 +176,14 @@ def test_DealUnit_set_current_time_RaisesErrorWhen_cashpurchase_ExistsWithGreate
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
-    x_deal.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
+    x_deal.set_bankpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
     assert x_deal.current_time == t6606_current_time
 
     # WHEN / THEN
     t4404_current_time = 4404
     with pytest_raises(Exception) as excinfo:
         x_deal.set_current_time(t4404_current_time)
-    exception_str = f"Cannot set current_time {t4404_current_time}, cashpurchase with greater time_int exists"
+    exception_str = f"Cannot set current_time {t4404_current_time}, bankpurchase with greater time_int exists"
     assert str(excinfo.value) == exception_str
 
     # THEN
@@ -211,11 +211,11 @@ def test_DealUnit_set_all_tranbook_SetsAttr():
     t77_tranunit = tranunit_shop(yao_str, sue_str, t77_t, t77_amount)
     t88_tranunit = tranunit_shop(sue_str, yao_str, t88_t, t88_amount)
     t99_tranunit = tranunit_shop(bob_str, sue_str, t99_t, t99_amount)
-    x_deal.set_cashpurchase(t55_tranunit)
-    x_deal.set_cashpurchase(t66_tranunit)
-    x_deal.set_cashpurchase(t77_tranunit)
-    x_deal.set_cashpurchase(t88_tranunit)
-    x_deal.set_cashpurchase(t99_tranunit)
+    x_deal.set_bankpurchase(t55_tranunit)
+    x_deal.set_bankpurchase(t66_tranunit)
+    x_deal.set_bankpurchase(t77_tranunit)
+    x_deal.set_bankpurchase(t88_tranunit)
+    x_deal.set_bankpurchase(t99_tranunit)
 
     x40000_time_int = 40000
     x70000_time_int = 70000
@@ -231,11 +231,11 @@ def test_DealUnit_set_all_tranbook_SetsAttr():
     sue_x70000_episode.set_net_turn(zia_str, zia_net_turn)
 
     assert x_deal._all_tranbook == tranbook_shop(x_deal.deal_idea)
-    assert x_deal.cashpurchase_exists(sue_str, bob_str, t55_t)
-    assert x_deal.cashpurchase_exists(yao_str, bob_str, t66_t)
-    assert x_deal.cashpurchase_exists(yao_str, sue_str, t77_t)
-    assert x_deal.cashpurchase_exists(sue_str, yao_str, t88_t)
-    assert x_deal.cashpurchase_exists(bob_str, sue_str, t99_t)
+    assert x_deal.bankpurchase_exists(sue_str, bob_str, t55_t)
+    assert x_deal.bankpurchase_exists(yao_str, bob_str, t66_t)
+    assert x_deal.bankpurchase_exists(yao_str, sue_str, t77_t)
+    assert x_deal.bankpurchase_exists(sue_str, yao_str, t88_t)
+    assert x_deal.bankpurchase_exists(bob_str, sue_str, t99_t)
 
     assert sue_x40000_episode.net_turn_exists(bob_str)
     assert sue_x70000_episode.net_turn_exists(zia_str)

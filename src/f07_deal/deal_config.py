@@ -15,8 +15,8 @@ def turnlogs_str() -> str:
     return "turnlogs"
 
 
-def cashbook_str() -> str:
-    return "cashbook"
+def bankbook_str() -> str:
+    return "bankbook"
 
 
 def amount_str() -> str:
@@ -59,7 +59,7 @@ def config_file_dir() -> str:
 # def dealunit_str()-> str: return "dealunit"
 # def deal_turnlog_str()-> str: return "deal_turnlog"
 # def deal_turn_episode_str()-> str: return "deal_turn_episode"
-# def deal_cashbook_str()-> str: return "deal_cashbook"
+# def deal_bankbook_str()-> str: return "deal_bankbook"
 # def deal_timeline_hour_str()-> str: return "deal_timeline_hour"
 # def deal_timeline_month_str()-> str: return "deal_timeline_month"
 # def deal_timeline_weekday_str()-> str: return "deal_timeline_weekday"
@@ -75,8 +75,8 @@ def deal_turn_episode_str() -> str:
     return "deal_turn_episode"
 
 
-def deal_cashbook_str() -> str:
-    return "deal_cashbook"
+def deal_bankbook_str() -> str:
+    return "deal_bankbook"
 
 
 def deal_timeline_hour_str() -> str:

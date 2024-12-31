@@ -69,7 +69,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario0_OneDealIdea(brick_env_setup_cle
         x_money_magnitude=445,
         allow_prev_to_current_time_entry=True,
     )
-    accord23_dealunit.add_cashpurchase(
+    accord23_dealunit.add_bankpurchase(
         x_owner_name="Zia",
         x_acct_name="Bob",
         x_time_int=777,
@@ -83,10 +83,10 @@ def test_deal_build_from_df_ReturnsObj_Scenario0_OneDealIdea(brick_env_setup_cle
     assert gen_dealunit.deals_dir == x_deals_dir
     assert gen_dealunit.timeline == accord23_dealunit.timeline
     assert gen_dealunit.turnlogs == accord23_dealunit.turnlogs
-    assert gen_dealunit.cashbook.tranunits == accord23_dealunit.cashbook.tranunits
+    assert gen_dealunit.bankbook.tranunits == accord23_dealunit.bankbook.tranunits
     print(f"{gen_dealunit.turnlogs=}")
     assert len(gen_dealunit.turnlogs) == 1
-    assert len(gen_dealunit.cashbook.tranunits) == 1
+    assert len(gen_dealunit.bankbook.tranunits) == 1
     assert gen_dealunit == accord23_dealunit
 
 
@@ -155,7 +155,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario1_TwoDealIdeas(
     assert creg_dealunit.deals_dir == x_deals_dir
     assert creg_dealunit.timeline == accord23_dealunit.timeline
     assert len(creg_dealunit.turnlogs) == 3
-    assert len(creg_dealunit.cashbook.tranunits) == 4
+    assert len(creg_dealunit.bankbook.tranunits) == 4
     # assert creg_dealunit == accord23_dealunit
 
     five_dealunit = x_dealunits.get("jeffy45")
@@ -165,7 +165,7 @@ def test_deal_build_from_df_ReturnsObj_Scenario1_TwoDealIdeas(
     assert five_dealunit.deal_idea == "jeffy45"
     assert five_dealunit.deals_dir == x_deals_dir
     assert len(five_dealunit.turnlogs) == 2
-    assert len(five_dealunit.cashbook.tranunits) == 1
+    assert len(five_dealunit.bankbook.tranunits) == 1
     jeffy45_timeline = jeffy45_dealunit.timeline
     assert five_dealunit.timeline.hours_config == jeffy45_timeline.hours_config
     assert five_dealunit.timeline.weekdays_config == jeffy45_timeline.weekdays_config
