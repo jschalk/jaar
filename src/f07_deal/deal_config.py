@@ -11,8 +11,8 @@ def current_time_str() -> str:
     return "current_time"
 
 
-def purviewlogs_str() -> str:
-    return "purviewlogs"
+def turnlogs_str() -> str:
+    return "turnlogs"
 
 
 def cashbook_str() -> str:
@@ -57,8 +57,8 @@ def config_file_dir() -> str:
 
 
 # def dealunit_str()-> str: return "dealunit"
-# def deal_purviewlog_str()-> str: return "deal_purviewlog"
-# def deal_purview_episode_str()-> str: return "deal_purview_episode"
+# def deal_turnlog_str()-> str: return "deal_turnlog"
+# def deal_turn_episode_str()-> str: return "deal_turn_episode"
 # def deal_cashbook_str()-> str: return "deal_cashbook"
 # def deal_timeline_hour_str()-> str: return "deal_timeline_hour"
 # def deal_timeline_month_str()-> str: return "deal_timeline_month"
@@ -67,12 +67,12 @@ def dealunit_str() -> str:
     return "dealunit"
 
 
-def deal_purviewlog_str() -> str:
-    return "deal_purviewlog"
+def deal_turnlog_str() -> str:
+    return "deal_turnlog"
 
 
-def deal_purview_episode_str() -> str:
-    return "deal_purview_episode"
+def deal_turn_episode_str() -> str:
+    return "deal_turn_episode"
 
 
 def deal_cashbook_str() -> str:

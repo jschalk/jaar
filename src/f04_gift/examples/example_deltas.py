@@ -32,7 +32,7 @@ def get_deltaunit_example1() -> DeltaUnit:
     x_atomunit.set_jvalue(x_attribute, 77)
     x_attribute = "debtor_respect"
     x_atomunit.set_jvalue(x_attribute, 88)
-    x_attribute = "purview_time_int"
+    x_attribute = "turn_time_int"
     x_atomunit.set_jvalue(x_attribute, 990000)
     sue_deltaunit.set_atomunit(x_atomunit)
 

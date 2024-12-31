@@ -184,7 +184,7 @@ def _get_pidgen_brick_format_filenames() -> set[str]:
 def _get_deal_brick_format_filenames() -> set[str]:
     brick_numbers = set(get_brick_category_ref().get("dealunit"))
     brick_numbers.update(set(get_brick_category_ref().get("deal_cashbook")))
-    brick_numbers.update(set(get_brick_category_ref().get("deal_purview_episode")))
+    brick_numbers.update(set(get_brick_category_ref().get("deal_turn_episode")))
     brick_numbers.update(set(get_brick_category_ref().get("deal_timeline_hour")))
     brick_numbers.update(set(get_brick_category_ref().get("deal_timeline_month")))
     brick_numbers.update(set(get_brick_category_ref().get("deal_timeline_weekday")))

@@ -20,27 +20,6 @@
             }
         }
     },
-    "deal_purview_episode": {
-        "jkeys": {
-            "acct_name": {
-                "jaar_type": "AcctName"
-            },
-            "deal_idea": {
-                "jaar_type": "IdeaUnit"
-            },
-            "owner_name": {
-                "jaar_type": "AcctName"
-            },
-            "time_int": {
-                "jaar_type": "TimeLinePoint"
-            }
-        },
-        "jvalues": {
-            "quota": {
-                "jaar_type": "int"
-            }
-        }
-    },
     "deal_timeline_hour": {
         "jkeys": {
             "deal_idea": {
@@ -86,17 +65,39 @@
             }
         }
     },
-    "dealunit": {
-        "jkeys": {},
+    "deal_turn_episode": {
+        "jkeys": {
+            "deal_idea": {
+                "jaar_type": "IdeaUnit"
+            },
+            "owner_name": {
+                "jaar_type": "AcctName"
+            },
+            "time_int": {
+                "jaar_type": "TimeLinePoint"
+            }
+        },
         "jvalues": {
+            "quota": {
+                "jaar_type": "int"
+            }
+        }
+    },
+    "dealunit": {
+        "jkeys": {
+            "deal_idea": {
+                "jaar_type": "IdeaUnit"
+            }
+        },
+        "jvalues": {
+            "bridge": {
+                "jaar_type": "str"
+            },
             "c400_number": {
                 "jaar_type": "int"
             },
             "current_time": {
                 "jaar_type": "int"
-            },
-            "deal_idea": {
-                "jaar_type": "IdeaUnit"
             },
             "fund_coin": {
                 "jaar_type": "float"
@@ -112,9 +113,6 @@
             },
             "timeline_idea": {
                 "jaar_type": "IdeaUnit"
-            },
-            "bridge": {
-                "jaar_type": "str"
             },
             "yr1_jan1_offset": {
                 "jaar_type": "int"

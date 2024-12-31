@@ -30,11 +30,11 @@ from src.f01_road.finance import (
     TimeLinePoint,
 )
 from src.f01_road.finance_tran import (
-    PurviewEpisode,
-    purviewepisode_shop,
-    PurviewLog,
-    purviewlog_shop,
-    get_purviewepisode_from_json,
+    TurnEpisode,
+    turnepisode_shop,
+    TurnLog,
+    turnlog_shop,
+    get_turnepisode_from_json,
 )
 from src.f01_road.road import (
     OwnerName,
@@ -93,7 +93,7 @@ class _save_valid_budpoint_Exception(Exception):
     pass
 
 
-class calc_timepoint_purview_Exception(Exception):
+class calc_timepoint_turn_Exception(Exception):
     pass
 
 
@@ -417,39 +417,39 @@ class HubUnit:
     def timepoint_dir(self, x_time_int: TimeLinePoint) -> str:
         return f_path(self.timeline_dir(), str(x_time_int))
 
-    def purview_file_name(self) -> str:
-        return "purview.json"
+    def turn_file_name(self) -> str:
+        return "turn.json"
 
-    def purview_file_path(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_int), self.purview_file_name())
+    def turn_file_path(self, x_time_int: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_time_int), self.turn_file_name())
 
-    def _save_valid_purview_file(self, x_purview: PurviewEpisode):
-        x_purview.calc_magnitude()
+    def _save_valid_turn_file(self, x_turn: TurnEpisode):
+        x_turn.calc_magnitude()
         save_file(
-            self.timepoint_dir(x_purview.time_int),
-            self.purview_file_name(),
-            x_purview.get_json(),
+            self.timepoint_dir(x_turn.time_int),
+            self.turn_file_name(),
+            x_turn.get_json(),
             replace=True,
         )
 
-    def purview_file_exists(self, x_time_int: TimeLinePoint) -> bool:
-        return os_path_exists(self.purview_file_path(x_time_int))
+    def turn_file_exists(self, x_time_int: TimeLinePoint) -> bool:
+        return os_path_exists(self.turn_file_path(x_time_int))
 
-    def get_purview_file(self, x_time_int: TimeLinePoint) -> PurviewEpisode:
-        if self.purview_file_exists(x_time_int):
-            x_json = open_file(self.timepoint_dir(x_time_int), self.purview_file_name())
-            return get_purviewepisode_from_json(x_json)
+    def get_turn_file(self, x_time_int: TimeLinePoint) -> TurnEpisode:
+        if self.turn_file_exists(x_time_int):
+            x_json = open_file(self.timepoint_dir(x_time_int), self.turn_file_name())
+            return get_turnepisode_from_json(x_json)
 
-    def delete_purview_file(self, x_time_int: TimeLinePoint):
-        delete_dir(self.purview_file_path(x_time_int))
+    def delete_turn_file(self, x_time_int: TimeLinePoint):
+        delete_dir(self.turn_file_path(x_time_int))
 
-    def get_purviewlog(self) -> PurviewLog:
-        x_purviewlog = purviewlog_shop(self.owner_name)
+    def get_turnlog(self) -> TurnLog:
+        x_turnlog = turnlog_shop(self.owner_name)
         x_dirs = self._get_timepoint_dirs()
-        for x_purview_folder_name in x_dirs:
-            x_purviewepisode = self.get_purview_file(x_purview_folder_name)
-            x_purviewlog.set_episode(x_purviewepisode)
-        return x_purviewlog
+        for x_turn_folder_name in x_dirs:
+            x_turnepisode = self.get_turn_file(x_turn_folder_name)
+            x_turnlog.set_episode(x_turnepisode)
+        return x_turnlog
 
     def _get_timepoint_dirs(self) -> list[str]:
         x_dict = get_dir_file_strs(
@@ -488,24 +488,24 @@ class HubUnit:
     def delete_budpoint_file(self, x_time_int: TimeLinePoint):
         delete_dir(self.budpoint_file_path(x_time_int))
 
-    def calc_timepoint_purview(self, x_time_int: TimeLinePoint):
+    def calc_timepoint_turn(self, x_time_int: TimeLinePoint):
         if self.budpoint_file_exists(x_time_int) is False:
-            exception_str = f"Cannot calculate timepoint {x_time_int} purviews without saved BudPoint file"
-            raise calc_timepoint_purview_Exception(exception_str)
+            exception_str = f"Cannot calculate timepoint {x_time_int} turns without saved BudPoint file"
+            raise calc_timepoint_turn_Exception(exception_str)
         x_budpoint = self.get_budpoint_file(x_time_int)
-        if self.purview_file_exists(x_time_int):
-            x_purviewepisode = self.get_purview_file(x_time_int)
-            x_budpoint.set_fund_pool(x_purviewepisode.quota)
+        if self.turn_file_exists(x_time_int):
+            x_turnepisode = self.get_turn_file(x_time_int)
+            x_budpoint.set_fund_pool(x_turnepisode.quota)
         else:
-            x_purviewepisode = purviewepisode_shop(x_time_int)
-        x_net_purviews = get_bud_settle_acct_net_dict(x_budpoint, True)
-        x_purviewepisode._net_purviews = x_net_purviews
+            x_turnepisode = turnepisode_shop(x_time_int)
+        x_net_turns = get_bud_settle_acct_net_dict(x_budpoint, True)
+        x_turnepisode._net_turns = x_net_turns
         self._save_valid_budpoint_file(x_time_int, x_budpoint)
-        self._save_valid_purview_file(x_purviewepisode)
+        self._save_valid_turn_file(x_turnepisode)
 
-    def calc_timepoint_purviews(self):
+    def calc_timepoint_turns(self):
         for x_timepoint in self._get_timepoint_dirs():
-            self.calc_timepoint_purview(x_timepoint)
+            self.calc_timepoint_turn(x_timepoint)
 
     def keep_dir(self) -> str:
         if self.keep_road is None:

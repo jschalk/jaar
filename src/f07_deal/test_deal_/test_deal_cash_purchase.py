@@ -75,14 +75,14 @@ def test_DealUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThan
     assert str(excinfo.value) == exception_str
 
 
-def test_DealUnit_set_cashpurchase_RaisesErrorWhenPurviewEpisodeHas_time_int():
+def test_DealUnit_set_cashpurchase_RaisesErrorWhenTurnEpisodeHas_time_int():
     # ESTABLISH
     x_deal = dealunit_shop(current_time=0)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_money_magnitude = 100
-    x_deal.add_purviewepisode("yao", t55_t, t55_money_magnitude)
+    x_deal.add_turnepisode("yao", t55_t, t55_money_magnitude)
     t55_amount = 37
     t6606_current_time = 6606
     x_deal.current_time = t6606_current_time
@@ -219,16 +219,16 @@ def test_DealUnit_set_all_tranbook_SetsAttr():
 
     x40000_time_int = 40000
     x70000_time_int = 70000
-    x_deal.add_purviewepisode(sue_str, x40000_time_int, 1)
-    x_deal.add_purviewepisode(sue_str, x70000_time_int, 1)
+    x_deal.add_turnepisode(sue_str, x40000_time_int, 1)
+    x_deal.add_turnepisode(sue_str, x70000_time_int, 1)
     bob_str = "Bob"
     zia_str = "Zia"
-    zia_net_purview = 887
-    bob_net_purview = 445
-    sue_x40000_episode = x_deal.get_purviewlog(sue_str).get_episode(x40000_time_int)
-    sue_x70000_episode = x_deal.get_purviewlog(sue_str).get_episode(x70000_time_int)
-    sue_x40000_episode.set_net_purview(bob_str, bob_net_purview)
-    sue_x70000_episode.set_net_purview(zia_str, zia_net_purview)
+    zia_net_turn = 887
+    bob_net_turn = 445
+    sue_x40000_episode = x_deal.get_turnlog(sue_str).get_episode(x40000_time_int)
+    sue_x70000_episode = x_deal.get_turnlog(sue_str).get_episode(x70000_time_int)
+    sue_x40000_episode.set_net_turn(bob_str, bob_net_turn)
+    sue_x70000_episode.set_net_turn(zia_str, zia_net_turn)
 
     assert x_deal._all_tranbook == tranbook_shop(x_deal.deal_idea)
     assert x_deal.cashpurchase_exists(sue_str, bob_str, t55_t)
@@ -237,9 +237,9 @@ def test_DealUnit_set_all_tranbook_SetsAttr():
     assert x_deal.cashpurchase_exists(sue_str, yao_str, t88_t)
     assert x_deal.cashpurchase_exists(bob_str, sue_str, t99_t)
 
-    assert sue_x40000_episode.net_purview_exists(bob_str)
-    assert sue_x70000_episode.net_purview_exists(zia_str)
-    # x_deal.add_purviewepisode()
+    assert sue_x40000_episode.net_turn_exists(bob_str)
+    assert sue_x70000_episode.net_turn_exists(zia_str)
+    # x_deal.add_turnepisode()
 
     # WHEN
     x_deal.set_all_tranbook()

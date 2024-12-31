@@ -631,18 +631,18 @@ def test_TranBook_get_dict_ReturnsObj():
     assert tranunits_dict == all_tranunits
 
 
-# def test_tranbook_shop_ReturnsObjWith_net_purviews():
+# def test_tranbook_shop_ReturnsObjWith_net_turns():
 #     # ESTABLISH
 #     x_time_int = 4
 #     x_amount = 55
-#     x_net_purviews = {"Sue": -4}
+#     x_net_turns = {"Sue": -4}
 #     x_magnitude = 677
 
 #     # WHEN
 #     x_tranbook = tranbook_shop(
 #         x_time_int=x_time_int,
 #         x_amount=x_amount,
-#         net_purviews=x_net_purviews,
+#         net_turns=x_net_turns,
 #         x_magnitude=x_magnitude,
 #     )
 
@@ -651,63 +651,63 @@ def test_TranBook_get_dict_ReturnsObj():
 #     assert x_tranbook.time_int == x_time_int
 #     assert x_tranbook.amount == x_amount
 #     assert x_tranbook._magnitude == 677
-#     assert x_tranbook._net_purviews == x_net_purviews
+#     assert x_tranbook._net_turns == x_net_turns
 
 
-# def test_TranBook_set_net_purview_SetsAttr():
+# def test_TranBook_set_net_turn_SetsAttr():
 #     # ESTABLISH
 #     yao_tranbook = tranbook_shop("yao", 33)
-#     assert yao_tranbook._net_purviews == {}
+#     assert yao_tranbook._net_turns == {}
 
 #     # WHEN
 #     sue_str = "Sue"
-#     sue_purview = -44
-#     yao_tranbook.set_net_purview(sue_str, sue_purview)
+#     sue_turn = -44
+#     yao_tranbook.set_net_turn(sue_str, sue_turn)
 
 #     # THEN
-#     assert yao_tranbook._net_purviews != {}
-#     assert yao_tranbook._net_purviews.get(sue_str) == sue_purview
+#     assert yao_tranbook._net_turns != {}
+#     assert yao_tranbook._net_turns.get(sue_str) == sue_turn
 
 
-# def test_TranBook_net_purview_exists_ReturnsObj():
+# def test_TranBook_net_turn_exists_ReturnsObj():
 #     # ESTABLISH
 #     yao_tranbook = tranbook_shop("yao", 33)
 #     sue_str = "Sue"
-#     sue_purview = -44
-#     assert yao_tranbook.net_purview_exists(sue_str) is False
+#     sue_turn = -44
+#     assert yao_tranbook.net_turn_exists(sue_str) is False
 
 #     # WHEN
-#     yao_tranbook.set_net_purview(sue_str, sue_purview)
+#     yao_tranbook.set_net_turn(sue_str, sue_turn)
 
 #     # THEN
-#     assert yao_tranbook.net_purview_exists(sue_str)
+#     assert yao_tranbook.net_turn_exists(sue_str)
 
 
-# def test_TranBook_get_net_purview_ReturnsObj():
+# def test_TranBook_get_net_turn_ReturnsObj():
 #     # ESTABLISH
 #     yao_tranbook = tranbook_shop("yao", 33)
 #     sue_str = "Sue"
-#     sue_purview = -44
-#     yao_tranbook.set_net_purview(sue_str, sue_purview)
+#     sue_turn = -44
+#     yao_tranbook.set_net_turn(sue_str, sue_turn)
 
 #     # WHEN / THEN
-#     assert yao_tranbook.get_net_purview(sue_str)
-#     assert yao_tranbook.get_net_purview(sue_str) == sue_purview
+#     assert yao_tranbook.get_net_turn(sue_str)
+#     assert yao_tranbook.get_net_turn(sue_str) == sue_turn
 
 
-# def test_TranBook_del_net_purview_SetsAttr():
+# def test_TranBook_del_net_turn_SetsAttr():
 #     # ESTABLISH
 #     yao_tranbook = tranbook_shop("yao", 33)
 #     sue_str = "Sue"
-#     sue_purview = -44
-#     yao_tranbook.set_net_purview(sue_str, sue_purview)
-#     assert yao_tranbook.net_purview_exists(sue_str)
+#     sue_turn = -44
+#     yao_tranbook.set_net_turn(sue_str, sue_turn)
+#     assert yao_tranbook.net_turn_exists(sue_str)
 
 #     # WHEN
-#     yao_tranbook.del_net_purview(sue_str)
+#     yao_tranbook.del_net_turn(sue_str)
 
 #     # THEN
-#     assert yao_tranbook.net_purview_exists(sue_str) is False
+#     assert yao_tranbook.net_turn_exists(sue_str) is False
 
 
 # def test_TranBook_get_dict_ReturnsObj():
@@ -739,9 +739,9 @@ def test_TranBook_get_dict_ReturnsObj():
 # def test_TranBook_calc_magnitude_SetsAttr_Scenario1():
 #     # ESTABLISH
 #     x_time_int = 4
-#     x_net_purviews = {"Sue": -4, "Yao": 2, "Zia": 2}
+#     x_net_turns = {"Sue": -4, "Yao": 2, "Zia": 2}
 
-#     x_tranbook = tranbook_shop(x_time_int, net_purviews=x_net_purviews)
+#     x_tranbook = tranbook_shop(x_time_int, net_turns=x_net_turns)
 #     assert x_tranbook._magnitude == 0
 
 #     # WHEN
@@ -754,9 +754,9 @@ def test_TranBook_get_dict_ReturnsObj():
 # def test_TranBook_calc_magnitude_SetsAttr_Scenario2():
 #     # ESTABLISH
 #     x_time_int = 4
-#     x_net_purviews = {"Bob": -13, "Sue": -7, "Yao": 18, "Zia": 2}
+#     x_net_turns = {"Bob": -13, "Sue": -7, "Yao": 18, "Zia": 2}
 
-#     x_tranbook = tranbook_shop(x_time_int, net_purviews=x_net_purviews)
+#     x_tranbook = tranbook_shop(x_time_int, net_turns=x_net_turns)
 #     assert x_tranbook._magnitude == 0
 
 #     # WHEN
@@ -769,26 +769,26 @@ def test_TranBook_get_dict_ReturnsObj():
 # def test_TranBook_calc_magnitude_SetsAttr_Scenario3_RaisesError():
 #     # ESTABLISH
 #     x_time_int = 4
-#     bob_purview = -13
-#     sue_purview = -3
-#     yao_purview = 100
-#     x_net_purviews = {"Bob": bob_purview, "Sue": sue_purview, "Yao": yao_purview}
-#     x_tranbook = tranbook_shop(x_time_int, net_purviews=x_net_purviews)
+#     bob_turn = -13
+#     sue_turn = -3
+#     yao_turn = 100
+#     x_net_turns = {"Bob": bob_turn, "Sue": sue_turn, "Yao": yao_turn}
+#     x_tranbook = tranbook_shop(x_time_int, net_turns=x_net_turns)
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
 #         x_tranbook.calc_magnitude()
-#     exception_str = f"magnitude cannot be calculated: debt_purview={bob_purview+sue_purview}, cred_purview={yao_purview}"
+#     exception_str = f"magnitude cannot be calculated: debt_turn={bob_turn+sue_turn}, cred_turn={yao_turn}"
 #     assert str(excinfo.value) == exception_str
 
 
-# def test_TranBook_get_dict_ReturnsObjWith_net_purviews():
+# def test_TranBook_get_dict_ReturnsObjWith_net_turns():
 #     # ESTABLISH
 #     x_time_int = 4
 #     x_amount = 55
-#     x_net_purviews = {"Sue": -4}
+#     x_net_turns = {"Sue": -4}
 #     x_magnitude = 67
-#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_purviews)
+#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_turns)
 #     x_tranbook._magnitude = 67
 
 #     # WHEN
@@ -799,7 +799,7 @@ def test_TranBook_get_dict_ReturnsObj():
 #         "time_int": x_time_int,
 #         "amount": x_amount,
 #         "magnitude": x_magnitude,
-#         "net_purviews": x_net_purviews,
+#         "net_turns": x_net_turns,
 #     }
 
 
@@ -807,8 +807,8 @@ def test_TranBook_get_dict_ReturnsObj():
 #     # ESTABLISH
 #     x_time_int = 4
 #     x_amount = 55
-#     x_net_purviews = {"Sue": -77}
-#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_purviews)
+#     x_net_turns = {"Sue": -77}
+#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_turns)
 #     x_tranbook._magnitude = 67
 
 #     # WHEN
@@ -817,7 +817,7 @@ def test_TranBook_get_dict_ReturnsObj():
 #     # THEN
 #     static_x_json = """{
 #   "magnitude": 67,
-#   "net_purviews": {
+#   "net_turns": {
 #     "Sue": -77
 #   },
 #   "amount": 55,
@@ -851,8 +851,8 @@ def test_TranBook_get_dict_ReturnsObj():
 #     x_time_int = 4
 #     x_amount = 55
 #     x_magnitude = 65
-#     x_net_purviews = {"Sue": -77}
-#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_purviews)
+#     x_net_turns = {"Sue": -77}
+#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_turns)
 #     x_tranbook._magnitude = x_magnitude
 #     x_dict = x_tranbook.get_dict()
 
@@ -864,7 +864,7 @@ def test_TranBook_get_dict_ReturnsObj():
 #     assert x_tranbook.time_int == x_time_int
 #     assert x_tranbook.amount == x_amount
 #     assert x_tranbook._magnitude == x_magnitude
-#     assert x_tranbook._net_purviews == x_net_purviews
+#     assert x_tranbook._net_turns == x_net_turns
 #     assert x_tranbook == x_tranbook
 
 
@@ -872,8 +872,8 @@ def test_TranBook_get_dict_ReturnsObj():
 #     # ESTABLISH
 #     x_time_int = 4
 #     x_amount = 55
-#     x_net_purviews = {"Sue": -57}
-#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_purviews)
+#     x_net_turns = {"Sue": -57}
+#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_turns)
 #     x_json = x_tranbook.get_json()
 
 #     # WHEN
@@ -883,5 +883,5 @@ def test_TranBook_get_dict_ReturnsObj():
 #     assert x_tranbook
 #     assert x_tranbook.time_int == x_time_int
 #     assert x_tranbook.amount == x_amount
-#     assert x_tranbook._net_purviews == x_net_purviews
+#     assert x_tranbook._net_turns == x_net_turns
 #     assert x_tranbook == x_tranbook

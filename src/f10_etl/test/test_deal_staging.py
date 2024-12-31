@@ -59,14 +59,14 @@ def test_DealPrimeFilePaths_Exists():
 
     # THEN
     x_dealunit_path = create_path(x_dir, "dealunit.xlsx")
-    x_deal_purview_path = create_path(x_dir, "deal_purview_episode.xlsx")
+    x_deal_turn_path = create_path(x_dir, "deal_turn_episode.xlsx")
     x_deal_cashbook_path = create_path(x_dir, "deal_cashbook.xlsx")
     x_deal_hour_path = create_path(x_dir, "deal_timeline_hour.xlsx")
     x_deal_month_path = create_path(x_dir, "deal_timeline_month.xlsx")
     x_deal_weekday_path = create_path(x_dir, "deal_timeline_weekday.xlsx")
     assert x_dealprimefilepaths
     assert x_dealprimefilepaths.dealunit_path == x_dealunit_path
-    assert x_dealprimefilepaths.deal_purview_path == x_deal_purview_path
+    assert x_dealprimefilepaths.deal_turn_path == x_deal_turn_path
     assert x_dealprimefilepaths.deal_cashbook_path == x_deal_cashbook_path
     assert x_dealprimefilepaths.deal_hour_path == x_deal_hour_path
     assert x_dealprimefilepaths.deal_month_path == x_deal_month_path
@@ -94,7 +94,7 @@ def test_DealPrimeColumns_Exists():
         yr1_jan1_offset_str(),
         "note",
     ]
-    assert x_dealprimecolumns.deal_purview_staging_columns == [
+    assert x_dealprimecolumns.deal_turn_staging_columns == [
         "source_br",
         face_name_str(),
         event_int_str(),
@@ -156,7 +156,7 @@ def test_DealPrimeColumns_Exists():
         timeline_idea_str(),
         yr1_jan1_offset_str(),
     ]
-    assert x_dealprimecolumns.deal_purview_agg_columns == [
+    assert x_dealprimecolumns.deal_turn_agg_columns == [
         deal_idea_str(),
         owner_name_str(),
         acct_name_str(),
@@ -193,7 +193,7 @@ def test_create_init_deal_prime_files_CreatesFiles_staging(env_dir_setup_cleanup
     staging_str = "staging"
     xp = DealPrimeFilePaths(x_dir)
     assert sheet_exists(xp.dealunit_path, staging_str) is False
-    assert sheet_exists(xp.deal_purview_path, staging_str) is False
+    assert sheet_exists(xp.deal_turn_path, staging_str) is False
     assert sheet_exists(xp.deal_cashbook_path, staging_str) is False
     assert sheet_exists(xp.deal_hour_path, staging_str) is False
     assert sheet_exists(xp.deal_month_path, staging_str) is False
@@ -204,7 +204,7 @@ def test_create_init_deal_prime_files_CreatesFiles_staging(env_dir_setup_cleanup
 
     # THEN
     assert sheet_exists(xp.dealunit_path, staging_str)
-    assert sheet_exists(xp.deal_purview_path, staging_str)
+    assert sheet_exists(xp.deal_turn_path, staging_str)
     assert sheet_exists(xp.deal_cashbook_path, staging_str)
     assert sheet_exists(xp.deal_hour_path, staging_str)
     assert sheet_exists(xp.deal_month_path, staging_str)
@@ -222,7 +222,7 @@ def test_create_init_deal_prime_files_HasCorrectColumns_staging(env_dir_setup_cl
     staging_str = "staging"
     xp = DealPrimeFilePaths(x_dir)
     dealunit_df = pandas_read_excel(xp.dealunit_path, sheet_name=staging_str)
-    deal_purview_df = pandas_read_excel(xp.deal_purview_path, sheet_name=staging_str)
+    deal_turn_df = pandas_read_excel(xp.deal_turn_path, sheet_name=staging_str)
     deal_cashbook_df = pandas_read_excel(xp.deal_cashbook_path, sheet_name=staging_str)
     deal_hour_df = pandas_read_excel(xp.deal_hour_path, sheet_name=staging_str)
     deal_month_df = pandas_read_excel(xp.deal_month_path, sheet_name=staging_str)
@@ -231,7 +231,7 @@ def test_create_init_deal_prime_files_HasCorrectColumns_staging(env_dir_setup_cl
     expected_cols = DealPrimeColumns()
     print(f"{list(dealunit_df.columns)=}")
     assert list(dealunit_df.columns) == expected_cols.dealunit_staging_columns
-    assert list(deal_purview_df.columns) == expected_cols.deal_purview_staging_columns
+    assert list(deal_turn_df.columns) == expected_cols.deal_turn_staging_columns
     assert list(deal_cashbook_df.columns) == expected_cols.deal_cashbook_staging_columns
     assert list(deal_hour_df.columns) == expected_cols.deal_hour_staging_columns
     assert list(deal_month_df.columns) == expected_cols.deal_month_staging_columns
@@ -244,7 +244,7 @@ def test_create_init_deal_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
     agg_str = "agg"
     xp = DealPrimeFilePaths(x_dir)
     assert sheet_exists(xp.dealunit_path, agg_str) is False
-    assert sheet_exists(xp.deal_purview_path, agg_str) is False
+    assert sheet_exists(xp.deal_turn_path, agg_str) is False
     assert sheet_exists(xp.deal_cashbook_path, agg_str) is False
     assert sheet_exists(xp.deal_hour_path, agg_str) is False
     assert sheet_exists(xp.deal_month_path, agg_str) is False
@@ -255,7 +255,7 @@ def test_create_init_deal_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
 
     # THEN
     assert sheet_exists(xp.dealunit_path, agg_str)
-    assert sheet_exists(xp.deal_purview_path, agg_str)
+    assert sheet_exists(xp.deal_turn_path, agg_str)
     assert sheet_exists(xp.deal_cashbook_path, agg_str)
     assert sheet_exists(xp.deal_hour_path, agg_str)
     assert sheet_exists(xp.deal_month_path, agg_str)
@@ -273,7 +273,7 @@ def test_create_init_deal_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanu
     agg_str = "agg"
     xp = DealPrimeFilePaths(x_dir)
     dealunit_df = pandas_read_excel(xp.dealunit_path, sheet_name=agg_str)
-    deal_purview_df = pandas_read_excel(xp.deal_purview_path, sheet_name=agg_str)
+    deal_turn_df = pandas_read_excel(xp.deal_turn_path, sheet_name=agg_str)
     deal_cashbook_df = pandas_read_excel(xp.deal_cashbook_path, sheet_name=agg_str)
     deal_hour_df = pandas_read_excel(xp.deal_hour_path, sheet_name=agg_str)
     deal_month_df = pandas_read_excel(xp.deal_month_path, sheet_name=agg_str)
@@ -282,7 +282,7 @@ def test_create_init_deal_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanu
     expected_cols = DealPrimeColumns()
     print(f"{list(dealunit_df.columns)=}")
     assert list(dealunit_df.columns) == expected_cols.dealunit_agg_columns
-    assert list(deal_purview_df.columns) == expected_cols.deal_purview_agg_columns
+    assert list(deal_turn_df.columns) == expected_cols.deal_turn_agg_columns
     assert list(deal_cashbook_df.columns) == expected_cols.deal_cashbook_agg_columns
     assert list(deal_hour_df.columns) == expected_cols.deal_hour_agg_columns
     assert list(deal_month_df.columns) == expected_cols.deal_month_agg_columns
@@ -531,7 +531,97 @@ def test_create_dealunit_jsons_from_prime_files_Scenario4_deal_timeline_month(
     assert accord56_dealunit.timeline.months_config == x_timelineunit.months_config
 
 
-# def test_create_dealunit_jsons_from_prime_files_Scenario3_deal_purview_episode(
+def test_create_dealunit_jsons_from_prime_files_Scenario5_deal_timeline_hour(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    deals_dir = create_path(get_test_etl_dir(), "deals")
+    create_init_deal_prime_files(deals_dir)
+    xp = DealPrimeFilePaths(deals_dir)
+    xc = DealPrimeColumns()
+    agg_str = "agg"
+    accord56_deal_idea = "accord56"
+    accord56_deal_idea
+    a56_0hr = "0hour"
+    a56_5hr = "5hour"
+    a56_8hr = "8hour"
+    accord56_deal_row = [accord56_deal_idea, "", "", "", "", "", "", "", "", ""]
+    dealunit_df = DataFrame([accord56_deal_row], columns=xc.dealunit_agg_columns)
+    a56_0hour_row = [accord56_deal_idea, a56_0hr, 60]
+    a56_5hour_row = [accord56_deal_idea, a56_5hr, 500]
+    a56_8hour_row = [accord56_deal_idea, a56_8hr, 1440]
+    a56_hour_rows = [a56_0hour_row, a56_5hour_row, a56_8hour_row]
+    a56_hour_df = DataFrame(a56_hour_rows, columns=xc.deal_hour_agg_columns)
+    print(f"{a56_hour_df=}")
+    upsert_sheet(xp.dealunit_path, agg_str, dealunit_df)
+    upsert_sheet(xp.deal_hour_path, agg_str, a56_hour_df)
+    deal_jsons_dir = create_path(deals_dir, "deal_jsons")
+    accord56_json_path = create_path(deal_jsons_dir, "accord56.json")
+    assert os_path_exists(accord56_json_path) is False
+
+    # WHEN
+    create_dealunit_jsons_from_prime_files(deals_dir=deals_dir)
+
+    # THEN
+    assert os_path_exists(accord56_json_path)
+    accord56_dealunit = deal_get_from_json(open_file(accord56_json_path))
+    x_timelineunit = timelineunit_shop(create_timeline_config())
+    expected_dealunit = dealunit_shop(accord56_deal_idea, deals_dir, x_timelineunit)
+    expected_hour_config = [[a56_0hr, 60], [a56_5hr, 500], [a56_8hr, 1440]]
+    expected_dealunit.timeline.hours_config = expected_hour_config
+    print(f"{expected_dealunit.timeline.hours_config=}")
+    assert accord56_dealunit.timeline.hours_config == expected_hour_config
+    assert accord56_dealunit.timeline.hours_config == x_timelineunit.hours_config
+
+
+# def test_create_dealunit_jsons_from_prime_files_Scenario3_deal_cashbook(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     deals_dir = create_path(get_test_etl_dir(), "deals")
+#     create_init_deal_prime_files(deals_dir)
+#     xp = DealPrimeFilePaths(deals_dir)
+#     xc = DealPrimeColumns()
+#     agg_str = "agg"
+#     accord56_deal_idea = "accord56"
+#     sue_str = "Sue"
+#     bob_str = "Bob"
+#     t3 = 3
+#     t7 = 7
+#     amount3 = 555
+#     amount7 = 777
+#     accord56_deal_row = [accord56_deal_idea, "", "", "", "", "", "", "", "", ""]
+#     dealunit_df = DataFrame([accord56_deal_row], columns=xc.dealunit_agg_columns)
+#     a56_cashbook_t3 = [accord56_deal_idea, sue_str, bob_str, t3, amount3]
+#     a56_cashbook_t7 = [accord56_deal_idea, sue_str, bob_str, t7, amount7]
+#     a56_cashbook_rows = [a56_cashbook_t3, a56_cashbook_t7]
+#     deal_cashbook_df = DataFrame(
+#         a56_cashbook_rows, columns=xc.deal_cashbook_agg_columns
+#     )
+#     print(f"{deal_cashbook_df=}")
+#     upsert_sheet(xp.dealunit_path, agg_str, dealunit_df)
+#     upsert_sheet(xp.deal_cashbook_path, agg_str, deal_cashbook_df)
+#     deal_jsons_dir = create_path(deals_dir, "deal_jsons")
+#     accord56_json_path = create_path(deal_jsons_dir, "accord56.json")
+#     assert os_path_exists(accord56_json_path) is False
+
+#     # WHEN
+#     create_dealunit_jsons_from_prime_files(deals_dir=deals_dir)
+
+#     # THEN
+#     assert os_path_exists(accord56_json_path)
+#     accord56_dealunit = deal_get_from_json(open_file(accord56_json_path))
+#     x_timelineunit = timelineunit_shop(create_timeline_config())
+#     expected_dealunit = dealunit_shop(accord56_deal_idea, deals_dir, x_timelineunit)
+#     expected_dealunit.add_cashpurchase(sue_str, bob_str, t3, amount3)
+#     expected_dealunit.add_cashpurchase(sue_str, bob_str, t7, amount7)
+#     print(f"{expected_dealunit.cashbook=}")
+#     print(f"{expected_dealunit=}")
+#     assert accord56_dealunit.cashbook == expected_dealunit.cashbook
+#     assert accord56_dealunit == expected_dealunit
+
+
+# def test_create_dealunit_jsons_from_prime_files_Scenario3_deal_turn_episode(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -550,13 +640,13 @@ def test_create_dealunit_jsons_from_prime_files_Scenario4_deal_timeline_month(
 #     quota7 = 777
 #     accord56_deal_row = [accord56_deal_idea, "", "", "", "", "", "", "", "", ""]
 #     dealunit_df = DataFrame([accord56_deal_row], columns=xc.dealunit_agg_columns)
-#     a56_purview_t3 = [accord56_deal_idea, sue_str, bob_str, t3, quota3]
-#     a56_purview_t7 = [accord56_deal_idea, sue_str, bob_str, t7, quota7]
-#     a56_purview_rows = [a56_purview_t3, a56_purview_t7]
-#     deal_purview_df = DataFrame(a56_purview_rows, columns=xc.deal_purview_agg_columns)
-#     print(f"{deal_purview_df=}")
+#     a56_turn_t3 = [accord56_deal_idea, sue_str, bob_str, t3, quota3]
+#     a56_turn_t7 = [accord56_deal_idea, sue_str, bob_str, t7, quota7]
+#     a56_turn_rows = [a56_turn_t3, a56_turn_t7]
+#     deal_turn_df = DataFrame(a56_turn_rows, columns=xc.deal_turn_agg_columns)
+#     print(f"{deal_turn_df=}")
 #     upsert_sheet(xp.dealunit_path, agg_str, dealunit_df)
-#     upsert_sheet(xp.deal_purview_path, agg_str, deal_purview_df)
+#     upsert_sheet(xp.deal_turn_path, agg_str, deal_turn_df)
 #     deal_jsons_dir = create_path(deals_dir, "deal_jsons")
 #     accord56_json_path = create_path(deal_jsons_dir, "accord56.json")
 #     assert os_path_exists(accord56_json_path) is False
@@ -569,11 +659,11 @@ def test_create_dealunit_jsons_from_prime_files_Scenario4_deal_timeline_month(
 #     accord56_dealunit = deal_get_from_json(open_file(accord56_json_path))
 #     x_timelineunit = timelineunit_shop(create_timeline_config())
 #     expected_dealunit = dealunit_shop(accord56_deal_idea, deals_dir, x_timelineunit)
-#     expected_dealunit.add_purviewepisode(sue_str, t3, quota3)
-#     expected_dealunit.add_purviewepisode(sue_str, t7, quota7)
-#     print(f"{expected_dealunit.purviewlogs=}")
+#     expected_dealunit.add_turnepisode(sue_str, t3, quota3)
+#     expected_dealunit.add_turnepisode(sue_str, t7, quota7)
+#     print(f"{expected_dealunit.turnlogs=}")
 #     print(f"{expected_dealunit=}")
-#     assert accord56_dealunit.purviewlogs == expected_dealunit.purviewlogs
+#     assert accord56_dealunit.turnlogs == expected_dealunit.turnlogs
 #     assert accord56_dealunit == expected_dealunit
 #     assert 1 == 2
 

@@ -52,7 +52,7 @@ def test_AtomRow_exists():
     assert x_atomrow.pick is None
     assert x_atomrow.pledge is None
     assert x_atomrow.problem_bool is None
-    assert x_atomrow.purview_time_int is None
+    assert x_atomrow.turn_time_int is None
     assert x_atomrow.road is None
     assert x_atomrow.stop_want is None
     assert x_atomrow.take_force is None
