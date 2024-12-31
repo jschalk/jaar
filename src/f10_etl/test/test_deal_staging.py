@@ -466,10 +466,10 @@ def test_create_dealunit_jsons_from_prime_files_Scenario3_deal_timeline_weekday(
     a56_weekday_t3 = [accord56_deal_idea, monday_str, 3]
     a56_weekday_t7 = [accord56_deal_idea, tuesday_str, 4]
     a56_weekday_rows = [a56_weekday_t3, a56_weekday_t7]
-    deal_weekday_df = DataFrame(a56_weekday_rows, columns=xc.deal_weekday_agg_columns)
-    print(f"{deal_weekday_df=}")
+    a56_weekday_df = DataFrame(a56_weekday_rows, columns=xc.deal_weekday_agg_columns)
+    print(f"{a56_weekday_df=}")
     upsert_sheet(xp.dealunit_path, agg_str, dealunit_df)
-    upsert_sheet(xp.deal_weekday_path, agg_str, deal_weekday_df)
+    upsert_sheet(xp.deal_weekday_path, agg_str, a56_weekday_df)
     deal_jsons_dir = create_path(deals_dir, "deal_jsons")
     accord56_json_path = create_path(deal_jsons_dir, "accord56.json")
     assert os_path_exists(accord56_json_path) is False
@@ -486,6 +486,49 @@ def test_create_dealunit_jsons_from_prime_files_Scenario3_deal_timeline_weekday(
     print(f"{expected_dealunit.timeline.weekdays_config=}")
     assert accord56_dealunit.timeline.weekdays_config == [monday_str, tuesday_str]
     assert accord56_dealunit.timeline.weekdays_config == x_timelineunit.weekdays_config
+
+
+def test_create_dealunit_jsons_from_prime_files_Scenario4_deal_timeline_month(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    deals_dir = create_path(get_test_etl_dir(), "deals")
+    create_init_deal_prime_files(deals_dir)
+    xp = DealPrimeFilePaths(deals_dir)
+    xc = DealPrimeColumns()
+    agg_str = "agg"
+    accord56_deal_idea = "accord56"
+    accord56_deal_idea
+    july_str = "July"
+    june_str = "June"
+    accord56_deal_row = [accord56_deal_idea, "", "", "", "", "", "", "", "", ""]
+    dealunit_df = DataFrame([accord56_deal_row], columns=xc.dealunit_agg_columns)
+    a56_june = [accord56_deal_idea, june_str, 150]
+    a56_july = [accord56_deal_idea, july_str, 365]
+    a56_month_rows = [a56_july, a56_june]
+    a56_month_df = DataFrame(a56_month_rows, columns=xc.deal_month_agg_columns)
+    print(f"{a56_month_df=}")
+    upsert_sheet(xp.dealunit_path, agg_str, dealunit_df)
+    upsert_sheet(xp.deal_month_path, agg_str, a56_month_df)
+    deal_jsons_dir = create_path(deals_dir, "deal_jsons")
+    accord56_json_path = create_path(deal_jsons_dir, "accord56.json")
+    assert os_path_exists(accord56_json_path) is False
+
+    # WHEN
+    create_dealunit_jsons_from_prime_files(deals_dir=deals_dir)
+
+    # THEN
+    assert os_path_exists(accord56_json_path)
+    accord56_dealunit = deal_get_from_json(open_file(accord56_json_path))
+    x_timelineunit = timelineunit_shop(create_timeline_config())
+    expected_dealunit = dealunit_shop(accord56_deal_idea, deals_dir, x_timelineunit)
+    expected_dealunit.timeline.months_config = [[june_str, 150], [july_str, 365]]
+    print(f"{expected_dealunit.timeline.months_config=}")
+    assert accord56_dealunit.timeline.months_config == [
+        [june_str, 150],
+        [july_str, 365],
+    ]
+    assert accord56_dealunit.timeline.months_config == x_timelineunit.months_config
 
 
 # def test_create_dealunit_jsons_from_prime_files_Scenario3_deal_purview_episode(

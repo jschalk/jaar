@@ -1,6 +1,10 @@
 from src.f00_instrument.file import create_path, save_file
 from src.f00_instrument.dict_toolbox import get_sorted_list_of_dict_keys
-from src.f03_chrono.chrono import create_timeline_config, timelineunit_shop
+from src.f03_chrono.chrono import (
+    create_timeline_config,
+    timelineunit_shop,
+    validate_timeline_config,
+)
 from src.f07_deal.deal import dealunit_shop
 from src.f09_brick.pandas_tool import (
     upsert_sheet,
@@ -184,6 +188,13 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
             monthday_distortion=None,
             yr1_jan1_offset=if_nan_return_None(deal_attrs.get("yr1_jan1_offset")),
         )
+        if month_dict := deals_month_dict.get(x_deal_idea):
+            x_month_list = get_sorted_list_of_dict_keys(
+                month_dict, "cumlative_day", True
+            )
+            timeline_config["months_config"] = x_month_list
+        if validate_timeline_config(timeline_config) is False:
+            raise ValueError(f"Invalid timeline_config: {timeline_config=}")
         dealunit = dealunit_shop(
             deal_idea=x_deal_idea,
             deals_dir=deals_dir,

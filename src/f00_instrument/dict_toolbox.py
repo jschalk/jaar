@@ -373,6 +373,9 @@ def get_str_in_sub_dict(x_str: str, x_dict: dict[str, str]) -> dict[str, str]:
 
 
 def get_sorted_list_of_dict_keys(
-    x_dict: dict[any, dict], nested_value_key: str
+    x_dict: dict[any, dict], nested_value_key: str, include_sort_values: bool = False
 ) -> list[str]:
-    return sorted(x_dict.keys(), key=lambda k: x_dict[k][nested_value_key])
+    sorted_keys = sorted(x_dict.keys(), key=lambda k: x_dict[k][nested_value_key])
+    if include_sort_values:
+        sorted_keys = [[key, x_dict[key][nested_value_key]] for key in sorted_keys]
+    return sorted_keys

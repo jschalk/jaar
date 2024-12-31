@@ -873,7 +873,7 @@ def test_get_sorted_list_of_dict_keys_ReturnsObj_WhenEmptyDict():
     assert get_sorted_list_of_dict_keys({}, "age") == []
 
 
-def test_get_sorted_list_of_dict_keys_ReturnsObj():
+def test_get_sorted_list_of_dict_keys_ReturnsObj_WhenValues():
     # ESTABLISH
     x_dict = {
         "Sue": {"name": "Sue", "age": 55, "city": "NYC"},
@@ -886,3 +886,18 @@ def test_get_sorted_list_of_dict_keys_ReturnsObj():
 
     # THEN
     assert x_list == ["Bob", "Yao", "Sue"]
+
+
+def test_get_sorted_list_of_dict_keys_ReturnsObj_WithValues():
+    # ESTABLISH
+    x_dict = {
+        "Sue": {"name": "Sue", "age": 55, "city": "NYC"},
+        "Bob": {"name": "Bob", "age": 30, "city": "Dallas"},
+        "Yao": {"name": "Yao", "age": 35, "city": "Paris"},
+    }
+
+    # WHEN
+    x_list = get_sorted_list_of_dict_keys(x_dict, "age", include_sort_values=True)
+
+    # THEN
+    assert x_list == [["Bob", 30], ["Yao", 35], ["Sue", 55]]
