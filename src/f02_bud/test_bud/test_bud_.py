@@ -34,8 +34,8 @@ def test_BudUnit_Exists():
     assert x_bud.respect_bit is None
     assert x_bud.penny is None
     assert x_bud.purview_time_int is None
-    assert x_bud._last_gift_id is None
-    assert x_bud._originunit is None
+    assert x_bud.last_gift_id is None
+    assert x_bud.originunit is None
     # calculated attr
     assert x_bud._item_dict is None
     assert x_bud._keep_dict is None
@@ -89,9 +89,9 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud.credor_respect == validate_respect_num()
     assert x_bud.debtor_respect == validate_respect_num()
     assert not x_bud.purview_time_int
-    assert not x_bud._last_gift_id
+    assert not x_bud.last_gift_id
+    assert x_bud.originunit == originunit_shop()
     # calculated attr
-    assert x_bud._originunit == originunit_shop()
     assert x_bud._item_dict == {}
     assert x_bud._keep_dict == {}
     assert x_bud._healers_dict == {}
@@ -210,14 +210,14 @@ def test_BudUnit_make_road_ReturnsCorrectObj():
 def test_BudUnit_set_last_gift_id_SetsAttrCorrectly():
     # ESTABLISH
     sue_bud = budunit_shop("Sue", "Texas")
-    assert sue_bud._last_gift_id is None
+    assert sue_bud.last_gift_id is None
 
     # WHEN
     x_last_gift_id = 89
     sue_bud.set_last_gift_id(x_last_gift_id)
 
     # THEN
-    assert sue_bud._last_gift_id == x_last_gift_id
+    assert sue_bud.last_gift_id == x_last_gift_id
 
 
 def test_BudUnit_set_last_gift_id_RaisesError():
@@ -242,13 +242,13 @@ def test_BudUnit_del_last_gift_id_SetsAttrCorrectly():
     sue_bud = budunit_shop("Sue", "Texas")
     old_last_gift_id = 89
     sue_bud.set_last_gift_id(old_last_gift_id)
-    assert sue_bud._last_gift_id is not None
+    assert sue_bud.last_gift_id is not None
 
     # WHEN
     sue_bud.del_last_gift_id()
 
     # WHEN
-    assert sue_bud._last_gift_id is None
+    assert sue_bud.last_gift_id is None
 
 
 def test_BudUnit_set_fund_pool_CorrectlySetsAttr():

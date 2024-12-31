@@ -29,6 +29,7 @@ from src.f00_instrument.dict_toolbox import (
     str_in_all_dict_values,
     get_str_in_sub_dict,
     get_str_in_all_sub_dict,
+    get_sorted_list_of_dict_keys,
 )
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -865,3 +866,38 @@ def test_get_str_not_in_sub_dict_ReturnsObj():
     assert get_str_in_all_sub_dict("Sue", suezia_sueandzia_dict) == {"SueAndZia": "Bob"}
     suezia_bob_dict = {"SueZia": "SueZia", "Bob": "SueAndZia"}
     assert get_str_in_all_sub_dict("Sue", suezia_bob_dict) == {"Bob": "SueAndZia"}
+
+
+def test_get_sorted_list_of_dict_keys_ReturnsObj_WhenEmptyDict():
+    # ESTABLISH / WHEN / THEN
+    assert get_sorted_list_of_dict_keys({}, "age") == []
+
+
+def test_get_sorted_list_of_dict_keys_ReturnsObj_WhenValues():
+    # ESTABLISH
+    x_dict = {
+        "Sue": {"name": "Sue", "age": 55, "city": "NYC"},
+        "Bob": {"name": "Bob", "age": 30, "city": "Dallas"},
+        "Yao": {"name": "Yao", "age": 35, "city": "Paris"},
+    }
+
+    # WHEN
+    x_list = get_sorted_list_of_dict_keys(x_dict, "age")
+
+    # THEN
+    assert x_list == ["Bob", "Yao", "Sue"]
+
+
+def test_get_sorted_list_of_dict_keys_ReturnsObj_WithValues():
+    # ESTABLISH
+    x_dict = {
+        "Sue": {"name": "Sue", "age": 55, "city": "NYC"},
+        "Bob": {"name": "Bob", "age": 30, "city": "Dallas"},
+        "Yao": {"name": "Yao", "age": 35, "city": "Paris"},
+    }
+
+    # WHEN
+    x_list = get_sorted_list_of_dict_keys(x_dict, "age", include_sort_values=True)
+
+    # THEN
+    assert x_list == [["Bob", 30], ["Yao", 35], ["Sue", 55]]

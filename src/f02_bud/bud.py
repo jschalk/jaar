@@ -119,20 +119,20 @@ class _gogo_calc_stop_calc_Exception(Exception):
 class BudUnit:
     deal_idea: DealIdea = None
     owner_name: OwnerName = None
-    _last_gift_id: int = None
-    tally: float = None
     accts: dict[AcctName, AcctUnit] = None
     itemroot: ItemUnit = None
-    max_tree_traverse: int = None
-    bridge: str = None
+    purview_time_int: TimeLinePoint = None
+    tally: float = None
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
     penny: PennyNum = None
-    respect_bit: BitNum = None
     credor_respect: RespectNum = None
     debtor_respect: RespectNum = None
-    purview_time_int: TimeLinePoint = None
-    _originunit: OriginUnit = None  # In job buds this shows source
+    respect_bit: BitNum = None
+    bridge: str = None
+    max_tree_traverse: int = None
+    last_gift_id: int = None
+    originunit: OriginUnit = None  # In job buds this shows source
     # settle_bud Calculated field begin
     _item_dict: dict[RoadUnit, ItemUnit] = None
     _keep_dict: dict[RoadUnit, ItemUnit] = None
@@ -150,13 +150,13 @@ class BudUnit:
     # settle_bud Calculated field end
 
     def del_last_gift_id(self):
-        self._last_gift_id = None
+        self.last_gift_id = None
 
     def set_last_gift_id(self, x_last_gift_id: int):
-        if self._last_gift_id is not None and x_last_gift_id < self._last_gift_id:
-            exception_str = f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self._last_gift_id}."
+        if self.last_gift_id is not None and x_last_gift_id < self.last_gift_id:
+            exception_str = f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self.last_gift_id}."
             raise _last_gift_idException(exception_str)
-        self._last_gift_id = x_last_gift_id
+        self.last_gift_id = x_last_gift_id
 
     def set_purview_time_int(self, x_purview_time_int: TimeLinePoint):
         self.purview_time_int = x_purview_time_int
@@ -877,7 +877,7 @@ class BudUnit:
 
     def get_credit_ledger_debtit_ledger(
         self,
-    ) -> tuple[dict[str:float], dict[str:float]]:
+    ) -> tuple[dict[str, float], dict[str, float]]:
         credit_ledger = {}
         debtit_ledger = {}
         for x_acctunit in self.accts.values():
@@ -1357,8 +1357,8 @@ class BudUnit:
 
     def get_dict(self) -> dict[str, str]:
         x_dict = {
-            "_accts": self.get_acctunits_dict(),
-            "_originunit": self._originunit.get_dict(),
+            "accts": self.get_acctunits_dict(),
+            "originunit": self.originunit.get_dict(),
             "tally": self.tally,
             "fund_pool": self.fund_pool,
             "fund_coin": self.fund_coin,
@@ -1367,15 +1367,15 @@ class BudUnit:
             "owner_name": self.owner_name,
             "deal_idea": self.deal_idea,
             "max_tree_traverse": self.max_tree_traverse,
-            "_bridge": self.bridge,
-            "_itemroot": self.itemroot.get_dict(),
+            "bridge": self.bridge,
+            "itemroot": self.itemroot.get_dict(),
         }
         if self.credor_respect is not None:
             x_dict["credor_respect"] = self.credor_respect
         if self.debtor_respect is not None:
             x_dict["debtor_respect"] = self.debtor_respect
-        if self._last_gift_id is not None:
-            x_dict["_last_gift_id"] = self._last_gift_id
+        if self.last_gift_id is not None:
+            x_dict["last_gift_id"] = self.last_gift_id
 
         return x_dict
 
@@ -1444,7 +1444,7 @@ def budunit_shop(
     )
     x_bud.set_max_tree_traverse(3)
     x_bud._rational = False
-    x_bud._originunit = originunit_shop()
+    x_bud.originunit = originunit_shop()
     return x_bud
 
 
@@ -1459,7 +1459,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
     x_bud.deal_idea = obj_from_bud_dict(bud_dict, "deal_idea")
     x_bud.itemroot._idee = obj_from_bud_dict(bud_dict, "deal_idea")
-    bud_bridge = obj_from_bud_dict(bud_dict, "_bridge")
+    bud_bridge = obj_from_bud_dict(bud_dict, "bridge")
     x_bud.bridge = default_bridge_if_None(bud_bridge)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
     x_bud.fund_coin = default_fund_coin_if_None(
@@ -1471,18 +1471,18 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.penny = default_penny_if_None(obj_from_bud_dict(bud_dict, "penny"))
     x_bud.credor_respect = obj_from_bud_dict(bud_dict, "credor_respect")
     x_bud.debtor_respect = obj_from_bud_dict(bud_dict, "debtor_respect")
-    x_bud._last_gift_id = obj_from_bud_dict(bud_dict, "_last_gift_id")
+    x_bud.last_gift_id = obj_from_bud_dict(bud_dict, "last_gift_id")
     x_bridge = x_bud.bridge
-    x_accts = obj_from_bud_dict(bud_dict, "_accts", x_bridge).values()
+    x_accts = obj_from_bud_dict(bud_dict, "accts", x_bridge).values()
     for x_acctunit in x_accts:
         x_bud.set_acctunit(x_acctunit)
-    x_bud._originunit = obj_from_bud_dict(bud_dict, "_originunit")
+    x_bud.originunit = obj_from_bud_dict(bud_dict, "originunit")
     create_itemroot_from_bud_dict(x_bud, bud_dict)
     return x_bud
 
 
 def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
-    itemroot_dict = bud_dict.get("_itemroot")
+    itemroot_dict = bud_dict.get("itemroot")
     x_bud.itemroot = itemunit_shop(
         _root=True,
         _idee=x_bud.deal_idea,
@@ -1504,7 +1504,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         factunits=get_obj_from_item_dict(itemroot_dict, "factunits"),
         awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
-        _bridge=get_obj_from_item_dict(itemroot_dict, "_bridge"),
+        _bridge=get_obj_from_item_dict(itemroot_dict, "bridge"),
         _bud_deal_idea=x_bud.deal_idea,
         _fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
@@ -1543,7 +1543,7 @@ def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
             reasonunits=get_obj_from_item_dict(item_dict, "reasonunits"),
             teamunit=get_obj_from_item_dict(item_dict, "teamunit"),
             healerlink=get_obj_from_item_dict(item_dict, "healerlink"),
-            _originunit=get_obj_from_item_dict(item_dict, "_originunit"),
+            _originunit=get_obj_from_item_dict(item_dict, "originunit"),
             awardlinks=get_obj_from_item_dict(item_dict, "awardlinks"),
             factunits=get_obj_from_item_dict(item_dict, "factunits"),
             _is_expanded=get_obj_from_item_dict(item_dict, "_is_expanded"),
@@ -1554,13 +1554,13 @@ def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
 def obj_from_bud_dict(
     x_dict: dict[str, dict], dict_key: str, _bridge: str = None
 ) -> any:
-    if dict_key == "_originunit":
+    if dict_key == "originunit":
         return (
             originunit_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
             else originunit_shop()
         )
-    elif dict_key == "_accts":
+    elif dict_key == "accts":
         return acctunits_get_from_dict(x_dict[dict_key], _bridge)
     elif dict_key == "_max_tree_traverse":
         return (

@@ -892,7 +892,7 @@ class ItemUnit:
         if self.awardlinks not in [{}, None]:
             x_dict["awardlinks"] = self.get_awardlinks_dict()
         if self._originunit not in [None, originunit_shop()]:
-            x_dict["_originunit"] = self.get_originunit_dict()
+            x_dict["originunit"] = self.get_originunit_dict()
         if self.begin is not None:
             x_dict["begin"] = self.begin
         if self.close is not None:
@@ -1073,7 +1073,7 @@ def get_obj_from_item_dict(x_dict: dict[str, dict], dict_key: str) -> any:
             if x_dict.get(dict_key) is not None
             else healerlink_shop()
         )
-    elif dict_key == "_originunit":
+    elif dict_key == "originunit":
         return (
             originunit_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None

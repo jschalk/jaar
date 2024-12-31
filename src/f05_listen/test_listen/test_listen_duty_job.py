@@ -319,8 +319,8 @@ def get_example_yao_voice_with_3_healers():
 #     yao_final.settle_bud()
 #     assert yao_final.accts.keys() == yao_voice0.accts.keys()
 #     assert yao_final.get_acct(yao_str)._irrational_debtit_belief == 0
-#     yao_final_accts = yao_final.get_dict().get("_accts")
-#     yao_voice0_accts = yao_voice0.get_dict().get("_accts")
+#     yao_final_accts = yao_final.get_dict().get("accts")
+#     yao_voice0_accts = yao_voice0.get_dict().get("accts")
 #     yao_final_bob = yao_final_accts.get("Bob")
 #     yao_voice0_bob = yao_voice0_accts.get("Bob")
 #     print(f"{yao_final_bob=}")
@@ -328,7 +328,7 @@ def get_example_yao_voice_with_3_healers():
 #     assert yao_final_bob == yao_voice0_bob
 #     assert yao_final_accts.keys() == yao_voice0_accts.keys()
 #     assert yao_final_accts == yao_voice0_accts
-#     assert len(yao_final.get_dict().get("_accts")) == 3
+#     assert len(yao_final.get_dict().get("accts")) == 3
 #     assert len(yao_final._item_dict) == 10
 #     print(f"{yao_final._item_dict.keys()=}")
 #     print(f"{yao_final.get_factunits_dict().keys()=}")
@@ -396,8 +396,8 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     yao_final.settle_bud()
     assert yao_final.accts.keys() == yao_voice0.accts.keys()
     assert yao_final.get_acct(yao_str)._irrational_debtit_belief == 0
-    yao_final_accts = yao_final.get_dict().get("_accts")
-    yao_voice0_accts = yao_voice0.get_dict().get("_accts")
+    yao_final_accts = yao_final.get_dict().get("accts")
+    yao_voice0_accts = yao_voice0.get_dict().get("accts")
     yao_final_bob = yao_final_accts.get("Bob")
     yao_voice0_bob = yao_voice0_accts.get("Bob")
     print(f"{yao_final_bob=}")
@@ -405,7 +405,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert yao_final_bob == yao_voice0_bob
     assert yao_final_accts.keys() == yao_voice0_accts.keys()
     assert yao_final_accts == yao_voice0_accts
-    assert len(yao_final.get_dict().get("_accts")) == 3
+    assert len(yao_final.get_dict().get("accts")) == 3
     assert len(yao_final._item_dict) == 4
     print(f"{yao_final._item_dict.keys()=}")
     print(f"{yao_final.get_factunits_dict().keys()=}")

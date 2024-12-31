@@ -194,7 +194,8 @@ def test_is_timeline_config_valid_ReturnsObj_CheckObjsRepeat():
     assert validate_timeline_config(creg_config)
 
 
-def test_create_timeline_config_ReturnsObj():
+# TODO change create_timeline_config so that any missing parts are given default hreg config
+def test_create_timeline_config_ReturnsObj_AllParameters():
     # ESTABLISH
     five_c400_count = 25
     five_yr1_jan1_offset = 1683037440 + 440640  # 3200 years + JanLen + FebLen
@@ -234,6 +235,7 @@ def test_create_timeline_config_ReturnsObj():
         weekday_list=five_weekday_list,
         months_list=five_months_list,
         yr1_jan1_offset=five_yr1_jan1_offset,
+        monthday_distortion=0,
     )
 
     # THEN
@@ -261,10 +263,87 @@ def test_create_timeline_config_ReturnsObj():
     # five_file_name = f"timeline_config_{five_str()}.json"
     # five_file_str = get_json_from_dict(five_dict)
     # save_file(chrono_examples_dir(), five_file_name, five_file_str)
-    x_five_config = get_example_timeline_config(five_str())
-    assert validate_timeline_config(x_five_config)
-    assert x_five_config.get(hours_config_str()) == x_hours_config
-    assert x_five_config == five_dict
+    expected_config = get_example_timeline_config(five_str())
+    assert validate_timeline_config(expected_config)
+    assert expected_config.get(hours_config_str()) == x_hours_config
+    assert expected_config == five_dict
+
+
+def test_create_timeline_config_ReturnsObj_NoParameters():
+    # ESTABLISH
+    h_c400_number = 7
+    h_hours_config = [
+        ["0-12am", 60],
+        ["1-1am", 120],
+        ["2-2am", 180],
+        ["3-3am", 240],
+        ["4-4am", 300],
+        ["5-5am", 360],
+        ["6-6am", 420],
+        ["7-7am", 480],
+        ["8-8am", 540],
+        ["9-9am", 600],
+        ["10-10am", 660],
+        ["11-11am", 720],
+        ["12-12pm", 780],
+        ["13-1pm", 840],
+        ["14-2pm", 900],
+        ["15-3pm", 960],
+        ["16-4pm", 1020],
+        ["17-5pm", 1080],
+        ["18-6pm", 1140],
+        ["19-7pm", 1200],
+        ["20-8pm", 1260],
+        ["21-9pm", 1320],
+        ["22-10pm", 1380],
+        ["23-11pm", 1440],
+    ]
+    h_months_config = [
+        ["March", 31],
+        ["April", 61],
+        ["May", 92],
+        ["June", 122],
+        ["July", 153],
+        ["August", 184],
+        ["September", 214],
+        ["October", 245],
+        ["November", 275],
+        ["December", 306],
+        ["January", 337],
+        ["February", 365],
+    ]
+    h_monthday_distortion = 1
+    h_timeline_idea = "creg"
+    h_weekdays_config = [
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+        "Monday",
+        "Tuesday",
+    ]
+    h_yr1_jan1_offset = 440640
+
+    # WHEN
+    generated_dict = create_timeline_config()
+
+    # THEN
+    print(f"{generated_dict=}")
+    print(f"{set(generated_dict.keys())=}")
+    print(f"{timeline_idea_str()=}")
+    print(f"{generated_dict.get(timeline_idea_str())=}")
+    assert generated_dict.get(c400_number_str()) == h_c400_number
+
+    assert generated_dict.get(timeline_idea_str()) == h_timeline_idea
+    assert generated_dict.get(c400_number_str()) == h_c400_number
+    assert generated_dict.get(hours_config_str()) == h_hours_config
+    assert generated_dict.get(months_config_str()) == h_months_config
+    assert generated_dict.get(monthday_distortion_str()) == h_monthday_distortion
+    assert generated_dict.get(timeline_idea_str()) == h_timeline_idea
+    assert generated_dict.get(weekdays_config_str()) == h_weekdays_config
+    assert generated_dict.get(yr1_jan1_offset_str()) == h_yr1_jan1_offset
+    assert validate_timeline_config(generated_dict)
 
 
 def test_get_year_road_ReturnsObj():

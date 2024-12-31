@@ -7,6 +7,7 @@ from src.f00_instrument.file import (
     open_file,
 )
 from src.f00_instrument.db_toolbox import get_grouping_with_all_values_equal_sql_query
+from src.f00_instrument.dict_toolbox import set_in_nested_dict
 from src.f08_pidgin.map import MapCore
 from src.f08_pidgin.pidgin import (
     PidginUnit,
@@ -325,3 +326,14 @@ def if_nan_return_None(x_obj: any) -> any:
     # sourcery skip: equality-identity, remove-redundant-if
     # If the value is NaN, the comparison value != value
     return None if x_obj != x_obj else x_obj
+
+
+def dataframe_to_dict(x_df: DataFrame, key_columns: list[str]) -> dict:
+    df_dict = x_df.to_dict(orient="records")
+    x_dict = {}
+    for x_value in df_dict:
+        if x_value.get("id"):
+            x_value.pop("id")
+        nested_keys = [x_value[key_column] for key_column in key_columns]
+        set_in_nested_dict(x_dict, nested_keys, x_value)
+    return x_dict

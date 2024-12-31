@@ -182,7 +182,7 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["awardlinks"] == x1_awardlinks
     assert casa_dict["teamunit"] == sue_teamunit.get_dict()
     assert casa_dict["healerlink"] == yao_healerlink.get_dict()
-    assert casa_dict["_originunit"] == casa_item.get_originunit_dict()
+    assert casa_dict["originunit"] == casa_item.get_originunit_dict()
     assert casa_dict["mass"] == casa_item.mass
     assert casa_dict["_idee"] == casa_item._idee
     assert casa_dict["_uid"] == casa_item._uid
@@ -253,7 +253,7 @@ def test_ItemUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     assert casa_dict.get("factunits") is not None
     assert casa_dict.get("awardlinks") is not None
     assert casa_dict.get("teamunit") is not None
-    assert casa_dict.get("_originunit") is not None
+    assert casa_dict.get("originunit") is not None
     assert casa_dict.get("_kids") is not None
 
 
@@ -279,5 +279,5 @@ def test_ItemUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     assert casa_dict.get("awardlinks") is None
     assert casa_dict.get("teamunit") is None
     assert casa_dict.get("healerlink") is None
-    assert casa_dict.get("_originunit") is None
+    assert casa_dict.get("originunit") is None
     assert casa_dict.get("_kids") is None
