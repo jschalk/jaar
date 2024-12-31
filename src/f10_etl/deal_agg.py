@@ -1,4 +1,5 @@
 from src.f00_instrument.file import create_path, save_file
+from src.f00_instrument.dict_toolbox import get_sorted_list_of_dict_keys
 from src.f03_chrono.chrono import create_timeline_config, timelineunit_shop
 from src.f07_deal.deal import dealunit_shop
 from src.f09_brick.pandas_tool import (
@@ -159,27 +160,32 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
     deal_hour_df = pandas_read_excel(xp.deal_hour_path, "agg")
     deal_month_df = pandas_read_excel(xp.deal_month_path, "agg")
     deal_weekday_df = pandas_read_excel(xp.deal_weekday_path, "agg")
-    dealunit_dict = dataframe_to_dict(dealunit_df, "deal_idea")
-    deal_purview_dict = dataframe_to_dict(deal_purview_df, "deal_idea")
-    deal_cashbook_dict = dataframe_to_dict(deal_cashbook_df, "deal_idea")
-    deal_hour_dict = dataframe_to_dict(deal_hour_df, "deal_idea")
-    deal_month_dict = dataframe_to_dict(deal_month_df, "deal_idea")
-    deal_weekday_dict = dataframe_to_dict(deal_weekday_df, "deal_idea")
+    dealunits_dict = dataframe_to_dict(dealunit_df, ["deal_idea"])
+    deals_purview_dict = dataframe_to_dict(deal_purview_df, ["deal_idea"])
+    deals_cashbook_dict = dataframe_to_dict(deal_cashbook_df, ["deal_idea"])
+    deals_hour_dict = dataframe_to_dict(deal_hour_df, ["deal_idea", "hour_idea"])
+    deals_month_dict = dataframe_to_dict(deal_month_df, ["deal_idea", "month_idea"])
+    weekday_keys = ["deal_idea", "weekday_idea"]
+    deals_weekday_dict = dataframe_to_dict(deal_weekday_df, weekday_keys)
     dealunits = {}
-    for deal_attrs in dealunit_dict.values():
+    for deal_attrs in dealunits_dict.values():
+        x_deal_idea = deal_attrs.get("deal_idea")
+        if weekday_dict := deals_weekday_dict.get(x_deal_idea):
+            x_weekday_list = get_sorted_list_of_dict_keys(weekday_dict, "weekday_order")
+        else:
+            x_weekday_list = None
         timeline_config = create_timeline_config(
             timeline_idea=if_nan_return_None(deal_attrs.get("timeline_idea")),
             c400_count=if_nan_return_None(deal_attrs.get("c400_number")),
             hour_length=None,
             month_length=None,
-            weekday_list=None,
+            weekday_list=x_weekday_list,
             months_list=None,
             monthday_distortion=None,
             yr1_jan1_offset=if_nan_return_None(deal_attrs.get("yr1_jan1_offset")),
         )
-        print(f"{deals_dir=}")
         dealunit = dealunit_shop(
-            deal_idea=deal_attrs.get("deal_idea"),
+            deal_idea=x_deal_idea,
             deals_dir=deals_dir,
             timeline=timelineunit_shop(timeline_config),
             current_time=if_nan_return_None(deal_attrs.get("current_time")),
