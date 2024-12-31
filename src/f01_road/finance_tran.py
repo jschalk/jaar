@@ -183,46 +183,49 @@ def tranbook_shop(
     )
 
 
-def get_tranbook_from_dict():
-    pass
-
-
-def get_tranbook_from_json():
-    pass
+def get_tranbook_from_dict(x_dict: dict) -> TranBook:
+    x_tranunits = x_dict.get("tranunits")
+    new_tranunits = {}
+    for x_owner_name, x_acct_dict in x_tranunits.items():
+        for x_acct_name, x_time_int_dict in x_acct_dict.items():
+            for x_time_int, x_amount in x_time_int_dict.items():
+                x_key_list = [x_owner_name, x_acct_name, int(x_time_int)]
+                set_in_nested_dict(new_tranunits, x_key_list, x_amount)
+    return tranbook_shop(x_dict.get("deal_idea"), new_tranunits)
 
 
 @dataclass
-class TurnEpisode:
+class BankEpisode:
     time_int: TimeLinePoint = None
     quota: FundNum = None
     _magnitude: FundNum = None
-    _net_turns: dict[AcctName, FundNum] = None
+    _net_banks: dict[AcctName, FundNum] = None
 
-    def set_net_turn(self, x_acct_name: AcctName, net_turn: FundNum):
-        self._net_turns[x_acct_name] = net_turn
+    def set_net_bank(self, x_acct_name: AcctName, net_bank: FundNum):
+        self._net_banks[x_acct_name] = net_bank
 
-    def net_turn_exists(self, x_acct_name: AcctName) -> bool:
-        return self._net_turns.get(x_acct_name) != None
+    def net_bank_exists(self, x_acct_name: AcctName) -> bool:
+        return self._net_banks.get(x_acct_name) != None
 
-    def get_net_turn(self, x_acct_name: AcctName) -> FundNum:
-        return self._net_turns.get(x_acct_name)
+    def get_net_bank(self, x_acct_name: AcctName) -> FundNum:
+        return self._net_banks.get(x_acct_name)
 
-    def del_net_turn(self, x_acct_name: AcctName):
-        self._net_turns.pop(x_acct_name)
+    def del_net_bank(self, x_acct_name: AcctName):
+        self._net_banks.pop(x_acct_name)
 
     def calc_magnitude(self):
-        net_turns = self._net_turns.values()
-        x_cred_sum = sum(net_turn for net_turn in net_turns if net_turn > 0)
-        x_debt_sum = sum(net_turn for net_turn in net_turns if net_turn < 0)
+        net_banks = self._net_banks.values()
+        x_cred_sum = sum(net_bank for net_bank in net_banks if net_bank > 0)
+        x_debt_sum = sum(net_bank for net_bank in net_banks if net_bank < 0)
         if x_cred_sum + x_debt_sum != 0:
-            exception_str = f"magnitude cannot be calculated: debt_turn={x_debt_sum}, cred_turn={x_cred_sum}"
+            exception_str = f"magnitude cannot be calculated: debt_bank={x_debt_sum}, cred_bank={x_cred_sum}"
             raise calc_magnitudeException(exception_str)
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
         x_dict = {"time_int": self.time_int, "quota": self.quota}
-        if self._net_turns:
-            x_dict["net_turns"] = self._net_turns
+        if self._net_banks:
+            x_dict["net_banks"] = self._net_banks
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
         return x_dict
@@ -231,42 +234,42 @@ class TurnEpisode:
         return get_json_from_dict(self.get_dict())
 
 
-def turnepisode_shop(
+def bankepisode_shop(
     x_time_int: TimeLinePoint,
     x_quota: FundNum = None,
-    net_turns: dict[AcctName, FundNum] = None,
+    net_banks: dict[AcctName, FundNum] = None,
     x_magnitude: FundNum = None,
-) -> TurnEpisode:
+) -> BankEpisode:
     if x_quota is None:
         x_quota = default_fund_pool()
 
-    return TurnEpisode(
+    return BankEpisode(
         time_int=x_time_int,
         quota=x_quota,
-        _net_turns=get_empty_dict_if_None(net_turns),
+        _net_banks=get_empty_dict_if_None(net_banks),
         _magnitude=get_0_if_None(x_magnitude),
     )
 
 
 @dataclass
-class TurnLog:
+class BankLog:
     owner_name: OwnerName = None
-    episodes: dict[TimeLinePoint, TurnEpisode] = None
-    _sum_turnepisode_quota: FundNum = None
-    _sum_acct_turns: int = None
+    episodes: dict[TimeLinePoint, BankEpisode] = None
+    _sum_bankepisode_quota: FundNum = None
+    _sum_acct_banks: int = None
     _time_int_min: TimeLinePoint = None
     _time_int_max: TimeLinePoint = None
 
-    def set_episode(self, x_episode: TurnEpisode):
+    def set_episode(self, x_episode: BankEpisode):
         self.episodes[x_episode.time_int] = x_episode
 
     def add_episode(self, x_time_int: TimeLinePoint, x_quota: FundNum):
-        self.set_episode(turnepisode_shop(x_time_int, x_quota))
+        self.set_episode(bankepisode_shop(x_time_int, x_quota))
 
     def episode_exists(self, x_time_int: TimeLinePoint) -> bool:
         return self.episodes.get(x_time_int) != None
 
-    def get_episode(self, x_time_int: TimeLinePoint) -> TurnEpisode:
+    def get_episode(self, x_time_int: TimeLinePoint) -> BankEpisode:
         return self.episodes.get(x_time_int)
 
     def del_episode(self, x_time_int: TimeLinePoint):
@@ -296,7 +299,7 @@ class TurnLog:
     def get_tranbook(self, deal_idea: DealIdea) -> TranBook:
         x_tranbook = tranbook_shop(deal_idea)
         for x_time_int, x_episode in self.episodes.items():
-            for dst_acct_name, x_quota in x_episode._net_turns.items():
+            for dst_acct_name, x_quota in x_episode._net_banks.items():
                 x_tranbook.add_tranunit(
                     x_owner_name=self.owner_name,
                     x_acct_name=dst_acct_name,
@@ -306,34 +309,34 @@ class TurnLog:
         return x_tranbook
 
 
-def turnlog_shop(owner_name: OwnerName) -> TurnLog:
-    return TurnLog(owner_name=owner_name, episodes={}, _sum_acct_turns={})
+def banklog_shop(owner_name: OwnerName) -> BankLog:
+    return BankLog(owner_name=owner_name, episodes={}, _sum_acct_banks={})
 
 
-def get_turnepisode_from_dict(x_dict: dict) -> TurnEpisode:
+def get_bankepisode_from_dict(x_dict: dict) -> BankEpisode:
     x_time_int = x_dict.get("time_int")
     x_quota = x_dict.get("quota")
-    x_net_turns = x_dict.get("net_turns")
+    x_net_banks = x_dict.get("net_banks")
     x_magnitude = x_dict.get("magnitude")
-    return turnepisode_shop(x_time_int, x_quota, x_net_turns, x_magnitude)
+    return bankepisode_shop(x_time_int, x_quota, x_net_banks, x_magnitude)
 
 
-def get_turnepisode_from_json(x_json: str) -> TurnEpisode:
-    return get_turnepisode_from_dict(get_dict_from_json(x_json))
+def get_bankepisode_from_json(x_json: str) -> BankEpisode:
+    return get_bankepisode_from_dict(get_dict_from_json(x_json))
 
 
-def get_turnlog_from_dict(x_dict: dict) -> TurnLog:
+def get_banklog_from_dict(x_dict: dict) -> BankLog:
     x_owner_name = x_dict.get("owner_name")
-    x_turnlog = turnlog_shop(x_owner_name)
-    x_turnlog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
-    return x_turnlog
+    x_banklog = banklog_shop(x_owner_name)
+    x_banklog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
+    return x_banklog
 
 
-def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, TurnEpisode]:
+def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, BankEpisode]:
     x_dict = {}
     for x_episode_dict in episodes_dict.values():
-        x_turn_episode = get_turnepisode_from_dict(x_episode_dict)
-        x_dict[x_turn_episode.time_int] = x_turn_episode
+        x_bank_episode = get_bankepisode_from_dict(x_episode_dict)
+        x_dict[x_bank_episode.time_int] = x_bank_episode
     return x_dict
 
 

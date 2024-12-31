@@ -19,6 +19,7 @@ from src.f01_road.finance import (
     TimeLinePoint,
     FundNum,
 )
+from src.f01_road.finance_tran import get_tranbook_from_dict
 from src.f01_road.road import (
     default_bridge_if_None,
     OwnerName,
@@ -29,9 +30,9 @@ from src.f01_road.road import (
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f01_road.finance_tran import (
-    TurnLog,
-    turnlog_shop,
-    get_turnlog_from_dict,
+    BankLog,
+    banklog_shop,
+    get_banklog_from_dict,
     TranUnit,
     TranBook,
     tranbook_shop,
@@ -50,7 +51,7 @@ from sqlite3 import connect as sqlite3_connect, Connection
 from copy import deepcopy as copy_deepcopy
 
 
-class turnepisode_Exception(Exception):
+class bankepisode_Exception(Exception):
     pass
 
 
@@ -78,7 +79,7 @@ class DealUnit:
     deals_dir: str = None
     timeline: TimeLineUnit = None
     current_time: int = None
-    turnlogs: dict[OwnerName, TurnLog] = None
+    banklogs: dict[OwnerName, BankLog] = None
     cashbook: TranBook = None
     bridge: str = None
     fund_coin: FundCoin = None
@@ -255,20 +256,20 @@ class DealUnit:
     def get_final_file_bud(self, owner_name: OwnerName) -> BudUnit:
         return self._get_hubunit(owner_name).get_final_bud()
 
-    # turnlogs
-    def set_turnlog(self, x_turnlog: TurnLog):
-        self.turnlogs[x_turnlog.owner_name] = x_turnlog
+    # banklogs
+    def set_banklog(self, x_banklog: BankLog):
+        self.banklogs[x_banklog.owner_name] = x_banklog
 
-    def turnlog_exists(self, x_owner_name: OwnerName) -> bool:
-        return self.turnlogs.get(x_owner_name) != None
+    def banklog_exists(self, x_owner_name: OwnerName) -> bool:
+        return self.banklogs.get(x_owner_name) != None
 
-    def get_turnlog(self, x_owner_name: OwnerName) -> TurnLog:
-        return self.turnlogs.get(x_owner_name)
+    def get_banklog(self, x_owner_name: OwnerName) -> BankLog:
+        return self.banklogs.get(x_owner_name)
 
-    def del_turnlog(self, x_owner_name: OwnerName):
-        self.turnlogs.pop(x_owner_name)
+    def del_banklog(self, x_owner_name: OwnerName):
+        self.banklogs.pop(x_owner_name)
 
-    def add_turnepisode(
+    def add_bankepisode(
         self,
         x_owner_name: OwnerName,
         x_time_int: TimeLinePoint,
@@ -276,12 +277,12 @@ class DealUnit:
         allow_prev_to_current_time_entry: bool = False,
     ):
         if x_time_int < self.current_time and not allow_prev_to_current_time_entry:
-            exception_str = f"Cannot set turnepisode because time_int {x_time_int} is less than DealUnit.current_time {self.current_time}."
-            raise turnepisode_Exception(exception_str)
-        if self.turnlog_exists(x_owner_name) is False:
-            self.set_turnlog(turnlog_shop(x_owner_name))
-        x_turnlog = self.get_turnlog(x_owner_name)
-        x_turnlog.add_episode(x_time_int, x_money_magnitude)
+            exception_str = f"Cannot set bankepisode because time_int {x_time_int} is less than DealUnit.current_time {self.current_time}."
+            raise bankepisode_Exception(exception_str)
+        if self.banklog_exists(x_owner_name) is False:
+            self.set_banklog(banklog_shop(x_owner_name))
+        x_banklog = self.get_banklog(x_owner_name)
+        x_banklog.add_episode(x_time_int, x_money_magnitude)
 
     def get_dict(self, include_cashbook: bool = True) -> dict:
         x_dict = {
@@ -290,7 +291,7 @@ class DealUnit:
             "current_time": self.current_time,
             "fund_coin": self.fund_coin,
             "penny": self.penny,
-            "turnlogs": self._get_turnlogs_dict(),
+            "banklogs": self._get_banklogs_dict(),
             "respect_bit": self.respect_bit,
             "timeline": self.timeline.get_dict(),
         }
@@ -301,22 +302,22 @@ class DealUnit:
     def get_json(self) -> str:
         return get_json_from_dict(self.get_dict())
 
-    def _get_turnlogs_dict(self):
+    def _get_banklogs_dict(self):
         return {
             x_episode.owner_name: x_episode.get_dict()
-            for x_episode in self.turnlogs.values()
+            for x_episode in self.banklogs.values()
         }
 
-    def get_turnlogs_time_ints(self) -> set[TimeLinePoint]:
-        all_turnepisode_time_ints = set()
-        for x_turnlog in self.turnlogs.values():
-            all_turnepisode_time_ints.update(x_turnlog.get_time_ints())
-        return all_turnepisode_time_ints
+    def get_banklogs_time_ints(self) -> set[TimeLinePoint]:
+        all_bankepisode_time_ints = set()
+        for x_banklog in self.banklogs.values():
+            all_bankepisode_time_ints.update(x_banklog.get_time_ints())
+        return all_bankepisode_time_ints
 
     def set_cashpurchase(self, x_cashpurchase: TranUnit):
         self.cashbook.set_tranunit(
             x_tranunit=x_cashpurchase,
-            x_blocked_time_ints=self.get_turnlogs_time_ints(),
+            x_blocked_time_ints=self.get_banklogs_time_ints(),
             x_current_time=self.current_time,
         )
 
@@ -361,9 +362,9 @@ class DealUnit:
     def set_all_tranbook(self):
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
         x_tranbook = tranbook_shop(self.deal_idea, x_tranunits)
-        for owner_name, x_turnlog in self.turnlogs.items():
-            for x_time_int, x_turnepisode in x_turnlog.episodes.items():
-                for acct_name, x_amount in x_turnepisode._net_turns.items():
+        for owner_name, x_banklog in self.banklogs.items():
+            for x_time_int, x_bankepisode in x_banklog.episodes.items():
+                for acct_name, x_amount in x_bankepisode._net_banks.items():
                     x_tranbook.add_tranunit(owner_name, acct_name, x_time_int, x_amount)
         self._all_tranbook = x_tranbook
 
@@ -397,7 +398,7 @@ def dealunit_shop(
         deals_dir=deals_dir,
         timeline=timeline,
         current_time=get_0_if_None(current_time),
-        turnlogs={},
+        banklogs={},
         cashbook=tranbook_shop(deal_idea),
         bridge=default_bridge_if_None(bridge),
         fund_coin=default_fund_coin_if_None(fund_coin),
@@ -422,12 +423,13 @@ def get_from_dict(deal_dict: dict) -> DealUnit:
     x_deal.fund_coin = deal_dict.get("fund_coin")
     x_deal.respect_bit = deal_dict.get("respect_bit")
     x_deal.penny = deal_dict.get("penny")
-    x_deal.turnlogs = _get_turnlogs_from_dict(deal_dict.get("turnlogs"))
+    x_deal.banklogs = _get_banklogs_from_dict(deal_dict.get("banklogs"))
+    x_deal.cashbook = get_tranbook_from_dict(deal_dict.get("cashbook"))
     return x_deal
 
 
-def _get_turnlogs_from_dict(turnlogs_dict: dict) -> dict[OwnerName, TurnLog]:
+def _get_banklogs_from_dict(banklogs_dict: dict) -> dict[OwnerName, BankLog]:
     return {
-        x_owner_name: get_turnlog_from_dict(turnlog_dict)
-        for x_owner_name, turnlog_dict in turnlogs_dict.items()
+        x_owner_name: get_banklog_from_dict(banklog_dict)
+        for x_owner_name, banklog_dict in banklogs_dict.items()
     }

@@ -30,11 +30,11 @@ from src.f01_road.finance import (
     TimeLinePoint,
 )
 from src.f01_road.finance_tran import (
-    TurnEpisode,
-    turnepisode_shop,
-    TurnLog,
-    turnlog_shop,
-    get_turnepisode_from_json,
+    BankEpisode,
+    bankepisode_shop,
+    BankLog,
+    banklog_shop,
+    get_bankepisode_from_json,
 )
 from src.f01_road.road import (
     OwnerName,
@@ -93,7 +93,7 @@ class _save_valid_budpoint_Exception(Exception):
     pass
 
 
-class calc_timepoint_turn_Exception(Exception):
+class calc_timepoint_bank_Exception(Exception):
     pass
 
 
@@ -417,39 +417,39 @@ class HubUnit:
     def timepoint_dir(self, x_time_int: TimeLinePoint) -> str:
         return f_path(self.timeline_dir(), str(x_time_int))
 
-    def turn_file_name(self) -> str:
-        return "turn.json"
+    def bank_file_name(self) -> str:
+        return "bank.json"
 
-    def turn_file_path(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_int), self.turn_file_name())
+    def bank_file_path(self, x_time_int: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_time_int), self.bank_file_name())
 
-    def _save_valid_turn_file(self, x_turn: TurnEpisode):
-        x_turn.calc_magnitude()
+    def _save_valid_bank_file(self, x_bank: BankEpisode):
+        x_bank.calc_magnitude()
         save_file(
-            self.timepoint_dir(x_turn.time_int),
-            self.turn_file_name(),
-            x_turn.get_json(),
+            self.timepoint_dir(x_bank.time_int),
+            self.bank_file_name(),
+            x_bank.get_json(),
             replace=True,
         )
 
-    def turn_file_exists(self, x_time_int: TimeLinePoint) -> bool:
-        return os_path_exists(self.turn_file_path(x_time_int))
+    def bank_file_exists(self, x_time_int: TimeLinePoint) -> bool:
+        return os_path_exists(self.bank_file_path(x_time_int))
 
-    def get_turn_file(self, x_time_int: TimeLinePoint) -> TurnEpisode:
-        if self.turn_file_exists(x_time_int):
-            x_json = open_file(self.timepoint_dir(x_time_int), self.turn_file_name())
-            return get_turnepisode_from_json(x_json)
+    def get_bank_file(self, x_time_int: TimeLinePoint) -> BankEpisode:
+        if self.bank_file_exists(x_time_int):
+            x_json = open_file(self.timepoint_dir(x_time_int), self.bank_file_name())
+            return get_bankepisode_from_json(x_json)
 
-    def delete_turn_file(self, x_time_int: TimeLinePoint):
-        delete_dir(self.turn_file_path(x_time_int))
+    def delete_bank_file(self, x_time_int: TimeLinePoint):
+        delete_dir(self.bank_file_path(x_time_int))
 
-    def get_turnlog(self) -> TurnLog:
-        x_turnlog = turnlog_shop(self.owner_name)
+    def get_banklog(self) -> BankLog:
+        x_banklog = banklog_shop(self.owner_name)
         x_dirs = self._get_timepoint_dirs()
-        for x_turn_folder_name in x_dirs:
-            x_turnepisode = self.get_turn_file(x_turn_folder_name)
-            x_turnlog.set_episode(x_turnepisode)
-        return x_turnlog
+        for x_bank_folder_name in x_dirs:
+            x_bankepisode = self.get_bank_file(x_bank_folder_name)
+            x_banklog.set_episode(x_bankepisode)
+        return x_banklog
 
     def _get_timepoint_dirs(self) -> list[str]:
         x_dict = get_dir_file_strs(
@@ -488,24 +488,24 @@ class HubUnit:
     def delete_budpoint_file(self, x_time_int: TimeLinePoint):
         delete_dir(self.budpoint_file_path(x_time_int))
 
-    def calc_timepoint_turn(self, x_time_int: TimeLinePoint):
+    def calc_timepoint_bank(self, x_time_int: TimeLinePoint):
         if self.budpoint_file_exists(x_time_int) is False:
-            exception_str = f"Cannot calculate timepoint {x_time_int} turns without saved BudPoint file"
-            raise calc_timepoint_turn_Exception(exception_str)
+            exception_str = f"Cannot calculate timepoint {x_time_int} banks without saved BudPoint file"
+            raise calc_timepoint_bank_Exception(exception_str)
         x_budpoint = self.get_budpoint_file(x_time_int)
-        if self.turn_file_exists(x_time_int):
-            x_turnepisode = self.get_turn_file(x_time_int)
-            x_budpoint.set_fund_pool(x_turnepisode.quota)
+        if self.bank_file_exists(x_time_int):
+            x_bankepisode = self.get_bank_file(x_time_int)
+            x_budpoint.set_fund_pool(x_bankepisode.quota)
         else:
-            x_turnepisode = turnepisode_shop(x_time_int)
-        x_net_turns = get_bud_settle_acct_net_dict(x_budpoint, True)
-        x_turnepisode._net_turns = x_net_turns
+            x_bankepisode = bankepisode_shop(x_time_int)
+        x_net_banks = get_bud_settle_acct_net_dict(x_budpoint, True)
+        x_bankepisode._net_banks = x_net_banks
         self._save_valid_budpoint_file(x_time_int, x_budpoint)
-        self._save_valid_turn_file(x_turnepisode)
+        self._save_valid_bank_file(x_bankepisode)
 
-    def calc_timepoint_turns(self):
+    def calc_timepoint_banks(self):
         for x_timepoint in self._get_timepoint_dirs():
-            self.calc_timepoint_turn(x_timepoint)
+            self.calc_timepoint_bank(x_timepoint)
 
     def keep_dir(self) -> str:
         if self.keep_road is None:

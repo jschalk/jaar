@@ -121,7 +121,7 @@ class BudUnit:
     owner_name: OwnerName = None
     accts: dict[AcctName, AcctUnit] = None
     itemroot: ItemUnit = None
-    turn_time_int: TimeLinePoint = None
+    bank_time_int: TimeLinePoint = None
     tally: float = None
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
@@ -158,8 +158,8 @@ class BudUnit:
             raise _last_gift_idException(exception_str)
         self.last_gift_id = x_last_gift_id
 
-    def set_turn_time_int(self, x_turn_time_int: TimeLinePoint):
-        self.turn_time_int = x_turn_time_int
+    def set_bank_time_int(self, x_bank_time_int: TimeLinePoint):
+        self.bank_time_int = x_bank_time_int
 
     def set_fund_pool(self, x_fund_pool):
         if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:
