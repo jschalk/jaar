@@ -193,6 +193,11 @@ def create_dealunit_jsons_from_prime_files(deals_dir: str):
                 month_dict, "cumlative_day", True
             )
             timeline_config["months_config"] = x_month_list
+        if hour_dict := deals_hour_dict.get(x_deal_idea):
+            x_hour_list = get_sorted_list_of_dict_keys(
+                hour_dict, "cumlative_minute", True
+            )
+            timeline_config["hours_config"] = x_hour_list
         if validate_timeline_config(timeline_config) is False:
             raise ValueError(f"Invalid timeline_config: {timeline_config=}")
         dealunit = dealunit_shop(

@@ -542,13 +542,15 @@ def test_create_dealunit_jsons_from_prime_files_Scenario5_deal_timeline_hour(
     agg_str = "agg"
     accord56_deal_idea = "accord56"
     accord56_deal_idea
-    july_str = "July"
-    june_str = "June"
+    a56_0hr = "0hour"
+    a56_5hr = "5hour"
+    a56_8hr = "8hour"
     accord56_deal_row = [accord56_deal_idea, "", "", "", "", "", "", "", "", ""]
     dealunit_df = DataFrame([accord56_deal_row], columns=xc.dealunit_agg_columns)
-    a56_june = [accord56_deal_idea, june_str, 150]
-    a56_july = [accord56_deal_idea, july_str, 365]
-    a56_hour_rows = [a56_july, a56_june]
+    a56_0hour_row = [accord56_deal_idea, a56_0hr, 60]
+    a56_5hour_row = [accord56_deal_idea, a56_5hr, 500]
+    a56_8hour_row = [accord56_deal_idea, a56_8hr, 1440]
+    a56_hour_rows = [a56_0hour_row, a56_5hour_row, a56_8hour_row]
     a56_hour_df = DataFrame(a56_hour_rows, columns=xc.deal_hour_agg_columns)
     print(f"{a56_hour_df=}")
     upsert_sheet(xp.dealunit_path, agg_str, dealunit_df)
@@ -565,12 +567,10 @@ def test_create_dealunit_jsons_from_prime_files_Scenario5_deal_timeline_hour(
     accord56_dealunit = deal_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(create_timeline_config())
     expected_dealunit = dealunit_shop(accord56_deal_idea, deals_dir, x_timelineunit)
-    expected_dealunit.timeline.hours_config = [[june_str, 150], [july_str, 365]]
+    expected_hour_config = [[a56_0hr, 60], [a56_5hr, 500], [a56_8hr, 1440]]
+    expected_dealunit.timeline.hours_config = expected_hour_config
     print(f"{expected_dealunit.timeline.hours_config=}")
-    assert accord56_dealunit.timeline.hours_config == [
-        [june_str, 150],
-        [july_str, 365],
-    ]
+    assert accord56_dealunit.timeline.hours_config == expected_hour_config
     assert accord56_dealunit.timeline.hours_config == x_timelineunit.hours_config
 
 
