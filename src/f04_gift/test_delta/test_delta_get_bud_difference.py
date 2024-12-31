@@ -183,9 +183,9 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_a
     x_max_tree_traverse = 66
     x_credor_respect = 770
     x_debtor_respect = 880
-    x_bank_time_int = 990000
+    x_pact_time_int = 990000
     after_sue_bud.tally = x_budunit_tally
-    after_sue_bud.bank_time_int = x_bank_time_int
+    after_sue_bud.pact_time_int = x_pact_time_int
     after_sue_bud.fund_pool = x_fund_pool
     after_sue_bud.fund_coin = x_fund_coin
     after_sue_bud.respect_bit = x_respect_bit
@@ -207,7 +207,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_a
     assert xio_atomunit.get_value("fund_pool") == x_fund_pool
     assert xio_atomunit.get_value("fund_coin") == x_fund_coin
     assert xio_atomunit.get_value("respect_bit") == x_respect_bit
-    assert xio_atomunit.get_value("bank_time_int") == x_bank_time_int
+    assert xio_atomunit.get_value("pact_time_int") == x_pact_time_int
 
     print(f"{get_atomunit_total_count(sue_deltaunit)=}")
     assert get_atomunit_total_count(sue_deltaunit) == 1
@@ -452,12 +452,12 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_insert():
     x_keylist = [
         atom_insert(),
         bud_itemunit_str(),
-        after_sue_bud.deal_idea,
+        after_sue_bud.gov_idea,
         accord45_str,
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(idee_str()) == accord45_str
-    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud.deal_idea
+    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud.gov_idea
     assert ball_atomunit.get_value(begin_str()) == accord_begin
     assert ball_atomunit.get_value(close_str()) == accord_close
     assert ball_atomunit.get_value(mass_str()) == accord_mass
@@ -511,11 +511,11 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_update():
     x_keylist = [
         atom_update(),
         bud_itemunit_str(),
-        after_sue_bud.deal_idea,
+        after_sue_bud.gov_idea,
         accord45_str,
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
-    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud.deal_idea
+    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud.gov_idea
     assert ball_atomunit.get_value(idee_str()) == accord45_str
     assert ball_atomunit.get_value(begin_str()) == after_accord_begin
     assert ball_atomunit.get_value(close_str()) == after_accord_close

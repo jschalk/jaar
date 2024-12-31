@@ -12,7 +12,7 @@
         "face_name": {
             "otx_key": true
         },
-        "deal_idea": {
+        "gov_idea": {
             "otx_key": true
         },
         "fund_coin": {
@@ -30,7 +30,7 @@
         "penny": {
             "otx_key": false
         },
-        "bank_time_int": {
+        "pact_time_int": {
             "otx_key": false
         },
         "respect_bit": {

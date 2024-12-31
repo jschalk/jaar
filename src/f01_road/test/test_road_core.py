@@ -20,7 +20,7 @@ from src.f01_road.road import (
     road_validate,
     get_ancestor_roads,
     get_forefather_roads,
-    get_default_deal_idea as root_idea,
+    get_default_gov_idea as root_idea,
     get_diff_road,
     is_heir_road,
     default_bridge_if_None,
@@ -295,18 +295,18 @@ def test_road_is_sub_road_correctlyReturnsBool():
 
 def test_road_road_validate_correctlyReturnsRoadUnit():
     x_s = default_bridge_if_None()
-    _deal_idea = "x"
-    casa_road = f"{_deal_idea}{x_s}casa"
-    clean_road = f"{_deal_idea}{x_s}clean"
-    fun_road = f"{_deal_idea}{x_s}fun"
-    assert road_validate(None, x_s, _deal_idea) == ""
-    assert road_validate("", x_s, _deal_idea) == ""
-    assert road_validate(f"{_deal_idea}{x_s}casa", x_s, _deal_idea) == casa_road
-    assert road_validate(f"A{x_s}casa", x_s, _deal_idea) == casa_road
-    assert road_validate(f"{x_s}clean", x_s, _deal_idea) == clean_road
-    assert road_validate(f"clean{x_s}fun", x_s, _deal_idea) == fun_road
-    assert road_validate("clean", x_s, _deal_idea) == _deal_idea
-    assert road_validate(f"AA{x_s}casa", x_s, _deal_idea) == casa_road
+    _gov_idea = "x"
+    casa_road = f"{_gov_idea}{x_s}casa"
+    clean_road = f"{_gov_idea}{x_s}clean"
+    fun_road = f"{_gov_idea}{x_s}fun"
+    assert road_validate(None, x_s, _gov_idea) == ""
+    assert road_validate("", x_s, _gov_idea) == ""
+    assert road_validate(f"{_gov_idea}{x_s}casa", x_s, _gov_idea) == casa_road
+    assert road_validate(f"A{x_s}casa", x_s, _gov_idea) == casa_road
+    assert road_validate(f"{x_s}clean", x_s, _gov_idea) == clean_road
+    assert road_validate(f"clean{x_s}fun", x_s, _gov_idea) == fun_road
+    assert road_validate("clean", x_s, _gov_idea) == _gov_idea
+    assert road_validate(f"AA{x_s}casa", x_s, _gov_idea) == casa_road
 
 
 def test_road_rebuild_road_ReturnsCorrectRoadUnit():
@@ -549,7 +549,7 @@ def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     assert x_roads == texas_forefather_roads
 
 
-def test_road_get_default_deal_idea_ReturnsCorrectObj():
+def test_road_get_default_gov_idea_ReturnsCorrectObj():
     assert root_idea() == "ZZ"
 
 

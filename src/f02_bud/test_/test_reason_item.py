@@ -8,7 +8,7 @@ from src.f02_bud.reason_item import (
     reasons_get_from_dict,
 )
 from src.f01_road.road import (
-    get_default_deal_idea as root_idea,
+    get_default_gov_idea as root_idea,
     create_road,
     default_bridge_if_None,
 )

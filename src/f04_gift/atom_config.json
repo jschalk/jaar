@@ -416,7 +416,7 @@
                 "jaar_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "bank_time_int": {
+            "pact_time_int": {
                 "column_order": 8,
                 "jaar_type": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"

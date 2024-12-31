@@ -95,7 +95,7 @@ def test_get_pidgin_config_dict_ReturnsObj():
 
     # assert gen_jvalues == x_pidginunit_jvalues
     # assert len(pidginunit_dict.get(jvalues_str())) == 9
-    # assert len(pidgin_bank_episode_dict.get(jvalues_str())) == 1
+    # assert len(pidgin_pact_episode_dict.get(jvalues_str())) == 1
     # assert len(pidgin_cashbook_dict.get(jvalues_str())) == 1
     # assert len(pidgin_timeline_hour_dict.get(jvalues_str())) == 0
     # assert len(pidgin_timeline_month_dict.get(jvalues_str())) == 0

@@ -2,19 +2,19 @@ from src.f01_road.road import OwnerName, AcctName
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.hubunit import HubUnit, hubunit_shop
 from src.f06_keep.examples.keep_env import (
-    temp_deals_dir,
-    temp_deal_idea,
+    temp_govs_dir,
+    temp_gov_idea,
     get_texas_road,
 )
 from src.f06_keep.rivercycle import get_credorledger
 
 
 def example_yao_hubunit() -> HubUnit:
-    return hubunit_shop(temp_deals_dir(), temp_deal_idea(), "Yao")
+    return hubunit_shop(temp_govs_dir(), temp_gov_idea(), "Yao")
 
 
 def example_yao_texas_hubunit() -> HubUnit:
-    return hubunit_shop(temp_deals_dir(), temp_deal_idea(), "Yao", get_texas_road())
+    return hubunit_shop(temp_govs_dir(), temp_gov_idea(), "Yao", get_texas_road())
 
 
 def example_yao_credorledger() -> dict[str, float]:

@@ -15,8 +15,8 @@ from src.f01_road.jaar_config import (
     get_rootpart_of_keep_dir,
     treasury_file_name,
     get_gifts_folder,
-    get_deal_idea_if_None,
-    get_test_deals_dir,
+    get_gov_idea_if_None,
+    get_test_govs_dir,
     get_init_gift_id_if_None,
     get_json_filename,
     init_gift_id,
@@ -30,15 +30,15 @@ from src.f01_road.finance import (
     TimeLinePoint,
 )
 from src.f01_road.finance_tran import (
-    BankEpisode,
-    bankepisode_shop,
-    BankLog,
-    banklog_shop,
-    get_bankepisode_from_json,
+    PactEpisode,
+    pactepisode_shop,
+    PactLog,
+    pactlog_shop,
+    get_pactepisode_from_json,
 )
 from src.f01_road.road import (
     OwnerName,
-    DealIdea,
+    GovIdea,
     IdeaUnit,
     RoadUnit,
     rebuild_road,
@@ -93,7 +93,7 @@ class _save_valid_budpoint_Exception(Exception):
     pass
 
 
-class calc_timepoint_bank_Exception(Exception):
+class calc_timepoint_pact_Exception(Exception):
     pass
 
 
@@ -112,8 +112,8 @@ def get_keep_grades_dir(x_keep_dir: str) -> str:
 @dataclass
 class HubUnit:
     owner_name: OwnerName = None
-    deals_dir: str = None
-    deal_idea: str = None
+    govs_dir: str = None
+    gov_idea: str = None
     keep_road: RoadUnit = None
     bridge: str = None
     fund_pool: float = None
@@ -122,11 +122,11 @@ class HubUnit:
     penny: float = None
     keep_point_magnitude: float = None
 
-    def deal_dir(self) -> str:
-        return f_path(self.deals_dir, self.deal_idea)
+    def gov_dir(self) -> str:
+        return f_path(self.govs_dir, self.gov_idea)
 
     def owners_dir(self) -> str:
-        return f_path(self.deal_dir(), "owners")
+        return f_path(self.gov_dir(), "owners")
 
     def owner_dir(self) -> str:
         return f_path(self.owners_dir(), self.owner_name)
@@ -202,7 +202,7 @@ class HubUnit:
     def default_voice_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
             owner_name=self.owner_name,
-            deal_idea=self.deal_idea,
+            gov_idea=self.gov_idea,
             bridge=self.bridge,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,
@@ -256,7 +256,7 @@ class HubUnit:
         delete_dir(self.atom_file_path(atom_number))
 
     def _get_bud_from_atom_files(self) -> BudUnit:
-        x_bud = budunit_shop(self.owner_name, self.deal_idea)
+        x_bud = budunit_shop(self.owner_name, self.gov_idea)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = get_dir_file_strs(self.atoms_dir(), delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
@@ -417,39 +417,39 @@ class HubUnit:
     def timepoint_dir(self, x_time_int: TimeLinePoint) -> str:
         return f_path(self.timeline_dir(), str(x_time_int))
 
-    def bank_file_name(self) -> str:
-        return "bank.json"
+    def pact_file_name(self) -> str:
+        return "pact.json"
 
-    def bank_file_path(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_int), self.bank_file_name())
+    def pact_file_path(self, x_time_int: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_time_int), self.pact_file_name())
 
-    def _save_valid_bank_file(self, x_bank: BankEpisode):
-        x_bank.calc_magnitude()
+    def _save_valid_pact_file(self, x_pact: PactEpisode):
+        x_pact.calc_magnitude()
         save_file(
-            self.timepoint_dir(x_bank.time_int),
-            self.bank_file_name(),
-            x_bank.get_json(),
+            self.timepoint_dir(x_pact.time_int),
+            self.pact_file_name(),
+            x_pact.get_json(),
             replace=True,
         )
 
-    def bank_file_exists(self, x_time_int: TimeLinePoint) -> bool:
-        return os_path_exists(self.bank_file_path(x_time_int))
+    def pact_file_exists(self, x_time_int: TimeLinePoint) -> bool:
+        return os_path_exists(self.pact_file_path(x_time_int))
 
-    def get_bank_file(self, x_time_int: TimeLinePoint) -> BankEpisode:
-        if self.bank_file_exists(x_time_int):
-            x_json = open_file(self.timepoint_dir(x_time_int), self.bank_file_name())
-            return get_bankepisode_from_json(x_json)
+    def get_pact_file(self, x_time_int: TimeLinePoint) -> PactEpisode:
+        if self.pact_file_exists(x_time_int):
+            x_json = open_file(self.timepoint_dir(x_time_int), self.pact_file_name())
+            return get_pactepisode_from_json(x_json)
 
-    def delete_bank_file(self, x_time_int: TimeLinePoint):
-        delete_dir(self.bank_file_path(x_time_int))
+    def delete_pact_file(self, x_time_int: TimeLinePoint):
+        delete_dir(self.pact_file_path(x_time_int))
 
-    def get_banklog(self) -> BankLog:
-        x_banklog = banklog_shop(self.owner_name)
+    def get_pactlog(self) -> PactLog:
+        x_pactlog = pactlog_shop(self.owner_name)
         x_dirs = self._get_timepoint_dirs()
-        for x_bank_folder_name in x_dirs:
-            x_bankepisode = self.get_bank_file(x_bank_folder_name)
-            x_banklog.set_episode(x_bankepisode)
-        return x_banklog
+        for x_pact_folder_name in x_dirs:
+            x_pactepisode = self.get_pact_file(x_pact_folder_name)
+            x_pactlog.set_episode(x_pactepisode)
+        return x_pactlog
 
     def _get_timepoint_dirs(self) -> list[str]:
         x_dict = get_dir_file_strs(
@@ -488,24 +488,24 @@ class HubUnit:
     def delete_budpoint_file(self, x_time_int: TimeLinePoint):
         delete_dir(self.budpoint_file_path(x_time_int))
 
-    def calc_timepoint_bank(self, x_time_int: TimeLinePoint):
+    def calc_timepoint_pact(self, x_time_int: TimeLinePoint):
         if self.budpoint_file_exists(x_time_int) is False:
-            exception_str = f"Cannot calculate timepoint {x_time_int} banks without saved BudPoint file"
-            raise calc_timepoint_bank_Exception(exception_str)
+            exception_str = f"Cannot calculate timepoint {x_time_int} pacts without saved BudPoint file"
+            raise calc_timepoint_pact_Exception(exception_str)
         x_budpoint = self.get_budpoint_file(x_time_int)
-        if self.bank_file_exists(x_time_int):
-            x_bankepisode = self.get_bank_file(x_time_int)
-            x_budpoint.set_fund_pool(x_bankepisode.quota)
+        if self.pact_file_exists(x_time_int):
+            x_pactepisode = self.get_pact_file(x_time_int)
+            x_budpoint.set_fund_pool(x_pactepisode.quota)
         else:
-            x_bankepisode = bankepisode_shop(x_time_int)
-        x_net_banks = get_bud_settle_acct_net_dict(x_budpoint, True)
-        x_bankepisode._net_banks = x_net_banks
+            x_pactepisode = pactepisode_shop(x_time_int)
+        x_net_pacts = get_bud_settle_acct_net_dict(x_budpoint, True)
+        x_pactepisode._net_pacts = x_net_pacts
         self._save_valid_budpoint_file(x_time_int, x_budpoint)
-        self._save_valid_bank_file(x_bankepisode)
+        self._save_valid_pact_file(x_pactepisode)
 
-    def calc_timepoint_banks(self):
+    def calc_timepoint_pacts(self):
         for x_timepoint in self._get_timepoint_dirs():
-            self.calc_timepoint_bank(x_timepoint)
+            self.calc_timepoint_pact(x_timepoint)
 
     def keep_dir(self) -> str:
         if self.keep_road is None:
@@ -604,8 +604,8 @@ class HubUnit:
 
     def dw_speaker_bud(self, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
-            deals_dir=self.deals_dir,
-            deal_idea=self.deal_idea,
+            govs_dir=self.govs_dir,
+            gov_idea=self.gov_idea,
             owner_name=speaker_id,
             bridge=self.bridge,
             respect_bit=self.respect_bit,
@@ -624,8 +624,8 @@ class HubUnit:
 
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
-            deals_dir=self.deals_dir,
-            deal_idea=self.deal_idea,
+            govs_dir=self.govs_dir,
+            gov_idea=self.gov_idea,
             owner_name=healer_name,
             keep_road=self.keep_road,
             bridge=self.bridge,
@@ -686,8 +686,8 @@ class HubUnit:
 
 
 def hubunit_shop(
-    deals_dir: str,
-    deal_idea: DealIdea,
+    govs_dir: str,
+    gov_idea: GovIdea,
     owner_name: OwnerName = None,
     keep_road: RoadUnit = None,
     bridge: str = None,
@@ -697,12 +697,12 @@ def hubunit_shop(
     penny: float = None,
     keep_point_magnitude: float = None,
 ) -> HubUnit:
-    deals_dir = get_test_deals_dir() if deals_dir is None else deals_dir
-    deal_idea = get_deal_idea_if_None(deal_idea)
+    govs_dir = get_test_govs_dir() if govs_dir is None else govs_dir
+    gov_idea = get_gov_idea_if_None(gov_idea)
 
     return HubUnit(
-        deals_dir=deals_dir,
-        deal_idea=deal_idea,
+        govs_dir=govs_dir,
+        gov_idea=gov_idea,
         owner_name=validate_ideaunit(owner_name, bridge),
         keep_road=keep_road,
         bridge=default_bridge_if_None(bridge),
@@ -716,7 +716,7 @@ def hubunit_shop(
 
 def get_keep_path(x_hubunit: HubUnit, x_road: IdeaUnit) -> str:
     keep_root = get_rootpart_of_keep_dir()
-    x_road = rebuild_road(x_road, x_hubunit.deal_idea, keep_root)
+    x_road = rebuild_road(x_road, x_hubunit.gov_idea, keep_root)
     x_list = get_all_road_ideas(x_road, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])
     return f_path(x_hubunit.keeps_dir(), keep_sub_path)

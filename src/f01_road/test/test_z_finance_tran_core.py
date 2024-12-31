@@ -45,7 +45,7 @@ def test_TranBook_Exists():
 
     # THEN
     assert x_tranbook
-    assert not x_tranbook.deal_idea
+    assert not x_tranbook.gov_idea
     assert not x_tranbook.tranunits
     assert not x_tranbook._accts_net
 
@@ -64,7 +64,7 @@ def test_tranbook_shop_WithParametersReturnsObj():
 
     # THEN
     assert x_tranbook
-    assert x_tranbook.deal_idea == accord23_str
+    assert x_tranbook.gov_idea == accord23_str
     assert x_tranbook.tranunits == x_tranunits
     assert x_tranbook._accts_net == {}
 
@@ -78,7 +78,7 @@ def test_tranbook_shop_WithoutParametersReturnsObj():
 
     # THEN
     assert x_tranbook
-    assert x_tranbook.deal_idea == accord23_str
+    assert x_tranbook.gov_idea == accord23_str
     assert x_tranbook.tranunits == {}
     assert x_tranbook._accts_net == {}
 
@@ -616,11 +616,11 @@ def test_TranBook_get_dict_ReturnsObj():
     x_dict = x_tranbook.get_dict()
 
     # THEN
-    deal_idea_str = "deal_idea"
+    gov_idea_str = "gov_idea"
     tranunits_str = "tranunits"
     assert x_dict
-    assert deal_idea_str in x_dict.keys()
-    assert x_dict.get(deal_idea_str) == accord23_str
+    assert gov_idea_str in x_dict.keys()
+    assert x_dict.get(gov_idea_str) == accord23_str
     assert tranunits_str in x_dict.keys()
     tranunits_dict = x_dict.get(tranunits_str)
     assert tranunits_dict.get(sue_str)
@@ -662,7 +662,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario0():
 
     # THEN
     assert generated_tranbook
-    assert generated_tranbook.deal_idea == accord23_str
+    assert generated_tranbook.gov_idea == accord23_str
     assert generated_tranbook.tranunits == accord23_tranbook.tranunits
     assert generated_tranbook == accord23_tranbook
 
@@ -687,7 +687,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
     accord23_tranbook.add_tranunit(yao_str, yao_str, t77_time_int, t77_yao_amount)
 
     str_time_int_accord23_dict = {
-        "deal_idea": accord23_str,
+        "gov_idea": accord23_str,
         "tranunits": {
             sue_str: {
                 yao_str: {
@@ -705,7 +705,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 
     # THEN
     assert generated_tranbook
-    assert generated_tranbook.deal_idea == accord23_str
+    assert generated_tranbook.gov_idea == accord23_str
     assert generated_tranbook.tranunits == accord23_tranbook.tranunits
     assert generated_tranbook == accord23_tranbook
 
@@ -714,8 +714,8 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 #     # ESTABLISH
 #     x_time_int = 4
 #     x_amount = 55
-#     x_net_banks = {"Sue": -57}
-#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_banks)
+#     x_net_pacts = {"Sue": -57}
+#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_net_pacts)
 #     x_json = x_tranbook.get_json()
 
 #     # WHEN
@@ -725,5 +725,5 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 #     assert x_tranbook
 #     assert x_tranbook.time_int == x_time_int
 #     assert x_tranbook.amount == x_amount
-#     assert x_tranbook._net_banks == x_net_banks
+#     assert x_tranbook._net_pacts == x_net_pacts
 #     assert x_tranbook == x_tranbook

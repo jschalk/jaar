@@ -11,7 +11,7 @@ from src.f04_gift.atom_config import (
     awardee_label_str,
     base_str,
     face_name_str,
-    deal_idea_str,
+    gov_idea_str,
     fund_coin_str,
     healer_name_str,
     group_label_str,
@@ -23,8 +23,8 @@ from src.f04_gift.atom_config import (
     road_str,
     team_label_str,
 )
-from src.f07_deal.deal_config import (
-    get_deal_args_jaar_types,
+from src.f07_gov.gov_config import (
+    get_gov_args_jaar_types,
     weekday_idea_str,
     month_idea_str,
     hour_idea_str,
@@ -56,7 +56,7 @@ from copy import deepcopy as copy_deepcopy
 
 
 # The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
-# initialize dealunits and output acct metrics such as calendars, financial status, healer status
+# initialize govunits and output acct metrics such as calendars, financial status, healer status
 def test_get_pidgin_args_jaar_types_ReturnsObj():
     # ESTABLISH / WHEN
     pidgin_args_jaar_types = get_pidgin_args_jaar_types()
@@ -83,7 +83,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("denom") == "int"
     assert pidgin_args_jaar_types.get("divisor") == "int"
     assert pidgin_args_jaar_types.get("face_name") == type_AcctName_str()
-    assert pidgin_args_jaar_types.get("deal_idea") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("gov_idea") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("fnigh") == "float"
     assert pidgin_args_jaar_types.get("fopen") == "float"
     assert pidgin_args_jaar_types.get("fund_coin") == "float"
@@ -109,7 +109,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("pick") == type_RoadUnit_str()
     assert pidgin_args_jaar_types.get("pledge") == "bool"
     assert pidgin_args_jaar_types.get("problem_bool") == "bool"
-    assert pidgin_args_jaar_types.get("bank_time_int") == "TimeLinePoint"
+    assert pidgin_args_jaar_types.get("pact_time_int") == "TimeLinePoint"
     assert pidgin_args_jaar_types.get("quota") == "int"
     assert pidgin_args_jaar_types.get("respect_bit") == "float"
     assert pidgin_args_jaar_types.get("road") == type_RoadUnit_str()
@@ -124,20 +124,20 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("bridge") == "str"
     assert pidgin_args_jaar_types.get("yr1_jan1_offset") == "int"
 
-    # make sure it pidgin_arg_jaar_types has all deal and all atom args
+    # make sure it pidgin_arg_jaar_types has all gov and all atom args
     pidgin_args = set(pidgin_args_jaar_types.keys())
     atom_args = set(get_atom_args_jaar_types().keys())
-    deal_args = set(get_deal_args_jaar_types().keys())
+    gov_args = set(get_gov_args_jaar_types().keys())
     assert atom_args.issubset(pidgin_args)
-    assert deal_args.issubset(pidgin_args)
-    assert atom_args.intersection(deal_args) == {
+    assert gov_args.issubset(pidgin_args)
+    assert atom_args.intersection(gov_args) == {
         acct_name_str(),
         fund_coin_str(),
         penny_str(),
         respect_bit_str(),
     }
-    assert atom_args.union(deal_args) != pidgin_args
-    assert atom_args.union(deal_args).union({"face_name"}) == pidgin_args
+    assert atom_args.union(gov_args) != pidgin_args
+    assert atom_args.union(gov_args).union({"face_name"}) == pidgin_args
     assert check_jaar_types_are_correct()
     # assert pidgin_args_jaar_types.keys() == get_atom_args_category_mapping().keys()
     # assert all_atom_args_jaar_types_are_correct(x_jaar_types)
@@ -146,7 +146,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
 def check_jaar_types_are_correct() -> bool:
     pidgin_args_jaar_types = get_pidgin_args_jaar_types()
     atom_args_jaar_types = get_atom_args_jaar_types()
-    deal_args_jaar_types = get_deal_args_jaar_types()
+    gov_args_jaar_types = get_gov_args_jaar_types()
     for pidgin_arg, pidgin_type in pidgin_args_jaar_types.items():
         print(f"check {pidgin_arg=} {pidgin_type=}")
         if atom_args_jaar_types.get(pidgin_arg) not in [None, pidgin_type]:
@@ -154,9 +154,9 @@ def check_jaar_types_are_correct() -> bool:
                 f"{pidgin_arg=} {pidgin_type=} {atom_args_jaar_types.get(pidgin_arg)=}"
             )
             return False
-        if deal_args_jaar_types.get(pidgin_arg) not in [None, pidgin_type]:
+        if gov_args_jaar_types.get(pidgin_arg) not in [None, pidgin_type]:
             print(
-                f"{pidgin_arg=} {pidgin_type=} {deal_args_jaar_types.get(pidgin_arg)=}"
+                f"{pidgin_arg=} {pidgin_type=} {gov_args_jaar_types.get(pidgin_arg)=}"
             )
             return False
     return True
@@ -188,7 +188,7 @@ def test_pidginable_atom_args_ReturnsObj():
         awardee_label_str(),
         base_str(),
         face_name_str(),
-        deal_idea_str(),
+        gov_idea_str(),
         group_label_str(),
         healer_name_str(),
         hour_idea_str(),

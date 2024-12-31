@@ -50,7 +50,7 @@ def test_sift_atom_ReturnsNoneIfGivenAtomUnitIsUPDATE():
     casa_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_item(casa_road)
     casa_atom = atomunit_shop(bud_itemunit_str(), atom_update())
-    casa_atom.set_arg(parent_road_str(), sue_bud.deal_idea)
+    casa_atom.set_arg(parent_road_str(), sue_bud.gov_idea)
     casa_atom.set_arg(idee_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN
@@ -70,7 +70,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
     sue_fund_pool = 69
     sue_max_tree_traverse = 72
     sue_penny = 2
-    sue_bank_time_int = 9990000
+    sue_pact_time_int = 9990000
     sue_tally = 100
     zia_atom = atomunit_shop(budunit_str(), atom_insert())
     zia_atom.set_arg("respect_bit", sue_bit)
@@ -80,7 +80,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
     zia_atom.set_arg("fund_pool", sue_fund_pool)
     zia_atom.set_arg("max_tree_traverse", sue_max_tree_traverse)
     zia_atom.set_arg("penny", sue_penny)
-    zia_atom.set_arg("bank_time_int", sue_bank_time_int)
+    zia_atom.set_arg("pact_time_int", sue_pact_time_int)
     zia_atom.set_arg("tally", sue_tally)
 
     # WHEN
@@ -99,7 +99,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_budunit():
         "fund_pool": sue_fund_pool,
         "max_tree_traverse": sue_max_tree_traverse,
         "penny": sue_penny,
-        "bank_time_int": sue_bank_time_int,
+        "pact_time_int": sue_pact_time_int,
         "tally": sue_tally,
     }
 
@@ -170,7 +170,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_UPDATE_bud_itemunit():
     sue_problem_bool = True
     sue_stop_want = 107
     old_casa_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
-    old_casa_atom.set_arg(parent_road_str(), sue_bud.deal_idea)
+    old_casa_atom.set_arg(parent_road_str(), sue_bud.gov_idea)
     old_casa_atom.set_arg(idee_str(), casa_str)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)

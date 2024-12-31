@@ -1,5 +1,5 @@
 from src.f01_road.road import (
-    get_default_deal_idea as root_idea,
+    get_default_gov_idea as root_idea,
     default_bridge_if_None,
     get_road_from_doar,
     get_doar_from_road,

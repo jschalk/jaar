@@ -121,7 +121,7 @@ class DeltaUnit:
         return get_from_nested_dict(self.atomunits, x_keylist)
 
     def add_all_atomunits(self, after_bud: BudUnit):
-        before_bud = budunit_shop(after_bud.owner_name, after_bud.deal_idea)
+        before_bud = budunit_shop(after_bud.owner_name, after_bud.gov_idea)
         self.add_all_different_atomunits(before_bud, after_bud)
 
     def add_all_different_atomunits(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -149,8 +149,8 @@ class DeltaUnit:
             x_atomunit.set_jvalue("fund_pool", after_bud.fund_pool)
         if before_bud.fund_coin != after_bud.fund_coin:
             x_atomunit.set_jvalue("fund_coin", after_bud.fund_coin)
-        if before_bud.bank_time_int != after_bud.bank_time_int:
-            x_atomunit.set_jvalue("bank_time_int", after_bud.bank_time_int)
+        if before_bud.pact_time_int != after_bud.pact_time_int:
+            x_atomunit.set_jvalue("pact_time_int", after_bud.pact_time_int)
         if before_bud.respect_bit != after_bud.respect_bit:
             x_atomunit.set_jvalue("respect_bit", after_bud.respect_bit)
         self.set_atomunit(x_atomunit)

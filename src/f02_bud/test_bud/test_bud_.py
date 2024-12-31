@@ -7,7 +7,7 @@ from src.f01_road.finance import (
 )
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f01_road.road import (
-    get_default_deal_idea as root_idea,
+    get_default_gov_idea as root_idea,
     default_bridge_if_None,
 )
 from src.f02_bud.origin import originunit_shop
@@ -20,7 +20,7 @@ def test_BudUnit_Exists():
 
     # THEN
     assert x_bud
-    assert x_bud.deal_idea is None
+    assert x_bud.gov_idea is None
     assert x_bud.owner_name is None
     assert x_bud.tally is None
     assert x_bud.accts is None
@@ -33,7 +33,7 @@ def test_BudUnit_Exists():
     assert x_bud.fund_coin is None
     assert x_bud.respect_bit is None
     assert x_bud.penny is None
-    assert x_bud.bank_time_int is None
+    assert x_bud.pact_time_int is None
     assert x_bud.last_gift_id is None
     assert x_bud.originunit is None
     # calculated attr
@@ -55,7 +55,7 @@ def test_BudUnit_Exists():
 def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
-    iowa_deal_idea = "Iowa"
+    iowa_gov_idea = "Iowa"
     slash_bridge = "/"
     x_fund_pool = 555
     x_fund_coin = 7
@@ -65,7 +65,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # WHEN
     x_bud = budunit_shop(
         owner_name=sue_str,
-        deal_idea=iowa_deal_idea,
+        gov_idea=iowa_gov_idea,
         bridge=slash_bridge,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
@@ -76,7 +76,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     # THEN
     assert x_bud
     assert x_bud.owner_name == sue_str
-    assert x_bud.deal_idea == iowa_deal_idea
+    assert x_bud.gov_idea == iowa_gov_idea
     assert x_bud.tally == 1
     assert x_bud.accts == {}
     assert x_bud.itemroot is not None
@@ -88,7 +88,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert x_bud.penny == x_penny
     assert x_bud.credor_respect == validate_respect_num()
     assert x_bud.debtor_respect == validate_respect_num()
-    assert not x_bud.bank_time_int
+    assert not x_bud.pact_time_int
     assert not x_bud.last_gift_id
     assert x_bud.originunit == originunit_shop()
     # calculated attr
@@ -114,7 +114,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
 
     # THEN
     assert x_bud.owner_name == ""
-    assert x_bud.deal_idea == root_idea()
+    assert x_bud.gov_idea == root_idea()
     assert x_bud.bridge == default_bridge_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_None()
@@ -125,7 +125,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
     assert x_bud.itemroot._root
     assert x_bud.itemroot._uid == 1
     assert x_bud.itemroot._level == 0
-    assert x_bud.itemroot._bud_deal_idea == x_bud.deal_idea
+    assert x_bud.itemroot._bud_gov_idea == x_bud.gov_idea
     assert x_bud.itemroot._bridge == x_bud.bridge
     assert x_bud.itemroot._parent_road == ""
 
@@ -177,10 +177,10 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
 
 def test_BudUnit_set_bridge_CorrectlySetsAttr():
     # ESTABLISH
-    x_deal_idea = "accord45"
+    x_gov_idea = "accord45"
     slash_bridge = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_deal_idea, bridge=slash_bridge)
+    sue_bud = budunit_shop(sue_str, x_gov_idea, bridge=slash_bridge)
     assert sue_bud.bridge == slash_bridge
 
     # WHEN
@@ -193,10 +193,10 @@ def test_BudUnit_set_bridge_CorrectlySetsAttr():
 
 def test_BudUnit_make_road_ReturnsCorrectObj():
     # ESTABLISH
-    x_deal_idea = "accord45"
+    x_gov_idea = "accord45"
     slash_bridge = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_deal_idea, bridge=slash_bridge)
+    sue_bud = budunit_shop(sue_str, x_gov_idea, bridge=slash_bridge)
     casa_str = "casa"
     v1_casa_road = sue_bud.make_l1_road(casa_str)
 
@@ -283,18 +283,18 @@ def test_BudUnit_set_fund_pool_RaisesErrorWhenArgIsNotMultiple():
     )
 
 
-def test_BudUnit_set_bank_CorrectlySetsAttr():
+def test_BudUnit_set_pact_CorrectlySetsAttr():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    assert sue_bud.bank_time_int is None
+    assert sue_bud.pact_time_int is None
 
     # WHEN
-    sue_bank = 99000
-    sue_bud.set_bank_time_int(sue_bank)
+    sue_pact = 99000
+    sue_bud.set_pact_time_int(sue_pact)
     # THEN
-    assert sue_bud.bank_time_int == sue_bank
+    assert sue_bud.pact_time_int == sue_pact
 
     # WHEN
-    sue_bud.set_bank_time_int(None)
+    sue_bud.set_pact_time_int(None)
     # THEN
-    assert sue_bud.bank_time_int is None
+    assert sue_bud.pact_time_int is None

@@ -15,13 +15,13 @@ def brick_examples_dir() -> str:
     return f"{src_brick_examples_dir()}/brick_examples"
 
 
-def brick_deals_dir() -> str:
-    return f"{src_brick_examples_dir()}/deals"
+def brick_govs_dir() -> str:
+    return f"{src_brick_examples_dir()}/govs"
 
 
 @pytest_fixture()
 def brick_env_setup_cleanup():
-    env_dir = brick_deals_dir()
+    env_dir = brick_govs_dir()
     delete_dir(env_dir)
     os_makedirs(env_dir)
     yield env_dir

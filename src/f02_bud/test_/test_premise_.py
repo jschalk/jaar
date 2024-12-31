@@ -6,7 +6,7 @@ from src.f02_bud.reason_item import (
     premises_get_from_dict,
 )
 from src.f01_road.road import (
-    get_default_deal_idea as root_idea,
+    get_default_gov_idea as root_idea,
     create_road,
     find_replace_road_key_dict,
 )
@@ -785,18 +785,18 @@ def test_road_find_replace_road_key_dict_ReturnsCorrectPremisesUnit_Scenario1():
 
 def test_road_find_replace_road_key_dict_ReturnsCorrectPremisesUnit_Scenario2():
     # ESTABLISH
-    old_deal_idea = "El Paso"
+    old_gov_idea = "El Paso"
     casa_str = "casa"
     seasons_str = "seasons"
-    old_casa_road = create_road(old_deal_idea, casa_str)
+    old_casa_road = create_road(old_gov_idea, casa_str)
     old_seasons_road = create_road(old_casa_road, seasons_str)
     old_premiseunit = premiseunit_shop(need=old_seasons_road)
     old_premiseunits = {old_premiseunit.need: old_premiseunit}
     assert old_premiseunits.get(old_seasons_road) == old_premiseunit
 
     # WHEN
-    new_deal_idea = "Austin"
-    new_casa_road = create_road(new_deal_idea, casa_str)
+    new_gov_idea = "Austin"
+    new_casa_road = create_road(new_gov_idea, casa_str)
     new_seasons_road = create_road(new_casa_road, seasons_str)
     new_premise_roads = find_replace_road_key_dict(
         dict_x=old_premiseunits, old_road=old_seasons_road, new_road=new_seasons_road

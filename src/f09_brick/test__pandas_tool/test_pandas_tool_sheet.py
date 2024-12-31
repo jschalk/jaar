@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f09_brick.examples.brick_env import brick_env_setup_cleanup, brick_deals_dir
+from src.f09_brick.examples.brick_env import brick_env_setup_cleanup, brick_govs_dir
 from src.f09_brick.pandas_tool import (
     sheet_exists,
     upsert_sheet,
@@ -18,7 +18,7 @@ from numpy import nan as numpy_nan, float64
 
 def test_append_df_to_excel_CreatesSheet(brick_env_setup_cleanup):
     # ESTABLISH
-    test_file = create_path(brick_deals_dir(), "test.xlsx")
+    test_file = create_path(brick_govs_dir(), "test.xlsx")
     append_data = {
         "Name": ["Alice", "Bob"],
         "Age": [25, 30],
@@ -45,7 +45,7 @@ def test_append_df_to_excel_CreatesSheet(brick_env_setup_cleanup):
 
 def test_append_df_to_excel_AppendsToSheet(brick_env_setup_cleanup):
     # ESTABLISH
-    test_file = create_path(brick_deals_dir(), "test.xlsx")
+    test_file = create_path(brick_govs_dir(), "test.xlsx")
     initial_data = {
         "Name": ["John", "Doe"],
         "Age": [40, 50],
@@ -139,7 +139,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(
     brick_env_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = brick_deals_dir()
+    env_dir = brick_govs_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_file_name)
@@ -164,7 +164,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     brick_env_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = brick_deals_dir()
+    env_dir = brick_govs_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_file_name)
@@ -191,7 +191,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
 
 def test_sheet_exists_ReturnsObj_Scenario1(brick_env_setup_cleanup):
     # ESTABLISH
-    env_dir = brick_deals_dir()
+    env_dir = brick_govs_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_file_name = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_file_name)
@@ -362,7 +362,7 @@ def test_if_nan_return_None_ReturnsObj(brick_env_setup_cleanup):
     ex1_df = DataFrame([["yao", None]], columns=["face_name", "example_col"])
     ex1_sheet_name = "ex1"
     ex1_file_name = "ex1.xlsx"
-    ex1_path = create_path(brick_deals_dir(), ex1_file_name)
+    ex1_path = create_path(brick_govs_dir(), ex1_file_name)
     upsert_sheet(ex1_path, ex1_sheet_name, ex1_df)
     gen_df = pandas_read_excel(ex1_path, sheet_name=ex1_sheet_name)
     nan_example = gen_df["example_col"][0]
