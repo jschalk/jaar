@@ -158,9 +158,37 @@ def create_init_gov_prime_files(govs_dir: str):
     upsert_sheet(xp.gov_weekday_path, "agg", agg_gov_weekday_df)
 
 
+def create_timelineunit_from_prime_data(
+    gov_attrs, gov_weekday_dict, gov_month_dict, gov_hour_dict
+):
+    if gov_weekday_dict:
+        x_weekday_list = get_sorted_list(gov_weekday_dict, "weekday_order")
+    else:
+        x_weekday_list = None
+    timeline_config = create_timeline_config(
+        timeline_idea=if_nan_return_None(gov_attrs.get("timeline_idea")),
+        c400_count=if_nan_return_None(gov_attrs.get("c400_number")),
+        hour_length=None,
+        month_length=None,
+        weekday_list=x_weekday_list,
+        months_list=None,
+        monthday_distortion=None,
+        yr1_jan1_offset=if_nan_return_None(gov_attrs.get("yr1_jan1_offset")),
+    )
+    if gov_month_dict:
+        x_month_list = get_sorted_list(gov_month_dict, "cumlative_day", True)
+        timeline_config["months_config"] = x_month_list
+    if gov_hour_dict:
+        x_hour_list = get_sorted_list(gov_hour_dict, "cumlative_minute", True)
+        timeline_config["hours_config"] = x_hour_list
+    if validate_timeline_config(timeline_config) is False:
+        raise ValueError(f"Invalid timeline_config: {timeline_config=}")
+
+    return timelineunit_shop(timeline_config)
+
+
 def create_govunit_jsons_from_prime_files(govs_dir: str):
     xp = GovPrimeFilePaths(govs_dir)
-    xc = GovPrimeColumns()
     govunit_df = pandas_read_excel(xp.govunit_path, "agg")
     gov_deal_df = pandas_read_excel(xp.gov_deal_path, "agg")
     gov_cashbook_df = pandas_read_excel(xp.gov_cashbook_path, "agg")
@@ -169,7 +197,6 @@ def create_govunit_jsons_from_prime_files(govs_dir: str):
     gov_weekday_df = pandas_read_excel(xp.gov_weekday_path, "agg")
     govunits_dict = dataframe_to_dict(govunit_df, ["gov_idea"])
     govs_deal_dict = dataframe_to_dict(gov_deal_df, ["gov_idea"])
-    # govs_cashbook_dict = dataframe_to_dict(gov_cashbook_df, ["gov_idea", "owner_name", "acct_name"])
     govs_hour_dict = dataframe_to_dict(gov_hour_df, ["gov_idea", "hour_idea"])
     govs_month_dict = dataframe_to_dict(gov_month_df, ["gov_idea", "month_idea"])
     weekday_keys = ["gov_idea", "weekday_idea"]
@@ -177,34 +204,17 @@ def create_govunit_jsons_from_prime_files(govs_dir: str):
     govunits = {}
     for gov_attrs in govunits_dict.values():
         x_gov_idea = gov_attrs.get("gov_idea")
-        # create TimeLineUnit
-        if weekday_dict := govs_weekday_dict.get(x_gov_idea):
-            x_weekday_list = get_sorted_list(weekday_dict, "weekday_order")
-        else:
-            x_weekday_list = None
-        timeline_config = create_timeline_config(
-            timeline_idea=if_nan_return_None(gov_attrs.get("timeline_idea")),
-            c400_count=if_nan_return_None(gov_attrs.get("c400_number")),
-            hour_length=None,
-            month_length=None,
-            weekday_list=x_weekday_list,
-            months_list=None,
-            monthday_distortion=None,
-            yr1_jan1_offset=if_nan_return_None(gov_attrs.get("yr1_jan1_offset")),
+        gov_timelineunit = create_timelineunit_from_prime_data(
+            gov_attrs,
+            gov_weekday_dict=govs_weekday_dict.get(x_gov_idea),
+            gov_month_dict=govs_month_dict.get(x_gov_idea),
+            gov_hour_dict=govs_hour_dict.get(x_gov_idea),
         )
-        if month_dict := govs_month_dict.get(x_gov_idea):
-            x_month_list = get_sorted_list(month_dict, "cumlative_day", True)
-            timeline_config["months_config"] = x_month_list
-        if hour_dict := govs_hour_dict.get(x_gov_idea):
-            x_hour_list = get_sorted_list(hour_dict, "cumlative_minute", True)
-            timeline_config["hours_config"] = x_hour_list
-        if validate_timeline_config(timeline_config) is False:
-            raise ValueError(f"Invalid timeline_config: {timeline_config=}")
 
         govunit = govunit_shop(
             gov_idea=x_gov_idea,
             govs_dir=govs_dir,
-            timeline=timelineunit_shop(timeline_config),
+            timeline=gov_timelineunit,
             current_time=if_nan_return_None(gov_attrs.get("current_time")),
             bridge=gov_attrs.get("bridge"),
             fund_coin=if_nan_return_None(gov_attrs.get("fund_coin")),
