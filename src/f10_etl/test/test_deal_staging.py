@@ -574,7 +574,7 @@ def test_create_dealunit_jsons_from_prime_files_Scenario5_deal_timeline_hour(
     assert accord56_dealunit.timeline.hours_config == x_timelineunit.hours_config
 
 
-def test_create_dealunit_jsons_from_prime_files_Scenario3_deal_cashbook(
+def test_create_dealunit_jsons_from_prime_files_Scenario6_deal_cashbook(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
