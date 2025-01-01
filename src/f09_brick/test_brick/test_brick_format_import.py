@@ -44,11 +44,11 @@ def test_open_csv_ReturnsObj():
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     j1_brickname = brick_format_00021_bud_acctunit_v0_0_0()
-    acct_filename = f"{sue_str}_acct_example_01.csv"
-    save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), acct_filename)
+    name_filename = f"{sue_str}_acct_example_01.csv"
+    save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), name_filename)
 
     # WHEN
-    acct_dataframe = open_csv(brick_examples_dir(), acct_filename)
+    acct_dataframe = open_csv(brick_examples_dir(), name_filename)
 
     # THEN
     array_headers = list(acct_dataframe.columns)
@@ -94,16 +94,16 @@ def test_load_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_csvToVoice(
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     j1_brickname = brick_format_00021_bud_acctunit_v0_0_0()
-    acct_filename = f"{sue_str}_acct_example_02.csv"
-    csv_example_path = f_path(brick_examples_dir(), acct_filename)
+    name_filename = f"{sue_str}_acct_example_02.csv"
+    csv_example_path = f_path(brick_examples_dir(), name_filename)
     print(f"{csv_example_path}")
-    save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), acct_filename)
+    save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), name_filename)
     sue_hubunit = hubunit_shop(brick_cmtys_dir(), accord_cmty_idea, owner_name=sue_str)
     # Open CmtyUnit and confirm voice BudUnit does not exist
     assert not sue_hubunit.voice_file_exists()
 
     # WHEN
-    load_brick_csv(sue_hubunit.cmtys_dir, brick_examples_dir(), acct_filename)
+    load_brick_csv(sue_hubunit.cmtys_dir, brick_examples_dir(), name_filename)
 
     # THEN
     # assert voice Budunit now exists
@@ -145,16 +145,16 @@ def test_load_brick_csv_csvToVoice(
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     j1_brickname = brick_format_00021_bud_acctunit_v0_0_0()
-    acct_filename = f"{sue_str}_acct_example_02.csv"
-    csv_example_path = f_path(brick_examples_dir(), acct_filename)
+    name_filename = f"{sue_str}_acct_example_02.csv"
+    csv_example_path = f_path(brick_examples_dir(), name_filename)
     print(f"{csv_example_path}")
-    save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), acct_filename)
+    save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), name_filename)
     sue_hubunit = hubunit_shop(brick_cmtys_dir(), accord_cmty_idea, owner_name=sue_str)
     # Open CmtyUnit and confirm voice BudUnit does not exist
     assert not sue_hubunit.voice_file_exists()
 
     # WHEN
-    load_brick_csv(sue_hubunit.cmtys_dir, brick_examples_dir(), acct_filename)
+    load_brick_csv(sue_hubunit.cmtys_dir, brick_examples_dir(), name_filename)
 
     # THEN
     # assert voice Budunit now exists
@@ -188,10 +188,10 @@ def test_load_brick_csv_csvToVoice(
 #     sue_budunit.add_acctunit(sue_str)
 #     sue_budunit.add_acctunit(bob_str)
 #     j1_brickname = brick_format_00021_bud_acctunit_v0_0_0()
-#     acct_filename = f"{sue_str}_acct_example_02.csv"
-#     csv_example_path = f_path(brick_examples_dir(), acct_filename)
+#     name_filename = f"{sue_str}_acct_example_02.csv"
+#     csv_example_path = f_path(brick_examples_dir(), name_filename)
 #     print(f"{csv_example_path}")
-#     save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), acct_filename)
+#     save_brick_csv(j1_brickname, sue_budunit, brick_examples_dir(), name_filename)
 #     sue_hubunit = hubunit_shop(brick_cmtys_dir(), accord_cmty_idea, owner_name=sue_str)
 #     sue_hubunit.save_voice_bud(budunit_shop(sue_str, accord_cmty_idea))
 #     sue_hubunit._create_initial_gift_files_from_voice()
@@ -207,7 +207,7 @@ def test_load_brick_csv_csvToVoice(
 #     assert sue_hubunit.get_max_gift_file_number() == 3
 
 #     # WHEN
-#     load_brick_csv(sue_hubunit.cmtys_dir, brick_examples_dir(), acct_filename)
+#     load_brick_csv(sue_hubunit.cmtys_dir, brick_examples_dir(), name_filename)
 
 #     # THEN
 #     # assert voice Budunit acctunit now exists

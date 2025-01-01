@@ -288,3 +288,83 @@ def pidginbodybook_shop(pidginheartbook: PidginHeartBook = None) -> PidginBodyBo
     if pidginheartbook is None:
         pidginheartbook = pidginheartbook_shop()
     return PidginBodyBook(pidginheartbook=pidginheartbook, pidginbodyunits={})
+
+
+class PidginPrimeColumns:
+    def __init__(self):
+        self.map_name_agg_columns = [
+            "face_name",
+            "event_int",
+            "otx_name",
+            "inx_name",
+            "otx_bridge",
+            "inx_bridge",
+            "unknown_word",
+        ]
+        self.map_label_agg_columns = [
+            "face_name",
+            "event_int",
+            "otx_label",
+            "inx_label",
+            "otx_bridge",
+            "inx_bridge",
+            "unknown_word",
+        ]
+        self.map_idea_agg_columns = [
+            "face_name",
+            "event_int",
+            "otx_idea",
+            "inx_idea",
+            "otx_bridge",
+            "inx_bridge",
+            "unknown_word",
+        ]
+        self.map_road_agg_columns = [
+            "face_name",
+            "event_int",
+            "otx_road",
+            "inx_road",
+            "otx_bridge",
+            "inx_bridge",
+            "unknown_word",
+        ]
+        self.map_name_staging_columns = [
+            "src_brick",
+            "face_name",
+            "event_int",
+            "otx_name",
+            "inx_name",
+            "otx_bridge",
+            "inx_bridge",
+            "unknown_word",
+        ]
+        self.map_label_staging_columns = [
+            "src_brick",
+            "face_name",
+            "event_int",
+            "otx_label",
+            "inx_label",
+            "otx_bridge",
+            "inx_bridge",
+            "unknown_word",
+        ]
+        self.map_idea_staging_columns = [
+            "src_brick",
+            "face_name",
+            "event_int",
+            "otx_idea",
+            "inx_idea",
+            "otx_bridge",
+            "inx_bridge",
+            "unknown_word",
+        ]
+        self.map_road_staging_columns = [
+            "src_brick",
+            "face_name",
+            "event_int",
+            "otx_road",
+            "inx_road",
+            "otx_bridge",
+            "inx_bridge",
+            "unknown_word",
+        ]

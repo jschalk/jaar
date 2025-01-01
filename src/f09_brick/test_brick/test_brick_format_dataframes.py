@@ -192,9 +192,9 @@ def test_save_brick_csv_Arg_brick_format_00019_itemunit_v0_0_0():
     x_brick_name = brick_format_00019_itemunit_v0_0_0()
 
     # WHEN
-    # acct_filename = f"{sue_str}_itemunit_example_00019.csv"
-    # csv_example_path = create_path(brick_cmtys_dir(), acct_filename)
-    # save_brick_csv(x_brick_name, sue_budunit, brick_examples_dir(), acct_filename)
+    # name_filename = f"{sue_str}_itemunit_example_00019.csv"
+    # csv_example_path = create_path(brick_cmtys_dir(), name_filename)
+    # save_brick_csv(x_brick_name, sue_budunit, brick_examples_dir(), name_filename)
     brick_df = create_brick_df(sue_budunit, x_brick_name)
 
     # THEN
@@ -223,30 +223,30 @@ def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     j1_brickname = brick_format_00021_bud_acctunit_v0_0_0()
-    acct_filename = f"{sue_str}_acct_example_00.csv"
-    csv_example_path = create_path(brick_cmtys_dir(), acct_filename)
+    name_filename = f"{sue_str}_acct_example_00.csv"
+    csv_example_path = create_path(brick_cmtys_dir(), name_filename)
     print(f"{csv_example_path}")
     assert not os_path_exists(csv_example_path)
 
     # WHEN
-    save_brick_csv(j1_brickname, sue_budunit, brick_cmtys_dir(), acct_filename)
+    save_brick_csv(j1_brickname, sue_budunit, brick_cmtys_dir(), name_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_acct_example_csv = """face_name,event_int,cmty_idea,owner_name,acct_name,credit_belief,debtit_belief
+    sue1_name_example_csv = """face_name,event_int,cmty_idea,owner_name,acct_name,credit_belief,debtit_belief
 ,,accord56,Sue,Bob,13,29
 ,,accord56,Sue,Sue,11,23
 ,,accord56,Sue,Yao,41,37
 """
-    brick_file_str = open_file(brick_cmtys_dir(), acct_filename)
+    brick_file_str = open_file(brick_cmtys_dir(), name_filename)
     print(f"      {brick_file_str=}")
-    print(f"{sue1_acct_example_csv=}")
-    assert brick_file_str == sue1_acct_example_csv
+    print(f"{sue1_name_example_csv=}")
+    assert brick_file_str == sue1_name_example_csv
 
     # WHEN
     zia_str = "Zia"
     sue_budunit.add_acctunit(zia_str)
-    save_brick_csv(j1_brickname, sue_budunit, brick_cmtys_dir(), acct_filename)
+    save_brick_csv(j1_brickname, sue_budunit, brick_cmtys_dir(), name_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)
@@ -256,7 +256,7 @@ def test_save_brick_csv_Arg_brick_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 ,,accord56,Sue,Yao,41,37
 ,,accord56,Sue,Zia,1,1
 """
-    assert open_file(brick_cmtys_dir(), acct_filename) == sue2_acct_example_csv
+    assert open_file(brick_cmtys_dir(), name_filename) == sue2_acct_example_csv
 
 
 def test_save_brick_csv_Arg_brick_format_00013_itemunit_v0_0_0(brick_env_setup_cleanup):
@@ -274,12 +274,12 @@ def test_save_brick_csv_Arg_brick_format_00013_itemunit_v0_0_0(brick_env_setup_c
     sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_road)
     x_brick_name = brick_format_00013_itemunit_v0_0_0()
     itemunit_format = create_brick_df(sue_budunit, x_brick_name)
-    acct_filename = f"{sue_str}_itemunit_example_000.csv"
-    csv_example_path = create_path(brick_cmtys_dir(), acct_filename)
+    name_filename = f"{sue_str}_itemunit_example_000.csv"
+    csv_example_path = create_path(brick_cmtys_dir(), name_filename)
     assert not os_path_exists(csv_example_path)
 
     # WHEN
-    save_brick_csv(x_brick_name, sue_budunit, brick_cmtys_dir(), acct_filename)
+    save_brick_csv(x_brick_name, sue_budunit, brick_cmtys_dir(), name_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)

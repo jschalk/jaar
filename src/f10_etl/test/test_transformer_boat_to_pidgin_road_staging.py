@@ -14,6 +14,7 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, boat_agg_str
+from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f10_etl.transformers import etl_boat_agg_to_pidgin_road_staging
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -57,23 +58,14 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
     assert os_path_exists(pidgin_path)
     road_staging_str = "road_staging"
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
-    road_file_columns = [
-        "src_brick",
-        face_name_str(),
-        event_int_str(),
-        otx_road_str(),
-        inx_road_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_road_df.columns) == road_file_columns
+    road_staging_columns = PidginPrimeColumns().map_road_staging_columns
+    assert list(gen_road_df.columns) == road_staging_columns
     assert len(gen_road_df) == 2
     bx = "br00117"
     e1_road0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
     e1_road1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
     e1_road_rows = [e1_road0, e1_road1]
-    e1_road_df = DataFrame(e1_road_rows, columns=road_file_columns)
+    e1_road_df = DataFrame(e1_road_rows, columns=road_staging_columns)
     assert len(gen_road_df) == len(e1_road_df)
     print(f"{gen_road_df.to_csv()=}")
     print(f" {e1_road_df.to_csv()=}")
@@ -140,17 +132,8 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBrick
     assert os_path_exists(pidgin_path)
     road_staging_str = "road_staging"
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
-    road_file_columns = [
-        "src_brick",
-        face_name_str(),
-        event_int_str(),
-        otx_road_str(),
-        inx_road_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_road_df.columns) == road_file_columns
+    road_staging_columns = PidginPrimeColumns().map_road_staging_columns
+    assert list(gen_road_df.columns) == road_staging_columns
     assert len(gen_road_df) == 5
     b3 = "br00117"
     b4 = "br00045"
@@ -161,7 +144,7 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBrick
     e1_road1 = [b3, sue_str, event1, bob_str, bob_inx, None, None, None]
 
     e1_road_rows = [e1_road3, e1_road4, e1_road5, e1_road0, e1_road1]
-    e1_road_df = DataFrame(e1_road_rows, columns=road_file_columns)
+    e1_road_df = DataFrame(e1_road_rows, columns=road_staging_columns)
     assert len(gen_road_df) == len(e1_road_df)
     print(f"{gen_road_df.to_csv()=}")
     print(f" {e1_road_df.to_csv()=}")
@@ -227,24 +210,15 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario2_WorldUnit_eve
     assert os_path_exists(pidgin_path)
     road_staging_str = "road_staging"
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
-    road_file_columns = [
-        "src_brick",
-        face_name_str(),
-        event_int_str(),
-        otx_road_str(),
-        inx_road_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_road_df.columns) == road_file_columns
+    road_staging_columns = PidginPrimeColumns().map_road_staging_columns
+    assert list(gen_road_df.columns) == road_staging_columns
     assert len(gen_road_df) == 2
     b3 = "br00117"
     b4 = "br00045"
     e1_road3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
     e1_road4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
     e1_road_rows = [e1_road3, e1_road4]
-    e1_road_df = DataFrame(e1_road_rows, columns=road_file_columns)
+    e1_road_df = DataFrame(e1_road_rows, columns=road_staging_columns)
     assert len(gen_road_df) == len(e1_road_df)
     print(f"{gen_road_df.to_csv()=}")
     print(f" {e1_road_df.to_csv()=}")

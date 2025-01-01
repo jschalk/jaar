@@ -14,6 +14,7 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, boat_agg_str
+from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f10_etl.transformers import etl_boat_agg_to_pidgin_idea_staging
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -57,23 +58,14 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario0_SingleBrick(
     assert os_path_exists(pidgin_path)
     idea_staging_str = "idea_staging"
     gen_idea_df = pandas_read_excel(pidgin_path, sheet_name=idea_staging_str)
-    idea_file_columns = [
-        "src_brick",
-        face_name_str(),
-        event_int_str(),
-        otx_idea_str(),
-        inx_idea_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_idea_df.columns) == idea_file_columns
+    idea_staging_columns = PidginPrimeColumns().map_idea_staging_columns
+    assert list(gen_idea_df.columns) == idea_staging_columns
     assert len(gen_idea_df) == 2
     bx = "br00116"
     e1_idea0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
     e1_idea1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
     e1_idea_rows = [e1_idea0, e1_idea1]
-    e1_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
+    e1_idea_df = DataFrame(e1_idea_rows, columns=idea_staging_columns)
     assert len(gen_idea_df) == len(e1_idea_df)
     print(f"{gen_idea_df.to_csv()=}")
     print(f" {e1_idea_df.to_csv()=}")
@@ -140,17 +132,8 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBrick
     assert os_path_exists(pidgin_path)
     idea_staging_str = "idea_staging"
     gen_idea_df = pandas_read_excel(pidgin_path, sheet_name=idea_staging_str)
-    idea_file_columns = [
-        "src_brick",
-        face_name_str(),
-        event_int_str(),
-        otx_idea_str(),
-        inx_idea_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_idea_df.columns) == idea_file_columns
+    idea_staging_columns = PidginPrimeColumns().map_idea_staging_columns
+    assert list(gen_idea_df.columns) == idea_staging_columns
     assert len(gen_idea_df) == 5
     b3 = "br00116"
     b4 = "br00044"
@@ -161,7 +144,7 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario1_MultipleBrick
     e1_idea1 = [b3, sue_str, event1, bob_str, bob_inx, None, None, None]
 
     e1_idea_rows = [e1_idea3, e1_idea4, e1_idea5, e1_idea0, e1_idea1]
-    e1_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
+    e1_idea_df = DataFrame(e1_idea_rows, columns=idea_staging_columns)
     assert len(gen_idea_df) == len(e1_idea_df)
     print(f"{gen_idea_df.to_csv()=}")
     print(f" {e1_idea_df.to_csv()=}")
@@ -227,24 +210,15 @@ def test_etl_boat_agg_to_pidgin_idea_staging_CreatesFile_Scenario2_WorldUnit_eve
     assert os_path_exists(pidgin_path)
     idea_staging_str = "idea_staging"
     gen_idea_df = pandas_read_excel(pidgin_path, sheet_name=idea_staging_str)
-    idea_file_columns = [
-        "src_brick",
-        face_name_str(),
-        event_int_str(),
-        otx_idea_str(),
-        inx_idea_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_idea_df.columns) == idea_file_columns
+    idea_staging_columns = PidginPrimeColumns().map_idea_staging_columns
+    assert list(gen_idea_df.columns) == idea_staging_columns
     assert len(gen_idea_df) == 2
     b3 = "br00116"
     b4 = "br00044"
     e1_idea3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
     e1_idea4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
     e1_idea_rows = [e1_idea3, e1_idea4]
-    e1_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
+    e1_idea_df = DataFrame(e1_idea_rows, columns=idea_staging_columns)
     assert len(gen_idea_df) == len(e1_idea_df)
     print(f"{gen_idea_df.to_csv()=}")
     print(f" {e1_idea_df.to_csv()=}")

@@ -133,12 +133,12 @@ def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
 
 def _save_map_acct_csv(x_dir: str, acctmap: AcctMap):
     x_dt = create_map_acct_dt(acctmap)
-    save_file(x_dir, "acct.csv", get_ordered_csv(x_dt))
+    save_file(x_dir, "name.csv", get_ordered_csv(x_dt))
 
 
 def _save_map_group_csv(x_dir: str, groupmap: GroupMap):
     x_dt = create_map_group_dt(groupmap)
-    save_file(x_dir, "group.csv", get_ordered_csv(x_dt))
+    save_file(x_dir, "label.csv", get_ordered_csv(x_dt))
 
 
 def _save_map_idea_csv(x_dir: str, ideamap: IdeaMap):
@@ -152,9 +152,9 @@ def _save_map_road_csv(x_dir: str, roadmap: RoadMap):
 
 
 def _load_acctmap_from_csv(x_dir, x_acctmap: AcctMap) -> AcctMap:
-    acct_filename = "acct.csv"
-    if os_path_exists(create_path(x_dir, acct_filename)):
-        otx2inx_dt = open_csv(x_dir, acct_filename)
+    name_filename = "name.csv"
+    if os_path_exists(create_path(x_dir, name_filename)):
+        otx2inx_dt = open_csv(x_dir, name_filename)
         for table_row in otx2inx_dt.to_dict("records"):
             otx_value = table_row.get("otx_name")
             inx_value = table_row.get("inx_name")
@@ -164,9 +164,9 @@ def _load_acctmap_from_csv(x_dir, x_acctmap: AcctMap) -> AcctMap:
 
 
 def _load_groupmap_from_csv(x_dir, x_groupmap: GroupMap) -> GroupMap:
-    group_filename = "group.csv"
-    if os_path_exists(create_path(x_dir, group_filename)):
-        otx2inx_dt = open_csv(x_dir, group_filename)
+    label_filename = "label.csv"
+    if os_path_exists(create_path(x_dir, label_filename)):
+        otx2inx_dt = open_csv(x_dir, label_filename)
         for table_row in otx2inx_dt.to_dict("records"):
             otx_value = table_row.get("otx_label")
             inx_value = table_row.get("inx_label")

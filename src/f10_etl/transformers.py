@@ -46,16 +46,16 @@ MAPS_CATEGORYS = {
 
 JAAR_TYPES = {
     "AcctName": {
-        "stage": "acct_staging",
-        "agg": "acct_agg",
-        "csv_filename": "acct.csv",
+        "stage": "name_staging",
+        "agg": "name_agg",
+        "csv_filename": "name.csv",
         "otx_obj": "otx_name",
         "inx_obj": "inx_name",
     },
     "GroupLabel": {
-        "stage": "group_staging",
-        "agg": "group_agg",
-        "csv_filename": "group.csv",
+        "stage": "label_staging",
+        "agg": "label_agg",
+        "csv_filename": "label.csv",
         "otx_obj": "otx_label",
         "inx_obj": "inx_label",
     },
@@ -316,13 +316,13 @@ def boat_agg_single_to_pidgin_staging(
     transformer.transform()
 
 
-def etl_boat_agg_to_pidgin_acct_staging(
+def etl_boat_agg_to_pidgin_name_staging(
     legitimate_events: set[EventInt], boat_dir: str
 ):
     boat_agg_single_to_pidgin_staging("map_name", legitimate_events, boat_dir)
 
 
-def etl_boat_agg_to_pidgin_group_staging(
+def etl_boat_agg_to_pidgin_label_staging(
     legitimate_events: set[EventInt], boat_dir: str
 ):
     boat_agg_single_to_pidgin_staging("map_label", legitimate_events, boat_dir)
@@ -341,8 +341,8 @@ def etl_boat_agg_to_pidgin_road_staging(
 
 
 def etl_boat_agg_to_pidgin_staging(legitimate_events: set[EventInt], boat_dir: str):
-    etl_boat_agg_to_pidgin_acct_staging(legitimate_events, boat_dir)
-    etl_boat_agg_to_pidgin_group_staging(legitimate_events, boat_dir)
+    etl_boat_agg_to_pidgin_name_staging(legitimate_events, boat_dir)
+    etl_boat_agg_to_pidgin_label_staging(legitimate_events, boat_dir)
     etl_boat_agg_to_pidgin_idea_staging(legitimate_events, boat_dir)
     etl_boat_agg_to_pidgin_road_staging(legitimate_events, boat_dir)
 
@@ -421,11 +421,11 @@ class boatAggToStagingTransformer:
         return None
 
 
-def etl_pidgin_acct_staging_to_acct_agg(boat_dir: str):
+def etl_pidgin_name_staging_to_name_agg(boat_dir: str):
     etl_pidgin_single_staging_to_agg(boat_dir, "map_name")
 
 
-def etl_pidgin_group_staging_to_group_agg(boat_dir: str):
+def etl_pidgin_label_staging_to_label_agg(boat_dir: str):
     etl_pidgin_single_staging_to_agg(boat_dir, "map_label")
 
 
@@ -443,8 +443,8 @@ def etl_pidgin_single_staging_to_agg(boat_dir: str, map_category: str):
 
 
 def etl_boat_pidgin_staging_to_agg(boat_dir):
-    etl_pidgin_acct_staging_to_acct_agg(boat_dir)
-    etl_pidgin_group_staging_to_group_agg(boat_dir)
+    etl_pidgin_name_staging_to_name_agg(boat_dir)
+    etl_pidgin_label_staging_to_label_agg(boat_dir)
     etl_pidgin_road_staging_to_road_agg(boat_dir)
     etl_pidgin_idea_staging_to_idea_agg(boat_dir)
 
