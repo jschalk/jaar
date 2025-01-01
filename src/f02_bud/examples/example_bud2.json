@@ -735,7 +735,7 @@
                                 "_uid": 107,
                                 "mass": 1
                             },
-                            "Rick Management and Hazard Communication": {
+                            "Rick Management and Hazard Analysis": {
                                 "_kids": {
                                     "Accomplish Fall 2021 training": {
                                         "_idee": "Accomplish Fall 2021 training",
@@ -755,7 +755,7 @@
                                         }
                                     }
                                 },
-                                "_idee": "Rick Management and Hazard Communication",
+                                "_idee": "Rick Management and Hazard Analysis",
                                 "_uid": 112,
                                 "mass": 1
                             },
@@ -2121,8 +2121,8 @@
             "Ultimate Frisbee": {
                 "_is_expanded": false,
                 "_kids": {
-                    "check on community": {
-                        "_idee": "check on community",
+                    "check on m33": {
+                        "_idee": "check on m33",
                         "_uid": 221,
                         "mass": 1,
                         "reasonunits": {

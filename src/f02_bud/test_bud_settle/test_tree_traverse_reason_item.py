@@ -509,51 +509,51 @@ def test_BudUnit_edit_item_attr_budIsAbleToEdit_base_item_active_requisite_AnyIt
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
 
-    commute_str = "commute to casa"
-    commute_road = sue_bud.make_l1_road(commute_str)
-    sue_bud.set_item(itemunit_shop(commute_str), sue_bud.gov_idea)
+    run_str = "run to casa"
+    run_road = sue_bud.make_l1_road(run_str)
+    sue_bud.set_item(itemunit_shop(run_str), sue_bud.gov_idea)
     sue_bud.settle_bud()  # set tree metrics
-    commute_item = sue_bud.get_item_obj(commute_road)
-    assert len(commute_item.reasonunits) == 0
+    run_item = sue_bud.get_item_obj(run_road)
+    assert len(run_item.reasonunits) == 0
 
     # WHEN
     sue_bud.edit_item_attr(
-        road=commute_road,
+        road=run_road,
         reason_base=casa_road,
         reason_base_item_active_requisite=True,
     )
 
     # THEN
-    assert len(commute_item.reasonunits) == 1
-    reasonunit_casa = commute_item.reasonunits.get(casa_road)
+    assert len(run_item.reasonunits) == 1
+    reasonunit_casa = run_item.reasonunits.get(casa_road)
     assert reasonunit_casa.base == casa_road
     assert len(reasonunit_casa.premises) == 0
     assert reasonunit_casa.base_item_active_requisite is True
 
     # WHEN
     sue_bud.edit_item_attr(
-        road=commute_road,
+        road=run_road,
         reason_base=casa_road,
         reason_base_item_active_requisite=False,
     )
 
     # THEN
-    assert len(commute_item.reasonunits) == 1
-    reasonunit_casa = commute_item.reasonunits.get(casa_road)
+    assert len(run_item.reasonunits) == 1
+    reasonunit_casa = run_item.reasonunits.get(casa_road)
     assert reasonunit_casa.base == casa_road
     assert len(reasonunit_casa.premises) == 0
     assert reasonunit_casa.base_item_active_requisite is False
 
     # WHEN
     sue_bud.edit_item_attr(
-        road=commute_road,
+        road=run_road,
         reason_base=casa_road,
         reason_base_item_active_requisite="Set to Ignore",
     )
 
     # THEN
-    assert len(commute_item.reasonunits) == 1
-    reasonunit_casa = commute_item.reasonunits.get(casa_road)
+    assert len(run_item.reasonunits) == 1
+    reasonunit_casa = run_item.reasonunits.get(casa_road)
     assert reasonunit_casa.base == casa_road
     assert len(reasonunit_casa.premises) == 0
     assert reasonunit_casa.base_item_active_requisite is None
@@ -586,27 +586,27 @@ def test_BudUnit_ReasonUnits_ItemUnit_active_InfluencesReasonUnitStatus():
     casa_item = sue_bud.get_item_obj(casa_road)
     assert casa_item._active is False
 
-    # 5. item(...,commute to casa) with
+    # 5. item(...,run to casa) with
     # 5.1. ReasonUnit: item(base=...,casa) has .base_item_active_requisite = True
     # 5.2. item(...,casa).active = False
-    commute_str = "commute to casa"
-    commute_road = sue_bud.make_l1_road(commute_str)
-    sue_bud.set_item(itemunit_shop(commute_str), sue_bud.gov_idea)
+    run_str = "run to casa"
+    run_road = sue_bud.make_l1_road(run_str)
+    sue_bud.set_item(itemunit_shop(run_str), sue_bud.gov_idea)
     sue_bud.edit_item_attr(
-        road=commute_road,
+        road=run_road,
         reason_base=casa_road,
         reason_base_item_active_requisite=True,
     )
-    commute_item = sue_bud.get_item_obj(commute_road)
+    run_item = sue_bud.get_item_obj(run_road)
     sue_bud.settle_bud()
-    assert commute_item._active is False
+    assert run_item._active is False
 
     # Fact: base: (...,weekdays) pick: (...,weekdays,wednesday)
     sue_bud.set_fact(base=weekdays_road, pick=wed_road)
     sue_bud.settle_bud()
 
     assert casa_item._active is False
-    assert commute_item._active is False
+    assert run_item._active is False
 
     # WHEN
     print("before changing fact")
@@ -616,7 +616,7 @@ def test_BudUnit_ReasonUnits_ItemUnit_active_InfluencesReasonUnitStatus():
     assert casa_item._active is True
 
     # THEN
-    assert commute_item._active is True
+    assert run_item._active is True
 
 
 def test_BudUnit_settle_bud_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():
