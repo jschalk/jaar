@@ -13,8 +13,8 @@ from src.f05_listen.examples.example_listen_deals import (
     get_dealepisode_invalid_example,
 )
 from src.f05_listen.examples.listen_env import (
-    get_listen_temp_env_dir as govs_dir,
-    get_default_gov_idea as gov_idea,
+    get_listen_temp_env_dir as cmtys_dir,
+    get_default_cmty_idea as cmty_idea,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -24,7 +24,7 @@ from pytest import raises as pytest_raises
 def test_HubUnit_timepoint_dir_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t88_time_int = 8800
 
     # WHEN
@@ -38,7 +38,7 @@ def test_HubUnit_timepoint_dir_ReturnsObj():
 def test_HubUnit_deal_file_name_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
 
     # WHEN
     x_deal_file_name = yao_hubunit.deal_file_name()
@@ -50,7 +50,7 @@ def test_HubUnit_deal_file_name_ReturnsObj():
 def test_HubUnit_deal_file_path_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t88_time_int = 8800
 
     # WHEN
@@ -65,7 +65,7 @@ def test_HubUnit_deal_file_path_ReturnsObj():
 def test_HubUnit_save_valid_deal_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t55_deal = get_dealepisode_55_example()
     t55_time_int = t55_deal.time_int
     assert os_path_exists(yao_hubunit.deal_file_path(t55_time_int)) is False
@@ -80,7 +80,7 @@ def test_HubUnit_save_valid_deal_file_SavesFile(env_dir_setup_cleanup):
 def test_HubUnit_save_valid_deal_file_RaisesError(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t_deal = get_dealepisode_invalid_example()
 
     # WHEN / THEN
@@ -93,7 +93,7 @@ def test_HubUnit_save_valid_deal_file_RaisesError(env_dir_setup_cleanup):
 def test_HubUnit_deal_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t55_deal = get_dealepisode_55_example()
     t55_time_int = t55_deal.time_int
     assert yao_hubunit.deal_file_exists(t55_time_int) is False
@@ -108,7 +108,7 @@ def test_HubUnit_deal_file_exists_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_get_deal_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t55_deal = get_dealepisode_55_example()
     t55_time_int = t55_deal.time_int
     yao_hubunit._save_valid_deal_file(t55_deal)
@@ -121,7 +121,7 @@ def test_HubUnit_get_deal_file_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_delete_deal_file_DeletesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t55_deal = get_dealepisode_55_example()
     t55_time_int = t55_deal.time_int
     yao_hubunit._save_valid_deal_file(t55_deal)
@@ -137,7 +137,7 @@ def test_HubUnit_delete_deal_file_DeletesFile(env_dir_setup_cleanup):
 def test_HubUnit_get_deallog_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t55_deal = get_dealepisode_55_example()
     t66_deal = get_dealepisode_66_example()
     t55_time_int = t55_deal.time_int
@@ -156,7 +156,7 @@ def test_HubUnit_get_deallog_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_budpoint_file_name_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
 
     # WHEN
     x_deal_file_name = yao_hubunit.budpoint_file_name()
@@ -168,7 +168,7 @@ def test_HubUnit_budpoint_file_name_ReturnsObj():
 def test_HubUnit_budpoint_file_path_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t88_time_int = 8800
 
     # WHEN
@@ -183,7 +183,7 @@ def test_HubUnit_budpoint_file_path_ReturnsObj():
 def test_HubUnit_save_valid_budpoint_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t55_budpoint = get_budunit_with_4_levels()
     t55_time_int = 55
     assert os_path_exists(yao_hubunit.budpoint_file_path(t55_time_int)) is False
@@ -198,7 +198,7 @@ def test_HubUnit_save_valid_budpoint_file_SavesFile(env_dir_setup_cleanup):
 def test_HubUnit_save_valid_budpoint_file_RaisesError(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t_budpoint = get_budunit_irrational_example()
     t55_time_int = 55
 
@@ -212,7 +212,7 @@ def test_HubUnit_save_valid_budpoint_file_RaisesError(env_dir_setup_cleanup):
 def test_HubUnit_budpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t55_time_int = 55
     assert yao_hubunit.budpoint_file_exists(t55_time_int) is False
 
@@ -227,7 +227,7 @@ def test_HubUnit_budpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_get_budpoint_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t55_time_int = 55
     t55_budpoint = get_budunit_with_4_levels()
     yao_hubunit._save_valid_budpoint_file(t55_time_int, t55_budpoint)
@@ -243,7 +243,7 @@ def test_HubUnit_get_budpoint_file_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_delete_budpoint_file_DeletesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     t55_time_int = 55
     t55_budpoint = get_budunit_with_4_levels()
     yao_hubunit._save_valid_budpoint_file(t55_time_int, t55_budpoint)
@@ -262,7 +262,7 @@ def test_HubUnit_calc_timepoint_deal_Sets_deal_file_Scenario0(
     # ESTABLISH
     yao_str = "Yao"
     t55_time_int = 55
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     yao_hubunit._save_valid_budpoint_file(t55_time_int, get_budunit_3_acct())
     assert yao_hubunit.budpoint_file_exists(t55_time_int)
     assert yao_hubunit.deal_file_exists(t55_time_int) is False
@@ -289,7 +289,7 @@ def test_HubUnit_calc_timepoint_deal_Sets_deal_file_Scenario1(
     yao_str = "Yao"
     t88_deal = get_dealepisode_88_example()
     t88_time_int = t88_deal.time_int
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     yao_hubunit._save_valid_budpoint_file(t88_time_int, get_budunit_3_acct())
     yao_hubunit._save_valid_deal_file(t88_deal)
     assert yao_hubunit.budpoint_file_exists(t88_time_int)
@@ -324,7 +324,7 @@ def test_HubUnit_calc_timepoint_deal_RaisesException(env_dir_setup_cleanup):
     yao_str = "Yao"
     t88_deal = get_dealepisode_88_example()
     t88_time_int = t88_deal.time_int
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     yao_hubunit._save_valid_deal_file(t88_deal)
     assert yao_hubunit.budpoint_file_exists(t88_time_int) is False
     assert yao_hubunit.deal_file_exists(t88_time_int)
@@ -347,7 +347,7 @@ def test_HubUnit_calc_timepoint_deals_Sets_deal_files_Scenario0(
     t88_deal = get_dealepisode_88_example()
     t66_time_int = t66_deal.time_int
     t88_time_int = t88_deal.time_int
-    yao_hubunit = hubunit_shop(govs_dir(), gov_idea(), yao_str)
+    yao_hubunit = hubunit_shop(cmtys_dir(), cmty_idea(), yao_str)
     yao_hubunit._save_valid_budpoint_file(t66_time_int, get_budunit_3_acct())
     yao_hubunit._save_valid_budpoint_file(t88_time_int, get_budunit_3_acct())
     yao_hubunit._save_valid_deal_file(t66_deal)

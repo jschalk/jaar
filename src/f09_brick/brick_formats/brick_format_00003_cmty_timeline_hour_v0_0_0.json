@@ -1,0 +1,23 @@
+{
+    "attributes": {
+        "cumlative_minute": {
+            "otx_key": false
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "cmty_idea": {
+            "otx_key": true
+        },
+        "hour_idea": {
+            "otx_key": true
+        }
+    },
+    "brick_number": "br00003",
+    "categorys": [
+        "cmty_timeline_hour"
+    ]
+}

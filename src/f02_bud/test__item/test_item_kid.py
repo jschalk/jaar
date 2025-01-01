@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_gov_idea as root_idea, create_road
+from src.f01_road.road import get_default_cmty_idea as root_idea, create_road
 from src.f02_bud.item import itemunit_shop
 from pytest import raises as pytest_raises
 

@@ -1,6 +1,6 @@
 from src.f01_road.road import (
     create_road,
-    get_default_gov_idea as root_idea,
+    get_default_cmty_idea as root_idea,
 )
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.example_listen_buds import get_budunit_with_4_levels

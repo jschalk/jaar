@@ -1,4 +1,4 @@
-from src.f01_road.road import create_road, get_default_gov_idea as root_idea
+from src.f01_road.road import create_road, get_default_cmty_idea as root_idea
 from src.f02_bud.reason_item import reasonunit_shop, factunit_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
@@ -6,28 +6,28 @@ from src.f02_bud.examples.example_buds import get_budunit_with_4_levels
 from pytest import raises as pytest_raises
 
 
-def test_BudUnit_set_gov_idea_CorrectlySetsAttr():
+def test_BudUnit_set_cmty_idea_CorrectlySetsAttr():
     # ESTABLISH
-    x_gov_idea = "accord45"
+    x_cmty_idea = "accord45"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str)
-    assert sue_bud.gov_idea == root_idea()
+    assert sue_bud.cmty_idea == root_idea()
 
     # WHEN
-    sue_bud.set_gov_idea(gov_idea=x_gov_idea)
+    sue_bud.set_cmty_idea(cmty_idea=x_cmty_idea)
 
     # THEN
-    assert sue_bud.gov_idea == x_gov_idea
+    assert sue_bud.cmty_idea == x_cmty_idea
 
 
-def test_BudUnit_set_item_CorrectlySets_bud_gov_idea_AND_fund_coin():
+def test_BudUnit_set_item_CorrectlySets_bud_cmty_idea_AND_fund_coin():
     # ESTABLISH'
     x_fund_coin = 500
     sue_bud = get_budunit_with_4_levels()
     sue_bud.fund_coin = x_fund_coin
-    bud_gov_idea = "Texas"
-    sue_bud.set_gov_idea(bud_gov_idea)
-    assert sue_bud.gov_idea == bud_gov_idea
+    bud_cmty_idea = "Texas"
+    sue_bud.set_cmty_idea(bud_cmty_idea)
+    assert sue_bud.cmty_idea == bud_cmty_idea
 
     casa_road = sue_bud.make_l1_road("casa")
     clean_road = sue_bud.make_road(casa_road, "cleaning")
@@ -39,11 +39,11 @@ def test_BudUnit_set_item_CorrectlySets_bud_gov_idea_AND_fund_coin():
 
     # THEN
     cookery_item = sue_bud.get_item_obj(cookery_road)
-    assert cookery_item._bud_gov_idea == bud_gov_idea
+    assert cookery_item._bud_cmty_idea == bud_cmty_idea
     assert cookery_item._fund_coin == x_fund_coin
 
 
-def test_bud_set_gov_idea_CorrectlySetsAttr():
+def test_bud_set_cmty_idea_CorrectlySetsAttr():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(owner_name=yao_str)
@@ -54,25 +54,25 @@ def test_bud_set_gov_idea_CorrectlySetsAttr():
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=old_casa_road)
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.itemroot._idee == yao_bud.gov_idea
+    assert yao_bud.itemroot._idee == yao_bud.cmty_idea
     casa_item = yao_bud.get_item_obj(old_casa_road)
-    assert casa_item._parent_road == yao_bud.gov_idea
+    assert casa_item._parent_road == yao_bud.cmty_idea
     swim_item = yao_bud.get_item_obj(old_swim_road)
     assert swim_item._parent_road == old_casa_road
-    assert yao_bud.gov_idea == yao_bud.gov_idea
+    assert yao_bud.cmty_idea == yao_bud.cmty_idea
 
     # WHEN
-    x_gov_idea = "accord45"
-    yao_bud.set_gov_idea(gov_idea=x_gov_idea)
+    x_cmty_idea = "accord45"
+    yao_bud.set_cmty_idea(cmty_idea=x_cmty_idea)
 
     # THEN
     new_casa_road = yao_bud.make_l1_road(casa_str)
     swim_str = "swim"
     new_swim_road = yao_bud.make_road(new_casa_road, swim_str)
-    assert yao_bud.gov_idea == x_gov_idea
-    assert yao_bud.itemroot._idee == x_gov_idea
+    assert yao_bud.cmty_idea == x_cmty_idea
+    assert yao_bud.itemroot._idee == x_cmty_idea
     casa_item = yao_bud.get_item_obj(new_casa_road)
-    assert casa_item._parent_road == x_gov_idea
+    assert casa_item._parent_road == x_cmty_idea
     swim_item = yao_bud.get_item_obj(new_swim_road)
     assert swim_item._parent_road == new_casa_road
 
@@ -112,7 +112,7 @@ def test_bud_set_bridge_CorrectlyModifies_parent_road():
     semicolon_str = ";"
     assert zia_bud.bridge == semicolon_str
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
-    # print(f"{zia_bud.gov_idea=} {zia_bud.itemroot._idee=} {casa_road=}")
+    # print(f"{zia_bud.cmty_idea=} {zia_bud.itemroot._idee=} {casa_road=}")
     # print(f"{cook_item._parent_road=} {cook_item._idee=}")
     # semicolon_casa_item = zia_bud.get_item_obj(semicolon_casa_road)
     # print(f"{semicolon_casa_item._parent_road=} {semicolon_casa_item._idee=}")
@@ -124,8 +124,8 @@ def test_bud_set_bridge_CorrectlyModifies_parent_road():
 
     # THEN
     assert cook_item.get_road() != semicolon_cook_road
-    zia_gov_idea = zia_bud.gov_idea
-    slash_casa_road = create_road(zia_gov_idea, casa_str, bridge=slash_str)
+    zia_cmty_idea = zia_bud.cmty_idea
+    slash_casa_road = create_road(zia_cmty_idea, casa_str, bridge=slash_str)
     slash_cook_road = create_road(slash_casa_road, cook_str, bridge=slash_str)
     assert cook_item.get_road() == slash_cook_road
 

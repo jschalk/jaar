@@ -1,13 +1,13 @@
-def get_test_gov_idea():
+def get_test_cmty_idea():
     return "accord_45"
 
 
-def get_gov_idea_if_None(gov_idea: str = None):
-    return get_test_gov_idea() if gov_idea is None else gov_idea
+def get_cmty_idea_if_None(cmty_idea: str = None):
+    return get_test_cmty_idea() if cmty_idea is None else cmty_idea
 
 
-def get_test_govs_dir():
-    return "src/f07_gov/examples/govs"
+def get_test_cmtys_dir():
+    return "src/f07_cmty/examples/cmtys"
 
 
 def get_gifts_folder() -> str:

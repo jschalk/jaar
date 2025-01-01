@@ -99,8 +99,8 @@ def face_name_str() -> str:
     return "face_name"
 
 
-def gov_idea_str() -> str:
-    return "gov_idea"
+def cmty_idea_str() -> str:
+    return "cmty_idea"
 
 
 def owner_name_str() -> str:

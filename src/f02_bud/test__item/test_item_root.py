@@ -1,5 +1,5 @@
 from src.f02_bud.item import itemunit_shop
-from src.f01_road.road import get_default_gov_idea as root_idea
+from src.f01_road.road import get_default_cmty_idea as root_idea
 from pytest import raises as pytest_raises
 
 
@@ -15,7 +15,7 @@ def test_itemunit_shop_With_root_TrueReturnsObj():
     assert x_itemroot._root is True
 
 
-def test_ItemUnit_set_idee_get_default_gov_idea_DoesNotRaisesError():
+def test_ItemUnit_set_idee_get_default_cmty_idea_DoesNotRaisesError():
     # ESTABLISH
     x_itemroot = itemunit_shop(_root=True)
 
@@ -29,7 +29,7 @@ def test_ItemUnit_set_idee_get_default_gov_idea_DoesNotRaisesError():
 def test_ItemUnit_set_idee_DoesNotRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_itemroot = itemunit_shop(_root=True, _bud_gov_idea=el_paso_str)
+    x_itemroot = itemunit_shop(_root=True, _bud_cmty_idea=el_paso_str)
 
     # WHEN
     x_itemroot.set_idee(_idee=el_paso_str)
@@ -41,7 +41,7 @@ def test_ItemUnit_set_idee_DoesNotRaisesError():
 def test_ItemUnit_set_idee_DoesRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_itemroot = itemunit_shop(_root=True, _bud_gov_idea=el_paso_str)
+    x_itemroot = itemunit_shop(_root=True, _bud_cmty_idea=el_paso_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -53,7 +53,7 @@ def test_ItemUnit_set_idee_DoesRaisesError():
     )
 
 
-def test_ItemUnit_set_idee_RaisesErrorWhen_bud_gov_idea_IsNone():
+def test_ItemUnit_set_idee_RaisesErrorWhen_bud_cmty_idea_IsNone():
     # ESTABLISH
     x_itemroot = itemunit_shop(_root=True)
 
