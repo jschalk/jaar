@@ -27,18 +27,11 @@ from src.f09_brick.pandas_tool import (
     _get_gov_brick_format_filenames,
     boat_agg_str,
 )
+from src.f10_etl.gov_agg import GovPrimeColumns, GovPrimeFilePaths
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
-
-
-# br00000 gov_idea c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
-# br00001 gov_idea owner_name,acct_name,time_int,quota
-# br00002 gov_idea owner_name,acct_name,time_int,amount
-# br00003 gov_idea hour_idea,cumlative_minute
-# br00004 gov_idea month_idea,cumlative_day
-# br00005 gov_idea weekday_idea,weekday_order
 
 
 # def test_create_init_gov_prime_files_HasCorrectColumns(env_dir_setup_cleanup):
