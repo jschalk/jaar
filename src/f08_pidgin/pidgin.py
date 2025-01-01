@@ -41,7 +41,7 @@ def pidginable_atom_args() -> set:
         "awardee_label",
         "base",
         "face_name",
-        "gov_idea",
+        "cmty_idea",
         "group_label",
         "healer_name",
         "hour_idea",

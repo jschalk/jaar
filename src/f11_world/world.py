@@ -8,12 +8,12 @@ from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
     FaceName,
     EventInt,
-    GovIdea,
+    CmtyIdea,
     WorldID,
     TimeLineIdea,
     get_default_world_id,
 )
-from src.f07_gov.gov import GovUnit
+from src.f07_cmty.cmty import CmtyUnit
 from src.f10_etl.transformers import (
     etl_ocean_to_boat_staging,
     etl_boat_staging_to_boat_agg,
@@ -35,7 +35,7 @@ from src.f10_etl.transformers import (
     etl_bow_event_bricks_to_inx_events,
     etl_bow_inx_event_bricks_to_aft_faces,
     etl_aft_face_bricks_to_aft_event_bricks,
-    etl_aft_event_bricks_to_gov_bricks,
+    etl_aft_event_bricks_to_cmty_bricks,
 )
 from dataclasses import dataclass
 
@@ -44,7 +44,7 @@ def get_default_worlds_dir() -> str:
     return "src/f11_world/examples/worlds"
 
 
-class _set_gov_pidgin_Exception(Exception):
+class _set_cmty_pidgin_Exception(Exception):
     pass
 
 
@@ -60,7 +60,7 @@ class WorldUnit:
     _world_dir: str = None
     _ocean_dir: str = None
     _boat_dir: str = None
-    _govunits: set[GovIdea] = None
+    _cmtyunits: set[CmtyIdea] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
     def set_event(self, event_int: EventInt, face_name: FaceName):
@@ -159,8 +159,8 @@ class WorldUnit:
     def aft_face_bricks_to_aft_event_bricks(self):
         etl_aft_face_bricks_to_aft_event_bricks(self._faces_aft_dir)
 
-    def aft_event_bricks_to_gov_bricks(self):
-        etl_aft_event_bricks_to_gov_bricks(self._faces_aft_dir)
+    def aft_event_bricks_to_cmty_bricks(self):
+        etl_aft_event_bricks_to_cmty_bricks(self._faces_aft_dir)
 
     def get_dict(self) -> dict:
         return {
@@ -177,7 +177,7 @@ def worldunit_shop(
     ocean_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineIdea, TimeConversion] = None,
-    _govunits: set[GovIdea] = None,
+    _cmtyunits: set[CmtyIdea] = None,
 ) -> WorldUnit:
     if world_id is None:
         world_id = get_default_world_id()
@@ -189,7 +189,7 @@ def worldunit_shop(
         current_time=get_0_if_None(current_time),
         timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
-        _govunits=get_empty_set_if_None(_govunits),
+        _cmtyunits=get_empty_set_if_None(_cmtyunits),
         _ocean_dir=ocean_dir,
         _pidgin_events={},
     )
@@ -199,5 +199,5 @@ def worldunit_shop(
     return x_worldunit
 
 
-def init_govunits_from_dirs(x_dirs: list[str]) -> list[GovUnit]:
+def init_cmtyunits_from_dirs(x_dirs: list[str]) -> list[CmtyUnit]:
     return []

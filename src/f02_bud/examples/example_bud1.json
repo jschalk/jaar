@@ -560,7 +560,7 @@
             "debtit_belief": 1
         }
     },
-    "gov_idea": "accord45",
+    "cmty_idea": "accord45",
     "itemroot": {
         "_kids": {
             "ACME": {
@@ -707,7 +707,7 @@
                                 "_uid": 109,
                                 "mass": 1
                             },
-                            "PC1026 Rick Management and Hazard Communication": {
+                            "PC1026 Rick Management and Hazard Analysis": {
                                 "_kids": {
                                     "Accomplish Fall 2021 training": {
                                         "_is_expanded": false,
@@ -716,7 +716,7 @@
                                         "mass": 1
                                     }
                                 },
-                                "_idee": "PC1026 Rick Management and Hazard Communication",
+                                "_idee": "PC1026 Rick Management and Hazard Analysis",
                                 "_uid": 112,
                                 "mass": 1
                             },
@@ -2185,8 +2185,8 @@
             "Ultimate Frisbee": {
                 "_is_expanded": false,
                 "_kids": {
-                    "check on community": {
-                        "_idee": "check on community",
+                    "check on m33": {
+                        "_idee": "check on m33",
                         "_uid": 221,
                         "mass": 1,
                         "reasonunits": {

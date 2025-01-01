@@ -4,7 +4,7 @@ from src.f02_bud.examples.example_buds import (
     get_budunit_with_4_levels_and_2reasons_2facts,
 )
 from pytest import raises as pytest_raises
-from src.f01_road.road import get_default_gov_idea as root_idea
+from src.f01_road.road import get_default_cmty_idea as root_idea
 
 
 def test_BudUnit_edit_item_idee_FailsWhenItemDoesNotExist():
@@ -24,7 +24,7 @@ def test_BudUnit_edit_item_idee_FailsWhenItemDoesNotExist():
     assert str(excinfo.value) == f"Item old_road='{no_item_road}' does not exist"
 
 
-def test_BudUnit_edit_item_idee_RaisesErrorForLevel0ItemWhen_gov_idea_isNone():
+def test_BudUnit_edit_item_idee_RaisesErrorForLevel0ItemWhen_cmty_idea_isNone():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(owner_name=yao_str)
@@ -36,30 +36,30 @@ def test_BudUnit_edit_item_idee_RaisesErrorForLevel0ItemWhen_gov_idea_isNone():
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=casa_road)
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.itemroot._idee == yao_bud.gov_idea
+    assert yao_bud.itemroot._idee == yao_bud.cmty_idea
     casa_item = yao_bud.get_item_obj(casa_road)
-    assert casa_item._parent_road == yao_bud.gov_idea
+    assert casa_item._parent_road == yao_bud.cmty_idea
     swim_item = yao_bud.get_item_obj(swim_road)
     assert swim_item._parent_road == casa_road
 
     # WHEN
     moon_str = "moon"
-    yao_bud.edit_item_idee(old_road=yao_bud.gov_idea, new_idee=moon_str)
+    yao_bud.edit_item_idee(old_road=yao_bud.cmty_idea, new_idee=moon_str)
 
     # THEN
     # with pytest_raises(Exception) as excinfo:
     #     moon_str = "moon"
-    #     yao_bud.edit_item_idee(old_road=yao_bud.gov_idea, new_idee=moon_str)
+    #     yao_bud.edit_item_idee(old_road=yao_bud.cmty_idea, new_idee=moon_str)
     # assert (
     #     str(excinfo.value)
-    #     == f"Cannot set itemroot to string other than '{yao_bud.gov_idea}'"
+    #     == f"Cannot set itemroot to string other than '{yao_bud.cmty_idea}'"
     # )
 
     assert yao_bud.itemroot._idee != moon_str
-    assert yao_bud.itemroot._idee == yao_bud.gov_idea
+    assert yao_bud.itemroot._idee == yao_bud.cmty_idea
 
 
-def test_BudUnit_edit_item_idee_RaisesErrorForLevel0When_gov_idea_IsDifferent():
+def test_BudUnit_edit_item_idee_RaisesErrorForLevel0When_cmty_idea_IsDifferent():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(owner_name=yao_str)
@@ -70,11 +70,11 @@ def test_BudUnit_edit_item_idee_RaisesErrorForLevel0When_gov_idea_IsDifferent():
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=casa_road)
     sun_str = "sun"
-    yao_bud.gov_idea = sun_str
-    yao_bud.itemroot._bud_gov_idea = sun_str
+    yao_bud.cmty_idea = sun_str
+    yao_bud.itemroot._bud_cmty_idea = sun_str
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.gov_idea == sun_str
-    assert yao_bud.itemroot._bud_gov_idea == sun_str
+    assert yao_bud.cmty_idea == sun_str
+    assert yao_bud.itemroot._bud_cmty_idea == sun_str
     assert yao_bud.itemroot._idee == root_idea()
     casa_item = yao_bud.get_item_obj(casa_road)
     assert casa_item._parent_road == root_idea()
@@ -239,7 +239,7 @@ def test_bud_set_owner_name_CorrectlyModifiesBoth():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     assert sue_bud.owner_name == "Sue"
-    assert sue_bud.itemroot._idee == sue_bud.gov_idea
+    assert sue_bud.itemroot._idee == sue_bud.cmty_idea
     # mid_idee1 = "Yao"
     # sue_bud.edit_item_idee(old_road=old_idee, new_idee=mid_idee1)
     # assert sue_bud.owner_name == old_idee
@@ -251,7 +251,7 @@ def test_bud_set_owner_name_CorrectlyModifiesBoth():
 
     # THEN
     assert sue_bud.owner_name == bob_str
-    assert sue_bud.itemroot._idee == sue_bud.gov_idea
+    assert sue_bud.itemroot._idee == sue_bud.cmty_idea
 
 
 def test_bud_edit_item_idee_RaisesErrorIfbridgeIsInIdea():

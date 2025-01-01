@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, gov_idea_str
-from src.f07_gov.gov_config import cumlative_minute_str, hour_idea_str
+from src.f04_gift.atom_config import face_name_str, cmty_idea_str
+from src.f07_cmty.cmty_config import cumlative_minute_str, hour_idea_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, boat_staging_str
 from src.f10_etl.transformers import etl_ocean_to_boat_staging
@@ -26,7 +26,7 @@ def test_etl_ocean_to_boat_staging_CreatesboatFiles(env_dir_setup_cleanup):
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        gov_idea_str(),
+        cmty_idea_str(),
         hour_idea_str(),
     ]
     accord23_str = "accord23"
@@ -37,7 +37,7 @@ def test_etl_ocean_to_boat_staging_CreatesboatFiles(env_dir_setup_cleanup):
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        gov_idea_str(),
+        cmty_idea_str(),
     ]
     incom_row1 = [sue_str, event_1, minute_360, accord23_str]
     incom_row2 = [sue_str, event_1, minute_420, accord23_str]
