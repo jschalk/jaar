@@ -1,20 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str
-from src.f08_pidgin.pidgin_config import (
-    event_int_str,
-    inx_bridge_str,
-    otx_bridge_str,
-    inx_name_str,
-    otx_name_str,
-    inx_label_str,
-    otx_label_str,
-    inx_road_str,
-    otx_road_str,
-    inx_idea_str,
-    otx_idea_str,
-    unknown_word_str,
-)
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
+from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f10_etl.transformers import etl_boat_pidgin_agg_to_bow_face_dirs
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -33,28 +19,20 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_names(
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
     event7 = 7
-    acct_agg_str = "acct_agg"
+    name_agg_str = "name_agg"
 
-    acct_file_columns = [
-        face_name_str(),
-        event_int_str(),
-        otx_name_str(),
-        inx_name_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
+    name_agg_columns = PidginPrimeColumns().map_name_agg_columns
     x_nan = float("nan")
-    acct0 = [sue_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
-    acct1 = [sue_str, event7, bob_otx, bob_inx, x_nan, x_nan, x_nan]
-    acct2 = [zia_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
-    acct3 = [zia_str, event7, bob_otx, bob_inx, x_nan, x_nan, x_nan]
-    acct_rows = [acct0, acct1, acct2, acct3]
-    e1_acct_agg_df = DataFrame(acct_rows, columns=acct_file_columns)
+    name0 = [sue_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
+    name1 = [sue_str, event7, bob_otx, bob_inx, x_nan, x_nan, x_nan]
+    name2 = [zia_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
+    name3 = [zia_str, event7, bob_otx, bob_inx, x_nan, x_nan, x_nan]
+    name_rows = [name0, name1, name2, name3]
+    e1_name_agg_df = DataFrame(name_rows, columns=name_agg_columns)
 
     boat_dir = create_path(get_test_etl_dir(), "boat")
     agg_pidgin_path = create_path(boat_dir, "pidgin.xlsx")
-    upsert_sheet(agg_pidgin_path, acct_agg_str, e1_acct_agg_df)
+    upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
 
     faces_dir = create_path(get_test_etl_dir(), "faces_bow")
 
@@ -70,16 +48,16 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_names(
     zia_pidgin_file_path = create_path(zia_dir, "pidgin.xlsx")
     assert os_path_exists(sue_pidgin_file_path)
     assert os_path_exists(zia_pidgin_file_path)
-    assert sheet_exists(sue_pidgin_file_path, acct_agg_str)
-    assert sheet_exists(zia_pidgin_file_path, acct_agg_str)
-    gen_sue_acct_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=acct_agg_str)
-    gen_zia_acct_df = pandas_read_excel(zia_pidgin_file_path, sheet_name=acct_agg_str)
+    assert sheet_exists(sue_pidgin_file_path, name_agg_str)
+    assert sheet_exists(zia_pidgin_file_path, name_agg_str)
+    gen_sue_name_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=name_agg_str)
+    gen_zia_name_df = pandas_read_excel(zia_pidgin_file_path, sheet_name=name_agg_str)
 
-    e1_sue_acct_agg_df = DataFrame([acct0, acct1], columns=acct_file_columns)
-    e1_zia_acct_agg_df = DataFrame([acct2, acct3], columns=acct_file_columns)
+    e1_sue_name_agg_df = DataFrame([name0, name1], columns=name_agg_columns)
+    e1_zia_name_agg_df = DataFrame([name2, name3], columns=name_agg_columns)
 
-    pandas_testing_assert_frame_equal(gen_sue_acct_df, e1_sue_acct_agg_df)
-    pandas_testing_assert_frame_equal(gen_zia_acct_df, e1_zia_acct_agg_df)
+    pandas_testing_assert_frame_equal(gen_sue_name_df, e1_sue_name_agg_df)
+    pandas_testing_assert_frame_equal(gen_zia_name_df, e1_zia_name_agg_df)
 
 
 def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
@@ -92,42 +70,26 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
     event7 = 7
-    acct_agg_str = "acct_agg"
+    name_agg_str = "name_agg"
 
-    acct_file_columns = [
-        face_name_str(),
-        event_int_str(),
-        otx_name_str(),
-        inx_name_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
+    name_agg_columns = PidginPrimeColumns().map_name_agg_columns
     x_nan = float("nan")
-    e1_acct0 = [sue_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
-    e1_acct1 = [sue_str, event7, bob_otx, bob_inx, x_nan, x_nan, x_nan]
-    e1_acct_rows = [e1_acct0, e1_acct1]
-    e1_acct_agg_df = DataFrame(e1_acct_rows, columns=acct_file_columns)
+    e1_name0 = [sue_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
+    e1_name1 = [sue_str, event7, bob_otx, bob_inx, x_nan, x_nan, x_nan]
+    e1_name_rows = [e1_name0, e1_name1]
+    e1_name_agg_df = DataFrame(e1_name_rows, columns=name_agg_columns)
 
     jog_str = ";Jog"
     jog_inx = ";Yogging"
     run_str = ";Run"
     run_inx = ";Running"
     event7 = 7
-    group_agg_str = "group_agg"
-    group_file_columns = [
-        face_name_str(),
-        event_int_str(),
-        otx_label_str(),
-        inx_label_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    e1_group0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
-    e1_group1 = [sue_str, event7, run_str, run_inx, x_nan, x_nan, x_nan]
-    e1_group_rows = [e1_group0, e1_group1]
-    e1_group_agg_df = DataFrame(e1_group_rows, columns=group_file_columns)
+    label_agg_str = "label_agg"
+    label_agg_columns = PidginPrimeColumns().map_label_agg_columns
+    e1_label0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
+    e1_label1 = [sue_str, event7, run_str, run_inx, x_nan, x_nan, x_nan]
+    e1_label_rows = [e1_label0, e1_label1]
+    e1_label_agg_df = DataFrame(e1_label_rows, columns=label_agg_columns)
 
     casa_otx = "fizz,casa"
     casa_inx = "fizz,casaita"
@@ -135,19 +97,11 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     clean_inx = "fizz,casaita,limpio"
     event7 = 7
     road_agg_str = "road_agg"
-    road_file_columns = [
-        face_name_str(),
-        event_int_str(),
-        otx_road_str(),
-        inx_road_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
+    road_agg_columns = PidginPrimeColumns().map_road_agg_columns
     e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
     e1_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e1_road_rows = [e1_road0, e1_road1]
-    e1_road_agg_df = DataFrame(e1_road_rows, columns=road_file_columns)
+    e1_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
 
     t3am_otx = "t3am"
     t3am_inx = "t300"
@@ -155,24 +109,16 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     t6am_inx = "T600"
     event7 = 7
     idea_agg_str = "idea_agg"
-    idea_file_columns = [
-        face_name_str(),
-        event_int_str(),
-        otx_idea_str(),
-        inx_idea_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
+    idea_agg_columns = PidginPrimeColumns().map_idea_agg_columns
     e1_idea0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
     e1_idea1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
     e1_idea_rows = [e1_idea0, e1_idea1]
-    e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
+    e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_agg_columns)
 
     boat_dir = create_path(get_test_etl_dir(), "boat")
     agg_pidgin_path = create_path(boat_dir, "pidgin.xlsx")
-    upsert_sheet(agg_pidgin_path, acct_agg_str, e1_acct_agg_df)
-    upsert_sheet(agg_pidgin_path, group_agg_str, e1_group_agg_df)
+    upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
+    upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
     upsert_sheet(agg_pidgin_path, idea_agg_str, e1_idea_agg_df)
 
@@ -186,17 +132,17 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     assert os_path_exists(sue_dir)
     sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
     assert os_path_exists(sue_pidgin_file_path)
-    assert sheet_exists(sue_pidgin_file_path, acct_agg_str)
-    assert sheet_exists(sue_pidgin_file_path, group_agg_str)
+    assert sheet_exists(sue_pidgin_file_path, name_agg_str)
+    assert sheet_exists(sue_pidgin_file_path, label_agg_str)
     assert sheet_exists(sue_pidgin_file_path, idea_agg_str)
     assert sheet_exists(sue_pidgin_file_path, road_agg_str)
-    gen_sue_acct_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=acct_agg_str)
-    gen_sue_group_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=group_agg_str)
+    gen_sue_name_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=name_agg_str)
+    gen_sue_label_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=label_agg_str)
     gen_sue_idea_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=idea_agg_str)
     gen_sue_road_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=road_agg_str)
     print(f"{gen_sue_idea_df=}")
 
-    pandas_testing_assert_frame_equal(gen_sue_acct_df, e1_acct_agg_df)
-    pandas_testing_assert_frame_equal(gen_sue_group_df, e1_group_agg_df)
+    pandas_testing_assert_frame_equal(gen_sue_name_df, e1_name_agg_df)
+    pandas_testing_assert_frame_equal(gen_sue_label_df, e1_label_agg_df)
     pandas_testing_assert_frame_equal(gen_sue_road_df, e1_road_agg_df)
     pandas_testing_assert_frame_equal(gen_sue_idea_df, e1_idea_agg_df)

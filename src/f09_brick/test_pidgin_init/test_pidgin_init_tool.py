@@ -170,12 +170,12 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
-    acct_filename = "acct.csv"
-    group_filename = "group.csv"
+    name_filename = "name.csv"
+    label_filename = "label.csv"
     idea_filename = "idea.csv"
     road_filename = "road.csv"
-    acct_csv_path = f"{map_dir}/{acct_filename}"
-    group_csv_path = f"{map_dir}/{group_filename}"
+    acct_csv_path = f"{map_dir}/{name_filename}"
+    group_csv_path = f"{map_dir}/{label_filename}"
     idea_csv_path = f"{map_dir}/{idea_filename}"
     road_csv_path = f"{map_dir}/{road_filename}"
     assert os_path_exists(acct_csv_path) is False
@@ -199,8 +199,8 @@ def test_load_acctmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
-    acct_filename = "acct.csv"
-    acct_csv_path = f"{map_dir}/{acct_filename}"
+    name_filename = "name.csv"
+    acct_csv_path = f"{map_dir}/{name_filename}"
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(acct_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
@@ -221,8 +221,8 @@ def test_load_acctmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 def test_load_acctmap_from_csv_DoesNothinWhenFileDoesNotExist(env_dir_setup_cleanup):
     # ESTABLISH
     map_dir = get_example_face_dir()
-    acct_filename = "acct.csv"
-    acct_csv_path = f"{map_dir}/{acct_filename}"
+    name_filename = "name.csv"
+    acct_csv_path = f"{map_dir}/{name_filename}"
     assert os_path_exists(acct_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
     sue_acctmap = empty_pidginunit.get_mapunit(type_AcctName_str())
@@ -241,8 +241,8 @@ def test_load_groupmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
-    group_filename = "group.csv"
-    group_csv_path = f"{map_dir}/{group_filename}"
+    label_filename = "label.csv"
+    group_csv_path = f"{map_dir}/{label_filename}"
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(group_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
@@ -265,8 +265,8 @@ def test_load_groupmap_from_csv_DoesNothingWhenFileDoesNotExist(
 ):
     # ESTABLISH
     map_dir = get_example_face_dir()
-    group_filename = "group.csv"
-    group_csv_path = f"{map_dir}/{group_filename}"
+    label_filename = "label.csv"
+    group_csv_path = f"{map_dir}/{label_filename}"
     assert os_path_exists(group_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
     sue_groupmap = empty_pidginunit.get_mapunit(type_GroupLabel_str())

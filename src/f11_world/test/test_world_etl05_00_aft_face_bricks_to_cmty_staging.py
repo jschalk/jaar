@@ -252,21 +252,21 @@ from os.path import exists as os_path_exists
 
 #     # THEN
 #     assert os_path_exists(pidgin_path)
-#     group_staging_str = "group_staging"
-#     acct_staging_str = "acct_staging"
+#     label_staging_str = "label_staging"
+#     name_staging_str = "name_staging"
 #     idea_staging_str = "idea_staging"
 #     road_staging_str = "road_staging"
-#     assert sheet_exists(pidgin_path, acct_staging_str)
-#     assert sheet_exists(pidgin_path, group_staging_str)
+#     assert sheet_exists(pidgin_path, name_staging_str)
+#     assert sheet_exists(pidgin_path, label_staging_str)
 #     assert sheet_exists(pidgin_path, idea_staging_str)
 #     assert sheet_exists(pidgin_path, road_staging_str)
 
-#     gen_group_df = pandas_read_excel(pidgin_path, sheet_name=group_staging_str)
-#     gen_acct_df = pandas_read_excel(pidgin_path, sheet_name=acct_staging_str)
+#     gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_staging_str)
+#     gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_staging_str)
 #     gen_idea_df = pandas_read_excel(pidgin_path, sheet_name=idea_staging_str)
 #     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
 
-#     group_file_columns = [
+#     label_file_columns = [
 #         "src_brick",
 #         face_name_str(),
 #         event_int_str(),
@@ -276,20 +276,20 @@ from os.path import exists as os_path_exists
 #         inx_bridge_str(),
 #         unknown_word_str(),
 #     ]
-#     assert list(gen_group_df.columns) == group_file_columns
-#     assert len(gen_group_df) == 2
+#     assert list(gen_label_df.columns) == label_file_columns
+#     assert len(gen_label_df) == 2
 #     b3 = "br00115"
 #     b4 = "br00042"
-#     e1_group3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-#     e1_group4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-#     e1_group_rows = [e1_group3, e1_group4]
-#     e1_group_df = DataFrame(e1_group_rows, columns=group_file_columns)
-#     assert len(gen_group_df) == len(e1_group_df)
-#     print(f"{gen_group_df.to_csv()=}")
-#     print(f" {e1_group_df.to_csv()=}")
-#     assert gen_group_df.to_csv(index=False) == e1_group_df.to_csv(index=False)
+#     e1_label3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+#     e1_label4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+#     e1_label_rows = [e1_label3, e1_label4]
+#     e1_label_df = DataFrame(e1_label_rows, columns=label_file_columns)
+#     assert len(gen_label_df) == len(e1_label_df)
+#     print(f"{gen_label_df.to_csv()=}")
+#     print(f" {e1_label_df.to_csv()=}")
+#     assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
 
-#     acct_file_columns = [
+#     name_file_columns = [
 #         "src_brick",
 #         face_name_str(),
 #         event_int_str(),
@@ -299,18 +299,18 @@ from os.path import exists as os_path_exists
 #         inx_bridge_str(),
 #         unknown_word_str(),
 #     ]
-#     assert list(gen_acct_df.columns) == acct_file_columns
-#     assert len(gen_acct_df) == 2
+#     assert list(gen_name_df.columns) == name_file_columns
+#     assert len(gen_name_df) == 2
 #     b3 = "br00113"
 #     b4 = "br00043"
-#     e1_acct3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-#     e1_acct4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-#     e1_acct_rows = [e1_acct3, e1_acct4]
-#     e1_acct_df = DataFrame(e1_acct_rows, columns=acct_file_columns)
-#     assert len(gen_acct_df) == len(e1_acct_df)
-#     print(f"{gen_acct_df.to_csv()=}")
-#     print(f" {e1_acct_df.to_csv()=}")
-#     assert gen_acct_df.to_csv(index=False) == e1_acct_df.to_csv(index=False)
+#     e1_name3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+#     e1_name4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+#     e1_name_rows = [e1_name3, e1_name4]
+#     e1_name_df = DataFrame(e1_name_rows, columns=name_file_columns)
+#     assert len(gen_name_df) == len(e1_name_df)
+#     print(f"{gen_name_df.to_csv()=}")
+#     print(f" {e1_name_df.to_csv()=}")
+#     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
 
 #     idea_file_columns = [
 #         "src_brick",

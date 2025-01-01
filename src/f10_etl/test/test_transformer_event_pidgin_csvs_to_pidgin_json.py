@@ -7,33 +7,15 @@ from src.f00_instrument.file import (
 )
 from src.f01_road.road import default_bridge_if_None
 from src.f01_road.jaar_config import default_unknown_word_if_None
-from src.f04_gift.atom_config import face_name_str, type_RoadUnit_str
-from src.f08_pidgin.pidgin import pidginunit_shop, get_pidginunit_from_json
-from src.f08_pidgin.pidgin_config import (
-    pidgin_filename,
-    event_int_str,
-    inx_bridge_str,
-    otx_bridge_str,
-    inx_name_str,
-    otx_name_str,
-    inx_label_str,
-    otx_label_str,
-    inx_idea_str,
-    otx_idea_str,
-    inx_road_str,
-    otx_road_str,
-    unknown_word_str,
-)
-from src.f09_brick.pidgin_toolbox import init_pidginunit_from_dir
-from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet, open_csv
+from src.f04_gift.atom_config import type_RoadUnit_str
+from src.f08_pidgin.pidgin import get_pidginunit_from_json
+from src.f08_pidgin.pidgin_config import pidgin_filename
 from src.f10_etl.transformers import (
     etl_event_pidgin_csvs_to_pidgin_json,
     etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons,
     get_pidgin_events_by_dirs,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
-from pandas import DataFrame, read_excel as pandas_read_excel
-from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
 
 

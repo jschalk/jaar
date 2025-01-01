@@ -14,13 +14,14 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
 )
 from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, boat_agg_str
-from src.f10_etl.transformers import etl_boat_agg_to_pidgin_group_staging
+from src.f10_etl.pidgin_agg import PidginPrimeColumns
+from src.f10_etl.transformers import etl_boat_agg_to_pidgin_label_staging
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario0_SingleBrick(
+def test_etl_boat_agg_to_pidgin_label_staging_CreatesFile_Scenario0_SingleBrick(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -52,37 +53,28 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario0_SingleBrick(
 
     # WHEN
     legitimate_events = {event7}
-    etl_boat_agg_to_pidgin_group_staging(legitimate_events, x_boat_dir)
+    etl_boat_agg_to_pidgin_label_staging(legitimate_events, x_boat_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    group_staging_str = "group_staging"
-    gen_group_df = pandas_read_excel(pidgin_path, sheet_name=group_staging_str)
-    group_file_columns = [
-        "src_brick",
-        face_name_str(),
-        event_int_str(),
-        otx_label_str(),
-        inx_label_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_group_df.columns) == group_file_columns
-    assert len(gen_group_df) == 2
+    label_staging_str = "label_staging"
+    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_staging_str)
+    label_staging_columns = PidginPrimeColumns().map_label_staging_columns
+    assert list(gen_label_df.columns) == label_staging_columns
+    assert len(gen_label_df) == 2
     bx = "br00115"
-    e1_group0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
-    e1_group1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
-    e1_group_rows = [e1_group0, e1_group1]
-    e1_group_df = DataFrame(e1_group_rows, columns=group_file_columns)
-    assert len(gen_group_df) == len(e1_group_df)
-    print(f"{gen_group_df.to_csv()=}")
-    print(f" {e1_group_df.to_csv()=}")
-    assert gen_group_df.to_csv(index=False) == e1_group_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [group_staging_str]
+    e1_label0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
+    e1_label1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
+    e1_label_rows = [e1_label0, e1_label1]
+    e1_label_df = DataFrame(e1_label_rows, columns=label_staging_columns)
+    assert len(gen_label_df) == len(e1_label_df)
+    print(f"{gen_label_df.to_csv()=}")
+    print(f" {e1_label_df.to_csv()=}")
+    assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [label_staging_str]
 
 
-def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario1_MultipleBricksFiles(
+def test_etl_boat_agg_to_pidgin_label_staging_CreatesFile_Scenario1_MultipleBricksFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -135,42 +127,33 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario1_MultipleBric
 
     # WHEN
     legitimate_events = {event1, event2, event5, event7}
-    etl_boat_agg_to_pidgin_group_staging(legitimate_events, x_boat_dir)
+    etl_boat_agg_to_pidgin_label_staging(legitimate_events, x_boat_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    group_staging_str = "group_staging"
-    gen_group_df = pandas_read_excel(pidgin_path, sheet_name=group_staging_str)
-    group_file_columns = [
-        "src_brick",
-        face_name_str(),
-        event_int_str(),
-        otx_label_str(),
-        inx_label_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_group_df.columns) == group_file_columns
-    assert len(gen_group_df) == 5
+    label_staging_str = "label_staging"
+    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_staging_str)
+    label_staging_columns = PidginPrimeColumns().map_label_staging_columns
+    assert list(gen_label_df.columns) == label_staging_columns
+    assert len(gen_label_df) == 5
     b3 = "br00115"
     b4 = "br00042"
-    e1_group3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_group4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_group5 = [b4, yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
-    e1_group0 = [b3, sue_str, event1, yao_str, yao_inx, None, None, None]
-    e1_group1 = [b3, sue_str, event1, bob_str, bob_inx, None, None, None]
+    e1_label3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+    e1_label4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_label5 = [b4, yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
+    e1_label0 = [b3, sue_str, event1, yao_str, yao_inx, None, None, None]
+    e1_label1 = [b3, sue_str, event1, bob_str, bob_inx, None, None, None]
 
-    e1_group_rows = [e1_group3, e1_group4, e1_group5, e1_group0, e1_group1]
-    e1_group_df = DataFrame(e1_group_rows, columns=group_file_columns)
-    assert len(gen_group_df) == len(e1_group_df)
-    print(f"{gen_group_df.to_csv()=}")
-    print(f" {e1_group_df.to_csv()=}")
-    assert gen_group_df.to_csv(index=False) == e1_group_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [group_staging_str]
+    e1_label_rows = [e1_label3, e1_label4, e1_label5, e1_label0, e1_label1]
+    e1_label_df = DataFrame(e1_label_rows, columns=label_staging_columns)
+    assert len(gen_label_df) == len(e1_label_df)
+    print(f"{gen_label_df.to_csv()=}")
+    print(f" {e1_label_df.to_csv()=}")
+    assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [label_staging_str]
 
 
-def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_etl_boat_agg_to_pidgin_label_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -222,32 +205,23 @@ def test_etl_boat_agg_to_pidgin_group_staging_CreatesFile_Scenario2_WorldUnit_ev
 
     # WHEN
     legitimate_events = {event2, event5}
-    etl_boat_agg_to_pidgin_group_staging(legitimate_events, x_boat_dir)
+    etl_boat_agg_to_pidgin_label_staging(legitimate_events, x_boat_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    group_staging_str = "group_staging"
-    gen_group_df = pandas_read_excel(pidgin_path, sheet_name=group_staging_str)
-    group_file_columns = [
-        "src_brick",
-        face_name_str(),
-        event_int_str(),
-        otx_label_str(),
-        inx_label_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_group_df.columns) == group_file_columns
-    assert len(gen_group_df) == 2
+    label_staging_str = "label_staging"
+    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_staging_str)
+    label_staging_columns = PidginPrimeColumns().map_label_staging_columns
+    assert list(gen_label_df.columns) == label_staging_columns
+    assert len(gen_label_df) == 2
     b3 = "br00115"
     b4 = "br00042"
-    e1_group3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_group4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_group_rows = [e1_group3, e1_group4]
-    e1_group_df = DataFrame(e1_group_rows, columns=group_file_columns)
-    assert len(gen_group_df) == len(e1_group_df)
-    print(f"{gen_group_df.to_csv()=}")
-    print(f" {e1_group_df.to_csv()=}")
-    assert gen_group_df.to_csv(index=False) == e1_group_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [group_staging_str]
+    e1_label3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+    e1_label4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_label_rows = [e1_label3, e1_label4]
+    e1_label_df = DataFrame(e1_label_rows, columns=label_staging_columns)
+    assert len(gen_label_df) == len(e1_label_df)
+    print(f"{gen_label_df.to_csv()=}")
+    print(f" {e1_label_df.to_csv()=}")
+    assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [label_staging_str]
