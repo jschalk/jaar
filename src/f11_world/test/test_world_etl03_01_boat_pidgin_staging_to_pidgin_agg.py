@@ -1,19 +1,4 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str
-from src.f08_pidgin.pidgin_config import (
-    event_int_str,
-    inx_bridge_str,
-    otx_bridge_str,
-    inx_name_str,
-    otx_name_str,
-    inx_label_str,
-    otx_label_str,
-    inx_road_str,
-    otx_road_str,
-    inx_idea_str,
-    otx_idea_str,
-    unknown_word_str,
-)
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f11_world.world import worldunit_shop
@@ -50,12 +35,12 @@ def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllCatego
     event7 = 7
     label_staging_str = "label_staging"
     label_agg_str = "label_agg"
-    label_file_columns = PidginPrimeColumns().map_label_staging_columns
+    label_staging_columns = PidginPrimeColumns().map_label_staging_columns
     bx = "br00xxx"
     e1_label0 = [bx, sue_str, event7, jog_str, jog_inx, None, None, None]
     e1_label1 = [bx, sue_str, event7, run_str, run_inx, None, None, None]
     e1_label_rows = [e1_label0, e1_label1]
-    staging_label_df = DataFrame(e1_label_rows, columns=label_file_columns)
+    staging_label_df = DataFrame(e1_label_rows, columns=label_staging_columns)
 
     casa_otx = "fizz,casa"
     casa_inx = "fizz,casaita"
@@ -64,21 +49,12 @@ def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllCatego
     event7 = 7
     road_staging_str = "road_staging"
     road_agg_str = "road_agg"
-    road_file_columns = [
-        "src_brick",
-        face_name_str(),
-        event_int_str(),
-        otx_road_str(),
-        inx_road_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
+    road_staging_columns = PidginPrimeColumns().map_road_staging_columns
     bx = "br00xxx"
     e1_road0 = [bx, sue_str, event7, casa_otx, casa_inx, None, None, None]
     e1_road1 = [bx, sue_str, event7, clean_otx, clean_inx, None, None, None]
     e1_road_rows = [e1_road0, e1_road1]
-    staging_road_df = DataFrame(e1_road_rows, columns=road_file_columns)
+    staging_road_df = DataFrame(e1_road_rows, columns=road_staging_columns)
 
     t3am_otx = "t3am"
     t3am_inx = "t300"
@@ -87,21 +63,12 @@ def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllCatego
     event7 = 7
     idea_staging_str = "idea_staging"
     idea_agg_str = "idea_agg"
-    idea_file_columns = [
-        "src_brick",
-        face_name_str(),
-        event_int_str(),
-        otx_idea_str(),
-        inx_idea_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
+    idea_staging_columns = PidginPrimeColumns().map_idea_staging_columns
     bx = "br00xxx"
     e1_idea0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
     e1_idea1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
     e1_idea_rows = [e1_idea0, e1_idea1]
-    staging_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
+    staging_idea_df = DataFrame(e1_idea_rows, columns=idea_staging_columns)
 
     pidgin_path = create_path(fizz_world._boat_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, name_staging_str, staging_name_df)
@@ -141,45 +108,28 @@ def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllCatego
     e1_name_rows = [e1_name0, e1_name1]
     e1_name_agg_df = DataFrame(e1_name_rows, columns=name_agg_columns)
 
-    label_file_columns = PidginPrimeColumns().map_label_agg_columns
-    assert list(gen_label_agg_df.columns) == label_file_columns
+    label_agg_columns = PidginPrimeColumns().map_label_agg_columns
+    assert list(gen_label_agg_df.columns) == label_agg_columns
     assert len(gen_label_agg_df) == 2
     e1_label0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
     e1_label1 = [sue_str, event7, run_str, run_inx, x_nan, x_nan, x_nan]
     e1_label_rows = [e1_label0, e1_label1]
-    e1_label_agg_df = DataFrame(e1_label_rows, columns=label_file_columns)
+    e1_label_agg_df = DataFrame(e1_label_rows, columns=label_agg_columns)
 
-    road_file_columns = [
-        face_name_str(),
-        event_int_str(),
-        otx_road_str(),
-        inx_road_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_road_agg_df.columns) == road_file_columns
+    road_agg_columns = PidginPrimeColumns().map_road_agg_columns
+    assert list(gen_road_agg_df.columns) == road_agg_columns
     assert len(gen_road_agg_df) == 2
     e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
     e1_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e1_road_rows = [e1_road0, e1_road1]
-    e1_road_agg_df = DataFrame(e1_road_rows, columns=road_file_columns)
-
-    idea_file_columns = [
-        face_name_str(),
-        event_int_str(),
-        otx_idea_str(),
-        inx_idea_str(),
-        otx_bridge_str(),
-        inx_bridge_str(),
-        unknown_word_str(),
-    ]
-    assert list(gen_idea_agg_df.columns) == idea_file_columns
+    e1_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
+    idea_agg_columns = PidginPrimeColumns().map_idea_agg_columns
+    assert list(gen_idea_agg_df.columns) == idea_agg_columns
     assert len(gen_idea_agg_df) == 2
     e1_idea0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
     e1_idea1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
     e1_idea_rows = [e1_idea0, e1_idea1]
-    e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
+    e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_agg_columns)
 
     pandas_testing_assert_frame_equal(gen_name_agg_df, e1_name_agg_df)
     pandas_testing_assert_frame_equal(gen_label_agg_df, e1_label_agg_df)
