@@ -141,7 +141,7 @@ def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllCatego
     e1_name_rows = [e1_name0, e1_name1]
     e1_name_agg_df = DataFrame(e1_name_rows, columns=name_agg_columns)
 
-    label_file_columns = PidginPrimeColumns().map_label_staging_columns
+    label_file_columns = PidginPrimeColumns().map_label_agg_columns
     assert list(gen_label_agg_df.columns) == label_file_columns
     assert len(gen_label_agg_df) == 2
     e1_label0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]

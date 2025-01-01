@@ -145,18 +145,18 @@ def get_dict_from_json(x_json: str) -> dict[str,]:
 def extract_csv_headers(x_csv: str, delimiter: str = None) -> tuple[list[str], str]:
     x_reader = csv_reader(x_csv.splitlines(), delimiter=",")
 
-    title_row = None
+    header_row = None
     si = io_StringIO()
     new_csv_writer = csv_writer(si, delimiter=",")
     for x_count, row in enumerate(x_reader):
         if x_count == 0:
-            title_row = row
+            header_row = row
         else:
             new_csv_writer.writerow(row)
     headers_list = []
-    if title_row is None:
+    if header_row is None:
         return headers_list
-    headers_list.extend(title_row[column_num] for column_num in range(len(title_row)))
+    headers_list.extend(header_row[column_num] for column_num in range(len(header_row)))
     x_csv = si.getvalue()
     y_csv = x_csv.replace("\r", "")
     return headers_list, y_csv
