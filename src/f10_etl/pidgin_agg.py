@@ -292,79 +292,19 @@ def pidginbodybook_shop(pidginheartbook: PidginHeartBook = None) -> PidginBodyBo
 
 class PidginPrimeColumns:
     def __init__(self):
-        self.map_name_agg_columns = [
-            "face_name",
-            "event_int",
-            "otx_name",
-            "inx_name",
-            "otx_bridge",
-            "inx_bridge",
-            "unknown_word",
-        ]
-        self.map_label_agg_columns = [
-            "face_name",
-            "event_int",
-            "otx_label",
-            "inx_label",
-            "otx_bridge",
-            "inx_bridge",
-            "unknown_word",
-        ]
-        self.map_idea_agg_columns = [
-            "face_name",
-            "event_int",
-            "otx_idea",
-            "inx_idea",
-            "otx_bridge",
-            "inx_bridge",
-            "unknown_word",
-        ]
-        self.map_road_agg_columns = [
-            "face_name",
-            "event_int",
-            "otx_road",
-            "inx_road",
-            "otx_bridge",
-            "inx_bridge",
-            "unknown_word",
-        ]
-        self.map_name_staging_columns = [
-            "src_brick",
-            "face_name",
-            "event_int",
-            "otx_name",
-            "inx_name",
-            "otx_bridge",
-            "inx_bridge",
-            "unknown_word",
-        ]
+        f1_columns = ["face_name", "event_int"]
+        f2_cols = ["src_brick", "face_name", "event_int"]
+        back_cols = ["otx_bridge", "inx_bridge", "unknown_word"]
+        self.map_name_agg_columns = [*f1_columns, "otx_name", "inx_name", *back_cols]
+        self.map_label_agg_columns = [*f1_columns, "otx_label", "inx_label", *back_cols]
+        self.map_idea_agg_columns = [*f1_columns, "otx_idea", "inx_idea", *back_cols]
+        self.map_road_agg_columns = [*f1_columns, "otx_road", "inx_road", *back_cols]
+        self.map_name_staging_columns = [*f2_cols, "otx_name", "inx_name", *back_cols]
         self.map_label_staging_columns = [
-            "src_brick",
-            "face_name",
-            "event_int",
+            *f2_cols,
             "otx_label",
             "inx_label",
-            "otx_bridge",
-            "inx_bridge",
-            "unknown_word",
+            *back_cols,
         ]
-        self.map_idea_staging_columns = [
-            "src_brick",
-            "face_name",
-            "event_int",
-            "otx_idea",
-            "inx_idea",
-            "otx_bridge",
-            "inx_bridge",
-            "unknown_word",
-        ]
-        self.map_road_staging_columns = [
-            "src_brick",
-            "face_name",
-            "event_int",
-            "otx_road",
-            "inx_road",
-            "otx_bridge",
-            "inx_bridge",
-            "unknown_word",
-        ]
+        self.map_idea_staging_columns = [*f2_cols, "otx_idea", "inx_idea", *back_cols]
+        self.map_road_staging_columns = [*f2_cols, "otx_road", "inx_road", *back_cols]

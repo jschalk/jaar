@@ -29,71 +29,6 @@ class CmtyPrimeFilePaths:
 
 class CmtyPrimeColumns:
     def __init__(self):
-        self.cmtyunit_staging_columns = [
-            "source_br",
-            "face_name",
-            "event_int",
-            "cmty_idea",
-            "c400_number",
-            "current_time",
-            "fund_coin",
-            "monthday_distortion",
-            "penny",
-            "respect_bit",
-            "bridge",
-            "timeline_idea",
-            "yr1_jan1_offset",
-            "note",
-        ]
-        self.cmty_deal_staging_columns = [
-            "source_br",
-            "face_name",
-            "event_int",
-            "cmty_idea",
-            "owner_name",
-            "time_int",
-            "quota",
-            "note",
-        ]
-        self.cmty_cashbook_staging_columns = [
-            "source_br",
-            "face_name",
-            "event_int",
-            "cmty_idea",
-            "owner_name",
-            "acct_name",
-            "time_int",
-            "amount",
-            "note",
-        ]
-        self.cmty_hour_staging_columns = [
-            "source_br",
-            "face_name",
-            "event_int",
-            "cmty_idea",
-            "hour_idea",
-            "cumlative_minute",
-            "note",
-        ]
-        self.cmty_month_staging_columns = [
-            "source_br",
-            "face_name",
-            "event_int",
-            "cmty_idea",
-            "month_idea",
-            "cumlative_day",
-            "note",
-        ]
-        self.cmty_weekday_staging_columns = [
-            "source_br",
-            "face_name",
-            "event_int",
-            "cmty_idea",
-            "weekday_idea",
-            "weekday_order",
-            "note",
-        ]
-
         self.cmtyunit_agg_columns = [
             "cmty_idea",
             "c400_number",
@@ -122,6 +57,39 @@ class CmtyPrimeColumns:
         self.cmty_hour_agg_columns = ["cmty_idea", "hour_idea", "cumlative_minute"]
         self.cmty_month_agg_columns = ["cmty_idea", "month_idea", "cumlative_day"]
         self.cmty_weekday_agg_columns = ["cmty_idea", "weekday_idea", "weekday_order"]
+
+        _front_columns = ["source_br", "face_name", "event_int"]
+        _back_columns = ["note"]
+        self.cmtyunit_staging_columns = [
+            *_front_columns,
+            *self.cmtyunit_agg_columns,
+            *_back_columns,
+        ]
+        self.cmty_deal_staging_columns = [
+            *_front_columns,
+            *self.cmty_deal_agg_columns,
+            *_back_columns,
+        ]
+        self.cmty_cashbook_staging_columns = [
+            *_front_columns,
+            *self.cmty_cashbook_agg_columns,
+            *_back_columns,
+        ]
+        self.cmty_hour_staging_columns = [
+            *_front_columns,
+            *self.cmty_hour_agg_columns,
+            *_back_columns,
+        ]
+        self.cmty_month_staging_columns = [
+            *_front_columns,
+            *self.cmty_month_agg_columns,
+            *_back_columns,
+        ]
+        self.cmty_weekday_staging_columns = [
+            *_front_columns,
+            *self.cmty_weekday_agg_columns,
+            *_back_columns,
+        ]
 
 
 def create_init_cmty_prime_files(cmtys_dir: str):
