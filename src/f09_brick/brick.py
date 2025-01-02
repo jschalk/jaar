@@ -146,8 +146,8 @@ def save_brick_csv(x_brickname: str, x_budunit: BudUnit, x_dir: str, x_filename:
     save_dataframe_to_csv(x_dataframe, x_dir, x_filename)
 
 
-def get_csv_brickref(title_row: list[str]) -> BrickRef:
-    headers_str = create_sorted_concatenated_str(title_row)
+def get_csv_brickref(header_row: list[str]) -> BrickRef:
+    headers_str = create_sorted_concatenated_str(header_row)
     headers_str = headers_str.replace("face_name,", "")
     headers_str = headers_str.replace("event_int,", "")
     x_brickname = get_brick_format_headers().get(headers_str)
@@ -155,15 +155,15 @@ def get_csv_brickref(title_row: list[str]) -> BrickRef:
 
 
 def make_deltaunit(x_csv: str) -> DeltaUnit:
-    title_row, headerless_csv = extract_csv_headers(x_csv)
-    x_brickref = get_csv_brickref(title_row)
+    header_row, headerless_csv = extract_csv_headers(x_csv)
+    x_brickref = get_csv_brickref(header_row)
 
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
-    x_dict = get_positional_dict(title_row)
+    x_dict = get_positional_dict(header_row)
     x_deltaunit = deltaunit_shop()
     for row in x_reader:
         x_atomrow = atomrow_shop(x_brickref.categorys, atom_insert())
-        for x_header in title_row:
+        for x_header in header_row:
             if header_index := x_dict.get(x_header):
                 x_atomrow.__dict__[x_header] = row[header_index]
 

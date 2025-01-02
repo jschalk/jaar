@@ -201,8 +201,8 @@ def append_df_to_excel(file_path: str, sheet_name: str, dataframe: DataFrame):
             workbook.create_sheet(sheet_name)
             sheet = workbook[sheet_name]
             # Add column names to the new sheet
-            for col_num, column_title in enumerate(dataframe.columns, 1):
-                sheet.cell(row=1, column=col_num, value=column_title)
+            for col_num, column_header in enumerate(dataframe.columns, 1):
+                sheet.cell(row=1, column=col_num, value=column_header)
             start_row = 2  # Start appending data from the second row
         else:
             sheet = workbook[sheet_name]
