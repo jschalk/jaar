@@ -7,7 +7,7 @@ from src.f07_cmty.cmty_config import (
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet
+from src.f09_idea.pandas_tool import get_sheet_names, upsert_sheet
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -32,7 +32,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
-    brick_columns = [
+    idea_columns = [
         face_name_str(),
         event_int_str(),
         cmty_title_str(),
@@ -45,7 +45,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
     row3 = [yao_str, event1, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
-    df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
+    df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", df1)
     fizz_world.ocean_to_boat_staging()
     fizz_world.boat_staging_to_boat_agg()
@@ -93,7 +93,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
     assert get_sheet_names(events_file_path) == ["events_log"]
 
 
-def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBricks(
+def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleIdeas(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -111,14 +111,14 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
-    brick3_columns = [
+    idea3_columns = [
         face_name_str(),
         event_int_str(),
         cmty_title_str(),
         hour_title_str(),
         cumlative_minute_str(),
     ]
-    brick5_columns = [
+    idea5_columns = [
         event_int_str(),
         face_name_str(),
         cmty_title_str(),
@@ -131,10 +131,10 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleBri
     row3 = [yao_str, event1, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
-    b3_df = DataFrame([row1, row2, row3, row4, row5], columns=brick3_columns)
+    b3_df = DataFrame([row1, row2, row3, row4, row5], columns=idea3_columns)
     b5_0_row = [event3, bob_str, accord23_str, "thu", 1]
     b5_1_row = [event9, yao_str, accord23_str, "wed", 0]
-    b5_df = DataFrame([b5_0_row, b5_1_row], columns=brick5_columns)
+    b5_df = DataFrame([b5_0_row, b5_1_row], columns=idea5_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", b3_df)
     upsert_sheet(ocean_file_path, "example1_br00005", b5_df)
     fizz_world.ocean_to_boat_staging()

@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import get_empty_set_if_None
-from src.f09_brick.pandas_tool import if_nan_return_None
+from src.f09_idea.pandas_tool import if_nan_return_None
 from dataclasses import dataclass
 
 
@@ -293,7 +293,7 @@ def pidginbodybook_shop(pidginheartbook: PidginHeartBook = None) -> PidginBodyBo
 class PidginPrimeColumns:
     def __init__(self):
         f1_columns = ["face_name", "event_int"]
-        f2_cols = ["src_brick", "face_name", "event_int"]
+        f2_cols = ["src_idea", "face_name", "event_int"]
         back_cols = ["otx_bridge", "inx_bridge", "unknown_word"]
         self.map_name_agg_columns = [*f1_columns, "otx_name", "inx_name", *back_cols]
         self.map_label_agg_columns = [*f1_columns, "otx_label", "inx_label", *back_cols]

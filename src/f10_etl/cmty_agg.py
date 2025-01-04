@@ -8,8 +8,8 @@ from src.f03_chrono.chrono import (
     validate_timeline_config,
 )
 from src.f07_cmty.cmty import cmtyunit_shop
-from src.f09_brick.brick import _add_cashpurchases_from_df, _add_dealepisodes_from_df
-from src.f09_brick.pandas_tool import (
+from src.f09_idea.idea import _add_cashpurchases_from_df, _add_dealepisodes_from_df
+from src.f09_idea.pandas_tool import (
     upsert_sheet,
     dataframe_to_dict,
     if_nan_return_None,

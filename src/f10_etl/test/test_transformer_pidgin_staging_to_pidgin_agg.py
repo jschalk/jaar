@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
+from src.f09_idea.pandas_tool import upsert_sheet, sheet_exists
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f10_etl.transformers import (
     etl_pidgin_name_staging_to_name_agg,
@@ -55,7 +55,7 @@ def test_etl_pidgin_name_staging_to_name_agg_Scenario0_CreatesEmptyFileBecauseOf
     pandas_testing_assert_frame_equal(gen_name_agg_df, e1_name_agg_df)
 
 
-def test_etl_pidgin_name_staging_to_name_agg_Scenario1_CreatesFileFromSingleBrick(
+def test_etl_pidgin_name_staging_to_name_agg_Scenario1_CreatesFileFromSingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -99,7 +99,7 @@ def test_etl_pidgin_name_staging_to_name_agg_Scenario1_CreatesFileFromSingleBric
     pandas_testing_assert_frame_equal(gen_name_agg_df, e1_name_agg_df)
 
 
-def test_etl_pidgin_label_staging_to_label_agg_Scenario0_CreatesFileFromSingleBrick(
+def test_etl_pidgin_label_staging_to_label_agg_Scenario0_CreatesFileFromSingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -143,7 +143,7 @@ def test_etl_pidgin_label_staging_to_label_agg_Scenario0_CreatesFileFromSingleBr
     pandas_testing_assert_frame_equal(gen_label_agg_df, e1_label_agg_df)
 
 
-def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleBrick(
+def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -187,7 +187,7 @@ def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleBric
     pandas_testing_assert_frame_equal(gen_road_agg_df, e1_road_agg_df)
 
 
-def test_etl_pidgin_title_staging_to_title_agg_Scenario0_CreatesFileFromSingleBrick(
+def test_etl_pidgin_title_staging_to_title_agg_Scenario0_CreatesFileFromSingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

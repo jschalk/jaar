@@ -1,0 +1,329 @@
+{
+  "map_name": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "idea_type": "pidginunit",
+    "build_order": 0,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "otx_name": {}
+    },
+    "jvalues": {
+      "inx_name": {},
+      "inx_bridge": {},
+      "otx_bridge": {},
+      "unknown_word": {}
+    }
+  },
+  "map_label": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "idea_type": "pidginunit",
+    "build_order": 1,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "otx_label": {}
+    },
+    "jvalues": {
+      "inx_label": {},
+      "inx_bridge": {},
+      "otx_bridge": {},
+      "unknown_word": {}
+    }
+  },
+  "map_title": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "idea_type": "pidginunit",
+    "build_order": 2,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "otx_title": {}
+    },
+    "jvalues": {
+      "inx_title": {},
+      "inx_bridge": {},
+      "otx_bridge": {},
+      "unknown_word": {}
+    }
+  },
+  "map_road": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "idea_type": "pidginunit",
+    "build_order": 3,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "otx_road": {}
+    },
+    "jvalues": {
+      "inx_road": {},
+      "inx_bridge": {},
+      "otx_bridge": {},
+      "unknown_word": {}
+    }
+  },
+  "bud_acct_membership": {
+    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "idea_type": "budunit",
+    "build_order": 9,
+    "jkeys": {
+      "acct_name": {},
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "group_label": {}
+    },
+    "jvalues": {
+      "credit_vote": {},
+      "debtit_vote": {}
+    }
+  },
+  "bud_acctunit": {
+    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "idea_type": "budunit",
+    "build_order": 10,
+    "jkeys": {
+      "acct_name": {},
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {}
+    },
+    "jvalues": {
+      "credit_belief": {},
+      "debtit_belief": {}
+    }
+  },
+  "bud_item_awardlink": {
+    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "idea_type": "budunit",
+    "build_order": 11,
+    "jkeys": {
+      "awardee_label": {},
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "road": {}
+    },
+    "jvalues": {
+      "give_force": {},
+      "take_force": {}
+    }
+  },
+  "bud_item_factunit": {
+    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "idea_type": "budunit",
+    "build_order": 12,
+    "jkeys": {
+      "base": {},
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "road": {}
+    },
+    "jvalues": {
+      "fnigh": {},
+      "fopen": {},
+      "pick": {}
+    }
+  },
+  "bud_item_healerlink": {
+    "allowed_crud": "DELETE_INSERT",
+    "idea_type": "budunit",
+    "build_order": 15,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "healer_name": {},
+      "road": {}
+    },
+    "jvalues": {}
+  },
+  "bud_item_reason_premiseunit": {
+    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "idea_type": "budunit",
+    "build_order": 16,
+    "jkeys": {
+      "base": {},
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "need": {},
+      "road": {}
+    },
+    "jvalues": {
+      "divisor": {},
+      "nigh": {},
+      "open": {}
+    }
+  },
+  "bud_item_reasonunit": {
+    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "idea_type": "budunit",
+    "build_order": 17,
+    "jkeys": {
+      "base": {},
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "road": {}
+    },
+    "jvalues": {
+      "base_item_active_requisite": {}
+    }
+  },
+  "bud_item_teamlink": {
+    "allowed_crud": "DELETE_INSERT",
+    "idea_type": "budunit",
+    "build_order": 14,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "road": {},
+      "team_label": {}
+    },
+    "jvalues": {}
+  },
+  "bud_itemunit": {
+    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "idea_type": "budunit",
+    "build_order": 18,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "item_title": {},
+      "parent_road": {}
+    },
+    "jvalues": {
+      "addin": {},
+      "begin": {},
+      "close": {},
+      "denom": {},
+      "gogo_want": {},
+      "mass": {},
+      "morph": {},
+      "numor": {},
+      "pledge": {},
+      "problem_bool": {},
+      "stop_want": {}
+    }
+  },
+  "budunit": {
+    "allowed_crud": "UPDATE",
+    "idea_type": "budunit",
+    "build_order": 19,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {}
+    },
+    "jvalues": {
+      "credor_respect": {},
+      "debtor_respect": {},
+      "fund_coin": {},
+      "fund_pool": {},
+      "max_tree_traverse": {},
+      "penny": {},
+      "deal_time_int": {},
+      "respect_bit": {},
+      "tally": {}
+    }
+  },
+  "cmty_cashbook": {
+    "allowed_crud": "INSERT_MULITPLE",
+    "idea_type": "cmtyunit",
+    "build_order": 21,
+    "jkeys": {
+      "acct_name": {},
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "owner_name": {},
+      "time_int": {}
+    },
+    "jvalues": {
+      "amount": {}
+    }
+  },
+  "cmty_deal_episode": {
+    "allowed_crud": "INSERT_MULITPLE",
+    "idea_type": "cmtyunit",
+    "build_order": 20,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "owner_name": {},
+      "time_int": {}
+    },
+    "jvalues": {
+      "quota": {}
+    }
+  },
+  "cmty_timeline_hour": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "idea_type": "cmtyunit",
+    "build_order": 6,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "hour_title": {}
+    },
+    "jvalues": {
+      "cumlative_minute": {}
+    }
+  },
+  "cmty_timeline_month": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "idea_type": "cmtyunit",
+    "build_order": 7,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "month_title": {}
+    },
+    "jvalues": {
+      "cumlative_day": {}
+    }
+  },
+  "cmty_timeline_weekday": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "idea_type": "cmtyunit",
+    "build_order": 8,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {},
+      "weekday_title": {}
+    },
+    "jvalues": {
+      "weekday_order": {}
+    }
+  },
+  "cmtyunit": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "idea_type": "cmtyunit",
+    "build_order": 5,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "cmty_title": {}
+    },
+    "jvalues": {
+      "c400_number": {},
+      "current_time": {},
+      "fund_coin": {},
+      "monthday_distortion": {},
+      "penny": {},
+      "respect_bit": {},
+      "timeline_title": {},
+      "bridge": {},
+      "yr1_jan1_offset": {}
+    }
+  }
+}

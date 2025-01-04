@@ -24,7 +24,7 @@ def test_PidginPrimeColumns_Exists():
     pidgin_label_agg_args = pidgin_label_agg_args.union(event_args)
     pidgin_title_agg_args = pidgin_title_agg_args.union(event_args)
     pidgin_road_agg_args = pidgin_road_agg_args.union(event_args)
-    staging_args = {"src_brick"}
+    staging_args = {"src_idea"}
     pidgin_name_staging_args = pidgin_name_agg_args.union(staging_args)
     pidgin_label_staging_args = pidgin_label_agg_args.union(staging_args)
     pidgin_title_staging_args = pidgin_title_agg_args.union(staging_args)

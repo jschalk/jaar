@@ -30,12 +30,12 @@ from src.f10_etl.transformers import (
     etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
     get_pidgin_events_by_dirs,
-    etl_boat_bricks_to_bow_face_bricks,
-    etl_bow_face_bricks_to_bow_event_otx_bricks,
-    etl_bow_event_bricks_to_inx_events,
-    etl_bow_inx_event_bricks_to_aft_faces,
-    etl_aft_face_bricks_to_aft_event_bricks,
-    etl_aft_event_bricks_to_cmty_bricks,
+    etl_boat_ideas_to_bow_face_ideas,
+    etl_bow_face_ideas_to_bow_event_otx_ideas,
+    etl_bow_event_ideas_to_inx_events,
+    etl_bow_inx_event_ideas_to_aft_faces,
+    etl_aft_face_ideas_to_aft_event_ideas,
+    etl_aft_event_ideas_to_cmty_ideas,
 )
 from dataclasses import dataclass
 
@@ -144,23 +144,23 @@ class WorldUnit:
         etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(self._faces_bow_dir)
         self._set_pidgin_events()
 
-    def boat_bricks_to_bow_face_bricks(self):
-        etl_boat_bricks_to_bow_face_bricks(self._boat_dir, self._faces_bow_dir)
+    def boat_ideas_to_bow_face_ideas(self):
+        etl_boat_ideas_to_bow_face_ideas(self._boat_dir, self._faces_bow_dir)
 
-    def bow_face_bricks_to_bow_event_otx_bricks(self):
-        etl_bow_face_bricks_to_bow_event_otx_bricks(self._faces_bow_dir)
+    def bow_face_ideas_to_bow_event_otx_ideas(self):
+        etl_bow_face_ideas_to_bow_event_otx_ideas(self._faces_bow_dir)
 
-    def bow_event_bricks_to_inx_events(self):
-        etl_bow_event_bricks_to_inx_events(self._faces_bow_dir, self._pidgin_events)
+    def bow_event_ideas_to_inx_events(self):
+        etl_bow_event_ideas_to_inx_events(self._faces_bow_dir, self._pidgin_events)
 
-    def bow_inx_event_bricks_to_aft_faces(self):
-        etl_bow_inx_event_bricks_to_aft_faces(self._faces_bow_dir, self._faces_aft_dir)
+    def bow_inx_event_ideas_to_aft_faces(self):
+        etl_bow_inx_event_ideas_to_aft_faces(self._faces_bow_dir, self._faces_aft_dir)
 
-    def aft_face_bricks_to_aft_event_bricks(self):
-        etl_aft_face_bricks_to_aft_event_bricks(self._faces_aft_dir)
+    def aft_face_ideas_to_aft_event_ideas(self):
+        etl_aft_face_ideas_to_aft_event_ideas(self._faces_aft_dir)
 
-    def aft_event_bricks_to_cmty_bricks(self):
-        etl_aft_event_bricks_to_cmty_bricks(self._faces_aft_dir)
+    def aft_event_ideas_to_cmty_ideas(self):
+        etl_aft_event_ideas_to_cmty_ideas(self._faces_aft_dir)
 
     def get_dict(self) -> dict:
         return {

@@ -12,7 +12,7 @@ from src.f07_cmty.cmty_config import (
     get_cmty_config_args,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet
+from src.f09_idea.pandas_tool import sheet_exists, upsert_sheet
 from src.f10_etl.cmty_agg import (
     CmtyPrimeFilePaths,
     CmtyPrimeColumns,

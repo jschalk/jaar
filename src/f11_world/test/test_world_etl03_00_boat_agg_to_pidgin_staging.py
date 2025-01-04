@@ -19,10 +19,10 @@ from src.f08_pidgin.pidgin_config import (
     otx_label_str,
     unknown_word_str,
 )
-from src.f09_brick.pandas_tool import (
+from src.f09_idea.pandas_tool import (
     upsert_sheet,
     sheet_exists,
-    _get_pidgen_brick_format_filenames,
+    _get_pidgen_idea_format_filenames,
     boat_agg_str,
 )
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
@@ -32,13 +32,13 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_get_pidgen_brick_format_filenames_ReturnsObj():
+def test_get_pidgen_idea_format_filenames_ReturnsObj():
     # ESTABLISH / WHEN
-    pidgen_brick_filenames = _get_pidgen_brick_format_filenames()
+    pidgen_idea_filenames = _get_pidgen_idea_format_filenames()
 
     # THEN
-    print(f"need examples for {pidgen_brick_filenames=}")
-    assert pidgen_brick_filenames == {
+    print(f"need examples for {pidgen_idea_filenames=}")
+    assert pidgen_idea_filenames == {
         "br00042.xlsx",
         "br00043.xlsx",
         "br00044.xlsx",
@@ -249,7 +249,7 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
 
     title_file_columns = [
-        "src_brick",
+        "src_idea",
         face_name_str(),
         event_int_str(),
         otx_title_str(),
@@ -272,7 +272,7 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     assert gen_title_df.to_csv(index=False) == e1_title_df.to_csv(index=False)
 
     road_file_columns = [
-        "src_brick",
+        "src_idea",
         face_name_str(),
         event_int_str(),
         otx_road_str(),

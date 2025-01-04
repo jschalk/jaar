@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_name_str, cmty_title_str
 from src.f07_cmty.cmty_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_brick.pandas_tool import (
+from src.f09_idea.pandas_tool import (
     get_sheet_names,
     upsert_sheet,
     boat_staging_str,
@@ -31,7 +31,7 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
     ex_file_name = "fizzbuzz.xlsx"
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
     boat_file_path = create_path(fizz_world._boat_dir, "br00003.xlsx")
-    brick_columns = [
+    idea_columns = [
         face_name_str(),
         event_int_str(),
         cmty_title_str(),
@@ -43,7 +43,7 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
     row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
     row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
-    df1 = DataFrame([row1, row2, row3, row4], columns=brick_columns)
+    df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", df1)
     fizz_world.ocean_to_boat_staging()
     fizz_world.boat_staging_to_boat_agg()
@@ -91,7 +91,7 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario1(
     ex_file_name = "fizzbuzz.xlsx"
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
     boat_file_path = create_path(fizz_world._boat_dir, "br00003.xlsx")
-    brick_columns = [
+    idea_columns = [
         face_name_str(),
         event_int_str(),
         cmty_title_str(),
@@ -104,7 +104,7 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario1(
     row3 = [yao_str, event1, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
-    df1 = DataFrame([row1, row2, row3, row4, row5], columns=brick_columns)
+    df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", df1)
     fizz_world.ocean_to_boat_staging()
     fizz_world.boat_staging_to_boat_agg()
