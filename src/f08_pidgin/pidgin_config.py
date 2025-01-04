@@ -166,7 +166,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "group_label": "GroupLabel",
         "healer_name": "AcctName",
         "hour_idea": "IdeaUnit",
-        "idee": "IdeaUnit",
+        "item_idee": "IdeaUnit",
         "mass": "int",
         "max_tree_traverse": "int",
         "month_idea": "IdeaUnit",

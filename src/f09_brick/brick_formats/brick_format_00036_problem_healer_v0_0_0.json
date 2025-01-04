@@ -12,7 +12,7 @@
         "healer_name": {
             "otx_key": true
         },
-        "idee": {
+        "item_idee": {
             "otx_key": true
         },
         "owner_name": {

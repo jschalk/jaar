@@ -16,7 +16,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit
     assert x_itemunit._kids is None
     assert x_itemunit.mass is None
-    assert x_itemunit._idee is None
+    assert x_itemunit._item_idee is None
     assert x_itemunit._uid is None
     assert x_itemunit.reasonunits is None
     assert x_itemunit._reasonheirs is None  # calculated field
@@ -67,7 +67,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit
     assert x_itemunit._kids == {}
     assert x_itemunit.mass == 1
-    assert x_itemunit._idee is None
+    assert x_itemunit._item_idee is None
     assert x_itemunit._bud_cmty_idea == root_idea()
     assert x_itemunit._uid is None
     assert x_itemunit.begin is None
@@ -158,7 +158,7 @@ def test_itemunit_shop_ReturnsObjWith_awardlinks():
 
     # WHEN
     sport_str = "sport"
-    sport_item = itemunit_shop(_idee=sport_str, awardlinks=x_awardlinks)
+    sport_item = itemunit_shop(_item_idee=sport_str, awardlinks=x_awardlinks)
 
     # THEN
     assert sport_item.awardlinks == x_awardlinks
@@ -187,7 +187,7 @@ def test_ItemUnit_get_obj_key_ReturnsCorrectObj():
     ball_str = "ball"
 
     # WHEN
-    ball_item = itemunit_shop(_idee=ball_str, _parent_road=round_road)
+    ball_item = itemunit_shop(_item_idee=ball_str, _parent_road=round_road)
 
     # THEN
     assert ball_item.get_obj_key() == ball_str

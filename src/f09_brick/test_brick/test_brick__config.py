@@ -36,7 +36,7 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     group_label_str,
     parent_road_str,
-    idee_str,
+    item_idee_str,
     road_str,
     base_str,
     team_label_str,
@@ -176,7 +176,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[4] == acct_name_str()
     assert table_sorting_priority[5] == group_label_str()
     assert table_sorting_priority[6] == parent_road_str()
-    assert table_sorting_priority[7] == idee_str()
+    assert table_sorting_priority[7] == item_idee_str()
     assert table_sorting_priority[8] == road_str()
     assert table_sorting_priority[9] == base_str()
     assert table_sorting_priority[10] == "need"
@@ -272,7 +272,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_label_str()) == "TEXT"
     assert sqlite_types.get(parent_road_str()) == "TEXT"
-    assert sqlite_types.get(idee_str()) == "TEXT"
+    assert sqlite_types.get(item_idee_str()) == "TEXT"
     assert sqlite_types.get(road_str()) == "TEXT"
     assert sqlite_types.get(base_str()) == "TEXT"
     assert sqlite_types.get("need") == "TEXT"

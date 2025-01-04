@@ -198,7 +198,7 @@ def itemattrholder_shop(
 
 @dataclass
 class ItemUnit:
-    _idee: IdeaUnit = None
+    _item_idee: IdeaUnit = None
     mass: int = None
     _parent_road: RoadUnit = None
     _root: bool = None
@@ -364,17 +364,19 @@ class ItemUnit:
             both_in_range = x_gogo <= x_item._gogo_calc and x_stop >= x_item._stop_calc
 
             if x_gogo_in_range or x_stop_in_range or both_in_range:
-                x_dict[x_item._idee] = x_item
+                x_dict[x_item._item_idee] = x_item
         return x_dict
 
     def get_obj_key(self) -> IdeaUnit:
-        return self._idee
+        return self._item_idee
 
     def get_road(self) -> RoadUnit:
         if self._parent_road in (None, ""):
-            return road_create_road(self._idee, bridge=self._bridge)
+            return road_create_road(self._item_idee, bridge=self._bridge)
         else:
-            return road_create_road(self._parent_road, self._idee, bridge=self._bridge)
+            return road_create_road(
+                self._parent_road, self._item_idee, bridge=self._bridge
+            )
 
     def clear_descendant_pledge_count(self):
         self._descendant_pledge_count = None
@@ -477,21 +479,21 @@ class ItemUnit:
     def clear_awardlines(self):
         self._awardlines = {}
 
-    def set_idee(self, _idee: str):
+    def set_item_idee(self, _item_idee: str):
         if (
             self._root
-            and _idee is not None
-            and _idee != self._bud_cmty_idea
+            and _item_idee is not None
+            and _item_idee != self._bud_cmty_idea
             and self._bud_cmty_idea is not None
         ):
             raise Item_root_IdeaNotEmptyException(
                 f"Cannot set itemroot to string different than '{self._bud_cmty_idea}'"
             )
         elif self._root and self._bud_cmty_idea is None:
-            self._idee = root_idea()
-        # elif _idee is not None:
+            self._item_idee = root_idea()
+        # elif _item_idee is not None:
         else:
-            self._idee = _idee
+            self._item_idee = _item_idee
 
     def set_bridge(self, new_bridge: str):
         old_bridge = deepcopy(self._bridge)
@@ -698,22 +700,22 @@ class ItemUnit:
         reason_unit.del_premise(premise=premise)
 
     def add_kid(self, item_kid):
-        self._kids[item_kid._idee] = item_kid
+        self._kids[item_kid._item_idee] = item_kid
         self._kids = dict(sorted(self._kids.items()))
 
-    def get_kid(self, item_kid_idee: IdeaUnit, if_missing_create=False):
+    def get_kid(self, item_kid_item_idee: IdeaUnit, if_missing_create=False):
         if if_missing_create is False:
-            return self._kids.get(item_kid_idee)
+            return self._kids.get(item_kid_item_idee)
         try:
-            return self._kids[item_kid_idee]
+            return self._kids[item_kid_item_idee]
         except Exception:
             KeyError
-            self.add_kid(itemunit_shop(item_kid_idee))
-            return_item = self._kids.get(item_kid_idee)
+            self.add_kid(itemunit_shop(item_kid_item_idee))
+            return_item = self._kids.get(item_kid_item_idee)
         return return_item
 
-    def del_kid(self, item_kid_idee: IdeaUnit):
-        self._kids.pop(item_kid_idee)
+    def del_kid(self, item_kid_item_idee: IdeaUnit):
+        self._kids.pop(item_kid_item_idee)
 
     def clear_kids(self):
         self._kids = {}
@@ -877,8 +879,8 @@ class ItemUnit:
     def get_dict(self) -> dict[str, str]:
         x_dict = {"mass": self.mass}
 
-        if self._idee is not None:
-            x_dict["_idee"] = self._idee
+        if self._item_idee is not None:
+            x_dict["_item_idee"] = self._item_idee
         if self._uid is not None:
             x_dict["_uid"] = self._uid
         if self._kids not in [{}, None]:
@@ -953,7 +955,7 @@ class ItemUnit:
 
 
 def itemunit_shop(
-    _idee: IdeaUnit = None,
+    _item_idee: IdeaUnit = None,
     _uid: int = None,  # Calculated field?
     _parent_road: RoadUnit = None,
     _kids: dict = None,
@@ -1001,7 +1003,7 @@ def itemunit_shop(
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_itemkid = ItemUnit(
-        _idee=None,
+        _item_idee=None,
         _uid=_uid,
         _parent_road=_parent_road,
         _kids=get_empty_dict_if_None(_kids),
@@ -1046,9 +1048,9 @@ def itemunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_itemkid._root:
-        x_itemkid.set_idee(_idee=_bud_cmty_idea)
+        x_itemkid.set_item_idee(_item_idee=_bud_cmty_idea)
     else:
-        x_itemkid.set_idee(_idee=_idee)
+        x_itemkid.set_item_idee(_item_idee=_item_idee)
     x_itemkid.set_teamunit_empty_if_None()
     x_itemkid.set_originunit_empty_if_None()
     return x_itemkid

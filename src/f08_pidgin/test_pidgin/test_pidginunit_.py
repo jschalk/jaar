@@ -15,7 +15,7 @@ from src.f04_gift.atom_config import (
     fund_coin_str,
     healer_name_str,
     group_label_str,
-    idee_str,
+    item_idee_str,
     parent_road_str,
     penny_str,
     owner_name_str,
@@ -93,7 +93,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("group_label") == type_GroupLabel_str()
     assert pidgin_args_jaar_types.get("healer_name") == type_AcctName_str()
     assert pidgin_args_jaar_types.get("hour_idea") == type_IdeaUnit_str()
-    assert pidgin_args_jaar_types.get("idee") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("item_idee") == type_IdeaUnit_str()
     assert pidgin_args_jaar_types.get("mass") == "int"
     assert pidgin_args_jaar_types.get("max_tree_traverse") == "int"
     assert pidgin_args_jaar_types.get("month_idea") == type_IdeaUnit_str()
@@ -192,7 +192,7 @@ def test_pidginable_atom_args_ReturnsObj():
         group_label_str(),
         healer_name_str(),
         hour_idea_str(),
-        idee_str(),
+        item_idee_str(),
         month_idea_str(),
         parent_road_str(),
         "pick",
