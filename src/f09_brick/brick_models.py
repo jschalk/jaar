@@ -13,13 +13,13 @@ class br00000AbstractTable(Base):
     event_int = Column(Integer, primary_key=True)
     c400_number = Column(Integer)
     current_time = Column(Integer)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     fund_coin = Column(Float)
     monthday_distortion = Column(Integer)
     penny = Column(Float)
     respect_bit = Column(Float)
     bridge = Column(String)
-    timeline_idea = Column(String)
+    timeline_title = Column(String)
     yr1_jan1_offset = Column(Integer)
 
 
@@ -28,7 +28,7 @@ class br00001AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     acct_name = Column(String)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     owner_name = Column(String)
     quota = Column(Float)
     time_int = Column(Integer)
@@ -40,7 +40,7 @@ class br00002AbstractTable(Base):
     event_int = Column(Integer, primary_key=True)
     acct_name = Column(String)
     amount = Column(Float)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     owner_name = Column(String)
     time_int = Column(Integer)
 
@@ -50,8 +50,8 @@ class br00003AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     cumlative_minute = Column(Integer)
-    cmty_idea = Column(String)
-    hour_idea = Column(String)
+    cmty_title = Column(String)
+    hour_title = Column(String)
 
 
 class br00004AbstractTable(Base):
@@ -59,8 +59,8 @@ class br00004AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     cumlative_day = Column(Integer)
-    cmty_idea = Column(String)
-    month_idea = Column(String)
+    cmty_title = Column(String)
+    month_title = Column(String)
 
 
 class br00005AbstractTable(Base):
@@ -68,8 +68,8 @@ class br00005AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     weekday_order = Column(Integer)
-    cmty_idea = Column(String)
-    weekday_idea = Column(String)
+    cmty_title = Column(String)
+    weekday_title = Column(String)
 
 
 class br00011AbstractTable(Base):
@@ -77,7 +77,7 @@ class br00011AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     acct_name = Column(String)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     owner_name = Column(String)
 
 
@@ -87,7 +87,7 @@ class br00012AbstractTable(Base):
     event_int = Column(Integer, primary_key=True)
     acct_name = Column(String)
     group_label = Column(String)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     owner_name = Column(String)
 
 
@@ -95,7 +95,7 @@ class br00013AbstractTable(Base):
     __abstract__ = True
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     item_title = Column(String)
     mass = Column(Float)
     owner_name = Column(String)
@@ -111,7 +111,7 @@ class br00019AbstractTable(Base):
     begin = Column(Float)
     close = Column(Float)
     denom = Column(Float)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     gogo_want = Column(Float)
     item_title = Column(String)
     morph = Column(Integer)
@@ -128,7 +128,7 @@ class br00020AbstractTable(Base):
     acct_name = Column(String)
     credit_vote = Column(Float)
     debtit_vote = Column(Float)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     group_label = Column(String)
     owner_name = Column(String)
 
@@ -140,7 +140,7 @@ class br00021AbstractTable(Base):
     acct_name = Column(String)
     credit_belief = Column(Float)
     debtit_belief = Column(Float)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     owner_name = Column(String)
 
 
@@ -149,7 +149,7 @@ class br00022AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     awardee_label = Column(String)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     give_force = Column(Float)
     owner_name = Column(String)
     road = Column(String)
@@ -161,7 +161,7 @@ class br00023AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     base = Column(String)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     fopen = Column(Float)
     fnigh = Column(Float)
     owner_name = Column(String)
@@ -173,7 +173,7 @@ class br00024AbstractTable(Base):
     __abstract__ = True
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     owner_name = Column(String)
     road = Column(String)
     team_label = Column(String)
@@ -183,7 +183,7 @@ class br00025AbstractTable(Base):
     __abstract__ = True
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     owner_name = Column(String)
     road = Column(String)
     healer_name = Column(String)
@@ -195,7 +195,7 @@ class br00026AbstractTable(Base):
     event_int = Column(Integer, primary_key=True)
     base = Column(String)
     divisor = Column(Float)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     need = Column(String)
     nigh = Column(Float)
     open = Column(Float)
@@ -209,7 +209,7 @@ class br00027AbstractTable(Base):
     event_int = Column(Integer, primary_key=True)
     base = Column(String)
     base_item_active_requisite = Column(String)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     owner_name = Column(String)
     road = Column(String)
 
@@ -222,7 +222,7 @@ class br00028AbstractTable(Base):
     begin = Column(Float)
     close = Column(Float)
     denom = Column(Float)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     gogo_want = Column(Float)
     item_title = Column(String)
     mass = Column(Float)
@@ -241,7 +241,7 @@ class br00029AbstractTable(Base):
     event_int = Column(Integer, primary_key=True)
     credor_respect = Column(Float)
     debtor_respect = Column(Float)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     fund_coin = Column(Float)
     fund_pool = Column(Float)
     max_tree_traverse = Column(Integer)
@@ -256,7 +256,7 @@ class br00036AbstractTable(Base):
     __abstract__ = True
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     healer_name = Column(String)
     item_title = Column(String)
     owner_name = Column(String)
@@ -290,9 +290,9 @@ class br00044AbstractTable(Base):
     __abstract__ = True
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
-    inx_idea = Column(String)
+    inx_title = Column(String)
     inx_bridge = Column(String)
-    otx_idea = Column(String)
+    otx_title = Column(String)
     otx_bridge = Column(String)
     unknown_word = Column(String)
 
@@ -313,7 +313,7 @@ class br00113AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     acct_name = Column(String)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     inx_name = Column(String)
     otx_name = Column(String)
     owner_name = Column(String)
@@ -324,7 +324,7 @@ class br00115AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     acct_name = Column(String)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     inx_label = Column(String)
     otx_label = Column(String)
     owner_name = Column(String)
@@ -335,9 +335,9 @@ class br00116AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     acct_name = Column(String)
-    cmty_idea = Column(String)
-    inx_idea = Column(String)
-    otx_idea = Column(String)
+    cmty_title = Column(String)
+    inx_title = Column(String)
+    otx_title = Column(String)
     owner_name = Column(String)
 
 
@@ -346,7 +346,7 @@ class br00117AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     acct_name = Column(String)
-    cmty_idea = Column(String)
+    cmty_title = Column(String)
     inx_road = Column(String)
     otx_road = Column(String)
     owner_name = Column(String)

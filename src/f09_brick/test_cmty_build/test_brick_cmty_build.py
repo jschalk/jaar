@@ -20,7 +20,7 @@ from src.f09_brick.brick import cmty_build_from_df
 
 
 # given a dataframe, build a cmty unit
-def test_cmty_build_from_df_ReturnsObj_Scenario0_OneCmtyIdea(brick_env_setup_cleanup):
+def test_cmty_build_from_df_ReturnsObj_Scenario0_OneCmtyTitle(brick_env_setup_cleanup):
     # ESTABLISH
     br00000_df = get_ex1_br00000_df()
     br00001_df = get_ex1_br00001_df()
@@ -55,7 +55,7 @@ def test_cmty_build_from_df_ReturnsObj_Scenario0_OneCmtyIdea(brick_env_setup_cle
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
     accord23_cmtyunit = cmtyunit_shop(
         current_time=5500,
-        cmty_idea=accord23_str,
+        cmty_title=accord23_str,
         cmtys_dir=x_cmtys_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
@@ -79,7 +79,7 @@ def test_cmty_build_from_df_ReturnsObj_Scenario0_OneCmtyIdea(brick_env_setup_cle
     assert gen_cmtyunit.fund_coin == x_fund_coin
     assert gen_cmtyunit.respect_bit == x_respect_bit
     assert gen_cmtyunit.penny == x_penny
-    assert gen_cmtyunit.cmty_idea == accord23_str
+    assert gen_cmtyunit.cmty_title == accord23_str
     assert gen_cmtyunit.cmtys_dir == x_cmtys_dir
     assert gen_cmtyunit.timeline == accord23_cmtyunit.timeline
     assert gen_cmtyunit.deallogs == accord23_cmtyunit.deallogs
@@ -91,7 +91,7 @@ def test_cmty_build_from_df_ReturnsObj_Scenario0_OneCmtyIdea(brick_env_setup_cle
 
 
 # given a dataframe, build a cmty unit
-def test_cmty_build_from_df_ReturnsObj_Scenario1_TwoCmtyIdeas(
+def test_cmty_build_from_df_ReturnsObj_Scenario1_TwoCmtyTitles(
     brick_env_setup_cleanup,
 ):
     # ESTABLISH
@@ -126,7 +126,7 @@ def test_cmty_build_from_df_ReturnsObj_Scenario1_TwoCmtyIdeas(
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
     accord23_cmtyunit = cmtyunit_shop(
         current_time=5500,
-        cmty_idea=accord23_str,
+        cmty_title=accord23_str,
         cmtys_dir=x_cmtys_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
@@ -137,7 +137,7 @@ def test_cmty_build_from_df_ReturnsObj_Scenario1_TwoCmtyIdeas(
     five_timelineunit = timelineunit_shop(get_five_config())
     jeffy45_cmtyunit = cmtyunit_shop(
         current_time=444,
-        cmty_idea="jeffy45",
+        cmty_title="jeffy45",
         cmtys_dir=x_cmtys_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
@@ -151,7 +151,7 @@ def test_cmty_build_from_df_ReturnsObj_Scenario1_TwoCmtyIdeas(
     assert creg_cmtyunit.fund_coin == x_fund_coin
     assert creg_cmtyunit.respect_bit == x_respect_bit
     assert creg_cmtyunit.penny == x_penny
-    assert creg_cmtyunit.cmty_idea == accord23_str
+    assert creg_cmtyunit.cmty_title == accord23_str
     assert creg_cmtyunit.cmtys_dir == x_cmtys_dir
     assert creg_cmtyunit.timeline == accord23_cmtyunit.timeline
     assert len(creg_cmtyunit.deallogs) == 3
@@ -162,7 +162,7 @@ def test_cmty_build_from_df_ReturnsObj_Scenario1_TwoCmtyIdeas(
     assert five_cmtyunit.fund_coin == x_fund_coin
     assert five_cmtyunit.respect_bit == x_respect_bit
     assert five_cmtyunit.penny == x_penny
-    assert five_cmtyunit.cmty_idea == "jeffy45"
+    assert five_cmtyunit.cmty_title == "jeffy45"
     assert five_cmtyunit.cmtys_dir == x_cmtys_dir
     assert len(five_cmtyunit.deallogs) == 2
     assert len(five_cmtyunit.cashbook.tranunits) == 1

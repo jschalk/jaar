@@ -4,26 +4,26 @@ from src.f04_gift.atom_config import acct_name_str, base_str, type_RoadUnit_str
 from src.f08_pidgin.map import (
     groupmap_shop,
     acctmap_shop,
-    ideamap_shop,
+    titlemap_shop,
     roadmap_shop,
     GroupMap,
     AcctMap,
-    IdeaMap,
+    TitleMap,
     RoadMap,
 )
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
 from pandas import DataFrame
 
 
-def get_clean_ideamap() -> IdeaMap:
+def get_clean_titlemap() -> TitleMap:
     clean_otx = "clean"
     clean_inx = "propre"
     casa_otx = "casa1"
     casa_inx = "casa2"
-    ideamap = ideamap_shop(face_name="Sue")
-    ideamap.set_otx2inx(clean_otx, clean_inx)
-    ideamap.set_otx2inx(casa_otx, casa_inx)
-    return ideamap
+    titlemap = titlemap_shop(face_name="Sue")
+    titlemap.set_otx2inx(clean_otx, clean_inx)
+    titlemap.set_otx2inx(casa_otx, casa_inx)
+    return titlemap
 
 
 def get_clean_roadmap() -> RoadMap:
@@ -34,7 +34,7 @@ def get_clean_roadmap() -> RoadMap:
     bridge = default_bridge_if_None()
     clean_otx_road = f"{otx_accord45_str}{bridge}{clean_otx_str}"
     road_mapunit = roadmap_shop(face_name="Sue")
-    road_mapunit.set_idea(clean_otx_str, clean_inx_str)
+    road_mapunit.set_title(clean_otx_str, clean_inx_str)
     road_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
     road_mapunit.reveal_inx(clean_otx_road)
     return road_mapunit
@@ -93,10 +93,10 @@ def get_suita_acctmap() -> AcctMap:
 #     clean_inx = "propre"
 #     casa_otx = f"casa{default_bridge_if_None()}"
 #     casa_inx = "casa"
-#     ideamap = mapunit_shop(type_IdeaUnit_str(), face_name="Sue")
-#     ideamap.set_otx2inx(clean_str, clean_inx)
-#     ideamap.set_otx2inx(casa_otx, casa_inx)
-#     return ideamap
+#     titlemap = mapunit_shop(type_TitleUnit_str(), face_name="Sue")
+#     titlemap.set_otx2inx(clean_str, clean_inx)
+#     titlemap.set_otx2inx(casa_otx, casa_inx)
+#     return titlemap
 
 
 def get_slash_roadmap() -> RoadMap:
@@ -115,7 +115,7 @@ def get_slash_roadmap() -> RoadMap:
         unknown_word=x_unknown_word,
         face_name="Sue",
     )
-    road_mapunit.set_idea(clean_otx_str, clean_inx_str)
+    road_mapunit.set_title(clean_otx_str, clean_inx_str)
     road_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
     road_mapunit.reveal_inx(clean_otx_road)
     return road_mapunit
@@ -167,9 +167,9 @@ def get_sue_pidginunit() -> PidginUnit:
     sue_pidginunit = pidginunit_shop("Sue")
     sue_pidginunit.set_acctmap(get_suita_acctmap())
     sue_pidginunit.set_groupmap(get_swim_groupmap())
-    sue_pidginunit.set_ideamap(get_clean_ideamap())
+    sue_pidginunit.set_titlemap(get_clean_titlemap())
     sue_pidginunit.set_roadmap(get_clean_roadmap())
-    sue_pidginunit.roadmap.ideamap = get_clean_ideamap()
+    sue_pidginunit.roadmap.titlemap = get_clean_titlemap()
     return sue_pidginunit
 
 
@@ -223,7 +223,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     return sue_pidginunit
 
 
-def get_casa_maison_pidginunit_set_by_idea() -> PidginUnit:
+def get_casa_maison_pidginunit_set_by_title() -> PidginUnit:
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
     casa_otx_str = "casa"
@@ -239,9 +239,9 @@ def get_casa_maison_pidginunit_set_by_idea() -> PidginUnit:
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
-    sue_pidginunit.set_idea(otx_accord45_str, inx_accord87_str)
-    sue_pidginunit.set_idea(casa_otx_str, casa_inx_str)
-    sue_pidginunit.set_idea(clean_otx_str, clean_inx_str)
+    sue_pidginunit.set_title(otx_accord45_str, inx_accord87_str)
+    sue_pidginunit.set_title(casa_otx_str, casa_inx_str)
+    sue_pidginunit.set_title(clean_otx_str, clean_inx_str)
     return sue_pidginunit
 
 
@@ -305,7 +305,7 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
     return inx_dt
 
 
-def get_casa_maison_idea_dt() -> DataFrame:
+def get_casa_maison_title_dt() -> DataFrame:
     inx_accord87_str = "accord87"
     casa_inx_str = "maison"
     clean_inx_str = "propre"
@@ -325,8 +325,8 @@ def get_casa_maison_idea_dt() -> DataFrame:
             "otx_bridge",
             "inx_bridge",
             "unknown_word",
-            "otx_idea",
-            "inx_idea",
+            "otx_title",
+            "inx_title",
         ]
     )
     inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_accord45_str, inx_accord87_str]
@@ -357,7 +357,7 @@ def get_invalid_groupmap() -> GroupMap:
     return x_groupmap
 
 
-def get_invalid_ideamap() -> RoadMap:
+def get_invalid_titlemap() -> RoadMap:
     clean_str = "clean"
     clean_inx = "propre"
     casa_otx = f"casa{default_bridge_if_None()}"
@@ -368,7 +368,7 @@ def get_invalid_ideamap() -> RoadMap:
     return roadmap
 
 
-def get_slash_ideamap() -> IdeaMap:
+def get_slash_titlemap() -> TitleMap:
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
     clean_otx_str = "clean"
@@ -376,17 +376,17 @@ def get_slash_ideamap() -> IdeaMap:
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
-    x_ideamap = ideamap_shop(
+    x_titlemap = titlemap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
         face_name="Sue",
         event_int=7,
     )
-    x_ideamap.set_otx2inx(otx_accord45_str, inx_accord87_str)
-    x_ideamap.set_otx2inx(clean_otx_str, clean_inx_str)
-    x_ideamap.reveal_inx("running")
-    return x_ideamap
+    x_titlemap.set_otx2inx(otx_accord45_str, inx_accord87_str)
+    x_titlemap.set_otx2inx(clean_otx_str, clean_inx_str)
+    x_titlemap.reveal_inx("running")
+    return x_titlemap
 
 
 def get_slash_roadmap() -> RoadMap:
@@ -405,9 +405,9 @@ def get_slash_roadmap() -> RoadMap:
         unknown_word=x_unknown_word,
         face_name="Sue",
         event_int=7,
-        x_ideamap=get_slash_ideamap(),
+        x_titlemap=get_slash_titlemap(),
     )
-    x_roadmap.set_idea(clean_otx_str, clean_inx_str)
+    x_roadmap.set_title(clean_otx_str, clean_inx_str)
     x_roadmap.set_otx2inx(otx_accord45_str, inx_accord87_str)
     x_roadmap.reveal_inx(clean_otx_road)
     return x_roadmap

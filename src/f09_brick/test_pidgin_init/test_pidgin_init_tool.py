@@ -1,7 +1,7 @@
 from src.f00_instrument.file import get_dir_file_strs
 from src.f04_gift.atom_config import (
     type_AcctName_str,
-    type_IdeaUnit_str,
+    type_TitleUnit_str,
     type_RoadUnit_str,
     type_GroupLabel_str,
     road_str,
@@ -22,30 +22,30 @@ from src.f08_pidgin.examples.pidgin_env import (
 )
 from src.f08_pidgin.examples.example_pidgins import (
     get_casa_maison_pidginunit_set_by_otx2inx,
-    get_casa_maison_pidginunit_set_by_idea,
+    get_casa_maison_pidginunit_set_by_title,
     get_casa_maison_road_otx2inx_dt,
-    get_casa_maison_idea_dt,
+    get_casa_maison_title_dt,
     get_slash_acctmap,
     get_sue_pidginunit,
-    get_casa_maison_pidginunit_set_by_idea,
+    get_casa_maison_pidginunit_set_by_title,
     get_pidgin_core_attrs_are_none_acctmap,
 )
 from src.f09_brick.pidgin_toolbox import (
     get_map_acct_dt_columns,
     get_map_group_dt_columns,
-    get_map_idea_dt_columns,
+    get_map_title_dt_columns,
     get_map_road_dt_columns,
     create_map_acct_dt,
     create_map_group_dt,
-    create_map_idea_dt,
+    create_map_title_dt,
     create_map_road_dt,
-    create_map_idea_dt,
+    create_map_title_dt,
     save_all_csvs_from_pidginunit,
     _load_acctmap_from_csv,
     _load_groupmap_from_csv,
-    _load_ideamap_from_csv,
+    _load_titlemap_from_csv,
     _load_roadmap_from_csv,
-    _save_map_idea_csv,
+    _save_map_title_csv,
     create_dir_valid_empty_pidginunit,
     init_pidginunit_from_dir,
 )
@@ -90,21 +90,21 @@ def test_get_map_group_dt_columns_ReturnsObj():
     assert set(get_map_group_dt_columns()).issubset(set(sorting_columns()))
 
 
-def test_get_map_idea_dt_columns_ReturnsObj():
+def test_get_map_title_dt_columns_ReturnsObj():
     # ESTABLISH / WHEN /THEN
-    assert get_map_idea_dt_columns()
-    assert len(get_map_idea_dt_columns()) == 7
+    assert get_map_title_dt_columns()
+    assert len(get_map_title_dt_columns()) == 7
     static_list = [
         face_name_str(),
         event_int_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
-        "otx_idea",
-        "inx_idea",
+        "otx_title",
+        "inx_title",
     ]
-    assert get_map_idea_dt_columns() == static_list
-    assert set(get_map_idea_dt_columns()).issubset(set(sorting_columns()))
+    assert get_map_title_dt_columns() == static_list
+    assert set(get_map_title_dt_columns()).issubset(set(sorting_columns()))
 
 
 def test_get_map_road_dt_columns_ReturnsObj():
@@ -144,26 +144,26 @@ def test_create_map_road_dt_ReturnsObj():
     assert casa_csv == get_ordered_csv(get_casa_maison_road_otx2inx_dt())
 
 
-def test_create_map_idea_dt_ReturnsObj():
+def test_create_map_title_dt_ReturnsObj():
     # ESTABLISH
-    casa_pidginunit = get_casa_maison_pidginunit_set_by_idea()
-    casa_mapunit = casa_pidginunit.get_ideamap()
+    casa_pidginunit = get_casa_maison_pidginunit_set_by_title()
+    casa_mapunit = casa_pidginunit.get_titlemap()
 
     # WHEN
-    casa_dataframe = create_map_idea_dt(casa_mapunit)
+    casa_dataframe = create_map_title_dt(casa_mapunit)
 
     # THEN
-    # print(f"{get_map_idea_dt_columns()=}")
+    # print(f"{get_map_title_dt_columns()=}")
     # print(f"    {list(casa_dataframe.columns)=}")
     # print("")
     # print(f"{casa_dataframe=}")
-    assert list(casa_dataframe.columns) == get_map_idea_dt_columns()
+    assert list(casa_dataframe.columns) == get_map_title_dt_columns()
     assert len(casa_dataframe) == 3
     casa_csv = get_ordered_csv(casa_dataframe)
-    ex_idea_csv = get_ordered_csv(get_casa_maison_idea_dt())
+    ex_title_csv = get_ordered_csv(get_casa_maison_title_dt())
     print(f"       {casa_csv=}")
-    print(f"{ex_idea_csv=}")
-    assert casa_csv == ex_idea_csv
+    print(f"{ex_title_csv=}")
+    assert casa_csv == ex_title_csv
 
 
 def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
@@ -172,15 +172,15 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     map_dir = get_example_face_dir()
     name_filename = "name.csv"
     label_filename = "label.csv"
-    idea_filename = "idea.csv"
+    title_filename = "title.csv"
     road_filename = "road.csv"
     acct_csv_path = f"{map_dir}/{name_filename}"
     group_csv_path = f"{map_dir}/{label_filename}"
-    idea_csv_path = f"{map_dir}/{idea_filename}"
+    title_csv_path = f"{map_dir}/{title_filename}"
     road_csv_path = f"{map_dir}/{road_filename}"
     assert os_path_exists(acct_csv_path) is False
     assert os_path_exists(group_csv_path) is False
-    assert os_path_exists(idea_csv_path) is False
+    assert os_path_exists(title_csv_path) is False
     assert os_path_exists(road_csv_path) is False
     assert len(get_dir_file_strs(map_dir)) == 0
 
@@ -190,7 +190,7 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     # THEN
     assert os_path_exists(acct_csv_path)
     assert os_path_exists(group_csv_path)
-    assert os_path_exists(idea_csv_path)
+    assert os_path_exists(title_csv_path)
     assert os_path_exists(road_csv_path)
     assert len(get_dir_file_strs(map_dir)) == 4
 
@@ -281,48 +281,48 @@ def test_load_groupmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     assert len(sue_groupmap.otx2inx) == 0
 
 
-def test_load_ideamap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
+def test_load_titlemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
-    idea_filename = "idea.csv"
-    idea_csv_path = f"{map_dir}/{idea_filename}"
+    title_filename = "title.csv"
+    title_csv_path = f"{map_dir}/{title_filename}"
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
-    assert os_path_exists(idea_csv_path)
+    assert os_path_exists(title_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_ideamap = empty_pidginunit.get_mapunit(type_IdeaUnit_str())
-    sue_ideamap.face_name = "Sue"
-    print(f"{empty_pidginunit=} {sue_ideamap=}")
-    assert len(sue_ideamap.otx2inx) == 0
+    sue_titlemap = empty_pidginunit.get_mapunit(type_TitleUnit_str())
+    sue_titlemap.face_name = "Sue"
+    print(f"{empty_pidginunit=} {sue_titlemap=}")
+    assert len(sue_titlemap.otx2inx) == 0
 
     # WHEN
-    sue_ideamap = _load_ideamap_from_csv(map_dir, sue_ideamap)
+    sue_titlemap = _load_titlemap_from_csv(map_dir, sue_titlemap)
 
     # THEN
-    assert len(sue_ideamap.otx2inx) == 2
-    ex_ideamap = sue_pidginunit.get_mapunit(type_IdeaUnit_str())
-    assert ex_ideamap == sue_ideamap
+    assert len(sue_titlemap.otx2inx) == 2
+    ex_titlemap = sue_pidginunit.get_mapunit(type_TitleUnit_str())
+    assert ex_titlemap == sue_titlemap
 
 
-def test_load_ideamap_from_csv_DoesNotChangeWhenFileDoesNotExist(
+def test_load_titlemap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     map_dir = get_example_face_dir()
-    idea_filename = "idea.csv"
-    idea_csv_path = f"{map_dir}/{idea_filename}"
-    assert os_path_exists(idea_csv_path) is False
+    title_filename = "title.csv"
+    title_csv_path = f"{map_dir}/{title_filename}"
+    assert os_path_exists(title_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_ideamap = empty_pidginunit.get_mapunit(type_IdeaUnit_str())
-    sue_ideamap.face_name = "Sue"
-    print(f"{empty_pidginunit=} {sue_ideamap=}")
-    assert len(sue_ideamap.otx2inx) == 0
+    sue_titlemap = empty_pidginunit.get_mapunit(type_TitleUnit_str())
+    sue_titlemap.face_name = "Sue"
+    print(f"{empty_pidginunit=} {sue_titlemap=}")
+    assert len(sue_titlemap.otx2inx) == 0
 
     # WHEN
-    sue_ideamap = _load_ideamap_from_csv(map_dir, sue_ideamap)
+    sue_titlemap = _load_titlemap_from_csv(map_dir, sue_titlemap)
 
     # THEN
-    assert len(sue_ideamap.otx2inx) == 0
+    assert len(sue_titlemap.otx2inx) == 0
 
 
 def test_load_roadmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
@@ -348,7 +348,7 @@ def test_load_roadmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     assert ex_roadmap.event_int == sue_roadmap.event_int
     assert ex_roadmap.face_name == sue_roadmap.face_name
     assert ex_roadmap.otx2inx == sue_roadmap.otx2inx
-    assert ex_roadmap.ideamap != sue_roadmap.ideamap
+    assert ex_roadmap.titlemap != sue_roadmap.titlemap
 
 
 def test_load_roadmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
@@ -454,7 +454,7 @@ def test_init_pidginunit_from_dir_ReturnsObj(env_dir_setup_cleanup):
     assert len(sue_pidginunit.acctmap.otx2inx) == 3
     assert gen_pidginunit.acctmap == sue_pidginunit.acctmap
     assert gen_pidginunit.groupmap == sue_pidginunit.groupmap
-    assert gen_pidginunit.ideamap == sue_pidginunit.ideamap
-    assert gen_pidginunit.roadmap.ideamap == sue_pidginunit.roadmap.ideamap
+    assert gen_pidginunit.titlemap == sue_pidginunit.titlemap
+    assert gen_pidginunit.roadmap.titlemap == sue_pidginunit.roadmap.titlemap
     assert gen_pidginunit.roadmap == sue_pidginunit.roadmap
     assert gen_pidginunit == sue_pidginunit

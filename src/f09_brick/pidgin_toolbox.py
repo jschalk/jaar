@@ -4,7 +4,7 @@ from src.f08_pidgin.pidgin import (
     pidginunit_shop,
     AcctMap,
     GroupMap,
-    IdeaMap,
+    TitleMap,
     RoadMap,
 )
 from src.f09_brick.pandas_tool import get_ordered_csv, open_csv
@@ -36,15 +36,15 @@ def get_map_group_dt_columns() -> list[str]:
     ]
 
 
-def get_map_idea_dt_columns() -> list[str]:
+def get_map_title_dt_columns() -> list[str]:
     return [
         "face_name",
         "event_int",
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
-        "otx_idea",
-        "inx_idea",
+        "otx_title",
+        "inx_title",
     ]
 
 
@@ -92,7 +92,7 @@ def create_map_group_dt(x_map: GroupMap) -> DataFrame:
     return DataFrame(x_rows_list, columns=get_map_group_dt_columns())
 
 
-def create_map_idea_dt(x_map: IdeaMap) -> DataFrame:
+def create_map_title_dt(x_map: TitleMap) -> DataFrame:
     x_rows_list = [
         {
             "event_int": x_map.event_int,
@@ -100,12 +100,12 @@ def create_map_idea_dt(x_map: IdeaMap) -> DataFrame:
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
             "unknown_word": x_map.unknown_word,
-            "otx_idea": otx_value,
-            "inx_idea": inx_value,
+            "otx_title": otx_value,
+            "inx_title": inx_value,
         }
         for otx_value, inx_value in x_map.otx2inx.items()
     ]
-    return DataFrame(x_rows_list, columns=get_map_idea_dt_columns())
+    return DataFrame(x_rows_list, columns=get_map_title_dt_columns())
 
 
 def create_map_road_dt(x_map: RoadMap) -> DataFrame:
@@ -127,7 +127,7 @@ def create_map_road_dt(x_map: RoadMap) -> DataFrame:
 def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
     _save_map_acct_csv(x_dir, x_pidginunit.acctmap)
     _save_map_group_csv(x_dir, x_pidginunit.groupmap)
-    _save_map_idea_csv(x_dir, x_pidginunit.ideamap)
+    _save_map_title_csv(x_dir, x_pidginunit.titlemap)
     _save_map_road_csv(x_dir, x_pidginunit.roadmap)
 
 
@@ -141,9 +141,9 @@ def _save_map_group_csv(x_dir: str, groupmap: GroupMap):
     save_file(x_dir, "label.csv", get_ordered_csv(x_dt))
 
 
-def _save_map_idea_csv(x_dir: str, ideamap: IdeaMap):
-    x_dt = create_map_idea_dt(ideamap)
-    save_file(x_dir, "idea.csv", get_ordered_csv(x_dt))
+def _save_map_title_csv(x_dir: str, titlemap: TitleMap):
+    x_dt = create_map_title_dt(titlemap)
+    save_file(x_dir, "title.csv", get_ordered_csv(x_dt))
 
 
 def _save_map_road_csv(x_dir: str, roadmap: RoadMap):
@@ -175,16 +175,16 @@ def _load_groupmap_from_csv(x_dir, x_groupmap: GroupMap) -> GroupMap:
     return x_groupmap
 
 
-def _load_ideamap_from_csv(x_dir, x_ideamap: IdeaMap) -> IdeaMap:
-    idea_filename = "idea.csv"
-    if os_path_exists(create_path(x_dir, idea_filename)):
-        otx2inx_dt = open_csv(x_dir, "idea.csv")
+def _load_titlemap_from_csv(x_dir, x_titlemap: TitleMap) -> TitleMap:
+    title_filename = "title.csv"
+    if os_path_exists(create_path(x_dir, title_filename)):
+        otx2inx_dt = open_csv(x_dir, "title.csv")
         for table_row in otx2inx_dt.to_dict("records"):
-            otx_value = table_row.get("otx_idea")
-            inx_value = table_row.get("inx_idea")
-            if x_ideamap.otx2inx_exists(otx_value, inx_value) is False:
-                x_ideamap.set_otx2inx(otx_value, inx_value)
-    return x_ideamap
+            otx_value = table_row.get("otx_title")
+            inx_value = table_row.get("inx_title")
+            if x_titlemap.otx2inx_exists(otx_value, inx_value) is False:
+                x_titlemap.set_otx2inx(otx_value, inx_value)
+    return x_titlemap
 
 
 def _load_roadmap_from_csv(x_dir, x_roadmap: RoadMap) -> RoadMap:
@@ -237,7 +237,7 @@ def init_pidginunit_from_dir(x_dir: str) -> PidginUnit:
     x_pidginunit = create_dir_valid_empty_pidginunit(x_dir)
     _load_acctmap_from_csv(x_dir, x_pidginunit.acctmap)
     _load_groupmap_from_csv(x_dir, x_pidginunit.groupmap)
-    _load_ideamap_from_csv(x_dir, x_pidginunit.ideamap)
+    _load_titlemap_from_csv(x_dir, x_pidginunit.titlemap)
     _load_roadmap_from_csv(x_dir, x_pidginunit.roadmap)
-    x_pidginunit.roadmap.ideamap = x_pidginunit.ideamap
+    x_pidginunit.roadmap.titlemap = x_pidginunit.titlemap
     return x_pidginunit

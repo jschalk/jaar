@@ -3,7 +3,7 @@ from src.f02_bud.group import awardlink_shop
 from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f02_bud.item import itemunit_shop
-from src.f01_road.road import create_road_from_ideas
+from src.f01_road.road import create_road_from_titles
 
 
 def test_BudUnit_get_tree_metrics_exists():
@@ -14,7 +14,7 @@ def test_BudUnit_get_tree_metrics_exists():
     zia_bud_tree_metrics = zia_bud.get_tree_metrics()
 
     # THEN
-    assert zia_bud_tree_metrics.idea_count is not None
+    assert zia_bud_tree_metrics.title_count is not None
     assert zia_bud_tree_metrics.reason_bases is not None
     assert zia_bud_tree_metrics.level_count is not None
     assert zia_bud_tree_metrics.awardlinks_metrics is not None
@@ -98,9 +98,9 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_ItemRoadUnit():
     yao_tree_metrics = yao_bud.get_tree_metrics()
 
     # WHEN / THEN
-    train_road = create_road_from_ideas(
+    train_road = create_road_from_titles(
         [
-            yao_bud.cmty_idea,
+            yao_bud.cmty_title,
             "ACME",
             "ACME Employee Responsiblities",
             "Know Abuse Deterrence and Reporting guildlines",

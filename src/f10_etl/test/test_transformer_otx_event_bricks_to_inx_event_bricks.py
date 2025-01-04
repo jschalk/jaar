@@ -2,10 +2,10 @@ from src.f00_instrument.file import create_path, save_file
 from src.f04_gift.atom_config import (
     acct_name_str,
     face_name_str,
-    cmty_idea_str,
+    cmty_title_str,
     owner_name_str,
     type_AcctName_str,
-    type_IdeaUnit_str,
+    type_TitleUnit_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str, pidgin_filename
 from src.f08_pidgin.pidgin import pidginunit_shop
@@ -40,7 +40,7 @@ def test_etl_bow_event_bricks_to_inx_events_Scenario0_NoPidginUnit():
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -90,7 +90,7 @@ def test_etl_bow_event_bricks_to_inx_events_Scenario1_MultpleFaceNames_CreatesEv
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -144,7 +144,7 @@ def test_etl_bow_event_bricks_to_inx_events_Scenario1_MultpleFaceNames_CreatesEv
     e9_pidginunit.set_otx2inx(type_AcctName_str(), zia_otx, zia_inx)
     e9_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob2_inx)
     e9_pidginunit.set_otx2inx(type_AcctName_str(), yao_otx, yao2_inx)
-    e9_pidginunit.set_otx2inx(type_IdeaUnit_str(), accord55_inx, accord55_otx)
+    e9_pidginunit.set_otx2inx(type_TitleUnit_str(), accord55_inx, accord55_otx)
     save_file(bow_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
     save_file(bow_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
     save_file(bow_e9_dir, pidgin_filename(), e9_pidginunit.get_json())

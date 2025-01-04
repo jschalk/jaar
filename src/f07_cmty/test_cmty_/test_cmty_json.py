@@ -7,7 +7,7 @@ from src.f01_road.finance import (
 from src.f01_road.finance_tran import bridge_str
 from src.f03_chrono.chrono import get_default_timeline_config_dict
 from src.f04_gift.atom_config import (
-    cmty_idea_str,
+    cmty_title_str,
     fund_coin_str,
     respect_bit_str,
     penny_str,
@@ -61,7 +61,7 @@ def test_CmtyUnit_get_dict_ReturnsObjWith_cashbook():
     # THEN
     print(f"{ accord_cmty._get_deallogs_dict()=}")
     print(f"{ accord_cmty.cashbook.get_dict()=}")
-    assert x_dict.get(cmty_idea_str()) == accord45_str
+    assert x_dict.get(cmty_title_str()) == accord45_str
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
     assert x_dict.get(current_time_str()) == accord_current_time_int
     assert x_dict.get(bridge_str()) == default_bridge_if_None()
@@ -71,7 +71,7 @@ def test_CmtyUnit_get_dict_ReturnsObjWith_cashbook():
     assert x_dict.get(deallogs_str()) == accord_cmty._get_deallogs_dict()
     assert x_dict.get(cashbook_str()) == accord_cmty.cashbook.get_dict()
     assert set(x_dict.keys()) == {
-        cmty_idea_str(),
+        cmty_title_str(),
         timeline_str(),
         current_time_str(),
         deallogs_str(),
@@ -94,7 +94,7 @@ def test_CmtyUnit_get_dict_ReturnsObjWithOut_cashbook():
     # THEN
     assert not x_dict.get(cashbook_str())
     assert set(x_dict.keys()) == {
-        cmty_idea_str(),
+        cmty_title_str(),
         timeline_str(),
         current_time_str(),
         deallogs_str(),
@@ -127,15 +127,15 @@ def test_CmtyUnit_get_json_ReturnsObj():
     # THEN
     print(f"{x_json=}")
     assert x_json
-    assert x_json.find(cmty_idea_str()) > 0
+    assert x_json.find(cmty_title_str()) > 0
 
 
 def test_get_from_dict_ReturnsCmtyUnit():
     # ESTABLISH
     accord45_str = "accord45"
     accord_cmty = cmtyunit_shop(accord45_str)
-    sue_timeline_idea = "sue casa"
-    accord_cmty.timeline.timeline_idea = sue_timeline_idea
+    sue_timeline_title = "sue casa"
+    accord_cmty.timeline.timeline_title = sue_timeline_title
     sue_current_time = 23
     sue_bridge = "/"
     sue_fund_coin = 0.3
@@ -171,8 +171,8 @@ def test_get_from_dict_ReturnsCmtyUnit():
     x_cmty = cmtyunit_get_from_dict(x_dict)
 
     # THEN
-    assert x_cmty.cmty_idea == accord45_str
-    assert x_cmty.timeline.timeline_idea == sue_timeline_idea
+    assert x_cmty.cmty_title == accord45_str
+    assert x_cmty.timeline.timeline_title == sue_timeline_title
     assert x_cmty.current_time == sue_current_time
     assert x_cmty.bridge == sue_bridge
     assert x_cmty.fund_coin == sue_fund_coin
@@ -188,8 +188,8 @@ def test_get_from_json_ReturnsCmtyUnit():
     # ESTABLISH
     accord45_str = "accord45"
     accord_cmty = cmtyunit_shop(accord45_str)
-    sue_timeline_idea = "sue casa"
-    accord_cmty.timeline.timeline_idea = sue_timeline_idea
+    sue_timeline_title = "sue casa"
+    accord_cmty.timeline.timeline_title = sue_timeline_title
     sue_current_time = 23
     sue_bridge = "/"
     sue_fund_coin = 0.3
@@ -217,8 +217,8 @@ def test_get_from_json_ReturnsCmtyUnit():
     x_cmty = cmtyunit_get_from_json(accord_json)
 
     # THEN
-    assert x_cmty.cmty_idea == accord45_str
-    assert x_cmty.timeline.timeline_idea == sue_timeline_idea
+    assert x_cmty.cmty_title == accord45_str
+    assert x_cmty.timeline.timeline_title == sue_timeline_title
     assert x_cmty.current_time == sue_current_time
     assert x_cmty.bridge == sue_bridge
     assert x_cmty.fund_coin == sue_fund_coin

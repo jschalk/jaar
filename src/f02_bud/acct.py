@@ -6,8 +6,8 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.road import (
     AcctName,
     default_bridge_if_None,
-    validate_ideaunit,
-    is_ideaunit,
+    validate_titleunit,
+    is_titleunit,
 )
 from src.f01_road.finance import default_respect_bit_if_None, RespectNum, allot_scale
 from src.f02_bud.group import (
@@ -34,7 +34,7 @@ class AcctCore:
     _respect_bit: float = None
 
     def set_acct_name(self, x_acct_name: AcctName):
-        self.acct_name = validate_ideaunit(x_acct_name, self._bridge)
+        self.acct_name = validate_titleunit(x_acct_name, self._bridge)
 
 
 @dataclass
@@ -162,7 +162,7 @@ class AcctUnit(AcctCore):
 
     def set_membership(self, x_membership: MemberShip):
         x_group_label = x_membership.group_label
-        group_label_is_acct_name = is_ideaunit(x_group_label, self._bridge)
+        group_label_is_acct_name = is_titleunit(x_group_label, self._bridge)
         if group_label_is_acct_name and self.acct_name != x_group_label:
             raise Bad_acct_nameMemberShipException(
                 f"AcctUnit with acct_name='{self.acct_name}' cannot have link to '{x_group_label}'."

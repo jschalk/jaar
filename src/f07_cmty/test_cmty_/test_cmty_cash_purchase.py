@@ -230,7 +230,7 @@ def test_CmtyUnit_set_all_tranbook_SetsAttr():
     sue_x40000_episode.set_net_deal(bob_str, bob_net_deal)
     sue_x70000_episode.set_net_deal(zia_str, zia_net_deal)
 
-    assert x_cmty._all_tranbook == tranbook_shop(x_cmty.cmty_idea)
+    assert x_cmty._all_tranbook == tranbook_shop(x_cmty.cmty_title)
     assert x_cmty.cashpurchase_exists(sue_str, bob_str, t55_t)
     assert x_cmty.cashpurchase_exists(yao_str, bob_str, t66_t)
     assert x_cmty.cashpurchase_exists(yao_str, sue_str, t77_t)

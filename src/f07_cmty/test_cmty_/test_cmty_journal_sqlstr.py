@@ -3,7 +3,7 @@
 # from src.f07_cmty.journal_sqlstr import get_atom_hx_table_insert_sqlstr
 # from src.f07_cmty.cmty import cmtyunit_shop
 # from src.f07_cmty.examples.cmty_env import (
-#     get_test_cmty_idea,
+#     get_test_cmty_title,
 #     get_test_cmtys_dir,
 #     env_dir_setup_cleanup,
 # )

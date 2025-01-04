@@ -1,9 +1,9 @@
-def get_test_cmty_idea():
+def get_test_cmty_title():
     return "accord_45"
 
 
-def get_cmty_idea_if_None(cmty_idea: str = None):
-    return get_test_cmty_idea() if cmty_idea is None else cmty_idea
+def get_cmty_title_if_None(cmty_title: str = None):
+    return get_test_cmty_title() if cmty_title is None else cmty_title
 
 
 def get_test_cmtys_dir():

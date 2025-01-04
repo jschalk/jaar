@@ -16,7 +16,7 @@ from src.f02_bud.bud_tool import (
 from src.f03_chrono.chrono import (
     c400_number_str,
     monthday_distortion_str,
-    timeline_idea_str,
+    timeline_title_str,
     yr1_jan1_offset_str,
 )
 from src.f04_gift.atom_config import (
@@ -31,7 +31,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_update,
     face_name_str,
-    cmty_idea_str,
+    cmty_title_str,
     owner_name_str,
     acct_name_str,
     group_label_str,
@@ -81,11 +81,11 @@ from src.f07_cmty.cmty_config import (
     cmty_timeline_weekday_str,
     current_time_str,
     amount_str,
-    month_idea_str,
-    hour_idea_str,
+    month_title_str,
+    hour_title_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_idea_str,
+    weekday_title_str,
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import (
@@ -94,8 +94,8 @@ from src.f08_pidgin.pidgin_config import (
     otx_bridge_str,
     inx_bridge_str,
     unknown_word_str,
-    otx_idea_str,
-    inx_idea_str,
+    otx_title_str,
+    inx_title_str,
     otx_road_str,
     inx_road_str,
     otx_name_str,
@@ -105,7 +105,7 @@ from src.f08_pidgin.pidgin_config import (
     map_otx2inx_str,
     map_name_str,
     map_label_str,
-    map_idea_str,
+    map_title_str,
     map_road_str,
     get_pidgin_categorys,
     get_pidgin_config_dict,
@@ -171,7 +171,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     # THEN
     assert table_sorting_priority[0] == face_name_str()
     assert table_sorting_priority[1] == event_int_str()
-    assert table_sorting_priority[2] == cmty_idea_str()
+    assert table_sorting_priority[2] == cmty_title_str()
     assert table_sorting_priority[3] == owner_name_str()
     assert table_sorting_priority[4] == acct_name_str()
     assert table_sorting_priority[5] == group_label_str()
@@ -219,14 +219,14 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[47] == respect_bit_str()
     assert table_sorting_priority[48] == current_time_str()
     assert table_sorting_priority[49] == amount_str()
-    assert table_sorting_priority[50] == month_idea_str()
-    assert table_sorting_priority[51] == hour_idea_str()
+    assert table_sorting_priority[50] == month_title_str()
+    assert table_sorting_priority[51] == hour_title_str()
     assert table_sorting_priority[52] == cumlative_minute_str()
     assert table_sorting_priority[53] == cumlative_day_str()
-    assert table_sorting_priority[54] == weekday_idea_str()
+    assert table_sorting_priority[54] == weekday_title_str()
     assert table_sorting_priority[55] == weekday_order_str()
-    assert table_sorting_priority[56] == otx_idea_str()
-    assert table_sorting_priority[57] == inx_idea_str()
+    assert table_sorting_priority[56] == otx_title_str()
+    assert table_sorting_priority[57] == inx_title_str()
     assert table_sorting_priority[58] == otx_road_str()
     assert table_sorting_priority[59] == inx_road_str()
     assert table_sorting_priority[60] == otx_name_str()
@@ -241,7 +241,7 @@ def test_get_brick_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[69] == yr1_jan1_offset_str()
     assert table_sorting_priority[70] == quota_str()
     assert table_sorting_priority[71] == monthday_distortion_str()
-    assert table_sorting_priority[72] == timeline_idea_str()
+    assert table_sorting_priority[72] == timeline_title_str()
     assert len(table_sorting_priority) == 73
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
@@ -267,7 +267,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert set(sqlite_types.keys()) == set(get_brick_elements_sort_order())
     assert sqlite_types.get(face_name_str()) == "TEXT"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
-    assert sqlite_types.get(cmty_idea_str()) == "TEXT"
+    assert sqlite_types.get(cmty_title_str()) == "TEXT"
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_label_str()) == "TEXT"
@@ -315,11 +315,11 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(respect_bit_str()) == "REAL"
     assert sqlite_types.get(current_time_str()) == "INTEGER"
     assert sqlite_types.get(amount_str()) == "REAL"
-    assert sqlite_types.get(month_idea_str()) == "TEXT"
-    assert sqlite_types.get(hour_idea_str()) == "TEXT"
+    assert sqlite_types.get(month_title_str()) == "TEXT"
+    assert sqlite_types.get(hour_title_str()) == "TEXT"
     assert sqlite_types.get(cumlative_minute_str()) == "INTEGER"
     assert sqlite_types.get(cumlative_day_str()) == "INTEGER"
-    assert sqlite_types.get(weekday_idea_str()) == "TEXT"
+    assert sqlite_types.get(weekday_title_str()) == "TEXT"
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
     assert sqlite_types.get(otx_bridge_str()) == "TEXT"
     assert sqlite_types.get(inx_bridge_str()) == "TEXT"
@@ -329,7 +329,7 @@ def test_get_brick_sqlite_type_ReturnsObj():
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(quota_str()) == "REAL"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
-    assert sqlite_types.get(timeline_idea_str()) == "TEXT"
+    assert sqlite_types.get(timeline_title_str()) == "TEXT"
 
 
 def test_get_allowed_curds_ReturnObj():
@@ -383,7 +383,7 @@ def test_get_brick_config_dict_ReturnsObj():
     assert budunit_str() in brick_config_categorys
     assert map_name_str() in brick_config_categorys
     assert map_label_str() in brick_config_categorys
-    assert map_idea_str() in brick_config_categorys
+    assert map_title_str() in brick_config_categorys
     assert map_road_str() in brick_config_categorys
     assert get_atom_categorys().issubset(brick_config_categorys)
     assert get_cmty_categorys().issubset(brick_config_categorys)
@@ -424,7 +424,7 @@ def _validate_brick_config(x_brick_config: dict):
             map_otx2inx_str(),
             map_label_str(),
             map_name_str(),
-            map_idea_str(),
+            map_title_str(),
             map_road_str(),
         }:
             assert brick_dict.get(allowed_crud_str()) == insert_one_time_str()
@@ -483,17 +483,17 @@ def _validate_brick_config(x_brick_config: dict):
         assert face_name_str() in brick_jkeys_keys
         assert event_int_str() in brick_jkeys_keys
         if brick_dict.get(brick_type_str()) != pidginunit_str():
-            assert cmty_idea_str() in brick_jkeys_keys
+            assert cmty_title_str() in brick_jkeys_keys
         if brick_dict.get(brick_type_str()) == budunit_str():
-            brick_jkeys_keys.remove(cmty_idea_str())
+            brick_jkeys_keys.remove(cmty_title_str())
         brick_jkeys_keys.remove(face_name_str())
         brick_jkeys_keys.remove(event_int_str())
         assert sub_jkeys_keys == brick_jkeys_keys
 
         sub_jvalues_keys = set(sub_category.get(jvalues_str()).keys())
         print(f"  {sub_jvalues_keys=}")
-        if cmty_idea_str() in sub_jvalues_keys:
-            sub_jvalues_keys.remove(cmty_idea_str())
+        if cmty_title_str() in sub_jvalues_keys:
+            sub_jvalues_keys.remove(cmty_title_str())
 
         brick_jvalues_dict = brick_dict.get(jvalues_str())
         brick_jvalues_keys = set(brick_jvalues_dict.keys())
@@ -501,7 +501,7 @@ def _validate_brick_config(x_brick_config: dict):
         # print(f"{brick_jvalues_keys=}")
         assert sub_jvalues_keys == brick_jvalues_keys
 
-        assert cmty_idea_str() not in brick_jvalues_keys
+        assert cmty_title_str() not in brick_jvalues_keys
 
         # sort_list = get_brick_elements_sort_order()
         # x_count = 0
@@ -633,7 +633,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     bo = build_order_str()
     # set_brick_config_json(map_name_str(), 0)
     # set_brick_config_json(map_label_str(), 1)
-    # set_brick_config_json(map_idea_str(), 2)
+    # set_brick_config_json(map_title_str(), 2)
     # set_brick_config_json(map_road_str(), 3)
     # set_brick_config_json(cmtyunit_str(), 5)
     # set_brick_config_json(cmty_timeline_hour_str(), 6)
@@ -657,7 +657,7 @@ def test_get_brick_config_dict_ReturnsObj_build_order():
     # THEN
     assert x_brick_config.get(map_name_str()).get(bo) == 0
     assert x_brick_config.get(map_label_str()).get(bo) == 1
-    assert x_brick_config.get(map_idea_str()).get(bo) == 2
+    assert x_brick_config.get(map_title_str()).get(bo) == 2
     assert x_brick_config.get(map_road_str()).get(bo) == 3
     assert x_brick_config.get(cmtyunit_str()).get(bo) == 5
     assert x_brick_config.get(cmty_timeline_hour_str()).get(bo) == 6
@@ -688,13 +688,13 @@ def test_get_quick_bricks_column_ref_ReturnsObj():
         event_int_str(),
         c400_number_str(),
         current_time_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),
         bridge_str(),
-        timeline_idea_str(),
+        timeline_title_str(),
         yr1_jan1_offset_str(),
     }
 

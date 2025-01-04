@@ -1,12 +1,12 @@
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.reason_item import reasonunit_shop, premiseunit_shop, factunit_shop
-from src.f01_road.road import get_default_cmty_idea as root_idea, create_road
+from src.f01_road.road import get_default_cmty_title as root_title, create_road
 
 
 def test_ItemUnit_find_replace_road_CorrectlyModifies_parent_road():
     # ESTABLISH Item with _parent_road that will be different
     old_casa_str = "casa1"
-    old_casa_road = create_road(root_idea(), old_casa_str)
+    old_casa_road = create_road(root_title(), old_casa_str)
     bloomers_str = "bloomers"
     old_bloomers_road = create_road(old_casa_road, bloomers_str)
     roses_str = "roses"
@@ -17,7 +17,7 @@ def test_ItemUnit_find_replace_road_CorrectlyModifies_parent_road():
 
     # WHEN
     new_casa = "casa2"
-    new_casa_road = create_road(root_idea(), new_casa)
+    new_casa_road = create_road(root_title(), new_casa)
     x_item.find_replace_road(old_road=old_casa_road, new_road=new_casa_road)
 
     # THEN
@@ -30,14 +30,14 @@ def test_ItemUnit_find_replace_road_CorrectlyModifies_parent_road():
 def test_ItemUnit_find_replace_road_CorrectlyModifies_reasonunits():
     # ESTABLISH Item with reason that will be different
     casa_str = "casa1"
-    casa_road = create_road(root_idea(), casa_str)
+    casa_road = create_road(root_title(), casa_str)
     bloomers_str = "bloomers"
     bloomers_road = create_road(casa_road, bloomers_str)
     roses_str = "roses"
     roses_road = create_road(bloomers_road, roses_str)
     # reason roads
     old_water_str = "water"
-    old_water_road = create_road(root_idea(), old_water_str)
+    old_water_road = create_road(root_title(), old_water_str)
     rain_str = "rain"
     old_rain_road = create_road(old_water_road, rain_str)
     # create reasonunit
@@ -56,7 +56,7 @@ def test_ItemUnit_find_replace_road_CorrectlyModifies_reasonunits():
 
     # WHEN
     new_water_str = "h2o"
-    new_water_road = create_road(root_idea(), new_water_str)
+    new_water_road = create_road(root_title(), new_water_str)
     assert x_item.reasonunits.get(new_water_road) is None
     x_item.find_replace_road(old_road=old_water_road, new_road=new_water_road)
 
@@ -85,7 +85,7 @@ def test_ItemUnit_find_replace_road_CorrectlyModifies_factunits():
     # ESTABLISH Item with factunit that will be different
     roses_str = "roses"
     old_water_str = "water"
-    old_water_road = create_road(root_idea(), old_water_str)
+    old_water_road = create_road(root_title(), old_water_str)
     rain_str = "rain"
     old_rain_road = create_road(old_water_road, rain_str)
 
@@ -99,7 +99,7 @@ def test_ItemUnit_find_replace_road_CorrectlyModifies_factunits():
 
     # WHEN
     new_water_str = "h2o"
-    new_water_road = create_road(root_idea(), new_water_str)
+    new_water_road = create_road(root_title(), new_water_str)
     assert x_item.factunits.get(new_water_road) is None
     x_item.find_replace_road(old_road=old_water_road, new_road=new_water_road)
 

@@ -14,8 +14,8 @@ from src.f01_road.finance import FundNum, TimeLinePoint, default_fund_pool
 from src.f01_road.road import (
     AcctName,
     OwnerName,
-    CmtyIdea,
-    get_default_cmty_idea,
+    CmtyTitle,
+    get_default_cmty_title,
 )
 from dataclasses import dataclass
 
@@ -56,7 +56,7 @@ def tranunit_shop(
 
 @dataclass
 class TranBook:
-    cmty_idea: CmtyIdea = None
+    cmty_title: CmtyTitle = None
     tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None
     _accts_net: dict[OwnerName, dict[AcctName, FundNum]] = None
 
@@ -168,16 +168,16 @@ class TranBook:
 
     def get_dict(
         self,
-    ) -> dict[CmtyIdea, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
-        return {"cmty_idea": self.cmty_idea, "tranunits": self.tranunits}
+    ) -> dict[CmtyTitle, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
+        return {"cmty_title": self.cmty_title, "tranunits": self.tranunits}
 
 
 def tranbook_shop(
-    x_cmty_idea: CmtyIdea,
+    x_cmty_title: CmtyTitle,
     x_tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None,
 ):
     return TranBook(
-        cmty_idea=x_cmty_idea,
+        cmty_title=x_cmty_title,
         tranunits=get_empty_dict_if_None(x_tranunits),
         _accts_net={},
     )
@@ -191,7 +191,7 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
             for x_time_int, x_amount in x_time_int_dict.items():
                 x_key_list = [x_owner_name, x_acct_name, int(x_time_int)]
                 set_in_nested_dict(new_tranunits, x_key_list, x_amount)
-    return tranbook_shop(x_dict.get("cmty_idea"), new_tranunits)
+    return tranbook_shop(x_dict.get("cmty_title"), new_tranunits)
 
 
 @dataclass
@@ -296,8 +296,8 @@ class DealLog:
     def get_time_ints(self) -> set[TimeLinePoint]:
         return set(self.episodes.keys())
 
-    def get_tranbook(self, cmty_idea: CmtyIdea) -> TranBook:
-        x_tranbook = tranbook_shop(cmty_idea)
+    def get_tranbook(self, cmty_title: CmtyTitle) -> TranBook:
+        x_tranbook = tranbook_shop(cmty_title)
         for x_time_int, x_episode in self.episodes.items():
             for dst_acct_name, x_quota in x_episode._net_deals.items():
                 x_tranbook.add_tranunit(
@@ -342,15 +342,15 @@ def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, DealEpiso
 
 @dataclass
 class TimeConversion:
-    cmty_idea: str = None
+    cmty_title: str = None
     addin: str = None
 
 
 def timeconversion_shop(
-    cmty_idea: CmtyIdea = None, addin: int = None
+    cmty_title: CmtyTitle = None, addin: int = None
 ) -> TimeConversion:
-    if cmty_idea is None:
-        cmty_idea = get_default_cmty_idea()
+    if cmty_title is None:
+        cmty_title = get_default_cmty_title()
     if addin is None:
         addin = 0
-    return TimeConversion(cmty_idea=cmty_idea, addin=addin)
+    return TimeConversion(cmty_title=cmty_title, addin=addin)

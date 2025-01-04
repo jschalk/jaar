@@ -31,17 +31,17 @@
       "unknown_word": {}
     }
   },
-  "map_idea": {
+  "map_title": {
     "allowed_crud": "INSERT_ONE_TIME",
     "brick_type": "pidginunit",
     "build_order": 2,
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "otx_idea": {}
+      "otx_title": {}
     },
     "jvalues": {
-      "inx_idea": {},
+      "inx_title": {},
       "inx_bridge": {},
       "otx_bridge": {},
       "unknown_word": {}
@@ -71,7 +71,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
+      "cmty_title": {},
       "group_label": {}
     },
     "jvalues": {
@@ -87,7 +87,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {}
+      "cmty_title": {}
     },
     "jvalues": {
       "credit_belief": {},
@@ -102,7 +102,7 @@
       "awardee_label": {},
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
+      "cmty_title": {},
       "road": {}
     },
     "jvalues": {
@@ -118,7 +118,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
+      "cmty_title": {},
       "road": {}
     },
     "jvalues": {
@@ -134,7 +134,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
+      "cmty_title": {},
       "healer_name": {},
       "road": {}
     },
@@ -148,7 +148,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
+      "cmty_title": {},
       "need": {},
       "road": {}
     },
@@ -166,7 +166,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
+      "cmty_title": {},
       "road": {}
     },
     "jvalues": {
@@ -180,7 +180,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
+      "cmty_title": {},
       "road": {},
       "team_label": {}
     },
@@ -193,7 +193,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
+      "cmty_title": {},
       "item_title": {},
       "parent_road": {}
     },
@@ -218,7 +218,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {}
+      "cmty_title": {}
     },
     "jvalues": {
       "credor_respect": {},
@@ -240,7 +240,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
+      "cmty_title": {},
       "owner_name": {},
       "time_int": {}
     },
@@ -255,7 +255,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
+      "cmty_title": {},
       "owner_name": {},
       "time_int": {}
     },
@@ -270,8 +270,8 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
-      "hour_idea": {}
+      "cmty_title": {},
+      "hour_title": {}
     },
     "jvalues": {
       "cumlative_minute": {}
@@ -284,8 +284,8 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
-      "month_idea": {}
+      "cmty_title": {},
+      "month_title": {}
     },
     "jvalues": {
       "cumlative_day": {}
@@ -298,8 +298,8 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {},
-      "weekday_idea": {}
+      "cmty_title": {},
+      "weekday_title": {}
     },
     "jvalues": {
       "weekday_order": {}
@@ -312,7 +312,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "cmty_idea": {}
+      "cmty_title": {}
     },
     "jvalues": {
       "c400_number": {},
@@ -321,7 +321,7 @@
       "monthday_distortion": {},
       "penny": {},
       "respect_bit": {},
-      "timeline_idea": {},
+      "timeline_title": {},
       "bridge": {},
       "yr1_jan1_offset": {}
     }

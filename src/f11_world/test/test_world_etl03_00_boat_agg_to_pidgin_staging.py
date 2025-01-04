@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
     face_name_str,
-    cmty_idea_str,
+    cmty_title_str,
     acct_name_str,
     owner_name_str,
 )
@@ -11,8 +11,8 @@ from src.f08_pidgin.pidgin_config import (
     otx_bridge_str,
     inx_name_str,
     otx_name_str,
-    inx_idea_str,
-    otx_idea_str,
+    inx_title_str,
+    otx_title_str,
     inx_road_str,
     otx_road_str,
     inx_label_str,
@@ -68,7 +68,7 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     br00113_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),
@@ -101,7 +101,7 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     br00115_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
         owner_name_str(),
         acct_name_str(),
         otx_label_str(),
@@ -133,18 +133,18 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     br00116_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_idea_str(),
-        inx_idea_str(),
+        otx_title_str(),
+        inx_title_str(),
     ]
     br00044_file_path = create_path(fizz_world._boat_dir, "br00044.xlsx")
     br00044_columns = [
         face_name_str(),
         event_int_str(),
-        otx_idea_str(),
-        inx_idea_str(),
+        otx_title_str(),
+        inx_title_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -165,7 +165,7 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     br00117_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
         owner_name_str(),
         acct_name_str(),
         otx_road_str(),
@@ -208,16 +208,16 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     assert os_path_exists(pidgin_path)
     label_staging_str = "label_staging"
     name_staging_str = "name_staging"
-    idea_staging_str = "idea_staging"
+    title_staging_str = "title_staging"
     road_staging_str = "road_staging"
     assert sheet_exists(pidgin_path, name_staging_str)
     assert sheet_exists(pidgin_path, label_staging_str)
-    assert sheet_exists(pidgin_path, idea_staging_str)
+    assert sheet_exists(pidgin_path, title_staging_str)
     assert sheet_exists(pidgin_path, road_staging_str)
 
     gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_staging_str)
     gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_staging_str)
-    gen_idea_df = pandas_read_excel(pidgin_path, sheet_name=idea_staging_str)
+    gen_title_df = pandas_read_excel(pidgin_path, sheet_name=title_staging_str)
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
 
     label_file_columns = PidginPrimeColumns().map_label_staging_columns
@@ -248,28 +248,28 @@ def test_WorldUnit_boat_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     print(f" {e1_name_df.to_csv()=}")
     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
 
-    idea_file_columns = [
+    title_file_columns = [
         "src_brick",
         face_name_str(),
         event_int_str(),
-        otx_idea_str(),
-        inx_idea_str(),
+        otx_title_str(),
+        inx_title_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    assert list(gen_idea_df.columns) == idea_file_columns
-    assert len(gen_idea_df) == 2
+    assert list(gen_title_df.columns) == title_file_columns
+    assert len(gen_title_df) == 2
     b3 = "br00116"
     b4 = "br00044"
-    e1_idea3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_idea4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_idea_rows = [e1_idea3, e1_idea4]
-    e1_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
-    assert len(gen_idea_df) == len(e1_idea_df)
-    print(f"{gen_idea_df.to_csv()=}")
-    print(f" {e1_idea_df.to_csv()=}")
-    assert gen_idea_df.to_csv(index=False) == e1_idea_df.to_csv(index=False)
+    e1_title3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+    e1_title4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_title_rows = [e1_title3, e1_title4]
+    e1_title_df = DataFrame(e1_title_rows, columns=title_file_columns)
+    assert len(gen_title_df) == len(e1_title_df)
+    print(f"{gen_title_df.to_csv()=}")
+    print(f" {e1_title_df.to_csv()=}")
+    assert gen_title_df.to_csv(index=False) == e1_title_df.to_csv(index=False)
 
     road_file_columns = [
         "src_brick",

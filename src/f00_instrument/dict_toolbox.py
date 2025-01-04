@@ -200,11 +200,11 @@ def create_l2nested_csv_dict(
         set_in_nested_dict(io_dict, [row[2], row[3]], cmty_owner_io)
 
     x_dict = {}
-    for cmty_idea, owner_name_dict in io_dict.items():
+    for cmty_title, owner_name_dict in io_dict.items():
         for owner_name, io_function in owner_name_dict.items():
             cmty_owner_csv = io_function.getvalue()
             cmty_owner_csv = cmty_owner_csv.replace("\r", "")
-            set_in_nested_dict(x_dict, [cmty_idea, owner_name], cmty_owner_csv)
+            set_in_nested_dict(x_dict, [cmty_title, owner_name], cmty_owner_csv)
 
     return x_dict
 

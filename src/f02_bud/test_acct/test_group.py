@@ -1,6 +1,6 @@
 from src.f01_road.finance import default_fund_coin_if_None
 from src.f01_road.road import (
-    get_default_cmty_idea as root_idea,
+    get_default_cmty_title as root_title,
     create_road,
     default_bridge_if_None,
 )
@@ -31,7 +31,7 @@ def test_GroupUnit_exists():
 def test_groupunit_shop_ReturnsCorrectObj():
     # ESTABLISH
     swim_str = ";swimmers"
-    nation_road = create_road(root_idea(), "nation-states")
+    nation_road = create_road(root_title(), "nation-states")
     usa_road = create_road(nation_road, "USA")
 
     # WHEN
@@ -79,7 +79,7 @@ def test_groupunit_shop_ReturnsCorrectObj_bridge():
 #         groupunit_shop(bob_str, _acct_mirror=True, _bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{bob_str}' needs to be a IdeaUnit. Cannot contain bridge: '{slash_str}'"
+#         == f"'{bob_str}' needs to be a TitleUnit. Cannot contain bridge: '{slash_str}'"
 #     )
 
 

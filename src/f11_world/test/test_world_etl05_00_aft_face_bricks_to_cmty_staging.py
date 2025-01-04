@@ -1,18 +1,18 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
     face_name_str,
-    cmty_idea_str,
+    cmty_title_str,
     acct_name_str,
     owner_name_str,
 )
 from src.f07_cmty.cmty_config import (
     current_time_str,
     amount_str,
-    month_idea_str,
-    hour_idea_str,
+    month_title_str,
+    hour_title_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_idea_str,
+    weekday_title_str,
     weekday_order_str,
     cmty_deallog_str,
     cmty_deal_episode_str,
@@ -57,7 +57,7 @@ from os.path import exists as os_path_exists
 #     br00004_df = pandas_read_excel(br00004_path, sheet_name=staging_str)
 #     br00005_df = pandas_read_excel(br00005_path, sheet_name=staging_str)
 
-#     common_cols = [face_name_str(), event_int_str(), cmty_idea_str()]
+#     common_cols = [face_name_str(), event_int_str(), cmty_title_str()]
 #     expected_br0_columns = copy_copy(common_cols)
 #     expected_br1_columns = copy_copy(common_cols)
 #     expected_br2_columns = copy_copy(common_cols)
@@ -73,7 +73,7 @@ from os.path import exists as os_path_exists
 #             penny_str(),
 #             respect_bit_str(),
 #             bridge_str(),
-#             timeline_idea_str(),
+#             timeline_title_str(),
 #             yr1_jan1_offset_str(),
 #         ]
 #     )
@@ -83,9 +83,9 @@ from os.path import exists as os_path_exists
 #     expected_br2_columns.extend(
 #         [owner_name_str(), acct_name_str(), time_int_str(), amount_str()]
 #     )
-#     expected_br3_columns.extend([hour_idea_str(), cumlative_minute_str()])
-#     expected_br4_columns.extend([month_idea_str(), cumlative_day_str()])
-#     expected_br5_columns.extend([weekday_idea_str(), weekday_order_str()])
+#     expected_br3_columns.extend([hour_title_str(), cumlative_minute_str()])
+#     expected_br4_columns.extend([month_title_str(), cumlative_day_str()])
+#     expected_br5_columns.extend([weekday_title_str(), weekday_order_str()])
 
 #     print(f"{list(br00000_df.columns)=}")
 #     assert list(br00000_df.columns) == expected_br0_columns
@@ -114,7 +114,7 @@ from os.path import exists as os_path_exists
 #     br00113_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         cmty_idea_str(),
+#         cmty_title_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #         otx_name_str(),
@@ -147,7 +147,7 @@ from os.path import exists as os_path_exists
 #     br00115_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         cmty_idea_str(),
+#         cmty_title_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #         otx_label_str(),
@@ -179,18 +179,18 @@ from os.path import exists as os_path_exists
 #     br00116_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         cmty_idea_str(),
+#         cmty_title_str(),
 #         owner_name_str(),
 #         acct_name_str(),
-#         otx_idea_str(),
-#         inx_idea_str(),
+#         otx_title_str(),
+#         inx_title_str(),
 #     ]
 #     br00044_file_path = create_path(fizz_world._boat_dir, "br00044.xlsx")
 #     br00044_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         otx_idea_str(),
-#         inx_idea_str(),
+#         otx_title_str(),
+#         inx_title_str(),
 #         otx_bridge_str(),
 #         inx_bridge_str(),
 #         unknown_word_str(),
@@ -211,7 +211,7 @@ from os.path import exists as os_path_exists
 #     br00117_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         cmty_idea_str(),
+#         cmty_title_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #         otx_road_str(),
@@ -254,16 +254,16 @@ from os.path import exists as os_path_exists
 #     assert os_path_exists(pidgin_path)
 #     label_staging_str = "label_staging"
 #     name_staging_str = "name_staging"
-#     idea_staging_str = "idea_staging"
+#     title_staging_str = "title_staging"
 #     road_staging_str = "road_staging"
 #     assert sheet_exists(pidgin_path, name_staging_str)
 #     assert sheet_exists(pidgin_path, label_staging_str)
-#     assert sheet_exists(pidgin_path, idea_staging_str)
+#     assert sheet_exists(pidgin_path, title_staging_str)
 #     assert sheet_exists(pidgin_path, road_staging_str)
 
 #     gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_staging_str)
 #     gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_staging_str)
-#     gen_idea_df = pandas_read_excel(pidgin_path, sheet_name=idea_staging_str)
+#     gen_title_df = pandas_read_excel(pidgin_path, sheet_name=title_staging_str)
 #     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
 
 #     label_file_columns = [
@@ -312,28 +312,28 @@ from os.path import exists as os_path_exists
 #     print(f" {e1_name_df.to_csv()=}")
 #     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
 
-#     idea_file_columns = [
+#     title_file_columns = [
 #         "src_brick",
 #         face_name_str(),
 #         event_int_str(),
-#         otx_idea_str(),
-#         inx_idea_str(),
+#         otx_title_str(),
+#         inx_title_str(),
 #         otx_bridge_str(),
 #         inx_bridge_str(),
 #         unknown_word_str(),
 #     ]
-#     assert list(gen_idea_df.columns) == idea_file_columns
-#     assert len(gen_idea_df) == 2
+#     assert list(gen_title_df.columns) == title_file_columns
+#     assert len(gen_title_df) == 2
 #     b3 = "br00116"
 #     b4 = "br00044"
-#     e1_idea3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-#     e1_idea4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-#     e1_idea_rows = [e1_idea3, e1_idea4]
-#     e1_idea_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
-#     assert len(gen_idea_df) == len(e1_idea_df)
-#     print(f"{gen_idea_df.to_csv()=}")
-#     print(f" {e1_idea_df.to_csv()=}")
-#     assert gen_idea_df.to_csv(index=False) == e1_idea_df.to_csv(index=False)
+#     e1_title3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+#     e1_title4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+#     e1_title_rows = [e1_title3, e1_title4]
+#     e1_title_df = DataFrame(e1_title_rows, columns=title_file_columns)
+#     assert len(gen_title_df) == len(e1_title_df)
+#     print(f"{gen_title_df.to_csv()=}")
+#     print(f" {e1_title_df.to_csv()=}")
+#     assert gen_title_df.to_csv(index=False) == e1_title_df.to_csv(index=False)
 
 #     road_file_columns = [
 #         "src_brick",
@@ -360,8 +360,8 @@ from os.path import exists as os_path_exists
 
 
 # from src.f00_instrument.file import create_path
-# from src.f04_gift.atom_config import face_name_str, cmty_idea_str
-# from src.f07_cmty.cmty_config import cumlative_minute_str, hour_idea_str
+# from src.f04_gift.atom_config import face_name_str, cmty_title_str
+# from src.f07_cmty.cmty_config import cumlative_minute_str, hour_title_str
 # from src.f08_pidgin.pidgin_config import event_int_str
 # from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
 # from src.f11_world.world import worldunit_shop
@@ -388,8 +388,8 @@ from os.path import exists as os_path_exists
 #     brick_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         cmty_idea_str(),
-#         hour_idea_str(),
+#         cmty_title_str(),
+#         hour_title_str(),
 #         cumlative_minute_str(),
 #     ]
 #     accord23_str = "accord23"

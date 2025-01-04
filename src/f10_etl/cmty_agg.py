@@ -30,7 +30,7 @@ class CmtyPrimeFilePaths:
 class CmtyPrimeColumns:
     def __init__(self):
         self.cmtyunit_agg_columns = [
-            "cmty_idea",
+            "cmty_title",
             "c400_number",
             "current_time",
             "fund_coin",
@@ -38,25 +38,25 @@ class CmtyPrimeColumns:
             "penny",
             "respect_bit",
             "bridge",
-            "timeline_idea",
+            "timeline_title",
             "yr1_jan1_offset",
         ]
         self.cmty_deal_agg_columns = [
-            "cmty_idea",
+            "cmty_title",
             "owner_name",
             "time_int",
             "quota",
         ]
         self.cmty_cashbook_agg_columns = [
-            "cmty_idea",
+            "cmty_title",
             "owner_name",
             "acct_name",
             "time_int",
             "amount",
         ]
-        self.cmty_hour_agg_columns = ["cmty_idea", "hour_idea", "cumlative_minute"]
-        self.cmty_month_agg_columns = ["cmty_idea", "month_idea", "cumlative_day"]
-        self.cmty_weekday_agg_columns = ["cmty_idea", "weekday_idea", "weekday_order"]
+        self.cmty_hour_agg_columns = ["cmty_title", "hour_title", "cumlative_minute"]
+        self.cmty_month_agg_columns = ["cmty_title", "month_title", "cumlative_day"]
+        self.cmty_weekday_agg_columns = ["cmty_title", "weekday_title", "weekday_order"]
 
         _front_columns = ["source_br", "face_name", "event_int"]
         _back_columns = ["note"]
@@ -130,7 +130,7 @@ def create_timelineunit_from_prime_data(
     else:
         x_weekday_list = None
     timeline_config = create_timeline_config(
-        timeline_idea=if_nan_return_None(cmty_attrs.get("timeline_idea")),
+        timeline_title=if_nan_return_None(cmty_attrs.get("timeline_title")),
         c400_count=if_nan_return_None(cmty_attrs.get("c400_number")),
         hour_length=None,
         month_length=None,
@@ -159,23 +159,23 @@ def create_cmtyunit_jsons_from_prime_files(cmtys_dir: str):
     cmty_hour_df = pandas_read_excel(xp.cmty_hour_path, "agg")
     cmty_month_df = pandas_read_excel(xp.cmty_month_path, "agg")
     cmty_weekday_df = pandas_read_excel(xp.cmty_weekday_path, "agg")
-    cmtyunits_dict = dataframe_to_dict(cmtyunit_df, ["cmty_idea"])
-    cmtys_hour_dict = dataframe_to_dict(cmty_hour_df, ["cmty_idea", "hour_idea"])
-    cmtys_month_dict = dataframe_to_dict(cmty_month_df, ["cmty_idea", "month_idea"])
-    weekday_keys = ["cmty_idea", "weekday_idea"]
+    cmtyunits_dict = dataframe_to_dict(cmtyunit_df, ["cmty_title"])
+    cmtys_hour_dict = dataframe_to_dict(cmty_hour_df, ["cmty_title", "hour_title"])
+    cmtys_month_dict = dataframe_to_dict(cmty_month_df, ["cmty_title", "month_title"])
+    weekday_keys = ["cmty_title", "weekday_title"]
     cmtys_weekday_dict = dataframe_to_dict(cmty_weekday_df, weekday_keys)
     cmtyunits = {}
     for cmty_attrs in cmtyunits_dict.values():
-        x_cmty_idea = cmty_attrs.get("cmty_idea")
+        x_cmty_title = cmty_attrs.get("cmty_title")
         cmty_timelineunit = create_timelineunit_from_prime_data(
             cmty_attrs=cmty_attrs,
-            cmty_weekday_dict=cmtys_weekday_dict.get(x_cmty_idea),
-            cmty_month_dict=cmtys_month_dict.get(x_cmty_idea),
-            cmty_hour_dict=cmtys_hour_dict.get(x_cmty_idea),
+            cmty_weekday_dict=cmtys_weekday_dict.get(x_cmty_title),
+            cmty_month_dict=cmtys_month_dict.get(x_cmty_title),
+            cmty_hour_dict=cmtys_hour_dict.get(x_cmty_title),
         )
 
         cmtyunit = cmtyunit_shop(
-            cmty_idea=x_cmty_idea,
+            cmty_title=x_cmty_title,
             cmtys_dir=cmtys_dir,
             timeline=cmty_timelineunit,
             current_time=if_nan_return_None(cmty_attrs.get("current_time")),
@@ -186,8 +186,8 @@ def create_cmtyunit_jsons_from_prime_files(cmtys_dir: str):
         )
         _add_cashpurchases_from_df(cmtyunit, cmty_cashbook_df)
         _add_dealepisodes_from_df(cmtyunit, cmty_deal_df)
-        cmtyunits[cmtyunit.cmty_idea] = cmtyunit
+        cmtyunits[cmtyunit.cmty_title] = cmtyunit
     cmty_jsons_dir = create_path(cmtys_dir, "cmty_jsons")
     for cmtyunit in cmtyunits.values():
-        cmty_file_name = f"{cmtyunit.cmty_idea}.json"
+        cmty_file_name = f"{cmtyunit.cmty_title}.json"
         save_file(cmty_jsons_dir, cmty_file_name, cmtyunit.get_json())

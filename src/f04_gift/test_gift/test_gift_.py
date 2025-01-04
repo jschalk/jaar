@@ -1,7 +1,7 @@
 from src.f00_instrument.dict_toolbox import x_is_json
 from src.f01_road.jaar_config import init_gift_id, get_gifts_folder
-from src.f01_road.road import get_default_cmty_idea as root_idea
-from src.f04_gift.atom_config import cmty_idea_str, owner_name_str, face_name_str
+from src.f01_road.road import get_default_cmty_title as root_title
+from src.f04_gift.atom_config import cmty_title_str, owner_name_str, face_name_str
 from src.f04_gift.delta import deltaunit_shop
 from src.f04_gift.gift import GiftUnit, giftunit_shop, get_init_gift_id_if_None
 from src.f04_gift.examples.example_atoms import get_atom_example_itemunit_sports
@@ -31,7 +31,7 @@ def test_GiftUnit_exists():
 
     # THEN
     assert not x_giftunit.face_name
-    assert not x_giftunit.cmty_idea
+    assert not x_giftunit.cmty_title
     assert not x_giftunit.owner_name
     assert not x_giftunit._gift_id
     assert not x_giftunit._deltaunit
@@ -49,7 +49,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
 
     # THEN
     assert not bob_giftunit.face_name
-    assert bob_giftunit.cmty_idea == root_idea()
+    assert bob_giftunit.cmty_title == root_title()
     assert bob_giftunit.owner_name == bob_str
     assert bob_giftunit._gift_id == 0
     assert bob_giftunit._deltaunit == deltaunit_shop()
@@ -73,7 +73,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     bob_giftunit = giftunit_shop(
         face_name=sue_str,
         owner_name=bob_str,
-        cmty_idea=accord45_str,
+        cmty_title=accord45_str,
         _gift_id=bob_gift_id,
         _deltaunit=bob_deltaunit,
         _delta_start=bob_delta_start,
@@ -84,7 +84,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     # THEN
     assert bob_giftunit.face_name == sue_str
     assert bob_giftunit.owner_name == bob_str
-    assert bob_giftunit.cmty_idea == accord45_str
+    assert bob_giftunit.cmty_title == accord45_str
     assert bob_giftunit._gift_id == bob_gift_id
     assert bob_giftunit._deltaunit == bob_deltaunit
     assert bob_giftunit._delta_start == bob_delta_start
@@ -207,15 +207,15 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
     bob_str = "Bob"
     sue_str = "Sue"
     accord45_str = "accord45"
-    bob_giftunit = giftunit_shop(cmty_idea=accord45_str, owner_name=bob_str)
+    bob_giftunit = giftunit_shop(cmty_title=accord45_str, owner_name=bob_str)
     bob_giftunit.set_face(sue_str)
 
     # WHEN
     x_dict = bob_giftunit.get_step_dict()
 
     # THEN
-    assert x_dict.get(cmty_idea_str()) is not None
-    assert x_dict.get(cmty_idea_str()) == accord45_str
+    assert x_dict.get(cmty_title_str()) is not None
+    assert x_dict.get(cmty_title_str()) == accord45_str
     assert x_dict.get(owner_name_str()) is not None
     assert x_dict.get(owner_name_str()) == bob_str
     assert x_dict.get(face_name_str()) is not None

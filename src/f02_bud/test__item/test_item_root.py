@@ -1,5 +1,5 @@
 from src.f02_bud.item import itemunit_shop
-from src.f01_road.road import get_default_cmty_idea as root_idea
+from src.f01_road.road import get_default_cmty_title as root_title
 from pytest import raises as pytest_raises
 
 
@@ -10,26 +10,26 @@ def test_itemunit_shop_With_root_TrueReturnsObj():
     # THEN
     assert x_itemroot
     assert x_itemroot._root
-    assert x_itemroot._item_title == root_idea()
+    assert x_itemroot._item_title == root_title()
     assert x_itemroot._kids == {}
     assert x_itemroot._root is True
 
 
-def test_ItemUnit_set_item_title_get_default_cmty_idea_DoesNotRaisesError():
+def test_ItemUnit_set_item_title_get_default_cmty_title_DoesNotRaisesError():
     # ESTABLISH
     x_itemroot = itemunit_shop(_root=True)
 
     # WHEN
-    x_itemroot.set_item_title(_item_title=root_idea())
+    x_itemroot.set_item_title(_item_title=root_title())
 
     # THEN
-    assert x_itemroot._item_title == root_idea()
+    assert x_itemroot._item_title == root_title()
 
 
 def test_ItemUnit_set_item_title_DoesNotRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_itemroot = itemunit_shop(_root=True, _bud_cmty_idea=el_paso_str)
+    x_itemroot = itemunit_shop(_root=True, _bud_cmty_title=el_paso_str)
 
     # WHEN
     x_itemroot.set_item_title(_item_title=el_paso_str)
@@ -41,7 +41,7 @@ def test_ItemUnit_set_item_title_DoesNotRaisesError():
 def test_ItemUnit_set_item_title_DoesRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_itemroot = itemunit_shop(_root=True, _bud_cmty_idea=el_paso_str)
+    x_itemroot = itemunit_shop(_root=True, _bud_cmty_title=el_paso_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -53,7 +53,7 @@ def test_ItemUnit_set_item_title_DoesRaisesError():
     )
 
 
-def test_ItemUnit_set_item_title_RaisesErrorWhen_bud_cmty_idea_IsNone():
+def test_ItemUnit_set_item_title_RaisesErrorWhen_bud_cmty_title_IsNone():
     # ESTABLISH
     x_itemroot = itemunit_shop(_root=True)
 
@@ -63,5 +63,5 @@ def test_ItemUnit_set_item_title_RaisesErrorWhen_bud_cmty_idea_IsNone():
         x_itemroot.set_item_title(_item_title=casa_str)
     assert (
         str(excinfo.value)
-        == f"Cannot set itemroot to string different than '{root_idea()}'"
+        == f"Cannot set itemroot to string different than '{root_title()}'"
     )

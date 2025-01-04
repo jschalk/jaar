@@ -14,14 +14,14 @@ from src.f01_road.finance import (
 from src.f01_road.range_toolbox import get_morphed_rangeunit, RangeUnit
 from src.f01_road.road import (
     RoadUnit,
-    IdeaUnit,
+    TitleUnit,
     is_sub_road,
-    get_default_cmty_idea as root_idea,
+    get_default_cmty_title as root_title,
     all_roadunits_between,
     create_road as road_create_road,
     default_bridge_if_None,
     replace_bridge,
-    CmtyIdea,
+    CmtyTitle,
     AcctName,
     GroupLabel,
     RoadUnit,
@@ -74,7 +74,7 @@ class ItemGetDescendantsException(Exception):
     pass
 
 
-class Item_root_IdeaNotEmptyException(Exception):
+class Item_root_TitleNotEmptyException(Exception):
     pass
 
 
@@ -198,12 +198,12 @@ def itemattrholder_shop(
 
 @dataclass
 class ItemUnit:
-    _item_title: IdeaUnit = None
+    _item_title: TitleUnit = None
     mass: int = None
     _parent_road: RoadUnit = None
     _root: bool = None
     _kids: dict[RoadUnit,] = None
-    _bud_cmty_idea: CmtyIdea = None
+    _bud_cmty_title: CmtyTitle = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupLabel, AwardLink] = None
     reasonunits: dict[RoadUnit, ReasonUnit] = None
@@ -347,7 +347,7 @@ class ItemUnit:
 
     def get_kids_in_range(
         self, x_gogo: float = None, x_stop: float = None
-    ) -> dict[IdeaUnit,]:
+    ) -> dict[TitleUnit,]:
         if x_gogo is None and x_stop is None:
             x_gogo = self.gogo_want
             x_gogo = self.stop_want
@@ -367,7 +367,7 @@ class ItemUnit:
                 x_dict[x_item._item_title] = x_item
         return x_dict
 
-    def get_obj_key(self) -> IdeaUnit:
+    def get_obj_key(self) -> TitleUnit:
         return self._item_title
 
     def get_road(self) -> RoadUnit:
@@ -483,14 +483,14 @@ class ItemUnit:
         if (
             self._root
             and _item_title is not None
-            and _item_title != self._bud_cmty_idea
-            and self._bud_cmty_idea is not None
+            and _item_title != self._bud_cmty_title
+            and self._bud_cmty_title is not None
         ):
-            raise Item_root_IdeaNotEmptyException(
-                f"Cannot set itemroot to string different than '{self._bud_cmty_idea}'"
+            raise Item_root_TitleNotEmptyException(
+                f"Cannot set itemroot to string different than '{self._bud_cmty_title}'"
             )
-        elif self._root and self._bud_cmty_idea is None:
-            self._item_title = root_idea()
+        elif self._root and self._bud_cmty_title is None:
+            self._item_title = root_title()
         # elif _item_title is not None:
         else:
             self._item_title = _item_title
@@ -703,7 +703,7 @@ class ItemUnit:
         self._kids[item_kid._item_title] = item_kid
         self._kids = dict(sorted(self._kids.items()))
 
-    def get_kid(self, item_kid_item_title: IdeaUnit, if_missing_create=False):
+    def get_kid(self, item_kid_item_title: TitleUnit, if_missing_create=False):
         if if_missing_create is False:
             return self._kids.get(item_kid_item_title)
         try:
@@ -714,7 +714,7 @@ class ItemUnit:
             return_item = self._kids.get(item_kid_item_title)
         return return_item
 
-    def del_kid(self, item_kid_item_title: IdeaUnit):
+    def del_kid(self, item_kid_item_title: TitleUnit):
         self._kids.pop(item_kid_item_title)
 
     def clear_kids(self):
@@ -955,7 +955,7 @@ class ItemUnit:
 
 
 def itemunit_shop(
-    _item_title: IdeaUnit = None,
+    _item_title: TitleUnit = None,
     _uid: int = None,  # Calculated field?
     _parent_road: RoadUnit = None,
     _kids: dict = None,
@@ -981,7 +981,7 @@ def itemunit_shop(
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
-    _bud_cmty_idea: CmtyIdea = None,
+    _bud_cmty_title: CmtyTitle = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
@@ -999,7 +999,7 @@ def itemunit_shop(
     _bridge: str = None,
     _healerlink_ratio: float = None,
 ) -> ItemUnit:
-    _bud_cmty_idea = root_idea() if _bud_cmty_idea is None else _bud_cmty_idea
+    _bud_cmty_title = root_title() if _bud_cmty_title is None else _bud_cmty_title
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_itemkid = ItemUnit(
@@ -1030,7 +1030,7 @@ def itemunit_shop(
         problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
         _root=get_False_if_None(_root),
-        _bud_cmty_idea=_bud_cmty_idea,
+        _bud_cmty_title=_bud_cmty_title,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
@@ -1048,7 +1048,7 @@ def itemunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_itemkid._root:
-        x_itemkid.set_item_title(_item_title=_bud_cmty_idea)
+        x_itemkid.set_item_title(_item_title=_bud_cmty_title)
     else:
         x_itemkid.set_item_title(_item_title=_item_title)
     x_itemkid.set_teamunit_empty_if_None()

@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f01_road.finance_tran import CmtyIdea
+from src.f01_road.finance_tran import CmtyTitle
 from src.f01_road.road import FaceName, EventInt
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -40,7 +40,7 @@ class not_given_pidgin_category_Exception(Exception):
 MAPS_CATEGORYS = {
     "map_name": "AcctName",
     "map_label": "GroupLabel",
-    "map_idea": "IdeaUnit",
+    "map_title": "TitleUnit",
     "map_road": "RoadUnit",
 }
 
@@ -59,12 +59,12 @@ JAAR_TYPES = {
         "otx_obj": "otx_label",
         "inx_obj": "inx_label",
     },
-    "IdeaUnit": {
-        "stage": "idea_staging",
-        "agg": "idea_agg",
-        "csv_filename": "idea.csv",
-        "otx_obj": "otx_idea",
-        "inx_obj": "inx_idea",
+    "TitleUnit": {
+        "stage": "title_staging",
+        "agg": "title_agg",
+        "csv_filename": "title.csv",
+        "otx_obj": "otx_title",
+        "inx_obj": "inx_title",
     },
     "RoadUnit": {
         "stage": "road_staging",
@@ -328,10 +328,10 @@ def etl_boat_agg_to_pidgin_label_staging(
     boat_agg_single_to_pidgin_staging("map_label", legitimate_events, boat_dir)
 
 
-def etl_boat_agg_to_pidgin_idea_staging(
+def etl_boat_agg_to_pidgin_title_staging(
     legitimate_events: set[EventInt], boat_dir: str
 ):
-    boat_agg_single_to_pidgin_staging("map_idea", legitimate_events, boat_dir)
+    boat_agg_single_to_pidgin_staging("map_title", legitimate_events, boat_dir)
 
 
 def etl_boat_agg_to_pidgin_road_staging(
@@ -343,7 +343,7 @@ def etl_boat_agg_to_pidgin_road_staging(
 def etl_boat_agg_to_pidgin_staging(legitimate_events: set[EventInt], boat_dir: str):
     etl_boat_agg_to_pidgin_name_staging(legitimate_events, boat_dir)
     etl_boat_agg_to_pidgin_label_staging(legitimate_events, boat_dir)
-    etl_boat_agg_to_pidgin_idea_staging(legitimate_events, boat_dir)
+    etl_boat_agg_to_pidgin_title_staging(legitimate_events, boat_dir)
     etl_boat_agg_to_pidgin_road_staging(legitimate_events, boat_dir)
 
 
@@ -414,8 +414,8 @@ class boatAggToStagingTransformer:
             return x_row["inx_name"]
         elif self.jaar_type == "GroupLabel" and "inx_label" not in missing_col:
             return x_row["inx_label"]
-        elif self.jaar_type == "IdeaUnit" and "inx_idea" not in missing_col:
-            return x_row["inx_idea"]
+        elif self.jaar_type == "TitleUnit" and "inx_title" not in missing_col:
+            return x_row["inx_title"]
         elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
             return x_row["inx_road"]
         return None
@@ -433,8 +433,8 @@ def etl_pidgin_road_staging_to_road_agg(boat_dir: str):
     etl_pidgin_single_staging_to_agg(boat_dir, "map_road")
 
 
-def etl_pidgin_idea_staging_to_idea_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "map_idea")
+def etl_pidgin_title_staging_to_title_agg(boat_dir: str):
+    etl_pidgin_single_staging_to_agg(boat_dir, "map_title")
 
 
 def etl_pidgin_single_staging_to_agg(boat_dir: str, map_category: str):
@@ -446,7 +446,7 @@ def etl_boat_pidgin_staging_to_agg(boat_dir):
     etl_pidgin_name_staging_to_name_agg(boat_dir)
     etl_pidgin_label_staging_to_label_agg(boat_dir)
     etl_pidgin_road_staging_to_road_agg(boat_dir)
-    etl_pidgin_idea_staging_to_idea_agg(boat_dir)
+    etl_pidgin_title_staging_to_title_agg(boat_dir)
 
 
 class PidginStagingToAggTransformer:
@@ -715,7 +715,7 @@ def etl_aft_event_bricks_to_cmty_bricks(faces_aft_dir: str):
                 split_excel_into_dirs(
                     input_file=event_brick_path,
                     output_dir=event_dir,
-                    column_name="cmty_idea",
+                    column_name="cmty_title",
                     file_name=event_br_ref.brick_number,
                     sheet_name="inx",
                 )

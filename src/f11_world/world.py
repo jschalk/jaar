@@ -8,9 +8,9 @@ from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
     FaceName,
     EventInt,
-    CmtyIdea,
+    CmtyTitle,
     WorldID,
-    TimeLineIdea,
+    TimeLineTitle,
     get_default_world_id,
 )
 from src.f07_cmty.cmty import CmtyUnit
@@ -54,13 +54,13 @@ class WorldUnit:
     worlds_dir: str = None
     current_time: TimeLinePoint = None
     events: dict[EventInt, FaceName] = None
-    timeconversions: dict[TimeLineIdea, TimeConversion] = None
+    timeconversions: dict[TimeLineTitle, TimeConversion] = None
     _faces_bow_dir: str = None
     _faces_aft_dir: str = None
     _world_dir: str = None
     _ocean_dir: str = None
     _boat_dir: str = None
-    _cmtyunits: set[CmtyIdea] = None
+    _cmtyunits: set[CmtyTitle] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
     def set_event(self, event_int: EventInt, face_name: FaceName):
@@ -96,7 +96,7 @@ class WorldUnit:
         set_dir(self._faces_aft_dir)
         set_dir(self._boat_dir)
 
-    def get_timeconversions_dict(self) -> dict[TimeLineIdea, TimeConversion]:
+    def get_timeconversions_dict(self) -> dict[TimeLineTitle, TimeConversion]:
         return self.timeconversions
 
     def ocean_to_boat_staging(self):
@@ -176,8 +176,8 @@ def worldunit_shop(
     worlds_dir: str = None,
     ocean_dir: str = None,
     current_time: TimeLinePoint = None,
-    timeconversions: dict[TimeLineIdea, TimeConversion] = None,
-    _cmtyunits: set[CmtyIdea] = None,
+    timeconversions: dict[TimeLineTitle, TimeConversion] = None,
+    _cmtyunits: set[CmtyTitle] = None,
 ) -> WorldUnit:
     if world_id is None:
         world_id = get_default_world_id()

@@ -11,18 +11,18 @@ from pytest import raises as pytest_raises
 def test_BudUnit_set_item_RaisesErrorWhen_parent_road_IsInvalid():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
-    invalid_rootidea_swim_road = "swimming"
-    assert invalid_rootidea_swim_road != zia_bud.cmty_idea
+    invalid_roottitle_swim_road = "swimming"
+    assert invalid_roottitle_swim_road != zia_bud.cmty_title
     casa_str = "casa"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_item(
-            itemunit_shop(casa_str), parent_road=invalid_rootidea_swim_road
+            itemunit_shop(casa_str), parent_road=invalid_roottitle_swim_road
         )
     assert (
         str(excinfo.value)
-        == f"set_item failed because parent_road '{invalid_rootidea_swim_road}' has an invalid root idea"
+        == f"set_item failed because parent_road '{invalid_roottitle_swim_road}' has an invalid root title"
     )
 
 
@@ -45,7 +45,7 @@ def test_BudUnit_set_item_RaisesErrorWhen_parent_road_ItemDoesNotExist():
     )
 
 
-def test_BudUnit_set_item_RaisesErrorWhen_item_title_IsNotIdea():
+def test_BudUnit_set_item_RaisesErrorWhen_item_title_IsNotTitle():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     swim_road = zia_bud.make_l1_road("swimming")
@@ -58,7 +58,8 @@ def test_BudUnit_set_item_RaisesErrorWhen_item_title_IsNotIdea():
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_item(itemunit_shop(run_road), parent_road=swim_road)
     assert (
-        str(excinfo.value) == f"set_item failed because '{run_road}' is not a IdeaUnit."
+        str(excinfo.value)
+        == f"set_item failed because '{run_road}' is not a TitleUnit."
     )
 
 
@@ -69,7 +70,7 @@ def test_BudUnit_set_item_CorrectlySetsAttr():
     assert not zia_bud.itemroot._kids.get(casa_str)
 
     # WHEN
-    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.cmty_idea)
+    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.cmty_title)
 
     # THEN
     print(f"{zia_bud.itemroot._kids.keys()=}")
@@ -84,7 +85,7 @@ def test_BudUnit_item_exists_ReturnsObj():
     assert zia_bud.item_exists(casa_road) is False
 
     # WHEN
-    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.cmty_idea)
+    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.cmty_title)
 
     # THEN
     assert zia_bud.item_exists(casa_road)
@@ -203,7 +204,7 @@ def test_BudUnit_set_item_CanCreateMissingItemUnits():
 def test_BudUnit_del_item_obj_Level0CannotBeDeleted():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_road = sue_bud.cmty_idea
+    root_road = sue_bud.cmty_title
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -253,7 +254,7 @@ def test_BudUnit_del_item_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sunday_road = sue_bud.make_l1_road(sun_str)
     assert sue_bud.get_item_obj(new_sunday_road)
     new_sunday_item = sue_bud.get_item_obj(new_sunday_road)
-    assert new_sunday_item._parent_road == sue_bud.cmty_idea
+    assert new_sunday_item._parent_road == sue_bud.cmty_title
 
 
 def test_BudUnit_del_item_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -782,11 +783,11 @@ def test_BudUnit_get_item_obj_ReturnsItem():
     assert week_item._item_title == week_str
 
     # WHEN
-    root_item = sue_bud.get_item_obj(road=sue_bud.cmty_idea)
+    root_item = sue_bud.get_item_obj(road=sue_bud.cmty_title)
 
     # THEN
     assert root_item is not None
-    assert root_item._item_title == sue_bud.cmty_idea
+    assert root_item._item_title == sue_bud.cmty_title
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"
@@ -824,7 +825,7 @@ def test_BudUnit_item_exists_ReturnsCorrectBool():
     # WHEN / THEN
     assert sue_bud.item_exists("") is False
     assert sue_bud.item_exists(None) is False
-    assert sue_bud.item_exists(sue_bud.cmty_idea)
+    assert sue_bud.item_exists(sue_bud.cmty_title)
     assert sue_bud.item_exists(cat_road)
     assert sue_bud.item_exists(week_road)
     assert sue_bud.item_exists(casa_road)
@@ -869,8 +870,8 @@ def test_BudUnit_set_offtrack_fund_ReturnsObj():
     casa_item = itemunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_item = itemunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_item = itemunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_item._parent_road = bob_budunit.cmty_idea
-    week_item._parent_road = bob_budunit.cmty_idea
+    casa_item._parent_road = bob_budunit.cmty_title
+    week_item._parent_road = bob_budunit.cmty_title
     wed_item._parent_road = week_road
     bob_budunit.set_l1_item(casa_item)
     bob_budunit.set_l1_item(week_item)
@@ -926,8 +927,8 @@ def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_item = itemunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_item = itemunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_item = itemunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_item._parent_road = bob_budunit.cmty_idea
-    week_item._parent_road = bob_budunit.cmty_idea
+    casa_item._parent_road = bob_budunit.cmty_title
+    week_item._parent_road = bob_budunit.cmty_title
     wed_item._parent_road = week_road
     bob_budunit.set_l1_item(casa_item)
     bob_budunit.set_l1_item(week_item)

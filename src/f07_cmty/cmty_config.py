@@ -23,12 +23,12 @@ def amount_str() -> str:
     return "amount"
 
 
-def month_idea_str() -> str:
-    return "month_idea"
+def month_title_str() -> str:
+    return "month_title"
 
 
-def hour_idea_str() -> str:
-    return "hour_idea"
+def hour_title_str() -> str:
+    return "hour_title"
 
 
 def cumlative_minute_str() -> str:
@@ -39,8 +39,8 @@ def cumlative_day_str() -> str:
     return "cumlative_day"
 
 
-def weekday_idea_str() -> str:
-    return "weekday_idea"
+def weekday_title_str() -> str:
+    return "weekday_title"
 
 
 def weekday_order_str() -> str:
@@ -137,18 +137,18 @@ def get_cmty_args_jaar_types() -> dict[str, str]:
         "cumlative_day": "int",
         "cumlative_minute": "int",
         "current_time": "int",
-        "hour_idea": "IdeaUnit",
-        "cmty_idea": "IdeaUnit",
+        "hour_title": "TitleUnit",
+        "cmty_title": "TitleUnit",
         "fund_coin": "float",
-        "month_idea": "IdeaUnit",
+        "month_title": "TitleUnit",
         "monthday_distortion": "int",
         "penny": "float",
         "owner_name": "AcctName",
         "quota": "int",
         "respect_bit": "float",
         "time_int": "TimeLinePoint",
-        "timeline_idea": "IdeaUnit",
-        "weekday_idea": "IdeaUnit",
+        "timeline_title": "TitleUnit",
+        "weekday_title": "TitleUnit",
         "weekday_order": "int",
         "bridge": "str",
         "yr1_jan1_offset": "int",

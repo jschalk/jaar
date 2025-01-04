@@ -24,8 +24,8 @@ from src.f08_pidgin.pidgin_config import (
     otx_label_str,
     inx_name_str,
     otx_name_str,
-    inx_idea_str,
-    otx_idea_str,
+    inx_title_str,
+    otx_title_str,
     inx_road_str,
     otx_road_str,
     unknown_word_str,
@@ -33,7 +33,7 @@ from src.f08_pidgin.pidgin_config import (
     map_otx2inx_str,
     map_name_str,
     map_label_str,
-    map_idea_str,
+    map_title_str,
     map_road_str,
 )
 from os import getcwd as os_getcwd
@@ -48,15 +48,15 @@ def test_str_functions_ReturnsObj():
     assert otx_label_str() == "otx_label"
     assert inx_name_str() == "inx_name"
     assert otx_name_str() == "otx_name"
-    assert inx_idea_str() == "inx_idea"
-    assert otx_idea_str() == "otx_idea"
+    assert inx_title_str() == "inx_title"
+    assert otx_title_str() == "otx_title"
     assert inx_road_str() == "inx_road"
     assert otx_road_str() == "otx_road"
     assert unknown_word_str() == "unknown_word"
     assert otx2inx_str() == "otx2inx"
     assert map_name_str() == "map_name"
     assert map_label_str() == "map_label"
-    assert map_idea_str() == "map_idea"
+    assert map_title_str() == "map_title"
     assert map_road_str() == "map_road"
     assert map_otx2inx_str() == "map_otx2inx"
     assert event_int_str() == "event_int"
@@ -81,17 +81,17 @@ def test_get_pidgin_config_dict_ReturnsObj():
     pidgin_config_categorys = set(pidgin_config.keys())
     assert map_name_str() in pidgin_config_categorys
     assert map_label_str() in pidgin_config_categorys
-    assert map_idea_str() in pidgin_config_categorys
+    assert map_title_str() in pidgin_config_categorys
     assert map_road_str() in pidgin_config_categorys
     assert len(pidgin_config) == 4
 
     _validate_pidgin_config(pidgin_config)
     map_road_dict = pidgin_config.get(map_road_str())
-    map_idea_dict = pidgin_config.get(map_idea_str())
+    map_title_dict = pidgin_config.get(map_title_str())
     assert len(map_road_dict.get(jkeys_str())) == 1
-    assert len(map_idea_dict.get(jkeys_str())) == 1
+    assert len(map_title_dict.get(jkeys_str())) == 1
     assert len(map_road_dict.get(jvalues_str())) == 4
-    assert len(map_idea_dict.get(jvalues_str())) == 4
+    assert len(map_title_dict.get(jvalues_str())) == 4
 
     # assert gen_jvalues == x_pidginunit_jvalues
     # assert len(pidginunit_dict.get(jvalues_str())) == 9
@@ -110,8 +110,8 @@ def _validate_pidgin_config(pidgin_config: dict):
         otx_label_str(),
         inx_name_str(),
         otx_name_str(),
-        inx_idea_str(),
-        otx_idea_str(),
+        inx_title_str(),
+        otx_title_str(),
         inx_road_str(),
         otx_road_str(),
         unknown_word_str(),
@@ -144,7 +144,7 @@ def test_get_pidgin_categorys_ReturnsObj():
     # THEN
     assert map_name_str() in pidgin_config_categorys
     assert map_label_str() in pidgin_config_categorys
-    assert map_idea_str() in pidgin_config_categorys
+    assert map_title_str() in pidgin_config_categorys
     assert map_road_str() in pidgin_config_categorys
     assert len(pidgin_config_categorys) == 4
 

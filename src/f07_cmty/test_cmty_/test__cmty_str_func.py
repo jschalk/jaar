@@ -4,11 +4,11 @@ from src.f07_cmty.cmty_config import (
     deallogs_str,
     cashbook_str,
     amount_str,
-    month_idea_str,
-    hour_idea_str,
+    month_title_str,
+    hour_title_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_idea_str,
+    weekday_title_str,
     weekday_order_str,
     cmtyunit_str,
     cmty_deallog_str,
@@ -26,11 +26,11 @@ def test_str_functions_ReturnsObj():
     assert deallogs_str() == "deallogs"
     assert cashbook_str() == "cashbook"
     assert amount_str() == "amount"
-    assert month_idea_str() == "month_idea"
-    assert hour_idea_str() == "hour_idea"
+    assert month_title_str() == "month_title"
+    assert hour_title_str() == "hour_title"
     assert cumlative_minute_str() == "cumlative_minute"
     assert cumlative_day_str() == "cumlative_day"
-    assert weekday_idea_str() == "weekday_idea"
+    assert weekday_title_str() == "weekday_title"
     assert weekday_order_str() == "weekday_order"
     assert cmtyunit_str() == "cmtyunit"
     assert cmty_deallog_str() == "cmty_deallog"

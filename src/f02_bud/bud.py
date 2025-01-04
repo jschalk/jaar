@@ -28,21 +28,21 @@ from src.f01_road.road import (
     all_roadunits_between,
     road_validate,
     rebuild_road,
-    get_terminus_idea,
-    get_root_idea_from_road,
+    get_terminus_title,
+    get_root_title_from_road,
     get_ancestor_roads,
-    get_default_cmty_idea,
-    get_all_road_ideas,
+    get_default_cmty_title,
+    get_all_road_titles,
     get_forefather_roads,
     create_road,
     default_bridge_if_None,
-    IdeaUnit,
+    TitleUnit,
     RoadUnit,
     is_string_in_road,
     OwnerName,
     AcctName,
     HealerName,
-    CmtyIdea,
+    CmtyTitle,
     roadunit_valid_dir_path,
 )
 from src.f02_bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
@@ -79,7 +79,7 @@ class InvalidBudException(Exception):
     pass
 
 
-class InvalidIdeaException(Exception):
+class InvalidTitleException(Exception):
     pass
 
 
@@ -117,7 +117,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 
 @dataclass
 class BudUnit:
-    cmty_idea: CmtyIdea = None
+    cmty_title: CmtyTitle = None
     owner_name: OwnerName = None
     accts: dict[AcctName, AcctUnit] = None
     itemroot: ItemUnit = None
@@ -188,17 +188,17 @@ class BudUnit:
     def make_road(
         self,
         parent_road: RoadUnit = None,
-        terminus_idea: IdeaUnit = None,
+        terminus_title: TitleUnit = None,
     ) -> RoadUnit:
         x_road = create_road(
             parent_road=parent_road,
-            terminus_idea=terminus_idea,
+            terminus_title=terminus_title,
             bridge=self.bridge,
         )
-        return road_validate(x_road, self.bridge, self.cmty_idea)
+        return road_validate(x_road, self.bridge, self.cmty_title)
 
-    def make_l1_road(self, l1_idea: IdeaUnit):
-        return self.make_road(self.cmty_idea, l1_idea)
+    def make_l1_road(self, l1_title: TitleUnit):
+        return self.make_road(self.cmty_title, l1_title)
 
     def set_bridge(self, new_bridge: str):
         self.settle_bud()
@@ -213,13 +213,13 @@ class BudUnit:
             for x_item in self._item_dict.values():
                 x_item.set_bridge(self.bridge)
 
-    def set_cmty_idea(self, cmty_idea: str):
-        old_cmty_idea = copy_deepcopy(self.cmty_idea)
+    def set_cmty_title(self, cmty_title: str):
+        old_cmty_title = copy_deepcopy(self.cmty_title)
         self.settle_bud()
         for item_obj in self._item_dict.values():
-            item_obj._bud_cmty_idea = cmty_idea
-        self.cmty_idea = cmty_idea
-        self.edit_item_title(old_road=old_cmty_idea, new_item_title=self.cmty_idea)
+            item_obj._bud_cmty_title = cmty_title
+        self.cmty_title = cmty_title
+        self.edit_item_title(old_road=old_cmty_title, new_item_title=self.cmty_title)
         self.settle_bud()
 
     def set_max_tree_traverse(self, x_int: int):
@@ -238,7 +238,7 @@ class BudUnit:
             to_evaluate_hx_dict[x_road] = "to_evaluate"
         evaluated_roads = set()
 
-        # while roads_to_evaluate != [] and count_x <= tree_metrics.idea_count:
+        # while roads_to_evaluate != [] and count_x <= tree_metrics.title_count:
         # Why count_x? because count_x might be wrong attr to measure
         # nice to avoid infinite loops from programming errors though...
         while to_evaluate_list != []:
@@ -413,7 +413,7 @@ class BudUnit:
         return all_group_labels.difference(x_acctunit_group_labels)
 
     def _is_item_rangeroot(self, item_road: RoadUnit) -> bool:
-        if self.cmty_idea == item_road:
+        if self.cmty_title == item_road:
             raise InvalidBudException(
                 "its difficult to foresee a scenario where itemroot is rangeroot"
             )
@@ -444,7 +444,7 @@ class BudUnit:
             self._create_itemkid_if_empty(road=pick)
 
         fact_base_item = self.get_item_obj(base)
-        x_itemroot = self.get_item_obj(self.cmty_idea)
+        x_itemroot = self.get_item_obj(self.cmty_title)
         x_fopen = None
         if fnigh is not None and fopen is None:
             x_fopen = x_itemroot.factunits.get(base).fopen
@@ -497,7 +497,7 @@ class BudUnit:
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
         tree_metrics = treemetrics_shop()
-        tree_metrics.evaluate_idea(
+        tree_metrics.evaluate_title(
             level=self.itemroot._level,
             reasons=self.itemroot.reasonunits,
             awardlinks=self.itemroot.awardlinks,
@@ -517,7 +517,7 @@ class BudUnit:
 
     def _eval_tree_metrics(self, parent_item, item_kid, tree_metrics, x_item_list):
         item_kid._level = parent_item._level + 1
-        tree_metrics.evaluate_idea(
+        tree_metrics.evaluate_title(
             level=item_kid._level,
             reasons=item_kid.reasonunits,
             awardlinks=item_kid.awardlinks,
@@ -569,7 +569,7 @@ class BudUnit:
     def add_item(
         self, item_road: RoadUnit, mass: float = None, pledge: bool = None
     ) -> ItemUnit:
-        x_item_title = get_terminus_idea(item_road, self.bridge)
+        x_item_title = get_terminus_title(item_road, self.bridge)
         x_parent_road = get_parent_road(item_road, self.bridge)
         x_itemunit = itemunit_shop(x_item_title, mass=mass)
         if pledge:
@@ -588,7 +588,7 @@ class BudUnit:
     ):
         self.set_item(
             item_kid=item_kid,
-            parent_road=self.cmty_idea,
+            parent_road=self.cmty_title,
             create_missing_items=create_missing_items,
             get_rid_of_missing_awardlinks_awardee_labels=get_rid_of_missing_awardlinks_awardee_labels,
             adoptees=adoptees,
@@ -606,20 +606,20 @@ class BudUnit:
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        if IdeaUnit(item_kid._item_title).is_idea(self.bridge) is False:
+        if TitleUnit(item_kid._item_title).is_title(self.bridge) is False:
             x_str = (
-                f"set_item failed because '{item_kid._item_title}' is not a IdeaUnit."
+                f"set_item failed because '{item_kid._item_title}' is not a TitleUnit."
             )
             raise InvalidBudException(x_str)
 
-        x_root_idea = get_root_idea_from_road(parent_road, self.bridge)
-        if self.itemroot._item_title != x_root_idea:
-            exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root idea"
+        x_root_title = get_root_title_from_road(parent_road, self.bridge)
+        if self.itemroot._item_title != x_root_title:
+            exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root title"
             raise InvalidBudException(exception_str)
 
         item_kid._bridge = self.bridge
-        if item_kid._bud_cmty_idea != self.cmty_idea:
-            item_kid._bud_cmty_idea = self.cmty_idea
+        if item_kid._bud_cmty_title != self.cmty_title:
+            item_kid._bud_cmty_title = self.cmty_title
         if item_kid._fund_coin != self.fund_coin:
             item_kid._fund_coin = self.fund_coin
         if not get_rid_of_missing_awardlinks_awardee_labels:
@@ -695,7 +695,7 @@ class BudUnit:
             if not del_children:
                 self._shift_item_kids(x_road=road)
             parent_item = self.get_item_obj(parent_road)
-            parent_item.del_kid(get_terminus_idea(road, self.bridge))
+            parent_item.del_kid(get_terminus_title(road, self.bridge))
         self.settle_bud()
 
     def _shift_item_kids(self, x_road: RoadUnit):
@@ -707,10 +707,10 @@ class BudUnit:
     def set_owner_name(self, new_owner_name):
         self.owner_name = new_owner_name
 
-    def edit_item_title(self, old_road: RoadUnit, new_item_title: IdeaUnit):
+    def edit_item_title(self, old_road: RoadUnit, new_item_title: TitleUnit):
         if self.bridge in new_item_title:
             exception_str = f"Cannot modify '{old_road}' because new_item_title {new_item_title} contains bridge {self.bridge}"
-            raise InvalidIdeaException(exception_str)
+            raise InvalidTitleException(exception_str)
         if self.item_exists(old_road) is False:
             raise InvalidBudException(f"Item {old_road=} does not exist")
 
@@ -728,13 +728,13 @@ class BudUnit:
             self._itemroot_find_replace_road(old_road=old_road, new_road=new_road)
 
     def _non_root_item_title_edit(
-        self, old_road: RoadUnit, new_item_title: IdeaUnit, parent_road: RoadUnit
+        self, old_road: RoadUnit, new_item_title: TitleUnit, parent_road: RoadUnit
     ):
         x_item = self.get_item_obj(old_road)
         x_item.set_item_title(new_item_title)
         x_item._parent_road = parent_road
         item_parent = self.get_item_obj(get_parent_road(old_road))
-        item_parent._kids.pop(get_terminus_idea(old_road, self.bridge))
+        item_parent._kids.pop(get_terminus_title(old_road, self.bridge))
         item_parent._kids[x_item._item_title] = x_item
 
     def _itemroot_find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
@@ -981,21 +981,21 @@ class BudUnit:
     def item_exists(self, road: RoadUnit) -> bool:
         if road is None:
             return False
-        root_road_item_title = get_root_idea_from_road(road, bridge=self.bridge)
+        root_road_item_title = get_root_title_from_road(road, bridge=self.bridge)
         if root_road_item_title != self.itemroot._item_title:
             return False
 
-        ideas = get_all_road_ideas(road, bridge=self.bridge)
-        root_road_item_title = ideas.pop(0)
-        if ideas == []:
+        titles = get_all_road_titles(road, bridge=self.bridge)
+        root_road_item_title = titles.pop(0)
+        if titles == []:
             return True
 
-        item_title = ideas.pop(0)
+        item_title = titles.pop(0)
         x_item = self.itemroot.get_kid(item_title)
         if x_item is None:
             return False
-        while ideas != []:
-            item_title = ideas.pop(0)
+        while titles != []:
+            item_title = titles.pop(0)
             x_item = x_item.get_kid(item_title)
             if x_item is None:
                 return False
@@ -1006,15 +1006,15 @@ class BudUnit:
             raise InvalidBudException("get_item_obj received road=None")
         if self.item_exists(road) is False and not if_missing_create:
             raise InvalidBudException(f"get_item_obj failed. no item at '{road}'")
-        ideaunits = get_all_road_ideas(road, bridge=self.bridge)
-        if len(ideaunits) == 1:
+        titleunits = get_all_road_titles(road, bridge=self.bridge)
+        if len(titleunits) == 1:
             return self.itemroot
 
-        ideaunits.pop(0)
-        item_title = ideaunits.pop(0)
+        titleunits.pop(0)
+        item_title = titleunits.pop(0)
         x_item = self.itemroot.get_kid(item_title, if_missing_create)
-        while ideaunits != []:
-            x_item = x_item.get_kid(ideaunits.pop(0), if_missing_create)
+        while titleunits != []:
+            x_item = x_item.get_kid(titleunits.pop(0), if_missing_create)
 
         return x_item
 
@@ -1031,7 +1031,7 @@ class BudUnit:
         return [self.get_item_obj(x_item_road) for x_item_road in item_roads]
 
     def _set_item_dict(self):
-        item_list = [self.get_item_obj(self.cmty_idea)]
+        item_list = [self.get_item_obj(self.cmty_title)]
         while item_list != []:
             x_item = item_list.pop()
             x_item.clear_gogo_calc_stop_calc()
@@ -1319,14 +1319,14 @@ class BudUnit:
         self, no_range_descendants: bool = False
     ) -> list[RoadUnit]:
         item_list = list(self.get_item_dict().values())
-        idea_dict = {item.get_road().lower(): item.get_road() for item in item_list}
-        idea_lowercase_ordered_list = sorted(list(idea_dict))
-        idea_orginalcase_ordered_list = [
-            idea_dict[idea_l] for idea_l in idea_lowercase_ordered_list
+        title_dict = {item.get_road().lower(): item.get_road() for item in item_list}
+        title_lowercase_ordered_list = sorted(list(title_dict))
+        title_orginalcase_ordered_list = [
+            title_dict[title_l] for title_l in title_lowercase_ordered_list
         ]
 
         list_x = []
-        for road in idea_orginalcase_ordered_list:
+        for road in title_orginalcase_ordered_list:
             if not no_range_descendants:
                 list_x.append(road)
             else:
@@ -1367,7 +1367,7 @@ class BudUnit:
             "respect_bit": self.respect_bit,
             "penny": self.penny,
             "owner_name": self.owner_name,
-            "cmty_idea": self.cmty_idea,
+            "cmty_title": self.cmty_title,
             "max_tree_traverse": self.max_tree_traverse,
             "bridge": self.bridge,
             "itemroot": self.itemroot.get_dict(),
@@ -1402,7 +1402,7 @@ class BudUnit:
 
 def budunit_shop(
     owner_name: OwnerName = None,
-    cmty_idea: CmtyIdea = None,
+    cmty_title: CmtyTitle = None,
     bridge: str = None,
     fund_pool: FundNum = None,
     fund_coin: FundCoin = None,
@@ -1411,11 +1411,11 @@ def budunit_shop(
     tally: float = None,
 ) -> BudUnit:
     owner_name = "" if owner_name is None else owner_name
-    cmty_idea = get_default_cmty_idea() if cmty_idea is None else cmty_idea
+    cmty_title = get_default_cmty_title() if cmty_title is None else cmty_title
     x_bud = BudUnit(
         owner_name=owner_name,
         tally=get_1_if_None(tally),
-        cmty_idea=cmty_idea,
+        cmty_title=cmty_title,
         accts=get_empty_dict_if_None(None),
         _groupunits={},
         bridge=default_bridge_if_None(bridge),
@@ -1439,7 +1439,7 @@ def budunit_shop(
         _root=True,
         _uid=1,
         _level=0,
-        _bud_cmty_idea=x_bud.cmty_idea,
+        _bud_cmty_title=x_bud.cmty_title,
         _bridge=x_bud.bridge,
         _fund_coin=x_bud.fund_coin,
         _parent_road="",
@@ -1459,8 +1459,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_owner_name(obj_from_bud_dict(bud_dict, "owner_name"))
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
-    x_bud.cmty_idea = obj_from_bud_dict(bud_dict, "cmty_idea")
-    x_bud.itemroot._item_title = obj_from_bud_dict(bud_dict, "cmty_idea")
+    x_bud.cmty_title = obj_from_bud_dict(bud_dict, "cmty_title")
+    x_bud.itemroot._item_title = obj_from_bud_dict(bud_dict, "cmty_title")
     bud_bridge = obj_from_bud_dict(bud_dict, "bridge")
     x_bud.bridge = default_bridge_if_None(bud_bridge)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
@@ -1487,7 +1487,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     itemroot_dict = bud_dict.get("itemroot")
     x_bud.itemroot = itemunit_shop(
         _root=True,
-        _item_title=x_bud.cmty_idea,
+        _item_title=x_bud.cmty_title,
         _parent_road="",
         _level=0,
         _uid=get_obj_from_item_dict(itemroot_dict, "_uid"),
@@ -1507,7 +1507,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
         _bridge=get_obj_from_item_dict(itemroot_dict, "bridge"),
-        _bud_cmty_idea=x_bud.cmty_idea,
+        _bud_cmty_title=x_bud.cmty_title,
         _fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
     create_itemroot_kids_from_dict(x_bud, itemroot_dict)
@@ -1518,7 +1518,7 @@ def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
     parent_road_str = "parent_road"
     # for every kid dict, set parent_road in dict, add to to_evaluate_list
     for x_dict in get_obj_from_item_dict(itemroot_dict, "_kids").values():
-        x_dict[parent_road_str] = x_bud.cmty_idea
+        x_dict[parent_road_str] = x_bud.cmty_title
         to_evaluate_item_dicts.append(x_dict)
 
     while to_evaluate_item_dicts != []:

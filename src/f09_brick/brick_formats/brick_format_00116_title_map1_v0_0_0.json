@@ -9,13 +9,13 @@
         "face_name": {
             "otx_key": true
         },
-        "cmty_idea": {
+        "cmty_title": {
             "otx_key": true
         },
-        "inx_idea": {
+        "inx_title": {
             "otx_key": false
         },
-        "otx_idea": {
+        "otx_title": {
             "otx_key": true
         },
         "owner_name": {
@@ -24,7 +24,7 @@
     },
     "brick_number": "br00116",
     "categorys": [
-        "map_idea",
+        "map_title",
         "bud_acctunit"
     ]
 }

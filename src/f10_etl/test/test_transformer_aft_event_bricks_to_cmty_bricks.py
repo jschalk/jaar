@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, cmty_idea_str
-from src.f07_cmty.cmty_config import cumlative_minute_str, hour_idea_str
+from src.f04_gift.atom_config import face_name_str, cmty_title_str
+from src.f07_cmty.cmty_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import upsert_sheet, sheet_exists
 from src.f10_etl.transformers import etl_aft_event_bricks_to_cmty_bricks
@@ -27,8 +27,8 @@ def test_WorldUnit_aft_event_bricks_to_cmty_bricks_CreatesFaceBrickSheets_Scenar
     brick_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
-        hour_idea_str(),
+        cmty_title_str(),
+        hour_title_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"

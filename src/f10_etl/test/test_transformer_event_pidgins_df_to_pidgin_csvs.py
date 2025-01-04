@@ -313,7 +313,7 @@ def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
 #     assert sheet_exists(event9_pidgin_file_path, label_agg_str)
 
 
-# def test_event_pidgin_to_pidgin_csv_files_Scenario3_idea(env_dir_setup_cleanup):
+# def test_event_pidgin_to_pidgin_csv_files_Scenario3_title(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     sue_str = "Sue"
 #     t3am_otx = "t3am"
@@ -322,20 +322,20 @@ def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
 #     t6am_inx = "T600"
 #     event7 = 7
 #     event9 = 9
-#     idea_file_columns = [
+#     title_file_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         otx_idea_str(),
-#         inx_idea_str(),
+#         otx_title_str(),
+#         inx_title_str(),
 #         otx_bridge_str(),
 #         inx_bridge_str(),
 #         unknown_word_str(),
 #     ]
 #     x_nan = float("nan")
-#     e1_idea0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
-#     e1_idea1 = [sue_str, event9, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
-#     e1_idea_rows = [e1_idea0, e1_idea1]
-#     e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
+#     e1_title0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
+#     e1_title1 = [sue_str, event9, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
+#     e1_title_rows = [e1_title0, e1_title1]
+#     e1_title_agg_df = DataFrame(e1_title_rows, columns=title_file_columns)
 
 #     faces_dir = get_test_etl_dir()
 #     sue_dir = create_path(faces_dir, sue_str)
@@ -344,18 +344,18 @@ def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
 #     sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
 #     event7_pidgin_file_path = create_path(event7_dir, "pidgin.xlsx")
 #     event9_pidgin_file_path = create_path(event9_dir, "pidgin.xlsx")
-#     idea_agg_str = "idea_agg"
-#     upsert_sheet(sue_pidgin_file_path, idea_agg_str, e1_idea_agg_df)
+#     title_agg_str = "title_agg"
+#     upsert_sheet(sue_pidgin_file_path, title_agg_str, e1_title_agg_df)
 #     assert os_path_exists(sue_dir)
 #     assert os_path_exists(sue_pidgin_file_path)
-#     assert sheet_exists(sue_pidgin_file_path, idea_agg_str)
+#     assert sheet_exists(sue_pidgin_file_path, title_agg_str)
 
 #     assert os_path_exists(event7_dir) is False
 #     assert os_path_exists(event9_dir) is False
 #     assert os_path_exists(event7_pidgin_file_path) is False
 #     assert os_path_exists(event9_pidgin_file_path) is False
-#     assert sheet_exists(event7_pidgin_file_path, idea_agg_str) is False
-#     assert sheet_exists(event9_pidgin_file_path, idea_agg_str) is False
+#     assert sheet_exists(event7_pidgin_file_path, title_agg_str) is False
+#     assert sheet_exists(event9_pidgin_file_path, title_agg_str) is False
 
 #     # WHEN
 #     event_pidgin_to_pidgin_csv_files(sue_dir)
@@ -365,8 +365,8 @@ def test_etl_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
 #     assert os_path_exists(event9_dir)
 #     assert os_path_exists(event7_pidgin_file_path)
 #     assert os_path_exists(event9_pidgin_file_path)
-#     assert sheet_exists(event7_pidgin_file_path, idea_agg_str)
-#     assert sheet_exists(event9_pidgin_file_path, idea_agg_str)
+#     assert sheet_exists(event7_pidgin_file_path, title_agg_str)
+#     assert sheet_exists(event9_pidgin_file_path, title_agg_str)
 
 
 # def test_event_pidgin_to_pidgin_csv_files_Scenario3_road(env_dir_setup_cleanup):

@@ -6,7 +6,7 @@ from src.f00_instrument.dict_toolbox import (
     get_all_nondictionary_objs,
     get_0_if_None,
 )
-from src.f01_road.road import RoadUnit, get_terminus_idea, get_parent_road
+from src.f01_road.road import RoadUnit, get_terminus_title, get_parent_road
 from src.f02_bud.reason_item import FactUnit, ReasonUnit
 from src.f02_bud.acct import MemberShip, AcctName, AcctUnit
 from src.f02_bud.group import MemberShip, GroupLabel
@@ -121,7 +121,7 @@ class DeltaUnit:
         return get_from_nested_dict(self.atomunits, x_keylist)
 
     def add_all_atomunits(self, after_bud: BudUnit):
-        before_bud = budunit_shop(after_bud.owner_name, after_bud.cmty_idea)
+        before_bud = budunit_shop(after_bud.owner_name, after_bud.cmty_title)
         self.add_all_different_atomunits(before_bud, after_bud)
 
     def add_all_different_atomunits(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -501,7 +501,7 @@ class DeltaUnit:
     def add_atomunit_item_deletes(self, before_bud: BudUnit, delete_item_roads: set):
         for delete_item_road in delete_item_roads:
             x_parent_road = get_parent_road(delete_item_road, before_bud.bridge)
-            x_item_title = get_terminus_idea(delete_item_road, before_bud.bridge)
+            x_item_title = get_terminus_title(delete_item_road, before_bud.bridge)
             x_atomunit = atomunit_shop("bud_itemunit", atom_delete())
             x_atomunit.set_jkey("parent_road", x_parent_road)
             x_atomunit.set_jkey("item_title", x_item_title)

@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, cmty_idea_str
-from src.f07_cmty.cmty_config import cumlative_minute_str, hour_idea_str
+from src.f04_gift.atom_config import face_name_str, cmty_title_str
+from src.f07_cmty.cmty_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_brick.pandas_tool import upsert_sheet
 from src.f10_etl.brick_collector import (
@@ -98,8 +98,8 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        cmty_idea_str(),
-        hour_idea_str(),
+        cmty_title_str(),
+        hour_title_str(),
     ]
     row1 = [sue_str, event_1, minute_360, accord23_str, hour6am]
     row2 = [sue_str, event_1, minute_420, accord23_str, hour7am]
@@ -137,8 +137,8 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        cmty_idea_str(),
-        hour_idea_str(),
+        cmty_title_str(),
+        hour_title_str(),
     ]
     row1 = [sue_str, event_1, minute_360, accord23_str, hour6am]
     row2 = [sue_str, event_1, minute_420, accord23_str, hour7am]
@@ -146,7 +146,7 @@ def test_get_all_brick_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
     ]
     incom_row1 = [sue_str, event_1, minute_360, accord23_str]
     incom_row2 = [sue_str, event_1, minute_420, accord23_str]

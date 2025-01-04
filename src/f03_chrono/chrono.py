@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_1_if_None, get_dict_from_json
 from src.f00_instrument.file import open_file, create_path
-from src.f01_road.road import RoadUnit, TimeLineIdea
+from src.f01_road.road import RoadUnit, TimeLineTitle
 from src.f02_bud.item import (
     itemunit_shop,
     ItemUnit,
@@ -191,13 +191,13 @@ def create_week_itemunits(x_weekdays_list) -> dict[str, ItemUnit]:
     }
 
 
-def new_timeline_itemunit(timeline_idea: TimeLineIdea, c400_count: int) -> ItemUnit:
+def new_timeline_itemunit(timeline_title: TimeLineTitle, c400_count: int) -> ItemUnit:
     timeline_length = c400_count * get_c400_constants().c400_leap_length
-    return itemunit_shop(timeline_idea, begin=0, close=timeline_length)
+    return itemunit_shop(timeline_title, begin=0, close=timeline_length)
 
 
 def add_newtimeline_itemunit(x_budunit: BudUnit, timeline_config: dict):
-    x_item_title = timeline_config.get(timeline_idea_str())
+    x_item_title = timeline_config.get(timeline_title_str())
     x_c400_count = timeline_config.get(c400_number_str())
     x_months = timeline_config.get(months_config_str())
     x_mday = timeline_config.get(monthday_distortion_str())
@@ -231,11 +231,11 @@ def add_itemunits(
 def add_stan_itemunits(
     x_budunit: BudUnit,
     time_road: RoadUnit,
-    timeline_idea: TimeLineIdea,
+    timeline_title: TimeLineTitle,
     timeline_c400_count: int,
 ):
     time_road = x_budunit.make_l1_road(time_str())
-    new_road = x_budunit.make_road(time_road, timeline_idea)
+    new_road = x_budunit.make_road(time_road, timeline_title)
     c400_leap_road = x_budunit.make_road(new_road, c400_leap_str())
     c400_clean_road = x_budunit.make_road(c400_leap_road, c400_clean_str())
     c100_road = x_budunit.make_road(c400_clean_road, c100_str())
@@ -244,7 +244,7 @@ def add_stan_itemunits(
 
     if not x_budunit.item_exists(time_road):
         x_budunit.set_l1_item(itemunit_shop(time_str()))
-    timeline_itemunit = new_timeline_itemunit(timeline_idea, timeline_c400_count)
+    timeline_itemunit = new_timeline_itemunit(timeline_title, timeline_c400_count)
     x_budunit.set_item(timeline_itemunit, time_road)
     x_budunit.set_item(stan_c400_leap_itemunit(), new_road)
     x_budunit.set_item(stan_c400_clean_itemunit(), c400_leap_road)
@@ -301,8 +301,8 @@ def monthday_distortion_str() -> str:
     return "monthday_distortion"
 
 
-def timeline_idea_str() -> str:
-    return "timeline_idea"
+def timeline_title_str() -> str:
+    return "timeline_title"
 
 
 def c400_number_str() -> str:
@@ -319,7 +319,7 @@ def validate_timeline_config(config_dict: dict) -> bool:
         weekdays_config_str(),
         months_config_str(),
         monthday_distortion_str(),
-        timeline_idea_str(),
+        timeline_title_str(),
         c400_number_str(),
         yr1_jan1_offset_str(),
     ]
@@ -407,7 +407,7 @@ def get_default_weekdays_config() -> list[list[str, int]]:
 
 
 def create_timeline_config(
-    timeline_idea: TimeLineIdea = None,
+    timeline_title: TimeLineTitle = None,
     c400_count: int = None,
     hour_length: int = None,
     month_length: int = None,
@@ -416,8 +416,8 @@ def create_timeline_config(
     monthday_distortion: int = None,
     yr1_jan1_offset: int = None,
 ) -> dict:
-    if timeline_idea is None:
-        timeline_idea = "creg"
+    if timeline_title is None:
+        timeline_title = "creg"
     if c400_count is None:
         c400_count = 7
     if yr1_jan1_offset is None:
@@ -442,7 +442,7 @@ def create_timeline_config(
         hours_config_str(): hour_config,
         weekdays_config_str(): weekday_list,
         months_config_str(): month_config,
-        timeline_idea_str(): timeline_idea,
+        timeline_title_str(): timeline_title,
         c400_number_str(): c400_count,
         monthday_distortion_str(): get_1_if_None(monthday_distortion),
         yr1_jan1_offset_str(): yr1_jan1_offset,
@@ -611,7 +611,7 @@ class TimeLineUnit:
     hours_config: list[list[str, int]] = None
     months_config: list[list[str, int]] = None
     monthday_distortion: int = None
-    timeline_idea: TimeLineIdea = None
+    timeline_title: TimeLineTitle = None
     weekdays_config: list[str] = None
     yr1_jan1_offset: int = None
 
@@ -621,7 +621,7 @@ class TimeLineUnit:
             "hours_config": self.hours_config,
             "months_config": self.months_config,
             "monthday_distortion": self.monthday_distortion,
-            "timeline_idea": self.timeline_idea,
+            "timeline_title": self.timeline_title,
             "weekdays_config": self.weekdays_config,
             "yr1_jan1_offset": self.yr1_jan1_offset,
         }
@@ -635,7 +635,7 @@ def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
         hours_config=timeline_config.get(hours_config_str()),
         months_config=timeline_config.get(months_config_str()),
         monthday_distortion=timeline_config.get(monthday_distortion_str()),
-        timeline_idea=timeline_config.get(timeline_idea_str()),
+        timeline_title=timeline_config.get(timeline_title_str()),
         weekdays_config=timeline_config.get(weekdays_config_str()),
         yr1_jan1_offset=timeline_config.get(yr1_jan1_offset_str()),
     )

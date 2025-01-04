@@ -9,10 +9,10 @@
         "face_name": {
             "otx_key": true
         },
-        "cmty_idea": {
+        "cmty_title": {
             "otx_key": true
         },
-        "hour_idea": {
+        "hour_title": {
             "otx_key": true
         }
     },

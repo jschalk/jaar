@@ -12,7 +12,7 @@
         "face_name": {
             "otx_key": true
         },
-        "cmty_idea": {
+        "cmty_title": {
             "otx_key": true
         },
         "fund_coin": {
@@ -30,7 +30,7 @@
         "bridge": {
             "otx_key": false
         },
-        "timeline_idea": {
+        "timeline_title": {
             "otx_key": false
         },
         "yr1_jan1_offset": {

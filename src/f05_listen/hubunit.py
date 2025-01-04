@@ -15,7 +15,7 @@ from src.f01_road.jaar_config import (
     get_rootpart_of_keep_dir,
     treasury_file_name,
     get_gifts_folder,
-    get_cmty_idea_if_None,
+    get_cmty_title_if_None,
     get_test_cmtys_dir,
     get_init_gift_id_if_None,
     get_json_filename,
@@ -38,12 +38,12 @@ from src.f01_road.finance_tran import (
 )
 from src.f01_road.road import (
     OwnerName,
-    CmtyIdea,
-    IdeaUnit,
+    CmtyTitle,
+    TitleUnit,
     RoadUnit,
     rebuild_road,
-    get_all_road_ideas,
-    validate_ideaunit,
+    get_all_road_titles,
+    validate_titleunit,
     default_bridge_if_None,
 )
 from src.f02_bud.bud import (
@@ -113,7 +113,7 @@ def get_keep_grades_dir(x_keep_dir: str) -> str:
 class HubUnit:
     owner_name: OwnerName = None
     cmtys_dir: str = None
-    cmty_idea: str = None
+    cmty_title: str = None
     keep_road: RoadUnit = None
     bridge: str = None
     fund_pool: float = None
@@ -123,7 +123,7 @@ class HubUnit:
     keep_point_magnitude: float = None
 
     def cmty_dir(self) -> str:
-        return f_path(self.cmtys_dir, self.cmty_idea)
+        return f_path(self.cmtys_dir, self.cmty_title)
 
     def owners_dir(self) -> str:
         return f_path(self.cmty_dir(), "owners")
@@ -202,7 +202,7 @@ class HubUnit:
     def default_voice_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
             owner_name=self.owner_name,
-            cmty_idea=self.cmty_idea,
+            cmty_title=self.cmty_title,
             bridge=self.bridge,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,
@@ -256,7 +256,7 @@ class HubUnit:
         delete_dir(self.atom_file_path(atom_number))
 
     def _get_bud_from_atom_files(self) -> BudUnit:
-        x_bud = budunit_shop(self.owner_name, self.cmty_idea)
+        x_bud = budunit_shop(self.owner_name, self.cmty_title)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = get_dir_file_strs(self.atoms_dir(), delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
@@ -605,7 +605,7 @@ class HubUnit:
     def dw_speaker_bud(self, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
             cmtys_dir=self.cmtys_dir,
-            cmty_idea=self.cmty_idea,
+            cmty_title=self.cmty_title,
             owner_name=speaker_id,
             bridge=self.bridge,
             respect_bit=self.respect_bit,
@@ -625,7 +625,7 @@ class HubUnit:
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
             cmtys_dir=self.cmtys_dir,
-            cmty_idea=self.cmty_idea,
+            cmty_title=self.cmty_title,
             owner_name=healer_name,
             keep_road=self.keep_road,
             bridge=self.bridge,
@@ -687,7 +687,7 @@ class HubUnit:
 
 def hubunit_shop(
     cmtys_dir: str,
-    cmty_idea: CmtyIdea,
+    cmty_title: CmtyTitle,
     owner_name: OwnerName = None,
     keep_road: RoadUnit = None,
     bridge: str = None,
@@ -698,12 +698,12 @@ def hubunit_shop(
     keep_point_magnitude: float = None,
 ) -> HubUnit:
     cmtys_dir = get_test_cmtys_dir() if cmtys_dir is None else cmtys_dir
-    cmty_idea = get_cmty_idea_if_None(cmty_idea)
+    cmty_title = get_cmty_title_if_None(cmty_title)
 
     return HubUnit(
         cmtys_dir=cmtys_dir,
-        cmty_idea=cmty_idea,
-        owner_name=validate_ideaunit(owner_name, bridge),
+        cmty_title=cmty_title,
+        owner_name=validate_titleunit(owner_name, bridge),
         keep_road=keep_road,
         bridge=default_bridge_if_None(bridge),
         fund_pool=validate_fund_pool(fund_pool),
@@ -714,9 +714,9 @@ def hubunit_shop(
     )
 
 
-def get_keep_path(x_hubunit: HubUnit, x_road: IdeaUnit) -> str:
+def get_keep_path(x_hubunit: HubUnit, x_road: TitleUnit) -> str:
     keep_root = get_rootpart_of_keep_dir()
-    x_road = rebuild_road(x_road, x_hubunit.cmty_idea, keep_root)
-    x_list = get_all_road_ideas(x_road, x_hubunit.bridge)
+    x_road = rebuild_road(x_road, x_hubunit.cmty_title, keep_root)
+    x_list = get_all_road_titles(x_road, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])
     return f_path(x_hubunit.keeps_dir(), keep_sub_path)

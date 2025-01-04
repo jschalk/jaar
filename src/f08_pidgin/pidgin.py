@@ -9,19 +9,19 @@ from src.f08_pidgin.map import (
     MapCore,
     GroupMap,
     AcctMap,
-    IdeaMap,
+    TitleMap,
     RoadMap,
     groupmap_shop,
     acctmap_shop,
-    ideamap_shop,
+    titlemap_shop,
     roadmap_shop,
     get_acctmap_from_dict,
     get_groupmap_from_dict,
-    get_ideamap_from_dict,
+    get_titlemap_from_dict,
     get_roadmap_from_dict,
     inherit_acctmap,
     inherit_groupmap,
-    inherit_ideamap,
+    inherit_titlemap,
     inherit_roadmap,
 )
 from dataclasses import dataclass
@@ -32,7 +32,7 @@ class check_attrException(Exception):
 
 
 def pidginable_jaar_types() -> set:
-    return {"AcctName", "GroupLabel", "IdeaUnit", "RoadUnit"}
+    return {"AcctName", "GroupLabel", "TitleUnit", "RoadUnit"}
 
 
 def pidginable_atom_args() -> set:
@@ -41,20 +41,20 @@ def pidginable_atom_args() -> set:
         "awardee_label",
         "base",
         "face_name",
-        "cmty_idea",
+        "cmty_title",
         "group_label",
         "healer_name",
-        "hour_idea",
+        "hour_title",
         "item_title",
-        "month_idea",
+        "month_title",
         "parent_road",
         "pick",
         "need",
         "owner_name",
         "road",
         "team_label",
-        "timeline_idea",
-        "weekday_idea",
+        "timeline_title",
+        "weekday_title",
     }
 
 
@@ -70,7 +70,7 @@ class PidginUnit:
     face_name: OwnerName = None
     groupmap: GroupMap = None
     acctmap: AcctMap = None
-    ideamap: IdeaMap = None
+    titlemap: TitleMap = None
     roadmap: RoadMap = None
     unknown_word: str = None  # pidginunit heart
     otx_bridge: str = None  # pidginunit heart
@@ -100,8 +100,8 @@ class PidginUnit:
             return self.acctmap
         elif x_jaar_type == "GroupLabel":
             return self.groupmap
-        elif x_jaar_type == "IdeaUnit":
-            return self.ideamap
+        elif x_jaar_type == "TitleUnit":
+            return self.titlemap
         elif x_jaar_type == "RoadUnit":
             return self.roadmap
 
@@ -124,24 +124,24 @@ class PidginUnit:
     def del_acct_name(self, otx_name: str):
         return self.acctmap.del_otx2inx(otx_name)
 
-    def set_ideamap(self, x_ideamap: IdeaMap):
-        self._check_all_core_attrs_match(x_ideamap)
-        self.ideamap = x_ideamap
+    def set_titlemap(self, x_titlemap: TitleMap):
+        self._check_all_core_attrs_match(x_titlemap)
+        self.titlemap = x_titlemap
 
-    def get_ideamap(self) -> IdeaMap:
-        return self.ideamap
+    def get_titlemap(self) -> TitleMap:
+        return self.titlemap
 
-    def set_idea(self, otx_idea: str, inx_idea: str):
-        self.ideamap.set_otx2inx(otx_idea, inx_idea)
+    def set_title(self, otx_title: str, inx_title: str):
+        self.titlemap.set_otx2inx(otx_title, inx_title)
 
-    def idea_exists(self, otx_idea: str, inx_idea: str):
-        return self.ideamap.otx2inx_exists(otx_idea, inx_idea)
+    def title_exists(self, otx_title: str, inx_title: str):
+        return self.titlemap.otx2inx_exists(otx_title, inx_title)
 
-    def _get_inx_idea(self, otx_idea: str):
-        return self.ideamap._get_inx_value(otx_idea)
+    def _get_inx_title(self, otx_title: str):
+        return self.titlemap._get_inx_value(otx_title)
 
-    def del_idea(self, otx_idea: str):
-        return self.ideamap.del_otx2inx(otx_idea)
+    def del_title(self, otx_title: str):
+        return self.titlemap.del_otx2inx(otx_title)
 
     def set_roadmap(self, x_roadmap: RoadMap):
         self._check_all_core_attrs_match(x_roadmap)
@@ -179,7 +179,7 @@ class PidginUnit:
         return (
             self.acctmap.is_valid()
             and self.groupmap.is_valid()
-            and self.ideamap.is_valid()
+            and self.titlemap.is_valid()
             and self.roadmap.is_valid()
         )
 
@@ -188,8 +188,8 @@ class PidginUnit:
             self.acctmap.set_otx2inx(x_otx, x_inx)
         elif x_jaar_type == "GroupLabel":
             self.groupmap.set_otx2inx(x_otx, x_inx)
-        elif x_jaar_type == "IdeaUnit":
-            self.ideamap.set_otx2inx(x_otx, x_inx)
+        elif x_jaar_type == "TitleUnit":
+            self.titlemap.set_otx2inx(x_otx, x_inx)
         elif x_jaar_type == "RoadUnit":
             self.roadmap.set_otx2inx(x_otx, x_inx)
 
@@ -198,8 +198,8 @@ class PidginUnit:
             return self.acctmap._get_inx_value(x_otx)
         elif x_jaar_type == "GroupLabel":
             return self.groupmap._get_inx_value(x_otx)
-        elif x_jaar_type == "IdeaUnit":
-            return self.ideamap._get_inx_value(x_otx)
+        elif x_jaar_type == "TitleUnit":
+            return self.titlemap._get_inx_value(x_otx)
         elif x_jaar_type == "RoadUnit":
             return self.roadmap._get_inx_value(x_otx)
 
@@ -208,8 +208,8 @@ class PidginUnit:
             return self.acctmap.otx2inx_exists(x_otx, x_inx)
         elif x_jaar_type == "GroupLabel":
             return self.groupmap.otx2inx_exists(x_otx, x_inx)
-        elif x_jaar_type == "IdeaUnit":
-            return self.ideamap.otx2inx_exists(x_otx, x_inx)
+        elif x_jaar_type == "TitleUnit":
+            return self.titlemap.otx2inx_exists(x_otx, x_inx)
         elif x_jaar_type == "RoadUnit":
             return self.roadmap.otx2inx_exists(x_otx, x_inx)
 
@@ -218,22 +218,22 @@ class PidginUnit:
             self.acctmap.del_otx2inx(x_otx)
         elif x_jaar_type == "GroupLabel":
             self.groupmap.del_otx2inx(x_otx)
-        elif x_jaar_type == "IdeaUnit":
-            self.ideamap.del_otx2inx(x_otx)
+        elif x_jaar_type == "TitleUnit":
+            self.titlemap.del_otx2inx(x_otx)
         elif x_jaar_type == "RoadUnit":
             self.roadmap.del_otx2inx(x_otx)
 
-    def set_idea(self, x_otx: str, x_inx: str):
-        self.roadmap.set_idea(x_otx, x_inx)
+    def set_title(self, x_otx: str, x_inx: str):
+        self.roadmap.set_title(x_otx, x_inx)
 
-    def _get_inx_idea(self, x_otx: str) -> str:
-        return self.roadmap._get_inx_idea(x_otx)
+    def _get_inx_title(self, x_otx: str) -> str:
+        return self.roadmap._get_inx_title(x_otx)
 
-    def idea_exists(self, x_otx: str, x_inx: str) -> bool:
-        return self.roadmap.idea_exists(x_otx, x_inx)
+    def title_exists(self, x_otx: str, x_inx: str) -> bool:
+        return self.roadmap.title_exists(x_otx, x_inx)
 
-    def del_idea(self, x_otx: str):
-        self.roadmap.del_idea(x_otx)
+    def del_title(self, x_otx: str):
+        self.roadmap.del_title(x_otx)
 
     def get_dict(self) -> dict:
         return {
@@ -243,7 +243,7 @@ class PidginUnit:
             "inx_bridge": self.inx_bridge,
             "unknown_word": self.unknown_word,
             "acctmap": self.acctmap.get_dict(),
-            "ideamap": self.ideamap.get_dict(),
+            "titlemap": self.titlemap.get_dict(),
             "groupmap": self.groupmap.get_dict(),
             "roadmap": self.roadmap.get_dict(),
         }
@@ -277,7 +277,7 @@ def pidginunit_shop(
         inx_bridge=inx_bridge,
         unknown_word=unknown_word,
     )
-    x_ideamap = ideamap_shop(
+    x_titlemap = titlemap_shop(
         face_name=face_name,
         event_int=event_int,
         otx_bridge=otx_bridge,
@@ -290,7 +290,7 @@ def pidginunit_shop(
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         unknown_word=unknown_word,
-        x_ideamap=x_ideamap,
+        x_titlemap=x_titlemap,
     )
 
     return PidginUnit(
@@ -301,7 +301,7 @@ def pidginunit_shop(
         inx_bridge=inx_bridge,
         acctmap=x_acctmap,
         groupmap=x_groupmap,
-        ideamap=x_ideamap,
+        titlemap=x_titlemap,
         roadmap=x_roadmap,
     )
 
@@ -309,9 +309,9 @@ def pidginunit_shop(
 def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
     x_acctmap = get_acctmap_from_dict(x_dict.get("acctmap"))
     x_groupmap = get_groupmap_from_dict(x_dict.get("groupmap"))
-    x_ideamap = get_ideamap_from_dict(x_dict.get("ideamap"))
+    x_titlemap = get_titlemap_from_dict(x_dict.get("titlemap"))
     x_roadmap = get_roadmap_from_dict(x_dict.get("roadmap"))
-    x_roadmap.ideamap = x_ideamap
+    x_roadmap.titlemap = x_titlemap
     return PidginUnit(
         face_name=x_dict.get("face_name"),
         event_int=x_dict.get("event_int"),
@@ -320,7 +320,7 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         unknown_word=x_dict.get("unknown_word"),
         acctmap=x_acctmap,
         groupmap=x_groupmap,
-        ideamap=x_ideamap,
+        titlemap=x_titlemap,
         roadmap=x_roadmap,
     )
 
@@ -345,7 +345,7 @@ def inherit_pidginunit(older: PidginUnit, newer: PidginUnit) -> PidginUnit:
         raise PidginCoreAttrConflictException("older pidginunit is not older")
     newer.set_acctmap(inherit_acctmap(newer.acctmap, older.acctmap))
     newer.set_groupmap(inherit_groupmap(newer.groupmap, older.groupmap))
-    newer.set_ideamap(inherit_ideamap(newer.ideamap, older.ideamap))
+    newer.set_titlemap(inherit_titlemap(newer.titlemap, older.titlemap))
     newer.set_roadmap(inherit_roadmap(newer.roadmap, older.roadmap))
 
     return newer

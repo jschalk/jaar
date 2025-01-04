@@ -1,7 +1,7 @@
 from src.f01_road.road import create_road
 from src.f04_gift.atom_config import (
     acct_name_str,
-    cmty_idea_str,
+    cmty_title_str,
     credit_belief_str,
     base_str,
     type_AcctName_str,
@@ -15,7 +15,7 @@ from src.f09_brick.pandas_tool import (
 )
 from src.f08_pidgin.examples.example_pidgins import (
     get_casa_maison_pidginunit_set_by_otx2inx,
-    get_casa_maison_pidginunit_set_by_idea,
+    get_casa_maison_pidginunit_set_by_title,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
 )
@@ -105,7 +105,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctName
     acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
     acct_name_mapunit.set_otx2inx(sue_otx, sue_inx)
     acct_name_mapunit.set_otx2inx(bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[cmty_idea_str(), acct_name_str(), credit_belief_str()])
+    otx_dt = DataFrame(columns=[cmty_title_str(), acct_name_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -121,7 +121,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctName
     assert otx_dt.iloc[0][acct_name_str()] == zia_otx
     assert otx_dt.iloc[1][acct_name_str()] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[cmty_idea_str(), acct_name_str(), credit_belief_str()])
+    inx_dt = DataFrame(columns=[cmty_title_str(), acct_name_str(), credit_belief_str()])
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_inx, 12]
     inx_dt.loc[2] = ["ZZ", bob_inx, 12]
@@ -138,7 +138,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctName()
     sue_otx = "Sue"
     bob_otx = "Bob"
     zia_otx = "Zia"
-    otx_dt = DataFrame(columns=[cmty_idea_str(), acct_name_str(), credit_belief_str()])
+    otx_dt = DataFrame(columns=[cmty_title_str(), acct_name_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -154,7 +154,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctName()
     assert otx_dt.iloc[0][acct_name_str()] == zia_otx
     assert otx_dt.iloc[1][acct_name_str()] == sue_otx
     pandas_assert_frame_equal(otx_dt, old_otx_dt)
-    inx_dt = DataFrame(columns=[cmty_idea_str(), acct_name_str(), credit_belief_str()])
+    inx_dt = DataFrame(columns=[cmty_title_str(), acct_name_str(), credit_belief_str()])
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_otx, 12]
     inx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -179,7 +179,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctName()
     yao_pidginunit.set_otx2inx(type_AcctName_str(), xio_otx, xio_inx)
     yao_pidginunit.set_otx2inx(type_AcctName_str(), sue_otx, sue_inx)
     yao_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[cmty_idea_str(), acct_name_str(), credit_belief_str()])
+    otx_dt = DataFrame(columns=[cmty_title_str(), acct_name_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -195,7 +195,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctName()
     assert otx_dt.iloc[0][acct_name_str()] == zia_otx
     assert otx_dt.iloc[1][acct_name_str()] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[cmty_idea_str(), acct_name_str(), credit_belief_str()])
+    inx_dt = DataFrame(columns=[cmty_title_str(), acct_name_str(), credit_belief_str()])
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_inx, 12]
     inx_dt.loc[2] = ["ZZ", bob_inx, 12]
@@ -246,7 +246,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     pandas_assert_frame_equal(otx_dt, inx_dt)
 
 
-def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_get_casa_maison_pidginunit_set_by_idea():
+def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_get_casa_maison_pidginunit_set_by_title():
     # ESTABLISH
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
@@ -261,7 +261,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     sweep_str = "sweep"
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
-    yao_pidginunit = get_casa_maison_pidginunit_set_by_idea()
+    yao_pidginunit = get_casa_maison_pidginunit_set_by_title()
     # print(f"{yao_pidginunit=}")
     otx_dt = get_casa_maison_road_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)

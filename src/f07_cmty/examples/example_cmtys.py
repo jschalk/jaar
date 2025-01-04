@@ -36,7 +36,7 @@ from src.f07_cmty.examples.cmty_env import get_test_cmtys_dir
 #     display_itemtree(yao_voice_bud.settle_bud(), mode="Keep", graphics_bool=graphics_bool)
 #     x_hubunit = hubunit_shop(
 #         cmtys_dir=yao_hubunit.cmtys_dir,
-#         cmty_idea=yao_hubunit.cmty_idea,
+#         cmty_title=yao_hubunit.cmty_title,
 #         owner_name=yao_hubunit.owner_name,
 #         keep_road=None,
 #         bridge=yao_hubunit.bridge,

@@ -627,12 +627,12 @@ def test_DealLog_get_tranbook_ReturnsObj():
     }
 
     # WHEN
-    x_cmty_idea = "cmty_idea_x"
-    sue_tranbook = sue_deallog.get_tranbook(x_cmty_idea)
+    x_cmty_title = "cmty_title_x"
+    sue_tranbook = sue_deallog.get_tranbook(x_cmty_title)
 
     # THEN
     assert sue_tranbook
-    assert sue_tranbook.cmty_idea == x_cmty_idea
+    assert sue_tranbook.cmty_title == x_cmty_title
     assert sue_tranbook.tranunit_exists(sue_str, zia_str, x7_time_int)
     assert sue_tranbook.tranunit_exists(sue_str, bob_str, x4_time_int)
     assert sue_tranbook.get_amount(sue_str, zia_str, x7_time_int) == zia_net_deal

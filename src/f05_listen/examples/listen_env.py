@@ -1,7 +1,7 @@
 from src.f00_instrument.file import delete_dir
 from src.f01_road.road import (
-    create_road_from_ideas,
-    get_default_cmty_idea,
+    create_road_from_titles,
+    get_default_cmty_title,
     RoadUnit,
 )
 from src.f05_listen.hubunit import HubUnit, hubunit_shop
@@ -29,18 +29,18 @@ def env_dir_setup_cleanup():
 
 
 def get_texas_road() -> RoadUnit:
-    cmty_idea = get_default_cmty_idea()
+    cmty_title = get_default_cmty_title()
     nation_str = "nation-state"
     usa_str = "USA"
     texas_str = "Texas"
-    return create_road_from_ideas([cmty_idea, nation_str, usa_str, texas_str])
+    return create_road_from_titles([cmty_title, nation_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
-    cmty_idea = get_default_cmty_idea()
+    cmty_title = get_default_cmty_title()
     return hubunit_shop(
         get_listen_temp_env_dir(),
-        cmty_idea,
+        cmty_title,
         owner_name="Sue",
         keep_road=get_texas_road(),
         # pipeline_duty_job_str(),
@@ -48,18 +48,18 @@ def get_texas_hubunit() -> HubUnit:
 
 
 def get_dakota_road() -> RoadUnit:
-    cmty_idea = get_default_cmty_idea()
+    cmty_title = get_default_cmty_title()
     nation_str = "nation-state"
     usa_str = "USA"
     dakota_str = "Dakota"
-    return create_road_from_ideas([cmty_idea, nation_str, usa_str, dakota_str])
+    return create_road_from_titles([cmty_title, nation_str, usa_str, dakota_str])
 
 
 def get_dakota_hubunit() -> HubUnit:
-    cmty_idea = get_default_cmty_idea()
+    cmty_title = get_default_cmty_title()
     return hubunit_shop(
         get_listen_temp_env_dir(),
-        cmty_idea,
+        cmty_title,
         owner_name="Sue",
         keep_road=get_dakota_road(),
         # pipeline_duty_job_str(),

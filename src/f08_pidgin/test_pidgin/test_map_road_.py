@@ -1,7 +1,7 @@
 from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.road import default_bridge_if_None, create_road
 from src.f08_pidgin.map import (
-    ideamap_shop,
+    titlemap_shop,
     RoadMap,
     roadmap_shop,
     get_roadmap_from_dict,
@@ -31,7 +31,7 @@ def test_RoadMap_Exists():
     assert not x_roadmap.unknown_word
     assert not x_roadmap.otx_bridge
     assert not x_roadmap.inx_bridge
-    assert not x_roadmap.ideamap
+    assert not x_roadmap.titlemap
 
 
 def test_roadmap_shop_ReturnsObj_scenario0():
@@ -62,7 +62,7 @@ def test_roadmap_shop_ReturnsObj_scenario0():
     assert e7_roadmap.unknown_word == x_unknown_word
     assert e7_roadmap.otx_bridge == slash_otx_bridge
     assert e7_roadmap.inx_bridge == colon_inx_bridge
-    assert e7_roadmap.ideamap == ideamap_shop(
+    assert e7_roadmap.titlemap == titlemap_shop(
         face_name=bob_str,
         event_int=event7,
         unknown_word=x_unknown_word,
@@ -82,7 +82,7 @@ def test_roadmap_shop_ReturnsObj_Scenario2():
     assert x_roadmap.inx_bridge == default_bridge_if_None()
     assert x_roadmap.face_name is None
     assert x_roadmap.event_int == 0
-    assert x_roadmap.ideamap == ideamap_shop(
+    assert x_roadmap.titlemap == titlemap_shop(
         event_int=0,
         unknown_word=default_unknown_word_if_None(),
         otx_bridge=default_bridge_if_None(),
@@ -290,140 +290,140 @@ def test_RoadMap_unknown_word_in_otx2inx_ReturnsObj():
     assert x_roadmap._unknown_word_in_otx2inx()
 
 
-def test_RoadMap_set_idea_SetsAttr():
+def test_RoadMap_set_title_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_roadmap = roadmap_shop(None)
-    assert x_roadmap.ideamap.otx2inx == {}
+    assert x_roadmap.titlemap.otx2inx == {}
 
     # WHEN
-    x_roadmap.set_idea(xio_str, sue_str)
+    x_roadmap.set_title(xio_str, sue_str)
 
     # THEN
-    assert x_roadmap.ideamap.otx2inx == {xio_str: sue_str}
+    assert x_roadmap.titlemap.otx2inx == {xio_str: sue_str}
 
 
-def test_RoadMap_set_idea_RaisesExceptionWhen_bridge_In_otx_idea():
+def test_RoadMap_set_title_RaisesExceptionWhen_bridge_In_otx_title():
     # ESTABLISH
     x_roadmap = roadmap_shop(None)
     sue_otx = f"Sue{x_roadmap.otx_bridge}"
     sue_inx = "Sue"
-    assert x_roadmap.ideamap.otx2inx == {}
+    assert x_roadmap.titlemap.otx2inx == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_roadmap.set_idea(sue_otx, sue_inx)
-    exception_str = f"idea cannot have otx_idea '{sue_otx}'. It must be not have bridge {x_roadmap.otx_bridge}."
+        x_roadmap.set_title(sue_otx, sue_inx)
+    exception_str = f"title cannot have otx_title '{sue_otx}'. It must be not have bridge {x_roadmap.otx_bridge}."
     assert str(excinfo.value) == exception_str
 
 
-def test_RoadMap_set_idea_RaisesExceptionWhen_bridge_In_inx_idea():
+def test_RoadMap_set_title_RaisesExceptionWhen_bridge_In_inx_title():
     # ESTABLISH
     x_roadmap = roadmap_shop(None)
     sue_inx = f"Sue{x_roadmap.otx_bridge}"
     sue_otx = "Sue"
-    assert x_roadmap.ideamap.otx2inx == {}
+    assert x_roadmap.titlemap.otx2inx == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_roadmap.set_idea(sue_otx, sue_inx)
-    exception_str = f"idea cannot have inx_idea '{sue_inx}'. It must be not have bridge {x_roadmap.inx_bridge}."
+        x_roadmap.set_title(sue_otx, sue_inx)
+    exception_str = f"title cannot have inx_title '{sue_inx}'. It must be not have bridge {x_roadmap.inx_bridge}."
     assert str(excinfo.value) == exception_str
 
 
-def test_RoadMap_get_inx_idea_ReturnsObj():
+def test_RoadMap_get_inx_title_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_roadmap = roadmap_shop(None)
-    assert x_roadmap._get_inx_idea(xio_str) != sue_str
+    assert x_roadmap._get_inx_title(xio_str) != sue_str
 
     # WHEN
-    x_roadmap.set_idea(xio_str, sue_str)
+    x_roadmap.set_title(xio_str, sue_str)
 
     # THEN
-    assert x_roadmap._get_inx_idea(xio_str) == sue_str
+    assert x_roadmap._get_inx_title(xio_str) == sue_str
 
 
-def test_RoadMap_idea_exists_ReturnsObj():
-    # ESTABLISH
-    xio_str = "Xio"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    zia_str = "Zia"
-    x_roadmap = roadmap_shop(None)
-    assert x_roadmap.idea_exists(xio_str, sue_str) is False
-    assert x_roadmap.idea_exists(xio_str, zia_str) is False
-    assert x_roadmap.idea_exists(xio_str, bob_str) is False
-    assert x_roadmap.idea_exists(zia_str, zia_str) is False
-
-    # WHEN
-    x_roadmap.set_idea(xio_str, sue_str)
-
-    # THEN
-    assert x_roadmap.idea_exists(xio_str, sue_str)
-    assert x_roadmap.idea_exists(xio_str, zia_str) is False
-    assert x_roadmap.idea_exists(xio_str, bob_str) is False
-    assert x_roadmap.idea_exists(zia_str, zia_str) is False
-
-    # WHEN
-    x_roadmap.set_idea(zia_str, zia_str)
-
-    # THEN
-    assert x_roadmap.idea_exists(xio_str, sue_str)
-    assert x_roadmap.idea_exists(xio_str, zia_str) is False
-    assert x_roadmap.idea_exists(xio_str, bob_str) is False
-    assert x_roadmap.idea_exists(zia_str, zia_str)
-
-
-def test_RoadMap_otx_idea_exists_ReturnsObj():
+def test_RoadMap_title_exists_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
     x_roadmap = roadmap_shop(None)
-    assert x_roadmap.otx_idea_exists(xio_str) is False
-    assert x_roadmap.otx_idea_exists(sue_str) is False
-    assert x_roadmap.otx_idea_exists(bob_str) is False
-    assert x_roadmap.otx_idea_exists(zia_str) is False
+    assert x_roadmap.title_exists(xio_str, sue_str) is False
+    assert x_roadmap.title_exists(xio_str, zia_str) is False
+    assert x_roadmap.title_exists(xio_str, bob_str) is False
+    assert x_roadmap.title_exists(zia_str, zia_str) is False
 
     # WHEN
-    x_roadmap.set_idea(xio_str, sue_str)
+    x_roadmap.set_title(xio_str, sue_str)
 
     # THEN
-    assert x_roadmap.otx_idea_exists(xio_str)
-    assert x_roadmap.otx_idea_exists(sue_str) is False
-    assert x_roadmap.otx_idea_exists(bob_str) is False
-    assert x_roadmap.otx_idea_exists(zia_str) is False
+    assert x_roadmap.title_exists(xio_str, sue_str)
+    assert x_roadmap.title_exists(xio_str, zia_str) is False
+    assert x_roadmap.title_exists(xio_str, bob_str) is False
+    assert x_roadmap.title_exists(zia_str, zia_str) is False
 
     # WHEN
-    x_roadmap.set_idea(zia_str, zia_str)
+    x_roadmap.set_title(zia_str, zia_str)
 
     # THEN
-    assert x_roadmap.otx_idea_exists(xio_str)
-    assert x_roadmap.otx_idea_exists(sue_str) is False
-    assert x_roadmap.otx_idea_exists(bob_str) is False
-    assert x_roadmap.otx_idea_exists(zia_str)
+    assert x_roadmap.title_exists(xio_str, sue_str)
+    assert x_roadmap.title_exists(xio_str, zia_str) is False
+    assert x_roadmap.title_exists(xio_str, bob_str) is False
+    assert x_roadmap.title_exists(zia_str, zia_str)
 
 
-def test_RoadMap_del_idea_SetsAttr():
+def test_RoadMap_otx_title_exists_ReturnsObj():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    zia_str = "Zia"
+    x_roadmap = roadmap_shop(None)
+    assert x_roadmap.otx_title_exists(xio_str) is False
+    assert x_roadmap.otx_title_exists(sue_str) is False
+    assert x_roadmap.otx_title_exists(bob_str) is False
+    assert x_roadmap.otx_title_exists(zia_str) is False
+
+    # WHEN
+    x_roadmap.set_title(xio_str, sue_str)
+
+    # THEN
+    assert x_roadmap.otx_title_exists(xio_str)
+    assert x_roadmap.otx_title_exists(sue_str) is False
+    assert x_roadmap.otx_title_exists(bob_str) is False
+    assert x_roadmap.otx_title_exists(zia_str) is False
+
+    # WHEN
+    x_roadmap.set_title(zia_str, zia_str)
+
+    # THEN
+    assert x_roadmap.otx_title_exists(xio_str)
+    assert x_roadmap.otx_title_exists(sue_str) is False
+    assert x_roadmap.otx_title_exists(bob_str) is False
+    assert x_roadmap.otx_title_exists(zia_str)
+
+
+def test_RoadMap_del_title_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_roadmap = roadmap_shop(None)
-    x_roadmap.set_idea(xio_str, sue_str)
-    assert x_roadmap.idea_exists(xio_str, sue_str)
+    x_roadmap.set_title(xio_str, sue_str)
+    assert x_roadmap.title_exists(xio_str, sue_str)
 
     # WHEN
-    x_roadmap.del_idea(xio_str)
+    x_roadmap.del_title(xio_str)
 
     # THEN
-    assert x_roadmap.idea_exists(xio_str, sue_str) is False
+    assert x_roadmap.title_exists(xio_str, sue_str) is False
 
 
-def test_RoadMap_set_idea_Edits_otx2inx():
+def test_RoadMap_set_title_Edits_otx2inx():
     # ESTABLISH
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
@@ -450,7 +450,7 @@ def test_RoadMap_set_idea_Edits_otx2inx():
 
     # WHEN
     menage_inx_str = "menage"
-    x_roadmap.set_idea(clean_otx_str, menage_inx_str)
+    x_roadmap.set_title(clean_otx_str, menage_inx_str)
 
     # THEN
     menage_inx_road = create_road(casa_inx_road, menage_inx_str)
@@ -511,7 +511,7 @@ def test_get_roadmap_from_dict_ReturnsObj():
     slash_otx_bridge = "/"
     x_roadmap = roadmap_shop(sue_str, event7, otx_bridge=slash_otx_bridge)
     x_roadmap.set_otx2inx(clean_otx, clean_inx)
-    x_roadmap.set_idea("bob", "bobito")
+    x_roadmap.set_title("bob", "bobito")
 
     # WHEN
     gen_roadmap = get_roadmap_from_dict(x_roadmap.get_dict())
@@ -520,9 +520,9 @@ def test_get_roadmap_from_dict_ReturnsObj():
     assert gen_roadmap.face_name == x_roadmap.face_name
     assert gen_roadmap.event_int == x_roadmap.event_int
     assert gen_roadmap.event_int == event7
-    assert gen_roadmap.ideamap.face_name == x_roadmap.ideamap.face_name
-    assert gen_roadmap.ideamap.otx2inx != x_roadmap.ideamap.otx2inx
-    assert gen_roadmap.ideamap != x_roadmap.ideamap
+    assert gen_roadmap.titlemap.face_name == x_roadmap.titlemap.face_name
+    assert gen_roadmap.titlemap.otx2inx != x_roadmap.titlemap.otx2inx
+    assert gen_roadmap.titlemap != x_roadmap.titlemap
     assert gen_roadmap.otx2inx == x_roadmap.otx2inx
     assert gen_roadmap.otx_bridge == x_roadmap.otx_bridge
     assert gen_roadmap.inx_bridge == x_roadmap.inx_bridge
@@ -536,7 +536,7 @@ def test_get_roadmap_from_json_ReturnsObj():
     slash_otx_bridge = "/"
     x_roadmap = roadmap_shop(slash_otx_bridge)
     x_roadmap.set_otx2inx(clean_otx, clean_inx)
-    x_roadmap.set_idea("bob", "bobito")
+    x_roadmap.set_title("bob", "bobito")
 
     # WHEN
     x_roadmap = get_roadmap_from_json(x_roadmap.get_json())
@@ -579,18 +579,18 @@ def test_RoadMap_is_valid_ReturnsObj_Scenario0_item_title_str():
     otx_bridge = "/"
     casa_otx = f"casa{otx_bridge}"
     casa_inx = "casa"
-    ideaunit_roadmap = roadmap_shop(otx_bridge=otx_bridge)
-    assert ideaunit_roadmap.is_valid()
+    titleunit_roadmap = roadmap_shop(otx_bridge=otx_bridge)
+    assert titleunit_roadmap.is_valid()
 
     # WHEN
-    ideaunit_roadmap.set_otx2inx(clean_str, clean_inx)
+    titleunit_roadmap.set_otx2inx(clean_str, clean_inx)
     # THEN
-    assert ideaunit_roadmap.is_valid()
+    assert titleunit_roadmap.is_valid()
 
     # WHEN
-    ideaunit_roadmap.set_otx2inx(casa_otx, casa_inx)
+    titleunit_roadmap.set_otx2inx(casa_otx, casa_inx)
     # THEN
-    assert ideaunit_roadmap.is_valid() is False
+    assert titleunit_roadmap.is_valid() is False
 
 
 def test_RoadMap_is_valid_ReturnsObj_Scenario1_road_str():

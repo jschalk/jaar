@@ -4,8 +4,8 @@
             "acct_name": {
                 "jaar_type": "AcctName"
             },
-            "cmty_idea": {
-                "jaar_type": "IdeaUnit"
+            "cmty_title": {
+                "jaar_type": "TitleUnit"
             },
             "owner_name": {
                 "jaar_type": "AcctName"
@@ -22,11 +22,11 @@
     },
     "cmty_timeline_hour": {
         "jkeys": {
-            "cmty_idea": {
-                "jaar_type": "IdeaUnit"
+            "cmty_title": {
+                "jaar_type": "TitleUnit"
             },
-            "hour_idea": {
-                "jaar_type": "IdeaUnit"
+            "hour_title": {
+                "jaar_type": "TitleUnit"
             }
         },
         "jvalues": {
@@ -37,11 +37,11 @@
     },
     "cmty_timeline_month": {
         "jkeys": {
-            "cmty_idea": {
-                "jaar_type": "IdeaUnit"
+            "cmty_title": {
+                "jaar_type": "TitleUnit"
             },
-            "month_idea": {
-                "jaar_type": "IdeaUnit"
+            "month_title": {
+                "jaar_type": "TitleUnit"
             }
         },
         "jvalues": {
@@ -52,11 +52,11 @@
     },
     "cmty_timeline_weekday": {
         "jkeys": {
-            "cmty_idea": {
-                "jaar_type": "IdeaUnit"
+            "cmty_title": {
+                "jaar_type": "TitleUnit"
             },
-            "weekday_idea": {
-                "jaar_type": "IdeaUnit"
+            "weekday_title": {
+                "jaar_type": "TitleUnit"
             }
         },
         "jvalues": {
@@ -67,8 +67,8 @@
     },
     "cmty_deal_episode": {
         "jkeys": {
-            "cmty_idea": {
-                "jaar_type": "IdeaUnit"
+            "cmty_title": {
+                "jaar_type": "TitleUnit"
             },
             "owner_name": {
                 "jaar_type": "AcctName"
@@ -85,8 +85,8 @@
     },
     "cmtyunit": {
         "jkeys": {
-            "cmty_idea": {
-                "jaar_type": "IdeaUnit"
+            "cmty_title": {
+                "jaar_type": "TitleUnit"
             }
         },
         "jvalues": {
@@ -111,8 +111,8 @@
             "respect_bit": {
                 "jaar_type": "float"
             },
-            "timeline_idea": {
-                "jaar_type": "IdeaUnit"
+            "timeline_title": {
+                "jaar_type": "TitleUnit"
             },
             "yr1_jan1_offset": {
                 "jaar_type": "int"

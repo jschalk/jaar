@@ -63,8 +63,8 @@ def type_RoadUnit_str() -> str:
     return "RoadUnit"
 
 
-def type_IdeaUnit_str() -> str:
-    return "IdeaUnit"
+def type_TitleUnit_str() -> str:
+    return "TitleUnit"
 
 
 def nullable_str() -> str:
@@ -99,8 +99,8 @@ def face_name_str() -> str:
     return "face_name"
 
 
-def cmty_idea_str() -> str:
-    return "cmty_idea"
+def cmty_title_str() -> str:
+    return "cmty_title"
 
 
 def owner_name_str() -> str:
@@ -293,7 +293,7 @@ def get_allowed_jaar_types() -> set[str]:
         "float",
         "GroupLabel",
         "int",
-        "IdeaUnit",
+        "TitleUnit",
         "RoadUnit",
         "TimeLinePoint",
     }
@@ -324,7 +324,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
         "gogo_want": "float",
         "group_label": "GroupLabel",
         "healer_name": "AcctName",
-        "item_title": "IdeaUnit",
+        "item_title": "TitleUnit",
         "mass": "int",
         "max_tree_traverse": "int",
         "morph": "bool",

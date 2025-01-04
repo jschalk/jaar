@@ -65,7 +65,7 @@ from src.f04_gift.atom_config import (
     team_label_str,
     type_AcctName_str,
     type_GroupLabel_str,
-    type_IdeaUnit_str,
+    type_TitleUnit_str,
     type_RoadUnit_str,
 )
 
@@ -112,7 +112,7 @@ def test_str_functions_ReturnsObj():
     assert team_label_str() == "team_label"
     assert type_AcctName_str() == "AcctName"
     assert type_GroupLabel_str() == "GroupLabel"
-    assert type_IdeaUnit_str() == "IdeaUnit"
+    assert type_TitleUnit_str() == "TitleUnit"
     assert type_RoadUnit_str() == "RoadUnit"
 
 
@@ -578,7 +578,7 @@ def test_get_allowed_jaar_types_ReturnsObj():
         "int",
         type_AcctName_str(),
         type_GroupLabel_str(),
-        type_IdeaUnit_str(),
+        type_TitleUnit_str(),
         type_RoadUnit_str(),
         "float",
         "bool",
@@ -660,7 +660,7 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     assert x_jaar_types.get(gogo_want_str()) == "float"
     assert x_jaar_types.get(group_label_str()) == type_GroupLabel_str()
     assert x_jaar_types.get(healer_name_str()) == type_AcctName_str()
-    assert x_jaar_types.get("item_title") == type_IdeaUnit_str()
+    assert x_jaar_types.get("item_title") == type_TitleUnit_str()
     assert x_jaar_types.get("mass") == "int"
     assert x_jaar_types.get("max_tree_traverse") == "int"
     assert x_jaar_types.get(morph_str()) == "bool"

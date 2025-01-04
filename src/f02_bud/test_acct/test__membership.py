@@ -93,7 +93,7 @@ def test_membership_shop_ReturnsCorrectObjAttr_acct_name():
     assert swim_membership._acct_name == yao_str
 
 
-# def test_MemberShip_set_group_label_RaisesErrorIf_group_label_IsNotAcctNameAndIsIdeaUnit():
+# def test_MemberShip_set_group_label_RaisesErrorIf_group_label_IsNotAcctNameAndIsTitleUnit():
 #     # ESTABLISH
 #     slash_str = "/"
 #     # bob_str = f"Bob{slash_str}Texas"
@@ -106,7 +106,7 @@ def test_membership_shop_ReturnsCorrectObjAttr_acct_name():
 #         membership_shop(swim_str, _acct_name=bob_str, _bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{swim_str}' needs to not be a IdeaUnit. Must contain bridge: '{slash_str}'"
+#         == f"'{swim_str}' needs to not be a TitleUnit. Must contain bridge: '{slash_str}'"
 #     )
 
 

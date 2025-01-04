@@ -8,7 +8,7 @@ from src.f08_pidgin.examples.pidgin_env import (
     get_example_face_dir,
 )
 from src.f08_pidgin.examples.example_pidgins import (
-    get_casa_maison_pidginunit_set_by_idea,
+    get_casa_maison_pidginunit_set_by_title,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
     get_clean_roadmap,
@@ -105,7 +105,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
-    sue_pidginunit = get_casa_maison_pidginunit_set_by_idea()
+    sue_pidginunit = get_casa_maison_pidginunit_set_by_title()
     sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_name}"
     save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
     sue_otx_dt = get_casa_maison_road_otx_dt()
@@ -148,7 +148,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    sue_pidginunit = get_casa_maison_pidginunit_set_by_idea()
+    sue_pidginunit = get_casa_maison_pidginunit_set_by_title()
     sue_pidginunit.set_acctmap(get_suita_acctmap())
     sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_name}"
     pidginunit_file_path = f"{sue_dir}/{pidgin_filename()}"

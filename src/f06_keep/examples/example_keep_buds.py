@@ -1,58 +1,58 @@
-from src.f02_bud.bud import BudUnit, budunit_shop, itemunit_shop, CmtyIdea
-from src.f06_keep.examples.keep_env import temp_cmty_idea
+from src.f02_bud.bud import BudUnit, budunit_shop, itemunit_shop, CmtyTitle
+from src.f06_keep.examples.keep_env import temp_cmty_title
 
 
-def get_1idea_bud() -> BudUnit:
+def get_1title_bud() -> BudUnit:
     x_bud = budunit_shop("A")
-    x_bud.set_cmty_idea(temp_cmty_idea())
+    x_bud.set_cmty_title(temp_cmty_title())
     x_bud.settle_bud()
     return x_bud
 
 
-def get_Jidea2idea_bud() -> BudUnit:
+def get_Jtitle2title_bud() -> BudUnit:
     x_bud = budunit_shop("J")
-    x_bud.set_cmty_idea(temp_cmty_idea())
+    x_bud.set_cmty_title(temp_cmty_title())
     x_bud.set_l1_item(itemunit_shop("A"))
     x_bud.settle_bud()
     return x_bud
 
 
-def get_2idea_bud(cmty_idea: CmtyIdea = None) -> BudUnit:
-    if cmty_idea is None:
-        cmty_idea = temp_cmty_idea()
+def get_2title_bud(cmty_title: CmtyTitle = None) -> BudUnit:
+    if cmty_title is None:
+        cmty_title = temp_cmty_title()
     a_str = "A"
     b_str = "B"
     x_bud = budunit_shop(owner_name=a_str)
-    x_bud.set_cmty_idea(cmty_idea)
+    x_bud.set_cmty_title(cmty_title)
     item_b = itemunit_shop(b_str)
-    x_bud.set_item(item_b, parent_road=temp_cmty_idea())
+    x_bud.set_item(item_b, parent_road=temp_cmty_title())
     x_bud.settle_bud()
     return x_bud
 
 
-def get_3idea_bud() -> BudUnit:
+def get_3title_bud() -> BudUnit:
     a_str = "A"
     x_bud = budunit_shop(a_str)
-    x_bud.set_cmty_idea(temp_cmty_idea())
+    x_bud.set_cmty_title(temp_cmty_title())
     x_bud.set_l1_item(itemunit_shop("B"))
     x_bud.set_l1_item(itemunit_shop("C"))
     x_bud.settle_bud()
     return x_bud
 
 
-def get_3idea_D_E_F_bud() -> BudUnit:
+def get_3title_D_E_F_bud() -> BudUnit:
     d_str = "D"
     x_bud = budunit_shop(d_str)
-    x_bud.set_cmty_idea(temp_cmty_idea())
+    x_bud.set_cmty_title(temp_cmty_title())
     x_bud.set_l1_item(itemunit_shop("E"))
     x_bud.set_l1_item(itemunit_shop("F"))
     x_bud.settle_bud()
     return x_bud
 
 
-def get_6idea_bud() -> BudUnit:
+def get_6title_bud() -> BudUnit:
     x_bud = budunit_shop("A")
-    x_bud.set_cmty_idea(temp_cmty_idea())
+    x_bud.set_cmty_title(temp_cmty_title())
     x_bud.set_l1_item(itemunit_shop("B"))
     x_bud.set_l1_item(itemunit_shop("C"))
     c_road = x_bud.make_l1_road("C")
@@ -63,9 +63,9 @@ def get_6idea_bud() -> BudUnit:
     return x_bud
 
 
-def get_7ideaInsertH_bud() -> BudUnit:
+def get_7titleInsertH_bud() -> BudUnit:
     x_bud = budunit_shop("A")
-    x_bud.set_cmty_idea(temp_cmty_idea())
+    x_bud.set_cmty_title(temp_cmty_title())
     x_bud.set_l1_item(itemunit_shop("B"))
     x_bud.set_l1_item(itemunit_shop("C"))
     c_road = x_bud.make_l1_road("C")
@@ -77,9 +77,9 @@ def get_7ideaInsertH_bud() -> BudUnit:
     return x_bud
 
 
-def get_5ideaHG_bud() -> BudUnit:
+def get_5titleHG_bud() -> BudUnit:
     x_bud = budunit_shop("A")
-    x_bud.set_cmty_idea(temp_cmty_idea())
+    x_bud.set_cmty_title(temp_cmty_title())
     x_bud.set_l1_item(itemunit_shop("B"))
     x_bud.set_l1_item(itemunit_shop("C"))
     c_road = x_bud.make_l1_road("C")
@@ -89,9 +89,9 @@ def get_5ideaHG_bud() -> BudUnit:
     return x_bud
 
 
-def get_7ideaJRoot_bud() -> BudUnit:
+def get_7titleJRoot_bud() -> BudUnit:
     x_bud = budunit_shop("J")
-    x_bud.set_cmty_idea(temp_cmty_idea())
+    x_bud.set_cmty_title(temp_cmty_title())
     x_bud.set_l1_item(itemunit_shop("A"))
 
     a_road = x_bud.make_l1_road("A")

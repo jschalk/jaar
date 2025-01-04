@@ -1,6 +1,6 @@
 from src.f01_road.finance import default_fund_coin_if_None
 from src.f01_road.road import (
-    get_default_cmty_idea as root_idea,
+    get_default_cmty_title as root_title,
     create_road,
     default_bridge_if_None,
 )
@@ -55,7 +55,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit._fund_onset is None
     assert x_itemunit._fund_cease is None
     assert x_itemunit._root is None
-    assert x_itemunit._bud_cmty_idea is None
+    assert x_itemunit._bud_cmty_title is None
     assert x_itemunit._healerlink_ratio is None
 
 
@@ -68,7 +68,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit._kids == {}
     assert x_itemunit.mass == 1
     assert x_itemunit._item_title is None
-    assert x_itemunit._bud_cmty_idea == root_idea()
+    assert x_itemunit._bud_cmty_title == root_title()
     assert x_itemunit._uid is None
     assert x_itemunit.begin is None
     assert x_itemunit.close is None
@@ -183,7 +183,7 @@ def test_itemunit_shop_ReturnsObjWithParameters():
 def test_ItemUnit_get_obj_key_ReturnsCorrectObj():
     # ESTABLISH
     round_str = "round_stuff"
-    round_road = create_road(root_idea(), round_str)
+    round_road = create_road(root_title(), round_str)
     ball_str = "ball"
 
     # WHEN
@@ -197,7 +197,7 @@ def test_ItemUnit_get_road_ReturnsCorrectObj():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_road = create_road(root_idea(), round_str, bridge=slash_str)
+    round_road = create_road(root_title(), round_str, bridge=slash_str)
     ball_str = "ball"
 
     # WHEN
@@ -212,13 +212,13 @@ def test_ItemUnit_set_parent_road_SetsAttr():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_road = create_road(root_idea(), round_str, bridge=slash_str)
+    round_road = create_road(root_title(), round_str, bridge=slash_str)
     ball_str = "ball"
     ball_item = itemunit_shop(ball_str, _parent_road=round_road, _bridge=slash_str)
     assert ball_item._parent_road == round_road
 
     # WHEN
-    sports_road = create_road(root_idea(), "sports", bridge=slash_str)
+    sports_road = create_road(root_title(), "sports", bridge=slash_str)
     ball_item.set_parent_road(parent_road=sports_road)
 
     # THEN

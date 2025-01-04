@@ -7,7 +7,7 @@ from pytest import raises as pytest_raises
 def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_UnitDoesNotErrorWithEmptyBudUnit():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     assert not root_item.begin
     assert not root_item.close
     assert not root_item._gogo_calc
@@ -23,10 +23,10 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Un
     assert not root_item._stop_calc
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_DoesNotErrorWhenNoMathIdeas():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_DoesNotErrorWhenNoMathTitles():
     # ESTABLISH
     yao_bud = get_budunit_with_4_levels_and_2reasons()
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     assert not root_item._gogo_calc
 
     # WHEM
@@ -36,14 +36,14 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Do
     assert not root_item._gogo_calc
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_SimpleIdea():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_SimpleTitle():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_begin = 7
     time0_close = 31
-    yao_bud.edit_item_attr(yao_bud.cmty_idea, begin=time0_begin, close=time0_close)
+    yao_bud.edit_item_attr(yao_bud.cmty_title, begin=time0_begin, close=time0_close)
     yao_bud._set_item_dict()
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     assert root_item.begin == time0_begin
     assert root_item.close == time0_close
     assert not root_item._gogo_calc
@@ -59,19 +59,19 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Si
     assert root_item._stop_calc == time0_close
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_IdeaWith_denom():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_TitleWith_denom():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_begin = 6
     time0_close = 21
     time0_denom = 3
     yao_bud.edit_item_attr(
-        yao_bud.cmty_idea,
+        yao_bud.cmty_title,
         begin=time0_begin,
         close=time0_close,
         denom=time0_denom,
     )
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     yao_bud._set_item_dict()
     assert root_item.begin == time0_begin
     assert root_item.close == time0_close
@@ -91,7 +91,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Id
     assert root_item._stop_calc == 7
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_IdeaWith_denom_numor():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_TitleWith_denom_numor():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_begin = 6
@@ -99,13 +99,13 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Id
     time0_numor = 7
     time0_denom = 3
     yao_bud.edit_item_attr(
-        yao_bud.cmty_idea,
+        yao_bud.cmty_title,
         begin=time0_begin,
         close=time0_close,
         numor=time0_numor,
         denom=time0_denom,
     )
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     yao_bud._set_item_dict()
     assert root_item.begin == time0_begin
     assert root_item.close == time0_close
@@ -126,20 +126,20 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Id
     assert root_item._stop_calc == 42
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_IdeaWith_addin():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_TitleWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_begin = 6
     time0_close = 18
     time0_addin = 7
     yao_bud.edit_item_attr(
-        yao_bud.cmty_idea,
+        yao_bud.cmty_title,
         begin=time0_begin,
         close=time0_close,
         addin=time0_addin,
     )
     yao_bud._set_item_dict()
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     assert root_item.begin == time0_begin
     assert root_item.close == time0_close
     assert root_item.addin == time0_addin
@@ -158,7 +158,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Id
     assert root_item._stop_calc == 25
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_IdeaWith_denom_addin():
+def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_TitleWith_denom_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_begin = 6
@@ -166,14 +166,14 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Id
     time0_denom = 3
     time0_addin = 60
     yao_bud.edit_item_attr(
-        yao_bud.cmty_idea,
+        yao_bud.cmty_title,
         begin=time0_begin,
         close=time0_close,
         denom=time0_denom,
         addin=time0_addin,
     )
     yao_bud._set_item_dict()
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     assert root_item.begin == time0_begin
     assert root_item.close == time0_close
     assert root_item.denom == time0_denom
@@ -207,7 +207,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     time1_road = yao_bud.make_road(time0_road, time1_str)
     yao_bud.set_item(itemunit_shop(time1_str), time0_road)
     time1_item = yao_bud.get_item_obj(time1_road)
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc
@@ -232,7 +232,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     assert yao_bud._range_inheritors == {time1_road: time0_road}
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_IdeaWith_denom():
+def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_TitleWith_denom():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -247,7 +247,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     time1_road = yao_bud.make_road(time0_road, time1_str)
     yao_bud.set_item(itemunit_shop(time1_str, denom=time1_denom), time0_road)
     time1_item = yao_bud.get_item_obj(time1_road)
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc
@@ -270,7 +270,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     assert time1_item._stop_calc == 5
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_IdeaWith_denom_numor():
+def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_TitleWith_denom_numor():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -287,7 +287,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     temp_item = itemunit_shop(time1_str, numor=time1_numor, denom=time1_denom)
     yao_bud.set_item(temp_item, time0_road)
     time1_item = yao_bud.get_item_obj(time1_road)
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc
@@ -310,7 +310,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     assert time1_item._stop_calc == 15
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_IdeaWith_addin():
+def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_TitleWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -326,7 +326,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     temp_item = itemunit_shop(time1_str, addin=time1_addin)
     yao_bud.set_item(temp_item, time0_road)
     time1_item = yao_bud.get_item_obj(time1_road)
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc
@@ -350,7 +350,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     assert time1_item._stop_calc == 12
 
 
-def test_BudUnit_set_itemtree_range_attrs_Sets2LevelsDescendentItem_gogo_calc_stop_calc_IdeaWith_addin():
+def test_BudUnit_set_itemtree_range_attrs_Sets2LevelsDescendentItem_gogo_calc_stop_calc_TitleWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -369,7 +369,7 @@ def test_BudUnit_set_itemtree_range_attrs_Sets2LevelsDescendentItem_gogo_calc_st
     x_time2_item = itemunit_shop(time2_str, addin=time2_addin)
     yao_bud.set_item(x_time2_item, time1_road)
     time2_item = yao_bud.get_item_obj(time2_road)
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc
@@ -395,7 +395,7 @@ def test_BudUnit_set_itemtree_range_attrs_Sets2LevelsDescendentItem_gogo_calc_st
     assert yao_bud._range_inheritors == {time1_road: time0_road, time2_road: time0_road}
 
 
-def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_IdeaWith_denom_addin():
+def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_TitleWith_denom_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -412,7 +412,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     temp_item = itemunit_shop(time1_str, denom=time1_denom, addin=time1_addin)
     yao_bud.set_item(temp_item, time0_road)
     time1_item = yao_bud.get_item_obj(time1_road)
-    root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc

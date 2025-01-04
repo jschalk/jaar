@@ -19,7 +19,7 @@ from src.f01_road.finance import (
     valid_finance_ratio,
     get_net,
 )
-from src.f01_road.road import CmtyIdea
+from src.f01_road.road import CmtyTitle
 from inspect import getdoc as inspect_getdoc
 from pytest import raises as pytest_raises
 

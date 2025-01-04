@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, cmty_idea_str
-from src.f07_cmty.cmty_config import cumlative_minute_str, hour_idea_str
+from src.f04_gift.atom_config import face_name_str, cmty_title_str
+from src.f07_cmty.cmty_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import (
     event_int_str,
     inx_bridge_str,
@@ -36,8 +36,8 @@ def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario0_Sin
     brick_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
-        hour_idea_str(),
+        cmty_title_str(),
+        hour_title_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
@@ -89,8 +89,8 @@ def test_etl_boat_bricks_to_bow_face_bricks_CreatesFaceBrickSheets_Scenario1_Mul
     brick_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
-        hour_idea_str(),
+        cmty_title_str(),
+        hour_title_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
@@ -146,8 +146,8 @@ def test_etl_boat_bricks_to_bow_face_bricks_Scenario2_PidginCategoryBricksAreNot
     br00003_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
-        hour_idea_str(),
+        cmty_title_str(),
+        hour_title_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"

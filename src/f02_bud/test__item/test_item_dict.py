@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_cmty_idea as root_idea, create_road
+from src.f01_road.road import get_default_cmty_title as root_title, create_road
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.group import awardlink_shop
 from src.f02_bud.reason_item import (
@@ -64,11 +64,11 @@ def test_get_obj_from_item_dict_ReturnsCorrect_HealerLink():
 def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     # ESTABLISH
     week_str = "weekdays"
-    week_road = create_road(root_idea(), week_str)
+    week_road = create_road(root_title(), week_str)
     wed_str = "Wednesday"
     wed_road = create_road(week_road, wed_str)
     states_str = "nation-state"
-    states_road = create_road(root_idea(), states_str)
+    states_road = create_road(root_title(), states_str)
     usa_str = "USA"
     usa_road = create_road(states_road, usa_str)
 
@@ -130,7 +130,7 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     sue_teamunit = teamunit_shop({sue_str: -1, yao_str: -1})
     yao_healerlink = healerlink_shop({yao_str})
     casa_str = "casa"
-    casa_road = create_road(root_idea(), casa_str)
+    casa_road = create_road(root_title(), casa_str)
     x_problem_bool = True
     casa_item = itemunit_shop(
         _parent_road=casa_road,
@@ -221,7 +221,7 @@ def test_ItemUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     ignore_str = "ignore"
 
     a_str = "a"
-    a_road = create_road(root_idea(), a_str)
+    a_road = create_road(root_title(), a_str)
     casa_item.set_factunit(factunit_shop(a_road, a_road))
 
     yao_str = "Yao"

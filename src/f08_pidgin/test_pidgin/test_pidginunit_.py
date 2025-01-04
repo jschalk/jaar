@@ -1,17 +1,17 @@
 from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.road import default_bridge_if_None
-from src.f03_chrono.chrono import timeline_idea_str
+from src.f03_chrono.chrono import timeline_title_str
 from src.f04_gift.atom_config import (
     get_atom_args_jaar_types,
     type_AcctName_str,
     type_GroupLabel_str,
-    type_IdeaUnit_str,
+    type_TitleUnit_str,
     type_RoadUnit_str,
     acct_name_str,
     awardee_label_str,
     base_str,
     face_name_str,
-    cmty_idea_str,
+    cmty_title_str,
     fund_coin_str,
     healer_name_str,
     group_label_str,
@@ -25,14 +25,14 @@ from src.f04_gift.atom_config import (
 )
 from src.f07_cmty.cmty_config import (
     get_cmty_args_jaar_types,
-    weekday_idea_str,
-    month_idea_str,
-    hour_idea_str,
+    weekday_title_str,
+    month_title_str,
+    hour_title_str,
 )
 from src.f08_pidgin.map import (
     groupmap_shop,
     acctmap_shop,
-    ideamap_shop,
+    titlemap_shop,
     roadmap_shop,
 )
 from src.f08_pidgin.pidgin_config import get_pidgin_args_jaar_types
@@ -45,9 +45,9 @@ from src.f08_pidgin.pidgin import (
 from src.f08_pidgin.examples.example_pidgins import (
     get_invalid_acctmap,
     get_invalid_groupmap,
-    get_invalid_ideamap,
+    get_invalid_titlemap,
     get_clean_roadmap,
-    get_clean_ideamap,
+    get_clean_titlemap,
     get_swim_groupmap,
     get_suita_acctmap,
 )
@@ -83,7 +83,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("denom") == "int"
     assert pidgin_args_jaar_types.get("divisor") == "int"
     assert pidgin_args_jaar_types.get("face_name") == type_AcctName_str()
-    assert pidgin_args_jaar_types.get("cmty_idea") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("cmty_title") == type_TitleUnit_str()
     assert pidgin_args_jaar_types.get("fnigh") == "float"
     assert pidgin_args_jaar_types.get("fopen") == "float"
     assert pidgin_args_jaar_types.get("fund_coin") == "float"
@@ -92,11 +92,11 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("gogo_want") == "float"
     assert pidgin_args_jaar_types.get("group_label") == type_GroupLabel_str()
     assert pidgin_args_jaar_types.get("healer_name") == type_AcctName_str()
-    assert pidgin_args_jaar_types.get("hour_idea") == type_IdeaUnit_str()
-    assert pidgin_args_jaar_types.get("item_title") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("hour_title") == type_TitleUnit_str()
+    assert pidgin_args_jaar_types.get("item_title") == type_TitleUnit_str()
     assert pidgin_args_jaar_types.get("mass") == "int"
     assert pidgin_args_jaar_types.get("max_tree_traverse") == "int"
-    assert pidgin_args_jaar_types.get("month_idea") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("month_title") == type_TitleUnit_str()
     assert pidgin_args_jaar_types.get("monthday_distortion") == "int"
     assert pidgin_args_jaar_types.get("morph") == "bool"
     assert pidgin_args_jaar_types.get("need") == type_RoadUnit_str()
@@ -118,8 +118,8 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("tally") == "int"
     assert pidgin_args_jaar_types.get("team_label") == type_GroupLabel_str()
     assert pidgin_args_jaar_types.get("time_int") == "TimeLinePoint"
-    assert pidgin_args_jaar_types.get("timeline_idea") == type_IdeaUnit_str()
-    assert pidgin_args_jaar_types.get("weekday_idea") == type_IdeaUnit_str()
+    assert pidgin_args_jaar_types.get("timeline_title") == type_TitleUnit_str()
+    assert pidgin_args_jaar_types.get("weekday_title") == type_TitleUnit_str()
     assert pidgin_args_jaar_types.get("weekday_order") == "int"
     assert pidgin_args_jaar_types.get("bridge") == "str"
     assert pidgin_args_jaar_types.get("yr1_jan1_offset") == "int"
@@ -171,7 +171,7 @@ def test_pidginable_jaar_types_ReturnsObj():
     assert x_pidginable_jaar_types == {
         type_AcctName_str(),
         type_GroupLabel_str(),
-        type_IdeaUnit_str(),
+        type_TitleUnit_str(),
         type_RoadUnit_str(),
     }
     print(f"{set(get_atom_args_jaar_types().values())=}")
@@ -188,20 +188,20 @@ def test_pidginable_atom_args_ReturnsObj():
         awardee_label_str(),
         base_str(),
         face_name_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
         group_label_str(),
         healer_name_str(),
-        hour_idea_str(),
+        hour_title_str(),
         item_title_str(),
-        month_idea_str(),
+        month_title_str(),
         parent_road_str(),
         "pick",
         "need",
         owner_name_str(),
         road_str(),
         team_label_str(),
-        timeline_idea_str(),
-        weekday_idea_str(),
+        timeline_title_str(),
+        weekday_title_str(),
     }
 
     print(f"{pidginable_jaar_types()=}")
@@ -224,7 +224,7 @@ def test_PidginUnit_Exists():
     assert not x_pidginunit.event_int
     assert not x_pidginunit.groupmap
     assert not x_pidginunit.acctmap
-    assert not x_pidginunit.ideamap
+    assert not x_pidginunit.titlemap
     assert not x_pidginunit.roadmap
     assert not x_pidginunit.unknown_word
     assert not x_pidginunit.otx_bridge
@@ -247,7 +247,7 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.inx_bridge == default_bridge_if_None()
     assert sue_pidginunit.groupmap == groupmap_shop(face_name=sue_str)
     assert sue_pidginunit.acctmap == acctmap_shop(face_name=sue_str)
-    assert sue_pidginunit.ideamap == ideamap_shop(face_name=sue_str)
+    assert sue_pidginunit.titlemap == titlemap_shop(face_name=sue_str)
     assert sue_pidginunit.roadmap == roadmap_shop(face_name=sue_str)
     assert sue_pidginunit.acctmap.event_int == 0
     assert sue_pidginunit.acctmap.unknown_word == default_unknown_word_if_None()
@@ -257,10 +257,10 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.groupmap.unknown_word == default_unknown_word_if_None()
     assert sue_pidginunit.groupmap.otx_bridge == default_bridge_if_None()
     assert sue_pidginunit.groupmap.inx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.ideamap.event_int == 0
-    assert sue_pidginunit.ideamap.unknown_word == default_unknown_word_if_None()
-    assert sue_pidginunit.ideamap.otx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.ideamap.inx_bridge == default_bridge_if_None()
+    assert sue_pidginunit.titlemap.event_int == 0
+    assert sue_pidginunit.titlemap.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.titlemap.otx_bridge == default_bridge_if_None()
+    assert sue_pidginunit.titlemap.inx_bridge == default_bridge_if_None()
     assert sue_pidginunit.roadmap.event_int == 0
     assert sue_pidginunit.roadmap.unknown_word == default_unknown_word_if_None()
     assert sue_pidginunit.roadmap.otx_bridge == default_bridge_if_None()
@@ -309,11 +309,11 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     assert sue_pidginunit.groupmap.unknown_word == y_uk
     assert sue_pidginunit.groupmap.otx_bridge == slash_otx_bridge
     assert sue_pidginunit.groupmap.inx_bridge == colon_inx_bridge
-    assert sue_pidginunit.ideamap.face_name == sue_str
-    assert sue_pidginunit.ideamap.event_int == five_event_int
-    assert sue_pidginunit.ideamap.unknown_word == y_uk
-    assert sue_pidginunit.ideamap.otx_bridge == slash_otx_bridge
-    assert sue_pidginunit.ideamap.inx_bridge == colon_inx_bridge
+    assert sue_pidginunit.titlemap.face_name == sue_str
+    assert sue_pidginunit.titlemap.event_int == five_event_int
+    assert sue_pidginunit.titlemap.unknown_word == y_uk
+    assert sue_pidginunit.titlemap.otx_bridge == slash_otx_bridge
+    assert sue_pidginunit.titlemap.inx_bridge == colon_inx_bridge
     assert sue_pidginunit.roadmap.face_name == sue_str
     assert sue_pidginunit.roadmap.event_int == five_event_int
     assert sue_pidginunit.roadmap.unknown_word == y_uk
@@ -452,26 +452,26 @@ def test_PidginUnit_get_mapunit_ReturnsObj():
     # WHEN / THEN
     assert sue_pu.get_mapunit(type_AcctName_str()) == sue_pu.acctmap
     assert sue_pu.get_mapunit(type_GroupLabel_str()) == sue_pu.groupmap
-    assert sue_pu.get_mapunit(type_IdeaUnit_str()) == sue_pu.ideamap
+    assert sue_pu.get_mapunit(type_TitleUnit_str()) == sue_pu.titlemap
     assert sue_pu.get_mapunit(type_RoadUnit_str()) == sue_pu.roadmap
 
     assert sue_pu.get_mapunit(type_AcctName_str()) != sue_pu.roadmap
     assert sue_pu.get_mapunit(type_GroupLabel_str()) != sue_pu.roadmap
-    assert sue_pu.get_mapunit(type_IdeaUnit_str()) != sue_pu.roadmap
+    assert sue_pu.get_mapunit(type_TitleUnit_str()) != sue_pu.roadmap
 
 
 def test_PidginUnit_is_valid_ReturnsObj():
     # ESTABLISH
     invalid_acctmap = get_invalid_acctmap()
     invalid_groupmap = get_invalid_groupmap()
-    invalid_ideamap = get_invalid_ideamap()
+    invalid_titlemap = get_invalid_titlemap()
     valid_acctmap = get_suita_acctmap()
     valid_groupmap = get_swim_groupmap()
-    valid_ideamap = get_clean_roadmap()
+    valid_titlemap = get_clean_roadmap()
     assert valid_acctmap.is_valid()
     assert valid_groupmap.is_valid()
-    assert valid_ideamap.is_valid()
-    assert invalid_ideamap.is_valid() is False
+    assert valid_titlemap.is_valid()
+    assert invalid_titlemap.is_valid() is False
     assert invalid_groupmap.is_valid() is False
     assert invalid_acctmap.is_valid() is False
 
@@ -480,7 +480,7 @@ def test_PidginUnit_is_valid_ReturnsObj():
     assert sue_pidginunit.is_valid()
     sue_pidginunit.set_acctmap(valid_acctmap)
     sue_pidginunit.set_groupmap(valid_groupmap)
-    sue_pidginunit.set_roadmap(valid_ideamap)
+    sue_pidginunit.set_roadmap(valid_titlemap)
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
@@ -496,9 +496,9 @@ def test_PidginUnit_is_valid_ReturnsObj():
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
-    sue_pidginunit.set_roadmap(invalid_ideamap)
+    sue_pidginunit.set_roadmap(invalid_titlemap)
     assert sue_pidginunit.is_valid() is False
-    sue_pidginunit.set_roadmap(valid_ideamap)
+    sue_pidginunit.set_roadmap(valid_titlemap)
     assert sue_pidginunit.is_valid()
 
 
@@ -534,17 +534,17 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_type_RoadUnit_str():
     assert roadmap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_set_otx2inx_SetsAttr_Scenario2_type_IdeaUnit_str():
+def test_PidginUnit_set_otx2inx_SetsAttr_Scenario2_type_TitleUnit_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    roadmap = zia_pidginunit.get_ideamap()
+    roadmap = zia_pidginunit.get_titlemap()
     assert roadmap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_otx2inx(type_IdeaUnit_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(type_TitleUnit_str(), sue_otx, sue_inx)
 
     # THEN
     assert roadmap.otx2inx_exists(sue_otx, sue_inx)
@@ -556,11 +556,11 @@ def test_PidginUnit_otx2inx_exists_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    road_type = type_IdeaUnit_str()
+    road_type = type_TitleUnit_str()
     assert zia_pidginunit.otx2inx_exists(road_type, sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_otx2inx(type_IdeaUnit_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(type_TitleUnit_str(), sue_otx, sue_inx)
 
     # THEN
     assert zia_pidginunit.otx2inx_exists(road_type, sue_otx, sue_inx)
@@ -587,9 +587,9 @@ def test_PidginUnit_del_otx2inx_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    road_type = type_IdeaUnit_str()
-    zia_pidginunit.set_otx2inx(type_IdeaUnit_str(), sue_otx, sue_inx)
-    zia_pidginunit.set_otx2inx(type_IdeaUnit_str(), zia_str, zia_str)
+    road_type = type_TitleUnit_str()
+    zia_pidginunit.set_otx2inx(type_TitleUnit_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(type_TitleUnit_str(), zia_str, zia_str)
     assert zia_pidginunit.otx2inx_exists(road_type, sue_otx, sue_inx)
     assert zia_pidginunit.otx2inx_exists(road_type, zia_str, zia_str)
 
@@ -601,68 +601,68 @@ def test_PidginUnit_del_otx2inx_ReturnsObj():
     assert zia_pidginunit.otx2inx_exists(road_type, zia_str, zia_str)
 
 
-def test_PidginUnit_set_idea_SetsAttr_Scenario1_type_RoadUnit_str():
+def test_PidginUnit_set_title_SetsAttr_Scenario1_type_RoadUnit_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
     roadmap = zia_pidginunit.get_roadmap()
-    assert roadmap.idea_exists(sue_otx, sue_inx) is False
+    assert roadmap.title_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_idea(sue_otx, sue_inx)
+    zia_pidginunit.set_title(sue_otx, sue_inx)
 
     # THEN
-    assert roadmap.idea_exists(sue_otx, sue_inx)
+    assert roadmap.title_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_idea_exists_ReturnsObj():
+def test_PidginUnit_title_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    sue_exists = zia_pidginunit.idea_exists(sue_otx, sue_inx)
+    sue_exists = zia_pidginunit.title_exists(sue_otx, sue_inx)
     assert sue_exists is False
 
     # WHEN
-    zia_pidginunit.set_idea(sue_otx, sue_inx)
+    zia_pidginunit.set_title(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit.idea_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.title_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_get_inx_idea_ReturnsObj():
+def test_PidginUnit_get_inx_title_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_inx_idea(sue_otx) != sue_inx
+    assert zia_pidginunit._get_inx_title(sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_idea(sue_otx, sue_inx)
+    zia_pidginunit.set_title(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit._get_inx_idea(sue_otx) == sue_inx
+    assert zia_pidginunit._get_inx_title(sue_otx) == sue_inx
 
 
-def test_PidginUnit_del_idea_ReturnsObj():
+def test_PidginUnit_del_title_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    zia_pidginunit.set_idea(sue_otx, sue_inx)
-    zia_pidginunit.set_idea(zia_str, zia_str)
-    assert zia_pidginunit.idea_exists(sue_otx, sue_inx)
-    assert zia_pidginunit.idea_exists(zia_str, zia_str)
+    zia_pidginunit.set_title(sue_otx, sue_inx)
+    zia_pidginunit.set_title(zia_str, zia_str)
+    assert zia_pidginunit.title_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.title_exists(zia_str, zia_str)
 
     # WHEN
-    zia_pidginunit.del_idea(sue_otx)
+    zia_pidginunit.del_title(sue_otx)
 
     # THEN
-    sue_exists = zia_pidginunit.idea_exists(sue_otx, sue_inx)
+    sue_exists = zia_pidginunit.title_exists(sue_otx, sue_inx)
     assert sue_exists is False
-    assert zia_pidginunit.idea_exists(zia_str, zia_str)
+    assert zia_pidginunit.title_exists(zia_str, zia_str)

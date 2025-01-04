@@ -1,5 +1,5 @@
-from src.f01_road.jaar_config import get_cmty_idea_if_None
-from src.f01_road.road import CmtyIdea
+from src.f01_road.jaar_config import get_cmty_title_if_None
+from src.f01_road.road import CmtyTitle
 from src.f02_bud.bud_tool import bud_acctunit_str, bud_itemunit_str
 from src.f04_gift.atom_config import acct_name_str, parent_road_str, item_title_str
 from src.f04_gift.atom import (
@@ -12,13 +12,13 @@ from src.f04_gift.atom import (
 from src.f04_gift.delta import DeltaUnit, deltaunit_shop
 
 
-def get_atom_example_itemunit_sports(cmty_idea: CmtyIdea = None) -> AtomUnit:
-    cmty_idea = get_cmty_idea_if_None(cmty_idea)
+def get_atom_example_itemunit_sports(cmty_title: CmtyTitle = None) -> AtomUnit:
+    cmty_title = get_cmty_title_if_None(cmty_title)
     sports_str = "sports"
     x_category = bud_itemunit_str()
     insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
     insert_itemunit_atomunit.set_jkey(item_title_str(), sports_str)
-    insert_itemunit_atomunit.set_jkey(parent_road_str(), cmty_idea)
+    insert_itemunit_atomunit.set_jkey(parent_road_str(), cmty_title)
     return insert_itemunit_atomunit
 
 
