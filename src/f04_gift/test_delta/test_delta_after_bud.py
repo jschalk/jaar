@@ -23,7 +23,7 @@ from src.f04_gift.atom_config import (
     team_label_str,
     healer_name_str,
     parent_road_str,
-    item_idee_str,
+    item_title_str,
     base_item_active_requisite_str,
     pledge_str,
     begin_str,
@@ -335,7 +335,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_itemunit():
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_delete())
     delete_disc_atomunit.set_jkey(
-        item_idee_str(), get_terminus_idea(disc_road, before_sue_budunit.bridge)
+        item_title_str(), get_terminus_idea(disc_road, before_sue_budunit.bridge)
     )
     print(f"{disc_road=}")
     delete_disc_atomunit.set_jkey(
@@ -374,7 +374,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_itemunit():
     # x_numor = 10
     x_pledge = True
     insert_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    insert_disc_atomunit.set_jkey(item_idee_str(), disc_str)
+    insert_disc_atomunit.set_jkey(item_title_str(), disc_str)
     insert_disc_atomunit.set_jkey(parent_road_str(), sports_road)
     # insert_disc_atomunit.set_jvalue(addin_str(), x_addin)
     # insert_disc_atomunit.set_jvalue(begin_str(), x_begin)
@@ -417,7 +417,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_itemunit_Simp
     x_stop_want = 1333
     x_pledge = True
     insert_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_update())
-    insert_disc_atomunit.set_jkey(item_idee_str(), ball_str)
+    insert_disc_atomunit.set_jkey(item_title_str(), ball_str)
     insert_disc_atomunit.set_jkey(parent_road_str(), sports_road)
     # insert_disc_atomunit.set_jvalue(addin_str(), x_addin)
     insert_disc_atomunit.set_jvalue(begin_str(), x_begin)

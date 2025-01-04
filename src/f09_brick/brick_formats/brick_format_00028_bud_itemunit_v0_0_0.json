@@ -24,7 +24,7 @@
         "gogo_want": {
             "otx_key": false
         },
-        "item_idee": {
+        "item_title": {
             "otx_key": true
         },
         "mass": {

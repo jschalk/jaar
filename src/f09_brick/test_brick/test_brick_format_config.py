@@ -8,7 +8,7 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     group_label_str,
     parent_road_str,
-    item_idee_str,
+    item_title_str,
     mass_str,
     pledge_str,
     acct_pool_str,
@@ -125,7 +125,7 @@ def test_get_sorted_headers_ReturnsObj():
     # ESTABLISH / WHEN
     headers = get_sorted_headers(brick_format_00019_itemunit_v0_0_0())
     # THEN
-    item_headers_str = "addin,begin,close,cmty_idea,denom,gogo_want,item_idee,morph,numor,owner_name,parent_road,stop_want"
+    item_headers_str = "addin,begin,close,cmty_idea,denom,gogo_want,item_title,morph,numor,owner_name,parent_road,stop_want"
     assert headers == item_headers_str
 
 
@@ -255,7 +255,7 @@ def test_get_brickref_obj_HasCorrectAttrs_brick_format_00013_itemunit_v0_0_0():
     assert headers_list[2] == cmty_idea_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == parent_road_str()
-    assert headers_list[5] == item_idee_str()
+    assert headers_list[5] == item_title_str()
     assert headers_list[6] == mass_str()
     assert headers_list[7] == pledge_str()
 
@@ -275,7 +275,7 @@ def test_get_brickref_obj_HasCorrectAttrs_brick_format_00019_itemunit_v0_0_0():
     assert headers_list[2] == cmty_idea_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == parent_road_str()
-    assert headers_list[5] == item_idee_str()
+    assert headers_list[5] == item_title_str()
     assert headers_list[6] == begin_str()
     assert headers_list[7] == close_str()
     assert headers_list[8] == addin_str()

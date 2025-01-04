@@ -15,7 +15,7 @@ from src.f04_gift.atom_config import (
     awardee_label_str,
     group_label_str,
     parent_road_str,
-    item_idee_str,
+    item_title_str,
     credit_belief_str,
     debtit_belief_str,
 )
@@ -348,10 +348,10 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
     knee_str = "knee"
     x_category = bud_itemunit_str()
     sports_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    sports_insert_itemunit_atomunit.set_jkey(item_idee_str(), sports_str)
+    sports_insert_itemunit_atomunit.set_jkey(item_title_str(), sports_str)
     sports_insert_itemunit_atomunit.set_jkey(parent_road_str(), x_cmty_idea)
     knee_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    knee_insert_itemunit_atomunit.set_jkey(item_idee_str(), knee_str)
+    knee_insert_itemunit_atomunit.set_jkey(item_title_str(), knee_str)
     knee_insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(knee_insert_itemunit_atomunit)

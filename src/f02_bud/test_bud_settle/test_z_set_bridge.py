@@ -54,7 +54,7 @@ def test_bud_set_cmty_idea_CorrectlySetsAttr():
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=old_casa_road)
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.itemroot._item_idee == yao_bud.cmty_idea
+    assert yao_bud.itemroot._item_title == yao_bud.cmty_idea
     casa_item = yao_bud.get_item_obj(old_casa_road)
     assert casa_item._parent_road == yao_bud.cmty_idea
     swim_item = yao_bud.get_item_obj(old_swim_road)
@@ -70,14 +70,14 @@ def test_bud_set_cmty_idea_CorrectlySetsAttr():
     swim_str = "swim"
     new_swim_road = yao_bud.make_road(new_casa_road, swim_str)
     assert yao_bud.cmty_idea == x_cmty_idea
-    assert yao_bud.itemroot._item_idee == x_cmty_idea
+    assert yao_bud.itemroot._item_title == x_cmty_idea
     casa_item = yao_bud.get_item_obj(new_casa_road)
     assert casa_item._parent_road == x_cmty_idea
     swim_item = yao_bud.get_item_obj(new_swim_road)
     assert swim_item._parent_road == new_casa_road
 
 
-def test_bud_set_bridge_RaisesErrorIfNew_bridge_IsAnItem_idee():
+def test_bud_set_bridge_RaisesErrorIfNew_bridge_IsAnItem_title():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     print(f"{zia_bud.max_tree_traverse=}")
@@ -95,7 +95,7 @@ def test_bud_set_bridge_RaisesErrorIfNew_bridge_IsAnItem_idee():
         zia_bud.set_bridge(slash_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify bridge to '{slash_str}' because it exists an item item_idee '{casa_road}'"
+        == f"Cannot modify bridge to '{slash_str}' because it exists an item item_title '{casa_road}'"
     )
 
 
@@ -112,10 +112,10 @@ def test_bud_set_bridge_CorrectlyModifies_parent_road():
     semicolon_str = ";"
     assert zia_bud.bridge == semicolon_str
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
-    # print(f"{zia_bud.cmty_idea=} {zia_bud.itemroot._item_idee=} {casa_road=}")
-    # print(f"{cook_item._parent_road=} {cook_item._item_idee=}")
+    # print(f"{zia_bud.cmty_idea=} {zia_bud.itemroot._item_title=} {casa_road=}")
+    # print(f"{cook_item._parent_road=} {cook_item._item_title=}")
     # semicolon_casa_item = zia_bud.get_item_obj(semicolon_casa_road)
-    # print(f"{semicolon_casa_item._parent_road=} {semicolon_casa_item._item_idee=}")
+    # print(f"{semicolon_casa_item._parent_road=} {semicolon_casa_item._item_title=}")
     assert cook_item.get_road() == semicolon_cook_road
 
     # WHEN

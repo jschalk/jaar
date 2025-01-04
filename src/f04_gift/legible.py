@@ -23,7 +23,7 @@ from src.f04_gift.atom_config import (
     team_label_str,
     healer_name_str,
     parent_road_str,
-    item_idee_str,
+    item_title_str,
     base_item_active_requisite_str,
     pledge_str,
     addin_str,
@@ -338,7 +338,7 @@ def add_bud_itemunit_insert_to_legible_list(
     _mass_str = "mass"
     for parent_road_dict in itemunit_insert_dict.values():
         for itemunit_atom in parent_road_dict.values():
-            item_idee_value = itemunit_atom.get_value(item_idee_str())
+            item_title_value = itemunit_atom.get_value(item_title_str())
             parent_road_value = itemunit_atom.get_value(parent_road_str())
             _addin_value = itemunit_atom.get_value(addin_str())
             _begin_value = itemunit_atom.get_value(begin_str())
@@ -349,7 +349,7 @@ def add_bud_itemunit_insert_to_legible_list(
             _morph_value = itemunit_atom.get_value(_morph_str)
             _mass_value = itemunit_atom.get_value(_mass_str)
             pledge_value = itemunit_atom.get_value(pledge_str())
-            x_str = f"Created Item '{item_idee_value}' with parent_road {parent_road_value}. "
+            x_str = f"Created Item '{item_title_value}' with parent_road {parent_road_value}. "
             if _addin_value is not None:
                 x_str += f"addin={_addin_value}."
             if _begin_value is not None:
@@ -379,7 +379,7 @@ def add_bud_itemunit_update_to_legible_list(
     _mass_str = "mass"
     for parent_road_dict in itemunit_update_dict.values():
         for itemunit_atom in parent_road_dict.values():
-            item_idee_value = itemunit_atom.get_value(item_idee_str())
+            item_title_value = itemunit_atom.get_value(item_title_str())
             parent_road_value = itemunit_atom.get_value(parent_road_str())
             addin_value = itemunit_atom.get_value(addin_str())
             begin_value = itemunit_atom.get_value(begin_str())
@@ -390,7 +390,7 @@ def add_bud_itemunit_update_to_legible_list(
             morph_value = itemunit_atom.get_value(morph_str())
             mass_value = itemunit_atom.get_value(_mass_str)
             pledge_value = itemunit_atom.get_value(pledge_str())
-            x_str = f"Item '{item_idee_value}' with parent_road {parent_road_value} set these attributes: "
+            x_str = f"Item '{item_title_value}' with parent_road {parent_road_value} set these attributes: "
             if addin_value is not None:
                 x_str += f"addin={addin_value}."
             if begin_value is not None:
@@ -418,9 +418,9 @@ def add_bud_itemunit_delete_to_legible_list(
 ):
     for parent_road_dict in itemunit_delete_dict.values():
         for itemunit_atom in parent_road_dict.values():
-            item_idee_value = itemunit_atom.get_value(item_idee_str())
+            item_title_value = itemunit_atom.get_value(item_title_str())
             parent_road_value = itemunit_atom.get_value(parent_road_str())
-            x_str = f"Item '{item_idee_value}' with parent_road {parent_road_value} was deleted."
+            x_str = f"Item '{item_title_value}' with parent_road {parent_road_value} was deleted."
             legible_list.append(x_str)
 
 
