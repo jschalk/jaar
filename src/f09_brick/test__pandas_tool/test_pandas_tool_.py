@@ -123,7 +123,7 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario2_UnimportantOnesArei
     df1 = DataFrame([["AAA", "BBB"]], columns=[spam_str, "egg"])
 
     # WHEN
-    relevant_columns = [spam_str, "something_else"]
+    relevant_columns = [spam_str, "not_relevant_else"]
     relevant_dataframe = get_relevant_columns_dataframe(df1, relevant_columns)
 
     # THEN

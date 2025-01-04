@@ -218,7 +218,7 @@ def test_load_acctmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     assert ex_acctmap == sue_acctmap
 
 
-def test_load_acctmap_from_csv_DoesNothinWhenFileDoesNotExist(env_dir_setup_cleanup):
+def test_load_acctmap_from_csv_DoesNotChangeWhenFileDoesNotExist(env_dir_setup_cleanup):
     # ESTABLISH
     map_dir = get_example_face_dir()
     name_filename = "name.csv"
@@ -260,7 +260,7 @@ def test_load_groupmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     assert ex_groupmap == sue_groupmap
 
 
-def test_load_groupmap_from_csv_DoesNothingWhenFileDoesNotExist(
+def test_load_groupmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -304,7 +304,7 @@ def test_load_ideamap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     assert ex_ideamap == sue_ideamap
 
 
-def test_load_ideamap_from_csv_DoesNothingWhenFileDoesNotExist(
+def test_load_ideamap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -351,7 +351,7 @@ def test_load_roadmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     assert ex_roadmap.ideamap != sue_roadmap.ideamap
 
 
-def test_load_roadmap_from_csv_DoesNothingWhenFileDoesNotExist(
+def test_load_roadmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

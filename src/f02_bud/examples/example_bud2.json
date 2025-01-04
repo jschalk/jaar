@@ -1174,7 +1174,7 @@
                 "_uid": 100,
                 "mass": 1
             },
-            "Aaron Donald things effected by him": {
+            "Aaron Donald objects effected by him": {
                 "_is_expanded": false,
                 "_kids": {
                     "interesting": {
@@ -1188,7 +1188,7 @@
                         "mass": 1
                     }
                 },
-                "_idee": "Aaron Donald things effected by him",
+                "_idee": "Aaron Donald objects effected by him",
                 "_uid": 261,
                 "mass": 1
             },
@@ -1486,11 +1486,11 @@
                                 },
                                 "mass": 1,
                                 "reasonunits": {
-                                    "A;Aaron Donald things effected by him": {
-                                        "base": "A;Aaron Donald things effected by him",
+                                    "A;Aaron Donald objects effected by him": {
+                                        "base": "A;Aaron Donald objects effected by him",
                                         "premises": {
-                                            "A;Aaron Donald things effected by him;interesting": {
-                                                "need": "A;Aaron Donald things effected by him;interesting"
+                                            "A;Aaron Donald objects effected by him;interesting": {
+                                                "need": "A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     }
@@ -1508,11 +1508,11 @@
                         },
                         "mass": 1,
                         "reasonunits": {
-                            "A;Aaron Donald things effected by him": {
-                                "base": "A;Aaron Donald things effected by him",
+                            "A;Aaron Donald objects effected by him": {
+                                "base": "A;Aaron Donald objects effected by him",
                                 "premises": {
-                                    "A;Aaron Donald things effected by him;interesting": {
-                                        "need": "A;Aaron Donald things effected by him;interesting"
+                                    "A;Aaron Donald objects effected by him;interesting": {
+                                        "need": "A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -1526,11 +1526,11 @@
                                 "mass": 1,
                                 "pledge": true,
                                 "reasonunits": {
-                                    "A;Aaron Donald things effected by him": {
-                                        "base": "A;Aaron Donald things effected by him",
+                                    "A;Aaron Donald objects effected by him": {
+                                        "base": "A;Aaron Donald objects effected by him",
                                         "premises": {
-                                            "A;Aaron Donald things effected by him;interesting": {
-                                                "need": "A;Aaron Donald things effected by him;interesting"
+                                            "A;Aaron Donald objects effected by him;interesting": {
+                                                "need": "A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     },
@@ -1559,11 +1559,11 @@
                         },
                         "mass": 1,
                         "reasonunits": {
-                            "A;Aaron Donald things effected by him": {
-                                "base": "A;Aaron Donald things effected by him",
+                            "A;Aaron Donald objects effected by him": {
+                                "base": "A;Aaron Donald objects effected by him",
                                 "premises": {
-                                    "A;Aaron Donald things effected by him;interesting": {
-                                        "need": "A;Aaron Donald things effected by him;interesting"
+                                    "A;Aaron Donald objects effected by him;interesting": {
+                                        "need": "A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -1584,11 +1584,11 @@
                                 "mass": 1,
                                 "pledge": true,
                                 "reasonunits": {
-                                    "A;Aaron Donald things effected by him": {
-                                        "base": "A;Aaron Donald things effected by him",
+                                    "A;Aaron Donald objects effected by him": {
+                                        "base": "A;Aaron Donald objects effected by him",
                                         "premises": {
-                                            "A;Aaron Donald things effected by him;interesting": {
-                                                "need": "A;Aaron Donald things effected by him;interesting"
+                                            "A;Aaron Donald objects effected by him;interesting": {
+                                                "need": "A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     },
@@ -1610,11 +1610,11 @@
                         "_uid": 167,
                         "mass": 1,
                         "reasonunits": {
-                            "A;Aaron Donald things effected by him": {
-                                "base": "A;Aaron Donald things effected by him",
+                            "A;Aaron Donald objects effected by him": {
+                                "base": "A;Aaron Donald objects effected by him",
                                 "premises": {
-                                    "A;Aaron Donald things effected by him;interesting": {
-                                        "need": "A;Aaron Donald things effected by him;interesting"
+                                    "A;Aaron Donald objects effected by him;interesting": {
+                                        "need": "A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -1626,11 +1626,11 @@
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
-                            "A;Aaron Donald things effected by him": {
-                                "base": "A;Aaron Donald things effected by him",
+                            "A;Aaron Donald objects effected by him": {
+                                "base": "A;Aaron Donald objects effected by him",
                                 "premises": {
-                                    "A;Aaron Donald things effected by him;interesting": {
-                                        "need": "A;Aaron Donald things effected by him;interesting"
+                                    "A;Aaron Donald objects effected by him;interesting": {
+                                        "need": "A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             },
@@ -1695,11 +1695,11 @@
                                         "mass": 1,
                                         "pledge": true,
                                         "reasonunits": {
-                                            "A;Aaron Donald things effected by him": {
-                                                "base": "A;Aaron Donald things effected by him",
+                                            "A;Aaron Donald objects effected by him": {
+                                                "base": "A;Aaron Donald objects effected by him",
                                                 "premises": {
-                                                    "A;Aaron Donald things effected by him;interesting": {
-                                                        "need": "A;Aaron Donald things effected by him;interesting"
+                                                    "A;Aaron Donald objects effected by him;interesting": {
+                                                        "need": "A;Aaron Donald objects effected by him;interesting"
                                                     }
                                                 }
                                             },
@@ -1734,11 +1734,11 @@
                                         "mass": 1,
                                         "pledge": true,
                                         "reasonunits": {
-                                            "A;Aaron Donald things effected by him": {
-                                                "base": "A;Aaron Donald things effected by him",
+                                            "A;Aaron Donald objects effected by him": {
+                                                "base": "A;Aaron Donald objects effected by him",
                                                 "premises": {
-                                                    "A;Aaron Donald things effected by him;interesting": {
-                                                        "need": "A;Aaron Donald things effected by him;interesting"
+                                                    "A;Aaron Donald objects effected by him;interesting": {
+                                                        "need": "A;Aaron Donald objects effected by him;interesting"
                                                     }
                                                 }
                                             },
@@ -1767,11 +1767,11 @@
                                 },
                                 "mass": 1,
                                 "reasonunits": {
-                                    "A;Aaron Donald things effected by him": {
-                                        "base": "A;Aaron Donald things effected by him",
+                                    "A;Aaron Donald objects effected by him": {
+                                        "base": "A;Aaron Donald objects effected by him",
                                         "premises": {
-                                            "A;Aaron Donald things effected by him;interesting": {
-                                                "need": "A;Aaron Donald things effected by him;interesting"
+                                            "A;Aaron Donald objects effected by him;interesting": {
+                                                "need": "A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     }
@@ -1782,11 +1782,11 @@
                         "_uid": 161,
                         "mass": 1,
                         "reasonunits": {
-                            "A;Aaron Donald things effected by him": {
-                                "base": "A;Aaron Donald things effected by him",
+                            "A;Aaron Donald objects effected by him": {
+                                "base": "A;Aaron Donald objects effected by him",
                                 "premises": {
-                                    "A;Aaron Donald things effected by him;interesting": {
-                                        "need": "A;Aaron Donald things effected by him;interesting"
+                                    "A;Aaron Donald objects effected by him;interesting": {
+                                        "need": "A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -1806,11 +1806,11 @@
                                 },
                                 "mass": 1,
                                 "reasonunits": {
-                                    "A;Aaron Donald things effected by him": {
-                                        "base": "A;Aaron Donald things effected by him",
+                                    "A;Aaron Donald objects effected by him": {
+                                        "base": "A;Aaron Donald objects effected by him",
                                         "premises": {
-                                            "A;Aaron Donald things effected by him;interesting": {
-                                                "need": "A;Aaron Donald things effected by him;interesting"
+                                            "A;Aaron Donald objects effected by him;interesting": {
+                                                "need": "A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     },
@@ -1832,11 +1832,11 @@
                         "_uid": 165,
                         "mass": 1,
                         "reasonunits": {
-                            "A;Aaron Donald things effected by him": {
-                                "base": "A;Aaron Donald things effected by him",
+                            "A;Aaron Donald objects effected by him": {
+                                "base": "A;Aaron Donald objects effected by him",
                                 "premises": {
-                                    "A;Aaron Donald things effected by him;interesting": {
-                                        "need": "A;Aaron Donald things effected by him;interesting"
+                                    "A;Aaron Donald objects effected by him;interesting": {
+                                        "need": "A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -1864,11 +1864,11 @@
                 },
                 "mass": 1,
                 "reasonunits": {
-                    "A;Aaron Donald things effected by him": {
-                        "base": "A;Aaron Donald things effected by him",
+                    "A;Aaron Donald objects effected by him": {
+                        "base": "A;Aaron Donald objects effected by him",
                         "premises": {
-                            "A;Aaron Donald things effected by him;interesting": {
-                                "need": "A;Aaron Donald things effected by him;interesting"
+                            "A;Aaron Donald objects effected by him;interesting": {
+                                "need": "A;Aaron Donald objects effected by him;interesting"
                             }
                         }
                     }
@@ -2067,7 +2067,7 @@
                 "_uid": 275,
                 "mass": 1
             },
-            "Things better Proposal": {
+            "Better Stuff Proposal": {
                 "_is_expanded": false,
                 "_kids": {
                     "decrease carbon footprint": {
@@ -2096,7 +2096,7 @@
                         "morph": false
                     }
                 },
-                "_idee": "Things better Proposal",
+                "_idee": "Better Stuff Proposal",
                 "mass": 1.0,
                 "morph": false
             },
@@ -3392,8 +3392,8 @@
                             },
                             "mass training": {
                                 "_kids": {
-                                    "bike or something": {
-                                        "_idee": "bike or something",
+                                    "bike or stuff": {
+                                        "_idee": "bike or stuff",
                                         "_uid": 92,
                                         "awardlinks": {
                                             ";Family": {
@@ -5380,9 +5380,9 @@
         "_idee": "A",
         "_uid": 1,
         "factunits": {
-            "A;Aaron Donald things effected by him": {
-                "base": "A;Aaron Donald things effected by him",
-                "pick": "A;Aaron Donald things effected by him"
+            "A;Aaron Donald objects effected by him": {
+                "base": "A;Aaron Donald objects effected by him",
+                "pick": "A;Aaron Donald objects effected by him"
             },
             "A;Interweb": {
                 "base": "A;Interweb",

@@ -236,7 +236,7 @@ class CmtyUnit:
                 x_job = keep_hubunit.get_job_bud(owner_name)
                 listen_to_speaker_agenda(x_final, x_job)
 
-        # if nothing has come from voice->duty->job->final pipeline use voice->final pipeline
+        # if no budunit has come from voice->duty->job->final pipeline use voice->final pipeline
         x_final.settle_bud()
         if len(x_final._item_dict) == 1:
             # pipeline_voice_final_str()

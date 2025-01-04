@@ -239,7 +239,7 @@ class BudUnit:
         evaluated_roads = set()
 
         # while roads_to_evaluate != [] and count_x <= tree_metrics.idea_count:
-        # Why count_x? because count_x might be wrong thing to measure
+        # Why count_x? because count_x might be wrong attr to measure
         # nice to avoid infinite loops from programming errors though...
         while to_evaluate_list != []:
             x_road = to_evaluate_list.pop()

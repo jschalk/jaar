@@ -105,13 +105,13 @@ def _create_itemunit_traces(
 
 
 def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_bud: BudUnit):
-    x_title = "Tree with lines Layout"
+    fig_title = "Tree with lines Layout"
     if mode == "Task":
-        x_title = "Item Tree with task items in Red."
-    x_title += f" (Items: {len(x_bud._item_dict)})"
-    x_title += f" (_sum_healerlink_share: {x_bud._sum_healerlink_share})"
-    x_title += f" (_keeps_justified: {x_bud._keeps_justified})"
-    x_fig.update_layout(title_text=x_title, font_size=12)
+        fig_title = "Item Tree with task items in Red."
+    fig_title += f" (Items: {len(x_bud._item_dict)})"
+    fig_title += f" (_sum_healerlink_share: {x_bud._sum_healerlink_share})"
+    fig_title += f" (_keeps_justified: {x_bud._keeps_justified})"
+    x_fig.update_layout(title_text=fig_title, font_size=12)
 
 
 def display_itemtree(

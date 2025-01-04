@@ -8,7 +8,7 @@ from src.f06_keep.keep_graphic import (
 )
 
 
-def test_money_graphics_ExplainThingsWell(graphics_bool):
+def test_money_graphics_ExplainedWell(graphics_bool):
     # ESTABLISH / WHEN / THEN
     get_protect_structures0_fig(graphics_bool)
     get_protect_structures1_fig(graphics_bool)

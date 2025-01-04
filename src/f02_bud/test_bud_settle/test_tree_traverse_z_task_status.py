@@ -365,7 +365,7 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
     mood_str = "Moods"
     mood_road = yao_budunit.make_l1_road(mood_str)
     yao_budunit.set_fact(base=mood_road, pick=mood_road)
-    aaron_str = "Aaron Donald things effected by him"
+    aaron_str = "Aaron Donald objects effected by him"
     aaron_road = yao_budunit.make_l1_road(aaron_str)
     yao_budunit.set_fact(base=aaron_road, pick=aaron_road)
     inter_str = "Interweb"
@@ -583,7 +583,7 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsCorrectObj_budunit_v001():
     mood_str = "Moods"
     mood_road = yao_budunit.make_l1_road(mood_str)
     yao_budunit.set_fact(base=mood_road, pick=mood_road)
-    aaron_str = "Aaron Donald things effected by him"
+    aaron_str = "Aaron Donald objects effected by him"
     aaron_road = yao_budunit.make_l1_road(aaron_str)
     yao_budunit.set_fact(base=aaron_road, pick=aaron_road)
     interweb_str = "Interweb"

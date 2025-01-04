@@ -616,11 +616,11 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert len(sue_bud.accts) == 0
     assert len(sue_bud.get_acctunit_group_labels_dict()) == 0
 
-    clean_things_str = "cleaning things"
-    clean_things_road = sue_bud.make_l1_road(clean_things_str)
+    clean_str = "cleanings"
+    clean_road = sue_bud.make_l1_road(clean_str)
     sweep_str = "sweep"
-    sweep_road = sue_bud.make_road(clean_things_road, sweep_str)
-    sweep_item = itemunit_shop(sweep_str, _parent_road=clean_things_road)
+    sweep_road = sue_bud.make_road(clean_road, sweep_str)
+    sweep_item = itemunit_shop(sweep_str, _parent_road=clean_road)
     print(f"{sweep_item.get_road()=}")
     house_str = "house"
     house_road = sue_bud.make_l1_road(house_str)
@@ -670,7 +670,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert sue_bud.get_item_obj(sweep_road)._idee == sweep_str
     assert sue_bud.get_item_obj(sweep_road).pledge
     assert len(sue_bud.get_item_obj(sweep_road).reasonunits) == 2
-    assert sue_bud.get_item_obj(clean_things_road) is not None
+    assert sue_bud.get_item_obj(clean_road) is not None
     assert sue_bud.get_item_obj(cookery_room_road) is not None
     assert sue_bud.get_item_obj(cookery_dirty_road) is not None
     assert len(sue_bud.get_acctunit_group_labels_dict()) == 0

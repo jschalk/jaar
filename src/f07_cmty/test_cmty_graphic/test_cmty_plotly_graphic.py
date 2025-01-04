@@ -4,6 +4,6 @@ from src.f07_cmty.cmty_graphic import (
 )
 
 
-def test_cmty_graphics_ExplainThingsWell(graphics_bool):
+def test_cmty_graphics_ExplainedWell(graphics_bool):
     # ESTABLISH / WHEN / THEN
     get_cmty_structures0_fig(graphics_bool)

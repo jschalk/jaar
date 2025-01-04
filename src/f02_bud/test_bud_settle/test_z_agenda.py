@@ -156,7 +156,7 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     nations_road = yao_bud.make_l1_road(nations_str)
     mood_str = "Moods"
     mood_road = yao_bud.make_l1_road(mood_str)
-    aaron_str = "Aaron Donald things effected by him"
+    aaron_str = "Aaron Donald objects effected by him"
     aaron_road = yao_bud.make_l1_road(aaron_str)
     # interweb_str = "Interweb"
     # interweb_road = yao_bud.make_l1_road(interweb_str)

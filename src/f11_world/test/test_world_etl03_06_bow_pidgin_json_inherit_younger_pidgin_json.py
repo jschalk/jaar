@@ -40,7 +40,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario0_NoPidginUnitFi
     # WHEN
     fizz_world.pidgin_jsons_inherit_younger_pidgins()
 
-    # THEN nothing changes, no errors raised
+    # THEN no changes, no errors raised
     assert fizz_world._pidgin_events == {}
 
     # Verify no files were created or modified

@@ -182,7 +182,7 @@ def test_itemunit_shop_ReturnsObjWithParameters():
 
 def test_ItemUnit_get_obj_key_ReturnsCorrectObj():
     # ESTABLISH
-    round_str = "round_things"
+    round_str = "round_stuff"
     round_road = create_road(root_idea(), round_str)
     ball_str = "ball"
 
@@ -195,7 +195,7 @@ def test_ItemUnit_get_obj_key_ReturnsCorrectObj():
 
 def test_ItemUnit_get_road_ReturnsCorrectObj():
     # ESTABLISH
-    round_str = "round_things"
+    round_str = "round_stuff"
     slash_str = "/"
     round_road = create_road(root_idea(), round_str, bridge=slash_str)
     ball_str = "ball"
@@ -210,7 +210,7 @@ def test_ItemUnit_get_road_ReturnsCorrectObj():
 
 def test_ItemUnit_set_parent_road_SetsAttr():
     # ESTABLISH
-    round_str = "round_things"
+    round_str = "round_stuff"
     slash_str = "/"
     round_road = create_road(root_idea(), round_str, bridge=slash_str)
     ball_str = "ball"

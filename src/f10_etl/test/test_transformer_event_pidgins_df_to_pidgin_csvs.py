@@ -28,7 +28,7 @@ def test_etl_event_pidgin_to_pidgin_csv_files_Scenario0_Nofile(env_dir_setup_cle
 
     # WHEN
     event_pidgin_to_pidgin_csv_files(sue_face_dir)
-    # THEN nothing changes
+    # THEN no changes
     assert os_path_exists(sue_face_dir) is False
     assert os_path_exists(event3_pidgin_file_path) is False
     assert sheet_exists(event3_pidgin_file_path, name_agg_str) is False
@@ -38,7 +38,7 @@ def test_etl_event_pidgin_to_pidgin_csv_files_Scenario0_Nofile(env_dir_setup_cle
     assert os_path_exists(sue_face_dir)
     # WHEN
     event_pidgin_to_pidgin_csv_files(sue_face_dir)
-    # THEN nothing changes
+    # THEN no changes
     assert os_path_exists(sue_face_dir)
     assert os_path_exists(event3_pidgin_file_path) is False
     assert sheet_exists(event3_pidgin_file_path, name_agg_str) is False
@@ -48,7 +48,7 @@ def test_etl_event_pidgin_to_pidgin_csv_files_Scenario0_Nofile(env_dir_setup_cle
     assert os_path_exists(event3_pidgin_file_path)
     # WHEN
     event_pidgin_to_pidgin_csv_files(sue_face_dir)
-    # THEN nothing changes
+    # THEN no changes
     assert os_path_exists(sue_face_dir)
     assert os_path_exists(event3_pidgin_file_path)
     assert sheet_exists(event3_pidgin_file_path, name_agg_str) is False

@@ -291,7 +291,7 @@ def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
     pandas_testing_assert_frame_equal(c_df, c_expected)
 
 
-def test_split_excel_into_dirs_DoesNothingIfColumnIsEmpty(tmp_path, output_dir):
+def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(tmp_path, output_dir):
     """Test handling of an empty column."""
     # ESTABLISH Create an Excel file with an empty column
     data = {

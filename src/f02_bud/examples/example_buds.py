@@ -21,7 +21,7 @@ def budunit_v001_with_large_agenda() -> BudUnit:
     month_week_road = yao_bud.make_l1_road("month_week")
     nations_road = yao_bud.make_l1_road("Nation-States")
     mood_road = yao_bud.make_l1_road("Moods")
-    aaron_road = yao_bud.make_l1_road("Aaron Donald things effected by him")
+    aaron_road = yao_bud.make_l1_road("Aaron Donald objects effected by him")
     year_month_road = yao_bud.make_l1_road("year_month")
     season_road = yao_bud.make_l1_road("Seasons")
     ced_week_road = yao_bud.make_l1_road("ced_week")

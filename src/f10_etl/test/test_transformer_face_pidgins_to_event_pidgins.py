@@ -25,7 +25,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario0_Nofile(env_dir_setup_cleanup
 
     # WHEN
     etl_face_pidgin_to_event_pidgins(sue_face_dir)
-    # THEN nothing changes
+    # THEN no changes
     assert os_path_exists(sue_face_dir) is False
     assert os_path_exists(face_pidgin_file_path) is False
     assert sheet_exists(face_pidgin_file_path, name_agg_str) is False
@@ -35,7 +35,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario0_Nofile(env_dir_setup_cleanup
     assert os_path_exists(sue_face_dir)
     # WHEN
     etl_face_pidgin_to_event_pidgins(sue_face_dir)
-    # THEN nothing changes
+    # THEN no changes
     assert os_path_exists(sue_face_dir)
     assert os_path_exists(face_pidgin_file_path) is False
     assert sheet_exists(face_pidgin_file_path, name_agg_str) is False
@@ -45,7 +45,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario0_Nofile(env_dir_setup_cleanup
     assert os_path_exists(face_pidgin_file_path)
     # WHEN
     etl_face_pidgin_to_event_pidgins(sue_face_dir)
-    # THEN nothing changes
+    # THEN no changes
     assert os_path_exists(sue_face_dir)
     assert os_path_exists(face_pidgin_file_path)
     assert sheet_exists(face_pidgin_file_path, name_agg_str) is False
