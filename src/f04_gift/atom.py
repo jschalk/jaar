@@ -280,7 +280,7 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         ),
         parent_road=x_atom.get_value("parent_road"),
         create_missing_items=False,
-        get_rid_of_missing_awardlinks_awardee_labels=False,
+        get_rid_of_missing_awardlinks_awardee_tags=False,
         create_missing_ancestors=False,
     )
 
@@ -288,13 +288,13 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_item_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_item_attr(
         road=x_atom.get_value("road"),
-        awardlink_del=x_atom.get_value("awardee_label"),
+        awardlink_del=x_atom.get_value("awardee_tag"),
     )
 
 
 def _modify_bud_item_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_item = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_awardlink = x_item.awardlinks.get(x_atom.get_value("awardee_label"))
+    x_awardlink = x_item.awardlinks.get(x_atom.get_value("awardee_tag"))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -306,7 +306,7 @@ def _modify_bud_item_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_item_awardlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
-        awardee_label=x_atom.get_value("awardee_label"),
+        awardee_tag=x_atom.get_value("awardee_tag"),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
@@ -613,7 +613,7 @@ class AtomRow:
     _crud_command: CRUD_command = None
     acct_name: AcctName = None
     addin: float = None
-    awardee_label: GroupLabel = None
+    awardee_tag: GroupLabel = None
     base: RoadUnit = None
     base_item_active_requisite: bool = None
     begin: float = None

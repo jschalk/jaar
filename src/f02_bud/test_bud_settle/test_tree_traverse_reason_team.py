@@ -208,7 +208,7 @@ def test_BudUnit_set_item_CorrectlyCleansItem_awardlinks():
     sue2_bud = budunit_shop("Sue")
     sue2_bud.add_acctunit(xia_str)
     sue2_bud.set_l1_item(
-        sue1_bud_swim_item, get_rid_of_missing_awardlinks_awardee_labels=False
+        sue1_bud_swim_item, get_rid_of_missing_awardlinks_awardee_tags=False
     )
 
     # THEN

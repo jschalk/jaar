@@ -131,8 +131,8 @@ def acct_name_str() -> str:
     return "acct_name"
 
 
-def awardee_label_str() -> str:
-    return "awardee_label"
+def awardee_tag_str() -> str:
+    return "awardee_tag"
 
 
 def give_force_str() -> str:
@@ -303,7 +303,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
     return {
         "acct_name": "AcctName",
         "addin": "float",
-        "awardee_label": "GroupLabel",
+        "awardee_tag": "GroupLabel",
         "base": "RoadUnit",
         "base_item_active_requisite": "bool",
         "begin": "float",

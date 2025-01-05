@@ -93,37 +93,37 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
             base=states_road, premises={usa_premise.need: usa_premise}, _status=False
         ),
     }
-    biker_awardee_label = "bikers"
+    biker_awardee_tag = "bikers"
     biker_give_force = 3.0
     biker_take_force = 7.0
     biker_awardlink = awardlink_shop(
-        biker_awardee_label, biker_give_force, biker_take_force
+        biker_awardee_tag, biker_give_force, biker_take_force
     )
-    flyer_awardee_label = "flyers"
+    flyer_awardee_tag = "flyers"
     flyer_give_force = 6.0
     flyer_take_force = 9.0
     flyer_awardlink = awardlink_shop(
-        awardee_label=flyer_awardee_label,
+        awardee_tag=flyer_awardee_tag,
         give_force=flyer_give_force,
         take_force=flyer_take_force,
     )
     biker_and_flyer_awardlinks = {
-        biker_awardlink.awardee_label: biker_awardlink,
-        flyer_awardlink.awardee_label: flyer_awardlink,
+        biker_awardlink.awardee_tag: biker_awardlink,
+        flyer_awardlink.awardee_tag: flyer_awardlink,
     }
     biker_get_dict = {
-        "awardee_label": biker_awardlink.awardee_label,
+        "awardee_tag": biker_awardlink.awardee_tag,
         "give_force": biker_awardlink.give_force,
         "take_force": biker_awardlink.take_force,
     }
     flyer_get_dict = {
-        "awardee_label": flyer_awardlink.awardee_label,
+        "awardee_tag": flyer_awardlink.awardee_tag,
         "give_force": flyer_awardlink.give_force,
         "take_force": flyer_awardlink.take_force,
     }
     x1_awardlinks = {
-        biker_awardee_label: biker_get_dict,
-        flyer_awardee_label: flyer_get_dict,
+        biker_awardee_tag: biker_get_dict,
+        flyer_awardee_tag: flyer_get_dict,
     }
     sue_str = "Sue"
     yao_str = "Yao"

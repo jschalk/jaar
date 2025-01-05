@@ -28,7 +28,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     atom_update,
-    awardee_label_str,
+    awardee_tag_str,
     base_str,
     begin_str,
     category_str,
@@ -76,7 +76,7 @@ def test_str_functions_ReturnsObj():
     assert atom_insert() == "INSERT"
     assert atom_update() == "UPDATE"
     assert atom_delete() == "DELETE"
-    assert awardee_label_str() == "awardee_label"
+    assert awardee_tag_str() == "awardee_tag"
     assert base_str() == "base"
     assert begin_str() == "begin"
     assert category_str() == "category"
@@ -638,7 +638,7 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     # THEN
     assert x_jaar_types.get(acct_name_str()) == type_AcctName_str()
     assert x_jaar_types.get(addin_str()) == "float"
-    assert x_jaar_types.get(awardee_label_str()) == type_GroupLabel_str()
+    assert x_jaar_types.get(awardee_tag_str()) == type_GroupLabel_str()
     assert x_jaar_types.get(base_str()) == type_RoadUnit_str()
     assert x_jaar_types.get("base_item_active_requisite") == "bool"
     assert x_jaar_types.get(begin_str()) == "float"

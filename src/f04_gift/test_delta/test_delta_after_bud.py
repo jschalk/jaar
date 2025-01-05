@@ -18,7 +18,7 @@ from src.f02_bud.bud_tool import (
 from src.f04_gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
 from src.f04_gift.atom_config import (
     acct_name_str,
-    awardee_label_str,
+    awardee_tag_str,
     group_label_str,
     team_label_str,
     healer_name_str,
@@ -487,7 +487,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_awardlin
     # WHEN
     delete_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_delete())
     delete_disc_atomunit.set_jkey("road", disc_road)
-    delete_disc_atomunit.set_jkey(awardee_label_str(), fly_str)
+    delete_disc_atomunit.set_jkey(awardee_tag_str(), fly_str)
     print(f"{delete_disc_atomunit=}")
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(delete_disc_atomunit)
@@ -525,7 +525,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_awardlin
     x_take_force = 66
     update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_update())
     update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(awardee_label_str(), run_str)
+    update_disc_atomunit.set_jkey(awardee_tag_str(), run_str)
     update_disc_atomunit.set_jvalue(give_force_str(), x_give_force)
     update_disc_atomunit.set_jvalue(take_force_str(), x_take_force)
     # print(f"{update_disc_atomunit=}")
@@ -564,7 +564,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_awardlin
     x_take_force = 66
     update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_insert())
     update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(awardee_label_str(), run_str)
+    update_disc_atomunit.set_jkey(awardee_tag_str(), run_str)
     update_disc_atomunit.set_jvalue(give_force_str(), x_give_force)
     update_disc_atomunit.set_jvalue(take_force_str(), x_take_force)
     # print(f"{update_disc_atomunit=}")

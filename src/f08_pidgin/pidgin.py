@@ -38,7 +38,7 @@ def pidginable_jaar_types() -> set:
 def pidginable_atom_args() -> set:
     return {
         "acct_name",
-        "awardee_label",
+        "awardee_tag",
         "base",
         "face_name",
         "cmty_title",

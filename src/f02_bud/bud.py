@@ -581,7 +581,7 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         create_missing_items: bool = None,
-        get_rid_of_missing_awardlinks_awardee_labels: bool = None,
+        get_rid_of_missing_awardlinks_awardee_tags: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
@@ -590,7 +590,7 @@ class BudUnit:
             item_kid=item_kid,
             parent_road=self.cmty_title,
             create_missing_items=create_missing_items,
-            get_rid_of_missing_awardlinks_awardee_labels=get_rid_of_missing_awardlinks_awardee_labels,
+            get_rid_of_missing_awardlinks_awardee_tags=get_rid_of_missing_awardlinks_awardee_tags,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
@@ -600,7 +600,7 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         parent_road: RoadUnit,
-        get_rid_of_missing_awardlinks_awardee_labels: bool = None,
+        get_rid_of_missing_awardlinks_awardee_tags: bool = None,
         create_missing_items: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
@@ -622,7 +622,7 @@ class BudUnit:
             item_kid._bud_cmty_title = self.cmty_title
         if item_kid._fund_coin != self.fund_coin:
             item_kid._fund_coin = self.fund_coin
-        if not get_rid_of_missing_awardlinks_awardee_labels:
+        if not get_rid_of_missing_awardlinks_awardee_tags:
             item_kid = self._get_cleaned_awardlinks_item(item_kid)
         item_kid.set_parent_road(parent_road=parent_road)
 
@@ -655,13 +655,12 @@ class BudUnit:
 
     def _get_cleaned_awardlinks_item(self, x_item: ItemUnit) -> ItemUnit:
         _awardlinks_to_delete = [
-            _awardlink_awardee_label
-            for _awardlink_awardee_label in x_item.awardlinks.keys()
-            if self.get_acctunit_group_labels_dict().get(_awardlink_awardee_label)
-            is None
+            _awardlink_awardee_tag
+            for _awardlink_awardee_tag in x_item.awardlinks.keys()
+            if self.get_acctunit_group_labels_dict().get(_awardlink_awardee_tag) is None
         ]
-        for _awardlink_awardee_label in _awardlinks_to_delete:
-            x_item.awardlinks.pop(_awardlink_awardee_label)
+        for _awardlink_awardee_tag in _awardlinks_to_delete:
+            x_item.awardlinks.pop(_awardlink_awardee_tag)
 
         if x_item.teamunit is not None:
             _teamlinks_to_delete = [
@@ -920,11 +919,11 @@ class BudUnit:
 
     def _set_groupunits_fund_share(self, awardheirs: dict[GroupLabel, AwardLink]):
         for awardlink_obj in awardheirs.values():
-            x_awardee_label = awardlink_obj.awardee_label
-            if not self.groupunit_exists(x_awardee_label):
-                self.set_groupunit(self.create_symmetry_groupunit(x_awardee_label))
+            x_awardee_tag = awardlink_obj.awardee_tag
+            if not self.groupunit_exists(x_awardee_tag):
+                self.set_groupunit(self.create_symmetry_groupunit(x_awardee_tag))
             self.add_to_groupunit_fund_give_fund_take(
-                group_label=awardlink_obj.awardee_label,
+                group_label=awardlink_obj.awardee_tag,
                 awardheir_fund_give=awardlink_obj._fund_give,
                 awardheir_fund_take=awardlink_obj._fund_take,
             )
@@ -939,7 +938,7 @@ class BudUnit:
                 if item.awardheir_exists():
                     for x_awardline in item._awardlines.values():
                         self.add_to_groupunit_fund_agenda_give_take(
-                            group_label=x_awardline.awardee_label,
+                            group_label=x_awardline.awardee_tag,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
@@ -1389,7 +1388,7 @@ class BudUnit:
         self.set_item(
             item_kid=item_kid,
             parent_road=self.make_road(item_kid._parent_road),
-            get_rid_of_missing_awardlinks_awardee_labels=True,
+            get_rid_of_missing_awardlinks_awardee_tags=True,
             create_missing_items=True,
         )
 

@@ -129,9 +129,9 @@ def test_bud_item_awardlink_exists_ReturnsObj():
     root_road = sue_bud.cmty_title
     swim_str = "Swim"
     root_road = sue_bud.cmty_title
-    root_jkeys = {"road": root_road, "awardee_label": swim_str}
-    casa_jkeys = {"road": casa_road, "awardee_label": swim_str}
-    clean_jkeys = {"road": clean_road, "awardee_label": swim_str}
+    root_jkeys = {"road": root_road, "awardee_tag": swim_str}
+    casa_jkeys = {"road": casa_road, "awardee_tag": swim_str}
+    clean_jkeys = {"road": clean_road, "awardee_tag": swim_str}
 
     # WHEN / THEN
     assert not bud_item_awardlink_exists(None, {})
@@ -419,9 +419,9 @@ def test_bud_attr_exists_ReturnsObj_bud_item_awardlink():
     root_road = sue_bud.cmty_title
     swim_str = "Swim"
     x_category = bud_item_awardlink_str()
-    root_jkeys = {"road": root_road, "awardee_label": swim_str}
-    casa_jkeys = {"road": casa_road, "awardee_label": swim_str}
-    clean_jkeys = {"road": clean_road, "awardee_label": swim_str}
+    root_jkeys = {"road": root_road, "awardee_tag": swim_str}
+    casa_jkeys = {"road": casa_road, "awardee_tag": swim_str}
+    clean_jkeys = {"road": clean_road, "awardee_tag": swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})

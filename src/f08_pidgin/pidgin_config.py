@@ -138,7 +138,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "acct_name": "AcctName",
         "addin": "float",
         "amount": "float",
-        "awardee_label": "GroupLabel",
+        "awardee_tag": "GroupLabel",
         "base": "RoadUnit",
         "base_item_active_requisite": "bool",
         "begin": "float",

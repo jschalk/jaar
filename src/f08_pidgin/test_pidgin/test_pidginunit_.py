@@ -8,7 +8,7 @@ from src.f04_gift.atom_config import (
     type_TitleUnit_str,
     type_RoadUnit_str,
     acct_name_str,
-    awardee_label_str,
+    awardee_tag_str,
     base_str,
     face_name_str,
     cmty_title_str,
@@ -65,7 +65,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("acct_name") == type_AcctName_str()
     assert pidgin_args_jaar_types.get("addin") == "float"
     assert pidgin_args_jaar_types.get("amount") == "float"
-    assert pidgin_args_jaar_types.get("awardee_label") == type_GroupLabel_str()
+    assert pidgin_args_jaar_types.get("awardee_tag") == type_GroupLabel_str()
     assert pidgin_args_jaar_types.get("base") == type_RoadUnit_str()
     assert pidgin_args_jaar_types.get("base_item_active_requisite") == "bool"
     assert pidgin_args_jaar_types.get("begin") == "float"
@@ -185,7 +185,7 @@ def test_pidginable_atom_args_ReturnsObj():
     assert len(pidginable_atom_args()) == 18
     assert pidginable_atom_args() == {
         acct_name_str(),
-        awardee_label_str(),
+        awardee_tag_str(),
         base_str(),
         face_name_str(),
         cmty_title_str(),

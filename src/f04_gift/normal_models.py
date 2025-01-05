@@ -59,7 +59,7 @@ class ItemTable(Base):
 class AwardLinkTable(Base):
     __tablename__ = "awardlink"
     uid = Column(Integer, primary_key=True)
-    awardee_label = Column(String)
+    awardee_tag = Column(String)
     road = Column(String)
     give_force = Column(Float)
     take_force = Column(Float)

@@ -18,7 +18,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_update,
     acct_name_str,
-    awardee_label_str,
+    awardee_tag_str,
     group_label_str,
     team_label_str,
     healer_name_str,
@@ -429,11 +429,11 @@ def add_bud_item_awardlink_insert_to_legible_list(
 ):
     for road_dict in item_awardlink_insert_dict.values():
         for item_awardlink_atom in road_dict.values():
-            awardee_label_value = item_awardlink_atom.get_value(awardee_label_str())
+            awardee_tag_value = item_awardlink_atom.get_value(awardee_tag_str())
             road_value = item_awardlink_atom.get_value("road")
             give_force_value = item_awardlink_atom.get_value("give_force")
             take_force_value = item_awardlink_atom.get_value("take_force")
-            x_str = f"Awardlink created for group {awardee_label_value} for item '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
+            x_str = f"Awardlink created for group {awardee_tag_value} for item '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -442,16 +442,16 @@ def add_bud_item_awardlink_update_to_legible_list(
 ):
     for road_dict in item_awardlink_update_dict.values():
         for item_awardlink_atom in road_dict.values():
-            awardee_label_value = item_awardlink_atom.get_value(awardee_label_str())
+            awardee_tag_value = item_awardlink_atom.get_value(awardee_tag_str())
             road_value = item_awardlink_atom.get_value("road")
             give_force_value = item_awardlink_atom.get_value("give_force")
             take_force_value = item_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_label_value} for item '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_label_value} for item '{road_value}'. Now give_force={give_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now give_force={give_force_value}."
             elif take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_label_value} for item '{road_value}'. Now take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -460,9 +460,9 @@ def add_bud_item_awardlink_delete_to_legible_list(
 ):
     for road_dict in item_awardlink_delete_dict.values():
         for item_awardlink_atom in road_dict.values():
-            awardee_label_value = item_awardlink_atom.get_value(awardee_label_str())
+            awardee_tag_value = item_awardlink_atom.get_value(awardee_tag_str())
             road_value = item_awardlink_atom.get_value("road")
-            x_str = f"Awardlink for group {awardee_label_value}, item '{road_value}' has been deleted."
+            x_str = f"Awardlink for group {awardee_tag_value}, item '{road_value}' has been deleted."
             legible_list.append(x_str)
 
 

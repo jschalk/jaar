@@ -40,7 +40,7 @@ from src.f04_gift.atom_config import (
     road_str,
     base_str,
     team_label_str,
-    awardee_label_str,
+    awardee_tag_str,
     healer_name_str,
     numor_str,
     denom_str,
@@ -182,7 +182,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[10] == "need"
     assert table_sorting_priority[11] == "pick"
     assert table_sorting_priority[12] == team_label_str()
-    assert table_sorting_priority[13] == awardee_label_str()
+    assert table_sorting_priority[13] == awardee_tag_str()
     assert table_sorting_priority[14] == healer_name_str()
     assert table_sorting_priority[15] == time_int_str()
     assert table_sorting_priority[16] == begin_str()
@@ -278,7 +278,7 @@ def test_get_idea_sqlite_type_ReturnsObj():
     assert sqlite_types.get("need") == "TEXT"
     assert sqlite_types.get("pick") == "TEXT"
     assert sqlite_types.get(team_label_str()) == "TEXT"
-    assert sqlite_types.get(awardee_label_str()) == "TEXT"
+    assert sqlite_types.get(awardee_tag_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(time_int_str()) == "INTEGER"
     assert sqlite_types.get(begin_str()) == "REAL"

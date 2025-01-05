@@ -83,7 +83,7 @@
             "atom_order": 12
         },
         "jkeys": {
-            "awardee_label": {
+            "awardee_tag": {
                 "column_order": 1,
                 "jaar_type": "GroupLabel",
                 "nesting_order": 1,
