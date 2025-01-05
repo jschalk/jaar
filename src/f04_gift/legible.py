@@ -20,7 +20,7 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     awardee_tag_str,
     group_label_str,
-    team_label_str,
+    team_tag_str,
     healer_name_str,
     parent_road_str,
     item_title_str,
@@ -597,9 +597,9 @@ def add_bud_item_teamlink_insert_to_legible_list(
 ):
     for road_dict in item_teamlink_insert_dict.values():
         for item_teamlink_atom in road_dict.values():
-            team_label_value = item_teamlink_atom.get_value(team_label_str())
+            team_tag_value = item_teamlink_atom.get_value(team_tag_str())
             road_value = item_teamlink_atom.get_value("road")
-            x_str = f"teamlink '{team_label_value}' created for item '{road_value}'."
+            x_str = f"teamlink '{team_tag_value}' created for item '{road_value}'."
             legible_list.append(x_str)
 
 
@@ -608,9 +608,9 @@ def add_bud_item_teamlink_delete_to_legible_list(
 ):
     for road_dict in item_teamlink_delete_dict.values():
         for item_teamlink_atom in road_dict.values():
-            team_label_value = item_teamlink_atom.get_value(team_label_str())
+            team_tag_value = item_teamlink_atom.get_value(team_tag_str())
             road_value = item_teamlink_atom.get_value("road")
-            x_str = f"teamlink '{team_label_value}' deleted for item '{road_value}'."
+            x_str = f"teamlink '{team_tag_value}' deleted for item '{road_value}'."
             legible_list.append(x_str)
 
 

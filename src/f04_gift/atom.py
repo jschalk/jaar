@@ -398,12 +398,12 @@ def _modify_bud_item_reason_premiseunit_insert(x_bud: BudUnit, x_atom: AtomUnit)
 
 def _modify_bud_item_teamlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.teamunit.del_teamlink(team_label=x_atom.get_value("team_label"))
+    x_itemunit.teamunit.del_teamlink(team_tag=x_atom.get_value("team_tag"))
 
 
 def _modify_bud_item_teamlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.teamunit.set_teamlink(team_label=x_atom.get_value("team_label"))
+    x_itemunit.teamunit.set_teamlink(team_tag=x_atom.get_value("team_tag"))
 
 
 def _modify_bud_item_healerlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -653,7 +653,7 @@ class AtomRow:
     stop_want: float = None
     take_force: float = None
     tally: int = None
-    team_label: int = None
+    team_tag: int = None
 
     def set_atom_category(self, atom_category: str):
         self._atom_categorys.add(atom_category)

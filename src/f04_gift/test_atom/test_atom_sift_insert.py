@@ -17,7 +17,7 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     awardee_tag_str,
     group_label_str,
-    team_label_str,
+    team_tag_str,
     healer_name_str,
     parent_road_str,
     item_title_str,
@@ -243,10 +243,10 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_item_teamlink():
 
     casa_swim_atom = atomunit_shop(bud_item_teamlink_str(), atom_insert())
     casa_swim_atom.set_arg(road_str(), casa_road)
-    casa_swim_atom.set_arg(team_label_str(), swim_str)
+    casa_swim_atom.set_arg(team_tag_str(), swim_str)
     clean_swim_atom = atomunit_shop(bud_item_teamlink_str(), atom_insert())
     clean_swim_atom.set_arg(road_str(), clean_road)
-    clean_swim_atom.set_arg(team_label_str(), swim_str)
+    clean_swim_atom.set_arg(team_tag_str(), swim_str)
     sue_bud.add_item(casa_road)
     sue_bud.add_item(clean_road)
     assert sift_atomunit(sue_bud, casa_swim_atom)

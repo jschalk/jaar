@@ -147,8 +147,8 @@ def group_label_str() -> str:
     return "group_label"
 
 
-def team_label_str() -> str:
-    return "team_label"
+def team_tag_str() -> str:
+    return "team_tag"
 
 
 def healer_name_str() -> str:
@@ -343,7 +343,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_label": "GroupLabel",
+        "team_tag": "GroupLabel",
     }
 
 

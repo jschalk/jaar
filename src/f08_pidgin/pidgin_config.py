@@ -189,7 +189,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_label": "GroupLabel",
+        "team_tag": "GroupLabel",
         "time_int": "TimeLinePoint",
         "timeline_title": "TitleUnit",
         "weekday_title": "TitleUnit",

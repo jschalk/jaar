@@ -62,7 +62,7 @@ from src.f04_gift.atom_config import (
     road_str,
     sqlite_datatype_str,
     stop_want_str,
-    team_label_str,
+    team_tag_str,
     type_AcctName_str,
     type_GroupLabel_str,
     type_TitleUnit_str,
@@ -109,7 +109,7 @@ def test_str_functions_ReturnsObj():
     assert road_str() == "road"
     assert sqlite_datatype_str() == "sqlite_datatype"
     assert stop_want_str() == "stop_want"
-    assert team_label_str() == "team_label"
+    assert team_tag_str() == "team_tag"
     assert type_AcctName_str() == "AcctName"
     assert type_GroupLabel_str() == "GroupLabel"
     assert type_TitleUnit_str() == "TitleUnit"
@@ -678,6 +678,6 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     assert x_jaar_types.get(stop_want_str()) == "float"
     assert x_jaar_types.get("take_force") == "float"
     assert x_jaar_types.get("tally") == "int"
-    assert x_jaar_types.get(team_label_str()) == type_GroupLabel_str()
+    assert x_jaar_types.get(team_tag_str()) == type_GroupLabel_str()
     assert x_jaar_types.keys() == get_atom_args_category_mapping().keys()
     assert all_atom_args_jaar_types_are_correct(x_jaar_types)

@@ -21,7 +21,7 @@ from src.f04_gift.atom_config import (
     owner_name_str,
     respect_bit_str,
     road_str,
-    team_label_str,
+    team_tag_str,
 )
 from src.f07_cmty.cmty_config import (
     get_cmty_args_jaar_types,
@@ -116,7 +116,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("stop_want") == "float"
     assert pidgin_args_jaar_types.get("take_force") == "float"
     assert pidgin_args_jaar_types.get("tally") == "int"
-    assert pidgin_args_jaar_types.get("team_label") == type_GroupLabel_str()
+    assert pidgin_args_jaar_types.get("team_tag") == type_GroupLabel_str()
     assert pidgin_args_jaar_types.get("time_int") == "TimeLinePoint"
     assert pidgin_args_jaar_types.get("timeline_title") == type_TitleUnit_str()
     assert pidgin_args_jaar_types.get("weekday_title") == type_TitleUnit_str()
@@ -199,7 +199,7 @@ def test_pidginable_atom_args_ReturnsObj():
         "need",
         owner_name_str(),
         road_str(),
-        team_label_str(),
+        team_tag_str(),
         timeline_title_str(),
         weekday_title_str(),
     }

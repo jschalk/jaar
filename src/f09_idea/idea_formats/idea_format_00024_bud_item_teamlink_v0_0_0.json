@@ -15,7 +15,7 @@
         "road": {
             "otx_key": true
         },
-        "team_label": {
+        "team_tag": {
             "otx_key": true
         }
     },

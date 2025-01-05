@@ -232,9 +232,9 @@ def test_bud_item_teamlink_exists_ReturnsObj():
     clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud.cmty_title
     swim_str = "Swim"
-    root_jkeys = {"road": root_road, "team_label": swim_str}
-    casa_jkeys = {"road": casa_road, "team_label": swim_str}
-    clean_jkeys = {"road": clean_road, "team_label": swim_str}
+    root_jkeys = {"road": root_road, "team_tag": swim_str}
+    casa_jkeys = {"road": casa_road, "team_tag": swim_str}
+    clean_jkeys = {"road": clean_road, "team_tag": swim_str}
 
     # WHEN / THEN
     assert not bud_item_teamlink_exists(None, {})
@@ -522,9 +522,9 @@ def test_bud_attr_exists_ReturnsObj_bud_item_teamlink():
     root_road = sue_bud.cmty_title
     swim_str = "Swim"
     x_category = bud_item_teamlink_str()
-    root_jkeys = {"road": root_road, "team_label": swim_str}
-    casa_jkeys = {"road": casa_road, "team_label": swim_str}
-    clean_jkeys = {"road": clean_road, "team_label": swim_str}
+    root_jkeys = {"road": root_road, "team_tag": swim_str}
+    casa_jkeys = {"road": casa_road, "team_tag": swim_str}
+    clean_jkeys = {"road": clean_road, "team_tag": swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_category, None, {})

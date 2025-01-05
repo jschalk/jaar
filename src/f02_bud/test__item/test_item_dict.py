@@ -228,7 +228,7 @@ def test_ItemUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_item.set_awardlink(awardlink_shop(yao_str))
 
     x_teamunit = casa_item.teamunit
-    x_teamunit.set_teamlink(team_label=yao_str)
+    x_teamunit.set_teamlink(team_tag=yao_str)
 
     x_originunit = casa_item._originunit
     x_originunit.set_originhold(yao_str, 1)

@@ -87,7 +87,7 @@ class PremiseTable(Base):
 class TeamLinkTable(Base):
     __tablename__ = "teamlink"
     uid = Column(Integer, primary_key=True)
-    team_label = Column(String)
+    team_tag = Column(String)
     road = Column(String)
 
 

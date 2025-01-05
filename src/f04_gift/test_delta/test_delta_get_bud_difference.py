@@ -20,7 +20,7 @@ from src.f04_gift.atom_config import (
     awardee_tag_str,
     group_label_str,
     road_str,
-    team_label_str,
+    team_tag_str,
     healer_name_str,
     parent_road_str,
     item_title_str,
@@ -1161,7 +1161,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_teamlink_in
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(team_label_str()) == xio_str
+    assert ball_atomunit.get_value(team_tag_str()) == xio_str
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 
@@ -1197,7 +1197,7 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_teamlink_de
     ]
     ball_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)
     assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(team_label_str()) == xio_str
+    assert ball_atomunit.get_value(team_tag_str()) == xio_str
     assert get_atomunit_total_count(sue_deltaunit) == 1
 
 

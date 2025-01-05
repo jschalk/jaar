@@ -20,7 +20,7 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     awardee_tag_str,
     group_label_str,
-    team_label_str,
+    team_tag_str,
     healer_name_str,
     parent_road_str,
     item_title_str,
@@ -1010,7 +1010,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_teamlink
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_insert())
     update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(team_label_str(), yao_str)
+    update_disc_atomunit.set_jkey(team_tag_str(), yao_str)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
     after_sue_au = sue_deltaunit.get_edited_bud(before_sue_au)
@@ -1040,7 +1040,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_teamlink
     # WHEN
     update_disc_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_delete())
     update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(team_label_str(), yao_str)
+    update_disc_atomunit.set_jkey(team_tag_str(), yao_str)
     sue_deltaunit = deltaunit_shop()
     sue_deltaunit.set_atomunit(update_disc_atomunit)
     print(f"{before_sue_au.get_item_obj(ball_road).teamunit=}")

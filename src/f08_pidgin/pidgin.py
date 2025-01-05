@@ -52,7 +52,7 @@ def pidginable_atom_args() -> set:
         "need",
         "owner_name",
         "road",
-        "team_label",
+        "team_tag",
         "timeline_title",
         "weekday_title",
     }

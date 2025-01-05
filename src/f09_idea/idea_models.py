@@ -176,7 +176,7 @@ class br00024AbstractTable(Base):
     cmty_title = Column(String)
     owner_name = Column(String)
     road = Column(String)
-    team_label = Column(String)
+    team_tag = Column(String)
 
 
 class br00025AbstractTable(Base):

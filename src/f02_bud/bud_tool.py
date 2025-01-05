@@ -100,11 +100,11 @@ def bud_item_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) ->
 
 
 def bud_item_teamlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_team_label = jkeys.get("team_label")
+    x_team_tag = jkeys.get("team_tag")
     x_road = jkeys.get("road")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_team_label)
+        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_team_tag)
     )
 
 
