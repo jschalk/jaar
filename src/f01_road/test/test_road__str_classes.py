@@ -13,7 +13,6 @@ from src.f01_road.road import (
     FaceName,
     get_default_face_name,
     EventInt,
-    PartyUnit,
 )
 from inspect import getdoc as inspect_getdoc
 
@@ -168,54 +167,3 @@ def test_EventInt_Exists():
     assert EventInt() == 0
     assert EventInt(12) == 12
     assert EventInt(12.4) == 12
-
-
-def test_PartyUnit_exists():
-    # ESTABLISH
-    empty_str = ""
-    # WHEN
-    x_road = PartyUnit(empty_str)
-    # THEN
-    assert x_road == empty_str
-    doc_str = "A string presentation of either Person Name or Group Label"
-    assert inspect_getdoc(x_road) == doc_str
-
-
-def test_PartyUnit_is_title_ReturnsObj_Scenario0():
-    # WHEN / THEN
-    assert PartyUnit("").is_title() is False
-    assert PartyUnit("A").is_title()
-
-    # WHEN / THEN
-    x_s = default_bridge_if_None()
-    x_partyunit = PartyUnit(f"casa{x_s}kitchen")
-    assert x_partyunit.is_title() is False
-
-
-def test_PartyUnit_is_title_ReturnsObj_Scenario1():
-    # ESTABLISH / WHEN / THEN
-    slash_str = "/"
-    x_partyunit = PartyUnit(f"casa{slash_str}kitchen")
-    assert x_partyunit.is_title()
-    assert x_partyunit.is_title(slash_str) is False
-
-
-def test_PartyUnit_is_label_ReturnsObj_Scenario0():
-    # WHEN / THEN
-    assert PartyUnit("").is_label() is False
-    assert PartyUnit("A").is_label() is False
-    x_s = default_bridge_if_None()
-    assert PartyUnit(f"{x_s}A").is_label()
-
-    # WHEN / THEN
-    x_partyunit = PartyUnit(f"casa{x_s}kitchen")
-    assert x_partyunit.is_title() is False
-    assert x_partyunit.is_label()
-
-
-def test_PartyUnit_is_label_ReturnsObj_Scenario1():
-    # ESTABLISH / WHEN / THEN
-    slash_str = "/"
-    x_partyunit = PartyUnit(f"casa{slash_str}kitchen")
-    assert x_partyunit.is_label() is False
-    assert x_partyunit.is_label(slash_str)

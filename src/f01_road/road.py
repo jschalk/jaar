@@ -326,10 +326,3 @@ def get_road_from_doar(x_doarunit: DoarUnit, bridge: str = None) -> RoadUnit:
 
 def get_doar_from_road(x_roadunit: RoadUnit, bridge: str = None) -> DoarUnit:
     return DoarUnit(get_road_from_doar(x_roadunit, bridge))
-
-
-class PartyUnit(TitleUnit):
-    """A string presentation of either Person Name or Group Label"""
-
-    def is_label(self, bridge: str = None) -> bool:
-        return len(self) > 0 and not self.contains_bridge(bridge)
