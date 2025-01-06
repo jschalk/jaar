@@ -1,6 +1,12 @@
-from sqlite3 import Connection, connect as sqlite3_connect
+from sqlite3 import (
+    Connection,
+    connect as sqlite3_connect,
+    Error as sqlite3_Error,
+    Connection as sqlite3_Connection,
+)
 from dataclasses import dataclass
 from contextlib import contextmanager
+from csv import reader as csv_reader
 
 
 def sqlite_null(x_obj: any):
@@ -212,3 +218,46 @@ def get_grouping_with_all_values_equal_sql_query(
     x_table: str, group_by_columns: list[str], value_columns: list[str]
 ) -> str:
     return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)} {_get_having_equal_value_clause(value_columns)}"
+
+
+def insert_csv(
+    csv_file_path: str, sqlite_connection: sqlite3_Connection, table_name: str
+):
+    """
+    Inserts data from a CSV file into a specified SQLite database table.
+
+    Args:
+        csv_file_path (str): Path to the CSV file.
+        sqlite_connection (sqlite3.Connection): SQLite database connection object.
+        table_name (str): Name of the table to insert data into.
+
+    Returns:
+        None
+    """
+    try:
+        # Use the provided SQLite connection
+        cursor = sqlite_connection.cursor()
+
+        # Open the CSV file
+        with open(csv_file_path, "r", newline="", encoding="utf-8") as csv_file:
+            reader = csv_reader(csv_file)
+
+            # Extract the header row from the CSV file
+            headers = next(reader)
+
+            # Create a parameterized SQL query for inserting data
+            placeholders = ", ".join(["?"] * len(headers))
+            insert_query = f"INSERT INTO {table_name} ({', '.join(headers)}) VALUES ({placeholders})"
+
+            # Insert each row into the database
+            for row in reader:
+                cursor.execute(insert_query, row)
+
+        # Commit the transaction
+        sqlite_connection.commit()
+
+    except sqlite3_Error as e:
+        print(f"SQLite error: {e}")
+
+    except Exception as e:
+        print(f"Error: {e}")
