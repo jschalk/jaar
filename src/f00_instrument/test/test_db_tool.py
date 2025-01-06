@@ -19,7 +19,7 @@ from src.f00_instrument.db_toolbox import (
 from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
 from os.path import exists as os_path_exists
-from sqlite3 import connect as sqlite3_connect
+from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 
 
 def test_sqlite_null_ReturnsCorrectObj():
@@ -295,74 +295,8 @@ def test_get_grouping_with_all_values_equal_sql_query_ReturnsObj_Scenario0():
     assert gen_select_clause == example_str
 
 
-# @pytest_fixture
-# def setup_database_and_csv():
-#     """
-#     Fixture to set up a temporary SQLite database and CSV file for testing.
-#     Yields the database path, table name, and CSV file path, and cleans up after the test.
-#     """
-#     test_db = "test_database.db"
-#     test_table = "test_table"
-#     test_csv = "test_data.csv"
-
-#     # Create a test SQLite database
-#     conn = sqlite3_connect(test_db)
-#     cursor = conn.cursor()
-
-#     # Create a test table
-#     cursor.execute(
-#         f"""
-#         CREATE TABLE {test_table} (
-#             id INTEGER PRIMARY KEY,
-#             name TEXT,
-#             age INTEGER,
-#             email TEXT
-#         )
-#     """
-#     )
-#     conn.commit()
-#     conn.close()
-
-#     # Create a test CSV file
-#     with open(test_csv, "w", newline="", encoding="utf-8") as csv_file:
-#         csv_file.write("id,name,age,email\n")
-#         csv_file.write("1,John Doe,30,john@example.com\n")
-#         csv_file.write("2,Jane Smith,25,jane@example.com\n")
-
-#     yield test_db, test_table, test_csv
-
-#     # Clean up
-#     if os_path_exists(test_db):
-#         os_remove(test_db)
-#     if os_path_exists(test_csv):
-#         os_remove(test_csv)
-
-
-# def test_insert_csv(setup_database_and_csv):
-#     """Test the insert_csv function using pytest."""
-#     test_db, test_table, test_csv = setup_database_and_csv
-
-#     # Call the function to insert data from the CSV file into the database
-#     insert_csv(test_csv, test_db, test_table)
-
-#     # Verify the data was inserted correctly
-#     conn = sqlite3_connect(test_db)
-#     cursor = conn.cursor()
-#     cursor.execute(f"SELECT * FROM {test_table}")
-#     rows = cursor.fetchall()
-#     conn.close()
-
-#     # Expected data
-#     expected_data = [
-#         (1, "John Doe", 30, "john@example.com"),
-#         (2, "Jane Smith", 25, "jane@example.com"),
-#     ]
-
-#     assert rows == expected_data
-
-
 @pytest_fixture
-def setup_database_and_csv():
+def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ignore
     """
     Fixture to set up a temporary SQLite database and CSV file for testing.
     Yields the database connection, table name, and CSV file path, and cleans up after the test.
@@ -404,7 +338,7 @@ def setup_database_and_csv():
         os_remove(test_csv)
 
 
-def test_insert_csv(setup_database_and_csv):
+def test_insert_csv(setup_database_and_csv: tuple[sqlite3_Connection, str, str]):
     """Test the insert_csv function using pytest."""
     # ESTABLISH
     conn, test_table, test_csv = setup_database_and_csv
@@ -428,7 +362,7 @@ def test_insert_csv(setup_database_and_csv):
     assert rows == expected_data
 
 
-def test_changes_committed(setup_database_and_csv):
+def test_changes_committed(setup_database_and_csv: tuple[sqlite3_Connection, str, str]):
     """Test that changes are committed to the database."""
     conn, test_table, test_csv = setup_database_and_csv
 
@@ -454,7 +388,9 @@ def test_changes_committed(setup_database_and_csv):
     assert rows == expected_data
 
 
-def test_create_table_from_csv_ChangesDBState(setup_database_and_csv):
+def test_create_table_from_csv_ChangesDBState(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
     """Test the create_table_from_csv_with_types function."""
     conn, test_table, test_csv = setup_database_and_csv
 
