@@ -261,3 +261,53 @@ def insert_csv(
 
     except Exception as e:
         print(f"Error: {e}")
+
+
+class sqlite3_Error_Exception(Exception):
+    pass
+
+
+def create_table_from_csv(
+    csv_file_path: str,
+    sqlite_connection: sqlite3_Connection,
+    table_name: str,
+    column_types: dict[str, str],
+):
+    """
+    Creates a SQLite table based on the header of a CSV file and a dictionary of column names and their data types.
+
+    Args:
+        csv_file_path (str): Path to the CSV file.
+        sqlite_connection (sqlite3.Connection): SQLite database connection object.
+        table_name (str): Name of the table to create.
+        column_types (dict): Dictionary mapping column names to their SQLite data types.
+
+    Returns:
+        None
+    """
+    try:
+        # Open the CSV file to read the header
+        with open(csv_file_path, "r", newline="", encoding="utf-8") as csv_file:
+            headers = csv_file.readline().strip().split(",")
+
+        # Dynamically create a table schema based on the provided column types
+        columns = []
+        for header in headers:
+            data_type = column_types.get(
+                header, "TEXT"
+            )  # Default to TEXT if not specified
+            columns.append(f"{header} {data_type}")
+        columns_definition = ", ".join(columns)
+
+        create_table_query = f"CREATE TABLE {table_name} ({columns_definition})"
+
+        # Execute the create table query
+        cursor = sqlite_connection.cursor()
+        cursor.execute(create_table_query)
+        sqlite_connection.commit()
+
+    except sqlite3_Error as e:
+        raise sqlite3_Error_Exception(f"SQLite error: {e}") from e
+
+    # except Exception as e:
+    #     raise Exception(f"Error: {e}")

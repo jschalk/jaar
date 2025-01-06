@@ -14,6 +14,7 @@ from src.f00_instrument.db_toolbox import (
     get_grouping_with_all_values_equal_sql_query,
     get_groupby_sql_query,
     insert_csv,
+    create_table_from_csv,
 )
 from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
@@ -451,3 +452,36 @@ def test_changes_committed(setup_database_and_csv):
     ]
 
     assert rows == expected_data
+
+
+def test_create_table_from_csv_ChangesDBState(setup_database_and_csv):
+    """Test the create_table_from_csv_with_types function."""
+    conn, test_table, test_csv = setup_database_and_csv
+
+    # Define column types
+    column_types = {
+        "id": "INTEGER",
+        "name": "TEXT",
+        "age": "INTEGER",
+        "email": "TEXT",
+        "city": "TEXT",
+    }
+
+    # Call the function to create a table based on the CSV header and column types
+    new_table = "new_test_table"
+    create_table_from_csv(test_csv, conn, new_table, column_types)
+
+    # Verify the table was created correctly
+    cursor = conn.cursor()
+    cursor.execute(f"PRAGMA table_info({new_table})")
+    columns = cursor.fetchall()
+
+    # Expected column definitions
+    expected_columns = [
+        (0, "id", "INTEGER", 0, None, 0),
+        (1, "name", "TEXT", 0, None, 0),
+        (2, "age", "INTEGER", 0, None, 0),
+        (3, "email", "TEXT", 0, None, 0),
+    ]
+
+    assert columns == expected_columns
