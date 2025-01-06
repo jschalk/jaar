@@ -76,7 +76,7 @@ def get_atomunit_total_count(x_deltaunit: DeltaUnit) -> int:
     )
 
 
-def test_DeltaUnit_create_atomunits_CorrectHandlesEmptyBuds():
+def test_DeltaUnit_create_atomunits_EmptyBuds():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     sue_deltaunit = deltaunit_shop()

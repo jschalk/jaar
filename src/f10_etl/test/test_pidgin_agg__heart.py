@@ -596,7 +596,7 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario1_MultipleRowsAtSa
     assert gen_pidginheartunit.unknown_words == {x_unk33, x_unk44}
 
 
-def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario2_NoneElementIsHandledCorrectly():
+def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario2_NoneElementIsChangedCorrectly():
     # ESTABLISH
     x_pidginheartbook = pidginheartbook_shop()
     sue_str = "Sue"
@@ -622,7 +622,7 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario2_NoneElementIsHan
     assert gen_pidginheartunit.unknown_words == {x_unk44}
 
 
-def test_PidginHeartBook_add_pidginheartrow_SetsAttr_Scenario2_NoneElementIsHandledCorrectly():
+def test_PidginHeartBook_add_pidginheartrow_SetsAttr_Scenario2_NoneElementIsChangedCorrectly():
     # ESTABLISH
     x_pidginheartbook = pidginheartbook_shop()
     sue_str = "Sue"
