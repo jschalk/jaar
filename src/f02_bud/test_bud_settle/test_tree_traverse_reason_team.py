@@ -148,7 +148,7 @@ def test_bud_itemkid_teamunit_CorrectlySets_grandchild_item_teamheir():
     assert four_item._teamheir == x_teamheir
 
 
-def test_BudUnit__get_cleaned_awardlinks_item_CorrectlyCleansItem_Teamunit():
+def test_BudUnit__get_filtered_awardlinks_item_CorrectlyCleansItem_Teamunit():
     # ESTABLISH
     sue_str = "Sue"
     sue1_bud = budunit_shop(sue_str)
@@ -174,7 +174,7 @@ def test_BudUnit__get_cleaned_awardlinks_item_CorrectlyCleansItem_Teamunit():
     # WHEN
     sue2_bud = budunit_shop(sue_str)
     sue2_bud.add_acctunit(xia_str)
-    cleaned_item = sue2_bud._get_cleaned_awardlinks_item(sue1_bud_swim_item)
+    cleaned_item = sue2_bud._get_filtered_awardlinks_item(sue1_bud_swim_item)
 
     # THEN
     cleaned_swim_teamlinks = cleaned_item.teamunit._teamlinks

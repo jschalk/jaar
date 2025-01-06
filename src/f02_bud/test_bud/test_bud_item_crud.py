@@ -697,30 +697,57 @@ def test_BudUnit_edit_item_attr_DeletesItemUnit_awardlinks():
     assert len(yao_bud.itemroot._kids[swim_str].awardlinks) == 2
 
 
-def test_BudUnit__get_cleaned_awardlinks_item_CorrectlyRemovesItem_awardlinks():
+def test_BudUnit__get_filtered_awardlinks_item_CorrectlyRemovesAcct_awardlinks():
     # ESTABLISH
     bob_str = "Bob"
-    x1_bud = budunit_shop(bob_str)
+    example_bud = budunit_shop(bob_str)
+    xia_str = "Xia"
+    run_str = ";runners"
+    hike_str = ";hikers"
+    example_bud.add_acctunit(xia_str)
+    example_bud.get_acct(xia_str).add_membership(run_str)
+
+    sports_str = "sports"
+    sports_road = example_bud.make_l1_road(sports_str)
+    example_bud.set_l1_item(itemunit_shop(sports_str))
+    example_bud.edit_item_attr(sports_road, awardlink=awardlink_shop(run_str))
+    example_bud.edit_item_attr(sports_road, awardlink=awardlink_shop(hike_str))
+    example_bud_sports_item = example_bud.get_item_obj(sports_road)
+    assert len(example_bud_sports_item.awardlinks) == 2
+    bob_bud = budunit_shop(bob_str)
+    bob_bud.add_acctunit(xia_str)
+    bob_bud.get_acct(xia_str).add_membership(run_str)
+    print(f"{example_bud_sports_item.awardlinks=}")
+
+    # WHEN
+    cleaned_item = bob_bud._get_filtered_awardlinks_item(example_bud_sports_item)
+
+    # THEN
+    assert len(cleaned_item.awardlinks) == 1
+    assert list(cleaned_item.awardlinks.keys()) == [run_str]
+
+
+def test_BudUnit__get_filtered_awardlinks_item_CorrectlyRemovesGroup_awardlink():
+    # ESTABLISH
+    bob_str = "Bob"
+    example_bud = budunit_shop(bob_str)
     xia_str = "Xia"
     zoa_str = "Zoa"
-    x1_bud.add_acctunit(xia_str)
-    x1_bud.add_acctunit(zoa_str)
+    example_bud.add_acctunit(xia_str)
+    example_bud.add_acctunit(zoa_str)
 
-    casa_str = "casa"
-    casa_road = x1_bud.make_l1_road(casa_str)
     swim_str = "swim"
-    swim_road = x1_bud.make_l1_road(swim_str)
-    x1_bud.set_l1_item(itemunit_shop(casa_str))
-    x1_bud.set_l1_item(itemunit_shop(swim_str))
-    x1_bud.edit_item_attr(swim_road, awardlink=awardlink_shop(xia_str))
-    x1_bud.edit_item_attr(swim_road, awardlink=awardlink_shop(zoa_str))
-    x1_bud_swim_item = x1_bud.get_item_obj(swim_road)
-    assert len(x1_bud_swim_item.awardlinks) == 2
+    swim_road = example_bud.make_l1_road(swim_str)
+    example_bud.set_l1_item(itemunit_shop(swim_str))
+    example_bud.edit_item_attr(swim_road, awardlink=awardlink_shop(xia_str))
+    example_bud.edit_item_attr(swim_road, awardlink=awardlink_shop(zoa_str))
+    example_bud_swim_item = example_bud.get_item_obj(swim_road)
+    assert len(example_bud_swim_item.awardlinks) == 2
     bob_bud = budunit_shop(bob_str)
     bob_bud.add_acctunit(xia_str)
 
     # WHEN
-    cleaned_item = bob_bud._get_cleaned_awardlinks_item(x1_bud_swim_item)
+    cleaned_item = bob_bud._get_filtered_awardlinks_item(example_bud_swim_item)
 
     # THEN
     assert len(cleaned_item.awardlinks) == 1
@@ -730,27 +757,27 @@ def test_BudUnit__get_cleaned_awardlinks_item_CorrectlyRemovesItem_awardlinks():
 def test_BudUnit_set_item_CorrectlyCleansItem_awardlinks():
     # ESTABLISH
     bob_str = "Bob"
-    x1_bud = budunit_shop(bob_str)
+    example_bud = budunit_shop(bob_str)
     xia_str = "Xia"
     zoa_str = "Zoa"
-    x1_bud.add_acctunit(xia_str)
-    x1_bud.add_acctunit(zoa_str)
+    example_bud.add_acctunit(xia_str)
+    example_bud.add_acctunit(zoa_str)
 
     casa_str = "casa"
-    casa_road = x1_bud.make_l1_road(casa_str)
+    casa_road = example_bud.make_l1_road(casa_str)
     swim_str = "swim"
-    swim_road = x1_bud.make_l1_road(swim_str)
-    x1_bud.set_l1_item(itemunit_shop(casa_str))
-    x1_bud.set_l1_item(itemunit_shop(swim_str))
-    x1_bud.edit_item_attr(swim_road, awardlink=awardlink_shop(xia_str))
-    x1_bud.edit_item_attr(swim_road, awardlink=awardlink_shop(zoa_str))
-    x1_bud_swim_item = x1_bud.get_item_obj(swim_road)
-    assert len(x1_bud_swim_item.awardlinks) == 2
+    swim_road = example_bud.make_l1_road(swim_str)
+    example_bud.set_l1_item(itemunit_shop(casa_str))
+    example_bud.set_l1_item(itemunit_shop(swim_str))
+    example_bud.edit_item_attr(swim_road, awardlink=awardlink_shop(xia_str))
+    example_bud.edit_item_attr(swim_road, awardlink=awardlink_shop(zoa_str))
+    example_bud_swim_item = example_bud.get_item_obj(swim_road)
+    assert len(example_bud_swim_item.awardlinks) == 2
 
     # WHEN
     bob_bud = budunit_shop(bob_str)
     bob_bud.add_acctunit(xia_str)
-    bob_bud.set_l1_item(x1_bud_swim_item, create_missing_items=False)
+    bob_bud.set_l1_item(example_bud_swim_item, create_missing_items=False)
 
     # THEN
     bob_bud_swim_item = bob_bud.get_item_obj(swim_road)

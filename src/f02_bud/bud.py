@@ -623,7 +623,7 @@ class BudUnit:
         if item_kid._fund_coin != self.fund_coin:
             item_kid._fund_coin = self.fund_coin
         if not get_rid_of_missing_awardlinks_awardee_tags:
-            item_kid = self._get_cleaned_awardlinks_item(item_kid)
+            item_kid = self._get_filtered_awardlinks_item(item_kid)
         item_kid.set_parent_road(parent_road=parent_road)
 
         # create any missing items
@@ -653,7 +653,7 @@ class BudUnit:
         if create_missing_items:
             self._create_missing_items(road=kid_road)
 
-    def _get_cleaned_awardlinks_item(self, x_item: ItemUnit) -> ItemUnit:
+    def _get_filtered_awardlinks_item(self, x_item: ItemUnit) -> ItemUnit:
         _awardlinks_to_delete = [
             _awardlink_awardee_tag
             for _awardlink_awardee_tag in x_item.awardlinks.keys()
