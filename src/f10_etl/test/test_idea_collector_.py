@@ -79,6 +79,25 @@ def test_IdeaFileRef_Exists():
     assert x_ideafileref.idea_number is None
 
 
+def test_IdeaFileRef_get_csv_filename_ReturnsObj_Scenario0():
+    # ESTABLISH / WHEN
+    x_ideafileref = IdeaFileRef()
+
+    # THEN
+    assert x_ideafileref.get_csv_filename() == ""
+
+
+def test_IdeaFileRef_get_csv_filename_ReturnsObj_Scenario1():
+    # ESTABLISH
+    br00003_str = "br00003"
+
+    # WHEN
+    x_ideafileref = IdeaFileRef(idea_number=br00003_str)
+
+    # THEN
+    assert x_ideafileref.get_csv_filename() == f"{br00003_str}.csv"
+
+
 def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     env_dir_setup_cleanup,
 ):

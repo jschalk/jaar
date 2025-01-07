@@ -36,6 +36,7 @@ from src.f10_etl.transformers import (
     etl_bow_inx_event_ideas_to_aft_faces,
     etl_aft_face_ideas_to_aft_event_ideas,
     etl_aft_event_ideas_to_cmty_ideas,
+    etl_aft_face_ideas_to_csv_files,
 )
 from dataclasses import dataclass
 
@@ -161,6 +162,9 @@ class WorldUnit:
 
     def aft_event_ideas_to_cmty_ideas(self):
         etl_aft_event_ideas_to_cmty_ideas(self._faces_aft_dir)
+
+    def aft_face_ideas_to_csv_files(self):
+        etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
 
     def get_dict(self) -> dict:
         return {

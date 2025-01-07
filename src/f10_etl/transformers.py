@@ -719,3 +719,15 @@ def etl_aft_event_ideas_to_cmty_ideas(faces_aft_dir: str):
                     file_name=event_br_ref.idea_number,
                     sheet_name="inx",
                 )
+
+
+def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
+    for face_name in get_level1_dirs(faces_aft_dir):
+        face_dir = create_path(faces_aft_dir, face_name)
+        for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
+            face_idea_excel_path = create_path(face_dir, face_br_ref.file_name)
+            idea_csv = pandas_read_excel(face_idea_excel_path, "inx").to_csv(
+                index=False
+            )
+            idea_csv = idea_csv.replace("\r", "")
+            save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)

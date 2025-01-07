@@ -16,6 +16,9 @@ class IdeaFileRef:
     sheet_name: str = None
     idea_number: str = None
 
+    def get_csv_filename(self) -> str:
+        return "" if self.idea_number is None else f"{self.idea_number}.csv"
+
 
 def get_all_idea_dataframes(dir: str) -> list[IdeaFileRef]:
     ideasheets = get_all_excel_ideasheets(dir)
