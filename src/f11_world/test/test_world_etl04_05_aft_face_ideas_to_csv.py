@@ -50,6 +50,11 @@ def test_WorldUnit_aft_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
 
     # THEN
     assert os_path_exists(br00011_csv_path)
-    expected_csv = """face_name,event_int,cmty_title,owner_name,acct_name\nSuzy,3,accord23,Bob,Bob\nSuzy,3,accord23,Yao,Bob\nSuzy,3,accord23,Yao,Yao\nSuzy,7,accord23,Yao,Yao\n"""
+    expected_csv = """face_name,event_int,cmty_title,owner_name,acct_name
+Suzy,3,accord23,Bob,Bob
+Suzy,3,accord23,Yao,Bob
+Suzy,3,accord23,Yao,Yao
+Suzy,7,accord23,Yao,Yao
+"""
     print(f"{expected_csv=}")
     assert open_file(br00011_csv_path) == expected_csv
