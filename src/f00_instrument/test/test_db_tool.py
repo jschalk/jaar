@@ -303,7 +303,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     """
     test_db = "test_database.db"
     test_table = "test_table"
-    test_csv = "test_data.csv"
+    test_csv_filepath = "test_data.csv"
 
     # Create a test SQLite database
     conn = sqlite3_connect(test_db)
@@ -323,22 +323,24 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     conn.commit()
 
     # Create a test CSV file
-    with open(test_csv, "w", newline="", encoding="utf-8") as csv_file:
+    with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write("id,name,age,email\n")
         csv_file.write("1,John Doe,30,john@example.com\n")
         csv_file.write("2,Jane Smith,25,jane@example.com\n")
 
-    yield conn, test_table, test_csv
+    yield conn, test_table, test_csv_filepath
 
     # Clean up
     conn.close()
     if os_path_exists(test_db):
         os_remove(test_db)
-    if os_path_exists(test_csv):
-        os_remove(test_csv)
+    if os_path_exists(test_csv_filepath):
+        os_remove(test_csv_filepath)
 
 
-def test_insert_csv(setup_database_and_csv: tuple[sqlite3_Connection, str, str]):
+def test_insert_csv_ChangesDBState(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
     """Test the insert_csv function using pytest."""
     # ESTABLISH
     conn, test_table, test_csv = setup_database_and_csv
@@ -362,7 +364,9 @@ def test_insert_csv(setup_database_and_csv: tuple[sqlite3_Connection, str, str])
     assert rows == expected_data
 
 
-def test_changes_committed(setup_database_and_csv: tuple[sqlite3_Connection, str, str]):
+def test_insert_csv_ChangesCommitted(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
     """Test that changes are committed to the database."""
     conn, test_table, test_csv = setup_database_and_csv
 
@@ -392,7 +396,7 @@ def test_create_table_from_csv_ChangesDBState(
     setup_database_and_csv: tuple[sqlite3_Connection, str, str]
 ):
     """Test the create_table_from_csv_with_types function."""
-    conn, test_table, test_csv = setup_database_and_csv
+    conn, test_table, test_csv_filepath = setup_database_and_csv
 
     # Define column types
     column_types = {
@@ -405,7 +409,7 @@ def test_create_table_from_csv_ChangesDBState(
 
     # Call the function to create a table based on the CSV header and column types
     new_table = "new_test_table"
-    create_table_from_csv(test_csv, conn, new_table, column_types)
+    create_table_from_csv(test_csv_filepath, conn, new_table, column_types)
 
     # Verify the table was created correctly
     cursor = conn.cursor()
@@ -421,3 +425,25 @@ def test_create_table_from_csv_ChangesDBState(
     ]
 
     assert columns == expected_columns
+
+
+def test_create_idea_table_from_csv_DoesNothingIfTableExists(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
+    # ESTABLISH
+    conn, test_table, test_csv_filepath = setup_database_and_csv
+    insert_csv(test_csv_filepath, conn, test_table)
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM {test_table}")
+    before_data = [
+        (1, "John Doe", 30, "john@example.com"),
+        (2, "Jane Smith", 25, "jane@example.com"),
+    ]
+    assert cursor.fetchall() == before_data
+
+    # WHEN
+    create_table_from_csv(test_csv_filepath, conn, test_table, {})
+
+    # THEN
+    cursor.execute(f"SELECT * FROM {test_table}")
+    assert cursor.fetchall() == before_data

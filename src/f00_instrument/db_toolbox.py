@@ -1,3 +1,4 @@
+from src.f00_instrument.dict_toolbox import extract_csv_headers
 from sqlite3 import (
     Connection,
     connect as sqlite3_connect,
@@ -293,13 +294,13 @@ def create_table_from_csv(
         # Dynamically create a table schema based on the provided column types
         columns = []
         for header in headers:
-            data_type = column_types.get(
-                header, "TEXT"
-            )  # Default to TEXT if not specified
+            data_type = column_types.get(header, "TEXT")  # Default to TEXT
             columns.append(f"{header} {data_type}")
         columns_definition = ", ".join(columns)
 
-        create_table_query = f"CREATE TABLE {table_name} ({columns_definition})"
+        create_table_query = (
+            f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_definition})"
+        )
 
         # Execute the create table query
         cursor = sqlite_connection.cursor()

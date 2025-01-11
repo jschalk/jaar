@@ -6,7 +6,11 @@ from src.f00_instrument.file import (
     get_dir_file_strs,
     open_file,
 )
-from src.f00_instrument.db_toolbox import get_grouping_with_all_values_equal_sql_query
+from src.f00_instrument.db_toolbox import (
+    get_grouping_with_all_values_equal_sql_query,
+    create_table_from_csv,
+    insert_csv,
+)
 from src.f00_instrument.dict_toolbox import set_in_nested_dict
 from src.f08_pidgin.map import MapCore
 from src.f08_pidgin.pidgin import (
@@ -19,6 +23,7 @@ from src.f09_idea.idea_config import (
     get_idea_elements_sort_order,
     get_idea_category_ref,
     get_idea_format_filename,
+    get_idea_sqlite_type,
 )
 from numpy import float64, nan as numpy_nan
 from pandas import (
@@ -29,7 +34,7 @@ from pandas import (
     read_excel as pandas_read_excel,
 )
 from openpyxl import load_workbook as openpyxl_load_workbook
-from sqlite3 import connect as sqlite3_connect
+from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 from os.path import exists as os_path_exists, dirname as os_path_dirname
 
 
@@ -337,3 +342,15 @@ def dataframe_to_dict(x_df: DataFrame, key_columns: list[str]) -> dict:
         nested_keys = [x_value[key_column] for key_column in key_columns]
         set_in_nested_dict(x_dict, nested_keys, x_value)
     return x_dict
+
+
+def create_idea_table_from_csv(
+    csv_filepath: str, conn: sqlite3_Connection, tablename: str
+):
+    column_types = get_idea_sqlite_type()
+    create_table_from_csv(csv_filepath, conn, tablename, column_types)
+
+
+def insert_idea_csv(csv_filepath: str, conn: sqlite3_Connection, new_table: str):
+    # Future feature? filtering csv file so only relevant idea columns are loaded
+    insert_csv(csv_filepath, conn, new_table)
