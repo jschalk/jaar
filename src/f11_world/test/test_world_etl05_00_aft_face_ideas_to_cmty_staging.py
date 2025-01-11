@@ -1,4 +1,5 @@
 from src.f00_instrument.file import create_path, save_file
+from src.f00_instrument.db_toolbox import db_table_exists
 from src.f01_road.finance_tran import bridge_str, time_int_str, quota_str
 from src.f03_chrono.chrono import (
     c400_number_str,
@@ -90,6 +91,19 @@ def test_WorldUnit_memory_fiscal_db_conn_HasIdeaDataFromCSV(
 
     # WHEN / THEN
     with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
+
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(
+            """
+            CREATE TABLE users (
+                id INTEGER PRIMARY KEY,
+                name TEXT NOT NULL
+            )
+        """
+        )
+        fiscal_db_conn.commit()
+        assert db_table_exists(fiscal_db_conn, "users")
+
         print(f"{type(fiscal_db_conn)=}")
         assert fiscal_db_conn != None
         cursor = fiscal_db_conn.cursor()
