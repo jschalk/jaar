@@ -1,0 +1,32 @@
+{
+    "attributes": {
+        "awardee_tag": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "cmty_title": {
+            "otx_key": true
+        },
+        "give_force": {
+            "otx_key": false
+        },
+        "owner_name": {
+            "otx_key": true
+        },
+        "road": {
+            "otx_key": true
+        },
+        "take_force": {
+            "otx_key": false
+        }
+    },
+    "idea_number": "br00022",
+    "categorys": [
+        "bud_item_awardlink"
+    ]
+}

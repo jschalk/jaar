@@ -1,12 +1,12 @@
 from src.f00_instrument.file import create_path
 from src.f03_chrono.chrono import (
     c400_number_str,
-    timeline_idea_str,
+    timeline_title_str,
     yr1_jan1_offset_str,
     monthday_distortion_str,
 )
 from src.f04_gift.atom_config import (
-    cmty_idea_str,
+    cmty_title_str,
     penny_str,
     fund_coin_str,
     penny_str,
@@ -87,7 +87,7 @@ def test_get_cmty_config_dict_ReturnsObj():
         penny_str(),
         respect_bit_str(),
         "bridge",
-        timeline_idea_str(),
+        timeline_title_str(),
         yr1_jan1_offset_str(),
     }
     print(f"{cmtyunit_dict.get(jvalues_str()).keys()=}")
@@ -153,10 +153,10 @@ def test_get_cmty_args_category_mapping_ReturnsObj():
     x_hour = {cmty_timeline_hour_str()}
     assert x_cmty_args_category_mapping.get(cumlative_minute_str()) == x_hour
     assert x_cmty_args_category_mapping.get(fund_coin_str())
-    cmty_idea_categorys = x_cmty_args_category_mapping.get(cmty_idea_str())
-    assert cmty_timeline_hour_str() in cmty_idea_categorys
-    assert cmtyunit_str() in cmty_idea_categorys
-    assert len(cmty_idea_categorys) == 6
+    cmty_title_categorys = x_cmty_args_category_mapping.get(cmty_title_str())
+    assert cmty_timeline_hour_str() in cmty_title_categorys
+    assert cmtyunit_str() in cmty_title_categorys
+    assert len(cmty_title_categorys) == 6
     assert len(x_cmty_args_category_mapping) == 21
 
 

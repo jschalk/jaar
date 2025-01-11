@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_cmty_idea as root_idea, create_road
+from src.f01_road.road import get_default_cmty_title as root_title, create_road
 from src.f02_bud.group import awardheir_shop, awardlink_shop
 from src.f02_bud.reason_item import (
     reasonunit_shop,
@@ -29,7 +29,7 @@ def test_ItemUnit_clear_all_acct_cred_debt_ClearsCorrectly():
 def test_ItemUnit_get_fund_share_ReturnsObj():
     # ESTABLISH
     texas_str = "texas"
-    texas_item = itemunit_shop(texas_str, root_idea())
+    texas_item = itemunit_shop(texas_str, root_title())
 
     # WHEN / THEN
     assert texas_item.get_fund_share() == 0
@@ -80,7 +80,7 @@ def test_ItemUnit_get_awardlink_ReturnsObj():
 
     # THEN
     assert biker_awardlink
-    assert biker_awardlink.awardee_label == biker_str
+    assert biker_awardlink.awardee_tag == biker_str
 
 
 def test_ItemUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
@@ -95,8 +95,8 @@ def test_ItemUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValue
     swim_take_force = 32
     swim_awardheir = awardheir_shop(swim_group_label, swim_give_force, swim_take_force)
     x_awardheirs = {
-        swim_awardheir.awardee_label: swim_awardheir,
-        biker_awardheir.awardee_label: biker_awardheir,
+        swim_awardheir.awardee_tag: swim_awardheir,
+        biker_awardheir.awardee_tag: biker_awardheir,
     }
     sport_str = "sport"
     sport_item = itemunit_shop(sport_str, _awardheirs=x_awardheirs)
@@ -207,18 +207,18 @@ def test_ItemUnit_set_range_factheirs_SetsAttrNoParameters():
 def test_ItemUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
     week_str = "week"
-    week_road = create_road(root_idea(), week_str)
+    week_road = create_road(root_title(), week_str)
     week_open = 3
     week_nigh = 7
     week_addin = 10
-    week_item = itemunit_shop(week_str, _parent_road=root_idea(), addin=week_addin)
+    week_item = itemunit_shop(week_str, _parent_road=root_title(), addin=week_addin)
     week_factheir = factheir_shop(week_road, week_road, week_open, week_nigh)
     tue_str = "Tue"
     tue_road = create_road(week_road, tue_str)
     tue_addin = 100
     tue_item = itemunit_shop(tue_str, _parent_road=week_road, addin=tue_addin)
     ball_str = "ball"
-    ball_road = create_road(root_idea(), ball_str)
+    ball_road = create_road(root_title(), ball_str)
     ball_item = itemunit_shop(ball_str)
     ball_item._set_factheir(week_factheir)
     tue_reasonheirs = {tue_road: reasonheir_shop(tue_road, None, False)}
@@ -451,7 +451,7 @@ def test_ItemUnit_set_teamheir_CorrectlySetsAttr():
     swim_str = "swimmers"
     sport_str = "sports"
     sport_item = itemunit_shop(sport_str)
-    sport_item.teamunit.set_teamlink(team_label=swim_str)
+    sport_item.teamunit.set_teamlink(team_tag=swim_str)
     # assert sport_item._teamheir is None
 
     # WHEN
@@ -460,7 +460,7 @@ def test_ItemUnit_set_teamheir_CorrectlySetsAttr():
     # THEN
     assert sport_item._teamheir is not None
     swim_teamunit = teamunit_shop()
-    swim_teamunit.set_teamlink(team_label=swim_str)
+    swim_teamunit.set_teamlink(team_tag=swim_str)
     swim_teamheir = teamheir_shop()
     swim_teamheir.set_teamlinks(
         teamunit=swim_teamunit, parent_teamheir=None, bud_groupunits=None

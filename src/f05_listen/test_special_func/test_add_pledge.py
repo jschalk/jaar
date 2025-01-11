@@ -1,4 +1,4 @@
-from src.f01_road.road import get_default_cmty_idea as root_idea
+from src.f01_road.road import get_default_cmty_title as root_title
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.special_func import add_voice_pledge, add_voice_fact
 from src.f05_listen.examples.listen_env import (
@@ -10,7 +10,7 @@ from src.f05_listen.examples.listen_env import (
 def test_add_voice_pledge_Addspledgegift(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), root_idea(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str)
     sue_hubunit.initialize_gift_voice_files()
     old_sue_voice = sue_hubunit.get_voice_bud()
     clean_str = "clean"
@@ -33,7 +33,7 @@ def test_add_voice_pledge_Addspledgegift(env_dir_setup_cleanup):
 def test_add_voice_pledge_SetsvoiceBudpledgeItem_teamlink(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), root_idea(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str)
     sue_hubunit.initialize_gift_voice_files()
     old_sue_voice = sue_hubunit.get_voice_bud()
     clean_str = "clean"
@@ -55,7 +55,7 @@ def test_add_voice_pledge_SetsvoiceBudpledgeItem_teamlink(env_dir_setup_cleanup)
 def test_add_voice_pledge_CanAdd_reasonunit(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), root_idea(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str)
     sue_hubunit.initialize_gift_voice_files()
     old_sue_voice = sue_hubunit.get_voice_bud()
     clean_str = "clean"
@@ -81,7 +81,7 @@ def test_add_voice_pledge_CanAdd_reasonunit(env_dir_setup_cleanup):
 def test_add_voice_fact_CanAdd_factunit(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), root_idea(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str)
     sue_hubunit.initialize_gift_voice_files()
     old_sue_voice = sue_hubunit.get_voice_bud()
     house_estimation_str = "house_estimation"

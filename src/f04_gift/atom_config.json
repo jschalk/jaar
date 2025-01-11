@@ -83,7 +83,7 @@
             "atom_order": 12
         },
         "jkeys": {
-            "awardee_label": {
+            "awardee_tag": {
                 "column_order": 1,
                 "jaar_type": "GroupLabel",
                 "nesting_order": 1,
@@ -283,7 +283,7 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
-            "team_label": {
+            "team_tag": {
                 "column_order": 1,
                 "jaar_type": "GroupLabel",
                 "nesting_order": 1,
@@ -306,9 +306,9 @@
             "atom_order": 11
         },
         "jkeys": {
-            "idee": {
+            "item_title": {
                 "column_order": 1,
-                "jaar_type": "IdeaUnit",
+                "jaar_type": "TitleUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },

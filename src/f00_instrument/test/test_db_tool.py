@@ -13,8 +13,18 @@ from src.f00_instrument.db_toolbox import (
     _get_having_equal_value_clause,
     get_grouping_with_all_values_equal_sql_query,
     get_groupby_sql_query,
+    insert_csv,
+    create_table_from_csv,
+    db_table_exists,
 )
-from pytest import raises as pytest_raises
+from pytest import raises as pytest_raises, fixture as pytest_fixture
+from os import remove as os_remove
+from os.path import exists as os_path_exists
+from sqlite3 import (
+    connect as sqlite3_connect,
+    Connection as sqlite3_Connection,
+    sqlite_version as sqlite3_sqlite_version,
+)
 
 
 def test_sqlite_null_ReturnsCorrectObj():
@@ -288,3 +298,194 @@ def test_get_grouping_with_all_values_equal_sql_query_ReturnsObj_Scenario0():
     # THEN
     example_str = f"""{get_groupby_sql_query(x_table_name, x_group_by_columns, x_value_columns)} HAVING MIN({swim_str}) = MAX({swim_str}) AND MIN({run_str}) = MAX({run_str})"""
     assert gen_select_clause == example_str
+
+
+@pytest_fixture
+def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ignore
+    """
+    Fixture to set up a temporary SQLite database and CSV file for testing.
+    Yields the database connection, table name, and CSV file path, and cleans up after the test.
+    """
+    test_db = "test_database.db"
+    test_table = "test_table"
+    test_csv_filepath = "test_data.csv"
+
+    # Create a test SQLite database
+    conn = sqlite3_connect(test_db)
+    cursor = conn.cursor()
+
+    # Create a test table
+    cursor.execute(
+        f"""
+        CREATE TABLE {test_table} (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            age INTEGER,
+            email TEXT
+        )
+    """
+    )
+    conn.commit()
+
+    # Create a test CSV file
+    with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
+        csv_file.write("id,name,age,email\n")
+        csv_file.write("1,John Doe,30,john@example.com\n")
+        csv_file.write("2,Jane Smith,25,jane@example.com\n")
+
+    yield conn, test_table, test_csv_filepath
+
+    # Clean up
+    conn.close()
+    if os_path_exists(test_db):
+        os_remove(test_db)
+    if os_path_exists(test_csv_filepath):
+        os_remove(test_csv_filepath)
+
+
+def test_insert_csv_ChangesDBState(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
+    """Test the insert_csv function using pytest."""
+    # ESTABLISH
+    conn, test_table, test_csv = setup_database_and_csv
+
+    # WHEN
+    # Call the function to insert data from the CSV file into the database
+    insert_csv(test_csv, conn, test_table)
+
+    # THEN
+    # Verify the data was inserted correctly
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM {test_table}")
+    rows = cursor.fetchall()
+
+    # Expected data
+    expected_data = [
+        (1, "John Doe", 30, "john@example.com"),
+        (2, "Jane Smith", 25, "jane@example.com"),
+    ]
+
+    assert rows == expected_data
+
+
+def test_insert_csv_ChangesCommitted(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
+    """Test that changes are committed to the database."""
+    conn, test_table, test_csv = setup_database_and_csv
+
+    # Insert data
+    insert_csv(test_csv, conn, test_table)
+
+    # Close and reopen the connection to verify persistence
+    conn.close()
+    conn = sqlite3_connect("test_database.db")
+
+    # Verify the data is still present
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM {test_table}")
+    rows = cursor.fetchall()
+    conn.close()
+
+    # Expected data
+    expected_data = [
+        (1, "John Doe", 30, "john@example.com"),
+        (2, "Jane Smith", 25, "jane@example.com"),
+    ]
+
+    assert rows == expected_data
+
+
+def test_create_table_from_csv_ChangesDBState(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
+    """Test the create_table_from_csv_with_types function."""
+    conn, test_table, test_csv_filepath = setup_database_and_csv
+
+    # Define column types
+    column_types = {
+        "id": "INTEGER",
+        "name": "TEXT",
+        "age": "INTEGER",
+        "email": "TEXT",
+        "city": "TEXT",
+    }
+
+    # Call the function to create a table based on the CSV header and column types
+    new_table = "new_test_table"
+    create_table_from_csv(test_csv_filepath, conn, new_table, column_types)
+
+    # Verify the table was created correctly
+    cursor = conn.cursor()
+    cursor.execute(f"PRAGMA table_info({new_table})")
+    columns = cursor.fetchall()
+
+    # Expected column definitions
+    expected_columns = [
+        (0, "id", "INTEGER", 0, None, 0),
+        (1, "name", "TEXT", 0, None, 0),
+        (2, "age", "INTEGER", 0, None, 0),
+        (3, "email", "TEXT", 0, None, 0),
+    ]
+
+    assert columns == expected_columns
+
+
+def test_create_idea_table_from_csv_DoesNothingIfTableExists(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
+    # ESTABLISH
+    conn, test_table, test_csv_filepath = setup_database_and_csv
+    insert_csv(test_csv_filepath, conn, test_table)
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM {test_table}")
+    before_data = [
+        (1, "John Doe", 30, "john@example.com"),
+        (2, "Jane Smith", 25, "jane@example.com"),
+    ]
+    assert cursor.fetchall() == before_data
+
+    # WHEN
+    create_table_from_csv(test_csv_filepath, conn, test_table, {})
+
+    # THEN
+    cursor.execute(f"SELECT * FROM {test_table}")
+    assert cursor.fetchall() == before_data
+
+
+def test_table_exists_ReturnsObj():
+    # ESTABLISH
+    conn = sqlite3_connect(":memory:")
+    users_tablename = "users"
+
+    # WHEN / THEN
+    assert db_table_exists(conn, users_tablename) is False
+
+    # ESTABLISH
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        CREATE TABLE users (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL
+        )
+    """
+    )
+    conn.commit()
+
+    # WHEN / THEN
+    assert db_table_exists(conn, users_tablename)
+
+
+def test_sqlite_version():
+    # Retrieve the SQLite version
+    sqlite_version = sqlite3_sqlite_version
+
+    # Log the version for debugging purposes
+    print(f"SQLite version being used: {sqlite_version}")
+
+    # Check if the version meets requirements (example: 3.30.0 or later)
+    major, minor, patch = map(int, sqlite_version.split("."))
+    sqlite_old_error_message = f"SQLite version is too old: {sqlite_version}"
+    assert (major, minor, patch) >= (3, 30, 0), sqlite_old_error_message

@@ -456,7 +456,7 @@ def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario2_MultipleRowsAtSame
     assert gen_pidginbodyunit.inx_strs == {bob2_inx, bob3_inx}
 
 
-def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario3_NoneElementIsHandledCorrectly():
+def test_PidginBodyBook_eval_pidginbodyrow_SetsAttr_Scenario3_NoneElementIsChangedCorrectly():
     # ESTABLISH
     x_pidginbodybook = pidginbodybook_shop()
     sue_str = "Sue"

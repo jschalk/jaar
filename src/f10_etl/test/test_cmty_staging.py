@@ -12,7 +12,7 @@ from src.f07_cmty.cmty_config import (
     get_cmty_config_args,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet
+from src.f09_idea.pandas_tool import sheet_exists, upsert_sheet
 from src.f10_etl.cmty_agg import (
     CmtyPrimeFilePaths,
     CmtyPrimeColumns,
@@ -24,12 +24,12 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-# br00000 cmty_idea c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_idea,yr1_jan1_offset
-# br00001 cmty_idea owner_name,acct_name,time_int,quota
-# br00002 cmty_idea owner_name,acct_name,time_int,amount
-# br00003 cmty_idea hour_idea,cumlative_minute
-# br00004 cmty_idea month_idea,cumlative_day
-# br00005 cmty_idea weekday_idea,weekday_order
+# br00000 cmty_title c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
+# br00001 cmty_title owner_name,acct_name,time_int,quota
+# br00002 cmty_title owner_name,acct_name,time_int,amount
+# br00003 cmty_title hour_title,cumlative_minute
+# br00004 cmty_title month_title,cumlative_day
+# br00005 cmty_title weekday_title,weekday_order
 
 
 def test_CmtyPrimeFilePaths_Exists():
@@ -199,9 +199,9 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParame
     xp = CmtyPrimeFilePaths(cmtys_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
-    accord56_cmty_idea_str = "accord56"
+    accord56_cmty_title_str = "accord56"
     accord56 = [
-        accord56_cmty_idea_str,
+        accord56_cmty_title_str,
         "",  # accord56_c400_number_str,
         "",  # accord56_current_time_str,
         "",  # accord56_fund_coin_str,
@@ -209,7 +209,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParame
         "",  # accord56_penny_str,
         "",  # accord56_respect_bit_str,
         "",  # accord56_bridge_str,
-        "",  # accord56_timeline_idea_str,
+        "",  # accord56_timeline_title_str,
         "",  # accord56_yr1_jan1_offset_str,
     ]
     cmtyunit_rows = [accord56]
@@ -228,9 +228,9 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParame
     accord56_cmtyunit.cmtys_dir = cmtys_dir
     accord56_cmtyunit._set_cmty_dirs()
     assert accord56_cmtyunit
-    assert accord56_cmtyunit.cmty_idea == accord56_cmty_idea_str
+    assert accord56_cmtyunit.cmty_title == accord56_cmty_title_str
     assert accord56_cmtyunit.cmtys_dir == cmtys_dir
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_idea_str, cmtys_dir)
+    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title_str, cmtys_dir)
     assert accord56_cmtyunit.timeline == expected_cmtyunit.timeline
     assert accord56_cmtyunit == expected_cmtyunit
 
@@ -244,14 +244,14 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineUni
     xp = CmtyPrimeFilePaths(cmtys_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
-    accord56_cmty_idea_str = "accord56"
+    accord56_cmty_title_str = "accord56"
     accord56_current_time = 77
     accord56_fund_coin = 3
     accord56_penny = 2
     accord56_respect_bit = 55
     accord56_bridge = "/"
     accord56 = [
-        accord56_cmty_idea_str,
+        accord56_cmty_title_str,
         "",  # accord56_c400_number_str,
         accord56_current_time,
         accord56_fund_coin,
@@ -259,7 +259,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineUni
         accord56_penny,
         accord56_respect_bit,
         accord56_bridge,
-        "",  # accord56_timeline_idea_str,
+        "",  # accord56_timeline_title_str,
         "",  # accord56_yr1_jan1_offset_str,
     ]
     cmtyunit_rows = [accord56]
@@ -276,15 +276,15 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineUni
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     assert accord56_cmtyunit
-    assert accord56_cmtyunit.cmty_idea == accord56_cmty_idea_str
+    assert accord56_cmtyunit.cmty_title == accord56_cmty_title_str
     assert accord56_cmtyunit.current_time == accord56_current_time
     assert accord56_cmtyunit.fund_coin == accord56_fund_coin
     assert accord56_cmtyunit.penny == accord56_penny
     assert accord56_cmtyunit.respect_bit == accord56_respect_bit
     assert accord56_cmtyunit.bridge == accord56_bridge
-    default_cmtyunit = cmtyunit_shop(accord56_cmty_idea_str)
+    default_cmtyunit = cmtyunit_shop(accord56_cmty_title_str)
     assert accord56_cmtyunit.timeline == default_cmtyunit.timeline
-    assert accord56_cmtyunit.cmty_idea == accord56_cmty_idea_str
+    assert accord56_cmtyunit.cmty_title == accord56_cmty_title_str
     assert accord56_cmtyunit.current_time != default_cmtyunit.current_time
     assert accord56_cmtyunit.fund_coin != default_cmtyunit.fund_coin
     assert accord56_cmtyunit.penny != default_cmtyunit.penny
@@ -302,12 +302,12 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitPar
     xp = CmtyPrimeFilePaths(cmtys_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
-    accord56_cmty_idea = "accord56"
+    accord56_cmty_title = "accord56"
     accord56_c400_number = 9
-    accord56_timeline_idea = "timelineX3"
+    accord56_timeline_title = "timelineX3"
     accord56_yr1_jan1_offset = 555
     accord56 = [
-        accord56_cmty_idea,
+        accord56_cmty_title,
         accord56_c400_number,
         "",  # current_time_str(),
         "",  # fund_coin_str(),
@@ -315,7 +315,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitPar
         "",  # penny_str(),
         "",  # respect_bit_str(),
         "",  # bridge_str(),
-        accord56_timeline_idea,
+        accord56_timeline_title,
         accord56_yr1_jan1_offset,
     ]
     cmtyunit_rows = [accord56]
@@ -332,17 +332,17 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitPar
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     assert accord56_cmtyunit
-    assert accord56_cmtyunit.cmty_idea == accord56_cmty_idea
+    assert accord56_cmtyunit.cmty_title == accord56_cmty_title
     expected_timeline_config = create_timeline_config(
-        timeline_idea=accord56_timeline_idea,
+        timeline_title=accord56_timeline_title,
         c400_count=accord56_c400_number,
         yr1_jan1_offset=accord56_yr1_jan1_offset,
     )
     expected_timelineunit = timelineunit_shop(expected_timeline_config)
     expected_cmtyunit = cmtyunit_shop(
-        accord56_cmty_idea, timeline=expected_timelineunit
+        accord56_cmty_title, timeline=expected_timelineunit
     )
-    assert accord56_cmtyunit.timeline.timeline_idea == accord56_timeline_idea
+    assert accord56_cmtyunit.timeline.timeline_title == accord56_timeline_title
     assert accord56_cmtyunit.timeline.c400_number == accord56_c400_number
     assert accord56_cmtyunit.timeline == expected_timelineunit
     assert accord56_cmtyunit.timeline == expected_cmtyunit.timeline
@@ -358,14 +358,14 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario3_cmty_timeline_weekday(
     xp = CmtyPrimeFilePaths(cmtys_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
-    accord56_cmty_idea = "accord56"
-    accord56_cmty_idea
+    accord56_cmty_title = "accord56"
+    accord56_cmty_title
     monday_str = "Monday"
     tuesday_str = "Tuesday"
-    accord56_cmty_row = [accord56_cmty_idea, "", "", "", "", "", "", "", "", ""]
+    accord56_cmty_row = [accord56_cmty_title, "", "", "", "", "", "", "", "", ""]
     cmtyunit_df = DataFrame([accord56_cmty_row], columns=xc.cmtyunit_agg_columns)
-    a56_weekday_t3 = [accord56_cmty_idea, monday_str, 3]
-    a56_weekday_t7 = [accord56_cmty_idea, tuesday_str, 4]
+    a56_weekday_t3 = [accord56_cmty_title, monday_str, 3]
+    a56_weekday_t7 = [accord56_cmty_title, tuesday_str, 4]
     a56_weekday_rows = [a56_weekday_t3, a56_weekday_t7]
     a56_weekday_df = DataFrame(a56_weekday_rows, columns=xc.cmty_weekday_agg_columns)
     print(f"{a56_weekday_df=}")
@@ -382,7 +382,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario3_cmty_timeline_weekday(
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(create_timeline_config())
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_idea, cmtys_dir, x_timelineunit)
+    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title, cmtys_dir, x_timelineunit)
     expected_cmtyunit.timeline.weekdays_config = [monday_str, tuesday_str]
     print(f"{expected_cmtyunit.timeline.weekdays_config=}")
     assert accord56_cmtyunit.timeline.weekdays_config == [monday_str, tuesday_str]
@@ -398,14 +398,14 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario4_cmty_timeline_month(
     xp = CmtyPrimeFilePaths(cmtys_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
-    accord56_cmty_idea = "accord56"
-    accord56_cmty_idea
+    accord56_cmty_title = "accord56"
+    accord56_cmty_title
     july_str = "July"
     june_str = "June"
-    accord56_cmty_row = [accord56_cmty_idea, "", "", "", "", "", "", "", "", ""]
+    accord56_cmty_row = [accord56_cmty_title, "", "", "", "", "", "", "", "", ""]
     cmtyunit_df = DataFrame([accord56_cmty_row], columns=xc.cmtyunit_agg_columns)
-    a56_june = [accord56_cmty_idea, june_str, 150]
-    a56_july = [accord56_cmty_idea, july_str, 365]
+    a56_june = [accord56_cmty_title, june_str, 150]
+    a56_july = [accord56_cmty_title, july_str, 365]
     a56_month_rows = [a56_july, a56_june]
     a56_month_df = DataFrame(a56_month_rows, columns=xc.cmty_month_agg_columns)
     print(f"{a56_month_df=}")
@@ -422,7 +422,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario4_cmty_timeline_month(
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(create_timeline_config())
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_idea, cmtys_dir, x_timelineunit)
+    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title, cmtys_dir, x_timelineunit)
     expected_cmtyunit.timeline.months_config = [[june_str, 150], [july_str, 365]]
     print(f"{expected_cmtyunit.timeline.months_config=}")
     assert accord56_cmtyunit.timeline.months_config == [
@@ -441,16 +441,16 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario5_cmty_timeline_hour(
     xp = CmtyPrimeFilePaths(cmtys_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
-    accord56_cmty_idea = "accord56"
-    accord56_cmty_idea
+    accord56_cmty_title = "accord56"
+    accord56_cmty_title
     a56_0hr = "0hour"
     a56_5hr = "5hour"
     a56_8hr = "8hour"
-    accord56_cmty_row = [accord56_cmty_idea, "", "", "", "", "", "", "", "", ""]
+    accord56_cmty_row = [accord56_cmty_title, "", "", "", "", "", "", "", "", ""]
     cmtyunit_df = DataFrame([accord56_cmty_row], columns=xc.cmtyunit_agg_columns)
-    a56_0hour_row = [accord56_cmty_idea, a56_0hr, 60]
-    a56_5hour_row = [accord56_cmty_idea, a56_5hr, 500]
-    a56_8hour_row = [accord56_cmty_idea, a56_8hr, 1440]
+    a56_0hour_row = [accord56_cmty_title, a56_0hr, 60]
+    a56_5hour_row = [accord56_cmty_title, a56_5hr, 500]
+    a56_8hour_row = [accord56_cmty_title, a56_8hr, 1440]
     a56_hour_rows = [a56_0hour_row, a56_5hour_row, a56_8hour_row]
     a56_hour_df = DataFrame(a56_hour_rows, columns=xc.cmty_hour_agg_columns)
     print(f"{a56_hour_df=}")
@@ -467,7 +467,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario5_cmty_timeline_hour(
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(create_timeline_config())
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_idea, cmtys_dir, x_timelineunit)
+    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title, cmtys_dir, x_timelineunit)
     expected_hour_config = [[a56_0hr, 60], [a56_5hr, 500], [a56_8hr, 1440]]
     expected_cmtyunit.timeline.hours_config = expected_hour_config
     print(f"{expected_cmtyunit.timeline.hours_config=}")
@@ -484,17 +484,17 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario6_cmty_cashbook(
     xp = CmtyPrimeFilePaths(cmtys_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
-    accord56_cmty_idea = "accord56"
+    accord56_cmty_title = "accord56"
     sue_str = "Sue"
     bob_str = "Bob"
     t3 = 3
     t7 = 7
     amount3 = 555
     amount7 = 777
-    accord56_cmty_row = [accord56_cmty_idea, "", "", "", "", "", "", "", "", ""]
+    accord56_cmty_row = [accord56_cmty_title, "", "", "", "", "", "", "", "", ""]
     cmtyunit_df = DataFrame([accord56_cmty_row], columns=xc.cmtyunit_agg_columns)
-    a56_cashbook_t3 = [accord56_cmty_idea, sue_str, bob_str, t3, amount3]
-    a56_cashbook_t7 = [accord56_cmty_idea, sue_str, bob_str, t7, amount7]
+    a56_cashbook_t3 = [accord56_cmty_title, sue_str, bob_str, t3, amount3]
+    a56_cashbook_t7 = [accord56_cmty_title, sue_str, bob_str, t7, amount7]
     a56_cashbook_rows = [a56_cashbook_t3, a56_cashbook_t7]
     cmty_cashbook_df = DataFrame(
         a56_cashbook_rows, columns=xc.cmty_cashbook_agg_columns
@@ -513,7 +513,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario6_cmty_cashbook(
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(create_timeline_config())
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_idea, cmtys_dir, x_timelineunit)
+    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title, cmtys_dir, x_timelineunit)
     expected_cmtyunit.add_cashpurchase(sue_str, bob_str, t3, amount3)
     expected_cmtyunit.add_cashpurchase(sue_str, bob_str, t7, amount7)
     print(f"{expected_cmtyunit.cashbook=}")
@@ -531,17 +531,17 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario7_cmty_deal_episode(
     xp = CmtyPrimeFilePaths(cmtys_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
-    accord56_cmty_idea = "accord56"
-    accord56_cmty_idea
+    accord56_cmty_title = "accord56"
+    accord56_cmty_title
     sue_str = "Sue"
     t3 = 3
     t7 = 7
     quota3 = 555
     quota7 = 777
-    accord56_cmty_row = [accord56_cmty_idea, "", "", "", "", "", "", "", "", ""]
+    accord56_cmty_row = [accord56_cmty_title, "", "", "", "", "", "", "", "", ""]
     cmtyunit_df = DataFrame([accord56_cmty_row], columns=xc.cmtyunit_agg_columns)
-    a56_deal_t3 = [accord56_cmty_idea, sue_str, t3, quota3]
-    a56_deal_t7 = [accord56_cmty_idea, sue_str, t7, quota7]
+    a56_deal_t3 = [accord56_cmty_title, sue_str, t3, quota3]
+    a56_deal_t7 = [accord56_cmty_title, sue_str, t7, quota7]
     a56_deal_rows = [a56_deal_t3, a56_deal_t7]
     cmty_deal_df = DataFrame(a56_deal_rows, columns=xc.cmty_deal_agg_columns)
     print(f"{cmty_deal_df=}")
@@ -558,7 +558,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario7_cmty_deal_episode(
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(create_timeline_config())
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_idea, cmtys_dir, x_timelineunit)
+    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title, cmtys_dir, x_timelineunit)
     expected_cmtyunit.add_dealepisode(sue_str, t3, quota3)
     expected_cmtyunit.add_dealepisode(sue_str, t7, quota7)
     print(f"{expected_cmtyunit.deallogs=}")

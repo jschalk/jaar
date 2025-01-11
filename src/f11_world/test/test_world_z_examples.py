@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import cmty_idea_str, acct_name_str
-from src.f09_brick.pandas_tool import upsert_sheet
-from src.f10_etl.brick_collector import get_all_excel_bricksheets
+from src.f04_gift.atom_config import cmty_title_str, acct_name_str
+from src.f09_idea.pandas_tool import upsert_sheet
+from src.f10_etl.idea_collector import get_all_excel_ideasheets
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame
 
@@ -16,7 +16,7 @@ def test_ocean_to_boat_staging_PidginsAll(env_dir_setup_cleanup):
     sue_str = "Sue"
     event_int = 55
     df1 = DataFrame(
-        [[accord23_str, sue_str]], columns=[cmty_idea_str(), acct_name_str()]
+        [[accord23_str, sue_str]], columns=[cmty_title_str(), acct_name_str()]
     )
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     br00000_str = "br00000"
@@ -27,7 +27,7 @@ def test_ocean_to_boat_staging_PidginsAll(env_dir_setup_cleanup):
     upsert_sheet(ex_file_path, br00002_str, df2)
 
     # WHEN
-    x_sheet_names = get_all_excel_bricksheets(env_dir)
+    x_sheet_names = get_all_excel_ideasheets(env_dir)
 
     # THEN
     assert x_sheet_names

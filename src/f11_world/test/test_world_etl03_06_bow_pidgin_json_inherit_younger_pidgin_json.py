@@ -12,14 +12,14 @@ from src.f08_pidgin.pidgin_config import (
     otx_name_str,
     inx_label_str,
     otx_label_str,
-    inx_idea_str,
-    otx_idea_str,
+    inx_title_str,
+    otx_title_str,
     inx_road_str,
     otx_road_str,
     unknown_word_str,
 )
-from src.f09_brick.pidgin_toolbox import init_pidginunit_from_dir
-from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet, open_csv
+from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
+from src.f09_idea.pandas_tool import sheet_exists, upsert_sheet, open_csv
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -40,7 +40,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario0_NoPidginUnitFi
     # WHEN
     fizz_world.pidgin_jsons_inherit_younger_pidgins()
 
-    # THEN nothing changes, no errors raised
+    # THEN no changes, no errors raised
     assert fizz_world._pidgin_events == {}
 
     # Verify no files were created or modified

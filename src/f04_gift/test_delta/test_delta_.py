@@ -1,4 +1,4 @@
-from src.f01_road.road import create_road, get_default_cmty_idea as root_idea
+from src.f01_road.road import create_road, get_default_cmty_title as root_title
 from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.bud_tool import (
     budunit_str,
@@ -12,10 +12,10 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     acct_name_str,
-    awardee_label_str,
+    awardee_tag_str,
     group_label_str,
     parent_road_str,
-    idee_str,
+    item_title_str,
     credit_belief_str,
     debtit_belief_str,
 )
@@ -342,16 +342,16 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj():
 
 def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
     # ESTABLISH
-    x_cmty_idea = root_idea()
+    x_cmty_title = root_title()
     sports_str = "sports"
-    sports_road = create_road(x_cmty_idea, sports_str)
+    sports_road = create_road(x_cmty_title, sports_str)
     knee_str = "knee"
     x_category = bud_itemunit_str()
     sports_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    sports_insert_itemunit_atomunit.set_jkey(idee_str(), sports_str)
-    sports_insert_itemunit_atomunit.set_jkey(parent_road_str(), x_cmty_idea)
+    sports_insert_itemunit_atomunit.set_jkey(item_title_str(), sports_str)
+    sports_insert_itemunit_atomunit.set_jkey(parent_road_str(), x_cmty_title)
     knee_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
-    knee_insert_itemunit_atomunit.set_jkey(idee_str(), knee_str)
+    knee_insert_itemunit_atomunit.set_jkey(item_title_str(), knee_str)
     knee_insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(knee_insert_itemunit_atomunit)
@@ -375,19 +375,19 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
 
 def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     # ESTABLISH
-    x_cmty_idea = root_idea()
+    x_cmty_title = root_title()
     sports_str = "sports"
-    sports_road = create_road(x_cmty_idea, sports_str)
+    sports_road = create_road(x_cmty_title, sports_str)
     knee_str = "knee"
     knee_road = create_road(sports_road, knee_str)
     x_category = bud_item_awardlink_str()
     road_str = "road"
     swimmers_str = ",Swimmers"
     sports_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
-    sports_awardlink_atomunit.set_jkey(awardee_label_str(), swimmers_str)
+    sports_awardlink_atomunit.set_jkey(awardee_tag_str(), swimmers_str)
     sports_awardlink_atomunit.set_jkey(road_str, sports_road)
     knee_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
-    knee_awardlink_atomunit.set_jkey(awardee_label_str(), swimmers_str)
+    knee_awardlink_atomunit.set_jkey(awardee_tag_str(), swimmers_str)
     knee_awardlink_atomunit.set_jkey(road_str, knee_road)
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(knee_awardlink_atomunit)

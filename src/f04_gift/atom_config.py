@@ -63,8 +63,8 @@ def type_RoadUnit_str() -> str:
     return "RoadUnit"
 
 
-def type_IdeaUnit_str() -> str:
-    return "IdeaUnit"
+def type_TitleUnit_str() -> str:
+    return "TitleUnit"
 
 
 def nullable_str() -> str:
@@ -99,8 +99,8 @@ def face_name_str() -> str:
     return "face_name"
 
 
-def cmty_idea_str() -> str:
-    return "cmty_idea"
+def cmty_title_str() -> str:
+    return "cmty_title"
 
 
 def owner_name_str() -> str:
@@ -131,8 +131,8 @@ def acct_name_str() -> str:
     return "acct_name"
 
 
-def awardee_label_str() -> str:
-    return "awardee_label"
+def awardee_tag_str() -> str:
+    return "awardee_tag"
 
 
 def give_force_str() -> str:
@@ -147,8 +147,8 @@ def group_label_str() -> str:
     return "group_label"
 
 
-def team_label_str() -> str:
-    return "team_label"
+def team_tag_str() -> str:
+    return "team_tag"
 
 
 def healer_name_str() -> str:
@@ -183,8 +183,8 @@ def parent_road_str() -> str:
     return "parent_road"
 
 
-def idee_str() -> str:
-    return "idee"
+def item_title_str() -> str:
+    return "item_title"
 
 
 def mass_str() -> str:
@@ -293,7 +293,7 @@ def get_allowed_jaar_types() -> set[str]:
         "float",
         "GroupLabel",
         "int",
-        "IdeaUnit",
+        "TitleUnit",
         "RoadUnit",
         "TimeLinePoint",
     }
@@ -303,7 +303,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
     return {
         "acct_name": "AcctName",
         "addin": "float",
-        "awardee_label": "GroupLabel",
+        "awardee_tag": "GroupLabel",
         "base": "RoadUnit",
         "base_item_active_requisite": "bool",
         "begin": "float",
@@ -324,7 +324,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
         "gogo_want": "float",
         "group_label": "GroupLabel",
         "healer_name": "AcctName",
-        "idee": "IdeaUnit",
+        "item_title": "TitleUnit",
         "mass": "int",
         "max_tree_traverse": "int",
         "morph": "bool",
@@ -343,7 +343,7 @@ def get_atom_args_jaar_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_label": "GroupLabel",
+        "team_tag": "GroupLabel",
     }
 
 

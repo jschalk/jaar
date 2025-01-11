@@ -55,7 +55,7 @@ def test_RoadMap_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario1():
     assert gen_inx_road == f"{inx_accord87_str}{inx_r_bridge}{clean_otx_str}"
 
 
-def test_RoadMap_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_idea():
+def test_RoadMap_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_title():
     # ESTABLISH
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
@@ -65,7 +65,7 @@ def test_RoadMap_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario2_With_idea():
     clean_inx_str = "prop"
     clean_otx_road = f"{otx_accord45_str}{otx_r_bridge}{clean_otx_str}"
     road_roadmap = roadmap_shop(otx_bridge=otx_r_bridge, inx_bridge=inx_r_bridge)
-    road_roadmap.set_idea(clean_otx_str, clean_inx_str)
+    road_roadmap.set_title(clean_otx_str, clean_inx_str)
     assert road_roadmap.otx_exists(otx_accord45_str) is False
     assert road_roadmap.otx_exists(clean_otx_road) is False
 
@@ -109,10 +109,10 @@ def test_RoadMap_reveal_inx_AddsMissingObjsTo_otx2inx_RoadUnit():
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
     x_roadmap = roadmap_shop()
-    x_roadmap.set_idea(otx_accord45_str, inx_accord87_str)
-    x_roadmap.set_idea(casa_otx_str, casa_inx_str)
-    x_roadmap.set_idea(clean_otx_str, clean_inx_str)
-    print(f"{x_roadmap.ideamap.otx2inx=}")
+    x_roadmap.set_title(otx_accord45_str, inx_accord87_str)
+    x_roadmap.set_title(casa_otx_str, casa_inx_str)
+    x_roadmap.set_title(clean_otx_str, clean_inx_str)
+    print(f"{x_roadmap.titlemap.otx2inx=}")
     print(f"{x_roadmap.otx2inx=}")
     assert x_roadmap.otx_exists(otx_accord45_str) is False
     assert x_roadmap.otx_exists(casa_otx_road) is False
@@ -125,7 +125,7 @@ def test_RoadMap_reveal_inx_AddsMissingObjsTo_otx2inx_RoadUnit():
 
     # WHEN
     assert x_roadmap.reveal_inx(otx_accord45_str) == inx_accord87_str
-    print(f"{x_roadmap.ideamap.otx2inx=}")
+    print(f"{x_roadmap.titlemap.otx2inx=}")
     print(f"{x_roadmap.otx2inx=}")
     # THEN
     assert x_roadmap.otx_exists(otx_accord45_str)

@@ -3,18 +3,18 @@ from src.f02_bud.bud import budunit_shop
 from src.f05_listen.hubunit import HubUnit, hubunit_shop
 from src.f06_keep.examples.keep_env import (
     temp_cmtys_dir,
-    temp_cmty_idea,
+    temp_cmty_title,
     get_texas_road,
 )
 from src.f06_keep.rivercycle import get_credorledger
 
 
 def example_yao_hubunit() -> HubUnit:
-    return hubunit_shop(temp_cmtys_dir(), temp_cmty_idea(), "Yao")
+    return hubunit_shop(temp_cmtys_dir(), temp_cmty_title(), "Yao")
 
 
 def example_yao_texas_hubunit() -> HubUnit:
-    return hubunit_shop(temp_cmtys_dir(), temp_cmty_idea(), "Yao", get_texas_road())
+    return hubunit_shop(temp_cmtys_dir(), temp_cmty_title(), "Yao", get_texas_road())
 
 
 def example_yao_credorledger() -> dict[str, float]:

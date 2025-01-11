@@ -590,7 +590,7 @@ def test__create_allot_dict_SummationFailsInConsistentWay():
     # ESTABLISH
     ledger = {
         "ACME": 1,
-        "Aaron Donald things effected by him": 1,
+        "Aaron Donald objects effected by him": 1,
         "Asset management": 1,
         "Bob Dylan Root": 1,
         "D&B": 1,
@@ -625,7 +625,7 @@ def test__create_allot_dict_SummationFailsInConsistentWay():
     # THEN
     # wrongsum_allot_dict = {
     #     "ACME": 2192982,
-    #     "Aaron Donald things effected by him": 2192982,
+    #     "Aaron Donald objects effected by him": 2192982,
     #     "Asset management": 2192982,
     #     "Bob Dylan Root": 2192982,
     #     "D&B": 2192982,
@@ -660,7 +660,7 @@ def test_allot_scale_Summation():
     # ESTABLISH
     ledger = {
         "ACME": 1,
-        "Aaron Donald things effected by him": 1,
+        "Aaron Donald objects effected by him": 1,
         "Asset management": 1,
         "Bob Dylan Root": 1,
         "D&B": 1,
@@ -699,7 +699,7 @@ def test_allot_scale_Summation():
 
     # correct_sum_allot_dict = {
     #     "ACME": 2192983,
-    #     "Aaron Donald things effected by him": 2192983,
+    #     "Aaron Donald objects effected by him": 2192983,
     #     "Asset management": 2192983,
     #     "Bob Dylan Root": 2192983,
     #     "D&B": 2192983,

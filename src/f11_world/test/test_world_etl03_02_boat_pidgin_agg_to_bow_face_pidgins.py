@@ -8,13 +8,13 @@ from src.f08_pidgin.pidgin_config import (
     otx_name_str,
     inx_label_str,
     otx_label_str,
-    inx_idea_str,
-    otx_idea_str,
+    inx_title_str,
+    otx_title_str,
     inx_road_str,
     otx_road_str,
     unknown_word_str,
 )
-from src.f09_brick.pandas_tool import sheet_exists, upsert_sheet
+from src.f09_idea.pandas_tool import sheet_exists, upsert_sheet
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -80,26 +80,26 @@ def test_WorldUnit_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     t6am_otx = "T6am"
     t6am_inx = "T600"
     event7 = 7
-    idea_agg_str = "idea_agg"
-    idea_file_columns = [
+    title_agg_str = "title_agg"
+    title_file_columns = [
         face_name_str(),
         event_int_str(),
-        otx_idea_str(),
-        inx_idea_str(),
+        otx_title_str(),
+        inx_title_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    e1_idea0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
-    e1_idea1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
-    e1_idea_rows = [e1_idea0, e1_idea1]
-    e1_idea_agg_df = DataFrame(e1_idea_rows, columns=idea_file_columns)
+    e1_title0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
+    e1_title1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
+    e1_title_rows = [e1_title0, e1_title1]
+    e1_title_agg_df = DataFrame(e1_title_rows, columns=title_file_columns)
 
     agg_pidgin_path = create_path(fizz_world._boat_dir, "pidgin.xlsx")
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
-    upsert_sheet(agg_pidgin_path, idea_agg_str, e1_idea_agg_df)
+    upsert_sheet(agg_pidgin_path, title_agg_str, e1_title_agg_df)
 
     # WHEN
     fizz_world.boat_pidgin_agg_to_bow_face_dirs()
@@ -111,15 +111,15 @@ def test_WorldUnit_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
     assert os_path_exists(sue_pidgin_file_path)
     assert sheet_exists(sue_pidgin_file_path, name_agg_str)
     assert sheet_exists(sue_pidgin_file_path, label_agg_str)
-    assert sheet_exists(sue_pidgin_file_path, idea_agg_str)
+    assert sheet_exists(sue_pidgin_file_path, title_agg_str)
     assert sheet_exists(sue_pidgin_file_path, road_agg_str)
     gen_sue_name_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=name_agg_str)
     gen_sue_label_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=label_agg_str)
-    gen_sue_idea_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=idea_agg_str)
+    gen_sue_title_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=title_agg_str)
     gen_sue_road_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=road_agg_str)
-    print(f"{gen_sue_idea_df=}")
+    print(f"{gen_sue_title_df=}")
 
     pandas_testing_assert_frame_equal(gen_sue_name_df, e1_name_agg_df)
     pandas_testing_assert_frame_equal(gen_sue_label_df, e1_label_agg_df)
     pandas_testing_assert_frame_equal(gen_sue_road_df, e1_road_agg_df)
-    pandas_testing_assert_frame_equal(gen_sue_idea_df, e1_idea_agg_df)
+    pandas_testing_assert_frame_equal(gen_sue_title_df, e1_title_agg_df)

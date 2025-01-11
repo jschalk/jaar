@@ -7,11 +7,11 @@ from src.f00_instrument.db_toolbox import create_insert_sqlstr, RowData
 from src.f01_road.finance import TimeLinePoint
 from src.f01_road.road import (
     create_road,
-    IdeaUnit,
+    TitleUnit,
     RoadUnit,
     GroupLabel,
     AcctName,
-    is_ideaunit,
+    is_titleunit,
 )
 from src.f02_bud.reason_item import factunit_shop
 from src.f02_bud.acct import acctunit_shop
@@ -238,7 +238,7 @@ def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_itemunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
     item_road = create_road(
         x_atom.get_value("parent_road"),
-        x_atom.get_value("idee"),
+        x_atom.get_value("item_title"),
         bridge=x_bud.bridge,
     )
     x_bud.del_item_obj(item_road, del_children=x_atom.get_value("del_children"))
@@ -247,7 +247,7 @@ def _modify_bud_itemunit_delete(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_itemunit_update(x_bud: BudUnit, x_atom: AtomUnit):
     item_road = create_road(
         x_atom.get_value("parent_road"),
-        x_atom.get_value("idee"),
+        x_atom.get_value("item_title"),
         bridge=x_bud.bridge,
     )
     x_bud.edit_item_attr(
@@ -268,7 +268,7 @@ def _modify_bud_itemunit_update(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.set_item(
         item_kid=itemunit_shop(
-            _idee=x_atom.get_value("idee"),
+            _item_title=x_atom.get_value("item_title"),
             addin=x_atom.get_value("addin"),
             begin=x_atom.get_value("begin"),
             close=x_atom.get_value("close"),
@@ -280,7 +280,7 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
         ),
         parent_road=x_atom.get_value("parent_road"),
         create_missing_items=False,
-        get_rid_of_missing_awardlinks_awardee_labels=False,
+        get_rid_of_missing_awardlinks_awardee_tags=False,
         create_missing_ancestors=False,
     )
 
@@ -288,13 +288,13 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: AtomUnit):
 def _modify_bud_item_awardlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_bud.edit_item_attr(
         road=x_atom.get_value("road"),
-        awardlink_del=x_atom.get_value("awardee_label"),
+        awardlink_del=x_atom.get_value("awardee_tag"),
     )
 
 
 def _modify_bud_item_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
     x_item = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_awardlink = x_item.awardlinks.get(x_atom.get_value("awardee_label"))
+    x_awardlink = x_item.awardlinks.get(x_atom.get_value("awardee_tag"))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -306,7 +306,7 @@ def _modify_bud_item_awardlink_update(x_bud: BudUnit, x_atom: AtomUnit):
 
 def _modify_bud_item_awardlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_awardlink = awardlink_shop(
-        awardee_label=x_atom.get_value("awardee_label"),
+        awardee_tag=x_atom.get_value("awardee_tag"),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
@@ -398,12 +398,12 @@ def _modify_bud_item_reason_premiseunit_insert(x_bud: BudUnit, x_atom: AtomUnit)
 
 def _modify_bud_item_teamlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.teamunit.del_teamlink(team_label=x_atom.get_value("team_label"))
+    x_itemunit.teamunit.del_teamlink(team_tag=x_atom.get_value("team_tag"))
 
 
 def _modify_bud_item_teamlink_insert(x_bud: BudUnit, x_atom: AtomUnit):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.teamunit.set_teamlink(team_label=x_atom.get_value("team_label"))
+    x_itemunit.teamunit.set_teamlink(team_tag=x_atom.get_value("team_tag"))
 
 
 def _modify_bud_item_healerlink_delete(x_bud: BudUnit, x_atom: AtomUnit):
@@ -613,7 +613,7 @@ class AtomRow:
     _crud_command: CRUD_command = None
     acct_name: AcctName = None
     addin: float = None
-    awardee_label: GroupLabel = None
+    awardee_tag: GroupLabel = None
     base: RoadUnit = None
     base_item_active_requisite: bool = None
     begin: float = None
@@ -635,7 +635,7 @@ class AtomRow:
     gogo_want: float = None
     group_label: GroupLabel = None
     healer_name: GroupLabel = None
-    idee: IdeaUnit = None
+    item_title: TitleUnit = None
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
@@ -653,7 +653,7 @@ class AtomRow:
     stop_want: float = None
     take_force: float = None
     tally: int = None
-    team_label: int = None
+    team_tag: int = None
 
     def set_atom_category(self, atom_category: str):
         self._atom_categorys.add(atom_category)
@@ -674,8 +674,8 @@ class AtomRow:
                     self.__dict__[x_arg] = GroupLabel(x_value)
                 elif jaar_type == "RoadUnit":
                     self.__dict__[x_arg] = RoadUnit(x_value)
-                elif jaar_type == "IdeaUnit":
-                    self.__dict__[x_arg] = IdeaUnit(x_value)
+                elif jaar_type == "TitleUnit":
+                    self.__dict__[x_arg] = TitleUnit(x_value)
                 elif jaar_type == "str":
                     self.__dict__[x_arg] = str(x_value)
                 elif jaar_type == "bool":
@@ -684,8 +684,8 @@ class AtomRow:
                     self.__dict__[x_arg] = int(x_value)
                 elif jaar_type == "float":
                     self.__dict__[x_arg] = float(x_value)
-        if self.idee != None and self.parent_road != None and self.road == None:
-            self.road = create_road(self.parent_road, self.idee)
+        if self.item_title != None and self.parent_road != None and self.road == None:
+            self.road = create_road(self.parent_road, self.item_title)
 
     def get_atomunits(self) -> list[AtomUnit]:
         self._set_jaar_types()
@@ -710,11 +710,11 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
     config_req_args = get_atom_config_jkeys(x_category)
     x_atom_reqs = {req_arg: x_atom.get_value(req_arg) for req_arg in config_req_args}
     x_parent_road = x_atom_reqs.get("parent_road")
-    x_idee = x_atom_reqs.get("idee")
-    if x_parent_road != None and x_idee != None:
-        x_atom_reqs["road"] = x_bud.make_road(x_parent_road, x_idee)
+    x_item_title = x_atom_reqs.get("item_title")
+    if x_parent_road != None and x_item_title != None:
+        x_atom_reqs["road"] = x_bud.make_road(x_parent_road, x_item_title)
         x_bridge = x_bud.bridge
-        is_itemroot_road = is_ideaunit(x_atom_reqs.get("road"), x_bridge)
+        is_itemroot_road = is_titleunit(x_atom_reqs.get("road"), x_bridge)
         if is_itemroot_road is True:
             return None
 

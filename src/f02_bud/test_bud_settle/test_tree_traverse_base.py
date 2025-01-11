@@ -163,7 +163,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     sue_bud.set_item(email_item, parent_road=casa_road)
 
     # test root status:
-    x_itemroot = sue_bud.get_item_obj(sue_bud.cmty_idea)
+    x_itemroot = sue_bud.get_item_obj(sue_bud.cmty_title)
     assert x_itemroot._descendant_pledge_count is None
     assert x_itemroot._all_acct_cred is None
     assert x_itemroot._all_acct_debt is None
@@ -208,7 +208,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     sue_bud.set_item(vacuum_item, parent_road=casa_road)
 
     sue_bud.add_acctunit(acct_name=sue_str)
-    x_awardlink = awardlink_shop(awardee_label=sue_str)
+    x_awardlink = awardlink_shop(awardee_tag=sue_str)
 
     sue_bud.itemroot._kids[casa_str]._kids[email_str].set_awardlink(
         awardlink=x_awardlink
@@ -366,12 +366,12 @@ def test_BudUnit_get_item_tree_ordered_road_list_ReturnsCorrectObj():
     assert sue_bud.get_item_tree_ordered_road_list()
 
     # WHEN
-    ordered_idea_list = sue_bud.get_item_tree_ordered_road_list()
+    ordered_title_list = sue_bud.get_item_tree_ordered_road_list()
 
     # THEN
-    assert len(ordered_idea_list) == 17
+    assert len(ordered_title_list) == 17
     x_1st_road_in_ordered_list = sue_bud.get_item_tree_ordered_road_list()[0]
-    assert x_1st_road_in_ordered_list == sue_bud.cmty_idea
+    assert x_1st_road_in_ordered_list == sue_bud.cmty_title
     x_8th_road_in_ordered_list = sue_bud.get_item_tree_ordered_road_list()[9]
     assert x_8th_road_in_ordered_list == sue_bud.make_l1_road(week_str)
 
@@ -380,7 +380,7 @@ def test_BudUnit_get_item_tree_ordered_road_list_ReturnsCorrectObj():
 
     # THEN
     y_1st_road_in_ordered_list = y_bud.get_item_tree_ordered_road_list()[0]
-    assert y_1st_road_in_ordered_list == sue_bud.cmty_idea
+    assert y_1st_road_in_ordered_list == sue_bud.cmty_title
 
 
 def test_BudUnit_get_item_tree_ordered_road_list_CorrectlyCleansRangedItemRoadUnits():
@@ -457,7 +457,7 @@ def test_BudUnit_settle_bud_WhenItemRootHas_massButAll_kidsHaveZero_massAddTo_of
     sue_budunit.settle_bud()
 
     # THEN
-    assert sue_budunit._offtrack_kids_mass_set == {sue_budunit.cmty_idea}
+    assert sue_budunit._offtrack_kids_mass_set == {sue_budunit.cmty_title}
 
     # WHEN
     sue_budunit.edit_item_attr(casa_road, mass=2)
@@ -516,7 +516,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     zia_debtit_belief = 5
     yao_bud.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     yao_bud.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
-    x_itemroot = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    x_itemroot = yao_bud.get_item_obj(yao_bud.cmty_title)
     x_itemroot.set_awardlink(awardlink_shop(yao_str))
     x_itemroot.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
@@ -649,8 +649,8 @@ def test_BudUnit_settle_bud_Sets_itemroot_factheir_With_range_factheirs():
     tue_road = yao_bud.make_road(week_road, tue_str)
     tue_addin = 100
     yao_bud.set_item(itemunit_shop(tue_str, addin=tue_addin), week_road)
-    x_cmty_idea = yao_bud.cmty_idea
-    yao_bud.edit_item_attr(x_cmty_idea, reason_base=tue_road, reason_premise=tue_road)
+    x_cmty_title = yao_bud.cmty_title
+    yao_bud.edit_item_attr(x_cmty_title, reason_base=tue_road, reason_premise=tue_road)
 
     week_open = 3
     week_nigh = 7
@@ -679,7 +679,7 @@ def test_BudUnit_settle_bud_Sets_itemroot_factheir_With_range_factheirs():
     # tue_open = 113
     # tue_nigh = 117
     # tue_factheir = factheir_shop(tue_road, tue_road, tue_open, tue_nigh)
-    # root_item = yao_bud.get_item_obj(yao_bud.cmty_idea)
+    # root_item = yao_bud.get_item_obj(yao_bud.cmty_title)
     # print(f"{week_road=} {root_item._factheirs.keys()=}")
     # assert root_item._factheirs.get(week_road) == week_factheir
     # assert len(root_item._factheirs) == 2

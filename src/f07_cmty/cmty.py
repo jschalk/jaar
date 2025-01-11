@@ -6,7 +6,7 @@ from src.f00_instrument.dict_toolbox import (
 )
 from src.f01_road.jaar_config import (
     get_gifts_folder,
-    get_cmty_idea_if_None,
+    get_cmty_title_if_None,
     get_test_cmtys_dir,
 )
 from src.f01_road.finance import (
@@ -24,7 +24,7 @@ from src.f01_road.road import (
     default_bridge_if_None,
     OwnerName,
     RoadUnit,
-    CmtyIdea,
+    CmtyTitle,
     AcctName,
 )
 from src.f02_bud.bud import BudUnit
@@ -75,7 +75,7 @@ class CmtyUnit:
     pipeline7: gifts->final (could be 5 of 6)
     """
 
-    cmty_idea: CmtyIdea = None
+    cmty_title: CmtyTitle = None
     cmtys_dir: str = None
     timeline: TimeLineUnit = None
     current_time: int = None
@@ -93,7 +93,7 @@ class CmtyUnit:
 
     # directory setup
     def _set_cmty_dirs(self, in_memory_journal: bool = None):
-        self._cmty_dir = create_path(self.cmtys_dir, self.cmty_idea)
+        self._cmty_dir = create_path(self.cmtys_dir, self.cmty_title)
         self._owners_dir = create_path(self._cmty_dir, "owners")
         self._gifts_dir = create_path(self._cmty_dir, get_gifts_folder())
         set_dir(x_path=self._cmty_dir)
@@ -115,7 +115,7 @@ class CmtyUnit:
         return {
             x_owner_name: hubunit_shop(
                 cmtys_dir=self.cmtys_dir,
-                cmty_idea=self.cmty_idea,
+                cmty_title=self.cmty_title,
                 owner_name=x_owner_name,
                 keep_road=None,
                 bridge=self.bridge,
@@ -126,7 +126,7 @@ class CmtyUnit:
 
     # database
     def get_journal_db_path(self) -> str:
-        cmty_dir = create_path(self.cmtys_dir, f"{self.cmty_idea}")
+        cmty_dir = create_path(self.cmtys_dir, f"{self.cmty_title}")
         return create_path(cmty_dir, "journal.db")
 
     def _create_journal_db(
@@ -163,7 +163,7 @@ class CmtyUnit:
     def _get_hubunit(self, owner_name: OwnerName) -> HubUnit:
         return hubunit_shop(
             owner_name=owner_name,
-            cmty_idea=self.cmty_idea,
+            cmty_title=self.cmty_title,
             cmtys_dir=self.cmtys_dir,
             keep_road=None,
             bridge=self.bridge,
@@ -184,7 +184,7 @@ class CmtyUnit:
         for healer_name, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 self.cmtys_dir,
-                self.cmty_idea,
+                self.cmty_title,
                 healer_name,
                 keep_road=None,
                 # "duty_job",
@@ -213,7 +213,7 @@ class CmtyUnit:
         for healer_name, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 cmtys_dir=self.cmtys_dir,
-                cmty_idea=self.cmty_idea,
+                cmty_title=self.cmty_title,
                 owner_name=healer_name,
                 keep_road=None,
                 # "duty_job",
@@ -224,7 +224,7 @@ class CmtyUnit:
             for keep_road in healer_dict.keys():
                 keep_hubunit = hubunit_shop(
                     cmtys_dir=self.cmtys_dir,
-                    cmty_idea=self.cmty_idea,
+                    cmty_title=self.cmty_title,
                     owner_name=healer_name,
                     keep_road=keep_road,
                     # "duty_job",
@@ -236,7 +236,7 @@ class CmtyUnit:
                 x_job = keep_hubunit.get_job_bud(owner_name)
                 listen_to_speaker_agenda(x_final, x_job)
 
-        # if nothing has come from voice->duty->job->final pipeline use voice->final pipeline
+        # if no budunit has come from voice->duty->job->final pipeline use voice->final pipeline
         x_final.settle_bud()
         if len(x_final._item_dict) == 1:
             # pipeline_voice_final_str()
@@ -286,7 +286,7 @@ class CmtyUnit:
 
     def get_dict(self, include_cashbook: bool = True) -> dict:
         x_dict = {
-            "cmty_idea": self.cmty_idea,
+            "cmty_title": self.cmty_title,
             "bridge": self.bridge,
             "current_time": self.current_time,
             "fund_coin": self.fund_coin,
@@ -361,7 +361,7 @@ class CmtyUnit:
 
     def set_all_tranbook(self):
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
-        x_tranbook = tranbook_shop(self.cmty_idea, x_tranunits)
+        x_tranbook = tranbook_shop(self.cmty_title, x_tranunits)
         for owner_name, x_deallog in self.deallogs.items():
             for x_time_int, x_dealepisode in x_deallog.episodes.items():
                 for acct_name, x_amount in x_dealepisode._net_deals.items():
@@ -371,14 +371,14 @@ class CmtyUnit:
     # TODO evaluate if this should be used
     # def set_all_tranbook(self):
     #     if not hasattr(self, "_combined_tranbook"):
-    #         self._combined_tranbook = tranbook_shop(self.cmty_idea, [])
+    #         self._combined_tranbook = tranbook_shop(self.cmty_title, [])
     #     new_tranunits = self.cashbook.get_new_tranunits()
     #     self._combined_tranbook.add_tranunits(new_tranunits)
     #     return self._combined_tranbook
 
 
 def cmtyunit_shop(
-    cmty_idea: CmtyIdea = None,
+    cmty_title: CmtyTitle = None,
     cmtys_dir: str = None,
     timeline: TimeLineUnit = None,
     current_time: int = None,
@@ -390,21 +390,21 @@ def cmtyunit_shop(
 ) -> CmtyUnit:
     if timeline is None:
         timeline = timelineunit_shop()
-    cmty_idea = get_cmty_idea_if_None(cmty_idea)
+    cmty_title = get_cmty_title_if_None(cmty_title)
     if cmtys_dir is None:
         cmtys_dir = get_test_cmtys_dir()
     cmty_x = CmtyUnit(
-        cmty_idea=cmty_idea,
+        cmty_title=cmty_title,
         cmtys_dir=cmtys_dir,
         timeline=timeline,
         current_time=get_0_if_None(current_time),
         deallogs={},
-        cashbook=tranbook_shop(cmty_idea),
+        cashbook=tranbook_shop(cmty_title),
         bridge=default_bridge_if_None(bridge),
         fund_coin=default_fund_coin_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
         penny=default_penny_if_None(penny),
-        _all_tranbook=tranbook_shop(cmty_idea),
+        _all_tranbook=tranbook_shop(cmty_title),
     )
     cmty_x._set_cmty_dirs(in_memory_journal=in_memory_journal)
     return cmty_x
@@ -415,8 +415,8 @@ def get_from_json(x_cmty_json: str) -> CmtyUnit:
 
 
 def get_from_dict(cmty_dict: dict) -> CmtyUnit:
-    x_cmty_idea = cmty_dict.get("cmty_idea")
-    x_cmty = cmtyunit_shop(x_cmty_idea, None)
+    x_cmty_title = cmty_dict.get("cmty_title")
+    x_cmty = cmtyunit_shop(x_cmty_title, None)
     x_cmty.timeline = timelineunit_shop(cmty_dict.get("timeline"))
     x_cmty.current_time = cmty_dict.get("current_time")
     x_cmty.bridge = cmty_dict.get("bridge")

@@ -21,12 +21,12 @@
             "unknown_word": {}
         }
     },
-    "map_idea": {
+    "map_title": {
         "jkeys": {
-            "otx_idea": {}
+            "otx_title": {}
         },
         "jvalues": {
-            "inx_idea": {},
+            "inx_title": {},
             "inx_bridge": {},
             "otx_bridge": {},
             "unknown_word": {}

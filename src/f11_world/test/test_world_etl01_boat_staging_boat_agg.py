@@ -1,8 +1,8 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, cmty_idea_str
-from src.f07_cmty.cmty_config import cumlative_minute_str, hour_idea_str
+from src.f04_gift.atom_config import face_name_str, cmty_title_str
+from src.f07_cmty.cmty_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_brick.pandas_tool import (
+from src.f09_idea.pandas_tool import (
     get_sheet_names,
     upsert_sheet,
     boat_staging_str,
@@ -29,18 +29,18 @@ def test_WorldUnit_boat_staging_to_boat_agg_CreatesOtxSheets_Scenario0_GroupByWo
     ex_file_name = "fizzbuzz.xlsx"
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
     boat_file_path = create_path(fizz_world._boat_dir, "br00003.xlsx")
-    brick_columns = [
+    idea_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
-        hour_idea_str(),
+        cmty_title_str(),
+        hour_title_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
     row1 = [sue_str, event_1, accord23_str, hour6am, minute_360]
     row2 = [sue_str, event_1, accord23_str, hour7am, minute_420]
     row3 = [sue_str, event_1, accord23_str, hour7am, minute_420]
-    df1 = DataFrame([row1, row2, row3], columns=brick_columns)
+    df1 = DataFrame([row1, row2, row3], columns=idea_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", df1)
     fizz_world.ocean_to_boat_staging()
     boat__staging_df = pandas_read_excel(boat_file_path, sheet_name=boat_staging_str())
@@ -51,7 +51,7 @@ def test_WorldUnit_boat_staging_to_boat_agg_CreatesOtxSheets_Scenario0_GroupByWo
 
     # THEN
     gen_otx_df = pandas_read_excel(boat_file_path, sheet_name=boat_agg_str())
-    ex_otx_df = DataFrame([row1, row2], columns=brick_columns)
+    ex_otx_df = DataFrame([row1, row2], columns=idea_columns)
     print(f"{gen_otx_df.columns=}")
     assert len(ex_otx_df.columns) == len(gen_otx_df.columns)
     assert list(ex_otx_df.columns) == list(gen_otx_df.columns)
@@ -77,11 +77,11 @@ def test_WorldUnit_boat_staging_to_boat_agg_CreatesOtxSheets_Scenario1_GroupByOn
     hour7am = "7am"
     ex_file_name = "fizzbuzz.xlsx"
     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
-    brick_columns = [
+    idea_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
-        hour_idea_str(),
+        cmty_title_str(),
+        hour_title_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
@@ -89,7 +89,7 @@ def test_WorldUnit_boat_staging_to_boat_agg_CreatesOtxSheets_Scenario1_GroupByOn
     row2 = [sue_str, event3, accord23_str, hour7am, minute_420]
     row3 = [sue_str, event3, accord23_str, hour7am, minute_480]
     row4 = [sue_str, event7, accord23_str, hour7am, minute_480]
-    df1 = DataFrame([row1, row2, row3, row4], columns=brick_columns)
+    df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(ocean_file_path, "example1_br00003", df1)
     fizz_world.ocean_to_boat_staging()
     br00003_agg_file_path = create_path(fizz_world._boat_dir, "br00003.xlsx")
@@ -105,7 +105,7 @@ def test_WorldUnit_boat_staging_to_boat_agg_CreatesOtxSheets_Scenario1_GroupByOn
     gen_br00003_agg_df = pandas_read_excel(
         br00003_agg_file_path, sheet_name=boat_agg_str()
     )
-    ex_otx_df = DataFrame([row1, row4], columns=brick_columns)
+    ex_otx_df = DataFrame([row1, row4], columns=idea_columns)
     # print(f"{gen_otx_df.columns=}")
     print("gen_br00003_agg_df")
     print(f"{gen_br00003_agg_df}")

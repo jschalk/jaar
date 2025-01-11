@@ -2,7 +2,7 @@ from src.f01_road.finance import allot_scale
 from src.f01_road.road import (
     get_ancestor_roads,
     RoadUnit,
-    get_root_idea_from_road,
+    get_root_title_from_road,
     OwnerName,
 )
 from src.f02_bud.item import ItemUnit
@@ -89,7 +89,7 @@ def _create_mass_data(listener: BudUnit, x_road: RoadUnit) -> list:
     mass_data.add_to_mass_list = []
     mass_data.replace_mass_list = []
     ancestor_roads = get_ancestor_roads(x_road)
-    root_road = get_root_idea_from_road(x_road)
+    root_road = get_root_title_from_road(x_road)
     for ancestor_road in ancestor_roads:
         if ancestor_road != root_road:
             if listener.item_exists(ancestor_road):

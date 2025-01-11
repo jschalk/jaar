@@ -28,7 +28,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     atom_update,
-    awardee_label_str,
+    awardee_tag_str,
     base_str,
     begin_str,
     category_str,
@@ -62,10 +62,10 @@ from src.f04_gift.atom_config import (
     road_str,
     sqlite_datatype_str,
     stop_want_str,
-    team_label_str,
+    team_tag_str,
     type_AcctName_str,
     type_GroupLabel_str,
-    type_IdeaUnit_str,
+    type_TitleUnit_str,
     type_RoadUnit_str,
 )
 
@@ -76,7 +76,7 @@ def test_str_functions_ReturnsObj():
     assert atom_insert() == "INSERT"
     assert atom_update() == "UPDATE"
     assert atom_delete() == "DELETE"
-    assert awardee_label_str() == "awardee_label"
+    assert awardee_tag_str() == "awardee_tag"
     assert base_str() == "base"
     assert begin_str() == "begin"
     assert category_str() == "category"
@@ -109,10 +109,10 @@ def test_str_functions_ReturnsObj():
     assert road_str() == "road"
     assert sqlite_datatype_str() == "sqlite_datatype"
     assert stop_want_str() == "stop_want"
-    assert team_label_str() == "team_label"
+    assert team_tag_str() == "team_tag"
     assert type_AcctName_str() == "AcctName"
     assert type_GroupLabel_str() == "GroupLabel"
-    assert type_IdeaUnit_str() == "IdeaUnit"
+    assert type_TitleUnit_str() == "TitleUnit"
     assert type_RoadUnit_str() == "RoadUnit"
 
 
@@ -578,7 +578,7 @@ def test_get_allowed_jaar_types_ReturnsObj():
         "int",
         type_AcctName_str(),
         type_GroupLabel_str(),
-        type_IdeaUnit_str(),
+        type_TitleUnit_str(),
         type_RoadUnit_str(),
         "float",
         "bool",
@@ -638,7 +638,7 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     # THEN
     assert x_jaar_types.get(acct_name_str()) == type_AcctName_str()
     assert x_jaar_types.get(addin_str()) == "float"
-    assert x_jaar_types.get(awardee_label_str()) == type_GroupLabel_str()
+    assert x_jaar_types.get(awardee_tag_str()) == type_GroupLabel_str()
     assert x_jaar_types.get(base_str()) == type_RoadUnit_str()
     assert x_jaar_types.get("base_item_active_requisite") == "bool"
     assert x_jaar_types.get(begin_str()) == "float"
@@ -660,7 +660,7 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     assert x_jaar_types.get(gogo_want_str()) == "float"
     assert x_jaar_types.get(group_label_str()) == type_GroupLabel_str()
     assert x_jaar_types.get(healer_name_str()) == type_AcctName_str()
-    assert x_jaar_types.get("idee") == type_IdeaUnit_str()
+    assert x_jaar_types.get("item_title") == type_TitleUnit_str()
     assert x_jaar_types.get("mass") == "int"
     assert x_jaar_types.get("max_tree_traverse") == "int"
     assert x_jaar_types.get(morph_str()) == "bool"
@@ -678,6 +678,6 @@ def test_get_atom_args_jaar_types_ReturnsObj():
     assert x_jaar_types.get(stop_want_str()) == "float"
     assert x_jaar_types.get("take_force") == "float"
     assert x_jaar_types.get("tally") == "int"
-    assert x_jaar_types.get(team_label_str()) == type_GroupLabel_str()
+    assert x_jaar_types.get(team_tag_str()) == type_GroupLabel_str()
     assert x_jaar_types.keys() == get_atom_args_category_mapping().keys()
     assert all_atom_args_jaar_types_are_correct(x_jaar_types)

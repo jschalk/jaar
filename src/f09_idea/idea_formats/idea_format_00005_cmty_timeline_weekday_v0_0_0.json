@@ -1,0 +1,23 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "cmty_title": {
+            "otx_key": true
+        },
+        "weekday_title": {
+            "otx_key": true
+        },
+        "weekday_order": {
+            "otx_key": false
+        }
+    },
+    "idea_number": "br00005",
+    "categorys": [
+        "cmty_timeline_weekday"
+    ]
+}

@@ -6,7 +6,7 @@ from src.f00_instrument.dict_toolbox import (
     get_all_nondictionary_objs,
     get_0_if_None,
 )
-from src.f01_road.road import RoadUnit, get_terminus_idea, get_parent_road
+from src.f01_road.road import RoadUnit, get_terminus_title, get_parent_road
 from src.f02_bud.reason_item import FactUnit, ReasonUnit
 from src.f02_bud.acct import MemberShip, AcctName, AcctUnit
 from src.f02_bud.group import MemberShip, GroupLabel
@@ -121,7 +121,7 @@ class DeltaUnit:
         return get_from_nested_dict(self.atomunits, x_keylist)
 
     def add_all_atomunits(self, after_bud: BudUnit):
-        before_bud = budunit_shop(after_bud.owner_name, after_bud.cmty_idea)
+        before_bud = budunit_shop(after_bud.owner_name, after_bud.cmty_title)
         self.add_all_different_atomunits(before_bud, after_bud)
 
     def add_all_different_atomunits(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -329,7 +329,7 @@ class DeltaUnit:
             insert_itemunit = after_bud.get_item_obj(insert_item_road)
             x_atomunit = atomunit_shop("bud_itemunit", atom_insert())
             x_atomunit.set_jkey("parent_road", insert_itemunit._parent_road)
-            x_atomunit.set_jkey("idee", insert_itemunit._idee)
+            x_atomunit.set_jkey("item_title", insert_itemunit._item_title)
             x_atomunit.set_jvalue("addin", insert_itemunit.addin)
             x_atomunit.set_jvalue("begin", insert_itemunit.begin)
             x_atomunit.set_jvalue("close", insert_itemunit.close)
@@ -346,7 +346,7 @@ class DeltaUnit:
             )
             self.add_atomunit_item_awardlink_inserts(
                 after_itemunit=insert_itemunit,
-                insert_awardlink_awardee_labels=set(insert_itemunit.awardlinks.keys()),
+                insert_awardlink_awardee_tags=set(insert_itemunit.awardlinks.keys()),
             )
             self.add_atomunit_item_reasonunit_inserts(
                 after_itemunit=insert_itemunit,
@@ -354,7 +354,7 @@ class DeltaUnit:
             )
             self.add_atomunit_item_teamlink_insert(
                 item_road=insert_item_road,
-                insert_teamlink_team_labels=insert_itemunit.teamunit._teamlinks,
+                insert_teamlink_team_tags=insert_itemunit.teamunit._teamlinks,
             )
             self.add_atomunit_item_healerlink_insert(
                 item_road=insert_item_road,
@@ -370,7 +370,7 @@ class DeltaUnit:
             if jvalues_different("bud_itemunit", before_itemunit, after_itemunit):
                 x_atomunit = atomunit_shop("bud_itemunit", atom_update())
                 x_atomunit.set_jkey("parent_road", after_itemunit._parent_road)
-                x_atomunit.set_jkey("idee", after_itemunit._idee)
+                x_atomunit.set_jkey("item_title", after_itemunit._item_title)
                 if before_itemunit.addin != after_itemunit.addin:
                     x_atomunit.set_jvalue("addin", after_itemunit.addin)
                 if before_itemunit.begin != after_itemunit.begin:
@@ -413,25 +413,25 @@ class DeltaUnit:
             )
 
             # insert / update / delete awardunits
-            before_awardlinks_awardee_labels = set(before_itemunit.awardlinks.keys())
-            after_awardlinks_awardee_labels = set(after_itemunit.awardlinks.keys())
+            before_awardlinks_awardee_tags = set(before_itemunit.awardlinks.keys())
+            after_awardlinks_awardee_tags = set(after_itemunit.awardlinks.keys())
             self.add_atomunit_item_awardlink_inserts(
                 after_itemunit=after_itemunit,
-                insert_awardlink_awardee_labels=after_awardlinks_awardee_labels.difference(
-                    before_awardlinks_awardee_labels
+                insert_awardlink_awardee_tags=after_awardlinks_awardee_tags.difference(
+                    before_awardlinks_awardee_tags
                 ),
             )
             self.add_atomunit_item_awardlink_updates(
                 before_itemunit=before_itemunit,
                 after_itemunit=after_itemunit,
-                update_awardlink_awardee_labels=before_awardlinks_awardee_labels.intersection(
-                    after_awardlinks_awardee_labels
+                update_awardlink_awardee_tags=before_awardlinks_awardee_tags.intersection(
+                    after_awardlinks_awardee_tags
                 ),
             )
             self.add_atomunit_item_awardlink_deletes(
                 item_road=item_road,
-                delete_awardlink_awardee_labels=before_awardlinks_awardee_labels.difference(
-                    after_awardlinks_awardee_labels
+                delete_awardlink_awardee_tags=before_awardlinks_awardee_tags.difference(
+                    after_awardlinks_awardee_tags
                 ),
             )
 
@@ -463,18 +463,18 @@ class DeltaUnit:
             # update reasonunits_permises delete_premise
 
             # insert / update / delete teamlinks
-            before_teamlinks_team_labels = set(before_itemunit.teamunit._teamlinks)
-            after_teamlinks_team_labels = set(after_itemunit.teamunit._teamlinks)
+            before_teamlinks_team_tags = set(before_itemunit.teamunit._teamlinks)
+            after_teamlinks_team_tags = set(after_itemunit.teamunit._teamlinks)
             self.add_atomunit_item_teamlink_insert(
                 item_road=item_road,
-                insert_teamlink_team_labels=after_teamlinks_team_labels.difference(
-                    before_teamlinks_team_labels
+                insert_teamlink_team_tags=after_teamlinks_team_tags.difference(
+                    before_teamlinks_team_tags
                 ),
             )
             self.add_atomunit_item_teamlink_deletes(
                 item_road=item_road,
-                delete_teamlink_team_labels=before_teamlinks_team_labels.difference(
-                    after_teamlinks_team_labels
+                delete_teamlink_team_tags=before_teamlinks_team_tags.difference(
+                    after_teamlinks_team_tags
                 ),
             )
 
@@ -501,10 +501,10 @@ class DeltaUnit:
     def add_atomunit_item_deletes(self, before_bud: BudUnit, delete_item_roads: set):
         for delete_item_road in delete_item_roads:
             x_parent_road = get_parent_road(delete_item_road, before_bud.bridge)
-            x_idee = get_terminus_idea(delete_item_road, before_bud.bridge)
+            x_item_title = get_terminus_title(delete_item_road, before_bud.bridge)
             x_atomunit = atomunit_shop("bud_itemunit", atom_delete())
             x_atomunit.set_jkey("parent_road", x_parent_road)
-            x_atomunit.set_jkey("idee", x_idee)
+            x_atomunit.set_jkey("item_title", x_item_title)
             self.set_atomunit(x_atomunit)
 
             delete_itemunit = before_bud.get_item_obj(delete_item_road)
@@ -515,7 +515,7 @@ class DeltaUnit:
 
             self.add_atomunit_item_awardlink_deletes(
                 item_road=delete_item_road,
-                delete_awardlink_awardee_labels=set(delete_itemunit.awardlinks.keys()),
+                delete_awardlink_awardee_tags=set(delete_itemunit.awardlinks.keys()),
             )
             self.add_atomunit_item_reasonunit_deletes(
                 before_itemunit=delete_itemunit,
@@ -523,7 +523,7 @@ class DeltaUnit:
             )
             self.add_atomunit_item_teamlink_deletes(
                 item_road=delete_item_road,
-                delete_teamlink_team_labels=delete_itemunit.teamunit._teamlinks,
+                delete_teamlink_team_tags=delete_itemunit.teamunit._teamlinks,
             )
             self.add_atomunit_item_healerlink_deletes(
                 item_road=delete_item_road,
@@ -678,21 +678,21 @@ class DeltaUnit:
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_teamlink_insert(
-        self, item_road: RoadUnit, insert_teamlink_team_labels: set
+        self, item_road: RoadUnit, insert_teamlink_team_tags: set
     ):
-        for insert_teamlink_team_label in insert_teamlink_team_labels:
+        for insert_teamlink_team_tag in insert_teamlink_team_tags:
             x_atomunit = atomunit_shop("bud_item_teamlink", atom_insert())
             x_atomunit.set_jkey("road", item_road)
-            x_atomunit.set_jkey("team_label", insert_teamlink_team_label)
+            x_atomunit.set_jkey("team_tag", insert_teamlink_team_tag)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_teamlink_deletes(
-        self, item_road: RoadUnit, delete_teamlink_team_labels: set
+        self, item_road: RoadUnit, delete_teamlink_team_tags: set
     ):
-        for delete_teamlink_team_label in delete_teamlink_team_labels:
+        for delete_teamlink_team_tag in delete_teamlink_team_tags:
             x_atomunit = atomunit_shop("bud_item_teamlink", atom_delete())
             x_atomunit.set_jkey("road", item_road)
-            x_atomunit.set_jkey("team_label", delete_teamlink_team_label)
+            x_atomunit.set_jkey("team_tag", delete_teamlink_team_tag)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_healerlink_insert(
@@ -714,15 +714,13 @@ class DeltaUnit:
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_awardlink_inserts(
-        self, after_itemunit: ItemUnit, insert_awardlink_awardee_labels: set
+        self, after_itemunit: ItemUnit, insert_awardlink_awardee_tags: set
     ):
-        for after_awardlink_awardee_label in insert_awardlink_awardee_labels:
-            after_awardlink = after_itemunit.awardlinks.get(
-                after_awardlink_awardee_label
-            )
+        for after_awardlink_awardee_tag in insert_awardlink_awardee_tags:
+            after_awardlink = after_itemunit.awardlinks.get(after_awardlink_awardee_tag)
             x_atomunit = atomunit_shop("bud_item_awardlink", atom_insert())
             x_atomunit.set_jkey("road", after_itemunit.get_road())
-            x_atomunit.set_jkey("awardee_label", after_awardlink.awardee_label)
+            x_atomunit.set_jkey("awardee_tag", after_awardlink.awardee_tag)
             x_atomunit.set_jvalue("give_force", after_awardlink.give_force)
             x_atomunit.set_jvalue("take_force", after_awardlink.take_force)
             self.set_atomunit(x_atomunit)
@@ -731,21 +729,21 @@ class DeltaUnit:
         self,
         before_itemunit: ItemUnit,
         after_itemunit: ItemUnit,
-        update_awardlink_awardee_labels: set,
+        update_awardlink_awardee_tags: set,
     ):
-        for update_awardlink_awardee_label in update_awardlink_awardee_labels:
+        for update_awardlink_awardee_tag in update_awardlink_awardee_tags:
             before_awardlink = before_itemunit.awardlinks.get(
-                update_awardlink_awardee_label
+                update_awardlink_awardee_tag
             )
             after_awardlink = after_itemunit.awardlinks.get(
-                update_awardlink_awardee_label
+                update_awardlink_awardee_tag
             )
             if jvalues_different(
                 "bud_item_awardlink", before_awardlink, after_awardlink
             ):
                 x_atomunit = atomunit_shop("bud_item_awardlink", atom_update())
                 x_atomunit.set_jkey("road", before_itemunit.get_road())
-                x_atomunit.set_jkey("awardee_label", after_awardlink.awardee_label)
+                x_atomunit.set_jkey("awardee_tag", after_awardlink.awardee_tag)
                 if before_awardlink.give_force != after_awardlink.give_force:
                     x_atomunit.set_jvalue("give_force", after_awardlink.give_force)
                 if before_awardlink.take_force != after_awardlink.take_force:
@@ -753,12 +751,12 @@ class DeltaUnit:
                 self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_awardlink_deletes(
-        self, item_road: RoadUnit, delete_awardlink_awardee_labels: set
+        self, item_road: RoadUnit, delete_awardlink_awardee_tags: set
     ):
-        for delete_awardlink_awardee_label in delete_awardlink_awardee_labels:
+        for delete_awardlink_awardee_tag in delete_awardlink_awardee_tags:
             x_atomunit = atomunit_shop("bud_item_awardlink", atom_delete())
             x_atomunit.set_jkey("road", item_road)
-            x_atomunit.set_jkey("awardee_label", delete_awardlink_awardee_label)
+            x_atomunit.set_jkey("awardee_tag", delete_awardlink_awardee_tag)
             self.set_atomunit(x_atomunit)
 
     def add_atomunit_item_factunit_inserts(

@@ -1,25 +1,26 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f01_road.finance_tran import CmtyIdea
+from src.f01_road.finance_tran import CmtyTitle
 from src.f01_road.road import FaceName, EventInt
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
-from src.f09_brick.brick_config import (
-    get_brick_numbers,
-    get_brick_format_filename,
-    get_brick_category_ref,
+from src.f09_idea.idea_config import (
+    get_idea_numbers,
+    get_idea_format_filename,
+    get_idea_category_ref,
 )
-from src.f09_brick.brick import get_brickref_obj
-from src.f09_brick.pandas_tool import (
+from src.f09_idea.idea import get_idearef_obj
+from src.f09_idea.pandas_tool import (
     get_sorting_columns,
     upsert_sheet,
     split_excel_into_dirs,
     sheet_exists,
-    _get_pidgen_brick_format_filenames,
+    _get_pidgen_idea_format_filenames,
     get_boat_staging_grouping_with_all_values_equal_df,
     translate_all_columns_dataframe,
+    insert_idea_csv,
 )
-from src.f09_brick.pidgin_toolbox import init_pidginunit_from_dir
-from src.f10_etl.brick_collector import get_all_brick_dataframes, BrickFileRef
+from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
+from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
@@ -31,6 +32,7 @@ from src.f10_etl.pidgin_agg import (
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
 from functools import reduce as functools_reduce
+from sqlite3 import Connection as sqlite3_Connection
 
 
 class not_given_pidgin_category_Exception(Exception):
@@ -40,7 +42,7 @@ class not_given_pidgin_category_Exception(Exception):
 MAPS_CATEGORYS = {
     "map_name": "AcctName",
     "map_label": "GroupLabel",
-    "map_idea": "IdeaUnit",
+    "map_title": "TitleUnit",
     "map_road": "RoadUnit",
 }
 
@@ -59,12 +61,12 @@ JAAR_TYPES = {
         "otx_obj": "otx_label",
         "inx_obj": "inx_label",
     },
-    "IdeaUnit": {
-        "stage": "idea_staging",
-        "agg": "idea_agg",
-        "csv_filename": "idea.csv",
-        "otx_obj": "otx_idea",
-        "inx_obj": "inx_idea",
+    "TitleUnit": {
+        "stage": "title_staging",
+        "agg": "title_agg",
+        "csv_filename": "title.csv",
+        "otx_obj": "otx_title",
+        "inx_obj": "inx_title",
     },
     "RoadUnit": {
         "stage": "road_staging",
@@ -109,14 +111,14 @@ class OceanToboatTransformer:
         self.boat_dir = boat_dir
 
     def transform(self):
-        for brick_number, dfs in self._group_ocean_data().items():
-            self._save_to_boat_staging(brick_number, dfs)
+        for idea_number, dfs in self._group_ocean_data().items():
+            self._save_to_boat_staging(idea_number, dfs)
 
     def _group_ocean_data(self):
         grouped_data = {}
-        for ref in get_all_brick_dataframes(self.ocean_dir):
+        for ref in get_all_idea_dataframes(self.ocean_dir):
             df = self._read_and_tag_dataframe(ref)
-            grouped_data.setdefault(ref.brick_number, []).append(df)
+            grouped_data.setdefault(ref.idea_number, []).append(df)
         return grouped_data
 
     def _read_and_tag_dataframe(self, ref):
@@ -127,23 +129,23 @@ class OceanToboatTransformer:
         df["sheet_name"] = ref.sheet_name
         return df
 
-    def _save_to_boat_staging(self, brick_number: str, dfs: list):
+    def _save_to_boat_staging(self, idea_number: str, dfs: list):
         final_df = pandas_concat(dfs)
-        boat_path = create_path(self.boat_dir, f"{brick_number}.xlsx")
+        boat_path = create_path(self.boat_dir, f"{idea_number}.xlsx")
         upsert_sheet(boat_path, "boat_staging", final_df)
 
 
-def get_existing_excel_brick_file_refs(x_dir: str) -> list[BrickFileRef]:
-    existing_excel_brick_filepaths = []
-    for brick_number in sorted(get_brick_numbers()):
-        brick_filename = f"{brick_number}.xlsx"
-        x_brick_path = create_path(x_dir, brick_filename)
-        if os_path_exists(x_brick_path):
-            x_fileref = BrickFileRef(
-                file_dir=x_dir, file_name=brick_filename, brick_number=brick_number
+def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
+    existing_excel_idea_filepaths = []
+    for idea_number in sorted(get_idea_numbers()):
+        idea_filename = f"{idea_number}.xlsx"
+        x_idea_path = create_path(x_dir, idea_filename)
+        if os_path_exists(x_idea_path):
+            x_fileref = IdeaFileRef(
+                file_dir=x_dir, file_name=idea_filename, idea_number=idea_number
             )
-            existing_excel_brick_filepaths.append(x_fileref)
-    return existing_excel_brick_filepaths
+            existing_excel_idea_filepaths.append(x_fileref)
+    return existing_excel_idea_filepaths
 
 
 def etl_boat_staging_to_boat_agg(boat_dir):
@@ -156,21 +158,21 @@ class boatStagingToboatAggTransformer:
         self.boat_dir = boat_dir
 
     def transform(self):
-        for br_ref in get_existing_excel_brick_file_refs(self.boat_dir):
-            boat_brick_path = create_path(br_ref.file_dir, br_ref.file_name)
-            boat_staging_df = pandas_read_excel(boat_brick_path, "boat_staging")
-            otx_df = self._group_by_brick_columns(boat_staging_df, br_ref.brick_number)
-            upsert_sheet(boat_brick_path, "boat_agg", otx_df)
+        for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
+            boat_idea_path = create_path(br_ref.file_dir, br_ref.file_name)
+            boat_staging_df = pandas_read_excel(boat_idea_path, "boat_staging")
+            otx_df = self._group_by_idea_columns(boat_staging_df, br_ref.idea_number)
+            upsert_sheet(boat_idea_path, "boat_agg", otx_df)
 
-    def _group_by_brick_columns(
-        self, boat_staging_df: DataFrame, brick_number: str
+    def _group_by_idea_columns(
+        self, boat_staging_df: DataFrame, idea_number: str
     ) -> DataFrame:
-        brick_filename = get_brick_format_filename(brick_number)
-        brickref = get_brickref_obj(brick_filename)
-        required_columns = brickref.get_otx_keys_list()
-        brick_columns_set = set(brickref._attributes.keys())
-        brick_columns_list = get_sorting_columns(brick_columns_set)
-        boat_staging_df = boat_staging_df[brick_columns_list]
+        idea_filename = get_idea_format_filename(idea_number)
+        idearef = get_idearef_obj(idea_filename)
+        required_columns = idearef.get_otx_keys_list()
+        idea_columns_set = set(idearef._attributes.keys())
+        idea_columns_list = get_sorting_columns(idea_columns_set)
+        boat_staging_df = boat_staging_df[idea_columns_list]
         return get_boat_staging_grouping_with_all_values_equal_df(
             boat_staging_df, required_columns
         )
@@ -187,21 +189,21 @@ class boatAggToboatValidTransformer:
         self.legitimate_events = legitimate_events
 
     def transform(self):
-        for br_ref in get_existing_excel_brick_file_refs(self.boat_dir):
-            boat_brick_path = create_path(br_ref.file_dir, br_ref.file_name)
-            boat_agg = pandas_read_excel(boat_brick_path, "boat_agg")
+        for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
+            boat_idea_path = create_path(br_ref.file_dir, br_ref.file_name)
+            boat_agg = pandas_read_excel(boat_idea_path, "boat_agg")
             boat_valid_df = boat_agg[boat_agg["event_int"].isin(self.legitimate_events)]
-            upsert_sheet(boat_brick_path, "boat_valid", boat_valid_df)
+            upsert_sheet(boat_idea_path, "boat_valid", boat_valid_df)
 
-    # def _group_by_brick_columns(
-    #     self, boat_staging_df: DataFrame, brick_number: str
+    # def _group_by_idea_columns(
+    #     self, boat_staging_df: DataFrame, idea_number: str
     # ) -> DataFrame:
-    #     brick_filename = get_brick_format_filename(brick_number)
-    #     brickref = get_brickref_obj(brick_filename)
-    #     required_columns = brickref.get_otx_keys_list()
-    #     brick_columns_set = set(brickref._attributes.keys())
-    #     brick_columns_list = get_sorting_columns(brick_columns_set)
-    #     boat_staging_df = boat_staging_df[brick_columns_list]
+    #     idea_filename = get_idea_format_filename(idea_number)
+    #     idearef = get_idearef_obj(idea_filename)
+    #     required_columns = idearef.get_otx_keys_list()
+    #     idea_columns_set = set(idearef._attributes.keys())
+    #     idea_columns_list = get_sorting_columns(idea_columns_set)
+    #     boat_staging_df = boat_staging_df[idea_columns_list]
     #     return get_boat_staging_grouping_with_all_values_equal_df(
     #         boat_staging_df, required_columns
     #     )
@@ -217,11 +219,11 @@ class boatAggToboatEventsTransformer:
         self.boat_dir = boat_dir
 
     def transform(self):
-        for file_ref in get_existing_excel_brick_file_refs(self.boat_dir):
-            boat_brick_path = create_path(self.boat_dir, file_ref.file_name)
-            boat_agg_df = pandas_read_excel(boat_brick_path, "boat_agg")
+        for file_ref in get_existing_excel_idea_file_refs(self.boat_dir):
+            boat_idea_path = create_path(self.boat_dir, file_ref.file_name)
+            boat_agg_df = pandas_read_excel(boat_idea_path, "boat_agg")
             events_df = self.get_unique_events(boat_agg_df)
-            upsert_sheet(boat_brick_path, "boat_events", events_df)
+            upsert_sheet(boat_idea_path, "boat_events", events_df)
 
     def get_unique_events(self, boat_agg_df: DataFrame) -> DataFrame:
         events_df = boat_agg_df[["face_name", "event_int"]].drop_duplicates()
@@ -244,9 +246,9 @@ class boatEventsToEventsLogTransformer:
 
     def transform(self):
         sheet_name = "boat_events"
-        for br_ref in get_existing_excel_brick_file_refs(self.boat_dir):
-            boat_brick_path = create_path(self.boat_dir, br_ref.file_name)
-            otx_events_df = pandas_read_excel(boat_brick_path, sheet_name)
+        for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
+            boat_idea_path = create_path(self.boat_dir, br_ref.file_name)
+            otx_events_df = pandas_read_excel(boat_idea_path, sheet_name)
             events_log_df = self.get_event_log_df(
                 otx_events_df, self.boat_dir, br_ref.file_name
             )
@@ -328,10 +330,10 @@ def etl_boat_agg_to_pidgin_label_staging(
     boat_agg_single_to_pidgin_staging("map_label", legitimate_events, boat_dir)
 
 
-def etl_boat_agg_to_pidgin_idea_staging(
+def etl_boat_agg_to_pidgin_title_staging(
     legitimate_events: set[EventInt], boat_dir: str
 ):
-    boat_agg_single_to_pidgin_staging("map_idea", legitimate_events, boat_dir)
+    boat_agg_single_to_pidgin_staging("map_title", legitimate_events, boat_dir)
 
 
 def etl_boat_agg_to_pidgin_road_staging(
@@ -343,7 +345,7 @@ def etl_boat_agg_to_pidgin_road_staging(
 def etl_boat_agg_to_pidgin_staging(legitimate_events: set[EventInt], boat_dir: str):
     etl_boat_agg_to_pidgin_name_staging(legitimate_events, boat_dir)
     etl_boat_agg_to_pidgin_label_staging(legitimate_events, boat_dir)
-    etl_boat_agg_to_pidgin_idea_staging(legitimate_events, boat_dir)
+    etl_boat_agg_to_pidgin_title_staging(legitimate_events, boat_dir)
     etl_boat_agg_to_pidgin_road_staging(legitimate_events, boat_dir)
 
 
@@ -357,18 +359,18 @@ class boatAggToStagingTransformer:
         self.jaar_type = get_jaar_type(pidgin_category)
 
     def transform(self):
-        category_bricks = get_brick_category_ref().get(self.pidgin_category)
+        category_ideas = get_idea_category_ref().get(self.pidgin_category)
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
         pidgin_columns.update({"face_name", "event_int"})
         pidgin_columns = get_sorting_columns(pidgin_columns)
-        pidgin_columns.insert(0, "src_brick")
+        pidgin_columns.insert(0, "src_idea")
         pidgin_df = DataFrame(columns=pidgin_columns)
-        for brick_number in sorted(category_bricks):
-            brick_file_name = f"{brick_number}.xlsx"
-            boat_brick_path = create_path(self.boat_dir, brick_file_name)
-            if os_path_exists(boat_brick_path):
+        for idea_number in sorted(category_ideas):
+            idea_file_name = f"{idea_number}.xlsx"
+            boat_idea_path = create_path(self.boat_dir, idea_file_name)
+            if os_path_exists(boat_idea_path):
                 self.insert_staging_rows(
-                    pidgin_df, brick_number, boat_brick_path, pidgin_columns
+                    pidgin_df, idea_number, boat_idea_path, pidgin_columns
                 )
 
         pidgin_file_path = create_path(self.boat_dir, "pidgin.xlsx")
@@ -377,11 +379,11 @@ class boatAggToStagingTransformer:
     def insert_staging_rows(
         self,
         stage_df: DataFrame,
-        brick_number: str,
-        boat_brick_path: str,
+        idea_number: str,
+        boat_idea_path: str,
         df_columns: list[str],
     ):
-        boat_agg_df = pandas_read_excel(boat_brick_path, sheet_name="boat_agg")
+        boat_agg_df = pandas_read_excel(boat_idea_path, sheet_name="boat_agg")
         df_missing_cols = set(df_columns).difference(boat_agg_df.columns)
 
         for index, x_row in boat_agg_df.iterrows():
@@ -399,7 +401,7 @@ class boatAggToStagingTransformer:
                     unknown_word = x_row["unknown_word"]
                 df_len = len(stage_df.index)
                 stage_df.loc[df_len] = [
-                    brick_number,
+                    idea_number,
                     face_name,
                     event_int,
                     get_otx_obj(self.jaar_type, x_row),
@@ -414,8 +416,8 @@ class boatAggToStagingTransformer:
             return x_row["inx_name"]
         elif self.jaar_type == "GroupLabel" and "inx_label" not in missing_col:
             return x_row["inx_label"]
-        elif self.jaar_type == "IdeaUnit" and "inx_idea" not in missing_col:
-            return x_row["inx_idea"]
+        elif self.jaar_type == "TitleUnit" and "inx_title" not in missing_col:
+            return x_row["inx_title"]
         elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
             return x_row["inx_road"]
         return None
@@ -433,8 +435,8 @@ def etl_pidgin_road_staging_to_road_agg(boat_dir: str):
     etl_pidgin_single_staging_to_agg(boat_dir, "map_road")
 
 
-def etl_pidgin_idea_staging_to_idea_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "map_idea")
+def etl_pidgin_title_staging_to_title_agg(boat_dir: str):
+    etl_pidgin_single_staging_to_agg(boat_dir, "map_title")
 
 
 def etl_pidgin_single_staging_to_agg(boat_dir: str, map_category: str):
@@ -446,7 +448,7 @@ def etl_boat_pidgin_staging_to_agg(boat_dir):
     etl_pidgin_name_staging_to_name_agg(boat_dir)
     etl_pidgin_label_staging_to_label_agg(boat_dir)
     etl_pidgin_road_staging_to_road_agg(boat_dir)
-    etl_pidgin_idea_staging_to_idea_agg(boat_dir)
+    etl_pidgin_title_staging_to_title_agg(boat_dir)
 
 
 class PidginStagingToAggTransformer:
@@ -600,29 +602,29 @@ def get_event_pidgin_path(
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_boat_bricks_to_bow_face_bricks(boat_dir: str, faces_dir: str):
-    for boat_br_ref in get_existing_excel_brick_file_refs(boat_dir):
-        boat_brick_path = create_path(boat_dir, boat_br_ref.file_name)
-        if boat_br_ref.file_name not in _get_pidgen_brick_format_filenames():
+def etl_boat_ideas_to_bow_face_ideas(boat_dir: str, faces_dir: str):
+    for boat_br_ref in get_existing_excel_idea_file_refs(boat_dir):
+        boat_idea_path = create_path(boat_dir, boat_br_ref.file_name)
+        if boat_br_ref.file_name not in _get_pidgen_idea_format_filenames():
             split_excel_into_dirs(
-                input_file=boat_brick_path,
+                input_file=boat_idea_path,
                 output_dir=faces_dir,
                 column_name="face_name",
-                file_name=boat_br_ref.brick_number,
+                file_name=boat_br_ref.idea_number,
                 sheet_name="boat_valid",
             )
 
 
-def etl_bow_face_bricks_to_bow_event_otx_bricks(faces_dir: str):
+def etl_bow_face_ideas_to_bow_event_otx_ideas(faces_dir: str):
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
-        for face_br_ref in get_existing_excel_brick_file_refs(face_dir):
-            face_brick_path = create_path(face_dir, face_br_ref.file_name)
+        for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
+            face_idea_path = create_path(face_dir, face_br_ref.file_name)
             split_excel_into_dirs(
-                input_file=face_brick_path,
+                input_file=face_idea_path,
                 output_dir=face_dir,
                 column_name="event_int",
-                file_name=face_br_ref.brick_number,
+                file_name=face_br_ref.idea_number,
                 sheet_name="boat_valid",
             )
 
@@ -650,7 +652,7 @@ def get_most_recent_event_int(
     return max(recent_event_ints, default=None)
 
 
-def etl_bow_event_bricks_to_inx_events(
+def etl_bow_event_ideas_to_inx_events(
     faces_bow_dir: str, event_pidgins: dict[FaceName, set[EventInt]]
 ):
     for face_name in get_level1_dirs(faces_bow_dir):
@@ -662,60 +664,82 @@ def etl_bow_event_bricks_to_inx_events(
             event_int = int(event_int)
             event_dir = create_path(face_dir, event_int)
             pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
-            for event_br_ref in get_existing_excel_brick_file_refs(event_dir):
-                event_brick_path = create_path(event_dir, event_br_ref.file_name)
-                brick_df = pandas_read_excel(event_brick_path, "boat_valid")
+            for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
+                event_idea_path = create_path(event_dir, event_br_ref.file_name)
+                idea_df = pandas_read_excel(event_idea_path, "boat_valid")
                 if pidgin_event_int != None:
                     pidgin_event_dir = create_path(face_dir, pidgin_event_int)
                     pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
                     x_pidginunit = get_pidginunit_from_json(open_file(pidgin_path))
-                    translate_all_columns_dataframe(brick_df, x_pidginunit)
-                upsert_sheet(event_brick_path, "inx", brick_df)
+                    translate_all_columns_dataframe(idea_df, x_pidginunit)
+                upsert_sheet(event_idea_path, "inx", idea_df)
 
 
-def etl_bow_inx_event_bricks_to_aft_faces(faces_bow_dir: str, faces_aft_dir: str):
+def etl_bow_inx_event_ideas_to_aft_faces(faces_bow_dir: str, faces_aft_dir: str):
     for face_name in get_level1_dirs(faces_bow_dir):
         face_dir = create_path(faces_bow_dir, face_name)
         for event_int in get_level1_dirs(face_dir):
             event_int = int(event_int)
             event_dir = create_path(face_dir, event_int)
-            for event_br_ref in get_existing_excel_brick_file_refs(event_dir):
-                event_brick_path = create_path(event_dir, event_br_ref.file_name)
+            for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
+                event_idea_path = create_path(event_dir, event_br_ref.file_name)
                 split_excel_into_dirs(
-                    input_file=event_brick_path,
+                    input_file=event_idea_path,
                     output_dir=faces_aft_dir,
                     column_name="face_name",
-                    file_name=event_br_ref.brick_number,
+                    file_name=event_br_ref.idea_number,
                     sheet_name="inx",
                 )
 
 
-def etl_aft_face_bricks_to_aft_event_bricks(faces_aft_dir: str):
+def etl_aft_face_ideas_to_aft_event_ideas(faces_aft_dir: str):
     for face_name_dir in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_name_dir)
-        for face_br_ref in get_existing_excel_brick_file_refs(face_dir):
-            face_brick_path = create_path(face_dir, face_br_ref.file_name)
+        for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
+            face_idea_path = create_path(face_dir, face_br_ref.file_name)
             split_excel_into_dirs(
-                input_file=face_brick_path,
+                input_file=face_idea_path,
                 output_dir=face_dir,
                 column_name="event_int",
-                file_name=face_br_ref.brick_number,
+                file_name=face_br_ref.idea_number,
                 sheet_name="inx",
             )
 
 
-def etl_aft_event_bricks_to_cmty_bricks(faces_aft_dir: str):
+def etl_aft_event_ideas_to_cmty_ideas(faces_aft_dir: str):
     for face_name in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_name)
         for event_int in get_level1_dirs(face_dir):
             event_int = int(event_int)
             event_dir = create_path(face_dir, event_int)
-            for event_br_ref in get_existing_excel_brick_file_refs(event_dir):
-                event_brick_path = create_path(event_dir, event_br_ref.file_name)
+            for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
+                event_idea_path = create_path(event_dir, event_br_ref.file_name)
                 split_excel_into_dirs(
-                    input_file=event_brick_path,
+                    input_file=event_idea_path,
                     output_dir=event_dir,
-                    column_name="cmty_idea",
-                    file_name=event_br_ref.brick_number,
+                    column_name="cmty_title",
+                    file_name=event_br_ref.idea_number,
                     sheet_name="inx",
                 )
+
+
+def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
+    for face_name in get_level1_dirs(faces_aft_dir):
+        face_dir = create_path(faces_aft_dir, face_name)
+        for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
+            face_idea_excel_path = create_path(face_dir, face_br_ref.file_name)
+            idea_csv = pandas_read_excel(face_idea_excel_path, "inx").to_csv(
+                index=False
+            )
+            idea_csv = idea_csv.replace("\r", "")
+            save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
+
+
+def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir: str):
+    for face_name in get_level1_dirs(faces_aft_dir):
+        face_dir = create_path(faces_aft_dir, face_name)
+        for idea_number in sorted(get_idea_numbers()):
+            csv_filename = f"{idea_number}.csv"
+            csv_path = create_path(face_dir, csv_filename)
+            if os_path_exists(csv_path):
+                insert_idea_csv(csv_path, conn, idea_number)

@@ -41,7 +41,7 @@ class MemberShipTable(Base):
 class ItemTable(Base):
     __tablename__ = "item"
     uid = Column(Integer, primary_key=True)
-    idee = Column(String)
+    item_title = Column(String)
     parent_road = Column(String)
     addin = Column(Float)
     begin = Column(Float)
@@ -59,7 +59,7 @@ class ItemTable(Base):
 class AwardLinkTable(Base):
     __tablename__ = "awardlink"
     uid = Column(Integer, primary_key=True)
-    awardee_label = Column(String)
+    awardee_tag = Column(String)
     road = Column(String)
     give_force = Column(Float)
     take_force = Column(Float)
@@ -87,7 +87,7 @@ class PremiseTable(Base):
 class TeamLinkTable(Base):
     __tablename__ = "teamlink"
     uid = Column(Integer, primary_key=True)
-    team_label = Column(String)
+    team_tag = Column(String)
     road = Column(String)
 
 

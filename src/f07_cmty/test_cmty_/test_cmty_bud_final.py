@@ -33,7 +33,7 @@ def test_CmtyUnit_generate_final_bud_Sets_final_BudFile(env_dir_setup_cleanup):
 
     # THEN
     example_bud = budunit_shop(sue_str, accord45_str)
-    assert sue_final.cmty_idea == example_bud.cmty_idea
+    assert sue_final.cmty_title == example_bud.cmty_title
     assert sue_final.owner_name == example_bud.owner_name
 
 
@@ -43,7 +43,7 @@ def test_CmtyUnit_generate_final_bud_ReturnsRegeneratedObj(env_dir_setup_cleanup
     sue_str = "Sue"
     accord_cmty.init_owner_keeps(sue_str)
     sue_hubunit = hubunit_shop(
-        accord_cmty.cmtys_dir, accord_cmty.cmty_idea, sue_str, None
+        accord_cmty.cmtys_dir, accord_cmty.cmty_title, sue_str, None
     )
     before_sue_bud = sue_hubunit.get_final_bud()
     bob_str = "Bob"
@@ -66,7 +66,7 @@ def test_CmtyUnit_generate_final_bud_SetsCorrectFileWithout_healerlink(
     bob_str = "Bob"
     accord_cmty.init_owner_keeps(bob_str)
     bob_hubunit = hubunit_shop(
-        accord_cmty.cmtys_dir, accord_cmty.cmty_idea, bob_str, None
+        accord_cmty.cmtys_dir, accord_cmty.cmty_title, bob_str, None
     )
     before_bob_final_bud = accord_cmty.generate_final_bud(bob_str)
     sue_str = "Sue"
@@ -91,7 +91,7 @@ def test_CmtyUnit_generate_final_bud_SetsFileWith_healerlink(env_dir_setup_clean
     bob_str = "Bob"
     accord_cmty.init_owner_keeps(bob_str)
     bob_hubunit = hubunit_shop(
-        accord_cmty.cmtys_dir, accord_cmty.cmty_idea, bob_str, None
+        accord_cmty.cmtys_dir, accord_cmty.cmty_title, bob_str, None
     )
     after_bob_final_bud = accord_cmty.generate_final_bud(bob_str)
     assert after_bob_final_bud.acct_exists(bob_str) is False
@@ -124,9 +124,9 @@ def test_CmtyUnit_generate_all_final_buds_SetsCorrectFiles(
     sue_str = "Sue"
     accord_cmty.init_owner_keeps(bob_str)
     cmtys_dir = accord_cmty.cmtys_dir
-    bob_hubunit = hubunit_shop(cmtys_dir, accord_cmty.cmty_idea, bob_str, None)
+    bob_hubunit = hubunit_shop(cmtys_dir, accord_cmty.cmty_title, bob_str, None)
     accord_cmty.init_owner_keeps(sue_str)
-    sue_hubunit = hubunit_shop(cmtys_dir, accord_cmty.cmty_idea, sue_str, None)
+    sue_hubunit = hubunit_shop(cmtys_dir, accord_cmty.cmty_title, sue_str, None)
     bob_voice_bud = accord_cmty.generate_final_bud(bob_str)
     sue_voice_bud = accord_cmty.generate_final_bud(sue_str)
 

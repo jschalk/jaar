@@ -55,7 +55,7 @@ def get_cmty_voices_accts_plotly_fig(x_cmty: CmtyUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"cmty '{x_cmty.cmty_idea}', voice accts metrics"
+    fig_title = f"cmty '{x_cmty.cmty_title}', voice accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
@@ -111,7 +111,7 @@ def get_cmty_finals_accts_plotly_fig(x_cmty: CmtyUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"cmty '{x_cmty.cmty_idea}', final accts metrics"
+    fig_title = f"cmty '{x_cmty.cmty_title}', final accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
@@ -136,7 +136,7 @@ def get_cmty_voices_agenda_plotly_fig(x_cmty: CmtyUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "_idee",
+        "_item_title",
         "_parent_road",
         "begin",
         "close",
@@ -155,7 +155,7 @@ def get_cmty_voices_agenda_plotly_fig(x_cmty: CmtyUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df._idee,
+                df._item_title,
                 df._parent_road,
                 df.begin,
                 df.close,
@@ -170,7 +170,7 @@ def get_cmty_voices_agenda_plotly_fig(x_cmty: CmtyUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"cmty '{x_cmty.cmty_idea}', voice agenda metrics"
+    fig_title = f"cmty '{x_cmty.cmty_title}', voice agenda metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
@@ -195,7 +195,7 @@ def get_cmty_finals_agenda_plotly_fig(x_cmty: CmtyUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "_idee",
+        "_item_title",
         "_parent_road",
         "begin",
         "close",
@@ -214,7 +214,7 @@ def get_cmty_finals_agenda_plotly_fig(x_cmty: CmtyUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df._idee,
+                df._item_title,
                 df._parent_road,
                 df.begin,
                 df.close,
@@ -229,7 +229,7 @@ def get_cmty_finals_agenda_plotly_fig(x_cmty: CmtyUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_title = f"cmty '{x_cmty.cmty_idea}', final agenda metrics"
+    fig_title = f"cmty '{x_cmty.cmty_title}', final agenda metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)

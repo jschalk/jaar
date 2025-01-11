@@ -59,12 +59,12 @@ def otx_name_str() -> str:
     return "otx_name"
 
 
-def inx_idea_str() -> str:
-    return "inx_idea"
+def inx_title_str() -> str:
+    return "inx_title"
 
 
-def otx_idea_str() -> str:
-    return "otx_idea"
+def otx_title_str() -> str:
+    return "otx_title"
 
 
 def inx_road_str() -> str:
@@ -95,8 +95,8 @@ def map_label_str() -> str:
     return "map_label"
 
 
-def map_idea_str() -> str:
-    return "map_idea"
+def map_title_str() -> str:
+    return "map_title"
 
 
 def map_road_str() -> str:
@@ -138,7 +138,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "acct_name": "AcctName",
         "addin": "float",
         "amount": "float",
-        "awardee_label": "GroupLabel",
+        "awardee_tag": "GroupLabel",
         "base": "RoadUnit",
         "base_item_active_requisite": "bool",
         "begin": "float",
@@ -156,7 +156,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "denom": "int",
         "divisor": "int",
         "face_name": "AcctName",
-        "cmty_idea": "IdeaUnit",
+        "cmty_title": "TitleUnit",
         "fnigh": "float",
         "fopen": "float",
         "fund_coin": "float",
@@ -165,11 +165,11 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "gogo_want": "float",
         "group_label": "GroupLabel",
         "healer_name": "AcctName",
-        "hour_idea": "IdeaUnit",
-        "idee": "IdeaUnit",
+        "hour_title": "TitleUnit",
+        "item_title": "TitleUnit",
         "mass": "int",
         "max_tree_traverse": "int",
-        "month_idea": "IdeaUnit",
+        "month_title": "TitleUnit",
         "monthday_distortion": "int",
         "morph": "bool",
         "need": "RoadUnit",
@@ -189,10 +189,10 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_label": "GroupLabel",
+        "team_tag": "GroupLabel",
         "time_int": "TimeLinePoint",
-        "timeline_idea": "IdeaUnit",
-        "weekday_idea": "IdeaUnit",
+        "timeline_title": "TitleUnit",
+        "weekday_title": "TitleUnit",
         "weekday_order": "int",
         "bridge": "str",
         "yr1_jan1_offset": "int",
@@ -216,12 +216,12 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "otx_bridge",
             "otx_name",
         },
-        "map_idea": {
-            "inx_idea",
+        "map_title": {
+            "inx_title",
             "unknown_word",
             "inx_bridge",
             "otx_bridge",
-            "otx_idea",
+            "otx_title",
         },
         "map_road": {
             "inx_road",

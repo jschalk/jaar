@@ -7,7 +7,7 @@ from src.f01_road.finance import (
 from src.f01_road.jaar_config import (
     get_gifts_folder,
     get_json_filename,
-    get_test_cmty_idea,
+    get_test_cmty_title,
 )
 from src.f01_road.road import default_bridge_if_None
 from src.f01_road.finance_tran import tranbook_shop
@@ -26,7 +26,7 @@ from os.path import exists as os_path_exists, isdir as os_path_isdir
 def test_CmtyUnit_Exists(env_dir_setup_cleanup):
     accord45_str = "accord45"
     accord_cmty = CmtyUnit()
-    assert not accord_cmty.cmty_idea
+    assert not accord_cmty.cmty_title
     assert not accord_cmty.timeline
     assert not accord_cmty.current_time
     assert not accord_cmty.deallogs
@@ -48,11 +48,11 @@ def test_cmtyunit_shop_ReturnsCmtyUnit():
     accord_cmty = cmtyunit_shop()
 
     # THEN
-    assert accord_cmty.cmty_idea == get_test_cmty_idea()
+    assert accord_cmty.cmty_title == get_test_cmty_title()
     assert accord_cmty.timeline == timelineunit_shop()
     assert accord_cmty.current_time == 0
     assert accord_cmty.deallogs == {}
-    assert accord_cmty.cashbook == tranbook_shop(get_test_cmty_idea())
+    assert accord_cmty.cashbook == tranbook_shop(get_test_cmty_title())
     assert accord_cmty.bridge == default_bridge_if_None()
     assert accord_cmty.fund_coin == default_fund_coin_if_None()
     assert accord_cmty.respect_bit == default_respect_bit_if_None()
@@ -61,7 +61,7 @@ def test_cmtyunit_shop_ReturnsCmtyUnit():
     # Calculated fields
     assert accord_cmty._owners_dir != None
     assert accord_cmty._gifts_dir != None
-    assert accord_cmty._all_tranbook == tranbook_shop(get_test_cmty_idea())
+    assert accord_cmty._all_tranbook == tranbook_shop(get_test_cmty_title())
 
 
 def test_cmtyunit_shop_ReturnsCmtyUnitWith_cmtys_dir(env_dir_setup_cleanup):
@@ -72,7 +72,7 @@ def test_cmtyunit_shop_ReturnsCmtyUnitWith_cmtys_dir(env_dir_setup_cleanup):
     accord_cmty = cmtyunit_shop(accord45_str, cmtys_dir=get_test_cmtys_dir())
 
     # THEN
-    assert accord_cmty.cmty_idea == accord45_str
+    assert accord_cmty.cmty_title == accord45_str
     assert accord_cmty.cmtys_dir == get_test_cmtys_dir()
     assert accord_cmty._owners_dir is not None
     assert accord_cmty._gifts_dir is not None
@@ -89,7 +89,7 @@ def test_cmtyunit_shop_ReturnsCmtyUnitWith_bridge(env_dir_setup_cleanup):
 
     # WHEN
     accord_cmty = cmtyunit_shop(
-        cmty_idea=accord45_str,
+        cmty_title=accord45_str,
         cmtys_dir=get_test_cmtys_dir(),
         current_time=x_current_time,
         in_memory_journal=True,
@@ -110,7 +110,7 @@ def test_cmtyunit_shop_ReturnsCmtyUnitWith_bridge(env_dir_setup_cleanup):
 def test_CmtyUnit_set_cmty_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     accord45_str = "accord45"
-    accord_cmty = CmtyUnit(cmty_idea=accord45_str, cmtys_dir=get_test_cmtys_dir())
+    accord_cmty = CmtyUnit(cmty_title=accord45_str, cmtys_dir=get_test_cmtys_dir())
     x_cmty_dir = create_path(get_test_cmtys_dir(), accord45_str)
     x_owners_dir = create_path(x_cmty_dir, "owners")
     x_gifts_dir = create_path(x_cmty_dir, get_gifts_folder())
@@ -150,7 +150,7 @@ def test_cmtyunit_shop_SetscmtysDirs(env_dir_setup_cleanup):
     )
 
     # THEN
-    assert accord_cmty.cmty_idea == accord45_str
+    assert accord_cmty.cmty_title == accord45_str
     assert accord_cmty._cmty_dir == create_path(get_test_cmtys_dir(), accord45_str)
     assert accord_cmty._owners_dir == create_path(accord_cmty._cmty_dir, "owners")
 
@@ -304,7 +304,7 @@ def test_CmtyUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
     # THEN
     sue_hubunit = hubunit_shop(
         cmtys_dir=accord_cmty.cmtys_dir,
-        cmty_idea=accord_cmty.cmty_idea,
+        cmty_title=accord_cmty.cmty_title,
         owner_name=sue_str,
         keep_road=None,
         bridge=accord_cmty.bridge,
@@ -313,7 +313,7 @@ def test_CmtyUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
     )
     yao_hubunit = hubunit_shop(
         cmtys_dir=accord_cmty.cmtys_dir,
-        cmty_idea=accord_cmty.cmty_idea,
+        cmty_title=accord_cmty.cmty_title,
         owner_name=yao_str,
         keep_road=None,
         bridge=accord_cmty.bridge,

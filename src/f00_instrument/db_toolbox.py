@@ -1,6 +1,13 @@
-from sqlite3 import Connection, connect as sqlite3_connect
+from src.f00_instrument.dict_toolbox import extract_csv_headers
+from sqlite3 import (
+    Connection,
+    connect as sqlite3_connect,
+    Error as sqlite3_Error,
+    Connection as sqlite3_Connection,
+)
 from dataclasses import dataclass
 from contextlib import contextmanager
+from csv import reader as csv_reader
 
 
 def sqlite_null(x_obj: any):
@@ -212,3 +219,109 @@ def get_grouping_with_all_values_equal_sql_query(
     x_table: str, group_by_columns: list[str], value_columns: list[str]
 ) -> str:
     return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)} {_get_having_equal_value_clause(value_columns)}"
+
+
+def insert_csv(
+    csv_file_path: str, sqlite_connection: sqlite3_Connection, table_name: str
+):
+    """
+    Inserts data from a CSV file into a specified SQLite database table.
+
+    Args:
+        csv_file_path (str): Path to the CSV file.
+        sqlite_connection (sqlite3.Connection): SQLite database connection object.
+        table_name (str): Name of the table to insert data into.
+
+    Returns:
+        None
+    """
+    try:
+        # Use the provided SQLite connection
+        cursor = sqlite_connection.cursor()
+
+        # Open the CSV file
+        with open(csv_file_path, "r", newline="", encoding="utf-8") as csv_file:
+            reader = csv_reader(csv_file)
+
+            # Extract the header row from the CSV file
+            headers = next(reader)
+
+            # Create a parameterized SQL query for inserting data
+            placeholders = ", ".join(["?"] * len(headers))
+            insert_query = f"INSERT INTO {table_name} ({', '.join(headers)}) VALUES ({placeholders})"
+
+            # Insert each row into the database
+            for row in reader:
+                cursor.execute(insert_query, row)
+
+        # Commit the transaction
+        sqlite_connection.commit()
+
+    except sqlite3_Error as e:
+        print(f"SQLite error: {e}")
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+
+class sqlite3_Error_Exception(Exception):
+    pass
+
+
+def create_table_from_csv(
+    csv_file_path: str,
+    sqlite_connection: sqlite3_Connection,
+    table_name: str,
+    column_types: dict[str, str],
+):
+    """
+    Creates a SQLite table based on the header of a CSV file and a dictionary of column names and their data types.
+
+    Args:
+        csv_file_path (str): Path to the CSV file.
+        sqlite_connection (sqlite3.Connection): SQLite database connection object.
+        table_name (str): Name of the table to create.
+        column_types (dict): Dictionary mapping column names to their SQLite data types.
+
+    Returns:
+        None
+    """
+    try:
+        # Open the CSV file to read the header
+        with open(csv_file_path, "r", newline="", encoding="utf-8") as csv_file:
+            headers = csv_file.readline().strip().split(",")
+
+        # Dynamically create a table schema based on the provided column types
+        columns = []
+        for header in headers:
+            data_type = column_types.get(header, "TEXT")  # Default to TEXT
+            columns.append(f"{header} {data_type}")
+        columns_definition = ", ".join(columns)
+
+        create_table_query = (
+            f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_definition})"
+        )
+
+        # Execute the create table query
+        cursor = sqlite_connection.cursor()
+        cursor.execute(create_table_query)
+        sqlite_connection.commit()
+
+    except sqlite3_Error as e:
+        raise sqlite3_Error_Exception(f"SQLite error: {e}") from e
+
+    # except Exception as e:
+    #     raise Exception(f"Error: {e}")
+
+
+def db_table_exists(conn: sqlite3_Connection, tablename: str) -> bool:
+    cursor = conn.cursor()
+    table_master_sqlstr = (
+        f"SELECT name FROM sqlite_master WHERE type='table' AND name='{tablename}';"
+    )
+    cursor.execute(table_master_sqlstr)
+    result = cursor.fetchone()
+    if result:
+        return True
+    else:
+        return False

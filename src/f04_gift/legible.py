@@ -18,12 +18,12 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_update,
     acct_name_str,
-    awardee_label_str,
+    awardee_tag_str,
     group_label_str,
-    team_label_str,
+    team_tag_str,
     healer_name_str,
     parent_road_str,
-    idee_str,
+    item_title_str,
     base_item_active_requisite_str,
     pledge_str,
     addin_str,
@@ -338,7 +338,7 @@ def add_bud_itemunit_insert_to_legible_list(
     _mass_str = "mass"
     for parent_road_dict in itemunit_insert_dict.values():
         for itemunit_atom in parent_road_dict.values():
-            idee_value = itemunit_atom.get_value(idee_str())
+            item_title_value = itemunit_atom.get_value(item_title_str())
             parent_road_value = itemunit_atom.get_value(parent_road_str())
             _addin_value = itemunit_atom.get_value(addin_str())
             _begin_value = itemunit_atom.get_value(begin_str())
@@ -349,9 +349,7 @@ def add_bud_itemunit_insert_to_legible_list(
             _morph_value = itemunit_atom.get_value(_morph_str)
             _mass_value = itemunit_atom.get_value(_mass_str)
             pledge_value = itemunit_atom.get_value(pledge_str())
-            x_str = (
-                f"Created Item '{idee_value}' with parent_road {parent_road_value}. "
-            )
+            x_str = f"Created Item '{item_title_value}' with parent_road {parent_road_value}. "
             if _addin_value is not None:
                 x_str += f"addin={_addin_value}."
             if _begin_value is not None:
@@ -381,7 +379,7 @@ def add_bud_itemunit_update_to_legible_list(
     _mass_str = "mass"
     for parent_road_dict in itemunit_update_dict.values():
         for itemunit_atom in parent_road_dict.values():
-            idee_value = itemunit_atom.get_value(idee_str())
+            item_title_value = itemunit_atom.get_value(item_title_str())
             parent_road_value = itemunit_atom.get_value(parent_road_str())
             addin_value = itemunit_atom.get_value(addin_str())
             begin_value = itemunit_atom.get_value(begin_str())
@@ -392,7 +390,7 @@ def add_bud_itemunit_update_to_legible_list(
             morph_value = itemunit_atom.get_value(morph_str())
             mass_value = itemunit_atom.get_value(_mass_str)
             pledge_value = itemunit_atom.get_value(pledge_str())
-            x_str = f"Item '{idee_value}' with parent_road {parent_road_value} set these attributes: "
+            x_str = f"Item '{item_title_value}' with parent_road {parent_road_value} set these attributes: "
             if addin_value is not None:
                 x_str += f"addin={addin_value}."
             if begin_value is not None:
@@ -420,11 +418,9 @@ def add_bud_itemunit_delete_to_legible_list(
 ):
     for parent_road_dict in itemunit_delete_dict.values():
         for itemunit_atom in parent_road_dict.values():
-            idee_value = itemunit_atom.get_value(idee_str())
+            item_title_value = itemunit_atom.get_value(item_title_str())
             parent_road_value = itemunit_atom.get_value(parent_road_str())
-            x_str = (
-                f"Item '{idee_value}' with parent_road {parent_road_value} was deleted."
-            )
+            x_str = f"Item '{item_title_value}' with parent_road {parent_road_value} was deleted."
             legible_list.append(x_str)
 
 
@@ -433,11 +429,11 @@ def add_bud_item_awardlink_insert_to_legible_list(
 ):
     for road_dict in item_awardlink_insert_dict.values():
         for item_awardlink_atom in road_dict.values():
-            awardee_label_value = item_awardlink_atom.get_value(awardee_label_str())
+            awardee_tag_value = item_awardlink_atom.get_value(awardee_tag_str())
             road_value = item_awardlink_atom.get_value("road")
             give_force_value = item_awardlink_atom.get_value("give_force")
             take_force_value = item_awardlink_atom.get_value("take_force")
-            x_str = f"Awardlink created for group {awardee_label_value} for item '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
+            x_str = f"Awardlink created for group {awardee_tag_value} for item '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -446,16 +442,16 @@ def add_bud_item_awardlink_update_to_legible_list(
 ):
     for road_dict in item_awardlink_update_dict.values():
         for item_awardlink_atom in road_dict.values():
-            awardee_label_value = item_awardlink_atom.get_value(awardee_label_str())
+            awardee_tag_value = item_awardlink_atom.get_value(awardee_tag_str())
             road_value = item_awardlink_atom.get_value("road")
             give_force_value = item_awardlink_atom.get_value("give_force")
             take_force_value = item_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_label_value} for item '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_label_value} for item '{road_value}'. Now give_force={give_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now give_force={give_force_value}."
             elif take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_label_value} for item '{road_value}'. Now take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -464,9 +460,9 @@ def add_bud_item_awardlink_delete_to_legible_list(
 ):
     for road_dict in item_awardlink_delete_dict.values():
         for item_awardlink_atom in road_dict.values():
-            awardee_label_value = item_awardlink_atom.get_value(awardee_label_str())
+            awardee_tag_value = item_awardlink_atom.get_value(awardee_tag_str())
             road_value = item_awardlink_atom.get_value("road")
-            x_str = f"Awardlink for group {awardee_label_value}, item '{road_value}' has been deleted."
+            x_str = f"Awardlink for group {awardee_tag_value}, item '{road_value}' has been deleted."
             legible_list.append(x_str)
 
 
@@ -601,9 +597,9 @@ def add_bud_item_teamlink_insert_to_legible_list(
 ):
     for road_dict in item_teamlink_insert_dict.values():
         for item_teamlink_atom in road_dict.values():
-            team_label_value = item_teamlink_atom.get_value(team_label_str())
+            team_tag_value = item_teamlink_atom.get_value(team_tag_str())
             road_value = item_teamlink_atom.get_value("road")
-            x_str = f"teamlink '{team_label_value}' created for item '{road_value}'."
+            x_str = f"teamlink '{team_tag_value}' created for item '{road_value}'."
             legible_list.append(x_str)
 
 
@@ -612,9 +608,9 @@ def add_bud_item_teamlink_delete_to_legible_list(
 ):
     for road_dict in item_teamlink_delete_dict.values():
         for item_teamlink_atom in road_dict.values():
-            team_label_value = item_teamlink_atom.get_value(team_label_str())
+            team_tag_value = item_teamlink_atom.get_value(team_tag_str())
             road_value = item_teamlink_atom.get_value("road")
-            x_str = f"teamlink '{team_label_value}' deleted for item '{road_value}'."
+            x_str = f"teamlink '{team_tag_value}' deleted for item '{road_value}'."
             legible_list.append(x_str)
 
 

@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
     face_name_str,
-    cmty_idea_str,
+    cmty_title_str,
     acct_name_str,
     owner_name_str,
 )
@@ -13,7 +13,7 @@ from src.f08_pidgin.pidgin_config import (
     otx_road_str,
     unknown_word_str,
 )
-from src.f09_brick.pandas_tool import get_sheet_names, upsert_sheet, boat_agg_str
+from src.f09_idea.pandas_tool import get_sheet_names, upsert_sheet, boat_agg_str
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f10_etl.transformers import etl_boat_agg_to_pidgin_road_staging
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -21,7 +21,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
+def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -37,7 +37,7 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
     br00117_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
         owner_name_str(),
         acct_name_str(),
         otx_road_str(),
@@ -73,7 +73,7 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario0_SingleBrick(
     assert get_sheet_names(pidgin_path) == [road_staging_str]
 
 
-def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBricksFiles(
+def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleIdeasFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -94,7 +94,7 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario1_MultipleBrick
     br00117_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
         owner_name_str(),
         acct_name_str(),
         otx_road_str(),
@@ -172,7 +172,7 @@ def test_etl_boat_agg_to_pidgin_road_staging_CreatesFile_Scenario2_WorldUnit_eve
     br00117_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_idea_str(),
+        cmty_title_str(),
         owner_name_str(),
         acct_name_str(),
         otx_road_str(),
