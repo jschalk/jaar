@@ -20,7 +20,11 @@ from src.f00_instrument.db_toolbox import (
 from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
 from os.path import exists as os_path_exists
-from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
+from sqlite3 import (
+    connect as sqlite3_connect,
+    Connection as sqlite3_Connection,
+    sqlite_version as sqlite3_sqlite_version,
+)
 
 
 def test_sqlite_null_ReturnsCorrectObj():
@@ -472,3 +476,16 @@ def test_table_exists_ReturnsObj():
 
     # WHEN / THEN
     assert db_table_exists(conn, users_tablename)
+
+
+def test_sqlite_version():
+    # Retrieve the SQLite version
+    sqlite_version = sqlite3_sqlite_version
+
+    # Log the version for debugging purposes
+    print(f"SQLite version being used: {sqlite_version}")
+
+    # Check if the version meets requirements (example: 3.30.0 or later)
+    major, minor, patch = map(int, sqlite_version.split("."))
+    sqlite_old_error_message = f"SQLite version is too old: {sqlite_version}"
+    assert (major, minor, patch) >= (3, 30, 0), sqlite_old_error_message
