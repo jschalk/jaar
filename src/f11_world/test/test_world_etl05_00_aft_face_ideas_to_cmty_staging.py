@@ -106,13 +106,14 @@ def test_WorldUnit_memory_fiscal_db_conn_HasIdeaDataFromCSV(
         print(f"{br00011_expected_columns=}")
         assert br00011_db_columns == br00011_expected_columns
         cursor.execute(f"SELECT * FROM {br00011_str}")
+        br00011_db_rows = cursor.fetchall()
         expected_data = [
             (sue_inx, event3, accord23_str, bob_inx, bob_inx),
             (sue_inx, event3, accord23_str, yao_inx, bob_inx),
             (sue_inx, event3, accord23_str, yao_inx, yao_inx),
             (sue_inx, event7, accord23_str, yao_inx, yao_inx),
         ]
-        assert cursor.fetchall() == expected_data
+        assert br00011_db_rows == expected_data
 
 
 # def test_WorldUnit_aft_faces_ideas_to_cmty_staging_CreatesCorrectTables(
