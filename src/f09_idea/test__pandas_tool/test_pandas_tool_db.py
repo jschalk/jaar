@@ -171,6 +171,43 @@ def test_insert_idea_csv_ChangesDBState_CorrectlyInserts(
         os_remove(zia_csv_filepath)
 
 
+def test_insert_idea_csv_ChangesDBState_CanCreateTable(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
+    """Test the insert_csv function using pytest."""
+    # ESTABLISH
+    conn, test_csv_filepath = setup_database_and_csv
+    # Create a new CSV file
+    zia_csv_filepath = "zia_brXXXXX.csv"
+    with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
+        csv_file.write(
+            "face_name,event_int,cmty_title,owner_name,acct_name,group_label,gogo_want\n"
+        )
+        csv_file.write("Zia,7,Accord55,Yao,Zia,;swimmers,10.2\n")
+        csv_file.write("Zia,8,Accord43,Zia,Bob,;runners,11.1\n")
+
+    br_tablename = "brXXXXX"
+    cursor = conn.cursor()
+    cursor.execute(f"PRAGMA table_info({br_tablename})")
+    columns = cursor.fetchall()
+    assert columns == []
+
+    # WHEN
+    insert_idea_csv(zia_csv_filepath, conn, br_tablename)
+
+    # THEN
+    expected_table_data = [
+        ("Zia", 7, "Accord55", "Yao", "Zia", ";swimmers", 10.2),
+        ("Zia", 8, "Accord43", "Zia", "Bob", ";runners", 11.1),
+    ]
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM {br_tablename}")
+    assert cursor.fetchall() == expected_table_data
+
+    if os_path_exists(zia_csv_filepath):
+        os_remove(zia_csv_filepath)
+
+
 def test_create_idea_table_from_csv_DoesNothingIfTableExists(
     setup_database_and_csv: tuple[sqlite3_Connection, str, str]
 ):

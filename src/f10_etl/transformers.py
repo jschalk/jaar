@@ -17,6 +17,7 @@ from src.f09_idea.pandas_tool import (
     _get_pidgen_idea_format_filenames,
     get_boat_staging_grouping_with_all_values_equal_df,
     translate_all_columns_dataframe,
+    insert_idea_csv,
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
@@ -31,6 +32,7 @@ from src.f10_etl.pidgin_agg import (
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
 from functools import reduce as functools_reduce
+from sqlite3 import Connection as sqlite3_Connection
 
 
 class not_given_pidgin_category_Exception(Exception):
@@ -731,3 +733,13 @@ def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
             )
             idea_csv = idea_csv.replace("\r", "")
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
+
+
+def etl_populate_fiscal_db(conn: sqlite3_Connection, faces_aft_dir: str):
+    for face_name in get_level1_dirs(faces_aft_dir):
+        face_dir = create_path(faces_aft_dir, face_name)
+        for idea_number in sorted(get_idea_numbers()):
+            csv_filename = f"{idea_number}.csv"
+            csv_path = create_path(face_dir, csv_filename)
+            if os_path_exists(csv_path):
+                insert_idea_csv(csv_path, conn, idea_number)

@@ -37,8 +37,10 @@ from src.f10_etl.transformers import (
     etl_aft_face_ideas_to_aft_event_ideas,
     etl_aft_event_ideas_to_cmty_ideas,
     etl_aft_face_ideas_to_csv_files,
+    etl_populate_fiscal_db,
 )
 from dataclasses import dataclass
+from sqlite3 import connect as sqlite3_connect
 
 
 def get_default_worlds_dir() -> str:
@@ -165,6 +167,14 @@ class WorldUnit:
 
     def aft_face_ideas_to_csv_files(self):
         etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
+
+    def memory_fiscal_db_conn(self):
+        conn = sqlite3_connect(":memory:")
+        etl_populate_fiscal_db(conn, self._faces_aft_dir)
+        return conn
+
+    def aft_faces_ideas_to_cmty_staging(self):
+        pass
 
     def get_dict(self) -> dict:
         return {

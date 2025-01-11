@@ -351,6 +351,12 @@ def create_idea_table_from_csv(
     create_table_from_csv(csv_filepath, conn, tablename, column_types)
 
 
-def insert_idea_csv(csv_filepath: str, conn: sqlite3_Connection, new_table: str):
+def insert_idea_csv(csv_filepath: str, conn: sqlite3_Connection, tablename: str):
+    cursor = conn.cursor()
+    cursor.execute(f"PRAGMA table_info({tablename})")
+    columns = cursor.fetchall()
+    if columns == []:
+        create_idea_table_from_csv(csv_filepath, conn, tablename)
+
     # Future feature? filtering csv file so only relevant idea columns are loaded
-    insert_csv(csv_filepath, conn, new_table)
+    insert_csv(csv_filepath, conn, tablename)

@@ -1,9 +1,19 @@
-from src.f00_instrument.file import create_path
+from src.f00_instrument.file import create_path, save_file
+from src.f01_road.finance_tran import bridge_str, time_int_str, quota_str
+from src.f03_chrono.chrono import (
+    c400_number_str,
+    monthday_distortion_str,
+    timeline_title_str,
+    yr1_jan1_offset_str,
+)
 from src.f04_gift.atom_config import (
     face_name_str,
     cmty_title_str,
     acct_name_str,
     owner_name_str,
+    fund_coin_str,
+    penny_str,
+    respect_bit_str,
 )
 from src.f07_cmty.cmty_config import (
     current_time_str,
@@ -21,6 +31,8 @@ from src.f07_cmty.cmty_config import (
     cmty_timeline_month_str,
     cmty_timeline_weekday_str,
 )
+from src.f08_pidgin.pidgin_config import event_int_str
+from src.f09_idea.idea_config import get_idea_sqlite_type
 from src.f09_idea.pandas_tool import (
     upsert_sheet,
     sheet_exists,
@@ -32,23 +44,89 @@ from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
+from copy import copy as copy_copy
 
 
-# def test_create_init_cmty_prime_files_HasCorrectColumns(env_dir_setup_cleanup):
-#     # ESTABLISH
-#     x_dir = get_test_etl_dir()
+def test_WorldUnit_memory_fiscal_db_conn_ReturnsDBConnection(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fizz_world = worldunit_shop("Fizz")
 
-#     # WHEN
-#     create_init_cmty_prime_files(x_dir)
+    # WHEN / THEN
+    with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
+        assert fiscal_db_conn != None
+        cursor = fiscal_db_conn.cursor()
+        x_tablename = "random_name_table"
+        cursor.execute(f"PRAGMA table_info({x_tablename})")
+        columns = cursor.fetchall()
+        assert columns == []  # implication is database exists
+
+
+def test_WorldUnit_memory_fiscal_db_conn_HasIdeaDataFromCSV(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bob"
+    yao_inx = "Yao"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    fizz_world = worldunit_shop("fizz")
+    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    br00011_str = "br00011"
+    br00011_csv_filename = f"{br00011_str}.csv"
+    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{cmty_title_str()},{owner_name_str()},{acct_name_str()}
+{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
+{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
+{sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
+{sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
+"""
+    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+
+    # ESTABLISH
+    fizz_world = worldunit_shop("Fizz")
+
+    # WHEN / THEN
+    with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
+        print(f"{type(fiscal_db_conn)=}")
+        assert fiscal_db_conn != None
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(f"PRAGMA table_info({br00011_str})")
+        br00011_db_columns = cursor.fetchall()
+        br00011_expected_columns = [
+            (0, face_name_str(), "TEXT", 0, None, 0),
+            (1, event_int_str(), "INTEGER", 0, None, 0),
+            (2, cmty_title_str(), "TEXT", 0, None, 0),
+            (3, owner_name_str(), "TEXT", 0, None, 0),
+            (4, acct_name_str(), "TEXT", 0, None, 0),
+        ]
+        print(f"      {br00011_db_columns=}")
+        print(f"{br00011_expected_columns=}")
+        assert br00011_db_columns == br00011_expected_columns
+        cursor.execute(f"SELECT * FROM {br00011_str}")
+        expected_data = [
+            (sue_inx, event3, accord23_str, bob_inx, bob_inx),
+            (sue_inx, event3, accord23_str, yao_inx, bob_inx),
+            (sue_inx, event3, accord23_str, yao_inx, yao_inx),
+            (sue_inx, event7, accord23_str, yao_inx, yao_inx),
+        ]
+        assert cursor.fetchall() == expected_data
+
+
+# def test_WorldUnit_aft_faces_ideas_to_cmty_staging_CreatesCorrectTables(
+#     env_dir_setup_cleanup,
+# ):
 
 #     # THEN
 #     staging_str = "staging"
-#     br00000_path = create_path(x_dir, "br00000.xlsx")
-#     br00001_path = create_path(x_dir, "br00001.xlsx")
-#     br00002_path = create_path(x_dir, "br00002.xlsx")
-#     br00003_path = create_path(x_dir, "br00003.xlsx")
-#     br00004_path = create_path(x_dir, "br00004.xlsx")
-#     br00005_path = create_path(x_dir, "br00005.xlsx")
+#     br00000_path = create_path(fizz_world._faces_aft_dir, "br00000.xlsx")
+#     br00001_path = create_path(fizz_world._faces_aft_dir, "br00001.xlsx")
+#     br00002_path = create_path(fizz_world._faces_aft_dir, "br00002.xlsx")
+#     br00003_path = create_path(fizz_world._faces_aft_dir, "br00003.xlsx")
+#     br00004_path = create_path(fizz_world._faces_aft_dir, "br00004.xlsx")
+#     br00005_path = create_path(fizz_world._faces_aft_dir, "br00005.xlsx")
 
 #     br00000_df = pandas_read_excel(br00000_path, sheet_name=staging_str)
 #     br00001_df = pandas_read_excel(br00001_path, sheet_name=staging_str)
@@ -357,19 +435,6 @@ from os.path import exists as os_path_exists
 #     print(f"{gen_road_df.to_csv()=}")
 #     print(f" {e1_road_df.to_csv()=}")
 #     assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)
-
-
-# from src.f00_instrument.file import create_path
-# from src.f04_gift.atom_config import face_name_str, cmty_title_str
-# from src.f07_cmty.cmty_config import cumlative_minute_str, hour_title_str
-# from src.f08_pidgin.pidgin_config import event_int_str
-# from src.f09_idea.pandas_tool import upsert_sheet, sheet_exists
-# from src.f11_world.world import worldunit_shop
-# from src.f11_world.examples.world_env import env_dir_setup_cleanup
-# from pandas.testing import (
-#     assert_frame_equal as pandas_assert_frame_equal,
-# )
-# from pandas import DataFrame, read_excel as pandas_read_excel
 
 
 # def test_WorldUnit_aft_face_ideas_to_aft_event_ideas_CreatesFaceIdeaSheets_Scenario0_MultpleFaceNames(
