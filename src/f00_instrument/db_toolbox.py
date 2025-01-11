@@ -312,3 +312,16 @@ def create_table_from_csv(
 
     # except Exception as e:
     #     raise Exception(f"Error: {e}")
+
+
+def db_table_exists(conn: sqlite3_Connection, tablename: str) -> bool:
+    cursor = conn.cursor()
+    table_master_sqlstr = (
+        f"SELECT name FROM sqlite_master WHERE type='table' AND name='{tablename}';"
+    )
+    cursor.execute(table_master_sqlstr)
+    result = cursor.fetchone()
+    if result:
+        return True
+    else:
+        return False

@@ -15,6 +15,7 @@ from src.f00_instrument.db_toolbox import (
     get_groupby_sql_query,
     insert_csv,
     create_table_from_csv,
+    db_table_exists,
 )
 from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
@@ -447,3 +448,27 @@ def test_create_idea_table_from_csv_DoesNothingIfTableExists(
     # THEN
     cursor.execute(f"SELECT * FROM {test_table}")
     assert cursor.fetchall() == before_data
+
+
+def test_table_exists_ReturnsObj():
+    # ESTABLISH
+    conn = sqlite3_connect(":memory:")
+    users_tablename = "users"
+
+    # WHEN / THEN
+    assert db_table_exists(conn, users_tablename) is False
+
+    # ESTABLISH
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        CREATE TABLE users (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL
+        )
+    """
+    )
+    conn.commit()
+
+    # WHEN / THEN
+    assert db_table_exists(conn, users_tablename)

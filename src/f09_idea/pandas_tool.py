@@ -10,6 +10,7 @@ from src.f00_instrument.db_toolbox import (
     get_grouping_with_all_values_equal_sql_query,
     create_table_from_csv,
     insert_csv,
+    db_table_exists,
 )
 from src.f00_instrument.dict_toolbox import set_in_nested_dict
 from src.f08_pidgin.map import MapCore
@@ -352,10 +353,7 @@ def create_idea_table_from_csv(
 
 
 def insert_idea_csv(csv_filepath: str, conn: sqlite3_Connection, tablename: str):
-    cursor = conn.cursor()
-    cursor.execute(f"PRAGMA table_info({tablename})")
-    columns = cursor.fetchall()
-    if columns == []:
+    if db_table_exists(conn, tablename) is False:
         create_idea_table_from_csv(csv_filepath, conn, tablename)
 
     # Future feature? filtering csv file so only relevant idea columns are loaded
