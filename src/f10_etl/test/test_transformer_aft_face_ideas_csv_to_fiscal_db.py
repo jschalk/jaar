@@ -87,7 +87,6 @@ def test_create_cmty_staging_tables_CreatesCmtyStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    # if platform_system() != "Linux":  # bug on github commit
     cmtyunit_tablename = f"{cmtyunit_str()}_staging"
     cmty_deal_episode_tablename = f"{cmty_deal_episode_str()}_staging"
     cmty_cashbook_tablename = f"{cmty_cashbook_str()}_staging"
