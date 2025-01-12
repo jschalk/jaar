@@ -1,4 +1,5 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
+from src.f00_instrument.db_toolbox import create_table_from_columns
 from src.f01_road.finance_tran import CmtyTitle
 from src.f01_road.road import FaceName, EventInt
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
@@ -7,6 +8,7 @@ from src.f09_idea.idea_config import (
     get_idea_numbers,
     get_idea_format_filename,
     get_idea_category_ref,
+    get_idea_sqlite_types,
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.pandas_tool import (
@@ -742,4 +744,49 @@ def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir:
             csv_filename = f"{idea_number}.csv"
             csv_path = create_path(face_dir, csv_filename)
             if os_path_exists(csv_path):
-                insert_idea_csv(csv_path, conn, idea_number)
+                insert_idea_csv(csv_path, conn, f"{idea_number}_staging")
+    create_cmty_staging_tables(conn)
+
+
+def create_cmty_staging_tables(conn: sqlite3_Connection):
+    cmtyunit_cols = [
+        "cmty_title",
+        "fund_coin",
+        "penny",
+        "respect_bit",
+        "current_time",
+        "bridge",
+        "c400_number",
+        "yr1_jan1_offset",
+        "monthday_distortion",
+        "timeline_title",
+    ]
+    cmty_deal_episode_cols = [
+        "cmty_title",
+        "owner_name",
+        "time_int",
+        "quota",
+    ]
+    cmty_cashbook_cols = [
+        "cmty_title",
+        "owner_name",
+        "acct_name",
+        "time_int",
+        "amount",
+    ]
+    cmty_hour_cols = ["cmty_title", "hour_title", "cumlative_minute"]
+    cmty_month_cols = ["cmty_title", "month_title", "cumlative_day"]
+    cmty_weekday_cols = ["cmty_title", "weekday_title", "weekday_order"]
+    col_types = get_idea_sqlite_types()
+    cmtyunit = "cmtyunit_staging"
+    cmtydeal = "cmty_deal_episode_staging"
+    cmtycash = "cmty_cashbook_staging"
+    cmtyhour = "cmty_timeline_hour_staging"
+    cmtymont = "cmty_timeline_month_staging"
+    cmtyweek = "cmty_timeline_weekday_staging"
+    create_table_from_columns(conn, cmtyunit, cmtyunit_cols, col_types)
+    create_table_from_columns(conn, cmtydeal, cmty_deal_episode_cols, col_types)
+    create_table_from_columns(conn, cmtycash, cmty_cashbook_cols, col_types)
+    create_table_from_columns(conn, cmtyhour, cmty_hour_cols, col_types)
+    create_table_from_columns(conn, cmtymont, cmty_month_cols, col_types)
+    create_table_from_columns(conn, cmtyweek, cmty_weekday_cols, col_types)

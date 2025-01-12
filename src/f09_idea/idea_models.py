@@ -27,7 +27,6 @@ class br00001AbstractTable(Base):
     __abstract__ = True
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
-    acct_name = Column(String)
     cmty_title = Column(String)
     owner_name = Column(String)
     quota = Column(Float)

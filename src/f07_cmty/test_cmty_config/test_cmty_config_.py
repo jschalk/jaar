@@ -28,7 +28,6 @@ from src.f07_cmty.cmty_config import (
     current_time_str,
     cumlative_minute_str,
     cmtyunit_str,
-    cmty_deallog_str,
     cmty_deal_episode_str,
     cmty_cashbook_str,
     cmty_timeline_hour_str,
@@ -58,7 +57,6 @@ def test_get_cmty_config_dict_ReturnsObj():
     assert cmty_config
     cmty_config_categorys = set(cmty_config.keys())
     assert cmtyunit_str() in cmty_config_categorys
-    assert cmty_deallog_str() not in cmty_config_categorys
     assert cmty_deal_episode_str() in cmty_config_categorys
     assert cmty_cashbook_str() in cmty_config_categorys
     assert cmty_timeline_hour_str() in cmty_config_categorys
@@ -135,7 +133,6 @@ def test_get_cmty_categorys_ReturnsObj():
 
     # THEN
     assert cmtyunit_str() in cmty_config_categorys
-    assert cmty_deallog_str() not in cmty_config_categorys
     assert cmty_deal_episode_str() in cmty_config_categorys
     assert cmty_cashbook_str() in cmty_config_categorys
     assert cmty_timeline_hour_str() in cmty_config_categorys

@@ -73,7 +73,6 @@ from src.f07_cmty.cmty_config import (
     get_cmty_config_dict,
     get_cmty_categorys,
     cmtyunit_str,
-    cmty_deallog_str,
     cmty_deal_episode_str,
     cmty_cashbook_str,
     cmty_timeline_hour_str,
@@ -115,7 +114,7 @@ from src.f09_idea.idea_config import (
     idea_type_str,
     get_idea_types,
     get_idea_elements_sort_order,
-    get_idea_sqlite_type,
+    get_idea_sqlite_types,
     get_idea_category_ref,
     idea_number_str,
     allowed_crud_str,
@@ -259,9 +258,9 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert atom_cmty_pidgin_args == set(table_sorting_priority)
 
 
-def test_get_idea_sqlite_type_ReturnsObj():
+def test_get_idea_sqlite_types_ReturnsObj():
     # ESTABLISH / WHEN
-    sqlite_types = get_idea_sqlite_type()
+    sqlite_types = get_idea_sqlite_types()
 
     # THEN
     assert set(sqlite_types.keys()) == set(get_idea_elements_sort_order())
@@ -365,7 +364,6 @@ def test_get_idea_config_dict_ReturnsObj():
     assert x_idea_config
     idea_config_categorys = set(x_idea_config.keys())
     assert cmtyunit_str() in idea_config_categorys
-    assert cmty_deallog_str() not in idea_config_categorys
     assert cmty_deal_episode_str() in idea_config_categorys
     assert cmty_cashbook_str() in idea_config_categorys
     assert cmty_timeline_hour_str() in idea_config_categorys

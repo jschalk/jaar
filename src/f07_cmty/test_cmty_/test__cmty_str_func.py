@@ -11,7 +11,6 @@ from src.f07_cmty.cmty_config import (
     weekday_title_str,
     weekday_order_str,
     cmtyunit_str,
-    cmty_deallog_str,
     cmty_deal_episode_str,
     cmty_cashbook_str,
     cmty_timeline_hour_str,
@@ -33,7 +32,6 @@ def test_str_functions_ReturnsObj():
     assert weekday_title_str() == "weekday_title"
     assert weekday_order_str() == "weekday_order"
     assert cmtyunit_str() == "cmtyunit"
-    assert cmty_deallog_str() == "cmty_deallog"
     assert cmty_deal_episode_str() == "cmty_deal_episode"
     assert cmty_cashbook_str() == "cmty_cashbook"
     assert cmty_timeline_hour_str() == "cmty_timeline_hour"

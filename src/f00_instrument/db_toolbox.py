@@ -268,6 +268,29 @@ class sqlite3_Error_Exception(Exception):
     pass
 
 
+def create_table_from_columns(
+    conn: sqlite3_Connection,
+    tablename: str,
+    columns_list: list[str],
+    column_types: dict[str, str],
+):
+    # Dynamically create a table schema based on the provided column types
+    columns = []
+    for column in columns_list:
+        data_type = column_types.get(column, "TEXT")  # Default to TEXT
+        columns.append(f"{column} {data_type}")
+    columns_definition = ", ".join(columns)
+
+    create_table_query = (
+        f"CREATE TABLE IF NOT EXISTS {tablename} ({columns_definition})"
+    )
+
+    # Execute the create table query
+    cursor = conn.cursor()
+    cursor.execute(create_table_query)
+    conn.commit()
+
+
 def create_table_from_csv(
     csv_file_path: str,
     sqlite_connection: sqlite3_Connection,
@@ -290,22 +313,7 @@ def create_table_from_csv(
         # Open the CSV file to read the header
         with open(csv_file_path, "r", newline="", encoding="utf-8") as csv_file:
             headers = csv_file.readline().strip().split(",")
-
-        # Dynamically create a table schema based on the provided column types
-        columns = []
-        for header in headers:
-            data_type = column_types.get(header, "TEXT")  # Default to TEXT
-            columns.append(f"{header} {data_type}")
-        columns_definition = ", ".join(columns)
-
-        create_table_query = (
-            f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_definition})"
-        )
-
-        # Execute the create table query
-        cursor = sqlite_connection.cursor()
-        cursor.execute(create_table_query)
-        sqlite_connection.commit()
+        create_table_from_columns(sqlite_connection, table_name, headers, column_types)
 
     except sqlite3_Error as e:
         raise sqlite3_Error_Exception(f"SQLite error: {e}") from e

@@ -1,6 +1,6 @@
 from src.f09_idea.idea_config import (
     get_quick_ideas_column_ref,
-    get_idea_sqlite_type,
+    get_idea_sqlite_types,
     get_idea_numbers,
 )
 from src.f09_idea.idea_models import get_idea_holdtables, get_idea_stagetables, Base
@@ -52,7 +52,7 @@ def _check_sqlalchemycolumn(
     )
     assert x_column is not None, failed_assert_str
     if column_type is None:
-        column_type = get_idea_sqlite_type().get(idearef_column)
+        column_type = get_idea_sqlite_types().get(idearef_column)
     if column_type == "TEXT":
         column_type = "VARCHAR"
     elif column_type == "REAL":
