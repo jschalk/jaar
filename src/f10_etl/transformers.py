@@ -745,7 +745,11 @@ def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir:
             csv_path = create_path(face_dir, csv_filename)
             if os_path_exists(csv_path):
                 insert_idea_csv(csv_path, conn, f"{idea_number}_staging")
+
+
+def etl_idea_staging_to_cmty_staging(conn):
     create_cmty_staging_tables(conn)
+    populate_cmty_staging_tables(conn)
 
 
 def create_cmty_staging_tables(conn: sqlite3_Connection):
