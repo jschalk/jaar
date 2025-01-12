@@ -140,6 +140,7 @@ from src.f09_idea.idea_config import (
     idea_format_00021_bud_acctunit_v0_0_0,
     idea_format_00020_bud_acct_membership_v0_0_0,
     idea_format_00013_itemunit_v0_0_0,
+    get_bud_ideas_with_only_cmty_title,
 )
 from os import getcwd as os_getcwd
 
@@ -723,3 +724,35 @@ def test_get_idea_category_ref_ReturnsObj():
 
     # WHEN / THEN
     assert get_idea_category_ref() == expected_idea_category_ref
+
+
+def _get_expected_only_cmty_title_ideas() -> set[str]:
+    idea_numbers_sorted = list(get_idea_numbers())
+    idea_numbers_sorted.sort(key=lambda x: x)
+    expected_only_cmty_title_ideas = set()
+    for idea_number in idea_numbers_sorted:
+        idea_format_file_name = get_idea_format_filename(idea_number)
+        x_idearef = get_idearef_from_file(idea_format_file_name)
+        categorys_list = x_idearef.get(categorys_str())
+        bud_category_exists = False
+        cmty_category_exists = False
+        for x_category in categorys_list:
+            if x_category[:3] == "bud":
+                bud_category_exists = True
+            if x_category[:4] == "cmty":
+                cmty_category_exists = True
+        if bud_category_exists and not cmty_category_exists:
+            expected_only_cmty_title_ideas.add(idea_number)
+        print(f"{idea_number} {bud_category_exists=} {cmty_category_exists=}")
+
+    return expected_only_cmty_title_ideas
+
+
+def test_get_bud_ideas_with_only_cmty_title_ReturnObj():
+    # ESTABLISH / WHEN
+    cmty_only_bud_ideas = get_bud_ideas_with_only_cmty_title()
+
+    # THEN
+    assert cmty_only_bud_ideas
+    assert cmty_only_bud_ideas == _get_expected_only_cmty_title_ideas()
+    assert len(cmty_only_bud_ideas) == 19

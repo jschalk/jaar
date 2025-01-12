@@ -547,3 +547,27 @@ def get_idea_category_ref() -> dict[str, set[str]]:
         "map_title": ["br00044", "br00116"],
         "map_road": ["br00045", "br00117"],
     }
+
+
+def get_bud_ideas_with_only_cmty_title() -> set[str]:
+    return {
+        "br00011",
+        "br00012",
+        "br00013",
+        "br00019",
+        "br00020",
+        "br00021",
+        "br00022",
+        "br00023",
+        "br00024",
+        "br00025",
+        "br00026",
+        "br00027",
+        "br00028",
+        "br00029",
+        "br00036",
+        "br00113",
+        "br00115",
+        "br00116",
+        "br00117",
+    }
