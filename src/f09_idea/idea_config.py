@@ -313,7 +313,7 @@ def get_idea_format_filename(idea_number: str) -> str:
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
         "bridge,c400_number,cmty_title,current_time,fund_coin,monthday_distortion,penny,respect_bit,timeline_title,yr1_jan1_offset": idea_format_00000_cmtyunit_v0_0_0(),
-        "acct_name,cmty_title,owner_name,quota,time_int": idea_format_00001_cmty_deal_episode_v0_0_0(),
+        "cmty_title,owner_name,quota,time_int": idea_format_00001_cmty_deal_episode_v0_0_0(),
         "acct_name,amount,cmty_title,owner_name,time_int": idea_format_00002_cmty_cashbook_v0_0_0(),
         "cmty_title,cumlative_minute,hour_title": idea_format_00003_cmty_timeline_hour_v0_0_0(),
         "cmty_title,cumlative_day,month_title": idea_format_00004_cmty_timeline_month_v0_0_0(),
@@ -361,6 +361,7 @@ def get_quick_ideas_column_ref() -> dict[str, set[str]]:
 
 def get_idea_elements_sort_order() -> list[str]:
     return [
+        "idea_number",
         "face_name",
         "event_int",
         "cmty_title",
@@ -437,8 +438,9 @@ def get_idea_elements_sort_order() -> list[str]:
     ]
 
 
-def get_idea_sqlite_type() -> dict[str, str]:
+def get_idea_sqlite_types() -> dict[str, str]:
     return {
+        "idea_number": "TEXT",
         "face_name": "TEXT",
         "event_int": "INTEGER",
         "cmty_title": "TEXT",
@@ -544,4 +546,28 @@ def get_idea_category_ref() -> dict[str, set[str]]:
         "map_name": ["br00043", "br00113"],
         "map_title": ["br00044", "br00116"],
         "map_road": ["br00045", "br00117"],
+    }
+
+
+def get_bud_ideas_with_only_cmty_title() -> set[str]:
+    return {
+        "br00011",
+        "br00012",
+        "br00013",
+        "br00019",
+        "br00020",
+        "br00021",
+        "br00022",
+        "br00023",
+        "br00024",
+        "br00025",
+        "br00026",
+        "br00027",
+        "br00028",
+        "br00029",
+        "br00036",
+        "br00113",
+        "br00115",
+        "br00116",
+        "br00117",
     }

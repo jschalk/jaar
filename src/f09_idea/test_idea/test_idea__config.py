@@ -73,7 +73,6 @@ from src.f07_cmty.cmty_config import (
     get_cmty_config_dict,
     get_cmty_categorys,
     cmtyunit_str,
-    cmty_deallog_str,
     cmty_deal_episode_str,
     cmty_cashbook_str,
     cmty_timeline_hour_str,
@@ -115,7 +114,7 @@ from src.f09_idea.idea_config import (
     idea_type_str,
     get_idea_types,
     get_idea_elements_sort_order,
-    get_idea_sqlite_type,
+    get_idea_sqlite_types,
     get_idea_category_ref,
     idea_number_str,
     allowed_crud_str,
@@ -141,6 +140,7 @@ from src.f09_idea.idea_config import (
     idea_format_00021_bud_acctunit_v0_0_0,
     idea_format_00020_bud_acct_membership_v0_0_0,
     idea_format_00013_itemunit_v0_0_0,
+    get_bud_ideas_with_only_cmty_title,
 )
 from os import getcwd as os_getcwd
 
@@ -169,80 +169,81 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     table_sorting_priority = get_idea_elements_sort_order()
 
     # THEN
-    assert table_sorting_priority[0] == face_name_str()
-    assert table_sorting_priority[1] == event_int_str()
-    assert table_sorting_priority[2] == cmty_title_str()
-    assert table_sorting_priority[3] == owner_name_str()
-    assert table_sorting_priority[4] == acct_name_str()
-    assert table_sorting_priority[5] == group_label_str()
-    assert table_sorting_priority[6] == parent_road_str()
-    assert table_sorting_priority[7] == item_title_str()
-    assert table_sorting_priority[8] == road_str()
-    assert table_sorting_priority[9] == base_str()
-    assert table_sorting_priority[10] == "need"
-    assert table_sorting_priority[11] == "pick"
-    assert table_sorting_priority[12] == team_tag_str()
-    assert table_sorting_priority[13] == awardee_tag_str()
-    assert table_sorting_priority[14] == healer_name_str()
-    assert table_sorting_priority[15] == time_int_str()
-    assert table_sorting_priority[16] == begin_str()
-    assert table_sorting_priority[17] == close_str()
-    assert table_sorting_priority[18] == addin_str()
-    assert table_sorting_priority[19] == numor_str()
-    assert table_sorting_priority[20] == denom_str()
-    assert table_sorting_priority[21] == morph_str()
-    assert table_sorting_priority[22] == gogo_want_str()
-    assert table_sorting_priority[23] == stop_want_str()
-    assert table_sorting_priority[24] == base_item_active_requisite_str()
-    assert table_sorting_priority[25] == credit_belief_str()
-    assert table_sorting_priority[26] == debtit_belief_str()
-    assert table_sorting_priority[27] == credit_vote_str()
-    assert table_sorting_priority[28] == debtit_vote_str()
-    assert table_sorting_priority[29] == credor_respect_str()
-    assert table_sorting_priority[30] == debtor_respect_str()
-    assert table_sorting_priority[31] == fopen_str()
-    assert table_sorting_priority[32] == fnigh_str()
-    assert table_sorting_priority[33] == "fund_pool"
-    assert table_sorting_priority[34] == give_force_str()
-    assert table_sorting_priority[35] == mass_str()
-    assert table_sorting_priority[36] == "max_tree_traverse"
-    assert table_sorting_priority[37] == "nigh"
-    assert table_sorting_priority[38] == "open"
-    assert table_sorting_priority[39] == "divisor"
-    assert table_sorting_priority[40] == pledge_str()
-    assert table_sorting_priority[41] == "problem_bool"
-    assert table_sorting_priority[42] == "deal_time_int"
-    assert table_sorting_priority[43] == take_force_str()
-    assert table_sorting_priority[44] == "tally"
-    assert table_sorting_priority[45] == fund_coin_str()
-    assert table_sorting_priority[46] == penny_str()
-    assert table_sorting_priority[47] == respect_bit_str()
-    assert table_sorting_priority[48] == current_time_str()
-    assert table_sorting_priority[49] == amount_str()
-    assert table_sorting_priority[50] == month_title_str()
-    assert table_sorting_priority[51] == hour_title_str()
-    assert table_sorting_priority[52] == cumlative_minute_str()
-    assert table_sorting_priority[53] == cumlative_day_str()
-    assert table_sorting_priority[54] == weekday_title_str()
-    assert table_sorting_priority[55] == weekday_order_str()
-    assert table_sorting_priority[56] == otx_title_str()
-    assert table_sorting_priority[57] == inx_title_str()
-    assert table_sorting_priority[58] == otx_road_str()
-    assert table_sorting_priority[59] == inx_road_str()
-    assert table_sorting_priority[60] == otx_name_str()
-    assert table_sorting_priority[61] == inx_name_str()
-    assert table_sorting_priority[62] == otx_label_str()
-    assert table_sorting_priority[63] == inx_label_str()
-    assert table_sorting_priority[64] == otx_bridge_str()
-    assert table_sorting_priority[65] == inx_bridge_str()
-    assert table_sorting_priority[66] == bridge_str()
-    assert table_sorting_priority[67] == unknown_word_str()
-    assert table_sorting_priority[68] == c400_number_str()
-    assert table_sorting_priority[69] == yr1_jan1_offset_str()
-    assert table_sorting_priority[70] == quota_str()
-    assert table_sorting_priority[71] == monthday_distortion_str()
-    assert table_sorting_priority[72] == timeline_title_str()
-    assert len(table_sorting_priority) == 73
+    assert table_sorting_priority[0] == idea_number_str()
+    assert table_sorting_priority[1] == face_name_str()
+    assert table_sorting_priority[2] == event_int_str()
+    assert table_sorting_priority[3] == cmty_title_str()
+    assert table_sorting_priority[4] == owner_name_str()
+    assert table_sorting_priority[5] == acct_name_str()
+    assert table_sorting_priority[6] == group_label_str()
+    assert table_sorting_priority[7] == parent_road_str()
+    assert table_sorting_priority[8] == item_title_str()
+    assert table_sorting_priority[9] == road_str()
+    assert table_sorting_priority[10] == base_str()
+    assert table_sorting_priority[11] == "need"
+    assert table_sorting_priority[12] == "pick"
+    assert table_sorting_priority[13] == team_tag_str()
+    assert table_sorting_priority[14] == awardee_tag_str()
+    assert table_sorting_priority[15] == healer_name_str()
+    assert table_sorting_priority[16] == time_int_str()
+    assert table_sorting_priority[17] == begin_str()
+    assert table_sorting_priority[18] == close_str()
+    assert table_sorting_priority[19] == addin_str()
+    assert table_sorting_priority[20] == numor_str()
+    assert table_sorting_priority[21] == denom_str()
+    assert table_sorting_priority[22] == morph_str()
+    assert table_sorting_priority[23] == gogo_want_str()
+    assert table_sorting_priority[24] == stop_want_str()
+    assert table_sorting_priority[25] == base_item_active_requisite_str()
+    assert table_sorting_priority[26] == credit_belief_str()
+    assert table_sorting_priority[27] == debtit_belief_str()
+    assert table_sorting_priority[28] == credit_vote_str()
+    assert table_sorting_priority[29] == debtit_vote_str()
+    assert table_sorting_priority[30] == credor_respect_str()
+    assert table_sorting_priority[31] == debtor_respect_str()
+    assert table_sorting_priority[32] == fopen_str()
+    assert table_sorting_priority[33] == fnigh_str()
+    assert table_sorting_priority[34] == "fund_pool"
+    assert table_sorting_priority[35] == give_force_str()
+    assert table_sorting_priority[36] == mass_str()
+    assert table_sorting_priority[37] == "max_tree_traverse"
+    assert table_sorting_priority[38] == "nigh"
+    assert table_sorting_priority[39] == "open"
+    assert table_sorting_priority[40] == "divisor"
+    assert table_sorting_priority[41] == pledge_str()
+    assert table_sorting_priority[42] == "problem_bool"
+    assert table_sorting_priority[43] == "deal_time_int"
+    assert table_sorting_priority[44] == take_force_str()
+    assert table_sorting_priority[45] == "tally"
+    assert table_sorting_priority[46] == fund_coin_str()
+    assert table_sorting_priority[47] == penny_str()
+    assert table_sorting_priority[48] == respect_bit_str()
+    assert table_sorting_priority[49] == current_time_str()
+    assert table_sorting_priority[50] == amount_str()
+    assert table_sorting_priority[51] == month_title_str()
+    assert table_sorting_priority[52] == hour_title_str()
+    assert table_sorting_priority[53] == cumlative_minute_str()
+    assert table_sorting_priority[54] == cumlative_day_str()
+    assert table_sorting_priority[55] == weekday_title_str()
+    assert table_sorting_priority[56] == weekday_order_str()
+    assert table_sorting_priority[57] == otx_title_str()
+    assert table_sorting_priority[58] == inx_title_str()
+    assert table_sorting_priority[59] == otx_road_str()
+    assert table_sorting_priority[60] == inx_road_str()
+    assert table_sorting_priority[61] == otx_name_str()
+    assert table_sorting_priority[62] == inx_name_str()
+    assert table_sorting_priority[63] == otx_label_str()
+    assert table_sorting_priority[64] == inx_label_str()
+    assert table_sorting_priority[65] == otx_bridge_str()
+    assert table_sorting_priority[66] == inx_bridge_str()
+    assert table_sorting_priority[67] == bridge_str()
+    assert table_sorting_priority[68] == unknown_word_str()
+    assert table_sorting_priority[69] == c400_number_str()
+    assert table_sorting_priority[70] == yr1_jan1_offset_str()
+    assert table_sorting_priority[71] == quota_str()
+    assert table_sorting_priority[72] == monthday_distortion_str()
+    assert table_sorting_priority[73] == timeline_title_str()
+    assert len(table_sorting_priority) == 74
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
     cmty_args = set(get_cmty_args_category_mapping().keys())
@@ -254,17 +255,19 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     atom_cmty_pidgin_args = atom_args
     atom_cmty_pidgin_args.update(cmty_args)
     atom_cmty_pidgin_args.update(pidgin_args)
+    table_sorting_priority.remove(idea_number_str())
     table_sorting_priority.remove(event_int_str())
     table_sorting_priority.remove(face_name_str())
     assert atom_cmty_pidgin_args == set(table_sorting_priority)
 
 
-def test_get_idea_sqlite_type_ReturnsObj():
+def test_get_idea_sqlite_types_ReturnsObj():
     # ESTABLISH / WHEN
-    sqlite_types = get_idea_sqlite_type()
+    sqlite_types = get_idea_sqlite_types()
 
     # THEN
     assert set(sqlite_types.keys()) == set(get_idea_elements_sort_order())
+    assert sqlite_types.get(idea_number_str()) == "TEXT"
     assert sqlite_types.get(face_name_str()) == "TEXT"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
     assert sqlite_types.get(cmty_title_str()) == "TEXT"
@@ -365,7 +368,6 @@ def test_get_idea_config_dict_ReturnsObj():
     assert x_idea_config
     idea_config_categorys = set(x_idea_config.keys())
     assert cmtyunit_str() in idea_config_categorys
-    assert cmty_deallog_str() not in idea_config_categorys
     assert cmty_deal_episode_str() in idea_config_categorys
     assert cmty_cashbook_str() in idea_config_categorys
     assert cmty_timeline_hour_str() in idea_config_categorys
@@ -699,24 +701,58 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
     }
 
 
-def test_get_idea_category_ref_ReturnsObj():
-    # ESTABLISH / WHEN
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+def _create_expected_idea_category_ref() -> dict[str, list[str]]:
     idea_numbers_sorted = list(get_idea_numbers())
     idea_numbers_sorted.sort(key=lambda x: x)
-
-    example_ref = {}
+    expected_idea_category_ref = {}
     for idea_number in idea_numbers_sorted:
         idea_format_file_name = get_idea_format_filename(idea_number)
         x_idearef = get_idearef_from_file(idea_format_file_name)
         categorys_list = x_idearef.get(categorys_str())
         for x_category in categorys_list:
-            if example_ref.get(x_category) is None:
-                example_ref[x_category] = [idea_number]
+            if expected_idea_category_ref.get(x_category) is None:
+                expected_idea_category_ref[x_category] = [idea_number]
             else:
-                example_ref.get(x_category).append(idea_number)
-    print(f"{example_ref=}")
+                expected_idea_category_ref.get(x_category).append(idea_number)
+    return expected_idea_category_ref
+
+
+def test_get_idea_category_ref_ReturnsObj():
+    # ESTABLISH
+    expected_idea_category_ref = _create_expected_idea_category_ref()
+    print(f"{expected_idea_category_ref=}")
 
     # WHEN / THEN
-    assert get_idea_category_ref() == example_ref
+    assert get_idea_category_ref() == expected_idea_category_ref
+
+
+def _get_expected_only_cmty_title_ideas() -> set[str]:
+    idea_numbers_sorted = list(get_idea_numbers())
+    idea_numbers_sorted.sort(key=lambda x: x)
+    expected_only_cmty_title_ideas = set()
+    for idea_number in idea_numbers_sorted:
+        idea_format_file_name = get_idea_format_filename(idea_number)
+        x_idearef = get_idearef_from_file(idea_format_file_name)
+        categorys_list = x_idearef.get(categorys_str())
+        bud_category_exists = False
+        cmty_category_exists = False
+        for x_category in categorys_list:
+            if x_category[:3] == "bud":
+                bud_category_exists = True
+            if x_category[:4] == "cmty":
+                cmty_category_exists = True
+        if bud_category_exists and not cmty_category_exists:
+            expected_only_cmty_title_ideas.add(idea_number)
+        print(f"{idea_number} {bud_category_exists=} {cmty_category_exists=}")
+
+    return expected_only_cmty_title_ideas
+
+
+def test_get_bud_ideas_with_only_cmty_title_ReturnObj():
+    # ESTABLISH / WHEN
+    cmty_only_bud_ideas = get_bud_ideas_with_only_cmty_title()
+
+    # THEN
+    assert cmty_only_bud_ideas
+    assert cmty_only_bud_ideas == _get_expected_only_cmty_title_ideas()
+    assert len(cmty_only_bud_ideas) == 19

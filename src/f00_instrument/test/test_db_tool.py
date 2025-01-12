@@ -325,6 +325,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
         )
     """
     )
+    cursor.close()
     conn.commit()
 
     # Create a test CSV file

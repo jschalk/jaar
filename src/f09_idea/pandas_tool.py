@@ -24,7 +24,7 @@ from src.f09_idea.idea_config import (
     get_idea_elements_sort_order,
     get_idea_category_ref,
     get_idea_format_filename,
-    get_idea_sqlite_type,
+    get_idea_sqlite_types,
 )
 from numpy import float64, nan as numpy_nan
 from pandas import (
@@ -348,7 +348,7 @@ def dataframe_to_dict(x_df: DataFrame, key_columns: list[str]) -> dict:
 def create_idea_table_from_csv(
     csv_filepath: str, conn: sqlite3_Connection, tablename: str
 ):
-    column_types = get_idea_sqlite_type()
+    column_types = get_idea_sqlite_types()
     create_table_from_csv(csv_filepath, conn, tablename, column_types)
 
 
@@ -358,3 +358,14 @@ def insert_idea_csv(csv_filepath: str, conn: sqlite3_Connection, tablename: str)
 
     # Future feature? filtering csv file so only relevant idea columns are loaded
     insert_csv(csv_filepath, conn, tablename)
+
+
+def get_pragma_table_fetchall(table_columns):
+    x_count = 0
+    pragma_table_attrs = []
+    idea_sqlite_types = get_idea_sqlite_types()
+    for x_col in table_columns:
+        col_type = idea_sqlite_types.get(x_col)
+        pragma_table_attrs.append((x_count, x_col, col_type, 0, None, 0))
+        x_count += 1
+    return pragma_table_attrs

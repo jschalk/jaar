@@ -256,6 +256,7 @@ def insert_csv(
 
         # Commit the transaction
         sqlite_connection.commit()
+        cursor.close()
 
     except sqlite3_Error as e:
         print(f"SQLite error: {e}")
@@ -266,6 +267,30 @@ def insert_csv(
 
 class sqlite3_Error_Exception(Exception):
     pass
+
+
+def create_table_from_columns(
+    conn: sqlite3_Connection,
+    tablename: str,
+    columns_list: list[str],
+    column_types: dict[str, str],
+):
+    # Dynamically create a table schema based on the provided column types
+    columns = []
+    for column in columns_list:
+        data_type = column_types.get(column, "TEXT")  # Default to TEXT
+        columns.append(f"{column} {data_type}")
+    columns_definition = ", ".join(columns)
+
+    create_table_query = (
+        f"CREATE TABLE IF NOT EXISTS {tablename} ({columns_definition})"
+    )
+
+    # Execute the create table query
+    cursor = conn.cursor()
+    cursor.execute(create_table_query)
+    cursor.close()
+    conn.commit()
 
 
 def create_table_from_csv(
@@ -290,22 +315,7 @@ def create_table_from_csv(
         # Open the CSV file to read the header
         with open(csv_file_path, "r", newline="", encoding="utf-8") as csv_file:
             headers = csv_file.readline().strip().split(",")
-
-        # Dynamically create a table schema based on the provided column types
-        columns = []
-        for header in headers:
-            data_type = column_types.get(header, "TEXT")  # Default to TEXT
-            columns.append(f"{header} {data_type}")
-        columns_definition = ", ".join(columns)
-
-        create_table_query = (
-            f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_definition})"
-        )
-
-        # Execute the create table query
-        cursor = sqlite_connection.cursor()
-        cursor.execute(create_table_query)
-        sqlite_connection.commit()
+        create_table_from_columns(sqlite_connection, table_name, headers, column_types)
 
     except sqlite3_Error as e:
         raise sqlite3_Error_Exception(f"SQLite error: {e}") from e
@@ -321,6 +331,7 @@ def db_table_exists(conn: sqlite3_Connection, tablename: str) -> bool:
     )
     cursor.execute(table_master_sqlstr)
     result = cursor.fetchone()
+    cursor.close()
     if result:
         return True
     else:

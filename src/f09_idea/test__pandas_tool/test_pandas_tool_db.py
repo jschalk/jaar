@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f09_idea.idea_config import get_idea_sqlite_type
+from src.f09_idea.idea_config import get_idea_sqlite_types
 from src.f09_idea.examples.idea_env import idea_env_setup_cleanup, idea_cmtys_dir
 from src.f09_idea.pandas_tool import create_idea_table_from_csv, insert_idea_csv
 from pytest import fixture as pytest_fixture
@@ -89,8 +89,8 @@ def test_create_idea_table_from_csv_ChangesDBState(
         (6, "gogo_want", "REAL", 0, None, 0),
     ]
     assert columns == expected_columns
-    column_types = get_idea_sqlite_type()
-    get_idea_sqlite_type_columns = [
+    column_types = get_idea_sqlite_types()
+    get_idea_sqlite_types_columns = [
         (0, "face_name", column_types.get("face_name"), 0, None, 0),
         (1, "event_int", column_types.get("event_int"), 0, None, 0),
         (2, "cmty_title", column_types.get("cmty_title"), 0, None, 0),
@@ -99,7 +99,7 @@ def test_create_idea_table_from_csv_ChangesDBState(
         (5, "group_label", column_types.get("group_label"), 0, None, 0),
         (6, "gogo_want", column_types.get("gogo_want"), 0, None, 0),
     ]
-    assert columns == get_idea_sqlite_type_columns
+    assert columns == get_idea_sqlite_types_columns
 
 
 def test_insert_idea_csv_ChangesDBState_add_to_empty_table(

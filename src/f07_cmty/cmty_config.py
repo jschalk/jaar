@@ -57,7 +57,6 @@ def config_file_dir() -> str:
 
 
 # def cmtyunit_str()-> str: return "cmtyunit"
-# def cmty_deallog_str()-> str: return "cmty_deallog"
 # def cmty_deal_episode_str()-> str: return "cmty_deal_episode"
 # def cmty_cashbook_str()-> str: return "cmty_cashbook"
 # def cmty_timeline_hour_str()-> str: return "cmty_timeline_hour"
@@ -65,10 +64,6 @@ def config_file_dir() -> str:
 # def cmty_timeline_weekday_str()-> str: return "cmty_timeline_weekday"
 def cmtyunit_str() -> str:
     return "cmtyunit"
-
-
-def cmty_deallog_str() -> str:
-    return "cmty_deallog"
 
 
 def cmty_deal_episode_str() -> str:
