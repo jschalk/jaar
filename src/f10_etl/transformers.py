@@ -747,9 +747,10 @@ def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir:
                 insert_idea_csv(csv_path, conn, f"{idea_number}_staging")
 
 
-def etl_idea_staging_to_cmty_staging(conn):
+def etl_idea_staging_to_cmty_tables(conn):
     create_cmty_tables(conn)
     populate_cmty_staging_tables(conn)
+    populate_cmty_agg_tables(conn)
 
 
 def create_cmty_tables(conn: sqlite3_Connection):
@@ -833,3 +834,19 @@ GROUP BY face_name, event_int, cmty_title
 """
             cursor.execute(insert_idea_staging_agg)
             cursor.close()
+
+
+def populate_cmty_agg_tables(fiscal_db_conn: sqlite3_Connection):
+    cmtyunit_str = "cmtyunit"
+    cmtyunit_staging_tablename = f"{cmtyunit_str}_staging"
+    cmtyunit_agg_tablename = f"{cmtyunit_str}_agg"
+    cursor = fiscal_db_conn.cursor()
+    insert_idea_staging_agg = f"""
+INSERT INTO {cmtyunit_agg_tablename} (cmty_title)
+SELECT cmty_title
+FROM {cmtyunit_staging_tablename}
+GROUP BY cmty_title
+;
+"""
+    cursor.execute(insert_idea_staging_agg)
+    cursor.close()

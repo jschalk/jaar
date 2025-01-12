@@ -289,6 +289,67 @@ def test_WorldUnit_memory_fiscal_db_conn_PopulatesCmtyStagingTables(
             assert cmtyunit_db_rows == [expected_row1, expected_row2]
 
 
+def test_WorldUnit_memory_fiscal_db_conn_PopulatesCmtyAggTables(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bob"
+    yao_inx = "Yao"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    fizz_world = worldunit_shop("fizz")
+    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    br00011_str = "br00011"
+    br00011_csv_filename = f"{br00011_str}.csv"
+    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{cmty_title_str()},{owner_name_str()},{acct_name_str()}
+{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
+{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
+{sue_inx},{event3},{accord45_str},{yao_inx},{yao_inx}
+{sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
+"""
+    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    fizz_world = worldunit_shop("Fizz")
+
+    # WHEN / THEN
+    if platform_system() != "Linux":  # bug on github commit
+        with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
+            cursor = fiscal_db_conn.cursor()
+            # cmtyunit_stage_tablename = f"{cmtyunit_str()}_staging"
+            # cursor.execute(f"SELECT * FROM {cmtyunit_stage_tablename};")
+            # cmtyunit_stage_rows = cursor.fetchall()
+            # assert len(cmtyunit_stage_rows) == 4
+
+            cmtyunit_agg_tablename = f"{cmtyunit_str()}_agg"
+            cursor.execute(f"SELECT * FROM {cmtyunit_agg_tablename};")
+            cmtyunit_agg_rows = cursor.fetchall()
+            expected_row1 = (
+                accord23_str,  # cmty_title
+                None,  # fund_coin
+                None,  # penny
+                None,  # respect_bit
+                None,  # current_time
+                None,  # bridge
+                None,  # c400_number
+                None,  # yr1_jan1_offset
+                None,  # monthday_distortion
+                None,  # timeline_title
+            )
+            expected_row2 = (
+                accord45_str,  # cmty_title
+                None,  # fund_coin
+                None,  # penny
+                None,  # respect_bit
+                None,  # current_time
+                None,  # bridge
+                None,  # c400_number
+                None,  # yr1_jan1_offset
+                None,  # monthday_distortion
+                None,  # timeline_title
+            )
+            assert cmtyunit_agg_rows == [expected_row1, expected_row2]
+
+
 # def test_WorldUnit_aft_faces_ideas_to_cmty_staging_CreatesCorrectTables(
 #     env_dir_setup_cleanup,
 # ):

@@ -21,6 +21,7 @@ from src.f10_etl.transformers import (
     etl_aft_face_csv_files_to_fiscal_db,
     create_cmty_tables,
     populate_cmty_staging_tables,
+    populate_cmty_agg_tables,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
@@ -265,3 +266,67 @@ def test_populate_cmty_staging_tables_PopulatesCmtyStagingTables(env_dir_setup_c
             None,  # timeline_title
         )
         assert cmtyunit_db_rows == [expected_row1, expected_row2]
+
+
+def test_populate_cmty_agg_tables_PopulatesCmtyAggTables(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    br00011_str = "br00011"
+    cmtyunit_stage_tablename = f"{cmtyunit_str()}_staging"
+    cmtyunit_agg_tablename = f"{cmtyunit_str()}_agg"
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        create_cmty_tables(fiscal_db_conn)
+
+        cursor = fiscal_db_conn.cursor()
+        insert_staging_sqlstr = f"""
+INSERT INTO cmtyunit_staging (idea_number, face_name, event_int, cmty_title)
+VALUES 
+  ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
+, ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
+, ('{br00011_str}', '{sue_inx}', {event3}, '{accord45_str}')
+, ('{br00011_str}', '{sue_inx}', {event7}, '{accord45_str}')
+;
+"""
+        cursor.execute(insert_staging_sqlstr)
+        cursor.execute(f"SELECT * FROM {cmtyunit_stage_tablename};")
+        cmtyunit_stage_rows = cursor.fetchall()
+        assert len(cmtyunit_stage_rows) == 4
+        cursor.execute(f"SELECT * FROM {cmtyunit_agg_tablename};")
+        cmtyunit_agg_rows = cursor.fetchall()
+        assert cmtyunit_agg_rows == []
+
+        # WHEN
+        populate_cmty_agg_tables(fiscal_db_conn)
+
+        # THEN
+        cursor.execute(f"SELECT * FROM {cmtyunit_agg_tablename};")
+        cmtyunit_agg_rows = cursor.fetchall()
+        expected_row1 = (
+            accord23_str,  # cmty_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        expected_row2 = (
+            accord45_str,  # cmty_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        assert cmtyunit_agg_rows == [expected_row1, expected_row2]
