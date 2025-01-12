@@ -750,6 +750,9 @@ def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir:
 
 def create_cmty_staging_tables(conn: sqlite3_Connection):
     cmtyunit_cols = [
+        "idea_number",
+        "face_name",
+        "event_int",
         "cmty_title",
         "fund_coin",
         "penny",
@@ -762,21 +765,48 @@ def create_cmty_staging_tables(conn: sqlite3_Connection):
         "timeline_title",
     ]
     cmty_deal_episode_cols = [
+        "idea_number",
+        "face_name",
+        "event_int",
         "cmty_title",
         "owner_name",
         "time_int",
         "quota",
     ]
     cmty_cashbook_cols = [
+        "idea_number",
+        "face_name",
+        "event_int",
         "cmty_title",
         "owner_name",
         "acct_name",
         "time_int",
         "amount",
     ]
-    cmty_hour_cols = ["cmty_title", "hour_title", "cumlative_minute"]
-    cmty_month_cols = ["cmty_title", "month_title", "cumlative_day"]
-    cmty_weekday_cols = ["cmty_title", "weekday_title", "weekday_order"]
+    cmty_hour_cols = [
+        "idea_number",
+        "face_name",
+        "event_int",
+        "cmty_title",
+        "hour_title",
+        "cumlative_minute",
+    ]
+    cmty_month_cols = [
+        "idea_number",
+        "face_name",
+        "event_int",
+        "cmty_title",
+        "month_title",
+        "cumlative_day",
+    ]
+    cmty_weekday_cols = [
+        "idea_number",
+        "face_name",
+        "event_int",
+        "cmty_title",
+        "weekday_title",
+        "weekday_order",
+    ]
     col_types = get_idea_sqlite_types()
     cmtyunit = "cmtyunit_staging"
     cmtydeal = "cmty_deal_episode_staging"

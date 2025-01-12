@@ -23,6 +23,7 @@ from src.f10_etl.transformers import (
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
+from copy import copy as copy_copy
 
 
 def test_etl_aft_face_csv_files_to_fiscal_db_DBChanges(
@@ -98,12 +99,19 @@ def test_create_cmty_staging_tables_CreatesCmtyStagingTables(
     cmty_hour_args = get_cmty_config_args(cmty_timeline_hour_str()).keys()
     cmty_month_args = get_cmty_config_args(cmty_timeline_month_str()).keys()
     cmty_weekday_args = get_cmty_config_args(cmty_timeline_weekday_str()).keys()
-    cmtyunit_columns = get_sorting_columns(cmtyunit_args)
-    cmty_deal_episode_columns = get_sorting_columns(cmty_deal_episode_args)
-    cmty_cashbook_columns = get_sorting_columns(cmty_cashbook_args)
-    cmty_hour_columns = get_sorting_columns(cmty_hour_args)
-    cmty_month_columns = get_sorting_columns(cmty_month_args)
-    cmty_weekday_columns = get_sorting_columns(cmty_weekday_args)
+    common_columns = ["idea_number", "face_name", "event_int"]
+    cmtyunit_columns = copy_copy(common_columns)
+    cmty_deal_episode_columns = copy_copy(common_columns)
+    cmty_cashbook_columns = copy_copy(common_columns)
+    cmty_hour_columns = copy_copy(common_columns)
+    cmty_month_columns = copy_copy(common_columns)
+    cmty_weekday_columns = copy_copy(common_columns)
+    cmtyunit_columns.extend(get_sorting_columns(cmtyunit_args))
+    cmty_deal_episode_columns.extend(get_sorting_columns(cmty_deal_episode_args))
+    cmty_cashbook_columns.extend(get_sorting_columns(cmty_cashbook_args))
+    cmty_hour_columns.extend(get_sorting_columns(cmty_hour_args))
+    cmty_month_columns.extend(get_sorting_columns(cmty_month_args))
+    cmty_weekday_columns.extend(get_sorting_columns(cmty_weekday_args))
     cmtyunit_pragma = get_pragma_table_fetchall(cmtyunit_columns)
     cmty_deal_episode_pragma = get_pragma_table_fetchall(cmty_deal_episode_columns)
     cmty_cashbook_pragma = get_pragma_table_fetchall(cmty_cashbook_columns)

@@ -361,6 +361,7 @@ def get_quick_ideas_column_ref() -> dict[str, set[str]]:
 
 def get_idea_elements_sort_order() -> list[str]:
     return [
+        "idea_number",
         "face_name",
         "event_int",
         "cmty_title",
@@ -439,6 +440,7 @@ def get_idea_elements_sort_order() -> list[str]:
 
 def get_idea_sqlite_types() -> dict[str, str]:
     return {
+        "idea_number": "TEXT",
         "face_name": "TEXT",
         "event_int": "INTEGER",
         "cmty_title": "TEXT",
