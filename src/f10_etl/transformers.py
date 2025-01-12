@@ -8,6 +8,7 @@ from src.f09_idea.idea_config import (
     get_idea_format_filename,
     get_idea_category_ref,
     get_idea_sqlite_types,
+    get_bud_ideas_with_only_cmty_title,
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.pandas_tool import (
@@ -790,3 +791,12 @@ def create_cmty_staging_tables(conn: sqlite3_Connection):
     create_table_from_columns(conn, cmtyhour, cmty_hour_cols, col_types)
     create_table_from_columns(conn, cmtymont, cmty_month_cols, col_types)
     create_table_from_columns(conn, cmtyweek, cmty_weekday_cols, col_types)
+
+
+def populate_cmty_staging_tables(fiscal_db_conn: sqlite3_Connection):
+    # get every budunit category idea that is not also cmtyunit category idea: collect cmty_titles
+    cmty1_ideas = get_bud_ideas_with_only_cmty_title()
+    for cmty1_idea in cmty1_ideas:
+        cursor = fiscal_db_conn.cursor()
+        print(f"{cmty1_idea=}")
+        cursor.close()

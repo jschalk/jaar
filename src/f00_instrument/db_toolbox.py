@@ -256,6 +256,7 @@ def insert_csv(
 
         # Commit the transaction
         sqlite_connection.commit()
+        cursor.close()
 
     except sqlite3_Error as e:
         print(f"SQLite error: {e}")
@@ -288,6 +289,7 @@ def create_table_from_columns(
     # Execute the create table query
     cursor = conn.cursor()
     cursor.execute(create_table_query)
+    cursor.close()
     conn.commit()
 
 
@@ -329,6 +331,7 @@ def db_table_exists(conn: sqlite3_Connection, tablename: str) -> bool:
     )
     cursor.execute(table_master_sqlstr)
     result = cursor.fetchone()
+    cursor.close()
     if result:
         return True
     else:
