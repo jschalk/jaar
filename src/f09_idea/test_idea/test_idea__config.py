@@ -700,24 +700,26 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
     }
 
 
-def test_get_idea_category_ref_ReturnsObj():
-    # ESTABLISH / WHEN
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+def _create_expected_idea_category_ref() -> dict[str, list[str]]:
     idea_numbers_sorted = list(get_idea_numbers())
     idea_numbers_sorted.sort(key=lambda x: x)
-
-    example_ref = {}
+    expected_idea_category_ref = {}
     for idea_number in idea_numbers_sorted:
         idea_format_file_name = get_idea_format_filename(idea_number)
         x_idearef = get_idearef_from_file(idea_format_file_name)
         categorys_list = x_idearef.get(categorys_str())
         for x_category in categorys_list:
-            if example_ref.get(x_category) is None:
-                example_ref[x_category] = [idea_number]
+            if expected_idea_category_ref.get(x_category) is None:
+                expected_idea_category_ref[x_category] = [idea_number]
             else:
-                example_ref.get(x_category).append(idea_number)
-    print(f"{example_ref=}")
+                expected_idea_category_ref.get(x_category).append(idea_number)
+    return expected_idea_category_ref
+
+
+def test_get_idea_category_ref_ReturnsObj():
+    # ESTABLISH
+    expected_idea_category_ref = _create_expected_idea_category_ref()
+    print(f"{expected_idea_category_ref=}")
 
     # WHEN / THEN
-    assert get_idea_category_ref() == example_ref
+    assert get_idea_category_ref() == expected_idea_category_ref
