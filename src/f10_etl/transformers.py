@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f00_instrument.db_toolbox import create_table_from_columns
+from src.f00_instrument.db_toolbox import create_table_from_columns, db_table_exists
 from src.f01_road.road import FaceName, EventInt
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -797,6 +797,15 @@ def populate_cmty_staging_tables(fiscal_db_conn: sqlite3_Connection):
     # get every budunit category idea that is not also cmtyunit category idea: collect cmty_titles
     cmty1_ideas = get_bud_ideas_with_only_cmty_title()
     for cmty1_idea in cmty1_ideas:
-        cursor = fiscal_db_conn.cursor()
-        print(f"{cmty1_idea=}")
-        cursor.close()
+        idea_staging_tablename = f"{cmty1_idea}_staging"
+        if db_table_exists(fiscal_db_conn, idea_staging_tablename):
+            cursor = fiscal_db_conn.cursor()
+            insert_idea_staging_agg = f"""
+INSERT INTO cmtyunit_staging (idea_number, face_name, event_int, cmty_title)
+SELECT '{cmty1_idea}' as idea_number, face_name, event_int, cmty_title
+FROM {idea_staging_tablename}
+GROUP BY face_name, event_int, cmty_title
+;
+"""
+            cursor.execute(insert_idea_staging_agg)
+            cursor.close()

@@ -153,71 +153,71 @@ def test_create_cmty_staging_tables_CreatesCmtyStagingTables(
         assert cmty_weekday_pragma == cursor.fetchall()
 
 
-# def test_populate_cmty_staging_tables_PopulatesCmtyStagingTables(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_inx = "Suzy"
-#     bob_inx = "Bob"
-#     yao_inx = "Yao"
-#     event3 = 3
-#     event7 = 7
-#     accord23_str = "accord23"
-#     aft_faces_dir = get_test_etl_dir()
-#     sue_aft_dir = create_path(aft_faces_dir, sue_inx)
-#     br00011_str = "br00011"
-#     br00011_csv_filename = f"{br00011_str}.csv"
-#     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{cmty_title_str()},{owner_name_str()},{acct_name_str()}
-# {sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
-# {sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
-# {sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
-# {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
-# """
-#     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+def test_populate_cmty_staging_tables_PopulatesCmtyStagingTables(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bob"
+    yao_inx = "Yao"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    aft_faces_dir = get_test_etl_dir()
+    sue_aft_dir = create_path(aft_faces_dir, sue_inx)
+    br00011_str = "br00011"
+    br00011_csv_filename = f"{br00011_str}.csv"
+    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{cmty_title_str()},{owner_name_str()},{acct_name_str()}
+{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
+{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
+{sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
+{sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
+"""
+    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
 
-#     cmtyunit_tablename = f"{cmtyunit_str()}_staging"
-#     with sqlite3_connect(":memory:") as fiscal_db_conn:
-#         etl_aft_face_csv_files_to_fiscal_db(fiscal_db_conn, aft_faces_dir)
-#         create_cmty_staging_tables(fiscal_db_conn)
-#         cursor = fiscal_db_conn.cursor()
-#         cursor.execute(f"SELECT * FROM {cmtyunit_tablename}")
-#         cmtyunit_db_rows = cursor.fetchall()
-#         assert cmtyunit_db_rows == []
+    cmtyunit_tablename = f"{cmtyunit_str()}_staging"
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        etl_aft_face_csv_files_to_fiscal_db(fiscal_db_conn, aft_faces_dir)
+        create_cmty_staging_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(f"SELECT * FROM {cmtyunit_tablename}")
+        cmtyunit_db_rows = cursor.fetchall()
+        assert cmtyunit_db_rows == []
 
-#         # WHEN
-#         populate_cmty_staging_tables(fiscal_db_conn)
+        # WHEN
+        populate_cmty_staging_tables(fiscal_db_conn)
 
-#         # THEN
-#         cursor.execute(f"SELECT * FROM {cmtyunit_tablename}")
-#         cmtyunit_db_rows = cursor.fetchall()
-#         expected_row1 = (
-#             br00011_str,  # idea_number
-#             sue_inx,  # face_name
-#             event3,  # event_int
-#             accord23_str,  # cmty_title
-#             None,  # fund_coin
-#             None,  # penny
-#             None,  # respect_bit
-#             None,  # current_time
-#             None,  # bridge
-#             None,  # c400_number
-#             None,  # yr1_jan1_offset
-#             None,  # monthday_distortion
-#             None,  # timeline_title
-#         )
-#         expected_row2 = (
-#             br00011_str,  # idea_number
-#             sue_inx,  # face_name
-#             event7,  # event_int
-#             accord23_str,  # cmty_title
-#             None,  # fund_coin
-#             None,  # penny
-#             None,  # respect_bit
-#             None,  # current_time
-#             None,  # bridge
-#             None,  # c400_number
-#             None,  # yr1_jan1_offset
-#             None,  # monthday_distortion
-#             None,  # timeline_title
-#         )
-#         assert cmtyunit_db_rows == [expected_row1, expected_row2]
+        # THEN
+        cursor.execute(f"SELECT * FROM {cmtyunit_tablename}")
+        cmtyunit_db_rows = cursor.fetchall()
+        expected_row1 = (
+            br00011_str,  # idea_number
+            sue_inx,  # face_name
+            event3,  # event_int
+            accord23_str,  # cmty_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        expected_row2 = (
+            br00011_str,  # idea_number
+            sue_inx,  # face_name
+            event7,  # event_int
+            accord23_str,  # cmty_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        assert cmtyunit_db_rows == [expected_row1, expected_row2]
