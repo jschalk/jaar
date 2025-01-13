@@ -175,11 +175,12 @@ class WorldUnit:
         etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
 
     def memory_cmty_db_conn(self) -> sqlite3_Connection:
-        print("I want to open sqlite connect to memory")
         conn = sqlite3_connect(":memory:")
         print(f"conn exists{conn=}")
         etl_aft_face_csv_files_to_cmty_db(conn, self._faces_aft_dir)
+        print(f"running etl_aft_face_csv_files_to_cmty_db")
         etl_idea_staging_to_cmty_tables(conn)
+        print(f"running etl_idea_staging_to_cmty_tables")
         return conn
 
     def aft_faces_ideas_to_cmty_mstr_csvs(self):

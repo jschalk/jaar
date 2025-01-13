@@ -71,7 +71,7 @@ def test_WorldUnit_memory_cmty_db_conn_ReturnsDBConnection(
         assert columns == []  # implication is database exists
 
 
-def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV(
+def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_cmty_db(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
