@@ -867,3 +867,7 @@ def etl_cmty_agg_tables_to_cmty_csvs(
     cmtyunit_str = "cmtyunit"
     cmtyunit_agg_tablename = f"{cmtyunit_str}_agg"
     save_table_to_csv(cmty_db_conn, cmty_mstr_dir, cmtyunit_agg_tablename)
+
+
+def etl_cmty_csvs_to_jsons(cmty_mstr_dir: str):
+    pass
