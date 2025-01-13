@@ -182,9 +182,11 @@ class WorldUnit:
         return conn
 
     def aft_faces_ideas_to_cmty_mstr_csvs(self):
-        with self.memory_cmty_db_conn() as cmty_db_conn:
-            etl_cmty_staging_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
-            etl_cmty_agg_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
+        # with self.memory_cmty_db_conn() as cmty_db_conn:
+        cmty_db_conn = self.memory_cmty_db_conn()
+        etl_cmty_staging_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
+        etl_cmty_agg_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
+        cmty_db_conn.close()
 
     def get_dict(self) -> dict:
         return {
