@@ -37,8 +37,10 @@ from src.f10_etl.transformers import (
     etl_aft_face_ideas_to_aft_event_ideas,
     etl_aft_event_ideas_to_cmty_ideas,
     etl_aft_face_ideas_to_csv_files,
-    etl_aft_face_csv_files_to_fiscal_db,
+    etl_aft_face_csv_files_to_cmty_db,
     etl_idea_staging_to_cmty_tables,
+    etl_cmty_staging_tables_to_cmty_csvs,
+    etl_cmty_agg_tables_to_cmty_csvs,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect
@@ -64,6 +66,7 @@ class WorldUnit:
     _world_dir: str = None
     _ocean_dir: str = None
     _boat_dir: str = None
+    _cmty_mstr_dir: str = None
     _cmtyunits: set[CmtyTitle] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
@@ -95,10 +98,12 @@ class WorldUnit:
         self._faces_bow_dir = create_path(self._world_dir, "faces_bow")
         self._faces_aft_dir = create_path(self._world_dir, "faces_aft")
         self._boat_dir = create_path(self._world_dir, "boat")
+        self._cmty_mstr_dir = create_path(self._world_dir, "cmty_mstr")
         set_dir(self._world_dir)
         set_dir(self._faces_bow_dir)
         set_dir(self._faces_aft_dir)
         set_dir(self._boat_dir)
+        set_dir(self._cmty_mstr_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineTitle, TimeConversion]:
         return self.timeconversions
@@ -169,14 +174,16 @@ class WorldUnit:
     def aft_face_ideas_to_csv_files(self):
         etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
 
-    def memory_fiscal_db_conn(self):
+    def memory_cmty_db_conn(self):
         conn = sqlite3_connect(":memory:")
-        etl_aft_face_csv_files_to_fiscal_db(conn, self._faces_aft_dir)
+        etl_aft_face_csv_files_to_cmty_db(conn, self._faces_aft_dir)
         etl_idea_staging_to_cmty_tables(conn)
         return conn
 
-    def aft_faces_ideas_to_cmty_staging(self):
-        pass
+    def aft_faces_ideas_to_cmty_mstr_csvs(self):
+        with self.memory_cmty_db_conn() as cmty_db_conn:
+            etl_cmty_staging_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
+            etl_cmty_agg_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
 
     def get_dict(self) -> dict:
         return {

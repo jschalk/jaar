@@ -1,10 +1,20 @@
-from src.f00_instrument.file import create_path, save_file
+from src.f00_instrument.file import create_path, save_file, open_file
 from src.f00_instrument.db_toolbox import db_table_exists
+from src.f01_road.finance_tran import bridge_str
+from src.f03_chrono.chrono import (
+    c400_number_str,
+    yr1_jan1_offset_str,
+    monthday_distortion_str,
+    timeline_title_str,
+)
 from src.f04_gift.atom_config import (
     acct_name_str,
     face_name_str,
     cmty_title_str,
     owner_name_str,
+    fund_coin_str,
+    penny_str,
+    respect_bit_str,
 )
 from src.f07_cmty.cmty_config import (
     get_cmty_config_args,
@@ -14,21 +24,26 @@ from src.f07_cmty.cmty_config import (
     cmty_timeline_hour_str,
     cmty_timeline_month_str,
     cmty_timeline_weekday_str,
+    current_time_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
+from src.f09_idea.idea_config import idea_number_str
 from src.f09_idea.pandas_tool import get_pragma_table_fetchall, get_sorting_columns
 from src.f10_etl.transformers import (
-    etl_aft_face_csv_files_to_fiscal_db,
+    etl_aft_face_csv_files_to_cmty_db,
     create_cmty_tables,
     populate_cmty_staging_tables,
     populate_cmty_agg_tables,
+    etl_cmty_staging_tables_to_cmty_csvs,
+    etl_cmty_agg_tables_to_cmty_csvs,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
 from copy import copy as copy_copy
+from os.path import exists as os_path_exists
 
 
-def test_etl_aft_face_csv_files_to_fiscal_db_DBChanges(
+def test_etl_aft_face_csv_files_to_cmty_db_DBChanges(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -50,17 +65,17 @@ def test_etl_aft_face_csv_files_to_fiscal_db_DBChanges(
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        assert db_table_exists(fiscal_db_conn, br00011_staging_tablename) is False
+    with sqlite3_connect(":memory:") as cmty_db_conn:
+        assert db_table_exists(cmty_db_conn, br00011_staging_tablename) is False
 
         # ESTABLISH
-        etl_aft_face_csv_files_to_fiscal_db(fiscal_db_conn, aft_faces_dir)
+        etl_aft_face_csv_files_to_cmty_db(cmty_db_conn, aft_faces_dir)
 
         # THEN
-        assert db_table_exists(fiscal_db_conn, br00011_staging_tablename)
-        print(f"{type(fiscal_db_conn)=}")
-        assert fiscal_db_conn != None
-        cursor = fiscal_db_conn.cursor()
+        assert db_table_exists(cmty_db_conn, br00011_staging_tablename)
+        print(f"{type(cmty_db_conn)=}")
+        assert cmty_db_conn != None
+        cursor = cmty_db_conn.cursor()
         cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
         br00011_db_columns = cursor.fetchall()
         br00011_expected_columns = [
@@ -141,38 +156,38 @@ def test_create_cmty_tables_CreatesCmtyStagingTables(
     cmtymont_stage_pragma = get_pragma_table_fetchall(cmtymont_stage_columns)
     cmtyweek_stage_pragma = get_pragma_table_fetchall(cmtyweek_stage_columns)
 
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        assert db_table_exists(fiscal_db_conn, cmtyunit_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, cmtydeal_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, cmtycash_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, cmtyhour_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, cmtymont_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, cmtyweek_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, cmtyunit_stage_tablename) is False
-        assert db_table_exists(fiscal_db_conn, cmtydeal_stage_tablename) is False
-        assert db_table_exists(fiscal_db_conn, cmtycash_stage_tablename) is False
-        assert db_table_exists(fiscal_db_conn, cmtyhour_stage_tablename) is False
-        assert db_table_exists(fiscal_db_conn, cmtymont_stage_tablename) is False
-        assert db_table_exists(fiscal_db_conn, cmtyweek_stage_tablename) is False
+    with sqlite3_connect(":memory:") as cmty_db_conn:
+        assert db_table_exists(cmty_db_conn, cmtyunit_agg_tablename) is False
+        assert db_table_exists(cmty_db_conn, cmtydeal_agg_tablename) is False
+        assert db_table_exists(cmty_db_conn, cmtycash_agg_tablename) is False
+        assert db_table_exists(cmty_db_conn, cmtyhour_agg_tablename) is False
+        assert db_table_exists(cmty_db_conn, cmtymont_agg_tablename) is False
+        assert db_table_exists(cmty_db_conn, cmtyweek_agg_tablename) is False
+        assert db_table_exists(cmty_db_conn, cmtyunit_stage_tablename) is False
+        assert db_table_exists(cmty_db_conn, cmtydeal_stage_tablename) is False
+        assert db_table_exists(cmty_db_conn, cmtycash_stage_tablename) is False
+        assert db_table_exists(cmty_db_conn, cmtyhour_stage_tablename) is False
+        assert db_table_exists(cmty_db_conn, cmtymont_stage_tablename) is False
+        assert db_table_exists(cmty_db_conn, cmtyweek_stage_tablename) is False
 
         # WHEN
-        create_cmty_tables(fiscal_db_conn)
+        create_cmty_tables(cmty_db_conn)
 
         # THEN
-        assert db_table_exists(fiscal_db_conn, cmtyunit_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, cmtydeal_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, cmtycash_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, cmtyhour_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, cmtymont_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, cmtyweek_agg_tablename)
+        assert db_table_exists(cmty_db_conn, cmtyunit_agg_tablename)
+        assert db_table_exists(cmty_db_conn, cmtydeal_agg_tablename)
+        assert db_table_exists(cmty_db_conn, cmtycash_agg_tablename)
+        assert db_table_exists(cmty_db_conn, cmtyhour_agg_tablename)
+        assert db_table_exists(cmty_db_conn, cmtymont_agg_tablename)
+        assert db_table_exists(cmty_db_conn, cmtyweek_agg_tablename)
 
-        assert db_table_exists(fiscal_db_conn, cmtyunit_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, cmtydeal_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, cmtycash_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, cmtyhour_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, cmtymont_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, cmtyweek_stage_tablename)
-        cursor = fiscal_db_conn.cursor()
+        assert db_table_exists(cmty_db_conn, cmtyunit_stage_tablename)
+        assert db_table_exists(cmty_db_conn, cmtydeal_stage_tablename)
+        assert db_table_exists(cmty_db_conn, cmtycash_stage_tablename)
+        assert db_table_exists(cmty_db_conn, cmtyhour_stage_tablename)
+        assert db_table_exists(cmty_db_conn, cmtymont_stage_tablename)
+        assert db_table_exists(cmty_db_conn, cmtyweek_stage_tablename)
+        cursor = cmty_db_conn.cursor()
         cursor.execute(f"PRAGMA table_info({cmtyunit_agg_tablename})")
         assert cmtyunit_agg_pragma == cursor.fetchall()
         cursor.execute(f"PRAGMA table_info({cmtydeal_agg_tablename})")
@@ -221,16 +236,16 @@ def test_populate_cmty_staging_tables_PopulatesCmtyStagingTables(env_dir_setup_c
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
 
     cmtyunit_tablename = f"{cmtyunit_str()}_staging"
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        etl_aft_face_csv_files_to_fiscal_db(fiscal_db_conn, aft_faces_dir)
-        create_cmty_tables(fiscal_db_conn)
-        cursor = fiscal_db_conn.cursor()
+    with sqlite3_connect(":memory:") as cmty_db_conn:
+        etl_aft_face_csv_files_to_cmty_db(cmty_db_conn, aft_faces_dir)
+        create_cmty_tables(cmty_db_conn)
+        cursor = cmty_db_conn.cursor()
         cursor.execute(f"SELECT * FROM {cmtyunit_tablename}")
         cmtyunit_db_rows = cursor.fetchall()
         assert cmtyunit_db_rows == []
 
         # WHEN
-        populate_cmty_staging_tables(fiscal_db_conn)
+        populate_cmty_staging_tables(cmty_db_conn)
 
         # THEN
         cursor.execute(f"SELECT * FROM {cmtyunit_tablename}")
@@ -278,10 +293,10 @@ def test_populate_cmty_agg_tables_PopulatesCmtyAggTables(env_dir_setup_cleanup):
     br00011_str = "br00011"
     cmtyunit_stage_tablename = f"{cmtyunit_str()}_staging"
     cmtyunit_agg_tablename = f"{cmtyunit_str()}_agg"
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_cmty_tables(fiscal_db_conn)
+    with sqlite3_connect(":memory:") as cmty_db_conn:
+        create_cmty_tables(cmty_db_conn)
 
-        cursor = fiscal_db_conn.cursor()
+        cursor = cmty_db_conn.cursor()
         insert_staging_sqlstr = f"""
 INSERT INTO cmtyunit_staging (idea_number, face_name, event_int, cmty_title)
 VALUES 
@@ -300,7 +315,7 @@ VALUES
         assert cmtyunit_agg_rows == []
 
         # WHEN
-        populate_cmty_agg_tables(fiscal_db_conn)
+        populate_cmty_agg_tables(cmty_db_conn)
 
         # THEN
         cursor.execute(f"SELECT * FROM {cmtyunit_agg_tablename};")
@@ -330,3 +345,79 @@ VALUES
             None,  # timeline_title
         )
         assert cmtyunit_agg_rows == [expected_row1, expected_row2]
+
+
+def test_etl_cmty_staging_tables_to_cmty_csvs_CreateFiles(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    br00011_str = "br00011"
+    cmtyunit_staging_tablename = f"{cmtyunit_str()}_staging"
+    with sqlite3_connect(":memory:") as cmty_db_conn:
+        create_cmty_tables(cmty_db_conn)
+        cursor = cmty_db_conn.cursor()
+        insert_staging_sqlstr = f"""
+INSERT INTO cmtyunit_staging (idea_number, face_name, event_int, cmty_title)
+VALUES 
+  ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
+, ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
+, ('{br00011_str}', '{sue_inx}', {event3}, '{accord45_str}')
+, ('{br00011_str}', '{sue_inx}', {event7}, '{accord45_str}')
+;
+"""
+        cursor.execute(insert_staging_sqlstr)
+        cmty_mstr_dir = get_test_etl_dir()
+        cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
+        cmtyunit_csv_filename = f"{cmtyunit_staging_tablename}.csv"
+        cmtyunit_csv_path = create_path(cmtys_dir, cmtyunit_csv_filename)
+        assert os_path_exists(cmtyunit_csv_path) is False
+
+        # WHEN
+        etl_cmty_staging_tables_to_cmty_csvs(cmty_db_conn, cmtys_dir)
+
+        # THEN
+        assert os_path_exists(cmtyunit_csv_path)
+        generated_cmtyunit_csv = open_file(cmtys_dir, cmtyunit_csv_filename)
+        expected_cmtyunit_csv_str = f"""{idea_number_str()},{face_name_str()},{event_int_str()},{cmty_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord45_str},,,,,,,,,
+{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,
+"""
+        assert generated_cmtyunit_csv == expected_cmtyunit_csv_str
+
+
+def test_etl_cmty_agg_tables_to_cmty_csvs_CreateFiles(env_dir_setup_cleanup):
+    # ESTABLISH
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    cmtyunit_agg_tablename = f"{cmtyunit_str()}_agg"
+    with sqlite3_connect(":memory:") as cmty_db_conn:
+        create_cmty_tables(cmty_db_conn)
+        cursor = cmty_db_conn.cursor()
+        insert_agg_sqlstr = f"""
+INSERT INTO {cmtyunit_agg_tablename} (cmty_title)
+VALUES ('{accord23_str}'), ('{accord45_str}')
+;
+"""
+        cursor.execute(insert_agg_sqlstr)
+        cmty_mstr_dir = get_test_etl_dir()
+        cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
+        cmtyunit_csv_filename = f"{cmtyunit_agg_tablename}.csv"
+        cmtyunit_csv_path = create_path(cmtys_dir, cmtyunit_csv_filename)
+        assert os_path_exists(cmtyunit_csv_path) is False
+
+        # WHEN
+        etl_cmty_agg_tables_to_cmty_csvs(cmty_db_conn, cmtys_dir)
+
+        # THEN
+        assert os_path_exists(cmtyunit_csv_path)
+        generated_cmtyunit_csv = open_file(cmtys_dir, cmtyunit_csv_filename)
+        expected_cmtyunit_csv_str = f"""{cmty_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
+{accord23_str},,,,,,,,,
+{accord45_str},,,,,,,,,
+"""
+        assert generated_cmtyunit_csv == expected_cmtyunit_csv_str
