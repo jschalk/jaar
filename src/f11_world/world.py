@@ -176,7 +176,6 @@ class WorldUnit:
 
     def memory_cmty_db_conn(self) -> sqlite3_Connection:
         conn = sqlite3_connect(":memory:")
-        print(f"conn exists{conn=}")
         etl_aft_face_csv_files_to_cmty_db(conn, self._faces_aft_dir)
         etl_idea_staging_to_cmty_tables(conn)
         return conn

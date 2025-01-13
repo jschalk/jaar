@@ -746,15 +746,11 @@ def etl_aft_face_csv_files_to_cmty_db(conn: sqlite3_Connection, faces_aft_dir: s
             csv_path = create_path(face_dir, csv_filename)
             if os_path_exists(csv_path):
                 insert_idea_csv(csv_path, conn, f"{idea_number}_staging")
-            print(f"{idea_number=}")
 
 
 def etl_idea_staging_to_cmty_tables(conn):
-    print(f"create_cmty_tables omni")
     create_cmty_tables(conn)
-    print(f"cmty_staging tables full omni")
     populate_cmty_staging_tables(conn)
-    print(f"cmty agg tables full omni")
     populate_cmty_agg_tables(conn)
 
 
