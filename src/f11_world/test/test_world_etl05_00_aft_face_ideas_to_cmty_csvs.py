@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, save_file
+from src.f00_instrument.file import create_path, save_file, open_file
 from src.f00_instrument.db_toolbox import db_table_exists
 from src.f01_road.finance_tran import bridge_str, time_int_str, quota_str
 from src.f03_chrono.chrono import (
@@ -38,6 +38,7 @@ from src.f09_idea.idea_config import (
     get_idea_sqlite_types,
     get_idea_format_filename,
     get_idearef_from_file,
+    idea_number_str,
 )
 from src.f09_idea.pandas_tool import (
     _get_cmty_idea_format_filenames,
@@ -54,23 +55,23 @@ from copy import copy as copy_copy
 from platform import system as platform_system
 
 
-def test_WorldUnit_memory_fiscal_db_conn_ReturnsDBConnection(
+def test_WorldUnit_memory_cmty_db_conn_ReturnsDBConnection(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     fizz_world = worldunit_shop("Fizz")
 
     # WHEN / THEN
-    with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
-        assert fiscal_db_conn != None
-        cursor = fiscal_db_conn.cursor()
+    with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+        assert cmty_db_conn != None
+        cursor = cmty_db_conn.cursor()
         x_tablename = "random_name_table"
         cursor.execute(f"PRAGMA table_info({x_tablename})")
         columns = cursor.fetchall()
         assert columns == []  # implication is database exists
 
 
-def test_WorldUnit_memory_fiscal_db_conn_HasIdeaDataFromCSV(
+def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_cmty_db(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -96,10 +97,9 @@ def test_WorldUnit_memory_fiscal_db_conn_HasIdeaDataFromCSV(
 
     # WHEN / THEN
     if platform_system() != "Linux":  # bug on github commit
-        with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
-            print(f"{type(fiscal_db_conn)=}")
-            assert fiscal_db_conn != None
-            cursor = fiscal_db_conn.cursor()
+        with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+            assert cmty_db_conn != None
+            cursor = cmty_db_conn.cursor()
             cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
             br00011_db_columns = cursor.fetchall()
             br00011_expected_columns = [
@@ -109,6 +109,7 @@ def test_WorldUnit_memory_fiscal_db_conn_HasIdeaDataFromCSV(
                 (3, owner_name_str(), "TEXT", 0, None, 0),
                 (4, acct_name_str(), "TEXT", 0, None, 0),
             ]
+            print(f"{type(cmty_db_conn)=}")
             print(f"      {br00011_db_columns=}")
             print(f"{br00011_expected_columns=}")
             assert br00011_db_columns == br00011_expected_columns
@@ -123,7 +124,7 @@ def test_WorldUnit_memory_fiscal_db_conn_HasIdeaDataFromCSV(
             assert br00011_db_rows == expected_data
 
 
-def test_WorldUnit_memory_fiscal_db_conn_CreatesCmtyStagingTables(
+def test_WorldUnit_memory_cmty_db_conn_CreatesCmtyStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -184,21 +185,21 @@ def test_WorldUnit_memory_fiscal_db_conn_CreatesCmtyStagingTables(
         cmtymont_stage_pragma = get_pragma_table_fetchall(cmtymont_stage_columns)
         cmtyweek_stage_pragma = get_pragma_table_fetchall(cmtyweek_stage_columns)
 
-        with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
-            assert db_table_exists(fiscal_db_conn, cmtyunit_agg_tablename)
-            assert db_table_exists(fiscal_db_conn, cmtydeal_agg_tablename)
-            assert db_table_exists(fiscal_db_conn, cmtycash_agg_tablename)
-            assert db_table_exists(fiscal_db_conn, cmtyhour_agg_tablename)
-            assert db_table_exists(fiscal_db_conn, cmtymont_agg_tablename)
-            assert db_table_exists(fiscal_db_conn, cmtyweek_agg_tablename)
+        with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+            assert db_table_exists(cmty_db_conn, cmtyunit_agg_tablename)
+            assert db_table_exists(cmty_db_conn, cmtydeal_agg_tablename)
+            assert db_table_exists(cmty_db_conn, cmtycash_agg_tablename)
+            assert db_table_exists(cmty_db_conn, cmtyhour_agg_tablename)
+            assert db_table_exists(cmty_db_conn, cmtymont_agg_tablename)
+            assert db_table_exists(cmty_db_conn, cmtyweek_agg_tablename)
 
-            assert db_table_exists(fiscal_db_conn, cmtyunit_stage_tablename)
-            assert db_table_exists(fiscal_db_conn, cmtydeal_stage_tablename)
-            assert db_table_exists(fiscal_db_conn, cmtycash_stage_tablename)
-            assert db_table_exists(fiscal_db_conn, cmtyhour_stage_tablename)
-            assert db_table_exists(fiscal_db_conn, cmtymont_stage_tablename)
-            assert db_table_exists(fiscal_db_conn, cmtyweek_stage_tablename)
-            cursor = fiscal_db_conn.cursor()
+            assert db_table_exists(cmty_db_conn, cmtyunit_stage_tablename)
+            assert db_table_exists(cmty_db_conn, cmtydeal_stage_tablename)
+            assert db_table_exists(cmty_db_conn, cmtycash_stage_tablename)
+            assert db_table_exists(cmty_db_conn, cmtyhour_stage_tablename)
+            assert db_table_exists(cmty_db_conn, cmtymont_stage_tablename)
+            assert db_table_exists(cmty_db_conn, cmtyweek_stage_tablename)
+            cursor = cmty_db_conn.cursor()
             cursor.execute(f"PRAGMA table_info({cmtyunit_agg_tablename})")
             assert cmtyunit_agg_pragma == cursor.fetchall()
             cursor.execute(f"PRAGMA table_info({cmtydeal_agg_tablename})")
@@ -226,7 +227,7 @@ def test_WorldUnit_memory_fiscal_db_conn_CreatesCmtyStagingTables(
             assert cmtyweek_stage_pragma == cursor.fetchall()
 
 
-def test_WorldUnit_memory_fiscal_db_conn_PopulatesCmtyStagingTables(
+def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -252,8 +253,8 @@ def test_WorldUnit_memory_fiscal_db_conn_PopulatesCmtyStagingTables(
     # WHEN / THEN
     if platform_system() != "Linux":  # bug on github commit
         cmtyunit_tablename = f"{cmtyunit_str()}_staging"
-        with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
-            cursor = fiscal_db_conn.cursor()
+        with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+            cursor = cmty_db_conn.cursor()
             cursor.execute(f"SELECT * FROM {cmtyunit_tablename}")
             cmtyunit_db_rows = cursor.fetchall()
             expected_row1 = (
@@ -287,6 +288,159 @@ def test_WorldUnit_memory_fiscal_db_conn_PopulatesCmtyStagingTables(
                 None,  # timeline_title
             )
             assert cmtyunit_db_rows == [expected_row1, expected_row2]
+
+
+def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyAggTables(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bob"
+    yao_inx = "Yao"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    fizz_world = worldunit_shop("fizz")
+    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    br00011_str = "br00011"
+    br00011_csv_filename = f"{br00011_str}.csv"
+    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{cmty_title_str()},{owner_name_str()},{acct_name_str()}
+{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
+{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
+{sue_inx},{event3},{accord45_str},{yao_inx},{yao_inx}
+{sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
+"""
+    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    fizz_world = worldunit_shop("Fizz")
+
+    # WHEN / THEN
+    if platform_system() != "Linux":  # bug on github commit
+        # with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+        cmty_db_conn = fizz_world.memory_cmty_db_conn()
+        cursor = cmty_db_conn.cursor()
+        # cmtyunit_stage_tablename = f"{cmtyunit_str()}_staging"
+        # cursor.execute(f"SELECT * FROM {cmtyunit_stage_tablename};")
+        # cmtyunit_stage_rows = cursor.fetchall()
+        # assert len(cmtyunit_stage_rows) == 4
+
+        cmtyunit_agg_tablename = f"{cmtyunit_str()}_agg"
+        cursor.execute(f"SELECT * FROM {cmtyunit_agg_tablename};")
+        cmtyunit_agg_rows = cursor.fetchall()
+        expected_row1 = (
+            accord23_str,  # cmty_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        expected_row2 = (
+            accord45_str,  # cmty_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        assert cmtyunit_agg_rows == [expected_row1, expected_row2]
+        cmty_db_conn.close()
+
+
+def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateStagingFiles(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bob"
+    yao_inx = "Yao"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    br00011_str = "br00011"
+    fizz_world = worldunit_shop("fizz")
+    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    br00011_csv_filename = f"{br00011_str}.csv"
+    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{cmty_title_str()},{owner_name_str()},{acct_name_str()}
+{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
+{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
+{sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
+{sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
+"""
+    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    fizz_world = worldunit_shop("Fizz")
+    cmtyunit_staging_csv_filename = f"cmtyunit_staging.csv"
+    cmtyunit_staging_csv_path = create_path(
+        fizz_world._cmty_mstr_dir, cmtyunit_staging_csv_filename
+    )
+    assert os_path_exists(cmtyunit_staging_csv_path) is False
+
+    # WHEN
+    if platform_system() != "Linux":  # bug on github commit
+        fizz_world.aft_faces_ideas_to_cmty_mstr_csvs()
+
+        # THEN
+        # print(f"{cmtyunit_staging_csv_path=}")
+        assert os_path_exists(cmtyunit_staging_csv_path)
+        generated_cmtyunit_csv = open_file(
+            fizz_world._cmty_mstr_dir, cmtyunit_staging_csv_filename
+        )
+        expected_cmtyunit_csv_str = f"""{idea_number_str()},{face_name_str()},{event_int_str()},{cmty_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
+{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,
+"""
+        print(f"   {expected_cmtyunit_csv_str=}")
+        assert generated_cmtyunit_csv == expected_cmtyunit_csv_str
+
+
+def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateAggFiles(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bob"
+    yao_inx = "Yao"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    br00011_str = "br00011"
+    fizz_world = worldunit_shop("fizz")
+    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    br00011_csv_filename = f"{br00011_str}.csv"
+    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{cmty_title_str()},{owner_name_str()},{acct_name_str()}
+{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
+{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
+{sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
+{sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
+"""
+    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    fizz_world = worldunit_shop("Fizz")
+    cmtyunit_csv_filename = f"cmtyunit_agg.csv"
+    cmtyunit_csv_path = create_path(fizz_world._cmty_mstr_dir, cmtyunit_csv_filename)
+    assert os_path_exists(cmtyunit_csv_path) is False
+
+    # WHEN
+    if platform_system() != "Linux":  # bug on github commit
+        fizz_world.aft_faces_ideas_to_cmty_mstr_csvs()
+
+        # THEN
+        # print(f"{cmtyunit_csv_path=}")
+        assert os_path_exists(cmtyunit_csv_path)
+        generated_cmtyunit_csv = open_file(cmtyunit_csv_path)
+        expected_cmtyunit_csv_str = f"""{cmty_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
+{accord23_str},,,,,,,,,
+{accord45_str},,,,,,,,,
+"""
+        print(f"      {expected_cmtyunit_csv_str=}")
+        assert generated_cmtyunit_csv == expected_cmtyunit_csv_str
 
 
 # def test_WorldUnit_aft_faces_ideas_to_cmty_staging_CreatesCorrectTables(

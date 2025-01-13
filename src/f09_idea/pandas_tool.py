@@ -353,6 +353,7 @@ def create_idea_table_from_csv(
 
 
 def insert_idea_csv(csv_filepath: str, conn: sqlite3_Connection, tablename: str):
+    print(f"{db_table_exists(conn, tablename)=}")
     if db_table_exists(conn, tablename) is False:
         create_idea_table_from_csv(csv_filepath, conn, tablename)
 
@@ -369,3 +370,16 @@ def get_pragma_table_fetchall(table_columns):
         pragma_table_attrs.append((x_count, x_col, col_type, 0, None, 0))
         x_count += 1
     return pragma_table_attrs
+
+
+def save_table_to_csv(cmty_db_conn: sqlite3_Connection, cmty_mstr_dir: str, tablename):
+    cursor = cmty_db_conn.cursor()
+    cmtyunit_sqlstr = f"""SELECT * FROM {tablename};"""
+    cursor.execute(cmtyunit_sqlstr)
+    cmtyunit_rows = cursor.fetchall()
+    cmtyunit_columns = [desc[0] for desc in cursor.description]
+    cursor.close()
+
+    cmtyunit_df = DataFrame(cmtyunit_rows, columns=cmtyunit_columns)
+    cmtyunit_filename = f"{tablename}.csv"
+    save_dataframe_to_csv(cmtyunit_df, cmty_mstr_dir, cmtyunit_filename)

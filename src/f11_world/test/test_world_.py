@@ -28,6 +28,7 @@ def test_WorldUnit_Exists():
     assert not x_world._world_dir
     assert not x_world._ocean_dir
     assert not x_world._boat_dir
+    assert not x_world._cmty_mstr_dir
     assert not x_world._cmtyunits
     assert not x_world._pidgin_events
 
@@ -42,6 +43,7 @@ def test_WorldUnit_set_ocean_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert fizz_world._faces_bow_dir is None
     assert fizz_world._ocean_dir is None
     assert fizz_world._boat_dir is None
+    assert fizz_world._cmty_mstr_dir is None
     assert os_path_exists(x_ocean_dir) is False
 
     # WHEN
@@ -52,6 +54,7 @@ def test_WorldUnit_set_ocean_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert fizz_world._faces_bow_dir is None
     assert fizz_world._ocean_dir == x_ocean_dir
     assert fizz_world._boat_dir is None
+    assert fizz_world._cmty_mstr_dir is None
     assert os_path_exists(x_ocean_dir)
 
 
@@ -64,17 +67,20 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     x_faces_aft_dir = create_path(x_world_dir, "faces_aft")
     x_ocean_dir = create_path(x_world_dir, "ocean")
     x_boat_dir = create_path(x_world_dir, "boat")
+    x_cmty_mstr_dir = create_path(x_world_dir, "cmty_mstr")
 
     assert not fizz_world._world_dir
     assert not fizz_world._faces_bow_dir
     assert not fizz_world._faces_aft_dir
     assert not fizz_world._ocean_dir
     assert not fizz_world._boat_dir
+    assert not fizz_world._cmty_mstr_dir
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_faces_bow_dir) is False
     assert os_path_exists(x_faces_aft_dir) is False
     assert os_path_exists(x_ocean_dir) is False
     assert os_path_exists(x_boat_dir) is False
+    assert os_path_exists(x_cmty_mstr_dir) is False
 
     # WHEN
     fizz_world._set_world_dirs()
@@ -90,6 +96,7 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     assert os_path_exists(x_faces_aft_dir)
     assert os_path_exists(x_ocean_dir) is False
     assert os_path_exists(x_boat_dir)
+    assert os_path_exists(x_cmty_mstr_dir)
 
 
 def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):

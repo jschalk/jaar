@@ -20,6 +20,7 @@ from src.f09_idea.pandas_tool import (
     get_boat_staging_grouping_with_all_values_equal_df,
     translate_all_columns_dataframe,
     insert_idea_csv,
+    save_table_to_csv,
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
@@ -737,7 +738,7 @@ def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 
 
-def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir: str):
+def etl_aft_face_csv_files_to_cmty_db(conn: sqlite3_Connection, faces_aft_dir: str):
     for face_name in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_name)
         for idea_number in sorted(get_idea_numbers()):
@@ -747,9 +748,10 @@ def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir:
                 insert_idea_csv(csv_path, conn, f"{idea_number}_staging")
 
 
-def etl_idea_staging_to_cmty_staging(conn):
+def etl_idea_staging_to_cmty_tables(conn):
     create_cmty_tables(conn)
     populate_cmty_staging_tables(conn)
+    populate_cmty_agg_tables(conn)
 
 
 def create_cmty_tables(conn: sqlite3_Connection):
@@ -817,13 +819,13 @@ def create_cmty_tables(conn: sqlite3_Connection):
     create_table_from_columns(conn, cmtyweek_stage, cmtyweek_stage_cols, col_types)
 
 
-def populate_cmty_staging_tables(fiscal_db_conn: sqlite3_Connection):
+def populate_cmty_staging_tables(cmty_db_conn: sqlite3_Connection):
     # get every budunit category idea that is not also cmtyunit category idea: collect cmty_titles
     cmty1_ideas = get_bud_ideas_with_only_cmty_title()
     for cmty1_idea in cmty1_ideas:
         idea_staging_tablename = f"{cmty1_idea}_staging"
-        if db_table_exists(fiscal_db_conn, idea_staging_tablename):
-            cursor = fiscal_db_conn.cursor()
+        if db_table_exists(cmty_db_conn, idea_staging_tablename):
+            cursor = cmty_db_conn.cursor()
             insert_idea_staging_agg = f"""
 INSERT INTO cmtyunit_staging (idea_number, face_name, event_int, cmty_title)
 SELECT '{cmty1_idea}' as idea_number, face_name, event_int, cmty_title
@@ -833,3 +835,35 @@ GROUP BY face_name, event_int, cmty_title
 """
             cursor.execute(insert_idea_staging_agg)
             cursor.close()
+
+
+def populate_cmty_agg_tables(cmty_db_conn: sqlite3_Connection):
+    cmtyunit_str = "cmtyunit"
+    cmtyunit_staging_tablename = f"{cmtyunit_str}_staging"
+    cmtyunit_agg_tablename = f"{cmtyunit_str}_agg"
+    cursor = cmty_db_conn.cursor()
+    insert_idea_staging_agg = f"""
+INSERT INTO {cmtyunit_agg_tablename} (cmty_title)
+SELECT cmty_title
+FROM {cmtyunit_staging_tablename}
+GROUP BY cmty_title
+;
+"""
+    cursor.execute(insert_idea_staging_agg)
+    cursor.close()
+
+
+def etl_cmty_staging_tables_to_cmty_csvs(
+    cmty_db_conn: sqlite3_Connection, cmty_mstr_dir: str
+):
+    cmtyunit_str = "cmtyunit"
+    cmtyunit_staging_tablename = f"{cmtyunit_str}_staging"
+    save_table_to_csv(cmty_db_conn, cmty_mstr_dir, cmtyunit_staging_tablename)
+
+
+def etl_cmty_agg_tables_to_cmty_csvs(
+    cmty_db_conn: sqlite3_Connection, cmty_mstr_dir: str
+):
+    cmtyunit_str = "cmtyunit"
+    cmtyunit_agg_tablename = f"{cmtyunit_str}_agg"
+    save_table_to_csv(cmty_db_conn, cmty_mstr_dir, cmtyunit_agg_tablename)

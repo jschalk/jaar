@@ -249,9 +249,9 @@ def insert_csv(
             # Create a parameterized SQL query for inserting data
             placeholders = ", ".join(["?"] * len(headers))
             insert_query = f"INSERT INTO {table_name} ({', '.join(headers)}) VALUES ({placeholders})"
-
             # Insert each row into the database
             for row in reader:
+                print(f"{insert_query=} {row=}")
                 cursor.execute(insert_query, row)
 
         # Commit the transaction
