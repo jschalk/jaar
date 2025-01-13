@@ -750,8 +750,11 @@ def etl_aft_face_csv_files_to_cmty_db(conn: sqlite3_Connection, faces_aft_dir: s
 
 
 def etl_idea_staging_to_cmty_tables(conn):
+    print(f"create_cmty_tables omni")
     create_cmty_tables(conn)
+    print(f"cmty_staging tables full omni")
     populate_cmty_staging_tables(conn)
+    print(f"cmty agg tables full omni")
     populate_cmty_agg_tables(conn)
 
 

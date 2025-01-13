@@ -178,9 +178,7 @@ class WorldUnit:
         conn = sqlite3_connect(":memory:")
         print(f"conn exists{conn=}")
         etl_aft_face_csv_files_to_cmty_db(conn, self._faces_aft_dir)
-        print(f"running etl_aft_face_csv_files_to_cmty_db")
         etl_idea_staging_to_cmty_tables(conn)
-        print(f"running etl_idea_staging_to_cmty_tables")
         return conn
 
     def aft_faces_ideas_to_cmty_mstr_csvs(self):
