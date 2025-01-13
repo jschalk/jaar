@@ -353,6 +353,7 @@ def create_idea_table_from_csv(
 
 
 def insert_idea_csv(csv_filepath: str, conn: sqlite3_Connection, tablename: str):
+    print(f"{db_table_exists(conn, tablename)=}")
     if db_table_exists(conn, tablename) is False:
         create_idea_table_from_csv(csv_filepath, conn, tablename)
 
