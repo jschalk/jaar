@@ -43,7 +43,7 @@ from src.f10_etl.transformers import (
     etl_cmty_agg_tables_to_cmty_csvs,
 )
 from dataclasses import dataclass
-from sqlite3 import connect as sqlite3_connect, Connection
+from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 
 
 def get_default_worlds_dir() -> str:
@@ -174,19 +174,16 @@ class WorldUnit:
     def aft_face_ideas_to_csv_files(self):
         etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
 
-    def memory_cmty_db_conn(self) -> Connection:
-        db_path = create_path(self._cmty_mstr_dir, "staging.db")
-        conn = sqlite3_connect(db_path)
+    def memory_cmty_db_conn(self) -> sqlite3_Connection:
+        conn = sqlite3_connect(":memory:")
         etl_aft_face_csv_files_to_cmty_db(conn, self._faces_aft_dir)
         etl_idea_staging_to_cmty_tables(conn)
         return conn
 
     def aft_faces_ideas_to_cmty_mstr_csvs(self):
-        # with self.memory_cmty_db_conn() as cmty_db_conn:
-        cmty_db_conn = self.memory_cmty_db_conn()
-        etl_cmty_staging_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
-        etl_cmty_agg_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
-        cmty_db_conn.close()
+        with self.memory_cmty_db_conn() as cmty_db_conn:
+            etl_cmty_staging_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
+            etl_cmty_agg_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
 
     def get_dict(self) -> dict:
         return {

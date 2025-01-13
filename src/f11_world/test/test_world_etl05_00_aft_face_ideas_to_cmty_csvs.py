@@ -97,33 +97,31 @@ def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV(
 
     # WHEN / THEN
     # if platform_system() != "Linux":  # bug on github commit
-    # with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
-    cmty_db_conn = fizz_world.memory_cmty_db_conn()
-    print(f"{type(cmty_db_conn)=}")
-    assert cmty_db_conn != None
-    cursor = cmty_db_conn.cursor()
-    cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
-    br00011_db_columns = cursor.fetchall()
-    br00011_expected_columns = [
-        (0, face_name_str(), "TEXT", 0, None, 0),
-        (1, event_int_str(), "INTEGER", 0, None, 0),
-        (2, cmty_title_str(), "TEXT", 0, None, 0),
-        (3, owner_name_str(), "TEXT", 0, None, 0),
-        (4, acct_name_str(), "TEXT", 0, None, 0),
-    ]
-    print(f"      {br00011_db_columns=}")
-    print(f"{br00011_expected_columns=}")
-    assert br00011_db_columns == br00011_expected_columns
-    cursor.execute(f"SELECT * FROM {br00011_staging_tablename}")
-    br00011_db_rows = cursor.fetchall()
-    expected_data = [
-        (sue_inx, event3, accord23_str, bob_inx, bob_inx),
-        (sue_inx, event3, accord23_str, yao_inx, bob_inx),
-        (sue_inx, event3, accord23_str, yao_inx, yao_inx),
-        (sue_inx, event7, accord23_str, yao_inx, yao_inx),
-    ]
-    assert br00011_db_rows == expected_data
-    cmty_db_conn.close()
+    with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+        print(f"{type(cmty_db_conn)=}")
+        assert cmty_db_conn != None
+        cursor = cmty_db_conn.cursor()
+        cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
+        br00011_db_columns = cursor.fetchall()
+        br00011_expected_columns = [
+            (0, face_name_str(), "TEXT", 0, None, 0),
+            (1, event_int_str(), "INTEGER", 0, None, 0),
+            (2, cmty_title_str(), "TEXT", 0, None, 0),
+            (3, owner_name_str(), "TEXT", 0, None, 0),
+            (4, acct_name_str(), "TEXT", 0, None, 0),
+        ]
+        print(f"      {br00011_db_columns=}")
+        print(f"{br00011_expected_columns=}")
+        assert br00011_db_columns == br00011_expected_columns
+        cursor.execute(f"SELECT * FROM {br00011_staging_tablename}")
+        br00011_db_rows = cursor.fetchall()
+        expected_data = [
+            (sue_inx, event3, accord23_str, bob_inx, bob_inx),
+            (sue_inx, event3, accord23_str, yao_inx, bob_inx),
+            (sue_inx, event3, accord23_str, yao_inx, yao_inx),
+            (sue_inx, event7, accord23_str, yao_inx, yao_inx),
+        ]
+        assert br00011_db_rows == expected_data
 
 
 def test_WorldUnit_memory_cmty_db_conn_CreatesCmtyStagingTables(
