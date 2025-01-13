@@ -175,7 +175,8 @@ class WorldUnit:
         etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
 
     def memory_cmty_db_conn(self):
-        conn = sqlite3_connect(":memory:")
+        db_path = create_path(self._cmty_mstr_dir, "staging.db")
+        conn = sqlite3_connect(db_path)
         etl_aft_face_csv_files_to_cmty_db(conn, self._faces_aft_dir)
         etl_idea_staging_to_cmty_tables(conn)
         return conn
