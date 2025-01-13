@@ -96,32 +96,34 @@ def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV(
     fizz_world = worldunit_shop("Fizz")
 
     # WHEN / THEN
-    if platform_system() != "Linux":  # bug on github commit
-        with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
-            print(f"{type(cmty_db_conn)=}")
-            assert cmty_db_conn != None
-            cursor = cmty_db_conn.cursor()
-            cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
-            br00011_db_columns = cursor.fetchall()
-            br00011_expected_columns = [
-                (0, face_name_str(), "TEXT", 0, None, 0),
-                (1, event_int_str(), "INTEGER", 0, None, 0),
-                (2, cmty_title_str(), "TEXT", 0, None, 0),
-                (3, owner_name_str(), "TEXT", 0, None, 0),
-                (4, acct_name_str(), "TEXT", 0, None, 0),
-            ]
-            print(f"      {br00011_db_columns=}")
-            print(f"{br00011_expected_columns=}")
-            assert br00011_db_columns == br00011_expected_columns
-            cursor.execute(f"SELECT * FROM {br00011_staging_tablename}")
-            br00011_db_rows = cursor.fetchall()
-            expected_data = [
-                (sue_inx, event3, accord23_str, bob_inx, bob_inx),
-                (sue_inx, event3, accord23_str, yao_inx, bob_inx),
-                (sue_inx, event3, accord23_str, yao_inx, yao_inx),
-                (sue_inx, event7, accord23_str, yao_inx, yao_inx),
-            ]
-            assert br00011_db_rows == expected_data
+    # if platform_system() != "Linux":  # bug on github commit
+    # with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+    cmty_db_conn = fizz_world.memory_cmty_db_conn()
+    print(f"{type(cmty_db_conn)=}")
+    assert cmty_db_conn != None
+    cursor = cmty_db_conn.cursor()
+    cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
+    br00011_db_columns = cursor.fetchall()
+    br00011_expected_columns = [
+        (0, face_name_str(), "TEXT", 0, None, 0),
+        (1, event_int_str(), "INTEGER", 0, None, 0),
+        (2, cmty_title_str(), "TEXT", 0, None, 0),
+        (3, owner_name_str(), "TEXT", 0, None, 0),
+        (4, acct_name_str(), "TEXT", 0, None, 0),
+    ]
+    print(f"      {br00011_db_columns=}")
+    print(f"{br00011_expected_columns=}")
+    assert br00011_db_columns == br00011_expected_columns
+    cursor.execute(f"SELECT * FROM {br00011_staging_tablename}")
+    br00011_db_rows = cursor.fetchall()
+    expected_data = [
+        (sue_inx, event3, accord23_str, bob_inx, bob_inx),
+        (sue_inx, event3, accord23_str, yao_inx, bob_inx),
+        (sue_inx, event3, accord23_str, yao_inx, yao_inx),
+        (sue_inx, event7, accord23_str, yao_inx, yao_inx),
+    ]
+    assert br00011_db_rows == expected_data
+    cmty_db_conn.close()
 
 
 def test_WorldUnit_memory_cmty_db_conn_CreatesCmtyStagingTables(
@@ -314,41 +316,43 @@ def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyAggTables(env_dir_setup_clea
 
     # WHEN / THEN
     if platform_system() != "Linux":  # bug on github commit
-        with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
-            cursor = cmty_db_conn.cursor()
-            # cmtyunit_stage_tablename = f"{cmtyunit_str()}_staging"
-            # cursor.execute(f"SELECT * FROM {cmtyunit_stage_tablename};")
-            # cmtyunit_stage_rows = cursor.fetchall()
-            # assert len(cmtyunit_stage_rows) == 4
+        # with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+        cmty_db_conn = fizz_world.memory_cmty_db_conn()
+        cursor = cmty_db_conn.cursor()
+        # cmtyunit_stage_tablename = f"{cmtyunit_str()}_staging"
+        # cursor.execute(f"SELECT * FROM {cmtyunit_stage_tablename};")
+        # cmtyunit_stage_rows = cursor.fetchall()
+        # assert len(cmtyunit_stage_rows) == 4
 
-            cmtyunit_agg_tablename = f"{cmtyunit_str()}_agg"
-            cursor.execute(f"SELECT * FROM {cmtyunit_agg_tablename};")
-            cmtyunit_agg_rows = cursor.fetchall()
-            expected_row1 = (
-                accord23_str,  # cmty_title
-                None,  # fund_coin
-                None,  # penny
-                None,  # respect_bit
-                None,  # current_time
-                None,  # bridge
-                None,  # c400_number
-                None,  # yr1_jan1_offset
-                None,  # monthday_distortion
-                None,  # timeline_title
-            )
-            expected_row2 = (
-                accord45_str,  # cmty_title
-                None,  # fund_coin
-                None,  # penny
-                None,  # respect_bit
-                None,  # current_time
-                None,  # bridge
-                None,  # c400_number
-                None,  # yr1_jan1_offset
-                None,  # monthday_distortion
-                None,  # timeline_title
-            )
-            assert cmtyunit_agg_rows == [expected_row1, expected_row2]
+        cmtyunit_agg_tablename = f"{cmtyunit_str()}_agg"
+        cursor.execute(f"SELECT * FROM {cmtyunit_agg_tablename};")
+        cmtyunit_agg_rows = cursor.fetchall()
+        expected_row1 = (
+            accord23_str,  # cmty_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        expected_row2 = (
+            accord45_str,  # cmty_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        assert cmtyunit_agg_rows == [expected_row1, expected_row2]
+        cmty_db_conn.close()
 
 
 def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateStagingFiles(

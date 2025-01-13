@@ -43,7 +43,7 @@ from src.f10_etl.transformers import (
     etl_cmty_agg_tables_to_cmty_csvs,
 )
 from dataclasses import dataclass
-from sqlite3 import connect as sqlite3_connect
+from sqlite3 import connect as sqlite3_connect, Connection
 
 
 def get_default_worlds_dir() -> str:
@@ -174,7 +174,7 @@ class WorldUnit:
     def aft_face_ideas_to_csv_files(self):
         etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
 
-    def memory_cmty_db_conn(self):
+    def memory_cmty_db_conn(self) -> Connection:
         db_path = create_path(self._cmty_mstr_dir, "staging.db")
         conn = sqlite3_connect(db_path)
         etl_aft_face_csv_files_to_cmty_db(conn, self._faces_aft_dir)
