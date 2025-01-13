@@ -98,7 +98,6 @@ def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV(
     # WHEN / THEN
     # if platform_system() != "Linux":  # bug on github commit
     with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
-        print(f"{type(cmty_db_conn)=}")
         assert cmty_db_conn != None
         cursor = cmty_db_conn.cursor()
         cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
@@ -110,6 +109,7 @@ def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV(
             (3, owner_name_str(), "TEXT", 0, None, 0),
             (4, acct_name_str(), "TEXT", 0, None, 0),
         ]
+        print(f"{type(cmty_db_conn)=}")
         print(f"      {br00011_db_columns=}")
         print(f"{br00011_expected_columns=}")
         assert br00011_db_columns == br00011_expected_columns
