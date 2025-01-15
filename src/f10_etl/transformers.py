@@ -751,6 +751,7 @@ def etl_aft_face_csv_files_to_cmty_db(conn: sqlite3_Connection, faces_aft_dir: s
         for idea_number in sorted(get_idea_numbers()):
             csv_filename = f"{idea_number}.csv"
             csv_path = create_path(face_dir, csv_filename)
+            print(f"{os_path_exists(csv_path)=} {csv_path=}")
             if os_path_exists(csv_path):
                 insert_idea_csv(csv_path, conn, f"{idea_number}_staging")
     print(f"create connection {id(conn)=} etl_aft_face_csv_files_to_cmty_db")
