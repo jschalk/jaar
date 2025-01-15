@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, cmty_title_str
-from src.f07_cmty.cmty_config import cumlative_minute_str, hour_title_str
+from src.f04_gift.atom_config import face_name_str, fiscal_title_str
+from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.pandas_tool import get_sheet_names, upsert_sheet, boat_staging_str
 from src.f11_world.world import worldunit_shop
@@ -27,7 +27,7 @@ def test_WorldUnit_ocean_to_boat_staging_CreatesboatFiles(env_dir_setup_cleanup)
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        cmty_title_str(),
+        fiscal_title_str(),
         hour_title_str(),
     ]
     accord23_str = "accord23"
@@ -38,7 +38,7 @@ def test_WorldUnit_ocean_to_boat_staging_CreatesboatFiles(env_dir_setup_cleanup)
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        cmty_title_str(),
+        fiscal_title_str(),
     ]
     incom_row1 = [sue_str, event_1, minute_360, accord23_str]
     incom_row2 = [sue_str, event_1, minute_420, accord23_str]

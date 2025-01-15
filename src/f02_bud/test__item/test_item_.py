@@ -1,6 +1,6 @@
 from src.f01_road.finance import default_fund_coin_if_None
 from src.f01_road.road import (
-    get_default_cmty_title as root_title,
+    get_default_fiscal_title as root_title,
     create_road,
     default_bridge_if_None,
 )
@@ -55,7 +55,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit._fund_onset is None
     assert x_itemunit._fund_cease is None
     assert x_itemunit._root is None
-    assert x_itemunit._bud_cmty_title is None
+    assert x_itemunit._bud_fiscal_title is None
     assert x_itemunit._healerlink_ratio is None
 
 
@@ -68,7 +68,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit._kids == {}
     assert x_itemunit.mass == 1
     assert x_itemunit._item_title is None
-    assert x_itemunit._bud_cmty_title == root_title()
+    assert x_itemunit._bud_fiscal_title == root_title()
     assert x_itemunit._uid is None
     assert x_itemunit.begin is None
     assert x_itemunit.close is None

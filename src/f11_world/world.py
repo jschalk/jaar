@@ -8,12 +8,12 @@ from src.f01_road.finance_tran import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
     FaceName,
     EventInt,
-    CmtyTitle,
+    FiscalTitle,
     WorldID,
     TimeLineTitle,
     get_default_world_id,
 )
-from src.f07_cmty.cmty import CmtyUnit
+from src.f07_fiscal.fiscal import FiscalUnit
 from src.f10_etl.transformers import (
     etl_ocean_to_boat_staging,
     etl_boat_staging_to_boat_agg,
@@ -35,13 +35,13 @@ from src.f10_etl.transformers import (
     etl_bow_event_ideas_to_inx_events,
     etl_bow_inx_event_ideas_to_aft_faces,
     etl_aft_face_ideas_to_aft_event_ideas,
-    etl_aft_event_ideas_to_cmty_ideas,
+    etl_aft_event_ideas_to_fiscal_ideas,
     etl_aft_face_ideas_to_csv_files,
-    etl_aft_face_csv_files_to_cmty_db,
-    etl_idea_staging_to_cmty_tables,
-    etl_cmty_staging_tables_to_cmty_csvs,
-    etl_cmty_agg_tables_to_cmty_csvs,
-    etl_cmty_csvs_to_jsons,
+    etl_aft_face_csv_files_to_fiscal_db,
+    etl_idea_staging_to_fiscal_tables,
+    etl_fiscal_staging_tables_to_fiscal_csvs,
+    etl_fiscal_agg_tables_to_fiscal_csvs,
+    etl_fiscal_csvs_to_jsons,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -51,7 +51,7 @@ def get_default_worlds_dir() -> str:
     return "src/f11_world/examples/worlds"
 
 
-class _set_cmty_pidgin_Exception(Exception):
+class _set_fiscal_pidgin_Exception(Exception):
     pass
 
 
@@ -67,8 +67,8 @@ class WorldUnit:
     _world_dir: str = None
     _ocean_dir: str = None
     _boat_dir: str = None
-    _cmty_mstr_dir: str = None
-    _cmtyunits: set[CmtyTitle] = None
+    _fiscal_mstr_dir: str = None
+    _fiscalunits: set[FiscalTitle] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
     def set_event(self, event_int: EventInt, face_name: FaceName):
@@ -99,12 +99,12 @@ class WorldUnit:
         self._faces_bow_dir = create_path(self._world_dir, "faces_bow")
         self._faces_aft_dir = create_path(self._world_dir, "faces_aft")
         self._boat_dir = create_path(self._world_dir, "boat")
-        self._cmty_mstr_dir = create_path(self._world_dir, "cmty_mstr")
+        self._fiscal_mstr_dir = create_path(self._world_dir, "fiscal_mstr")
         set_dir(self._world_dir)
         set_dir(self._faces_bow_dir)
         set_dir(self._faces_aft_dir)
         set_dir(self._boat_dir)
-        set_dir(self._cmty_mstr_dir)
+        set_dir(self._fiscal_mstr_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineTitle, TimeConversion]:
         return self.timeconversions
@@ -169,25 +169,27 @@ class WorldUnit:
     def aft_face_ideas_to_aft_event_ideas(self):
         etl_aft_face_ideas_to_aft_event_ideas(self._faces_aft_dir)
 
-    def aft_event_ideas_to_cmty_ideas(self):
-        etl_aft_event_ideas_to_cmty_ideas(self._faces_aft_dir)
+    def aft_event_ideas_to_fiscal_ideas(self):
+        etl_aft_event_ideas_to_fiscal_ideas(self._faces_aft_dir)
 
     def aft_face_ideas_to_csv_files(self):
         etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
 
-    def memory_cmty_db_conn(self) -> sqlite3_Connection:
+    def memory_fiscal_db_conn(self) -> sqlite3_Connection:
         conn = sqlite3_connect(":memory:")
-        etl_aft_face_csv_files_to_cmty_db(conn, self._faces_aft_dir)
-        etl_idea_staging_to_cmty_tables(conn)
+        etl_aft_face_csv_files_to_fiscal_db(conn, self._faces_aft_dir)
+        etl_idea_staging_to_fiscal_tables(conn)
         return conn
 
-    def aft_faces_ideas_to_cmty_mstr_csvs(self):
-        with self.memory_cmty_db_conn() as cmty_db_conn:
-            etl_cmty_staging_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
-            etl_cmty_agg_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
+    def aft_faces_ideas_to_fiscal_mstr_csvs(self):
+        with self.memory_fiscal_db_conn() as fiscal_db_conn:
+            etl_fiscal_staging_tables_to_fiscal_csvs(
+                fiscal_db_conn, self._fiscal_mstr_dir
+            )
+            etl_fiscal_agg_tables_to_fiscal_csvs(fiscal_db_conn, self._fiscal_mstr_dir)
 
-    def cmty_csvs_to_jsons(self):
-        etl_cmty_csvs_to_jsons(self._cmty_mstr_dir)
+    def fiscal_csvs_to_jsons(self):
+        etl_fiscal_csvs_to_jsons(self._fiscal_mstr_dir)
 
     def get_dict(self) -> dict:
         return {
@@ -204,7 +206,7 @@ def worldunit_shop(
     ocean_dir: str = None,
     current_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineTitle, TimeConversion] = None,
-    _cmtyunits: set[CmtyTitle] = None,
+    _fiscalunits: set[FiscalTitle] = None,
 ) -> WorldUnit:
     if world_id is None:
         world_id = get_default_world_id()
@@ -216,7 +218,7 @@ def worldunit_shop(
         current_time=get_0_if_None(current_time),
         timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
-        _cmtyunits=get_empty_set_if_None(_cmtyunits),
+        _fiscalunits=get_empty_set_if_None(_fiscalunits),
         _ocean_dir=ocean_dir,
         _pidgin_events={},
     )
@@ -226,5 +228,5 @@ def worldunit_shop(
     return x_worldunit
 
 
-def init_cmtyunits_from_dirs(x_dirs: list[str]) -> list[CmtyUnit]:
+def init_fiscalunits_from_dirs(x_dirs: list[str]) -> list[FiscalUnit]:
     return []

@@ -16,7 +16,7 @@ class TitleUnit(str):
         return self.find(default_bridge_if_None(bridge)) == -1
 
 
-class CmtyTitle(TitleUnit):  # Created to help track the concept
+class FiscalTitle(TitleUnit):  # Created to help track the concept
     pass
 
 
@@ -221,7 +221,7 @@ def get_forefather_roads(road: RoadUnit) -> dict[RoadUnit]:
     return {a_road: None for a_road in ancestor_roads}
 
 
-def get_default_cmty_title() -> CmtyTitle:
+def get_default_fiscal_title() -> FiscalTitle:
     return "ZZ"
 
 

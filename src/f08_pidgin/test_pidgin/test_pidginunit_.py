@@ -11,7 +11,7 @@ from src.f04_gift.atom_config import (
     awardee_tag_str,
     base_str,
     face_name_str,
-    cmty_title_str,
+    fiscal_title_str,
     fund_coin_str,
     healer_name_str,
     group_label_str,
@@ -23,8 +23,8 @@ from src.f04_gift.atom_config import (
     road_str,
     team_tag_str,
 )
-from src.f07_cmty.cmty_config import (
-    get_cmty_args_jaar_types,
+from src.f07_fiscal.fiscal_config import (
+    get_fiscal_args_jaar_types,
     weekday_title_str,
     month_title_str,
     hour_title_str,
@@ -56,7 +56,7 @@ from copy import deepcopy as copy_deepcopy
 
 
 # The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
-# initialize cmtyunits and output acct metrics such as calendars, financial status, healer status
+# initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
 def test_get_pidgin_args_jaar_types_ReturnsObj():
     # ESTABLISH / WHEN
     pidgin_args_jaar_types = get_pidgin_args_jaar_types()
@@ -83,7 +83,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("denom") == "int"
     assert pidgin_args_jaar_types.get("divisor") == "int"
     assert pidgin_args_jaar_types.get("face_name") == type_AcctName_str()
-    assert pidgin_args_jaar_types.get("cmty_title") == type_TitleUnit_str()
+    assert pidgin_args_jaar_types.get("fiscal_title") == type_TitleUnit_str()
     assert pidgin_args_jaar_types.get("fnigh") == "float"
     assert pidgin_args_jaar_types.get("fopen") == "float"
     assert pidgin_args_jaar_types.get("fund_coin") == "float"
@@ -124,20 +124,20 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     assert pidgin_args_jaar_types.get("bridge") == "str"
     assert pidgin_args_jaar_types.get("yr1_jan1_offset") == "int"
 
-    # make sure it pidgin_arg_jaar_types has all cmty and all atom args
+    # make sure it pidgin_arg_jaar_types has all fiscal and all atom args
     pidgin_args = set(pidgin_args_jaar_types.keys())
     atom_args = set(get_atom_args_jaar_types().keys())
-    cmty_args = set(get_cmty_args_jaar_types().keys())
+    fiscal_args = set(get_fiscal_args_jaar_types().keys())
     assert atom_args.issubset(pidgin_args)
-    assert cmty_args.issubset(pidgin_args)
-    assert atom_args.intersection(cmty_args) == {
+    assert fiscal_args.issubset(pidgin_args)
+    assert atom_args.intersection(fiscal_args) == {
         acct_name_str(),
         fund_coin_str(),
         penny_str(),
         respect_bit_str(),
     }
-    assert atom_args.union(cmty_args) != pidgin_args
-    assert atom_args.union(cmty_args).union({"face_name"}) == pidgin_args
+    assert atom_args.union(fiscal_args) != pidgin_args
+    assert atom_args.union(fiscal_args).union({"face_name"}) == pidgin_args
     assert check_jaar_types_are_correct()
     # assert pidgin_args_jaar_types.keys() == get_atom_args_category_mapping().keys()
     # assert all_atom_args_jaar_types_are_correct(x_jaar_types)
@@ -146,7 +146,7 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
 def check_jaar_types_are_correct() -> bool:
     pidgin_args_jaar_types = get_pidgin_args_jaar_types()
     atom_args_jaar_types = get_atom_args_jaar_types()
-    cmty_args_jaar_types = get_cmty_args_jaar_types()
+    fiscal_args_jaar_types = get_fiscal_args_jaar_types()
     for pidgin_arg, pidgin_type in pidgin_args_jaar_types.items():
         print(f"check {pidgin_arg=} {pidgin_type=}")
         if atom_args_jaar_types.get(pidgin_arg) not in [None, pidgin_type]:
@@ -154,9 +154,9 @@ def check_jaar_types_are_correct() -> bool:
                 f"{pidgin_arg=} {pidgin_type=} {atom_args_jaar_types.get(pidgin_arg)=}"
             )
             return False
-        if cmty_args_jaar_types.get(pidgin_arg) not in [None, pidgin_type]:
+        if fiscal_args_jaar_types.get(pidgin_arg) not in [None, pidgin_type]:
             print(
-                f"{pidgin_arg=} {pidgin_type=} {cmty_args_jaar_types.get(pidgin_arg)=}"
+                f"{pidgin_arg=} {pidgin_type=} {fiscal_args_jaar_types.get(pidgin_arg)=}"
             )
             return False
     return True
@@ -188,7 +188,7 @@ def test_pidginable_atom_args_ReturnsObj():
         awardee_tag_str(),
         base_str(),
         face_name_str(),
-        cmty_title_str(),
+        fiscal_title_str(),
         group_label_str(),
         healer_name_str(),
         hour_title_str(),

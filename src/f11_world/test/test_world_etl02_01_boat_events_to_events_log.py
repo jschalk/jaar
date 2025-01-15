@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, cmty_title_str
-from src.f07_cmty.cmty_config import (
+from src.f04_gift.atom_config import face_name_str, fiscal_title_str
+from src.f07_fiscal.fiscal_config import (
     cumlative_minute_str,
     hour_title_str,
     weekday_title_str,
@@ -35,7 +35,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
     idea_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_title_str(),
+        fiscal_title_str(),
         hour_title_str(),
         cumlative_minute_str(),
     ]
@@ -114,14 +114,14 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleIde
     idea3_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_title_str(),
+        fiscal_title_str(),
         hour_title_str(),
         cumlative_minute_str(),
     ]
     idea5_columns = [
         event_int_str(),
         face_name_str(),
-        cmty_title_str(),
+        fiscal_title_str(),
         weekday_title_str(),
         weekday_order_str(),
     ]

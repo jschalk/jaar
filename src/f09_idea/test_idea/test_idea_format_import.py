@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path as f_path
 from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import (
-    cmty_title_str,
+    fiscal_title_str,
     owner_name_str,
     acct_name_str,
     debtit_belief_str,
@@ -22,7 +22,7 @@ from src.f09_idea.idea_config import (
 from src.f09_idea.pandas_tool import open_csv
 from src.f09_idea.examples.idea_env import (
     idea_examples_dir,
-    idea_cmtys_dir,
+    idea_fiscals_dir,
     idea_env_setup_cleanup,
 )
 
@@ -38,8 +38,8 @@ def test_open_csv_ReturnsObjWhenFileExists(idea_env_setup_cleanup):
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    accord_cmty_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_cmty_title)
+    accord_fiscal_title = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fiscal_title)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -54,19 +54,19 @@ def test_open_csv_ReturnsObjWhenFileExists(idea_env_setup_cleanup):
     array_headers = list(acct_dataframe.columns)
     acct_idearef = get_idearef_obj(j1_ideaname)
     assert array_headers == acct_idearef.get_headers_list()
-    assert acct_dataframe.loc[0, cmty_title_str()] == accord_cmty_title
+    assert acct_dataframe.loc[0, fiscal_title_str()] == accord_fiscal_title
     assert acct_dataframe.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[0, acct_name_str()] == bob_str
     assert acct_dataframe.loc[0, credit_belief_str()] == bob_credit_belief
     assert acct_dataframe.loc[0, debtit_belief_str()] == bob_debtit_belief
 
-    assert acct_dataframe.loc[1, cmty_title_str()] == accord_cmty_title
+    assert acct_dataframe.loc[1, fiscal_title_str()] == accord_fiscal_title
     assert acct_dataframe.loc[1, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[1, acct_name_str()] == sue_str
     assert acct_dataframe.loc[1, credit_belief_str()] == sue_credit_belief
     assert acct_dataframe.loc[1, debtit_belief_str()] == sue_debtit_belief
 
-    assert acct_dataframe.loc[2, cmty_title_str()] == accord_cmty_title
+    assert acct_dataframe.loc[2, fiscal_title_str()] == accord_fiscal_title
     assert acct_dataframe.loc[2, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[2, acct_name_str()] == yao_str
     assert acct_dataframe.loc[2, credit_belief_str()] == yao_credit_belief
@@ -100,8 +100,8 @@ def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvToVoice(
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    accord_cmty_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_cmty_title)
+    accord_fiscal_title = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fiscal_title)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -110,12 +110,14 @@ def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvToVoice(
     csv_example_path = f_path(idea_examples_dir(), name_filename)
     print(f"{csv_example_path}")
     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
-    sue_hubunit = hubunit_shop(idea_cmtys_dir(), accord_cmty_title, owner_name=sue_str)
-    # Open CmtyUnit and confirm voice BudUnit does not exist
+    sue_hubunit = hubunit_shop(
+        idea_fiscals_dir(), accord_fiscal_title, owner_name=sue_str
+    )
+    # Open FiscalUnit and confirm voice BudUnit does not exist
     assert not sue_hubunit.voice_file_exists()
 
     # WHEN
-    load_idea_csv(sue_hubunit.cmtys_dir, idea_examples_dir(), name_filename)
+    load_idea_csv(sue_hubunit.fiscals_dir, idea_examples_dir(), name_filename)
 
     # THEN
     # assert voice Budunit now exists
@@ -151,8 +153,8 @@ def test_load_idea_csv_csvToVoice(
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    accord_cmty_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_cmty_title)
+    accord_fiscal_title = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fiscal_title)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -161,12 +163,14 @@ def test_load_idea_csv_csvToVoice(
     csv_example_path = f_path(idea_examples_dir(), name_filename)
     print(f"{csv_example_path}")
     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
-    sue_hubunit = hubunit_shop(idea_cmtys_dir(), accord_cmty_title, owner_name=sue_str)
-    # Open CmtyUnit and confirm voice BudUnit does not exist
+    sue_hubunit = hubunit_shop(
+        idea_fiscals_dir(), accord_fiscal_title, owner_name=sue_str
+    )
+    # Open FiscalUnit and confirm voice BudUnit does not exist
     assert not sue_hubunit.voice_file_exists()
 
     # WHEN
-    load_idea_csv(sue_hubunit.cmtys_dir, idea_examples_dir(), name_filename)
+    load_idea_csv(sue_hubunit.fiscals_dir, idea_examples_dir(), name_filename)
 
     # THEN
     # assert voice Budunit now exists
@@ -195,8 +199,8 @@ def test_load_idea_csv_csvToVoice(
 #     # ESTABLISH
 #     sue_str = "Sue"
 #     bob_str = "Bob"
-#     accord_cmty_title = "accord56"
-#     sue_budunit = budunit_shop(sue_str, accord_cmty_title)
+#     accord_fiscal_title = "accord56"
+#     sue_budunit = budunit_shop(sue_str, accord_fiscal_title)
 #     sue_budunit.add_acctunit(sue_str)
 #     sue_budunit.add_acctunit(bob_str)
 #     j1_ideaname = idea_format_00021_bud_acctunit_v0_0_0()
@@ -204,22 +208,22 @@ def test_load_idea_csv_csvToVoice(
 #     csv_example_path = f_path(idea_examples_dir(), name_filename)
 #     print(f"{csv_example_path}")
 #     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
-#     sue_hubunit = hubunit_shop(idea_cmtys_dir(), accord_cmty_title, owner_name=sue_str)
-#     sue_hubunit.save_voice_bud(budunit_shop(sue_str, accord_cmty_title))
+#     sue_hubunit = hubunit_shop(idea_fiscals_dir(), accord_fiscal_title, owner_name=sue_str)
+#     sue_hubunit.save_voice_bud(budunit_shop(sue_str, accord_fiscal_title))
 #     sue_hubunit._create_initial_gift_files_from_voice()
 #     old_sue_voice = sue_hubunit.get_voice_bud()
 #     old_sue_voice.add_acctunit(sue_str)
 #     sue_hubunit.save_voice_bud(old_sue_voice)
 
 #     sue_hubunit.initialize_gift_voice_files()
-#     # Open CmtyUnit and confirm voice BudUnit does not exist
+#     # Open FiscalUnit and confirm voice BudUnit does not exist
 #     assert sue_hubunit.voice_file_exists()
 #     assert sue_hubunit.get_voice_bud().acct_exists(sue_str)
 #     assert not sue_hubunit.get_voice_bud().acct_exists(bob_str)
 #     assert sue_hubunit.get_max_gift_file_number() == 3
 
 #     # WHEN
-#     load_idea_csv(sue_hubunit.cmtys_dir, idea_examples_dir(), name_filename)
+#     load_idea_csv(sue_hubunit.fiscals_dir, idea_examples_dir(), name_filename)
 
 #     # THEN
 #     # assert voice Budunit acctunit now exists

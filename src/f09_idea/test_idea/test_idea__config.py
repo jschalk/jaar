@@ -31,7 +31,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_update,
     face_name_str,
-    cmty_title_str,
+    fiscal_title_str,
     owner_name_str,
     acct_name_str,
     group_label_str,
@@ -68,16 +68,16 @@ from src.f04_gift.atom_config import (
     take_force_str,
 )
 
-from src.f07_cmty.cmty_config import (
-    get_cmty_args_category_mapping,
-    get_cmty_config_dict,
-    get_cmty_categorys,
-    cmtyunit_str,
-    cmty_deal_episode_str,
-    cmty_cashbook_str,
-    cmty_timeline_hour_str,
-    cmty_timeline_month_str,
-    cmty_timeline_weekday_str,
+from src.f07_fiscal.fiscal_config import (
+    get_fiscal_args_category_mapping,
+    get_fiscal_config_dict,
+    get_fiscal_categorys,
+    fiscalunit_str,
+    fiscal_deal_episode_str,
+    fiscal_cashbook_str,
+    fiscal_timeline_hour_str,
+    fiscal_timeline_month_str,
+    fiscal_timeline_weekday_str,
     current_time_str,
     amount_str,
     month_title_str,
@@ -140,7 +140,7 @@ from src.f09_idea.idea_config import (
     idea_format_00021_bud_acctunit_v0_0_0,
     idea_format_00020_bud_acct_membership_v0_0_0,
     idea_format_00013_itemunit_v0_0_0,
-    get_bud_ideas_with_only_cmty_title,
+    get_bud_ideas_with_only_fiscal_title,
 )
 from os import getcwd as os_getcwd
 
@@ -161,7 +161,7 @@ def test_str_functions_ReturnObj():
     assert delete_insert_str() == "DELETE_INSERT"
     assert delete_update_str() == "DELETE_UPDATE"
 
-    assert get_idea_types() == {budunit_str(), cmtyunit_str(), pidginunit_str()}
+    assert get_idea_types() == {budunit_str(), fiscalunit_str(), pidginunit_str()}
 
 
 def test_get_idea_elements_sort_order_ReturnsObj():
@@ -172,7 +172,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[0] == idea_number_str()
     assert table_sorting_priority[1] == face_name_str()
     assert table_sorting_priority[2] == event_int_str()
-    assert table_sorting_priority[3] == cmty_title_str()
+    assert table_sorting_priority[3] == fiscal_title_str()
     assert table_sorting_priority[4] == owner_name_str()
     assert table_sorting_priority[5] == acct_name_str()
     assert table_sorting_priority[6] == group_label_str()
@@ -246,19 +246,19 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert len(table_sorting_priority) == 74
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
-    cmty_args = set(get_cmty_args_category_mapping().keys())
-    print(f"{cmty_args=}")
-    print(f"{cmty_args.difference(set(table_sorting_priority))=}")
-    assert cmty_args.issubset(set(table_sorting_priority))
+    fiscal_args = set(get_fiscal_args_category_mapping().keys())
+    print(f"{fiscal_args=}")
+    print(f"{fiscal_args.difference(set(table_sorting_priority))=}")
+    assert fiscal_args.issubset(set(table_sorting_priority))
     pidgin_args = set(get_pidgin_args_category_mapping().keys())
     assert pidgin_args.issubset(set(table_sorting_priority))
-    atom_cmty_pidgin_args = atom_args
-    atom_cmty_pidgin_args.update(cmty_args)
-    atom_cmty_pidgin_args.update(pidgin_args)
+    atom_fiscal_pidgin_args = atom_args
+    atom_fiscal_pidgin_args.update(fiscal_args)
+    atom_fiscal_pidgin_args.update(pidgin_args)
     table_sorting_priority.remove(idea_number_str())
     table_sorting_priority.remove(event_int_str())
     table_sorting_priority.remove(face_name_str())
-    assert atom_cmty_pidgin_args == set(table_sorting_priority)
+    assert atom_fiscal_pidgin_args == set(table_sorting_priority)
 
 
 def test_get_idea_sqlite_types_ReturnsObj():
@@ -270,7 +270,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(idea_number_str()) == "TEXT"
     assert sqlite_types.get(face_name_str()) == "TEXT"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
-    assert sqlite_types.get(cmty_title_str()) == "TEXT"
+    assert sqlite_types.get(fiscal_title_str()) == "TEXT"
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_label_str()) == "TEXT"
@@ -367,12 +367,12 @@ def test_get_idea_config_dict_ReturnsObj():
     # THEN
     assert x_idea_config
     idea_config_categorys = set(x_idea_config.keys())
-    assert cmtyunit_str() in idea_config_categorys
-    assert cmty_deal_episode_str() in idea_config_categorys
-    assert cmty_cashbook_str() in idea_config_categorys
-    assert cmty_timeline_hour_str() in idea_config_categorys
-    assert cmty_timeline_month_str() in idea_config_categorys
-    assert cmty_timeline_weekday_str() in idea_config_categorys
+    assert fiscalunit_str() in idea_config_categorys
+    assert fiscal_deal_episode_str() in idea_config_categorys
+    assert fiscal_cashbook_str() in idea_config_categorys
+    assert fiscal_timeline_hour_str() in idea_config_categorys
+    assert fiscal_timeline_month_str() in idea_config_categorys
+    assert fiscal_timeline_weekday_str() in idea_config_categorys
     assert bud_acct_membership_str() in idea_config_categorys
     assert bud_acctunit_str() in idea_config_categorys
     assert bud_item_awardlink_str() in idea_config_categorys
@@ -388,7 +388,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert map_title_str() in idea_config_categorys
     assert map_road_str() in idea_config_categorys
     assert get_atom_categorys().issubset(idea_config_categorys)
-    assert get_cmty_categorys().issubset(idea_config_categorys)
+    assert get_fiscal_categorys().issubset(idea_config_categorys)
     assert get_pidgin_categorys().issubset(idea_config_categorys)
     assert len(x_idea_config) == 20
     _validate_idea_config(x_idea_config)
@@ -396,7 +396,7 @@ def test_get_idea_config_dict_ReturnsObj():
 
 def _validate_idea_config(x_idea_config: dict):
     atom_config_dict = get_atom_config_dict()
-    cmty_config_dict = get_cmty_config_dict()
+    fiscal_config_dict = get_fiscal_config_dict()
     pidgin_config_dict = get_pidgin_config_dict()
     # for every idea_format file there exists a unique idea_number always with leading zeros to make 5 digits
     for idea_category, idea_dict in x_idea_config.items():
@@ -411,18 +411,18 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(normal_specs_str()) is None
         if idea_dict.get(idea_type_str()) == budunit_str():
             sub_category = atom_config_dict.get(idea_category)
-        elif idea_dict.get(idea_type_str()) == cmtyunit_str():
-            sub_category = cmty_config_dict.get(idea_category)
+        elif idea_dict.get(idea_type_str()) == fiscalunit_str():
+            sub_category = fiscal_config_dict.get(idea_category)
         elif idea_dict.get(idea_type_str()) == pidginunit_str():
             sub_category = pidgin_config_dict.get(idea_category)
 
         assert idea_dict.get(allowed_crud_str()) in get_allowed_curds()
 
         if idea_category in {
-            cmty_timeline_hour_str(),
-            cmty_timeline_month_str(),
-            cmty_timeline_weekday_str(),
-            cmtyunit_str(),
+            fiscal_timeline_hour_str(),
+            fiscal_timeline_month_str(),
+            fiscal_timeline_weekday_str(),
+            fiscalunit_str(),
             map_otx2inx_str(),
             map_label_str(),
             map_name_str(),
@@ -430,7 +430,7 @@ def _validate_idea_config(x_idea_config: dict):
             map_road_str(),
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
-        elif idea_category in {cmty_deal_episode_str(), cmty_cashbook_str()}:
+        elif idea_category in {fiscal_deal_episode_str(), fiscal_cashbook_str()}:
             assert idea_dict.get(allowed_crud_str()) == insert_mulitple_str()
         elif (
             sub_category.get(atom_update()) != None
@@ -485,17 +485,17 @@ def _validate_idea_config(x_idea_config: dict):
         assert face_name_str() in idea_jkeys_keys
         assert event_int_str() in idea_jkeys_keys
         if idea_dict.get(idea_type_str()) != pidginunit_str():
-            assert cmty_title_str() in idea_jkeys_keys
+            assert fiscal_title_str() in idea_jkeys_keys
         if idea_dict.get(idea_type_str()) == budunit_str():
-            idea_jkeys_keys.remove(cmty_title_str())
+            idea_jkeys_keys.remove(fiscal_title_str())
         idea_jkeys_keys.remove(face_name_str())
         idea_jkeys_keys.remove(event_int_str())
         assert sub_jkeys_keys == idea_jkeys_keys
 
         sub_jvalues_keys = set(sub_category.get(jvalues_str()).keys())
         print(f"  {sub_jvalues_keys=}")
-        if cmty_title_str() in sub_jvalues_keys:
-            sub_jvalues_keys.remove(cmty_title_str())
+        if fiscal_title_str() in sub_jvalues_keys:
+            sub_jvalues_keys.remove(fiscal_title_str())
 
         idea_jvalues_dict = idea_dict.get(jvalues_str())
         idea_jvalues_keys = set(idea_jvalues_dict.keys())
@@ -503,7 +503,7 @@ def _validate_idea_config(x_idea_config: dict):
         # print(f"{idea_jvalues_keys=}")
         assert sub_jvalues_keys == idea_jvalues_keys
 
-        assert cmty_title_str() not in idea_jvalues_keys
+        assert fiscal_title_str() not in idea_jvalues_keys
 
         # sort_list = get_idea_elements_sort_order()
         # x_count = 0
@@ -551,7 +551,7 @@ def test_get_idea_format_filenames_ReturnsObj():
 def _validate_idea_format_files(idea_filenames: set[str]):
     valid_idea_categorys = set()
     valid_idea_categorys.update(get_atom_categorys())
-    valid_idea_categorys.update(get_cmty_categorys())
+    valid_idea_categorys.update(get_fiscal_categorys())
     valid_idea_categorys.update(get_pidgin_categorys())
     config_dict = get_idea_config_dict()
 
@@ -637,10 +637,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(map_label_str(), 1)
     # set_idea_config_json(map_title_str(), 2)
     # set_idea_config_json(map_road_str(), 3)
-    # set_idea_config_json(cmtyunit_str(), 5)
-    # set_idea_config_json(cmty_timeline_hour_str(), 6)
-    # set_idea_config_json(cmty_timeline_month_str(), 7)
-    # set_idea_config_json(cmty_timeline_weekday_str(), 8)
+    # set_idea_config_json(fiscalunit_str(), 5)
+    # set_idea_config_json(fiscal_timeline_hour_str(), 6)
+    # set_idea_config_json(fiscal_timeline_month_str(), 7)
+    # set_idea_config_json(fiscal_timeline_weekday_str(), 8)
     # set_idea_config_json(bud_acct_membership_str(), 9)
     # set_idea_config_json(bud_acctunit_str(), 10)
     # set_idea_config_json(bud_item_awardlink_str(), 11)
@@ -651,8 +651,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(bud_item_reasonunit_str(), 17)
     # set_idea_config_json(bud_itemunit_str(), 18)
     # set_idea_config_json(budunit_str(), 19)
-    # set_idea_config_json(cmty_deal_episode_str(), 20)
-    # set_idea_config_json(cmty_cashbook_str(), 21)
+    # set_idea_config_json(fiscal_deal_episode_str(), 20)
+    # set_idea_config_json(fiscal_cashbook_str(), 21)
 
     x_idea_config = get_idea_config_dict()
 
@@ -661,10 +661,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(map_label_str()).get(bo) == 1
     assert x_idea_config.get(map_title_str()).get(bo) == 2
     assert x_idea_config.get(map_road_str()).get(bo) == 3
-    assert x_idea_config.get(cmtyunit_str()).get(bo) == 5
-    assert x_idea_config.get(cmty_timeline_hour_str()).get(bo) == 6
-    assert x_idea_config.get(cmty_timeline_month_str()).get(bo) == 7
-    assert x_idea_config.get(cmty_timeline_weekday_str()).get(bo) == 8
+    assert x_idea_config.get(fiscalunit_str()).get(bo) == 5
+    assert x_idea_config.get(fiscal_timeline_hour_str()).get(bo) == 6
+    assert x_idea_config.get(fiscal_timeline_month_str()).get(bo) == 7
+    assert x_idea_config.get(fiscal_timeline_weekday_str()).get(bo) == 8
     assert x_idea_config.get(bud_acct_membership_str()).get(bo) == 9
     assert x_idea_config.get(bud_acctunit_str()).get(bo) == 10
     assert x_idea_config.get(bud_item_awardlink_str()).get(bo) == 11
@@ -675,8 +675,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(bud_item_reasonunit_str()).get(bo) == 17
     assert x_idea_config.get(bud_itemunit_str()).get(bo) == 18
     assert x_idea_config.get(budunit_str()).get(bo) == 19
-    assert x_idea_config.get(cmty_deal_episode_str()).get(bo) == 20
-    assert x_idea_config.get(cmty_cashbook_str()).get(bo) == 21
+    assert x_idea_config.get(fiscal_deal_episode_str()).get(bo) == 20
+    assert x_idea_config.get(fiscal_cashbook_str()).get(bo) == 21
 
 
 def test_get_quick_ideas_column_ref_ReturnsObj():
@@ -690,7 +690,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         event_int_str(),
         c400_number_str(),
         current_time_str(),
-        cmty_title_str(),
+        fiscal_title_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),
@@ -726,33 +726,33 @@ def test_get_idea_category_ref_ReturnsObj():
     assert get_idea_category_ref() == expected_idea_category_ref
 
 
-def _get_expected_only_cmty_title_ideas() -> set[str]:
+def _get_expected_only_fiscal_title_ideas() -> set[str]:
     idea_numbers_sorted = list(get_idea_numbers())
     idea_numbers_sorted.sort(key=lambda x: x)
-    expected_only_cmty_title_ideas = set()
+    expected_only_fiscal_title_ideas = set()
     for idea_number in idea_numbers_sorted:
         idea_format_file_name = get_idea_format_filename(idea_number)
         x_idearef = get_idearef_from_file(idea_format_file_name)
         categorys_list = x_idearef.get(categorys_str())
         bud_category_exists = False
-        cmty_category_exists = False
+        fiscal_category_exists = False
         for x_category in categorys_list:
             if x_category[:3] == "bud":
                 bud_category_exists = True
-            if x_category[:4] == "cmty":
-                cmty_category_exists = True
-        if bud_category_exists and not cmty_category_exists:
-            expected_only_cmty_title_ideas.add(idea_number)
-        print(f"{idea_number} {bud_category_exists=} {cmty_category_exists=}")
+            if x_category[:4] == "fiscal":
+                fiscal_category_exists = True
+        if bud_category_exists and not fiscal_category_exists:
+            expected_only_fiscal_title_ideas.add(idea_number)
+        print(f"{idea_number} {bud_category_exists=} {fiscal_category_exists=}")
 
-    return expected_only_cmty_title_ideas
+    return expected_only_fiscal_title_ideas
 
 
-def test_get_bud_ideas_with_only_cmty_title_ReturnObj():
+def test_get_bud_ideas_with_only_fiscal_title_ReturnObj():
     # ESTABLISH / WHEN
-    cmty_only_bud_ideas = get_bud_ideas_with_only_cmty_title()
+    fiscal_only_bud_ideas = get_bud_ideas_with_only_fiscal_title()
 
     # THEN
-    assert cmty_only_bud_ideas
-    assert cmty_only_bud_ideas == _get_expected_only_cmty_title_ideas()
-    assert len(cmty_only_bud_ideas) == 19
+    assert fiscal_only_bud_ideas
+    assert fiscal_only_bud_ideas == _get_expected_only_fiscal_title_ideas()
+    assert len(fiscal_only_bud_ideas) == 19
