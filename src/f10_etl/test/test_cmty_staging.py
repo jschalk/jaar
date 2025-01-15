@@ -194,9 +194,9 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParame
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    cmtys_dir = create_path(get_test_etl_dir(), "cmtys")
-    create_init_cmty_prime_files(cmtys_dir)
-    xp = CmtyPrimeFilePaths(cmtys_dir)
+    cmty_mstr_dir = create_path(get_test_etl_dir(), "cmty_mstr")
+    create_init_cmty_prime_files(cmty_mstr_dir)
+    xp = CmtyPrimeFilePaths(cmty_mstr_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
     accord56_cmty_title_str = "accord56"
@@ -215,22 +215,23 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParame
     cmtyunit_rows = [accord56]
     cmtyunit_df = DataFrame(cmtyunit_rows, columns=xc.cmtyunit_agg_columns)
     upsert_sheet(xp.cmtyunit_path, agg_str, cmtyunit_df)
-    cmty_jsons_dir = create_path(cmtys_dir, "cmty_jsons")
-    accord56_json_path = create_path(cmty_jsons_dir, "accord56.json")
+    cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
+    accord56_dir = create_path(cmtys_dir, "accord56")
+    accord56_json_path = create_path(accord56_dir, "accord56.json")
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
-    create_cmtyunit_jsons_from_prime_files(cmtys_dir=cmtys_dir)
+    create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir)
 
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
-    accord56_cmtyunit.cmtys_dir = cmtys_dir
+    accord56_cmtyunit.cmtys_dir = cmty_mstr_dir
     accord56_cmtyunit._set_cmty_dirs()
     assert accord56_cmtyunit
     assert accord56_cmtyunit.cmty_title == accord56_cmty_title_str
-    assert accord56_cmtyunit.cmtys_dir == cmtys_dir
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title_str, cmtys_dir)
+    assert accord56_cmtyunit.cmtys_dir == cmty_mstr_dir
+    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title_str, cmty_mstr_dir)
     assert accord56_cmtyunit.timeline == expected_cmtyunit.timeline
     assert accord56_cmtyunit == expected_cmtyunit
 
@@ -239,9 +240,9 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineUni
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    cmtys_dir = create_path(get_test_etl_dir(), "cmtys")
-    create_init_cmty_prime_files(cmtys_dir)
-    xp = CmtyPrimeFilePaths(cmtys_dir)
+    cmty_mstr_dir = create_path(get_test_etl_dir(), "cmty_mstr")
+    create_init_cmty_prime_files(cmty_mstr_dir)
+    xp = CmtyPrimeFilePaths(cmty_mstr_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
     accord56_cmty_title_str = "accord56"
@@ -265,12 +266,13 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineUni
     cmtyunit_rows = [accord56]
     cmtyunit_df = DataFrame(cmtyunit_rows, columns=xc.cmtyunit_agg_columns)
     upsert_sheet(xp.cmtyunit_path, agg_str, cmtyunit_df)
-    cmty_jsons_dir = create_path(cmtys_dir, "cmty_jsons")
-    accord56_json_path = create_path(cmty_jsons_dir, "accord56.json")
+    cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
+    accord56_dir = create_path(cmtys_dir, "accord56")
+    accord56_json_path = create_path(accord56_dir, "accord56.json")
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
-    create_cmtyunit_jsons_from_prime_files(cmtys_dir=cmtys_dir)
+    create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir)
 
     # THEN
     assert os_path_exists(accord56_json_path)
@@ -297,9 +299,9 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitPar
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    cmtys_dir = create_path(get_test_etl_dir(), "cmtys")
-    create_init_cmty_prime_files(cmtys_dir)
-    xp = CmtyPrimeFilePaths(cmtys_dir)
+    cmty_mstr_dir = create_path(get_test_etl_dir(), "cmty_mstr")
+    create_init_cmty_prime_files(cmty_mstr_dir)
+    xp = CmtyPrimeFilePaths(cmty_mstr_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
     accord56_cmty_title = "accord56"
@@ -321,12 +323,13 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitPar
     cmtyunit_rows = [accord56]
     cmtyunit_df = DataFrame(cmtyunit_rows, columns=xc.cmtyunit_agg_columns)
     upsert_sheet(xp.cmtyunit_path, agg_str, cmtyunit_df)
-    cmty_jsons_dir = create_path(cmtys_dir, "cmty_jsons")
-    accord56_json_path = create_path(cmty_jsons_dir, "accord56.json")
+    cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
+    accord56_dir = create_path(cmtys_dir, "accord56")
+    accord56_json_path = create_path(accord56_dir, "accord56.json")
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
-    create_cmtyunit_jsons_from_prime_files(cmtys_dir=cmtys_dir)
+    create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir)
 
     # THEN
     assert os_path_exists(accord56_json_path)
@@ -353,9 +356,9 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario3_cmty_timeline_weekday(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    cmtys_dir = create_path(get_test_etl_dir(), "cmtys")
-    create_init_cmty_prime_files(cmtys_dir)
-    xp = CmtyPrimeFilePaths(cmtys_dir)
+    cmty_mstr_dir = create_path(get_test_etl_dir(), "cmty_mstr")
+    create_init_cmty_prime_files(cmty_mstr_dir)
+    xp = CmtyPrimeFilePaths(cmty_mstr_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
     accord56_cmty_title = "accord56"
@@ -371,18 +374,21 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario3_cmty_timeline_weekday(
     print(f"{a56_weekday_df=}")
     upsert_sheet(xp.cmtyunit_path, agg_str, cmtyunit_df)
     upsert_sheet(xp.cmty_weekday_path, agg_str, a56_weekday_df)
-    cmty_jsons_dir = create_path(cmtys_dir, "cmty_jsons")
-    accord56_json_path = create_path(cmty_jsons_dir, "accord56.json")
+    cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
+    accord56_dir = create_path(cmtys_dir, "accord56")
+    accord56_json_path = create_path(accord56_dir, "accord56.json")
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
-    create_cmtyunit_jsons_from_prime_files(cmtys_dir=cmtys_dir)
+    create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir)
 
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(create_timeline_config())
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title, cmtys_dir, x_timelineunit)
+    expected_cmtyunit = cmtyunit_shop(
+        accord56_cmty_title, cmty_mstr_dir, x_timelineunit
+    )
     expected_cmtyunit.timeline.weekdays_config = [monday_str, tuesday_str]
     print(f"{expected_cmtyunit.timeline.weekdays_config=}")
     assert accord56_cmtyunit.timeline.weekdays_config == [monday_str, tuesday_str]
@@ -393,9 +399,9 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario4_cmty_timeline_month(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    cmtys_dir = create_path(get_test_etl_dir(), "cmtys")
-    create_init_cmty_prime_files(cmtys_dir)
-    xp = CmtyPrimeFilePaths(cmtys_dir)
+    cmty_mstr_dir = create_path(get_test_etl_dir(), "cmty_mstr")
+    create_init_cmty_prime_files(cmty_mstr_dir)
+    xp = CmtyPrimeFilePaths(cmty_mstr_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
     accord56_cmty_title = "accord56"
@@ -411,18 +417,21 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario4_cmty_timeline_month(
     print(f"{a56_month_df=}")
     upsert_sheet(xp.cmtyunit_path, agg_str, cmtyunit_df)
     upsert_sheet(xp.cmty_month_path, agg_str, a56_month_df)
-    cmty_jsons_dir = create_path(cmtys_dir, "cmty_jsons")
-    accord56_json_path = create_path(cmty_jsons_dir, "accord56.json")
+    cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
+    accord56_dir = create_path(cmtys_dir, "accord56")
+    accord56_json_path = create_path(accord56_dir, "accord56.json")
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
-    create_cmtyunit_jsons_from_prime_files(cmtys_dir=cmtys_dir)
+    create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir)
 
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(create_timeline_config())
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title, cmtys_dir, x_timelineunit)
+    expected_cmtyunit = cmtyunit_shop(
+        accord56_cmty_title, cmty_mstr_dir, x_timelineunit
+    )
     expected_cmtyunit.timeline.months_config = [[june_str, 150], [july_str, 365]]
     print(f"{expected_cmtyunit.timeline.months_config=}")
     assert accord56_cmtyunit.timeline.months_config == [
@@ -436,9 +445,9 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario5_cmty_timeline_hour(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    cmtys_dir = create_path(get_test_etl_dir(), "cmtys")
-    create_init_cmty_prime_files(cmtys_dir)
-    xp = CmtyPrimeFilePaths(cmtys_dir)
+    cmty_mstr_dir = create_path(get_test_etl_dir(), "cmty_mstr")
+    create_init_cmty_prime_files(cmty_mstr_dir)
+    xp = CmtyPrimeFilePaths(cmty_mstr_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
     accord56_cmty_title = "accord56"
@@ -456,18 +465,21 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario5_cmty_timeline_hour(
     print(f"{a56_hour_df=}")
     upsert_sheet(xp.cmtyunit_path, agg_str, cmtyunit_df)
     upsert_sheet(xp.cmty_hour_path, agg_str, a56_hour_df)
-    cmty_jsons_dir = create_path(cmtys_dir, "cmty_jsons")
-    accord56_json_path = create_path(cmty_jsons_dir, "accord56.json")
+    cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
+    accord56_dir = create_path(cmtys_dir, "accord56")
+    accord56_json_path = create_path(accord56_dir, "accord56.json")
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
-    create_cmtyunit_jsons_from_prime_files(cmtys_dir=cmtys_dir)
+    create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir)
 
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(create_timeline_config())
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title, cmtys_dir, x_timelineunit)
+    expected_cmtyunit = cmtyunit_shop(
+        accord56_cmty_title, cmty_mstr_dir, x_timelineunit
+    )
     expected_hour_config = [[a56_0hr, 60], [a56_5hr, 500], [a56_8hr, 1440]]
     expected_cmtyunit.timeline.hours_config = expected_hour_config
     print(f"{expected_cmtyunit.timeline.hours_config=}")
@@ -479,9 +491,9 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario6_cmty_cashbook(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    cmtys_dir = create_path(get_test_etl_dir(), "cmtys")
-    create_init_cmty_prime_files(cmtys_dir)
-    xp = CmtyPrimeFilePaths(cmtys_dir)
+    cmty_mstr_dir = create_path(get_test_etl_dir(), "cmty_mstr")
+    create_init_cmty_prime_files(cmty_mstr_dir)
+    xp = CmtyPrimeFilePaths(cmty_mstr_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
     accord56_cmty_title = "accord56"
@@ -502,18 +514,21 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario6_cmty_cashbook(
     # print(f"{cmty_cashbook_df=}")
     upsert_sheet(xp.cmtyunit_path, agg_str, cmtyunit_df)
     upsert_sheet(xp.cmty_cashbook_path, agg_str, cmty_cashbook_df)
-    cmty_jsons_dir = create_path(cmtys_dir, "cmty_jsons")
-    accord56_json_path = create_path(cmty_jsons_dir, "accord56.json")
+    cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
+    accord56_dir = create_path(cmtys_dir, "accord56")
+    accord56_json_path = create_path(accord56_dir, "accord56.json")
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
-    create_cmtyunit_jsons_from_prime_files(cmtys_dir=cmtys_dir)
+    create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir)
 
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(create_timeline_config())
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title, cmtys_dir, x_timelineunit)
+    expected_cmtyunit = cmtyunit_shop(
+        accord56_cmty_title, cmty_mstr_dir, x_timelineunit
+    )
     expected_cmtyunit.add_cashpurchase(sue_str, bob_str, t3, amount3)
     expected_cmtyunit.add_cashpurchase(sue_str, bob_str, t7, amount7)
     print(f"{expected_cmtyunit.cashbook=}")
@@ -526,9 +541,9 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario7_cmty_deal_episode(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    cmtys_dir = create_path(get_test_etl_dir(), "cmtys")
-    create_init_cmty_prime_files(cmtys_dir)
-    xp = CmtyPrimeFilePaths(cmtys_dir)
+    cmty_mstr_dir = create_path(get_test_etl_dir(), "cmty_mstr")
+    create_init_cmty_prime_files(cmty_mstr_dir)
+    xp = CmtyPrimeFilePaths(cmty_mstr_dir)
     xc = CmtyPrimeColumns()
     agg_str = "agg"
     accord56_cmty_title = "accord56"
@@ -547,18 +562,21 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario7_cmty_deal_episode(
     print(f"{cmty_deal_df=}")
     upsert_sheet(xp.cmtyunit_path, agg_str, cmtyunit_df)
     upsert_sheet(xp.cmty_deal_path, agg_str, cmty_deal_df)
-    cmty_jsons_dir = create_path(cmtys_dir, "cmty_jsons")
-    accord56_json_path = create_path(cmty_jsons_dir, "accord56.json")
+    cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
+    accord56_dir = create_path(cmtys_dir, "accord56")
+    accord56_json_path = create_path(accord56_dir, "accord56.json")
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
-    create_cmtyunit_jsons_from_prime_files(cmtys_dir=cmtys_dir)
+    create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir)
 
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(create_timeline_config())
-    expected_cmtyunit = cmtyunit_shop(accord56_cmty_title, cmtys_dir, x_timelineunit)
+    expected_cmtyunit = cmtyunit_shop(
+        accord56_cmty_title, cmty_mstr_dir, x_timelineunit
+    )
     expected_cmtyunit.add_dealepisode(sue_str, t3, quota3)
     expected_cmtyunit.add_dealepisode(sue_str, t7, quota7)
     print(f"{expected_cmtyunit.deallogs=}")

@@ -74,6 +74,7 @@ def test_WorldUnit_memory_cmty_db_conn_ReturnsDBConnection(
 def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_cmty_db(
     env_dir_setup_cleanup,
 ):
+    # sourcery skip: extract-method, no-conditionals-in-tests
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bob"
@@ -84,7 +85,6 @@ def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_
     fizz_world = worldunit_shop("fizz")
     sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
     br00011_str = "br00011"
-    br00011_staging_tablename = f"{br00011_str}_staging"
     br00011_csv_filename = f"{br00011_str}.csv"
     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{cmty_title_str()},{owner_name_str()},{acct_name_str()}
 {sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
@@ -97,6 +97,7 @@ def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_
 
     # WHEN / THEN
     if platform_system() != "Linux":  # bug on github commit
+        br00011_staging_tablename = f"{br00011_str}_staging"
         with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
             assert cmty_db_conn != None
             cursor = cmty_db_conn.cursor()
@@ -127,6 +128,7 @@ def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_
 def test_WorldUnit_memory_cmty_db_conn_CreatesCmtyStagingTables(
     env_dir_setup_cleanup,
 ):
+    # sourcery skip: extract-method, no-conditionals-in-tests
     # ESTABLISH
     fizz_world = worldunit_shop("Fizz")
 
@@ -251,6 +253,7 @@ def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyStagingTables(
     fizz_world = worldunit_shop("Fizz")
 
     # WHEN / THEN
+    # sourcery skip: no-conditionals-in-tests
     if platform_system() != "Linux":  # bug on github commit
         cmtyunit_tablename = f"{cmtyunit_str()}_staging"
         with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
@@ -291,6 +294,7 @@ def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyStagingTables(
 
 
 def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyAggTables(env_dir_setup_cleanup):
+    # sourcery skip: extract-method, no-conditionals-in-tests
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bob"
@@ -376,13 +380,14 @@ def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateStagingFiles(
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("Fizz")
-    cmtyunit_staging_csv_filename = f"cmtyunit_staging.csv"
+    cmtyunit_staging_csv_filename = "cmtyunit_staging.csv"
     cmtyunit_staging_csv_path = create_path(
         fizz_world._cmty_mstr_dir, cmtyunit_staging_csv_filename
     )
     assert os_path_exists(cmtyunit_staging_csv_path) is False
 
     # WHEN
+    # sourcery skip: no-conditionals-in-tests
     if platform_system() != "Linux":  # bug on github commit
         fizz_world.aft_faces_ideas_to_cmty_mstr_csvs()
 
@@ -403,6 +408,7 @@ def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateStagingFiles(
 def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateAggFiles(
     env_dir_setup_cleanup,
 ):
+    # sourcery skip: extract-method, no-conditionals-in-tests
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bob"
@@ -423,7 +429,7 @@ def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateAggFiles(
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("Fizz")
-    cmtyunit_csv_filename = f"cmtyunit_agg.csv"
+    cmtyunit_csv_filename = "cmtyunit_agg.csv"
     cmtyunit_csv_path = create_path(fizz_world._cmty_mstr_dir, cmtyunit_csv_filename)
     assert os_path_exists(cmtyunit_csv_path) is False
 

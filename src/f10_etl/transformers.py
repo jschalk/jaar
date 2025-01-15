@@ -21,9 +21,15 @@ from src.f09_idea.pandas_tool import (
     translate_all_columns_dataframe,
     insert_idea_csv,
     save_table_to_csv,
+    open_csv,
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
+from src.f10_etl.cmty_agg import (
+    create_cmtyunit_jsons_from_prime_files,
+    CmtyPrimeFilePaths,
+    CmtyPrimeColumns,
+)
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
@@ -36,6 +42,7 @@ from pandas import read_excel as pandas_read_excel, concat as pandas_concat, Dat
 from os.path import exists as os_path_exists
 from sqlite3 import Connection as sqlite3_Connection
 from copy import copy as copy_copy
+import os
 
 
 class not_given_pidgin_category_Exception(Exception):
@@ -870,4 +877,58 @@ def etl_cmty_agg_tables_to_cmty_csvs(
 
 
 def etl_cmty_csvs_to_jsons(cmty_mstr_dir: str):
-    pass
+    cmtyunit_str = "cmtyunit"
+    # cmtydeal_str = "cmty_deal_episode"
+    # cmtycash_str = "cmty_cashbook"
+    # cmtyhour_str = "cmty_timeline_hour"
+    # cmtymont_str = "cmty_timeline_month"
+    # cmtyweek_str = "cmty_timeline_weekday"
+    cmtyunit_excel_path = create_path(cmty_mstr_dir, f"{cmtyunit_str}.xlsx")
+    # cmtydeal_excel_path = create_path(cmty_mstr_dir, f"{cmtydeal_str}.xlsx")
+    # cmtycash_excel_path = create_path(cmty_mstr_dir, f"{cmtycash_str}.xlsx")
+    # cmtyhour_excel_path = create_path(cmty_mstr_dir, f"{cmtyhour_str}.xlsx")
+    # cmtymont_excel_path = create_path(cmty_mstr_dir, f"{cmtymont_str}.xlsx")
+    # cmtyweek_excel_path = create_path(cmty_mstr_dir, f"{cmtyweek_str}.xlsx")
+    cmtyunit_df = open_csv(cmty_mstr_dir, f"{cmtyunit_str}_agg.csv")
+    # cmtydeal_df = open_csv(cmty_mstr_dir, f"{cmtydeal_str}_agg.csv")
+    # cmtycash_df = open_csv(cmty_mstr_dir, f"{cmtycash_str}_agg.csv")
+    # cmtyhour_df = open_csv(cmty_mstr_dir, f"{cmtyhour_str}_agg.csv")
+    # cmtymont_df = open_csv(cmty_mstr_dir, f"{cmtymont_str}_agg.csv")
+    # cmtyweek_df = open_csv(cmty_mstr_dir, f"{cmtyweek_str}_agg.csv")
+    upsert_sheet(cmtyunit_excel_path, "agg", cmtyunit_df)
+
+    # TODO replace empty sheet upsert with csv file upsert
+    xp = CmtyPrimeFilePaths(cmty_mstr_dir)
+    xc = CmtyPrimeColumns()
+    agg_cmty_deal_df = DataFrame([], columns=xc.cmty_deal_agg_columns)
+    agg_cmty_cashbook_df = DataFrame([], columns=xc.cmty_cashbook_agg_columns)
+    agg_cmty_hour_df = DataFrame([], columns=xc.cmty_hour_agg_columns)
+    agg_cmty_month_df = DataFrame([], columns=xc.cmty_month_agg_columns)
+    agg_cmty_weekday_df = DataFrame([], columns=xc.cmty_weekday_agg_columns)
+    upsert_sheet(xp.cmty_deal_path, "agg", agg_cmty_deal_df)
+    upsert_sheet(xp.cmty_cashbook_path, "agg", agg_cmty_cashbook_df)
+    upsert_sheet(xp.cmty_hour_path, "agg", agg_cmty_hour_df)
+    upsert_sheet(xp.cmty_month_path, "agg", agg_cmty_month_df)
+    upsert_sheet(xp.cmty_weekday_path, "agg", agg_cmty_weekday_df)
+
+    # if cmtydeal_df:
+    #     upsert_sheet(cmty_excel_path, cmtydeal_str, cmtydeal_df)
+    # if cmtycash_df:
+    #     upsert_sheet(cmty_excel_path, cmtycash_str, cmtycash_df)
+    # if cmtyhour_df:
+    #     upsert_sheet(cmty_excel_path, cmtyhour_str, cmtyhour_df)
+    # if cmtymont_df:
+    #     upsert_sheet(cmty_excel_path, cmtymont_str, cmtymont_df)
+    # if cmtyweek_df:
+    #     upsert_sheet(cmty_excel_path, cmtyweek_str, cmtyweek_df)
+    create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir)
+
+    def print_cmty_mstr_dir_files(cmty_mstr_dir: str):
+        for root, dirs, files in os.walk(cmty_mstr_dir):
+            for file in files:
+                print(os.path.join(root, file))
+
+    print(f"huh")
+
+    # Example usage
+    print_cmty_mstr_dir_files(cmty_mstr_dir)

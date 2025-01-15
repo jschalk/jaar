@@ -151,43 +151,45 @@ def create_timelineunit_from_prime_data(
     return timelineunit_shop(timeline_config)
 
 
-def create_cmtyunit_jsons_from_prime_files(cmtys_dir: str):
-    xp = CmtyPrimeFilePaths(cmtys_dir)
+def create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir: str):
+    xp = CmtyPrimeFilePaths(cmty_mstr_dir)
     cmtyunit_df = pandas_read_excel(xp.cmtyunit_path, "agg")
-    cmty_deal_df = pandas_read_excel(xp.cmty_deal_path, "agg")
-    cmty_cashbook_df = pandas_read_excel(xp.cmty_cashbook_path, "agg")
-    cmty_hour_df = pandas_read_excel(xp.cmty_hour_path, "agg")
-    cmty_month_df = pandas_read_excel(xp.cmty_month_path, "agg")
-    cmty_weekday_df = pandas_read_excel(xp.cmty_weekday_path, "agg")
+    cmtydeal_df = pandas_read_excel(xp.cmty_deal_path, "agg")
+    cmtycash_df = pandas_read_excel(xp.cmty_cashbook_path, "agg")
+    cmtyhour_df = pandas_read_excel(xp.cmty_hour_path, "agg")
+    cmtymont_df = pandas_read_excel(xp.cmty_month_path, "agg")
+    cmtyweek_df = pandas_read_excel(xp.cmty_weekday_path, "agg")
+
     cmtyunits_dict = dataframe_to_dict(cmtyunit_df, ["cmty_title"])
-    cmtys_hour_dict = dataframe_to_dict(cmty_hour_df, ["cmty_title", "hour_title"])
-    cmtys_month_dict = dataframe_to_dict(cmty_month_df, ["cmty_title", "month_title"])
-    weekday_keys = ["cmty_title", "weekday_title"]
-    cmtys_weekday_dict = dataframe_to_dict(cmty_weekday_df, weekday_keys)
+    cmtyhours_dict = dataframe_to_dict(cmtyhour_df, ["cmty_title", "hour_title"])
+    cmtymonts_dict = dataframe_to_dict(cmtymont_df, ["cmty_title", "month_title"])
+    cmtyweeks_dict = dataframe_to_dict(cmtyweek_df, ["cmty_title", "weekday_title"])
     cmtyunits = {}
     for cmty_attrs in cmtyunits_dict.values():
         x_cmty_title = cmty_attrs.get("cmty_title")
         cmty_timelineunit = create_timelineunit_from_prime_data(
             cmty_attrs=cmty_attrs,
-            cmty_weekday_dict=cmtys_weekday_dict.get(x_cmty_title),
-            cmty_month_dict=cmtys_month_dict.get(x_cmty_title),
-            cmty_hour_dict=cmtys_hour_dict.get(x_cmty_title),
+            cmty_weekday_dict=cmtyweeks_dict.get(x_cmty_title),
+            cmty_month_dict=cmtymonts_dict.get(x_cmty_title),
+            cmty_hour_dict=cmtyhours_dict.get(x_cmty_title),
         )
 
         cmtyunit = cmtyunit_shop(
             cmty_title=x_cmty_title,
-            cmtys_dir=cmtys_dir,
+            cmtys_dir=cmty_mstr_dir,
             timeline=cmty_timelineunit,
             current_time=if_nan_return_None(cmty_attrs.get("current_time")),
             bridge=cmty_attrs.get("bridge"),
             fund_coin=if_nan_return_None(cmty_attrs.get("fund_coin")),
             penny=if_nan_return_None(cmty_attrs.get("penny")),
             respect_bit=if_nan_return_None(cmty_attrs.get("respect_bit")),
+            in_memory_journal=True,
         )
-        _add_cashpurchases_from_df(cmtyunit, cmty_cashbook_df)
-        _add_dealepisodes_from_df(cmtyunit, cmty_deal_df)
+        _add_cashpurchases_from_df(cmtyunit, cmtycash_df)
+        _add_dealepisodes_from_df(cmtyunit, cmtydeal_df)
         cmtyunits[cmtyunit.cmty_title] = cmtyunit
-    cmty_jsons_dir = create_path(cmtys_dir, "cmty_jsons")
+    cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
     for cmtyunit in cmtyunits.values():
         cmty_file_name = f"{cmtyunit.cmty_title}.json"
-        save_file(cmty_jsons_dir, cmty_file_name, cmtyunit.get_json())
+        cmtyunit_dir = create_path(cmtys_dir, cmtyunit.cmty_title)
+        save_file(cmtyunit_dir, cmty_file_name, cmtyunit.get_json())
