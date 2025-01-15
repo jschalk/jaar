@@ -63,6 +63,8 @@ def get_ordered_csv(x_df: DataFrame, sorting_columns: list[str] = None) -> str:
 
 
 def open_csv(x_file_dir: str, x_filename: str) -> DataFrame:
+    if os_path_exists(create_path(x_file_dir, x_filename)) is False:
+        return None
     return pandas_read_csv(create_path(x_file_dir, x_filename))
 
 
@@ -353,7 +355,6 @@ def create_idea_table_from_csv(
 
 
 def insert_idea_csv(csv_filepath: str, conn: sqlite3_Connection, tablename: str):
-    print(f"{db_table_exists(conn, tablename)=}")
     if db_table_exists(conn, tablename) is False:
         create_idea_table_from_csv(csv_filepath, conn, tablename)
 
@@ -362,13 +363,11 @@ def insert_idea_csv(csv_filepath: str, conn: sqlite3_Connection, tablename: str)
 
 
 def get_pragma_table_fetchall(table_columns):
-    x_count = 0
     pragma_table_attrs = []
     idea_sqlite_types = get_idea_sqlite_types()
-    for x_col in table_columns:
+    for x_count, x_col in enumerate(table_columns):
         col_type = idea_sqlite_types.get(x_col)
         pragma_table_attrs.append((x_count, x_col, col_type, 0, None, 0))
-        x_count += 1
     return pragma_table_attrs
 
 

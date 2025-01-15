@@ -27,7 +27,7 @@ from src.f09_idea.examples.idea_env import (
 )
 
 
-def test_open_csv_ReturnsObj():
+def test_open_csv_ReturnsObjWhenFileExists(idea_env_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -73,6 +73,18 @@ def test_open_csv_ReturnsObj():
     assert acct_dataframe.loc[2, debtit_belief_str()] == yao_debtit_belief
 
     assert len(acct_dataframe) == 3
+
+
+def test_open_csv_ReturnsObjWhenNoFileExists(idea_env_setup_cleanup):
+    # ESTABLISH
+    sue_str = "Sue"
+    name_filename = f"{sue_str}_acct_example_77.csv"
+
+    # WHEN
+    acct_dataframe = open_csv(idea_examples_dir(), name_filename)
+
+    # THEN
+    assert acct_dataframe is None
 
 
 def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvToVoice(

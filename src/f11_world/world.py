@@ -41,6 +41,7 @@ from src.f10_etl.transformers import (
     etl_idea_staging_to_cmty_tables,
     etl_cmty_staging_tables_to_cmty_csvs,
     etl_cmty_agg_tables_to_cmty_csvs,
+    etl_cmty_csvs_to_jsons,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -184,6 +185,9 @@ class WorldUnit:
         with self.memory_cmty_db_conn() as cmty_db_conn:
             etl_cmty_staging_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
             etl_cmty_agg_tables_to_cmty_csvs(cmty_db_conn, self._cmty_mstr_dir)
+
+    def cmty_csvs_to_jsons(self):
+        etl_cmty_csvs_to_jsons(self._cmty_mstr_dir)
 
     def get_dict(self) -> dict:
         return {

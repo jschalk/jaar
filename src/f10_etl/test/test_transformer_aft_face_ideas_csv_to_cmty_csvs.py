@@ -396,28 +396,36 @@ def test_etl_cmty_agg_tables_to_cmty_csvs_CreateFiles(env_dir_setup_cleanup):
     accord45_str = "accord45"
     cmtyunit_agg_tablename = f"{cmtyunit_str()}_agg"
     with sqlite3_connect(":memory:") as cmty_db_conn:
-        create_cmty_tables(cmty_db_conn)
-        cursor = cmty_db_conn.cursor()
-        insert_agg_sqlstr = f"""
+        check_etl_cmty_agg_tables_to_cmty_csvs_CreateFile(
+            cmty_db_conn, cmtyunit_agg_tablename, accord23_str, accord45_str
+        )
+
+
+def check_etl_cmty_agg_tables_to_cmty_csvs_CreateFile(
+    cmty_db_conn, cmtyunit_agg_tablename, accord23_str, accord45_str
+):
+    create_cmty_tables(cmty_db_conn)
+    cursor = cmty_db_conn.cursor()
+    insert_agg_sqlstr = f"""
 INSERT INTO {cmtyunit_agg_tablename} (cmty_title)
 VALUES ('{accord23_str}'), ('{accord45_str}')
 ;
 """
-        cursor.execute(insert_agg_sqlstr)
-        cmty_mstr_dir = get_test_etl_dir()
-        cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
-        cmtyunit_csv_filename = f"{cmtyunit_agg_tablename}.csv"
-        cmtyunit_csv_path = create_path(cmtys_dir, cmtyunit_csv_filename)
-        assert os_path_exists(cmtyunit_csv_path) is False
+    cursor.execute(insert_agg_sqlstr)
+    cmty_mstr_dir = get_test_etl_dir()
+    cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
+    cmtyunit_csv_filename = f"{cmtyunit_agg_tablename}.csv"
+    cmtyunit_csv_path = create_path(cmtys_dir, cmtyunit_csv_filename)
+    assert os_path_exists(cmtyunit_csv_path) is False
 
-        # WHEN
-        etl_cmty_agg_tables_to_cmty_csvs(cmty_db_conn, cmtys_dir)
+    # WHEN
+    etl_cmty_agg_tables_to_cmty_csvs(cmty_db_conn, cmtys_dir)
 
-        # THEN
-        assert os_path_exists(cmtyunit_csv_path)
-        generated_cmtyunit_csv = open_file(cmtys_dir, cmtyunit_csv_filename)
-        expected_cmtyunit_csv_str = f"""{cmty_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
+    # THEN
+    assert os_path_exists(cmtyunit_csv_path)
+    generated_cmtyunit_csv = open_file(cmtys_dir, cmtyunit_csv_filename)
+    expected_cmtyunit_csv_str = f"""{cmty_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
 {accord23_str},,,,,,,,,
 {accord45_str},,,,,,,,,
 """
-        assert generated_cmtyunit_csv == expected_cmtyunit_csv_str
+    assert generated_cmtyunit_csv == expected_cmtyunit_csv_str

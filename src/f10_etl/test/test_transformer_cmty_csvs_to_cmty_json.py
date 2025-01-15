@@ -16,38 +16,28 @@ from src.f04_gift.atom_config import (
     respect_bit_str,
 )
 from src.f07_cmty.cmty import cmtyunit_shop, get_from_json as cmtyunit_get_from_json
-from src.f07_cmty.cmty_config import (
-    get_cmty_config_args,
-    cmtyunit_str,
-    cmty_deal_episode_str,
-    cmty_cashbook_str,
-    cmty_timeline_hour_str,
-    cmty_timeline_month_str,
-    cmty_timeline_weekday_str,
-    current_time_str,
-)
-from src.f11_world.world import worldunit_shop
-from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
-from copy import copy as copy_copy
+from src.f07_cmty.cmty_config import cmtyunit_str, current_time_str
+from src.f10_etl.transformers import etl_cmty_csvs_to_jsons
+from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_cmty_csvs_to_jsons_CreateFiles(env_dir_setup_cleanup):
+def test_etl_cmty_csvs_to_jsons_CreateFiles(env_dir_setup_cleanup):
     # ESTABLISH
     accord23_str = "accord23"
     accord45_str = "accord45"
     cmtyunit_agg_tablename = f"{cmtyunit_str()}_agg"
+    cmty_mstr_dir = get_test_etl_dir()
     cmtyunit_csv_filename = f"{cmtyunit_agg_tablename}.csv"
     cmtyunit_csv_str = f"""{cmty_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
 {accord23_str},,,,,,,,,
 {accord45_str},,,,,,,,,
 """
-    fizz_world = worldunit_shop("Fizz")
-    save_file(fizz_world._cmty_mstr_dir, cmtyunit_csv_filename, cmtyunit_csv_str)
+    save_file(cmty_mstr_dir, cmtyunit_csv_filename, cmtyunit_csv_str)
 
     accord23_json_filename = f"{accord23_str}.json"
     accord45_json_filename = f"{accord45_str}.json"
-    cmtys_dir = create_path(fizz_world._cmty_mstr_dir, "cmtys")
+    cmtys_dir = create_path(cmty_mstr_dir, "cmtys")
     accord23_dir = create_path(cmtys_dir, accord23_str)
     accord45_dir = create_path(cmtys_dir, accord45_str)
     accord23_json_path = create_path(accord23_dir, accord23_json_filename)
@@ -56,7 +46,7 @@ def test_WorldUnit_cmty_csvs_to_jsons_CreateFiles(env_dir_setup_cleanup):
     assert os_path_exists(accord45_json_path) is False
 
     # WHEN
-    fizz_world.cmty_csvs_to_jsons()
+    etl_cmty_csvs_to_jsons(cmty_mstr_dir=cmty_mstr_dir)
 
     # THEN
     assert os_path_exists(accord23_json_path)
