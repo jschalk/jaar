@@ -59,7 +59,7 @@ from platform import system as platform_system
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     fizz_world = worldunit_shop("Fizz")
+#     fizz_world = worldunit_shop("fizz")
 
 #     # WHEN / THEN
 #     with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
@@ -93,7 +93,7 @@ def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
     print(f"{sue_aft_dir=}")
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
 
     # WHEN / THEN
     br00011_staging_tablename = f"{br00011_str}_staging"
@@ -122,7 +122,6 @@ def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_
             (sue_inx, event7, accord23_str, yao_inx, yao_inx),
         ]
         assert br00011_db_rows == expected_data
-    assert 1 == 2
 
 
 def test_WorldUnit_memory_cmty_db_conn_CreatesCmtyStagingTables(
@@ -130,7 +129,7 @@ def test_WorldUnit_memory_cmty_db_conn_CreatesCmtyStagingTables(
 ):
     # sourcery skip: extract-method, no-conditionals-in-tests
     # ESTABLISH
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
 
     # WHEN / THEN
     if platform_system() != "Linux":  # bug on github commit
@@ -250,7 +249,7 @@ def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyStagingTables(
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
 
     # WHEN / THEN
     # sourcery skip: no-conditionals-in-tests
@@ -314,7 +313,7 @@ def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyAggTables(env_dir_setup_clea
 {sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
 
     # WHEN / THEN
     if platform_system() != "Linux":  # bug on github commit
@@ -379,7 +378,7 @@ def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateStagingFiles(
 {sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
     cmtyunit_staging_csv_filename = "cmtyunit_staging.csv"
     cmtyunit_staging_csv_path = create_path(
         fizz_world._cmty_mstr_dir, cmtyunit_staging_csv_filename
@@ -428,7 +427,7 @@ def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateAggFiles(
 {sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
     cmtyunit_csv_filename = "cmtyunit_agg.csv"
     cmtyunit_csv_path = create_path(fizz_world._cmty_mstr_dir, cmtyunit_csv_filename)
     assert os_path_exists(cmtyunit_csv_path) is False

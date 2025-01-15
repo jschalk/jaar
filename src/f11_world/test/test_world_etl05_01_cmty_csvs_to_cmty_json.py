@@ -46,7 +46,7 @@ def test_WorldUnit_cmty_csvs_to_jsons_Scenario0_CreateFilesWithOnlyCmtyTitle(
 {accord23_str},,,,,,,,,
 {accord45_str},,,,,,,,,
 """
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
     save_file(fizz_world._cmty_mstr_dir, cmtyunit_csv_filename, cmtyunit_csv_str)
 
     accord23_json_filename = f"{accord23_str}.json"
@@ -92,7 +92,7 @@ def test_WorldUnit_cmty_csvs_to_jsons_Scenario1_CreateFilesWithCmtyUnitAttrs(
 {accord23_str},,,,,,,,,
 {accord45_str},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_current_time},{a45_bridge},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_timeline_title}
 """
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
     save_file(fizz_world._cmty_mstr_dir, cmtyunit_csv_filename, cmtyunit_csv_str)
 
     accord23_json_filename = f"{accord23_str}.json"
