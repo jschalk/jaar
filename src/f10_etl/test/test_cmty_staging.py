@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, open_file
-from src.f03_chrono.chrono import timelineunit_shop, create_timeline_config
+from src.f03_chrono.chrono import timelineunit_shop, timeline_config_shop
 from src.f04_gift.atom_config import face_name_str
 from src.f07_cmty.cmty import get_from_json as cmty_get_from_json, cmtyunit_shop
 from src.f07_cmty.cmty_config import (
@@ -306,6 +306,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitPar
     agg_str = "agg"
     accord56_cmty_title = "accord56"
     accord56_c400_number = 9
+    accord56_monthday_distortion = 7
     accord56_timeline_title = "timelineX3"
     accord56_yr1_jan1_offset = 555
     accord56 = [
@@ -313,7 +314,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitPar
         accord56_c400_number,
         "",  # current_time_str(),
         "",  # fund_coin_str(),
-        "",  # monthday_distortion_str(),
+        accord56_monthday_distortion,
         "",  # penny_str(),
         "",  # respect_bit_str(),
         "",  # bridge_str(),
@@ -336,9 +337,10 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitPar
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
     assert accord56_cmtyunit
     assert accord56_cmtyunit.cmty_title == accord56_cmty_title
-    expected_timeline_config = create_timeline_config(
+    expected_timeline_config = timeline_config_shop(
+        c400_number=accord56_c400_number,
+        monthday_distortion=accord56_monthday_distortion,
         timeline_title=accord56_timeline_title,
-        c400_count=accord56_c400_number,
         yr1_jan1_offset=accord56_yr1_jan1_offset,
     )
     expected_timelineunit = timelineunit_shop(expected_timeline_config)
@@ -385,7 +387,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario3_cmty_timeline_weekday(
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
-    x_timelineunit = timelineunit_shop(create_timeline_config())
+    x_timelineunit = timelineunit_shop(timeline_config_shop())
     expected_cmtyunit = cmtyunit_shop(
         accord56_cmty_title, cmty_mstr_dir, x_timelineunit
     )
@@ -428,7 +430,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario4_cmty_timeline_month(
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
-    x_timelineunit = timelineunit_shop(create_timeline_config())
+    x_timelineunit = timelineunit_shop(timeline_config_shop())
     expected_cmtyunit = cmtyunit_shop(
         accord56_cmty_title, cmty_mstr_dir, x_timelineunit
     )
@@ -476,7 +478,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario5_cmty_timeline_hour(
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
-    x_timelineunit = timelineunit_shop(create_timeline_config())
+    x_timelineunit = timelineunit_shop(timeline_config_shop())
     expected_cmtyunit = cmtyunit_shop(
         accord56_cmty_title, cmty_mstr_dir, x_timelineunit
     )
@@ -525,7 +527,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario6_cmty_cashbook(
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
-    x_timelineunit = timelineunit_shop(create_timeline_config())
+    x_timelineunit = timelineunit_shop(timeline_config_shop())
     expected_cmtyunit = cmtyunit_shop(
         accord56_cmty_title, cmty_mstr_dir, x_timelineunit
     )
@@ -573,7 +575,7 @@ def test_create_cmtyunit_jsons_from_prime_files_Scenario7_cmty_deal_episode(
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_cmtyunit = cmty_get_from_json(open_file(accord56_json_path))
-    x_timelineunit = timelineunit_shop(create_timeline_config())
+    x_timelineunit = timelineunit_shop(timeline_config_shop())
     expected_cmtyunit = cmtyunit_shop(
         accord56_cmty_title, cmty_mstr_dir, x_timelineunit
     )

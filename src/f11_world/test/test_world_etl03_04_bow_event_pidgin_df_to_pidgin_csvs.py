@@ -61,7 +61,7 @@ def test_WorldUnit_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_ro
     e9_road_rows = [e9_road0, e9_road1]
     e9_road_df = DataFrame(e9_road_rows, columns=road_file_columns)
 
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
     bob_dir = create_path(fizz_world._faces_bow_dir, bob_str)
     sue_dir = create_path(fizz_world._faces_bow_dir, sue_str)
     zia_dir = create_path(fizz_world._faces_bow_dir, zia_str)

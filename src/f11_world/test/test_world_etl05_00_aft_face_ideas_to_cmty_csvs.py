@@ -59,7 +59,7 @@ def test_WorldUnit_memory_cmty_db_conn_ReturnsDBConnection(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
 
     # WHEN / THEN
     with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
@@ -74,7 +74,6 @@ def test_WorldUnit_memory_cmty_db_conn_ReturnsDBConnection(
 def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_cmty_db(
     env_dir_setup_cleanup,
 ):
-    # sourcery skip: extract-method, no-conditionals-in-tests
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bob"
@@ -93,140 +92,138 @@ def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("Fizz")
+    print(f"{sue_aft_dir=}")
+    fizz_world = worldunit_shop("fizz")
 
     # WHEN / THEN
-    if platform_system() != "Linux":  # bug on github commit
-        br00011_staging_tablename = f"{br00011_str}_staging"
-        with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
-            assert cmty_db_conn != None
-            cursor = cmty_db_conn.cursor()
-            cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
-            br00011_db_columns = cursor.fetchall()
-            br00011_expected_columns = [
-                (0, face_name_str(), "TEXT", 0, None, 0),
-                (1, event_int_str(), "INTEGER", 0, None, 0),
-                (2, cmty_title_str(), "TEXT", 0, None, 0),
-                (3, owner_name_str(), "TEXT", 0, None, 0),
-                (4, acct_name_str(), "TEXT", 0, None, 0),
-            ]
-            print(f"{type(cmty_db_conn)=}")
-            print(f"      {br00011_db_columns=}")
-            print(f"{br00011_expected_columns=}")
-            assert br00011_db_columns == br00011_expected_columns
-            cursor.execute(f"SELECT * FROM {br00011_staging_tablename}")
-            br00011_db_rows = cursor.fetchall()
-            expected_data = [
-                (sue_inx, event3, accord23_str, bob_inx, bob_inx),
-                (sue_inx, event3, accord23_str, yao_inx, bob_inx),
-                (sue_inx, event3, accord23_str, yao_inx, yao_inx),
-                (sue_inx, event7, accord23_str, yao_inx, yao_inx),
-            ]
-            assert br00011_db_rows == expected_data
+    br00011_staging_tablename = f"{br00011_str}_staging"
+    with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+        assert cmty_db_conn != None
+        cursor = cmty_db_conn.cursor()
+        cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
+        br00011_db_columns = cursor.fetchall()
+        br00011_expected_columns = [
+            (0, face_name_str(), "TEXT", 0, None, 0),
+            (1, event_int_str(), "INTEGER", 0, None, 0),
+            (2, cmty_title_str(), "TEXT", 0, None, 0),
+            (3, owner_name_str(), "TEXT", 0, None, 0),
+            (4, acct_name_str(), "TEXT", 0, None, 0),
+        ]
+        print(f"{type(cmty_db_conn)=}")
+        print(f"      {br00011_db_columns=}")
+        print(f"{br00011_expected_columns=}")
+        assert br00011_db_columns == br00011_expected_columns
+        cursor.execute(f"SELECT * FROM {br00011_staging_tablename}")
+        br00011_db_rows = cursor.fetchall()
+        expected_data = [
+            (sue_inx, event3, accord23_str, bob_inx, bob_inx),
+            (sue_inx, event3, accord23_str, yao_inx, bob_inx),
+            (sue_inx, event3, accord23_str, yao_inx, yao_inx),
+            (sue_inx, event7, accord23_str, yao_inx, yao_inx),
+        ]
+        assert br00011_db_rows == expected_data
 
 
 def test_WorldUnit_memory_cmty_db_conn_CreatesCmtyStagingTables(
     env_dir_setup_cleanup,
 ):
-    # sourcery skip: extract-method, no-conditionals-in-tests
     # ESTABLISH
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
 
     # WHEN / THEN
-    if platform_system() != "Linux":  # bug on github commit
-        agg_str = "_agg"
-        cmtyunit_agg_tablename = f"{cmtyunit_str()}{agg_str}"
-        cmtydeal_agg_tablename = f"{cmty_deal_episode_str()}{agg_str}"
-        cmtycash_agg_tablename = f"{cmty_cashbook_str()}{agg_str}"
-        cmtyhour_agg_tablename = f"{cmty_timeline_hour_str()}{agg_str}"
-        cmtymont_agg_tablename = f"{cmty_timeline_month_str()}{agg_str}"
-        cmtyweek_agg_tablename = f"{cmty_timeline_weekday_str()}{agg_str}"
-        staging_str = "_staging"
-        cmtyunit_stage_tablename = f"{cmtyunit_str()}{staging_str}"
-        cmtydeal_stage_tablename = f"{cmty_deal_episode_str()}{staging_str}"
-        cmtycash_stage_tablename = f"{cmty_cashbook_str()}{staging_str}"
-        cmtyhour_stage_tablename = f"{cmty_timeline_hour_str()}{staging_str}"
-        cmtymont_stage_tablename = f"{cmty_timeline_month_str()}{staging_str}"
-        cmtyweek_stage_tablename = f"{cmty_timeline_weekday_str()}{staging_str}"
-        cmtyunit_args = get_cmty_config_args(cmtyunit_str()).keys()
-        cmtydeal_args = get_cmty_config_args(cmty_deal_episode_str()).keys()
-        cmtycash_args = get_cmty_config_args(cmty_cashbook_str()).keys()
-        cmtyhour_args = get_cmty_config_args(cmty_timeline_hour_str()).keys()
-        cmtymont_args = get_cmty_config_args(cmty_timeline_month_str()).keys()
-        cmtyweek_args = get_cmty_config_args(cmty_timeline_weekday_str()).keys()
-        staging_columns = ["idea_number", "face_name", "event_int"]
-        cmtyunit_agg_columns = get_sorting_columns(cmtyunit_args)
-        cmtydeal_agg_columns = get_sorting_columns(cmtydeal_args)
-        cmtycash_agg_columns = get_sorting_columns(cmtycash_args)
-        cmtyhour_agg_columns = get_sorting_columns(cmtyhour_args)
-        cmtymont_agg_columns = get_sorting_columns(cmtymont_args)
-        cmtyweek_agg_columns = get_sorting_columns(cmtyweek_args)
-        cmtyunit_agg_pragma = get_pragma_table_fetchall(cmtyunit_agg_columns)
-        cmtydeal_agg_pragma = get_pragma_table_fetchall(cmtydeal_agg_columns)
-        cmtycash_agg_pragma = get_pragma_table_fetchall(cmtycash_agg_columns)
-        cmtyhour_agg_pragma = get_pragma_table_fetchall(cmtyhour_agg_columns)
-        cmtymont_agg_pragma = get_pragma_table_fetchall(cmtymont_agg_columns)
-        cmtyweek_agg_pragma = get_pragma_table_fetchall(cmtyweek_agg_columns)
+    agg_str = "_agg"
+    cmtyunit_agg_tablename = f"{cmtyunit_str()}{agg_str}"
+    cmtydeal_agg_tablename = f"{cmty_deal_episode_str()}{agg_str}"
+    cmtycash_agg_tablename = f"{cmty_cashbook_str()}{agg_str}"
+    cmtyhour_agg_tablename = f"{cmty_timeline_hour_str()}{agg_str}"
+    cmtymont_agg_tablename = f"{cmty_timeline_month_str()}{agg_str}"
+    cmtyweek_agg_tablename = f"{cmty_timeline_weekday_str()}{agg_str}"
+    staging_str = "_staging"
+    cmtyunit_stage_tablename = f"{cmtyunit_str()}{staging_str}"
+    cmtydeal_stage_tablename = f"{cmty_deal_episode_str()}{staging_str}"
+    cmtycash_stage_tablename = f"{cmty_cashbook_str()}{staging_str}"
+    cmtyhour_stage_tablename = f"{cmty_timeline_hour_str()}{staging_str}"
+    cmtymont_stage_tablename = f"{cmty_timeline_month_str()}{staging_str}"
+    cmtyweek_stage_tablename = f"{cmty_timeline_weekday_str()}{staging_str}"
+    cmtyunit_args = get_cmty_config_args(cmtyunit_str()).keys()
+    cmtydeal_args = get_cmty_config_args(cmty_deal_episode_str()).keys()
+    cmtycash_args = get_cmty_config_args(cmty_cashbook_str()).keys()
+    cmtyhour_args = get_cmty_config_args(cmty_timeline_hour_str()).keys()
+    cmtymont_args = get_cmty_config_args(cmty_timeline_month_str()).keys()
+    cmtyweek_args = get_cmty_config_args(cmty_timeline_weekday_str()).keys()
+    staging_columns = ["idea_number", "face_name", "event_int"]
+    cmtyunit_agg_columns = get_sorting_columns(cmtyunit_args)
+    cmtydeal_agg_columns = get_sorting_columns(cmtydeal_args)
+    cmtycash_agg_columns = get_sorting_columns(cmtycash_args)
+    cmtyhour_agg_columns = get_sorting_columns(cmtyhour_args)
+    cmtymont_agg_columns = get_sorting_columns(cmtymont_args)
+    cmtyweek_agg_columns = get_sorting_columns(cmtyweek_args)
+    cmtyunit_agg_pragma = get_pragma_table_fetchall(cmtyunit_agg_columns)
+    cmtydeal_agg_pragma = get_pragma_table_fetchall(cmtydeal_agg_columns)
+    cmtycash_agg_pragma = get_pragma_table_fetchall(cmtycash_agg_columns)
+    cmtyhour_agg_pragma = get_pragma_table_fetchall(cmtyhour_agg_columns)
+    cmtymont_agg_pragma = get_pragma_table_fetchall(cmtymont_agg_columns)
+    cmtyweek_agg_pragma = get_pragma_table_fetchall(cmtyweek_agg_columns)
 
-        cmtyunit_stage_columns = copy_copy(staging_columns)
-        cmtydeal_stage_columns = copy_copy(staging_columns)
-        cmtycash_stage_columns = copy_copy(staging_columns)
-        cmtyhour_stage_columns = copy_copy(staging_columns)
-        cmtymont_stage_columns = copy_copy(staging_columns)
-        cmtyweek_stage_columns = copy_copy(staging_columns)
-        cmtyunit_stage_columns.extend(cmtyunit_agg_columns)
-        cmtydeal_stage_columns.extend(cmtydeal_agg_columns)
-        cmtycash_stage_columns.extend(cmtycash_agg_columns)
-        cmtyhour_stage_columns.extend(cmtyhour_agg_columns)
-        cmtymont_stage_columns.extend(cmtymont_agg_columns)
-        cmtyweek_stage_columns.extend(cmtyweek_agg_columns)
-        cmtyunit_stage_pragma = get_pragma_table_fetchall(cmtyunit_stage_columns)
-        cmtydeal_stage_pragma = get_pragma_table_fetchall(cmtydeal_stage_columns)
-        cmtycash_stage_pragma = get_pragma_table_fetchall(cmtycash_stage_columns)
-        cmtyhour_stage_pragma = get_pragma_table_fetchall(cmtyhour_stage_columns)
-        cmtymont_stage_pragma = get_pragma_table_fetchall(cmtymont_stage_columns)
-        cmtyweek_stage_pragma = get_pragma_table_fetchall(cmtyweek_stage_columns)
+    cmtyunit_stage_columns = copy_copy(staging_columns)
+    cmtydeal_stage_columns = copy_copy(staging_columns)
+    cmtycash_stage_columns = copy_copy(staging_columns)
+    cmtyhour_stage_columns = copy_copy(staging_columns)
+    cmtymont_stage_columns = copy_copy(staging_columns)
+    cmtyweek_stage_columns = copy_copy(staging_columns)
+    cmtyunit_stage_columns.extend(cmtyunit_agg_columns)
+    cmtydeal_stage_columns.extend(cmtydeal_agg_columns)
+    cmtycash_stage_columns.extend(cmtycash_agg_columns)
+    cmtyhour_stage_columns.extend(cmtyhour_agg_columns)
+    cmtymont_stage_columns.extend(cmtymont_agg_columns)
+    cmtyweek_stage_columns.extend(cmtyweek_agg_columns)
+    cmtyunit_stage_pragma = get_pragma_table_fetchall(cmtyunit_stage_columns)
+    cmtydeal_stage_pragma = get_pragma_table_fetchall(cmtydeal_stage_columns)
+    cmtycash_stage_pragma = get_pragma_table_fetchall(cmtycash_stage_columns)
+    cmtyhour_stage_pragma = get_pragma_table_fetchall(cmtyhour_stage_columns)
+    cmtymont_stage_pragma = get_pragma_table_fetchall(cmtymont_stage_columns)
+    cmtyweek_stage_pragma = get_pragma_table_fetchall(cmtyweek_stage_columns)
 
-        with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
-            assert db_table_exists(cmty_db_conn, cmtyunit_agg_tablename)
-            assert db_table_exists(cmty_db_conn, cmtydeal_agg_tablename)
-            assert db_table_exists(cmty_db_conn, cmtycash_agg_tablename)
-            assert db_table_exists(cmty_db_conn, cmtyhour_agg_tablename)
-            assert db_table_exists(cmty_db_conn, cmtymont_agg_tablename)
-            assert db_table_exists(cmty_db_conn, cmtyweek_agg_tablename)
+    with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+        assert db_table_exists(cmty_db_conn, cmtyunit_agg_tablename)
+        assert db_table_exists(cmty_db_conn, cmtydeal_agg_tablename)
+        assert db_table_exists(cmty_db_conn, cmtycash_agg_tablename)
+        assert db_table_exists(cmty_db_conn, cmtyhour_agg_tablename)
+        assert db_table_exists(cmty_db_conn, cmtymont_agg_tablename)
+        assert db_table_exists(cmty_db_conn, cmtyweek_agg_tablename)
 
-            assert db_table_exists(cmty_db_conn, cmtyunit_stage_tablename)
-            assert db_table_exists(cmty_db_conn, cmtydeal_stage_tablename)
-            assert db_table_exists(cmty_db_conn, cmtycash_stage_tablename)
-            assert db_table_exists(cmty_db_conn, cmtyhour_stage_tablename)
-            assert db_table_exists(cmty_db_conn, cmtymont_stage_tablename)
-            assert db_table_exists(cmty_db_conn, cmtyweek_stage_tablename)
-            cursor = cmty_db_conn.cursor()
-            cursor.execute(f"PRAGMA table_info({cmtyunit_agg_tablename})")
-            assert cmtyunit_agg_pragma == cursor.fetchall()
-            cursor.execute(f"PRAGMA table_info({cmtydeal_agg_tablename})")
-            assert cmtydeal_agg_pragma == cursor.fetchall()
-            cursor.execute(f"PRAGMA table_info({cmtycash_agg_tablename})")
-            assert cmtycash_agg_pragma == cursor.fetchall()
-            cursor.execute(f"PRAGMA table_info({cmtyhour_agg_tablename})")
-            assert cmtyhour_agg_pragma == cursor.fetchall()
-            cursor.execute(f"PRAGMA table_info({cmtymont_agg_tablename})")
-            assert cmtymont_agg_pragma == cursor.fetchall()
-            cursor.execute(f"PRAGMA table_info({cmtyweek_agg_tablename})")
-            assert cmtyweek_agg_pragma == cursor.fetchall()
+        assert db_table_exists(cmty_db_conn, cmtyunit_stage_tablename)
+        assert db_table_exists(cmty_db_conn, cmtydeal_stage_tablename)
+        assert db_table_exists(cmty_db_conn, cmtycash_stage_tablename)
+        assert db_table_exists(cmty_db_conn, cmtyhour_stage_tablename)
+        assert db_table_exists(cmty_db_conn, cmtymont_stage_tablename)
+        assert db_table_exists(cmty_db_conn, cmtyweek_stage_tablename)
+        cursor = cmty_db_conn.cursor()
+        cursor.execute(f"PRAGMA table_info({cmtyunit_agg_tablename})")
+        assert cmtyunit_agg_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({cmtydeal_agg_tablename})")
+        assert cmtydeal_agg_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({cmtycash_agg_tablename})")
+        assert cmtycash_agg_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({cmtyhour_agg_tablename})")
+        assert cmtyhour_agg_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({cmtymont_agg_tablename})")
+        assert cmtymont_agg_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({cmtyweek_agg_tablename})")
+        assert cmtyweek_agg_pragma == cursor.fetchall()
 
-            cursor.execute(f"PRAGMA table_info({cmtyunit_stage_tablename})")
-            assert cmtyunit_stage_pragma == cursor.fetchall()
-            cursor.execute(f"PRAGMA table_info({cmtydeal_stage_tablename})")
-            assert cmtydeal_stage_pragma == cursor.fetchall()
-            cursor.execute(f"PRAGMA table_info({cmtycash_stage_tablename})")
-            assert cmtycash_stage_pragma == cursor.fetchall()
-            cursor.execute(f"PRAGMA table_info({cmtyhour_stage_tablename})")
-            assert cmtyhour_stage_pragma == cursor.fetchall()
-            cursor.execute(f"PRAGMA table_info({cmtymont_stage_tablename})")
-            assert cmtymont_stage_pragma == cursor.fetchall()
-            cursor.execute(f"PRAGMA table_info({cmtyweek_stage_tablename})")
-            assert cmtyweek_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({cmtyunit_stage_tablename})")
+        assert cmtyunit_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({cmtydeal_stage_tablename})")
+        assert cmtydeal_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({cmtycash_stage_tablename})")
+        assert cmtycash_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({cmtyhour_stage_tablename})")
+        assert cmtyhour_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({cmtymont_stage_tablename})")
+        assert cmtymont_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({cmtyweek_stage_tablename})")
+        assert cmtyweek_stage_pragma == cursor.fetchall()
 
 
 def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyStagingTables(
@@ -250,51 +247,49 @@ def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyStagingTables(
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
 
     # WHEN / THEN
-    # sourcery skip: no-conditionals-in-tests
-    if platform_system() != "Linux":  # bug on github commit
-        cmtyunit_tablename = f"{cmtyunit_str()}_staging"
-        with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
-            cursor = cmty_db_conn.cursor()
-            cursor.execute(f"SELECT * FROM {cmtyunit_tablename}")
-            cmtyunit_db_rows = cursor.fetchall()
-            expected_row1 = (
-                br00011_str,
-                sue_inx,
-                event3,
-                accord23_str,  # cmty_title
-                None,  # fund_coin
-                None,  # penny
-                None,  # respect_bit
-                None,  # current_time
-                None,  # bridge
-                None,  # c400_number
-                None,  # yr1_jan1_offset
-                None,  # monthday_distortion
-                None,  # timeline_title
-            )
-            expected_row2 = (
-                br00011_str,
-                sue_inx,
-                event7,
-                accord23_str,  # cmty_title
-                None,  # fund_coin
-                None,  # penny
-                None,  # respect_bit
-                None,  # current_time
-                None,  # bridge
-                None,  # c400_number
-                None,  # yr1_jan1_offset
-                None,  # monthday_distortion
-                None,  # timeline_title
-            )
-            assert cmtyunit_db_rows == [expected_row1, expected_row2]
+    cmtyunit_tablename = f"{cmtyunit_str()}_staging"
+    with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+        cursor = cmty_db_conn.cursor()
+        cursor.execute(f"SELECT * FROM {cmtyunit_tablename}")
+        cmtyunit_db_rows = cursor.fetchall()
+        expected_row1 = (
+            br00011_str,
+            sue_inx,
+            event3,
+            accord23_str,  # cmty_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        expected_row2 = (
+            br00011_str,
+            sue_inx,
+            event7,
+            accord23_str,  # cmty_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        assert cmtyunit_db_rows == [expected_row1, expected_row2]
 
 
 def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyAggTables(env_dir_setup_cleanup):
-    # sourcery skip: extract-method, no-conditionals-in-tests
+
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bob"
@@ -314,47 +309,46 @@ def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyAggTables(env_dir_setup_clea
 {sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
 
     # WHEN / THEN
-    if platform_system() != "Linux":  # bug on github commit
-        # with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
-        cmty_db_conn = fizz_world.memory_cmty_db_conn()
-        cursor = cmty_db_conn.cursor()
-        # cmtyunit_stage_tablename = f"{cmtyunit_str()}_staging"
-        # cursor.execute(f"SELECT * FROM {cmtyunit_stage_tablename};")
-        # cmtyunit_stage_rows = cursor.fetchall()
-        # assert len(cmtyunit_stage_rows) == 4
+    # with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+    cmty_db_conn = fizz_world.memory_cmty_db_conn()
+    cursor = cmty_db_conn.cursor()
+    # cmtyunit_stage_tablename = f"{cmtyunit_str()}_staging"
+    # cursor.execute(f"SELECT * FROM {cmtyunit_stage_tablename};")
+    # cmtyunit_stage_rows = cursor.fetchall()
+    # assert len(cmtyunit_stage_rows) == 4
 
-        cmtyunit_agg_tablename = f"{cmtyunit_str()}_agg"
-        cursor.execute(f"SELECT * FROM {cmtyunit_agg_tablename};")
-        cmtyunit_agg_rows = cursor.fetchall()
-        expected_row1 = (
-            accord23_str,  # cmty_title
-            None,  # fund_coin
-            None,  # penny
-            None,  # respect_bit
-            None,  # current_time
-            None,  # bridge
-            None,  # c400_number
-            None,  # yr1_jan1_offset
-            None,  # monthday_distortion
-            None,  # timeline_title
-        )
-        expected_row2 = (
-            accord45_str,  # cmty_title
-            None,  # fund_coin
-            None,  # penny
-            None,  # respect_bit
-            None,  # current_time
-            None,  # bridge
-            None,  # c400_number
-            None,  # yr1_jan1_offset
-            None,  # monthday_distortion
-            None,  # timeline_title
-        )
-        assert cmtyunit_agg_rows == [expected_row1, expected_row2]
-        cmty_db_conn.close()
+    cmtyunit_agg_tablename = f"{cmtyunit_str()}_agg"
+    cursor.execute(f"SELECT * FROM {cmtyunit_agg_tablename};")
+    cmtyunit_agg_rows = cursor.fetchall()
+    expected_row1 = (
+        accord23_str,  # cmty_title
+        None,  # fund_coin
+        None,  # penny
+        None,  # respect_bit
+        None,  # current_time
+        None,  # bridge
+        None,  # c400_number
+        None,  # yr1_jan1_offset
+        None,  # monthday_distortion
+        None,  # timeline_title
+    )
+    expected_row2 = (
+        accord45_str,  # cmty_title
+        None,  # fund_coin
+        None,  # penny
+        None,  # respect_bit
+        None,  # current_time
+        None,  # bridge
+        None,  # c400_number
+        None,  # yr1_jan1_offset
+        None,  # monthday_distortion
+        None,  # timeline_title
+    )
+    assert cmtyunit_agg_rows == [expected_row1, expected_row2]
+    cmty_db_conn.close()
 
 
 def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateStagingFiles(
@@ -379,7 +373,7 @@ def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateStagingFiles(
 {sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
     cmtyunit_staging_csv_filename = "cmtyunit_staging.csv"
     cmtyunit_staging_csv_path = create_path(
         fizz_world._cmty_mstr_dir, cmtyunit_staging_csv_filename
@@ -387,28 +381,26 @@ def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateStagingFiles(
     assert os_path_exists(cmtyunit_staging_csv_path) is False
 
     # WHEN
-    # sourcery skip: no-conditionals-in-tests
-    if platform_system() != "Linux":  # bug on github commit
-        fizz_world.aft_faces_ideas_to_cmty_mstr_csvs()
+    fizz_world.aft_faces_ideas_to_cmty_mstr_csvs()
 
-        # THEN
-        # print(f"{cmtyunit_staging_csv_path=}")
-        assert os_path_exists(cmtyunit_staging_csv_path)
-        generated_cmtyunit_csv = open_file(
-            fizz_world._cmty_mstr_dir, cmtyunit_staging_csv_filename
-        )
-        expected_cmtyunit_csv_str = f"""{idea_number_str()},{face_name_str()},{event_int_str()},{cmty_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
+    # THEN
+    # print(f"{cmtyunit_staging_csv_path=}")
+    assert os_path_exists(cmtyunit_staging_csv_path)
+    generated_cmtyunit_csv = open_file(
+        fizz_world._cmty_mstr_dir, cmtyunit_staging_csv_filename
+    )
+    expected_cmtyunit_csv_str = f"""{idea_number_str()},{face_name_str()},{event_int_str()},{cmty_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
 {br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
 {br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,
 """
-        print(f"   {expected_cmtyunit_csv_str=}")
-        assert generated_cmtyunit_csv == expected_cmtyunit_csv_str
+    print(f"   {expected_cmtyunit_csv_str=}")
+    assert generated_cmtyunit_csv == expected_cmtyunit_csv_str
 
 
 def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateAggFiles(
     env_dir_setup_cleanup,
 ):
-    # sourcery skip: extract-method, no-conditionals-in-tests
+
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bob"
@@ -428,25 +420,24 @@ def test_WorldUnit_aft_faces_ideas_to_cmty_mstr_csvs_CreateAggFiles(
 {sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("Fizz")
+    fizz_world = worldunit_shop("fizz")
     cmtyunit_csv_filename = "cmtyunit_agg.csv"
     cmtyunit_csv_path = create_path(fizz_world._cmty_mstr_dir, cmtyunit_csv_filename)
     assert os_path_exists(cmtyunit_csv_path) is False
 
     # WHEN
-    if platform_system() != "Linux":  # bug on github commit
-        fizz_world.aft_faces_ideas_to_cmty_mstr_csvs()
+    fizz_world.aft_faces_ideas_to_cmty_mstr_csvs()
 
-        # THEN
-        # print(f"{cmtyunit_csv_path=}")
-        assert os_path_exists(cmtyunit_csv_path)
-        generated_cmtyunit_csv = open_file(cmtyunit_csv_path)
-        expected_cmtyunit_csv_str = f"""{cmty_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
+    # THEN
+    # print(f"{cmtyunit_csv_path=}")
+    assert os_path_exists(cmtyunit_csv_path)
+    generated_cmtyunit_csv = open_file(cmtyunit_csv_path)
+    expected_cmtyunit_csv_str = f"""{cmty_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
 {accord23_str},,,,,,,,,
 {accord45_str},,,,,,,,,
 """
-        print(f"      {expected_cmtyunit_csv_str=}")
-        assert generated_cmtyunit_csv == expected_cmtyunit_csv_str
+    print(f"      {expected_cmtyunit_csv_str=}")
+    assert generated_cmtyunit_csv == expected_cmtyunit_csv_str
 
 
 # def test_WorldUnit_aft_faces_ideas_to_cmty_staging_CreatesCorrectTables(

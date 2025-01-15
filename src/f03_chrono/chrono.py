@@ -191,14 +191,14 @@ def create_week_itemunits(x_weekdays_list) -> dict[str, ItemUnit]:
     }
 
 
-def new_timeline_itemunit(timeline_title: TimeLineTitle, c400_count: int) -> ItemUnit:
-    timeline_length = c400_count * get_c400_constants().c400_leap_length
+def new_timeline_itemunit(timeline_title: TimeLineTitle, c400_number: int) -> ItemUnit:
+    timeline_length = c400_number * get_c400_constants().c400_leap_length
     return itemunit_shop(timeline_title, begin=0, close=timeline_length)
 
 
 def add_newtimeline_itemunit(x_budunit: BudUnit, timeline_config: dict):
     x_item_title = timeline_config.get(timeline_title_str())
-    x_c400_count = timeline_config.get(c400_number_str())
+    x_c400_number = timeline_config.get(c400_number_str())
     x_months = timeline_config.get(months_config_str())
     x_mday = timeline_config.get(monthday_distortion_str())
     x_hours_list = timeline_config.get(hours_config_str())
@@ -211,7 +211,7 @@ def add_newtimeline_itemunit(x_budunit: BudUnit, timeline_config: dict):
     week_road = x_budunit.make_road(new_road, week_str())
     year_road = get_year_road(x_budunit, new_road)
 
-    add_stan_itemunits(x_budunit, time_road, x_item_title, x_c400_count)
+    add_stan_itemunits(x_budunit, time_road, x_item_title, x_c400_number)
     add_itemunits(x_budunit, day_road, create_hour_itemunits(x_hours_list))
     add_itemunits(x_budunit, new_road, create_week_itemunits(x_wkdays_list))
     add_itemunits(x_budunit, week_road, create_weekday_itemunits(x_wkdays_list))
@@ -232,7 +232,7 @@ def add_stan_itemunits(
     x_budunit: BudUnit,
     time_road: RoadUnit,
     timeline_title: TimeLineTitle,
-    timeline_c400_count: int,
+    timeline_c400_number: int,
 ):
     time_road = x_budunit.make_l1_road(time_str())
     new_road = x_budunit.make_road(time_road, timeline_title)
@@ -244,7 +244,7 @@ def add_stan_itemunits(
 
     if not x_budunit.item_exists(time_road):
         x_budunit.set_l1_item(itemunit_shop(time_str()))
-    timeline_itemunit = new_timeline_itemunit(timeline_title, timeline_c400_count)
+    timeline_itemunit = new_timeline_itemunit(timeline_title, timeline_c400_number)
     x_budunit.set_item(timeline_itemunit, time_road)
     x_budunit.set_item(stan_c400_leap_itemunit(), new_road)
     x_budunit.set_item(stan_c400_clean_itemunit(), c400_leap_road)
@@ -406,9 +406,9 @@ def get_default_weekdays_config() -> list[list[str, int]]:
     ]
 
 
-def create_timeline_config(
+def timeline_config_shop(
     timeline_title: TimeLineTitle = None,
-    c400_count: int = None,
+    c400_number: int = None,
     hour_length: int = None,
     month_length: int = None,
     weekday_list: list[str] = None,
@@ -418,8 +418,8 @@ def create_timeline_config(
 ) -> dict:
     if timeline_title is None:
         timeline_title = "creg"
-    if c400_count is None:
-        c400_count = 7
+    if c400_number is None:
+        c400_number = 7
     if yr1_jan1_offset is None:
         yr1_jan1_offset = 440640
 
@@ -443,7 +443,7 @@ def create_timeline_config(
         weekdays_config_str(): weekday_list,
         months_config_str(): month_config,
         timeline_title_str(): timeline_title,
-        c400_number_str(): c400_count,
+        c400_number_str(): c400_number,
         monthday_distortion_str(): get_1_if_None(monthday_distortion),
         yr1_jan1_offset_str(): yr1_jan1_offset,
     }
@@ -494,7 +494,7 @@ class ChronoUnit:
     _month: str = None
     _hour: str = None
     _minute: str = None
-    _c400_count: str = None
+    _c400_number: str = None
     _c100_count: str = None
     _yr4_count: str = None
     _year_count: str = None
@@ -544,7 +544,7 @@ class ChronoUnit:
         x_time_road = self.time_range_root_road
         x_item_dict = self.x_budunit._item_dict
         # count 400 year blocks
-        self._c400_count = self.x_min // c400_constants.c400_leap_length
+        self._c400_number = self.x_min // c400_constants.c400_leap_length
 
         # count 100 year blocks
         c400_clean_road = get_c400_clean_road(self.x_budunit, x_time_road)
@@ -564,7 +564,7 @@ class ChronoUnit:
         yr4_clean_range = calc_range(yr4_clean_items, self.x_min, self.x_min)
         self._year_count = yr4_clean_range.gogo // c400_constants.year_length
 
-        self._year_num = self._c400_count * 400
+        self._year_num = self._c400_number * 400
         self._year_num += self._c100_count * 100
         self._year_num += self._yr4_count * 4
         self._year_num += self._year_count

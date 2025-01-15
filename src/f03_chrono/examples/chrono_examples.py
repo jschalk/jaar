@@ -50,8 +50,8 @@ def get_example_timeline_config(timeline_title: str) -> dict:
 
 
 def cregtime_itemunit() -> ItemUnit:
-    c400_count = get_creg_config().get(c400_number_str())
-    return new_timeline_itemunit(get_cregtime_str(), c400_count)
+    c400_number = get_creg_config().get(c400_number_str())
+    return new_timeline_itemunit(get_cregtime_str(), c400_number)
 
 
 def get_wed():

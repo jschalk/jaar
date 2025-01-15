@@ -3,7 +3,7 @@ from src.f00_instrument.dict_toolbox import (
     get_sorted_list_of_dict_keys as get_sorted_list,
 )
 from src.f03_chrono.chrono import (
-    create_timeline_config,
+    timeline_config_shop,
     timelineunit_shop,
     validate_timeline_config,
 )
@@ -129,14 +129,14 @@ def create_timelineunit_from_prime_data(
         x_weekday_list = get_sorted_list(cmty_weekday_dict, "weekday_order")
     else:
         x_weekday_list = None
-    timeline_config = create_timeline_config(
+    timeline_config = timeline_config_shop(
         timeline_title=if_nan_return_None(cmty_attrs.get("timeline_title")),
-        c400_count=if_nan_return_None(cmty_attrs.get("c400_number")),
+        c400_number=if_nan_return_None(cmty_attrs.get("c400_number")),
         hour_length=None,
         month_length=None,
         weekday_list=x_weekday_list,
         months_list=None,
-        monthday_distortion=None,
+        monthday_distortion=if_nan_return_None(cmty_attrs.get("monthday_distortion")),
         yr1_jan1_offset=if_nan_return_None(cmty_attrs.get("yr1_jan1_offset")),
     )
     if cmty_month_dict:

@@ -746,13 +746,17 @@ def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
 
 
 def etl_aft_face_csv_files_to_cmty_db(conn: sqlite3_Connection, faces_aft_dir: str):
+    print(f"etl_aft_face_csv_files_to_cmty_db {faces_aft_dir=}")
+    print(f"etl_aft_face_csv_files_to_cmty_db {get_level1_dirs(faces_aft_dir)=}")
     for face_name in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_name)
         for idea_number in sorted(get_idea_numbers()):
             csv_filename = f"{idea_number}.csv"
             csv_path = create_path(face_dir, csv_filename)
+            print(f"{os_path_exists(csv_path)=} {csv_path=}")
             if os_path_exists(csv_path):
                 insert_idea_csv(csv_path, conn, f"{idea_number}_staging")
+    print(f"create connection {id(conn)=} etl_aft_face_csv_files_to_cmty_db")
 
 
 def etl_idea_staging_to_cmty_tables(conn):
