@@ -22,7 +22,7 @@ from src.f03_chrono.chrono import (
     c400_number_str,
     yr1_jan1_offset_str,
     validate_timeline_config,
-    create_timeline_config,
+    timeline_config_shop,
     get_default_timeline_config_dict,
     TimeLineUnit,
     timelineunit_shop,
@@ -194,10 +194,10 @@ def test_is_timeline_config_valid_ReturnsObj_CheckObjsRepeat():
     assert validate_timeline_config(creg_config)
 
 
-# TODO change create_timeline_config so that any missing parts are given default hreg config
-def test_create_timeline_config_ReturnsObj_AllParameters():
+# TODO change timeline_config_shop so that any missing parts are given default hreg config
+def test_timeline_config_shop_ReturnsObj_AllParameters():
     # ESTABLISH
-    five_c400_count = 25
+    five_c400_number = 25
     five_yr1_jan1_offset = 1683037440 + 440640  # 3200 years + JanLen + FebLen
     five_hour_length = 72
     five_month_length = 25
@@ -227,9 +227,9 @@ def test_create_timeline_config_ReturnsObj_AllParameters():
     print(f"{len(five_months_list)=} {calc_months_day_length=}")
 
     # WHEN
-    five_dict = create_timeline_config(
+    five_dict = timeline_config_shop(
         timeline_title=five_str(),
-        c400_count=five_c400_count,
+        c400_number=five_c400_number,
         hour_length=five_hour_length,
         month_length=five_month_length,
         weekday_list=five_weekday_list,
@@ -241,7 +241,7 @@ def test_create_timeline_config_ReturnsObj_AllParameters():
     # THEN
     assert validate_timeline_config(five_dict)
     assert five_dict.get(timeline_title_str()) == five_str()
-    assert five_dict.get(c400_number_str()) == five_c400_count
+    assert five_dict.get(c400_number_str()) == five_c400_number
     assert five_dict.get(weekdays_config_str()) == five_weekday_list
     x_months_config = five_dict.get(months_config_str())
     gen_months = [mon_config[0] for mon_config in x_months_config]
@@ -269,7 +269,7 @@ def test_create_timeline_config_ReturnsObj_AllParameters():
     assert expected_config == five_dict
 
 
-def test_create_timeline_config_ReturnsObj_NoParameters():
+def test_timeline_config_shop_ReturnsObj_NoParameters():
     # ESTABLISH
     h_c400_number = 7
     h_hours_config = [
@@ -326,7 +326,7 @@ def test_create_timeline_config_ReturnsObj_NoParameters():
     h_yr1_jan1_offset = 440640
 
     # WHEN
-    generated_dict = create_timeline_config()
+    generated_dict = timeline_config_shop()
 
     # THEN
     print(f"{generated_dict=}")

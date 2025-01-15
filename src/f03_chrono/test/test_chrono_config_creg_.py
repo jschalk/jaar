@@ -538,7 +538,7 @@ def test_add_time_creg_itemunit_ReturnsObjWith_offset_ItemUnits():
 # def test_BudUnit_get_item_ranged_kids_ReturnsSomeChildrenScenario2():
 #     # ESTABLISH
 #     sue_budunit = budunit_shop("Sue")
-#     sue_budunit.set_time_creg_items(c400_count=7)
+#     sue_budunit.set_time_creg_items(c400_number=7)
 
 #     # WHEN THEN
 #     time_road = sue_budunit.make_l1_road("time")
@@ -552,7 +552,7 @@ def test_add_time_creg_itemunit_ReturnsObjWith_offset_ItemUnits():
 # def test_BudUnit_get_item_ranged_kids_ReturnsSomeChildrenScenario3():
 #     # ESTABLISH
 #     sue_budunit = budunit_shop("Sue")
-#     sue_budunit.set_time_creg_items(c400_count=7)
+#     sue_budunit.set_time_creg_items(c400_number=7)
 
 #     # WHEN THEN
 #     time_road = sue_budunit.make_l1_road("time")

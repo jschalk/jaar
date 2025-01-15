@@ -27,7 +27,7 @@ def test_ChronoUnit_Exists():
     assert not x_chronounit._month
     assert not x_chronounit._hour
     assert not x_chronounit._minute
-    assert not x_chronounit._c400_count
+    assert not x_chronounit._c400_number
     assert not x_chronounit._c100_count
     assert not x_chronounit._yr4_count
     assert not x_chronounit._year_count
@@ -139,7 +139,7 @@ def test_ChronoUnit_set_year_SetsAttr():
     creg_road = sue_bud.make_road(time_road, creg_str())
     x_chronounit = chronounit_shop(sue_bud, creg_road, 1030600100)
     x_chronounit._set_timeline_item()
-    assert not x_chronounit._c400_count
+    assert not x_chronounit._c400_number
     assert not x_chronounit._c100_count
     assert not x_chronounit._yr4_count
     assert not x_chronounit._year_count
@@ -150,7 +150,7 @@ def test_ChronoUnit_set_year_SetsAttr():
 
     # THEN
     print(f"{x_chronounit._year_num=}")
-    assert x_chronounit._c400_count == 4
+    assert x_chronounit._c400_number == 4
     assert x_chronounit._c100_count == 3
     assert x_chronounit._yr4_count == 14
     assert x_chronounit._year_count == 3
