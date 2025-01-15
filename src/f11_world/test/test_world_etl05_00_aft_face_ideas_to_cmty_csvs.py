@@ -55,20 +55,20 @@ from copy import copy as copy_copy
 from platform import system as platform_system
 
 
-# def test_WorldUnit_memory_cmty_db_conn_ReturnsDBConnection(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     fizz_world = worldunit_shop("fizz")
+def test_WorldUnit_memory_cmty_db_conn_ReturnsDBConnection(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fizz_world = worldunit_shop("fizz")
 
-#     # WHEN / THEN
-#     with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
-#         assert cmty_db_conn != None
-#         cursor = cmty_db_conn.cursor()
-#         x_tablename = "random_name_table"
-#         cursor.execute(f"PRAGMA table_info({x_tablename})")
-#         columns = cursor.fetchall()
-#         assert columns == []  # implication is database exists
+    # WHEN / THEN
+    with fizz_world.memory_cmty_db_conn() as cmty_db_conn:
+        assert cmty_db_conn != None
+        cursor = cmty_db_conn.cursor()
+        x_tablename = "random_name_table"
+        cursor.execute(f"PRAGMA table_info({x_tablename})")
+        columns = cursor.fetchall()
+        assert columns == []  # implication is database exists
 
 
 def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_cmty_db(
