@@ -922,13 +922,3 @@ def etl_cmty_csvs_to_jsons(cmty_mstr_dir: str):
     # if cmtyweek_df:
     #     upsert_sheet(cmty_excel_path, cmtyweek_str, cmtyweek_df)
     create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir)
-
-    def print_cmty_mstr_dir_files(cmty_mstr_dir: str):
-        for root, dirs, files in os.walk(cmty_mstr_dir):
-            for file in files:
-                print(os.path.join(root, file))
-
-    print(f"huh")
-
-    # Example usage
-    print_cmty_mstr_dir_files(cmty_mstr_dir)

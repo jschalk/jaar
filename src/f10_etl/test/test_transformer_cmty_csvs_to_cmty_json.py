@@ -1,5 +1,4 @@
 from src.f00_instrument.file import create_path, save_file, open_file
-from src.f00_instrument.db_toolbox import db_table_exists
 from src.f01_road.finance_tran import bridge_str
 from src.f03_chrono.chrono import (
     c400_number_str,
@@ -17,30 +16,9 @@ from src.f04_gift.atom_config import (
     respect_bit_str,
 )
 from src.f07_cmty.cmty import cmtyunit_shop, get_from_json as cmtyunit_get_from_json
-from src.f07_cmty.cmty_config import (
-    get_cmty_config_args,
-    cmtyunit_str,
-    cmty_deal_episode_str,
-    cmty_cashbook_str,
-    cmty_timeline_hour_str,
-    cmty_timeline_month_str,
-    cmty_timeline_weekday_str,
-    current_time_str,
-)
-from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.idea_config import idea_number_str
-from src.f09_idea.pandas_tool import get_pragma_table_fetchall, get_sorting_columns
-from src.f10_etl.transformers import (
-    etl_aft_face_csv_files_to_cmty_db,
-    create_cmty_tables,
-    populate_cmty_staging_tables,
-    populate_cmty_agg_tables,
-    etl_cmty_staging_tables_to_cmty_csvs,
-    etl_cmty_agg_tables_to_cmty_csvs,
-    etl_cmty_csvs_to_jsons,
-)
+from src.f07_cmty.cmty_config import cmtyunit_str, current_time_str
+from src.f10_etl.transformers import etl_cmty_csvs_to_jsons
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
-from copy import copy as copy_copy
 from os.path import exists as os_path_exists
 
 
@@ -77,7 +55,3 @@ def test_etl_cmty_csvs_to_jsons_CreateFiles(env_dir_setup_cleanup):
     accord45_cmty = cmtyunit_get_from_json(open_file(accord45_json_path))
     assert accord23_cmty == cmtyunit_shop(accord23_str)
     assert accord45_cmty == cmtyunit_shop(accord45_str)
-
-
-# reference
-# create_cmtyunit_jsons_from_prime_files
