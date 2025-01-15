@@ -226,7 +226,7 @@ def test_WorldUnit_memory_cmty_db_conn_CreatesCmtyStagingTables(
         assert cmtyweek_stage_pragma == cursor.fetchall()
 
 
-def test_WorldUnit_memory_cmty_db_conn_PopulatesCmtyStagingTables(
+def test_WorldUnit_memory_cmty_db_conn_Bud_category_idea_PopulatesCmtyStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

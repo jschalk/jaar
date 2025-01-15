@@ -142,24 +142,22 @@ def get_row_count(db_conn: Connection, table_name: str) -> str:
 
 def check_table_column_existence(tables_dict: dict, db_conn: Connection) -> bool:
     db_tables = get_db_tables(db_conn)
-    print(f"{db_tables.keys()=}")
     db_tables_columns = get_db_columns(db_conn)
 
-    # for table_name, table_dict in tables_dict.items():
-    for table_name in tables_dict:
-        if db_tables.get(table_name) is None:
-            print(f"Table {table_name} is missing")
-            return False
+    # # for table_name, table_dict in tables_dict.items():
+    # for table_name in tables_dict:
+    #     if db_tables.get(table_name) is None:
+    #         # print(f"Table {table_name} is missing")
+    #         return False
 
-        # db_columns = set(db_tables_columns.get(table_name).keys())
-        # config_columns = set(table_dict.get("columns").keys())
-        # diff_columns = db_columns.symmetric_difference(config_columns)
-        # print(f"Table: {table_name} Column differences: {diff_columns}")
+    #     # db_columns = set(db_tables_columns.get(table_name).keys())
+    #     # config_columns = set(table_dict.get("columns").keys())
+    #     # diff_columns = db_columns.symmetric_difference(config_columns)
+    #     # print(f"Table: {table_name} Column differences: {diff_columns}")
 
-        # if diff_columns:
-        #     return False
-
-    return True
+    #     # if diff_columns:
+    #     #     return False
+    return all(db_tables.get(table_name) is not None for table_name in tables_dict)
 
 
 @contextmanager
@@ -251,7 +249,6 @@ def insert_csv(
             insert_query = f"INSERT INTO {table_name} ({', '.join(headers)}) VALUES ({placeholders})"
             # Insert each row into the database
             for row in reader:
-                print(f"{insert_query=} {row=}")
                 cursor.execute(insert_query, row)
 
         # Commit the transaction
@@ -332,7 +329,4 @@ def db_table_exists(conn: sqlite3_Connection, tablename: str) -> bool:
     cursor.execute(table_master_sqlstr)
     result = cursor.fetchone()
     cursor.close()
-    if result:
-        return True
-    else:
-        return False
+    return bool(result)
