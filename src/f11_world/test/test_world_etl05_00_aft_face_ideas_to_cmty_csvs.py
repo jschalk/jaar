@@ -92,6 +92,7 @@ def test_WorldUnit_memory_cmty_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    print(f"{sue_aft_dir=}")
     fizz_world = worldunit_shop("Fizz")
 
     # WHEN / THEN
