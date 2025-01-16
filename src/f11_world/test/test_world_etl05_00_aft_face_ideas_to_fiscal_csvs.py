@@ -290,7 +290,7 @@ def test_WorldUnit_memory_fiscal_db_conn_Bud_category_idea_PopulatesFiscalStagin
 
 def test_WorldUnit_memory_fiscal_db_conn_PopulatesFiscalAggTables(
     env_dir_setup_cleanup,
-):
+):  # sourcery skip: extract-method
 
     # ESTABLISH
     sue_inx = "Suzy"
@@ -314,43 +314,41 @@ def test_WorldUnit_memory_fiscal_db_conn_PopulatesFiscalAggTables(
     fizz_world = worldunit_shop("fizz")
 
     # WHEN / THEN
-    # with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
-    fiscal_db_conn = fizz_world.memory_fiscal_db_conn()
-    cursor = fiscal_db_conn.cursor()
-    # fiscalunit_stage_tablename = f"{fiscalunit_str()}_staging"
-    # cursor.execute(f"SELECT * FROM {fiscalunit_stage_tablename};")
-    # fiscalunit_stage_rows = cursor.fetchall()
-    # assert len(fiscalunit_stage_rows) == 4
+    with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
+        cursor = fiscal_db_conn.cursor()
+        # fiscalunit_stage_tablename = f"{fiscalunit_str()}_staging"
+        # cursor.execute(f"SELECT * FROM {fiscalunit_stage_tablename};")
+        # fiscalunit_stage_rows = cursor.fetchall()
+        # assert len(fiscalunit_stage_rows) == 4
 
-    fiscalunit_agg_tablename = f"{fiscalunit_str()}_agg"
-    cursor.execute(f"SELECT * FROM {fiscalunit_agg_tablename};")
-    fiscalunit_agg_rows = cursor.fetchall()
-    expected_row1 = (
-        accord23_str,  # fiscal_title
-        None,  # fund_coin
-        None,  # penny
-        None,  # respect_bit
-        None,  # current_time
-        None,  # bridge
-        None,  # c400_number
-        None,  # yr1_jan1_offset
-        None,  # monthday_distortion
-        None,  # timeline_title
-    )
-    expected_row2 = (
-        accord45_str,  # fiscal_title
-        None,  # fund_coin
-        None,  # penny
-        None,  # respect_bit
-        None,  # current_time
-        None,  # bridge
-        None,  # c400_number
-        None,  # yr1_jan1_offset
-        None,  # monthday_distortion
-        None,  # timeline_title
-    )
-    assert fiscalunit_agg_rows == [expected_row1, expected_row2]
-    fiscal_db_conn.close()
+        fiscalunit_agg_tablename = f"{fiscalunit_str()}_agg"
+        cursor.execute(f"SELECT * FROM {fiscalunit_agg_tablename};")
+        fiscalunit_agg_rows = cursor.fetchall()
+        expected_row1 = (
+            accord23_str,  # fiscal_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        expected_row2 = (
+            accord45_str,  # fiscal_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+        )
+        assert fiscalunit_agg_rows == [expected_row1, expected_row2]
 
 
 def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(

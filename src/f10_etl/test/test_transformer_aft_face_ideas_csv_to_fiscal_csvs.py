@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, save_file, open_file
-from src.f00_instrument.db_toolbox import db_table_exists
+from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
 from src.f01_road.finance_tran import bridge_str
 from src.f03_chrono.chrono import (
     c400_number_str,
@@ -241,15 +241,13 @@ def test_populate_fiscal_staging_tables_PopulatesFiscalStagingTables(
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         etl_aft_face_csv_files_to_fiscal_db(fiscal_db_conn, aft_faces_dir)
         create_fiscal_tables(fiscal_db_conn)
-        cursor = fiscal_db_conn.cursor()
-        cursor.execute(f"SELECT * FROM {fiscalunit_tablename}")
-        fiscalunit_db_rows = cursor.fetchall()
-        assert fiscalunit_db_rows == []
+        assert get_row_count(fiscal_db_conn, fiscalunit_tablename) == 0
 
         # WHEN
         populate_fiscal_staging_tables(fiscal_db_conn)
 
         # THEN
+        cursor = fiscal_db_conn.cursor()
         cursor.execute(f"SELECT * FROM {fiscalunit_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row1 = (
