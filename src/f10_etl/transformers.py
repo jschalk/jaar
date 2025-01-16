@@ -22,6 +22,7 @@ from src.f09_idea.pandas_tool import (
     insert_idea_csv,
     save_table_to_csv,
     open_csv,
+    get_ordered_csv,
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
@@ -738,10 +739,7 @@ def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
         face_dir = create_path(faces_aft_dir, face_name)
         for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
             face_idea_excel_path = create_path(face_dir, face_br_ref.file_name)
-            idea_csv = pandas_read_excel(face_idea_excel_path, "inx").to_csv(
-                index=False
-            )
-            idea_csv = idea_csv.replace("\r", "")
+            idea_csv = get_ordered_csv(pandas_read_excel(face_idea_excel_path, "inx"))
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 
 
