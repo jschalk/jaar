@@ -9,12 +9,7 @@ from src.f03_chrono.chrono import (
 )
 from src.f07_fiscal.fiscal import fiscalunit_shop
 from src.f09_idea.idea import _add_cashpurchases_from_df, _add_dealepisodes_from_df
-from src.f09_idea.pandas_tool import (
-    upsert_sheet,
-    dataframe_to_dict,
-    if_nan_return_None,
-    get_sorting_columns,
-)
+from src.f09_idea.pandas_tool import upsert_sheet, dataframe_to_dict, if_nan_return_None
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
@@ -99,14 +94,12 @@ class FiscalPrimeColumnsRef:
 
         _front_cols = ["idea_number", "face_name", "event_int"]
         _back_cols = ["note"]
-        self.unit_agg_csv_header = """fiscal_title,fund_coin,penny,respect_bit,current_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title"""
-        self.deal_agg_csv_header = """fiscal_title,owner_name,time_int,quota"""
-        self.cash_agg_csv_header = (
-            """fiscal_title,owner_name,acct_name,time_int,amount"""
-        )
-        self.hour_agg_csv_header = """fiscal_title,hour_title,cumlative_minute"""
-        self.mont_agg_csv_header = """fiscal_title,month_title,cumlative_day"""
-        self.week_agg_csv_header = """fiscal_title,weekday_title,weekday_order"""
+        self.unit_agg_csv_header = "fiscal_title,fund_coin,penny,respect_bit,current_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title"
+        self.deal_agg_csv_header = "fiscal_title,owner_name,time_int,quota"
+        self.cash_agg_csv_header = "fiscal_title,owner_name,acct_name,time_int,amount"
+        self.hour_agg_csv_header = "fiscal_title,hour_title,cumlative_minute"
+        self.mont_agg_csv_header = "fiscal_title,month_title,cumlative_day"
+        self.week_agg_csv_header = "fiscal_title,weekday_title,weekday_order"
         self.unit_staging_columns = [*_front_cols, *self.unit_agg_columns, *_back_cols]
         self.deal_staging_columns = [*_front_cols, *self.deal_agg_columns, *_back_cols]
         self.cash_staging_columns = [*_front_cols, *self.cash_agg_columns, *_back_cols]

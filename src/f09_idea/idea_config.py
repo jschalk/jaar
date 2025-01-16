@@ -515,7 +515,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "quota": "REAL",
         "monthday_distortion": "INTEGER",
         "timeline_title": "TEXT",
-        "note": "INT",
+        "note": "TEXT",
     }
 
 
