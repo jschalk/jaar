@@ -29,7 +29,10 @@ from src.f07_fiscal.fiscal_config import (
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_config import idea_number_str
 from src.f09_idea.pandas_tool import get_pragma_table_fetchall, get_sorting_columns
-from src.f10_etl.fiscal_etl_tool import FiscalPrimeObjsTestingRef
+from src.f10_etl.fiscal_etl_tool import (
+    FiscalPrimeObjsRef,
+    FiscalPrimeColumnsRef,
+)
 from src.f10_etl.transformers import (
     etl_aft_face_csv_files_to_fiscal_db,
     create_fiscal_tables,
@@ -104,20 +107,6 @@ def test_create_fiscal_tables_CreatesFiscalStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    agg_str = "_agg"
-    fiscalunit_agg_tablename = f"{fiscalunit_str()}{agg_str}"
-    fiscaldeal_agg_tablename = f"{fiscal_deal_episode_str()}{agg_str}"
-    fiscalcash_agg_tablename = f"{fiscal_cashbook_str()}{agg_str}"
-    fiscalhour_agg_tablename = f"{fiscal_timeline_hour_str()}{agg_str}"
-    fiscalmont_agg_tablename = f"{fiscal_timeline_month_str()}{agg_str}"
-    fiscalweek_agg_tablename = f"{fiscal_timeline_weekday_str()}{agg_str}"
-    staging_str = "_staging"
-    fiscalunit_stage_tablename = f"{fiscalunit_str()}{staging_str}"
-    fiscaldeal_stage_tablename = f"{fiscal_deal_episode_str()}{staging_str}"
-    fiscalcash_stage_tablename = f"{fiscal_cashbook_str()}{staging_str}"
-    fiscalhour_stage_tablename = f"{fiscal_timeline_hour_str()}{staging_str}"
-    fiscalmont_stage_tablename = f"{fiscal_timeline_month_str()}{staging_str}"
-    fiscalweek_stage_tablename = f"{fiscal_timeline_weekday_str()}{staging_str}"
     fiscalunit_args = get_fiscal_config_args(fiscalunit_str()).keys()
     fiscaldeal_args = get_fiscal_config_args(fiscal_deal_episode_str()).keys()
     fiscalcash_args = get_fiscal_config_args(fiscal_cashbook_str()).keys()
@@ -158,65 +147,66 @@ def test_create_fiscal_tables_CreatesFiscalStagingTables(
     fiscalweek_stage_pragma = get_pragma_table_fetchall(fiscalweek_stage_columns)
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        assert db_table_exists(fiscal_db_conn, fiscalunit_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, fiscaldeal_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, fiscalcash_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, fiscalhour_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, fiscalmont_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, fiscalweek_agg_tablename) is False
-        assert db_table_exists(fiscal_db_conn, fiscalunit_stage_tablename) is False
-        assert db_table_exists(fiscal_db_conn, fiscaldeal_stage_tablename) is False
-        assert db_table_exists(fiscal_db_conn, fiscalcash_stage_tablename) is False
-        assert db_table_exists(fiscal_db_conn, fiscalhour_stage_tablename) is False
-        assert db_table_exists(fiscal_db_conn, fiscalmont_stage_tablename) is False
-        assert db_table_exists(fiscal_db_conn, fiscalweek_stage_tablename) is False
+        fis_objs = FiscalPrimeObjsRef()
+        assert db_table_exists(fiscal_db_conn, fis_objs.unit_agg_tablename) is False
+        assert db_table_exists(fiscal_db_conn, fis_objs.deal_agg_tablename) is False
+        assert db_table_exists(fiscal_db_conn, fis_objs.cash_agg_tablename) is False
+        assert db_table_exists(fiscal_db_conn, fis_objs.hour_agg_tablename) is False
+        assert db_table_exists(fiscal_db_conn, fis_objs.mont_agg_tablename) is False
+        assert db_table_exists(fiscal_db_conn, fis_objs.week_agg_tablename) is False
+        assert db_table_exists(fiscal_db_conn, fis_objs.unit_stage_tablename) is False
+        assert db_table_exists(fiscal_db_conn, fis_objs.deal_stage_tablename) is False
+        assert db_table_exists(fiscal_db_conn, fis_objs.cash_stage_tablename) is False
+        assert db_table_exists(fiscal_db_conn, fis_objs.hour_stage_tablename) is False
+        assert db_table_exists(fiscal_db_conn, fis_objs.mont_stage_tablename) is False
+        assert db_table_exists(fiscal_db_conn, fis_objs.week_stage_tablename) is False
 
         # WHEN
         create_fiscal_tables(fiscal_db_conn)
 
         # THEN
-        assert db_table_exists(fiscal_db_conn, fiscalunit_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fiscaldeal_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fiscalcash_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fiscalhour_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fiscalmont_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fiscalweek_agg_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.unit_agg_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.deal_agg_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.cash_agg_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.hour_agg_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.mont_agg_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.week_agg_tablename)
 
-        assert db_table_exists(fiscal_db_conn, fiscalunit_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fiscaldeal_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fiscalcash_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fiscalhour_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fiscalmont_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fiscalweek_stage_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.unit_stage_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.deal_stage_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.cash_stage_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.hour_stage_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.mont_stage_tablename)
+        assert db_table_exists(fiscal_db_conn, fis_objs.week_stage_tablename)
         cursor = fiscal_db_conn.cursor()
-        cursor.execute(f"PRAGMA table_info({fiscalunit_agg_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.unit_agg_tablename})")
         assert fiscalunit_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fiscaldeal_agg_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.deal_agg_tablename})")
         assert fiscaldeal_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fiscalcash_agg_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.cash_agg_tablename})")
         assert fiscalcash_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fiscalhour_agg_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.hour_agg_tablename})")
         assert fiscalhour_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fiscalmont_agg_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.mont_agg_tablename})")
         assert fiscalmont_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fiscalweek_agg_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.week_agg_tablename})")
         assert fiscalweek_agg_pragma == cursor.fetchall()
 
-        cursor.execute(f"PRAGMA table_info({fiscalunit_stage_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.unit_stage_tablename})")
         assert fiscalunit_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fiscaldeal_stage_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.deal_stage_tablename})")
         assert fiscaldeal_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fiscalcash_stage_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.cash_stage_tablename})")
         assert fiscalcash_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fiscalhour_stage_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.hour_stage_tablename})")
         assert fiscalhour_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fiscalmont_stage_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.mont_stage_tablename})")
         assert fiscalmont_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fiscalweek_stage_tablename})")
+        cursor.execute(f"PRAGMA table_info({fis_objs.week_stage_tablename})")
         assert fiscalweek_stage_pragma == cursor.fetchall()
 
 
-def test_populate_fiscal_staging_tables_PopulatesFiscalStagingTables(
+def test_populate_fiscal_staging_tables_Scenario0_PopulatesFiscalStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -361,7 +351,7 @@ def test_etl_fiscal_staging_tables_to_fiscal_csvs_CreateFiles(env_dir_setup_clea
         create_fiscal_tables(fiscal_db_conn)
         cursor = fiscal_db_conn.cursor()
         insert_staging_sqlstr = f"""
-INSERT INTO fiscalunit_staging (idea_number, face_name, event_int, fiscal_title)
+INSERT INTO fiscalunit_staging ({idea_number_str()}, {face_name_str()}, {event_int_str()}, {fiscal_title_str()})
 VALUES 
   ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
 , ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
@@ -372,7 +362,7 @@ VALUES
         cursor.execute(insert_staging_sqlstr)
         fiscal_mstr_dir = get_test_etl_dir()
         fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-        fiscalref = FiscalPrimeObjsTestingRef(fiscals_dir)
+        fiscalref = FiscalPrimeObjsRef(fiscals_dir)
         assert os_path_exists(fiscalref.unit_stage_csv_path) is False
         assert os_path_exists(fiscalref.deal_stage_csv_path) is False
         assert os_path_exists(fiscalref.cash_stage_csv_path) is False
@@ -416,9 +406,9 @@ def test_etl_fiscal_agg_tables_to_fiscal_csvs_CreateFiles(env_dir_setup_cleanup)
         create_fiscal_tables(fiscal_db_conn)
         cursor = fiscal_db_conn.cursor()
         fiscal_mstr_dir = get_test_etl_dir()
-        fiscalref = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
+        fiscalref = FiscalPrimeObjsRef(fiscal_mstr_dir)
         insert_agg_sqlstr = f"""
-INSERT INTO {fiscalref.unit_agg_tablename} (fiscal_title)
+INSERT INTO {fiscalref.unit_agg_tablename} ({fiscal_title_str()})
 VALUES ('{accord23_str}'), ('{accord45_str}')
 ;
 """

@@ -23,8 +23,8 @@ from src.f07_fiscal.fiscal import (
 )
 from src.f07_fiscal.fiscal_config import fiscalunit_str, current_time_str
 from src.f10_etl.fiscal_etl_tool import (
-    FiscalPrimeColumnsTestingRef,
-    FiscalPrimeObjsTestingRef,
+    FiscalPrimeColumnsRef,
+    FiscalPrimeObjsRef,
 )
 from src.f10_etl.transformers import etl_fiscal_csvs_to_jsons
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -38,8 +38,8 @@ def test_etl_fiscal_csvs_to_jsons_Scenario0_CreateFilesWithOnlyFiscalTitle(
     accord23_str = "accord23"
     accord45_str = "accord45"
     fiscal_mstr_dir = get_test_etl_dir()
-    x_objs = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    x_cols = FiscalPrimeColumnsTestingRef()
+    x_objs = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    x_cols = FiscalPrimeColumnsRef()
     fiscalunit_agg_csv_str = f"""{x_cols.unit_agg_csv_header}
 {accord23_str},,,,,,,,,
 {accord45_str},,,,,,,,,
@@ -79,8 +79,8 @@ def test_etl_fiscal_csvs_to_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs(
     accord23_str = "accord23"
     accord45_str = "accord45"
     fiscal_mstr_dir = get_test_etl_dir()
-    x_objs = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    x_cols = FiscalPrimeColumnsTestingRef()
+    x_objs = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    x_cols = FiscalPrimeColumnsRef()
     a45_fund_coin = 3
     a45_penny = 5
     a45_respect_bit = 7

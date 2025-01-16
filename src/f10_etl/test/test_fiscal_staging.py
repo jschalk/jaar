@@ -20,10 +20,10 @@ from src.f07_fiscal.fiscal_config import (
     get_fiscal_config_args,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.pandas_tool import sheet_exists, upsert_sheet
+from src.f09_idea.pandas_tool import sheet_exists, upsert_sheet, get_sorting_columns
 from src.f10_etl.fiscal_etl_tool import (
-    FiscalPrimeObjsTestingRef,
-    FiscalPrimeColumnsTestingRef,
+    FiscalPrimeObjsRef,
+    FiscalPrimeColumnsRef,
     create_init_fiscal_prime_files,
     create_fiscalunit_jsons_from_prime_files,
 )
@@ -40,12 +40,12 @@ from os.path import exists as os_path_exists
 # br00005 fiscal_title weekday_title,weekday_order
 
 
-def test_FiscalPrimeObjsTestingRef_Exists():
+def test_FiscalPrimeObjsRef_Exists():
     # ESTABLISH
     x_dir = get_test_etl_dir()
 
     # WHEN
-    xp = FiscalPrimeObjsTestingRef(x_dir)
+    xp = FiscalPrimeObjsRef(x_dir)
 
     # THEN
     assert xp
@@ -101,80 +101,80 @@ def test_FiscalPrimeObjsTestingRef_Exists():
     assert xp.week_excel_path == create_path(x_dir, xp.week_excel_filename)
 
 
-def test_FiscalPrimeColumnsTestingRef_Exists():
+def test_FiscalPrimeColumnsRef_Exists():
     # ESTABLISH / WHEN
-    x_fiscalprimecols = FiscalPrimeColumnsTestingRef()
+    fis_cols = FiscalPrimeColumnsRef()
 
     # THEN
-    fiscalcash_args = set(get_fiscal_config_args(fiscal_cashbook_str()).keys())
-    fiscaldeal_args = set(get_fiscal_config_args(fiscal_deal_episode_str()).keys())
-    fiscalhour_args = set(get_fiscal_config_args(fiscal_timeline_hour_str()).keys())
-    fiscalmont_args = set(get_fiscal_config_args(fiscal_timeline_month_str()).keys())
-    fiscalweek_args = set(get_fiscal_config_args(fiscal_timeline_weekday_str()).keys())
-    fiscalunit_args = set(get_fiscal_config_args(fiscalunit_str()).keys())
-    assert set(x_fiscalprimecols.cash_agg_columns) == fiscalcash_args
-    assert set(x_fiscalprimecols.deal_agg_columns) == fiscaldeal_args
-    assert set(x_fiscalprimecols.hour_agg_columns) == fiscalhour_args
-    assert set(x_fiscalprimecols.mont_agg_columns) == fiscalmont_args
-    assert set(x_fiscalprimecols.week_agg_columns) == fiscalweek_args
-    assert set(x_fiscalprimecols.unit_agg_columns) == fiscalunit_args
+    unit_args = set(get_fiscal_config_args(fiscalunit_str()).keys())
+    cash_args = set(get_fiscal_config_args(fiscal_cashbook_str()).keys())
+    deal_args = set(get_fiscal_config_args(fiscal_deal_episode_str()).keys())
+    hour_args = set(get_fiscal_config_args(fiscal_timeline_hour_str()).keys())
+    mont_args = set(get_fiscal_config_args(fiscal_timeline_month_str()).keys())
+    week_args = set(get_fiscal_config_args(fiscal_timeline_weekday_str()).keys())
+    print(f"           {fis_cols.unit_agg_columns=}")
+    print(f"{get_sorting_columns(list(unit_args))=}")
+    assert fis_cols.unit_agg_columns == get_sorting_columns(list(unit_args))
+    assert fis_cols.cash_agg_columns == get_sorting_columns(list(cash_args))
+    assert fis_cols.deal_agg_columns == get_sorting_columns(list(deal_args))
+    assert fis_cols.hour_agg_columns == get_sorting_columns(list(hour_args))
+    assert fis_cols.mont_agg_columns == get_sorting_columns(list(mont_args))
+    assert fis_cols.week_agg_columns == get_sorting_columns(list(week_args))
 
-    staging_args = {"source_br", face_name_str(), event_int_str(), "note"}
-    fiscalcash_staging = fiscalcash_args.union(staging_args)
-    fiscaldeal_staging = fiscaldeal_args.union(staging_args)
-    fiscalhour_staging = fiscalhour_args.union(staging_args)
-    fiscalmont_staging = fiscalmont_args.union(staging_args)
-    fiscalweek_staging = fiscalweek_args.union(staging_args)
-    fiscalunit_staging = fiscalunit_args.union(staging_args)
-    assert set(x_fiscalprimecols.cash_staging_columns) == fiscalcash_staging
-    assert set(x_fiscalprimecols.deal_staging_columns) == fiscaldeal_staging
-    assert set(x_fiscalprimecols.hour_staging_columns) == fiscalhour_staging
-    assert set(x_fiscalprimecols.mont_staging_columns) == fiscalmont_staging
-    assert set(x_fiscalprimecols.week_staging_columns) == fiscalweek_staging
-    assert set(x_fiscalprimecols.unit_staging_columns) == fiscalunit_staging
+    staging_args = {"idea_number", face_name_str(), event_int_str(), "note"}
+    unit_staging_args = unit_args.union(staging_args)
+    cash_staging_args = cash_args.union(staging_args)
+    deal_staging_args = deal_args.union(staging_args)
+    hour_staging_args = hour_args.union(staging_args)
+    mont_staging_args = mont_args.union(staging_args)
+    week_staging_args = week_args.union(staging_args)
+    assert fis_cols.unit_staging_columns == get_sorting_columns(list(unit_staging_args))
+    assert fis_cols.cash_staging_columns == get_sorting_columns(list(cash_staging_args))
+    assert fis_cols.deal_staging_columns == get_sorting_columns(list(deal_staging_args))
+    assert fis_cols.hour_staging_columns == get_sorting_columns(list(hour_staging_args))
+    assert fis_cols.mont_staging_columns == get_sorting_columns(list(mont_staging_args))
+    assert fis_cols.week_staging_columns == get_sorting_columns(list(week_staging_args))
 
     # unit_staging_csv_header = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}"""
-    unit_staging_csv_header = """source_br,face_name,event_int,fiscal_title,fund_coin,penny,respect_bit,current_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title,note"""
-    deal_staging_csv_header = (
-        """source_br,face_name,event_int,fiscal_title,owner_name,time_int,quota,note"""
-    )
-    cash_staging_csv_header = """source_br,face_name,event_int,fiscal_title,owner_name,acct_name,time_int,amount,note"""
-    hour_staging_csv_header = """source_br,face_name,event_int,fiscal_title,hour_title,cumlative_minute,note"""
-    mont_staging_csv_header = (
-        """source_br,face_name,event_int,fiscal_title,month_title,cumlative_day,note"""
-    )
-    week_staging_csv_header = """source_br,face_name,event_int,fiscal_title,weekday_title,weekday_order,note"""
-    assert x_fiscalprimecols.unit_staging_csv_header == unit_staging_csv_header
-    assert x_fiscalprimecols.deal_staging_csv_header == deal_staging_csv_header
-    assert x_fiscalprimecols.cash_staging_csv_header == cash_staging_csv_header
-    assert x_fiscalprimecols.hour_staging_csv_header == hour_staging_csv_header
-    assert x_fiscalprimecols.mont_staging_csv_header == mont_staging_csv_header
-    assert x_fiscalprimecols.week_staging_csv_header == week_staging_csv_header
-    unit_agg_csv_header = """fiscal_title,fund_coin,penny,respect_bit,current_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title"""
-    deal_agg_csv_header = """fiscal_title,owner_name,time_int,quota"""
-    cash_agg_csv_header = """fiscal_title,owner_name,acct_name,time_int,amount"""
-    hour_agg_csv_header = """fiscal_title,hour_title,cumlative_minute"""
-    mont_agg_csv_header = """fiscal_title,month_title,cumlative_day"""
-    week_agg_csv_header = """fiscal_title,weekday_title,weekday_order"""
-    assert x_fiscalprimecols.unit_agg_csv_header == unit_agg_csv_header
-    assert x_fiscalprimecols.deal_agg_csv_header == deal_agg_csv_header
-    assert x_fiscalprimecols.cash_agg_csv_header == cash_agg_csv_header
-    assert x_fiscalprimecols.hour_agg_csv_header == hour_agg_csv_header
-    assert x_fiscalprimecols.mont_agg_csv_header == mont_agg_csv_header
-    assert x_fiscalprimecols.week_agg_csv_header == week_agg_csv_header
-    assert x_fiscalprimecols.unit_agg_empty_csv == f"{unit_agg_csv_header}\n"
-    assert x_fiscalprimecols.deal_agg_empty_csv == f"{deal_agg_csv_header}\n"
-    assert x_fiscalprimecols.cash_agg_empty_csv == f"{cash_agg_csv_header}\n"
-    assert x_fiscalprimecols.hour_agg_empty_csv == f"{hour_agg_csv_header}\n"
-    assert x_fiscalprimecols.mont_agg_empty_csv == f"{mont_agg_csv_header}\n"
-    assert x_fiscalprimecols.week_agg_empty_csv == f"{week_agg_csv_header}\n"
+    unit_staging_csv_header = ",".join(fis_cols.unit_staging_columns)
+    deal_staging_csv_header = ",".join(fis_cols.deal_staging_columns)
+    cash_staging_csv_header = ",".join(fis_cols.cash_staging_columns)
+    hour_staging_csv_header = ",".join(fis_cols.hour_staging_columns)
+    mont_staging_csv_header = ",".join(fis_cols.mont_staging_columns)
+    week_staging_csv_header = ",".join(fis_cols.week_staging_columns)
+
+    assert fis_cols.unit_staging_csv_header == unit_staging_csv_header
+    assert fis_cols.deal_staging_csv_header == deal_staging_csv_header
+    assert fis_cols.cash_staging_csv_header == cash_staging_csv_header
+    assert fis_cols.hour_staging_csv_header == hour_staging_csv_header
+    assert fis_cols.mont_staging_csv_header == mont_staging_csv_header
+    assert fis_cols.week_staging_csv_header == week_staging_csv_header
+    unit_agg_csv_header = ",".join(fis_cols.unit_agg_columns)
+    deal_agg_csv_header = ",".join(fis_cols.deal_agg_columns)
+    cash_agg_csv_header = ",".join(fis_cols.cash_agg_columns)
+    hour_agg_csv_header = ",".join(fis_cols.hour_agg_columns)
+    mont_agg_csv_header = ",".join(fis_cols.mont_agg_columns)
+    week_agg_csv_header = ",".join(fis_cols.week_agg_columns)
+
+    assert fis_cols.unit_agg_csv_header == unit_agg_csv_header
+    assert fis_cols.deal_agg_csv_header == deal_agg_csv_header
+    assert fis_cols.cash_agg_csv_header == cash_agg_csv_header
+    assert fis_cols.hour_agg_csv_header == hour_agg_csv_header
+    assert fis_cols.mont_agg_csv_header == mont_agg_csv_header
+    assert fis_cols.week_agg_csv_header == week_agg_csv_header
+    assert fis_cols.unit_agg_empty_csv == f"{unit_agg_csv_header}\n"
+    assert fis_cols.deal_agg_empty_csv == f"{deal_agg_csv_header}\n"
+    assert fis_cols.cash_agg_empty_csv == f"{cash_agg_csv_header}\n"
+    assert fis_cols.hour_agg_empty_csv == f"{hour_agg_csv_header}\n"
+    assert fis_cols.mont_agg_empty_csv == f"{mont_agg_csv_header}\n"
+    assert fis_cols.week_agg_empty_csv == f"{week_agg_csv_header}\n"
 
 
 def test_create_init_fiscal_prime_files_CreatesFiles_staging(env_dir_setup_cleanup):
     # ESTABLISH
     x_dir = get_test_etl_dir()
     staging_str = "staging"
-    fiscalref = FiscalPrimeObjsTestingRef(x_dir)
+    fiscalref = FiscalPrimeObjsRef(x_dir)
     assert sheet_exists(fiscalref.unit_excel_path, staging_str) is False
     assert sheet_exists(fiscalref.deal_excel_path, staging_str) is False
     assert sheet_exists(fiscalref.cash_excel_path, staging_str) is False
@@ -205,7 +205,7 @@ def test_create_init_fiscal_prime_files_HasCorrectColumns_staging(
 
     # THEN
     staging_str = "staging"
-    xp = FiscalPrimeObjsTestingRef(x_dir)
+    xp = FiscalPrimeObjsRef(x_dir)
     fiscalunit_df = pandas_read_excel(xp.unit_excel_path, sheet_name=staging_str)
     fiscaldeal_df = pandas_read_excel(xp.deal_excel_path, sheet_name=staging_str)
     fiscalcash_df = pandas_read_excel(xp.cash_excel_path, sheet_name=staging_str)
@@ -213,7 +213,7 @@ def test_create_init_fiscal_prime_files_HasCorrectColumns_staging(
     fiscalmont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=staging_str)
     fiscalweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=staging_str)
 
-    expected_cols = FiscalPrimeColumnsTestingRef()
+    expected_cols = FiscalPrimeColumnsRef()
     print(f"{list(fiscalunit_df.columns)=}")
     assert list(fiscalunit_df.columns) == expected_cols.unit_staging_columns
     assert list(fiscaldeal_df.columns) == expected_cols.deal_staging_columns
@@ -227,7 +227,7 @@ def test_create_init_fiscal_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
     # ESTABLISH
     x_dir = get_test_etl_dir()
     agg_str = "agg"
-    xp = FiscalPrimeObjsTestingRef(x_dir)
+    xp = FiscalPrimeObjsRef(x_dir)
     assert sheet_exists(xp.unit_excel_path, agg_str) is False
     assert sheet_exists(xp.deal_excel_path, agg_str) is False
     assert sheet_exists(xp.cash_excel_path, agg_str) is False
@@ -256,7 +256,7 @@ def test_create_init_fiscal_prime_files_HasCorrectColumns_agg(env_dir_setup_clea
 
     # THEN
     agg_str = "agg"
-    xp = FiscalPrimeObjsTestingRef(x_dir)
+    xp = FiscalPrimeObjsRef(x_dir)
     fiscalunit_df = pandas_read_excel(xp.unit_excel_path, sheet_name=agg_str)
     fiscaldeal_df = pandas_read_excel(xp.deal_excel_path, sheet_name=agg_str)
     fiscalcash_df = pandas_read_excel(xp.cash_excel_path, sheet_name=agg_str)
@@ -264,7 +264,7 @@ def test_create_init_fiscal_prime_files_HasCorrectColumns_agg(env_dir_setup_clea
     fiscalmont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=agg_str)
     fiscalweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=agg_str)
 
-    expected_cols = FiscalPrimeColumnsTestingRef()
+    expected_cols = FiscalPrimeColumnsRef()
     print(f"{list(fiscalunit_df.columns)=}")
     assert list(fiscalunit_df.columns) == expected_cols.unit_agg_columns
     assert list(fiscaldeal_df.columns) == expected_cols.deal_agg_columns
@@ -280,8 +280,8 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario0_MinimumNecessaryPara
     # ESTABLISH
     fiscal_mstr_dir = create_path(get_test_etl_dir(), "fiscal_mstr")
     create_init_fiscal_prime_files(fiscal_mstr_dir)
-    xp = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    xc = FiscalPrimeColumnsTestingRef()
+    xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
     accord56_fiscal_title_str = "accord56"
     accord56 = [
@@ -326,8 +326,8 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineU
     # ESTABLISH
     fiscal_mstr_dir = create_path(get_test_etl_dir(), "fiscal_mstr")
     create_init_fiscal_prime_files(fiscal_mstr_dir)
-    xp = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    xc = FiscalPrimeColumnsTestingRef()
+    xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
     accord56_fiscal_title_str = "accord56"
     accord56_current_time = 77
@@ -386,8 +386,8 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitP
     # ESTABLISH
     fiscal_mstr_dir = create_path(get_test_etl_dir(), "fiscal_mstr")
     create_init_fiscal_prime_files(fiscal_mstr_dir)
-    xp = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    xc = FiscalPrimeColumnsTestingRef()
+    xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
     accord56_fiscal_title = "accord56"
     accord56_c400_number = 9
@@ -445,8 +445,8 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario3_fiscal_timeline_week
     # ESTABLISH
     fiscal_mstr_dir = create_path(get_test_etl_dir(), "fiscal_mstr")
     create_init_fiscal_prime_files(fiscal_mstr_dir)
-    xp = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    xc = FiscalPrimeColumnsTestingRef()
+    xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
     accord56_fiscal_title = "accord56"
     accord56_fiscal_title
@@ -490,8 +490,8 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario4_fiscal_timeline_mont
     # ESTABLISH
     fiscal_mstr_dir = create_path(get_test_etl_dir(), "fiscal_mstr")
     create_init_fiscal_prime_files(fiscal_mstr_dir)
-    xp = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    xc = FiscalPrimeColumnsTestingRef()
+    xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
     accord56_fiscal_title = "accord56"
     accord56_fiscal_title
@@ -536,8 +536,8 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario5_fiscal_timeline_hour
     # ESTABLISH
     fiscal_mstr_dir = create_path(get_test_etl_dir(), "fiscal_mstr")
     create_init_fiscal_prime_files(fiscal_mstr_dir)
-    xp = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    xc = FiscalPrimeColumnsTestingRef()
+    xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
     accord56_fiscal_title = "accord56"
     accord56_fiscal_title
@@ -582,8 +582,8 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario6_fiscal_cashbook(
     # ESTABLISH
     fiscal_mstr_dir = create_path(get_test_etl_dir(), "fiscal_mstr")
     create_init_fiscal_prime_files(fiscal_mstr_dir)
-    xp = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    xc = FiscalPrimeColumnsTestingRef()
+    xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
     accord56_fiscal_title = "accord56"
     sue_str = "Sue"
@@ -630,8 +630,8 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario7_fiscal_deal_episode(
     # ESTABLISH
     fiscal_mstr_dir = create_path(get_test_etl_dir(), "fiscal_mstr")
     create_init_fiscal_prime_files(fiscal_mstr_dir)
-    xp = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    xc = FiscalPrimeColumnsTestingRef()
+    xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
     accord56_fiscal_title = "accord56"
     accord56_fiscal_title

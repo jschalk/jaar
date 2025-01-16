@@ -243,7 +243,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[71] == quota_str()
     assert table_sorting_priority[72] == monthday_distortion_str()
     assert table_sorting_priority[73] == timeline_title_str()
-    assert len(table_sorting_priority) == 74
+    assert table_sorting_priority[74] == "note"
+    assert len(table_sorting_priority) == 75
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
     fiscal_args = set(get_fiscal_args_category_mapping().keys())
@@ -258,6 +259,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     table_sorting_priority.remove(idea_number_str())
     table_sorting_priority.remove(event_int_str())
     table_sorting_priority.remove(face_name_str())
+    table_sorting_priority.remove("note")
     assert atom_fiscal_pidgin_args == set(table_sorting_priority)
 
 

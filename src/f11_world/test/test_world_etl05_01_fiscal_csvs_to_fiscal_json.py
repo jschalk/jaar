@@ -32,8 +32,8 @@ from src.f07_fiscal.fiscal_config import (
     current_time_str,
 )
 from src.f10_etl.fiscal_etl_tool import (
-    FiscalPrimeObjsTestingRef,
-    FiscalPrimeColumnsTestingRef,
+    FiscalPrimeObjsRef,
+    FiscalPrimeColumnsRef,
 )
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -49,8 +49,8 @@ def test_WorldUnit_fiscal_csvs_to_jsons_Scenario0_CreateFilesWithOnlyFiscalTitle
     accord45_str = "accord45"
     fizz_world = worldunit_shop("fizz")
     fiscal_mstr_dir = fizz_world._fiscal_mstr_dir
-    x_objs = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    x_cols = FiscalPrimeColumnsTestingRef()
+    x_objs = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    x_cols = FiscalPrimeColumnsRef()
     fiscalunit_csv_str = f"""{x_cols.unit_agg_csv_header}
 {accord23_str},,,,,,,,,
 {accord45_str},,,,,,,,,
@@ -101,8 +101,8 @@ def test_WorldUnit_fiscal_csvs_to_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs
     a45_timeline_title = "a45_timeline"
     fizz_world = worldunit_shop("fizz")
     fiscal_mstr_dir = fizz_world._fiscal_mstr_dir
-    x_objs = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    x_cols = FiscalPrimeColumnsTestingRef()
+    x_objs = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    x_cols = FiscalPrimeColumnsRef()
     fiscalunit_csv_str = f"""{x_cols.unit_agg_csv_header}
 {accord23_str},,,,,,,,,
 {accord45_str},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_current_time},{a45_bridge},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_timeline_title}

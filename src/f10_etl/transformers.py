@@ -28,8 +28,8 @@ from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import (
     create_fiscalunit_jsons_from_prime_files,
-    FiscalPrimeObjsTestingRef,
-    FiscalPrimeColumnsTestingRef,
+    FiscalPrimeObjsRef,
+    FiscalPrimeColumnsRef,
 )
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
@@ -931,8 +931,8 @@ def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
     upsert_sheet(fiscalweek_excel_path, "agg", fiscalweek_df)
 
     # TODO replace empty sheet upsert with csv file upsert
-    # xp = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
-    # xc = FiscalPrimeColumnsTestingRef()
+    # xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    # xc = FiscalPrimeColumnsRef()
     # agg_fiscal_deal_df = DataFrame([], columns=xc.fiscal_deal_agg_columns)
     # agg_fiscal_cashbook_df = DataFrame([], columns=xc.fiscal_cashbook_agg_columns)
     # agg_fiscal_hour_df = DataFrame([], columns=xc.fiscal_hour_agg_columns)

@@ -18,8 +18,8 @@ from src.f09_idea.pandas_tool import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-class FiscalPrimeObjsTestingRef:
-    def __init__(self, x_dir: str):
+class FiscalPrimeObjsRef:
+    def __init__(self, x_dir: str = ""):
         self.unit_agg_tablename = "fiscalunit_agg"
         self.deal_agg_tablename = "fiscal_deal_episode_agg"
         self.cash_agg_tablename = "fiscal_cashbook_agg"
@@ -71,19 +71,19 @@ class FiscalPrimeObjsTestingRef:
         self.week_excel_path = create_path(x_dir, "fiscal_timeline_weekday.xlsx")
 
 
-class FiscalPrimeColumnsTestingRef:
+class FiscalPrimeColumnsRef:
     def __init__(self):
         self.unit_agg_columns = [
             "fiscal_title",
-            "c400_number",
-            "current_time",
             "fund_coin",
-            "monthday_distortion",
             "penny",
             "respect_bit",
+            "current_time",
             "bridge",
-            "timeline_title",
+            "c400_number",
             "yr1_jan1_offset",
+            "monthday_distortion",
+            "timeline_title",
         ]
         self.deal_agg_columns = ["fiscal_title", "owner_name", "time_int", "quota"]
         self.cash_agg_columns = [
@@ -96,33 +96,29 @@ class FiscalPrimeColumnsTestingRef:
         self.hour_agg_columns = ["fiscal_title", "hour_title", "cumlative_minute"]
         self.mont_agg_columns = ["fiscal_title", "month_title", "cumlative_day"]
         self.week_agg_columns = ["fiscal_title", "weekday_title", "weekday_order"]
-        self.unit_agg_columns = get_sorting_columns(self.unit_agg_columns)
-        self.deal_agg_columns = get_sorting_columns(self.deal_agg_columns)
-        self.cash_agg_columns = get_sorting_columns(self.cash_agg_columns)
-        self.hour_agg_columns = get_sorting_columns(self.hour_agg_columns)
-        self.mont_agg_columns = get_sorting_columns(self.mont_agg_columns)
-        self.week_agg_columns = get_sorting_columns(self.week_agg_columns)
 
-        _front_cols = ["source_br", "face_name", "event_int"]
+        _front_cols = ["idea_number", "face_name", "event_int"]
         _back_cols = ["note"]
-        self.unit_agg_csv_header = ",".join(self.unit_agg_columns)
-        self.deal_agg_csv_header = ",".join(self.deal_agg_columns)
-        self.cash_agg_csv_header = ",".join(self.cash_agg_columns)
-        self.hour_agg_csv_header = ",".join(self.hour_agg_columns)
-        self.mont_agg_csv_header = ",".join(self.mont_agg_columns)
-        self.week_agg_csv_header = ",".join(self.week_agg_columns)
+        self.unit_agg_csv_header = """fiscal_title,fund_coin,penny,respect_bit,current_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title"""
+        self.deal_agg_csv_header = """fiscal_title,owner_name,time_int,quota"""
+        self.cash_agg_csv_header = (
+            """fiscal_title,owner_name,acct_name,time_int,amount"""
+        )
+        self.hour_agg_csv_header = """fiscal_title,hour_title,cumlative_minute"""
+        self.mont_agg_csv_header = """fiscal_title,month_title,cumlative_day"""
+        self.week_agg_csv_header = """fiscal_title,weekday_title,weekday_order"""
         self.unit_staging_columns = [*_front_cols, *self.unit_agg_columns, *_back_cols]
         self.deal_staging_columns = [*_front_cols, *self.deal_agg_columns, *_back_cols]
         self.cash_staging_columns = [*_front_cols, *self.cash_agg_columns, *_back_cols]
         self.hour_staging_columns = [*_front_cols, *self.hour_agg_columns, *_back_cols]
         self.mont_staging_columns = [*_front_cols, *self.mont_agg_columns, *_back_cols]
         self.week_staging_columns = [*_front_cols, *self.week_agg_columns, *_back_cols]
-        self.unit_staging_csv_header = ",".join(self.unit_staging_columns)
-        self.deal_staging_csv_header = ",".join(self.deal_staging_columns)
-        self.cash_staging_csv_header = ",".join(self.cash_staging_columns)
-        self.hour_staging_csv_header = ",".join(self.hour_staging_columns)
-        self.mont_staging_csv_header = ",".join(self.mont_staging_columns)
-        self.week_staging_csv_header = ",".join(self.week_staging_columns)
+        self.unit_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,fund_coin,penny,respect_bit,current_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title,note"""
+        self.deal_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,owner_name,time_int,quota,note"""
+        self.cash_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,owner_name,acct_name,time_int,amount,note"""
+        self.hour_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,hour_title,cumlative_minute,note"""
+        self.mont_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,month_title,cumlative_day,note"""
+        self.week_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,weekday_title,weekday_order,note"""
         self.unit_agg_empty_csv = f"{self.unit_agg_csv_header}\n"
         self.deal_agg_empty_csv = f"{self.deal_agg_csv_header}\n"
         self.cash_agg_empty_csv = f"{self.cash_agg_csv_header}\n"
@@ -132,8 +128,8 @@ class FiscalPrimeColumnsTestingRef:
 
 
 def create_init_fiscal_prime_files(fiscals_dir: str):
-    fiscalref = FiscalPrimeObjsTestingRef(fiscals_dir)
-    xc = FiscalPrimeColumnsTestingRef()
+    fiscalref = FiscalPrimeObjsRef(fiscals_dir)
+    xc = FiscalPrimeColumnsRef()
     unit_staging_df = DataFrame([], columns=xc.unit_staging_columns)
     deal_staging_df = DataFrame([], columns=xc.deal_staging_columns)
     cash_staging_df = DataFrame([], columns=xc.cash_staging_columns)
@@ -191,7 +187,7 @@ def create_timelineunit_from_prime_data(
 
 
 def create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir: str):
-    xp = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
+    xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
     fiscalunit_df = pandas_read_excel(xp.unit_excel_path, "agg")
     fiscaldeal_df = pandas_read_excel(xp.deal_excel_path, "agg")
     fiscalcash_df = pandas_read_excel(xp.cash_excel_path, "agg")
