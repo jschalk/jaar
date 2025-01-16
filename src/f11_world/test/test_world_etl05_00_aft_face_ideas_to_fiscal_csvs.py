@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, save_file, open_file
-from src.f00_instrument.db_toolbox import db_table_exists
+from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
 from src.f01_road.finance_tran import bridge_str, time_int_str, quota_str
 from src.f03_chrono.chrono import (
     c400_number_str,
@@ -53,25 +53,25 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 from copy import copy as copy_copy
 from platform import system as platform_system
+from sqlite3 import connect as sqlite3_connect
+
+# def test_WorldUnit_memory_fiscal_db_conn_ReturnsDBConnection(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     fizz_world = worldunit_shop("fizz")
+
+#     # WHEN / THEN
+#     with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
+#         assert fiscal_db_conn != None
+#         cursor = fiscal_db_conn.cursor()
+#         x_tablename = "random_name_table"
+#         cursor.execute(f"PRAGMA table_info({x_tablename})")
+#         columns = cursor.fetchall()
+#         assert columns == []  # implication is database exists
 
 
-def test_WorldUnit_memory_fiscal_db_conn_ReturnsDBConnection(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
-
-    # WHEN / THEN
-    with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
-        assert fiscal_db_conn != None
-        cursor = fiscal_db_conn.cursor()
-        x_tablename = "random_name_table"
-        cursor.execute(f"PRAGMA table_info({x_tablename})")
-        columns = cursor.fetchall()
-        assert columns == []  # implication is database exists
-
-
-def test_WorldUnit_memory_fiscal_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_to_fiscal_db(
+def test_WorldUnit_aft_face_csv_files_to_fiscal_db_HasIdeaDataFromCSV_aft_face_csv_files_to_fiscal_db(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -97,7 +97,8 @@ def test_WorldUnit_memory_fiscal_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_t
 
     # WHEN / THEN
     br00011_staging_tablename = f"{br00011_str}_staging"
-    with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        fizz_world.aft_face_csv_files_to_fiscal_db(fiscal_db_conn)
         assert fiscal_db_conn != None
         cursor = fiscal_db_conn.cursor()
         cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
@@ -124,7 +125,7 @@ def test_WorldUnit_memory_fiscal_db_conn_HasIdeaDataFromCSV_aft_face_csv_files_t
         assert br00011_db_rows == expected_data
 
 
-def test_WorldUnit_memory_fiscal_db_conn_CreatesFiscalStagingTables(
+def test_WorldUnit_idea_staging_to_fiscal_tables_CreatesFiscalStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -184,7 +185,8 @@ def test_WorldUnit_memory_fiscal_db_conn_CreatesFiscalStagingTables(
     fiscalmont_stage_pragma = get_pragma_table_fetchall(fiscalmont_stage_columns)
     fiscalweek_stage_pragma = get_pragma_table_fetchall(fiscalweek_stage_columns)
 
-    with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
         assert db_table_exists(fiscal_db_conn, fiscalunit_agg_tablename)
         assert db_table_exists(fiscal_db_conn, fiscaldeal_agg_tablename)
         assert db_table_exists(fiscal_db_conn, fiscalcash_agg_tablename)
@@ -226,7 +228,7 @@ def test_WorldUnit_memory_fiscal_db_conn_CreatesFiscalStagingTables(
         assert fiscalweek_stage_pragma == cursor.fetchall()
 
 
-def test_WorldUnit_memory_fiscal_db_conn_Bud_category_idea_PopulatesFiscalStagingTables(
+def test_WorldUnit_idea_staging_to_fiscal_tables_Bud_category_idea_PopulatesFiscalStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -248,10 +250,16 @@ def test_WorldUnit_memory_fiscal_db_conn_Bud_category_idea_PopulatesFiscalStagin
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("fizz")
-
-    # WHEN / THEN
     fiscalunit_tablename = f"{fiscalunit_str()}_staging"
-    with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        fizz_world.aft_face_csv_files_to_fiscal_db(fiscal_db_conn)
+        assert not db_table_exists(fiscal_db_conn, fiscalunit_tablename)
+
+        # WHEN
+        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
+
+        # THEN
+        assert get_row_count(fiscal_db_conn, fiscalunit_tablename) == 2
         cursor = fiscal_db_conn.cursor()
         cursor.execute(f"SELECT * FROM {fiscalunit_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
@@ -288,7 +296,7 @@ def test_WorldUnit_memory_fiscal_db_conn_Bud_category_idea_PopulatesFiscalStagin
         assert fiscalunit_db_rows == [expected_row1, expected_row2]
 
 
-def test_WorldUnit_memory_fiscal_db_conn_PopulatesFiscalAggTables(
+def test_WorldUnit_idea_staging_to_fiscal_tables_PopulatesFiscalAggTables(
     env_dir_setup_cleanup,
 ):  # sourcery skip: extract-method
 
@@ -313,15 +321,21 @@ def test_WorldUnit_memory_fiscal_db_conn_PopulatesFiscalAggTables(
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("fizz")
 
-    # WHEN / THEN
-    with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        fizz_world.aft_face_csv_files_to_fiscal_db(fiscal_db_conn)
+        fiscalunit_agg_tablename = f"{fiscalunit_str()}_agg"
+        assert not db_table_exists(fiscal_db_conn, fiscalunit_agg_tablename)
+
+        # WHEN
+        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
+
+        # THEN
+        assert db_table_exists(fiscal_db_conn, fiscalunit_agg_tablename)
         cursor = fiscal_db_conn.cursor()
         # fiscalunit_stage_tablename = f"{fiscalunit_str()}_staging"
         # cursor.execute(f"SELECT * FROM {fiscalunit_stage_tablename};")
         # fiscalunit_stage_rows = cursor.fetchall()
         # assert len(fiscalunit_stage_rows) == 4
-
-        fiscalunit_agg_tablename = f"{fiscalunit_str()}_agg"
         cursor.execute(f"SELECT * FROM {fiscalunit_agg_tablename};")
         fiscalunit_agg_rows = cursor.fetchall()
         expected_row1 = (
@@ -378,23 +392,27 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
     fiscalunit_staging_csv_path = create_path(
         fizz_world._fiscal_mstr_dir, fiscalunit_staging_csv_filename
     )
-    assert os_path_exists(fiscalunit_staging_csv_path) is False
+    fizz_world.aft_face_ideas_to_csv_files()
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        fizz_world.aft_face_csv_files_to_fiscal_db(fiscal_db_conn)
+        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
+        assert os_path_exists(fiscalunit_staging_csv_path) is False
 
-    # WHEN
-    fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs()
+        # WHEN
+        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(fiscal_db_conn)
 
-    # THEN
-    # print(f"{fiscalunit_staging_csv_path=}")
-    assert os_path_exists(fiscalunit_staging_csv_path)
-    generated_fiscalunit_csv = open_file(
-        fizz_world._fiscal_mstr_dir, fiscalunit_staging_csv_filename
-    )
-    expected_fiscalunit_csv_str = f"""{idea_number_str()},{face_name_str()},{event_int_str()},{fiscal_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
+        # THEN
+        # print(f"{fiscalunit_staging_csv_path=}")
+        assert os_path_exists(fiscalunit_staging_csv_path)
+        generated_fiscalunit_csv = open_file(
+            fizz_world._fiscal_mstr_dir, fiscalunit_staging_csv_filename
+        )
+        expected_fiscalunit_csv_str = f"""{idea_number_str()},{face_name_str()},{event_int_str()},{fiscal_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
 {br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
 {br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,
 """
-    print(f"   {expected_fiscalunit_csv_str=}")
-    assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
+        print(f"   {expected_fiscalunit_csv_str=}")
+        assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
 
 
 def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
@@ -425,21 +443,27 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
     fiscalunit_csv_path = create_path(
         fizz_world._fiscal_mstr_dir, fiscalunit_csv_filename
     )
-    assert os_path_exists(fiscalunit_csv_path) is False
 
-    # WHEN
-    fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs()
+    fizz_world.aft_face_ideas_to_csv_files()
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        fizz_world.aft_face_csv_files_to_fiscal_db(fiscal_db_conn)
+        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
+        assert os_path_exists(fiscalunit_csv_path) is False
 
-    # THEN
-    # print(f"{fiscalunit_csv_path=}")
-    assert os_path_exists(fiscalunit_csv_path)
-    generated_fiscalunit_csv = open_file(fiscalunit_csv_path)
-    expected_fiscalunit_csv_str = f"""{fiscal_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
+        # WHEN
+        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(fiscal_db_conn)
+
+        # THEN
+        # print(f"{fiscalunit_csv_path=}")
+        assert os_path_exists(fiscalunit_csv_path)
+        generated_fiscalunit_csv = open_file(fiscalunit_csv_path)
+        expected_fiscalunit_csv_str = f"""{fiscal_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
 {accord23_str},,,,,,,,,
 {accord45_str},,,,,,,,,
 """
-    print(f"      {expected_fiscalunit_csv_str=}")
-    assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
+        print(f"{expected_fiscalunit_csv_str=}")
+        print(f"   {generated_fiscalunit_csv=}")
+        assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
 
 
 # def test_WorldUnit_aft_faces_ideas_to_fiscal_staging_CreatesCorrectTables(

@@ -175,18 +175,15 @@ class WorldUnit:
     def aft_face_ideas_to_csv_files(self):
         etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
 
-    def memory_fiscal_db_conn(self) -> sqlite3_Connection:
-        conn = sqlite3_connect(":memory:")
-        etl_aft_face_csv_files_to_fiscal_db(conn, self._faces_aft_dir)
-        etl_idea_staging_to_fiscal_tables(conn)
-        return conn
+    def aft_face_csv_files_to_fiscal_db(self, fiscal_db_conn: sqlite3_Connection):
+        etl_aft_face_csv_files_to_fiscal_db(fiscal_db_conn, self._faces_aft_dir)
 
-    def aft_faces_ideas_to_fiscal_mstr_csvs(self):
-        with self.memory_fiscal_db_conn() as fiscal_db_conn:
-            etl_fiscal_staging_tables_to_fiscal_csvs(
-                fiscal_db_conn, self._fiscal_mstr_dir
-            )
-            etl_fiscal_agg_tables_to_fiscal_csvs(fiscal_db_conn, self._fiscal_mstr_dir)
+    def idea_staging_to_fiscal_tables(self, fiscal_db_conn: sqlite3_Connection):
+        etl_idea_staging_to_fiscal_tables(fiscal_db_conn)
+
+    def aft_faces_ideas_to_fiscal_mstr_csvs(self, fiscal_db_conn: sqlite3_Connection):
+        etl_fiscal_staging_tables_to_fiscal_csvs(fiscal_db_conn, self._fiscal_mstr_dir)
+        etl_fiscal_agg_tables_to_fiscal_csvs(fiscal_db_conn, self._fiscal_mstr_dir)
 
     def fiscal_csvs_to_jsons(self):
         etl_fiscal_csvs_to_jsons(self._fiscal_mstr_dir)
