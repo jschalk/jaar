@@ -46,7 +46,10 @@ from src.f09_idea.pandas_tool import (
     get_sorting_columns,
     get_pragma_table_fetchall,
 )
-from src.f10_etl.fiscal_agg import FiscalPrimeColumns, FiscalPrimeFilePaths
+from src.f10_etl.fiscal_etl_tool import (
+    FiscalPrimeColumnsTestingRef,
+    FiscalPrimeObjsTestingRef,
+)
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel

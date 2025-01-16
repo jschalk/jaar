@@ -22,6 +22,10 @@ from src.f07_fiscal.fiscal import (
     get_from_json as fiscalunit_get_from_json,
 )
 from src.f07_fiscal.fiscal_config import fiscalunit_str, current_time_str
+from src.f10_etl.fiscal_etl_tool import (
+    FiscalPrimeColumnsTestingRef,
+    FiscalPrimeObjsTestingRef,
+)
 from src.f10_etl.transformers import etl_fiscal_csvs_to_jsons
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists
@@ -33,15 +37,19 @@ def test_etl_fiscal_csvs_to_jsons_Scenario0_CreateFilesWithOnlyFiscalTitle(
     # ESTABLISH
     accord23_str = "accord23"
     accord45_str = "accord45"
-    fiscalunit_agg_tablename = f"{fiscalunit_str()}_agg"
     fiscal_mstr_dir = get_test_etl_dir()
-    fiscalunit_csv_filename = f"{fiscalunit_agg_tablename}.csv"
-    fiscalunit_csv_str = f"""{fiscal_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
+    x_objs = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
+    x_cols = FiscalPrimeColumnsTestingRef()
+    fiscalunit_agg_csv_str = f"""{x_cols.unit_agg_csv_header}
 {accord23_str},,,,,,,,,
 {accord45_str},,,,,,,,,
 """
-    save_file(fiscal_mstr_dir, fiscalunit_csv_filename, fiscalunit_csv_str)
-
+    save_file(fiscal_mstr_dir, x_objs.unit_agg_csv_filename, fiscalunit_agg_csv_str)
+    save_file(fiscal_mstr_dir, x_objs.deal_agg_csv_filename, x_cols.deal_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_objs.cash_agg_csv_filename, x_cols.cash_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_objs.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_objs.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_objs.week_agg_csv_filename, x_cols.week_agg_empty_csv)
     accord23_json_filename = f"{accord23_str}.json"
     accord45_json_filename = f"{accord45_str}.json"
     fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
@@ -70,8 +78,9 @@ def test_etl_fiscal_csvs_to_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs(
     # ESTABLISH
     accord23_str = "accord23"
     accord45_str = "accord45"
-    fiscalunit_agg_tablename = f"{fiscalunit_str()}_agg"
-    fiscalunit_csv_filename = f"{fiscalunit_agg_tablename}.csv"
+    fiscal_mstr_dir = get_test_etl_dir()
+    x_objs = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
+    x_cols = FiscalPrimeColumnsTestingRef()
     a45_fund_coin = 3
     a45_penny = 5
     a45_respect_bit = 7
@@ -81,12 +90,17 @@ def test_etl_fiscal_csvs_to_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs(
     a45_yr1_jan1_offset = 501
     a45_monthday_distortion = 17
     a45_timeline_title = "a45_timeline"
-    fiscalunit_csv_str = f"""{fiscal_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()}
+    print(f"{x_cols.unit_agg_csv_header=}")
+    fiscalunit_agg_csv_str = f"""{x_cols.unit_agg_csv_header}
 {accord23_str},,,,,,,,,
 {accord45_str},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_current_time},{a45_bridge},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_timeline_title}
 """
-    fiscal_mstr_dir = get_test_etl_dir()
-    save_file(fiscal_mstr_dir, fiscalunit_csv_filename, fiscalunit_csv_str)
+    save_file(fiscal_mstr_dir, x_objs.unit_agg_csv_filename, fiscalunit_agg_csv_str)
+    save_file(fiscal_mstr_dir, x_objs.deal_agg_csv_filename, x_cols.deal_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_objs.cash_agg_csv_filename, x_cols.cash_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_objs.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_objs.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_objs.week_agg_csv_filename, x_cols.week_agg_empty_csv)
 
     accord23_json_filename = f"{accord23_str}.json"
     accord45_json_filename = f"{accord45_str}.json"

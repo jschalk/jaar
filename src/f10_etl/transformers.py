@@ -26,10 +26,10 @@ from src.f09_idea.pandas_tool import (
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
-from src.f10_etl.fiscal_agg import (
+from src.f10_etl.fiscal_etl_tool import (
     create_fiscalunit_jsons_from_prime_files,
-    FiscalPrimeFilePaths,
-    FiscalPrimeColumns,
+    FiscalPrimeObjsTestingRef,
+    FiscalPrimeColumnsTestingRef,
 )
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
@@ -862,52 +862,87 @@ def etl_fiscal_staging_tables_to_fiscal_csvs(
     fiscal_db_conn: sqlite3_Connection, fiscal_mstr_dir: str
 ):
     fiscalunit_str = "fiscalunit"
+    fiscaldeal_str = "fiscal_deal_episode"
+    fiscalcash_str = "fiscal_cashbook"
+    fiscalhour_str = "fiscal_timeline_hour"
+    fiscalmont_str = "fiscal_timeline_month"
+    fiscalweek_str = "fiscal_timeline_weekday"
     fiscalunit_staging_tablename = f"{fiscalunit_str}_staging"
+    fiscaldeal_staging_tablename = f"{fiscaldeal_str}_staging"
+    fiscalcash_staging_tablename = f"{fiscalcash_str}_staging"
+    fiscalhour_staging_tablename = f"{fiscalhour_str}_staging"
+    fiscalmont_staging_tablename = f"{fiscalmont_str}_staging"
+    fiscalweek_staging_tablename = f"{fiscalweek_str}_staging"
     save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalunit_staging_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscaldeal_staging_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalcash_staging_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalhour_staging_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalmont_staging_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalweek_staging_tablename)
 
 
 def etl_fiscal_agg_tables_to_fiscal_csvs(
     fiscal_db_conn: sqlite3_Connection, fiscal_mstr_dir: str
 ):
     fiscalunit_str = "fiscalunit"
+    fiscaldeal_str = "fiscal_deal_episode"
+    fiscalcash_str = "fiscal_cashbook"
+    fiscalhour_str = "fiscal_timeline_hour"
+    fiscalmont_str = "fiscal_timeline_month"
+    fiscalweek_str = "fiscal_timeline_weekday"
     fiscalunit_agg_tablename = f"{fiscalunit_str}_agg"
+    fiscaldeal_agg_tablename = f"{fiscaldeal_str}_agg"
+    fiscalcash_agg_tablename = f"{fiscalcash_str}_agg"
+    fiscalhour_agg_tablename = f"{fiscalhour_str}_agg"
+    fiscalmont_agg_tablename = f"{fiscalmont_str}_agg"
+    fiscalweek_agg_tablename = f"{fiscalweek_str}_agg"
     save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalunit_agg_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscaldeal_agg_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalcash_agg_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalhour_agg_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalmont_agg_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalweek_agg_tablename)
 
 
 def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
     fiscalunit_str = "fiscalunit"
-    # fiscaldeal_str = "fiscal_deal_episode"
-    # fiscalcash_str = "fiscal_cashbook"
-    # fiscalhour_str = "fiscal_timeline_hour"
-    # fiscalmont_str = "fiscal_timeline_month"
-    # fiscalweek_str = "fiscal_timeline_weekday"
+    fiscaldeal_str = "fiscal_deal_episode"
+    fiscalcash_str = "fiscal_cashbook"
+    fiscalhour_str = "fiscal_timeline_hour"
+    fiscalmont_str = "fiscal_timeline_month"
+    fiscalweek_str = "fiscal_timeline_weekday"
     fiscalunit_excel_path = create_path(fiscal_mstr_dir, f"{fiscalunit_str}.xlsx")
-    # fiscaldeal_excel_path = create_path(fiscal_mstr_dir, f"{fiscaldeal_str}.xlsx")
-    # fiscalcash_excel_path = create_path(fiscal_mstr_dir, f"{fiscalcash_str}.xlsx")
-    # fiscalhour_excel_path = create_path(fiscal_mstr_dir, f"{fiscalhour_str}.xlsx")
-    # fiscalmont_excel_path = create_path(fiscal_mstr_dir, f"{fiscalmont_str}.xlsx")
-    # fiscalweek_excel_path = create_path(fiscal_mstr_dir, f"{fiscalweek_str}.xlsx")
+    fiscaldeal_excel_path = create_path(fiscal_mstr_dir, f"{fiscaldeal_str}.xlsx")
+    fiscalcash_excel_path = create_path(fiscal_mstr_dir, f"{fiscalcash_str}.xlsx")
+    fiscalhour_excel_path = create_path(fiscal_mstr_dir, f"{fiscalhour_str}.xlsx")
+    fiscalmont_excel_path = create_path(fiscal_mstr_dir, f"{fiscalmont_str}.xlsx")
+    fiscalweek_excel_path = create_path(fiscal_mstr_dir, f"{fiscalweek_str}.xlsx")
     fiscalunit_df = open_csv(fiscal_mstr_dir, f"{fiscalunit_str}_agg.csv")
-    # fiscaldeal_df = open_csv(fiscal_mstr_dir, f"{fiscaldeal_str}_agg.csv")
-    # fiscalcash_df = open_csv(fiscal_mstr_dir, f"{fiscalcash_str}_agg.csv")
-    # fiscalhour_df = open_csv(fiscal_mstr_dir, f"{fiscalhour_str}_agg.csv")
-    # fiscalmont_df = open_csv(fiscal_mstr_dir, f"{fiscalmont_str}_agg.csv")
-    # fiscalweek_df = open_csv(fiscal_mstr_dir, f"{fiscalweek_str}_agg.csv")
+    fiscaldeal_df = open_csv(fiscal_mstr_dir, f"{fiscaldeal_str}_agg.csv")
+    fiscalcash_df = open_csv(fiscal_mstr_dir, f"{fiscalcash_str}_agg.csv")
+    fiscalhour_df = open_csv(fiscal_mstr_dir, f"{fiscalhour_str}_agg.csv")
+    fiscalmont_df = open_csv(fiscal_mstr_dir, f"{fiscalmont_str}_agg.csv")
+    fiscalweek_df = open_csv(fiscal_mstr_dir, f"{fiscalweek_str}_agg.csv")
     upsert_sheet(fiscalunit_excel_path, "agg", fiscalunit_df)
+    upsert_sheet(fiscaldeal_excel_path, "agg", fiscaldeal_df)
+    upsert_sheet(fiscalcash_excel_path, "agg", fiscalcash_df)
+    upsert_sheet(fiscalhour_excel_path, "agg", fiscalhour_df)
+    upsert_sheet(fiscalmont_excel_path, "agg", fiscalmont_df)
+    upsert_sheet(fiscalweek_excel_path, "agg", fiscalweek_df)
 
     # TODO replace empty sheet upsert with csv file upsert
-    xp = FiscalPrimeFilePaths(fiscal_mstr_dir)
-    xc = FiscalPrimeColumns()
-    agg_fiscal_deal_df = DataFrame([], columns=xc.fiscal_deal_agg_columns)
-    agg_fiscal_cashbook_df = DataFrame([], columns=xc.fiscal_cashbook_agg_columns)
-    agg_fiscal_hour_df = DataFrame([], columns=xc.fiscal_hour_agg_columns)
-    agg_fiscal_month_df = DataFrame([], columns=xc.fiscal_month_agg_columns)
-    agg_fiscal_weekday_df = DataFrame([], columns=xc.fiscal_weekday_agg_columns)
-    upsert_sheet(xp.fiscal_deal_path, "agg", agg_fiscal_deal_df)
-    upsert_sheet(xp.fiscal_cashbook_path, "agg", agg_fiscal_cashbook_df)
-    upsert_sheet(xp.fiscal_hour_path, "agg", agg_fiscal_hour_df)
-    upsert_sheet(xp.fiscal_month_path, "agg", agg_fiscal_month_df)
-    upsert_sheet(xp.fiscal_weekday_path, "agg", agg_fiscal_weekday_df)
+    # xp = FiscalPrimeObjsTestingRef(fiscal_mstr_dir)
+    # xc = FiscalPrimeColumnsTestingRef()
+    # agg_fiscal_deal_df = DataFrame([], columns=xc.fiscal_deal_agg_columns)
+    # agg_fiscal_cashbook_df = DataFrame([], columns=xc.fiscal_cashbook_agg_columns)
+    # agg_fiscal_hour_df = DataFrame([], columns=xc.fiscal_hour_agg_columns)
+    # agg_fiscal_month_df = DataFrame([], columns=xc.fiscal_month_agg_columns)
+    # agg_fiscal_weekday_df = DataFrame([], columns=xc.fiscal_weekday_agg_columns)
+    # upsert_sheet(xp.deal_excel_path, "agg", agg_fiscal_deal_df)
+    # upsert_sheet(xp.cash_excel_path, "agg", agg_fiscal_cashbook_df)
+    # upsert_sheet(xp.hour_excel_path, "agg", agg_fiscal_hour_df)
+    # upsert_sheet(xp.mont_excel_path, "agg", agg_fiscal_month_df)
+    # upsert_sheet(xp.week_excel_path, "agg", agg_fiscal_weekday_df)
 
     # if fiscaldeal_df:
     #     upsert_sheet(fiscal_excel_path, fiscaldeal_str, fiscaldeal_df)
