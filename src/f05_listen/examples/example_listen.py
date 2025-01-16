@@ -1,4 +1,4 @@
-from src.f01_road.road import RoadUnit, create_road, get_default_cmty_title
+from src.f01_road.road import RoadUnit, create_road, get_default_fiscal_title
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop, BudUnit
 
@@ -32,7 +32,7 @@ def run_str():
 
 
 def casa_road() -> RoadUnit:
-    return create_road(get_default_cmty_title(), casa_str())
+    return create_road(get_default_fiscal_title(), casa_str())
 
 
 def cook_road() -> RoadUnit:

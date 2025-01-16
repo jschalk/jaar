@@ -1,6 +1,9 @@
 from src.f00_instrument.file import open_file, create_path as f_path
 from src.f00_instrument.dict_toolbox import get_dict_from_json
-from src.f01_road.jaar_config import get_gifts_folder, get_test_cmty_title as cmty_title
+from src.f01_road.jaar_config import (
+    get_gifts_folder,
+    get_test_fiscal_title as fiscal_title,
+)
 from src.f04_gift.atom_config import owner_name_str, face_name_str
 from src.f04_gift.delta import deltaunit_shop
 from src.f04_gift.gift import giftunit_shop, create_giftunit_from_files
@@ -10,7 +13,7 @@ from src.f04_gift.examples.example_atoms import (
     get_atom_example_itemunit_ball,
 )
 from src.f04_gift.examples.gift_env import (
-    get_gift_temp_env_dir as cmtys_dir,
+    get_gift_temp_env_dir as fiscals_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -18,8 +21,8 @@ from os.path import exists as os_path_exists
 
 def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_cmty_dir = f_path(cmtys_dir(), cmty_title())
-    x_owners_dir = f_path(x_cmty_dir, "owners")
+    x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
+    x_owners_dir = f_path(x_fiscal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
@@ -48,8 +51,8 @@ def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_cmty_dir = f_path(cmtys_dir(), cmty_title())
-    x_owners_dir = f_path(x_cmty_dir, "owners")
+    x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
+    x_owners_dir = f_path(x_fiscal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
@@ -75,8 +78,8 @@ def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_cmty_dir = f_path(cmtys_dir(), cmty_title())
-    x_owners_dir = f_path(x_cmty_dir, "owners")
+    x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
+    x_owners_dir = f_path(x_fiscal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
@@ -102,8 +105,8 @@ def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_cmty_dir = f_path(cmtys_dir(), cmty_title())
-    x_owners_dir = f_path(x_cmty_dir, "owners")
+    x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
+    x_owners_dir = f_path(x_fiscal_dir, "owners")
     sue_str = "Sue"
     sue_gift_id = 2
     sue_owner_dir = f_path(x_owners_dir, sue_str)
@@ -139,8 +142,8 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_cmty_dir = f_path(cmtys_dir(), cmty_title())
-    x_owners_dir = f_path(x_cmty_dir, "owners")
+    x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
+    x_owners_dir = f_path(x_fiscal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_gifts_dir = f_path(sue_owner_dir, get_gifts_folder())
@@ -165,8 +168,8 @@ def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
 
 def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    x_cmty_dir = f_path(cmtys_dir(), cmty_title())
-    x_owners_dir = f_path(x_cmty_dir, "owners")
+    x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
+    x_owners_dir = f_path(x_fiscal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
@@ -202,8 +205,8 @@ def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
 
 def test_GiftUnit_create_deltaunit_from_atom_files_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
-    x_cmty_dir = f_path(cmtys_dir(), cmty_title())
-    x_owners_dir = f_path(x_cmty_dir, "owners")
+    x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
+    x_owners_dir = f_path(x_fiscal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")
@@ -235,8 +238,8 @@ def test_GiftUnit_create_deltaunit_from_atom_files_SetsAttr(env_dir_setup_cleanu
 
 def test_create_giftunit_from_files_ReturnsCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_cmty_dir = f_path(cmtys_dir(), cmty_title())
-    x_owners_dir = f_path(x_cmty_dir, "owners")
+    x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
+    x_owners_dir = f_path(x_fiscal_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = f_path(x_owners_dir, sue_str)
     sue_atoms_dir = f_path(sue_owner_dir, "atoms")

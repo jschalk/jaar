@@ -1,13 +1,13 @@
-def get_test_cmty_title():
+def get_test_fiscal_title():
     return "accord_45"
 
 
-def get_cmty_title_if_None(cmty_title: str = None):
-    return get_test_cmty_title() if cmty_title is None else cmty_title
+def get_fiscal_title_if_None(fiscal_title: str = None):
+    return get_test_fiscal_title() if fiscal_title is None else fiscal_title
 
 
-def get_test_cmtys_dir():
-    return "src/f07_cmty/examples/cmtys"
+def get_test_fiscals_dir():
+    return "src/f07_fiscal/examples/fiscals"
 
 
 def get_gifts_folder() -> str:

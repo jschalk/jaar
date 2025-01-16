@@ -15,8 +15,8 @@ from src.f01_road.jaar_config import (
     get_rootpart_of_keep_dir,
     treasury_file_name,
     get_gifts_folder,
-    get_cmty_title_if_None,
-    get_test_cmtys_dir,
+    get_fiscal_title_if_None,
+    get_test_fiscals_dir,
     get_init_gift_id_if_None,
     get_json_filename,
     init_gift_id,
@@ -38,7 +38,7 @@ from src.f01_road.finance_tran import (
 )
 from src.f01_road.road import (
     OwnerName,
-    CmtyTitle,
+    FiscalTitle,
     TitleUnit,
     RoadUnit,
     rebuild_road,
@@ -112,8 +112,8 @@ def get_keep_grades_dir(x_keep_dir: str) -> str:
 @dataclass
 class HubUnit:
     owner_name: OwnerName = None
-    cmtys_dir: str = None
-    cmty_title: str = None
+    fiscals_dir: str = None
+    fiscal_title: str = None
     keep_road: RoadUnit = None
     bridge: str = None
     fund_pool: float = None
@@ -122,11 +122,11 @@ class HubUnit:
     penny: float = None
     keep_point_magnitude: float = None
 
-    def cmty_dir(self) -> str:
-        return f_path(self.cmtys_dir, self.cmty_title)
+    def fiscal_dir(self) -> str:
+        return f_path(self.fiscals_dir, self.fiscal_title)
 
     def owners_dir(self) -> str:
-        return f_path(self.cmty_dir(), "owners")
+        return f_path(self.fiscal_dir(), "owners")
 
     def owner_dir(self) -> str:
         return f_path(self.owners_dir(), self.owner_name)
@@ -202,7 +202,7 @@ class HubUnit:
     def default_voice_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
             owner_name=self.owner_name,
-            cmty_title=self.cmty_title,
+            fiscal_title=self.fiscal_title,
             bridge=self.bridge,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,
@@ -256,7 +256,7 @@ class HubUnit:
         delete_dir(self.atom_file_path(atom_number))
 
     def _get_bud_from_atom_files(self) -> BudUnit:
-        x_bud = budunit_shop(self.owner_name, self.cmty_title)
+        x_bud = budunit_shop(self.owner_name, self.fiscal_title)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = get_dir_file_strs(self.atoms_dir(), delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
@@ -604,8 +604,8 @@ class HubUnit:
 
     def dw_speaker_bud(self, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
-            cmtys_dir=self.cmtys_dir,
-            cmty_title=self.cmty_title,
+            fiscals_dir=self.fiscals_dir,
+            fiscal_title=self.fiscal_title,
             owner_name=speaker_id,
             bridge=self.bridge,
             respect_bit=self.respect_bit,
@@ -624,8 +624,8 @@ class HubUnit:
 
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
-            cmtys_dir=self.cmtys_dir,
-            cmty_title=self.cmty_title,
+            fiscals_dir=self.fiscals_dir,
+            fiscal_title=self.fiscal_title,
             owner_name=healer_name,
             keep_road=self.keep_road,
             bridge=self.bridge,
@@ -686,8 +686,8 @@ class HubUnit:
 
 
 def hubunit_shop(
-    cmtys_dir: str,
-    cmty_title: CmtyTitle,
+    fiscals_dir: str,
+    fiscal_title: FiscalTitle,
     owner_name: OwnerName = None,
     keep_road: RoadUnit = None,
     bridge: str = None,
@@ -697,12 +697,12 @@ def hubunit_shop(
     penny: float = None,
     keep_point_magnitude: float = None,
 ) -> HubUnit:
-    cmtys_dir = get_test_cmtys_dir() if cmtys_dir is None else cmtys_dir
-    cmty_title = get_cmty_title_if_None(cmty_title)
+    fiscals_dir = get_test_fiscals_dir() if fiscals_dir is None else fiscals_dir
+    fiscal_title = get_fiscal_title_if_None(fiscal_title)
 
     return HubUnit(
-        cmtys_dir=cmtys_dir,
-        cmty_title=cmty_title,
+        fiscals_dir=fiscals_dir,
+        fiscal_title=fiscal_title,
         owner_name=validate_titleunit(owner_name, bridge),
         keep_road=keep_road,
         bridge=default_bridge_if_None(bridge),
@@ -716,7 +716,7 @@ def hubunit_shop(
 
 def get_keep_path(x_hubunit: HubUnit, x_road: TitleUnit) -> str:
     keep_root = get_rootpart_of_keep_dir()
-    x_road = rebuild_road(x_road, x_hubunit.cmty_title, keep_root)
+    x_road = rebuild_road(x_road, x_hubunit.fiscal_title, keep_root)
     x_list = get_all_road_titles(x_road, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])
     return f_path(x_hubunit.keeps_dir(), keep_sub_path)

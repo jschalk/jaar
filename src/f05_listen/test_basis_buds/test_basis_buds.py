@@ -37,7 +37,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     # THEN
     assert yao_empty_job.owner_name != yao_voice.owner_name
     assert yao_empty_job.owner_name == zia_str
-    assert yao_empty_job.cmty_title == yao_voice.cmty_title
+    assert yao_empty_job.fiscal_title == yao_voice.fiscal_title
     assert yao_empty_job.last_gift_id is None
     assert yao_empty_job.get_acctunits_dict() == {}
     assert yao_empty_job.bridge == yao_voice.bridge
@@ -80,7 +80,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
 
     # THEN
     assert yao_basis_job.owner_name == yao_duty.owner_name
-    assert yao_basis_job.cmty_title == yao_duty.cmty_title
+    assert yao_basis_job.fiscal_title == yao_duty.fiscal_title
     assert yao_basis_job.last_gift_id == yao_duty.last_gift_id
     assert yao_basis_job.get_acctunits_dict() == yao_duty.get_acctunits_dict()
     assert yao_basis_job.bridge == yao_duty.bridge
@@ -132,8 +132,8 @@ def test_get_default_final_bud_ReturnsCorrectObj():
     default_final_bud.settle_bud()
     assert default_final_bud.owner_name == sue_budunit.owner_name
     assert default_final_bud.owner_name == sue_str
-    assert default_final_bud.cmty_title == sue_budunit.cmty_title
-    assert default_final_bud.cmty_title == blue_str
+    assert default_final_bud.fiscal_title == sue_budunit.fiscal_title
+    assert default_final_bud.fiscal_title == blue_str
     assert default_final_bud.bridge == slash_str
     assert default_final_bud.fund_pool == sue_acct_pool
     assert default_final_bud.fund_coin == x_fund_coin

@@ -8,7 +8,7 @@ from src.f09_idea.idea_config import (
     get_idea_format_filename,
     get_idea_category_ref,
     get_idea_sqlite_types,
-    get_bud_ideas_with_only_cmty_title,
+    get_bud_ideas_with_only_fiscal_title,
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.pandas_tool import (
@@ -22,13 +22,14 @@ from src.f09_idea.pandas_tool import (
     insert_idea_csv,
     save_table_to_csv,
     open_csv,
+    get_ordered_csv,
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
-from src.f10_etl.cmty_agg import (
-    create_cmtyunit_jsons_from_prime_files,
-    CmtyPrimeFilePaths,
-    CmtyPrimeColumns,
+from src.f10_etl.fiscal_etl_tool import (
+    create_fiscalunit_jsons_from_prime_files,
+    FiscalPrimeObjsRef,
+    FiscalPrimeColumnsRef,
 )
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
@@ -716,7 +717,7 @@ def etl_aft_face_ideas_to_aft_event_ideas(faces_aft_dir: str):
             )
 
 
-def etl_aft_event_ideas_to_cmty_ideas(faces_aft_dir: str):
+def etl_aft_event_ideas_to_fiscal_ideas(faces_aft_dir: str):
     for face_name in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_name)
         for event_int in get_level1_dirs(face_dir):
@@ -727,7 +728,7 @@ def etl_aft_event_ideas_to_cmty_ideas(faces_aft_dir: str):
                 split_excel_into_dirs(
                     input_file=event_idea_path,
                     output_dir=event_dir,
-                    column_name="cmty_title",
+                    column_name="fiscal_title",
                     file_name=event_br_ref.idea_number,
                     sheet_name="inx",
                 )
@@ -738,36 +739,29 @@ def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
         face_dir = create_path(faces_aft_dir, face_name)
         for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
             face_idea_excel_path = create_path(face_dir, face_br_ref.file_name)
-            idea_csv = pandas_read_excel(face_idea_excel_path, "inx").to_csv(
-                index=False
-            )
-            idea_csv = idea_csv.replace("\r", "")
+            idea_csv = get_ordered_csv(pandas_read_excel(face_idea_excel_path, "inx"))
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 
 
-def etl_aft_face_csv_files_to_cmty_db(conn: sqlite3_Connection, faces_aft_dir: str):
-    print(f"etl_aft_face_csv_files_to_cmty_db {faces_aft_dir=}")
-    print(f"etl_aft_face_csv_files_to_cmty_db {get_level1_dirs(faces_aft_dir)=}")
+def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir: str):
     for face_name in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_name)
         for idea_number in sorted(get_idea_numbers()):
             csv_filename = f"{idea_number}.csv"
             csv_path = create_path(face_dir, csv_filename)
-            print(f"{os_path_exists(csv_path)=} {csv_path=}")
             if os_path_exists(csv_path):
                 insert_idea_csv(csv_path, conn, f"{idea_number}_staging")
-    print(f"create connection {id(conn)=} etl_aft_face_csv_files_to_cmty_db")
 
 
-def etl_idea_staging_to_cmty_tables(conn):
-    create_cmty_tables(conn)
-    populate_cmty_staging_tables(conn)
-    populate_cmty_agg_tables(conn)
+def etl_idea_staging_to_fiscal_tables(conn):
+    create_fiscal_tables(conn)
+    populate_fiscal_staging_tables(conn)
+    populate_fiscal_agg_tables(conn)
 
 
-def create_cmty_tables(conn: sqlite3_Connection):
-    cmtyunit_agg_cols = [
-        "cmty_title",
+def create_fiscal_tables(conn: sqlite3_Connection):
+    fiscalunit_agg_cols = [
+        "fiscal_title",
         "fund_coin",
         "penny",
         "respect_bit",
@@ -778,151 +772,186 @@ def create_cmty_tables(conn: sqlite3_Connection):
         "monthday_distortion",
         "timeline_title",
     ]
-    cmtydeal_agg_cols = ["cmty_title", "owner_name", "time_int", "quota"]
-    cmtycash_agg_cols = [
-        "cmty_title",
+    fiscaldeal_agg_cols = ["fiscal_title", "owner_name", "time_int", "quota"]
+    fiscalcash_agg_cols = [
+        "fiscal_title",
         "owner_name",
         "acct_name",
         "time_int",
         "amount",
     ]
-    cmtyhour_agg_cols = ["cmty_title", "hour_title", "cumlative_minute"]
-    cmtymont_agg_cols = ["cmty_title", "month_title", "cumlative_day"]
-    cmtyweek_agg_cols = ["cmty_title", "weekday_title", "weekday_order"]
-    cmtyunit_agg = "cmtyunit_agg"
-    cmtydeal_agg = "cmty_deal_episode_agg"
-    cmtycash_agg = "cmty_cashbook_agg"
-    cmtyhour_agg = "cmty_timeline_hour_agg"
-    cmtymont_agg = "cmty_timeline_month_agg"
-    cmtyweek_agg = "cmty_timeline_weekday_agg"
+    fiscalhour_agg_cols = ["fiscal_title", "hour_title", "cumlative_minute"]
+    fiscalmont_agg_cols = ["fiscal_title", "month_title", "cumlative_day"]
+    fiscalweek_agg_cols = ["fiscal_title", "weekday_title", "weekday_order"]
+    fiscalunit_agg = "fiscalunit_agg"
+    fiscaldeal_agg = "fiscal_deal_episode_agg"
+    fiscalcash_agg = "fiscal_cashbook_agg"
+    fiscalhour_agg = "fiscal_timeline_hour_agg"
+    fiscalmont_agg = "fiscal_timeline_month_agg"
+    fiscalweek_agg = "fiscal_timeline_weekday_agg"
     col_types = get_idea_sqlite_types()
-    create_table_from_columns(conn, cmtyunit_agg, cmtyunit_agg_cols, col_types)
-    create_table_from_columns(conn, cmtydeal_agg, cmtydeal_agg_cols, col_types)
-    create_table_from_columns(conn, cmtycash_agg, cmtycash_agg_cols, col_types)
-    create_table_from_columns(conn, cmtyhour_agg, cmtyhour_agg_cols, col_types)
-    create_table_from_columns(conn, cmtymont_agg, cmtymont_agg_cols, col_types)
-    create_table_from_columns(conn, cmtyweek_agg, cmtyweek_agg_cols, col_types)
+    create_table_from_columns(conn, fiscalunit_agg, fiscalunit_agg_cols, col_types)
+    create_table_from_columns(conn, fiscaldeal_agg, fiscaldeal_agg_cols, col_types)
+    create_table_from_columns(conn, fiscalcash_agg, fiscalcash_agg_cols, col_types)
+    create_table_from_columns(conn, fiscalhour_agg, fiscalhour_agg_cols, col_types)
+    create_table_from_columns(conn, fiscalmont_agg, fiscalmont_agg_cols, col_types)
+    create_table_from_columns(conn, fiscalweek_agg, fiscalweek_agg_cols, col_types)
 
     staging_columns = ["idea_number", "face_name", "event_int"]
-    cmtyunit_stage_cols = copy_copy(staging_columns)
-    cmtydeal_stage_cols = copy_copy(staging_columns)
-    cmtycash_stage_cols = copy_copy(staging_columns)
-    cmtyhour_stage_cols = copy_copy(staging_columns)
-    cmtymont_stage_cols = copy_copy(staging_columns)
-    cmtyweek_stage_cols = copy_copy(staging_columns)
-    cmtyunit_stage_cols.extend(cmtyunit_agg_cols)
-    cmtydeal_stage_cols.extend(cmtydeal_agg_cols)
-    cmtycash_stage_cols.extend(cmtycash_agg_cols)
-    cmtyhour_stage_cols.extend(cmtyhour_agg_cols)
-    cmtymont_stage_cols.extend(cmtymont_agg_cols)
-    cmtyweek_stage_cols.extend(cmtyweek_agg_cols)
-    cmtyunit_stage = "cmtyunit_staging"
-    cmtydeal_stage = "cmty_deal_episode_staging"
-    cmtycash_stage = "cmty_cashbook_staging"
-    cmtyhour_stage = "cmty_timeline_hour_staging"
-    cmtymont_stage = "cmty_timeline_month_staging"
-    cmtyweek_stage = "cmty_timeline_weekday_staging"
-    create_table_from_columns(conn, cmtyunit_stage, cmtyunit_stage_cols, col_types)
-    create_table_from_columns(conn, cmtydeal_stage, cmtydeal_stage_cols, col_types)
-    create_table_from_columns(conn, cmtycash_stage, cmtycash_stage_cols, col_types)
-    create_table_from_columns(conn, cmtyhour_stage, cmtyhour_stage_cols, col_types)
-    create_table_from_columns(conn, cmtymont_stage, cmtymont_stage_cols, col_types)
-    create_table_from_columns(conn, cmtyweek_stage, cmtyweek_stage_cols, col_types)
+    fiscalunit_stage_cols = copy_copy(staging_columns)
+    fiscaldeal_stage_cols = copy_copy(staging_columns)
+    fiscalcash_stage_cols = copy_copy(staging_columns)
+    fiscalhour_stage_cols = copy_copy(staging_columns)
+    fiscalmont_stage_cols = copy_copy(staging_columns)
+    fiscalweek_stage_cols = copy_copy(staging_columns)
+    fiscalunit_stage_cols.extend(fiscalunit_agg_cols)
+    fiscaldeal_stage_cols.extend(fiscaldeal_agg_cols)
+    fiscalcash_stage_cols.extend(fiscalcash_agg_cols)
+    fiscalhour_stage_cols.extend(fiscalhour_agg_cols)
+    fiscalmont_stage_cols.extend(fiscalmont_agg_cols)
+    fiscalweek_stage_cols.extend(fiscalweek_agg_cols)
+    fiscalunit_stage = "fiscalunit_staging"
+    fiscaldeal_stage = "fiscal_deal_episode_staging"
+    fiscalcash_stage = "fiscal_cashbook_staging"
+    fiscalhour_stage = "fiscal_timeline_hour_staging"
+    fiscalmont_stage = "fiscal_timeline_month_staging"
+    fiscalweek_stage = "fiscal_timeline_weekday_staging"
+    create_table_from_columns(conn, fiscalunit_stage, fiscalunit_stage_cols, col_types)
+    create_table_from_columns(conn, fiscaldeal_stage, fiscaldeal_stage_cols, col_types)
+    create_table_from_columns(conn, fiscalcash_stage, fiscalcash_stage_cols, col_types)
+    create_table_from_columns(conn, fiscalhour_stage, fiscalhour_stage_cols, col_types)
+    create_table_from_columns(conn, fiscalmont_stage, fiscalmont_stage_cols, col_types)
+    create_table_from_columns(conn, fiscalweek_stage, fiscalweek_stage_cols, col_types)
 
 
-def populate_cmty_staging_tables(cmty_db_conn: sqlite3_Connection):
-    # get every budunit category idea that is not also cmtyunit category idea: collect cmty_titles
-    cmty1_ideas = get_bud_ideas_with_only_cmty_title()
-    for cmty1_idea in cmty1_ideas:
-        idea_staging_tablename = f"{cmty1_idea}_staging"
-        if db_table_exists(cmty_db_conn, idea_staging_tablename):
-            cursor = cmty_db_conn.cursor()
+def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
+    # get every budunit category idea that is not also fiscalunit category idea: collect fiscal_titles
+    fiscal1_ideas = get_bud_ideas_with_only_fiscal_title()
+    for fiscal1_idea in fiscal1_ideas:
+        idea_staging_tablename = f"{fiscal1_idea}_staging"
+        if db_table_exists(fiscal_db_conn, idea_staging_tablename):
+            cursor = fiscal_db_conn.cursor()
             insert_idea_staging_agg = f"""
-INSERT INTO cmtyunit_staging (idea_number, face_name, event_int, cmty_title)
-SELECT '{cmty1_idea}' as idea_number, face_name, event_int, cmty_title
+INSERT INTO fiscalunit_staging (idea_number, face_name, event_int, fiscal_title)
+SELECT '{fiscal1_idea}' as idea_number, face_name, event_int, fiscal_title
 FROM {idea_staging_tablename}
-GROUP BY face_name, event_int, cmty_title
+GROUP BY face_name, event_int, fiscal_title
 ;
 """
             cursor.execute(insert_idea_staging_agg)
             cursor.close()
 
 
-def populate_cmty_agg_tables(cmty_db_conn: sqlite3_Connection):
-    cmtyunit_str = "cmtyunit"
-    cmtyunit_staging_tablename = f"{cmtyunit_str}_staging"
-    cmtyunit_agg_tablename = f"{cmtyunit_str}_agg"
-    cursor = cmty_db_conn.cursor()
+def populate_fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):
+    fiscalunit_str = "fiscalunit"
+    fiscalunit_staging_tablename = f"{fiscalunit_str}_staging"
+    fiscalunit_agg_tablename = f"{fiscalunit_str}_agg"
+    cursor = fiscal_db_conn.cursor()
     insert_idea_staging_agg = f"""
-INSERT INTO {cmtyunit_agg_tablename} (cmty_title)
-SELECT cmty_title
-FROM {cmtyunit_staging_tablename}
-GROUP BY cmty_title
+INSERT INTO {fiscalunit_agg_tablename} (fiscal_title)
+SELECT fiscal_title
+FROM {fiscalunit_staging_tablename}
+GROUP BY fiscal_title
 ;
 """
     cursor.execute(insert_idea_staging_agg)
     cursor.close()
 
 
-def etl_cmty_staging_tables_to_cmty_csvs(
-    cmty_db_conn: sqlite3_Connection, cmty_mstr_dir: str
+def etl_fiscal_staging_tables_to_fiscal_csvs(
+    fiscal_db_conn: sqlite3_Connection, fiscal_mstr_dir: str
 ):
-    cmtyunit_str = "cmtyunit"
-    cmtyunit_staging_tablename = f"{cmtyunit_str}_staging"
-    save_table_to_csv(cmty_db_conn, cmty_mstr_dir, cmtyunit_staging_tablename)
+    fiscalunit_str = "fiscalunit"
+    fiscaldeal_str = "fiscal_deal_episode"
+    fiscalcash_str = "fiscal_cashbook"
+    fiscalhour_str = "fiscal_timeline_hour"
+    fiscalmont_str = "fiscal_timeline_month"
+    fiscalweek_str = "fiscal_timeline_weekday"
+    fiscalunit_staging_tablename = f"{fiscalunit_str}_staging"
+    fiscaldeal_staging_tablename = f"{fiscaldeal_str}_staging"
+    fiscalcash_staging_tablename = f"{fiscalcash_str}_staging"
+    fiscalhour_staging_tablename = f"{fiscalhour_str}_staging"
+    fiscalmont_staging_tablename = f"{fiscalmont_str}_staging"
+    fiscalweek_staging_tablename = f"{fiscalweek_str}_staging"
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalunit_staging_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscaldeal_staging_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalcash_staging_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalhour_staging_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalmont_staging_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalweek_staging_tablename)
 
 
-def etl_cmty_agg_tables_to_cmty_csvs(
-    cmty_db_conn: sqlite3_Connection, cmty_mstr_dir: str
+def etl_fiscal_agg_tables_to_fiscal_csvs(
+    fiscal_db_conn: sqlite3_Connection, fiscal_mstr_dir: str
 ):
-    cmtyunit_str = "cmtyunit"
-    cmtyunit_agg_tablename = f"{cmtyunit_str}_agg"
-    save_table_to_csv(cmty_db_conn, cmty_mstr_dir, cmtyunit_agg_tablename)
+    fiscalunit_str = "fiscalunit"
+    fiscaldeal_str = "fiscal_deal_episode"
+    fiscalcash_str = "fiscal_cashbook"
+    fiscalhour_str = "fiscal_timeline_hour"
+    fiscalmont_str = "fiscal_timeline_month"
+    fiscalweek_str = "fiscal_timeline_weekday"
+    fiscalunit_agg_tablename = f"{fiscalunit_str}_agg"
+    fiscaldeal_agg_tablename = f"{fiscaldeal_str}_agg"
+    fiscalcash_agg_tablename = f"{fiscalcash_str}_agg"
+    fiscalhour_agg_tablename = f"{fiscalhour_str}_agg"
+    fiscalmont_agg_tablename = f"{fiscalmont_str}_agg"
+    fiscalweek_agg_tablename = f"{fiscalweek_str}_agg"
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalunit_agg_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscaldeal_agg_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalcash_agg_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalhour_agg_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalmont_agg_tablename)
+    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalweek_agg_tablename)
 
 
-def etl_cmty_csvs_to_jsons(cmty_mstr_dir: str):
-    cmtyunit_str = "cmtyunit"
-    # cmtydeal_str = "cmty_deal_episode"
-    # cmtycash_str = "cmty_cashbook"
-    # cmtyhour_str = "cmty_timeline_hour"
-    # cmtymont_str = "cmty_timeline_month"
-    # cmtyweek_str = "cmty_timeline_weekday"
-    cmtyunit_excel_path = create_path(cmty_mstr_dir, f"{cmtyunit_str}.xlsx")
-    # cmtydeal_excel_path = create_path(cmty_mstr_dir, f"{cmtydeal_str}.xlsx")
-    # cmtycash_excel_path = create_path(cmty_mstr_dir, f"{cmtycash_str}.xlsx")
-    # cmtyhour_excel_path = create_path(cmty_mstr_dir, f"{cmtyhour_str}.xlsx")
-    # cmtymont_excel_path = create_path(cmty_mstr_dir, f"{cmtymont_str}.xlsx")
-    # cmtyweek_excel_path = create_path(cmty_mstr_dir, f"{cmtyweek_str}.xlsx")
-    cmtyunit_df = open_csv(cmty_mstr_dir, f"{cmtyunit_str}_agg.csv")
-    # cmtydeal_df = open_csv(cmty_mstr_dir, f"{cmtydeal_str}_agg.csv")
-    # cmtycash_df = open_csv(cmty_mstr_dir, f"{cmtycash_str}_agg.csv")
-    # cmtyhour_df = open_csv(cmty_mstr_dir, f"{cmtyhour_str}_agg.csv")
-    # cmtymont_df = open_csv(cmty_mstr_dir, f"{cmtymont_str}_agg.csv")
-    # cmtyweek_df = open_csv(cmty_mstr_dir, f"{cmtyweek_str}_agg.csv")
-    upsert_sheet(cmtyunit_excel_path, "agg", cmtyunit_df)
+def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
+    fiscalunit_str = "fiscalunit"
+    fiscaldeal_str = "fiscal_deal_episode"
+    fiscalcash_str = "fiscal_cashbook"
+    fiscalhour_str = "fiscal_timeline_hour"
+    fiscalmont_str = "fiscal_timeline_month"
+    fiscalweek_str = "fiscal_timeline_weekday"
+    fiscalunit_excel_path = create_path(fiscal_mstr_dir, f"{fiscalunit_str}.xlsx")
+    fiscaldeal_excel_path = create_path(fiscal_mstr_dir, f"{fiscaldeal_str}.xlsx")
+    fiscalcash_excel_path = create_path(fiscal_mstr_dir, f"{fiscalcash_str}.xlsx")
+    fiscalhour_excel_path = create_path(fiscal_mstr_dir, f"{fiscalhour_str}.xlsx")
+    fiscalmont_excel_path = create_path(fiscal_mstr_dir, f"{fiscalmont_str}.xlsx")
+    fiscalweek_excel_path = create_path(fiscal_mstr_dir, f"{fiscalweek_str}.xlsx")
+    fiscalunit_df = open_csv(fiscal_mstr_dir, f"{fiscalunit_str}_agg.csv")
+    fiscaldeal_df = open_csv(fiscal_mstr_dir, f"{fiscaldeal_str}_agg.csv")
+    fiscalcash_df = open_csv(fiscal_mstr_dir, f"{fiscalcash_str}_agg.csv")
+    fiscalhour_df = open_csv(fiscal_mstr_dir, f"{fiscalhour_str}_agg.csv")
+    fiscalmont_df = open_csv(fiscal_mstr_dir, f"{fiscalmont_str}_agg.csv")
+    fiscalweek_df = open_csv(fiscal_mstr_dir, f"{fiscalweek_str}_agg.csv")
+    upsert_sheet(fiscalunit_excel_path, "agg", fiscalunit_df)
+    upsert_sheet(fiscaldeal_excel_path, "agg", fiscaldeal_df)
+    upsert_sheet(fiscalcash_excel_path, "agg", fiscalcash_df)
+    upsert_sheet(fiscalhour_excel_path, "agg", fiscalhour_df)
+    upsert_sheet(fiscalmont_excel_path, "agg", fiscalmont_df)
+    upsert_sheet(fiscalweek_excel_path, "agg", fiscalweek_df)
 
     # TODO replace empty sheet upsert with csv file upsert
-    xp = CmtyPrimeFilePaths(cmty_mstr_dir)
-    xc = CmtyPrimeColumns()
-    agg_cmty_deal_df = DataFrame([], columns=xc.cmty_deal_agg_columns)
-    agg_cmty_cashbook_df = DataFrame([], columns=xc.cmty_cashbook_agg_columns)
-    agg_cmty_hour_df = DataFrame([], columns=xc.cmty_hour_agg_columns)
-    agg_cmty_month_df = DataFrame([], columns=xc.cmty_month_agg_columns)
-    agg_cmty_weekday_df = DataFrame([], columns=xc.cmty_weekday_agg_columns)
-    upsert_sheet(xp.cmty_deal_path, "agg", agg_cmty_deal_df)
-    upsert_sheet(xp.cmty_cashbook_path, "agg", agg_cmty_cashbook_df)
-    upsert_sheet(xp.cmty_hour_path, "agg", agg_cmty_hour_df)
-    upsert_sheet(xp.cmty_month_path, "agg", agg_cmty_month_df)
-    upsert_sheet(xp.cmty_weekday_path, "agg", agg_cmty_weekday_df)
+    # xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    # xc = FiscalPrimeColumnsRef()
+    # agg_fiscal_deal_df = DataFrame([], columns=xc.fiscal_deal_agg_columns)
+    # agg_fiscal_cashbook_df = DataFrame([], columns=xc.fiscal_cashbook_agg_columns)
+    # agg_fiscal_hour_df = DataFrame([], columns=xc.fiscal_hour_agg_columns)
+    # agg_fiscal_month_df = DataFrame([], columns=xc.fiscal_month_agg_columns)
+    # agg_fiscal_weekday_df = DataFrame([], columns=xc.fiscal_weekday_agg_columns)
+    # upsert_sheet(xp.deal_excel_path, "agg", agg_fiscal_deal_df)
+    # upsert_sheet(xp.cash_excel_path, "agg", agg_fiscal_cashbook_df)
+    # upsert_sheet(xp.hour_excel_path, "agg", agg_fiscal_hour_df)
+    # upsert_sheet(xp.mont_excel_path, "agg", agg_fiscal_month_df)
+    # upsert_sheet(xp.week_excel_path, "agg", agg_fiscal_weekday_df)
 
-    # if cmtydeal_df:
-    #     upsert_sheet(cmty_excel_path, cmtydeal_str, cmtydeal_df)
-    # if cmtycash_df:
-    #     upsert_sheet(cmty_excel_path, cmtycash_str, cmtycash_df)
-    # if cmtyhour_df:
-    #     upsert_sheet(cmty_excel_path, cmtyhour_str, cmtyhour_df)
-    # if cmtymont_df:
-    #     upsert_sheet(cmty_excel_path, cmtymont_str, cmtymont_df)
-    # if cmtyweek_df:
-    #     upsert_sheet(cmty_excel_path, cmtyweek_str, cmtyweek_df)
-    create_cmtyunit_jsons_from_prime_files(cmty_mstr_dir)
+    # if fiscaldeal_df:
+    #     upsert_sheet(fiscal_excel_path, fiscaldeal_str, fiscaldeal_df)
+    # if fiscalcash_df:
+    #     upsert_sheet(fiscal_excel_path, fiscalcash_str, fiscalcash_df)
+    # if fiscalhour_df:
+    #     upsert_sheet(fiscal_excel_path, fiscalhour_str, fiscalhour_df)
+    # if fiscalmont_df:
+    #     upsert_sheet(fiscal_excel_path, fiscalmont_str, fiscalmont_df)
+    # if fiscalweek_df:
+    #     upsert_sheet(fiscal_excel_path, fiscalweek_str, fiscalweek_df)
+    create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)

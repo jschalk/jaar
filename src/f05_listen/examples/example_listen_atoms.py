@@ -1,5 +1,5 @@
-from src.f01_road.jaar_config import get_cmty_title_if_None
-from src.f01_road.road import create_road, CmtyTitle
+from src.f01_road.jaar_config import get_fiscal_title_if_None
+from src.f01_road.road import create_road, FiscalTitle
 from src.f02_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
@@ -20,20 +20,20 @@ from src.f04_gift.atom import atomunit_shop, AtomUnit
 from src.f04_gift.delta import deltaunit_shop, DeltaUnit
 
 
-def get_atom_example_itemunit_sports(cmty_title: CmtyTitle = None) -> AtomUnit:
-    cmty_title = get_cmty_title_if_None(cmty_title)
+def get_atom_example_itemunit_sports(fiscal_title: FiscalTitle = None) -> AtomUnit:
+    fiscal_title = get_fiscal_title_if_None(fiscal_title)
     sports_str = "sports"
     x_category = bud_itemunit_str()
     insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
     insert_itemunit_atomunit.set_jkey(item_title_str(), sports_str)
-    insert_itemunit_atomunit.set_jkey(parent_road_str(), cmty_title)
+    insert_itemunit_atomunit.set_jkey(parent_road_str(), fiscal_title)
     return insert_itemunit_atomunit
 
 
-def get_atom_example_itemunit_ball(cmty_title: CmtyTitle = None) -> AtomUnit:
-    cmty_title = get_cmty_title_if_None(cmty_title)
+def get_atom_example_itemunit_ball(fiscal_title: FiscalTitle = None) -> AtomUnit:
+    fiscal_title = get_fiscal_title_if_None(fiscal_title)
     sports_str = "sports"
-    sports_road = create_road(cmty_title, sports_str)
+    sports_road = create_road(fiscal_title, sports_str)
     ball_str = "basketball"
     x_category = bud_itemunit_str()
     insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
@@ -42,10 +42,10 @@ def get_atom_example_itemunit_ball(cmty_title: CmtyTitle = None) -> AtomUnit:
     return insert_itemunit_atomunit
 
 
-def get_atom_example_itemunit_knee(cmty_title: CmtyTitle = None) -> AtomUnit:
-    cmty_title = get_cmty_title_if_None(cmty_title)
+def get_atom_example_itemunit_knee(fiscal_title: FiscalTitle = None) -> AtomUnit:
+    fiscal_title = get_fiscal_title_if_None(fiscal_title)
     sports_str = "sports"
-    sports_road = create_road(cmty_title, sports_str)
+    sports_road = create_road(fiscal_title, sports_str)
     knee_str = "knee"
     knee_begin = 1
     knee_close = 71
@@ -60,14 +60,14 @@ def get_atom_example_itemunit_knee(cmty_title: CmtyTitle = None) -> AtomUnit:
     return insert_itemunit_atomunit
 
 
-def get_atom_example_factunit_knee(cmty_title: CmtyTitle = None) -> AtomUnit:
-    cmty_title = get_cmty_title_if_None(cmty_title)
+def get_atom_example_factunit_knee(fiscal_title: FiscalTitle = None) -> AtomUnit:
+    fiscal_title = get_fiscal_title_if_None(fiscal_title)
     sports_str = "sports"
-    sports_road = create_road(cmty_title, sports_str)
+    sports_road = create_road(fiscal_title, sports_str)
     ball_str = "basketball"
     ball_road = create_road(sports_road, ball_str)
     knee_str = "knee"
-    knee_road = create_road(cmty_title, knee_str)
+    knee_road = create_road(fiscal_title, knee_str)
     knee_fopen = 7
     knee_fnigh = 23
     x_category = bud_item_factunit_str()

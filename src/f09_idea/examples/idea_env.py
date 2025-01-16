@@ -15,13 +15,13 @@ def idea_examples_dir() -> str:
     return f"{src_idea_examples_dir()}/idea_examples"
 
 
-def idea_cmtys_dir() -> str:
-    return f"{src_idea_examples_dir()}/cmtys"
+def idea_fiscals_dir() -> str:
+    return f"{src_idea_examples_dir()}/fiscals"
 
 
 @pytest_fixture()
 def idea_env_setup_cleanup():
-    env_dir = idea_cmtys_dir()
+    env_dir = idea_fiscals_dir()
     delete_dir(env_dir)
     os_makedirs(env_dir)
     yield env_dir

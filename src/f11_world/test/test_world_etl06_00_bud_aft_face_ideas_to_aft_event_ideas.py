@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, cmty_title_str
-from src.f07_cmty.cmty_config import cumlative_minute_str, hour_title_str
+from src.f04_gift.atom_config import face_name_str, fiscal_title_str
+from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.pandas_tool import upsert_sheet, sheet_exists
 from src.f11_world.world import worldunit_shop
@@ -27,7 +27,7 @@ def test_WorldUnit_aft_face_ideas_to_aft_event_ideas_CreatesFaceIdeaSheets_Scena
     idea_columns = [
         face_name_str(),
         event_int_str(),
-        cmty_title_str(),
+        fiscal_title_str(),
         hour_title_str(),
         cumlative_minute_str(),
     ]

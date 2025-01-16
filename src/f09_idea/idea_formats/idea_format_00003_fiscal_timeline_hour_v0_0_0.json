@@ -1,0 +1,23 @@
+{
+    "attributes": {
+        "cumlative_minute": {
+            "otx_key": false
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fiscal_title": {
+            "otx_key": true
+        },
+        "hour_title": {
+            "otx_key": true
+        }
+    },
+    "idea_number": "br00003",
+    "categorys": [
+        "fiscal_timeline_hour"
+    ]
+}

@@ -189,13 +189,13 @@ def _get_pidgen_idea_format_filenames() -> set[str]:
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 
-def _get_cmty_idea_format_filenames() -> set[str]:
-    idea_numbers = set(get_idea_category_ref().get("cmtyunit"))
-    idea_numbers.update(set(get_idea_category_ref().get("cmty_cashbook")))
-    idea_numbers.update(set(get_idea_category_ref().get("cmty_deal_episode")))
-    idea_numbers.update(set(get_idea_category_ref().get("cmty_timeline_hour")))
-    idea_numbers.update(set(get_idea_category_ref().get("cmty_timeline_month")))
-    idea_numbers.update(set(get_idea_category_ref().get("cmty_timeline_weekday")))
+def _get_fiscal_idea_format_filenames() -> set[str]:
+    idea_numbers = set(get_idea_category_ref().get("fiscalunit"))
+    idea_numbers.update(set(get_idea_category_ref().get("fiscal_cashbook")))
+    idea_numbers.update(set(get_idea_category_ref().get("fiscal_deal_episode")))
+    idea_numbers.update(set(get_idea_category_ref().get("fiscal_timeline_hour")))
+    idea_numbers.update(set(get_idea_category_ref().get("fiscal_timeline_month")))
+    idea_numbers.update(set(get_idea_category_ref().get("fiscal_timeline_weekday")))
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 
@@ -371,14 +371,16 @@ def get_pragma_table_fetchall(table_columns):
     return pragma_table_attrs
 
 
-def save_table_to_csv(cmty_db_conn: sqlite3_Connection, cmty_mstr_dir: str, tablename):
-    cursor = cmty_db_conn.cursor()
-    cmtyunit_sqlstr = f"""SELECT * FROM {tablename};"""
-    cursor.execute(cmtyunit_sqlstr)
-    cmtyunit_rows = cursor.fetchall()
-    cmtyunit_columns = [desc[0] for desc in cursor.description]
+def save_table_to_csv(
+    fiscal_db_conn: sqlite3_Connection, fiscal_mstr_dir: str, tablename
+):
+    cursor = fiscal_db_conn.cursor()
+    fiscalunit_sqlstr = f"""SELECT * FROM {tablename};"""
+    cursor.execute(fiscalunit_sqlstr)
+    fiscalunit_rows = cursor.fetchall()
+    fiscalunit_columns = [desc[0] for desc in cursor.description]
     cursor.close()
 
-    cmtyunit_df = DataFrame(cmtyunit_rows, columns=cmtyunit_columns)
-    cmtyunit_filename = f"{tablename}.csv"
-    save_dataframe_to_csv(cmtyunit_df, cmty_mstr_dir, cmtyunit_filename)
+    fiscalunit_df = DataFrame(fiscalunit_rows, columns=fiscalunit_columns)
+    fiscalunit_filename = f"{tablename}.csv"
+    save_dataframe_to_csv(fiscalunit_df, fiscal_mstr_dir, fiscalunit_filename)
