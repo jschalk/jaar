@@ -1,22 +1,22 @@
-from src.f00_instrument.file import delete_dir
+from src.f00_instrument.file import delete_dir, create_path
 from pytest import fixture as pytest_fixture
 from os import makedirs as os_makedirs
 
 
 def src_idea_dir() -> str:
-    return "src/f09_idea"
+    return create_path("src", "f09_idea")
 
 
 def src_idea_examples_dir() -> str:
-    return "src/f09_idea/examples"
+    return create_path(src_idea_dir(), "examples")
 
 
 def idea_examples_dir() -> str:
-    return f"{src_idea_examples_dir()}/idea_examples"
+    return create_path(src_idea_examples_dir(), "idea_examples")
 
 
 def idea_fiscals_dir() -> str:
-    return f"{src_idea_examples_dir()}/fiscals"
+    return create_path(src_idea_examples_dir(), "fiscals")
 
 
 @pytest_fixture()

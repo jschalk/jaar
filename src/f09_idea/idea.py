@@ -3,7 +3,6 @@ from src.f00_instrument.dict_toolbox import (
     extract_csv_headers,
     get_csv_column1_column2_metrics,
     create_l2nested_csv_dict,
-    create_sorted_concatenated_str,
     get_positional_dict,
     add_headers_to_csv,
 )
@@ -147,7 +146,9 @@ def save_idea_csv(x_ideaname: str, x_budunit: BudUnit, x_dir: str, x_filename: s
 
 
 def get_csv_idearef(header_row: list[str]) -> IdeaRef:
-    headers_str = create_sorted_concatenated_str(header_row)
+    header_row = get_custom_sorted_list(header_row)
+    headers_str = "".join(f",{x_header}" for x_header in header_row)
+    headers_str = headers_str[1:]
     headers_str = headers_str.replace("face_name,", "")
     headers_str = headers_str.replace("event_int,", "")
     x_ideaname = get_idea_format_headers().get(headers_str)
