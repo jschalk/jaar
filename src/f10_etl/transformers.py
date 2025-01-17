@@ -841,9 +841,6 @@ def create_fiscal_tables(conn: sqlite3_Connection):
 
 
 def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
-    # get every budunit category idea that is not also fiscalunit category idea: collect fiscal_titles
-    only_fiscal_title_ideas = get_bud_ideas_with_only_fiscal_title()
-
     dst_unit_columns = set(get_fiscalunit_sorted_args())
     dst_deal_columns = set(get_fiscaldeal_sorted_args())
     dst_cash_columns = set(get_fiscalcash_sorted_args())
@@ -853,6 +850,8 @@ def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
     dst_deal_columns.remove("fiscal_title")
     dst_deal_columns.remove("owner_name")
     dst_cash_columns.remove("fiscal_title")
+    dst_cash_columns.remove("owner_name")
+    dst_cash_columns.remove("acct_name")
     dst_hour_columns.remove("fiscal_title")
     dst_mont_columns.remove("fiscal_title")
     dst_week_columns.remove("fiscal_title")
@@ -865,18 +864,19 @@ def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
                     fiscal_db_conn=fiscal_db_conn,
                     dst_table="fiscalunit_staging",
                     src_table=idea_staging_tablename,
-                    idea_number=idea_number,
                 )
             if not dst_deal_columns.isdisjoint(set(src_columns)):
                 _insert_into_fiscal_staging(
                     fiscal_db_conn=fiscal_db_conn,
                     dst_table="fiscal_deal_episode_staging",
                     src_table=idea_staging_tablename,
-                    idea_number=idea_number,
                 )
             if not dst_cash_columns.isdisjoint(set(src_columns)):
-                # insert into fiscalcash_staging_table
-                pass
+                _insert_into_fiscal_staging(
+                    fiscal_db_conn=fiscal_db_conn,
+                    dst_table="fiscal_cashbook_staging",
+                    src_table=idea_staging_tablename,
+                )
             if not dst_hour_columns.isdisjoint(set(src_columns)):
                 # insert into fiscalhour_staging_table
                 pass
@@ -889,7 +889,7 @@ def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
 
 
 def _insert_into_fiscal_staging(
-    fiscal_db_conn: sqlite3_Connection, dst_table: str, src_table: str, idea_number: str
+    fiscal_db_conn: sqlite3_Connection, dst_table: str, src_table: str
 ):
     dst_columns = get_table_columns(fiscal_db_conn, dst_table)
     src_columns = get_table_columns(fiscal_db_conn, src_table)
@@ -897,6 +897,8 @@ def _insert_into_fiscal_staging(
     common_columns_list = [col for col in dst_columns if col in common_columns_set]
     common_columns_str = ", ".join(common_columns_list)
     cursor = fiscal_db_conn.cursor()
+    idea_number = copy_copy(src_table)
+    idea_number = idea_number.replace("_staging", "")
     insert_idea_staging_agg_str = f"""
 INSERT INTO {dst_table} (idea_number, {common_columns_str})
 SELECT '{idea_number}' as idea_number, {common_columns_str}
@@ -904,7 +906,6 @@ FROM {src_table}
 GROUP BY face_name, event_int, fiscal_title
 ;
 """
-    print(f"{insert_idea_staging_agg_str=}")
     cursor.execute(insert_idea_staging_agg_str)
     cursor.close()
 

@@ -62,7 +62,7 @@ def test_get_fiscaldeal_sorted_args_ReturnsObj():
     # ESTABLISH / WHEN
     deal_sorted_args = get_fiscaldeal_sorted_args()
     # THEN
-    expected_deal_args = set(get_fiscal_config_args(fiscal_cashbook_str()).keys())
+    expected_deal_args = set(get_fiscal_config_args(fiscal_deal_episode_str()).keys())
     # expected_deal_args.add(face_name_str())
     # expected_deal_args.add(event_int_str())
     expected_deal_sorted_args = get_custom_sorted_list(expected_deal_args)
@@ -74,7 +74,7 @@ def test_get_fiscalcash_sorted_args_ReturnsObj():
     # ESTABLISH / WHEN
     cash_sorted_args = get_fiscalcash_sorted_args()
     # THEN
-    expected_cash_args = set(get_fiscal_config_args(fiscal_deal_episode_str()).keys())
+    expected_cash_args = set(get_fiscal_config_args(fiscal_cashbook_str()).keys())
     # expected_cash_args.add(face_name_str())
     # expected_cash_args.add(event_int_str())
     expected_cash_sorted_args = get_custom_sorted_list(expected_cash_args)
