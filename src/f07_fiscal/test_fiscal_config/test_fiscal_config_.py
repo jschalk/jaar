@@ -1,4 +1,5 @@
 from src.f00_instrument.file import create_path
+from src.f01_road.finance_tran import quota_str, time_int_str, bridge_str
 from src.f03_chrono.chrono import (
     c400_number_str,
     timeline_title_str,
@@ -6,6 +7,8 @@ from src.f03_chrono.chrono import (
     monthday_distortion_str,
 )
 from src.f04_gift.atom_config import (
+    acct_name_str,
+    owner_name_str,
     fiscal_title_str,
     penny_str,
     fund_coin_str,
@@ -35,6 +38,15 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_weekday_str,
     get_fiscal_categorys,
     get_fiscal_args_class_types,
+    get_fiscal_args_set,
+    amount_str,
+    cumlative_day_str,
+    cumlative_minute_str,
+    current_time_str,
+    hour_title_str,
+    month_title_str,
+    weekday_title_str,
+    weekday_order_str,
 )
 from os import getcwd as os_getcwd
 
@@ -194,3 +206,39 @@ def test_get_fiscal_args_class_types_ReturnsObj():
     print(f"{fiscal_args_from_categorys=}")
     assert set(fiscal_args_class_types.keys()) == fiscal_args_from_categorys
     assert all_args_class_types_are_correct(fiscal_args_class_types)
+
+
+def test_get_fiscal_args_set_ReturnsObj():
+    # ESTABLISH / WHEN
+    fiscal_args_set = get_fiscal_args_set()
+
+    # THEN
+    assert fiscal_args_set
+    mapping_args_set = set(get_fiscal_args_category_mapping().keys())
+    print(f"{mapping_args_set=}")
+    assert fiscal_args_set == mapping_args_set
+    assert len(fiscal_args_set) == 21
+    expected_fiscal_args_set = {
+        acct_name_str(),
+        amount_str(),
+        c400_number_str(),
+        cumlative_day_str(),
+        cumlative_minute_str(),
+        current_time_str(),
+        hour_title_str(),
+        fiscal_title_str(),
+        fund_coin_str(),
+        month_title_str(),
+        monthday_distortion_str(),
+        penny_str(),
+        owner_name_str(),
+        quota_str(),
+        respect_bit_str(),
+        time_int_str(),
+        timeline_title_str(),
+        weekday_title_str(),
+        weekday_order_str(),
+        bridge_str(),
+        yr1_jan1_offset_str(),
+    }
+    assert fiscal_args_set == expected_fiscal_args_set
