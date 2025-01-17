@@ -43,7 +43,7 @@ from src.f09_idea.idea_config import (
 from src.f09_idea.pandas_tool import (
     _get_fiscal_idea_format_filenames,
     boat_agg_str,
-    get_sorting_columns,
+    get_custom_sorted_list,
     get_pragma_table_fetchall,
 )
 from src.f10_etl.fiscal_etl_tool import (

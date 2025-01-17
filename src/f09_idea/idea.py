@@ -19,7 +19,7 @@ from src.f09_idea.idea_config import (
     get_idearef_from_file,
     get_idea_format_headers,
 )
-from src.f09_idea.pandas_tool import save_dataframe_to_csv, get_sorting_columns
+from src.f09_idea.pandas_tool import save_dataframe_to_csv, get_custom_sorted_list
 from pandas import DataFrame
 from csv import reader as csv_reader
 from dataclasses import dataclass
@@ -35,7 +35,7 @@ class IdeaRef:
         self._attributes[x_attribute] = {"otx_key": otx_key}
 
     def get_headers_list(self) -> list[str]:
-        return get_sorting_columns(self._attributes)
+        return get_custom_sorted_list(self._attributes)
 
     def get_otx_keys_list(self) -> list[str]:
         x_set = {
@@ -43,7 +43,7 @@ class IdeaRef:
             for x_attr, otx_dict in self._attributes.items()
             if otx_dict.get("otx_key") is True
         }
-        return get_sorting_columns(x_set)
+        return get_custom_sorted_list(x_set)
 
     def get_otx_values_list(self) -> list[str]:
         x_set = {
@@ -51,7 +51,7 @@ class IdeaRef:
             for x_attr, otx_dict in self._attributes.items()
             if otx_dict.get("otx_key") is False
         }
-        return get_sorting_columns(x_set)
+        return get_custom_sorted_list(x_set)
 
 
 def idearef_shop(x_idea_name: str, x_categorys: list[str]) -> IdeaRef:

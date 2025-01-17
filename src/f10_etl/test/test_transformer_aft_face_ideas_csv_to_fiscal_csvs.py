@@ -1,5 +1,9 @@
 from src.f00_instrument.file import create_path, save_file, open_file
-from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
+from src.f00_instrument.db_toolbox import (
+    db_table_exists,
+    get_row_count,
+    create_table_from_columns,
+)
 from src.f01_road.finance_tran import bridge_str
 from src.f03_chrono.chrono import (
     c400_number_str,
@@ -27,8 +31,8 @@ from src.f07_fiscal.fiscal_config import (
     current_time_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.idea_config import idea_number_str
-from src.f09_idea.pandas_tool import get_pragma_table_fetchall, get_sorting_columns
+from src.f09_idea.idea_config import idea_number_str, get_idea_sqlite_types
+from src.f09_idea.pandas_tool import get_pragma_table_fetchall, get_custom_sorted_list
 from src.f10_etl.fiscal_etl_tool import (
     FiscalPrimeObjsRef,
     FiscalPrimeColumnsRef,
@@ -213,7 +217,92 @@ def test_populate_fiscal_staging_tables_Scenario0_PopulatesFiscalStagingTablesFr
         populate_fiscal_staging_tables(fiscal_db_conn)
 
         # THEN
+        assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 2
         cursor = fiscal_db_conn.cursor()
+        cursor.execute(f"SELECT * FROM {x_fis.unit_stage_tablename}")
+        fiscalunit_db_rows = cursor.fetchall()
+        expected_row0 = (
+            br00011_str,  # idea_number
+            sue_inx,  # face_name
+            event3,  # event_int
+            accord23_str,  # fiscal_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+            None,  # note
+        )
+        expected_row1 = (
+            br00011_str,  # idea_number
+            sue_inx,  # face_name
+            event7,  # event_int
+            accord23_str,  # fiscal_title
+            None,  # fund_coin
+            None,  # penny
+            None,  # respect_bit
+            None,  # current_time
+            None,  # bridge
+            None,  # c400_number
+            None,  # yr1_jan1_offset
+            None,  # monthday_distortion
+            None,  # timeline_title
+            None,  # note
+        )
+        print(f"{fiscalunit_db_rows[1]=}")
+        print(f"        {expected_row1=}")
+        assert fiscalunit_db_rows[0] == expected_row0
+        assert fiscalunit_db_rows[1] == expected_row1
+        assert fiscalunit_db_rows == [expected_row0, expected_row1]
+
+
+def test_populate_fiscal_staging_tables_Scenario1_PopulatesFiscalStagingTablesFromIdeaTable(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bob"
+    yao_inx = "Yao"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    br00011_str = "br00011"
+    br00011_columns = [
+        face_name_str(),
+        event_int_str(),
+        fiscal_title_str(),
+        owner_name_str(),
+        acct_name_str(),
+    ]
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        br00011_tablename = f"{br00011_str}_staging"
+        create_table_from_columns(
+            fiscal_db_conn, br00011_tablename, br00011_columns, get_idea_sqlite_types()
+        )
+        insert_staging_sqlstr = f"""
+INSERT INTO {br00011_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()})
+VALUES 
+  ('{sue_inx}', {event3}, '{accord23_str}', '{bob_inx}', '{bob_inx}')
+, ('{sue_inx}', {event3}, '{accord23_str}', '{yao_inx}', '{bob_inx}')
+, ('{sue_inx}', {event3}, '{accord23_str}', '{yao_inx}', '{yao_inx}')
+, ('{sue_inx}', {event7}, '{accord23_str}', '{yao_inx}', '{yao_inx}')
+;
+"""
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        x_fis = FiscalPrimeObjsRef()
+        create_fiscal_tables(fiscal_db_conn)
+        assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 0
+
+        # WHEN
+        populate_fiscal_staging_tables(fiscal_db_conn)
+
+        # THEN
+        assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 2
         cursor.execute(f"SELECT * FROM {x_fis.unit_stage_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row0 = (
@@ -267,8 +356,9 @@ def test_populate_fiscal_agg_tables_PopulatesFiscalAggTables(env_dir_setup_clean
         create_fiscal_tables(fiscal_db_conn)
 
         cursor = fiscal_db_conn.cursor()
+        x_fis = FiscalPrimeObjsRef()
         insert_staging_sqlstr = f"""
-INSERT INTO fiscalunit_staging (idea_number, face_name, event_int, fiscal_title)
+INSERT INTO {x_fis.unit_stage_tablename} (idea_number, face_name, event_int, fiscal_title)
 VALUES 
   ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
 , ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
@@ -277,7 +367,6 @@ VALUES
 ;
 """
         cursor.execute(insert_staging_sqlstr)
-        x_fis = FiscalPrimeObjsRef()
         assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 4
         assert get_row_count(fiscal_db_conn, x_fis.unit_agg_tablename) == 0
 

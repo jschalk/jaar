@@ -12,7 +12,7 @@ from src.f09_idea.idea_config import (
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.pandas_tool import (
-    get_sorting_columns,
+    get_custom_sorted_list,
     upsert_sheet,
     split_excel_into_dirs,
     sheet_exists,
@@ -182,7 +182,7 @@ class boatStagingToboatAggTransformer:
         idearef = get_idearef_obj(idea_filename)
         required_columns = idearef.get_otx_keys_list()
         idea_columns_set = set(idearef._attributes.keys())
-        idea_columns_list = get_sorting_columns(idea_columns_set)
+        idea_columns_list = get_custom_sorted_list(idea_columns_set)
         boat_staging_df = boat_staging_df[idea_columns_list]
         return get_boat_staging_grouping_with_all_values_equal_df(
             boat_staging_df, required_columns
@@ -213,7 +213,7 @@ class boatAggToboatValidTransformer:
     #     idearef = get_idearef_obj(idea_filename)
     #     required_columns = idearef.get_otx_keys_list()
     #     idea_columns_set = set(idearef._attributes.keys())
-    #     idea_columns_list = get_sorting_columns(idea_columns_set)
+    #     idea_columns_list = get_custom_sorted_list(idea_columns_set)
     #     boat_staging_df = boat_staging_df[idea_columns_list]
     #     return get_boat_staging_grouping_with_all_values_equal_df(
     #         boat_staging_df, required_columns
@@ -373,7 +373,7 @@ class boatAggToStagingTransformer:
         category_ideas = get_idea_category_ref().get(self.pidgin_category)
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
         pidgin_columns.update({"face_name", "event_int"})
-        pidgin_columns = get_sorting_columns(pidgin_columns)
+        pidgin_columns = get_custom_sorted_list(pidgin_columns)
         pidgin_columns.insert(0, "src_idea")
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(category_ideas):
@@ -472,7 +472,7 @@ class PidginStagingToAggTransformer:
     def transform(self):
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
         pidgin_columns.update({"face_name", "event_int"})
-        pidgin_columns = get_sorting_columns(pidgin_columns)
+        pidgin_columns = get_custom_sorted_list(pidgin_columns)
         pidgin_agg_df = DataFrame(columns=pidgin_columns)
         self.insert_agg_rows(pidgin_agg_df)
         upsert_sheet(self.file_path, get_sheet_agg_name(self.jaar_type), pidgin_agg_df)
