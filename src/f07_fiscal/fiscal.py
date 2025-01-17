@@ -59,7 +59,7 @@ class set_cashpurchase_Exception(Exception):
     pass
 
 
-class set_current_time_Exception(Exception):
+class set_present_time_Exception(Exception):
     pass
 
 
@@ -78,7 +78,7 @@ class FiscalUnit:
     fiscal_title: FiscalTitle = None
     fiscals_dir: str = None
     timeline: TimeLineUnit = None
-    current_time: int = None
+    present_time: int = None
     deallogs: dict[OwnerName, DealLog] = None
     cashbook: TranBook = None
     bridge: str = None
@@ -274,10 +274,10 @@ class FiscalUnit:
         x_owner_name: OwnerName,
         x_time_int: TimeLinePoint,
         x_money_magnitude: int,
-        allow_prev_to_current_time_entry: bool = False,
+        allow_prev_to_present_time_entry: bool = False,
     ):
-        if x_time_int < self.current_time and not allow_prev_to_current_time_entry:
-            exception_str = f"Cannot set dealepisode because time_int {x_time_int} is less than FiscalUnit.current_time {self.current_time}."
+        if x_time_int < self.present_time and not allow_prev_to_present_time_entry:
+            exception_str = f"Cannot set dealepisode because time_int {x_time_int} is less than FiscalUnit.present_time {self.present_time}."
             raise dealepisode_Exception(exception_str)
         if self.deallog_exists(x_owner_name) is False:
             self.set_deallog(deallog_shop(x_owner_name))
@@ -288,7 +288,7 @@ class FiscalUnit:
         x_dict = {
             "fiscal_title": self.fiscal_title,
             "bridge": self.bridge,
-            "current_time": self.current_time,
+            "present_time": self.present_time,
             "fund_coin": self.fund_coin,
             "penny": self.penny,
             "deallogs": self._get_deallogs_dict(),
@@ -318,7 +318,7 @@ class FiscalUnit:
         self.cashbook.set_tranunit(
             x_tranunit=x_cashpurchase,
             x_blocked_time_ints=self.get_deallogs_time_ints(),
-            x_current_time=self.current_time,
+            x_present_time=self.present_time,
         )
 
     def add_cashpurchase(
@@ -328,7 +328,7 @@ class FiscalUnit:
         x_time_int: TimeLinePoint,
         x_amount: FundNum,
         x_blocked_time_ints: set[TimeLinePoint] = None,
-        x_current_time: TimeLinePoint = None,
+        x_present_time: TimeLinePoint = None,
     ):
         self.cashbook.add_tranunit(
             x_owner_name=x_owner_name,
@@ -336,7 +336,7 @@ class FiscalUnit:
             x_time_int=x_time_int,
             x_amount=x_amount,
             x_blocked_time_ints=x_blocked_time_ints,
-            x_current_time=x_current_time,
+            x_present_time=x_present_time,
         )
 
     def cashpurchase_exists(
@@ -352,12 +352,12 @@ class FiscalUnit:
     def del_cashpurchase(self, src: AcctName, dst: AcctName, x_time_int: TimeLinePoint):
         return self.cashbook.del_tranunit(src, dst, x_time_int)
 
-    def set_current_time(self, x_current_time: TimeLinePoint):
+    def set_present_time(self, x_present_time: TimeLinePoint):
         x_time_ints = self.cashbook.get_time_ints()
-        if x_time_ints != set() and max(x_time_ints) >= x_current_time:
-            exception_str = f"Cannot set current_time {x_current_time}, cashpurchase with greater time_int exists"
-            raise set_current_time_Exception(exception_str)
-        self.current_time = x_current_time
+        if x_time_ints != set() and max(x_time_ints) >= x_present_time:
+            exception_str = f"Cannot set present_time {x_present_time}, cashpurchase with greater time_int exists"
+            raise set_present_time_Exception(exception_str)
+        self.present_time = x_present_time
 
     def set_all_tranbook(self):
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
@@ -381,7 +381,7 @@ def fiscalunit_shop(
     fiscal_title: FiscalTitle = None,
     fiscals_dir: str = None,
     timeline: TimeLineUnit = None,
-    current_time: int = None,
+    present_time: int = None,
     in_memory_journal: bool = None,
     bridge: str = None,
     fund_coin: float = None,
@@ -397,7 +397,7 @@ def fiscalunit_shop(
         fiscal_title=fiscal_title,
         fiscals_dir=fiscals_dir,
         timeline=timeline,
-        current_time=get_0_if_None(current_time),
+        present_time=get_0_if_None(present_time),
         deallogs={},
         cashbook=tranbook_shop(fiscal_title),
         bridge=default_bridge_if_None(bridge),
@@ -418,7 +418,7 @@ def get_from_dict(fiscal_dict: dict) -> FiscalUnit:
     x_fiscal_title = fiscal_dict.get("fiscal_title")
     x_fiscal = fiscalunit_shop(x_fiscal_title, None)
     x_fiscal.timeline = timelineunit_shop(fiscal_dict.get("timeline"))
-    x_fiscal.current_time = fiscal_dict.get("current_time")
+    x_fiscal.present_time = fiscal_dict.get("present_time")
     x_fiscal.bridge = fiscal_dict.get("bridge")
     x_fiscal.fund_coin = fiscal_dict.get("fund_coin")
     x_fiscal.respect_bit = fiscal_dict.get("respect_bit")

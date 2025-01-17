@@ -20,7 +20,7 @@ def test_WorldUnit_Exists():
     # THEN
     assert not x_world.world_id
     assert not x_world.worlds_dir
-    assert not x_world.current_time
+    assert not x_world.present_time
     assert not x_world.timeconversions
     assert not x_world.events
     assert not x_world._faces_bow_dir
@@ -104,7 +104,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     worlds2_dir = f"{get_test_worlds_dir()}/worlds2"
     example_ocean_dir = f"{get_test_worlds_dir()}/example_ocean"
     five_world_id = "five"
-    world2_current_time = 55
+    world2_present_time = 55
     accord45_str = "accord45"
     world2timeconversions = {accord45_str: timeconversion_shop(accord45_str)}
     world2_fiscalunits = {"accord45"}
@@ -114,7 +114,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
         world_id=five_world_id,
         worlds_dir=worlds2_dir,
         ocean_dir=example_ocean_dir,
-        current_time=world2_current_time,
+        present_time=world2_present_time,
         timeconversions=world2timeconversions,
         _fiscalunits=world2_fiscalunits,
     )
@@ -124,7 +124,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.world_id == five_world_id
     assert x_world.worlds_dir == worlds2_dir
     assert x_world._ocean_dir == example_ocean_dir
-    assert x_world.current_time == world2_current_time
+    assert x_world.present_time == world2_present_time
     assert x_world.timeconversions == world2timeconversions
     assert x_world.events == {}
     assert x_world._faces_bow_dir == create_path(world_dir, "faces_bow")
@@ -140,7 +140,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     world_dir = create_path(get_test_worlds_dir(), x_world.world_id)
     assert x_world.world_id == get_test_world_id()
     assert x_world.worlds_dir == get_test_worlds_dir()
-    assert x_world.current_time == 0
+    assert x_world.present_time == 0
     assert x_world.timeconversions == {}
     assert x_world.events == {}
     assert x_world._ocean_dir == create_path(x_world._world_dir, "ocean")

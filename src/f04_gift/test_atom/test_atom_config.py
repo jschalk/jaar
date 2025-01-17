@@ -16,8 +16,8 @@ from src.f04_gift.atom_config import (
     is_atom_category,
     get_atom_config_dict,
     get_atom_args_category_mapping,
-    get_allowed_jaar_types,
-    get_atom_args_jaar_types,
+    get_allowed_class_types,
+    get_atom_args_class_types,
     get_atom_order as q_order,
     get_sorted_jkey_keys,
     set_mog,
@@ -48,7 +48,7 @@ from src.f04_gift.atom_config import (
     gogo_want_str,
     group_label_str,
     healer_name_str,
-    jaar_type_str,
+    class_type_str,
     jkeys_str,
     jvalues_str,
     morph_str,
@@ -95,7 +95,7 @@ def test_str_functions_ReturnsObj():
     assert fund_coin_str() == "fund_coin"
     assert gogo_want_str() == "gogo_want"
     assert group_label_str() == "group_label"
-    assert jaar_type_str() == "jaar_type"
+    assert class_type_str() == "class_type"
     assert jkeys_str() == "jkeys"
     assert jvalues_str() == "jvalues"
     assert morph_str() == "morph"
@@ -261,7 +261,7 @@ def test_get_atom_config_dict_CheckEachCategoryHasCorrectArgCount():
 
 
 def _has_every_element(x_arg, x_dict) -> bool:
-    arg_elements = {jaar_type_str(), sqlite_datatype_str(), column_order_str()}
+    arg_elements = {class_type_str(), sqlite_datatype_str(), column_order_str()}
     for arg_element in arg_elements:
         if x_dict.get(arg_element) is None:
             print(f"{arg_element} failed for {x_arg=}")
@@ -287,7 +287,7 @@ def check_every_arg_dict_has_elements(atom_config_dict):
     return True
 
 
-def test_atom_config_AllArgsHave_jaar_type_sqlite_datatype():
+def test_atom_config_AllArgsHave_class_type_sqlite_datatype():
     # ESTABLISH / WHEN / THEN
     assert check_every_arg_dict_has_elements(get_atom_config_dict())
 
@@ -553,7 +553,7 @@ def test_get_atom_args_category_mapping_ReturnsObj():
     assert len(x_atom_args_category_mapping) == 43
 
 
-def get_jaar_type(x_category: str, x_arg: str) -> str:
+def get_class_type(x_category: str, x_arg: str) -> str:
     atom_config_dict = get_atom_config_dict()
     category_dict = atom_config_dict.get(x_category)
     optional_dict = category_dict.get(jvalues_str())
@@ -563,18 +563,18 @@ def get_jaar_type(x_category: str, x_arg: str) -> str:
         arg_dict = category_dict.get(jvalues_str()).get(x_arg)
     if required_dict.get(x_arg):
         arg_dict = required_dict.get(x_arg)
-    return arg_dict.get(jaar_type_str())
+    return arg_dict.get(class_type_str())
 
 
-def test_get_jaar_type_ReturnsObj():
+def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_jaar_type(bud_acctunit_str(), acct_name_str()) == type_AcctName_str()
-    assert get_jaar_type(bud_itemunit_str(), gogo_want_str()) == "float"
+    assert get_class_type(bud_acctunit_str(), acct_name_str()) == type_AcctName_str()
+    assert get_class_type(bud_itemunit_str(), gogo_want_str()) == "float"
 
 
-def test_get_allowed_jaar_types_ReturnsObj():
+def test_get_allowed_class_types_ReturnsObj():
     # ESTABLISH
-    x_allowed_jaar_types = {
+    x_allowed_class_types = {
         "int",
         type_AcctName_str(),
         type_GroupLabel_str(),
@@ -586,98 +586,98 @@ def test_get_allowed_jaar_types_ReturnsObj():
     }
 
     # WHEN / THEN
-    assert get_allowed_jaar_types() == x_allowed_jaar_types
+    assert get_allowed_class_types() == x_allowed_class_types
 
 
 def test_get_atom_config_dict_ValidatePythonTypes():
     # make sure all atom config python types are valid and repeated args are the same
     # ESTABLISH WHEN / THEN
-    assert all_atom_config_jaar_types_are_valid(get_allowed_jaar_types())
+    assert all_atom_config_class_types_are_valid(get_allowed_class_types())
 
 
-def all_atom_config_jaar_types_are_valid(allowed_jaar_types):
+def all_atom_config_class_types_are_valid(allowed_class_types):
     x_atom_args_category_mapping = get_atom_args_category_mapping()
     for x_atom_arg, categorys in x_atom_args_category_mapping.items():
-        old_jaar_type = None
-        x_jaar_type = ""
+        old_class_type = None
+        x_class_type = ""
         for x_category in categorys:
-            x_jaar_type = get_jaar_type(x_category, x_atom_arg)
-            # print(f"{x_jaar_type=} {x_atom_arg=} {x_category=}")
-            if x_jaar_type not in allowed_jaar_types:
+            x_class_type = get_class_type(x_category, x_atom_arg)
+            # print(f"{x_class_type=} {x_atom_arg=} {x_category=}")
+            if x_class_type not in allowed_class_types:
                 return False
 
-            if old_jaar_type is None:
-                old_jaar_type = x_jaar_type
+            if old_class_type is None:
+                old_class_type = x_class_type
             # confirm each atom_arg has same data type in all categorys
-            print(f"{x_jaar_type=} {old_jaar_type=} {x_atom_arg=} {x_category=}")
-            if x_jaar_type != old_jaar_type:
+            print(f"{x_class_type=} {old_class_type=} {x_atom_arg=} {x_category=}")
+            if x_class_type != old_class_type:
                 return False
-            old_jaar_type = x_jaar_type
+            old_class_type = x_class_type
     return True
 
 
-def all_atom_args_jaar_types_are_correct(x_jaar_types) -> bool:
+def all_atom_args_class_types_are_correct(x_class_types) -> bool:
     x_atom_args_category_mapping = get_atom_args_category_mapping()
-    x_sorted_jaar_types = sorted(list(x_jaar_types.keys()))
-    for x_atom_arg in x_sorted_jaar_types:
+    x_sorted_class_types = sorted(list(x_class_types.keys()))
+    for x_atom_arg in x_sorted_class_types:
         x_categorys = list(x_atom_args_category_mapping.get(x_atom_arg))
         x_category = x_categorys[0]
-        x_jaar_type = get_jaar_type(x_category, x_atom_arg)
+        x_class_type = get_class_type(x_category, x_atom_arg)
         print(
-            f"assert x_jaar_types.get({x_atom_arg}) == {x_jaar_type} {x_jaar_types.get(x_atom_arg)=}"
+            f"assert x_class_types.get({x_atom_arg}) == {x_class_type} {x_class_types.get(x_atom_arg)=}"
         )
-        if x_jaar_types.get(x_atom_arg) != x_jaar_type:
+        if x_class_types.get(x_atom_arg) != x_class_type:
             return False
     return True
 
 
-def test_get_atom_args_jaar_types_ReturnsObj():
+def test_get_atom_args_class_types_ReturnsObj():
     # ESTABLISH / WHEN
-    x_jaar_types = get_atom_args_jaar_types()
+    x_class_types = get_atom_args_class_types()
 
     # THEN
-    assert x_jaar_types.get(acct_name_str()) == type_AcctName_str()
-    assert x_jaar_types.get(addin_str()) == "float"
-    assert x_jaar_types.get(awardee_tag_str()) == type_GroupLabel_str()
-    assert x_jaar_types.get(base_str()) == type_RoadUnit_str()
-    assert x_jaar_types.get("base_item_active_requisite") == "bool"
-    assert x_jaar_types.get(begin_str()) == "float"
-    assert x_jaar_types.get(respect_bit_str()) == "float"
-    assert x_jaar_types.get(close_str()) == "float"
-    assert x_jaar_types.get(credit_belief_str()) == "int"
-    assert x_jaar_types.get(credit_vote_str()) == "int"
-    assert x_jaar_types.get(credor_respect_str()) == "int"
-    assert x_jaar_types.get(debtit_belief_str()) == "int"
-    assert x_jaar_types.get(debtit_vote_str()) == "int"
-    assert x_jaar_types.get(debtor_respect_str()) == "int"
-    assert x_jaar_types.get(denom_str()) == "int"
-    assert x_jaar_types.get("divisor") == "int"
-    assert x_jaar_types.get(fnigh_str()) == "float"
-    assert x_jaar_types.get(fopen_str()) == "float"
-    assert x_jaar_types.get(fund_coin_str()) == "float"
-    assert x_jaar_types.get("fund_pool") == "float"
-    assert x_jaar_types.get("give_force") == "float"
-    assert x_jaar_types.get(gogo_want_str()) == "float"
-    assert x_jaar_types.get(group_label_str()) == type_GroupLabel_str()
-    assert x_jaar_types.get(healer_name_str()) == type_AcctName_str()
-    assert x_jaar_types.get("item_title") == type_TitleUnit_str()
-    assert x_jaar_types.get("mass") == "int"
-    assert x_jaar_types.get("max_tree_traverse") == "int"
-    assert x_jaar_types.get(morph_str()) == "bool"
-    assert x_jaar_types.get("need") == type_RoadUnit_str()
-    assert x_jaar_types.get("nigh") == "float"
-    assert x_jaar_types.get(numor_str()) == "int"
-    assert x_jaar_types.get("open") == "float"
-    assert x_jaar_types.get(parent_road_str()) == type_RoadUnit_str()
-    assert x_jaar_types.get(penny_str()) == "float"
-    assert x_jaar_types.get("pick") == type_RoadUnit_str()
-    assert x_jaar_types.get("pledge") == "bool"
-    assert x_jaar_types.get("problem_bool") == "bool"
-    assert x_jaar_types.get("deal_time_int") == "TimeLinePoint"
-    assert x_jaar_types.get(road_str()) == type_RoadUnit_str()
-    assert x_jaar_types.get(stop_want_str()) == "float"
-    assert x_jaar_types.get("take_force") == "float"
-    assert x_jaar_types.get("tally") == "int"
-    assert x_jaar_types.get(team_tag_str()) == type_GroupLabel_str()
-    assert x_jaar_types.keys() == get_atom_args_category_mapping().keys()
-    assert all_atom_args_jaar_types_are_correct(x_jaar_types)
+    assert x_class_types.get(acct_name_str()) == type_AcctName_str()
+    assert x_class_types.get(addin_str()) == "float"
+    assert x_class_types.get(awardee_tag_str()) == type_GroupLabel_str()
+    assert x_class_types.get(base_str()) == type_RoadUnit_str()
+    assert x_class_types.get("base_item_active_requisite") == "bool"
+    assert x_class_types.get(begin_str()) == "float"
+    assert x_class_types.get(respect_bit_str()) == "float"
+    assert x_class_types.get(close_str()) == "float"
+    assert x_class_types.get(credit_belief_str()) == "int"
+    assert x_class_types.get(credit_vote_str()) == "int"
+    assert x_class_types.get(credor_respect_str()) == "int"
+    assert x_class_types.get(debtit_belief_str()) == "int"
+    assert x_class_types.get(debtit_vote_str()) == "int"
+    assert x_class_types.get(debtor_respect_str()) == "int"
+    assert x_class_types.get(denom_str()) == "int"
+    assert x_class_types.get("divisor") == "int"
+    assert x_class_types.get(fnigh_str()) == "float"
+    assert x_class_types.get(fopen_str()) == "float"
+    assert x_class_types.get(fund_coin_str()) == "float"
+    assert x_class_types.get("fund_pool") == "float"
+    assert x_class_types.get("give_force") == "float"
+    assert x_class_types.get(gogo_want_str()) == "float"
+    assert x_class_types.get(group_label_str()) == type_GroupLabel_str()
+    assert x_class_types.get(healer_name_str()) == type_AcctName_str()
+    assert x_class_types.get("item_title") == type_TitleUnit_str()
+    assert x_class_types.get("mass") == "int"
+    assert x_class_types.get("max_tree_traverse") == "int"
+    assert x_class_types.get(morph_str()) == "bool"
+    assert x_class_types.get("need") == type_RoadUnit_str()
+    assert x_class_types.get("nigh") == "float"
+    assert x_class_types.get(numor_str()) == "int"
+    assert x_class_types.get("open") == "float"
+    assert x_class_types.get(parent_road_str()) == type_RoadUnit_str()
+    assert x_class_types.get(penny_str()) == "float"
+    assert x_class_types.get("pick") == type_RoadUnit_str()
+    assert x_class_types.get("pledge") == "bool"
+    assert x_class_types.get("problem_bool") == "bool"
+    assert x_class_types.get("deal_time_int") == "TimeLinePoint"
+    assert x_class_types.get(road_str()) == type_RoadUnit_str()
+    assert x_class_types.get(stop_want_str()) == "float"
+    assert x_class_types.get("take_force") == "float"
+    assert x_class_types.get("tally") == "int"
+    assert x_class_types.get(team_tag_str()) == type_GroupLabel_str()
+    assert x_class_types.keys() == get_atom_args_category_mapping().keys()
+    assert all_atom_args_class_types_are_correct(x_class_types)

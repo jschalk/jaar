@@ -19,7 +19,7 @@ from src.f08_pidgin.pidgin import (
     pidginable_atom_args,
     get_pidginunit_from_json,
 )
-from src.f08_pidgin.pidgin_config import get_pidgin_args_jaar_types
+from src.f08_pidgin.pidgin_config import get_pidgin_args_class_types
 from src.f09_idea.idea_config import (
     get_idea_elements_sort_order,
     get_idea_category_ref,
@@ -153,8 +153,8 @@ def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
     column_names = set(x_df.columns)
     pidginable_columns = column_names.intersection(pidginable_atom_args())
     for pidginable_column in pidginable_columns:
-        jaar_type = get_pidgin_args_jaar_types().get(pidginable_column)
-        x_mapunit = x_pidginunit.get_mapunit(jaar_type)
+        class_type = get_pidgin_args_class_types().get(pidginable_column)
+        x_mapunit = x_pidginunit.get_mapunit(class_type)
         translate_single_column_dataframe(x_df, x_mapunit, pidginable_column)
 
 

@@ -16,6 +16,7 @@ from src.f00_instrument.db_toolbox import (
     insert_csv,
     create_table_from_csv,
     db_table_exists,
+    get_table_columns,
 )
 from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
@@ -490,3 +491,26 @@ def test_sqlite_version():
     major, minor, patch = map(int, sqlite_version.split("."))
     sqlite_old_error_message = f"SQLite version is too old: {sqlite_version}"
     assert (major, minor, patch) >= (3, 30, 0), sqlite_old_error_message
+
+
+def test_get_table_columns_ReturnsObj_Scenario0_TableDoesNotExist(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
+    """Test the create_table_from_csv_with_types function."""
+    conn, test_table, test_csv_filepath = setup_database_and_csv
+    x_tablename = "something_dark_side_table"
+    assert db_table_exists(conn, x_tablename) is False
+
+    # WHEN / THEN
+    assert get_table_columns(conn, x_tablename) == []
+
+
+def test_get_table_columns_ReturnsObj_Scenario1_TableExists(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
+    conn, test_table, test_csv_filepath = setup_database_and_csv
+    x_tablename = "something_dark_side_table"
+    create_table_from_csv(test_csv_filepath, conn, x_tablename, {})
+
+    # WHEN / THEN
+    assert get_table_columns(conn, x_tablename) == ["id", "name", "age", "email"]

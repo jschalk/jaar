@@ -1,5 +1,9 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f00_instrument.db_toolbox import create_table_from_columns, db_table_exists
+from src.f00_instrument.db_toolbox import (
+    create_table_from_columns,
+    db_table_exists,
+    get_table_columns,
+)
 from src.f01_road.road import FaceName, EventInt
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -30,6 +34,12 @@ from src.f10_etl.fiscal_etl_tool import (
     create_fiscalunit_jsons_from_prime_files,
     FiscalPrimeObjsRef,
     FiscalPrimeColumnsRef,
+    get_fiscalunit_sorted_args,
+    get_fiscaldeal_sorted_args,
+    get_fiscalcash_sorted_args,
+    get_fiscalhour_sorted_args,
+    get_fiscalmont_sorted_args,
+    get_fiscalweek_sorted_args,
 )
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
@@ -57,7 +67,7 @@ MAPS_CATEGORYS = {
     "map_road": "RoadUnit",
 }
 
-JAAR_TYPES = {
+class_typeS = {
     "AcctName": {
         "stage": "name_staging",
         "agg": "name_agg",
@@ -89,26 +99,26 @@ JAAR_TYPES = {
 }
 
 
-def get_jaar_type(pidgin_category: str) -> str:
+def get_class_type(pidgin_category: str) -> str:
     if pidgin_category not in MAPS_CATEGORYS:
         raise not_given_pidgin_category_Exception("not given pidgin_category")
     return MAPS_CATEGORYS[pidgin_category]
 
 
-def get_sheet_stage_name(jaar_type: str) -> str:
-    return JAAR_TYPES[jaar_type]["stage"]
+def get_sheet_stage_name(class_type: str) -> str:
+    return class_typeS[class_type]["stage"]
 
 
-def get_sheet_agg_name(jaar_type: str) -> str:
-    return JAAR_TYPES[jaar_type]["agg"]
+def get_sheet_agg_name(class_type: str) -> str:
+    return class_typeS[class_type]["agg"]
 
 
-def get_otx_obj(jaar_type, x_row) -> str:
-    return x_row[JAAR_TYPES[jaar_type]["otx_obj"]]
+def get_otx_obj(class_type, x_row) -> str:
+    return x_row[class_typeS[class_type]["otx_obj"]]
 
 
-def get_inx_obj(jaar_type, x_row) -> str:
-    return x_row[JAAR_TYPES[jaar_type]["inx_obj"]]
+def get_inx_obj(class_type, x_row) -> str:
+    return x_row[class_typeS[class_type]["inx_obj"]]
 
 
 def etl_ocean_to_boat_staging(ocean_dir: str, boat_dir: str):
@@ -367,7 +377,7 @@ class boatAggToStagingTransformer:
         self.boat_dir = boat_dir
         self.legitmate_events = legitmate_events
         self.pidgin_category = pidgin_category
-        self.jaar_type = get_jaar_type(pidgin_category)
+        self.class_type = get_class_type(pidgin_category)
 
     def transform(self):
         category_ideas = get_idea_category_ref().get(self.pidgin_category)
@@ -385,7 +395,7 @@ class boatAggToStagingTransformer:
                 )
 
         pidgin_file_path = create_path(self.boat_dir, "pidgin.xlsx")
-        upsert_sheet(pidgin_file_path, get_sheet_stage_name(self.jaar_type), pidgin_df)
+        upsert_sheet(pidgin_file_path, get_sheet_stage_name(self.class_type), pidgin_df)
 
     def insert_staging_rows(
         self,
@@ -415,7 +425,7 @@ class boatAggToStagingTransformer:
                     idea_number,
                     face_name,
                     event_int,
-                    get_otx_obj(self.jaar_type, x_row),
+                    get_otx_obj(self.class_type, x_row),
                     self.get_inx_obj(x_row, df_missing_cols),
                     otx_bridge,
                     inx_bridge,
@@ -423,13 +433,13 @@ class boatAggToStagingTransformer:
                 ]
 
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
-        if self.jaar_type == "AcctName" and "inx_name" not in missing_col:
+        if self.class_type == "AcctName" and "inx_name" not in missing_col:
             return x_row["inx_name"]
-        elif self.jaar_type == "GroupLabel" and "inx_label" not in missing_col:
+        elif self.class_type == "GroupLabel" and "inx_label" not in missing_col:
             return x_row["inx_label"]
-        elif self.jaar_type == "TitleUnit" and "inx_title" not in missing_col:
+        elif self.class_type == "TitleUnit" and "inx_title" not in missing_col:
             return x_row["inx_title"]
-        elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
+        elif self.class_type == "RoadUnit" and "inx_road" not in missing_col:
             return x_row["inx_road"]
         return None
 
@@ -467,7 +477,7 @@ class PidginStagingToAggTransformer:
         self.boat_dir = boat_dir
         self.pidgin_category = pidgin_category
         self.file_path = create_path(self.boat_dir, "pidgin.xlsx")
-        self.jaar_type = get_jaar_type(self.pidgin_category)
+        self.class_type = get_class_type(self.pidgin_category)
 
     def transform(self):
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
@@ -475,11 +485,11 @@ class PidginStagingToAggTransformer:
         pidgin_columns = get_custom_sorted_list(pidgin_columns)
         pidgin_agg_df = DataFrame(columns=pidgin_columns)
         self.insert_agg_rows(pidgin_agg_df)
-        upsert_sheet(self.file_path, get_sheet_agg_name(self.jaar_type), pidgin_agg_df)
+        upsert_sheet(self.file_path, get_sheet_agg_name(self.class_type), pidgin_agg_df)
 
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
         pidgin_file_path = create_path(self.boat_dir, "pidgin.xlsx")
-        stage_sheet_name = get_sheet_stage_name(self.jaar_type)
+        stage_sheet_name = get_sheet_stage_name(self.class_type)
         staging_df = pandas_read_excel(pidgin_file_path, sheet_name=stage_sheet_name)
         x_pidginbodybook = self.get_validated_pidginbodybook(staging_df)
         for pidginbodylist in x_pidginbodybook.get_valid_pidginbodylists():
@@ -492,8 +502,8 @@ class PidginStagingToAggTransformer:
             x_pidginbodyrow = PidginBodyRow(
                 event_int=x_row["event_int"],
                 face_name=x_row["face_name"],
-                otx_str=get_otx_obj(self.jaar_type, x_row),
-                inx_str=get_inx_obj(self.jaar_type, x_row),
+                otx_str=get_otx_obj(self.class_type, x_row),
+                inx_str=get_inx_obj(self.class_type, x_row),
             )
             x_pidginbodybook.eval_pidginbodyrow(x_pidginbodyrow)
         return x_pidginbodybook
@@ -514,8 +524,8 @@ class PidginStagingToAggTransformer:
 
 def etl_boat_pidgin_agg_to_bow_face_dirs(boat_dir: str, faces_dir: str):
     agg_pidgin = create_path(boat_dir, "pidgin.xlsx")
-    for jaar_type in JAAR_TYPES.keys():
-        agg_sheet_name = JAAR_TYPES[jaar_type]["agg"]
+    for class_type in class_typeS.keys():
+        agg_sheet_name = class_typeS[class_type]["agg"]
         if sheet_exists(agg_pidgin, agg_sheet_name):
             split_excel_into_dirs(
                 input_file=agg_pidgin,
@@ -528,8 +538,8 @@ def etl_boat_pidgin_agg_to_bow_face_dirs(boat_dir: str, faces_dir: str):
 
 def etl_face_pidgin_to_event_pidgins(face_dir: str):
     face_pidgin_path = create_path(face_dir, "pidgin.xlsx")
-    for jaar_type in JAAR_TYPES.keys():
-        agg_sheet_name = JAAR_TYPES[jaar_type]["agg"]
+    for class_type in class_typeS.keys():
+        agg_sheet_name = class_typeS[class_type]["agg"]
         if sheet_exists(face_pidgin_path, agg_sheet_name):
             split_excel_into_events_dirs(face_pidgin_path, face_dir, agg_sheet_name)
 
@@ -554,9 +564,9 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
 
 def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
     event_pidgin_path = create_path(event_pidgin_dir, "pidgin.xlsx")
-    for jaar_type in JAAR_TYPES.keys():
-        agg_sheet_name = JAAR_TYPES[jaar_type]["agg"]
-        csv_filename = JAAR_TYPES[jaar_type]["csv_filename"]
+    for class_type in class_typeS.keys():
+        agg_sheet_name = class_typeS[class_type]["agg"]
+        csv_filename = class_typeS[class_type]["csv_filename"]
         if sheet_exists(event_pidgin_path, agg_sheet_name):
             acct_csv_path = create_path(event_pidgin_dir, csv_filename)
             acct_df = pandas_read_excel(event_pidgin_path, agg_sheet_name)
@@ -765,7 +775,7 @@ def create_fiscal_tables(conn: sqlite3_Connection):
         "fund_coin",
         "penny",
         "respect_bit",
-        "current_time",
+        "present_time",
         "bridge",
         "c400_number",
         "yr1_jan1_offset",
@@ -832,20 +842,71 @@ def create_fiscal_tables(conn: sqlite3_Connection):
 
 def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
     # get every budunit category idea that is not also fiscalunit category idea: collect fiscal_titles
-    fiscal1_ideas = get_bud_ideas_with_only_fiscal_title()
-    for fiscal1_idea in fiscal1_ideas:
-        idea_staging_tablename = f"{fiscal1_idea}_staging"
+    only_fiscal_title_ideas = get_bud_ideas_with_only_fiscal_title()
+
+    dst_unit_columns = set(get_fiscalunit_sorted_args())
+    dst_deal_columns = set(get_fiscaldeal_sorted_args())
+    dst_cash_columns = set(get_fiscalcash_sorted_args())
+    dst_hour_columns = set(get_fiscalhour_sorted_args())
+    dst_mont_columns = set(get_fiscalmont_sorted_args())
+    dst_week_columns = set(get_fiscalweek_sorted_args())
+    dst_deal_columns.remove("fiscal_title")
+    dst_deal_columns.remove("owner_name")
+    dst_cash_columns.remove("fiscal_title")
+    dst_hour_columns.remove("fiscal_title")
+    dst_mont_columns.remove("fiscal_title")
+    dst_week_columns.remove("fiscal_title")
+    for idea_number in get_idea_numbers():
+        idea_staging_tablename = f"{idea_number}_staging"
         if db_table_exists(fiscal_db_conn, idea_staging_tablename):
-            cursor = fiscal_db_conn.cursor()
-            insert_idea_staging_agg = f"""
-INSERT INTO fiscalunit_staging (idea_number, face_name, event_int, fiscal_title)
-SELECT '{fiscal1_idea}' as idea_number, face_name, event_int, fiscal_title
-FROM {idea_staging_tablename}
+            src_columns = get_table_columns(fiscal_db_conn, idea_staging_tablename)
+            if not dst_unit_columns.isdisjoint(set(src_columns)):
+                _insert_into_fiscal_staging(
+                    fiscal_db_conn=fiscal_db_conn,
+                    dst_table="fiscalunit_staging",
+                    src_table=idea_staging_tablename,
+                    idea_number=idea_number,
+                )
+            if not dst_deal_columns.isdisjoint(set(src_columns)):
+                _insert_into_fiscal_staging(
+                    fiscal_db_conn=fiscal_db_conn,
+                    dst_table="fiscal_deal_episode_staging",
+                    src_table=idea_staging_tablename,
+                    idea_number=idea_number,
+                )
+            if not dst_cash_columns.isdisjoint(set(src_columns)):
+                # insert into fiscalcash_staging_table
+                pass
+            if not dst_hour_columns.isdisjoint(set(src_columns)):
+                # insert into fiscalhour_staging_table
+                pass
+            if not dst_mont_columns.isdisjoint(set(src_columns)):
+                # insert into fiscalmont_staging_table
+                pass
+            if not dst_week_columns.isdisjoint(set(src_columns)):
+                # insert into fiscalweek_staging_table
+                pass
+
+
+def _insert_into_fiscal_staging(
+    fiscal_db_conn: sqlite3_Connection, dst_table: str, src_table: str, idea_number: str
+):
+    dst_columns = get_table_columns(fiscal_db_conn, dst_table)
+    src_columns = get_table_columns(fiscal_db_conn, src_table)
+    common_columns_set = set(dst_columns).intersection(set(src_columns))
+    common_columns_list = [col for col in dst_columns if col in common_columns_set]
+    common_columns_str = ", ".join(common_columns_list)
+    cursor = fiscal_db_conn.cursor()
+    insert_idea_staging_agg_str = f"""
+INSERT INTO {dst_table} (idea_number, {common_columns_str})
+SELECT '{idea_number}' as idea_number, {common_columns_str}
+FROM {src_table}
 GROUP BY face_name, event_int, fiscal_title
 ;
 """
-            cursor.execute(insert_idea_staging_agg)
-            cursor.close()
+    print(f"{insert_idea_staging_agg_str=}")
+    cursor.execute(insert_idea_staging_agg_str)
+    cursor.close()
 
 
 def populate_fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):

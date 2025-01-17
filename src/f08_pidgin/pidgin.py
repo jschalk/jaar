@@ -31,7 +31,7 @@ class check_attrException(Exception):
     pass
 
 
-def pidginable_jaar_types() -> set:
+def pidginable_class_types() -> set:
     return {"AcctName", "GroupLabel", "TitleUnit", "RoadUnit"}
 
 
@@ -95,14 +95,14 @@ class PidginUnit:
     def del_group_label(self, otx_label: str):
         return self.groupmap.del_otx2inx(otx_label)
 
-    def get_mapunit(self, x_jaar_type: str):
-        if x_jaar_type == "AcctName":
+    def get_mapunit(self, x_class_type: str):
+        if x_class_type == "AcctName":
             return self.acctmap
-        elif x_jaar_type == "GroupLabel":
+        elif x_class_type == "GroupLabel":
             return self.groupmap
-        elif x_jaar_type == "TitleUnit":
+        elif x_class_type == "TitleUnit":
             return self.titlemap
-        elif x_jaar_type == "RoadUnit":
+        elif x_class_type == "RoadUnit":
             return self.roadmap
 
     def set_acctmap(self, x_acctmap: AcctMap):
@@ -183,44 +183,44 @@ class PidginUnit:
             and self.roadmap.is_valid()
         )
 
-    def set_otx2inx(self, x_jaar_type: str, x_otx: str, x_inx: str):
-        if x_jaar_type == "AcctName":
+    def set_otx2inx(self, x_class_type: str, x_otx: str, x_inx: str):
+        if x_class_type == "AcctName":
             self.acctmap.set_otx2inx(x_otx, x_inx)
-        elif x_jaar_type == "GroupLabel":
+        elif x_class_type == "GroupLabel":
             self.groupmap.set_otx2inx(x_otx, x_inx)
-        elif x_jaar_type == "TitleUnit":
+        elif x_class_type == "TitleUnit":
             self.titlemap.set_otx2inx(x_otx, x_inx)
-        elif x_jaar_type == "RoadUnit":
+        elif x_class_type == "RoadUnit":
             self.roadmap.set_otx2inx(x_otx, x_inx)
 
-    def _get_inx_value(self, x_jaar_type: str, x_otx: str) -> str:
-        if x_jaar_type == "AcctName":
+    def _get_inx_value(self, x_class_type: str, x_otx: str) -> str:
+        if x_class_type == "AcctName":
             return self.acctmap._get_inx_value(x_otx)
-        elif x_jaar_type == "GroupLabel":
+        elif x_class_type == "GroupLabel":
             return self.groupmap._get_inx_value(x_otx)
-        elif x_jaar_type == "TitleUnit":
+        elif x_class_type == "TitleUnit":
             return self.titlemap._get_inx_value(x_otx)
-        elif x_jaar_type == "RoadUnit":
+        elif x_class_type == "RoadUnit":
             return self.roadmap._get_inx_value(x_otx)
 
-    def otx2inx_exists(self, x_jaar_type: str, x_otx: str, x_inx: str) -> bool:
-        if x_jaar_type == "AcctName":
+    def otx2inx_exists(self, x_class_type: str, x_otx: str, x_inx: str) -> bool:
+        if x_class_type == "AcctName":
             return self.acctmap.otx2inx_exists(x_otx, x_inx)
-        elif x_jaar_type == "GroupLabel":
+        elif x_class_type == "GroupLabel":
             return self.groupmap.otx2inx_exists(x_otx, x_inx)
-        elif x_jaar_type == "TitleUnit":
+        elif x_class_type == "TitleUnit":
             return self.titlemap.otx2inx_exists(x_otx, x_inx)
-        elif x_jaar_type == "RoadUnit":
+        elif x_class_type == "RoadUnit":
             return self.roadmap.otx2inx_exists(x_otx, x_inx)
 
-    def del_otx2inx(self, x_jaar_type: str, x_otx: str):
-        if x_jaar_type == "AcctName":
+    def del_otx2inx(self, x_class_type: str, x_otx: str):
+        if x_class_type == "AcctName":
             self.acctmap.del_otx2inx(x_otx)
-        elif x_jaar_type == "GroupLabel":
+        elif x_class_type == "GroupLabel":
             self.groupmap.del_otx2inx(x_otx)
-        elif x_jaar_type == "TitleUnit":
+        elif x_class_type == "TitleUnit":
             self.titlemap.del_otx2inx(x_otx)
-        elif x_jaar_type == "RoadUnit":
+        elif x_class_type == "RoadUnit":
             self.roadmap.del_otx2inx(x_otx)
 
     def set_title(self, x_otx: str, x_inx: str):

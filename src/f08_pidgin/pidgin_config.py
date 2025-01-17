@@ -133,7 +133,7 @@ def get_pidgin_args_category_mapping() -> dict[str, str]:
     return x_dict
 
 
-def get_pidgin_args_jaar_types() -> dict[str, str]:
+def get_pidgin_args_class_types() -> dict[str, str]:
     return {
         "acct_name": "AcctName",
         "addin": "float",
@@ -149,7 +149,7 @@ def get_pidgin_args_jaar_types() -> dict[str, str]:
         "credor_respect": "int",
         "cumlative_day": "int",
         "cumlative_minute": "int",
-        "current_time": "int",
+        "present_time": "int",
         "debtit_belief": "int",
         "debtit_vote": "int",
         "debtor_respect": "int",

@@ -78,7 +78,7 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_hour_str,
     fiscal_timeline_month_str,
     fiscal_timeline_weekday_str,
-    current_time_str,
+    present_time_str,
     amount_str,
     month_title_str,
     hour_title_str,
@@ -218,7 +218,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[46] == fund_coin_str()
     assert table_sorting_priority[47] == penny_str()
     assert table_sorting_priority[48] == respect_bit_str()
-    assert table_sorting_priority[49] == current_time_str()
+    assert table_sorting_priority[49] == present_time_str()
     assert table_sorting_priority[50] == amount_str()
     assert table_sorting_priority[51] == month_title_str()
     assert table_sorting_priority[52] == hour_title_str()
@@ -318,7 +318,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(fund_coin_str()) == "REAL"
     assert sqlite_types.get(penny_str()) == "REAL"
     assert sqlite_types.get(respect_bit_str()) == "REAL"
-    assert sqlite_types.get(current_time_str()) == "INTEGER"
+    assert sqlite_types.get(present_time_str()) == "INTEGER"
     assert sqlite_types.get(amount_str()) == "REAL"
     assert sqlite_types.get(month_title_str()) == "TEXT"
     assert sqlite_types.get(hour_title_str()) == "TEXT"
@@ -692,7 +692,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         face_name_str(),
         event_int_str(),
         c400_number_str(),
-        current_time_str(),
+        present_time_str(),
         fiscal_title_str(),
         fund_coin_str(),
         monthday_distortion_str(),

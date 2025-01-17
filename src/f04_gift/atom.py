@@ -31,7 +31,7 @@ from src.f04_gift.atom_config import (
     is_atom_category,
     get_atom_config_args,
     get_sorted_jkey_keys,
-    get_atom_args_jaar_types,
+    get_atom_args_class_types,
     CRUD_command,
 )
 from dataclasses import dataclass
@@ -664,31 +664,31 @@ class AtomRow:
     def delete_atom_category(self, atom_category: str):
         self._atom_categorys.remove(atom_category)
 
-    def _set_jaar_types(self):
-        for x_arg, jaar_type in get_atom_args_jaar_types().items():
+    def _set_class_types(self):
+        for x_arg, class_type in get_atom_args_class_types().items():
             x_value = self.__dict__.get(x_arg)
             if x_value != None:
-                if jaar_type == "AcctName":
+                if class_type == "AcctName":
                     self.__dict__[x_arg] = AcctName(x_value)
-                elif jaar_type == "GroupLabel":
+                elif class_type == "GroupLabel":
                     self.__dict__[x_arg] = GroupLabel(x_value)
-                elif jaar_type == "RoadUnit":
+                elif class_type == "RoadUnit":
                     self.__dict__[x_arg] = RoadUnit(x_value)
-                elif jaar_type == "TitleUnit":
+                elif class_type == "TitleUnit":
                     self.__dict__[x_arg] = TitleUnit(x_value)
-                elif jaar_type == "str":
+                elif class_type == "str":
                     self.__dict__[x_arg] = str(x_value)
-                elif jaar_type == "bool":
+                elif class_type == "bool":
                     self.__dict__[x_arg] = bool(x_value)
-                elif jaar_type == "int":
+                elif class_type == "int":
                     self.__dict__[x_arg] = int(x_value)
-                elif jaar_type == "float":
+                elif class_type == "float":
                     self.__dict__[x_arg] = float(x_value)
         if self.item_title != None and self.parent_road != None and self.road == None:
             self.road = create_road(self.parent_road, self.item_title)
 
     def get_atomunits(self) -> list[AtomUnit]:
-        self._set_jaar_types()
+        self._set_class_types()
         x_list = []
         for x_category in self._atom_categorys:
             x_atom = atomunit_shop(x_category, self._crud_command)

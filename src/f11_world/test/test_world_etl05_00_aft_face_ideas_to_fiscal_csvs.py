@@ -17,7 +17,7 @@ from src.f04_gift.atom_config import (
     respect_bit_str,
 )
 from src.f07_fiscal.fiscal_config import (
-    current_time_str,
+    present_time_str,
     amount_str,
     month_title_str,
     hour_title_str,
@@ -234,7 +234,7 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_Bud_category_idea_PopulatesFisc
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # current_time
+            None,  # present_time
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -250,7 +250,7 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_Bud_category_idea_PopulatesFisc
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # current_time
+            None,  # present_time
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -307,7 +307,7 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_PopulatesFiscalAggTables(
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # current_time
+            None,  # present_time
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -319,7 +319,7 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_PopulatesFiscalAggTables(
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # current_time
+            None,  # present_time
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -453,7 +453,7 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
 #     expected_br0_columns.extend(
 #         [
 #             c400_number_str(),
-#             current_time_str(),
+#             present_time_str(),
 #             fund_coin_str(),
 #             monthday_distortion_str(),
 #             penny_str(),

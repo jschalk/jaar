@@ -12,13 +12,13 @@
         "jkeys": {
             "acct_name": {
                 "column_order": 0,
-                "jaar_type": "AcctName",
+                "class_type": "AcctName",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "group_label": {
                 "column_order": 1,
-                "jaar_type": "GroupLabel",
+                "class_type": "GroupLabel",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
@@ -26,12 +26,12 @@
         "jvalues": {
             "credit_vote": {
                 "column_order": 3,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_vote": {
                 "column_order": 2,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
@@ -52,19 +52,19 @@
         "jkeys": {
             "acct_name": {
                 "column_order": 0,
-                "jaar_type": "AcctName",
+                "class_type": "AcctName",
                 "sqlite_datatype": "TEXT"
             }
         },
         "jvalues": {
             "credit_belief": {
                 "column_order": 2,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_belief": {
                 "column_order": 1,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },
@@ -85,13 +85,13 @@
         "jkeys": {
             "awardee_tag": {
                 "column_order": 1,
-                "jaar_type": "GroupLabel",
+                "class_type": "GroupLabel",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -99,12 +99,12 @@
         "jvalues": {
             "give_force": {
                 "column_order": 3,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "take_force": {
                 "column_order": 2,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
@@ -125,13 +125,13 @@
         "jkeys": {
             "base": {
                 "column_order": 1,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -139,17 +139,17 @@
         "jvalues": {
             "fnigh": {
                 "column_order": 4,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "fopen": {
                 "column_order": 3,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "pick": {
                 "column_order": 2,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -167,13 +167,13 @@
         "jkeys": {
             "healer_name": {
                 "column_order": 1,
-                "jaar_type": "AcctName",
+                "class_type": "AcctName",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -196,19 +196,19 @@
         "jkeys": {
             "base": {
                 "column_order": 1,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "need": {
                 "column_order": 2,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "nesting_order": 2,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -216,17 +216,17 @@
         "jvalues": {
             "divisor": {
                 "column_order": 5,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "nigh": {
                 "column_order": 4,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "open": {
                 "column_order": 3,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
@@ -247,13 +247,13 @@
         "jkeys": {
             "base": {
                 "column_order": 1,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -261,7 +261,7 @@
         "jvalues": {
             "base_item_active_requisite": {
                 "column_order": 2,
-                "jaar_type": "bool",
+                "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             }
         },
@@ -279,13 +279,13 @@
         "jkeys": {
             "road": {
                 "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "team_tag": {
                 "column_order": 1,
-                "jaar_type": "GroupLabel",
+                "class_type": "GroupLabel",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
@@ -308,13 +308,13 @@
         "jkeys": {
             "item_title": {
                 "column_order": 1,
-                "jaar_type": "TitleUnit",
+                "class_type": "TitleUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
                 "column_order": 0,
-                "jaar_type": "RoadUnit",
+                "class_type": "RoadUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -322,57 +322,57 @@
         "jvalues": {
             "addin": {
                 "column_order": 10,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "begin": {
                 "column_order": 5,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "close": {
                 "column_order": 6,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "denom": {
                 "column_order": 8,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "gogo_want": {
                 "column_order": 11,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "mass": {
                 "column_order": 3,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "morph": {
                 "column_order": 9,
-                "jaar_type": "bool",
+                "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "numor": {
                 "column_order": 7,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "pledge": {
                 "column_order": 2,
-                "jaar_type": "bool",
+                "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "problem_bool": {
                 "column_order": 4,
-                "jaar_type": "bool",
+                "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
             "stop_want": {
                 "column_order": 12,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
@@ -388,47 +388,47 @@
         "jvalues": {
             "credor_respect": {
                 "column_order": 3,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "debtor_respect": {
                 "column_order": 2,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "fund_coin": {
                 "column_order": 1,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "fund_pool": {
                 "column_order": 0,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "max_tree_traverse": {
                 "column_order": 5,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
             "penny": {
                 "column_order": 6,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "deal_time_int": {
                 "column_order": 8,
-                "jaar_type": "TimeLinePoint",
+                "class_type": "TimeLinePoint",
                 "sqlite_datatype": "INTEGER"
             },
             "respect_bit": {
                 "column_order": 4,
-                "jaar_type": "float",
+                "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "tally": {
                 "column_order": 7,
-                "jaar_type": "int",
+                "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
         },

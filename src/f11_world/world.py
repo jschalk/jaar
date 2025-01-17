@@ -59,7 +59,7 @@ class _set_fiscal_pidgin_Exception(Exception):
 class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
-    current_time: TimeLinePoint = None
+    present_time: TimeLinePoint = None
     events: dict[EventInt, FaceName] = None
     timeconversions: dict[TimeLineTitle, TimeConversion] = None
     _faces_bow_dir: str = None
@@ -191,7 +191,7 @@ class WorldUnit:
     def get_dict(self) -> dict:
         return {
             "world_id": self.world_id,
-            "current_time": self.current_time,
+            "present_time": self.present_time,
             "timeconversions": self.get_timeconversions_dict(),
             "events": self.events,
         }
@@ -201,7 +201,7 @@ def worldunit_shop(
     world_id: WorldID = None,
     worlds_dir: str = None,
     ocean_dir: str = None,
-    current_time: TimeLinePoint = None,
+    present_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineTitle, TimeConversion] = None,
     _fiscalunits: set[FiscalTitle] = None,
 ) -> WorldUnit:
@@ -212,7 +212,7 @@ def worldunit_shop(
     x_worldunit = WorldUnit(
         world_id=world_id,
         worlds_dir=worlds_dir,
-        current_time=get_0_if_None(current_time),
+        present_time=get_0_if_None(present_time),
         timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
         _fiscalunits=get_empty_set_if_None(_fiscalunits),

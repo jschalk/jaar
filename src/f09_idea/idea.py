@@ -247,7 +247,7 @@ def fiscal_build_from_df(
             fiscal_title=x_fiscal_title,
             fiscals_dir=x_fiscals_dir,
             timeline=x_timeline,
-            current_time=row["current_time"],
+            present_time=row["present_time"],
             # in_memory_journal=row["in_memory_journal"],
             bridge=row["bridge"],
             fund_coin=x_fund_coin,
@@ -303,7 +303,7 @@ def _add_dealepisodes_from_df(x_fiscalunit: FiscalUnit, br00001_df: DataFrame):
             x_owner_name=row["owner_name"],
             x_time_int=row["time_int"],
             x_money_magnitude=row["quota"],
-            allow_prev_to_current_time_entry=True,
+            allow_prev_to_present_time_entry=True,
         )
 
 
