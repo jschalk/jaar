@@ -49,6 +49,8 @@ from src.f09_idea.idea_config import (
     idea_format_00029_budunit_v0_0_0,
     get_idea_format_headers,
     attributes_str,
+    get_idea_elements_sort_order,
+    get_custom_sorted_list,
 )
 from src.f09_idea.examples.idea_env import src_idea_dir
 
@@ -74,6 +76,7 @@ def test_get_idea_formats_dir_ReturnsObj():
     idea_dir = get_idea_formats_dir()
     # THEN
     print(f"{idea_dir=}")
+    print(f"{src_idea_dir()=}")
     assert idea_dir == create_path(src_idea_dir(), "idea_formats")
 
 
@@ -108,30 +111,34 @@ def test_get_headers_list_ReturnsObj():
     ]
 
 
-def get_sorted_headers(idea_filename):
+def get_sorted_headers_str(idea_filename):
     x_idearef = get_idearef_from_file(idea_filename)
     idea_attributes = set(x_idearef.get(attributes_str()).keys())
     idea_attributes.remove(face_name_str())
     idea_attributes.remove(event_int_str())
-    return create_sorted_concatenated_str(list(idea_attributes))
+    attr_sort = get_idea_elements_sort_order()
+    idea_attributes = get_custom_sorted_list(idea_attributes, attr_sort)
+    header_str = "".join(f",{x_header}" for x_header in idea_attributes)
+    return header_str[1:]
+    # return create_sorted_concatenated_str(list(idea_attributes))
 
 
-def test_get_sorted_headers_ReturnsObj():
+def test_get_sorted_headers_str_ReturnsObj():
     # ESTABLISH / WHEN
-    headers = get_sorted_headers(idea_format_00021_bud_acctunit_v0_0_0())
+    headers = get_sorted_headers_str(idea_format_00021_bud_acctunit_v0_0_0())
     # THEN
-    assert headers == "acct_name,credit_belief,debtit_belief,fiscal_title,owner_name"
+    assert headers == "fiscal_title,owner_name,acct_name,credit_belief,debtit_belief"
 
     # ESTABLISH / WHEN
-    headers = get_sorted_headers(idea_format_00019_itemunit_v0_0_0())
+    headers = get_sorted_headers_str(idea_format_00019_itemunit_v0_0_0())
     # THEN
-    item_headers_str = "addin,begin,close,denom,fiscal_title,gogo_want,item_title,morph,numor,owner_name,parent_road,stop_want"
+    item_headers_str = "fiscal_title,owner_name,parent_road,item_title,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
     assert headers == item_headers_str
 
 
 def check_sorted_headers_exist(idea_format_filename: str, x_headers: dict):
     # print(f"{idea_format_filename=}")
-    sorted_headers = get_sorted_headers(idea_format_filename)
+    sorted_headers = get_sorted_headers_str(idea_format_filename)
     print(f"{idea_format_filename=} {sorted_headers=}")
     assert x_headers.get(sorted_headers) == idea_format_filename
 

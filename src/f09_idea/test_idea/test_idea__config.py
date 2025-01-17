@@ -335,6 +335,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(quota_str()) == "REAL"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
     assert sqlite_types.get(timeline_title_str()) == "TEXT"
+    assert sqlite_types.get("note") == "TEXT"
 
 
 def test_get_allowed_curds_ReturnObj():

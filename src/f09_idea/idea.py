@@ -3,7 +3,6 @@ from src.f00_instrument.dict_toolbox import (
     extract_csv_headers,
     get_csv_column1_column2_metrics,
     create_l2nested_csv_dict,
-    create_sorted_concatenated_str,
     get_positional_dict,
     add_headers_to_csv,
 )
@@ -19,7 +18,7 @@ from src.f09_idea.idea_config import (
     get_idearef_from_file,
     get_idea_format_headers,
 )
-from src.f09_idea.pandas_tool import save_dataframe_to_csv, get_sorting_columns
+from src.f09_idea.pandas_tool import save_dataframe_to_csv, get_custom_sorted_list
 from pandas import DataFrame
 from csv import reader as csv_reader
 from dataclasses import dataclass
@@ -35,7 +34,7 @@ class IdeaRef:
         self._attributes[x_attribute] = {"otx_key": otx_key}
 
     def get_headers_list(self) -> list[str]:
-        return get_sorting_columns(self._attributes)
+        return get_custom_sorted_list(self._attributes)
 
     def get_otx_keys_list(self) -> list[str]:
         x_set = {
@@ -43,7 +42,7 @@ class IdeaRef:
             for x_attr, otx_dict in self._attributes.items()
             if otx_dict.get("otx_key") is True
         }
-        return get_sorting_columns(x_set)
+        return get_custom_sorted_list(x_set)
 
     def get_otx_values_list(self) -> list[str]:
         x_set = {
@@ -51,7 +50,7 @@ class IdeaRef:
             for x_attr, otx_dict in self._attributes.items()
             if otx_dict.get("otx_key") is False
         }
-        return get_sorting_columns(x_set)
+        return get_custom_sorted_list(x_set)
 
 
 def idearef_shop(x_idea_name: str, x_categorys: list[str]) -> IdeaRef:
@@ -147,7 +146,9 @@ def save_idea_csv(x_ideaname: str, x_budunit: BudUnit, x_dir: str, x_filename: s
 
 
 def get_csv_idearef(header_row: list[str]) -> IdeaRef:
-    headers_str = create_sorted_concatenated_str(header_row)
+    header_row = get_custom_sorted_list(header_row)
+    headers_str = "".join(f",{x_header}" for x_header in header_row)
+    headers_str = headers_str[1:]
     headers_str = headers_str.replace("face_name,", "")
     headers_str = headers_str.replace("event_int,", "")
     x_ideaname = get_idea_format_headers().get(headers_str)

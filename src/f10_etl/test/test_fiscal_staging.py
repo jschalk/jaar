@@ -20,7 +20,7 @@ from src.f07_fiscal.fiscal_config import (
     get_fiscal_config_args,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.pandas_tool import sheet_exists, upsert_sheet, get_sorting_columns
+from src.f09_idea.pandas_tool import sheet_exists, upsert_sheet, get_custom_sorted_list
 from src.f10_etl.fiscal_etl_tool import (
     FiscalPrimeObjsRef,
     FiscalPrimeColumnsRef,
@@ -113,13 +113,13 @@ def test_FiscalPrimeColumnsRef_Exists():
     mont_args = set(get_fiscal_config_args(fiscal_timeline_month_str()).keys())
     week_args = set(get_fiscal_config_args(fiscal_timeline_weekday_str()).keys())
     print(f"           {fis_cols.unit_agg_columns=}")
-    print(f"{get_sorting_columns(list(unit_args))=}")
-    assert fis_cols.unit_agg_columns == get_sorting_columns(list(unit_args))
-    assert fis_cols.cash_agg_columns == get_sorting_columns(list(cash_args))
-    assert fis_cols.deal_agg_columns == get_sorting_columns(list(deal_args))
-    assert fis_cols.hour_agg_columns == get_sorting_columns(list(hour_args))
-    assert fis_cols.mont_agg_columns == get_sorting_columns(list(mont_args))
-    assert fis_cols.week_agg_columns == get_sorting_columns(list(week_args))
+    print(f"{get_custom_sorted_list(list(unit_args))=}")
+    assert fis_cols.unit_agg_columns == get_custom_sorted_list(list(unit_args))
+    assert fis_cols.cash_agg_columns == get_custom_sorted_list(list(cash_args))
+    assert fis_cols.deal_agg_columns == get_custom_sorted_list(list(deal_args))
+    assert fis_cols.hour_agg_columns == get_custom_sorted_list(list(hour_args))
+    assert fis_cols.mont_agg_columns == get_custom_sorted_list(list(mont_args))
+    assert fis_cols.week_agg_columns == get_custom_sorted_list(list(week_args))
 
     staging_args = {"idea_number", face_name_str(), event_int_str(), "note"}
     unit_staging_args = unit_args.union(staging_args)
@@ -128,12 +128,24 @@ def test_FiscalPrimeColumnsRef_Exists():
     hour_staging_args = hour_args.union(staging_args)
     mont_staging_args = mont_args.union(staging_args)
     week_staging_args = week_args.union(staging_args)
-    assert fis_cols.unit_staging_columns == get_sorting_columns(list(unit_staging_args))
-    assert fis_cols.cash_staging_columns == get_sorting_columns(list(cash_staging_args))
-    assert fis_cols.deal_staging_columns == get_sorting_columns(list(deal_staging_args))
-    assert fis_cols.hour_staging_columns == get_sorting_columns(list(hour_staging_args))
-    assert fis_cols.mont_staging_columns == get_sorting_columns(list(mont_staging_args))
-    assert fis_cols.week_staging_columns == get_sorting_columns(list(week_staging_args))
+    assert fis_cols.unit_staging_columns == get_custom_sorted_list(
+        list(unit_staging_args)
+    )
+    assert fis_cols.cash_staging_columns == get_custom_sorted_list(
+        list(cash_staging_args)
+    )
+    assert fis_cols.deal_staging_columns == get_custom_sorted_list(
+        list(deal_staging_args)
+    )
+    assert fis_cols.hour_staging_columns == get_custom_sorted_list(
+        list(hour_staging_args)
+    )
+    assert fis_cols.mont_staging_columns == get_custom_sorted_list(
+        list(mont_staging_args)
+    )
+    assert fis_cols.week_staging_columns == get_custom_sorted_list(
+        list(week_staging_args)
+    )
 
     # unit_staging_csv_header = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}"""
     unit_staging_csv_header = ",".join(fis_cols.unit_staging_columns)

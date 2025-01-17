@@ -46,6 +46,7 @@ def test_make_deltaunit_Arg_idea_format_00021_bud_acctunit_v0_0_0():
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     x_idea_name = idea_format_00021_bud_acctunit_v0_0_0()
     acct_dataframe = create_idea_df(sue_budunit, x_idea_name)
+    print(f"{acct_dataframe.columns=}")
     acct_csv = acct_dataframe.to_csv(index=False)
 
     # WHEN

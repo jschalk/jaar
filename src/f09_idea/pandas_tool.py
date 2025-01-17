@@ -25,6 +25,7 @@ from src.f09_idea.idea_config import (
     get_idea_category_ref,
     get_idea_format_filename,
     get_idea_sqlite_types,
+    get_custom_sorted_list,
 )
 from numpy import float64, nan as numpy_nan
 from pandas import (
@@ -43,19 +44,8 @@ def save_dataframe_to_csv(x_df: DataFrame, x_dir: str, x_filename: str):
     save_file(x_dir, x_filename, get_ordered_csv(x_df))
 
 
-def get_sorting_columns(
-    existing_columns: set[str], sorting_columns: list[str] = None
-) -> list[str]:
-    if sorting_columns is None:
-        sorting_columns = get_idea_elements_sort_order()
-    sort_columns_in_existing = set(sorting_columns).intersection(existing_columns)
-    return [
-        sort_col for sort_col in sorting_columns if sort_col in sort_columns_in_existing
-    ]
-
-
 def get_ordered_csv(x_df: DataFrame, sorting_columns: list[str] = None) -> str:
-    new_sorting_columns = get_sorting_columns(set(x_df.columns), sorting_columns)
+    new_sorting_columns = get_custom_sorted_list(set(x_df.columns), sorting_columns)
     x_df.sort_values(new_sorting_columns, inplace=True)
     x_df.reset_index(inplace=True)
     x_df.drop(columns=["index"], inplace=True)
@@ -125,7 +115,7 @@ def get_boat_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, group_by_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
-    grouping_columns = get_sorting_columns(df_columns, group_by_list)
+    grouping_columns = get_custom_sorted_list(df_columns, group_by_list)
     value_columns = df_columns.difference(grouping_columns)
 
     if grouping_columns == []:
