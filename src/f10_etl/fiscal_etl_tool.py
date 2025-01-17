@@ -13,6 +13,51 @@ from src.f09_idea.pandas_tool import upsert_sheet, dataframe_to_dict, if_nan_ret
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
+def get_fiscalunit_sorted_args() -> list[str]:
+    return [
+        "face_name",
+        "event_int",
+        "fiscal_title",
+        "fund_coin",
+        "penny",
+        "respect_bit",
+        "current_time",
+        "bridge",
+        "c400_number",
+        "yr1_jan1_offset",
+        "monthday_distortion",
+        "timeline_title",
+    ]
+
+
+def get_fiscaldeal_sorted_args() -> list[str]:
+    return [
+        "face_name",
+        "event_int",
+        "fiscal_title",
+        "owner_name",
+        "acct_name",
+        "time_int",
+        "amount",
+    ]
+
+
+def get_fiscalcash_sorted_args() -> list[str]:
+    return ["face_name", "event_int", "fiscal_title", "owner_name", "time_int", "quota"]
+
+
+def get_fiscalhour_sorted_args() -> list[str]:
+    return ["face_name", "event_int", "fiscal_title", "hour_title", "cumlative_minute"]
+
+
+def get_fiscalmont_sorted_args() -> list[str]:
+    return ["face_name", "event_int", "fiscal_title", "month_title", "cumlative_day"]
+
+
+def get_fiscalweek_sorted_args() -> list[str]:
+    return ["face_name", "event_int", "fiscal_title", "weekday_title", "weekday_order"]
+
+
 class FiscalPrimeObjsRef:
     def __init__(self, x_dir: str = ""):
         self.unit_agg_tablename = "fiscalunit_agg"
