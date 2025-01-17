@@ -49,18 +49,18 @@ def test_WorldUnit_fiscal_csvs_to_jsons_Scenario0_CreateFilesWithOnlyFiscalTitle
     accord45_str = "accord45"
     fizz_world = worldunit_shop("fizz")
     fiscal_mstr_dir = fizz_world._fiscal_mstr_dir
-    x_objs = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    x_fis = FiscalPrimeObjsRef(fiscal_mstr_dir)
     x_cols = FiscalPrimeColumnsRef()
     fiscalunit_csv_str = f"""{x_cols.unit_agg_csv_header}
 {accord23_str},,,,,,,,,
 {accord45_str},,,,,,,,,
 """
-    save_file(fiscal_mstr_dir, x_objs.unit_agg_csv_filename, fiscalunit_csv_str)
-    save_file(fiscal_mstr_dir, x_objs.deal_agg_csv_filename, x_cols.deal_agg_empty_csv)
-    save_file(fiscal_mstr_dir, x_objs.cash_agg_csv_filename, x_cols.cash_agg_empty_csv)
-    save_file(fiscal_mstr_dir, x_objs.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
-    save_file(fiscal_mstr_dir, x_objs.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
-    save_file(fiscal_mstr_dir, x_objs.week_agg_csv_filename, x_cols.week_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_fis.unit_agg_csv_filename, fiscalunit_csv_str)
+    save_file(fiscal_mstr_dir, x_fis.deal_agg_csv_filename, x_cols.deal_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_fis.cash_agg_csv_filename, x_cols.cash_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_fis.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_fis.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_fis.week_agg_csv_filename, x_cols.week_agg_empty_csv)
 
     accord23_json_filename = f"{accord23_str}.json"
     accord45_json_filename = f"{accord45_str}.json"
@@ -101,19 +101,19 @@ def test_WorldUnit_fiscal_csvs_to_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs
     a45_timeline_title = "a45_timeline"
     fizz_world = worldunit_shop("fizz")
     fiscal_mstr_dir = fizz_world._fiscal_mstr_dir
-    x_objs = FiscalPrimeObjsRef(fiscal_mstr_dir)
+    x_fis = FiscalPrimeObjsRef(fiscal_mstr_dir)
     x_cols = FiscalPrimeColumnsRef()
     fiscalunit_csv_str = f"""{x_cols.unit_agg_csv_header}
 {accord23_str},,,,,,,,,
 {accord45_str},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_current_time},{a45_bridge},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_timeline_title}
 """
     fizz_world = worldunit_shop("fizz")
-    save_file(fiscal_mstr_dir, x_objs.unit_agg_csv_filename, fiscalunit_csv_str)
-    save_file(fiscal_mstr_dir, x_objs.deal_agg_csv_filename, x_cols.deal_agg_empty_csv)
-    save_file(fiscal_mstr_dir, x_objs.cash_agg_csv_filename, x_cols.cash_agg_empty_csv)
-    save_file(fiscal_mstr_dir, x_objs.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
-    save_file(fiscal_mstr_dir, x_objs.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
-    save_file(fiscal_mstr_dir, x_objs.week_agg_csv_filename, x_cols.week_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_fis.unit_agg_csv_filename, fiscalunit_csv_str)
+    save_file(fiscal_mstr_dir, x_fis.deal_agg_csv_filename, x_cols.deal_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_fis.cash_agg_csv_filename, x_cols.cash_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_fis.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_fis.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
+    save_file(fiscal_mstr_dir, x_fis.week_agg_csv_filename, x_cols.week_agg_empty_csv)
 
     accord23_json_filename = f"{accord23_str}.json"
     accord45_json_filename = f"{accord45_str}.json"
