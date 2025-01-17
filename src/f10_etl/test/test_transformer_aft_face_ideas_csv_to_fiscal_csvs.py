@@ -841,6 +841,78 @@ VALUES
         assert fiscalunit_db_rows == [expected_row0, expected_row1]
 
 
+def test_populate_fiscal_staging_tables_Scenario8_Idea_br00005_Table_WithAttrs(
+    env_dir_setup_cleanup,
+):
+
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    br00005_str = "br00005"
+    br00005_columns = [
+        face_name_str(),
+        event_int_str(),
+        fiscal_title_str(),
+        weekday_title_str(),
+        weekday_order_str(),
+    ]
+    a23_weekday_title = "4pm"
+    a23_weekday_order = 44
+
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        br00005_tablename = f"{br00005_str}_staging"
+        create_idea_staging_table(fiscal_db_conn, br00005_tablename, br00005_columns)
+        insert_staging_sqlstr = f"""
+INSERT INTO {br00005_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{weekday_title_str()},{weekday_order_str()})
+VALUES
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_weekday_title}',{a23_weekday_order})
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_weekday_title}',{a23_weekday_order})
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_weekday_title}',{a23_weekday_order})
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        x_fis = FiscalPrimeObjsRef()
+        create_fiscal_tables(fiscal_db_conn)
+        assert get_row_count(fiscal_db_conn, x_fis.week_stage_tablename) == 0
+
+        # WHEN
+        populate_fiscal_staging_tables(fiscal_db_conn)
+
+        # THEN
+        assert get_row_count(fiscal_db_conn, x_fis.week_stage_tablename) == 2
+        cursor.execute(f"SELECT * FROM {x_fis.week_stage_tablename}")
+        fiscalunit_db_rows = cursor.fetchall()
+        expected_row0 = (
+            br00005_str,  # idea_number
+            sue_inx,  # face_name
+            event3,  # event_int
+            accord23_str,  # fiscal_title
+            a23_weekday_title,
+            a23_weekday_order,
+            None,  # note
+        )
+        expected_row1 = (
+            br00005_str,  # idea_number
+            sue_inx,  # face_name
+            event7,  # event_int
+            accord23_str,  # fiscal_title
+            a23_weekday_title,
+            a23_weekday_order,
+            None,  # note
+        )
+        print(f"{fiscalunit_db_rows[0]=}")
+        print(f"{fiscalunit_db_rows[1]=}")
+        print(f"        {expected_row0=}")
+        print(f"        {expected_row1=}")
+        assert fiscalunit_db_rows[0] == expected_row0
+        assert fiscalunit_db_rows[1] == expected_row1
+        assert fiscalunit_db_rows == [expected_row0, expected_row1]
+
+
 def test_populate_fiscal_agg_tables_PopulatesFiscalAggTables(env_dir_setup_cleanup):
     # ESTABLISH
     sue_inx = "Suzy"

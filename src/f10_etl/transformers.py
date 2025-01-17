@@ -876,8 +876,7 @@ def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
             if not dst_mont_columns.isdisjoint(set(src_columns)):
                 insert_fiscal_staging(fiscal_db_conn, mont_staging, idea_number)
             if not dst_week_columns.isdisjoint(set(src_columns)):
-                # insert into fiscalweek_staging_table
-                pass
+                insert_fiscal_staging(fiscal_db_conn, week_staging, idea_number)
 
 
 def insert_fiscal_staging(
