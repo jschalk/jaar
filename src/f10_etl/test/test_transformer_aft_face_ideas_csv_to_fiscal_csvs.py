@@ -46,9 +46,15 @@ from src.f10_etl.transformers import (
     etl_fiscal_agg_tables_to_fiscal_csvs,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
-from sqlite3 import connect as sqlite3_connect
+from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 from copy import copy as copy_copy
 from os.path import exists as os_path_exists
+
+
+def create_idea_staging_table(
+    conn: sqlite3_Connection, tablename: str, columns_list: list[str]
+):
+    create_table_from_columns(conn, tablename, columns_list, get_idea_sqlite_types())
 
 
 def test_etl_aft_face_csv_files_to_fiscal_db_DBChanges(
@@ -185,7 +191,7 @@ def test_create_fiscal_tables_CreatesFiscalStagingTables(
         assert fis_week_stage_pragma == cursor.fetchall()
 
 
-def test_populate_fiscal_staging_tables_Scenario0_PopulatesFiscalStagingTablesFromIdeaFile(
+def test_populate_fiscal_staging_tables_Scenario0_From_br00011_IdeaFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -260,7 +266,7 @@ def test_populate_fiscal_staging_tables_Scenario0_PopulatesFiscalStagingTablesFr
         assert fiscalunit_db_rows == [expected_row0, expected_row1]
 
 
-def test_populate_fiscal_staging_tables_Scenario1_PopulatesFiscalStagingTablesFromIdeaTable(
+def test_populate_fiscal_staging_tables_Scenario1_From_br00011_IdeaTable(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -280,9 +286,7 @@ def test_populate_fiscal_staging_tables_Scenario1_PopulatesFiscalStagingTablesFr
     ]
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00011_tablename = f"{br00011_str}_staging"
-        create_table_from_columns(
-            fiscal_db_conn, br00011_tablename, br00011_columns, get_idea_sqlite_types()
-        )
+        create_idea_staging_table(fiscal_db_conn, br00011_tablename, br00011_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00011_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()})
 VALUES 
@@ -342,6 +346,93 @@ VALUES
         assert fiscalunit_db_rows[0] == expected_row0
         assert fiscalunit_db_rows[1] == expected_row1
         assert fiscalunit_db_rows == [expected_row0, expected_row1]
+
+
+# def test_populate_fiscal_staging_tables_Scenario2_Idea_br00000_Table(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     sue_inx = "Suzy"
+#     event3 = 3
+#     event7 = 7
+#     accord23_str = "accord23"
+#     br00000_str = "br00000"
+#     br00000_columns = [
+#         face_name_str(),
+#         event_int_str(),
+#         fiscal_title_str(),
+#         fund_coin_str(),
+#         penny_str(),
+#         respect_bit_str(),
+#         current_time_str(),
+#         bridge_str(),
+#         c400_number_str(),
+#         yr1_jan1_offset_str(),
+#         monthday_distortion_str(),
+#         timeline_title_str(),
+#     ]
+#     with sqlite3_connect(":memory:") as fiscal_db_conn:
+#         br00000_tablename = f"{br00000_str}_staging"
+#         create_idea_staging_table(fiscal_db_conn, br00000_tablename, br00000_columns)
+#         insert_staging_sqlstr = f"""
+# INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{current_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()})
+# VALUES
+#   ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+# , ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+# , ('{sue_inx}', {event7}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+# ;
+# """
+#         cursor = fiscal_db_conn.cursor()
+#         cursor.execute(insert_staging_sqlstr)
+#         x_fis = FiscalPrimeObjsRef()
+#         create_fiscal_tables(fiscal_db_conn)
+#         assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 0
+
+#         # WHEN
+#         populate_fiscal_staging_tables(fiscal_db_conn)
+
+#         # THEN
+#         assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 2
+#         cursor.execute(f"SELECT * FROM {x_fis.unit_stage_tablename}")
+#         fiscalunit_db_rows = cursor.fetchall()
+#         expected_row0 = (
+#             br00000_str,  # idea_number
+#             sue_inx,  # face_name
+#             event3,  # event_int
+#             accord23_str,  # fiscal_title
+#             None,  # fund_coin
+#             None,  # penny
+#             None,  # respect_bit
+#             None,  # current_time
+#             None,  # bridge
+#             None,  # c400_number
+#             None,  # yr1_jan1_offset
+#             None,  # monthday_distortion
+#             None,  # timeline_title
+#             None,  # note
+#         )
+#         expected_row1 = (
+#             br00000_str,  # idea_number
+#             sue_inx,  # face_name
+#             event7,  # event_int
+#             accord23_str,  # fiscal_title
+#             None,  # fund_coin
+#             None,  # penny
+#             None,  # respect_bit
+#             None,  # current_time
+#             None,  # bridge
+#             None,  # c400_number
+#             None,  # yr1_jan1_offset
+#             None,  # monthday_distortion
+#             None,  # timeline_title
+#             None,  # note
+#         )
+#         print(f"{fiscalunit_db_rows[1]=}")
+#         print(f"        {expected_row1=}")
+#         assert fiscalunit_db_rows[0] == expected_row0
+#         assert fiscalunit_db_rows[1] == expected_row1
+#         assert fiscalunit_db_rows == [expected_row0, expected_row1]
+#         assert 1 == 2
 
 
 def test_populate_fiscal_agg_tables_PopulatesFiscalAggTables(env_dir_setup_cleanup):
