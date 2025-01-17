@@ -126,7 +126,7 @@ def get_fiscal_args_category_mapping() -> dict[str, str]:
     return x_dict
 
 
-def get_fiscal_args_jaar_types() -> dict[str, str]:
+def get_fiscal_args_class_types() -> dict[str, str]:
     return {
         "acct_name": "AcctName",
         "amount": "float",

@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     normal_specs_str,
-    jaar_type_str,
+    class_type_str,
 )
 from src.f08_pidgin.pidgin_config import (
     config_file_dir,

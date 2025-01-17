@@ -2,7 +2,7 @@ from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.road import default_bridge_if_None
 from src.f03_chrono.chrono import timeline_title_str
 from src.f04_gift.atom_config import (
-    get_atom_args_jaar_types,
+    get_atom_args_class_types,
     type_AcctName_str,
     type_GroupLabel_str,
     type_TitleUnit_str,
@@ -24,7 +24,7 @@ from src.f04_gift.atom_config import (
     team_tag_str,
 )
 from src.f07_fiscal.fiscal_config import (
-    get_fiscal_args_jaar_types,
+    get_fiscal_args_class_types,
     weekday_title_str,
     month_title_str,
     hour_title_str,
@@ -35,11 +35,11 @@ from src.f08_pidgin.map import (
     titlemap_shop,
     roadmap_shop,
 )
-from src.f08_pidgin.pidgin_config import get_pidgin_args_jaar_types
+from src.f08_pidgin.pidgin_config import get_pidgin_args_class_types
 from src.f08_pidgin.pidgin import (
     PidginUnit,
     pidginunit_shop,
-    pidginable_jaar_types,
+    pidginable_class_types,
     pidginable_atom_args,
 )
 from src.f08_pidgin.examples.example_pidgins import (
@@ -57,77 +57,77 @@ from copy import deepcopy as copy_deepcopy
 
 # The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
 # initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
-def test_get_pidgin_args_jaar_types_ReturnsObj():
+def test_get_pidgin_args_class_types_ReturnsObj():
     # ESTABLISH / WHEN
-    pidgin_args_jaar_types = get_pidgin_args_jaar_types()
+    pidgin_args_class_types = get_pidgin_args_class_types()
 
     # THEN
-    assert pidgin_args_jaar_types.get("acct_name") == type_AcctName_str()
-    assert pidgin_args_jaar_types.get("addin") == "float"
-    assert pidgin_args_jaar_types.get("amount") == "float"
-    assert pidgin_args_jaar_types.get("awardee_tag") == type_GroupLabel_str()
-    assert pidgin_args_jaar_types.get("base") == type_RoadUnit_str()
-    assert pidgin_args_jaar_types.get("base_item_active_requisite") == "bool"
-    assert pidgin_args_jaar_types.get("begin") == "float"
-    assert pidgin_args_jaar_types.get("c400_number") == "int"
-    assert pidgin_args_jaar_types.get("close") == "float"
-    assert pidgin_args_jaar_types.get("credit_belief") == "int"
-    assert pidgin_args_jaar_types.get("credit_vote") == "int"
-    assert pidgin_args_jaar_types.get("credor_respect") == "int"
-    assert pidgin_args_jaar_types.get("cumlative_day") == "int"
-    assert pidgin_args_jaar_types.get("cumlative_minute") == "int"
-    assert pidgin_args_jaar_types.get("current_time") == "int"
-    assert pidgin_args_jaar_types.get("debtit_belief") == "int"
-    assert pidgin_args_jaar_types.get("debtit_vote") == "int"
-    assert pidgin_args_jaar_types.get("debtor_respect") == "int"
-    assert pidgin_args_jaar_types.get("denom") == "int"
-    assert pidgin_args_jaar_types.get("divisor") == "int"
-    assert pidgin_args_jaar_types.get("face_name") == type_AcctName_str()
-    assert pidgin_args_jaar_types.get("fiscal_title") == type_TitleUnit_str()
-    assert pidgin_args_jaar_types.get("fnigh") == "float"
-    assert pidgin_args_jaar_types.get("fopen") == "float"
-    assert pidgin_args_jaar_types.get("fund_coin") == "float"
-    assert pidgin_args_jaar_types.get("fund_pool") == "float"
-    assert pidgin_args_jaar_types.get("give_force") == "float"
-    assert pidgin_args_jaar_types.get("gogo_want") == "float"
-    assert pidgin_args_jaar_types.get("group_label") == type_GroupLabel_str()
-    assert pidgin_args_jaar_types.get("healer_name") == type_AcctName_str()
-    assert pidgin_args_jaar_types.get("hour_title") == type_TitleUnit_str()
-    assert pidgin_args_jaar_types.get("item_title") == type_TitleUnit_str()
-    assert pidgin_args_jaar_types.get("mass") == "int"
-    assert pidgin_args_jaar_types.get("max_tree_traverse") == "int"
-    assert pidgin_args_jaar_types.get("month_title") == type_TitleUnit_str()
-    assert pidgin_args_jaar_types.get("monthday_distortion") == "int"
-    assert pidgin_args_jaar_types.get("morph") == "bool"
-    assert pidgin_args_jaar_types.get("need") == type_RoadUnit_str()
-    assert pidgin_args_jaar_types.get("nigh") == "float"
-    assert pidgin_args_jaar_types.get("numor") == "int"
-    assert pidgin_args_jaar_types.get("owner_name") == type_AcctName_str()
-    assert pidgin_args_jaar_types.get("open") == "float"
-    assert pidgin_args_jaar_types.get("parent_road") == type_RoadUnit_str()
-    assert pidgin_args_jaar_types.get("penny") == "float"
-    assert pidgin_args_jaar_types.get("pick") == type_RoadUnit_str()
-    assert pidgin_args_jaar_types.get("pledge") == "bool"
-    assert pidgin_args_jaar_types.get("problem_bool") == "bool"
-    assert pidgin_args_jaar_types.get("deal_time_int") == "TimeLinePoint"
-    assert pidgin_args_jaar_types.get("quota") == "int"
-    assert pidgin_args_jaar_types.get("respect_bit") == "float"
-    assert pidgin_args_jaar_types.get("road") == type_RoadUnit_str()
-    assert pidgin_args_jaar_types.get("stop_want") == "float"
-    assert pidgin_args_jaar_types.get("take_force") == "float"
-    assert pidgin_args_jaar_types.get("tally") == "int"
-    assert pidgin_args_jaar_types.get("team_tag") == type_GroupLabel_str()
-    assert pidgin_args_jaar_types.get("time_int") == "TimeLinePoint"
-    assert pidgin_args_jaar_types.get("timeline_title") == type_TitleUnit_str()
-    assert pidgin_args_jaar_types.get("weekday_title") == type_TitleUnit_str()
-    assert pidgin_args_jaar_types.get("weekday_order") == "int"
-    assert pidgin_args_jaar_types.get("bridge") == "str"
-    assert pidgin_args_jaar_types.get("yr1_jan1_offset") == "int"
+    assert pidgin_args_class_types.get("acct_name") == type_AcctName_str()
+    assert pidgin_args_class_types.get("addin") == "float"
+    assert pidgin_args_class_types.get("amount") == "float"
+    assert pidgin_args_class_types.get("awardee_tag") == type_GroupLabel_str()
+    assert pidgin_args_class_types.get("base") == type_RoadUnit_str()
+    assert pidgin_args_class_types.get("base_item_active_requisite") == "bool"
+    assert pidgin_args_class_types.get("begin") == "float"
+    assert pidgin_args_class_types.get("c400_number") == "int"
+    assert pidgin_args_class_types.get("close") == "float"
+    assert pidgin_args_class_types.get("credit_belief") == "int"
+    assert pidgin_args_class_types.get("credit_vote") == "int"
+    assert pidgin_args_class_types.get("credor_respect") == "int"
+    assert pidgin_args_class_types.get("cumlative_day") == "int"
+    assert pidgin_args_class_types.get("cumlative_minute") == "int"
+    assert pidgin_args_class_types.get("current_time") == "int"
+    assert pidgin_args_class_types.get("debtit_belief") == "int"
+    assert pidgin_args_class_types.get("debtit_vote") == "int"
+    assert pidgin_args_class_types.get("debtor_respect") == "int"
+    assert pidgin_args_class_types.get("denom") == "int"
+    assert pidgin_args_class_types.get("divisor") == "int"
+    assert pidgin_args_class_types.get("face_name") == type_AcctName_str()
+    assert pidgin_args_class_types.get("fiscal_title") == type_TitleUnit_str()
+    assert pidgin_args_class_types.get("fnigh") == "float"
+    assert pidgin_args_class_types.get("fopen") == "float"
+    assert pidgin_args_class_types.get("fund_coin") == "float"
+    assert pidgin_args_class_types.get("fund_pool") == "float"
+    assert pidgin_args_class_types.get("give_force") == "float"
+    assert pidgin_args_class_types.get("gogo_want") == "float"
+    assert pidgin_args_class_types.get("group_label") == type_GroupLabel_str()
+    assert pidgin_args_class_types.get("healer_name") == type_AcctName_str()
+    assert pidgin_args_class_types.get("hour_title") == type_TitleUnit_str()
+    assert pidgin_args_class_types.get("item_title") == type_TitleUnit_str()
+    assert pidgin_args_class_types.get("mass") == "int"
+    assert pidgin_args_class_types.get("max_tree_traverse") == "int"
+    assert pidgin_args_class_types.get("month_title") == type_TitleUnit_str()
+    assert pidgin_args_class_types.get("monthday_distortion") == "int"
+    assert pidgin_args_class_types.get("morph") == "bool"
+    assert pidgin_args_class_types.get("need") == type_RoadUnit_str()
+    assert pidgin_args_class_types.get("nigh") == "float"
+    assert pidgin_args_class_types.get("numor") == "int"
+    assert pidgin_args_class_types.get("owner_name") == type_AcctName_str()
+    assert pidgin_args_class_types.get("open") == "float"
+    assert pidgin_args_class_types.get("parent_road") == type_RoadUnit_str()
+    assert pidgin_args_class_types.get("penny") == "float"
+    assert pidgin_args_class_types.get("pick") == type_RoadUnit_str()
+    assert pidgin_args_class_types.get("pledge") == "bool"
+    assert pidgin_args_class_types.get("problem_bool") == "bool"
+    assert pidgin_args_class_types.get("deal_time_int") == "TimeLinePoint"
+    assert pidgin_args_class_types.get("quota") == "int"
+    assert pidgin_args_class_types.get("respect_bit") == "float"
+    assert pidgin_args_class_types.get("road") == type_RoadUnit_str()
+    assert pidgin_args_class_types.get("stop_want") == "float"
+    assert pidgin_args_class_types.get("take_force") == "float"
+    assert pidgin_args_class_types.get("tally") == "int"
+    assert pidgin_args_class_types.get("team_tag") == type_GroupLabel_str()
+    assert pidgin_args_class_types.get("time_int") == "TimeLinePoint"
+    assert pidgin_args_class_types.get("timeline_title") == type_TitleUnit_str()
+    assert pidgin_args_class_types.get("weekday_title") == type_TitleUnit_str()
+    assert pidgin_args_class_types.get("weekday_order") == "int"
+    assert pidgin_args_class_types.get("bridge") == "str"
+    assert pidgin_args_class_types.get("yr1_jan1_offset") == "int"
 
-    # make sure it pidgin_arg_jaar_types has all fiscal and all atom args
-    pidgin_args = set(pidgin_args_jaar_types.keys())
-    atom_args = set(get_atom_args_jaar_types().keys())
-    fiscal_args = set(get_fiscal_args_jaar_types().keys())
+    # make sure it pidgin_arg_class_types has all fiscal and all atom args
+    pidgin_args = set(pidgin_args_class_types.keys())
+    atom_args = set(get_atom_args_class_types().keys())
+    fiscal_args = set(get_fiscal_args_class_types().keys())
     assert atom_args.issubset(pidgin_args)
     assert fiscal_args.issubset(pidgin_args)
     assert atom_args.intersection(fiscal_args) == {
@@ -138,46 +138,46 @@ def test_get_pidgin_args_jaar_types_ReturnsObj():
     }
     assert atom_args.union(fiscal_args) != pidgin_args
     assert atom_args.union(fiscal_args).union({"face_name"}) == pidgin_args
-    assert check_jaar_types_are_correct()
-    # assert pidgin_args_jaar_types.keys() == get_atom_args_category_mapping().keys()
-    # assert all_atom_args_jaar_types_are_correct(x_jaar_types)
+    assert check_class_types_are_correct()
+    # assert pidgin_args_class_types.keys() == get_atom_args_category_mapping().keys()
+    # assert all_atom_args_class_types_are_correct(x_class_types)
 
 
-def check_jaar_types_are_correct() -> bool:
-    pidgin_args_jaar_types = get_pidgin_args_jaar_types()
-    atom_args_jaar_types = get_atom_args_jaar_types()
-    fiscal_args_jaar_types = get_fiscal_args_jaar_types()
-    for pidgin_arg, pidgin_type in pidgin_args_jaar_types.items():
+def check_class_types_are_correct() -> bool:
+    pidgin_args_class_types = get_pidgin_args_class_types()
+    atom_args_class_types = get_atom_args_class_types()
+    fiscal_args_class_types = get_fiscal_args_class_types()
+    for pidgin_arg, pidgin_type in pidgin_args_class_types.items():
         print(f"check {pidgin_arg=} {pidgin_type=}")
-        if atom_args_jaar_types.get(pidgin_arg) not in [None, pidgin_type]:
+        if atom_args_class_types.get(pidgin_arg) not in [None, pidgin_type]:
             print(
-                f"{pidgin_arg=} {pidgin_type=} {atom_args_jaar_types.get(pidgin_arg)=}"
+                f"{pidgin_arg=} {pidgin_type=} {atom_args_class_types.get(pidgin_arg)=}"
             )
             return False
-        if fiscal_args_jaar_types.get(pidgin_arg) not in [None, pidgin_type]:
+        if fiscal_args_class_types.get(pidgin_arg) not in [None, pidgin_type]:
             print(
-                f"{pidgin_arg=} {pidgin_type=} {fiscal_args_jaar_types.get(pidgin_arg)=}"
+                f"{pidgin_arg=} {pidgin_type=} {fiscal_args_class_types.get(pidgin_arg)=}"
             )
             return False
     return True
 
 
-def test_pidginable_jaar_types_ReturnsObj():
+def test_pidginable_class_types_ReturnsObj():
     # ESTABLISH / WHEN
-    x_pidginable_jaar_types = pidginable_jaar_types()
+    x_pidginable_class_types = pidginable_class_types()
 
     # THEN
-    assert len(x_pidginable_jaar_types) == 4
-    assert x_pidginable_jaar_types == {
+    assert len(x_pidginable_class_types) == 4
+    assert x_pidginable_class_types == {
         type_AcctName_str(),
         type_GroupLabel_str(),
         type_TitleUnit_str(),
         type_RoadUnit_str(),
     }
-    print(f"{set(get_atom_args_jaar_types().values())=}")
-    all_atom_jaar_types = set(get_atom_args_jaar_types().values())
-    inter_x = set(all_atom_jaar_types).intersection(x_pidginable_jaar_types)
-    assert inter_x == x_pidginable_jaar_types
+    print(f"{set(get_atom_args_class_types().values())=}")
+    all_atom_class_types = set(get_atom_args_class_types().values())
+    inter_x = set(all_atom_class_types).intersection(x_pidginable_class_types)
+    assert inter_x == x_pidginable_class_types
 
 
 def test_pidginable_atom_args_ReturnsObj():
@@ -204,14 +204,14 @@ def test_pidginable_atom_args_ReturnsObj():
         weekday_title_str(),
     }
 
-    print(f"{pidginable_jaar_types()=}")
-    all_pidgin_args = set(get_pidgin_args_jaar_types().keys())
+    print(f"{pidginable_class_types()=}")
+    all_pidgin_args = set(get_pidgin_args_class_types().keys())
     print(f"{pidginable_atom_args().difference(all_pidgin_args)}")
     assert pidginable_atom_args().issubset(all_pidgin_args)
     static_pidginable_atom_args = {
         x_arg
-        for x_arg, jaar_type in get_pidgin_args_jaar_types().items()
-        if jaar_type in pidginable_jaar_types()
+        for x_arg, class_type in get_pidgin_args_class_types().items()
+        if class_type in pidginable_class_types()
     }
     assert pidginable_atom_args() == static_pidginable_atom_args
 

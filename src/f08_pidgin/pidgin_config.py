@@ -133,7 +133,7 @@ def get_pidgin_args_category_mapping() -> dict[str, str]:
     return x_dict
 
 
-def get_pidgin_args_jaar_types() -> dict[str, str]:
+def get_pidgin_args_class_types() -> dict[str, str]:
     return {
         "acct_name": "AcctName",
         "addin": "float",

@@ -57,7 +57,7 @@ MAPS_CATEGORYS = {
     "map_road": "RoadUnit",
 }
 
-JAAR_TYPES = {
+class_typeS = {
     "AcctName": {
         "stage": "name_staging",
         "agg": "name_agg",
@@ -89,26 +89,26 @@ JAAR_TYPES = {
 }
 
 
-def get_jaar_type(pidgin_category: str) -> str:
+def get_class_type(pidgin_category: str) -> str:
     if pidgin_category not in MAPS_CATEGORYS:
         raise not_given_pidgin_category_Exception("not given pidgin_category")
     return MAPS_CATEGORYS[pidgin_category]
 
 
-def get_sheet_stage_name(jaar_type: str) -> str:
-    return JAAR_TYPES[jaar_type]["stage"]
+def get_sheet_stage_name(class_type: str) -> str:
+    return class_typeS[class_type]["stage"]
 
 
-def get_sheet_agg_name(jaar_type: str) -> str:
-    return JAAR_TYPES[jaar_type]["agg"]
+def get_sheet_agg_name(class_type: str) -> str:
+    return class_typeS[class_type]["agg"]
 
 
-def get_otx_obj(jaar_type, x_row) -> str:
-    return x_row[JAAR_TYPES[jaar_type]["otx_obj"]]
+def get_otx_obj(class_type, x_row) -> str:
+    return x_row[class_typeS[class_type]["otx_obj"]]
 
 
-def get_inx_obj(jaar_type, x_row) -> str:
-    return x_row[JAAR_TYPES[jaar_type]["inx_obj"]]
+def get_inx_obj(class_type, x_row) -> str:
+    return x_row[class_typeS[class_type]["inx_obj"]]
 
 
 def etl_ocean_to_boat_staging(ocean_dir: str, boat_dir: str):
@@ -367,7 +367,7 @@ class boatAggToStagingTransformer:
         self.boat_dir = boat_dir
         self.legitmate_events = legitmate_events
         self.pidgin_category = pidgin_category
-        self.jaar_type = get_jaar_type(pidgin_category)
+        self.class_type = get_class_type(pidgin_category)
 
     def transform(self):
         category_ideas = get_idea_category_ref().get(self.pidgin_category)
@@ -385,7 +385,7 @@ class boatAggToStagingTransformer:
                 )
 
         pidgin_file_path = create_path(self.boat_dir, "pidgin.xlsx")
-        upsert_sheet(pidgin_file_path, get_sheet_stage_name(self.jaar_type), pidgin_df)
+        upsert_sheet(pidgin_file_path, get_sheet_stage_name(self.class_type), pidgin_df)
 
     def insert_staging_rows(
         self,
@@ -415,7 +415,7 @@ class boatAggToStagingTransformer:
                     idea_number,
                     face_name,
                     event_int,
-                    get_otx_obj(self.jaar_type, x_row),
+                    get_otx_obj(self.class_type, x_row),
                     self.get_inx_obj(x_row, df_missing_cols),
                     otx_bridge,
                     inx_bridge,
@@ -423,13 +423,13 @@ class boatAggToStagingTransformer:
                 ]
 
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
-        if self.jaar_type == "AcctName" and "inx_name" not in missing_col:
+        if self.class_type == "AcctName" and "inx_name" not in missing_col:
             return x_row["inx_name"]
-        elif self.jaar_type == "GroupLabel" and "inx_label" not in missing_col:
+        elif self.class_type == "GroupLabel" and "inx_label" not in missing_col:
             return x_row["inx_label"]
-        elif self.jaar_type == "TitleUnit" and "inx_title" not in missing_col:
+        elif self.class_type == "TitleUnit" and "inx_title" not in missing_col:
             return x_row["inx_title"]
-        elif self.jaar_type == "RoadUnit" and "inx_road" not in missing_col:
+        elif self.class_type == "RoadUnit" and "inx_road" not in missing_col:
             return x_row["inx_road"]
         return None
 
@@ -467,7 +467,7 @@ class PidginStagingToAggTransformer:
         self.boat_dir = boat_dir
         self.pidgin_category = pidgin_category
         self.file_path = create_path(self.boat_dir, "pidgin.xlsx")
-        self.jaar_type = get_jaar_type(self.pidgin_category)
+        self.class_type = get_class_type(self.pidgin_category)
 
     def transform(self):
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
@@ -475,11 +475,11 @@ class PidginStagingToAggTransformer:
         pidgin_columns = get_custom_sorted_list(pidgin_columns)
         pidgin_agg_df = DataFrame(columns=pidgin_columns)
         self.insert_agg_rows(pidgin_agg_df)
-        upsert_sheet(self.file_path, get_sheet_agg_name(self.jaar_type), pidgin_agg_df)
+        upsert_sheet(self.file_path, get_sheet_agg_name(self.class_type), pidgin_agg_df)
 
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
         pidgin_file_path = create_path(self.boat_dir, "pidgin.xlsx")
-        stage_sheet_name = get_sheet_stage_name(self.jaar_type)
+        stage_sheet_name = get_sheet_stage_name(self.class_type)
         staging_df = pandas_read_excel(pidgin_file_path, sheet_name=stage_sheet_name)
         x_pidginbodybook = self.get_validated_pidginbodybook(staging_df)
         for pidginbodylist in x_pidginbodybook.get_valid_pidginbodylists():
@@ -492,8 +492,8 @@ class PidginStagingToAggTransformer:
             x_pidginbodyrow = PidginBodyRow(
                 event_int=x_row["event_int"],
                 face_name=x_row["face_name"],
-                otx_str=get_otx_obj(self.jaar_type, x_row),
-                inx_str=get_inx_obj(self.jaar_type, x_row),
+                otx_str=get_otx_obj(self.class_type, x_row),
+                inx_str=get_inx_obj(self.class_type, x_row),
             )
             x_pidginbodybook.eval_pidginbodyrow(x_pidginbodyrow)
         return x_pidginbodybook
@@ -514,8 +514,8 @@ class PidginStagingToAggTransformer:
 
 def etl_boat_pidgin_agg_to_bow_face_dirs(boat_dir: str, faces_dir: str):
     agg_pidgin = create_path(boat_dir, "pidgin.xlsx")
-    for jaar_type in JAAR_TYPES.keys():
-        agg_sheet_name = JAAR_TYPES[jaar_type]["agg"]
+    for class_type in class_typeS.keys():
+        agg_sheet_name = class_typeS[class_type]["agg"]
         if sheet_exists(agg_pidgin, agg_sheet_name):
             split_excel_into_dirs(
                 input_file=agg_pidgin,
@@ -528,8 +528,8 @@ def etl_boat_pidgin_agg_to_bow_face_dirs(boat_dir: str, faces_dir: str):
 
 def etl_face_pidgin_to_event_pidgins(face_dir: str):
     face_pidgin_path = create_path(face_dir, "pidgin.xlsx")
-    for jaar_type in JAAR_TYPES.keys():
-        agg_sheet_name = JAAR_TYPES[jaar_type]["agg"]
+    for class_type in class_typeS.keys():
+        agg_sheet_name = class_typeS[class_type]["agg"]
         if sheet_exists(face_pidgin_path, agg_sheet_name):
             split_excel_into_events_dirs(face_pidgin_path, face_dir, agg_sheet_name)
 
@@ -554,9 +554,9 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
 
 def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
     event_pidgin_path = create_path(event_pidgin_dir, "pidgin.xlsx")
-    for jaar_type in JAAR_TYPES.keys():
-        agg_sheet_name = JAAR_TYPES[jaar_type]["agg"]
-        csv_filename = JAAR_TYPES[jaar_type]["csv_filename"]
+    for class_type in class_typeS.keys():
+        agg_sheet_name = class_typeS[class_type]["agg"]
+        csv_filename = class_typeS[class_type]["csv_filename"]
         if sheet_exists(event_pidgin_path, agg_sheet_name):
             acct_csv_path = create_path(event_pidgin_dir, csv_filename)
             acct_df = pandas_read_excel(event_pidgin_path, agg_sheet_name)

@@ -17,8 +17,8 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_delete,
     normal_specs_str,
-    jaar_type_str,
-    get_allowed_jaar_types,
+    class_type_str,
+    get_allowed_class_types,
 )
 from src.f07_fiscal.fiscal_config import (
     config_file_dir,
@@ -34,7 +34,7 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_month_str,
     fiscal_timeline_weekday_str,
     get_fiscal_categorys,
-    get_fiscal_args_jaar_types,
+    get_fiscal_args_class_types,
 )
 from os import getcwd as os_getcwd
 
@@ -100,8 +100,8 @@ def test_get_fiscal_config_dict_ReturnsObj():
 
 
 def _validate_fiscal_config(fiscal_config: dict):
-    accepted_jaar_typees = get_allowed_jaar_types()
-    accepted_jaar_typees.add("str")
+    accepted_class_typees = get_allowed_class_types()
+    accepted_class_typees.add("str")
 
     # for every fiscal_format file there exists a unique fiscal_number always with leading zeros to make 5 digits
     for fiscal_categorys, cat_dict in fiscal_config.items():
@@ -118,13 +118,13 @@ def _validate_fiscal_config(fiscal_config: dict):
             jkey_dict = cat_dict.get(jkeys_str())
             print(f"_validate_fiscal_config {fiscal_categorys=} {jkey_key=} ")
             arg_dict = jkey_dict.get(jkey_key)
-            assert arg_dict.get(jaar_type_str()) in accepted_jaar_typees
+            assert arg_dict.get(class_type_str()) in accepted_class_typees
         fiscal_jvalues_keys = set(cat_dict.get(jvalues_str()).keys())
         for jvalue_key in fiscal_jvalues_keys:
             jvalue_dict = cat_dict.get(jvalues_str())
             print(f"_validate_fiscal_config {fiscal_categorys=} {jvalue_key=} ")
             arg_dict = jvalue_dict.get(jvalue_key)
-            assert arg_dict.get(jaar_type_str()) in accepted_jaar_typees
+            assert arg_dict.get(class_type_str()) in accepted_class_typees
 
 
 def test_get_fiscal_categorys_ReturnsObj():
@@ -157,7 +157,7 @@ def test_get_fiscal_args_category_mapping_ReturnsObj():
     assert len(x_fiscal_args_category_mapping) == 21
 
 
-def get_jaar_type(x_category: str, x_arg: str) -> str:
+def get_class_type(x_category: str, x_arg: str) -> str:
     fiscal_config_dict = get_fiscal_config_dict()
     category_dict = fiscal_config_dict.get(x_category)
     optional_dict = category_dict.get(jvalues_str())
@@ -167,30 +167,30 @@ def get_jaar_type(x_category: str, x_arg: str) -> str:
         arg_dict = category_dict.get(jvalues_str()).get(x_arg)
     if required_dict.get(x_arg):
         arg_dict = required_dict.get(x_arg)
-    return arg_dict.get(jaar_type_str())
+    return arg_dict.get(class_type_str())
 
 
-def all_args_jaar_types_are_correct(x_jaar_types) -> bool:
+def all_args_class_types_are_correct(x_class_types) -> bool:
     x_fiscal_args_category_mapping = get_fiscal_args_category_mapping()
-    x_sorted_jaar_types = sorted(list(x_jaar_types.keys()))
-    for x_fiscal_arg in x_sorted_jaar_types:
+    x_sorted_class_types = sorted(list(x_class_types.keys()))
+    for x_fiscal_arg in x_sorted_class_types:
         x_categorys = list(x_fiscal_args_category_mapping.get(x_fiscal_arg))
         x_category = x_categorys[0]
-        x_jaar_type = get_jaar_type(x_category, x_fiscal_arg)
+        x_class_type = get_class_type(x_category, x_fiscal_arg)
         print(
-            f"assert x_jaar_types.get({x_fiscal_arg}) == {x_jaar_type} {x_jaar_types.get(x_fiscal_arg)=}"
+            f"assert x_class_types.get({x_fiscal_arg}) == {x_class_type} {x_class_types.get(x_fiscal_arg)=}"
         )
-        if x_jaar_types.get(x_fiscal_arg) != x_jaar_type:
+        if x_class_types.get(x_fiscal_arg) != x_class_type:
             return False
     return True
 
 
-def test_get_fiscal_args_jaar_types_ReturnsObj():
+def test_get_fiscal_args_class_types_ReturnsObj():
     # ESTABLISH / WHEN
-    fiscal_args_jaar_types = get_fiscal_args_jaar_types()
+    fiscal_args_class_types = get_fiscal_args_class_types()
 
     # THEN
     fiscal_args_from_categorys = set(get_fiscal_args_category_mapping().keys())
     print(f"{fiscal_args_from_categorys=}")
-    assert set(fiscal_args_jaar_types.keys()) == fiscal_args_from_categorys
-    assert all_args_jaar_types_are_correct(fiscal_args_jaar_types)
+    assert set(fiscal_args_class_types.keys()) == fiscal_args_from_categorys
+    assert all_args_class_types_are_correct(fiscal_args_class_types)

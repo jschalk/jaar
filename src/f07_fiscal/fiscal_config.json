@@ -2,120 +2,120 @@
     "fiscal_cashbook": {
         "jkeys": {
             "acct_name": {
-                "jaar_type": "AcctName"
+                "class_type": "AcctName"
             },
             "fiscal_title": {
-                "jaar_type": "TitleUnit"
+                "class_type": "TitleUnit"
             },
             "owner_name": {
-                "jaar_type": "AcctName"
+                "class_type": "AcctName"
             },
             "time_int": {
-                "jaar_type": "TimeLinePoint"
+                "class_type": "TimeLinePoint"
             }
         },
         "jvalues": {
             "amount": {
-                "jaar_type": "float"
+                "class_type": "float"
             }
         }
     },
     "fiscal_timeline_hour": {
         "jkeys": {
             "fiscal_title": {
-                "jaar_type": "TitleUnit"
+                "class_type": "TitleUnit"
             },
             "hour_title": {
-                "jaar_type": "TitleUnit"
+                "class_type": "TitleUnit"
             }
         },
         "jvalues": {
             "cumlative_minute": {
-                "jaar_type": "int"
+                "class_type": "int"
             }
         }
     },
     "fiscal_timeline_month": {
         "jkeys": {
             "fiscal_title": {
-                "jaar_type": "TitleUnit"
+                "class_type": "TitleUnit"
             },
             "month_title": {
-                "jaar_type": "TitleUnit"
+                "class_type": "TitleUnit"
             }
         },
         "jvalues": {
             "cumlative_day": {
-                "jaar_type": "int"
+                "class_type": "int"
             }
         }
     },
     "fiscal_timeline_weekday": {
         "jkeys": {
             "fiscal_title": {
-                "jaar_type": "TitleUnit"
+                "class_type": "TitleUnit"
             },
             "weekday_title": {
-                "jaar_type": "TitleUnit"
+                "class_type": "TitleUnit"
             }
         },
         "jvalues": {
             "weekday_order": {
-                "jaar_type": "int"
+                "class_type": "int"
             }
         }
     },
     "fiscal_deal_episode": {
         "jkeys": {
             "fiscal_title": {
-                "jaar_type": "TitleUnit"
+                "class_type": "TitleUnit"
             },
             "owner_name": {
-                "jaar_type": "AcctName"
+                "class_type": "AcctName"
             },
             "time_int": {
-                "jaar_type": "TimeLinePoint"
+                "class_type": "TimeLinePoint"
             }
         },
         "jvalues": {
             "quota": {
-                "jaar_type": "int"
+                "class_type": "int"
             }
         }
     },
     "fiscalunit": {
         "jkeys": {
             "fiscal_title": {
-                "jaar_type": "TitleUnit"
+                "class_type": "TitleUnit"
             }
         },
         "jvalues": {
             "bridge": {
-                "jaar_type": "str"
+                "class_type": "str"
             },
             "c400_number": {
-                "jaar_type": "int"
+                "class_type": "int"
             },
             "current_time": {
-                "jaar_type": "int"
+                "class_type": "int"
             },
             "fund_coin": {
-                "jaar_type": "float"
+                "class_type": "float"
             },
             "monthday_distortion": {
-                "jaar_type": "int"
+                "class_type": "int"
             },
             "penny": {
-                "jaar_type": "float"
+                "class_type": "float"
             },
             "respect_bit": {
-                "jaar_type": "float"
+                "class_type": "float"
             },
             "timeline_title": {
-                "jaar_type": "TitleUnit"
+                "class_type": "TitleUnit"
             },
             "yr1_jan1_offset": {
-                "jaar_type": "int"
+                "class_type": "int"
             }
         }
     }
