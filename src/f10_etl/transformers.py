@@ -841,6 +841,12 @@ def create_fiscal_tables(conn: sqlite3_Connection):
 
 
 def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
+    unit_staging = "fiscalunit_staging"
+    deal_staging = "fiscal_deal_episode_staging"
+    cash_staging = "fiscal_cashbook_staging"
+    hour_staging = "fiscal_timeline_hour_staging"
+    mont_staging = "fiscal_timeline_month_staging"
+    week_staging = "fiscal_timeline_weekday_staging"
     dst_unit_columns = set(get_fiscalunit_sorted_args())
     dst_deal_columns = set(get_fiscaldeal_sorted_args())
     dst_cash_columns = set(get_fiscalcash_sorted_args())
@@ -856,30 +862,17 @@ def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
     dst_mont_columns.remove("fiscal_title")
     dst_week_columns.remove("fiscal_title")
     for idea_number in get_idea_numbers():
-        idea_staging_tablename = f"{idea_number}_staging"
-        if db_table_exists(fiscal_db_conn, idea_staging_tablename):
-            src_columns = get_table_columns(fiscal_db_conn, idea_staging_tablename)
+        idea_staging = f"{idea_number}_staging"
+        if db_table_exists(fiscal_db_conn, idea_staging):
+            src_columns = get_table_columns(fiscal_db_conn, idea_staging)
             if not dst_unit_columns.isdisjoint(set(src_columns)):
-                _insert_into_fiscal_staging(
-                    fiscal_db_conn=fiscal_db_conn,
-                    dst_table="fiscalunit_staging",
-                    src_table=idea_staging_tablename,
-                )
+                insert_fiscal_staging(fiscal_db_conn, unit_staging, idea_number)
             if not dst_deal_columns.isdisjoint(set(src_columns)):
-                _insert_into_fiscal_staging(
-                    fiscal_db_conn=fiscal_db_conn,
-                    dst_table="fiscal_deal_episode_staging",
-                    src_table=idea_staging_tablename,
-                )
+                insert_fiscal_staging(fiscal_db_conn, deal_staging, idea_number)
             if not dst_cash_columns.isdisjoint(set(src_columns)):
-                _insert_into_fiscal_staging(
-                    fiscal_db_conn=fiscal_db_conn,
-                    dst_table="fiscal_cashbook_staging",
-                    src_table=idea_staging_tablename,
-                )
+                insert_fiscal_staging(fiscal_db_conn, cash_staging, idea_number)
             if not dst_hour_columns.isdisjoint(set(src_columns)):
-                # insert into fiscalhour_staging_table
-                pass
+                insert_fiscal_staging(fiscal_db_conn, hour_staging, idea_number)
             if not dst_mont_columns.isdisjoint(set(src_columns)):
                 # insert into fiscalmont_staging_table
                 pass
@@ -888,17 +881,18 @@ def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
                 pass
 
 
-def _insert_into_fiscal_staging(
-    fiscal_db_conn: sqlite3_Connection, dst_table: str, src_table: str
+def insert_fiscal_staging(
+    fiscal_db_conn: sqlite3_Connection, dst_table: str, idea_number: str
 ):
+    # idea_number = copy_copy(src_table)
+    # idea_number = idea_number.replace("_staging", "")
+    src_table = f"{idea_number}_staging"
     dst_columns = get_table_columns(fiscal_db_conn, dst_table)
     src_columns = get_table_columns(fiscal_db_conn, src_table)
     common_columns_set = set(dst_columns).intersection(set(src_columns))
     common_columns_list = [col for col in dst_columns if col in common_columns_set]
     common_columns_str = ", ".join(common_columns_list)
     cursor = fiscal_db_conn.cursor()
-    idea_number = copy_copy(src_table)
-    idea_number = idea_number.replace("_staging", "")
     insert_idea_staging_agg_str = f"""
 INSERT INTO {dst_table} (idea_number, {common_columns_str})
 SELECT '{idea_number}' as idea_number, {common_columns_str}
