@@ -29,7 +29,7 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_hour_str,
     fiscal_timeline_month_str,
     fiscal_timeline_weekday_str,
-    current_time_str,
+    present_time_str,
 )
 from src.f10_etl.fiscal_etl_tool import (
     FiscalPrimeObjsRef,
@@ -93,7 +93,7 @@ def test_WorldUnit_fiscal_csvs_to_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs
     a45_fund_coin = 3
     a45_penny = 5
     a45_respect_bit = 7
-    a45_current_time = 11
+    a45_present_time = 11
     a45_bridge = "/"
     a45_c400_number = 88
     a45_yr1_jan1_offset = 501
@@ -105,7 +105,7 @@ def test_WorldUnit_fiscal_csvs_to_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs
     x_cols = FiscalPrimeColumnsRef()
     fiscalunit_csv_str = f"""{x_cols.unit_agg_csv_header}
 {accord23_str},,,,,,,,,
-{accord45_str},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_current_time},{a45_bridge},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_timeline_title}
+{accord45_str},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_present_time},{a45_bridge},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_timeline_title}
 """
     fizz_world = worldunit_shop("fizz")
     save_file(fiscal_mstr_dir, x_fis.unit_agg_csv_filename, fiscalunit_csv_str)
@@ -153,7 +153,7 @@ def test_WorldUnit_fiscal_csvs_to_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs
         fund_coin=a45_fund_coin,
         penny=a45_penny,
         respect_bit=a45_respect_bit,
-        current_time=a45_current_time,
+        present_time=a45_present_time,
         bridge=a45_bridge,
         timeline=expected_45_tl,
     )

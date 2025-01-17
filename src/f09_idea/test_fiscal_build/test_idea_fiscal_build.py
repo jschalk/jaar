@@ -56,7 +56,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario0_OneFiscalTitle(
     assert x_fiscalunits.get(accord23_str) != None
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
     accord23_fiscalunit = fiscalunit_shop(
-        current_time=5500,
+        present_time=5500,
         fiscal_title=accord23_str,
         fiscals_dir=x_fiscals_dir,
         fund_coin=x_fund_coin,
@@ -69,7 +69,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario0_OneFiscalTitle(
         x_owner_name="Sue",
         x_time_int=777,
         x_money_magnitude=445,
-        allow_prev_to_current_time_entry=True,
+        allow_prev_to_present_time_entry=True,
     )
     accord23_fiscalunit.add_cashpurchase(
         x_owner_name="Zia",
@@ -127,7 +127,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario1_TwoFiscalTitles(
     # THEN
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
     accord23_fiscalunit = fiscalunit_shop(
-        current_time=5500,
+        present_time=5500,
         fiscal_title=accord23_str,
         fiscals_dir=x_fiscals_dir,
         fund_coin=x_fund_coin,
@@ -138,7 +138,7 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario1_TwoFiscalTitles(
     )
     five_timelineunit = timelineunit_shop(get_five_config())
     jeffy45_fiscalunit = fiscalunit_shop(
-        current_time=444,
+        present_time=444,
         fiscal_title="jeffy45",
         fiscals_dir=x_fiscals_dir,
         fund_coin=x_fund_coin,

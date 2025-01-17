@@ -76,7 +76,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("credor_respect") == "int"
     assert pidgin_args_class_types.get("cumlative_day") == "int"
     assert pidgin_args_class_types.get("cumlative_minute") == "int"
-    assert pidgin_args_class_types.get("current_time") == "int"
+    assert pidgin_args_class_types.get("present_time") == "int"
     assert pidgin_args_class_types.get("debtit_belief") == "int"
     assert pidgin_args_class_types.get("debtit_vote") == "int"
     assert pidgin_args_class_types.get("debtor_respect") == "int"

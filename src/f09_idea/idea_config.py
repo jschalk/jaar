@@ -147,7 +147,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "fund_coin",
         "penny",
         "respect_bit",
-        "current_time",
+        "present_time",
         "amount",
         "month_title",
         "hour_title",
@@ -238,7 +238,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "fund_coin": "REAL",
         "penny": "REAL",
         "respect_bit": "REAL",
-        "current_time": "INTEGER",
+        "present_time": "INTEGER",
         "amount": "REAL",
         "month_title": "TEXT",
         "hour_title": "TEXT",
@@ -484,7 +484,7 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "fiscal_title,fund_coin,penny,respect_bit,current_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title": idea_format_00000_fiscalunit_v0_0_0(),
+        "fiscal_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title": idea_format_00000_fiscalunit_v0_0_0(),
         "fiscal_title,owner_name,time_int,quota": idea_format_00001_fiscal_deal_episode_v0_0_0(),
         "fiscal_title,owner_name,acct_name,time_int,amount": idea_format_00002_fiscal_cashbook_v0_0_0(),
         "fiscal_title,hour_title,cumlative_minute": idea_format_00003_fiscal_timeline_hour_v0_0_0(),

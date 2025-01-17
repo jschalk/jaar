@@ -1,6 +1,6 @@
 from src.f07_fiscal.fiscal_config import (
     timeline_str,
-    current_time_str,
+    present_time_str,
     deallogs_str,
     cashbook_str,
     amount_str,
@@ -21,7 +21,7 @@ from src.f07_fiscal.fiscal_config import (
 
 def test_str_functions_ReturnsObj():
     assert timeline_str() == "timeline"
-    assert current_time_str() == "current_time"
+    assert present_time_str() == "present_time"
     assert deallogs_str() == "deallogs"
     assert cashbook_str() == "cashbook"
     assert amount_str() == "amount"

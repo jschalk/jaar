@@ -122,12 +122,12 @@ def test_FiscalUnit_get_deallogs_time_ints_ReturnsObj():
     assert accord_fiscal.get_deallogs_time_ints() == all_time_ints
 
 
-def test_FiscalUnit_add_dealepisode_RaisesErrorWhenDeal_time_int_IsLessThan_current_time():
+def test_FiscalUnit_add_dealepisode_RaisesErrorWhenDeal_time_int_IsLessThan_present_time():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fiscal = fiscalunit_shop(accord45_str, get_test_fiscals_dir())
-    accord_current_time = 606
-    accord_fiscal.current_time = accord_current_time
+    accord_present_time = 606
+    accord_fiscal.present_time = accord_present_time
     bob_str = "Bob"
     bob_x0_time_int = 707
     bob_x0_magnitude = 33
@@ -143,16 +143,16 @@ def test_FiscalUnit_add_dealepisode_RaisesErrorWhenDeal_time_int_IsLessThan_curr
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         accord_fiscal.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
-    exception_str = f"Cannot set dealepisode because time_int {sue_x4_time_int} is less than FiscalUnit.current_time {accord_current_time}."
+    exception_str = f"Cannot set dealepisode because time_int {sue_x4_time_int} is less than FiscalUnit.present_time {accord_present_time}."
     assert str(excinfo.value) == exception_str
 
 
-def test_FiscalUnit_add_dealepisode_DoesNotRaiseError_allow_prev_to_current_time_entry_IsTrue():
+def test_FiscalUnit_add_dealepisode_DoesNotRaiseError_allow_prev_to_present_time_entry_IsTrue():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fiscal = fiscalunit_shop(accord45_str, get_test_fiscals_dir())
-    accord_current_time = 606
-    accord_fiscal.current_time = accord_current_time
+    accord_present_time = 606
+    accord_fiscal.present_time = accord_present_time
     bob_str = "Bob"
     bob_x0_time_int = 707
     bob_x0_magnitude = 33
@@ -175,7 +175,7 @@ def test_FiscalUnit_add_dealepisode_DoesNotRaiseError_allow_prev_to_current_time
         x_owner_name=sue_str,
         x_time_int=sue_x4_time_int,
         x_money_magnitude=sue_x4_magnitude,
-        allow_prev_to_current_time_entry=True,
+        allow_prev_to_present_time_entry=True,
     )
 
     # THEN

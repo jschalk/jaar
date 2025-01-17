@@ -1,5 +1,9 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f00_instrument.db_toolbox import create_table_from_columns, db_table_exists
+from src.f00_instrument.db_toolbox import (
+    create_table_from_columns,
+    db_table_exists,
+    get_table_columns,
+)
 from src.f01_road.road import FaceName, EventInt
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -30,6 +34,12 @@ from src.f10_etl.fiscal_etl_tool import (
     create_fiscalunit_jsons_from_prime_files,
     FiscalPrimeObjsRef,
     FiscalPrimeColumnsRef,
+    get_fiscalunit_sorted_args,
+    get_fiscaldeal_sorted_args,
+    get_fiscalcash_sorted_args,
+    get_fiscalhour_sorted_args,
+    get_fiscalmont_sorted_args,
+    get_fiscalweek_sorted_args,
 )
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
@@ -765,7 +775,7 @@ def create_fiscal_tables(conn: sqlite3_Connection):
         "fund_coin",
         "penny",
         "respect_bit",
-        "current_time",
+        "present_time",
         "bridge",
         "c400_number",
         "yr1_jan1_offset",
@@ -833,41 +843,71 @@ def create_fiscal_tables(conn: sqlite3_Connection):
 def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
     # get every budunit category idea that is not also fiscalunit category idea: collect fiscal_titles
     only_fiscal_title_ideas = get_bud_ideas_with_only_fiscal_title()
-    insert_into_fiscalunit_staging(fiscal_db_conn, only_fiscal_title_ideas)
 
-
-#     cat_fiscalunit_ideas = get_bud_ideas_with_only_fiscal_title()
-#     for fiscal1_idea in fiscal1_ideas:
-#         idea_staging_tablename = f"{fiscal1_idea}_staging"
-#         if db_table_exists(fiscal_db_conn, idea_staging_tablename):
-#             cursor = fiscal_db_conn.cursor()
-#             insert_idea_staging_agg = f"""
-# INSERT INTO fiscalunit_staging (idea_number, face_name, event_int, fiscal_title)
-# SELECT '{fiscal1_idea}' as idea_number, face_name, event_int, fiscal_title
-# FROM {idea_staging_tablename}
-# GROUP BY face_name, event_int, fiscal_title
-# ;
-# """
-#             cursor.execute(insert_idea_staging_agg)
-#             cursor.close()
-
-
-def insert_into_fiscalunit_staging(
-    fiscal_db_conn: sqlite3_Connection, only_fiscal_title_ideas: list[str]
-):
-    for fiscal1_idea in only_fiscal_title_ideas:
-        idea_staging_tablename = f"{fiscal1_idea}_staging"
+    unit_args_set = set(get_fiscalunit_sorted_args())
+    deal_args_set = set(get_fiscaldeal_sorted_args())
+    cash_args_set = set(get_fiscalcash_sorted_args())
+    hour_args_set = set(get_fiscalhour_sorted_args())
+    mont_args_set = set(get_fiscalmont_sorted_args())
+    week_args_set = set(get_fiscalweek_sorted_args())
+    for idea_number in get_idea_numbers():
+        idea_staging_tablename = f"{idea_number}_staging"
         if db_table_exists(fiscal_db_conn, idea_staging_tablename):
+            staging_columns = get_table_columns(fiscal_db_conn, idea_staging_tablename)
+            if not unit_args_set.isdisjoint(set(staging_columns)):
+                # insert into fiscalunit_staging_table
+                print("insert into fiscalunit_staging_table")
+                _insert_into_fiscal_staging(
+                    fiscal_db_conn=fiscal_db_conn,
+                    dst_table="fiscalunit_staging",
+                    src_table=idea_staging_tablename,
+                    dst_columns=get_fiscalunit_sorted_args(),
+                    src_columns=staging_columns,
+                    idea_number=idea_number,
+                )
+            if not deal_args_set.isdisjoint(set(staging_columns)):
+                # insert into fiscaldeal_staging_table
+                pass
+            if not cash_args_set.isdisjoint(set(staging_columns)):
+                # insert into fiscalcash_staging_table
+                pass
+            if not hour_args_set.isdisjoint(set(staging_columns)):
+                # insert into fiscalhour_staging_table
+                pass
+            if not mont_args_set.isdisjoint(set(staging_columns)):
+                # insert into fiscalmont_staging_table
+                pass
+            if not week_args_set.isdisjoint(set(staging_columns)):
+                # insert into fiscalweek_staging_table
+                pass
+
             cursor = fiscal_db_conn.cursor()
-            insert_idea_staging_agg = f"""
-INSERT INTO fiscalunit_staging (idea_number, face_name, event_int, fiscal_title)
-SELECT '{fiscal1_idea}' as idea_number, face_name, event_int, fiscal_title
-FROM {idea_staging_tablename}
+
+
+def _insert_into_fiscal_staging(
+    fiscal_db_conn: sqlite3_Connection,
+    dst_table: str,
+    src_table: str,
+    dst_columns: list[str],
+    src_columns: list[str],
+    idea_number: str,
+):
+    common_columns_set = set(dst_columns).intersection(set(src_columns))
+    common_columns_list = [col for col in dst_columns if col in common_columns_set]
+    common_columns_str = ", ".join(common_columns_list)
+    print(f"{common_columns_list=}")
+    print(f"{common_columns_str=}")
+    cursor = fiscal_db_conn.cursor()
+    insert_idea_staging_agg_str = f"""
+INSERT INTO {dst_table} (idea_number, face_name, event_int, {common_columns_str})
+SELECT '{idea_number}' as idea_number, face_name, event_int, {common_columns_str}
+FROM {src_table}
 GROUP BY face_name, event_int, fiscal_title
 ;
 """
-            cursor.execute(insert_idea_staging_agg)
-            cursor.close()
+    print(f"{insert_idea_staging_agg_str=}")
+    cursor.execute(insert_idea_staging_agg_str)
+    cursor.close()
 
 
 def populate_fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):

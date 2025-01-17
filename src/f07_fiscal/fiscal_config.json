@@ -96,7 +96,7 @@
             "c400_number": {
                 "class_type": "int"
             },
-            "current_time": {
+            "present_time": {
                 "class_type": "int"
             },
             "fund_coin": {

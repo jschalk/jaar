@@ -28,7 +28,7 @@ from src.f07_fiscal.fiscal_config import (
     get_fiscal_config_file_name,
     get_fiscal_config_dict,
     get_fiscal_args_category_mapping,
-    current_time_str,
+    present_time_str,
     cumlative_minute_str,
     fiscalunit_str,
     fiscal_deal_episode_str,
@@ -42,7 +42,7 @@ from src.f07_fiscal.fiscal_config import (
     amount_str,
     cumlative_day_str,
     cumlative_minute_str,
-    current_time_str,
+    present_time_str,
     hour_title_str,
     month_title_str,
     weekday_title_str,
@@ -91,7 +91,7 @@ def test_get_fiscal_config_dict_ReturnsObj():
 
     x_fiscalunit_jvalues = {
         c400_number_str(),
-        current_time_str(),
+        present_time_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),
@@ -158,7 +158,7 @@ def test_get_fiscal_args_category_mapping_ReturnsObj():
 
     # THEN
     assert x_fiscal_args_category_mapping
-    assert x_fiscal_args_category_mapping.get(current_time_str())
+    assert x_fiscal_args_category_mapping.get(present_time_str())
     x_hour = {fiscal_timeline_hour_str()}
     assert x_fiscal_args_category_mapping.get(cumlative_minute_str()) == x_hour
     assert x_fiscal_args_category_mapping.get(fund_coin_str())
@@ -224,7 +224,7 @@ def test_get_fiscal_args_set_ReturnsObj():
         c400_number_str(),
         cumlative_day_str(),
         cumlative_minute_str(),
-        current_time_str(),
+        present_time_str(),
         hour_title_str(),
         fiscal_title_str(),
         fund_coin_str(),

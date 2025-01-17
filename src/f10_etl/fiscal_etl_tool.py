@@ -15,13 +15,11 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 
 def get_fiscalunit_sorted_args() -> list[str]:
     return [
-        "face_name",
-        "event_int",
         "fiscal_title",
         "fund_coin",
         "penny",
         "respect_bit",
-        "current_time",
+        "present_time",
         "bridge",
         "c400_number",
         "yr1_jan1_offset",
@@ -31,31 +29,23 @@ def get_fiscalunit_sorted_args() -> list[str]:
 
 
 def get_fiscaldeal_sorted_args() -> list[str]:
-    return [
-        "face_name",
-        "event_int",
-        "fiscal_title",
-        "owner_name",
-        "acct_name",
-        "time_int",
-        "amount",
-    ]
+    return ["fiscal_title", "owner_name", "acct_name", "time_int", "amount"]
 
 
 def get_fiscalcash_sorted_args() -> list[str]:
-    return ["face_name", "event_int", "fiscal_title", "owner_name", "time_int", "quota"]
+    return ["fiscal_title", "owner_name", "time_int", "quota"]
 
 
 def get_fiscalhour_sorted_args() -> list[str]:
-    return ["face_name", "event_int", "fiscal_title", "hour_title", "cumlative_minute"]
+    return ["fiscal_title", "hour_title", "cumlative_minute"]
 
 
 def get_fiscalmont_sorted_args() -> list[str]:
-    return ["face_name", "event_int", "fiscal_title", "month_title", "cumlative_day"]
+    return ["fiscal_title", "month_title", "cumlative_day"]
 
 
 def get_fiscalweek_sorted_args() -> list[str]:
-    return ["face_name", "event_int", "fiscal_title", "weekday_title", "weekday_order"]
+    return ["fiscal_title", "weekday_title", "weekday_order"]
 
 
 class FiscalPrimeObjsRef:
@@ -118,7 +108,7 @@ class FiscalPrimeColumnsRef:
             "fund_coin",
             "penny",
             "respect_bit",
-            "current_time",
+            "present_time",
             "bridge",
             "c400_number",
             "yr1_jan1_offset",
@@ -139,7 +129,7 @@ class FiscalPrimeColumnsRef:
 
         _front_cols = ["idea_number", "face_name", "event_int"]
         _back_cols = ["note"]
-        self.unit_agg_csv_header = "fiscal_title,fund_coin,penny,respect_bit,current_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title"
+        self.unit_agg_csv_header = "fiscal_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title"
         self.deal_agg_csv_header = "fiscal_title,owner_name,time_int,quota"
         self.cash_agg_csv_header = "fiscal_title,owner_name,acct_name,time_int,amount"
         self.hour_agg_csv_header = "fiscal_title,hour_title,cumlative_minute"
@@ -151,7 +141,7 @@ class FiscalPrimeColumnsRef:
         self.hour_staging_columns = [*_front_cols, *self.hour_agg_columns, *_back_cols]
         self.mont_staging_columns = [*_front_cols, *self.mont_agg_columns, *_back_cols]
         self.week_staging_columns = [*_front_cols, *self.week_agg_columns, *_back_cols]
-        self.unit_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,fund_coin,penny,respect_bit,current_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title,note"""
+        self.unit_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title,note"""
         self.deal_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,owner_name,time_int,quota,note"""
         self.cash_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,owner_name,acct_name,time_int,amount,note"""
         self.hour_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,hour_title,cumlative_minute,note"""
@@ -253,7 +243,7 @@ def create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir: str):
             fiscal_title=x_fiscal_title,
             fiscals_dir=fiscal_mstr_dir,
             timeline=fiscal_timelineunit,
-            current_time=if_nan_return_None(fiscal_attrs.get("current_time")),
+            present_time=if_nan_return_None(fiscal_attrs.get("present_time")),
             bridge=fiscal_attrs.get("bridge"),
             fund_coin=if_nan_return_None(fiscal_attrs.get("fund_coin")),
             penny=if_nan_return_None(fiscal_attrs.get("penny")),

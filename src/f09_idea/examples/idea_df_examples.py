@@ -7,12 +7,12 @@ JEFFY45_STR = "jeffy45"
 
 def get_ex1_br00000_df() -> DataFrame:
     """idea_format_00000_fiscalunit_v0_0_0
-    c400_number,current_time,fiscal_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
+    c400_number,present_time,fiscal_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
-            "current_time",
+            "present_time",
             "fiscal_title",
             "fund_coin",
             "monthday_distortion",
@@ -113,12 +113,12 @@ def get_ex1_br00005_df() -> DataFrame:
 
 def get_ex2_br00000_df() -> DataFrame:
     """idea_format_00000_fiscalunit_v0_0_0
-    c400_number,current_time,fiscal_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
+    c400_number,present_time,fiscal_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
-            "current_time",
+            "present_time",
             "fiscal_title",
             "fund_coin",
             "monthday_distortion",

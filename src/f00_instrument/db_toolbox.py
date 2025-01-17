@@ -330,3 +330,19 @@ def db_table_exists(conn: sqlite3_Connection, tablename: str) -> bool:
     result = cursor.fetchone()
     cursor.close()
     return bool(result)
+
+
+def get_table_columns(conn: sqlite3_Connection, tablename: str) -> list[str]:
+    cursor = conn.cursor()
+    cursor.execute(f"PRAGMA table_info({tablename})")
+    db_columns = cursor.fetchall()
+    # # Expected column definitions
+    # expected_columns = [
+    #     (0, "id", "INTEGER", 0, None, 0),
+    #     (1, "name", "TEXT", 0, None, 0),
+    #     (2, "age", "INTEGER", 0, None, 0),
+    #     (3, "email", "TEXT", 0, None, 0),
+    # ]
+    columns_list = []
+    columns_list.extend(db_column[1] for db_column in db_columns)
+    return columns_list

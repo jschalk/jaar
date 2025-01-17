@@ -38,7 +38,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-# br00000 fiscal_title c400_number,current_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
+# br00000 fiscal_title c400_number,present_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
 # br00001 fiscal_title owner_name,acct_name,time_int,quota
 # br00002 fiscal_title owner_name,acct_name,time_int,amount
 # br00003 fiscal_title hour_title,cumlative_minute
@@ -51,8 +51,8 @@ def test_get_fiscalunit_sorted_args_ReturnsObj():
     unit_sorted_args = get_fiscalunit_sorted_args()
     # THEN
     expected_unit_args = set(get_fiscal_config_args(fiscalunit_str()).keys())
-    expected_unit_args.add(face_name_str())
-    expected_unit_args.add(event_int_str())
+    # expected_unit_args.add(face_name_str())
+    # expected_unit_args.add(event_int_str())
     expected_unit_sorted_args = get_custom_sorted_list(expected_unit_args)
     print(f"{expected_unit_sorted_args=}")
     assert unit_sorted_args == expected_unit_sorted_args
@@ -63,8 +63,8 @@ def test_get_fiscaldeal_sorted_args_ReturnsObj():
     deal_sorted_args = get_fiscaldeal_sorted_args()
     # THEN
     expected_deal_args = set(get_fiscal_config_args(fiscal_cashbook_str()).keys())
-    expected_deal_args.add(face_name_str())
-    expected_deal_args.add(event_int_str())
+    # expected_deal_args.add(face_name_str())
+    # expected_deal_args.add(event_int_str())
     expected_deal_sorted_args = get_custom_sorted_list(expected_deal_args)
     print(f"{expected_deal_sorted_args=}")
     assert deal_sorted_args == expected_deal_sorted_args
@@ -75,8 +75,8 @@ def test_get_fiscalcash_sorted_args_ReturnsObj():
     cash_sorted_args = get_fiscalcash_sorted_args()
     # THEN
     expected_cash_args = set(get_fiscal_config_args(fiscal_deal_episode_str()).keys())
-    expected_cash_args.add(face_name_str())
-    expected_cash_args.add(event_int_str())
+    # expected_cash_args.add(face_name_str())
+    # expected_cash_args.add(event_int_str())
     expected_cash_sorted_args = get_custom_sorted_list(expected_cash_args)
     print(f"{expected_cash_sorted_args=}")
     assert cash_sorted_args == expected_cash_sorted_args
@@ -87,8 +87,8 @@ def test_get_fiscalhour_sorted_args_ReturnsObj():
     hour_sorted_args = get_fiscalhour_sorted_args()
     # THEN
     expected_hour_args = set(get_fiscal_config_args(fiscal_timeline_hour_str()).keys())
-    expected_hour_args.add(face_name_str())
-    expected_hour_args.add(event_int_str())
+    # expected_hour_args.add(face_name_str())
+    # expected_hour_args.add(event_int_str())
     expected_hour_sorted_args = get_custom_sorted_list(expected_hour_args)
     print(f"{expected_hour_sorted_args=}")
     assert hour_sorted_args == expected_hour_sorted_args
@@ -99,8 +99,8 @@ def test_get_fiscalmont_sorted_args_ReturnsObj():
     mont_sorted_args = get_fiscalmont_sorted_args()
     # THEN
     expected_mont_args = set(get_fiscal_config_args(fiscal_timeline_month_str()).keys())
-    expected_mont_args.add(face_name_str())
-    expected_mont_args.add(event_int_str())
+    # expected_mont_args.add(face_name_str())
+    # expected_mont_args.add(event_int_str())
     expected_mont_sorted_args = get_custom_sorted_list(expected_mont_args)
     print(f"{expected_mont_sorted_args=}")
     assert mont_sorted_args == expected_mont_sorted_args
@@ -113,8 +113,8 @@ def test_get_fiscalweek_sorted_args_ReturnsObj():
     expected_week_args = set(
         get_fiscal_config_args(fiscal_timeline_weekday_str()).keys()
     )
-    expected_week_args.add(face_name_str())
-    expected_week_args.add(event_int_str())
+    # expected_week_args.add(face_name_str())
+    # expected_week_args.add(event_int_str())
     expected_week_sorted_args = get_custom_sorted_list(expected_week_args)
     print(f"{expected_week_sorted_args=}")
     assert week_sorted_args == expected_week_sorted_args
@@ -367,7 +367,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario0_MinimumNecessaryPara
     accord56 = [
         accord56_fiscal_title_str,
         "",  # accord56_c400_number_str,
-        "",  # accord56_current_time_str,
+        "",  # accord56_present_time_str,
         "",  # accord56_fund_coin_str,
         "",  # accord56_monthday_distortion_str,
         "",  # accord56_penny_str,
@@ -410,7 +410,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineU
     xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
     accord56_fiscal_title_str = "accord56"
-    accord56_current_time = 77
+    accord56_present_time = 77
     accord56_fund_coin = 3
     accord56_penny = 2
     accord56_respect_bit = 55
@@ -420,7 +420,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineU
         accord56_fund_coin,
         accord56_penny,
         accord56_respect_bit,
-        accord56_current_time,
+        accord56_present_time,
         accord56_bridge,
         "",  # accord56_c400_number_str,
         "",  # accord56_yr1_jan1_offset_str,
@@ -444,7 +444,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineU
     accord56_fiscalunit = fiscal_get_from_json(open_file(accord56_json_path))
     assert accord56_fiscalunit
     assert accord56_fiscalunit.fiscal_title == accord56_fiscal_title_str
-    assert accord56_fiscalunit.current_time == accord56_current_time
+    assert accord56_fiscalunit.present_time == accord56_present_time
     assert accord56_fiscalunit.fund_coin == accord56_fund_coin
     assert accord56_fiscalunit.penny == accord56_penny
     assert accord56_fiscalunit.respect_bit == accord56_respect_bit
@@ -452,7 +452,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineU
     default_fiscalunit = fiscalunit_shop(accord56_fiscal_title_str)
     assert accord56_fiscalunit.timeline == default_fiscalunit.timeline
     assert accord56_fiscalunit.fiscal_title == accord56_fiscal_title_str
-    assert accord56_fiscalunit.current_time != default_fiscalunit.current_time
+    assert accord56_fiscalunit.present_time != default_fiscalunit.present_time
     assert accord56_fiscalunit.fund_coin != default_fiscalunit.fund_coin
     assert accord56_fiscalunit.penny != default_fiscalunit.penny
     assert accord56_fiscalunit.respect_bit != default_fiscalunit.respect_bit
@@ -479,7 +479,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitP
         "",  # accord56_fund_coin,
         "",  # accord56_penny,
         "",  # accord56_respect_bit,
-        "",  # accord56_current_time,
+        "",  # accord56_present_time,
         "",  # accord56_bridge,
         accord56_c400_number,
         accord56_yr1_jan1_offset,

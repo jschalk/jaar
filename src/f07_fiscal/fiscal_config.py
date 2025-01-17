@@ -7,8 +7,8 @@ def timeline_str() -> str:
     return "timeline"
 
 
-def current_time_str() -> str:
-    return "current_time"
+def present_time_str() -> str:
+    return "present_time"
 
 
 def deallogs_str() -> str:
@@ -134,7 +134,7 @@ def get_fiscal_args_class_types() -> dict[str, str]:
         "c400_number": "int",
         "cumlative_day": "int",
         "cumlative_minute": "int",
-        "current_time": "int",
+        "present_time": "int",
         "hour_title": "TitleUnit",
         "fiscal_title": "TitleUnit",
         "fund_coin": "float",
@@ -160,7 +160,7 @@ def get_fiscal_args_set() -> set[str]:
         "c400_number",
         "cumlative_day",
         "cumlative_minute",
-        "current_time",
+        "present_time",
         "hour_title",
         "fiscal_title",
         "fund_coin",

@@ -19,7 +19,7 @@ from src.f07_fiscal.fiscal import (
 )
 from src.f07_fiscal.fiscal_config import (
     timeline_str,
-    current_time_str,
+    present_time_str,
     deallogs_str,
     cashbook_str,
 )
@@ -33,7 +33,7 @@ def test_FiscalUnit_get_dict_ReturnsObjWith_cashbook():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fiscal = fiscalunit_shop(accord45_str, get_test_fiscals_dir())
-    accord_current_time_int = 23
+    accord_present_time_int = 23
     bob_str = "Bob"
     bob_x0_time_int = 702
     bob_x0_magnitude = 33
@@ -44,7 +44,7 @@ def test_FiscalUnit_get_dict_ReturnsObjWith_cashbook():
     sue_x7_magnitude = 66
     cash_time_int = 15
     bob_sue_amount = 30000
-    accord_fiscal.set_current_time(accord_current_time_int)
+    accord_fiscal.set_present_time(accord_present_time_int)
     accord_fiscal.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
     accord_fiscal.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
     accord_fiscal.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
@@ -63,7 +63,7 @@ def test_FiscalUnit_get_dict_ReturnsObjWith_cashbook():
     print(f"{ accord_fiscal.cashbook.get_dict()=}")
     assert x_dict.get(fiscal_title_str()) == accord45_str
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
-    assert x_dict.get(current_time_str()) == accord_current_time_int
+    assert x_dict.get(present_time_str()) == accord_present_time_int
     assert x_dict.get(bridge_str()) == default_bridge_if_None()
     assert x_dict.get(fund_coin_str()) == default_fund_coin_if_None()
     assert x_dict.get(respect_bit_str()) == default_respect_bit_if_None()
@@ -73,7 +73,7 @@ def test_FiscalUnit_get_dict_ReturnsObjWith_cashbook():
     assert set(x_dict.keys()) == {
         fiscal_title_str(),
         timeline_str(),
-        current_time_str(),
+        present_time_str(),
         deallogs_str(),
         bridge_str(),
         fund_coin_str(),
@@ -96,7 +96,7 @@ def test_FiscalUnit_get_dict_ReturnsObjWithOut_cashbook():
     assert set(x_dict.keys()) == {
         fiscal_title_str(),
         timeline_str(),
-        current_time_str(),
+        present_time_str(),
         deallogs_str(),
         bridge_str(),
         fund_coin_str(),
@@ -136,7 +136,7 @@ def test_get_from_dict_ReturnsFiscalUnit():
     accord_fiscal = fiscalunit_shop(accord45_str)
     sue_timeline_title = "sue casa"
     accord_fiscal.timeline.timeline_title = sue_timeline_title
-    sue_current_time = 23
+    sue_present_time = 23
     sue_bridge = "/"
     sue_fund_coin = 0.3
     sue_respect_bit = 0.5
@@ -154,7 +154,7 @@ def test_get_from_dict_ReturnsFiscalUnit():
     accord_fiscal.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
     accord_fiscal.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
     accord_fiscal.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
-    accord_fiscal.current_time = sue_current_time
+    accord_fiscal.present_time = sue_present_time
     accord_fiscal.bridge = sue_bridge
     accord_fiscal.fund_coin = sue_fund_coin
     accord_fiscal.respect_bit = sue_respect_bit
@@ -173,7 +173,7 @@ def test_get_from_dict_ReturnsFiscalUnit():
     # THEN
     assert x_fiscal.fiscal_title == accord45_str
     assert x_fiscal.timeline.timeline_title == sue_timeline_title
-    assert x_fiscal.current_time == sue_current_time
+    assert x_fiscal.present_time == sue_present_time
     assert x_fiscal.bridge == sue_bridge
     assert x_fiscal.fund_coin == sue_fund_coin
     assert x_fiscal.respect_bit == sue_respect_bit
@@ -190,7 +190,7 @@ def test_get_from_json_ReturnsFiscalUnit():
     accord_fiscal = fiscalunit_shop(accord45_str)
     sue_timeline_title = "sue casa"
     accord_fiscal.timeline.timeline_title = sue_timeline_title
-    sue_current_time = 23
+    sue_present_time = 23
     sue_bridge = "/"
     sue_fund_coin = 0.3
     sue_respect_bit = 0.5
@@ -206,7 +206,7 @@ def test_get_from_json_ReturnsFiscalUnit():
     accord_fiscal.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
     accord_fiscal.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
     accord_fiscal.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
-    accord_fiscal.current_time = sue_current_time
+    accord_fiscal.present_time = sue_present_time
     accord_fiscal.bridge = sue_bridge
     accord_fiscal.fund_coin = sue_fund_coin
     accord_fiscal.respect_bit = sue_respect_bit
@@ -219,7 +219,7 @@ def test_get_from_json_ReturnsFiscalUnit():
     # THEN
     assert x_fiscal.fiscal_title == accord45_str
     assert x_fiscal.timeline.timeline_title == sue_timeline_title
-    assert x_fiscal.current_time == sue_current_time
+    assert x_fiscal.present_time == sue_present_time
     assert x_fiscal.bridge == sue_bridge
     assert x_fiscal.fund_coin == sue_fund_coin
     assert x_fiscal.respect_bit == sue_respect_bit

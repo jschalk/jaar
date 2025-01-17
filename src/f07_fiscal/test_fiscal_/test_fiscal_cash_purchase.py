@@ -5,8 +5,8 @@ from pytest import raises as pytest_raises
 
 def test_FiscalUnit_set_cashpurchase_SetsAttr():
     # ESTABLISH
-    t6606_current_time = 6606
-    x_fiscal = fiscalunit_shop(current_time=t6606_current_time)
+    t6606_present_time = 6606
+    x_fiscal = fiscalunit_shop(present_time=t6606_present_time)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -23,8 +23,8 @@ def test_FiscalUnit_set_cashpurchase_SetsAttr():
 
 def test_FiscalUnit_add_cashpurchase_SetsAttr():
     # ESTABLISH
-    t6606_current_time = 6606
-    x_fiscal = fiscalunit_shop(current_time=t6606_current_time)
+    t6606_present_time = 6606
+    x_fiscal = fiscalunit_shop(present_time=t6606_present_time)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -38,18 +38,18 @@ def test_FiscalUnit_add_cashpurchase_SetsAttr():
     assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
-def test_FiscalUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThanOrEqual_current_time():
+def test_FiscalUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThanOrEqual_present_time():
     # ESTABLISH
-    t6606_current_time = 6606
-    x_fiscal = fiscalunit_shop(current_time=t6606_current_time)
+    t6606_present_time = 6606
+    x_fiscal = fiscalunit_shop(present_time=t6606_present_time)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
     sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
-    assert x_fiscal.current_time == t6606_current_time
+    assert x_fiscal.present_time == t6606_present_time
     assert sue_bob_t55_tranunit.time_int == t55_t
-    assert sue_bob_t55_tranunit.time_int < x_fiscal.current_time
+    assert sue_bob_t55_tranunit.time_int < x_fiscal.present_time
 
     # WHEN
     x_fiscal.set_cashpurchase(sue_bob_t55_tranunit)
@@ -64,28 +64,28 @@ def test_FiscalUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterTh
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_fiscal.set_cashpurchase(sue_bob_t77_tranunit)
-    exception_str = f"Cannot set tranunit for time_int={t77_t}, timelinepoint is greater than current time={t6606_current_time}"
+    exception_str = f"Cannot set tranunit for time_int={t77_t}, timelinepoint is greater than current time={t6606_present_time}"
     assert str(excinfo.value) == exception_str
 
     # WHEN / THEN
-    sue_bob_t6606 = tranunit_shop(sue_str, bob_str, t6606_current_time, t77_amount)
+    sue_bob_t6606 = tranunit_shop(sue_str, bob_str, t6606_present_time, t77_amount)
     with pytest_raises(Exception) as excinfo:
         x_fiscal.set_cashpurchase(sue_bob_t6606)
-    exception_str = f"Cannot set tranunit for time_int={t6606_current_time}, timelinepoint is greater than current time={t6606_current_time}"
+    exception_str = f"Cannot set tranunit for time_int={t6606_present_time}, timelinepoint is greater than current time={t6606_present_time}"
     assert str(excinfo.value) == exception_str
 
 
 def test_FiscalUnit_set_cashpurchase_RaisesErrorWhenDealEpisodeHas_time_int():
     # ESTABLISH
-    x_fiscal = fiscalunit_shop(current_time=0)
+    x_fiscal = fiscalunit_shop(present_time=0)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_money_magnitude = 100
     x_fiscal.add_dealepisode("yao", t55_t, t55_money_magnitude)
     t55_amount = 37
-    t6606_current_time = 6606
-    x_fiscal.current_time = t6606_current_time
+    t6606_present_time = 6606
+    x_fiscal.present_time = t6606_present_time
     sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
 
     # WHEN / THEN
@@ -99,7 +99,7 @@ def test_FiscalUnit_set_cashpurchase_RaisesErrorWhenDealEpisodeHas_time_int():
 
 def test_FiscalUnit_cashpurchase_exists_ReturnsObj():
     # ESTABLISH
-    x_fiscal = fiscalunit_shop(current_time=6606)
+    x_fiscal = fiscalunit_shop(present_time=6606)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -115,7 +115,7 @@ def test_FiscalUnit_cashpurchase_exists_ReturnsObj():
 
 def test_FiscalUnit_get_cashpurchase_ReturnsObj():
     # ESTABLISH
-    x_fiscal = fiscalunit_shop(current_time=6606)
+    x_fiscal = fiscalunit_shop(present_time=6606)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -134,7 +134,7 @@ def test_FiscalUnit_get_cashpurchase_ReturnsObj():
 
 def test_FiscalUnit_del_cashpurchase_SetsAttr():
     # ESTABLISH
-    x_fiscal = fiscalunit_shop(current_time=6606)
+    x_fiscal = fiscalunit_shop(present_time=6606)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -149,50 +149,50 @@ def test_FiscalUnit_del_cashpurchase_SetsAttr():
     assert x_fiscal.cashpurchase_exists(sue_str, bob_str, t55_t) is False
 
 
-def test_FiscalUnit_set_current_time_SetsAttr():
+def test_FiscalUnit_set_present_time_SetsAttr():
     # ESTABLISH
-    t6606_current_time = 6606
-    x_fiscal = fiscalunit_shop(current_time=t6606_current_time)
+    t6606_present_time = 6606
+    x_fiscal = fiscalunit_shop(present_time=t6606_present_time)
     sue_str = "Sue"
     bob_str = "Bob"
     t22_t = 2202
     t22_amount = 27
     x_fiscal.set_cashpurchase(tranunit_shop(sue_str, bob_str, t22_t, t22_amount))
-    assert x_fiscal.current_time == t6606_current_time
+    assert x_fiscal.present_time == t6606_present_time
 
     # WHEN
-    t4404_current_time = 4404
-    x_fiscal.set_current_time(t4404_current_time)
+    t4404_present_time = 4404
+    x_fiscal.set_present_time(t4404_present_time)
 
     # THEN
-    assert x_fiscal.current_time == t4404_current_time
+    assert x_fiscal.present_time == t4404_present_time
 
 
-def test_FiscalUnit_set_current_time_RaisesErrorWhen_cashpurchase_ExistsWithGreatertime_int():
+def test_FiscalUnit_set_present_time_RaisesErrorWhen_cashpurchase_ExistsWithGreatertime_int():
     # ESTABLISH
-    t6606_current_time = 6606
-    x_fiscal = fiscalunit_shop(current_time=t6606_current_time)
+    t6606_present_time = 6606
+    x_fiscal = fiscalunit_shop(present_time=t6606_present_time)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
     x_fiscal.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
-    assert x_fiscal.current_time == t6606_current_time
+    assert x_fiscal.present_time == t6606_present_time
 
     # WHEN / THEN
-    t4404_current_time = 4404
+    t4404_present_time = 4404
     with pytest_raises(Exception) as excinfo:
-        x_fiscal.set_current_time(t4404_current_time)
-    exception_str = f"Cannot set current_time {t4404_current_time}, cashpurchase with greater time_int exists"
+        x_fiscal.set_present_time(t4404_present_time)
+    exception_str = f"Cannot set present_time {t4404_present_time}, cashpurchase with greater time_int exists"
     assert str(excinfo.value) == exception_str
 
     # THEN
-    assert x_fiscal.current_time == t6606_current_time
+    assert x_fiscal.present_time == t6606_present_time
 
 
 def test_FiscalUnit_set_all_tranbook_SetsAttr():
     # ESTABLISH
-    x_fiscal = fiscalunit_shop(current_time=10101)
+    x_fiscal = fiscalunit_shop(present_time=10101)
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"

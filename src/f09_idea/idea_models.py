@@ -12,7 +12,7 @@ class br00000AbstractTable(Base):
     face_name = Column(String, primary_key=True)
     event_int = Column(Integer, primary_key=True)
     c400_number = Column(Integer)
-    current_time = Column(Integer)
+    present_time = Column(Integer)
     fiscal_title = Column(String)
     fund_coin = Column(Float)
     monthday_distortion = Column(Integer)
