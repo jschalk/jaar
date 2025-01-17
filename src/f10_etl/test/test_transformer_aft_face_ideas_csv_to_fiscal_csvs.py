@@ -4,7 +4,7 @@ from src.f00_instrument.db_toolbox import (
     get_row_count,
     create_table_from_columns,
 )
-from src.f01_road.finance_tran import bridge_str
+from src.f01_road.finance_tran import bridge_str, quota_str, time_int_str
 from src.f03_chrono.chrono import (
     c400_number_str,
     yr1_jan1_offset_str,
@@ -523,6 +523,82 @@ VALUES
             a23_yr1_jan1_offset,  # yr1_jan1_offset
             a23_monthday_distortion,  # monthday_distortion
             a23_timeline_title,  # timeline_title
+            None,  # note
+        )
+        print(f"{fiscalunit_db_rows[0]=}")
+        print(f"{fiscalunit_db_rows[1]=}")
+        print(f"        {expected_row0=}")
+        print(f"        {expected_row1=}")
+        assert fiscalunit_db_rows[0] == expected_row0
+        assert fiscalunit_db_rows[1] == expected_row1
+        assert fiscalunit_db_rows == [expected_row0, expected_row1]
+
+
+def test_populate_fiscal_staging_tables_Scenario4_Idea_br00001_Table_WithAttrs(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bobby"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    br00001_str = "br00001"
+    br00001_columns = [
+        face_name_str(),
+        event_int_str(),
+        fiscal_title_str(),
+        owner_name_str(),
+        time_int_str(),
+        quota_str(),
+    ]
+    a23_owner_name = bob_inx
+    a23_time_int = 22
+    a23_quota = 33
+
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        br00001_tablename = f"{br00001_str}_staging"
+        create_idea_staging_table(fiscal_db_conn, br00001_tablename, br00001_columns)
+        insert_staging_sqlstr = f"""
+INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{time_int_str()},{quota_str()})
+VALUES
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota})
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota})
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota})
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        x_fis = FiscalPrimeObjsRef()
+        create_fiscal_tables(fiscal_db_conn)
+        assert get_row_count(fiscal_db_conn, x_fis.deal_stage_tablename) == 0
+
+        # WHEN
+        populate_fiscal_staging_tables(fiscal_db_conn)
+
+        # THEN
+        assert get_row_count(fiscal_db_conn, x_fis.deal_stage_tablename) == 2
+        cursor.execute(f"SELECT * FROM {x_fis.deal_stage_tablename}")
+        fiscalunit_db_rows = cursor.fetchall()
+        expected_row0 = (
+            br00001_str,  # idea_number
+            sue_inx,  # face_name
+            event3,  # event_int
+            accord23_str,  # fiscal_title
+            a23_owner_name,
+            a23_time_int,
+            a23_quota,
+            None,  # note
+        )
+        expected_row1 = (
+            br00001_str,  # idea_number
+            sue_inx,  # face_name
+            event7,  # event_int
+            accord23_str,  # fiscal_title
+            a23_owner_name,
+            a23_time_int,
+            a23_quota,
             None,  # note
         )
         print(f"{fiscalunit_db_rows[0]=}")

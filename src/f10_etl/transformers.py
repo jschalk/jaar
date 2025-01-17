@@ -850,6 +850,12 @@ def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
     dst_hour_columns = set(get_fiscalhour_sorted_args())
     dst_mont_columns = set(get_fiscalmont_sorted_args())
     dst_week_columns = set(get_fiscalweek_sorted_args())
+    dst_deal_columns.remove("fiscal_title")
+    dst_deal_columns.remove("owner_name")
+    dst_cash_columns.remove("fiscal_title")
+    dst_hour_columns.remove("fiscal_title")
+    dst_mont_columns.remove("fiscal_title")
+    dst_week_columns.remove("fiscal_title")
     for idea_number in get_idea_numbers():
         idea_staging_tablename = f"{idea_number}_staging"
         if db_table_exists(fiscal_db_conn, idea_staging_tablename):
@@ -862,8 +868,12 @@ def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
                     idea_number=idea_number,
                 )
             if not dst_deal_columns.isdisjoint(set(src_columns)):
-                # insert into fiscaldeal_staging_table
-                pass
+                _insert_into_fiscal_staging(
+                    fiscal_db_conn=fiscal_db_conn,
+                    dst_table="fiscal_deal_episode_staging",
+                    src_table=idea_staging_tablename,
+                    idea_number=idea_number,
+                )
             if not dst_cash_columns.isdisjoint(set(src_columns)):
                 # insert into fiscalcash_staging_table
                 pass
@@ -888,12 +898,13 @@ def _insert_into_fiscal_staging(
     common_columns_str = ", ".join(common_columns_list)
     cursor = fiscal_db_conn.cursor()
     insert_idea_staging_agg_str = f"""
-INSERT INTO {dst_table} (idea_number, face_name, event_int, {common_columns_str})
-SELECT '{idea_number}' as idea_number, face_name, event_int, {common_columns_str}
+INSERT INTO {dst_table} (idea_number, {common_columns_str})
+SELECT '{idea_number}' as idea_number, {common_columns_str}
 FROM {src_table}
 GROUP BY face_name, event_int, fiscal_title
 ;
 """
+    print(f"{insert_idea_staging_agg_str=}")
     cursor.execute(insert_idea_staging_agg_str)
     cursor.close()
 
