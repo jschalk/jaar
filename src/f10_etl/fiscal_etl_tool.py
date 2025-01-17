@@ -28,11 +28,11 @@ def get_fiscalunit_sorted_args() -> list[str]:
     ]
 
 
-def get_fiscaldeal_sorted_args() -> list[str]:
+def get_fiscalcash_sorted_args() -> list[str]:
     return ["fiscal_title", "owner_name", "acct_name", "time_int", "amount"]
 
 
-def get_fiscalcash_sorted_args() -> list[str]:
+def get_fiscaldeal_sorted_args() -> list[str]:
     return ["fiscal_title", "owner_name", "time_int", "quota"]
 
 

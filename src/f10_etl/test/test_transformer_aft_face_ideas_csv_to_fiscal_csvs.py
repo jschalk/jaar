@@ -29,6 +29,13 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_month_str,
     fiscal_timeline_weekday_str,
     present_time_str,
+    amount_str,
+    hour_title_str,
+    cumlative_minute_str,
+    cumlative_day_str,
+    month_title_str,
+    weekday_order_str,
+    weekday_title_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_config import idea_number_str, get_idea_sqlite_types
@@ -599,6 +606,302 @@ VALUES
             a23_owner_name,
             a23_time_int,
             a23_quota,
+            None,  # note
+        )
+        print(f"{fiscalunit_db_rows[0]=}")
+        print(f"{fiscalunit_db_rows[1]=}")
+        print(f"        {expected_row0=}")
+        print(f"        {expected_row1=}")
+        assert fiscalunit_db_rows[0] == expected_row0
+        assert fiscalunit_db_rows[1] == expected_row1
+        assert fiscalunit_db_rows == [expected_row0, expected_row1]
+
+
+def test_populate_fiscal_staging_tables_Scenario5_Idea_br00002_Table_WithAttrs(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bobby"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    br00002_str = "br00002"
+    br00002_columns = [
+        face_name_str(),
+        event_int_str(),
+        fiscal_title_str(),
+        owner_name_str(),
+        acct_name_str(),
+        time_int_str(),
+        amount_str(),
+    ]
+    a23_owner_name = bob_inx
+    a23_acct_name = "Yao"
+    a23_time_int = 33
+    a23_amount = 44
+
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        br00002_tablename = f"{br00002_str}_staging"
+        create_idea_staging_table(fiscal_db_conn, br00002_tablename, br00002_columns)
+        insert_staging_sqlstr = f"""
+INSERT INTO {br00002_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{time_int_str()},{amount_str()})
+VALUES
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_time_int},{a23_amount})
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_time_int},{a23_amount})
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_time_int},{a23_amount})
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        x_fis = FiscalPrimeObjsRef()
+        create_fiscal_tables(fiscal_db_conn)
+        assert get_row_count(fiscal_db_conn, x_fis.cash_stage_tablename) == 0
+
+        # WHEN
+        populate_fiscal_staging_tables(fiscal_db_conn)
+
+        # THEN
+        assert get_row_count(fiscal_db_conn, x_fis.cash_stage_tablename) == 2
+        cursor.execute(f"SELECT * FROM {x_fis.cash_stage_tablename}")
+        fiscalunit_db_rows = cursor.fetchall()
+        expected_row0 = (
+            br00002_str,  # idea_number
+            sue_inx,  # face_name
+            event3,  # event_int
+            accord23_str,  # fiscal_title
+            a23_owner_name,
+            a23_acct_name,
+            a23_time_int,
+            a23_amount,
+            None,  # note
+        )
+        expected_row1 = (
+            br00002_str,  # idea_number
+            sue_inx,  # face_name
+            event7,  # event_int
+            accord23_str,  # fiscal_title
+            a23_owner_name,
+            a23_acct_name,
+            a23_time_int,
+            a23_amount,
+            None,  # note
+        )
+        print(f"{fiscalunit_db_rows[0]=}")
+        print(f"{fiscalunit_db_rows[1]=}")
+        print(f"        {expected_row0=}")
+        print(f"        {expected_row1=}")
+        assert fiscalunit_db_rows[0] == expected_row0
+        assert fiscalunit_db_rows[1] == expected_row1
+        assert fiscalunit_db_rows == [expected_row0, expected_row1]
+
+
+def test_populate_fiscal_staging_tables_Scenario6_Idea_br00003_Table_WithAttrs(
+    env_dir_setup_cleanup,
+):
+
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    br00003_str = "br00003"
+    br00003_columns = [
+        face_name_str(),
+        event_int_str(),
+        fiscal_title_str(),
+        hour_title_str(),
+        cumlative_minute_str(),
+    ]
+    a23_hour_title = "4pm"
+    a23_cumlative_minute = 44
+
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        br00003_tablename = f"{br00003_str}_staging"
+        create_idea_staging_table(fiscal_db_conn, br00003_tablename, br00003_columns)
+        insert_staging_sqlstr = f"""
+INSERT INTO {br00003_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{hour_title_str()},{cumlative_minute_str()})
+VALUES
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_hour_title}',{a23_cumlative_minute})
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_hour_title}',{a23_cumlative_minute})
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_hour_title}',{a23_cumlative_minute})
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        x_fis = FiscalPrimeObjsRef()
+        create_fiscal_tables(fiscal_db_conn)
+        assert get_row_count(fiscal_db_conn, x_fis.hour_stage_tablename) == 0
+
+        # WHEN
+        populate_fiscal_staging_tables(fiscal_db_conn)
+
+        # THEN
+        assert get_row_count(fiscal_db_conn, x_fis.hour_stage_tablename) == 2
+        cursor.execute(f"SELECT * FROM {x_fis.hour_stage_tablename}")
+        fiscalunit_db_rows = cursor.fetchall()
+        expected_row0 = (
+            br00003_str,  # idea_number
+            sue_inx,  # face_name
+            event3,  # event_int
+            accord23_str,  # fiscal_title
+            a23_hour_title,
+            a23_cumlative_minute,
+            None,  # note
+        )
+        expected_row1 = (
+            br00003_str,  # idea_number
+            sue_inx,  # face_name
+            event7,  # event_int
+            accord23_str,  # fiscal_title
+            a23_hour_title,
+            a23_cumlative_minute,
+            None,  # note
+        )
+        print(f"{fiscalunit_db_rows[0]=}")
+        print(f"{fiscalunit_db_rows[1]=}")
+        print(f"        {expected_row0=}")
+        print(f"        {expected_row1=}")
+        assert fiscalunit_db_rows[0] == expected_row0
+        assert fiscalunit_db_rows[1] == expected_row1
+        assert fiscalunit_db_rows == [expected_row0, expected_row1]
+
+
+def test_populate_fiscal_staging_tables_Scenario7_Idea_br00004_Table_WithAttrs(
+    env_dir_setup_cleanup,
+):
+
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    br00004_str = "br00004"
+    br00004_columns = [
+        face_name_str(),
+        event_int_str(),
+        fiscal_title_str(),
+        month_title_str(),
+        cumlative_day_str(),
+    ]
+    a23_month_title = "4pm"
+    a23_cumlative_day = 44
+
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        br00004_tablename = f"{br00004_str}_staging"
+        create_idea_staging_table(fiscal_db_conn, br00004_tablename, br00004_columns)
+        insert_staging_sqlstr = f"""
+INSERT INTO {br00004_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{month_title_str()},{cumlative_day_str()})
+VALUES
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_month_title}',{a23_cumlative_day})
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_month_title}',{a23_cumlative_day})
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_month_title}',{a23_cumlative_day})
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        x_fis = FiscalPrimeObjsRef()
+        create_fiscal_tables(fiscal_db_conn)
+        assert get_row_count(fiscal_db_conn, x_fis.mont_stage_tablename) == 0
+
+        # WHEN
+        populate_fiscal_staging_tables(fiscal_db_conn)
+
+        # THEN
+        assert get_row_count(fiscal_db_conn, x_fis.mont_stage_tablename) == 2
+        cursor.execute(f"SELECT * FROM {x_fis.mont_stage_tablename}")
+        fiscalunit_db_rows = cursor.fetchall()
+        expected_row0 = (
+            br00004_str,  # idea_number
+            sue_inx,  # face_name
+            event3,  # event_int
+            accord23_str,  # fiscal_title
+            a23_month_title,
+            a23_cumlative_day,
+            None,  # note
+        )
+        expected_row1 = (
+            br00004_str,  # idea_number
+            sue_inx,  # face_name
+            event7,  # event_int
+            accord23_str,  # fiscal_title
+            a23_month_title,
+            a23_cumlative_day,
+            None,  # note
+        )
+        print(f"{fiscalunit_db_rows[0]=}")
+        print(f"{fiscalunit_db_rows[1]=}")
+        print(f"        {expected_row0=}")
+        print(f"        {expected_row1=}")
+        assert fiscalunit_db_rows[0] == expected_row0
+        assert fiscalunit_db_rows[1] == expected_row1
+        assert fiscalunit_db_rows == [expected_row0, expected_row1]
+
+
+def test_populate_fiscal_staging_tables_Scenario8_Idea_br00005_Table_WithAttrs(
+    env_dir_setup_cleanup,
+):
+
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    br00005_str = "br00005"
+    br00005_columns = [
+        face_name_str(),
+        event_int_str(),
+        fiscal_title_str(),
+        weekday_title_str(),
+        weekday_order_str(),
+    ]
+    a23_weekday_title = "4pm"
+    a23_weekday_order = 44
+
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        br00005_tablename = f"{br00005_str}_staging"
+        create_idea_staging_table(fiscal_db_conn, br00005_tablename, br00005_columns)
+        insert_staging_sqlstr = f"""
+INSERT INTO {br00005_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{weekday_title_str()},{weekday_order_str()})
+VALUES
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_weekday_title}',{a23_weekday_order})
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_weekday_title}',{a23_weekday_order})
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_weekday_title}',{a23_weekday_order})
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        x_fis = FiscalPrimeObjsRef()
+        create_fiscal_tables(fiscal_db_conn)
+        assert get_row_count(fiscal_db_conn, x_fis.week_stage_tablename) == 0
+
+        # WHEN
+        populate_fiscal_staging_tables(fiscal_db_conn)
+
+        # THEN
+        assert get_row_count(fiscal_db_conn, x_fis.week_stage_tablename) == 2
+        cursor.execute(f"SELECT * FROM {x_fis.week_stage_tablename}")
+        fiscalunit_db_rows = cursor.fetchall()
+        expected_row0 = (
+            br00005_str,  # idea_number
+            sue_inx,  # face_name
+            event3,  # event_int
+            accord23_str,  # fiscal_title
+            a23_weekday_title,
+            a23_weekday_order,
+            None,  # note
+        )
+        expected_row1 = (
+            br00005_str,  # idea_number
+            sue_inx,  # face_name
+            event7,  # event_int
+            accord23_str,  # fiscal_title
+            a23_weekday_title,
+            a23_weekday_order,
             None,  # note
         )
         print(f"{fiscalunit_db_rows[0]=}")
