@@ -12,7 +12,6 @@ from src.f09_idea.idea_config import (
     get_idea_format_filename,
     get_idea_category_ref,
     get_idea_sqlite_types,
-    get_bud_ideas_with_only_fiscal_title,
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.pandas_tool import (
