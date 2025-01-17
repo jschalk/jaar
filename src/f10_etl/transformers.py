@@ -832,8 +832,30 @@ def create_fiscal_tables(conn: sqlite3_Connection):
 
 def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
     # get every budunit category idea that is not also fiscalunit category idea: collect fiscal_titles
-    fiscal1_ideas = get_bud_ideas_with_only_fiscal_title()
-    for fiscal1_idea in fiscal1_ideas:
+    only_fiscal_title_ideas = get_bud_ideas_with_only_fiscal_title()
+    insert_into_fiscalunit_staging(fiscal_db_conn, only_fiscal_title_ideas)
+
+
+#     cat_fiscalunit_ideas = get_bud_ideas_with_only_fiscal_title()
+#     for fiscal1_idea in fiscal1_ideas:
+#         idea_staging_tablename = f"{fiscal1_idea}_staging"
+#         if db_table_exists(fiscal_db_conn, idea_staging_tablename):
+#             cursor = fiscal_db_conn.cursor()
+#             insert_idea_staging_agg = f"""
+# INSERT INTO fiscalunit_staging (idea_number, face_name, event_int, fiscal_title)
+# SELECT '{fiscal1_idea}' as idea_number, face_name, event_int, fiscal_title
+# FROM {idea_staging_tablename}
+# GROUP BY face_name, event_int, fiscal_title
+# ;
+# """
+#             cursor.execute(insert_idea_staging_agg)
+#             cursor.close()
+
+
+def insert_into_fiscalunit_staging(
+    fiscal_db_conn: sqlite3_Connection, only_fiscal_title_ideas: list[str]
+):
+    for fiscal1_idea in only_fiscal_title_ideas:
         idea_staging_tablename = f"{fiscal1_idea}_staging"
         if db_table_exists(fiscal_db_conn, idea_staging_tablename):
             cursor = fiscal_db_conn.cursor()
