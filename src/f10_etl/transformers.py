@@ -844,59 +844,48 @@ def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
     # get every budunit category idea that is not also fiscalunit category idea: collect fiscal_titles
     only_fiscal_title_ideas = get_bud_ideas_with_only_fiscal_title()
 
-    unit_args_set = set(get_fiscalunit_sorted_args())
-    deal_args_set = set(get_fiscaldeal_sorted_args())
-    cash_args_set = set(get_fiscalcash_sorted_args())
-    hour_args_set = set(get_fiscalhour_sorted_args())
-    mont_args_set = set(get_fiscalmont_sorted_args())
-    week_args_set = set(get_fiscalweek_sorted_args())
+    dst_unit_columns = set(get_fiscalunit_sorted_args())
+    dst_deal_columns = set(get_fiscaldeal_sorted_args())
+    dst_cash_columns = set(get_fiscalcash_sorted_args())
+    dst_hour_columns = set(get_fiscalhour_sorted_args())
+    dst_mont_columns = set(get_fiscalmont_sorted_args())
+    dst_week_columns = set(get_fiscalweek_sorted_args())
     for idea_number in get_idea_numbers():
         idea_staging_tablename = f"{idea_number}_staging"
         if db_table_exists(fiscal_db_conn, idea_staging_tablename):
-            staging_columns = get_table_columns(fiscal_db_conn, idea_staging_tablename)
-            if not unit_args_set.isdisjoint(set(staging_columns)):
-                # insert into fiscalunit_staging_table
-                print("insert into fiscalunit_staging_table")
+            src_columns = get_table_columns(fiscal_db_conn, idea_staging_tablename)
+            if not dst_unit_columns.isdisjoint(set(src_columns)):
                 _insert_into_fiscal_staging(
                     fiscal_db_conn=fiscal_db_conn,
                     dst_table="fiscalunit_staging",
                     src_table=idea_staging_tablename,
-                    dst_columns=get_fiscalunit_sorted_args(),
-                    src_columns=staging_columns,
                     idea_number=idea_number,
                 )
-            if not deal_args_set.isdisjoint(set(staging_columns)):
+            if not dst_deal_columns.isdisjoint(set(src_columns)):
                 # insert into fiscaldeal_staging_table
                 pass
-            if not cash_args_set.isdisjoint(set(staging_columns)):
+            if not dst_cash_columns.isdisjoint(set(src_columns)):
                 # insert into fiscalcash_staging_table
                 pass
-            if not hour_args_set.isdisjoint(set(staging_columns)):
+            if not dst_hour_columns.isdisjoint(set(src_columns)):
                 # insert into fiscalhour_staging_table
                 pass
-            if not mont_args_set.isdisjoint(set(staging_columns)):
+            if not dst_mont_columns.isdisjoint(set(src_columns)):
                 # insert into fiscalmont_staging_table
                 pass
-            if not week_args_set.isdisjoint(set(staging_columns)):
+            if not dst_week_columns.isdisjoint(set(src_columns)):
                 # insert into fiscalweek_staging_table
                 pass
 
-            cursor = fiscal_db_conn.cursor()
-
 
 def _insert_into_fiscal_staging(
-    fiscal_db_conn: sqlite3_Connection,
-    dst_table: str,
-    src_table: str,
-    dst_columns: list[str],
-    src_columns: list[str],
-    idea_number: str,
+    fiscal_db_conn: sqlite3_Connection, dst_table: str, src_table: str, idea_number: str
 ):
+    dst_columns = get_table_columns(fiscal_db_conn, dst_table)
+    src_columns = get_table_columns(fiscal_db_conn, src_table)
     common_columns_set = set(dst_columns).intersection(set(src_columns))
     common_columns_list = [col for col in dst_columns if col in common_columns_set]
     common_columns_str = ", ".join(common_columns_list)
-    print(f"{common_columns_list=}")
-    print(f"{common_columns_str=}")
     cursor = fiscal_db_conn.cursor()
     insert_idea_staging_agg_str = f"""
 INSERT INTO {dst_table} (idea_number, face_name, event_int, {common_columns_str})
@@ -905,7 +894,6 @@ FROM {src_table}
 GROUP BY face_name, event_int, fiscal_title
 ;
 """
-    print(f"{insert_idea_staging_agg_str=}")
     cursor.execute(insert_idea_staging_agg_str)
     cursor.close()
 
