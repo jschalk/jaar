@@ -172,7 +172,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "quota",
         "monthday_distortion",
         "timeline_title",
-        "note",
+        "fault_note",
     ]
 
 
@@ -263,7 +263,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "quota": "REAL",
         "monthday_distortion": "INTEGER",
         "timeline_title": "TEXT",
-        "note": "TEXT",
+        "fault_note": "TEXT",
     }
 
 

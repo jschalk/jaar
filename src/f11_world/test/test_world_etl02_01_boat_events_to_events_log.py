@@ -68,7 +68,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario0(
         "sheet_name",
         face_name_str(),
         event_int_str(),
-        "note",
+        "fault_note",
     ]
     invalid_error_str = "invalid because of conflicting event_int"
     invalid_error_str = "invalid because of conflicting event_int"
@@ -158,7 +158,7 @@ def test_WorldUnit_boat_events_to_events_log_CreatesSheets_Scenario1_MultipleIde
         "sheet_name",
         face_name_str(),
         event_int_str(),
-        "note",
+        "fault_note",
     ]
     invalid_error_str = "invalid because of conflicting event_int"
     invalid_error_str = "invalid because of conflicting event_int"

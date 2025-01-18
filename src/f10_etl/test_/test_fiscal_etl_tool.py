@@ -201,7 +201,7 @@ def test_FiscalPrimeColumnsRef_Exists():
     assert fis_cols.mont_agg_columns == get_custom_sorted_list(mont_args)
     assert fis_cols.week_agg_columns == get_custom_sorted_list(week_args)
 
-    staging_args = {"idea_number", face_name_str(), event_int_str(), "note"}
+    staging_args = {"idea_number", face_name_str(), event_int_str(), "fault_note"}
     unit_staging_args = unit_args.union(staging_args)
     cash_staging_args = cash_args.union(staging_args)
     deal_staging_args = deal_args.union(staging_args)

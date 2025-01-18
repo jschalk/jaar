@@ -912,7 +912,7 @@ VALUES
         print(f"{expected_fiscalunit_csv_str=}")
         assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
         # confirming file is non-zero length, has column headers
-        assert len(open_file(x_fis.deal_stage_csv_path)) == 76
+        assert len(open_file(x_fis.deal_stage_csv_path)) == 82
         assert len(open_file(x_fis.cash_stage_csv_path)) == 87
         assert len(open_file(x_fis.hour_stage_csv_path)) == 78
         assert len(open_file(x_fis.mont_stage_csv_path)) == 76
@@ -974,8 +974,93 @@ VALUES
         print(f"{expected_fiscalunit_csv_str=}")
         assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
         # confirming file is non-zero length, has column headers
-        assert len(open_file(x_fis.deal_stage_csv_path)) == 76
-        assert len(open_file(x_fis.cash_stage_csv_path)) == 87
-        assert len(open_file(x_fis.hour_stage_csv_path)) == 78
-        assert len(open_file(x_fis.mont_stage_csv_path)) == 76
-        assert len(open_file(x_fis.week_stage_csv_path)) == 78
+        assert len(open_file(x_fis.deal_stage_csv_path)) == 82
+        assert len(open_file(x_fis.cash_stage_csv_path)) == 93
+        assert len(open_file(x_fis.hour_stage_csv_path)) == 84
+        assert len(open_file(x_fis.mont_stage_csv_path)) == 82
+        assert len(open_file(x_fis.week_stage_csv_path)) == 84
+
+
+# def test_create_fiscal_staging_fault_notes_Scenario3_Idea_br00000_Table_WithAttrs(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     sue_inx = "Suzy"
+#     event3 = 3
+#     event7 = 7
+#     accord23_str = "accord23"
+#     a23_fund_coin = 11
+#     a23_penny = 22
+#     a23_respect_bit = 33
+#     a23_present_time = 44
+#     a23_bridge = ";"
+#     a23_c400_number = 55
+#     a23_yr1_jan1_offset = 66
+#     a23_monthday_distortion = 77
+#     a23_timeline_title = "accord23_timeline"
+#     x_objs = FiscalPrimeObjsRef()
+#     x_cols = FiscalPrimeColumnsRef()
+
+#     with sqlite3_connect(":memory:") as fiscal_db_conn:
+#         x_tablename = x_objs.unit_stage_tablename
+#         x_columns = x_cols.unit_staging_columns
+#         create_idea_staging_table(fiscal_db_conn, x_tablename, x_columns)
+#         insert_staging_sqlstr = f"""
+# INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
+# VALUES
+#   ('{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}')
+# , ('{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}')
+# ;
+# """
+#         print(f"{insert_staging_sqlstr=}")
+#         cursor = fiscal_db_conn.cursor()
+#         cursor.execute(insert_staging_sqlstr)
+#         create_fiscal_tables(fiscal_db_conn)
+#         assert get_row_count(fiscal_db_conn, x_tablename) == 0
+
+#         # WHEN
+#         idea_staging_tables2fiscal_staging_tables(fiscal_db_conn)
+
+#         # THEN
+#         assert get_row_count(fiscal_db_conn, x_tablename) == 2
+#         cursor.execute(f"SELECT * FROM {x_tablename};")
+#         fiscalunit_db_rows = cursor.fetchall()
+#         expected_row0 = (
+#             br00000_str,  # idea_number
+#             sue_inx,  # face_name
+#             event3,  # event_int
+#             accord23_str,  # fiscal_title
+#             a23_fund_coin,  # fund_coin
+#             a23_penny,  # penny
+#             a23_respect_bit,  # respect_bit
+#             a23_present_time,  # present_time
+#             a23_bridge,  # bridge
+#             a23_c400_number,  # c400_number
+#             a23_yr1_jan1_offset,  # yr1_jan1_offset
+#             a23_monthday_distortion,  # monthday_distortion
+#             a23_timeline_title,  # timeline_title
+#             None,  # note
+#         )
+#         expected_row1 = (
+#             br00000_str,  # idea_number
+#             sue_inx,  # face_name
+#             event7,  # event_int
+#             accord23_str,  # fiscal_title
+#             a23_fund_coin,  # fund_coin
+#             a23_penny,  # penny
+#             a23_respect_bit,  # respect_bit
+#             a23_present_time,  # present_time
+#             a23_bridge,  # bridge
+#             a23_c400_number,  # c400_number
+#             a23_yr1_jan1_offset,  # yr1_jan1_offset
+#             a23_monthday_distortion,  # monthday_distortion
+#             a23_timeline_title,  # timeline_title
+#             None,  # note
+#         )
+#         print(f"{fiscalunit_db_rows[0]=}")
+#         print(f"{fiscalunit_db_rows[1]=}")
+#         print(f"        {expected_row0=}")
+#         print(f"        {expected_row1=}")
+#         assert fiscalunit_db_rows[0] == expected_row0
+#         assert fiscalunit_db_rows[1] == expected_row1
+#         assert fiscalunit_db_rows == [expected_row0, expected_row1]
