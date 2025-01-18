@@ -21,13 +21,6 @@ from src.f04_gift.atom_config import (
     respect_bit_str,
 )
 from src.f07_fiscal.fiscal_config import (
-    get_fiscal_config_args,
-    fiscalunit_str,
-    fiscal_deal_episode_str,
-    fiscal_cashbook_str,
-    fiscal_timeline_hour_str,
-    fiscal_timeline_month_str,
-    fiscal_timeline_weekday_str,
     present_time_str,
     amount_str,
     hour_title_str,
@@ -48,9 +41,8 @@ from src.f10_etl.transformers import (
     etl_aft_face_csv_files_to_fiscal_db,
     create_fiscal_tables,
     idea_staging_tables2fiscal_staging_tables,
-    fiscal_staging_tables2fiscal_agg_tables,
     etl_fiscal_staging_tables_to_fiscal_csvs,
-    etl_fiscal_agg_tables_to_fiscal_csvs,
+    create_fiscal_staging_fault_notes,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -981,86 +973,53 @@ VALUES
         assert len(open_file(x_fis.week_stage_csv_path)) == 84
 
 
-# def test_create_fiscal_staging_fault_notes_Scenario3_Idea_br00000_Table_WithAttrs(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_inx = "Suzy"
-#     event3 = 3
-#     event7 = 7
-#     accord23_str = "accord23"
-#     a23_fund_coin = 11
-#     a23_penny = 22
-#     a23_respect_bit = 33
-#     a23_present_time = 44
-#     a23_bridge = ";"
-#     a23_c400_number = 55
-#     a23_yr1_jan1_offset = 66
-#     a23_monthday_distortion = 77
-#     a23_timeline_title = "accord23_timeline"
-#     x_objs = FiscalPrimeObjsRef()
-#     x_cols = FiscalPrimeColumnsRef()
+def test_create_fiscal_staging_fault_notes_Scenario0_fiscalunit_NoFaults(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    a23_fund_coin = 11
+    a23_penny = 22
+    a23_respect_bit = 33
+    a23_present_time = 44
+    a23_bridge = ";"
+    a23_c400_number = 55
+    a23_yr1_jan1_offset = 66
+    a23_monthday_distortion = 77
+    a23_timeline_title = "accord23_timeline"
+    x_objs = FiscalPrimeObjsRef()
+    x_cols = FiscalPrimeColumnsRef()
 
-#     with sqlite3_connect(":memory:") as fiscal_db_conn:
-#         x_tablename = x_objs.unit_stage_tablename
-#         x_columns = x_cols.unit_staging_columns
-#         create_idea_staging_table(fiscal_db_conn, x_tablename, x_columns)
-#         insert_staging_sqlstr = f"""
-# INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
-# VALUES
-#   ('{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}')
-# , ('{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}')
-# ;
-# """
-#         print(f"{insert_staging_sqlstr=}")
-#         cursor = fiscal_db_conn.cursor()
-#         cursor.execute(insert_staging_sqlstr)
-#         create_fiscal_tables(fiscal_db_conn)
-#         assert get_row_count(fiscal_db_conn, x_tablename) == 0
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        create_fiscal_tables(fiscal_db_conn)
+        x_tablename = x_objs.unit_stage_tablename
+        assert db_table_exists(fiscal_db_conn, x_tablename)
+        insert_staging_sqlstr = f"""
+INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
+VALUES
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        assert get_row_count(fiscal_db_conn, x_tablename) == 2
+        select_sqlstr = f"SELECT {event_int_str()}, fault_note FROM {x_tablename};"
+        # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
+        cursor.execute(select_sqlstr)
+        print(f"{select_sqlstr=}")
+        rows = cursor.fetchall()
+        print(f"{rows=}")
+        assert rows == [(event3, None), (event7, None)]
 
-#         # WHEN
-#         idea_staging_tables2fiscal_staging_tables(fiscal_db_conn)
+        # WHEN
+        create_fiscal_staging_fault_notes(fiscal_db_conn)
 
-#         # THEN
-#         assert get_row_count(fiscal_db_conn, x_tablename) == 2
-#         cursor.execute(f"SELECT * FROM {x_tablename};")
-#         fiscalunit_db_rows = cursor.fetchall()
-#         expected_row0 = (
-#             br00000_str,  # idea_number
-#             sue_inx,  # face_name
-#             event3,  # event_int
-#             accord23_str,  # fiscal_title
-#             a23_fund_coin,  # fund_coin
-#             a23_penny,  # penny
-#             a23_respect_bit,  # respect_bit
-#             a23_present_time,  # present_time
-#             a23_bridge,  # bridge
-#             a23_c400_number,  # c400_number
-#             a23_yr1_jan1_offset,  # yr1_jan1_offset
-#             a23_monthday_distortion,  # monthday_distortion
-#             a23_timeline_title,  # timeline_title
-#             None,  # note
-#         )
-#         expected_row1 = (
-#             br00000_str,  # idea_number
-#             sue_inx,  # face_name
-#             event7,  # event_int
-#             accord23_str,  # fiscal_title
-#             a23_fund_coin,  # fund_coin
-#             a23_penny,  # penny
-#             a23_respect_bit,  # respect_bit
-#             a23_present_time,  # present_time
-#             a23_bridge,  # bridge
-#             a23_c400_number,  # c400_number
-#             a23_yr1_jan1_offset,  # yr1_jan1_offset
-#             a23_monthday_distortion,  # monthday_distortion
-#             a23_timeline_title,  # timeline_title
-#             None,  # note
-#         )
-#         print(f"{fiscalunit_db_rows[0]=}")
-#         print(f"{fiscalunit_db_rows[1]=}")
-#         print(f"        {expected_row0=}")
-#         print(f"        {expected_row1=}")
-#         assert fiscalunit_db_rows[0] == expected_row0
-#         assert fiscalunit_db_rows[1] == expected_row1
-#         assert fiscalunit_db_rows == [expected_row0, expected_row1]
+        # THEN
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        assert rows == [(event3, None), (event7, None)]

@@ -1016,3 +1016,7 @@ def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
     # if fiscalweek_df:
     #     upsert_sheet(fiscal_excel_path, fiscalweek_str, fiscalweek_df)
     create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)
+
+
+def create_fiscal_staging_fault_notes(fiscal_db_conn: sqlite3_Connection):
+    pass
