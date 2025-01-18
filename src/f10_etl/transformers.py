@@ -764,7 +764,7 @@ def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir:
 
 def etl_idea_staging_to_fiscal_tables(conn):
     create_fiscal_tables(conn)
-    populate_fiscal_staging_tables(conn)
+    idea_staging_tables2fiscal_staging_tables(conn)
     populate_fiscal_agg_tables(conn)
 
 
@@ -839,7 +839,7 @@ def create_fiscal_tables(conn: sqlite3_Connection):
     create_table_from_columns(conn, fiscalweek_stage, fiscalweek_stage_cols, col_types)
 
 
-def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
+def idea_staging_tables2fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
     unit_staging = "fiscalunit_staging"
     deal_staging = "fiscal_deal_episode_staging"
     cash_staging = "fiscal_cashbook_staging"
