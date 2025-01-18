@@ -765,7 +765,7 @@ def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir:
 def etl_idea_staging_to_fiscal_tables(conn):
     create_fiscal_tables(conn)
     idea_staging_tables2fiscal_staging_tables(conn)
-    populate_fiscal_agg_tables(conn)
+    fiscal_staging_tables2fiscal_agg_tables(conn)
 
 
 def create_fiscal_tables(conn: sqlite3_Connection):
@@ -840,68 +840,63 @@ def create_fiscal_tables(conn: sqlite3_Connection):
 
 
 def idea_staging_tables2fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
-    unit_staging = "fiscalunit_staging"
-    deal_staging = "fiscal_deal_episode_staging"
-    cash_staging = "fiscal_cashbook_staging"
-    hour_staging = "fiscal_timeline_hour_staging"
-    mont_staging = "fiscal_timeline_month_staging"
-    week_staging = "fiscal_timeline_weekday_staging"
-    dst_unit_columns = set(get_fiscalunit_sorted_args())
-    dst_deal_columns = set(get_fiscaldeal_sorted_args())
-    dst_cash_columns = set(get_fiscalcash_sorted_args())
-    dst_hour_columns = set(get_fiscalhour_sorted_args())
-    dst_mont_columns = set(get_fiscalmont_sorted_args())
-    dst_week_columns = set(get_fiscalweek_sorted_args())
-    dst_deal_columns.remove("fiscal_title")
-    dst_deal_columns.remove("owner_name")
-    dst_cash_columns.remove("fiscal_title")
-    dst_cash_columns.remove("owner_name")
-    dst_cash_columns.remove("acct_name")
-    dst_hour_columns.remove("fiscal_title")
-    dst_mont_columns.remove("fiscal_title")
-    dst_week_columns.remove("fiscal_title")
+    unit_dst = "fiscalunit_staging"
+    deal_dst = "fiscal_deal_episode_staging"
+    cash_dst = "fiscal_cashbook_staging"
+    hour_dst = "fiscal_timeline_hour_staging"
+    mont_dst = "fiscal_timeline_month_staging"
+    week_dst = "fiscal_timeline_weekday_staging"
+    unit_marks = set(get_fiscalunit_sorted_args())
+    deal_marks = set(get_fiscaldeal_sorted_args())
+    cash_marks = set(get_fiscalcash_sorted_args())
+    hour_marks = set(get_fiscalhour_sorted_args())
+    mont_marks = set(get_fiscalmont_sorted_args())
+    week_marks = set(get_fiscalweek_sorted_args())
+    deal_marks.remove("fiscal_title")
+    deal_marks.remove("owner_name")
+    cash_marks.remove("fiscal_title")
+    cash_marks.remove("owner_name")
+    cash_marks.remove("acct_name")
+    hour_marks.remove("fiscal_title")
+    mont_marks.remove("fiscal_title")
+    week_marks.remove("fiscal_title")
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
         if db_table_exists(fiscal_db_conn, idea_staging):
-            src_columns = get_table_columns(fiscal_db_conn, idea_staging)
-            if not dst_unit_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, unit_staging, idea_number)
-            if not dst_deal_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, deal_staging, idea_number)
-            if not dst_cash_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, cash_staging, idea_number)
-            if not dst_hour_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, hour_staging, idea_number)
-            if not dst_mont_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, mont_staging, idea_number)
-            if not dst_week_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, week_staging, idea_number)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, unit_dst, unit_marks)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, deal_dst, deal_marks)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, cash_dst, cash_marks)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, hour_dst, hour_marks)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, mont_dst, mont_marks)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, week_dst, week_marks)
 
 
 def insert_fiscal_staging(
-    fiscal_db_conn: sqlite3_Connection, dst_table: str, idea_number: str
+    fiscal_db_conn: sqlite3_Connection,
+    idea_number: str,
+    dst_table: str,
+    mark_columns: set[str],
 ):
-    # idea_number = copy_copy(src_table)
-    # idea_number = idea_number.replace("_staging", "")
     src_table = f"{idea_number}_staging"
-    dst_columns = get_table_columns(fiscal_db_conn, dst_table)
     src_columns = get_table_columns(fiscal_db_conn, src_table)
-    common_columns_set = set(dst_columns).intersection(set(src_columns))
-    common_columns_list = [col for col in dst_columns if col in common_columns_set]
-    common_columns_str = ", ".join(common_columns_list)
-    cursor = fiscal_db_conn.cursor()
-    insert_idea_staging_agg_str = f"""
+    if not mark_columns.isdisjoint(src_columns):
+        dst_columns = get_table_columns(fiscal_db_conn, dst_table)
+        common_columns_set = set(dst_columns).intersection(set(src_columns))
+        common_columns_list = [col for col in dst_columns if col in common_columns_set]
+        common_columns_str = ", ".join(common_columns_list)
+        cursor = fiscal_db_conn.cursor()
+        insert_idea_staging_agg_str = f"""
 INSERT INTO {dst_table} (idea_number, {common_columns_str})
 SELECT '{idea_number}' as idea_number, {common_columns_str}
 FROM {src_table}
 GROUP BY face_name, event_int, fiscal_title
 ;
 """
-    cursor.execute(insert_idea_staging_agg_str)
-    cursor.close()
+        cursor.execute(insert_idea_staging_agg_str)
+        cursor.close()
 
 
-def populate_fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):
+def fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):
     fiscalunit_str = "fiscalunit"
     fiscalunit_staging_tablename = f"{fiscalunit_str}_staging"
     fiscalunit_agg_tablename = f"{fiscalunit_str}_agg"

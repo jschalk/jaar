@@ -48,7 +48,7 @@ from src.f10_etl.transformers import (
     etl_aft_face_csv_files_to_fiscal_db,
     create_fiscal_tables,
     idea_staging_tables2fiscal_staging_tables,
-    populate_fiscal_agg_tables,
+    fiscal_staging_tables2fiscal_agg_tables,
     etl_fiscal_staging_tables_to_fiscal_csvs,
     etl_fiscal_agg_tables_to_fiscal_csvs,
 )

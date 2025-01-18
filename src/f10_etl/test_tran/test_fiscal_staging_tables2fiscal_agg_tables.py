@@ -48,7 +48,7 @@ from src.f10_etl.transformers import (
     etl_aft_face_csv_files_to_fiscal_db,
     create_fiscal_tables,
     idea_staging_tables2fiscal_staging_tables,
-    populate_fiscal_agg_tables,
+    fiscal_staging_tables2fiscal_agg_tables,
     etl_fiscal_staging_tables_to_fiscal_csvs,
     etl_fiscal_agg_tables_to_fiscal_csvs,
 )
@@ -58,7 +58,9 @@ from copy import copy as copy_copy
 from os.path import exists as os_path_exists
 
 
-def test_populate_fiscal_agg_tables_PopulatesFiscalAggTables(env_dir_setup_cleanup):
+def test_fiscal_staging_tables2fiscal_agg_tables_PopulatesFiscalAggTables(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -85,7 +87,7 @@ VALUES
         assert get_row_count(fiscal_db_conn, x_fis.unit_agg_tablename) == 0
 
         # WHEN
-        populate_fiscal_agg_tables(fiscal_db_conn)
+        fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn)
 
         # THEN
         assert get_row_count(fiscal_db_conn, x_fis.unit_agg_tablename) == 2
