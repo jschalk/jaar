@@ -1075,6 +1075,20 @@ WHERE inconsistency_rows.fiscal_title = fiscalunit_staging.fiscal_title
 """
     cursor.execute(update_ficalunit_sqlstr)
 
+    update_fiscaldeal_sqlstr = f"""
+WITH inconsistency_rows AS (
+    {FISCALDEAL_INCONSISTENCY_SQLSTR}
+)
+UPDATE fiscal_deal_episode_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = fiscal_deal_episode_staging.fiscal_title
+    AND inconsistency_rows.owner_name = fiscal_deal_episode_staging.owner_name
+    AND inconsistency_rows.time_int = fiscal_deal_episode_staging.time_int
+;
+"""
+    cursor.execute(update_fiscaldeal_sqlstr)
+
     update_fiscalhour_sqlstr = f"""
 WITH inconsistency_rows AS (
     {FISCALHOUR_INCONSISTENCY_SQLSTR}
