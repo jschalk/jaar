@@ -535,7 +535,6 @@ GROUP BY id
 HAVING MIN(name) != MAX(name)
     OR MIN(age) != MAX(age)
     OR MIN(hair) != MAX(hair)
-;
 """
     assert gen_sqlstr == expected_sqlstr
 
@@ -558,6 +557,5 @@ FROM dark_side
 GROUP BY id, name
 HAVING MIN(age) != MAX(age)
     OR MIN(hair) != MAX(hair)
-;
 """
     assert gen_sqlstr == expected_sqlstr

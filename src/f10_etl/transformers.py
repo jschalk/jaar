@@ -1018,49 +1018,60 @@ def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
     create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)
 
 
-def create_fiscal_staging_error_messages(fiscal_db_conn: sqlite3_Connection):
-    cursor = fiscal_db_conn.cursor()
-    select_sqlstr = """
-SELECT *
-FROM fiscalunit_staging
-;
-"""
-    cursor.execute(select_sqlstr)
-    rows = cursor.fetchall()
-    for row in rows:
-        print(f"{row=}")
-
-    select_sqlstr = """
-SELECT fiscal_title
+FISCALUNIT_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
 FROM fiscalunit_staging
 GROUP BY fiscal_title
 HAVING MIN(fund_coin) != MAX(fund_coin)
     OR MIN(penny) != MAX(penny)
+    OR MIN(respect_bit) != MAX(respect_bit)
+    OR MIN(present_time) != MAX(present_time)
+    OR MIN(bridge) != MAX(bridge)
+    OR MIN(c400_number) != MAX(c400_number)
+    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
+    OR MIN(monthday_distortion) != MAX(monthday_distortion)
+    OR MIN(timeline_title) != MAX(timeline_title)
+"""
+FISCALDEAL_INCONSISTENCY_SQLSTR = """SELECT fiscal_title, owner_name, time_int
+FROM fiscal_deal_episode_staging
+GROUP BY fiscal_title, owner_name, time_int
+HAVING MIN(quota) != MAX(quota)
+"""
+FISCALCASH_INCONSISTENCY_SQLSTR = """SELECT acct_name, fiscal_title, owner_name, time_int
+FROM fiscal_cashbook_staging
+GROUP BY acct_name, fiscal_title, owner_name, time_int
+HAVING MIN(amount) != MAX(amount)
+"""
+FISCALHOUR_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FROM fiscal_timeline_hour_staging
+GROUP BY fiscal_title
+HAVING MIN(hour_title) != MAX(hour_title)
+    OR MIN(cumlative_minute) != MAX(cumlative_minute)
+"""
+FISCALMONT_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FROM fiscal_timeline_month_staging
+GROUP BY fiscal_title
+HAVING MIN(month_title) != MAX(month_title)
+    OR MIN(cumlative_day) != MAX(cumlative_day)
+"""
+FISCALWEEK_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FROM fiscal_timeline_weekday_staging
+GROUP BY fiscal_title
+HAVING MIN(weekday_title) != MAX(weekday_title)
+    OR MIN(weekday_order) != MAX(weekday_order)
+"""
+
+
+def set_fiscal_staging_error_message(fiscal_db_conn: sqlite3_Connection):
+    cursor = fiscal_db_conn.cursor()
+    update_sqlstr = f"""
+WITH inconsistency_rows AS (
+    {FISCALUNIT_INCONSISTENCY_SQLSTR}
+)
+UPDATE fiscalunit_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = fiscalunit_staging.fiscal_title
 ;
 """
-    cursor.execute(select_sqlstr)
-    rows = cursor.fetchall()
-    for row in rows:
-        print(f"{row=}")
-
-    #     staging_error_message_update_sqlstr = f"""
-    # WITH errored_filter_titles AS (
-    #     SELECT filter_title
-    #     FROM fiscal_unit_staging
-    #     WHERE department = 'Engineering'
-    # )
-    # -- Update the salaries of the identified employees
-    # UPDATE employees
-    # SET salary = salary * 1.1
-    # WHERE id IN (SELECT id FROM engineering_employees);
-
-    # UPDATE fiscalunit_staging
-    # SET error_message = 'Inconsistent fiscal data'
-    # WHERE
-    # SELECT fiscal_title
-    # FROM {fiscalunit_staging_tablename}
-    # GROUP BY fiscal_title
-    # ;
-    # """
-    # cursor.execute(insert_idea_staging_agg)
+    cursor.execute(update_sqlstr)
     cursor.close()

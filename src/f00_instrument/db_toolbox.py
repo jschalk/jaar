@@ -367,5 +367,4 @@ def create_inconsistency_query(
 FROM {x_tablename}
 GROUP BY {focus_columns_str}
 {having_str}
-;
 """
