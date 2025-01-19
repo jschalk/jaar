@@ -19,6 +19,7 @@ from src.f00_instrument.db_toolbox import (
     get_table_columns,
     create_table_from_columns,
     create_inconsistency_query,
+    create_agg_insert_query,
 )
 from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
@@ -559,3 +560,67 @@ HAVING MIN(age) != MAX(age)
     OR MIN(hair) != MAX(hair)
 """
     assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_agg_insert_query_ReturnsObj_Scenario0():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        hair_str = "hair"
+        src_tablename = "side1"
+        src_columns = ["id", "name", "age", "email", hair_str]
+        create_table_from_columns(conn, src_tablename, src_columns, {})
+        dst_tablename = "side2"
+        dst_columns = ["name", "age", "email", hair_str]
+        create_table_from_columns(conn, dst_tablename, dst_columns, {})
+
+        # WHEN
+        gen_sqlstr = create_agg_insert_query(
+            conn,
+            dst_table=dst_tablename,
+            src_table=src_tablename,
+            exclude_cols={hair_str},
+        )
+
+        # THEN
+        expected_sqlstr = f"""INSERT INTO {dst_tablename} (name, age, email)
+SELECT name, age, email
+FROM {src_tablename}
+WHERE error_message IS NULL
+GROUP BY name, age, email
+;
+"""
+        print(f"     {gen_sqlstr=}")
+        print(f"{expected_sqlstr=}")
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_agg_insert_query_ReturnsObj_Scenario1():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        hair_str = "hair"
+        src_tablename = "side1"
+        src_columns = ["id", "name", "age", "email", hair_str]
+        create_table_from_columns(conn, src_tablename, src_columns, {})
+        dst_tablename = "side2"
+        dst_columns = ["name", "age", hair_str]
+        create_table_from_columns(conn, dst_tablename, dst_columns, {})
+
+        # WHEN
+        gen_sqlstr = create_agg_insert_query(
+            conn,
+            dst_table=dst_tablename,
+            src_table=src_tablename,
+            exclude_cols={hair_str},
+        )
+
+        # THEN
+        expected_sqlstr = f"""INSERT INTO {dst_tablename} (name, age)
+SELECT name, age
+FROM {src_tablename}
+WHERE error_message IS NULL
+GROUP BY name, age
+;
+"""
+        print(f"     {gen_sqlstr=}")
+        print(f"{expected_sqlstr=}")
+        assert gen_sqlstr == expected_sqlstr
