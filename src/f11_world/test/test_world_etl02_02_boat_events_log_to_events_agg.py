@@ -26,7 +26,7 @@ def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
         "sheet_name",
         face_name_str(),
         event_int_str(),
-        "note",
+        "error_message",
     ]
     invalid_error_str = "invalid because of conflicting event_int"
     invalid_error_str = "invalid because of conflicting event_int"
@@ -56,7 +56,7 @@ def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
     e1_yao_row = [yao_str, event1, invalid_error_str]
     e9_row = [yao_str, event9, ""]
     el_rows = [e1_sue_row, e1_yao_row, e3_row, e9_row]
-    events_agg_columns = [face_name_str(), event_int_str(), "note"]
+    events_agg_columns = [face_name_str(), event_int_str(), "error_message"]
     ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
     e_agg = "events_agg"
     gen_events_agg_df = pandas_read_excel(events_file_path, sheet_name=e_agg)
@@ -91,7 +91,7 @@ def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
     e1_yao_row = [yao_str, event1, invalid_error_str]
     e9_row = [yao_str, event9, ""]
     el_rows = [e1_sue_row, e1_yao_row, e3_row, e9_row]
-    events_agg_columns = [face_name_str(), event_int_str(), "note"]
+    events_agg_columns = [face_name_str(), event_int_str(), "error_message"]
     ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
     events_agg_str = "events_agg"
     events_file_path = create_path(boat_dir, "events.xlsx")
@@ -109,7 +109,7 @@ def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
 def test_WorldUnit_set_events_from_events_agg_file_ClearsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
-    events_agg_columns = [face_name_str(), event_int_str(), "note"]
+    events_agg_columns = [face_name_str(), event_int_str(), "error_message"]
     ex_events_agg_df = DataFrame([], columns=events_agg_columns)
     events_agg_str = "events_agg"
     events_file_path = create_path(fizz_world._boat_dir, "events.xlsx")

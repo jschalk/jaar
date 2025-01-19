@@ -17,6 +17,9 @@ from src.f00_instrument.db_toolbox import (
     create_table_from_csv,
     db_table_exists,
     get_table_columns,
+    create_table_from_columns,
+    create_inconsistency_query,
+    create_agg_insert_query,
 )
 from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
@@ -489,8 +492,8 @@ def test_sqlite_version():
 
     # Check if the version meets requirements (example: 3.30.0 or later)
     major, minor, patch = map(int, sqlite_version.split("."))
-    sqlite_old_error_message = f"SQLite version is too old: {sqlite_version}"
-    assert (major, minor, patch) >= (3, 30, 0), sqlite_old_error_message
+    sqlite_old_message = f"SQLite version is too old: {sqlite_version}"
+    assert (major, minor, patch) >= (3, 30, 0), sqlite_old_message
 
 
 def test_get_table_columns_ReturnsObj_Scenario0_TableDoesNotExist(
@@ -514,3 +517,110 @@ def test_get_table_columns_ReturnsObj_Scenario1_TableExists(
 
     # WHEN / THEN
     assert get_table_columns(conn, x_tablename) == ["id", "name", "age", "email"]
+
+
+def test_create_inconsistency_query_ReturnsObj_Scenario0():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        x_tablename = "dark_side"
+        x_columns = ["id", "name", "age", "email", "hair"]
+        create_table_from_columns(conn, x_tablename, x_columns, {})
+
+        # WHEN
+        gen_sqlstr = create_inconsistency_query(conn, x_tablename, {"id"}, {"email"})
+
+    # THEN
+    expected_sqlstr = """SELECT id
+FROM dark_side
+GROUP BY id
+HAVING MIN(name) != MAX(name)
+    OR MIN(age) != MAX(age)
+    OR MIN(hair) != MAX(hair)
+"""
+    assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_inconsistency_query_ReturnsObj_Scenario1():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        x_tablename = "dark_side"
+        x_columns = ["id", "name", "age", "email", "hair"]
+        create_table_from_columns(conn, x_tablename, x_columns, {})
+
+        # WHEN
+        gen_sqlstr = create_inconsistency_query(
+            conn, x_tablename, {"id", "name"}, {"email"}
+        )
+
+    # THEN
+    expected_sqlstr = """SELECT id, name
+FROM dark_side
+GROUP BY id, name
+HAVING MIN(age) != MAX(age)
+    OR MIN(hair) != MAX(hair)
+"""
+    assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_agg_insert_query_ReturnsObj_Scenario0():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        hair_str = "hair"
+        src_tablename = "side1"
+        src_columns = ["id", "name", "age", "email", hair_str]
+        create_table_from_columns(conn, src_tablename, src_columns, {})
+        dst_tablename = "side2"
+        dst_columns = ["name", "age", "email", hair_str]
+        create_table_from_columns(conn, dst_tablename, dst_columns, {})
+
+        # WHEN
+        gen_sqlstr = create_agg_insert_query(
+            conn,
+            dst_table=dst_tablename,
+            src_table=src_tablename,
+            exclude_cols={hair_str},
+        )
+
+        # THEN
+        expected_sqlstr = f"""INSERT INTO {dst_tablename} (name, age, email)
+SELECT name, age, email
+FROM {src_tablename}
+WHERE error_message IS NULL
+GROUP BY name, age, email
+;
+"""
+        print(f"     {gen_sqlstr=}")
+        print(f"{expected_sqlstr=}")
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_agg_insert_query_ReturnsObj_Scenario1():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        hair_str = "hair"
+        src_tablename = "side1"
+        src_columns = ["id", "name", "age", "email", hair_str]
+        create_table_from_columns(conn, src_tablename, src_columns, {})
+        dst_tablename = "side2"
+        dst_columns = ["name", "age", hair_str]
+        create_table_from_columns(conn, dst_tablename, dst_columns, {})
+
+        # WHEN
+        gen_sqlstr = create_agg_insert_query(
+            conn,
+            dst_table=dst_tablename,
+            src_table=src_tablename,
+            exclude_cols={hair_str},
+        )
+
+        # THEN
+        expected_sqlstr = f"""INSERT INTO {dst_tablename} (name, age)
+SELECT name, age
+FROM {src_tablename}
+WHERE error_message IS NULL
+GROUP BY name, age
+;
+"""
+        print(f"     {gen_sqlstr=}")
+        print(f"{expected_sqlstr=}")
+        assert gen_sqlstr == expected_sqlstr

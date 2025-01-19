@@ -346,3 +346,43 @@ def get_table_columns(conn: sqlite3_Connection, tablename: str) -> list[str]:
     columns_list = []
     columns_list.extend(db_column[1] for db_column in db_columns)
     return columns_list
+
+
+def create_inconsistency_query(
+    conn: sqlite3_Connection,
+    x_tablename: str,
+    focus_columns: set[str],
+    exclude_columns: set[str],
+) -> str:
+    table_columns = get_table_columns(conn, x_tablename)
+    having_str = None
+    for x_column in table_columns:
+        if x_column not in exclude_columns and x_column not in focus_columns:
+            if having_str:
+                having_str += f"\n    OR MIN({x_column}) != MAX({x_column})"
+            else:
+                having_str = f"HAVING MIN({x_column}) != MAX({x_column})"
+    focus_columns_str = ", ".join(sorted(list(focus_columns)))
+    return f"""SELECT {focus_columns_str}
+FROM {x_tablename}
+GROUP BY {focus_columns_str}
+{having_str}
+"""
+
+
+def create_agg_insert_query(
+    conn: sqlite3_Connection,
+    src_table: str,
+    dst_table: str,
+    exclude_cols: set[str],
+) -> str:
+    dst_columns = get_table_columns(conn, dst_table)
+    dst_columns = [dst_col for dst_col in dst_columns if dst_col not in exclude_cols]
+    dst_columns_str = ", ".join(list(dst_columns))
+    return f"""INSERT INTO {dst_table} ({dst_columns_str})
+SELECT {dst_columns_str}
+FROM {src_table}
+WHERE error_message IS NULL
+GROUP BY {dst_columns_str}
+;
+"""

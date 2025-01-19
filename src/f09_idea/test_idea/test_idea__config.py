@@ -242,7 +242,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[71] == quota_str()
     assert table_sorting_priority[72] == monthday_distortion_str()
     assert table_sorting_priority[73] == timeline_title_str()
-    assert table_sorting_priority[74] == "note"
+    assert table_sorting_priority[74] == "error_message"
     assert len(table_sorting_priority) == 75
     atom_args = set(get_atom_args_category_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
@@ -258,7 +258,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     table_sorting_priority.remove(idea_number_str())
     table_sorting_priority.remove(event_int_str())
     table_sorting_priority.remove(face_name_str())
-    table_sorting_priority.remove("note")
+    table_sorting_priority.remove("error_message")
     assert atom_fiscal_pidgin_args == set(table_sorting_priority)
 
 
@@ -334,7 +334,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(quota_str()) == "REAL"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
     assert sqlite_types.get(timeline_title_str()) == "TEXT"
-    assert sqlite_types.get("note") == "TEXT"
+    assert sqlite_types.get("error_message") == "TEXT"
 
 
 def test_get_allowed_curds_ReturnObj():

@@ -31,8 +31,6 @@ from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import (
     create_fiscalunit_jsons_from_prime_files,
-    FiscalPrimeObjsRef,
-    FiscalPrimeColumnsRef,
     get_fiscalunit_sorted_args,
     get_fiscaldeal_sorted_args,
     get_fiscalcash_sorted_args,
@@ -247,7 +245,7 @@ class boatAggToboatEventsTransformer:
 
     def get_unique_events(self, boat_agg_df: DataFrame) -> DataFrame:
         events_df = boat_agg_df[["face_name", "event_int"]].drop_duplicates()
-        events_df["note"] = (
+        events_df["error_message"] = (
             events_df["event_int"]
             .duplicated(keep=False)
             .apply(lambda x: "invalid because of conflicting event_int" if x else "")
@@ -280,7 +278,14 @@ class boatEventsToEventsLogTransformer:
         otx_events_df[["file_dir"]] = x_dir
         otx_events_df[["file_name"]] = x_file_name
         otx_events_df[["sheet_name"]] = "boat_events"
-        cols = ["file_dir", "file_name", "sheet_name", "face_name", "event_int", "note"]
+        cols = [
+            "file_dir",
+            "file_name",
+            "sheet_name",
+            "face_name",
+            "event_int",
+            "error_message",
+        ]
         otx_events_df = otx_events_df[cols]
         return otx_events_df
 
@@ -295,7 +300,7 @@ class boatEventsToEventsLogTransformer:
 
 def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
     events_agg_df = events_log_df[["face_name", "event_int"]].drop_duplicates()
-    events_agg_df["note"] = (
+    events_agg_df["error_message"] = (
         events_agg_df["event_int"]
         .duplicated(keep=False)
         .apply(lambda x: "invalid because of conflicting event_int" if x else "")
@@ -324,7 +329,7 @@ def get_events_dict_from_events_agg_file(boat_dir) -> dict[int, str]:
     events_agg_df = pandas_read_excel(events_file_path, "events_agg")
     x_dict = {}
     for index, event_agg_row in events_agg_df.iterrows():
-        x_note = event_agg_row["note"]
+        x_note = event_agg_row["error_message"]
         if x_note != "invalid because of conflicting event_int":
             x_dict[event_agg_row["event_int"]] = event_agg_row["face_name"]
     return x_dict
@@ -764,8 +769,8 @@ def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir:
 
 def etl_idea_staging_to_fiscal_tables(conn):
     create_fiscal_tables(conn)
-    populate_fiscal_staging_tables(conn)
-    populate_fiscal_agg_tables(conn)
+    idea_staging_tables2fiscal_staging_tables(conn)
+    fiscal_staging_tables2fiscal_agg_tables(conn)
 
 
 def create_fiscal_tables(conn: sqlite3_Connection):
@@ -813,12 +818,12 @@ def create_fiscal_tables(conn: sqlite3_Connection):
     fiscalhour_stage_cols = copy_copy(staging_columns)
     fiscalmont_stage_cols = copy_copy(staging_columns)
     fiscalweek_stage_cols = copy_copy(staging_columns)
-    fiscalunit_agg_cols.extend(["note"])
-    fiscaldeal_agg_cols.extend(["note"])
-    fiscalcash_agg_cols.extend(["note"])
-    fiscalhour_agg_cols.extend(["note"])
-    fiscalmont_agg_cols.extend(["note"])
-    fiscalweek_agg_cols.extend(["note"])
+    fiscalunit_agg_cols.extend(["error_message"])
+    fiscaldeal_agg_cols.extend(["error_message"])
+    fiscalcash_agg_cols.extend(["error_message"])
+    fiscalhour_agg_cols.extend(["error_message"])
+    fiscalmont_agg_cols.extend(["error_message"])
+    fiscalweek_agg_cols.extend(["error_message"])
     fiscalunit_stage_cols.extend(fiscalunit_agg_cols)
     fiscaldeal_stage_cols.extend(fiscaldeal_agg_cols)
     fiscalcash_stage_cols.extend(fiscalcash_agg_cols)
@@ -839,81 +844,235 @@ def create_fiscal_tables(conn: sqlite3_Connection):
     create_table_from_columns(conn, fiscalweek_stage, fiscalweek_stage_cols, col_types)
 
 
-def populate_fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
-    unit_staging = "fiscalunit_staging"
-    deal_staging = "fiscal_deal_episode_staging"
-    cash_staging = "fiscal_cashbook_staging"
-    hour_staging = "fiscal_timeline_hour_staging"
-    mont_staging = "fiscal_timeline_month_staging"
-    week_staging = "fiscal_timeline_weekday_staging"
-    dst_unit_columns = set(get_fiscalunit_sorted_args())
-    dst_deal_columns = set(get_fiscaldeal_sorted_args())
-    dst_cash_columns = set(get_fiscalcash_sorted_args())
-    dst_hour_columns = set(get_fiscalhour_sorted_args())
-    dst_mont_columns = set(get_fiscalmont_sorted_args())
-    dst_week_columns = set(get_fiscalweek_sorted_args())
-    dst_deal_columns.remove("fiscal_title")
-    dst_deal_columns.remove("owner_name")
-    dst_cash_columns.remove("fiscal_title")
-    dst_cash_columns.remove("owner_name")
-    dst_cash_columns.remove("acct_name")
-    dst_hour_columns.remove("fiscal_title")
-    dst_mont_columns.remove("fiscal_title")
-    dst_week_columns.remove("fiscal_title")
+def idea_staging_tables2fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
+    unit_dst = "fiscalunit_staging"
+    deal_dst = "fiscal_deal_episode_staging"
+    cash_dst = "fiscal_cashbook_staging"
+    hour_dst = "fiscal_timeline_hour_staging"
+    mont_dst = "fiscal_timeline_month_staging"
+    week_dst = "fiscal_timeline_weekday_staging"
+    unit_marks = set(get_fiscalunit_sorted_args())
+    deal_marks = set(get_fiscaldeal_sorted_args())
+    cash_marks = set(get_fiscalcash_sorted_args())
+    hour_marks = set(get_fiscalhour_sorted_args())
+    mont_marks = set(get_fiscalmont_sorted_args())
+    week_marks = set(get_fiscalweek_sorted_args())
+    deal_marks.remove("fiscal_title")
+    deal_marks.remove("owner_name")
+    cash_marks.remove("fiscal_title")
+    cash_marks.remove("owner_name")
+    cash_marks.remove("acct_name")
+    hour_marks.remove("fiscal_title")
+    mont_marks.remove("fiscal_title")
+    week_marks.remove("fiscal_title")
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
         if db_table_exists(fiscal_db_conn, idea_staging):
-            src_columns = get_table_columns(fiscal_db_conn, idea_staging)
-            if not dst_unit_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, unit_staging, idea_number)
-            if not dst_deal_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, deal_staging, idea_number)
-            if not dst_cash_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, cash_staging, idea_number)
-            if not dst_hour_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, hour_staging, idea_number)
-            if not dst_mont_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, mont_staging, idea_number)
-            if not dst_week_columns.isdisjoint(set(src_columns)):
-                insert_fiscal_staging(fiscal_db_conn, week_staging, idea_number)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, unit_dst, unit_marks)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, deal_dst, deal_marks)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, cash_dst, cash_marks)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, hour_dst, hour_marks)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, mont_dst, mont_marks)
+            insert_fiscal_staging(fiscal_db_conn, idea_number, week_dst, week_marks)
 
 
 def insert_fiscal_staging(
-    fiscal_db_conn: sqlite3_Connection, dst_table: str, idea_number: str
+    fiscal_db_conn: sqlite3_Connection,
+    idea_number: str,
+    dst_table: str,
+    mark_columns: set[str],
 ):
-    # idea_number = copy_copy(src_table)
-    # idea_number = idea_number.replace("_staging", "")
     src_table = f"{idea_number}_staging"
-    dst_columns = get_table_columns(fiscal_db_conn, dst_table)
     src_columns = get_table_columns(fiscal_db_conn, src_table)
-    common_columns_set = set(dst_columns).intersection(set(src_columns))
-    common_columns_list = [col for col in dst_columns if col in common_columns_set]
-    common_columns_str = ", ".join(common_columns_list)
-    cursor = fiscal_db_conn.cursor()
-    insert_idea_staging_agg_str = f"""
-INSERT INTO {dst_table} (idea_number, {common_columns_str})
-SELECT '{idea_number}' as idea_number, {common_columns_str}
+    if not mark_columns.isdisjoint(src_columns):
+        dst_columns = get_table_columns(fiscal_db_conn, dst_table)
+        common_columns_set = set(dst_columns).intersection(set(src_columns))
+        common_columns_list = [col for col in dst_columns if col in common_columns_set]
+        common_columns_header = ", ".join(common_columns_list)
+        cursor = fiscal_db_conn.cursor()
+        insert_idea_staging_agg_str = f"""
+INSERT INTO {dst_table} (idea_number, {common_columns_header})
+SELECT '{idea_number}' as idea_number, {common_columns_header}
 FROM {src_table}
 GROUP BY face_name, event_int, fiscal_title
 ;
 """
-    cursor.execute(insert_idea_staging_agg_str)
+        cursor.execute(insert_idea_staging_agg_str)
+        cursor.close()
+
+
+FISCALUNIT_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FROM fiscalunit_staging
+GROUP BY fiscal_title
+HAVING MIN(fund_coin) != MAX(fund_coin)
+    OR MIN(penny) != MAX(penny)
+    OR MIN(respect_bit) != MAX(respect_bit)
+    OR MIN(present_time) != MAX(present_time)
+    OR MIN(bridge) != MAX(bridge)
+    OR MIN(c400_number) != MAX(c400_number)
+    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
+    OR MIN(monthday_distortion) != MAX(monthday_distortion)
+    OR MIN(timeline_title) != MAX(timeline_title)
+"""
+FISCALDEAL_INCONSISTENCY_SQLSTR = """SELECT fiscal_title, owner_name, time_int
+FROM fiscal_deal_episode_staging
+GROUP BY fiscal_title, owner_name, time_int
+HAVING MIN(quota) != MAX(quota)
+"""
+FISCALCASH_INCONSISTENCY_SQLSTR = """SELECT acct_name, fiscal_title, owner_name, time_int
+FROM fiscal_cashbook_staging
+GROUP BY acct_name, fiscal_title, owner_name, time_int
+HAVING MIN(amount) != MAX(amount)
+"""
+FISCALHOUR_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FROM fiscal_timeline_hour_staging
+GROUP BY fiscal_title
+HAVING MIN(hour_title) != MAX(hour_title)
+    OR MIN(cumlative_minute) != MAX(cumlative_minute)
+"""
+FISCALMONT_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FROM fiscal_timeline_month_staging
+GROUP BY fiscal_title
+HAVING MIN(month_title) != MAX(month_title)
+    OR MIN(cumlative_day) != MAX(cumlative_day)
+"""
+FISCALWEEK_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FROM fiscal_timeline_weekday_staging
+GROUP BY fiscal_title
+HAVING MIN(weekday_title) != MAX(weekday_title)
+    OR MIN(weekday_order) != MAX(weekday_order)
+"""
+
+FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
+WITH inconsistency_rows AS (
+    {FISCALUNIT_INCONSISTENCY_SQLSTR}
+)
+UPDATE fiscalunit_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = fiscalunit_staging.fiscal_title
+;
+"""
+FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
+WITH inconsistency_rows AS (
+    {FISCALDEAL_INCONSISTENCY_SQLSTR}
+)
+UPDATE fiscal_deal_episode_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = fiscal_deal_episode_staging.fiscal_title
+    AND inconsistency_rows.owner_name = fiscal_deal_episode_staging.owner_name
+    AND inconsistency_rows.time_int = fiscal_deal_episode_staging.time_int
+;
+"""
+FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
+WITH inconsistency_rows AS (
+    {FISCALCASH_INCONSISTENCY_SQLSTR}
+)
+UPDATE fiscal_cashbook_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = fiscal_cashbook_staging.fiscal_title
+    AND inconsistency_rows.owner_name = fiscal_cashbook_staging.owner_name
+    AND inconsistency_rows.acct_name = fiscal_cashbook_staging.acct_name
+    AND inconsistency_rows.time_int = fiscal_cashbook_staging.time_int
+;
+"""
+FISCALHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
+WITH inconsistency_rows AS (
+    {FISCALHOUR_INCONSISTENCY_SQLSTR}
+)
+UPDATE fiscal_timeline_hour_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = fiscal_timeline_hour_staging.fiscal_title
+;
+"""
+FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
+WITH inconsistency_rows AS (
+    {FISCALMONT_INCONSISTENCY_SQLSTR}
+)
+UPDATE fiscal_timeline_month_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = fiscal_timeline_month_staging.fiscal_title
+;
+"""
+FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
+WITH inconsistency_rows AS (
+    {FISCALWEEK_INCONSISTENCY_SQLSTR}
+)
+UPDATE fiscal_timeline_weekday_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = fiscal_timeline_weekday_staging.fiscal_title
+;
+"""
+
+
+def set_fiscal_staging_error_message(fiscal_db_conn: sqlite3_Connection):
+    cursor = fiscal_db_conn.cursor()
+    cursor.execute(FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
+    cursor.execute(FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
+    cursor.execute(FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
+    cursor.execute(FISCALHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
+    cursor.execute(FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
+    cursor.execute(FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
     cursor.close()
 
 
-def populate_fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):
-    fiscalunit_str = "fiscalunit"
-    fiscalunit_staging_tablename = f"{fiscalunit_str}_staging"
-    fiscalunit_agg_tablename = f"{fiscalunit_str}_agg"
-    cursor = fiscal_db_conn.cursor()
-    insert_idea_staging_agg = f"""
-INSERT INTO {fiscalunit_agg_tablename} (fiscal_title)
-SELECT fiscal_title
-FROM {fiscalunit_staging_tablename}
-GROUP BY fiscal_title
+FISCALUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscalunit_agg (fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title)
+SELECT fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title
+FROM fiscalunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title
 ;
 """
-    cursor.execute(insert_idea_staging_agg)
+FISCALDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_deal_episode_agg (fiscal_title, owner_name, time_int, quota)
+SELECT fiscal_title, owner_name, time_int, quota
+FROM fiscal_deal_episode_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, owner_name, time_int, quota
+;
+"""
+FISCALCASH_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_cashbook_agg (fiscal_title, owner_name, acct_name, time_int, amount)
+SELECT fiscal_title, owner_name, acct_name, time_int, amount
+FROM fiscal_cashbook_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, owner_name, acct_name, time_int, amount
+;
+"""
+FISCALHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_hour_agg (fiscal_title, hour_title, cumlative_minute)
+SELECT fiscal_title, hour_title, cumlative_minute
+FROM fiscal_timeline_hour_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, hour_title, cumlative_minute
+;
+"""
+FISCALMONT_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_month_agg (fiscal_title, month_title, cumlative_day)
+SELECT fiscal_title, month_title, cumlative_day
+FROM fiscal_timeline_month_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, month_title, cumlative_day
+;
+"""
+FISCALWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_weekday_agg (fiscal_title, weekday_title, weekday_order)
+SELECT fiscal_title, weekday_title, weekday_order
+FROM fiscal_timeline_weekday_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, weekday_title, weekday_order
+;
+"""
+
+
+def fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):
+    cursor = fiscal_db_conn.cursor()
+    cursor.execute(FISCALUNIT_AGG_INSERT_SQLSTR)
+    # cursor.execute(FISCALDEAL_AGG_INSERT_SQLSTR)
+    # cursor.execute(FISCALCASH_AGG_INSERT_SQLSTR)
+    # cursor.execute(FISCALHOUR_AGG_INSERT_SQLSTR)
+    # cursor.execute(FISCALMONT_AGG_INSERT_SQLSTR)
+    # cursor.execute(FISCALWEEK_AGG_INSERT_SQLSTR)
     cursor.close()
 
 
