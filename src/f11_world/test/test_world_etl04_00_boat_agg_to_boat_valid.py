@@ -111,7 +111,7 @@ def test_WorldUnit_boat_agg_to_boat_valid_CreatesSheets_Scenario0(
 #     # THEN
 #     gen_otx_events_df = pandas_read_excel(boat_file_path, sheet_name="boat_valid")
 #     print(f"{gen_otx_events_df.columns=}")
-#     events_otx_columns = [face_name_str(), event_int_str(), "fault_note"]
+#     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
 #     bob_row = [bob_str, event3, ""]
 #     sue_row = [sue_str, event1, "invalid because of conflicting event_int"]
 #     yao1_row = [yao_str, event1, "invalid because of conflicting event_int"]

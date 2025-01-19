@@ -128,7 +128,7 @@ class FiscalPrimeColumnsRef:
         self.week_agg_columns = ["fiscal_title", "weekday_title", "weekday_order"]
 
         _front_cols = ["idea_number", "face_name", "event_int"]
-        _back_cols = ["fault_note"]
+        _back_cols = ["error_message"]
         self.unit_agg_csv_header = "fiscal_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title"
         self.deal_agg_csv_header = "fiscal_title,owner_name,time_int,quota"
         self.cash_agg_csv_header = "fiscal_title,owner_name,acct_name,time_int,amount"
@@ -141,12 +141,12 @@ class FiscalPrimeColumnsRef:
         self.hour_staging_columns = [*_front_cols, *self.hour_agg_columns, *_back_cols]
         self.mont_staging_columns = [*_front_cols, *self.mont_agg_columns, *_back_cols]
         self.week_staging_columns = [*_front_cols, *self.week_agg_columns, *_back_cols]
-        self.unit_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title,fault_note"""
-        self.deal_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,owner_name,time_int,quota,fault_note"""
-        self.cash_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,owner_name,acct_name,time_int,amount,fault_note"""
-        self.hour_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,hour_title,cumlative_minute,fault_note"""
-        self.mont_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,month_title,cumlative_day,fault_note"""
-        self.week_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,weekday_title,weekday_order,fault_note"""
+        self.unit_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title,error_message"""
+        self.deal_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,owner_name,time_int,quota,error_message"""
+        self.cash_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,owner_name,acct_name,time_int,amount,error_message"""
+        self.hour_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,hour_title,cumlative_minute,error_message"""
+        self.mont_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,month_title,cumlative_day,error_message"""
+        self.week_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,weekday_title,weekday_order,error_message"""
         self.unit_agg_empty_csv = f"{self.unit_agg_csv_header}\n"
         self.deal_agg_empty_csv = f"{self.deal_agg_csv_header}\n"
         self.cash_agg_empty_csv = f"{self.cash_agg_csv_header}\n"

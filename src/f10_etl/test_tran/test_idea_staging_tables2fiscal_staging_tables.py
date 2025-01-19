@@ -3,6 +3,7 @@ from src.f00_instrument.db_toolbox import (
     db_table_exists,
     get_row_count,
     create_table_from_columns,
+    create_inconsistency_query,
 )
 from src.f01_road.finance_tran import bridge_str, quota_str, time_int_str
 from src.f03_chrono.chrono import (
@@ -42,7 +43,7 @@ from src.f10_etl.transformers import (
     create_fiscal_tables,
     idea_staging_tables2fiscal_staging_tables,
     etl_fiscal_staging_tables_to_fiscal_csvs,
-    create_fiscal_staging_fault_notes,
+    create_fiscal_staging_error_messages,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -904,7 +905,7 @@ VALUES
         print(f"{expected_fiscalunit_csv_str=}")
         assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
         # confirming file is non-zero length, has column headers
-        assert len(open_file(x_fis.deal_stage_csv_path)) == 82
+        assert len(open_file(x_fis.deal_stage_csv_path)) == 85
         assert len(open_file(x_fis.cash_stage_csv_path)) == 87
         assert len(open_file(x_fis.hour_stage_csv_path)) == 78
         assert len(open_file(x_fis.mont_stage_csv_path)) == 76
@@ -966,14 +967,134 @@ VALUES
         print(f"{expected_fiscalunit_csv_str=}")
         assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
         # confirming file is non-zero length, has column headers
-        assert len(open_file(x_fis.deal_stage_csv_path)) == 82
-        assert len(open_file(x_fis.cash_stage_csv_path)) == 93
-        assert len(open_file(x_fis.hour_stage_csv_path)) == 84
-        assert len(open_file(x_fis.mont_stage_csv_path)) == 82
-        assert len(open_file(x_fis.week_stage_csv_path)) == 84
+        assert len(open_file(x_fis.deal_stage_csv_path)) == 85
+        assert len(open_file(x_fis.cash_stage_csv_path)) == 96
+        assert len(open_file(x_fis.hour_stage_csv_path)) == 87
+        assert len(open_file(x_fis.mont_stage_csv_path)) == 85
+        assert len(open_file(x_fis.week_stage_csv_path)) == 87
 
 
-def test_create_fiscal_staging_fault_notes_Scenario0_fiscalunit_NoFaults(
+def test_create_inconsistency_query_ReturnsFiscalCategory_sqlstrs():
+    # ESTABLISH
+    x_objs = FiscalPrimeObjsRef()
+    exclude_cols = {"idea_number", "face_name", "event_int", "error_message"}
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        create_fiscal_tables(fiscal_db_conn)
+
+        # WHEN
+        unit_tablename = x_objs.unit_stage_tablename
+        unit_focus_columns = {fiscal_title_str()}
+        generated_fiscalunit_sqlstr = create_inconsistency_query(
+            fiscal_db_conn, unit_tablename, unit_focus_columns, exclude_cols
+        )
+
+        # THEN
+        expected_fiscalunit_sqlstr = """SELECT fiscal_title
+FROM fiscalunit_staging
+GROUP BY fiscal_title
+HAVING MIN(fund_coin) != MAX(fund_coin)
+    OR MIN(penny) != MAX(penny)
+    OR MIN(respect_bit) != MAX(respect_bit)
+    OR MIN(present_time) != MAX(present_time)
+    OR MIN(bridge) != MAX(bridge)
+    OR MIN(c400_number) != MAX(c400_number)
+    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
+    OR MIN(monthday_distortion) != MAX(monthday_distortion)
+    OR MIN(timeline_title) != MAX(timeline_title)
+;
+"""
+        print(f"{generated_fiscalunit_sqlstr=}")
+        assert generated_fiscalunit_sqlstr == expected_fiscalunit_sqlstr
+
+        # WHEN
+        deal_tablename = x_objs.deal_stage_tablename
+        deal_focus_columns = {fiscal_title_str(), owner_name_str(), time_int_str()}
+        generated_fiscaldeal_sqlstr = create_inconsistency_query(
+            fiscal_db_conn, deal_tablename, deal_focus_columns, exclude_cols
+        )
+
+        # THEN
+        expected_fiscaldeal_sqlstr = """SELECT fiscal_title, owner_name, time_int
+FROM fiscal_deal_episode_staging
+GROUP BY fiscal_title, owner_name, time_int
+HAVING MIN(quota) != MAX(quota)
+;
+"""
+        print(f"{generated_fiscaldeal_sqlstr=}")
+        assert generated_fiscaldeal_sqlstr == expected_fiscaldeal_sqlstr
+
+        # WHEN
+        cash_tablename = x_objs.cash_stage_tablename
+        cash_focus_columns = {
+            fiscal_title_str(),
+            owner_name_str(),
+            acct_name_str(),
+            time_int_str(),
+        }
+        generated_fiscalcash_sqlstr = create_inconsistency_query(
+            fiscal_db_conn, cash_tablename, cash_focus_columns, exclude_cols
+        )
+
+        # THEN
+        expected_fiscalcash_sqlstr = """SELECT acct_name, fiscal_title, owner_name, time_int
+FROM fiscal_cashbook_staging
+GROUP BY acct_name, fiscal_title, owner_name, time_int
+HAVING MIN(amount) != MAX(amount)
+;
+"""
+        print(f"{generated_fiscalcash_sqlstr=}")
+        assert generated_fiscalcash_sqlstr == expected_fiscalcash_sqlstr
+
+        # WHEN
+        hour_tablename = x_objs.hour_stage_tablename
+        generated_fiscalhour_sqlstr = create_inconsistency_query(
+            fiscal_db_conn, hour_tablename, {fiscal_title_str()}, exclude_cols
+        )
+
+        # THEN
+        expected_fiscalhour_sqlstr = """SELECT fiscal_title
+FROM fiscal_timeline_hour_staging
+GROUP BY fiscal_title
+HAVING MIN(hour_title) != MAX(hour_title)
+    OR MIN(cumlative_minute) != MAX(cumlative_minute)
+;
+"""
+        assert generated_fiscalhour_sqlstr == expected_fiscalhour_sqlstr
+
+        # WHEN
+        mont_tablename = x_objs.mont_stage_tablename
+        generated_fiscalmont_sqlstr = create_inconsistency_query(
+            fiscal_db_conn, mont_tablename, {fiscal_title_str()}, exclude_cols
+        )
+
+        # THEN
+        expected_fiscalmont_sqlstr = """SELECT fiscal_title
+FROM fiscal_timeline_month_staging
+GROUP BY fiscal_title
+HAVING MIN(month_title) != MAX(month_title)
+    OR MIN(cumlative_day) != MAX(cumlative_day)
+;
+"""
+        assert expected_fiscalmont_sqlstr == generated_fiscalmont_sqlstr
+
+        # WHEN
+        week_tablename = x_objs.week_stage_tablename
+        generated_fiscalweek_sqlstr = create_inconsistency_query(
+            fiscal_db_conn, week_tablename, {fiscal_title_str()}, exclude_cols
+        )
+
+        # THEN
+        expected_fiscalweek_sqlstr = """SELECT fiscal_title
+FROM fiscal_timeline_weekday_staging
+GROUP BY fiscal_title
+HAVING MIN(weekday_title) != MAX(weekday_title)
+    OR MIN(weekday_order) != MAX(weekday_order)
+;
+"""
+        assert expected_fiscalweek_sqlstr == generated_fiscalweek_sqlstr
+
+
+def test_create_fiscal_staging_error_messages_Scenario0_fiscalunit_NoFaults(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -1008,7 +1129,7 @@ VALUES
         cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
         assert get_row_count(fiscal_db_conn, x_tablename) == 2
-        select_sqlstr = f"SELECT {event_int_str()}, fault_note FROM {x_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, error_message FROM {x_tablename};"
         # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
         print(f"{select_sqlstr=}")
@@ -1017,9 +1138,74 @@ VALUES
         assert rows == [(event3, None), (event7, None)]
 
         # WHEN
-        create_fiscal_staging_fault_notes(fiscal_db_conn)
+        create_fiscal_staging_error_messages(fiscal_db_conn)
 
         # THEN
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         assert rows == [(event3, None), (event7, None)]
+
+
+# def test_create_fiscal_staging_error_messages_Scenario1_fiscalunit_AllFaults(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     sue_inx = "Suzy"
+#     event3 = 3
+#     event7 = 7
+#     accord23_str = "accord23"
+#     accord45_str = "accord45"
+#     a23_fund_coin = 11
+#     a23_penny_1 = 22
+#     a23_penny_2 = 99
+#     a23_respect_bit = 33
+#     a23_present_time = 44
+#     a23_bridge = ";"
+#     a23_c400_number = 55
+#     a23_yr1_jan1_offset = 66
+#     a23_monthday_distortion = 77
+#     a23_timeline_title = "accord23_timeline"
+#     x_objs = FiscalPrimeObjsRef()
+#     x_cols = FiscalPrimeColumnsRef()
+
+#     with sqlite3_connect(":memory:") as fiscal_db_conn:
+#         create_fiscal_tables(fiscal_db_conn)
+#         x_tablename = x_objs.unit_stage_tablename
+#         assert db_table_exists(fiscal_db_conn, x_tablename)
+#         insert_staging_sqlstr = f"""
+# INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
+# VALUES
+#   ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+# , ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+# , ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+# ;
+# """
+#         print(f"{insert_staging_sqlstr=}")
+#         cursor = fiscal_db_conn.cursor()
+#         cursor.execute(insert_staging_sqlstr)
+#         assert get_row_count(fiscal_db_conn, x_tablename) == 3
+#         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, error_message FROM {x_tablename};"
+#         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
+#         cursor.execute(select_sqlstr)
+#         # print(f"{select_sqlstr=}")
+#         rows = cursor.fetchall()
+#         # print(f"{rows=}")
+#         assert rows == [
+#             (event3, accord23_str, None),
+#             (event7, accord23_str, None),
+#             (event7, accord45_str, None),
+#         ]
+
+#         # WHEN
+#         create_fiscal_staging_error_messages(fiscal_db_conn)
+
+#         # THEN
+#         cursor.execute(select_sqlstr)
+#         rows = cursor.fetchall()
+#         x_error_message = "Inconsistent fiscal data"
+#         assert rows == [
+#             (event3, accord23_str, x_error_message),
+#             (event7, accord23_str, x_error_message),
+#             (event7, accord45_str, None),
+#         ]
+#     assert 1 == 2

@@ -247,7 +247,7 @@ class boatAggToboatEventsTransformer:
 
     def get_unique_events(self, boat_agg_df: DataFrame) -> DataFrame:
         events_df = boat_agg_df[["face_name", "event_int"]].drop_duplicates()
-        events_df["fault_note"] = (
+        events_df["error_message"] = (
             events_df["event_int"]
             .duplicated(keep=False)
             .apply(lambda x: "invalid because of conflicting event_int" if x else "")
@@ -286,7 +286,7 @@ class boatEventsToEventsLogTransformer:
             "sheet_name",
             "face_name",
             "event_int",
-            "fault_note",
+            "error_message",
         ]
         otx_events_df = otx_events_df[cols]
         return otx_events_df
@@ -302,7 +302,7 @@ class boatEventsToEventsLogTransformer:
 
 def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
     events_agg_df = events_log_df[["face_name", "event_int"]].drop_duplicates()
-    events_agg_df["fault_note"] = (
+    events_agg_df["error_message"] = (
         events_agg_df["event_int"]
         .duplicated(keep=False)
         .apply(lambda x: "invalid because of conflicting event_int" if x else "")
@@ -331,7 +331,7 @@ def get_events_dict_from_events_agg_file(boat_dir) -> dict[int, str]:
     events_agg_df = pandas_read_excel(events_file_path, "events_agg")
     x_dict = {}
     for index, event_agg_row in events_agg_df.iterrows():
-        x_note = event_agg_row["fault_note"]
+        x_note = event_agg_row["error_message"]
         if x_note != "invalid because of conflicting event_int":
             x_dict[event_agg_row["event_int"]] = event_agg_row["face_name"]
     return x_dict
@@ -820,12 +820,12 @@ def create_fiscal_tables(conn: sqlite3_Connection):
     fiscalhour_stage_cols = copy_copy(staging_columns)
     fiscalmont_stage_cols = copy_copy(staging_columns)
     fiscalweek_stage_cols = copy_copy(staging_columns)
-    fiscalunit_agg_cols.extend(["fault_note"])
-    fiscaldeal_agg_cols.extend(["fault_note"])
-    fiscalcash_agg_cols.extend(["fault_note"])
-    fiscalhour_agg_cols.extend(["fault_note"])
-    fiscalmont_agg_cols.extend(["fault_note"])
-    fiscalweek_agg_cols.extend(["fault_note"])
+    fiscalunit_agg_cols.extend(["error_message"])
+    fiscaldeal_agg_cols.extend(["error_message"])
+    fiscalcash_agg_cols.extend(["error_message"])
+    fiscalhour_agg_cols.extend(["error_message"])
+    fiscalmont_agg_cols.extend(["error_message"])
+    fiscalweek_agg_cols.extend(["error_message"])
     fiscalunit_stage_cols.extend(fiscalunit_agg_cols)
     fiscaldeal_stage_cols.extend(fiscaldeal_agg_cols)
     fiscalcash_stage_cols.extend(fiscalcash_agg_cols)
@@ -1018,5 +1018,49 @@ def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
     create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)
 
 
-def create_fiscal_staging_fault_notes(fiscal_db_conn: sqlite3_Connection):
-    pass
+def create_fiscal_staging_error_messages(fiscal_db_conn: sqlite3_Connection):
+    cursor = fiscal_db_conn.cursor()
+    select_sqlstr = """
+SELECT *
+FROM fiscalunit_staging
+;
+"""
+    cursor.execute(select_sqlstr)
+    rows = cursor.fetchall()
+    for row in rows:
+        print(f"{row=}")
+
+    select_sqlstr = """
+SELECT fiscal_title
+FROM fiscalunit_staging
+GROUP BY fiscal_title
+HAVING MIN(fund_coin) != MAX(fund_coin)
+    OR MIN(penny) != MAX(penny)
+;
+"""
+    cursor.execute(select_sqlstr)
+    rows = cursor.fetchall()
+    for row in rows:
+        print(f"{row=}")
+
+    #     staging_error_message_update_sqlstr = f"""
+    # WITH errored_filter_titles AS (
+    #     SELECT filter_title
+    #     FROM fiscal_unit_staging
+    #     WHERE department = 'Engineering'
+    # )
+    # -- Update the salaries of the identified employees
+    # UPDATE employees
+    # SET salary = salary * 1.1
+    # WHERE id IN (SELECT id FROM engineering_employees);
+
+    # UPDATE fiscalunit_staging
+    # SET error_message = 'Inconsistent fiscal data'
+    # WHERE
+    # SELECT fiscal_title
+    # FROM {fiscalunit_staging_tablename}
+    # GROUP BY fiscal_title
+    # ;
+    # """
+    # cursor.execute(insert_idea_staging_agg)
+    cursor.close()
