@@ -1060,10 +1060,7 @@ HAVING MIN(weekday_title) != MAX(weekday_title)
     OR MIN(weekday_order) != MAX(weekday_order)
 """
 
-
-def set_fiscal_staging_error_message(fiscal_db_conn: sqlite3_Connection):
-    cursor = fiscal_db_conn.cursor()
-    update_ficalunit_sqlstr = f"""
+FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
 WITH inconsistency_rows AS (
     {FISCALUNIT_INCONSISTENCY_SQLSTR}
 )
@@ -1073,9 +1070,7 @@ FROM inconsistency_rows
 WHERE inconsistency_rows.fiscal_title = fiscalunit_staging.fiscal_title
 ;
 """
-    cursor.execute(update_ficalunit_sqlstr)
-
-    update_fiscaldeal_sqlstr = f"""
+FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
 WITH inconsistency_rows AS (
     {FISCALDEAL_INCONSISTENCY_SQLSTR}
 )
@@ -1087,9 +1082,20 @@ WHERE inconsistency_rows.fiscal_title = fiscal_deal_episode_staging.fiscal_title
     AND inconsistency_rows.time_int = fiscal_deal_episode_staging.time_int
 ;
 """
-    cursor.execute(update_fiscaldeal_sqlstr)
-
-    update_fiscalhour_sqlstr = f"""
+FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
+WITH inconsistency_rows AS (
+    {FISCALCASH_INCONSISTENCY_SQLSTR}
+)
+UPDATE fiscal_cashbook_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = fiscal_cashbook_staging.fiscal_title
+    AND inconsistency_rows.owner_name = fiscal_cashbook_staging.owner_name
+    AND inconsistency_rows.acct_name = fiscal_cashbook_staging.acct_name
+    AND inconsistency_rows.time_int = fiscal_cashbook_staging.time_int
+;
+"""
+FISCALHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
 WITH inconsistency_rows AS (
     {FISCALHOUR_INCONSISTENCY_SQLSTR}
 )
@@ -1099,9 +1105,7 @@ FROM inconsistency_rows
 WHERE inconsistency_rows.fiscal_title = fiscal_timeline_hour_staging.fiscal_title
 ;
 """
-    cursor.execute(update_fiscalhour_sqlstr)
-
-    update_fiscalhour_sqlstr = f"""
+FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
 WITH inconsistency_rows AS (
     {FISCALMONT_INCONSISTENCY_SQLSTR}
 )
@@ -1111,9 +1115,7 @@ FROM inconsistency_rows
 WHERE inconsistency_rows.fiscal_title = fiscal_timeline_month_staging.fiscal_title
 ;
 """
-    cursor.execute(update_fiscalhour_sqlstr)
-
-    update_fiscalweek_sqlstr = f"""
+FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
 WITH inconsistency_rows AS (
     {FISCALWEEK_INCONSISTENCY_SQLSTR}
 )
@@ -1123,6 +1125,14 @@ FROM inconsistency_rows
 WHERE inconsistency_rows.fiscal_title = fiscal_timeline_weekday_staging.fiscal_title
 ;
 """
-    cursor.execute(update_fiscalweek_sqlstr)
 
+
+def set_fiscal_staging_error_message(fiscal_db_conn: sqlite3_Connection):
+    cursor = fiscal_db_conn.cursor()
+    cursor.execute(FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
+    cursor.execute(FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
+    cursor.execute(FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
+    cursor.execute(FISCALHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
+    cursor.execute(FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
+    cursor.execute(FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
     cursor.close()

@@ -1406,69 +1406,69 @@ VALUES
         ]
 
 
-# def test_set_fiscal_staging_error_message_Scenario6_fiscal_Some_error_message(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_inx = "Suzy"
-#     bob_inx = "Bobby"
-#     event3 = 3
-#     event7 = 7
-#     accord23_str = "accord23"
-#     accord45_str = "accord45"
-#     a23_owner_name = bob_inx
-#     t1_time_int = 33
-#     t1_quota_1 = 200
-#     t1_quota_2 = 300
-#     t2_time_int = 55
-#     t2_quota = 400
-#     x_objs = FiscalPrimeObjsRef()
-#     x_cols = FiscalPrimeColumnsRef()
+def test_set_fiscal_staging_error_message_Scenario6_fiscalcash_Some_error_message(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bobby"
+    yao_inx = "Yao"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    t1_time_int = 33
+    t2_time_int = 55
+    t1_amount_1 = 200
+    t1_amount_2 = 300
+    t2_amount = 400
+    x_objs = FiscalPrimeObjsRef()
+    x_cols = FiscalPrimeColumnsRef()
 
-#     with sqlite3_connect(":memory:") as fiscal_db_conn:
-#         create_fiscal_tables(fiscal_db_conn)
-#         x_tablename = x_objs.deal_stage_tablename
-#         assert db_table_exists(fiscal_db_conn, x_tablename)
-#         insert_staging_sqlstr = f"""
-# INSERT INTO {x_tablename} ({x_cols.deal_staging_csv_header})
-# VALUES
-#   ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_2},NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL)
-# ;
-# """
-#         print(f"{insert_staging_sqlstr=}")
-#         cursor = fiscal_db_conn.cursor()
-#         cursor.execute(insert_staging_sqlstr)
-#         assert get_row_count(fiscal_db_conn, x_tablename) == 5
-#         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, {time_int_str()}, error_message FROM {x_tablename};"
-#         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
-#         cursor.execute(select_sqlstr)
-#         # print(f"{select_sqlstr=}")
-#         rows = cursor.fetchall()
-#         # print(f"{rows=}")
-#         assert rows == [
-#             (event3, accord23_str, t1_time_int, None),
-#             (event7, accord23_str, t1_time_int, None),
-#             (event7, accord23_str, t2_time_int, None),
-#             (event7, accord45_str, t1_time_int, None),
-#             (event7, accord45_str, t2_time_int, None),
-#         ]
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        create_fiscal_tables(fiscal_db_conn)
+        x_tablename = x_objs.cash_stage_tablename
+        assert db_table_exists(fiscal_db_conn, x_tablename)
+        insert_staging_sqlstr = f"""
+INSERT INTO {x_tablename} ({x_cols.cash_staging_csv_header})
+VALUES
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{yao_inx}','{bob_inx}',{t1_time_int},{t1_amount_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{yao_inx}','{bob_inx}',{t1_time_int},{t1_amount_2},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{yao_inx}','{bob_inx}',{t2_time_int},{t2_amount},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{yao_inx}','{bob_inx}',{t1_time_int},{t1_amount_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{yao_inx}','{bob_inx}',{t2_time_int},{t2_amount},NULL)
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        assert get_row_count(fiscal_db_conn, x_tablename) == 5
+        select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, {time_int_str()}, error_message FROM {x_tablename};"
+        # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
+        cursor.execute(select_sqlstr)
+        # print(f"{select_sqlstr=}")
+        rows = cursor.fetchall()
+        # print(f"{rows=}")
+        assert rows == [
+            (event3, accord23_str, t1_time_int, None),
+            (event7, accord23_str, t1_time_int, None),
+            (event7, accord23_str, t2_time_int, None),
+            (event7, accord45_str, t1_time_int, None),
+            (event7, accord45_str, t2_time_int, None),
+        ]
 
-#         # WHEN
-#         set_fiscal_staging_error_message(fiscal_db_conn)
+        # WHEN
+        set_fiscal_staging_error_message(fiscal_db_conn)
 
-#         # THEN
-#         cursor.execute(select_sqlstr)
-#         rows = cursor.fetchall()
-#         print(f"{rows=}")
-#         x_error_message = "Inconsistent fiscal data"
-#         assert rows == [
-#             (event3, accord23_str, t1_time_int, x_error_message),
-#             (event7, accord23_str, t1_time_int, x_error_message),
-#             (event7, accord23_str, t2_time_int, None),
-#             (event7, accord45_str, t1_time_int, None),
-#             (event7, accord45_str, t2_time_int, None),
-#         ]
+        # THEN
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        print(f"{rows=}")
+        x_error_message = "Inconsistent fiscal data"
+        assert rows == [
+            (event3, accord23_str, t1_time_int, x_error_message),
+            (event7, accord23_str, t1_time_int, x_error_message),
+            (event7, accord23_str, t2_time_int, None),
+            (event7, accord45_str, t1_time_int, None),
+            (event7, accord45_str, t2_time_int, None),
+        ]
