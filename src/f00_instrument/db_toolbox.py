@@ -355,7 +355,6 @@ def create_inconsistency_query(
     exclude_columns: set[str],
 ) -> str:
     table_columns = get_table_columns(conn, x_tablename)
-    print(f"{table_columns=}")
     having_str = None
     for x_column in table_columns:
         if x_column not in exclude_columns and x_column not in focus_columns:
