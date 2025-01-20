@@ -757,14 +757,16 @@ def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 
 
-def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir: str):
+def etl_aft_face_csv_files_to_fiscal_db(
+    conn_or_cursor: sqlite3_Connection, faces_aft_dir: str
+):
     for face_name in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_name)
         for idea_number in sorted(get_idea_numbers()):
             csv_filename = f"{idea_number}.csv"
             csv_path = create_path(face_dir, csv_filename)
             if os_path_exists(csv_path):
-                insert_idea_csv(csv_path, conn, f"{idea_number}_staging")
+                insert_idea_csv(csv_path, conn_or_cursor, f"{idea_number}_staging")
 
 
 def etl_idea_staging_to_fiscal_tables(conn):
@@ -773,7 +775,8 @@ def etl_idea_staging_to_fiscal_tables(conn):
     fiscal_staging_tables2fiscal_agg_tables(conn)
 
 
-def create_fiscal_tables(conn: sqlite3_Connection):
+def create_fiscal_tables(conn_or_cursor: sqlite3_Connection):
+    conn = conn_or_cursor
     fiscalunit_agg_cols = [
         "fiscal_title",
         "fund_coin",
@@ -1012,9 +1015,6 @@ WHERE inconsistency_rows.fiscal_title = fiscal_timeline_weekday_staging.fiscal_t
 
 def set_fiscal_staging_error_message(fiscal_db_conn: sqlite3_Connection):
     cursor = fiscal_db_conn.cursor()
-    cursor.execute(FISCALWEEK_INCONSISTENCY_SQLSTR)
-    print(f"{cursor.fetchall()=}")
-
     cursor.execute(FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
     cursor.execute(FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
     cursor.execute(FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)

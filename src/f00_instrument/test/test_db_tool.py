@@ -374,7 +374,31 @@ def test_insert_csv_ChangesDBState(
     assert rows == expected_data
 
 
-def test_insert_csv_ChangesCommitted(
+def test_insert_csv_ChangesDBState_WhenPassedCursorObj(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
+    """Test the insert_csv function using pytest."""
+    # ESTABLISH
+    conn, test_table, test_csv = setup_database_and_csv
+
+    # WHEN
+    insert_csv(test_csv, conn.cursor(), test_table)
+
+    # THEN
+    # Verify the data was inserted correctly
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM {test_table}")
+    rows = cursor.fetchall()
+
+    # Expected data
+    expected_data = [
+        (1, "John Doe", 30, "john@example.com"),
+        (2, "Jane Smith", 25, "jane@example.com"),
+    ]
+    assert rows == expected_data
+
+
+def test_insert_csv_ChangesNotCommitted(
     setup_database_and_csv: tuple[sqlite3_Connection, str, str]
 ):
     """Test that changes are committed to the database."""
@@ -394,12 +418,7 @@ def test_insert_csv_ChangesCommitted(
     conn.close()
 
     # Expected data
-    expected_data = [
-        (1, "John Doe", 30, "john@example.com"),
-        (2, "Jane Smith", 25, "jane@example.com"),
-    ]
-
-    assert rows == expected_data
+    assert rows == []
 
 
 def test_create_table_from_csv_ChangesDBState(
@@ -459,15 +478,13 @@ def test_create_idea_table_from_csv_DoesNothingIfTableExists(
     assert cursor.fetchall() == before_data
 
 
-def test_table_exists_ReturnsObj():
+def test_table_exists_ReturnsObjWhenPassedConnectionObj():
     # ESTABLISH
     conn = sqlite3_connect(":memory:")
     users_tablename = "users"
-
-    # WHEN / THEN
     assert db_table_exists(conn, users_tablename) is False
 
-    # ESTABLISH
+    # WHEN
     cursor = conn.cursor()
     cursor.execute(
         """
@@ -477,10 +494,30 @@ def test_table_exists_ReturnsObj():
         )
     """
     )
-    conn.commit()
 
-    # WHEN / THEN
+    # THEN
     assert db_table_exists(conn, users_tablename)
+
+
+def test_table_exists_ReturnsObjWhenPassedCusorObj():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        users_tablename = "users"
+        assert db_table_exists(cursor, users_tablename) is False
+
+        # WHEN
+        cursor.execute(
+            """
+            CREATE TABLE users (
+                id INTEGER PRIMARY KEY,
+                name TEXT NOT NULL
+            )
+        """
+        )
+
+        # THEN
+        assert db_table_exists(cursor, users_tablename)
 
 
 def test_sqlite_version():
@@ -517,6 +554,18 @@ def test_get_table_columns_ReturnsObj_Scenario1_TableExists(
 
     # WHEN / THEN
     assert get_table_columns(conn, x_tablename) == ["id", "name", "age", "email"]
+
+
+def test_get_table_columns_ReturnsObj_Scenario2_TableExists_PassCursorObj(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+):
+    conn, test_table, test_csv_filepath = setup_database_and_csv
+    x_tablename = "something_dark_side_table"
+    create_table_from_csv(test_csv_filepath, conn, x_tablename, {})
+    expected_columns = ["id", "name", "age", "email"]
+
+    # WHEN / THEN
+    assert get_table_columns(conn.cursor(), x_tablename) == expected_columns
 
 
 def test_create_inconsistency_query_ReturnsObj_Scenario0():

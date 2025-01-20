@@ -338,18 +338,20 @@ def dataframe_to_dict(x_df: DataFrame, key_columns: list[str]) -> dict:
 
 
 def create_idea_table_from_csv(
-    csv_filepath: str, conn: sqlite3_Connection, tablename: str
+    csv_filepath: str, conn_or_cursor: sqlite3_Connection, tablename: str
 ):
     column_types = get_idea_sqlite_types()
-    create_table_from_csv(csv_filepath, conn, tablename, column_types)
+    create_table_from_csv(csv_filepath, conn_or_cursor, tablename, column_types)
 
 
-def insert_idea_csv(csv_filepath: str, conn: sqlite3_Connection, tablename: str):
-    if db_table_exists(conn, tablename) is False:
-        create_idea_table_from_csv(csv_filepath, conn, tablename)
+def insert_idea_csv(
+    csv_filepath: str, conn_or_cursor: sqlite3_Connection, tablename: str
+):
+    if db_table_exists(conn_or_cursor, tablename) is False:
+        create_idea_table_from_csv(csv_filepath, conn_or_cursor, tablename)
 
     # Future feature? filtering csv file so only relevant idea columns are loaded
-    insert_csv(csv_filepath, conn, tablename)
+    insert_csv(csv_filepath, conn_or_cursor, tablename)
 
 
 def get_pragma_table_fetchall(table_columns):
