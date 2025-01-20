@@ -757,14 +757,16 @@ def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 
 
-def etl_aft_face_csv_files_to_fiscal_db(conn: sqlite3_Connection, faces_aft_dir: str):
+def etl_aft_face_csv_files_to_fiscal_db(
+    conn_or_cursor: sqlite3_Connection, faces_aft_dir: str
+):
     for face_name in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_name)
         for idea_number in sorted(get_idea_numbers()):
             csv_filename = f"{idea_number}.csv"
             csv_path = create_path(face_dir, csv_filename)
             if os_path_exists(csv_path):
-                insert_idea_csv(csv_path, conn, f"{idea_number}_staging")
+                insert_idea_csv(csv_path, conn_or_cursor, f"{idea_number}_staging")
 
 
 def etl_idea_staging_to_fiscal_tables(conn):
@@ -773,7 +775,8 @@ def etl_idea_staging_to_fiscal_tables(conn):
     fiscal_staging_tables2fiscal_agg_tables(conn)
 
 
-def create_fiscal_tables(conn: sqlite3_Connection):
+def create_fiscal_tables(conn_or_cursor: sqlite3_Connection):
+    conn = conn_or_cursor
     fiscalunit_agg_cols = [
         "fiscal_title",
         "fund_coin",
@@ -924,23 +927,20 @@ FROM fiscal_cashbook_staging
 GROUP BY acct_name, fiscal_title, owner_name, time_int
 HAVING MIN(amount) != MAX(amount)
 """
-FISCALHOUR_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FISCALHOUR_INCONSISTENCY_SQLSTR = """SELECT fiscal_title, hour_title
 FROM fiscal_timeline_hour_staging
-GROUP BY fiscal_title
-HAVING MIN(hour_title) != MAX(hour_title)
-    OR MIN(cumlative_minute) != MAX(cumlative_minute)
+GROUP BY fiscal_title, hour_title
+HAVING MIN(cumlative_minute) != MAX(cumlative_minute)
 """
-FISCALMONT_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FISCALMONT_INCONSISTENCY_SQLSTR = """SELECT fiscal_title, month_title
 FROM fiscal_timeline_month_staging
-GROUP BY fiscal_title
-HAVING MIN(month_title) != MAX(month_title)
-    OR MIN(cumlative_day) != MAX(cumlative_day)
+GROUP BY fiscal_title, month_title
+HAVING MIN(cumlative_day) != MAX(cumlative_day)
 """
-FISCALWEEK_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FISCALWEEK_INCONSISTENCY_SQLSTR = """SELECT fiscal_title, weekday_title
 FROM fiscal_timeline_weekday_staging
-GROUP BY fiscal_title
-HAVING MIN(weekday_title) != MAX(weekday_title)
-    OR MIN(weekday_order) != MAX(weekday_order)
+GROUP BY fiscal_title, weekday_title
+HAVING MIN(weekday_order) != MAX(weekday_order)
 """
 
 FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
@@ -986,6 +986,7 @@ UPDATE fiscal_timeline_hour_staging
 SET error_message = 'Inconsistent fiscal data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fiscal_title = fiscal_timeline_hour_staging.fiscal_title
+    AND inconsistency_rows.hour_title = fiscal_timeline_hour_staging.hour_title
 ;
 """
 FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
@@ -996,6 +997,7 @@ UPDATE fiscal_timeline_month_staging
 SET error_message = 'Inconsistent fiscal data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fiscal_title = fiscal_timeline_month_staging.fiscal_title
+    AND inconsistency_rows.month_title = fiscal_timeline_month_staging.month_title
 ;
 """
 FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
@@ -1006,6 +1008,7 @@ UPDATE fiscal_timeline_weekday_staging
 SET error_message = 'Inconsistent fiscal data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fiscal_title = fiscal_timeline_weekday_staging.fiscal_title
+    AND inconsistency_rows.weekday_title = fiscal_timeline_weekday_staging.weekday_title
 ;
 """
 
@@ -1022,45 +1025,45 @@ def set_fiscal_staging_error_message(fiscal_db_conn: sqlite3_Connection):
 
 
 FISCALUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscalunit_agg (fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title)
-SELECT fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title
+SELECT fiscal_title, MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(timeline_title)
 FROM fiscalunit_staging
 WHERE error_message IS NULL
-GROUP BY fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title
+GROUP BY fiscal_title
 ;
 """
 FISCALDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_deal_episode_agg (fiscal_title, owner_name, time_int, quota)
-SELECT fiscal_title, owner_name, time_int, quota
+SELECT fiscal_title, owner_name, time_int, MAX(quota)
 FROM fiscal_deal_episode_staging
 WHERE error_message IS NULL
-GROUP BY fiscal_title, owner_name, time_int, quota
+GROUP BY fiscal_title, owner_name, time_int
 ;
 """
 FISCALCASH_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_cashbook_agg (fiscal_title, owner_name, acct_name, time_int, amount)
-SELECT fiscal_title, owner_name, acct_name, time_int, amount
+SELECT fiscal_title, owner_name, acct_name, time_int, MAX(amount)
 FROM fiscal_cashbook_staging
 WHERE error_message IS NULL
-GROUP BY fiscal_title, owner_name, acct_name, time_int, amount
+GROUP BY fiscal_title, owner_name, acct_name, time_int
 ;
 """
 FISCALHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_hour_agg (fiscal_title, hour_title, cumlative_minute)
-SELECT fiscal_title, hour_title, cumlative_minute
+SELECT fiscal_title, hour_title, MAX(cumlative_minute)
 FROM fiscal_timeline_hour_staging
 WHERE error_message IS NULL
-GROUP BY fiscal_title, hour_title, cumlative_minute
+GROUP BY fiscal_title, hour_title
 ;
 """
 FISCALMONT_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_month_agg (fiscal_title, month_title, cumlative_day)
-SELECT fiscal_title, month_title, cumlative_day
+SELECT fiscal_title, month_title, MAX(cumlative_day)
 FROM fiscal_timeline_month_staging
 WHERE error_message IS NULL
-GROUP BY fiscal_title, month_title, cumlative_day
+GROUP BY fiscal_title, month_title
 ;
 """
 FISCALWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_weekday_agg (fiscal_title, weekday_title, weekday_order)
-SELECT fiscal_title, weekday_title, weekday_order
+SELECT fiscal_title, weekday_title, MAX(weekday_order)
 FROM fiscal_timeline_weekday_staging
 WHERE error_message IS NULL
-GROUP BY fiscal_title, weekday_title, weekday_order
+GROUP BY fiscal_title, weekday_title
 ;
 """
 
@@ -1068,11 +1071,11 @@ GROUP BY fiscal_title, weekday_title, weekday_order
 def fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):
     cursor = fiscal_db_conn.cursor()
     cursor.execute(FISCALUNIT_AGG_INSERT_SQLSTR)
-    # cursor.execute(FISCALDEAL_AGG_INSERT_SQLSTR)
-    # cursor.execute(FISCALCASH_AGG_INSERT_SQLSTR)
-    # cursor.execute(FISCALHOUR_AGG_INSERT_SQLSTR)
-    # cursor.execute(FISCALMONT_AGG_INSERT_SQLSTR)
-    # cursor.execute(FISCALWEEK_AGG_INSERT_SQLSTR)
+    cursor.execute(FISCALDEAL_AGG_INSERT_SQLSTR)
+    cursor.execute(FISCALCASH_AGG_INSERT_SQLSTR)
+    cursor.execute(FISCALHOUR_AGG_INSERT_SQLSTR)
+    cursor.execute(FISCALMONT_AGG_INSERT_SQLSTR)
+    cursor.execute(FISCALWEEK_AGG_INSERT_SQLSTR)
     cursor.close()
 
 

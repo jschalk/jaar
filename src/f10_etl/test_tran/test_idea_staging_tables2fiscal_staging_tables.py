@@ -1025,8 +1025,9 @@ def test_GlobalVariablesForFiscal_inconsistency_queryReturns_sqlstrs():
 
         # WHEN
         hour_tablename = x_objs.hour_stage_tablename
+        focus_columns = {fiscal_title_str(), hour_title_str()}
         generated_fiscalhour_sqlstr = create_inconsistency_query(
-            fiscal_db_conn, hour_tablename, {fiscal_title_str()}, exclude_cols
+            fiscal_db_conn, hour_tablename, focus_columns, exclude_cols
         )
         # THEN
         print(f"{generated_fiscalhour_sqlstr=}")
@@ -1034,8 +1035,9 @@ def test_GlobalVariablesForFiscal_inconsistency_queryReturns_sqlstrs():
 
         # WHEN
         mont_tablename = x_objs.mont_stage_tablename
+        focus_columns = {fiscal_title_str(), month_title_str()}
         generated_fiscalmont_sqlstr = create_inconsistency_query(
-            fiscal_db_conn, mont_tablename, {fiscal_title_str()}, exclude_cols
+            fiscal_db_conn, mont_tablename, focus_columns, exclude_cols
         )
         # THEN
         print(f"{generated_fiscalmont_sqlstr=}")
@@ -1043,8 +1045,9 @@ def test_GlobalVariablesForFiscal_inconsistency_queryReturns_sqlstrs():
 
         # WHEN
         week_tablename = x_objs.week_stage_tablename
+        focus_columns = {fiscal_title_str(), weekday_title_str()}
         generated_fiscalweek_sqlstr = create_inconsistency_query(
-            fiscal_db_conn, week_tablename, {fiscal_title_str()}, exclude_cols
+            fiscal_db_conn, week_tablename, focus_columns, exclude_cols
         )
         # THEN
         print(f"{generated_fiscalweek_sqlstr=}")
@@ -1235,7 +1238,8 @@ def test_set_fiscal_staging_error_message_Scenario3_fiscalhour_Some_error_messag
     accord45_str = "accord45"
     a23_month_title_1 = "March"
     a23_month_title_2 = "Marche"
-    a23_cumlative_day = 44
+    _44_cumlative_day = 44
+    _55_cumlative_day = 55
     x_objs = FiscalPrimeObjsRef()
     x_cols = FiscalPrimeColumnsRef()
 
@@ -1246,9 +1250,9 @@ def test_set_fiscal_staging_error_message_Scenario3_fiscalhour_Some_error_messag
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.mont_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_month_title_1}',{a23_cumlative_day},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_month_title_2}',{a23_cumlative_day},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_month_title_2}',{a23_cumlative_day},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_month_title_1}',{_44_cumlative_day},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_month_title_1}',{_55_cumlative_day},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_month_title_2}',{_55_cumlative_day},NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -1290,38 +1294,41 @@ def test_set_fiscal_staging_error_message_Scenario4_fiscalweek_Some_error_messag
     event7 = 7
     accord23_str = "accord23"
     accord45_str = "accord45"
-    a23_weekday_title_1 = "Wednesday"
-    a23_weekday_title_2 = "Tuesday"
-    a23_weekday_order = 7
+    wed_str = "Wednesday"
+    tue_str = "Tuesday"
+    mon_str = "Monday"
+    order1 = 1
+    order2 = 2
+    order3 = 3
     x_objs = FiscalPrimeObjsRef()
     x_cols = FiscalPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         create_fiscal_tables(fiscal_db_conn)
         x_tablename = x_objs.week_stage_tablename
-        assert db_table_exists(fiscal_db_conn, x_tablename)
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.week_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_weekday_title_1}',{a23_weekday_order},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_weekday_title_2}',{a23_weekday_order},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_weekday_title_1}',{a23_weekday_order},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{mon_str}',{order1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{tue_str}',{order2},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{tue_str}',{order3},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{wed_str}',{order3},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{mon_str}',{order3},NULL)
 ;
 """
-        print(f"{insert_staging_sqlstr=}")
         cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
-        assert get_row_count(fiscal_db_conn, x_tablename) == 3
-        select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, error_message FROM {x_tablename};"
-        # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
+        assert get_row_count(fiscal_db_conn, x_tablename) == 5
+        select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, {weekday_title_str()}, error_message FROM {x_tablename};"
         cursor.execute(select_sqlstr)
-        # print(f"{select_sqlstr=}")
         rows = cursor.fetchall()
         # print(f"{rows=}")
         assert rows == [
-            (event3, accord23_str, None),
-            (event7, accord23_str, None),
-            (event7, accord45_str, None),
+            (event3, accord23_str, mon_str, None),
+            (event7, accord23_str, tue_str, None),
+            (event7, accord23_str, tue_str, None),
+            (event7, accord45_str, wed_str, None),
+            (event7, accord45_str, mon_str, None),
         ]
 
         # WHEN
@@ -1330,11 +1337,14 @@ VALUES
         # THEN
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
+        print(f"{rows=}")
         x_error_message = "Inconsistent fiscal data"
         assert rows == [
-            (event3, accord23_str, x_error_message),
-            (event7, accord23_str, x_error_message),
-            (event7, accord45_str, None),
+            (event3, accord23_str, mon_str, None),
+            (event7, accord23_str, tue_str, x_error_message),
+            (event7, accord23_str, tue_str, x_error_message),
+            (event7, accord45_str, wed_str, None),
+            (event7, accord45_str, mon_str, None),
         ]
 
 

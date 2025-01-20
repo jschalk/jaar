@@ -219,9 +219,7 @@ def get_grouping_with_all_values_equal_sql_query(
     return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)} {_get_having_equal_value_clause(value_columns)}"
 
 
-def insert_csv(
-    csv_file_path: str, sqlite_connection: sqlite3_Connection, table_name: str
-):
+def insert_csv(csv_file_path: str, conn_or_cursor: sqlite3_Connection, table_name: str):
     """
     Inserts data from a CSV file into a specified SQLite database table.
 
@@ -234,9 +232,6 @@ def insert_csv(
         None
     """
     try:
-        # Use the provided SQLite connection
-        cursor = sqlite_connection.cursor()
-
         # Open the CSV file
         with open(csv_file_path, "r", newline="", encoding="utf-8") as csv_file:
             reader = csv_reader(csv_file)
@@ -249,11 +244,7 @@ def insert_csv(
             insert_query = f"INSERT INTO {table_name} ({', '.join(headers)}) VALUES ({placeholders})"
             # Insert each row into the database
             for row in reader:
-                cursor.execute(insert_query, row)
-
-        # Commit the transaction
-        sqlite_connection.commit()
-        cursor.close()
+                conn_or_cursor.execute(insert_query, row)
 
     except sqlite3_Error as e:
         print(f"SQLite error: {e}")
@@ -267,7 +258,7 @@ class sqlite3_Error_Exception(Exception):
 
 
 def create_table_from_columns(
-    conn: sqlite3_Connection,
+    conn_or_cursor: sqlite3_Connection,
     tablename: str,
     columns_list: list[str],
     column_types: dict[str, str],
@@ -284,15 +275,12 @@ def create_table_from_columns(
     )
 
     # Execute the create table query
-    cursor = conn.cursor()
-    cursor.execute(create_table_query)
-    cursor.close()
-    conn.commit()
+    conn_or_cursor.execute(create_table_query)
 
 
 def create_table_from_csv(
     csv_file_path: str,
-    sqlite_connection: sqlite3_Connection,
+    conn_or_cursor: sqlite3_Connection,
     table_name: str,
     column_types: dict[str, str],
 ):
@@ -312,7 +300,7 @@ def create_table_from_csv(
         # Open the CSV file to read the header
         with open(csv_file_path, "r", newline="", encoding="utf-8") as csv_file:
             headers = csv_file.readline().strip().split(",")
-        create_table_from_columns(sqlite_connection, table_name, headers, column_types)
+        create_table_from_columns(conn_or_cursor, table_name, headers, column_types)
 
     except sqlite3_Error as e:
         raise sqlite3_Error_Exception(f"SQLite error: {e}") from e
@@ -321,40 +309,26 @@ def create_table_from_csv(
     #     raise Exception(f"Error: {e}")
 
 
-def db_table_exists(conn: sqlite3_Connection, tablename: str) -> bool:
-    cursor = conn.cursor()
+def db_table_exists(conn_or_cursor: sqlite3_Connection, tablename: str) -> bool:
     table_master_sqlstr = (
         f"SELECT name FROM sqlite_master WHERE type='table' AND name='{tablename}';"
     )
-    cursor.execute(table_master_sqlstr)
-    result = cursor.fetchone()
-    cursor.close()
+    result = conn_or_cursor.execute(table_master_sqlstr).fetchone()
     return bool(result)
 
 
-def get_table_columns(conn: sqlite3_Connection, tablename: str) -> list[str]:
-    cursor = conn.cursor()
-    cursor.execute(f"PRAGMA table_info({tablename})")
-    db_columns = cursor.fetchall()
-    # # Expected column definitions
-    # expected_columns = [
-    #     (0, "id", "INTEGER", 0, None, 0),
-    #     (1, "name", "TEXT", 0, None, 0),
-    #     (2, "age", "INTEGER", 0, None, 0),
-    #     (3, "email", "TEXT", 0, None, 0),
-    # ]
-    columns_list = []
-    columns_list.extend(db_column[1] for db_column in db_columns)
-    return columns_list
+def get_table_columns(conn_or_cursor: sqlite3_Connection, tablename: str) -> list[str]:
+    db_columns = conn_or_cursor.execute(f"PRAGMA table_info({tablename})").fetchall()
+    return [db_column[1] for db_column in db_columns]
 
 
 def create_inconsistency_query(
-    conn: sqlite3_Connection,
+    conn_or_cursor: sqlite3_Connection,
     x_tablename: str,
     focus_columns: set[str],
     exclude_columns: set[str],
 ) -> str:
-    table_columns = get_table_columns(conn, x_tablename)
+    table_columns = get_table_columns(conn_or_cursor, x_tablename)
     having_str = None
     for x_column in table_columns:
         if x_column not in exclude_columns and x_column not in focus_columns:
@@ -371,18 +345,30 @@ GROUP BY {focus_columns_str}
 
 
 def create_agg_insert_query(
-    conn: sqlite3_Connection,
+    conn_or_cursor: sqlite3_Connection,
     src_table: str,
     dst_table: str,
+    focus_cols: list[str],
     exclude_cols: set[str],
 ) -> str:
-    dst_columns = get_table_columns(conn, dst_table)
+    focus_cols_set = set(focus_cols)
+    dst_columns = get_table_columns(conn_or_cursor, dst_table)
     dst_columns = [dst_col for dst_col in dst_columns if dst_col not in exclude_cols]
     dst_columns_str = ", ".join(list(dst_columns))
+    select_columns_str = None
+    for dst_column in dst_columns:
+        if select_columns_str is None and dst_column in focus_cols_set:
+            select_columns_str = f"{dst_column}"
+        elif dst_column in focus_cols_set:
+            select_columns_str += f", {dst_column}"
+        else:
+            select_columns_str += f", MAX({dst_column})"
+    group_by_columns_str = ", ".join(focus_cols)
+
     return f"""INSERT INTO {dst_table} ({dst_columns_str})
-SELECT {dst_columns_str}
+SELECT {select_columns_str}
 FROM {src_table}
 WHERE error_message IS NULL
-GROUP BY {dst_columns_str}
+GROUP BY {group_by_columns_str}
 ;
 """
