@@ -2,10 +2,22 @@ from src.f00_instrument.db_toolbox import (
     db_table_exists,
     create_inconsistency_query,
     get_create_table_sqlstr,
+    create_agg_insert_query,
 )
+from src.f01_road.finance_tran import time_int_str
 from src.f02_bud.bud_tool import budunit_str
-from src.f04_gift.atom_config import face_name_str
-from src.f07_fiscal.fiscal_config import fiscalunit_str
+from src.f04_gift.atom_config import (
+    face_name_str,
+    fiscal_title_str,
+    owner_name_str,
+    acct_name_str,
+)
+from src.f07_fiscal.fiscal_config import (
+    fiscalunit_str,
+    hour_title_str,
+    month_title_str,
+    weekday_title_str,
+)
 from src.f08_pidgin.pidgin_config import event_int_str, pidginunit_str
 from src.f09_idea.idea_config import (
     idea_number_str,
@@ -26,6 +38,12 @@ from src.f10_etl.tran_sqlstrs import (
     create_bud_tables,
     get_all_inconsistency_sqlstrs,
     get_fiscal_inconsistency_sqlstrs,
+    FISCALUNIT_AGG_INSERT_SQLSTR,
+    FISCALDEAL_AGG_INSERT_SQLSTR,
+    FISCALCASH_AGG_INSERT_SQLSTR,
+    FISCALHOUR_AGG_INSERT_SQLSTR,
+    FISCALMONT_AGG_INSERT_SQLSTR,
+    FISCALWEEK_AGG_INSERT_SQLSTR,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -300,3 +318,99 @@ def test_get_all_inconsistency_sqlstrs_ReturnsObj():
             )
             # print(f"{generated_cat_sqlstr=}")
             assert x_sqlstr == generated_cat_sqlstr
+
+
+def test_GlobalVairableAGG_INSERT_SQLSTR_ReturnsObj():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_objs = FiscalPrimeObjsRef()
+    x_cols = FiscalPrimeColumnsRef()
+    x_exclude_cols = {
+        idea_number_str(),
+        face_name_str(),
+        event_int_str(),
+        "error_message",
+    }
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        create_fiscal_tables(fiscal_db_conn)
+
+        # WHEN
+        generated_fiscalunit_sqlstr = create_agg_insert_query(
+            fiscal_db_conn,
+            src_table=x_objs.unit_stage_tablename,
+            dst_table=x_objs.unit_agg_tablename,
+            focus_cols=[fiscal_title_str()],
+            exclude_cols=x_exclude_cols,
+        )
+
+        # THEN
+        print(f" {generated_fiscalunit_sqlstr=}")
+        print(f"{FISCALUNIT_AGG_INSERT_SQLSTR=}")
+        assert FISCALUNIT_AGG_INSERT_SQLSTR == generated_fiscalunit_sqlstr
+
+        columns_header = """fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title"""
+        tablename = "fiscalunit"
+        expected_ficsalunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
+SELECT fiscal_title, MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(timeline_title)
+FROM {tablename}_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title
+;
+"""
+        assert FISCALUNIT_AGG_INSERT_SQLSTR == expected_ficsalunit_sqlstr
+
+        # WHEN / THEN
+        generated_fiscaldeal_sqlstr = create_agg_insert_query(
+            fiscal_db_conn,
+            src_table=x_objs.deal_stage_tablename,
+            dst_table=x_objs.deal_agg_tablename,
+            focus_cols=[fiscal_title_str(), owner_name_str(), time_int_str()],
+            exclude_cols=x_exclude_cols,
+        )
+        assert FISCALDEAL_AGG_INSERT_SQLSTR == generated_fiscaldeal_sqlstr
+
+        # WHEN / THEN
+        cash_focus_cols = [
+            fiscal_title_str(),
+            owner_name_str(),
+            acct_name_str(),
+            time_int_str(),
+        ]
+        generated_fiscalcash_sqlstr = create_agg_insert_query(
+            fiscal_db_conn,
+            src_table=x_objs.cash_stage_tablename,
+            dst_table=x_objs.cash_agg_tablename,
+            focus_cols=cash_focus_cols,
+            exclude_cols=x_exclude_cols,
+        )
+        assert FISCALCASH_AGG_INSERT_SQLSTR == generated_fiscalcash_sqlstr
+
+        # WHEN / THEN
+        generated_fiscalhour_sqlstr = create_agg_insert_query(
+            fiscal_db_conn,
+            src_table=x_objs.hour_stage_tablename,
+            dst_table=x_objs.hour_agg_tablename,
+            focus_cols=[fiscal_title_str(), hour_title_str()],
+            exclude_cols=x_exclude_cols,
+        )
+        assert FISCALHOUR_AGG_INSERT_SQLSTR == generated_fiscalhour_sqlstr
+
+        # WHEN / THEN
+        generated_fiscalmont_sqlstr = create_agg_insert_query(
+            fiscal_db_conn,
+            src_table=x_objs.mont_stage_tablename,
+            dst_table=x_objs.mont_agg_tablename,
+            focus_cols=[fiscal_title_str(), month_title_str()],
+            exclude_cols=x_exclude_cols,
+        )
+        assert FISCALMONT_AGG_INSERT_SQLSTR == generated_fiscalmont_sqlstr
+
+        # WHEN / THEN
+        generated_fiscalweek_sqlstr = create_agg_insert_query(
+            fiscal_db_conn,
+            src_table=x_objs.week_stage_tablename,
+            dst_table=x_objs.week_agg_tablename,
+            focus_cols=[fiscal_title_str(), weekday_title_str()],
+            exclude_cols=x_exclude_cols,
+        )
+        assert FISCALWEEK_AGG_INSERT_SQLSTR == generated_fiscalweek_sqlstr

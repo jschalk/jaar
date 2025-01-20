@@ -31,6 +31,12 @@ from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
     create_fiscal_tables,
     get_set_inconsistency_error_message_sqlstrs,
+    FISCALUNIT_AGG_INSERT_SQLSTR,
+    FISCALDEAL_AGG_INSERT_SQLSTR,
+    FISCALCASH_AGG_INSERT_SQLSTR,
+    FISCALHOUR_AGG_INSERT_SQLSTR,
+    FISCALMONT_AGG_INSERT_SQLSTR,
+    FISCALWEEK_AGG_INSERT_SQLSTR,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import (
@@ -839,50 +845,6 @@ def set_fiscal_staging_error_message(fiscal_db_conn: sqlite3_Connection):
     for set_error_sqlstr in get_set_inconsistency_error_message_sqlstrs().values():
         cursor.execute(set_error_sqlstr)
     cursor.close()
-
-
-FISCALUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscalunit_agg (fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title)
-SELECT fiscal_title, MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(timeline_title)
-FROM fiscalunit_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title
-;
-"""
-FISCALDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_deal_episode_agg (fiscal_title, owner_name, time_int, quota)
-SELECT fiscal_title, owner_name, time_int, MAX(quota)
-FROM fiscal_deal_episode_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title, owner_name, time_int
-;
-"""
-FISCALCASH_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_cashbook_agg (fiscal_title, owner_name, acct_name, time_int, amount)
-SELECT fiscal_title, owner_name, acct_name, time_int, MAX(amount)
-FROM fiscal_cashbook_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title, owner_name, acct_name, time_int
-;
-"""
-FISCALHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_hour_agg (fiscal_title, hour_title, cumlative_minute)
-SELECT fiscal_title, hour_title, MAX(cumlative_minute)
-FROM fiscal_timeline_hour_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title, hour_title
-;
-"""
-FISCALMONT_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_month_agg (fiscal_title, month_title, cumlative_day)
-SELECT fiscal_title, month_title, MAX(cumlative_day)
-FROM fiscal_timeline_month_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title, month_title
-;
-"""
-FISCALWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_weekday_agg (fiscal_title, weekday_title, weekday_order)
-SELECT fiscal_title, weekday_title, MAX(weekday_order)
-FROM fiscal_timeline_weekday_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title, weekday_title
-;
-"""
 
 
 def fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):

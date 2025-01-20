@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, save_file, open_file
-from src.f00_instrument.db_toolbox import get_row_count, create_agg_insert_query
+from src.f00_instrument.db_toolbox import get_row_count
 from src.f01_road.finance_tran import bridge_str, quota_str, time_int_str
 from src.f03_chrono.chrono import (
     c400_number_str,
@@ -40,118 +40,14 @@ from src.f10_etl.transformers import (
     fiscal_staging_tables2fiscal_agg_tables,
     etl_fiscal_staging_tables_to_fiscal_csvs,
     etl_fiscal_agg_tables_to_fiscal_csvs,
-    FISCALUNIT_AGG_INSERT_SQLSTR,
-    FISCALDEAL_AGG_INSERT_SQLSTR,
-    FISCALCASH_AGG_INSERT_SQLSTR,
-    FISCALHOUR_AGG_INSERT_SQLSTR,
-    FISCALMONT_AGG_INSERT_SQLSTR,
-    FISCALWEEK_AGG_INSERT_SQLSTR,
 )
-from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.f10_etl.examples.etl_env import get_test_etl_dir
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 from copy import copy as copy_copy
 from os.path import exists as os_path_exists
 
 
-def test_GlobalVairableAGG_INSERT_SQLSTR_ReturnsObj():
-    # sourcery skip: extract-method
-    # ESTABLISH
-    x_objs = FiscalPrimeObjsRef()
-    x_cols = FiscalPrimeColumnsRef()
-    x_exclude_cols = {
-        idea_number_str(),
-        face_name_str(),
-        event_int_str(),
-        "error_message",
-    }
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_fiscal_tables(fiscal_db_conn)
-
-        # WHEN
-        generated_fiscalunit_sqlstr = create_agg_insert_query(
-            fiscal_db_conn,
-            src_table=x_objs.unit_stage_tablename,
-            dst_table=x_objs.unit_agg_tablename,
-            focus_cols=[fiscal_title_str()],
-            exclude_cols=x_exclude_cols,
-        )
-
-        # THEN
-        print(f" {generated_fiscalunit_sqlstr=}")
-        print(f"{FISCALUNIT_AGG_INSERT_SQLSTR=}")
-        assert FISCALUNIT_AGG_INSERT_SQLSTR == generated_fiscalunit_sqlstr
-
-        columns_header = """fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title"""
-        tablename = "fiscalunit"
-        expected_ficsalunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
-SELECT fiscal_title, MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(timeline_title)
-FROM {tablename}_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title
-;
-"""
-        assert FISCALUNIT_AGG_INSERT_SQLSTR == expected_ficsalunit_sqlstr
-
-        # WHEN / THEN
-        generated_fiscaldeal_sqlstr = create_agg_insert_query(
-            fiscal_db_conn,
-            src_table=x_objs.deal_stage_tablename,
-            dst_table=x_objs.deal_agg_tablename,
-            focus_cols=[fiscal_title_str(), owner_name_str(), time_int_str()],
-            exclude_cols=x_exclude_cols,
-        )
-        assert FISCALDEAL_AGG_INSERT_SQLSTR == generated_fiscaldeal_sqlstr
-
-        # WHEN / THEN
-        cash_focus_cols = [
-            fiscal_title_str(),
-            owner_name_str(),
-            acct_name_str(),
-            time_int_str(),
-        ]
-        generated_fiscalcash_sqlstr = create_agg_insert_query(
-            fiscal_db_conn,
-            src_table=x_objs.cash_stage_tablename,
-            dst_table=x_objs.cash_agg_tablename,
-            focus_cols=cash_focus_cols,
-            exclude_cols=x_exclude_cols,
-        )
-        assert FISCALCASH_AGG_INSERT_SQLSTR == generated_fiscalcash_sqlstr
-
-        # WHEN / THEN
-        generated_fiscalhour_sqlstr = create_agg_insert_query(
-            fiscal_db_conn,
-            src_table=x_objs.hour_stage_tablename,
-            dst_table=x_objs.hour_agg_tablename,
-            focus_cols=[fiscal_title_str(), hour_title_str()],
-            exclude_cols=x_exclude_cols,
-        )
-        assert FISCALHOUR_AGG_INSERT_SQLSTR == generated_fiscalhour_sqlstr
-
-        # WHEN / THEN
-        generated_fiscalmont_sqlstr = create_agg_insert_query(
-            fiscal_db_conn,
-            src_table=x_objs.mont_stage_tablename,
-            dst_table=x_objs.mont_agg_tablename,
-            focus_cols=[fiscal_title_str(), month_title_str()],
-            exclude_cols=x_exclude_cols,
-        )
-        assert FISCALMONT_AGG_INSERT_SQLSTR == generated_fiscalmont_sqlstr
-
-        # WHEN / THEN
-        generated_fiscalweek_sqlstr = create_agg_insert_query(
-            fiscal_db_conn,
-            src_table=x_objs.week_stage_tablename,
-            dst_table=x_objs.week_agg_tablename,
-            focus_cols=[fiscal_title_str(), weekday_title_str()],
-            exclude_cols=x_exclude_cols,
-        )
-        assert FISCALWEEK_AGG_INSERT_SQLSTR == generated_fiscalweek_sqlstr
-
-
-def test_fiscal_staging_tables2fiscal_agg_tables_PassesOnly_fiscal_title(
-    env_dir_setup_cleanup,
-):
+def test_fiscal_staging_tables2fiscal_agg_tables_PassesOnly_fiscal_title():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -213,9 +109,7 @@ VALUES
         assert fiscalunit_agg_rows == [expected_row0, expected_row1]
 
 
-def test_fiscal_staging_tables2fiscal_agg_tables_Scenario0_fiscalunit_WithNo_error_message(
-    env_dir_setup_cleanup,
-):
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario0_fiscalunit_WithNo_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -290,9 +184,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fiscal_staging_tables2fiscal_agg_tables_Scenario1_fiscalunit_With_error_message(
-    env_dir_setup_cleanup,
-):
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario1_fiscalunit_With_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -355,9 +247,7 @@ VALUES
         assert rows == [expected_agg_row0]
 
 
-def test_fiscal_staging_tables2fiscal_agg_tables_Scenario2_fiscalhour_Some_error_message(
-    env_dir_setup_cleanup,
-):
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario2_fiscalhour_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -405,9 +295,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fiscal_staging_tables2fiscal_agg_tables_Scenario3_fiscalmont_Some_error_message(
-    env_dir_setup_cleanup,
-):
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario3_fiscalmont_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -454,9 +342,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fiscal_staging_tables2fiscal_agg_tables_Scenario4_fiscalweek_Some_error_message(
-    env_dir_setup_cleanup,
-):
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario4_fiscalweek_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -503,9 +389,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fiscal_staging_tables2fiscal_agg_tables_Scenario5_fiscaldeal_Some_error_message(
-    env_dir_setup_cleanup,
-):
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario5_fiscaldeal_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -556,9 +440,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
 
 
-def test_fiscal_staging_tables2fiscal_agg_tables_Scenario6_fiscalcash_Some_error_message(
-    env_dir_setup_cleanup,
-):
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario6_fiscalcash_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -611,7 +493,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
 
 
-def test_etl_fiscal_agg_tables_to_fiscal_csvs_CreateFiles(env_dir_setup_cleanup):
+def test_etl_fiscal_agg_tables_to_fiscal_csvs_CreateFiles():
     # sourcery skip: extract-method
     # ESTABLISH
     accord23_str = "accord23"
