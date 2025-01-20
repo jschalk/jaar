@@ -17,13 +17,6 @@ from src.f04_gift.atom_config import (
     respect_bit_str,
 )
 from src.f07_fiscal.fiscal_config import (
-    get_fiscal_config_args,
-    fiscalunit_str,
-    fiscal_deal_episode_str,
-    fiscal_cashbook_str,
-    fiscal_timeline_hour_str,
-    fiscal_timeline_month_str,
-    fiscal_timeline_weekday_str,
     present_time_str,
     amount_str,
     hour_title_str,
@@ -61,6 +54,7 @@ from os.path import exists as os_path_exists
 
 
 def test_GlobalVairableAGG_INSERT_SQLSTR_ReturnsObj():
+    # sourcery skip: extract-method
     # ESTABLISH
     x_objs = FiscalPrimeObjsRef()
     x_cols = FiscalPrimeColumnsRef()
