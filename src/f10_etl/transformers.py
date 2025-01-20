@@ -1067,8 +1067,8 @@ GROUP BY fiscal_title, weekday_title, weekday_order
 def fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):
     cursor = fiscal_db_conn.cursor()
     cursor.execute(FISCALUNIT_AGG_INSERT_SQLSTR)
-    # cursor.execute(FISCALDEAL_AGG_INSERT_SQLSTR)
-    # cursor.execute(FISCALCASH_AGG_INSERT_SQLSTR)
+    cursor.execute(FISCALDEAL_AGG_INSERT_SQLSTR)
+    cursor.execute(FISCALCASH_AGG_INSERT_SQLSTR)
     cursor.execute(FISCALHOUR_AGG_INSERT_SQLSTR)
     cursor.execute(FISCALMONT_AGG_INSERT_SQLSTR)
     cursor.execute(FISCALWEEK_AGG_INSERT_SQLSTR)

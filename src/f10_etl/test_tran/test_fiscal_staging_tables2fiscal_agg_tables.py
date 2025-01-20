@@ -496,6 +496,113 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario5_fiscaldeal_Some_error_message(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    event9 = 9
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    bob_inx = "Bobby"
+    t1_time_int = 33
+    t1_quota_1 = 200
+    t1_quota_2 = 300
+    t2_time_int = 55
+    t2_quota = 400
+    x_error_message = "Inconsistent fiscal data"
+    x_objs = FiscalPrimeObjsRef()
+    x_cols = FiscalPrimeColumnsRef()
+
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        create_fiscal_tables(fiscal_db_conn)
+        insert_staging_sqlstr = f"""
+INSERT INTO {x_objs.deal_stage_tablename} ({x_cols.deal_staging_csv_header})
+VALUES
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}',{t1_time_int},{t1_quota_1},'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t1_time_int},{t1_quota_2},'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL)
+, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}',{t1_time_int},{t1_quota_1},NULL)
+, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL)
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        agg_tablename = x_objs.deal_agg_tablename
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 0
+
+        # WHEN
+        fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn)
+
+        # THEN
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 3
+        select_agg_sqlstr = f"SELECT {x_cols.deal_agg_csv_header} FROM {agg_tablename};"
+        cursor.execute(select_agg_sqlstr)
+        rows = cursor.fetchall()
+        expected_agg_row0 = (accord23_str, bob_inx, t2_time_int, t2_quota)
+        expected_agg_row1 = (accord45_str, bob_inx, t1_time_int, t1_quota_1)
+        expected_agg_row2 = (accord45_str, bob_inx, t2_time_int, t2_quota)
+        assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
+
+
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario6_fiscalcash_Some_error_message(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    event9 = 9
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    bob_inx = "Bobby"
+    yao_inx = "Yao"
+    t1_time_int = 33
+    t1_quota_1 = 200
+    t1_quota_2 = 300
+    t2_time_int = 55
+    t2_quota = 400
+    x_error_message = "Inconsistent fiscal data"
+    x_objs = FiscalPrimeObjsRef()
+    x_cols = FiscalPrimeColumnsRef()
+
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        create_fiscal_tables(fiscal_db_conn)
+        insert_staging_sqlstr = f"""
+INSERT INTO {x_objs.cash_stage_tablename} ({x_cols.cash_staging_csv_header})
+VALUES
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_quota_1},'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_quota_2},'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_quota},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_quota},NULL)
+, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_quota_1},NULL)
+, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_quota},NULL)
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        agg_tablename = x_objs.cash_agg_tablename
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 0
+
+        # WHEN
+        fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn)
+
+        # THEN
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 3
+        select_agg_sqlstr = f"SELECT {x_cols.cash_agg_csv_header} FROM {agg_tablename};"
+        cursor.execute(select_agg_sqlstr)
+        rows = cursor.fetchall()
+        expected_agg_row0 = (accord23_str, bob_inx, yao_inx, t2_time_int, t2_quota)
+        expected_agg_row1 = (accord45_str, bob_inx, yao_inx, t1_time_int, t1_quota_1)
+        expected_agg_row2 = (accord45_str, bob_inx, yao_inx, t2_time_int, t2_quota)
+        assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
+
+
 # def test_fiscal_staging_tables2fiscal_agg_tables_Scenario5_fiscaldeal_Some_error_message(
 #     env_dir_setup_cleanup,
 # ):
