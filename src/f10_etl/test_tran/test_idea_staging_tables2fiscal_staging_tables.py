@@ -49,7 +49,7 @@ from src.f10_etl.fiscal_etl_tool import (
     FiscalPrimeObjsRef,
     FiscalPrimeColumnsRef,
 )
-from src.f10_etl.tran_sqlstrs import get_inconsistency_sqlstrs
+from src.f10_etl.tran_sqlstrs import get_fiscal_inconsistency_sqlstrs
 from src.f10_etl.transformers import (
     etl_aft_face_csv_files_to_fiscal_db,
     create_fiscal_tables,
@@ -923,7 +923,7 @@ def test_GlobalVariablesForFiscal_inconsistency_queryReturns_sqlstrs():
     with sqlite3_connect(":memory:") as conn:
         create_fiscal_tables(conn)
 
-        for x_category, x_sqlstr in get_inconsistency_sqlstrs().items():
+        for x_category, x_sqlstr in get_fiscal_inconsistency_sqlstrs().items():
             x_tablename = f"{x_category}_staging"
             cat_config = idea_config.get(x_category)
             cat_focus_columns = set(cat_config.get("jkeys").keys())

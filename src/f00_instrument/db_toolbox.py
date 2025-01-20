@@ -257,25 +257,28 @@ class sqlite3_Error_Exception(Exception):
     pass
 
 
-def create_table_from_columns(
-    conn_or_cursor: sqlite3_Connection,
+def get_create_table_sqlstr(
     tablename: str,
     columns_list: list[str],
     column_types: dict[str, str],
-):
+) -> str:
     # Dynamically create a table schema based on the provided column types
     columns = []
     for column in columns_list:
         data_type = column_types.get(column, "TEXT")  # Default to TEXT
         columns.append(f"{column} {data_type}")
     columns_definition = ", ".join(columns)
+    return f"CREATE TABLE IF NOT EXISTS {tablename} ({columns_definition})"
 
-    create_table_query = (
-        f"CREATE TABLE IF NOT EXISTS {tablename} ({columns_definition})"
-    )
 
-    # Execute the create table query
-    conn_or_cursor.execute(create_table_query)
+def create_table_from_columns(
+    conn_or_cursor: sqlite3_Connection,
+    tablename: str,
+    columns_list: list[str],
+    column_types: dict[str, str],
+):
+    x_sqlstr = get_create_table_sqlstr(tablename, columns_list, column_types)
+    conn_or_cursor.execute(x_sqlstr)
 
 
 def create_table_from_csv(

@@ -129,7 +129,18 @@ HAVING MIN(weekday_order) != MAX(weekday_order)
 """
 
 
-def get_inconsistency_sqlstrs() -> dict[str, str]:
+def get_all_inconsistency_sqlstrs() -> dict[str, str]:
+    return {
+        "fiscalunit": FISCALUNIT_INCONSISTENCY_SQLSTR,
+        "fiscal_deal_episode": FISCALDEAL_INCONSISTENCY_SQLSTR,
+        "fiscal_cashbook": FISCALCASH_INCONSISTENCY_SQLSTR,
+        "fiscal_timeline_hour": FISCALHOUR_INCONSISTENCY_SQLSTR,
+        "fiscal_timeline_month": FISCALMONT_INCONSISTENCY_SQLSTR,
+        "fiscal_timeline_weekday": FISCALWEEK_INCONSISTENCY_SQLSTR,
+    }
+
+
+def get_fiscal_inconsistency_sqlstrs() -> dict[str, str]:
     return {
         "fiscalunit": FISCALUNIT_INCONSISTENCY_SQLSTR,
         "fiscal_deal_episode": FISCALDEAL_INCONSISTENCY_SQLSTR,
@@ -208,3 +219,14 @@ WHERE inconsistency_rows.fiscal_title = fiscal_timeline_weekday_staging.fiscal_t
     AND inconsistency_rows.weekday_title = fiscal_timeline_weekday_staging.weekday_title
 ;
 """
+
+
+def get_set_inconsistency_error_message_sqlstrs() -> dict[str, str]:
+    return {
+        "fiscalunit": FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fiscal_deal_episode": FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fiscal_cashbook": FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fiscal_timeline_hour": FISCALHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fiscal_timeline_month": FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fiscal_timeline_weekday": FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+    }

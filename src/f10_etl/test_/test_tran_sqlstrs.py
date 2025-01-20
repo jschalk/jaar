@@ -1,3 +1,4 @@
+from src.f00_instrument.file import save_file
 from src.f00_instrument.db_toolbox import (
     db_table_exists,
     get_row_count,
@@ -48,7 +49,11 @@ from src.f10_etl.fiscal_etl_tool import (
     FiscalPrimeObjsRef,
     FiscalPrimeColumnsRef,
 )
-from src.f10_etl.tran_sqlstrs import create_fiscal_tables, get_inconsistency_sqlstrs
+from src.f10_etl.tran_sqlstrs import (
+    create_fiscal_tables,
+    get_all_inconsistency_sqlstrs,
+    get_fiscal_inconsistency_sqlstrs,
+)
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 from copy import copy as copy_copy
@@ -133,29 +138,49 @@ def test_create_fiscal_tables_CreatesFiscalStagingTables(
         assert fis_week_stage_pragma == cursor.fetchall()
 
 
-def test_GlobalVariablesForFiscal_inconsistency_queryReturns_sqlstrs():
-    # sourcery skip: extract-method, no-loop-in-tests
-    # ESTABLISH
+def test_get_fiscal_inconsistency_sqlstrs_ReturnsObj():
+    # ESTABLISH / WHEN
+    fiscal_inconsistency_sqlstrs = get_fiscal_inconsistency_sqlstrs()
+
+    # THEN
+    assert fiscal_inconsistency_sqlstrs
     idea_config = get_idea_config_dict()
-    idea_config = {
+    fiscal_config = {
         x_category: category_config
         for x_category, category_config in idea_config.items()
-        # if category_config.get(idea_type_str()) != pidginunit_str()
         if category_config.get(idea_type_str()) == fiscalunit_str()
     }
+    expected_fiscal_cateogrys = fiscal_config.keys()
+    assert fiscal_inconsistency_sqlstrs.keys() == expected_fiscal_cateogrys
 
-    exclude_cols = {"idea_number", "face_name", "event_int", "error_message"}
-    with sqlite3_connect(":memory:") as conn:
-        create_fiscal_tables(conn)
 
-        for x_category, x_sqlstr in get_inconsistency_sqlstrs().items():
-            x_tablename = f"{x_category}_staging"
-            cat_config = idea_config.get(x_category)
-            cat_focus_columns = set(cat_config.get("jkeys").keys())
-            cat_focus_columns.remove(event_int_str())
-            cat_focus_columns.remove(face_name_str())
-            generated_cat_sqlstr = create_inconsistency_query(
-                conn, x_tablename, cat_focus_columns, exclude_cols
-            )
-            assert x_sqlstr == generated_cat_sqlstr
-            print(f"{x_category} checked...")
+# def test_get_all_inconsistency_sqlstrs_ReturnsObj():
+#     # sourcery skip: extract-method, no-loop-in-tests
+#     # ESTABLISH
+#     idea_config = get_idea_config_dict()
+#     idea_config = {
+#         x_category: category_config
+#         for x_category, category_config in idea_config.items()
+#         if category_config.get(idea_type_str()) != pidginunit_str()
+#     }
+
+#     exclude_cols = {"idea_number", "face_name", "event_int", "error_message"}
+#     with sqlite3_connect(":memory:") as conn:
+#         create_fiscal_tables(conn)
+
+#         for x_category in idea_config:
+#             x_sqlstr = get_all_inconsistency_sqlstrs().get(x_category)
+#             x_tablename = f"{x_category}_staging"
+#             cat_config = idea_config.get(x_category)
+#             cat_focus_columns = set(cat_config.get("jkeys").keys())
+#             cat_focus_columns.remove(event_int_str())
+#             cat_focus_columns.remove(face_name_str())
+#             generated_cat_sqlstr = create_inconsistency_query(
+#                 conn, x_tablename, cat_focus_columns, exclude_cols
+#             )
+#             print(f"{generated_cat_sqlstr=}")
+#             # save_file("c:/dev/jaar", f"{x_category}.txt", generated_cat_sqlstr)
+#             print(f"{x_category} checking...")
+#             assert x_sqlstr == generated_cat_sqlstr
+
+#     assert 1 == 2

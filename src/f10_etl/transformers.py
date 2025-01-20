@@ -30,12 +30,7 @@ from src.f09_idea.pandas_tool import (
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
     create_fiscal_tables,
-    FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-    FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-    FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-    FISCALHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-    FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-    FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+    get_set_inconsistency_error_message_sqlstrs,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import (
@@ -841,12 +836,8 @@ GROUP BY face_name, event_int, fiscal_title
 
 def set_fiscal_staging_error_message(fiscal_db_conn: sqlite3_Connection):
     cursor = fiscal_db_conn.cursor()
-    cursor.execute(FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
-    cursor.execute(FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
-    cursor.execute(FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
-    cursor.execute(FISCALHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
-    cursor.execute(FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
-    cursor.execute(FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
+    for set_error_sqlstr in get_set_inconsistency_error_message_sqlstrs().values():
+        cursor.execute(set_error_sqlstr)
     cursor.close()
 
 
