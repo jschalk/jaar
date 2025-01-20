@@ -374,15 +374,27 @@ def create_agg_insert_query(
     conn: sqlite3_Connection,
     src_table: str,
     dst_table: str,
+    focus_cols: list[str],
     exclude_cols: set[str],
 ) -> str:
+    focus_cols_set = set(focus_cols)
     dst_columns = get_table_columns(conn, dst_table)
     dst_columns = [dst_col for dst_col in dst_columns if dst_col not in exclude_cols]
     dst_columns_str = ", ".join(list(dst_columns))
+    select_columns_str = None
+    for dst_column in dst_columns:
+        if select_columns_str is None and dst_column in focus_cols_set:
+            select_columns_str = f"{dst_column}"
+        elif dst_column in focus_cols_set:
+            select_columns_str += f", {dst_column}"
+        else:
+            select_columns_str += f", MAX({dst_column})"
+    group_by_columns_str = ", ".join(focus_cols)
+
     return f"""INSERT INTO {dst_table} ({dst_columns_str})
-SELECT {dst_columns_str}
+SELECT {select_columns_str}
 FROM {src_table}
 WHERE error_message IS NULL
-GROUP BY {dst_columns_str}
+GROUP BY {group_by_columns_str}
 ;
 """

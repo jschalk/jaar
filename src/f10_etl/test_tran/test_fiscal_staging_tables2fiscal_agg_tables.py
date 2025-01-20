@@ -63,6 +63,7 @@ from os.path import exists as os_path_exists
 def test_GlobalVairableAGG_INSERT_SQLSTR_ReturnsObj():
     # ESTABLISH
     x_objs = FiscalPrimeObjsRef()
+    x_cols = FiscalPrimeColumnsRef()
     x_exclude_cols = {
         idea_number_str(),
         face_name_str(),
@@ -77,6 +78,7 @@ def test_GlobalVairableAGG_INSERT_SQLSTR_ReturnsObj():
             fiscal_db_conn,
             src_table=x_objs.unit_stage_tablename,
             dst_table=x_objs.unit_agg_tablename,
+            focus_cols=[fiscal_title_str()],
             exclude_cols=x_exclude_cols,
         )
 
@@ -88,10 +90,10 @@ def test_GlobalVairableAGG_INSERT_SQLSTR_ReturnsObj():
         columns_header = """fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title"""
         tablename = "fiscalunit"
         expected_ficsalunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
-SELECT {columns_header}
+SELECT fiscal_title, MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(timeline_title)
 FROM {tablename}_staging
 WHERE error_message IS NULL
-GROUP BY {columns_header}
+GROUP BY fiscal_title
 ;
 """
         assert FISCALUNIT_AGG_INSERT_SQLSTR == expected_ficsalunit_sqlstr
@@ -101,15 +103,23 @@ GROUP BY {columns_header}
             fiscal_db_conn,
             src_table=x_objs.deal_stage_tablename,
             dst_table=x_objs.deal_agg_tablename,
+            focus_cols=[fiscal_title_str(), owner_name_str(), time_int_str()],
             exclude_cols=x_exclude_cols,
         )
         assert FISCALDEAL_AGG_INSERT_SQLSTR == generated_fiscaldeal_sqlstr
 
         # WHEN / THEN
+        cash_focus_cols = [
+            fiscal_title_str(),
+            owner_name_str(),
+            acct_name_str(),
+            time_int_str(),
+        ]
         generated_fiscalcash_sqlstr = create_agg_insert_query(
             fiscal_db_conn,
             src_table=x_objs.cash_stage_tablename,
             dst_table=x_objs.cash_agg_tablename,
+            focus_cols=cash_focus_cols,
             exclude_cols=x_exclude_cols,
         )
         assert FISCALCASH_AGG_INSERT_SQLSTR == generated_fiscalcash_sqlstr
@@ -119,6 +129,7 @@ GROUP BY {columns_header}
             fiscal_db_conn,
             src_table=x_objs.hour_stage_tablename,
             dst_table=x_objs.hour_agg_tablename,
+            focus_cols=[fiscal_title_str(), hour_title_str()],
             exclude_cols=x_exclude_cols,
         )
         assert FISCALHOUR_AGG_INSERT_SQLSTR == generated_fiscalhour_sqlstr
@@ -128,6 +139,7 @@ GROUP BY {columns_header}
             fiscal_db_conn,
             src_table=x_objs.mont_stage_tablename,
             dst_table=x_objs.mont_agg_tablename,
+            focus_cols=[fiscal_title_str(), month_title_str()],
             exclude_cols=x_exclude_cols,
         )
         assert FISCALMONT_AGG_INSERT_SQLSTR == generated_fiscalmont_sqlstr
@@ -137,6 +149,7 @@ GROUP BY {columns_header}
             fiscal_db_conn,
             src_table=x_objs.week_stage_tablename,
             dst_table=x_objs.week_agg_tablename,
+            focus_cols=[fiscal_title_str(), weekday_title_str()],
             exclude_cols=x_exclude_cols,
         )
         assert FISCALWEEK_AGG_INSERT_SQLSTR == generated_fiscalweek_sqlstr
@@ -562,10 +575,10 @@ def test_fiscal_staging_tables2fiscal_agg_tables_Scenario6_fiscalcash_Some_error
     bob_inx = "Bobby"
     yao_inx = "Yao"
     t1_time_int = 33
-    t1_quota_1 = 200
-    t1_quota_2 = 300
+    t1_amount_1 = 200
+    t1_amount_2 = 300
     t2_time_int = 55
-    t2_quota = 400
+    t2_amount = 400
     x_error_message = "Inconsistent fiscal data"
     x_objs = FiscalPrimeObjsRef()
     x_cols = FiscalPrimeColumnsRef()
@@ -575,12 +588,13 @@ def test_fiscal_staging_tables2fiscal_agg_tables_Scenario6_fiscalcash_Some_error
         insert_staging_sqlstr = f"""
 INSERT INTO {x_objs.cash_stage_tablename} ({x_cols.cash_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_quota_1},'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_quota_2},'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_quota},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_quota},NULL)
-, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_quota_1},NULL)
-, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_quota},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_amount_1},'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_amount_2},'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_amount},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_amount},NULL)
+, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_amount_1},NULL)
+, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_amount},NULL)
+, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_time_int},NULL,NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -597,9 +611,9 @@ VALUES
         select_agg_sqlstr = f"SELECT {x_cols.cash_agg_csv_header} FROM {agg_tablename};"
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
-        expected_agg_row0 = (accord23_str, bob_inx, yao_inx, t2_time_int, t2_quota)
-        expected_agg_row1 = (accord45_str, bob_inx, yao_inx, t1_time_int, t1_quota_1)
-        expected_agg_row2 = (accord45_str, bob_inx, yao_inx, t2_time_int, t2_quota)
+        expected_agg_row0 = (accord23_str, bob_inx, yao_inx, t2_time_int, t2_amount)
+        expected_agg_row1 = (accord45_str, bob_inx, yao_inx, t1_time_int, t1_amount_1)
+        expected_agg_row2 = (accord45_str, bob_inx, yao_inx, t2_time_int, t2_amount)
         assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
 
 

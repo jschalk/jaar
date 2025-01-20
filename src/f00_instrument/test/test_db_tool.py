@@ -578,15 +578,16 @@ def test_create_agg_insert_query_ReturnsObj_Scenario0():
             conn,
             dst_table=dst_tablename,
             src_table=src_tablename,
+            focus_cols=["name", "age"],
             exclude_cols={hair_str},
         )
 
         # THEN
         expected_sqlstr = f"""INSERT INTO {dst_tablename} (name, age, email)
-SELECT name, age, email
+SELECT name, age, MAX(email)
 FROM {src_tablename}
 WHERE error_message IS NULL
-GROUP BY name, age, email
+GROUP BY name, age
 ;
 """
         print(f"     {gen_sqlstr=}")
@@ -610,15 +611,16 @@ def test_create_agg_insert_query_ReturnsObj_Scenario1():
             conn,
             dst_table=dst_tablename,
             src_table=src_tablename,
+            focus_cols=["name"],
             exclude_cols={hair_str},
         )
 
         # THEN
         expected_sqlstr = f"""INSERT INTO {dst_tablename} (name, age)
-SELECT name, age
+SELECT name, MAX(age)
 FROM {src_tablename}
 WHERE error_message IS NULL
-GROUP BY name, age
+GROUP BY name
 ;
 """
         print(f"     {gen_sqlstr=}")
