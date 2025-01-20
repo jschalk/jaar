@@ -924,18 +924,17 @@ FROM fiscal_cashbook_staging
 GROUP BY acct_name, fiscal_title, owner_name, time_int
 HAVING MIN(amount) != MAX(amount)
 """
-FISCALHOUR_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FISCALHOUR_INCONSISTENCY_SQLSTR = """SELECT fiscal_title, hour_title
 FROM fiscal_timeline_hour_staging
 GROUP BY fiscal_title, hour_title
-HAVING MIN(hour_title) != MAX(hour_title)
-    OR MIN(cumlative_minute) != MAX(cumlative_minute)
+HAVING MIN(cumlative_minute) != MAX(cumlative_minute)
 """
-FISCALMONT_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FISCALMONT_INCONSISTENCY_SQLSTR = """SELECT fiscal_title, month_title
 FROM fiscal_timeline_month_staging
 GROUP BY fiscal_title, month_title
 HAVING MIN(cumlative_day) != MAX(cumlative_day)
 """
-FISCALWEEK_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
+FISCALWEEK_INCONSISTENCY_SQLSTR = """SELECT fiscal_title, weekday_title
 FROM fiscal_timeline_weekday_staging
 GROUP BY fiscal_title, weekday_title
 HAVING MIN(weekday_order) != MAX(weekday_order)
@@ -995,6 +994,7 @@ UPDATE fiscal_timeline_month_staging
 SET error_message = 'Inconsistent fiscal data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fiscal_title = fiscal_timeline_month_staging.fiscal_title
+    AND inconsistency_rows.month_title = fiscal_timeline_month_staging.month_title
 ;
 """
 FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
@@ -1005,12 +1005,16 @@ UPDATE fiscal_timeline_weekday_staging
 SET error_message = 'Inconsistent fiscal data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fiscal_title = fiscal_timeline_weekday_staging.fiscal_title
+    AND inconsistency_rows.weekday_title = fiscal_timeline_weekday_staging.weekday_title
 ;
 """
 
 
 def set_fiscal_staging_error_message(fiscal_db_conn: sqlite3_Connection):
     cursor = fiscal_db_conn.cursor()
+    cursor.execute(FISCALWEEK_INCONSISTENCY_SQLSTR)
+    print(f"{cursor.fetchall()=}")
+
     cursor.execute(FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
     cursor.execute(FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
     cursor.execute(FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR)
