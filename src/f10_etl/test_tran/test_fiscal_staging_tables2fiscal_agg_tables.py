@@ -283,239 +283,217 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-# def test_fiscal_staging_tables2fiscal_agg_tables_Scenario1_fiscalunit_Some_error_message(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_inx = "Suzy"
-#     event3 = 3
-#     event7 = 7
-#     accord23_str = "accord23"
-#     accord45_str = "accord45"
-#     a23_fund_coin = 11
-#     a23_penny_1 = 22
-#     a23_penny_2 = 99
-#     a23_respect_bit = 33
-#     a23_present_time = 44
-#     a23_bridge = ";"
-#     a23_c400_number = 55
-#     a23_yr1_jan1_offset = 66
-#     a23_monthday_distortion = 77
-#     a23_timeline_title = "accord23_timeline"
-#     x_objs = FiscalPrimeObjsRef()
-#     x_cols = FiscalPrimeColumnsRef()
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario1_fiscalunit_With_error_message(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    a23_fund_coin = 11
+    a23_penny = 22
+    a23_respect_bit = 33
+    a23_present_time = 44
+    a23_bridge = ";"
+    a23_c400_number = 55
+    a23_yr1_jan1_offset = 66
+    a23_monthday_distortion = 77
+    a23_timeline_title = "accord23_timeline"
+    x_objs = FiscalPrimeObjsRef()
+    x_cols = FiscalPrimeColumnsRef()
 
-#     with sqlite3_connect(":memory:") as fiscal_db_conn:
-#         create_fiscal_tables(fiscal_db_conn)
-#         x_tablename = x_objs.unit_stage_tablename
-#         assert db_table_exists(fiscal_db_conn, x_tablename)
-#         insert_staging_sqlstr = f"""
-# INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
-# VALUES
-#   ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-# ;
-# """
-#         print(f"{insert_staging_sqlstr=}")
-#         cursor = fiscal_db_conn.cursor()
-#         cursor.execute(insert_staging_sqlstr)
-#         assert get_row_count(fiscal_db_conn, x_tablename) == 3
-#         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, error_message FROM {x_tablename};"
-#         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
-#         cursor.execute(select_sqlstr)
-#         # print(f"{select_sqlstr=}")
-#         rows = cursor.fetchall()
-#         # print(f"{rows=}")
-#         assert rows == [
-#             (event3, accord23_str, None),
-#             (event7, accord23_str, None),
-#             (event7, accord45_str, None),
-#         ]
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        create_fiscal_tables(fiscal_db_conn)
+        staging_tablename = x_objs.unit_stage_tablename
+        insert_staging_sqlstr = f"""
+INSERT INTO {staging_tablename} ({x_cols.unit_staging_csv_header})
+VALUES
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}','Inconsistent fiscal data')
+, ('br00555','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}','Inconsistent fiscal data')
+, ('br00666','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}','Inconsistent fiscal data')
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        agg_tablename = x_objs.unit_agg_tablename
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 0
 
-#         # WHEN
-#         fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn)
+        # WHEN
+        fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn)
 
-#         # THEN
-#         cursor.execute(select_sqlstr)
-#         rows = cursor.fetchall()
-#         x_error_message = "Inconsistent fiscal data"
-#         assert rows == [
-#             (event3, accord23_str, x_error_message),
-#             (event7, accord23_str, x_error_message),
-#             (event7, accord45_str, None),
-#         ]
-
-
-# def test_fiscal_staging_tables2fiscal_agg_tables_Scenario2_fiscalhour_Some_error_message(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_inx = "Suzy"
-#     event3 = 3
-#     event7 = 7
-#     accord23_str = "accord23"
-#     accord45_str = "accord45"
-#     a23_hour_title = "4pm"
-#     a23_cumlative_minute_1 = 44
-#     a23_cumlative_minute_2 = 77
-#     x_objs = FiscalPrimeObjsRef()
-#     x_cols = FiscalPrimeColumnsRef()
-
-#     with sqlite3_connect(":memory:") as fiscal_db_conn:
-#         create_fiscal_tables(fiscal_db_conn)
-#         x_tablename = x_objs.hour_stage_tablename
-#         assert db_table_exists(fiscal_db_conn, x_tablename)
-#         insert_staging_sqlstr = f"""
-# INSERT INTO {x_tablename} ({x_cols.hour_staging_csv_header})
-# VALUES
-#   ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_hour_title}',{a23_cumlative_minute_1},NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_hour_title}',{a23_cumlative_minute_2},NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_hour_title}',{a23_cumlative_minute_1},NULL)
-# ;
-# """
-#         print(f"{insert_staging_sqlstr=}")
-#         cursor = fiscal_db_conn.cursor()
-#         cursor.execute(insert_staging_sqlstr)
-#         assert get_row_count(fiscal_db_conn, x_tablename) == 3
-#         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, error_message FROM {x_tablename};"
-#         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
-#         cursor.execute(select_sqlstr)
-#         # print(f"{select_sqlstr=}")
-#         rows = cursor.fetchall()
-#         # print(f"{rows=}")
-#         assert rows == [
-#             (event3, accord23_str, None),
-#             (event7, accord23_str, None),
-#             (event7, accord45_str, None),
-#         ]
-
-#         # WHEN
-#         fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn)
-
-#         # THEN
-#         cursor.execute(select_sqlstr)
-#         rows = cursor.fetchall()
-#         x_error_message = "Inconsistent fiscal data"
-#         assert rows == [
-#             (event3, accord23_str, x_error_message),
-#             (event7, accord23_str, x_error_message),
-#             (event7, accord45_str, None),
-#         ]
+        # THEN
+        assert get_row_count(fiscal_db_conn, agg_tablename) != 0
+        select_agg_sqlstr = f"SELECT {x_cols.unit_agg_csv_header} FROM {agg_tablename};"
+        cursor.execute(select_agg_sqlstr)
+        rows = cursor.fetchall()
+        expected_agg_row0 = (
+            accord23_str,
+            a23_fund_coin,
+            a23_penny,
+            a23_respect_bit,
+            a23_present_time,
+            a23_bridge,
+            a23_c400_number,
+            a23_yr1_jan1_offset,
+            a23_monthday_distortion,
+            a23_timeline_title,
+        )
+        # print(f"{rows}")
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 1
+        assert rows == [expected_agg_row0]
 
 
-# def test_fiscal_staging_tables2fiscal_agg_tables_Scenario3_fiscalhour_Some_error_message(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_inx = "Suzy"
-#     event3 = 3
-#     event7 = 7
-#     accord23_str = "accord23"
-#     accord45_str = "accord45"
-#     a23_month_title_1 = "March"
-#     a23_month_title_2 = "Marche"
-#     a23_cumlative_day = 44
-#     x_objs = FiscalPrimeObjsRef()
-#     x_cols = FiscalPrimeColumnsRef()
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario2_fiscalhour_Some_error_message(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    event9 = 9
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    _4pm_str = "4pm"
+    _8pm_str = "8pm"
+    cumlative_minute_1 = 44
+    cumlative_minute_2 = 77
+    x_error_message = "Inconsistent fiscal data"
+    x_objs = FiscalPrimeObjsRef()
+    x_cols = FiscalPrimeColumnsRef()
 
-#     with sqlite3_connect(":memory:") as fiscal_db_conn:
-#         create_fiscal_tables(fiscal_db_conn)
-#         x_tablename = x_objs.mont_stage_tablename
-#         assert db_table_exists(fiscal_db_conn, x_tablename)
-#         insert_staging_sqlstr = f"""
-# INSERT INTO {x_tablename} ({x_cols.mont_staging_csv_header})
-# VALUES
-#   ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_month_title_1}',{a23_cumlative_day},NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_month_title_2}',{a23_cumlative_day},NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_month_title_2}',{a23_cumlative_day},NULL)
-# ;
-# """
-#         print(f"{insert_staging_sqlstr=}")
-#         cursor = fiscal_db_conn.cursor()
-#         cursor.execute(insert_staging_sqlstr)
-#         assert get_row_count(fiscal_db_conn, x_tablename) == 3
-#         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, error_message FROM {x_tablename};"
-#         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
-#         cursor.execute(select_sqlstr)
-#         # print(f"{select_sqlstr=}")
-#         rows = cursor.fetchall()
-#         # print(f"{rows=}")
-#         assert rows == [
-#             (event3, accord23_str, None),
-#             (event7, accord23_str, None),
-#             (event7, accord45_str, None),
-#         ]
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        create_fiscal_tables(fiscal_db_conn)
+        staging_tablename = x_objs.hour_stage_tablename
+        insert_staging_sqlstr = f"""
+INSERT INTO {staging_tablename} ({x_cols.hour_staging_csv_header})
+VALUES
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{_4pm_str}',{cumlative_minute_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{_4pm_str}',{cumlative_minute_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{_4pm_str}',{cumlative_minute_1},'{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord45_str}','{_4pm_str}',{cumlative_minute_2},'{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord23_str}','{_8pm_str}',{cumlative_minute_2},NULL)
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        agg_tablename = x_objs.hour_agg_tablename
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 0
 
-#         # WHEN
-#         fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn)
+        # WHEN
+        fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn)
 
-#         # THEN
-#         cursor.execute(select_sqlstr)
-#         rows = cursor.fetchall()
-#         x_error_message = "Inconsistent fiscal data"
-#         assert rows == [
-#             (event3, accord23_str, x_error_message),
-#             (event7, accord23_str, x_error_message),
-#             (event7, accord45_str, None),
-#         ]
+        # THEN
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 2
+        select_agg_sqlstr = f"SELECT {x_cols.hour_agg_csv_header} FROM {agg_tablename};"
+        cursor.execute(select_agg_sqlstr)
+        rows = cursor.fetchall()
+        expected_agg_row0 = (accord23_str, _4pm_str, cumlative_minute_1)
+        expected_agg_row1 = (accord23_str, _8pm_str, cumlative_minute_2)
+        assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-# def test_fiscal_staging_tables2fiscal_agg_tables_Scenario4_fiscalweek_Some_error_message(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_inx = "Suzy"
-#     event3 = 3
-#     event7 = 7
-#     accord23_str = "accord23"
-#     accord45_str = "accord45"
-#     a23_weekday_title_1 = "Wednesday"
-#     a23_weekday_title_2 = "Tuesday"
-#     a23_weekday_order = 7
-#     x_objs = FiscalPrimeObjsRef()
-#     x_cols = FiscalPrimeColumnsRef()
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario3_fiscalmont_Some_error_message(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    event9 = 9
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    apr_str = "Apr"
+    aug_str = "Aug"
+    cumlative_day_1 = 44
+    cumlative_day_2 = 77
+    x_error_message = "Inconsistent fiscal data"
+    x_objs = FiscalPrimeObjsRef()
+    x_cols = FiscalPrimeColumnsRef()
 
-#     with sqlite3_connect(":memory:") as fiscal_db_conn:
-#         create_fiscal_tables(fiscal_db_conn)
-#         x_tablename = x_objs.week_stage_tablename
-#         assert db_table_exists(fiscal_db_conn, x_tablename)
-#         insert_staging_sqlstr = f"""
-# INSERT INTO {x_tablename} ({x_cols.week_staging_csv_header})
-# VALUES
-#   ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_weekday_title_1}',{a23_weekday_order},NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_weekday_title_2}',{a23_weekday_order},NULL)
-# , ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_weekday_title_1}',{a23_weekday_order},NULL)
-# ;
-# """
-#         print(f"{insert_staging_sqlstr=}")
-#         cursor = fiscal_db_conn.cursor()
-#         cursor.execute(insert_staging_sqlstr)
-#         assert get_row_count(fiscal_db_conn, x_tablename) == 3
-#         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, error_message FROM {x_tablename};"
-#         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
-#         cursor.execute(select_sqlstr)
-#         # print(f"{select_sqlstr=}")
-#         rows = cursor.fetchall()
-#         # print(f"{rows=}")
-#         assert rows == [
-#             (event3, accord23_str, None),
-#             (event7, accord23_str, None),
-#             (event7, accord45_str, None),
-#         ]
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        create_fiscal_tables(fiscal_db_conn)
+        insert_staging_sqlstr = f"""
+INSERT INTO {x_objs.mont_stage_tablename} ({x_cols.mont_staging_csv_header})
+VALUES
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{apr_str}',{cumlative_day_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{apr_str}',{cumlative_day_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{aug_str}',{cumlative_day_1},'{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord45_str}','{aug_str}',{cumlative_day_2},'{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord23_str}','{aug_str}',{cumlative_day_2},NULL)
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        agg_tablename = x_objs.mont_agg_tablename
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 0
 
-#         # WHEN
-#         fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn)
+        # WHEN
+        fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn)
 
-#         # THEN
-#         cursor.execute(select_sqlstr)
-#         rows = cursor.fetchall()
-#         x_error_message = "Inconsistent fiscal data"
-#         assert rows == [
-#             (event3, accord23_str, x_error_message),
-#             (event7, accord23_str, x_error_message),
-#             (event7, accord45_str, None),
-#         ]
+        # THEN
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 2
+        select_agg_sqlstr = f"SELECT {x_cols.mont_agg_csv_header} FROM {agg_tablename};"
+        cursor.execute(select_agg_sqlstr)
+        rows = cursor.fetchall()
+        expected_agg_row0 = (accord23_str, apr_str, cumlative_day_1)
+        expected_agg_row1 = (accord23_str, aug_str, cumlative_day_2)
+        assert rows == [expected_agg_row0, expected_agg_row1]
+
+
+def test_fiscal_staging_tables2fiscal_agg_tables_Scenario4_fiscalweek_Some_error_message(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    event3 = 3
+    event7 = 7
+    event9 = 9
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    mon_str = "Mon"
+    wed_str = "Wed"
+    weekday_order_1 = 4
+    weekday_order_2 = 7
+    x_error_message = "Inconsistent fiscal data"
+    x_objs = FiscalPrimeObjsRef()
+    x_cols = FiscalPrimeColumnsRef()
+
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        create_fiscal_tables(fiscal_db_conn)
+        insert_staging_sqlstr = f"""
+INSERT INTO {x_objs.week_stage_tablename} ({x_cols.week_staging_csv_header})
+VALUES
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{mon_str}',{weekday_order_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{mon_str}',{weekday_order_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{wed_str}',{weekday_order_1},'{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord45_str}','{wed_str}',{weekday_order_2},'{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord23_str}','{wed_str}',{weekday_order_2},NULL)
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor = fiscal_db_conn.cursor()
+        cursor.execute(insert_staging_sqlstr)
+        agg_tablename = x_objs.week_agg_tablename
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 0
+
+        # WHEN
+        fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn)
+
+        # THEN
+        assert get_row_count(fiscal_db_conn, agg_tablename) == 2
+        select_agg_sqlstr = f"SELECT {x_cols.week_agg_csv_header} FROM {agg_tablename};"
+        cursor.execute(select_agg_sqlstr)
+        rows = cursor.fetchall()
+        expected_agg_row0 = (accord23_str, mon_str, weekday_order_1)
+        expected_agg_row1 = (accord23_str, wed_str, weekday_order_2)
+        assert rows == [expected_agg_row0, expected_agg_row1]
 
 
 # def test_fiscal_staging_tables2fiscal_agg_tables_Scenario5_fiscaldeal_Some_error_message(

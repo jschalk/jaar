@@ -926,21 +926,19 @@ HAVING MIN(amount) != MAX(amount)
 """
 FISCALHOUR_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
 FROM fiscal_timeline_hour_staging
-GROUP BY fiscal_title
+GROUP BY fiscal_title, hour_title
 HAVING MIN(hour_title) != MAX(hour_title)
     OR MIN(cumlative_minute) != MAX(cumlative_minute)
 """
 FISCALMONT_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
 FROM fiscal_timeline_month_staging
-GROUP BY fiscal_title
-HAVING MIN(month_title) != MAX(month_title)
-    OR MIN(cumlative_day) != MAX(cumlative_day)
+GROUP BY fiscal_title, month_title
+HAVING MIN(cumlative_day) != MAX(cumlative_day)
 """
 FISCALWEEK_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
 FROM fiscal_timeline_weekday_staging
-GROUP BY fiscal_title
-HAVING MIN(weekday_title) != MAX(weekday_title)
-    OR MIN(weekday_order) != MAX(weekday_order)
+GROUP BY fiscal_title, weekday_title
+HAVING MIN(weekday_order) != MAX(weekday_order)
 """
 
 FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
@@ -986,6 +984,7 @@ UPDATE fiscal_timeline_hour_staging
 SET error_message = 'Inconsistent fiscal data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fiscal_title = fiscal_timeline_hour_staging.fiscal_title
+    AND inconsistency_rows.hour_title = fiscal_timeline_hour_staging.hour_title
 ;
 """
 FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
@@ -1070,9 +1069,9 @@ def fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):
     cursor.execute(FISCALUNIT_AGG_INSERT_SQLSTR)
     # cursor.execute(FISCALDEAL_AGG_INSERT_SQLSTR)
     # cursor.execute(FISCALCASH_AGG_INSERT_SQLSTR)
-    # cursor.execute(FISCALHOUR_AGG_INSERT_SQLSTR)
-    # cursor.execute(FISCALMONT_AGG_INSERT_SQLSTR)
-    # cursor.execute(FISCALWEEK_AGG_INSERT_SQLSTR)
+    cursor.execute(FISCALHOUR_AGG_INSERT_SQLSTR)
+    cursor.execute(FISCALMONT_AGG_INSERT_SQLSTR)
+    cursor.execute(FISCALWEEK_AGG_INSERT_SQLSTR)
     cursor.close()
 
 
