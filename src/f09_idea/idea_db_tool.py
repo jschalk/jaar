@@ -12,6 +12,7 @@ from src.f00_instrument.db_toolbox import (
     insert_csv,
     db_table_exists,
     get_table_columns,
+    create_table_from_columns,
 )
 from src.f00_instrument.dict_toolbox import set_in_nested_dict
 from src.f08_pidgin.map import MapCore
@@ -376,5 +377,42 @@ def save_table_to_csv(
     save_dataframe_to_csv(fiscalunit_df, fiscal_mstr_dir, fiscalunit_filename)
 
 
-def create_idea_into_category_staging_query():
-    return ""
+def create_idea_sorted_table(
+    conn: sqlite3_Connection, tablename: str, columns_list: list[str]
+):
+    columns_list = get_custom_sorted_list(columns_list)
+    create_table_from_columns(conn, tablename, columns_list, get_idea_sqlite_types())
+
+
+def create_idea_into_category_staging_query(
+    conn_or_cursor: sqlite3_Connection,
+    idea_number: str,
+    x_category: str,
+    x_jkeys: set[str],
+) -> str:
+    idea_cols = get_table_columns(conn_or_cursor, f"{idea_number}_staging")
+    cat_cols = get_table_columns(conn_or_cursor, f"{x_category}_staging")
+    columns_str = ", ".join(cat_cols)
+    keys_where_str = None
+    for x_jkey in x_jkeys:
+        if keys_where_str is None:
+            keys_where_str = f"WHERE {x_jkey} IS NOT NULL"
+        else:
+            keys_where_str += f" AND {x_jkey} IS NOT NULL"
+    values_cols = set(cat_cols).difference_update(x_jkeys)
+    values_where_str = ""
+    if values_cols:
+        for value_col in values_cols:
+            if values_where_str is None:
+                values_where_str = f"\n  AND ({value_col} IS NOT NULL"
+            else:
+                values_where_str += f" OR {value_col} IS NOT NULL"
+        if len(values_where_str) > 0:
+            values_where_str += ")"
+    return f"""INSERT INTO {x_category}_staging (idea_number, {columns_str})
+SELECT '{idea_number}' as idea_number, {columns_str}
+FROM {idea_number}_staging
+{keys_where_str}{values_where_str}
+GROUP BY {columns_str}
+;
+"""

@@ -572,13 +572,14 @@ def test_get_table_columns_ReturnsObj_Scenario2_TableExists_PassCursorObj(
 def test_create_select_inconsistency_query_ReturnsObj_Scenario0():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
         x_tablename = "dark_side"
         x_columns = ["id", "name", "age", "email", "hair"]
-        create_table_from_columns(conn, x_tablename, x_columns, {})
+        create_table_from_columns(cursor, x_tablename, x_columns, {})
 
         # WHEN
         gen_sqlstr = create_select_inconsistency_query(
-            conn, x_tablename, {"id"}, {"email"}
+            cursor, x_tablename, {"id"}, {"email"}
         )
 
         # THEN
@@ -595,13 +596,14 @@ HAVING MIN(name) != MAX(name)
 def test_create_select_inconsistency_query_ReturnsObj_Scenario1():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
         x_tablename = "dark_side"
         x_columns = ["id", "name", "age", "email", "hair"]
-        create_table_from_columns(conn, x_tablename, x_columns, {})
+        create_table_from_columns(cursor, x_tablename, x_columns, {})
 
         # WHEN
         gen_sqlstr = create_select_inconsistency_query(
-            conn, x_tablename, {"id", "name"}, {"email"}
+            cursor, x_tablename, {"id", "name"}, {"email"}
         )
 
         # THEN
@@ -617,13 +619,14 @@ HAVING MIN(age) != MAX(age)
 def test_create_update_inconsistency_error_query_ReturnsObj_Scenario0():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
         x_tablename = "dark_side"
         x_columns = ["id", "name", "age", "email", "hair"]
-        create_table_from_columns(conn, x_tablename, x_columns, {})
+        create_table_from_columns(cursor, x_tablename, x_columns, {})
 
         # WHEN
         gen_sqlstr = create_update_inconsistency_error_query(
-            conn, x_tablename, {"id"}, {"email"}
+            cursor, x_tablename, {"id"}, {"email"}
         )
 
         # THEN
@@ -648,13 +651,14 @@ WHERE inconsistency_rows.id = dark_side.id
 def test_create_update_inconsistency_error_queryReturnsObj_Scenario1():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
         x_tablename = "dark_side"
         x_columns = ["id", "name", "age", "email", "hair"]
-        create_table_from_columns(conn, x_tablename, x_columns, {})
+        create_table_from_columns(cursor, x_tablename, x_columns, {})
 
         # WHEN
         gen_sqlstr = create_update_inconsistency_error_query(
-            conn, x_tablename, {"id", "name"}, {"email"}
+            cursor, x_tablename, {"id", "name"}, {"email"}
         )
 
         # THEN
@@ -678,17 +682,18 @@ WHERE inconsistency_rows.id = dark_side.id
 def test_create_table2table_agg_insert_query_ReturnsObj_Scenario0():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
         hair_str = "hair"
         src_tablename = "side1"
         src_columns = ["id", "name", "age", "email", hair_str]
-        create_table_from_columns(conn, src_tablename, src_columns, {})
+        create_table_from_columns(cursor, src_tablename, src_columns, {})
         dst_tablename = "side2"
         dst_columns = ["name", "age", "email", hair_str]
-        create_table_from_columns(conn, dst_tablename, dst_columns, {})
+        create_table_from_columns(cursor, dst_tablename, dst_columns, {})
 
         # WHEN
         gen_sqlstr = create_table2table_agg_insert_query(
-            conn,
+            cursor,
             dst_table=dst_tablename,
             src_table=src_tablename,
             focus_cols=["name", "age"],
@@ -711,17 +716,18 @@ GROUP BY name, age
 def test_create_table2table_agg_insert_query_ReturnsObj_Scenario1():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
         hair_str = "hair"
         src_tablename = "side1"
         src_columns = ["id", "name", "age", "email", hair_str]
-        create_table_from_columns(conn, src_tablename, src_columns, {})
+        create_table_from_columns(cursor, src_tablename, src_columns, {})
         dst_tablename = "side2"
         dst_columns = ["name", "age", hair_str]
-        create_table_from_columns(conn, dst_tablename, dst_columns, {})
+        create_table_from_columns(cursor, dst_tablename, dst_columns, {})
 
         # WHEN
         gen_sqlstr = create_table2table_agg_insert_query(
-            conn,
+            cursor,
             dst_table=dst_tablename,
             src_table=src_tablename,
             focus_cols=["name"],

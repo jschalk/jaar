@@ -2,7 +2,6 @@ from src.f00_instrument.file import create_path, save_file, open_file
 from src.f00_instrument.db_toolbox import (
     db_table_exists,
     get_row_count,
-    create_table_from_columns,
     create_select_inconsistency_query,
 )
 from src.f01_road.finance_tran import bridge_str, quota_str, time_int_str
@@ -37,14 +36,14 @@ from src.f07_fiscal.fiscal_config import (
     weekday_order_str,
     weekday_title_str,
 )
-from src.f08_pidgin.pidgin_config import event_int_str, pidginunit_str
+from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_config import (
     idea_number_str,
     get_idea_sqlite_types,
     get_idea_config_dict,
     idea_type_str,
 )
-from src.f09_idea.idea_db_tool import get_pragma_table_fetchall, get_custom_sorted_list
+from src.f09_idea.idea_db_tool import create_idea_sorted_table
 from src.f10_etl.fiscal_etl_tool import (
     FiscalPrimeObjsRef,
     FiscalPrimeColumnsRef,
@@ -61,12 +60,6 @@ from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 from copy import copy as copy_copy
 from os.path import exists as os_path_exists
-
-
-def create_idea_staging_table(
-    conn: sqlite3_Connection, tablename: str, columns_list: list[str]
-):
-    create_table_from_columns(conn, tablename, columns_list, get_idea_sqlite_types())
 
 
 def test_idea_staging_tables2fiscal_staging_tables_Scenario0_From_br00011_IdeaFile(
@@ -165,7 +158,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario1_From_br00011_IdeaTa
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
         br00011_tablename = f"{br00011_str}_staging"
-        create_idea_staging_table(cursor, br00011_tablename, br00011_columns)
+        create_idea_sorted_table(cursor, br00011_tablename, br00011_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00011_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()})
 VALUES 
@@ -252,7 +245,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario2_Idea_br00000_Table_
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00000_tablename = f"{br00000_str}_staging"
         cursor = fiscal_db_conn.cursor()
-        create_idea_staging_table(cursor, br00000_tablename, br00000_columns)
+        create_idea_sorted_table(cursor, br00000_tablename, br00000_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()})
 VALUES
@@ -349,7 +342,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario3_Idea_br00000_Table_
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00000_tablename = f"{br00000_str}_staging"
         cursor = fiscal_db_conn.cursor()
-        create_idea_staging_table(cursor, br00000_tablename, br00000_columns)
+        create_idea_sorted_table(cursor, br00000_tablename, br00000_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()})
 VALUES
@@ -437,7 +430,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario4_Idea_br00001_Table_
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00001_tablename = f"{br00001_str}_staging"
         cursor = fiscal_db_conn.cursor()
-        create_idea_staging_table(cursor, br00001_tablename, br00001_columns)
+        create_idea_sorted_table(cursor, br00001_tablename, br00001_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{time_int_str()},{quota_str()})
 VALUES
@@ -515,7 +508,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario5_Idea_br00002_Table_
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00002_tablename = f"{br00002_str}_staging"
         cursor = fiscal_db_conn.cursor()
-        create_idea_staging_table(cursor, br00002_tablename, br00002_columns)
+        create_idea_sorted_table(cursor, br00002_tablename, br00002_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00002_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{time_int_str()},{amount_str()})
 VALUES
@@ -591,7 +584,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario6_Idea_br00003_Table_
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00003_tablename = f"{br00003_str}_staging"
         cursor = fiscal_db_conn.cursor()
-        create_idea_staging_table(cursor, br00003_tablename, br00003_columns)
+        create_idea_sorted_table(cursor, br00003_tablename, br00003_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00003_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{hour_title_str()},{cumlative_minute_str()})
 VALUES
@@ -663,7 +656,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario7_Idea_br00004_Table_
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00004_tablename = f"{br00004_str}_staging"
         cursor = fiscal_db_conn.cursor()
-        create_idea_staging_table(cursor, br00004_tablename, br00004_columns)
+        create_idea_sorted_table(cursor, br00004_tablename, br00004_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00004_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{month_title_str()},{cumlative_day_str()})
 VALUES
@@ -735,7 +728,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario8_Idea_br00005_Table_
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00005_tablename = f"{br00005_str}_staging"
         cursor = fiscal_db_conn.cursor()
-        create_idea_staging_table(cursor, br00005_tablename, br00005_columns)
+        create_idea_sorted_table(cursor, br00005_tablename, br00005_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00005_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{weekday_title_str()},{weekday_order_str()})
 VALUES
