@@ -25,8 +25,13 @@ from src.f09_idea.idea_config import (
     get_idea_sqlite_types,
     get_idea_config_dict,
     idea_type_str,
+    get_idea_numbers,
 )
-from src.f09_idea.idea_db_tool import get_pragma_table_fetchall, get_custom_sorted_list
+from src.f09_idea.idea_db_tool import (
+    get_pragma_table_fetchall,
+    get_custom_sorted_list,
+    get_idea_into_category_staging_query,
+)
 from src.f10_etl.fiscal_etl_tool import (
     FiscalPrimeObjsRef,
     FiscalPrimeColumnsRef,
@@ -37,6 +42,7 @@ from src.f10_etl.tran_sqlstrs import (
     get_bud_create_table_sqlstrs,
     create_fiscal_tables,
     create_bud_tables,
+    create_all_idea_tables,
     get_all_inconsistency_sqlstrs,
     get_fiscal_inconsistency_sqlstrs,
     get_update_inconsist_error_message_sqlstrs,
@@ -44,6 +50,7 @@ from src.f10_etl.tran_sqlstrs import (
     get_insert_agg_from_staging_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
     FISCALUNIT_AGG_INSERT_SQLSTR,
+    get_idea2category_staging_sqlstrs,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -135,6 +142,23 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj():
     )
     print(f"{expected_bud_tablenames=}")
     assert set(bud_create_table_sqlstrs.keys()) == expected_bud_tablenames
+
+
+def test_create_all_idea_tables_CreatesFiscalStagingTables():
+    # ESTABLISH sourcery skip: no-loop-in-tests
+    idea_numbers = get_idea_numbers()
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        cursor = fiscal_db_conn.cursor()
+        for idea_number in idea_numbers:
+            assert db_table_exists(cursor, f"{idea_number}_staging") is False
+
+        # WHEN
+        create_all_idea_tables(cursor)
+
+        # THEN
+        for idea_number in idea_numbers:
+            print(f"{idea_number} checking...")
+            assert db_table_exists(cursor, f"{idea_number}_staging")
 
 
 def test_create_bud_tables_CreatesFiscalStagingTables():
@@ -383,7 +407,7 @@ def test_get_fiscal_update_inconsist_error_message_sqlstrs_ReturnsObj():
 
 
 def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
-    # sourcery skip: extract-method, no-loop-in-tests
+    # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
     insert_agg_from_staging_sqlstrs = get_insert_agg_from_staging_sqlstrs()
 
@@ -403,8 +427,9 @@ def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
         # if category_config.get(idea_type_str()) == fiscalunit_str()
     }
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_fiscal_tables(fiscal_db_conn)
-        create_bud_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
+        create_bud_tables(cursor)
 
         for x_category in idea_config:
             print(f"{x_category} checking...")
@@ -418,7 +443,7 @@ def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
 
             generated_table2table_agg_insert_sqlstr = (
                 create_table2table_agg_insert_query(
-                    fiscal_db_conn,
+                    cursor,
                     src_table=stage_tablename,
                     dst_table=agg_tablename,
                     focus_cols=cat_focus_columns,
@@ -431,7 +456,7 @@ def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
             assert x_sqlstr == generated_table2table_agg_insert_sqlstr
 
         generated_fiscalunit_sqlstr = create_table2table_agg_insert_query(
-            fiscal_db_conn,
+            cursor,
             src_table=x_objs.unit_stage_tablename,
             dst_table=x_objs.unit_agg_tablename,
             focus_cols=[fiscal_title_str()],
@@ -465,3 +490,43 @@ def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
     }
     expected_fiscal_cateogrys = fiscal_config.keys()
     assert set(fiscal_insert_agg_sqlstrs.keys()) == set(expected_fiscal_cateogrys)
+
+
+def test_idea_into_category_ReturnsObj_ForAll_idea_numbersAndAll_categorys():
+    # sourcery skip: extract-method, no-loop-in-tests
+    # ESTABLISH / WHEN
+    insert_agg_from_staging_sqlstrs = get_idea2category_staging_sqlstrs()
+
+    # THEN
+    x_objs = FiscalPrimeObjsRef()
+    x_exclude_cols = {
+        idea_number_str(),
+        face_name_str(),
+        event_int_str(),
+        "error_message",
+    }
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_category: category_config
+        for x_category, category_config in idea_config.items()
+        if category_config.get(idea_type_str()) != pidginunit_str()
+        # if category_config.get(idea_type_str()) == fiscalunit_str()
+    }
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        cursor = fiscal_db_conn.cursor()
+        create_all_idea_tables(cursor)
+        create_fiscal_tables(cursor)
+        create_bud_tables(cursor)
+
+        for x_category in idea_config:
+            cat_config = idea_config.get(x_category)
+            category_columns = set(cat_config.get("jkeys").keys())
+            for idea_number in get_idea_numbers():
+                print(f"{x_category} {idea_number} checking...")
+                generated_sqlstr = get_idea_into_category_staging_query(
+                    conn_or_cursor=cursor,
+                    idea_number=idea_number,
+                    x_category=x_category,
+                    x_jkeys=category_columns,
+                )
+                assert generated_sqlstr != ""

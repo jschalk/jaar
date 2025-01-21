@@ -278,7 +278,6 @@ def create_table_from_columns(
     column_types: dict[str, str],
 ):
     x_sqlstr = get_create_table_sqlstr(tablename, columns_list, column_types)
-    print(f"{x_sqlstr=}")
     conn_or_cursor.execute(x_sqlstr)
 
 

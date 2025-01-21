@@ -1,3 +1,6 @@
+from src.f00_instrument.db_toolbox import create_table_from_columns
+from src.f09_idea.idea_db_tool import get_custom_sorted_list
+from src.f09_idea.idea_config import get_quick_ideas_column_ref, get_idea_sqlite_types
 from sqlite3 import Connection as sqlite3_Connection
 
 
@@ -91,6 +94,15 @@ def create_fiscal_tables(conn_or_cursor: sqlite3_Connection):
 def create_bud_tables(conn_or_cursor: sqlite3_Connection):
     for create_table_sqlstr in get_bud_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
+
+
+def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
+    idea_refs = get_quick_ideas_column_ref()
+    for idea_number, idea_columns in idea_refs.items():
+        x_tablename = f"{idea_number}_staging"
+        x_columns = get_custom_sorted_list(idea_columns)
+        col_types = get_idea_sqlite_types()
+        create_table_from_columns(conn_or_cursor, x_tablename, x_columns, col_types)
 
 
 FISCALUNIT_INCONSISTENCY_SQLSTR = """SELECT fiscal_title
@@ -657,3 +669,7 @@ def get_fiscal_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
         "fiscal_timeline_weekday": FISCALWEEK_AGG_INSERT_SQLSTR,
         "fiscalunit": FISCALUNIT_AGG_INSERT_SQLSTR,
     }
+
+
+def get_idea2category_staging_sqlstrs() -> dict[str, str]:
+    return {}
