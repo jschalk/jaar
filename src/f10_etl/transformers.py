@@ -783,7 +783,7 @@ def etl_idea_staging_to_fiscal_tables(conn):
     fiscal_staging_tables2fiscal_agg_tables(conn)
 
 
-def idea_staging_tables2fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
+def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection):
     unit_dst = "fiscalunit_staging"
     deal_dst = "fiscal_deal_episode_staging"
     cash_dst = "fiscal_cashbook_staging"
@@ -806,29 +806,28 @@ def idea_staging_tables2fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection
     week_marks.remove("fiscal_title")
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
-        if db_table_exists(fiscal_db_conn, idea_staging):
-            insert_fiscal_staging(fiscal_db_conn, idea_number, unit_dst, unit_marks)
-            insert_fiscal_staging(fiscal_db_conn, idea_number, deal_dst, deal_marks)
-            insert_fiscal_staging(fiscal_db_conn, idea_number, cash_dst, cash_marks)
-            insert_fiscal_staging(fiscal_db_conn, idea_number, hour_dst, hour_marks)
-            insert_fiscal_staging(fiscal_db_conn, idea_number, mont_dst, mont_marks)
-            insert_fiscal_staging(fiscal_db_conn, idea_number, week_dst, week_marks)
+        if db_table_exists(conn_or_cursor, idea_staging):
+            insert_fiscal_staging(conn_or_cursor, idea_number, unit_dst, unit_marks)
+            insert_fiscal_staging(conn_or_cursor, idea_number, deal_dst, deal_marks)
+            insert_fiscal_staging(conn_or_cursor, idea_number, cash_dst, cash_marks)
+            insert_fiscal_staging(conn_or_cursor, idea_number, hour_dst, hour_marks)
+            insert_fiscal_staging(conn_or_cursor, idea_number, mont_dst, mont_marks)
+            insert_fiscal_staging(conn_or_cursor, idea_number, week_dst, week_marks)
 
 
 def insert_fiscal_staging(
-    fiscal_db_conn: sqlite3_Connection,
+    conn_or_cursor: sqlite3_Connection,
     idea_number: str,
     dst_table: str,
     mark_columns: set[str],
 ):
     src_table = f"{idea_number}_staging"
-    src_columns = get_table_columns(fiscal_db_conn, src_table)
+    src_columns = get_table_columns(conn_or_cursor, src_table)
     if not mark_columns.isdisjoint(src_columns):
-        dst_columns = get_table_columns(fiscal_db_conn, dst_table)
+        dst_columns = get_table_columns(conn_or_cursor, dst_table)
         common_columns_set = set(dst_columns).intersection(set(src_columns))
         common_columns_list = [col for col in dst_columns if col in common_columns_set]
         common_columns_header = ", ".join(common_columns_list)
-        cursor = fiscal_db_conn.cursor()
         insert_idea_staging_agg_str = f"""
 INSERT INTO {dst_table} (idea_number, {common_columns_header})
 SELECT '{idea_number}' as idea_number, {common_columns_header}
@@ -836,26 +835,21 @@ FROM {src_table}
 GROUP BY face_name, event_int, fiscal_title
 ;
 """
-        cursor.execute(insert_idea_staging_agg_str)
-        cursor.close()
+        conn_or_cursor.execute(insert_idea_staging_agg_str)
 
 
-def set_fiscal_staging_error_message(fiscal_db_conn: sqlite3_Connection):
-    cursor = fiscal_db_conn.cursor()
+def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):
     for set_error_sqlstr in get_set_inconsistency_error_message_sqlstrs().values():
-        cursor.execute(set_error_sqlstr)
-    cursor.close()
+        conn_or_cursor.execute(set_error_sqlstr)
 
 
-def fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):
-    cursor = fiscal_db_conn.cursor()
-    cursor.execute(FISCALUNIT_AGG_INSERT_SQLSTR)
-    cursor.execute(FISCALDEAL_AGG_INSERT_SQLSTR)
-    cursor.execute(FISCALCASH_AGG_INSERT_SQLSTR)
-    cursor.execute(FISCALHOUR_AGG_INSERT_SQLSTR)
-    cursor.execute(FISCALMONT_AGG_INSERT_SQLSTR)
-    cursor.execute(FISCALWEEK_AGG_INSERT_SQLSTR)
-    cursor.close()
+def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
+    conn_or_cursor.execute(FISCALUNIT_AGG_INSERT_SQLSTR)
+    conn_or_cursor.execute(FISCALDEAL_AGG_INSERT_SQLSTR)
+    conn_or_cursor.execute(FISCALCASH_AGG_INSERT_SQLSTR)
+    conn_or_cursor.execute(FISCALHOUR_AGG_INSERT_SQLSTR)
+    conn_or_cursor.execute(FISCALMONT_AGG_INSERT_SQLSTR)
+    conn_or_cursor.execute(FISCALWEEK_AGG_INSERT_SQLSTR)
 
 
 def etl_fiscal_staging_tables_to_fiscal_csvs(

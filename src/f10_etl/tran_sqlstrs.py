@@ -394,3 +394,7 @@ WHERE error_message IS NULL
 GROUP BY fiscal_title, weekday_title
 ;
 """
+
+
+def get_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
+    return {}

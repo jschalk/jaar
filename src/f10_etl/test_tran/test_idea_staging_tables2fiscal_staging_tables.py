@@ -3,7 +3,7 @@ from src.f00_instrument.db_toolbox import (
     db_table_exists,
     get_row_count,
     create_table_from_columns,
-    create_inconsistency_query,
+    create_select_inconsistency_query,
 )
 from src.f01_road.finance_tran import bridge_str, quota_str, time_int_str
 from src.f03_chrono.chrono import (
@@ -929,7 +929,7 @@ def test_GlobalVariablesForFiscal_inconsistency_queryReturns_sqlstrs():
             cat_focus_columns = set(cat_config.get("jkeys").keys())
             cat_focus_columns.remove(event_int_str())
             cat_focus_columns.remove(face_name_str())
-            generated_cat_sqlstr = create_inconsistency_query(
+            generated_cat_sqlstr = create_select_inconsistency_query(
                 conn, x_tablename, cat_focus_columns, exclude_cols
             )
             assert x_sqlstr == generated_cat_sqlstr

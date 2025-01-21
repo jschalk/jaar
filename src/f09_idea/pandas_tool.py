@@ -11,6 +11,7 @@ from src.f00_instrument.db_toolbox import (
     create_table_from_csv,
     insert_csv,
     db_table_exists,
+    get_table_columns,
 )
 from src.f00_instrument.dict_toolbox import set_in_nested_dict
 from src.f08_pidgin.map import MapCore
@@ -364,15 +365,12 @@ def get_pragma_table_fetchall(table_columns):
 
 
 def save_table_to_csv(
-    fiscal_db_conn: sqlite3_Connection, fiscal_mstr_dir: str, tablename
+    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str, tablename
 ):
-    cursor = fiscal_db_conn.cursor()
     fiscalunit_sqlstr = f"""SELECT * FROM {tablename};"""
-    cursor.execute(fiscalunit_sqlstr)
-    fiscalunit_rows = cursor.fetchall()
-    fiscalunit_columns = [desc[0] for desc in cursor.description]
-    cursor.close()
-
+    fiscalunit_rows = conn_or_cursor.execute(fiscalunit_sqlstr).fetchall()
+    fiscalunit_columns = get_table_columns(conn_or_cursor, tablename)
+    # fiscalunit_columns = [desc[0] for desc in cursor.description]
     fiscalunit_df = DataFrame(fiscalunit_rows, columns=fiscalunit_columns)
     fiscalunit_filename = f"{tablename}.csv"
     save_dataframe_to_csv(fiscalunit_df, fiscal_mstr_dir, fiscalunit_filename)

@@ -18,8 +18,8 @@ from src.f00_instrument.db_toolbox import (
     db_table_exists,
     get_table_columns,
     create_table_from_columns,
-    create_inconsistency_query,
-    create_agg_insert_query,
+    create_select_inconsistency_query,
+    create_table2table_agg_insert_query,
 )
 from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
@@ -568,7 +568,7 @@ def test_get_table_columns_ReturnsObj_Scenario2_TableExists_PassCursorObj(
     assert get_table_columns(conn.cursor(), x_tablename) == expected_columns
 
 
-def test_create_inconsistency_query_ReturnsObj_Scenario0():
+def test_create_select_inconsistency_query_ReturnsObj_Scenario0():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         x_tablename = "dark_side"
@@ -576,7 +576,9 @@ def test_create_inconsistency_query_ReturnsObj_Scenario0():
         create_table_from_columns(conn, x_tablename, x_columns, {})
 
         # WHEN
-        gen_sqlstr = create_inconsistency_query(conn, x_tablename, {"id"}, {"email"})
+        gen_sqlstr = create_select_inconsistency_query(
+            conn, x_tablename, {"id"}, {"email"}
+        )
 
     # THEN
     expected_sqlstr = """SELECT id
@@ -589,7 +591,7 @@ HAVING MIN(name) != MAX(name)
     assert gen_sqlstr == expected_sqlstr
 
 
-def test_create_inconsistency_query_ReturnsObj_Scenario1():
+def test_create_select_inconsistency_query_ReturnsObj_Scenario1():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         x_tablename = "dark_side"
@@ -597,7 +599,7 @@ def test_create_inconsistency_query_ReturnsObj_Scenario1():
         create_table_from_columns(conn, x_tablename, x_columns, {})
 
         # WHEN
-        gen_sqlstr = create_inconsistency_query(
+        gen_sqlstr = create_select_inconsistency_query(
             conn, x_tablename, {"id", "name"}, {"email"}
         )
 
@@ -611,7 +613,7 @@ HAVING MIN(age) != MAX(age)
     assert gen_sqlstr == expected_sqlstr
 
 
-def test_create_agg_insert_query_ReturnsObj_Scenario0():
+def test_create_table2table_agg_insert_query_ReturnsObj_Scenario0():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         hair_str = "hair"
@@ -623,7 +625,7 @@ def test_create_agg_insert_query_ReturnsObj_Scenario0():
         create_table_from_columns(conn, dst_tablename, dst_columns, {})
 
         # WHEN
-        gen_sqlstr = create_agg_insert_query(
+        gen_sqlstr = create_table2table_agg_insert_query(
             conn,
             dst_table=dst_tablename,
             src_table=src_tablename,
@@ -644,7 +646,7 @@ GROUP BY name, age
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_create_agg_insert_query_ReturnsObj_Scenario1():
+def test_create_table2table_agg_insert_query_ReturnsObj_Scenario1():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         hair_str = "hair"
@@ -656,7 +658,7 @@ def test_create_agg_insert_query_ReturnsObj_Scenario1():
         create_table_from_columns(conn, dst_tablename, dst_columns, {})
 
         # WHEN
-        gen_sqlstr = create_agg_insert_query(
+        gen_sqlstr = create_table2table_agg_insert_query(
             conn,
             dst_table=dst_tablename,
             src_table=src_tablename,

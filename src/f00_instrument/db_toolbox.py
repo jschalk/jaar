@@ -325,7 +325,7 @@ def get_table_columns(conn_or_cursor: sqlite3_Connection, tablename: str) -> lis
     return [db_column[1] for db_column in db_columns]
 
 
-def create_inconsistency_query(
+def create_select_inconsistency_query(
     conn_or_cursor: sqlite3_Connection,
     x_tablename: str,
     focus_columns: set[str],
@@ -347,7 +347,7 @@ GROUP BY {focus_columns_str}
 """
 
 
-def create_agg_insert_query(
+def create_table2table_agg_insert_query(
     conn_or_cursor: sqlite3_Connection,
     src_table: str,
     dst_table: str,
