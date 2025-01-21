@@ -394,7 +394,105 @@ WHERE error_message IS NULL
 GROUP BY fiscal_title, weekday_title
 ;
 """
+BUDMEMB_AGG_INSERT_SQLSTR = """INSERT INTO bud_acct_membership_agg (fiscal_title, acct_name, group_label, credit_vote, debtit_vote)
+SELECT fiscal_title, acct_name, group_label, MAX(credit_vote), MAX(debtit_vote)
+FROM bud_acct_membership_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, acct_name, group_label
+;
+"""
+BUDACCT_AGG_INSERT_SQLSTR = """INSERT INTO bud_acctunit_agg (fiscal_title, acct_name, credit_belief, debtit_belief)
+SELECT fiscal_title, acct_name, MAX(credit_belief), MAX(debtit_belief)
+FROM bud_acctunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, acct_name
+;
+"""
+BUDAWAR_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_awardlink_agg (fiscal_title, road, awardee_tag, give_force, take_force)
+SELECT fiscal_title, road, awardee_tag, MAX(give_force), MAX(take_force)
+FROM bud_item_awardlink_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, awardee_tag
+;
+"""
+BUDFACT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_factunit_agg (fiscal_title, road, base, pick, fopen, fnigh)
+SELECT fiscal_title, road, base, MAX(pick), MAX(fopen), MAX(fnigh)
+FROM bud_item_factunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, base
+;
+"""
+BUDHEAL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_healerlink_agg (fiscal_title, road, healer_name)
+SELECT fiscal_title, road, healer_name
+FROM bud_item_healerlink_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, healer_name
+;
+"""
+BUDPREM_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reason_premiseunit_agg (fiscal_title, road, base, need, nigh, open, divisor)
+SELECT fiscal_title, road, base, need, MAX(nigh), MAX(open), MAX(divisor)
+FROM bud_item_reason_premiseunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, base, need
+;
+"""
+BUDREAS_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reasonunit_agg (fiscal_title, road, base, base_item_active_requisite)
+SELECT fiscal_title, road, base, MAX(base_item_active_requisite)
+FROM bud_item_reasonunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, base
+;
+"""
+BUDTEAM_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_teamlink_agg (fiscal_title, road, team_tag)
+SELECT fiscal_title, road, team_tag
+FROM bud_item_teamlink_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, team_tag
+;
+"""
+BUDITEM_AGG_INSERT_SQLSTR = """INSERT INTO bud_itemunit_agg (fiscal_title, parent_road, item_title, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool)
+SELECT fiscal_title, parent_road, item_title, MAX(begin), MAX(close), MAX(addin), MAX(numor), MAX(denom), MAX(morph), MAX(gogo_want), MAX(stop_want), MAX(mass), MAX(pledge), MAX(problem_bool)
+FROM bud_itemunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, parent_road, item_title
+;
+"""
+BUDUNIT_AGG_INSERT_SQLSTR = """INSERT INTO budunit_agg (fiscal_title, credor_respect, debtor_respect, fund_pool, max_tree_traverse, deal_time_int, tally, fund_coin, penny, respect_bit)
+SELECT fiscal_title, MAX(credor_respect), MAX(debtor_respect), MAX(fund_pool), MAX(max_tree_traverse), MAX(deal_time_int), MAX(tally), MAX(fund_coin), MAX(penny), MAX(respect_bit)
+FROM budunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title
+;
+"""
 
 
 def get_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
-    return {}
+    return {
+        "bud_acct_membership": BUDMEMB_AGG_INSERT_SQLSTR,
+        "bud_acctunit": BUDACCT_AGG_INSERT_SQLSTR,
+        "bud_item_awardlink": BUDAWAR_AGG_INSERT_SQLSTR,
+        "bud_item_factunit": BUDFACT_AGG_INSERT_SQLSTR,
+        "bud_item_healerlink": BUDHEAL_AGG_INSERT_SQLSTR,
+        "bud_item_reason_premiseunit": BUDPREM_AGG_INSERT_SQLSTR,
+        "bud_item_reasonunit": BUDREAS_AGG_INSERT_SQLSTR,
+        "bud_item_teamlink": BUDTEAM_AGG_INSERT_SQLSTR,
+        "bud_itemunit": BUDITEM_AGG_INSERT_SQLSTR,
+        "budunit": BUDUNIT_AGG_INSERT_SQLSTR,
+        "fiscal_cashbook": FISCALCASH_AGG_INSERT_SQLSTR,
+        "fiscal_deal_episode": FISCALDEAL_AGG_INSERT_SQLSTR,
+        "fiscal_timeline_hour": FISCALHOUR_AGG_INSERT_SQLSTR,
+        "fiscal_timeline_month": FISCALMONT_AGG_INSERT_SQLSTR,
+        "fiscal_timeline_weekday": FISCALWEEK_AGG_INSERT_SQLSTR,
+        "fiscalunit": FISCALUNIT_AGG_INSERT_SQLSTR,
+    }
+
+
+def get_fiscal_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
+    return {
+        "fiscal_cashbook": FISCALCASH_AGG_INSERT_SQLSTR,
+        "fiscal_deal_episode": FISCALDEAL_AGG_INSERT_SQLSTR,
+        "fiscal_timeline_hour": FISCALHOUR_AGG_INSERT_SQLSTR,
+        "fiscal_timeline_month": FISCALMONT_AGG_INSERT_SQLSTR,
+        "fiscal_timeline_weekday": FISCALWEEK_AGG_INSERT_SQLSTR,
+        "fiscalunit": FISCALUNIT_AGG_INSERT_SQLSTR,
+    }

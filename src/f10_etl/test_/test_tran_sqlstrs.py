@@ -39,12 +39,8 @@ from src.f10_etl.tran_sqlstrs import (
     get_all_inconsistency_sqlstrs,
     get_fiscal_inconsistency_sqlstrs,
     get_insert_agg_from_staging_sqlstrs,
+    get_fiscal_insert_agg_from_staging_sqlstrs,
     FISCALUNIT_AGG_INSERT_SQLSTR,
-    FISCALDEAL_AGG_INSERT_SQLSTR,
-    FISCALCASH_AGG_INSERT_SQLSTR,
-    FISCALHOUR_AGG_INSERT_SQLSTR,
-    FISCALMONT_AGG_INSERT_SQLSTR,
-    FISCALWEEK_AGG_INSERT_SQLSTR,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -322,7 +318,7 @@ def test_get_all_inconsistency_sqlstrs_ReturnsObj():
 
 
 def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
-    # sourcery skip: extract-method
+    # sourcery skip: extract-method, no-loop-in-tests
     # ESTABLISH / WHEN
     insert_agg_from_staging_sqlstrs = get_insert_agg_from_staging_sqlstrs()
 
@@ -339,13 +335,36 @@ def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
         x_category: category_config
         for x_category, category_config in idea_config.items()
         if category_config.get(idea_type_str()) != pidginunit_str()
-        # if category_config.get(idea_type_str()) == budunit_str()
+        # if category_config.get(idea_type_str()) == fiscalunit_str()
     }
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         create_fiscal_tables(fiscal_db_conn)
         create_bud_tables(fiscal_db_conn)
 
-        # WHEN
+        for x_category in idea_config:
+            print(f"{x_category} checking...")
+            cat_config = idea_config.get(x_category)
+            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            cat_focus_columns.remove(event_int_str())
+            cat_focus_columns.remove(face_name_str())
+            cat_focus_columns = get_custom_sorted_list(cat_focus_columns)
+            stage_tablename = f"{x_category}_staging"
+            agg_tablename = f"{x_category}_agg"
+
+            generated_table2table_agg_insert_sqlstr = (
+                create_table2table_agg_insert_query(
+                    fiscal_db_conn,
+                    src_table=stage_tablename,
+                    dst_table=agg_tablename,
+                    focus_cols=cat_focus_columns,
+                    exclude_cols=x_exclude_cols,
+                )
+            )
+            x_sqlstr = insert_agg_from_staging_sqlstrs.get(x_category)
+            # print(f'"{x_category}": BUD_AGG_INSERT_SQLSTR,')
+            # print(   f'BUD_AGG_INSERT_SQLSTR = """{generated_table2table_agg_insert_sqlstr}"""')
+            assert x_sqlstr == generated_table2table_agg_insert_sqlstr
+
         generated_fiscalunit_sqlstr = create_table2table_agg_insert_query(
             fiscal_db_conn,
             src_table=x_objs.unit_stage_tablename,
@@ -353,12 +372,7 @@ def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
             focus_cols=[fiscal_title_str()],
             exclude_cols=x_exclude_cols,
         )
-
-        # THEN
-        print(f" {generated_fiscalunit_sqlstr=}")
-        print(f"{FISCALUNIT_AGG_INSERT_SQLSTR=}")
         assert FISCALUNIT_AGG_INSERT_SQLSTR == generated_fiscalunit_sqlstr
-
         columns_header = """fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title"""
         tablename = "fiscalunit"
         expected_ficsalunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
@@ -370,60 +384,19 @@ GROUP BY fiscal_title
 """
         assert FISCALUNIT_AGG_INSERT_SQLSTR == expected_ficsalunit_sqlstr
 
-        # WHEN / THEN
-        generated_fiscaldeal_sqlstr = create_table2table_agg_insert_query(
-            fiscal_db_conn,
-            src_table=x_objs.deal_stage_tablename,
-            dst_table=x_objs.deal_agg_tablename,
-            focus_cols=[fiscal_title_str(), owner_name_str(), time_int_str()],
-            exclude_cols=x_exclude_cols,
-        )
-        assert FISCALDEAL_AGG_INSERT_SQLSTR == generated_fiscaldeal_sqlstr
+    assert len(idea_config) == len(insert_agg_from_staging_sqlstrs)
 
-        # WHEN / THEN
-        cash_focus_cols = [
-            fiscal_title_str(),
-            owner_name_str(),
-            acct_name_str(),
-            time_int_str(),
-        ]
-        generated_fiscalcash_sqlstr = create_table2table_agg_insert_query(
-            fiscal_db_conn,
-            src_table=x_objs.cash_stage_tablename,
-            dst_table=x_objs.cash_agg_tablename,
-            focus_cols=cash_focus_cols,
-            exclude_cols=x_exclude_cols,
-        )
-        assert FISCALCASH_AGG_INSERT_SQLSTR == generated_fiscalcash_sqlstr
 
-        # WHEN / THEN
-        generated_fiscalhour_sqlstr = create_table2table_agg_insert_query(
-            fiscal_db_conn,
-            src_table=x_objs.hour_stage_tablename,
-            dst_table=x_objs.hour_agg_tablename,
-            focus_cols=[fiscal_title_str(), hour_title_str()],
-            exclude_cols=x_exclude_cols,
-        )
-        assert FISCALHOUR_AGG_INSERT_SQLSTR == generated_fiscalhour_sqlstr
+def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
+    # ESTABLISH / WHEN
+    fiscal_insert_agg_sqlstrs = get_fiscal_insert_agg_from_staging_sqlstrs()
 
-        # WHEN / THEN
-        generated_fiscalmont_sqlstr = create_table2table_agg_insert_query(
-            fiscal_db_conn,
-            src_table=x_objs.mont_stage_tablename,
-            dst_table=x_objs.mont_agg_tablename,
-            focus_cols=[fiscal_title_str(), month_title_str()],
-            exclude_cols=x_exclude_cols,
-        )
-        assert FISCALMONT_AGG_INSERT_SQLSTR == generated_fiscalmont_sqlstr
-
-        # WHEN / THEN
-        generated_fiscalweek_sqlstr = create_table2table_agg_insert_query(
-            fiscal_db_conn,
-            src_table=x_objs.week_stage_tablename,
-            dst_table=x_objs.week_agg_tablename,
-            focus_cols=[fiscal_title_str(), weekday_title_str()],
-            exclude_cols=x_exclude_cols,
-        )
-        assert FISCALWEEK_AGG_INSERT_SQLSTR == generated_fiscalweek_sqlstr
-
-    # assert len(idea_config) == len(insert_agg_from_staging_sqlstrs)
+    # THEN
+    assert fiscal_insert_agg_sqlstrs
+    fiscal_config = {
+        x_category: category_config
+        for x_category, category_config in get_idea_config_dict().items()
+        if category_config.get(idea_type_str()) == fiscalunit_str()
+    }
+    expected_fiscal_cateogrys = fiscal_config.keys()
+    assert set(fiscal_insert_agg_sqlstrs.keys()) == set(expected_fiscal_cateogrys)
