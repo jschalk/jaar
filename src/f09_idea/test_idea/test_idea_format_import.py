@@ -19,7 +19,7 @@ from src.f09_idea.idea_config import (
     idea_format_00012_membership_v0_0_0,
     idea_format_00013_itemunit_v0_0_0,
 )
-from src.f09_idea.pandas_tool import open_csv
+from src.f09_idea.idea_db_tool import open_csv
 from src.f09_idea.examples.idea_env import (
     idea_examples_dir,
     idea_fiscals_dir,

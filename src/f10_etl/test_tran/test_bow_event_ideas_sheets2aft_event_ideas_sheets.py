@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.pandas_tool import upsert_sheet, sheet_exists
+from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
 from src.f10_etl.transformers import (
     etl_bow_inx_event_ideas_to_aft_faces,
 )

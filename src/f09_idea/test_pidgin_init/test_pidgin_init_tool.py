@@ -49,7 +49,7 @@ from src.f09_idea.pidgin_toolbox import (
     create_dir_valid_empty_pidginunit,
     init_pidginunit_from_dir,
 )
-from src.f09_idea.pandas_tool import (
+from src.f09_idea.idea_db_tool import (
     get_ordered_csv,
     get_idea_elements_sort_order as sorting_columns,
 )

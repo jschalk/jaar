@@ -7,7 +7,7 @@ from src.f07_fiscal.fiscal_config import (
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.pandas_tool import get_sheet_names, upsert_sheet
+from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel

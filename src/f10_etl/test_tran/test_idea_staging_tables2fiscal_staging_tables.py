@@ -44,7 +44,7 @@ from src.f09_idea.idea_config import (
     get_idea_config_dict,
     idea_type_str,
 )
-from src.f09_idea.pandas_tool import get_pragma_table_fetchall, get_custom_sorted_list
+from src.f09_idea.idea_db_tool import get_pragma_table_fetchall, get_custom_sorted_list
 from src.f10_etl.fiscal_etl_tool import (
     FiscalPrimeObjsRef,
     FiscalPrimeColumnsRef,

@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.pandas_tool import upsert_sheet
+from src.f09_idea.idea_db_tool import upsert_sheet
 from src.f10_etl.transformers import etl_aft_face_ideas_to_csv_files
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame

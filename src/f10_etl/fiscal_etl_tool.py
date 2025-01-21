@@ -9,7 +9,11 @@ from src.f03_chrono.chrono import (
 )
 from src.f07_fiscal.fiscal import fiscalunit_shop
 from src.f09_idea.idea import _add_cashpurchases_from_df, _add_dealepisodes_from_df
-from src.f09_idea.pandas_tool import upsert_sheet, dataframe_to_dict, if_nan_return_None
+from src.f09_idea.idea_db_tool import (
+    upsert_sheet,
+    dataframe_to_dict,
+    if_nan_return_None,
+)
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 

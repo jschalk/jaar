@@ -9,7 +9,7 @@ from src.f09_idea.idea_config import (
     get_idea_category_ref,
 )
 from src.f09_idea.idea import get_idearef_obj
-from src.f09_idea.pandas_tool import (
+from src.f09_idea.idea_db_tool import (
     get_custom_sorted_list,
     upsert_sheet,
     split_excel_into_dirs,

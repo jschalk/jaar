@@ -1,4 +1,4 @@
-from src.f09_idea.pandas_tool import dataframe_to_dict
+from src.f09_idea.idea_db_tool import dataframe_to_dict
 from pandas import DataFrame
 
 

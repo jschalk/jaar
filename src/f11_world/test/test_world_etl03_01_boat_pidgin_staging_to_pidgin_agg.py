@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f09_idea.pandas_tool import upsert_sheet, sheet_exists
+from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
