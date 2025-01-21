@@ -1,6 +1,7 @@
 from src.f00_instrument.db_toolbox import (
     db_table_exists,
     create_select_inconsistency_query,
+    create_update_inconsistency_error_query,
     get_create_table_sqlstr,
     create_table2table_agg_insert_query,
 )
@@ -38,6 +39,8 @@ from src.f10_etl.tran_sqlstrs import (
     create_bud_tables,
     get_all_inconsistency_sqlstrs,
     get_fiscal_inconsistency_sqlstrs,
+    get_update_inconsist_error_message_sqlstrs,
+    get_fiscal_update_inconsist_error_message_sqlstrs,
     get_insert_agg_from_staging_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
     FISCALUNIT_AGG_INSERT_SQLSTR,
@@ -315,6 +318,68 @@ def test_get_all_inconsistency_sqlstrs_ReturnsObj():
             )
             # print(f"{generated_cat_sqlstr=}")
             assert x_sqlstr == generated_cat_sqlstr
+
+
+def test_get_update_inconsist_error_message_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    update_error_message_sqlstrs = get_update_inconsist_error_message_sqlstrs()
+
+    # THEN
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_category: category_config
+        for x_category, category_config in idea_config.items()
+        if category_config.get(idea_type_str()) != pidginunit_str()
+        # if category_config.get(idea_type_str()) == budunit_str()
+        # if category_config.get(idea_type_str()) == fiscalunit_str()
+    }
+
+    exclude_cols = {
+        idea_number_str(),
+        face_name_str(),
+        event_int_str(),
+        "error_message",
+    }
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_fiscal_tables(cursor)
+        create_bud_tables(cursor)
+
+        for x_category in idea_config:
+            print(f"{x_category} checking...")
+            x_sqlstr = update_error_message_sqlstrs.get(x_category)
+            x_tablename = f"{x_category}_staging"
+            cat_config = idea_config.get(x_category)
+            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            cat_focus_columns.remove(event_int_str())
+            cat_focus_columns.remove(face_name_str())
+            generated_cat_sqlstr = create_update_inconsistency_error_query(
+                cursor, x_tablename, cat_focus_columns, exclude_cols
+            )
+            # print(
+            #     f"""{x_category.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_cat_sqlstr}\"\"\""""
+            # )
+            # print(
+            #     f"""\"{x_category}\": {x_category.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
+            # )
+            # print(f"""            {x_sqlstr=}""")
+            assert x_sqlstr == generated_cat_sqlstr
+
+
+def test_get_fiscal_update_inconsist_error_message_sqlstrs_ReturnsObj():
+    # ESTABLISH / WHEN
+    fiscal_update_error_sqlstrs = get_fiscal_update_inconsist_error_message_sqlstrs()
+
+    # THEN
+    assert fiscal_update_error_sqlstrs
+    fiscal_config = {
+        x_category: category_config
+        for x_category, category_config in get_idea_config_dict().items()
+        if category_config.get(idea_type_str()) == fiscalunit_str()
+    }
+    expected_fiscal_cateogrys = fiscal_config.keys()
+    assert set(fiscal_update_error_sqlstrs.keys()) == set(expected_fiscal_cateogrys)
 
 
 def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():

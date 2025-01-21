@@ -19,6 +19,7 @@ from src.f00_instrument.db_toolbox import (
     get_table_columns,
     create_table_from_columns,
     create_select_inconsistency_query,
+    create_update_inconsistency_error_query,
     create_table2table_agg_insert_query,
 )
 from pytest import raises as pytest_raises, fixture as pytest_fixture
@@ -580,15 +581,15 @@ def test_create_select_inconsistency_query_ReturnsObj_Scenario0():
             conn, x_tablename, {"id"}, {"email"}
         )
 
-    # THEN
-    expected_sqlstr = """SELECT id
+        # THEN
+        expected_sqlstr = """SELECT id
 FROM dark_side
 GROUP BY id
 HAVING MIN(name) != MAX(name)
     OR MIN(age) != MAX(age)
     OR MIN(hair) != MAX(hair)
 """
-    assert gen_sqlstr == expected_sqlstr
+        assert gen_sqlstr == expected_sqlstr
 
 
 def test_create_select_inconsistency_query_ReturnsObj_Scenario1():
@@ -603,14 +604,75 @@ def test_create_select_inconsistency_query_ReturnsObj_Scenario1():
             conn, x_tablename, {"id", "name"}, {"email"}
         )
 
-    # THEN
-    expected_sqlstr = """SELECT id, name
+        # THEN
+        expected_sqlstr = """SELECT id, name
 FROM dark_side
 GROUP BY id, name
 HAVING MIN(age) != MAX(age)
     OR MIN(hair) != MAX(hair)
 """
-    assert gen_sqlstr == expected_sqlstr
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_update_inconsistency_error_query_ReturnsObj_Scenario0():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        x_tablename = "dark_side"
+        x_columns = ["id", "name", "age", "email", "hair"]
+        create_table_from_columns(conn, x_tablename, x_columns, {})
+
+        # WHEN
+        gen_sqlstr = create_update_inconsistency_error_query(
+            conn, x_tablename, {"id"}, {"email"}
+        )
+
+        # THEN
+        expected_sqlstr = """WITH inconsistency_rows AS (
+SELECT id
+FROM dark_side
+GROUP BY id
+HAVING MIN(name) != MAX(name)
+    OR MIN(age) != MAX(age)
+    OR MIN(hair) != MAX(hair)
+)
+UPDATE dark_side
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.id = dark_side.id
+;
+"""
+        print(f"""{gen_sqlstr=}""")
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_update_inconsistency_error_queryReturnsObj_Scenario1():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        x_tablename = "dark_side"
+        x_columns = ["id", "name", "age", "email", "hair"]
+        create_table_from_columns(conn, x_tablename, x_columns, {})
+
+        # WHEN
+        gen_sqlstr = create_update_inconsistency_error_query(
+            conn, x_tablename, {"id", "name"}, {"email"}
+        )
+
+        # THEN
+        expected_sqlstr = """WITH inconsistency_rows AS (
+SELECT id, name
+FROM dark_side
+GROUP BY id, name
+HAVING MIN(age) != MAX(age)
+    OR MIN(hair) != MAX(hair)
+)
+UPDATE dark_side
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.id = dark_side.id
+    AND inconsistency_rows.name = dark_side.name
+;
+"""
+        assert gen_sqlstr == expected_sqlstr
 
 
 def test_create_table2table_agg_insert_query_ReturnsObj_Scenario0():

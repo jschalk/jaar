@@ -25,7 +25,7 @@ from src.f09_idea.pandas_tool import (
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
     create_fiscal_tables,
-    get_set_inconsistency_error_message_sqlstrs,
+    get_fiscal_update_inconsist_error_message_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
@@ -829,7 +829,9 @@ GROUP BY face_name, event_int, fiscal_title
 
 
 def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):
-    for set_error_sqlstr in get_set_inconsistency_error_message_sqlstrs().values():
+    for (
+        set_error_sqlstr
+    ) in get_fiscal_update_inconsist_error_message_sqlstrs().values():
         conn_or_cursor.execute(set_error_sqlstr)
 
 
@@ -909,29 +911,4 @@ def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
     upsert_sheet(fiscalhour_excel_path, "agg", fiscalhour_df)
     upsert_sheet(fiscalmont_excel_path, "agg", fiscalmont_df)
     upsert_sheet(fiscalweek_excel_path, "agg", fiscalweek_df)
-
-    # TODO replace empty sheet upsert with csv file upsert
-    # xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
-    # xc = FiscalPrimeColumnsRef()
-    # agg_fiscal_deal_df = DataFrame([], columns=xc.fiscal_deal_agg_columns)
-    # agg_fiscal_cashbook_df = DataFrame([], columns=xc.fiscal_cashbook_agg_columns)
-    # agg_fiscal_hour_df = DataFrame([], columns=xc.fiscal_hour_agg_columns)
-    # agg_fiscal_month_df = DataFrame([], columns=xc.fiscal_month_agg_columns)
-    # agg_fiscal_weekday_df = DataFrame([], columns=xc.fiscal_weekday_agg_columns)
-    # upsert_sheet(xp.deal_excel_path, "agg", agg_fiscal_deal_df)
-    # upsert_sheet(xp.cash_excel_path, "agg", agg_fiscal_cashbook_df)
-    # upsert_sheet(xp.hour_excel_path, "agg", agg_fiscal_hour_df)
-    # upsert_sheet(xp.mont_excel_path, "agg", agg_fiscal_month_df)
-    # upsert_sheet(xp.week_excel_path, "agg", agg_fiscal_weekday_df)
-
-    # if fiscaldeal_df:
-    #     upsert_sheet(fiscal_excel_path, fiscaldeal_str, fiscaldeal_df)
-    # if fiscalcash_df:
-    #     upsert_sheet(fiscal_excel_path, fiscalcash_str, fiscalcash_df)
-    # if fiscalhour_df:
-    #     upsert_sheet(fiscal_excel_path, fiscalhour_str, fiscalhour_df)
-    # if fiscalmont_df:
-    #     upsert_sheet(fiscal_excel_path, fiscalmont_str, fiscalmont_df)
-    # if fiscalweek_df:
-    #     upsert_sheet(fiscal_excel_path, fiscalweek_str, fiscalweek_df)
     create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)

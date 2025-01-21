@@ -347,6 +347,36 @@ GROUP BY {focus_columns_str}
 """
 
 
+def create_update_inconsistency_error_query(
+    conn_or_cursor: sqlite3_Connection,
+    x_tablename: str,
+    focus_columns: set[str],
+    exclude_columns: set[str],
+):
+    select_inconsistency_query = create_select_inconsistency_query(
+        conn_or_cursor, x_tablename, focus_columns, exclude_columns
+    )
+    table_columns = get_table_columns(conn_or_cursor, x_tablename)
+    where_str = None
+    for x_column in table_columns:
+        if x_column not in exclude_columns and x_column in focus_columns:
+            if where_str:
+                where_str += f"\n    AND inconsistency_rows.{x_column} = {x_tablename}.{x_column}"
+            else:
+                where_str = (
+                    f"WHERE inconsistency_rows.{x_column} = {x_tablename}.{x_column}"
+                )
+
+    return f"""WITH inconsistency_rows AS (
+{select_inconsistency_query})
+UPDATE {x_tablename}
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+{where_str}
+;
+"""
+
+
 def create_table2table_agg_insert_query(
     conn_or_cursor: sqlite3_Connection,
     src_table: str,
