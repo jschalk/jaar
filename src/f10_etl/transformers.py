@@ -1,9 +1,5 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f00_instrument.db_toolbox import (
-    create_table_from_columns,
-    db_table_exists,
-    get_table_columns,
-)
+from src.f00_instrument.db_toolbox import db_table_exists, get_table_columns
 from src.f01_road.road import FaceName, EventInt
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -11,7 +7,6 @@ from src.f09_idea.idea_config import (
     get_idea_numbers,
     get_idea_format_filename,
     get_idea_category_ref,
-    get_idea_sqlite_types,
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.pandas_tool import (
@@ -31,12 +26,7 @@ from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
     create_fiscal_tables,
     get_set_inconsistency_error_message_sqlstrs,
-    FISCALUNIT_AGG_INSERT_SQLSTR,
-    FISCALDEAL_AGG_INSERT_SQLSTR,
-    FISCALCASH_AGG_INSERT_SQLSTR,
-    FISCALHOUR_AGG_INSERT_SQLSTR,
-    FISCALMONT_AGG_INSERT_SQLSTR,
-    FISCALWEEK_AGG_INSERT_SQLSTR,
+    get_fiscal_insert_agg_from_staging_sqlstrs,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import (
@@ -777,10 +767,10 @@ def etl_aft_face_csv_files_to_fiscal_db(
                 insert_idea_csv(csv_path, conn_or_cursor, f"{idea_number}_staging")
 
 
-def etl_idea_staging_to_fiscal_tables(conn):
-    create_fiscal_tables(conn)
-    idea_staging_tables2fiscal_staging_tables(conn)
-    fiscal_staging_tables2fiscal_agg_tables(conn)
+def etl_idea_staging_to_fiscal_tables(conn_or_cursor):
+    create_fiscal_tables(conn_or_cursor)
+    idea_staging_tables2fiscal_staging_tables(conn_or_cursor)
+    fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor)
 
 
 def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection):
@@ -844,12 +834,8 @@ def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):
 
 
 def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
-    conn_or_cursor.execute(FISCALUNIT_AGG_INSERT_SQLSTR)
-    conn_or_cursor.execute(FISCALDEAL_AGG_INSERT_SQLSTR)
-    conn_or_cursor.execute(FISCALCASH_AGG_INSERT_SQLSTR)
-    conn_or_cursor.execute(FISCALHOUR_AGG_INSERT_SQLSTR)
-    conn_or_cursor.execute(FISCALMONT_AGG_INSERT_SQLSTR)
-    conn_or_cursor.execute(FISCALWEEK_AGG_INSERT_SQLSTR)
+    for x_sqlstr in get_fiscal_insert_agg_from_staging_sqlstrs().values():
+        conn_or_cursor.execute(x_sqlstr)
 
 
 def etl_fiscal_staging_tables_to_fiscal_csvs(
@@ -876,7 +862,7 @@ def etl_fiscal_staging_tables_to_fiscal_csvs(
 
 
 def etl_fiscal_agg_tables_to_fiscal_csvs(
-    fiscal_db_conn: sqlite3_Connection, fiscal_mstr_dir: str
+    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
     fiscalunit_str = "fiscalunit"
     fiscaldeal_str = "fiscal_deal_episode"
@@ -890,12 +876,12 @@ def etl_fiscal_agg_tables_to_fiscal_csvs(
     fiscalhour_agg_tablename = f"{fiscalhour_str}_agg"
     fiscalmont_agg_tablename = f"{fiscalmont_str}_agg"
     fiscalweek_agg_tablename = f"{fiscalweek_str}_agg"
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalunit_agg_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscaldeal_agg_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalcash_agg_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalhour_agg_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalmont_agg_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalweek_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalunit_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscaldeal_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalcash_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalhour_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalmont_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalweek_agg_tablename)
 
 
 def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
