@@ -374,3 +374,7 @@ def save_table_to_csv(
     fiscalunit_df = DataFrame(fiscalunit_rows, columns=fiscalunit_columns)
     fiscalunit_filename = f"{tablename}.csv"
     save_dataframe_to_csv(fiscalunit_df, fiscal_mstr_dir, fiscalunit_filename)
+
+
+def create_idea_into_category_staging_query():
+    return ""
