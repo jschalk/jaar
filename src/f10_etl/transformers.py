@@ -1,9 +1,5 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f00_instrument.db_toolbox import (
-    create_table_from_columns,
-    db_table_exists,
-    get_table_columns,
-)
+from src.f00_instrument.db_toolbox import db_table_exists, get_table_columns
 from src.f01_road.road import FaceName, EventInt
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -11,7 +7,6 @@ from src.f09_idea.idea_config import (
     get_idea_numbers,
     get_idea_format_filename,
     get_idea_category_ref,
-    get_idea_sqlite_types,
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.pandas_tool import (
@@ -30,7 +25,8 @@ from src.f09_idea.pandas_tool import (
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
     create_fiscal_tables,
-    get_set_inconsistency_error_message_sqlstrs,
+    get_fiscal_update_inconsist_error_message_sqlstrs,
+    get_fiscal_insert_agg_from_staging_sqlstrs,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import (
@@ -771,13 +767,13 @@ def etl_aft_face_csv_files_to_fiscal_db(
                 insert_idea_csv(csv_path, conn_or_cursor, f"{idea_number}_staging")
 
 
-def etl_idea_staging_to_fiscal_tables(conn):
-    create_fiscal_tables(conn)
-    idea_staging_tables2fiscal_staging_tables(conn)
-    fiscal_staging_tables2fiscal_agg_tables(conn)
+def etl_idea_staging_to_fiscal_tables(conn_or_cursor):
+    create_fiscal_tables(conn_or_cursor)
+    idea_staging_tables2fiscal_staging_tables(conn_or_cursor)
+    fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor)
 
 
-def idea_staging_tables2fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection):
+def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection):
     unit_dst = "fiscalunit_staging"
     deal_dst = "fiscal_deal_episode_staging"
     cash_dst = "fiscal_cashbook_staging"
@@ -800,29 +796,28 @@ def idea_staging_tables2fiscal_staging_tables(fiscal_db_conn: sqlite3_Connection
     week_marks.remove("fiscal_title")
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
-        if db_table_exists(fiscal_db_conn, idea_staging):
-            insert_fiscal_staging(fiscal_db_conn, idea_number, unit_dst, unit_marks)
-            insert_fiscal_staging(fiscal_db_conn, idea_number, deal_dst, deal_marks)
-            insert_fiscal_staging(fiscal_db_conn, idea_number, cash_dst, cash_marks)
-            insert_fiscal_staging(fiscal_db_conn, idea_number, hour_dst, hour_marks)
-            insert_fiscal_staging(fiscal_db_conn, idea_number, mont_dst, mont_marks)
-            insert_fiscal_staging(fiscal_db_conn, idea_number, week_dst, week_marks)
+        if db_table_exists(conn_or_cursor, idea_staging):
+            insert_fiscal_staging(conn_or_cursor, idea_number, unit_dst, unit_marks)
+            insert_fiscal_staging(conn_or_cursor, idea_number, deal_dst, deal_marks)
+            insert_fiscal_staging(conn_or_cursor, idea_number, cash_dst, cash_marks)
+            insert_fiscal_staging(conn_or_cursor, idea_number, hour_dst, hour_marks)
+            insert_fiscal_staging(conn_or_cursor, idea_number, mont_dst, mont_marks)
+            insert_fiscal_staging(conn_or_cursor, idea_number, week_dst, week_marks)
 
 
 def insert_fiscal_staging(
-    fiscal_db_conn: sqlite3_Connection,
+    conn_or_cursor: sqlite3_Connection,
     idea_number: str,
     dst_table: str,
     mark_columns: set[str],
 ):
     src_table = f"{idea_number}_staging"
-    src_columns = get_table_columns(fiscal_db_conn, src_table)
+    src_columns = get_table_columns(conn_or_cursor, src_table)
     if not mark_columns.isdisjoint(src_columns):
-        dst_columns = get_table_columns(fiscal_db_conn, dst_table)
+        dst_columns = get_table_columns(conn_or_cursor, dst_table)
         common_columns_set = set(dst_columns).intersection(set(src_columns))
         common_columns_list = [col for col in dst_columns if col in common_columns_set]
         common_columns_header = ", ".join(common_columns_list)
-        cursor = fiscal_db_conn.cursor()
         insert_idea_staging_agg_str = f"""
 INSERT INTO {dst_table} (idea_number, {common_columns_header})
 SELECT '{idea_number}' as idea_number, {common_columns_header}
@@ -830,70 +825,19 @@ FROM {src_table}
 GROUP BY face_name, event_int, fiscal_title
 ;
 """
-        cursor.execute(insert_idea_staging_agg_str)
-        cursor.close()
+        conn_or_cursor.execute(insert_idea_staging_agg_str)
 
 
-def set_fiscal_staging_error_message(fiscal_db_conn: sqlite3_Connection):
-    cursor = fiscal_db_conn.cursor()
-    for set_error_sqlstr in get_set_inconsistency_error_message_sqlstrs().values():
-        cursor.execute(set_error_sqlstr)
-    cursor.close()
+def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):
+    for (
+        set_error_sqlstr
+    ) in get_fiscal_update_inconsist_error_message_sqlstrs().values():
+        conn_or_cursor.execute(set_error_sqlstr)
 
 
-FISCALUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscalunit_agg (fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title)
-SELECT fiscal_title, MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(timeline_title)
-FROM fiscalunit_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title
-;
-"""
-FISCALDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_deal_episode_agg (fiscal_title, owner_name, time_int, quota)
-SELECT fiscal_title, owner_name, time_int, MAX(quota)
-FROM fiscal_deal_episode_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title, owner_name, time_int
-;
-"""
-FISCALCASH_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_cashbook_agg (fiscal_title, owner_name, acct_name, time_int, amount)
-SELECT fiscal_title, owner_name, acct_name, time_int, MAX(amount)
-FROM fiscal_cashbook_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title, owner_name, acct_name, time_int
-;
-"""
-FISCALHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_hour_agg (fiscal_title, hour_title, cumlative_minute)
-SELECT fiscal_title, hour_title, MAX(cumlative_minute)
-FROM fiscal_timeline_hour_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title, hour_title
-;
-"""
-FISCALMONT_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_month_agg (fiscal_title, month_title, cumlative_day)
-SELECT fiscal_title, month_title, MAX(cumlative_day)
-FROM fiscal_timeline_month_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title, month_title
-;
-"""
-FISCALWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_weekday_agg (fiscal_title, weekday_title, weekday_order)
-SELECT fiscal_title, weekday_title, MAX(weekday_order)
-FROM fiscal_timeline_weekday_staging
-WHERE error_message IS NULL
-GROUP BY fiscal_title, weekday_title
-;
-"""
-
-
-def fiscal_staging_tables2fiscal_agg_tables(fiscal_db_conn: sqlite3_Connection):
-    cursor = fiscal_db_conn.cursor()
-    cursor.execute(FISCALUNIT_AGG_INSERT_SQLSTR)
-    cursor.execute(FISCALDEAL_AGG_INSERT_SQLSTR)
-    cursor.execute(FISCALCASH_AGG_INSERT_SQLSTR)
-    cursor.execute(FISCALHOUR_AGG_INSERT_SQLSTR)
-    cursor.execute(FISCALMONT_AGG_INSERT_SQLSTR)
-    cursor.execute(FISCALWEEK_AGG_INSERT_SQLSTR)
-    cursor.close()
+def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
+    for x_sqlstr in get_fiscal_insert_agg_from_staging_sqlstrs().values():
+        conn_or_cursor.execute(x_sqlstr)
 
 
 def etl_fiscal_staging_tables_to_fiscal_csvs(
@@ -920,7 +864,7 @@ def etl_fiscal_staging_tables_to_fiscal_csvs(
 
 
 def etl_fiscal_agg_tables_to_fiscal_csvs(
-    fiscal_db_conn: sqlite3_Connection, fiscal_mstr_dir: str
+    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
     fiscalunit_str = "fiscalunit"
     fiscaldeal_str = "fiscal_deal_episode"
@@ -934,12 +878,12 @@ def etl_fiscal_agg_tables_to_fiscal_csvs(
     fiscalhour_agg_tablename = f"{fiscalhour_str}_agg"
     fiscalmont_agg_tablename = f"{fiscalmont_str}_agg"
     fiscalweek_agg_tablename = f"{fiscalweek_str}_agg"
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalunit_agg_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscaldeal_agg_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalcash_agg_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalhour_agg_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalmont_agg_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalweek_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalunit_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscaldeal_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalcash_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalhour_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalmont_agg_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalweek_agg_tablename)
 
 
 def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
@@ -967,29 +911,4 @@ def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
     upsert_sheet(fiscalhour_excel_path, "agg", fiscalhour_df)
     upsert_sheet(fiscalmont_excel_path, "agg", fiscalmont_df)
     upsert_sheet(fiscalweek_excel_path, "agg", fiscalweek_df)
-
-    # TODO replace empty sheet upsert with csv file upsert
-    # xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
-    # xc = FiscalPrimeColumnsRef()
-    # agg_fiscal_deal_df = DataFrame([], columns=xc.fiscal_deal_agg_columns)
-    # agg_fiscal_cashbook_df = DataFrame([], columns=xc.fiscal_cashbook_agg_columns)
-    # agg_fiscal_hour_df = DataFrame([], columns=xc.fiscal_hour_agg_columns)
-    # agg_fiscal_month_df = DataFrame([], columns=xc.fiscal_month_agg_columns)
-    # agg_fiscal_weekday_df = DataFrame([], columns=xc.fiscal_weekday_agg_columns)
-    # upsert_sheet(xp.deal_excel_path, "agg", agg_fiscal_deal_df)
-    # upsert_sheet(xp.cash_excel_path, "agg", agg_fiscal_cashbook_df)
-    # upsert_sheet(xp.hour_excel_path, "agg", agg_fiscal_hour_df)
-    # upsert_sheet(xp.mont_excel_path, "agg", agg_fiscal_month_df)
-    # upsert_sheet(xp.week_excel_path, "agg", agg_fiscal_weekday_df)
-
-    # if fiscaldeal_df:
-    #     upsert_sheet(fiscal_excel_path, fiscaldeal_str, fiscaldeal_df)
-    # if fiscalcash_df:
-    #     upsert_sheet(fiscal_excel_path, fiscalcash_str, fiscalcash_df)
-    # if fiscalhour_df:
-    #     upsert_sheet(fiscal_excel_path, fiscalhour_str, fiscalhour_df)
-    # if fiscalmont_df:
-    #     upsert_sheet(fiscal_excel_path, fiscalmont_str, fiscalmont_df)
-    # if fiscalweek_df:
-    #     upsert_sheet(fiscal_excel_path, fiscalweek_str, fiscalweek_df)
     create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)

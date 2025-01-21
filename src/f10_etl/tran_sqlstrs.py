@@ -36,40 +36,9 @@ CREATE_FISCALUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscalunit_stag
 
 
 def get_all_idea_create_table_sqlstrs() -> dict[str, str]:
-    return {
-        "bud_acct_membership_agg": CREATE_BUD_ACCT_MEMBERSHIP_AGG_SQLSTR,
-        "bud_acct_membership_staging": CREATE_BUD_ACCT_MEMBERSHIP_STAGING_SQLSTR,
-        "bud_acctunit_agg": CREATE_BUD_ACCTUNIT_AGG_SQLSTR,
-        "bud_acctunit_staging": CREATE_BUD_ACCTUNIT_STAGING_SQLSTR,
-        "bud_item_awardlink_agg": CREATE_BUD_ITEM_AWARDLINK_AGG_SQLSTR,
-        "bud_item_awardlink_staging": CREATE_BUD_ITEM_AWARDLINK_STAGING_SQLSTR,
-        "bud_item_factunit_agg": CREATE_BUD_ITEM_FACTUNIT_AGG_SQLSTR,
-        "bud_item_factunit_staging": CREATE_BUD_ITEM_FACTUNIT_STAGING_SQLSTR,
-        "bud_item_healerlink_agg": CREATE_BUD_ITEM_HEALERLINK_AGG_SQLSTR,
-        "bud_item_healerlink_staging": CREATE_BUD_ITEM_HEALERLINK_STAGING_SQLSTR,
-        "bud_item_reason_premiseunit_agg": CREATE_BUD_ITEM_REASON_PREMISEUNIT_AGG_SQLSTR,
-        "bud_item_reason_premiseunit_staging": CREATE_BUD_ITEM_REASON_PREMISEUNIT_STAGING_SQLSTR,
-        "bud_item_reasonunit_agg": CREATE_BUD_ITEM_REASONUNIT_AGG_SQLSTR,
-        "bud_item_reasonunit_staging": CREATE_BUD_ITEM_REASONUNIT_STAGING_SQLSTR,
-        "bud_item_teamlink_agg": CREATE_BUD_ITEM_TEAMLINK_AGG_SQLSTR,
-        "bud_item_teamlink_staging": CREATE_BUD_ITEM_TEAMLINK_STAGING_SQLSTR,
-        "bud_itemunit_agg": CREATE_BUD_ITEMUNIT_AGG_SQLSTR,
-        "bud_itemunit_staging": CREATE_BUD_ITEMUNIT_STAGING_SQLSTR,
-        "budunit_agg": CREATE_BUDUNIT_AGG_SQLSTR,
-        "budunit_staging": CREATE_BUDUNIT_STAGING_SQLSTR,
-        "fiscal_cashbook_agg": CREATE_FISCAL_CASHBOOK_AGG_SQLSTR,
-        "fiscal_cashbook_staging": CREATE_FISCAL_CASHBOOK_STAGING_SQLSTR,
-        "fiscal_deal_episode_agg": CREATE_FISCAL_DEAL_EPISODE_AGG_SQLSTR,
-        "fiscal_deal_episode_staging": CREATE_FISCAL_DEAL_EPISODE_STAGING_SQLSTR,
-        "fiscal_timeline_hour_agg": CREATE_FISCAL_TIMELINE_HOUR_AGG_SQLSTR,
-        "fiscal_timeline_hour_staging": CREATE_FISCAL_TIMELINE_HOUR_STAGING_SQLSTR,
-        "fiscal_timeline_month_agg": CREATE_FISCAL_TIMELINE_MONTH_AGG_SQLSTR,
-        "fiscal_timeline_month_staging": CREATE_FISCAL_TIMELINE_MONTH_STAGING_SQLSTR,
-        "fiscal_timeline_weekday_agg": CREATE_FISCAL_TIMELINE_WEEKDAY_AGG_SQLSTR,
-        "fiscal_timeline_weekday_staging": CREATE_FISCAL_TIMELINE_WEEKDAY_STAGING_SQLSTR,
-        "fiscalunit_agg": CREATE_FISCALUNIT_AGG_SQLSTR,
-        "fiscalunit_staging": CREATE_FISCALUNIT_STAGING_SQLSTR,
-    }
+    x_dict = get_fiscal_create_table_sqlstrs()
+    x_dict |= get_bud_create_table_sqlstrs()
+    return x_dict
 
 
 def get_fiscal_create_table_sqlstrs() -> dict[str, str]:
@@ -240,13 +209,7 @@ HAVING MIN(credor_respect) != MAX(credor_respect)
 
 
 def get_all_inconsistency_sqlstrs() -> dict[str, str]:
-    return {
-        "fiscalunit": FISCALUNIT_INCONSISTENCY_SQLSTR,
-        "fiscal_deal_episode": FISCALDEAL_INCONSISTENCY_SQLSTR,
-        "fiscal_cashbook": FISCALCASH_INCONSISTENCY_SQLSTR,
-        "fiscal_timeline_hour": FISCALHOUR_INCONSISTENCY_SQLSTR,
-        "fiscal_timeline_month": FISCALMONT_INCONSISTENCY_SQLSTR,
-        "fiscal_timeline_weekday": FISCALWEEK_INCONSISTENCY_SQLSTR,
+    x_dict = {
         "bud_acct_membership": BUDMEMB_INCONSISTENCY_SQLSTR,
         "bud_acctunit": BUDACCT_INCONSISTENCY_SQLSTR,
         "bud_item_awardlink": BUDAWAR_INCONSISTENCY_SQLSTR,
@@ -258,6 +221,8 @@ def get_all_inconsistency_sqlstrs() -> dict[str, str]:
         "bud_itemunit": BUDITEM_INCONSISTENCY_SQLSTR,
         "budunit": BUDUNIT_INCONSISTENCY_SQLSTR,
     }
+    x_dict |= get_fiscal_inconsistency_sqlstrs()
+    return x_dict
 
 
 def get_fiscal_inconsistency_sqlstrs() -> dict[str, str]:
@@ -271,31 +236,174 @@ def get_fiscal_inconsistency_sqlstrs() -> dict[str, str]:
     }
 
 
-FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
-WITH inconsistency_rows AS (
-    {FISCALUNIT_INCONSISTENCY_SQLSTR}
+BUDMEMB_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT acct_name, fiscal_title, group_label
+FROM bud_acct_membership_staging
+GROUP BY acct_name, fiscal_title, group_label
+HAVING MIN(credit_vote) != MAX(credit_vote)
+    OR MIN(debtit_vote) != MAX(debtit_vote)
 )
-UPDATE fiscalunit_staging
+UPDATE bud_acct_membership_staging
 SET error_message = 'Inconsistent fiscal data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fiscal_title = fiscalunit_staging.fiscal_title
+WHERE inconsistency_rows.fiscal_title = bud_acct_membership_staging.fiscal_title
+    AND inconsistency_rows.acct_name = bud_acct_membership_staging.acct_name
+    AND inconsistency_rows.group_label = bud_acct_membership_staging.group_label
 ;
 """
-FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
-WITH inconsistency_rows AS (
-    {FISCALDEAL_INCONSISTENCY_SQLSTR}
+BUDACCT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT acct_name, fiscal_title
+FROM bud_acctunit_staging
+GROUP BY acct_name, fiscal_title
+HAVING MIN(credit_belief) != MAX(credit_belief)
+    OR MIN(debtit_belief) != MAX(debtit_belief)
 )
-UPDATE fiscal_deal_episode_staging
+UPDATE bud_acctunit_staging
 SET error_message = 'Inconsistent fiscal data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fiscal_title = fiscal_deal_episode_staging.fiscal_title
-    AND inconsistency_rows.owner_name = fiscal_deal_episode_staging.owner_name
-    AND inconsistency_rows.time_int = fiscal_deal_episode_staging.time_int
+WHERE inconsistency_rows.fiscal_title = bud_acctunit_staging.fiscal_title
+    AND inconsistency_rows.acct_name = bud_acctunit_staging.acct_name
 ;
 """
-FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
-WITH inconsistency_rows AS (
-    {FISCALCASH_INCONSISTENCY_SQLSTR}
+BUDAWAR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT awardee_tag, fiscal_title, road
+FROM bud_item_awardlink_staging
+GROUP BY awardee_tag, fiscal_title, road
+HAVING MIN(give_force) != MAX(give_force)
+    OR MIN(take_force) != MAX(take_force)
+)
+UPDATE bud_item_awardlink_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = bud_item_awardlink_staging.fiscal_title
+    AND inconsistency_rows.road = bud_item_awardlink_staging.road
+    AND inconsistency_rows.awardee_tag = bud_item_awardlink_staging.awardee_tag
+;
+"""
+BUDFACT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT base, fiscal_title, road
+FROM bud_item_factunit_staging
+GROUP BY base, fiscal_title, road
+HAVING MIN(pick) != MAX(pick)
+    OR MIN(fopen) != MAX(fopen)
+    OR MIN(fnigh) != MAX(fnigh)
+)
+UPDATE bud_item_factunit_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = bud_item_factunit_staging.fiscal_title
+    AND inconsistency_rows.road = bud_item_factunit_staging.road
+    AND inconsistency_rows.base = bud_item_factunit_staging.base
+;
+"""
+BUDHEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fiscal_title, healer_name, road
+FROM bud_item_healerlink_staging
+GROUP BY fiscal_title, healer_name, road
+None
+)
+UPDATE bud_item_healerlink_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = bud_item_healerlink_staging.fiscal_title
+    AND inconsistency_rows.road = bud_item_healerlink_staging.road
+    AND inconsistency_rows.healer_name = bud_item_healerlink_staging.healer_name
+;
+"""
+BUDPREM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT base, fiscal_title, need, road
+FROM bud_item_reason_premiseunit_staging
+GROUP BY base, fiscal_title, need, road
+HAVING MIN(nigh) != MAX(nigh)
+    OR MIN(open) != MAX(open)
+    OR MIN(divisor) != MAX(divisor)
+)
+UPDATE bud_item_reason_premiseunit_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = bud_item_reason_premiseunit_staging.fiscal_title
+    AND inconsistency_rows.road = bud_item_reason_premiseunit_staging.road
+    AND inconsistency_rows.base = bud_item_reason_premiseunit_staging.base
+    AND inconsistency_rows.need = bud_item_reason_premiseunit_staging.need
+;
+"""
+BUDREAS_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT base, fiscal_title, road
+FROM bud_item_reasonunit_staging
+GROUP BY base, fiscal_title, road
+HAVING MIN(base_item_active_requisite) != MAX(base_item_active_requisite)
+)
+UPDATE bud_item_reasonunit_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = bud_item_reasonunit_staging.fiscal_title
+    AND inconsistency_rows.road = bud_item_reasonunit_staging.road
+    AND inconsistency_rows.base = bud_item_reasonunit_staging.base
+;
+"""
+BUDTEAM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fiscal_title, road, team_tag
+FROM bud_item_teamlink_staging
+GROUP BY fiscal_title, road, team_tag
+None
+)
+UPDATE bud_item_teamlink_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = bud_item_teamlink_staging.fiscal_title
+    AND inconsistency_rows.road = bud_item_teamlink_staging.road
+    AND inconsistency_rows.team_tag = bud_item_teamlink_staging.team_tag
+;
+"""
+BUDITEM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fiscal_title, item_title, parent_road
+FROM bud_itemunit_staging
+GROUP BY fiscal_title, item_title, parent_road
+HAVING MIN(begin) != MAX(begin)
+    OR MIN(close) != MAX(close)
+    OR MIN(addin) != MAX(addin)
+    OR MIN(numor) != MAX(numor)
+    OR MIN(denom) != MAX(denom)
+    OR MIN(morph) != MAX(morph)
+    OR MIN(gogo_want) != MAX(gogo_want)
+    OR MIN(stop_want) != MAX(stop_want)
+    OR MIN(mass) != MAX(mass)
+    OR MIN(pledge) != MAX(pledge)
+    OR MIN(problem_bool) != MAX(problem_bool)
+)
+UPDATE bud_itemunit_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = bud_itemunit_staging.fiscal_title
+    AND inconsistency_rows.parent_road = bud_itemunit_staging.parent_road
+    AND inconsistency_rows.item_title = bud_itemunit_staging.item_title
+;
+"""
+BUDUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fiscal_title
+FROM budunit_staging
+GROUP BY fiscal_title
+HAVING MIN(credor_respect) != MAX(credor_respect)
+    OR MIN(debtor_respect) != MAX(debtor_respect)
+    OR MIN(fund_pool) != MAX(fund_pool)
+    OR MIN(max_tree_traverse) != MAX(max_tree_traverse)
+    OR MIN(deal_time_int) != MAX(deal_time_int)
+    OR MIN(tally) != MAX(tally)
+    OR MIN(fund_coin) != MAX(fund_coin)
+    OR MIN(penny) != MAX(penny)
+    OR MIN(respect_bit) != MAX(respect_bit)
+)
+UPDATE budunit_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = budunit_staging.fiscal_title
+;
+"""
+FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT acct_name, fiscal_title, owner_name, time_int
+FROM fiscal_cashbook_staging
+GROUP BY acct_name, fiscal_title, owner_name, time_int
+HAVING MIN(amount) != MAX(amount)
 )
 UPDATE fiscal_cashbook_staging
 SET error_message = 'Inconsistent fiscal data'
@@ -306,9 +414,25 @@ WHERE inconsistency_rows.fiscal_title = fiscal_cashbook_staging.fiscal_title
     AND inconsistency_rows.time_int = fiscal_cashbook_staging.time_int
 ;
 """
-FISCALHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
-WITH inconsistency_rows AS (
-    {FISCALHOUR_INCONSISTENCY_SQLSTR}
+FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fiscal_title, owner_name, time_int
+FROM fiscal_deal_episode_staging
+GROUP BY fiscal_title, owner_name, time_int
+HAVING MIN(quota) != MAX(quota)
+)
+UPDATE fiscal_deal_episode_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = fiscal_deal_episode_staging.fiscal_title
+    AND inconsistency_rows.owner_name = fiscal_deal_episode_staging.owner_name
+    AND inconsistency_rows.time_int = fiscal_deal_episode_staging.time_int
+;
+"""
+FISCALHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fiscal_title, hour_title
+FROM fiscal_timeline_hour_staging
+GROUP BY fiscal_title, hour_title
+HAVING MIN(cumlative_minute) != MAX(cumlative_minute)
 )
 UPDATE fiscal_timeline_hour_staging
 SET error_message = 'Inconsistent fiscal data'
@@ -317,9 +441,11 @@ WHERE inconsistency_rows.fiscal_title = fiscal_timeline_hour_staging.fiscal_titl
     AND inconsistency_rows.hour_title = fiscal_timeline_hour_staging.hour_title
 ;
 """
-FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
-WITH inconsistency_rows AS (
-    {FISCALMONT_INCONSISTENCY_SQLSTR}
+FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fiscal_title, month_title
+FROM fiscal_timeline_month_staging
+GROUP BY fiscal_title, month_title
+HAVING MIN(cumlative_day) != MAX(cumlative_day)
 )
 UPDATE fiscal_timeline_month_staging
 SET error_message = 'Inconsistent fiscal data'
@@ -328,9 +454,11 @@ WHERE inconsistency_rows.fiscal_title = fiscal_timeline_month_staging.fiscal_tit
     AND inconsistency_rows.month_title = fiscal_timeline_month_staging.month_title
 ;
 """
-FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = f"""
-WITH inconsistency_rows AS (
-    {FISCALWEEK_INCONSISTENCY_SQLSTR}
+FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fiscal_title, weekday_title
+FROM fiscal_timeline_weekday_staging
+GROUP BY fiscal_title, weekday_title
+HAVING MIN(weekday_order) != MAX(weekday_order)
 )
 UPDATE fiscal_timeline_weekday_staging
 SET error_message = 'Inconsistent fiscal data'
@@ -339,9 +467,46 @@ WHERE inconsistency_rows.fiscal_title = fiscal_timeline_weekday_staging.fiscal_t
     AND inconsistency_rows.weekday_title = fiscal_timeline_weekday_staging.weekday_title
 ;
 """
+FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fiscal_title
+FROM fiscalunit_staging
+GROUP BY fiscal_title
+HAVING MIN(fund_coin) != MAX(fund_coin)
+    OR MIN(penny) != MAX(penny)
+    OR MIN(respect_bit) != MAX(respect_bit)
+    OR MIN(present_time) != MAX(present_time)
+    OR MIN(bridge) != MAX(bridge)
+    OR MIN(c400_number) != MAX(c400_number)
+    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
+    OR MIN(monthday_distortion) != MAX(monthday_distortion)
+    OR MIN(timeline_title) != MAX(timeline_title)
+)
+UPDATE fiscalunit_staging
+SET error_message = 'Inconsistent fiscal data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fiscal_title = fiscalunit_staging.fiscal_title
+;
+"""
 
 
-def get_set_inconsistency_error_message_sqlstrs() -> dict[str, str]:
+def get_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
+    x_dict = {
+        "bud_acct_membership": BUDMEMB_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "bud_acctunit": BUDACCT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "bud_item_awardlink": BUDAWAR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "bud_item_factunit": BUDFACT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "bud_item_healerlink": BUDHEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "bud_item_reason_premiseunit": BUDPREM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "bud_item_reasonunit": BUDREAS_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "bud_item_teamlink": BUDTEAM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "bud_itemunit": BUDITEM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "budunit": BUDUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+    }
+    x_dict |= get_fiscal_update_inconsist_error_message_sqlstrs()
+    return x_dict
+
+
+def get_fiscal_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
     return {
         "fiscalunit": FISCALUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
         "fiscal_deal_episode": FISCALDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
@@ -349,4 +514,146 @@ def get_set_inconsistency_error_message_sqlstrs() -> dict[str, str]:
         "fiscal_timeline_hour": FISCALHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
         "fiscal_timeline_month": FISCALMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
         "fiscal_timeline_weekday": FISCALWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+    }
+
+
+FISCALUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscalunit_agg (fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title)
+SELECT fiscal_title, MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(timeline_title)
+FROM fiscalunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title
+;
+"""
+FISCALDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_deal_episode_agg (fiscal_title, owner_name, time_int, quota)
+SELECT fiscal_title, owner_name, time_int, MAX(quota)
+FROM fiscal_deal_episode_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, owner_name, time_int
+;
+"""
+FISCALCASH_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_cashbook_agg (fiscal_title, owner_name, acct_name, time_int, amount)
+SELECT fiscal_title, owner_name, acct_name, time_int, MAX(amount)
+FROM fiscal_cashbook_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, owner_name, acct_name, time_int
+;
+"""
+FISCALHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_hour_agg (fiscal_title, hour_title, cumlative_minute)
+SELECT fiscal_title, hour_title, MAX(cumlative_minute)
+FROM fiscal_timeline_hour_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, hour_title
+;
+"""
+FISCALMONT_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_month_agg (fiscal_title, month_title, cumlative_day)
+SELECT fiscal_title, month_title, MAX(cumlative_day)
+FROM fiscal_timeline_month_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, month_title
+;
+"""
+FISCALWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_timeline_weekday_agg (fiscal_title, weekday_title, weekday_order)
+SELECT fiscal_title, weekday_title, MAX(weekday_order)
+FROM fiscal_timeline_weekday_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, weekday_title
+;
+"""
+BUDMEMB_AGG_INSERT_SQLSTR = """INSERT INTO bud_acct_membership_agg (fiscal_title, acct_name, group_label, credit_vote, debtit_vote)
+SELECT fiscal_title, acct_name, group_label, MAX(credit_vote), MAX(debtit_vote)
+FROM bud_acct_membership_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, acct_name, group_label
+;
+"""
+BUDACCT_AGG_INSERT_SQLSTR = """INSERT INTO bud_acctunit_agg (fiscal_title, acct_name, credit_belief, debtit_belief)
+SELECT fiscal_title, acct_name, MAX(credit_belief), MAX(debtit_belief)
+FROM bud_acctunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, acct_name
+;
+"""
+BUDAWAR_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_awardlink_agg (fiscal_title, road, awardee_tag, give_force, take_force)
+SELECT fiscal_title, road, awardee_tag, MAX(give_force), MAX(take_force)
+FROM bud_item_awardlink_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, awardee_tag
+;
+"""
+BUDFACT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_factunit_agg (fiscal_title, road, base, pick, fopen, fnigh)
+SELECT fiscal_title, road, base, MAX(pick), MAX(fopen), MAX(fnigh)
+FROM bud_item_factunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, base
+;
+"""
+BUDHEAL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_healerlink_agg (fiscal_title, road, healer_name)
+SELECT fiscal_title, road, healer_name
+FROM bud_item_healerlink_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, healer_name
+;
+"""
+BUDPREM_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reason_premiseunit_agg (fiscal_title, road, base, need, nigh, open, divisor)
+SELECT fiscal_title, road, base, need, MAX(nigh), MAX(open), MAX(divisor)
+FROM bud_item_reason_premiseunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, base, need
+;
+"""
+BUDREAS_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reasonunit_agg (fiscal_title, road, base, base_item_active_requisite)
+SELECT fiscal_title, road, base, MAX(base_item_active_requisite)
+FROM bud_item_reasonunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, base
+;
+"""
+BUDTEAM_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_teamlink_agg (fiscal_title, road, team_tag)
+SELECT fiscal_title, road, team_tag
+FROM bud_item_teamlink_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, road, team_tag
+;
+"""
+BUDITEM_AGG_INSERT_SQLSTR = """INSERT INTO bud_itemunit_agg (fiscal_title, parent_road, item_title, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool)
+SELECT fiscal_title, parent_road, item_title, MAX(begin), MAX(close), MAX(addin), MAX(numor), MAX(denom), MAX(morph), MAX(gogo_want), MAX(stop_want), MAX(mass), MAX(pledge), MAX(problem_bool)
+FROM bud_itemunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title, parent_road, item_title
+;
+"""
+BUDUNIT_AGG_INSERT_SQLSTR = """INSERT INTO budunit_agg (fiscal_title, credor_respect, debtor_respect, fund_pool, max_tree_traverse, deal_time_int, tally, fund_coin, penny, respect_bit)
+SELECT fiscal_title, MAX(credor_respect), MAX(debtor_respect), MAX(fund_pool), MAX(max_tree_traverse), MAX(deal_time_int), MAX(tally), MAX(fund_coin), MAX(penny), MAX(respect_bit)
+FROM budunit_staging
+WHERE error_message IS NULL
+GROUP BY fiscal_title
+;
+"""
+
+
+def get_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
+    x_dict = {
+        "bud_acct_membership": BUDMEMB_AGG_INSERT_SQLSTR,
+        "bud_acctunit": BUDACCT_AGG_INSERT_SQLSTR,
+        "bud_item_awardlink": BUDAWAR_AGG_INSERT_SQLSTR,
+        "bud_item_factunit": BUDFACT_AGG_INSERT_SQLSTR,
+        "bud_item_healerlink": BUDHEAL_AGG_INSERT_SQLSTR,
+        "bud_item_reason_premiseunit": BUDPREM_AGG_INSERT_SQLSTR,
+        "bud_item_reasonunit": BUDREAS_AGG_INSERT_SQLSTR,
+        "bud_item_teamlink": BUDTEAM_AGG_INSERT_SQLSTR,
+        "bud_itemunit": BUDITEM_AGG_INSERT_SQLSTR,
+        "budunit": BUDUNIT_AGG_INSERT_SQLSTR,
+    }
+    x_dict |= get_fiscal_insert_agg_from_staging_sqlstrs()
+    return x_dict
+
+
+def get_fiscal_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
+    return {
+        "fiscal_cashbook": FISCALCASH_AGG_INSERT_SQLSTR,
+        "fiscal_deal_episode": FISCALDEAL_AGG_INSERT_SQLSTR,
+        "fiscal_timeline_hour": FISCALHOUR_AGG_INSERT_SQLSTR,
+        "fiscal_timeline_month": FISCALMONT_AGG_INSERT_SQLSTR,
+        "fiscal_timeline_weekday": FISCALWEEK_AGG_INSERT_SQLSTR,
+        "fiscalunit": FISCALUNIT_AGG_INSERT_SQLSTR,
     }

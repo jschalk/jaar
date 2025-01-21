@@ -3,7 +3,7 @@ from src.f00_instrument.db_toolbox import (
     db_table_exists,
     get_row_count,
     create_table_from_columns,
-    create_inconsistency_query,
+    create_select_inconsistency_query,
 )
 from src.f01_road.finance_tran import bridge_str, quota_str, time_int_str
 from src.f03_chrono.chrono import (
@@ -92,17 +92,17 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario0_From_br00011_IdeaFi
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        etl_aft_face_csv_files_to_fiscal_db(fiscal_db_conn, aft_faces_dir)
-        create_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        etl_aft_face_csv_files_to_fiscal_db(cursor, aft_faces_dir)
+        create_fiscal_tables(cursor)
         x_fis = FiscalPrimeObjsRef()
-        assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 0
+        assert get_row_count(cursor, x_fis.unit_stage_tablename) == 0
 
         # WHEN
-        idea_staging_tables2fiscal_staging_tables(fiscal_db_conn)
+        idea_staging_tables2fiscal_staging_tables(cursor)
 
         # THEN
-        assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 2
-        cursor = fiscal_db_conn.cursor()
+        assert get_row_count(cursor, x_fis.unit_stage_tablename) == 2
         cursor.execute(f"SELECT * FROM {x_fis.unit_stage_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row0 = (
@@ -163,8 +163,9 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario1_From_br00011_IdeaTa
         acct_name_str(),
     ]
     with sqlite3_connect(":memory:") as fiscal_db_conn:
+        cursor = fiscal_db_conn.cursor()
         br00011_tablename = f"{br00011_str}_staging"
-        create_idea_staging_table(fiscal_db_conn, br00011_tablename, br00011_columns)
+        create_idea_staging_table(cursor, br00011_tablename, br00011_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00011_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()})
 VALUES 
@@ -174,17 +175,16 @@ VALUES
 , ('{sue_inx}', {event7}, '{accord23_str}', '{yao_inx}', '{yao_inx}')
 ;
 """
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
         x_fis = FiscalPrimeObjsRef()
-        create_fiscal_tables(fiscal_db_conn)
-        assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 0
+        create_fiscal_tables(cursor)
+        assert get_row_count(cursor, x_fis.unit_stage_tablename) == 0
 
         # WHEN
-        idea_staging_tables2fiscal_staging_tables(fiscal_db_conn)
+        idea_staging_tables2fiscal_staging_tables(cursor)
 
         # THEN
-        assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 2
+        assert get_row_count(cursor, x_fis.unit_stage_tablename) == 2
         cursor.execute(f"SELECT * FROM {x_fis.unit_stage_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row0 = (
@@ -251,7 +251,8 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario2_Idea_br00000_Table_
     ]
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00000_tablename = f"{br00000_str}_staging"
-        create_idea_staging_table(fiscal_db_conn, br00000_tablename, br00000_columns)
+        cursor = fiscal_db_conn.cursor()
+        create_idea_staging_table(cursor, br00000_tablename, br00000_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()})
 VALUES
@@ -260,17 +261,16 @@ VALUES
 , ('{sue_inx}', {event7}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
 ;
 """
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
         x_fis = FiscalPrimeObjsRef()
-        create_fiscal_tables(fiscal_db_conn)
-        assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 0
+        create_fiscal_tables(cursor)
+        assert get_row_count(cursor, x_fis.unit_stage_tablename) == 0
 
         # WHEN
-        idea_staging_tables2fiscal_staging_tables(fiscal_db_conn)
+        idea_staging_tables2fiscal_staging_tables(cursor)
 
         # THEN
-        assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 2
+        assert get_row_count(cursor, x_fis.unit_stage_tablename) == 2
         cursor.execute(f"SELECT * FROM {x_fis.unit_stage_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row0 = (
@@ -348,7 +348,8 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario3_Idea_br00000_Table_
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00000_tablename = f"{br00000_str}_staging"
-        create_idea_staging_table(fiscal_db_conn, br00000_tablename, br00000_columns)
+        cursor = fiscal_db_conn.cursor()
+        create_idea_staging_table(cursor, br00000_tablename, br00000_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()})
 VALUES
@@ -358,17 +359,16 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
         x_fis = FiscalPrimeObjsRef()
-        create_fiscal_tables(fiscal_db_conn)
-        assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 0
+        create_fiscal_tables(cursor)
+        assert get_row_count(cursor, x_fis.unit_stage_tablename) == 0
 
         # WHEN
-        idea_staging_tables2fiscal_staging_tables(fiscal_db_conn)
+        idea_staging_tables2fiscal_staging_tables(cursor)
 
         # THEN
-        assert get_row_count(fiscal_db_conn, x_fis.unit_stage_tablename) == 2
+        assert get_row_count(cursor, x_fis.unit_stage_tablename) == 2
         cursor.execute(f"SELECT * FROM {x_fis.unit_stage_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row0 = (
@@ -436,7 +436,8 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario4_Idea_br00001_Table_
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00001_tablename = f"{br00001_str}_staging"
-        create_idea_staging_table(fiscal_db_conn, br00001_tablename, br00001_columns)
+        cursor = fiscal_db_conn.cursor()
+        create_idea_staging_table(cursor, br00001_tablename, br00001_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{time_int_str()},{quota_str()})
 VALUES
@@ -446,17 +447,16 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
         x_fis = FiscalPrimeObjsRef()
-        create_fiscal_tables(fiscal_db_conn)
-        assert get_row_count(fiscal_db_conn, x_fis.deal_stage_tablename) == 0
+        create_fiscal_tables(cursor)
+        assert get_row_count(cursor, x_fis.deal_stage_tablename) == 0
 
         # WHEN
-        idea_staging_tables2fiscal_staging_tables(fiscal_db_conn)
+        idea_staging_tables2fiscal_staging_tables(cursor)
 
         # THEN
-        assert get_row_count(fiscal_db_conn, x_fis.deal_stage_tablename) == 2
+        assert get_row_count(cursor, x_fis.deal_stage_tablename) == 2
         cursor.execute(f"SELECT * FROM {x_fis.deal_stage_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row0 = (
@@ -514,7 +514,8 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario5_Idea_br00002_Table_
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00002_tablename = f"{br00002_str}_staging"
-        create_idea_staging_table(fiscal_db_conn, br00002_tablename, br00002_columns)
+        cursor = fiscal_db_conn.cursor()
+        create_idea_staging_table(cursor, br00002_tablename, br00002_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00002_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{time_int_str()},{amount_str()})
 VALUES
@@ -524,17 +525,16 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
         x_fis = FiscalPrimeObjsRef()
-        create_fiscal_tables(fiscal_db_conn)
-        assert get_row_count(fiscal_db_conn, x_fis.cash_stage_tablename) == 0
+        create_fiscal_tables(cursor)
+        assert get_row_count(cursor, x_fis.cash_stage_tablename) == 0
 
         # WHEN
-        idea_staging_tables2fiscal_staging_tables(fiscal_db_conn)
+        idea_staging_tables2fiscal_staging_tables(cursor)
 
         # THEN
-        assert get_row_count(fiscal_db_conn, x_fis.cash_stage_tablename) == 2
+        assert get_row_count(cursor, x_fis.cash_stage_tablename) == 2
         cursor.execute(f"SELECT * FROM {x_fis.cash_stage_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row0 = (
@@ -590,7 +590,8 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario6_Idea_br00003_Table_
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00003_tablename = f"{br00003_str}_staging"
-        create_idea_staging_table(fiscal_db_conn, br00003_tablename, br00003_columns)
+        cursor = fiscal_db_conn.cursor()
+        create_idea_staging_table(cursor, br00003_tablename, br00003_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00003_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{hour_title_str()},{cumlative_minute_str()})
 VALUES
@@ -600,17 +601,16 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
         x_fis = FiscalPrimeObjsRef()
-        create_fiscal_tables(fiscal_db_conn)
-        assert get_row_count(fiscal_db_conn, x_fis.hour_stage_tablename) == 0
+        create_fiscal_tables(cursor)
+        assert get_row_count(cursor, x_fis.hour_stage_tablename) == 0
 
         # WHEN
-        idea_staging_tables2fiscal_staging_tables(fiscal_db_conn)
+        idea_staging_tables2fiscal_staging_tables(cursor)
 
         # THEN
-        assert get_row_count(fiscal_db_conn, x_fis.hour_stage_tablename) == 2
+        assert get_row_count(cursor, x_fis.hour_stage_tablename) == 2
         cursor.execute(f"SELECT * FROM {x_fis.hour_stage_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row0 = (
@@ -662,7 +662,8 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario7_Idea_br00004_Table_
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00004_tablename = f"{br00004_str}_staging"
-        create_idea_staging_table(fiscal_db_conn, br00004_tablename, br00004_columns)
+        cursor = fiscal_db_conn.cursor()
+        create_idea_staging_table(cursor, br00004_tablename, br00004_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00004_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{month_title_str()},{cumlative_day_str()})
 VALUES
@@ -672,17 +673,16 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
         x_fis = FiscalPrimeObjsRef()
-        create_fiscal_tables(fiscal_db_conn)
-        assert get_row_count(fiscal_db_conn, x_fis.mont_stage_tablename) == 0
+        create_fiscal_tables(cursor)
+        assert get_row_count(cursor, x_fis.mont_stage_tablename) == 0
 
         # WHEN
-        idea_staging_tables2fiscal_staging_tables(fiscal_db_conn)
+        idea_staging_tables2fiscal_staging_tables(cursor)
 
         # THEN
-        assert get_row_count(fiscal_db_conn, x_fis.mont_stage_tablename) == 2
+        assert get_row_count(cursor, x_fis.mont_stage_tablename) == 2
         cursor.execute(f"SELECT * FROM {x_fis.mont_stage_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row0 = (
@@ -734,7 +734,8 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario8_Idea_br00005_Table_
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         br00005_tablename = f"{br00005_str}_staging"
-        create_idea_staging_table(fiscal_db_conn, br00005_tablename, br00005_columns)
+        cursor = fiscal_db_conn.cursor()
+        create_idea_staging_table(cursor, br00005_tablename, br00005_columns)
         insert_staging_sqlstr = f"""
 INSERT INTO {br00005_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{weekday_title_str()},{weekday_order_str()})
 VALUES
@@ -744,17 +745,16 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
         x_fis = FiscalPrimeObjsRef()
-        create_fiscal_tables(fiscal_db_conn)
-        assert get_row_count(fiscal_db_conn, x_fis.week_stage_tablename) == 0
+        create_fiscal_tables(cursor)
+        assert get_row_count(cursor, x_fis.week_stage_tablename) == 0
 
         # WHEN
-        idea_staging_tables2fiscal_staging_tables(fiscal_db_conn)
+        idea_staging_tables2fiscal_staging_tables(cursor)
 
         # THEN
-        assert get_row_count(fiscal_db_conn, x_fis.week_stage_tablename) == 2
+        assert get_row_count(cursor, x_fis.week_stage_tablename) == 2
         cursor.execute(f"SELECT * FROM {x_fis.week_stage_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row0 = (
@@ -794,12 +794,12 @@ def test_etl_fiscal_staging_tables_to_fiscal_csvs_CreateFiles(env_dir_setup_clea
     br00011_str = "br00011"
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
         fiscal_mstr_dir = get_test_etl_dir()
         fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
         x_fis = FiscalPrimeObjsRef(fiscals_dir)
         fis_cols = FiscalPrimeColumnsRef()
-        cursor = fiscal_db_conn.cursor()
         insert_staging_sqlstr = f"""
 INSERT INTO {x_fis.unit_stage_tablename} ({idea_number_str()}, {face_name_str()}, {event_int_str()}, {fiscal_title_str()})
 VALUES 
@@ -818,7 +818,7 @@ VALUES
         assert os_path_exists(x_fis.week_stage_csv_path) is False
 
         # WHEN
-        etl_fiscal_staging_tables_to_fiscal_csvs(fiscal_db_conn, fiscals_dir)
+        etl_fiscal_staging_tables_to_fiscal_csvs(cursor, fiscals_dir)
 
         # THEN
         assert os_path_exists(x_fis.unit_stage_csv_path)
@@ -856,12 +856,12 @@ def test_etl_fiscal_staging_tables_to_fiscal_csvs_CreateFiles(env_dir_setup_clea
     br00011_str = "br00011"
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
         fiscal_mstr_dir = get_test_etl_dir()
         fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
         x_fis = FiscalPrimeObjsRef(fiscals_dir)
         fis_cols = FiscalPrimeColumnsRef()
-        cursor = fiscal_db_conn.cursor()
         insert_staging_sqlstr = f"""
 INSERT INTO {x_fis.unit_stage_tablename} ({idea_number_str()}, {face_name_str()}, {event_int_str()}, {fiscal_title_str()})
 VALUES 
@@ -880,7 +880,7 @@ VALUES
         assert os_path_exists(x_fis.week_stage_csv_path) is False
 
         # WHEN
-        etl_fiscal_staging_tables_to_fiscal_csvs(fiscal_db_conn, fiscals_dir)
+        etl_fiscal_staging_tables_to_fiscal_csvs(cursor, fiscals_dir)
 
         # THEN
         assert os_path_exists(x_fis.unit_stage_csv_path)
@@ -929,7 +929,7 @@ def test_GlobalVariablesForFiscal_inconsistency_queryReturns_sqlstrs():
             cat_focus_columns = set(cat_config.get("jkeys").keys())
             cat_focus_columns.remove(event_int_str())
             cat_focus_columns.remove(face_name_str())
-            generated_cat_sqlstr = create_inconsistency_query(
+            generated_cat_sqlstr = create_select_inconsistency_query(
                 conn, x_tablename, cat_focus_columns, exclude_cols
             )
             assert x_sqlstr == generated_cat_sqlstr
@@ -957,9 +957,10 @@ def test_set_fiscal_staging_error_message_Scenario0_fiscalunit_WithNo_error_mess
     x_cols = FiscalPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
         x_tablename = x_objs.unit_stage_tablename
-        assert db_table_exists(fiscal_db_conn, x_tablename)
+        assert db_table_exists(cursor, x_tablename)
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
 VALUES
@@ -968,9 +969,8 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
-        assert get_row_count(fiscal_db_conn, x_tablename) == 2
+        assert get_row_count(cursor, x_tablename) == 2
         select_sqlstr = f"SELECT {event_int_str()}, error_message FROM {x_tablename};"
         # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
@@ -980,7 +980,7 @@ VALUES
         assert rows == [(event3, None), (event7, None)]
 
         # WHEN
-        set_fiscal_staging_error_message(fiscal_db_conn)
+        set_fiscal_staging_error_message(cursor)
 
         # THEN
         cursor.execute(select_sqlstr)
@@ -1011,9 +1011,10 @@ def test_set_fiscal_staging_error_message_Scenario1_fiscalunit_Some_error_messag
     x_cols = FiscalPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
         x_tablename = x_objs.unit_stage_tablename
-        assert db_table_exists(fiscal_db_conn, x_tablename)
+        assert db_table_exists(cursor, x_tablename)
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
 VALUES
@@ -1023,9 +1024,8 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
-        assert get_row_count(fiscal_db_conn, x_tablename) == 3
+        assert get_row_count(cursor, x_tablename) == 3
         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, error_message FROM {x_tablename};"
         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
@@ -1039,7 +1039,7 @@ VALUES
         ]
 
         # WHEN
-        set_fiscal_staging_error_message(fiscal_db_conn)
+        set_fiscal_staging_error_message(cursor)
 
         # THEN
         cursor.execute(select_sqlstr)
@@ -1068,9 +1068,10 @@ def test_set_fiscal_staging_error_message_Scenario2_fiscalhour_Some_error_messag
     x_cols = FiscalPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
         x_tablename = x_objs.hour_stage_tablename
-        assert db_table_exists(fiscal_db_conn, x_tablename)
+        assert db_table_exists(cursor, x_tablename)
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.hour_staging_csv_header})
 VALUES
@@ -1080,9 +1081,8 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
-        assert get_row_count(fiscal_db_conn, x_tablename) == 3
+        assert get_row_count(cursor, x_tablename) == 3
         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, error_message FROM {x_tablename};"
         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
@@ -1096,7 +1096,7 @@ VALUES
         ]
 
         # WHEN
-        set_fiscal_staging_error_message(fiscal_db_conn)
+        set_fiscal_staging_error_message(cursor)
 
         # THEN
         cursor.execute(select_sqlstr)
@@ -1126,9 +1126,10 @@ def test_set_fiscal_staging_error_message_Scenario3_fiscalhour_Some_error_messag
     x_cols = FiscalPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
         x_tablename = x_objs.mont_stage_tablename
-        assert db_table_exists(fiscal_db_conn, x_tablename)
+        assert db_table_exists(cursor, x_tablename)
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.mont_staging_csv_header})
 VALUES
@@ -1138,9 +1139,8 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
-        assert get_row_count(fiscal_db_conn, x_tablename) == 3
+        assert get_row_count(cursor, x_tablename) == 3
         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, error_message FROM {x_tablename};"
         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
@@ -1154,7 +1154,7 @@ VALUES
         ]
 
         # WHEN
-        set_fiscal_staging_error_message(fiscal_db_conn)
+        set_fiscal_staging_error_message(cursor)
 
         # THEN
         cursor.execute(select_sqlstr)
@@ -1186,7 +1186,8 @@ def test_set_fiscal_staging_error_message_Scenario4_fiscalweek_Some_error_messag
     x_cols = FiscalPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
         x_tablename = x_objs.week_stage_tablename
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.week_staging_csv_header})
@@ -1198,9 +1199,8 @@ VALUES
 , ('br00333','{sue_inx}',{event7},'{accord45_str}','{mon_str}',{order3},NULL)
 ;
 """
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
-        assert get_row_count(fiscal_db_conn, x_tablename) == 5
+        assert get_row_count(cursor, x_tablename) == 5
         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, {weekday_title_str()}, error_message FROM {x_tablename};"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -1214,7 +1214,7 @@ VALUES
         ]
 
         # WHEN
-        set_fiscal_staging_error_message(fiscal_db_conn)
+        set_fiscal_staging_error_message(cursor)
 
         # THEN
         cursor.execute(select_sqlstr)
@@ -1250,9 +1250,10 @@ def test_set_fiscal_staging_error_message_Scenario5_fiscaldeal_Some_error_messag
     x_cols = FiscalPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
         x_tablename = x_objs.deal_stage_tablename
-        assert db_table_exists(fiscal_db_conn, x_tablename)
+        assert db_table_exists(cursor, x_tablename)
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.deal_staging_csv_header})
 VALUES
@@ -1264,9 +1265,8 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
-        assert get_row_count(fiscal_db_conn, x_tablename) == 5
+        assert get_row_count(cursor, x_tablename) == 5
         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, {time_int_str()}, error_message FROM {x_tablename};"
         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
@@ -1282,7 +1282,7 @@ VALUES
         ]
 
         # WHEN
-        set_fiscal_staging_error_message(fiscal_db_conn)
+        set_fiscal_staging_error_message(cursor)
 
         # THEN
         cursor.execute(select_sqlstr)
@@ -1318,9 +1318,10 @@ def test_set_fiscal_staging_error_message_Scenario6_fiscalcash_Some_error_messag
     x_cols = FiscalPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        create_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
         x_tablename = x_objs.cash_stage_tablename
-        assert db_table_exists(fiscal_db_conn, x_tablename)
+        assert db_table_exists(cursor, x_tablename)
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.cash_staging_csv_header})
 VALUES
@@ -1332,9 +1333,8 @@ VALUES
 ;
 """
         print(f"{insert_staging_sqlstr=}")
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(insert_staging_sqlstr)
-        assert get_row_count(fiscal_db_conn, x_tablename) == 5
+        assert get_row_count(cursor, x_tablename) == 5
         select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, {time_int_str()}, error_message FROM {x_tablename};"
         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
@@ -1350,7 +1350,7 @@ VALUES
         ]
 
         # WHEN
-        set_fiscal_staging_error_message(fiscal_db_conn)
+        set_fiscal_staging_error_message(cursor)
 
         # THEN
         cursor.execute(select_sqlstr)
