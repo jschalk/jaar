@@ -398,11 +398,11 @@ def get_idea_into_category_staging_query(
     common_columns_header = ", ".join(common_columns_list)
     values_cols = set(common_columns_set)
     values_cols.difference_update(x_jkeys)
+    # {_get_values_where_str(values_cols, dst_columns)}
     return f"""INSERT INTO {x_category}_staging (idea_number, {common_columns_header})
 SELECT '{idea_number}' as idea_number, {common_columns_header}
 FROM {idea_number}_staging
 {_get_keys_where_str(x_jkeys, dst_columns)}
-{_get_values_where_str(values_cols, dst_columns)}
 GROUP BY {common_columns_header}
 ;
 """

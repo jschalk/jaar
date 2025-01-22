@@ -47,7 +47,6 @@ def test_get_idea_into_category_staging_query_ReturnsObj_Scenario0_bud_item_team
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_staging
 WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND road IS NOT NULL AND team_tag IS NOT NULL
-
 GROUP BY {columns_str}
 ;
 """
@@ -97,7 +96,6 @@ def test_get_idea_into_category_staging_query_ReturnsObj_Scenario1_bud_acctunit(
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_staging
 WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND acct_name IS NOT NULL
-    AND (credit_belief IS NOT NULL OR debtit_belief IS NOT NULL)
 GROUP BY {columns_str}
 ;
 """
@@ -147,7 +145,6 @@ def test_get_idea_into_category_staging_query_ReturnsObj_Scenario2_bud_acctunit(
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_staging
 WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND acct_name IS NOT NULL
-    AND (credit_belief IS NOT NULL)
 GROUP BY {columns_str}
 ;
 """

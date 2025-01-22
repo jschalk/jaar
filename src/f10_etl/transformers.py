@@ -1,5 +1,9 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f00_instrument.db_toolbox import db_table_exists, get_table_columns
+from src.f00_instrument.db_toolbox import (
+    db_table_exists,
+    get_table_columns,
+    is_stageable,
+)
 from src.f01_road.road import FaceName, EventInt
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -7,6 +11,7 @@ from src.f09_idea.idea_config import (
     get_idea_numbers,
     get_idea_format_filename,
     get_idea_category_ref,
+    get_idea_config_dict,
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.idea_db_tool import (
@@ -21,6 +26,7 @@ from src.f09_idea.idea_db_tool import (
     save_table_to_csv,
     open_csv,
     get_ordered_csv,
+    get_idea_into_category_staging_query,
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
@@ -774,58 +780,26 @@ def etl_idea_staging_to_fiscal_tables(conn_or_cursor):
 
 
 def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection):
-    unit_dst = "fiscalunit_staging"
-    deal_dst = "fiscal_deal_episode_staging"
-    cash_dst = "fiscal_cashbook_staging"
-    hour_dst = "fiscal_timeline_hour_staging"
-    mont_dst = "fiscal_timeline_month_staging"
-    week_dst = "fiscal_timeline_weekday_staging"
-    unit_marks = set(get_fiscalunit_sorted_args())
-    deal_marks = set(get_fiscaldeal_sorted_args())
-    cash_marks = set(get_fiscalcash_sorted_args())
-    hour_marks = set(get_fiscalhour_sorted_args())
-    mont_marks = set(get_fiscalmont_sorted_args())
-    week_marks = set(get_fiscalweek_sorted_args())
-    deal_marks.remove("fiscal_title")
-    deal_marks.remove("owner_name")
-    cash_marks.remove("fiscal_title")
-    cash_marks.remove("owner_name")
-    cash_marks.remove("acct_name")
-    hour_marks.remove("fiscal_title")
-    mont_marks.remove("fiscal_title")
-    week_marks.remove("fiscal_title")
+    unit_cat = "fiscalunit"
+    deal_cat = "fiscal_deal_episode"
+    cash_cat = "fiscal_cashbook"
+    hour_cat = "fiscal_timeline_hour"
+    mont_cat = "fiscal_timeline_month"
+    week_cat = "fiscal_timeline_weekday"
+    fiscal_cats = {unit_cat, deal_cat, cash_cat, hour_cat, mont_cat, week_cat}
+    idea_config_dict = get_idea_config_dict()
+
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
         if db_table_exists(conn_or_cursor, idea_staging):
-            insert_fiscal_staging(conn_or_cursor, idea_number, unit_dst, unit_marks)
-            insert_fiscal_staging(conn_or_cursor, idea_number, deal_dst, deal_marks)
-            insert_fiscal_staging(conn_or_cursor, idea_number, cash_dst, cash_marks)
-            insert_fiscal_staging(conn_or_cursor, idea_number, hour_dst, hour_marks)
-            insert_fiscal_staging(conn_or_cursor, idea_number, mont_dst, mont_marks)
-            insert_fiscal_staging(conn_or_cursor, idea_number, week_dst, week_marks)
-
-
-def insert_fiscal_staging(
-    conn_or_cursor: sqlite3_Connection,
-    idea_number: str,
-    dst_table: str,
-    mark_columns: set[str],
-):
-    src_table = f"{idea_number}_staging"
-    src_columns = get_table_columns(conn_or_cursor, src_table)
-    if not mark_columns.isdisjoint(src_columns):
-        dst_columns = get_table_columns(conn_or_cursor, dst_table)
-        common_columns_set = set(dst_columns).intersection(set(src_columns))
-        common_columns_list = [col for col in dst_columns if col in common_columns_set]
-        common_columns_header = ", ".join(common_columns_list)
-        insert_idea_staging_agg_str = f"""
-INSERT INTO {dst_table} (idea_number, {common_columns_header})
-SELECT '{idea_number}' as idea_number, {common_columns_header}
-FROM {src_table}
-GROUP BY face_name, event_int, fiscal_title
-;
-"""
-        conn_or_cursor.execute(insert_idea_staging_agg_str)
+            for x_cat in fiscal_cats:
+                cat_config = idea_config_dict.get(x_cat)
+                cat_jkeys = set(cat_config.get("jkeys").keys())
+                if is_stageable(conn_or_cursor, idea_staging, cat_jkeys):
+                    gen_sqlstr = get_idea_into_category_staging_query(
+                        conn_or_cursor, idea_number, x_cat, cat_jkeys
+                    )
+                    conn_or_cursor.execute(gen_sqlstr)
 
 
 def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):
