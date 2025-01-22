@@ -13,7 +13,7 @@ from src.f08_pidgin.pidgin_config import (
     otx_title_str,
     unknown_word_str,
 )
-from src.f09_idea.pandas_tool import get_sheet_names, upsert_sheet, boat_agg_str
+from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet, boat_agg_str
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f10_etl.transformers import etl_boat_agg_to_pidgin_title_staging
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup

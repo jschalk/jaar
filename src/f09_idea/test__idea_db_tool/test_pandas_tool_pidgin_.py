@@ -8,7 +8,7 @@ from src.f04_gift.atom_config import (
 )
 from src.f08_pidgin.map import acctmap_shop
 from src.f08_pidgin.pidgin import pidginunit_shop
-from src.f09_idea.pandas_tool import (
+from src.f09_idea.idea_db_tool import (
     translate_single_column_dataframe,
     translate_all_columns_dataframe,
     get_dataframe_pidginable_columns,

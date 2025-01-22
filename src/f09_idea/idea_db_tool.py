@@ -12,6 +12,7 @@ from src.f00_instrument.db_toolbox import (
     insert_csv,
     db_table_exists,
     get_table_columns,
+    create_table_from_columns,
 )
 from src.f00_instrument.dict_toolbox import set_in_nested_dict
 from src.f08_pidgin.map import MapCore
@@ -374,3 +375,57 @@ def save_table_to_csv(
     fiscalunit_df = DataFrame(fiscalunit_rows, columns=fiscalunit_columns)
     fiscalunit_filename = f"{tablename}.csv"
     save_dataframe_to_csv(fiscalunit_df, fiscal_mstr_dir, fiscalunit_filename)
+
+
+def create_idea_sorted_table(
+    conn: sqlite3_Connection, tablename: str, columns_list: list[str]
+):
+    columns_list = get_custom_sorted_list(columns_list)
+    create_table_from_columns(conn, tablename, columns_list, get_idea_sqlite_types())
+
+
+def get_idea_into_category_staging_query(
+    conn_or_cursor: sqlite3_Connection,
+    idea_number: str,
+    x_category: str,
+    x_jkeys: set[str],
+) -> str:
+    src_columns = get_table_columns(conn_or_cursor, f"{idea_number}_staging")
+    dst_table = f"{x_category}_staging"
+    dst_columns = get_table_columns(conn_or_cursor, dst_table)
+    common_columns_set = set(dst_columns).intersection(set(src_columns))
+    common_columns_list = [col for col in dst_columns if col in common_columns_set]
+    common_columns_header = ", ".join(common_columns_list)
+    values_cols = set(common_columns_set)
+    values_cols.difference_update(x_jkeys)
+    # {_get_values_where_str(values_cols, dst_columns)}
+    return f"""INSERT INTO {x_category}_staging (idea_number, {common_columns_header})
+SELECT '{idea_number}' as idea_number, {common_columns_header}
+FROM {idea_number}_staging
+{_get_keys_where_str(x_jkeys, dst_columns)}
+GROUP BY {common_columns_header}
+;
+"""
+
+
+def _get_keys_where_str(x_jkeys: set[str], dst_columns: list[str]) -> str:
+    key_columns_list = [col for col in dst_columns if col in x_jkeys]
+    keys_where_str = None
+    for x_jkey in key_columns_list:
+        if keys_where_str is None:
+            keys_where_str = f"WHERE {x_jkey} IS NOT NULL"
+        else:
+            keys_where_str += f" AND {x_jkey} IS NOT NULL"
+    return "" if keys_where_str is None else keys_where_str
+
+
+def _get_values_where_str(values_cols: set[str], dst_columns: list[str]) -> str:
+    values_columns_list = [col for col in dst_columns if col in values_cols]
+    values_where_str = None
+    if values_cols:
+        for value_col in values_columns_list:
+            if values_where_str is None:
+                values_where_str = f"    AND ({value_col} IS NOT NULL"
+            else:
+                values_where_str += f" OR {value_col} IS NOT NULL"
+    return "" if values_where_str is None else values_where_str + ")"

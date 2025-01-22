@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f09_idea.idea_config import get_idea_numbers, get_quick_ideas_column_ref
-from src.f09_idea.pandas_tool import get_all_excel_sheet_names
+from src.f09_idea.idea_db_tool import get_all_excel_sheet_names
 from pandas import read_excel as pandas_read_excel, DataFrame, Series as PandaSeries
 from dataclasses import dataclass
 

@@ -18,7 +18,7 @@ from src.f08_pidgin.examples.example_pidgins import (
     get_suita_acct_name_inx_dt,
     get_sue_pidginunit,
 )
-from src.f09_idea.pandas_tool import (
+from src.f09_idea.idea_db_tool import (
     save_dataframe_to_csv,
     open_csv,
     move_otx_csvs_to_pidgin_inx,

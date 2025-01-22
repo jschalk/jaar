@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_name_str, fiscal_title_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.pandas_tool import upsert_sheet, boat_valid_str, sheet_exists
+from src.f09_idea.idea_db_tool import upsert_sheet, boat_valid_str, sheet_exists
 from src.f10_etl.transformers import etl_bow_face_ideas_to_bow_event_otx_ideas
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (

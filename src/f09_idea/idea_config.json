@@ -72,7 +72,8 @@
       "event_int": {},
       "face_name": {},
       "fiscal_title": {},
-      "group_label": {}
+      "group_label": {},
+      "owner_name": {}
     },
     "jvalues": {
       "credit_vote": {},
@@ -87,7 +88,8 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fiscal_title": {}
+      "fiscal_title": {},
+      "owner_name": {}
     },
     "jvalues": {
       "credit_belief": {},
@@ -103,6 +105,7 @@
       "event_int": {},
       "face_name": {},
       "fiscal_title": {},
+      "owner_name": {},
       "road": {}
     },
     "jvalues": {
@@ -119,6 +122,7 @@
       "event_int": {},
       "face_name": {},
       "fiscal_title": {},
+      "owner_name": {},
       "road": {}
     },
     "jvalues": {
@@ -136,6 +140,7 @@
       "face_name": {},
       "fiscal_title": {},
       "healer_name": {},
+      "owner_name": {},
       "road": {}
     },
     "jvalues": {}
@@ -150,6 +155,7 @@
       "face_name": {},
       "fiscal_title": {},
       "need": {},
+      "owner_name": {},
       "road": {}
     },
     "jvalues": {
@@ -167,6 +173,7 @@
       "event_int": {},
       "face_name": {},
       "fiscal_title": {},
+      "owner_name": {},
       "road": {}
     },
     "jvalues": {
@@ -181,6 +188,7 @@
       "event_int": {},
       "face_name": {},
       "fiscal_title": {},
+      "owner_name": {},
       "road": {},
       "team_tag": {}
     },
@@ -195,7 +203,8 @@
       "face_name": {},
       "fiscal_title": {},
       "item_title": {},
-      "parent_road": {}
+      "parent_road": {},
+      "owner_name": {}
     },
     "jvalues": {
       "addin": {},
@@ -218,7 +227,8 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fiscal_title": {}
+      "fiscal_title": {},
+      "owner_name": {}
     },
     "jvalues": {
       "credor_respect": {},

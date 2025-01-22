@@ -7,7 +7,7 @@ from src.f08_pidgin.pidgin import (
     TitleMap,
     RoadMap,
 )
-from src.f09_idea.pandas_tool import get_ordered_csv, open_csv
+from src.f09_idea.idea_db_tool import get_ordered_csv, open_csv
 from pandas import DataFrame
 from os.path import exists as os_path_exists
 

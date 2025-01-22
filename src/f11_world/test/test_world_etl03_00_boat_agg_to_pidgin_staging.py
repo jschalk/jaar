@@ -19,7 +19,7 @@ from src.f08_pidgin.pidgin_config import (
     otx_label_str,
     unknown_word_str,
 )
-from src.f09_idea.pandas_tool import (
+from src.f09_idea.idea_db_tool import (
     upsert_sheet,
     sheet_exists,
     _get_pidgen_idea_format_filenames,

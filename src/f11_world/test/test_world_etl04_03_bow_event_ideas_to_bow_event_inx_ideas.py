@@ -9,7 +9,7 @@ from src.f04_gift.atom_config import (
 )
 from src.f08_pidgin.pidgin_config import event_int_str, pidgin_filename
 from src.f08_pidgin.pidgin import pidginunit_shop
-from src.f09_idea.pandas_tool import upsert_sheet, boat_valid_str, sheet_exists
+from src.f09_idea.idea_db_tool import upsert_sheet, boat_valid_str, sheet_exists
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas.testing import (

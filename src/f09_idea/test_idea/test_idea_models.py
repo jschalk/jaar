@@ -3,7 +3,7 @@ from src.f09_idea.idea_config import (
     get_idea_sqlite_types,
     get_idea_numbers,
 )
-from src.f09_idea.idea_models import get_idea_holdtables, get_idea_stagetables, Base
+from src.f09_idea.idea_db_model import get_idea_holdtables, get_idea_stagetables, Base
 from src.f09_idea.examples.idea_env import idea_env_setup_cleanup, idea_examples_dir
 from sqlalchemy import inspect, create_engine, MetaData
 

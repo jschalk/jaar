@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f09_idea.idea_config import get_idea_sqlite_types
 from src.f09_idea.examples.idea_env import idea_env_setup_cleanup, idea_fiscals_dir
-from src.f09_idea.pandas_tool import create_idea_table_from_csv, insert_idea_csv
+from src.f09_idea.idea_db_tool import create_idea_table_from_csv, insert_idea_csv
 from pytest import fixture as pytest_fixture
 from os import remove as os_remove
 from os.path import exists as os_path_exists

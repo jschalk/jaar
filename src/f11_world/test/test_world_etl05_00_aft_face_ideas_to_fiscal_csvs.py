@@ -40,7 +40,7 @@ from src.f09_idea.idea_config import (
     get_idearef_from_file,
     idea_number_str,
 )
-from src.f09_idea.pandas_tool import (
+from src.f09_idea.idea_db_tool import (
     _get_fiscal_idea_format_filenames,
     boat_agg_str,
     get_custom_sorted_list,

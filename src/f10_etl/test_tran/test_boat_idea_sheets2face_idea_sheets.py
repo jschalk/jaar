@@ -9,7 +9,7 @@ from src.f08_pidgin.pidgin_config import (
     otx_name_str,
     unknown_word_str,
 )
-from src.f09_idea.pandas_tool import (
+from src.f09_idea.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
     boat_valid_str,
