@@ -12,8 +12,8 @@ from src.f02_bud.bud_tool import (
     bud_item_factunit_str,
 )
 from src.f04_gift.atom_config import (
-    get_atom_categorys,
-    is_atom_category,
+    get_bud_categorys,
+    is_bud_category,
     get_atom_config_dict,
     get_atom_args_category_mapping,
     get_allowed_class_types,
@@ -116,21 +116,10 @@ def test_str_functions_ReturnsObj():
     assert type_RoadUnit_str() == "RoadUnit"
 
 
-def test_atom_config_HasCorrect_category():
-    assert get_atom_categorys() == {
-        budunit_str(),
-        bud_acctunit_str(),
-        bud_acct_membership_str(),
-        bud_itemunit_str(),
-        bud_item_awardlink_str(),
-        bud_item_reasonunit_str(),
-        bud_item_reason_premiseunit_str(),
-        bud_item_teamlink_str(),
-        bud_item_healerlink_str(),
-        bud_item_factunit_str(),
-    }
-    assert bud_acctunit_str() in get_atom_categorys()
-    assert is_atom_category("itemroot") is False
+def test_get_bud_categorys_ReturnsObj():
+    assert get_bud_categorys() == set(get_atom_config_dict().keys())
+    assert bud_acctunit_str() in get_bud_categorys()
+    assert is_bud_category("itemroot") is False
 
 
 def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):

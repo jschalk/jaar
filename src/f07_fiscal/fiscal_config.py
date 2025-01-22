@@ -93,7 +93,14 @@ def get_fiscal_config_dict() -> dict:
 
 
 def get_fiscal_categorys() -> set[str]:
-    return set(get_fiscal_config_dict().keys())
+    return {
+        "fiscalunit",
+        "fiscal_deal_episode",
+        "fiscal_cashbook",
+        "fiscal_timeline_hour",
+        "fiscal_timeline_month",
+        "fiscal_timeline_weekday",
+    }
 
 
 def get_fiscal_config_jkeys(x_cat: str) -> dict:
