@@ -7,22 +7,9 @@ from src.f00_instrument.db_toolbox import (
     get_table_columns,
     is_stageable,
 )
-from src.f01_road.finance_tran import time_int_str
 from src.f02_bud.bud_tool import budunit_str
-from src.f04_gift.atom_config import (
-    face_name_str,
-    fiscal_title_str,
-    owner_name_str,
-    acct_name_str,
-    get_bud_categorys,
-)
-from src.f07_fiscal.fiscal_config import (
-    fiscalunit_str,
-    hour_title_str,
-    month_title_str,
-    weekday_title_str,
-    get_fiscal_categorys,
-)
+from src.f04_gift.atom_config import face_name_str, fiscal_title_str, get_bud_categorys
+from src.f07_fiscal.fiscal_config import fiscalunit_str, get_fiscal_categorys
 from src.f08_pidgin.pidgin_config import event_int_str, pidginunit_str
 from src.f09_idea.idea_config import (
     idea_number_str,
@@ -470,12 +457,12 @@ def test_get_bud_update_inconsist_error_message_sqlstrs_ReturnsObj():
 
 
 def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
+    # sourcery skip: extract-method, no-loop-in-tests
     # ESTABLISH / WHEN
     fiscal_insert_agg_sqlstrs = get_fiscal_insert_agg_from_staging_sqlstrs()
 
     # THEN
     assert set(fiscal_insert_agg_sqlstrs.keys()) == get_fiscal_categorys()
-    x_objs = FiscalPrimeObjsRef()
     x_exclude_cols = {
         idea_number_str(),
         face_name_str(),
@@ -520,8 +507,8 @@ def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
 
         generated_fiscalunit_sqlstr = create_table2table_agg_insert_query(
             cursor,
-            src_table=x_objs.unit_stage_tablename,
-            dst_table=x_objs.unit_agg_tablename,
+            src_table=f"{fiscalunit_str()}_staging",
+            dst_table=f"{fiscalunit_str()}_agg",
             focus_cols=[fiscal_title_str()],
             exclude_cols=x_exclude_cols,
         )
@@ -547,7 +534,6 @@ def test_get_bud_insert_agg_from_staging_sqlstrs_ReturnsObj():
 
     # THEN
     assert set(bud_insert_agg_sqlstrs.keys()) == get_bud_categorys()
-    x_objs = FiscalPrimeObjsRef()
     x_exclude_cols = {
         idea_number_str(),
         "error_message",
