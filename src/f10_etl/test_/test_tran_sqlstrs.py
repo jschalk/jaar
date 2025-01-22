@@ -52,6 +52,7 @@ from src.f10_etl.tran_sqlstrs import (
     get_insert_agg_from_staging_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
     FISCALUNIT_AGG_INSERT_SQLSTR,
+    IDEA_STAGEABLE_CATEGORYS,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -497,13 +498,6 @@ def test_idea_into_category_ReturnsObj_ForAll_idea_numbersAndAll_categorys():
     # sourcery skip: extract-method, no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN
     # THEN
-    x_objs = FiscalPrimeObjsRef()
-    x_exclude_cols = {
-        idea_number_str(),
-        face_name_str(),
-        event_int_str(),
-        "error_message",
-    }
     idea_config = get_idea_config_dict()
     idea_config = {
         x_category: category_config
@@ -519,37 +513,13 @@ def test_idea_into_category_ReturnsObj_ForAll_idea_numbersAndAll_categorys():
 
         idea_stage2category_count = 0
         idea_cat_combo_checked_count = 0
-        # for x_category in idea_config:
-        #     cat_config = idea_config.get(x_category)
-        #     cat_key_columns = set(cat_config.get("jkeys").keys())
-        #     cat_value_columns = set(cat_config.get("jvalues").keys())
-        #     for idea_number in sorted(get_idea_numbers()):
-        #         # print(f"{x_category} {idea_number} checking...")
-        #         src_columns = get_table_columns(cursor, f"{idea_number}_staging")
-        #         if cat_key_columns.issubset(src_columns):
-        #             idea_stage2category_count += 1
-        #             src_cols_set = set(src_columns)
-        #             existing_value_col = src_cols_set.intersection(cat_value_columns)
-        #             # print(
-        #             #     f"{x_category} {idea_number} checking... {cat_key_columns=} {cat_value_columns=} {src_cols_set=}"
-        #             # )
-        #             print(
-        #                 f"{idea_stage2category_count} {idea_number} {x_category} keys:{cat_key_columns}, values: {existing_value_col}"
-        #             )
-        #             generated_sqlstr = get_idea_into_category_staging_query(
-        #                 conn_or_cursor=cursor,
-        #                 idea_number=idea_number,
-        #                 x_category=x_category,
-        #                 x_jkeys=cat_key_columns,
-        #             )
-        #             # check sql syntax is correct?
-        #             assert generated_sqlstr != ""
-
-        for x_category in idea_config:
+        sorted_idea_numbers = sorted(get_idea_numbers())
+        idea_stagable_categorys = {i_num: [] for i_num in sorted_idea_numbers}
+        for x_category in sorted(idea_config):
             cat_config = idea_config.get(x_category)
             cat_key_columns = set(cat_config.get("jkeys").keys())
             cat_value_columns = set(cat_config.get("jvalues").keys())
-            for idea_number in sorted(get_idea_numbers()):
+            for idea_number in sorted_idea_numbers:
                 # print(f"{x_category} {idea_number} checking...")
                 src_columns = get_table_columns(cursor, f"{idea_number}_staging")
                 expected_stagable = cat_key_columns.issubset(src_columns)
@@ -559,6 +529,7 @@ def test_idea_into_category_ReturnsObj_ForAll_idea_numbersAndAll_categorys():
 
                 idea_cat_combo_checked_count += 1
                 if is_stageable(cursor, src_tablename, cat_key_columns):
+                    idea_stagable_categorys.get(idea_number).append(x_category)
                     idea_stage2category_count += 1
                     src_cols_set = set(src_columns)
                     existing_value_col = src_cols_set.intersection(cat_value_columns)
@@ -577,5 +548,8 @@ def test_idea_into_category_ReturnsObj_ForAll_idea_numbersAndAll_categorys():
                     # check sql syntax is correct?
                     assert generated_sqlstr != ""
 
+    idea_stageable_category_list = sorted(list(idea_stagable_categorys))
+    print(f"{idea_stageable_category_list=}")
     assert idea_cat_combo_checked_count == 464
     assert idea_stage2category_count == 81
+    assert IDEA_STAGEABLE_CATEGORYS == idea_stagable_categorys
