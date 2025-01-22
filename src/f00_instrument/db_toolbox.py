@@ -405,3 +405,12 @@ WHERE error_message IS NULL
 GROUP BY {group_by_columns_str}
 ;
 """
+
+
+def is_stageable(
+    conn_or_cursor: sqlite3_Connection,
+    src_table: str,
+    required_columns: set[str],
+):
+    src_columns = set(get_table_columns(conn_or_cursor, src_table))
+    return required_columns.issubset(src_columns)

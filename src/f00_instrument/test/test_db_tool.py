@@ -21,6 +21,7 @@ from src.f00_instrument.db_toolbox import (
     create_select_inconsistency_query,
     create_update_inconsistency_error_query,
     create_table2table_agg_insert_query,
+    is_stageable,
 )
 from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
@@ -745,3 +746,22 @@ GROUP BY name
         print(f"     {gen_sqlstr=}")
         print(f"{expected_sqlstr=}")
         assert gen_sqlstr == expected_sqlstr
+
+
+def test_is_stageable_ReturnsObj_Scenario0():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        hair_str = "hair"
+        x_table1 = "side1"
+        src_columns = ["id", "name", "age", "email", hair_str]
+        create_table_from_columns(cursor, x_table1, src_columns, {})
+        x_table2 = "side2"
+        dst_columns = ["name", "age", hair_str]
+        create_table_from_columns(cursor, x_table2, dst_columns, {})
+
+        # WHEN / THEN
+        assert is_stageable(cursor, x_table1, {"name", "email"})
+        assert is_stageable(cursor, x_table1, {"name", "address"}) is False
+        assert is_stageable(cursor, x_table2, {"name", "email"}) is False
+        assert is_stageable(cursor, x_table2, {"name"})

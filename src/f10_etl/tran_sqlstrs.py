@@ -669,7 +669,3 @@ def get_fiscal_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
         "fiscal_timeline_weekday": FISCALWEEK_AGG_INSERT_SQLSTR,
         "fiscalunit": FISCALUNIT_AGG_INSERT_SQLSTR,
     }
-
-
-def get_idea2category_staging_sqlstrs() -> dict[str, str]:
-    return {}

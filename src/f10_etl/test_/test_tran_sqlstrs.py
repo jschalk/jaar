@@ -4,6 +4,8 @@ from src.f00_instrument.db_toolbox import (
     create_update_inconsistency_error_query,
     get_create_table_sqlstr,
     create_table2table_agg_insert_query,
+    get_table_columns,
+    is_stageable,
 )
 from src.f01_road.finance_tran import time_int_str
 from src.f02_bud.bud_tool import budunit_str
@@ -50,7 +52,6 @@ from src.f10_etl.tran_sqlstrs import (
     get_insert_agg_from_staging_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
     FISCALUNIT_AGG_INSERT_SQLSTR,
-    get_idea2category_staging_sqlstrs,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -493,10 +494,8 @@ def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
 
 
 def test_idea_into_category_ReturnsObj_ForAll_idea_numbersAndAll_categorys():
-    # sourcery skip: extract-method, no-loop-in-tests
+    # sourcery skip: extract-method, no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN
-    insert_agg_from_staging_sqlstrs = get_idea2category_staging_sqlstrs()
-
     # THEN
     x_objs = FiscalPrimeObjsRef()
     x_exclude_cols = {
@@ -518,15 +517,65 @@ def test_idea_into_category_ReturnsObj_ForAll_idea_numbersAndAll_categorys():
         create_fiscal_tables(cursor)
         create_bud_tables(cursor)
 
+        idea_stage2category_count = 0
+        idea_cat_combo_checked_count = 0
+        # for x_category in idea_config:
+        #     cat_config = idea_config.get(x_category)
+        #     cat_key_columns = set(cat_config.get("jkeys").keys())
+        #     cat_value_columns = set(cat_config.get("jvalues").keys())
+        #     for idea_number in sorted(get_idea_numbers()):
+        #         # print(f"{x_category} {idea_number} checking...")
+        #         src_columns = get_table_columns(cursor, f"{idea_number}_staging")
+        #         if cat_key_columns.issubset(src_columns):
+        #             idea_stage2category_count += 1
+        #             src_cols_set = set(src_columns)
+        #             existing_value_col = src_cols_set.intersection(cat_value_columns)
+        #             # print(
+        #             #     f"{x_category} {idea_number} checking... {cat_key_columns=} {cat_value_columns=} {src_cols_set=}"
+        #             # )
+        #             print(
+        #                 f"{idea_stage2category_count} {idea_number} {x_category} keys:{cat_key_columns}, values: {existing_value_col}"
+        #             )
+        #             generated_sqlstr = get_idea_into_category_staging_query(
+        #                 conn_or_cursor=cursor,
+        #                 idea_number=idea_number,
+        #                 x_category=x_category,
+        #                 x_jkeys=cat_key_columns,
+        #             )
+        #             # check sql syntax is correct?
+        #             assert generated_sqlstr != ""
+
         for x_category in idea_config:
             cat_config = idea_config.get(x_category)
-            category_columns = set(cat_config.get("jkeys").keys())
-            for idea_number in get_idea_numbers():
-                print(f"{x_category} {idea_number} checking...")
-                generated_sqlstr = get_idea_into_category_staging_query(
-                    conn_or_cursor=cursor,
-                    idea_number=idea_number,
-                    x_category=x_category,
-                    x_jkeys=category_columns,
-                )
-                assert generated_sqlstr != ""
+            cat_key_columns = set(cat_config.get("jkeys").keys())
+            cat_value_columns = set(cat_config.get("jvalues").keys())
+            for idea_number in sorted(get_idea_numbers()):
+                # print(f"{x_category} {idea_number} checking...")
+                src_columns = get_table_columns(cursor, f"{idea_number}_staging")
+                expected_stagable = cat_key_columns.issubset(src_columns)
+                src_tablename = f"{idea_number}_staging"
+                gen_stablable = is_stageable(cursor, src_tablename, cat_key_columns)
+                assert expected_stagable == gen_stablable
+
+                idea_cat_combo_checked_count += 1
+                if is_stageable(cursor, src_tablename, cat_key_columns):
+                    idea_stage2category_count += 1
+                    src_cols_set = set(src_columns)
+                    existing_value_col = src_cols_set.intersection(cat_value_columns)
+                    # print(
+                    #     f"{x_category} {idea_number} checking... {cat_key_columns=} {cat_value_columns=} {src_cols_set=}"
+                    # )
+                    print(
+                        f"{idea_stage2category_count} {idea_number} {x_category} keys:{cat_key_columns}, values: {existing_value_col}"
+                    )
+                    generated_sqlstr = get_idea_into_category_staging_query(
+                        conn_or_cursor=cursor,
+                        idea_number=idea_number,
+                        x_category=x_category,
+                        x_jkeys=cat_key_columns,
+                    )
+                    # check sql syntax is correct?
+                    assert generated_sqlstr != ""
+
+    assert idea_cat_combo_checked_count == 464
+    assert idea_stage2category_count == 81
