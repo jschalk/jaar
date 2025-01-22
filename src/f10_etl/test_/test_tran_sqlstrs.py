@@ -331,8 +331,8 @@ def test_get_all_inconsistency_sqlstrs_ReturnsObj():
         create_fiscal_tables(cursor)
         create_bud_tables(cursor)
 
-        for x_category in idea_config:
-            print(f"{x_category} checking...")
+        for x_category in sorted(idea_config):
+            # print(f"{x_category} checking...")
             x_sqlstr = all_inconsistency_sqlstrs.get(x_category)
             x_tablename = f"{x_category}_staging"
             cat_config = idea_config.get(x_category)
@@ -342,7 +342,7 @@ def test_get_all_inconsistency_sqlstrs_ReturnsObj():
             generated_cat_sqlstr = create_select_inconsistency_query(
                 cursor, x_tablename, cat_focus_columns, exclude_cols
             )
-            # print(f"{generated_cat_sqlstr=}")
+            print(f'{x_category}_INCONSISTENCY_SQLSTR ="""{generated_cat_sqlstr}"""')
             assert x_sqlstr == generated_cat_sqlstr
 
 
@@ -454,7 +454,9 @@ def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
             )
             x_sqlstr = insert_agg_from_staging_sqlstrs.get(x_category)
             # print(f'"{x_category}": BUD_AGG_INSERT_SQLSTR,')
-            # print(   f'BUD_AGG_INSERT_SQLSTR = """{generated_table2table_agg_insert_sqlstr}"""')
+            # print(
+            #     f'{x_category.upper()}_AGG_INSERT_SQLSTR = """{generated_table2table_agg_insert_sqlstr}"""'
+            # )
             assert x_sqlstr == generated_table2table_agg_insert_sqlstr
 
         generated_fiscalunit_sqlstr = create_table2table_agg_insert_query(
@@ -549,7 +551,7 @@ def test_idea_into_category_ReturnsObj_ForAll_idea_numbersAndAll_categorys():
                     assert generated_sqlstr != ""
 
     idea_stageable_category_list = sorted(list(idea_stagable_categorys))
-    print(f"{idea_stageable_category_list=}")
+    # print(f"{idea_stagable_categorys=}")
     assert idea_cat_combo_checked_count == 464
-    assert idea_stage2category_count == 81
+    assert idea_stage2category_count == 77
     assert IDEA_STAGEABLE_CATEGORYS == idea_stagable_categorys

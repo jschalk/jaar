@@ -339,7 +339,13 @@ def create_select_inconsistency_query(
                 having_str += f"\n    OR MIN({x_column}) != MAX({x_column})"
             else:
                 having_str = f"HAVING MIN({x_column}) != MAX({x_column})"
-    focus_columns_str = ", ".join(sorted(list(focus_columns)))
+    focus_columns_list = []
+    focus_columns_list.extend(
+        t_column
+        for t_column in table_columns
+        if t_column not in exclude_columns and t_column in focus_columns
+    )
+    focus_columns_str = ", ".join(focus_columns_list)
     return f"""SELECT {focus_columns_str}
 FROM {x_tablename}
 GROUP BY {focus_columns_str}

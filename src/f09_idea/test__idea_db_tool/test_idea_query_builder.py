@@ -3,6 +3,7 @@ from src.f09_idea.idea_config import get_idea_config_dict
 from src.f09_idea.idea_db_tool import (
     create_idea_sorted_table,
     get_idea_into_category_staging_query,
+    get_custom_sorted_list,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -31,10 +32,11 @@ def test_get_idea_into_category_staging_query_ReturnsObj_Scenario0_bud_item_team
         budteam_jkeys = budteam_config.get("jkeys")
         budteam_jvals = budteam_config.get("jvalues")
         budteam_args = set(budteam_jkeys.keys()).union(set(budteam_jvals.keys()))
+        budteam_args = get_custom_sorted_list(budteam_args)
         print(f"{budteam_jkeys=}")
         print(f"{budteam_jvals=}")
         create_idea_sorted_table(conn, src_table, idea_cols)
-        create_idea_sorted_table(conn, dst_table, list(budteam_args))
+        create_idea_sorted_table(conn, dst_table, budteam_args)
 
         # WHEN
         gen_sqlstr = get_idea_into_category_staging_query(
@@ -42,11 +44,11 @@ def test_get_idea_into_category_staging_query_ReturnsObj_Scenario0_bud_item_team
         )
 
         # THEN
-        columns_str = "face_name, event_int, fiscal_title, road, team_tag"
+        columns_str = "face_name, event_int, fiscal_title, owner_name, road, team_tag"
         expected_sqlstr = f"""INSERT INTO {budteam_cat}_staging (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_staging
-WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND road IS NOT NULL AND team_tag IS NOT NULL
+WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND owner_name IS NOT NULL AND road IS NOT NULL AND team_tag IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -91,11 +93,11 @@ def test_get_idea_into_category_staging_query_ReturnsObj_Scenario1_bud_acctunit(
         )
 
         # THEN
-        columns_str = "face_name, event_int, fiscal_title, acct_name, credit_belief, debtit_belief"
+        columns_str = "face_name, event_int, fiscal_title, owner_name, acct_name, credit_belief, debtit_belief"
         expected_sqlstr = f"""INSERT INTO {budacct_cat}_staging (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_staging
-WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND acct_name IS NOT NULL
+WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -140,11 +142,13 @@ def test_get_idea_into_category_staging_query_ReturnsObj_Scenario2_bud_acctunit(
         )
 
         # THEN
-        columns_str = "face_name, event_int, fiscal_title, acct_name, credit_belief"
+        columns_str = (
+            "face_name, event_int, fiscal_title, owner_name, acct_name, credit_belief"
+        )
         expected_sqlstr = f"""INSERT INTO {budacct_cat}_staging (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_staging
-WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND acct_name IS NOT NULL
+WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """

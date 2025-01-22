@@ -490,6 +490,7 @@ def _validate_idea_config(x_idea_config: dict):
             assert fiscal_title_str() in idea_jkeys_keys
         if idea_dict.get(idea_type_str()) == budunit_str():
             idea_jkeys_keys.remove(fiscal_title_str())
+            idea_jkeys_keys.remove(owner_name_str())
         idea_jkeys_keys.remove(face_name_str())
         idea_jkeys_keys.remove(event_int_str())
         assert sub_jkeys_keys == idea_jkeys_keys
