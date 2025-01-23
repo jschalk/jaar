@@ -730,7 +730,7 @@ def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 
 
-def etl_aft_face_csv_files_to_fiscal_db(
+def etl_etl_aft_face_csv_files2idea_staging_tables(
     conn_or_cursor: sqlite3_Connection, faces_aft_dir: str
 ):
     for face_name in get_level1_dirs(faces_aft_dir):

@@ -35,7 +35,7 @@ from src.f10_etl.transformers import (
     etl_bow_event_ideas_to_inx_events,
     etl_bow_inx_event_ideas_to_aft_faces,
     etl_aft_face_ideas_to_csv_files,
-    etl_aft_face_csv_files_to_fiscal_db,
+    etl_etl_aft_face_csv_files2idea_staging_tables,
     etl_idea_staging_to_fiscal_tables,
     etl_fiscal_staging_tables_to_fiscal_csvs,
     etl_fiscal_agg_tables_to_fiscal_csvs,
@@ -167,8 +167,12 @@ class WorldUnit:
     def aft_face_ideas_to_csv_files(self):
         etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
 
-    def aft_face_csv_files_to_fiscal_db(self, fiscal_db_conn: sqlite3_Connection):
-        etl_aft_face_csv_files_to_fiscal_db(fiscal_db_conn, self._faces_aft_dir)
+    def etl_aft_face_csv_files2idea_staging_tables(
+        self, fiscal_db_conn: sqlite3_Connection
+    ):
+        etl_etl_aft_face_csv_files2idea_staging_tables(
+            fiscal_db_conn, self._faces_aft_dir
+        )
 
     def idea_staging_to_fiscal_tables(self, fiscal_db_conn: sqlite3_Connection):
         etl_idea_staging_to_fiscal_tables(fiscal_db_conn)

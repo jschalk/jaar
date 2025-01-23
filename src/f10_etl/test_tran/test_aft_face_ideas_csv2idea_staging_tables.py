@@ -7,12 +7,12 @@ from src.f04_gift.atom_config import (
     owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f10_etl.transformers import etl_aft_face_csv_files_to_fiscal_db
+from src.f10_etl.transformers import etl_etl_aft_face_csv_files2idea_staging_tables
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_aft_face_csv_files_to_fiscal_db_DBChanges(
+def test_etl_etl_aft_face_csv_files2idea_staging_tables_DBChanges(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -38,7 +38,7 @@ def test_etl_aft_face_csv_files_to_fiscal_db_DBChanges(
         assert db_table_exists(fiscal_db_conn, br00011_staging_tablename) is False
 
         # ESTABLISH
-        etl_aft_face_csv_files_to_fiscal_db(fiscal_db_conn, aft_faces_dir)
+        etl_etl_aft_face_csv_files2idea_staging_tables(fiscal_db_conn, aft_faces_dir)
 
         # THEN
         assert db_table_exists(fiscal_db_conn, br00011_staging_tablename)
