@@ -37,11 +37,11 @@ from src.f01_road.finance_tran import (
     TranBook,
     tranbook_shop,
 )
-from src.f05_listen.basis_buds import get_default_final_bud
+from src.f05_listen.basis_buds import get_default_voice_bud
 from src.f05_listen.hubunit import hubunit_shop, HubUnit
 from src.f05_listen.listen import (
     listen_to_speaker_agenda,
-    listen_to_debtors_roll_voice_final,
+    listen_to_debtors_roll_soul_voice,
     listen_to_debtors_roll_duty_job,
     create_job_file_from_duty_file,
 )
@@ -66,13 +66,13 @@ class set_present_time_Exception(Exception):
 @dataclass
 class FiscalUnit:
     """Data pipelines:
-    pipeline1: gifts->voice
-    pipeline2: voice->dutys
+    pipeline1: gifts->soul
+    pipeline2: soul->dutys
     pipeline3: duty->job
-    pipeline4: job->final
-    pipeline5: voice->final (direct)
-    pipeline6: voice->job->final (through jobs)
-    pipeline7: gifts->final (could be 5 of 6)
+    pipeline4: job->voice
+    pipeline5: soul->voice (direct)
+    pipeline6: soul->job->voice (through jobs)
+    pipeline7: gifts->voice (could be 5 of 6)
     """
 
     fiscal_title: FiscalTitle = None
@@ -172,16 +172,16 @@ class FiscalUnit:
 
     def init_owner_keeps(self, owner_name: OwnerName):
         x_hubunit = self._get_hubunit(owner_name)
-        x_hubunit.initialize_gift_voice_files()
-        x_hubunit.initialize_final_file(self.get_owner_voice_from_file(owner_name))
+        x_hubunit.initialize_gift_soul_files()
+        x_hubunit.initialize_voice_file(self.get_owner_soul_from_file(owner_name))
 
-    def get_owner_voice_from_file(self, owner_name: OwnerName) -> BudUnit:
-        return self._get_hubunit(owner_name).get_voice_bud()
+    def get_owner_soul_from_file(self, owner_name: OwnerName) -> BudUnit:
+        return self._get_hubunit(owner_name).get_soul_bud()
 
     def _set_all_healer_dutys(self, owner_name: OwnerName):
-        x_voice = self.get_owner_voice_from_file(owner_name)
-        x_voice.settle_bud()
-        for healer_name, healer_dict in x_voice._healers_dict.items():
+        x_soul = self.get_owner_soul_from_file(owner_name)
+        x_soul.settle_bud()
+        for healer_name, healer_dict in x_soul._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 self.fiscals_dir,
                 self.fiscal_title,
@@ -192,25 +192,25 @@ class FiscalUnit:
                 respect_bit=self.respect_bit,
             )
             for keep_road in healer_dict.keys():
-                self._set_owner_duty(healer_hubunit, keep_road, x_voice)
+                self._set_owner_duty(healer_hubunit, keep_road, x_soul)
 
     def _set_owner_duty(
         self,
         healer_hubunit: HubUnit,
         keep_road: RoadUnit,
-        voice_bud: BudUnit,
+        soul_bud: BudUnit,
     ):
         healer_hubunit.keep_road = keep_road
         healer_hubunit.create_treasury_db_file()
-        healer_hubunit.save_duty_bud(voice_bud)
+        healer_hubunit.save_duty_bud(soul_bud)
 
-    # final bud management
-    def generate_final_bud(self, owner_name: OwnerName) -> BudUnit:
+    # voice bud management
+    def generate_voice_bud(self, owner_name: OwnerName) -> BudUnit:
         listener_hubunit = self._get_hubunit(owner_name)
-        x_voice = listener_hubunit.get_voice_bud()
-        x_voice.settle_bud()
-        x_final = get_default_final_bud(x_voice)
-        for healer_name, healer_dict in x_voice._healers_dict.items():
+        x_soul = listener_hubunit.get_soul_bud()
+        x_soul.settle_bud()
+        x_voice = get_default_voice_bud(x_soul)
+        for healer_name, healer_dict in x_soul._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 fiscals_dir=self.fiscals_dir,
                 fiscal_title=self.fiscal_title,
@@ -220,7 +220,7 @@ class FiscalUnit:
                 bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
-            healer_hubunit.create_voice_treasury_db_files()
+            healer_hubunit.create_soul_treasury_db_files()
             for keep_road in healer_dict.keys():
                 keep_hubunit = hubunit_shop(
                     fiscals_dir=self.fiscals_dir,
@@ -231,30 +231,30 @@ class FiscalUnit:
                     bridge=self.bridge,
                     respect_bit=self.respect_bit,
                 )
-                keep_hubunit.save_duty_bud(x_voice)
+                keep_hubunit.save_duty_bud(x_soul)
                 create_job_file_from_duty_file(keep_hubunit, owner_name)
                 x_job = keep_hubunit.get_job_bud(owner_name)
-                listen_to_speaker_agenda(x_final, x_job)
+                listen_to_speaker_agenda(x_voice, x_job)
 
-        # if no budunit has come from voice->duty->job->final pipeline use voice->final pipeline
-        x_final.settle_bud()
-        if len(x_final._item_dict) == 1:
-            # pipeline_voice_final_str()
-            listen_to_debtors_roll_voice_final(listener_hubunit)
-            listener_hubunit.open_file_final()
-            x_final.settle_bud()
-        if len(x_final._item_dict) == 1:
-            x_final = x_voice
-        listener_hubunit.save_final_bud(x_final)
+        # if no budunit has come from soul->duty->job->voice pipeline use soul->voice pipeline
+        x_voice.settle_bud()
+        if len(x_voice._item_dict) == 1:
+            # pipeline_soul_voice_str()
+            listen_to_debtors_roll_soul_voice(listener_hubunit)
+            listener_hubunit.open_file_voice()
+            x_voice.settle_bud()
+        if len(x_voice._item_dict) == 1:
+            x_voice = x_soul
+        listener_hubunit.save_voice_bud(x_voice)
 
-        return self.get_final_file_bud(owner_name)
+        return self.get_voice_file_bud(owner_name)
 
-    def generate_all_final_buds(self):
+    def generate_all_voice_buds(self):
         for x_owner_name in self._get_owner_folder_names():
-            self.generate_final_bud(x_owner_name)
+            self.generate_voice_bud(x_owner_name)
 
-    def get_final_file_bud(self, owner_name: OwnerName) -> BudUnit:
-        return self._get_hubunit(owner_name).get_final_bud()
+    def get_voice_file_bud(self, owner_name: OwnerName) -> BudUnit:
+        return self._get_hubunit(owner_name).get_voice_bud()
 
     # deallogs
     def set_deallog(self, x_deallog: DealLog):

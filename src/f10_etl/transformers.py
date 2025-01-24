@@ -152,9 +152,9 @@ class OceanToboatTransformer:
         return df
 
     def _save_to_boat_staging(self, idea_number: str, dfs: list):
-        final_df = pandas_concat(dfs)
+        voice_df = pandas_concat(dfs)
         boat_path = create_path(self.boat_dir, f"{idea_number}.xlsx")
-        upsert_sheet(boat_path, "boat_staging", final_df)
+        upsert_sheet(boat_path, "boat_staging", voice_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:

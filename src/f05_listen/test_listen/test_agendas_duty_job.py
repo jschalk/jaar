@@ -117,17 +117,17 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJobBudWithDetailsDecidedBy_
 
     yao_duty = get_example_yao_speaker()
     sue_dakota_hubunit.save_duty_bud(yao_duty)
-    new_yao_final1 = create_listen_basis(yao_duty)
-    assert new_yao_final1.item_exists(cook_road()) is False
+    new_yao_voice1 = create_listen_basis(yao_duty)
+    assert new_yao_voice1.item_exists(cook_road()) is False
 
     # WHEN
-    listen_to_agendas_duty_job(new_yao_final1, sue_dakota_hubunit)
+    listen_to_agendas_duty_job(new_yao_voice1, sue_dakota_hubunit)
 
     # THEN
-    assert new_yao_final1.item_exists(cook_road())
-    new_cook_item = new_yao_final1.get_item_obj(cook_road())
-    zia_acctunit = new_yao_final1.get_acct(zia_str)
-    bob_acctunit = new_yao_final1.get_acct(bob_str)
+    assert new_yao_voice1.item_exists(cook_road())
+    new_cook_item = new_yao_voice1.get_item_obj(cook_road())
+    zia_acctunit = new_yao_voice1.get_acct(zia_str)
+    bob_acctunit = new_yao_voice1.get_acct(bob_str)
     assert zia_acctunit.debtit_belief < bob_acctunit.debtit_belief
     assert new_cook_item.get_reasonunit(eat_road()) is None
 
@@ -136,17 +136,17 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJobBudWithDetailsDecidedBy_
     yao_duty.add_acctunit(zia_str, None, yao_zia_debtit_belief)
     yao_duty.add_acctunit(bob_str, None, yao_bob_debtit_belief)
     yao_duty.set_acct_respect(100)
-    new_yao_final2 = create_listen_basis(yao_duty)
-    assert new_yao_final2.item_exists(cook_road()) is False
+    new_yao_voice2 = create_listen_basis(yao_duty)
+    assert new_yao_voice2.item_exists(cook_road()) is False
 
     # WHEN
-    listen_to_agendas_duty_job(new_yao_final2, sue_dakota_hubunit)
+    listen_to_agendas_duty_job(new_yao_voice2, sue_dakota_hubunit)
 
     # THEN
-    assert new_yao_final2.item_exists(cook_road())
-    new_cook_item = new_yao_final2.get_item_obj(cook_road())
-    zia_acctunit = new_yao_final2.get_acct(zia_str)
-    bob_acctunit = new_yao_final2.get_acct(bob_str)
+    assert new_yao_voice2.item_exists(cook_road())
+    new_cook_item = new_yao_voice2.get_item_obj(cook_road())
+    zia_acctunit = new_yao_voice2.get_acct(zia_str)
+    bob_acctunit = new_yao_voice2.get_acct(bob_str)
     assert zia_acctunit.debtit_belief > bob_acctunit.debtit_belief
     zia_eat_reasonunit = zia_cook_itemunit.get_reasonunit(eat_road())
     assert new_cook_item.get_reasonunit(eat_road()) == zia_eat_reasonunit

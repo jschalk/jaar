@@ -26,12 +26,12 @@ def get_json_filename(filename_without_extention) -> str:
     return f"{filename_without_extention}.json"
 
 
+def soul_str() -> str:
+    return "soul"
+
+
 def voice_str() -> str:
     return "voice"
-
-
-def final_str() -> str:
-    return "final"
 
 
 def jobs_str() -> str:

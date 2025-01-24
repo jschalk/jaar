@@ -140,18 +140,18 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.owner_dir() == create_path(x_hubunit.owners_dir(), sue_str)
     assert x_hubunit.keeps_dir() == create_path(x_hubunit.owner_dir(), "keeps")
     assert x_hubunit.atoms_dir() == create_path(x_hubunit.owner_dir(), "atoms")
+    assert x_hubunit.soul_dir() == create_path(x_hubunit.owner_dir(), "soul")
     assert x_hubunit.voice_dir() == create_path(x_hubunit.owner_dir(), "voice")
-    assert x_hubunit.final_dir() == create_path(x_hubunit.owner_dir(), "final")
     assert x_hubunit.timeline_dir() == create_path(x_hubunit.owner_dir(), "timeline")
     assert x_hubunit.gifts_dir() == create_path(
         x_hubunit.owner_dir(), get_gifts_folder()
     )
+    assert x_hubunit.soul_file_name() == f"{sue_str}.json"
+    x_soul_file_path = create_path(x_hubunit.soul_dir(), x_hubunit.soul_file_name())
+    assert x_hubunit.soul_file_path() == x_soul_file_path
     assert x_hubunit.voice_file_name() == f"{sue_str}.json"
-    x_voice_file_path = create_path(x_hubunit.voice_dir(), x_hubunit.voice_file_name())
-    assert x_hubunit.voice_file_path() == x_voice_file_path
-    assert x_hubunit.final_file_name() == f"{sue_str}.json"
-    x_finalpath = create_path(x_hubunit.final_dir(), x_hubunit.final_file_name())
-    assert x_hubunit.final_path() == x_finalpath
+    x_voicepath = create_path(x_hubunit.voice_dir(), x_hubunit.voice_file_name())
+    assert x_hubunit.voice_path() == x_voicepath
 
 
 def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
@@ -220,17 +220,54 @@ def test_hubunit_shop_RaisesErrorIf_owner_name_Contains_bridge():
     )
 
 
+def test_HubUnit_save_file_soul_CorrectlySavesFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
+    assert os_path_exists(sue_hubunit.soul_file_path()) is False
+
+    # WHEN
+    sue_hubunit.save_file_soul(file_str="fooboo", replace=True)
+
+    # THEN
+    assert os_path_exists(sue_hubunit.soul_file_path())
+
+
+def test_HubUnit_soul_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
+    assert sue_hubunit.soul_file_exists() is False
+
+    # WHEN
+    sue_hubunit.save_file_soul(file_str="fooboo", replace=True)
+
+    # THEN
+    assert sue_hubunit.soul_file_exists()
+
+
+def test_HubUnit_open_file_soul_OpensFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
+    example_str = "fooboo"
+    sue_hubunit.save_file_soul(example_str, replace=True)
+
+    # WHEN / THEN
+    assert sue_hubunit.open_file_soul() == example_str
+
+
 def test_HubUnit_save_file_voice_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
-    assert os_path_exists(sue_hubunit.voice_file_path()) is False
+    assert os_path_exists(sue_hubunit.voice_path()) is False
 
     # WHEN
     sue_hubunit.save_file_voice(file_str="fooboo", replace=True)
 
     # THEN
-    assert os_path_exists(sue_hubunit.voice_file_path())
+    assert os_path_exists(sue_hubunit.voice_path())
 
 
 def test_HubUnit_voice_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
@@ -257,61 +294,24 @@ def test_HubUnit_open_file_voice_OpensFile(env_dir_setup_cleanup):
     assert sue_hubunit.open_file_voice() == example_str
 
 
-def test_HubUnit_save_file_final_CorrectlySavesFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
-    assert os_path_exists(sue_hubunit.final_path()) is False
-
-    # WHEN
-    sue_hubunit.save_file_final(file_str="fooboo", replace=True)
-
-    # THEN
-    assert os_path_exists(sue_hubunit.final_path())
-
-
-def test_HubUnit_final_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
-    assert sue_hubunit.final_file_exists() is False
-
-    # WHEN
-    sue_hubunit.save_file_final(file_str="fooboo", replace=True)
-
-    # THEN
-    assert sue_hubunit.final_file_exists()
-
-
-def test_HubUnit_open_file_final_OpensFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
-    example_str = "fooboo"
-    sue_hubunit.save_file_final(example_str, replace=True)
-
-    # WHEN / THEN
-    assert sue_hubunit.open_file_final() == example_str
-
-
-def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_HubUnit_save_soul_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit.owner_name
     fiscal_title = root_title()
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title, sue_str, None)
 
-    print(f"{sue_hubunit.voice_file_path()=}")
-    assert sue_hubunit.voice_file_exists() is False
+    print(f"{sue_hubunit.soul_file_path()=}")
+    assert sue_hubunit.soul_file_exists() is False
 
     # WHEN
-    sue_hubunit.save_voice_bud(sue_budunit)
+    sue_hubunit.save_soul_bud(sue_budunit)
 
     # THEN
-    assert sue_hubunit.voice_file_exists()
+    assert sue_hubunit.soul_file_exists()
 
 
-def test_HubUnit_save_voice_bud_RaisesErrorWhenBud_final_id_IsWrong(
+def test_HubUnit_save_soul_bud_RaisesErrorWhenBud_voice_id_IsWrong(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -323,11 +323,46 @@ def test_HubUnit_save_voice_bud_RaisesErrorWhenBud_final_id_IsWrong(
     # WHEN / THEN
     yao_str = "Yao"
     with pytest_raises(Exception) as excinfo:
-        sue_hubunit.save_voice_bud(budunit_shop(yao_str))
+        sue_hubunit.save_soul_bud(budunit_shop(yao_str))
     assert (
         str(excinfo.value)
-        == f"BudUnit with owner_name '{yao_str}' cannot be saved as owner_name '{sue_str}''s voice bud."
+        == f"BudUnit with owner_name '{yao_str}' cannot be saved as owner_name '{sue_str}''s soul bud."
     )
+
+
+def test_HubUnit_get_soul_bud_OpensFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_budunit = get_budunit_with_4_levels()
+    sue_str = sue_budunit.owner_name
+    nation_str = "nation-state"
+    nation_road = create_road(root_title(), nation_str)
+    usa_str = "USA"
+    usa_road = create_road(nation_road, usa_str)
+    texas_str = "Texas"
+    texas_road = create_road(usa_road, texas_str)
+    sue_hubunit = hubunit_shop(env_dir(), None, sue_str, texas_road)
+    sue_hubunit.save_soul_bud(sue_budunit)
+
+    # WHEN / THEN
+    assert sue_hubunit.get_soul_bud().get_dict() == sue_budunit.get_dict()
+
+
+def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_budunit = get_budunit_with_4_levels()
+    sue_str = sue_budunit.owner_name
+
+    fiscal_title = root_title()
+    sue_hubunit = hubunit_shop(env_dir(), fiscal_title, sue_str, None)
+
+    print(f"{sue_hubunit.voice_path()=}")
+    assert sue_hubunit.voice_file_exists() is False
+
+    # WHEN
+    sue_hubunit.save_voice_bud(sue_budunit)
+
+    # THEN
+    assert sue_hubunit.voice_file_exists()
 
 
 def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
@@ -347,52 +382,17 @@ def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
     assert sue_hubunit.get_voice_bud().get_dict() == sue_budunit.get_dict()
 
 
-def test_HubUnit_save_final_bud_CorrectlySavesFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit.owner_name
-
-    fiscal_title = root_title()
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title, sue_str, None)
-
-    print(f"{sue_hubunit.final_path()=}")
-    assert sue_hubunit.final_file_exists() is False
-
-    # WHEN
-    sue_hubunit.save_final_bud(sue_budunit)
-
-    # THEN
-    assert sue_hubunit.final_file_exists()
-
-
-def test_HubUnit_get_final_bud_OpensFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit.owner_name
-    nation_str = "nation-state"
-    nation_road = create_road(root_title(), nation_str)
-    usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
-    texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str, texas_road)
-    sue_hubunit.save_final_bud(sue_budunit)
-
-    # WHEN / THEN
-    assert sue_hubunit.get_final_bud().get_dict() == sue_budunit.get_dict()
-
-
-def test_HubUnit_get_final_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
+def test_HubUnit_get_voice_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit.owner_name
     sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
 
     # WHEN / THEN
-    assert sue_hubunit.get_final_bud() is None
+    assert sue_hubunit.get_voice_bud() is None
 
 
-def test_HubUnit_save_final_bud_RaisesErrorWhenBud_final_id_IsWrong(
+def test_HubUnit_save_voice_bud_RaisesErrorWhenBud_voice_id_IsWrong(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -404,8 +404,8 @@ def test_HubUnit_save_final_bud_RaisesErrorWhenBud_final_id_IsWrong(
     # WHEN / THEN
     yao_str = "Yao"
     with pytest_raises(Exception) as excinfo:
-        sue_hubunit.save_final_bud(budunit_shop(yao_str))
+        sue_hubunit.save_voice_bud(budunit_shop(yao_str))
     assert (
         str(excinfo.value)
-        == f"BudUnit with owner_name '{yao_str}' cannot be saved as owner_name '{sue_str}''s final bud."
+        == f"BudUnit with owner_name '{yao_str}' cannot be saved as owner_name '{sue_str}''s voice bud."
     )
