@@ -168,16 +168,16 @@ class WorldUnit:
         etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
 
     def etl_aft_face_csv_files2idea_staging_tables(
-        self, fiscal_db_conn: sqlite3_Connection
+        self, conn_or_cursor: sqlite3_Connection
     ):
-        etl_aft_face_csv_files2idea_staging_tables(fiscal_db_conn, self._faces_aft_dir)
+        etl_aft_face_csv_files2idea_staging_tables(conn_or_cursor, self._faces_aft_dir)
 
-    def idea_staging_to_fiscal_tables(self, fiscal_db_conn: sqlite3_Connection):
-        etl_idea_staging_to_fiscal_tables(fiscal_db_conn)
+    def idea_staging_to_fiscal_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_idea_staging_to_fiscal_tables(conn_or_cursor)
 
-    def aft_faces_ideas_to_fiscal_mstr_csvs(self, fiscal_db_conn: sqlite3_Connection):
-        etl_fiscal_staging_tables_to_fiscal_csvs(fiscal_db_conn, self._fiscal_mstr_dir)
-        etl_fiscal_agg_tables_to_fiscal_csvs(fiscal_db_conn, self._fiscal_mstr_dir)
+    def aft_faces_ideas_to_fiscal_mstr_csvs(self, conn_or_cursor: sqlite3_Connection):
+        etl_fiscal_staging_tables_to_fiscal_csvs(conn_or_cursor, self._fiscal_mstr_dir)
+        etl_fiscal_agg_tables_to_fiscal_csvs(conn_or_cursor, self._fiscal_mstr_dir)
 
     def fiscal_csvs_to_jsons(self):
         etl_fiscal_csvs_to_jsons(self._fiscal_mstr_dir)

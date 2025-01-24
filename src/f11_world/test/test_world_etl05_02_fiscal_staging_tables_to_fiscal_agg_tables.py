@@ -1,5 +1,5 @@
-from src.f00_instrument.file import create_path, save_file, open_file
-from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
+from src.f00_instrument.file import create_path, save_file
+from src.f00_instrument.db_toolbox import db_table_exists
 from src.f04_gift.atom_config import (
     face_name_str,
     fiscal_title_str,
@@ -7,14 +7,9 @@ from src.f04_gift.atom_config import (
     owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.idea_db_tool import get_pragma_table_fetchall
-from src.f10_etl.fiscal_etl_tool import (
-    FiscalPrimeColumnsRef,
-    FiscalPrimeObjsRef,
-)
+from src.f10_etl.fiscal_etl_tool import FiscalPrimeObjsRef
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
-from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
@@ -44,16 +39,16 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_PopulatesFiscalAggTables(
     fizz_world = worldunit_shop("fizz")
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.etl_aft_face_csv_files2idea_staging_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
         fis_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
-        assert not db_table_exists(fiscal_db_conn, fis_objs.unit_agg_tablename)
+        assert not db_table_exists(cursor, fis_objs.unit_agg_tablename)
 
         # WHEN
-        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
+        fizz_world.idea_staging_to_fiscal_tables(cursor)
 
         # THEN
-        assert db_table_exists(fiscal_db_conn, fis_objs.unit_agg_tablename)
-        cursor = fiscal_db_conn.cursor()
+        assert db_table_exists(cursor, fis_objs.unit_agg_tablename)
         # cursor.execute(f"SELECT * FROM {fiscalunit_stage_tablename};")
         # fiscalunit_stage_rows = cursor.fetchall()
         # assert len(fiscalunit_stage_rows) == 4

@@ -44,12 +44,13 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
     fis_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
     fizz_world.aft_face_ideas_to_csv_files()
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.etl_aft_face_csv_files2idea_staging_tables(fiscal_db_conn)
-        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.idea_staging_to_fiscal_tables(cursor)
         assert os_path_exists(fis_objs.unit_stage_csv_path) is False
 
         # WHEN
-        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(fiscal_db_conn)
+        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(cursor)
 
         # THEN
         # print(f"{fiscalunit_staging_csv_path=}")
@@ -90,13 +91,14 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
     fizz_world = worldunit_shop("fizz")
     fizz_world.aft_face_ideas_to_csv_files()
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.etl_aft_face_csv_files2idea_staging_tables(fiscal_db_conn)
-        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.idea_staging_to_fiscal_tables(cursor)
         fiz_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
         assert os_path_exists(fiz_objs.unit_agg_csv_path) is False
 
         # WHEN
-        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(fiscal_db_conn)
+        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(cursor)
 
         # THEN
         # print(f"{fiscalunit_csv_path=}")

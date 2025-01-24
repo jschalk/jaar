@@ -24,22 +24,23 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_CreatesFiscalStagingTables(
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        fizz_world.idea_staging_to_fiscal_tables(cursor)
         fis_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
         fis_cols = FiscalPrimeColumnsRef()
-        assert db_table_exists(fiscal_db_conn, fis_objs.unit_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.deal_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.cash_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.hour_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.mont_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.week_agg_tablename)
+        assert db_table_exists(cursor, fis_objs.unit_agg_tablename)
+        assert db_table_exists(cursor, fis_objs.deal_agg_tablename)
+        assert db_table_exists(cursor, fis_objs.cash_agg_tablename)
+        assert db_table_exists(cursor, fis_objs.hour_agg_tablename)
+        assert db_table_exists(cursor, fis_objs.mont_agg_tablename)
+        assert db_table_exists(cursor, fis_objs.week_agg_tablename)
 
-        assert db_table_exists(fiscal_db_conn, fis_objs.unit_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.deal_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.cash_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.hour_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.mont_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.week_stage_tablename)
+        assert db_table_exists(cursor, fis_objs.unit_stage_tablename)
+        assert db_table_exists(cursor, fis_objs.deal_stage_tablename)
+        assert db_table_exists(cursor, fis_objs.cash_stage_tablename)
+        assert db_table_exists(cursor, fis_objs.hour_stage_tablename)
+        assert db_table_exists(cursor, fis_objs.mont_stage_tablename)
+        assert db_table_exists(cursor, fis_objs.week_stage_tablename)
 
         fis_unit_agg_pragma = get_pragma_table_fetchall(fis_cols.unit_agg_columns)
         fis_deal_agg_pragma = get_pragma_table_fetchall(fis_cols.deal_agg_columns)
@@ -53,7 +54,6 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_CreatesFiscalStagingTables(
         fis_hour_stage_pragma = get_pragma_table_fetchall(fis_cols.hour_staging_columns)
         fis_mont_stage_pragma = get_pragma_table_fetchall(fis_cols.mont_staging_columns)
         fis_week_stage_pragma = get_pragma_table_fetchall(fis_cols.week_staging_columns)
-        cursor = fiscal_db_conn.cursor()
         cursor.execute(f"PRAGMA table_info({fis_objs.unit_agg_tablename})")
         assert fis_unit_agg_pragma == cursor.fetchall()
         cursor.execute(f"PRAGMA table_info({fis_objs.deal_agg_tablename})")
@@ -104,16 +104,16 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_Bud_category_idea_PopulatesFisc
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("fizz")
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.etl_aft_face_csv_files2idea_staging_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
         fis_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
-        assert not db_table_exists(fiscal_db_conn, fis_objs.unit_stage_tablename)
+        assert not db_table_exists(cursor, fis_objs.unit_stage_tablename)
 
         # WHEN
-        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
+        fizz_world.idea_staging_to_fiscal_tables(cursor)
 
         # THEN
-        assert get_row_count(fiscal_db_conn, fis_objs.unit_stage_tablename) == 2
-        cursor = fiscal_db_conn.cursor()
+        assert get_row_count(cursor, fis_objs.unit_stage_tablename) == 2
         cursor.execute(f"SELECT * FROM {fis_objs.unit_stage_tablename}")
         fiscalunit_db_rows = cursor.fetchall()
         expected_row1 = (

@@ -38,9 +38,8 @@ def test_WorldUnit_etl_aft_face_csv_files2idea_staging_tables_HasIdeaDataFromCSV
     # WHEN / THEN
     br00011_staging_tablename = f"{br00011_str}_staging"
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.etl_aft_face_csv_files2idea_staging_tables(fiscal_db_conn)
-        assert fiscal_db_conn != None
         cursor = fiscal_db_conn.cursor()
+        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
         cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
         br00011_db_columns = cursor.fetchall()
         br00011_expected_columns = [
@@ -50,7 +49,7 @@ def test_WorldUnit_etl_aft_face_csv_files2idea_staging_tables_HasIdeaDataFromCSV
             (3, owner_name_str(), "TEXT", 0, None, 0),
             (4, acct_name_str(), "TEXT", 0, None, 0),
         ]
-        print(f"{type(fiscal_db_conn)=}")
+        print(f"{type(cursor)=}")
         print(f"      {br00011_db_columns=}")
         print(f"{br00011_expected_columns=}")
         assert br00011_db_columns == br00011_expected_columns

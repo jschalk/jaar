@@ -784,7 +784,7 @@ def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
 
 
 def etl_fiscal_staging_tables_to_fiscal_csvs(
-    fiscal_db_conn: sqlite3_Connection, fiscal_mstr_dir: str
+    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
     fiscalunit_str = "fiscalunit"
     fiscaldeal_str = "fiscal_deal_episode"
@@ -798,12 +798,12 @@ def etl_fiscal_staging_tables_to_fiscal_csvs(
     fiscalhour_staging_tablename = f"{fiscalhour_str}_staging"
     fiscalmont_staging_tablename = f"{fiscalmont_str}_staging"
     fiscalweek_staging_tablename = f"{fiscalweek_str}_staging"
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalunit_staging_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscaldeal_staging_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalcash_staging_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalhour_staging_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalmont_staging_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalweek_staging_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalunit_staging_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscaldeal_staging_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalcash_staging_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalhour_staging_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalmont_staging_tablename)
+    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalweek_staging_tablename)
 
 
 def etl_fiscal_agg_tables_to_fiscal_csvs(
