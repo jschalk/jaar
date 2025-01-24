@@ -7,11 +7,11 @@ from src.f04_gift.atom_config import (
 )
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f11_world.world import worldunit_shop
-from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
+from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_etl_aft_face_csv_files2idea_staging_tables_HasIdeaDataFromCSV_etl_aft_face_csv_files2idea_staging_tables(
+def test_WorldUnit_etl_aft_face_csv_files2idea_staging_tables_HasIdeaDataFromCSV(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
