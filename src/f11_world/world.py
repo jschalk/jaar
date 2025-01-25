@@ -40,6 +40,7 @@ from src.f10_etl.transformers import (
     etl_fiscal_staging_tables_to_fiscal_csvs,
     etl_fiscal_agg_tables_to_fiscal_csvs,
     etl_fiscal_csvs_to_jsons,
+    etl_idea_staging_to_bud_tables,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -174,6 +175,9 @@ class WorldUnit:
 
     def idea_staging_to_fiscal_tables(self, conn_or_cursor: sqlite3_Connection):
         etl_idea_staging_to_fiscal_tables(conn_or_cursor)
+
+    def idea_staging_to_bud_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_idea_staging_to_bud_tables(conn_or_cursor)
 
     def aft_faces_ideas_to_fiscal_mstr_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_fiscal_staging_tables_to_fiscal_csvs(conn_or_cursor, self._fiscal_mstr_dir)

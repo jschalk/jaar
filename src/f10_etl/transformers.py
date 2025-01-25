@@ -5,6 +5,8 @@ from src.f00_instrument.db_toolbox import (
     is_stageable,
 )
 from src.f01_road.road import FaceName, EventInt
+from src.f04_gift.atom_config import get_bud_categorys
+from src.f07_fiscal.fiscal_config import get_fiscal_categorys
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_idea.idea_config import (
@@ -31,6 +33,7 @@ from src.f09_idea.idea_db_tool import (
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
     create_fiscal_tables,
+    create_bud_tables,
     get_fiscal_update_inconsist_error_message_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
 )
@@ -748,20 +751,37 @@ def etl_idea_staging_to_fiscal_tables(conn_or_cursor):
     fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor)
 
 
+def etl_idea_staging_to_bud_tables(conn_or_cursor):
+    create_bud_tables(conn_or_cursor)
+    idea_staging_tables2bud_staging_tables(conn_or_cursor)
+    # fiscal_staging_tables2bud_agg_tables(conn_or_cursor)
+
+
 def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection):
-    unit_cat = "fiscalunit"
-    deal_cat = "fiscal_deal_episode"
-    cash_cat = "fiscal_cashbook"
-    hour_cat = "fiscal_timeline_hour"
-    mont_cat = "fiscal_timeline_month"
-    week_cat = "fiscal_timeline_weekday"
-    fiscal_cats = {unit_cat, deal_cat, cash_cat, hour_cat, mont_cat, week_cat}
+    fiscal_cats = get_fiscal_categorys()
     idea_config_dict = get_idea_config_dict()
 
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
         if db_table_exists(conn_or_cursor, idea_staging):
             for x_cat in fiscal_cats:
+                cat_config = idea_config_dict.get(x_cat)
+                cat_jkeys = set(cat_config.get("jkeys").keys())
+                if is_stageable(conn_or_cursor, idea_staging, cat_jkeys):
+                    gen_sqlstr = get_idea_into_category_staging_query(
+                        conn_or_cursor, idea_number, x_cat, cat_jkeys
+                    )
+                    conn_or_cursor.execute(gen_sqlstr)
+
+
+def idea_staging_tables2bud_staging_tables(conn_or_cursor: sqlite3_Connection):
+    bud_cats = get_bud_categorys()
+    idea_config_dict = get_idea_config_dict()
+
+    for idea_number in get_idea_numbers():
+        idea_staging = f"{idea_number}_staging"
+        if db_table_exists(conn_or_cursor, idea_staging):
+            for x_cat in bud_cats:
                 cat_config = idea_config_dict.get(x_cat)
                 cat_jkeys = set(cat_config.get("jkeys").keys())
                 if is_stageable(conn_or_cursor, idea_staging, cat_jkeys):
