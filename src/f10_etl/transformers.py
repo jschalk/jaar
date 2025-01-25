@@ -806,72 +806,21 @@ def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
 def etl_fiscal_staging_tables_to_fiscal_csvs(
     conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
-    fiscalunit_str = "fiscalunit"
-    fiscaldeal_str = "fiscal_deal_episode"
-    fiscalcash_str = "fiscal_cashbook"
-    fiscalhour_str = "fiscal_timeline_hour"
-    fiscalmont_str = "fiscal_timeline_month"
-    fiscalweek_str = "fiscal_timeline_weekday"
-    fiscalunit_staging_tablename = f"{fiscalunit_str}_staging"
-    fiscaldeal_staging_tablename = f"{fiscaldeal_str}_staging"
-    fiscalcash_staging_tablename = f"{fiscalcash_str}_staging"
-    fiscalhour_staging_tablename = f"{fiscalhour_str}_staging"
-    fiscalmont_staging_tablename = f"{fiscalmont_str}_staging"
-    fiscalweek_staging_tablename = f"{fiscalweek_str}_staging"
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalunit_staging_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscaldeal_staging_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalcash_staging_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalhour_staging_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalmont_staging_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalweek_staging_tablename)
+    for ficsal_category in get_fiscal_categorys():
+        staging_tablename = f"{ficsal_category}_staging"
+        save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, staging_tablename)
 
 
 def etl_fiscal_agg_tables_to_fiscal_csvs(
     conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
-    fiscalunit_str = "fiscalunit"
-    fiscaldeal_str = "fiscal_deal_episode"
-    fiscalcash_str = "fiscal_cashbook"
-    fiscalhour_str = "fiscal_timeline_hour"
-    fiscalmont_str = "fiscal_timeline_month"
-    fiscalweek_str = "fiscal_timeline_weekday"
-    fiscalunit_agg_tablename = f"{fiscalunit_str}_agg"
-    fiscaldeal_agg_tablename = f"{fiscaldeal_str}_agg"
-    fiscalcash_agg_tablename = f"{fiscalcash_str}_agg"
-    fiscalhour_agg_tablename = f"{fiscalhour_str}_agg"
-    fiscalmont_agg_tablename = f"{fiscalmont_str}_agg"
-    fiscalweek_agg_tablename = f"{fiscalweek_str}_agg"
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalunit_agg_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscaldeal_agg_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalcash_agg_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalhour_agg_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalmont_agg_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalweek_agg_tablename)
+    for ficsal_category in get_fiscal_categorys():
+        save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, f"{ficsal_category}_agg")
 
 
 def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
-    fiscalunit_str = "fiscalunit"
-    fiscaldeal_str = "fiscal_deal_episode"
-    fiscalcash_str = "fiscal_cashbook"
-    fiscalhour_str = "fiscal_timeline_hour"
-    fiscalmont_str = "fiscal_timeline_month"
-    fiscalweek_str = "fiscal_timeline_weekday"
-    fiscalunit_excel_path = create_path(fiscal_mstr_dir, f"{fiscalunit_str}.xlsx")
-    fiscaldeal_excel_path = create_path(fiscal_mstr_dir, f"{fiscaldeal_str}.xlsx")
-    fiscalcash_excel_path = create_path(fiscal_mstr_dir, f"{fiscalcash_str}.xlsx")
-    fiscalhour_excel_path = create_path(fiscal_mstr_dir, f"{fiscalhour_str}.xlsx")
-    fiscalmont_excel_path = create_path(fiscal_mstr_dir, f"{fiscalmont_str}.xlsx")
-    fiscalweek_excel_path = create_path(fiscal_mstr_dir, f"{fiscalweek_str}.xlsx")
-    fiscalunit_df = open_csv(fiscal_mstr_dir, f"{fiscalunit_str}_agg.csv")
-    fiscaldeal_df = open_csv(fiscal_mstr_dir, f"{fiscaldeal_str}_agg.csv")
-    fiscalcash_df = open_csv(fiscal_mstr_dir, f"{fiscalcash_str}_agg.csv")
-    fiscalhour_df = open_csv(fiscal_mstr_dir, f"{fiscalhour_str}_agg.csv")
-    fiscalmont_df = open_csv(fiscal_mstr_dir, f"{fiscalmont_str}_agg.csv")
-    fiscalweek_df = open_csv(fiscal_mstr_dir, f"{fiscalweek_str}_agg.csv")
-    upsert_sheet(fiscalunit_excel_path, "agg", fiscalunit_df)
-    upsert_sheet(fiscaldeal_excel_path, "agg", fiscaldeal_df)
-    upsert_sheet(fiscalcash_excel_path, "agg", fiscalcash_df)
-    upsert_sheet(fiscalhour_excel_path, "agg", fiscalhour_df)
-    upsert_sheet(fiscalmont_excel_path, "agg", fiscalmont_df)
-    upsert_sheet(fiscalweek_excel_path, "agg", fiscalweek_df)
+    for ficsal_category in get_fiscal_categorys():
+        x_excel_path = create_path(fiscal_mstr_dir, f"{ficsal_category}.xlsx")
+        cat_df = open_csv(fiscal_mstr_dir, f"{ficsal_category}_agg.csv")
+        upsert_sheet(x_excel_path, "agg", cat_df)
     create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)
