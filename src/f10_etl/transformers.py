@@ -38,15 +38,7 @@ from src.f10_etl.tran_sqlstrs import (
     get_fiscal_insert_agg_from_staging_sqlstrs,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
-from src.f10_etl.fiscal_etl_tool import (
-    create_fiscalunit_jsons_from_prime_files,
-    get_fiscalunit_sorted_args,
-    get_fiscaldeal_sorted_args,
-    get_fiscalcash_sorted_args,
-    get_fiscalhour_sorted_args,
-    get_fiscalmont_sorted_args,
-    get_fiscalweek_sorted_args,
-)
+from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
@@ -748,6 +740,7 @@ def etl_aft_face_csv_files2idea_staging_tables(
 def etl_idea_staging_to_fiscal_tables(conn_or_cursor):
     create_fiscal_tables(conn_or_cursor)
     idea_staging_tables2fiscal_staging_tables(conn_or_cursor)
+    set_fiscal_staging_error_message(conn_or_cursor)
     fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor)
 
 

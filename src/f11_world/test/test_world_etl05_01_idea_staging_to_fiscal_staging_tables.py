@@ -1,5 +1,6 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
+from src.f01_road.finance_tran import time_int_str
 from src.f04_gift.atom_config import (
     face_name_str,
     fiscal_title_str,
@@ -8,10 +9,8 @@ from src.f04_gift.atom_config import (
 )
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_db_tool import get_pragma_table_fetchall
-from src.f10_etl.fiscal_etl_tool import (
-    FiscalPrimeColumnsRef,
-    FiscalPrimeObjsRef,
-)
+from src.f10_etl.tran_sqlstrs import create_fiscal_tables
+from src.f10_etl.fiscal_etl_tool import FiscalPrimeColumnsRef, FiscalPrimeObjsRef
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists
@@ -102,7 +101,6 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_Bud_category_idea_PopulatesFisc
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 """
     save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("fizz")
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
         fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
@@ -149,3 +147,70 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_Bud_category_idea_PopulatesFisc
             None,  # note
         )
         assert fiscalunit_db_rows == [expected_row1, expected_row2]
+
+
+def test_WorldUnit_set_idea_staging_error_message_ChangeAttrs(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bobby"
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    a23_owner_name = bob_inx
+    t1_time_int = 33
+    t1_quota_1 = 200
+    t1_quota_2 = 300
+    t2_time_int = 55
+    t2_quota = 400
+    x_objs = FiscalPrimeObjsRef()
+    x_cols = FiscalPrimeColumnsRef()
+    fizz_world = worldunit_shop("fizz")
+
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
+        x_tablename = x_objs.deal_stage_tablename
+        assert db_table_exists(cursor, x_tablename)
+        insert_staging_sqlstr = f"""
+INSERT INTO {x_tablename} ({x_cols.deal_staging_csv_header})
+VALUES
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_2},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL)
+;
+"""
+        print(f"{insert_staging_sqlstr=}")
+        cursor.execute(insert_staging_sqlstr)
+        assert get_row_count(cursor, x_tablename) == 5
+        select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, {time_int_str()}, error_message FROM {x_tablename};"
+        # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
+        cursor.execute(select_sqlstr)
+        # print(f"{select_sqlstr=}")
+        rows = cursor.fetchall()
+        # print(f"{rows=}")
+        assert rows == [
+            (event3, accord23_str, t1_time_int, None),
+            (event7, accord23_str, t1_time_int, None),
+            (event7, accord23_str, t2_time_int, None),
+            (event7, accord45_str, t1_time_int, None),
+            (event7, accord45_str, t2_time_int, None),
+        ]
+
+        # WHEN
+        fizz_world.idea_staging_to_fiscal_tables(cursor)
+
+        # THEN
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        print(f"{rows=}")
+        x_error_message = "Inconsistent fiscal data"
+        assert rows == [
+            (event3, accord23_str, t1_time_int, x_error_message),
+            (event7, accord23_str, t1_time_int, x_error_message),
+            (event7, accord23_str, t2_time_int, None),
+            (event7, accord45_str, t1_time_int, None),
+            (event7, accord45_str, t2_time_int, None),
+        ]
