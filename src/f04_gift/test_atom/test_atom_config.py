@@ -14,6 +14,7 @@ from src.f02_bud.bud_tool import (
 from src.f04_gift.atom_config import (
     get_bud_dimens,
     get_all_bud_dimen_keys,
+    get_delete_key_name,
     get_all_bud_dimen_delete_keys,
     is_bud_dimen,
     get_atom_config_dict,
@@ -141,14 +142,21 @@ def test_get_all_bud_dimen_keys_ReturnsObj():
     assert all_bud_dimen_keys == expected_bud_keys
 
 
+def test_get_delete_key_name_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_delete_key_name("fizz") == "fizz_DELETE"
+    assert get_delete_key_name("run") == "run_DELETE"
+    assert get_delete_key_name("") is None
+
+
 def test_get_all_bud_dimen_delete_keys_ReturnsObj():
     # ESTABLISH / WHEN
     all_bud_dimen_delete_keys = get_all_bud_dimen_delete_keys()
 
     # THEN
-    assert not all_bud_dimen_delete_keys.isdisjoint({"acct_name_DELETE"})
+    assert not all_bud_dimen_delete_keys.isdisjoint({get_delete_key_name("acct_name")})
     expected_bud_delete_keys = {
-        f"{bud_dimen_key}_DELETE" for bud_dimen_key in get_all_bud_dimen_keys()
+        get_delete_key_name(bud_dimen_key) for bud_dimen_key in get_all_bud_dimen_keys()
     }
     print(f"{expected_bud_delete_keys=}")
     assert all_bud_dimen_delete_keys == expected_bud_delete_keys

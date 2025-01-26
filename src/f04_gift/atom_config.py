@@ -498,6 +498,10 @@ def get_all_bud_dimen_keys() -> set:
     }
 
 
+def get_delete_key_name(key: str) -> str:
+    return f"{key}_DELETE" if key else None
+
+
 def get_all_bud_dimen_delete_keys() -> set:
     return {
         "acct_name_DELETE",
