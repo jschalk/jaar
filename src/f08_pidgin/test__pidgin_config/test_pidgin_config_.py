@@ -10,10 +10,10 @@ from src.f04_gift.atom_config import (
 )
 from src.f08_pidgin.pidgin_config import (
     config_file_dir,
-    get_pidgin_categorys,
+    get_pidgin_dimens,
     get_pidgin_config_file_name,
     get_pidgin_config_dict,
-    get_pidgin_args_category_mapping,
+    get_pidgin_args_dimen_mapping,
     get_quick_pidgens_column_ref,
     pidginunit_str,
     pidgin_filename,
@@ -78,11 +78,11 @@ def test_get_pidgin_config_dict_ReturnsObj():
 
     # THEN
     assert pidgin_config
-    pidgin_config_categorys = set(pidgin_config.keys())
-    assert map_name_str() in pidgin_config_categorys
-    assert map_label_str() in pidgin_config_categorys
-    assert map_title_str() in pidgin_config_categorys
-    assert map_road_str() in pidgin_config_categorys
+    pidgin_config_dimens = set(pidgin_config.keys())
+    assert map_name_str() in pidgin_config_dimens
+    assert map_label_str() in pidgin_config_dimens
+    assert map_title_str() in pidgin_config_dimens
+    assert map_road_str() in pidgin_config_dimens
     assert len(pidgin_config) == 4
 
     _validate_pidgin_config(pidgin_config)
@@ -118,8 +118,8 @@ def _validate_pidgin_config(pidgin_config: dict):
     }
 
     # for every pidgin_format file there exists a unique pidgin_number always with leading zeros to make 5 digits
-    for pidgin_categorys, cat_dict in pidgin_config.items():
-        print(f"_validate_pidgin_config {pidgin_categorys=}")
+    for pidgin_dimens, cat_dict in pidgin_config.items():
+        print(f"_validate_pidgin_config {pidgin_dimens=}")
         assert cat_dict.get(jkeys_str()) is not None
         assert cat_dict.get(jvalues_str()) is not None
         assert cat_dict.get(atom_update()) is None
@@ -129,50 +129,50 @@ def _validate_pidgin_config(pidgin_config: dict):
 
         pidgin_jkeys_keys = set(cat_dict.get(jkeys_str()).keys())
         for jkey_key in pidgin_jkeys_keys:
-            print(f"_validate_pidgin_config {pidgin_categorys=} {jkey_key=} ")
+            print(f"_validate_pidgin_config {pidgin_dimens=} {jkey_key=} ")
             assert jkey_key in x_possible_args
         pidgin_jvalues_keys = set(cat_dict.get(jvalues_str()).keys())
         for jvalue_key in pidgin_jvalues_keys:
-            print(f"_validate_pidgin_config {pidgin_categorys=} {jvalue_key=} ")
+            print(f"_validate_pidgin_config {pidgin_dimens=} {jvalue_key=} ")
             assert jvalue_key in x_possible_args
 
 
-def test_get_pidgin_categorys_ReturnsObj():
+def test_get_pidgin_dimens_ReturnsObj():
     # ESTABLISH / WHEN
-    pidgin_config_categorys = get_pidgin_categorys()
+    pidgin_config_dimens = get_pidgin_dimens()
 
     # THEN
-    assert map_name_str() in pidgin_config_categorys
-    assert map_label_str() in pidgin_config_categorys
-    assert map_title_str() in pidgin_config_categorys
-    assert map_road_str() in pidgin_config_categorys
-    assert len(pidgin_config_categorys) == 4
+    assert map_name_str() in pidgin_config_dimens
+    assert map_label_str() in pidgin_config_dimens
+    assert map_title_str() in pidgin_config_dimens
+    assert map_road_str() in pidgin_config_dimens
+    assert len(pidgin_config_dimens) == 4
 
 
-def test_get_pidgin_args_category_mapping_ReturnsObj():
+def test_get_pidgin_args_dimen_mapping_ReturnsObj():
     # ESTABLISH / WHEN
-    x_pidgin_args_category_mapping = get_pidgin_args_category_mapping()
-    print(f"{x_pidgin_args_category_mapping=}")
+    x_pidgin_args_dimen_mapping = get_pidgin_args_dimen_mapping()
+    print(f"{x_pidgin_args_dimen_mapping=}")
 
     # THEN
-    assert x_pidgin_args_category_mapping
-    assert x_pidgin_args_category_mapping.get(otx_road_str())
-    x_categorys = {map_road_str()}
-    assert x_pidgin_args_category_mapping.get(otx_road_str()) == x_categorys
-    assert x_pidgin_args_category_mapping.get(inx_bridge_str())
-    pidgin_id_categorys = x_pidgin_args_category_mapping.get(inx_bridge_str())
-    assert len(pidgin_id_categorys) == 4
-    assert len(x_pidgin_args_category_mapping) == 11
+    assert x_pidgin_args_dimen_mapping
+    assert x_pidgin_args_dimen_mapping.get(otx_road_str())
+    x_dimens = {map_road_str()}
+    assert x_pidgin_args_dimen_mapping.get(otx_road_str()) == x_dimens
+    assert x_pidgin_args_dimen_mapping.get(inx_bridge_str())
+    pidgin_id_dimens = x_pidgin_args_dimen_mapping.get(inx_bridge_str())
+    assert len(pidgin_id_dimens) == 4
+    assert len(x_pidgin_args_dimen_mapping) == 11
 
 
 def _get_all_pidgen_config_attrs() -> dict[str, set[str]]:
     pidgin_config = get_pidgin_config_dict()
     print(f"{pidgin_config=}")
     x_pidgen_attrs = {}
-    for pidgin_category, jkeys_jvalues_dict in pidgin_config.items():
+    for pidgin_dimen, jkeys_jvalues_dict in pidgin_config.items():
         attrs_set = set(jkeys_jvalues_dict.get("jkeys").keys())
         attrs_set.update(set(jkeys_jvalues_dict.get("jvalues").keys()))
-        x_pidgen_attrs[pidgin_category] = attrs_set
+        x_pidgen_attrs[pidgin_dimen] = attrs_set
     return x_pidgen_attrs
 
 

@@ -126,26 +126,26 @@ def bud_item_factunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     )
 
 
-def bud_attr_exists(x_category: str, x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    if x_category == budunit_str():
+def bud_attr_exists(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
+    if x_dimen == budunit_str():
         return budunit_exists(x_bud)
-    elif x_category == bud_acctunit_str():
+    elif x_dimen == bud_acctunit_str():
         return bud_acctunit_exists(x_bud, jkeys)
-    elif x_category == bud_acct_membership_str():
+    elif x_dimen == bud_acct_membership_str():
         return bud_acct_membership_exists(x_bud, jkeys)
-    elif x_category == bud_itemunit_str():
+    elif x_dimen == bud_itemunit_str():
         return bud_itemunit_exists(x_bud, jkeys)
-    elif x_category == bud_item_awardlink_str():
+    elif x_dimen == bud_item_awardlink_str():
         return bud_item_awardlink_exists(x_bud, jkeys)
-    elif x_category == bud_item_reasonunit_str():
+    elif x_dimen == bud_item_reasonunit_str():
         return bud_item_reasonunit_exists(x_bud, jkeys)
-    elif x_category == bud_item_reason_premiseunit_str():
+    elif x_dimen == bud_item_reason_premiseunit_str():
         return bud_item_reason_premiseunit_exists(x_bud, jkeys)
-    elif x_category == bud_item_teamlink_str():
+    elif x_dimen == bud_item_teamlink_str():
         return bud_item_teamlink_exists(x_bud, jkeys)
-    elif x_category == bud_item_healerlink_str():
+    elif x_dimen == bud_item_healerlink_str():
         return bud_item_healerlink_exists(x_bud, jkeys)
-    elif x_category == bud_item_factunit_str():
+    elif x_dimen == bud_item_factunit_str():
         return bud_item_factunit_exists(x_bud, jkeys)
     return True
 
@@ -192,11 +192,11 @@ def bud_item_factunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> FactUnit
     return x_bud.get_item_obj(x_road).factunits.get(x_base)
 
 
-def bud_get_obj(x_category: str, x_bud: BudUnit, jkeys: dict[str, any]) -> any:
-    if x_category == budunit_str():
+def bud_get_obj(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> any:
+    if x_dimen == budunit_str():
         return x_bud
 
-    x_categorys = {
+    x_dimens = {
         bud_acctunit_str(): bud_acctunit_get_obj,
         bud_acct_membership_str(): bud_acct_membership_get_obj,
         bud_itemunit_str(): bud_itemunit_get_obj,
@@ -205,7 +205,7 @@ def bud_get_obj(x_category: str, x_bud: BudUnit, jkeys: dict[str, any]) -> any:
         bud_item_reason_premiseunit_str(): bud_item_reason_premiseunit_get_obj,
         bud_item_factunit_str(): bud_item_factunit_get_obj,
     }
-    if x_func := x_categorys.get(x_category):
+    if x_func := x_dimens.get(x_dimen):
         return x_func(x_bud, jkeys)
 
 

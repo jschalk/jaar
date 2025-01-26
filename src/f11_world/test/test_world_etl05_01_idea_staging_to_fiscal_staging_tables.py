@@ -80,7 +80,7 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_CreatesFiscalStagingTables(
         assert fis_week_stage_pragma == cursor.fetchall()
 
 
-def test_WorldUnit_idea_staging_to_fiscal_tables_Bud_category_idea_PopulatesFiscalStagingTables(
+def test_WorldUnit_idea_staging_to_fiscal_tables_Bud_dimen_idea_PopulatesFiscalStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

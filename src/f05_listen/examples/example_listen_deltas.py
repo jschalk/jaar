@@ -15,8 +15,8 @@ from src.f04_gift.delta import DeltaUnit, deltaunit_shop
 def get_atom_example_itemunit_sports(fiscal_title: FiscalTitle = None) -> AtomUnit:
     fiscal_title = get_fiscal_title_if_None(fiscal_title)
     sports_str = "sports"
-    x_category = bud_itemunit_str()
-    insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
+    x_dimen = bud_itemunit_str()
+    insert_itemunit_atomunit = atomunit_shop(x_dimen, atom_insert())
     insert_itemunit_atomunit.set_jkey(item_title_str(), sports_str)
     insert_itemunit_atomunit.set_jkey(parent_road_str(), fiscal_title)
     return insert_itemunit_atomunit
@@ -31,9 +31,9 @@ def get_deltaunit_sue_example() -> DeltaUnit:
     pool_atomunit.set_jvalue(pool_attribute, 77)
     sue_deltaunit.set_atomunit(pool_atomunit)
 
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     sue_str = "Sue"
-    sue_atomunit = atomunit_shop(category, atom_delete())
+    sue_atomunit = atomunit_shop(dimen, atom_delete())
     sue_atomunit.set_jkey(acct_name_str(), sue_str)
     sue_deltaunit.set_atomunit(sue_atomunit)
     return sue_deltaunit
@@ -54,9 +54,9 @@ def get_deltaunit_example1() -> DeltaUnit:
     x_atomunit.set_jvalue(x_attribute, 88)
     sue_deltaunit.set_atomunit(x_atomunit)
 
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     sue_str = "Sue"
-    x_atomunit = atomunit_shop(category, atom_delete())
+    x_atomunit = atomunit_shop(dimen, atom_delete())
     x_atomunit.set_jkey(acct_name_str(), sue_str)
     sue_deltaunit.set_atomunit(x_atomunit)
     return sue_deltaunit
@@ -70,9 +70,9 @@ def get_deltaunit_example2() -> DeltaUnit:
     x_attribute = "_credor_respect"
     x_atomunit.set_jvalue(x_attribute, 77)
 
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     sue_str = "Sue"
-    x_atomunit = atomunit_shop(category, atom_delete())
+    x_atomunit = atomunit_shop(dimen, atom_delete())
     x_atomunit.set_jkey(acct_name_str(), sue_str)
     sue_deltaunit.set_atomunit(x_atomunit)
     return sue_deltaunit

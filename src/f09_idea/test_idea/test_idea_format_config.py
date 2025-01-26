@@ -89,7 +89,7 @@ def test_get_idearef_obj_ReturnsObj():
 
     # THEN
     assert x_idearef.idea_name == idea_name_00021
-    assert x_idearef.categorys == [bud_acctunit_str()]
+    assert x_idearef.dimens == [bud_acctunit_str()]
     assert x_idearef._attributes != {}
     assert len(x_idearef._attributes) == 7
 

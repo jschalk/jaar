@@ -38,7 +38,7 @@ class AtomPlotlyShape:
         self.level = 0
         self.level_width0 = 0.1
         self.level_width1 = 0.9
-        self.display_str = f"{get_normal_table_name(self.x_atomunit.category)} {self.x_atomunit.crud_str} Order: {self.x_atomunit.atom_order}"
+        self.display_str = f"{get_normal_table_name(self.x_atomunit.dimen)} {self.x_atomunit.crud_str} Order: {self.x_atomunit.atom_order}"
 
     def set_level(self, x_level, x_width0, x_width1, color=None):
         self.level = x_level
@@ -47,24 +47,24 @@ class AtomPlotlyShape:
         self.color = color
 
 
-def get_insert_rect(category: str) -> AtomPlotlyShape:
-    x_atomunit = atomunit_shop(category, atom_insert())
+def get_insert_rect(dimen: str) -> AtomPlotlyShape:
+    x_atomunit = atomunit_shop(dimen, atom_insert())
     x_atomunit.set_atom_order()
     atom_rect = AtomPlotlyShape(x_atomunit=x_atomunit)
     atom_rect.set_attrs()
     return atom_rect
 
 
-def get_update_rect(category: str) -> AtomPlotlyShape:
-    x_atomunit = atomunit_shop(category, atom_update())
+def get_update_rect(dimen: str) -> AtomPlotlyShape:
+    x_atomunit = atomunit_shop(dimen, atom_update())
     x_atomunit.set_atom_order()
     atom_rect = AtomPlotlyShape(x_atomunit=x_atomunit)
     atom_rect.set_attrs()
     return atom_rect
 
 
-def get_delete_rect(category: str) -> AtomPlotlyShape:
-    x_atomunit = atomunit_shop(category, atom_delete())
+def get_delete_rect(dimen: str) -> AtomPlotlyShape:
+    x_atomunit = atomunit_shop(dimen, atom_delete())
     x_atomunit.set_atom_order()
     atom_rect = AtomPlotlyShape(x_atomunit=x_atomunit)
     atom_rect.set_attrs()

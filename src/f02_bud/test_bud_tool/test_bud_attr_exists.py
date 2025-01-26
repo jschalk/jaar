@@ -343,28 +343,28 @@ def test_bud_attr_exists_ReturnsObj_bud_acct_membership():
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
     x_jkeys = {"acct_name": yao_str, "group_label": swim_str}
-    x_category = bud_acct_membership_str()
+    x_dimen = bud_acct_membership_str()
 
     # WHEN / THEN
-    assert not bud_attr_exists(x_category, None, {})
-    assert not bud_attr_exists(x_category, sue_bud, x_jkeys)
+    assert not bud_attr_exists(x_dimen, None, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, x_jkeys)
 
     # WHEN
     sue_bud.add_acctunit(yao_str)
     # THEN
-    assert not bud_attr_exists(x_category, sue_bud, x_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, x_jkeys)
 
     # WHEN
     yao_item = sue_bud.get_acct(yao_str)
     yao_item.add_membership(";run")
     # THEN
-    assert not bud_attr_exists(x_category, sue_bud, x_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, x_jkeys)
 
     # WHEN
     yao_item = sue_bud.get_acct(yao_str)
     yao_item.add_membership(swim_str)
     # THEN
-    assert bud_attr_exists(x_category, sue_bud, x_jkeys)
+    assert bud_attr_exists(x_dimen, sue_bud, x_jkeys)
 
 
 def test_bud_attr_exists_ReturnsObj_bud_itemunit():
@@ -380,33 +380,33 @@ def test_bud_attr_exists_ReturnsObj_bud_itemunit():
     casa_jkeys = {"road": casa_road}
     clean_jkeys = {"road": clean_road}
     sweep_jkeys = {"road": sweep_road}
-    x_category = bud_itemunit_str()
+    x_dimen = bud_itemunit_str()
 
     # WHEN / THEN
-    assert not bud_attr_exists(x_category, None, {})
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, sweep_jkeys)
+    assert not bud_attr_exists(x_dimen, None, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, sweep_jkeys)
 
     # WHEN
     sue_bud.add_item(casa_road)
     # THEN
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, sweep_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, sweep_jkeys)
 
     # WHEN
     sue_bud.add_item(clean_road)
     # THEN
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert bud_attr_exists(x_category, sue_bud, clean_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, sweep_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, sweep_jkeys)
 
 
 def test_bud_attr_exists_ReturnsObj_bud_item_awardlink():
@@ -418,26 +418,26 @@ def test_bud_attr_exists_ReturnsObj_bud_item_awardlink():
     clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud.fiscal_title
     swim_str = "Swim"
-    x_category = bud_item_awardlink_str()
+    x_dimen = bud_item_awardlink_str()
     root_jkeys = {"road": root_road, "awardee_tag": swim_str}
     casa_jkeys = {"road": casa_road, "awardee_tag": swim_str}
     clean_jkeys = {"road": clean_road, "awardee_tag": swim_str}
 
     # WHEN / THEN
-    assert not bud_attr_exists(x_category, None, {})
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert not bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, None, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
     # WHEN
     sue_bud.itemroot.set_awardlink(awardlink_shop(swim_str))
 
     # THEN
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
 
 def test_bud_attr_exists_ReturnsObj_bud_item_reasonunit():
@@ -449,26 +449,26 @@ def test_bud_attr_exists_ReturnsObj_bud_item_reasonunit():
     root_road = sue_bud.fiscal_title
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
-    x_category = bud_item_reasonunit_str()
+    x_dimen = bud_item_reasonunit_str()
     root_jkeys = {"road": root_road, "base": week_road}
     casa_jkeys = {"road": casa_road, "base": week_road}
     clean_jkeys = {"road": clean_road, "base": week_road}
 
     # WHEN / THEN
-    assert not bud_attr_exists(x_category, None, {})
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert not bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, None, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
     # WHEN
     sue_bud.add_item(week_road)
     sue_bud.itemroot.set_reasonunit(reasonunit_shop(week_road))
 
     # THEN
-    assert bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
 
 def test_bud_attr_exists_ReturnsObj_bud_item_reason_premiseunit():
@@ -481,35 +481,35 @@ def test_bud_attr_exists_ReturnsObj_bud_item_reason_premiseunit():
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     thur_road = sue_bud.make_road(week_road, "thur")
-    x_category = bud_item_reason_premiseunit_str()
+    x_dimen = bud_item_reason_premiseunit_str()
     root_jkeys = {"road": root_road, "base": week_road, "need": thur_road}
     casa_jkeys = {"road": casa_road, "base": week_road, "need": thur_road}
     clean_jkeys = {"road": clean_road, "base": week_road, "need": thur_road}
 
     # WHEN / THEN
-    assert not bud_attr_exists(x_category, None, {})
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert not bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, None, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
     # WHEN
     sue_bud.add_item(week_road)
     sue_bud.itemroot.set_reasonunit(reasonunit_shop(week_road))
 
     # THEN
-    assert not bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
     # WHEN
     sue_bud.add_item(thur_road)
     sue_bud.itemroot.get_reasonunit(week_road).set_premise(thur_road)
 
     # THEN
-    assert bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
 
 def test_bud_attr_exists_ReturnsObj_bud_item_teamlink():
@@ -521,26 +521,26 @@ def test_bud_attr_exists_ReturnsObj_bud_item_teamlink():
     clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud.fiscal_title
     swim_str = "Swim"
-    x_category = bud_item_teamlink_str()
+    x_dimen = bud_item_teamlink_str()
     root_jkeys = {"road": root_road, "team_tag": swim_str}
     casa_jkeys = {"road": casa_road, "team_tag": swim_str}
     clean_jkeys = {"road": clean_road, "team_tag": swim_str}
 
     # WHEN / THEN
-    assert not bud_attr_exists(x_category, None, {})
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert not bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, None, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
     # WHEN
     sue_bud.itemroot.teamunit.set_teamlink(swim_str)
 
     # THEN
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
 
 def test_bud_attr_exists_ReturnsObj_bud_item_healerlink():
@@ -552,26 +552,26 @@ def test_bud_attr_exists_ReturnsObj_bud_item_healerlink():
     clean_road = sue_bud.make_road(casa_road, clean_str)
     root_road = sue_bud.fiscal_title
     swim_str = "Swim"
-    x_category = bud_item_healerlink_str()
+    x_dimen = bud_item_healerlink_str()
     root_jkeys = {"road": root_road, "healer_name": swim_str}
     casa_jkeys = {"road": casa_road, "healer_name": swim_str}
     clean_jkeys = {"road": clean_road, "healer_name": swim_str}
 
     # WHEN / THEN
-    assert not bud_attr_exists(x_category, None, {})
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert not bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, None, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
     # WHEN
     sue_bud.itemroot.healerlink.set_healer_name(swim_str)
 
     # THEN
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
 
 def test_bud_attr_exists_ReturnsObj_bud_item_factunit():
@@ -583,23 +583,23 @@ def test_bud_attr_exists_ReturnsObj_bud_item_factunit():
     root_road = sue_bud.fiscal_title
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
-    x_category = bud_item_factunit_str()
+    x_dimen = bud_item_factunit_str()
     root_jkeys = {"road": root_road, "base": week_road}
     casa_jkeys = {"road": casa_road, "base": week_road}
     clean_jkeys = {"road": clean_road, "base": week_road}
 
     # WHEN / THEN
-    assert not bud_attr_exists(x_category, None, {})
-    assert not bud_attr_exists(x_category, sue_bud, {})
-    assert not bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert not bud_attr_exists(x_dimen, None, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, {})
+    assert not bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
     # WHEN
     sue_bud.add_item(week_road)
     sue_bud.itemroot.set_factunit(factunit_shop(week_road))
 
     # THEN
-    assert bud_attr_exists(x_category, sue_bud, root_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, casa_jkeys)
-    assert not bud_attr_exists(x_category, sue_bud, clean_jkeys)
+    assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, casa_jkeys)
+    assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)

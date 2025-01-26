@@ -5,7 +5,7 @@ from src.f04_gift.atom_config import acct_name_str, credit_belief_str
 from src.f04_gift.delta import deltaunit_shop, sift_deltaunit
 
 
-# all other atom categorys are covered by test_sift_atom tests
+# all other atom dimens are covered by test_sift_atom tests
 def test_sift_deltaunit_ReturnsObjUPDATEAtomUnit_bud_acctunit():
     # ESTABLISH
     bob_str = "Bob"

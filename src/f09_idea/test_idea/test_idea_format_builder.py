@@ -12,38 +12,38 @@ from src.f04_gift.atom_config import (
 from src.f09_idea.idea_config import (
     get_idea_formats_dir,
     get_idea_config_dict,
-    categorys_str,
+    dimens_str,
     attributes_str,
 )
 
 
-def create_categorys_idea_format_dict() -> dict:
+def create_dimens_idea_format_dict() -> dict:
     idea_format_files_dict = {}
     x_count = 20
-    for idea_category, category_dict in get_idea_config_dict().items():
-        if category_dict.get("idea_type") == "budunit":
-            idea_filename = f"idea_format_{x_count:05}_{idea_category}_v0_0_0.json"
+    for idea_dimen, dimen_dict in get_idea_config_dict().items():
+        if dimen_dict.get("idea_type") == "budunit":
+            idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
             attributes_set = {fiscal_title_str(), owner_name_str()}
-            args_dict = get_atom_config_args(idea_category)
+            args_dict = get_atom_config_args(idea_dimen)
             attributes_set.update(set(args_dict.keys()))
 
-            idea_format = {"categorys": [idea_category], "attributes": attributes_set}
+            idea_format = {"dimens": [idea_dimen], "attributes": attributes_set}
             idea_format_files_dict[idea_filename] = idea_format
             x_count += 1
     return idea_format_files_dict
 
 
-def test_create_categorys_idea_format_dict_ReturnObj(rebuild_bool):
+def test_create_dimens_idea_format_dict_ReturnObj(rebuild_bool):
     # ESTABLISH / WHEN
-    categorys_idea_format_dict = create_categorys_idea_format_dict()
-    print(f"{categorys_idea_format_dict.keys()=}")
+    dimens_idea_format_dict = create_dimens_idea_format_dict()
+    print(f"{dimens_idea_format_dict.keys()=}")
 
     # THEN
-    assert len(categorys_idea_format_dict) == 10
+    assert len(dimens_idea_format_dict) == 10
     bud_itemunit_filename = f"idea_format_00028_{bud_itemunit_str()}_v0_0_0.json"
-    assert categorys_idea_format_dict.get(bud_itemunit_filename)
-    bud_itemunit_dict = categorys_idea_format_dict.get(bud_itemunit_filename)
-    assert bud_itemunit_dict.get(categorys_str()) == [bud_itemunit_str()]
+    assert dimens_idea_format_dict.get(bud_itemunit_filename)
+    bud_itemunit_dict = dimens_idea_format_dict.get(bud_itemunit_filename)
+    assert bud_itemunit_dict.get(dimens_str()) == [bud_itemunit_str()]
     assert bud_itemunit_dict.get(attributes_str())
     bud_itemunit_attributes = bud_itemunit_dict.get(attributes_str())
     assert fiscal_title_str() in bud_itemunit_attributes
@@ -57,6 +57,6 @@ def test_create_categorys_idea_format_dict_ReturnObj(rebuild_bool):
 
 def rebuild_format_jsons(x_rebuild_format_jsons: bool):
     if x_rebuild_format_jsons:
-        for x_filename, idea_format in create_categorys_idea_format_dict().items():
+        for x_filename, idea_format in create_dimens_idea_format_dict().items():
             idea_json = get_json_from_dict(idea_format)
             save_file(get_idea_formats_dir(), x_filename, idea_json)

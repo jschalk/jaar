@@ -20,7 +20,7 @@ def test_AtomUnit_exists():
     x_atomunit = AtomUnit()
 
     # THEN
-    assert x_atomunit.category is None
+    assert x_atomunit.dimen is None
     assert x_atomunit.crud_str is None
     assert x_atomunit.jkeys is None
     assert x_atomunit.jvalues is None
@@ -42,7 +42,7 @@ def test_atomunit_shop_ReturnsCorrectObj():
 
     # WHEN
     x_atomunit = atomunit_shop(
-        category=acctunit_str,
+        dimen=acctunit_str,
         crud_str=atom_insert(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -50,7 +50,7 @@ def test_atomunit_shop_ReturnsCorrectObj():
 
     # THEN
     print(f"{x_atomunit=}")
-    assert x_atomunit.category == acctunit_str
+    assert x_atomunit.dimen == acctunit_str
     assert x_atomunit.crud_str == atom_insert()
     assert x_atomunit.jkeys == bob_required_dict
     assert x_atomunit.jvalues == bob_optional_dict

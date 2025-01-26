@@ -37,8 +37,8 @@ def allowed_crud_str() -> str:
     return "allowed_crud"
 
 
-def categorys_str() -> str:
-    return "categorys"
+def dimens_str() -> str:
+    return "dimens"
 
 
 def otx_key_str() -> str:
@@ -531,7 +531,7 @@ def get_quick_ideas_column_ref() -> dict[str, set[str]]:
     return idea_number_dict
 
 
-def get_idea_category_ref() -> dict[str, set[str]]:
+def get_idea_dimen_ref() -> dict[str, set[str]]:
     return {
         "fiscalunit": ["br00000"],
         "fiscal_deal_episode": ["br00001"],

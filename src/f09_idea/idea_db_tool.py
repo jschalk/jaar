@@ -24,7 +24,7 @@ from src.f08_pidgin.pidgin import (
 from src.f08_pidgin.pidgin_config import get_pidgin_args_class_types
 from src.f09_idea.idea_config import (
     get_idea_elements_sort_order,
-    get_idea_category_ref,
+    get_idea_dimen_ref,
     get_idea_format_filename,
     get_idea_sqlite_types,
     get_custom_sorted_list,
@@ -174,20 +174,20 @@ def move_otx_csvs_to_pidgin_inx(face_dir: str):
 
 
 def _get_pidgen_idea_format_filenames() -> set[str]:
-    idea_numbers = set(get_idea_category_ref().get("map_name"))
-    idea_numbers.update(set(get_idea_category_ref().get("map_label")))
-    idea_numbers.update(set(get_idea_category_ref().get("map_title")))
-    idea_numbers.update(set(get_idea_category_ref().get("map_road")))
+    idea_numbers = set(get_idea_dimen_ref().get("map_name"))
+    idea_numbers.update(set(get_idea_dimen_ref().get("map_label")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("map_title")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("map_road")))
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 
 def _get_fiscal_idea_format_filenames() -> set[str]:
-    idea_numbers = set(get_idea_category_ref().get("fiscalunit"))
-    idea_numbers.update(set(get_idea_category_ref().get("fiscal_cashbook")))
-    idea_numbers.update(set(get_idea_category_ref().get("fiscal_deal_episode")))
-    idea_numbers.update(set(get_idea_category_ref().get("fiscal_timeline_hour")))
-    idea_numbers.update(set(get_idea_category_ref().get("fiscal_timeline_month")))
-    idea_numbers.update(set(get_idea_category_ref().get("fiscal_timeline_weekday")))
+    idea_numbers = set(get_idea_dimen_ref().get("fiscalunit"))
+    idea_numbers.update(set(get_idea_dimen_ref().get("fiscal_cashbook")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("fiscal_deal_episode")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("fiscal_timeline_hour")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("fiscal_timeline_month")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("fiscal_timeline_weekday")))
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 
@@ -384,14 +384,14 @@ def create_idea_sorted_table(
     create_table_from_columns(conn, tablename, columns_list, get_idea_sqlite_types())
 
 
-def get_idea_into_category_staging_query(
+def get_idea_into_dimen_staging_query(
     conn_or_cursor: sqlite3_Connection,
     idea_number: str,
-    x_category: str,
+    x_dimen: str,
     x_jkeys: set[str],
 ) -> str:
     src_columns = get_table_columns(conn_or_cursor, f"{idea_number}_staging")
-    dst_table = f"{x_category}_staging"
+    dst_table = f"{x_dimen}_staging"
     dst_columns = get_table_columns(conn_or_cursor, dst_table)
     common_columns_set = set(dst_columns).intersection(set(src_columns))
     common_columns_list = [col for col in dst_columns if col in common_columns_set]
@@ -399,7 +399,7 @@ def get_idea_into_category_staging_query(
     values_cols = set(common_columns_set)
     values_cols.difference_update(x_jkeys)
     # {_get_values_where_str(values_cols, dst_columns)}
-    return f"""INSERT INTO {x_category}_staging (idea_number, {common_columns_header})
+    return f"""INSERT INTO {x_dimen}_staging (idea_number, {common_columns_header})
 SELECT '{idea_number}' as idea_number, {common_columns_header}
 FROM {idea_number}_staging
 {_get_keys_where_str(x_jkeys, dst_columns)}

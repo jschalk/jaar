@@ -43,11 +43,11 @@ from copy import deepcopy as copy_deepcopy
 
 def print_atomunit_keys(x_deltaunit: DeltaUnit):
     for x_atomunit in get_delete_atomunit_list(x_deltaunit):
-        print(f"DELETE {x_atomunit.category} {list(x_atomunit.jkeys.values())}")
+        print(f"DELETE {x_atomunit.dimen} {list(x_atomunit.jkeys.values())}")
     for x_atomunit in get_update_atomunit_list(x_deltaunit):
-        print(f"UPDATE {x_atomunit.category} {list(x_atomunit.jkeys.values())}")
+        print(f"UPDATE {x_atomunit.dimen} {list(x_atomunit.jkeys.values())}")
     for x_atomunit in get_insert_atomunit_list(x_deltaunit):
-        print(f"INSERT {x_atomunit.category} {list(x_atomunit.jkeys.values())}")
+        print(f"INSERT {x_atomunit.dimen} {list(x_atomunit.jkeys.values())}")
 
 
 def get_delete_atomunit_list(x_deltaunit: DeltaUnit) -> list:
@@ -387,8 +387,8 @@ def test_DeltaUnit_add_all_different_atomunits_Creates_AtomUnit_item_delete():
     sue_deltaunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_category = bud_itemunit_str()
-    print(f"{sue_deltaunit.atomunits.get(atom_delete()).get(x_category).keys()=}")
+    x_dimen = bud_itemunit_str()
+    print(f"{sue_deltaunit.atomunits.get(atom_delete()).get(x_dimen).keys()=}")
 
     x_keylist = [atom_delete(), bud_itemunit_str(), ball_road, street_str]
     street_atomunit = get_from_nested_dict(sue_deltaunit.atomunits, x_keylist)

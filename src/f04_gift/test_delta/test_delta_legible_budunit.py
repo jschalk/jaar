@@ -17,10 +17,10 @@ def test_create_legible_list_ReturnsObjEstablishWithEmptyDeltaUnit():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tally():
     # ESTABLISH
-    category = budunit_str()
+    dimen = budunit_str()
     tally_str = "tally"
     tally_int = 55
-    tally_atomunit = atomunit_shop(category, atom_update())
+    tally_atomunit = atomunit_shop(dimen, atom_update())
     tally_atomunit.set_arg(tally_str, tally_int)
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(tally_atomunit)
@@ -36,10 +36,10 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tally():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_deal_time_int():
     # ESTABLISH
-    category = budunit_str()
+    dimen = budunit_str()
     deal_time_int_str = "deal_time_int"
     deal_time_int_int = 55
-    deal_time_int_atomunit = atomunit_shop(category, atom_update())
+    deal_time_int_atomunit = atomunit_shop(dimen, atom_update())
     deal_time_int_atomunit.set_arg(deal_time_int_str, deal_time_int_int)
     x_deltaunit = deltaunit_shop()
     x_deltaunit.set_atomunit(deal_time_int_atomunit)
@@ -55,10 +55,10 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_deal_time_int():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
     # ESTABLISH
-    category = budunit_str()
+    dimen = budunit_str()
     acct_credor_pool_str = "credor_respect"
     acct_credor_pool_int = 71
-    acct_credor_pool_atomunit = atomunit_shop(category, atom_update())
+    acct_credor_pool_atomunit = atomunit_shop(dimen, atom_update())
     acct_credor_pool_atomunit.set_arg(acct_credor_pool_str, acct_credor_pool_int)
 
     print(f"{acct_credor_pool_atomunit=}")
@@ -76,10 +76,10 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
     # ESTABLISH
-    category = budunit_str()
+    dimen = budunit_str()
     acct_debtor_pool_str = "debtor_respect"
     acct_debtor_pool_int = 78
-    acct_debtor_pool_atomunit = atomunit_shop(category, atom_update())
+    acct_debtor_pool_atomunit = atomunit_shop(dimen, atom_update())
     acct_debtor_pool_atomunit.set_arg(acct_debtor_pool_str, acct_debtor_pool_int)
 
     print(f"{acct_debtor_pool_atomunit=}")
@@ -98,11 +98,11 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equal_debtor_respect():
     # ESTABLISH
     x_deltaunit = deltaunit_shop()
-    category = budunit_str()
+    dimen = budunit_str()
     acct_credor_pool_str = "credor_respect"
     acct_debtor_pool_str = "debtor_respect"
     acct_pool_int = 83
-    budunit_atomunit = atomunit_shop(category, atom_update())
+    budunit_atomunit = atomunit_shop(dimen, atom_update())
     budunit_atomunit.set_arg(acct_credor_pool_str, acct_pool_int)
     budunit_atomunit.set_arg(acct_debtor_pool_str, acct_pool_int)
     x_deltaunit.set_atomunit(budunit_atomunit)
@@ -119,10 +119,10 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equ
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_max_tree_traverse():
     # ESTABLISH
-    category = budunit_str()
+    dimen = budunit_str()
     max_tree_traverse_str = "max_tree_traverse"
     max_tree_traverse_int = 71
-    max_tree_traverse_atomunit = atomunit_shop(category, atom_update())
+    max_tree_traverse_atomunit = atomunit_shop(dimen, atom_update())
     max_tree_traverse_atomunit.set_arg(max_tree_traverse_str, max_tree_traverse_int)
 
     print(f"{max_tree_traverse_atomunit=}")

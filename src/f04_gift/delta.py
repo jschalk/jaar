@@ -36,7 +36,7 @@ class DeltaUnit:
     def _get_crud_atomunits_list(self) -> dict[CRUD_command, list[AtomUnit]]:
         return get_all_nondictionary_objs(self.atomunits)
 
-    def get_category_sorted_atomunits_list(self) -> list[AtomUnit]:
+    def get_dimen_sorted_atomunits_list(self) -> list[AtomUnit]:
         atoms_list = []
         for crud_list in self._get_crud_atomunits_list().values():
             atoms_list.extend(iter(crud_list))
@@ -59,7 +59,7 @@ class DeltaUnit:
         return ordered_list
 
     def get_sorted_atomunits(self) -> list[AtomUnit]:
-        atomunits_list = self.get_category_sorted_atomunits_list()
+        atomunits_list = self.get_dimen_sorted_atomunits_list()
         return sorted(atomunits_list, key=lambda x: x.atom_order)
 
     def get_edited_bud(self, before_bud: BudUnit):
@@ -71,7 +71,7 @@ class DeltaUnit:
     def set_atomunit(self, x_atomunit: AtomUnit):
         if x_atomunit.is_valid() is False:
             raise InvalidAtomUnitException(
-                f"""'{x_atomunit.category}' {x_atomunit.crud_str} AtomUnit is invalid
+                f"""'{x_atomunit.dimen}' {x_atomunit.crud_str} AtomUnit is invalid
                 {x_atomunit.is_jkeys_valid()=}
                 {x_atomunit.is_jvalues_valid()=}"""
             )
@@ -79,7 +79,7 @@ class DeltaUnit:
         x_atomunit.set_atom_order()
         x_keylist = [
             x_atomunit.crud_str,
-            x_atomunit.category,
+            x_atomunit.dimen,
             *x_atomunit.get_nesting_order_args(),
         ]
         set_in_nested_dict(self.atomunits, x_keylist, x_atomunit)
@@ -87,7 +87,7 @@ class DeltaUnit:
     def atomunit_exists(self, x_atomunit: AtomUnit) -> bool:
         if x_atomunit.is_valid() is False:
             raise InvalidAtomUnitException(
-                f"""'{x_atomunit.category}' {x_atomunit.crud_str} AtomUnit is invalid
+                f"""'{x_atomunit.dimen}' {x_atomunit.crud_str} AtomUnit is invalid
                 {x_atomunit.is_jkeys_valid()=}
                 {x_atomunit.is_jvalues_valid()=}"""
             )
@@ -95,7 +95,7 @@ class DeltaUnit:
         x_atomunit.set_atom_order()
         x_keylist = [
             x_atomunit.crud_str,
-            x_atomunit.category,
+            x_atomunit.dimen,
             *list(x_atomunit.get_nesting_order_args()),
         ]
         nested_atomunit = get_from_nested_dict(self.atomunits, x_keylist, True)
@@ -103,21 +103,21 @@ class DeltaUnit:
 
     def add_atomunit(
         self,
-        category: str,
+        dimen: str,
         crud_str: str,
         jkeys: str = None,
         jvalues: str = None,
     ):
         x_atomunit = atomunit_shop(
-            category=category,
+            dimen=dimen,
             crud_str=crud_str,
             jkeys=jkeys,
             jvalues=jvalues,
         )
         self.set_atomunit(x_atomunit)
 
-    def get_atomunit(self, crud_str: str, category: str, jkeys: list[str]) -> AtomUnit:
-        x_keylist = [crud_str, category, *jkeys]
+    def get_atomunit(self, crud_str: str, dimen: str, jkeys: list[str]) -> AtomUnit:
+        x_keylist = [crud_str, dimen, *jkeys]
         return get_from_nested_dict(self.atomunits, x_keylist)
 
     def add_all_atomunits(self, after_bud: BudUnit):
@@ -840,12 +840,12 @@ def bud_built_from_delta_is_valid(x_delta: DeltaUnit, x_bud: BudUnit = None) -> 
     return True
 
 
-def get_categorys_cruds_deltaunit(
-    x_deltaunit: DeltaUnit, category_set: set[str], curd_set: set[str]
+def get_dimens_cruds_deltaunit(
+    x_deltaunit: DeltaUnit, dimen_set: set[str], curd_set: set[str]
 ) -> DeltaUnit:
     new_deltaunit = deltaunit_shop()
     for x_atomunit in x_deltaunit.get_sorted_atomunits():
-        if x_atomunit.crud_str in curd_set and x_atomunit.category in category_set:
+        if x_atomunit.crud_str in curd_set and x_atomunit.dimen in dimen_set:
             new_deltaunit.set_atomunit(x_atomunit)
     return new_deltaunit
 

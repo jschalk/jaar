@@ -12,10 +12,10 @@ from src.f02_bud.bud_tool import (
     bud_item_factunit_str,
 )
 from src.f04_gift.atom_config import (
-    get_bud_categorys,
-    is_bud_category,
+    get_bud_dimens,
+    is_bud_dimen,
     get_atom_config_dict,
-    get_atom_args_category_mapping,
+    get_atom_args_dimen_mapping,
     get_allowed_class_types,
     get_atom_args_class_types,
     get_atom_order as q_order,
@@ -31,7 +31,7 @@ from src.f04_gift.atom_config import (
     awardee_tag_str,
     base_str,
     begin_str,
-    category_str,
+    dimen_str,
     close_str,
     column_order_str,
     credit_belief_str,
@@ -79,7 +79,7 @@ def test_str_functions_ReturnsObj():
     assert awardee_tag_str() == "awardee_tag"
     assert base_str() == "base"
     assert begin_str() == "begin"
-    assert category_str() == "category"
+    assert dimen_str() == "dimen"
     assert close_str() == "close"
     assert column_order_str() == "column_order"
     assert credit_belief_str() == "credit_belief"
@@ -116,37 +116,37 @@ def test_str_functions_ReturnsObj():
     assert type_RoadUnit_str() == "RoadUnit"
 
 
-def test_get_bud_categorys_ReturnsObj():
-    assert get_bud_categorys() == set(get_atom_config_dict().keys())
-    assert bud_acctunit_str() in get_bud_categorys()
-    assert is_bud_category("itemroot") is False
+def test_get_bud_dimens_ReturnsObj():
+    assert get_bud_dimens() == set(get_atom_config_dict().keys())
+    assert bud_acctunit_str() in get_bud_dimens()
+    assert is_bud_dimen("itemroot") is False
 
 
 def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
-    for category, category_dict in atom_config_dict.items():
-        if category_dict.get(atom_insert()) is not None:
-            category_insert = category_dict.get(atom_insert())
-            if category_insert.get(atom_order_str) is None:
-                x_str = f"Missing from {category} {atom_insert()} {category_insert.get(atom_order_str)=}"
+    for dimen, dimen_dict in atom_config_dict.items():
+        if dimen_dict.get(atom_insert()) is not None:
+            dimen_insert = dimen_dict.get(atom_insert())
+            if dimen_insert.get(atom_order_str) is None:
+                x_str = f"Missing from {dimen} {atom_insert()} {dimen_insert.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
-        if category_dict.get(atom_update()) is not None:
-            category_update = category_dict.get(atom_update())
-            if category_update.get(atom_order_str) is None:
-                x_str = f"Missing from {category} {atom_update()} {category_update.get(atom_order_str)=}"
+        if dimen_dict.get(atom_update()) is not None:
+            dimen_update = dimen_dict.get(atom_update())
+            if dimen_update.get(atom_order_str) is None:
+                x_str = f"Missing from {dimen} {atom_update()} {dimen_update.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
-        if category_dict.get(atom_delete()) is not None:
-            category_delete = category_dict.get(atom_delete())
-            if category_delete.get(atom_order_str) is None:
-                x_str = f"Missing from {category} {atom_delete()} {category_delete.get(atom_order_str)=}"
+        if dimen_dict.get(atom_delete()) is not None:
+            dimen_delete = dimen_dict.get(atom_delete())
+            if dimen_delete.get(atom_order_str) is None:
+                x_str = f"Missing from {dimen} {atom_delete()} {dimen_delete.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
-        if category_dict.get(normal_specs_str()) is None:
-            print(f"{category=} {normal_specs_str()} is missing")
+        if dimen_dict.get(normal_specs_str()) is None:
+            print(f"{dimen=} {normal_specs_str()} is missing")
             return False
     return True
 
@@ -258,21 +258,21 @@ def _has_every_element(x_arg, x_dict) -> bool:
     return True
 
 
-def _every_category_dict_has_arg_elements(category_dict: dict) -> bool:
-    for jkey, x_dict in category_dict.get(jkeys_str()).items():
+def _every_dimen_dict_has_arg_elements(dimen_dict: dict) -> bool:
+    for jkey, x_dict in dimen_dict.get(jkeys_str()).items():
         if not _has_every_element(jkey, x_dict):
             return False
-    if category_dict.get(jvalues_str()) is not None:
-        for jvalue, x_dict in category_dict.get(jvalues_str()).items():
+    if dimen_dict.get(jvalues_str()) is not None:
+        for jvalue, x_dict in dimen_dict.get(jvalues_str()).items():
             if not _has_every_element(jvalue, x_dict):
                 return False
     return True
 
 
 def check_every_arg_dict_has_elements(atom_config_dict):
-    for category_key, category_dict in atom_config_dict.items():
-        print(f"{category_key=}")
-        assert _every_category_dict_has_arg_elements(category_dict)
+    for dimen_key, dimen_dict in atom_config_dict.items():
+        print(f"{dimen_key=}")
+        assert _every_dimen_dict_has_arg_elements(dimen_dict)
     return True
 
 
@@ -322,11 +322,11 @@ def _get_atom_config_jkey_keys(x_cat: str) -> set[str]:
 def unique_jvalues():
     jvalue_keys = set()
     jvalue_key_count = 0
-    for atom_category in get_atom_config_dict().keys():
-        new_jvalue_keys = _get_atom_config_jvalue_keys(atom_category)
+    for atom_dimen in get_atom_config_dict().keys():
+        new_jvalue_keys = _get_atom_config_jvalue_keys(atom_dimen)
         jvalue_key_count += len(new_jvalue_keys)
         jvalue_keys.update(new_jvalue_keys)
-        # print(f"{atom_category} {_get_atom_config_jvalue_keys(atom_category)}")
+        # print(f"{atom_dimen} {_get_atom_config_jvalue_keys(atom_dimen)}")
     return jvalue_keys, jvalue_key_count
 
 
@@ -342,8 +342,8 @@ def test_get_atom_config_dict_CheckEveryOptionalArgHasUniqueKey():
 def unique_jkeys():
     jkey_keys = set()
     jkey_key_count = 0
-    for atom_category in get_atom_config_dict().keys():
-        new_jkey_keys = _get_atom_config_jkey_keys(atom_category)
+    for atom_dimen in get_atom_config_dict().keys():
+        new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
         if road_str() in new_jkey_keys:
             new_jkey_keys.remove(road_str())
         if base_str() in new_jkey_keys:
@@ -352,7 +352,7 @@ def unique_jkeys():
             new_jkey_keys.remove(acct_name_str())
         if group_label_str() in new_jkey_keys:
             new_jkey_keys.remove(group_label_str())
-        print(f"{atom_category} {new_jkey_keys=}")
+        print(f"{atom_dimen} {new_jkey_keys=}")
         jkey_key_count += len(new_jkey_keys)
         jkey_keys.update(new_jkey_keys)
     return jkey_keys, jkey_key_count
@@ -369,10 +369,10 @@ def test_get_atom_config_dict_SomeRequiredArgAreUnique():
 
 def test_get_sorted_jkey_keys_ReturnsObj_bud_acctunit():
     # ESTABLISH
-    x_category = bud_acctunit_str()
+    x_dimen = bud_acctunit_str()
 
     # WHEN
-    x_sorted_jkey_keys = get_sorted_jkey_keys(x_category)
+    x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
     assert x_sorted_jkey_keys == [acct_name_str()]
@@ -380,10 +380,10 @@ def test_get_sorted_jkey_keys_ReturnsObj_bud_acctunit():
 
 def test_get_sorted_jkey_keys_ReturnsObj_bud_item_reason_premiseunit():
     # ESTABLISH
-    x_category = bud_item_reason_premiseunit_str()
+    x_dimen = bud_item_reason_premiseunit_str()
 
     # WHEN
-    x_sorted_jkey_keys = get_sorted_jkey_keys(x_category)
+    x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
     assert x_sorted_jkey_keys == [road_str(), base_str(), "need"]
@@ -526,30 +526,30 @@ def test_get_normalized_bud_table_build_ReturnsCorrectObj():
     assert stop_want_dict.get("nullable") is True
 
 
-def test_get_atom_args_category_mapping_ReturnsObj():
+def test_get_atom_args_dimen_mapping_ReturnsObj():
     # ESTABLISH / WHEN
-    x_atom_args_category_mapping = get_atom_args_category_mapping()
+    x_atom_args_dimen_mapping = get_atom_args_dimen_mapping()
 
     # THEN
-    assert x_atom_args_category_mapping
-    assert x_atom_args_category_mapping.get(stop_want_str())
-    assert x_atom_args_category_mapping.get(stop_want_str()) == {bud_itemunit_str()}
-    assert x_atom_args_category_mapping.get(parent_road_str())
-    road_categorys = x_atom_args_category_mapping.get(road_str())
-    assert bud_item_factunit_str() in road_categorys
-    assert bud_item_teamlink_str() in road_categorys
-    assert len(road_categorys) == 6
-    assert len(x_atom_args_category_mapping) == 43
+    assert x_atom_args_dimen_mapping
+    assert x_atom_args_dimen_mapping.get(stop_want_str())
+    assert x_atom_args_dimen_mapping.get(stop_want_str()) == {bud_itemunit_str()}
+    assert x_atom_args_dimen_mapping.get(parent_road_str())
+    road_dimens = x_atom_args_dimen_mapping.get(road_str())
+    assert bud_item_factunit_str() in road_dimens
+    assert bud_item_teamlink_str() in road_dimens
+    assert len(road_dimens) == 6
+    assert len(x_atom_args_dimen_mapping) == 43
 
 
-def get_class_type(x_category: str, x_arg: str) -> str:
+def get_class_type(x_dimen: str, x_arg: str) -> str:
     atom_config_dict = get_atom_config_dict()
-    category_dict = atom_config_dict.get(x_category)
-    optional_dict = category_dict.get(jvalues_str())
-    required_dict = category_dict.get(jkeys_str())
+    dimen_dict = atom_config_dict.get(x_dimen)
+    optional_dict = dimen_dict.get(jvalues_str())
+    required_dict = dimen_dict.get(jkeys_str())
     arg_dict = {}
     if optional_dict.get(x_arg):
-        arg_dict = category_dict.get(jvalues_str()).get(x_arg)
+        arg_dict = dimen_dict.get(jvalues_str()).get(x_arg)
     if required_dict.get(x_arg):
         arg_dict = required_dict.get(x_arg)
     return arg_dict.get(class_type_str())
@@ -585,20 +585,20 @@ def test_get_atom_config_dict_ValidatePythonTypes():
 
 
 def all_atom_config_class_types_are_valid(allowed_class_types):
-    x_atom_args_category_mapping = get_atom_args_category_mapping()
-    for x_atom_arg, categorys in x_atom_args_category_mapping.items():
+    x_atom_args_dimen_mapping = get_atom_args_dimen_mapping()
+    for x_atom_arg, dimens in x_atom_args_dimen_mapping.items():
         old_class_type = None
         x_class_type = ""
-        for x_category in categorys:
-            x_class_type = get_class_type(x_category, x_atom_arg)
-            # print(f"{x_class_type=} {x_atom_arg=} {x_category=}")
+        for x_dimen in dimens:
+            x_class_type = get_class_type(x_dimen, x_atom_arg)
+            # print(f"{x_class_type=} {x_atom_arg=} {x_dimen=}")
             if x_class_type not in allowed_class_types:
                 return False
 
             if old_class_type is None:
                 old_class_type = x_class_type
-            # confirm each atom_arg has same data type in all categorys
-            print(f"{x_class_type=} {old_class_type=} {x_atom_arg=} {x_category=}")
+            # confirm each atom_arg has same data type in all dimens
+            print(f"{x_class_type=} {old_class_type=} {x_atom_arg=} {x_dimen=}")
             if x_class_type != old_class_type:
                 return False
             old_class_type = x_class_type
@@ -606,12 +606,12 @@ def all_atom_config_class_types_are_valid(allowed_class_types):
 
 
 def all_atom_args_class_types_are_correct(x_class_types) -> bool:
-    x_atom_args_category_mapping = get_atom_args_category_mapping()
+    x_atom_args_dimen_mapping = get_atom_args_dimen_mapping()
     x_sorted_class_types = sorted(list(x_class_types.keys()))
     for x_atom_arg in x_sorted_class_types:
-        x_categorys = list(x_atom_args_category_mapping.get(x_atom_arg))
-        x_category = x_categorys[0]
-        x_class_type = get_class_type(x_category, x_atom_arg)
+        x_dimens = list(x_atom_args_dimen_mapping.get(x_atom_arg))
+        x_dimen = x_dimens[0]
+        x_class_type = get_class_type(x_dimen, x_atom_arg)
         print(
             f"assert x_class_types.get({x_atom_arg}) == {x_class_type} {x_class_types.get(x_atom_arg)=}"
         )
@@ -668,5 +668,5 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
     assert x_class_types.get(team_tag_str()) == type_GroupLabel_str()
-    assert x_class_types.keys() == get_atom_args_category_mapping().keys()
+    assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

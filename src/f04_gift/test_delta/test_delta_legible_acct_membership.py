@@ -9,14 +9,14 @@ from src.f02_bud.bud import budunit_shop
 def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_acct_membership_str()
+    dimen = bud_acct_membership_str()
     credit_vote_str = "credit_vote"
     debtit_vote_str = "debtit_vote"
     swim_str = f"{sue_bud.bridge}Swimmers"
     yao_str = "Yao"
     credit_vote_value = 81
     debtit_vote_value = 43
-    yao_atomunit = atomunit_shop(category, atom_insert())
+    yao_atomunit = atomunit_shop(dimen, atom_insert())
     yao_atomunit.set_arg(group_label_str(), swim_str)
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_vote_str, credit_vote_value)
@@ -37,14 +37,14 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
 def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debtit_vote():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_acct_membership_str()
+    dimen = bud_acct_membership_str()
     credit_vote_str = "credit_vote"
     debtit_vote_str = "debtit_vote"
     swim_str = f"{sue_bud.bridge}Swimmers"
     yao_str = "Yao"
     credit_vote_value = 81
     debtit_vote_value = 43
-    yao_atomunit = atomunit_shop(category, atom_update())
+    yao_atomunit = atomunit_shop(dimen, atom_update())
     yao_atomunit.set_arg(group_label_str(), swim_str)
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_vote_str, credit_vote_value)
@@ -65,12 +65,12 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debti
 def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_acct_membership_str()
+    dimen = bud_acct_membership_str()
     credit_vote_str = "credit_vote"
     swim_str = f"{sue_bud.bridge}Swimmers"
     yao_str = "Yao"
     credit_vote_value = 81
-    yao_atomunit = atomunit_shop(category, atom_update())
+    yao_atomunit = atomunit_shop(dimen, atom_update())
     yao_atomunit.set_arg(group_label_str(), swim_str)
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_vote_str, credit_vote_value)
@@ -90,12 +90,12 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
 def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_vote():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_acct_membership_str()
+    dimen = bud_acct_membership_str()
     debtit_vote_str = "debtit_vote"
     swim_str = f"{sue_bud.bridge}Swimmers"
     yao_str = "Yao"
     debtit_vote_value = 43
-    yao_atomunit = atomunit_shop(category, atom_update())
+    yao_atomunit = atomunit_shop(dimen, atom_update())
     yao_atomunit.set_arg(group_label_str(), swim_str)
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(debtit_vote_str, debtit_vote_value)
@@ -115,10 +115,10 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_vote():
 def test_create_legible_list_ReturnsObj_acct_membership_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_acct_membership_str()
+    dimen = bud_acct_membership_str()
     swim_str = f"{sue_bud.bridge}Swimmers"
     yao_str = "Yao"
-    yao_atomunit = atomunit_shop(category, atom_delete())
+    yao_atomunit = atomunit_shop(dimen, atom_delete())
     yao_atomunit.set_arg(group_label_str(), swim_str)
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     # print(f"{yao_atomunit=}")

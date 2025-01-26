@@ -10,7 +10,7 @@ from src.f01_road.road import FiscalTitle, OwnerName
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import timelineunit_shop
 from src.f04_gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
-from src.f04_gift.delta import deltaunit_shop, get_categorys_cruds_deltaunit, DeltaUnit
+from src.f04_gift.delta import deltaunit_shop, get_dimens_cruds_deltaunit, DeltaUnit
 from src.f04_gift.gift import giftunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fiscal.fiscal import fiscalunit_shop, FiscalUnit
@@ -27,7 +27,7 @@ from dataclasses import dataclass
 @dataclass
 class IdeaRef:
     idea_name: str = None
-    categorys: str = None
+    dimens: str = None
     _attributes: dict[str, dict[str, bool]] = None
 
     def set_attribute(self, x_attribute: str, otx_key: bool):
@@ -53,13 +53,13 @@ class IdeaRef:
         return get_custom_sorted_list(x_set)
 
 
-def idearef_shop(x_idea_name: str, x_categorys: list[str]) -> IdeaRef:
-    return IdeaRef(idea_name=x_idea_name, categorys=x_categorys, _attributes={})
+def idearef_shop(x_idea_name: str, x_dimens: list[str]) -> IdeaRef:
+    return IdeaRef(idea_name=x_idea_name, dimens=x_dimens, _attributes={})
 
 
 def get_idearef_obj(idea_name: str) -> IdeaRef:
     idearef_dict = get_idearef_from_file(idea_name)
-    x_idearef = idearef_shop(idea_name, idearef_dict.get("categorys"))
+    x_idearef = idearef_shop(idea_name, idearef_dict.get("dimens"))
     x_idearef._attributes = idearef_dict.get("attributes")
     return x_idearef
 
@@ -93,10 +93,10 @@ def create_idea_df(x_budunit: BudUnit, idea_name: str) -> DataFrame:
 def _get_sorted_atom_insert_atomunits(
     x_deltaunit: DeltaUnit, x_idearef: IdeaRef
 ) -> list[AtomUnit]:
-    category_set = set(x_idearef.categorys)
+    dimen_set = set(x_idearef.dimens)
     curd_set = {atom_insert()}
-    limited_delta = get_categorys_cruds_deltaunit(x_deltaunit, category_set, curd_set)
-    return limited_delta.get_category_sorted_atomunits_list()
+    limited_delta = get_dimens_cruds_deltaunit(x_deltaunit, dimen_set, curd_set)
+    return limited_delta.get_dimen_sorted_atomunits_list()
 
 
 def _create_d2_list(
@@ -163,7 +163,7 @@ def make_deltaunit(x_csv: str) -> DeltaUnit:
     x_dict = get_positional_dict(header_row)
     x_deltaunit = deltaunit_shop()
     for row in x_reader:
-        x_atomrow = atomrow_shop(x_idearef.categorys, atom_insert())
+        x_atomrow = atomrow_shop(x_idearef.dimens, atom_insert())
         for x_header in header_row:
             if header_index := x_dict.get(x_header):
                 x_atomrow.__dict__[x_header] = row[header_index]

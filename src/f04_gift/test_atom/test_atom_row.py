@@ -14,7 +14,7 @@ def test_AtomRow_exists():
     x_atomrow = AtomRow()
 
     # THEN
-    assert x_atomrow._atom_categorys is None
+    assert x_atomrow._atom_dimens is None
     assert x_atomrow._crud_command is None
     assert x_atomrow.acct_name is None
     assert x_atomrow.addin is None
@@ -61,56 +61,56 @@ def test_AtomRow_exists():
 
 def test_atomrow_shop_ReturnObj():
     # ESTABLISH
-    x_atom_categorys = {bud_acctunit_str()}
+    x_atom_dimens = {bud_acctunit_str()}
 
     # WHEN
-    x_atomrow = atomrow_shop(x_atom_categorys, atom_insert())
+    x_atomrow = atomrow_shop(x_atom_dimens, atom_insert())
 
     # THEN
-    assert x_atomrow._atom_categorys == x_atom_categorys
+    assert x_atomrow._atom_dimens == x_atom_dimens
     assert x_atomrow._crud_command == atom_insert()
 
 
-def test_AtomRow_set_atom_category_SetsAttr():
+def test_AtomRow_set_atom_dimen_SetsAttr():
     # ESTABLISH
     x_atomrow = atomrow_shop({bud_acctunit_str()}, atom_insert())
-    assert bud_acct_membership_str() not in x_atomrow._atom_categorys
+    assert bud_acct_membership_str() not in x_atomrow._atom_dimens
 
     # WHEN
-    x_atomrow.set_atom_category(bud_acct_membership_str())
+    x_atomrow.set_atom_dimen(bud_acct_membership_str())
 
     # THEN
-    assert bud_acct_membership_str() in x_atomrow._atom_categorys
+    assert bud_acct_membership_str() in x_atomrow._atom_dimens
 
 
-def test_AtomRow_atom_category_exists_ReturnsObj():
+def test_AtomRow_atom_dimen_exists_ReturnsObj():
     # ESTABLISH
     x_atomrow = atomrow_shop(set(), atom_insert())
-    assert not x_atomrow.atom_category_exists(bud_acctunit_str())
-    assert not x_atomrow.atom_category_exists(bud_acct_membership_str())
+    assert not x_atomrow.atom_dimen_exists(bud_acctunit_str())
+    assert not x_atomrow.atom_dimen_exists(bud_acct_membership_str())
 
     # WHEN
-    x_atomrow.set_atom_category(bud_acct_membership_str())
+    x_atomrow.set_atom_dimen(bud_acct_membership_str())
 
     # THEN
-    assert not x_atomrow.atom_category_exists(bud_acctunit_str())
-    assert x_atomrow.atom_category_exists(bud_acct_membership_str())
+    assert not x_atomrow.atom_dimen_exists(bud_acctunit_str())
+    assert x_atomrow.atom_dimen_exists(bud_acct_membership_str())
 
 
-def test_AtomRow_delete_atom_category_SetsAttr():
+def test_AtomRow_delete_atom_dimen_SetsAttr():
     # ESTABLISH
     x_atomrow = atomrow_shop({bud_acctunit_str()}, atom_insert())
-    x_atomrow.set_atom_category(bud_acctunit_str())
-    x_atomrow.set_atom_category(bud_acct_membership_str())
-    assert x_atomrow.atom_category_exists(bud_acctunit_str())
-    assert x_atomrow.atom_category_exists(bud_acct_membership_str())
+    x_atomrow.set_atom_dimen(bud_acctunit_str())
+    x_atomrow.set_atom_dimen(bud_acct_membership_str())
+    assert x_atomrow.atom_dimen_exists(bud_acctunit_str())
+    assert x_atomrow.atom_dimen_exists(bud_acct_membership_str())
 
     # WHEN
-    x_atomrow.delete_atom_category(bud_acct_membership_str())
+    x_atomrow.delete_atom_dimen(bud_acct_membership_str())
 
     # THEN
-    assert x_atomrow.atom_category_exists(bud_acctunit_str())
-    assert not x_atomrow.atom_category_exists(bud_acct_membership_str())
+    assert x_atomrow.atom_dimen_exists(bud_acctunit_str())
+    assert not x_atomrow.atom_dimen_exists(bud_acct_membership_str())
 
 
 def test_AtomRow_set_class_types_SetsAttr():
@@ -144,8 +144,8 @@ def test_AtomRow_set_class_types_SetsAttr():
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario0():
     # ESTABLISH
-    x_category = bud_acctunit_str()
-    x_atomrow = atomrow_shop({x_category}, atom_insert())
+    x_dimen = bud_acctunit_str()
+    x_atomrow = atomrow_shop({x_dimen}, atom_insert())
     x_atomrow.acct_name = "Bob"
 
     # WHEN
@@ -153,15 +153,15 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario0():
 
     # THEN
     assert len(x_atomunits) == 1
-    static_atom = atomunit_shop(x_category, atom_insert())
+    static_atom = atomunit_shop(x_dimen, atom_insert())
     static_atom.set_arg(acct_name_str(), "Bob")
     assert x_atomunits[0] == static_atom
 
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
     # ESTABLISH
-    x_category = bud_acctunit_str()
-    x_atomrow = atomrow_shop({x_category}, atom_insert())
+    x_dimen = bud_acctunit_str()
+    x_atomrow = atomrow_shop({x_dimen}, atom_insert())
     x_atomrow.acct_name = "Bob"
     x_atomrow.credit_belief = 5
 
@@ -170,7 +170,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
 
     # THEN
     assert len(x_atomunits) == 1
-    static_atom = atomunit_shop(x_category, atom_insert())
+    static_atom = atomunit_shop(x_dimen, atom_insert())
     static_atom.set_arg(acct_name_str(), "Bob")
     static_atom.set_arg("credit_belief", 5)
     assert x_atomunits[0] == static_atom
@@ -178,8 +178,8 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_NSERT_Fails():
     # ESTABLISH
-    x_category = bud_acctunit_str()
-    x_atomrow = atomrow_shop({x_category}, atom_insert())
+    x_dimen = bud_acctunit_str()
+    x_atomrow = atomrow_shop({x_dimen}, atom_insert())
 
     # WHEN
     x_atomunits = x_atomrow.get_atomunits()
@@ -190,8 +190,8 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_NSERT_Fails():
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
     # ESTABLISH
-    x_category = bud_acctunit_str()
-    x_atomrow = atomrow_shop({x_category}, atom_insert())
+    x_dimen = bud_acctunit_str()
+    x_atomrow = atomrow_shop({x_dimen}, atom_insert())
     x_atomrow.acct_name = "Bob"
     four_str = "4"
     x_atomrow.credit_belief = four_str
@@ -201,7 +201,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
 
     # THEN
     assert len(x_atomunits) == 1
-    static_atom = atomunit_shop(x_category, atom_insert())
+    static_atom = atomunit_shop(x_dimen, atom_insert())
     static_atom.set_arg(acct_name_str(), "Bob")
     four_int = 4
     static_atom.set_arg("credit_belief", four_int)
@@ -217,11 +217,11 @@ def test_AtomRow_get_atomunits_ReturnsObjIfCategoryIsCorrect():
     assert len(x_atomrow.get_atomunits()) == 0
 
     # WHEN / THEN
-    x_atomrow.set_atom_category(bud_acct_membership_str())
+    x_atomrow.set_atom_dimen(bud_acct_membership_str())
     assert len(x_atomrow.get_atomunits()) == 0
 
     # THEN
-    x_atomrow.set_atom_category(bud_acctunit_str())
+    x_atomrow.set_atom_dimen(bud_acctunit_str())
     assert len(x_atomrow.get_atomunits()) == 1
 
 
@@ -246,8 +246,8 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_itemunit_INSERT_pledge_False():
 
 def test_AtomRow_get_atomunits_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     # ESTABLISH
-    x_categorys = {bud_itemunit_str(), bud_item_healerlink_str()}
-    x_atomrow = atomrow_shop(x_categorys, atom_insert())
+    x_dimens = {bud_itemunit_str(), bud_item_healerlink_str()}
+    x_atomrow = atomrow_shop(x_dimens, atom_insert())
     x_atomrow.parent_road = "accord78"
     x_atomrow.item_title = "casa"
     x_atomrow.pledge = False

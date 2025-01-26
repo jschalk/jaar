@@ -19,7 +19,7 @@ def get_pidgin_config_dict() -> dict:
     )
 
 
-def get_pidgin_categorys() -> set[str]:
+def get_pidgin_dimens() -> set[str]:
     return set(get_pidgin_config_dict().keys())
 
 
@@ -113,23 +113,23 @@ def get_pidgin_config_jvalues(x_cat: str) -> dict:
     return get_from_nested_dict(get_pidgin_config_dict(), jvalues_key_list)
 
 
-def get_pidgin_config_args(x_category: str) -> dict[str, dict]:
-    args_dict = get_pidgin_config_jkeys(x_category)
-    args_dict.update(get_pidgin_config_jvalues(x_category))
+def get_pidgin_config_args(x_dimen: str) -> dict[str, dict]:
+    args_dict = get_pidgin_config_jkeys(x_dimen)
+    args_dict.update(get_pidgin_config_jvalues(x_dimen))
     return args_dict
 
 
-def get_pidgin_args_category_mapping() -> dict[str, str]:
+def get_pidgin_args_dimen_mapping() -> dict[str, str]:
     x_dict = {}
-    for pidgin_category in get_pidgin_config_dict().keys():
-        args_set = set(get_pidgin_config_args(pidgin_category))
+    for pidgin_dimen in get_pidgin_config_dict().keys():
+        args_set = set(get_pidgin_config_args(pidgin_dimen))
         for x_arg in args_set:
             if x_dict.get(x_arg) is None:
-                x_dict[x_arg] = {pidgin_category}
+                x_dict[x_arg] = {pidgin_dimen}
             else:
-                x_category_set = x_dict.get(x_arg)
-                x_category_set.add(pidgin_category)
-                x_dict[x_arg] = x_category_set
+                x_dimen_set = x_dict.get(x_arg)
+                x_dimen_set.add(pidgin_dimen)
+                x_dict[x_arg] = x_dimen_set
     return x_dict
 
 
@@ -200,7 +200,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
 
 
 def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
-    """for each pidgin_config category contains the associated columns"""
+    """for each pidgin_config dimen contains the associated columns"""
     return {
         "map_label": {
             "inx_label",

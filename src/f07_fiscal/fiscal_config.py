@@ -92,7 +92,7 @@ def get_fiscal_config_dict() -> dict:
     )
 
 
-def get_fiscal_categorys() -> set[str]:
+def get_fiscal_dimens() -> set[str]:
     return {
         "fiscalunit",
         "fiscal_deal_episode",
@@ -113,23 +113,23 @@ def get_fiscal_config_jvalues(x_cat: str) -> dict:
     return get_from_nested_dict(get_fiscal_config_dict(), jvalues_key_list)
 
 
-def get_fiscal_config_args(x_category: str) -> dict[str, dict]:
-    args_dict = get_fiscal_config_jkeys(x_category)
-    args_dict.update(get_fiscal_config_jvalues(x_category))
+def get_fiscal_config_args(x_dimen: str) -> dict[str, dict]:
+    args_dict = get_fiscal_config_jkeys(x_dimen)
+    args_dict.update(get_fiscal_config_jvalues(x_dimen))
     return args_dict
 
 
-def get_fiscal_args_category_mapping() -> dict[str, str]:
+def get_fiscal_args_dimen_mapping() -> dict[str, str]:
     x_dict = {}
-    for fiscal_category in get_fiscal_config_dict().keys():
-        args_set = set(get_fiscal_config_args(fiscal_category))
+    for fiscal_dimen in get_fiscal_config_dict().keys():
+        args_set = set(get_fiscal_config_args(fiscal_dimen))
         for x_arg in args_set:
             if x_dict.get(x_arg) is None:
-                x_dict[x_arg] = {fiscal_category}
+                x_dict[x_arg] = {fiscal_dimen}
             else:
-                x_category_set = x_dict.get(x_arg)
-                x_category_set.add(fiscal_category)
-                x_dict[x_arg] = x_category_set
+                x_dimen_set = x_dict.get(x_arg)
+                x_dimen_set.add(fiscal_dimen)
+                x_dict[x_arg] = x_dimen_set
     return x_dict
 
 

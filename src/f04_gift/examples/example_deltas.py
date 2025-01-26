@@ -12,9 +12,9 @@ def get_deltaunit_sue_example() -> DeltaUnit:
     pool_atomunit.set_jvalue(pool_attribute, 77)
     sue_deltaunit.set_atomunit(pool_atomunit)
 
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     sue_str = "Sue"
-    sue_atomunit = atomunit_shop(category, atom_delete())
+    sue_atomunit = atomunit_shop(dimen, atom_delete())
     sue_atomunit.set_jkey(acct_name_str(), sue_str)
     sue_deltaunit.set_atomunit(sue_atomunit)
     return sue_deltaunit
@@ -36,9 +36,9 @@ def get_deltaunit_example1() -> DeltaUnit:
     x_atomunit.set_jvalue(x_attribute, 990000)
     sue_deltaunit.set_atomunit(x_atomunit)
 
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     zia_str = "Zia"
-    x_atomunit = atomunit_shop(category, atom_delete())
+    x_atomunit = atomunit_shop(dimen, atom_delete())
     x_atomunit.set_jkey(acct_name_str(), zia_str)
     sue_deltaunit.set_atomunit(x_atomunit)
     return sue_deltaunit

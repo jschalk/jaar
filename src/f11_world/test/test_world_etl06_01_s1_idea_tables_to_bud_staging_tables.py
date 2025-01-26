@@ -5,7 +5,7 @@ from src.f04_gift.atom_config import (
     face_name_str,
     acct_name_str,
     owner_name_str,
-    get_bud_categorys,
+    get_bud_dimens,
     fiscal_title_str,
     credit_belief_str,
     debtit_belief_str,
@@ -20,9 +20,9 @@ from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 
 def get_existing_bud_x_tables(cursor: sqlite3_Connection, ending: str) -> set:
     return {
-        bud_category
-        for bud_category in get_bud_categorys()
-        if db_table_exists(cursor, f"{bud_category}{ending}")
+        bud_dimen
+        for bud_dimen in get_bud_dimens()
+        if db_table_exists(cursor, f"{bud_dimen}{ending}")
     }
 
 
@@ -42,17 +42,17 @@ def test_WorldUnit_idea_staging_to_bud_tables_CreatesBudStagingTables(
         # THEN
         assert len(get_existing_bud_x_tables(cursor, "_staging")) != 0
         assert len(get_existing_bud_x_tables(cursor, "_agg")) != 0
-        bud_count = len(get_bud_categorys())
+        bud_count = len(get_bud_dimens())
         bud_staging_tables = get_existing_bud_x_tables(cursor, "_staging")
         bud_agg_tables = get_existing_bud_x_tables(cursor, "_staging")
-        print(f"{get_bud_categorys()=}")
+        print(f"{get_bud_dimens()=}")
         print(f"{bud_staging_tables=}")
         print(f"{bud_agg_tables=}")
         assert len(get_existing_bud_x_tables(cursor, "_staging")) == bud_count
         assert len(get_existing_bud_x_tables(cursor, "_agg")) == bud_count
 
 
-def test_WorldUnit_idea_staging_to_bud_tables_Bud_category_idea_PopulatesFiscalStagingTables(
+def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

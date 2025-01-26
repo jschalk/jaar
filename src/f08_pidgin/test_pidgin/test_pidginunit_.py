@@ -139,7 +139,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert atom_args.union(fiscal_args) != pidgin_args
     assert atom_args.union(fiscal_args).union({"face_name"}) == pidgin_args
     assert check_class_types_are_correct()
-    # assert pidgin_args_class_types.keys() == get_atom_args_category_mapping().keys()
+    # assert pidgin_args_class_types.keys() == get_atom_args_dimen_mapping().keys()
     # assert all_atom_args_class_types_are_correct(x_class_types)
 
 
