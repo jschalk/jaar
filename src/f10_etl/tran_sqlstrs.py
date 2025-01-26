@@ -128,7 +128,7 @@ HAVING MIN(pick) != MAX(pick)
 BUDHEAL_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fiscal_title, owner_name, road, healer_name
 FROM bud_item_healerlink_staging
 GROUP BY face_name, event_int, fiscal_title, owner_name, road, healer_name
-None
+
 """
 BUDPREM_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fiscal_title, owner_name, road, base, need
 FROM bud_item_reason_premiseunit_staging
@@ -145,7 +145,7 @@ HAVING MIN(base_item_active_requisite) != MAX(base_item_active_requisite)
 BUDTEAM_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fiscal_title, owner_name, road, team_tag
 FROM bud_item_teamlink_staging
 GROUP BY face_name, event_int, fiscal_title, owner_name, road, team_tag
-None
+
 """
 BUDITEM_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fiscal_title, owner_name, parent_road, item_title
 FROM bud_itemunit_staging
@@ -318,7 +318,7 @@ BUDHEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT face_name, event_int, fiscal_title, owner_name, road, healer_name
 FROM bud_item_healerlink_staging
 GROUP BY face_name, event_int, fiscal_title, owner_name, road, healer_name
-None
+
 )
 UPDATE bud_item_healerlink_staging
 SET error_message = 'Inconsistent fiscal data'
@@ -372,7 +372,7 @@ BUDTEAM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT face_name, event_int, fiscal_title, owner_name, road, team_tag
 FROM bud_item_teamlink_staging
 GROUP BY face_name, event_int, fiscal_title, owner_name, road, team_tag
-None
+
 )
 UPDATE bud_item_teamlink_staging
 SET error_message = 'Inconsistent fiscal data'

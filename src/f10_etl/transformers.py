@@ -36,6 +36,8 @@ from src.f10_etl.tran_sqlstrs import (
     create_bud_tables,
     get_fiscal_update_inconsist_error_message_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
+    get_bud_update_inconsist_error_message_sqlstrs,
+    # get_bud_insert_agg_from_staging_sqlstrs,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
@@ -747,7 +749,8 @@ def etl_idea_staging_to_fiscal_tables(conn_or_cursor):
 def etl_idea_staging_to_bud_tables(conn_or_cursor):
     create_bud_tables(conn_or_cursor)
     idea_staging_tables2bud_staging_tables(conn_or_cursor)
-    # fiscal_staging_tables2bud_agg_tables(conn_or_cursor)
+    set_bud_staging_error_message(conn_or_cursor)
+    # bud_staging_tables2bud_agg_tables(conn_or_cursor)
 
 
 def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection):
@@ -788,6 +791,11 @@ def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):
     for (
         set_error_sqlstr
     ) in get_fiscal_update_inconsist_error_message_sqlstrs().values():
+        conn_or_cursor.execute(set_error_sqlstr)
+
+
+def set_bud_staging_error_message(conn_or_cursor: sqlite3_Connection):
+    for set_error_sqlstr in get_bud_update_inconsist_error_message_sqlstrs().values():
         conn_or_cursor.execute(set_error_sqlstr)
 
 

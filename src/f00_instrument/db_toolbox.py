@@ -339,6 +339,8 @@ def create_select_inconsistency_query(
                 having_str += f"\n    OR MIN({x_column}) != MAX({x_column})"
             else:
                 having_str = f"HAVING MIN({x_column}) != MAX({x_column})"
+    if not having_str:
+        having_str = ""
     focus_columns_list = []
     focus_columns_list.extend(
         t_column
