@@ -591,7 +591,7 @@ def test_idea_into_dimen_ReturnsObj_ForAll_idea_numbersAndAll_dimens():
         idea_stage2dimen_count = 0
         idea_cat_combo_checked_count = 0
         sorted_idea_numbers = sorted(get_idea_numbers())
-        idea_stagable_dimens = {i_num: [] for i_num in sorted_idea_numbers}
+        expected_idea_stagable_dimens = {i_num: [] for i_num in sorted_idea_numbers}
         for x_dimen in sorted(idea_config):
             cat_config = idea_config.get(x_dimen)
             cat_key_columns = set(cat_config.get("jkeys").keys())
@@ -606,7 +606,7 @@ def test_idea_into_dimen_ReturnsObj_ForAll_idea_numbersAndAll_dimens():
 
                 idea_cat_combo_checked_count += 1
                 if is_stageable(cursor, src_tablename, cat_key_columns):
-                    idea_stagable_dimens.get(idea_number).append(x_dimen)
+                    expected_idea_stagable_dimens.get(idea_number).append(x_dimen)
                     idea_stage2dimen_count += 1
                     src_cols_set = set(src_columns)
                     existing_value_col = src_cols_set.intersection(cat_value_columns)
@@ -625,8 +625,8 @@ def test_idea_into_dimen_ReturnsObj_ForAll_idea_numbersAndAll_dimens():
                     # check sql syntax is correct?
                     assert generated_sqlstr != ""
 
-    idea_stageable_dimen_list = sorted(list(idea_stagable_dimens))
+    idea_stageable_dimen_list = sorted(list(expected_idea_stagable_dimens))
     # print(f"{idea_stagable_dimens=}")
-    assert idea_cat_combo_checked_count == 464
-    assert idea_stage2dimen_count == 77
-    assert IDEA_STAGEABLE_DIMENS == idea_stagable_dimens
+    assert idea_cat_combo_checked_count == 480
+    assert idea_stage2dimen_count == 80
+    assert IDEA_STAGEABLE_DIMENS == expected_idea_stagable_dimens

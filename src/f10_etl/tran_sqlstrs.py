@@ -731,6 +731,7 @@ IDEA_STAGEABLE_DIMENS = {
     "br00043": [],
     "br00044": [],
     "br00045": [],
+    "br00050": ["bud_acctunit", "budunit", "fiscalunit"],
     "br00113": ["bud_acctunit", "budunit", "fiscalunit"],
     "br00115": ["bud_acctunit", "budunit", "fiscalunit"],
     "br00116": ["bud_acctunit", "budunit", "fiscalunit"],

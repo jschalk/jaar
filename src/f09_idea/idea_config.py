@@ -337,10 +337,6 @@ def idea_format_00019_itemunit_v0_0_0() -> str:
     return "idea_format_00019_itemunit_v0_0_0"
 
 
-def idea_format_00036_problem_healer_v0_0_0() -> str:
-    return "idea_format_00036_problem_healer_v0_0_0"
-
-
 # def idea_format_00020_bud_acct_membership_v0_0_0()-> str: return "idea_format_00020_bud_acct_membership_v0_0_0"
 # def idea_format_00021_bud_acctunit_v0_0_0()-> str: return "idea_format_00021_bud_acctunit_v0_0_0"
 # def idea_format_00022_bud_item_awardlink_v0_0_0()-> str: return "idea_format_00022_bud_item_awardlink_v0_0_0"
@@ -393,6 +389,10 @@ def idea_format_00029_budunit_v0_0_0() -> str:
     return "idea_format_00029_budunit_v0_0_0"
 
 
+def idea_format_00036_problem_healer_v0_0_0() -> str:
+    return "idea_format_00036_problem_healer_v0_0_0"
+
+
 def idea_format_00040_map_otx2inx_v0_0_0() -> str:
     return "idea_format_00040_map_otx2inx_v0_0_0"
 
@@ -411,6 +411,22 @@ def idea_format_00044_map_title_v0_0_0() -> str:
 
 def idea_format_00045_map_road_v0_0_0() -> str:
     return "idea_format_00045_map_road_v0_0_0"
+
+
+# def idea_format_00050_delete_bud_acct_membership_v0_0_0()-> str: return "idea_format_00050_delete_bud_acct_membership_v0_0_0"
+# def idea_format_00051_delete_bud_acctunit_v0_0_0()-> str: return "idea_format_00051_delete_bud_acctunit_v0_0_0"
+# def idea_format_00052_delete_bud_item_awardlink_v0_0_0()-> str: return "idea_format_00052_delete_bud_item_awardlink_v0_0_0"
+# def idea_format_00053_delete_bud_item_factunit_v0_0_0()-> str: return "idea_format_00053_delete_bud_item_factunit_v0_0_0"
+# def idea_format_00054_delete_bud_item_teamlink_v0_0_0()-> str: return "idea_format_00054_delete_bud_item_teamlink_v0_0_0"
+# def idea_format_00055_delete_bud_item_healerlink_v0_0_0()-> str: return "idea_format_00055_delete_bud_item_healerlink_v0_0_0"
+# def idea_format_00056_delete_bud_item_reason_premiseunit_v0_0_0()-> str: return "idea_format_00056_delete_bud_item_reason_premiseunit_v0_0_0"
+# def idea_format_00057_delete_bud_item_reasonunit_v0_0_0()-> str: return "idea_format_00057_delete_bud_item_reasonunit_v0_0_0"
+# def idea_format_00058_delete_bud_itemunit_v0_0_0()-> str: return "idea_format_00058_delete_bud_itemunit_v0_0_0"
+# def idea_format_00059_delete_budunit_v0_0_0()-> str: return "idea_format_00059_delete_budunit_v0_0_0"
+
+
+def idea_format_00050_delete_bud_acct_membership_v0_0_0() -> str:
+    return "idea_format_00050_delete_bud_acct_membership_v0_0_0"
 
 
 def idea_format_00113_acct_map1_v0_0_0() -> str:
@@ -456,6 +472,16 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00043_map_name_v0_0_0(),
         idea_format_00044_map_title_v0_0_0(),
         idea_format_00045_map_road_v0_0_0(),
+        idea_format_00050_delete_bud_acct_membership_v0_0_0(),
+        # idea_format_00051_delete_bud_acctunit_v0_0_0(),
+        # idea_format_00052_delete_bud_item_awardlink_v0_0_0(),
+        # idea_format_00053_delete_bud_item_factunit_v0_0_0(),
+        # idea_format_00054_delete_bud_item_teamlink_v0_0_0(),
+        # idea_format_00055_delete_bud_item_healerlink_v0_0_0(),
+        # idea_format_00056_delete_bud_item_reason_premiseunit_v0_0_0(),
+        # idea_format_00057_delete_bud_item_reasonunit_v0_0_0(),
+        # idea_format_00058_delete_bud_itemunit_v0_0_0(),
+        # idea_format_00059_delete_budunit_v0_0_0(),
         idea_format_00113_acct_map1_v0_0_0(),
         idea_format_00115_group_map1_v0_0_0(),
         idea_format_00116_title_map1_v0_0_0(),
@@ -490,6 +516,16 @@ def get_idea_numbers() -> set[str]:
         "br00043",
         "br00044",
         "br00045",
+        "br00050",
+        # "br00051",
+        # "br00052",
+        # "br00053",
+        # "br00054",
+        # "br00055",
+        # "br00056",
+        # "br00057",
+        # "br00058",
+        # "br00059",
         "br00113",
         "br00115",
         "br00116",
@@ -531,6 +567,16 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word": idea_format_00043_map_name_v0_0_0(),
         "otx_title,inx_title,otx_bridge,inx_bridge,unknown_word": idea_format_00044_map_title_v0_0_0(),
         "otx_road,inx_road,otx_bridge,inx_bridge,unknown_word": idea_format_00045_map_road_v0_0_0(),
+        "fiscal_title,owner_name,acct_name,group_label_DELETE": idea_format_00050_delete_bud_acct_membership_v0_0_0(),
+        # "fiscal_title,owner_name,acct_name,credit_belief,debtit_belief": idea_format_00021_bud_acctunit_v0_0_0(),
+        # "fiscal_title,owner_name,road,awardee_tag,give_force,take_force": idea_format_00022_bud_item_awardlink_v0_0_0(),
+        # "fiscal_title,owner_name,road,base,pick,fopen,fnigh": idea_format_00023_bud_item_factunit_v0_0_0(),
+        # "fiscal_title,owner_name,road,team_tag": idea_format_00024_bud_item_teamlink_v0_0_0(),
+        # "fiscal_title,owner_name,road,healer_name": idea_format_00025_bud_item_healerlink_v0_0_0(),
+        # "fiscal_title,owner_name,road,base,need,nigh,open,divisor": idea_format_00026_bud_item_reason_premiseunit_v0_0_0(),
+        # "fiscal_title,owner_name,road,base,base_item_active_requisite": idea_format_00027_bud_item_reasonunit_v0_0_0(),
+        # "fiscal_title,owner_name,parent_road,item_title,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": idea_format_00028_bud_itemunit_v0_0_0(),
+        # "fiscal_title,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,deal_time_int,tally,fund_coin,penny,respect_bit": idea_format_00029_budunit_v0_0_0(),
         "fiscal_title,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
         "fiscal_title,owner_name,acct_name,otx_label,inx_label": idea_format_00115_group_map1_v0_0_0(),
         "fiscal_title,owner_name,acct_name,otx_title,inx_title": idea_format_00116_title_map1_v0_0_0(),
@@ -569,7 +615,7 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00116",
             "br00117",
         ],
-        "bud_acct_membership": ["br00012", "br00020"],
+        "bud_acct_membership": ["br00012", "br00020", "br00050"],
         "bud_itemunit": ["br00013", "br00019", "br00028", "br00036"],
         "bud_item_awardlink": ["br00022"],
         "bud_item_factunit": ["br00023"],

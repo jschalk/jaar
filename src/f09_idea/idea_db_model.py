@@ -307,6 +307,16 @@ class br00045AbstractTable(Base):
     unknown_word = Column(String)
 
 
+class br00050AbstractTable(Base):
+    __abstract__ = True
+    face_name = Column(String, primary_key=True)
+    event_int = Column(Integer, primary_key=True)
+    acct_name = Column(String)
+    fiscal_title = Column(String)
+    group_label_DELETE = Column(String)
+    owner_name = Column(String)
+
+
 class br00113AbstractTable(Base):
     __abstract__ = True
     face_name = Column(String, primary_key=True)
@@ -449,6 +459,10 @@ class br00044HoldTable(br00044AbstractTable):
 
 class br00045HoldTable(br00045AbstractTable):
     __tablename__ = "br00045_hold"
+
+
+class br00050HoldTable(br00050AbstractTable):
+    __tablename__ = "br00050_hold"
 
 
 class br00113HoldTable(br00113AbstractTable):
@@ -642,6 +656,13 @@ class br00045StageTable(br00045AbstractTable):
     src_sheet = Column(String)
 
 
+class br00050StageTable(br00050AbstractTable):
+    __tablename__ = "br00050_stage"
+    src_type = Column(String)
+    src_path = Column(String)
+    src_sheet = Column(String)
+
+
 class br00113StageTable(br00113AbstractTable):
     __tablename__ = "br00113_stage"
     src_type = Column(String)
@@ -697,6 +718,7 @@ def get_idea_holdtables() -> dict[str, DeclarativeBase]:
         "br00043": br00043HoldTable,
         "br00044": br00044HoldTable,
         "br00045": br00045HoldTable,
+        "br00050": br00050HoldTable,
         "br00113": br00113HoldTable,
         "br00115": br00115HoldTable,
         "br00116": br00116HoldTable,
@@ -731,6 +753,7 @@ def get_idea_stagetables() -> dict[str, DeclarativeBase]:
         "br00043": br00043StageTable,
         "br00044": br00044StageTable,
         "br00045": br00045StageTable,
+        "br00050": br00050StageTable,
         "br00113": br00113StageTable,
         "br00115": br00115StageTable,
         "br00116": br00116StageTable,
