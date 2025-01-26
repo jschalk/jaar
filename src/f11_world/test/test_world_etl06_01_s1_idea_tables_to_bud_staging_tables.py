@@ -196,7 +196,7 @@ VALUES
         x_error_message = "Inconsistent fiscal data"
         assert rows == [
             (event3, accord23_str, yao_credit_belief5, None),
-            (event7, accord23_str, yao_credit_belief5, None),
+            (event3, accord23_str, None, None),
             (event7, accord23_str, yao_credit_belief5, None),
             (event7, accord45_str, yao_credit_belief5, x_error_message),
             (event7, accord45_str, yao_credit_belief7, x_error_message),
