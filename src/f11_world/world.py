@@ -34,14 +34,13 @@ from src.f10_etl.transformers import (
     etl_bow_face_ideas_to_bow_event_otx_ideas,
     etl_bow_event_ideas_to_inx_events,
     etl_bow_inx_event_ideas_to_aft_faces,
-    etl_aft_face_ideas_to_aft_event_ideas,
-    etl_aft_event_ideas_to_fiscal_ideas,
     etl_aft_face_ideas_to_csv_files,
-    etl_aft_face_csv_files_to_fiscal_db,
+    etl_aft_face_csv_files2idea_staging_tables,
     etl_idea_staging_to_fiscal_tables,
     etl_fiscal_staging_tables_to_fiscal_csvs,
     etl_fiscal_agg_tables_to_fiscal_csvs,
     etl_fiscal_csvs_to_jsons,
+    etl_idea_staging_to_bud_tables,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -166,24 +165,23 @@ class WorldUnit:
     def bow_inx_event_ideas_to_aft_faces(self):
         etl_bow_inx_event_ideas_to_aft_faces(self._faces_bow_dir, self._faces_aft_dir)
 
-    def aft_face_ideas_to_aft_event_ideas(self):
-        etl_aft_face_ideas_to_aft_event_ideas(self._faces_aft_dir)
-
-    def aft_event_ideas_to_fiscal_ideas(self):
-        etl_aft_event_ideas_to_fiscal_ideas(self._faces_aft_dir)
-
     def aft_face_ideas_to_csv_files(self):
         etl_aft_face_ideas_to_csv_files(self._faces_aft_dir)
 
-    def aft_face_csv_files_to_fiscal_db(self, fiscal_db_conn: sqlite3_Connection):
-        etl_aft_face_csv_files_to_fiscal_db(fiscal_db_conn, self._faces_aft_dir)
+    def etl_aft_face_csv_files2idea_staging_tables(
+        self, conn_or_cursor: sqlite3_Connection
+    ):
+        etl_aft_face_csv_files2idea_staging_tables(conn_or_cursor, self._faces_aft_dir)
 
-    def idea_staging_to_fiscal_tables(self, fiscal_db_conn: sqlite3_Connection):
-        etl_idea_staging_to_fiscal_tables(fiscal_db_conn)
+    def idea_staging_to_fiscal_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_idea_staging_to_fiscal_tables(conn_or_cursor)
 
-    def aft_faces_ideas_to_fiscal_mstr_csvs(self, fiscal_db_conn: sqlite3_Connection):
-        etl_fiscal_staging_tables_to_fiscal_csvs(fiscal_db_conn, self._fiscal_mstr_dir)
-        etl_fiscal_agg_tables_to_fiscal_csvs(fiscal_db_conn, self._fiscal_mstr_dir)
+    def idea_staging_to_bud_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_idea_staging_to_bud_tables(conn_or_cursor)
+
+    def aft_faces_ideas_to_fiscal_mstr_csvs(self, conn_or_cursor: sqlite3_Connection):
+        etl_fiscal_staging_tables_to_fiscal_csvs(conn_or_cursor, self._fiscal_mstr_dir)
+        etl_fiscal_agg_tables_to_fiscal_csvs(conn_or_cursor, self._fiscal_mstr_dir)
 
     def fiscal_csvs_to_jsons(self):
         etl_fiscal_csvs_to_jsons(self._fiscal_mstr_dir)

@@ -617,6 +617,28 @@ HAVING MIN(age) != MAX(age)
         assert gen_sqlstr == expected_sqlstr
 
 
+def test_create_select_inconsistency_query_ReturnsObj_Scenario2():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        x_tablename = "dark_side"
+        x_columns = ["id", "name", "age", "email", "hair"]
+        create_table_from_columns(cursor, x_tablename, x_columns, {})
+
+        # WHEN
+        gen_sqlstr = create_select_inconsistency_query(
+            cursor, x_tablename, {"id", "name", "age", "email", "hair"}, {}
+        )
+
+        # THEN
+        expected_sqlstr = """SELECT id, name, age, email, hair
+FROM dark_side
+GROUP BY id, name, age, email, hair
+
+"""
+        assert gen_sqlstr == expected_sqlstr
+
+
 def test_create_update_inconsistency_error_query_ReturnsObj_Scenario0():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:

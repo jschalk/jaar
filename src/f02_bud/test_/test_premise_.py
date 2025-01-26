@@ -213,6 +213,18 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolFor_is_r
     yr_fact = factheir_shop(base=yr_road, fopen=0, fnigh=3, pick=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
+    yr_fact = factheir_shop(base=yr_road, fopen=0, fnigh=0, pick=yr_road)
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
+    yr_fact = factheir_shop(base=yr_road, fopen=3, fnigh=3, pick=yr_road)
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact)
+    yr_fact = factheir_shop(base=yr_road, fopen=13, fnigh=13, pick=yr_road)
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
+    yr_fact = factheir_shop(base=yr_road, fopen=17, fnigh=17, pick=yr_road)
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
+
+    yr_fact = factheir_shop(base=yr_road, fopen=20, fnigh=17, pick=yr_road)
+    assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
+
 
 def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegregatePremise():
     # ESTABLISH

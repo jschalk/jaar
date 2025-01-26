@@ -50,7 +50,7 @@ from src.f10_etl.fiscal_etl_tool import (
 )
 from src.f10_etl.tran_sqlstrs import get_fiscal_inconsistency_sqlstrs
 from src.f10_etl.transformers import (
-    etl_aft_face_csv_files_to_fiscal_db,
+    etl_aft_face_csv_files2idea_staging_tables,
     create_fiscal_tables,
     idea_staging_tables2fiscal_staging_tables,
     etl_fiscal_staging_tables_to_fiscal_csvs,
@@ -86,7 +86,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario0_From_br00011_IdeaFi
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
-        etl_aft_face_csv_files_to_fiscal_db(cursor, aft_faces_dir)
+        etl_aft_face_csv_files2idea_staging_tables(cursor, aft_faces_dir)
         create_fiscal_tables(cursor)
         x_fis = FiscalPrimeObjsRef()
         assert get_row_count(cursor, x_fis.unit_stage_tablename) == 0

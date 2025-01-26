@@ -453,7 +453,7 @@ def test_HubUnit_create_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     assert sue_hubunit.gift_file_exists(three_int) is False
 
     # WHEN
-    before_bud = sue_hubunit.default_voice_bud()
+    before_bud = sue_hubunit.default_soul_bud()
     bob_str = "Bob"
     after_bud = copy_deepcopy(before_bud)
     after_bud.add_acctunit(bob_str)
@@ -467,15 +467,15 @@ def test_HubUnit_merge_any_gifts_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
-    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
-    voice_bud = sue_hubunit.get_voice_bud()
-    voice_bud.last_gift_id is None
+    sue_hubunit.save_soul_bud(sue_hubunit.default_soul_bud())
+    soul_bud = sue_hubunit.get_soul_bud()
+    soul_bud.last_gift_id is None
 
     # WHEN
-    new_bud = sue_hubunit._merge_any_gifts(voice_bud)
+    new_bud = sue_hubunit._merge_any_gifts(soul_bud)
 
     # THEN
-    assert new_bud == voice_bud
+    assert new_bud == soul_bud
 
 
 def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_1atom(
@@ -485,21 +485,21 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_1atom(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     sue_hubunit.save_gift_file(sue_1atomunits_giftunit())
-    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
-    voice_bud = sue_hubunit.get_voice_bud()
-    print(f"{voice_bud.fiscal_title=}")
+    sue_hubunit.save_soul_bud(sue_hubunit.default_soul_bud())
+    soul_bud = sue_hubunit.get_soul_bud()
+    print(f"{soul_bud.fiscal_title=}")
     print(f"{sue_hubunit.fiscal_title=}")
     sports_str = "sports"
-    sports_road = voice_bud.make_l1_road(sports_str)
+    sports_road = soul_bud.make_l1_road(sports_str)
     knee_str = "knee"
-    knee_road = voice_bud.make_road(sports_road, knee_str)
-    assert voice_bud.item_exists(sports_road) is False
+    knee_road = soul_bud.make_road(sports_road, knee_str)
+    assert soul_bud.item_exists(sports_road) is False
 
     # WHEN
-    new_bud = sue_hubunit._merge_any_gifts(voice_bud)
+    new_bud = sue_hubunit._merge_any_gifts(soul_bud)
 
     # THEN
-    assert new_bud != voice_bud
+    assert new_bud != soul_bud
     assert new_bud.item_exists(sports_road)
 
 
@@ -510,20 +510,20 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_2atoms(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
-    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
-    voice_bud = sue_hubunit.get_voice_bud()
-    print(f"{voice_bud.fiscal_title=}")
+    sue_hubunit.save_soul_bud(sue_hubunit.default_soul_bud())
+    soul_bud = sue_hubunit.get_soul_bud()
+    print(f"{soul_bud.fiscal_title=}")
     sports_str = "sports"
-    sports_road = voice_bud.make_l1_road(sports_str)
+    sports_road = soul_bud.make_l1_road(sports_str)
     knee_str = "knee"
-    knee_road = voice_bud.make_road(sports_road, knee_str)
-    assert voice_bud.item_exists(sports_road) is False
-    assert voice_bud.item_exists(knee_road) is False
+    knee_road = soul_bud.make_road(sports_road, knee_str)
+    assert soul_bud.item_exists(sports_road) is False
+    assert soul_bud.item_exists(knee_road) is False
 
     # WHEN
-    new_bud = sue_hubunit._merge_any_gifts(voice_bud)
+    new_bud = sue_hubunit._merge_any_gifts(soul_bud)
 
     # THEN
-    assert new_bud != voice_bud
+    assert new_bud != soul_bud
     assert new_bud.item_exists(sports_road)
     assert new_bud.item_exists(knee_road)

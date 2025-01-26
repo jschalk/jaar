@@ -5,6 +5,8 @@ from src.f00_instrument.db_toolbox import (
     is_stageable,
 )
 from src.f01_road.road import FaceName, EventInt
+from src.f04_gift.atom_config import get_bud_categorys
+from src.f07_fiscal.fiscal_config import get_fiscal_categorys
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_idea.idea_config import (
@@ -31,19 +33,14 @@ from src.f09_idea.idea_db_tool import (
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
     create_fiscal_tables,
+    create_bud_tables,
     get_fiscal_update_inconsist_error_message_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
+    get_bud_update_inconsist_error_message_sqlstrs,
+    # get_bud_insert_agg_from_staging_sqlstrs,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
-from src.f10_etl.fiscal_etl_tool import (
-    create_fiscalunit_jsons_from_prime_files,
-    get_fiscalunit_sorted_args,
-    get_fiscaldeal_sorted_args,
-    get_fiscalcash_sorted_args,
-    get_fiscalhour_sorted_args,
-    get_fiscalmont_sorted_args,
-    get_fiscalweek_sorted_args,
-)
+from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
@@ -152,9 +149,9 @@ class OceanToboatTransformer:
         return df
 
     def _save_to_boat_staging(self, idea_number: str, dfs: list):
-        final_df = pandas_concat(dfs)
+        voice_df = pandas_concat(dfs)
         boat_path = create_path(self.boat_dir, f"{idea_number}.xlsx")
-        upsert_sheet(boat_path, "boat_staging", final_df)
+        upsert_sheet(boat_path, "boat_staging", voice_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -721,37 +718,6 @@ def etl_bow_inx_event_ideas_to_aft_faces(faces_bow_dir: str, faces_aft_dir: str)
                 )
 
 
-def etl_aft_face_ideas_to_aft_event_ideas(faces_aft_dir: str):
-    for face_name_dir in get_level1_dirs(faces_aft_dir):
-        face_dir = create_path(faces_aft_dir, face_name_dir)
-        for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
-            face_idea_path = create_path(face_dir, face_br_ref.file_name)
-            split_excel_into_dirs(
-                input_file=face_idea_path,
-                output_dir=face_dir,
-                column_name="event_int",
-                file_name=face_br_ref.idea_number,
-                sheet_name="inx",
-            )
-
-
-def etl_aft_event_ideas_to_fiscal_ideas(faces_aft_dir: str):
-    for face_name in get_level1_dirs(faces_aft_dir):
-        face_dir = create_path(faces_aft_dir, face_name)
-        for event_int in get_level1_dirs(face_dir):
-            event_int = int(event_int)
-            event_dir = create_path(face_dir, event_int)
-            for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
-                event_idea_path = create_path(event_dir, event_br_ref.file_name)
-                split_excel_into_dirs(
-                    input_file=event_idea_path,
-                    output_dir=event_dir,
-                    column_name="fiscal_title",
-                    file_name=event_br_ref.idea_number,
-                    sheet_name="inx",
-                )
-
-
 def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
     for face_name in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_name)
@@ -761,7 +727,7 @@ def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 
 
-def etl_aft_face_csv_files_to_fiscal_db(
+def etl_aft_face_csv_files2idea_staging_tables(
     conn_or_cursor: sqlite3_Connection, faces_aft_dir: str
 ):
     for face_name in get_level1_dirs(faces_aft_dir):
@@ -776,23 +742,42 @@ def etl_aft_face_csv_files_to_fiscal_db(
 def etl_idea_staging_to_fiscal_tables(conn_or_cursor):
     create_fiscal_tables(conn_or_cursor)
     idea_staging_tables2fiscal_staging_tables(conn_or_cursor)
+    set_fiscal_staging_error_message(conn_or_cursor)
     fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor)
 
 
+def etl_idea_staging_to_bud_tables(conn_or_cursor):
+    create_bud_tables(conn_or_cursor)
+    idea_staging_tables2bud_staging_tables(conn_or_cursor)
+    set_bud_staging_error_message(conn_or_cursor)
+    # bud_staging_tables2bud_agg_tables(conn_or_cursor)
+
+
 def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection):
-    unit_cat = "fiscalunit"
-    deal_cat = "fiscal_deal_episode"
-    cash_cat = "fiscal_cashbook"
-    hour_cat = "fiscal_timeline_hour"
-    mont_cat = "fiscal_timeline_month"
-    week_cat = "fiscal_timeline_weekday"
-    fiscal_cats = {unit_cat, deal_cat, cash_cat, hour_cat, mont_cat, week_cat}
+    fiscal_cats = get_fiscal_categorys()
     idea_config_dict = get_idea_config_dict()
 
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
         if db_table_exists(conn_or_cursor, idea_staging):
             for x_cat in fiscal_cats:
+                cat_config = idea_config_dict.get(x_cat)
+                cat_jkeys = set(cat_config.get("jkeys").keys())
+                if is_stageable(conn_or_cursor, idea_staging, cat_jkeys):
+                    gen_sqlstr = get_idea_into_category_staging_query(
+                        conn_or_cursor, idea_number, x_cat, cat_jkeys
+                    )
+                    conn_or_cursor.execute(gen_sqlstr)
+
+
+def idea_staging_tables2bud_staging_tables(conn_or_cursor: sqlite3_Connection):
+    bud_cats = get_bud_categorys()
+    idea_config_dict = get_idea_config_dict()
+
+    for idea_number in get_idea_numbers():
+        idea_staging = f"{idea_number}_staging"
+        if db_table_exists(conn_or_cursor, idea_staging):
+            for x_cat in bud_cats:
                 cat_config = idea_config_dict.get(x_cat)
                 cat_jkeys = set(cat_config.get("jkeys").keys())
                 if is_stageable(conn_or_cursor, idea_staging, cat_jkeys):
@@ -809,80 +794,34 @@ def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):
         conn_or_cursor.execute(set_error_sqlstr)
 
 
+def set_bud_staging_error_message(conn_or_cursor: sqlite3_Connection):
+    for set_error_sqlstr in get_bud_update_inconsist_error_message_sqlstrs().values():
+        conn_or_cursor.execute(set_error_sqlstr)
+
+
 def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
     for x_sqlstr in get_fiscal_insert_agg_from_staging_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)
 
 
 def etl_fiscal_staging_tables_to_fiscal_csvs(
-    fiscal_db_conn: sqlite3_Connection, fiscal_mstr_dir: str
+    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
-    fiscalunit_str = "fiscalunit"
-    fiscaldeal_str = "fiscal_deal_episode"
-    fiscalcash_str = "fiscal_cashbook"
-    fiscalhour_str = "fiscal_timeline_hour"
-    fiscalmont_str = "fiscal_timeline_month"
-    fiscalweek_str = "fiscal_timeline_weekday"
-    fiscalunit_staging_tablename = f"{fiscalunit_str}_staging"
-    fiscaldeal_staging_tablename = f"{fiscaldeal_str}_staging"
-    fiscalcash_staging_tablename = f"{fiscalcash_str}_staging"
-    fiscalhour_staging_tablename = f"{fiscalhour_str}_staging"
-    fiscalmont_staging_tablename = f"{fiscalmont_str}_staging"
-    fiscalweek_staging_tablename = f"{fiscalweek_str}_staging"
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalunit_staging_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscaldeal_staging_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalcash_staging_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalhour_staging_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalmont_staging_tablename)
-    save_table_to_csv(fiscal_db_conn, fiscal_mstr_dir, fiscalweek_staging_tablename)
+    for ficsal_category in get_fiscal_categorys():
+        staging_tablename = f"{ficsal_category}_staging"
+        save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, staging_tablename)
 
 
 def etl_fiscal_agg_tables_to_fiscal_csvs(
     conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
-    fiscalunit_str = "fiscalunit"
-    fiscaldeal_str = "fiscal_deal_episode"
-    fiscalcash_str = "fiscal_cashbook"
-    fiscalhour_str = "fiscal_timeline_hour"
-    fiscalmont_str = "fiscal_timeline_month"
-    fiscalweek_str = "fiscal_timeline_weekday"
-    fiscalunit_agg_tablename = f"{fiscalunit_str}_agg"
-    fiscaldeal_agg_tablename = f"{fiscaldeal_str}_agg"
-    fiscalcash_agg_tablename = f"{fiscalcash_str}_agg"
-    fiscalhour_agg_tablename = f"{fiscalhour_str}_agg"
-    fiscalmont_agg_tablename = f"{fiscalmont_str}_agg"
-    fiscalweek_agg_tablename = f"{fiscalweek_str}_agg"
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalunit_agg_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscaldeal_agg_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalcash_agg_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalhour_agg_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalmont_agg_tablename)
-    save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, fiscalweek_agg_tablename)
+    for ficsal_category in get_fiscal_categorys():
+        save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, f"{ficsal_category}_agg")
 
 
 def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
-    fiscalunit_str = "fiscalunit"
-    fiscaldeal_str = "fiscal_deal_episode"
-    fiscalcash_str = "fiscal_cashbook"
-    fiscalhour_str = "fiscal_timeline_hour"
-    fiscalmont_str = "fiscal_timeline_month"
-    fiscalweek_str = "fiscal_timeline_weekday"
-    fiscalunit_excel_path = create_path(fiscal_mstr_dir, f"{fiscalunit_str}.xlsx")
-    fiscaldeal_excel_path = create_path(fiscal_mstr_dir, f"{fiscaldeal_str}.xlsx")
-    fiscalcash_excel_path = create_path(fiscal_mstr_dir, f"{fiscalcash_str}.xlsx")
-    fiscalhour_excel_path = create_path(fiscal_mstr_dir, f"{fiscalhour_str}.xlsx")
-    fiscalmont_excel_path = create_path(fiscal_mstr_dir, f"{fiscalmont_str}.xlsx")
-    fiscalweek_excel_path = create_path(fiscal_mstr_dir, f"{fiscalweek_str}.xlsx")
-    fiscalunit_df = open_csv(fiscal_mstr_dir, f"{fiscalunit_str}_agg.csv")
-    fiscaldeal_df = open_csv(fiscal_mstr_dir, f"{fiscaldeal_str}_agg.csv")
-    fiscalcash_df = open_csv(fiscal_mstr_dir, f"{fiscalcash_str}_agg.csv")
-    fiscalhour_df = open_csv(fiscal_mstr_dir, f"{fiscalhour_str}_agg.csv")
-    fiscalmont_df = open_csv(fiscal_mstr_dir, f"{fiscalmont_str}_agg.csv")
-    fiscalweek_df = open_csv(fiscal_mstr_dir, f"{fiscalweek_str}_agg.csv")
-    upsert_sheet(fiscalunit_excel_path, "agg", fiscalunit_df)
-    upsert_sheet(fiscaldeal_excel_path, "agg", fiscaldeal_df)
-    upsert_sheet(fiscalcash_excel_path, "agg", fiscalcash_df)
-    upsert_sheet(fiscalhour_excel_path, "agg", fiscalhour_df)
-    upsert_sheet(fiscalmont_excel_path, "agg", fiscalmont_df)
-    upsert_sheet(fiscalweek_excel_path, "agg", fiscalweek_df)
+    for ficsal_category in get_fiscal_categorys():
+        x_excel_path = create_path(fiscal_mstr_dir, f"{ficsal_category}.xlsx")
+        cat_df = open_csv(fiscal_mstr_dir, f"{ficsal_category}_agg.csv")
+        upsert_sheet(x_excel_path, "agg", cat_df)
     create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)

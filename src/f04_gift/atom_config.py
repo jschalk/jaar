@@ -467,12 +467,23 @@ def save_atom_config_file(atom_config_dict):
     save_file(config_file_dir(), get_atom_config_file_name(), x_file_str)
 
 
-def get_atom_categorys() -> set:
-    return set(get_atom_config_dict().keys())
+def get_bud_categorys() -> set:
+    return {
+        "budunit",
+        "bud_acctunit",
+        "bud_acct_membership",
+        "bud_itemunit",
+        "bud_item_awardlink",
+        "bud_item_reasonunit",
+        "bud_item_reason_premiseunit",
+        "bud_item_teamlink",
+        "bud_item_healerlink",
+        "bud_item_factunit",
+    }
 
 
-def is_atom_category(category_str: str) -> bool:
-    return category_str in get_atom_categorys()
+def is_bud_category(category_str: str) -> bool:
+    return category_str in get_bud_categorys()
 
 
 def get_atom_order(crud_str: str, category: str) -> int:
@@ -499,9 +510,9 @@ def set_mog(
 
 
 def get_category_from_dict(x_row_dict: dict) -> str:
-    x_get_atom_categorys = get_atom_categorys()
+    x_get_bud_categorys = get_bud_categorys()
     for x_columnname in x_row_dict:
-        for x_category in x_get_atom_categorys:
+        for x_category in x_get_bud_categorys:
             if x_columnname.find(x_category) == 0:
                 category_len = len(x_category)
                 return x_category, x_columnname[category_len + 1 : category_len + 7]

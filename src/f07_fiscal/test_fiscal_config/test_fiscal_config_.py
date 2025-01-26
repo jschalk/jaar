@@ -150,6 +150,8 @@ def test_get_fiscal_categorys_ReturnsObj():
     assert fiscal_timeline_hour_str() in fiscal_config_categorys
     assert fiscal_timeline_month_str() in fiscal_config_categorys
     assert fiscal_timeline_weekday_str() in fiscal_config_categorys
+    assert len(fiscal_config_categorys) == 6
+    return fiscal_config_categorys == set(get_fiscal_config_dict().keys())
 
 
 def test_get_fiscal_args_category_mapping_ReturnsObj():

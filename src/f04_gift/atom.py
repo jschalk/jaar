@@ -28,7 +28,7 @@ from src.f04_gift.atom_config import (
     atom_hx_table_name,
     get_atom_order,
     get_atom_config_dict,
-    is_atom_category,
+    is_bud_category,
     get_atom_config_args,
     get_sorted_jkey_keys,
     get_atom_args_class_types,
@@ -160,7 +160,7 @@ def atomunit_shop(
     jkeys: dict[str, str] = None,
     jvalues: dict[str, str] = None,
 ) -> AtomUnit:
-    if is_atom_category(category):
+    if is_bud_category(category):
         return AtomUnit(
             category=category,
             crud_str=crud_str,

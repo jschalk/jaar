@@ -7,20 +7,9 @@ from src.f00_instrument.db_toolbox import (
     get_table_columns,
     is_stageable,
 )
-from src.f01_road.finance_tran import time_int_str
 from src.f02_bud.bud_tool import budunit_str
-from src.f04_gift.atom_config import (
-    face_name_str,
-    fiscal_title_str,
-    owner_name_str,
-    acct_name_str,
-)
-from src.f07_fiscal.fiscal_config import (
-    fiscalunit_str,
-    hour_title_str,
-    month_title_str,
-    weekday_title_str,
-)
+from src.f04_gift.atom_config import face_name_str, fiscal_title_str, get_bud_categorys
+from src.f07_fiscal.fiscal_config import fiscalunit_str, get_fiscal_categorys
 from src.f08_pidgin.pidgin_config import event_int_str, pidginunit_str
 from src.f09_idea.idea_config import (
     idea_number_str,
@@ -39,17 +28,16 @@ from src.f10_etl.fiscal_etl_tool import (
     FiscalPrimeColumnsRef,
 )
 from src.f10_etl.tran_sqlstrs import (
-    get_all_idea_create_table_sqlstrs,
     get_fiscal_create_table_sqlstrs,
     get_bud_create_table_sqlstrs,
     create_fiscal_tables,
     create_bud_tables,
     create_all_idea_tables,
-    get_all_inconsistency_sqlstrs,
+    get_bud_inconsistency_sqlstrs,
     get_fiscal_inconsistency_sqlstrs,
-    get_update_inconsist_error_message_sqlstrs,
+    get_bud_update_inconsist_error_message_sqlstrs,
     get_fiscal_update_inconsist_error_message_sqlstrs,
-    get_insert_agg_from_staging_sqlstrs,
+    get_bud_insert_agg_from_staging_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
     FISCALUNIT_AGG_INSERT_SQLSTR,
     IDEA_STAGEABLE_CATEGORYS,
@@ -57,17 +45,17 @@ from src.f10_etl.tran_sqlstrs import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_get_all_idea_create_table_sqlstrs_ReturnsObj():
+def test_get_fiscal_create_table_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    create_table_sqlstrs = get_all_idea_create_table_sqlstrs()
+    create_table_sqlstrs = get_fiscal_create_table_sqlstrs()
 
     # THEN
     idea_config = get_idea_config_dict()
     idea_config = {
         x_category: category_config
         for x_category, category_config in idea_config.items()
-        if category_config.get(idea_type_str()) != pidginunit_str()
+        if category_config.get(idea_type_str()) == fiscalunit_str()
     }
     sqlite_types = get_idea_sqlite_types()
     for x_category in idea_config:
@@ -100,48 +88,71 @@ def test_get_all_idea_create_table_sqlstrs_ReturnsObj():
         # print(f'"{st_table}": {st_table.upper()}_SQLSTR,')
 
 
-def test_get_fiscal_create_table_sqlstrs_ReturnsObj():
+def test_get_bud_create_table_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    create_table_sqlstrs = get_bud_create_table_sqlstrs()
+
+    # THEN
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_category: category_config
+        for x_category, category_config in idea_config.items()
+        if category_config.get(idea_type_str()) == budunit_str()
+    }
+    sqlite_types = get_idea_sqlite_types()
+    for x_category in idea_config:
+        print(f"{x_category} checking...")
+        x_config = idea_config.get(x_category)
+
+        ag_table = f"{x_category}_agg"
+        ag_sqlstr = create_table_sqlstrs.get(ag_table)
+        ag_cols = set(x_config.get("jkeys").keys())
+        ag_cols.update(set(x_config.get("jvalues").keys()))
+        ag_cols = get_custom_sorted_list(ag_cols)
+        gen_cat_agg_sqlstr = get_create_table_sqlstr(ag_table, ag_cols, sqlite_types)
+        assert ag_sqlstr == gen_cat_agg_sqlstr
+
+        st_table = f"{x_category}_staging"
+        st_sqlstr = create_table_sqlstrs.get(st_table)
+        st_cols = set(x_config.get("jkeys").keys())
+        st_cols.update(set(x_config.get("jvalues").keys()))
+        st_cols.add(idea_number_str())
+        st_cols.add("error_message")
+        st_cols = get_custom_sorted_list(st_cols)
+        gen_cat_stage_sqlstr = get_create_table_sqlstr(st_table, st_cols, sqlite_types)
+        assert st_sqlstr == gen_cat_stage_sqlstr
+
+        # print(f'CREATE_{ag_table.upper()}_SQLSTR= """{gen_cat_agg_sqlstr}"""')
+        # print(f'CREATE_{st_table.upper()}_SQLSTR= """{gen_cat_stage_sqlstr}"""')
+        # print(f'"{ag_table}": {ag_table.upper()}_SQLSTR,')
+        # print(f'"{st_table}": {st_table.upper()}_SQLSTR,')
+
+
+def test_get_fiscal_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # ESTABLISH / WHEN
     fiscal_create_table_sqlstrs = get_fiscal_create_table_sqlstrs()
 
     # THEN
     assert fiscal_create_table_sqlstrs
-    idea_config = get_idea_config_dict()
-    expected_fiscal_tablenames = {
-        f"{x_category}_agg"
-        for x_category, category_config in idea_config.items()
-        if category_config.get(idea_type_str()) == fiscalunit_str()
-    }
+    fiscal_categorys = get_fiscal_categorys()
+    expected_fiscal_tablenames = {f"{x_cat}_agg" for x_cat in fiscal_categorys}
     expected_fiscal_tablenames.update(
-        {
-            f"{x_category}_staging"
-            for x_category, category_config in idea_config.items()
-            if category_config.get(idea_type_str()) == fiscalunit_str()
-        }
+        {f"{x_cat}_staging" for x_cat in fiscal_categorys}
     )
     print(f"{expected_fiscal_tablenames=}")
     assert set(fiscal_create_table_sqlstrs.keys()) == expected_fiscal_tablenames
 
 
-def test_get_bud_create_table_sqlstrs_ReturnsObj():
+def test_get_bud_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # ESTABLISH / WHEN
     bud_create_table_sqlstrs = get_bud_create_table_sqlstrs()
 
     # THEN
     assert bud_create_table_sqlstrs
-    idea_config = get_idea_config_dict()
-    expected_bud_tablenames = {
-        f"{x_category}_agg"
-        for x_category, category_config in idea_config.items()
-        if category_config.get(idea_type_str()) == budunit_str()
-    }
-    expected_bud_tablenames.update(
-        {
-            f"{x_category}_staging"
-            for x_category, category_config in idea_config.items()
-            if category_config.get(idea_type_str()) == budunit_str()
-        }
-    )
+    bud_categorys = get_bud_categorys()
+    expected_bud_tablenames = {f"{x_cat}_agg" for x_cat in bud_categorys}
+    expected_bud_tablenames.update({f"{x_cat}_staging" for x_cat in bud_categorys})
     print(f"{expected_bud_tablenames=}")
     assert set(bud_create_table_sqlstrs.keys()) == expected_bud_tablenames
 
@@ -291,33 +302,19 @@ def test_create_fiscal_tables_CreatesFiscalStagingTables():
 
 
 def test_get_fiscal_inconsistency_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
     fiscal_inconsistency_sqlstrs = get_fiscal_inconsistency_sqlstrs()
 
     # THEN
-    assert fiscal_inconsistency_sqlstrs
-    idea_config = get_idea_config_dict()
-    fiscal_config = {
-        x_category: category_config
-        for x_category, category_config in idea_config.items()
-        if category_config.get(idea_type_str()) == fiscalunit_str()
-    }
-    expected_fiscal_cateogrys = fiscal_config.keys()
-    assert fiscal_inconsistency_sqlstrs.keys() == expected_fiscal_cateogrys
-
-
-def test_get_all_inconsistency_sqlstrs_ReturnsObj():
-    # sourcery skip: no-loop-in-tests
-    # ESTABLISH / WHEN
-    all_inconsistency_sqlstrs = get_all_inconsistency_sqlstrs()
-
-    # THEN
+    assert fiscal_inconsistency_sqlstrs.keys() == get_fiscal_categorys()
     idea_config = get_idea_config_dict()
     idea_config = {
         x_category: category_config
         for x_category, category_config in idea_config.items()
-        if category_config.get(idea_type_str()) != pidginunit_str()
+        # if category_config.get(idea_type_str()) != pidginunit_str()
         # if category_config.get(idea_type_str()) == budunit_str()
+        if category_config.get(idea_type_str()) == fiscalunit_str()
     }
 
     exclude_cols = {
@@ -329,16 +326,13 @@ def test_get_all_inconsistency_sqlstrs_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_fiscal_tables(cursor)
-        create_bud_tables(cursor)
 
         for x_category in sorted(idea_config):
             # print(f"{x_category} checking...")
-            x_sqlstr = all_inconsistency_sqlstrs.get(x_category)
+            x_sqlstr = fiscal_inconsistency_sqlstrs.get(x_category)
             x_tablename = f"{x_category}_staging"
             cat_config = idea_config.get(x_category)
             cat_focus_columns = set(cat_config.get("jkeys").keys())
-            cat_focus_columns.remove(event_int_str())
-            cat_focus_columns.remove(face_name_str())
             generated_cat_sqlstr = create_select_inconsistency_query(
                 cursor, x_tablename, cat_focus_columns, exclude_cols
             )
@@ -346,19 +340,52 @@ def test_get_all_inconsistency_sqlstrs_ReturnsObj():
             assert x_sqlstr == generated_cat_sqlstr
 
 
-def test_get_update_inconsist_error_message_sqlstrs_ReturnsObj():
+def test_get_bud_inconsistency_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    update_error_message_sqlstrs = get_update_inconsist_error_message_sqlstrs()
+    bud_inconsistency_sqlstrs = get_bud_inconsistency_sqlstrs()
 
     # THEN
+    assert bud_inconsistency_sqlstrs.keys() == get_bud_categorys()
     idea_config = get_idea_config_dict()
     idea_config = {
         x_category: category_config
         for x_category, category_config in idea_config.items()
-        if category_config.get(idea_type_str()) != pidginunit_str()
-        # if category_config.get(idea_type_str()) == budunit_str()
-        # if category_config.get(idea_type_str()) == fiscalunit_str()
+        if category_config.get(idea_type_str()) == budunit_str()
+    }
+
+    exclude_cols = {idea_number_str(), "error_message"}
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_bud_tables(cursor)
+
+        for x_category in sorted(idea_config):
+            # print(f"{x_category} checking...")
+            x_sqlstr = bud_inconsistency_sqlstrs.get(x_category)
+            x_tablename = f"{x_category}_staging"
+            cat_config = idea_config.get(x_category)
+            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            generated_cat_sqlstr = create_select_inconsistency_query(
+                cursor, x_tablename, cat_focus_columns, exclude_cols
+            )
+            print(
+                f'{x_category.upper()}_INCONSISTENCY_SQLSTR ="""{generated_cat_sqlstr}"""'
+            )
+            assert x_sqlstr == generated_cat_sqlstr
+
+
+def test_get_fiscal_update_inconsist_error_message_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    fiscal_update_error_sqlstrs = get_fiscal_update_inconsist_error_message_sqlstrs()
+
+    # THEN
+    assert set(fiscal_update_error_sqlstrs.keys()) == get_fiscal_categorys()
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_category: category_config
+        for x_category, category_config in idea_config.items()
+        if category_config.get(idea_type_str()) == fiscalunit_str()
     }
 
     exclude_cols = {
@@ -374,12 +401,10 @@ def test_get_update_inconsist_error_message_sqlstrs_ReturnsObj():
 
         for x_category in idea_config:
             print(f"{x_category} checking...")
-            x_sqlstr = update_error_message_sqlstrs.get(x_category)
+            x_sqlstr = fiscal_update_error_sqlstrs.get(x_category)
             x_tablename = f"{x_category}_staging"
             cat_config = idea_config.get(x_category)
             cat_focus_columns = set(cat_config.get("jkeys").keys())
-            cat_focus_columns.remove(event_int_str())
-            cat_focus_columns.remove(face_name_str())
             generated_cat_sqlstr = create_update_inconsistency_error_query(
                 cursor, x_tablename, cat_focus_columns, exclude_cols
             )
@@ -393,28 +418,51 @@ def test_get_update_inconsist_error_message_sqlstrs_ReturnsObj():
             assert x_sqlstr == generated_cat_sqlstr
 
 
-def test_get_fiscal_update_inconsist_error_message_sqlstrs_ReturnsObj():
-    # ESTABLISH / WHEN
-    fiscal_update_error_sqlstrs = get_fiscal_update_inconsist_error_message_sqlstrs()
-
-    # THEN
-    assert fiscal_update_error_sqlstrs
-    fiscal_config = {
-        x_category: category_config
-        for x_category, category_config in get_idea_config_dict().items()
-        if category_config.get(idea_type_str()) == fiscalunit_str()
-    }
-    expected_fiscal_cateogrys = fiscal_config.keys()
-    assert set(fiscal_update_error_sqlstrs.keys()) == set(expected_fiscal_cateogrys)
-
-
-def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
+def test_get_bud_update_inconsist_error_message_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    insert_agg_from_staging_sqlstrs = get_insert_agg_from_staging_sqlstrs()
+    bud_update_error_sqlstrs = get_bud_update_inconsist_error_message_sqlstrs()
 
     # THEN
-    x_objs = FiscalPrimeObjsRef()
+    assert set(bud_update_error_sqlstrs.keys()) == get_bud_categorys()
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_category: category_config
+        for x_category, category_config in idea_config.items()
+        if category_config.get(idea_type_str()) == budunit_str()
+    }
+
+    exclude_cols = {idea_number_str(), "error_message"}
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_bud_tables(cursor)
+
+        for x_category in idea_config:
+            # print(f"{x_category} checking...")
+            x_sqlstr = bud_update_error_sqlstrs.get(x_category)
+            x_tablename = f"{x_category}_staging"
+            cat_config = idea_config.get(x_category)
+            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            generated_cat_sqlstr = create_update_inconsistency_error_query(
+                cursor, x_tablename, cat_focus_columns, exclude_cols
+            )
+            # print(
+            #     f"""{x_category.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_cat_sqlstr}\"\"\""""
+            # )
+            # print(
+            #     f"""\"{x_category}\": {x_category.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
+            # )
+            # print(f"""            {x_sqlstr=}""")
+            assert x_sqlstr == generated_cat_sqlstr
+
+
+def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
+    # sourcery skip: extract-method, no-loop-in-tests
+    # ESTABLISH / WHEN
+    fiscal_insert_agg_sqlstrs = get_fiscal_insert_agg_from_staging_sqlstrs()
+
+    # THEN
+    assert set(fiscal_insert_agg_sqlstrs.keys()) == get_fiscal_categorys()
     x_exclude_cols = {
         idea_number_str(),
         face_name_str(),
@@ -425,13 +473,11 @@ def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
     idea_config = {
         x_category: category_config
         for x_category, category_config in idea_config.items()
-        if category_config.get(idea_type_str()) != pidginunit_str()
-        # if category_config.get(idea_type_str()) == fiscalunit_str()
+        if category_config.get(idea_type_str()) == fiscalunit_str()
     }
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
         create_fiscal_tables(cursor)
-        create_bud_tables(cursor)
 
         for x_category in idea_config:
             print(f"{x_category} checking...")
@@ -452,7 +498,7 @@ def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
                     exclude_cols=x_exclude_cols,
                 )
             )
-            x_sqlstr = insert_agg_from_staging_sqlstrs.get(x_category)
+            x_sqlstr = fiscal_insert_agg_sqlstrs.get(x_category)
             # print(f'"{x_category}": BUD_AGG_INSERT_SQLSTR,')
             # print(
             #     f'{x_category.upper()}_AGG_INSERT_SQLSTR = """{generated_table2table_agg_insert_sqlstr}"""'
@@ -461,8 +507,8 @@ def test_get_insert_agg_from_staging_sqlstrs_ReturnsObj():
 
         generated_fiscalunit_sqlstr = create_table2table_agg_insert_query(
             cursor,
-            src_table=x_objs.unit_stage_tablename,
-            dst_table=x_objs.unit_agg_tablename,
+            src_table=f"{fiscalunit_str()}_staging",
+            dst_table=f"{fiscalunit_str()}_agg",
             focus_cols=[fiscal_title_str()],
             exclude_cols=x_exclude_cols,
         )
@@ -478,22 +524,53 @@ GROUP BY fiscal_title
 """
         assert FISCALUNIT_AGG_INSERT_SQLSTR == expected_ficsalunit_sqlstr
 
-    assert len(idea_config) == len(insert_agg_from_staging_sqlstrs)
+    assert len(idea_config) == len(fiscal_insert_agg_sqlstrs)
 
 
-def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
+def test_get_bud_insert_agg_from_staging_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    fiscal_insert_agg_sqlstrs = get_fiscal_insert_agg_from_staging_sqlstrs()
+    bud_insert_agg_sqlstrs = get_bud_insert_agg_from_staging_sqlstrs()
 
     # THEN
-    assert fiscal_insert_agg_sqlstrs
-    fiscal_config = {
-        x_category: category_config
-        for x_category, category_config in get_idea_config_dict().items()
-        if category_config.get(idea_type_str()) == fiscalunit_str()
+    assert set(bud_insert_agg_sqlstrs.keys()) == get_bud_categorys()
+    x_exclude_cols = {
+        idea_number_str(),
+        "error_message",
     }
-    expected_fiscal_cateogrys = fiscal_config.keys()
-    assert set(fiscal_insert_agg_sqlstrs.keys()) == set(expected_fiscal_cateogrys)
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_category: category_config
+        for x_category, category_config in idea_config.items()
+        if category_config.get(idea_type_str()) == budunit_str()
+    }
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_bud_tables(cursor)
+
+        for x_category in idea_config:
+            print(f"{x_category} checking...")
+            cat_config = idea_config.get(x_category)
+            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            cat_focus_columns = get_custom_sorted_list(cat_focus_columns)
+            stage_tablename = f"{x_category}_staging"
+            agg_tablename = f"{x_category}_agg"
+
+            generated_table2table_agg_insert_sqlstr = (
+                create_table2table_agg_insert_query(
+                    cursor,
+                    src_table=stage_tablename,
+                    dst_table=agg_tablename,
+                    focus_cols=cat_focus_columns,
+                    exclude_cols=x_exclude_cols,
+                )
+            )
+            x_sqlstr = bud_insert_agg_sqlstrs.get(x_category)
+            # print(f'"{x_category}": BUD_AGG_INSERT_SQLSTR,')
+            # print(
+            #     f'{x_category.upper()}_AGG_INSERT_SQLSTR = """{generated_table2table_agg_insert_sqlstr}"""'
+            # )
+            assert x_sqlstr == generated_table2table_agg_insert_sqlstr
 
 
 def test_idea_into_category_ReturnsObj_ForAll_idea_numbersAndAll_categorys():

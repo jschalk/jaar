@@ -1,332 +1,21 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
-from src.f01_road.finance_tran import bridge_str, time_int_str, quota_str
-from src.f03_chrono.chrono import (
-    c400_number_str,
-    monthday_distortion_str,
-    timeline_title_str,
-    yr1_jan1_offset_str,
-)
 from src.f04_gift.atom_config import (
     face_name_str,
     fiscal_title_str,
     acct_name_str,
     owner_name_str,
-    fund_coin_str,
-    penny_str,
-    respect_bit_str,
-)
-from src.f07_fiscal.fiscal_config import (
-    present_time_str,
-    amount_str,
-    month_title_str,
-    hour_title_str,
-    cumlative_minute_str,
-    cumlative_day_str,
-    weekday_title_str,
-    weekday_order_str,
-    fiscalunit_str,
-    fiscal_deal_episode_str,
-    fiscal_cashbook_str,
-    fiscal_timeline_hour_str,
-    fiscal_timeline_month_str,
-    fiscal_timeline_weekday_str,
-    get_fiscal_config_args,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.idea_config import (
-    get_idea_sqlite_types,
-    get_idea_format_filename,
-    get_idearef_from_file,
-    idea_number_str,
-)
-from src.f09_idea.idea_db_tool import (
-    _get_fiscal_idea_format_filenames,
-    boat_agg_str,
-    get_custom_sorted_list,
-    get_pragma_table_fetchall,
-)
+from src.f09_idea.idea_db_tool import get_pragma_table_fetchall
 from src.f10_etl.fiscal_etl_tool import (
     FiscalPrimeColumnsRef,
     FiscalPrimeObjsRef,
 )
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
-from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
-from copy import copy as copy_copy
-from platform import system as platform_system
 from sqlite3 import connect as sqlite3_connect
-
-# def test_WorldUnit_memory_fiscal_db_conn_ReturnsDBConnection(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     fizz_world = worldunit_shop("fizz")
-
-#     # WHEN / THEN
-#     with fizz_world.memory_fiscal_db_conn() as fiscal_db_conn:
-#         assert fiscal_db_conn != None
-#         cursor = fiscal_db_conn.cursor()
-#         x_tablename = "random_name_table"
-#         cursor.execute(f"PRAGMA table_info({x_tablename})")
-#         columns = cursor.fetchall()
-#         assert columns == []  # implication is database exists
-
-
-def test_WorldUnit_aft_face_csv_files_to_fiscal_db_HasIdeaDataFromCSV_aft_face_csv_files_to_fiscal_db(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    sue_inx = "Suzy"
-    bob_inx = "Bob"
-    yao_inx = "Yao"
-    event3 = 3
-    event7 = 7
-    accord23_str = "accord23"
-    fizz_world = worldunit_shop("fizz")
-    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
-    br00011_str = "br00011"
-    br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
-{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
-{sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
-"""
-    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    print(f"{sue_aft_dir=}")
-    fizz_world = worldunit_shop("fizz")
-
-    # WHEN / THEN
-    br00011_staging_tablename = f"{br00011_str}_staging"
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.aft_face_csv_files_to_fiscal_db(fiscal_db_conn)
-        assert fiscal_db_conn != None
-        cursor = fiscal_db_conn.cursor()
-        cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
-        br00011_db_columns = cursor.fetchall()
-        br00011_expected_columns = [
-            (0, face_name_str(), "TEXT", 0, None, 0),
-            (1, event_int_str(), "INTEGER", 0, None, 0),
-            (2, fiscal_title_str(), "TEXT", 0, None, 0),
-            (3, owner_name_str(), "TEXT", 0, None, 0),
-            (4, acct_name_str(), "TEXT", 0, None, 0),
-        ]
-        print(f"{type(fiscal_db_conn)=}")
-        print(f"      {br00011_db_columns=}")
-        print(f"{br00011_expected_columns=}")
-        assert br00011_db_columns == br00011_expected_columns
-        cursor.execute(f"SELECT * FROM {br00011_staging_tablename}")
-        br00011_db_rows = cursor.fetchall()
-        expected_data = [
-            (sue_inx, event3, accord23_str, bob_inx, bob_inx),
-            (sue_inx, event3, accord23_str, yao_inx, bob_inx),
-            (sue_inx, event3, accord23_str, yao_inx, yao_inx),
-            (sue_inx, event7, accord23_str, yao_inx, yao_inx),
-        ]
-        assert br00011_db_rows == expected_data
-
-
-def test_WorldUnit_idea_staging_to_fiscal_tables_CreatesFiscalStagingTables(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
-        fis_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
-        fis_cols = FiscalPrimeColumnsRef()
-        assert db_table_exists(fiscal_db_conn, fis_objs.unit_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.deal_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.cash_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.hour_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.mont_agg_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.week_agg_tablename)
-
-        assert db_table_exists(fiscal_db_conn, fis_objs.unit_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.deal_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.cash_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.hour_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.mont_stage_tablename)
-        assert db_table_exists(fiscal_db_conn, fis_objs.week_stage_tablename)
-
-        fis_unit_agg_pragma = get_pragma_table_fetchall(fis_cols.unit_agg_columns)
-        fis_deal_agg_pragma = get_pragma_table_fetchall(fis_cols.deal_agg_columns)
-        fis_cash_agg_pragma = get_pragma_table_fetchall(fis_cols.cash_agg_columns)
-        fis_hour_agg_pragma = get_pragma_table_fetchall(fis_cols.hour_agg_columns)
-        fis_mont_agg_pragma = get_pragma_table_fetchall(fis_cols.mont_agg_columns)
-        fis_week_agg_pragma = get_pragma_table_fetchall(fis_cols.week_agg_columns)
-        fis_unit_stage_pragma = get_pragma_table_fetchall(fis_cols.unit_staging_columns)
-        fis_deal_stage_pragma = get_pragma_table_fetchall(fis_cols.deal_staging_columns)
-        fis_cash_stage_pragma = get_pragma_table_fetchall(fis_cols.cash_staging_columns)
-        fis_hour_stage_pragma = get_pragma_table_fetchall(fis_cols.hour_staging_columns)
-        fis_mont_stage_pragma = get_pragma_table_fetchall(fis_cols.mont_staging_columns)
-        fis_week_stage_pragma = get_pragma_table_fetchall(fis_cols.week_staging_columns)
-        cursor = fiscal_db_conn.cursor()
-        cursor.execute(f"PRAGMA table_info({fis_objs.unit_agg_tablename})")
-        assert fis_unit_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.deal_agg_tablename})")
-        assert fis_deal_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.cash_agg_tablename})")
-        assert fis_cash_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.hour_agg_tablename})")
-        assert fis_hour_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.mont_agg_tablename})")
-        assert fis_mont_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.week_agg_tablename})")
-        assert fis_week_agg_pragma == cursor.fetchall()
-
-        cursor.execute(f"PRAGMA table_info({fis_objs.unit_stage_tablename})")
-        assert fis_unit_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.deal_stage_tablename})")
-        assert fis_deal_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.cash_stage_tablename})")
-        assert fis_cash_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.hour_stage_tablename})")
-        assert fis_hour_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.mont_stage_tablename})")
-        assert fis_mont_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.week_stage_tablename})")
-        assert fis_week_stage_pragma == cursor.fetchall()
-
-
-def test_WorldUnit_idea_staging_to_fiscal_tables_Bud_category_idea_PopulatesFiscalStagingTables(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    sue_inx = "Suzy"
-    bob_inx = "Bob"
-    yao_inx = "Yao"
-    event3 = 3
-    event7 = 7
-    accord23_str = "accord23"
-    fizz_world = worldunit_shop("fizz")
-    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
-    br00011_str = "br00011"
-    br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
-{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
-{sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
-"""
-    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("fizz")
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.aft_face_csv_files_to_fiscal_db(fiscal_db_conn)
-        fis_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
-        assert not db_table_exists(fiscal_db_conn, fis_objs.unit_stage_tablename)
-
-        # WHEN
-        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
-
-        # THEN
-        assert get_row_count(fiscal_db_conn, fis_objs.unit_stage_tablename) == 2
-        cursor = fiscal_db_conn.cursor()
-        cursor.execute(f"SELECT * FROM {fis_objs.unit_stage_tablename}")
-        fiscalunit_db_rows = cursor.fetchall()
-        expected_row1 = (
-            br00011_str,
-            sue_inx,
-            event3,
-            accord23_str,  # fiscal_title
-            None,  # fund_coin
-            None,  # penny
-            None,  # respect_bit
-            None,  # present_time
-            None,  # bridge
-            None,  # c400_number
-            None,  # yr1_jan1_offset
-            None,  # monthday_distortion
-            None,  # timeline_title
-            None,  # note
-        )
-        expected_row2 = (
-            br00011_str,
-            sue_inx,
-            event7,
-            accord23_str,  # fiscal_title
-            None,  # fund_coin
-            None,  # penny
-            None,  # respect_bit
-            None,  # present_time
-            None,  # bridge
-            None,  # c400_number
-            None,  # yr1_jan1_offset
-            None,  # monthday_distortion
-            None,  # timeline_title
-            None,  # note
-        )
-        assert fiscalunit_db_rows == [expected_row1, expected_row2]
-
-
-def test_WorldUnit_idea_staging_to_fiscal_tables_PopulatesFiscalAggTables(
-    env_dir_setup_cleanup,
-):  # sourcery skip: extract-method
-
-    # ESTABLISH
-    sue_inx = "Suzy"
-    bob_inx = "Bob"
-    yao_inx = "Yao"
-    event3 = 3
-    event7 = 7
-    accord23_str = "accord23"
-    accord45_str = "accord45"
-    fizz_world = worldunit_shop("fizz")
-    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
-    br00011_str = "br00011"
-    br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
-{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
-{sue_inx},{event3},{accord45_str},{yao_inx},{yao_inx}
-{sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
-"""
-    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("fizz")
-
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.aft_face_csv_files_to_fiscal_db(fiscal_db_conn)
-        fis_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
-        assert not db_table_exists(fiscal_db_conn, fis_objs.unit_agg_tablename)
-
-        # WHEN
-        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
-
-        # THEN
-        assert db_table_exists(fiscal_db_conn, fis_objs.unit_agg_tablename)
-        cursor = fiscal_db_conn.cursor()
-        # cursor.execute(f"SELECT * FROM {fiscalunit_stage_tablename};")
-        # fiscalunit_stage_rows = cursor.fetchall()
-        # assert len(fiscalunit_stage_rows) == 4
-        cursor.execute(f"SELECT * FROM {fis_objs.unit_agg_tablename};")
-        fiscalunit_agg_rows = cursor.fetchall()
-        expected_row1 = (
-            accord23_str,  # fiscal_title
-            None,  # fund_coin
-            None,  # penny
-            None,  # respect_bit
-            None,  # present_time
-            None,  # bridge
-            None,  # c400_number
-            None,  # yr1_jan1_offset
-            None,  # monthday_distortion
-            None,  # timeline_title
-        )
-        expected_row2 = (
-            accord45_str,  # fiscal_title
-            None,  # fund_coin
-            None,  # penny
-            None,  # respect_bit
-            None,  # present_time
-            None,  # bridge
-            None,  # c400_number
-            None,  # yr1_jan1_offset
-            None,  # monthday_distortion
-            None,  # timeline_title
-        )
-        assert fiscalunit_agg_rows == [expected_row1, expected_row2]
 
 
 def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
@@ -355,12 +44,13 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
     fis_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
     fizz_world.aft_face_ideas_to_csv_files()
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.aft_face_csv_files_to_fiscal_db(fiscal_db_conn)
-        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.idea_staging_to_fiscal_tables(cursor)
         assert os_path_exists(fis_objs.unit_stage_csv_path) is False
 
         # WHEN
-        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(fiscal_db_conn)
+        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(cursor)
 
         # THEN
         # print(f"{fiscalunit_staging_csv_path=}")
@@ -401,13 +91,14 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
     fizz_world = worldunit_shop("fizz")
     fizz_world.aft_face_ideas_to_csv_files()
     with sqlite3_connect(":memory:") as fiscal_db_conn:
-        fizz_world.aft_face_csv_files_to_fiscal_db(fiscal_db_conn)
-        fizz_world.idea_staging_to_fiscal_tables(fiscal_db_conn)
+        cursor = fiscal_db_conn.cursor()
+        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.idea_staging_to_fiscal_tables(cursor)
         fiz_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
         assert os_path_exists(fiz_objs.unit_agg_csv_path) is False
 
         # WHEN
-        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(fiscal_db_conn)
+        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(cursor)
 
         # THEN
         # print(f"{fiscalunit_csv_path=}")

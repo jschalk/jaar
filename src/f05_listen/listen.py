@@ -177,16 +177,16 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
     return _ingest_perspective_agenda(listener, agenda)
 
 
-def listen_to_agendas_voice_final(listener_final: BudUnit, listener_hubunit: HubUnit):
-    for x_acctunit in get_ordered_debtors_roll(listener_final):
-        if x_acctunit.acct_name == listener_final.owner_name:
-            listen_to_speaker_agenda(listener_final, listener_hubunit.get_voice_bud())
+def listen_to_agendas_soul_voice(listener_voice: BudUnit, listener_hubunit: HubUnit):
+    for x_acctunit in get_ordered_debtors_roll(listener_voice):
+        if x_acctunit.acct_name == listener_voice.owner_name:
+            listen_to_speaker_agenda(listener_voice, listener_hubunit.get_soul_bud())
         else:
             speaker_id = x_acctunit.acct_name
-            speaker_final = listener_hubunit.dw_speaker_bud(speaker_id)
-            if speaker_final is None:
-                speaker_final = create_empty_bud(listener_final, speaker_id)
-            listen_to_speaker_agenda(listener_final, speaker_final)
+            speaker_voice = listener_hubunit.dw_speaker_bud(speaker_id)
+            if speaker_voice is None:
+                speaker_voice = create_empty_bud(listener_voice, speaker_id)
+            listen_to_speaker_agenda(listener_voice, speaker_voice)
 
 
 def listen_to_agendas_duty_job(listener_job: BudUnit, healer_hubunit: HubUnit):
@@ -214,23 +214,23 @@ def listen_to_facts_duty_job(new_job: BudUnit, healer_hubunit: HubUnit):
                 listen_to_speaker_fact(new_job, speaker_job)
 
 
-def listen_to_facts_voice_final(new_final: BudUnit, listener_hubunit: HubUnit):
-    migrate_all_facts(listener_hubunit.get_voice_bud(), new_final)
-    for x_acctunit in get_ordered_debtors_roll(new_final):
+def listen_to_facts_soul_voice(new_voice: BudUnit, listener_hubunit: HubUnit):
+    migrate_all_facts(listener_hubunit.get_soul_bud(), new_voice)
+    for x_acctunit in get_ordered_debtors_roll(new_voice):
         speaker_id = x_acctunit.acct_name
-        if speaker_id != new_final.owner_name:
-            speaker_final = listener_hubunit.dw_speaker_bud(speaker_id)
-            if speaker_final is not None:
-                listen_to_speaker_fact(new_final, speaker_final)
+        if speaker_id != new_voice.owner_name:
+            speaker_voice = listener_hubunit.dw_speaker_bud(speaker_id)
+            if speaker_voice is not None:
+                listen_to_speaker_fact(new_voice, speaker_voice)
 
 
-def listen_to_debtors_roll_voice_final(listener_hubunit: HubUnit) -> BudUnit:
-    voice = listener_hubunit.get_voice_bud()
-    new_bud = create_listen_basis(voice)
-    if voice.debtor_respect is None:
+def listen_to_debtors_roll_soul_voice(listener_hubunit: HubUnit) -> BudUnit:
+    soul = listener_hubunit.get_soul_bud()
+    new_bud = create_listen_basis(soul)
+    if soul.debtor_respect is None:
         return new_bud
-    listen_to_agendas_voice_final(new_bud, listener_hubunit)
-    listen_to_facts_voice_final(new_bud, listener_hubunit)
+    listen_to_agendas_soul_voice(new_bud, listener_hubunit)
+    listen_to_facts_soul_voice(new_bud, listener_hubunit)
     return new_bud
 
 
@@ -247,46 +247,46 @@ def listen_to_debtors_roll_duty_job(
 
 
 def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
-    voice = listener_hubunit.get_voice_bud()
-    new_final = create_listen_basis(voice)
-    pre_final_dict = new_final.get_dict()
-    voice.settle_bud()
-    new_final.settle_bud()
+    soul = listener_hubunit.get_soul_bud()
+    new_voice = create_listen_basis(soul)
+    pre_voice_dict = new_voice.get_dict()
+    soul.settle_bud()
+    new_voice.settle_bud()
 
-    for x_healer_name, keep_dict in voice._healers_dict.items():
+    for x_healer_name, keep_dict in soul._healers_dict.items():
         listener_id = listener_hubunit.owner_name
         healer_hubunit = copy_deepcopy(listener_hubunit)
         healer_hubunit.owner_name = x_healer_name
-        _pick_keep_jobs_and_listen(listener_id, keep_dict, healer_hubunit, new_final)
+        _pick_keep_jobs_and_listen(listener_id, keep_dict, healer_hubunit, new_voice)
 
-    if new_final.get_dict() == pre_final_dict:
-        agenda = list(voice.get_agenda_dict().values())
-        _ingest_perspective_agenda(new_final, agenda)
-        listen_to_speaker_fact(new_final, voice)
+    if new_voice.get_dict() == pre_voice_dict:
+        agenda = list(soul.get_agenda_dict().values())
+        _ingest_perspective_agenda(new_voice, agenda)
+        listen_to_speaker_fact(new_voice, soul)
 
-    listener_hubunit.save_final_bud(new_final)
+    listener_hubunit.save_voice_bud(new_voice)
 
 
 def _pick_keep_jobs_and_listen(
     listener_id: OwnerName,
     keep_dict: dict[RoadUnit],
     healer_hubunit: HubUnit,
-    new_final: BudUnit,
+    new_voice: BudUnit,
 ):
     for keep_path in keep_dict:
         healer_hubunit.keep_road = keep_path
-        pick_keep_job_and_listen(listener_id, healer_hubunit, new_final)
+        pick_keep_job_and_listen(listener_id, healer_hubunit, new_voice)
 
 
 def pick_keep_job_and_listen(
-    listener_owner_name: OwnerName, healer_hubunit: HubUnit, new_final: BudUnit
+    listener_owner_name: OwnerName, healer_hubunit: HubUnit, new_voice: BudUnit
 ):
     listener_id = listener_owner_name
     if healer_hubunit.job_file_exists(listener_id):
         keep_job = healer_hubunit.get_job_bud(listener_id)
     else:
-        keep_job = create_empty_bud(new_final, new_final.owner_name)
-    listen_to_job_agenda(new_final, keep_job)
+        keep_job = create_empty_bud(new_voice, new_voice.owner_name)
+    listen_to_job_agenda(new_voice, keep_job)
 
 
 def listen_to_job_agenda(listener: BudUnit, job: BudUnit):
@@ -305,6 +305,6 @@ def create_job_file_from_duty_file(healer_hubunit: HubUnit, owner_name: OwnerNam
     healer_hubunit.save_job_bud(x_job)
 
 
-def create_final_file_from_voice_file(hubunit: HubUnit):
-    x_final = listen_to_debtors_roll_voice_final(hubunit)
-    hubunit.save_final_bud(x_final)
+def create_voice_file_from_soul_file(hubunit: HubUnit):
+    x_voice = listen_to_debtors_roll_soul_voice(hubunit)
+    hubunit.save_voice_bud(x_voice)

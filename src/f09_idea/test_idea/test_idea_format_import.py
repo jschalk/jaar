@@ -113,25 +113,25 @@ def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvToVoice(
     sue_hubunit = hubunit_shop(
         idea_fiscals_dir(), accord_fiscal_title, owner_name=sue_str
     )
-    # Open FiscalUnit and confirm voice BudUnit does not exist
-    assert not sue_hubunit.voice_file_exists()
+    # Open FiscalUnit and confirm soul BudUnit does not exist
+    assert not sue_hubunit.soul_file_exists()
 
     # WHEN
     load_idea_csv(sue_hubunit.fiscals_dir, idea_examples_dir(), name_filename)
 
     # THEN
-    # assert voice Budunit now exists
-    assert sue_hubunit.voice_file_exists()
-    # assert voice Budunit acctunit now exists
-    sue_voice = sue_hubunit.get_voice_bud()
-    assert sue_voice.acct_exists(sue_str)
-    assert sue_voice.acct_exists(bob_str)
-    assert sue_voice.acct_exists(yao_str)
-    # assert voice Budunit acctunit.credit_belief is correct
-    sue_acctunit = sue_voice.get_acct(sue_str)
-    bob_acctunit = sue_voice.get_acct(bob_str)
-    yao_acctunit = sue_voice.get_acct(yao_str)
-    # assert voice Budunit acctunit.credit_belief is correct
+    # assert soul Budunit now exists
+    assert sue_hubunit.soul_file_exists()
+    # assert soul Budunit acctunit now exists
+    sue_soul = sue_hubunit.get_soul_bud()
+    assert sue_soul.acct_exists(sue_str)
+    assert sue_soul.acct_exists(bob_str)
+    assert sue_soul.acct_exists(yao_str)
+    # assert soul Budunit acctunit.credit_belief is correct
+    sue_acctunit = sue_soul.get_acct(sue_str)
+    bob_acctunit = sue_soul.get_acct(bob_str)
+    yao_acctunit = sue_soul.get_acct(yao_str)
+    # assert soul Budunit acctunit.credit_belief is correct
     assert sue_acctunit.credit_belief == sue_credit_belief
     assert bob_acctunit.credit_belief == bob_credit_belief
     assert yao_acctunit.credit_belief == yao_credit_belief
@@ -166,25 +166,25 @@ def test_load_idea_csv_csvToVoice(
     sue_hubunit = hubunit_shop(
         idea_fiscals_dir(), accord_fiscal_title, owner_name=sue_str
     )
-    # Open FiscalUnit and confirm voice BudUnit does not exist
-    assert not sue_hubunit.voice_file_exists()
+    # Open FiscalUnit and confirm soul BudUnit does not exist
+    assert not sue_hubunit.soul_file_exists()
 
     # WHEN
     load_idea_csv(sue_hubunit.fiscals_dir, idea_examples_dir(), name_filename)
 
     # THEN
-    # assert voice Budunit now exists
-    assert sue_hubunit.voice_file_exists()
-    # assert voice Budunit acctunit now exists
-    sue_voice = sue_hubunit.get_voice_bud()
-    assert sue_voice.acct_exists(sue_str)
-    assert sue_voice.acct_exists(bob_str)
-    assert sue_voice.acct_exists(yao_str)
-    # assert voice Budunit acctunit.credit_belief is correct
-    sue_acctunit = sue_voice.get_acct(sue_str)
-    bob_acctunit = sue_voice.get_acct(bob_str)
-    yao_acctunit = sue_voice.get_acct(yao_str)
-    # assert voice Budunit acctunit.credit_belief is correct
+    # assert soul Budunit now exists
+    assert sue_hubunit.soul_file_exists()
+    # assert soul Budunit acctunit now exists
+    sue_soul = sue_hubunit.get_soul_bud()
+    assert sue_soul.acct_exists(sue_str)
+    assert sue_soul.acct_exists(bob_str)
+    assert sue_soul.acct_exists(yao_str)
+    # assert soul Budunit acctunit.credit_belief is correct
+    sue_acctunit = sue_soul.get_acct(sue_str)
+    bob_acctunit = sue_soul.get_acct(bob_str)
+    yao_acctunit = sue_soul.get_acct(yao_str)
+    # assert soul Budunit acctunit.credit_belief is correct
     assert sue_acctunit.credit_belief == sue_credit_belief
     assert bob_acctunit.credit_belief == bob_credit_belief
     assert yao_acctunit.credit_belief == yao_credit_belief
@@ -209,30 +209,30 @@ def test_load_idea_csv_csvToVoice(
 #     print(f"{csv_example_path}")
 #     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
 #     sue_hubunit = hubunit_shop(idea_fiscals_dir(), accord_fiscal_title, owner_name=sue_str)
-#     sue_hubunit.save_voice_bud(budunit_shop(sue_str, accord_fiscal_title))
-#     sue_hubunit._create_initial_gift_files_from_voice()
-#     old_sue_voice = sue_hubunit.get_voice_bud()
-#     old_sue_voice.add_acctunit(sue_str)
-#     sue_hubunit.save_voice_bud(old_sue_voice)
+#     sue_hubunit.save_soul_bud(budunit_shop(sue_str, accord_fiscal_title))
+#     sue_hubunit._create_initial_gift_files_from_soul()
+#     old_sue_soul = sue_hubunit.get_soul_bud()
+#     old_sue_soul.add_acctunit(sue_str)
+#     sue_hubunit.save_soul_bud(old_sue_soul)
 
-#     sue_hubunit.initialize_gift_voice_files()
-#     # Open FiscalUnit and confirm voice BudUnit does not exist
-#     assert sue_hubunit.voice_file_exists()
-#     assert sue_hubunit.get_voice_bud().acct_exists(sue_str)
-#     assert not sue_hubunit.get_voice_bud().acct_exists(bob_str)
+#     sue_hubunit.initialize_gift_soul_files()
+#     # Open FiscalUnit and confirm soul BudUnit does not exist
+#     assert sue_hubunit.soul_file_exists()
+#     assert sue_hubunit.get_soul_bud().acct_exists(sue_str)
+#     assert not sue_hubunit.get_soul_bud().acct_exists(bob_str)
 #     assert sue_hubunit.get_max_gift_file_number() == 3
 
 #     # WHEN
 #     load_idea_csv(sue_hubunit.fiscals_dir, idea_examples_dir(), name_filename)
 
 #     # THEN
-#     # assert voice Budunit acctunit now exists
-#     new_sue_voice = sue_hubunit.get_voice_bud()
-#     assert new_sue_voice.acct_exists(sue_str)
-#     assert new_sue_voice.acct_exists(bob_str)
-#     # assert voice Budunit acctunit.credit_belief is correct
-#     sue_acctunit = new_sue_voice.get_acct(sue_str)
-#     bob_acctunit = new_sue_voice.get_acct(bob_str)
+#     # assert soul Budunit acctunit now exists
+#     new_sue_soul = sue_hubunit.get_soul_bud()
+#     assert new_sue_soul.acct_exists(sue_str)
+#     assert new_sue_soul.acct_exists(bob_str)
+#     # assert soul Budunit acctunit.credit_belief is correct
+#     sue_acctunit = new_sue_soul.get_acct(sue_str)
+#     bob_acctunit = new_sue_soul.get_acct(bob_str)
 #     assert sue_hubunit.get_max_gift_file_number() != 3
 #     assert 1 == 2
 

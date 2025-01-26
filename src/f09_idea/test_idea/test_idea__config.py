@@ -22,7 +22,7 @@ from src.f03_chrono.chrono import (
 from src.f04_gift.atom_config import (
     get_atom_args_category_mapping,
     get_atom_config_dict,
-    get_atom_categorys,
+    get_bud_categorys,
     jkeys_str,
     jvalues_str,
     normal_specs_str,
@@ -389,7 +389,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert map_label_str() in idea_config_categorys
     assert map_title_str() in idea_config_categorys
     assert map_road_str() in idea_config_categorys
-    assert get_atom_categorys().issubset(idea_config_categorys)
+    assert get_bud_categorys().issubset(idea_config_categorys)
     assert get_fiscal_categorys().issubset(idea_config_categorys)
     assert get_pidgin_categorys().issubset(idea_config_categorys)
     assert len(x_idea_config) == 20
@@ -553,7 +553,7 @@ def test_get_idea_format_filenames_ReturnsObj():
 
 def _validate_idea_format_files(idea_filenames: set[str]):
     valid_idea_categorys = set()
-    valid_idea_categorys.update(get_atom_categorys())
+    valid_idea_categorys.update(get_bud_categorys())
     valid_idea_categorys.update(get_fiscal_categorys())
     valid_idea_categorys.update(get_pidgin_categorys())
     config_dict = get_idea_config_dict()
