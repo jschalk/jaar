@@ -208,7 +208,7 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
     assert x_atomunits[0] == static_atom
 
 
-def test_AtomRow_get_atomunits_ReturnsObjIfCategoryIsCorrect():
+def test_AtomRow_get_atomunits_ReturnsObjIfDimenIsCorrect():
     # ESTABLISH
     x_atomrow = atomrow_shop(set(), atom_insert())
     x_atomrow.acct_name = "Bob"

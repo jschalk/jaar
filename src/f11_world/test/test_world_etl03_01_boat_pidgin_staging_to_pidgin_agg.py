@@ -8,7 +8,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllCategorys(
+def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

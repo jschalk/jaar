@@ -482,6 +482,38 @@ def get_bud_dimens() -> set:
     }
 
 
+def get_all_bud_dimen_keys() -> set:
+    return {
+        "acct_name",
+        "awardee_tag",
+        "base",
+        "group_label",
+        "healer_name",
+        "item_title",
+        "need",
+        "owner_name",
+        "parent_road",
+        "road",
+        "team_tag",
+    }
+
+
+def get_all_bud_dimen_delete_keys() -> set:
+    return {
+        "acct_name_DELETE",
+        "awardee_tag_DELETE",
+        "base_DELETE",
+        "group_label_DELETE",
+        "healer_name_DELETE",
+        "item_title_DELETE",
+        "need_DELETE",
+        "owner_name_DELETE",
+        "parent_road_DELETE",
+        "road_DELETE",
+        "team_tag_DELETE",
+    }
+
+
 def is_bud_dimen(dimen_str: str) -> bool:
     return dimen_str in get_bud_dimens()
 

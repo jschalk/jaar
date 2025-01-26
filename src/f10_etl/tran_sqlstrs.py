@@ -693,7 +693,7 @@ def get_fiscal_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
     }
 
 
-IDEA_STAGEABLE_CATEGORYS = {
+IDEA_STAGEABLE_DIMENS = {
     "br00000": ["fiscalunit"],
     "br00001": ["budunit", "fiscal_deal_episode", "fiscalunit"],
     "br00002": [

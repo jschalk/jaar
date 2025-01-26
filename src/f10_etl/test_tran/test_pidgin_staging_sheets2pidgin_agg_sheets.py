@@ -231,7 +231,7 @@ def test_etl_pidgin_title_staging_to_title_agg_Scenario0_CreatesFileFromSingleId
     pandas_testing_assert_frame_equal(gen_title_agg_df, e1_title_agg_df)
 
 
-def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllCategorys(
+def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

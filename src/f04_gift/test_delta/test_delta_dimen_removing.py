@@ -6,7 +6,7 @@ from src.f04_gift.atom import atom_insert
 from src.f04_gift.delta import deltaunit_shop, get_dimens_cruds_deltaunit
 
 
-def test_DeltaUnit_get_dimens_cruds_deltaunit_ReturnsObjWithCorrectCategorysAndCRUDsBy_acctunit_insert():
+def test_DeltaUnit_get_dimens_cruds_deltaunit_ReturnsObjWithCorrectDimensAndCRUDsBy_acctunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"

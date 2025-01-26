@@ -40,7 +40,7 @@ from src.f10_etl.tran_sqlstrs import (
     get_bud_insert_agg_from_staging_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
     FISCALUNIT_AGG_INSERT_SQLSTR,
-    IDEA_STAGEABLE_CATEGORYS,
+    IDEA_STAGEABLE_DIMENS,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -629,4 +629,4 @@ def test_idea_into_dimen_ReturnsObj_ForAll_idea_numbersAndAll_dimens():
     # print(f"{idea_stagable_dimens=}")
     assert idea_cat_combo_checked_count == 464
     assert idea_stage2dimen_count == 77
-    assert IDEA_STAGEABLE_CATEGORYS == idea_stagable_dimens
+    assert IDEA_STAGEABLE_DIMENS == idea_stagable_dimens

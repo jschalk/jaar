@@ -13,6 +13,8 @@ from src.f02_bud.bud_tool import (
 )
 from src.f04_gift.atom_config import (
     get_bud_dimens,
+    get_all_bud_dimen_keys,
+    get_all_bud_dimen_delete_keys,
     is_bud_dimen,
     get_atom_config_dict,
     get_atom_args_dimen_mapping,
@@ -117,9 +119,39 @@ def test_str_functions_ReturnsObj():
 
 
 def test_get_bud_dimens_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert get_bud_dimens() == set(get_atom_config_dict().keys())
     assert bud_acctunit_str() in get_bud_dimens()
     assert is_bud_dimen("itemroot") is False
+
+
+def test_get_all_bud_dimen_keys_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    all_bud_dimen_keys = get_all_bud_dimen_keys()
+
+    # THEN
+    assert not all_bud_dimen_keys.isdisjoint({"acct_name"})
+    expected_bud_keys = set()
+    for bud_dimen in get_bud_dimens():
+        expected_bud_keys.update(_get_atom_config_jkey_keys(bud_dimen))
+
+    expected_bud_keys.add("owner_name")
+    print(f"{expected_bud_keys=}")
+    assert all_bud_dimen_keys == expected_bud_keys
+
+
+def test_get_all_bud_dimen_delete_keys_ReturnsObj():
+    # ESTABLISH / WHEN
+    all_bud_dimen_delete_keys = get_all_bud_dimen_delete_keys()
+
+    # THEN
+    assert not all_bud_dimen_delete_keys.isdisjoint({"acct_name_DELETE"})
+    expected_bud_delete_keys = {
+        f"{bud_dimen_key}_DELETE" for bud_dimen_key in get_all_bud_dimen_keys()
+    }
+    print(f"{expected_bud_delete_keys=}")
+    assert all_bud_dimen_delete_keys == expected_bud_delete_keys
 
 
 def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
@@ -224,7 +256,7 @@ def _get_atom_config_jvalues_len(x_cat: str) -> int:
     return len(get_from_nested_dict(get_atom_config_dict(), jvalues_key_list))
 
 
-def test_get_atom_config_dict_CheckEachCategoryHasCorrectArgCount():
+def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     # ESTABLISH
     assert _get_atom_config_jkeys_len(budunit_str()) == 0
     assert _get_atom_config_jkeys_len(bud_acctunit_str()) == 1

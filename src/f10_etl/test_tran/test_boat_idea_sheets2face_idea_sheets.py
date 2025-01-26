@@ -133,7 +133,7 @@ def test_etl_boat_ideas_to_bow_face_ideas_CreatesFaceIdeaSheets_Scenario1_Multpl
     pandas_assert_frame_equal(zia_br3_agg_df, example_zia_df)
 
 
-def test_etl_boat_ideas_to_bow_face_ideas_Scenario2_PidginCategoryIdeasAreNotLoaded(
+def test_etl_boat_ideas_to_bow_face_ideas_Scenario2_PidginDimenIdeasAreNotLoaded(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

@@ -58,7 +58,7 @@ class not_given_pidgin_dimen_Exception(Exception):
     pass
 
 
-MAPS_CATEGORYS = {
+MAPS_DIMENS = {
     "map_name": "AcctName",
     "map_label": "GroupLabel",
     "map_title": "TitleUnit",
@@ -98,9 +98,9 @@ class_typeS = {
 
 
 def get_class_type(pidgin_dimen: str) -> str:
-    if pidgin_dimen not in MAPS_CATEGORYS:
+    if pidgin_dimen not in MAPS_DIMENS:
         raise not_given_pidgin_dimen_Exception("not given pidgin_dimen")
-    return MAPS_CATEGORYS[pidgin_dimen]
+    return MAPS_DIMENS[pidgin_dimen]
 
 
 def get_sheet_stage_name(class_type: str) -> str:
