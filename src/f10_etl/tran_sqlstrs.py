@@ -856,10 +856,13 @@ IDEA_STAGEABLE_PUT_DIMENS = {
     "br00043": [],
     "br00044": [],
     "br00045": [],
-    # "br00050": ["bud_acctunit", "budunit", "fiscalunit", "bud_acct_membership_DELETE"],
     "br00050": ["bud_acctunit", "budunit", "fiscalunit"],
     "br00113": ["bud_acctunit", "budunit", "fiscalunit"],
     "br00115": ["bud_acctunit", "budunit", "fiscalunit"],
     "br00116": ["bud_acctunit", "budunit", "fiscalunit"],
     "br00117": ["bud_acctunit", "budunit", "fiscalunit"],
+}
+
+IDEA_STAGEABLE_DEL_DIMENS = {
+    "br00050": ["bud_acct_membership"],
 }

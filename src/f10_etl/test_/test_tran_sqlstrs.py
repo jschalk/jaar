@@ -47,6 +47,7 @@ from src.f10_etl.tran_sqlstrs import (
     get_fiscal_insert_agg_from_staging_sqlstrs,
     FISCALUNIT_AGG_INSERT_SQLSTR,
     IDEA_STAGEABLE_PUT_DIMENS,
+    IDEA_STAGEABLE_DEL_DIMENS,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -758,3 +759,68 @@ def test_IDEA_STAGEABLE_PUT_DIMENS_HasAll_idea_numbersForAll_dimens():
     assert idea_dimen_combo_checked_count == 480
     assert idea_stage2dimen_count == 80
     assert IDEA_STAGEABLE_PUT_DIMENS == expected_idea_stagable_dimens
+
+
+def test_IDEA_STAGEABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
+    # sourcery skip: extract-method, no-loop-in-tests, no-conditionals-in-tests
+    # ESTABLISH / WHEN
+    # THEN
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) != "pidgin"
+        # if dimen_config.get(idea_category_str()) == "fiscal"
+    }
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        cursor = fiscal_db_conn.cursor()
+        create_all_idea_tables(cursor)
+        create_fiscal_tables(cursor)
+        create_bud_tables(cursor)
+
+        idea_stage2dimen_count = 0
+        idea_dimen_combo_checked_count = 0
+        sorted_idea_numbers = sorted(get_idea_numbers())
+        x_idea_stagable_dimens = {i_num: [] for i_num in sorted_idea_numbers}
+        for x_dimen in sorted(idea_config):
+            dimen_config = idea_config.get(x_dimen)
+            dimen_key_columns = set(dimen_config.get("jkeys").keys())
+            dimen_key_columns = get_custom_sorted_list(dimen_key_columns)
+            dimen_key_columns[-1] = get_delete_key_name(dimen_key_columns[-1])
+            dimen_key_columns = set(dimen_key_columns)
+            for idea_number in sorted_idea_numbers:
+                src_columns = get_table_columns(cursor, f"{idea_number}_staging")
+                expected_stagable = dimen_key_columns.issubset(src_columns)
+                src_tablename = f"{idea_number}_staging"
+                gen_stablable = is_stageable(cursor, src_tablename, dimen_key_columns)
+                assert expected_stagable == gen_stablable
+
+                idea_dimen_combo_checked_count += 1
+                if is_stageable(cursor, src_tablename, dimen_key_columns):
+                    x_idea_stagable_dimens.get(idea_number).append(x_dimen)
+                    idea_stage2dimen_count += 1
+                    src_cols_set = set(src_columns)
+                    # print(
+                    #     f"{x_dimen} {idea_number} checking... {dimen_key_columns=} {dimen_value_columns=} {src_cols_set=}"
+                    # )
+                    print(
+                        f"{idea_stage2dimen_count} {idea_number} {x_dimen} keys:{dimen_key_columns}"
+                    )
+                    generated_sqlstr = get_idea_into_dimen_staging_query(
+                        conn_or_cursor=cursor,
+                        idea_number=idea_number,
+                        x_dimen=x_dimen,
+                        x_jkeys=dimen_key_columns,
+                    )
+                    # check sql syntax is correct?
+                    assert generated_sqlstr != ""
+    expected_idea_stagable_dimens = {
+        x_idea_number: stagable_dimens
+        for x_idea_number, stagable_dimens in x_idea_stagable_dimens.items()
+        if stagable_dimens != []
+    }
+    idea_stageable_dimen_list = sorted(list(expected_idea_stagable_dimens))
+    # print(f"{idea_stagable_dimens=}")
+    assert idea_dimen_combo_checked_count == 480
+    assert idea_stage2dimen_count == 1
+    assert IDEA_STAGEABLE_DEL_DIMENS == expected_idea_stagable_dimens
