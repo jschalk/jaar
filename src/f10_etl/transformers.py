@@ -38,7 +38,7 @@ from src.f10_etl.tran_sqlstrs import (
     get_fiscal_insert_agg_from_staging_sqlstrs,
     get_bud_put_update_inconsist_error_message_sqlstrs,
     get_bud_insert_put_agg_from_staging_sqlstrs,
-    IDEA_STAGEABLE_DIMENS,
+    IDEA_STAGEABLE_PUT_DIMENS,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
@@ -760,7 +760,7 @@ def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection
         idea_staging = f"{idea_number}_staging"
         if db_table_exists(conn_or_cursor, idea_staging):
             # only inserts from pre-identified idea categorys
-            stageable_dimens = IDEA_STAGEABLE_DIMENS.get(idea_number)
+            stageable_dimens = IDEA_STAGEABLE_PUT_DIMENS.get(idea_number)
             for x_dimen in stageable_dimens:
                 dimen_config = idea_config_dict.get(x_dimen)
                 if dimen_config.get("idea_category") == "fiscal":
@@ -787,7 +787,7 @@ def idea_staging_tables2bud_staging_tables(conn_or_cursor: sqlite3_Connection):
         idea_staging = f"{idea_number}_staging"
         if db_table_exists(conn_or_cursor, idea_staging):
             # only inserts from pre-identified idea categorys
-            stageable_dimens = IDEA_STAGEABLE_DIMENS.get(idea_number)
+            stageable_dimens = IDEA_STAGEABLE_PUT_DIMENS.get(idea_number)
             for x_dimen in stageable_dimens:
                 dimen_config = idea_config_dict.get(x_dimen)
                 if dimen_config.get("idea_category") == "bud":

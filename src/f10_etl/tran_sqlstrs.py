@@ -6,24 +6,44 @@ from sqlite3 import Connection as sqlite3_Connection
 
 CREATE_BUDMEMB_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"""
 CREATE_BUDMEMB_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"""
+CREATE_BUDMEMB_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, acct_name TEXT, group_label_ERASE TEXT)"""
+CREATE_BUDMEMB_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, acct_name TEXT, group_label_ERASE TEXT, error_message TEXT)"""
 CREATE_BUDACCT_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"""
 CREATE_BUDACCT_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, error_message TEXT)"""
+CREATE_BUDACCT_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, acct_name_ERASE TEXT)"""
+CREATE_BUDACCT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, acct_name_ERASE TEXT, error_message TEXT)"""
 CREATE_BUDAWAR_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, awardee_tag TEXT, give_force REAL, take_force REAL)"""
 CREATE_BUDAWAR_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, awardee_tag TEXT, give_force REAL, take_force REAL, error_message TEXT)"""
+CREATE_BUDAWAR_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, awardee_tag_ERASE TEXT)"""
+CREATE_BUDAWAR_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, awardee_tag_ERASE TEXT, error_message TEXT)"""
 CREATE_BUDFACT_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"""
 CREATE_BUDFACT_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL, error_message TEXT)"""
+CREATE_BUDFACT_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"""
+CREATE_BUDFACT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT, error_message TEXT)"""
 CREATE_BUDHEAL_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"""
 CREATE_BUDHEAL_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, healer_name TEXT, error_message TEXT)"""
+CREATE_BUDHEAL_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT)"""
+CREATE_BUDHEAL_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT, error_message TEXT)"""
 CREATE_BUDPREM_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor REAL)"""
 CREATE_BUDPREM_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor REAL, error_message TEXT)"""
+CREATE_BUDPREM_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base TEXT, need_ERASE TEXT)"""
+CREATE_BUDPREM_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base TEXT, need_ERASE TEXT, error_message TEXT)"""
 CREATE_BUDREAS_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite TEXT)"""
 CREATE_BUDREAS_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite TEXT, error_message TEXT)"""
+CREATE_BUDREAS_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"""
+CREATE_BUDREAS_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT, error_message TEXT)"""
 CREATE_BUDTEAM_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, team_tag TEXT)"""
 CREATE_BUDTEAM_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, team_tag TEXT, error_message TEXT)"""
+CREATE_BUDTEAM_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, team_tag_ERASE TEXT)"""
+CREATE_BUDTEAM_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, road TEXT, team_tag_ERASE TEXT, error_message TEXT)"""
 CREATE_BUDITEM_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, parent_road TEXT, item_title TEXT, begin REAL, close REAL, addin REAL, numor REAL, denom REAL, morph INTEGER, gogo_want REAL, stop_want REAL, mass REAL, pledge INTEGER, problem_bool INTEGER)"""
 CREATE_BUDITEM_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, parent_road TEXT, item_title TEXT, begin REAL, close REAL, addin REAL, numor REAL, denom REAL, morph INTEGER, gogo_want REAL, stop_want REAL, mass REAL, pledge INTEGER, problem_bool INTEGER, error_message TEXT)"""
+CREATE_BUDITEM_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, parent_road TEXT, item_title_ERASE TEXT)"""
+CREATE_BUDITEM_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, parent_road TEXT, item_title_ERASE TEXT, error_message TEXT)"""
 CREATE_BUDUNIT_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, deal_time_int INTEGER, tally REAL, fund_coin REAL, penny REAL, respect_bit REAL)"""
 CREATE_BUDUNIT_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, deal_time_int INTEGER, tally REAL, fund_coin REAL, penny REAL, respect_bit REAL, error_message TEXT)"""
+CREATE_BUDUNIT_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name_ERASE TEXT)"""
+CREATE_BUDUNIT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name_ERASE TEXT, error_message TEXT)"""
 
 CREATE_FISCAL_CASHBOOK_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscal_cashbook_agg (fiscal_title TEXT, owner_name TEXT, acct_name TEXT, time_int INTEGER, amount REAL)"""
 CREATE_FISCAL_CASHBOOK_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscal_cashbook_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, acct_name TEXT, time_int INTEGER, amount REAL, error_message TEXT)"""
@@ -60,24 +80,44 @@ def get_bud_create_table_sqlstrs() -> dict[str, str]:
     return {
         "bud_acct_membership_put_agg": CREATE_BUDMEMB_PUT_AGG_SQLSTR,
         "bud_acct_membership_put_staging": CREATE_BUDMEMB_PUT_STAGING_SQLSTR,
+        "bud_acct_membership_del_agg": CREATE_BUDMEMB_DEL_AGG_SQLSTR,
+        "bud_acct_membership_del_staging": CREATE_BUDMEMB_DEL_STAGING_SQLSTR,
         "bud_acctunit_put_agg": CREATE_BUDACCT_PUT_AGG_SQLSTR,
         "bud_acctunit_put_staging": CREATE_BUDACCT_PUT_STAGING_SQLSTR,
+        "bud_acctunit_del_agg": CREATE_BUDACCT_DEL_AGG_SQLSTR,
+        "bud_acctunit_del_staging": CREATE_BUDACCT_DEL_STAGING_SQLSTR,
         "bud_item_awardlink_put_agg": CREATE_BUDAWAR_PUT_AGG_SQLSTR,
         "bud_item_awardlink_put_staging": CREATE_BUDAWAR_PUT_STAGING_SQLSTR,
+        "bud_item_awardlink_del_agg": CREATE_BUDAWAR_DEL_AGG_SQLSTR,
+        "bud_item_awardlink_del_staging": CREATE_BUDAWAR_DEL_STAGING_SQLSTR,
         "bud_item_factunit_put_agg": CREATE_BUDFACT_PUT_AGG_SQLSTR,
         "bud_item_factunit_put_staging": CREATE_BUDFACT_PUT_STAGING_SQLSTR,
+        "bud_item_factunit_del_agg": CREATE_BUDFACT_DEL_AGG_SQLSTR,
+        "bud_item_factunit_del_staging": CREATE_BUDFACT_DEL_STAGING_SQLSTR,
         "bud_item_healerlink_put_agg": CREATE_BUDHEAL_PUT_AGG_SQLSTR,
         "bud_item_healerlink_put_staging": CREATE_BUDHEAL_PUT_STAGING_SQLSTR,
+        "bud_item_healerlink_del_agg": CREATE_BUDHEAL_DEL_AGG_SQLSTR,
+        "bud_item_healerlink_del_staging": CREATE_BUDHEAL_DEL_STAGING_SQLSTR,
         "bud_item_reason_premiseunit_put_agg": CREATE_BUDPREM_PUT_AGG_SQLSTR,
         "bud_item_reason_premiseunit_put_staging": CREATE_BUDPREM_PUT_STAGING_SQLSTR,
+        "bud_item_reason_premiseunit_del_agg": CREATE_BUDPREM_DEL_AGG_SQLSTR,
+        "bud_item_reason_premiseunit_del_staging": CREATE_BUDPREM_DEL_STAGING_SQLSTR,
         "bud_item_reasonunit_put_agg": CREATE_BUDREAS_PUT_AGG_SQLSTR,
         "bud_item_reasonunit_put_staging": CREATE_BUDREAS_PUT_STAGING_SQLSTR,
+        "bud_item_reasonunit_del_agg": CREATE_BUDREAS_DEL_AGG_SQLSTR,
+        "bud_item_reasonunit_del_staging": CREATE_BUDREAS_DEL_STAGING_SQLSTR,
         "bud_item_teamlink_put_agg": CREATE_BUDTEAM_PUT_AGG_SQLSTR,
         "bud_item_teamlink_put_staging": CREATE_BUDTEAM_PUT_STAGING_SQLSTR,
+        "bud_item_teamlink_del_agg": CREATE_BUDTEAM_DEL_AGG_SQLSTR,
+        "bud_item_teamlink_del_staging": CREATE_BUDTEAM_DEL_STAGING_SQLSTR,
         "bud_itemunit_put_agg": CREATE_BUDITEM_PUT_AGG_SQLSTR,
         "bud_itemunit_put_staging": CREATE_BUDITEM_PUT_STAGING_SQLSTR,
+        "bud_itemunit_del_agg": CREATE_BUDITEM_DEL_AGG_SQLSTR,
+        "bud_itemunit_del_staging": CREATE_BUDITEM_DEL_STAGING_SQLSTR,
         "budunit_put_agg": CREATE_BUDUNIT_PUT_AGG_SQLSTR,
         "budunit_put_staging": CREATE_BUDUNIT_PUT_STAGING_SQLSTR,
+        "budunit_del_agg": CREATE_BUDUNIT_DEL_AGG_SQLSTR,
+        "budunit_del_staging": CREATE_BUDUNIT_DEL_STAGING_SQLSTR,
     }
 
 
@@ -682,6 +722,21 @@ def get_bud_insert_put_agg_from_staging_sqlstrs() -> dict[str, str]:
     }
 
 
+def get_bud_insert_del_agg_from_staging_sqlstrs() -> dict[str, str]:
+    return {
+        # "bud_acct_membership": BUDMEMB_DEL_AGG_INSERT_SQLSTR,
+        # "bud_acctunit": BUDACCT_DEL_AGG_INSERT_SQLSTR,
+        # "bud_item_awardlink": BUDAWAR_DEL_AGG_INSERT_SQLSTR,
+        # "bud_item_factunit": BUDFACT_DEL_AGG_INSERT_SQLSTR,
+        # "bud_item_healerlink": BUDHEAL_DEL_AGG_INSERT_SQLSTR,
+        # "bud_item_reason_premiseunit": BUDPREM_DEL_AGG_INSERT_SQLSTR,
+        # "bud_item_reasonunit": BUDREAS_DEL_AGG_INSERT_SQLSTR,
+        # "bud_item_teamlink": BUDTEAM_DEL_AGG_INSERT_SQLSTR,
+        # "bud_itemunit": BUDITEM_DEL_AGG_INSERT_SQLSTR,
+        # "budunit": BUDUNIT_DEL_AGG_INSERT_SQLSTR,
+    }
+
+
 def get_fiscal_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
     return {
         "fiscal_cashbook": FISCALCASH_AGG_INSERT_SQLSTR,
@@ -693,7 +748,7 @@ def get_fiscal_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
     }
 
 
-IDEA_STAGEABLE_DIMENS = {
+IDEA_STAGEABLE_PUT_DIMENS = {
     "br00000": ["fiscalunit"],
     "br00001": ["budunit", "fiscal_deal_episode", "fiscalunit"],
     "br00002": [
