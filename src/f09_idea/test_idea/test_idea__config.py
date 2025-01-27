@@ -163,7 +163,7 @@ def test_str_functions_ReturnObj():
     assert delete_insert_str() == "DELETE_INSERT"
     assert delete_update_str() == "DELETE_UPDATE"
 
-    assert get_idea_categorys() == {budunit_str(), fiscalunit_str(), pidginunit_str()}
+    assert get_idea_categorys() == {"bud", "fiscal", "pidgin"}
 
 
 def test_get_idea_elements_sort_order_ReturnsObj():
@@ -430,11 +430,11 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(atom_insert()) is None
         assert idea_dict.get(atom_delete()) is None
         assert idea_dict.get(normal_specs_str()) is None
-        if idea_dict.get(idea_category_str()) == budunit_str():
+        if idea_dict.get(idea_category_str()) == "bud":
             sub_dimen = atom_config_dict.get(idea_dimen)
-        elif idea_dict.get(idea_category_str()) == fiscalunit_str():
+        elif idea_dict.get(idea_category_str()) == "fiscal":
             sub_dimen = fiscal_config_dict.get(idea_dimen)
-        elif idea_dict.get(idea_category_str()) == pidginunit_str():
+        elif idea_dict.get(idea_category_str()) == "pidgin":
             sub_dimen = pidgin_config_dict.get(idea_dimen)
 
         assert idea_dict.get(allowed_crud_str()) in get_allowed_curds()
@@ -505,9 +505,9 @@ def _validate_idea_config(x_idea_config: dict):
         print(f"  {idea_jkeys_keys=}")
         assert face_name_str() in idea_jkeys_keys
         assert event_int_str() in idea_jkeys_keys
-        if idea_dict.get(idea_category_str()) != pidginunit_str():
+        if idea_dict.get(idea_category_str()) != "pidgin":
             assert fiscal_title_str() in idea_jkeys_keys
-        if idea_dict.get(idea_category_str()) == budunit_str():
+        if idea_dict.get(idea_category_str()) == "bud":
             idea_jkeys_keys.remove(fiscal_title_str())
             idea_jkeys_keys.remove(owner_name_str())
         idea_jkeys_keys.remove(face_name_str())

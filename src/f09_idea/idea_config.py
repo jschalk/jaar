@@ -30,7 +30,7 @@ def idea_category_str() -> str:
 
 
 def get_idea_categorys() -> set[str]:
-    return {budunit_str(), fiscalunit_str(), pidginunit_str()}
+    return {"bud", "fiscal", "pidgin"}
 
 
 def allowed_crud_str() -> str:

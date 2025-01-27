@@ -908,8 +908,8 @@ def test_GlobalVariablesForFiscal_inconsistency_queryReturns_sqlstrs():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        # if dimen_config.get(idea_category_str()) != pidginunit_str()
-        if dimen_config.get(idea_category_str()) == fiscalunit_str()
+        # if dimen_config.get(idea_category_str()) != "pidgin"
+        if dimen_config.get(idea_category_str()) == "fiscal"
     }
 
     exclude_cols = {"idea_number", "face_name", "event_int", "error_message"}

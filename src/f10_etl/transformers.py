@@ -763,7 +763,7 @@ def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection
             stageable_dimens = IDEA_STAGEABLE_DIMENS.get(idea_number)
             for x_dimen in stageable_dimens:
                 dimen_config = idea_config_dict.get(x_dimen)
-                if dimen_config.get("idea_category") == "fiscalunit":
+                if dimen_config.get("idea_category") == "fiscal":
                     dimen_jkeys = set(dimen_config.get("jkeys").keys())
                     gen_sqlstr = get_idea_into_dimen_staging_query(
                         conn_or_cursor, idea_number, x_dimen, dimen_jkeys
@@ -790,7 +790,7 @@ def idea_staging_tables2bud_staging_tables(conn_or_cursor: sqlite3_Connection):
             stageable_dimens = IDEA_STAGEABLE_DIMENS.get(idea_number)
             for x_dimen in stageable_dimens:
                 dimen_config = idea_config_dict.get(x_dimen)
-                if dimen_config.get("idea_category") == "budunit":
+                if dimen_config.get("idea_category") == "bud":
                     dimen_jkeys = set(dimen_config.get("jkeys").keys())
                     insert_sqlstr = get_idea_into_dimen_staging_query(
                         conn_or_cursor, idea_number, x_dimen, dimen_jkeys, "put"
