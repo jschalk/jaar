@@ -149,7 +149,7 @@ def get_namemap_from_json(x_json: str) -> NameMap:
     return get_namemap_from_dict(get_dict_from_json(x_json))
 
 
-class GroupMap(MapCore):
+class LabelMap(MapCore):
     def set_otx2inx(self, otx_label: str, inx_label: str):
         self.otx2inx[otx_label] = inx_label
 
@@ -190,19 +190,19 @@ class GroupMap(MapCore):
         )
 
 
-def groupmap_shop(
+def labelmap_shop(
     face_name: FaceName = None,
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
     otx2inx: dict = None,
     unknown_word: str = None,
-) -> GroupMap:
+) -> LabelMap:
     unknown_word = default_unknown_word_if_None(unknown_word)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
-    return GroupMap(
+    return LabelMap(
         face_name=face_name,
         event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
@@ -212,8 +212,8 @@ def groupmap_shop(
     )
 
 
-def get_groupmap_from_dict(x_dict: dict) -> GroupMap:
-    return groupmap_shop(
+def get_labelmap_from_dict(x_dict: dict) -> LabelMap:
+    return labelmap_shop(
         face_name=x_dict.get("face_name"),
         event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
@@ -223,8 +223,8 @@ def get_groupmap_from_dict(x_dict: dict) -> GroupMap:
     )
 
 
-def get_groupmap_from_json(x_json: str) -> GroupMap:
-    return get_groupmap_from_dict(get_dict_from_json(x_json))
+def get_labelmap_from_json(x_json: str) -> LabelMap:
+    return get_labelmap_from_dict(get_dict_from_json(x_json))
 
 
 class TitleMap(MapCore):
@@ -500,7 +500,7 @@ def inherit_namemap(new: NameMap, old: NameMap) -> NameMap:
     return _inherit_mapunit(new, old)
 
 
-def inherit_groupmap(new: GroupMap, old: GroupMap) -> GroupMap:
+def inherit_labelmap(new: LabelMap, old: LabelMap) -> LabelMap:
     return _inherit_mapunit(new, old)
 
 

@@ -2,11 +2,11 @@ from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.road import default_bridge_if_None, create_road
 from src.f04_gift.atom_config import acct_name_str, base_str, type_RoadUnit_str
 from src.f08_pidgin.map import (
-    groupmap_shop,
+    labelmap_shop,
     namemap_shop,
     titlemap_shop,
     roadmap_shop,
-    GroupMap,
+    LabelMap,
     NameMap,
     TitleMap,
     RoadMap,
@@ -40,15 +40,15 @@ def get_clean_roadmap() -> RoadMap:
     return road_mapunit
 
 
-def get_swim_groupmap() -> GroupMap:
+def get_swim_labelmap() -> LabelMap:
     bridge = default_bridge_if_None()
     swim_otx = f"swim{bridge}"
     swim_inx = f"nage{bridge}"
     climb_otx = f"climb{bridge}"
-    x_groupmap = groupmap_shop(face_name="Sue")
-    x_groupmap.set_otx2inx(swim_otx, swim_inx)
-    x_groupmap.set_otx2inx(climb_otx, climb_otx)
-    return x_groupmap
+    x_labelmap = labelmap_shop(face_name="Sue")
+    x_labelmap.set_otx2inx(swim_otx, swim_inx)
+    x_labelmap.set_otx2inx(climb_otx, climb_otx)
+    return x_labelmap
 
 
 def get_suita_namemap() -> NameMap:
@@ -71,10 +71,10 @@ def get_suita_namemap() -> NameMap:
 #     sue_inx = "Sue"
 #     zia_otx = "Zia"
 #     zia_inx = "Zia"
-#     x_groupmap = mapunit_shop(type_AcctName_str(), face_name="Sue")
-#     x_groupmap.set_otx2inx(sue_otx, sue_inx)
-#     x_groupmap.set_otx2inx(zia_otx, zia_inx)
-#     return x_groupmap
+#     x_labelmap = mapunit_shop(type_AcctName_str(), face_name="Sue")
+#     x_labelmap.set_otx2inx(sue_otx, sue_inx)
+#     x_labelmap.set_otx2inx(zia_otx, zia_inx)
+#     return x_labelmap
 
 
 # def get_invalid_group_label_mapunit() -> MapUnit:
@@ -82,10 +82,10 @@ def get_suita_namemap() -> NameMap:
 #     sue_inx = f"Sue{default_bridge_if_None()}"
 #     zia_otx = "Zia"
 #     zia_inx = f"Zia{default_bridge_if_None()}"
-#     x_groupmap = mapunit_shop(type_GroupLabel_str(), face_name="Sue")
-#     x_groupmap.set_otx2inx(sue_otx, sue_inx)
-#     x_groupmap.set_otx2inx(zia_otx, zia_inx)
-#     return x_groupmap
+#     x_labelmap = mapunit_shop(type_LabelUnit_str(), face_name="Sue")
+#     x_labelmap.set_otx2inx(sue_otx, sue_inx)
+#     x_labelmap.set_otx2inx(zia_otx, zia_inx)
+#     return x_labelmap
 
 
 # def get_invalid_road_mapunit() -> MapUnit:
@@ -121,7 +121,7 @@ def get_slash_roadmap() -> RoadMap:
     return road_mapunit
 
 
-def get_slash_groupmap() -> GroupMap:
+def get_slash_labelmap() -> LabelMap:
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
@@ -129,15 +129,15 @@ def get_slash_groupmap() -> GroupMap:
     swim_inx = f"nage{colon_inx_bridge}"
     climb_otx = f"climb{slash_otx_bridge}"
     climb_inx = f"climb{colon_inx_bridge}"
-    x_groupmap = groupmap_shop(
+    x_labelmap = labelmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
         face_name="Sue",
     )
-    x_groupmap.set_otx2inx(swim_otx, swim_inx)
-    x_groupmap.set_otx2inx(climb_otx, climb_inx)
-    return x_groupmap
+    x_labelmap.set_otx2inx(swim_otx, swim_inx)
+    x_labelmap.set_otx2inx(climb_otx, climb_inx)
+    return x_labelmap
 
 
 def get_slash_namemap() -> NameMap:
@@ -166,7 +166,7 @@ def get_slash_namemap() -> NameMap:
 def get_sue_pidginunit() -> PidginUnit:
     sue_pidginunit = pidginunit_shop("Sue")
     sue_pidginunit.set_namemap(get_suita_namemap())
-    sue_pidginunit.set_groupmap(get_swim_groupmap())
+    sue_pidginunit.set_labelmap(get_swim_labelmap())
     sue_pidginunit.set_titlemap(get_clean_titlemap())
     sue_pidginunit.set_roadmap(get_clean_roadmap())
     sue_pidginunit.roadmap.titlemap = get_clean_titlemap()
@@ -346,15 +346,15 @@ def get_invalid_namemap() -> NameMap:
     return namemap
 
 
-def get_invalid_groupmap() -> GroupMap:
+def get_invalid_labelmap() -> LabelMap:
     sue_otx = f"Xio{default_bridge_if_None()}"
     sue_inx = f"Sue{default_bridge_if_None()}"
     zia_otx = "Zia"
     zia_inx = f"Zia{default_bridge_if_None()}"
-    x_groupmap = groupmap_shop(face_name="Sue")
-    x_groupmap.set_otx2inx(sue_otx, sue_inx)
-    x_groupmap.set_otx2inx(zia_otx, zia_inx)
-    return x_groupmap
+    x_labelmap = labelmap_shop(face_name="Sue")
+    x_labelmap.set_otx2inx(sue_otx, sue_inx)
+    x_labelmap.set_otx2inx(zia_otx, zia_inx)
+    return x_labelmap
 
 
 def get_invalid_titlemap() -> RoadMap:
@@ -413,7 +413,7 @@ def get_slash_roadmap() -> RoadMap:
     return x_roadmap
 
 
-def get_slash_groupmap() -> GroupMap:
+def get_slash_labelmap() -> LabelMap:
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
@@ -421,16 +421,16 @@ def get_slash_groupmap() -> GroupMap:
     swim_inx = f"nage{colon_inx_bridge}"
     climb_otx = f"climb{slash_otx_bridge}"
     climb_inx = f"climb{colon_inx_bridge}"
-    x_groupmap = groupmap_shop(
+    x_labelmap = labelmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
         face_name="Sue",
         event_int=7,
     )
-    x_groupmap.set_otx2inx(swim_otx, swim_inx)
-    x_groupmap.set_otx2inx(climb_otx, climb_inx)
-    return x_groupmap
+    x_labelmap.set_otx2inx(swim_otx, swim_inx)
+    x_labelmap.set_otx2inx(climb_otx, climb_inx)
+    return x_labelmap
 
 
 def get_slash_namemap() -> NameMap:

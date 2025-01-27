@@ -61,7 +61,7 @@ class not_given_pidgin_dimen_Exception(Exception):
 
 MAPS_DIMENS = {
     "map_name": "NameUnit",
-    "map_label": "GroupLabel",
+    "map_label": "LabelUnit",
     "map_title": "TitleUnit",
     "map_road": "RoadUnit",
 }
@@ -74,7 +74,7 @@ class_typeS = {
         "otx_obj": "otx_name",
         "inx_obj": "inx_name",
     },
-    "GroupLabel": {
+    "LabelUnit": {
         "stage": "label_staging",
         "agg": "label_agg",
         "csv_filename": "label.csv",
@@ -441,7 +441,7 @@ class boatAggToStagingTransformer:
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
         if self.class_type == "NameUnit" and "inx_name" not in missing_col:
             return x_row["inx_name"]
-        elif self.class_type == "GroupLabel" and "inx_label" not in missing_col:
+        elif self.class_type == "LabelUnit" and "inx_label" not in missing_col:
             return x_row["inx_label"]
         elif self.class_type == "TitleUnit" and "inx_title" not in missing_col:
             return x_row["inx_title"]

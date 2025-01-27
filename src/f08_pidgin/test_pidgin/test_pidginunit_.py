@@ -4,7 +4,7 @@ from src.f03_chrono.chrono import timeline_title_str
 from src.f04_gift.atom_config import (
     get_atom_args_class_types,
     type_AcctName_str,
-    type_GroupLabel_str,
+    type_LabelUnit_str,
     type_TitleUnit_str,
     type_RoadUnit_str,
     acct_name_str,
@@ -30,7 +30,7 @@ from src.f07_fiscal.fiscal_config import (
     hour_title_str,
 )
 from src.f08_pidgin.map import (
-    groupmap_shop,
+    labelmap_shop,
     namemap_shop,
     titlemap_shop,
     roadmap_shop,
@@ -44,11 +44,11 @@ from src.f08_pidgin.pidgin import (
 )
 from src.f08_pidgin.examples.example_pidgins import (
     get_invalid_namemap,
-    get_invalid_groupmap,
+    get_invalid_labelmap,
     get_invalid_titlemap,
     get_clean_roadmap,
     get_clean_titlemap,
-    get_swim_groupmap,
+    get_swim_labelmap,
     get_suita_namemap,
 )
 from pytest import raises as pytest_raises
@@ -65,7 +65,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("acct_name") == type_AcctName_str()
     assert pidgin_args_class_types.get("addin") == "float"
     assert pidgin_args_class_types.get("amount") == "float"
-    assert pidgin_args_class_types.get("awardee_tag") == type_GroupLabel_str()
+    assert pidgin_args_class_types.get("awardee_tag") == type_LabelUnit_str()
     assert pidgin_args_class_types.get("base") == type_RoadUnit_str()
     assert pidgin_args_class_types.get("base_item_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
@@ -90,7 +90,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("fund_pool") == "float"
     assert pidgin_args_class_types.get("give_force") == "float"
     assert pidgin_args_class_types.get("gogo_want") == "float"
-    assert pidgin_args_class_types.get("group_label") == type_GroupLabel_str()
+    assert pidgin_args_class_types.get("group_label") == type_LabelUnit_str()
     assert pidgin_args_class_types.get("healer_name") == type_AcctName_str()
     assert pidgin_args_class_types.get("hour_title") == type_TitleUnit_str()
     assert pidgin_args_class_types.get("item_title") == type_TitleUnit_str()
@@ -116,7 +116,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
     assert pidgin_args_class_types.get("tally") == "int"
-    assert pidgin_args_class_types.get("team_tag") == type_GroupLabel_str()
+    assert pidgin_args_class_types.get("team_tag") == type_LabelUnit_str()
     assert pidgin_args_class_types.get("time_int") == "TimeLinePoint"
     assert pidgin_args_class_types.get("timeline_title") == type_TitleUnit_str()
     assert pidgin_args_class_types.get("weekday_title") == type_TitleUnit_str()
@@ -170,7 +170,7 @@ def test_pidginable_class_types_ReturnsObj():
     assert len(x_pidginable_class_types) == 4
     assert x_pidginable_class_types == {
         type_AcctName_str(),
-        type_GroupLabel_str(),
+        type_LabelUnit_str(),
         type_TitleUnit_str(),
         type_RoadUnit_str(),
     }
@@ -222,7 +222,7 @@ def test_PidginUnit_Exists():
 
     # WHEN / THEN
     assert not x_pidginunit.event_int
-    assert not x_pidginunit.groupmap
+    assert not x_pidginunit.labelmap
     assert not x_pidginunit.namemap
     assert not x_pidginunit.titlemap
     assert not x_pidginunit.roadmap
@@ -245,7 +245,7 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.unknown_word == default_unknown_word_if_None()
     assert sue_pidginunit.otx_bridge == default_bridge_if_None()
     assert sue_pidginunit.inx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.groupmap == groupmap_shop(face_name=sue_str)
+    assert sue_pidginunit.labelmap == labelmap_shop(face_name=sue_str)
     assert sue_pidginunit.namemap == namemap_shop(face_name=sue_str)
     assert sue_pidginunit.titlemap == titlemap_shop(face_name=sue_str)
     assert sue_pidginunit.roadmap == roadmap_shop(face_name=sue_str)
@@ -253,10 +253,10 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.namemap.unknown_word == default_unknown_word_if_None()
     assert sue_pidginunit.namemap.otx_bridge == default_bridge_if_None()
     assert sue_pidginunit.namemap.inx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.groupmap.event_int == 0
-    assert sue_pidginunit.groupmap.unknown_word == default_unknown_word_if_None()
-    assert sue_pidginunit.groupmap.otx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.groupmap.inx_bridge == default_bridge_if_None()
+    assert sue_pidginunit.labelmap.event_int == 0
+    assert sue_pidginunit.labelmap.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.labelmap.otx_bridge == default_bridge_if_None()
+    assert sue_pidginunit.labelmap.inx_bridge == default_bridge_if_None()
     assert sue_pidginunit.titlemap.event_int == 0
     assert sue_pidginunit.titlemap.unknown_word == default_unknown_word_if_None()
     assert sue_pidginunit.titlemap.otx_bridge == default_bridge_if_None()
@@ -286,7 +286,7 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     assert sue_pidginunit.otx_bridge == slash_otx_bridge
     assert sue_pidginunit.inx_bridge == colon_inx_bridge
 
-    # x_groupmap = groupmap_shop(
+    # x_labelmap = labelmap_shop(
     #     slash_otx_bridge, colon_inx_bridge, {}, y_uk, sue_str, five_event_int
     # )
     # x_namemap = namemap_shop(
@@ -295,7 +295,7 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     # x_roadmap = roadmap_shop(
     #     slash_otx_bridge, colon_inx_bridge, None, {}, y_uk, sue_str, five_event_int
     # )
-    # assert sue_pidginunit.groupmap == x_groupmap
+    # assert sue_pidginunit.labelmap == x_labelmap
     # assert sue_pidginunit.namemap == x_namemap
     # assert sue_pidginunit.roadmap == x_roadmap
 
@@ -304,11 +304,11 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     assert sue_pidginunit.namemap.unknown_word == y_uk
     assert sue_pidginunit.namemap.otx_bridge == slash_otx_bridge
     assert sue_pidginunit.namemap.inx_bridge == colon_inx_bridge
-    assert sue_pidginunit.groupmap.face_name == sue_str
-    assert sue_pidginunit.groupmap.event_int == five_event_int
-    assert sue_pidginunit.groupmap.unknown_word == y_uk
-    assert sue_pidginunit.groupmap.otx_bridge == slash_otx_bridge
-    assert sue_pidginunit.groupmap.inx_bridge == colon_inx_bridge
+    assert sue_pidginunit.labelmap.face_name == sue_str
+    assert sue_pidginunit.labelmap.event_int == five_event_int
+    assert sue_pidginunit.labelmap.unknown_word == y_uk
+    assert sue_pidginunit.labelmap.otx_bridge == slash_otx_bridge
+    assert sue_pidginunit.labelmap.inx_bridge == colon_inx_bridge
     assert sue_pidginunit.titlemap.face_name == sue_str
     assert sue_pidginunit.titlemap.event_int == five_event_int
     assert sue_pidginunit.titlemap.unknown_word == y_uk
@@ -451,35 +451,35 @@ def test_PidginUnit_get_mapunit_ReturnsObj():
 
     # WHEN / THEN
     assert sue_pu.get_mapunit(type_AcctName_str()) == sue_pu.namemap
-    assert sue_pu.get_mapunit(type_GroupLabel_str()) == sue_pu.groupmap
+    assert sue_pu.get_mapunit(type_LabelUnit_str()) == sue_pu.labelmap
     assert sue_pu.get_mapunit(type_TitleUnit_str()) == sue_pu.titlemap
     assert sue_pu.get_mapunit(type_RoadUnit_str()) == sue_pu.roadmap
 
     assert sue_pu.get_mapunit(type_AcctName_str()) != sue_pu.roadmap
-    assert sue_pu.get_mapunit(type_GroupLabel_str()) != sue_pu.roadmap
+    assert sue_pu.get_mapunit(type_LabelUnit_str()) != sue_pu.roadmap
     assert sue_pu.get_mapunit(type_TitleUnit_str()) != sue_pu.roadmap
 
 
 def test_PidginUnit_is_valid_ReturnsObj():
     # ESTABLISH
     invalid_namemap = get_invalid_namemap()
-    invalid_groupmap = get_invalid_groupmap()
+    invalid_labelmap = get_invalid_labelmap()
     invalid_titlemap = get_invalid_titlemap()
     valid_namemap = get_suita_namemap()
-    valid_groupmap = get_swim_groupmap()
+    valid_labelmap = get_swim_labelmap()
     valid_titlemap = get_clean_roadmap()
     assert valid_namemap.is_valid()
-    assert valid_groupmap.is_valid()
+    assert valid_labelmap.is_valid()
     assert valid_titlemap.is_valid()
     assert invalid_titlemap.is_valid() is False
-    assert invalid_groupmap.is_valid() is False
+    assert invalid_labelmap.is_valid() is False
     assert invalid_namemap.is_valid() is False
 
     # WHEN / THEN
     sue_pidginunit = pidginunit_shop("Sue")
     assert sue_pidginunit.is_valid()
     sue_pidginunit.set_namemap(valid_namemap)
-    sue_pidginunit.set_groupmap(valid_groupmap)
+    sue_pidginunit.set_labelmap(valid_labelmap)
     sue_pidginunit.set_roadmap(valid_titlemap)
     assert sue_pidginunit.is_valid()
 
@@ -490,9 +490,9 @@ def test_PidginUnit_is_valid_ReturnsObj():
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
-    sue_pidginunit.set_groupmap(invalid_groupmap)
+    sue_pidginunit.set_labelmap(invalid_labelmap)
     assert sue_pidginunit.is_valid() is False
-    sue_pidginunit.set_groupmap(valid_groupmap)
+    sue_pidginunit.set_labelmap(valid_labelmap)
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN

@@ -1,6 +1,7 @@
 from src.f01_road.road import (
     TitleUnit,
     NameUnit,
+    LabelUnit,
     HealerName,
     OwnerName,
     AcctName,
@@ -81,8 +82,19 @@ def test_AcctName_exists():
     assert inspect_getdoc(bob_acct_name) == doc_str
 
 
+def test_LabelUnit_exists():
+    # ESTABLISH
+    bob_str = "Bob"
+    # WHEN
+    bob_nameunit = LabelUnit(bob_str)
+    # THEN
+    assert bob_nameunit == bob_str
+    doc_str = "Any Label and Tag string classes should inherit from this class"
+    assert inspect_getdoc(bob_nameunit) == doc_str
+
+
 def test_GroupLabel_exists():
-    bikers_group_label = GroupLabel("bikers")
+    bikers_group_label = GroupLabel(";bikers")
     assert bikers_group_label is not None
     assert str(type(bikers_group_label)).find("src.f01_road.road.GroupLabel") > 0
 

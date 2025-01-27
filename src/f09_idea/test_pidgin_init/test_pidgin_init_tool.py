@@ -3,11 +3,11 @@ from src.f04_gift.atom_config import (
     type_AcctName_str,
     type_TitleUnit_str,
     type_RoadUnit_str,
-    type_GroupLabel_str,
+    type_LabelUnit_str,
     road_str,
     face_name_str,
     type_AcctName_str,
-    type_GroupLabel_str,
+    type_LabelUnit_str,
 )
 from src.f08_pidgin.pidgin_config import (
     event_int_str,
@@ -32,17 +32,17 @@ from src.f08_pidgin.examples.example_pidgins import (
 )
 from src.f09_idea.pidgin_toolbox import (
     get_map_name_dt_columns,
-    get_map_group_dt_columns,
+    get_map_label_dt_columns,
     get_map_title_dt_columns,
     get_map_road_dt_columns,
     create_map_name_dt,
-    create_map_group_dt,
+    create_map_label_dt,
     create_map_title_dt,
     create_map_road_dt,
     create_map_title_dt,
     save_all_csvs_from_pidginunit,
     _load_namemap_from_csv,
-    _load_groupmap_from_csv,
+    _load_labelmap_from_csv,
     _load_titlemap_from_csv,
     _load_roadmap_from_csv,
     _save_map_title_csv,
@@ -73,10 +73,10 @@ def test_get_map_name_dt_columns_ReturnsObj():
     assert set(get_map_name_dt_columns()).issubset(set(sorting_columns()))
 
 
-def test_get_map_group_dt_columns_ReturnsObj():
+def test_get_map_label_dt_columns_ReturnsObj():
     # ESTABLISH / WHEN /THEN
-    assert get_map_group_dt_columns()
-    assert len(get_map_group_dt_columns()) == 7
+    assert get_map_label_dt_columns()
+    assert len(get_map_label_dt_columns()) == 7
     static_list = [
         face_name_str(),
         event_int_str(),
@@ -86,8 +86,8 @@ def test_get_map_group_dt_columns_ReturnsObj():
         "otx_label",
         "inx_label",
     ]
-    assert get_map_group_dt_columns() == static_list
-    assert set(get_map_group_dt_columns()).issubset(set(sorting_columns()))
+    assert get_map_label_dt_columns() == static_list
+    assert set(get_map_label_dt_columns()).issubset(set(sorting_columns()))
 
 
 def test_get_map_title_dt_columns_ReturnsObj():
@@ -237,7 +237,7 @@ def test_load_namemap_from_csv_DoesNotChangeWhenFileDoesNotExist(env_dir_setup_c
     assert len(sue_namemap.otx2inx) == 0
 
 
-def test_load_groupmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
+def test_load_labelmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
@@ -246,21 +246,21 @@ def test_load_groupmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(group_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_groupmap = empty_pidginunit.get_mapunit(type_GroupLabel_str())
-    sue_groupmap.face_name = "Sue"
-    print(f"{empty_pidginunit=} {sue_groupmap=}")
-    assert len(sue_groupmap.otx2inx) == 0
+    sue_labelmap = empty_pidginunit.get_mapunit(type_LabelUnit_str())
+    sue_labelmap.face_name = "Sue"
+    print(f"{empty_pidginunit=} {sue_labelmap=}")
+    assert len(sue_labelmap.otx2inx) == 0
 
     # WHEN
-    sue_groupmap = _load_groupmap_from_csv(map_dir, sue_groupmap)
+    sue_labelmap = _load_labelmap_from_csv(map_dir, sue_labelmap)
 
     # THEN
-    assert len(sue_groupmap.otx2inx) == 2
-    ex_groupmap = sue_pidginunit.get_mapunit(type_GroupLabel_str())
-    assert ex_groupmap == sue_groupmap
+    assert len(sue_labelmap.otx2inx) == 2
+    ex_labelmap = sue_pidginunit.get_mapunit(type_LabelUnit_str())
+    assert ex_labelmap == sue_labelmap
 
 
-def test_load_groupmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
+def test_load_labelmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -269,16 +269,16 @@ def test_load_groupmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     group_csv_path = f"{map_dir}/{label_filename}"
     assert os_path_exists(group_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_groupmap = empty_pidginunit.get_mapunit(type_GroupLabel_str())
-    sue_groupmap.face_name = "Sue"
-    print(f"{empty_pidginunit=} {sue_groupmap=}")
-    assert len(sue_groupmap.otx2inx) == 0
+    sue_labelmap = empty_pidginunit.get_mapunit(type_LabelUnit_str())
+    sue_labelmap.face_name = "Sue"
+    print(f"{empty_pidginunit=} {sue_labelmap=}")
+    assert len(sue_labelmap.otx2inx) == 0
 
     # WHEN
-    sue_groupmap = _load_groupmap_from_csv(map_dir, sue_groupmap)
+    sue_labelmap = _load_labelmap_from_csv(map_dir, sue_labelmap)
 
     # THEN
-    assert len(sue_groupmap.otx2inx) == 0
+    assert len(sue_labelmap.otx2inx) == 0
 
 
 def test_load_titlemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
@@ -453,7 +453,7 @@ def test_init_pidginunit_from_dir_ReturnsObj(env_dir_setup_cleanup):
 
     assert len(sue_pidginunit.namemap.otx2inx) == 3
     assert gen_pidginunit.namemap == sue_pidginunit.namemap
-    assert gen_pidginunit.groupmap == sue_pidginunit.groupmap
+    assert gen_pidginunit.labelmap == sue_pidginunit.labelmap
     assert gen_pidginunit.titlemap == sue_pidginunit.titlemap
     assert gen_pidginunit.roadmap.titlemap == sue_pidginunit.roadmap.titlemap
     assert gen_pidginunit.roadmap == sue_pidginunit.roadmap

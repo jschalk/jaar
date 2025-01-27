@@ -6,10 +6,10 @@ from src.f00_instrument.dict_toolbox import (
     get_all_nondictionary_objs,
     get_0_if_None,
 )
-from src.f01_road.road import RoadUnit, get_terminus_title, get_parent_road
+from src.f01_road.road import RoadUnit, get_terminus_title, get_parent_road, LabelUnit
 from src.f02_bud.reason_item import FactUnit, ReasonUnit
 from src.f02_bud.acct import MemberShip, AcctName, AcctUnit
-from src.f02_bud.group import MemberShip, GroupLabel
+from src.f02_bud.group import MemberShip
 from src.f02_bud.item import ItemUnit
 from src.f02_bud.bud import BudUnit, budunit_shop
 from src.f04_gift.atom_config import CRUD_command
@@ -268,7 +268,7 @@ class DeltaUnit:
     def add_atomunit_memberships_inserts(
         self,
         after_acctunit: AcctUnit,
-        insert_membership_group_labels: list[GroupLabel],
+        insert_membership_group_labels: list[LabelUnit],
     ):
         after_acct_name = after_acctunit.acct_name
         for insert_group_label in insert_membership_group_labels:
@@ -298,7 +298,7 @@ class DeltaUnit:
         self.set_atomunit(x_atomunit)
 
     def add_atomunit_memberships_delete(
-        self, before_acct_name: AcctName, before_group_labels: GroupLabel
+        self, before_acct_name: AcctName, before_group_labels: LabelUnit
     ):
         for delete_group_label in before_group_labels:
             x_atomunit = atomunit_shop("bud_acct_membership", atom_delete())

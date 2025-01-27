@@ -9,7 +9,7 @@ from src.f01_road.road import (
     create_road,
     TitleUnit,
     RoadUnit,
-    GroupLabel,
+    LabelUnit,
     AcctName,
     is_titleunit,
 )
@@ -612,7 +612,7 @@ class AtomRow:
     _crud_command: CRUD_command = None
     acct_name: AcctName = None
     addin: float = None
-    awardee_tag: GroupLabel = None
+    awardee_tag: LabelUnit = None
     base: RoadUnit = None
     base_item_active_requisite: bool = None
     begin: float = None
@@ -632,8 +632,8 @@ class AtomRow:
     fund_pool: float = None
     give_force: float = None
     gogo_want: float = None
-    group_label: GroupLabel = None
-    healer_name: GroupLabel = None
+    group_label: LabelUnit = None
+    healer_name: LabelUnit = None
     item_title: TitleUnit = None
     mass: int = None
     max_tree_traverse: int = None
@@ -669,8 +669,8 @@ class AtomRow:
             if x_value != None:
                 if class_type == "NameUnit":
                     self.__dict__[x_arg] = AcctName(x_value)
-                elif class_type == "GroupLabel":
-                    self.__dict__[x_arg] = GroupLabel(x_value)
+                elif class_type == "LabelUnit":
+                    self.__dict__[x_arg] = LabelUnit(x_value)
                 elif class_type == "RoadUnit":
                     self.__dict__[x_arg] = RoadUnit(x_value)
                 elif class_type == "TitleUnit":
