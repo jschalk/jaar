@@ -33,6 +33,7 @@ from src.f10_etl.tran_sqlstrs import (
     get_fiscal_insert_agg_from_staging_sqlstrs,
     get_bud_put_update_inconsist_error_message_sqlstrs,
     get_bud_insert_put_agg_from_staging_sqlstrs,
+    get_bud_insert_del_agg_from_staging_sqlstrs,
     IDEA_STAGEABLE_PUT_DIMENS,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
@@ -824,6 +825,8 @@ def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
 
 def bud_staging_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
     for x_sqlstr in get_bud_insert_put_agg_from_staging_sqlstrs().values():
+        conn_or_cursor.execute(x_sqlstr)
+    for x_sqlstr in get_bud_insert_del_agg_from_staging_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)
 
 
