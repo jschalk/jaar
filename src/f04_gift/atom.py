@@ -683,7 +683,7 @@ class AtomRow:
                     self.__dict__[x_arg] = int(x_value)
                 elif class_type == "float":
                     self.__dict__[x_arg] = float(x_value)
-        if self.item_title != None and self.parent_road != None and self.road == None:
+        if self.item_title != None and self.parent_road != None and self.road is None:
             self.road = create_road(self.parent_road, self.item_title)
 
     def get_atomunits(self) -> list[AtomUnit]:
