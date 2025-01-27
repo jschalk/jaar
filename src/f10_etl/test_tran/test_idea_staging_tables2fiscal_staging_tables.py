@@ -41,7 +41,7 @@ from src.f09_idea.idea_config import (
     idea_number_str,
     get_idea_sqlite_types,
     get_idea_config_dict,
-    idea_type_str,
+    idea_category_str,
 )
 from src.f09_idea.idea_db_tool import create_idea_sorted_table
 from src.f10_etl.fiscal_etl_tool import (
@@ -908,8 +908,8 @@ def test_GlobalVariablesForFiscal_inconsistency_queryReturns_sqlstrs():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        # if dimen_config.get(idea_type_str()) != pidginunit_str()
-        if dimen_config.get(idea_type_str()) == fiscalunit_str()
+        # if dimen_config.get(idea_category_str()) != pidginunit_str()
+        if dimen_config.get(idea_category_str()) == fiscalunit_str()
     }
 
     exclude_cols = {"idea_number", "face_name", "event_int", "error_message"}

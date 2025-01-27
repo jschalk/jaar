@@ -1,7 +1,7 @@
 {
   "map_name": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_type": "pidginunit",
+    "idea_category": "pidginunit",
     "build_order": 0,
     "jkeys": {
       "event_int": {},
@@ -17,7 +17,7 @@
   },
   "map_label": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_type": "pidginunit",
+    "idea_category": "pidginunit",
     "build_order": 1,
     "jkeys": {
       "event_int": {},
@@ -33,7 +33,7 @@
   },
   "map_title": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_type": "pidginunit",
+    "idea_category": "pidginunit",
     "build_order": 2,
     "jkeys": {
       "event_int": {},
@@ -49,7 +49,7 @@
   },
   "map_road": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_type": "pidginunit",
+    "idea_category": "pidginunit",
     "build_order": 3,
     "jkeys": {
       "event_int": {},
@@ -65,7 +65,7 @@
   },
   "bud_acct_membership": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_type": "budunit",
+    "idea_category": "budunit",
     "build_order": 9,
     "jkeys": {
       "acct_name": {},
@@ -82,7 +82,7 @@
   },
   "bud_acctunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_type": "budunit",
+    "idea_category": "budunit",
     "build_order": 10,
     "jkeys": {
       "acct_name": {},
@@ -98,7 +98,7 @@
   },
   "bud_item_awardlink": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_type": "budunit",
+    "idea_category": "budunit",
     "build_order": 11,
     "jkeys": {
       "awardee_tag": {},
@@ -115,7 +115,7 @@
   },
   "bud_item_factunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_type": "budunit",
+    "idea_category": "budunit",
     "build_order": 12,
     "jkeys": {
       "base": {},
@@ -133,7 +133,7 @@
   },
   "bud_item_healerlink": {
     "allowed_crud": "DELETE_INSERT",
-    "idea_type": "budunit",
+    "idea_category": "budunit",
     "build_order": 15,
     "jkeys": {
       "event_int": {},
@@ -147,7 +147,7 @@
   },
   "bud_item_reason_premiseunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_type": "budunit",
+    "idea_category": "budunit",
     "build_order": 16,
     "jkeys": {
       "base": {},
@@ -166,7 +166,7 @@
   },
   "bud_item_reasonunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_type": "budunit",
+    "idea_category": "budunit",
     "build_order": 17,
     "jkeys": {
       "base": {},
@@ -182,7 +182,7 @@
   },
   "bud_item_teamlink": {
     "allowed_crud": "DELETE_INSERT",
-    "idea_type": "budunit",
+    "idea_category": "budunit",
     "build_order": 14,
     "jkeys": {
       "event_int": {},
@@ -196,7 +196,7 @@
   },
   "bud_itemunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_type": "budunit",
+    "idea_category": "budunit",
     "build_order": 18,
     "jkeys": {
       "event_int": {},
@@ -222,7 +222,7 @@
   },
   "budunit": {
     "allowed_crud": "UPDATE",
-    "idea_type": "budunit",
+    "idea_category": "budunit",
     "build_order": 19,
     "jkeys": {
       "event_int": {},
@@ -244,7 +244,7 @@
   },
   "fiscal_cashbook": {
     "allowed_crud": "INSERT_MULITPLE",
-    "idea_type": "fiscalunit",
+    "idea_category": "fiscalunit",
     "build_order": 21,
     "jkeys": {
       "acct_name": {},
@@ -260,7 +260,7 @@
   },
   "fiscal_deal_episode": {
     "allowed_crud": "INSERT_MULITPLE",
-    "idea_type": "fiscalunit",
+    "idea_category": "fiscalunit",
     "build_order": 20,
     "jkeys": {
       "event_int": {},
@@ -275,7 +275,7 @@
   },
   "fiscal_timeline_hour": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_type": "fiscalunit",
+    "idea_category": "fiscalunit",
     "build_order": 6,
     "jkeys": {
       "event_int": {},
@@ -289,7 +289,7 @@
   },
   "fiscal_timeline_month": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_type": "fiscalunit",
+    "idea_category": "fiscalunit",
     "build_order": 7,
     "jkeys": {
       "event_int": {},
@@ -303,7 +303,7 @@
   },
   "fiscal_timeline_weekday": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_type": "fiscalunit",
+    "idea_category": "fiscalunit",
     "build_order": 8,
     "jkeys": {
       "event_int": {},
@@ -317,7 +317,7 @@
   },
   "fiscalunit": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_type": "fiscalunit",
+    "idea_category": "fiscalunit",
     "build_order": 5,
     "jkeys": {
       "event_int": {},

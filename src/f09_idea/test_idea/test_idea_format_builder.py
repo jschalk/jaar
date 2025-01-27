@@ -21,7 +21,7 @@ def create_dimens_idea_format_dict() -> dict:
     idea_format_files_dict = {}
     x_count = 20
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
-        if dimen_dict.get("idea_type") == "budunit":
+        if dimen_dict.get("idea_category") == "budunit":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
             attributes_set = {fiscal_title_str(), owner_name_str()}
             args_dict = get_atom_config_args(idea_dimen)

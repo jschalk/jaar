@@ -113,8 +113,8 @@ from src.f08_pidgin.pidgin_config import (
     get_pidgin_args_dimen_mapping,
 )
 from src.f09_idea.idea_config import (
-    idea_type_str,
-    get_idea_types,
+    idea_category_str,
+    get_idea_categorys,
     get_idea_elements_sort_order,
     get_idea_sqlite_types,
     get_idea_dimen_ref,
@@ -149,7 +149,7 @@ from copy import copy as copy_copy
 
 def test_str_functions_ReturnObj():
     # ESTABLISH / WHEN / THEN
-    assert idea_type_str() == "idea_type"
+    assert idea_category_str() == "idea_category"
     assert build_order_str() == "build_order"
     assert idea_number_str() == "idea_number"
     assert allowed_crud_str() == "allowed_crud"
@@ -163,7 +163,7 @@ def test_str_functions_ReturnObj():
     assert delete_insert_str() == "DELETE_INSERT"
     assert delete_update_str() == "DELETE_UPDATE"
 
-    assert get_idea_types() == {budunit_str(), fiscalunit_str(), pidginunit_str()}
+    assert get_idea_categorys() == {budunit_str(), fiscalunit_str(), pidginunit_str()}
 
 
 def test_get_idea_elements_sort_order_ReturnsObj():
@@ -422,7 +422,7 @@ def _validate_idea_config(x_idea_config: dict):
     # for every idea_format file there exists a unique idea_number always with leading zeros to make 5 digits
     for idea_dimen, idea_dict in x_idea_config.items():
         print(f"{idea_dimen=}")
-        assert idea_dict.get(idea_type_str()) in get_idea_types()
+        assert idea_dict.get(idea_category_str()) in get_idea_categorys()
         assert idea_dict.get(jkeys_str()) is not None
         assert idea_dict.get(jvalues_str()) is not None
         assert idea_dict.get(allowed_crud_str()) is not None
@@ -430,11 +430,11 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(atom_insert()) is None
         assert idea_dict.get(atom_delete()) is None
         assert idea_dict.get(normal_specs_str()) is None
-        if idea_dict.get(idea_type_str()) == budunit_str():
+        if idea_dict.get(idea_category_str()) == budunit_str():
             sub_dimen = atom_config_dict.get(idea_dimen)
-        elif idea_dict.get(idea_type_str()) == fiscalunit_str():
+        elif idea_dict.get(idea_category_str()) == fiscalunit_str():
             sub_dimen = fiscal_config_dict.get(idea_dimen)
-        elif idea_dict.get(idea_type_str()) == pidginunit_str():
+        elif idea_dict.get(idea_category_str()) == pidginunit_str():
             sub_dimen = pidgin_config_dict.get(idea_dimen)
 
         assert idea_dict.get(allowed_crud_str()) in get_allowed_curds()
@@ -505,9 +505,9 @@ def _validate_idea_config(x_idea_config: dict):
         print(f"  {idea_jkeys_keys=}")
         assert face_name_str() in idea_jkeys_keys
         assert event_int_str() in idea_jkeys_keys
-        if idea_dict.get(idea_type_str()) != pidginunit_str():
+        if idea_dict.get(idea_category_str()) != pidginunit_str():
             assert fiscal_title_str() in idea_jkeys_keys
-        if idea_dict.get(idea_type_str()) == budunit_str():
+        if idea_dict.get(idea_category_str()) == budunit_str():
             idea_jkeys_keys.remove(fiscal_title_str())
             idea_jkeys_keys.remove(owner_name_str())
         idea_jkeys_keys.remove(face_name_str())

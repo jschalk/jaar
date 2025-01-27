@@ -25,11 +25,11 @@ def idea_number_str() -> str:
     return "idea_number"
 
 
-def idea_type_str() -> str:
-    return "idea_type"
+def idea_category_str() -> str:
+    return "idea_category"
 
 
-def get_idea_types() -> set[str]:
+def get_idea_categorys() -> set[str]:
     return {budunit_str(), fiscalunit_str(), pidginunit_str()}
 
 

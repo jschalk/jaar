@@ -15,7 +15,7 @@ from src.f09_idea.idea_config import (
     idea_number_str,
     get_idea_sqlite_types,
     get_idea_config_dict,
-    idea_type_str,
+    idea_category_str,
     get_idea_numbers,
 )
 from src.f09_idea.idea_db_tool import (
@@ -55,7 +55,7 @@ def test_get_fiscal_create_table_sqlstrs_ReturnsObj():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_type_str()) == fiscalunit_str()
+        if dimen_config.get(idea_category_str()) == fiscalunit_str()
     }
     sqlite_types = get_idea_sqlite_types()
     for x_dimen in idea_config:
@@ -98,7 +98,7 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_type_str()) == budunit_str()
+        if dimen_config.get(idea_category_str()) == budunit_str()
     }
     sqlite_types = get_idea_sqlite_types()
     for x_dimen in idea_config:
@@ -310,9 +310,9 @@ def test_get_fiscal_inconsistency_sqlstrs_ReturnsObj():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        # if dimen_config.get(idea_type_str()) != pidginunit_str()
-        # if dimen_config.get(idea_type_str()) == budunit_str()
-        if dimen_config.get(idea_type_str()) == fiscalunit_str()
+        # if dimen_config.get(idea_category_str()) != pidginunit_str()
+        # if dimen_config.get(idea_category_str()) == budunit_str()
+        if dimen_config.get(idea_category_str()) == fiscalunit_str()
     }
 
     exclude_cols = {
@@ -349,7 +349,7 @@ def test_get_bud_inconsistency_sqlstrs_ReturnsObj():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_type_str()) == budunit_str()
+        if dimen_config.get(idea_category_str()) == budunit_str()
     }
 
     exclude_cols = {idea_number_str(), "error_message"}
@@ -383,7 +383,7 @@ def test_get_fiscal_update_inconsist_error_message_sqlstrs_ReturnsObj():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_type_str()) == fiscalunit_str()
+        if dimen_config.get(idea_category_str()) == fiscalunit_str()
     }
 
     exclude_cols = {
@@ -427,7 +427,7 @@ def test_get_bud_update_inconsist_error_message_sqlstrs_ReturnsObj():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_type_str()) == budunit_str()
+        if dimen_config.get(idea_category_str()) == budunit_str()
     }
 
     exclude_cols = {idea_number_str(), "error_message"}
@@ -471,7 +471,7 @@ def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_type_str()) == fiscalunit_str()
+        if dimen_config.get(idea_category_str()) == fiscalunit_str()
     }
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
@@ -540,7 +540,7 @@ def test_get_bud_insert_agg_from_staging_sqlstrs_ReturnsObj():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_type_str()) == budunit_str()
+        if dimen_config.get(idea_category_str()) == budunit_str()
     }
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -579,8 +579,8 @@ def test_idea_into_dimen_ReturnsObj_ForAll_idea_numbersAndAll_dimens():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_type_str()) != pidginunit_str()
-        # if dimen_config.get(idea_type_str()) == fiscalunit_str()
+        if dimen_config.get(idea_category_str()) != pidginunit_str()
+        # if dimen_config.get(idea_category_str()) == fiscalunit_str()
     }
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
