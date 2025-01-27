@@ -389,9 +389,11 @@ def get_idea_into_dimen_staging_query(
     idea_number: str,
     x_dimen: str,
     x_jkeys: set[str],
+    action_str: str = None,
 ) -> str:
-    src_columns = get_table_columns(conn_or_cursor, f"{idea_number}_staging")
-    dst_table = f"{x_dimen}_staging"
+    src_table = f"{idea_number}_staging"
+    src_columns = get_table_columns(conn_or_cursor, src_table)
+    dst_table = f"{x_dimen}_put_staging" if action_str else f"{x_dimen}_staging"
     dst_columns = get_table_columns(conn_or_cursor, dst_table)
     common_columns_set = set(dst_columns).intersection(set(src_columns))
     common_columns_list = [col for col in dst_columns if col in common_columns_set]
@@ -399,9 +401,9 @@ def get_idea_into_dimen_staging_query(
     values_cols = set(common_columns_set)
     values_cols.difference_update(x_jkeys)
     # {_get_values_where_str(values_cols, dst_columns)}
-    return f"""INSERT INTO {x_dimen}_staging (idea_number, {common_columns_header})
+    return f"""INSERT INTO {dst_table} (idea_number, {common_columns_header})
 SELECT '{idea_number}' as idea_number, {common_columns_header}
-FROM {idea_number}_staging
+FROM {src_table}
 {_get_keys_where_str(x_jkeys, dst_columns)}
 GROUP BY {common_columns_header}
 ;

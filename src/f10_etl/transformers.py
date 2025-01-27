@@ -36,8 +36,8 @@ from src.f10_etl.tran_sqlstrs import (
     create_bud_tables,
     get_fiscal_update_inconsist_error_message_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
-    get_bud_update_inconsist_error_message_sqlstrs,
-    get_bud_insert_agg_from_staging_sqlstrs,
+    get_bud_put_update_inconsist_error_message_sqlstrs,
+    get_bud_insert_put_agg_from_staging_sqlstrs,
     IDEA_STAGEABLE_DIMENS,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
@@ -793,7 +793,7 @@ def idea_staging_tables2bud_staging_tables(conn_or_cursor: sqlite3_Connection):
                 if dimen_config.get("idea_category") == "budunit":
                     dimen_jkeys = set(dimen_config.get("jkeys").keys())
                     insert_sqlstr = get_idea_into_dimen_staging_query(
-                        conn_or_cursor, idea_number, x_dimen, dimen_jkeys
+                        conn_or_cursor, idea_number, x_dimen, dimen_jkeys, "put"
                     )
                     conn_or_cursor.execute(insert_sqlstr)
 
@@ -816,7 +816,9 @@ def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):
 
 
 def set_bud_staging_error_message(conn_or_cursor: sqlite3_Connection):
-    for set_error_sqlstr in get_bud_update_inconsist_error_message_sqlstrs().values():
+    for (
+        set_error_sqlstr
+    ) in get_bud_put_update_inconsist_error_message_sqlstrs().values():
         conn_or_cursor.execute(set_error_sqlstr)
 
 
@@ -826,7 +828,7 @@ def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
 
 
 def bud_staging_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
-    for x_sqlstr in get_bud_insert_agg_from_staging_sqlstrs().values():
+    for x_sqlstr in get_bud_insert_put_agg_from_staging_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)
 
 

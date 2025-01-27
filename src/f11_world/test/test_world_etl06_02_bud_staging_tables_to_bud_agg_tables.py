@@ -37,7 +37,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_PopulatesFiscalAggTables(
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
         create_bud_tables(cursor)
-        staging_tablename = f"{bud_acctunit_str()}_staging"
+        staging_tablename = f"{bud_acctunit_str()}_put_staging"
         insert_staging_sqlstr = f"""
 INSERT INTO {staging_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()})
 VALUES
@@ -50,7 +50,7 @@ VALUES
 """
         print(insert_staging_sqlstr)
         cursor.execute(insert_staging_sqlstr)
-        agg_tablename = f"{bud_acctunit_str()}_agg"
+        agg_tablename = f"{bud_acctunit_str()}_put_agg"
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN

@@ -35,9 +35,9 @@ from src.f10_etl.tran_sqlstrs import (
     create_all_idea_tables,
     get_bud_inconsistency_sqlstrs,
     get_fiscal_inconsistency_sqlstrs,
-    get_bud_update_inconsist_error_message_sqlstrs,
+    get_bud_put_update_inconsist_error_message_sqlstrs,
     get_fiscal_update_inconsist_error_message_sqlstrs,
-    get_bud_insert_agg_from_staging_sqlstrs,
+    get_bud_insert_put_agg_from_staging_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
     FISCALUNIT_AGG_INSERT_SQLSTR,
     IDEA_STAGEABLE_DIMENS,
@@ -105,7 +105,7 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj():
         print(f"{x_dimen} checking...")
         x_config = idea_config.get(x_dimen)
 
-        ag_table = f"{x_dimen}_agg"
+        ag_table = f"{x_dimen}_put_agg"
         ag_sqlstr = create_table_sqlstrs.get(ag_table)
         ag_cols = set(x_config.get("jkeys").keys())
         ag_cols.update(set(x_config.get("jvalues").keys()))
@@ -113,7 +113,7 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj():
         gen_cat_agg_sqlstr = get_create_table_sqlstr(ag_table, ag_cols, sqlite_types)
         assert ag_sqlstr == gen_cat_agg_sqlstr
 
-        st_table = f"{x_dimen}_staging"
+        st_table = f"{x_dimen}_put_staging"
         st_sqlstr = create_table_sqlstrs.get(st_table)
         st_cols = set(x_config.get("jkeys").keys())
         st_cols.update(set(x_config.get("jvalues").keys()))
@@ -151,8 +151,8 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # THEN
     assert bud_create_table_sqlstrs
     bud_dimens = get_bud_dimens()
-    expected_bud_tablenames = {f"{x_dimen}_agg" for x_dimen in bud_dimens}
-    expected_bud_tablenames.update({f"{x_dimen}_staging" for x_dimen in bud_dimens})
+    expected_bud_tablenames = {f"{x_dimen}_put_agg" for x_dimen in bud_dimens}
+    expected_bud_tablenames.update({f"{x_dimen}_put_staging" for x_dimen in bud_dimens})
     print(f"{expected_bud_tablenames=}")
     assert set(bud_create_table_sqlstrs.keys()) == expected_bud_tablenames
 
@@ -178,51 +178,53 @@ def test_create_bud_tables_CreatesFiscalStagingTables():
     # ESTABLISH
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
-        assert db_table_exists(cursor, "bud_acct_membership_agg") is False
-        assert db_table_exists(cursor, "bud_acct_membership_staging") is False
-        assert db_table_exists(cursor, "bud_acctunit_agg") is False
-        assert db_table_exists(cursor, "bud_acctunit_staging") is False
-        assert db_table_exists(cursor, "bud_item_awardlink_agg") is False
-        assert db_table_exists(cursor, "bud_item_awardlink_staging") is False
-        assert db_table_exists(cursor, "bud_item_factunit_agg") is False
-        assert db_table_exists(cursor, "bud_item_factunit_staging") is False
-        assert db_table_exists(cursor, "bud_item_healerlink_agg") is False
-        assert db_table_exists(cursor, "bud_item_healerlink_staging") is False
-        assert db_table_exists(cursor, "bud_item_reason_premiseunit_agg") is False
-        assert db_table_exists(cursor, "bud_item_reason_premiseunit_staging") is False
-        assert db_table_exists(cursor, "bud_item_reasonunit_agg") is False
-        assert db_table_exists(cursor, "bud_item_reasonunit_staging") is False
-        assert db_table_exists(cursor, "bud_item_teamlink_agg") is False
-        assert db_table_exists(cursor, "bud_item_teamlink_staging") is False
-        assert db_table_exists(cursor, "bud_itemunit_agg") is False
-        assert db_table_exists(cursor, "bud_itemunit_staging") is False
-        assert db_table_exists(cursor, "budunit_agg") is False
-        assert db_table_exists(cursor, "budunit_staging") is False
+        assert db_table_exists(cursor, "bud_acct_membership_put_agg") is False
+        assert db_table_exists(cursor, "bud_acct_membership_put_staging") is False
+        assert db_table_exists(cursor, "bud_acctunit_put_agg") is False
+        assert db_table_exists(cursor, "bud_acctunit_put_staging") is False
+        assert db_table_exists(cursor, "bud_item_awardlink_put_agg") is False
+        assert db_table_exists(cursor, "bud_item_awardlink_put_staging") is False
+        assert db_table_exists(cursor, "bud_item_factunit_put_agg") is False
+        assert db_table_exists(cursor, "bud_item_factunit_put_staging") is False
+        assert db_table_exists(cursor, "bud_item_healerlink_put_agg") is False
+        assert db_table_exists(cursor, "bud_item_healerlink_put_staging") is False
+        assert db_table_exists(cursor, "bud_item_reason_premiseunit_put_agg") is False
+        assert (
+            db_table_exists(cursor, "bud_item_reason_premiseunit_put_staging") is False
+        )
+        assert db_table_exists(cursor, "bud_item_reasonunit_put_agg") is False
+        assert db_table_exists(cursor, "bud_item_reasonunit_put_staging") is False
+        assert db_table_exists(cursor, "bud_item_teamlink_put_agg") is False
+        assert db_table_exists(cursor, "bud_item_teamlink_put_staging") is False
+        assert db_table_exists(cursor, "bud_itemunit_put_agg") is False
+        assert db_table_exists(cursor, "bud_itemunit_put_staging") is False
+        assert db_table_exists(cursor, "budunit_put_agg") is False
+        assert db_table_exists(cursor, "budunit_put_staging") is False
 
         # WHEN
         create_bud_tables(cursor)
 
         # THEN
-        assert db_table_exists(cursor, "bud_acct_membership_agg")
-        assert db_table_exists(cursor, "bud_acct_membership_staging")
-        assert db_table_exists(cursor, "bud_acctunit_agg")
-        assert db_table_exists(cursor, "bud_acctunit_staging")
-        assert db_table_exists(cursor, "bud_item_awardlink_agg")
-        assert db_table_exists(cursor, "bud_item_awardlink_staging")
-        assert db_table_exists(cursor, "bud_item_factunit_agg")
-        assert db_table_exists(cursor, "bud_item_factunit_staging")
-        assert db_table_exists(cursor, "bud_item_healerlink_agg")
-        assert db_table_exists(cursor, "bud_item_healerlink_staging")
-        assert db_table_exists(cursor, "bud_item_reason_premiseunit_agg")
-        assert db_table_exists(cursor, "bud_item_reason_premiseunit_staging")
-        assert db_table_exists(cursor, "bud_item_reasonunit_agg")
-        assert db_table_exists(cursor, "bud_item_reasonunit_staging")
-        assert db_table_exists(cursor, "bud_item_teamlink_agg")
-        assert db_table_exists(cursor, "bud_item_teamlink_staging")
-        assert db_table_exists(cursor, "bud_itemunit_agg")
-        assert db_table_exists(cursor, "bud_itemunit_staging")
-        assert db_table_exists(cursor, "budunit_agg")
-        assert db_table_exists(cursor, "budunit_staging")
+        assert db_table_exists(cursor, "bud_acct_membership_put_agg")
+        assert db_table_exists(cursor, "bud_acct_membership_put_staging")
+        assert db_table_exists(cursor, "bud_acctunit_put_agg")
+        assert db_table_exists(cursor, "bud_acctunit_put_staging")
+        assert db_table_exists(cursor, "bud_item_awardlink_put_agg")
+        assert db_table_exists(cursor, "bud_item_awardlink_put_staging")
+        assert db_table_exists(cursor, "bud_item_factunit_put_agg")
+        assert db_table_exists(cursor, "bud_item_factunit_put_staging")
+        assert db_table_exists(cursor, "bud_item_healerlink_put_agg")
+        assert db_table_exists(cursor, "bud_item_healerlink_put_staging")
+        assert db_table_exists(cursor, "bud_item_reason_premiseunit_put_agg")
+        assert db_table_exists(cursor, "bud_item_reason_premiseunit_put_staging")
+        assert db_table_exists(cursor, "bud_item_reasonunit_put_agg")
+        assert db_table_exists(cursor, "bud_item_reasonunit_put_staging")
+        assert db_table_exists(cursor, "bud_item_teamlink_put_agg")
+        assert db_table_exists(cursor, "bud_item_teamlink_put_staging")
+        assert db_table_exists(cursor, "bud_itemunit_put_agg")
+        assert db_table_exists(cursor, "bud_itemunit_put_staging")
+        assert db_table_exists(cursor, "budunit_put_agg")
+        assert db_table_exists(cursor, "budunit_put_staging")
 
 
 def test_create_fiscal_tables_CreatesFiscalStagingTables():
@@ -362,7 +364,7 @@ def test_get_bud_inconsistency_sqlstrs_ReturnsObj():
         for x_dimen in sorted(idea_config):
             # print(f"{x_dimen} checking...")
             x_sqlstr = bud_inconsistency_sqlstrs.get(x_dimen)
-            x_tablename = f"{x_dimen}_staging"
+            x_tablename = f"{x_dimen}_put_staging"
             dimen_config = idea_config.get(x_dimen)
             cat_focus_columns = set(dimen_config.get("jkeys").keys())
             generated_cat_sqlstr = create_select_inconsistency_query(
@@ -418,10 +420,10 @@ def test_get_fiscal_update_inconsist_error_message_sqlstrs_ReturnsObj():
             assert x_sqlstr == generated_cat_sqlstr
 
 
-def test_get_bud_update_inconsist_error_message_sqlstrs_ReturnsObj():
+def test_get_bud_put_update_inconsist_error_message_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    bud_update_error_sqlstrs = get_bud_update_inconsist_error_message_sqlstrs()
+    bud_update_error_sqlstrs = get_bud_put_update_inconsist_error_message_sqlstrs()
 
     # THEN
     assert set(bud_update_error_sqlstrs.keys()) == get_bud_dimens()
@@ -440,7 +442,7 @@ def test_get_bud_update_inconsist_error_message_sqlstrs_ReturnsObj():
         for x_dimen in idea_config:
             # print(f"{x_dimen} checking...")
             x_sqlstr = bud_update_error_sqlstrs.get(x_dimen)
-            x_tablename = f"{x_dimen}_staging"
+            x_tablename = f"{x_dimen}_put_staging"
             dimen_config = idea_config.get(x_dimen)
             cat_focus_columns = set(dimen_config.get("jkeys").keys())
             generated_cat_sqlstr = create_update_inconsistency_error_query(
@@ -527,10 +529,10 @@ GROUP BY fiscal_title
     assert len(idea_config) == len(fiscal_insert_agg_sqlstrs)
 
 
-def test_get_bud_insert_agg_from_staging_sqlstrs_ReturnsObj():
+def test_get_bud_insert_put_agg_from_staging_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    bud_insert_agg_sqlstrs = get_bud_insert_agg_from_staging_sqlstrs()
+    bud_insert_agg_sqlstrs = get_bud_insert_put_agg_from_staging_sqlstrs()
 
     # THEN
     assert set(bud_insert_agg_sqlstrs.keys()) == get_bud_dimens()
@@ -553,8 +555,8 @@ def test_get_bud_insert_agg_from_staging_sqlstrs_ReturnsObj():
             dimen_config = idea_config.get(x_dimen)
             cat_focus_columns = set(dimen_config.get("jkeys").keys())
             cat_focus_columns = get_custom_sorted_list(cat_focus_columns)
-            stage_tablename = f"{x_dimen}_staging"
-            agg_tablename = f"{x_dimen}_agg"
+            stage_tablename = f"{x_dimen}_put_staging"
+            agg_tablename = f"{x_dimen}_put_agg"
 
             generated_table2table_agg_insert_sqlstr = (
                 create_table2table_agg_insert_query(

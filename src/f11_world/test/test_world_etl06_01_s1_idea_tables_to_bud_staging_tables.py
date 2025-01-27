@@ -30,26 +30,28 @@ def test_WorldUnit_idea_staging_to_bud_tables_CreatesBudStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
+    staging_str = "_put_staging"
+    agg_str = "_put_agg"
     fizz_world = worldunit_shop("fizz")
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        assert len(get_existing_bud_x_tables(cursor, "_staging")) == 0
-        assert len(get_existing_bud_x_tables(cursor, "_agg")) == 0
+        assert len(get_existing_bud_x_tables(cursor, staging_str)) == 0
+        assert len(get_existing_bud_x_tables(cursor, agg_str)) == 0
 
         # WHEN
         fizz_world.idea_staging_to_bud_tables(cursor)
 
         # THEN
-        assert len(get_existing_bud_x_tables(cursor, "_staging")) != 0
-        assert len(get_existing_bud_x_tables(cursor, "_agg")) != 0
+        assert len(get_existing_bud_x_tables(cursor, staging_str)) != 0
+        assert len(get_existing_bud_x_tables(cursor, agg_str)) != 0
         bud_count = len(get_bud_dimens())
-        bud_staging_tables = get_existing_bud_x_tables(cursor, "_staging")
-        bud_agg_tables = get_existing_bud_x_tables(cursor, "_staging")
+        bud_staging_tables = get_existing_bud_x_tables(cursor, staging_str)
+        bud_agg_tables = get_existing_bud_x_tables(cursor, agg_str)
         print(f"{get_bud_dimens()=}")
         print(f"{bud_staging_tables=}")
         print(f"{bud_agg_tables=}")
-        assert len(get_existing_bud_x_tables(cursor, "_staging")) == bud_count
-        assert len(get_existing_bud_x_tables(cursor, "_agg")) == bud_count
+        assert len(get_existing_bud_x_tables(cursor, staging_str)) == bud_count
+        assert len(get_existing_bud_x_tables(cursor, agg_str)) == bud_count
 
 
 def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTables(
@@ -78,7 +80,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStag
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
-        budunit_staging_tablename = f"{budunit_str()}_staging"
+        budunit_staging_tablename = f"{budunit_str()}_put_staging"
         assert not db_table_exists(cursor, budunit_staging_tablename)
 
         # WHEN
@@ -160,7 +162,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_Sets_error_message(env_dir_setup_c
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
         create_bud_tables(cursor)
-        x_tablename = f"{bud_acctunit_str()}_staging"
+        x_tablename = f"{bud_acctunit_str()}_put_staging"
         assert db_table_exists(cursor, x_tablename)
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()})
