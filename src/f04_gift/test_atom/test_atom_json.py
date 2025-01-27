@@ -3,7 +3,7 @@ from src.f02_bud.bud_tool import bud_item_factunit_str
 from src.f04_gift.atom_config import (
     jkeys_str,
     jvalues_str,
-    category_str,
+    dimen_str,
     crud_str,
     road_str,
     base_str,
@@ -24,10 +24,10 @@ def test_AtomUnit_get_dict_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_str)
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
-    x_category = bud_item_factunit_str()
+    x_dimen = bud_item_factunit_str()
     knee_open = 7
     knee_nigh = 13
-    insert_factunit_atomunit = atomunit_shop(x_category, atom_insert())
+    insert_factunit_atomunit = atomunit_shop(x_dimen, atom_insert())
     insert_factunit_atomunit.set_jkey(road_str(), ball_road)
     insert_factunit_atomunit.set_jkey(base_str(), knee_road)
     insert_factunit_atomunit.set_jvalue("open", knee_open)
@@ -38,7 +38,7 @@ def test_AtomUnit_get_dict_ReturnsCorrectObj():
 
     # THEN
     assert atom_dict == {
-        category_str(): x_category,
+        dimen_str(): x_dimen,
         crud_str(): atom_insert(),
         jkeys_str(): {road_str(): ball_road, base_str(): knee_road},
         jvalues_str(): {"open": knee_open, "nigh": knee_nigh},
@@ -53,14 +53,14 @@ def test_AtomUnit_get_json_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_str)
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
-    x_category = bud_item_factunit_str()
+    x_dimen = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
     open_str = "open"
     nigh_str = "nigh"
     knee_open = 7
     knee_nigh = 13
-    insert_factunit_atomunit = atomunit_shop(x_category, atom_insert())
+    insert_factunit_atomunit = atomunit_shop(x_dimen, atom_insert())
     insert_factunit_atomunit.set_jkey(road_str, ball_road)
     insert_factunit_atomunit.set_jkey(base_str, knee_road)
     insert_factunit_atomunit.set_jvalue(open_str, knee_open)
@@ -81,14 +81,14 @@ def test_atomunit_get_from_json_ReturnsCorrectObj():
     ball_road = create_road(sports_road, ball_str)
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
-    x_category = bud_item_factunit_str()
+    x_dimen = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
     open_str = "open"
     nigh_str = "nigh"
     knee_open = 7
     knee_nigh = 13
-    gen_atomunit = atomunit_shop(x_category, atom_insert())
+    gen_atomunit = atomunit_shop(x_dimen, atom_insert())
     gen_atomunit.set_jkey(road_str, ball_road)
     gen_atomunit.set_jkey(base_str, knee_road)
     gen_atomunit.set_jvalue(open_str, knee_open)
@@ -99,7 +99,7 @@ def test_atomunit_get_from_json_ReturnsCorrectObj():
     json_atomunit = atomunit_get_from_json(atom_json)
 
     # THEN
-    assert json_atomunit.category == gen_atomunit.category
+    assert json_atomunit.dimen == gen_atomunit.dimen
     assert json_atomunit.crud_str == gen_atomunit.crud_str
     assert json_atomunit.jkeys == gen_atomunit.jkeys
     assert json_atomunit.jvalues == gen_atomunit.jvalues

@@ -53,12 +53,12 @@ def test_DeltaUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     # ESTABLISH
     ex1_deltaunit = deltaunit_shop()
     attribute_value = 55
-    category = budunit_str()
+    dimen = budunit_str()
     opt1_arg = "tally"
     jvalues = {opt1_arg: attribute_value}
     jkeys = {}
     bud_mass_atomunit = atomunit_shop(
-        category,
+        dimen,
         atom_update(),
         jkeys=jkeys,
         jvalues=jvalues,
@@ -73,24 +73,24 @@ def test_DeltaUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     assert len(ex1_deltaunit.atomunits) == 1
     x_update_dict = ex1_deltaunit.atomunits.get(atom_update())
     # print(f"{x_update_dict=}")
-    x_category_atomunit = x_update_dict.get(category)
-    print(f"{x_category_atomunit=}")
-    assert x_category_atomunit == bud_mass_atomunit
+    x_dimen_atomunit = x_update_dict.get(dimen)
+    print(f"{x_dimen_atomunit=}")
+    assert x_dimen_atomunit == bud_mass_atomunit
     assert bud_mass_atomunit.atom_order is not None
 
 
 def test_DeltaUnit_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
     # ESTABLISH
     ex1_deltaunit = deltaunit_shop()
-    x_category = bud_acctunit_str()
-    bud_mass_atomunit = atomunit_shop(x_category, atom_update())
+    x_dimen = bud_acctunit_str()
+    bud_mass_atomunit = atomunit_shop(x_dimen, atom_update())
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
         ex1_deltaunit.set_atomunit(bud_mass_atomunit)
     assert (
         str(excinfo.value)
-        == f"""'{x_category}' UPDATE AtomUnit is invalid
+        == f"""'{x_dimen}' UPDATE AtomUnit is invalid
                 x_atomunit.is_jkeys_valid()=False
                 x_atomunit.is_jvalues_valid()=True"""
     )
@@ -139,7 +139,7 @@ def test_DeltaUnit_get_atom_ReturnsCorrectObj():
 
     # WHEN
     gen_atomunit = ex1_deltaunit.get_atomunit(
-        atom_update(), category=budunit_str(), jkeys=[]
+        atom_update(), dimen=budunit_str(), jkeys=[]
     )
 
     # THEN
@@ -168,7 +168,7 @@ def test_DeltaUnit_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     x_update_dict = ex1_deltaunit.atomunits.get(atom_update())
     x_atomunit = x_update_dict.get(budunit_str())
     assert x_atomunit is not None
-    assert x_atomunit.category == budunit_str()
+    assert x_atomunit.dimen == budunit_str()
 
 
 def test_DeltaUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
@@ -190,7 +190,7 @@ def test_DeltaUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
     print(f"{bob_required_dict=}")
     acctunit_str = bud_acctunit_str()
     ex1_deltaunit.add_atomunit(
-        category=acctunit_str,
+        dimen=acctunit_str,
         crud_str=atom_insert(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -223,10 +223,10 @@ def test_DeltaUnit_get_crud_atomunits_list_ReturnsCorrectObj():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")
     #     for x_atom in atom_list:
-    #         print(f"{x_atom.category=}")
+    #         print(f"{x_atom.dimen=}")
 
 
-def test_DeltaUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
+def test_DeltaUnit_get_dimen_sorted_atomunits_list_ReturnsCorrectObj():
     # ESTABLISH
     ex1_deltaunit = get_deltaunit_example1()
     update_dict = ex1_deltaunit.atomunits.get(atom_update())
@@ -237,7 +237,7 @@ def test_DeltaUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
     assert len(delete_dict.keys()) == 1
 
     # WHEN
-    sue_atoms_list = ex1_deltaunit.get_category_sorted_atomunits_list()
+    sue_atoms_list = ex1_deltaunit.get_dimen_sorted_atomunits_list()
 
     # THEN
     assert len(sue_atoms_list) == 2
@@ -255,7 +255,7 @@ def test_DeltaUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")
     #     for x_atom in atom_list:
-    #         print(f"{x_atom.category=}")
+    #         print(f"{x_atom.dimen=}")
 
 
 # def test_DeltaUnit_add_atomunit_CorrectlySets_BudUnit_max_tree_traverse():
@@ -265,15 +265,15 @@ def test_DeltaUnit_get_category_sorted_atomunits_list_ReturnsCorrectObj():
 
 #     # WHEN
 #     opt2_value = 55
-#     category = budunit_str()
+#     dimen = budunit_str()
 #     opt2_arg = "mass"
-#     mass_atomunit = atomunit_shop(category, atom_update())
+#     mass_atomunit = atomunit_shop(dimen, atom_update())
 #     mass_atomunit.set_jvalue(opt2_arg, opt2_value)
 #     ex1_deltaunit.set_atomunit(mass_atomunit)
 #     # THEN
 #     assert len(ex1_deltaunit.atomunits.get(atom_update()).keys()) == 1
 #     sue_budunit_dict = ex1_deltaunit.atomunits.get(atom_update())
-#     sue_mass_atomunit = sue_budunit_dict.get(category)
+#     sue_mass_atomunit = sue_budunit_dict.get(dimen)
 #     print(f"{sue_mass_atomunit=}")
 #     assert mass_atomunit == sue_mass_atomunit
 
@@ -337,7 +337,7 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")
     #     for x_atom in atom_list:
-    #         print(f"{x_atom.category=}")
+    #         print(f"{x_atom.dimen=}")
 
 
 def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
@@ -346,11 +346,11 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
     sports_str = "sports"
     sports_road = create_road(x_fiscal_title, sports_str)
     knee_str = "knee"
-    x_category = bud_itemunit_str()
-    sports_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
+    x_dimen = bud_itemunit_str()
+    sports_insert_itemunit_atomunit = atomunit_shop(x_dimen, atom_insert())
     sports_insert_itemunit_atomunit.set_jkey(item_title_str(), sports_str)
     sports_insert_itemunit_atomunit.set_jkey(parent_road_str(), x_fiscal_title)
-    knee_insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
+    knee_insert_itemunit_atomunit = atomunit_shop(x_dimen, atom_insert())
     knee_insert_itemunit_atomunit.set_jkey(item_title_str(), knee_str)
     knee_insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
     x_deltaunit = deltaunit_shop()
@@ -370,7 +370,7 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")
     #     for x_atom in atom_list:
-    #         print(f"{x_atom.category=}")
+    #         print(f"{x_atom.dimen=}")
 
 
 def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
@@ -380,13 +380,13 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     sports_road = create_road(x_fiscal_title, sports_str)
     knee_str = "knee"
     knee_road = create_road(sports_road, knee_str)
-    x_category = bud_item_awardlink_str()
+    x_dimen = bud_item_awardlink_str()
     road_str = "road"
     swimmers_str = ",Swimmers"
-    sports_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
+    sports_awardlink_atomunit = atomunit_shop(x_dimen, atom_insert())
     sports_awardlink_atomunit.set_jkey(awardee_tag_str(), swimmers_str)
     sports_awardlink_atomunit.set_jkey(road_str, sports_road)
-    knee_awardlink_atomunit = atomunit_shop(x_category, atom_insert())
+    knee_awardlink_atomunit = atomunit_shop(x_dimen, atom_insert())
     knee_awardlink_atomunit.set_jkey(awardee_tag_str(), swimmers_str)
     knee_awardlink_atomunit.set_jkey(road_str, knee_road)
     x_deltaunit = deltaunit_shop()
@@ -406,7 +406,7 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")
     #     for x_atom in atom_list:
-    #         print(f"{x_atom.category=}")
+    #         print(f"{x_atom.dimen=}")
 
 
 def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scenario1():
@@ -418,9 +418,9 @@ def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scena
     x_atomunit.set_jvalue(x_attribute, 100)
     sue_deltaunit.set_atomunit(x_atomunit)
 
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     zia_str = "Zia"
-    x_atomunit = atomunit_shop(category, atom_insert())
+    x_atomunit = atomunit_shop(dimen, atom_insert())
     x_atomunit.set_arg(acct_name_str(), zia_str)
     x_atomunit.set_arg(credit_belief_str(), "70 is the number")
     sue_deltaunit.set_atomunit(x_atomunit)
@@ -432,10 +432,10 @@ def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scena
 
 def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scenario2():
     sue_deltaunit = deltaunit_shop()
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     # WHEN
     yao_str = "Yao"
-    x_atomunit = atomunit_shop(category, atom_insert())
+    x_atomunit = atomunit_shop(dimen, atom_insert())
     x_atomunit.set_arg(acct_name_str(), yao_str)
     x_atomunit.set_arg(credit_belief_str(), 30)
     sue_deltaunit.set_atomunit(x_atomunit)
@@ -445,7 +445,7 @@ def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scena
 
     # WHEN
     bob_str = "Bob"
-    x_atomunit = atomunit_shop(category, atom_insert())
+    x_atomunit = atomunit_shop(dimen, atom_insert())
     x_atomunit.set_arg(acct_name_str(), bob_str)
     x_atomunit.set_arg(credit_belief_str(), "70 is the number")
     sue_deltaunit.set_atomunit(x_atomunit)
@@ -461,16 +461,16 @@ def test_DeltaUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStarti
     pool_attribute = "credor_respect"
     pool_atomunit.set_jvalue(pool_attribute, 100)
     sue_deltaunit.set_atomunit(pool_atomunit)
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_atomunit = atomunit_shop(category, atom_insert())
+    zia_atomunit = atomunit_shop(dimen, atom_insert())
     zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_deltaunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
-    yao_atomunit = atomunit_shop(category, atom_insert())
+    yao_atomunit = atomunit_shop(dimen, atom_insert())
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_deltaunit.set_atomunit(yao_atomunit)
@@ -500,16 +500,16 @@ def test_DeltaUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStarting
     pool_attribute = "credor_respect"
     pool_atomunit.set_jvalue(pool_attribute, 100)
     sue_deltaunit.set_atomunit(pool_atomunit)
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_atomunit = atomunit_shop(category, atom_insert())
+    zia_atomunit = atomunit_shop(dimen, atom_insert())
     zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_deltaunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
-    yao_atomunit = atomunit_shop(category, atom_insert())
+    yao_atomunit = atomunit_shop(dimen, atom_insert())
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_deltaunit.set_atomunit(yao_atomunit)
@@ -539,16 +539,16 @@ def test_DeltaUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumbe
     pool_attribute = "credor_respect"
     pool_atomunit.set_jvalue(pool_attribute, 100)
     sue_deltaunit.set_atomunit(pool_atomunit)
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_atomunit = atomunit_shop(category, atom_insert())
+    zia_atomunit = atomunit_shop(dimen, atom_insert())
     zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_deltaunit.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
-    yao_atomunit = atomunit_shop(category, atom_insert())
+    yao_atomunit = atomunit_shop(dimen, atom_insert())
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_deltaunit.set_atomunit(yao_atomunit)
@@ -578,14 +578,14 @@ def test_DeltaUnit_get_json_ReturnsCorrectObj():
     pool_attribute = "credor_respect"
     pool_atomunit.set_jvalue(pool_attribute, 100)
     sue_deltaunit.set_atomunit(pool_atomunit)
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_atomunit = atomunit_shop(category, atom_insert())
+    zia_atomunit = atomunit_shop(dimen, atom_insert())
     zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
     sue_deltaunit.set_atomunit(zia_atomunit)
     yao_str = "Yao"
-    yao_atomunit = atomunit_shop(category, atom_insert())
+    yao_atomunit = atomunit_shop(dimen, atom_insert())
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
     sue_deltaunit.set_atomunit(yao_atomunit)
@@ -603,9 +603,9 @@ def test_DeltaUnit_atomunit_exists_ReturnsCorrectObj():
     x_deltaunit = deltaunit_shop()
 
     # WHEN / THEN
-    category = bud_acctunit_str()
+    dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_atomunit = atomunit_shop(category, atom_insert())
+    zia_atomunit = atomunit_shop(dimen, atom_insert())
     zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
     assert x_deltaunit.atomunit_exists(zia_atomunit) is False

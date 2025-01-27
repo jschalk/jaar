@@ -20,7 +20,7 @@ from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import BudUnit
 from src.f02_bud.bud_tool import bud_attr_exists, bud_get_obj
 from src.f04_gift.atom_config import (
-    get_category_from_dict,
+    get_dimen_from_dict,
     get_atom_config_jkeys,
     atom_delete,
     atom_insert,
@@ -28,7 +28,7 @@ from src.f04_gift.atom_config import (
     atom_hx_table_name,
     get_atom_order,
     get_atom_config_dict,
-    is_bud_category,
+    is_bud_dimen,
     get_atom_config_args,
     get_sorted_jkey_keys,
     get_atom_args_class_types,
@@ -43,7 +43,7 @@ class AtomUnitDescriptionException(Exception):
 
 @dataclass
 class AtomUnit:
-    category: str = None
+    dimen: str = None
     crud_str: str = None
     jkeys: dict[str, str] = None
     jvalues: dict[str, str] = None
@@ -52,16 +52,15 @@ class AtomUnit:
     def get_insert_sqlstr(self) -> str:
         if self.is_valid() is False:
             raise AtomUnitDescriptionException(
-                f"Cannot get_insert_sqlstr '{self.category}' with is_valid=False."
+                f"Cannot get_insert_sqlstr '{self.dimen}' with is_valid=False."
             )
 
         x_columns = [
-            f"{self.category}_{self.crud_str}_{jkey}"
-            for jkey in get_sorted_jkey_keys(self.category)
+            f"{self.dimen}_{self.crud_str}_{jkey}"
+            for jkey in get_sorted_jkey_keys(self.dimen)
         ]
         x_columns.extend(
-            f"{self.category}_{self.crud_str}_{jvalue}"
-            for jvalue in self.jvalues.keys()
+            f"{self.dimen}_{self.crud_str}_{jvalue}" for jvalue in self.jvalues.keys()
         )
         x_values = self.get_nesting_order_args()
         x_values.extend(iter(self.jvalues.values()))
@@ -73,7 +72,7 @@ class AtomUnit:
         return x_list
 
     def set_atom_order(self):
-        self.atom_order = get_atom_order(self.crud_str, self.category)
+        self.atom_order = get_atom_order(self.crud_str, self.dimen)
 
     def set_arg(self, x_key: str, x_value: any):
         for jkey in self._get_jkeys_dict():
@@ -89,24 +88,24 @@ class AtomUnit:
     def set_jvalue(self, x_key: str, x_value: any):
         self.jvalues[x_key] = x_value
 
-    def _get_category_dict(self) -> dict:
-        return get_atom_config_dict().get(self.category)
+    def _get_dimen_dict(self) -> dict:
+        return get_atom_config_dict().get(self.dimen)
 
     def _get_crud_dict(self) -> dict:
-        return self._get_category_dict().get(self.crud_str)
+        return self._get_dimen_dict().get(self.crud_str)
 
     def _get_jkeys_dict(self) -> dict:
-        return self._get_category_dict().get("jkeys")
+        return self._get_dimen_dict().get("jkeys")
 
     def _get_jvalues_dict(self) -> dict:
         x_key = "jvalues"
-        return get_empty_dict_if_None(self._get_category_dict().get(x_key))
+        return get_empty_dict_if_None(self._get_dimen_dict().get(x_key))
 
     def get_nesting_order_args(self) -> list[str]:
         # When ChangUnit places an AtomUnit in a nested dictionary ChangUnit.atomunits
         # the order of required argments decides the location. The order must always be
         # the same
-        sorted_jkey_keys = get_sorted_jkey_keys(self.category)
+        sorted_jkey_keys = get_sorted_jkey_keys(self.dimen)
         return [self.jkeys.get(jkey) for jkey in sorted_jkey_keys]
 
     def is_jkeys_valid(self) -> bool:
@@ -144,7 +143,7 @@ class AtomUnit:
         jkeys_dict = self.get_jkeys_dict()
         jvalues_dict = self.get_jvalues_dict()
         return {
-            "category": self.category,
+            "dimen": self.dimen,
             "crud": self.crud_str,
             "jkeys": jkeys_dict,
             "jvalues": jvalues_dict,
@@ -155,14 +154,14 @@ class AtomUnit:
 
 
 def atomunit_shop(
-    category: str,
+    dimen: str,
     crud_str: str = None,
     jkeys: dict[str, str] = None,
     jvalues: dict[str, str] = None,
 ) -> AtomUnit:
-    if is_bud_category(category):
+    if is_bud_dimen(dimen):
         return AtomUnit(
-            category=category,
+            dimen=dimen,
             crud_str=crud_str,
             jkeys=get_empty_dict_if_None(jkeys),
             jvalues=get_empty_dict_if_None(jvalues),
@@ -171,7 +170,7 @@ def atomunit_shop(
 
 def get_from_json(x_str: str) -> AtomUnit:
     x_dict = get_dict_from_json(x_str)
-    x_atom = atomunit_shop(x_dict["category"], x_dict["crud"])
+    x_atom = atomunit_shop(x_dict["dimen"], x_dict["crud"])
     for x_key, x_value in x_dict["jkeys"].items():
         x_atom.set_jkey(x_key, x_value)
     for x_key, x_value in x_dict["jvalues"].items():
@@ -521,30 +520,30 @@ def _modify_bud_acctunit(x_bud: BudUnit, x_atom: AtomUnit):
 
 
 def modify_bud_with_atomunit(x_bud: BudUnit, x_atom: AtomUnit):
-    if x_atom.category == "budunit":
+    if x_atom.dimen == "budunit":
         _modify_bud_budunit(x_bud, x_atom)
-    elif x_atom.category == "bud_acct_membership":
+    elif x_atom.dimen == "bud_acct_membership":
         _modify_bud_acct_membership(x_bud, x_atom)
-    elif x_atom.category == "bud_itemunit":
+    elif x_atom.dimen == "bud_itemunit":
         _modify_bud_itemunit(x_bud, x_atom)
-    elif x_atom.category == "bud_item_awardlink":
+    elif x_atom.dimen == "bud_item_awardlink":
         _modify_bud_item_awardlink(x_bud, x_atom)
-    elif x_atom.category == "bud_item_factunit":
+    elif x_atom.dimen == "bud_item_factunit":
         _modify_bud_item_factunit(x_bud, x_atom)
-    elif x_atom.category == "bud_item_reasonunit":
+    elif x_atom.dimen == "bud_item_reasonunit":
         _modify_bud_item_reasonunit(x_bud, x_atom)
-    elif x_atom.category == "bud_item_reason_premiseunit":
+    elif x_atom.dimen == "bud_item_reason_premiseunit":
         _modify_bud_item_reason_premiseunit(x_bud, x_atom)
-    elif x_atom.category == "bud_item_healerlink":
+    elif x_atom.dimen == "bud_item_healerlink":
         _modify_bud_item_healerlink(x_bud, x_atom)
-    elif x_atom.category == "bud_item_teamlink":
+    elif x_atom.dimen == "bud_item_teamlink":
         _modify_bud_item_teamlink(x_bud, x_atom)
-    elif x_atom.category == "bud_acctunit":
+    elif x_atom.dimen == "bud_acctunit":
         _modify_bud_acctunit(x_bud, x_atom)
 
 
-def jvalues_different(category: str, x_obj: any, y_obj: any) -> bool:
-    if category == "budunit":
+def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
+    if dimen == "budunit":
         return (
             x_obj.tally != y_obj.tally
             or x_obj.max_tree_traverse != y_obj.max_tree_traverse
@@ -554,15 +553,15 @@ def jvalues_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.fund_pool != y_obj.fund_pool
             or x_obj.fund_coin != y_obj.fund_coin
         )
-    elif category in {"bud_acct_membership"}:
+    elif dimen in {"bud_acct_membership"}:
         return (x_obj.credit_vote != y_obj.credit_vote) or (
             x_obj.debtit_vote != y_obj.debtit_vote
         )
-    elif category in {"bud_item_awardlink"}:
+    elif dimen in {"bud_item_awardlink"}:
         return (x_obj.give_force != y_obj.give_force) or (
             x_obj.take_force != y_obj.take_force
         )
-    elif category == "bud_itemunit":
+    elif dimen == "bud_itemunit":
         return (
             x_obj.addin != y_obj.addin
             or x_obj.begin != y_obj.begin
@@ -573,21 +572,21 @@ def jvalues_different(category: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.mass != y_obj.mass
             or x_obj.pledge != y_obj.pledge
         )
-    elif category == "bud_item_factunit":
+    elif dimen == "bud_item_factunit":
         return (
             (x_obj.pick != y_obj.pick)
             or (x_obj.open != y_obj.open)
             or (x_obj.nigh != y_obj.nigh)
         )
-    elif category == "bud_item_reasonunit":
+    elif dimen == "bud_item_reasonunit":
         return x_obj.base_item_active_requisite != y_obj.base_item_active_requisite
-    elif category == "bud_item_reason_premiseunit":
+    elif dimen == "bud_item_reason_premiseunit":
         return (
             x_obj.open != y_obj.open
             or x_obj.nigh != y_obj.nigh
             or x_obj.divisor != y_obj.divisor
         )
-    elif category == "bud_acctunit":
+    elif dimen == "bud_acctunit":
         return (x_obj.credit_belief != y_obj.credit_belief) or (
             x_obj.debtit_belief != y_obj.debtit_belief
         )
@@ -598,9 +597,9 @@ class InvalidAtomUnitException(Exception):
 
 
 def get_atomunit_from_rowdata(x_rowdata: RowData) -> AtomUnit:
-    category_str, crud_str = get_category_from_dict(x_rowdata.row_dict)
-    x_atom = atomunit_shop(category=category_str, crud_str=crud_str)
-    front_len = len(category_str) + len(crud_str) + 2
+    dimen_str, crud_str = get_dimen_from_dict(x_rowdata.row_dict)
+    x_atom = atomunit_shop(dimen=dimen_str, crud_str=crud_str)
+    front_len = len(dimen_str) + len(crud_str) + 2
     for x_columnname, x_value in x_rowdata.row_dict.items():
         arg_key = x_columnname[front_len:]
         x_atom.set_arg(x_key=arg_key, x_value=x_value)
@@ -609,7 +608,7 @@ def get_atomunit_from_rowdata(x_rowdata: RowData) -> AtomUnit:
 
 @dataclass
 class AtomRow:
-    _atom_categorys: set[str] = None
+    _atom_dimens: set[str] = None
     _crud_command: CRUD_command = None
     acct_name: AcctName = None
     addin: float = None
@@ -655,20 +654,20 @@ class AtomRow:
     tally: int = None
     team_tag: int = None
 
-    def set_atom_category(self, atom_category: str):
-        self._atom_categorys.add(atom_category)
+    def set_atom_dimen(self, atom_dimen: str):
+        self._atom_dimens.add(atom_dimen)
 
-    def atom_category_exists(self, atom_category: str) -> bool:
-        return atom_category in self._atom_categorys
+    def atom_dimen_exists(self, atom_dimen: str) -> bool:
+        return atom_dimen in self._atom_dimens
 
-    def delete_atom_category(self, atom_category: str):
-        self._atom_categorys.remove(atom_category)
+    def delete_atom_dimen(self, atom_dimen: str):
+        self._atom_dimens.remove(atom_dimen)
 
     def _set_class_types(self):
         for x_arg, class_type in get_atom_args_class_types().items():
             x_value = self.__dict__.get(x_arg)
             if x_value != None:
-                if class_type == "AcctName":
+                if class_type == "NameUnit":
                     self.__dict__[x_arg] = AcctName(x_value)
                 elif class_type == "GroupLabel":
                     self.__dict__[x_arg] = GroupLabel(x_value)
@@ -690,9 +689,9 @@ class AtomRow:
     def get_atomunits(self) -> list[AtomUnit]:
         self._set_class_types()
         x_list = []
-        for x_category in self._atom_categorys:
-            x_atom = atomunit_shop(x_category, self._crud_command)
-            x_args = get_atom_config_args(x_category)
+        for x_dimen in self._atom_dimens:
+            x_atom = atomunit_shop(x_dimen, self._crud_command)
+            x_args = get_atom_config_args(x_dimen)
             for x_arg in x_args:
                 if self.__dict__[x_arg] != None:
                     x_atom.set_arg(x_arg, self.__dict__[x_arg])
@@ -701,13 +700,13 @@ class AtomRow:
         return x_list
 
 
-def atomrow_shop(atom_categorys: set[str], crud_command: CRUD_command) -> AtomRow:
-    return AtomRow(_atom_categorys=atom_categorys, _crud_command=crud_command)
+def atomrow_shop(atom_dimens: set[str], crud_command: CRUD_command) -> AtomRow:
+    return AtomRow(_atom_dimens=atom_dimens, _crud_command=crud_command)
 
 
 def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
-    x_category = x_atom.category
-    config_req_args = get_atom_config_jkeys(x_category)
+    x_dimen = x_atom.dimen
+    config_req_args = get_atom_config_jkeys(x_dimen)
     x_atom_reqs = {req_arg: x_atom.get_value(req_arg) for req_arg in config_req_args}
     x_parent_road = x_atom_reqs.get("parent_road")
     x_item_title = x_atom_reqs.get("item_title")
@@ -718,16 +717,16 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
         if is_itemroot_road is True:
             return None
 
-    x_exists = bud_attr_exists(x_category, x_bud, x_atom_reqs)
+    x_exists = bud_attr_exists(x_dimen, x_bud, x_atom_reqs)
 
     if x_atom.crud_str == atom_delete() and x_exists:
         return x_atom
     elif x_atom.crud_str == atom_insert() and not x_exists:
         return x_atom
     elif x_atom.crud_str == atom_insert() and x_exists:
-        x_bud_obj = bud_get_obj(x_category, x_bud, x_atom_reqs)
+        x_bud_obj = bud_get_obj(x_dimen, x_bud, x_atom_reqs)
         x_jvalues = x_atom.get_jvalues_dict()
-        update_atom = atomunit_shop(x_category, atom_update(), x_atom.jkeys)
+        update_atom = atomunit_shop(x_dimen, atom_update(), x_atom.jkeys)
         for jvalue in x_jvalues:
             optional_value = x_atom.get_value(jvalue)
             obj_value = x_bud_obj.__dict__[jvalue]

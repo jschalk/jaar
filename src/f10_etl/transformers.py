@@ -5,14 +5,14 @@ from src.f00_instrument.db_toolbox import (
     is_stageable,
 )
 from src.f01_road.road import FaceName, EventInt
-from src.f04_gift.atom_config import get_bud_categorys
-from src.f07_fiscal.fiscal_config import get_fiscal_categorys
+from src.f04_gift.atom_config import get_bud_dimens
+from src.f07_fiscal.fiscal_config import get_fiscal_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_idea.idea_config import (
     get_idea_numbers,
     get_idea_format_filename,
-    get_idea_category_ref,
+    get_idea_dimen_ref,
     get_idea_config_dict,
 )
 from src.f09_idea.idea import get_idearef_obj
@@ -28,7 +28,7 @@ from src.f09_idea.idea_db_tool import (
     save_table_to_csv,
     open_csv,
     get_ordered_csv,
-    get_idea_into_category_staging_query,
+    get_idea_into_dimen_staging_query,
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
@@ -36,8 +36,9 @@ from src.f10_etl.tran_sqlstrs import (
     create_bud_tables,
     get_fiscal_update_inconsist_error_message_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
-    get_bud_update_inconsist_error_message_sqlstrs,
-    # get_bud_insert_agg_from_staging_sqlstrs,
+    get_bud_put_update_inconsist_error_message_sqlstrs,
+    get_bud_insert_put_agg_from_staging_sqlstrs,
+    IDEA_STAGEABLE_PUT_DIMENS,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
@@ -54,19 +55,19 @@ from os.path import exists as os_path_exists
 from sqlite3 import Connection as sqlite3_Connection
 
 
-class not_given_pidgin_category_Exception(Exception):
+class not_given_pidgin_dimen_Exception(Exception):
     pass
 
 
-MAPS_CATEGORYS = {
-    "map_name": "AcctName",
+MAPS_DIMENS = {
+    "map_name": "NameUnit",
     "map_label": "GroupLabel",
     "map_title": "TitleUnit",
     "map_road": "RoadUnit",
 }
 
 class_typeS = {
-    "AcctName": {
+    "NameUnit": {
         "stage": "name_staging",
         "agg": "name_agg",
         "csv_filename": "name.csv",
@@ -97,10 +98,10 @@ class_typeS = {
 }
 
 
-def get_class_type(pidgin_category: str) -> str:
-    if pidgin_category not in MAPS_CATEGORYS:
-        raise not_given_pidgin_category_Exception("not given pidgin_category")
-    return MAPS_CATEGORYS[pidgin_category]
+def get_class_type(pidgin_dimen: str) -> str:
+    if pidgin_dimen not in MAPS_DIMENS:
+        raise not_given_pidgin_dimen_Exception("not given pidgin_dimen")
+    return MAPS_DIMENS[pidgin_dimen]
 
 
 def get_sheet_stage_name(class_type: str) -> str:
@@ -337,10 +338,10 @@ def get_events_dict_from_events_agg_file(boat_dir) -> dict[int, str]:
 
 
 def boat_agg_single_to_pidgin_staging(
-    pidgin_category: str, legitimate_events: set[EventInt], boat_dir: str
+    pidgin_dimen: str, legitimate_events: set[EventInt], boat_dir: str
 ):
     x_events = legitimate_events
-    transformer = boatAggToStagingTransformer(boat_dir, pidgin_category, x_events)
+    transformer = boatAggToStagingTransformer(boat_dir, pidgin_dimen, x_events)
     transformer.transform()
 
 
@@ -377,21 +378,21 @@ def etl_boat_agg_to_pidgin_staging(legitimate_events: set[EventInt], boat_dir: s
 
 class boatAggToStagingTransformer:
     def __init__(
-        self, boat_dir: str, pidgin_category: str, legitmate_events: set[EventInt]
+        self, boat_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
     ):
         self.boat_dir = boat_dir
         self.legitmate_events = legitmate_events
-        self.pidgin_category = pidgin_category
-        self.class_type = get_class_type(pidgin_category)
+        self.pidgin_dimen = pidgin_dimen
+        self.class_type = get_class_type(pidgin_dimen)
 
     def transform(self):
-        category_ideas = get_idea_category_ref().get(self.pidgin_category)
-        pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
+        dimen_ideas = get_idea_dimen_ref().get(self.pidgin_dimen)
+        pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_dimen)
         pidgin_columns.update({"face_name", "event_int"})
         pidgin_columns = get_custom_sorted_list(pidgin_columns)
         pidgin_columns.insert(0, "src_idea")
         pidgin_df = DataFrame(columns=pidgin_columns)
-        for idea_number in sorted(category_ideas):
+        for idea_number in sorted(dimen_ideas):
             idea_file_name = f"{idea_number}.xlsx"
             boat_idea_path = create_path(self.boat_dir, idea_file_name)
             if os_path_exists(boat_idea_path):
@@ -438,7 +439,7 @@ class boatAggToStagingTransformer:
                 ]
 
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
-        if self.class_type == "AcctName" and "inx_name" not in missing_col:
+        if self.class_type == "NameUnit" and "inx_name" not in missing_col:
             return x_row["inx_name"]
         elif self.class_type == "GroupLabel" and "inx_label" not in missing_col:
             return x_row["inx_label"]
@@ -465,8 +466,8 @@ def etl_pidgin_title_staging_to_title_agg(boat_dir: str):
     etl_pidgin_single_staging_to_agg(boat_dir, "map_title")
 
 
-def etl_pidgin_single_staging_to_agg(boat_dir: str, map_category: str):
-    transformer = PidginStagingToAggTransformer(boat_dir, map_category)
+def etl_pidgin_single_staging_to_agg(boat_dir: str, map_dimen: str):
+    transformer = PidginStagingToAggTransformer(boat_dir, map_dimen)
     transformer.transform()
 
 
@@ -478,14 +479,14 @@ def etl_boat_pidgin_staging_to_agg(boat_dir):
 
 
 class PidginStagingToAggTransformer:
-    def __init__(self, boat_dir: str, pidgin_category: str):
+    def __init__(self, boat_dir: str, pidgin_dimen: str):
         self.boat_dir = boat_dir
-        self.pidgin_category = pidgin_category
+        self.pidgin_dimen = pidgin_dimen
         self.file_path = create_path(self.boat_dir, "pidgin.xlsx")
-        self.class_type = get_class_type(self.pidgin_category)
+        self.class_type = get_class_type(self.pidgin_dimen)
 
     def transform(self):
-        pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_category)
+        pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_dimen)
         pidgin_columns.update({"face_name", "event_int"})
         pidgin_columns = get_custom_sorted_list(pidgin_columns)
         pidgin_agg_df = DataFrame(columns=pidgin_columns)
@@ -573,9 +574,9 @@ def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
         agg_sheet_name = class_typeS[class_type]["agg"]
         csv_filename = class_typeS[class_type]["csv_filename"]
         if sheet_exists(event_pidgin_path, agg_sheet_name):
-            acct_csv_path = create_path(event_pidgin_dir, csv_filename)
-            acct_df = pandas_read_excel(event_pidgin_path, agg_sheet_name)
-            acct_df.to_csv(acct_csv_path, index=False)
+            name_csv_path = create_path(event_pidgin_dir, csv_filename)
+            name_df = pandas_read_excel(event_pidgin_path, agg_sheet_name)
+            name_df.to_csv(name_csv_path, index=False)
 
 
 def _get_all_faces_bow_dir_event_dirs(faces_dir) -> list[str]:
@@ -750,41 +751,61 @@ def etl_idea_staging_to_bud_tables(conn_or_cursor):
     create_bud_tables(conn_or_cursor)
     idea_staging_tables2bud_staging_tables(conn_or_cursor)
     set_bud_staging_error_message(conn_or_cursor)
-    # bud_staging_tables2bud_agg_tables(conn_or_cursor)
+    bud_staging_tables2bud_agg_tables(conn_or_cursor)
 
 
 def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection):
-    fiscal_cats = get_fiscal_categorys()
     idea_config_dict = get_idea_config_dict()
-
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
         if db_table_exists(conn_or_cursor, idea_staging):
-            for x_cat in fiscal_cats:
-                cat_config = idea_config_dict.get(x_cat)
-                cat_jkeys = set(cat_config.get("jkeys").keys())
-                if is_stageable(conn_or_cursor, idea_staging, cat_jkeys):
-                    gen_sqlstr = get_idea_into_category_staging_query(
-                        conn_or_cursor, idea_number, x_cat, cat_jkeys
+            # only inserts from pre-identified idea categorys
+            stageable_dimens = IDEA_STAGEABLE_PUT_DIMENS.get(idea_number)
+            for x_dimen in stageable_dimens:
+                dimen_config = idea_config_dict.get(x_dimen)
+                if dimen_config.get("idea_category") == "fiscal":
+                    dimen_jkeys = set(dimen_config.get("jkeys").keys())
+                    gen_sqlstr = get_idea_into_dimen_staging_query(
+                        conn_or_cursor, idea_number, x_dimen, dimen_jkeys
                     )
                     conn_or_cursor.execute(gen_sqlstr)
+
+            # for x_dimen in fiscal_dimens:
+            #     dimen_config = idea_config_dict.get(x_dimen)
+            #     dimen_jkeys = set(dimen_config.get("jkeys").keys())
+            #     if is_stageable(conn_or_cursor, idea_staging, dimen_jkeys):
+            #         gen_sqlstr = get_idea_into_dimen_staging_query(
+            #             conn_or_cursor, idea_number, x_dimen, dimen_jkeys
+            #         )
+            #         conn_or_cursor.execute(gen_sqlstr)
 
 
 def idea_staging_tables2bud_staging_tables(conn_or_cursor: sqlite3_Connection):
-    bud_cats = get_bud_categorys()
     idea_config_dict = get_idea_config_dict()
 
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
         if db_table_exists(conn_or_cursor, idea_staging):
-            for x_cat in bud_cats:
-                cat_config = idea_config_dict.get(x_cat)
-                cat_jkeys = set(cat_config.get("jkeys").keys())
-                if is_stageable(conn_or_cursor, idea_staging, cat_jkeys):
-                    gen_sqlstr = get_idea_into_category_staging_query(
-                        conn_or_cursor, idea_number, x_cat, cat_jkeys
+            # only inserts from pre-identified idea categorys
+            stageable_dimens = IDEA_STAGEABLE_PUT_DIMENS.get(idea_number)
+            for x_dimen in stageable_dimens:
+                dimen_config = idea_config_dict.get(x_dimen)
+                if dimen_config.get("idea_category") == "bud":
+                    dimen_jkeys = set(dimen_config.get("jkeys").keys())
+                    insert_sqlstr = get_idea_into_dimen_staging_query(
+                        conn_or_cursor, idea_number, x_dimen, dimen_jkeys, "put"
                     )
-                    conn_or_cursor.execute(gen_sqlstr)
+                    conn_or_cursor.execute(insert_sqlstr)
+
+            # manually checks each idea categorys
+            # for x_dimen in bud_dimens:
+            #     dimen_config = idea_config_dict.get(x_dimen)
+            #     dimen_jkeys = set(dimen_config.get("jkeys").keys())
+            #     if is_stageable(conn_or_cursor, idea_staging, dimen_jkeys):
+            #         insert_sqlstr = get_idea_into_dimen_staging_query(
+            #             conn_or_cursor, idea_number, x_dimen, dimen_jkeys
+            #         )
+            #         conn_or_cursor.execute(insert_sqlstr)
 
 
 def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):
@@ -795,7 +816,9 @@ def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):
 
 
 def set_bud_staging_error_message(conn_or_cursor: sqlite3_Connection):
-    for set_error_sqlstr in get_bud_update_inconsist_error_message_sqlstrs().values():
+    for (
+        set_error_sqlstr
+    ) in get_bud_put_update_inconsist_error_message_sqlstrs().values():
         conn_or_cursor.execute(set_error_sqlstr)
 
 
@@ -804,24 +827,29 @@ def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
         conn_or_cursor.execute(x_sqlstr)
 
 
+def bud_staging_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
+    for x_sqlstr in get_bud_insert_put_agg_from_staging_sqlstrs().values():
+        conn_or_cursor.execute(x_sqlstr)
+
+
 def etl_fiscal_staging_tables_to_fiscal_csvs(
     conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
-    for ficsal_category in get_fiscal_categorys():
-        staging_tablename = f"{ficsal_category}_staging"
+    for ficsal_dimen in get_fiscal_dimens():
+        staging_tablename = f"{ficsal_dimen}_staging"
         save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, staging_tablename)
 
 
 def etl_fiscal_agg_tables_to_fiscal_csvs(
     conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
-    for ficsal_category in get_fiscal_categorys():
-        save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, f"{ficsal_category}_agg")
+    for ficsal_dimen in get_fiscal_dimens():
+        save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, f"{ficsal_dimen}_agg")
 
 
 def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
-    for ficsal_category in get_fiscal_categorys():
-        x_excel_path = create_path(fiscal_mstr_dir, f"{ficsal_category}.xlsx")
-        cat_df = open_csv(fiscal_mstr_dir, f"{ficsal_category}_agg.csv")
-        upsert_sheet(x_excel_path, "agg", cat_df)
+    for ficsal_dimen in get_fiscal_dimens():
+        x_excel_path = create_path(fiscal_mstr_dir, f"{ficsal_dimen}.xlsx")
+        dimen_df = open_csv(fiscal_mstr_dir, f"{ficsal_dimen}_agg.csv")
+        upsert_sheet(x_excel_path, "agg", dimen_df)
     create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)

@@ -23,7 +23,7 @@ from src.f02_bud.bud import budunit_shop
 def test_create_legible_list_ReturnsObj_itemunit_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_itemunit_str()
+    dimen = bud_itemunit_str()
     _problem_bool_str = "problem_bool"
     item_title_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
@@ -36,7 +36,7 @@ def test_create_legible_list_ReturnsObj_itemunit_INSERT():
     morph_value = 37
     mass_value = 43
     pledge_value = False
-    clean_atomunit = atomunit_shop(category, atom_insert())
+    clean_atomunit = atomunit_shop(dimen, atom_insert())
     clean_atomunit.set_arg(item_title_str(), item_title_value)
     clean_atomunit.set_arg(parent_road_str(), parent_road_value)
     clean_atomunit.set_arg(addin_str(), addin_value)
@@ -64,7 +64,7 @@ def test_create_legible_list_ReturnsObj_itemunit_INSERT():
 def test_create_legible_list_ReturnsObj_itemunit_UPDATE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_itemunit_str()
+    dimen = bud_itemunit_str()
     _problem_bool_str = "problem_bool"
     item_title_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
@@ -77,7 +77,7 @@ def test_create_legible_list_ReturnsObj_itemunit_UPDATE():
     morph_value = 37
     mass_value = 43
     pledge_value = False
-    clean_atomunit = atomunit_shop(category, atom_update())
+    clean_atomunit = atomunit_shop(dimen, atom_update())
     clean_atomunit.set_arg(item_title_str(), item_title_value)
     clean_atomunit.set_arg(parent_road_str(), parent_road_value)
     clean_atomunit.set_arg(addin_str(), addin_value)
@@ -105,10 +105,10 @@ def test_create_legible_list_ReturnsObj_itemunit_UPDATE():
 def test_create_legible_list_ReturnsObj_itemunit_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_itemunit_str()
+    dimen = bud_itemunit_str()
     item_title_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
-    clean_atomunit = atomunit_shop(category, atom_delete())
+    clean_atomunit = atomunit_shop(dimen, atom_delete())
     clean_atomunit.set_arg(item_title_str(), item_title_value)
     clean_atomunit.set_arg(parent_road_str(), parent_road_value)
 

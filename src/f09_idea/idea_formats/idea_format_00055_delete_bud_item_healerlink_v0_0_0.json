@@ -1,0 +1,26 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fiscal_title": {
+            "otx_key": true
+        },
+        "healer_name_ERASE": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        },
+        "road": {
+            "otx_key": true
+        }
+    },
+    "idea_number": "br00055",
+    "dimens": [
+        "bud_item_healerlink"
+    ]
+}

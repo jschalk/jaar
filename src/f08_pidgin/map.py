@@ -71,7 +71,7 @@ class MapCore:
         return get_json_from_dict(self.get_dict())
 
 
-class AcctMap(MapCore):
+class NameMap(MapCore):
     def set_otx2inx(self, otx_name: str, inx_name: str):
         self.otx2inx[otx_name] = inx_name
 
@@ -112,19 +112,19 @@ class AcctMap(MapCore):
         )
 
 
-def acctmap_shop(
+def namemap_shop(
     face_name: FaceName = None,
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
     otx2inx: dict = None,
     unknown_word: str = None,
-) -> AcctMap:
+) -> NameMap:
     unknown_word = default_unknown_word_if_None(unknown_word)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
-    return AcctMap(
+    return NameMap(
         face_name=face_name,
         event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
@@ -134,8 +134,8 @@ def acctmap_shop(
     )
 
 
-def get_acctmap_from_dict(x_dict: dict) -> AcctMap:
-    return acctmap_shop(
+def get_namemap_from_dict(x_dict: dict) -> NameMap:
+    return namemap_shop(
         face_name=x_dict.get("face_name"),
         event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
@@ -145,8 +145,8 @@ def get_acctmap_from_dict(x_dict: dict) -> AcctMap:
     )
 
 
-def get_acctmap_from_json(x_json: str) -> AcctMap:
-    return get_acctmap_from_dict(get_dict_from_json(x_json))
+def get_namemap_from_json(x_json: str) -> NameMap:
+    return get_namemap_from_dict(get_dict_from_json(x_json))
 
 
 class GroupMap(MapCore):
@@ -496,7 +496,7 @@ def _inherit_mapunit(new, old):
     return new
 
 
-def inherit_acctmap(new: AcctMap, old: AcctMap) -> AcctMap:
+def inherit_namemap(new: NameMap, old: NameMap) -> NameMap:
     return _inherit_mapunit(new, old)
 
 

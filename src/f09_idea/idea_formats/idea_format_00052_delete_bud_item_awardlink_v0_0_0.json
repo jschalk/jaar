@@ -1,0 +1,26 @@
+{
+    "attributes": {
+        "awardee_tag_ERASE": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fiscal_title": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        },
+        "road": {
+            "otx_key": true
+        }
+    },
+    "idea_number": "br00052",
+    "dimens": [
+        "bud_item_awardlink"
+    ]
+}

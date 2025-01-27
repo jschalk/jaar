@@ -14,14 +14,14 @@ from src.f02_bud.bud import budunit_shop
 def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_With_base_item_active_requisite():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_item_reasonunit_str()
+    dimen = bud_item_reasonunit_str()
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_str = "base"
     base_value = f"{sue_bud.bridge}Swimmers"
     base_item_active_requisite_value = True
-    swim_atomunit = atomunit_shop(category, atom_insert())
+    swim_atomunit = atomunit_shop(dimen, atom_insert())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(base_str, base_value)
     swim_atomunit.set_arg(
@@ -43,13 +43,13 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_With_base_item_ac
 def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_Without_base_item_active_requisite():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_item_reasonunit_str()
+    dimen = bud_item_reasonunit_str()
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_str = "base"
     base_value = f"{sue_bud.bridge}Swimmers"
-    swim_atomunit = atomunit_shop(category, atom_insert())
+    swim_atomunit = atomunit_shop(dimen, atom_insert())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(base_str, base_value)
     # print(f"{swim_atomunit=}")
@@ -68,14 +68,14 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_Without_base_item
 def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_requisite_IsTrue():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_item_reasonunit_str()
+    dimen = bud_item_reasonunit_str()
     base_str = "base"
     base_value = f"{sue_bud.bridge}Swimmers"
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_item_active_requisite_value = True
-    swim_atomunit = atomunit_shop(category, atom_update())
+    swim_atomunit = atomunit_shop(dimen, atom_update())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(base_str, base_value)
     swim_atomunit.set_arg(
@@ -97,13 +97,13 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_
 def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_requisite_IsNone():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_item_reasonunit_str()
+    dimen = bud_item_reasonunit_str()
     base_str = "base"
     base_value = f"{sue_bud.bridge}Swimmers"
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    swim_atomunit = atomunit_shop(category, atom_update())
+    swim_atomunit = atomunit_shop(dimen, atom_update())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(base_str, base_value)
     # print(f"{swim_atomunit=}")
@@ -122,13 +122,13 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_
 def test_create_legible_list_ReturnsObj_item_reasonunit_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    category = bud_item_reasonunit_str()
+    dimen = bud_item_reasonunit_str()
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_str = "base"
     base_value = f"{sue_bud.bridge}Swimmers"
-    swim_atomunit = atomunit_shop(category, atom_delete())
+    swim_atomunit = atomunit_shop(dimen, atom_delete())
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(base_str, base_value)
     # print(f"{swim_atomunit=}")

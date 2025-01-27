@@ -27,7 +27,7 @@ from src.f07_fiscal.fiscal_config import (
     config_file_dir,
     get_fiscal_config_file_name,
     get_fiscal_config_dict,
-    get_fiscal_args_category_mapping,
+    get_fiscal_args_dimen_mapping,
     present_time_str,
     cumlative_minute_str,
     fiscalunit_str,
@@ -36,7 +36,7 @@ from src.f07_fiscal.fiscal_config import (
     fiscal_timeline_hour_str,
     fiscal_timeline_month_str,
     fiscal_timeline_weekday_str,
-    get_fiscal_categorys,
+    get_fiscal_dimens,
     get_fiscal_args_class_types,
     get_fiscal_args_set,
     amount_str,
@@ -67,13 +67,13 @@ def test_get_fiscal_config_dict_ReturnsObj():
 
     # THEN
     assert fiscal_config
-    fiscal_config_categorys = set(fiscal_config.keys())
-    assert fiscalunit_str() in fiscal_config_categorys
-    assert fiscal_deal_episode_str() in fiscal_config_categorys
-    assert fiscal_cashbook_str() in fiscal_config_categorys
-    assert fiscal_timeline_hour_str() in fiscal_config_categorys
-    assert fiscal_timeline_month_str() in fiscal_config_categorys
-    assert fiscal_timeline_weekday_str() in fiscal_config_categorys
+    fiscal_config_dimens = set(fiscal_config.keys())
+    assert fiscalunit_str() in fiscal_config_dimens
+    assert fiscal_deal_episode_str() in fiscal_config_dimens
+    assert fiscal_cashbook_str() in fiscal_config_dimens
+    assert fiscal_timeline_hour_str() in fiscal_config_dimens
+    assert fiscal_timeline_month_str() in fiscal_config_dimens
+    assert fiscal_timeline_weekday_str() in fiscal_config_dimens
     assert len(fiscal_config) == 6
     _validate_fiscal_config(fiscal_config)
     fiscalunit_dict = fiscal_config.get(fiscalunit_str())
@@ -116,81 +116,81 @@ def _validate_fiscal_config(fiscal_config: dict):
     accepted_class_typees.add("str")
 
     # for every fiscal_format file there exists a unique fiscal_number always with leading zeros to make 5 digits
-    for fiscal_categorys, cat_dict in fiscal_config.items():
-        print(f"_validate_fiscal_config {fiscal_categorys=}")
-        assert cat_dict.get(jkeys_str()) is not None
-        assert cat_dict.get(jvalues_str()) is not None
-        assert cat_dict.get(atom_update()) is None
-        assert cat_dict.get(atom_insert()) is None
-        assert cat_dict.get(atom_delete()) is None
-        assert cat_dict.get(normal_specs_str()) is None
+    for fiscal_dimens, dimen_dict in fiscal_config.items():
+        print(f"_validate_fiscal_config {fiscal_dimens=}")
+        assert dimen_dict.get(jkeys_str()) is not None
+        assert dimen_dict.get(jvalues_str()) is not None
+        assert dimen_dict.get(atom_update()) is None
+        assert dimen_dict.get(atom_insert()) is None
+        assert dimen_dict.get(atom_delete()) is None
+        assert dimen_dict.get(normal_specs_str()) is None
 
-        fiscal_jkeys_keys = set(cat_dict.get(jkeys_str()).keys())
+        fiscal_jkeys_keys = set(dimen_dict.get(jkeys_str()).keys())
         for jkey_key in fiscal_jkeys_keys:
-            jkey_dict = cat_dict.get(jkeys_str())
-            print(f"_validate_fiscal_config {fiscal_categorys=} {jkey_key=} ")
+            jkey_dict = dimen_dict.get(jkeys_str())
+            print(f"_validate_fiscal_config {fiscal_dimens=} {jkey_key=} ")
             arg_dict = jkey_dict.get(jkey_key)
             assert arg_dict.get(class_type_str()) in accepted_class_typees
-        fiscal_jvalues_keys = set(cat_dict.get(jvalues_str()).keys())
+        fiscal_jvalues_keys = set(dimen_dict.get(jvalues_str()).keys())
         for jvalue_key in fiscal_jvalues_keys:
-            jvalue_dict = cat_dict.get(jvalues_str())
-            print(f"_validate_fiscal_config {fiscal_categorys=} {jvalue_key=} ")
+            jvalue_dict = dimen_dict.get(jvalues_str())
+            print(f"_validate_fiscal_config {fiscal_dimens=} {jvalue_key=} ")
             arg_dict = jvalue_dict.get(jvalue_key)
             assert arg_dict.get(class_type_str()) in accepted_class_typees
 
 
-def test_get_fiscal_categorys_ReturnsObj():
+def test_get_fiscal_dimens_ReturnsObj():
     # ESTABLISH / WHEN
-    fiscal_config_categorys = get_fiscal_categorys()
+    fiscal_config_dimens = get_fiscal_dimens()
 
     # THEN
-    assert fiscalunit_str() in fiscal_config_categorys
-    assert fiscal_deal_episode_str() in fiscal_config_categorys
-    assert fiscal_cashbook_str() in fiscal_config_categorys
-    assert fiscal_timeline_hour_str() in fiscal_config_categorys
-    assert fiscal_timeline_month_str() in fiscal_config_categorys
-    assert fiscal_timeline_weekday_str() in fiscal_config_categorys
-    assert len(fiscal_config_categorys) == 6
-    return fiscal_config_categorys == set(get_fiscal_config_dict().keys())
+    assert fiscalunit_str() in fiscal_config_dimens
+    assert fiscal_deal_episode_str() in fiscal_config_dimens
+    assert fiscal_cashbook_str() in fiscal_config_dimens
+    assert fiscal_timeline_hour_str() in fiscal_config_dimens
+    assert fiscal_timeline_month_str() in fiscal_config_dimens
+    assert fiscal_timeline_weekday_str() in fiscal_config_dimens
+    assert len(fiscal_config_dimens) == 6
+    return fiscal_config_dimens == set(get_fiscal_config_dict().keys())
 
 
-def test_get_fiscal_args_category_mapping_ReturnsObj():
+def test_get_fiscal_args_dimen_mapping_ReturnsObj():
     # ESTABLISH / WHEN
-    x_fiscal_args_category_mapping = get_fiscal_args_category_mapping()
+    x_fiscal_args_dimen_mapping = get_fiscal_args_dimen_mapping()
 
     # THEN
-    assert x_fiscal_args_category_mapping
-    assert x_fiscal_args_category_mapping.get(present_time_str())
+    assert x_fiscal_args_dimen_mapping
+    assert x_fiscal_args_dimen_mapping.get(present_time_str())
     x_hour = {fiscal_timeline_hour_str()}
-    assert x_fiscal_args_category_mapping.get(cumlative_minute_str()) == x_hour
-    assert x_fiscal_args_category_mapping.get(fund_coin_str())
-    fiscal_title_categorys = x_fiscal_args_category_mapping.get(fiscal_title_str())
-    assert fiscal_timeline_hour_str() in fiscal_title_categorys
-    assert fiscalunit_str() in fiscal_title_categorys
-    assert len(fiscal_title_categorys) == 6
-    assert len(x_fiscal_args_category_mapping) == 21
+    assert x_fiscal_args_dimen_mapping.get(cumlative_minute_str()) == x_hour
+    assert x_fiscal_args_dimen_mapping.get(fund_coin_str())
+    fiscal_title_dimens = x_fiscal_args_dimen_mapping.get(fiscal_title_str())
+    assert fiscal_timeline_hour_str() in fiscal_title_dimens
+    assert fiscalunit_str() in fiscal_title_dimens
+    assert len(fiscal_title_dimens) == 6
+    assert len(x_fiscal_args_dimen_mapping) == 21
 
 
-def get_class_type(x_category: str, x_arg: str) -> str:
+def get_class_type(x_dimen: str, x_arg: str) -> str:
     fiscal_config_dict = get_fiscal_config_dict()
-    category_dict = fiscal_config_dict.get(x_category)
-    optional_dict = category_dict.get(jvalues_str())
-    required_dict = category_dict.get(jkeys_str())
+    dimen_dict = fiscal_config_dict.get(x_dimen)
+    optional_dict = dimen_dict.get(jvalues_str())
+    required_dict = dimen_dict.get(jkeys_str())
     arg_dict = {}
     if optional_dict.get(x_arg):
-        arg_dict = category_dict.get(jvalues_str()).get(x_arg)
+        arg_dict = dimen_dict.get(jvalues_str()).get(x_arg)
     if required_dict.get(x_arg):
         arg_dict = required_dict.get(x_arg)
     return arg_dict.get(class_type_str())
 
 
 def all_args_class_types_are_correct(x_class_types) -> bool:
-    x_fiscal_args_category_mapping = get_fiscal_args_category_mapping()
+    x_fiscal_args_dimen_mapping = get_fiscal_args_dimen_mapping()
     x_sorted_class_types = sorted(list(x_class_types.keys()))
     for x_fiscal_arg in x_sorted_class_types:
-        x_categorys = list(x_fiscal_args_category_mapping.get(x_fiscal_arg))
-        x_category = x_categorys[0]
-        x_class_type = get_class_type(x_category, x_fiscal_arg)
+        x_dimens = list(x_fiscal_args_dimen_mapping.get(x_fiscal_arg))
+        x_dimen = x_dimens[0]
+        x_class_type = get_class_type(x_dimen, x_fiscal_arg)
         print(
             f"assert x_class_types.get({x_fiscal_arg}) == {x_class_type} {x_class_types.get(x_fiscal_arg)=}"
         )
@@ -204,9 +204,9 @@ def test_get_fiscal_args_class_types_ReturnsObj():
     fiscal_args_class_types = get_fiscal_args_class_types()
 
     # THEN
-    fiscal_args_from_categorys = set(get_fiscal_args_category_mapping().keys())
-    print(f"{fiscal_args_from_categorys=}")
-    assert set(fiscal_args_class_types.keys()) == fiscal_args_from_categorys
+    fiscal_args_from_dimens = set(get_fiscal_args_dimen_mapping().keys())
+    print(f"{fiscal_args_from_dimens=}")
+    assert set(fiscal_args_class_types.keys()) == fiscal_args_from_dimens
     assert all_args_class_types_are_correct(fiscal_args_class_types)
 
 
@@ -216,7 +216,7 @@ def test_get_fiscal_args_set_ReturnsObj():
 
     # THEN
     assert fiscal_args_set
-    mapping_args_set = set(get_fiscal_args_category_mapping().keys())
+    mapping_args_set = set(get_fiscal_args_dimen_mapping().keys())
     print(f"{mapping_args_set=}")
     assert fiscal_args_set == mapping_args_set
     assert len(fiscal_args_set) == 21

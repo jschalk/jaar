@@ -9,7 +9,7 @@ def test_IdeaRef_Exists():
 
     # THEN
     assert not x_idearef.idea_name
-    assert not x_idearef.categorys
+    assert not x_idearef.dimens
     assert not x_idearef._attributes
 
 
@@ -18,11 +18,11 @@ def test_idearef_shop_ReturnsObj():
     x1_idea_name = "0001"
 
     # WHEN
-    x_idearef = idearef_shop(x_idea_name=x1_idea_name, x_categorys=[bud_acctunit_str()])
+    x_idearef = idearef_shop(x_idea_name=x1_idea_name, x_dimens=[bud_acctunit_str()])
 
     # THEN
     assert x_idearef.idea_name == x1_idea_name
-    assert x_idearef.categorys == [bud_acctunit_str()]
+    assert x_idearef.dimens == [bud_acctunit_str()]
     assert x_idearef._attributes == {}
 
 

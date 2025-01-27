@@ -228,7 +228,7 @@ def sample_excel_file(tmp_path):
     """Fixture to create a sample Excel file for testing."""
     data = {
         "ID": [1, 2, 3, 4, 5],
-        "Category": ["A", "B", "A", "C", "B"],
+        "Dimen": ["A", "B", "A", "C", "B"],
         "Value": [100, 200, 150, 300, 250],
     }
     df = DataFrame(data)
@@ -268,26 +268,24 @@ def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
     assert os_path_exists(c_file_path) is False
 
     # WHEN
-    split_excel_into_dirs(
-        sample_excel_file, output_dir, "Category", x_filename, "sheet5"
-    )
+    split_excel_into_dirs(sample_excel_file, output_dir, "Dimen", x_filename, "sheet5")
 
-    # Verify files are created for each unique value in "Category"
+    # Verify files are created for each unique value in "Dimen"
     assert os_path_exists(a_file_path)
     assert os_path_exists(b_file_path)
     assert os_path_exists(c_file_path)
 
     # Verify contents of one of the created files
     a_df = pandas_read_excel(a_file_path)
-    expected_a = DataFrame({"ID": [1, 3], "Category": ["A", "A"], "Value": [100, 150]})
+    expected_a = DataFrame({"ID": [1, 3], "Dimen": ["A", "A"], "Value": [100, 150]})
     pandas_testing_assert_frame_equal(a_df, expected_a)
 
     b_df = pandas_read_excel(b_file_path)
-    b_expected = DataFrame({"ID": [2, 5], "Category": ["B", "B"], "Value": [200, 250]})
+    b_expected = DataFrame({"ID": [2, 5], "Dimen": ["B", "B"], "Value": [200, 250]})
     pandas_testing_assert_frame_equal(b_df, b_expected)
 
     c_df = pandas_read_excel(c_file_path)
-    c_expected = DataFrame({"ID": [4], "Category": ["C"], "Value": [300]})
+    c_expected = DataFrame({"ID": [4], "Dimen": ["C"], "Value": [300]})
     pandas_testing_assert_frame_equal(c_df, c_expected)
 
 
@@ -296,7 +294,7 @@ def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(tmp_path, output_dir
     # ESTABLISH Create an Excel file with an empty column
     data = {
         "ID": [1, 2, 3],
-        "Category": [None, None, None],
+        "Dimen": [None, None, None],
         "Value": [100, 200, 300],
     }
     df = DataFrame(data)
@@ -305,7 +303,7 @@ def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(tmp_path, output_dir
 
     # WHEN
     x_filename = "fizz"
-    split_excel_into_dirs(file_path, output_dir, "Category", x_filename, "sheet5")
+    split_excel_into_dirs(file_path, output_dir, "Dimen", x_filename, "sheet5")
 
     # THEN Verify that no files are created
     created_files = list(output_dir.iterdir())
@@ -322,9 +320,7 @@ def test_split_excel_into_dirs_DoesCreateDirectoryIfColumnEmpty(
     x_filename = "fizz"
 
     # WHEN
-    split_excel_into_dirs(
-        sample_excel_file, output_dir, "Category", x_filename, "sheet5"
-    )
+    split_excel_into_dirs(sample_excel_file, output_dir, "Dimen", x_filename, "sheet5")
 
     # THEN
     assert output_dir.exists()
@@ -337,7 +333,7 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
     # ESTABLISH Create a DataFrame with special characters in the splitting column
     data = {
         "ID": [1, 2],
-        "Category": ["A/B", "C\\D"],
+        "Dimen": ["A/B", "C\\D"],
         "Value": [100, 200],
     }
     df = DataFrame(data)
@@ -350,7 +346,7 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
     assert os_path_exists(c_file_path) is False
 
     # WHEN
-    split_excel_into_dirs(file_path, output_dir, "Category", x_filename, "sheet5")
+    split_excel_into_dirs(file_path, output_dir, "Dimen", x_filename, "sheet5")
 
     # THEN
     assert os_path_exists(b_file_path)

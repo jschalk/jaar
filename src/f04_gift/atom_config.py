@@ -52,7 +52,7 @@ def class_type_str() -> str:
 
 
 def type_AcctName_str() -> str:
-    return "AcctName"
+    return "NameUnit"
 
 
 def type_GroupLabel_str() -> str:
@@ -87,8 +87,8 @@ def column_order_str() -> str:
     return "column_order"
 
 
-def category_str() -> str:
-    return "category"
+def dimen_str() -> str:
+    return "dimen"
 
 
 def crud_str() -> str:
@@ -256,39 +256,39 @@ def get_atom_config_dict() -> dict:
     return get_dict_from_json(open_file(config_file_dir(), get_atom_config_file_name()))
 
 
-def get_atom_config_jkeys(x_cat: str) -> dict:
-    jkeys_key_list = [x_cat, jkeys_str()]
+def get_atom_config_jkeys(x_dimen: str) -> dict:
+    jkeys_key_list = [x_dimen, jkeys_str()]
     return get_from_nested_dict(get_atom_config_dict(), jkeys_key_list)
 
 
-def get_atom_config_jvalues(x_cat: str) -> dict:
-    jvalues_key_list = [x_cat, jvalues_str()]
+def get_atom_config_jvalues(x_dimen: str) -> dict:
+    jvalues_key_list = [x_dimen, jvalues_str()]
     return get_from_nested_dict(get_atom_config_dict(), jvalues_key_list)
 
 
-def get_atom_config_args(x_category: str) -> dict[str, dict]:
-    args_dict = get_atom_config_jkeys(x_category)
-    args_dict.update(get_atom_config_jvalues(x_category))
+def get_atom_config_args(x_dimen: str) -> dict[str, dict]:
+    args_dict = get_atom_config_jkeys(x_dimen)
+    args_dict.update(get_atom_config_jvalues(x_dimen))
     return args_dict
 
 
-def get_atom_args_category_mapping() -> dict[str, set[str]]:
+def get_atom_args_dimen_mapping() -> dict[str, set[str]]:
     x_dict = {}
-    for atom_category in get_atom_config_dict().keys():
-        args_set = set(get_atom_config_args(atom_category))
+    for atom_dimen in get_atom_config_dict().keys():
+        args_set = set(get_atom_config_args(atom_dimen))
         for x_arg in args_set:
             if x_dict.get(x_arg) is None:
-                x_dict[x_arg] = {atom_category}
+                x_dict[x_arg] = {atom_dimen}
             else:
-                x_category_set = x_dict.get(x_arg)
-                x_category_set.add(atom_category)
-                x_dict[x_arg] = x_category_set
+                x_dimen_set = x_dict.get(x_arg)
+                x_dimen_set.add(atom_dimen)
+                x_dict[x_arg] = x_dimen_set
     return x_dict
 
 
 def get_allowed_class_types() -> set[str]:
     return {
-        "AcctName",
+        "NameUnit",
         "bool",
         "float",
         "GroupLabel",
@@ -301,7 +301,7 @@ def get_allowed_class_types() -> set[str]:
 
 def get_atom_args_class_types() -> dict[str, str]:
     return {
-        "acct_name": "AcctName",
+        "acct_name": "NameUnit",
         "addin": "float",
         "awardee_tag": "GroupLabel",
         "base": "RoadUnit",
@@ -323,7 +323,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "give_force": "float",
         "gogo_want": "float",
         "group_label": "GroupLabel",
-        "healer_name": "AcctName",
+        "healer_name": "NameUnit",
         "item_title": "TitleUnit",
         "mass": "int",
         "max_tree_traverse": "int",
@@ -347,10 +347,10 @@ def get_atom_args_class_types() -> dict[str, str]:
     }
 
 
-def get_sorted_jkey_keys(atom_category: str) -> list[str]:
+def get_sorted_jkey_keys(atom_dimen: str) -> list[str]:
     atom_config = get_atom_config_dict()
-    atom_category_config = atom_config.get(atom_category)
-    atom_jkeys_config = atom_category_config.get(jkeys_str())
+    atom_dimen_config = atom_config.get(atom_dimen)
+    atom_jkeys_config = atom_dimen_config.get(jkeys_str())
     if len(atom_jkeys_config) == 1:
         return list(atom_jkeys_config.keys())
     nesting_order_dict = {
@@ -361,24 +361,24 @@ def get_sorted_jkey_keys(atom_category: str) -> list[str]:
     return [x_tuple[0] for x_tuple in sorted_tuples]
 
 
-def add_to_atom_table_columns(x_dict, atom_category, crud, arg_key, arg_value):
-    x_dict[f"{atom_category}_{crud}_{arg_key}"] = arg_value.get("sqlite_datatype")
+def add_to_atom_table_columns(x_dict, atom_dimen, crud, arg_key, arg_value):
+    x_dict[f"{atom_dimen}_{crud}_{arg_key}"] = arg_value.get("sqlite_datatype")
 
 
 def get_flattened_atom_table_build() -> dict[str, any]:
     atom_table_columns = {}
     atom_config = get_atom_config_dict()
-    for atom_category, category_dict in atom_config.items():
-        catergory_insert = category_dict.get(atom_insert())
-        catergory_update = category_dict.get(atom_update())
-        catergory_delete = category_dict.get(atom_delete())
+    for atom_dimen, dimen_dict in atom_config.items():
+        catergory_insert = dimen_dict.get(atom_insert())
+        catergory_update = dimen_dict.get(atom_update())
+        catergory_delete = dimen_dict.get(atom_delete())
         if catergory_insert is not None:
-            jkeys = category_dict.get(jkeys_str())
-            jvalues = category_dict.get(jvalues_str())
+            jkeys = dimen_dict.get(jkeys_str())
+            jvalues = dimen_dict.get(jvalues_str())
             for jkey, x_value in jkeys.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
-                    atom_category,
+                    atom_dimen,
                     atom_insert(),
                     jkey,
                     x_value,
@@ -386,18 +386,18 @@ def get_flattened_atom_table_build() -> dict[str, any]:
             for jvalue, x_value in jvalues.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
-                    atom_category,
+                    atom_dimen,
                     atom_insert(),
                     jvalue,
                     x_value,
                 )
         if catergory_update is not None:
-            jkeys = category_dict.get(jkeys_str())
-            jvalues = category_dict.get(jvalues_str())
+            jkeys = dimen_dict.get(jkeys_str())
+            jvalues = dimen_dict.get(jvalues_str())
             for jkey, x_value in jkeys.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
-                    atom_category,
+                    atom_dimen,
                     atom_update(),
                     jkey,
                     x_value,
@@ -405,17 +405,17 @@ def get_flattened_atom_table_build() -> dict[str, any]:
             for jvalue, x_value in jvalues.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
-                    atom_category,
+                    atom_dimen,
                     atom_update(),
                     jvalue,
                     x_value,
                 )
         if catergory_delete is not None:
-            jkeys = category_dict.get(jkeys_str())
+            jkeys = dimen_dict.get(jkeys_str())
             for jkey, x_value in jkeys.items():
                 add_to_atom_table_columns(
                     atom_table_columns,
-                    atom_category,
+                    atom_dimen,
                     atom_delete(),
                     jkey,
                     x_value,
@@ -426,9 +426,9 @@ def get_flattened_atom_table_build() -> dict[str, any]:
 def get_normalized_bud_table_build() -> dict[str : dict[str, any]]:
     normal_tables_dict = {}
     atom_config = get_atom_config_dict()
-    for x_category, category_dict in atom_config.items():
-        normal_tables_dict[x_category] = {}
-        normal_table_dict = normal_tables_dict.get(x_category)
+    for x_dimen, dimen_dict in atom_config.items():
+        normal_tables_dict[x_dimen] = {}
+        normal_table_dict = normal_tables_dict.get(x_dimen)
 
         normal_table_dict[columns_str()] = {}
         normal_columns_dict = normal_table_dict.get(columns_str())
@@ -437,8 +437,8 @@ def get_normalized_bud_table_build() -> dict[str : dict[str, any]]:
             nullable_str(): False,
             "primary_key": True,
         }
-        jkeys = category_dict.get(jkeys_str())
-        jvalues = category_dict.get(jvalues_str())
+        jkeys = dimen_dict.get(jkeys_str())
+        jvalues = dimen_dict.get(jvalues_str())
         if jkeys is not None:
             for jkey, x_value in jkeys.items():
                 normal_columns_dict[jkey] = {
@@ -455,7 +455,7 @@ def get_normalized_bud_table_build() -> dict[str : dict[str, any]]:
 
         normal_table_dict[normal_specs_str()] = {}
         normal_specs_dict = normal_table_dict.get(normal_specs_str())
-        config_normal_dict = category_dict.get(normal_specs_str())
+        config_normal_dict = dimen_dict.get(normal_specs_str())
         table_name = config_normal_dict.get(normal_table_name_str())
         normal_specs_dict[normal_table_name_str()] = table_name
 
@@ -467,7 +467,7 @@ def save_atom_config_file(atom_config_dict):
     save_file(config_file_dir(), get_atom_config_file_name(), x_file_str)
 
 
-def get_bud_categorys() -> set:
+def get_bud_dimens() -> set:
     return {
         "budunit",
         "bud_acctunit",
@@ -482,37 +482,71 @@ def get_bud_categorys() -> set:
     }
 
 
-def is_bud_category(category_str: str) -> bool:
-    return category_str in get_bud_categorys()
+def get_all_bud_dimen_keys() -> set:
+    return {
+        "acct_name",
+        "awardee_tag",
+        "base",
+        "group_label",
+        "healer_name",
+        "item_title",
+        "need",
+        "owner_name",
+        "parent_road",
+        "road",
+        "team_tag",
+    }
 
 
-def get_atom_order(crud_str: str, category: str) -> int:
-    return get_from_nested_dict(
-        get_atom_config_dict(), [category, crud_str, "atom_order"]
-    )
+def get_delete_key_name(key: str) -> str:
+    return f"{key}_ERASE" if key else None
 
 
-def get_normal_table_name(category: str) -> str:
-    nested_list = [category, normal_specs_str(), normal_table_name_str()]
+def get_all_bud_dimen_delete_keys() -> set:
+    return {
+        "acct_name_ERASE",
+        "awardee_tag_ERASE",
+        "base_ERASE",
+        "group_label_ERASE",
+        "healer_name_ERASE",
+        "item_title_ERASE",
+        "need_ERASE",
+        "owner_name_ERASE",
+        "parent_road_ERASE",
+        "road_ERASE",
+        "team_tag_ERASE",
+    }
+
+
+def is_bud_dimen(dimen_str: str) -> bool:
+    return dimen_str in get_bud_dimens()
+
+
+def get_atom_order(crud_str: str, dimen: str) -> int:
+    return get_from_nested_dict(get_atom_config_dict(), [dimen, crud_str, "atom_order"])
+
+
+def get_normal_table_name(dimen: str) -> str:
+    nested_list = [dimen, normal_specs_str(), normal_table_name_str()]
     return get_from_nested_dict(get_atom_config_dict(), nested_list)
 
 
 def set_mog(
     crud_str: str,
-    category: str,
+    dimen: str,
     atom_order_int: int,
 ) -> int:
     atom_config_dict = get_atom_config_dict()
-    category_dict = atom_config_dict.get(category)
-    crud_dict = category_dict.get(crud_str)
+    dimen_dict = atom_config_dict.get(dimen)
+    crud_dict = dimen_dict.get(crud_str)
     crud_dict["atom_order"] = atom_order_int
     save_atom_config_file(atom_config_dict)
 
 
-def get_category_from_dict(x_row_dict: dict) -> str:
-    x_get_bud_categorys = get_bud_categorys()
+def get_dimen_from_dict(x_row_dict: dict) -> str:
+    x_get_bud_dimens = get_bud_dimens()
     for x_columnname in x_row_dict:
-        for x_category in x_get_bud_categorys:
-            if x_columnname.find(x_category) == 0:
-                category_len = len(x_category)
-                return x_category, x_columnname[category_len + 1 : category_len + 7]
+        for x_dimen in x_get_bud_dimens:
+            if x_columnname.find(x_dimen) == 0:
+                dimen_len = len(x_dimen)
+                return x_dimen, x_columnname[dimen_len + 1 : dimen_len + 7]

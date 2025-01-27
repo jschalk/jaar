@@ -3,10 +3,10 @@ from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_gift.atom_config import acct_name_str
 from src.f04_gift.atom import atom_insert
-from src.f04_gift.delta import deltaunit_shop, get_categorys_cruds_deltaunit
+from src.f04_gift.delta import deltaunit_shop, get_dimens_cruds_deltaunit
 
 
-def test_DeltaUnit_get_categorys_cruds_deltaunit_ReturnsObjWithCorrectCategorysAndCRUDsBy_acctunit_insert():
+def test_DeltaUnit_get_dimens_cruds_deltaunit_ReturnsObjWithCorrectDimensAndCRUDsBy_acctunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
@@ -21,13 +21,13 @@ def test_DeltaUnit_get_categorys_cruds_deltaunit_ReturnsObjWithCorrectCategorysA
     old_deltaunit = deltaunit_shop()
     old_deltaunit.add_all_different_atomunits(before_sue_bud, after_sue_bud)
 
-    category_set = [bud_acctunit_str()]
+    dimen_set = [bud_acctunit_str()]
     curd_set = {atom_insert()}
-    new_deltaunit = get_categorys_cruds_deltaunit(old_deltaunit, category_set, curd_set)
+    new_deltaunit = get_dimens_cruds_deltaunit(old_deltaunit, dimen_set, curd_set)
 
     # THEN
-    new_deltaunit.get_category_sorted_atomunits_list()
-    assert len(new_deltaunit.get_category_sorted_atomunits_list()) == 1
+    new_deltaunit.get_dimen_sorted_atomunits_list()
+    assert len(new_deltaunit.get_dimen_sorted_atomunits_list()) == 1
     sue_insert_dict = new_deltaunit.atomunits.get(atom_insert())
     sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_str())
     bob_atomunit = sue_acctunit_dict.get(bob_str)

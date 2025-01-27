@@ -182,10 +182,10 @@ def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
     knee_fopen = 7
 
     # WHEN
-    x_category = bud_item_factunit_str()
+    x_dimen = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
-    update_disc_atomunit = atomunit_shop(x_category, atom_insert())
+    update_disc_atomunit = atomunit_shop(x_dimen, atom_insert())
     update_disc_atomunit.set_jkey(road_str, ball_road)
     update_disc_atomunit.set_jkey(base_str, knee_road)
     update_disc_atomunit.set_jvalue(fopen_str(), knee_fopen)
@@ -193,9 +193,9 @@ def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
     # THEN
     example_sqlstr = f"""
 INSERT INTO {atom_hx_table_name()} (
-  {x_category}_{atom_insert()}_{road_str}
-, {x_category}_{atom_insert()}_{base_str}
-, {x_category}_{atom_insert()}_{fopen_str()}
+  {x_dimen}_{atom_insert()}_{road_str}
+, {x_dimen}_{atom_insert()}_{base_str}
+, {x_dimen}_{atom_insert()}_{fopen_str()}
 )
 VALUES (
   '{ball_road}'

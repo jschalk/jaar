@@ -2,13 +2,13 @@
     "fiscal_cashbook": {
         "jkeys": {
             "acct_name": {
-                "class_type": "AcctName"
+                "class_type": "NameUnit"
             },
             "fiscal_title": {
                 "class_type": "TitleUnit"
             },
             "owner_name": {
-                "class_type": "AcctName"
+                "class_type": "NameUnit"
             },
             "time_int": {
                 "class_type": "TimeLinePoint"
@@ -71,7 +71,7 @@
                 "class_type": "TitleUnit"
             },
             "owner_name": {
-                "class_type": "AcctName"
+                "class_type": "NameUnit"
             },
             "time_int": {
                 "class_type": "TimeLinePoint"

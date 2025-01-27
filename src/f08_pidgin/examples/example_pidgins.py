@@ -3,11 +3,11 @@ from src.f01_road.road import default_bridge_if_None, create_road
 from src.f04_gift.atom_config import acct_name_str, base_str, type_RoadUnit_str
 from src.f08_pidgin.map import (
     groupmap_shop,
-    acctmap_shop,
+    namemap_shop,
     titlemap_shop,
     roadmap_shop,
     GroupMap,
-    AcctMap,
+    NameMap,
     TitleMap,
     RoadMap,
 )
@@ -51,7 +51,7 @@ def get_swim_groupmap() -> GroupMap:
     return x_groupmap
 
 
-def get_suita_acctmap() -> AcctMap:
+def get_suita_namemap() -> NameMap:
     xio_otx = "Xio"
     sue_otx = "Sue"
     bob_otx = "Bob"
@@ -59,7 +59,7 @@ def get_suita_acctmap() -> AcctMap:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_name_mapunit = acctmap_shop(face_name="Sue")
+    acct_name_mapunit = namemap_shop(face_name="Sue")
     acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
     acct_name_mapunit.set_otx2inx(sue_otx, sue_inx)
     acct_name_mapunit.set_otx2inx(bob_otx, bob_inx)
@@ -140,7 +140,7 @@ def get_slash_groupmap() -> GroupMap:
     return x_groupmap
 
 
-def get_slash_acctmap() -> AcctMap:
+def get_slash_namemap() -> NameMap:
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
@@ -151,7 +151,7 @@ def get_slash_acctmap() -> AcctMap:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_name_mapunit = acctmap_shop(
+    acct_name_mapunit = namemap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
@@ -165,7 +165,7 @@ def get_slash_acctmap() -> AcctMap:
 
 def get_sue_pidginunit() -> PidginUnit:
     sue_pidginunit = pidginunit_shop("Sue")
-    sue_pidginunit.set_acctmap(get_suita_acctmap())
+    sue_pidginunit.set_namemap(get_suita_namemap())
     sue_pidginunit.set_groupmap(get_swim_groupmap())
     sue_pidginunit.set_titlemap(get_clean_titlemap())
     sue_pidginunit.set_roadmap(get_clean_roadmap())
@@ -335,15 +335,15 @@ def get_casa_maison_title_dt() -> DataFrame:
     return inx_dt
 
 
-def get_invalid_acctmap() -> AcctMap:
+def get_invalid_namemap() -> NameMap:
     sue_otx = f"Xio{default_bridge_if_None()}"
     sue_inx = "Sue"
     zia_otx = "Zia"
     zia_inx = "Zia"
-    acctmap = acctmap_shop(face_name="Sue")
-    acctmap.set_otx2inx(sue_otx, sue_inx)
-    acctmap.set_otx2inx(zia_otx, zia_inx)
-    return acctmap
+    namemap = namemap_shop(face_name="Sue")
+    namemap.set_otx2inx(sue_otx, sue_inx)
+    namemap.set_otx2inx(zia_otx, zia_inx)
+    return namemap
 
 
 def get_invalid_groupmap() -> GroupMap:
@@ -433,7 +433,7 @@ def get_slash_groupmap() -> GroupMap:
     return x_groupmap
 
 
-def get_slash_acctmap() -> AcctMap:
+def get_slash_namemap() -> NameMap:
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
@@ -444,20 +444,20 @@ def get_slash_acctmap() -> AcctMap:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    x_acctmap = acctmap_shop(
+    x_namemap = namemap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
         face_name="Sue",
         event_int=7,
     )
-    x_acctmap.set_otx2inx(xio_otx, xio_inx)
-    x_acctmap.set_otx2inx(sue_otx, sue_inx)
-    x_acctmap.set_otx2inx(bob_otx, bob_inx)
-    return x_acctmap
+    x_namemap.set_otx2inx(xio_otx, xio_inx)
+    x_namemap.set_otx2inx(sue_otx, sue_inx)
+    x_namemap.set_otx2inx(bob_otx, bob_inx)
+    return x_namemap
 
 
-def get_pidgin_core_attrs_are_none_acctmap() -> AcctMap:
+def get_pidgin_core_attrs_are_none_namemap() -> NameMap:
     xio_otx = "Xio"
     sue_otx = "Sue"
     bob_otx = "Bob"
@@ -465,14 +465,14 @@ def get_pidgin_core_attrs_are_none_acctmap() -> AcctMap:
     sue_inx = "Suita"
     bob_inx = "Bobita"
     x_nan = float("nan")
-    x_acctmap = acctmap_shop(
+    x_namemap = namemap_shop(
         face_name="Sue",
         event_int=7,
         otx_bridge=x_nan,
         inx_bridge=x_nan,
         unknown_word=x_nan,
     )
-    x_acctmap.set_otx2inx(xio_otx, xio_inx)
-    x_acctmap.set_otx2inx(sue_otx, sue_inx)
-    x_acctmap.set_otx2inx(bob_otx, bob_inx)
-    return x_acctmap
+    x_namemap.set_otx2inx(xio_otx, xio_inx)
+    x_namemap.set_otx2inx(sue_otx, sue_inx)
+    x_namemap.set_otx2inx(bob_otx, bob_inx)
+    return x_namemap

@@ -19,7 +19,7 @@ def get_pidgin_config_dict() -> dict:
     )
 
 
-def get_pidgin_categorys() -> set[str]:
+def get_pidgin_dimens() -> set[str]:
     return set(get_pidgin_config_dict().keys())
 
 
@@ -103,39 +103,39 @@ def map_road_str() -> str:
     return "map_road"
 
 
-def get_pidgin_config_jkeys(x_cat: str) -> dict:
-    jkeys_key_list = [x_cat, jkeys_str()]
+def get_pidgin_config_jkeys(x_dimen: str) -> dict:
+    jkeys_key_list = [x_dimen, jkeys_str()]
     return get_from_nested_dict(get_pidgin_config_dict(), jkeys_key_list)
 
 
-def get_pidgin_config_jvalues(x_cat: str) -> dict:
-    jvalues_key_list = [x_cat, jvalues_str()]
+def get_pidgin_config_jvalues(x_dimen: str) -> dict:
+    jvalues_key_list = [x_dimen, jvalues_str()]
     return get_from_nested_dict(get_pidgin_config_dict(), jvalues_key_list)
 
 
-def get_pidgin_config_args(x_category: str) -> dict[str, dict]:
-    args_dict = get_pidgin_config_jkeys(x_category)
-    args_dict.update(get_pidgin_config_jvalues(x_category))
+def get_pidgin_config_args(x_dimen: str) -> dict[str, dict]:
+    args_dict = get_pidgin_config_jkeys(x_dimen)
+    args_dict.update(get_pidgin_config_jvalues(x_dimen))
     return args_dict
 
 
-def get_pidgin_args_category_mapping() -> dict[str, str]:
+def get_pidgin_args_dimen_mapping() -> dict[str, str]:
     x_dict = {}
-    for pidgin_category in get_pidgin_config_dict().keys():
-        args_set = set(get_pidgin_config_args(pidgin_category))
+    for pidgin_dimen in get_pidgin_config_dict().keys():
+        args_set = set(get_pidgin_config_args(pidgin_dimen))
         for x_arg in args_set:
             if x_dict.get(x_arg) is None:
-                x_dict[x_arg] = {pidgin_category}
+                x_dict[x_arg] = {pidgin_dimen}
             else:
-                x_category_set = x_dict.get(x_arg)
-                x_category_set.add(pidgin_category)
-                x_dict[x_arg] = x_category_set
+                x_dimen_set = x_dict.get(x_arg)
+                x_dimen_set.add(pidgin_dimen)
+                x_dict[x_arg] = x_dimen_set
     return x_dict
 
 
 def get_pidgin_args_class_types() -> dict[str, str]:
     return {
-        "acct_name": "AcctName",
+        "acct_name": "NameUnit",
         "addin": "float",
         "amount": "float",
         "awardee_tag": "GroupLabel",
@@ -155,7 +155,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "debtor_respect": "int",
         "denom": "int",
         "divisor": "int",
-        "face_name": "AcctName",
+        "face_name": "NameUnit",
         "fiscal_title": "TitleUnit",
         "fnigh": "float",
         "fopen": "float",
@@ -164,7 +164,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "give_force": "float",
         "gogo_want": "float",
         "group_label": "GroupLabel",
-        "healer_name": "AcctName",
+        "healer_name": "NameUnit",
         "hour_title": "TitleUnit",
         "item_title": "TitleUnit",
         "mass": "int",
@@ -175,7 +175,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "need": "RoadUnit",
         "nigh": "float",
         "numor": "int",
-        "owner_name": "AcctName",
+        "owner_name": "NameUnit",
         "open": "float",
         "parent_road": "RoadUnit",
         "penny": "float",
@@ -200,7 +200,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
 
 
 def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
-    """for each pidgin_config category contains the associated columns"""
+    """for each pidgin_config dimen contains the associated columns"""
     return {
         "map_label": {
             "inx_label",

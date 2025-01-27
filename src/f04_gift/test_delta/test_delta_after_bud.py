@@ -64,8 +64,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     sue_tally = 44
     before_sue_budunit = budunit_shop(sue_str, tally=sue_tally)
 
-    category = budunit_str()
-    x_atomunit = atomunit_shop(category, atom_update())
+    dimen = budunit_str()
+    x_atomunit = atomunit_shop(dimen, atom_update())
     new1_value = 55
     new1_arg = "tally"
     x_atomunit.set_jvalue(new1_arg, new1_value)
@@ -131,8 +131,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_acct():
     before_sue_budunit.add_acctunit(yao_str)
     before_sue_budunit.add_acctunit(zia_str)
 
-    category = bud_acctunit_str()
-    x_atomunit = atomunit_shop(category, atom_delete())
+    dimen = bud_acctunit_str()
+    x_atomunit = atomunit_shop(dimen, atom_delete())
     x_atomunit.set_jkey(acct_name_str(), zia_str)
     sue_deltaunit.set_atomunit(x_atomunit)
 
@@ -159,8 +159,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_acct():
     assert before_sue_budunit.acct_exists(zia_str) is False
 
     # WHEN
-    category = bud_acctunit_str()
-    x_atomunit = atomunit_shop(category, atom_insert())
+    dimen = bud_acctunit_str()
+    x_atomunit = atomunit_shop(dimen, atom_insert())
     x_atomunit.set_jkey(acct_name_str(), zia_str)
     x_credit_belief = 55
     x_debtit_belief = 66
@@ -190,8 +190,8 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_acct():
     assert before_sue_budunit.get_acct(yao_str).credit_belief == 1
 
     # WHEN
-    category = bud_acctunit_str()
-    x_atomunit = atomunit_shop(category, atom_update())
+    dimen = bud_acctunit_str()
+    x_atomunit = atomunit_shop(dimen, atom_update())
     x_atomunit.set_jkey(acct_name_str(), yao_str)
     yao_credit_belief = 55
     x_atomunit.set_jvalue("credit_belief", yao_credit_belief)

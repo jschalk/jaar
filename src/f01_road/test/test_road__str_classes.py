@@ -1,5 +1,6 @@
 from src.f01_road.road import (
     TitleUnit,
+    NameUnit,
     HealerName,
     OwnerName,
     AcctName,
@@ -15,6 +16,36 @@ from src.f01_road.road import (
     EventInt,
 )
 from inspect import getdoc as inspect_getdoc
+
+
+def test_NameUnit_exists():
+    # ESTABLISH
+    bob_str = "Bob"
+    # WHEN
+    bob_nameunit = NameUnit(bob_str)
+    # THEN
+    assert bob_nameunit == bob_str
+    doc_str = "All Name string classes should inherit from this class"
+    assert inspect_getdoc(bob_nameunit) == doc_str
+
+
+def test_NameUnit_is_name_ReturnsObj_Scenario0():
+    # WHEN / THEN
+    assert NameUnit("").is_name() is False
+    assert NameUnit("A").is_name()
+
+    # WHEN / THEN
+    x_s = default_bridge_if_None()
+    x_nameunit = NameUnit(f"casa{x_s}kitchen")
+    assert x_nameunit.is_name() is False
+
+
+def test_NameUnit_is_name_ReturnsObj_Scenario1():
+    # ESTABLISH / WHEN / THEN
+    slash_str = "/"
+    x_nameunit = NameUnit(f"casa{slash_str}kitchen")
+    assert x_nameunit.is_name()
+    assert x_nameunit.is_name(slash_str) is False
 
 
 def test_HealerName_exists():

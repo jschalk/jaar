@@ -16,11 +16,11 @@ from src.f08_pidgin.examples.example_pidgins import (
     get_clean_roadmap,
     get_clean_titlemap,
     get_swim_groupmap,
-    get_slash_acctmap,
+    get_slash_namemap,
     get_slash_groupmap,
     get_slash_titlemap,
     get_slash_roadmap,
-    get_suita_acctmap,
+    get_suita_namemap,
 )
 
 
@@ -39,7 +39,7 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     assert sue_dict.get(otx_bridge_str()) == default_bridge_if_None()
     assert sue_dict.get(inx_bridge_str()) == default_bridge_if_None()
     assert sue_dict.get(unknown_word_str()) == default_unknown_word_if_None()
-    assert sue_dict.get("acctmap") == sue_pidginunit.acctmap.get_dict()
+    assert sue_dict.get("namemap") == sue_pidginunit.namemap.get_dict()
     assert sue_dict.get("groupmap") == sue_pidginunit.groupmap.get_dict()
     assert sue_dict.get("titlemap") == sue_pidginunit.titlemap.get_dict()
     assert sue_dict.get("roadmap") == sue_pidginunit.roadmap.get_dict()
@@ -54,7 +54,7 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
     sue_pidginunit = pidginunit_shop(
         sue_str, 0, slash_otx_bridge, colon_inx_bridge, x_unknown_word
     )
-    sue_pidginunit.set_acctmap(get_slash_acctmap())
+    sue_pidginunit.set_namemap(get_slash_namemap())
     sue_pidginunit.set_groupmap(get_slash_groupmap())
     sue_pidginunit.set_titlemap(get_slash_titlemap())
     sue_pidginunit.set_roadmap(get_slash_roadmap())
@@ -67,7 +67,7 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
     assert sue_dict.get(otx_bridge_str()) == slash_otx_bridge
     assert sue_dict.get(inx_bridge_str()) == colon_inx_bridge
     assert sue_dict.get(unknown_word_str()) == x_unknown_word
-    assert sue_dict.get("acctmap") == sue_pidginunit.acctmap.get_dict()
+    assert sue_dict.get("namemap") == sue_pidginunit.namemap.get_dict()
     assert sue_dict.get("groupmap") == sue_pidginunit.groupmap.get_dict()
     assert sue_dict.get("titlemap") == sue_pidginunit.titlemap.get_dict()
     assert sue_dict.get("roadmap") == sue_pidginunit.roadmap.get_dict()
@@ -78,7 +78,7 @@ def test_PidginUnit_get_json_ReturnsObj():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     sue_pidginunit.set_groupmap(get_swim_groupmap())
-    sue_pidginunit.set_acctmap(get_suita_acctmap())
+    sue_pidginunit.set_namemap(get_suita_namemap())
     sue_pidginunit.set_titlemap(get_clean_titlemap())
     sue_pidginunit.set_roadmap(get_clean_roadmap())
 
@@ -88,7 +88,7 @@ def test_PidginUnit_get_json_ReturnsObj():
     # THEN
     # print(f"{sue_json=}")
     assert sue_json.find("titlemap") == 766
-    assert sue_json.find(otx_bridge_str()) == 180
+    assert sue_json.find(otx_bridge_str()) == 203
 
 
 def test_get_pidginunit_from_dict_ReturnsObj():
@@ -105,7 +105,7 @@ def test_get_pidginunit_from_dict_ReturnsObj():
         colon_inx_bridge,
         x_unknown_word,
     )
-    sue_pidginunit.set_acctmap(get_slash_acctmap())
+    sue_pidginunit.set_namemap(get_slash_namemap())
     sue_pidginunit.set_titlemap(get_slash_titlemap())
     sue_pidginunit.set_roadmap(get_slash_roadmap())
     sue_pidginunit.set_groupmap(get_slash_groupmap())
@@ -120,7 +120,7 @@ def test_get_pidginunit_from_dict_ReturnsObj():
     assert gen_pidginunit.otx_bridge == slash_otx_bridge
     assert gen_pidginunit.inx_bridge == colon_inx_bridge
     assert gen_pidginunit.unknown_word == x_unknown_word
-    assert gen_pidginunit.acctmap == get_slash_acctmap()
+    assert gen_pidginunit.namemap == get_slash_namemap()
     assert gen_pidginunit.roadmap == get_slash_roadmap()
     assert gen_pidginunit.groupmap == get_slash_groupmap()
 
@@ -140,7 +140,7 @@ def test_get_pidginunit_from_json_ReturnsObj():
         x_unknown_word,
     )
     sue_pidginunit.set_groupmap(get_slash_groupmap())
-    sue_pidginunit.set_acctmap(get_slash_acctmap())
+    sue_pidginunit.set_namemap(get_slash_namemap())
     sue_pidginunit.set_roadmap(get_slash_roadmap())
 
     # WHEN
@@ -153,6 +153,6 @@ def test_get_pidginunit_from_json_ReturnsObj():
     assert gen_pidginunit.otx_bridge == slash_otx_bridge
     assert gen_pidginunit.inx_bridge == colon_inx_bridge
     assert gen_pidginunit.unknown_word == x_unknown_word
-    assert gen_pidginunit.acctmap.get_dict() == get_slash_acctmap().get_dict()
+    assert gen_pidginunit.namemap.get_dict() == get_slash_namemap().get_dict()
     assert gen_pidginunit.groupmap.get_dict() == get_slash_groupmap().get_dict()
     assert gen_pidginunit.roadmap.get_dict() == get_slash_roadmap().get_dict()

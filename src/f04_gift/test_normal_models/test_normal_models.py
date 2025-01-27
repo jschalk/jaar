@@ -32,14 +32,14 @@ from src.f04_gift.normal_models import (
 from sqlalchemy import inspect
 
 
-def get_config_table_name(config_category) -> str:
-    config_specs_dict = config_category.get(normal_specs_str())
+def get_config_table_name(config_dimen) -> str:
+    config_specs_dict = config_dimen.get(normal_specs_str())
     return config_specs_dict.get(normal_table_name_str())
 
 
-def all_columns_are_as_config_requires(mapper, config_category):
-    config_table_name = get_config_table_name(config_category)
-    config_columns = config_category.get(columns_str())
+def all_columns_are_as_config_requires(mapper, config_dimen):
+    config_table_name = get_config_table_name(config_dimen)
+    config_columns = config_dimen.get(columns_str())
 
     for config_column, column_dict in config_columns.items():
         table_column = mapper.columns.get(config_column)
@@ -54,9 +54,9 @@ def all_columns_are_as_config_requires(mapper, config_category):
         assert str(table_column.type) == config_type, failed_assert_str
 
 
-def print_out_expected_class_attribute_declarations(config_category):
-    config_table_name = get_config_table_name(config_category)
-    config_columns = config_category.get(columns_str())
+def print_out_expected_class_attribute_declarations(config_dimen):
+    config_table_name = get_config_table_name(config_dimen)
+    config_columns = config_dimen.get(columns_str())
 
     print(f"Table {config_table_name}")
     for config_column, column_dict in config_columns.items():
@@ -74,143 +74,143 @@ def print_out_expected_class_attribute_declarations(config_category):
 
 def test_normalized_table_BudTable_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(budunit_str())
+    config_dimen = get_normalized_bud_table_build().get(budunit_str())
     mapper = inspect(BudTable)
 
     # WHEN / THEN
-    config_table_name = get_config_table_name(config_category)
+    config_table_name = get_config_table_name(config_dimen)
     assert config_table_name == "bud"
     assert config_table_name == BudTable.__tablename__
-    all_columns_are_as_config_requires(mapper, config_category)
+    all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 def test_normalized_table_AcctUnitTable_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_acctunit_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_acctunit_str())
     mapper = inspect(AcctUnitTable)
-    # print_out_expected_class_attribute_declarations(config_category)
+    # print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
-    config_table_name = get_config_table_name(config_category)
+    config_table_name = get_config_table_name(config_dimen)
     assert config_table_name == "acctunit"
     assert config_table_name == AcctUnitTable.__tablename__
-    all_columns_are_as_config_requires(mapper, config_category)
+    all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 # def test_normalized_table_GroupTable_Exists():
 #     # ESTABLISH
-#     config_category = get_normalized_bud_table_build().get("bud_groupunit")
+#     config_dimen = get_normalized_bud_table_build().get("bud_groupunit")
 #     mapper = inspect(GroupTable)
-#     print_out_expected_class_attribute_declarations(config_category)
+#     print_out_expected_class_attribute_declarations(config_dimen)
 
 #     # WHEN / THEN
-#     config_table_name = get_config_table_name(config_category)
+#     config_table_name = get_config_table_name(config_dimen)
 #     assert config_table_name == "groupunit"
 #     assert config_table_name == GroupTable.__tablename__
-#     all_columns_are_as_config_requires(mapper, config_category)
+#     all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 def test_normalized_table_MemberShipTable_membership_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_acct_membership_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_acct_membership_str())
     mapper = inspect(MemberShipTable)
-    print_out_expected_class_attribute_declarations(config_category)
+    print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
-    config_table_name = get_config_table_name(config_category)
+    config_table_name = get_config_table_name(config_dimen)
     assert config_table_name == "membership"
     assert config_table_name == MemberShipTable.__tablename__
-    all_columns_are_as_config_requires(mapper, config_category)
+    all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 def test_normalized_table_ItemTable_item_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_itemunit_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_itemunit_str())
     mapper = inspect(ItemTable)
-    print_out_expected_class_attribute_declarations(config_category)
+    print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
-    config_table_name = get_config_table_name(config_category)
+    config_table_name = get_config_table_name(config_dimen)
     assert config_table_name == "item"
     assert config_table_name == ItemTable.__tablename__
-    all_columns_are_as_config_requires(mapper, config_category)
+    all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 def test_normalized_table_AwardLinkTable_awardlink_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_item_awardlink_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_item_awardlink_str())
     mapper = inspect(AwardLinkTable)
-    print_out_expected_class_attribute_declarations(config_category)
+    print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
-    config_table_name = get_config_table_name(config_category)
+    config_table_name = get_config_table_name(config_dimen)
     assert config_table_name == "awardlink"
     assert config_table_name == AwardLinkTable.__tablename__
-    all_columns_are_as_config_requires(mapper, config_category)
+    all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 def test_normalized_table_ReasonTable_reason_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_item_reasonunit_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_item_reasonunit_str())
     mapper = inspect(ReasonTable)
-    print_out_expected_class_attribute_declarations(config_category)
+    print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
-    config_table_name = get_config_table_name(config_category)
+    config_table_name = get_config_table_name(config_dimen)
     assert config_table_name == "reason"
     assert config_table_name == ReasonTable.__tablename__
-    all_columns_are_as_config_requires(mapper, config_category)
+    all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 def test_normalized_table_PremiseTable_premise_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(
+    config_dimen = get_normalized_bud_table_build().get(
         bud_item_reason_premiseunit_str()
     )
     mapper = inspect(PremiseTable)
-    print_out_expected_class_attribute_declarations(config_category)
+    print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
-    config_table_name = get_config_table_name(config_category)
+    config_table_name = get_config_table_name(config_dimen)
     assert config_table_name == "premise"
     assert config_table_name == PremiseTable.__tablename__
-    all_columns_are_as_config_requires(mapper, config_category)
+    all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 def test_normalized_table_TeamLinkTable_teamlink_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_item_teamlink_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_item_teamlink_str())
     mapper = inspect(TeamLinkTable)
-    print_out_expected_class_attribute_declarations(config_category)
+    print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
-    config_table_name = get_config_table_name(config_category)
+    config_table_name = get_config_table_name(config_dimen)
     assert config_table_name == "teamlink"
     assert config_table_name == TeamLinkTable.__tablename__
-    all_columns_are_as_config_requires(mapper, config_category)
+    all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 def test_normalized_table_HealerLinkTable_healerlink_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_item_healerlink_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_item_healerlink_str())
     mapper = inspect(HealerLinkTable)
-    print_out_expected_class_attribute_declarations(config_category)
+    print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
-    config_table_name = get_config_table_name(config_category)
+    config_table_name = get_config_table_name(config_dimen)
     assert config_table_name == "healerlink"
     assert config_table_name == HealerLinkTable.__tablename__
-    all_columns_are_as_config_requires(mapper, config_category)
+    all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 def test_normalized_table_FactTable_fact_Exists():
     # ESTABLISH
-    config_category = get_normalized_bud_table_build().get(bud_item_factunit_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_item_factunit_str())
     mapper = inspect(FactTable)
-    print_out_expected_class_attribute_declarations(config_category)
+    print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
-    config_table_name = get_config_table_name(config_category)
+    config_table_name = get_config_table_name(config_dimen)
     assert config_table_name == "fact"
     assert config_table_name == FactTable.__tablename__
-    all_columns_are_as_config_requires(mapper, config_category)
+    all_columns_are_as_config_requires(mapper, config_dimen)

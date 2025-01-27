@@ -61,14 +61,14 @@ def test_sift_ReturnsObjWithoutUnecessaryINSERT_bud_acct_membership():
     accts_deltaunit.set_atomunit(bob_run_atom)
     accts_deltaunit.set_atomunit(yao_run_atom)
     accts_deltaunit.set_atomunit(zia_run_atom)
-    print(f"{len(accts_deltaunit.get_category_sorted_atomunits_list())=}")
-    assert len(accts_deltaunit.get_category_sorted_atomunits_list()) == 3
+    print(f"{len(accts_deltaunit.get_dimen_sorted_atomunits_list())=}")
+    assert len(accts_deltaunit.get_dimen_sorted_atomunits_list()) == 3
 
     # WHEN
     new_deltaunit = sift_deltaunit(accts_deltaunit, sue_bud)
 
     # THEN
-    assert len(new_deltaunit.get_category_sorted_atomunits_list()) == 2
+    assert len(new_deltaunit.get_dimen_sorted_atomunits_list()) == 2
 
 
-# all atom categorys are covered by "sift_atom" tests
+# all atom dimens are covered by "sift_atom" tests

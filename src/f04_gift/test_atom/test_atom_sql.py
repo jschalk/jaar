@@ -20,8 +20,8 @@ def test_AtomUnit_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     knee_road = create_road("a", knee_str)
 
     # WHEN
-    x_category = bud_item_factunit_str()
-    update_disc_atomunit = atomunit_shop(x_category, atom_update())
+    x_dimen = bud_item_factunit_str()
+    update_disc_atomunit = atomunit_shop(x_dimen, atom_update())
     update_disc_atomunit.set_jkey("base", knee_road)
 
     # WHEN / THEN
@@ -29,22 +29,22 @@ def test_AtomUnit_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
         update_disc_atomunit.get_insert_sqlstr()
     assert (
         str(excinfo.value)
-        == f"Cannot get_insert_sqlstr '{x_category}' with is_valid=False."
+        == f"Cannot get_insert_sqlstr '{x_dimen}' with is_valid=False."
     )
 
 
 def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_BudUnitSimpleAttrs():
     # WHEN
     new2_value = 66
-    category = budunit_str()
+    dimen = budunit_str()
     opt_arg2 = "max_tree_traverse"
-    x_atomunit = atomunit_shop(category, atom_update())
+    x_atomunit = atomunit_shop(dimen, atom_update())
     x_atomunit.set_jvalue(opt_arg2, new2_value)
     # THEN
     x_table = "atom_hx"
     example_sqlstr = f"""
 INSERT INTO {x_table} (
-  {category}_{atom_update()}_{opt_arg2}
+  {dimen}_{atom_update()}_{opt_arg2}
 )
 VALUES (
   {new2_value}
@@ -62,10 +62,10 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_item_factunit():
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
     knee_open = 7
-    x_category = bud_item_factunit_str()
+    x_dimen = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
-    update_disc_atomunit = atomunit_shop(x_category, atom_insert())
+    update_disc_atomunit = atomunit_shop(x_dimen, atom_insert())
     update_disc_atomunit.set_jkey(road_str, ball_road)
     update_disc_atomunit.set_jkey(base_str, knee_road)
     update_disc_atomunit.set_jvalue(fopen_str(), knee_open)
@@ -76,9 +76,9 @@ def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_item_factunit():
     # THEN
     example_sqlstr = f"""
 INSERT INTO {atom_hx_table_name()} (
-  {x_category}_{atom_insert()}_{road_str}
-, {x_category}_{atom_insert()}_{base_str}
-, {x_category}_{atom_insert()}_{fopen_str()}
+  {x_dimen}_{atom_insert()}_{road_str}
+, {x_dimen}_{atom_insert()}_{base_str}
+, {x_dimen}_{atom_insert()}_{fopen_str()}
 )
 VALUES (
   '{ball_road}'
@@ -99,13 +99,13 @@ def test_get_atomunit_from_rowdata_ReturnsCorrectObj_item_factunit():
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
     knee_fopen = 7
-    x_category = bud_item_factunit_str()
+    x_dimen = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
     x_sqlstr = f"""SELECT
-  '{ball_road}' as {x_category}_{atom_insert()}_{road_str}
-, '{knee_road}' as {x_category}_{atom_insert()}_{base_str}
-, {knee_fopen} as {x_category}_{atom_insert()}_{fopen_str()}
+  '{ball_road}' as {x_dimen}_{atom_insert()}_{road_str}
+, '{knee_road}' as {x_dimen}_{atom_insert()}_{base_str}
+, {knee_fopen} as {x_dimen}_{atom_insert()}_{fopen_str()}
 """
     with sqlite_connection(":memory:") as x_conn:
         x_rowdata = get_rowdata(atom_hx_table_name(), x_conn, x_sqlstr)
@@ -114,11 +114,11 @@ def test_get_atomunit_from_rowdata_ReturnsCorrectObj_item_factunit():
     x_atomunit = get_atomunit_from_rowdata(x_rowdata)
 
     # THEN
-    update_disc_atomunit = atomunit_shop(x_category, atom_insert())
+    update_disc_atomunit = atomunit_shop(x_dimen, atom_insert())
     update_disc_atomunit.set_jkey(road_str, ball_road)
     update_disc_atomunit.set_jkey(base_str, knee_road)
     update_disc_atomunit.set_jvalue(fopen_str(), knee_fopen)
-    assert update_disc_atomunit.category == x_atomunit.category
+    assert update_disc_atomunit.dimen == x_atomunit.dimen
     assert update_disc_atomunit.crud_str == x_atomunit.crud_str
     assert update_disc_atomunit.jkeys == x_atomunit.jkeys
     assert update_disc_atomunit.jvalues == x_atomunit.jvalues

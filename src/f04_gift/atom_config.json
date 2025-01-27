@@ -12,7 +12,7 @@
         "jkeys": {
             "acct_name": {
                 "column_order": 0,
-                "class_type": "AcctName",
+                "class_type": "NameUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
@@ -52,7 +52,7 @@
         "jkeys": {
             "acct_name": {
                 "column_order": 0,
-                "class_type": "AcctName",
+                "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -167,7 +167,7 @@
         "jkeys": {
             "healer_name": {
                 "column_order": 1,
-                "class_type": "AcctName",
+                "class_type": "NameUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },

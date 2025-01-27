@@ -2,13 +2,13 @@
 from src.f09_idea.idea_config import get_idea_config_dict
 from src.f09_idea.idea_db_tool import (
     create_idea_sorted_table,
-    get_idea_into_category_staging_query,
+    get_idea_into_dimen_staging_query,
     get_custom_sorted_list,
 )
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_get_idea_into_category_staging_query_ReturnsObj_Scenario0_bud_item_teamlink():
+def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario0_bud_item_teamlink():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -39,7 +39,7 @@ def test_get_idea_into_category_staging_query_ReturnsObj_Scenario0_bud_item_team
         create_idea_sorted_table(conn, dst_table, budteam_args)
 
         # WHEN
-        gen_sqlstr = get_idea_into_category_staging_query(
+        gen_sqlstr = get_idea_into_dimen_staging_query(
             conn, idea_number, budteam_cat, budteam_jkeys
         )
 
@@ -58,7 +58,7 @@ GROUP BY {columns_str}
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_get_idea_into_category_staging_query_ReturnsObj_Scenario1_bud_acctunit():
+def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario1_bud_acctunit():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -88,7 +88,7 @@ def test_get_idea_into_category_staging_query_ReturnsObj_Scenario1_bud_acctunit(
         create_idea_sorted_table(conn, budacct_table, list(budacct_args))
 
         # WHEN
-        gen_sqlstr = get_idea_into_category_staging_query(
+        gen_sqlstr = get_idea_into_dimen_staging_query(
             conn, idea_number, budacct_cat, budacct_jkeys
         )
 
@@ -108,7 +108,7 @@ GROUP BY {columns_str}
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_get_idea_into_category_staging_query_ReturnsObj_Scenario2_bud_acctunit():
+def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario2_bud_acctunit():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -137,7 +137,7 @@ def test_get_idea_into_category_staging_query_ReturnsObj_Scenario2_bud_acctunit(
         create_idea_sorted_table(conn, budacct_table, list(budacct_args))
 
         # WHEN
-        gen_sqlstr = get_idea_into_category_staging_query(
+        gen_sqlstr = get_idea_into_dimen_staging_query(
             conn, idea_number, budacct_cat, budacct_jkeys
         )
 

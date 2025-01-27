@@ -60,7 +60,7 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_names(
     pandas_testing_assert_frame_equal(gen_zia_name_df, e1_zia_name_agg_df)
 
 
-def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapCategorys(
+def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

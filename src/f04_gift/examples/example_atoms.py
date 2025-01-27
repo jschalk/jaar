@@ -8,8 +8,8 @@ from src.f04_gift.atom import atomunit_shop, AtomUnit
 def get_atom_example_itemunit_sports(fiscal_title: FiscalTitle = None) -> AtomUnit:
     fiscal_title = get_fiscal_title_if_None(fiscal_title)
     sports_str = "sports"
-    x_category = bud_itemunit_str()
-    insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
+    x_dimen = bud_itemunit_str()
+    insert_itemunit_atomunit = atomunit_shop(x_dimen, atom_insert())
     insert_itemunit_atomunit.set_jkey(item_title_str(), sports_str)
     insert_itemunit_atomunit.set_jkey(parent_road_str(), fiscal_title)
     return insert_itemunit_atomunit
@@ -20,8 +20,8 @@ def get_atom_example_itemunit_ball(fiscal_title: FiscalTitle = None) -> AtomUnit
     sports_str = "sports"
     sports_road = create_road(fiscal_title, sports_str)
     ball_str = "basketball"
-    x_category = bud_itemunit_str()
-    insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
+    x_dimen = bud_itemunit_str()
+    insert_itemunit_atomunit = atomunit_shop(x_dimen, atom_insert())
     insert_itemunit_atomunit.set_jkey(item_title_str(), ball_str)
     insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
     return insert_itemunit_atomunit
@@ -34,10 +34,10 @@ def get_atom_example_itemunit_knee(fiscal_title: FiscalTitle = None) -> AtomUnit
     knee_str = "knee"
     knee_begin = 1
     knee_close = 71
-    x_category = bud_itemunit_str()
+    x_dimen = bud_itemunit_str()
     begin_str = "begin"
     close_str = "close"
-    insert_itemunit_atomunit = atomunit_shop(x_category, atom_insert())
+    insert_itemunit_atomunit = atomunit_shop(x_dimen, atom_insert())
     insert_itemunit_atomunit.set_jkey(item_title_str(), knee_str)
     insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
     insert_itemunit_atomunit.set_jvalue(begin_str, knee_begin)

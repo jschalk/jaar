@@ -41,7 +41,7 @@ from src.f09_idea.idea_config import (
     idea_number_str,
     get_idea_sqlite_types,
     get_idea_config_dict,
-    idea_type_str,
+    idea_category_str,
 )
 from src.f09_idea.idea_db_tool import create_idea_sorted_table
 from src.f10_etl.fiscal_etl_tool import (
@@ -906,27 +906,27 @@ def test_GlobalVariablesForFiscal_inconsistency_queryReturns_sqlstrs():
     # ESTABLISH
     idea_config = get_idea_config_dict()
     idea_config = {
-        x_category: category_config
-        for x_category, category_config in idea_config.items()
-        # if category_config.get(idea_type_str()) != pidginunit_str()
-        if category_config.get(idea_type_str()) == fiscalunit_str()
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in idea_config.items()
+        # if dimen_config.get(idea_category_str()) != "pidgin"
+        if dimen_config.get(idea_category_str()) == "fiscal"
     }
 
     exclude_cols = {"idea_number", "face_name", "event_int", "error_message"}
     with sqlite3_connect(":memory:") as conn:
         create_fiscal_tables(conn)
 
-        for x_category, x_sqlstr in get_fiscal_inconsistency_sqlstrs().items():
-            x_tablename = f"{x_category}_staging"
-            cat_config = idea_config.get(x_category)
-            cat_focus_columns = set(cat_config.get("jkeys").keys())
-            cat_focus_columns.remove(event_int_str())
-            cat_focus_columns.remove(face_name_str())
-            generated_cat_sqlstr = create_select_inconsistency_query(
-                conn, x_tablename, cat_focus_columns, exclude_cols
+        for x_dimen, x_sqlstr in get_fiscal_inconsistency_sqlstrs().items():
+            x_tablename = f"{x_dimen}_staging"
+            dimen_config = idea_config.get(x_dimen)
+            dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+            dimen_focus_columns.remove(event_int_str())
+            dimen_focus_columns.remove(face_name_str())
+            expected_dimen_sqlstr = create_select_inconsistency_query(
+                conn, x_tablename, dimen_focus_columns, exclude_cols
             )
-            assert x_sqlstr == generated_cat_sqlstr
-            print(f"{x_category} checked...")
+            assert x_sqlstr == expected_dimen_sqlstr
+            print(f"{x_dimen} checked...")
 
 
 def test_set_fiscal_staging_error_message_Scenario0_fiscalunit_WithNo_error_message(
