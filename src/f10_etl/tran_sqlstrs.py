@@ -857,6 +857,15 @@ IDEA_STAGEABLE_PUT_DIMENS = {
     "br00044": [],
     "br00045": [],
     "br00050": ["bud_acctunit", "budunit", "fiscalunit"],
+    "br00051": ["budunit", "fiscalunit"],
+    "br00052": ["budunit", "fiscalunit"],
+    "br00053": ["budunit", "fiscalunit"],
+    "br00054": ["budunit", "fiscalunit"],
+    "br00055": ["budunit", "fiscalunit"],
+    "br00056": ["bud_item_factunit", "bud_item_reasonunit", "budunit", "fiscalunit"],
+    "br00057": ["budunit", "fiscalunit"],
+    "br00058": ["budunit", "fiscalunit"],
+    "br00059": ["fiscalunit"],
     "br00113": ["bud_acctunit", "budunit", "fiscalunit"],
     "br00115": ["bud_acctunit", "budunit", "fiscalunit"],
     "br00116": ["bud_acctunit", "budunit", "fiscalunit"],
@@ -865,4 +874,12 @@ IDEA_STAGEABLE_PUT_DIMENS = {
 
 IDEA_STAGEABLE_DEL_DIMENS = {
     "br00050": ["bud_acct_membership"],
+    "br00051": ["bud_acctunit"],
+    "br00052": ["bud_item_awardlink"],
+    "br00054": ["bud_item_teamlink"],
+    "br00055": ["bud_item_healerlink"],
+    "br00056": ["bud_item_reason_premiseunit"],
+    "br00057": ["bud_item_factunit", "bud_item_reasonunit"],
+    "br00058": ["bud_itemunit"],
+    "br00059": ["budunit"],
 }

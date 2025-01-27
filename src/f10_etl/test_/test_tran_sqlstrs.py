@@ -755,9 +755,9 @@ def test_IDEA_STAGEABLE_PUT_DIMENS_HasAll_idea_numbersForAll_dimens():
                     assert generated_sqlstr != ""
 
     idea_stageable_dimen_list = sorted(list(expected_idea_stagable_dimens))
-    # print(f"{idea_stagable_dimens=}")
-    assert idea_dimen_combo_checked_count == 480
-    assert idea_stage2dimen_count == 80
+    print(f"{expected_idea_stagable_dimens=}")
+    assert idea_dimen_combo_checked_count == 624
+    assert idea_stage2dimen_count == 99
     assert IDEA_STAGEABLE_PUT_DIMENS == expected_idea_stagable_dimens
 
 
@@ -820,7 +820,7 @@ def test_IDEA_STAGEABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
         if stagable_dimens != []
     }
     idea_stageable_dimen_list = sorted(list(expected_idea_stagable_dimens))
-    # print(f"{idea_stagable_dimens=}")
-    assert idea_dimen_combo_checked_count == 480
-    assert idea_stage2dimen_count == 1
+    print(f"{expected_idea_stagable_dimens=}")
+    assert idea_dimen_combo_checked_count == 624
+    assert idea_stage2dimen_count == 10
     assert IDEA_STAGEABLE_DEL_DIMENS == expected_idea_stagable_dimens
