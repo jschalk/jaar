@@ -118,20 +118,20 @@ def _validate_pidgin_config(pidgin_config: dict):
     }
 
     # for every pidgin_format file there exists a unique pidgin_number always with leading zeros to make 5 digits
-    for pidgin_dimens, cat_dict in pidgin_config.items():
+    for pidgin_dimens, dimen_dict in pidgin_config.items():
         print(f"_validate_pidgin_config {pidgin_dimens=}")
-        assert cat_dict.get(jkeys_str()) is not None
-        assert cat_dict.get(jvalues_str()) is not None
-        assert cat_dict.get(atom_update()) is None
-        assert cat_dict.get(atom_insert()) is None
-        assert cat_dict.get(atom_delete()) is None
-        assert cat_dict.get(normal_specs_str()) is None
+        assert dimen_dict.get(jkeys_str()) is not None
+        assert dimen_dict.get(jvalues_str()) is not None
+        assert dimen_dict.get(atom_update()) is None
+        assert dimen_dict.get(atom_insert()) is None
+        assert dimen_dict.get(atom_delete()) is None
+        assert dimen_dict.get(normal_specs_str()) is None
 
-        pidgin_jkeys_keys = set(cat_dict.get(jkeys_str()).keys())
+        pidgin_jkeys_keys = set(dimen_dict.get(jkeys_str()).keys())
         for jkey_key in pidgin_jkeys_keys:
             print(f"_validate_pidgin_config {pidgin_dimens=} {jkey_key=} ")
             assert jkey_key in x_possible_args
-        pidgin_jvalues_keys = set(cat_dict.get(jvalues_str()).keys())
+        pidgin_jvalues_keys = set(dimen_dict.get(jvalues_str()).keys())
         for jvalue_key in pidgin_jvalues_keys:
             print(f"_validate_pidgin_config {pidgin_dimens=} {jvalue_key=} ")
             assert jvalue_key in x_possible_args

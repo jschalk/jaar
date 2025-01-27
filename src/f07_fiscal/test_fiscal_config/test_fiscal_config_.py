@@ -116,24 +116,24 @@ def _validate_fiscal_config(fiscal_config: dict):
     accepted_class_typees.add("str")
 
     # for every fiscal_format file there exists a unique fiscal_number always with leading zeros to make 5 digits
-    for fiscal_dimens, cat_dict in fiscal_config.items():
+    for fiscal_dimens, dimen_dict in fiscal_config.items():
         print(f"_validate_fiscal_config {fiscal_dimens=}")
-        assert cat_dict.get(jkeys_str()) is not None
-        assert cat_dict.get(jvalues_str()) is not None
-        assert cat_dict.get(atom_update()) is None
-        assert cat_dict.get(atom_insert()) is None
-        assert cat_dict.get(atom_delete()) is None
-        assert cat_dict.get(normal_specs_str()) is None
+        assert dimen_dict.get(jkeys_str()) is not None
+        assert dimen_dict.get(jvalues_str()) is not None
+        assert dimen_dict.get(atom_update()) is None
+        assert dimen_dict.get(atom_insert()) is None
+        assert dimen_dict.get(atom_delete()) is None
+        assert dimen_dict.get(normal_specs_str()) is None
 
-        fiscal_jkeys_keys = set(cat_dict.get(jkeys_str()).keys())
+        fiscal_jkeys_keys = set(dimen_dict.get(jkeys_str()).keys())
         for jkey_key in fiscal_jkeys_keys:
-            jkey_dict = cat_dict.get(jkeys_str())
+            jkey_dict = dimen_dict.get(jkeys_str())
             print(f"_validate_fiscal_config {fiscal_dimens=} {jkey_key=} ")
             arg_dict = jkey_dict.get(jkey_key)
             assert arg_dict.get(class_type_str()) in accepted_class_typees
-        fiscal_jvalues_keys = set(cat_dict.get(jvalues_str()).keys())
+        fiscal_jvalues_keys = set(dimen_dict.get(jvalues_str()).keys())
         for jvalue_key in fiscal_jvalues_keys:
-            jvalue_dict = cat_dict.get(jvalues_str())
+            jvalue_dict = dimen_dict.get(jvalues_str())
             print(f"_validate_fiscal_config {fiscal_dimens=} {jvalue_key=} ")
             arg_dict = jvalue_dict.get(jvalue_key)
             assert arg_dict.get(class_type_str()) in accepted_class_typees

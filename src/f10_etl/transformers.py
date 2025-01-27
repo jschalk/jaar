@@ -850,6 +850,6 @@ def etl_fiscal_agg_tables_to_fiscal_csvs(
 def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
     for ficsal_dimen in get_fiscal_dimens():
         x_excel_path = create_path(fiscal_mstr_dir, f"{ficsal_dimen}.xlsx")
-        cat_df = open_csv(fiscal_mstr_dir, f"{ficsal_dimen}_agg.csv")
-        upsert_sheet(x_excel_path, "agg", cat_df)
+        dimen_df = open_csv(fiscal_mstr_dir, f"{ficsal_dimen}_agg.csv")
+        upsert_sheet(x_excel_path, "agg", dimen_df)
     create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)

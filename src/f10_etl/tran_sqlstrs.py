@@ -475,6 +475,76 @@ WHERE inconsistency_rows.face_name = budunit_put_staging.face_name
     AND inconsistency_rows.owner_name = budunit_put_staging.owner_name
 ;
 """
+BUDMEMB_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_acct_membership_del_agg (face_name, event_int, fiscal_title, owner_name, acct_name, group_label_ERASE)
+SELECT face_name, event_int, fiscal_title, owner_name, acct_name, group_label_ERASE
+FROM bud_acct_membership_del_staging
+WHERE error_message IS NULL
+GROUP BY face_name, event_int, fiscal_title, owner_name, acct_name, group_label_ERASE
+;
+"""
+BUDACCT_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_acctunit_del_agg (face_name, event_int, fiscal_title, owner_name, acct_name_ERASE)
+SELECT face_name, event_int, fiscal_title, owner_name, acct_name_ERASE
+FROM bud_acctunit_del_staging
+WHERE error_message IS NULL
+GROUP BY face_name, event_int, fiscal_title, owner_name, acct_name_ERASE
+;
+"""
+BUDAWAR_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_awardlink_del_agg (face_name, event_int, fiscal_title, owner_name, road, awardee_tag_ERASE)
+SELECT face_name, event_int, fiscal_title, owner_name, road, awardee_tag_ERASE
+FROM bud_item_awardlink_del_staging
+WHERE error_message IS NULL
+GROUP BY face_name, event_int, fiscal_title, owner_name, road, awardee_tag_ERASE
+;
+"""
+BUDFACT_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_factunit_del_agg (face_name, event_int, fiscal_title, owner_name, road, base_ERASE)
+SELECT face_name, event_int, fiscal_title, owner_name, road, base_ERASE
+FROM bud_item_factunit_del_staging
+WHERE error_message IS NULL
+GROUP BY face_name, event_int, fiscal_title, owner_name, road, base_ERASE
+;
+"""
+BUDHEAL_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_healerlink_del_agg (face_name, event_int, fiscal_title, owner_name, road, healer_name_ERASE)
+SELECT face_name, event_int, fiscal_title, owner_name, road, healer_name_ERASE
+FROM bud_item_healerlink_del_staging
+WHERE error_message IS NULL
+GROUP BY face_name, event_int, fiscal_title, owner_name, road, healer_name_ERASE
+;
+"""
+BUDPREM_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reason_premiseunit_del_agg (face_name, event_int, fiscal_title, owner_name, road, base, need_ERASE)
+SELECT face_name, event_int, fiscal_title, owner_name, road, base, need_ERASE
+FROM bud_item_reason_premiseunit_del_staging
+WHERE error_message IS NULL
+GROUP BY face_name, event_int, fiscal_title, owner_name, road, base, need_ERASE
+;
+"""
+BUDREAS_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reasonunit_del_agg (face_name, event_int, fiscal_title, owner_name, road, base_ERASE)
+SELECT face_name, event_int, fiscal_title, owner_name, road, base_ERASE
+FROM bud_item_reasonunit_del_staging
+WHERE error_message IS NULL
+GROUP BY face_name, event_int, fiscal_title, owner_name, road, base_ERASE
+;
+"""
+BUDTEAM_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_teamlink_del_agg (face_name, event_int, fiscal_title, owner_name, road, team_tag_ERASE)
+SELECT face_name, event_int, fiscal_title, owner_name, road, team_tag_ERASE
+FROM bud_item_teamlink_del_staging
+WHERE error_message IS NULL
+GROUP BY face_name, event_int, fiscal_title, owner_name, road, team_tag_ERASE
+;
+"""
+BUDITEM_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_itemunit_del_agg (face_name, event_int, fiscal_title, owner_name, parent_road, item_title_ERASE)
+SELECT face_name, event_int, fiscal_title, owner_name, parent_road, item_title_ERASE
+FROM bud_itemunit_del_staging
+WHERE error_message IS NULL
+GROUP BY face_name, event_int, fiscal_title, owner_name, parent_road, item_title_ERASE
+;
+"""
+BUDUNIT_DEL_AGG_INSERT_SQLSTR = """INSERT INTO budunit_del_agg (face_name, event_int, fiscal_title, owner_name_ERASE)
+SELECT face_name, event_int, fiscal_title, owner_name_ERASE
+FROM budunit_del_staging
+WHERE error_message IS NULL
+GROUP BY face_name, event_int, fiscal_title, owner_name_ERASE
+;
+"""
 
 FISCALCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT fiscal_title, owner_name, acct_name, time_int
@@ -724,16 +794,16 @@ def get_bud_insert_put_agg_from_staging_sqlstrs() -> dict[str, str]:
 
 def get_bud_insert_del_agg_from_staging_sqlstrs() -> dict[str, str]:
     return {
-        # "bud_acct_membership": BUDMEMB_DEL_AGG_INSERT_SQLSTR,
-        # "bud_acctunit": BUDACCT_DEL_AGG_INSERT_SQLSTR,
-        # "bud_item_awardlink": BUDAWAR_DEL_AGG_INSERT_SQLSTR,
-        # "bud_item_factunit": BUDFACT_DEL_AGG_INSERT_SQLSTR,
-        # "bud_item_healerlink": BUDHEAL_DEL_AGG_INSERT_SQLSTR,
-        # "bud_item_reason_premiseunit": BUDPREM_DEL_AGG_INSERT_SQLSTR,
-        # "bud_item_reasonunit": BUDREAS_DEL_AGG_INSERT_SQLSTR,
-        # "bud_item_teamlink": BUDTEAM_DEL_AGG_INSERT_SQLSTR,
-        # "bud_itemunit": BUDITEM_DEL_AGG_INSERT_SQLSTR,
-        # "budunit": BUDUNIT_DEL_AGG_INSERT_SQLSTR,
+        "bud_acct_membership": BUDMEMB_DEL_AGG_INSERT_SQLSTR,
+        "bud_acctunit": BUDACCT_DEL_AGG_INSERT_SQLSTR,
+        "bud_item_awardlink": BUDAWAR_DEL_AGG_INSERT_SQLSTR,
+        "bud_item_factunit": BUDFACT_DEL_AGG_INSERT_SQLSTR,
+        "bud_item_healerlink": BUDHEAL_DEL_AGG_INSERT_SQLSTR,
+        "bud_item_reason_premiseunit": BUDPREM_DEL_AGG_INSERT_SQLSTR,
+        "bud_item_reasonunit": BUDREAS_DEL_AGG_INSERT_SQLSTR,
+        "bud_item_teamlink": BUDTEAM_DEL_AGG_INSERT_SQLSTR,
+        "bud_itemunit": BUDITEM_DEL_AGG_INSERT_SQLSTR,
+        "budunit": BUDUNIT_DEL_AGG_INSERT_SQLSTR,
     }
 
 

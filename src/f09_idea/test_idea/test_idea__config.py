@@ -587,10 +587,10 @@ def _validate_idea_format_files(idea_filenames: set[str]):
         assert idea_number_value[2:8] == idea_filename[12:17]
         idea_numbers_set.add(idea_number_value)
 
-        format_cats = ref_dict.get(dimens_str())
-        assert format_cats is not None
-        assert len(format_cats) > 0
-        for idea_format_dimen in format_cats:
+        format_dimens = ref_dict.get(dimens_str())
+        assert format_dimens is not None
+        assert len(format_dimens) > 0
+        for idea_format_dimen in format_dimens:
             assert idea_format_dimen in valid_idea_dimens
 
         assert ref_dict.get(attributes_str()) is not None
@@ -598,12 +598,12 @@ def _validate_idea_format_files(idea_filenames: set[str]):
         for idea_attribute, attr_dict in idea_format_attributes.items():
             assert otx_key_str() in set(attr_dict.keys())
             otx_key_value = attr_dict.get(otx_key_str())
-            for idea_format_dimen in format_cats:
+            for idea_format_dimen in format_dimens:
                 format_config = config_dict.get(idea_format_dimen)
-                cat_required_keys = set(format_config.get(jkeys_str()).keys())
-                cat_optional_keys = set(format_config.get(jvalues_str()).keys())
-                attr_in_required = idea_attribute in cat_required_keys
-                attr_in_optional = idea_attribute in cat_optional_keys
+                dimen_required_keys = set(format_config.get(jkeys_str()).keys())
+                dimen_optional_keys = set(format_config.get(jvalues_str()).keys())
+                attr_in_required = idea_attribute in dimen_required_keys
+                attr_in_optional = idea_attribute in dimen_optional_keys
                 attr_in_keys = attr_in_required or attr_in_optional
                 assert_fail_str = (
                     f"{idea_format_dimen=} {idea_attribute=} {otx_key_value=}"
