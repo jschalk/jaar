@@ -499,22 +499,22 @@ def get_all_bud_dimen_keys() -> set:
 
 
 def get_delete_key_name(key: str) -> str:
-    return f"{key}_DELETE" if key else None
+    return f"{key}_ERASE" if key else None
 
 
 def get_all_bud_dimen_delete_keys() -> set:
     return {
-        "acct_name_DELETE",
-        "awardee_tag_DELETE",
-        "base_DELETE",
-        "group_label_DELETE",
-        "healer_name_DELETE",
-        "item_title_DELETE",
-        "need_DELETE",
-        "owner_name_DELETE",
-        "parent_road_DELETE",
-        "road_DELETE",
-        "team_tag_DELETE",
+        "acct_name_ERASE",
+        "awardee_tag_ERASE",
+        "base_ERASE",
+        "group_label_ERASE",
+        "healer_name_ERASE",
+        "item_title_ERASE",
+        "need_ERASE",
+        "owner_name_ERASE",
+        "parent_road_ERASE",
+        "road_ERASE",
+        "team_tag_ERASE",
     }
 
 
