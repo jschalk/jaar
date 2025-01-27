@@ -32,19 +32,19 @@ def test_AcctUnit_exists():
     assert bob_acctunit._respect_bit is None
 
 
-def test_AcctUnit_set_acct_name_CorrectlySetsAttr():
+def test_AcctUnit_set_nameunit_CorrectlySetsAttr():
     # ESTABLISH
     x_acctunit = AcctUnit()
 
     # WHEN
     bob_str = "Bob"
-    x_acctunit.set_acct_name(bob_str)
+    x_acctunit.set_nameunit(bob_str)
 
     # THEN
     assert x_acctunit.acct_name == bob_str
 
 
-def test_AcctUnit_set_acct_name_RaisesErrorIfParameterContains_bridge():
+def test_AcctUnit_set_nameunit_RaisesErrorIfParameterContains_bridge():
     # ESTABLISH
     slash_str = "/"
     texas_str = f"Texas{slash_str}Arkansas"

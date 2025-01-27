@@ -60,14 +60,14 @@ class not_given_pidgin_dimen_Exception(Exception):
 
 
 MAPS_DIMENS = {
-    "map_name": "AcctName",
+    "map_name": "NameUnit",
     "map_label": "GroupLabel",
     "map_title": "TitleUnit",
     "map_road": "RoadUnit",
 }
 
 class_typeS = {
-    "AcctName": {
+    "NameUnit": {
         "stage": "name_staging",
         "agg": "name_agg",
         "csv_filename": "name.csv",
@@ -439,7 +439,7 @@ class boatAggToStagingTransformer:
                 ]
 
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
-        if self.class_type == "AcctName" and "inx_name" not in missing_col:
+        if self.class_type == "NameUnit" and "inx_name" not in missing_col:
             return x_row["inx_name"]
         elif self.class_type == "GroupLabel" and "inx_label" not in missing_col:
             return x_row["inx_label"]
@@ -574,9 +574,9 @@ def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
         agg_sheet_name = class_typeS[class_type]["agg"]
         csv_filename = class_typeS[class_type]["csv_filename"]
         if sheet_exists(event_pidgin_path, agg_sheet_name):
-            acct_csv_path = create_path(event_pidgin_dir, csv_filename)
-            acct_df = pandas_read_excel(event_pidgin_path, agg_sheet_name)
-            acct_df.to_csv(acct_csv_path, index=False)
+            name_csv_path = create_path(event_pidgin_dir, csv_filename)
+            name_df = pandas_read_excel(event_pidgin_path, agg_sheet_name)
+            name_df.to_csv(name_csv_path, index=False)
 
 
 def _get_all_faces_bow_dir_event_dirs(faces_dir) -> list[str]:

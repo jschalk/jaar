@@ -13,7 +13,7 @@ from src.f08_pidgin.examples.example_pidgins import (
     get_casa_maison_road_inx_dt,
     get_clean_roadmap,
     get_swim_groupmap,
-    get_suita_acctmap,
+    get_suita_namemap,
     get_suita_acct_name_otx_dt,
     get_suita_acct_name_inx_dt,
     get_sue_pidginunit,
@@ -41,7 +41,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     sue_inx = "Suita"
     xio_inx = "Xioita"
     sue_pidginunit = pidginunit_shop(sue_otx)
-    sue_pidginunit.set_acctmap(get_suita_acctmap())
+    sue_pidginunit.set_namemap(get_suita_namemap())
     sue_dir = f"{get_example_face_dir()}/{sue_otx}"
     pidginunit_file_path = f"{sue_dir}/{pidgin_filename()}"
     print(f"{sue_dir=}")
@@ -149,7 +149,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
 ):
     # ESTABLISH
     sue_pidginunit = get_casa_maison_pidginunit_set_by_title()
-    sue_pidginunit.set_acctmap(get_suita_acctmap())
+    sue_pidginunit.set_namemap(get_suita_namemap())
     sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_name}"
     pidginunit_file_path = f"{sue_dir}/{pidgin_filename()}"
     print(f"{sue_dir=}")

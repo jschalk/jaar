@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     base_str,
     type_AcctName_str,
 )
-from src.f08_pidgin.map import acctmap_shop
+from src.f08_pidgin.map import namemap_shop
 from src.f08_pidgin.pidgin import pidginunit_shop
 from src.f09_idea.idea_db_tool import (
     translate_single_column_dataframe,
@@ -40,7 +40,7 @@ def test_get_dataframe_pidginable_columns_ReturnsObj():
 
 def test_translate_single_column_dataframe_ReturnsObj_Scenario0_AcctName_EmptyDataFrame():
     # ESTABLISH
-    acct_name_mapunit = acctmap_shop()
+    acct_name_mapunit = namemap_shop()
     empty_dt = DataFrame(columns=[acct_name_str()])
 
     # WHEN
@@ -61,7 +61,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_AcctName
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_name_mapunit = acctmap_shop()
+    acct_name_mapunit = namemap_shop()
     acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
     acct_name_mapunit.set_otx2inx(sue_otx, sue_inx)
     acct_name_mapunit.set_otx2inx(bob_otx, bob_inx)
@@ -101,7 +101,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctName
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_name_mapunit = acctmap_shop()
+    acct_name_mapunit = namemap_shop()
     acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
     acct_name_mapunit.set_otx2inx(sue_otx, sue_inx)
     acct_name_mapunit.set_otx2inx(bob_otx, bob_inx)

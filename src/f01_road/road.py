@@ -20,19 +20,17 @@ class FiscalTitle(TitleUnit):  # Created to help track the concept
     pass
 
 
-class OwnerName(TitleUnit):  # Created to help track the concept
-    """Must be title thus not include road bridge"""
+class NameUnit(str):
+    """All Name string classes should inherit from this class"""
 
-    pass
+    def is_name(self, bridge: str = None) -> bool:
+        return len(self) > 0 and self.contains_bridge(bridge)
 
-
-class HealerName(OwnerName):
-    """A TitleUnit used to identify a Problem's Healer"""
-
-    pass
+    def contains_bridge(self, bridge: str = None) -> bool:
+        return self.find(default_bridge_if_None(bridge)) == -1
 
 
-class OwnerName(HealerName):
+class OwnerName(NameUnit):
     """A TitleUnit used to identify a BudUnit's owner_name"""
 
     pass
@@ -40,6 +38,12 @@ class OwnerName(HealerName):
 
 class AcctName(OwnerName):  # Created to help track the concept
     """Every AcctName object is OwnerName, must follow OwnerName format."""
+
+    pass
+
+
+class HealerName(OwnerName):
+    """A TitleUnit used to identify a Problem's Healer"""
 
     pass
 

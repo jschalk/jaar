@@ -135,7 +135,7 @@ def get_pidgin_args_dimen_mapping() -> dict[str, str]:
 
 def get_pidgin_args_class_types() -> dict[str, str]:
     return {
-        "acct_name": "AcctName",
+        "acct_name": "NameUnit",
         "addin": "float",
         "amount": "float",
         "awardee_tag": "GroupLabel",
@@ -155,7 +155,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "debtor_respect": "int",
         "denom": "int",
         "divisor": "int",
-        "face_name": "AcctName",
+        "face_name": "NameUnit",
         "fiscal_title": "TitleUnit",
         "fnigh": "float",
         "fopen": "float",
@@ -164,7 +164,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "give_force": "float",
         "gogo_want": "float",
         "group_label": "GroupLabel",
-        "healer_name": "AcctName",
+        "healer_name": "NameUnit",
         "hour_title": "TitleUnit",
         "item_title": "TitleUnit",
         "mass": "int",
@@ -175,7 +175,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "need": "RoadUnit",
         "nigh": "float",
         "numor": "int",
-        "owner_name": "AcctName",
+        "owner_name": "NameUnit",
         "open": "float",
         "parent_road": "RoadUnit",
         "penny": "float",

@@ -113,7 +113,7 @@ def test_str_functions_ReturnsObj():
     assert sqlite_datatype_str() == "sqlite_datatype"
     assert stop_want_str() == "stop_want"
     assert team_tag_str() == "team_tag"
-    assert type_AcctName_str() == "AcctName"
+    assert type_AcctName_str() == "NameUnit"
     assert type_GroupLabel_str() == "GroupLabel"
     assert type_TitleUnit_str() == "TitleUnit"
     assert type_RoadUnit_str() == "RoadUnit"

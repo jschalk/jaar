@@ -31,7 +31,7 @@ from src.f07_fiscal.fiscal_config import (
 )
 from src.f08_pidgin.map import (
     groupmap_shop,
-    acctmap_shop,
+    namemap_shop,
     titlemap_shop,
     roadmap_shop,
 )
@@ -43,13 +43,13 @@ from src.f08_pidgin.pidgin import (
     pidginable_atom_args,
 )
 from src.f08_pidgin.examples.example_pidgins import (
-    get_invalid_acctmap,
+    get_invalid_namemap,
     get_invalid_groupmap,
     get_invalid_titlemap,
     get_clean_roadmap,
     get_clean_titlemap,
     get_swim_groupmap,
-    get_suita_acctmap,
+    get_suita_namemap,
 )
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -223,7 +223,7 @@ def test_PidginUnit_Exists():
     # WHEN / THEN
     assert not x_pidginunit.event_int
     assert not x_pidginunit.groupmap
-    assert not x_pidginunit.acctmap
+    assert not x_pidginunit.namemap
     assert not x_pidginunit.titlemap
     assert not x_pidginunit.roadmap
     assert not x_pidginunit.unknown_word
@@ -246,13 +246,13 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.otx_bridge == default_bridge_if_None()
     assert sue_pidginunit.inx_bridge == default_bridge_if_None()
     assert sue_pidginunit.groupmap == groupmap_shop(face_name=sue_str)
-    assert sue_pidginunit.acctmap == acctmap_shop(face_name=sue_str)
+    assert sue_pidginunit.namemap == namemap_shop(face_name=sue_str)
     assert sue_pidginunit.titlemap == titlemap_shop(face_name=sue_str)
     assert sue_pidginunit.roadmap == roadmap_shop(face_name=sue_str)
-    assert sue_pidginunit.acctmap.event_int == 0
-    assert sue_pidginunit.acctmap.unknown_word == default_unknown_word_if_None()
-    assert sue_pidginunit.acctmap.otx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.acctmap.inx_bridge == default_bridge_if_None()
+    assert sue_pidginunit.namemap.event_int == 0
+    assert sue_pidginunit.namemap.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.namemap.otx_bridge == default_bridge_if_None()
+    assert sue_pidginunit.namemap.inx_bridge == default_bridge_if_None()
     assert sue_pidginunit.groupmap.event_int == 0
     assert sue_pidginunit.groupmap.unknown_word == default_unknown_word_if_None()
     assert sue_pidginunit.groupmap.otx_bridge == default_bridge_if_None()
@@ -289,21 +289,21 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     # x_groupmap = groupmap_shop(
     #     slash_otx_bridge, colon_inx_bridge, {}, y_uk, sue_str, five_event_int
     # )
-    # x_acctmap = acctmap_shop(
+    # x_namemap = namemap_shop(
     #     slash_otx_bridge, colon_inx_bridge, {}, y_uk, sue_str, five_event_int
     # )
     # x_roadmap = roadmap_shop(
     #     slash_otx_bridge, colon_inx_bridge, None, {}, y_uk, sue_str, five_event_int
     # )
     # assert sue_pidginunit.groupmap == x_groupmap
-    # assert sue_pidginunit.acctmap == x_acctmap
+    # assert sue_pidginunit.namemap == x_namemap
     # assert sue_pidginunit.roadmap == x_roadmap
 
-    assert sue_pidginunit.acctmap.face_name == sue_str
-    assert sue_pidginunit.acctmap.event_int == five_event_int
-    assert sue_pidginunit.acctmap.unknown_word == y_uk
-    assert sue_pidginunit.acctmap.otx_bridge == slash_otx_bridge
-    assert sue_pidginunit.acctmap.inx_bridge == colon_inx_bridge
+    assert sue_pidginunit.namemap.face_name == sue_str
+    assert sue_pidginunit.namemap.event_int == five_event_int
+    assert sue_pidginunit.namemap.unknown_word == y_uk
+    assert sue_pidginunit.namemap.otx_bridge == slash_otx_bridge
+    assert sue_pidginunit.namemap.inx_bridge == colon_inx_bridge
     assert sue_pidginunit.groupmap.face_name == sue_str
     assert sue_pidginunit.groupmap.event_int == five_event_int
     assert sue_pidginunit.groupmap.unknown_word == y_uk
@@ -351,15 +351,15 @@ def test_PidginUnit_set_mapunit_SetsAttr():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    acctmap = acctmap_shop(face_name=sue_str)
-    acctmap.set_otx2inx("Bob", "Bob of Portland")
-    assert sue_pidginunit.acctmap != acctmap
+    namemap = namemap_shop(face_name=sue_str)
+    namemap.set_otx2inx("Bob", "Bob of Portland")
+    assert sue_pidginunit.namemap != namemap
 
     # WHEN
-    sue_pidginunit.set_acctmap(acctmap)
+    sue_pidginunit.set_namemap(namemap)
 
     # THEN
-    assert sue_pidginunit.acctmap == acctmap
+    assert sue_pidginunit.namemap == namemap
 
 
 def test_PidginUnit_set_mapunit_SetsAttr_SpecialCase_RoadUnit():
@@ -382,13 +382,13 @@ def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_otx_bridge_IsNotSame():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_otx_bridge = "/"
-    acctmap = acctmap_shop(otx_bridge=slash_otx_bridge, face_name=sue_str)
-    assert sue_pidginunit.otx_bridge != acctmap.otx_bridge
-    assert sue_pidginunit.acctmap != acctmap
+    namemap = namemap_shop(otx_bridge=slash_otx_bridge, face_name=sue_str)
+    assert sue_pidginunit.otx_bridge != namemap.otx_bridge
+    assert sue_pidginunit.namemap != namemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_acctmap(acctmap)
+        sue_pidginunit.set_namemap(namemap)
     exception_str = f"set_mapcore Error: PidginUnit otx_bridge is '{sue_pidginunit.otx_bridge}', MapCore is '{slash_otx_bridge}'."
     assert str(excinfo.value) == exception_str
 
@@ -398,13 +398,13 @@ def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_inx_bridge_IsNotSame():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     slash_inx_bridge = "/"
-    acctmap = acctmap_shop(inx_bridge=slash_inx_bridge, face_name=sue_str)
-    assert sue_pidginunit.inx_bridge != acctmap.inx_bridge
-    assert sue_pidginunit.acctmap != acctmap
+    namemap = namemap_shop(inx_bridge=slash_inx_bridge, face_name=sue_str)
+    assert sue_pidginunit.inx_bridge != namemap.inx_bridge
+    assert sue_pidginunit.namemap != namemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_acctmap(acctmap)
+        sue_pidginunit.set_namemap(namemap)
     exception_str = f"set_mapcore Error: PidginUnit inx_bridge is '{sue_pidginunit.inx_bridge}', MapCore is '{slash_inx_bridge}'."
     assert str(excinfo.value) == exception_str
 
@@ -414,13 +414,13 @@ def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_unknown_word_IsNotSame():
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
     casa_unknown_word = "Unknown_casa"
-    acctmap = acctmap_shop(unknown_word=casa_unknown_word, face_name=sue_str)
-    assert sue_pidginunit.unknown_word != acctmap.unknown_word
-    assert sue_pidginunit.acctmap != acctmap
+    namemap = namemap_shop(unknown_word=casa_unknown_word, face_name=sue_str)
+    assert sue_pidginunit.unknown_word != namemap.unknown_word
+    assert sue_pidginunit.namemap != namemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_acctmap(acctmap)
+        sue_pidginunit.set_namemap(namemap)
     exception_str = f"set_mapcore Error: PidginUnit unknown_word is '{sue_pidginunit.unknown_word}', MapCore is '{casa_unknown_word}'."
     assert str(excinfo.value) == exception_str
 
@@ -430,13 +430,13 @@ def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_face_name_IsNotSame():
     sue_str = "Sue"
     yao_str = "Yao"
     sue_pidginunit = pidginunit_shop(sue_str)
-    acctmap = acctmap_shop(face_name=yao_str)
-    assert sue_pidginunit.face_name != acctmap.face_name
-    assert sue_pidginunit.acctmap != acctmap
+    namemap = namemap_shop(face_name=yao_str)
+    assert sue_pidginunit.face_name != namemap.face_name
+    assert sue_pidginunit.namemap != namemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        sue_pidginunit.set_acctmap(acctmap)
+        sue_pidginunit.set_namemap(namemap)
     exception_str = f"set_mapcore Error: PidginUnit face_name is '{sue_pidginunit.face_name}', MapCore is '{yao_str}'."
     assert str(excinfo.value) == exception_str
 
@@ -445,12 +445,12 @@ def test_PidginUnit_get_mapunit_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_pu = pidginunit_shop(sue_str)
-    static_acctmap = acctmap_shop(face_name=sue_str)
-    static_acctmap.set_otx2inx("Bob", "Bob of Portland")
-    sue_pu.set_acctmap(static_acctmap)
+    static_namemap = namemap_shop(face_name=sue_str)
+    static_namemap.set_otx2inx("Bob", "Bob of Portland")
+    sue_pu.set_namemap(static_namemap)
 
     # WHEN / THEN
-    assert sue_pu.get_mapunit(type_AcctName_str()) == sue_pu.acctmap
+    assert sue_pu.get_mapunit(type_AcctName_str()) == sue_pu.namemap
     assert sue_pu.get_mapunit(type_GroupLabel_str()) == sue_pu.groupmap
     assert sue_pu.get_mapunit(type_TitleUnit_str()) == sue_pu.titlemap
     assert sue_pu.get_mapunit(type_RoadUnit_str()) == sue_pu.roadmap
@@ -462,31 +462,31 @@ def test_PidginUnit_get_mapunit_ReturnsObj():
 
 def test_PidginUnit_is_valid_ReturnsObj():
     # ESTABLISH
-    invalid_acctmap = get_invalid_acctmap()
+    invalid_namemap = get_invalid_namemap()
     invalid_groupmap = get_invalid_groupmap()
     invalid_titlemap = get_invalid_titlemap()
-    valid_acctmap = get_suita_acctmap()
+    valid_namemap = get_suita_namemap()
     valid_groupmap = get_swim_groupmap()
     valid_titlemap = get_clean_roadmap()
-    assert valid_acctmap.is_valid()
+    assert valid_namemap.is_valid()
     assert valid_groupmap.is_valid()
     assert valid_titlemap.is_valid()
     assert invalid_titlemap.is_valid() is False
     assert invalid_groupmap.is_valid() is False
-    assert invalid_acctmap.is_valid() is False
+    assert invalid_namemap.is_valid() is False
 
     # WHEN / THEN
     sue_pidginunit = pidginunit_shop("Sue")
     assert sue_pidginunit.is_valid()
-    sue_pidginunit.set_acctmap(valid_acctmap)
+    sue_pidginunit.set_namemap(valid_namemap)
     sue_pidginunit.set_groupmap(valid_groupmap)
     sue_pidginunit.set_roadmap(valid_titlemap)
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
-    sue_pidginunit.set_acctmap(invalid_acctmap)
+    sue_pidginunit.set_namemap(invalid_namemap)
     assert sue_pidginunit.is_valid() is False
-    sue_pidginunit.set_acctmap(valid_acctmap)
+    sue_pidginunit.set_namemap(valid_namemap)
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
@@ -508,14 +508,14 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_type_AcctName_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    acctmap = zia_pidginunit.get_acctmap()
-    assert acctmap.otx2inx_exists(sue_otx, sue_inx) is False
+    namemap = zia_pidginunit.get_namemap()
+    assert namemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_otx2inx(type_AcctName_str(), sue_otx, sue_inx)
 
     # THEN
-    assert acctmap.otx2inx_exists(sue_otx, sue_inx)
+    assert namemap.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_type_RoadUnit_str():

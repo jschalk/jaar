@@ -4,7 +4,7 @@ from src.f08_pidgin.examples.example_pidgins import (
     get_clean_roadmap,
     get_clean_titlemap,
     get_swim_groupmap,
-    get_suita_acctmap,
+    get_suita_namemap,
 )
 from pytest import raises as pytest_raises
 
@@ -82,26 +82,26 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario5_RaiseErrorWhenEventI
     assert str(excinfo.value) == "older pidginunit is not older"
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_acctmap_Inherited():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_namemap_Inherited():
     # ESTABLISH
     sue_str = "Sue"
     event1 = 1
     old_pidginunit = pidginunit_shop(sue_str, 0)
-    old_pidginunit.set_acctmap(get_suita_acctmap())
+    old_pidginunit.set_namemap(get_suita_namemap())
     old_pidginunit.set_groupmap(get_swim_groupmap())
     old_pidginunit.set_titlemap(get_clean_titlemap())
     old_pidginunit.set_roadmap(get_clean_roadmap())
     new_pidginunit = pidginunit_shop(sue_str, event1)
-    assert new_pidginunit.acctmap != get_suita_acctmap()
+    assert new_pidginunit.namemap != get_suita_namemap()
 
     # WHEN
     merged_pidginunit = inherit_pidginunit(old_pidginunit, new_pidginunit)
 
     # THEN
     assert merged_pidginunit
-    merged_acctbrigde = get_suita_acctmap()
+    merged_acctbrigde = get_suita_namemap()
     merged_acctbrigde.event_int = event1
-    assert merged_pidginunit.acctmap == merged_acctbrigde
+    assert merged_pidginunit.namemap == merged_acctbrigde
     merged_groupbrigde = get_swim_groupmap()
     merged_groupbrigde.event_int = event1
     assert merged_pidginunit.groupmap == merged_groupbrigde
@@ -114,30 +114,30 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_acctmap_Inherited():
     assert merged_pidginunit.roadmap == merged_roadbrigde
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_acctmap_Inherited():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_namemap_Inherited():
     # ESTABLISH
     sue_str = "Sue"
     event1 = 1
     old_pidginunit = pidginunit_shop(sue_str, 0)
-    old_pidginunit.set_acctmap(get_suita_acctmap())
+    old_pidginunit.set_namemap(get_suita_namemap())
     old_pidginunit.set_groupmap(get_swim_groupmap())
     new_pidginunit = pidginunit_shop(sue_str, event1)
     bob_otx = "Bob"
     bob_inx = "Bobby"
     new_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob_inx)
-    assert new_pidginunit.acctmap != get_suita_acctmap()
-    assert new_pidginunit.acct_name_exists(bob_otx, bob_inx)
+    assert new_pidginunit.namemap != get_suita_namemap()
+    assert new_pidginunit.nameunit_exists(bob_otx, bob_inx)
 
     # WHEN
     merged_pidginunit = inherit_pidginunit(old_pidginunit, new_pidginunit)
 
     # THEN
     assert merged_pidginunit
-    assert new_pidginunit.acct_name_exists(bob_otx, bob_inx)
-    merged_acctbrigde = get_suita_acctmap()
+    assert new_pidginunit.nameunit_exists(bob_otx, bob_inx)
+    merged_acctbrigde = get_suita_namemap()
     merged_acctbrigde.event_int = event1
     merged_acctbrigde.set_otx2inx(bob_otx, bob_inx)
-    assert merged_pidginunit.acctmap == merged_acctbrigde
+    assert merged_pidginunit.namemap == merged_acctbrigde
     merged_groupbrigde = get_swim_groupmap()
     merged_groupbrigde.event_int = event1
     assert merged_pidginunit.groupmap == merged_groupbrigde

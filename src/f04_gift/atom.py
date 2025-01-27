@@ -667,7 +667,7 @@ class AtomRow:
         for x_arg, class_type in get_atom_args_class_types().items():
             x_value = self.__dict__.get(x_arg)
             if x_value != None:
-                if class_type == "AcctName":
+                if class_type == "NameUnit":
                     self.__dict__[x_arg] = AcctName(x_value)
                 elif class_type == "GroupLabel":
                     self.__dict__[x_arg] = GroupLabel(x_value)

@@ -33,7 +33,7 @@ class AcctCore:
     _bridge: str = None
     _respect_bit: float = None
 
-    def set_acct_name(self, x_acct_name: AcctName):
+    def set_nameunit(self, x_acct_name: AcctName):
         self.acct_name = validate_titleunit(x_acct_name, self._bridge)
 
 
@@ -294,5 +294,5 @@ def acctunit_shop(
         _bridge=default_bridge_if_None(_bridge),
         _respect_bit=default_respect_bit_if_None(_respect_bit),
     )
-    x_acctunit.set_acct_name(x_acct_name=acct_name)
+    x_acctunit.set_nameunit(x_acct_name=acct_name)
     return x_acctunit

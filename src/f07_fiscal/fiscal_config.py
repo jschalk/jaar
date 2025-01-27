@@ -135,7 +135,7 @@ def get_fiscal_args_dimen_mapping() -> dict[str, str]:
 
 def get_fiscal_args_class_types() -> dict[str, str]:
     return {
-        "acct_name": "AcctName",
+        "acct_name": "NameUnit",
         "amount": "float",
         "bridge": "str",
         "c400_number": "int",
@@ -148,7 +148,7 @@ def get_fiscal_args_class_types() -> dict[str, str]:
         "month_title": "TitleUnit",
         "monthday_distortion": "int",
         "penny": "float",
-        "owner_name": "AcctName",
+        "owner_name": "NameUnit",
         "quota": "int",
         "respect_bit": "float",
         "time_int": "TimeLinePoint",

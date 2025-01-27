@@ -52,7 +52,7 @@ def class_type_str() -> str:
 
 
 def type_AcctName_str() -> str:
-    return "AcctName"
+    return "NameUnit"
 
 
 def type_GroupLabel_str() -> str:
@@ -288,7 +288,7 @@ def get_atom_args_dimen_mapping() -> dict[str, set[str]]:
 
 def get_allowed_class_types() -> set[str]:
     return {
-        "AcctName",
+        "NameUnit",
         "bool",
         "float",
         "GroupLabel",
@@ -301,7 +301,7 @@ def get_allowed_class_types() -> set[str]:
 
 def get_atom_args_class_types() -> dict[str, str]:
     return {
-        "acct_name": "AcctName",
+        "acct_name": "NameUnit",
         "addin": "float",
         "awardee_tag": "GroupLabel",
         "base": "RoadUnit",
@@ -323,7 +323,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "give_force": "float",
         "gogo_want": "float",
         "group_label": "GroupLabel",
-        "healer_name": "AcctName",
+        "healer_name": "NameUnit",
         "item_title": "TitleUnit",
         "mass": "int",
         "max_tree_traverse": "int",
