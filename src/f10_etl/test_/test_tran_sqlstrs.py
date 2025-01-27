@@ -136,8 +136,10 @@ def test_get_fiscal_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # THEN
     assert fiscal_create_table_sqlstrs
     fiscal_dimens = get_fiscal_dimens()
-    expected_fiscal_tablenames = {f"{x_cat}_agg" for x_cat in fiscal_dimens}
-    expected_fiscal_tablenames.update({f"{x_cat}_staging" for x_cat in fiscal_dimens})
+    expected_fiscal_tablenames = {f"{x_dimen}_agg" for x_dimen in fiscal_dimens}
+    expected_fiscal_tablenames.update(
+        {f"{x_dimen}_staging" for x_dimen in fiscal_dimens}
+    )
     print(f"{expected_fiscal_tablenames=}")
     assert set(fiscal_create_table_sqlstrs.keys()) == expected_fiscal_tablenames
 
@@ -149,8 +151,8 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # THEN
     assert bud_create_table_sqlstrs
     bud_dimens = get_bud_dimens()
-    expected_bud_tablenames = {f"{x_cat}_agg" for x_cat in bud_dimens}
-    expected_bud_tablenames.update({f"{x_cat}_staging" for x_cat in bud_dimens})
+    expected_bud_tablenames = {f"{x_dimen}_agg" for x_dimen in bud_dimens}
+    expected_bud_tablenames.update({f"{x_dimen}_staging" for x_dimen in bud_dimens})
     print(f"{expected_bud_tablenames=}")
     assert set(bud_create_table_sqlstrs.keys()) == expected_bud_tablenames
 
@@ -329,8 +331,8 @@ def test_get_fiscal_inconsistency_sqlstrs_ReturnsObj():
             # print(f"{x_dimen} checking...")
             x_sqlstr = fiscal_inconsistency_sqlstrs.get(x_dimen)
             x_tablename = f"{x_dimen}_staging"
-            cat_config = idea_config.get(x_dimen)
-            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            dimen_config = idea_config.get(x_dimen)
+            cat_focus_columns = set(dimen_config.get("jkeys").keys())
             generated_cat_sqlstr = create_select_inconsistency_query(
                 cursor, x_tablename, cat_focus_columns, exclude_cols
             )
@@ -361,8 +363,8 @@ def test_get_bud_inconsistency_sqlstrs_ReturnsObj():
             # print(f"{x_dimen} checking...")
             x_sqlstr = bud_inconsistency_sqlstrs.get(x_dimen)
             x_tablename = f"{x_dimen}_staging"
-            cat_config = idea_config.get(x_dimen)
-            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            dimen_config = idea_config.get(x_dimen)
+            cat_focus_columns = set(dimen_config.get("jkeys").keys())
             generated_cat_sqlstr = create_select_inconsistency_query(
                 cursor, x_tablename, cat_focus_columns, exclude_cols
             )
@@ -401,8 +403,8 @@ def test_get_fiscal_update_inconsist_error_message_sqlstrs_ReturnsObj():
             print(f"{x_dimen} checking...")
             x_sqlstr = fiscal_update_error_sqlstrs.get(x_dimen)
             x_tablename = f"{x_dimen}_staging"
-            cat_config = idea_config.get(x_dimen)
-            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            dimen_config = idea_config.get(x_dimen)
+            cat_focus_columns = set(dimen_config.get("jkeys").keys())
             generated_cat_sqlstr = create_update_inconsistency_error_query(
                 cursor, x_tablename, cat_focus_columns, exclude_cols
             )
@@ -439,8 +441,8 @@ def test_get_bud_update_inconsist_error_message_sqlstrs_ReturnsObj():
             # print(f"{x_dimen} checking...")
             x_sqlstr = bud_update_error_sqlstrs.get(x_dimen)
             x_tablename = f"{x_dimen}_staging"
-            cat_config = idea_config.get(x_dimen)
-            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            dimen_config = idea_config.get(x_dimen)
+            cat_focus_columns = set(dimen_config.get("jkeys").keys())
             generated_cat_sqlstr = create_update_inconsistency_error_query(
                 cursor, x_tablename, cat_focus_columns, exclude_cols
             )
@@ -479,8 +481,8 @@ def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
 
         for x_dimen in idea_config:
             print(f"{x_dimen} checking...")
-            cat_config = idea_config.get(x_dimen)
-            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            dimen_config = idea_config.get(x_dimen)
+            cat_focus_columns = set(dimen_config.get("jkeys").keys())
             cat_focus_columns.remove(event_int_str())
             cat_focus_columns.remove(face_name_str())
             cat_focus_columns = get_custom_sorted_list(cat_focus_columns)
@@ -548,8 +550,8 @@ def test_get_bud_insert_agg_from_staging_sqlstrs_ReturnsObj():
 
         for x_dimen in idea_config:
             print(f"{x_dimen} checking...")
-            cat_config = idea_config.get(x_dimen)
-            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            dimen_config = idea_config.get(x_dimen)
+            cat_focus_columns = set(dimen_config.get("jkeys").keys())
             cat_focus_columns = get_custom_sorted_list(cat_focus_columns)
             stage_tablename = f"{x_dimen}_staging"
             agg_tablename = f"{x_dimen}_agg"
@@ -571,7 +573,7 @@ def test_get_bud_insert_agg_from_staging_sqlstrs_ReturnsObj():
             assert x_sqlstr == generated_table2table_agg_insert_sqlstr
 
 
-def test_idea_into_dimen_ReturnsObj_ForAll_idea_numbersAndAll_dimens():
+def test_IDEA_STAGEABLE_DIMENS_HasAll_idea_numbersForAll_dimens():
     # sourcery skip: extract-method, no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN
     # THEN
@@ -593,13 +595,14 @@ def test_idea_into_dimen_ReturnsObj_ForAll_idea_numbersAndAll_dimens():
         sorted_idea_numbers = sorted(get_idea_numbers())
         expected_idea_stagable_dimens = {i_num: [] for i_num in sorted_idea_numbers}
         for x_dimen in sorted(idea_config):
-            cat_config = idea_config.get(x_dimen)
-            cat_key_columns = set(cat_config.get("jkeys").keys())
-            cat_value_columns = set(cat_config.get("jvalues").keys())
+            dimen_config = idea_config.get(x_dimen)
+            cat_key_columns = set(dimen_config.get("jkeys").keys())
+            cat_value_columns = set(dimen_config.get("jvalues").keys())
             for idea_number in sorted_idea_numbers:
-                # print(f"{x_dimen} {idea_number} checking...")
                 src_columns = get_table_columns(cursor, f"{idea_number}_staging")
                 expected_stagable = cat_key_columns.issubset(src_columns)
+                if idea_number == "br00050":
+                    print(f"{x_dimen} {idea_number} checking... {src_columns}")
                 src_tablename = f"{idea_number}_staging"
                 gen_stablable = is_stageable(cursor, src_tablename, cat_key_columns)
                 assert expected_stagable == gen_stablable
@@ -613,9 +616,9 @@ def test_idea_into_dimen_ReturnsObj_ForAll_idea_numbersAndAll_dimens():
                     # print(
                     #     f"{x_dimen} {idea_number} checking... {cat_key_columns=} {cat_value_columns=} {src_cols_set=}"
                     # )
-                    print(
-                        f"{idea_stage2dimen_count} {idea_number} {x_dimen} keys:{cat_key_columns}, values: {existing_value_col}"
-                    )
+                    # print(
+                    #     f"{idea_stage2dimen_count} {idea_number} {x_dimen} keys:{cat_key_columns}, values: {existing_value_col}"
+                    # )
                     generated_sqlstr = get_idea_into_dimen_staging_query(
                         conn_or_cursor=cursor,
                         idea_number=idea_number,

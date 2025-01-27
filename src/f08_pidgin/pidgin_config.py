@@ -103,13 +103,13 @@ def map_road_str() -> str:
     return "map_road"
 
 
-def get_pidgin_config_jkeys(x_cat: str) -> dict:
-    jkeys_key_list = [x_cat, jkeys_str()]
+def get_pidgin_config_jkeys(x_dimen: str) -> dict:
+    jkeys_key_list = [x_dimen, jkeys_str()]
     return get_from_nested_dict(get_pidgin_config_dict(), jkeys_key_list)
 
 
-def get_pidgin_config_jvalues(x_cat: str) -> dict:
-    jvalues_key_list = [x_cat, jvalues_str()]
+def get_pidgin_config_jvalues(x_dimen: str) -> dict:
+    jvalues_key_list = [x_dimen, jvalues_str()]
     return get_from_nested_dict(get_pidgin_config_dict(), jvalues_key_list)
 
 

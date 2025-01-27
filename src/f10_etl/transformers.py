@@ -38,6 +38,7 @@ from src.f10_etl.tran_sqlstrs import (
     get_fiscal_insert_agg_from_staging_sqlstrs,
     get_bud_update_inconsist_error_message_sqlstrs,
     get_bud_insert_agg_from_staging_sqlstrs,
+    IDEA_STAGEABLE_DIMENS,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
@@ -754,37 +755,57 @@ def etl_idea_staging_to_bud_tables(conn_or_cursor):
 
 
 def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection):
-    fiscal_cats = get_fiscal_dimens()
     idea_config_dict = get_idea_config_dict()
-
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
         if db_table_exists(conn_or_cursor, idea_staging):
-            for x_cat in fiscal_cats:
-                cat_config = idea_config_dict.get(x_cat)
-                cat_jkeys = set(cat_config.get("jkeys").keys())
-                if is_stageable(conn_or_cursor, idea_staging, cat_jkeys):
+            # only inserts from pre-identified idea categorys
+            stageable_dimens = IDEA_STAGEABLE_DIMENS.get(idea_number)
+            for x_dimen in stageable_dimens:
+                dimen_config = idea_config_dict.get(x_dimen)
+                if dimen_config.get("idea_category") == "fiscalunit":
+                    dimen_jkeys = set(dimen_config.get("jkeys").keys())
                     gen_sqlstr = get_idea_into_dimen_staging_query(
-                        conn_or_cursor, idea_number, x_cat, cat_jkeys
+                        conn_or_cursor, idea_number, x_dimen, dimen_jkeys
                     )
                     conn_or_cursor.execute(gen_sqlstr)
+
+            # for x_dimen in fiscal_dimens:
+            #     dimen_config = idea_config_dict.get(x_dimen)
+            #     dimen_jkeys = set(dimen_config.get("jkeys").keys())
+            #     if is_stageable(conn_or_cursor, idea_staging, dimen_jkeys):
+            #         gen_sqlstr = get_idea_into_dimen_staging_query(
+            #             conn_or_cursor, idea_number, x_dimen, dimen_jkeys
+            #         )
+            #         conn_or_cursor.execute(gen_sqlstr)
 
 
 def idea_staging_tables2bud_staging_tables(conn_or_cursor: sqlite3_Connection):
-    bud_cats = get_bud_dimens()
     idea_config_dict = get_idea_config_dict()
 
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
         if db_table_exists(conn_or_cursor, idea_staging):
-            for x_cat in bud_cats:
-                cat_config = idea_config_dict.get(x_cat)
-                cat_jkeys = set(cat_config.get("jkeys").keys())
-                if is_stageable(conn_or_cursor, idea_staging, cat_jkeys):
-                    gen_sqlstr = get_idea_into_dimen_staging_query(
-                        conn_or_cursor, idea_number, x_cat, cat_jkeys
+            # only inserts from pre-identified idea categorys
+            stageable_dimens = IDEA_STAGEABLE_DIMENS.get(idea_number)
+            for x_dimen in stageable_dimens:
+                dimen_config = idea_config_dict.get(x_dimen)
+                if dimen_config.get("idea_category") == "budunit":
+                    dimen_jkeys = set(dimen_config.get("jkeys").keys())
+                    insert_sqlstr = get_idea_into_dimen_staging_query(
+                        conn_or_cursor, idea_number, x_dimen, dimen_jkeys
                     )
-                    conn_or_cursor.execute(gen_sqlstr)
+                    conn_or_cursor.execute(insert_sqlstr)
+
+            # manually checks each idea categorys
+            # for x_dimen in bud_dimens:
+            #     dimen_config = idea_config_dict.get(x_dimen)
+            #     dimen_jkeys = set(dimen_config.get("jkeys").keys())
+            #     if is_stageable(conn_or_cursor, idea_staging, dimen_jkeys):
+            #         insert_sqlstr = get_idea_into_dimen_staging_query(
+            #             conn_or_cursor, idea_number, x_dimen, dimen_jkeys
+            #         )
+            #         conn_or_cursor.execute(insert_sqlstr)
 
 
 def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):

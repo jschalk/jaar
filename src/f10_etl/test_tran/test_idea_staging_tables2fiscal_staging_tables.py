@@ -918,8 +918,8 @@ def test_GlobalVariablesForFiscal_inconsistency_queryReturns_sqlstrs():
 
         for x_dimen, x_sqlstr in get_fiscal_inconsistency_sqlstrs().items():
             x_tablename = f"{x_dimen}_staging"
-            cat_config = idea_config.get(x_dimen)
-            cat_focus_columns = set(cat_config.get("jkeys").keys())
+            dimen_config = idea_config.get(x_dimen)
+            cat_focus_columns = set(dimen_config.get("jkeys").keys())
             cat_focus_columns.remove(event_int_str())
             cat_focus_columns.remove(face_name_str())
             generated_cat_sqlstr = create_select_inconsistency_query(

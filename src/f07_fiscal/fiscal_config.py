@@ -103,13 +103,13 @@ def get_fiscal_dimens() -> set[str]:
     }
 
 
-def get_fiscal_config_jkeys(x_cat: str) -> dict:
-    jkeys_key_list = [x_cat, "jkeys"]
+def get_fiscal_config_jkeys(x_dimen: str) -> dict:
+    jkeys_key_list = [x_dimen, "jkeys"]
     return get_from_nested_dict(get_fiscal_config_dict(), jkeys_key_list)
 
 
-def get_fiscal_config_jvalues(x_cat: str) -> dict:
-    jvalues_key_list = [x_cat, "jvalues"]
+def get_fiscal_config_jvalues(x_dimen: str) -> dict:
+    jvalues_key_list = [x_dimen, "jvalues"]
     return get_from_nested_dict(get_fiscal_config_dict(), jvalues_key_list)
 
 

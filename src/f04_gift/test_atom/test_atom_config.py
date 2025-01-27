@@ -254,13 +254,13 @@ def test_get_atom_config_dict_EveryCrudOperationHasDeltaUnitOrderGroup():
     assert 25 == q_order(atom_update(), budunit_str())
 
 
-def _get_atom_config_jkeys_len(x_cat: str) -> int:
-    jkeys_key_list = [x_cat, jkeys_str()]
+def _get_atom_config_jkeys_len(x_dimen: str) -> int:
+    jkeys_key_list = [x_dimen, jkeys_str()]
     return len(get_from_nested_dict(get_atom_config_dict(), jkeys_key_list))
 
 
-def _get_atom_config_jvalues_len(x_cat: str) -> int:
-    jvalues_key_list = [x_cat, jvalues_str()]
+def _get_atom_config_jvalues_len(x_dimen: str) -> int:
+    jvalues_key_list = [x_dimen, jvalues_str()]
     return len(get_from_nested_dict(get_atom_config_dict(), jvalues_key_list))
 
 
@@ -349,13 +349,13 @@ def test_atom_config_NestingOrderExistsWhenNeeded():
     assert check_necessary_nesting_order_exists()
 
 
-def _get_atom_config_jvalue_keys(x_cat: str) -> set[str]:
-    jvalues_key_list = [x_cat, jvalues_str()]
+def _get_atom_config_jvalue_keys(x_dimen: str) -> set[str]:
+    jvalues_key_list = [x_dimen, jvalues_str()]
     return set(get_from_nested_dict(get_atom_config_dict(), jvalues_key_list).keys())
 
 
-def _get_atom_config_jkey_keys(x_cat: str) -> set[str]:
-    jkeys_key_list = [x_cat, jkeys_str()]
+def _get_atom_config_jkey_keys(x_dimen: str) -> set[str]:
+    jkeys_key_list = [x_dimen, jkeys_str()]
     return set(get_from_nested_dict(get_atom_config_dict(), jkeys_key_list).keys())
 
 
