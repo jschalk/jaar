@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_toolbox import extract_csv_headers
+from src.f00_instrument.file import set_dir, create_path
 from sqlite3 import (
     Connection,
     connect as sqlite3_connect,
@@ -7,7 +7,8 @@ from sqlite3 import (
 )
 from dataclasses import dataclass
 from contextlib import contextmanager
-from csv import reader as csv_reader
+from csv import reader as csv_reader, writer as csv_writer
+from os.path import join as os_path_join
 
 
 def sqlite_null(x_obj: any):
@@ -422,3 +423,46 @@ def is_stageable(
 ):
     src_columns = set(get_table_columns(conn_or_cursor, src_table))
     return required_columns.issubset(src_columns)
+
+
+def export_filtered_csvs(
+    conn_or_cursor: sqlite3_Connection, tablename, key_columns, output_dir
+):
+    """
+    Select a single table from a SQLite DB, filter rows into CSVs by key columns, and save them.
+
+    :param db_path: Path to the SQLite database file.
+    :param tablename: Name of the table to query.
+    :param key_columns: List of columns to use as keys for filtering rows.
+    :param output_dir: Directory to save the resulting CSVs.
+    """
+    # Fetch all rows from the table
+    column_names = get_table_columns(conn_or_cursor, tablename)
+    query = f"SELECT * FROM {tablename}"
+    rows = conn_or_cursor.execute(query).fetchall()
+
+    # Find the indices of key columns
+    key_indices = [column_names.index(key) for key in key_columns]
+
+    # Organize rows by key values
+    grouped_rows = {}
+    for row in rows:
+        # Create a tuple of key values
+        key_values = tuple(row[index] for index in key_indices)
+
+        if key_values not in grouped_rows:
+            grouped_rows[key_values] = []
+        grouped_rows[key_values].append(row)
+
+    # Write grouped rows to separate CSV files
+    for key_values, group in grouped_rows.items():
+        key_path_part = "/".join(str(value) for value in key_values)
+        csv_path = create_path(output_dir, key_path_part)
+        set_dir(csv_path)
+        output_file = os_path_join(csv_path, f"{tablename}.csv")
+
+        # Write to CSV
+        with open(output_file, mode="w", newline="", encoding="utf-8") as csv_file:
+            writer = csv_writer(csv_file)
+            writer.writerow(column_names)
+            writer.writerows(group)
