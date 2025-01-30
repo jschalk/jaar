@@ -255,6 +255,8 @@ def test_create_bud_tables_CreatesFiscalStagingTables():
     # ESTABLISH
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
+        assert cursor.fetchone()[0] == 0
         assert db_table_exists(cursor, "bud_acct_membership_put_agg") is False
         assert db_table_exists(cursor, "bud_acct_membership_put_staging") is False
         assert db_table_exists(cursor, "bud_acctunit_put_agg") is False
@@ -282,6 +284,14 @@ def test_create_bud_tables_CreatesFiscalStagingTables():
         create_bud_tables(cursor)
 
         # THEN
+        cursor.execute("SELECT * FROM sqlite_master WHERE type = 'table'")
+        # print(f"{cursor.fetchall()=}")
+        # x_count = 0
+        # for x_row in cursor.fetchall():
+        #     print(f"{x_count} {x_row[1]=}")
+        #     x_count += 1
+        cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
+        assert cursor.fetchone()[0] == 40
         assert db_table_exists(cursor, "bud_acct_membership_put_agg")
         assert db_table_exists(cursor, "bud_acct_membership_put_staging")
         assert db_table_exists(cursor, "bud_acctunit_put_agg")

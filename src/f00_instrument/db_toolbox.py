@@ -425,7 +425,7 @@ def is_stageable(
     return required_columns.issubset(src_columns)
 
 
-def export_filtered_csvs(
+def save_to_split_csvs(
     conn_or_cursor: sqlite3_Connection, tablename, key_columns, output_dir
 ):
     """
@@ -462,6 +462,7 @@ def export_filtered_csvs(
         output_file = os_path_join(csv_path, f"{tablename}.csv")
 
         # Write to CSV
+        print(f"{output_file=}")
         with open(output_file, mode="w", newline="", encoding="utf-8") as csv_file:
             writer = csv_writer(csv_file)
             writer.writerow(column_names)

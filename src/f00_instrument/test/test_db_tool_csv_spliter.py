@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f00_instrument.db_toolbox import export_filtered_csvs
+from src.f00_instrument.db_toolbox import save_to_split_csvs
 from src.f00_instrument.csv_toolbox import read_csv_with_types
 from src.f00_instrument.examples.instrument_env import (
     env_dir_setup_cleanup,
@@ -9,7 +9,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_export_filtered_csvs_CreatesFiles():
+def test_save_to_split_csvs_CreatesFiles():
     # sourcery skip: extract-method
     # ESTABLISH
     x_tablename = "test_table56"
@@ -50,7 +50,7 @@ VALUES
         assert os_path_exists(C4_path) is False
 
         # WHEN
-        export_filtered_csvs(conn, x_tablename, key_columns, x_dir)
+        save_to_split_csvs(conn, x_tablename, key_columns, x_dir)
 
         # THEN
         assert os_path_exists(A1_path)

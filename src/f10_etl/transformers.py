@@ -1,5 +1,10 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
-from src.f00_instrument.db_toolbox import db_table_exists
+from src.f00_instrument.db_toolbox import (
+    db_table_exists,
+    get_row_count,
+    get_table_columns,
+    save_to_split_csvs,
+)
 from src.f01_road.road import FaceName, EventInt
 from src.f07_fiscal.fiscal_config import get_fiscal_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
@@ -27,6 +32,7 @@ from src.f09_idea.idea_db_tool import (
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
+    get_bud_create_table_sqlstrs,
     create_fiscal_tables,
     create_bud_tables,
     get_fiscal_update_inconsist_error_message_sqlstrs,
@@ -828,6 +834,19 @@ def bud_staging_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
         conn_or_cursor.execute(x_sqlstr)
     for x_sqlstr in get_bud_insert_del_agg_from_staging_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)
+
+
+def etl_bud_tables_to_event_bud_csvs(
+    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
+):
+    for bud_table in get_bud_create_table_sqlstrs():
+        if get_row_count(conn_or_cursor, bud_table) > 0:
+            save_to_split_csvs(
+                conn_or_cursor=conn_or_cursor,
+                tablename=bud_table,
+                key_columns=["fiscal_title", "event_int", "owner_name"],
+                output_dir=fiscal_mstr_dir,
+            )
 
 
 def etl_fiscal_staging_tables_to_fiscal_csvs(

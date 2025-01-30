@@ -3,20 +3,19 @@ from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_gift.atom_config import (
     face_name_str,
     fiscal_title_str,
-    get_delete_key_name,
     owner_name_str,
     acct_name_str,
     credit_belief_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f10_etl.tran_sqlstrs import create_bud_tables
-from src.f11_world.world import worldunit_shop
-from src.f11_world.examples.world_env import env_dir_setup_cleanup
+from src.f10_etl.transformers import etl_bud_tables_to_event_bud_csvs
+from src.f10_etl.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
 from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_bud_tables_to_event_bud_csvs_PopulatesBudPutAggTables(
+def test_etl_bud_tables_to_event_bud_csvs_PopulatesBudPutAggTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -28,10 +27,10 @@ def test_WorldUnit_bud_tables_to_event_bud_csvs_PopulatesBudPutAggTables(
     accord23_str = "accord23"
     yao_credit_belief5 = 5
     sue_credit_belief7 = 7
-    fizz_world = worldunit_shop("fizz")
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv = f"{put_agg_tablename}.csv"
-    a23_dir = create_path(fizz_world._fiscal_mstr_dir, accord23_str)
+    x_fiscal_mstr_dir = get_test_etl_dir()
+    a23_dir = create_path(x_fiscal_mstr_dir, accord23_str)
     a23_e3_dir = create_path(a23_dir, event3)
     a23_e7_dir = create_path(a23_dir, event7)
     a23_e3_bob_dir = create_path(a23_e3_dir, bob_inx)
@@ -56,7 +55,7 @@ VALUES
         assert os_path_exists(a23_e7_budacct_put_path) is False
 
         # WHEN
-        fizz_world.bud_tables_to_event_bud_csvs(cursor)
+        etl_bud_tables_to_event_bud_csvs(cursor, x_fiscal_mstr_dir)
 
         # THEN
         assert os_path_exists(a23_e3_budacct_put_path)

@@ -41,6 +41,7 @@ from src.f10_etl.transformers import (
     etl_fiscal_agg_tables_to_fiscal_csvs,
     etl_fiscal_csvs_to_jsons,
     etl_idea_staging_to_bud_tables,
+    etl_bud_tables_to_event_bud_csvs,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -185,6 +186,9 @@ class WorldUnit:
 
     def fiscal_csvs_to_jsons(self):
         etl_fiscal_csvs_to_jsons(self._fiscal_mstr_dir)
+
+    def bud_tables_to_event_bud_csvs(self, conn_or_cursor: sqlite3_Connection):
+        etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fiscal_mstr_dir)
 
     def get_dict(self) -> dict:
         return {
