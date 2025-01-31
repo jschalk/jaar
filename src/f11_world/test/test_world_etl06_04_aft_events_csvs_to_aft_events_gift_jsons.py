@@ -60,8 +60,6 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_put_aggTables(
     # THEN
     assert os_path_exists(e3_gift_path)
     assert os_path_exists(e7_gift_path)
-    print("")
-    print("")
     # print(f"{open_file(e3_gift_path)=}")
     # print(f"{open_file(e7_gift_path)=}")
     # gifts_dir = create_path(fizz_world._fiscal_mstr_dir, "gifts")
@@ -153,8 +151,6 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_del_aggTables(
     # THEN
     assert os_path_exists(e3_gift_path)
     assert os_path_exists(e7_gift_path)
-    print("")
-    print("")
     # print(f"{open_file(e3_gift_path)=}")
     # print(f"{open_file(e7_gift_path)=}")
     # gifts_dir = create_path(fizz_world._fiscal_mstr_dir, "gifts")

@@ -114,10 +114,10 @@ def boat_valid_str():
 
 
 def get_boat_staging_grouping_with_all_values_equal_df(
-    x_df: DataFrame, group_by_list: list
+    x_df: DataFrame, groupby_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
-    grouping_columns = get_custom_sorted_list(df_columns, group_by_list)
+    grouping_columns = get_custom_sorted_list(df_columns, groupby_list)
     value_columns = df_columns.difference(grouping_columns)
 
     if grouping_columns == []:
@@ -126,7 +126,7 @@ def get_boat_staging_grouping_with_all_values_equal_df(
         x_df.to_sql(boat_staging_str(), conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
             x_table=boat_staging_str(),
-            group_by_columns=grouping_columns,
+            groupby_columns=grouping_columns,
             value_columns=value_columns,
         )
         return pandas_read_sql_query(query_str, conn)

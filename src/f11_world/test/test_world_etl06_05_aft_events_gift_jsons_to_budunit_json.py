@@ -9,3 +9,17 @@ from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
+
+
+# ESTABLISH
+# fiscal/owners/events each with a gift.json
+# for each owner
+#   grab all events numbers
+#   create sorted list of all events numbers
+#   get min event: create BudUnit from giftunit. Save json
+#   for event_id in smallest to  largerst event_ints
+#       get previous budunit,
+#       apply gift to budunit
+#       save budunit json
+#
+# that's it.

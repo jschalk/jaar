@@ -176,11 +176,11 @@ def sqlite_connection(db_name):
 
 
 def _get_grouping_select_clause(
-    group_by_columns: list[str], value_columns: list[str]
+    groupby_columns: list[str], value_columns: list[str]
 ) -> str:
     select_str = "SELECT"
-    for group_by_column in group_by_columns:
-        select_str += f" {group_by_column},"
+    for groupby_column in groupby_columns:
+        select_str += f" {groupby_column},"
     for value_column in value_columns:
         select_str += f" MAX({value_column}) AS {value_column},"
     return _remove_comma_at_end(select_str)
@@ -190,10 +190,10 @@ def _remove_comma_at_end(x_str: str) -> str:
     return x_str.removesuffix(",")
 
 
-def _get_grouping_groupby_clause(group_by_columns: list[str]) -> str:
+def _get_grouping_groupby_clause(groupby_columns: list[str]) -> str:
     groupby_str = "GROUP BY"
-    for group_by_column in group_by_columns:
-        groupby_str += f" {group_by_column},"
+    for groupby_column in groupby_columns:
+        groupby_str += f" {groupby_column},"
     return _remove_comma_at_end(groupby_str)
 
 
@@ -209,15 +209,15 @@ def _get_having_equal_value_clause(value_columns: list[str]) -> str:
 
 
 def get_groupby_sql_query(
-    x_table: str, group_by_columns: list[str], value_columns: list[str]
+    x_table: str, groupby_columns: list[str], value_columns: list[str]
 ) -> str:
-    return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)}"
+    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(groupby_columns)}"
 
 
 def get_grouping_with_all_values_equal_sql_query(
-    x_table: str, group_by_columns: list[str], value_columns: list[str]
+    x_table: str, groupby_columns: list[str], value_columns: list[str]
 ) -> str:
-    return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)} {_get_having_equal_value_clause(value_columns)}"
+    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(groupby_columns)} {_get_having_equal_value_clause(value_columns)}"
 
 
 def insert_csv(csv_file_path: str, conn_or_cursor: sqlite3_Connection, table_name: str):
@@ -405,13 +405,13 @@ def create_table2table_agg_insert_query(
             select_columns_str += f", {dst_column}"
         else:
             select_columns_str += f", MAX({dst_column})"
-    group_by_columns_str = ", ".join(focus_cols)
+    groupby_columns_str = ", ".join(focus_cols)
 
     return f"""INSERT INTO {dst_table} ({dst_columns_str})
 SELECT {select_columns_str}
 FROM {src_table}
 WHERE error_message IS NULL
-GROUP BY {group_by_columns_str}
+GROUP BY {groupby_columns_str}
 ;
 """
 
@@ -445,25 +445,24 @@ def save_to_split_csvs(
     key_indices = [column_names.index(key) for key in key_columns]
 
     # Organize rows by key values
-    grouped_rows = {}
+    collectioned_rows = {}
     for row in rows:
         # Create a tuple of key values
         key_values = tuple(row[index] for index in key_indices)
 
-        if key_values not in grouped_rows:
-            grouped_rows[key_values] = []
-        grouped_rows[key_values].append(row)
+        if key_values not in collectioned_rows:
+            collectioned_rows[key_values] = []
+        collectioned_rows[key_values].append(row)
 
-    # Write grouped rows to separate CSV files
-    for key_values, group in grouped_rows.items():
+    # Write collectioned rows to separate CSV files
+    for key_values, collection in collectioned_rows.items():
         key_path_part = "/".join(str(value) for value in key_values)
         csv_path = create_path(output_dir, key_path_part)
         set_dir(csv_path)
         output_file = os_path_join(csv_path, f"{tablename}.csv")
 
         # Write to CSV
-        print(f"{output_file=}")
         with open(output_file, mode="w", newline="", encoding="utf-8") as csv_file:
             writer = csv_writer(csv_file)
             writer.writerow(column_names)
-            writer.writerows(group)
+            writer.writerows(collection)

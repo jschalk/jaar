@@ -188,10 +188,10 @@ class boatStagingToboatAggTransformer:
         for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
             boat_idea_path = create_path(br_ref.file_dir, br_ref.file_name)
             boat_staging_df = pandas_read_excel(boat_idea_path, "boat_staging")
-            otx_df = self._group_by_idea_columns(boat_staging_df, br_ref.idea_number)
+            otx_df = self._groupby_idea_columns(boat_staging_df, br_ref.idea_number)
             upsert_sheet(boat_idea_path, "boat_agg", otx_df)
 
-    def _group_by_idea_columns(
+    def _groupby_idea_columns(
         self, boat_staging_df: DataFrame, idea_number: str
     ) -> DataFrame:
         idea_filename = get_idea_format_filename(idea_number)
@@ -222,7 +222,7 @@ class boatAggToboatValidTransformer:
             boat_valid_df = boat_agg[boat_agg["event_int"].isin(self.legitimate_events)]
             upsert_sheet(boat_idea_path, "boat_valid", boat_valid_df)
 
-    # def _group_by_idea_columns(
+    # def _groupby_idea_columns(
     #     self, boat_staging_df: DataFrame, idea_number: str
     # ) -> DataFrame:
     #     idea_filename = get_idea_format_filename(idea_number)
