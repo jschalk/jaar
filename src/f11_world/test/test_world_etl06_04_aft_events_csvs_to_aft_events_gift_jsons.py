@@ -3,7 +3,6 @@ from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_gift.atom_config import (
     face_name_str,
     fiscal_title_str,
-    get_delete_key_name,
     owner_name_str,
     acct_name_str,
     credit_belief_str,
@@ -13,10 +12,8 @@ from src.f04_gift.atom_config import (
 )
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f10_etl.tran_sqlstrs import create_bud_tables
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
-from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
 
@@ -40,10 +37,10 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_put_aggTables(
     a23_bob_dir = create_path(a23_dir, bob_inx)
     a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     a23_bob_e7_dir = create_path(a23_bob_dir, event7)
-    e3_put_csv = f"""face_name,event_int,fiscal_title,{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+    e3_put_csv = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {sue_inx},{event3},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 """
-    e7_put_csv = f"""face_name,event_int,fiscal_title,{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+    e7_put_csv = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {sue_inx},{event7},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 {sue_inx},{event7},{a23_str},{bob_inx},{sue_inx},{credit88},{debtit_empty}
 """
@@ -132,10 +129,10 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_del_aggTables(
     a23_bob_dir = create_path(a23_dir, bob_inx)
     a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     a23_bob_e7_dir = create_path(a23_bob_dir, event7)
-    e3_put_csv = f"""face_name,event_int,fiscal_title,{owner_name_str()},{acct_name_str()}
+    e3_put_csv = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
 {sue_inx},{event3},{a23_str},{bob_inx},{bob_inx}
 """
-    e7_put_csv = f"""face_name,event_int,fiscal_title,{owner_name_str()},{acct_name_str()}
+    e7_put_csv = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
 {sue_inx},{event7},{a23_str},{bob_inx},{bob_inx}
 {sue_inx},{event7},{a23_str},{bob_inx},{sue_inx}
 """
