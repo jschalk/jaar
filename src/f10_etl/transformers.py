@@ -880,18 +880,18 @@ def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
 def etl_event_bud_csvs_to_gift_json(fiscal_mstr_dir: str):
     for fiscal_title in get_level1_dirs(fiscal_mstr_dir):
         fiscal_path = create_path(fiscal_mstr_dir, fiscal_title)
-        for event_int in get_level1_dirs(fiscal_path):
-            event_path = create_path(fiscal_path, event_int)
-            for owner_name in get_level1_dirs(event_path):
-                owner_path = create_path(event_path, owner_name)
-                owner_gift = giftunit_shop(
+        for owner_name in get_level1_dirs(fiscal_path):
+            owner_path = create_path(fiscal_path, owner_name)
+            for event_int in get_level1_dirs(owner_path):
+                event_path = create_path(owner_path, event_int)
+                event_gift = giftunit_shop(
                     owner_name=owner_name,
                     face_name=None,
                     fiscal_title=fiscal_title,
                     event_int=event_int,
                 )
-                add_atomunits_from_csv(owner_gift, owner_path)
-                save_file(owner_path, "gift.json", owner_gift.get_json())
+                add_atomunits_from_csv(event_gift, event_path)
+                save_file(event_path, "gift.json", event_gift.get_json())
 
 
 def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):

@@ -37,10 +37,9 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_put_aggTables(
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     a23_dir = create_path(fizz_world._fiscal_mstr_dir, a23_str)
-    a23_e3_dir = create_path(a23_dir, event3)
-    a23_e7_dir = create_path(a23_dir, event7)
-    a23_e3_bob_dir = create_path(a23_e3_dir, bob_inx)
-    a23_e7_bob_dir = create_path(a23_e7_dir, bob_inx)
+    a23_bob_dir = create_path(a23_dir, bob_inx)
+    a23_bob_e3_dir = create_path(a23_bob_dir, event3)
+    a23_bob_e7_dir = create_path(a23_bob_dir, event7)
     e3_put_csv = f"""face_name,event_int,fiscal_title,{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {sue_inx},{event3},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 """
@@ -48,11 +47,11 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_put_aggTables(
 {sue_inx},{event7},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 {sue_inx},{event7},{a23_str},{bob_inx},{sue_inx},{credit88},{debtit_empty}
 """
-    save_file(a23_e3_bob_dir, put_agg_csv_filename, e3_put_csv)
-    save_file(a23_e7_bob_dir, put_agg_csv_filename, e7_put_csv)
+    save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
+    save_file(a23_bob_e7_dir, put_agg_csv_filename, e7_put_csv)
     gift_filename = "gift.json"
-    e3_gift_path = create_path(a23_e3_bob_dir, gift_filename)
-    e7_gift_path = create_path(a23_e7_bob_dir, gift_filename)
+    e3_gift_path = create_path(a23_bob_e3_dir, gift_filename)
+    e7_gift_path = create_path(a23_bob_e7_dir, gift_filename)
     # print(f"{e3_gift_path=}")
     # print(f"{e7_gift_path=}")
     assert os_path_exists(e3_gift_path) is False
@@ -130,10 +129,9 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_del_aggTables(
     put_agg_tablename = f"{bud_acctunit_str()}_del_agg"
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     a23_dir = create_path(fizz_world._fiscal_mstr_dir, a23_str)
-    a23_e3_dir = create_path(a23_dir, event3)
-    a23_e7_dir = create_path(a23_dir, event7)
-    a23_e3_bob_dir = create_path(a23_e3_dir, bob_inx)
-    a23_e7_bob_dir = create_path(a23_e7_dir, bob_inx)
+    a23_bob_dir = create_path(a23_dir, bob_inx)
+    a23_bob_e3_dir = create_path(a23_bob_dir, event3)
+    a23_bob_e7_dir = create_path(a23_bob_dir, event7)
     e3_put_csv = f"""face_name,event_int,fiscal_title,{owner_name_str()},{acct_name_str()}
 {sue_inx},{event3},{a23_str},{bob_inx},{bob_inx}
 """
@@ -141,11 +139,12 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_del_aggTables(
 {sue_inx},{event7},{a23_str},{bob_inx},{bob_inx}
 {sue_inx},{event7},{a23_str},{bob_inx},{sue_inx}
 """
-    save_file(a23_e3_bob_dir, put_agg_csv_filename, e3_put_csv)
-    save_file(a23_e7_bob_dir, put_agg_csv_filename, e7_put_csv)
+    save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
+    save_file(a23_bob_e7_dir, put_agg_csv_filename, e7_put_csv)
     gift_filename = "gift.json"
-    e3_gift_path = create_path(a23_e3_bob_dir, gift_filename)
-    e7_gift_path = create_path(a23_e7_bob_dir, gift_filename)
+    e3_gift_path = create_path(a23_bob_e3_dir, gift_filename)
+    e7_gift_path = create_path(a23_bob_e7_dir, gift_filename)
+
     # print(f"{e3_gift_path=}")
     # print(f"{e7_gift_path=}")
     assert os_path_exists(e3_gift_path) is False
@@ -168,15 +167,11 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_del_aggTables(
     expected_e3_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event3)
     expected_e7_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event7)
     budacct_dimen = bud_acctunit_str()
-    expected_e3_gift._deltaunit.add_atomunit(
-        budacct_dimen, atom_delete(), jkeys={acct_name_str(): bob_inx}
-    )
-    expected_e7_gift._deltaunit.add_atomunit(
-        budacct_dimen, atom_delete(), jkeys={acct_name_str(): bob_inx}
-    )
-    expected_e7_gift._deltaunit.add_atomunit(
-        budacct_dimen, atom_delete(), jkeys={acct_name_str(): sue_inx}
-    )
+    bob_jkeys = {acct_name_str(): bob_inx}
+    expected_e3_gift._deltaunit.add_atomunit(budacct_dimen, atom_delete(), bob_jkeys)
+    expected_e7_gift._deltaunit.add_atomunit(budacct_dimen, atom_delete(), bob_jkeys)
+    sue_jkeys = {acct_name_str(): sue_inx}
+    expected_e7_gift._deltaunit.add_atomunit(budacct_dimen, atom_delete(), sue_jkeys)
     e3_giftunit = get_giftunit_from_json(open_file(e3_gift_path))
     e7_giftunit = get_giftunit_from_json(open_file(e7_gift_path))
     # print(f"{e7_giftunit=}")
