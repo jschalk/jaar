@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f00_instrument.db_toolbox import save_to_split_csvs
-from src.f00_instrument.csv_toolbox import read_csv_with_types
+from src.f00_instrument.csv_toolbox import open_csv_with_types
 from src.f00_instrument.examples.instrument_env import (
     env_dir_setup_cleanup,
     get_instrument_temp_env_dir,
@@ -61,17 +61,23 @@ VALUES
         # expected_A2_csv = "z_int,user,y_int\n2,A,200"
         # expected_B3_csv = "z_int,user,y_int\n3,C,300"
         # expected_C4_csv = "z_int,user,y_int\n4,C,400\n4,C,500"
-        expected_A1_csv = [(1, "A", 100)]
-        expected_A2_csv = [(2, "A", 200)]
-        expected_B3_csv = [(3, "B", 300)]
-        expected_C4_csv = [(4, "C", 400), (4, "C", 500)]
+        expected_A1_row = (1, "A", 100)
+        expected_A2_row = (2, "A", 200)
+        expected_B3_row = (3, "B", 300)
+        expected_C4_0_row = (4, "C", 400)
+        expected_C4_1_row = (4, "C", 500)
 
-        A1_csv = read_csv_with_types(A1_path, x_column_types)
-        A2_csv = read_csv_with_types(A2_path, x_column_types)
-        B3_csv = read_csv_with_types(B3_path, x_column_types)
-        C4_csv = read_csv_with_types(C4_path, x_column_types)
+        A1_csv = open_csv_with_types(A1_path, x_column_types)
+        A2_csv = open_csv_with_types(A2_path, x_column_types)
+        B3_csv = open_csv_with_types(B3_path, x_column_types)
+        C4_csv = open_csv_with_types(C4_path, x_column_types)
 
-        assert A1_csv == expected_A1_csv
-        assert A2_csv == expected_A2_csv
-        assert B3_csv == expected_B3_csv
-        assert C4_csv == expected_C4_csv
+        assert A1_csv[0] == ("z_int", "user", "y_int")
+        assert A2_csv[0] == ("z_int", "user", "y_int")
+        assert B3_csv[0] == ("z_int", "user", "y_int")
+        assert C4_csv[0] == ("z_int", "user", "y_int")
+        assert A1_csv[1] == expected_A1_row
+        assert A2_csv[1] == expected_A2_row
+        assert B3_csv[1] == expected_B3_row
+        assert C4_csv[1] == expected_C4_0_row
+        assert C4_csv[2] == expected_C4_1_row

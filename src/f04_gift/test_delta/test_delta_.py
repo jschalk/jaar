@@ -24,6 +24,7 @@ from src.f04_gift.delta import (
     DeltaUnit,
     deltaunit_shop,
     bud_built_from_delta_is_valid,
+    get_deltaunit_from_ordered_dict,
 )
 from src.f02_bud.bud import budunit_shop
 from src.f04_gift.examples.example_deltas import get_deltaunit_example1
@@ -569,6 +570,44 @@ def test_DeltaUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumbe
     assert deltaunit_dict.get(5) == zia_atomunit.get_dict()
     assert deltaunit_dict.get(6) == yao_atomunit.get_dict()
     assert deltaunit_dict.get(7) == pool_atomunit.get_dict()
+
+
+def test_get_deltaunit_from_ordered_dict_ReturnsObj():
+    # ESTABLISH
+    expected_deltaunit = deltaunit_shop()
+    pool_atomunit = atomunit_shop(budunit_str(), atom_update())
+    pool_attribute = "credor_respect"
+    pool_atomunit.set_jvalue(pool_attribute, 100)
+    expected_deltaunit.set_atomunit(pool_atomunit)
+    dimen = bud_acctunit_str()
+    zia_str = "Zia"
+    zia_atomunit = atomunit_shop(dimen, atom_insert())
+    zia_atomunit.set_arg(acct_name_str(), zia_str)
+    zia_atomunit.set_arg(credit_belief_str(), 70)
+    expected_deltaunit.set_atomunit(zia_atomunit)
+    sue_bud = budunit_shop("Sue")
+    sue_bud.set_credor_respect(100)
+    yao_str = "Yao"
+    yao_atomunit = atomunit_shop(dimen, atom_insert())
+    yao_atomunit.set_arg(acct_name_str(), yao_str)
+    yao_atomunit.set_arg(credit_belief_str(), 30)
+    expected_deltaunit.set_atomunit(yao_atomunit)
+    deltaunit_dict = expected_deltaunit.get_ordered_dict(5)
+
+    # WHEN
+    generated_deltaunit = get_deltaunit_from_ordered_dict(deltaunit_dict)
+
+    # THEN
+    # delta_zia = deltaunit_dict.get(0)
+    # delta_yao = deltaunit_dict.get(1)
+    # delta_pool = deltaunit_dict.get(2)
+    # assert delta_zia == zia_atomunit
+    # assert delta_yao == yao_atomunit
+    # assert delta_pool == pool_atomunit
+    # assert deltaunit_dict.get(5) == zia_atomunit.get_dict()
+    # assert deltaunit_dict.get(6) == yao_atomunit.get_dict()
+    # assert deltaunit_dict.get(7) == pool_atomunit.get_dict()
+    assert generated_deltaunit == expected_deltaunit
 
 
 def test_DeltaUnit_get_json_ReturnsCorrectObj():

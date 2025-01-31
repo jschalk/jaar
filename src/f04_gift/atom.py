@@ -168,14 +168,17 @@ def atomunit_shop(
         )
 
 
-def get_from_json(x_str: str) -> AtomUnit:
-    x_dict = get_dict_from_json(x_str)
+def get_from_dict(x_dict: dict) -> AtomUnit:
     x_atom = atomunit_shop(x_dict["dimen"], x_dict["crud"])
     for x_key, x_value in x_dict["jkeys"].items():
         x_atom.set_jkey(x_key, x_value)
     for x_key, x_value in x_dict["jvalues"].items():
         x_atom.set_jvalue(x_key, x_value)
     return x_atom
+
+
+def get_from_json(x_str: str) -> AtomUnit:
+    return get_from_dict(get_dict_from_json(x_str))
 
 
 def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):

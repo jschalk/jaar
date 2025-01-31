@@ -3,7 +3,12 @@ from src.f01_road.jaar_config import init_gift_id, get_gifts_folder
 from src.f01_road.road import get_default_fiscal_title as root_title
 from src.f04_gift.atom_config import fiscal_title_str, owner_name_str, face_name_str
 from src.f04_gift.delta import deltaunit_shop
-from src.f04_gift.gift import GiftUnit, giftunit_shop, get_init_gift_id_if_None
+from src.f04_gift.gift import (
+    GiftUnit,
+    giftunit_shop,
+    get_init_gift_id_if_None,
+    get_giftunit_from_json,
+)
 from src.f04_gift.examples.example_atoms import get_atom_example_itemunit_sports
 from src.f04_gift.examples.example_deltas import get_deltaunit_sue_example
 
@@ -38,6 +43,7 @@ def test_GiftUnit_exists():
     assert not x_giftunit._delta_start
     assert not x_giftunit._gifts_dir
     assert not x_giftunit._atoms_dir
+    assert not x_giftunit.event_int
 
 
 def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
@@ -56,6 +62,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
     assert bob_giftunit._delta_start == 0
     assert not bob_giftunit._gifts_dir
     assert not bob_giftunit._atoms_dir
+    assert not bob_giftunit.event_int
 
 
 def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
@@ -68,6 +75,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     bob_gifts_dir = "exampletext7"
     bob_atoms_dir = "exampletext9"
     accord45_str = "accord45"
+    accord45_e5_event_int = 5
 
     # WHEN
     bob_giftunit = giftunit_shop(
@@ -79,6 +87,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
         _delta_start=bob_delta_start,
         _gifts_dir=bob_gifts_dir,
         _atoms_dir=bob_atoms_dir,
+        event_int=accord45_e5_event_int,
     )
 
     # THEN
@@ -90,6 +99,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     assert bob_giftunit._delta_start == bob_delta_start
     assert bob_giftunit._gifts_dir == bob_gifts_dir
     assert bob_giftunit._atoms_dir == bob_atoms_dir
+    assert bob_giftunit.event_int == accord45_e5_event_int
 
 
 def test_giftunit_shop_ReturnsCorrectObjEstablishWithSomeArgs_v1():
@@ -207,7 +217,10 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
     bob_str = "Bob"
     sue_str = "Sue"
     accord45_str = "accord45"
-    bob_giftunit = giftunit_shop(fiscal_title=accord45_str, owner_name=bob_str)
+    accord45_e5_int = 5
+    bob_giftunit = giftunit_shop(
+        fiscal_title=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
+    )
     bob_giftunit.set_face(sue_str)
 
     # WHEN
@@ -220,6 +233,8 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
     assert x_dict.get(owner_name_str()) == bob_str
     assert x_dict.get(face_name_str()) is not None
     assert x_dict.get(face_name_str()) == sue_str
+    assert x_dict.get("event_int") is not None
+    assert x_dict.get("event_int") == accord45_e5_int
 
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
@@ -259,19 +274,121 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_delta_start():
     )
 
     # WHEN
-    x_dict = bob_giftunit.get_step_dict()
+    step_dict = bob_giftunit.get_step_dict()
 
     # THEN
     delta_str = "delta"
-    assert x_dict.get(delta_str) is not None
-    assert x_dict.get(delta_str) == sue_deltaunit.get_ordered_atomunits(x_delta_start)
-    sue_atomunits_dict = x_dict.get(delta_str)
+    assert step_dict.get(delta_str) is not None
+    assert step_dict.get(delta_str) == sue_deltaunit.get_ordered_atomunits(
+        x_delta_start
+    )
+    sue_atomunits_dict = step_dict.get(delta_str)
     print(f"{len(sue_deltaunit.get_sorted_atomunits())=}")
     print(f"{sue_atomunits_dict.keys()=}")
     # print(f"{sue_atomunits_dict.get(0)=}")
     assert sue_atomunits_dict.get(x_delta_start + 2) is None
     assert sue_atomunits_dict.get(x_delta_start + 0) is not None
     assert sue_atomunits_dict.get(x_delta_start + 1) is not None
+
+
+def test_GiftUnit_get_serializable_dict_ReturnsCorrectObj_Simple():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    accord45_str = "accord45"
+    accord45_e5_int = 5
+    bob_giftunit = giftunit_shop(
+        fiscal_title=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
+    )
+    bob_giftunit.set_face(sue_str)
+
+    # WHEN
+    total_dict = bob_giftunit.get_serializable_dict()
+
+    # THEN
+    assert total_dict.get(fiscal_title_str()) is not None
+    assert total_dict.get(fiscal_title_str()) == accord45_str
+    assert total_dict.get(owner_name_str()) is not None
+    assert total_dict.get(owner_name_str()) == bob_str
+    assert total_dict.get(face_name_str()) is not None
+    assert total_dict.get(face_name_str()) == sue_str
+    assert total_dict.get("event_int") is not None
+    assert total_dict.get("event_int") == accord45_e5_int
+    delta_str = "delta"
+    assert total_dict.get(delta_str) == {}
+
+
+def test_GiftUnit_get_serializable_dict_ReturnsObj_WithDeltaUnitPopulated():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_deltaunit = get_deltaunit_sue_example()
+    bob_giftunit = giftunit_shop(bob_str, _deltaunit=sue_deltaunit)
+
+    # WHEN
+    total_dict = bob_giftunit.get_serializable_dict()
+
+    # THEN
+    print(f"{total_dict=}")
+    delta_str = "delta"
+    assert total_dict.get(delta_str) is not None
+    assert total_dict.get(delta_str) == sue_deltaunit.get_ordered_dict()
+
+
+def test_GiftUnit_get_json_ReturnsObj_WithDeltaUnitPopulated():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_deltaunit = get_deltaunit_sue_example()
+    bob_giftunit = giftunit_shop(bob_str, _deltaunit=sue_deltaunit)
+
+    # WHEN
+    generated_json = bob_giftunit.get_json()
+
+    # THEN
+    assert generated_json
+    print(f"{generated_json=}")
+    expected_json = """{
+  "delta": {
+    "0": {
+      "crud": "DELETE",
+      "dimen": "bud_acctunit",
+      "jkeys": {
+        "acct_name": "Sue"
+      },
+      "jvalues": {}
+    },
+    "1": {
+      "crud": "UPDATE",
+      "dimen": "budunit",
+      "jkeys": {},
+      "jvalues": {
+        "credor_respect": 77
+      }
+    }
+  },
+  "event_int": null,
+  "face_name": null,
+  "fiscal_title": "ZZ",
+  "owner_name": "Bob"
+}"""
+    assert generated_json == expected_json
+
+
+def test_get_giftunit_from_json_ReturnsObj_WithDeltaUnitPopulated():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_deltaunit = get_deltaunit_sue_example()
+    bob_giftunit = giftunit_shop(bob_str, _deltaunit=sue_deltaunit, event_int=778)
+
+    # WHEN
+    generated_bob_giftunit = get_giftunit_from_json(bob_giftunit.get_json())
+
+    # THEN
+    assert generated_bob_giftunit
+    assert generated_bob_giftunit.face_name == bob_giftunit.face_name
+    assert generated_bob_giftunit.event_int == bob_giftunit.event_int
+    assert generated_bob_giftunit.fiscal_title == bob_giftunit.fiscal_title
+    assert generated_bob_giftunit._deltaunit == bob_giftunit._deltaunit
+    assert generated_bob_giftunit == bob_giftunit
 
 
 def test_GiftUnit_get_delta_atom_numbers_ReturnsCorrectObj():
@@ -296,12 +413,14 @@ def test_GiftUnit_get_deltametric_dict_ReturnsCorrectObj():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
+    event5_int = 5550
     sue_deltaunit = get_deltaunit_sue_example()
     x_delta_start = 7
     bob_giftunit = giftunit_shop(bob_str)
     bob_giftunit.set_deltaunit(sue_deltaunit)
     bob_giftunit.set_delta_start(x_delta_start)
     bob_giftunit.set_face(yao_str)
+    bob_giftunit.event_int = event5_int
 
     # WHEN
     x_dict = bob_giftunit.get_deltametric_dict()
@@ -309,9 +428,10 @@ def test_GiftUnit_get_deltametric_dict_ReturnsCorrectObj():
     # THEN
     assert x_dict.get(owner_name_str()) is not None
     assert x_dict.get(owner_name_str()) == bob_str
-
     assert x_dict.get(face_name_str()) is not None
     assert x_dict.get(face_name_str()) == yao_str
+    assert x_dict.get("event_int") is not None
+    assert x_dict.get("event_int") == event5_int
 
     delta_atom_numbers_str = "delta_atom_numbers"
     assert x_dict.get(delta_atom_numbers_str) is not None

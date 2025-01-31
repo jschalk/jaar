@@ -23,6 +23,7 @@ from src.f04_gift.atom import (
     atom_update,
     jvalues_different,
     sift_atomunit,
+    get_from_dict as get_atomunit_from_dict,
 )
 from dataclasses import dataclass
 from copy import deepcopy as copy_deepcopy
@@ -105,8 +106,8 @@ class DeltaUnit:
         self,
         dimen: str,
         crud_str: str,
-        jkeys: str = None,
-        jvalues: str = None,
+        jkeys: dict[str, str] = None,
+        jvalues: dict[str, str] = None,
     ):
         x_atomunit = atomunit_shop(
             dimen=dimen,
@@ -832,7 +833,6 @@ def deltaunit_shop(atomunits: dict[str, AtomUnit] = None) -> DeltaUnit:
 def bud_built_from_delta_is_valid(x_delta: DeltaUnit, x_bud: BudUnit = None) -> bool:
     x_bud = budunit_shop() if x_bud is None else x_bud
     x_bud = x_delta.get_edited_bud(x_bud)
-    print(f"{x_bud=}")
     try:
         x_bud.settle_bud()
     except Exception:
@@ -857,3 +857,10 @@ def sift_deltaunit(x_deltaunit: DeltaUnit, x_bud: BudUnit) -> DeltaUnit:
         if sifted_atom != None:
             new_deltaunit.set_atomunit(sifted_atom)
     return new_deltaunit
+
+
+def get_deltaunit_from_ordered_dict(x_dict: dict) -> DeltaUnit:
+    x_deltaunit = deltaunit_shop()
+    for x_atom_dict in x_dict.values():
+        x_deltaunit.set_atomunit(get_atomunit_from_dict(x_atom_dict))
+    return x_deltaunit

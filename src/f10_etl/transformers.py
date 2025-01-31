@@ -1,4 +1,5 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
+from src.f00_instrument.csv_toolbox import open_csv_with_types
 from src.f00_instrument.db_toolbox import (
     db_table_exists,
     get_row_count,
@@ -6,6 +7,9 @@ from src.f00_instrument.db_toolbox import (
     save_to_split_csvs,
 )
 from src.f01_road.road import FaceName, EventInt
+from src.f04_gift.atom import atomunit_shop
+from src.f04_gift.atom_config import get_bud_dimens
+from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
 from src.f07_fiscal.fiscal_config import get_fiscal_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -14,6 +18,7 @@ from src.f09_idea.idea_config import (
     get_idea_format_filename,
     get_idea_dimen_ref,
     get_idea_config_dict,
+    get_idea_sqlite_types,
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.idea_db_tool import (
@@ -870,3 +875,46 @@ def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
         dimen_df = open_csv(fiscal_mstr_dir, f"{ficsal_dimen}_agg.csv")
         upsert_sheet(x_excel_path, "agg", dimen_df)
     create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)
+
+
+def etl_event_bud_csvs_to_gift_json(fiscal_mstr_dir: str):
+    for fiscal_title in get_level1_dirs(fiscal_mstr_dir):
+        fiscal_path = create_path(fiscal_mstr_dir, fiscal_title)
+        for event_int in get_level1_dirs(fiscal_path):
+            event_path = create_path(fiscal_path, event_int)
+            for owner_name in get_level1_dirs(event_path):
+                owner_path = create_path(event_path, owner_name)
+                owner_gift = giftunit_shop(
+                    owner_name=owner_name,
+                    face_name=None,
+                    fiscal_title=fiscal_title,
+                    event_int=event_int,
+                )
+                add_atomunits_from_csv(owner_gift, owner_path)
+                save_file(owner_path, "gift.json", owner_gift.get_json())
+
+
+def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
+    idea_sqlite_types = get_idea_sqlite_types()
+    for bud_dimen in get_bud_dimens():
+        bud_dimen_put_csv = f"{bud_dimen}_put_agg.csv"
+        bud_dimen_del_csv = f"{bud_dimen}_del_agg.csv"
+        put_path = create_path(owner_path, bud_dimen_put_csv)
+        del_path = create_path(owner_path, bud_dimen_del_csv)
+        if os_path_exists(put_path):
+            put_rows = open_csv_with_types(put_path, idea_sqlite_types)
+            headers = put_rows.pop(0)
+            for put_row in put_rows:
+                x_atom = atomunit_shop(bud_dimen, "INSERT")
+                for col_name, row_value in zip(headers, put_row):
+                    if col_name not in {
+                        "face_name",
+                        "event_int",
+                        "fiscal_title",
+                        "owner_name",
+                    }:
+                        x_atom.set_arg(col_name, row_value)
+                owner_gift._deltaunit.set_atomunit(x_atom)
+
+        if os_path_exists(del_path):
+            del_rows = open_csv_with_types(del_path)

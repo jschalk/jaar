@@ -1,7 +1,7 @@
 from csv import reader as csv_reader
 
 
-def read_csv_with_types(csv_path, column_types):
+def open_csv_with_types(csv_path, column_types):
     """
     Reads a CSV file and returns a list of tuples where each value is converted
     based on the provided column type dictionary.
@@ -14,17 +14,23 @@ def read_csv_with_types(csv_path, column_types):
         reader = csv_reader(csv_file)
         headers = next(reader)  # Read the header row
 
-        result = []
+        result = [tuple(headers)]
         for row in reader:
             typed_list = []
             for header, value in zip(headers, row):
                 try:
                     if column_types[header] == "INTEGER":
-                        typed_list.append(int(value))
+                        if value == "":
+                            typed_list.append(None)
+                        else:
+                            typed_list.append(int(value))
                     elif column_types[header] == "TEXT":
                         typed_list.append(str(value))
                     elif column_types[header] == "REAL":
-                        typed_list.append(float(value))
+                        if value == "":
+                            typed_list.append(None)
+                        else:
+                            typed_list.append(float(value))
                     elif column_types[header] == "BOOLEAN":
                         if value.lower() == "true":
                             typed_list.append(True)

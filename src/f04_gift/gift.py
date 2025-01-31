@@ -8,7 +8,11 @@ from src.f01_road.road import (
     get_default_fiscal_title,
 )
 from src.f04_gift.atom import AtomUnit, get_from_json as atomunit_get_from_json
-from src.f04_gift.delta import DeltaUnit, deltaunit_shop
+from src.f04_gift.delta import (
+    DeltaUnit,
+    deltaunit_shop,
+    get_deltaunit_from_ordered_dict,
+)
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
 
@@ -23,6 +27,7 @@ class GiftUnit:
     _delta_start: int = None
     _gifts_dir: str = None
     _atoms_dir: str = None
+    event_int: int = None
 
     def set_face(self, x_face_name: FaceName):
         self.face_name = x_face_name
@@ -47,8 +52,17 @@ class GiftUnit:
             "face_name": self.face_name,
             "fiscal_title": self.fiscal_title,
             "owner_name": self.owner_name,
+            "event_int": self.event_int,
             "delta": self._deltaunit.get_ordered_atomunits(self._delta_start),
         }
+
+    def get_serializable_dict(self) -> dict[str, dict]:
+        total_dict = self.get_step_dict()
+        total_dict["delta"] = self._deltaunit.get_ordered_dict()
+        return total_dict
+
+    def get_json(self) -> str:
+        return get_json_from_dict(self.get_serializable_dict())
 
     def get_delta_atom_numbers(self, giftunit_dict: list[str]) -> int:
         delta_dict = giftunit_dict.get("delta")
@@ -59,6 +73,7 @@ class GiftUnit:
         return {
             "owner_name": x_dict.get("owner_name"),
             "face_name": x_dict.get("face_name"),
+            "event_int": x_dict.get("event_int"),
             "delta_atom_numbers": self.get_delta_atom_numbers(x_dict),
         }
 
@@ -115,7 +130,8 @@ def giftunit_shop(
     _delta_start: int = None,
     _gifts_dir: str = None,
     _atoms_dir: str = None,
-):
+    event_int: int = None,
+) -> GiftUnit:
     _deltaunit = deltaunit_shop() if _deltaunit is None else _deltaunit
     fiscal_title = get_default_fiscal_title() if fiscal_title is None else fiscal_title
     x_giftunit = GiftUnit(
@@ -126,6 +142,7 @@ def giftunit_shop(
         _deltaunit=_deltaunit,
         _gifts_dir=_gifts_dir,
         _atoms_dir=_atoms_dir,
+        event_int=event_int,
     )
     x_giftunit.set_delta_start(_delta_start)
     return x_giftunit
@@ -150,4 +167,23 @@ def create_giftunit_from_files(
         _atoms_dir=atoms_dir,
     )
     x_giftunit._create_deltaunit_from_atom_files(delta_atom_numbers_list)
+    return x_giftunit
+
+
+def get_giftunit_from_json(x_json: str) -> GiftUnit:
+    gift_dict = get_dict_from_json(x_json)
+    if gift_dict.get("event_int") is None:
+        x_event_int = None
+    else:
+        x_event_int = int(gift_dict.get("event_int"))
+    x_giftunit = giftunit_shop(
+        face_name=gift_dict.get("face_name"),
+        owner_name=gift_dict.get("owner_name"),
+        fiscal_title=gift_dict.get("fiscal_title"),
+        _gift_id=gift_dict.get("gift_id"),
+        _atoms_dir=gift_dict.get("atoms_dir"),
+        event_int=x_event_int,
+    )
+    x_deltaunit = get_deltaunit_from_ordered_dict(gift_dict.get("delta"))
+    x_giftunit.set_deltaunit(x_deltaunit)
     return x_giftunit
