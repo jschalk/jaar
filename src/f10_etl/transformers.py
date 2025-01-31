@@ -917,4 +917,16 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
                 owner_gift._deltaunit.set_atomunit(x_atom)
 
         if os_path_exists(del_path):
-            del_rows = open_csv_with_types(del_path)
+            del_rows = open_csv_with_types(del_path, idea_sqlite_types)
+            headers = del_rows.pop(0)
+            for del_row in del_rows:
+                x_atom = atomunit_shop(bud_dimen, "DELETE")
+                for col_name, row_value in zip(headers, del_row):
+                    if col_name not in {
+                        "face_name",
+                        "event_int",
+                        "fiscal_title",
+                        "owner_name",
+                    }:
+                        x_atom.set_arg(col_name, row_value)
+                owner_gift._deltaunit.set_atomunit(x_atom)
