@@ -22,8 +22,8 @@ def test_save_to_split_csvs_CreatesFiles():
             f"""CREATE TABLE {x_tablename} (hair INTEGER,user TEXT,y_int INTEGER)"""
         )
         cursor.execute(
-            f"""INSERT INTO {x_tablename} (hair, user, y_int) 
-VALUES 
+            f"""INSERT INTO {x_tablename} (hair, user, y_int)
+VALUES
 (1, "A", 100),
 (2, "A", 200),
 (3, "B", 300),
@@ -83,7 +83,6 @@ VALUES
         assert C4_csv[2] == expected_C4_1_row
 
 
-# TODO get this version of the test working
 # def test_save_to_split_csvs_CreatesFiles():
 #     # sourcery skip: extract-method
 #     # ESTABLISH
@@ -125,6 +124,10 @@ VALUES
 #         A2_path = create_path(A2_dir, f"{x_tablename}.csv")
 #         B3_path = create_path(B3_dir, f"{x_tablename}.csv")
 #         C4_path = create_path(C4_dir, f"{x_tablename}.csv")
+#         print(f"{A1_path=}")
+#         print(f"{A2_path=}")
+#         print(f"{B3_path=}")
+#         print(f"{C4_path=}")
 #         assert os_path_exists(A1_path) is False
 #         assert os_path_exists(A2_path) is False
 #         assert os_path_exists(B3_path) is False
@@ -162,5 +165,3 @@ VALUES
 #         assert B3_csv[1] == expected_B3_row
 #         assert C4_csv[1] == expected_C4_0_row
 #         assert C4_csv[2] == expected_C4_1_row
-
-#     assert 1 == 2

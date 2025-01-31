@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from contextlib import contextmanager
 from csv import reader as csv_reader, writer as csv_writer
 from os.path import join as os_path_join
+from copy import copy as copy_copy
 
 
 def sqlite_null(x_obj: any):
@@ -456,7 +457,7 @@ def save_to_split_csvs(
 
     # Write collectioned rows to separate CSV files
     for key_values, collection in collectioned_rows.items():
-        key_path_part = "/".join(str(value) for value in key_values)
+        key_path_part = get_key_part(key_values, copy_copy(key_columns))
         csv_path = create_path(output_dir, key_path_part)
         set_dir(csv_path)
         output_file = os_path_join(csv_path, f"{tablename}.csv")
@@ -466,3 +467,15 @@ def save_to_split_csvs(
             writer = csv_writer(csv_file)
             writer.writerow(column_names)
             writer.writerows(collection)
+
+
+def get_key_part(key_values: list[str], key_columns: list[str]) -> str:
+    return "/".join(str(value) for value in key_values)
+    # x_key_path = ""
+    # for value in key_values:
+    #     header_name = key_columns.pop()
+    #     if x_key_path == "":
+    #         x_key_path = f"{header_name}s/{value}"
+    #     else:
+    #         x_key_path += f"/{header_name}s/{value}"
+    # return x_key_path
