@@ -17,7 +17,7 @@ from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_put_aggTables(
+def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -110,7 +110,7 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_put_aggTables(
     assert e7_giftunit == expected_e7_gift
 
 
-def test_WorldUnit_event_bud_csvs_to_gift_json_PopulatesBud_del_aggTables(
+def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

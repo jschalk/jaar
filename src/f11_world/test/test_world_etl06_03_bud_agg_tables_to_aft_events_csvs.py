@@ -16,7 +16,7 @@ from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_bud_tables_to_event_bud_csvs_PopulatesBudPutAggTables(
+def test_WorldUnit_bud_tables_to_event_bud_csvs_CreatesFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
