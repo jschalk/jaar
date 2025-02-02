@@ -26,17 +26,17 @@ from src.f04_gift.examples.example_deltas import get_deltaunit_sue_example
 from pytest import raises as pytest_raises
 
 
-def test_get_gifts_folder_ReturnsCorrectObj():
+def test_get_gifts_folder_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_gifts_folder() == "gifts"
 
 
-def test_init_gift_id_ReturnsCorrectObj():
+def test_init_gift_id_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert init_gift_id() == 0
 
 
-def test_get_init_gift_id_if_None_ReturnsCorrectObj():
+def test_get_init_gift_id_if_None_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_init_gift_id_if_None() == init_gift_id()
     assert get_init_gift_id_if_None(None) == init_gift_id()
@@ -59,7 +59,7 @@ def test_GiftUnit_exists():
     assert not x_giftunit.event_int
 
 
-def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
+def test_giftunit_shop_ReturnsObjEstablishWithEmptyArgs():
     # ESTABLISH
     bob_str = "Bob"
 
@@ -78,7 +78,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithEmptyArgs():
     assert not bob_giftunit.event_int
 
 
-def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
+def test_giftunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     # ESTABLISH
     bob_str = "Bob"
     bob_gift_id = 13
@@ -115,7 +115,7 @@ def test_giftunit_shop_ReturnsCorrectObjEstablishWithNonEmptyArgs():
     assert bob_giftunit.event_int == accord45_e5_event_int
 
 
-def test_giftunit_shop_ReturnsCorrectObjEstablishWithSomeArgs_v1():
+def test_giftunit_shop_ReturnsObjEstablishWithSomeArgs_v1():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -188,7 +188,7 @@ def test_GiftUnit_set_delta_start_SetsAttribute():
     assert bob_giftunit._delta_start == x_delta_start
 
 
-def test_GiftUnit_atomunit_exists_ReturnsCorrectObj():
+def test_GiftUnit_atomunit_exists_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     x_deltaunit = deltaunit_shop()
@@ -225,7 +225,7 @@ def test_GiftUnit_del_deltaunit_SetsAttribute():
     assert bob_giftunit._deltaunit == deltaunit_shop()
 
 
-def test_GiftUnit_get_step_dict_ReturnsCorrectObj_Simple():
+def test_GiftUnit_get_step_dict_ReturnsObj_Simple():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -277,7 +277,7 @@ def test_GiftUnit_get_step_dict_ReturnsObj_WithDeltaUnitPopulated():
     assert sue_atomunits_dict.get(1) is not None
 
 
-def test_GiftUnit_get_step_dict_ReturnsCorrectObj_delta_start():
+def test_GiftUnit_get_step_dict_ReturnsObj_delta_start():
     # ESTABLISH
     bob_str = "Bob"
     sue_deltaunit = get_deltaunit_sue_example()
@@ -304,7 +304,7 @@ def test_GiftUnit_get_step_dict_ReturnsCorrectObj_delta_start():
     assert sue_atomunits_dict.get(x_delta_start + 1) is not None
 
 
-def test_GiftUnit_get_serializable_dict_ReturnsCorrectObj_Simple():
+def test_GiftUnit_get_serializable_dict_ReturnsObj_Simple():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -404,7 +404,7 @@ def test_get_giftunit_from_json_ReturnsObj_WithDeltaUnitPopulated():
     assert generated_bob_giftunit == bob_giftunit
 
 
-def test_GiftUnit_get_delta_atom_numbers_ReturnsCorrectObj():
+def test_GiftUnit_get_delta_atom_numbers_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -422,7 +422,7 @@ def test_GiftUnit_get_delta_atom_numbers_ReturnsCorrectObj():
     assert x_delta_atom_numbers == [x_delta_start, x_delta_start + 1]
 
 
-def test_GiftUnit_get_deltametric_dict_ReturnsCorrectObj():
+def test_GiftUnit_get_deltametric_dict_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -456,7 +456,7 @@ def test_GiftUnit_get_deltametric_dict_ReturnsCorrectObj():
     assert x_dict.get(delta_max_str) is None
 
 
-def test_GiftUnit_get_deltametric_json_ReturnsCorrectObj():
+def test_GiftUnit_get_deltametric_json_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -510,7 +510,7 @@ def test_GiftUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
     )
 
 
-def test_GiftUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_acct():
+def test_GiftUnit_get_edited_bud_ReturnsObj_BudUnit_insert_acct():
     # ESTABLISH
     sue_str = "Sue"
     sue_giftunit = giftunit_shop(sue_str)

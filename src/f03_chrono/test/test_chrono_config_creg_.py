@@ -679,7 +679,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert len(sue_bud.itemroot._kids) == 3
 
 
-def test_ItemCore_get_agenda_dict_ReturnsCorrectObj_BugFindAndFix_active_SettingError():  # https://github.com/jschalk/jaar/issues/69
+def test_ItemCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError():  # https://github.com/jschalk/jaar/issues/69
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     add_time_creg_itemunit(sue_bud)

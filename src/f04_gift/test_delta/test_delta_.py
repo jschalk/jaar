@@ -41,7 +41,7 @@ def test_DeltaUnit_exists():
     assert x_deltaunit._bud_build_validated is None
 
 
-def test_deltaunit_shop_ReturnsCorrectObj():
+def test_deltaunit_shop_ReturnsObj():
     # ESTABLISH / WHEN
     ex1_deltaunit = deltaunit_shop()
 
@@ -129,7 +129,7 @@ def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acct_membership_str():
     assert x_deltaunit.atomunit_exists(bob_iowa_atomunit)
 
 
-def test_DeltaUnit_get_atom_ReturnsCorrectObj():
+def test_DeltaUnit_get_atom_ReturnsObj():
     # ESTABLISH
     ex1_deltaunit = deltaunit_shop()
     opt_arg1 = "tally"
@@ -204,7 +204,7 @@ def test_DeltaUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
     )
 
 
-def test_DeltaUnit_get_crud_atomunits_list_ReturnsCorrectObj():
+def test_DeltaUnit_get_crud_atomunits_list_ReturnsObj():
     # ESTABLISH
     ex1_deltaunit = get_deltaunit_example1()
     assert len(ex1_deltaunit.atomunits.get(atom_update()).keys()) == 1
@@ -227,7 +227,7 @@ def test_DeltaUnit_get_crud_atomunits_list_ReturnsCorrectObj():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_DeltaUnit_get_dimen_sorted_atomunits_list_ReturnsCorrectObj():
+def test_DeltaUnit_get_dimen_sorted_atomunits_list_ReturnsObj():
     # ESTABLISH
     ex1_deltaunit = get_deltaunit_example1()
     update_dict = ex1_deltaunit.atomunits.get(atom_update())
@@ -311,7 +311,7 @@ def test_DeltaUnit_get_dimen_sorted_atomunits_list_ReturnsCorrectObj():
 #     assert x_atomunit == ex1_deltaunit.atomunits.get(atom_update()).get(x_attribute)
 
 
-def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj():
+def test_DeltaUnit_get_sorted_atomunits_ReturnsObj():
     # ESTABLISH
     ex1_deltaunit = get_deltaunit_example1()
     update_dict = ex1_deltaunit.atomunits.get(atom_update())
@@ -341,7 +341,7 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
+def test_DeltaUnit_get_sorted_atomunits_ReturnsObj_ItemUnitsSorted():
     # ESTABLISH
     x_fiscal_title = root_title()
     sports_str = "sports"
@@ -374,7 +374,7 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_ItemUnitsSorted():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
+def test_DeltaUnit_get_sorted_atomunits_ReturnsObj_Road_Sorted():
     # ESTABLISH
     x_fiscal_title = root_title()
     sports_str = "sports"
@@ -410,7 +410,7 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsCorrectObj_Road_Sorted():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scenario1():
+def test_bud_built_from_delta_is_valid_ReturnsObjEstablishWithNoBud_scenario1():
     # ESTABLISH
     sue_deltaunit = deltaunit_shop()
 
@@ -431,7 +431,7 @@ def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scena
     assert bud_built_from_delta_is_valid(sue_deltaunit) is False
 
 
-def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scenario2():
+def test_bud_built_from_delta_is_valid_ReturnsObjEstablishWithNoBud_scenario2():
     sue_deltaunit = deltaunit_shop()
     dimen = bud_acctunit_str()
     # WHEN
@@ -455,7 +455,7 @@ def test_bud_built_from_delta_is_valid_ReturnsCorrectObjEstablishWithNoBud_scena
     assert bud_built_from_delta_is_valid(sue_deltaunit) is False
 
 
-def test_DeltaUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStartingNumber():
+def test_DeltaUnit_get_ordered_atomunits_ReturnsObj_EstablishWithNoStartingNumber():
     # ESTABLISH
     sue_deltaunit = deltaunit_shop()
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
@@ -494,7 +494,7 @@ def test_DeltaUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithNoStarti
     assert deltaunit_dict.get(2) == pool_atomunit
 
 
-def test_DeltaUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStartingNumber():
+def test_DeltaUnit_get_ordered_atomunits_ReturnsObj_EstablishWithStartingNumber():
     # ESTABLISH
     sue_deltaunit = deltaunit_shop()
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
@@ -533,7 +533,7 @@ def test_DeltaUnit_get_ordered_atomunits_ReturnsCorrectObj_EstablishWithStarting
     assert deltaunit_dict.get(7) == pool_atomunit
 
 
-def test_DeltaUnit_get_ordered_dict_ReturnsCorrectObj_EstablishWithStartingNumber():
+def test_DeltaUnit_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber():
     # ESTABLISH
     sue_deltaunit = deltaunit_shop()
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
@@ -610,7 +610,7 @@ def test_get_deltaunit_from_ordered_dict_ReturnsObj():
     assert generated_deltaunit == expected_deltaunit
 
 
-def test_DeltaUnit_get_json_ReturnsCorrectObj():
+def test_DeltaUnit_get_json_ReturnsObj():
     # ESTABLISH
     sue_deltaunit = deltaunit_shop()
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
@@ -637,7 +637,7 @@ def test_DeltaUnit_get_json_ReturnsCorrectObj():
     assert x_is_json(deltaunit_json)
 
 
-def test_DeltaUnit_atomunit_exists_ReturnsCorrectObj():
+def test_DeltaUnit_atomunit_exists_ReturnsObj():
     # ESTABLISH
     x_deltaunit = deltaunit_shop()
 

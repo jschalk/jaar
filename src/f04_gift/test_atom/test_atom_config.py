@@ -429,7 +429,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_bud_item_reason_premiseunit():
     assert x_sorted_jkey_keys == [road_str(), base_str(), "need"]
 
 
-def test_get_flattened_atom_table_build_ReturnsCorrectObj():
+def test_get_flattened_atom_table_build_ReturnsObj():
     # ESTABLISH / WHEN
     atom_columns = get_flattened_atom_table_build()
 
@@ -439,7 +439,7 @@ def test_get_flattened_atom_table_build_ReturnsCorrectObj():
     # print(f"{atom_columns.keys()=}")
 
 
-def test_get_normalized_bud_table_build_ReturnsCorrectObj():
+def test_get_normalized_bud_table_build_ReturnsObj():
     # ESTABLISH / WHEN
     normalized_bud_table_build = get_normalized_bud_table_build()
     nx = normalized_bud_table_build

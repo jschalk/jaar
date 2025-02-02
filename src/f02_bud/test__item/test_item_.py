@@ -125,7 +125,7 @@ def test_itemunit_shop_Allows_doesNotAllow_massToBeNegative():
     assert x_itemunit.mass == zero_int
 
 
-def test_itemunit_shop_NonNoneParametersReturnsCorrectObj():
+def test_itemunit_shop_NonNoneParametersReturnsObj():
     # ESTABLISH
     x_healerlink = healerlink_shop({"Sue", "Yao"})
     x_problem_bool = True
@@ -180,7 +180,7 @@ def test_itemunit_shop_ReturnsObjWithParameters():
     assert sport_item.stop_want == sport_stop_want
 
 
-def test_ItemUnit_get_obj_key_ReturnsCorrectObj():
+def test_ItemUnit_get_obj_key_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
     round_road = create_road(root_title(), round_str)
@@ -193,7 +193,7 @@ def test_ItemUnit_get_obj_key_ReturnsCorrectObj():
     assert ball_item.get_obj_key() == ball_str
 
 
-def test_ItemUnit_get_road_ReturnsCorrectObj():
+def test_ItemUnit_get_road_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"

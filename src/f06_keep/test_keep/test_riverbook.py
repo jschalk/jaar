@@ -18,7 +18,7 @@ def test_RiverBook_Exists():
     assert x_riverbook._rivergrants is None
 
 
-def test_riverbook_shop_ReturnsCorrectObj():
+def test_riverbook_shop_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(None, None, yao_str)
@@ -33,7 +33,7 @@ def test_riverbook_shop_ReturnsCorrectObj():
     assert bob_riverbook._rivergrants == {}
 
 
-def test_create_riverbook_ReturnsCorrectObj():
+def test_create_riverbook_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"

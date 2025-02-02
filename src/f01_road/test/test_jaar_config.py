@@ -18,7 +18,7 @@ def test_voice_str():
     assert voice_str() == "voice"
 
 
-def test_get_rootpart_of_keep_dir_ReturnsCorrectObj():
+def test_get_rootpart_of_keep_dir_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_rootpart_of_keep_dir() == "itemroot"
 

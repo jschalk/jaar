@@ -8,7 +8,7 @@ from src.f05_listen.basis_buds import (
 )
 
 
-def test_create_empty_bud_ReturnsCorrectObj():
+def test_create_empty_bud_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     slash_str = "/"
@@ -53,7 +53,7 @@ def test_create_empty_bud_ReturnsCorrectObj():
     assert yao_empty_job.accts == {}
 
 
-def test_create_listen_basis_ReturnsCorrectObj():
+def test_create_listen_basis_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     slash_str = "/"
@@ -101,7 +101,7 @@ def test_create_listen_basis_ReturnsCorrectObj():
     assert job_zia_acctunit._inallocable_debtit_belief == 0
 
 
-def test_get_default_voice_bud_ReturnsCorrectObj():
+def test_get_default_voice_bud_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     blue_str = "blue"

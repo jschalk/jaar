@@ -139,7 +139,7 @@ def test_ItemUnit_awardheir_exists_ReturnsObj():
     assert sport_itemunit.awardheir_exists()
 
 
-def test_ItemUnit_set_awardheirs_fund_give_fund_take_ReturnsCorrectObj_NoValues():
+def test_ItemUnit_set_awardheirs_fund_give_fund_take_ReturnsObj_NoValues():
     # ESTABLISH /WHEN
     sport_str = "sport"
     sport_item = itemunit_shop(sport_str)
@@ -260,7 +260,7 @@ def test_ItemUnit_set_reasonunit_SetsAttr():
     assert x_reasonunit.base == dirty_str
 
 
-def test_ItemUnit_reasonunit_exists_ReturnsCorrectObj():
+def test_ItemUnit_reasonunit_exists_ReturnsObj():
     # ESTABLISH
     clean_str = "clean"
     clean_item = itemunit_shop(clean_str)
@@ -274,7 +274,7 @@ def test_ItemUnit_reasonunit_exists_ReturnsCorrectObj():
     assert clean_item.reasonunit_exists(dirty_str)
 
 
-def test_ItemUnit_get_reasonunit_ReturnsCorrectObj():
+def test_ItemUnit_get_reasonunit_ReturnsObj():
     # ESTABLISH
     clean_str = "clean"
     clean_item = itemunit_shop(clean_str)
@@ -289,7 +289,7 @@ def test_ItemUnit_get_reasonunit_ReturnsCorrectObj():
     assert x_reasonunit.base == dirty_str
 
 
-def test_ItemUnit_get_reasonheir_ReturnsCorrectObj():
+def test_ItemUnit_get_reasonheir_ReturnsObj():
     # ESTABLISH
     clean_str = "clean"
     clean_item = itemunit_shop(clean_str)
@@ -361,7 +361,7 @@ def test_ItemUnit_set_factunit_SetsAttr():
     assert clean_item.factunits.get(dirty_str)
 
 
-def test_ItemUnit_factunit_exists_ReturnsCorrectObj():
+def test_ItemUnit_factunit_exists_ReturnsObj():
     # ESTABLISH
     clean_str = "clean"
     clean_item = itemunit_shop(clean_str)

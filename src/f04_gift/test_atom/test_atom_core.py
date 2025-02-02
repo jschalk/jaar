@@ -27,7 +27,7 @@ def test_AtomUnit_exists():
     assert x_atomunit.atom_order is None
 
 
-def test_atomunit_shop_ReturnsCorrectObj():
+def test_atomunit_shop_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_credit_belief = 55
@@ -84,7 +84,7 @@ def test_AtomUnit_set_jvalue_CorrectlySetsAttr():
     assert acctunit_atomunit.jvalues == {acct_name_str(): bob_str}
 
 
-def test_AtomUnit_get_value_ReturnsCorrectObj():
+def test_AtomUnit_get_value_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     acctunit_str = bud_acctunit_str()

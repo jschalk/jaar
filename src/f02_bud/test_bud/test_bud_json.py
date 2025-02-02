@@ -285,7 +285,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     assert len(yao_bud.accts) == 22
 
 
-def test_budunit_get_from_json_ReturnsCorrectObjSimpleExample():
+def test_budunit_get_from_json_ReturnsObjSimpleExample():
     # ESTABLISH
     zia_bud = get_budunit_x1_3levels_1reason_1facts()
     zia_bud.set_max_tree_traverse(23)
@@ -438,7 +438,7 @@ def test_budunit_get_from_json_ReturnsCorrectItemRoot():
     assert json_itemroot.stop_want == zia_stop_want
 
 
-def test_budunit_get_from_json_ReturnsCorrectObj_bridge_Example():
+def test_budunit_get_from_json_ReturnsObj_bridge_Example():
     # ESTABLISH
     slash_bridge = "/"
     before_bob_bud = budunit_shop("Bob", bridge=slash_bridge)
@@ -454,7 +454,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_bridge_Example():
     assert after_bob_bud.bridge == before_bob_bud.bridge
 
 
-def test_budunit_get_from_json_ReturnsCorrectObj_bridge_AcctExample():
+def test_budunit_get_from_json_ReturnsObj_bridge_AcctExample():
     # ESTABLISH
     slash_bridge = "/"
     before_bob_bud = budunit_shop("Bob", bridge=slash_bridge)
@@ -471,7 +471,7 @@ def test_budunit_get_from_json_ReturnsCorrectObj_bridge_AcctExample():
     assert after_bob_acctunit._bridge == slash_bridge
 
 
-def test_budunit_get_from_json_ReturnsCorrectObj_bridge_GroupExample():
+def test_budunit_get_from_json_ReturnsObj_bridge_GroupExample():
     # ESTABLISH
     slash_bridge = "/"
     before_bob_bud = budunit_shop("Bob", bridge=slash_bridge)

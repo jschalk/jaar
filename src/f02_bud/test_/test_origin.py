@@ -14,7 +14,7 @@ def test_OriginHold_exists():
     assert originhold_x.importance == bob_importance
 
 
-def test_originhold_shop_ReturnsCorrectObj():
+def test_originhold_shop_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_importance = 4
@@ -62,7 +62,7 @@ def test_OriginUnit_exists():
     assert originunit_x._originholds is None
 
 
-def test_originunit_ReturnsCorrectObj():
+def test_originunit_ReturnsObj():
     # ESTABLISH / WHEN
     originunit_x = originunit_shop()
 

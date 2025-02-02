@@ -54,7 +54,7 @@ def test_MemberShip_exists():
     assert swim_membership._acct_name is None
 
 
-def test_membership_shop_ReturnsCorrectObj():
+def test_membership_shop_ReturnsObj():
     # ESTABLISH
     swim_str = ",swim"
     swim_credit_vote = 3.0
@@ -81,7 +81,7 @@ def test_membership_shop_ReturnsCorrectObj():
     assert swim_membership._acct_name is None
 
 
-def test_membership_shop_ReturnsCorrectObjAttr_acct_name():
+def test_membership_shop_ReturnsObjAttr_acct_name():
     # ESTABLISH
     swim_str = ",swim"
     yao_str = "Yao"
@@ -293,7 +293,7 @@ def test_AwardLink_exists():
     assert bikers_awardlink.take_force == 1.0
 
 
-def test_awardlink_shop_ReturnsCorrectObj():
+def test_awardlink_shop_ReturnsObj():
     # ESTABLISH
     bikers_str = "bikers"
     bikers_give_force = 3.0
@@ -367,7 +367,7 @@ def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     }
 
 
-def test_awardlinks_get_from_JSON_ReturnsCorrectObj_SimpleExample():
+def test_awardlinks_get_from_JSON_ReturnsObj_SimpleExample():
     # ESTABLISH
     teacher_str = "teachers"
     teacher_awardlink = awardlink_shop(
@@ -410,7 +410,7 @@ def test_AwardLine_exists():
     assert bikers_awardline._fund_take == bikers_fund_take
 
 
-def test_awardline_shop_ReturnsCorrectObj_exists():
+def test_awardline_shop_ReturnsObj_exists():
     # ESTABLISH
     bikers_str = "bikers"
     bikers_str = bikers_str

@@ -158,7 +158,7 @@ def test_get_idea_format_headers_ReturnsObj():
     assert set(x_headers.values()) == get_idea_format_filenames()
 
 
-def test__generate_idea_dataframe_ReturnsCorrectObj():
+def test__generate_idea_dataframe_ReturnsObj():
     # ESTABLISH
     empty_d2 = []
     # WHEN
@@ -180,7 +180,7 @@ def for_all_ideas__generate_idea_dataframe():
     return True
 
 
-def test__generate_idea_dataframe_ReturnsCorrectObjForEvery_idea():
+def test__generate_idea_dataframe_ReturnsObjForEvery_idea():
     # ESTABLISH / WHEN / THEN
     assert for_all_ideas__generate_idea_dataframe()
 

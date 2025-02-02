@@ -49,7 +49,7 @@ def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     assert two_file_json == sports_atom.get_json()
 
 
-def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_GiftUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
     x_owners_dir = f_path(x_fiscal_dir, "owners")
@@ -76,7 +76,7 @@ def test_GiftUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
     assert sue_giftunit.atom_file_exists(two_int)
 
 
-def test_GiftUnit_open_atom_file_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_GiftUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
     x_owners_dir = f_path(x_fiscal_dir, "owners")
@@ -140,7 +140,7 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     print(f"{gift_file_dict.keys()=}")
 
 
-def test_GiftUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_GiftUnit_gift_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
     x_owners_dir = f_path(x_fiscal_dir, "owners")
@@ -236,7 +236,7 @@ def test_GiftUnit_create_deltaunit_from_atom_files_SetsAttr(env_dir_setup_cleanu
     assert sue_giftunit._deltaunit == static_deltaunit
 
 
-def test_create_giftunit_from_files_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_create_giftunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
     x_owners_dir = f_path(x_fiscal_dir, "owners")

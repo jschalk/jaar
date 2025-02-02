@@ -235,7 +235,7 @@ def test_road_get_root_title_from_road_ReturnsTitleUnit():
     assert get_root_title_from_road(roses_road) == casa_str
 
 
-def test_road_get_parent_road_ReturnsCorrectObj_Scenario0():
+def test_road_get_parent_road_ReturnsObj_Scenario0():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
@@ -252,7 +252,7 @@ def test_road_get_parent_road_ReturnsCorrectObj_Scenario0():
     assert get_parent_road(roses_road, x_s) == bloomers_road
 
 
-def test_road_get_parent_road_ReturnsCorrectObj_Scenario1():
+def test_road_get_parent_road_ReturnsObj_Scenario1():
     # ESTABLISH
     x_s = "/"
     casa_str = "casa"
@@ -269,7 +269,7 @@ def test_road_get_parent_road_ReturnsCorrectObj_Scenario1():
     assert get_parent_road(roses_road, x_s) == bloomers_road
 
 
-def test_road_create_road_without_root_title_ReturnsCorrectObj():
+def test_road_create_road_without_root_title_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
@@ -384,11 +384,11 @@ def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     assert x_roads == texas_forefather_roads
 
 
-def test_road_get_default_fiscal_title_ReturnsCorrectObj():
+def test_road_get_default_fiscal_title_ReturnsObj():
     assert root_title() == "ZZ"
 
 
-def test_road_create_road_from_titles_ReturnsCorrectObj():
+def test_road_create_road_from_titles_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
     root_list = get_all_road_titles(root_title())
@@ -409,7 +409,7 @@ def test_road_create_road_from_titles_ReturnsCorrectObj():
     assert roses_road == create_road_from_titles(roses_list)
 
 
-def test_road_create_road_ReturnsCorrectObj():
+def test_road_create_road_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
@@ -440,7 +440,7 @@ def test_is_titleunit_ReturnsObj():
     assert is_titleunit(RoadUnit("ZZ"), x_s)
 
 
-def test_get_diff_road_ReturnsCorrectObj():
+def test_get_diff_road_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
@@ -582,7 +582,7 @@ def test_validate_titleunit_RaisesErrorWhenTitleUnit():
     )
 
 
-def test_roadunit_valid_dir_path_ReturnsCorrectObj_simple_bridge():
+def test_roadunit_valid_dir_path_ReturnsObj_simple_bridge():
     # ESTABLISH
     comma_str = ","
     # WHEN / THEN
@@ -595,7 +595,7 @@ def test_roadunit_valid_dir_path_ReturnsCorrectObj_simple_bridge():
     ) or platform_system() == "Linux"
 
 
-def test_roadunit_valid_dir_path_ReturnsCorrectObj_complicated_bridge():
+def test_roadunit_valid_dir_path_ReturnsObj_complicated_bridge():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"
@@ -615,7 +615,7 @@ def test_roadunit_valid_dir_path_ReturnsCorrectObj_complicated_bridge():
     ) or platform_system() == "Linux"
 
 
-def test_roadunit_valid_dir_path_ReturnsCorrectObjWhereSlashNotbridgeEdgeCases():
+def test_roadunit_valid_dir_path_ReturnsObjWhereSlashNotbridgeEdgeCases():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"

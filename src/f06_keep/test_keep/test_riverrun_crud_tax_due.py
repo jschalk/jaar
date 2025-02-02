@@ -5,7 +5,7 @@ from src.f06_keep.riverrun import riverrun_shop
 from src.f06_keep.examples.example_credorledgers import example_yao_hubunit
 
 
-def test_get_credorledger_ReturnsCorrectObj():
+def test_get_credorledger_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
@@ -28,7 +28,7 @@ def test_get_credorledger_ReturnsCorrectObj():
     assert yao_credorledger.get(yao_str) == sue_credit_belief
 
 
-def test_get_credorledger_ReturnsCorrectObjWithNoEmpty_credit_belief():
+def test_get_credorledger_ReturnsObjWithNoEmpty_credit_belief():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
@@ -51,7 +51,7 @@ def test_get_credorledger_ReturnsCorrectObjWithNoEmpty_credit_belief():
     assert len(yao_credorledger) == 2
 
 
-def test_get_debtorledger_ReturnsCorrectObj():
+def test_get_debtorledger_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
@@ -74,7 +74,7 @@ def test_get_debtorledger_ReturnsCorrectObj():
     assert yao_debtorledger.get(yao_str) == yao_debtit_belief
 
 
-def test_get_debtorledger_ReturnsCorrectObjWithNoEmpty_debtit_belief():
+def test_get_debtorledger_ReturnsObjWithNoEmpty_debtit_belief():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
@@ -232,7 +232,7 @@ def test_RiverRun_delete_tax_due_SetsAttr():
     assert bob_riverrun.acct_has_tax_due(yao_str) is False
 
 
-def test_RiverRun_get_acct_tax_due_ReturnsCorrectObj():
+def test_RiverRun_get_acct_tax_due_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
