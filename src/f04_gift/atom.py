@@ -731,10 +731,10 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
         x_jvalues = x_atom.get_jvalues_dict()
         update_atom = atomunit_shop(x_dimen, atom_update(), x_atom.jkeys)
         for jvalue in x_jvalues:
-            optional_value = x_atom.get_value(jvalue)
-            obj_value = x_bud_obj.__dict__[jvalue]
-            if obj_value != optional_value:
-                update_atom.set_arg(jvalue, optional_value)
+            optional_jvalue = x_atom.get_value(jvalue)
+            obj_jvalue = x_bud_obj.__dict__[jvalue]
+            if obj_jvalue != optional_jvalue:
+                update_atom.set_arg(jvalue, optional_jvalue)
 
         if update_atom.get_jvalues_dict() != {}:
             return update_atom

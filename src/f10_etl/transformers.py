@@ -14,6 +14,7 @@ from src.f02_bud.bud import (
 )
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
+from src.f04_gift.delta import sift_deltaunit
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
 from src.f07_fiscal.fiscal_config import get_fiscal_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
@@ -65,6 +66,7 @@ from src.f10_etl.pidgin_agg import (
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
 from sqlite3 import Connection as sqlite3_Connection
+from copy import deepcopy as copy_deepcopy
 
 
 class not_given_pidgin_dimen_Exception(Exception):
@@ -943,12 +945,6 @@ def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
         fiscal_path = create_path(fiscal_mstr_dir, fiscal_title)
         for owner_name in get_level1_dirs(fiscal_path):
             owner_path = create_path(fiscal_path, owner_name)
-            # get all event_ints
-            sorted_event_ints = get_level1_dirs(owner_path)
-            # get min of event
-            event_ints_min = min(sorted_event_ints)
-            print(f"{event_ints_min=}")
-
             prev_event_int = None
             for event_int in get_level1_dirs(owner_path):
                 prev_bud = get_prev_event_int_budunit(
@@ -957,8 +953,12 @@ def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
                 event_path = create_path(owner_path, event_int)
                 gift_path = create_path(event_path, "all_gift.json")
                 event_gift = get_giftunit_from_json(open_file(gift_path))
+                sift_delta = sift_deltaunit(event_gift._deltaunit, prev_bud)
                 curr_bud = event_gift.get_edited_bud(prev_bud)
                 save_file(event_path, "bud.json", curr_bud.get_json())
+                expressed_gift = copy_deepcopy(event_gift)
+                expressed_gift.set_deltaunit(sift_delta)
+                save_file(event_path, "expressed_gift.json", expressed_gift.get_json())
                 prev_event_int = event_int
 
 
