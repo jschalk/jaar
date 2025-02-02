@@ -200,6 +200,7 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
 class DealEpisode:
     time_int: TimeLinePoint = None
     quota: FundNum = None
+    search_depth: int = None  # non-negative
     _magnitude: FundNum = None
     _net_deals: dict[AcctName, FundNum] = None
 
@@ -241,13 +242,17 @@ def dealepisode_shop(
     x_quota: FundNum = None,
     net_deals: dict[AcctName, FundNum] = None,
     x_magnitude: FundNum = None,
+    search_depth: int = None,
 ) -> DealEpisode:
     if x_quota is None:
         x_quota = default_fund_pool()
+    if search_depth is None:
+        search_depth = 3
 
     return DealEpisode(
         time_int=x_time_int,
         quota=x_quota,
+        search_depth=search_depth,
         _net_deals=get_empty_dict_if_None(net_deals),
         _magnitude=get_0_if_None(x_magnitude),
     )

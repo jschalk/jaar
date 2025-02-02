@@ -28,6 +28,7 @@ def test_DealEpisode_Exists():
     assert x_dealepisode
     assert not x_dealepisode.time_int
     assert not x_dealepisode.quota
+    assert not x_dealepisode.search_depth
     assert not x_dealepisode._net_deals
     assert not x_dealepisode._magnitude
 
@@ -44,6 +45,7 @@ def test_dealepisode_shop_ReturnsObj():
     assert t4_dealepisode.time_int == t4_time_int
     assert t4_dealepisode.quota == default_fund_pool()
     assert t4_dealepisode._magnitude == 0
+    assert t4_dealepisode.search_depth == 3
     assert not t4_dealepisode._net_deals
 
 
@@ -53,6 +55,7 @@ def test_dealepisode_shop_ReturnsObjWith_net_deals():
     t4_quota = 55
     t4_net_deals = {"Sue": -4}
     t4_magnitude = 677
+    t4_search_depth = 88
 
     # WHEN
     x_dealepisode = dealepisode_shop(
@@ -60,14 +63,17 @@ def test_dealepisode_shop_ReturnsObjWith_net_deals():
         x_quota=t4_quota,
         net_deals=t4_net_deals,
         x_magnitude=t4_magnitude,
+        search_depth=t4_search_depth,
     )
 
     # THEN
     assert x_dealepisode
     assert x_dealepisode.time_int == t4_time_int
     assert x_dealepisode.quota == t4_quota
+    assert x_dealepisode.search_depth == t4_search_depth
     assert x_dealepisode._magnitude == 677
     assert x_dealepisode._net_deals == t4_net_deals
+    assert 1 == 2
 
 
 def test_DealEpisode_set_net_deal_SetsAttr():
