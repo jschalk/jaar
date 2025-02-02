@@ -121,7 +121,7 @@ def test_sift_atom_ReturnsObj_AtomUnit_DELETE_bud_itemunit():
     assert not sift_atomunit(sue_bud, sweep_atom)
 
 
-def test_sift_atom_SetsDeltaUnitAtomUnit_bud_itemunit():
+def test_sift_atom_SetsBudDeltaAtomUnit_bud_itemunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -159,7 +159,7 @@ def test_sift_atom_SetsDeltaUnitAtomUnit_bud_itemunit():
     assert not sift_atomunit(sue_bud, sweep_atom)
 
 
-def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_awardlink():
+def test_sift_atom_SetsBudDeltaAtomUnit_bud_item_awardlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -193,7 +193,7 @@ def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_awardlink():
     assert sift_atomunit(sue_bud, clean_swim_atom)
 
 
-def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_reasonunit():
+def test_sift_atom_SetsBudDeltaAtomUnit_bud_item_reasonunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -228,7 +228,7 @@ def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_reasonunit():
     assert sift_atomunit(sue_bud, clean_week_atom)
 
 
-def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_reason_premiseunit_exists():
+def test_sift_atom_SetsBudDeltaAtomUnit_bud_item_reason_premiseunit_exists():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -272,7 +272,7 @@ def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_reason_premiseunit_exists():
     assert sift_atomunit(sue_bud, clean_week_atom)
 
 
-def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_teamlink():
+def test_sift_atom_SetsBudDeltaAtomUnit_bud_item_teamlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -306,7 +306,7 @@ def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_teamlink():
     assert sift_atomunit(sue_bud, clean_swim_atom)
 
 
-def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_healerlink():
+def test_sift_atom_SetsBudDeltaAtomUnit_bud_item_healerlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -340,7 +340,7 @@ def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_healerlink():
     assert sift_atomunit(sue_bud, clean_swim_atom)
 
 
-def test_sift_atom_SetsDeltaUnitAtomUnit_bud_item_factunit():
+def test_sift_atom_SetsBudDeltaAtomUnit_bud_item_factunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"

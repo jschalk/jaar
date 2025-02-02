@@ -1,18 +1,18 @@
 from src.f02_bud.bud_tool import budunit_str
 from src.f04_gift.atom_config import atom_update
 from src.f04_gift.atom import atomunit_shop
-from src.f04_gift.delta import deltaunit_shop
+from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
 
 
-def test_create_legible_list_ReturnsObjEstablishWithEmptyDeltaUnit():
+def test_create_legible_list_ReturnsObjEstablishWithEmptyBudDelta():
     # ESTABLISH / WHEN
-    x_deltaunit = deltaunit_shop()
+    x_buddelta = buddelta_shop()
     sue_bud = budunit_shop("Sue")
 
     # THEN
-    assert create_legible_list(x_deltaunit, sue_bud) == []
+    assert create_legible_list(x_buddelta, sue_bud) == []
 
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tally():
@@ -22,12 +22,12 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tally():
     tally_int = 55
     tally_atomunit = atomunit_shop(dimen, atom_update())
     tally_atomunit.set_arg(tally_str, tally_int)
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(tally_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(tally_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{sue_bud.owner_name}'s bud tally set to {tally_int}"
@@ -41,12 +41,12 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_deal_time_int():
     deal_time_int_int = 55
     deal_time_int_atomunit = atomunit_shop(dimen, atom_update())
     deal_time_int_atomunit.set_arg(deal_time_int_str, deal_time_int_int)
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(deal_time_int_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(deal_time_int_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{sue_bud.owner_name}'s bud deal_time_int set to {deal_time_int_int}"
@@ -62,12 +62,12 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
     acct_credor_pool_atomunit.set_arg(acct_credor_pool_str, acct_credor_pool_int)
 
     print(f"{acct_credor_pool_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(acct_credor_pool_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(acct_credor_pool_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{sue_bud.owner_name}'s credor pool is now {acct_credor_pool_int}"
@@ -83,12 +83,12 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
     acct_debtor_pool_atomunit.set_arg(acct_debtor_pool_str, acct_debtor_pool_int)
 
     print(f"{acct_debtor_pool_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(acct_debtor_pool_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(acct_debtor_pool_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{sue_bud.owner_name}'s debtor pool is now {acct_debtor_pool_int}"
@@ -97,7 +97,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
 
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equal_debtor_respect():
     # ESTABLISH
-    x_deltaunit = deltaunit_shop()
+    x_buddelta = buddelta_shop()
     dimen = budunit_str()
     acct_credor_pool_str = "credor_respect"
     acct_debtor_pool_str = "debtor_respect"
@@ -105,11 +105,11 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equ
     budunit_atomunit = atomunit_shop(dimen, atom_update())
     budunit_atomunit.set_arg(acct_credor_pool_str, acct_pool_int)
     budunit_atomunit.set_arg(acct_debtor_pool_str, acct_pool_int)
-    x_deltaunit.set_atomunit(budunit_atomunit)
+    x_buddelta.set_atomunit(budunit_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{sue_bud.owner_name}'s total pool is now {acct_pool_int}"
@@ -126,12 +126,12 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_max_tree_traverse(
     max_tree_traverse_atomunit.set_arg(max_tree_traverse_str, max_tree_traverse_int)
 
     print(f"{max_tree_traverse_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(max_tree_traverse_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(max_tree_traverse_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{sue_bud.owner_name}'s maximum number of Bud evaluations set to {max_tree_traverse_int}"

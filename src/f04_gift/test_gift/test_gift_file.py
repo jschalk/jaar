@@ -5,7 +5,7 @@ from src.f01_road.jaar_config import (
     get_test_fiscal_title as fiscal_title,
 )
 from src.f04_gift.atom_config import owner_name_str, face_name_str
-from src.f04_gift.delta import deltaunit_shop
+from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.gift import giftunit_shop, create_giftunit_from_files
 from src.f04_gift.examples.example_atoms import (
     get_atom_example_itemunit_sports,
@@ -188,8 +188,8 @@ def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     int5 = 5
     sports_atom = get_atom_example_itemunit_sports()
     knee_atom = get_atom_example_itemunit_knee()
-    sue_giftunit._deltaunit.set_atomunit(sports_atom)
-    sue_giftunit._deltaunit.set_atomunit(knee_atom)
+    sue_giftunit._buddelta.set_atomunit(sports_atom)
+    sue_giftunit._buddelta.set_atomunit(knee_atom)
     assert sue_giftunit.gift_file_exists() is False
     assert sue_giftunit.atom_file_exists(int4) is False
     assert sue_giftunit.atom_file_exists(int5) is False
@@ -203,7 +203,7 @@ def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     assert sue_giftunit.atom_file_exists(int5)
 
 
-def test_GiftUnit_create_deltaunit_from_atom_files_SetsAttr(env_dir_setup_cleanup):
+def test_GiftUnit_create_buddelta_from_atom_files_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     x_fiscal_dir = f_path(fiscals_dir(), fiscal_title())
     x_owners_dir = f_path(x_fiscal_dir, "owners")
@@ -221,19 +221,19 @@ def test_GiftUnit_create_deltaunit_from_atom_files_SetsAttr(env_dir_setup_cleanu
     sue_giftunit._save_atom_file(int4, spor_atom)
     sue_giftunit._save_atom_file(int5, knee_atom)
     sue_giftunit._save_atom_file(int9, ball_atom)
-    assert sue_giftunit._deltaunit == deltaunit_shop()
+    assert sue_giftunit._buddelta == buddelta_shop()
 
     # WHEN
     atoms_list = [int4, int5, int9]
-    sue_giftunit._create_deltaunit_from_atom_files(atoms_list)
+    sue_giftunit._create_buddelta_from_atom_files(atoms_list)
 
     # THEN
-    static_deltaunit = deltaunit_shop()
-    static_deltaunit.set_atomunit(spor_atom)
-    static_deltaunit.set_atomunit(knee_atom)
-    static_deltaunit.set_atomunit(ball_atom)
-    assert sue_giftunit._deltaunit != deltaunit_shop()
-    assert sue_giftunit._deltaunit == static_deltaunit
+    static_buddelta = buddelta_shop()
+    static_buddelta.set_atomunit(spor_atom)
+    static_buddelta.set_atomunit(knee_atom)
+    static_buddelta.set_atomunit(ball_atom)
+    assert sue_giftunit._buddelta != buddelta_shop()
+    assert sue_giftunit._buddelta == static_buddelta
 
 
 def test_create_giftunit_from_files_ReturnsObj(env_dir_setup_cleanup):
@@ -255,9 +255,9 @@ def test_create_giftunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     sports_atom = get_atom_example_itemunit_sports()
     knee_atom = get_atom_example_itemunit_knee()
     ball_atom = get_atom_example_itemunit_ball()
-    src_sue_giftunit._deltaunit.set_atomunit(sports_atom)
-    src_sue_giftunit._deltaunit.set_atomunit(knee_atom)
-    src_sue_giftunit._deltaunit.set_atomunit(ball_atom)
+    src_sue_giftunit._buddelta.set_atomunit(sports_atom)
+    src_sue_giftunit._buddelta.set_atomunit(knee_atom)
+    src_sue_giftunit._buddelta.set_atomunit(ball_atom)
     src_sue_giftunit.save_files()
 
     # WHEN
@@ -270,4 +270,4 @@ def test_create_giftunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     # THEN
     assert src_sue_giftunit.owner_name == new_sue_giftunit.owner_name
     assert src_sue_giftunit.face_name == new_sue_giftunit.face_name
-    assert src_sue_giftunit._deltaunit == new_sue_giftunit._deltaunit
+    assert src_sue_giftunit._buddelta == new_sue_giftunit._buddelta

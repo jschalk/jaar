@@ -1,7 +1,7 @@
 from src.f02_bud.bud_tool import bud_acct_membership_str
 from src.f04_gift.atom import atomunit_shop, atom_update, atom_insert, atom_delete
 from src.f04_gift.atom_config import acct_name_str, group_label_str
-from src.f04_gift.delta import deltaunit_shop
+from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
 
@@ -22,11 +22,11 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     yao_atomunit.set_arg(credit_vote_str, credit_vote_value)
     yao_atomunit.set_arg(debtit_vote_str, debtit_vote_value)
     # print(f"{yao_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(yao_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(yao_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Group '{swim_str}' has new membership {yao_str} with credit_vote_value{credit_vote_value} and debtit_vote_value={debtit_vote_value}."
@@ -50,11 +50,11 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debti
     yao_atomunit.set_arg(credit_vote_str, credit_vote_value)
     yao_atomunit.set_arg(debtit_vote_str, debtit_vote_value)
     # print(f"{yao_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(yao_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(yao_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Group '{swim_str}' membership {yao_str} has new credit_vote_value{credit_vote_value} and debtit_vote_value={debtit_vote_value}."
@@ -75,11 +75,11 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_vote_str, credit_vote_value)
     # print(f"{yao_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(yao_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(yao_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Group '{swim_str}' membership {yao_str} has new credit_vote_value{credit_vote_value}."
@@ -100,11 +100,11 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_vote():
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(debtit_vote_str, debtit_vote_value)
     # print(f"{yao_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(yao_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(yao_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Group '{swim_str}' membership {yao_str} has new debtit_vote_value={debtit_vote_value}."
@@ -122,11 +122,11 @@ def test_create_legible_list_ReturnsObj_acct_membership_DELETE():
     yao_atomunit.set_arg(group_label_str(), swim_str)
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     # print(f"{yao_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(yao_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(yao_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Group '{swim_str}' no longer has membership {yao_str}."

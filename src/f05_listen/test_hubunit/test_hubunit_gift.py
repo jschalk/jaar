@@ -369,7 +369,7 @@ def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
         _atoms_dir=sue_hubunit.atoms_dir(),
         _gifts_dir=sue_hubunit.gifts_dir(),
     )
-    sue_giftunit._deltaunit.set_atomunit(get_atom_example_itemunit_knee())
+    sue_giftunit._buddelta.set_atomunit(get_atom_example_itemunit_knee())
     zero_int = 0
     assert sue_hubunit.gift_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int) is False

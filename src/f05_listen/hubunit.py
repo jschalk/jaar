@@ -345,8 +345,8 @@ class HubUnit:
 
     def create_save_gift_file(self, before_bud: BudUnit, after_bud: BudUnit):
         new_giftunit = self._default_giftunit()
-        new_deltaunit = new_giftunit._deltaunit
-        new_deltaunit.add_all_different_atomunits(before_bud, after_bud)
+        new_buddelta = new_giftunit._buddelta
+        new_buddelta.add_all_different_atomunits(before_bud, after_bud)
         self.save_gift_file(new_giftunit)
 
     def get_giftunit(self, gift_id: int) -> GiftUnit:
@@ -366,7 +366,7 @@ class HubUnit:
 
         for gift_int in gift_ints:
             x_gift = self.get_giftunit(gift_int)
-            new_bud = x_gift._deltaunit.get_edited_bud(x_bud)
+            new_bud = x_gift._buddelta.get_edited_bud(x_bud)
         return new_bud
 
     def _create_initial_gift_files_from_default(self):
@@ -376,7 +376,7 @@ class HubUnit:
             _gifts_dir=self.gifts_dir(),
             _atoms_dir=self.atoms_dir(),
         )
-        x_giftunit._deltaunit.add_all_different_atomunits(
+        x_giftunit._buddelta.add_all_different_atomunits(
             before_bud=self.default_soul_bud(),
             after_bud=self.default_soul_bud(),
         )
@@ -392,7 +392,7 @@ class HubUnit:
 
     def _create_initial_gift_files_from_soul(self):
         x_giftunit = self._default_giftunit()
-        x_giftunit._deltaunit.add_all_different_atomunits(
+        x_giftunit._buddelta.add_all_different_atomunits(
             before_bud=self.default_soul_bud(),
             after_bud=self.get_soul_bud(),
         )

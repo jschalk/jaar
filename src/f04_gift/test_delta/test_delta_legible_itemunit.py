@@ -15,7 +15,7 @@ from src.f04_gift.atom_config import (
     mass_str,
 )
 from src.f04_gift.atom import atomunit_shop
-from src.f04_gift.delta import deltaunit_shop
+from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
 
@@ -49,11 +49,11 @@ def test_create_legible_list_ReturnsObj_itemunit_INSERT():
     clean_atomunit.set_arg(mass_str(), mass_value)
     clean_atomunit.set_arg(pledge_str(), pledge_value)
 
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(clean_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(clean_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Created Item '{item_title_value}' with parent_road {parent_road_value}. addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.pledge={pledge_value}."
@@ -90,11 +90,11 @@ def test_create_legible_list_ReturnsObj_itemunit_UPDATE():
     clean_atomunit.set_arg(mass_str(), mass_value)
     clean_atomunit.set_arg(pledge_str(), pledge_value)
 
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(clean_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(clean_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Item '{item_title_value}' with parent_road {parent_road_value} set these attributes: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.pledge={pledge_value}."
@@ -112,11 +112,11 @@ def test_create_legible_list_ReturnsObj_itemunit_DELETE():
     clean_atomunit.set_arg(item_title_str(), item_title_value)
     clean_atomunit.set_arg(parent_road_str(), parent_road_value)
 
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(clean_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(clean_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = (

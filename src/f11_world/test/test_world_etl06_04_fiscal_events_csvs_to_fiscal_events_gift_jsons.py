@@ -70,19 +70,19 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles(
     expected_e7_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event7)
     budacct_dimen = bud_acctunit_str()
     insert_str = atom_insert()
-    expected_e3_gift._deltaunit.add_atomunit(
+    expected_e3_gift._buddelta.add_atomunit(
         budacct_dimen,
         insert_str,
         jkeys={acct_name_str(): bob_inx},
         jvalues={credit_belief_str(): credit77, debtit_belief_str(): None},
     )
-    expected_e7_gift._deltaunit.add_atomunit(
+    expected_e7_gift._buddelta.add_atomunit(
         budacct_dimen,
         insert_str,
         jkeys={acct_name_str(): bob_inx},
         jvalues={credit_belief_str(): credit77, debtit_belief_str(): None},
     )
-    expected_e7_gift._deltaunit.add_atomunit(
+    expected_e7_gift._buddelta.add_atomunit(
         budacct_dimen,
         insert_str,
         jkeys={acct_name_str(): sue_inx},
@@ -92,13 +92,13 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles(
     e7_giftunit = get_giftunit_from_json(open_file(e7_gift_path))
     # print(f"{e7_giftunit=}")
     assert e3_giftunit.event_int == expected_e3_gift.event_int
-    expected_deltaunit = expected_e3_gift._deltaunit
-    generated_e3_deltaunit = e3_giftunit._deltaunit
-    assert generated_e3_deltaunit.atomunits == expected_deltaunit.atomunits
-    assert e3_giftunit._deltaunit == expected_e3_gift._deltaunit
+    expected_buddelta = expected_e3_gift._buddelta
+    generated_e3_buddelta = e3_giftunit._buddelta
+    assert generated_e3_buddelta.atomunits == expected_buddelta.atomunits
+    assert e3_giftunit._buddelta == expected_e3_gift._buddelta
     assert e3_giftunit == expected_e3_gift
-    e7_insert = e7_giftunit._deltaunit.atomunits.get("INSERT")
-    expected_e7_insert = expected_e7_gift._deltaunit.atomunits.get("INSERT")
+    e7_insert = e7_giftunit._buddelta.atomunits.get("INSERT")
+    expected_e7_insert = expected_e7_gift._buddelta.atomunits.get("INSERT")
     # print(e7_insert.get("bud_acctunit").keys())
     # print(expected_e7_insert.get("bud_acctunit").keys())
     e7_budacct = e7_insert.get("bud_acctunit")
@@ -106,7 +106,7 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles(
     assert e7_budacct.keys() == expected_e7_budacct.keys()
     # print(f"{expected_e7_insert.keys()=}")
     assert e7_insert == expected_e7_insert
-    assert e7_giftunit._deltaunit == expected_e7_gift._deltaunit
+    assert e7_giftunit._buddelta == expected_e7_gift._buddelta
     assert e7_giftunit == expected_e7_gift
 
 
@@ -161,21 +161,21 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles(
     expected_e7_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event7)
     budacct_dimen = bud_acctunit_str()
     bob_jkeys = {acct_name_str(): bob_inx}
-    expected_e3_gift._deltaunit.add_atomunit(budacct_dimen, atom_delete(), bob_jkeys)
-    expected_e7_gift._deltaunit.add_atomunit(budacct_dimen, atom_delete(), bob_jkeys)
+    expected_e3_gift._buddelta.add_atomunit(budacct_dimen, atom_delete(), bob_jkeys)
+    expected_e7_gift._buddelta.add_atomunit(budacct_dimen, atom_delete(), bob_jkeys)
     sue_jkeys = {acct_name_str(): sue_inx}
-    expected_e7_gift._deltaunit.add_atomunit(budacct_dimen, atom_delete(), sue_jkeys)
+    expected_e7_gift._buddelta.add_atomunit(budacct_dimen, atom_delete(), sue_jkeys)
     e3_giftunit = get_giftunit_from_json(open_file(e3_gift_path))
     e7_giftunit = get_giftunit_from_json(open_file(e7_gift_path))
     # print(f"{e7_giftunit=}")
     assert e3_giftunit.event_int == expected_e3_gift.event_int
-    expected_deltaunit = expected_e3_gift._deltaunit
-    generated_e3_deltaunit = e3_giftunit._deltaunit
-    assert generated_e3_deltaunit.atomunits == expected_deltaunit.atomunits
-    assert e3_giftunit._deltaunit == expected_e3_gift._deltaunit
+    expected_buddelta = expected_e3_gift._buddelta
+    generated_e3_buddelta = e3_giftunit._buddelta
+    assert generated_e3_buddelta.atomunits == expected_buddelta.atomunits
+    assert e3_giftunit._buddelta == expected_e3_gift._buddelta
     assert e3_giftunit == expected_e3_gift
-    e7_insert = e7_giftunit._deltaunit.atomunits.get(atom_delete())
-    expected_e7_insert = expected_e7_gift._deltaunit.atomunits.get(atom_delete())
+    e7_insert = e7_giftunit._buddelta.atomunits.get(atom_delete())
+    expected_e7_insert = expected_e7_gift._buddelta.atomunits.get(atom_delete())
     # print(e7_insert.get("bud_acctunit").keys())
     # print(expected_e7_insert.get("bud_acctunit").keys())
     e7_budacct = e7_insert.get(bud_acctunit_str())
@@ -183,5 +183,5 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles(
     assert e7_budacct.keys() == expected_e7_budacct.keys()
     # print(f"{expected_e7_insert.keys()=}")
     assert e7_insert == expected_e7_insert
-    assert e7_giftunit._deltaunit == expected_e7_gift._deltaunit
+    assert e7_giftunit._buddelta == expected_e7_gift._buddelta
     assert e7_giftunit == expected_e7_gift

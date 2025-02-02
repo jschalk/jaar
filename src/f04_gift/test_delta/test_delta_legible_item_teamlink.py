@@ -1,7 +1,7 @@
 from src.f02_bud.bud_tool import bud_item_teamlink_str
 from src.f04_gift.atom_config import atom_insert, atom_delete, team_tag_str, road_str
 from src.f04_gift.atom import atomunit_shop
-from src.f04_gift.delta import deltaunit_shop
+from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
 
@@ -17,11 +17,11 @@ def test_create_legible_list_ReturnsObj_item_teamlink_INSERT():
     swim_atomunit.set_arg(road_str(), road_value)
     swim_atomunit.set_arg(team_tag_str(), team_tag_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"teamlink '{team_tag_value}' created for item '{road_value}'."
@@ -40,11 +40,11 @@ def test_create_legible_list_ReturnsObj_item_teamlink_DELETE():
     swim_atomunit.set_arg(road_str(), road_value)
     swim_atomunit.set_arg(team_tag_str(), team_tag_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"teamlink '{team_tag_value}' deleted for item '{road_value}'."

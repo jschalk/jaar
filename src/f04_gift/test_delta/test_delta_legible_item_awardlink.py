@@ -8,7 +8,7 @@ from src.f04_gift.atom_config import (
     take_force_str,
 )
 from src.f04_gift.atom import atomunit_shop
-from src.f04_gift.delta import deltaunit_shop
+from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
 
@@ -29,11 +29,11 @@ def test_create_legible_list_ReturnsObj_item_awardlink_INSERT():
     swim_atomunit.set_arg(give_force_str(), give_force_value)
     swim_atomunit.set_arg(take_force_str(), take_force_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Awardlink created for group {awardee_tag_value} for item '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
@@ -58,11 +58,11 @@ def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_give_force_take_fo
     swim_atomunit.set_arg(give_force_str(), give_force_value)
     swim_atomunit.set_arg(take_force_str(), take_force_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
@@ -84,11 +84,11 @@ def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_give_force():
     swim_atomunit.set_arg(awardee_tag_str(), awardee_tag_value)
     swim_atomunit.set_arg(give_force_str(), give_force_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now give_force={give_force_value}."
@@ -111,11 +111,11 @@ def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_take_force():
     swim_atomunit.set_arg(awardee_tag_str(), awardee_tag_value)
     swim_atomunit.set_arg(take_force_str(), take_force_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now take_force={take_force_value}."
@@ -135,11 +135,11 @@ def test_create_legible_list_ReturnsObj_item_awardlink_DELETE():
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(awardee_tag_str(), awardee_tag_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"Awardlink for group {awardee_tag_value}, item '{road_value}' has been deleted."

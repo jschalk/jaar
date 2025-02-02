@@ -30,7 +30,7 @@ from copy import deepcopy as copy_deepcopy
 
 
 @dataclass
-class DeltaUnit:
+class BudDelta:
     atomunits: dict[CRUD_command : dict[str, AtomUnit]] = None
     _bud_build_validated: bool = None
 
@@ -823,14 +823,14 @@ class DeltaUnit:
         return get_json_from_dict(x_dict)
 
 
-def deltaunit_shop(atomunits: dict[str, AtomUnit] = None) -> DeltaUnit:
-    return DeltaUnit(
+def buddelta_shop(atomunits: dict[str, AtomUnit] = None) -> BudDelta:
+    return BudDelta(
         atomunits=get_empty_dict_if_None(atomunits),
         _bud_build_validated=False,
     )
 
 
-def bud_built_from_delta_is_valid(x_delta: DeltaUnit, x_bud: BudUnit = None) -> bool:
+def bud_built_from_delta_is_valid(x_delta: BudDelta, x_bud: BudUnit = None) -> bool:
     x_bud = budunit_shop() if x_bud is None else x_bud
     x_bud = x_delta.get_edited_bud(x_bud)
     try:
@@ -840,28 +840,28 @@ def bud_built_from_delta_is_valid(x_delta: DeltaUnit, x_bud: BudUnit = None) -> 
     return True
 
 
-def get_dimens_cruds_deltaunit(
-    x_deltaunit: DeltaUnit, dimen_set: set[str], curd_set: set[str]
-) -> DeltaUnit:
-    new_deltaunit = deltaunit_shop()
-    for x_atomunit in x_deltaunit.get_sorted_atomunits():
+def get_dimens_cruds_buddelta(
+    x_buddelta: BudDelta, dimen_set: set[str], curd_set: set[str]
+) -> BudDelta:
+    new_buddelta = buddelta_shop()
+    for x_atomunit in x_buddelta.get_sorted_atomunits():
         if x_atomunit.crud_str in curd_set and x_atomunit.dimen in dimen_set:
-            new_deltaunit.set_atomunit(x_atomunit)
-    return new_deltaunit
+            new_buddelta.set_atomunit(x_atomunit)
+    return new_buddelta
 
 
-def get_minimal_deltaunit(x_deltaunit: DeltaUnit, x_bud: BudUnit) -> DeltaUnit:
-    """Creates new DeltaUnit with only AtomUnits that would actually change the BudUnit"""
-    new_deltaunit = deltaunit_shop()
-    for x_atom in x_deltaunit.get_sorted_atomunits():
+def get_minimal_buddelta(x_buddelta: BudDelta, x_bud: BudUnit) -> BudDelta:
+    """Creates new BudDelta with only AtomUnits that would actually change the BudUnit"""
+    new_buddelta = buddelta_shop()
+    for x_atom in x_buddelta.get_sorted_atomunits():
         sifted_atom = sift_atomunit(x_bud, x_atom)
         if sifted_atom != None:
-            new_deltaunit.set_atomunit(sifted_atom)
-    return new_deltaunit
+            new_buddelta.set_atomunit(sifted_atom)
+    return new_buddelta
 
 
-def get_deltaunit_from_ordered_dict(x_dict: dict) -> DeltaUnit:
-    x_deltaunit = deltaunit_shop()
+def get_buddelta_from_ordered_dict(x_dict: dict) -> BudDelta:
+    x_buddelta = buddelta_shop()
     for x_atom_dict in x_dict.values():
-        x_deltaunit.set_atomunit(get_atomunit_from_dict(x_atom_dict))
-    return x_deltaunit
+        x_buddelta.set_atomunit(get_atomunit_from_dict(x_atom_dict))
+    return x_buddelta

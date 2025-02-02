@@ -35,7 +35,7 @@ def add_soul_pledge(
     old_soul_bud = copy_deepcopy(soul_bud)
     create_pledge(soul_bud, pledge_road, x_teamlink, reason_premise)
     next_giftunit = x_hubunit._default_giftunit()
-    next_giftunit._deltaunit.add_all_different_atomunits(old_soul_bud, soul_bud)
+    next_giftunit._buddelta.add_all_different_atomunits(old_soul_bud, soul_bud)
     next_giftunit.save_files()
     x_hubunit.append_gifts_to_soul_file()
 
@@ -52,6 +52,6 @@ def add_soul_fact(x_hubunit: HubUnit, fact_pick: RoadUnit):
     old_soul_bud = copy_deepcopy(soul_bud)
     create_fact(soul_bud, fact_pick)
     next_giftunit = x_hubunit._default_giftunit()
-    next_giftunit._deltaunit.add_all_different_atomunits(old_soul_bud, soul_bud)
+    next_giftunit._buddelta.add_all_different_atomunits(old_soul_bud, soul_bud)
     next_giftunit.save_files()
     x_hubunit.append_gifts_to_soul_file()

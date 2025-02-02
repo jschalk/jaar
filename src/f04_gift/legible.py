@@ -39,14 +39,14 @@ from src.f04_gift.atom_config import (
     fnigh_str,
     fopen_str,
 )
-from src.f04_gift.delta import DeltaUnit
+from src.f04_gift.delta import BudDelta
 
 
 def get_leg_obj(x_dict: dict, x_keylist) -> any:
     return get_from_nested_dict(x_dict, x_keylist, if_missing_return_None=True)
 
 
-def create_legible_list(x_delta: DeltaUnit, x_bud: BudUnit) -> list[str]:
+def create_legible_list(x_delta: BudDelta, x_bud: BudUnit) -> list[str]:
     atoms_dict = x_delta.atomunits
     budunit_atom = get_leg_obj(atoms_dict, [atom_update(), budunit_str()])
 
