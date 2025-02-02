@@ -6,10 +6,10 @@ from src.f00_instrument.dict_toolbox import (
     get_all_nondictionary_objs,
     get_0_if_None,
 )
-from src.f01_road.road import RoadUnit, get_terminus_title, get_parent_road
+from src.f01_road.road import RoadUnit, get_terminus_title, get_parent_road, LabelUnit
 from src.f02_bud.reason_item import FactUnit, ReasonUnit
 from src.f02_bud.acct import MemberShip, AcctName, AcctUnit
-from src.f02_bud.group import MemberShip, GroupLabel
+from src.f02_bud.group import MemberShip
 from src.f02_bud.item import ItemUnit
 from src.f02_bud.bud import BudUnit, budunit_shop
 from src.f04_gift.atom_config import CRUD_command
@@ -23,6 +23,7 @@ from src.f04_gift.atom import (
     atom_update,
     jvalues_different,
     sift_atomunit,
+    get_from_dict as get_atomunit_from_dict,
 )
 from dataclasses import dataclass
 from copy import deepcopy as copy_deepcopy
@@ -62,7 +63,7 @@ class DeltaUnit:
         atomunits_list = self.get_dimen_sorted_atomunits_list()
         return sorted(atomunits_list, key=lambda x: x.atom_order)
 
-    def get_edited_bud(self, before_bud: BudUnit):
+    def get_edited_bud(self, before_bud: BudUnit) -> BudUnit:
         edited_bud = copy_deepcopy(before_bud)
         for x_atomunit in self.get_sorted_atomunits():
             modify_bud_with_atomunit(edited_bud, x_atomunit)
@@ -105,8 +106,8 @@ class DeltaUnit:
         self,
         dimen: str,
         crud_str: str,
-        jkeys: str = None,
-        jvalues: str = None,
+        jkeys: dict[str, str] = None,
+        jvalues: dict[str, str] = None,
     ):
         x_atomunit = atomunit_shop(
             dimen=dimen,
@@ -268,7 +269,7 @@ class DeltaUnit:
     def add_atomunit_memberships_inserts(
         self,
         after_acctunit: AcctUnit,
-        insert_membership_group_labels: list[GroupLabel],
+        insert_membership_group_labels: list[LabelUnit],
     ):
         after_acct_name = after_acctunit.acct_name
         for insert_group_label in insert_membership_group_labels:
@@ -298,7 +299,7 @@ class DeltaUnit:
         self.set_atomunit(x_atomunit)
 
     def add_atomunit_memberships_delete(
-        self, before_acct_name: AcctName, before_group_labels: GroupLabel
+        self, before_acct_name: AcctName, before_group_labels: LabelUnit
     ):
         for delete_group_label in before_group_labels:
             x_atomunit = atomunit_shop("bud_acct_membership", atom_delete())
@@ -832,7 +833,6 @@ def deltaunit_shop(atomunits: dict[str, AtomUnit] = None) -> DeltaUnit:
 def bud_built_from_delta_is_valid(x_delta: DeltaUnit, x_bud: BudUnit = None) -> bool:
     x_bud = budunit_shop() if x_bud is None else x_bud
     x_bud = x_delta.get_edited_bud(x_bud)
-    print(f"{x_bud=}")
     try:
         x_bud.settle_bud()
     except Exception:
@@ -850,10 +850,18 @@ def get_dimens_cruds_deltaunit(
     return new_deltaunit
 
 
-def sift_deltaunit(x_deltaunit: DeltaUnit, x_bud: BudUnit) -> DeltaUnit:
+def get_minimal_deltaunit(x_deltaunit: DeltaUnit, x_bud: BudUnit) -> DeltaUnit:
+    """Creates new DeltaUnit with only AtomUnits that would actually change the BudUnit"""
     new_deltaunit = deltaunit_shop()
     for x_atom in x_deltaunit.get_sorted_atomunits():
         sifted_atom = sift_atomunit(x_bud, x_atom)
         if sifted_atom != None:
             new_deltaunit.set_atomunit(sifted_atom)
     return new_deltaunit
+
+
+def get_deltaunit_from_ordered_dict(x_dict: dict) -> DeltaUnit:
+    x_deltaunit = deltaunit_shop()
+    for x_atom_dict in x_dict.values():
+        x_deltaunit.set_atomunit(get_atomunit_from_dict(x_atom_dict))
+    return x_deltaunit

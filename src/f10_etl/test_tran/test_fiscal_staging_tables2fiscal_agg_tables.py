@@ -394,12 +394,12 @@ def test_fiscal_staging_tables2fiscal_agg_tables_Scenario5_fiscaldeal_Some_error
         insert_staging_sqlstr = f"""
 INSERT INTO {x_objs.deal_stage_tablename} ({x_cols.deal_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}',{t1_time_int},{t1_quota_1},'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t1_time_int},{t1_quota_2},'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL)
-, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}',{t1_time_int},{t1_quota_1},NULL)
-, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}',{t1_time_int},{t1_quota_1},NULL,'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t1_time_int},{t1_quota_2},NULL,'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL,NULL)
+, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}',{t1_time_int},{t1_quota_1},NULL,NULL)
+, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL,NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -415,9 +415,9 @@ VALUES
         select_agg_sqlstr = f"SELECT {x_cols.deal_agg_csv_header} FROM {agg_tablename};"
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
-        expected_agg_row0 = (accord23_str, bob_inx, t2_time_int, t2_quota)
-        expected_agg_row1 = (accord45_str, bob_inx, t1_time_int, t1_quota_1)
-        expected_agg_row2 = (accord45_str, bob_inx, t2_time_int, t2_quota)
+        expected_agg_row0 = (accord23_str, bob_inx, t2_time_int, t2_quota, None)
+        expected_agg_row1 = (accord45_str, bob_inx, t1_time_int, t1_quota_1, None)
+        expected_agg_row2 = (accord45_str, bob_inx, t2_time_int, t2_quota, None)
         assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
 
 

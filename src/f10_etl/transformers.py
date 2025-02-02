@@ -1,11 +1,21 @@
 from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
+from src.f00_instrument.csv_toolbox import open_csv_with_types
 from src.f00_instrument.db_toolbox import (
     db_table_exists,
+    get_row_count,
     get_table_columns,
-    is_stageable,
+    save_to_split_csvs,
 )
 from src.f01_road.road import FaceName, EventInt
+from src.f02_bud.bud import (
+    budunit_shop,
+    get_from_json as budunit_get_from_json,
+    BudUnit,
+)
+from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
+from src.f04_gift.delta import get_minimal_deltaunit
+from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
 from src.f07_fiscal.fiscal_config import get_fiscal_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -14,6 +24,7 @@ from src.f09_idea.idea_config import (
     get_idea_format_filename,
     get_idea_dimen_ref,
     get_idea_config_dict,
+    get_idea_sqlite_types,
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.idea_db_tool import (
@@ -32,12 +43,14 @@ from src.f09_idea.idea_db_tool import (
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
+    get_bud_create_table_sqlstrs,
     create_fiscal_tables,
     create_bud_tables,
     get_fiscal_update_inconsist_error_message_sqlstrs,
     get_fiscal_insert_agg_from_staging_sqlstrs,
     get_bud_put_update_inconsist_error_message_sqlstrs,
     get_bud_insert_put_agg_from_staging_sqlstrs,
+    get_bud_insert_del_agg_from_staging_sqlstrs,
     IDEA_STAGEABLE_PUT_DIMENS,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
@@ -53,6 +66,7 @@ from src.f10_etl.pidgin_agg import (
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
 from sqlite3 import Connection as sqlite3_Connection
+from copy import deepcopy as copy_deepcopy
 
 
 class not_given_pidgin_dimen_Exception(Exception):
@@ -61,7 +75,7 @@ class not_given_pidgin_dimen_Exception(Exception):
 
 MAPS_DIMENS = {
     "map_name": "NameUnit",
-    "map_label": "GroupLabel",
+    "map_label": "LabelUnit",
     "map_title": "TitleUnit",
     "map_road": "RoadUnit",
 }
@@ -74,7 +88,7 @@ class_typeS = {
         "otx_obj": "otx_name",
         "inx_obj": "inx_name",
     },
-    "GroupLabel": {
+    "LabelUnit": {
         "stage": "label_staging",
         "agg": "label_agg",
         "csv_filename": "label.csv",
@@ -181,10 +195,10 @@ class boatStagingToboatAggTransformer:
         for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
             boat_idea_path = create_path(br_ref.file_dir, br_ref.file_name)
             boat_staging_df = pandas_read_excel(boat_idea_path, "boat_staging")
-            otx_df = self._group_by_idea_columns(boat_staging_df, br_ref.idea_number)
+            otx_df = self._groupby_idea_columns(boat_staging_df, br_ref.idea_number)
             upsert_sheet(boat_idea_path, "boat_agg", otx_df)
 
-    def _group_by_idea_columns(
+    def _groupby_idea_columns(
         self, boat_staging_df: DataFrame, idea_number: str
     ) -> DataFrame:
         idea_filename = get_idea_format_filename(idea_number)
@@ -215,7 +229,7 @@ class boatAggToboatValidTransformer:
             boat_valid_df = boat_agg[boat_agg["event_int"].isin(self.legitimate_events)]
             upsert_sheet(boat_idea_path, "boat_valid", boat_valid_df)
 
-    # def _group_by_idea_columns(
+    # def _groupby_idea_columns(
     #     self, boat_staging_df: DataFrame, idea_number: str
     # ) -> DataFrame:
     #     idea_filename = get_idea_format_filename(idea_number)
@@ -441,7 +455,7 @@ class boatAggToStagingTransformer:
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
         if self.class_type == "NameUnit" and "inx_name" not in missing_col:
             return x_row["inx_name"]
-        elif self.class_type == "GroupLabel" and "inx_label" not in missing_col:
+        elif self.class_type == "LabelUnit" and "inx_label" not in missing_col:
             return x_row["inx_label"]
         elif self.class_type == "TitleUnit" and "inx_title" not in missing_col:
             return x_row["inx_title"]
@@ -551,6 +565,7 @@ def etl_face_pidgin_to_event_pidgins(face_dir: str):
 
 
 def get_level1_dirs(x_dir: str) -> list[str]:
+    """returns sorted list of all first level directorys"""
     try:
         level1_dirs = get_dir_file_strs(x_dir, include_dirs=True, include_files=False)
         return sorted(list(level1_dirs.keys()))
@@ -830,6 +845,21 @@ def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
 def bud_staging_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
     for x_sqlstr in get_bud_insert_put_agg_from_staging_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)
+    for x_sqlstr in get_bud_insert_del_agg_from_staging_sqlstrs().values():
+        conn_or_cursor.execute(x_sqlstr)
+
+
+def etl_bud_tables_to_event_bud_csvs(
+    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
+):
+    for bud_table in get_bud_create_table_sqlstrs():
+        if get_row_count(conn_or_cursor, bud_table) > 0:
+            save_to_split_csvs(
+                conn_or_cursor=conn_or_cursor,
+                tablename=bud_table,
+                key_columns=["fiscal_title", "event_int", "owner_name"],
+                output_dir=fiscal_mstr_dir,
+            )
 
 
 def etl_fiscal_staging_tables_to_fiscal_csvs(
@@ -853,3 +883,90 @@ def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
         dimen_df = open_csv(fiscal_mstr_dir, f"{ficsal_dimen}_agg.csv")
         upsert_sheet(x_excel_path, "agg", dimen_df)
     create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)
+
+
+def etl_event_bud_csvs_to_gift_json(fiscal_mstr_dir: str):
+    for fiscal_title in get_level1_dirs(fiscal_mstr_dir):
+        fiscal_path = create_path(fiscal_mstr_dir, fiscal_title)
+        for owner_name in get_level1_dirs(fiscal_path):
+            owner_path = create_path(fiscal_path, owner_name)
+            for event_int in get_level1_dirs(owner_path):
+                event_path = create_path(owner_path, event_int)
+                event_gift = giftunit_shop(
+                    owner_name=owner_name,
+                    face_name=None,
+                    fiscal_title=fiscal_title,
+                    event_int=event_int,
+                )
+                add_atomunits_from_csv(event_gift, event_path)
+                save_file(event_path, "gift.json", event_gift.get_json())
+
+
+def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
+    idea_sqlite_types = get_idea_sqlite_types()
+    for bud_dimen in get_bud_dimens():
+        bud_dimen_put_csv = f"{bud_dimen}_put_agg.csv"
+        bud_dimen_del_csv = f"{bud_dimen}_del_agg.csv"
+        put_path = create_path(owner_path, bud_dimen_put_csv)
+        del_path = create_path(owner_path, bud_dimen_del_csv)
+        if os_path_exists(put_path):
+            put_rows = open_csv_with_types(put_path, idea_sqlite_types)
+            headers = put_rows.pop(0)
+            for put_row in put_rows:
+                x_atom = atomunit_shop(bud_dimen, "INSERT")
+                for col_name, row_value in zip(headers, put_row):
+                    if col_name not in {
+                        "face_name",
+                        "event_int",
+                        "fiscal_title",
+                        "owner_name",
+                    }:
+                        x_atom.set_arg(col_name, row_value)
+                owner_gift._deltaunit.set_atomunit(x_atom)
+
+        if os_path_exists(del_path):
+            del_rows = open_csv_with_types(del_path, idea_sqlite_types)
+            headers = del_rows.pop(0)
+            for del_row in del_rows:
+                x_atom = atomunit_shop(bud_dimen, "DELETE")
+                for col_name, row_value in zip(headers, del_row):
+                    if col_name not in {
+                        "face_name",
+                        "event_int",
+                        "fiscal_title",
+                        "owner_name",
+                    }:
+                        x_atom.set_arg(col_name, row_value)
+                owner_gift._deltaunit.set_atomunit(x_atom)
+
+
+def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
+    for fiscal_title in get_level1_dirs(fiscal_mstr_dir):
+        fiscal_path = create_path(fiscal_mstr_dir, fiscal_title)
+        for owner_name in get_level1_dirs(fiscal_path):
+            owner_path = create_path(fiscal_path, owner_name)
+            prev_event_int = None
+            for event_int in get_level1_dirs(owner_path):
+                prev_bud = get_prev_event_int_budunit(
+                    fiscal_title, owner_name, owner_path, prev_event_int
+                )
+                event_path = create_path(owner_path, event_int)
+                gift_path = create_path(event_path, "all_gift.json")
+                event_gift = get_giftunit_from_json(open_file(gift_path))
+                sift_delta = get_minimal_deltaunit(event_gift._deltaunit, prev_bud)
+                curr_bud = event_gift.get_edited_bud(prev_bud)
+                save_file(event_path, "bud.json", curr_bud.get_json())
+                expressed_gift = copy_deepcopy(event_gift)
+                expressed_gift.set_deltaunit(sift_delta)
+                save_file(event_path, "expressed_gift.json", expressed_gift.get_json())
+                prev_event_int = event_int
+
+
+def get_prev_event_int_budunit(
+    fiscal_title, owner_name, owner_path, prev_event_int
+) -> BudUnit:
+    if prev_event_int is None:
+        return budunit_shop(owner_name, fiscal_title)
+    prev_event_int_path = create_path(owner_path, prev_event_int)
+    prev_bud_path = create_path(prev_event_int_path, "bud.json")
+    return budunit_get_from_json(open_file(prev_bud_path))

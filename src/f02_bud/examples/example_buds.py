@@ -389,9 +389,7 @@ def from_list_get_active(
     for item in item_dict.values():
         if item.get_road() == road:
             temp_item = item
-            print(
-                f"searched for ItemUnit {temp_item.get_road()} found {temp_item._active=}"
-            )
+            print(f"s for ItemUnit {temp_item.get_road()} found {temp_item._active=}")
 
         if item._active:
             active_true_count += 1

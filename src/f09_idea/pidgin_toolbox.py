@@ -3,7 +3,7 @@ from src.f08_pidgin.pidgin import (
     PidginUnit,
     pidginunit_shop,
     NameMap,
-    GroupMap,
+    LabelMap,
     TitleMap,
     RoadMap,
 )
@@ -24,7 +24,7 @@ def get_map_name_dt_columns() -> list[str]:
     ]
 
 
-def get_map_group_dt_columns() -> list[str]:
+def get_map_label_dt_columns() -> list[str]:
     return [
         "face_name",
         "event_int",
@@ -76,7 +76,7 @@ def create_map_name_dt(x_map: NameMap) -> DataFrame:
     return DataFrame(x_rows_list, columns=get_map_name_dt_columns())
 
 
-def create_map_group_dt(x_map: GroupMap) -> DataFrame:
+def create_map_label_dt(x_map: LabelMap) -> DataFrame:
     x_rows_list = [
         {
             "event_int": x_map.event_int,
@@ -89,7 +89,7 @@ def create_map_group_dt(x_map: GroupMap) -> DataFrame:
         }
         for otx_value, inx_value in x_map.otx2inx.items()
     ]
-    return DataFrame(x_rows_list, columns=get_map_group_dt_columns())
+    return DataFrame(x_rows_list, columns=get_map_label_dt_columns())
 
 
 def create_map_title_dt(x_map: TitleMap) -> DataFrame:
@@ -126,7 +126,7 @@ def create_map_road_dt(x_map: RoadMap) -> DataFrame:
 
 def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
     _save_map_name_csv(x_dir, x_pidginunit.namemap)
-    _save_map_group_csv(x_dir, x_pidginunit.groupmap)
+    _save_map_label_csv(x_dir, x_pidginunit.labelmap)
     _save_map_title_csv(x_dir, x_pidginunit.titlemap)
     _save_map_road_csv(x_dir, x_pidginunit.roadmap)
 
@@ -136,8 +136,8 @@ def _save_map_name_csv(x_dir: str, namemap: NameMap):
     save_file(x_dir, "name.csv", get_ordered_csv(x_dt))
 
 
-def _save_map_group_csv(x_dir: str, groupmap: GroupMap):
-    x_dt = create_map_group_dt(groupmap)
+def _save_map_label_csv(x_dir: str, labelmap: LabelMap):
+    x_dt = create_map_label_dt(labelmap)
     save_file(x_dir, "label.csv", get_ordered_csv(x_dt))
 
 
@@ -163,16 +163,16 @@ def _load_namemap_from_csv(x_dir, x_namemap: NameMap) -> NameMap:
     return x_namemap
 
 
-def _load_groupmap_from_csv(x_dir, x_groupmap: GroupMap) -> GroupMap:
+def _load_labelmap_from_csv(x_dir, x_labelmap: LabelMap) -> LabelMap:
     label_filename = "label.csv"
     if os_path_exists(create_path(x_dir, label_filename)):
         otx2inx_dt = open_csv(x_dir, label_filename)
         for table_row in otx2inx_dt.to_dict("records"):
             otx_value = table_row.get("otx_label")
             inx_value = table_row.get("inx_label")
-            if x_groupmap.otx2inx_exists(otx_value, inx_value) is False:
-                x_groupmap.set_otx2inx(otx_value, inx_value)
-    return x_groupmap
+            if x_labelmap.otx2inx_exists(otx_value, inx_value) is False:
+                x_labelmap.set_otx2inx(otx_value, inx_value)
+    return x_labelmap
 
 
 def _load_titlemap_from_csv(x_dir, x_titlemap: TitleMap) -> TitleMap:
@@ -236,7 +236,7 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
 def init_pidginunit_from_dir(x_dir: str) -> PidginUnit:
     x_pidginunit = create_dir_valid_empty_pidginunit(x_dir)
     _load_namemap_from_csv(x_dir, x_pidginunit.namemap)
-    _load_groupmap_from_csv(x_dir, x_pidginunit.groupmap)
+    _load_labelmap_from_csv(x_dir, x_pidginunit.labelmap)
     _load_titlemap_from_csv(x_dir, x_pidginunit.titlemap)
     _load_roadmap_from_csv(x_dir, x_pidginunit.roadmap)
     x_pidginunit.roadmap.titlemap = x_pidginunit.titlemap

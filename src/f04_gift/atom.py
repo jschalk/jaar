@@ -9,7 +9,7 @@ from src.f01_road.road import (
     create_road,
     TitleUnit,
     RoadUnit,
-    GroupLabel,
+    LabelUnit,
     AcctName,
     is_titleunit,
 )
@@ -168,14 +168,17 @@ def atomunit_shop(
         )
 
 
-def get_from_json(x_str: str) -> AtomUnit:
-    x_dict = get_dict_from_json(x_str)
+def get_from_dict(x_dict: dict) -> AtomUnit:
     x_atom = atomunit_shop(x_dict["dimen"], x_dict["crud"])
     for x_key, x_value in x_dict["jkeys"].items():
         x_atom.set_jkey(x_key, x_value)
     for x_key, x_value in x_dict["jvalues"].items():
         x_atom.set_jvalue(x_key, x_value)
     return x_atom
+
+
+def get_from_json(x_str: str) -> AtomUnit:
+    return get_from_dict(get_dict_from_json(x_str))
 
 
 def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: AtomUnit):
@@ -612,7 +615,7 @@ class AtomRow:
     _crud_command: CRUD_command = None
     acct_name: AcctName = None
     addin: float = None
-    awardee_tag: GroupLabel = None
+    awardee_tag: LabelUnit = None
     base: RoadUnit = None
     base_item_active_requisite: bool = None
     begin: float = None
@@ -632,8 +635,8 @@ class AtomRow:
     fund_pool: float = None
     give_force: float = None
     gogo_want: float = None
-    group_label: GroupLabel = None
-    healer_name: GroupLabel = None
+    group_label: LabelUnit = None
+    healer_name: LabelUnit = None
     item_title: TitleUnit = None
     mass: int = None
     max_tree_traverse: int = None
@@ -669,8 +672,8 @@ class AtomRow:
             if x_value != None:
                 if class_type == "NameUnit":
                     self.__dict__[x_arg] = AcctName(x_value)
-                elif class_type == "GroupLabel":
-                    self.__dict__[x_arg] = GroupLabel(x_value)
+                elif class_type == "LabelUnit":
+                    self.__dict__[x_arg] = LabelUnit(x_value)
                 elif class_type == "RoadUnit":
                     self.__dict__[x_arg] = RoadUnit(x_value)
                 elif class_type == "TitleUnit":
@@ -683,7 +686,7 @@ class AtomRow:
                     self.__dict__[x_arg] = int(x_value)
                 elif class_type == "float":
                     self.__dict__[x_arg] = float(x_value)
-        if self.item_title != None and self.parent_road != None and self.road == None:
+        if self.item_title != None and self.parent_road != None and self.road is None:
             self.road = create_road(self.parent_road, self.item_title)
 
     def get_atomunits(self) -> list[AtomUnit]:
@@ -728,10 +731,10 @@ def sift_atomunit(x_bud: BudUnit, x_atom: AtomUnit) -> AtomUnit:
         x_jvalues = x_atom.get_jvalues_dict()
         update_atom = atomunit_shop(x_dimen, atom_update(), x_atom.jkeys)
         for jvalue in x_jvalues:
-            optional_value = x_atom.get_value(jvalue)
-            obj_value = x_bud_obj.__dict__[jvalue]
-            if obj_value != optional_value:
-                update_atom.set_arg(jvalue, optional_value)
+            optional_jvalue = x_atom.get_value(jvalue)
+            obj_jvalue = x_bud_obj.__dict__[jvalue]
+            if obj_jvalue != optional_jvalue:
+                update_atom.set_arg(jvalue, optional_jvalue)
 
         if update_atom.get_jvalues_dict() != {}:
             return update_atom

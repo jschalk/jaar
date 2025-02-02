@@ -1,4 +1,4 @@
-from src.f01_road.road import RoadUnit, get_terminus_title, get_parent_road, GroupLabel
+from src.f01_road.road import RoadUnit, get_terminus_title, get_parent_road, LabelUnit
 from src.f02_bud.bud import BudUnit
 from src.f05_listen.hubunit import HubUnit
 from copy import deepcopy as copy_deepcopy
@@ -7,7 +7,7 @@ from copy import deepcopy as copy_deepcopy
 def create_pledge(
     x_bud: BudUnit,
     pledge_road: RoadUnit,
-    x_teamlink: GroupLabel = None,
+    x_teamlink: LabelUnit = None,
     reason_premise: RoadUnit = None,
 ):
     if pledge_road is not None and get_terminus_title(pledge_road) != "":
@@ -28,7 +28,7 @@ def create_pledge(
 def add_soul_pledge(
     x_hubunit: HubUnit,
     pledge_road: RoadUnit,
-    x_teamlink: GroupLabel = None,
+    x_teamlink: LabelUnit = None,
     reason_premise: RoadUnit = None,
 ):
     soul_bud = x_hubunit.get_soul_bud()

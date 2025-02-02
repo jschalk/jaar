@@ -174,11 +174,11 @@ def test_get_rowdata_ReturnsCorrectObj():
 
 def test_get_groupby_select_clause_ReturnsObj_Scenario0():
     # ESTABLISH
-    x_group_by_columns = set()
+    x_groupby_columns = set()
     x_value_columns = set()
 
     # WHEN
-    x_select_clause = _get_grouping_select_clause(x_group_by_columns, x_value_columns)
+    x_select_clause = _get_grouping_select_clause(x_groupby_columns, x_value_columns)
 
     # THEN
     assert x_select_clause == "SELECT"
@@ -188,11 +188,11 @@ def test_get_groupby_select_clause_ReturnsObj_Scenario1():
     # ESTABLISH
     fizz_str = "fizz"
     buzz_str = "buzz"
-    x_group_by_columns = [fizz_str, buzz_str]
+    x_groupby_columns = [fizz_str, buzz_str]
     x_value_columns = []
 
     # WHEN
-    x_select_clause = _get_grouping_select_clause(x_group_by_columns, x_value_columns)
+    x_select_clause = _get_grouping_select_clause(x_groupby_columns, x_value_columns)
 
     # THEN
     assert x_select_clause == f"SELECT {fizz_str}, {buzz_str}"
@@ -204,11 +204,11 @@ def test_get_groupby_select_clause_ReturnsObj_Scenario2():
     buzz_str = "buzz"
     swim_str = "swim"
     run_str = "run"
-    x_group_by_columns = [fizz_str, buzz_str]
+    x_groupby_columns = [fizz_str, buzz_str]
     x_value_columns = [swim_str, run_str]
 
     # WHEN
-    gen_select_clause = _get_grouping_select_clause(x_group_by_columns, x_value_columns)
+    gen_select_clause = _get_grouping_select_clause(x_groupby_columns, x_value_columns)
 
     # THEN
     example_str = f"SELECT {fizz_str}, {buzz_str}, MAX({swim_str}) AS {swim_str}, MAX({run_str}) AS {run_str}"
@@ -217,10 +217,10 @@ def test_get_groupby_select_clause_ReturnsObj_Scenario2():
 
 def test_get_grouping_groupby_clause_ReturnsObj_Scenario0():
     # ESTABLISH
-    x_group_by_columns = set()
+    x_groupby_columns = set()
 
     # WHEN
-    x_select_clause = _get_grouping_groupby_clause(x_group_by_columns)
+    x_select_clause = _get_grouping_groupby_clause(x_groupby_columns)
 
     # THEN
     assert x_select_clause == "GROUP BY"
@@ -230,10 +230,10 @@ def test_get_grouping_groupby_clause_ReturnsObj_Scenario1():
     # ESTABLISH
     fizz_str = "fizz"
     buzz_str = "buzz"
-    x_group_by_columns = [fizz_str, buzz_str]
+    x_groupby_columns = [fizz_str, buzz_str]
 
     # WHEN
-    x_select_clause = _get_grouping_groupby_clause(x_group_by_columns)
+    x_select_clause = _get_grouping_groupby_clause(x_groupby_columns)
 
     # THEN
     assert x_select_clause == f"GROUP BY {fizz_str}, {buzz_str}"
@@ -272,17 +272,17 @@ def test_get_groupby_sql_query_ReturnsObj_Scenario0():
     buzz_str = "buzz"
     swim_str = "swim"
     run_str = "run"
-    x_group_by_columns = [fizz_str, buzz_str]
+    x_groupby_columns = [fizz_str, buzz_str]
     x_value_columns = [swim_str, run_str]
     x_table_name = "fizzybuzzy"
 
     # WHEN
     gen_select_clause = get_groupby_sql_query(
-        x_table_name, x_group_by_columns, x_value_columns
+        x_table_name, x_groupby_columns, x_value_columns
     )
 
     # THEN
-    example_str = f"""{_get_grouping_select_clause(x_group_by_columns, x_value_columns)} FROM {x_table_name} GROUP BY {fizz_str}, {buzz_str}"""
+    example_str = f"""{_get_grouping_select_clause(x_groupby_columns, x_value_columns)} FROM {x_table_name} GROUP BY {fizz_str}, {buzz_str}"""
     assert gen_select_clause == example_str
 
 
@@ -292,17 +292,17 @@ def test_get_grouping_with_all_values_equal_sql_query_ReturnsObj_Scenario0():
     buzz_str = "buzz"
     swim_str = "swim"
     run_str = "run"
-    x_group_by_columns = [fizz_str, buzz_str]
+    x_groupby_columns = [fizz_str, buzz_str]
     x_value_columns = [swim_str, run_str]
     x_table_name = "fizzybuzzy"
 
     # WHEN
     gen_select_clause = get_grouping_with_all_values_equal_sql_query(
-        x_table_name, x_group_by_columns, x_value_columns
+        x_table_name, x_groupby_columns, x_value_columns
     )
 
     # THEN
-    example_str = f"""{get_groupby_sql_query(x_table_name, x_group_by_columns, x_value_columns)} HAVING MIN({swim_str}) = MAX({swim_str}) AND MIN({run_str}) = MAX({run_str})"""
+    example_str = f"""{get_groupby_sql_query(x_table_name, x_groupby_columns, x_value_columns)} HAVING MIN({swim_str}) = MAX({swim_str}) AND MIN({run_str}) = MAX({run_str})"""
     assert gen_select_clause == example_str
 
 

@@ -1,5 +1,10 @@
 from src.f00_instrument.file import create_path
-from src.f01_road.finance_tran import quota_str, time_int_str, bridge_str
+from src.f01_road.finance_tran import (
+    quota_str,
+    time_int_str,
+    bridge_str,
+    search_depth_str,
+)
 from src.f03_chrono.chrono import (
     c400_number_str,
     timeline_title_str,
@@ -104,7 +109,7 @@ def test_get_fiscal_config_dict_ReturnsObj():
     gen_jvalues = set(fiscalunit_dict.get(jvalues_str()).keys())
     assert gen_jvalues == x_fiscalunit_jvalues
     assert len(fiscalunit_dict.get(jvalues_str())) == 9
-    assert len(fiscal_deal_episode_dict.get(jvalues_str())) == 1
+    assert len(fiscal_deal_episode_dict.get(jvalues_str())) == 2
     assert len(fiscal_cashbook_dict.get(jvalues_str())) == 1
     assert len(fiscal_timeline_hour_dict.get(jvalues_str())) == 1
     assert len(fiscal_timeline_month_dict.get(jvalues_str())) == 1
@@ -168,7 +173,7 @@ def test_get_fiscal_args_dimen_mapping_ReturnsObj():
     assert fiscal_timeline_hour_str() in fiscal_title_dimens
     assert fiscalunit_str() in fiscal_title_dimens
     assert len(fiscal_title_dimens) == 6
-    assert len(x_fiscal_args_dimen_mapping) == 21
+    assert len(x_fiscal_args_dimen_mapping) == 22
 
 
 def get_class_type(x_dimen: str, x_arg: str) -> str:
@@ -219,7 +224,7 @@ def test_get_fiscal_args_set_ReturnsObj():
     mapping_args_set = set(get_fiscal_args_dimen_mapping().keys())
     print(f"{mapping_args_set=}")
     assert fiscal_args_set == mapping_args_set
-    assert len(fiscal_args_set) == 21
+    assert len(fiscal_args_set) == 22
     expected_fiscal_args_set = {
         acct_name_str(),
         amount_str(),
@@ -235,6 +240,7 @@ def test_get_fiscal_args_set_ReturnsObj():
         penny_str(),
         owner_name_str(),
         quota_str(),
+        search_depth_str(),
         respect_bit_str(),
         time_int_str(),
         timeline_title_str(),

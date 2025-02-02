@@ -173,18 +173,18 @@ def test_boat_staging_str_ReturnsObj():
 def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
     # ESTABLISH
     df1 = DataFrame([[]], columns=[])
-    group_by_list = [group_label_str(), acct_name_str()]
+    groupby_list = [group_label_str(), acct_name_str()]
 
     # WHEN
-    group_by_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
-        df1, group_by_list
+    groupby_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
+        df1, groupby_list
     )
 
     # THEN
-    assert group_by_dataframe is not None
-    assert len(group_by_dataframe) == len(DataFrame([[]], columns=[]))
-    print(f"{group_by_dataframe.columns=}")
-    assert group_by_dataframe.columns.to_list() == []
+    assert groupby_dataframe is not None
+    assert len(groupby_dataframe) == len(DataFrame([[]], columns=[]))
+    print(f"{groupby_dataframe.columns=}")
+    assert groupby_dataframe.columns.to_list() == []
 
 
 def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_GroupBySingleColumn():
@@ -192,22 +192,22 @@ def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario1
     df_columns = [group_label_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
     df1 = DataFrame(before_df_values, columns=df_columns)
-    group_by_list = [group_label_str()]
+    groupby_list = [group_label_str()]
 
     # WHEN
-    group_by_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
-        df1, group_by_list
+    groupby_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
+        df1, groupby_list
     )
-    print(f"{group_by_dataframe=}")
+    print(f"{groupby_dataframe=}")
 
     # THEN
-    assert group_by_dataframe is not None
+    assert groupby_dataframe is not None
     after_df_values = [["AA0", "BB0"]]
     after_df = DataFrame(after_df_values, columns=df_columns)
-    assert len(group_by_dataframe) == len(after_df)
-    print(f"{group_by_dataframe.columns=}")
-    assert group_by_dataframe.columns.to_list() == after_df.columns.to_list()
-    assert group_by_dataframe.to_csv() == after_df.to_csv()
+    assert len(groupby_dataframe) == len(after_df)
+    print(f"{groupby_dataframe.columns=}")
+    assert groupby_dataframe.columns.to_list() == after_df.columns.to_list()
+    assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
 def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_GroupByExtraColumns():
@@ -215,22 +215,22 @@ def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario2
     df_columns = [group_label_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
     df1 = DataFrame(before_df_values, columns=df_columns)
-    group_by_list = [group_label_str(), acct_name_str()]
+    groupby_list = [group_label_str(), acct_name_str()]
 
     # WHEN
-    group_by_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
-        df1, group_by_list
+    groupby_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
+        df1, groupby_list
     )
-    print(f"{group_by_dataframe=}")
+    print(f"{groupby_dataframe=}")
 
     # THEN
-    assert group_by_dataframe is not None
+    assert groupby_dataframe is not None
     after_df_values = [["AA0", "BB0"]]
     after_df = DataFrame(after_df_values, columns=df_columns)
-    assert len(group_by_dataframe) == len(after_df)
-    print(f"{group_by_dataframe.columns=}")
-    assert group_by_dataframe.columns.to_list() == after_df.columns.to_list()
-    assert group_by_dataframe.to_csv() == after_df.to_csv()
+    assert len(groupby_dataframe) == len(after_df)
+    print(f"{groupby_dataframe.columns=}")
+    assert groupby_dataframe.columns.to_list() == after_df.columns.to_list()
+    assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
 def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_GroupByExtraColumns():
@@ -238,22 +238,22 @@ def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario3
     df_columns = [group_label_str(), credor_respect_str(), "column3"]
     before_df_values = [["AA0", "BB0", "CC0"], ["AA0", "BB0", "CC0"]]
     df1 = DataFrame(before_df_values, columns=df_columns)
-    group_by_list = [group_label_str(), acct_name_str(), credor_respect_str()]
+    groupby_list = [group_label_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
-    group_by_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
-        df1, group_by_list
+    groupby_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
+        df1, groupby_list
     )
-    print(f"{group_by_dataframe=}")
+    print(f"{groupby_dataframe=}")
 
     # THEN
-    assert group_by_dataframe is not None
+    assert groupby_dataframe is not None
     after_df_values = [["AA0", "BB0", "CC0"]]
     after_df = DataFrame(after_df_values, columns=df_columns)
-    assert len(group_by_dataframe) == len(after_df)
-    print(f"{group_by_dataframe.columns=}")
-    assert group_by_dataframe.columns.to_list() == after_df.columns.to_list()
-    assert group_by_dataframe.to_csv() == after_df.to_csv()
+    assert len(groupby_dataframe) == len(after_df)
+    print(f"{groupby_dataframe.columns=}")
+    assert groupby_dataframe.columns.to_list() == after_df.columns.to_list()
+    assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
 def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_GroupByExtraColumns():
@@ -265,19 +265,19 @@ def test_get_boat_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario4
         ["DD0", "EE0", "FF0"],
     ]
     df1 = DataFrame(before_df_values, columns=df_columns)
-    group_by_list = [group_label_str(), acct_name_str(), credor_respect_str()]
+    groupby_list = [group_label_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
-    group_by_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
-        df1, group_by_list
+    groupby_dataframe = get_boat_staging_grouping_with_all_values_equal_df(
+        df1, groupby_list
     )
-    print(f"{group_by_dataframe=}")
+    print(f"{groupby_dataframe=}")
 
     # THEN
     after_df_values = [["DD0", "EE0", "FF0"]]
-    assert group_by_dataframe is not None
+    assert groupby_dataframe is not None
     after_df = DataFrame(after_df_values, columns=df_columns)
-    assert group_by_dataframe.columns.to_list() == after_df.columns.to_list()
-    assert len(group_by_dataframe) == len(after_df)
-    print(f"{group_by_dataframe.columns=}")
-    assert group_by_dataframe.to_csv() == after_df.to_csv()
+    assert groupby_dataframe.columns.to_list() == after_df.columns.to_list()
+    assert len(groupby_dataframe) == len(after_df)
+    print(f"{groupby_dataframe.columns=}")
+    assert groupby_dataframe.to_csv() == after_df.to_csv()

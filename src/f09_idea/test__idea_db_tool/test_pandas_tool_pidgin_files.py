@@ -12,7 +12,7 @@ from src.f08_pidgin.examples.example_pidgins import (
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,
     get_clean_roadmap,
-    get_swim_groupmap,
+    get_swim_labelmap,
     get_suita_namemap,
     get_suita_acct_name_otx_dt,
     get_suita_acct_name_inx_dt,

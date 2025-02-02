@@ -66,7 +66,11 @@ class DoarUnit(str):
     pass
 
 
-class GroupLabel(str):  # Created to help track the concept
+class LabelUnit(str):
+    """Any Label and Tag string classes should inherit from this class"""
+
+
+class GroupLabel(LabelUnit):  # Created to help track the concept
     pass
 
 
@@ -78,7 +82,7 @@ def get_default_world_id() -> WorldID:
     return WorldID("TestingWorld3")
 
 
-class FaceName(str):
+class FaceName(NameUnit):
     pass
 
 

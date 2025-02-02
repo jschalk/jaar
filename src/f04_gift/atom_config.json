@@ -18,7 +18,7 @@
             },
             "group_label": {
                 "column_order": 1,
-                "class_type": "GroupLabel",
+                "class_type": "LabelUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
@@ -85,7 +85,7 @@
         "jkeys": {
             "awardee_tag": {
                 "column_order": 1,
-                "class_type": "GroupLabel",
+                "class_type": "LabelUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
@@ -285,7 +285,7 @@
             },
             "team_tag": {
                 "column_order": 1,
-                "class_type": "GroupLabel",
+                "class_type": "LabelUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }

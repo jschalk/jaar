@@ -114,10 +114,10 @@ def boat_valid_str():
 
 
 def get_boat_staging_grouping_with_all_values_equal_df(
-    x_df: DataFrame, group_by_list: list
+    x_df: DataFrame, groupby_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
-    grouping_columns = get_custom_sorted_list(df_columns, group_by_list)
+    grouping_columns = get_custom_sorted_list(df_columns, groupby_list)
     value_columns = df_columns.difference(grouping_columns)
 
     if grouping_columns == []:
@@ -126,7 +126,7 @@ def get_boat_staging_grouping_with_all_values_equal_df(
         x_df.to_sql(boat_staging_str(), conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
             x_table=boat_staging_str(),
-            group_by_columns=grouping_columns,
+            groupby_columns=grouping_columns,
             value_columns=value_columns,
         )
         return pandas_read_sql_query(query_str, conn)
@@ -400,7 +400,6 @@ def get_idea_into_dimen_staging_query(
     common_columns_header = ", ".join(common_columns_list)
     values_cols = set(common_columns_set)
     values_cols.difference_update(x_jkeys)
-    # {_get_values_where_str(values_cols, dst_columns)}
     return f"""INSERT INTO {dst_table} (idea_number, {common_columns_header})
 SELECT '{idea_number}' as idea_number, {common_columns_header}
 FROM {src_table}
@@ -419,15 +418,3 @@ def _get_keys_where_str(x_jkeys: set[str], dst_columns: list[str]) -> str:
         else:
             keys_where_str += f" AND {x_jkey} IS NOT NULL"
     return "" if keys_where_str is None else keys_where_str
-
-
-def _get_values_where_str(values_cols: set[str], dst_columns: list[str]) -> str:
-    values_columns_list = [col for col in dst_columns if col in values_cols]
-    values_where_str = None
-    if values_cols:
-        for value_col in values_columns_list:
-            if values_where_str is None:
-                values_where_str = f"    AND ({value_col} IS NOT NULL"
-            else:
-                values_where_str += f" OR {value_col} IS NOT NULL"
-    return "" if values_where_str is None else values_where_str + ")"

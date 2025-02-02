@@ -55,8 +55,8 @@ def type_AcctName_str() -> str:
     return "NameUnit"
 
 
-def type_GroupLabel_str() -> str:
-    return "GroupLabel"
+def type_LabelUnit_str() -> str:
+    return "LabelUnit"
 
 
 def type_RoadUnit_str() -> str:
@@ -291,7 +291,7 @@ def get_allowed_class_types() -> set[str]:
         "NameUnit",
         "bool",
         "float",
-        "GroupLabel",
+        "LabelUnit",
         "int",
         "TitleUnit",
         "RoadUnit",
@@ -303,7 +303,7 @@ def get_atom_args_class_types() -> dict[str, str]:
     return {
         "acct_name": "NameUnit",
         "addin": "float",
-        "awardee_tag": "GroupLabel",
+        "awardee_tag": "LabelUnit",
         "base": "RoadUnit",
         "base_item_active_requisite": "bool",
         "begin": "float",
@@ -322,7 +322,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",
-        "group_label": "GroupLabel",
+        "group_label": "LabelUnit",
         "healer_name": "NameUnit",
         "item_title": "TitleUnit",
         "mass": "int",
@@ -343,7 +343,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_tag": "GroupLabel",
+        "team_tag": "LabelUnit",
     }
 
 

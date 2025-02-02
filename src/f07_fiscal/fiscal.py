@@ -271,18 +271,18 @@ class FiscalUnit:
 
     def add_dealepisode(
         self,
-        x_owner_name: OwnerName,
-        x_time_int: TimeLinePoint,
-        x_money_magnitude: int,
+        owner_name: OwnerName,
+        time_int: TimeLinePoint,
+        money_magnitude: int,
         allow_prev_to_present_time_entry: bool = False,
     ):
-        if x_time_int < self.present_time and not allow_prev_to_present_time_entry:
-            exception_str = f"Cannot set dealepisode because time_int {x_time_int} is less than FiscalUnit.present_time {self.present_time}."
+        if time_int < self.present_time and not allow_prev_to_present_time_entry:
+            exception_str = f"Cannot set dealepisode because time_int {time_int} is less than FiscalUnit.present_time {self.present_time}."
             raise dealepisode_Exception(exception_str)
-        if self.deallog_exists(x_owner_name) is False:
-            self.set_deallog(deallog_shop(x_owner_name))
-        x_deallog = self.get_deallog(x_owner_name)
-        x_deallog.add_episode(x_time_int, x_money_magnitude)
+        if self.deallog_exists(owner_name) is False:
+            self.set_deallog(deallog_shop(owner_name))
+        x_deallog = self.get_deallog(owner_name)
+        x_deallog.add_episode(time_int, money_magnitude)
 
     def get_dict(self, include_cashbook: bool = True) -> dict:
         x_dict = {
@@ -316,27 +316,27 @@ class FiscalUnit:
 
     def set_cashpurchase(self, x_cashpurchase: TranUnit):
         self.cashbook.set_tranunit(
-            x_tranunit=x_cashpurchase,
-            x_blocked_time_ints=self.get_deallogs_time_ints(),
-            x_present_time=self.present_time,
+            tranunit=x_cashpurchase,
+            blocked_time_ints=self.get_deallogs_time_ints(),
+            present_time=self.present_time,
         )
 
     def add_cashpurchase(
         self,
-        x_owner_name: OwnerName,
-        x_acct_name: AcctName,
-        x_time_int: TimeLinePoint,
-        x_amount: FundNum,
-        x_blocked_time_ints: set[TimeLinePoint] = None,
-        x_present_time: TimeLinePoint = None,
+        owner_name: OwnerName,
+        acct_name: AcctName,
+        time_int: TimeLinePoint,
+        amount: FundNum,
+        blocked_time_ints: set[TimeLinePoint] = None,
+        present_time: TimeLinePoint = None,
     ):
         self.cashbook.add_tranunit(
-            x_owner_name=x_owner_name,
-            x_acct_name=x_acct_name,
-            x_time_int=x_time_int,
-            x_amount=x_amount,
-            x_blocked_time_ints=x_blocked_time_ints,
-            x_present_time=x_present_time,
+            owner_name=owner_name,
+            acct_name=acct_name,
+            time_int=time_int,
+            amount=amount,
+            blocked_time_ints=blocked_time_ints,
+            present_time=present_time,
         )
 
     def cashpurchase_exists(

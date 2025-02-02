@@ -66,16 +66,16 @@ def test_fiscal_build_from_df_ReturnsObj_Scenario0_OneFiscalTitle(
         timeline=creg_timelineunit,
     )
     accord23_fiscalunit.add_dealepisode(
-        x_owner_name="Sue",
-        x_time_int=777,
-        x_money_magnitude=445,
+        owner_name="Sue",
+        time_int=777,
+        money_magnitude=445,
         allow_prev_to_present_time_entry=True,
     )
     accord23_fiscalunit.add_cashpurchase(
-        x_owner_name="Zia",
-        x_acct_name="Bob",
-        x_time_int=777,
-        x_amount=888,
+        owner_name="Zia",
+        acct_name="Bob",
+        time_int=777,
+        amount=888,
     )
     gen_fiscalunit = x_fiscalunits.get(accord23_str)
     assert gen_fiscalunit.fund_coin == x_fund_coin

@@ -172,9 +172,9 @@ def test_FiscalUnit_add_dealepisode_DoesNotRaiseError_allow_prev_to_present_time
 
     # WHEN
     accord_fiscal.add_dealepisode(
-        x_owner_name=sue_str,
-        x_time_int=sue_x4_time_int,
-        x_money_magnitude=sue_x4_magnitude,
+        owner_name=sue_str,
+        time_int=sue_x4_time_int,
+        money_magnitude=sue_x4_magnitude,
         allow_prev_to_present_time_entry=True,
     )
 

@@ -15,6 +15,9 @@
         "quota": {
             "otx_key": false
         },
+        "search_depth": {
+            "otx_key": false
+        },
         "time_int": {
             "otx_key": true
         }

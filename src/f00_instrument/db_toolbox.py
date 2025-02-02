@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_toolbox import extract_csv_headers
+from src.f00_instrument.file import set_dir, create_path
 from sqlite3 import (
     Connection,
     connect as sqlite3_connect,
@@ -7,7 +7,9 @@ from sqlite3 import (
 )
 from dataclasses import dataclass
 from contextlib import contextmanager
-from csv import reader as csv_reader
+from csv import reader as csv_reader, writer as csv_writer
+from os.path import join as os_path_join
+from copy import copy as copy_copy
 
 
 def sqlite_null(x_obj: any):
@@ -175,11 +177,11 @@ def sqlite_connection(db_name):
 
 
 def _get_grouping_select_clause(
-    group_by_columns: list[str], value_columns: list[str]
+    groupby_columns: list[str], value_columns: list[str]
 ) -> str:
     select_str = "SELECT"
-    for group_by_column in group_by_columns:
-        select_str += f" {group_by_column},"
+    for groupby_column in groupby_columns:
+        select_str += f" {groupby_column},"
     for value_column in value_columns:
         select_str += f" MAX({value_column}) AS {value_column},"
     return _remove_comma_at_end(select_str)
@@ -189,10 +191,10 @@ def _remove_comma_at_end(x_str: str) -> str:
     return x_str.removesuffix(",")
 
 
-def _get_grouping_groupby_clause(group_by_columns: list[str]) -> str:
+def _get_grouping_groupby_clause(groupby_columns: list[str]) -> str:
     groupby_str = "GROUP BY"
-    for group_by_column in group_by_columns:
-        groupby_str += f" {group_by_column},"
+    for groupby_column in groupby_columns:
+        groupby_str += f" {groupby_column},"
     return _remove_comma_at_end(groupby_str)
 
 
@@ -208,15 +210,15 @@ def _get_having_equal_value_clause(value_columns: list[str]) -> str:
 
 
 def get_groupby_sql_query(
-    x_table: str, group_by_columns: list[str], value_columns: list[str]
+    x_table: str, groupby_columns: list[str], value_columns: list[str]
 ) -> str:
-    return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)}"
+    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(groupby_columns)}"
 
 
 def get_grouping_with_all_values_equal_sql_query(
-    x_table: str, group_by_columns: list[str], value_columns: list[str]
+    x_table: str, groupby_columns: list[str], value_columns: list[str]
 ) -> str:
-    return f"{_get_grouping_select_clause(group_by_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(group_by_columns)} {_get_having_equal_value_clause(value_columns)}"
+    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(groupby_columns)} {_get_having_equal_value_clause(value_columns)}"
 
 
 def insert_csv(csv_file_path: str, conn_or_cursor: sqlite3_Connection, table_name: str):
@@ -404,13 +406,13 @@ def create_table2table_agg_insert_query(
             select_columns_str += f", {dst_column}"
         else:
             select_columns_str += f", MAX({dst_column})"
-    group_by_columns_str = ", ".join(focus_cols)
+    groupby_columns_str = ", ".join(focus_cols)
 
     return f"""INSERT INTO {dst_table} ({dst_columns_str})
 SELECT {select_columns_str}
 FROM {src_table}
 WHERE error_message IS NULL
-GROUP BY {group_by_columns_str}
+GROUP BY {groupby_columns_str}
 ;
 """
 
@@ -422,3 +424,58 @@ def is_stageable(
 ):
     src_columns = set(get_table_columns(conn_or_cursor, src_table))
     return required_columns.issubset(src_columns)
+
+
+def save_to_split_csvs(
+    conn_or_cursor: sqlite3_Connection, tablename, key_columns, output_dir
+):
+    """
+    Select a single table from a SQLite DB, filter rows into CSVs by key columns, and save them.
+
+    :param db_path: Path to the SQLite database file.
+    :param tablename: Name of the table to query.
+    :param key_columns: List of columns to use as keys for filtering rows.
+    :param output_dir: Directory to save the resulting CSVs.
+    """
+    # Fetch all rows from the table
+    column_names = get_table_columns(conn_or_cursor, tablename)
+    query = f"SELECT * FROM {tablename}"
+    rows = conn_or_cursor.execute(query).fetchall()
+
+    # Find the indices of key columns
+    key_indices = [column_names.index(key) for key in key_columns]
+
+    # Organize rows by key values
+    collectioned_rows = {}
+    for row in rows:
+        # Create a tuple of key values
+        key_values = tuple(row[index] for index in key_indices)
+
+        if key_values not in collectioned_rows:
+            collectioned_rows[key_values] = []
+        collectioned_rows[key_values].append(row)
+
+    # Write collectioned rows to separate CSV files
+    for key_values, collection in collectioned_rows.items():
+        key_path_part = get_key_part(key_values, copy_copy(key_columns))
+        csv_path = create_path(output_dir, key_path_part)
+        set_dir(csv_path)
+        output_file = os_path_join(csv_path, f"{tablename}.csv")
+
+        # Write to CSV
+        with open(output_file, mode="w", newline="", encoding="utf-8") as csv_file:
+            writer = csv_writer(csv_file)
+            writer.writerow(column_names)
+            writer.writerows(collection)
+
+
+def get_key_part(key_values: list[str], key_columns: list[str]) -> str:
+    return "/".join(str(value) for value in key_values)
+    # x_key_path = ""
+    # for value in key_values:
+    #     header_name = key_columns.pop()
+    #     if x_key_path == "":
+    #         x_key_path = f"{header_name}s/{value}"
+    #     else:
+    #         x_key_path += f"/{header_name}s/{value}"
+    # return x_key_path

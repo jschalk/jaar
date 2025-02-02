@@ -4,7 +4,12 @@ from src.f00_instrument.db_toolbox import (
     get_row_count,
     create_select_inconsistency_query,
 )
-from src.f01_road.finance_tran import bridge_str, quota_str, time_int_str
+from src.f01_road.finance_tran import (
+    bridge_str,
+    quota_str,
+    time_int_str,
+    search_depth_str,
+)
 from src.f03_chrono.chrono import (
     c400_number_str,
     yr1_jan1_offset_str,
@@ -422,6 +427,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario4_Idea_br00001_Table_
         owner_name_str(),
         time_int_str(),
         quota_str(),
+        search_depth_str(),
     ]
     a23_owner_name = bob_inx
     a23_time_int = 22
@@ -432,11 +438,11 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario4_Idea_br00001_Table_
         cursor = fiscal_db_conn.cursor()
         create_idea_sorted_table(cursor, br00001_tablename, br00001_columns)
         insert_staging_sqlstr = f"""
-INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{time_int_str()},{quota_str()})
+INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{time_int_str()},{quota_str()}, {search_depth_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota})
-, ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota})
-, ('{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota})
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota}, NULL)
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota}, NULL)
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota}, NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -460,6 +466,7 @@ VALUES
             a23_owner_name,
             a23_time_int,
             a23_quota,
+            None,  # search_depth
             None,  # note
         )
         expected_row1 = (
@@ -470,6 +477,7 @@ VALUES
             a23_owner_name,
             a23_time_int,
             a23_quota,
+            None,  # search_depth
             None,  # note
         )
         print(f"{fiscalunit_db_rows[0]=}")
@@ -832,7 +840,7 @@ VALUES
         print(f"{expected_fiscalunit_csv_str=}")
         assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
         # confirming file is non-zero length, has column headers
-        assert len(open_file(x_fis.deal_stage_csv_path)) == 85
+        assert len(open_file(x_fis.deal_stage_csv_path)) == 98
         assert len(open_file(x_fis.cash_stage_csv_path)) == 87
         assert len(open_file(x_fis.hour_stage_csv_path)) == 78
         assert len(open_file(x_fis.mont_stage_csv_path)) == 76
@@ -894,7 +902,7 @@ VALUES
         print(f"{expected_fiscalunit_csv_str=}")
         assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
         # confirming file is non-zero length, has column headers
-        assert len(open_file(x_fis.deal_stage_csv_path)) == 85
+        assert len(open_file(x_fis.deal_stage_csv_path)) == 98
         assert len(open_file(x_fis.cash_stage_csv_path)) == 96
         assert len(open_file(x_fis.hour_stage_csv_path)) == 87
         assert len(open_file(x_fis.mont_stage_csv_path)) == 85
@@ -1250,11 +1258,11 @@ def test_set_fiscal_staging_error_message_Scenario5_fiscaldeal_Some_error_messag
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.deal_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_2},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_2},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL,NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
