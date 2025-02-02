@@ -426,6 +426,7 @@ def test_get_fiscal_inconsistency_sqlstrs_ReturnsObj():
                 cursor, x_tablename, dimen_focus_columns, exclude_cols
             )
             print(f'{x_dimen}_INCONSISTENCY_SQLSTR ="""{generated_dimen_sqlstr}"""')
+            print(f'{x_sqlstr=}"""')
             assert x_sqlstr == generated_dimen_sqlstr
 
 

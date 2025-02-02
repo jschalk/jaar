@@ -270,7 +270,8 @@
       "time_int": {}
     },
     "jvalues": {
-      "quota": {}
+      "quota": {},
+      "search_depth": {}
     }
   },
   "fiscal_timeline_hour": {

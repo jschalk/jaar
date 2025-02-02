@@ -3,6 +3,7 @@ from src.f01_road.finance_tran import (
     quota_str,
     time_int_str,
     bridge_str,
+    search_depth_str,
     DealEpisode,
     dealepisode_shop,
     DealLog,
@@ -16,6 +17,7 @@ from pytest import raises as pytest_raises
 
 def test_str_functions_ReturnObj():
     assert bridge_str() == "bridge"
+    assert search_depth_str() == "search_depth"
     assert time_int_str() == "time_int"
     assert quota_str() == "quota"
 

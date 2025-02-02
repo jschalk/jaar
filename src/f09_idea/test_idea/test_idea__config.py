@@ -1,6 +1,11 @@
 from src.f00_instrument.dict_toolbox import get_json_from_dict
 from src.f00_instrument.file import save_file, create_path
-from src.f01_road.finance_tran import quota_str, time_int_str, bridge_str
+from src.f01_road.finance_tran import (
+    quota_str,
+    time_int_str,
+    bridge_str,
+    search_depth_str,
+)
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
     bud_acctunit_str,
@@ -267,10 +272,11 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[81] == c400_number_str()
     assert table_sorting_priority[82] == yr1_jan1_offset_str()
     assert table_sorting_priority[83] == quota_str()
-    assert table_sorting_priority[84] == monthday_distortion_str()
-    assert table_sorting_priority[85] == timeline_title_str()
-    assert table_sorting_priority[86] == "error_message"
-    assert len(table_sorting_priority) == 87
+    assert table_sorting_priority[84] == search_depth_str()
+    assert table_sorting_priority[85] == monthday_distortion_str()
+    assert table_sorting_priority[86] == timeline_title_str()
+    assert table_sorting_priority[87] == "error_message"
+    assert len(table_sorting_priority) == 88
     all_args = copy_copy(atom_args)
     all_args.update(all_bud_dimen_delete_keys)
     all_args.update(fiscal_args)
@@ -353,6 +359,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(quota_str()) == "REAL"
+    assert sqlite_types.get(search_depth_str()) == "INT"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
     assert sqlite_types.get(timeline_title_str()) == "TEXT"
     assert sqlite_types.get("error_message") == "TEXT"
@@ -503,8 +510,8 @@ def _validate_idea_config(x_idea_config: dict):
 
         sub_jkeys_keys = set(sub_dimen.get(jkeys_str()).keys())
         idea_jkeys_keys = set(idea_dict.get(jkeys_str()).keys())
-        print(f"    {sub_jkeys_keys=}")
-        print(f"  {idea_jkeys_keys=}")
+        # print(f"    {sub_jkeys_keys=}")
+        # print(f"  {idea_jkeys_keys=}")
         assert face_name_str() in idea_jkeys_keys
         assert event_int_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) != "pidgin":

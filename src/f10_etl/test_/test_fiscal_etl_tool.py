@@ -722,8 +722,8 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario7_fiscal_deal_episode(
     quota7 = 777
     accord56_fiscal_row = [accord56_fiscal_title, "", "", "", "", "", "", "", "", ""]
     fiscalunit_df = DataFrame([accord56_fiscal_row], columns=xc.unit_agg_columns)
-    a56_deal_t3 = [accord56_fiscal_title, sue_str, t3, quota3]
-    a56_deal_t7 = [accord56_fiscal_title, sue_str, t7, quota7]
+    a56_deal_t3 = [accord56_fiscal_title, sue_str, t3, quota3, None]
+    a56_deal_t7 = [accord56_fiscal_title, sue_str, t7, quota7, None]
     a56_deal_rows = [a56_deal_t3, a56_deal_t7]
     fiscal_deal_df = DataFrame(a56_deal_rows, columns=xc.deal_agg_columns)
     print(f"{fiscal_deal_df=}")

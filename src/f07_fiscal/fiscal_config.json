@@ -20,6 +20,27 @@
             }
         }
     },
+    "fiscal_deal_episode": {
+        "jkeys": {
+            "fiscal_title": {
+                "class_type": "TitleUnit"
+            },
+            "owner_name": {
+                "class_type": "NameUnit"
+            },
+            "time_int": {
+                "class_type": "TimeLinePoint"
+            }
+        },
+        "jvalues": {
+            "quota": {
+                "class_type": "int"
+            },
+            "search_depth": {
+                "class_type": "int"
+            }
+        }
+    },
     "fiscal_timeline_hour": {
         "jkeys": {
             "fiscal_title": {
@@ -65,24 +86,6 @@
             }
         }
     },
-    "fiscal_deal_episode": {
-        "jkeys": {
-            "fiscal_title": {
-                "class_type": "TitleUnit"
-            },
-            "owner_name": {
-                "class_type": "NameUnit"
-            },
-            "time_int": {
-                "class_type": "TimeLinePoint"
-            }
-        },
-        "jvalues": {
-            "quota": {
-                "class_type": "int"
-            }
-        }
-    },
     "fiscalunit": {
         "jkeys": {
             "fiscal_title": {
@@ -96,9 +99,6 @@
             "c400_number": {
                 "class_type": "int"
             },
-            "present_time": {
-                "class_type": "int"
-            },
             "fund_coin": {
                 "class_type": "float"
             },
@@ -107,6 +107,9 @@
             },
             "penny": {
                 "class_type": "float"
+            },
+            "present_time": {
+                "class_type": "int"
             },
             "respect_bit": {
                 "class_type": "float"

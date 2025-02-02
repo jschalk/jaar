@@ -37,7 +37,7 @@ def get_fiscalcash_sorted_args() -> list[str]:
 
 
 def get_fiscaldeal_sorted_args() -> list[str]:
-    return ["fiscal_title", "owner_name", "time_int", "quota"]
+    return ["fiscal_title", "owner_name", "time_int", "quota", "search_depth"]
 
 
 def get_fiscalhour_sorted_args() -> list[str]:
@@ -119,7 +119,13 @@ class FiscalPrimeColumnsRef:
             "monthday_distortion",
             "timeline_title",
         ]
-        self.deal_agg_columns = ["fiscal_title", "owner_name", "time_int", "quota"]
+        self.deal_agg_columns = [
+            "fiscal_title",
+            "owner_name",
+            "time_int",
+            "quota",
+            "search_depth",
+        ]
         self.cash_agg_columns = [
             "fiscal_title",
             "owner_name",
@@ -134,7 +140,7 @@ class FiscalPrimeColumnsRef:
         _front_cols = ["idea_number", "face_name", "event_int"]
         _back_cols = ["error_message"]
         self.unit_agg_csv_header = "fiscal_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title"
-        self.deal_agg_csv_header = "fiscal_title,owner_name,time_int,quota"
+        self.deal_agg_csv_header = "fiscal_title,owner_name,time_int,quota,search_depth"
         self.cash_agg_csv_header = "fiscal_title,owner_name,acct_name,time_int,amount"
         self.hour_agg_csv_header = "fiscal_title,hour_title,cumlative_minute"
         self.mont_agg_csv_header = "fiscal_title,month_title,cumlative_day"
@@ -146,7 +152,7 @@ class FiscalPrimeColumnsRef:
         self.mont_staging_columns = [*_front_cols, *self.mont_agg_columns, *_back_cols]
         self.week_staging_columns = [*_front_cols, *self.week_agg_columns, *_back_cols]
         self.unit_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title,error_message"""
-        self.deal_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,owner_name,time_int,quota,error_message"""
+        self.deal_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,owner_name,time_int,quota,search_depth,error_message"""
         self.cash_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,owner_name,acct_name,time_int,amount,error_message"""
         self.hour_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,hour_title,cumlative_minute,error_message"""
         self.mont_staging_csv_header = """idea_number,face_name,event_int,fiscal_title,month_title,cumlative_day,error_message"""

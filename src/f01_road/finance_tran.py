@@ -40,6 +40,10 @@ def quota_str() -> str:
     return "quota"
 
 
+def search_depth_str() -> str:
+    return "search_depth"
+
+
 @dataclass
 class TranUnit:
     src: AcctName = None

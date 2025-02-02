@@ -47,8 +47,8 @@ CREATE_BUDUNIT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_st
 
 CREATE_FISCAL_CASHBOOK_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscal_cashbook_agg (fiscal_title TEXT, owner_name TEXT, acct_name TEXT, time_int INTEGER, amount REAL)"""
 CREATE_FISCAL_CASHBOOK_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscal_cashbook_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, acct_name TEXT, time_int INTEGER, amount REAL, error_message TEXT)"""
-CREATE_FISCAL_DEAL_EPISODE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscal_deal_episode_agg (fiscal_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL)"""
-CREATE_FISCAL_DEAL_EPISODE_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscal_deal_episode_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, error_message TEXT)"""
+CREATE_FISCAL_DEAL_EPISODE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscal_deal_episode_agg (fiscal_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, search_depth INT)"""
+CREATE_FISCAL_DEAL_EPISODE_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscal_deal_episode_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, search_depth INT, error_message TEXT)"""
 CREATE_FISCAL_TIMELINE_HOUR_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscal_timeline_hour_agg (fiscal_title TEXT, hour_title TEXT, cumlative_minute INTEGER)"""
 CREATE_FISCAL_TIMELINE_HOUR_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscal_timeline_hour_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, hour_title TEXT, cumlative_minute INTEGER, error_message TEXT)"""
 CREATE_FISCAL_TIMELINE_MONTH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscal_timeline_month_agg (fiscal_title TEXT, month_title TEXT, cumlative_day INTEGER)"""
@@ -124,6 +124,7 @@ def get_bud_create_table_sqlstrs() -> dict[str, str]:
 def create_fiscal_tables(conn_or_cursor: sqlite3_Connection):
     for create_table_sqlstr in get_fiscal_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
+        print(f"{create_table_sqlstr=}")
 
 
 def create_bud_tables(conn_or_cursor: sqlite3_Connection):
@@ -225,6 +226,7 @@ FISCALDEAL_INCONSISTENCY_SQLSTR = """SELECT fiscal_title, owner_name, time_int
 FROM fiscal_deal_episode_staging
 GROUP BY fiscal_title, owner_name, time_int
 HAVING MIN(quota) != MAX(quota)
+    OR MIN(search_depth) != MAX(search_depth)
 """
 FISCALHOUR_INCONSISTENCY_SQLSTR = """SELECT fiscal_title, hour_title
 FROM fiscal_timeline_hour_staging
@@ -566,6 +568,7 @@ SELECT fiscal_title, owner_name, time_int
 FROM fiscal_deal_episode_staging
 GROUP BY fiscal_title, owner_name, time_int
 HAVING MIN(quota) != MAX(quota)
+    OR MIN(search_depth) != MAX(search_depth)
 )
 UPDATE fiscal_deal_episode_staging
 SET error_message = 'Inconsistent fiscal data'
@@ -740,8 +743,8 @@ WHERE error_message IS NULL
 GROUP BY fiscal_title, owner_name, acct_name, time_int
 ;
 """
-FISCALDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_deal_episode_agg (fiscal_title, owner_name, time_int, quota)
-SELECT fiscal_title, owner_name, time_int, MAX(quota)
+FISCALDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fiscal_deal_episode_agg (fiscal_title, owner_name, time_int, quota, search_depth)
+SELECT fiscal_title, owner_name, time_int, MAX(quota), MAX(search_depth)
 FROM fiscal_deal_episode_staging
 WHERE error_message IS NULL
 GROUP BY fiscal_title, owner_name, time_int
