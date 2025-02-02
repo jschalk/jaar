@@ -44,7 +44,7 @@ def test_teamunit_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
     assert x_teamunit._teamlinks == set()
 
 
-def test_create_teamunit_ReturnsCorrectObj():
+def test_create_teamunit_ReturnsObj():
     # ESTABLISH
     swim_team_tag = GroupLabel("swimmers")
 
@@ -85,7 +85,7 @@ def test_TeamUnit_set_teamlink_CorrectlySets_teamlinks_v1():
     assert len(x_teamunit._teamlinks) == 1
 
 
-def test_TeamUnit_teamlink_exists_ReturnsCorrectObj():
+def test_TeamUnit_teamlink_exists_ReturnsObj():
     # ESTABLISH
     x_teamunit = teamunit_shop()
     yao_str = "Yao"
@@ -438,7 +438,7 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
 #     )
 
 
-def test_TeamUnit_get_teamlink_ReturnsCorrectObj():
+def test_TeamUnit_get_teamlink_ReturnsObj():
     # ESTABLISH
     climb_str = ",climbers"
     hike_str = ",hikers"

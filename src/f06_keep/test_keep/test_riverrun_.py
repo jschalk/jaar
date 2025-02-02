@@ -51,7 +51,7 @@ def test_RiverRun_set_cycle_max_CorrectlySetsAttr():
     assert x_riverrun.cycle_max == 10
 
 
-def test_riverrun_shop_ReturnsCorrectObjWithArg():
+def test_riverrun_shop_ReturnsObjWithArg():
     # ESTABLISH
     ten_int = 10
     yao_hubunit = example_yao_hubunit()
@@ -84,7 +84,7 @@ def test_riverrun_shop_ReturnsCorrectObjWithArg():
     assert x_riverrun._cycle_payees_curr == set()
 
 
-def test_riverrun_shop_ReturnsCorrectObjWithoutArgs():
+def test_riverrun_shop_ReturnsObjWithoutArgs():
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
 
@@ -142,7 +142,7 @@ def test_RiverRun_delete_keep_credorledgers_owner_SetsAttr():
     assert x_riverrun.keep_credorledgers == {yao_str: {yao_str: 1}}
 
 
-def test_RiverRun_get_all_keep_credorledger_acct_names_ReturnsCorrectObj():
+def test_RiverRun_get_all_keep_credorledger_acct_names_ReturnsObj():
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"

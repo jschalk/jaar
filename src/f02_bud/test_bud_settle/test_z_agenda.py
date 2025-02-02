@@ -18,7 +18,7 @@ def get_tasks_count(agenda_dict: dict[RoadUnit, ItemUnit]) -> int:
     return sum(bool(x_itemunit._task) for x_itemunit in agenda_dict.values())
 
 
-def test_BudUnit_get_agenda_dict_ReturnsCorrectObj():
+def test_BudUnit_get_agenda_dict_ReturnsObj():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
 
@@ -509,7 +509,7 @@ def test_BudUnit_get_agenda_dict_IsSetByTeamUnit_2AcctGroup():
     assert len(yao_bud.get_agenda_dict()) == 1
 
 
-def test_BudUnit_get_all_pledges_ReturnsCorrectObj():
+def test_BudUnit_get_all_pledges_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     zia_bud = budunit_shop(zia_str)

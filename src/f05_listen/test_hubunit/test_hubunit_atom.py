@@ -14,7 +14,7 @@ from src.f05_listen.examples.listen_env import (
 from os.path import exists as os_path_exists
 
 
-def test_HubUnit_atom_file_name_ReturnsCorrectObj():
+def test_HubUnit_atom_file_name_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_title(), yao_str)
@@ -27,7 +27,7 @@ def test_HubUnit_atom_file_name_ReturnsCorrectObj():
     assert one_atom_file_name == f"{one_int}.json"
 
 
-def test_HubUnit_atom_file_path_ReturnsCorrectObj():
+def test_HubUnit_atom_file_path_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_title(), yao_str)
@@ -58,7 +58,7 @@ def test_HubUnit_save_valid_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
     assert atom_num == one_int
 
 
-def test_HubUnit_atom_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_HubUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_title(), yao_str)
@@ -89,7 +89,7 @@ def test_HubUnit_delete_atom_file_CorrectlyDeletesFile(env_dir_setup_cleanup):
     assert yao_hubunit.atom_file_exists(ten_int) is False
 
 
-def test_HubUnit_get_max_atom_file_number_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_HubUnit_get_max_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_title(), yao_str)
@@ -101,7 +101,7 @@ def test_HubUnit_get_max_atom_file_number_ReturnsCorrectObj(env_dir_setup_cleanu
     assert yao_hubunit.get_max_atom_file_number() == ten_int
 
 
-def test_HubUnit_get_max_atom_file_number_ReturnsCorrectObjWhenDirIsEmpty(
+def test_HubUnit_get_max_atom_file_number_ReturnsObjWhenDirIsEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -112,7 +112,7 @@ def test_HubUnit_get_max_atom_file_number_ReturnsCorrectObjWhenDirIsEmpty(
     assert yao_hubunit.get_max_atom_file_number() is None
 
 
-def test_HubUnit_get_next_atom_file_number_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_HubUnit_get_next_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_title(), yao_str)

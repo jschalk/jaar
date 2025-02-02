@@ -264,7 +264,7 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     assert sue_budunit._item_dict.get(clean_road)._active is False
 
 
-def test_BudUnit_get_agenda_dict_ReturnsCorrectObj():
+def test_BudUnit_get_agenda_dict_ReturnsObj():
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
 
@@ -346,7 +346,7 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     assert yao_budunit._item_dict.get(laundry_road)._active is False
 
 
-def test_BudUnit_settle_bud_OptionWeekdaysReturnsCorrectObj_budunit_v001():
+def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
     # ESTABLISH
     yao_budunit = budunit_v001()
 
@@ -570,7 +570,7 @@ def test_BudUnit_settle_bud_EveryItemHasActiveStatus_budunit_v001():
     )
 
 
-def test_BudUnit_settle_bud_EveryTwoMonthReturnsCorrectObj_budunit_v001():
+def test_BudUnit_settle_bud_EveryTwoMonthReturnsObj_budunit_v001():
     # ESTABLISH
     yao_budunit = budunit_v001()
     minute_str = "day_minute"

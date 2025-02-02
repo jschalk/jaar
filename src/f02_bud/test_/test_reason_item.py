@@ -49,7 +49,7 @@ def test_reasoncore_shop_ReturnsCorrectAttrWith_bridge():
     assert casa_reason.bridge == slash_str
 
 
-def test_reasonheir_shop_ReturnsCorrectObj():
+def test_reasonheir_shop_ReturnsObj():
     # ESTABLISH
     casa_str = "casa"
     casa_road = create_road(root_title(), casa_str)
@@ -220,7 +220,7 @@ def test_ReasonHeir_set_status_BudNoneCorrectlySetsStatusFalse():
     assert wkday_reason._status is False
 
 
-def test_reasonunit_shop_ReturnsCorrectObj():
+def test_reasonunit_shop_ReturnsObj():
     # ESTABLISH
     wkday_str = "weekday"
     wkday_road = create_road(root_title(), wkday_str)
@@ -304,7 +304,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoPremisesReasons():
     assert wkday_reason_dict == static_wkday_reason_dict
 
 
-def test_reasons_get_from_dict_ReturnsCorrectObj():
+def test_reasons_get_from_dict_ReturnsObj():
     # ESTABLISH
     wkday_str = "weekday"
     wkday_road = create_road(root_title(), wkday_str)
@@ -413,7 +413,7 @@ def test_ReasonCore_premise_exists_ReturnsObj():
     assert day_reason.premise_exists(day_road)
 
 
-def test_ReasonCore_get_single_premis_ReturnsCorrectObj():
+def test_ReasonCore_get_single_premis_ReturnsObj():
     # ESTABLISH
     day_road = create_road(root_title(), "day")
     day_reason = reasoncore_shop(base=day_road)

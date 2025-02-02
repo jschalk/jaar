@@ -35,7 +35,7 @@ def test_BitNum_exists():
     assert inspect_getdoc(y_BitNum) == inspect_str
 
 
-def test_default_respect_bit_if_None_ReturnsCorrectObj():
+def test_default_respect_bit_if_None_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert default_respect_bit_if_None() == 1
     assert default_respect_bit_if_None(None) == 1
@@ -73,7 +73,7 @@ def test_PennyNum_exists():
     assert inspect_getdoc(y_pennynum) == "Smallest Unit of Money"
 
 
-def test_default_penny_if_None_ReturnsCorrectObj():
+def test_default_penny_if_None_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert default_penny_if_None() == 1
     assert default_penny_if_None(5) == 5
@@ -140,7 +140,7 @@ def test_FundCoin_exists():
     assert inspect_getdoc(y_fund_coinnum) == inspect_str
 
 
-def test_default_fund_coin_if_None_ReturnsCorrectObj():
+def test_default_fund_coin_if_None_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert default_fund_coin_if_None() == 1
     assert default_fund_coin_if_None(5) == 5

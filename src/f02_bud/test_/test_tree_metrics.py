@@ -16,7 +16,7 @@ def test_TreeMetrics_Exists():
     assert x_tree_metrics.all_item_uids_are_unique is None
 
 
-def test_treemetrics_shop_ReturnsCorrectObj():
+def test_treemetrics_shop_ReturnsObj():
     # ESTABLISH / WHEN
     x_tree_metrics = treemetrics_shop()
 

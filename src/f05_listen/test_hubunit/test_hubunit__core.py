@@ -28,7 +28,7 @@ from pytest import raises as pytest_raises
 from os.path import exists as os_path_exists
 
 
-def test_get_keep_path_ReturnsCorrectObj():
+def test_get_keep_path_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     peru_str = "peru"
@@ -99,7 +99,7 @@ def test_HubUnit_RaisesError_keep_road_DoesNotExist():
     )
 
 
-def test_hubunit_shop_ReturnsCorrectObj():
+def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
     x_fiscals_dir = "src/f07_fiscal/examples"
     x_fiscal_title = "accord45"
@@ -154,7 +154,7 @@ def test_hubunit_shop_ReturnsCorrectObj():
     assert x_hubunit.voice_path() == x_voicepath
 
 
-def test_hubunit_shop_ReturnsCorrectObjWhenEmpty():
+def test_hubunit_shop_ReturnsObjWhenEmpty():
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"

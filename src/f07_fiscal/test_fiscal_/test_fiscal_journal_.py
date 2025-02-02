@@ -16,7 +16,7 @@ from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 
 
-def test_FiscalUnit_get_journal_db_path_ReturnsCorrectObj():
+def test_FiscalUnit_get_journal_db_path_ReturnsObj():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fiscal = FiscalUnit(

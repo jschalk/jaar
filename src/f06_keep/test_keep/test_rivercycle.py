@@ -26,7 +26,7 @@ def test_RiverCylce_Exists():
     assert x_rivercycle.riverbooks is None
 
 
-def test_rivercycle_shop_ReturnsCorrectObj():
+def test_rivercycle_shop_ReturnsObj():
     # ESTABLISH
     one_int = 1
     yao_hubunit = hubunit_shop(None, None, "Yao")
@@ -80,7 +80,7 @@ def test_RiverCylce_set_riverbook_CorrectlySetsAttr():
     assert one_rivercycle.riverbooks == {bob_str: bob_riverbook}
 
 
-def test_RiverCylce_create_cylceledger_ReturnsCorrectObjOneRiverBook():
+def test_RiverCylce_create_cylceledger_ReturnsObjOneRiverBook():
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(None, None, yao_str)
@@ -97,7 +97,7 @@ def test_RiverCylce_create_cylceledger_ReturnsCorrectObjOneRiverBook():
     assert one_cylceledger == {yao_str: book_point_amount}
 
 
-def test_RiverCylce_create_cylceledger_ReturnsCorrectObjTwoRiverBooks():
+def test_RiverCylce_create_cylceledger_ReturnsObjTwoRiverBooks():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"

@@ -9,7 +9,7 @@ from src.f05_listen.examples.listen_env import (
 from os.path import exists as os_path_exists
 
 
-def test_HubUnit_default_soul_bud_ReturnsCorrectObj():
+def test_HubUnit_default_soul_bud_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     slash_str = "/"

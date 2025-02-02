@@ -192,7 +192,7 @@ def test_FiscalUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_clea
     assert os_path_exists(sue_hubunit.voice_path())
 
 
-def test_FiscalUnit_get_owner_soul_from_file_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_FiscalUnit_get_owner_soul_from_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     accord45_str = "accord45"
     accord_fiscal = fiscalunit_shop(
@@ -289,7 +289,7 @@ def test_FiscalUnit__set_all_healer_dutys_CorrectlySetsdutys(
     assert os_path_exists(yao_dallas_yao_duty_file_path)
 
 
-def test_FiscalUnit_get_owner_hubunits_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_FiscalUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     accord_fiscal = fiscalunit_shop(
         "accord45", get_test_fiscals_dir(), in_memory_journal=True

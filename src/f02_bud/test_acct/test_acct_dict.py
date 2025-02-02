@@ -189,7 +189,7 @@ def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_job_ValuesIsNone()
     assert len(x_dict.keys()) == 10
 
 
-def test_acctunit_get_from_dict_ReturnsCorrectObjWith_bridge():
+def test_acctunit_get_from_dict_ReturnsObjWith_bridge():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
@@ -230,7 +230,7 @@ def test_acctunit_get_from_dict_Returns_memberships():
     assert after_yao_acctunit._bridge == slash_str
 
 
-def test_acctunits_get_from_dict_ReturnsCorrectObjWith_bridge():
+def test_acctunits_get_from_dict_ReturnsObjWith_bridge():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
@@ -246,7 +246,7 @@ def test_acctunits_get_from_dict_ReturnsCorrectObjWith_bridge():
     assert x_acctunits_objs.get(yao_str)._bridge == slash_str
 
 
-def test_acctunits_get_from_json_ReturnsCorrectObj_SimpleExampleWithIncompleteData():
+def test_acctunits_get_from_json_ReturnsObj_SimpleExampleWithIncompleteData():
     # ESTABLISH
     yao_str = "Yao"
     yao_credit_belief = 13

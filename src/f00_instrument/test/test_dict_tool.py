@@ -341,7 +341,7 @@ def test_get_from_nested_dict_ReturnsNoneWhen_if_missing_return_None_True():
     assert x_value is None
 
 
-def test_get_positive_int_ReturnsCorrectObj():
+def test_get_positive_int_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_positive_int(None) == 0
     assert get_positive_int("sports") == 0

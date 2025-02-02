@@ -28,7 +28,7 @@ def test_GroupUnit_exists():
     assert swim_groupunit._fund_coin is None
 
 
-def test_groupunit_shop_ReturnsCorrectObj():
+def test_groupunit_shop_ReturnsObj():
     # ESTABLISH
     swim_str = ";swimmers"
     nation_road = create_road(root_title(), "nation-states")
@@ -53,7 +53,7 @@ def test_groupunit_shop_ReturnsCorrectObj():
     assert swim_groupunit._fund_coin == default_fund_coin_if_None()
 
 
-def test_groupunit_shop_ReturnsCorrectObj_bridge():
+def test_groupunit_shop_ReturnsObj_bridge():
     # ESTABLISH
     swim_str = "/swimmers"
     slash_str = "/"

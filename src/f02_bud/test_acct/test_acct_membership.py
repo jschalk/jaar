@@ -62,7 +62,7 @@ def test_AcctUnit_set_membership_RaisesErrorIf_group_labelIsAcctNameAndNotAcctUn
     )
 
 
-def test_AcctUnit_get_membership_ReturnsCorrectObj():
+def test_AcctUnit_get_membership_ReturnsObj():
     # ESTABLISH
     run_str = ";run"
     fly_str = ";fly"
@@ -77,7 +77,7 @@ def test_AcctUnit_get_membership_ReturnsCorrectObj():
     assert yao_acctunit.get_membership(climb_str) is None
 
 
-def test_membership_exists_ReturnsCorrectObj():
+def test_membership_exists_ReturnsObj():
     # ESTABLISH
     run_str = ";run"
     fly_str = ";fly"
@@ -92,7 +92,7 @@ def test_membership_exists_ReturnsCorrectObj():
     assert yao_acctunit.membership_exists(climb_str) is False
 
 
-def test_memberships_exist_ReturnsCorrectObj():
+def test_memberships_exist_ReturnsObj():
     # ESTABLISH
     run_str = ";run"
     fly_str = ";fly"

@@ -57,7 +57,7 @@ def test_ItemAttrHolder_CorrectlyCalculatesPremiseRanges():
     # assert item_attr.reason_premise_morph is None
 
 
-def test_itemattrholder_shop_ReturnsCorrectObj():
+def test_itemattrholder_shop_ReturnsObj():
     # ESTABLISH
     sue_healerlink = healerlink_shop({"Sue", "Yim"})
 

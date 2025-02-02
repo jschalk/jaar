@@ -12,7 +12,7 @@ from src.f02_bud.origin import originunit_shop
 from src.f02_bud.item import itemunit_shop, get_obj_from_item_dict
 
 
-def test_get_obj_from_item_dict_ReturnsCorrectObj():
+def test_get_obj_from_item_dict_ReturnsObj():
     # ESTABLISH
     field_str = "_is_expanded"
     # WHEN / THEN

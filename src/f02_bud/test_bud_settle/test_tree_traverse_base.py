@@ -359,7 +359,7 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     assert len(swim_item._awardheirs) == 2
 
 
-def test_BudUnit_get_item_tree_ordered_road_list_ReturnsCorrectObj():
+def test_BudUnit_get_item_tree_ordered_road_list_ReturnsObj():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     week_str = "weekdays"
@@ -399,7 +399,7 @@ def test_BudUnit_get_item_tree_ordered_road_list_CorrectlyCleansRangedItemRoadUn
     assert len(yao_bud.get_item_tree_ordered_road_list(no_range_descendants=True)) == 2
 
 
-def test_BudUnit_get_item_dict_ReturnsCorrectObjWhenSingle():
+def test_BudUnit_get_item_dict_ReturnsObjWhenSingle():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     texas_str = "Texas"

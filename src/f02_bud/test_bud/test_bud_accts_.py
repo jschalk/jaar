@@ -181,7 +181,7 @@ def test_BudUnit_edit_acct_CorrectlyUpdatesObj():
     assert zia_acctunit.debtit_belief == new_zia_debtit_belief
 
 
-def test_BudUnit_get_acct_ReturnsCorrectObj():
+def test_BudUnit_get_acct_ReturnsObj():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     zia_str = "Zia"

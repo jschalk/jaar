@@ -82,7 +82,7 @@ def test_HealerLink_del_healer_name_CorrectlyDeletes_healer_names_v1():
     assert len(x_healerlink._healer_names) == 1
 
 
-def test_HealerLink_healer_name_exists_ReturnsCorrectObj():
+def test_HealerLink_healer_name_exists_ReturnsObj():
     # ESTABLISH
     x_healerlink = healerlink_shop()
     yao_str = "Yao"
@@ -98,7 +98,7 @@ def test_HealerLink_healer_name_exists_ReturnsCorrectObj():
     assert x_healerlink.healer_name_exists(sue_str) is False
 
 
-def test_HealerLink_any_healer_name_exists_ReturnsCorrectObj():
+def test_HealerLink_any_healer_name_exists_ReturnsObj():
     # ESTABLISH
     x_healerlink = healerlink_shop()
     assert x_healerlink.any_healer_name_exists() is False
@@ -122,7 +122,7 @@ def test_HealerLink_any_healer_name_exists_ReturnsCorrectObj():
     assert x_healerlink.any_healer_name_exists() is False
 
 
-def test_healerlink_get_from_dict_ReturnsCorrectObj():
+def test_healerlink_get_from_dict_ReturnsObj():
     # ESTABLISH
     empty_dict = {}
 

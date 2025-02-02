@@ -32,7 +32,7 @@ def test_PremiseUnit_Exists():
     assert email_premise.bridge is None
 
 
-def test_premiseunit_shop_ReturnsCorrectObj():
+def test_premiseunit_shop_ReturnsObj():
     # ESTABLISH
     casa_str = "casa"
     casa_road = create_road(root_title(), casa_str)

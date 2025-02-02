@@ -32,7 +32,7 @@ def test_PremiseStatusFinder_Exists():
     assert x_pbsd.fact_nigh_full == x_fact_nigh_full
 
 
-def test_premisestatusfinder_shop_ReturnsCorrectObj():
+def test_premisestatusfinder_shop_ReturnsObj():
     # ESTABLISH
     x_premise_open = 1
     x_premise_nigh = 1
@@ -127,7 +127,7 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
     )
 
 
-def test_PremiseStatusFinder_AbbrevationMethodsReturnCorrectObjs():
+def test_PremiseStatusFinder_AbbrevationMethodsReturnsObjs():
     # ESTABLISH
     x_premise_open = 1
     x_premise_nigh = 2
@@ -292,7 +292,7 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
     return fig
 
 
-def test_PremiseStatusFinder_get_active_ReturnsCorrectObj(graphics_bool):
+def test_PremiseStatusFinder_get_active_ReturnsObj(graphics_bool):
     """Check scenarios PremiseUnit._active. Plotly graph can be used to identify problems."""
     # # Case A
     assert premisestatusfinder_shop(0.3, 0.7, 1, 0.1, 1.2).get_active()

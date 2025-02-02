@@ -33,7 +33,7 @@ def test_AtomUnit_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     )
 
 
-def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_BudUnitSimpleAttrs():
+def test_AtomUnit_get_insert_sqlstr_ReturnsObj_BudUnitSimpleAttrs():
     # WHEN
     new2_value = 66
     dimen = budunit_str()
@@ -53,7 +53,7 @@ VALUES (
     assert x_atomunit.get_insert_sqlstr() == example_sqlstr
 
 
-def test_AtomUnit_get_insert_sqlstr_ReturnsCorrectObj_item_factunit():
+def test_AtomUnit_get_insert_sqlstr_ReturnsObj_item_factunit():
     # ESTABLISH
     sports_str = "sports"
     sports_road = create_road("a", sports_str)
@@ -90,7 +90,7 @@ VALUES (
     assert generated_sqlstr == example_sqlstr
 
 
-def test_get_atomunit_from_rowdata_ReturnsCorrectObj_item_factunit():
+def test_get_atomunit_from_rowdata_ReturnsObj_item_factunit():
     # ESTABLISH
     sports_str = "sports"
     sports_road = create_road("a", sports_str)

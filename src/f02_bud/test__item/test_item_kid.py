@@ -124,7 +124,7 @@ def test_ItemUnit_clear_kids_CorrectlySetsAttr():
     assert len(nation_item._kids) == 0
 
 
-def test_ItemUnit_get_kid_ReturnsCorrectObj():
+def test_ItemUnit_get_kid_ReturnsObj():
     # ESTABLISH
     nation_str = "nation-state"
     nation_road = create_road(root_title(), nation_str)

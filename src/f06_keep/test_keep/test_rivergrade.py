@@ -42,7 +42,7 @@ def test_RiverGrade_Exists():
     assert x_rivergrade.rewards_magnitude is None
 
 
-def test_rivergrade_shop_ReturnsCorrectObjWithArg():
+def test_rivergrade_shop_ReturnsObjWithArg():
     # ESTABLISH
     bob_str = "Bob"
     yao_hubunit = example_yao_hubunit()
@@ -75,7 +75,7 @@ def test_rivergrade_shop_ReturnsCorrectObjWithArg():
     assert x_rivergrade.rewards_magnitude is None
 
 
-def test_rivergrade_shop_ReturnsCorrectObjWithoutArgs():
+def test_rivergrade_shop_ReturnsObjWithoutArgs():
     # ESTABLISH
     bob_str = "Bob"
     yao_hubunit = example_yao_hubunit()
@@ -132,7 +132,7 @@ def test_RiverGrade_set_tax_due_amount_SetsCorrectAttrs():
     assert x_rivergrade.tax_paid_bool is True
 
 
-def test_RiverGrade_get_dict_ReturnsCorrectObj():
+def test_RiverGrade_get_dict_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     yao_hubunit = example_yao_hubunit()
@@ -192,7 +192,7 @@ def test_RiverGrade_get_dict_ReturnsCorrectObj():
     assert rivergrade_dict.get("rewards_magnitude") == x_rewards_magnitude
 
 
-def test_RiverGrade_get_json_ReturnsCorrectObj():
+def test_RiverGrade_get_json_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     yao_hubunit = example_yao_hubunit()

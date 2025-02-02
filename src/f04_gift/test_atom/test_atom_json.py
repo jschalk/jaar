@@ -16,7 +16,7 @@ from src.f04_gift.atom import (
 from src.f00_instrument.dict_toolbox import x_is_json
 
 
-def test_AtomUnit_get_dict_ReturnsCorrectObj():
+def test_AtomUnit_get_dict_ReturnsObj():
     # ESTABLISH
     sports_str = "sports"
     sports_road = create_road("a", sports_str)
@@ -45,7 +45,7 @@ def test_AtomUnit_get_dict_ReturnsCorrectObj():
     }
 
 
-def test_AtomUnit_get_json_ReturnsCorrectObj():
+def test_AtomUnit_get_json_ReturnsObj():
     # ESTABLISH
     sports_str = "sports"
     sports_road = create_road("a", sports_str)
@@ -73,7 +73,7 @@ def test_AtomUnit_get_json_ReturnsCorrectObj():
     assert x_is_json(atom_json)
 
 
-def test_atomunit_get_from_json_ReturnsCorrectObj():
+def test_atomunit_get_from_json_ReturnsObj():
     # ESTABLISH
     sports_str = "sports"
     sports_road = create_road("a", sports_str)

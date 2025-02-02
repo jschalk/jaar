@@ -41,7 +41,7 @@ from src.f04_gift.delta import deltaunit_shop
 from src.f04_gift.examples.example_deltas import get_deltaunit_example1
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_SimplestScenario():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_SimplestScenario():
     # ESTABLISH
     ex1_deltaunit = deltaunit_shop()
 
@@ -56,7 +56,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_SimplestScenario():
     assert after_sue_budunit == before_sue_budunit
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnitSimpleAttrs():
     # ESTABLISH
     sue_deltaunit = deltaunit_shop()
     sue_str = "Sue"
@@ -120,7 +120,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnitSimpleAttrs():
     assert after_sue_budunit.deal_time_int != before_sue_budunit.deal_time_int
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_acct():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_delete_acct():
     # ESTABLISH
     sue_deltaunit = deltaunit_shop()
     sue_str = "Sue"
@@ -146,7 +146,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_acct():
     assert after_sue_budunit.acct_exists(zia_str) is False
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_acct():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_insert_acct():
     # ESTABLISH
     sue_deltaunit = deltaunit_shop()
     sue_str = "Sue"
@@ -179,7 +179,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_acct():
     assert zia_acctunit.debtit_belief == x_debtit_belief
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_acct():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_update_acct():
     # ESTABLISH
     sue_deltaunit = deltaunit_shop()
     sue_str = "Sue"
@@ -204,7 +204,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_acct():
     assert yao_acct.credit_belief == yao_credit_belief
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_membership():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_delete_membership():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_budunit = budunit_shop(sue_str)
@@ -248,7 +248,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_membership():
     assert len(after_group_labels_dict.get(fly_str)) == 2
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_insert_membership():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_budunit = budunit_shop(sue_str)
@@ -284,7 +284,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_membership():
     assert after_yao_run_membership.credit_vote == yao_run_credit_vote
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_update_membership():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_budunit = budunit_shop(sue_str)
@@ -317,7 +317,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_membership():
     assert after_yao_run_membership.debtit_vote == new_yao_run_debtit_vote
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_itemunit():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_delete_itemunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_budunit = budunit_shop(sue_str)
@@ -352,7 +352,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_itemunit():
     assert after_sue_budunit.item_exists(disc_road) is False
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_itemunit():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_insert_itemunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_budunit = budunit_shop(sue_str)
@@ -398,7 +398,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_itemunit():
     assert disc_item.stop_want == x_stop_want
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_itemunit_SimpleAttributes():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_update_itemunit_SimpleAttributes():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_budunit = budunit_shop(sue_str)
@@ -448,7 +448,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_itemunit_Simp
     assert after_sue_budunit.get_item_obj(ball_road).pledge
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_awardlink():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_delete_item_awardlink():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_budunit = budunit_shop(sue_str)
@@ -498,7 +498,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_awardlin
     assert len(after_sue_budunit.get_item_obj(disc_road).awardlinks) == 1
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_awardlink():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_update_item_awardlink():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_budunit = budunit_shop(sue_str)
@@ -540,7 +540,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_awardlin
     assert run_awardlink.take_force == x_take_force
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_awardlink():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_insert_item_awardlink():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_budunit = budunit_shop(sue_str)
@@ -577,7 +577,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_awardlin
     assert after_ball_item.awardlinks.get(run_str) is not None
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_factunit():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_insert_item_factunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -619,7 +619,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_factunit
     assert after_ball_item.factunits.get(knee_road).fnigh == broken_fnigh
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_factunit():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_delete_item_factunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -655,7 +655,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_factunit
     assert after_ball_item.factunits == {}
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_factunit():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_update_item_factunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -705,7 +705,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_factunit
     assert after_ball_item.factunits.get(knee_road).fnigh == medical_fnigh
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_reason_premiseunit():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_update_item_reason_premiseunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -762,7 +762,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_reason_p
     assert after_broken_premiseunit.divisor == broken_divisor
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_reason_premiseunit():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_insert_item_reason_premiseunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -817,7 +817,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_reason_p
     assert after_medical_premiseunit.divisor == medical_divisor
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_reason_premiseunit():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_delete_item_reason_premiseunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -864,7 +864,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_reason_p
     assert after_knee_reasonunit.get_premise(medical_road) is None
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_reasonunit():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_insert_item_reasonunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -906,7 +906,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_reasonun
     )
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_reasonunit():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_update_item_reasonunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -959,7 +959,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_update_item_reasonun
     )
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_reasonunit():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_delete_item_reasonunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -993,7 +993,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_reasonun
     assert after_ball_item.get_reasonunit(knee_road) is None
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_teamlink():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_insert_item_teamlink():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -1021,7 +1021,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_teamlink
     assert after_ball_itemunit.teamunit.get_teamlink(yao_str) is not None
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_teamlink():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_delete_item_teamlink():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -1051,7 +1051,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_teamlink
     assert after_ball_itemunit.teamunit._teamlinks == set()
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_healerlink():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_insert_item_healerlink():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -1081,7 +1081,7 @@ def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_item_healerli
     assert after_ball_itemunit.healerlink.healer_name_exists(yao_str)
 
 
-def test_DeltaUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_delete_item_healerlink():
+def test_DeltaUnit_get_edited_bud_ReturnsObj_BudUnit_delete_item_healerlink():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)

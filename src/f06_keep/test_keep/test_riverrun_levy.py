@@ -54,7 +54,7 @@ def test_RiverRun_levy_tax_dues_Molds_cycleledger_Scenario02():
     assert tax_got == 322
 
 
-def test_RiverRun_cycle_payees_vary_ReturnsCorrectObj():
+def test_RiverRun_cycle_payees_vary_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     x_riverrun = riverrun_shop(example_yao_hubunit())
@@ -69,7 +69,7 @@ def test_RiverRun_cycle_payees_vary_ReturnsCorrectObj():
     assert x_riverrun._cycle_payees_vary()
 
 
-def test_RiverRun_cycles_vary_ReturnsCorrectObj():
+def test_RiverRun_cycles_vary_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     yao_tax_got = 5

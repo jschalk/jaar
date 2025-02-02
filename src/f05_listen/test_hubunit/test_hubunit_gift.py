@@ -24,7 +24,7 @@ from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
 
 
-def test_HubUnit_get_max_gift_file_number_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_HubUnit_get_max_gift_file_number_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
@@ -44,7 +44,7 @@ def test_HubUnit_get_max_gift_file_number_ReturnsCorrectObj(env_dir_setup_cleanu
     assert sue_hubunit._get_next_gift_file_number() == 7
 
 
-def test_HubUnit_gift_file_exists_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_HubUnit_gift_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
@@ -305,7 +305,7 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhengiftFilesExi
     assert sue_giftunit._gifts_dir == sue_hubunit.gifts_dir()
 
 
-def test_HubUnit_get_giftunit_ReturnsCorrectObjWhenFilesDoesExist(
+def test_HubUnit_get_giftunit_ReturnsObjWhenFilesDoesExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

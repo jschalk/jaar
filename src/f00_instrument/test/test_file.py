@@ -192,7 +192,7 @@ def test_get_dir_file_strs_correctlyGrabsFileData(env_dir_setup_cleanup):
     assert files_dict.get(x2_file_name) == x2_file_str
 
 
-def test_get_dir_file_strs_delete_extensions_ReturnsCorrectObj(env_dir_setup_cleanup):
+def test_get_dir_file_strs_delete_extensions_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
     x1_name = "x1"
@@ -376,7 +376,7 @@ def test_count_files_ReturnsNoneIfDirectoryDoesNotExist(
     assert dir_count is None
 
 
-def test_get_directory_path_ReturnsCorrectObj():
+def test_get_directory_path_ReturnsObj():
     # ESTABLISH
     texas_str = "texas"
     dallas_str = "dallas"
@@ -397,7 +397,7 @@ def test_get_directory_path_ReturnsCorrectObj():
     assert kern_path == create_path(elpaso_path, kern_str)
 
 
-def test_is_path_valid_ReturnsCorrectObj():
+def test_is_path_valid_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert is_path_valid("run")
     assert is_path_valid("run/trail")
@@ -411,13 +411,13 @@ def test_is_path_valid_ReturnsCorrectObj():
     assert is_path_valid("run//trail////")
 
 
-def test_can_active_usser_edit_paths_ReturnsCorrectObj():
+def test_can_active_usser_edit_paths_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     """I am not able to test this correctly. For now make sure it runs."""
     assert can_active_usser_edit_paths()
 
 
-def test_is_path_existent_or_creatable_ReturnsCorrectObj():
+def test_is_path_existent_or_creatable_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     """I am not able to test this correctly. For now make sure it runs."""
     assert is_path_existent_or_creatable("run")
@@ -428,7 +428,7 @@ def test_is_path_existent_or_creatable_ReturnsCorrectObj():
     assert is_path_existent_or_creatable("run///trail")
 
 
-def test_is_path_probably_creatable_ReturnsCorrectObj():
+def test_is_path_probably_creatable_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     """I am not able to test this correctly. For now make sure it runs."""
     assert is_path_probably_creatable("run")
@@ -436,7 +436,7 @@ def test_is_path_probably_creatable_ReturnsCorrectObj():
     assert is_path_probably_creatable("run///trail") is False
 
 
-def test_is_path_existent_or_probably_creatable_ReturnsCorrectObj():
+def test_is_path_existent_or_probably_creatable_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     """I am not able to test this correctly. For now make sure it runs."""
     assert is_path_existent_or_probably_creatable("run")

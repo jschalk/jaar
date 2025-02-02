@@ -52,7 +52,7 @@ def test_BudUnit_Exists():
     assert str(type(x_bud.itemroot)).find("None") == 8
 
 
-def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
+def test_BudUnit_shop_ReturnsObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
     iowa_fiscal_title = "Iowa"
@@ -108,7 +108,7 @@ def test_BudUnit_shop_ReturnsCorrectObjectWithFilledFields():
     assert str(type(x_bud.itemroot)).find(".item.ItemUnit'>") > 0
 
 
-def test_BudUnit_shop_ReturnsCorrectObjectWithCorrectEmptyField():
+def test_BudUnit_shop_ReturnsObjectWithCorrectEmptyField():
     # ESTABLISH / WHEN
     x_bud = budunit_shop()
 
@@ -191,7 +191,7 @@ def test_BudUnit_set_bridge_CorrectlySetsAttr():
     assert sue_bud.bridge == at_title_bridge
 
 
-def test_BudUnit_make_road_ReturnsCorrectObj():
+def test_BudUnit_make_road_ReturnsObj():
     # ESTABLISH
     x_fiscal_title = "accord45"
     slash_bridge = "/"

@@ -132,7 +132,7 @@ def test_RiverRun_delete_tax_yield_SetsAttr():
     assert bob_riverrun.acct_has_tax_yield(yao_str) is False
 
 
-def test_RiverRun_get_acct_tax_yield_ReturnsCorrectObj():
+def test_RiverRun_get_acct_tax_yield_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
@@ -165,7 +165,7 @@ def test_RiverRun_get_acct_tax_yield_ReturnsCorrectObj():
     assert bob_riverrun.get_acct_tax_yield(zia_str) == 0
 
 
-def test_RiverRun_add_acct_tax_yield_ReturnsCorrectObj():
+def test_RiverRun_add_acct_tax_yield_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000

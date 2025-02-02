@@ -33,19 +33,19 @@ from sqlite3 import (
 )
 
 
-def test_sqlite_null_ReturnsCorrectObj():
+def test_sqlite_null_ReturnsObj():
     assert sqlite_null(True)
     assert sqlite_null("yea") == "yea"
     assert sqlite_null(None) == "NULL"
 
 
-def test_sqlite_bool_ReturnsCorrectObj():
+def test_sqlite_bool_ReturnsObj():
     assert sqlite_bool(x_int=0) is False
     assert sqlite_bool(x_int=1)
     assert sqlite_bool(x_int=None) == "NULL"
 
 
-def test_sqlite_str_ReturnsCorrectObj():
+def test_sqlite_str_ReturnsObj():
     assert sqlite_str(True) == "TRUE"
     assert sqlite_str(False) == "FALSE"
     # WHEN / THEN
@@ -54,7 +54,7 @@ def test_sqlite_str_ReturnsCorrectObj():
     assert str(excinfo.value) == "function requires boolean"
 
 
-def test_sqlite_create_insert_sqlstr_ReturnsCorrectObj():
+def test_sqlite_create_insert_sqlstr_ReturnsObj():
     # ESTABLISH
     x_table = "kubo_trains"
     eagle_id_str = "eagle_id"
@@ -157,7 +157,7 @@ def test_rowdata_shop_ReturnsObjWithoutNone():
     assert x_rowdata.row_dict == {"name": "Earth", "radius": 6378}
 
 
-def test_get_rowdata_ReturnsCorrectObj():
+def test_get_rowdata_ReturnsObj():
     # ESTABLISH
     x_tablename = "earth"
 
