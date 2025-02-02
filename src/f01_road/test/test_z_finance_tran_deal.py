@@ -59,10 +59,10 @@ def test_dealepisode_shop_ReturnsObjWith_net_deals():
 
     # WHEN
     x_dealepisode = dealepisode_shop(
-        x_time_int=t4_time_int,
-        x_quota=t4_quota,
+        time_int=t4_time_int,
+        quota=t4_quota,
         net_deals=t4_net_deals,
-        x_magnitude=t4_magnitude,
+        magnitude=t4_magnitude,
         search_depth=t4_search_depth,
     )
 
@@ -73,7 +73,6 @@ def test_dealepisode_shop_ReturnsObjWith_net_deals():
     assert x_dealepisode.search_depth == t4_search_depth
     assert x_dealepisode._magnitude == 677
     assert x_dealepisode._net_deals == t4_net_deals
-    assert 1 == 2
 
 
 def test_DealEpisode_set_net_deal_SetsAttr():

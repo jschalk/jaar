@@ -32,7 +32,7 @@ def test_FiscalUnit_add_cashpurchase_SetsAttr():
     assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t) is False
 
     # WHEN
-    x_fiscal.add_cashpurchase(sue_str, bob_str, x_time_int=t55_t, x_amount=t55_amount)
+    x_fiscal.add_cashpurchase(sue_str, bob_str, time_int=t55_t, amount=t55_amount)
 
     # THEN
     assert x_fiscal.cashbook.tranunit_exists(sue_str, bob_str, t55_t)

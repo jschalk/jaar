@@ -49,10 +49,10 @@ def test_FiscalUnit_get_dict_ReturnsObjWith_cashbook():
     accord_fiscal.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
     accord_fiscal.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
     accord_fiscal.add_cashpurchase(
-        x_owner_name=bob_str,
-        x_acct_name=sue_str,
-        x_time_int=cash_time_int,
-        x_amount=bob_sue_amount,
+        owner_name=bob_str,
+        acct_name=sue_str,
+        time_int=cash_time_int,
+        amount=bob_sue_amount,
     )
 
     # WHEN
@@ -160,10 +160,10 @@ def test_get_from_dict_ReturnsFiscalUnit():
     accord_fiscal.respect_bit = sue_respect_bit
     accord_fiscal.penny = sue_penny
     accord_fiscal.add_cashpurchase(
-        x_owner_name=bob_str,
-        x_acct_name=sue_str,
-        x_time_int=cash_time_int,
-        x_amount=bob_sue_amount,
+        owner_name=bob_str,
+        acct_name=sue_str,
+        time_int=cash_time_int,
+        amount=bob_sue_amount,
     )
     x_dict = accord_fiscal.get_dict()
 

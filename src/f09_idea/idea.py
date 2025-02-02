@@ -300,9 +300,9 @@ def _add_dealepisodes_from_df(x_fiscalunit: FiscalUnit, br00001_df: DataFrame):
     query_str = f"fiscal_title == '{x_fiscalunit.fiscal_title}'"
     for index, row in br00001_df.query(query_str).iterrows():
         x_fiscalunit.add_dealepisode(
-            x_owner_name=row["owner_name"],
-            x_time_int=row["time_int"],
-            x_money_magnitude=row["quota"],
+            owner_name=row["owner_name"],
+            time_int=row["time_int"],
+            money_magnitude=row["quota"],
             allow_prev_to_present_time_entry=True,
         )
 
@@ -311,8 +311,8 @@ def _add_cashpurchases_from_df(x_fiscalunit: FiscalUnit, br00002_df: DataFrame):
     query_str = f"fiscal_title == '{x_fiscalunit.fiscal_title}'"
     for index, row in br00002_df.query(query_str).iterrows():
         x_fiscalunit.add_cashpurchase(
-            x_owner_name=row["owner_name"],
-            x_acct_name=row["acct_name"],
-            x_time_int=row["time_int"],
-            x_amount=row["amount"],
+            owner_name=row["owner_name"],
+            acct_name=row["acct_name"],
+            time_int=row["time_int"],
+            amount=row["amount"],
         )

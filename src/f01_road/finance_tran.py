@@ -62,36 +62,38 @@ class TranBook:
 
     def set_tranunit(
         self,
-        x_tranunit: TranUnit,
-        x_blocked_time_ints: set[TimeLinePoint] = None,
-        x_present_time: TimeLinePoint = None,
+        tranunit: TranUnit,
+        blocked_time_ints: set[TimeLinePoint] = None,
+        present_time: TimeLinePoint = None,
     ):
         self.add_tranunit(
-            x_owner_name=x_tranunit.src,
-            x_acct_name=x_tranunit.dst,
-            x_time_int=x_tranunit.time_int,
-            x_amount=x_tranunit.amount,
-            x_blocked_time_ints=x_blocked_time_ints,
-            x_present_time=x_present_time,
+            owner_name=tranunit.src,
+            acct_name=tranunit.dst,
+            time_int=tranunit.time_int,
+            amount=tranunit.amount,
+            blocked_time_ints=blocked_time_ints,
+            present_time=present_time,
         )
 
     def add_tranunit(
         self,
-        x_owner_name: OwnerName,
-        x_acct_name: AcctName,
-        x_time_int: TimeLinePoint,
-        x_amount: FundNum,
-        x_blocked_time_ints: set[TimeLinePoint] = None,
-        x_present_time: TimeLinePoint = None,
+        owner_name: OwnerName,
+        acct_name: AcctName,
+        time_int: TimeLinePoint,
+        amount: FundNum,
+        blocked_time_ints: set[TimeLinePoint] = None,
+        present_time: TimeLinePoint = None,
     ):
-        if x_time_int in get_empty_set_if_None(x_blocked_time_ints):
-            exception_str = f"Cannot set tranunit for time_int={x_time_int}, timelinepoint is blocked"
+        if time_int in get_empty_set_if_None(blocked_time_ints):
+            exception_str = (
+                f"Cannot set tranunit for time_int={time_int}, timelinepoint is blocked"
+            )
             raise time_int_Exception(exception_str)
-        if x_present_time != None and x_time_int >= x_present_time:
-            exception_str = f"Cannot set tranunit for time_int={x_time_int}, timelinepoint is greater than current time={x_present_time}"
+        if present_time != None and time_int >= present_time:
+            exception_str = f"Cannot set tranunit for time_int={time_int}, timelinepoint is greater than current time={present_time}"
             raise time_int_Exception(exception_str)
-        x_keylist = [x_owner_name, x_acct_name, x_time_int]
-        set_in_nested_dict(self.tranunits, x_keylist, x_amount)
+        x_keylist = [owner_name, acct_name, time_int]
+        set_in_nested_dict(self.tranunits, x_keylist, amount)
 
     def tranunit_exists(
         self, src: AcctName, dst: AcctName, time_int: TimeLinePoint
@@ -238,23 +240,23 @@ class DealEpisode:
 
 
 def dealepisode_shop(
-    x_time_int: TimeLinePoint,
-    x_quota: FundNum = None,
+    time_int: TimeLinePoint,
+    quota: FundNum = None,
     net_deals: dict[AcctName, FundNum] = None,
-    x_magnitude: FundNum = None,
+    magnitude: FundNum = None,
     search_depth: int = None,
 ) -> DealEpisode:
-    if x_quota is None:
-        x_quota = default_fund_pool()
+    if quota is None:
+        quota = default_fund_pool()
     if search_depth is None:
         search_depth = 3
 
     return DealEpisode(
-        time_int=x_time_int,
-        quota=x_quota,
+        time_int=time_int,
+        quota=quota,
         search_depth=search_depth,
         _net_deals=get_empty_dict_if_None(net_deals),
-        _magnitude=get_0_if_None(x_magnitude),
+        _magnitude=get_0_if_None(magnitude),
     )
 
 
@@ -308,10 +310,10 @@ class DealLog:
         for x_time_int, x_episode in self.episodes.items():
             for dst_acct_name, x_quota in x_episode._net_deals.items():
                 x_tranbook.add_tranunit(
-                    x_owner_name=self.owner_name,
-                    x_acct_name=dst_acct_name,
-                    x_time_int=x_time_int,
-                    x_amount=x_quota,
+                    owner_name=self.owner_name,
+                    acct_name=dst_acct_name,
+                    time_int=x_time_int,
+                    amount=x_quota,
                 )
         return x_tranbook
 
