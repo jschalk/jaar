@@ -63,7 +63,7 @@ class DeltaUnit:
         atomunits_list = self.get_dimen_sorted_atomunits_list()
         return sorted(atomunits_list, key=lambda x: x.atom_order)
 
-    def get_edited_bud(self, before_bud: BudUnit):
+    def get_edited_bud(self, before_bud: BudUnit) -> BudUnit:
         edited_bud = copy_deepcopy(before_bud)
         for x_atomunit in self.get_sorted_atomunits():
             modify_bud_with_atomunit(edited_bud, x_atomunit)

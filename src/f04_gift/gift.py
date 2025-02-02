@@ -7,6 +7,7 @@ from src.f01_road.road import (
     FiscalTitle,
     get_default_fiscal_title,
 )
+from src.f02_bud.bud import BudUnit
 from src.f04_gift.atom import AtomUnit, get_from_json as atomunit_get_from_json
 from src.f04_gift.delta import (
     DeltaUnit,
@@ -15,6 +16,10 @@ from src.f04_gift.delta import (
 )
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
+
+
+class gift_bud_conflict_Exception(Exception):
+    pass
 
 
 @dataclass
@@ -119,6 +124,25 @@ class GiftUnit:
             x_atomunit = self._open_atom_file(atom_number)
             x_deltaunit.set_atomunit(x_atomunit)
         self._deltaunit = x_deltaunit
+
+    def add_atomunit(
+        self,
+        dimen: str,
+        crud_str: str,
+        jkeys: dict[str, str] = None,
+        jvalues: dict[str, str] = None,
+    ):
+        self._deltaunit.add_atomunit(dimen, crud_str, jkeys=jkeys, jvalues=jvalues)
+
+    def get_edited_bud(self, before_bud: BudUnit) -> BudUnit:
+        if (
+            self.fiscal_title != before_bud.fiscal_title
+            or self.owner_name != before_bud.owner_name
+        ):
+            raise gift_bud_conflict_Exception(
+                f"gift bud conflict {self.fiscal_title} != {before_bud.fiscal_title} or {self.owner_name} != {before_bud.owner_name}"
+            )
+        return self._deltaunit.get_edited_bud(before_bud)
 
 
 def giftunit_shop(

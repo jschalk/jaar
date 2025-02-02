@@ -1,7 +1,19 @@
 from src.f00_instrument.dict_toolbox import x_is_json
 from src.f01_road.jaar_config import init_gift_id, get_gifts_folder
 from src.f01_road.road import get_default_fiscal_title as root_title
-from src.f04_gift.atom_config import fiscal_title_str, owner_name_str, face_name_str
+from src.f02_bud.acct import acctunit_shop
+from src.f02_bud.bud_tool import bud_acctunit_str
+from src.f02_bud.bud import budunit_shop
+from src.f04_gift.atom import atomunit_shop
+from src.f04_gift.atom_config import (
+    fiscal_title_str,
+    owner_name_str,
+    face_name_str,
+    credit_belief_str,
+    debtit_belief_str,
+    acct_name_str,
+    atom_insert,
+)
 from src.f04_gift.delta import deltaunit_shop
 from src.f04_gift.gift import (
     GiftUnit,
@@ -11,6 +23,7 @@ from src.f04_gift.gift import (
 )
 from src.f04_gift.examples.example_atoms import get_atom_example_itemunit_sports
 from src.f04_gift.examples.example_deltas import get_deltaunit_sue_example
+from pytest import raises as pytest_raises
 
 
 def test_get_gifts_folder_ReturnsCorrectObj():
@@ -461,3 +474,86 @@ def test_GiftUnit_get_deltametric_json_ReturnsCorrectObj():
 
     # THEN
     assert x_is_json(delta_json)
+
+
+def test_GiftUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
+    # ESTABLISH
+    bob_str = "Bob"
+    bob_giftunit = giftunit_shop(bob_str)
+    bob_credit_belief = 55
+    bob_debtit_belief = 66
+    bob_acctunit = acctunit_shop(bob_str, bob_credit_belief, bob_debtit_belief)
+    cw_str = credit_belief_str()
+    dw_str = debtit_belief_str()
+    print(f"{bob_acctunit.get_dict()=}")
+    bob_required_dict = {acct_name_str(): bob_acctunit.get_dict().get(acct_name_str())}
+    bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_acctunit.get_dict().get(dw_str)
+    print(f"{bob_required_dict=}")
+    assert bob_giftunit._deltaunit.atomunits == {}
+
+    # WHEN
+    bob_giftunit.add_atomunit(
+        dimen=bud_acctunit_str(),
+        crud_str=atom_insert(),
+        jkeys=bob_required_dict,
+        jvalues=bob_optional_dict,
+    )
+
+    # THEN
+    assert len(bob_giftunit._deltaunit.atomunits) == 1
+    assert (
+        bob_giftunit._deltaunit.atomunits.get(atom_insert())
+        .get(bud_acctunit_str())
+        .get(bob_str)
+        is not None
+    )
+
+
+def test_GiftUnit_get_edited_bud_ReturnsCorrectObj_BudUnit_insert_acct():
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_giftunit = giftunit_shop(sue_str)
+
+    before_sue_budunit = budunit_shop(sue_str)
+    yao_str = "Yao"
+    zia_str = "Zia"
+    before_sue_budunit.add_acctunit(yao_str)
+    assert before_sue_budunit.acct_exists(yao_str)
+    assert before_sue_budunit.acct_exists(zia_str) is False
+    dimen = bud_acctunit_str()
+    x_atomunit = atomunit_shop(dimen, atom_insert())
+    x_atomunit.set_jkey(acct_name_str(), zia_str)
+    x_credit_belief = 55
+    x_debtit_belief = 66
+    x_atomunit.set_jvalue("credit_belief", x_credit_belief)
+    x_atomunit.set_jvalue("debtit_belief", x_debtit_belief)
+    sue_giftunit._deltaunit.set_atomunit(x_atomunit)
+    print(f"{sue_giftunit._deltaunit.atomunits.keys()=}")
+
+    # WHEN
+    after_sue_budunit = sue_giftunit.get_edited_bud(before_sue_budunit)
+
+    # THEN
+    yao_acctunit = after_sue_budunit.get_acct(yao_str)
+    zia_acctunit = after_sue_budunit.get_acct(zia_str)
+    assert yao_acctunit is not None
+    assert zia_acctunit is not None
+    assert zia_acctunit.credit_belief == x_credit_belief
+    assert zia_acctunit.debtit_belief == x_debtit_belief
+
+
+def test_GiftUnit_get_edited_bud_RaisesErrorWhenGiftAttrsAndBudAttrsAreNotTheSame():
+    # ESTABLISH
+    yao_str = "Yao"
+    xia_str = "Xia"
+    accord23_str = "accord23"
+    bob_giftunit = giftunit_shop(yao_str, xia_str, fiscal_title=accord23_str)
+    sue_str = "Sue"
+    accord45_str = "accord45"
+    before_sue_budunit = budunit_shop(sue_str, fiscal_title=accord45_str)
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        bob_giftunit.get_edited_bud(before_sue_budunit)
+    assert str(excinfo.value) == "gift bud conflict accord23 != accord45 or Yao != Sue"

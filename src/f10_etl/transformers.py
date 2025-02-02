@@ -7,6 +7,11 @@ from src.f00_instrument.db_toolbox import (
     save_to_split_csvs,
 )
 from src.f01_road.road import FaceName, EventInt
+from src.f02_bud.bud import (
+    budunit_shop,
+    get_from_json as budunit_get_from_json,
+    BudUnit,
+)
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
@@ -558,6 +563,7 @@ def etl_face_pidgin_to_event_pidgins(face_dir: str):
 
 
 def get_level1_dirs(x_dir: str) -> list[str]:
+    """returns sorted list of all first level directorys"""
     try:
         level1_dirs = get_dir_file_strs(x_dir, include_dirs=True, include_files=False)
         return sorted(list(level1_dirs.keys()))
@@ -930,3 +936,37 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
                     }:
                         x_atom.set_arg(col_name, row_value)
                 owner_gift._deltaunit.set_atomunit(x_atom)
+
+
+def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
+    for fiscal_title in get_level1_dirs(fiscal_mstr_dir):
+        fiscal_path = create_path(fiscal_mstr_dir, fiscal_title)
+        for owner_name in get_level1_dirs(fiscal_path):
+            owner_path = create_path(fiscal_path, owner_name)
+            # get all event_ints
+            sorted_event_ints = get_level1_dirs(owner_path)
+            # get min of event
+            event_ints_min = min(sorted_event_ints)
+            print(f"{event_ints_min=}")
+
+            prev_event_int = None
+            for event_int in get_level1_dirs(owner_path):
+                prev_bud = get_prev_event_int_budunit(
+                    fiscal_title, owner_name, owner_path, prev_event_int
+                )
+                event_path = create_path(owner_path, event_int)
+                gift_path = create_path(event_path, "all_gift.json")
+                event_gift = get_giftunit_from_json(open_file(gift_path))
+                curr_bud = event_gift.get_edited_bud(prev_bud)
+                save_file(event_path, "bud.json", curr_bud.get_json())
+                prev_event_int = event_int
+
+
+def get_prev_event_int_budunit(
+    fiscal_title, owner_name, owner_path, prev_event_int
+) -> BudUnit:
+    if prev_event_int is None:
+        return budunit_shop(owner_name, fiscal_title)
+    prev_event_int_path = create_path(owner_path, prev_event_int)
+    prev_bud_path = create_path(prev_event_int_path, "bud.json")
+    return budunit_get_from_json(open_file(prev_bud_path))

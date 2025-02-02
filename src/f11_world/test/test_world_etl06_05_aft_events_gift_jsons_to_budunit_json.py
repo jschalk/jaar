@@ -1,25 +1,80 @@
-from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, fiscal_title_str
-from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_title_str
-from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
+from src.f00_instrument.file import create_path, open_file, save_file
+from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
+from src.f02_bud.bud_tool import bud_acctunit_str
+from src.f04_gift.atom_config import (
+    acct_name_str,
+    credit_belief_str,
+    debtit_belief_str,
+    atom_insert,
+)
+from src.f04_gift.gift import giftunit_shop
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
-from pandas.testing import (
-    assert_frame_equal as pandas_assert_frame_equal,
-)
-from pandas import DataFrame, read_excel as pandas_read_excel
+from os.path import exists as os_path_exists
 
 
-# ESTABLISH
-# fiscal/owners/events each with a gift.json
-# for each owner
-#   grab all events numbers
-#   create sorted list of all events numbers
-#   get min event: create BudUnit from giftunit. Save json
-#   for event_id in smallest to  largerst event_ints
-#       get previous budunit,
-#       apply gift to budunit
-#       save budunit json
-#
-# that's it.
+def test_WorldUnit_event_gift_json_to_event_inherited_budunits_SetsFiles(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bobby"
+    yao_inx = "Yaoe"
+    event3 = 3
+    event7 = 7
+    credit44 = 44
+    credit77 = 77
+    credit88 = 88
+    a23_str = "accord23"
+    fizz_world = worldunit_shop("fizz")
+    a23_dir = create_path(fizz_world._fiscal_mstr_dir, a23_str)
+    a23_bob_dir = create_path(a23_dir, bob_inx)
+    a23_bob_e3_dir = create_path(a23_bob_dir, event3)
+    a23_bob_e7_dir = create_path(a23_bob_dir, event7)
+    a23_bob_e3_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event3)
+    a23_bob_e7_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event7)
+    budacct_dimen = bud_acctunit_str()
+    insert_str = atom_insert()
+    bob_jkeys = {acct_name_str(): bob_inx}
+    bob_jvalues = {credit_belief_str(): credit77, debtit_belief_str(): None}
+    yao_jkeys = {acct_name_str(): yao_inx}
+    yao_jvalues = {credit_belief_str(): credit44, debtit_belief_str(): None}
+    a23_bob_e3_gift.add_atomunit(budacct_dimen, insert_str, bob_jkeys, bob_jvalues)
+    a23_bob_e3_gift.add_atomunit(budacct_dimen, insert_str, yao_jkeys, yao_jvalues)
+    sue_jkeys = {acct_name_str(): sue_inx}
+    sue_jvalues = {credit_belief_str(): credit88, debtit_belief_str(): None}
+    a23_bob_e7_gift.add_atomunit(budacct_dimen, insert_str, bob_jkeys, bob_jvalues)
+    a23_bob_e7_gift.add_atomunit(budacct_dimen, insert_str, sue_jkeys, sue_jvalues)
+    all_gift_filename = "all_gift.json"
+    save_file(a23_bob_e3_dir, all_gift_filename, a23_bob_e3_gift.get_json())
+    save_file(a23_bob_e7_dir, all_gift_filename, a23_bob_e7_gift.get_json())
+    e3_gift_path = create_path(a23_bob_e3_dir, all_gift_filename)
+    e7_gift_path = create_path(a23_bob_e7_dir, all_gift_filename)
+    assert os_path_exists(e3_gift_path)
+    assert os_path_exists(e7_gift_path)
+    bud_filename = "bud.json"
+    e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
+    e7_bud_path = create_path(a23_bob_e7_dir, bud_filename)
+    assert os_path_exists(e3_bud_path) is False
+    assert os_path_exists(e7_bud_path) is False
+
+    # WHEN
+    fizz_world.event_gift_json_to_event_inherited_budunits()
+
+    # THEN
+    assert os_path_exists(e3_bud_path)
+    assert os_path_exists(e7_bud_path)
+    e3_bob_bud = budunit_shop(bob_inx, a23_str)
+    e7_bob_bud = budunit_shop(bob_inx, a23_str)
+    e3_bob_bud.add_acctunit(bob_inx, credit77)
+    e3_bob_bud.add_acctunit(yao_inx, credit44)
+    e7_bob_bud.add_acctunit(bob_inx, credit77)
+    e7_bob_bud.add_acctunit(sue_inx, credit88)
+    e7_bob_bud.add_acctunit(yao_inx, credit44)
+    generated_e3_bud = budunit_get_from_json(open_file(e3_bud_path))
+    generated_e7_bud = budunit_get_from_json(open_file(e7_bud_path))
+    assert generated_e3_bud.accts == e3_bob_bud.accts
+    assert generated_e3_bud == e3_bob_bud
+    assert generated_e3_bud.get_dict() == e3_bob_bud.get_dict()
+    assert generated_e7_bud.accts == e7_bob_bud.accts
+    assert generated_e7_bud.get_dict() == e7_bob_bud.get_dict()
