@@ -14,7 +14,7 @@ from src.f02_bud.bud import (
 )
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
-from src.f04_gift.delta import sift_deltaunit
+from src.f04_gift.delta import get_minimal_deltaunit
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
 from src.f07_fiscal.fiscal_config import get_fiscal_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
@@ -953,7 +953,7 @@ def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
                 event_path = create_path(owner_path, event_int)
                 gift_path = create_path(event_path, "all_gift.json")
                 event_gift = get_giftunit_from_json(open_file(gift_path))
-                sift_delta = sift_deltaunit(event_gift._deltaunit, prev_bud)
+                sift_delta = get_minimal_deltaunit(event_gift._deltaunit, prev_bud)
                 curr_bud = event_gift.get_edited_bud(prev_bud)
                 save_file(event_path, "bud.json", curr_bud.get_json())
                 expressed_gift = copy_deepcopy(event_gift)

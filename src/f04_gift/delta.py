@@ -850,7 +850,7 @@ def get_dimens_cruds_deltaunit(
     return new_deltaunit
 
 
-def sift_deltaunit(x_deltaunit: DeltaUnit, x_bud: BudUnit) -> DeltaUnit:
+def get_minimal_deltaunit(x_deltaunit: DeltaUnit, x_bud: BudUnit) -> DeltaUnit:
     """Creates new DeltaUnit with only AtomUnits that would actually change the BudUnit"""
     new_deltaunit = deltaunit_shop()
     for x_atom in x_deltaunit.get_sorted_atomunits():

@@ -183,7 +183,7 @@ def _load_individual_idea_csv(
     x_hubunit.initialize_gift_soul_files()
     x_soul = x_hubunit.get_soul_bud()
     x_deltaunit = make_deltaunit(complete_csv)
-    # x_deltaunit = sift_deltaunit(x_deltaunit, x_soul)
+    # x_deltaunit = get_minimal_deltaunit(x_deltaunit, x_soul)
     x_giftunit = giftunit_shop(x_owner_name, x_fiscal_title)
     x_giftunit.set_deltaunit(x_deltaunit)
     x_hubunit.save_gift_file(x_giftunit)
