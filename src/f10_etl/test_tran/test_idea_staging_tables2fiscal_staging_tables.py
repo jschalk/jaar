@@ -8,7 +8,7 @@ from src.f01_road.deal import (
     bridge_str,
     quota_str,
     time_int_str,
-    search_depth_str,
+    ledger_depth_str,
 )
 from src.f03_chrono.chrono import (
     c400_number_str,
@@ -427,7 +427,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario4_Idea_br00001_Table_
         owner_name_str(),
         time_int_str(),
         quota_str(),
-        search_depth_str(),
+        ledger_depth_str(),
     ]
     a23_owner_name = bob_inx
     a23_time_int = 22
@@ -438,7 +438,7 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario4_Idea_br00001_Table_
         cursor = fiscal_db_conn.cursor()
         create_idea_sorted_table(cursor, br00001_tablename, br00001_columns)
         insert_staging_sqlstr = f"""
-INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{time_int_str()},{quota_str()}, {search_depth_str()})
+INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{time_int_str()},{quota_str()}, {ledger_depth_str()})
 VALUES
   ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota}, NULL)
 , ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota}, NULL)
@@ -466,7 +466,7 @@ VALUES
             a23_owner_name,
             a23_time_int,
             a23_quota,
-            None,  # search_depth
+            None,  # ledger_depth
             None,  # note
         )
         expected_row1 = (
@@ -477,7 +477,7 @@ VALUES
             a23_owner_name,
             a23_time_int,
             a23_quota,
-            None,  # search_depth
+            None,  # ledger_depth
             None,  # note
         )
         print(f"{fiscalunit_db_rows[0]=}")

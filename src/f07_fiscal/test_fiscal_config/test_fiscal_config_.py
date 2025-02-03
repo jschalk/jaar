@@ -3,7 +3,7 @@ from src.f01_road.deal import (
     quota_str,
     time_int_str,
     bridge_str,
-    search_depth_str,
+    ledger_depth_str,
 )
 from src.f03_chrono.chrono import (
     c400_number_str,
@@ -241,7 +241,7 @@ def test_get_fiscal_args_set_ReturnsObj():
         penny_str(),
         owner_name_str(),
         quota_str(),
-        search_depth_str(),
+        ledger_depth_str(),
         respect_bit_str(),
         time_int_str(),
         timeline_title_str(),

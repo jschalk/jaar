@@ -3,7 +3,7 @@ from src.f01_road.deal import (
     quota_str,
     time_int_str,
     bridge_str,
-    search_depth_str,
+    ledger_depth_str,
     DealEpisode,
     dealepisode_shop,
     DealLog,
@@ -17,7 +17,7 @@ from pytest import raises as pytest_raises
 
 def test_str_functions_ReturnObj():
     assert bridge_str() == "bridge"
-    assert search_depth_str() == "search_depth"
+    assert ledger_depth_str() == "ledger_depth"
     assert time_int_str() == "time_int"
     assert quota_str() == "quota"
 
@@ -30,7 +30,7 @@ def test_DealEpisode_Exists():
     assert x_dealepisode
     assert not x_dealepisode.time_int
     assert not x_dealepisode.quota
-    assert not x_dealepisode.search_depth
+    assert not x_dealepisode.ledger_depth
     assert not x_dealepisode._net_deals
     assert not x_dealepisode._magnitude
 
@@ -47,7 +47,7 @@ def test_dealepisode_shop_ReturnsObj():
     assert t4_dealepisode.time_int == t4_time_int
     assert t4_dealepisode.quota == default_fund_pool()
     assert t4_dealepisode._magnitude == 0
-    assert t4_dealepisode.search_depth == 3
+    assert t4_dealepisode.ledger_depth == 3
     assert not t4_dealepisode._net_deals
 
 
@@ -57,7 +57,7 @@ def test_dealepisode_shop_ReturnsObjWith_net_deals():
     t4_quota = 55
     t4_net_deals = {"Sue": -4}
     t4_magnitude = 677
-    t4_search_depth = 88
+    t4_ledger_depth = 88
 
     # WHEN
     x_dealepisode = dealepisode_shop(
@@ -65,14 +65,14 @@ def test_dealepisode_shop_ReturnsObjWith_net_deals():
         quota=t4_quota,
         net_deals=t4_net_deals,
         magnitude=t4_magnitude,
-        search_depth=t4_search_depth,
+        ledger_depth=t4_ledger_depth,
     )
 
     # THEN
     assert x_dealepisode
     assert x_dealepisode.time_int == t4_time_int
     assert x_dealepisode.quota == t4_quota
-    assert x_dealepisode.search_depth == t4_search_depth
+    assert x_dealepisode.ledger_depth == t4_ledger_depth
     assert x_dealepisode._magnitude == 677
     assert x_dealepisode._net_deals == t4_net_deals
 

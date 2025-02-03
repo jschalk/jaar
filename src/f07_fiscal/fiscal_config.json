@@ -36,7 +36,7 @@
             "quota": {
                 "class_type": "int"
             },
-            "search_depth": {
+            "ledger_depth": {
                 "class_type": "int"
             }
         }

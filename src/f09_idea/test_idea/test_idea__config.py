@@ -4,7 +4,7 @@ from src.f01_road.deal import (
     quota_str,
     time_int_str,
     bridge_str,
-    search_depth_str,
+    ledger_depth_str,
 )
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
@@ -272,7 +272,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[81] == c400_number_str()
     assert table_sorting_priority[82] == yr1_jan1_offset_str()
     assert table_sorting_priority[83] == quota_str()
-    assert table_sorting_priority[84] == search_depth_str()
+    assert table_sorting_priority[84] == ledger_depth_str()
     assert table_sorting_priority[85] == monthday_distortion_str()
     assert table_sorting_priority[86] == timeline_title_str()
     assert table_sorting_priority[87] == "error_message"
@@ -359,7 +359,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(quota_str()) == "REAL"
-    assert sqlite_types.get(search_depth_str()) == "INT"
+    assert sqlite_types.get(ledger_depth_str()) == "INT"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
     assert sqlite_types.get(timeline_title_str()) == "TEXT"
     assert sqlite_types.get("error_message") == "TEXT"

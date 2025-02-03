@@ -113,7 +113,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"
     assert pidgin_args_class_types.get("road") == type_RoadUnit_str()
-    assert pidgin_args_class_types.get("search_depth") == "int"
+    assert pidgin_args_class_types.get("ledger_depth") == "int"
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
     assert pidgin_args_class_types.get("tally") == "int"

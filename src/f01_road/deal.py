@@ -10,7 +10,7 @@ from src.f00_instrument.dict_toolbox import (
     exists_in_nested_dict,
     del_in_nested_dict,
 )
-from src.f01_road.finance import FundNum, TimeLinePoint, default_fund_pool
+from src.f01_road.finance import FundNum, TimeLinePoint, default_fund_pool, allot_scale
 from src.f01_road.road import (
     AcctName,
     OwnerName,
@@ -40,8 +40,8 @@ def quota_str() -> str:
     return "quota"
 
 
-def search_depth_str() -> str:
-    return "search_depth"
+def ledger_depth_str() -> str:
+    return "ledger_depth"
 
 
 @dataclass
@@ -206,8 +206,8 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
 class DealEpisode:
     time_int: TimeLinePoint = None
     quota: FundNum = None
-    search_depth: int = None  # non-negative
-    _magnitude: FundNum = None
+    ledger_depth: int = None  # non-negative
+    _magnitude: FundNum = None  # how much of the actual quota is distributed
     _net_deals: dict[AcctName, FundNum] = None
 
     def set_net_deal(self, x_acct_name: AcctName, net_deal: FundNum):
@@ -248,17 +248,17 @@ def dealepisode_shop(
     quota: FundNum = None,
     net_deals: dict[AcctName, FundNum] = None,
     magnitude: FundNum = None,
-    search_depth: int = None,
+    ledger_depth: int = None,
 ) -> DealEpisode:
     if quota is None:
         quota = default_fund_pool()
-    if search_depth is None:
-        search_depth = 3
+    if ledger_depth is None:
+        ledger_depth = 3
 
     return DealEpisode(
         time_int=time_int,
         quota=quota,
-        search_depth=search_depth,
+        ledger_depth=ledger_depth,
         _net_deals=get_empty_dict_if_None(net_deals),
         _magnitude=get_0_if_None(magnitude),
     )
