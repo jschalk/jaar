@@ -1,4 +1,4 @@
-from src.f01_road.finance import allot_scale
+from src.f01_road.allot import allot_scale
 from src.f01_road.road import (
     get_ancestor_roads,
     RoadUnit,

@@ -6,6 +6,7 @@ from src.f00_instrument.dict_toolbox import (
     get_False_if_None,
     get_empty_dict_if_None,
 )
+from src.f01_road.allot import allot_scale
 from src.f01_road.finance import (
     valid_finance_ratio,
     default_respect_bit_if_None,
@@ -17,7 +18,6 @@ from src.f01_road.finance import (
     PennyNum,
     FundCoin,
     FundNum,
-    allot_scale,
     validate_respect_num,
     TimeLinePoint,
 )

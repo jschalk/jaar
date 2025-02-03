@@ -9,7 +9,8 @@ from src.f01_road.road import (
     validate_titleunit,
     is_titleunit,
 )
-from src.f01_road.finance import default_respect_bit_if_None, RespectNum, allot_scale
+from src.f01_road.allot import allot_scale
+from src.f01_road.finance import default_respect_bit_if_None, RespectNum
 from src.f02_bud.group import (
     GroupLabel,
     MemberShip,

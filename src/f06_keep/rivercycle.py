@@ -3,7 +3,7 @@ from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
     get_json_from_dict,
 )
-from src.f01_road.finance import allot_scale
+from src.f01_road.allot import allot_scale
 from src.f01_road.road import AcctName, OwnerName
 from src.f02_bud.bud import BudUnit
 from src.f05_listen.hubunit import HubUnit
