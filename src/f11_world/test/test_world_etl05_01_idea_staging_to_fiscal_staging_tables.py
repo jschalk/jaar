@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
-from src.f01_road.finance_tran import time_int_str
+from src.f01_road.deal import time_int_str
 from src.f04_gift.atom_config import (
     face_name_str,
     fiscal_title_str,

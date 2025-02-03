@@ -4,7 +4,7 @@ from src.f00_instrument.db_toolbox import (
     get_row_count,
     create_select_inconsistency_query,
 )
-from src.f01_road.finance_tran import (
+from src.f01_road.deal import (
     bridge_str,
     quota_str,
     time_int_str,

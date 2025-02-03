@@ -1,4 +1,4 @@
-from src.f01_road.finance_tran import tranbook_shop, tranunit_shop
+from src.f01_road.deal import tranbook_shop, tranunit_shop
 from src.f07_fiscal.fiscal import fiscalunit_shop
 from pytest import raises as pytest_raises
 

@@ -1,4 +1,4 @@
-from src.f01_road.finance_tran import deallog_shop
+from src.f01_road.deal import deallog_shop
 from src.f07_fiscal.fiscal import fiscalunit_shop
 from src.f07_fiscal.examples.fiscal_env import get_test_fiscals_dir
 from pytest import raises as pytest_raises

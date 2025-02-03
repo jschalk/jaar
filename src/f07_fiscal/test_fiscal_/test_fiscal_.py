@@ -10,7 +10,7 @@ from src.f01_road.jaar_config import (
     get_test_fiscal_title,
 )
 from src.f01_road.road import default_bridge_if_None
-from src.f01_road.finance_tran import tranbook_shop
+from src.f01_road.deal import tranbook_shop
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f03_chrono.chrono import timelineunit_shop

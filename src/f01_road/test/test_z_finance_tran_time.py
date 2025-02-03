@@ -1,5 +1,5 @@
 from src.f01_road.road import get_default_fiscal_title
-from src.f01_road.finance_tran import TimeConversion, timeconversion_shop
+from src.f01_road.deal import TimeConversion, timeconversion_shop
 
 
 def test_TimeConversion_Exists():

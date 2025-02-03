@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, save_file, open_file
-from src.f01_road.finance_tran import bridge_str
+from src.f01_road.deal import bridge_str
 from src.f03_chrono.chrono import (
     c400_number_str,
     yr1_jan1_offset_str,

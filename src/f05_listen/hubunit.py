@@ -29,7 +29,7 @@ from src.f01_road.finance import (
     default_money_magnitude_if_None,
     TimeLinePoint,
 )
-from src.f01_road.finance_tran import (
+from src.f01_road.deal import (
     DealEpisode,
     dealepisode_shop,
     DealLog,

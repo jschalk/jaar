@@ -4,7 +4,7 @@ from src.f01_road.finance import (
     default_respect_bit_if_None,
     default_penny_if_None,
 )
-from src.f01_road.finance_tran import bridge_str
+from src.f01_road.deal import bridge_str
 from src.f03_chrono.chrono import get_default_timeline_config_dict
 from src.f04_gift.atom_config import (
     fiscal_title_str,

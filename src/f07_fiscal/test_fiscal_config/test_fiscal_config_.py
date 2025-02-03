@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f01_road.finance_tran import (
+from src.f01_road.deal import (
     quota_str,
     time_int_str,
     bridge_str,
@@ -228,6 +228,7 @@ def test_get_fiscal_args_set_ReturnsObj():
     expected_fiscal_args_set = {
         acct_name_str(),
         amount_str(),
+        bridge_str(),
         c400_number_str(),
         cumlative_day_str(),
         cumlative_minute_str(),
@@ -246,7 +247,6 @@ def test_get_fiscal_args_set_ReturnsObj():
         timeline_title_str(),
         weekday_title_str(),
         weekday_order_str(),
-        bridge_str(),
         yr1_jan1_offset_str(),
     }
     assert fiscal_args_set == expected_fiscal_args_set
