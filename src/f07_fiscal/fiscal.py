@@ -364,7 +364,7 @@ class FiscalUnit:
         x_tranbook = tranbook_shop(self.fiscal_title, x_tranunits)
         for owner_name, x_deallog in self.deallogs.items():
             for x_time_int, x_dealepisode in x_deallog.episodes.items():
-                for acct_name, x_amount in x_dealepisode._net_deals.items():
+                for acct_name, x_amount in x_dealepisode._episode_net.items():
                     x_tranbook.add_tranunit(owner_name, acct_name, x_time_int, x_amount)
         self._all_tranbook = x_tranbook
 

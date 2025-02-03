@@ -498,8 +498,8 @@ class HubUnit:
             x_budpoint.set_fund_pool(x_dealepisode.quota)
         else:
             x_dealepisode = dealepisode_shop(x_time_int)
-        x_net_deals = get_bud_settle_acct_net_dict(x_budpoint, True)
-        x_dealepisode._net_deals = x_net_deals
+        x_episode_net = get_bud_settle_acct_net_dict(x_budpoint, True)
+        x_dealepisode._episode_net = x_episode_net
         self._save_valid_budpoint_file(x_time_int, x_budpoint)
         self._save_valid_deal_file(x_dealepisode)
 

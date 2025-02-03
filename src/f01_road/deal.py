@@ -208,24 +208,24 @@ class DealEpisode:
     quota: FundNum = None
     ledger_depth: int = None  # non-negative
     _magnitude: FundNum = None  # how much of the actual quota is distributed
-    _net_deals: dict[AcctName, FundNum] = None
+    _episode_net: dict[AcctName, FundNum] = None  # ledger of deal outcome
 
     def set_net_deal(self, x_acct_name: AcctName, net_deal: FundNum):
-        self._net_deals[x_acct_name] = net_deal
+        self._episode_net[x_acct_name] = net_deal
 
     def net_deal_exists(self, x_acct_name: AcctName) -> bool:
-        return self._net_deals.get(x_acct_name) != None
+        return self._episode_net.get(x_acct_name) != None
 
     def get_net_deal(self, x_acct_name: AcctName) -> FundNum:
-        return self._net_deals.get(x_acct_name)
+        return self._episode_net.get(x_acct_name)
 
     def del_net_deal(self, x_acct_name: AcctName):
-        self._net_deals.pop(x_acct_name)
+        self._episode_net.pop(x_acct_name)
 
     def calc_magnitude(self):
-        net_deals = self._net_deals.values()
-        x_cred_sum = sum(net_deal for net_deal in net_deals if net_deal > 0)
-        x_debt_sum = sum(net_deal for net_deal in net_deals if net_deal < 0)
+        episode_net = self._episode_net.values()
+        x_cred_sum = sum(net_deal for net_deal in episode_net if net_deal > 0)
+        x_debt_sum = sum(net_deal for net_deal in episode_net if net_deal < 0)
         if x_cred_sum + x_debt_sum != 0:
             exception_str = f"magnitude cannot be calculated: debt_deal={x_debt_sum}, cred_deal={x_cred_sum}"
             raise calc_magnitudeException(exception_str)
@@ -233,8 +233,8 @@ class DealEpisode:
 
     def get_dict(self) -> dict[str,]:
         x_dict = {"time_int": self.time_int, "quota": self.quota}
-        if self._net_deals:
-            x_dict["net_deals"] = self._net_deals
+        if self._episode_net:
+            x_dict["episode_net"] = self._episode_net
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
         return x_dict
@@ -246,7 +246,7 @@ class DealEpisode:
 def dealepisode_shop(
     time_int: TimeLinePoint,
     quota: FundNum = None,
-    net_deals: dict[AcctName, FundNum] = None,
+    episode_net: dict[AcctName, FundNum] = None,
     magnitude: FundNum = None,
     ledger_depth: int = None,
 ) -> DealEpisode:
@@ -259,7 +259,7 @@ def dealepisode_shop(
         time_int=time_int,
         quota=quota,
         ledger_depth=ledger_depth,
-        _net_deals=get_empty_dict_if_None(net_deals),
+        _episode_net=get_empty_dict_if_None(episode_net),
         _magnitude=get_0_if_None(magnitude),
     )
 
@@ -312,7 +312,7 @@ class DealLog:
     def get_tranbook(self, fiscal_title: FiscalTitle) -> TranBook:
         x_tranbook = tranbook_shop(fiscal_title)
         for x_time_int, x_episode in self.episodes.items():
-            for dst_acct_name, x_quota in x_episode._net_deals.items():
+            for dst_acct_name, x_quota in x_episode._episode_net.items():
                 x_tranbook.add_tranunit(
                     owner_name=self.owner_name,
                     acct_name=dst_acct_name,
@@ -329,9 +329,9 @@ def deallog_shop(owner_name: OwnerName) -> DealLog:
 def get_dealepisode_from_dict(x_dict: dict) -> DealEpisode:
     x_time_int = x_dict.get("time_int")
     x_quota = x_dict.get("quota")
-    x_net_deals = x_dict.get("net_deals")
+    x_episode_net = x_dict.get("episode_net")
     x_magnitude = x_dict.get("magnitude")
-    return dealepisode_shop(x_time_int, x_quota, x_net_deals, x_magnitude)
+    return dealepisode_shop(x_time_int, x_quota, x_episode_net, x_magnitude)
 
 
 def get_dealepisode_from_json(x_json: str) -> DealEpisode:

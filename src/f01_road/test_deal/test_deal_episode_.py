@@ -28,7 +28,7 @@ def test_DealEpisode_Exists():
     assert not x_dealepisode.time_int
     assert not x_dealepisode.quota
     assert not x_dealepisode.ledger_depth
-    assert not x_dealepisode._net_deals
+    assert not x_dealepisode._episode_net
     assert not x_dealepisode._magnitude
 
 
@@ -45,14 +45,14 @@ def test_dealepisode_shop_ReturnsObj():
     assert t4_dealepisode.quota == default_fund_pool()
     assert t4_dealepisode._magnitude == 0
     assert t4_dealepisode.ledger_depth == 3
-    assert not t4_dealepisode._net_deals
+    assert not t4_dealepisode._episode_net
 
 
-def test_dealepisode_shop_ReturnsObjWith_net_deals():
+def test_dealepisode_shop_ReturnsObjWith_episode_net():
     # ESTABLISH
     t4_time_int = 4
     t4_quota = 55
-    t4_net_deals = {"Sue": -4}
+    t4_episode_net = {"Sue": -4}
     t4_magnitude = 677
     t4_ledger_depth = 88
 
@@ -60,7 +60,7 @@ def test_dealepisode_shop_ReturnsObjWith_net_deals():
     x_dealepisode = dealepisode_shop(
         time_int=t4_time_int,
         quota=t4_quota,
-        net_deals=t4_net_deals,
+        episode_net=t4_episode_net,
         magnitude=t4_magnitude,
         ledger_depth=t4_ledger_depth,
     )
@@ -71,13 +71,13 @@ def test_dealepisode_shop_ReturnsObjWith_net_deals():
     assert x_dealepisode.quota == t4_quota
     assert x_dealepisode.ledger_depth == t4_ledger_depth
     assert x_dealepisode._magnitude == 677
-    assert x_dealepisode._net_deals == t4_net_deals
+    assert x_dealepisode._episode_net == t4_episode_net
 
 
 def test_DealEpisode_set_net_deal_SetsAttr():
     # ESTABLISH
     yao_dealepisode = dealepisode_shop("yao", 33)
-    assert yao_dealepisode._net_deals == {}
+    assert yao_dealepisode._episode_net == {}
 
     # WHEN
     sue_str = "Sue"
@@ -85,8 +85,8 @@ def test_DealEpisode_set_net_deal_SetsAttr():
     yao_dealepisode.set_net_deal(sue_str, sue_deal)
 
     # THEN
-    assert yao_dealepisode._net_deals != {}
-    assert yao_dealepisode._net_deals.get(sue_str) == sue_deal
+    assert yao_dealepisode._episode_net != {}
+    assert yao_dealepisode._episode_net.get(sue_str) == sue_deal
 
 
 def test_DealEpisode_net_deal_exists_ReturnsObj():
@@ -159,9 +159,9 @@ def test_DealEpisode_calc_magnitude_SetsAttr_Scenario0():
 def test_DealEpisode_calc_magnitude_SetsAttr_Scenario1():
     # ESTABLISH
     t4_time_int = 4
-    t4_net_deals = {"Sue": -4, "Yao": 2, "Zia": 2}
+    t4_episode_net = {"Sue": -4, "Yao": 2, "Zia": 2}
 
-    t4_dealepisode = dealepisode_shop(t4_time_int, net_deals=t4_net_deals)
+    t4_dealepisode = dealepisode_shop(t4_time_int, episode_net=t4_episode_net)
     assert t4_dealepisode._magnitude == 0
 
     # WHEN
@@ -174,9 +174,9 @@ def test_DealEpisode_calc_magnitude_SetsAttr_Scenario1():
 def test_DealEpisode_calc_magnitude_SetsAttr_Scenario2():
     # ESTABLISH
     t4_time_int = 4
-    t4_net_deals = {"Bob": -13, "Sue": -7, "Yao": 18, "Zia": 2}
+    t4_episode_net = {"Bob": -13, "Sue": -7, "Yao": 18, "Zia": 2}
 
-    t4_dealepisode = dealepisode_shop(t4_time_int, net_deals=t4_net_deals)
+    t4_dealepisode = dealepisode_shop(t4_time_int, episode_net=t4_episode_net)
     assert t4_dealepisode._magnitude == 0
 
     # WHEN
@@ -192,8 +192,8 @@ def test_DealEpisode_calc_magnitude_SetsAttr_Scenario3_RaisesError():
     bob_deal = -13
     sue_deal = -3
     yao_deal = 100
-    t4_net_deals = {"Bob": bob_deal, "Sue": sue_deal, "Yao": yao_deal}
-    t4_dealepisode = dealepisode_shop(t4_time_int, net_deals=t4_net_deals)
+    t4_episode_net = {"Bob": bob_deal, "Sue": sue_deal, "Yao": yao_deal}
+    t4_dealepisode = dealepisode_shop(t4_time_int, episode_net=t4_episode_net)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -202,13 +202,13 @@ def test_DealEpisode_calc_magnitude_SetsAttr_Scenario3_RaisesError():
     assert str(excinfo.value) == exception_str
 
 
-def test_DealEpisode_get_dict_ReturnsObjWith_net_deals():
+def test_DealEpisode_get_dict_ReturnsObjWith_episode_net():
     # ESTABLISH
     t4_time_int = 4
     t4_quota = 55
-    t4_net_deals = {"Sue": -4}
+    t4_episode_net = {"Sue": -4}
     t4_magnitude = 67
-    t4_dealepisode = dealepisode_shop(t4_time_int, t4_quota, t4_net_deals)
+    t4_dealepisode = dealepisode_shop(t4_time_int, t4_quota, t4_episode_net)
     t4_dealepisode._magnitude = 67
 
     # WHEN
@@ -219,7 +219,7 @@ def test_DealEpisode_get_dict_ReturnsObjWith_net_deals():
         "time_int": t4_time_int,
         quota_str(): t4_quota,
         "magnitude": t4_magnitude,
-        "net_deals": t4_net_deals,
+        "episode_net": t4_episode_net,
     }
 
 
@@ -227,8 +227,8 @@ def test_DealEpisode_get_json_ReturnsObj():
     # ESTABLISH
     t4_time_int = 4
     t4_quota = 55
-    t4_net_deals = {"Sue": -77}
-    t4_dealepisode = dealepisode_shop(t4_time_int, t4_quota, t4_net_deals)
+    t4_episode_net = {"Sue": -77}
+    t4_dealepisode = dealepisode_shop(t4_time_int, t4_quota, t4_episode_net)
     t4_dealepisode._magnitude = 67
 
     # WHEN
@@ -236,10 +236,10 @@ def test_DealEpisode_get_json_ReturnsObj():
 
     # THEN
     static_t4_json = """{
-  "magnitude": 67,
-  "net_deals": {
+  "episode_net": {
     "Sue": -77
   },
+  "magnitude": 67,
   "quota": 55,
   "time_int": 4
 }"""
@@ -271,8 +271,8 @@ def test_get_dealepisode_from_dict_ReturnsObj_Scenario1():
     t4_time_int = 4
     t4_quota = 55
     t4_magnitude = 65
-    t4_net_deals = {"Sue": -77}
-    t4_dealepisode = dealepisode_shop(t4_time_int, t4_quota, t4_net_deals)
+    t4_episode_net = {"Sue": -77}
+    t4_dealepisode = dealepisode_shop(t4_time_int, t4_quota, t4_episode_net)
     t4_dealepisode._magnitude = t4_magnitude
     t4_dict = t4_dealepisode.get_dict()
 
@@ -284,7 +284,7 @@ def test_get_dealepisode_from_dict_ReturnsObj_Scenario1():
     assert x_dealepisode.time_int == t4_time_int
     assert x_dealepisode.quota == t4_quota
     assert x_dealepisode._magnitude == t4_magnitude
-    assert x_dealepisode._net_deals == t4_net_deals
+    assert x_dealepisode._episode_net == t4_episode_net
     assert x_dealepisode == t4_dealepisode
 
 
@@ -292,8 +292,8 @@ def test_get_dealepisode_from_json_ReturnsObj():
     # ESTABLISH
     t4_time_int = 4
     t4_quota = 55
-    t4_net_deals = {"Sue": -57}
-    t4_dealepisode = dealepisode_shop(t4_time_int, t4_quota, t4_net_deals)
+    t4_episode_net = {"Sue": -57}
+    t4_dealepisode = dealepisode_shop(t4_time_int, t4_quota, t4_episode_net)
     t4_json = t4_dealepisode.get_json()
 
     # WHEN
@@ -303,5 +303,5 @@ def test_get_dealepisode_from_json_ReturnsObj():
     assert x_dealepisode
     assert x_dealepisode.time_int == t4_time_int
     assert x_dealepisode.quota == t4_quota
-    assert x_dealepisode._net_deals == t4_net_deals
+    assert x_dealepisode._episode_net == t4_episode_net
     assert x_dealepisode == t4_dealepisode

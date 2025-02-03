@@ -278,7 +278,7 @@ def test_get_deallog_from_dict_ReturnsObj_Scenario2():
             x7_time_int: {
                 "time_int": x7_time_int,
                 quota_str(): x7_quota,
-                "net_deals": {sue_str: sue_net_deal, zia_str: zia_net_deal},
+                "episode_net": {sue_str: sue_net_deal, zia_str: zia_net_deal},
             },
         },
     }
@@ -291,8 +291,8 @@ def test_get_deallog_from_dict_ReturnsObj_Scenario2():
     assert x_deallog.owner_name == sue_str
     assert x_deallog.get_episode(x4_time_int) != None
     assert x_deallog.get_episode(x7_time_int) != None
-    assert x_deallog.get_episode(x7_time_int)._net_deals != {}
-    assert len(x_deallog.get_episode(x7_time_int)._net_deals) == 2
+    assert x_deallog.get_episode(x7_time_int)._episode_net != {}
+    assert len(x_deallog.get_episode(x7_time_int)._episode_net) == 2
     assert x_deallog.episodes == sue_deallog.episodes
     assert x_deallog == sue_deallog
 
@@ -320,12 +320,12 @@ def test_DealLog_get_tranbook_ReturnsObj():
             x4_time_int: {
                 "time_int": x4_time_int,
                 quota_str(): x4_quota,
-                "net_deals": {bob_str: bob_net_deal},
+                "episode_net": {bob_str: bob_net_deal},
             },
             x7_time_int: {
                 "time_int": x7_time_int,
                 quota_str(): x7_quota,
-                "net_deals": {zia_str: zia_net_deal},
+                "episode_net": {zia_str: zia_net_deal},
             },
         },
     }
