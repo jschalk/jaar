@@ -155,7 +155,7 @@ def allot_nested_scale(
     root_file_path = create_path(x_dir, src_filename)
     root_ledger = get_dict_from_json(open_file(root_file_path))
     root_allot = allot_scale(root_ledger, scale_number, grain_unit)
-    dst_filename = "allot.json"
+    dst_filename = "alloted.json"
     save_file(x_dir, dst_filename, get_json_from_dict(root_allot))
     evalutable_allot_dirs = [x_dir]
     final_allots = {(): root_allot}
@@ -172,18 +172,23 @@ def allot_nested_scale(
                 child_ledger = get_dict_from_json(open_file(child_ledger_path))
                 child_allot = allot_scale(child_ledger, x_scale, grain_unit)
                 save_file(child_dir, dst_filename, get_json_from_dict(child_allot))
-                final_allots[tuple(local_dir_parts)] = child_allot
+                final_allots[local_dir_parts] = child_allot
                 evalutable_allot_dirs.append(child_dir)
 
+    return _calc_final_allot(final_allots)
+
+
+def _calc_final_allot(final_allots: dict[str, dict]) -> dict[str, float]:
     final_allot_keys = list(final_allots.keys())
     x_count = 0
     while final_allot_keys != [] and x_count < 1000:
         # pop longest element in list
-        max_element_length = 0
-        for x_element in final_allot_keys:
-            if len(x_element) > max_element_length:
-                max_element_length = len(x_element)
+        # max_element_length = 0
+        # for x_element in final_allot_keys:
+        #     if len(x_element) > max_element_length:
+        #         max_element_length = len(x_element)
         calc_allot_up_to_parent = final_allot_keys.pop(-1)
+        # assert len(calc_allot_up_to_parent) == max_element_length
         child_to_push = final_allots.get(calc_allot_up_to_parent)
         calc_allot_up_to_parent = list(calc_allot_up_to_parent)
 
@@ -192,12 +197,9 @@ def allot_nested_scale(
             parent_to_update = final_allots.get(tuple(calc_allot_up_to_parent))
             del parent_to_update[parent_allot_key]
             for x_key, x_scale in child_to_push.items():
-                curr_scale = parent_to_update.get(x_key)
-                if curr_scale is None:
-                    parent_to_update[x_key] = x_scale
-                else:
-                    parent_to_update[x_key] = curr_scale + x_scale
-
+                parent_to_update[x_key] = (
+                    get_0_if_None(parent_to_update.get(x_key)) + x_scale
+                )
         x_count += 1
     return final_allots.get(())
 
@@ -206,4 +208,4 @@ def _local_path_parts(root_dir: str, y_dir: str) -> tuple[str]:
     local_path = copy_copy(y_dir)
     local_path = local_path.replace(root_dir, "")
     path_obj = Path(local_path)
-    return list(path_obj.parts[1:])
+    return tuple(path_obj.parts[1:])
