@@ -126,8 +126,8 @@ class AcctUnit(AcctCore):
     ):
         self.add_fund_give(fund_give)
         self.add_fund_take(fund_take)
-        self._fund_agenda_give += fund_agenda_give
-        self._fund_agenda_take += fund_agenda_take
+        self.add_fund_agenda_give(fund_agenda_give)
+        self.add_fund_agenda_take(fund_agenda_take)
 
     def set_fund_agenda_ratio_give_take(
         self,
