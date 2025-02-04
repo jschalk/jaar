@@ -2,7 +2,7 @@ from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import (
     get_bud_acct_agenda_award_array,
     get_bud_acct_agenda_award_csv,
-    get_bud_settle_acct_net,
+    get_acct_agenda_ledger,
 )
 
 
@@ -117,8 +117,8 @@ def test_get_bud_acct_agenda_award_csv_ReturnsObj_settle_bud_True():
     # THEN
     print(f"{bud_deal_csv_str=}")
     print("")
-    q_fund_agenda_give = int(sue_bud.fund_agenda_pool * 0.25)
-    q_fund_agenda_take = int(sue_bud.fund_agenda_pool * 0.25)
+    q_fund_agenda_give = int(sue_bud.fund_pool * 0.25)
+    q_fund_agenda_take = int(sue_bud.fund_pool * 0.25)
     example_csv_str = f"""acct_name,fund_agenda_take,fund_agenda_give
 {bob_str},{q_fund_agenda_take},{q_fund_agenda_give}
 {xio_str},{q_fund_agenda_take},{q_fund_agenda_give}
@@ -129,7 +129,7 @@ def test_get_bud_acct_agenda_award_csv_ReturnsObj_settle_bud_True():
     assert bud_deal_csv_str == example_csv_str
 
 
-def test_get_bud_net_deal_dict_ReturnsObj_ScenarioMultipleAcctUnit():
+def test_get_acct_agenda_ledger_ReturnsObj_ScenarioMultipleAcctUnit():
     # ESTABLISH
     yao_str = "Yao"
     yao_fund_agenda_give = 42
@@ -148,7 +148,7 @@ def test_get_bud_net_deal_dict_ReturnsObj_ScenarioMultipleAcctUnit():
     sue_bud.get_acct(bob_str)._fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
-    bud_net_deal_dict = get_bud_settle_acct_net(sue_bud)
+    bud_net_deal_dict = get_acct_agenda_ledger(sue_bud)
 
     # THEN
     print(f"{bud_net_deal_dict=}")
@@ -161,7 +161,7 @@ def test_get_bud_net_deal_dict_ReturnsObj_ScenarioMultipleAcctUnit():
     assert example_net_deal_dict == bud_net_deal_dict
 
 
-def test_get_bud_acct_agenda_award_csv_ReturnsObj_settle_bud_True():
+def test_get_acct_agenda_ledger_ReturnsObj_settle_bud_True():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_str = "Yao"
@@ -172,10 +172,10 @@ def test_get_bud_acct_agenda_award_csv_ReturnsObj_settle_bud_True():
     sue_bud.add_acctunit(bob_str, 5, 7)
     sue_bud.add_acctunit(xio_str, 2, 3)
     sue_bud.add_acctunit(zia_str, 0, 0)
-    assert get_bud_settle_acct_net(sue_bud) == {}
+    assert get_acct_agenda_ledger(sue_bud) == {}
 
     # WHEN
-    sue_bud_settle_net_dict = get_bud_settle_acct_net(sue_bud, settle_bud=True)
+    sue_bud_settle_net_dict = get_acct_agenda_ledger(sue_bud, settle_bud=True)
 
     # THEN
     print(f"{sue_bud_settle_net_dict=}")

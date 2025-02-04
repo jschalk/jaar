@@ -1238,8 +1238,7 @@ def test_BudUnit_settle_bud_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_ra
     yao_bud.settle_bud()
 
     # THEN
-    assert len(yao_bud.get_factunits_dict()) == 0
-    # assert len(yao_bud.get_reason_bases()) == 0
+    assert yao_bud._reason_bases == set()
     assert sue_acct._fund_give == 50000000
     assert sue_acct._fund_take == 200000000
     assert bob_acct._fund_give == 150000000
@@ -1258,12 +1257,6 @@ def test_BudUnit_settle_bud_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_ra
     assert bob_acct._fund_agenda_take == bob_acct._fund_take
     assert zia_acct._fund_agenda_give == zia_acct._fund_give
     assert zia_acct._fund_agenda_take == zia_acct._fund_take
-    # assert sue_acct._fund_agenda_give == 0
-    # assert sue_acct._fund_agenda_take == 0
-    # assert bob_acct._fund_agenda_give == 0
-    # assert bob_acct._fund_agenda_take == 0
-    # assert zia_acct._fund_agenda_give == 0
-    # assert zia_acct._fund_agenda_take == 0
     assert sue_acct._fund_agenda_ratio_give == 0.05
     assert sue_acct._fund_agenda_ratio_take == 0.2
     assert bob_acct._fund_agenda_ratio_give == 0.15

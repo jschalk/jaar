@@ -229,7 +229,7 @@ def get_bud_acct_agenda_award_csv(x_bud: BudUnit, settle_bud: bool = None) -> st
     return create_csv(x_headers, x_deal_array)
 
 
-def get_bud_settle_acct_net(
+def get_acct_agenda_ledger(
     x_bud: BudUnit, settle_bud: bool = None
 ) -> dict[AcctName, FundNum]:
     if settle_bud:
