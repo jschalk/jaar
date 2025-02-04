@@ -44,7 +44,7 @@ def test_dealepisode_shop_ReturnsObj():
     assert t4_dealepisode.time_int == t4_time_int
     assert t4_dealepisode.quota == default_fund_pool()
     assert t4_dealepisode._magnitude == 0
-    assert t4_dealepisode.ledger_depth == 3
+    assert t4_dealepisode.ledger_depth == 2
     assert not t4_dealepisode._episode_net
 
 

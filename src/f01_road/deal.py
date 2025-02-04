@@ -254,7 +254,7 @@ def dealepisode_shop(
     if quota is None:
         quota = default_fund_pool()
     if ledger_depth is None:
-        ledger_depth = 3
+        ledger_depth = 2
 
     return DealEpisode(
         time_int=time_int,
