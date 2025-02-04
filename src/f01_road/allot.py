@@ -1,4 +1,12 @@
-from src.f00_instrument.dict_toolbox import get_0_if_None
+from src.f00_instrument.dict_toolbox import (
+    get_0_if_None,
+    get_dict_from_json,
+    get_json_from_dict,
+)
+from src.f00_instrument.file import create_path, open_file, save_file
+from pathlib import Path
+from copy import copy as copy_copy
+from os.path import exists as os_path_exists
 
 
 class missing_base_residual_Exception(Exception):
@@ -139,3 +147,63 @@ def get_net(x_give: float, x_take: float) -> float:
         exception_str = f"{parameters_str} Only non-negative numbers allowed."
         raise get_net_Exception(exception_str)
     return x_give - x_take
+
+
+def allot_nested_scale(
+    x_dir: str, src_filename: str, scale_number: float, grain_unit: float, depth: int
+) -> dict[str, float]:
+    root_file_path = create_path(x_dir, src_filename)
+    root_ledger = get_dict_from_json(open_file(root_file_path))
+    root_allot = allot_scale(root_ledger, scale_number, grain_unit)
+    dst_filename = "allot.json"
+    save_file(x_dir, dst_filename, get_json_from_dict(root_allot))
+    evalutable_allot_dirs = [x_dir]
+    final_allots = {(): root_allot}
+
+    while evalutable_allot_dirs != []:
+        parent_dir = evalutable_allot_dirs.pop()
+        parent_allot_path = create_path(parent_dir, dst_filename)
+        parent_allot = get_dict_from_json(open_file(parent_allot_path))
+        for x_dst, x_scale in parent_allot.items():
+            child_dir = create_path(parent_dir, x_dst)
+            local_dir_parts = _local_path_parts(x_dir, child_dir)
+            child_ledger_path = create_path(child_dir, src_filename)
+            if os_path_exists(child_ledger_path) and len(local_dir_parts) <= depth:
+                child_ledger = get_dict_from_json(open_file(child_ledger_path))
+                child_allot = allot_scale(child_ledger, x_scale, grain_unit)
+                save_file(child_dir, dst_filename, get_json_from_dict(child_allot))
+                final_allots[tuple(local_dir_parts)] = child_allot
+                evalutable_allot_dirs.append(child_dir)
+
+    final_allot_keys = list(final_allots.keys())
+    x_count = 0
+    while final_allot_keys != [] and x_count < 1000:
+        # pop longest element in list
+        max_element_length = 0
+        for x_element in final_allot_keys:
+            if len(x_element) > max_element_length:
+                max_element_length = len(x_element)
+        calc_allot_up_to_parent = final_allot_keys.pop(-1)
+        child_to_push = final_allots.get(calc_allot_up_to_parent)
+        calc_allot_up_to_parent = list(calc_allot_up_to_parent)
+
+        if calc_allot_up_to_parent != []:
+            parent_allot_key = calc_allot_up_to_parent.pop(-1)
+            parent_to_update = final_allots.get(tuple(calc_allot_up_to_parent))
+            del parent_to_update[parent_allot_key]
+            for x_key, x_scale in child_to_push.items():
+                curr_scale = parent_to_update.get(x_key)
+                if curr_scale is None:
+                    parent_to_update[x_key] = x_scale
+                else:
+                    parent_to_update[x_key] = curr_scale + x_scale
+
+        x_count += 1
+    return final_allots.get(())
+
+
+def _local_path_parts(root_dir: str, y_dir: str) -> tuple[str]:
+    local_path = copy_copy(y_dir)
+    local_path = local_path.replace(root_dir, "")
+    path_obj = Path(local_path)
+    return list(path_obj.parts[1:])
