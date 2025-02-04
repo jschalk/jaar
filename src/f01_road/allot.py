@@ -13,13 +13,15 @@ class missing_base_residual_Exception(Exception):
     pass
 
 
-class get_net_Exception(Exception):
+class GrainFloat(float):
+    """float Class that is supposed to be divisable by a float"""
+
     pass
 
 
 def _get_missing_scale_list(
-    missing_scale: float, grain_unit: float, list_length: int
-) -> list[float]:
+    missing_scale: GrainFloat, grain_unit: float, list_length: int
+) -> list[GrainFloat]:
     if list_length == 0 or missing_scale == 0:
         return []
     missing_avg = missing_scale / list_length
@@ -54,11 +56,11 @@ def _get_missing_scale_list(
 
 
 def _allot_missing_scale(
-    ledger: dict[str, float],
-    scale_number: float,
+    ledger: dict[str, GrainFloat],
+    scale_number: GrainFloat,
     grain_unit: float,
     missing_scale: float,
-) -> dict[str, float]:
+) -> dict[str, GrainFloat]:
     missing_scale_list = _get_missing_scale_list(missing_scale, grain_unit, len(ledger))
     changes_ledger_list = []
     if missing_scale != 0:
@@ -82,29 +84,31 @@ def _allot_missing_scale(
     return ledger
 
 
-def _calc_allot_value(obj, total_credit_belief, scale_number, grain_unit):
-    if total_credit_belief == 0:
+def _calc_allot_value(
+    obj, ledger_value_total, scale_number: GrainFloat, grain_unit: float
+):
+    if ledger_value_total == 0:
         return 0
     # calculate the allot based on credit_belief
-    allot_amt = (obj / total_credit_belief) * scale_number
+    allot_amt = (obj / ledger_value_total) * scale_number
     # Adjust to the nearest grain unit
     return round(allot_amt / grain_unit) * grain_unit
 
 
 def _create_allot_dict(
-    ledger: dict[str, float], scale_number: float, grain_unit: float
-) -> dict[str, float]:
+    ledger: dict[str, float], scale_number: GrainFloat, grain_unit: float
+) -> dict[str, GrainFloat]:
     # Calculate the total credit_belief
-    total_credit_belief = sum(ledger.values())
+    ledger_value_total = sum(ledger.values())
     return {
-        x_key: _calc_allot_value(x_obj, total_credit_belief, scale_number, grain_unit)
+        x_key: _calc_allot_value(x_obj, ledger_value_total, scale_number, grain_unit)
         for x_key, x_obj in ledger.items()
     }
 
 
 def allot_scale(
-    ledger: dict[str, float], scale_number: float, grain_unit: float
-) -> dict[str, int]:
+    ledger: dict[str, float], scale_number: GrainFloat, grain_unit: float
+) -> dict[str, GrainFloat]:
     """
     allots the scale_number among ledger with float values with a resolution of the grain unit.
 
@@ -134,24 +138,13 @@ def allot_scale(
     return allot_dict
 
 
-def get_net(x_give: float, x_take: float) -> float:
-    x_give = get_0_if_None(x_give)
-    x_take = get_0_if_None(x_take)
-    if x_give < 0 or x_take < 0:
-        if x_give < 0 and x_take >= 0:
-            parameters_str = f"get_net x_give={x_give}."
-        elif x_give >= 0:
-            parameters_str = f"get_net x_take={x_take}."
-        else:
-            parameters_str = f"get_net x_give={x_give} and x_take={x_take}."
-        exception_str = f"{parameters_str} Only non-negative numbers allowed."
-        raise get_net_Exception(exception_str)
-    return x_give - x_take
-
-
 def allot_nested_scale(
-    x_dir: str, src_filename: str, scale_number: float, grain_unit: float, depth: int
-) -> dict[str, float]:
+    x_dir: str,
+    src_filename: str,
+    scale_number: GrainFloat,
+    grain_unit: float,
+    depth: int,
+) -> dict[str, GrainFloat]:
     root_file_path = create_path(x_dir, src_filename)
     root_ledger = get_dict_from_json(open_file(root_file_path))
     root_allot = allot_scale(root_ledger, scale_number, grain_unit)

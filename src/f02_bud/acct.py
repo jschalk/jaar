@@ -209,11 +209,7 @@ class AcctUnit(AcctCore):
 
     def get_memberships_dict(self) -> dict:
         return {
-            x_membership.group_label: {
-                "group_label": x_membership.group_label,
-                "credit_vote": x_membership.credit_vote,
-                "debtit_vote": x_membership.debtit_vote,
-            }
+            x_membership.group_label: x_membership.get_dict()
             for x_membership in self._memberships.values()
         }
 
@@ -242,7 +238,6 @@ class AcctUnit(AcctCore):
         x_dict["_fund_agenda_ratio_take"] = self._fund_agenda_ratio_take
 
 
-# class AcctUnitsshop:
 def acctunits_get_from_json(acctunits_json: str) -> dict[str, AcctUnit]:
     acctunits_dict = get_dict_from_json(acctunits_json)
     return acctunits_get_from_dict(x_dict=acctunits_dict)
