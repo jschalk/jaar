@@ -51,7 +51,7 @@ from src.f02_bud.bud import (
     get_from_json as budunit_get_from_json,
     budunit_shop,
 )
-from src.f02_bud.bud_tool import get_bud_settle_acct_net_dict
+from src.f02_bud.bud_tool import get_bud_settle_acct_net
 from src.f04_gift.atom import (
     AtomUnit,
     get_from_json as atomunit_get_from_json,
@@ -498,7 +498,7 @@ class HubUnit:
             x_budpoint.set_fund_pool(x_dealepisode.quota)
         else:
             x_dealepisode = dealepisode_shop(x_time_int)
-        x_episode_net = get_bud_settle_acct_net_dict(x_budpoint, True)
+        x_episode_net = get_bud_settle_acct_net(x_budpoint, True)
         x_dealepisode._episode_net = x_episode_net
         self._save_valid_budpoint_file(x_time_int, x_budpoint)
         self._save_valid_deal_file(x_dealepisode)

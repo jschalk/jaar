@@ -209,25 +209,27 @@ def bud_get_obj(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> any:
         return x_func(x_bud, jkeys)
 
 
-def get_bud_deal_array(x_bud: BudUnit, settle_bud: bool = None) -> list[list]:
+def get_bud_acct_agenda_award_array(
+    x_bud: BudUnit, settle_bud: bool = None
+) -> list[list]:
     if settle_bud:
         x_bud.settle_bud()
 
     x_list = [
-        [x_acct.acct_name, x_acct._fund_take, x_acct._fund_give]
+        [x_acct.acct_name, x_acct._fund_agenda_take, x_acct._fund_agenda_give]
         for x_acct in x_bud.accts.values()
     ]
     x_list.sort(key=lambda y: y[0], reverse=False)
     return x_list
 
 
-def get_bud_deal_csv(x_bud: BudUnit, settle_bud: bool = None) -> str:
-    x_deal_array = get_bud_deal_array(x_bud, settle_bud)
-    x_headers = ["acct_name", "fund_take", "fund_give"]
+def get_bud_acct_agenda_award_csv(x_bud: BudUnit, settle_bud: bool = None) -> str:
+    x_deal_array = get_bud_acct_agenda_award_array(x_bud, settle_bud)
+    x_headers = ["acct_name", "fund_agenda_take", "fund_agenda_give"]
     return create_csv(x_headers, x_deal_array)
 
 
-def get_bud_settle_acct_net_dict(
+def get_bud_settle_acct_net(
     x_bud: BudUnit, settle_bud: bool = None
 ) -> dict[AcctName, FundNum]:
     if settle_bud:
@@ -235,7 +237,7 @@ def get_bud_settle_acct_net_dict(
 
     x_dict = {}
     for x_acct in x_bud.accts.values():
-        settle_net = get_net(x_acct._fund_give, x_acct._fund_take)
+        settle_net = get_net(x_acct._fund_agenda_give, x_acct._fund_agenda_take)
         if settle_net != 0:
             x_dict[x_acct.acct_name] = settle_net
     return x_dict
