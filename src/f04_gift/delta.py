@@ -150,8 +150,6 @@ class BudDelta:
             x_atomunit.set_jvalue("fund_pool", after_bud.fund_pool)
         if before_bud.fund_coin != after_bud.fund_coin:
             x_atomunit.set_jvalue("fund_coin", after_bud.fund_coin)
-        if before_bud.deal_time_int != after_bud.deal_time_int:
-            x_atomunit.set_jvalue("deal_time_int", after_bud.deal_time_int)
         if before_bud.respect_bit != after_bud.respect_bit:
             x_atomunit.set_jvalue("respect_bit", after_bud.respect_bit)
         self.set_atomunit(x_atomunit)

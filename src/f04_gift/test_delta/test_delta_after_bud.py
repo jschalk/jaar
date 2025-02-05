@@ -93,10 +93,6 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnitSimpleAttrs():
     new7_arg = "penny"
     x_atomunit.set_jvalue(new7_arg, new7_value)
     sue_buddelta.set_atomunit(x_atomunit)
-    new0_value = 9900000
-    new0_arg = "deal_time_int"
-    x_atomunit.set_jvalue(new0_arg, new0_value)
-    sue_buddelta.set_atomunit(x_atomunit)
 
     # WHEN
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
@@ -116,8 +112,6 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnitSimpleAttrs():
     assert after_sue_budunit.respect_bit != before_sue_budunit.respect_bit
     assert after_sue_budunit.penny == new7_value
     assert after_sue_budunit.penny != before_sue_budunit.penny
-    assert after_sue_budunit.deal_time_int == new0_value
-    assert after_sue_budunit.deal_time_int != before_sue_budunit.deal_time_int
 
 
 def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_acct():
@@ -1135,7 +1129,6 @@ def test_BudDelta_get_buddelta_example1_ContainsAtomUnits():
     assert before_sue_budunit.max_tree_traverse != 66
     assert before_sue_budunit.credor_respect != 77
     assert before_sue_budunit.debtor_respect != 88
-    assert before_sue_budunit.deal_time_int != 990000
     assert before_sue_budunit.acct_exists(yao_str)
     assert before_sue_budunit.acct_exists(zia_str)
     assert yao_acctunit.get_membership(fly_str) is not None
@@ -1150,6 +1143,5 @@ def test_BudDelta_get_buddelta_example1_ContainsAtomUnits():
     assert after_sue_budunit.max_tree_traverse == 66
     assert after_sue_budunit.credor_respect == 77
     assert after_sue_budunit.debtor_respect == 88
-    assert after_sue_budunit.deal_time_int == 990000
     assert after_sue_budunit.acct_exists(yao_str)
     assert after_sue_budunit.acct_exists(zia_str) is False

@@ -277,7 +277,7 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jkeys_len(bud_item_healerlink_str()) == 2
     assert _get_atom_config_jkeys_len(bud_item_factunit_str()) == 2
 
-    assert _get_atom_config_jvalues_len(budunit_str()) == 9
+    assert _get_atom_config_jvalues_len(budunit_str()) == 8
     assert _get_atom_config_jvalues_len(bud_acctunit_str()) == 2
     assert _get_atom_config_jvalues_len(bud_acct_membership_str()) == 2
     assert _get_atom_config_jvalues_len(bud_itemunit_str()) == 11
@@ -434,7 +434,7 @@ def test_get_flattened_atom_table_build_ReturnsObj():
     atom_columns = get_flattened_atom_table_build()
 
     # THEN
-    assert len(atom_columns) == 107
+    assert len(atom_columns) == 106
     assert atom_columns.get("budunit_UPDATE_credor_respect") == "INTEGER"
     # print(f"{atom_columns.keys()=}")
 
@@ -519,7 +519,7 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     assert cat_budunit.get(columns_str) is not None
 
     budunit_columns = cat_budunit.get(columns_str)
-    assert len(budunit_columns) == 10
+    assert len(budunit_columns) == 9
     assert budunit_columns.get("uid") is not None
     assert budunit_columns.get("max_tree_traverse") is not None
     assert budunit_columns.get(credor_respect_str()) is not None
@@ -528,7 +528,6 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     assert budunit_columns.get(fund_coin_str()) is not None
     assert budunit_columns.get(respect_bit_str()) is not None
     assert budunit_columns.get(penny_str()) is not None
-    assert budunit_columns.get("deal_time_int") is not None
     assert budunit_columns.get("tally") is not None
 
     assert len(cat_acctunit) == 2
@@ -579,7 +578,7 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
     assert bud_item_factunit_str() in road_dimens
     assert bud_item_teamlink_str() in road_dimens
     assert len(road_dimens) == 6
-    assert len(x_atom_args_dimen_mapping) == 43
+    assert len(x_atom_args_dimen_mapping) == 42
 
 
 def get_class_type(x_dimen: str, x_arg: str) -> str:
@@ -702,7 +701,6 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("pick") == type_RoadUnit_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get("deal_time_int") == "TimeLinePoint"
     assert x_class_types.get(road_str()) == type_RoadUnit_str()
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"

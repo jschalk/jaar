@@ -32,8 +32,6 @@ def get_buddelta_example1() -> BudDelta:
     x_atomunit.set_jvalue(x_attribute, 77)
     x_attribute = "debtor_respect"
     x_atomunit.set_jvalue(x_attribute, 88)
-    x_attribute = "deal_time_int"
-    x_atomunit.set_jvalue(x_attribute, 990000)
     sue_buddelta.set_atomunit(x_atomunit)
 
     dimen = bud_acctunit_str()

@@ -121,7 +121,6 @@ class BudUnit:
     owner_name: OwnerName = None
     accts: dict[AcctName, AcctUnit] = None
     itemroot: ItemUnit = None
-    deal_time_int: TimeLinePoint = None
     tally: float = None
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
@@ -157,9 +156,6 @@ class BudUnit:
             exception_str = f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self.last_gift_id}."
             raise _last_gift_idException(exception_str)
         self.last_gift_id = x_last_gift_id
-
-    def set_deal_time_int(self, x_deal_time_int: TimeLinePoint):
-        self.deal_time_int = x_deal_time_int
 
     def set_fund_pool(self, x_fund_pool):
         if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:

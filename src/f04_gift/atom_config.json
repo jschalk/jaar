@@ -416,11 +416,6 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "deal_time_int": {
-                "column_order": 8,
-                "class_type": "TimeLinePoint",
-                "sqlite_datatype": "INTEGER"
-            },
             "respect_bit": {
                 "column_order": 4,
                 "class_type": "float",

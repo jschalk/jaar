@@ -122,7 +122,7 @@ def test_FiscalUnit_get_deallogs_time_ints_ReturnsObj():
     assert accord_fiscal.get_deallogs_time_ints() == all_time_ints
 
 
-def test_FiscalUnit_add_dealepisode_RaisesErrorWhenDeal_time_int_IsLessThan_present_time():
+def test_FiscalUnit_add_dealepisode_RaisesErrorWhen_time_int_IsLessThan_present_time():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fiscal = fiscalunit_shop(accord45_str, get_test_fiscals_dir())

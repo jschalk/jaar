@@ -40,8 +40,8 @@ CREATE_BUDITEM_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_put_a
 CREATE_BUDITEM_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, parent_road TEXT, item_title TEXT, begin REAL, close REAL, addin REAL, numor REAL, denom REAL, morph INTEGER, gogo_want REAL, stop_want REAL, mass REAL, pledge INTEGER, problem_bool INTEGER, error_message TEXT)"""
 CREATE_BUDITEM_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, parent_road TEXT, item_title_ERASE TEXT)"""
 CREATE_BUDITEM_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, parent_road TEXT, item_title_ERASE TEXT, error_message TEXT)"""
-CREATE_BUDUNIT_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, deal_time_int INTEGER, tally REAL, fund_coin REAL, penny REAL, respect_bit REAL)"""
-CREATE_BUDUNIT_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, deal_time_int INTEGER, tally REAL, fund_coin REAL, penny REAL, respect_bit REAL, error_message TEXT)"""
+CREATE_BUDUNIT_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_put_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally REAL, fund_coin REAL, penny REAL, respect_bit REAL)"""
+CREATE_BUDUNIT_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally REAL, fund_coin REAL, penny REAL, respect_bit REAL, error_message TEXT)"""
 CREATE_BUDUNIT_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_agg (face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name_ERASE TEXT)"""
 CREATE_BUDUNIT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fiscal_title TEXT, owner_name_ERASE TEXT, error_message TEXT)"""
 
@@ -210,7 +210,6 @@ HAVING MIN(credor_respect) != MAX(credor_respect)
     OR MIN(debtor_respect) != MAX(debtor_respect)
     OR MIN(fund_pool) != MAX(fund_pool)
     OR MIN(max_tree_traverse) != MAX(max_tree_traverse)
-    OR MIN(deal_time_int) != MAX(deal_time_int)
     OR MIN(tally) != MAX(tally)
     OR MIN(fund_coin) != MAX(fund_coin)
     OR MIN(penny) != MAX(penny)
@@ -462,7 +461,6 @@ HAVING MIN(credor_respect) != MAX(credor_respect)
     OR MIN(debtor_respect) != MAX(debtor_respect)
     OR MIN(fund_pool) != MAX(fund_pool)
     OR MIN(max_tree_traverse) != MAX(max_tree_traverse)
-    OR MIN(deal_time_int) != MAX(deal_time_int)
     OR MIN(tally) != MAX(tally)
     OR MIN(fund_coin) != MAX(fund_coin)
     OR MIN(penny) != MAX(penny)
@@ -728,8 +726,8 @@ WHERE error_message IS NULL
 GROUP BY face_name, event_int, fiscal_title, owner_name, parent_road, item_title
 ;
 """
-BUDUNIT_PUT_AGG_INSERT_SQLSTR = """INSERT INTO budunit_put_agg (face_name, event_int, fiscal_title, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, deal_time_int, tally, fund_coin, penny, respect_bit)
-SELECT face_name, event_int, fiscal_title, owner_name, MAX(credor_respect), MAX(debtor_respect), MAX(fund_pool), MAX(max_tree_traverse), MAX(deal_time_int), MAX(tally), MAX(fund_coin), MAX(penny), MAX(respect_bit)
+BUDUNIT_PUT_AGG_INSERT_SQLSTR = """INSERT INTO budunit_put_agg (face_name, event_int, fiscal_title, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit)
+SELECT face_name, event_int, fiscal_title, owner_name, MAX(credor_respect), MAX(debtor_respect), MAX(fund_pool), MAX(max_tree_traverse), MAX(tally), MAX(fund_coin), MAX(penny), MAX(respect_bit)
 FROM budunit_put_staging
 WHERE error_message IS NULL
 GROUP BY face_name, event_int, fiscal_title, owner_name

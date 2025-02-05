@@ -34,25 +34,6 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tally():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_deal_time_int():
-    # ESTABLISH
-    dimen = budunit_str()
-    deal_time_int_str = "deal_time_int"
-    deal_time_int_int = 55
-    deal_time_int_atomunit = atomunit_shop(dimen, atom_update())
-    deal_time_int_atomunit.set_arg(deal_time_int_str, deal_time_int_int)
-    x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(deal_time_int_atomunit)
-    sue_bud = budunit_shop("Sue")
-
-    # WHEN
-    legible_list = create_legible_list(x_buddelta, sue_bud)
-
-    # THEN
-    x_str = f"{sue_bud.owner_name}'s bud deal_time_int set to {deal_time_int_int}"
-    assert legible_list[0] == x_str
-
-
 def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
     # ESTABLISH
     dimen = budunit_str()

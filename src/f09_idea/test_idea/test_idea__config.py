@@ -243,40 +243,39 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[52] == "divisor"
     assert table_sorting_priority[53] == pledge_str()
     assert table_sorting_priority[54] == "problem_bool"
-    assert table_sorting_priority[55] == "deal_time_int"
-    assert table_sorting_priority[56] == take_force_str()
-    assert table_sorting_priority[57] == "tally"
-    assert table_sorting_priority[58] == fund_coin_str()
-    assert table_sorting_priority[59] == penny_str()
-    assert table_sorting_priority[60] == respect_bit_str()
-    assert table_sorting_priority[61] == present_time_str()
-    assert table_sorting_priority[62] == amount_str()
-    assert table_sorting_priority[63] == month_title_str()
-    assert table_sorting_priority[64] == hour_title_str()
-    assert table_sorting_priority[65] == cumlative_minute_str()
-    assert table_sorting_priority[66] == cumlative_day_str()
-    assert table_sorting_priority[67] == weekday_title_str()
-    assert table_sorting_priority[68] == weekday_order_str()
-    assert table_sorting_priority[69] == otx_title_str()
-    assert table_sorting_priority[70] == inx_title_str()
-    assert table_sorting_priority[71] == otx_road_str()
-    assert table_sorting_priority[72] == inx_road_str()
-    assert table_sorting_priority[73] == otx_name_str()
-    assert table_sorting_priority[74] == inx_name_str()
-    assert table_sorting_priority[75] == otx_label_str()
-    assert table_sorting_priority[76] == inx_label_str()
-    assert table_sorting_priority[77] == otx_bridge_str()
-    assert table_sorting_priority[78] == inx_bridge_str()
-    assert table_sorting_priority[79] == bridge_str()
-    assert table_sorting_priority[80] == unknown_word_str()
-    assert table_sorting_priority[81] == c400_number_str()
-    assert table_sorting_priority[82] == yr1_jan1_offset_str()
-    assert table_sorting_priority[83] == quota_str()
-    assert table_sorting_priority[84] == ledger_depth_str()
-    assert table_sorting_priority[85] == monthday_distortion_str()
-    assert table_sorting_priority[86] == timeline_title_str()
-    assert table_sorting_priority[87] == "error_message"
-    assert len(table_sorting_priority) == 88
+    assert table_sorting_priority[55] == take_force_str()
+    assert table_sorting_priority[56] == "tally"
+    assert table_sorting_priority[57] == fund_coin_str()
+    assert table_sorting_priority[58] == penny_str()
+    assert table_sorting_priority[59] == respect_bit_str()
+    assert table_sorting_priority[60] == present_time_str()
+    assert table_sorting_priority[61] == amount_str()
+    assert table_sorting_priority[62] == month_title_str()
+    assert table_sorting_priority[63] == hour_title_str()
+    assert table_sorting_priority[64] == cumlative_minute_str()
+    assert table_sorting_priority[65] == cumlative_day_str()
+    assert table_sorting_priority[66] == weekday_title_str()
+    assert table_sorting_priority[67] == weekday_order_str()
+    assert table_sorting_priority[68] == otx_title_str()
+    assert table_sorting_priority[69] == inx_title_str()
+    assert table_sorting_priority[70] == otx_road_str()
+    assert table_sorting_priority[71] == inx_road_str()
+    assert table_sorting_priority[72] == otx_name_str()
+    assert table_sorting_priority[73] == inx_name_str()
+    assert table_sorting_priority[74] == otx_label_str()
+    assert table_sorting_priority[75] == inx_label_str()
+    assert table_sorting_priority[76] == otx_bridge_str()
+    assert table_sorting_priority[77] == inx_bridge_str()
+    assert table_sorting_priority[78] == bridge_str()
+    assert table_sorting_priority[79] == unknown_word_str()
+    assert table_sorting_priority[80] == c400_number_str()
+    assert table_sorting_priority[81] == yr1_jan1_offset_str()
+    assert table_sorting_priority[82] == quota_str()
+    assert table_sorting_priority[83] == ledger_depth_str()
+    assert table_sorting_priority[84] == monthday_distortion_str()
+    assert table_sorting_priority[85] == timeline_title_str()
+    assert table_sorting_priority[86] == "error_message"
+    assert len(table_sorting_priority) == 87
     all_args = copy_copy(atom_args)
     all_args.update(all_bud_dimen_delete_keys)
     all_args.update(fiscal_args)
@@ -338,7 +337,6 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get("divisor") == "REAL"
     assert sqlite_types.get(pledge_str()) == "INTEGER"
     assert sqlite_types.get("problem_bool") == "INTEGER"
-    assert sqlite_types.get("deal_time_int") == "INTEGER"
     assert sqlite_types.get(take_force_str()) == "REAL"
     assert sqlite_types.get("tally") == "REAL"
     assert sqlite_types.get(fund_coin_str()) == "REAL"

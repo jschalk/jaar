@@ -109,7 +109,6 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("pick") == type_RoadUnit_str()
     assert pidgin_args_class_types.get("pledge") == "bool"
     assert pidgin_args_class_types.get("problem_bool") == "bool"
-    assert pidgin_args_class_types.get("deal_time_int") == "TimeLinePoint"
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"
     assert pidgin_args_class_types.get("road") == type_RoadUnit_str()
