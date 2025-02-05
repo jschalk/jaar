@@ -175,32 +175,31 @@ def test_FiscalUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_clea
     )
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(
-        None,
+        get_test_fiscals_dir(),
         accord45_str,
         sue_str,
         None,
         respect_bit=x_respect_bit,
         fund_coin=x_fund_coin,
     )
-    assert os_path_exists(sue_hubunit.voice_path()) is False
+    assert os_path_exists(sue_hubunit._voice_path) is False
 
     # WHEN
     accord_fiscal.init_owner_keeps(sue_str)
 
     # THEN
     print(f"{get_test_fiscals_dir()=}")
-    assert os_path_exists(sue_hubunit.voice_path())
+    assert os_path_exists(sue_hubunit._voice_path)
 
 
 def test_FiscalUnit_get_owner_soul_from_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fiscal = fiscalunit_shop(
-        accord45_str, get_test_fiscals_dir(), in_memory_journal=True
-    )
+    x_fiscals_dir = get_test_fiscals_dir()
+    accord_fiscal = fiscalunit_shop(accord45_str, x_fiscals_dir, in_memory_journal=True)
     sue_str = "Sue"
     accord_fiscal.init_owner_keeps(sue_str)
-    sue_hubunit = hubunit_shop(None, accord45_str, sue_str, None)
+    sue_hubunit = hubunit_shop(x_fiscals_dir, accord45_str, sue_str, None)
     bob_str = "Bob"
     sue_soul = sue_hubunit.get_soul_bud()
     sue_soul.add_acctunit(bob_str)
@@ -219,15 +218,14 @@ def test_FiscalUnit__set_all_healer_dutys_CorrectlySetsdutys(
 ):
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fiscal = fiscalunit_shop(
-        accord45_str, get_test_fiscals_dir(), in_memory_journal=True
-    )
+    x_fiscals_dir = get_test_fiscals_dir()
+    accord_fiscal = fiscalunit_shop(accord45_str, x_fiscals_dir, in_memory_journal=True)
     sue_str = "Sue"
     yao_str = "Yao"
     accord_fiscal.init_owner_keeps(sue_str)
     accord_fiscal.init_owner_keeps(yao_str)
-    sue_hubunit = hubunit_shop(None, accord45_str, sue_str, None)
-    yao_hubunit = hubunit_shop(None, accord45_str, yao_str, None)
+    sue_hubunit = hubunit_shop(x_fiscals_dir, accord45_str, sue_str, None)
+    yao_hubunit = hubunit_shop(x_fiscals_dir, accord45_str, yao_str, None)
     sue_soul_bud = sue_hubunit.get_soul_bud()
     yao_soul_bud = yao_hubunit.get_soul_bud()
 
@@ -257,8 +255,8 @@ def test_FiscalUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_hubunit.save_soul_bud(yao_soul_bud)
     sue_file_name = get_json_filename(sue_str)
     yao_file_name = get_json_filename(yao_str)
-    sue_dallas_hubunit = hubunit_shop(None, accord45_str, sue_str, dallas_road)
-    yao_dallas_hubunit = hubunit_shop(None, accord45_str, yao_str, dallas_road)
+    sue_dallas_hubunit = hubunit_shop(x_fiscals_dir, accord45_str, sue_str, dallas_road)
+    yao_dallas_hubunit = hubunit_shop(x_fiscals_dir, accord45_str, yao_str, dallas_road)
     sue_dutys_dir = sue_dallas_hubunit.dutys_dir()
     yao_dutys_dir = yao_dallas_hubunit.dutys_dir()
     sue_dallas_sue_duty_file_path = f"{sue_dutys_dir}/{sue_file_name}"

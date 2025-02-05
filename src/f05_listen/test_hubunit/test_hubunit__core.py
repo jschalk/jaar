@@ -32,7 +32,7 @@ def test_get_keep_path_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     peru_str = "peru"
-    sue_hubunit = hubunit_shop(None, fiscal_title=peru_str, owner_name=sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), fiscal_title=peru_str, owner_name=sue_str)
     texas_str = "texas"
     dallas_str = "dallas"
     elpaso_str = "el paso"
@@ -50,8 +50,8 @@ def test_get_keep_path_ReturnsObj():
     kern_path = get_keep_path(sue_hubunit, kern_road)
 
     # THEN
-    # itemroot_dir = f"{sue_hubunit.keeps_dir()}/{get_rootpart_of_keep_dir()}"
-    itemroot_dir = create_path(sue_hubunit.keeps_dir(), get_rootpart_of_keep_dir())
+    # itemroot_dir = f"{sue_hubunit._keeps_dir}/{get_rootpart_of_keep_dir()}"
+    itemroot_dir = create_path(sue_hubunit._keeps_dir, get_rootpart_of_keep_dir())
     print(f"{kern_road=}")
     print(f"{itemroot_dir=}")
     assert texas_path == create_path(itemroot_dir, texas_str)
@@ -73,16 +73,29 @@ def test_HubUnit_Exists():
     x_hubunit = HubUnit()
 
     # THEN
-    assert x_hubunit.fiscals_dir is None
-    assert x_hubunit.fiscal_title is None
-    assert x_hubunit.owner_name is None
-    assert x_hubunit.keep_road is None
-    assert x_hubunit.bridge is None
-    assert x_hubunit.fund_pool is None
-    assert x_hubunit.fund_coin is None
-    assert x_hubunit.respect_bit is None
-    assert x_hubunit.penny is None
-    assert x_hubunit.keep_point_magnitude is None
+    assert not x_hubunit.fiscals_dir
+    assert not x_hubunit.fiscal_title
+    assert not x_hubunit.owner_name
+    assert not x_hubunit.keep_road
+    assert not x_hubunit.bridge
+    assert not x_hubunit.fund_pool
+    assert not x_hubunit.fund_coin
+    assert not x_hubunit.respect_bit
+    assert not x_hubunit.penny
+    assert not x_hubunit.keep_point_magnitude
+    assert not x_hubunit._fiscal_dir
+    assert not x_hubunit._owners_dir
+    assert not x_hubunit._owner_dir
+    assert not x_hubunit._keeps_dir
+    assert not x_hubunit._atoms_dir
+    assert not x_hubunit._soul_dir
+    assert not x_hubunit._voice_dir
+    assert not x_hubunit._timeline_dir
+    assert not x_hubunit._gifts_dir
+    assert not x_hubunit._soul_file_name
+    assert not x_hubunit._soul_file_path
+    assert not x_hubunit._voice_file_name
+    assert not x_hubunit._voice_path
 
 
 def test_HubUnit_RaisesError_keep_road_DoesNotExist():
@@ -135,23 +148,21 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
-    assert x_hubunit.fiscal_dir() == create_path(x_fiscals_dir, x_fiscal_title)
-    assert x_hubunit.owners_dir() == create_path(x_hubunit.fiscal_dir(), "owners")
-    assert x_hubunit.owner_dir() == create_path(x_hubunit.owners_dir(), sue_str)
-    assert x_hubunit.keeps_dir() == create_path(x_hubunit.owner_dir(), "keeps")
-    assert x_hubunit.atoms_dir() == create_path(x_hubunit.owner_dir(), "atoms")
-    assert x_hubunit.soul_dir() == create_path(x_hubunit.owner_dir(), "soul")
-    assert x_hubunit.voice_dir() == create_path(x_hubunit.owner_dir(), "voice")
-    assert x_hubunit.timeline_dir() == create_path(x_hubunit.owner_dir(), "timeline")
-    assert x_hubunit.gifts_dir() == create_path(
-        x_hubunit.owner_dir(), get_gifts_folder()
-    )
-    assert x_hubunit.soul_file_name() == f"{sue_str}.json"
-    x_soul_file_path = create_path(x_hubunit.soul_dir(), x_hubunit.soul_file_name())
-    assert x_hubunit.soul_file_path() == x_soul_file_path
-    assert x_hubunit.voice_file_name() == f"{sue_str}.json"
-    x_voicepath = create_path(x_hubunit.voice_dir(), x_hubunit.voice_file_name())
-    assert x_hubunit.voice_path() == x_voicepath
+    assert x_hubunit._fiscal_dir == create_path(x_fiscals_dir, x_fiscal_title)
+    assert x_hubunit._owners_dir == create_path(x_hubunit._fiscal_dir, "owners")
+    assert x_hubunit._owner_dir == create_path(x_hubunit._owners_dir, sue_str)
+    assert x_hubunit._keeps_dir == create_path(x_hubunit._owner_dir, "keeps")
+    assert x_hubunit._atoms_dir == create_path(x_hubunit._owner_dir, "atoms")
+    assert x_hubunit._soul_dir == create_path(x_hubunit._owner_dir, "soul")
+    assert x_hubunit._voice_dir == create_path(x_hubunit._owner_dir, "voice")
+    assert x_hubunit._timeline_dir == create_path(x_hubunit._owner_dir, "timeline")
+    assert x_hubunit._gifts_dir == create_path(x_hubunit._owner_dir, get_gifts_folder())
+    assert x_hubunit._soul_file_name == f"{sue_str}.json"
+    x_soul_file_path = create_path(x_hubunit._soul_dir, x_hubunit._soul_file_name)
+    assert x_hubunit._soul_file_path == x_soul_file_path
+    assert x_hubunit._voice_file_name == f"{sue_str}.json"
+    x_voicepath = create_path(x_hubunit._voice_dir, x_hubunit._voice_file_name)
+    assert x_hubunit._voice_path == x_voicepath
 
 
 def test_hubunit_shop_ReturnsObjWhenEmpty():
@@ -163,28 +174,30 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
     texas_road = create_road(usa_road, texas_str)
+    fiscals_dir = get_test_fiscals_dir()
+    accord23_str = "accord23"
 
     # WHEN
-    sue_hubunit = hubunit_shop(None, None, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(fiscals_dir, accord23_str, sue_str, texas_road)
 
     # THEN
-    x_fiscal_path = create_path(get_test_fiscals_dir(), get_fiscal_title_if_None())
-    x_owners_path = create_path(sue_hubunit.fiscal_dir(), "owners")
+    x_fiscal_path = create_path(fiscals_dir, accord23_str)
+    x_owners_path = create_path(sue_hubunit._fiscal_dir, "owners")
     x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
     x_jobs_path = create_path(sue_hubunit.keep_dir(), "jobs")
     x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
 
-    assert sue_hubunit.fiscals_dir == get_test_fiscals_dir()
-    assert sue_hubunit.fiscal_title == get_fiscal_title_if_None()
-    assert sue_hubunit.fiscal_dir() == x_fiscal_path
+    assert sue_hubunit.fiscals_dir == fiscals_dir
+    assert sue_hubunit.fiscal_title == accord23_str
+    assert sue_hubunit._fiscal_dir == x_fiscal_path
     assert sue_hubunit.owner_name == sue_str
     assert sue_hubunit.bridge == default_bridge_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_coin == default_fund_coin_if_None()
     assert sue_hubunit.respect_bit == default_respect_bit_if_None()
     assert sue_hubunit.penny == default_penny_if_None()
-    assert sue_hubunit.owners_dir() == x_owners_path
-    x_hubunit = hubunit_shop(None, None, sue_str)
+    assert sue_hubunit._owners_dir == x_owners_path
+    x_hubunit = hubunit_shop(fiscals_dir, accord23_str, sue_str)
     assert sue_hubunit.keep_road == texas_road
     assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_road)
     bob_str = "Bob"
@@ -223,20 +236,22 @@ def test_hubunit_shop_RaisesErrorIf_owner_name_Contains_bridge():
 def test_HubUnit_save_file_soul_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
-    assert os_path_exists(sue_hubunit.soul_file_path()) is False
+    a23_str = "accord23"
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
+    assert os_path_exists(sue_hubunit._soul_file_path) is False
 
     # WHEN
     sue_hubunit.save_file_soul(file_str="fooboo", replace=True)
 
     # THEN
-    assert os_path_exists(sue_hubunit.soul_file_path())
+    assert os_path_exists(sue_hubunit._soul_file_path)
 
 
 def test_HubUnit_soul_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
+    a23_str = "accord23"
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
     assert sue_hubunit.soul_file_exists() is False
 
     # WHEN
@@ -249,7 +264,8 @@ def test_HubUnit_soul_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
 def test_HubUnit_open_file_soul_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
+    a23_str = "accord23"
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
     example_str = "fooboo"
     sue_hubunit.save_file_soul(example_str, replace=True)
 
@@ -260,20 +276,22 @@ def test_HubUnit_open_file_soul_OpensFile(env_dir_setup_cleanup):
 def test_HubUnit_save_file_voice_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
-    assert os_path_exists(sue_hubunit.voice_path()) is False
+    a23_str = "accord23"
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
+    assert os_path_exists(sue_hubunit._voice_path) is False
 
     # WHEN
     sue_hubunit.save_file_voice(file_str="fooboo", replace=True)
 
     # THEN
-    assert os_path_exists(sue_hubunit.voice_path())
+    assert os_path_exists(sue_hubunit._voice_path)
 
 
 def test_HubUnit_voice_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
+    a23_str = "accord23"
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
     assert sue_hubunit.voice_file_exists() is False
 
     # WHEN
@@ -286,7 +304,8 @@ def test_HubUnit_voice_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
 def test_HubUnit_open_file_voice_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
+    a23_str = "accord23"
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
     example_str = "fooboo"
     sue_hubunit.save_file_voice(example_str, replace=True)
 
@@ -301,7 +320,7 @@ def test_HubUnit_save_soul_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     fiscal_title = root_title()
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title, sue_str, None)
 
-    print(f"{sue_hubunit.soul_file_path()=}")
+    print(f"{sue_hubunit._soul_file_path=}")
     assert sue_hubunit.soul_file_exists() is False
 
     # WHEN
@@ -340,7 +359,8 @@ def test_HubUnit_get_soul_bud_OpensFile(env_dir_setup_cleanup):
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
     texas_road = create_road(usa_road, texas_str)
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str, texas_road)
+    a23_str = "accord23"
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
     sue_hubunit.save_soul_bud(sue_budunit)
 
     # WHEN / THEN
@@ -355,7 +375,7 @@ def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     fiscal_title = root_title()
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title, sue_str, None)
 
-    print(f"{sue_hubunit.voice_path()=}")
+    print(f"{sue_hubunit._voice_path=}")
     assert sue_hubunit.voice_file_exists() is False
 
     # WHEN
@@ -375,7 +395,8 @@ def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
     texas_road = create_road(usa_road, texas_str)
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str, texas_road)
+    a23_str = "accord23"
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
     sue_hubunit.save_voice_bud(sue_budunit)
 
     # WHEN / THEN
@@ -386,7 +407,8 @@ def test_HubUnit_get_voice_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_clean
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit.owner_name
-    sue_hubunit = hubunit_shop(env_dir(), None, sue_str)
+    a23_str = "accord23"
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
 
     # WHEN / THEN
     assert sue_hubunit.get_voice_bud() is None

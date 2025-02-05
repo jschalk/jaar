@@ -14,6 +14,7 @@ from src.f00_instrument.file import (
     get_all_dirs_with_file,
     get_integer_filenames,
     get_dir_filenames,
+    get_max_file_number,
 )
 from src.f00_instrument.examples.instrument_env import (
     get_instrument_temp_env_dir,
@@ -566,3 +567,25 @@ def test_get_dir_filenames_ReturnsObj_Scenario2_FilterByExtension(
     assert (ohio_rel_dir, x3_file_name) in filenames_set
     assert (ohio_rel_dir, x4_file_name) not in filenames_set
     assert len(filenames_set) == 2
+
+
+def test_get_max_file_number_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    x_dir = get_instrument_temp_env_dir()
+    six_int = 6
+    ten_int = 10
+    save_file(x_dir, f"{six_int}.json", "fizzbuzz")
+    save_file(x_dir, f"{ten_int}.json", "fizzbuzz")
+
+    # WHEN / THEN
+    assert get_max_file_number(x_dir) == ten_int
+
+
+def test_get_max_file_number_ReturnsObjWhenDirIsEmpty(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    x_dir = get_instrument_temp_env_dir()
+
+    # WHEN / THEN
+    assert get_max_file_number(x_dir) is None

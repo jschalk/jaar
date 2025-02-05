@@ -31,7 +31,7 @@ def test_HubUnit_timepoint_dir_ReturnsObj():
     one_timepoint_dir = yao_hubunit.timepoint_dir(t88_time_int)
 
     # THEN
-    x_timeline_dir = yao_hubunit.timeline_dir()
+    x_timeline_dir = yao_hubunit._timeline_dir
     assert one_timepoint_dir == create_path(x_timeline_dir, str(t88_time_int))
 
 

@@ -39,6 +39,7 @@ def test_HubUnit_default_soul_bud_ReturnsObj():
     assert sue_default_soul.fund_coin == sue_hubunit.fund_coin
     assert sue_default_soul.respect_bit == sue_hubunit.respect_bit
     assert sue_default_soul.penny == sue_hubunit.penny
+    assert sue_default_soul.last_gift_id == init_gift_id()
 
 
 def test_HubUnit_delete_soul_file_DeletessoulFile(env_dir_setup_cleanup):
@@ -62,7 +63,7 @@ def test_HubUnit_create_initial_gift_files_from_default_CorrectlySavesGiftUnitFi
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
-    init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_file_name}"
+    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_file_name}"
     assert os_path_exists(init_gift_file_path) is False
     assert sue_hubunit.soul_file_exists() is False
 
@@ -81,7 +82,7 @@ def test_HubUnit_create_soul_from_gifts_CreatessoulFileFromGiftFiles(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
-    init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_file_name}"
+    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_file_name}"
     sue_hubunit._create_initial_gift_files_from_default()
     assert os_path_exists(init_gift_file_path)
     assert sue_hubunit.soul_file_exists() is False
@@ -102,7 +103,7 @@ def test_HubUnit_create_initial_gift_and_soul_files_CreatesGiftFilesAndsoulFile(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
-    init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_file_name}"
+    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_file_name}"
     assert os_path_exists(init_gift_file_path) is False
     assert sue_hubunit.soul_file_exists() is False
 
@@ -128,7 +129,7 @@ def test_HubUnit_create_initial_gift_files_from_soul_SavesOnlyGiftFiles(
     assert sue_hubunit.soul_file_exists() is False
     sue_hubunit.save_soul_bud(sue_soul_bud)
     assert sue_hubunit.soul_file_exists()
-    init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_id()}.json"
+    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_id()}.json"
     assert os_path_exists(init_gift_file_path) is False
 
     # WHEN
@@ -148,8 +149,8 @@ def test_HubUnit_initialize_gift_soul_files_CorrectlySavessoulFileAndGiftFile(
         env_dir(), fiscal_title(), sue_str, respect_bit=seven_int
     )
     assert sue_hubunit.soul_file_exists() is False
-    init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_id()}.json"
-    delete_dir(sue_hubunit.gifts_dir())
+    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_id()}.json"
+    delete_dir(sue_hubunit._gifts_dir)
     assert os_path_exists(init_gift_file_path) is False
 
     # WHEN
@@ -176,7 +177,7 @@ def test_HubUnit_initialize_gift_soul_files_CorrectlySavesOnlysoulFile(
     assert sue_hubunit.soul_file_exists()
     sue_hubunit.delete_soul_file()
     assert sue_hubunit.soul_file_exists() is False
-    init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_id()}.json"
+    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_id()}.json"
     assert os_path_exists(init_gift_file_path)
 
     # WHEN
@@ -205,8 +206,8 @@ def test_HubUnit_initialize_gift_soul_files_CorrectlySavesOnlygiftFile(
     sue_soul_bud.add_acctunit(bob_str)
     sue_hubunit.save_soul_bud(sue_soul_bud)
     assert sue_hubunit.soul_file_exists()
-    init_gift_file_path = f"{sue_hubunit.gifts_dir()}/{init_gift_id()}.json"
-    delete_dir(sue_hubunit.gifts_dir())
+    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_id()}.json"
+    delete_dir(sue_hubunit._gifts_dir)
     assert os_path_exists(init_gift_file_path) is False
 
     # WHEN

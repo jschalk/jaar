@@ -14,18 +14,19 @@ from os.path import exists as os_path_exists
 def test_FiscalUnit_generate_voice_bud_Sets_voice_BudFile(env_dir_setup_cleanup):
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fiscal = fiscalunit_shop(accord45_str, get_test_fiscals_dir(), True)
+    x_fiscals_dir = get_test_fiscals_dir()
+    accord_fiscal = fiscalunit_shop(accord45_str, x_fiscals_dir, True)
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(None, accord45_str, sue_str, None)
+    sue_hubunit = hubunit_shop(x_fiscals_dir, accord45_str, sue_str, None)
 
     x_sue_owner_dir = create_path(accord_fiscal._owners_dir, sue_str)
     x_voice_dir = create_path(x_sue_owner_dir, "voice")
     x_sue_voice_path = create_path(x_voice_dir, f"{sue_str}.json")
     print(f"        {x_sue_voice_path=}")
-    print(f"{sue_hubunit.voice_path()=}")
+    print(f"{sue_hubunit._voice_path=}")
     assert os_path_exists(x_sue_voice_path) is False
     accord_fiscal.init_owner_keeps(sue_str)
-    assert sue_hubunit.voice_path() == x_sue_voice_path
+    assert sue_hubunit._voice_path == x_sue_voice_path
     assert os_path_exists(x_sue_voice_path)
 
     # WHEN

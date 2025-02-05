@@ -7,6 +7,7 @@ from src.f00_instrument.file import (
     get_dir_file_strs,
     set_dir,
     get_integer_filenames,
+    get_max_file_number,
 )
 from src.f00_instrument.dict_toolbox import get_empty_set_if_None
 from src.f00_instrument.db_toolbox import sqlite_connection
@@ -15,8 +16,6 @@ from src.f01_road.jaar_config import (
     get_rootpart_of_keep_dir,
     treasury_file_name,
     get_gifts_folder,
-    get_fiscal_title_if_None,
-    get_test_fiscals_dir,
     get_init_gift_id_if_None,
     get_json_filename,
     init_gift_id,
@@ -121,70 +120,59 @@ class HubUnit:
     respect_bit: float = None
     penny: float = None
     keep_point_magnitude: float = None
+    _fiscal_dir: str = None
+    _owners_dir: str = None
+    _owner_dir: str = None
+    _keeps_dir: str = None
+    _atoms_dir: str = None
+    _gifts_dir: str = None
+    _soul_dir: str = None
+    _voice_dir: str = None
+    _timeline_dir: str = None
+    _soul_file_name: str = None
+    _soul_file_path: str = None
+    _voice_file_name: str = None
+    _voice_path: str = None
 
-    def fiscal_dir(self) -> str:
-        return f_path(self.fiscals_dir, self.fiscal_title)
-
-    def owners_dir(self) -> str:
-        return f_path(self.fiscal_dir(), "owners")
-
-    def owner_dir(self) -> str:
-        return f_path(self.owners_dir(), self.owner_name)
-
-    def keeps_dir(self) -> str:
-        return f_path(self.owner_dir(), "keeps")
-
-    def atoms_dir(self) -> str:
-        return f_path(self.owner_dir(), "atoms")
-
-    def gifts_dir(self) -> str:
-        return f_path(self.owner_dir(), get_gifts_folder())
-
-    def soul_dir(self) -> str:
-        return f_path(self.owner_dir(), "soul")
-
-    def voice_dir(self) -> str:
-        return f_path(self.owner_dir(), "voice")
-
-    def timeline_dir(self) -> str:
-        return f_path(self.owner_dir(), "timeline")
-
-    def soul_file_name(self) -> str:
-        return get_json_filename(self.owner_name)
-
-    def soul_file_path(self) -> str:
-        return f_path(self.soul_dir(), self.soul_file_name())
-
-    def voice_file_name(self) -> str:
-        return get_json_filename(self.owner_name)
-
-    def voice_path(self) -> str:
-        return f_path(self.voice_dir(), self.voice_file_name())
+    def set_dir_attrs(self):
+        self._fiscal_dir = f_path(self.fiscals_dir, self.fiscal_title)
+        self._owners_dir = f_path(self._fiscal_dir, "owners")
+        self._owner_dir = f_path(self._owners_dir, self.owner_name)
+        self._keeps_dir = f_path(self._owner_dir, "keeps")
+        self._atoms_dir = f_path(self._owner_dir, "atoms")
+        self._gifts_dir = f_path(self._owner_dir, get_gifts_folder())
+        self._soul_dir = f_path(self._owner_dir, "soul")
+        self._voice_dir = f_path(self._owner_dir, "voice")
+        self._timeline_dir = f_path(self._owner_dir, "timeline")
+        self._soul_file_name = get_json_filename(self.owner_name)
+        self._soul_file_path = f_path(self._soul_dir, self._soul_file_name)
+        self._voice_file_name = get_json_filename(self.owner_name)
+        self._voice_path = f_path(self._voice_dir, self._voice_file_name)
 
     def save_file_soul(self, file_str: str, replace: bool):
         save_file(
-            dest_dir=self.soul_dir(),
-            file_name=self.soul_file_name(),
+            dest_dir=self._soul_dir,
+            file_name=self._soul_file_name,
             file_str=file_str,
             replace=replace,
         )
 
     def save_file_voice(self, file_str: str, replace: bool):
         save_file(
-            dest_dir=self.voice_dir(),
-            file_name=self.voice_file_name(),
+            dest_dir=self._voice_dir,
+            file_name=self._voice_file_name,
             file_str=file_str,
             replace=replace,
         )
 
     def soul_file_exists(self) -> bool:
-        return os_path_exists(self.soul_file_path())
+        return os_path_exists(self._soul_file_path)
 
     def voice_file_exists(self) -> bool:
-        return os_path_exists(self.voice_path())
+        return os_path_exists(self._voice_path)
 
     def open_file_soul(self) -> str:
-        return open_file(self.soul_dir(), self.soul_file_name())
+        return open_file(self._soul_dir, self._soul_file_name)
 
     def save_soul_bud(self, x_bud: BudUnit):
         if x_bud.owner_name != self.owner_name:
@@ -196,8 +184,7 @@ class HubUnit:
     def get_soul_bud(self) -> BudUnit:
         if self.soul_file_exists() is False:
             return None
-        file_content = self.open_file_soul()
-        return budunit_get_from_json(file_content)
+        return budunit_get_from_json(self.open_file_soul())
 
     def default_soul_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
@@ -209,22 +196,18 @@ class HubUnit:
             respect_bit=self.respect_bit,
             penny=self.penny,
         )
-        x_budunit._last_gift_id = init_gift_id()
+        x_budunit.last_gift_id = init_gift_id()
         return x_budunit
 
     def delete_soul_file(self):
-        delete_dir(self.soul_file_path())
+        delete_dir(self._soul_file_path)
 
     def open_file_voice(self) -> str:
-        return open_file(self.voice_dir(), self.voice_file_name())
+        return open_file(self._voice_dir, self._voice_file_name)
 
+    # Gift methods
     def get_max_atom_file_number(self) -> int:
-        if not os_path_exists(self.atoms_dir()):
-            return None
-        atom_files_dict = get_dir_file_strs(self.atoms_dir(), True, include_files=True)
-        atom_filenames = atom_files_dict.keys()
-        atom_file_numbers = {int(atom_filename) for atom_filename in atom_filenames}
-        return max(atom_file_numbers, default=None)
+        return get_max_file_number(self._atoms_dir)
 
     def _get_next_atom_file_number(self) -> int:
         max_file_number = self.get_max_atom_file_number()
@@ -234,11 +217,11 @@ class HubUnit:
         return f"{atom_number}.json"
 
     def atom_file_path(self, atom_number: int) -> str:
-        return f_path(self.atoms_dir(), self.atom_file_name(atom_number))
+        return f_path(self._atoms_dir, self.atom_file_name(atom_number))
 
     def _save_valid_atom_file(self, x_atom: AtomUnit, file_number: int):
         save_file(
-            self.atoms_dir(),
+            self._atoms_dir,
             self.atom_file_name(file_number),
             x_atom.get_json(),
             replace=False,
@@ -258,7 +241,7 @@ class HubUnit:
     def _get_bud_from_atom_files(self) -> BudUnit:
         x_bud = budunit_shop(self.owner_name, self.fiscal_title)
         if self.atom_file_exists(self.get_max_atom_file_number()):
-            x_atom_files = get_dir_file_strs(self.atoms_dir(), delete_extensions=True)
+            x_atom_files = get_dir_file_strs(self._atoms_dir, delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
 
             for x_atom_filename in sorted_atom_filenames:
@@ -268,12 +251,7 @@ class HubUnit:
         return x_bud
 
     def get_max_gift_file_number(self) -> int:
-        if not os_path_exists(self.gifts_dir()):
-            return None
-        gifts_dir = self.gifts_dir()
-        gift_filenames = get_dir_file_strs(gifts_dir, True, include_files=True).keys()
-        gift_file_numbers = {int(filename) for filename in gift_filenames}
-        return max(gift_file_numbers, default=None)
+        return get_max_file_number(self._gifts_dir)
 
     def _get_next_gift_file_number(self) -> int:
         max_file_number = self.get_max_gift_file_number()
@@ -285,16 +263,16 @@ class HubUnit:
 
     def gift_file_path(self, gift_id: int) -> bool:
         gift_filename = self.gift_file_name(gift_id)
-        return f_path(self.gifts_dir(), gift_filename)
+        return f_path(self._gifts_dir, gift_filename)
 
     def gift_file_exists(self, gift_id: int) -> bool:
         return os_path_exists(self.gift_file_path(gift_id))
 
     def validate_giftunit(self, x_giftunit: GiftUnit) -> GiftUnit:
-        if x_giftunit._atoms_dir != self.atoms_dir():
-            x_giftunit._atoms_dir = self.atoms_dir()
-        if x_giftunit._gifts_dir != self.gifts_dir():
-            x_giftunit._gifts_dir = self.gifts_dir()
+        if x_giftunit._atoms_dir != self._atoms_dir:
+            x_giftunit._atoms_dir = self._atoms_dir
+        if x_giftunit._gifts_dir != self._gifts_dir:
+            x_giftunit._gifts_dir = self._gifts_dir
         if x_giftunit._gift_id != self._get_next_gift_file_number():
             x_giftunit._gift_id = self._get_next_gift_file_number()
         if x_giftunit.owner_name != self.owner_name:
@@ -312,13 +290,13 @@ class HubUnit:
         if correct_invalid_attrs:
             x_gift = self.validate_giftunit(x_gift)
 
-        if x_gift._atoms_dir != self.atoms_dir():
+        if x_gift._atoms_dir != self._atoms_dir:
             raise SaveGiftFileException(
-                f"GiftUnit file cannot be saved because giftunit._atoms_dir is incorrect: {x_gift._atoms_dir}. It must be {self.atoms_dir()}."
+                f"GiftUnit file cannot be saved because giftunit._atoms_dir is incorrect: {x_gift._atoms_dir}. It must be {self._atoms_dir}."
             )
-        if x_gift._gifts_dir != self.gifts_dir():
+        if x_gift._gifts_dir != self._gifts_dir:
             raise SaveGiftFileException(
-                f"GiftUnit file cannot be saved because giftunit._gifts_dir is incorrect: {x_gift._gifts_dir}. It must be {self.gifts_dir()}."
+                f"GiftUnit file cannot be saved because giftunit._gifts_dir is incorrect: {x_gift._gifts_dir}. It must be {self._gifts_dir}."
             )
         if x_gift.owner_name != self.owner_name:
             raise SaveGiftFileException(
@@ -339,8 +317,8 @@ class HubUnit:
         return giftunit_shop(
             owner_name=self.owner_name,
             _gift_id=self._get_next_gift_file_number(),
-            _atoms_dir=self.atoms_dir(),
-            _gifts_dir=self.gifts_dir(),
+            _atoms_dir=self._atoms_dir,
+            _gifts_dir=self._gifts_dir,
         )
 
     def create_save_gift_file(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -354,12 +332,12 @@ class HubUnit:
             raise GiftFileMissingException(
                 f"GiftUnit file_number {gift_id} does not exist."
             )
-        x_gifts_dir = self.gifts_dir()
-        x_atoms_dir = self.atoms_dir()
+        x_gifts_dir = self._gifts_dir
+        x_atoms_dir = self._atoms_dir
         return create_giftunit_from_files(x_gifts_dir, gift_id, x_atoms_dir)
 
     def _merge_any_gifts(self, x_bud: BudUnit) -> BudUnit:
-        gifts_dir = self.gifts_dir()
+        gifts_dir = self._gifts_dir
         gift_ints = get_integer_filenames(gifts_dir, x_bud.last_gift_id)
         if len(gift_ints) == 0:
             return copy_deepcopy(x_bud)
@@ -373,8 +351,8 @@ class HubUnit:
         x_giftunit = giftunit_shop(
             owner_name=self.owner_name,
             _gift_id=get_init_gift_id_if_None(),
-            _gifts_dir=self.gifts_dir(),
-            _atoms_dir=self.atoms_dir(),
+            _gifts_dir=self._gifts_dir,
+            _atoms_dir=self._atoms_dir,
         )
         x_giftunit._buddelta.add_all_different_atomunits(
             before_bud=self.default_soul_bud(),
@@ -414,8 +392,9 @@ class HubUnit:
         self.save_soul_bud(soul_bud)
         return self.get_soul_bud()
 
+    # Deal methods
     def timepoint_dir(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self.timeline_dir(), str(x_time_int))
+        return f_path(self._timeline_dir, str(x_time_int))
 
     def deal_file_name(self) -> str:
         return "deal.json"
@@ -453,7 +432,7 @@ class HubUnit:
 
     def _get_timepoint_dirs(self) -> list[str]:
         x_dict = get_dir_file_strs(
-            self.timeline_dir(), include_dirs=True, include_files=False
+            self._timeline_dir, include_dirs=True, include_files=False
         )
         return list(x_dict.keys())
 
@@ -697,10 +676,7 @@ def hubunit_shop(
     penny: float = None,
     keep_point_magnitude: float = None,
 ) -> HubUnit:
-    fiscals_dir = get_test_fiscals_dir() if fiscals_dir is None else fiscals_dir
-    fiscal_title = get_fiscal_title_if_None(fiscal_title)
-
-    return HubUnit(
+    x_hubunit = HubUnit(
         fiscals_dir=fiscals_dir,
         fiscal_title=fiscal_title,
         owner_name=validate_titleunit(owner_name, bridge),
@@ -712,6 +688,8 @@ def hubunit_shop(
         penny=default_penny_if_None(penny),
         keep_point_magnitude=default_money_magnitude_if_None(keep_point_magnitude),
     )
+    x_hubunit.set_dir_attrs()
+    return x_hubunit
 
 
 def get_keep_path(x_hubunit: HubUnit, x_road: TitleUnit) -> str:
@@ -719,4 +697,4 @@ def get_keep_path(x_hubunit: HubUnit, x_road: TitleUnit) -> str:
     x_road = rebuild_road(x_road, x_hubunit.fiscal_title, keep_root)
     x_list = get_all_road_titles(x_road, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])
-    return f_path(x_hubunit.keeps_dir(), keep_sub_path)
+    return f_path(x_hubunit._keeps_dir, keep_sub_path)

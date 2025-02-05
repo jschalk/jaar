@@ -30,14 +30,14 @@ def test_HubUnit_get_max_gift_file_number_ReturnsObj(env_dir_setup_cleanup):
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
 
     # WHEN / THEN
-    delete_dir(sue_hubunit.gifts_dir())
+    delete_dir(sue_hubunit._gifts_dir)
     assert sue_hubunit.get_max_gift_file_number() is None
     assert sue_hubunit._get_next_gift_file_number() == init_gift_id()
     assert sue_hubunit._get_next_gift_file_number() == 0
 
     # ESTABLISH
     six_int = 6
-    save_file(sue_hubunit.gifts_dir(), sue_hubunit.gift_file_name(six_int), "x")
+    save_file(sue_hubunit._gifts_dir, sue_hubunit.gift_file_name(six_int), "x")
 
     # WHEN / THEN
     assert sue_hubunit.get_max_gift_file_number() == six_int
@@ -55,7 +55,7 @@ def test_HubUnit_gift_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert sue_hubunit.gift_file_exists(six_int) is False
 
     # WHEN
-    save_file(sue_hubunit.gifts_dir(), sue_hubunit.gift_file_name(six_int), "x")
+    save_file(sue_hubunit._gifts_dir, sue_hubunit.gift_file_name(six_int), "x")
 
     # THEN
     assert sue_hubunit.gift_file_exists(None) is False
@@ -70,15 +70,15 @@ def test_HubUnit_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     six_int = 6
     two_filename = get_json_filename(two_int)
     six_filename = get_json_filename(six_int)
-    sue_gift2_path = f"{sue_hubunit.gifts_dir()}/{two_filename}"
-    sue_gift0_path = f"{sue_hubunit.gifts_dir()}/{six_filename}"
+    sue_gift2_path = f"{sue_hubunit._gifts_dir}/{two_filename}"
+    sue_gift0_path = f"{sue_hubunit._gifts_dir}/{six_filename}"
     print(f"{sue_gift2_path=}")
     print(f"{sue_gift0_path=}")
     sue_giftunit = giftunit_shop(
         owner_name=sue_str,
         _gift_id=two_int,
-        _atoms_dir=sue_hubunit.atoms_dir(),
-        _gifts_dir=sue_hubunit.gifts_dir(),
+        _atoms_dir=sue_hubunit._atoms_dir,
+        _gifts_dir=sue_hubunit._gifts_dir,
     )
     assert sue_hubunit.gift_file_exists(two_int) is False
     assert sue_hubunit.gift_file_exists(six_int) is False
@@ -89,7 +89,7 @@ def test_HubUnit_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     # THEN
     assert sue_hubunit.gift_file_exists(two_int)
     assert sue_hubunit.gift_file_exists(six_int) is False
-    two_file_json = open_file(sue_hubunit.gifts_dir(), two_filename)
+    two_file_json = open_file(sue_hubunit._gifts_dir, two_filename)
     assert two_file_json == sue_giftunit.get_deltametric_json()
 
 
@@ -100,13 +100,13 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_atoms_dir_IsWrong(
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     x_gift_id = 6
     six_filename = get_json_filename(x_gift_id)
-    sue_gift0_path = f"{sue_hubunit.gifts_dir()}/{six_filename}"
+    sue_gift0_path = f"{sue_hubunit._gifts_dir}/{six_filename}"
     print(f"{sue_gift0_path=}")
     sue_giftunit = giftunit_shop(
         owner_name=sue_str,
         _gift_id=x_gift_id,
         _atoms_dir="src/incorrect_directory",
-        _gifts_dir=sue_hubunit.gifts_dir(),
+        _gifts_dir=sue_hubunit._gifts_dir,
     )
 
     # WHEN / THEN
@@ -114,7 +114,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_atoms_dir_IsWrong(
         sue_hubunit.save_gift_file(sue_giftunit, correct_invalid_attrs=False)
     assert (
         str(excinfo.value)
-        == f"GiftUnit file cannot be saved because giftunit._atoms_dir is incorrect: {sue_giftunit._atoms_dir}. It must be {sue_hubunit.atoms_dir()}."
+        == f"GiftUnit file cannot be saved because giftunit._atoms_dir is incorrect: {sue_giftunit._atoms_dir}. It must be {sue_hubunit._atoms_dir}."
     )
 
 
@@ -125,12 +125,12 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_gifts_dir_IsWrong(
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     x_gift_id = 6
     six_filename = get_json_filename(x_gift_id)
-    sue_gift0_path = f"{sue_hubunit.gifts_dir()}/{six_filename}"
+    sue_gift0_path = f"{sue_hubunit._gifts_dir}/{six_filename}"
     print(f"{sue_gift0_path=}")
     sue_giftunit = giftunit_shop(
         owner_name=sue_str,
         _gift_id=x_gift_id,
-        _atoms_dir=sue_hubunit.atoms_dir(),
+        _atoms_dir=sue_hubunit._atoms_dir,
         _gifts_dir="src/incorrect_directory",
     )
 
@@ -139,7 +139,7 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_gifts_dir_IsWrong(
         sue_hubunit.save_gift_file(sue_giftunit, correct_invalid_attrs=False)
     assert (
         str(excinfo.value)
-        == f"GiftUnit file cannot be saved because giftunit._gifts_dir is incorrect: {sue_giftunit._gifts_dir}. It must be {sue_hubunit.gifts_dir()}."
+        == f"GiftUnit file cannot be saved because giftunit._gifts_dir is incorrect: {sue_giftunit._gifts_dir}. It must be {sue_hubunit._gifts_dir}."
     )
 
 
@@ -150,14 +150,14 @@ def test_HubUnit_save_gift_file_RaisesErrorIfGiftUnit_owner_name_IsWrong(
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     x_gift_id = 6
     six_filename = get_json_filename(x_gift_id)
-    sue_gift0_path = f"{sue_hubunit.gifts_dir()}/{six_filename}"
+    sue_gift0_path = f"{sue_hubunit._gifts_dir}/{six_filename}"
     print(f"{sue_gift0_path=}")
     bob_str = "Bob"
     sue_giftunit = giftunit_shop(
         owner_name=bob_str,
         _gift_id=x_gift_id,
-        _atoms_dir=sue_hubunit.atoms_dir(),
-        _gifts_dir=sue_hubunit.gifts_dir(),
+        _atoms_dir=sue_hubunit._atoms_dir,
+        _gifts_dir=sue_hubunit._gifts_dir,
     )
 
     # WHEN / THEN
@@ -180,8 +180,8 @@ def test_HubUnit_save_gift_file_RaisesErrorIf_replace_IsFalse(
     sue_giftunit = giftunit_shop(
         owner_name=sue_str,
         _gift_id=x_gift_id,
-        _atoms_dir=sue_hubunit.atoms_dir(),
-        _gifts_dir=sue_hubunit.gifts_dir(),
+        _atoms_dir=sue_hubunit._atoms_dir,
+        _gifts_dir=sue_hubunit._gifts_dir,
     )
     saved_giftunit = sue_hubunit.save_gift_file(sue_giftunit)
 
@@ -206,27 +206,27 @@ def test_HubUnit_validate_giftunit_ReturnsObjWithAttributesFixed(
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     two_int = 2
     two_filename = get_json_filename(two_int)
-    sue_gift2_path = f"{sue_hubunit.gifts_dir()}/{two_filename}"
+    sue_gift2_path = f"{sue_hubunit._gifts_dir}/{two_filename}"
     print(f"{sue_gift2_path=}")
 
     # WHEN
     invalid_sue_giftunit = giftunit_shop(
         owner_name="Bob",
         _gift_id=sue_hubunit._get_next_gift_file_number() - 5,
-        _atoms_dir=f"{sue_hubunit.keeps_dir()}/swimming",
-        _gifts_dir=f"{sue_hubunit.keeps_dir()}/swimming",
+        _atoms_dir=f"{sue_hubunit._keeps_dir}/swimming",
+        _gifts_dir=f"{sue_hubunit._keeps_dir}/swimming",
     )
     valid_giftunit = sue_hubunit.validate_giftunit(invalid_sue_giftunit)
 
     # THEN
-    assert valid_giftunit._atoms_dir == sue_hubunit.atoms_dir()
-    assert valid_giftunit._gifts_dir == sue_hubunit.gifts_dir()
+    assert valid_giftunit._atoms_dir == sue_hubunit._atoms_dir
+    assert valid_giftunit._gifts_dir == sue_hubunit._gifts_dir
     assert valid_giftunit._gift_id == sue_hubunit._get_next_gift_file_number()
     correct_sue_giftunit = giftunit_shop(
         owner_name=sue_str,
         _gift_id=sue_hubunit._get_next_gift_file_number(),
-        _atoms_dir=sue_hubunit.atoms_dir(),
-        _gifts_dir=sue_hubunit.gifts_dir(),
+        _atoms_dir=sue_hubunit._atoms_dir,
+        _gifts_dir=sue_hubunit._gifts_dir,
     )
     assert valid_giftunit == correct_sue_giftunit
 
@@ -239,7 +239,7 @@ def test_HubUnit_save_gift_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     next_int = sue_hubunit._get_next_gift_file_number()
     next_filename = get_json_filename(next_int)
-    sue_gift2_path = f"{sue_hubunit.gifts_dir()}/{next_filename}"
+    sue_gift2_path = f"{sue_hubunit._gifts_dir}/{next_filename}"
     print(f"{sue_gift2_path=}")
     assert sue_hubunit.gift_file_exists(next_int) is False
 
@@ -247,14 +247,14 @@ def test_HubUnit_save_gift_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
     invalid_sue_giftunit = giftunit_shop(
         owner_name="Bob",
         _gift_id=sue_hubunit._get_next_gift_file_number() - 5,
-        _atoms_dir=f"{sue_hubunit.keeps_dir()}/swimming",
-        _gifts_dir=f"{sue_hubunit.keeps_dir()}/swimming",
+        _atoms_dir=f"{sue_hubunit._keeps_dir}/swimming",
+        _gifts_dir=f"{sue_hubunit._keeps_dir}/swimming",
     )
     sue_hubunit.save_gift_file(invalid_sue_giftunit)
 
     # THEN
     assert sue_hubunit.gift_file_exists(next_int)
-    two_file_json = open_file(sue_hubunit.gifts_dir(), next_filename)
+    two_file_json = open_file(sue_hubunit._gifts_dir, next_filename)
 
 
 def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhenNogiftFilesExist(
@@ -265,7 +265,7 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhenNogiftFilesE
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
 
     # WHEN
-    delete_dir(sue_hubunit.gifts_dir())
+    delete_dir(sue_hubunit._gifts_dir)
     sue_giftunit = sue_hubunit._default_giftunit()
 
     # THEN
@@ -274,8 +274,8 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhenNogiftFilesE
     assert sue_giftunit._gift_id == 0
     assert sue_giftunit._gift_id == sue_hubunit._get_next_gift_file_number()
     assert sue_giftunit.face_name is None
-    assert sue_giftunit._atoms_dir == sue_hubunit.atoms_dir()
-    assert sue_giftunit._gifts_dir == sue_hubunit.gifts_dir()
+    assert sue_giftunit._atoms_dir == sue_hubunit._atoms_dir
+    assert sue_giftunit._gifts_dir == sue_hubunit._gifts_dir
 
 
 def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhengiftFilesExist(
@@ -284,12 +284,12 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhengiftFilesExi
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
-    delete_dir(sue_hubunit.gifts_dir())
+    delete_dir(sue_hubunit._gifts_dir)
 
     zero_giftunit = get_sue_giftunit()
     zero_giftunit._gift_id = sue_hubunit._get_next_gift_file_number()
-    zero_giftunit._atoms_dir = sue_hubunit.atoms_dir()
-    zero_giftunit._gifts_dir = sue_hubunit.gifts_dir()
+    zero_giftunit._atoms_dir = sue_hubunit._atoms_dir
+    zero_giftunit._gifts_dir = sue_hubunit._gifts_dir
     sue_hubunit.save_gift_file(zero_giftunit)
 
     # WHEN
@@ -301,8 +301,8 @@ def test_HubUnit_default_giftunit_ReturnsObjWithCorrect_gift_id_WhengiftFilesExi
     assert sue_giftunit._gift_id == 1
     assert sue_giftunit._gift_id == sue_hubunit._get_next_gift_file_number()
     assert sue_giftunit.face_name is None
-    assert sue_giftunit._atoms_dir == sue_hubunit.atoms_dir()
-    assert sue_giftunit._gifts_dir == sue_hubunit.gifts_dir()
+    assert sue_giftunit._atoms_dir == sue_hubunit._atoms_dir
+    assert sue_giftunit._gifts_dir == sue_hubunit._gifts_dir
 
 
 def test_HubUnit_get_giftunit_ReturnsObjWhenFilesDoesExist(
@@ -366,8 +366,8 @@ def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
     sue_giftunit = giftunit_shop(
         owner_name=sue_str,
         _gift_id=six_int,
-        _atoms_dir=sue_hubunit.atoms_dir(),
-        _gifts_dir=sue_hubunit.gifts_dir(),
+        _atoms_dir=sue_hubunit._atoms_dir,
+        _gifts_dir=sue_hubunit._gifts_dir,
     )
     sue_giftunit._buddelta.set_atomunit(get_atom_example_itemunit_knee())
     zero_int = 0
@@ -377,7 +377,7 @@ def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     sue_hubunit.save_gift_file(sue_giftunit, correct_invalid_attrs=False)
 
-    print(f"{get_dir_file_strs(sue_hubunit.atoms_dir())}")
+    print(f"{get_dir_file_strs(sue_hubunit._atoms_dir)}")
     assert sue_hubunit.gift_file_exists(six_int)
     assert sue_hubunit.atom_file_exists(zero_int)
 
@@ -395,12 +395,12 @@ def test_HubUnit_save_gift_file_CanCreateAndModify3giftunits(
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
-    delete_dir(sue_hubunit.gifts_dir())
-    delete_dir(sue_hubunit.atoms_dir())
-    set_dir(sue_hubunit.gifts_dir())
-    set_dir(sue_hubunit.atoms_dir())
-    assert len(get_dir_file_strs(sue_hubunit.gifts_dir())) == 0
-    assert len(get_dir_file_strs(sue_hubunit.atoms_dir())) == 0
+    delete_dir(sue_hubunit._gifts_dir)
+    delete_dir(sue_hubunit._atoms_dir)
+    set_dir(sue_hubunit._gifts_dir)
+    set_dir(sue_hubunit._atoms_dir)
+    assert len(get_dir_file_strs(sue_hubunit._gifts_dir)) == 0
+    assert len(get_dir_file_strs(sue_hubunit._atoms_dir)) == 0
 
     # WHEN
     sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
@@ -408,8 +408,8 @@ def test_HubUnit_save_gift_file_CanCreateAndModify3giftunits(
     sue_hubunit.save_gift_file(sue_4atomunits_giftunit())
 
     # THEN
-    assert len(get_dir_file_strs(sue_hubunit.gifts_dir())) == 3
-    assert len(get_dir_file_strs(sue_hubunit.atoms_dir())) == 9
+    assert len(get_dir_file_strs(sue_hubunit._gifts_dir)) == 3
+    assert len(get_dir_file_strs(sue_hubunit._atoms_dir)) == 9
 
 
 def test_HubUnit_save_gift_file_ReturnsValidObj(env_dir_setup_cleanup):
@@ -417,8 +417,8 @@ def test_HubUnit_save_gift_file_ReturnsValidObj(env_dir_setup_cleanup):
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     sue2_giftunit = sue_2atomunits_giftunit()
-    sue2_giftunit._atoms_dir = f"{sue_hubunit.keeps_dir()}/swimming"
-    sue2_giftunit._gifts_dir = f"{sue_hubunit.keeps_dir()}/swimming"
+    sue2_giftunit._atoms_dir = f"{sue_hubunit._keeps_dir}/swimming"
+    sue2_giftunit._gifts_dir = f"{sue_hubunit._keeps_dir}/swimming"
     sue2_giftunit.owner_name = "Bob"
     sue2_giftunit._gift_id = sue_hubunit._get_next_gift_file_number() - 5
     prev_sue2_giftunit = copy_deepcopy(sue2_giftunit)
@@ -428,8 +428,8 @@ def test_HubUnit_save_gift_file_ReturnsValidObj(env_dir_setup_cleanup):
 
     # THEN
     assert valid_giftunit._gifts_dir != prev_sue2_giftunit._gifts_dir
-    assert valid_giftunit._gifts_dir == sue_hubunit.gifts_dir()
-    assert valid_giftunit._atoms_dir == sue_hubunit.atoms_dir()
+    assert valid_giftunit._gifts_dir == sue_hubunit._gifts_dir
+    assert valid_giftunit._atoms_dir == sue_hubunit._atoms_dir
     assert valid_giftunit._gift_id != prev_sue2_giftunit._gift_id
 
 
@@ -444,8 +444,8 @@ def test_HubUnit_create_save_gift_file_SaveCorrectObj(env_dir_setup_cleanup):
     sue_giftunit = giftunit_shop(
         owner_name=sue_str,
         _gift_id=two_int,
-        _atoms_dir=sue_hubunit.atoms_dir(),
-        _gifts_dir=sue_hubunit.gifts_dir(),
+        _atoms_dir=sue_hubunit._atoms_dir,
+        _gifts_dir=sue_hubunit._gifts_dir,
     )
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
     sue_hubunit.save_gift_file(sue_giftunit, correct_invalid_attrs=False)

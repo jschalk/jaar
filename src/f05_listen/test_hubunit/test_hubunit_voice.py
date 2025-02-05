@@ -14,18 +14,18 @@ def test_HubUnit_voice_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str, None)
-    assert os_path_exists(sue_hubunit.voice_path()) is False
+    assert os_path_exists(sue_hubunit._voice_path) is False
     assert sue_hubunit.voice_file_exists() is False
 
     # WHEN
     save_file(
-        dest_dir=sue_hubunit.voice_dir(),
-        file_name=sue_hubunit.voice_file_name(),
+        dest_dir=sue_hubunit._voice_dir,
+        file_name=sue_hubunit._voice_file_name,
         file_str=budunit_shop(sue_str).get_json(),
     )
 
     # THEN
-    assert os_path_exists(sue_hubunit.voice_path())
+    assert os_path_exists(sue_hubunit._voice_path)
     assert sue_hubunit.voice_file_exists()
 
 
@@ -44,7 +44,7 @@ def test_HubUnit_save_voice_file_CorrectlySavesFile(env_dir_setup_cleanup):
     # THEN
     assert sue_hubunit.voice_file_exists()
 
-    voice_file_str = open_file(sue_hubunit.voice_dir(), sue_hubunit.voice_file_name())
+    voice_file_str = open_file(sue_hubunit._voice_dir, sue_hubunit._voice_file_name)
     print(f"{voice_file_str=}")
     voice_bud = budunit_get_from_json(voice_file_str)
     assert voice_bud.acct_exists(bob_str)
@@ -56,7 +56,7 @@ def test_HubUnit_save_voice_file_CorrectlySavesFile(env_dir_setup_cleanup):
     sue_hubunit.save_voice_bud(sue2_bud)
 
     # THEN
-    voice_file_str = open_file(sue_hubunit.voice_dir(), sue_hubunit.voice_file_name())
+    voice_file_str = open_file(sue_hubunit._voice_dir, sue_hubunit._voice_file_name)
     print(f"{voice_file_str=}")
     voice_bud = budunit_get_from_json(voice_file_str)
     assert voice_bud.acct_exists(zia_str)
@@ -138,7 +138,7 @@ def test_HubUnit_initialize_voice_file_CorrectlyDoesNotOverwrite(
     )
     sue_hubunit.initialize_voice_file(sue_bud)
     assert sue_hubunit.voice_file_exists()
-    delete_dir(sue_hubunit.voice_path())
+    delete_dir(sue_hubunit._voice_path)
     assert sue_hubunit.voice_file_exists() is False
 
     # WHEN
@@ -168,12 +168,12 @@ def test_HubUnit_initialize_voice_file_CreatesDirsAndFiles(env_dir_setup_cleanup
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str, None)
-    delete_dir(sue_hubunit.fiscal_dir())
-    assert os_path_exists(sue_hubunit.voice_path()) is False
+    delete_dir(sue_hubunit._fiscal_dir)
+    assert os_path_exists(sue_hubunit._voice_path) is False
 
     # WHEN
     sue_bud = budunit_shop(sue_str, root_title())
     sue_hubunit.initialize_voice_file(sue_bud)
 
     # THEN
-    assert os_path_exists(sue_hubunit.voice_path())
+    assert os_path_exists(sue_hubunit._voice_path)
