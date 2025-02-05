@@ -10,6 +10,10 @@ def get_test_fiscals_dir():
     return "src/f07_fiscal/examples/fiscals"
 
 
+def get_owners_folder() -> str:
+    return "owners"
+
+
 def get_gifts_folder() -> str:
     return "gifts"
 

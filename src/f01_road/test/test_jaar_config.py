@@ -1,6 +1,7 @@
 from src.f01_road.jaar_config import (
     soul_str,
     voice_str,
+    get_owners_folder,
     get_rootpart_of_keep_dir,
     treasury_file_name,
     max_tree_traverse_default,
@@ -8,6 +9,10 @@ from src.f01_road.jaar_config import (
     default_unknown_word,
     default_unknown_word_if_None,
 )
+
+
+def test_get_owners_folder():
+    assert get_owners_folder() == "owners"
 
 
 def test_soul_str():

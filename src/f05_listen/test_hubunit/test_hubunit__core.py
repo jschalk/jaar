@@ -18,6 +18,7 @@ from src.f01_road.jaar_config import (
     get_fiscal_title_if_None,
 )
 from src.f02_bud.bud import budunit_shop
+from src.f05_listen.hub_tool import create_timeline_dir
 from src.f05_listen.hubunit import HubUnit, hubunit_shop, get_keep_path
 from src.f05_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.f05_listen.examples.listen_env import (
@@ -156,6 +157,12 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit._soul_dir == create_path(x_hubunit._owner_dir, "soul")
     assert x_hubunit._voice_dir == create_path(x_hubunit._owner_dir, "voice")
     assert x_hubunit._timeline_dir == create_path(x_hubunit._owner_dir, "timeline")
+    func_timeline_dir = create_timeline_dir(
+        x_fiscals_dir, x_fiscal_title, x_hubunit.owner_name
+    )
+    print(f"{x_hubunit._timeline_dir=}")
+    print(f"{func_timeline_dir=}")
+    assert x_hubunit._timeline_dir == func_timeline_dir
     assert x_hubunit._gifts_dir == create_path(x_hubunit._owner_dir, get_gifts_folder())
     assert x_hubunit._soul_file_name == f"{sue_str}.json"
     x_soul_file_path = create_path(x_hubunit._soul_dir, x_hubunit._soul_file_name)
