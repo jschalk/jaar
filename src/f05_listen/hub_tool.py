@@ -16,3 +16,11 @@ def create_timeline_dir(
     owners_dir = create_path(fiscal_dir, "owners")
     owner_dir = create_path(owners_dir, owner_name)
     return create_path(owner_dir, "timeline")
+
+
+def create_deal_path(
+    fiscals_dir: str, fiscal_title: TitleUnit, owner_name: OwnerName, timepoint_int: int
+) -> str:
+    timeline_dir = create_timeline_dir(fiscals_dir, fiscal_title, owner_name)
+    timepoint_dir = create_path(timeline_dir, timepoint_int)
+    return create_path(timepoint_dir, "deal.json")

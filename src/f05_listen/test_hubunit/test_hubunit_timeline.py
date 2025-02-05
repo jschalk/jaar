@@ -1,5 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.finance import default_fund_pool
+from src.f05_listen.hub_tool import create_deal_path
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.example_listen_buds import (
     get_budunit_with_4_levels,
@@ -60,6 +61,8 @@ def test_HubUnit_deal_file_path_ReturnsObj():
     x_timepoint_dir = yao_hubunit.timepoint_dir(t88_time_int)
     x_file_path = create_path(x_timepoint_dir, yao_hubunit.deal_file_name())
     assert t88_deal_file_path == x_file_path
+    f_deal_path = create_deal_path(fiscals_dir(), fiscal_title(), yao_str, t88_time_int)
+    assert t88_deal_file_path == f_deal_path
 
 
 def test_HubUnit_save_valid_deal_file_SavesFile(env_dir_setup_cleanup):
