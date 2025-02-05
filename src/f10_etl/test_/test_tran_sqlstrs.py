@@ -48,6 +48,8 @@ from src.f10_etl.tran_sqlstrs import (
     FISCALUNIT_AGG_INSERT_SQLSTR,
     IDEA_STAGEABLE_PUT_DIMENS,
     IDEA_STAGEABLE_DEL_DIMENS,
+    CREATE_FISCAL_EVENT_TIME_AGG,
+    INSERT_FISCAL_EVENT_TIME_AGG,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -835,3 +837,38 @@ def test_IDEA_STAGEABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     assert idea_dimen_combo_checked_count == 624
     assert idea_stage2dimen_count == 10
     assert IDEA_STAGEABLE_DEL_DIMENS == expected_idea_stagable_dimens
+
+
+def test_CREATE_FISCAL_EVENT_TIME_AGG_Exists():
+    # ESTABLISH
+    expected_create_table_sqlstr = """
+CREATE TABLE IF NOT EXISTS fiscal_event_time_agg (
+  fiscal_title TEXT
+, event_int INTEGER
+, time_int INTEGER
+)
+;
+"""
+    # WHEN / THEN
+    assert CREATE_FISCAL_EVENT_TIME_AGG == expected_create_table_sqlstr
+
+
+def test_INSERT_FISCAL_EVENT_TIME_AGG_Exists():
+    # ESTABLISH
+    expected_insert_fiscal_event_time_agg_sqlstr = """
+INSERT INTO fiscal_event_time_agg (fiscal_title, event_int, time_int)
+SELECT fiscal_title, event_int, time_int
+FROM (
+    SELECT fiscal_title, event_int, time_int
+    FROM fiscal_cashbook_staging
+    GROUP BY fiscal_title, event_int, time_int
+    UNION 
+    SELECT fiscal_title, event_int, time_int
+    FROM fiscal_deal_episode_staging
+    GROUP BY fiscal_title, event_int, time_int
+)
+ORDER BY fiscal_title, event_int, time_int
+;
+"""
+    # WHEN / THEN
+    assert INSERT_FISCAL_EVENT_TIME_AGG == expected_insert_fiscal_event_time_agg_sqlstr

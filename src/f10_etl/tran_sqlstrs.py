@@ -124,7 +124,6 @@ def get_bud_create_table_sqlstrs() -> dict[str, str]:
 def create_fiscal_tables(conn_or_cursor: sqlite3_Connection):
     for create_table_sqlstr in get_fiscal_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
-        print(f"{create_table_sqlstr=}")
 
 
 def create_bud_tables(conn_or_cursor: sqlite3_Connection):
@@ -884,3 +883,29 @@ IDEA_STAGEABLE_DEL_DIMENS = {
     "br00058": ["bud_itemunit"],
     "br00059": ["budunit"],
 }
+
+
+CREATE_FISCAL_EVENT_TIME_AGG = """
+CREATE TABLE IF NOT EXISTS fiscal_event_time_agg (
+  fiscal_title TEXT
+, event_int INTEGER
+, time_int INTEGER
+)
+;
+"""
+
+INSERT_FISCAL_EVENT_TIME_AGG = """
+INSERT INTO fiscal_event_time_agg (fiscal_title, event_int, time_int)
+SELECT fiscal_title, event_int, time_int
+FROM (
+    SELECT fiscal_title, event_int, time_int
+    FROM fiscal_cashbook_staging
+    GROUP BY fiscal_title, event_int, time_int
+    UNION 
+    SELECT fiscal_title, event_int, time_int
+    FROM fiscal_deal_episode_staging
+    GROUP BY fiscal_title, event_int, time_int
+)
+ORDER BY fiscal_title, event_int, time_int
+;
+"""
