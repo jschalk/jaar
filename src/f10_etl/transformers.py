@@ -52,8 +52,9 @@ from src.f10_etl.tran_sqlstrs import (
     get_bud_insert_put_agg_from_staging_sqlstrs,
     get_bud_insert_del_agg_from_staging_sqlstrs,
     IDEA_STAGEABLE_PUT_DIMENS,
-    CREATE_FISCAL_EVENT_TIME_AGG,
-    INSERT_FISCAL_EVENT_TIME_AGG,
+    CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR,
+    INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR,
+    UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
@@ -841,8 +842,9 @@ def set_bud_staging_error_message(conn_or_cursor: sqlite3_Connection):
 
 
 def fiscal_agg_tables2fiscal_event_time_agg(conn_or_cursor: sqlite3_Connection):
-    conn_or_cursor.execute(CREATE_FISCAL_EVENT_TIME_AGG)
-    conn_or_cursor.execute(INSERT_FISCAL_EVENT_TIME_AGG)
+    conn_or_cursor.execute(CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR)
+    conn_or_cursor.execute(INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR)
+    conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR)
 
 
 def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):

@@ -142,19 +142,19 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_PopulatesTable_fiscal_event_tim
         # cursor.execute(f"SELECT * FROM {fiscalunit_stage_tablename};")
         # fiscalunit_stage_rows = cursor.fetchall()
         # assert len(fiscalunit_stage_rows) == 4
-        event_time_select_sql = f"""SELECT fiscal_title, event_int, time_int 
+        event_time_select_sql = f"""SELECT fiscal_title, event_int, time_int, error_message 
 FROM {event_time_tablename}
 ;
 """
         cursor.execute(event_time_select_sql)
         fiscalunit_agg_rows = cursor.fetchall()
         # fiscal_title, owner_name
-        expected_row0 = (accord23_str, event2, timepoint22)
-        expected_row1 = (accord23_str, event3, timepoint800)
-        expected_row2 = (accord45_str, event2, timepoint22)
-        expected_row3 = (accord45_str, event3, timepoint800)
-        expected_row4 = (accord45_str, event7, timepoint900)
-        expected_row5 = (accord45_str, event8, timepoint23)
+        expected_row0 = (accord23_str, event2, timepoint22, "sorted")
+        expected_row1 = (accord23_str, event3, timepoint800, "sorted")
+        expected_row2 = (accord45_str, event2, timepoint22, "sorted")
+        expected_row3 = (accord45_str, event3, timepoint800, "sorted")
+        expected_row4 = (accord45_str, event7, timepoint900, "sorted")
+        expected_row5 = (accord45_str, event8, timepoint23, "not sorted")
         assert fiscalunit_agg_rows == [
             expected_row0,
             expected_row1,

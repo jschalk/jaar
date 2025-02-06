@@ -885,16 +885,17 @@ IDEA_STAGEABLE_DEL_DIMENS = {
 }
 
 
-CREATE_FISCAL_EVENT_TIME_AGG = """
+CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR = """
 CREATE TABLE IF NOT EXISTS fiscal_event_time_agg (
   fiscal_title TEXT
 , event_int INTEGER
 , time_int INTEGER
+, error_message TEXT
 )
 ;
 """
 
-INSERT_FISCAL_EVENT_TIME_AGG = """
+INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR = """
 INSERT INTO fiscal_event_time_agg (fiscal_title, event_int, time_int)
 SELECT fiscal_title, event_int, time_int
 FROM (
@@ -907,5 +908,24 @@ FROM (
     GROUP BY fiscal_title, event_int, time_int
 )
 ORDER BY fiscal_title, event_int, time_int
+;
+"""
+
+UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR = """
+WITH EventTimeOrdered AS (
+    SELECT fiscal_title, event_int, time_int,
+           LAG(time_int) OVER (PARTITION BY fiscal_title ORDER BY event_int) AS prev_time_int
+    FROM fiscal_event_time_agg
+)
+UPDATE fiscal_event_time_agg
+SET error_message = CASE 
+         WHEN EventTimeOrdered.prev_time_int > EventTimeOrdered.time_int
+         THEN 'not sorted'
+         ELSE 'sorted'
+       END 
+FROM EventTimeOrdered
+WHERE EventTimeOrdered.event_int = fiscal_event_time_agg.event_int
+    AND EventTimeOrdered.fiscal_title = fiscal_event_time_agg.fiscal_title
+    AND EventTimeOrdered.time_int = fiscal_event_time_agg.time_int
 ;
 """

@@ -28,9 +28,8 @@ from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
 
-def test_fiscal_agg_tables2fiscal_event_time_agg_PassesOnly_fiscal_title():
+def test_fiscal_agg_tables2fiscal_event_time_agg_SetsTableAttr():
     # ESTABLISH
-    sue_inx = "Suzy"
     event3 = 3
     event7 = 7
     accord23_str = "accord23"
@@ -78,12 +77,12 @@ VALUES
         assert get_row_count(cursor, fiscal_event_time_agg_str) == 6
         cursor.execute(f"SELECT * FROM {fiscal_event_time_agg_str};")
         fiscalunit_agg_rows = cursor.fetchall()
-        ex_row0 = (accord23_str, event3, timepoint55)
-        ex_row1 = (accord45_str, event3, timepoint55)
-        ex_row2 = (accord45_str, event7, timepoint66)
-        ex_row3 = (accord55_str, event3, timepoint55)
-        ex_row4 = (accord55_str, event3, timepoint77)
-        ex_row5 = (accord55_str, event7, timepoint77)
+        ex_row0 = (accord23_str, event3, timepoint55, "sorted")
+        ex_row1 = (accord45_str, event3, timepoint55, "sorted")
+        ex_row2 = (accord45_str, event7, timepoint66, "sorted")
+        ex_row3 = (accord55_str, event3, timepoint55, "sorted")
+        ex_row4 = (accord55_str, event3, timepoint77, "sorted")
+        ex_row5 = (accord55_str, event7, timepoint77, "sorted")
         print(f"{fiscalunit_agg_rows[0]=}")
         print(f"{fiscalunit_agg_rows[1]=}")
         print(f"{fiscalunit_agg_rows[2]=}")
@@ -98,3 +97,50 @@ VALUES
             ex_row4,
             ex_row5,
         ]
+
+
+def test_fiscal_agg_tables2fiscal_event_time_agg_SetsTableAttr():
+    # ESTABLISH
+    event3 = 3
+    event7 = 7
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    accord55_str = "accord55"
+    timepoint55 = 55
+    timepoint66 = 66
+    timepoint77 = 77
+    with sqlite3_connect(":memory:") as fiscal_db_conn:
+        cursor = fiscal_db_conn.cursor()
+        create_fiscal_tables(cursor)
+
+        x_fis = FiscalPrimeObjsRef()
+        insert_staging_sqlstr = f"""
+INSERT INTO {x_fis.deal_stage_tablename} (event_int, fiscal_title, time_int)
+VALUES
+  ({event3}, '{accord23_str}', {timepoint66})
+, ({event7}, '{accord23_str}', {timepoint55})
+, ({event3}, '{accord45_str}', {timepoint55})
+, ({event3}, '{accord45_str}', {timepoint55})
+;
+"""
+        cursor.execute(insert_staging_sqlstr)
+        fiscal_event_time_agg_str = "fiscal_event_time_agg"
+        assert db_table_exists(cursor, fiscal_event_time_agg_str) is False
+
+        # WHEN
+        fiscal_agg_tables2fiscal_event_time_agg(cursor)
+
+        # THEN
+        assert db_table_exists(cursor, fiscal_event_time_agg_str)
+        assert get_row_count(cursor, fiscal_event_time_agg_str) == 3
+        cursor.execute(
+            f"SELECT fiscal_title, event_int, time_int, error_message FROM {fiscal_event_time_agg_str};"
+        )
+        fiscalunit_agg_rows = cursor.fetchall()
+        ex_row0 = (accord23_str, event3, timepoint66, "sorted")
+        ex_row1 = (accord23_str, event7, timepoint55, "not sorted")
+        ex_row2 = (accord45_str, event3, timepoint55, "sorted")
+        print(f"{fiscalunit_agg_rows[0]=}")
+        print(f"{fiscalunit_agg_rows[1]=}")
+        print(f"{fiscalunit_agg_rows[2]=}")
+        assert fiscalunit_agg_rows == [ex_row0, ex_row1, ex_row2]
