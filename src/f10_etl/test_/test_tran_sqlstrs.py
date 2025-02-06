@@ -51,6 +51,8 @@ from src.f10_etl.tran_sqlstrs import (
     CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR,
+    CREATE_FISCAL_OWNER_TIME_AGG_SQLSTR,
+    INSERT_FISCAL_OWNER_TIME_AGG_SQLSTR,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -857,7 +859,7 @@ CREATE TABLE IF NOT EXISTS fiscal_event_time_agg (
 
 def test_INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
-    expected_INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR_sqlstr = """
+    expected_INSERT_sqlstr = """
 INSERT INTO fiscal_event_time_agg (fiscal_title, event_int, time_int)
 SELECT fiscal_title, event_int, time_int
 FROM (
@@ -873,15 +875,12 @@ ORDER BY fiscal_title, event_int, time_int
 ;
 """
     # WHEN / THEN
-    assert (
-        INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR
-        == expected_INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR_sqlstr
-    )
+    assert INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
 
 
 def test_UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
-    expected_UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR_sqlstr = """
+    expected_UPDATE_sqlstr = """
 WITH EventTimeOrdered AS (
     SELECT fiscal_title, event_int, time_int,
            LAG(time_int) OVER (PARTITION BY fiscal_title ORDER BY event_int) AS prev_time_int
@@ -900,7 +899,41 @@ WHERE EventTimeOrdered.event_int = fiscal_event_time_agg.event_int
 ;
 """
     # WHEN / THEN
-    assert (
-        UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR
-        == expected_UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR_sqlstr
-    )
+    assert UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
+
+
+def test_CREATE_FISCAL_OWNER_TIME_AGG_SQLSTR_Exists():
+    # ESTABLISH
+    expected_create_table_sqlstr = """
+CREATE TABLE IF NOT EXISTS fiscal_owner_time_agg (
+  fiscal_title TEXT
+, owner_name TEXT
+, event_int INTEGER
+, time_int INTEGER
+, error_message TEXT
+)
+;
+"""
+    # WHEN / THEN
+    assert CREATE_FISCAL_OWNER_TIME_AGG_SQLSTR == expected_create_table_sqlstr
+
+
+def test_INSERT_FISCAL_OWNER_TIME_AGG_SQLSTR_Exists():
+    # ESTABLISH
+    expected_INSERT_sqlstr = """
+INSERT INTO fiscal_owner_time_agg (fiscal_title, owner_name, event_int, time_int)
+SELECT fiscal_title, owner_name, event_int, time_int
+FROM (
+    SELECT fiscal_title, owner_name, event_int, time_int
+    FROM fiscal_cashbook_staging
+    GROUP BY fiscal_title, owner_name, event_int, time_int
+    UNION 
+    SELECT fiscal_title, owner_name, event_int, time_int
+    FROM fiscal_deal_episode_staging
+    GROUP BY fiscal_title, owner_name, event_int, time_int
+)
+ORDER BY fiscal_title, owner_name, event_int, time_int
+;
+"""
+    # WHEN / THEN
+    assert INSERT_FISCAL_OWNER_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
