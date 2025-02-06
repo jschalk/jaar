@@ -890,8 +890,8 @@ WITH EventTimeOrdered AS (
 UPDATE fiscal_event_time_agg
 SET error_message = CASE 
          WHEN EventTimeOrdered.prev_time_int > EventTimeOrdered.time_int
-         THEN 'Not Sorted'
-         ELSE 'Sorted'
+         THEN 'not sorted'
+         ELSE 'sorted'
        END 
 FROM EventTimeOrdered
 WHERE EventTimeOrdered.event_int = fiscal_event_time_agg.event_int
