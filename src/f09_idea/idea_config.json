@@ -237,7 +237,6 @@
       "fund_pool": {},
       "max_tree_traverse": {},
       "penny": {},
-      "deal_time_int": {},
       "respect_bit": {},
       "tally": {}
     }
@@ -271,7 +270,7 @@
     },
     "jvalues": {
       "quota": {},
-      "search_depth": {}
+      "ledger_depth": {}
     }
   },
   "fiscal_timeline_hour": {

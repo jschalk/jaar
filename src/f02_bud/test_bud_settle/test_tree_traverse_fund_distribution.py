@@ -1199,7 +1199,7 @@ def are_equal(x1: float, x2: float):
     return abs(x1 - x2) < e10
 
 
-def test_BudUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenBudIsEmpty():
+def test_BudUnit_settle_bud_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_ratio_cred_debt():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     sue_str = "Sue"
@@ -1211,39 +1211,58 @@ def test_BudUnit_agenda_ratio_cred_debt_IsCorrectlySetWhenBudIsEmpty():
     yao_bud.set_acctunit(sue_acctunit)
     yao_bud.set_acctunit(bob_acctunit)
     yao_bud.set_acctunit(zia_acctunit)
-    yao_bud_sue_acct = yao_bud.get_acct(sue_str)
-    yao_bud_bob_acct = yao_bud.get_acct(bob_str)
-    yao_bud_zia_acct = yao_bud.get_acct(zia_str)
+    sue_acct = yao_bud.get_acct(sue_str)
+    bob_acct = yao_bud.get_acct(bob_str)
+    zia_acct = yao_bud.get_acct(zia_str)
 
-    assert yao_bud_sue_acct._fund_agenda_give in [0, None]
-    assert yao_bud_sue_acct._fund_agenda_take in [0, None]
-    assert yao_bud_bob_acct._fund_agenda_give in [0, None]
-    assert yao_bud_bob_acct._fund_agenda_take in [0, None]
-    assert yao_bud_zia_acct._fund_agenda_give in [0, None]
-    assert yao_bud_zia_acct._fund_agenda_take in [0, None]
-    assert yao_bud_sue_acct._fund_agenda_ratio_give != 0.05
-    assert yao_bud_sue_acct._fund_agenda_ratio_take != 0.2
-    assert yao_bud_bob_acct._fund_agenda_ratio_give != 0.15
-    assert yao_bud_bob_acct._fund_agenda_ratio_take != 0.3
-    assert yao_bud_zia_acct._fund_agenda_ratio_give != 0.8
-    assert yao_bud_zia_acct._fund_agenda_ratio_take != 0.5
+    assert not sue_acct._fund_give
+    assert not sue_acct._fund_take
+    assert not bob_acct._fund_give
+    assert not bob_acct._fund_take
+    assert not zia_acct._fund_give
+    assert not zia_acct._fund_take
+    assert not sue_acct._fund_agenda_give
+    assert not sue_acct._fund_agenda_take
+    assert not bob_acct._fund_agenda_give
+    assert not bob_acct._fund_agenda_take
+    assert not zia_acct._fund_agenda_give
+    assert not zia_acct._fund_agenda_take
+    assert not sue_acct._fund_agenda_ratio_give
+    assert not sue_acct._fund_agenda_ratio_take
+    assert not bob_acct._fund_agenda_ratio_give
+    assert not bob_acct._fund_agenda_ratio_take
+    assert not zia_acct._fund_agenda_ratio_give
+    assert not zia_acct._fund_agenda_ratio_take
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert yao_bud_sue_acct._fund_agenda_give == 0
-    assert yao_bud_sue_acct._fund_agenda_take == 0
-    assert yao_bud_bob_acct._fund_agenda_give == 0
-    assert yao_bud_bob_acct._fund_agenda_take == 0
-    assert yao_bud_zia_acct._fund_agenda_give == 0
-    assert yao_bud_zia_acct._fund_agenda_take == 0
-    assert yao_bud_sue_acct._fund_agenda_ratio_give == 0.05
-    assert yao_bud_sue_acct._fund_agenda_ratio_take == 0.2
-    assert yao_bud_bob_acct._fund_agenda_ratio_give == 0.15
-    assert yao_bud_bob_acct._fund_agenda_ratio_take == 0.3
-    assert yao_bud_zia_acct._fund_agenda_ratio_give == 0.8
-    assert yao_bud_zia_acct._fund_agenda_ratio_take == 0.5
+    assert yao_bud._reason_bases == set()
+    assert sue_acct._fund_give == 50000000
+    assert sue_acct._fund_take == 200000000
+    assert bob_acct._fund_give == 150000000
+    assert bob_acct._fund_take == 300000000
+    assert zia_acct._fund_give == 800000000
+    assert zia_acct._fund_take == 500000000
+    assert sue_acct._fund_agenda_give == 50000000
+    assert sue_acct._fund_agenda_take == 200000000
+    assert bob_acct._fund_agenda_give == 150000000
+    assert bob_acct._fund_agenda_take == 300000000
+    assert zia_acct._fund_agenda_give == 800000000
+    assert zia_acct._fund_agenda_take == 500000000
+    assert sue_acct._fund_agenda_give == sue_acct._fund_give
+    assert sue_acct._fund_agenda_take == sue_acct._fund_take
+    assert bob_acct._fund_agenda_give == bob_acct._fund_give
+    assert bob_acct._fund_agenda_take == bob_acct._fund_take
+    assert zia_acct._fund_agenda_give == zia_acct._fund_give
+    assert zia_acct._fund_agenda_take == zia_acct._fund_take
+    assert sue_acct._fund_agenda_ratio_give == 0.05
+    assert sue_acct._fund_agenda_ratio_take == 0.2
+    assert bob_acct._fund_agenda_ratio_give == 0.15
+    assert bob_acct._fund_agenda_ratio_take == 0.3
+    assert zia_acct._fund_agenda_ratio_give == 0.8
+    assert zia_acct._fund_agenda_ratio_take == 0.5
 
 
 def test_BudUnit_settle_bud_CreatesGroupUnitWith_budunit_v001():

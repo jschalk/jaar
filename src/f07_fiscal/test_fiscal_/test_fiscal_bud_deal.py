@@ -1,4 +1,4 @@
-from src.f01_road.finance_tran import deallog_shop
+from src.f01_road.deal import deallog_shop
 from src.f07_fiscal.fiscal import fiscalunit_shop
 from src.f07_fiscal.examples.fiscal_env import get_test_fiscals_dir
 from pytest import raises as pytest_raises
@@ -122,7 +122,7 @@ def test_FiscalUnit_get_deallogs_time_ints_ReturnsObj():
     assert accord_fiscal.get_deallogs_time_ints() == all_time_ints
 
 
-def test_FiscalUnit_add_dealepisode_RaisesErrorWhenDeal_time_int_IsLessThan_present_time():
+def test_FiscalUnit_add_dealepisode_RaisesErrorWhen_time_int_IsLessThan_present_time():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fiscal = fiscalunit_shop(accord45_str, get_test_fiscals_dir())

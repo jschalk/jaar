@@ -30,9 +30,6 @@
         "penny": {
             "otx_key": false
         },
-        "deal_time_int": {
-            "otx_key": false
-        },
         "respect_bit": {
             "otx_key": false
         },

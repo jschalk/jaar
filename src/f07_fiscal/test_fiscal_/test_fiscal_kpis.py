@@ -1,14 +1,14 @@
 from src.f00_instrument.plotly_toolbox import conditional_fig_show
 from src.f04_gift.atom_config import acct_name_str, owner_name_str
 from src.f07_fiscal.fiscal_report import (
-    get_fiscal_souls_accts_dataframe,
-    get_fiscal_souls_accts_plotly_fig,
     get_fiscal_voices_accts_dataframe,
     get_fiscal_voices_accts_plotly_fig,
-    get_fiscal_souls_agenda_dataframe,
-    get_fiscal_souls_agenda_plotly_fig,
+    get_fiscal_forecasts_accts_dataframe,
+    get_fiscal_forecasts_accts_plotly_fig,
     get_fiscal_voices_agenda_dataframe,
     get_fiscal_voices_agenda_plotly_fig,
+    get_fiscal_forecasts_agenda_dataframe,
+    get_fiscal_forecasts_agenda_plotly_fig,
 )
 from src.f07_fiscal.examples.example_fiscals import (
     create_example_fiscal2,
@@ -18,14 +18,14 @@ from src.f07_fiscal.examples.example_fiscals import (
 from src.f07_fiscal.examples.fiscal_env import env_dir_setup_cleanup
 
 
-def test_get_fiscal_souls_accts_dataframe_ReturnsObj(
+def test_get_fiscal_voices_accts_dataframe_ReturnsObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     accord_fiscal = create_example_fiscal2()
 
     # WHEN
-    x_df = get_fiscal_souls_accts_dataframe(accord_fiscal)
+    x_df = get_fiscal_voices_accts_dataframe(accord_fiscal)
 
     # THEN
     acctunit_colums = {
@@ -48,28 +48,28 @@ def test_get_fiscal_souls_accts_dataframe_ReturnsObj(
     assert x_df.shape[0] == 8
 
 
-def test_get_fiscal_souls_accts_plotly_fig_DisplaysCorrectInfo(
+def test_get_fiscal_voices_accts_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     accord_fiscal = create_example_fiscal2()
 
     # WHEN
-    x_fig = get_fiscal_souls_accts_plotly_fig(accord_fiscal)
+    x_fig = get_fiscal_voices_accts_plotly_fig(accord_fiscal)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_fiscal_voices_accts_dataframe_ReturnsObj(
+def test_get_fiscal_forecasts_accts_dataframe_ReturnsObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     accord_fiscal = create_example_fiscal2()
-    accord_fiscal.generate_all_voice_buds()
+    accord_fiscal.generate_all_forecast_buds()
 
     # WHEN
-    x_df = get_fiscal_voices_accts_dataframe(accord_fiscal)
+    x_df = get_fiscal_forecasts_accts_dataframe(accord_fiscal)
 
     # THEN
     acctunit_colums = {
@@ -93,66 +93,25 @@ def test_get_fiscal_voices_accts_dataframe_ReturnsObj(
     assert set(x_df.columns) == acctunit_colums
 
 
-def test_get_fiscal_voices_accts_plotly_fig_DisplaysCorrectInfo(
+def test_get_fiscal_forecasts_accts_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     accord_fiscal = create_example_fiscal2()
-    accord_fiscal.generate_all_voice_buds()
+    accord_fiscal.generate_all_forecast_buds()
 
     # WHEN
-    x_fig = get_fiscal_voices_accts_plotly_fig(accord_fiscal)
+    x_fig = get_fiscal_forecasts_accts_plotly_fig(accord_fiscal)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_fiscal_souls_agenda_dataframe_ReturnsObj(
+def test_get_fiscal_voices_agenda_dataframe_ReturnsObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     accord_fiscal = create_example_fiscal3()
-
-    # WHEN
-    x_df = get_fiscal_souls_agenda_dataframe(accord_fiscal)
-
-    # THEN
-    agenda_colums = {
-        owner_name_str(),
-        "fund_ratio",
-        "_item_title",
-        "_parent_road",
-        "begin",
-        "close",
-        "addin",
-        "denom",
-        "numor",
-        "morph",
-    }
-    print(f"{set(x_df.columns)=}")
-    print(x_df)
-
-    assert set(x_df.columns) == agenda_colums
-    assert x_df.shape[0] == 8
-
-
-def test_get_fiscal_souls_agenda_plotly_fig_DisplaysCorrectInfo(
-    env_dir_setup_cleanup, graphics_bool
-):
-    # ESTABLISH
-    accord_fiscal = create_example_fiscal3()
-
-    # WHEN
-    x_fig = get_fiscal_souls_agenda_plotly_fig(accord_fiscal)
-
-    # THEN
-    conditional_fig_show(x_fig, graphics_bool)
-
-
-def test_get_fiscal_voices_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
-    # ESTABLISH
-    accord_fiscal = create_example_fiscal4()
-    accord_fiscal.generate_all_voice_buds()
 
     # WHEN
     x_df = get_fiscal_voices_agenda_dataframe(accord_fiscal)
@@ -174,18 +133,59 @@ def test_get_fiscal_voices_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     print(x_df)
 
     assert set(x_df.columns) == agenda_colums
-    assert x_df.shape[0] in [8, 9]
+    assert x_df.shape[0] == 8
 
 
 def test_get_fiscal_voices_agenda_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    accord_fiscal = create_example_fiscal4()
-    accord_fiscal.generate_all_voice_buds()
+    accord_fiscal = create_example_fiscal3()
 
     # WHEN
     x_fig = get_fiscal_voices_agenda_plotly_fig(accord_fiscal)
+
+    # THEN
+    conditional_fig_show(x_fig, graphics_bool)
+
+
+def test_get_fiscal_forecasts_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    accord_fiscal = create_example_fiscal4()
+    accord_fiscal.generate_all_forecast_buds()
+
+    # WHEN
+    x_df = get_fiscal_forecasts_agenda_dataframe(accord_fiscal)
+
+    # THEN
+    agenda_colums = {
+        owner_name_str(),
+        "fund_ratio",
+        "_item_title",
+        "_parent_road",
+        "begin",
+        "close",
+        "addin",
+        "denom",
+        "numor",
+        "morph",
+    }
+    print(f"{set(x_df.columns)=}")
+    print(x_df)
+
+    assert set(x_df.columns) == agenda_colums
+    assert x_df.shape[0] in [8, 9]
+
+
+def test_get_fiscal_forecasts_agenda_plotly_fig_DisplaysCorrectInfo(
+    env_dir_setup_cleanup, graphics_bool
+):
+    # ESTABLISH
+    accord_fiscal = create_example_fiscal4()
+    accord_fiscal.generate_all_forecast_buds()
+
+    # WHEN
+    x_fig = get_fiscal_forecasts_agenda_plotly_fig(accord_fiscal)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)

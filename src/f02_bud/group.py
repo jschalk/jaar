@@ -1,5 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_1_if_None, get_dict_from_json
-from src.f01_road.finance import allot_scale, FundCoin, default_fund_coin_if_None
+from src.f01_road.allot import allot_scale
+from src.f01_road.finance import FundCoin, default_fund_coin_if_None
 from src.f01_road.road import GroupLabel, AcctName, default_bridge_if_None
 from dataclasses import dataclass
 

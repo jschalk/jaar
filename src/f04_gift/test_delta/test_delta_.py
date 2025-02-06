@@ -21,38 +21,38 @@ from src.f04_gift.atom_config import (
 )
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.delta import (
-    DeltaUnit,
-    deltaunit_shop,
+    BudDelta,
+    buddelta_shop,
     bud_built_from_delta_is_valid,
-    get_deltaunit_from_ordered_dict,
+    get_buddelta_from_ordered_dict,
 )
 from src.f02_bud.bud import budunit_shop
-from src.f04_gift.examples.example_deltas import get_deltaunit_example1
+from src.f04_gift.examples.example_deltas import get_buddelta_example1
 from src.f00_instrument.dict_toolbox import x_is_json
 from pytest import raises as pytest_raises
 
 
-def test_DeltaUnit_exists():
+def test_BudDelta_exists():
     # ESTABLISH / WHEN
-    x_deltaunit = DeltaUnit()
+    x_buddelta = BudDelta()
 
     # THEN
-    assert x_deltaunit.atomunits is None
-    assert x_deltaunit._bud_build_validated is None
+    assert x_buddelta.atomunits is None
+    assert x_buddelta._bud_build_validated is None
 
 
-def test_deltaunit_shop_ReturnsObj():
+def test_buddelta_shop_ReturnsObj():
     # ESTABLISH / WHEN
-    ex1_deltaunit = deltaunit_shop()
+    ex1_buddelta = buddelta_shop()
 
     # THEN
-    assert ex1_deltaunit.atomunits == {}
-    assert ex1_deltaunit._bud_build_validated is False
+    assert ex1_buddelta.atomunits == {}
+    assert ex1_buddelta._bud_build_validated is False
 
 
-def test_DeltaUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
+def test_BudDelta_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     # ESTABLISH
-    ex1_deltaunit = deltaunit_shop()
+    ex1_buddelta = buddelta_shop()
     attribute_value = 55
     dimen = budunit_str()
     opt1_arg = "tally"
@@ -64,15 +64,15 @@ def test_DeltaUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
         jkeys=jkeys,
         jvalues=jvalues,
     )
-    assert ex1_deltaunit.atomunits == {}
+    assert ex1_buddelta.atomunits == {}
     assert bud_mass_atomunit.atom_order is None
 
     # WHEN
-    ex1_deltaunit.set_atomunit(bud_mass_atomunit)
+    ex1_buddelta.set_atomunit(bud_mass_atomunit)
 
     # THEN
-    assert len(ex1_deltaunit.atomunits) == 1
-    x_update_dict = ex1_deltaunit.atomunits.get(atom_update())
+    assert len(ex1_buddelta.atomunits) == 1
+    x_update_dict = ex1_buddelta.atomunits.get(atom_update())
     # print(f"{x_update_dict=}")
     x_dimen_atomunit = x_update_dict.get(dimen)
     print(f"{x_dimen_atomunit=}")
@@ -80,15 +80,15 @@ def test_DeltaUnit_set_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     assert bud_mass_atomunit.atom_order is not None
 
 
-def test_DeltaUnit_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
+def test_BudDelta_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
     # ESTABLISH
-    ex1_deltaunit = deltaunit_shop()
+    ex1_buddelta = buddelta_shop()
     x_dimen = bud_acctunit_str()
     bud_mass_atomunit = atomunit_shop(x_dimen, atom_update())
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        ex1_deltaunit.set_atomunit(bud_mass_atomunit)
+        ex1_buddelta.set_atomunit(bud_mass_atomunit)
     assert (
         str(excinfo.value)
         == f"""'{x_dimen}' UPDATE AtomUnit is invalid
@@ -100,46 +100,46 @@ def test_DeltaUnit_set_atomunit_RaisesErrorWhen_is_valid_IsFalse():
 def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acctunit_str():
     # ESTABLISH
     bob_str = "Bob"
-    x_deltaunit = deltaunit_shop()
+    x_buddelta = buddelta_shop()
     bob_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
     bob_atomunit.set_arg(acct_name_str(), bob_str)
-    assert not x_deltaunit.atomunit_exists(bob_atomunit)
+    assert not x_buddelta.atomunit_exists(bob_atomunit)
 
     # WHEN
-    x_deltaunit.set_atomunit(bob_atomunit)
+    x_buddelta.set_atomunit(bob_atomunit)
 
     # THEN
-    assert x_deltaunit.atomunit_exists(bob_atomunit)
+    assert x_buddelta.atomunit_exists(bob_atomunit)
 
 
 def test_ChangUnit_atomunit_exists_ReturnsObj_bud_acct_membership_str():
     # ESTABLISH
     bob_str = "Bob"
     iowa_str = ";Iowa"
-    x_deltaunit = deltaunit_shop()
+    x_buddelta = buddelta_shop()
     bob_iowa_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
     bob_iowa_atomunit.set_arg(group_label_str(), iowa_str)
     bob_iowa_atomunit.set_arg(acct_name_str(), bob_str)
-    assert not x_deltaunit.atomunit_exists(bob_iowa_atomunit)
+    assert not x_buddelta.atomunit_exists(bob_iowa_atomunit)
 
     # WHEN
-    x_deltaunit.set_atomunit(bob_iowa_atomunit)
+    x_buddelta.set_atomunit(bob_iowa_atomunit)
 
     # THEN
-    assert x_deltaunit.atomunit_exists(bob_iowa_atomunit)
+    assert x_buddelta.atomunit_exists(bob_iowa_atomunit)
 
 
-def test_DeltaUnit_get_atom_ReturnsObj():
+def test_BudDelta_get_atom_ReturnsObj():
     # ESTABLISH
-    ex1_deltaunit = deltaunit_shop()
+    ex1_buddelta = buddelta_shop()
     opt_arg1 = "tally"
     opt_value = 55
     budunit_atomunit = atomunit_shop(budunit_str(), atom_update())
     budunit_atomunit.set_jvalue(x_key=opt_arg1, x_value=opt_value)
-    ex1_deltaunit.set_atomunit(budunit_atomunit)
+    ex1_buddelta.set_atomunit(budunit_atomunit)
 
     # WHEN
-    gen_atomunit = ex1_deltaunit.get_atomunit(
+    gen_atomunit = ex1_buddelta.get_atomunit(
         atom_update(), dimen=budunit_str(), jkeys=[]
     )
 
@@ -147,17 +147,17 @@ def test_DeltaUnit_get_atom_ReturnsObj():
     assert gen_atomunit == budunit_atomunit
 
 
-def test_DeltaUnit_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
+def test_BudDelta_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     # ESTABLISH
-    ex1_deltaunit = deltaunit_shop()
-    assert ex1_deltaunit.atomunits == {}
+    ex1_buddelta = buddelta_shop()
+    assert ex1_buddelta.atomunits == {}
 
     # WHEN
     op2_arg = "tally"
     op2_value = 55
     jkeys = {}
     jvalues = {op2_arg: op2_value}
-    ex1_deltaunit.add_atomunit(
+    ex1_buddelta.add_atomunit(
         budunit_str(),
         atom_update(),
         jkeys,
@@ -165,17 +165,17 @@ def test_DeltaUnit_add_atomunit_CorrectlySets_BudUnitSimpleAttrs():
     )
 
     # THEN
-    assert len(ex1_deltaunit.atomunits) == 1
-    x_update_dict = ex1_deltaunit.atomunits.get(atom_update())
+    assert len(ex1_buddelta.atomunits) == 1
+    x_update_dict = ex1_buddelta.atomunits.get(atom_update())
     x_atomunit = x_update_dict.get(budunit_str())
     assert x_atomunit is not None
     assert x_atomunit.dimen == budunit_str()
 
 
-def test_DeltaUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
+def test_BudDelta_add_atomunit_CorrectlySets_BudUnit_acctunits():
     # ESTABLISH
-    ex1_deltaunit = deltaunit_shop()
-    assert ex1_deltaunit.atomunits == {}
+    ex1_buddelta = buddelta_shop()
+    assert ex1_buddelta.atomunits == {}
 
     # WHEN
     bob_str = "Bob"
@@ -190,29 +190,29 @@ def test_DeltaUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
     bob_optional_dict[dw_str] = bob_acctunit.get_dict().get(dw_str)
     print(f"{bob_required_dict=}")
     acctunit_str = bud_acctunit_str()
-    ex1_deltaunit.add_atomunit(
+    ex1_buddelta.add_atomunit(
         dimen=acctunit_str,
         crud_str=atom_insert(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
     # THEN
-    assert len(ex1_deltaunit.atomunits) == 1
+    assert len(ex1_buddelta.atomunits) == 1
     assert (
-        ex1_deltaunit.atomunits.get(atom_insert()).get(acctunit_str).get(bob_str)
+        ex1_buddelta.atomunits.get(atom_insert()).get(acctunit_str).get(bob_str)
         is not None
     )
 
 
-def test_DeltaUnit_get_crud_atomunits_list_ReturnsObj():
+def test_BudDelta_get_crud_atomunits_list_ReturnsObj():
     # ESTABLISH
-    ex1_deltaunit = get_deltaunit_example1()
-    assert len(ex1_deltaunit.atomunits.get(atom_update()).keys()) == 1
-    assert ex1_deltaunit.atomunits.get(atom_insert()) is None
-    assert len(ex1_deltaunit.atomunits.get(atom_delete()).keys()) == 1
+    ex1_buddelta = get_buddelta_example1()
+    assert len(ex1_buddelta.atomunits.get(atom_update()).keys()) == 1
+    assert ex1_buddelta.atomunits.get(atom_insert()) is None
+    assert len(ex1_buddelta.atomunits.get(atom_delete()).keys()) == 1
 
     # WHEN
-    sue_atom_order_dict = ex1_deltaunit._get_crud_atomunits_list()
+    sue_atom_order_dict = ex1_buddelta._get_crud_atomunits_list()
 
     # THEN
     assert len(sue_atom_order_dict) == 2
@@ -227,18 +227,18 @@ def test_DeltaUnit_get_crud_atomunits_list_ReturnsObj():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_DeltaUnit_get_dimen_sorted_atomunits_list_ReturnsObj():
+def test_BudDelta_get_dimen_sorted_atomunits_list_ReturnsObj():
     # ESTABLISH
-    ex1_deltaunit = get_deltaunit_example1()
-    update_dict = ex1_deltaunit.atomunits.get(atom_update())
+    ex1_buddelta = get_buddelta_example1()
+    update_dict = ex1_buddelta.atomunits.get(atom_update())
     assert len(update_dict.keys()) == 1
     print(f"{update_dict.keys()=}")
-    assert ex1_deltaunit.atomunits.get(atom_insert()) is None
-    delete_dict = ex1_deltaunit.atomunits.get(atom_delete())
+    assert ex1_buddelta.atomunits.get(atom_insert()) is None
+    delete_dict = ex1_buddelta.atomunits.get(atom_delete())
     assert len(delete_dict.keys()) == 1
 
     # WHEN
-    sue_atoms_list = ex1_deltaunit.get_dimen_sorted_atomunits_list()
+    sue_atoms_list = ex1_buddelta.get_dimen_sorted_atomunits_list()
 
     # THEN
     assert len(sue_atoms_list) == 2
@@ -259,10 +259,10 @@ def test_DeltaUnit_get_dimen_sorted_atomunits_list_ReturnsObj():
     #         print(f"{x_atom.dimen=}")
 
 
-# def test_DeltaUnit_add_atomunit_CorrectlySets_BudUnit_max_tree_traverse():
+# def test_BudDelta_add_atomunit_CorrectlySets_BudUnit_max_tree_traverse():
 #     # ESTABLISH
-#     ex1_deltaunit = deltaunit_shop(get_sue_road())
-#     assert ex1_deltaunit.atomunits == {}
+#     ex1_buddelta = buddelta_shop(get_sue_road())
+#     assert ex1_buddelta.atomunits == {}
 
 #     # WHEN
 #     opt2_value = 55
@@ -270,10 +270,10 @@ def test_DeltaUnit_get_dimen_sorted_atomunits_list_ReturnsObj():
 #     opt2_arg = "mass"
 #     mass_atomunit = atomunit_shop(dimen, atom_update())
 #     mass_atomunit.set_jvalue(opt2_arg, opt2_value)
-#     ex1_deltaunit.set_atomunit(mass_atomunit)
+#     ex1_buddelta.set_atomunit(mass_atomunit)
 #     # THEN
-#     assert len(ex1_deltaunit.atomunits.get(atom_update()).keys()) == 1
-#     sue_budunit_dict = ex1_deltaunit.atomunits.get(atom_update())
+#     assert len(ex1_buddelta.atomunits.get(atom_update()).keys()) == 1
+#     sue_budunit_dict = ex1_buddelta.atomunits.get(atom_update())
 #     sue_mass_atomunit = sue_budunit_dict.get(dimen)
 #     print(f"{sue_mass_atomunit=}")
 #     assert mass_atomunit == sue_mass_atomunit
@@ -283,48 +283,48 @@ def test_DeltaUnit_get_dimen_sorted_atomunits_list_ReturnsObj():
 #     x_attribute = "max_tree_traverse"
 #     jkeys = {x_attribute: new2_value}
 #     x_atomunit = atomunit_shop(x_attribute, atom_update(), None, jkeys)
-#     ex1_deltaunit.set_atomunit(x_atomunit)
+#     ex1_buddelta.set_atomunit(x_atomunit)
 #     # THEN
-#     print(f"{ex1_deltaunit.atomunits.keys()=}")
-#     print(f"{ex1_deltaunit.atomunits.get(atom_update()).keys()=}")
-#     assert len(ex1_deltaunit.atomunits.get(atom_update()).keys()) == 2
-#     assert x_atomunit == ex1_deltaunit.atomunits.get(atom_update()).get(x_attribute)
+#     print(f"{ex1_buddelta.atomunits.keys()=}")
+#     print(f"{ex1_buddelta.atomunits.get(atom_update()).keys()=}")
+#     assert len(ex1_buddelta.atomunits.get(atom_update()).keys()) == 2
+#     assert x_atomunit == ex1_buddelta.atomunits.get(atom_update()).get(x_attribute)
 
 #     # WHEN
 #     new3_value = 77
 #     x_attribute = "credor_respect"
 #     jkeys = {x_attribute: new3_value}
 #     x_atomunit = atomunit_shop(x_attribute, atom_update(), None, jkeys)
-#     ex1_deltaunit.set_atomunit(x_atomunit)
+#     ex1_buddelta.set_atomunit(x_atomunit)
 #     # THEN
-#     assert len(ex1_deltaunit.atomunits.get(atom_update()).keys()) == 3
-#     assert x_atomunit == ex1_deltaunit.atomunits.get(atom_update()).get(x_attribute)
+#     assert len(ex1_buddelta.atomunits.get(atom_update()).keys()) == 3
+#     assert x_atomunit == ex1_buddelta.atomunits.get(atom_update()).get(x_attribute)
 
 #     # WHEN
 #     new4_value = 88
 #     x_attribute = "debtor_respect"
 #     jkeys = {x_attribute: new4_value}
 #     x_atomunit = atomunit_shop(x_attribute, atom_update(), None, jkeys)
-#     ex1_deltaunit.set_atomunit(x_atomunit)
+#     ex1_buddelta.set_atomunit(x_atomunit)
 #     # THEN
-#     assert len(ex1_deltaunit.atomunits.get(atom_update()).keys()) == 4
-#     assert x_atomunit == ex1_deltaunit.atomunits.get(atom_update()).get(x_attribute)
+#     assert len(ex1_buddelta.atomunits.get(atom_update()).keys()) == 4
+#     assert x_atomunit == ex1_buddelta.atomunits.get(atom_update()).get(x_attribute)
 
 
-def test_DeltaUnit_get_sorted_atomunits_ReturnsObj():
+def test_BudDelta_get_sorted_atomunits_ReturnsObj():
     # ESTABLISH
-    ex1_deltaunit = get_deltaunit_example1()
-    update_dict = ex1_deltaunit.atomunits.get(atom_update())
+    ex1_buddelta = get_buddelta_example1()
+    update_dict = ex1_buddelta.atomunits.get(atom_update())
     assert len(update_dict.keys()) == 1
     assert update_dict.get(budunit_str()) is not None
-    print(f"atom_order 28 {ex1_deltaunit.atomunits.get(atom_update()).keys()=}")
-    delete_dict = ex1_deltaunit.atomunits.get(atom_delete())
+    print(f"atom_order 28 {ex1_buddelta.atomunits.get(atom_update()).keys()=}")
+    delete_dict = ex1_buddelta.atomunits.get(atom_delete())
     assert len(delete_dict.keys()) == 1
     assert delete_dict.get(bud_acctunit_str()) is not None
-    print(f"atom_order 26 {ex1_deltaunit.atomunits.get(atom_delete()).keys()=}")
+    print(f"atom_order 26 {ex1_buddelta.atomunits.get(atom_delete()).keys()=}")
 
     # WHEN
-    sue_atom_order_list = ex1_deltaunit.get_sorted_atomunits()
+    sue_atom_order_list = ex1_buddelta.get_sorted_atomunits()
 
     # THEN
     assert len(sue_atom_order_list) == 2
@@ -341,7 +341,7 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsObj():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_DeltaUnit_get_sorted_atomunits_ReturnsObj_ItemUnitsSorted():
+def test_BudDelta_get_sorted_atomunits_ReturnsObj_ItemUnitsSorted():
     # ESTABLISH
     x_fiscal_title = root_title()
     sports_str = "sports"
@@ -354,12 +354,12 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsObj_ItemUnitsSorted():
     knee_insert_itemunit_atomunit = atomunit_shop(x_dimen, atom_insert())
     knee_insert_itemunit_atomunit.set_jkey(item_title_str(), knee_str)
     knee_insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(knee_insert_itemunit_atomunit)
-    x_deltaunit.set_atomunit(sports_insert_itemunit_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(knee_insert_itemunit_atomunit)
+    x_buddelta.set_atomunit(sports_insert_itemunit_atomunit)
 
     # WHEN
-    x_atom_order_list = x_deltaunit.get_sorted_atomunits()
+    x_atom_order_list = x_buddelta.get_sorted_atomunits()
 
     # THEN
     assert len(x_atom_order_list) == 2
@@ -374,7 +374,7 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsObj_ItemUnitsSorted():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_DeltaUnit_get_sorted_atomunits_ReturnsObj_Road_Sorted():
+def test_BudDelta_get_sorted_atomunits_ReturnsObj_Road_Sorted():
     # ESTABLISH
     x_fiscal_title = root_title()
     sports_str = "sports"
@@ -390,12 +390,12 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsObj_Road_Sorted():
     knee_awardlink_atomunit = atomunit_shop(x_dimen, atom_insert())
     knee_awardlink_atomunit.set_jkey(awardee_tag_str(), swimmers_str)
     knee_awardlink_atomunit.set_jkey(road_str, knee_road)
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(knee_awardlink_atomunit)
-    x_deltaunit.set_atomunit(sports_awardlink_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(knee_awardlink_atomunit)
+    x_buddelta.set_atomunit(sports_awardlink_atomunit)
 
     # WHEN
-    x_atom_order_list = x_deltaunit.get_sorted_atomunits()
+    x_atom_order_list = x_buddelta.get_sorted_atomunits()
 
     # THEN
     assert len(x_atom_order_list) == 2
@@ -412,234 +412,234 @@ def test_DeltaUnit_get_sorted_atomunits_ReturnsObj_Road_Sorted():
 
 def test_bud_built_from_delta_is_valid_ReturnsObjEstablishWithNoBud_scenario1():
     # ESTABLISH
-    sue_deltaunit = deltaunit_shop()
+    sue_buddelta = buddelta_shop()
 
     x_atomunit = atomunit_shop(budunit_str(), atom_update())
     x_attribute = "credor_respect"
     x_atomunit.set_jvalue(x_attribute, 100)
-    sue_deltaunit.set_atomunit(x_atomunit)
+    sue_buddelta.set_atomunit(x_atomunit)
 
     dimen = bud_acctunit_str()
     zia_str = "Zia"
     x_atomunit = atomunit_shop(dimen, atom_insert())
     x_atomunit.set_arg(acct_name_str(), zia_str)
     x_atomunit.set_arg(credit_belief_str(), "70 is the number")
-    sue_deltaunit.set_atomunit(x_atomunit)
-    print(f"{sue_deltaunit=}")
+    sue_buddelta.set_atomunit(x_atomunit)
+    print(f"{sue_buddelta=}")
 
     # WHEN / THEN
-    assert bud_built_from_delta_is_valid(sue_deltaunit) is False
+    assert bud_built_from_delta_is_valid(sue_buddelta) is False
 
 
 def test_bud_built_from_delta_is_valid_ReturnsObjEstablishWithNoBud_scenario2():
-    sue_deltaunit = deltaunit_shop()
+    sue_buddelta = buddelta_shop()
     dimen = bud_acctunit_str()
     # WHEN
     yao_str = "Yao"
     x_atomunit = atomunit_shop(dimen, atom_insert())
     x_atomunit.set_arg(acct_name_str(), yao_str)
     x_atomunit.set_arg(credit_belief_str(), 30)
-    sue_deltaunit.set_atomunit(x_atomunit)
+    sue_buddelta.set_atomunit(x_atomunit)
 
     # THEN
-    assert bud_built_from_delta_is_valid(sue_deltaunit)
+    assert bud_built_from_delta_is_valid(sue_buddelta)
 
     # WHEN
     bob_str = "Bob"
     x_atomunit = atomunit_shop(dimen, atom_insert())
     x_atomunit.set_arg(acct_name_str(), bob_str)
     x_atomunit.set_arg(credit_belief_str(), "70 is the number")
-    sue_deltaunit.set_atomunit(x_atomunit)
+    sue_buddelta.set_atomunit(x_atomunit)
 
     # THEN
-    assert bud_built_from_delta_is_valid(sue_deltaunit) is False
+    assert bud_built_from_delta_is_valid(sue_buddelta) is False
 
 
-def test_DeltaUnit_get_ordered_atomunits_ReturnsObj_EstablishWithNoStartingNumber():
+def test_BudDelta_get_ordered_atomunits_ReturnsObj_EstablishWithNoStartingNumber():
     # ESTABLISH
-    sue_deltaunit = deltaunit_shop()
+    sue_buddelta = buddelta_shop()
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_jvalue(pool_attribute, 100)
-    sue_deltaunit.set_atomunit(pool_atomunit)
+    sue_buddelta.set_atomunit(pool_atomunit)
     dimen = bud_acctunit_str()
     zia_str = "Zia"
     zia_atomunit = atomunit_shop(dimen, atom_insert())
     zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
-    sue_deltaunit.set_atomunit(zia_atomunit)
+    sue_buddelta.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(dimen, atom_insert())
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
-    sue_deltaunit.set_atomunit(yao_atomunit)
+    sue_buddelta.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
-    assert bud_built_from_delta_is_valid(sue_deltaunit, sue_bud)
+    assert bud_built_from_delta_is_valid(sue_buddelta, sue_bud)
 
     # WHEN
-    deltaunit_dict = sue_deltaunit.get_ordered_atomunits()
+    buddelta_dict = sue_buddelta.get_ordered_atomunits()
 
     # THEN
-    # delta_zia = deltaunit_dict.get(0)
-    # delta_yao = deltaunit_dict.get(1)
-    # delta_pool = deltaunit_dict.get(2)
+    # delta_zia = buddelta_dict.get(0)
+    # delta_yao = buddelta_dict.get(1)
+    # delta_pool = buddelta_dict.get(2)
     # assert delta_zia == zia_atomunit
     # assert delta_yao == yao_atomunit
     # assert delta_pool == pool_atomunit
-    assert deltaunit_dict.get(0) == zia_atomunit
-    assert deltaunit_dict.get(1) == yao_atomunit
-    assert deltaunit_dict.get(2) == pool_atomunit
+    assert buddelta_dict.get(0) == zia_atomunit
+    assert buddelta_dict.get(1) == yao_atomunit
+    assert buddelta_dict.get(2) == pool_atomunit
 
 
-def test_DeltaUnit_get_ordered_atomunits_ReturnsObj_EstablishWithStartingNumber():
+def test_BudDelta_get_ordered_atomunits_ReturnsObj_EstablishWithStartingNumber():
     # ESTABLISH
-    sue_deltaunit = deltaunit_shop()
+    sue_buddelta = buddelta_shop()
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_jvalue(pool_attribute, 100)
-    sue_deltaunit.set_atomunit(pool_atomunit)
+    sue_buddelta.set_atomunit(pool_atomunit)
     dimen = bud_acctunit_str()
     zia_str = "Zia"
     zia_atomunit = atomunit_shop(dimen, atom_insert())
     zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
-    sue_deltaunit.set_atomunit(zia_atomunit)
+    sue_buddelta.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(dimen, atom_insert())
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
-    sue_deltaunit.set_atomunit(yao_atomunit)
+    sue_buddelta.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
-    assert bud_built_from_delta_is_valid(sue_deltaunit, sue_bud)
+    assert bud_built_from_delta_is_valid(sue_buddelta, sue_bud)
 
     # WHEN
-    deltaunit_dict = sue_deltaunit.get_ordered_atomunits(5)
+    buddelta_dict = sue_buddelta.get_ordered_atomunits(5)
 
     # THEN
-    # delta_zia = deltaunit_dict.get(0)
-    # delta_yao = deltaunit_dict.get(1)
-    # delta_pool = deltaunit_dict.get(2)
+    # delta_zia = buddelta_dict.get(0)
+    # delta_yao = buddelta_dict.get(1)
+    # delta_pool = buddelta_dict.get(2)
     # assert delta_zia == zia_atomunit
     # assert delta_yao == yao_atomunit
     # assert delta_pool == pool_atomunit
-    assert deltaunit_dict.get(5) == zia_atomunit
-    assert deltaunit_dict.get(6) == yao_atomunit
-    assert deltaunit_dict.get(7) == pool_atomunit
+    assert buddelta_dict.get(5) == zia_atomunit
+    assert buddelta_dict.get(6) == yao_atomunit
+    assert buddelta_dict.get(7) == pool_atomunit
 
 
-def test_DeltaUnit_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber():
+def test_BudDelta_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber():
     # ESTABLISH
-    sue_deltaunit = deltaunit_shop()
+    sue_buddelta = buddelta_shop()
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_jvalue(pool_attribute, 100)
-    sue_deltaunit.set_atomunit(pool_atomunit)
+    sue_buddelta.set_atomunit(pool_atomunit)
     dimen = bud_acctunit_str()
     zia_str = "Zia"
     zia_atomunit = atomunit_shop(dimen, atom_insert())
     zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
-    sue_deltaunit.set_atomunit(zia_atomunit)
+    sue_buddelta.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(dimen, atom_insert())
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
-    sue_deltaunit.set_atomunit(yao_atomunit)
+    sue_buddelta.set_atomunit(yao_atomunit)
 
     sue_bud = budunit_shop("Sue")
-    assert bud_built_from_delta_is_valid(sue_deltaunit, sue_bud)
+    assert bud_built_from_delta_is_valid(sue_buddelta, sue_bud)
 
     # WHEN
-    deltaunit_dict = sue_deltaunit.get_ordered_dict(5)
+    buddelta_dict = sue_buddelta.get_ordered_dict(5)
 
     # THEN
-    # delta_zia = deltaunit_dict.get(0)
-    # delta_yao = deltaunit_dict.get(1)
-    # delta_pool = deltaunit_dict.get(2)
+    # delta_zia = buddelta_dict.get(0)
+    # delta_yao = buddelta_dict.get(1)
+    # delta_pool = buddelta_dict.get(2)
     # assert delta_zia == zia_atomunit
     # assert delta_yao == yao_atomunit
     # assert delta_pool == pool_atomunit
-    assert deltaunit_dict.get(5) == zia_atomunit.get_dict()
-    assert deltaunit_dict.get(6) == yao_atomunit.get_dict()
-    assert deltaunit_dict.get(7) == pool_atomunit.get_dict()
+    assert buddelta_dict.get(5) == zia_atomunit.get_dict()
+    assert buddelta_dict.get(6) == yao_atomunit.get_dict()
+    assert buddelta_dict.get(7) == pool_atomunit.get_dict()
 
 
-def test_get_deltaunit_from_ordered_dict_ReturnsObj():
+def test_get_buddelta_from_ordered_dict_ReturnsObj():
     # ESTABLISH
-    expected_deltaunit = deltaunit_shop()
+    expected_buddelta = buddelta_shop()
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_jvalue(pool_attribute, 100)
-    expected_deltaunit.set_atomunit(pool_atomunit)
+    expected_buddelta.set_atomunit(pool_atomunit)
     dimen = bud_acctunit_str()
     zia_str = "Zia"
     zia_atomunit = atomunit_shop(dimen, atom_insert())
     zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
-    expected_deltaunit.set_atomunit(zia_atomunit)
+    expected_buddelta.set_atomunit(zia_atomunit)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(dimen, atom_insert())
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
-    expected_deltaunit.set_atomunit(yao_atomunit)
-    deltaunit_dict = expected_deltaunit.get_ordered_dict(5)
+    expected_buddelta.set_atomunit(yao_atomunit)
+    buddelta_dict = expected_buddelta.get_ordered_dict(5)
 
     # WHEN
-    generated_deltaunit = get_deltaunit_from_ordered_dict(deltaunit_dict)
+    generated_buddelta = get_buddelta_from_ordered_dict(buddelta_dict)
 
     # THEN
-    # delta_zia = deltaunit_dict.get(0)
-    # delta_yao = deltaunit_dict.get(1)
-    # delta_pool = deltaunit_dict.get(2)
+    # delta_zia = buddelta_dict.get(0)
+    # delta_yao = buddelta_dict.get(1)
+    # delta_pool = buddelta_dict.get(2)
     # assert delta_zia == zia_atomunit
     # assert delta_yao == yao_atomunit
     # assert delta_pool == pool_atomunit
-    # assert deltaunit_dict.get(5) == zia_atomunit.get_dict()
-    # assert deltaunit_dict.get(6) == yao_atomunit.get_dict()
-    # assert deltaunit_dict.get(7) == pool_atomunit.get_dict()
-    assert generated_deltaunit == expected_deltaunit
+    # assert buddelta_dict.get(5) == zia_atomunit.get_dict()
+    # assert buddelta_dict.get(6) == yao_atomunit.get_dict()
+    # assert buddelta_dict.get(7) == pool_atomunit.get_dict()
+    assert generated_buddelta == expected_buddelta
 
 
-def test_DeltaUnit_get_json_ReturnsObj():
+def test_BudDelta_get_json_ReturnsObj():
     # ESTABLISH
-    sue_deltaunit = deltaunit_shop()
+    sue_buddelta = buddelta_shop()
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_jvalue(pool_attribute, 100)
-    sue_deltaunit.set_atomunit(pool_atomunit)
+    sue_buddelta.set_atomunit(pool_atomunit)
     dimen = bud_acctunit_str()
     zia_str = "Zia"
     zia_atomunit = atomunit_shop(dimen, atom_insert())
     zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
-    sue_deltaunit.set_atomunit(zia_atomunit)
+    sue_buddelta.set_atomunit(zia_atomunit)
     yao_str = "Yao"
     yao_atomunit = atomunit_shop(dimen, atom_insert())
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str(), 30)
-    sue_deltaunit.set_atomunit(yao_atomunit)
+    sue_buddelta.set_atomunit(yao_atomunit)
 
     # WHEN
     delta_start_int = 5
-    deltaunit_json = sue_deltaunit.get_json(delta_start_int)
+    buddelta_json = sue_buddelta.get_json(delta_start_int)
 
     # THEN
-    assert x_is_json(deltaunit_json)
+    assert x_is_json(buddelta_json)
 
 
-def test_DeltaUnit_atomunit_exists_ReturnsObj():
+def test_BudDelta_atomunit_exists_ReturnsObj():
     # ESTABLISH
-    x_deltaunit = deltaunit_shop()
+    x_buddelta = buddelta_shop()
 
     # WHEN / THEN
     dimen = bud_acctunit_str()
@@ -647,10 +647,10 @@ def test_DeltaUnit_atomunit_exists_ReturnsObj():
     zia_atomunit = atomunit_shop(dimen, atom_insert())
     zia_atomunit.set_arg(acct_name_str(), zia_str)
     zia_atomunit.set_arg(credit_belief_str(), 70)
-    assert x_deltaunit.atomunit_exists(zia_atomunit) is False
+    assert x_buddelta.atomunit_exists(zia_atomunit) is False
 
     # WHEN
-    x_deltaunit.set_atomunit(zia_atomunit)
+    x_buddelta.set_atomunit(zia_atomunit)
 
     # THEN
-    assert x_deltaunit.atomunit_exists(zia_atomunit)
+    assert x_buddelta.atomunit_exists(zia_atomunit)

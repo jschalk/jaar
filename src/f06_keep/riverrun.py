@@ -6,7 +6,7 @@ from src.f00_instrument.dict_toolbox import (
     set_in_nested_dict,
 )
 from src.f01_road.jaar_config import get_json_filename
-from src.f01_road.finance import allot_scale
+from src.f01_road.allot import allot_scale
 from src.f01_road.road import AcctName, OwnerName
 from src.f06_keep.rivercycle import (
     RiverGrade,

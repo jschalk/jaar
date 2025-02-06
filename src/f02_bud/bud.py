@@ -6,6 +6,7 @@ from src.f00_instrument.dict_toolbox import (
     get_False_if_None,
     get_empty_dict_if_None,
 )
+from src.f01_road.allot import allot_scale
 from src.f01_road.finance import (
     valid_finance_ratio,
     default_respect_bit_if_None,
@@ -17,7 +18,6 @@ from src.f01_road.finance import (
     PennyNum,
     FundCoin,
     FundNum,
-    allot_scale,
     validate_respect_num,
     TimeLinePoint,
 )
@@ -121,7 +121,6 @@ class BudUnit:
     owner_name: OwnerName = None
     accts: dict[AcctName, AcctUnit] = None
     itemroot: ItemUnit = None
-    deal_time_int: TimeLinePoint = None
     tally: float = None
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
@@ -157,9 +156,6 @@ class BudUnit:
             exception_str = f"Cannot set _last_gift_id to {x_last_gift_id} because it is less than {self.last_gift_id}."
             raise _last_gift_idException(exception_str)
         self.last_gift_id = x_last_gift_id
-
-    def set_deal_time_int(self, x_deal_time_int: TimeLinePoint):
-        self.deal_time_int = x_deal_time_int
 
     def set_fund_pool(self, x_fund_pool):
         if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:
@@ -902,8 +898,14 @@ class BudUnit:
         fund_take_allot = allot_scale(debtor_ledger, item_fund_share, self.fund_coin)
         for x_acct_name, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_name).add_fund_give(acct_fund_give)
+            # if there is no differentiated agenda (what factunits exist do not change agenda)
+            if not self._reason_bases:
+                self.get_acct(x_acct_name).add_fund_agenda_give(acct_fund_give)
         for x_acct_name, acct_fund_take in fund_take_allot.items():
             self.get_acct(x_acct_name).add_fund_take(acct_fund_take)
+            # if there is no differentiated agenda (what factunits exist do not change agenda)
+            if not self._reason_bases:
+                self.get_acct(x_acct_name).add_fund_agenda_take(acct_fund_take)
 
     def _add_to_acctunits_fund_agenda_give_take(self, item_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
@@ -959,13 +961,14 @@ class BudUnit:
                 )
 
     def _set_acctunits_fund_agenda_ratios(self):
+        fund_agenda_ratio_give_sum = sum(
+            x_acctunit._fund_agenda_give for x_acctunit in self.accts.values()
+        )
+        fund_agenda_ratio_take_sum = sum(
+            x_acctunit._fund_agenda_take for x_acctunit in self.accts.values()
+        )
         x_acctunit_credit_belief_sum = self.get_acctunits_credit_belief_sum()
         x_acctunit_debtit_belief_sum = self.get_acctunits_debtit_belief_sum()
-        fund_agenda_ratio_give_sum = 0
-        fund_agenda_ratio_take_sum = 0
-        for x_acctunit in self.accts.values():
-            fund_agenda_ratio_give_sum += x_acctunit._fund_agenda_give
-            fund_agenda_ratio_take_sum += x_acctunit._fund_agenda_take
         for x_acctunit in self.accts.values():
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
@@ -1222,7 +1225,9 @@ class BudUnit:
             self._tree_traverse_count += 1
 
         self._set_itemtree_fund_attrs(self.itemroot)
+        print(f"{self.accts.get('Sue')=}")
         self._set_groupunit_acctunit_funds(keep_exceptions)
+        print(f"{self.accts.get('Sue')=}")
         self._set_acctunit_fund_related_attrs()
         self._set_bud_keep_attrs()
 

@@ -9,7 +9,7 @@ from src.f04_gift.atom import (
     atom_insert,
     atomunit_shop,
 )
-from src.f04_gift.delta import DeltaUnit, deltaunit_shop
+from src.f04_gift.delta import BudDelta, buddelta_shop
 
 
 def get_atom_example_itemunit_sports(fiscal_title: FiscalTitle = None) -> AtomUnit:
@@ -22,25 +22,25 @@ def get_atom_example_itemunit_sports(fiscal_title: FiscalTitle = None) -> AtomUn
     return insert_itemunit_atomunit
 
 
-def get_deltaunit_sue_example() -> DeltaUnit:
-    sue_deltaunit = deltaunit_shop()
+def get_buddelta_sue_example() -> BudDelta:
+    sue_buddelta = buddelta_shop()
 
     budunit_str = budunit_str()
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
     pool_attribute = "_credor_respect"
     pool_atomunit.set_jvalue(pool_attribute, 77)
-    sue_deltaunit.set_atomunit(pool_atomunit)
+    sue_buddelta.set_atomunit(pool_atomunit)
 
     dimen = bud_acctunit_str()
     sue_str = "Sue"
     sue_atomunit = atomunit_shop(dimen, atom_delete())
     sue_atomunit.set_jkey(acct_name_str(), sue_str)
-    sue_deltaunit.set_atomunit(sue_atomunit)
-    return sue_deltaunit
+    sue_buddelta.set_atomunit(sue_atomunit)
+    return sue_buddelta
 
 
-def get_deltaunit_example1() -> DeltaUnit:
-    sue_deltaunit = deltaunit_shop()
+def get_buddelta_example1() -> BudDelta:
+    sue_buddelta = buddelta_shop()
 
     budunit_str = budunit_str()
     mass_name = "mass"
@@ -52,18 +52,18 @@ def get_deltaunit_example1() -> DeltaUnit:
     x_atomunit.set_jvalue(x_attribute, 77)
     x_attribute = "_debtor_respect"
     x_atomunit.set_jvalue(x_attribute, 88)
-    sue_deltaunit.set_atomunit(x_atomunit)
+    sue_buddelta.set_atomunit(x_atomunit)
 
     dimen = bud_acctunit_str()
     sue_str = "Sue"
     x_atomunit = atomunit_shop(dimen, atom_delete())
     x_atomunit.set_jkey(acct_name_str(), sue_str)
-    sue_deltaunit.set_atomunit(x_atomunit)
-    return sue_deltaunit
+    sue_buddelta.set_atomunit(x_atomunit)
+    return sue_buddelta
 
 
-def get_deltaunit_example2() -> DeltaUnit:
-    sue_deltaunit = deltaunit_shop()
+def get_buddelta_example2() -> BudDelta:
+    sue_buddelta = buddelta_shop()
 
     budunit_str = budunit_str()
     x_atomunit = atomunit_shop(budunit_str(), atom_update())
@@ -74,5 +74,5 @@ def get_deltaunit_example2() -> DeltaUnit:
     sue_str = "Sue"
     x_atomunit = atomunit_shop(dimen, atom_delete())
     x_atomunit.set_jkey(acct_name_str(), sue_str)
-    sue_deltaunit.set_atomunit(x_atomunit)
-    return sue_deltaunit
+    sue_buddelta.set_atomunit(x_atomunit)
+    return sue_buddelta

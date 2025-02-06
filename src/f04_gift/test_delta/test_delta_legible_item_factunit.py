@@ -7,7 +7,7 @@ from src.f04_gift.atom_config import (
     fopen_str,
 )
 from src.f04_gift.atom import atomunit_shop
-from src.f04_gift.delta import deltaunit_shop
+from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
 
@@ -29,11 +29,11 @@ def test_create_legible_list_ReturnsObj_item_factunit_INSERT_WithOutNumberArgs()
     swim_atomunit.set_arg(base_str, base_value)
     swim_atomunit.set_arg(pick_str, pick_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"FactUnit '{pick_value}' created for base '{base_value}' for item '{road_value}'."
@@ -62,11 +62,11 @@ def test_create_legible_list_ReturnsObj_item_factunit_INSERT_WithNumberArgs():
     swim_atomunit.set_arg(fnigh_str(), fnigh_value)
     swim_atomunit.set_arg(fopen_str(), fopen_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"FactUnit '{pick_value}' created for base '{base_value}' for item '{road_value}'. fOpen={fopen_value}. fNigh={fnigh_value}."
@@ -91,11 +91,11 @@ def test_create_legible_list_ReturnsObj_item_factunit_UPDATE_WithOutNumberArgs()
     swim_atomunit.set_arg(base_str, base_value)
     swim_atomunit.set_arg(pick_str, pick_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"FactUnit '{pick_value}' updated for base '{base_value}' for item '{road_value}'."
@@ -124,11 +124,11 @@ def test_create_legible_list_ReturnsObj_item_factunit_UPDATE_WithNumberArgs():
     swim_atomunit.set_arg(fnigh_str(), fnigh_value)
     swim_atomunit.set_arg(fopen_str(), fopen_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"FactUnit '{pick_value}' updated for base '{base_value}' for item '{road_value}'. fOpen={fopen_value}. fNigh={fnigh_value}."
@@ -150,11 +150,11 @@ def test_create_legible_list_ReturnsObj_item_factunit_DELETE():
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(base_str, base_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"FactUnit base '{base_value}' deleted for item '{road_value}'."

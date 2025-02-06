@@ -10,7 +10,7 @@ from src.f01_road.road import FiscalTitle, OwnerName
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import timelineunit_shop
 from src.f04_gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
-from src.f04_gift.delta import deltaunit_shop, get_dimens_cruds_deltaunit, DeltaUnit
+from src.f04_gift.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
 from src.f04_gift.gift import giftunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fiscal.fiscal import fiscalunit_shop, FiscalUnit
@@ -77,12 +77,12 @@ def _generate_idea_dataframe(d2_list: list[list[str]], idea_name: str) -> DataFr
 
 
 def create_idea_df(x_budunit: BudUnit, idea_name: str) -> DataFrame:
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.add_all_atomunits(x_budunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.add_all_atomunits(x_budunit)
     x_idearef = get_idearef_obj(idea_name)
     x_fiscal_title = x_budunit.fiscal_title
     x_owner_name = x_budunit.owner_name
-    sorted_atomunits = _get_sorted_atom_insert_atomunits(x_deltaunit, x_idearef)
+    sorted_atomunits = _get_sorted_atom_insert_atomunits(x_buddelta, x_idearef)
     d2_list = _create_d2_list(sorted_atomunits, x_idearef, x_fiscal_title, x_owner_name)
     d2_list = _delta_all_pledge_values(d2_list, x_idearef)
     x_idea = _generate_idea_dataframe(d2_list, idea_name)
@@ -91,11 +91,11 @@ def create_idea_df(x_budunit: BudUnit, idea_name: str) -> DataFrame:
 
 
 def _get_sorted_atom_insert_atomunits(
-    x_deltaunit: DeltaUnit, x_idearef: IdeaRef
+    x_buddelta: BudDelta, x_idearef: IdeaRef
 ) -> list[AtomUnit]:
     dimen_set = set(x_idearef.dimens)
     curd_set = {atom_insert()}
-    limited_delta = get_dimens_cruds_deltaunit(x_deltaunit, dimen_set, curd_set)
+    limited_delta = get_dimens_cruds_buddelta(x_buddelta, dimen_set, curd_set)
     return limited_delta.get_dimen_sorted_atomunits_list()
 
 
@@ -155,13 +155,13 @@ def get_csv_idearef(header_row: list[str]) -> IdeaRef:
     return get_idearef_obj(x_ideaname)
 
 
-def make_deltaunit(x_csv: str) -> DeltaUnit:
+def make_buddelta(x_csv: str) -> BudDelta:
     header_row, headerless_csv = extract_csv_headers(x_csv)
     x_idearef = get_csv_idearef(header_row)
 
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     x_dict = get_positional_dict(header_row)
-    x_deltaunit = deltaunit_shop()
+    x_buddelta = buddelta_shop()
     for row in x_reader:
         x_atomrow = atomrow_shop(x_idearef.dimens, atom_insert())
         for x_header in header_row:
@@ -169,8 +169,8 @@ def make_deltaunit(x_csv: str) -> DeltaUnit:
                 x_atomrow.__dict__[x_header] = row[header_index]
 
         for x_atomunit in x_atomrow.get_atomunits():
-            x_deltaunit.set_atomunit(x_atomunit)
-    return x_deltaunit
+            x_buddelta.set_atomunit(x_atomunit)
+    return x_buddelta
 
 
 def _load_individual_idea_csv(
@@ -180,14 +180,14 @@ def _load_individual_idea_csv(
     x_owner_name: OwnerName,
 ):
     x_hubunit = hubunit_shop(fiscals_dir, x_fiscal_title, x_owner_name)
-    x_hubunit.initialize_gift_soul_files()
-    x_soul = x_hubunit.get_soul_bud()
-    x_deltaunit = make_deltaunit(complete_csv)
-    # x_deltaunit = get_minimal_deltaunit(x_deltaunit, x_soul)
+    x_hubunit.initialize_gift_voice_files()
+    x_voice = x_hubunit.get_voice_bud()
+    x_buddelta = make_buddelta(complete_csv)
+    # x_buddelta = get_minimal_buddelta(x_buddelta, x_voice)
     x_giftunit = giftunit_shop(x_owner_name, x_fiscal_title)
-    x_giftunit.set_deltaunit(x_deltaunit)
+    x_giftunit.set_buddelta(x_buddelta)
     x_hubunit.save_gift_file(x_giftunit)
-    x_hubunit._create_soul_from_gifts()
+    x_hubunit._create_voice_from_gifts()
 
 
 def load_idea_csv(fiscals_dir: str, x_file_dir: str, x_filename: str):

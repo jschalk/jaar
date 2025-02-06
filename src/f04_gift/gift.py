@@ -10,9 +10,9 @@ from src.f01_road.road import (
 from src.f02_bud.bud import BudUnit
 from src.f04_gift.atom import AtomUnit, get_from_json as atomunit_get_from_json
 from src.f04_gift.delta import (
-    DeltaUnit,
-    deltaunit_shop,
-    get_deltaunit_from_ordered_dict,
+    BudDelta,
+    buddelta_shop,
+    get_buddelta_from_ordered_dict,
 )
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
@@ -28,7 +28,7 @@ class GiftUnit:
     fiscal_title: FiscalTitle = None
     owner_name: OwnerName = None
     _gift_id: int = None
-    _deltaunit: DeltaUnit = None
+    _buddelta: BudDelta = None
     _delta_start: int = None
     _gifts_dir: str = None
     _atoms_dir: str = None
@@ -40,17 +40,17 @@ class GiftUnit:
     def del_face(self):
         self.face_name = None
 
-    def set_deltaunit(self, x_deltaunit: DeltaUnit):
-        self._deltaunit = x_deltaunit
+    def set_buddelta(self, x_buddelta: BudDelta):
+        self._buddelta = x_buddelta
 
-    def del_deltaunit(self):
-        self._deltaunit = deltaunit_shop()
+    def del_buddelta(self):
+        self._buddelta = buddelta_shop()
 
     def set_delta_start(self, x_delta_start: int):
         self._delta_start = get_init_gift_id_if_None(x_delta_start)
 
     def atomunit_exists(self, x_atomunit: AtomUnit):
-        return self._deltaunit.atomunit_exists(x_atomunit)
+        return self._buddelta.atomunit_exists(x_atomunit)
 
     def get_step_dict(self) -> dict[str, any]:
         return {
@@ -58,12 +58,12 @@ class GiftUnit:
             "fiscal_title": self.fiscal_title,
             "owner_name": self.owner_name,
             "event_int": self.event_int,
-            "delta": self._deltaunit.get_ordered_atomunits(self._delta_start),
+            "delta": self._buddelta.get_ordered_atomunits(self._delta_start),
         }
 
     def get_serializable_dict(self) -> dict[str, dict]:
         total_dict = self.get_step_dict()
-        total_dict["delta"] = self._deltaunit.get_ordered_dict()
+        total_dict["delta"] = self._buddelta.get_ordered_dict()
         return total_dict
 
     def get_json(self) -> str:
@@ -118,12 +118,12 @@ class GiftUnit:
         self._save_gift_file()
         self._save_atom_files()
 
-    def _create_deltaunit_from_atom_files(self, atom_number_list: list) -> DeltaUnit:
-        x_deltaunit = deltaunit_shop()
+    def _create_buddelta_from_atom_files(self, atom_number_list: list) -> BudDelta:
+        x_buddelta = buddelta_shop()
         for atom_number in atom_number_list:
             x_atomunit = self._open_atom_file(atom_number)
-            x_deltaunit.set_atomunit(x_atomunit)
-        self._deltaunit = x_deltaunit
+            x_buddelta.set_atomunit(x_atomunit)
+        self._buddelta = x_buddelta
 
     def add_atomunit(
         self,
@@ -132,7 +132,7 @@ class GiftUnit:
         jkeys: dict[str, str] = None,
         jvalues: dict[str, str] = None,
     ):
-        self._deltaunit.add_atomunit(dimen, crud_str, jkeys=jkeys, jvalues=jvalues)
+        self._buddelta.add_atomunit(dimen, crud_str, jkeys=jkeys, jvalues=jvalues)
 
     def get_edited_bud(self, before_bud: BudUnit) -> BudUnit:
         if (
@@ -142,7 +142,7 @@ class GiftUnit:
             raise gift_bud_conflict_Exception(
                 f"gift bud conflict {self.fiscal_title} != {before_bud.fiscal_title} or {self.owner_name} != {before_bud.owner_name}"
             )
-        return self._deltaunit.get_edited_bud(before_bud)
+        return self._buddelta.get_edited_bud(before_bud)
 
 
 def giftunit_shop(
@@ -150,20 +150,20 @@ def giftunit_shop(
     face_name: FaceName = None,
     fiscal_title: FiscalTitle = None,
     _gift_id: int = None,
-    _deltaunit: DeltaUnit = None,
+    _buddelta: BudDelta = None,
     _delta_start: int = None,
     _gifts_dir: str = None,
     _atoms_dir: str = None,
     event_int: int = None,
 ) -> GiftUnit:
-    _deltaunit = deltaunit_shop() if _deltaunit is None else _deltaunit
+    _buddelta = buddelta_shop() if _buddelta is None else _buddelta
     fiscal_title = get_default_fiscal_title() if fiscal_title is None else fiscal_title
     x_giftunit = GiftUnit(
         face_name=face_name,
         owner_name=owner_name,
         fiscal_title=fiscal_title,
         _gift_id=get_init_gift_id_if_None(_gift_id),
-        _deltaunit=_deltaunit,
+        _buddelta=_buddelta,
         _gifts_dir=_gifts_dir,
         _atoms_dir=_atoms_dir,
         event_int=event_int,
@@ -190,7 +190,7 @@ def create_giftunit_from_files(
         _gift_id=gift_id,
         _atoms_dir=atoms_dir,
     )
-    x_giftunit._create_deltaunit_from_atom_files(delta_atom_numbers_list)
+    x_giftunit._create_buddelta_from_atom_files(delta_atom_numbers_list)
     return x_giftunit
 
 
@@ -208,6 +208,6 @@ def get_giftunit_from_json(x_json: str) -> GiftUnit:
         _atoms_dir=gift_dict.get("atoms_dir"),
         event_int=x_event_int,
     )
-    x_deltaunit = get_deltaunit_from_ordered_dict(gift_dict.get("delta"))
-    x_giftunit.set_deltaunit(x_deltaunit)
+    x_buddelta = get_buddelta_from_ordered_dict(gift_dict.get("delta"))
+    x_giftunit.set_buddelta(x_buddelta)
     return x_giftunit

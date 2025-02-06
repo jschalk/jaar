@@ -38,7 +38,7 @@ def test_HubUnit_atom_file_path_ReturnsObj():
 
     # THEN
     one_atom_file_name = yao_hubunit.atom_file_name(one_int)
-    expected_path = create_path(yao_hubunit.atoms_dir(), one_atom_file_name)
+    expected_path = create_path(yao_hubunit._atoms_dir, one_atom_file_name)
     assert one_atom_file_path == expected_path
 
 
@@ -205,7 +205,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     yao_hubunit.save_atom_file(get_atom_example_itemunit_ball(x_fiscal_title))
     yao_hubunit.save_atom_file(get_atom_example_itemunit_knee(x_fiscal_title))
     yao_hubunit.save_atom_file(get_atom_example_factunit_knee(x_fiscal_title))
-    print(f"{get_dir_file_strs(yao_hubunit.atoms_dir()).keys()=}")
+    print(f"{get_dir_file_strs(yao_hubunit._atoms_dir).keys()=}")
 
     # WHEN
     yao_bud = yao_hubunit._get_bud_from_atom_files()

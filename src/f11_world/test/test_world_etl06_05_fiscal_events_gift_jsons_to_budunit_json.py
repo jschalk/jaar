@@ -140,7 +140,7 @@ def test_WorldUnit_event_gift_json_to_event_inherited_budunits_SetsFiles_express
     expected_e3_bob_gift.add_atomunit(budacct_dimen, insert_str, yao_jkeys, yao_jvalues)
     expected_e7_bob_gift.add_atomunit(budacct_dimen, insert_str, sue_jkeys, sue_jvalues)
     assert expected_e3_bob_gift == a23_bob_e3_gift
-    assert expected_e7_bob_gift._deltaunit != a23_bob_e7_gift._deltaunit
+    assert expected_e7_bob_gift._buddelta != a23_bob_e7_gift._buddelta
     assert expected_e7_bob_gift != a23_bob_e7_gift
     # expected_e3_bob_gift.add_atomunit()
     # expected_e3_bob_gift.add_atomunit()
@@ -148,8 +148,8 @@ def test_WorldUnit_event_gift_json_to_event_inherited_budunits_SetsFiles_express
     # expected_e7_bob_gift.add_atomunit()
     # expected_e7_bob_gift.add_atomunit()
     assert gen_e3_express_gift == expected_e3_bob_gift
-    gen_e7_express_delta = gen_e7_express_gift._deltaunit
-    expected_e7_delta = expected_e7_bob_gift._deltaunit
+    gen_e7_express_delta = gen_e7_express_gift._buddelta
+    expected_e7_delta = expected_e7_bob_gift._buddelta
     assert gen_e7_express_delta.atomunits == expected_e7_delta.atomunits
-    assert gen_e7_express_gift._deltaunit == expected_e7_bob_gift._deltaunit
+    assert gen_e7_express_gift._buddelta == expected_e7_bob_gift._buddelta
     assert gen_e7_express_gift == expected_e7_bob_gift

@@ -17,7 +17,7 @@ from src.f04_gift.atom_config import (
     fnigh_str,
 )
 from src.f04_gift.atom import atomunit_shop, AtomUnit
-from src.f04_gift.delta import deltaunit_shop, DeltaUnit
+from src.f04_gift.delta import buddelta_shop, BudDelta
 
 
 def get_atom_example_itemunit_sports(fiscal_title: FiscalTitle = None) -> AtomUnit:
@@ -81,17 +81,17 @@ def get_atom_example_factunit_knee(fiscal_title: FiscalTitle = None) -> AtomUnit
     return insert_factunit_atomunit
 
 
-def get_deltaunit_sue_example() -> DeltaUnit:
-    sue_deltaunit = deltaunit_shop()
+def get_buddelta_sue_example() -> BudDelta:
+    sue_buddelta = buddelta_shop()
 
     pool_atomunit = atomunit_shop(budunit_str(), atom_update())
     pool_attribute = "credor_respect"
     pool_atomunit.set_jvalue(pool_attribute, 77)
-    sue_deltaunit.set_atomunit(pool_atomunit)
+    sue_buddelta.set_atomunit(pool_atomunit)
 
     dimen = bud_acctunit_str()
     sue_str = "Sue"
     sue_atomunit = atomunit_shop(dimen, atom_delete())
     sue_atomunit.set_jkey(acct_name_str(), sue_str)
-    sue_deltaunit.set_atomunit(sue_atomunit)
-    return sue_deltaunit
+    sue_buddelta.set_atomunit(sue_atomunit)
+    return sue_buddelta

@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     base_item_active_requisite_str,
 )
 from src.f04_gift.atom import atomunit_shop
-from src.f04_gift.delta import deltaunit_shop
+from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
 
@@ -28,11 +28,11 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_With_base_item_ac
         base_item_active_requisite_str(), base_item_active_requisite_value
     )
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"ReasonUnit created for item '{road_value}' with base '{base_value}'. base_item_active_requisite={base_item_active_requisite_value}."
@@ -53,11 +53,11 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_Without_base_item
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(base_str, base_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"ReasonUnit created for item '{road_value}' with base '{base_value}'."
@@ -82,11 +82,11 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_
         base_item_active_requisite_str(), base_item_active_requisite_value
     )
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' set with base_item_active_requisite={base_item_active_requisite_value}."
@@ -107,11 +107,11 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(base_str, base_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' and no longer checks base active mode."
@@ -132,11 +132,11 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_DELETE():
     swim_atomunit.set_arg(road_str, road_value)
     swim_atomunit.set_arg(base_str, base_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' has been deleted."

@@ -14,7 +14,7 @@ from src.f02_bud.bud import (
 )
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
-from src.f04_gift.delta import get_minimal_deltaunit
+from src.f04_gift.delta import get_minimal_buddelta
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
 from src.f07_fiscal.fiscal_config import get_fiscal_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
@@ -52,6 +52,9 @@ from src.f10_etl.tran_sqlstrs import (
     get_bud_insert_put_agg_from_staging_sqlstrs,
     get_bud_insert_del_agg_from_staging_sqlstrs,
     IDEA_STAGEABLE_PUT_DIMENS,
+    CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR,
+    INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR,
+    UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
@@ -164,9 +167,9 @@ class OceanToboatTransformer:
         return df
 
     def _save_to_boat_staging(self, idea_number: str, dfs: list):
-        voice_df = pandas_concat(dfs)
+        forecast_df = pandas_concat(dfs)
         boat_path = create_path(self.boat_dir, f"{idea_number}.xlsx")
-        upsert_sheet(boat_path, "boat_staging", voice_df)
+        upsert_sheet(boat_path, "boat_staging", forecast_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -760,6 +763,7 @@ def etl_idea_staging_to_fiscal_tables(conn_or_cursor):
     idea_staging_tables2fiscal_staging_tables(conn_or_cursor)
     set_fiscal_staging_error_message(conn_or_cursor)
     fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor)
+    fiscal_agg_tables2fiscal_event_time_agg(conn_or_cursor)
 
 
 def etl_idea_staging_to_bud_tables(conn_or_cursor):
@@ -835,6 +839,12 @@ def set_bud_staging_error_message(conn_or_cursor: sqlite3_Connection):
         set_error_sqlstr
     ) in get_bud_put_update_inconsist_error_message_sqlstrs().values():
         conn_or_cursor.execute(set_error_sqlstr)
+
+
+def fiscal_agg_tables2fiscal_event_time_agg(conn_or_cursor: sqlite3_Connection):
+    conn_or_cursor.execute(CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR)
+    conn_or_cursor.execute(INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR)
+    conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR)
 
 
 def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
@@ -922,7 +932,7 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_gift._deltaunit.set_atomunit(x_atom)
+                owner_gift._buddelta.set_atomunit(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
@@ -937,7 +947,7 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_gift._deltaunit.set_atomunit(x_atom)
+                owner_gift._buddelta.set_atomunit(x_atom)
 
 
 def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
@@ -953,11 +963,11 @@ def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
                 event_path = create_path(owner_path, event_int)
                 gift_path = create_path(event_path, "all_gift.json")
                 event_gift = get_giftunit_from_json(open_file(gift_path))
-                sift_delta = get_minimal_deltaunit(event_gift._deltaunit, prev_bud)
+                sift_delta = get_minimal_buddelta(event_gift._buddelta, prev_bud)
                 curr_bud = event_gift.get_edited_bud(prev_bud)
                 save_file(event_path, "bud.json", curr_bud.get_json())
                 expressed_gift = copy_deepcopy(event_gift)
-                expressed_gift.set_deltaunit(sift_delta)
+                expressed_gift.set_buddelta(sift_delta)
                 save_file(event_path, "expressed_gift.json", expressed_gift.get_json())
                 prev_event_int = event_int
 

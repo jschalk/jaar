@@ -39,14 +39,14 @@ from src.f04_gift.atom_config import (
     fnigh_str,
     fopen_str,
 )
-from src.f04_gift.delta import DeltaUnit
+from src.f04_gift.delta import BudDelta
 
 
 def get_leg_obj(x_dict: dict, x_keylist) -> any:
     return get_from_nested_dict(x_dict, x_keylist, if_missing_return_None=True)
 
 
-def create_legible_list(x_delta: DeltaUnit, x_bud: BudUnit) -> list[str]:
+def create_legible_list(x_delta: BudDelta, x_bud: BudUnit) -> list[str]:
     atoms_dict = x_delta.atomunits
     budunit_atom = get_leg_obj(atoms_dict, [atom_update(), budunit_str()])
 
@@ -219,12 +219,10 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
     jvalues = x_atom.jvalues
     _tally_str = "tally"
     _max_tree_traverse_str = "max_tree_traverse"
-    deal_time_int_str = "deal_time_int"
     _max_tree_traverse_value = jvalues.get(_max_tree_traverse_str)
     credor_respect_value = jvalues.get(credor_respect_str())
     debtor_respect_value = jvalues.get(debtor_respect_str())
     _tally_value = jvalues.get(_tally_str)
-    deal_time_int_value = jvalues.get(deal_time_int_str)
 
     if _max_tree_traverse_value is not None:
         x_str = f"{x_bud.owner_name}'s maximum number of Bud evaluations set to {_max_tree_traverse_value}"
@@ -244,11 +242,6 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
         legible_list.append(x_str)
     if _tally_value is not None:
         x_str = f"{x_bud.owner_name}'s bud tally set to {_tally_value}"
-        legible_list.append(x_str)
-    if deal_time_int_value is not None:
-        x_str = (
-            f"{x_bud.owner_name}'s bud {deal_time_int_str} set to {deal_time_int_value}"
-        )
         legible_list.append(x_str)
 
 

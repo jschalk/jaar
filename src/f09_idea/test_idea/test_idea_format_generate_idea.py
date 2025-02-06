@@ -20,7 +20,7 @@ from src.f04_gift.atom_config import (
     credit_vote_str,
 )
 from src.f04_gift.atom import atomunit_shop
-from src.f09_idea.idea import create_idea_df, make_deltaunit, get_idearef_obj
+from src.f09_idea.idea import create_idea_df, make_buddelta, get_idearef_obj
 from src.f09_idea.idea_config import (
     idea_format_00021_bud_acctunit_v0_0_0,
     idea_format_00020_bud_acct_membership_v0_0_0,
@@ -28,7 +28,7 @@ from src.f09_idea.idea_config import (
 )
 
 
-def test_make_deltaunit_Arg_idea_format_00021_bud_acctunit_v0_0_0():
+def test_make_buddelta_Arg_idea_format_00021_bud_acctunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -50,10 +50,10 @@ def test_make_deltaunit_Arg_idea_format_00021_bud_acctunit_v0_0_0():
     acct_csv = acct_dataframe.to_csv(index=False)
 
     # WHEN
-    sue_acct_deltaunit = make_deltaunit(acct_csv)
+    sue_acct_buddelta = make_buddelta(acct_csv)
 
     # THEN
-    assert sue_acct_deltaunit
+    assert sue_acct_buddelta
     sue_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
     sue_atomunit.set_arg(acct_name_str(), sue_str)
     sue_atomunit.set_arg(credit_belief_str(), sue_credit_belief)
@@ -64,17 +64,17 @@ def test_make_deltaunit_Arg_idea_format_00021_bud_acctunit_v0_0_0():
     bob_atomunit.set_arg(credit_belief_str(), bob_credit_belief)
     bob_atomunit.set_arg(debtit_belief_str(), bob_debtit_belief)
     bob_atomunit.set_atom_order()
-    # print(f"{sue_acct_deltaunit.get_ordered_dict()=}")
+    # print(f"{sue_acct_buddelta.get_ordered_dict()=}")
     # print(
-    #     f"{sue_acct_deltaunit.atomunits.get(atom_insert()).get(bud_acctunit_str()).get(sue_str)=}"
+    #     f"{sue_acct_buddelta.atomunits.get(atom_insert()).get(bud_acctunit_str()).get(sue_str)=}"
     # )
     print(f"{sue_atomunit=}")
-    assert sue_acct_deltaunit.atomunit_exists(sue_atomunit)
-    assert sue_acct_deltaunit.atomunit_exists(bob_atomunit)
-    assert len(sue_acct_deltaunit.get_ordered_atomunits()) == 3
+    assert sue_acct_buddelta.atomunit_exists(sue_atomunit)
+    assert sue_acct_buddelta.atomunit_exists(bob_atomunit)
+    assert len(sue_acct_buddelta.get_ordered_atomunits()) == 3
 
 
-def test_make_deltaunit_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
+def test_make_buddelta_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -108,7 +108,7 @@ def test_make_deltaunit_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
     print(f"{membership_csv=}")
 
     # WHEN
-    membership_changunit = make_deltaunit(membership_csv)
+    membership_changunit = make_buddelta(membership_csv)
 
     # THEN
     assert membership_changunit
@@ -144,7 +144,7 @@ def test_make_deltaunit_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
     assert len(membership_changunit.get_ordered_atomunits()) == 7
 
 
-def test_make_deltaunit_Arg_idea_format_00013_itemunit_v0_0_0():
+def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -162,7 +162,7 @@ def test_make_deltaunit_Arg_idea_format_00013_itemunit_v0_0_0():
     itemunit_csv = itemunit_dataframe.to_csv(index=False)
 
     # WHEN
-    itemunit_changunit = make_deltaunit(itemunit_csv)
+    itemunit_changunit = make_buddelta(itemunit_csv)
 
     # THEN
     casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
@@ -199,7 +199,7 @@ def test_create_idea_df_Arg_idea_format_00013_itemunit_v0_0_0_Scenario_budunit_v
         assert len(itemunit_format) == 251
 
 
-def test_make_deltaunit_Arg_idea_format_00013_itemunit_v0_0_0():
+def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -217,7 +217,7 @@ def test_make_deltaunit_Arg_idea_format_00013_itemunit_v0_0_0():
     itemunit_csv = itemunit_dataframe.to_csv(index=False)
 
     # WHEN
-    itemunit_changunit = make_deltaunit(itemunit_csv)
+    itemunit_changunit = make_buddelta(itemunit_csv)
 
     # THEN
     casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())

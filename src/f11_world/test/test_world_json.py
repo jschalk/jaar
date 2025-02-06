@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f01_road.finance_tran import timeconversion_shop
+from src.f01_road.deal import timeconversion_shop
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 

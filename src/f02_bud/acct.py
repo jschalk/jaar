@@ -9,7 +9,8 @@ from src.f01_road.road import (
     validate_titleunit,
     is_titleunit,
 )
-from src.f01_road.finance import default_respect_bit_if_None, RespectNum, allot_scale
+from src.f01_road.allot import allot_scale
+from src.f01_road.finance import default_respect_bit_if_None, RespectNum
 from src.f02_bud.group import (
     GroupLabel,
     MemberShip,
@@ -125,8 +126,8 @@ class AcctUnit(AcctCore):
     ):
         self.add_fund_give(fund_give)
         self.add_fund_take(fund_take)
-        self._fund_agenda_give += fund_agenda_give
-        self._fund_agenda_take += fund_agenda_take
+        self.add_fund_agenda_give(fund_agenda_give)
+        self.add_fund_agenda_take(fund_agenda_take)
 
     def set_fund_agenda_ratio_give_take(
         self,
@@ -208,11 +209,7 @@ class AcctUnit(AcctCore):
 
     def get_memberships_dict(self) -> dict:
         return {
-            x_membership.group_label: {
-                "group_label": x_membership.group_label,
-                "credit_vote": x_membership.credit_vote,
-                "debtit_vote": x_membership.debtit_vote,
-            }
+            x_membership.group_label: x_membership.get_dict()
             for x_membership in self._memberships.values()
         }
 
@@ -241,7 +238,6 @@ class AcctUnit(AcctCore):
         x_dict["_fund_agenda_ratio_take"] = self._fund_agenda_ratio_take
 
 
-# class AcctUnitsshop:
 def acctunits_get_from_json(acctunits_json: str) -> dict[str, AcctUnit]:
     acctunits_dict = get_dict_from_json(acctunits_json)
     return acctunits_get_from_dict(x_dict=acctunits_dict)

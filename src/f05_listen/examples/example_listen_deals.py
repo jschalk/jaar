@@ -1,4 +1,4 @@
-from src.f01_road.finance_tran import dealepisode_shop, DealEpisode
+from src.f01_road.deal import dealepisode_shop, DealEpisode
 
 
 def get_dealepisode_55_example() -> DealEpisode:

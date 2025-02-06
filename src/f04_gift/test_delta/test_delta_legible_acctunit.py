@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     acct_name_str,
 )
 from src.f04_gift.atom import atomunit_shop
-from src.f04_gift.delta import deltaunit_shop
+from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
 
@@ -24,12 +24,12 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     yao_atomunit.set_arg(credit_belief_str, credit_belief_value)
     yao_atomunit.set_arg(debtit_belief_str, debtit_belief_value)
     # print(f"{yao_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(yao_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(yao_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{yao_str} was added with {credit_belief_value} belief credit and {debtit_belief_value} belief debtit"
@@ -50,12 +50,12 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT_belief():
     yao_atomunit.set_arg(credit_belief_str, credit_belief_value)
     yao_atomunit.set_arg(debtit_belief_str, debtit_belief_value)
     # print(f"{yao_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(yao_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(yao_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{yao_str} was added with {credit_belief_value} belief credit and {debtit_belief_value} belief debtit"
@@ -76,12 +76,12 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_belief_debtit_bel
     yao_atomunit.set_arg(credit_belief_str, credit_belief_value)
     yao_atomunit.set_arg(debtit_belief_str, debtit_belief_value)
     # print(f"{yao_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(yao_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(yao_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{yao_str} now has {credit_belief_value} belief credit and {debtit_belief_value} belief debtit."
@@ -99,12 +99,12 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_belief():
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(credit_belief_str, credit_belief_value)
     # print(f"{yao_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(yao_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(yao_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{yao_str} now has {credit_belief_value} belief credit."
@@ -122,12 +122,12 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_belief():
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     yao_atomunit.set_arg(debtit_belief_str, debtit_belief_value)
     # print(f"{yao_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(yao_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(yao_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{yao_str} now has {debtit_belief_value} belief debtit."
@@ -142,12 +142,12 @@ def test_create_legible_list_ReturnsObj_acctunit_DELETE():
     yao_atomunit = atomunit_shop(dimen, atom_delete())
     yao_atomunit.set_arg(acct_name_str(), yao_str)
     # print(f"{yao_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(yao_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(yao_atomunit)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"{yao_str} was removed from belief accts."

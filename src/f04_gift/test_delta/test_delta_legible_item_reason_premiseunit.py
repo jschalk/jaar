@@ -1,7 +1,7 @@
 from src.f02_bud.bud_tool import bud_item_reason_premiseunit_str
 from src.f04_gift.atom_config import atom_update, atom_insert, atom_delete
 from src.f04_gift.atom import atomunit_shop
-from src.f04_gift.delta import deltaunit_shop
+from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
 
@@ -23,11 +23,11 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_INSERT_WithOutNu
     swim_atomunit.set_arg(base_str, base_value)
     swim_atomunit.set_arg(need_str, need_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for item '{road_value}'."
@@ -61,11 +61,11 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_INSERT_WithNumbe
     swim_atomunit.set_arg(nigh_str, nigh_value)
     swim_atomunit.set_arg(open_str, open_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for item '{road_value}'. Open={open_value}. Nigh={nigh_value}. Divisor={divisor_value}."
@@ -90,11 +90,11 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_UPDATE_WithOutNu
     swim_atomunit.set_arg(base_str, base_value)
     swim_atomunit.set_arg(need_str, need_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for item '{road_value}'."
@@ -128,11 +128,11 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_UPDATE_WithNumbe
     swim_atomunit.set_arg(nigh_str, nigh_value)
     swim_atomunit.set_arg(open_str, open_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for item '{road_value}'. Open={open_value}. Nigh={nigh_value}. Divisor={divisor_value}."
@@ -157,11 +157,11 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_DELETE():
     swim_atomunit.set_arg(base_str, base_value)
     swim_atomunit.set_arg(need_str, need_value)
     # print(f"{swim_atomunit=}")
-    x_deltaunit = deltaunit_shop()
-    x_deltaunit.set_atomunit(swim_atomunit)
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_atomunit(swim_atomunit)
 
     # WHEN
-    legible_list = create_legible_list(x_deltaunit, sue_bud)
+    legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
     x_str = f"PremiseUnit '{need_value}' deleted from reason '{base_value}' for item '{road_value}'."
