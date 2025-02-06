@@ -180,14 +180,14 @@ def _load_individual_idea_csv(
     x_owner_name: OwnerName,
 ):
     x_hubunit = hubunit_shop(fiscals_dir, x_fiscal_title, x_owner_name)
-    x_hubunit.initialize_gift_soul_files()
-    x_soul = x_hubunit.get_soul_bud()
+    x_hubunit.initialize_gift_voice_files()
+    x_voice = x_hubunit.get_voice_bud()
     x_buddelta = make_buddelta(complete_csv)
-    # x_buddelta = get_minimal_buddelta(x_buddelta, x_soul)
+    # x_buddelta = get_minimal_buddelta(x_buddelta, x_voice)
     x_giftunit = giftunit_shop(x_owner_name, x_fiscal_title)
     x_giftunit.set_buddelta(x_buddelta)
     x_hubunit.save_gift_file(x_giftunit)
-    x_hubunit._create_soul_from_gifts()
+    x_hubunit._create_voice_from_gifts()
 
 
 def load_idea_csv(fiscals_dir: str, x_file_dir: str, x_filename: str):

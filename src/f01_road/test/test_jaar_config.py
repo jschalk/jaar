@@ -1,6 +1,6 @@
 from src.f01_road.jaar_config import (
-    soul_str,
     voice_str,
+    forecast_str,
     get_owners_folder,
     get_rootpart_of_keep_dir,
     treasury_file_name,
@@ -15,12 +15,12 @@ def test_get_owners_folder():
     assert get_owners_folder() == "owners"
 
 
-def test_soul_str():
-    assert soul_str() == "soul"
-
-
 def test_voice_str():
     assert voice_str() == "voice"
+
+
+def test_forecast_str():
+    assert forecast_str() == "forecast"
 
 
 def test_get_rootpart_of_keep_dir_ReturnsObj():

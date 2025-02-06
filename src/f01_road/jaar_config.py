@@ -30,12 +30,12 @@ def get_json_filename(filename_without_extention) -> str:
     return f"{filename_without_extention}.json"
 
 
-def soul_str() -> str:
-    return "soul"
-
-
 def voice_str() -> str:
     return "voice"
+
+
+def forecast_str() -> str:
+    return "forecast"
 
 
 def jobs_str() -> str:
