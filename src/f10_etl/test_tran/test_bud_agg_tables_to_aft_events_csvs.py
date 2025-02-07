@@ -7,6 +7,7 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     credit_belief_str,
 )
+from src.f05_listen.hub_tool import create_events_owner_dir
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f10_etl.tran_sqlstrs import create_bud_tables
 from src.f10_etl.transformers import etl_bud_tables_to_event_bud_csvs
@@ -31,11 +32,8 @@ def test_etl_bud_tables_to_event_bud_csvs_PopulatesBudPutAggTables(
     put_agg_csv = f"{put_agg_tablename}.csv"
     x_fiscal_mstr_dir = get_test_etl_dir()
     fiscals_dir = create_path(x_fiscal_mstr_dir, "fiscals")
-    a23_dir = create_path(fiscals_dir, accord23_str)
-    a23_events_dir = create_path(a23_dir, "events")
-    a23_bob_dir = create_path(a23_events_dir, bob_inx)
-    a23_bob_e3_dir = create_path(a23_bob_dir, event3)
-    a23_bob_e7_dir = create_path(a23_bob_dir, event7)
+    a23_bob_e3_dir = create_events_owner_dir(fiscals_dir, accord23_str, bob_inx, event3)
+    a23_bob_e7_dir = create_events_owner_dir(fiscals_dir, accord23_str, bob_inx, event7)
     a23_e3_budacct_put_path = create_path(a23_bob_e3_dir, put_agg_csv)
     a23_e7_budacct_put_path = create_path(a23_bob_e7_dir, put_agg_csv)
 

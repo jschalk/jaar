@@ -8,6 +8,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
 )
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json
+from src.f05_listen.hub_tool import create_events_owner_dir
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
@@ -27,10 +28,9 @@ def test_WorldUnit_event_gift_json_to_event_inherited_budunits_SetsFiles_bud_jso
     credit88 = 88
     a23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
-    a23_dir = create_path(fizz_world._fiscal_mstr_dir, a23_str)
-    a23_bob_dir = create_path(a23_dir, bob_inx)
-    a23_bob_e3_dir = create_path(a23_bob_dir, event3)
-    a23_bob_e7_dir = create_path(a23_bob_dir, event7)
+    fiscals_dir = create_path(fizz_world._fiscal_mstr_dir, "fiscals")
+    a23_bob_e3_dir = create_events_owner_dir(fiscals_dir, a23_str, bob_inx, event3)
+    a23_bob_e7_dir = create_events_owner_dir(fiscals_dir, a23_str, bob_inx, event7)
     a23_bob_e3_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event3)
     a23_bob_e7_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event7)
     budacct_dimen = bud_acctunit_str()
@@ -95,10 +95,9 @@ def test_WorldUnit_event_gift_json_to_event_inherited_budunits_SetsFiles_express
     credit88 = 88
     a23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
-    a23_dir = create_path(fizz_world._fiscal_mstr_dir, a23_str)
-    a23_bob_dir = create_path(a23_dir, bob_inx)
-    a23_bob_e3_dir = create_path(a23_bob_dir, event3)
-    a23_bob_e7_dir = create_path(a23_bob_dir, event7)
+    fiscals_dir = create_path(fizz_world._fiscal_mstr_dir, "fiscals")
+    a23_bob_e3_dir = create_events_owner_dir(fiscals_dir, a23_str, bob_inx, event3)
+    a23_bob_e7_dir = create_events_owner_dir(fiscals_dir, a23_str, bob_inx, event7)
     a23_bob_e3_gift = giftunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     a23_bob_e7_gift = giftunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
     budacct_dimen = bud_acctunit_str()
