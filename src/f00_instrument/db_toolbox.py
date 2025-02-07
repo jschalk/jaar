@@ -427,7 +427,11 @@ def is_stageable(
 
 
 def save_to_split_csvs(
-    conn_or_cursor: sqlite3_Connection, tablename, key_columns, output_dir
+    conn_or_cursor: sqlite3_Connection,
+    tablename,
+    key_columns,
+    output_dir,
+    col1_prefix=None,
 ):
     """
     Select a single table from a SQLite DB, filter rows into CSVs by key columns, and save them.
@@ -457,10 +461,16 @@ def save_to_split_csvs(
 
     # Write collectioned rows to separate CSV files
     for key_values, collection in collectioned_rows.items():
-        key_path_part = get_key_part(key_values, copy_copy(key_columns))
+        if col1_prefix:
+            new_key_values = [key_values[0], col1_prefix]
+            new_key_values.extend(key_values[1:])
+            key_values = new_key_values
+
+        key_path_part = get_key_part(key_values)
         csv_path = create_path(output_dir, key_path_part)
         set_dir(csv_path)
         output_file = os_path_join(csv_path, f"{tablename}.csv")
+        print(f"{output_file=}")
 
         # Write to CSV
         with open(output_file, mode="w", newline="", encoding="utf-8") as csv_file:
@@ -469,7 +479,7 @@ def save_to_split_csvs(
             writer.writerows(collection)
 
 
-def get_key_part(key_values: list[str], key_columns: list[str]) -> str:
+def get_key_part(key_values: list[str]) -> str:
     return "/".join(str(value) for value in key_values)
     # x_key_path = ""
     # for value in key_values:

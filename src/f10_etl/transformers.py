@@ -55,6 +55,8 @@ from src.f10_etl.tran_sqlstrs import (
     CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR,
+    CREATE_FISCAL_OWNER_TIME_AGG_SQLSTR,
+    INSERT_FISCAL_OWNER_TIME_AGG_SQLSTR,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
@@ -847,6 +849,11 @@ def fiscal_agg_tables2fiscal_event_time_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR)
 
 
+def fiscal_agg_tables2fiscal_owner_time_agg(conn_or_cursor: sqlite3_Connection):
+    conn_or_cursor.execute(CREATE_FISCAL_OWNER_TIME_AGG_SQLSTR)
+    conn_or_cursor.execute(INSERT_FISCAL_OWNER_TIME_AGG_SQLSTR)
+
+
 def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
     for x_sqlstr in get_fiscal_insert_agg_from_staging_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)
@@ -862,13 +869,15 @@ def bud_staging_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
 def etl_bud_tables_to_event_bud_csvs(
     conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
+    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
     for bud_table in get_bud_create_table_sqlstrs():
         if get_row_count(conn_or_cursor, bud_table) > 0:
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,
                 tablename=bud_table,
-                key_columns=["fiscal_title", "event_int", "owner_name"],
-                output_dir=fiscal_mstr_dir,
+                key_columns=["fiscal_title", "owner_name", "event_int"],
+                output_dir=fiscals_dir,
+                col1_prefix="events",
             )
 
 
