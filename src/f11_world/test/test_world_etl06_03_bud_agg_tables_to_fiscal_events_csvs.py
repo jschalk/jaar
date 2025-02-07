@@ -31,13 +31,14 @@ def test_WorldUnit_bud_tables_to_event_bud_csvs_CreatesFiles(
     fizz_world = worldunit_shop("fizz")
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv = f"{put_agg_tablename}.csv"
-    a23_dir = create_path(fizz_world._fiscal_mstr_dir, accord23_str)
-    a23_e3_dir = create_path(a23_dir, event3)
-    a23_e7_dir = create_path(a23_dir, event7)
-    a23_e3_bob_dir = create_path(a23_e3_dir, bob_inx)
-    a23_e7_bob_dir = create_path(a23_e7_dir, bob_inx)
-    a23_e3_budacct_put_path = create_path(a23_e3_bob_dir, put_agg_csv)
-    a23_e7_budacct_put_path = create_path(a23_e7_bob_dir, put_agg_csv)
+    fiscals_dir = create_path(fizz_world._fiscal_mstr_dir, "fiscals")
+    a23_dir = create_path(fiscals_dir, accord23_str)
+    a23_events_dir = create_path(a23_dir, "events")
+    a23_bob_dir = create_path(a23_events_dir, bob_inx)
+    a23_bob_e3_dir = create_path(a23_bob_dir, event3)
+    a23_bob_e7_dir = create_path(a23_bob_dir, event7)
+    a23_e3_budacct_put_path = create_path(a23_bob_e3_dir, put_agg_csv)
+    a23_e7_budacct_put_path = create_path(a23_bob_e7_dir, put_agg_csv)
 
     with sqlite3_connect(":memory:") as bud_db_conn:
         cursor = bud_db_conn.cursor()
@@ -52,6 +53,8 @@ VALUES
 """
         print(insert_staging_sqlstr)
         cursor.execute(insert_staging_sqlstr)
+        print(f"{a23_e3_budacct_put_path=}")
+        print(f"{a23_e7_budacct_put_path=}")
         assert os_path_exists(a23_e3_budacct_put_path) is False
         assert os_path_exists(a23_e7_budacct_put_path) is False
 

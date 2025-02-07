@@ -869,13 +869,15 @@ def bud_staging_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
 def etl_bud_tables_to_event_bud_csvs(
     conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
+    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
     for bud_table in get_bud_create_table_sqlstrs():
         if get_row_count(conn_or_cursor, bud_table) > 0:
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,
                 tablename=bud_table,
-                key_columns=["fiscal_title", "event_int", "owner_name"],
-                output_dir=fiscal_mstr_dir,
+                key_columns=["fiscal_title", "owner_name", "event_int"],
+                output_dir=fiscals_dir,
+                col1_prefix="events",
             )
 
 
