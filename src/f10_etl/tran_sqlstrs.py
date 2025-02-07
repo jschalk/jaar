@@ -929,7 +929,7 @@ WHERE EventTimeOrdered.event_int = fiscal_event_time_agg.event_int
 """
 
 
-CREATE_FISCAL_OWNER_TIME_AGG_SQLSTR = """
+CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR = """
 CREATE TABLE IF NOT EXISTS fiscal_owner_time_agg (
   fiscal_title TEXT
 , owner_name TEXT
@@ -939,14 +939,10 @@ CREATE TABLE IF NOT EXISTS fiscal_owner_time_agg (
 )
 ;
 """
-INSERT_FISCAL_OWNER_TIME_AGG_SQLSTR = """
+INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR = """
 INSERT INTO fiscal_owner_time_agg (fiscal_title, owner_name, event_int, time_int)
 SELECT fiscal_title, owner_name, event_int, time_int
 FROM (
-    SELECT fiscal_title, owner_name, event_int, time_int
-    FROM fiscal_cashbook_staging
-    GROUP BY fiscal_title, owner_name, event_int, time_int
-    UNION 
     SELECT fiscal_title, owner_name, event_int, time_int
     FROM fiscal_deal_episode_staging
     GROUP BY fiscal_title, owner_name, event_int, time_int
