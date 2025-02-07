@@ -53,7 +53,7 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
         fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(cursor)
 
         # THEN
-        # print(f"{fiscalunit_staging_csv_path=}")
+        print(f"{fis_objs.unit_stage_csv_path=}")
         assert os_path_exists(fis_objs.unit_stage_csv_path)
         generated_fiscalunit_csv = open_file(fis_objs.unit_stage_csv_path)
         fis_cols = FiscalPrimeColumnsRef()
@@ -63,6 +63,7 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
 """
         print(f"   {expected_fiscalunit_csv_str=}")
         assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
+        assert 1 == 2
 
 
 def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(

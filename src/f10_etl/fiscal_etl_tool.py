@@ -15,6 +15,8 @@ from src.f09_idea.idea_db_tool import (
     if_nan_return_None,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
+from os import listdir as os_listdir
+from os.path import join as os_path_join, isdir as os_path_isdir
 
 
 def get_fiscalunit_sorted_args() -> list[str]:
@@ -268,3 +270,32 @@ def create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir: str):
         fiscal_file_name = f"{fiscalunit.fiscal_title}.json"
         fiscalunit_dir = create_path(fiscals_dir, fiscalunit.fiscal_title)
         save_file(fiscalunit_dir, fiscal_file_name, fiscalunit.get_json())
+
+
+def collect_events_dir_owner_events_sets(fiscal_events_dir: str) -> dict[str, set[int]]:
+    directory_structure = {}
+    for owner_name in os_listdir(fiscal_events_dir):
+        owner_dir = os_path_join(fiscal_events_dir, owner_name)
+        if os_path_isdir(owner_dir):
+            owner_events_dirs = {
+                int(event_int_dir)
+                for event_int_dir in os_listdir(owner_dir)
+                if os_path_isdir(os_path_join(owner_dir, event_int_dir))
+            }
+            directory_structure[owner_name] = owner_events_dirs
+    return directory_structure
+
+
+def get_owners_downhill_event_ints(
+    owner_events_sets: dict[str, set[int]],
+    downhill_owners: set[str],
+    ref_event_int: int,
+) -> dict[str, int]:
+    x_dict = {}
+    for downhill_owner in downhill_owners:
+        if event_set := owner_events_sets.get(downhill_owner):
+            if downhill_event_ints := {
+                event_int for event_int in event_set if event_int <= ref_event_int
+            }:
+                x_dict[downhill_owner] = max(downhill_event_ints)
+    return x_dict
