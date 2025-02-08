@@ -63,7 +63,6 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
 """
         print(f"   {expected_fiscalunit_csv_str=}")
         assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
-        assert 1 == 2
 
 
 def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
