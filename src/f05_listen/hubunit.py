@@ -14,7 +14,7 @@ from src.f00_instrument.db_toolbox import sqlite_connection
 from src.f01_road.jaar_config import (
     grades_folder,
     get_rootpart_of_keep_dir,
-    treasury_file_name,
+    treasury_filename,
     get_gifts_folder,
     get_init_gift_id_if_None,
     get_json_filename,
@@ -129,9 +129,9 @@ class HubUnit:
     _voice_dir: str = None
     _forecast_dir: str = None
     _timeline_dir: str = None
-    _voice_file_name: str = None
+    _voice_filename: str = None
     _voice_file_path: str = None
-    _forecast_file_name: str = None
+    _forecast_filename: str = None
     _forecast_path: str = None
 
     def set_dir_attrs(self):
@@ -144,15 +144,15 @@ class HubUnit:
         self._voice_dir = f_path(self._owner_dir, "voice")
         self._forecast_dir = f_path(self._owner_dir, "forecast")
         self._timeline_dir = f_path(self._owner_dir, "timeline")
-        self._voice_file_name = get_json_filename(self.owner_name)
-        self._voice_file_path = f_path(self._voice_dir, self._voice_file_name)
-        self._forecast_file_name = get_json_filename(self.owner_name)
-        self._forecast_path = f_path(self._forecast_dir, self._forecast_file_name)
+        self._voice_filename = get_json_filename(self.owner_name)
+        self._voice_file_path = f_path(self._voice_dir, self._voice_filename)
+        self._forecast_filename = get_json_filename(self.owner_name)
+        self._forecast_path = f_path(self._forecast_dir, self._forecast_filename)
 
     def save_file_voice(self, file_str: str, replace: bool):
         save_file(
             dest_dir=self._voice_dir,
-            file_name=self._voice_file_name,
+            filename=self._voice_filename,
             file_str=file_str,
             replace=replace,
         )
@@ -160,7 +160,7 @@ class HubUnit:
     def save_file_forecast(self, file_str: str, replace: bool):
         save_file(
             dest_dir=self._forecast_dir,
-            file_name=self._forecast_file_name,
+            filename=self._forecast_filename,
             file_str=file_str,
             replace=replace,
         )
@@ -172,7 +172,7 @@ class HubUnit:
         return os_path_exists(self._forecast_path)
 
     def open_file_voice(self) -> str:
-        return open_file(self._voice_dir, self._voice_file_name)
+        return open_file(self._voice_dir, self._voice_filename)
 
     def save_voice_bud(self, x_bud: BudUnit):
         if x_bud.owner_name != self.owner_name:
@@ -203,7 +203,7 @@ class HubUnit:
         delete_dir(self._voice_file_path)
 
     def open_file_forecast(self) -> str:
-        return open_file(self._forecast_dir, self._forecast_file_name)
+        return open_file(self._forecast_dir, self._forecast_filename)
 
     # Gift methods
     def get_max_atom_file_number(self) -> int:
@@ -213,16 +213,16 @@ class HubUnit:
         max_file_number = self.get_max_atom_file_number()
         return 0 if max_file_number is None else max_file_number + 1
 
-    def atom_file_name(self, atom_number: int) -> str:
+    def atom_filename(self, atom_number: int) -> str:
         return f"{atom_number}.json"
 
     def atom_file_path(self, atom_number: int) -> str:
-        return f_path(self._atoms_dir, self.atom_file_name(atom_number))
+        return f_path(self._atoms_dir, self.atom_filename(atom_number))
 
     def _save_valid_atom_file(self, x_atom: AtomUnit, file_number: int):
         save_file(
             self._atoms_dir,
-            self.atom_file_name(file_number),
+            self.atom_filename(file_number),
             x_atom.get_json(),
             replace=False,
         )
@@ -258,11 +258,11 @@ class HubUnit:
         init_gift_id = get_init_gift_id_if_None()
         return init_gift_id if max_file_number is None else max_file_number + 1
 
-    def gift_file_name(self, gift_id: int) -> str:
+    def gift_filename(self, gift_id: int) -> str:
         return get_json_filename(gift_id)
 
     def gift_file_path(self, gift_id: int) -> bool:
-        gift_filename = self.gift_file_name(gift_id)
+        gift_filename = self.gift_filename(gift_id)
         return f_path(self._gifts_dir, gift_filename)
 
     def gift_file_exists(self, gift_id: int) -> bool:
@@ -302,7 +302,7 @@ class HubUnit:
             raise SaveGiftFileException(
                 f"GiftUnit file cannot be saved because giftunit.owner_name is incorrect: {x_gift.owner_name}. It must be {self.owner_name}."
             )
-        gift_filename = self.gift_file_name(x_gift._gift_id)
+        gift_filename = self.gift_filename(x_gift._gift_id)
         if not replace and self.gift_file_exists(x_gift._gift_id):
             raise SaveGiftFileException(
                 f"GiftUnit file {gift_filename} exists and cannot be saved over."
@@ -396,17 +396,17 @@ class HubUnit:
     def timepoint_dir(self, x_time_int: TimeLinePoint) -> str:
         return f_path(self._timeline_dir, str(x_time_int))
 
-    def deal_file_name(self) -> str:
+    def deal_filename(self) -> str:
         return "deal.json"
 
     def deal_file_path(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_int), self.deal_file_name())
+        return f_path(self.timepoint_dir(x_time_int), self.deal_filename())
 
     def _save_valid_deal_file(self, x_deal: DealEpisode):
         x_deal.calc_magnitude()
         save_file(
             self.timepoint_dir(x_deal.time_int),
-            self.deal_file_name(),
+            self.deal_filename(),
             x_deal.get_json(),
             replace=True,
         )
@@ -416,7 +416,7 @@ class HubUnit:
 
     def get_deal_file(self, x_time_int: TimeLinePoint) -> DealEpisode:
         if self.deal_file_exists(x_time_int):
-            x_json = open_file(self.timepoint_dir(x_time_int), self.deal_file_name())
+            x_json = open_file(self.timepoint_dir(x_time_int), self.deal_filename())
             return get_dealepisode_from_json(x_json)
 
     def delete_deal_file(self, x_time_int: TimeLinePoint):
@@ -436,11 +436,11 @@ class HubUnit:
         )
         return list(x_dict.keys())
 
-    def budpoint_file_name(self) -> str:
+    def budpoint_filename(self) -> str:
         return "budpoint.json"
 
     def budpoint_file_path(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_int), self.budpoint_file_name())
+        return f_path(self.timepoint_dir(x_time_int), self.budpoint_filename())
 
     def _save_valid_budpoint_file(self, x_time_int: TimeLinePoint, x_budpoint: BudUnit):
         x_budpoint.settle_bud()
@@ -450,7 +450,7 @@ class HubUnit:
             )
         save_file(
             self.timepoint_dir(x_time_int),
-            self.budpoint_file_name(),
+            self.budpoint_filename(),
             x_budpoint.get_json(),
             replace=True,
         )
@@ -461,7 +461,7 @@ class HubUnit:
     def get_budpoint_file(self, x_time_int: TimeLinePoint) -> BudUnit:
         if self.budpoint_file_exists(x_time_int):
             timepoint_dir = self.timepoint_dir(x_time_int)
-            file_content = open_file(timepoint_dir, self.budpoint_file_name())
+            file_content = open_file(timepoint_dir, self.budpoint_filename())
             return budunit_get_from_json(file_content)
 
     def delete_budpoint_file(self, x_time_int: TimeLinePoint):
@@ -495,23 +495,23 @@ class HubUnit:
     def create_keep_dir_if_missing(self):
         set_dir(self.keep_dir())
 
-    def owner_file_name(self, owner_name: OwnerName) -> str:
+    def owner_filename(self, owner_name: OwnerName) -> str:
         return get_json_filename(owner_name)
 
-    def treasury_file_name(self) -> str:
-        return treasury_file_name()
+    def treasury_filename(self) -> str:
+        return treasury_filename()
 
     def treasury_db_path(self) -> str:
-        return f_path(self.keep_dir(), treasury_file_name())
+        return f_path(self.keep_dir(), treasury_filename())
 
     def duty_path(self, owner_name: OwnerName) -> str:
-        return f_path(self.dutys_dir(), self.owner_file_name(owner_name))
+        return f_path(self.dutys_dir(), self.owner_filename(owner_name))
 
     def job_path(self, owner_name: OwnerName) -> str:
-        return f_path(self.jobs_dir(), self.owner_file_name(owner_name))
+        return f_path(self.jobs_dir(), self.owner_filename(owner_name))
 
     def grade_path(self, owner_name: OwnerName) -> str:
-        return f_path(self.grades_dir(), self.owner_file_name(owner_name))
+        return f_path(self.grades_dir(), self.owner_filename(owner_name))
 
     def dutys_dir(self) -> str:
         return get_keep_dutys_dir(self.keep_dir())
@@ -522,19 +522,19 @@ class HubUnit:
     def grades_dir(self) -> str:
         return get_keep_grades_dir(self.keep_dir())
 
-    def get_jobs_dir_file_names_list(self) -> list[str]:
+    def get_jobs_dir_filenames_list(self) -> list[str]:
         try:
             return list(get_dir_file_strs(self.jobs_dir(), True).keys())
         except Exception:
             return []
 
     def save_duty_bud(self, x_bud: BudUnit):
-        x_file_name = self.owner_file_name(x_bud.owner_name)
-        save_file(self.dutys_dir(), x_file_name, x_bud.get_json())
+        x_filename = self.owner_filename(x_bud.owner_name)
+        save_file(self.dutys_dir(), x_filename, x_bud.get_json())
 
     def save_job_bud(self, x_bud: BudUnit):
-        x_file_name = self.owner_file_name(x_bud.owner_name)
-        save_file(self.jobs_dir(), x_file_name, x_bud.get_json())
+        x_filename = self.owner_filename(x_bud.owner_name)
+        save_file(self.jobs_dir(), x_filename, x_bud.get_json())
 
     def save_forecast_bud(self, x_bud: BudUnit):
         if x_bud.owner_name != self.owner_name:
@@ -556,13 +556,13 @@ class HubUnit:
     def get_duty_bud(self, owner_name: OwnerName) -> BudUnit:
         if self.duty_file_exists(owner_name) is False:
             return None
-        file_content = open_file(self.dutys_dir(), self.owner_file_name(owner_name))
+        file_content = open_file(self.dutys_dir(), self.owner_filename(owner_name))
         return budunit_get_from_json(file_content)
 
     def get_job_bud(self, owner_name: OwnerName) -> BudUnit:
         if self.job_file_exists(owner_name) is False:
             return None
-        file_content = open_file(self.jobs_dir(), self.owner_file_name(owner_name))
+        file_content = open_file(self.jobs_dir(), self.owner_filename(owner_name))
         return budunit_get_from_json(file_content)
 
     def get_forecast_bud(self) -> BudUnit:

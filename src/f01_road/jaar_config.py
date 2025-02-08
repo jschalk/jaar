@@ -54,7 +54,7 @@ def get_rootpart_of_keep_dir() -> str:
     return "itemroot"
 
 
-def treasury_file_name() -> str:
+def treasury_filename() -> str:
     return "treasury.db"
 
 

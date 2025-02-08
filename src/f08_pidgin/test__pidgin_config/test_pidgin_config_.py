@@ -11,7 +11,7 @@ from src.f04_gift.atom_config import (
 from src.f08_pidgin.pidgin_config import (
     config_file_dir,
     get_pidgin_dimens,
-    get_pidgin_config_file_name,
+    get_pidgin_config_filename,
     get_pidgin_config_dict,
     get_pidgin_args_dimen_mapping,
     get_quick_pidgens_column_ref,
@@ -62,9 +62,9 @@ def test_str_functions_ReturnsObj():
     assert event_int_str() == "event_int"
 
 
-def test_get_pidgin_config_file_name_ReturnsObj():
+def test_get_pidgin_config_filename_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_pidgin_config_file_name() == "pidgin_config.json"
+    assert get_pidgin_config_filename() == "pidgin_config.json"
 
 
 def test_config_file_dir_ReturnsObj() -> str:

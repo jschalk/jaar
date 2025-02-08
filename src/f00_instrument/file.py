@@ -61,13 +61,13 @@ def copy_dir(src_dir: str, dest_dir: str):
         shutil_copytree(src=src_dir, dst=dest_dir)
 
 
-def save_file(dest_dir: str, file_name: str, file_str: str, replace: bool = True):
+def save_file(dest_dir: str, filename: str, file_str: str, replace: bool = True):
     replace = True if replace is None else replace
     if "." not in os_path_basename(dest_dir):
         set_dir(dest_dir)
     else:
         set_dir(os_path_dirname(dest_dir))
-    file_path = create_path(dest_dir, file_name) if file_name else dest_dir
+    file_path = create_path(dest_dir, filename) if filename else dest_dir
     if (os_path_exists(file_path) and replace) or os_path_exists(file_path) is False:
         with open(file_path, "w") as f:
             f.write(file_str)
@@ -78,9 +78,9 @@ class CouldNotOpenFileException(Exception):
     pass
 
 
-def open_file(dest_dir: str, file_name: str = None):
+def open_file(dest_dir: str, filename: str = None):
     # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
-    file_path = create_path(dest_dir, file_name)
+    file_path = create_path(dest_dir, filename)
     x_str = ""
     try:
         with open(file_path, "r") as f:
@@ -112,11 +112,9 @@ def get_dir_file_strs(
     for obj_name in os_listdir(x_dir):
         obj_path = create_path(x_dir, obj_name)
         if os_path_isfile(obj_path) and include_files:
-            file_name = obj_name
-            dict_key = (
-                os_path_splitext(file_name)[0] if delete_extensions else file_name
-            )
-            dict_x[dict_key] = open_file(x_dir, file_name)
+            filename = obj_name
+            dict_key = os_path_splitext(filename)[0] if delete_extensions else filename
+            dict_x[dict_key] = open_file(x_dir, filename)
 
         if os_path_isdir(obj_path) and include_dirs:
             dict_x[obj_name] = True
@@ -272,11 +270,11 @@ def is_path_existent_or_probably_creatable(path: str) -> bool:
 # # -*- CODE BLOCK END -*-
 
 
-def get_all_dirs_with_file(x_file_name: str, x_dir: pathlib_Path) -> set[str]:
+def get_all_dirs_with_file(x_filename: str, x_dir: pathlib_Path) -> set[str]:
     relative_dirs = set()
     for dirpath, dirnames, filenames in os_walk(x_dir):
         for filename in filenames:
-            if filename == x_file_name:
+            if filename == x_filename:
                 x_dir_path = pathlib_Path(dirpath)
                 relative_path = x_dir_path.relative_to(x_dir)
                 relative_dirs.add(str(relative_path).replace("\\", "/"))

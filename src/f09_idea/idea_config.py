@@ -8,7 +8,7 @@ from src.f09_idea.examples.idea_env import src_idea_dir
 from os import getcwd as os_getcwd
 
 
-def get_idea_config_file_name() -> str:
+def get_idea_config_filename() -> str:
     return "idea_config.json"
 
 
@@ -18,7 +18,7 @@ def config_file_dir() -> str:
 
 
 def get_idea_config_dict() -> dict:
-    return get_dict_from_json(open_file(config_file_dir(), get_idea_config_file_name()))
+    return get_dict_from_json(open_file(config_file_dir(), get_idea_config_filename()))
 
 
 def idea_number_str() -> str:

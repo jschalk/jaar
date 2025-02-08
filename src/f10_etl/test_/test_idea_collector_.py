@@ -18,8 +18,8 @@ def test_get_all_excel_ideasheets_ReturnsObj_Scenario0_SheetNames(
     # ESTABLISH
     env_dir = get_test_etl_dir()
     x_dir = create_path(env_dir, "examples_folder")
-    ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_path(x_dir, ex_file_name)
+    ex_filename = "fizzbuzz.xlsx"
+    ex_file_path = create_path(x_dir, ex_filename)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     br00000_str = "br00000"
@@ -34,9 +34,9 @@ def test_get_all_excel_ideasheets_ReturnsObj_Scenario0_SheetNames(
 
     # THEN
     assert x_sheet_names
-    assert (x_dir, ex_file_name, br00000_str) in x_sheet_names
-    assert (x_dir, ex_file_name, br00001_str) in x_sheet_names
-    assert (x_dir, ex_file_name, br00002_str) in x_sheet_names
+    assert (x_dir, ex_filename, br00000_str) in x_sheet_names
+    assert (x_dir, ex_filename, br00001_str) in x_sheet_names
+    assert (x_dir, ex_filename, br00002_str) in x_sheet_names
     assert len(x_sheet_names) == 3
 
 
@@ -46,8 +46,8 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     # ESTABLISH
     env_dir = get_test_etl_dir()
     x_dir = create_path(env_dir, "examples_folder")
-    ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_path(x_dir, ex_file_name)
+    ex_filename = "fizzbuzz.xlsx"
+    ex_file_path = create_path(x_dir, ex_filename)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     not_br00000_str = "b00000"
@@ -62,9 +62,9 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
 
     # THEN
     assert x_ideasheets
-    assert (x_dir, ex_file_name, not_br00000_str) not in x_ideasheets
-    assert (x_dir, ex_file_name, br00001_str) in x_ideasheets
-    assert (x_dir, ex_file_name, br00002_str) in x_ideasheets
+    assert (x_dir, ex_filename, not_br00000_str) not in x_ideasheets
+    assert (x_dir, ex_filename, br00001_str) in x_ideasheets
+    assert (x_dir, ex_filename, br00002_str) in x_ideasheets
     assert len(x_ideasheets) == 2
 
 
@@ -74,7 +74,7 @@ def test_IdeaFileRef_Exists():
 
     # THEN
     assert x_ideafileref.file_dir is None
-    assert x_ideafileref.file_name is None
+    assert x_ideafileref.filename is None
     assert x_ideafileref.sheet_name is None
     assert x_ideafileref.idea_number is None
 
@@ -111,8 +111,8 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     accord23_str = "accord23"
     hour6am = "6am"
     hour7am = "7am"
-    ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_path(x_dir, ex_file_name)
+    ex_filename = "fizzbuzz.xlsx"
+    ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -133,9 +133,9 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
 
     # THEN
     assert x_ideasheets
-    br3_ideafileref = IdeaFileRef(x_dir, ex_file_name, br00003_str, "br00003")
+    br3_ideafileref = IdeaFileRef(x_dir, ex_filename, br00003_str, "br00003")
     assert x_ideasheets == [br3_ideafileref]
-    # assert (x_dir, ex_file_name, br00003_str) in x_ideasheets
+    # assert (x_dir, ex_filename, br00003_str) in x_ideasheets
     assert len(x_ideasheets) == 1
 
 
@@ -150,8 +150,8 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     accord23_str = "accord23"
     hour6am = "6am"
     hour7am = "7am"
-    ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_path(x_dir, ex_file_name)
+    ex_filename = "fizzbuzz.xlsx"
+    ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -182,8 +182,8 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
 
     # THEN
     assert x_ideasheets
-    ex1_ideafileref = IdeaFileRef(x_dir, ex_file_name, br00003_ex1_str, "br00003")
-    ex2_ideafileref = IdeaFileRef(x_dir, ex_file_name, br00003_ex2_str, "br00003")
+    ex1_ideafileref = IdeaFileRef(x_dir, ex_filename, br00003_ex1_str, "br00003")
+    ex2_ideafileref = IdeaFileRef(x_dir, ex_filename, br00003_ex2_str, "br00003")
 
     assert x_ideasheets == [ex1_ideafileref]
     assert len(x_ideasheets) == 1

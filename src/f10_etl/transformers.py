@@ -166,10 +166,10 @@ class OceanToboatTransformer:
         return grouped_data
 
     def _read_and_tag_dataframe(self, ref):
-        x_file_path = create_path(ref.file_dir, ref.file_name)
+        x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
         df["file_dir"] = ref.file_dir
-        df["file_name"] = ref.file_name
+        df["filename"] = ref.filename
         df["sheet_name"] = ref.sheet_name
         return df
 
@@ -186,7 +186,7 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
         x_idea_path = create_path(x_dir, idea_filename)
         if os_path_exists(x_idea_path):
             x_fileref = IdeaFileRef(
-                file_dir=x_dir, file_name=idea_filename, idea_number=idea_number
+                file_dir=x_dir, filename=idea_filename, idea_number=idea_number
             )
             existing_excel_idea_filepaths.append(x_fileref)
     return existing_excel_idea_filepaths
@@ -203,7 +203,7 @@ class boatStagingToboatAggTransformer:
 
     def transform(self):
         for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(br_ref.file_dir, br_ref.file_name)
+            boat_idea_path = create_path(br_ref.file_dir, br_ref.filename)
             boat_staging_df = pandas_read_excel(boat_idea_path, "boat_staging")
             otx_df = self._groupby_idea_columns(boat_staging_df, br_ref.idea_number)
             upsert_sheet(boat_idea_path, "boat_agg", otx_df)
@@ -234,7 +234,7 @@ class boatAggToboatValidTransformer:
 
     def transform(self):
         for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(br_ref.file_dir, br_ref.file_name)
+            boat_idea_path = create_path(br_ref.file_dir, br_ref.filename)
             boat_agg = pandas_read_excel(boat_idea_path, "boat_agg")
             boat_valid_df = boat_agg[boat_agg["event_int"].isin(self.legitimate_events)]
             upsert_sheet(boat_idea_path, "boat_valid", boat_valid_df)
@@ -264,7 +264,7 @@ class boatAggToboatEventsTransformer:
 
     def transform(self):
         for file_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(self.boat_dir, file_ref.file_name)
+            boat_idea_path = create_path(self.boat_dir, file_ref.filename)
             boat_agg_df = pandas_read_excel(boat_idea_path, "boat_agg")
             events_df = self.get_unique_events(boat_agg_df)
             upsert_sheet(boat_idea_path, "boat_events", events_df)
@@ -291,22 +291,22 @@ class boatEventsToEventsLogTransformer:
     def transform(self):
         sheet_name = "boat_events"
         for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(self.boat_dir, br_ref.file_name)
+            boat_idea_path = create_path(self.boat_dir, br_ref.filename)
             otx_events_df = pandas_read_excel(boat_idea_path, sheet_name)
             events_log_df = self.get_event_log_df(
-                otx_events_df, self.boat_dir, br_ref.file_name
+                otx_events_df, self.boat_dir, br_ref.filename
             )
             self._save_events_log_file(events_log_df)
 
     def get_event_log_df(
-        self, otx_events_df: DataFrame, x_dir: str, x_file_name: str
+        self, otx_events_df: DataFrame, x_dir: str, x_filename: str
     ) -> DataFrame:
         otx_events_df[["file_dir"]] = x_dir
-        otx_events_df[["file_name"]] = x_file_name
+        otx_events_df[["filename"]] = x_filename
         otx_events_df[["sheet_name"]] = "boat_events"
         cols = [
             "file_dir",
-            "file_name",
+            "filename",
             "sheet_name",
             "face_name",
             "event_int",
@@ -417,8 +417,8 @@ class boatAggToStagingTransformer:
         pidgin_columns.insert(0, "src_idea")
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
-            idea_file_name = f"{idea_number}.xlsx"
-            boat_idea_path = create_path(self.boat_dir, idea_file_name)
+            idea_filename = f"{idea_number}.xlsx"
+            boat_idea_path = create_path(self.boat_dir, idea_filename)
             if os_path_exists(boat_idea_path):
                 self.insert_staging_rows(
                     pidgin_df, idea_number, boat_idea_path, pidgin_columns
@@ -561,7 +561,7 @@ def etl_boat_pidgin_agg_to_bow_face_dirs(boat_dir: str, faces_dir: str):
                 input_file=agg_pidgin,
                 output_dir=faces_dir,
                 column_name="face_name",
-                file_name="pidgin",
+                filename="pidgin",
                 sheet_name=agg_sheet_name,
             )
 
@@ -656,13 +656,13 @@ def get_event_pidgin_path(
 
 def etl_boat_ideas_to_bow_face_ideas(boat_dir: str, faces_dir: str):
     for boat_br_ref in get_existing_excel_idea_file_refs(boat_dir):
-        boat_idea_path = create_path(boat_dir, boat_br_ref.file_name)
-        if boat_br_ref.file_name not in _get_pidgen_idea_format_filenames():
+        boat_idea_path = create_path(boat_dir, boat_br_ref.filename)
+        if boat_br_ref.filename not in _get_pidgen_idea_format_filenames():
             split_excel_into_dirs(
                 input_file=boat_idea_path,
                 output_dir=faces_dir,
                 column_name="face_name",
-                file_name=boat_br_ref.idea_number,
+                filename=boat_br_ref.idea_number,
                 sheet_name="boat_valid",
             )
 
@@ -671,12 +671,12 @@ def etl_bow_face_ideas_to_bow_event_otx_ideas(faces_dir: str):
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
         for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
-            face_idea_path = create_path(face_dir, face_br_ref.file_name)
+            face_idea_path = create_path(face_dir, face_br_ref.filename)
             split_excel_into_dirs(
                 input_file=face_idea_path,
                 output_dir=face_dir,
                 column_name="event_int",
-                file_name=face_br_ref.idea_number,
+                filename=face_br_ref.idea_number,
                 sheet_name="boat_valid",
             )
 
@@ -717,7 +717,7 @@ def etl_bow_event_ideas_to_inx_events(
             event_dir = create_path(face_dir, event_int)
             pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
             for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
-                event_idea_path = create_path(event_dir, event_br_ref.file_name)
+                event_idea_path = create_path(event_dir, event_br_ref.filename)
                 idea_df = pandas_read_excel(event_idea_path, "boat_valid")
                 if pidgin_event_int != None:
                     pidgin_event_dir = create_path(face_dir, pidgin_event_int)
@@ -734,12 +734,12 @@ def etl_bow_inx_event_ideas_to_aft_faces(faces_bow_dir: str, faces_aft_dir: str)
             event_int = int(event_int)
             event_dir = create_path(face_dir, event_int)
             for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
-                event_idea_path = create_path(event_dir, event_br_ref.file_name)
+                event_idea_path = create_path(event_dir, event_br_ref.filename)
                 split_excel_into_dirs(
                     input_file=event_idea_path,
                     output_dir=faces_aft_dir,
                     column_name="face_name",
-                    file_name=event_br_ref.idea_number,
+                    filename=event_br_ref.idea_number,
                     sheet_name="inx",
                 )
 
@@ -748,7 +748,7 @@ def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
     for face_name in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_name)
         for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
-            face_idea_excel_path = create_path(face_dir, face_br_ref.file_name)
+            face_idea_excel_path = create_path(face_dir, face_br_ref.filename)
             idea_csv = get_ordered_csv(pandas_read_excel(face_idea_excel_path, "inx"))
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 

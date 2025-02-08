@@ -30,10 +30,10 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    ex_file_name = "fizzbuzz.xlsx"
+    ex_filename = "fizzbuzz.xlsx"
     ocean_dir = create_path(get_test_etl_dir(), "ocean")
     boat_dir = create_path(get_test_etl_dir(), "boat")
-    ocean_file_path = create_path(ocean_dir, ex_file_name)
+    ocean_file_path = create_path(ocean_dir, ex_filename)
     boat_file_path = create_path(boat_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
@@ -91,10 +91,10 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario1(
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    ex_file_name = "fizzbuzz.xlsx"
+    ex_filename = "fizzbuzz.xlsx"
     ocean_dir = create_path(get_test_etl_dir(), "ocean")
     boat_dir = create_path(get_test_etl_dir(), "boat")
-    ocean_file_path = create_path(ocean_dir, ex_file_name)
+    ocean_file_path = create_path(ocean_dir, ex_filename)
     boat_file_path = create_path(boat_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),

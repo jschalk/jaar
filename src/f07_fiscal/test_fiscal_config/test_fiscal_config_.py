@@ -30,7 +30,7 @@ from src.f04_gift.atom_config import (
 )
 from src.f07_fiscal.fiscal_config import (
     config_file_dir,
-    get_fiscal_config_file_name,
+    get_fiscal_config_filename,
     get_fiscal_config_dict,
     get_fiscal_args_dimen_mapping,
     present_time_str,
@@ -56,9 +56,9 @@ from src.f07_fiscal.fiscal_config import (
 from os import getcwd as os_getcwd
 
 
-def test_get_fiscal_config_file_name_ReturnsObj():
+def test_get_fiscal_config_filename_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_fiscal_config_file_name() == "fiscal_config.json"
+    assert get_fiscal_config_filename() == "fiscal_config.json"
 
 
 def test_config_file_dir_ReturnsObj() -> str:

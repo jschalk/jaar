@@ -93,9 +93,9 @@ def test_HubUnit_Exists():
     assert not x_hubunit._forecast_dir
     assert not x_hubunit._timeline_dir
     assert not x_hubunit._gifts_dir
-    assert not x_hubunit._voice_file_name
+    assert not x_hubunit._voice_filename
     assert not x_hubunit._voice_file_path
-    assert not x_hubunit._forecast_file_name
+    assert not x_hubunit._forecast_filename
     assert not x_hubunit._forecast_path
 
 
@@ -164,16 +164,16 @@ def test_hubunit_shop_ReturnsObj():
     print(f"{func_timeline_dir=}")
     assert x_hubunit._timeline_dir == func_timeline_dir
     assert x_hubunit._gifts_dir == create_path(x_hubunit._owner_dir, get_gifts_folder())
-    assert x_hubunit._voice_file_name == f"{sue_str}.json"
-    x_voice_file_path = create_path(x_hubunit._voice_dir, x_hubunit._voice_file_name)
+    assert x_hubunit._voice_filename == f"{sue_str}.json"
+    x_voice_file_path = create_path(x_hubunit._voice_dir, x_hubunit._voice_filename)
     assert x_hubunit._voice_file_path == x_voice_file_path
     func_voice_file_path = create_voice_path(
         x_hubunit.fiscals_dir, x_hubunit.fiscal_title, sue_str
     )
     assert x_hubunit._voice_file_path == func_voice_file_path
     print(f"{x_hubunit._voice_file_path=}")
-    assert x_hubunit._forecast_file_name == f"{sue_str}.json"
-    x_forecastpath = create_path(x_hubunit._forecast_dir, x_hubunit._forecast_file_name)
+    assert x_hubunit._forecast_filename == f"{sue_str}.json"
+    x_forecastpath = create_path(x_hubunit._forecast_dir, x_hubunit._forecast_filename)
     assert x_hubunit._forecast_path == x_forecastpath
 
 
@@ -225,9 +225,9 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.duty_path(bob_str) == x_duty_path
     assert sue_hubunit.job_path(bob_str) == x_job_path
     assert sue_hubunit.grade_path(bob_str) == x_grade_path
-    treasury_file_name = "treasury.db"
-    x_treasury_file_path = create_path(sue_hubunit.keep_dir(), treasury_file_name)
-    assert sue_hubunit.treasury_file_name() == treasury_file_name
+    treasury_filename = "treasury.db"
+    x_treasury_file_path = create_path(sue_hubunit.keep_dir(), treasury_filename)
+    assert sue_hubunit.treasury_filename() == treasury_filename
     assert sue_hubunit.treasury_db_path() == x_treasury_file_path
 
 

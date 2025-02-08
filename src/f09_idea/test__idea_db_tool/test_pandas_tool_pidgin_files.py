@@ -194,43 +194,43 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
 
 def test_get_pidgen_idea_format_filenames_ReturnsObj():
     # ESTABLISH
-    br00003_file_name = "br00003.xlsx"
-    br00042_file_name = "br00042.xlsx"
-    br00043_file_name = "br00043.xlsx"
-    br00044_file_name = "br00044.xlsx"
+    br00003_filename = "br00003.xlsx"
+    br00042_filename = "br00042.xlsx"
+    br00043_filename = "br00043.xlsx"
+    br00044_filename = "br00044.xlsx"
 
     # WHEN
     x_pidgen_idea_filenames = _get_pidgen_idea_format_filenames()
 
     # THEN
     print(f"{x_pidgen_idea_filenames=}")
-    assert br00003_file_name not in x_pidgen_idea_filenames
-    assert br00042_file_name in x_pidgen_idea_filenames
-    assert br00043_file_name in x_pidgen_idea_filenames
-    assert br00044_file_name in x_pidgen_idea_filenames
+    assert br00003_filename not in x_pidgen_idea_filenames
+    assert br00042_filename in x_pidgen_idea_filenames
+    assert br00043_filename in x_pidgen_idea_filenames
+    assert br00044_filename in x_pidgen_idea_filenames
     assert len(x_pidgen_idea_filenames) == 8
 
 
 def test_get_fiscal_idea_format_filenames_ReturnsObj():
     # ESTABLISH
-    br00000_file_name = "br00000.xlsx"
-    br00001_file_name = "br00001.xlsx"
-    br00002_file_name = "br00002.xlsx"
-    br00003_file_name = "br00003.xlsx"
-    br00004_file_name = "br00004.xlsx"
-    br00005_file_name = "br00005.xlsx"
-    br00042_file_name = "br00042.xlsx"
+    br00000_filename = "br00000.xlsx"
+    br00001_filename = "br00001.xlsx"
+    br00002_filename = "br00002.xlsx"
+    br00003_filename = "br00003.xlsx"
+    br00004_filename = "br00004.xlsx"
+    br00005_filename = "br00005.xlsx"
+    br00042_filename = "br00042.xlsx"
 
     # WHEN
     x_pidgen_idea_filenames = _get_fiscal_idea_format_filenames()
 
     # THEN
     print(f"{x_pidgen_idea_filenames=}")
-    assert br00000_file_name in x_pidgen_idea_filenames
-    assert br00001_file_name in x_pidgen_idea_filenames
-    assert br00002_file_name in x_pidgen_idea_filenames
-    assert br00003_file_name in x_pidgen_idea_filenames
-    assert br00004_file_name in x_pidgen_idea_filenames
-    assert br00005_file_name in x_pidgen_idea_filenames
-    assert br00042_file_name not in x_pidgen_idea_filenames
+    assert br00000_filename in x_pidgen_idea_filenames
+    assert br00001_filename in x_pidgen_idea_filenames
+    assert br00002_filename in x_pidgen_idea_filenames
+    assert br00003_filename in x_pidgen_idea_filenames
+    assert br00004_filename in x_pidgen_idea_filenames
+    assert br00005_filename in x_pidgen_idea_filenames
+    assert br00042_filename not in x_pidgen_idea_filenames
     assert len(x_pidgen_idea_filenames) == 6

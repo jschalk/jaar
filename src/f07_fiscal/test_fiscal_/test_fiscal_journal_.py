@@ -28,8 +28,8 @@ def test_FiscalUnit_get_journal_db_path_ReturnsObj():
 
     # THEN
     x_fiscal_dir = create_path(get_test_fiscals_dir(), accord45_str)
-    journal_file_name = "journal.db"
-    assert x_journal_db_path == create_path(x_fiscal_dir, journal_file_name)
+    journal_filename = "journal.db"
+    assert x_journal_db_path == create_path(x_fiscal_dir, journal_filename)
 
 
 def test_FiscalUnit_create_journal_db_CreatesDBIfDoesNotExist(
@@ -70,17 +70,17 @@ def test_FiscalUnit_create_journal_db_DoesNotOverWriteDBIfExists(
     db_file = "journal.db"
     save_file(accord_fiscal._fiscal_dir, db_file, file_str=x_file_str, replace=True)
     assert os_path_exists(accord_fiscal.get_journal_db_path())
-    assert open_file(accord_fiscal._fiscal_dir, file_name=db_file) == x_file_str
+    assert open_file(accord_fiscal._fiscal_dir, filename=db_file) == x_file_str
 
     # WHEN
     accord_fiscal._create_journal_db()
     # THEN
-    assert open_file(accord_fiscal._fiscal_dir, file_name=db_file) == x_file_str
+    assert open_file(accord_fiscal._fiscal_dir, filename=db_file) == x_file_str
 
     # # WHEN
     # accord_fiscal._create_journal_db(overwrite=True)
     # # THEN
-    # assert open_file(accord_fiscal._fiscal_dir, file_name=db_file) != x_file_str
+    # assert open_file(accord_fiscal._fiscal_dir, filename=db_file) != x_file_str
 
 
 def test_FiscalUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
@@ -130,7 +130,7 @@ def test_fiscal_set_fiscal_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
 
     # THEN
     # grab config.json
-    config_str = open_file(dest_dir="src/f07_fiscal", file_name="journal_db_check.json")
+    config_str = open_file(dest_dir="src/f07_fiscal", filename="journal_db_check.json")
     config_dict = get_dict_from_json(config_str)
     tables_dict = get_from_nested_dict(config_dict, ["tables"])
     print(f"{tables_dict=}")

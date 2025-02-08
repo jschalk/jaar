@@ -12,7 +12,7 @@ def get_all_excel_ideasheets(dir: str) -> set[tuple[str, str, str]]:
 @dataclass
 class IdeaFileRef:
     file_dir: str = None
-    file_name: str = None
+    filename: str = None
     sheet_name: str = None
     idea_number: str = None
 

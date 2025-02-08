@@ -267,9 +267,9 @@ def create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir: str):
         fiscalunits[fiscalunit.fiscal_title] = fiscalunit
     fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
     for fiscalunit in fiscalunits.values():
-        fiscal_file_name = f"{fiscalunit.fiscal_title}.json"
+        fiscal_filename = f"{fiscalunit.fiscal_title}.json"
         fiscalunit_dir = create_path(fiscals_dir, fiscalunit.fiscal_title)
-        save_file(fiscalunit_dir, fiscal_file_name, fiscalunit.get_json())
+        save_file(fiscalunit_dir, fiscal_filename, fiscalunit.get_json())
 
 
 def collect_events_dir_owner_events_sets(fiscal_events_dir: str) -> dict[str, set[int]]:

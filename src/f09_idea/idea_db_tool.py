@@ -167,10 +167,10 @@ def move_otx_csvs_to_pidgin_inx(face_dir: str):
     pidginunit_json = open_file(face_dir, pidgin_filename)
     face_pidginunit = get_pidginunit_from_json(pidginunit_json)
     bow_dir_files = get_dir_file_strs(bow_dir, delete_extensions=False)
-    for x_file_name in bow_dir_files.keys():
-        x_df = open_csv(bow_dir, x_file_name)
+    for x_filename in bow_dir_files.keys():
+        x_df = open_csv(bow_dir, x_filename)
         translate_all_columns_dataframe(x_df, face_pidginunit)
-        save_dataframe_to_csv(x_df, aft_dir, x_file_name)
+        save_dataframe_to_csv(x_df, aft_dir, x_filename)
 
 
 def _get_pidgen_idea_format_filenames() -> set[str]:
@@ -285,7 +285,7 @@ def sheet_exists(file_path: str, sheet_name: str):
 
 
 def split_excel_into_dirs(
-    input_file: str, output_dir: str, column_name: str, file_name: str, sheet_name: str
+    input_file: str, output_dir: str, column_name: str, filename: str, sheet_name: str
 ):
     """
     Splits an Excel file into multiple Excel files, each containing rows
@@ -318,7 +318,7 @@ def split_excel_into_dirs(
             # Create the subdirectory if it doesn't exist
             set_dir(subdirectory)
             # Define the output file path
-            output_file = create_path(subdirectory, f"{file_name}.xlsx")
+            output_file = create_path(subdirectory, f"{filename}.xlsx")
             upsert_sheet(output_file, sheet_name, filtered_df)
 
 
