@@ -804,6 +804,9 @@ class BudDelta:
             x_atomunit.set_jkey("base", delete_factunit_base)
             self.set_atomunit(x_atomunit)
 
+    def is_empty(self) -> bool:
+        return self.atomunits == {}
+
     def get_ordered_atomunits(self, x_count: int = None) -> dict[int, AtomUnit]:
         x_count = get_0_if_None(x_count)
         x_dict = {}

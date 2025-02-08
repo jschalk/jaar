@@ -24,3 +24,12 @@ def create_deal_path(
     timeline_dir = create_timeline_dir(fiscals_dir, fiscal_title, owner_name)
     timepoint_dir = create_path(timeline_dir, timepoint_int)
     return create_path(timepoint_dir, "deal.json")
+
+
+def create_events_owner_dir(
+    fiscals_dir: str, fiscal_title: TitleUnit, owner_name: OwnerName, event_int: int
+):
+    fiscal_dir = create_path(fiscals_dir, fiscal_title)
+    fiscal_events_dir = create_path(fiscal_dir, "events")
+    fiscal_events_owner_dir = create_path(fiscal_events_dir, owner_name)
+    return create_path(fiscal_events_owner_dir, event_int)

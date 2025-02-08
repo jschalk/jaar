@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, open_file
+from src.f00_instrument.file import create_path, open_file, set_dir
 from src.f03_chrono.chrono import timelineunit_shop, timeline_config_shop
 from src.f04_gift.atom_config import (
     face_name_str,
@@ -32,6 +32,8 @@ from src.f10_etl.fiscal_etl_tool import (
     get_fiscalhour_sorted_args,
     get_fiscalmont_sorted_args,
     get_fiscalweek_sorted_args,
+    collect_events_dir_owner_events_sets,
+    get_owners_downhill_event_ints,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -749,3 +751,106 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario7_fiscal_deal_episode(
     print(f"{expected_fiscalunit.deallogs=}")
     print(f"{expected_fiscalunit=}")
     assert accord56_fiscalunit.deallogs == expected_fiscalunit.deallogs
+
+
+def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario0_none(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fiscal_events_dir = get_test_etl_dir()
+    set_dir(fiscal_events_dir)
+    # WHEN
+    owner_events_sets = collect_events_dir_owner_events_sets(fiscal_events_dir)
+    # THEN
+    assert owner_events_sets == {}
+
+
+def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario1_DirsExist(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fiscal_events_dir = get_test_etl_dir()
+    bob_str = "Bob"
+    bob_dir = create_path(fiscal_events_dir, bob_str)
+    event1 = 1
+    event2 = 2
+    bob_event1_dir = create_path(bob_dir, event1)
+    bob_event2_dir = create_path(bob_dir, event2)
+    set_dir(bob_event1_dir)
+    set_dir(bob_event2_dir)
+
+    # WHEN
+    owner_events_sets = collect_events_dir_owner_events_sets(fiscal_events_dir)
+
+    # THEN
+    assert owner_events_sets == {bob_str: {event1, event2}}
+
+
+def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario2_DirsExist(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fiscal_events_dir = get_test_etl_dir()
+    bob_str = "Bob"
+    sue_str = "Sue"
+    bob_dir = create_path(fiscal_events_dir, bob_str)
+    sue_dir = create_path(fiscal_events_dir, sue_str)
+    event1 = 1
+    event2 = 2
+    event7 = 7
+    bob_event1_dir = create_path(bob_dir, event1)
+    bob_event2_dir = create_path(bob_dir, event2)
+    sue_event2_dir = create_path(sue_dir, event2)
+    sue_event7_dir = create_path(sue_dir, event7)
+    set_dir(bob_event1_dir)
+    set_dir(bob_event2_dir)
+    set_dir(sue_event2_dir)
+    set_dir(sue_event7_dir)
+
+    # WHEN
+    owner_events_sets = collect_events_dir_owner_events_sets(fiscal_events_dir)
+
+    # THEN
+    assert owner_events_sets == {bob_str: {event1, event2}, sue_str: {event2, event7}}
+
+
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario0_Empty(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    event2 = 2
+    owner_events_sets = {}
+    downhill_event_int = event2
+    downhill_owners = {bob_str, sue_str}
+
+    # WHEN
+    owners_downhill_event_ints = get_owners_downhill_event_ints(
+        owner_events_sets, downhill_owners, downhill_event_int
+    )
+
+    # THEN
+    assert owners_downhill_event_ints == {}
+
+
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario1_simple(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    event1 = 1
+    event2 = 2
+    event7 = 7
+    owner_events_sets = {bob_str: {event1, event2}, sue_str: {event2, event7}}
+    downhill_event_int = event2
+    downhill_owners = {bob_str, sue_str}
+
+    # WHEN
+    owners_downhill_event_ints = get_owners_downhill_event_ints(
+        owner_events_sets, downhill_owners, downhill_event_int
+    )
+
+    # THEN
+    assert owners_downhill_event_ints == {bob_str: event2, sue_str: event2}

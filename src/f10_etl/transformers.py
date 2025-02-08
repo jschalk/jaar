@@ -55,8 +55,8 @@ from src.f10_etl.tran_sqlstrs import (
     CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR,
-    CREATE_FISCAL_OWNER_TIME_AGG_SQLSTR,
-    INSERT_FISCAL_OWNER_TIME_AGG_SQLSTR,
+    CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR,
+    INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
@@ -850,8 +850,8 @@ def fiscal_agg_tables2fiscal_event_time_agg(conn_or_cursor: sqlite3_Connection):
 
 
 def fiscal_agg_tables2fiscal_owner_time_agg(conn_or_cursor: sqlite3_Connection):
-    conn_or_cursor.execute(CREATE_FISCAL_OWNER_TIME_AGG_SQLSTR)
-    conn_or_cursor.execute(INSERT_FISCAL_OWNER_TIME_AGG_SQLSTR)
+    conn_or_cursor.execute(CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR)
+    conn_or_cursor.execute(INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR)
 
 
 def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
@@ -905,10 +905,12 @@ def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
 
 
 def etl_event_bud_csvs_to_gift_json(fiscal_mstr_dir: str):
-    for fiscal_title in get_level1_dirs(fiscal_mstr_dir):
-        fiscal_path = create_path(fiscal_mstr_dir, fiscal_title)
-        for owner_name in get_level1_dirs(fiscal_path):
-            owner_path = create_path(fiscal_path, owner_name)
+    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    for fiscal_title in get_level1_dirs(fiscals_dir):
+        fiscal_path = create_path(fiscals_dir, fiscal_title)
+        events_path = create_path(fiscal_path, "events")
+        for owner_name in get_level1_dirs(events_path):
+            owner_path = create_path(events_path, owner_name)
             for event_int in get_level1_dirs(owner_path):
                 event_path = create_path(owner_path, event_int)
                 event_gift = giftunit_shop(
@@ -918,7 +920,7 @@ def etl_event_bud_csvs_to_gift_json(fiscal_mstr_dir: str):
                     event_int=event_int,
                 )
                 add_atomunits_from_csv(event_gift, event_path)
-                save_file(event_path, "gift.json", event_gift.get_json())
+                save_file(event_path, "all_gift.json", event_gift.get_json())
 
 
 def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
@@ -960,10 +962,12 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
 
 
 def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
-    for fiscal_title in get_level1_dirs(fiscal_mstr_dir):
-        fiscal_path = create_path(fiscal_mstr_dir, fiscal_title)
-        for owner_name in get_level1_dirs(fiscal_path):
-            owner_path = create_path(fiscal_path, owner_name)
+    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    for fiscal_title in get_level1_dirs(fiscals_dir):
+        fiscal_path = create_path(fiscals_dir, fiscal_title)
+        events_path = create_path(fiscal_path, "events")
+        for owner_name in get_level1_dirs(events_path):
+            owner_path = create_path(events_path, owner_name)
             prev_event_int = None
             for event_int in get_level1_dirs(owner_path):
                 prev_bud = get_prev_event_int_budunit(
@@ -978,6 +982,7 @@ def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
                 expressed_gift = copy_deepcopy(event_gift)
                 expressed_gift.set_buddelta(sift_delta)
                 save_file(event_path, "expressed_gift.json", expressed_gift.get_json())
+                print(f"{event_path=}")
                 prev_event_int = event_int
 
 

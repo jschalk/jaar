@@ -654,3 +654,22 @@ def test_BudDelta_atomunit_exists_ReturnsObj():
 
     # THEN
     assert x_buddelta.atomunit_exists(zia_atomunit)
+
+
+def test_BudDelta_is_empty_ReturnsObj():
+    # ESTABLISH
+    x_buddelta = buddelta_shop()
+
+    # WHEN / THEN
+    dimen = bud_acctunit_str()
+    zia_str = "Zia"
+    zia_atomunit = atomunit_shop(dimen, atom_insert())
+    zia_atomunit.set_arg(acct_name_str(), zia_str)
+    zia_atomunit.set_arg(credit_belief_str(), 70)
+    assert x_buddelta.is_empty()
+
+    # WHEN
+    x_buddelta.set_atomunit(zia_atomunit)
+
+    # THEN
+    assert x_buddelta.is_empty() is False

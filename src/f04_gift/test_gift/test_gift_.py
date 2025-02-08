@@ -555,3 +555,39 @@ def test_GiftUnit_get_edited_bud_RaisesErrorWhenGiftAttrsAndBudAttrsAreNotTheSam
     with pytest_raises(Exception) as excinfo:
         bob_giftunit.get_edited_bud(before_sue_budunit)
     assert str(excinfo.value) == "gift bud conflict accord23 != accord45 or Yao != Sue"
+
+
+def test_GiftUnit_is_empty_ReturnsObj():
+    # ESTABLISH
+    bob_str = "Bob"
+    bob_giftunit = giftunit_shop(bob_str)
+    bob_credit_belief = 55
+    bob_debtit_belief = 66
+    bob_acctunit = acctunit_shop(bob_str, bob_credit_belief, bob_debtit_belief)
+    cw_str = credit_belief_str()
+    dw_str = debtit_belief_str()
+    print(f"{bob_acctunit.get_dict()=}")
+    bob_required_dict = {acct_name_str(): bob_acctunit.get_dict().get(acct_name_str())}
+    bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_acctunit.get_dict().get(dw_str)
+    print(f"{bob_required_dict=}")
+    assert bob_giftunit._buddelta.atomunits == {}
+    assert bob_giftunit.is_empty()
+
+    # WHEN
+    bob_giftunit.add_atomunit(
+        dimen=bud_acctunit_str(),
+        crud_str=atom_insert(),
+        jkeys=bob_required_dict,
+        jvalues=bob_optional_dict,
+    )
+
+    # THEN
+    assert len(bob_giftunit._buddelta.atomunits) == 1
+    assert bob_giftunit.is_empty() is False
+
+    # WHEN
+    bob_giftunit._buddelta.atomunits = {}
+
+    # THEN
+    assert bob_giftunit.is_empty()

@@ -51,8 +51,8 @@ from src.f10_etl.tran_sqlstrs import (
     CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR,
-    CREATE_FISCAL_OWNER_TIME_AGG_SQLSTR,
-    INSERT_FISCAL_OWNER_TIME_AGG_SQLSTR,
+    CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR,
+    INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -902,7 +902,7 @@ WHERE EventTimeOrdered.event_int = fiscal_event_time_agg.event_int
     assert UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
 
 
-def test_CREATE_FISCAL_OWNER_TIME_AGG_SQLSTR_Exists():
+def test_CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = """
 CREATE TABLE IF NOT EXISTS fiscal_owner_time_agg (
@@ -915,19 +915,15 @@ CREATE TABLE IF NOT EXISTS fiscal_owner_time_agg (
 ;
 """
     # WHEN / THEN
-    assert CREATE_FISCAL_OWNER_TIME_AGG_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR == expected_create_table_sqlstr
 
 
-def test_INSERT_FISCAL_OWNER_TIME_AGG_SQLSTR_Exists():
+def test_INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = """
 INSERT INTO fiscal_owner_time_agg (fiscal_title, owner_name, event_int, time_int)
 SELECT fiscal_title, owner_name, event_int, time_int
 FROM (
-    SELECT fiscal_title, owner_name, event_int, time_int
-    FROM fiscal_cashbook_staging
-    GROUP BY fiscal_title, owner_name, event_int, time_int
-    UNION 
     SELECT fiscal_title, owner_name, event_int, time_int
     FROM fiscal_deal_episode_staging
     GROUP BY fiscal_title, owner_name, event_int, time_int
@@ -936,4 +932,4 @@ ORDER BY fiscal_title, owner_name, event_int, time_int
 ;
 """
     # WHEN / THEN
-    assert INSERT_FISCAL_OWNER_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR == expected_INSERT_sqlstr

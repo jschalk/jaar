@@ -144,6 +144,9 @@ class GiftUnit:
             )
         return self._buddelta.get_edited_bud(before_bud)
 
+    def is_empty(self) -> bool:
+        return self._buddelta.is_empty()
+
 
 def giftunit_shop(
     owner_name: OwnerName,
