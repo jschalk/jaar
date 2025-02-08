@@ -13,6 +13,7 @@ from src.f05_listen.hub_tool import (
     create_deal_path,
     create_budpoint_dir_path,
     create_events_owner_dir_path,
+    create_voice_path,
 )
 from src.f05_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.f05_listen.examples.listen_env import (
@@ -124,3 +125,23 @@ def test_create_events_owner_dir_path_ReturnObj() -> str:
     # bud_filename = "bud.json"
     # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
     assert gen_a23_e3_bud_path == a23_bob_e3_dir
+
+
+def test_create_voice_path_ReturnObj() -> str:
+    # ESTABLISH
+    x_fiscals_dir = env_dir()
+    a23_str = "accord23"
+    bob_str = "Bob"
+
+    # WHEN
+    gen_a23_e3_bud_path = create_voice_path(x_fiscals_dir, a23_str, bob_str)
+
+    # THEN
+    a23_dir = create_path(x_fiscals_dir, a23_str)
+    a23_owners_dir = create_path(a23_dir, "owners")
+    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_bob_voice_dir = create_path(a23_bob_dir, "voice")
+    expected_a23_bob_voice_json_path = create_path(a23_bob_voice_dir, f"{bob_str}.json")
+    # bud_filename = "bud.json"
+    # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
+    assert gen_a23_e3_bud_path == expected_a23_bob_voice_json_path

@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, save_file
+from src.f00_instrument.file import create_path, save_file, set_dir
 from src.f00_instrument.dict_toolbox import (
     get_sorted_list_of_dict_keys as get_sorted_list,
 )
@@ -274,6 +274,7 @@ def create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir: str):
 
 def collect_events_dir_owner_events_sets(fiscal_events_dir: str) -> dict[str, set[int]]:
     directory_structure = {}
+    set_dir(fiscal_events_dir)
     for owner_name in os_listdir(fiscal_events_dir):
         owner_dir = os_path_join(fiscal_events_dir, owner_name)
         if os_path_isdir(owner_dir):
@@ -288,14 +289,26 @@ def collect_events_dir_owner_events_sets(fiscal_events_dir: str) -> dict[str, se
 
 def get_owners_downhill_event_ints(
     owner_events_sets: dict[str, set[int]],
-    downhill_owners: set[str],
-    ref_event_int: int,
+    downhill_owners: set[str] = None,
+    ref_event_int: int = None,
 ) -> dict[str, int]:
     x_dict = {}
-    for downhill_owner in downhill_owners:
-        if event_set := owner_events_sets.get(downhill_owner):
-            if downhill_event_ints := {
-                event_int for event_int in event_set if event_int <= ref_event_int
-            }:
-                x_dict[downhill_owner] = max(downhill_event_ints)
+    if downhill_owners:
+        for owner_name in downhill_owners:
+            if event_set := owner_events_sets.get(owner_name):
+                _add_downhill_event_int(x_dict, event_set, ref_event_int, owner_name)
+    else:
+        for owner_name, event_set in owner_events_sets.items():
+            _add_downhill_event_int(x_dict, event_set, ref_event_int, owner_name)
     return x_dict
+
+
+def _add_downhill_event_int(
+    x_dict: dict[str, int], event_set: set[int], ref_event_int: int, downhill_owner: str
+):
+    if event_set:
+        if ref_event_int:
+            if downhill_event_ints := {ei for ei in event_set if ei <= ref_event_int}:
+                x_dict[downhill_owner] = max(downhill_event_ints)
+        else:
+            x_dict[downhill_owner] = max(event_set)

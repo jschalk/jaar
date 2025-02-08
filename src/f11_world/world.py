@@ -44,6 +44,7 @@ from src.f10_etl.transformers import (
     etl_bud_tables_to_event_bud_csvs,
     etl_event_bud_csvs_to_gift_json,
     etl_event_gift_json_to_event_inherited_budunits,
+    etl_event_inherited_budunits_to_fiscal_voice,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -197,6 +198,9 @@ class WorldUnit:
 
     def event_gift_json_to_event_inherited_budunits(self):
         etl_event_gift_json_to_event_inherited_budunits(self._fiscal_mstr_dir)
+
+    def event_inherited_budunits_to_fiscal_voice(self):
+        etl_event_inherited_budunits_to_fiscal_voice(self._fiscal_mstr_dir)
 
     def get_dict(self) -> dict:
         return {

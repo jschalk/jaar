@@ -18,7 +18,7 @@ from src.f01_road.jaar_config import (
     get_fiscal_title_if_None,
 )
 from src.f02_bud.bud import budunit_shop
-from src.f05_listen.hub_tool import create_timeline_dir_path
+from src.f05_listen.hub_tool import create_timeline_dir_path, create_voice_path
 from src.f05_listen.hubunit import HubUnit, hubunit_shop, get_keep_path
 from src.f05_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.f05_listen.examples.listen_env import (
@@ -167,6 +167,11 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit._voice_file_name == f"{sue_str}.json"
     x_voice_file_path = create_path(x_hubunit._voice_dir, x_hubunit._voice_file_name)
     assert x_hubunit._voice_file_path == x_voice_file_path
+    func_voice_file_path = create_voice_path(
+        x_hubunit.fiscals_dir, x_hubunit.fiscal_title, sue_str
+    )
+    assert x_hubunit._voice_file_path == func_voice_file_path
+    print(f"{x_hubunit._voice_file_path=}")
     assert x_hubunit._forecast_file_name == f"{sue_str}.json"
     x_forecastpath = create_path(x_hubunit._forecast_dir, x_hubunit._forecast_file_name)
     assert x_hubunit._forecast_path == x_forecastpath

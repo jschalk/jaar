@@ -758,7 +758,6 @@ def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario0_none(
 ):
     # ESTABLISH
     fiscal_events_dir = get_test_etl_dir()
-    set_dir(fiscal_events_dir)
     # WHEN
     owner_events_sets = collect_events_dir_owner_events_sets(fiscal_events_dir)
     # THEN
@@ -814,9 +813,7 @@ def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario2_DirsExist(
     assert owner_events_sets == {bob_str: {event1, event2}, sue_str: {event2, event7}}
 
 
-def test_get_owners_downhill_event_ints_ReturnsObj_Scenario0_Empty(
-    env_dir_setup_cleanup,
-):
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario0_Empty():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -834,9 +831,7 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario0_Empty(
     assert owners_downhill_event_ints == {}
 
 
-def test_get_owners_downhill_event_ints_ReturnsObj_Scenario1_simple(
-    env_dir_setup_cleanup,
-):
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario1_simple():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -850,6 +845,79 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario1_simple(
     # WHEN
     owners_downhill_event_ints = get_owners_downhill_event_ints(
         owner_events_sets, downhill_owners, downhill_event_int
+    )
+
+    # THEN
+    assert owners_downhill_event_ints == {bob_str: event2, sue_str: event2}
+
+
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario2Empty_downhill_event_int():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    event1 = 1
+    event2 = 2
+    event7 = 7
+    owner_events_sets = {
+        bob_str: {event1, event2},
+        sue_str: {event2, event7},
+        yao_str: {event1, event2, event7},
+    }
+    downhill_owners = {bob_str, sue_str}
+
+    # WHEN
+    owners_downhill_event_ints = get_owners_downhill_event_ints(
+        owner_events_sets, downhill_owners
+    )
+
+    # THEN
+    assert owners_downhill_event_ints == {bob_str: event2, sue_str: event7}
+
+
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario3Empty_downhill_owners():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    event1 = 1
+    event2 = 2
+    event7 = 7
+    owner_events_sets = {
+        bob_str: {event1, event2},
+        sue_str: {event2, event7},
+        yao_str: {event1, event2, event7},
+    }
+
+    # WHEN
+    owners_downhill_event_ints = get_owners_downhill_event_ints(owner_events_sets)
+
+    # THEN
+    assert owners_downhill_event_ints == {
+        bob_str: event2,
+        sue_str: event7,
+        yao_str: event7,
+    }
+
+
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_owners_Withdownhill_event_int():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    event1 = 1
+    event2 = 2
+    event7 = 7
+    owner_events_sets = {
+        bob_str: {event1, event2},
+        sue_str: {event2, event7},
+        yao_str: {event7},
+    }
+    downhill_event_int = 2
+
+    # WHEN
+    owners_downhill_event_ints = get_owners_downhill_event_ints(
+        owner_events_sets, ref_event_int=downhill_event_int
     )
 
     # THEN

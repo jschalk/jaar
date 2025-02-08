@@ -16,6 +16,7 @@ from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
 from src.f04_gift.delta import get_minimal_buddelta
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
+from src.f05_listen.hub_tool import create_voice_path
 from src.f07_fiscal.fiscal_config import get_fiscal_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -59,7 +60,11 @@ from src.f10_etl.tran_sqlstrs import (
     INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
-from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
+from src.f10_etl.fiscal_etl_tool import (
+    create_fiscalunit_jsons_from_prime_files,
+    collect_events_dir_owner_events_sets,
+    get_owners_downhill_event_ints,
+)
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
@@ -994,3 +999,19 @@ def get_prev_event_int_budunit(
     prev_event_int_path = create_path(owner_path, prev_event_int)
     prev_bud_path = create_path(prev_event_int_path, "bud.json")
     return budunit_get_from_json(open_file(prev_bud_path))
+
+
+def etl_event_inherited_budunits_to_fiscal_voice(fiscal_mstr_dir: str):
+    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    for fiscal_title in get_level1_dirs(fiscals_dir):
+        fiscal_path = create_path(fiscals_dir, fiscal_title)
+        fiscal_events_dir = create_path(fiscal_path, "events")
+        owner_events = collect_events_dir_owner_events_sets(fiscal_events_dir)
+        owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
+        for owner_name, max_event_int in owners_max_event_int_dict.items():
+            owner_dir = create_path(fiscal_events_dir, owner_name)
+            max_event_int_dir = create_path(owner_dir, max_event_int)
+            max_event_bud_path = create_path(max_event_int_dir, "bud.json")
+            max_event_bud_json = open_file(max_event_bud_path)
+            voice_path = create_voice_path(fiscals_dir, fiscal_title, owner_name)
+            save_file(voice_path, None, max_event_bud_json)

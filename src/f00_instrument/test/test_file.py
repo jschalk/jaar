@@ -174,6 +174,24 @@ def test_save_file_DoesNotReplaceFile(env_dir_setup_cleanup):
     assert open_file(env_dir, swim_file_name) == swim_old_file_str
 
 
+def test_save_file_DoesNotRequireSeperateFilename(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    swim_str = "swim"
+    swim_file_ext = "txt"
+    swim_file_name = f"{swim_str}.{swim_file_ext}"
+    swim_file_str = "swimming is good"
+    print(f"{env_dir=} {swim_file_name=}")
+    swim_file_path = create_path(env_dir, swim_file_name)
+    assert os_path_exist(swim_file_path) is False
+
+    # WHEN
+    save_file(swim_file_path, file_name=None, file_str=swim_file_str)
+
+    # THEN
+    assert os_path_exist(swim_file_path)
+
+
 def test_get_dir_file_strs_correctlyGrabsFileData(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_instrument_temp_env_dir()
