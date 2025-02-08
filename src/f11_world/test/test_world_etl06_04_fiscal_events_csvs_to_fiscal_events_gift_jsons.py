@@ -11,7 +11,7 @@ from src.f04_gift.atom_config import (
     atom_delete,
 )
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json
-from src.f05_listen.hub_tool import create_events_owner_dir
+from src.f05_listen.hub_tool import create_events_owner_dir_path
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
@@ -38,8 +38,8 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles(
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
-    a23_bob_e3_dir = create_events_owner_dir(fiscals_dir, a23_str, bob_inx, event3)
-    a23_bob_e7_dir = create_events_owner_dir(fiscals_dir, a23_str, bob_inx, event7)
+    a23_bob_e3_dir = create_events_owner_dir_path(fiscals_dir, a23_str, bob_inx, event3)
+    a23_bob_e7_dir = create_events_owner_dir_path(fiscals_dir, a23_str, bob_inx, event7)
     e3_put_csv = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {sue_inx},{event3},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 """
