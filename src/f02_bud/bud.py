@@ -1225,9 +1225,7 @@ class BudUnit:
             self._tree_traverse_count += 1
 
         self._set_itemtree_fund_attrs(self.itemroot)
-        print(f"{self.accts.get('Sue')=}")
         self._set_groupunit_acctunit_funds(keep_exceptions)
-        print(f"{self.accts.get('Sue')=}")
         self._set_acctunit_fund_related_attrs()
         self._set_bud_keep_attrs()
 

@@ -130,7 +130,7 @@ class HubUnit:
     _forecast_dir: str = None
     _timeline_dir: str = None
     _voice_filename: str = None
-    _voice_file_path: str = None
+    _voice_path: str = None
     _forecast_filename: str = None
     _forecast_path: str = None
 
@@ -145,7 +145,7 @@ class HubUnit:
         self._forecast_dir = f_path(self._owner_dir, "forecast")
         self._timeline_dir = f_path(self._owner_dir, "timeline")
         self._voice_filename = get_json_filename(self.owner_name)
-        self._voice_file_path = f_path(self._voice_dir, self._voice_filename)
+        self._voice_path = f_path(self._voice_dir, self._voice_filename)
         self._forecast_filename = get_json_filename(self.owner_name)
         self._forecast_path = f_path(self._forecast_dir, self._forecast_filename)
 
@@ -166,7 +166,7 @@ class HubUnit:
         )
 
     def voice_file_exists(self) -> bool:
-        return os_path_exists(self._voice_file_path)
+        return os_path_exists(self._voice_path)
 
     def forecast_file_exists(self) -> bool:
         return os_path_exists(self._forecast_path)
@@ -200,7 +200,7 @@ class HubUnit:
         return x_budunit
 
     def delete_voice_file(self):
-        delete_dir(self._voice_file_path)
+        delete_dir(self._voice_path)
 
     def open_file_forecast(self) -> str:
         return open_file(self._forecast_dir, self._forecast_filename)

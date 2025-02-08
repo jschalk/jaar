@@ -267,7 +267,7 @@ def create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir: str):
         fiscalunits[fiscalunit.fiscal_title] = fiscalunit
     fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
     for fiscalunit in fiscalunits.values():
-        fiscal_filename = f"{fiscalunit.fiscal_title}.json"
+        fiscal_filename = "fiscal.json"
         fiscalunit_dir = create_path(fiscals_dir, fiscalunit.fiscal_title)
         save_file(fiscalunit_dir, fiscal_filename, fiscalunit.get_json())
 

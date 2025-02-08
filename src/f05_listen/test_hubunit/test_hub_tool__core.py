@@ -8,12 +8,14 @@ from src.f01_road.jaar_config import (
 )
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.hub_tool import (
+    create_fiscal_json_path,
     create_timeline_dir_path,
     create_timepoint_dir_path,
     create_deal_path,
     create_budpoint_dir_path,
     create_events_owner_dir_path,
     create_voice_path,
+    create_forecast_path,
 )
 from src.f05_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.f05_listen.examples.listen_env import (
@@ -22,6 +24,23 @@ from src.f05_listen.examples.listen_env import (
 )
 from pytest import raises as pytest_raises
 from os.path import exists as os_path_exists
+
+
+def test_create_fiscal_json_path_ReturnObj() -> str:
+    # ESTABLISH
+    x_fiscal_mstr_dir = env_dir()
+    a23_str = "accord23"
+
+    # WHEN
+    gen_a23_json_path = create_fiscal_json_path(x_fiscal_mstr_dir, a23_str)
+
+    # THEN
+    fiscals_dir = create_path(x_fiscal_mstr_dir, "fiscals")
+    a23_path = create_path(fiscals_dir, a23_str)
+    expected_a23_json_path = create_path(a23_path, "fiscal.json")
+    # bud_filename = "bud.json"
+    # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
+    assert gen_a23_json_path == expected_a23_json_path
 
 
 def test_create_timeline_dir_path_ReturnObj() -> str:
@@ -145,3 +164,25 @@ def test_create_voice_path_ReturnObj() -> str:
     # bud_filename = "bud.json"
     # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
     assert gen_a23_e3_bud_path == expected_a23_bob_voice_json_path
+
+
+def test_create_forecast_path_ReturnObj() -> str:
+    # ESTABLISH
+    x_fiscals_dir = env_dir()
+    a23_str = "accord23"
+    bob_str = "Bob"
+
+    # WHEN
+    gen_a23_e3_bud_path = create_forecast_path(x_fiscals_dir, a23_str, bob_str)
+
+    # THEN
+    a23_dir = create_path(x_fiscals_dir, a23_str)
+    a23_owners_dir = create_path(a23_dir, "owners")
+    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_bob_forecast_dir = create_path(a23_bob_dir, "forecast")
+    expected_a23_bob_forecast_json_path = create_path(
+        a23_bob_forecast_dir, f"{bob_str}.json"
+    )
+    # bud_filename = "bud.json"
+    # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
+    assert gen_a23_e3_bud_path == expected_a23_bob_forecast_json_path

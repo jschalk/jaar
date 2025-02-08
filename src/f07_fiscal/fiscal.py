@@ -250,7 +250,12 @@ class FiscalUnit:
         return self.get_forecast_file_bud(owner_name)
 
     def generate_all_forecast_buds(self):
+        print(f"  {self.fiscals_dir=}")
+        print(f"  {self._fiscal_dir=}")
+        print(f"  {self._owners_dir=}")
         for x_owner_name in self._get_owner_folder_names():
+            print(f"{x_owner_name=}")
+            self.init_owner_keeps(x_owner_name)
             self.generate_forecast_bud(x_owner_name)
 
     def get_forecast_file_bud(self, owner_name: OwnerName) -> BudUnit:

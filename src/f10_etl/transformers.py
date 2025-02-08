@@ -16,7 +16,8 @@ from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
 from src.f04_gift.delta import get_minimal_buddelta
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
-from src.f05_listen.hub_tool import create_voice_path
+from src.f05_listen.hub_tool import create_voice_path, create_fiscal_json_path
+from src.f07_fiscal.fiscal import get_from_json as fiscalunit_get_from_json
 from src.f07_fiscal.fiscal_config import get_fiscal_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -713,8 +714,8 @@ def etl_bow_event_ideas_to_inx_events(
             face_pidgin_events = set()
         face_dir = create_path(faces_bow_dir, face_name)
         for event_int in get_level1_dirs(face_dir):
-            event_int = int(event_int)
             event_dir = create_path(face_dir, event_int)
+            event_int = int(event_int)
             pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
             for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
                 event_idea_path = create_path(event_dir, event_br_ref.filename)
@@ -901,7 +902,7 @@ def etl_fiscal_agg_tables_to_fiscal_csvs(
         save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, f"{ficsal_dimen}_agg")
 
 
-def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
+def etl_fiscal_csvs_to_fiscal_jsons(fiscal_mstr_dir: str):
     for ficsal_dimen in get_fiscal_dimens():
         x_excel_path = create_path(fiscal_mstr_dir, f"{ficsal_dimen}.xlsx")
         dimen_df = open_csv(fiscal_mstr_dir, f"{ficsal_dimen}_agg.csv")
@@ -987,7 +988,6 @@ def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
                 expressed_gift = copy_deepcopy(event_gift)
                 expressed_gift.set_buddelta(sift_delta)
                 save_file(event_path, "expressed_gift.json", expressed_gift.get_json())
-                print(f"{event_path=}")
                 prev_event_int = event_int
 
 
@@ -1015,3 +1015,13 @@ def etl_event_inherited_budunits_to_fiscal_voice(fiscal_mstr_dir: str):
             max_event_bud_json = open_file(max_event_bud_path)
             voice_path = create_voice_path(fiscals_dir, fiscal_title, owner_name)
             save_file(voice_path, None, max_event_bud_json)
+
+
+def etl_fiscal_voice_to_fiscal_forecast(fiscal_mstr_dir: str):
+    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    for fiscal_title in get_level1_dirs(fiscals_dir):
+        fiscal_json_path = create_fiscal_json_path(fiscal_mstr_dir, fiscal_title)
+        x_fiscalunit = fiscalunit_get_from_json(open_file(fiscal_json_path))
+        x_fiscalunit.fiscals_dir = fiscals_dir
+        x_fiscalunit._set_fiscal_dirs()
+        x_fiscalunit.generate_all_forecast_buds()

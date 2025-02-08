@@ -18,7 +18,11 @@ from src.f01_road.jaar_config import (
     get_fiscal_title_if_None,
 )
 from src.f02_bud.bud import budunit_shop
-from src.f05_listen.hub_tool import create_timeline_dir_path, create_voice_path
+from src.f05_listen.hub_tool import (
+    create_timeline_dir_path,
+    create_voice_path,
+    create_forecast_path,
+)
 from src.f05_listen.hubunit import HubUnit, hubunit_shop, get_keep_path
 from src.f05_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.f05_listen.examples.listen_env import (
@@ -94,7 +98,7 @@ def test_HubUnit_Exists():
     assert not x_hubunit._timeline_dir
     assert not x_hubunit._gifts_dir
     assert not x_hubunit._voice_filename
-    assert not x_hubunit._voice_file_path
+    assert not x_hubunit._voice_path
     assert not x_hubunit._forecast_filename
     assert not x_hubunit._forecast_path
 
@@ -164,17 +168,25 @@ def test_hubunit_shop_ReturnsObj():
     print(f"{func_timeline_dir=}")
     assert x_hubunit._timeline_dir == func_timeline_dir
     assert x_hubunit._gifts_dir == create_path(x_hubunit._owner_dir, get_gifts_folder())
+
+    # voice
     assert x_hubunit._voice_filename == f"{sue_str}.json"
-    x_voice_file_path = create_path(x_hubunit._voice_dir, x_hubunit._voice_filename)
-    assert x_hubunit._voice_file_path == x_voice_file_path
-    func_voice_file_path = create_voice_path(
+    x_voice_path = create_path(x_hubunit._voice_dir, x_hubunit._voice_filename)
+    assert x_hubunit._voice_path == x_voice_path
+    func_voice_path = create_voice_path(
         x_hubunit.fiscals_dir, x_hubunit.fiscal_title, sue_str
     )
-    assert x_hubunit._voice_file_path == func_voice_file_path
-    print(f"{x_hubunit._voice_file_path=}")
+    assert x_hubunit._voice_path == func_voice_path
+    print(f"{x_hubunit._voice_path=}")
+
+    # forecast
     assert x_hubunit._forecast_filename == f"{sue_str}.json"
     x_forecastpath = create_path(x_hubunit._forecast_dir, x_hubunit._forecast_filename)
     assert x_hubunit._forecast_path == x_forecastpath
+    func_forecast_path = create_forecast_path(
+        x_hubunit.fiscals_dir, x_hubunit.fiscal_title, sue_str
+    )
+    assert x_hubunit._forecast_path == func_forecast_path
 
 
 def test_hubunit_shop_ReturnsObjWhenEmpty():
@@ -250,13 +262,13 @@ def test_HubUnit_save_file_voice_CorrectlySavesFile(env_dir_setup_cleanup):
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
-    assert os_path_exists(sue_hubunit._voice_file_path) is False
+    assert os_path_exists(sue_hubunit._voice_path) is False
 
     # WHEN
     sue_hubunit.save_file_voice(file_str="fooboo", replace=True)
 
     # THEN
-    assert os_path_exists(sue_hubunit._voice_file_path)
+    assert os_path_exists(sue_hubunit._voice_path)
 
 
 def test_HubUnit_voice_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
@@ -332,7 +344,7 @@ def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     fiscal_title = root_title()
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title, sue_str, None)
 
-    print(f"{sue_hubunit._voice_file_path=}")
+    print(f"{sue_hubunit._voice_path=}")
     assert sue_hubunit.voice_file_exists() is False
 
     # WHEN
