@@ -7,15 +7,14 @@ from src.f04_gift.atom_config import (
 )
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_db_tool import upsert_sheet
-from src.f11_world.world import worldunit_shop
-from src.f11_world.examples.world_env import env_dir_setup_cleanup
+from src.f10_etl.transformers import etl_inz_face_ideas_to_csv_files
+from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_aft_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
+def test_etl_inz_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    sue_otx = "Sue"
     sue_inx = "Suzy"
     bob_inx = "Bob"
     yao_inx = "Yao"
@@ -34,27 +33,22 @@ def test_WorldUnit_aft_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
     sue2 = [sue_inx, event3, accord23_str, yao_inx, yao_inx]
     sue3 = [sue_inx, event7, accord23_str, yao_inx, yao_inx]
     sue_accord23_df = DataFrame([sue0, sue1, sue2, sue3], columns=br00011_columns)
-    fizz_world = worldunit_shop("fizz")
     inx_str = "inx"
-    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    x_faces_inz_dir = create_path(get_test_etl_dir(), "inz")
+    sue_inz_dir = create_path(x_faces_inz_dir, sue_inx)
     br00011_excel_filename = "br00011.xlsx"
-    br00011_excel_path = create_path(sue_aft_dir, br00011_excel_filename)
+    br00011_excel_path = create_path(sue_inz_dir, br00011_excel_filename)
     upsert_sheet(br00011_excel_path, inx_str, sue_accord23_df)
 
     br00011_csv_filename = "br00011.csv"
-    br00011_csv_path = create_path(sue_aft_dir, br00011_csv_filename)
+    br00011_csv_path = create_path(sue_inz_dir, br00011_csv_filename)
     assert os_path_exists(br00011_csv_path) is False
 
     # WHEN
-    fizz_world.aft_face_ideas_to_csv_files()
+    etl_inz_face_ideas_to_csv_files(x_faces_inz_dir)
 
     # THEN
     assert os_path_exists(br00011_csv_path)
-    expected_csv = """face_name,event_int,fiscal_title,owner_name,acct_name
-Suzy,3,accord23,Bob,Bob
-Suzy,3,accord23,Yao,Bob
-Suzy,3,accord23,Yao,Yao
-Suzy,7,accord23,Yao,Yao
-"""
+    expected_csv = """face_name,event_int,fiscal_title,owner_name,acct_name\nSuzy,3,accord23,Bob,Bob\nSuzy,3,accord23,Yao,Bob\nSuzy,3,accord23,Yao,Yao\nSuzy,7,accord23,Yao,Yao\n"""
     print(f"{expected_csv=}")
     assert open_file(br00011_csv_path) == expected_csv

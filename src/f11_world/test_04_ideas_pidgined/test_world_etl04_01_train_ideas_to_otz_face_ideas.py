@@ -13,7 +13,7 @@ from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_train_ideas_to_bow_face_ideas_CreatesOtxSheets_Scenario0_GroupByWorks(
+def test_WorldUnit_train_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -39,12 +39,12 @@ def test_WorldUnit_train_ideas_to_bow_face_ideas_CreatesOtxSheets_Scenario0_Grou
     br00003_agg_file_path = create_path(fizz_world._train_dir, "br00003.xlsx")
     upsert_sheet(br00003_agg_file_path, train_valid_str(), br00003_train_agg_df)
     assert sheet_exists(br00003_agg_file_path, train_valid_str())
-    sue_dir = create_path(fizz_world._faces_bow_dir, sue_str)
+    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, "br00003.xlsx")
     assert sheet_exists(sue_br00003_filepath, train_valid_str()) is False
 
     # WHEN
-    fizz_world.train_ideas_to_bow_face_ideas()
+    fizz_world.train_ideas_to_otz_face_ideas()
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, train_valid_str())

@@ -8,7 +8,7 @@ from src.f04_gift.atom_config import (
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
 from src.f10_etl.transformers import (
-    etl_bow_inx_event_ideas_to_aft_faces,
+    etl_otz_inx_event_ideas_to_inz_faces,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
@@ -17,7 +17,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_bow_event_ideas_to_train_events_Scenario0():
+def test_etl_otz_event_ideas_to_train_events_Scenario0():
     # ESTABLISH
     sue_otx = "Sue"
     sue_inx = "Suzy"
@@ -37,34 +37,34 @@ def test_etl_bow_event_ideas_to_train_events_Scenario0():
     sue2 = [sue_inx, event3, accord23_str, yao_inx, yao_inx]
     e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
-    bow_dir = create_path(get_test_etl_dir(), "faces_bow")
-    bow_sue_dir = create_path(bow_dir, sue_otx)
-    bow_e3_dir = create_path(bow_sue_dir, event3)
-    bow_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
+    otz_dir = create_path(get_test_etl_dir(), "faces_otz")
+    otz_sue_dir = create_path(otz_dir, sue_otx)
+    otz_e3_dir = create_path(otz_sue_dir, event3)
+    otz_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
     inx_str = "inx"
-    upsert_sheet(bow_e3_br00011_path, inx_str, e3_accord23_df)
-    assert sheet_exists(bow_e3_br00011_path, inx_str)
-    aft_dir = create_path(get_test_etl_dir(), "faces_aft")
-    aft_sue_dir = create_path(aft_dir, sue_inx)
-    aft_br00011_path = create_path(aft_sue_dir, br00011_filename)
-    print(f"{bow_e3_br00011_path=}")
-    print(f"{aft_br00011_path=}")
-    assert sheet_exists(aft_br00011_path, inx_str) is False
+    upsert_sheet(otz_e3_br00011_path, inx_str, e3_accord23_df)
+    assert sheet_exists(otz_e3_br00011_path, inx_str)
+    inz_dir = create_path(get_test_etl_dir(), "faces_inz")
+    inz_sue_dir = create_path(inz_dir, sue_inx)
+    inz_br00011_path = create_path(inz_sue_dir, br00011_filename)
+    print(f"{otz_e3_br00011_path=}")
+    print(f"{inz_br00011_path=}")
+    assert sheet_exists(inz_br00011_path, inx_str) is False
 
     # WHEN
-    etl_bow_inx_event_ideas_to_aft_faces(bow_dir, aft_dir)
+    etl_otz_inx_event_ideas_to_inz_faces(otz_dir, inz_dir)
 
     # THEN
-    assert sheet_exists(aft_br00011_path, inx_str)
-    aft_e3_df = pandas_read_excel(aft_br00011_path, sheet_name=inx_str)
+    assert sheet_exists(inz_br00011_path, inx_str)
+    inz_e3_df = pandas_read_excel(inz_br00011_path, sheet_name=inx_str)
     # sue_i0 = [sue_inx, event3, accord23_str, bob_inx, bob_inx]
     # sue_i1 = [sue_inx, event3, accord23_str, yao_inx, bob_inx]
     # sue_i2 = [sue_inx, event3, accord23_str, yao_inx, yao_inx]
     # example_e3_inx_df = DataFrame([sue_i0, sue_i1, sue_i2], columns=br00011_columns)
-    pandas_assert_frame_equal(aft_e3_df, e3_accord23_df)
+    pandas_assert_frame_equal(inz_e3_df, e3_accord23_df)
 
 
-# def test_etl_bow_event_ideas_to_train_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
+# def test_etl_otz_event_ideas_to_train_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -105,15 +105,15 @@ def test_etl_bow_event_ideas_to_train_events_Scenario0():
 #     e9_accord23_df = DataFrame([zia1, zia2, zia3], columns=br00011_columns)
 #     br00011_filename = "br00011.xlsx"
 #     x_event_pidgins = {sue_otx: {event3}, zia_otx: {event7, event9}}
-#     x_bow_dir = create_path(get_test_etl_dir(), "faces_bow")
-#     sue_bow_dir = create_path(x_bow_dir, sue_otx)
-#     zia_bow_dir = create_path(x_bow_dir, zia_otx)
-#     bow_e3_dir = create_path(sue_bow_dir, event3)
-#     bow_e7_dir = create_path(zia_bow_dir, event7)
-#     bow_e9_dir = create_path(zia_bow_dir, event9)
-#     train_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
-#     train_e7_br00011_path = create_path(bow_e7_dir, br00011_filename)
-#     train_e9_br00011_path = create_path(bow_e9_dir, br00011_filename)
+#     x_otz_dir = create_path(get_test_etl_dir(), "faces_otz")
+#     sue_otz_dir = create_path(x_otz_dir, sue_otx)
+#     zia_otz_dir = create_path(x_otz_dir, zia_otx)
+#     otz_e3_dir = create_path(sue_otz_dir, event3)
+#     otz_e7_dir = create_path(zia_otz_dir, event7)
+#     otz_e9_dir = create_path(zia_otz_dir, event9)
+#     train_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
+#     train_e7_br00011_path = create_path(otz_e7_dir, br00011_filename)
+#     train_e9_br00011_path = create_path(otz_e9_dir, br00011_filename)
 #     print(f"{train_e3_br00011_path=}")
 #     print(f"{train_e7_br00011_path=}")
 #     print(f"{train_e9_br00011_path=}")
@@ -135,15 +135,15 @@ def test_etl_bow_event_ideas_to_train_events_Scenario0():
 #     e9_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob2_inx)
 #     e9_pidginunit.set_otx2inx(type_AcctName_str(), yao_otx, yao2_inx)
 #     e9_pidginunit.set_otx2inx(type_TitleUnit_str(), accord55_inx, accord55_otx)
-#     save_file(bow_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
-#     save_file(bow_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
-#     save_file(bow_e9_dir, pidgin_filename(), e9_pidginunit.get_json())
+#     save_file(otz_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
+#     save_file(otz_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
+#     save_file(otz_e9_dir, pidgin_filename(), e9_pidginunit.get_json())
 #     assert sheet_exists(train_e3_br00011_path, inx_str) is False
 #     assert sheet_exists(train_e7_br00011_path, inx_str) is False
 #     assert sheet_exists(train_e9_br00011_path, inx_str) is False
 
 #     # WHEN
-#     etl_bow_inx_event_ideas_to_aft_faces(x_bow_dir, x_event_pidgins)
+#     etl_otz_inx_event_ideas_to_inz_faces(x_otz_dir, x_event_pidgins)
 
 #     # THEN
 #     assert sheet_exists(train_e3_br00011_path, inx_str)

@@ -18,7 +18,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
+def test_WorldUnit_inz_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -31,7 +31,7 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
     accord45_str = "accord45"
     br00011_str = "br00011"
     fizz_world = worldunit_shop("fizz")
-    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_csv_filename = f"{br00011_str}.csv"
     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
 {sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
@@ -39,18 +39,18 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
 {sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
 {sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
 """
-    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("fizz")
     fis_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
-    fizz_world.aft_face_ideas_to_csv_files()
+    fizz_world.inz_face_ideas_to_csv_files()
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
-        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
         fizz_world.idea_staging_to_fiscal_tables(cursor)
         assert os_path_exists(fis_objs.unit_stage_csv_path) is False
 
         # WHEN
-        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(cursor)
+        fizz_world.inz_faces_ideas_to_fiscal_mstr_csvs(cursor)
 
         # THEN
         print(f"{fis_objs.unit_stage_csv_path=}")
@@ -65,7 +65,7 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateStagingFiles(
         assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
 
 
-def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
+def test_WorldUnit_inz_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
     env_dir_setup_cleanup,
 ):  # sourcery skip: extract-method
 
@@ -79,7 +79,7 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
     accord45_str = "accord45"
     br00011_str = "br00011"
     fizz_world = worldunit_shop("fizz")
-    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_csv_filename = f"{br00011_str}.csv"
     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
 {sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
@@ -87,18 +87,18 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
 {sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
 {sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
 """
-    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("fizz")
-    fizz_world.aft_face_ideas_to_csv_files()
+    fizz_world.inz_face_ideas_to_csv_files()
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
-        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
         fizz_world.idea_staging_to_fiscal_tables(cursor)
         fiz_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
         assert os_path_exists(fiz_objs.unit_agg_csv_path) is False
 
         # WHEN
-        fizz_world.aft_faces_ideas_to_fiscal_mstr_csvs(cursor)
+        fizz_world.inz_faces_ideas_to_fiscal_mstr_csvs(cursor)
 
         # THEN
         # print(f"{fiscalunit_csv_path=}")
@@ -114,18 +114,18 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
         assert generated_fiscalunit_csv == expected_fiscalunit_csv_str
 
 
-# def test_WorldUnit_aft_faces_ideas_to_fiscal_staging_CreatesCorrectTables(
+# def test_WorldUnit_inz_faces_ideas_to_fiscal_staging_CreatesCorrectTables(
 #     env_dir_setup_cleanup,
 # ):
 
 #     # THEN
 #     staging_str = "staging"
-#     br00000_path = create_path(fizz_world._faces_aft_dir, "br00000.xlsx")
-#     br00001_path = create_path(fizz_world._faces_aft_dir, "br00001.xlsx")
-#     br00002_path = create_path(fizz_world._faces_aft_dir, "br00002.xlsx")
-#     br00003_path = create_path(fizz_world._faces_aft_dir, "br00003.xlsx")
-#     br00004_path = create_path(fizz_world._faces_aft_dir, "br00004.xlsx")
-#     br00005_path = create_path(fizz_world._faces_aft_dir, "br00005.xlsx")
+#     br00000_path = create_path(fizz_world._faces_inz_dir, "br00000.xlsx")
+#     br00001_path = create_path(fizz_world._faces_inz_dir, "br00001.xlsx")
+#     br00002_path = create_path(fizz_world._faces_inz_dir, "br00002.xlsx")
+#     br00003_path = create_path(fizz_world._faces_inz_dir, "br00003.xlsx")
+#     br00004_path = create_path(fizz_world._faces_inz_dir, "br00004.xlsx")
+#     br00005_path = create_path(fizz_world._faces_inz_dir, "br00005.xlsx")
 
 #     br00000_df = pandas_read_excel(br00000_path, sheet_name=staging_str)
 #     br00001_df = pandas_read_excel(br00001_path, sheet_name=staging_str)
@@ -436,7 +436,7 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
 #     assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)
 
 
-# def test_WorldUnit_aft_face_ideas_to_aft_event_ideas_CreatesFaceIdeaSheets_Scenario0_MultpleFaceNames(
+# def test_WorldUnit_inz_face_ideas_to_inz_event_ideas_CreatesFaceIdeaSheets_Scenario0_MultpleFaceNames(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -466,8 +466,8 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
 #     example_zia_df = DataFrame([zia0, zia1, zia2], columns=idea_columns)
 #     fizz_world = worldunit_shop("fizz")
 #     br00003_filename = "br00003.xlsx"
-#     sue_dir = create_path(fizz_world._faces_aft_dir, sue_str)
-#     zia_dir = create_path(fizz_world._faces_aft_dir, zia_str)
+#     sue_dir = create_path(fizz_world._faces_inz_dir, sue_str)
+#     zia_dir = create_path(fizz_world._faces_inz_dir, zia_str)
 #     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
 #     zia_br00003_filepath = create_path(zia_dir, br00003_filename)
 #     upsert_sheet(sue_br00003_filepath, "inx", example_sue_df)
@@ -484,7 +484,7 @@ def test_WorldUnit_aft_faces_ideas_to_fiscal_mstr_csvs_CreateAggFiles(
 #     assert sheet_exists(event9_br00003_filepath, "inx") is False
 
 #     # WHEN
-#     fizz_world.aft_face_ideas_to_aft_event_ideas()
+#     fizz_world.inz_face_ideas_to_inz_event_ideas()
 
 #     # THEN
 #     assert sheet_exists(event3_br00003_filepath, "inx")

@@ -22,7 +22,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_road(
+def test_WorldUnit_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -62,9 +62,9 @@ def test_WorldUnit_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_ro
     e9_road_df = DataFrame(e9_road_rows, columns=road_file_columns)
 
     fizz_world = worldunit_shop("fizz")
-    bob_dir = create_path(fizz_world._faces_bow_dir, bob_str)
-    sue_dir = create_path(fizz_world._faces_bow_dir, sue_str)
-    zia_dir = create_path(fizz_world._faces_bow_dir, zia_str)
+    bob_dir = create_path(fizz_world._faces_otz_dir, bob_str)
+    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
+    zia_dir = create_path(fizz_world._faces_otz_dir, zia_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(zia_dir, event9)
@@ -86,7 +86,7 @@ def test_WorldUnit_bow_event_pidgins_to_bow_pidgin_csv_files_Scenario0_3Event_ro
     assert os_path_exists(event9_road_csv_file_path) is False
 
     # WHEN
-    fizz_world.bow_event_pidgins_to_bow_pidgin_csv_files()
+    fizz_world.otz_event_pidgins_to_otz_pidgin_csv_files()
 
     # THEN
     assert os_path_exists(event3_road_csv_file_path)

@@ -557,7 +557,7 @@ class PidginStagingToAggTransformer:
         return x_pidginheartbook
 
 
-def etl_train_pidgin_agg_to_bow_face_dirs(train_dir: str, faces_dir: str):
+def etl_train_pidgin_agg_to_otz_face_dirs(train_dir: str, faces_dir: str):
     agg_pidgin = create_path(train_dir, "pidgin.xlsx")
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
@@ -588,7 +588,7 @@ def get_level1_dirs(x_dir: str) -> list[str]:
         return []
 
 
-def etl_bow_face_pidgins_to_bow_event_pidgins(faces_dir: str):
+def etl_otz_face_pidgins_to_otz_event_pidgins(faces_dir: str):
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
         etl_face_pidgin_to_event_pidgins(face_dir)
@@ -609,7 +609,7 @@ def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
             name_df.to_csv(name_csv_path, index=False)
 
 
-def _get_all_faces_bow_dir_event_dirs(faces_dir) -> list[str]:
+def _get_all_faces_otz_dir_event_dirs(faces_dir) -> list[str]:
     full_event_dirs = []
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
@@ -620,8 +620,8 @@ def _get_all_faces_bow_dir_event_dirs(faces_dir) -> list[str]:
     return full_event_dirs
 
 
-def etl_bow_event_pidgins_to_bow_pidgin_csv_files(faces_dir: str):
-    for event_pidgin_dir in _get_all_faces_bow_dir_event_dirs(faces_dir):
+def etl_otz_event_pidgins_to_otz_pidgin_csv_files(faces_dir: str):
+    for event_pidgin_dir in _get_all_faces_otz_dir_event_dirs(faces_dir):
         event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
 
 
@@ -630,8 +630,8 @@ def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
     save_file(event_dir, "pidgin.json", pidginunit.get_json(), replace=True)
 
 
-def etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(faces_dir: str):
-    for event_pidgin_dir in _get_all_faces_bow_dir_event_dirs(faces_dir):
+def etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(faces_dir: str):
+    for event_pidgin_dir in _get_all_faces_otz_dir_event_dirs(faces_dir):
         etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
 
 
@@ -659,7 +659,7 @@ def get_event_pidgin_path(
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_train_ideas_to_bow_face_ideas(train_dir: str, faces_dir: str):
+def etl_train_ideas_to_otz_face_ideas(train_dir: str, faces_dir: str):
     for train_br_ref in get_existing_excel_idea_file_refs(train_dir):
         train_idea_path = create_path(train_dir, train_br_ref.filename)
         if train_br_ref.filename not in _get_pidgen_idea_format_filenames():
@@ -672,7 +672,7 @@ def etl_train_ideas_to_bow_face_ideas(train_dir: str, faces_dir: str):
             )
 
 
-def etl_bow_face_ideas_to_bow_event_otx_ideas(faces_dir: str):
+def etl_otz_face_ideas_to_otz_event_otx_ideas(faces_dir: str):
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
         for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
@@ -709,14 +709,14 @@ def get_most_recent_event_int(
     return max(recent_event_ints, default=None)
 
 
-def etl_bow_event_ideas_to_inx_events(
-    faces_bow_dir: str, event_pidgins: dict[FaceName, set[EventInt]]
+def etl_otz_event_ideas_to_inx_events(
+    faces_otz_dir: str, event_pidgins: dict[FaceName, set[EventInt]]
 ):
-    for face_name in get_level1_dirs(faces_bow_dir):
+    for face_name in get_level1_dirs(faces_otz_dir):
         face_pidgin_events = event_pidgins.get(face_name)
         if face_pidgin_events is None:
             face_pidgin_events = set()
-        face_dir = create_path(faces_bow_dir, face_name)
+        face_dir = create_path(faces_otz_dir, face_name)
         for event_int in get_level1_dirs(face_dir):
             event_dir = create_path(face_dir, event_int)
             event_int = int(event_int)
@@ -732,9 +732,9 @@ def etl_bow_event_ideas_to_inx_events(
                 upsert_sheet(event_idea_path, "inx", idea_df)
 
 
-def etl_bow_inx_event_ideas_to_aft_faces(faces_bow_dir: str, faces_aft_dir: str):
-    for face_name in get_level1_dirs(faces_bow_dir):
-        face_dir = create_path(faces_bow_dir, face_name)
+def etl_otz_inx_event_ideas_to_inz_faces(faces_otz_dir: str, faces_inz_dir: str):
+    for face_name in get_level1_dirs(faces_otz_dir):
+        face_dir = create_path(faces_otz_dir, face_name)
         for event_int in get_level1_dirs(face_dir):
             event_int = int(event_int)
             event_dir = create_path(face_dir, event_int)
@@ -742,27 +742,27 @@ def etl_bow_inx_event_ideas_to_aft_faces(faces_bow_dir: str, faces_aft_dir: str)
                 event_idea_path = create_path(event_dir, event_br_ref.filename)
                 split_excel_into_dirs(
                     input_file=event_idea_path,
-                    output_dir=faces_aft_dir,
+                    output_dir=faces_inz_dir,
                     column_name="face_name",
                     filename=event_br_ref.idea_number,
                     sheet_name="inx",
                 )
 
 
-def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
-    for face_name in get_level1_dirs(faces_aft_dir):
-        face_dir = create_path(faces_aft_dir, face_name)
+def etl_inz_face_ideas_to_csv_files(faces_inz_dir: str):
+    for face_name in get_level1_dirs(faces_inz_dir):
+        face_dir = create_path(faces_inz_dir, face_name)
         for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
             face_idea_excel_path = create_path(face_dir, face_br_ref.filename)
             idea_csv = get_ordered_csv(pandas_read_excel(face_idea_excel_path, "inx"))
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 
 
-def etl_aft_face_csv_files2idea_staging_tables(
-    conn_or_cursor: sqlite3_Connection, faces_aft_dir: str
+def etl_inz_face_csv_files2idea_staging_tables(
+    conn_or_cursor: sqlite3_Connection, faces_inz_dir: str
 ):
-    for face_name in get_level1_dirs(faces_aft_dir):
-        face_dir = create_path(faces_aft_dir, face_name)
+    for face_name in get_level1_dirs(faces_inz_dir):
+        face_dir = create_path(faces_inz_dir, face_name)
         for idea_number in sorted(get_idea_numbers()):
             csv_filename = f"{idea_number}.csv"
             csv_path = create_path(face_dir, csv_filename)

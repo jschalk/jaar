@@ -23,7 +23,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_train_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapDimens(
+def test_WorldUnit_train_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -102,10 +102,10 @@ def test_WorldUnit_train_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapDimens(
     upsert_sheet(agg_pidgin_path, title_agg_str, e1_title_agg_df)
 
     # WHEN
-    fizz_world.train_pidgin_agg_to_bow_face_dirs()
+    fizz_world.train_pidgin_agg_to_otz_face_dirs()
 
     # THEN
-    sue_dir = create_path(fizz_world._faces_bow_dir, sue_str)
+    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
     assert os_path_exists(sue_dir)
     sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
     assert os_path_exists(sue_pidgin_file_path)

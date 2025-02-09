@@ -15,7 +15,7 @@ from src.f09_idea.idea_db_tool import (
     train_valid_str,
     sheet_exists,
 )
-from src.f10_etl.transformers import etl_train_ideas_to_bow_face_ideas
+from src.f10_etl.transformers import etl_train_ideas_to_otz_face_ideas
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
@@ -23,7 +23,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_train_ideas_to_bow_face_ideas_CreatesFaceIdeaSheets_Scenario0_SingleFaceName(
+def test_etl_train_ideas_to_otz_face_ideas_CreatesFaceIdeaSheets_Scenario0_SingleFaceName(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -46,17 +46,17 @@ def test_etl_train_ideas_to_bow_face_ideas_CreatesFaceIdeaSheets_Scenario0_Singl
     br00003_train_agg_df = DataFrame([row1, row2], columns=idea_columns)
     x_etl_dir = get_test_etl_dir()
     x_train_dir = create_path(x_etl_dir, "train")
-    x_faces_bow_dir = create_path(x_etl_dir, "faces_bow")
+    x_faces_otz_dir = create_path(x_etl_dir, "faces_otz")
     br00003_filename = "br00003.xlsx"
     br00003_agg_file_path = create_path(x_train_dir, br00003_filename)
     upsert_sheet(br00003_agg_file_path, train_valid_str(), br00003_train_agg_df)
     assert sheet_exists(br00003_agg_file_path, train_valid_str())
-    sue_dir = create_path(x_faces_bow_dir, sue_str)
+    sue_dir = create_path(x_faces_otz_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     assert sheet_exists(sue_br00003_filepath, train_valid_str()) is False
 
     # WHEN
-    etl_train_ideas_to_bow_face_ideas(x_train_dir, x_faces_bow_dir)
+    etl_train_ideas_to_otz_face_ideas(x_train_dir, x_faces_otz_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, train_valid_str())
@@ -74,7 +74,7 @@ def test_etl_train_ideas_to_bow_face_ideas_CreatesFaceIdeaSheets_Scenario0_Singl
     assert get_sheet_names(sue_br00003_filepath) == [train_valid_str()]
 
 
-def test_etl_train_ideas_to_bow_face_ideas_CreatesFaceIdeaSheets_Scenario1_MultpleFaceNames(
+def test_etl_train_ideas_to_otz_face_ideas_CreatesFaceIdeaSheets_Scenario1_MultpleFaceNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -100,19 +100,19 @@ def test_etl_train_ideas_to_bow_face_ideas_CreatesFaceIdeaSheets_Scenario1_Multp
     br00003_train_agg_df = DataFrame([sue1, sue2, zia3], columns=idea_columns)
     x_etl_dir = get_test_etl_dir()
     x_train_dir = create_path(x_etl_dir, "train")
-    x_faces_bow_dir = create_path(x_etl_dir, "faces_bow")
+    x_faces_otz_dir = create_path(x_etl_dir, "faces_otz")
     br00003_filename = "br00003.xlsx"
     br00003_agg_file_path = create_path(x_train_dir, br00003_filename)
     upsert_sheet(br00003_agg_file_path, train_valid_str(), br00003_train_agg_df)
-    sue_dir = create_path(x_faces_bow_dir, sue_str)
-    zia_dir = create_path(x_faces_bow_dir, zia_str)
+    sue_dir = create_path(x_faces_otz_dir, sue_str)
+    zia_dir = create_path(x_faces_otz_dir, zia_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     zia_br00003_filepath = create_path(zia_dir, br00003_filename)
     assert sheet_exists(sue_br00003_filepath, train_valid_str()) is False
     assert sheet_exists(zia_br00003_filepath, train_valid_str()) is False
 
     # WHEN
-    etl_train_ideas_to_bow_face_ideas(x_train_dir, x_faces_bow_dir)
+    etl_train_ideas_to_otz_face_ideas(x_train_dir, x_faces_otz_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, train_valid_str())
@@ -133,7 +133,7 @@ def test_etl_train_ideas_to_bow_face_ideas_CreatesFaceIdeaSheets_Scenario1_Multp
     pandas_assert_frame_equal(zia_br3_agg_df, example_zia_df)
 
 
-def test_etl_train_ideas_to_bow_face_ideas_Scenario2_PidginDimenIdeasAreNotLoaded(
+def test_etl_train_ideas_to_otz_face_ideas_Scenario2_PidginDimenIdeasAreNotLoaded(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -170,7 +170,7 @@ def test_etl_train_ideas_to_bow_face_ideas_Scenario2_PidginDimenIdeasAreNotLoade
 
     x_etl_dir = get_test_etl_dir()
     x_train_dir = create_path(x_etl_dir, "train")
-    x_faces_bow_dir = create_path(x_etl_dir, "faces_bow")
+    x_faces_otz_dir = create_path(x_etl_dir, "faces_otz")
     br00003_filename = "br00003.xlsx"
     br00043_filename = "br00043.xlsx"
     br00003_agg_file_path = create_path(x_train_dir, br00003_filename)
@@ -180,14 +180,14 @@ def test_etl_train_ideas_to_bow_face_ideas_Scenario2_PidginDimenIdeasAreNotLoade
     assert sheet_exists(br00003_agg_file_path, train_valid_str())
     assert sheet_exists(br00043_agg_file_path, train_valid_str())
 
-    sue_dir = create_path(x_faces_bow_dir, sue_str)
+    sue_dir = create_path(x_faces_otz_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     sue_br00043_filepath = create_path(sue_dir, br00043_filename)
     assert sheet_exists(sue_br00003_filepath, train_valid_str()) is False
     assert sheet_exists(sue_br00043_filepath, train_valid_str()) is False
 
     # WHEN
-    etl_train_ideas_to_bow_face_ideas(x_train_dir, x_faces_bow_dir)
+    etl_train_ideas_to_otz_face_ideas(x_train_dir, x_faces_otz_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, train_valid_str())

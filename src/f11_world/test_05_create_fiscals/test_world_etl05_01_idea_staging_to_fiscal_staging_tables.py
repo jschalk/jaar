@@ -91,7 +91,7 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_Bud_dimen_idea_PopulatesFiscalS
     event7 = 7
     accord23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
-    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
@@ -100,10 +100,10 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_Bud_dimen_idea_PopulatesFiscalS
 {sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 """
-    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
-        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
         fis_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
         assert not db_table_exists(cursor, fis_objs.unit_stage_tablename)
 

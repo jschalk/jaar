@@ -3,15 +3,15 @@ from src.f04_gift.atom_config import face_name_str, fiscal_title_str
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_db_tool import upsert_sheet, train_valid_str, sheet_exists
-from src.f10_etl.transformers import etl_bow_face_ideas_to_bow_event_otx_ideas
-from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.f11_world.world import worldunit_shop
+from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_bow_face_ideas_to_bow_event_otx_ideas_CreatesFaceIdeaSheets_Scenario0_MultpleFaceNames(
+def test_WorldUnit_otz_face_ideas_to_otz_event_otx_ideas_CreatesFaceIdeaSheets_Scenario0_MultpleFaceNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -39,11 +39,10 @@ def test_etl_bow_face_ideas_to_bow_event_otx_ideas_CreatesFaceIdeaSheets_Scenari
     zia2 = [zia_str, event9, accord23_str, hour7am, minute_420]
     example_sue_df = DataFrame([sue0, sue1], columns=idea_columns)
     example_zia_df = DataFrame([zia0, zia1, zia2], columns=idea_columns)
-    x_etl_dir = get_test_etl_dir()
-    x_faces_bow_dir = create_path(x_etl_dir, "faces_bow")
+    fizz_world = worldunit_shop("fizz")
     br00003_filename = "br00003.xlsx"
-    sue_dir = create_path(x_faces_bow_dir, sue_str)
-    zia_dir = create_path(x_faces_bow_dir, zia_str)
+    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
+    zia_dir = create_path(fizz_world._faces_otz_dir, zia_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     zia_br00003_filepath = create_path(zia_dir, br00003_filename)
     upsert_sheet(sue_br00003_filepath, train_valid_str(), example_sue_df)
@@ -60,13 +59,12 @@ def test_etl_bow_face_ideas_to_bow_event_otx_ideas_CreatesFaceIdeaSheets_Scenari
     assert sheet_exists(event9_br00003_filepath, train_valid_str()) is False
 
     # WHEN
-    etl_bow_face_ideas_to_bow_event_otx_ideas(x_faces_bow_dir)
+    fizz_world.otz_face_ideas_to_otz_event_otx_ideas()
 
     # THEN
     assert sheet_exists(event3_br00003_filepath, train_valid_str())
     assert sheet_exists(event7_br00003_filepath, train_valid_str())
     assert sheet_exists(event9_br00003_filepath, train_valid_str())
-
     gen_event3_df = pandas_read_excel(event3_br00003_filepath, train_valid_str())
     gen_event7_df = pandas_read_excel(event7_br00003_filepath, train_valid_str())
     gen_event9_df = pandas_read_excel(event9_br00003_filepath, train_valid_str())

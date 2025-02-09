@@ -55,7 +55,7 @@ from src.f10_etl.fiscal_etl_tool import (
 )
 from src.f10_etl.tran_sqlstrs import get_fiscal_inconsistency_sqlstrs
 from src.f10_etl.transformers import (
-    etl_aft_face_csv_files2idea_staging_tables,
+    etl_inz_face_csv_files2idea_staging_tables,
     create_fiscal_tables,
     idea_staging_tables2fiscal_staging_tables,
     etl_fiscal_staging_tables_to_fiscal_csvs,
@@ -77,8 +77,8 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario0_From_br00011_IdeaFi
     event3 = 3
     event7 = 7
     accord23_str = "accord23"
-    aft_faces_dir = get_test_etl_dir()
-    sue_aft_dir = create_path(aft_faces_dir, sue_inx)
+    inz_faces_dir = get_test_etl_dir()
+    sue_inz_dir = create_path(inz_faces_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
@@ -87,11 +87,11 @@ def test_idea_staging_tables2fiscal_staging_tables_Scenario0_From_br00011_IdeaFi
 {sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 """
-    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
-        etl_aft_face_csv_files2idea_staging_tables(cursor, aft_faces_dir)
+        etl_inz_face_csv_files2idea_staging_tables(cursor, inz_faces_dir)
         create_fiscal_tables(cursor)
         x_fis = FiscalPrimeObjsRef()
         assert get_row_count(cursor, x_fis.unit_stage_tablename) == 0

@@ -15,7 +15,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_bow_inx_event_ideas_to_aft_faces_Scenario0(env_dir_setup_cleanup):
+def test_otz_inx_event_ideas_to_inz_faces_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     sue_otx = "Sue"
     sue_inx = "Suzy"
@@ -36,28 +36,28 @@ def test_bow_inx_event_ideas_to_aft_faces_Scenario0(env_dir_setup_cleanup):
     e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz")
-    bow_sue_dir = create_path(fizz_world._faces_bow_dir, sue_otx)
-    bow_e3_dir = create_path(bow_sue_dir, event3)
-    bow_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
+    otz_sue_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
+    otz_e3_dir = create_path(otz_sue_dir, event3)
+    otz_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
     inx_str = "inx"
-    upsert_sheet(bow_e3_br00011_path, inx_str, e3_accord23_df)
-    assert sheet_exists(bow_e3_br00011_path, inx_str)
-    aft_sue_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
-    aft_br00011_path = create_path(aft_sue_dir, br00011_filename)
-    print(f"{bow_e3_br00011_path=}")
-    print(f"{aft_br00011_path=}")
-    assert sheet_exists(aft_br00011_path, inx_str) is False
+    upsert_sheet(otz_e3_br00011_path, inx_str, e3_accord23_df)
+    assert sheet_exists(otz_e3_br00011_path, inx_str)
+    inz_sue_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
+    inz_br00011_path = create_path(inz_sue_dir, br00011_filename)
+    print(f"{otz_e3_br00011_path=}")
+    print(f"{inz_br00011_path=}")
+    assert sheet_exists(inz_br00011_path, inx_str) is False
 
     # WHEN
-    fizz_world.bow_inx_event_ideas_to_aft_faces()
+    fizz_world.otz_inx_event_ideas_to_inz_faces()
 
     # THEN
-    assert sheet_exists(aft_br00011_path, inx_str)
-    aft_e3_df = pandas_read_excel(aft_br00011_path, sheet_name=inx_str)
-    pandas_assert_frame_equal(aft_e3_df, e3_accord23_df)
+    assert sheet_exists(inz_br00011_path, inx_str)
+    inz_e3_df = pandas_read_excel(inz_br00011_path, sheet_name=inx_str)
+    pandas_assert_frame_equal(inz_e3_df, e3_accord23_df)
 
 
-def test_bow_inx_event_ideas_to_aft_faces_Scenario1(env_dir_setup_cleanup):
+def test_otz_inx_event_ideas_to_inz_faces_Scenario1(env_dir_setup_cleanup):
     # ESTABLISH
     sue_otx = "Sue"
     sue_inx = "Suzy"
@@ -81,28 +81,28 @@ def test_bow_inx_event_ideas_to_aft_faces_Scenario1(env_dir_setup_cleanup):
     e7_accord23_df = DataFrame([sue3], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz")
-    bow_sue_dir = create_path(fizz_world._faces_bow_dir, sue_otx)
-    bow_e3_dir = create_path(bow_sue_dir, event3)
-    bow_e7_dir = create_path(bow_sue_dir, event7)
-    bow_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
-    bow_e7_br00011_path = create_path(bow_e7_dir, br00011_filename)
+    otz_sue_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
+    otz_e3_dir = create_path(otz_sue_dir, event3)
+    otz_e7_dir = create_path(otz_sue_dir, event7)
+    otz_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
+    otz_e7_br00011_path = create_path(otz_e7_dir, br00011_filename)
     inx_str = "inx"
-    upsert_sheet(bow_e3_br00011_path, inx_str, e3_accord23_df)
-    upsert_sheet(bow_e7_br00011_path, inx_str, e7_accord23_df)
-    assert sheet_exists(bow_e3_br00011_path, inx_str)
-    assert sheet_exists(bow_e7_br00011_path, inx_str)
-    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
-    aft_br00011_path = create_path(sue_aft_dir, br00011_filename)
-    print(f"{bow_e3_br00011_path=}")
-    print(f"{aft_br00011_path=}")
-    assert sheet_exists(aft_br00011_path, inx_str) is False
+    upsert_sheet(otz_e3_br00011_path, inx_str, e3_accord23_df)
+    upsert_sheet(otz_e7_br00011_path, inx_str, e7_accord23_df)
+    assert sheet_exists(otz_e3_br00011_path, inx_str)
+    assert sheet_exists(otz_e7_br00011_path, inx_str)
+    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
+    inz_br00011_path = create_path(sue_inz_dir, br00011_filename)
+    print(f"{otz_e3_br00011_path=}")
+    print(f"{inz_br00011_path=}")
+    assert sheet_exists(inz_br00011_path, inx_str) is False
 
     # WHEN
-    fizz_world.bow_inx_event_ideas_to_aft_faces()
+    fizz_world.otz_inx_event_ideas_to_inz_faces()
 
     # THEN
-    assert sheet_exists(aft_br00011_path, inx_str)
+    assert sheet_exists(inz_br00011_path, inx_str)
     sue_accord23_df = DataFrame([sue0, sue1, sue2, sue3], columns=br00011_columns)
-    aft_sue_df = pandas_read_excel(aft_br00011_path, sheet_name=inx_str)
-    print(f"{aft_sue_df=}")
-    pandas_assert_frame_equal(aft_sue_df, sue_accord23_df)
+    inz_sue_df = pandas_read_excel(inz_br00011_path, sheet_name=inx_str)
+    print(f"{inz_sue_df=}")
+    pandas_assert_frame_equal(inz_sue_df, sue_accord23_df)

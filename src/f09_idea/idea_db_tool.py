@@ -161,16 +161,16 @@ def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
 
 
 def move_otx_csvs_to_pidgin_inx(face_dir: str):
-    bow_dir = create_path(face_dir, "bow")
-    aft_dir = create_path(face_dir, "aft")
+    otz_dir = create_path(face_dir, "otz")
+    inz_dir = create_path(face_dir, "inz")
     pidgin_filename = "pidgin.json"
     pidginunit_json = open_file(face_dir, pidgin_filename)
     face_pidginunit = get_pidginunit_from_json(pidginunit_json)
-    bow_dir_files = get_dir_file_strs(bow_dir, delete_extensions=False)
-    for x_filename in bow_dir_files.keys():
-        x_df = open_csv(bow_dir, x_filename)
+    otz_dir_files = get_dir_file_strs(otz_dir, delete_extensions=False)
+    for x_filename in otz_dir_files.keys():
+        x_df = open_csv(otz_dir, x_filename)
         translate_all_columns_dataframe(x_df, face_pidginunit)
-        save_dataframe_to_csv(x_df, aft_dir, x_filename)
+        save_dataframe_to_csv(x_df, inz_dir, x_filename)
 
 
 def _get_pidgen_idea_format_filenames() -> set[str]:

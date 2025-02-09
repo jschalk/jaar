@@ -65,7 +65,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStag
     event7 = 7
     accord23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
-    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
@@ -75,11 +75,11 @@ def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStag
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 """
-    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("fizz")
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
         budunit_staging_tablename = f"{budunit_str()}_put_staging"
         assert not db_table_exists(cursor, budunit_staging_tablename)
 

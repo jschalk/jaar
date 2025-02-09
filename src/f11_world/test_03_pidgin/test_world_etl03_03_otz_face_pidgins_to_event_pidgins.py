@@ -22,7 +22,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face_names(
+def test_WorldUnit_otz_face_pidgins_to_otz_event_pidgins_Scenario0_road_Two_face_names(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -54,8 +54,8 @@ def test_WorldUnit_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face
     zia_road_agg_df = DataFrame([z1_road3], columns=road_file_columns)
 
     fizz_world = worldunit_shop("fizz")
-    sue_dir = create_path(fizz_world._faces_bow_dir, sue_str)
-    zia_dir = create_path(fizz_world._faces_bow_dir, zia_str)
+    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
+    zia_dir = create_path(fizz_world._faces_otz_dir, zia_str)
     event3_dir = create_path(zia_dir, event3)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(sue_dir, event9)
@@ -81,7 +81,7 @@ def test_WorldUnit_bow_face_pidgins_to_bow_event_pidgins_Scenario0_road_Two_face
     assert sheet_exists(event9_pidgin_file_path, road_agg_str) is False
 
     # WHEN
-    fizz_world.bow_face_pidgins_to_bow_event_pidgins()
+    fizz_world.otz_face_pidgins_to_otz_event_pidgins()
 
     # THEN
     assert os_path_exists(event3_dir)

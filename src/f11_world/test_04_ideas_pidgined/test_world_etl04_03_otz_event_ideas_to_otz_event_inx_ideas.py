@@ -18,7 +18,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_bow_event_ideas_to_train_events_Scenario0_NoPidginUnit(
+def test_etl_otz_event_ideas_to_train_events_Scenario0_NoPidginUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -41,9 +41,9 @@ def test_etl_bow_event_ideas_to_train_events_Scenario0_NoPidginUnit(
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz")
     fizz_world._pidgin_events = {}
-    sue_bow_dir = create_path(fizz_world._faces_bow_dir, sue_otx)
-    bow_e3_dir = create_path(sue_bow_dir, event3)
-    train_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
+    sue_otz_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
+    otz_e3_dir = create_path(sue_otz_dir, event3)
+    train_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
     print(f"{train_e3_br00011_path=}")
     upsert_sheet(train_e3_br00011_path, train_valid_str(), e3_accord23_df)
     print(f"{train_valid_str()=}")
@@ -51,7 +51,7 @@ def test_etl_bow_event_ideas_to_train_events_Scenario0_NoPidginUnit(
     assert sheet_exists(train_e3_br00011_path, inx_str) is False
 
     # WHEN
-    fizz_world.bow_event_ideas_to_inx_events()
+    fizz_world.otz_event_ideas_to_inx_events()
 
     # THEN
     assert sheet_exists(train_e3_br00011_path, inx_str)
@@ -63,7 +63,7 @@ def test_etl_bow_event_ideas_to_train_events_Scenario0_NoPidginUnit(
     pandas_assert_frame_equal(e3_inx_df, example_e3_inx_df)
 
 
-def test_etl_bow_event_ideas_to_train_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
+def test_etl_otz_event_ideas_to_train_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -105,14 +105,14 @@ def test_etl_bow_event_ideas_to_train_events_Scenario1_MultpleFaceNames_CreatesE
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz")
     fizz_world._pidgin_events = {sue_otx: {event3}, zia_otx: {event7, event9}}
-    sue_bow_dir = create_path(fizz_world._faces_bow_dir, sue_otx)
-    zia_bow_dir = create_path(fizz_world._faces_bow_dir, zia_otx)
-    bow_e3_dir = create_path(sue_bow_dir, event3)
-    bow_e7_dir = create_path(zia_bow_dir, event7)
-    bow_e9_dir = create_path(zia_bow_dir, event9)
-    train_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
-    train_e7_br00011_path = create_path(bow_e7_dir, br00011_filename)
-    train_e9_br00011_path = create_path(bow_e9_dir, br00011_filename)
+    sue_otz_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
+    zia_otz_dir = create_path(fizz_world._faces_otz_dir, zia_otx)
+    otz_e3_dir = create_path(sue_otz_dir, event3)
+    otz_e7_dir = create_path(zia_otz_dir, event7)
+    otz_e9_dir = create_path(zia_otz_dir, event9)
+    train_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
+    train_e7_br00011_path = create_path(otz_e7_dir, br00011_filename)
+    train_e9_br00011_path = create_path(otz_e9_dir, br00011_filename)
     print(f"{train_e3_br00011_path=}")
     print(f"{train_e7_br00011_path=}")
     print(f"{train_e9_br00011_path=}")
@@ -134,15 +134,15 @@ def test_etl_bow_event_ideas_to_train_events_Scenario1_MultpleFaceNames_CreatesE
     e9_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob2_inx)
     e9_pidginunit.set_otx2inx(type_AcctName_str(), yao_otx, yao2_inx)
     e9_pidginunit.set_otx2inx(type_TitleUnit_str(), accord55_inx, accord55_otx)
-    save_file(bow_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
-    save_file(bow_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
-    save_file(bow_e9_dir, pidgin_filename(), e9_pidginunit.get_json())
+    save_file(otz_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
+    save_file(otz_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
+    save_file(otz_e9_dir, pidgin_filename(), e9_pidginunit.get_json())
     assert sheet_exists(train_e3_br00011_path, inx_str) is False
     assert sheet_exists(train_e7_br00011_path, inx_str) is False
     assert sheet_exists(train_e9_br00011_path, inx_str) is False
 
     # WHEN
-    fizz_world.bow_event_ideas_to_inx_events()
+    fizz_world.otz_event_ideas_to_inx_events()
 
     # THEN
     assert sheet_exists(train_e3_br00011_path, inx_str)

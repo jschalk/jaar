@@ -26,7 +26,7 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_PopulatesFiscalAggTables(
     accord23_str = "accord23"
     accord45_str = "accord45"
     fizz_world = worldunit_shop("fizz")
-    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
@@ -35,12 +35,12 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_PopulatesFiscalAggTables(
 {sue_inx},{event3},{accord45_str},{yao_inx},{yao_inx}
 {sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
 """
-    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("fizz")
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
-        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
         fis_objs = FiscalPrimeObjsRef(fizz_world._fiscal_mstr_dir)
         assert not db_table_exists(cursor, fis_objs.unit_agg_tablename)
 
@@ -105,7 +105,7 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_PopulatesTable_fiscal_event_tim
     amount_t23 = 2323
     x_ledger_depth = 2
     fizz_world = worldunit_shop("fizz")
-    sue_aft_dir = create_path(fizz_world._faces_aft_dir, sue_inx)
+    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     # create deal rows
     # create cash rows
     br00001_str = "br00001"
@@ -124,13 +124,13 @@ def test_WorldUnit_idea_staging_to_fiscal_tables_PopulatesTable_fiscal_event_tim
 {sue_inx},{event2},{accord45_str},{yao_inx},{sue_inx},{timepoint22},{amount_t22}
 {sue_inx},{event8},{accord45_str},{yao_inx},{bob_inx},{timepoint23},{amount_t23}
 """
-    save_file(sue_aft_dir, br00001_csv_filename, br00001_csv_str)
-    save_file(sue_aft_dir, br00002_csv_filename, br00002_csv_str)
+    save_file(sue_inz_dir, br00001_csv_filename, br00001_csv_str)
+    save_file(sue_inz_dir, br00002_csv_filename, br00002_csv_str)
     fizz_world = worldunit_shop("fizz")
 
     with sqlite3_connect(":memory:") as fiscal_db_conn:
         cursor = fiscal_db_conn.cursor()
-        fizz_world.etl_aft_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
         event_time_tablename = "fiscal_event_time_agg"
         assert not db_table_exists(cursor, event_time_tablename)
 
