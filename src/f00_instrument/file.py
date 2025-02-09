@@ -22,6 +22,7 @@ from os.path import (
     splitext as os_path_splitext,
     join as os_path_join,
     basename as os_path_basename,
+    abspath as os_path_abspath,
 )
 from pathlib import Path as pathlib_Path
 from errno import ENAMETOOLONG as errno_ENAMETOOLONG, ERANGE as errno_ERANGE
@@ -68,6 +69,7 @@ def save_file(dest_dir: str, filename: str, file_str: str, replace: bool = True)
     else:
         set_dir(os_path_dirname(dest_dir))
     file_path = create_path(dest_dir, filename) if filename else dest_dir
+    file_path = os_path_abspath(file_path)
     if (os_path_exists(file_path) and replace) or os_path_exists(file_path) is False:
         with open(file_path, "w") as f:
             f.write(file_str)
@@ -314,3 +316,24 @@ def get_max_file_number(x_dir: str) -> int:
     filenames = files_dict.keys()
     file_numbers = {int(atom_filename) for atom_filename in filenames}
     return max(file_numbers, default=None)
+
+
+def count_dirs_files(x_dir: str) -> int:
+    # path = pathlib_Path(x_dir)
+    # if not path.is_dir():
+    #     raise ValueError(f"'{x_dir}' is not a valid directory.")
+    # num_dirs = sum(bool(p.is_dir()) for p in path.iterdir())
+    # num_files = sum(bool(p.is_file()) for p in path.iterdir())
+    # return num_dirs + num_files
+    num_dirs = 0
+    num_files = 0
+    x_dir = os_path_abspath(x_dir)  # Normalize path (fix slashes)
+
+    if not os_path_isdir(x_dir):
+        raise ValueError(f"'{x_dir}' is not a valid directory.")
+
+    for root, dirs, files in os_walk(x_dir):
+        num_dirs += len(dirs)  # Count directories
+        num_files += len(files)  # Count files
+
+    return num_dirs + num_files
