@@ -17,7 +17,7 @@ from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
+def test_etl_boat_agg_to_boat_events_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -76,7 +76,7 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
     ]
 
 
-def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario1(
+def test_etl_boat_agg_to_boat_events_CreatesSheets_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

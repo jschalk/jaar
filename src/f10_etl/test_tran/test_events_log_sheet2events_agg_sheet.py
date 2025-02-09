@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path
+from src.f00_instrument.file import create_path, count_dirs_files, count_files
 from src.f04_gift.atom_config import face_name_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet
@@ -66,11 +66,24 @@ def test_create_events_agg_df_ReturnsObj(
     assert gen_events_agg_df.to_csv(index=False) == ex_events_agg_df.to_csv(index=False)
 
 
-def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
+def test_etl_boat_events_log_to_events_agg_CreatesSheets_Scenario0_Empty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
+    boat_dir = get_test_etl_dir()
+    assert count_dirs_files(boat_dir) == 0
+
+    # WHEN
+    etl_boat_events_log_to_events_agg(boat_dir)
+
+    # THEN
+    assert count_dirs_files(boat_dir) == 0
+
+
+def test_etl_boat_events_log_to_events_agg_CreatesSheets_Scenario1(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
@@ -128,11 +141,23 @@ def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
     assert get_sheet_names(events_file_path) == ["events_log", "events_agg"]
 
 
-def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
+def test_get_events_dict_from_events_agg_file_ReturnsObj_Scenario0_isEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
+    boat_dir = get_test_etl_dir()
+
+    # WHEN
+    events_dict = get_events_dict_from_events_agg_file(boat_dir)
+
+    # THEN
+    assert len(events_dict) == 0
+
+
+def test_get_events_dict_from_events_agg_file_ReturnsObj_Scenario1(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"

@@ -78,7 +78,7 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
         assert e7_put_csv == expected_e7_put_csv
 
 
-# def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudDelAggTables(
+# def test_etl_idea_staging_to_bud_tables_PopulatesBudDelAggTables(
 #     env_dir_setup_cleanup,
 # ):  # sourcery skip: extract-method
 

@@ -1,4 +1,4 @@
-from src.f00_instrument.file import set_dir, create_path, count_dirs_files
+from src.f00_instrument.file import set_dir, create_path, count_dirs_files, delete_dir
 from src.f00_instrument.dict_toolbox import (
     get_empty_dict_if_None,
     get_0_if_None,
@@ -207,31 +207,35 @@ class WorldUnit:
         etl_fiscal_voice_to_fiscal_forecast(self._fiscal_mstr_dir)
 
     def ocean_to_forecasts(self):  # sourcery skip: extract-method
-        # print(f"      {self.worlds_dir=}")
-        # print(f"step 00 {count_dirs_files(self.worlds_dir)}")
+        fiscal_mstr_dir = create_path(self._world_dir, "fiscal_mstr")
+        delete_dir(fiscal_mstr_dir)
+        print(f"{fiscal_mstr_dir=}")
+        set_dir(fiscal_mstr_dir)
+        print(f"      {self.worlds_dir=}")
+        print(f"step 00 {count_dirs_files(self.worlds_dir)}")
         self.ocean_to_boat_staging()
-        # print(f"step 01 {count_dirs_files(self.worlds_dir)}")
+        print(f"step 01 {count_dirs_files(self.worlds_dir)}")
         self.boat_staging_to_boat_agg()
-        # print(f"step 02 {count_dirs_files(self.worlds_dir)}")
+        print(f"step 02 {count_dirs_files(self.worlds_dir)}")
         self.boat_agg_to_boat_events()
         self.boat_events_to_events_log()
         self.boat_events_log_to_events_agg()
         self.set_events_from_events_agg_file()
-        # print(f"step 03 {count_dirs_files(self.worlds_dir)}")
+        print(f"step 03 {count_dirs_files(self.worlds_dir)}")
         self.boat_agg_to_pidgin_staging()
         self.boat_pidgin_staging_to_agg()
         self.boat_pidgin_agg_to_bow_face_dirs()
         self.bow_face_pidgins_to_bow_event_pidgins()
         self.bow_event_pidgins_csvs_to_bow_pidgin_jsons()
         self.pidgin_jsons_inherit_younger_pidgins()
-        # print(f"step 04 {count_dirs_files(self.worlds_dir)}")
+        print(f"step 04 {count_dirs_files(self.worlds_dir)}")
         self.boat_agg_to_boat_valid()
         self.boat_ideas_to_bow_face_ideas()
         self.bow_face_ideas_to_bow_event_otx_ideas()
         self.bow_event_ideas_to_inx_events()
         self.bow_inx_event_ideas_to_aft_faces()
         self.aft_face_ideas_to_csv_files()
-        # print(f"step 05 {count_dirs_files(self.worlds_dir)}")
+        print(f"step 05 {count_dirs_files(self.worlds_dir)}")
         with sqlite3_connect(":memory:") as fiscal_db_conn:
             cursor = fiscal_db_conn.cursor()
             self.etl_aft_face_csv_files2idea_staging_tables(cursor)
@@ -239,16 +243,16 @@ class WorldUnit:
             self.idea_staging_to_fiscal_tables(cursor)
             self.aft_faces_ideas_to_fiscal_mstr_csvs(cursor)
             self.fiscal_csvs_to_jsons()
-            # print(f"step 06 {count_dirs_files(self.worlds_dir)}")
+            print(f"step 06 {count_dirs_files(self.worlds_dir)}")
             self.idea_staging_to_bud_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
-        # print(f"step 06.5 {count_dirs_files(self.worlds_dir)}")
+        print(f"step 06.5 {count_dirs_files(self.worlds_dir)}")
         self.event_bud_csvs_to_gift_json()
         self.event_gift_json_to_event_inherited_budunits()
-        # print(f"step 07 {count_dirs_files(self.worlds_dir)}")
+        print(f"step 07 {count_dirs_files(self.worlds_dir)}")
         self.event_inherited_budunits_to_fiscal_voice()
         self.fiscal_voice_to_fiscal_forecast()
-        # print(f"step 08 {count_dirs_files(self.worlds_dir)}")
+        print(f"step 08 {count_dirs_files(self.worlds_dir)}")
 
     def get_dict(self) -> dict:
         return {

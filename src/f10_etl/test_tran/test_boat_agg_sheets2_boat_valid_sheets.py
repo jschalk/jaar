@@ -16,7 +16,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_boat_agg_to_boat_valid_CreatesSheets_Scenario0(
+def test_etl_boat_agg_to_boat_valid_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -64,7 +64,7 @@ def test_WorldUnit_boat_agg_to_boat_valid_CreatesSheets_Scenario0(
     pandas_assert_frame_equal(gen_boat_valid_df, example_boat_valid_df)
 
 
-# def test_WorldUnit_boat_agg_to_boat_valid_CreatesSheets_Scenario1(
+# def test_etl_boat_agg_to_boat_valid_CreatesSheets_Scenario1(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH

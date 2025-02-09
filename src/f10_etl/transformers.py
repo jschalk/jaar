@@ -346,19 +346,21 @@ class EventsLogToEventsAggTransformer:
 
     def transform(self):
         events_file_path = create_path(self.boat_dir, "events.xlsx")
-        events_log_df = pandas_read_excel(events_file_path, "events_log")
-        events_agg_df = _create_events_agg_df(events_log_df)
-        upsert_sheet(events_file_path, "events_agg", events_agg_df)
+        if os_path_exists(events_file_path):
+            events_log_df = pandas_read_excel(events_file_path, "events_log")
+            events_agg_df = _create_events_agg_df(events_log_df)
+            upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
 def get_events_dict_from_events_agg_file(boat_dir) -> dict[int, str]:
     events_file_path = create_path(boat_dir, "events.xlsx")
-    events_agg_df = pandas_read_excel(events_file_path, "events_agg")
     x_dict = {}
-    for index, event_agg_row in events_agg_df.iterrows():
-        x_note = event_agg_row["error_message"]
-        if x_note != "invalid because of conflicting event_int":
-            x_dict[event_agg_row["event_int"]] = event_agg_row["face_name"]
+    if os_path_exists(events_file_path):
+        events_agg_df = pandas_read_excel(events_file_path, "events_agg")
+        for index, event_agg_row in events_agg_df.iterrows():
+            x_note = event_agg_row["error_message"]
+            if x_note != "invalid because of conflicting event_int":
+                x_dict[event_agg_row["event_int"]] = event_agg_row["face_name"]
     return x_dict
 
 

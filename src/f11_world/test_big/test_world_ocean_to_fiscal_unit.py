@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, count_dirs_files, delete_dir
+from src.f00_instrument.file import create_path, count_dirs_files, delete_dir, save_file
 from src.f04_gift.atom_config import face_name_str, fiscal_title_str
 from src.f05_listen.hub_paths import (
     create_fiscal_json_path,
@@ -14,7 +14,35 @@ from pandas import DataFrame
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_ocean_to_forecasts_CreatesboatFiles(env_dir_setup_cleanup):
+def test_WorldUnit_ocean_to_forecasts_DeletesPreviousFiles():
+    # ESTABLISH
+    fizz_str = "fizz"
+    fizz_world = worldunit_shop(fizz_str)
+    delete_dir(fizz_world.worlds_dir)
+    print(f"{fizz_world.worlds_dir=}")
+    fiscal_mstr_dir = fizz_world._fiscal_mstr_dir
+    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    testing2_filename = "testing2.txt"
+    testing3_filename = "testing3.txt"
+    save_file(fizz_world.worlds_dir, testing2_filename, "")
+    save_file(fiscals_dir, testing3_filename, "")
+    testing2_path = create_path(fizz_world.worlds_dir, testing2_filename)
+    testing3_path = create_path(fiscals_dir, testing3_filename)
+    assert os_path_exists(testing2_path)
+    assert os_path_exists(testing3_path)
+    print(f"{testing3_path=}")
+    assert count_dirs_files(fizz_world.worlds_dir) == 5
+
+    # WHEN
+    fizz_world.ocean_to_forecasts()
+
+    # THEN
+    assert os_path_exists(testing2_path)
+    assert os_path_exists(testing3_path) is False
+    assert count_dirs_files(fizz_world.worlds_dir) == 26
+
+
+def test_WorldUnit_ocean_to_forecasts_CreatesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str)

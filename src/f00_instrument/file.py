@@ -328,9 +328,9 @@ def count_dirs_files(x_dir: str) -> int:
     num_dirs = 0
     num_files = 0
     x_dir = os_path_abspath(x_dir)  # Normalize path (fix slashes)
-
-    if not os_path_isdir(x_dir):
-        raise ValueError(f"'{x_dir}' is not a valid directory.")
+    set_dir(x_dir)
+    # if not os_path_isdir(x_dir):
+    #     raise ValueError(f"'{x_dir}' is not a valid directory.")
 
     for root, dirs, files in os_walk(x_dir):
         num_dirs += len(dirs)  # Count directories

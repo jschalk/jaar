@@ -64,7 +64,7 @@ def test_etl_boat_staging_to_boat_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     assert get_sheet_names(boat_file_path) == [boat_staging_str(), boat_agg_str()]
 
 
-def test_WorldUnit_boat_staging_to_boat_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+def test_etl_boat_staging_to_boat_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
