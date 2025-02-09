@@ -260,9 +260,9 @@ def test_timeline_config_shop_ReturnsObj_AllParameters():
     assert x_hours_config[4] == ["4hr", 360]
     assert five_dict.get(yr1_jan1_offset_str()) == five_yr1_jan1_offset
 
-    # five_file_name = f"timeline_config_{five_str()}.json"
+    # five_filename = f"timeline_config_{five_str()}.json"
     # five_file_str = get_json_from_dict(five_dict)
-    # save_file(chrono_examples_dir(), five_file_name, five_file_str)
+    # save_file(chrono_examples_dir(), five_filename, five_file_str)
     expected_config = get_example_timeline_config(five_str())
     assert validate_timeline_config(expected_config)
     assert expected_config.get(hours_config_str()) == x_hours_config

@@ -13,6 +13,7 @@ def test_RiverRun_save_rivergrade_file_CorrectlySavesFile(env_dir_setup_cleanup)
     x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_belief)
     x_riverrun.set_tax_dues({yao_str: 1})
     x_riverrun.calc_metrics()
+    print(f"{x_riverrun.hubunit.grade_path(yao_str)=}")
     assert os_path_exists(x_riverrun.hubunit.grade_path(yao_str)) is False
 
     # WHEN

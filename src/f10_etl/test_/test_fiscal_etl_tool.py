@@ -9,6 +9,7 @@ from src.f04_gift.atom_config import (
     penny_str,
     respect_bit_str,
 )
+from src.f05_listen.hub_paths import create_fiscal_json_path
 from src.f07_fiscal.fiscal import get_from_json as fiscal_get_from_json, fiscalunit_shop
 from src.f07_fiscal.fiscal_config import (
     fiscalunit_str,
@@ -365,9 +366,9 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario0_MinimumNecessaryPara
     xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
     xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
-    accord56_fiscal_title_str = "accord56"
-    accord56 = [
-        accord56_fiscal_title_str,
+    accord56_str = "accord56"
+    accord56_row = [
+        accord56_str,
         "",  # accord56_c400_number_str,
         "",  # accord56_present_time_str,
         "",  # accord56_fund_coin_str,
@@ -378,12 +379,10 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario0_MinimumNecessaryPara
         "",  # accord56_timeline_title_str,
         "",  # accord56_yr1_jan1_offset_str,
     ]
-    fiscalunit_rows = [accord56]
+    fiscalunit_rows = [accord56_row]
     fiscalunit_df = DataFrame(fiscalunit_rows, columns=xc.unit_agg_columns)
     upsert_sheet(xp.unit_excel_path, agg_str, fiscalunit_df)
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    accord56_dir = create_path(fiscals_dir, "accord56")
-    accord56_json_path = create_path(accord56_dir, "accord56.json")
+    accord56_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord56_str)
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
@@ -395,9 +394,9 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario0_MinimumNecessaryPara
     accord56_fiscalunit.fiscals_dir = fiscal_mstr_dir
     accord56_fiscalunit._set_fiscal_dirs()
     assert accord56_fiscalunit
-    assert accord56_fiscalunit.fiscal_title == accord56_fiscal_title_str
+    assert accord56_fiscalunit.fiscal_title == accord56_str
     assert accord56_fiscalunit.fiscals_dir == fiscal_mstr_dir
-    expected_fiscalunit = fiscalunit_shop(accord56_fiscal_title_str, fiscal_mstr_dir)
+    expected_fiscalunit = fiscalunit_shop(accord56_str, fiscal_mstr_dir)
     assert accord56_fiscalunit.timeline == expected_fiscalunit.timeline
     assert accord56_fiscalunit == expected_fiscalunit
 
@@ -411,14 +410,14 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineU
     xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
     xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
-    accord56_fiscal_title_str = "accord56"
+    accord56_str = "accord56"
     accord56_present_time = 77
     accord56_fund_coin = 3
     accord56_penny = 2
     accord56_respect_bit = 55
     accord56_bridge = "/"
     accord56 = [
-        accord56_fiscal_title_str,
+        accord56_str,
         accord56_fund_coin,
         accord56_penny,
         accord56_respect_bit,
@@ -433,9 +432,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineU
     fiscalunit_rows = [accord56]
     fiscalunit_df = DataFrame(fiscalunit_rows, columns=xc.unit_agg_columns)
     upsert_sheet(xp.unit_excel_path, agg_str, fiscalunit_df)
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    accord56_dir = create_path(fiscals_dir, "accord56")
-    accord56_json_path = create_path(accord56_dir, "accord56.json")
+    accord56_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord56_str)
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
@@ -445,15 +442,15 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineU
     assert os_path_exists(accord56_json_path)
     accord56_fiscalunit = fiscal_get_from_json(open_file(accord56_json_path))
     assert accord56_fiscalunit
-    assert accord56_fiscalunit.fiscal_title == accord56_fiscal_title_str
+    assert accord56_fiscalunit.fiscal_title == accord56_str
     assert accord56_fiscalunit.present_time == accord56_present_time
     assert accord56_fiscalunit.fund_coin == accord56_fund_coin
     assert accord56_fiscalunit.penny == accord56_penny
     assert accord56_fiscalunit.respect_bit == accord56_respect_bit
     assert accord56_fiscalunit.bridge == accord56_bridge
-    default_fiscalunit = fiscalunit_shop(accord56_fiscal_title_str)
+    default_fiscalunit = fiscalunit_shop(accord56_str)
     assert accord56_fiscalunit.timeline == default_fiscalunit.timeline
-    assert accord56_fiscalunit.fiscal_title == accord56_fiscal_title_str
+    assert accord56_fiscalunit.fiscal_title == accord56_str
     assert accord56_fiscalunit.present_time != default_fiscalunit.present_time
     assert accord56_fiscalunit.fund_coin != default_fiscalunit.fund_coin
     assert accord56_fiscalunit.penny != default_fiscalunit.penny
@@ -471,13 +468,13 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitP
     xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
     xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
-    accord56_fiscal_title = "accord56"
+    accord56_str = "accord56"
     accord56_c400_number = 9
     accord56_monthday_distortion = 7
     accord56_timeline_title = "timelineX3"
     accord56_yr1_jan1_offset = 555
     accord56 = [
-        accord56_fiscal_title,
+        accord56_str,
         "",  # accord56_fund_coin,
         "",  # accord56_penny,
         "",  # accord56_respect_bit,
@@ -491,9 +488,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitP
     fiscalunit_rows = [accord56]
     fiscalunit_df = DataFrame(fiscalunit_rows, columns=xc.unit_agg_columns)
     upsert_sheet(xp.unit_excel_path, agg_str, fiscalunit_df)
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    accord56_dir = create_path(fiscals_dir, "accord56")
-    accord56_json_path = create_path(accord56_dir, "accord56.json")
+    accord56_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord56_str)
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
@@ -503,7 +498,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitP
     assert os_path_exists(accord56_json_path)
     accord56_fiscalunit = fiscal_get_from_json(open_file(accord56_json_path))
     assert accord56_fiscalunit
-    assert accord56_fiscalunit.fiscal_title == accord56_fiscal_title
+    assert accord56_fiscalunit.fiscal_title == accord56_str
     expected_timeline_config = timeline_config_shop(
         c400_number=accord56_c400_number,
         monthday_distortion=accord56_monthday_distortion,
@@ -511,9 +506,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitP
         yr1_jan1_offset=accord56_yr1_jan1_offset,
     )
     expected_timelineunit = timelineunit_shop(expected_timeline_config)
-    expected_fiscalunit = fiscalunit_shop(
-        accord56_fiscal_title, timeline=expected_timelineunit
-    )
+    expected_fiscalunit = fiscalunit_shop(accord56_str, timeline=expected_timelineunit)
     assert accord56_fiscalunit.timeline.timeline_title == accord56_timeline_title
     assert accord56_fiscalunit.timeline.c400_number == accord56_c400_number
     assert accord56_fiscalunit.timeline == expected_timelineunit
@@ -530,22 +523,20 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario3_fiscal_timeline_week
     xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
     xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
-    accord56_fiscal_title = "accord56"
-    accord56_fiscal_title
+    accord56_str = "accord56"
+    accord56_str
     monday_str = "Monday"
     tuesday_str = "Tuesday"
-    accord56_fiscal_row = [accord56_fiscal_title, "", "", "", "", "", "", "", "", ""]
+    accord56_fiscal_row = [accord56_str, "", "", "", "", "", "", "", "", ""]
     fiscalunit_df = DataFrame([accord56_fiscal_row], columns=xc.unit_agg_columns)
-    a56_weekday_t3 = [accord56_fiscal_title, monday_str, 3]
-    a56_weekday_t7 = [accord56_fiscal_title, tuesday_str, 4]
+    a56_weekday_t3 = [accord56_str, monday_str, 3]
+    a56_weekday_t7 = [accord56_str, tuesday_str, 4]
     a56_weekday_rows = [a56_weekday_t3, a56_weekday_t7]
     a56_weekday_df = DataFrame(a56_weekday_rows, columns=xc.week_agg_columns)
     print(f"{a56_weekday_df=}")
     upsert_sheet(xp.unit_excel_path, agg_str, fiscalunit_df)
     upsert_sheet(xp.week_excel_path, agg_str, a56_weekday_df)
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    accord56_dir = create_path(fiscals_dir, "accord56")
-    accord56_json_path = create_path(accord56_dir, "accord56.json")
+    accord56_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord56_str)
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
@@ -555,9 +546,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario3_fiscal_timeline_week
     assert os_path_exists(accord56_json_path)
     accord56_fiscalunit = fiscal_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(timeline_config_shop())
-    expected_fiscalunit = fiscalunit_shop(
-        accord56_fiscal_title, fiscal_mstr_dir, x_timelineunit
-    )
+    expected_fiscalunit = fiscalunit_shop(accord56_str, fiscal_mstr_dir, x_timelineunit)
     expected_fiscalunit.timeline.weekdays_config = [monday_str, tuesday_str]
     print(f"{expected_fiscalunit.timeline.weekdays_config=}")
     assert accord56_fiscalunit.timeline.weekdays_config == [monday_str, tuesday_str]
@@ -575,22 +564,20 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario4_fiscal_timeline_mont
     xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
     xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
-    accord56_fiscal_title = "accord56"
-    accord56_fiscal_title
+    accord56_str = "accord56"
+    accord56_str
     july_str = "July"
     june_str = "June"
-    accord56_fiscal_row = [accord56_fiscal_title, "", "", "", "", "", "", "", "", ""]
+    accord56_fiscal_row = [accord56_str, "", "", "", "", "", "", "", "", ""]
     fiscalunit_df = DataFrame([accord56_fiscal_row], columns=xc.unit_agg_columns)
-    a56_june = [accord56_fiscal_title, june_str, 150]
-    a56_july = [accord56_fiscal_title, july_str, 365]
+    a56_june = [accord56_str, june_str, 150]
+    a56_july = [accord56_str, july_str, 365]
     a56_month_rows = [a56_july, a56_june]
     a56_month_df = DataFrame(a56_month_rows, columns=xc.mont_agg_columns)
     print(f"{a56_month_df=}")
     upsert_sheet(xp.unit_excel_path, agg_str, fiscalunit_df)
     upsert_sheet(xp.mont_excel_path, agg_str, a56_month_df)
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    accord56_dir = create_path(fiscals_dir, "accord56")
-    accord56_json_path = create_path(accord56_dir, "accord56.json")
+    accord56_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord56_str)
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
@@ -600,9 +587,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario4_fiscal_timeline_mont
     assert os_path_exists(accord56_json_path)
     accord56_fiscalunit = fiscal_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(timeline_config_shop())
-    expected_fiscalunit = fiscalunit_shop(
-        accord56_fiscal_title, fiscal_mstr_dir, x_timelineunit
-    )
+    expected_fiscalunit = fiscalunit_shop(accord56_str, fiscal_mstr_dir, x_timelineunit)
     expected_fiscalunit.timeline.months_config = [[june_str, 150], [july_str, 365]]
     print(f"{expected_fiscalunit.timeline.months_config=}")
     assert accord56_fiscalunit.timeline.months_config == [
@@ -621,24 +606,22 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario5_fiscal_timeline_hour
     xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
     xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
-    accord56_fiscal_title = "accord56"
-    accord56_fiscal_title
+    accord56_str = "accord56"
+    accord56_str
     a56_0hr = "0hour"
     a56_5hr = "5hour"
     a56_8hr = "8hour"
-    accord56_fiscal_row = [accord56_fiscal_title, "", "", "", "", "", "", "", "", ""]
+    accord56_fiscal_row = [accord56_str, "", "", "", "", "", "", "", "", ""]
     fiscalunit_df = DataFrame([accord56_fiscal_row], columns=xc.unit_agg_columns)
-    a56_0hour_row = [accord56_fiscal_title, a56_0hr, 60]
-    a56_5hour_row = [accord56_fiscal_title, a56_5hr, 500]
-    a56_8hour_row = [accord56_fiscal_title, a56_8hr, 1440]
+    a56_0hour_row = [accord56_str, a56_0hr, 60]
+    a56_5hour_row = [accord56_str, a56_5hr, 500]
+    a56_8hour_row = [accord56_str, a56_8hr, 1440]
     a56_hour_rows = [a56_0hour_row, a56_5hour_row, a56_8hour_row]
     a56_hour_df = DataFrame(a56_hour_rows, columns=xc.hour_agg_columns)
     print(f"{a56_hour_df=}")
     upsert_sheet(xp.unit_excel_path, agg_str, fiscalunit_df)
     upsert_sheet(xp.hour_excel_path, agg_str, a56_hour_df)
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    accord56_dir = create_path(fiscals_dir, "accord56")
-    accord56_json_path = create_path(accord56_dir, "accord56.json")
+    accord56_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord56_str)
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
@@ -648,9 +631,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario5_fiscal_timeline_hour
     assert os_path_exists(accord56_json_path)
     accord56_fiscalunit = fiscal_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(timeline_config_shop())
-    expected_fiscalunit = fiscalunit_shop(
-        accord56_fiscal_title, fiscal_mstr_dir, x_timelineunit
-    )
+    expected_fiscalunit = fiscalunit_shop(accord56_str, fiscal_mstr_dir, x_timelineunit)
     expected_hour_config = [[a56_0hr, 60], [a56_5hr, 500], [a56_8hr, 1440]]
     expected_fiscalunit.timeline.hours_config = expected_hour_config
     print(f"{expected_fiscalunit.timeline.hours_config=}")
@@ -667,25 +648,23 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario6_fiscal_cashbook(
     xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
     xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
-    accord56_fiscal_title = "accord56"
+    accord56_str = "accord56"
     sue_str = "Sue"
     bob_str = "Bob"
     t3 = 3
     t7 = 7
     amount3 = 555
     amount7 = 777
-    accord56_fiscal_row = [accord56_fiscal_title, "", "", "", "", "", "", "", "", ""]
+    accord56_fiscal_row = [accord56_str, "", "", "", "", "", "", "", "", ""]
     fiscalunit_df = DataFrame([accord56_fiscal_row], columns=xc.unit_agg_columns)
-    a56_cashbook_t3 = [accord56_fiscal_title, sue_str, bob_str, t3, amount3]
-    a56_cashbook_t7 = [accord56_fiscal_title, sue_str, bob_str, t7, amount7]
+    a56_cashbook_t3 = [accord56_str, sue_str, bob_str, t3, amount3]
+    a56_cashbook_t7 = [accord56_str, sue_str, bob_str, t7, amount7]
     a56_cashbook_rows = [a56_cashbook_t3, a56_cashbook_t7]
     fiscal_cashbook_df = DataFrame(a56_cashbook_rows, columns=xc.cash_agg_columns)
     # print(f"{fiscal_cashbook_df=}")
     upsert_sheet(xp.unit_excel_path, agg_str, fiscalunit_df)
     upsert_sheet(xp.cash_excel_path, agg_str, fiscal_cashbook_df)
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    accord56_dir = create_path(fiscals_dir, "accord56")
-    accord56_json_path = create_path(accord56_dir, "accord56.json")
+    accord56_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord56_str)
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
@@ -695,9 +674,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario6_fiscal_cashbook(
     assert os_path_exists(accord56_json_path)
     accord56_fiscalunit = fiscal_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(timeline_config_shop())
-    expected_fiscalunit = fiscalunit_shop(
-        accord56_fiscal_title, fiscal_mstr_dir, x_timelineunit
-    )
+    expected_fiscalunit = fiscalunit_shop(accord56_str, fiscal_mstr_dir, x_timelineunit)
     expected_fiscalunit.add_cashpurchase(sue_str, bob_str, t3, amount3)
     expected_fiscalunit.add_cashpurchase(sue_str, bob_str, t7, amount7)
     print(f"{expected_fiscalunit.cashbook=}")
@@ -715,25 +692,23 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario7_fiscal_deal_episode(
     xp = FiscalPrimeObjsRef(fiscal_mstr_dir)
     xc = FiscalPrimeColumnsRef()
     agg_str = "agg"
-    accord56_fiscal_title = "accord56"
-    accord56_fiscal_title
+    accord56_str = "accord56"
+    accord56_str
     sue_str = "Sue"
     t3 = 3
     t7 = 7
     quota3 = 555
     quota7 = 777
-    accord56_fiscal_row = [accord56_fiscal_title, "", "", "", "", "", "", "", "", ""]
+    accord56_fiscal_row = [accord56_str, "", "", "", "", "", "", "", "", ""]
     fiscalunit_df = DataFrame([accord56_fiscal_row], columns=xc.unit_agg_columns)
-    a56_deal_t3 = [accord56_fiscal_title, sue_str, t3, quota3, None]
-    a56_deal_t7 = [accord56_fiscal_title, sue_str, t7, quota7, None]
+    a56_deal_t3 = [accord56_str, sue_str, t3, quota3, None]
+    a56_deal_t7 = [accord56_str, sue_str, t7, quota7, None]
     a56_deal_rows = [a56_deal_t3, a56_deal_t7]
     fiscal_deal_df = DataFrame(a56_deal_rows, columns=xc.deal_agg_columns)
     print(f"{fiscal_deal_df=}")
     upsert_sheet(xp.unit_excel_path, agg_str, fiscalunit_df)
     upsert_sheet(xp.deal_excel_path, agg_str, fiscal_deal_df)
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    accord56_dir = create_path(fiscals_dir, "accord56")
-    accord56_json_path = create_path(accord56_dir, "accord56.json")
+    accord56_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord56_str)
     assert os_path_exists(accord56_json_path) is False
 
     # WHEN
@@ -743,9 +718,7 @@ def test_create_fiscalunit_jsons_from_prime_files_Scenario7_fiscal_deal_episode(
     assert os_path_exists(accord56_json_path)
     accord56_fiscalunit = fiscal_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(timeline_config_shop())
-    expected_fiscalunit = fiscalunit_shop(
-        accord56_fiscal_title, fiscal_mstr_dir, x_timelineunit
-    )
+    expected_fiscalunit = fiscalunit_shop(accord56_str, fiscal_mstr_dir, x_timelineunit)
     expected_fiscalunit.add_dealepisode(sue_str, t3, quota3)
     expected_fiscalunit.add_dealepisode(sue_str, t7, quota7)
     print(f"{expected_fiscalunit.deallogs=}")
@@ -758,7 +731,6 @@ def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario0_none(
 ):
     # ESTABLISH
     fiscal_events_dir = get_test_etl_dir()
-    set_dir(fiscal_events_dir)
     # WHEN
     owner_events_sets = collect_events_dir_owner_events_sets(fiscal_events_dir)
     # THEN
@@ -814,9 +786,7 @@ def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario2_DirsExist(
     assert owner_events_sets == {bob_str: {event1, event2}, sue_str: {event2, event7}}
 
 
-def test_get_owners_downhill_event_ints_ReturnsObj_Scenario0_Empty(
-    env_dir_setup_cleanup,
-):
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario0_Empty():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -834,9 +804,7 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario0_Empty(
     assert owners_downhill_event_ints == {}
 
 
-def test_get_owners_downhill_event_ints_ReturnsObj_Scenario1_simple(
-    env_dir_setup_cleanup,
-):
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario1_simple():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -850,6 +818,79 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario1_simple(
     # WHEN
     owners_downhill_event_ints = get_owners_downhill_event_ints(
         owner_events_sets, downhill_owners, downhill_event_int
+    )
+
+    # THEN
+    assert owners_downhill_event_ints == {bob_str: event2, sue_str: event2}
+
+
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario2Empty_downhill_event_int():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    event1 = 1
+    event2 = 2
+    event7 = 7
+    owner_events_sets = {
+        bob_str: {event1, event2},
+        sue_str: {event2, event7},
+        yao_str: {event1, event2, event7},
+    }
+    downhill_owners = {bob_str, sue_str}
+
+    # WHEN
+    owners_downhill_event_ints = get_owners_downhill_event_ints(
+        owner_events_sets, downhill_owners
+    )
+
+    # THEN
+    assert owners_downhill_event_ints == {bob_str: event2, sue_str: event7}
+
+
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario3Empty_downhill_owners():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    event1 = 1
+    event2 = 2
+    event7 = 7
+    owner_events_sets = {
+        bob_str: {event1, event2},
+        sue_str: {event2, event7},
+        yao_str: {event1, event2, event7},
+    }
+
+    # WHEN
+    owners_downhill_event_ints = get_owners_downhill_event_ints(owner_events_sets)
+
+    # THEN
+    assert owners_downhill_event_ints == {
+        bob_str: event2,
+        sue_str: event7,
+        yao_str: event7,
+    }
+
+
+def test_get_owners_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_owners_Withdownhill_event_int():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    event1 = 1
+    event2 = 2
+    event7 = 7
+    owner_events_sets = {
+        bob_str: {event1, event2},
+        sue_str: {event2, event7},
+        yao_str: {event7},
+    }
+    downhill_event_int = 2
+
+    # WHEN
+    owners_downhill_event_ints = get_owners_downhill_event_ints(
+        owner_events_sets, ref_event_int=downhill_event_int
     )
 
     # THEN

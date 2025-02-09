@@ -47,7 +47,7 @@ def weekday_order_str() -> str:
     return "weekday_order"
 
 
-def get_fiscal_config_file_name() -> str:
+def get_fiscal_config_filename() -> str:
     return "fiscal_config.json"
 
 
@@ -88,7 +88,7 @@ def fiscal_timeline_weekday_str() -> str:
 
 def get_fiscal_config_dict() -> dict:
     return get_dict_from_json(
-        open_file(config_file_dir(), get_fiscal_config_file_name())
+        open_file(config_file_dir(), get_fiscal_config_filename())
     )
 
 

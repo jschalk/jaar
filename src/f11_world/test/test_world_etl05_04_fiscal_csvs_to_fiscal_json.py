@@ -1,5 +1,6 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f03_chrono.chrono import timelineunit_shop, timeline_config_shop
+from src.f05_listen.hub_paths import create_fiscal_json_path
 from src.f07_fiscal.fiscal import (
     fiscalunit_shop,
     get_from_json as fiscalunit_get_from_json,
@@ -34,13 +35,11 @@ def test_WorldUnit_fiscal_csvs_to_jsons_Scenario0_CreateFilesWithOnlyFiscalTitle
     save_file(fiscal_mstr_dir, x_fis.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
     save_file(fiscal_mstr_dir, x_fis.week_agg_csv_filename, x_cols.week_agg_empty_csv)
 
-    accord23_json_filename = f"{accord23_str}.json"
-    accord45_json_filename = f"{accord45_str}.json"
-    fiscals_dir = create_path(fizz_world._fiscal_mstr_dir, "fiscals")
-    accord23_dir = create_path(fiscals_dir, accord23_str)
-    accord45_dir = create_path(fiscals_dir, accord45_str)
-    accord23_json_path = create_path(accord23_dir, accord23_json_filename)
-    accord45_json_path = create_path(accord45_dir, accord45_json_filename)
+    # accord23_json_filename = f"{accord23_str}.json"
+    # accord45_json_filename = f"{accord45_str}.json"
+    fiscal_mstr_dir = fizz_world._fiscal_mstr_dir
+    accord23_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord23_str)
+    accord45_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord45_str)
     assert os_path_exists(accord23_json_path) is False
     assert os_path_exists(accord45_json_path) is False
 
@@ -87,13 +86,9 @@ def test_WorldUnit_fiscal_csvs_to_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs
     save_file(fiscal_mstr_dir, x_fis.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
     save_file(fiscal_mstr_dir, x_fis.week_agg_csv_filename, x_cols.week_agg_empty_csv)
 
-    accord23_json_filename = f"{accord23_str}.json"
-    accord45_json_filename = f"{accord45_str}.json"
-    fiscals_dir = create_path(fizz_world._fiscal_mstr_dir, "fiscals")
-    accord23_dir = create_path(fiscals_dir, accord23_str)
-    accord45_dir = create_path(fiscals_dir, accord45_str)
-    accord23_json_path = create_path(accord23_dir, accord23_json_filename)
-    accord45_json_path = create_path(accord45_dir, accord45_json_filename)
+    fiscal_mstr_dir = fizz_world._fiscal_mstr_dir
+    accord23_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord23_str)
+    accord45_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord45_str)
     assert os_path_exists(accord23_json_path) is False
     assert os_path_exists(accord45_json_path) is False
 

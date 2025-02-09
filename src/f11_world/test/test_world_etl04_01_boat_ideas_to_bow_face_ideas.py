@@ -75,8 +75,8 @@ def test_WorldUnit_boat_ideas_to_bow_face_ideas_CreatesOtxSheets_Scenario0_Group
 #     minute_480 = 480
 #     hour6am = "6am"
 #     hour7am = "7am"
-#     ex_file_name = "fizzbuzz.xlsx"
-#     ocean_file_path = create_path(fizz_world._ocean_dir, ex_file_name)
+#     ex_filename = "fizzbuzz.xlsx"
+#     ocean_file_path = create_path(fizz_world._ocean_dir, ex_filename)
 #     idea_columns = [
 #         face_name_str(),
 #         event_int_str(),

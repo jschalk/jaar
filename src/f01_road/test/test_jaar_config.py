@@ -3,7 +3,7 @@ from src.f01_road.jaar_config import (
     forecast_str,
     get_owners_folder,
     get_rootpart_of_keep_dir,
-    treasury_file_name,
+    treasury_filename,
     max_tree_traverse_default,
     default_river_blocks_count,
     default_unknown_word,
@@ -28,8 +28,8 @@ def test_get_rootpart_of_keep_dir_ReturnsObj():
     assert get_rootpart_of_keep_dir() == "itemroot"
 
 
-def test_treasury_file_name_ReturnsObj() -> str:
-    assert treasury_file_name() == "treasury.db"
+def test_treasury_filename_ReturnsObj() -> str:
+    assert treasury_filename() == "treasury.db"
 
 
 def test_max_tree_traverse_default_ReturnsObj() -> str:

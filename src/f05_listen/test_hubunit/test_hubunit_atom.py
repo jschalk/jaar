@@ -14,17 +14,17 @@ from src.f05_listen.examples.listen_env import (
 from os.path import exists as os_path_exists
 
 
-def test_HubUnit_atom_file_name_ReturnsObj():
+def test_HubUnit_atom_filename_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fiscals_dir(), fiscal_title(), yao_str)
     one_int = 1
 
     # WHEN
-    one_atom_file_name = yao_hubunit.atom_file_name(one_int)
+    one_atom_filename = yao_hubunit.atom_filename(one_int)
 
     # THEN
-    assert one_atom_file_name == f"{one_int}.json"
+    assert one_atom_filename == f"{one_int}.json"
 
 
 def test_HubUnit_atom_file_path_ReturnsObj():
@@ -37,8 +37,8 @@ def test_HubUnit_atom_file_path_ReturnsObj():
     one_atom_file_path = yao_hubunit.atom_file_path(one_int)
 
     # THEN
-    one_atom_file_name = yao_hubunit.atom_file_name(one_int)
-    expected_path = create_path(yao_hubunit._atoms_dir, one_atom_file_name)
+    one_atom_filename = yao_hubunit.atom_filename(one_int)
+    expected_path = create_path(yao_hubunit._atoms_dir, one_atom_filename)
     assert one_atom_file_path == expected_path
 
 

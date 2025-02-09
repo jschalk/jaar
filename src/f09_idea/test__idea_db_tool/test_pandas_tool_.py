@@ -57,17 +57,17 @@ def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(
     # ESTABLISH
     env_dir = idea_fiscals_dir()
     small_dt = get_small_example01_dataframe()
-    ex_file_name = "fizzbuzz.csv"
-    ex_file_path = create_path(env_dir, ex_file_name)
+    ex_filename = "fizzbuzz.csv"
+    ex_file_path = create_path(env_dir, ex_filename)
     assert os_path_exists(ex_file_path) is False
 
     # WHEN
-    save_dataframe_to_csv(small_dt, env_dir, ex_file_name)
+    save_dataframe_to_csv(small_dt, env_dir, ex_filename)
 
     # THEN
     assert os_path_exists(ex_file_path)
     small_example01_csv = get_small_example01_csv()
-    assert open_file(env_dir, ex_file_name) == small_example01_csv
+    assert open_file(env_dir, ex_filename) == small_example01_csv
 
 
 def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(
@@ -76,14 +76,14 @@ def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(
     # ESTABLISH
     env_dir = idea_fiscals_dir()
     atom_example_dt = get_ex02_atom_dataframe()
-    ex_file_name = "atom_example.csv"
+    ex_filename = "atom_example.csv"
 
     # WHEN
-    save_dataframe_to_csv(atom_example_dt, env_dir, ex_file_name)
+    save_dataframe_to_csv(atom_example_dt, env_dir, ex_filename)
 
     # THEN
     function_ex02_atom_csv = get_ex02_atom_csv()
-    file_ex02_atom_csv = open_file(env_dir, ex_file_name)
+    file_ex02_atom_csv = open_file(env_dir, ex_filename)
     print(f"{function_ex02_atom_csv=}")
     print(f"    {file_ex02_atom_csv=}")
     assert file_ex02_atom_csv == function_ex02_atom_csv

@@ -37,7 +37,7 @@ def test_HubUnit_get_max_gift_file_number_ReturnsObj(env_dir_setup_cleanup):
 
     # ESTABLISH
     six_int = 6
-    save_file(sue_hubunit._gifts_dir, sue_hubunit.gift_file_name(six_int), "x")
+    save_file(sue_hubunit._gifts_dir, sue_hubunit.gift_filename(six_int), "x")
 
     # WHEN / THEN
     assert sue_hubunit.get_max_gift_file_number() == six_int
@@ -55,7 +55,7 @@ def test_HubUnit_gift_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert sue_hubunit.gift_file_exists(six_int) is False
 
     # WHEN
-    save_file(sue_hubunit._gifts_dir, sue_hubunit.gift_file_name(six_int), "x")
+    save_file(sue_hubunit._gifts_dir, sue_hubunit.gift_filename(six_int), "x")
 
     # THEN
     assert sue_hubunit.gift_file_exists(None) is False

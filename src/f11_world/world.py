@@ -39,11 +39,13 @@ from src.f10_etl.transformers import (
     etl_idea_staging_to_fiscal_tables,
     etl_fiscal_staging_tables_to_fiscal_csvs,
     etl_fiscal_agg_tables_to_fiscal_csvs,
-    etl_fiscal_csvs_to_jsons,
+    etl_fiscal_csvs_to_fiscal_jsons,
     etl_idea_staging_to_bud_tables,
     etl_bud_tables_to_event_bud_csvs,
     etl_event_bud_csvs_to_gift_json,
     etl_event_gift_json_to_event_inherited_budunits,
+    etl_event_inherited_budunits_to_fiscal_voice,
+    etl_fiscal_voice_to_fiscal_forecast,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -187,7 +189,7 @@ class WorldUnit:
         etl_fiscal_agg_tables_to_fiscal_csvs(conn_or_cursor, self._fiscal_mstr_dir)
 
     def fiscal_csvs_to_jsons(self):
-        etl_fiscal_csvs_to_jsons(self._fiscal_mstr_dir)
+        etl_fiscal_csvs_to_fiscal_jsons(self._fiscal_mstr_dir)
 
     def bud_tables_to_event_bud_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fiscal_mstr_dir)
@@ -197,6 +199,12 @@ class WorldUnit:
 
     def event_gift_json_to_event_inherited_budunits(self):
         etl_event_gift_json_to_event_inherited_budunits(self._fiscal_mstr_dir)
+
+    def event_inherited_budunits_to_fiscal_voice(self):
+        etl_event_inherited_budunits_to_fiscal_voice(self._fiscal_mstr_dir)
+
+    def fiscal_voice_to_fiscal_forecast(self):
+        etl_fiscal_voice_to_fiscal_forecast(self._fiscal_mstr_dir)
 
     def get_dict(self) -> dict:
         return {

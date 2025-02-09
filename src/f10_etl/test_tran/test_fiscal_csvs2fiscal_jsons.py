@@ -17,6 +17,7 @@ from src.f04_gift.atom_config import (
     penny_str,
     respect_bit_str,
 )
+from src.f05_listen.hub_paths import create_fiscal_json_path
 from src.f07_fiscal.fiscal import (
     fiscalunit_shop,
     get_from_json as fiscalunit_get_from_json,
@@ -26,12 +27,12 @@ from src.f10_etl.fiscal_etl_tool import (
     FiscalPrimeColumnsRef,
     FiscalPrimeObjsRef,
 )
-from src.f10_etl.transformers import etl_fiscal_csvs_to_jsons
+from src.f10_etl.transformers import etl_fiscal_csvs_to_fiscal_jsons
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_etl_fiscal_csvs_to_jsons_Scenario0_CreateFilesWithOnlyFiscalTitle(
+def test_etl_fiscal_csvs_to_fiscal_jsons_Scenario0_CreateFilesWithOnlyFiscalTitle(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -50,18 +51,13 @@ def test_etl_fiscal_csvs_to_jsons_Scenario0_CreateFilesWithOnlyFiscalTitle(
     save_file(fiscal_mstr_dir, x_fis.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
     save_file(fiscal_mstr_dir, x_fis.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
     save_file(fiscal_mstr_dir, x_fis.week_agg_csv_filename, x_cols.week_agg_empty_csv)
-    accord23_json_filename = f"{accord23_str}.json"
-    accord45_json_filename = f"{accord45_str}.json"
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    accord23_dir = create_path(fiscals_dir, accord23_str)
-    accord45_dir = create_path(fiscals_dir, accord45_str)
-    accord23_json_path = create_path(accord23_dir, accord23_json_filename)
-    accord45_json_path = create_path(accord45_dir, accord45_json_filename)
+    accord23_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord23_str)
+    accord45_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord45_str)
     assert os_path_exists(accord23_json_path) is False
     assert os_path_exists(accord45_json_path) is False
 
     # WHEN
-    etl_fiscal_csvs_to_jsons(fiscal_mstr_dir=fiscal_mstr_dir)
+    etl_fiscal_csvs_to_fiscal_jsons(fiscal_mstr_dir=fiscal_mstr_dir)
 
     # THEN
     assert os_path_exists(accord23_json_path)
@@ -72,7 +68,7 @@ def test_etl_fiscal_csvs_to_jsons_Scenario0_CreateFilesWithOnlyFiscalTitle(
     assert accord45_fiscal == fiscalunit_shop(accord45_str)
 
 
-def test_etl_fiscal_csvs_to_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs(
+def test_etl_fiscal_csvs_to_fiscal_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -102,18 +98,13 @@ def test_etl_fiscal_csvs_to_jsons_Scenario1_CreateFilesWithFiscalUnitAttrs(
     save_file(fiscal_mstr_dir, x_fis.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
     save_file(fiscal_mstr_dir, x_fis.week_agg_csv_filename, x_cols.week_agg_empty_csv)
 
-    accord23_json_filename = f"{accord23_str}.json"
-    accord45_json_filename = f"{accord45_str}.json"
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    accord23_dir = create_path(fiscals_dir, accord23_str)
-    accord45_dir = create_path(fiscals_dir, accord45_str)
-    accord23_json_path = create_path(accord23_dir, accord23_json_filename)
-    accord45_json_path = create_path(accord45_dir, accord45_json_filename)
+    accord23_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord23_str)
+    accord45_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord45_str)
     assert os_path_exists(accord23_json_path) is False
     assert os_path_exists(accord45_json_path) is False
 
     # WHEN
-    etl_fiscal_csvs_to_jsons(fiscal_mstr_dir)
+    etl_fiscal_csvs_to_fiscal_jsons(fiscal_mstr_dir)
 
     # THEN
     assert os_path_exists(accord23_json_path)

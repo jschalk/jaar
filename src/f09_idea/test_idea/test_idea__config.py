@@ -139,7 +139,7 @@ from src.f09_idea.idea_config import (
     get_idearef_from_file,
     get_quick_ideas_column_ref,
     config_file_dir,
-    get_idea_config_file_name,
+    get_idea_config_filename,
     get_idea_config_dict,
     get_idea_format_filenames,
     get_idea_format_filename,
@@ -378,9 +378,9 @@ def test_get_allowed_curds_ReturnObj():
     }
 
 
-def test_get_idea_config_file_name_ReturnsObj():
+def test_get_idea_config_filename_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_idea_config_file_name() == "idea_config.json"
+    assert get_idea_config_filename() == "idea_config.json"
 
 
 def test_config_file_dir_ReturnsObj() -> str:
@@ -656,7 +656,7 @@ def set_idea_config_json(dimen: str, build_order: int):
     dimen_dict[build_order_str()] = build_order
     x_idea_config[dimen] = dimen_dict
     x_file_str = get_json_from_dict(x_idea_config)
-    save_file(config_file_dir(), get_idea_config_file_name(), x_file_str)
+    save_file(config_file_dir(), get_idea_config_filename(), x_file_str)
 
 
 def test_get_idea_config_dict_ReturnsObj_build_order():
@@ -735,8 +735,8 @@ def _create_expected_idea_dimen_ref() -> dict[str, list[str]]:
     idea_numbers_sorted.sort(key=lambda x: x)
     expected_idea_dimen_ref = {}
     for idea_number in idea_numbers_sorted:
-        idea_format_file_name = get_idea_format_filename(idea_number)
-        x_idearef = get_idearef_from_file(idea_format_file_name)
+        idea_format_filename = get_idea_format_filename(idea_number)
+        x_idearef = get_idearef_from_file(idea_format_filename)
         dimens_list = x_idearef.get(dimens_str())
         for x_dimen in dimens_list:
             if expected_idea_dimen_ref.get(x_dimen) is None:

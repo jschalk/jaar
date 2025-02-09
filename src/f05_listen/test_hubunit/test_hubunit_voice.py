@@ -62,8 +62,8 @@ def test_HubUnit_create_initial_gift_files_from_default_CorrectlySavesGiftUnitFi
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
-    init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
-    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_file_name}"
+    init_gift_filename = sue_hubunit.gift_filename(init_gift_id())
+    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_filename}"
     assert os_path_exists(init_gift_file_path) is False
     assert sue_hubunit.voice_file_exists() is False
 
@@ -81,8 +81,8 @@ def test_HubUnit_create_voice_from_gifts_CreatesvoiceFileFromGiftFiles(
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
-    init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
-    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_file_name}"
+    init_gift_filename = sue_hubunit.gift_filename(init_gift_id())
+    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_filename}"
     sue_hubunit._create_initial_gift_files_from_default()
     assert os_path_exists(init_gift_file_path)
     assert sue_hubunit.voice_file_exists() is False
@@ -102,8 +102,8 @@ def test_HubUnit_create_initial_gift_and_voice_files_CreatesGiftFilesAndvoiceFil
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
-    init_gift_file_name = sue_hubunit.gift_file_name(init_gift_id())
-    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_file_name}"
+    init_gift_filename = sue_hubunit.gift_filename(init_gift_id())
+    init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_filename}"
     assert os_path_exists(init_gift_file_path) is False
     assert sue_hubunit.voice_file_exists() is False
 

@@ -21,6 +21,7 @@ from os.path import (
     splitdrive as os_path_splitdrive,
     splitext as os_path_splitext,
     join as os_path_join,
+    basename as os_path_basename,
 )
 from pathlib import Path as pathlib_Path
 from errno import ENAMETOOLONG as errno_ENAMETOOLONG, ERANGE as errno_ERANGE
@@ -60,10 +61,13 @@ def copy_dir(src_dir: str, dest_dir: str):
         shutil_copytree(src=src_dir, dst=dest_dir)
 
 
-def save_file(dest_dir: str, file_name: str, file_str: str, replace: bool = True):
+def save_file(dest_dir: str, filename: str, file_str: str, replace: bool = True):
     replace = True if replace is None else replace
-    set_dir(dest_dir)
-    file_path = create_path(dest_dir, file_name)
+    if "." not in os_path_basename(dest_dir):
+        set_dir(dest_dir)
+    else:
+        set_dir(os_path_dirname(dest_dir))
+    file_path = create_path(dest_dir, filename) if filename else dest_dir
     if (os_path_exists(file_path) and replace) or os_path_exists(file_path) is False:
         with open(file_path, "w") as f:
             f.write(file_str)
@@ -74,9 +78,9 @@ class CouldNotOpenFileException(Exception):
     pass
 
 
-def open_file(dest_dir: str, file_name: str = None):
+def open_file(dest_dir: str, filename: str = None):
     # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
-    file_path = create_path(dest_dir, file_name)
+    file_path = create_path(dest_dir, filename)
     x_str = ""
     try:
         with open(file_path, "r") as f:
@@ -106,24 +110,14 @@ def get_dir_file_strs(
     set_dir(x_dir)
     dict_x = {}
     for obj_name in os_listdir(x_dir):
-        dict_key = None
-        file_name = None
-        file_path = None
-        file_str = None
         obj_path = create_path(x_dir, obj_name)
         if os_path_isfile(obj_path) and include_files:
-            file_name = obj_name
-            file_path = create_path(x_dir, file_name)
-            file_str = open_file(dest_dir=x_dir, file_name=file_name)
-            dict_key = (
-                os_path_splitext(file_name)[0] if delete_extensions else file_name
-            )
-            dict_x[dict_key] = file_str
+            filename = obj_name
+            dict_key = os_path_splitext(filename)[0] if delete_extensions else filename
+            dict_x[dict_key] = open_file(x_dir, filename)
 
         if os_path_isdir(obj_path) and include_dirs:
-            dict_key = obj_name
-            file_str = True
-            dict_x[dict_key] = file_str
+            dict_x[obj_name] = True
     return dict_x
 
 
@@ -276,11 +270,11 @@ def is_path_existent_or_probably_creatable(path: str) -> bool:
 # # -*- CODE BLOCK END -*-
 
 
-def get_all_dirs_with_file(x_file_name: str, x_dir: pathlib_Path) -> set[str]:
+def get_all_dirs_with_file(x_filename: str, x_dir: pathlib_Path) -> set[str]:
     relative_dirs = set()
     for dirpath, dirnames, filenames in os_walk(x_dir):
         for filename in filenames:
-            if filename == x_file_name:
+            if filename == x_filename:
                 x_dir_path = pathlib_Path(dirpath)
                 relative_path = x_dir_path.relative_to(x_dir)
                 relative_dirs.add(str(relative_path).replace("\\", "/"))

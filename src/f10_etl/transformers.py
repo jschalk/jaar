@@ -16,6 +16,8 @@ from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
 from src.f04_gift.delta import get_minimal_buddelta
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
+from src.f05_listen.hub_paths import create_voice_path, create_fiscal_json_path
+from src.f07_fiscal.fiscal import get_from_json as fiscalunit_get_from_json
 from src.f07_fiscal.fiscal_config import get_fiscal_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -59,7 +61,11 @@ from src.f10_etl.tran_sqlstrs import (
     INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
-from src.f10_etl.fiscal_etl_tool import create_fiscalunit_jsons_from_prime_files
+from src.f10_etl.fiscal_etl_tool import (
+    create_fiscalunit_jsons_from_prime_files,
+    collect_events_dir_owner_events_sets,
+    get_owners_downhill_event_ints,
+)
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
@@ -161,10 +167,10 @@ class OceanToboatTransformer:
         return grouped_data
 
     def _read_and_tag_dataframe(self, ref):
-        x_file_path = create_path(ref.file_dir, ref.file_name)
+        x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
         df["file_dir"] = ref.file_dir
-        df["file_name"] = ref.file_name
+        df["filename"] = ref.filename
         df["sheet_name"] = ref.sheet_name
         return df
 
@@ -181,7 +187,7 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
         x_idea_path = create_path(x_dir, idea_filename)
         if os_path_exists(x_idea_path):
             x_fileref = IdeaFileRef(
-                file_dir=x_dir, file_name=idea_filename, idea_number=idea_number
+                file_dir=x_dir, filename=idea_filename, idea_number=idea_number
             )
             existing_excel_idea_filepaths.append(x_fileref)
     return existing_excel_idea_filepaths
@@ -198,7 +204,7 @@ class boatStagingToboatAggTransformer:
 
     def transform(self):
         for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(br_ref.file_dir, br_ref.file_name)
+            boat_idea_path = create_path(br_ref.file_dir, br_ref.filename)
             boat_staging_df = pandas_read_excel(boat_idea_path, "boat_staging")
             otx_df = self._groupby_idea_columns(boat_staging_df, br_ref.idea_number)
             upsert_sheet(boat_idea_path, "boat_agg", otx_df)
@@ -229,7 +235,7 @@ class boatAggToboatValidTransformer:
 
     def transform(self):
         for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(br_ref.file_dir, br_ref.file_name)
+            boat_idea_path = create_path(br_ref.file_dir, br_ref.filename)
             boat_agg = pandas_read_excel(boat_idea_path, "boat_agg")
             boat_valid_df = boat_agg[boat_agg["event_int"].isin(self.legitimate_events)]
             upsert_sheet(boat_idea_path, "boat_valid", boat_valid_df)
@@ -259,7 +265,7 @@ class boatAggToboatEventsTransformer:
 
     def transform(self):
         for file_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(self.boat_dir, file_ref.file_name)
+            boat_idea_path = create_path(self.boat_dir, file_ref.filename)
             boat_agg_df = pandas_read_excel(boat_idea_path, "boat_agg")
             events_df = self.get_unique_events(boat_agg_df)
             upsert_sheet(boat_idea_path, "boat_events", events_df)
@@ -286,22 +292,22 @@ class boatEventsToEventsLogTransformer:
     def transform(self):
         sheet_name = "boat_events"
         for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(self.boat_dir, br_ref.file_name)
+            boat_idea_path = create_path(self.boat_dir, br_ref.filename)
             otx_events_df = pandas_read_excel(boat_idea_path, sheet_name)
             events_log_df = self.get_event_log_df(
-                otx_events_df, self.boat_dir, br_ref.file_name
+                otx_events_df, self.boat_dir, br_ref.filename
             )
             self._save_events_log_file(events_log_df)
 
     def get_event_log_df(
-        self, otx_events_df: DataFrame, x_dir: str, x_file_name: str
+        self, otx_events_df: DataFrame, x_dir: str, x_filename: str
     ) -> DataFrame:
         otx_events_df[["file_dir"]] = x_dir
-        otx_events_df[["file_name"]] = x_file_name
+        otx_events_df[["filename"]] = x_filename
         otx_events_df[["sheet_name"]] = "boat_events"
         cols = [
             "file_dir",
-            "file_name",
+            "filename",
             "sheet_name",
             "face_name",
             "event_int",
@@ -412,8 +418,8 @@ class boatAggToStagingTransformer:
         pidgin_columns.insert(0, "src_idea")
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
-            idea_file_name = f"{idea_number}.xlsx"
-            boat_idea_path = create_path(self.boat_dir, idea_file_name)
+            idea_filename = f"{idea_number}.xlsx"
+            boat_idea_path = create_path(self.boat_dir, idea_filename)
             if os_path_exists(boat_idea_path):
                 self.insert_staging_rows(
                     pidgin_df, idea_number, boat_idea_path, pidgin_columns
@@ -556,7 +562,7 @@ def etl_boat_pidgin_agg_to_bow_face_dirs(boat_dir: str, faces_dir: str):
                 input_file=agg_pidgin,
                 output_dir=faces_dir,
                 column_name="face_name",
-                file_name="pidgin",
+                filename="pidgin",
                 sheet_name=agg_sheet_name,
             )
 
@@ -651,13 +657,13 @@ def get_event_pidgin_path(
 
 def etl_boat_ideas_to_bow_face_ideas(boat_dir: str, faces_dir: str):
     for boat_br_ref in get_existing_excel_idea_file_refs(boat_dir):
-        boat_idea_path = create_path(boat_dir, boat_br_ref.file_name)
-        if boat_br_ref.file_name not in _get_pidgen_idea_format_filenames():
+        boat_idea_path = create_path(boat_dir, boat_br_ref.filename)
+        if boat_br_ref.filename not in _get_pidgen_idea_format_filenames():
             split_excel_into_dirs(
                 input_file=boat_idea_path,
                 output_dir=faces_dir,
                 column_name="face_name",
-                file_name=boat_br_ref.idea_number,
+                filename=boat_br_ref.idea_number,
                 sheet_name="boat_valid",
             )
 
@@ -666,12 +672,12 @@ def etl_bow_face_ideas_to_bow_event_otx_ideas(faces_dir: str):
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
         for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
-            face_idea_path = create_path(face_dir, face_br_ref.file_name)
+            face_idea_path = create_path(face_dir, face_br_ref.filename)
             split_excel_into_dirs(
                 input_file=face_idea_path,
                 output_dir=face_dir,
                 column_name="event_int",
-                file_name=face_br_ref.idea_number,
+                filename=face_br_ref.idea_number,
                 sheet_name="boat_valid",
             )
 
@@ -708,11 +714,11 @@ def etl_bow_event_ideas_to_inx_events(
             face_pidgin_events = set()
         face_dir = create_path(faces_bow_dir, face_name)
         for event_int in get_level1_dirs(face_dir):
-            event_int = int(event_int)
             event_dir = create_path(face_dir, event_int)
+            event_int = int(event_int)
             pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
             for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
-                event_idea_path = create_path(event_dir, event_br_ref.file_name)
+                event_idea_path = create_path(event_dir, event_br_ref.filename)
                 idea_df = pandas_read_excel(event_idea_path, "boat_valid")
                 if pidgin_event_int != None:
                     pidgin_event_dir = create_path(face_dir, pidgin_event_int)
@@ -729,12 +735,12 @@ def etl_bow_inx_event_ideas_to_aft_faces(faces_bow_dir: str, faces_aft_dir: str)
             event_int = int(event_int)
             event_dir = create_path(face_dir, event_int)
             for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
-                event_idea_path = create_path(event_dir, event_br_ref.file_name)
+                event_idea_path = create_path(event_dir, event_br_ref.filename)
                 split_excel_into_dirs(
                     input_file=event_idea_path,
                     output_dir=faces_aft_dir,
                     column_name="face_name",
-                    file_name=event_br_ref.idea_number,
+                    filename=event_br_ref.idea_number,
                     sheet_name="inx",
                 )
 
@@ -743,7 +749,7 @@ def etl_aft_face_ideas_to_csv_files(faces_aft_dir: str):
     for face_name in get_level1_dirs(faces_aft_dir):
         face_dir = create_path(faces_aft_dir, face_name)
         for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
-            face_idea_excel_path = create_path(face_dir, face_br_ref.file_name)
+            face_idea_excel_path = create_path(face_dir, face_br_ref.filename)
             idea_csv = get_ordered_csv(pandas_read_excel(face_idea_excel_path, "inx"))
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 
@@ -896,7 +902,7 @@ def etl_fiscal_agg_tables_to_fiscal_csvs(
         save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, f"{ficsal_dimen}_agg")
 
 
-def etl_fiscal_csvs_to_jsons(fiscal_mstr_dir: str):
+def etl_fiscal_csvs_to_fiscal_jsons(fiscal_mstr_dir: str):
     for ficsal_dimen in get_fiscal_dimens():
         x_excel_path = create_path(fiscal_mstr_dir, f"{ficsal_dimen}.xlsx")
         dimen_df = open_csv(fiscal_mstr_dir, f"{ficsal_dimen}_agg.csv")
@@ -982,7 +988,6 @@ def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
                 expressed_gift = copy_deepcopy(event_gift)
                 expressed_gift.set_buddelta(sift_delta)
                 save_file(event_path, "expressed_gift.json", expressed_gift.get_json())
-                print(f"{event_path=}")
                 prev_event_int = event_int
 
 
@@ -994,3 +999,29 @@ def get_prev_event_int_budunit(
     prev_event_int_path = create_path(owner_path, prev_event_int)
     prev_bud_path = create_path(prev_event_int_path, "bud.json")
     return budunit_get_from_json(open_file(prev_bud_path))
+
+
+def etl_event_inherited_budunits_to_fiscal_voice(fiscal_mstr_dir: str):
+    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    for fiscal_title in get_level1_dirs(fiscals_dir):
+        fiscal_path = create_path(fiscals_dir, fiscal_title)
+        fiscal_events_dir = create_path(fiscal_path, "events")
+        owner_events = collect_events_dir_owner_events_sets(fiscal_events_dir)
+        owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
+        for owner_name, max_event_int in owners_max_event_int_dict.items():
+            owner_dir = create_path(fiscal_events_dir, owner_name)
+            max_event_int_dir = create_path(owner_dir, max_event_int)
+            max_event_bud_path = create_path(max_event_int_dir, "bud.json")
+            max_event_bud_json = open_file(max_event_bud_path)
+            voice_path = create_voice_path(fiscals_dir, fiscal_title, owner_name)
+            save_file(voice_path, None, max_event_bud_json)
+
+
+def etl_fiscal_voice_to_fiscal_forecast(fiscal_mstr_dir: str):
+    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    for fiscal_title in get_level1_dirs(fiscals_dir):
+        fiscal_json_path = create_fiscal_json_path(fiscal_mstr_dir, fiscal_title)
+        x_fiscalunit = fiscalunit_get_from_json(open_file(fiscal_json_path))
+        x_fiscalunit.fiscals_dir = fiscals_dir
+        x_fiscalunit._set_fiscal_dirs()
+        x_fiscalunit.generate_all_forecast_buds()

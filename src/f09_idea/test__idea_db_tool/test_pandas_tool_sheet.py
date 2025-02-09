@@ -141,8 +141,8 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(
     # ESTABLISH
     env_dir = idea_fiscals_dir()
     x_dir = create_path(env_dir, "examples_folder")
-    ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_path(x_dir, ex_file_name)
+    ex_filename = "fizzbuzz.xlsx"
+    ex_file_path = create_path(x_dir, ex_filename)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     sheet_name1 = "Sheet1x"
@@ -155,8 +155,8 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(
 
     # THEN
     assert x_sheet_names
-    assert (x_dir, ex_file_name, sheet_name1) in x_sheet_names
-    assert (x_dir, ex_file_name, sheet_name2) in x_sheet_names
+    assert (x_dir, ex_filename, sheet_name1) in x_sheet_names
+    assert (x_dir, ex_filename, sheet_name2) in x_sheet_names
     assert len(x_sheet_names) == 2
 
 
@@ -166,8 +166,8 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     # ESTABLISH
     env_dir = idea_fiscals_dir()
     x_dir = create_path(env_dir, "examples_folder")
-    ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_path(x_dir, ex_file_name)
+    ex_filename = "fizzbuzz.xlsx"
+    ex_file_path = create_path(x_dir, ex_filename)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     sugar_str = "sugar"
@@ -183,9 +183,9 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
 
     # THEN
     assert x_sheet_names
-    assert (x_dir, ex_file_name, honey_name1) not in x_sheet_names
-    assert (x_dir, ex_file_name, sugar_name1) in x_sheet_names
-    assert (x_dir, ex_file_name, sugar_name2) in x_sheet_names
+    assert (x_dir, ex_filename, honey_name1) not in x_sheet_names
+    assert (x_dir, ex_filename, sugar_name1) in x_sheet_names
+    assert (x_dir, ex_filename, sugar_name2) in x_sheet_names
     assert len(x_sheet_names) == 2
 
 
@@ -193,8 +193,8 @@ def test_sheet_exists_ReturnsObj_Scenario1(idea_env_setup_cleanup):
     # ESTABLISH
     env_dir = idea_fiscals_dir()
     x_dir = create_path(env_dir, "examples_folder")
-    ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_path(x_dir, ex_file_name)
+    ex_filename = "fizzbuzz.xlsx"
+    ex_file_path = create_path(x_dir, ex_filename)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     sugar_str = "sugar"
     honey_name1 = "honey1x"
@@ -357,8 +357,8 @@ def test_if_nan_return_None_ReturnsObj(idea_env_setup_cleanup):
     # ESTABLISH
     ex1_df = DataFrame([["yao", None]], columns=["face_name", "example_col"])
     ex1_sheet_name = "ex1"
-    ex1_file_name = "ex1.xlsx"
-    ex1_path = create_path(idea_fiscals_dir(), ex1_file_name)
+    ex1_filename = "ex1.xlsx"
+    ex1_path = create_path(idea_fiscals_dir(), ex1_filename)
     upsert_sheet(ex1_path, ex1_sheet_name, ex1_df)
     gen_df = pandas_read_excel(ex1_path, sheet_name=ex1_sheet_name)
     nan_example = gen_df["example_col"][0]

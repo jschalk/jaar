@@ -243,7 +243,7 @@ def base_item_active_requisite_str() -> str:
     return "base_item_active_requisite"
 
 
-def get_atom_config_file_name() -> str:
+def get_atom_config_filename() -> str:
     return "atom_config.json"
 
 
@@ -253,7 +253,7 @@ def config_file_dir() -> str:
 
 
 def get_atom_config_dict() -> dict:
-    return get_dict_from_json(open_file(config_file_dir(), get_atom_config_file_name()))
+    return get_dict_from_json(open_file(config_file_dir(), get_atom_config_filename()))
 
 
 def get_atom_config_jkeys(x_dimen: str) -> dict:
@@ -463,7 +463,7 @@ def get_normalized_bud_table_build() -> dict[str : dict[str, any]]:
 
 def save_atom_config_file(atom_config_dict):
     x_file_str = get_json_from_dict(atom_config_dict)
-    save_file(config_file_dir(), get_atom_config_file_name(), x_file_str)
+    save_file(config_file_dir(), get_atom_config_filename(), x_file_str)
 
 
 def get_bud_dimens() -> set:

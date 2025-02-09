@@ -596,12 +596,12 @@ def config_file_dir() -> str:
     return create_path(src_dir, "f03_chrono")
 
 
-def get_default_timeline_config_file_name() -> str:
+def get_default_timeline_config_filename() -> str:
     return "default_timeline_config.json"
 
 
 def get_default_timeline_config_dict() -> dict:
-    x_filename = get_default_timeline_config_file_name()
+    x_filename = get_default_timeline_config_filename()
     return get_dict_from_json(open_file(config_file_dir(), x_filename))
 
 

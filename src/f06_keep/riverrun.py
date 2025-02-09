@@ -211,8 +211,7 @@ class RiverRun:
     def _save_rivergrade_file(self, acct_name: AcctName):
         rivergrade = self.get_rivergrade(acct_name)
         grade_path = self.hubunit.grade_path(acct_name)
-        grade_filename = get_json_filename(acct_name)
-        save_file(grade_path, grade_filename, rivergrade.get_json())
+        save_file(grade_path, None, rivergrade.get_json())
 
     def save_rivergrade_files(self):
         for rivergrade_acct in self._rivergrades.keys():

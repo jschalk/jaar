@@ -24,7 +24,7 @@ def test_create_events_agg_df_ReturnsObj(
     event9 = 9
     events_otx_columns = [
         "file_dir",
-        "file_name",
+        "filename",
         "sheet_name",
         face_name_str(),
         event_int_str(),
@@ -32,16 +32,16 @@ def test_create_events_agg_df_ReturnsObj(
     ]
     invalid_error_str = "invalid because of conflicting event_int"
     invalid_error_str = "invalid because of conflicting event_int"
-    src3_file_name = "br00003.xlsx"
-    src5_file_name = "br00005.xlsx"
+    src3_filename = "br00003.xlsx"
+    src5_filename = "br00005.xlsx"
     oe_str = "boat_events"
-    bob_row = [boat_dir, src3_file_name, oe_str, bob_str, event3, ""]
-    sue_row = [boat_dir, src3_file_name, oe_str, sue_str, event1, invalid_error_str]
-    yao1_row = [boat_dir, src3_file_name, oe_str, yao_str, event1, invalid_error_str]
-    yao9_row = [boat_dir, src3_file_name, oe_str, yao_str, event9, ""]
-    s5_0_row = [boat_dir, src5_file_name, oe_str, bob_str, event3, ""]
-    s5_1_row = [boat_dir, src5_file_name, oe_str, yao_str, event9, ""]
-    # el_rows = [boat_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
+    bob_row = [boat_dir, src3_filename, oe_str, bob_str, event3, ""]
+    sue_row = [boat_dir, src3_filename, oe_str, sue_str, event1, invalid_error_str]
+    yao1_row = [boat_dir, src3_filename, oe_str, yao_str, event1, invalid_error_str]
+    yao9_row = [boat_dir, src3_filename, oe_str, yao_str, event9, ""]
+    s5_0_row = [boat_dir, src5_filename, oe_str, bob_str, event3, ""]
+    s5_1_row = [boat_dir, src5_filename, oe_str, yao_str, event9, ""]
+    # el_rows = [boat_dir, events_filename, elog, bob_row, sue_row, yao1_row, yao9_row]
     el_rows = [bob_row, sue_row, yao1_row, yao9_row, s5_0_row, s5_1_row]
     ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
 
@@ -79,7 +79,7 @@ def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
     event9 = 9
     events_otx_columns = [
         "file_dir",
-        "file_name",
+        "filename",
         "sheet_name",
         face_name_str(),
         event_int_str(),
@@ -88,16 +88,16 @@ def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
     invalid_error_str = "invalid because of conflicting event_int"
     invalid_error_str = "invalid because of conflicting event_int"
     boat_dir = get_test_etl_dir()
-    src3_file_name = "br00003.xlsx"
-    src5_file_name = "br00005.xlsx"
+    src3_filename = "br00003.xlsx"
+    src5_filename = "br00005.xlsx"
     oe_str = "boat_events"
-    bob_row = [boat_dir, src3_file_name, oe_str, bob_str, event3, ""]
-    sue_row = [boat_dir, src3_file_name, oe_str, sue_str, event1, invalid_error_str]
-    yao1_row = [boat_dir, src3_file_name, oe_str, yao_str, event1, invalid_error_str]
-    yao9_row = [boat_dir, src3_file_name, oe_str, yao_str, event9, ""]
-    s5_0_row = [boat_dir, src5_file_name, oe_str, bob_str, event3, ""]
-    s5_1_row = [boat_dir, src5_file_name, oe_str, yao_str, event9, ""]
-    # el_rows = [boat_dir, events_file_name, elog, bob_row, sue_row, yao1_row, yao9_row]
+    bob_row = [boat_dir, src3_filename, oe_str, bob_str, event3, ""]
+    sue_row = [boat_dir, src3_filename, oe_str, sue_str, event1, invalid_error_str]
+    yao1_row = [boat_dir, src3_filename, oe_str, yao_str, event1, invalid_error_str]
+    yao9_row = [boat_dir, src3_filename, oe_str, yao_str, event9, ""]
+    s5_0_row = [boat_dir, src5_filename, oe_str, bob_str, event3, ""]
+    s5_1_row = [boat_dir, src5_filename, oe_str, yao_str, event9, ""]
+    # el_rows = [boat_dir, events_filename, elog, bob_row, sue_row, yao1_row, yao9_row]
     el_rows = [bob_row, sue_row, yao1_row, yao9_row, s5_0_row, s5_1_row]
     ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
     events_file_path = create_path(boat_dir, "events.xlsx")

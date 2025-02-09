@@ -9,13 +9,13 @@ def config_file_dir() -> str:
     return create_path(src_dir, "f08_pidgin")
 
 
-def get_pidgin_config_file_name() -> str:
+def get_pidgin_config_filename() -> str:
     return "pidgin_config.json"
 
 
 def get_pidgin_config_dict() -> dict:
     return get_dict_from_json(
-        open_file(config_file_dir(), get_pidgin_config_file_name())
+        open_file(config_file_dir(), get_pidgin_config_filename())
     )
 
 

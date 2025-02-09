@@ -244,8 +244,8 @@ def test_listen_to_agendas_voice_forecast_ProcessesMissingDebtorBud(
     yao_str = "Yao"
     a23_str = "accord23"
     yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
-    delete_dir(yao_hubunit._voice_file_path)  # don't know why I have to do this...
-    print(f"{os_path_exists(yao_hubunit._voice_file_path)=}")
+    delete_dir(yao_hubunit._voice_path)  # don't know why I have to do this...
+    print(f"{os_path_exists(yao_hubunit._voice_path)=}")
     yao_voice = budunit_shop(yao_str)
     zia_str = "Zia"
     sue_str = "Sue"

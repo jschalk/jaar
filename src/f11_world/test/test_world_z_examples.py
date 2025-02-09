@@ -10,8 +10,8 @@ def test_ocean_to_boat_staging_PidginsAll(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_test_worlds_dir()
     x_dir = create_path(env_dir, "examples_folder")
-    ex_file_name = "fizzbuzz.xlsx"
-    ex_file_path = create_path(x_dir, ex_file_name)
+    ex_filename = "fizzbuzz.xlsx"
+    ex_file_path = create_path(x_dir, ex_filename)
     accord23_str = "accord23"
     sue_str = "Sue"
     event_int = 55
@@ -31,7 +31,7 @@ def test_ocean_to_boat_staging_PidginsAll(env_dir_setup_cleanup):
 
     # THEN
     assert x_sheet_names
-    assert (x_dir, ex_file_name, br00000_str) in x_sheet_names
-    assert (x_dir, ex_file_name, br00001_str) in x_sheet_names
-    assert (x_dir, ex_file_name, br00002_str) in x_sheet_names
+    assert (x_dir, ex_filename, br00000_str) in x_sheet_names
+    assert (x_dir, ex_filename, br00001_str) in x_sheet_names
+    assert (x_dir, ex_filename, br00002_str) in x_sheet_names
     assert len(x_sheet_names) == 3

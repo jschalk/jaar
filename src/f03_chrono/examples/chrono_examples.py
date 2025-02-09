@@ -45,8 +45,8 @@ def get_squirt_config() -> dict:
 
 
 def get_example_timeline_config(timeline_title: str) -> dict:
-    x_file_name = f"timeline_config_{timeline_title}.json"
-    return get_dict_from_json(open_file(chrono_examples_dir(), x_file_name))
+    x_filename = f"timeline_config_{timeline_title}.json"
+    return get_dict_from_json(open_file(chrono_examples_dir(), x_filename))
 
 
 def cregtime_itemunit() -> ItemUnit:

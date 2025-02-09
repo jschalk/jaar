@@ -116,8 +116,8 @@ def test_FiscalUnit_set_fiscal_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanu
     x_fiscal_dir = create_path(get_test_fiscals_dir(), accord45_str)
     x_owners_dir = create_path(x_fiscal_dir, "owners")
     x_gifts_dir = create_path(x_fiscal_dir, get_gifts_folder())
-    journal_file_name = "journal.db"
-    journal_file_path = create_path(x_fiscal_dir, journal_file_name)
+    journal_filename = "journal.db"
+    journal_file_path = create_path(x_fiscal_dir, journal_filename)
 
     assert accord_fiscal._fiscal_dir is None
     assert accord_fiscal._owners_dir is None
@@ -253,16 +253,16 @@ def test_FiscalUnit__set_all_healer_dutys_CorrectlySetsdutys(
 
     sue_hubunit.save_voice_bud(sue_voice_bud)
     yao_hubunit.save_voice_bud(yao_voice_bud)
-    sue_file_name = get_json_filename(sue_str)
-    yao_file_name = get_json_filename(yao_str)
+    sue_filename = get_json_filename(sue_str)
+    yao_filename = get_json_filename(yao_str)
     sue_dallas_hubunit = hubunit_shop(x_fiscals_dir, accord45_str, sue_str, dallas_road)
     yao_dallas_hubunit = hubunit_shop(x_fiscals_dir, accord45_str, yao_str, dallas_road)
     sue_dutys_dir = sue_dallas_hubunit.dutys_dir()
     yao_dutys_dir = yao_dallas_hubunit.dutys_dir()
-    sue_dallas_sue_duty_file_path = f"{sue_dutys_dir}/{sue_file_name}"
-    sue_dallas_yao_duty_file_path = f"{sue_dutys_dir}/{yao_file_name}"
-    yao_dallas_sue_duty_file_path = f"{yao_dutys_dir}/{sue_file_name}"
-    yao_dallas_yao_duty_file_path = f"{yao_dutys_dir}/{yao_file_name}"
+    sue_dallas_sue_duty_file_path = f"{sue_dutys_dir}/{sue_filename}"
+    sue_dallas_yao_duty_file_path = f"{sue_dutys_dir}/{yao_filename}"
+    yao_dallas_sue_duty_file_path = f"{yao_dutys_dir}/{sue_filename}"
+    yao_dallas_yao_duty_file_path = f"{yao_dutys_dir}/{yao_filename}"
     assert os_path_exists(sue_dallas_sue_duty_file_path) is False
     assert os_path_exists(sue_dallas_yao_duty_file_path) is False
     assert os_path_exists(yao_dallas_sue_duty_file_path) is False

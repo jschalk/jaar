@@ -18,10 +18,10 @@ def test_etl_ocean_to_boat_staging_CreatesboatFiles(env_dir_setup_cleanup):
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    ex_file_name = "fizzbuzz.xlsx"
+    ex_filename = "fizzbuzz.xlsx"
     ocean_dir = create_path(get_test_etl_dir(), "ocean")
     boat_dir = create_path(get_test_etl_dir(), "boat")
-    ocean_file_path = create_path(ocean_dir, ex_file_name)
+    ocean_file_path = create_path(ocean_dir, ex_filename)
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -63,10 +63,10 @@ def test_etl_ocean_to_boat_staging_CreatesboatFiles(env_dir_setup_cleanup):
     x_df = pandas_read_excel(boat_file_path, sheet_name=boat_staging_str())
     assert set(idea_columns).issubset(set(x_df.columns))
     file_dir_str = "file_dir"
-    file_name_str = "file_name"
+    filename_str = "filename"
     sheet_name_str = "sheet_name"
     assert file_dir_str in set(x_df.columns)
-    assert file_name_str in set(x_df.columns)
+    assert filename_str in set(x_df.columns)
     assert sheet_name_str in set(x_df.columns)
     assert len(x_df) == 5
     assert get_sheet_names(boat_file_path) == [boat_staging_str()]

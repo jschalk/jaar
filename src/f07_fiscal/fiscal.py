@@ -108,10 +108,9 @@ class FiscalUnit:
         owners = get_dir_file_strs(
             self._owners_dir, include_dirs=True, include_files=False
         )
-        return set(owners.keys())
+        return sorted(list(owners.keys()))
 
     def get_owner_hubunits(self) -> dict[OwnerName:HubUnit]:
-        x_owner_names = self._get_owner_folder_names()
         return {
             x_owner_name: hubunit_shop(
                 fiscals_dir=self.fiscals_dir,
@@ -121,7 +120,7 @@ class FiscalUnit:
                 bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
-            for x_owner_name in x_owner_names
+            for x_owner_name in self._get_owner_folder_names()
         }
 
     # database
@@ -239,10 +238,7 @@ class FiscalUnit:
         # if no budunit has come from voice->duty->job->forecast pipeline use voice->forecast pipeline
         x_forecast.settle_bud()
         if len(x_forecast._item_dict) == 1:
-            # pipeline_voice_forecast_str()
-            listen_to_debtors_roll_voice_forecast(listener_hubunit)
-            listener_hubunit.open_file_forecast()
-            x_forecast.settle_bud()
+            x_forecast = listen_to_debtors_roll_voice_forecast(listener_hubunit)
         if len(x_forecast._item_dict) == 1:
             x_forecast = x_voice
         listener_hubunit.save_forecast_bud(x_forecast)
@@ -251,6 +247,7 @@ class FiscalUnit:
 
     def generate_all_forecast_buds(self):
         for x_owner_name in self._get_owner_folder_names():
+            self.init_owner_keeps(x_owner_name)
             self.generate_forecast_bud(x_owner_name)
 
     def get_forecast_file_bud(self, owner_name: OwnerName) -> BudUnit:
