@@ -14,11 +14,10 @@ from pandas import DataFrame
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_mine_to_forecasts_DeletesPreviousFiles():
+def test_WorldUnit_mine_to_forecasts_DeletesPreviousFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str)
-    delete_dir(fizz_world.worlds_dir)
     print(f"{fizz_world.worlds_dir=}")
     fiscal_mstr_dir = fizz_world._fiscal_mstr_dir
     fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
@@ -31,7 +30,7 @@ def test_WorldUnit_mine_to_forecasts_DeletesPreviousFiles():
     assert os_path_exists(testing2_path)
     assert os_path_exists(testing3_path)
     print(f"{testing3_path=}")
-    assert count_dirs_files(fizz_world.worlds_dir) == 5
+    assert count_dirs_files(fizz_world.worlds_dir) == 9
 
     # WHEN
     fizz_world.mine_to_forecasts()
@@ -39,14 +38,14 @@ def test_WorldUnit_mine_to_forecasts_DeletesPreviousFiles():
     # THEN
     assert os_path_exists(testing2_path)
     assert os_path_exists(testing3_path) is False
-    assert count_dirs_files(fizz_world.worlds_dir) == 26
+    assert count_dirs_files(fizz_world.worlds_dir) == 27
 
 
 def test_WorldUnit_mine_to_forecasts_CreatesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str)
-    delete_dir(fizz_world.worlds_dir)
+    # delete_dir(fizz_world.worlds_dir)
     sue_str = "Sue"
     event_1 = 1
     event_2 = 2
@@ -84,6 +83,8 @@ def test_WorldUnit_mine_to_forecasts_CreatesFiles(env_dir_setup_cleanup):
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mine_file_path, "br00011_ex3", br00011_df)
     fiscal_mstr_dir = fizz_world._fiscal_mstr_dir
+    wrong_a23_fiscal_dir = create_path(fiscal_mstr_dir, accord23_str)
+    assert os_path_exists(wrong_a23_fiscal_dir) is False
     fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
     a23_json_path = create_fiscal_json_path(fiscal_mstr_dir, accord23_str)
     a23_sue_voice_path = create_voice_path(fiscals_dir, accord23_str, sue_str)
@@ -92,19 +93,20 @@ def test_WorldUnit_mine_to_forecasts_CreatesFiles(env_dir_setup_cleanup):
     assert os_path_exists(a23_json_path) is False
     assert os_path_exists(a23_sue_voice_path) is False
     assert os_path_exists(a23_sue_forecast_path) is False
-    assert count_dirs_files(fizz_world.worlds_dir) == 3
+    assert count_dirs_files(fizz_world.worlds_dir) == 7
 
     # WHEN
     fizz_world.mine_to_forecasts()
 
     # THEN
+    assert os_path_exists(wrong_a23_fiscal_dir) is False
     train_file_path = create_path(fizz_world._train_dir, "br00003.xlsx")
     assert os_path_exists(mine_file_path)
     assert os_path_exists(train_file_path)
     assert os_path_exists(a23_json_path)
     assert os_path_exists(a23_sue_voice_path)
     assert os_path_exists(a23_sue_forecast_path)
-    assert count_dirs_files(fizz_world.worlds_dir) == 71
+    assert count_dirs_files(fizz_world.worlds_dir) == 68
 
 
 # def test_WorldUnit_mine_to_forecasts_CreatestrainFiles(env_dir_setup_cleanup):

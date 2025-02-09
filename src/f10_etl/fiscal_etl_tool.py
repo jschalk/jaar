@@ -251,9 +251,10 @@ def create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir: str):
             fiscal_hour_dict=fiscalhours_dict.get(x_fiscal_title),
         )
 
+        fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
         fiscalunit = fiscalunit_shop(
             fiscal_title=x_fiscal_title,
-            fiscals_dir=fiscal_mstr_dir,
+            fiscals_dir=fiscals_dir,
             timeline=fiscal_timelineunit,
             present_time=if_nan_return_None(fiscal_attrs.get("present_time")),
             bridge=fiscal_attrs.get("bridge"),
@@ -265,7 +266,6 @@ def create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir: str):
         _add_cashpurchases_from_df(fiscalunit, fiscalcash_df)
         _add_dealepisodes_from_df(fiscalunit, fiscaldeal_df)
         fiscalunits[fiscalunit.fiscal_title] = fiscalunit
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
     for fiscalunit in fiscalunits.values():
         fiscal_filename = "fiscal.json"
         fiscalunit_dir = create_path(fiscals_dir, fiscalunit.fiscal_title)
