@@ -5,6 +5,7 @@ from src.f05_listen.hub_tool import (
     create_voice_path,
     create_forecast_path,
 )
+from src.f05_listen.special_func import create_pledge
 from src.f07_fiscal.fiscal import fiscalunit_shop
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
@@ -54,3 +55,89 @@ def test_WorldUnit_event_inherited_budunits_to_fiscal_voice_SetsFiles_Scenario0(
     assert generated_forecast.accts == expected_forecast.accts
     assert generated_forecast.get_dict() == expected_forecast.get_dict()
     assert generated_forecast == expected_forecast
+
+
+def test_WorldUnit_event_inherited_budunits_to_fiscal_voice_SetsFiles_Scenario1(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_inx = "Suzy"
+    bob_inx = "Bobby"
+    yao_inx = "Yao"
+    a23_str = "accord23"
+    fizz_world = worldunit_shop("fizz")
+    fiscal_mstr_dir = fizz_world._fiscal_mstr_dir
+    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    bob_voice = budunit_shop(bob_inx, a23_str)
+    bob_voice.add_acctunit(bob_inx)
+    bob_voice.add_acctunit(yao_inx)
+    bob_voice.add_acctunit(bob_inx)
+    bob_voice.add_acctunit(sue_inx)
+    bob_voice.add_acctunit(yao_inx)
+    clean_road = bob_voice.make_l1_road("clean")
+    bob_voice.add_item(clean_road, pledge=True)
+
+    yao_voice = budunit_shop(yao_inx, a23_str)
+    yao_voice.add_acctunit(bob_inx)
+    yao_voice.add_acctunit(yao_inx)
+    run_road = bob_voice.make_l1_road("run")
+    fly_road = bob_voice.make_l1_road("fly")
+    yao_voice.add_item(run_road, pledge=True)
+    yao_voice.add_item(fly_road, pledge=True)
+    assert bob_voice.item_exists(clean_road)
+    assert yao_voice.item_exists(clean_road) is False
+
+    a23_bob_voice_path = create_voice_path(fiscals_dir, a23_str, bob_inx)
+    a23_yao_voice_path = create_voice_path(fiscals_dir, a23_str, yao_inx)
+    save_file(a23_bob_voice_path, None, bob_voice.get_json())
+    save_file(a23_yao_voice_path, None, yao_voice.get_json())
+    a23_bob_forecast_path = create_forecast_path(fiscals_dir, a23_str, bob_inx)
+    a23_yao_forecast_path = create_forecast_path(fiscals_dir, a23_str, yao_inx)
+    fiscal_json_path = create_fiscal_json_path(fiscal_mstr_dir, a23_str)
+    save_file(fiscal_json_path, None, fiscalunit_shop(a23_str, fiscals_dir).get_json())
+    assert os_path_exists(a23_bob_voice_path)
+    assert os_path_exists(a23_yao_voice_path)
+    assert os_path_exists(a23_bob_forecast_path) is False
+    assert os_path_exists(a23_yao_forecast_path) is False
+
+    # WHEN
+    fizz_world.fiscal_voice_to_fiscal_forecast()
+    fizz_world.fiscal_voice_to_fiscal_forecast()
+
+    # THEN
+    assert os_path_exists(a23_bob_forecast_path)
+    assert os_path_exists(a23_yao_forecast_path)
+    gen_bob_forecast = budunit_get_from_json(open_file(a23_bob_forecast_path))
+    gen_yao_forecast = budunit_get_from_json(open_file(a23_yao_forecast_path))
+    expected_bob_forecast = budunit_shop(bob_inx, a23_str)
+    expected_yao_forecast = budunit_shop(yao_inx, a23_str)
+    expected_bob_forecast.add_acctunit(bob_inx)
+    expected_bob_forecast.add_acctunit(yao_inx)
+    expected_bob_forecast.add_acctunit(bob_inx)
+    expected_bob_forecast.add_acctunit(sue_inx)
+    expected_bob_forecast.add_acctunit(yao_inx)
+    expected_yao_forecast.add_acctunit(bob_inx)
+    expected_yao_forecast.add_acctunit(yao_inx)
+    expected_bob_forecast.add_item(clean_road, pledge=True)
+    expected_bob_forecast.add_item(run_road, pledge=True)
+    expected_bob_forecast.add_item(fly_road, pledge=True)
+    expected_yao_forecast.add_item(clean_road, pledge=True)
+    expected_yao_forecast.add_item(run_road, pledge=True)
+    expected_yao_forecast.add_item(fly_road, pledge=True)
+
+    assert gen_yao_forecast.accts.keys() == expected_yao_forecast.accts.keys()
+    print(f"{gen_yao_forecast.get_item_dict().keys()=}")
+    assert gen_yao_forecast.item_exists(clean_road)
+    assert gen_yao_forecast.get_dict() == expected_yao_forecast.get_dict()
+
+    assert gen_bob_forecast.accts.keys() == expected_bob_forecast.accts.keys()
+    expected_bob_items = expected_bob_forecast.get_item_dict().keys()
+    generate_bob_items = gen_bob_forecast.get_item_dict().keys()
+    print(f"{expected_bob_items=}")
+    print(f"{generate_bob_items=}")
+    assert generate_bob_items == expected_bob_items
+    expected_clean_item = expected_bob_forecast.get_item_obj(clean_road)
+    gen_clean_item = gen_bob_forecast.get_item_obj(clean_road)
+    assert gen_clean_item._bud_fiscal_title == expected_clean_item._bud_fiscal_title
+    assert gen_clean_item == expected_clean_item
+    assert gen_bob_forecast.get_item_obj(clean_road) == expected_clean_item
