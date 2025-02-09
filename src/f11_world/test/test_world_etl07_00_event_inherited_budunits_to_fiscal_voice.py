@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path, save_file, open_file
 from src.f01_road.allot import allot_nested_scale, allot_scale
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.f04_gift.atom_config import face_name_str, fiscal_title_str
-from src.f05_listen.hub_tool import create_events_owner_dir_path, create_voice_path
+from src.f05_listen.hub_paths import create_events_owner_dir_path, create_voice_path
 from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists

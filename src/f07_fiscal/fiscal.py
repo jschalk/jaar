@@ -238,9 +238,7 @@ class FiscalUnit:
         # if no budunit has come from voice->duty->job->forecast pipeline use voice->forecast pipeline
         x_forecast.settle_bud()
         if len(x_forecast._item_dict) == 1:
-            # pipeline_voice_forecast_str()
             x_forecast = listen_to_debtors_roll_voice_forecast(listener_hubunit)
-        print(f"save_forecast_bud {x_forecast.get_item_dict().keys()=}")
         if len(x_forecast._item_dict) == 1:
             x_forecast = x_voice
         listener_hubunit.save_forecast_bud(x_forecast)

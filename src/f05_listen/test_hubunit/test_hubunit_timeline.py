@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.finance import default_fund_pool
-from src.f05_listen.hub_tool import create_deal_path, create_budpoint_dir_path
+from src.f05_listen.hub_paths import create_deal_path, create_budpoint_dir_path
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.example_listen_buds import (
     get_budunit_with_4_levels,

@@ -9,7 +9,7 @@ from src.f04_gift.atom_config import (
     penny_str,
     respect_bit_str,
 )
-from src.f05_listen.hub_tool import create_fiscal_json_path
+from src.f05_listen.hub_paths import create_fiscal_json_path
 from src.f07_fiscal.fiscal import get_from_json as fiscal_get_from_json, fiscalunit_shop
 from src.f07_fiscal.fiscal_config import (
     fiscalunit_str,

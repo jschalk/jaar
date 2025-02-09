@@ -18,7 +18,7 @@ from src.f01_road.jaar_config import (
     get_fiscal_title_if_None,
 )
 from src.f02_bud.bud import budunit_shop
-from src.f05_listen.hub_tool import (
+from src.f05_listen.hub_paths import (
     create_timeline_dir_path,
     create_voice_path,
     create_forecast_path,
