@@ -931,7 +931,9 @@ def etl_event_bud_csvs_to_gift_json(fiscal_mstr_dir: str):
 
 def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
     idea_sqlite_types = get_idea_sqlite_types()
-    for bud_dimen in get_bud_dimens():
+    bud_dimens = get_bud_dimens()
+    bud_dimens.remove("budunit")
+    for bud_dimen in bud_dimens:
         bud_dimen_put_csv = f"{bud_dimen}_put_agg.csv"
         bud_dimen_del_csv = f"{bud_dimen}_del_agg.csv"
         put_path = create_path(owner_path, bud_dimen_put_csv)

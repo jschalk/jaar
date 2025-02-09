@@ -180,9 +180,6 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
 def listen_to_agendas_voice_forecast(
     listener_forecast: BudUnit, listener_hubunit: HubUnit
 ):
-    print(
-        f"{listener_forecast.owner_name=} {listener_forecast.get_item_dict().keys()=}"
-    )
     for x_acctunit in get_ordered_debtors_roll(listener_forecast):
         if x_acctunit.acct_name == listener_forecast.owner_name:
             listen_to_speaker_agenda(
@@ -194,9 +191,6 @@ def listen_to_agendas_voice_forecast(
             if speaker_forecast is None:
                 speaker_forecast = create_empty_bud(listener_forecast, speaker_id)
             listen_to_speaker_agenda(listener_forecast, speaker_forecast)
-    print(
-        f"{listener_forecast.owner_name=} {listener_forecast.get_item_dict().keys()=}"
-    )
 
 
 def listen_to_agendas_duty_job(listener_job: BudUnit, healer_hubunit: HubUnit):
