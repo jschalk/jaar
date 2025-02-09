@@ -70,7 +70,7 @@ def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllDimens
     e1_title_rows = [e1_title0, e1_title1]
     staging_title_df = DataFrame(e1_title_rows, columns=title_staging_columns)
 
-    pidgin_path = create_path(fizz_world._boat_dir, "pidgin.xlsx")
+    pidgin_path = create_path(fizz_world._train_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, name_staging_str, staging_name_df)
     upsert_sheet(pidgin_path, label_staging_str, staging_label_df)
     upsert_sheet(pidgin_path, road_staging_str, staging_road_df)
@@ -86,7 +86,7 @@ def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllDimens
     assert sheet_exists(pidgin_path, title_agg_str) is False
 
     # WHEN
-    fizz_world.boat_pidgin_staging_to_agg()
+    fizz_world.train_pidgin_staging_to_agg()
 
     # THEN
     assert os_path_exists(pidgin_path)

@@ -23,7 +23,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapDimens(
+def test_WorldUnit_train_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -95,14 +95,14 @@ def test_WorldUnit_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapDimens(
     e1_title_rows = [e1_title0, e1_title1]
     e1_title_agg_df = DataFrame(e1_title_rows, columns=title_file_columns)
 
-    agg_pidgin_path = create_path(fizz_world._boat_dir, "pidgin.xlsx")
+    agg_pidgin_path = create_path(fizz_world._train_dir, "pidgin.xlsx")
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
     upsert_sheet(agg_pidgin_path, title_agg_str, e1_title_agg_df)
 
     # WHEN
-    fizz_world.boat_pidgin_agg_to_bow_face_dirs()
+    fizz_world.train_pidgin_agg_to_bow_face_dirs()
 
     # THEN
     sue_dir = create_path(fizz_world._faces_bow_dir, sue_str)

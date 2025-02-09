@@ -35,7 +35,7 @@ from src.f09_idea.idea_db_tool import (
     split_excel_into_dirs,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
-    get_boat_staging_grouping_with_all_values_equal_df,
+    get_train_staging_grouping_with_all_values_equal_df,
     translate_all_columns_dataframe,
     insert_idea_csv,
     save_table_to_csv,
@@ -145,23 +145,23 @@ def get_inx_obj(class_type, x_row) -> str:
     return x_row[class_typeS[class_type]["inx_obj"]]
 
 
-def etl_ocean_to_boat_staging(ocean_dir: str, boat_dir: str):
-    transformer = OceanToboatTransformer(ocean_dir, boat_dir)
+def etl_mine_to_train_staging(mine_dir: str, train_dir: str):
+    transformer = mineTotrainTransformer(mine_dir, train_dir)
     transformer.transform()
 
 
-class OceanToboatTransformer:
-    def __init__(self, ocean_dir: str, boat_dir: str):
-        self.ocean_dir = ocean_dir
-        self.boat_dir = boat_dir
+class mineTotrainTransformer:
+    def __init__(self, mine_dir: str, train_dir: str):
+        self.mine_dir = mine_dir
+        self.train_dir = train_dir
 
     def transform(self):
-        for idea_number, dfs in self._group_ocean_data().items():
-            self._save_to_boat_staging(idea_number, dfs)
+        for idea_number, dfs in self._group_mine_data().items():
+            self._save_to_train_staging(idea_number, dfs)
 
-    def _group_ocean_data(self):
+    def _group_mine_data(self):
         grouped_data = {}
-        for ref in get_all_idea_dataframes(self.ocean_dir):
+        for ref in get_all_idea_dataframes(self.mine_dir):
             df = self._read_and_tag_dataframe(ref)
             grouped_data.setdefault(ref.idea_number, []).append(df)
         return grouped_data
@@ -174,10 +174,10 @@ class OceanToboatTransformer:
         df["sheet_name"] = ref.sheet_name
         return df
 
-    def _save_to_boat_staging(self, idea_number: str, dfs: list):
+    def _save_to_train_staging(self, idea_number: str, dfs: list):
         forecast_df = pandas_concat(dfs)
-        boat_path = create_path(self.boat_dir, f"{idea_number}.xlsx")
-        upsert_sheet(boat_path, "boat_staging", forecast_df)
+        train_path = create_path(self.train_dir, f"{idea_number}.xlsx")
+        upsert_sheet(train_path, "train_staging", forecast_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -193,85 +193,87 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
     return existing_excel_idea_filepaths
 
 
-def etl_boat_staging_to_boat_agg(boat_dir):
-    transformer = boatStagingToboatAggTransformer(boat_dir)
+def etl_train_staging_to_train_agg(train_dir):
+    transformer = trainStagingTotrainAggTransformer(train_dir)
     transformer.transform()
 
 
-class boatStagingToboatAggTransformer:
-    def __init__(self, boat_dir: str):
-        self.boat_dir = boat_dir
+class trainStagingTotrainAggTransformer:
+    def __init__(self, train_dir: str):
+        self.train_dir = train_dir
 
     def transform(self):
-        for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-            boat_staging_df = pandas_read_excel(boat_idea_path, "boat_staging")
-            otx_df = self._groupby_idea_columns(boat_staging_df, br_ref.idea_number)
-            upsert_sheet(boat_idea_path, "boat_agg", otx_df)
+        for br_ref in get_existing_excel_idea_file_refs(self.train_dir):
+            train_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+            train_staging_df = pandas_read_excel(train_idea_path, "train_staging")
+            otx_df = self._groupby_idea_columns(train_staging_df, br_ref.idea_number)
+            upsert_sheet(train_idea_path, "train_agg", otx_df)
 
     def _groupby_idea_columns(
-        self, boat_staging_df: DataFrame, idea_number: str
+        self, train_staging_df: DataFrame, idea_number: str
     ) -> DataFrame:
         idea_filename = get_idea_format_filename(idea_number)
         idearef = get_idearef_obj(idea_filename)
         required_columns = idearef.get_otx_keys_list()
         idea_columns_set = set(idearef._attributes.keys())
         idea_columns_list = get_custom_sorted_list(idea_columns_set)
-        boat_staging_df = boat_staging_df[idea_columns_list]
-        return get_boat_staging_grouping_with_all_values_equal_df(
-            boat_staging_df, required_columns
+        train_staging_df = train_staging_df[idea_columns_list]
+        return get_train_staging_grouping_with_all_values_equal_df(
+            train_staging_df, required_columns
         )
 
 
-def etl_boat_agg_to_boat_valid(boat_dir: str, legitimate_events: set[EventInt]):
-    transformer = boatAggToboatValidTransformer(boat_dir, legitimate_events)
+def etl_train_agg_to_train_valid(train_dir: str, legitimate_events: set[EventInt]):
+    transformer = trainAggTotrainValidTransformer(train_dir, legitimate_events)
     transformer.transform()
 
 
-class boatAggToboatValidTransformer:
-    def __init__(self, boat_dir: str, legitimate_events: set[EventInt]):
-        self.boat_dir = boat_dir
+class trainAggTotrainValidTransformer:
+    def __init__(self, train_dir: str, legitimate_events: set[EventInt]):
+        self.train_dir = train_dir
         self.legitimate_events = legitimate_events
 
     def transform(self):
-        for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-            boat_agg = pandas_read_excel(boat_idea_path, "boat_agg")
-            boat_valid_df = boat_agg[boat_agg["event_int"].isin(self.legitimate_events)]
-            upsert_sheet(boat_idea_path, "boat_valid", boat_valid_df)
+        for br_ref in get_existing_excel_idea_file_refs(self.train_dir):
+            train_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+            train_agg = pandas_read_excel(train_idea_path, "train_agg")
+            train_valid_df = train_agg[
+                train_agg["event_int"].isin(self.legitimate_events)
+            ]
+            upsert_sheet(train_idea_path, "train_valid", train_valid_df)
 
     # def _groupby_idea_columns(
-    #     self, boat_staging_df: DataFrame, idea_number: str
+    #     self, train_staging_df: DataFrame, idea_number: str
     # ) -> DataFrame:
     #     idea_filename = get_idea_format_filename(idea_number)
     #     idearef = get_idearef_obj(idea_filename)
     #     required_columns = idearef.get_otx_keys_list()
     #     idea_columns_set = set(idearef._attributes.keys())
     #     idea_columns_list = get_custom_sorted_list(idea_columns_set)
-    #     boat_staging_df = boat_staging_df[idea_columns_list]
-    #     return get_boat_staging_grouping_with_all_values_equal_df(
-    #         boat_staging_df, required_columns
+    #     train_staging_df = train_staging_df[idea_columns_list]
+    #     return get_train_staging_grouping_with_all_values_equal_df(
+    #         train_staging_df, required_columns
     #     )
 
 
-def etl_boat_agg_to_boat_events(boat_dir):
-    transformer = boatAggToboatEventsTransformer(boat_dir)
+def etl_train_agg_to_train_events(train_dir):
+    transformer = trainAggTotrainEventsTransformer(train_dir)
     transformer.transform()
 
 
-class boatAggToboatEventsTransformer:
-    def __init__(self, boat_dir: str):
-        self.boat_dir = boat_dir
+class trainAggTotrainEventsTransformer:
+    def __init__(self, train_dir: str):
+        self.train_dir = train_dir
 
     def transform(self):
-        for file_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(self.boat_dir, file_ref.filename)
-            boat_agg_df = pandas_read_excel(boat_idea_path, "boat_agg")
-            events_df = self.get_unique_events(boat_agg_df)
-            upsert_sheet(boat_idea_path, "boat_events", events_df)
+        for file_ref in get_existing_excel_idea_file_refs(self.train_dir):
+            train_idea_path = create_path(self.train_dir, file_ref.filename)
+            train_agg_df = pandas_read_excel(train_idea_path, "train_agg")
+            events_df = self.get_unique_events(train_agg_df)
+            upsert_sheet(train_idea_path, "train_events", events_df)
 
-    def get_unique_events(self, boat_agg_df: DataFrame) -> DataFrame:
-        events_df = boat_agg_df[["face_name", "event_int"]].drop_duplicates()
+    def get_unique_events(self, train_agg_df: DataFrame) -> DataFrame:
+        events_df = train_agg_df[["face_name", "event_int"]].drop_duplicates()
         events_df["error_message"] = (
             events_df["event_int"]
             .duplicated(keep=False)
@@ -280,22 +282,22 @@ class boatAggToboatEventsTransformer:
         return events_df.sort_values(["face_name", "event_int"])
 
 
-def etl_boat_events_to_events_log(boat_dir: str):
-    transformer = boatEventsToEventsLogTransformer(boat_dir)
+def etl_train_events_to_events_log(train_dir: str):
+    transformer = trainEventsToEventsLogTransformer(train_dir)
     transformer.transform()
 
 
-class boatEventsToEventsLogTransformer:
-    def __init__(self, boat_dir: str):
-        self.boat_dir = boat_dir
+class trainEventsToEventsLogTransformer:
+    def __init__(self, train_dir: str):
+        self.train_dir = train_dir
 
     def transform(self):
-        sheet_name = "boat_events"
-        for br_ref in get_existing_excel_idea_file_refs(self.boat_dir):
-            boat_idea_path = create_path(self.boat_dir, br_ref.filename)
-            otx_events_df = pandas_read_excel(boat_idea_path, sheet_name)
+        sheet_name = "train_events"
+        for br_ref in get_existing_excel_idea_file_refs(self.train_dir):
+            train_idea_path = create_path(self.train_dir, br_ref.filename)
+            otx_events_df = pandas_read_excel(train_idea_path, sheet_name)
             events_log_df = self.get_event_log_df(
-                otx_events_df, self.boat_dir, br_ref.filename
+                otx_events_df, self.train_dir, br_ref.filename
             )
             self._save_events_log_file(events_log_df)
 
@@ -304,7 +306,7 @@ class boatEventsToEventsLogTransformer:
     ) -> DataFrame:
         otx_events_df[["file_dir"]] = x_dir
         otx_events_df[["filename"]] = x_filename
-        otx_events_df[["sheet_name"]] = "boat_events"
+        otx_events_df[["sheet_name"]] = "train_events"
         cols = [
             "file_dir",
             "filename",
@@ -317,7 +319,7 @@ class boatEventsToEventsLogTransformer:
         return otx_events_df
 
     def _save_events_log_file(self, events_df: DataFrame):
-        events_file_path = create_path(self.boat_dir, "events.xlsx")
+        events_file_path = create_path(self.train_dir, "events.xlsx")
         events_log_str = "events_log"
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, events_log_str)
@@ -335,25 +337,25 @@ def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
     return events_agg_df.sort_values(["event_int", "face_name"])
 
 
-def etl_boat_events_log_to_events_agg(boat_dir):
-    transformer = EventsLogToEventsAggTransformer(boat_dir)
+def etl_train_events_log_to_events_agg(train_dir):
+    transformer = EventsLogToEventsAggTransformer(train_dir)
     transformer.transform()
 
 
 class EventsLogToEventsAggTransformer:
-    def __init__(self, boat_dir: str):
-        self.boat_dir = boat_dir
+    def __init__(self, train_dir: str):
+        self.train_dir = train_dir
 
     def transform(self):
-        events_file_path = create_path(self.boat_dir, "events.xlsx")
+        events_file_path = create_path(self.train_dir, "events.xlsx")
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, "events_log")
             events_agg_df = _create_events_agg_df(events_log_df)
             upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
-def get_events_dict_from_events_agg_file(boat_dir) -> dict[int, str]:
-    events_file_path = create_path(boat_dir, "events.xlsx")
+def get_events_dict_from_events_agg_file(train_dir) -> dict[int, str]:
+    events_file_path = create_path(train_dir, "events.xlsx")
     x_dict = {}
     if os_path_exists(events_file_path):
         events_agg_df = pandas_read_excel(events_file_path, "events_agg")
@@ -364,50 +366,50 @@ def get_events_dict_from_events_agg_file(boat_dir) -> dict[int, str]:
     return x_dict
 
 
-def boat_agg_single_to_pidgin_staging(
-    pidgin_dimen: str, legitimate_events: set[EventInt], boat_dir: str
+def train_agg_single_to_pidgin_staging(
+    pidgin_dimen: str, legitimate_events: set[EventInt], train_dir: str
 ):
     x_events = legitimate_events
-    transformer = boatAggToStagingTransformer(boat_dir, pidgin_dimen, x_events)
+    transformer = trainAggToStagingTransformer(train_dir, pidgin_dimen, x_events)
     transformer.transform()
 
 
-def etl_boat_agg_to_pidgin_name_staging(
-    legitimate_events: set[EventInt], boat_dir: str
+def etl_train_agg_to_pidgin_name_staging(
+    legitimate_events: set[EventInt], train_dir: str
 ):
-    boat_agg_single_to_pidgin_staging("map_name", legitimate_events, boat_dir)
+    train_agg_single_to_pidgin_staging("map_name", legitimate_events, train_dir)
 
 
-def etl_boat_agg_to_pidgin_label_staging(
-    legitimate_events: set[EventInt], boat_dir: str
+def etl_train_agg_to_pidgin_label_staging(
+    legitimate_events: set[EventInt], train_dir: str
 ):
-    boat_agg_single_to_pidgin_staging("map_label", legitimate_events, boat_dir)
+    train_agg_single_to_pidgin_staging("map_label", legitimate_events, train_dir)
 
 
-def etl_boat_agg_to_pidgin_title_staging(
-    legitimate_events: set[EventInt], boat_dir: str
+def etl_train_agg_to_pidgin_title_staging(
+    legitimate_events: set[EventInt], train_dir: str
 ):
-    boat_agg_single_to_pidgin_staging("map_title", legitimate_events, boat_dir)
+    train_agg_single_to_pidgin_staging("map_title", legitimate_events, train_dir)
 
 
-def etl_boat_agg_to_pidgin_road_staging(
-    legitimate_events: set[EventInt], boat_dir: str
+def etl_train_agg_to_pidgin_road_staging(
+    legitimate_events: set[EventInt], train_dir: str
 ):
-    boat_agg_single_to_pidgin_staging("map_road", legitimate_events, boat_dir)
+    train_agg_single_to_pidgin_staging("map_road", legitimate_events, train_dir)
 
 
-def etl_boat_agg_to_pidgin_staging(legitimate_events: set[EventInt], boat_dir: str):
-    etl_boat_agg_to_pidgin_name_staging(legitimate_events, boat_dir)
-    etl_boat_agg_to_pidgin_label_staging(legitimate_events, boat_dir)
-    etl_boat_agg_to_pidgin_title_staging(legitimate_events, boat_dir)
-    etl_boat_agg_to_pidgin_road_staging(legitimate_events, boat_dir)
+def etl_train_agg_to_pidgin_staging(legitimate_events: set[EventInt], train_dir: str):
+    etl_train_agg_to_pidgin_name_staging(legitimate_events, train_dir)
+    etl_train_agg_to_pidgin_label_staging(legitimate_events, train_dir)
+    etl_train_agg_to_pidgin_title_staging(legitimate_events, train_dir)
+    etl_train_agg_to_pidgin_road_staging(legitimate_events, train_dir)
 
 
-class boatAggToStagingTransformer:
+class trainAggToStagingTransformer:
     def __init__(
-        self, boat_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
+        self, train_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
     ):
-        self.boat_dir = boat_dir
+        self.train_dir = train_dir
         self.legitmate_events = legitmate_events
         self.pidgin_dimen = pidgin_dimen
         self.class_type = get_class_type(pidgin_dimen)
@@ -421,26 +423,26 @@ class boatAggToStagingTransformer:
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
             idea_filename = f"{idea_number}.xlsx"
-            boat_idea_path = create_path(self.boat_dir, idea_filename)
-            if os_path_exists(boat_idea_path):
+            train_idea_path = create_path(self.train_dir, idea_filename)
+            if os_path_exists(train_idea_path):
                 self.insert_staging_rows(
-                    pidgin_df, idea_number, boat_idea_path, pidgin_columns
+                    pidgin_df, idea_number, train_idea_path, pidgin_columns
                 )
 
-        pidgin_file_path = create_path(self.boat_dir, "pidgin.xlsx")
+        pidgin_file_path = create_path(self.train_dir, "pidgin.xlsx")
         upsert_sheet(pidgin_file_path, get_sheet_stage_name(self.class_type), pidgin_df)
 
     def insert_staging_rows(
         self,
         stage_df: DataFrame,
         idea_number: str,
-        boat_idea_path: str,
+        train_idea_path: str,
         df_columns: list[str],
     ):
-        boat_agg_df = pandas_read_excel(boat_idea_path, sheet_name="boat_agg")
-        df_missing_cols = set(df_columns).difference(boat_agg_df.columns)
+        train_agg_df = pandas_read_excel(train_idea_path, sheet_name="train_agg")
+        df_missing_cols = set(df_columns).difference(train_agg_df.columns)
 
-        for index, x_row in boat_agg_df.iterrows():
+        for index, x_row in train_agg_df.iterrows():
             event_int = x_row["event_int"]
             if event_int in self.legitmate_events:
                 face_name = x_row["face_name"]
@@ -477,39 +479,39 @@ class boatAggToStagingTransformer:
         return None
 
 
-def etl_pidgin_name_staging_to_name_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "map_name")
+def etl_pidgin_name_staging_to_name_agg(train_dir: str):
+    etl_pidgin_single_staging_to_agg(train_dir, "map_name")
 
 
-def etl_pidgin_label_staging_to_label_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "map_label")
+def etl_pidgin_label_staging_to_label_agg(train_dir: str):
+    etl_pidgin_single_staging_to_agg(train_dir, "map_label")
 
 
-def etl_pidgin_road_staging_to_road_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "map_road")
+def etl_pidgin_road_staging_to_road_agg(train_dir: str):
+    etl_pidgin_single_staging_to_agg(train_dir, "map_road")
 
 
-def etl_pidgin_title_staging_to_title_agg(boat_dir: str):
-    etl_pidgin_single_staging_to_agg(boat_dir, "map_title")
+def etl_pidgin_title_staging_to_title_agg(train_dir: str):
+    etl_pidgin_single_staging_to_agg(train_dir, "map_title")
 
 
-def etl_pidgin_single_staging_to_agg(boat_dir: str, map_dimen: str):
-    transformer = PidginStagingToAggTransformer(boat_dir, map_dimen)
+def etl_pidgin_single_staging_to_agg(train_dir: str, map_dimen: str):
+    transformer = PidginStagingToAggTransformer(train_dir, map_dimen)
     transformer.transform()
 
 
-def etl_boat_pidgin_staging_to_agg(boat_dir):
-    etl_pidgin_name_staging_to_name_agg(boat_dir)
-    etl_pidgin_label_staging_to_label_agg(boat_dir)
-    etl_pidgin_road_staging_to_road_agg(boat_dir)
-    etl_pidgin_title_staging_to_title_agg(boat_dir)
+def etl_train_pidgin_staging_to_agg(train_dir):
+    etl_pidgin_name_staging_to_name_agg(train_dir)
+    etl_pidgin_label_staging_to_label_agg(train_dir)
+    etl_pidgin_road_staging_to_road_agg(train_dir)
+    etl_pidgin_title_staging_to_title_agg(train_dir)
 
 
 class PidginStagingToAggTransformer:
-    def __init__(self, boat_dir: str, pidgin_dimen: str):
-        self.boat_dir = boat_dir
+    def __init__(self, train_dir: str, pidgin_dimen: str):
+        self.train_dir = train_dir
         self.pidgin_dimen = pidgin_dimen
-        self.file_path = create_path(self.boat_dir, "pidgin.xlsx")
+        self.file_path = create_path(self.train_dir, "pidgin.xlsx")
         self.class_type = get_class_type(self.pidgin_dimen)
 
     def transform(self):
@@ -521,7 +523,7 @@ class PidginStagingToAggTransformer:
         upsert_sheet(self.file_path, get_sheet_agg_name(self.class_type), pidgin_agg_df)
 
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
-        pidgin_file_path = create_path(self.boat_dir, "pidgin.xlsx")
+        pidgin_file_path = create_path(self.train_dir, "pidgin.xlsx")
         stage_sheet_name = get_sheet_stage_name(self.class_type)
         staging_df = pandas_read_excel(pidgin_file_path, sheet_name=stage_sheet_name)
         x_pidginbodybook = self.get_validated_pidginbodybook(staging_df)
@@ -555,8 +557,8 @@ class PidginStagingToAggTransformer:
         return x_pidginheartbook
 
 
-def etl_boat_pidgin_agg_to_bow_face_dirs(boat_dir: str, faces_dir: str):
-    agg_pidgin = create_path(boat_dir, "pidgin.xlsx")
+def etl_train_pidgin_agg_to_bow_face_dirs(train_dir: str, faces_dir: str):
+    agg_pidgin = create_path(train_dir, "pidgin.xlsx")
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
         if sheet_exists(agg_pidgin, agg_sheet_name):
@@ -657,16 +659,16 @@ def get_event_pidgin_path(
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_boat_ideas_to_bow_face_ideas(boat_dir: str, faces_dir: str):
-    for boat_br_ref in get_existing_excel_idea_file_refs(boat_dir):
-        boat_idea_path = create_path(boat_dir, boat_br_ref.filename)
-        if boat_br_ref.filename not in _get_pidgen_idea_format_filenames():
+def etl_train_ideas_to_bow_face_ideas(train_dir: str, faces_dir: str):
+    for train_br_ref in get_existing_excel_idea_file_refs(train_dir):
+        train_idea_path = create_path(train_dir, train_br_ref.filename)
+        if train_br_ref.filename not in _get_pidgen_idea_format_filenames():
             split_excel_into_dirs(
-                input_file=boat_idea_path,
+                input_file=train_idea_path,
                 output_dir=faces_dir,
                 column_name="face_name",
-                filename=boat_br_ref.idea_number,
-                sheet_name="boat_valid",
+                filename=train_br_ref.idea_number,
+                sheet_name="train_valid",
             )
 
 
@@ -680,7 +682,7 @@ def etl_bow_face_ideas_to_bow_event_otx_ideas(faces_dir: str):
                 output_dir=face_dir,
                 column_name="event_int",
                 filename=face_br_ref.idea_number,
-                sheet_name="boat_valid",
+                sheet_name="train_valid",
             )
 
 
@@ -721,7 +723,7 @@ def etl_bow_event_ideas_to_inx_events(
             pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
             for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
                 event_idea_path = create_path(event_dir, event_br_ref.filename)
-                idea_df = pandas_read_excel(event_idea_path, "boat_valid")
+                idea_df = pandas_read_excel(event_idea_path, "train_valid")
                 if pidgin_event_int != None:
                     pidgin_event_dir = create_path(face_dir, pidgin_event_int)
                     pidgin_path = create_path(pidgin_event_dir, "pidgin.json")

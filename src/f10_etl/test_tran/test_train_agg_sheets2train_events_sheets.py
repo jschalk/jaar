@@ -5,20 +5,22 @@ from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
-    boat_staging_str,
-    boat_agg_str,
+    train_staging_str,
+    train_agg_str,
 )
-from src.f11_world.world import worldunit_shop
-from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
+from src.f10_etl.transformers import (
+    etl_mine_to_train_staging,
+    etl_train_staging_to_train_agg,
+    etl_train_agg_to_train_events,
+)
+from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
+def test_etl_train_agg_to_train_events_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
     sue_str = "Sue"
     yao_str = "Yao"
     event1 = 1
@@ -29,8 +31,10 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    ocean_file_path = create_path(fizz_world._ocean_dir, ex_filename)
-    boat_file_path = create_path(fizz_world._boat_dir, "br00003.xlsx")
+    mine_dir = create_path(get_test_etl_dir(), "mine")
+    train_dir = create_path(get_test_etl_dir(), "train")
+    mine_file_path = create_path(mine_dir, ex_filename)
+    train_file_path = create_path(train_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -44,15 +48,15 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
     row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
-    upsert_sheet(ocean_file_path, "example1_br00003", df1)
-    fizz_world.ocean_to_boat_staging()
-    fizz_world.boat_staging_to_boat_agg()
+    upsert_sheet(mine_file_path, "example1_br00003", df1)
+    etl_mine_to_train_staging(mine_dir, train_dir)
+    etl_train_staging_to_train_agg(train_dir)
 
     # WHEN
-    fizz_world.boat_agg_to_boat_events()
+    etl_train_agg_to_train_events(train_dir)
 
     # THEN
-    gen_otx_events_df = pandas_read_excel(boat_file_path, sheet_name="boat_events")
+    gen_otx_events_df = pandas_read_excel(train_file_path, sheet_name="train_events")
     print(f"{gen_otx_events_df.columns=}")
     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
     sue_r = [sue_str, event1, ""]
@@ -65,19 +69,18 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario0(
     assert len(gen_otx_events_df) == 3
     assert len(gen_otx_events_df) == len(ex_otx_events_df)
     assert gen_otx_events_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
-    assert get_sheet_names(boat_file_path) == [
-        boat_staging_str(),
-        boat_agg_str(),
-        "boat_events",
+    assert get_sheet_names(train_file_path) == [
+        train_staging_str(),
+        train_agg_str(),
+        "train_events",
     ]
 
 
-def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario1(
+def test_etl_train_agg_to_train_events_CreatesSheets_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
@@ -89,8 +92,10 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario1(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    ocean_file_path = create_path(fizz_world._ocean_dir, ex_filename)
-    boat_file_path = create_path(fizz_world._boat_dir, "br00003.xlsx")
+    mine_dir = create_path(get_test_etl_dir(), "mine")
+    train_dir = create_path(get_test_etl_dir(), "train")
+    mine_file_path = create_path(mine_dir, ex_filename)
+    train_file_path = create_path(train_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -105,15 +110,15 @@ def test_WorldUnit_boat_agg_to_boat_events_CreatesSheets_Scenario1(
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
-    upsert_sheet(ocean_file_path, "example1_br00003", df1)
-    fizz_world.ocean_to_boat_staging()
-    fizz_world.boat_staging_to_boat_agg()
+    upsert_sheet(mine_file_path, "example1_br00003", df1)
+    etl_mine_to_train_staging(mine_dir, train_dir)
+    etl_train_staging_to_train_agg(train_dir)
 
     # WHEN
-    fizz_world.boat_agg_to_boat_events()
+    etl_train_agg_to_train_events(train_dir)
 
     # THEN
-    gen_otx_events_df = pandas_read_excel(boat_file_path, sheet_name="boat_events")
+    gen_otx_events_df = pandas_read_excel(train_file_path, sheet_name="train_events")
     print(f"{gen_otx_events_df.columns=}")
     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
     bob_row = [bob_str, event3, ""]

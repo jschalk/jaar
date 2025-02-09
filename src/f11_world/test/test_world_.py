@@ -26,36 +26,36 @@ def test_WorldUnit_Exists():
     assert not x_world._faces_bow_dir
     assert not x_world._faces_aft_dir
     assert not x_world._world_dir
-    assert not x_world._ocean_dir
-    assert not x_world._boat_dir
+    assert not x_world._mine_dir
+    assert not x_world._train_dir
     assert not x_world._fiscal_mstr_dir
     assert not x_world._fiscalunits
     assert not x_world._pidgin_events
 
 
-def test_WorldUnit_set_ocean_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
+def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = WorldUnit("fizz")
     x_example_dir = create_path(get_test_worlds_dir(), "example_dir")
-    x_ocean_dir = create_path(x_example_dir, "ocean")
+    x_mine_dir = create_path(x_example_dir, "mine")
 
     assert fizz_world._world_dir is None
     assert fizz_world._faces_bow_dir is None
-    assert fizz_world._ocean_dir is None
-    assert fizz_world._boat_dir is None
+    assert fizz_world._mine_dir is None
+    assert fizz_world._train_dir is None
     assert fizz_world._fiscal_mstr_dir is None
-    assert os_path_exists(x_ocean_dir) is False
+    assert os_path_exists(x_mine_dir) is False
 
     # WHEN
-    fizz_world.set_ocean_dir(x_ocean_dir)
+    fizz_world.set_mine_dir(x_mine_dir)
 
     # THEN
     assert fizz_world._world_dir is None
     assert fizz_world._faces_bow_dir is None
-    assert fizz_world._ocean_dir == x_ocean_dir
-    assert fizz_world._boat_dir is None
+    assert fizz_world._mine_dir == x_mine_dir
+    assert fizz_world._train_dir is None
     assert fizz_world._fiscal_mstr_dir is None
-    assert os_path_exists(x_ocean_dir)
+    assert os_path_exists(x_mine_dir)
 
 
 def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
@@ -65,21 +65,21 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     x_world_dir = create_path(get_test_worlds_dir(), fizz_str)
     x_faces_bow_dir = create_path(x_world_dir, "faces_bow")
     x_faces_aft_dir = create_path(x_world_dir, "faces_aft")
-    x_ocean_dir = create_path(x_world_dir, "ocean")
-    x_boat_dir = create_path(x_world_dir, "boat")
+    x_mine_dir = create_path(x_world_dir, "mine")
+    x_train_dir = create_path(x_world_dir, "train")
     x_fiscal_mstr_dir = create_path(x_world_dir, "fiscal_mstr")
 
     assert not fizz_world._world_dir
     assert not fizz_world._faces_bow_dir
     assert not fizz_world._faces_aft_dir
-    assert not fizz_world._ocean_dir
-    assert not fizz_world._boat_dir
+    assert not fizz_world._mine_dir
+    assert not fizz_world._train_dir
     assert not fizz_world._fiscal_mstr_dir
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_faces_bow_dir) is False
     assert os_path_exists(x_faces_aft_dir) is False
-    assert os_path_exists(x_ocean_dir) is False
-    assert os_path_exists(x_boat_dir) is False
+    assert os_path_exists(x_mine_dir) is False
+    assert os_path_exists(x_train_dir) is False
     assert os_path_exists(x_fiscal_mstr_dir) is False
 
     # WHEN
@@ -89,20 +89,20 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     assert fizz_world._world_dir == x_world_dir
     assert fizz_world._faces_bow_dir == x_faces_bow_dir
     assert fizz_world._faces_aft_dir == x_faces_aft_dir
-    assert not fizz_world._ocean_dir
-    assert fizz_world._boat_dir == x_boat_dir
+    assert not fizz_world._mine_dir
+    assert fizz_world._train_dir == x_train_dir
     assert os_path_exists(x_world_dir)
     assert os_path_exists(x_faces_bow_dir)
     assert os_path_exists(x_faces_aft_dir)
-    assert os_path_exists(x_ocean_dir) is False
-    assert os_path_exists(x_boat_dir)
+    assert os_path_exists(x_mine_dir) is False
+    assert os_path_exists(x_train_dir)
     assert os_path_exists(x_fiscal_mstr_dir)
 
 
 def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     # ESTABLISH
     worlds2_dir = f"{get_test_worlds_dir()}/worlds2"
-    example_ocean_dir = f"{get_test_worlds_dir()}/example_ocean"
+    example_mine_dir = f"{get_test_worlds_dir()}/example_mine"
     five_world_id = "five"
     world2_present_time = 55
     accord45_str = "accord45"
@@ -113,7 +113,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     x_world = worldunit_shop(
         world_id=five_world_id,
         worlds_dir=worlds2_dir,
-        ocean_dir=example_ocean_dir,
+        mine_dir=example_mine_dir,
         present_time=world2_present_time,
         timeconversions=world2timeconversions,
         _fiscalunits=world2_fiscalunits,
@@ -123,7 +123,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     world_dir = create_path(worlds2_dir, x_world.world_id)
     assert x_world.world_id == five_world_id
     assert x_world.worlds_dir == worlds2_dir
-    assert x_world._ocean_dir == example_ocean_dir
+    assert x_world._mine_dir == example_mine_dir
     assert x_world.present_time == world2_present_time
     assert x_world.timeconversions == world2timeconversions
     assert x_world.events == {}
@@ -143,7 +143,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world.present_time == 0
     assert x_world.timeconversions == {}
     assert x_world.events == {}
-    assert x_world._ocean_dir == create_path(x_world._world_dir, "ocean")
+    assert x_world._mine_dir == create_path(x_world._world_dir, "mine")
     assert x_world._faces_bow_dir == create_path(world_dir, "faces_bow")
     assert x_world._faces_aft_dir == create_path(world_dir, "faces_aft")
     assert x_world._fiscalunits == set()

@@ -571,8 +571,8 @@
                         "_kids": {
                             "Abuse Deterrence and Reporting guildlines": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                    "Accomplish Fall 2021 traaining": {
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 116,
                                         "mass": 1,
                                         "pledge": true,
@@ -596,8 +596,8 @@
                             },
                             "Know ACME Staff  and Safety #2 guildlines": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                    "Accomplish Fall 2021 traaining": {
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 115,
                                         "mass": 1,
                                         "reasonunits": {
@@ -620,8 +620,8 @@
                             },
                             "Know Adult Sexual Misconduct guildlines": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                    "Accomplish Fall 2021 traaining": {
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 118,
                                         "mass": 1,
                                         "pledge": true,
@@ -663,8 +663,8 @@
                             },
                             "Know Identifying and Supporting Houseless Youth guildlines": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                    "Accomplish Fall 2021 traaining": {
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 119,
                                         "mass": 1,
                                         "pledge": true,
@@ -688,8 +688,8 @@
                             },
                             "Know Information Security Awareness guildlines": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                    "Accomplish Fall 2021 traaining": {
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 121,
                                         "mass": 1,
                                         "pledge": true,
@@ -713,8 +713,8 @@
                             },
                             "Know Interbody retaliation guildlines": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                    "Accomplish Fall 2021 traaining": {
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 117,
                                         "mass": 1,
                                         "reasonunits": {
@@ -737,8 +737,8 @@
                             },
                             "Rick Management and Hazard Analysis": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                    "Accomplish Fall 2021 traaining": {
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 122,
                                         "mass": 1,
                                         "reasonunits": {
@@ -761,8 +761,8 @@
                             },
                             "know OSHA COVID-19 Rick Reduction guildlines": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                    "Accomplish Fall 2021 traaining": {
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 120,
                                         "mass": 1,
                                         "pledge": true,
@@ -3390,7 +3390,7 @@
                                     }
                                 }
                             },
-                            "mass training": {
+                            "mass traaining": {
                                 "_kids": {
                                     "bike or stuff": {
                                         "_item_title": "bike or stuff",
@@ -3594,7 +3594,7 @@
                                         }
                                     }
                                 },
-                                "_item_title": "mass training",
+                                "_item_title": "mass traaining",
                                 "_uid": 81,
                                 "mass": 1
                             },

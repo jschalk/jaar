@@ -13,15 +13,15 @@ from src.f08_pidgin.pidgin_config import (
     otx_name_str,
     unknown_word_str,
 )
-from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet, boat_agg_str
+from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet, train_agg_str
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
-from src.f10_etl.transformers import etl_boat_agg_to_pidgin_name_staging
+from src.f10_etl.transformers import etl_train_agg_to_pidgin_name_staging
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario0_SingleIdea(
+def test_etl_train_agg_to_pidgin_name_staging_CreatesFile_Scenario0_SingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -32,8 +32,8 @@ def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario0_SingleIdea(
     bob_inx = "Bobito"
     m_str = "accord23"
     event7 = 7
-    x_boat_dir = get_test_etl_dir()
-    br00113_file_path = create_path(x_boat_dir, "br00113.xlsx")
+    x_train_dir = get_test_etl_dir()
+    br00113_file_path = create_path(x_train_dir, "br00113.xlsx")
     br00113_columns = [
         face_name_str(),
         event_int_str(),
@@ -47,13 +47,13 @@ def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario0_SingleIdea(
     sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
     br00113_rows = [sue0, sue1]
     br00113_df = DataFrame(br00113_rows, columns=br00113_columns)
-    upsert_sheet(br00113_file_path, boat_agg_str(), br00113_df)
-    pidgin_path = create_path(x_boat_dir, "pidgin.xlsx")
+    upsert_sheet(br00113_file_path, train_agg_str(), br00113_df)
+    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
     legitimate_events = {event7}
-    etl_boat_agg_to_pidgin_name_staging(legitimate_events, x_boat_dir)
+    etl_train_agg_to_pidgin_name_staging(legitimate_events, x_train_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -74,7 +74,7 @@ def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario0_SingleIdea(
     assert get_sheet_names(pidgin_path) == [name_staging_str]
 
 
-def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario1_MultipleIdeasFiles(
+def test_etl_train_agg_to_pidgin_name_staging_CreatesFile_Scenario1_MultipleIdeasFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -90,8 +90,8 @@ def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario1_MultipleIdeas
     event2 = 2
     event5 = 5
     event7 = 7
-    x_boat_dir = get_test_etl_dir()
-    br00113_file_path = create_path(x_boat_dir, "br00113.xlsx")
+    x_train_dir = get_test_etl_dir()
+    br00113_file_path = create_path(x_train_dir, "br00113.xlsx")
     br00113_columns = [
         face_name_str(),
         event_int_str(),
@@ -101,7 +101,7 @@ def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario1_MultipleIdeas
         otx_name_str(),
         inx_name_str(),
     ]
-    br00043_file_path = create_path(x_boat_dir, "br00043.xlsx")
+    br00043_file_path = create_path(x_train_dir, "br00043.xlsx")
     br00043_columns = [
         face_name_str(),
         event_int_str(),
@@ -118,16 +118,16 @@ def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario1_MultipleIdeas
     yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
     br00113_rows = [sue0, sue1]
     br00113_df = DataFrame(br00113_rows, columns=br00113_columns)
-    upsert_sheet(br00113_file_path, boat_agg_str(), br00113_df)
+    upsert_sheet(br00113_file_path, train_agg_str(), br00113_df)
     br00043_df = [sue2, sue3, yao1]
     br00043_df = DataFrame(br00043_df, columns=br00043_columns)
-    upsert_sheet(br00043_file_path, boat_agg_str(), br00043_df)
-    pidgin_path = create_path(x_boat_dir, "pidgin.xlsx")
+    upsert_sheet(br00043_file_path, train_agg_str(), br00043_df)
+    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
     legitimate_events = {event1, event2, event7, event5}
-    etl_boat_agg_to_pidgin_name_staging(legitimate_events, x_boat_dir)
+    etl_train_agg_to_pidgin_name_staging(legitimate_events, x_train_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -153,7 +153,7 @@ def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario1_MultipleIdeas
     assert get_sheet_names(pidgin_path) == [name_staging_str]
 
 
-def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_etl_train_agg_to_pidgin_name_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -168,8 +168,8 @@ def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario2_WorldUnit_eve
     event1 = 1
     event2 = 2
     event5 = 5
-    x_boat_dir = get_test_etl_dir()
-    br00113_file_path = create_path(x_boat_dir, "br00113.xlsx")
+    x_train_dir = get_test_etl_dir()
+    br00113_file_path = create_path(x_train_dir, "br00113.xlsx")
     br00113_columns = [
         face_name_str(),
         event_int_str(),
@@ -179,7 +179,7 @@ def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario2_WorldUnit_eve
         otx_name_str(),
         inx_name_str(),
     ]
-    br00043_file_path = create_path(x_boat_dir, "br00043.xlsx")
+    br00043_file_path = create_path(x_train_dir, "br00043.xlsx")
     br00043_columns = [
         face_name_str(),
         event_int_str(),
@@ -196,16 +196,16 @@ def test_etl_boat_agg_to_pidgin_name_staging_CreatesFile_Scenario2_WorldUnit_eve
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00113_rows = [sue0, sue1]
     br00113_df = DataFrame(br00113_rows, columns=br00113_columns)
-    upsert_sheet(br00113_file_path, boat_agg_str(), br00113_df)
+    upsert_sheet(br00113_file_path, train_agg_str(), br00113_df)
     br00043_df = [sue2, sue3, yao1]
     br00043_df = DataFrame(br00043_df, columns=br00043_columns)
-    upsert_sheet(br00043_file_path, boat_agg_str(), br00043_df)
-    pidgin_path = create_path(x_boat_dir, "pidgin.xlsx")
+    upsert_sheet(br00043_file_path, train_agg_str(), br00043_df)
+    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
     legitimate_events = {event2: sue_str, event5: sue_str}
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_boat_agg_to_pidgin_name_staging(legitimate_events, x_boat_dir)
+    etl_train_agg_to_pidgin_name_staging(legitimate_events, x_train_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)

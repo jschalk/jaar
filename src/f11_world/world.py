@@ -15,22 +15,22 @@ from src.f01_road.road import (
 )
 from src.f07_fiscal.fiscal import FiscalUnit
 from src.f10_etl.transformers import (
-    etl_ocean_to_boat_staging,
-    etl_boat_staging_to_boat_agg,
-    etl_boat_agg_to_boat_valid,
-    etl_boat_agg_to_boat_events,
-    etl_boat_events_to_events_log,
-    etl_boat_pidgin_staging_to_agg,
-    etl_boat_agg_to_pidgin_staging,
-    etl_boat_events_log_to_events_agg,
+    etl_mine_to_train_staging,
+    etl_train_staging_to_train_agg,
+    etl_train_agg_to_train_valid,
+    etl_train_agg_to_train_events,
+    etl_train_events_to_events_log,
+    etl_train_pidgin_staging_to_agg,
+    etl_train_agg_to_pidgin_staging,
+    etl_train_events_log_to_events_agg,
     get_events_dict_from_events_agg_file,
-    etl_boat_pidgin_agg_to_bow_face_dirs,
+    etl_train_pidgin_agg_to_bow_face_dirs,
     etl_bow_face_pidgins_to_bow_event_pidgins,
     etl_bow_event_pidgins_to_bow_pidgin_csv_files,
     etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
     get_pidgin_events_by_dirs,
-    etl_boat_ideas_to_bow_face_ideas,
+    etl_train_ideas_to_bow_face_ideas,
     etl_bow_face_ideas_to_bow_event_otx_ideas,
     etl_bow_event_ideas_to_inx_events,
     etl_bow_inx_event_ideas_to_aft_faces,
@@ -69,8 +69,8 @@ class WorldUnit:
     _faces_bow_dir: str = None
     _faces_aft_dir: str = None
     _world_dir: str = None
-    _ocean_dir: str = None
-    _boat_dir: str = None
+    _mine_dir: str = None
+    _train_dir: str = None
     _fiscal_mstr_dir: str = None
     _fiscalunits: set[FiscalTitle] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
@@ -94,54 +94,54 @@ class WorldUnit:
     def _set_pidgin_events(self):
         self._pidgin_events = get_pidgin_events_by_dirs(self._faces_bow_dir)
 
-    def set_ocean_dir(self, x_dir: str):
-        self._ocean_dir = x_dir
-        set_dir(self._ocean_dir)
+    def set_mine_dir(self, x_dir: str):
+        self._mine_dir = x_dir
+        set_dir(self._mine_dir)
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._faces_bow_dir = create_path(self._world_dir, "faces_bow")
         self._faces_aft_dir = create_path(self._world_dir, "faces_aft")
-        self._boat_dir = create_path(self._world_dir, "boat")
+        self._train_dir = create_path(self._world_dir, "train")
         self._fiscal_mstr_dir = create_path(self._world_dir, "fiscal_mstr")
         set_dir(self._world_dir)
         set_dir(self._faces_bow_dir)
         set_dir(self._faces_aft_dir)
-        set_dir(self._boat_dir)
+        set_dir(self._train_dir)
         set_dir(self._fiscal_mstr_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineTitle, TimeConversion]:
         return self.timeconversions
 
-    def ocean_to_boat_staging(self):
-        etl_ocean_to_boat_staging(self._ocean_dir, self._boat_dir)
+    def mine_to_train_staging(self):
+        etl_mine_to_train_staging(self._mine_dir, self._train_dir)
 
-    def boat_staging_to_boat_agg(self):
-        etl_boat_staging_to_boat_agg(self._boat_dir)
+    def train_staging_to_train_agg(self):
+        etl_train_staging_to_train_agg(self._train_dir)
 
-    def boat_agg_to_boat_valid(self):
-        etl_boat_agg_to_boat_valid(self._boat_dir, self.legitimate_events())
+    def train_agg_to_train_valid(self):
+        etl_train_agg_to_train_valid(self._train_dir, self.legitimate_events())
 
-    def boat_agg_to_boat_events(self):
-        etl_boat_agg_to_boat_events(self._boat_dir)
+    def train_agg_to_train_events(self):
+        etl_train_agg_to_train_events(self._train_dir)
 
-    def boat_events_to_events_log(self):
-        etl_boat_events_to_events_log(self._boat_dir)
+    def train_events_to_events_log(self):
+        etl_train_events_to_events_log(self._train_dir)
 
-    def boat_events_log_to_events_agg(self):
-        etl_boat_events_log_to_events_agg(self._boat_dir)
+    def train_events_log_to_events_agg(self):
+        etl_train_events_log_to_events_agg(self._train_dir)
 
     def set_events_from_events_agg_file(self):
-        self.events = get_events_dict_from_events_agg_file(self._boat_dir)
+        self.events = get_events_dict_from_events_agg_file(self._train_dir)
 
-    def boat_agg_to_pidgin_staging(self):
-        etl_boat_agg_to_pidgin_staging(self.legitimate_events(), self._boat_dir)
+    def train_agg_to_pidgin_staging(self):
+        etl_train_agg_to_pidgin_staging(self.legitimate_events(), self._train_dir)
 
-    def boat_pidgin_staging_to_agg(self):
-        etl_boat_pidgin_staging_to_agg(self._boat_dir)
+    def train_pidgin_staging_to_agg(self):
+        etl_train_pidgin_staging_to_agg(self._train_dir)
 
-    def boat_pidgin_agg_to_bow_face_dirs(self):
-        etl_boat_pidgin_agg_to_bow_face_dirs(self._boat_dir, self._faces_bow_dir)
+    def train_pidgin_agg_to_bow_face_dirs(self):
+        etl_train_pidgin_agg_to_bow_face_dirs(self._train_dir, self._faces_bow_dir)
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
@@ -158,8 +158,8 @@ class WorldUnit:
         etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(self._faces_bow_dir)
         self._set_pidgin_events()
 
-    def boat_ideas_to_bow_face_ideas(self):
-        etl_boat_ideas_to_bow_face_ideas(self._boat_dir, self._faces_bow_dir)
+    def train_ideas_to_bow_face_ideas(self):
+        etl_train_ideas_to_bow_face_ideas(self._train_dir, self._faces_bow_dir)
 
     def bow_face_ideas_to_bow_event_otx_ideas(self):
         etl_bow_face_ideas_to_bow_event_otx_ideas(self._faces_bow_dir)
@@ -206,36 +206,36 @@ class WorldUnit:
     def fiscal_voice_to_fiscal_forecast(self):
         etl_fiscal_voice_to_fiscal_forecast(self._fiscal_mstr_dir)
 
-    def ocean_to_forecasts(self):  # sourcery skip: extract-method
+    def mine_to_forecasts(self):  # sourcery skip: extract-method
         fiscal_mstr_dir = create_path(self._world_dir, "fiscal_mstr")
         delete_dir(fiscal_mstr_dir)
-        print(f"{fiscal_mstr_dir=}")
+        # print(f"{fiscal_mstr_dir=}")
         set_dir(fiscal_mstr_dir)
-        print(f"      {self.worlds_dir=}")
-        print(f"step 00 {count_dirs_files(self.worlds_dir)}")
-        self.ocean_to_boat_staging()
-        print(f"step 01 {count_dirs_files(self.worlds_dir)}")
-        self.boat_staging_to_boat_agg()
-        print(f"step 02 {count_dirs_files(self.worlds_dir)}")
-        self.boat_agg_to_boat_events()
-        self.boat_events_to_events_log()
-        self.boat_events_log_to_events_agg()
+        # print(f"      {self.worlds_dir=}")
+        # print(f"step 00 {count_dirs_files(self.worlds_dir)}")
+        self.mine_to_train_staging()
+        # print(f"step 01 {count_dirs_files(self.worlds_dir)}")
+        self.train_staging_to_train_agg()
+        # print(f"step 02 {count_dirs_files(self.worlds_dir)}")
+        self.train_agg_to_train_events()
+        self.train_events_to_events_log()
+        self.train_events_log_to_events_agg()
         self.set_events_from_events_agg_file()
-        print(f"step 03 {count_dirs_files(self.worlds_dir)}")
-        self.boat_agg_to_pidgin_staging()
-        self.boat_pidgin_staging_to_agg()
-        self.boat_pidgin_agg_to_bow_face_dirs()
+        # print(f"step 03 {count_dirs_files(self.worlds_dir)}")
+        self.train_agg_to_pidgin_staging()
+        self.train_pidgin_staging_to_agg()
+        self.train_pidgin_agg_to_bow_face_dirs()
         self.bow_face_pidgins_to_bow_event_pidgins()
         self.bow_event_pidgins_csvs_to_bow_pidgin_jsons()
         self.pidgin_jsons_inherit_younger_pidgins()
-        print(f"step 04 {count_dirs_files(self.worlds_dir)}")
-        self.boat_agg_to_boat_valid()
-        self.boat_ideas_to_bow_face_ideas()
+        # print(f"step 04 {count_dirs_files(self.worlds_dir)}")
+        self.train_agg_to_train_valid()
+        self.train_ideas_to_bow_face_ideas()
         self.bow_face_ideas_to_bow_event_otx_ideas()
         self.bow_event_ideas_to_inx_events()
         self.bow_inx_event_ideas_to_aft_faces()
         self.aft_face_ideas_to_csv_files()
-        print(f"step 05 {count_dirs_files(self.worlds_dir)}")
+        # print(f"step 05 {count_dirs_files(self.worlds_dir)}")
         with sqlite3_connect(":memory:") as fiscal_db_conn:
             cursor = fiscal_db_conn.cursor()
             self.etl_aft_face_csv_files2idea_staging_tables(cursor)
@@ -243,16 +243,16 @@ class WorldUnit:
             self.idea_staging_to_fiscal_tables(cursor)
             self.aft_faces_ideas_to_fiscal_mstr_csvs(cursor)
             self.fiscal_csvs_to_jsons()
-            print(f"step 06 {count_dirs_files(self.worlds_dir)}")
+            # print(f"step 06 {count_dirs_files(self.worlds_dir)}")
             self.idea_staging_to_bud_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
-        print(f"step 06.5 {count_dirs_files(self.worlds_dir)}")
+        # print(f"step 06.5 {count_dirs_files(self.worlds_dir)}")
         self.event_bud_csvs_to_gift_json()
         self.event_gift_json_to_event_inherited_budunits()
-        print(f"step 07 {count_dirs_files(self.worlds_dir)}")
+        # print(f"step 07 {count_dirs_files(self.worlds_dir)}")
         self.event_inherited_budunits_to_fiscal_voice()
         self.fiscal_voice_to_fiscal_forecast()
-        print(f"step 08 {count_dirs_files(self.worlds_dir)}")
+        # print(f"step 08 {count_dirs_files(self.worlds_dir)}")
 
     def get_dict(self) -> dict:
         return {
@@ -266,7 +266,7 @@ class WorldUnit:
 def worldunit_shop(
     world_id: WorldID = None,
     worlds_dir: str = None,
-    ocean_dir: str = None,
+    mine_dir: str = None,
     present_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineTitle, TimeConversion] = None,
     _fiscalunits: set[FiscalTitle] = None,
@@ -282,12 +282,12 @@ def worldunit_shop(
         timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
         _fiscalunits=get_empty_set_if_None(_fiscalunits),
-        _ocean_dir=ocean_dir,
+        _mine_dir=mine_dir,
         _pidgin_events={},
     )
     x_worldunit._set_world_dirs()
-    if not x_worldunit._ocean_dir:
-        x_worldunit.set_ocean_dir(create_path(x_worldunit._world_dir, "ocean"))
+    if not x_worldunit._mine_dir:
+        x_worldunit.set_mine_dir(create_path(x_worldunit._world_dir, "mine"))
     return x_worldunit
 
 

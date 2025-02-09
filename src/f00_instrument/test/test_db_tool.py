@@ -56,15 +56,15 @@ def test_sqlite_str_ReturnsObj():
 
 def test_sqlite_create_insert_sqlstr_ReturnsObj():
     # ESTABLISH
-    x_table = "kubo_trains"
+    x_table = "kubo_casas"
     eagle_id_str = "eagle_id"
-    train_id_str = "train_id"
-    train_color_str = "train_color"
-    x_columns = [eagle_id_str, train_id_str, train_color_str]
+    casa_id_str = "casa_id"
+    casa_color_str = "casa_color"
+    x_columns = [eagle_id_str, casa_id_str, casa_color_str]
     eagle_id_value = 47
-    train_id_value = "TR34"
-    train_color_value = "red"
-    x_values = [eagle_id_value, train_id_value, train_color_value]
+    casa_id_value = "TR34"
+    casa_color_value = "red"
+    x_values = [eagle_id_value, casa_id_value, casa_color_value]
 
     # WHEN
     gen_sqlstr = create_insert_sqlstr(x_table, x_columns, x_values)
@@ -73,13 +73,13 @@ def test_sqlite_create_insert_sqlstr_ReturnsObj():
     example_sqlstr = f"""
 INSERT INTO {x_table} (
   {eagle_id_str}
-, {train_id_str}
-, {train_color_str}
+, {casa_id_str}
+, {casa_color_str}
 )
 VALUES (
   {eagle_id_value}
-, '{train_id_value}'
-, '{train_color_value}'
+, '{casa_id_value}'
+, '{casa_color_value}'
 )
 ;"""
     print(example_sqlstr)

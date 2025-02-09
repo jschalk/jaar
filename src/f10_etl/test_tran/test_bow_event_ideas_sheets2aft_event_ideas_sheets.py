@@ -17,7 +17,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_bow_event_ideas_to_boat_events_Scenario0():
+def test_etl_bow_event_ideas_to_train_events_Scenario0():
     # ESTABLISH
     sue_otx = "Sue"
     sue_inx = "Suzy"
@@ -64,7 +64,7 @@ def test_etl_bow_event_ideas_to_boat_events_Scenario0():
     pandas_assert_frame_equal(aft_e3_df, e3_accord23_df)
 
 
-# def test_etl_bow_event_ideas_to_boat_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
+# def test_etl_bow_event_ideas_to_train_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -111,16 +111,16 @@ def test_etl_bow_event_ideas_to_boat_events_Scenario0():
 #     bow_e3_dir = create_path(sue_bow_dir, event3)
 #     bow_e7_dir = create_path(zia_bow_dir, event7)
 #     bow_e9_dir = create_path(zia_bow_dir, event9)
-#     boat_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
-#     boat_e7_br00011_path = create_path(bow_e7_dir, br00011_filename)
-#     boat_e9_br00011_path = create_path(bow_e9_dir, br00011_filename)
-#     print(f"{boat_e3_br00011_path=}")
-#     print(f"{boat_e7_br00011_path=}")
-#     print(f"{boat_e9_br00011_path=}")
-#     upsert_sheet(boat_e3_br00011_path, boat_valid_str(), e3_accord23_df)
-#     upsert_sheet(boat_e7_br00011_path, boat_valid_str(), e7_accord23_df)
-#     upsert_sheet(boat_e9_br00011_path, boat_valid_str(), e9_accord23_df)
-#     print(f"{boat_valid_str()=}")
+#     train_e3_br00011_path = create_path(bow_e3_dir, br00011_filename)
+#     train_e7_br00011_path = create_path(bow_e7_dir, br00011_filename)
+#     train_e9_br00011_path = create_path(bow_e9_dir, br00011_filename)
+#     print(f"{train_e3_br00011_path=}")
+#     print(f"{train_e7_br00011_path=}")
+#     print(f"{train_e9_br00011_path=}")
+#     upsert_sheet(train_e3_br00011_path, train_valid_str(), e3_accord23_df)
+#     upsert_sheet(train_e7_br00011_path, train_valid_str(), e7_accord23_df)
+#     upsert_sheet(train_e9_br00011_path, train_valid_str(), e9_accord23_df)
+#     print(f"{train_valid_str()=}")
 #     inx_str = "inx"
 #     e3_pidginunit = pidginunit_shop(sue_otx, event3)
 #     e7_pidginunit = pidginunit_shop(zia_otx, event7)
@@ -138,20 +138,20 @@ def test_etl_bow_event_ideas_to_boat_events_Scenario0():
 #     save_file(bow_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
 #     save_file(bow_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
 #     save_file(bow_e9_dir, pidgin_filename(), e9_pidginunit.get_json())
-#     assert sheet_exists(boat_e3_br00011_path, inx_str) is False
-#     assert sheet_exists(boat_e7_br00011_path, inx_str) is False
-#     assert sheet_exists(boat_e9_br00011_path, inx_str) is False
+#     assert sheet_exists(train_e3_br00011_path, inx_str) is False
+#     assert sheet_exists(train_e7_br00011_path, inx_str) is False
+#     assert sheet_exists(train_e9_br00011_path, inx_str) is False
 
 #     # WHEN
 #     etl_bow_inx_event_ideas_to_aft_faces(x_bow_dir, x_event_pidgins)
 
 #     # THEN
-#     assert sheet_exists(boat_e3_br00011_path, inx_str)
-#     assert sheet_exists(boat_e7_br00011_path, inx_str)
-#     assert sheet_exists(boat_e9_br00011_path, inx_str)
-#     e3_inx_df = pandas_read_excel(boat_e3_br00011_path, sheet_name=inx_str)
-#     e7_inx_df = pandas_read_excel(boat_e7_br00011_path, sheet_name=inx_str)
-#     e9_inx_df = pandas_read_excel(boat_e9_br00011_path, sheet_name=inx_str)
+#     assert sheet_exists(train_e3_br00011_path, inx_str)
+#     assert sheet_exists(train_e7_br00011_path, inx_str)
+#     assert sheet_exists(train_e9_br00011_path, inx_str)
+#     e3_inx_df = pandas_read_excel(train_e3_br00011_path, sheet_name=inx_str)
+#     e7_inx_df = pandas_read_excel(train_e7_br00011_path, sheet_name=inx_str)
+#     e9_inx_df = pandas_read_excel(train_e9_br00011_path, sheet_name=inx_str)
 #     sue_i0 = [sue_inx, event3, accord23_str, bob0_inx, bob0_inx]
 #     sue_i1 = [sue_inx, event3, accord23_str, yao0_inx, bob0_inx]
 #     sue_i2 = [sue_inx, event3, accord23_str, yao0_inx, yao0_inx]

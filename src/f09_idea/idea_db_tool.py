@@ -101,19 +101,19 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def boat_staging_str():
-    return "boat_staging"
+def train_staging_str():
+    return "train_staging"
 
 
-def boat_agg_str():
-    return "boat_agg"
+def train_agg_str():
+    return "train_agg"
 
 
-def boat_valid_str():
-    return "boat_valid"
+def train_valid_str():
+    return "train_valid"
 
 
-def get_boat_staging_grouping_with_all_values_equal_df(
+def get_train_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, groupby_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
@@ -123,9 +123,9 @@ def get_boat_staging_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql(boat_staging_str(), conn, index=False)
+        x_df.to_sql(train_staging_str(), conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table=boat_staging_str(),
+            x_table=train_staging_str(),
             groupby_columns=grouping_columns,
             value_columns=value_columns,
         )
