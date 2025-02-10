@@ -9,7 +9,8 @@ from src.f01_road.jaar_config import (
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.hub_paths import (
     create_fiscal_json_path,
-    create_fiscal_event_time_path,
+    create_fiscal_owner_time_csv_path,
+    create_fiscal_owner_time_json_path,
     fiscal_agenda_list_report_path,
     create_timeline_dir_path,
     create_timepoint_dir_path,
@@ -43,18 +44,33 @@ def test_create_fiscal_json_path_ReturnObj() -> str:
     assert gen_a23_json_path == expected_a23_json_path
 
 
-def test_create_fiscal_event_time_path_ReturnObj() -> str:
+def test_create_fiscal_owner_time_csv_path_ReturnObj() -> str:
     # ESTABLISH
     x_fiscal_mstr_dir = env_dir()
     a23_str = "accord23"
 
     # WHEN
-    gen_a23_te_csv_path = create_fiscal_event_time_path(x_fiscal_mstr_dir, a23_str)
+    gen_a23_te_csv_path = create_fiscal_owner_time_csv_path(x_fiscal_mstr_dir, a23_str)
 
     # THEN
     fiscals_dir = create_path(x_fiscal_mstr_dir, "fiscals")
     a23_path = create_path(fiscals_dir, a23_str)
     expected_a23_te_path = create_path(a23_path, "fiscal_owner_time_agg.csv")
+    assert gen_a23_te_csv_path == expected_a23_te_path
+
+
+def test_create_fiscal_owner_time_json_path_ReturnObj() -> str:
+    # ESTABLISH
+    x_fiscal_mstr_dir = env_dir()
+    a23_str = "accord23"
+
+    # WHEN
+    gen_a23_te_csv_path = create_fiscal_owner_time_json_path(x_fiscal_mstr_dir, a23_str)
+
+    # THEN
+    fiscals_dir = create_path(x_fiscal_mstr_dir, "fiscals")
+    a23_path = create_path(fiscals_dir, a23_str)
+    expected_a23_te_path = create_path(a23_path, "fiscal_owner_time_agg.json")
     assert gen_a23_te_csv_path == expected_a23_te_path
 
 

@@ -8,10 +8,16 @@ def create_fiscal_json_path(fiscal_mstr_dir: str, fiscal_title: str) -> str:
     return create_path(fiscal_path, "fiscal.json")
 
 
-def create_fiscal_event_time_path(fiscal_mstr_dir: str, fiscal_title: str):
+def create_fiscal_owner_time_csv_path(fiscal_mstr_dir: str, fiscal_title: str):
     fiscals_path = create_path(fiscal_mstr_dir, "fiscals")
     fiscal_path = create_path(fiscals_path, fiscal_title)
     return create_path(fiscal_path, "fiscal_owner_time_agg.csv")
+
+
+def create_fiscal_owner_time_json_path(fiscal_mstr_dir: str, fiscal_title: str):
+    fiscals_path = create_path(fiscal_mstr_dir, "fiscals")
+    fiscal_path = create_path(fiscals_path, fiscal_title)
+    return create_path(fiscal_path, "fiscal_owner_time_agg.json")
 
 
 def fiscal_agenda_list_report_path(fiscal_mstr_dir: str, fiscal_title: str) -> str:

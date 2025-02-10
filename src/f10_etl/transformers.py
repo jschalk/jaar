@@ -864,13 +864,19 @@ def etl_fiscal_agg_tables2fiscal_owner_time_agg(conn_or_cursor: sqlite3_Connecti
     conn_or_cursor.execute(INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR)
 
 
-def etl_fiscal_owner_time_agg_table2fiscal_owner_time_agg_csvs(
+def etl_fiscal_table2fiscal_owner_time_agg_csvs(
     conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
 ):
     fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
     save_to_split_csvs(
         conn_or_cursor, "fiscal_owner_time_agg", ["fiscal_title"], fiscals_dir
     )
+
+
+def etl_fiscal_table2fiscal_owner_time_agg_jsons(
+    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
+):
+    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
 
 
 def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):

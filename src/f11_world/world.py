@@ -47,7 +47,7 @@ from src.f10_etl.transformers import (
     etl_event_inherited_budunits_to_fiscal_voice,
     etl_fiscal_voice_to_fiscal_forecast,
     etl_fiscal_agg_tables2fiscal_owner_time_agg,
-    etl_fiscal_owner_time_agg_table2fiscal_owner_time_agg_csvs,
+    etl_fiscal_table2fiscal_owner_time_agg_csvs,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -198,10 +198,10 @@ class WorldUnit:
     ):
         etl_fiscal_agg_tables2fiscal_owner_time_agg(conn_or_cursor)
 
-    def fiscal_owner_time_agg_table2fiscal_owner_time_agg_csvs(
+    def fiscal_table2fiscal_owner_time_agg_csvs(
         self, conn_or_cursor: sqlite3_Connection
     ):
-        etl_fiscal_owner_time_agg_table2fiscal_owner_time_agg_csvs(
+        etl_fiscal_table2fiscal_owner_time_agg_csvs(
             conn_or_cursor, self._fiscal_mstr_dir
         )
 
