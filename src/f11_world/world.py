@@ -48,6 +48,7 @@ from src.f10_etl.transformers import (
     etl_fiscal_voice_to_fiscal_forecast,
     etl_fiscal_agg_tables2fiscal_owner_time_agg,
     etl_fiscal_table2fiscal_owner_time_agg_csvs,
+    etl_fiscal_owner_time_agg_csvs2jsons,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -219,6 +220,9 @@ class WorldUnit:
 
     def fiscal_voice_to_fiscal_forecast(self):
         etl_fiscal_voice_to_fiscal_forecast(self._fiscal_mstr_dir)
+
+    def fiscal_owner_time_agg_csvs2jsons(self):
+        etl_fiscal_owner_time_agg_csvs2jsons(self._fiscal_mstr_dir)
 
     def mine_to_forecasts(self):  # sourcery skip: extract-method
         fiscal_mstr_dir = create_path(self._world_dir, "fiscal_mstr")

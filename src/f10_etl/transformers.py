@@ -6,6 +6,7 @@ from src.f00_instrument.db_toolbox import (
     get_table_columns,
     save_to_split_csvs,
 )
+from src.f00_instrument.dict_toolbox import get_json_from_dict
 from src.f01_road.road import FaceName, EventInt
 from src.f02_bud.bud import (
     budunit_shop,
@@ -16,7 +17,12 @@ from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
 from src.f04_gift.delta import get_minimal_buddelta
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
-from src.f05_listen.hub_paths import create_voice_path, create_fiscal_json_path
+from src.f05_listen.hub_paths import (
+    create_voice_path,
+    create_fiscal_json_path,
+    create_fiscal_owner_time_csv_path,
+    create_fiscal_owner_time_json_path,
+)
 from src.f07_fiscal.fiscal import get_from_json as fiscalunit_get_from_json
 from src.f07_fiscal.fiscal_config import get_fiscal_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
@@ -873,10 +879,24 @@ def etl_fiscal_table2fiscal_owner_time_agg_csvs(
     )
 
 
-def etl_fiscal_table2fiscal_owner_time_agg_jsons(
-    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
-):
+def etl_fiscal_owner_time_agg_csvs2jsons(fiscal_mstr_dir: str):
+    idea_types = get_idea_sqlite_types()
     fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    for fiscal_title in get_level1_dirs(fiscals_dir):
+        csv_path = create_fiscal_owner_time_csv_path(fiscal_mstr_dir, fiscal_title)
+        csv_arrays = open_csv_with_types(csv_path, idea_types)
+        x_dict = {}
+        header_row = csv_arrays.pop(0)
+        for row in csv_arrays:
+            owner_name = row[1]
+            event_int = row[2]
+            time_int = row[3]
+            if x_dict.get(owner_name) is None:
+                x_dict[owner_name] = {}
+            owner_dict = x_dict.get(owner_name)
+            owner_dict[int(event_int)] = time_int
+        json_path = create_fiscal_owner_time_json_path(fiscal_mstr_dir, fiscal_title)
+        save_file(json_path, None, get_json_from_dict(x_dict))
 
 
 def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
