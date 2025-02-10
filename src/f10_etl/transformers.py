@@ -859,7 +859,7 @@ def fiscal_agg_tables2fiscal_event_time_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR)
 
 
-def fiscal_agg_tables2fiscal_owner_time_agg(conn_or_cursor: sqlite3_Connection):
+def etl_fiscal_agg_tables2fiscal_owner_time_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR)
     conn_or_cursor.execute(INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR)
 

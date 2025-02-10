@@ -46,6 +46,7 @@ from src.f10_etl.transformers import (
     etl_event_gift_json_to_event_inherited_budunits,
     etl_event_inherited_budunits_to_fiscal_voice,
     etl_fiscal_voice_to_fiscal_forecast,
+    etl_fiscal_agg_tables2fiscal_owner_time_agg,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -190,6 +191,11 @@ class WorldUnit:
 
     def fiscal_csvs_to_jsons(self):
         etl_fiscal_csvs_to_fiscal_jsons(self._fiscal_mstr_dir)
+
+    def fiscal_agg_tables2fiscal_owner_time_agg(
+        self, conn_or_cursor: sqlite3_Connection
+    ):
+        etl_fiscal_agg_tables2fiscal_owner_time_agg(conn_or_cursor)
 
     def bud_tables_to_event_bud_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fiscal_mstr_dir)

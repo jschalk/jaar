@@ -5,12 +5,12 @@ from src.f08_pidgin.pidgin_config import event_int_str
 from src.f10_etl.fiscal_etl_tool import FiscalPrimeObjsRef
 from src.f10_etl.transformers import (
     create_fiscal_tables,
-    fiscal_agg_tables2fiscal_owner_time_agg,
+    etl_fiscal_agg_tables2fiscal_owner_time_agg,
 )
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_fiscal_agg_tables2fiscal_owner_time_agg_SetsTableAttr():
+def test_etl_fiscal_agg_tables2fiscal_owner_time_agg_SetsTableAttr():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -42,7 +42,7 @@ VALUES
         assert db_table_exists(cursor, fiscal_owner_time_agg_str) is False
 
         # WHEN
-        fiscal_agg_tables2fiscal_owner_time_agg(cursor)
+        etl_fiscal_agg_tables2fiscal_owner_time_agg(cursor)
 
         # THEN
         assert db_table_exists(cursor, fiscal_owner_time_agg_str)
@@ -58,7 +58,7 @@ VALUES
         assert fiscalunit_agg_rows == [ex_row0, ex_row1, ex_row2]
 
 
-# def test_fiscal_agg_tables2fiscal_owner_time_agg_SetsTableAttr():
+# def test_etl_fiscal_agg_tables2fiscal_owner_time_agg_SetsTableAttr():
 #     # ESTABLISH
 #     event3 = 3
 #     event7 = 7
@@ -87,7 +87,7 @@ VALUES
 #         assert db_table_exists(cursor, fiscal_owner_time_agg_str) is False
 
 #         # WHEN
-#         fiscal_agg_tables2fiscal_owner_time_agg(cursor)
+#         etl_fiscal_agg_tables2fiscal_owner_time_agg(cursor)
 
 #         # THEN
 #         assert db_table_exists(cursor, fiscal_owner_time_agg_str)
