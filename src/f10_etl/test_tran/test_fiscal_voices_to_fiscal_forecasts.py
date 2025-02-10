@@ -11,7 +11,7 @@ from src.f10_etl.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_event_inherited_budunits_to_fiscal_voice_SetsFiles_Scenario0(
+def test_etl_event_inherited_budunits_to_fiscal_voice_SetsFiles_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

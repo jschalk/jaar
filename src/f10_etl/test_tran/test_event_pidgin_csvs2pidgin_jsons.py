@@ -12,7 +12,7 @@ from src.f08_pidgin.pidgin import get_pidginunit_from_json
 from src.f08_pidgin.pidgin_config import pidgin_filename
 from src.f10_etl.transformers import (
     etl_event_pidgin_csvs_to_pidgin_json,
-    etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons,
+    etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,
     get_pidgin_events_by_dirs,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -57,7 +57,7 @@ def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_road(
     assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
 
 
-def test_etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons_Scenario0_1Event_road(
+def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_road(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -86,9 +86,9 @@ def test_etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons_Scenario0_1Event_road(
 "{zia_str}",{event9},"{casa_otx}","{casa_inx}",,,
 "{zia_str}",{event9},"{clean_otx}","{clean_inx}",,,
 """
-    x_faces_bow_dir = create_path(get_test_etl_dir(), "faces_bow")
-    bob_dir = create_path(x_faces_bow_dir, bob_str)
-    zia_dir = create_path(x_faces_bow_dir, bob_str)
+    x_faces_otz_dir = create_path(get_test_etl_dir(), "faces_otz")
+    bob_dir = create_path(x_faces_otz_dir, bob_str)
+    zia_dir = create_path(x_faces_otz_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
     event9_dir = create_path(zia_dir, event9)
@@ -103,7 +103,7 @@ def test_etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons_Scenario0_1Event_road(
     assert os_path_exists(e9_json_file_path) is False
 
     # WHEN
-    etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons(x_faces_bow_dir)
+    etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(x_faces_otz_dir)
 
     # THEN
     assert os_path_exists(e3_json_file_path)
@@ -130,8 +130,8 @@ def test_etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons_Scenario0_1Event_road(
     assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
     assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
 
-    # bob_dir = create_path(fizz_world._faces_bow_dir, bob_str)
-    # zia_dir = create_path(fizz_world._faces_bow_dir, zia_str)
+    # bob_dir = create_path(fizz_world._faces_otz_dir, bob_str)
+    # zia_dir = create_path(fizz_world._faces_otz_dir, zia_str)
     # event3_dir = create_path(bob_dir, event3)
     # event7_dir = create_path(bob_dir, event7)
     # event9_dir = create_path(zia_dir, event9)
@@ -153,7 +153,7 @@ def test_etl_bow_event_pidgins_csvs_to_bow_pidgin_jsons_Scenario0_1Event_road(
     # assert os_path_exists(event9_road_csv_file_path) is False
 
     # # WHEN
-    # fizz_world.bow_event_pidgins_to_bow_pidgin_csv_files()
+    # fizz_world.otz_event_pidgins_to_otz_pidgin_csv_files()
 
     # # THEN
     # assert os_path_exists(event3_road_csv_file_path)

@@ -601,8 +601,8 @@
                             },
                             "Know Abuse Deterrence and Reporting guildlines": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                    "Accomplish Fall 2021 traaining": {
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 116,
                                         "mass": 1,
                                         "pledge": true,
@@ -637,8 +637,8 @@
                             },
                             "Know Discrimination Harassment Bully guildlines": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                    "Accomplish Fall 2021 traaining": {
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 117,
                                         "mass": 1,
                                         "reasonunits": {
@@ -672,9 +672,9 @@
                             },
                             "PC1025 Identifying and Supporting houseless Youth": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
+                                    "Accomplish Fall 2021 traaining": {
                                         "_is_expanded": false,
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 119,
                                         "mass": 1,
                                         "pledge": true,
@@ -709,9 +709,9 @@
                             },
                             "PC1026 Rick Management and Hazard Analysis": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
+                                    "Accomplish Fall 2021 traaining": {
                                         "_is_expanded": false,
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 122,
                                         "mass": 1
                                     }
@@ -722,9 +722,9 @@
                             },
                             "PC1027 Adult Sexual Misconduct: Staff to Student/ IX": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
+                                    "Accomplish Fall 2021 traaining": {
                                         "_is_expanded": false,
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 118,
                                         "mass": 1,
                                         "pledge": true,
@@ -757,11 +757,11 @@
                                 "_uid": 108,
                                 "mass": 1
                             },
-                            "PC1029 Information Security Awareness Training": {
+                            "PC1029 Information Security Awareness traaining": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
+                                    "Accomplish Fall 2021 traaining": {
                                         "_is_expanded": false,
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 121,
                                         "mass": 1,
                                         "pledge": true,
@@ -790,15 +790,15 @@
                                         }
                                     }
                                 },
-                                "_item_title": "PC1029 Information Security Awareness Training",
+                                "_item_title": "PC1029 Information Security Awareness traaining",
                                 "_uid": 111,
                                 "mass": 1
                             },
-                            "PRM1003 ACME OSHA COVID-19 Rick Reduction Training": {
+                            "PRM1003 ACME OSHA COVID-19 Rick Reduction traaining": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
+                                    "Accomplish Fall 2021 traaining": {
                                         "_is_expanded": false,
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 120,
                                         "mass": 1,
                                         "pledge": true,
@@ -827,14 +827,14 @@
                                         }
                                     }
                                 },
-                                "_item_title": "PRM1003 ACME OSHA COVID-19 Rick Reduction Training",
+                                "_item_title": "PRM1003 ACME OSHA COVID-19 Rick Reduction traaining",
                                 "_uid": 110,
                                 "mass": 1
                             },
                             "PRM1005 ACME Staff  and Safety": {
                                 "_kids": {
-                                    "Accomplish Fall 2021 training": {
-                                        "_item_title": "Accomplish Fall 2021 training",
+                                    "Accomplish Fall 2021 traaining": {
+                                        "_item_title": "Accomplish Fall 2021 traaining",
                                         "_uid": 115,
                                         "mass": 1,
                                         "reasonunits": {
@@ -3817,7 +3817,7 @@
                                     }
                                 }
                             },
-                            "mass training": {
+                            "mass traaining": {
                                 "_kids": {
                                     "bike or stuff": {
                                         "_item_title": "bike or stuff",
@@ -4063,7 +4063,7 @@
                                         }
                                     }
                                 },
-                                "_item_title": "mass training",
+                                "_item_title": "mass traaining",
                                 "_uid": 81,
                                 "mass": 1
                             },

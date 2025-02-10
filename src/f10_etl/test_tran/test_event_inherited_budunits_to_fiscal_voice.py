@@ -10,7 +10,7 @@ from os.path import exists as os_path_exists
 # test that deal_episode with depth 1 is able to create nested budunits directories and populate with event relevant
 
 
-def test_WorldUnit_event_inherited_budunits_to_fiscal_voice_SetsFiles_Scenario0(
+def test_etl_event_inherited_budunits_to_fiscal_voice_SetsFiles_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

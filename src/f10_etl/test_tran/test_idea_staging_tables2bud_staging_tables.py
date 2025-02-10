@@ -15,7 +15,7 @@ from src.f09_idea.idea_config import idea_number_str, fiscalunit_str
 from src.f10_etl.tran_sqlstrs import create_bud_tables
 from src.f10_etl.transformers import (
     etl_idea_staging_to_bud_tables,
-    etl_aft_face_csv_files2idea_staging_tables,
+    etl_inz_face_csv_files2idea_staging_tables,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -66,8 +66,8 @@ def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTab
     event3 = 3
     event7 = 7
     accord23_str = "accord23"
-    x_faces_aft_dir = create_path(get_test_etl_dir(), "faces_aft")
-    sue_aft_dir = create_path(x_faces_aft_dir, sue_inx)
+    x_faces_inz_dir = create_path(get_test_etl_dir(), "faces_inz")
+    sue_inz_dir = create_path(x_faces_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
@@ -77,10 +77,10 @@ def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTab
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 """
-    save_file(sue_aft_dir, br00011_csv_filename, br00011_csv_str)
+    save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        etl_aft_face_csv_files2idea_staging_tables(cursor, x_faces_aft_dir)
+        etl_inz_face_csv_files2idea_staging_tables(cursor, x_faces_inz_dir)
         budunit_staging_tablename = f"{budunit_str()}_put_staging"
         budacct_staging_tablename = f"{bud_acctunit_str()}_put_staging"
         fiscalunit_staging_tablename = f"{fiscalunit_str()}_staging"

@@ -1,10 +1,10 @@
-from src.f00_instrument.file import create_path
+from src.f00_instrument.file import create_path, count_dirs_files, count_files
 from src.f04_gift.atom_config import face_name_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet
 from src.f10_etl.transformers import (
     _create_events_agg_df,
-    etl_boat_events_log_to_events_agg,
+    etl_train_events_log_to_events_agg,
     get_events_dict_from_events_agg_file,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -15,7 +15,7 @@ def test_create_events_agg_df_ReturnsObj(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    boat_dir = "fizzyz"
+    train_dir = "fizzyz"
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
@@ -34,14 +34,14 @@ def test_create_events_agg_df_ReturnsObj(
     invalid_error_str = "invalid because of conflicting event_int"
     src3_filename = "br00003.xlsx"
     src5_filename = "br00005.xlsx"
-    oe_str = "boat_events"
-    bob_row = [boat_dir, src3_filename, oe_str, bob_str, event3, ""]
-    sue_row = [boat_dir, src3_filename, oe_str, sue_str, event1, invalid_error_str]
-    yao1_row = [boat_dir, src3_filename, oe_str, yao_str, event1, invalid_error_str]
-    yao9_row = [boat_dir, src3_filename, oe_str, yao_str, event9, ""]
-    s5_0_row = [boat_dir, src5_filename, oe_str, bob_str, event3, ""]
-    s5_1_row = [boat_dir, src5_filename, oe_str, yao_str, event9, ""]
-    # el_rows = [boat_dir, events_filename, elog, bob_row, sue_row, yao1_row, yao9_row]
+    oe_str = "train_events"
+    bob_row = [train_dir, src3_filename, oe_str, bob_str, event3, ""]
+    sue_row = [train_dir, src3_filename, oe_str, sue_str, event1, invalid_error_str]
+    yao1_row = [train_dir, src3_filename, oe_str, yao_str, event1, invalid_error_str]
+    yao9_row = [train_dir, src3_filename, oe_str, yao_str, event9, ""]
+    s5_0_row = [train_dir, src5_filename, oe_str, bob_str, event3, ""]
+    s5_1_row = [train_dir, src5_filename, oe_str, yao_str, event9, ""]
+    # el_rows = [train_dir, events_filename, elog, bob_row, sue_row, yao1_row, yao9_row]
     el_rows = [bob_row, sue_row, yao1_row, yao9_row, s5_0_row, s5_1_row]
     ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
 
@@ -66,11 +66,24 @@ def test_create_events_agg_df_ReturnsObj(
     assert gen_events_agg_df.to_csv(index=False) == ex_events_agg_df.to_csv(index=False)
 
 
-def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
+def test_etl_train_events_log_to_events_agg_CreatesSheets_Scenario0_Empty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
+    train_dir = get_test_etl_dir()
+    assert count_dirs_files(train_dir) == 0
+
+    # WHEN
+    etl_train_events_log_to_events_agg(train_dir)
+
+    # THEN
+    assert count_dirs_files(train_dir) == 0
+
+
+def test_etl_train_events_log_to_events_agg_CreatesSheets_Scenario1(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
@@ -87,25 +100,25 @@ def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
     ]
     invalid_error_str = "invalid because of conflicting event_int"
     invalid_error_str = "invalid because of conflicting event_int"
-    boat_dir = get_test_etl_dir()
+    train_dir = get_test_etl_dir()
     src3_filename = "br00003.xlsx"
     src5_filename = "br00005.xlsx"
-    oe_str = "boat_events"
-    bob_row = [boat_dir, src3_filename, oe_str, bob_str, event3, ""]
-    sue_row = [boat_dir, src3_filename, oe_str, sue_str, event1, invalid_error_str]
-    yao1_row = [boat_dir, src3_filename, oe_str, yao_str, event1, invalid_error_str]
-    yao9_row = [boat_dir, src3_filename, oe_str, yao_str, event9, ""]
-    s5_0_row = [boat_dir, src5_filename, oe_str, bob_str, event3, ""]
-    s5_1_row = [boat_dir, src5_filename, oe_str, yao_str, event9, ""]
-    # el_rows = [boat_dir, events_filename, elog, bob_row, sue_row, yao1_row, yao9_row]
+    oe_str = "train_events"
+    bob_row = [train_dir, src3_filename, oe_str, bob_str, event3, ""]
+    sue_row = [train_dir, src3_filename, oe_str, sue_str, event1, invalid_error_str]
+    yao1_row = [train_dir, src3_filename, oe_str, yao_str, event1, invalid_error_str]
+    yao9_row = [train_dir, src3_filename, oe_str, yao_str, event9, ""]
+    s5_0_row = [train_dir, src5_filename, oe_str, bob_str, event3, ""]
+    s5_1_row = [train_dir, src5_filename, oe_str, yao_str, event9, ""]
+    # el_rows = [train_dir, events_filename, elog, bob_row, sue_row, yao1_row, yao9_row]
     el_rows = [bob_row, sue_row, yao1_row, yao9_row, s5_0_row, s5_1_row]
     ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
-    events_file_path = create_path(boat_dir, "events.xlsx")
+    events_file_path = create_path(train_dir, "events.xlsx")
     events_log_str = "events_log"
     upsert_sheet(events_file_path, events_log_str, ex_events_log_df)
 
     # WHEN
-    etl_boat_events_log_to_events_agg(boat_dir)
+    etl_train_events_log_to_events_agg(train_dir)
 
     # THEN
     e3_row = [bob_str, event3, ""]
@@ -128,11 +141,23 @@ def test_WorldUnit_boat_events_log_to_events_agg_CreatesSheets_Scenario0(
     assert get_sheet_names(events_file_path) == ["events_log", "events_agg"]
 
 
-def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
+def test_get_events_dict_from_events_agg_file_ReturnsObj_Scenario0_isEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
+    train_dir = get_test_etl_dir()
+
+    # WHEN
+    events_dict = get_events_dict_from_events_agg_file(train_dir)
+
+    # THEN
+    assert len(events_dict) == 0
+
+
+def test_get_events_dict_from_events_agg_file_ReturnsObj_Scenario1(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
@@ -141,7 +166,7 @@ def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
     event9 = 9
     invalid_error_str = "invalid because of conflicting event_int"
     invalid_error_str = "invalid because of conflicting event_int"
-    boat_dir = get_test_etl_dir()
+    train_dir = get_test_etl_dir()
     e3_row = [bob_str, event3, ""]
     e1_sue_row = [sue_str, event1, invalid_error_str]
     e1_yao_row = [yao_str, event1, invalid_error_str]
@@ -150,11 +175,11 @@ def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
     events_agg_columns = [face_name_str(), event_int_str(), "error_message"]
     ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
     events_agg_str = "events_agg"
-    events_file_path = create_path(boat_dir, "events.xlsx")
+    events_file_path = create_path(train_dir, "events.xlsx")
     upsert_sheet(events_file_path, events_agg_str, ex_events_agg_df)
 
     # WHEN
-    events_dict = get_events_dict_from_events_agg_file(boat_dir)
+    events_dict = get_events_dict_from_events_agg_file(train_dir)
 
     # THEN
     assert len(events_dict) == 2

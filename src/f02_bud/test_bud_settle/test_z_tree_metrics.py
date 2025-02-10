@@ -98,16 +98,16 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_ItemRoadUnit():
     yao_tree_metrics = yao_bud.get_tree_metrics()
 
     # WHEN / THEN
-    train_road = create_road_from_titles(
+    traain_road = create_road_from_titles(
         [
             yao_bud.fiscal_title,
             "ACME",
             "ACME Employee Responsiblities",
             "Know Abuse Deterrence and Reporting guildlines",
-            "Accomplish Fall 2021 training",
+            "Accomplish Fall 2021 traaining",
         ]
     )
-    assert yao_tree_metrics.last_evaluated_pledge_item_road == train_road
+    assert yao_tree_metrics.last_evaluated_pledge_item_road == traain_road
 
 
 def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactBases():

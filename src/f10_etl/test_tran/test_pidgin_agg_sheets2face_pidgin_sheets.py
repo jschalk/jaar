@@ -1,14 +1,14 @@
 from src.f00_instrument.file import create_path
 from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
-from src.f10_etl.transformers import etl_boat_pidgin_agg_to_bow_face_dirs
+from src.f10_etl.transformers import etl_train_pidgin_agg_to_otz_face_dirs
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
 
 
-def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_names(
+def test_etl_train_pidgin_agg_to_otz_face_dirs_Scenario0_Two_face_names(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -30,14 +30,14 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_names(
     name_rows = [name0, name1, name2, name3]
     e1_name_agg_df = DataFrame(name_rows, columns=name_agg_columns)
 
-    boat_dir = create_path(get_test_etl_dir(), "boat")
-    agg_pidgin_path = create_path(boat_dir, "pidgin.xlsx")
+    train_dir = create_path(get_test_etl_dir(), "train")
+    agg_pidgin_path = create_path(train_dir, "pidgin.xlsx")
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
 
-    faces_dir = create_path(get_test_etl_dir(), "faces_bow")
+    faces_dir = create_path(get_test_etl_dir(), "faces_otz")
 
     # WHEN
-    etl_boat_pidgin_agg_to_bow_face_dirs(boat_dir, faces_dir)
+    etl_train_pidgin_agg_to_otz_face_dirs(train_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
@@ -60,7 +60,7 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario0_Two_face_names(
     pandas_testing_assert_frame_equal(gen_zia_name_df, e1_zia_name_agg_df)
 
 
-def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapDimens(
+def test_etl_train_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -115,17 +115,17 @@ def test_etl_boat_pidgin_agg_to_bow_face_dirs_Scenario1_AllMapDimens(
     e1_title_rows = [e1_title0, e1_title1]
     e1_title_agg_df = DataFrame(e1_title_rows, columns=title_agg_columns)
 
-    boat_dir = create_path(get_test_etl_dir(), "boat")
-    agg_pidgin_path = create_path(boat_dir, "pidgin.xlsx")
+    train_dir = create_path(get_test_etl_dir(), "train")
+    agg_pidgin_path = create_path(train_dir, "pidgin.xlsx")
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
     upsert_sheet(agg_pidgin_path, title_agg_str, e1_title_agg_df)
 
-    faces_dir = create_path(get_test_etl_dir(), "faces_bow")
+    faces_dir = create_path(get_test_etl_dir(), "faces_otz")
 
     # WHEN
-    etl_boat_pidgin_agg_to_bow_face_dirs(boat_dir, faces_dir)
+    etl_train_pidgin_agg_to_otz_face_dirs(train_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)

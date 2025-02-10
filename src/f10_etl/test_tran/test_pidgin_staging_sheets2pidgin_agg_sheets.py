@@ -6,7 +6,7 @@ from src.f10_etl.transformers import (
     etl_pidgin_label_staging_to_label_agg,
     etl_pidgin_title_staging_to_title_agg,
     etl_pidgin_road_staging_to_road_agg,
-    etl_boat_pidgin_staging_to_agg,
+    etl_train_pidgin_staging_to_agg,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -34,15 +34,15 @@ def test_etl_pidgin_name_staging_to_name_agg_Scenario0_CreatesEmptyFileBecauseOf
     e1_name1 = [bx, sue_str, event7, bob_str, bob_inx, None, slash_str, None]
     e1_name_rows = [e1_name0, e1_name1]
     staging_name_df = DataFrame(e1_name_rows, columns=name_staging_columns)
-    x_boat_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_boat_dir, "pidgin.xlsx")
+    x_train_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, name_staging_str, staging_name_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, name_staging_str)
     assert sheet_exists(pidgin_path, name_agg_str) is False
 
     # WHEN
-    etl_pidgin_name_staging_to_name_agg(x_boat_dir)
+    etl_pidgin_name_staging_to_name_agg(x_train_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -73,15 +73,15 @@ def test_etl_pidgin_name_staging_to_name_agg_Scenario1_CreatesFileFromSingleIdea
     e1_name1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
     e1_name_rows = [e1_name0, e1_name1]
     staging_name_df = DataFrame(e1_name_rows, columns=name_staging_columns)
-    x_boat_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_boat_dir, "pidgin.xlsx")
+    x_train_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, name_staging_str, staging_name_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, name_staging_str)
     assert sheet_exists(pidgin_path, name_agg_str) is False
 
     # WHEN
-    etl_pidgin_name_staging_to_name_agg(x_boat_dir)
+    etl_pidgin_name_staging_to_name_agg(x_train_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -117,15 +117,15 @@ def test_etl_pidgin_label_staging_to_label_agg_Scenario0_CreatesFileFromSingleId
     e1_label1 = [bx, sue_str, event7, run_str, run_inx, None, None, None]
     e1_label_rows = [e1_label0, e1_label1]
     staging_label_df = DataFrame(e1_label_rows, columns=label_staging_columns)
-    x_boat_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_boat_dir, "pidgin.xlsx")
+    x_train_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, label_staging_str, staging_label_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, label_staging_str)
     assert sheet_exists(pidgin_path, label_agg_str) is False
 
     # WHEN
-    etl_pidgin_label_staging_to_label_agg(x_boat_dir)
+    etl_pidgin_label_staging_to_label_agg(x_train_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -161,15 +161,15 @@ def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleIdea
     e1_road1 = [bx, sue_str, event7, clean_otx, clean_inx, None, None, None]
     e1_road_rows = [e1_road0, e1_road1]
     staging_road_df = DataFrame(e1_road_rows, columns=road_staging_columns)
-    x_boat_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_boat_dir, "pidgin.xlsx")
+    x_train_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, road_staging_str, staging_road_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, road_staging_str)
     assert sheet_exists(pidgin_path, road_agg_str) is False
 
     # WHEN
-    etl_pidgin_road_staging_to_road_agg(x_boat_dir)
+    etl_pidgin_road_staging_to_road_agg(x_train_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -205,15 +205,15 @@ def test_etl_pidgin_title_staging_to_title_agg_Scenario0_CreatesFileFromSingleId
     e1_title1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
     e1_title_rows = [e1_title0, e1_title1]
     staging_title_df = DataFrame(e1_title_rows, columns=title_staging_columns)
-    x_boat_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_boat_dir, "pidgin.xlsx")
+    x_train_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, title_staging_str, staging_title_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, title_staging_str)
     assert sheet_exists(pidgin_path, title_agg_str) is False
 
     # WHEN
-    etl_pidgin_title_staging_to_title_agg(x_boat_dir)
+    etl_pidgin_title_staging_to_title_agg(x_train_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -231,7 +231,7 @@ def test_etl_pidgin_title_staging_to_title_agg_Scenario0_CreatesFileFromSingleId
     pandas_testing_assert_frame_equal(gen_title_agg_df, e1_title_agg_df)
 
 
-def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllDimens(
+def test_etl_train_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -292,8 +292,8 @@ def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllDimens(
     e1_title_rows = [e1_title0, e1_title1]
     staging_title_df = DataFrame(e1_title_rows, columns=title_staging_columns)
 
-    x_boat_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_boat_dir, "pidgin.xlsx")
+    x_train_dir = get_test_etl_dir()
+    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
     upsert_sheet(pidgin_path, name_staging_str, staging_name_df)
     upsert_sheet(pidgin_path, label_staging_str, staging_label_df)
     upsert_sheet(pidgin_path, road_staging_str, staging_road_df)
@@ -309,7 +309,7 @@ def test_etl_boat_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllDimens(
     assert sheet_exists(pidgin_path, title_agg_str) is False
 
     # WHEN
-    etl_boat_pidgin_staging_to_agg(x_boat_dir)
+    etl_train_pidgin_staging_to_agg(x_train_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
