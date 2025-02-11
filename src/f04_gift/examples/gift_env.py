@@ -1,4 +1,4 @@
-from src.f00_instrument.file import delete_dir
+from src.f00_instrument.file import delete_dir, create_path
 from pytest import fixture as pytest_fixture
 
 
@@ -7,11 +7,11 @@ def get_codespace_gift_dir() -> str:
 
 
 def get_gift_examples_dir():
-    return f"{get_codespace_gift_dir()}/examples"
+    return create_path(get_codespace_gift_dir(), "examples")
 
 
 def get_gift_temp_env_dir():
-    return f"{get_gift_examples_dir()}/temp"
+    return create_path(get_gift_examples_dir(), "temp")
 
 
 @pytest_fixture()

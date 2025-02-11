@@ -1,3 +1,4 @@
+from src.f00_instrument.file import create_path
 from src.f03_chrono.examples.chrono_examples import get_five_config
 from src.f03_chrono.chrono import timelineunit_shop, get_default_timeline_config_dict
 from src.f07_fisc.fisc import fiscunit_shop
@@ -33,7 +34,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     x_fund_coin = 55
     x_respect_bit = 66
     x_penny = 77
-    x_fiscs_dir = f"{idea_fiscs_dir()}/fizz"
+    x_fiscs_dir = create_path(idea_fiscs_dir(), "fizz")
     accord23_str = "accord23"
     slash_str = "/"
 
@@ -106,7 +107,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     x_fund_coin = 55
     x_respect_bit = 66
     x_penny = 77
-    x_fiscs_dir = f"{idea_fiscs_dir()}/fizz"
+    x_fiscs_dir = create_path(idea_fiscs_dir(), "fizz")
     accord23_str = "accord23"
     slash_str = "/"
 

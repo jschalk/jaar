@@ -82,7 +82,7 @@ def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_Bud(env_dir_setup_clean
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_road())
     yao_dakota_hubunit.save_job_bud(zia_job)
 
-    # zia_file_path = f"{jobs_dir}/{zia_str}.json"
+    # zia_file_path = create_path(jobs_dir, zia_str}.json")
     # print(f"{os_path_exists(zia_file_path)=}")
     new_yao_job = create_listen_basis(yao_duty)
     assert len(new_yao_job.get_agenda_dict()) == 0
