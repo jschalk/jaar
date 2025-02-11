@@ -128,7 +128,7 @@ class HubUnit:
     _gifts_dir: str = None
     _voice_dir: str = None
     _forecast_dir: str = None
-    _timeline_dir: str = None
+    _episodes_dir: str = None
     _voice_filename: str = None
     _voice_path: str = None
     _forecast_filename: str = None
@@ -143,7 +143,7 @@ class HubUnit:
         self._gifts_dir = f_path(self._owner_dir, get_gifts_folder())
         self._voice_dir = f_path(self._owner_dir, "voice")
         self._forecast_dir = f_path(self._owner_dir, "forecast")
-        self._timeline_dir = f_path(self._owner_dir, "timeline")
+        self._episodes_dir = f_path(self._owner_dir, "episodes")
         self._voice_filename = get_json_filename(self.owner_name)
         self._voice_path = f_path(self._voice_dir, self._voice_filename)
         self._forecast_filename = get_json_filename(self.owner_name)
@@ -394,7 +394,7 @@ class HubUnit:
 
     # Deal methods
     def timepoint_dir(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self._timeline_dir, str(x_time_int))
+        return f_path(self._episodes_dir, str(x_time_int))
 
     def deal_filename(self) -> str:
         return "deal.json"
@@ -432,7 +432,7 @@ class HubUnit:
 
     def _get_timepoint_dirs(self) -> list[str]:
         x_dict = get_dir_file_strs(
-            self._timeline_dir, include_dirs=True, include_files=False
+            self._episodes_dir, include_dirs=True, include_files=False
         )
         return list(x_dict.keys())
 

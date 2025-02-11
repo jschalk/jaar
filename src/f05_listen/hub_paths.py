@@ -26,19 +26,24 @@ def fisc_agenda_list_report_path(fisc_mstr_dir: str, fisc_title: str) -> str:
     return create_path(fisc_path, "agenda_full_listing.csv")
 
 
-def create_timeline_dir_path(
+def create_owners_dir_path(fisc_mstr_dir: str, fisc_title: str) -> str:
+    fisc_dir = create_path(fisc_mstr_dir, fisc_title)
+    return create_path(fisc_dir, "owners")
+
+
+def create_episodes_dir_path(
     fiscs_dir: str, fisc_title: TitleUnit, owner_name: OwnerName
 ) -> str:
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
     owner_dir = create_path(owners_dir, owner_name)
-    return create_path(owner_dir, "timeline")
+    return create_path(owner_dir, "episodes")
 
 
 def create_timepoint_dir_path(
     fiscs_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, timepoint_int: int
 ):
-    timeline_dir = create_timeline_dir_path(fiscs_dir, fisc_title, owner_name)
+    timeline_dir = create_episodes_dir_path(fiscs_dir, fisc_title, owner_name)
     return create_path(timeline_dir, timepoint_int)
 
 

@@ -11,7 +11,8 @@ from src.f05_listen.hub_paths import (
     create_fisc_owner_time_csv_path,
     create_fisc_owner_time_json_path,
     fisc_agenda_list_report_path,
-    create_timeline_dir_path,
+    create_owners_dir_path,
+    create_episodes_dir_path,
     create_timepoint_dir_path,
     create_deal_path,
     create_budpoint_dir_path,
@@ -85,21 +86,35 @@ def test_fisc_agenda_list_report_path_ReturnObj() -> str:
     assert gen_a23_full_report_path == expected_a23_agenda_full_path
 
 
-def test_create_timeline_dir_path_ReturnObj() -> str:
+def test_create_owners_dir_path_ReturnObj() -> str:
+    # ESTABLISH
+    x_fiscs_dir = get_listen_temp_env_dir()
+    accord23_str = "accord23"
+
+    # WHEN
+    gen_owners_dir = create_owners_dir_path(x_fiscs_dir, accord23_str)
+
+    # THEN
+    accord23_dir = create_path(x_fiscs_dir, accord23_str)
+    expected_owners_dir = create_path(accord23_dir, get_owners_folder())
+    assert gen_owners_dir == expected_owners_dir
+
+
+def test_create_episodes_dir_path_ReturnObj() -> str:
     # ESTABLISH
     x_fiscs_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
     sue_str = "Sue"
 
     # WHEN
-    timeline_dir = create_timeline_dir_path(x_fiscs_dir, accord23_str, sue_str)
+    episodes_dir = create_episodes_dir_path(x_fiscs_dir, accord23_str, sue_str)
 
     # THEN
     accord23_dir = create_path(x_fiscs_dir, accord23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
-    expected_timeline_dir = create_path(sue_dir, "timeline")
-    assert timeline_dir == expected_timeline_dir
+    expected_episodes_dir = create_path(sue_dir, "episodes")
+    assert episodes_dir == expected_episodes_dir
 
 
 def test_create_timepoint_dir_path_ReturnObj() -> str:
@@ -118,8 +133,8 @@ def test_create_timepoint_dir_path_ReturnObj() -> str:
     accord23_dir = create_path(x_fiscs_dir, accord23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
-    timeline_dir = create_path(sue_dir, "timeline")
-    expected_timepoint_dir = create_path(timeline_dir, timepoint7)
+    episodes_dir = create_path(sue_dir, "episodes")
+    expected_timepoint_dir = create_path(episodes_dir, timepoint7)
     assert generated_timepoint_dir == expected_timepoint_dir
 
 
@@ -137,8 +152,8 @@ def test_create_deal_path_ReturnObj() -> str:
     accord23_dir = create_path(x_fiscs_dir, a23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
-    timeline_dir = create_path(sue_dir, "timeline")
-    timepoint_dir = create_path(timeline_dir, timepoint7)
+    episodes_dir = create_path(sue_dir, "episodes")
+    timepoint_dir = create_path(episodes_dir, timepoint7)
     expected_deal_path_dir = create_path(timepoint_dir, "deal.json")
     assert gen_deal_path == expected_deal_path_dir
 
@@ -159,8 +174,8 @@ def test_create_budpoint_dir_path_ReturnObj() -> str:
     accord23_dir = create_path(x_fiscs_dir, a23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
-    timeline_dir = create_path(sue_dir, "timeline")
-    timepoint_dir = create_path(timeline_dir, timepoint7)
+    episodes_dir = create_path(sue_dir, "episodes")
+    timepoint_dir = create_path(episodes_dir, timepoint7)
     expected_budpoint_path_dir = create_path(timepoint_dir, "budpoint.json")
     assert gen_budpoint_path == expected_budpoint_path_dir
 

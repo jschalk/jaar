@@ -1,25 +1,32 @@
 from src.f00_instrument.dict_toolbox import get_dict_from_json
-from src.f00_instrument.file import open_file, save_file
+from src.f00_instrument.file import open_file, save_file, create_path, count_dirs_files
 from src.f01_road.deal import time_int_str
+from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import fisc_title_str, owner_name_str
 from src.f05_listen.hub_paths import (
+    create_fisc_json_path,
+    create_episodes_dir_path,
     create_fisc_owner_time_csv_path,
     create_fisc_owner_time_json_path,
 )
+from src.f07_fisc.fisc import fiscunit_shop
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
-# open_fisc_owner_time_agg(path)-> dict[tuple(OwnerName, TimePiont), EventInt]
 
-
-# def test_WorldUnit_fisc_table2fisc_owner_time_agg_csvs_Scenaro1_SetsTableAttr(
-#     env_dir_setup_cleanup,
-# ):
+# def test_WorldUnit_create_deal_ledger_depth_dir_Scenaro0_Empty(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_world = worldunit_shop("fizz")
 #     bob_str = "Bob"
+#     accord23_str = "accord23"
+#     fiscs_dir = create_path(fizz_world._fisc_mstr_dir, "fiscals")
+#     accord23_fisc = fiscunit_shop(accord23_str, fiscs_dir)
+#     a23_json_path = create_fisc_json_path(fizz_world._fisc_mstr_dir, accord23_str)
+#     save_file(a23_json_path, None, accord23_fisc.get_json())
+#     create_episodes_dir_path()
+#     assert count_dirs_files(accord23_fisc.)
 #     sue_str = "Sue"
 #     event3 = 3
 #     event7 = 7
