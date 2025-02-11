@@ -2,7 +2,7 @@ from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import FiscUnit, fiscunit_shop
-from src.f07_fisc.examples.fisc_env import get_test_fiscs_dir, get_test_fisc_mstr_dir
+from src.f07_fisc.examples.fisc_env import get_test_fisc_mstr_dir
 
 
 # def create_example_fisc1(graphics_bool) -> FiscUnit:

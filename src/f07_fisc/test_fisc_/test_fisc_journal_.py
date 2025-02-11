@@ -9,7 +9,6 @@ from src.f00_instrument.db_toolbox import (
 from src.f01_road.jaar_config import get_fisc_title_if_None
 from src.f07_fisc.fisc import FiscUnit, fiscunit_shop
 from src.f07_fisc.examples.fisc_env import (
-    get_test_fiscs_dir,
     get_test_fisc_mstr_dir,
     env_dir_setup_cleanup,
 )
@@ -28,7 +27,8 @@ def test_FiscUnit_get_journal_db_path_ReturnsObj():
     x_journal_db_path = accord_fisc.get_journal_db_path()
 
     # THEN
-    x_fisc_dir = create_path(get_test_fiscs_dir(), accord45_str)
+    fiscs_dir = create_path(get_test_fisc_mstr_dir(), "fiscs")
+    x_fisc_dir = create_path(fiscs_dir, accord45_str)
     journal_filename = "journal.db"
     assert x_journal_db_path == create_path(x_fisc_dir, journal_filename)
 
@@ -92,7 +92,7 @@ def test_FiscUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
     )
 
     accord_fisc._journal_db = None
-    assert accord_fisc._journal_db is None
+    assert not accord_fisc._journal_db
     assert os_path_exists(accord_fisc.get_journal_db_path()) is False
 
     # WHEN
@@ -107,7 +107,7 @@ def test_FiscUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH create fisc
-    x_fisc = FiscUnit(get_fisc_title_if_None(), get_test_fiscs_dir())
+    x_fisc = FiscUnit(get_fisc_title_if_None(), get_test_fisc_mstr_dir())
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         check_connection(x_fisc.get_journal_conn())
@@ -122,7 +122,7 @@ def test_FiscUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
 
 def test_fisc_set_fisc_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
     # ESTABLISH create fisc
-    x_fisc = fiscunit_shop(get_fisc_title_if_None(), get_test_fiscs_dir())
+    x_fisc = fiscunit_shop(get_fisc_title_if_None(), get_test_fisc_mstr_dir())
 
     # WHEN
     x_fisc._set_fisc_dirs(in_memory_journal=True)

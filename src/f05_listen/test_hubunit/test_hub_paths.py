@@ -1,7 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.jaar_config import (
     get_gifts_folder,
-    get_test_fiscs_dir,
     get_rootpart_of_keep_dir,
     get_fisc_title_if_None,
     get_owners_folder,

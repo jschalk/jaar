@@ -82,7 +82,7 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
 
 # def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudDelAggTables(
 #     env_dir_setup_cleanup,
-# ):  # sourcery skip: extract-method
+# ):
 
 #     # ESTABLISH
 #     sue_inx = "Suzy"
