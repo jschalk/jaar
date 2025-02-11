@@ -1,5 +1,5 @@
 from src.f00_instrument.file import delete_dir
-from src.f01_road.jaar_config import init_gift_id, get_test_fiscal_title as fiscal_title
+from src.f01_road.jaar_config import init_gift_id, get_test_fisc_title as fisc_title
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.example_listen_gifts import sue_2atomunits_giftunit
 from src.f05_listen.examples.listen_env import (
@@ -18,7 +18,7 @@ def test_HubUnit_default_voice_bud_ReturnsObj():
     pfour_float = 0.4
     sue_hubunit = hubunit_shop(
         env_dir(),
-        fiscal_title(),
+        fisc_title(),
         sue_str,
         keep_road=None,
         bridge=slash_str,
@@ -32,7 +32,7 @@ def test_HubUnit_default_voice_bud_ReturnsObj():
     sue_default_voice = sue_hubunit.default_voice_bud()
 
     # THEN
-    assert sue_default_voice.fiscal_title == sue_hubunit.fiscal_title
+    assert sue_default_voice.fisc_title == sue_hubunit.fisc_title
     assert sue_default_voice.owner_name == sue_hubunit.owner_name
     assert sue_default_voice.bridge == sue_hubunit.bridge
     assert sue_default_voice.fund_pool == sue_hubunit.fund_pool
@@ -45,7 +45,7 @@ def test_HubUnit_default_voice_bud_ReturnsObj():
 def test_HubUnit_delete_voice_file_DeletesvoiceFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     assert sue_hubunit.voice_file_exists()
 
@@ -61,7 +61,7 @@ def test_HubUnit_create_initial_gift_files_from_default_CorrectlySavesGiftUnitFi
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     init_gift_filename = sue_hubunit.gift_filename(init_gift_id())
     init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_filename}"
     assert os_path_exists(init_gift_file_path) is False
@@ -80,7 +80,7 @@ def test_HubUnit_create_voice_from_gifts_CreatesvoiceFileFromGiftFiles(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     init_gift_filename = sue_hubunit.gift_filename(init_gift_id())
     init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_filename}"
     sue_hubunit._create_initial_gift_files_from_default()
@@ -101,7 +101,7 @@ def test_HubUnit_create_initial_gift_and_voice_files_CreatesGiftFilesAndvoiceFil
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     init_gift_filename = sue_hubunit.gift_filename(init_gift_id())
     init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_filename}"
     assert os_path_exists(init_gift_file_path) is False
@@ -122,7 +122,7 @@ def test_HubUnit_create_initial_gift_files_from_voice_SavesOnlyGiftFiles(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     sue_voice_bud = sue_hubunit.default_voice_bud()
     bob_str = "Bob"
     sue_voice_bud.add_acctunit(bob_str)
@@ -145,9 +145,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesvoiceFileAndGiftFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(
-        env_dir(), fiscal_title(), sue_str, respect_bit=seven_int
-    )
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str, respect_bit=seven_int)
     assert sue_hubunit.voice_file_exists() is False
     init_gift_file_path = f"{sue_hubunit._gifts_dir}/{init_gift_id()}.json"
     delete_dir(sue_hubunit._gifts_dir)
@@ -158,7 +156,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesvoiceFileAndGiftFile(
 
     # THEN
     voice_bud = sue_hubunit.get_voice_bud()
-    assert voice_bud.fiscal_title == fiscal_title()
+    assert voice_bud.fisc_title == fisc_title()
     assert voice_bud.owner_name == sue_str
     assert voice_bud.respect_bit == seven_int
     assert os_path_exists(init_gift_file_path)
@@ -170,9 +168,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlyvoiceFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(
-        env_dir(), fiscal_title(), sue_str, respect_bit=seven_int
-    )
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str, respect_bit=seven_int)
     sue_hubunit.initialize_gift_voice_files()
     assert sue_hubunit.voice_file_exists()
     sue_hubunit.delete_voice_file()
@@ -185,7 +181,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlyvoiceFile(
 
     # THEN
     voice_bud = sue_hubunit.get_voice_bud()
-    assert voice_bud.fiscal_title == fiscal_title()
+    assert voice_bud.fisc_title == fisc_title()
     assert voice_bud.owner_name == sue_str
     assert voice_bud.respect_bit == seven_int
     assert os_path_exists(init_gift_file_path)
@@ -197,9 +193,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlygiftFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(
-        env_dir(), fiscal_title(), sue_str, respect_bit=seven_int
-    )
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str, respect_bit=seven_int)
     sue_hubunit.initialize_gift_voice_files()
     sue_voice_bud = sue_hubunit.get_voice_bud()
     bob_str = "Bob"
@@ -214,7 +208,7 @@ def test_HubUnit_initialize_gift_voice_files_CorrectlySavesOnlygiftFile(
     sue_hubunit.initialize_gift_voice_files()
 
     # THEN
-    assert sue_voice_bud.fiscal_title == fiscal_title()
+    assert sue_voice_bud.fisc_title == fisc_title()
     assert sue_voice_bud.owner_name == sue_str
     assert sue_voice_bud.respect_bit == seven_int
     assert sue_voice_bud.acct_exists(bob_str)
@@ -226,11 +220,11 @@ def test_HubUnit_append_gifts_to_voice_file_AddsgiftsTovoiceFile(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     sue_hubunit.initialize_gift_voice_files()
     sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
     voice_bud = sue_hubunit.get_voice_bud()
-    print(f"{voice_bud.fiscal_title=}")
+    print(f"{voice_bud.fisc_title=}")
     sports_str = "sports"
     sports_road = voice_bud.make_l1_road(sports_str)
     knee_str = "knee"

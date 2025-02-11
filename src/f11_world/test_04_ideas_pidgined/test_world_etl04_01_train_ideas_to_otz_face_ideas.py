@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, fiscal_title_str
-from src.f07_fiscal.fiscal_config import cumlative_minute_str, hour_title_str
+from src.f04_gift.atom_config import face_name_str, fisc_title_str
+from src.f07_fisc.fisc_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_db_tool import (
     get_sheet_names,
@@ -28,7 +28,7 @@ def test_WorldUnit_train_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Grou
     idea_columns = [
         face_name_str(),
         event_int_str(),
-        fiscal_title_str(),
+        fisc_title_str(),
         hour_title_str(),
         cumlative_minute_str(),
     ]
@@ -80,7 +80,7 @@ def test_WorldUnit_train_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Grou
 #     idea_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         fiscal_title_str(),
+#         fisc_title_str(),
 #         hour_title_str(),
 #         cumlative_minute_str(),
 #     ]

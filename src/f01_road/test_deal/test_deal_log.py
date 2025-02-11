@@ -331,12 +331,12 @@ def test_DealLog_get_tranbook_ReturnsObj():
     }
 
     # WHEN
-    x_fiscal_title = "fiscal_title_x"
-    sue_tranbook = sue_deallog.get_tranbook(x_fiscal_title)
+    x_fisc_title = "fisc_title_x"
+    sue_tranbook = sue_deallog.get_tranbook(x_fisc_title)
 
     # THEN
     assert sue_tranbook
-    assert sue_tranbook.fiscal_title == x_fiscal_title
+    assert sue_tranbook.fisc_title == x_fisc_title
     assert sue_tranbook.tranunit_exists(sue_str, zia_str, x7_time_int)
     assert sue_tranbook.tranunit_exists(sue_str, bob_str, x4_time_int)
     assert sue_tranbook.get_amount(sue_str, zia_str, x7_time_int) == zia_net_deal

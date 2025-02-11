@@ -1,12 +1,12 @@
 from src.f00_instrument.dict_toolbox import x_is_json
 from src.f01_road.jaar_config import init_gift_id, get_gifts_folder
-from src.f01_road.road import get_default_fiscal_title as root_title
+from src.f01_road.road import get_default_fisc_title as root_title
 from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import (
-    fiscal_title_str,
+    fisc_title_str,
     owner_name_str,
     face_name_str,
     credit_belief_str,
@@ -49,7 +49,7 @@ def test_GiftUnit_exists():
 
     # THEN
     assert not x_giftunit.face_name
-    assert not x_giftunit.fiscal_title
+    assert not x_giftunit.fisc_title
     assert not x_giftunit.owner_name
     assert not x_giftunit._gift_id
     assert not x_giftunit._buddelta
@@ -68,7 +68,7 @@ def test_giftunit_shop_ReturnsObjEstablishWithEmptyArgs():
 
     # THEN
     assert not bob_giftunit.face_name
-    assert bob_giftunit.fiscal_title == root_title()
+    assert bob_giftunit.fisc_title == root_title()
     assert bob_giftunit.owner_name == bob_str
     assert bob_giftunit._gift_id == 0
     assert bob_giftunit._buddelta == buddelta_shop()
@@ -94,7 +94,7 @@ def test_giftunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     bob_giftunit = giftunit_shop(
         face_name=sue_str,
         owner_name=bob_str,
-        fiscal_title=accord45_str,
+        fisc_title=accord45_str,
         _gift_id=bob_gift_id,
         _buddelta=bob_buddelta,
         _delta_start=bob_delta_start,
@@ -106,7 +106,7 @@ def test_giftunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     # THEN
     assert bob_giftunit.face_name == sue_str
     assert bob_giftunit.owner_name == bob_str
-    assert bob_giftunit.fiscal_title == accord45_str
+    assert bob_giftunit.fisc_title == accord45_str
     assert bob_giftunit._gift_id == bob_gift_id
     assert bob_giftunit._buddelta == bob_buddelta
     assert bob_giftunit._delta_start == bob_delta_start
@@ -232,7 +232,7 @@ def test_GiftUnit_get_step_dict_ReturnsObj_Simple():
     accord45_str = "accord45"
     accord45_e5_int = 5
     bob_giftunit = giftunit_shop(
-        fiscal_title=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
+        fisc_title=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
     )
     bob_giftunit.set_face(sue_str)
 
@@ -240,8 +240,8 @@ def test_GiftUnit_get_step_dict_ReturnsObj_Simple():
     x_dict = bob_giftunit.get_step_dict()
 
     # THEN
-    assert x_dict.get(fiscal_title_str()) is not None
-    assert x_dict.get(fiscal_title_str()) == accord45_str
+    assert x_dict.get(fisc_title_str()) is not None
+    assert x_dict.get(fisc_title_str()) == accord45_str
     assert x_dict.get(owner_name_str()) is not None
     assert x_dict.get(owner_name_str()) == bob_str
     assert x_dict.get(face_name_str()) is not None
@@ -309,7 +309,7 @@ def test_GiftUnit_get_serializable_dict_ReturnsObj_Simple():
     accord45_str = "accord45"
     accord45_e5_int = 5
     bob_giftunit = giftunit_shop(
-        fiscal_title=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
+        fisc_title=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
     )
     bob_giftunit.set_face(sue_str)
 
@@ -317,8 +317,8 @@ def test_GiftUnit_get_serializable_dict_ReturnsObj_Simple():
     total_dict = bob_giftunit.get_serializable_dict()
 
     # THEN
-    assert total_dict.get(fiscal_title_str()) is not None
-    assert total_dict.get(fiscal_title_str()) == accord45_str
+    assert total_dict.get(fisc_title_str()) is not None
+    assert total_dict.get(fisc_title_str()) == accord45_str
     assert total_dict.get(owner_name_str()) is not None
     assert total_dict.get(owner_name_str()) == bob_str
     assert total_dict.get(face_name_str()) is not None
@@ -378,7 +378,7 @@ def test_GiftUnit_get_json_ReturnsObj_WithBudDeltaPopulated():
   },
   "event_int": null,
   "face_name": null,
-  "fiscal_title": "ZZ",
+  "fisc_title": "ZZ",
   "owner_name": "Bob"
 }"""
     assert generated_json == expected_json
@@ -397,7 +397,7 @@ def test_get_giftunit_from_json_ReturnsObj_WithBudDeltaPopulated():
     assert generated_bob_giftunit
     assert generated_bob_giftunit.face_name == bob_giftunit.face_name
     assert generated_bob_giftunit.event_int == bob_giftunit.event_int
-    assert generated_bob_giftunit.fiscal_title == bob_giftunit.fiscal_title
+    assert generated_bob_giftunit.fisc_title == bob_giftunit.fisc_title
     assert generated_bob_giftunit._buddelta == bob_giftunit._buddelta
     assert generated_bob_giftunit == bob_giftunit
 
@@ -546,10 +546,10 @@ def test_GiftUnit_get_edited_bud_RaisesErrorWhenGiftAttrsAndBudAttrsAreNotTheSam
     yao_str = "Yao"
     xia_str = "Xia"
     accord23_str = "accord23"
-    bob_giftunit = giftunit_shop(yao_str, xia_str, fiscal_title=accord23_str)
+    bob_giftunit = giftunit_shop(yao_str, xia_str, fisc_title=accord23_str)
     sue_str = "Sue"
     accord45_str = "accord45"
-    before_sue_budunit = budunit_shop(sue_str, fiscal_title=accord45_str)
+    before_sue_budunit = budunit_shop(sue_str, fisc_title=accord45_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:

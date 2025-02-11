@@ -1,6 +1,10 @@
 from src.f00_instrument.file import open_file, create_path, get_dir_file_strs
 from src.f04_gift.atom_config import acct_name_str, group_label_str, credor_respect_str
-from src.f09_idea.examples.idea_env import idea_env_setup_cleanup, idea_fiscals_dir
+from src.f09_idea.examples.idea_env import (
+    idea_env_setup_cleanup,
+    idea_fiscs_dir,
+    idea_examples_dir,
+)
 from src.f09_idea.examples.examples_pandas import (
     get_empty_dataframe,
     get_small_example01_csv,
@@ -55,7 +59,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(
     idea_env_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = idea_fiscals_dir()
+    env_dir = idea_examples_dir()
     small_dt = get_small_example01_dataframe()
     ex_filename = "fizzbuzz.csv"
     ex_file_path = create_path(env_dir, ex_filename)
@@ -74,7 +78,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(
     idea_env_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = idea_fiscals_dir()
+    env_dir = idea_examples_dir()
     atom_example_dt = get_ex02_atom_dataframe()
     ex_filename = "atom_example.csv"
 

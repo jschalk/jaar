@@ -1,0 +1,23 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_title": {
+            "otx_key": true
+        },
+        "weekday_title": {
+            "otx_key": true
+        },
+        "weekday_order": {
+            "otx_key": false
+        }
+    },
+    "idea_number": "br00005",
+    "dimens": [
+        "fisc_timeline_weekday"
+    ]
+}

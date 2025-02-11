@@ -1,5 +1,5 @@
-from src.f00_instrument.file import open_file, save_file, delete_dir
-from src.f01_road.road import get_default_fiscal_title as root_title
+from src.f00_instrument.file import open_file, save_file, delete_dir, create_path
+from src.f01_road.road import get_default_fisc_title as root_title
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.listen_env import (
@@ -95,7 +95,7 @@ def test_HubUnit_initialize_forecast_file_CorrectlySavesFile(env_dir_setup_clean
 
     # THEN
     forecast_bud = sue_hubunit.get_forecast_bud()
-    assert forecast_bud.fiscal_title == root_title()
+    assert forecast_bud.fisc_title == root_title()
     assert forecast_bud.owner_name == sue_str
     bob_str = "Bob"
     assert forecast_bud.acct_exists(bob_str) is False
@@ -120,12 +120,13 @@ def test_HubUnit_initialize_forecast_file_CorrectlyDoesNotOverwrite(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_fiscal_dir = f"{env_dir()}/{root_title()}"
+    fisc_mstr_dir = env_dir()
+    sue_fisc_dir = f"{fisc_mstr_dir}/{root_title()}"
     sue_fund_pool = 50000
     sue_fund_coin = 5
     sue_bit = 25
     sue_hubunit = hubunit_shop(
-        env_dir(),
+        fisc_mstr_dir,
         root_title(),
         sue_str,
         None,
@@ -153,8 +154,9 @@ def test_HubUnit_initialize_forecast_file_CorrectlyDoesNotOverwrite(
     # THEN
     assert sue_hubunit.forecast_file_exists()
 
-    sue_fiscal_dir = f"{env_dir()}/{root_title()}"
-    sue_owners_dir = f"{sue_fiscal_dir}/owners"
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    sue_fisc_dir = create_path(fiscs_dir, root_title())
+    sue_owners_dir = f"{sue_fisc_dir}/owners"
     sue_owner_dir = f"{sue_owners_dir}/{sue_str}"
     sue_forecast_dir = f"{sue_owner_dir}/forecast"
     sue_forecast_filename = f"{sue_str}.json"
@@ -163,7 +165,7 @@ def test_HubUnit_initialize_forecast_file_CorrectlyDoesNotOverwrite(
     )
     print(f"{forecast_file_str=}")
     forecast_bud = budunit_get_from_json(forecast_file_str)
-    assert forecast_bud.fiscal_title == root_title()
+    assert forecast_bud.fisc_title == root_title()
     assert forecast_bud.owner_name == sue_str
     assert forecast_bud.fund_pool == sue_fund_pool
     assert forecast_bud.fund_coin == sue_fund_coin
@@ -174,7 +176,7 @@ def test_HubUnit_initialize_forecast_file_CreatesDirsAndFiles(env_dir_setup_clea
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str, None)
-    delete_dir(sue_hubunit._fiscal_dir)
+    delete_dir(sue_hubunit._fisc_dir)
     assert os_path_exists(sue_hubunit._forecast_path) is False
 
     # WHEN

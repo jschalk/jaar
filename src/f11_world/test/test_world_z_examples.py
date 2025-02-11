@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import fiscal_title_str, acct_name_str
+from src.f04_gift.atom_config import fisc_title_str, acct_name_str
 from src.f09_idea.idea_db_tool import upsert_sheet
 from src.f10_etl.idea_collector import get_all_excel_ideasheets
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -16,7 +16,7 @@ def test_mine_to_train_staging_PidginsAll(env_dir_setup_cleanup):
     sue_str = "Sue"
     event_int = 55
     df1 = DataFrame(
-        [[accord23_str, sue_str]], columns=[fiscal_title_str(), acct_name_str()]
+        [[accord23_str, sue_str]], columns=[fisc_title_str(), acct_name_str()]
     )
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     br00000_str = "br00000"

@@ -3,7 +3,7 @@ from src.f01_road.road import (
     default_bridge_if_None,
     create_road_from_titles,
     create_road,
-    get_default_fiscal_title as root_title,
+    get_default_fisc_title as root_title,
 )
 from src.f01_road.finance import (
     default_respect_bit_if_None,
@@ -13,13 +13,14 @@ from src.f01_road.finance import (
 )
 from src.f01_road.jaar_config import (
     get_gifts_folder,
-    get_test_fiscals_dir,
+    get_test_fiscs_dir,
+    get_test_fisc_mstr_dir,
     get_rootpart_of_keep_dir,
-    get_fiscal_title_if_None,
+    get_fisc_title_if_None,
 )
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.hub_paths import (
-    create_timeline_dir_path,
+    create_episodes_dir_path,
     create_voice_path,
     create_forecast_path,
 )
@@ -33,53 +34,13 @@ from pytest import raises as pytest_raises
 from os.path import exists as os_path_exists
 
 
-def test_get_keep_path_ReturnsObj():
-    # ESTABLISH
-    sue_str = "Sue"
-    peru_str = "peru"
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title=peru_str, owner_name=sue_str)
-    texas_str = "texas"
-    dallas_str = "dallas"
-    elpaso_str = "el paso"
-    kern_str = "kern"
-    itemroot = get_rootpart_of_keep_dir()
-    texas_road = create_road_from_titles([itemroot, texas_str])
-    dallas_road = create_road_from_titles([itemroot, texas_str, dallas_str])
-    elpaso_road = create_road_from_titles([itemroot, texas_str, elpaso_str])
-    kern_road = create_road_from_titles([itemroot, texas_str, elpaso_str, kern_str])
-
-    # WHEN
-    texas_path = get_keep_path(sue_hubunit, texas_road)
-    dallas_path = get_keep_path(sue_hubunit, dallas_road)
-    elpaso_path = get_keep_path(sue_hubunit, elpaso_road)
-    kern_path = get_keep_path(sue_hubunit, kern_road)
-
-    # THEN
-    # itemroot_dir = f"{sue_hubunit._keeps_dir}/{get_rootpart_of_keep_dir()}"
-    itemroot_dir = create_path(sue_hubunit._keeps_dir, get_rootpart_of_keep_dir())
-    print(f"{kern_road=}")
-    print(f"{itemroot_dir=}")
-    assert texas_path == create_path(itemroot_dir, texas_str)
-    assert dallas_path == create_path(texas_path, dallas_str)
-    assert elpaso_path == create_path(texas_path, elpaso_str)
-    assert kern_path == create_path(elpaso_path, kern_str)
-
-    # WHEN / THEN
-    diff_root_texas_road = create_road_from_titles([peru_str, texas_str])
-    diff_root_dallas_road = create_road_from_titles([peru_str, texas_str, dallas_str])
-    diff_root_elpaso_road = create_road_from_titles([peru_str, texas_str, elpaso_str])
-    assert texas_path == get_keep_path(sue_hubunit, diff_root_texas_road)
-    assert dallas_path == get_keep_path(sue_hubunit, diff_root_dallas_road)
-    assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_road)
-
-
 def test_HubUnit_Exists():
     # ESTABLISH / WHEN
     x_hubunit = HubUnit()
 
     # THEN
-    assert not x_hubunit.fiscals_dir
-    assert not x_hubunit.fiscal_title
+    assert not x_hubunit.fisc_mstr_dir
+    assert not x_hubunit.fisc_title
     assert not x_hubunit.owner_name
     assert not x_hubunit.keep_road
     assert not x_hubunit.bridge
@@ -88,14 +49,14 @@ def test_HubUnit_Exists():
     assert not x_hubunit.respect_bit
     assert not x_hubunit.penny
     assert not x_hubunit.keep_point_magnitude
-    assert not x_hubunit._fiscal_dir
+    assert not x_hubunit._fisc_dir
     assert not x_hubunit._owners_dir
     assert not x_hubunit._owner_dir
     assert not x_hubunit._keeps_dir
     assert not x_hubunit._atoms_dir
     assert not x_hubunit._voice_dir
     assert not x_hubunit._forecast_dir
-    assert not x_hubunit._timeline_dir
+    assert not x_hubunit._episodes_dir
     assert not x_hubunit._gifts_dir
     assert not x_hubunit._voice_filename
     assert not x_hubunit._voice_path
@@ -119,8 +80,8 @@ def test_HubUnit_RaisesError_keep_road_DoesNotExist():
 
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
-    x_fiscals_dir = "src/f07_fiscal/examples"
-    x_fiscal_title = "accord45"
+    x_fisc_mstr_dir = "src/f07_fisc/examples"
+    x_fisc_title = "accord45"
     sue_str = "Sue"
     x_bridge = "/"
     x_fund_pool = 13000
@@ -131,8 +92,8 @@ def test_hubunit_shop_ReturnsObj():
 
     # WHEN
     x_hubunit = hubunit_shop(
-        fiscals_dir=x_fiscals_dir,
-        fiscal_title=x_fiscal_title,
+        fisc_mstr_dir=x_fisc_mstr_dir,
+        fisc_title=x_fisc_title,
         owner_name=sue_str,
         keep_road=None,
         bridge=x_bridge,
@@ -144,8 +105,9 @@ def test_hubunit_shop_ReturnsObj():
     )
 
     # THEN
-    assert x_hubunit.fiscals_dir == x_fiscals_dir
-    assert x_hubunit.fiscal_title == x_fiscal_title
+    assert x_hubunit.fisc_mstr_dir == x_fisc_mstr_dir
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    assert x_hubunit.fisc_title == x_fisc_title
     assert x_hubunit.owner_name == sue_str
     assert x_hubunit.bridge == x_bridge
     assert x_hubunit.fund_pool == x_fund_pool
@@ -153,29 +115,27 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
-    assert x_hubunit._fiscal_dir == create_path(x_fiscals_dir, x_fiscal_title)
-    assert x_hubunit._owners_dir == create_path(x_hubunit._fiscal_dir, "owners")
+    assert x_hubunit._fisc_dir == create_path(x_fiscs_dir, x_fisc_title)
+    assert x_hubunit._owners_dir == create_path(x_hubunit._fisc_dir, "owners")
     assert x_hubunit._owner_dir == create_path(x_hubunit._owners_dir, sue_str)
     assert x_hubunit._keeps_dir == create_path(x_hubunit._owner_dir, "keeps")
     assert x_hubunit._atoms_dir == create_path(x_hubunit._owner_dir, "atoms")
     assert x_hubunit._voice_dir == create_path(x_hubunit._owner_dir, "voice")
     assert x_hubunit._forecast_dir == create_path(x_hubunit._owner_dir, "forecast")
-    assert x_hubunit._timeline_dir == create_path(x_hubunit._owner_dir, "timeline")
-    func_timeline_dir = create_timeline_dir_path(
-        x_fiscals_dir, x_fiscal_title, x_hubunit.owner_name
+    assert x_hubunit._episodes_dir == create_path(x_hubunit._owner_dir, "episodes")
+    func_episodes_dir = create_episodes_dir_path(
+        x_fisc_mstr_dir, x_fisc_title, x_hubunit.owner_name
     )
-    print(f"{x_hubunit._timeline_dir=}")
-    print(f"{func_timeline_dir=}")
-    assert x_hubunit._timeline_dir == func_timeline_dir
+    print(f"{x_hubunit._episodes_dir=}")
+    print(f"{func_episodes_dir=}")
+    assert x_hubunit._episodes_dir == func_episodes_dir
     assert x_hubunit._gifts_dir == create_path(x_hubunit._owner_dir, get_gifts_folder())
 
     # voice
     assert x_hubunit._voice_filename == f"{sue_str}.json"
     x_voice_path = create_path(x_hubunit._voice_dir, x_hubunit._voice_filename)
     assert x_hubunit._voice_path == x_voice_path
-    func_voice_path = create_voice_path(
-        x_hubunit.fiscals_dir, x_hubunit.fiscal_title, sue_str
-    )
+    func_voice_path = create_voice_path(x_fisc_mstr_dir, x_hubunit.fisc_title, sue_str)
     assert x_hubunit._voice_path == func_voice_path
     print(f"{x_hubunit._voice_path=}")
 
@@ -184,7 +144,7 @@ def test_hubunit_shop_ReturnsObj():
     x_forecastpath = create_path(x_hubunit._forecast_dir, x_hubunit._forecast_filename)
     assert x_hubunit._forecast_path == x_forecastpath
     func_forecast_path = create_forecast_path(
-        x_hubunit.fiscals_dir, x_hubunit.fiscal_title, sue_str
+        x_fisc_mstr_dir, x_hubunit.fisc_title, sue_str
     )
     assert x_hubunit._forecast_path == func_forecast_path
 
@@ -198,22 +158,23 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
     texas_road = create_road(usa_road, texas_str)
-    fiscals_dir = get_test_fiscals_dir()
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
     accord23_str = "accord23"
 
     # WHEN
-    sue_hubunit = hubunit_shop(fiscals_dir, accord23_str, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str, texas_road)
 
     # THEN
-    x_fiscal_path = create_path(fiscals_dir, accord23_str)
-    x_owners_path = create_path(sue_hubunit._fiscal_dir, "owners")
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    x_fisc_path = create_path(fiscs_dir, accord23_str)
+    x_owners_path = create_path(sue_hubunit._fisc_dir, "owners")
     x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
     x_jobs_path = create_path(sue_hubunit.keep_dir(), "jobs")
     x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
 
-    assert sue_hubunit.fiscals_dir == fiscals_dir
-    assert sue_hubunit.fiscal_title == accord23_str
-    assert sue_hubunit._fiscal_dir == x_fiscal_path
+    assert sue_hubunit.fisc_mstr_dir == fisc_mstr_dir
+    assert sue_hubunit.fisc_title == accord23_str
+    assert sue_hubunit._fisc_dir == x_fisc_path
     assert sue_hubunit.owner_name == sue_str
     assert sue_hubunit.bridge == default_bridge_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
@@ -221,7 +182,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.respect_bit == default_respect_bit_if_None()
     assert sue_hubunit.penny == default_penny_if_None()
     assert sue_hubunit._owners_dir == x_owners_path
-    x_hubunit = hubunit_shop(fiscals_dir, accord23_str, sue_str)
+    x_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str)
     assert sue_hubunit.keep_road == texas_road
     assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_road)
     bob_str = "Bob"
@@ -255,6 +216,45 @@ def test_hubunit_shop_RaisesErrorIf_owner_name_Contains_bridge():
         str(excinfo.value)
         == f"'{bob_str}' needs to be a TitleUnit. Cannot contain bridge: '{slash_str}'"
     )
+
+
+def test_get_keep_path_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    peru_str = "peru"
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title=peru_str, owner_name=sue_str)
+    texas_str = "texas"
+    dallas_str = "dallas"
+    elpaso_str = "el paso"
+    kern_str = "kern"
+    itemroot = get_rootpart_of_keep_dir()
+    texas_road = create_road_from_titles([itemroot, texas_str])
+    dallas_road = create_road_from_titles([itemroot, texas_str, dallas_str])
+    elpaso_road = create_road_from_titles([itemroot, texas_str, elpaso_str])
+    kern_road = create_road_from_titles([itemroot, texas_str, elpaso_str, kern_str])
+
+    # WHEN
+    texas_path = get_keep_path(sue_hubunit, texas_road)
+    dallas_path = get_keep_path(sue_hubunit, dallas_road)
+    elpaso_path = get_keep_path(sue_hubunit, elpaso_road)
+    kern_path = get_keep_path(sue_hubunit, kern_road)
+
+    # THEN
+    itemroot_dir = create_path(sue_hubunit._keeps_dir, get_rootpart_of_keep_dir())
+    print(f"{kern_road=}")
+    print(f"{itemroot_dir=}")
+    assert texas_path == create_path(itemroot_dir, texas_str)
+    assert dallas_path == create_path(texas_path, dallas_str)
+    assert elpaso_path == create_path(texas_path, elpaso_str)
+    assert kern_path == create_path(elpaso_path, kern_str)
+
+    # WHEN / THEN
+    diff_root_texas_road = create_road_from_titles([peru_str, texas_str])
+    diff_root_dallas_road = create_road_from_titles([peru_str, texas_str, dallas_str])
+    diff_root_elpaso_road = create_road_from_titles([peru_str, texas_str, elpaso_str])
+    assert texas_path == get_keep_path(sue_hubunit, diff_root_texas_road)
+    assert dallas_path == get_keep_path(sue_hubunit, diff_root_dallas_road)
+    assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_road)
 
 
 def test_HubUnit_save_file_voice_CorrectlySavesFile(env_dir_setup_cleanup):
@@ -341,8 +341,8 @@ def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit.owner_name
-    fiscal_title = root_title()
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title, sue_str, None)
+    fisc_title = root_title()
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title, sue_str, None)
 
     print(f"{sue_hubunit._voice_path=}")
     assert sue_hubunit.voice_file_exists() is False
@@ -360,8 +360,8 @@ def test_HubUnit_save_voice_bud_RaisesErrorWhenBud_forecast_id_IsWrong(
     # ESTABLISH
     sue_str = "Sue"
 
-    fiscal_title = root_title()
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title, sue_str, None)
+    fisc_title = root_title()
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title, sue_str, None)
 
     # WHEN / THEN
     yao_str = "Yao"
@@ -396,8 +396,8 @@ def test_HubUnit_save_forecast_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     sue_budunit = get_budunit_with_4_levels()
     sue_str = sue_budunit.owner_name
 
-    fiscal_title = root_title()
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title, sue_str, None)
+    fisc_title = root_title()
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title, sue_str, None)
 
     print(f"{sue_hubunit._forecast_path=}")
     assert sue_hubunit.forecast_file_exists() is False
@@ -444,8 +444,8 @@ def test_HubUnit_save_forecast_bud_RaisesErrorWhenBud_forecast_id_IsWrong(
     # ESTABLISH
     sue_str = "Sue"
 
-    fiscal_title = root_title()
-    sue_hubunit = hubunit_shop(env_dir(), fiscal_title, sue_str, None)
+    fisc_title = root_title()
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title, sue_str, None)
 
     # WHEN / THEN
     yao_str = "Yao"

@@ -34,13 +34,13 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     world2_present_time = 55
     accord45_str = "accord45"
     world2_timeconversions = {accord45_str: timeconversion_shop(accord45_str)}
-    world2_fiscalunits = {"accord45"}
+    world2_fiscunits = {"accord45"}
     x_world = worldunit_shop(
         world_id=five_world_id,
         worlds_dir=worlds2_dir,
         present_time=world2_present_time,
         timeconversions=world2_timeconversions,
-        _fiscalunits=world2_fiscalunits,
+        _fiscunits=world2_fiscunits,
     )
 
     # WHEN

@@ -6,7 +6,7 @@ from src.f06_keep.rivercycle import (
     create_riverbook,
     get_credorledger,
 )
-from src.f06_keep.examples.keep_env import temp_fiscals_dir
+from src.f06_keep.examples.keep_env import temp_fisc_mstr_dir
 
 
 def test_RiverBook_Exists():
@@ -22,8 +22,8 @@ def test_RiverBook_Exists():
 def test_riverbook_shop_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    x_fiscals_dir = temp_fiscals_dir()
-    yao_hubunit = hubunit_shop(x_fiscals_dir, None, yao_str)
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, yao_str)
 
     # WHEN
     bob_str = "Bob"
@@ -42,8 +42,8 @@ def test_create_riverbook_ReturnsObj():
     yao_bud = budunit_shop(yao_str)
     yao_bud.add_acctunit(yao_str)
     yao_bud.add_acctunit(sue_str)
-    x_fiscals_dir = temp_fiscals_dir()
-    yao_hubunit = hubunit_shop(x_fiscals_dir, None, yao_str)
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, yao_str)
     yao_book_point_amount = 500
 
     # WHEN

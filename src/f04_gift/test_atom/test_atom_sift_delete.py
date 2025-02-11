@@ -89,9 +89,9 @@ def test_sift_atom_ReturnsObj_AtomUnit_DELETE_bud_itemunit():
 
     root_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
     root_atom.set_arg(parent_road_str(), "")
-    root_atom.set_arg(item_title_str(), sue_bud.fiscal_title)
+    root_atom.set_arg(item_title_str(), sue_bud.fisc_title)
     casa_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
-    casa_atom.set_arg(parent_road_str(), sue_bud.fiscal_title)
+    casa_atom.set_arg(parent_road_str(), sue_bud.fisc_title)
     casa_atom.set_arg(item_title_str(), casa_str)
     clean_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
     clean_atom.set_arg(parent_road_str(), casa_road)
@@ -132,7 +132,7 @@ def test_sift_atom_SetsBudDeltaAtomUnit_bud_itemunit():
     sweep_road = sue_bud.make_road(clean_road, sweep_str)
 
     casa_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
-    casa_atom.set_arg(parent_road_str(), sue_bud.fiscal_title)
+    casa_atom.set_arg(parent_road_str(), sue_bud.fisc_title)
     casa_atom.set_arg(item_title_str(), casa_str)
     clean_atom = atomunit_shop(bud_itemunit_str(), atom_delete())
     clean_atom.set_arg(parent_road_str(), casa_road)

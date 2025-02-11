@@ -38,7 +38,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_update,
     face_name_str,
-    fiscal_title_str,
+    fisc_title_str,
     owner_name_str,
     acct_name_str,
     group_label_str,
@@ -75,16 +75,16 @@ from src.f04_gift.atom_config import (
     take_force_str,
 )
 
-from src.f07_fiscal.fiscal_config import (
-    get_fiscal_args_dimen_mapping,
-    get_fiscal_config_dict,
-    get_fiscal_dimens,
-    fiscalunit_str,
-    fiscal_deal_episode_str,
-    fiscal_cashbook_str,
-    fiscal_timeline_hour_str,
-    fiscal_timeline_month_str,
-    fiscal_timeline_weekday_str,
+from src.f07_fisc.fisc_config import (
+    get_fisc_args_dimen_mapping,
+    get_fisc_config_dict,
+    get_fisc_dimens,
+    fiscunit_str,
+    fisc_deal_episode_str,
+    fisc_cashbook_str,
+    fisc_timeline_hour_str,
+    fisc_timeline_month_str,
+    fisc_timeline_weekday_str,
     present_time_str,
     amount_str,
     month_title_str,
@@ -168,7 +168,7 @@ def test_str_functions_ReturnObj():
     assert delete_insert_str() == "DELETE_INSERT"
     assert delete_update_str() == "DELETE_UPDATE"
 
-    assert get_idea_categorys() == {"bud", "fiscal", "pidgin"}
+    assert get_idea_categorys() == {"bud", "fisc", "pidgin"}
 
 
 def test_get_idea_elements_sort_order_ReturnsObj():
@@ -178,10 +178,10 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     # THEN
     atom_args = set(get_atom_args_dimen_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
-    fiscal_args = set(get_fiscal_args_dimen_mapping().keys())
-    print(f"{fiscal_args=}")
-    print(f"{fiscal_args.difference(set(table_sorting_priority))=}")
-    assert fiscal_args.issubset(set(table_sorting_priority))
+    fisc_args = set(get_fisc_args_dimen_mapping().keys())
+    print(f"{fisc_args=}")
+    print(f"{fisc_args.difference(set(table_sorting_priority))=}")
+    assert fisc_args.issubset(set(table_sorting_priority))
     pidgin_args = set(get_pidgin_args_dimen_mapping().keys())
     assert pidgin_args.issubset(set(table_sorting_priority))
     all_bud_dimen_delete_keys = get_all_bud_dimen_delete_keys()
@@ -191,7 +191,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[0] == idea_number_str()
     assert table_sorting_priority[1] == face_name_str()
     assert table_sorting_priority[2] == event_int_str()
-    assert table_sorting_priority[3] == fiscal_title_str()
+    assert table_sorting_priority[3] == fisc_title_str()
     assert table_sorting_priority[4] == owner_name_str()
     assert table_sorting_priority[5] == get_delete_key_name(owner_name_str())
     assert table_sorting_priority[6] == acct_name_str()
@@ -278,7 +278,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert len(table_sorting_priority) == 87
     all_args = copy_copy(atom_args)
     all_args.update(all_bud_dimen_delete_keys)
-    all_args.update(fiscal_args)
+    all_args.update(fisc_args)
     all_args.update(pidgin_args)
     all_args.add(idea_number_str())
     all_args.add(event_int_str())
@@ -297,7 +297,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(idea_number_str()) == "TEXT"
     assert sqlite_types.get(face_name_str()) == "TEXT"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
-    assert sqlite_types.get(fiscal_title_str()) == "TEXT"
+    assert sqlite_types.get(fisc_title_str()) == "TEXT"
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_label_str()) == "TEXT"
@@ -395,12 +395,12 @@ def test_get_idea_config_dict_ReturnsObj():
     # THEN
     assert x_idea_config
     idea_config_dimens = set(x_idea_config.keys())
-    assert fiscalunit_str() in idea_config_dimens
-    assert fiscal_deal_episode_str() in idea_config_dimens
-    assert fiscal_cashbook_str() in idea_config_dimens
-    assert fiscal_timeline_hour_str() in idea_config_dimens
-    assert fiscal_timeline_month_str() in idea_config_dimens
-    assert fiscal_timeline_weekday_str() in idea_config_dimens
+    assert fiscunit_str() in idea_config_dimens
+    assert fisc_deal_episode_str() in idea_config_dimens
+    assert fisc_cashbook_str() in idea_config_dimens
+    assert fisc_timeline_hour_str() in idea_config_dimens
+    assert fisc_timeline_month_str() in idea_config_dimens
+    assert fisc_timeline_weekday_str() in idea_config_dimens
     assert bud_acct_membership_str() in idea_config_dimens
     assert bud_acctunit_str() in idea_config_dimens
     assert bud_item_awardlink_str() in idea_config_dimens
@@ -416,7 +416,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert map_title_str() in idea_config_dimens
     assert map_road_str() in idea_config_dimens
     assert get_bud_dimens().issubset(idea_config_dimens)
-    assert get_fiscal_dimens().issubset(idea_config_dimens)
+    assert get_fisc_dimens().issubset(idea_config_dimens)
     assert get_pidgin_dimens().issubset(idea_config_dimens)
     assert len(x_idea_config) == 20
     _validate_idea_config(x_idea_config)
@@ -424,7 +424,7 @@ def test_get_idea_config_dict_ReturnsObj():
 
 def _validate_idea_config(x_idea_config: dict):
     atom_config_dict = get_atom_config_dict()
-    fiscal_config_dict = get_fiscal_config_dict()
+    fisc_config_dict = get_fisc_config_dict()
     pidgin_config_dict = get_pidgin_config_dict()
     # for every idea_format file there exists a unique idea_number always with leading zeros to make 5 digits
     for idea_dimen, idea_dict in x_idea_config.items():
@@ -439,18 +439,18 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(normal_specs_str()) is None
         if idea_dict.get(idea_category_str()) == "bud":
             sub_dimen = atom_config_dict.get(idea_dimen)
-        elif idea_dict.get(idea_category_str()) == "fiscal":
-            sub_dimen = fiscal_config_dict.get(idea_dimen)
+        elif idea_dict.get(idea_category_str()) == "fisc":
+            sub_dimen = fisc_config_dict.get(idea_dimen)
         elif idea_dict.get(idea_category_str()) == "pidgin":
             sub_dimen = pidgin_config_dict.get(idea_dimen)
 
         assert idea_dict.get(allowed_crud_str()) in get_allowed_curds()
 
         if idea_dimen in {
-            fiscal_timeline_hour_str(),
-            fiscal_timeline_month_str(),
-            fiscal_timeline_weekday_str(),
-            fiscalunit_str(),
+            fisc_timeline_hour_str(),
+            fisc_timeline_month_str(),
+            fisc_timeline_weekday_str(),
+            fiscunit_str(),
             map_otx2inx_str(),
             map_label_str(),
             map_name_str(),
@@ -458,7 +458,7 @@ def _validate_idea_config(x_idea_config: dict):
             map_road_str(),
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
-        elif idea_dimen in {fiscal_deal_episode_str(), fiscal_cashbook_str()}:
+        elif idea_dimen in {fisc_deal_episode_str(), fisc_cashbook_str()}:
             assert idea_dict.get(allowed_crud_str()) == insert_mulitple_str()
         elif (
             sub_dimen.get(atom_update()) != None
@@ -513,9 +513,9 @@ def _validate_idea_config(x_idea_config: dict):
         assert face_name_str() in idea_jkeys_keys
         assert event_int_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) != "pidgin":
-            assert fiscal_title_str() in idea_jkeys_keys
+            assert fisc_title_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) == "bud":
-            idea_jkeys_keys.remove(fiscal_title_str())
+            idea_jkeys_keys.remove(fisc_title_str())
             idea_jkeys_keys.remove(owner_name_str())
         idea_jkeys_keys.remove(face_name_str())
         idea_jkeys_keys.remove(event_int_str())
@@ -523,8 +523,8 @@ def _validate_idea_config(x_idea_config: dict):
 
         sub_jvalues_keys = set(sub_dimen.get(jvalues_str()).keys())
         print(f"  {sub_jvalues_keys=}")
-        if fiscal_title_str() in sub_jvalues_keys:
-            sub_jvalues_keys.remove(fiscal_title_str())
+        if fisc_title_str() in sub_jvalues_keys:
+            sub_jvalues_keys.remove(fisc_title_str())
 
         idea_jvalues_dict = idea_dict.get(jvalues_str())
         idea_jvalues_keys = set(idea_jvalues_dict.keys())
@@ -532,7 +532,7 @@ def _validate_idea_config(x_idea_config: dict):
         # print(f"{idea_jvalues_keys=}")
         assert sub_jvalues_keys == idea_jvalues_keys
 
-        assert fiscal_title_str() not in idea_jvalues_keys
+        assert fisc_title_str() not in idea_jvalues_keys
 
         # sort_list = get_idea_elements_sort_order()
         # x_count = 0
@@ -580,7 +580,7 @@ def test_get_idea_format_filenames_ReturnsObj():
 def _validate_idea_format_files(idea_filenames: set[str]):
     valid_idea_dimens = set()
     valid_idea_dimens.update(get_bud_dimens())
-    valid_idea_dimens.update(get_fiscal_dimens())
+    valid_idea_dimens.update(get_fisc_dimens())
     valid_idea_dimens.update(get_pidgin_dimens())
     config_dict = get_idea_config_dict()
 
@@ -666,10 +666,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(map_label_str(), 1)
     # set_idea_config_json(map_title_str(), 2)
     # set_idea_config_json(map_road_str(), 3)
-    # set_idea_config_json(fiscalunit_str(), 5)
-    # set_idea_config_json(fiscal_timeline_hour_str(), 6)
-    # set_idea_config_json(fiscal_timeline_month_str(), 7)
-    # set_idea_config_json(fiscal_timeline_weekday_str(), 8)
+    # set_idea_config_json(fiscunit_str(), 5)
+    # set_idea_config_json(fisc_timeline_hour_str(), 6)
+    # set_idea_config_json(fisc_timeline_month_str(), 7)
+    # set_idea_config_json(fisc_timeline_weekday_str(), 8)
     # set_idea_config_json(bud_acct_membership_str(), 9)
     # set_idea_config_json(bud_acctunit_str(), 10)
     # set_idea_config_json(bud_item_awardlink_str(), 11)
@@ -680,8 +680,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(bud_item_reasonunit_str(), 17)
     # set_idea_config_json(bud_itemunit_str(), 18)
     # set_idea_config_json(budunit_str(), 19)
-    # set_idea_config_json(fiscal_deal_episode_str(), 20)
-    # set_idea_config_json(fiscal_cashbook_str(), 21)
+    # set_idea_config_json(fisc_deal_episode_str(), 20)
+    # set_idea_config_json(fisc_cashbook_str(), 21)
 
     x_idea_config = get_idea_config_dict()
 
@@ -690,10 +690,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(map_label_str()).get(bo) == 1
     assert x_idea_config.get(map_title_str()).get(bo) == 2
     assert x_idea_config.get(map_road_str()).get(bo) == 3
-    assert x_idea_config.get(fiscalunit_str()).get(bo) == 5
-    assert x_idea_config.get(fiscal_timeline_hour_str()).get(bo) == 6
-    assert x_idea_config.get(fiscal_timeline_month_str()).get(bo) == 7
-    assert x_idea_config.get(fiscal_timeline_weekday_str()).get(bo) == 8
+    assert x_idea_config.get(fiscunit_str()).get(bo) == 5
+    assert x_idea_config.get(fisc_timeline_hour_str()).get(bo) == 6
+    assert x_idea_config.get(fisc_timeline_month_str()).get(bo) == 7
+    assert x_idea_config.get(fisc_timeline_weekday_str()).get(bo) == 8
     assert x_idea_config.get(bud_acct_membership_str()).get(bo) == 9
     assert x_idea_config.get(bud_acctunit_str()).get(bo) == 10
     assert x_idea_config.get(bud_item_awardlink_str()).get(bo) == 11
@@ -704,8 +704,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(bud_item_reasonunit_str()).get(bo) == 17
     assert x_idea_config.get(bud_itemunit_str()).get(bo) == 18
     assert x_idea_config.get(budunit_str()).get(bo) == 19
-    assert x_idea_config.get(fiscal_deal_episode_str()).get(bo) == 20
-    assert x_idea_config.get(fiscal_cashbook_str()).get(bo) == 21
+    assert x_idea_config.get(fisc_deal_episode_str()).get(bo) == 20
+    assert x_idea_config.get(fisc_cashbook_str()).get(bo) == 21
 
 
 def test_get_quick_ideas_column_ref_ReturnsObj():
@@ -719,7 +719,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         event_int_str(),
         c400_number_str(),
         present_time_str(),
-        fiscal_title_str(),
+        fisc_title_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),

@@ -6,12 +6,12 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     owner_name_str,
     get_bud_dimens,
-    fiscal_title_str,
+    fisc_title_str,
     credit_belief_str,
     debtit_belief_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.idea_config import idea_number_str, fiscalunit_str
+from src.f09_idea.idea_config import idea_number_str, fiscunit_str
 from src.f10_etl.tran_sqlstrs import create_bud_tables
 from src.f10_etl.transformers import (
     etl_idea_staging_to_bud_tables,
@@ -56,7 +56,7 @@ def test_etl_idea_staging_to_bud_tables_CreatesBudStagingTables(
         assert len(get_existing_bud_x_tables(cursor, agg_str)) == bud_count
 
 
-def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTables(
+def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -70,7 +70,7 @@ def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTab
     sue_inz_dir = create_path(x_faces_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
+    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()}
 {sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
 {sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
 {sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
@@ -83,10 +83,10 @@ def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTab
         etl_inz_face_csv_files2idea_staging_tables(cursor, x_faces_inz_dir)
         budunit_staging_tablename = f"{budunit_str()}_put_staging"
         budacct_staging_tablename = f"{bud_acctunit_str()}_put_staging"
-        fiscalunit_staging_tablename = f"{fiscalunit_str()}_staging"
+        fiscunit_staging_tablename = f"{fiscunit_str()}_staging"
         assert not db_table_exists(cursor, budunit_staging_tablename)
         assert not db_table_exists(cursor, budacct_staging_tablename)
-        assert not db_table_exists(cursor, fiscalunit_staging_tablename)
+        assert not db_table_exists(cursor, fiscunit_staging_tablename)
 
         # WHEN
         etl_idea_staging_to_bud_tables(cursor)
@@ -94,7 +94,7 @@ def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTab
         # THEN
         assert db_table_exists(cursor, budunit_staging_tablename)
         assert db_table_exists(cursor, budacct_staging_tablename)
-        assert not db_table_exists(cursor, fiscalunit_staging_tablename)
+        assert not db_table_exists(cursor, fiscunit_staging_tablename)
         assert get_row_count(cursor, budunit_staging_tablename) == 3
         assert get_row_count(cursor, budacct_staging_tablename) == 4
         cursor.execute(f"SELECT * FROM {budunit_staging_tablename}")
@@ -103,7 +103,7 @@ def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTab
             br00011_str,
             sue_inx,
             event3,
-            accord23_str,  # fiscal_title,
+            accord23_str,  # fisc_title,
             bob_inx,  # owner_name,
             None,  # credor_respect,
             None,  # debtor_respect,
@@ -119,7 +119,7 @@ def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTab
             br00011_str,
             sue_inx,
             event3,
-            accord23_str,  # fiscal_title,
+            accord23_str,  # fisc_title,
             yao_inx,  # owner_name,
             None,  # credor_respect,
             None,  # debtor_respect,
@@ -135,7 +135,7 @@ def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTab
             br00011_str,
             sue_inx,
             event7,
-            accord23_str,  # fiscal_title,
+            accord23_str,  # fisc_title,
             yao_inx,  # owner_name,
             None,  # credor_respect,
             None,  # debtor_respect,
@@ -163,13 +163,13 @@ def test_etl_idea_staging_to_bud_tables_Sets_error_message(env_dir_setup_cleanup
     accord45_str = "accord45"
     yao_credit_belief5 = 5
     yao_credit_belief7 = 7
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        cursor = fiscal_db_conn.cursor()
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
         create_bud_tables(cursor)
         x_tablename = f"{bud_acctunit_str()}_put_staging"
         assert db_table_exists(cursor, x_tablename)
         insert_staging_sqlstr = f"""
-INSERT INTO {x_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()})
+INSERT INTO {x_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()})
 VALUES
   ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL)
 , ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL,NULL)
@@ -180,7 +180,7 @@ VALUES
 """
         print(f"{insert_staging_sqlstr=}")
         cursor.execute(insert_staging_sqlstr)
-        select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, {credit_belief_str()}, error_message FROM {x_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {credit_belief_str()}, error_message FROM {x_tablename};"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(f"{rows=}")
@@ -199,7 +199,7 @@ VALUES
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(f"{rows=}")
-        x_error_message = "Inconsistent fiscal data"
+        x_error_message = "Inconsistent fisc data"
         assert rows == [
             (event3, accord23_str, yao_credit_belief5, None),
             (event3, accord23_str, None, None),

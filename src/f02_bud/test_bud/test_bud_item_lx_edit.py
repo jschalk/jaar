@@ -4,7 +4,7 @@ from src.f02_bud.examples.example_buds import (
     get_budunit_with_4_levels_and_2reasons_2facts,
 )
 from pytest import raises as pytest_raises
-from src.f01_road.road import get_default_fiscal_title as root_title
+from src.f01_road.road import get_default_fisc_title as root_title
 
 
 def test_BudUnit_edit_item_title_FailsWhenItemDoesNotExist():
@@ -24,7 +24,7 @@ def test_BudUnit_edit_item_title_FailsWhenItemDoesNotExist():
     assert str(excinfo.value) == f"Item old_road='{no_item_road}' does not exist"
 
 
-def test_BudUnit_edit_item_title_RaisesErrorForLevel0ItemWhen_fiscal_title_isNone():
+def test_BudUnit_edit_item_title_RaisesErrorForLevel0ItemWhen_fisc_title_isNone():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(owner_name=yao_str)
@@ -36,30 +36,30 @@ def test_BudUnit_edit_item_title_RaisesErrorForLevel0ItemWhen_fiscal_title_isNon
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=casa_road)
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.itemroot._item_title == yao_bud.fiscal_title
+    assert yao_bud.itemroot._item_title == yao_bud.fisc_title
     casa_item = yao_bud.get_item_obj(casa_road)
-    assert casa_item._parent_road == yao_bud.fiscal_title
+    assert casa_item._parent_road == yao_bud.fisc_title
     swim_item = yao_bud.get_item_obj(swim_road)
     assert swim_item._parent_road == casa_road
 
     # WHEN
     moon_str = "moon"
-    yao_bud.edit_item_title(old_road=yao_bud.fiscal_title, new_item_title=moon_str)
+    yao_bud.edit_item_title(old_road=yao_bud.fisc_title, new_item_title=moon_str)
 
     # THEN
     # with pytest_raises(Exception) as excinfo:
     #     moon_str = "moon"
-    #     yao_bud.edit_item_title(old_road=yao_bud.fiscal_title, new_item_title=moon_str)
+    #     yao_bud.edit_item_title(old_road=yao_bud.fisc_title, new_item_title=moon_str)
     # assert (
     #     str(excinfo.value)
-    #     == f"Cannot set itemroot to string other than '{yao_bud.fiscal_title}'"
+    #     == f"Cannot set itemroot to string other than '{yao_bud.fisc_title}'"
     # )
 
     assert yao_bud.itemroot._item_title != moon_str
-    assert yao_bud.itemroot._item_title == yao_bud.fiscal_title
+    assert yao_bud.itemroot._item_title == yao_bud.fisc_title
 
 
-def test_BudUnit_edit_item_title_RaisesErrorForLevel0When_fiscal_title_IsDifferent():
+def test_BudUnit_edit_item_title_RaisesErrorForLevel0When_fisc_title_IsDifferent():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(owner_name=yao_str)
@@ -70,11 +70,11 @@ def test_BudUnit_edit_item_title_RaisesErrorForLevel0When_fiscal_title_IsDiffere
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=casa_road)
     sun_str = "sun"
-    yao_bud.fiscal_title = sun_str
-    yao_bud.itemroot._bud_fiscal_title = sun_str
+    yao_bud.fisc_title = sun_str
+    yao_bud.itemroot._bud_fisc_title = sun_str
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.fiscal_title == sun_str
-    assert yao_bud.itemroot._bud_fiscal_title == sun_str
+    assert yao_bud.fisc_title == sun_str
+    assert yao_bud.itemroot._bud_fisc_title == sun_str
     assert yao_bud.itemroot._item_title == root_title()
     casa_item = yao_bud.get_item_obj(casa_road)
     assert casa_item._parent_road == root_title()
@@ -239,7 +239,7 @@ def test_bud_set_owner_name_CorrectlyModifiesBoth():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     assert sue_bud.owner_name == "Sue"
-    assert sue_bud.itemroot._item_title == sue_bud.fiscal_title
+    assert sue_bud.itemroot._item_title == sue_bud.fisc_title
     # mid_item_title1 = "Yao"
     # sue_bud.edit_item_title(old_road=old_item_title, new_item_title=mid_item_title1)
     # assert sue_bud.owner_name == old_item_title
@@ -251,7 +251,7 @@ def test_bud_set_owner_name_CorrectlyModifiesBoth():
 
     # THEN
     assert sue_bud.owner_name == bob_str
-    assert sue_bud.itemroot._item_title == sue_bud.fiscal_title
+    assert sue_bud.itemroot._item_title == sue_bud.fisc_title
 
 
 def test_bud_edit_item_title_RaisesErrorIfbridgeIsInTitle():

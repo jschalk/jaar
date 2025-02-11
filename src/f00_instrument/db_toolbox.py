@@ -380,7 +380,7 @@ def create_update_inconsistency_error_query(
     return f"""WITH inconsistency_rows AS (
 {select_inconsistency_query})
 UPDATE {x_tablename}
-SET error_message = 'Inconsistent fiscal data'
+SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 {where_str}
 ;
@@ -470,7 +470,6 @@ def save_to_split_csvs(
         csv_path = create_path(output_dir, key_path_part)
         set_dir(csv_path)
         output_file = os_path_join(csv_path, f"{tablename}.csv")
-        print(f"     {output_file=}")
         # Write to CSV
         with open(output_file, mode="w", newline="", encoding="utf-8") as csv_file:
             writer = csv_writer(csv_file)

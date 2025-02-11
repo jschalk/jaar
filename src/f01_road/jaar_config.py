@@ -1,13 +1,17 @@
-def get_test_fiscal_title():
+def get_test_fisc_title():
     return "accord_45"
 
 
-def get_fiscal_title_if_None(fiscal_title: str = None):
-    return get_test_fiscal_title() if fiscal_title is None else fiscal_title
+def get_fisc_title_if_None(fisc_title: str = None):
+    return get_test_fisc_title() if fisc_title is None else fisc_title
 
 
-def get_test_fiscals_dir():
-    return "src/f07_fiscal/examples/fiscals"
+def get_test_fisc_mstr_dir():
+    return "src/f07_fisc/examples/fisc_mstr"
+
+
+def get_test_fiscs_dir():
+    return "src/f07_fisc/examples/fisc_mstr/fiscs"
 
 
 def get_owners_folder() -> str:

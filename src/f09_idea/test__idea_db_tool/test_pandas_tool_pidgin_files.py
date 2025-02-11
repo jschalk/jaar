@@ -1,4 +1,4 @@
-from src.f00_instrument.file import save_file
+from src.f00_instrument.file import save_file, create_path
 from src.f01_road.road import create_road
 from src.f04_gift.atom_config import acct_name_str, base_str
 from src.f08_pidgin.pidgin import pidginunit_shop
@@ -23,7 +23,7 @@ from src.f09_idea.idea_db_tool import (
     open_csv,
     move_otx_csvs_to_pidgin_inx,
     _get_pidgen_idea_format_filenames,
-    _get_fiscal_idea_format_filenames,
+    _get_fisc_idea_format_filenames,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame
@@ -42,8 +42,8 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     xio_inx = "Xioita"
     sue_pidginunit = pidginunit_shop(sue_otx)
     sue_pidginunit.set_namemap(get_suita_namemap())
-    sue_dir = f"{get_example_face_dir()}/{sue_otx}"
-    pidginunit_file_path = f"{sue_dir}/{pidgin_filename()}"
+    sue_dir = create_path(get_example_face_dir(), sue_otx)
+    pidginunit_file_path = create_path(sue_dir, pidgin_filename())
     print(f"{sue_dir=}")
     save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
     sue_otx_dt = get_suita_acct_name_otx_dt()
@@ -150,7 +150,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     # ESTABLISH
     sue_pidginunit = get_casa_maison_pidginunit_set_by_title()
     sue_pidginunit.set_namemap(get_suita_namemap())
-    sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_name}"
+    sue_dir = create_path(get_example_face_dir(), sue_pidginunit.face_name)
     pidginunit_file_path = f"{sue_dir}/{pidgin_filename()}"
     print(f"{sue_dir=}")
     save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
@@ -211,7 +211,7 @@ def test_get_pidgen_idea_format_filenames_ReturnsObj():
     assert len(x_pidgen_idea_filenames) == 8
 
 
-def test_get_fiscal_idea_format_filenames_ReturnsObj():
+def test_get_fisc_idea_format_filenames_ReturnsObj():
     # ESTABLISH
     br00000_filename = "br00000.xlsx"
     br00001_filename = "br00001.xlsx"
@@ -222,7 +222,7 @@ def test_get_fiscal_idea_format_filenames_ReturnsObj():
     br00042_filename = "br00042.xlsx"
 
     # WHEN
-    x_pidgen_idea_filenames = _get_fiscal_idea_format_filenames()
+    x_pidgen_idea_filenames = _get_fisc_idea_format_filenames()
 
     # THEN
     print(f"{x_pidgen_idea_filenames=}")

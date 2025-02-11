@@ -41,7 +41,7 @@ def pidginable_atom_args() -> set:
         "awardee_tag",
         "base",
         "face_name",
-        "fiscal_title",
+        "fisc_title",
         "group_label",
         "healer_name",
         "hour_title",

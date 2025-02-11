@@ -1,7 +1,7 @@
 from src.f00_instrument.file import save_file, delete_dir, create_path
 from src.f01_road.deal import timeconversion_shop
 from src.f08_pidgin.pidgin import pidginunit_shop
-from src.f11_world.world import init_fiscalunits_from_dirs, WorldUnit, worldunit_shop
+from src.f11_world.world import init_fiscunits_from_dirs, WorldUnit, worldunit_shop
 from src.f11_world.examples.world_env import (
     get_test_world_id,
     get_test_worlds_dir,
@@ -10,7 +10,7 @@ from src.f11_world.examples.world_env import (
 from os.path import exists as os_path_exists
 
 # The goal of the world function is to allow a single command, pointing at a bunch of directories
-# initialize fiscalunits and output acct metrics such as calendars, financial status, healer status
+# initialize fiscunits and output acct metrics such as calendars, financial status, healer status
 
 
 def test_WorldUnit_Exists():
@@ -28,8 +28,8 @@ def test_WorldUnit_Exists():
     assert not x_world._world_dir
     assert not x_world._mine_dir
     assert not x_world._train_dir
-    assert not x_world._fiscal_mstr_dir
-    assert not x_world._fiscalunits
+    assert not x_world._fisc_mstr_dir
+    assert not x_world._fiscunits
     assert not x_world._pidgin_events
 
 
@@ -43,7 +43,7 @@ def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert fizz_world._faces_otz_dir is None
     assert fizz_world._mine_dir is None
     assert fizz_world._train_dir is None
-    assert fizz_world._fiscal_mstr_dir is None
+    assert fizz_world._fisc_mstr_dir is None
     assert os_path_exists(x_mine_dir) is False
 
     # WHEN
@@ -54,7 +54,7 @@ def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert fizz_world._faces_otz_dir is None
     assert fizz_world._mine_dir == x_mine_dir
     assert fizz_world._train_dir is None
-    assert fizz_world._fiscal_mstr_dir is None
+    assert fizz_world._fisc_mstr_dir is None
     assert os_path_exists(x_mine_dir)
 
 
@@ -67,20 +67,20 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     x_faces_inz_dir = create_path(x_world_dir, "faces_inz")
     x_mine_dir = create_path(x_world_dir, "mine")
     x_train_dir = create_path(x_world_dir, "train")
-    x_fiscal_mstr_dir = create_path(x_world_dir, "fiscal_mstr")
+    x_fisc_mstr_dir = create_path(x_world_dir, "fisc_mstr")
 
     assert not fizz_world._world_dir
     assert not fizz_world._faces_otz_dir
     assert not fizz_world._faces_inz_dir
     assert not fizz_world._mine_dir
     assert not fizz_world._train_dir
-    assert not fizz_world._fiscal_mstr_dir
+    assert not fizz_world._fisc_mstr_dir
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_faces_otz_dir) is False
     assert os_path_exists(x_faces_inz_dir) is False
     assert os_path_exists(x_mine_dir) is False
     assert os_path_exists(x_train_dir) is False
-    assert os_path_exists(x_fiscal_mstr_dir) is False
+    assert os_path_exists(x_fisc_mstr_dir) is False
 
     # WHEN
     fizz_world._set_world_dirs()
@@ -96,7 +96,7 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     assert os_path_exists(x_faces_inz_dir)
     assert os_path_exists(x_mine_dir) is False
     assert os_path_exists(x_train_dir)
-    assert os_path_exists(x_fiscal_mstr_dir)
+    assert os_path_exists(x_fisc_mstr_dir)
 
 
 def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
@@ -107,7 +107,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     world2_present_time = 55
     accord45_str = "accord45"
     world2timeconversions = {accord45_str: timeconversion_shop(accord45_str)}
-    world2_fiscalunits = {"accord45"}
+    world2_fiscunits = {"accord45"}
 
     # WHEN
     x_world = worldunit_shop(
@@ -116,7 +116,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
         mine_dir=example_mine_dir,
         present_time=world2_present_time,
         timeconversions=world2timeconversions,
-        _fiscalunits=world2_fiscalunits,
+        _fiscunits=world2_fiscunits,
     )
 
     # THEN
@@ -128,7 +128,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.timeconversions == world2timeconversions
     assert x_world.events == {}
     assert x_world._faces_otz_dir == create_path(world_dir, "faces_otz")
-    assert x_world._fiscalunits == world2_fiscalunits
+    assert x_world._fiscunits == world2_fiscunits
     assert x_world._pidgin_events == {}
 
 
@@ -146,7 +146,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world._mine_dir == create_path(x_world._world_dir, "mine")
     assert x_world._faces_otz_dir == create_path(world_dir, "faces_otz")
     assert x_world._faces_inz_dir == create_path(world_dir, "faces_inz")
-    assert x_world._fiscalunits == set()
+    assert x_world._fiscunits == set()
 
 
 # def test_WorldUnit_open_event_from_files_ReturnsObj(env_dir_setup_cleanup):
@@ -203,15 +203,15 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
 #     assert x_world.pidgins_empty() is False
 
 
-def test_init_fiscalunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
+def test_init_fiscunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     x_dir = get_test_worlds_dir()
 
     # WHEN
-    x_fiscalunits = init_fiscalunits_from_dirs([])
+    x_fiscunits = init_fiscunits_from_dirs([])
 
     # THEN
-    assert x_fiscalunits == []
+    assert x_fiscunits == []
 
 
 def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):

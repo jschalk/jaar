@@ -14,7 +14,7 @@ from src.f01_road.road import (
     road_validate,
     get_ancestor_roads,
     get_forefather_roads,
-    get_default_fiscal_title as root_title,
+    get_default_fisc_title as root_title,
     get_diff_road,
     is_heir_road,
     default_bridge_if_None,
@@ -130,18 +130,18 @@ def test_road_is_sub_road_correctlyReturnsBool():
 
 def test_road_road_validate_correctlyReturnsRoadUnit():
     x_s = default_bridge_if_None()
-    _fiscal_title = "x"
-    casa_road = f"{_fiscal_title}{x_s}casa"
-    clean_road = f"{_fiscal_title}{x_s}clean"
-    fun_road = f"{_fiscal_title}{x_s}fun"
-    assert road_validate(None, x_s, _fiscal_title) == ""
-    assert road_validate("", x_s, _fiscal_title) == ""
-    assert road_validate(f"{_fiscal_title}{x_s}casa", x_s, _fiscal_title) == casa_road
-    assert road_validate(f"A{x_s}casa", x_s, _fiscal_title) == casa_road
-    assert road_validate(f"{x_s}clean", x_s, _fiscal_title) == clean_road
-    assert road_validate(f"clean{x_s}fun", x_s, _fiscal_title) == fun_road
-    assert road_validate("clean", x_s, _fiscal_title) == _fiscal_title
-    assert road_validate(f"AA{x_s}casa", x_s, _fiscal_title) == casa_road
+    _fisc_title = "x"
+    casa_road = f"{_fisc_title}{x_s}casa"
+    clean_road = f"{_fisc_title}{x_s}clean"
+    fun_road = f"{_fisc_title}{x_s}fun"
+    assert road_validate(None, x_s, _fisc_title) == ""
+    assert road_validate("", x_s, _fisc_title) == ""
+    assert road_validate(f"{_fisc_title}{x_s}casa", x_s, _fisc_title) == casa_road
+    assert road_validate(f"A{x_s}casa", x_s, _fisc_title) == casa_road
+    assert road_validate(f"{x_s}clean", x_s, _fisc_title) == clean_road
+    assert road_validate(f"clean{x_s}fun", x_s, _fisc_title) == fun_road
+    assert road_validate("clean", x_s, _fisc_title) == _fisc_title
+    assert road_validate(f"AA{x_s}casa", x_s, _fisc_title) == casa_road
 
 
 def test_road_rebuild_road_ReturnsCorrectRoadUnit():
@@ -384,7 +384,7 @@ def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     assert x_roads == texas_forefather_roads
 
 
-def test_road_get_default_fiscal_title_ReturnsObj():
+def test_road_get_default_fisc_title_ReturnsObj():
     assert root_title() == "ZZ"
 
 

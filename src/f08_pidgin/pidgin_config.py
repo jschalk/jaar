@@ -156,7 +156,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "denom": "int",
         "divisor": "int",
         "face_name": "NameUnit",
-        "fiscal_title": "TitleUnit",
+        "fisc_title": "TitleUnit",
         "fnigh": "float",
         "fopen": "float",
         "fund_coin": "float",

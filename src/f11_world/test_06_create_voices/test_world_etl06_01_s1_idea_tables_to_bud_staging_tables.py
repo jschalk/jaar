@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     owner_name_str,
     get_bud_dimens,
-    fiscal_title_str,
+    fisc_title_str,
     credit_belief_str,
     debtit_belief_str,
 )
@@ -54,7 +54,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_CreatesBudStagingTables(
         assert len(get_existing_bud_x_tables(cursor, agg_str)) == bud_count
 
 
-def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStagingTables(
+def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -68,7 +68,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStag
     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
+    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()}
 {sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
 {sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
 {sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
@@ -95,7 +95,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStag
             br00011_str,
             sue_inx,
             event3,
-            accord23_str,  # fiscal_title,
+            accord23_str,  # fisc_title,
             bob_inx,  # owner_name,
             None,  # credor_respect,
             None,  # debtor_respect,
@@ -111,7 +111,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStag
             br00011_str,
             sue_inx,
             event3,
-            accord23_str,  # fiscal_title,
+            accord23_str,  # fisc_title,
             yao_inx,  # owner_name,
             None,  # credor_respect,
             None,  # debtor_respect,
@@ -127,7 +127,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscalStag
             br00011_str,
             sue_inx,
             event7,
-            accord23_str,  # fiscal_title,
+            accord23_str,  # fisc_title,
             yao_inx,  # owner_name,
             None,  # credor_respect,
             None,  # debtor_respect,
@@ -156,13 +156,13 @@ def test_WorldUnit_idea_staging_to_bud_tables_Sets_error_message(env_dir_setup_c
     yao_credit_belief5 = 5
     yao_credit_belief7 = 7
     fizz_world = worldunit_shop("fizz")
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        cursor = fiscal_db_conn.cursor()
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
         create_bud_tables(cursor)
         x_tablename = f"{bud_acctunit_str()}_put_staging"
         assert db_table_exists(cursor, x_tablename)
         insert_staging_sqlstr = f"""
-INSERT INTO {x_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()})
+INSERT INTO {x_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()})
 VALUES
   ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL)
 , ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL,NULL)
@@ -173,7 +173,7 @@ VALUES
 """
         print(f"{insert_staging_sqlstr=}")
         cursor.execute(insert_staging_sqlstr)
-        select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, {credit_belief_str()}, error_message FROM {x_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {credit_belief_str()}, error_message FROM {x_tablename};"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(f"{rows=}")
@@ -192,7 +192,7 @@ VALUES
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(f"{rows=}")
-        x_error_message = "Inconsistent fiscal data"
+        x_error_message = "Inconsistent fisc data"
         assert rows == [
             (event3, accord23_str, yao_credit_belief5, None),
             (event3, accord23_str, None, None),

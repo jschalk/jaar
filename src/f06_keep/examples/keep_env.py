@@ -5,16 +5,20 @@ from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 
 
-def temp_fiscal_title():
+def temp_fisc_title():
     return "ex_keep04"
 
 
-def temp_fiscal_dir():
-    return f"{temp_fiscals_dir()}/{temp_fiscal_title()}"
+def temp_fisc_dir():
+    return f"{temp_fiscs_dir()}/{temp_fisc_title()}"
 
 
-def temp_fiscals_dir():
-    return "src/f06_keep/examples/fiscals"
+def temp_fisc_mstr_dir():
+    return "src/f06_keep/examples/fisc_mstr"
+
+
+def temp_fiscs_dir():
+    return "src/f06_keep/examples/fisc_mstr/fiscs"
 
 
 def temp_owner_name():
@@ -23,7 +27,7 @@ def temp_owner_name():
 
 @pytest_fixture()
 def env_dir_setup_cleanup():
-    env_dir = temp_fiscals_dir()
+    env_dir = temp_fiscs_dir()
     delete_dir(env_dir)
     yield env_dir
     delete_dir(env_dir)
@@ -38,7 +42,7 @@ def get_texas_road() -> RoadUnit:
 
 def get_texas_hubunit() -> HubUnit:
     return hubunit_shop(
-        temp_fiscals_dir(), temp_fiscal_title(), temp_owner_name(), get_texas_road()
+        temp_fiscs_dir(), temp_fisc_title(), temp_owner_name(), get_texas_road()
     )
 
 
@@ -46,14 +50,14 @@ class InvalidkeepCopyException(Exception):
     pass
 
 
-def copy_evaluation_keep(src_fiscal_title: str, dest_fiscal_title: str):
+def copy_evaluation_keep(src_fisc_title: str, dest_fisc_title: str):
     base_dir = "src/keep/examples/keeps"
-    new_dir = f"{base_dir}/{dest_fiscal_title}"
+    new_dir = f"{base_dir}/{dest_fisc_title}"
     if os_path_exists(new_dir):
         raise InvalidkeepCopyException(
             f"Cannot copy keep to '{new_dir}' directory because '{new_dir}' exists."
         )
     # base_dir = keep_obj.hubunit.keep_dir()
-    src_dir = f"{base_dir}/{src_fiscal_title}"
-    dest_dir = f"{base_dir}/{dest_fiscal_title}"
+    src_dir = f"{base_dir}/{src_fisc_title}"
+    dest_dir = f"{base_dir}/{dest_fisc_title}"
     copy_dir(src_dir=src_dir, dest_dir=dest_dir)

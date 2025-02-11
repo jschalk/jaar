@@ -89,9 +89,9 @@ def test_sift_atom_ReturnsObj_AtomUnit_INSERT_bud_itemunit():
 
     root_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     root_atom.set_arg(parent_road_str(), "")
-    root_atom.set_arg(item_title_str(), sue_bud.fiscal_title)
+    root_atom.set_arg(item_title_str(), sue_bud.fisc_title)
     casa_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
-    casa_atom.set_arg(parent_road_str(), sue_bud.fiscal_title)
+    casa_atom.set_arg(parent_road_str(), sue_bud.fisc_title)
     casa_atom.set_arg(item_title_str(), casa_str)
     clean_atom = atomunit_shop(bud_itemunit_str(), atom_insert())
     clean_atom.set_arg(parent_road_str(), casa_road)

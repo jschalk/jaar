@@ -15,7 +15,7 @@ def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario0_bud_item_teamlin
         idea_cols = [
             "event_int",
             "face_name",
-            "fiscal_title",
+            "fisc_title",
             "road",
             "team_tag",
             "owner_name",
@@ -44,11 +44,11 @@ def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario0_bud_item_teamlin
         )
 
         # THEN
-        columns_str = "face_name, event_int, fiscal_title, owner_name, road, team_tag"
+        columns_str = "face_name, event_int, fisc_title, owner_name, road, team_tag"
         expected_sqlstr = f"""INSERT INTO {budteam_cat}_staging (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_staging
-WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND owner_name IS NOT NULL AND road IS NOT NULL AND team_tag IS NOT NULL
+WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fisc_title IS NOT NULL AND owner_name IS NOT NULL AND road IS NOT NULL AND team_tag IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -65,7 +65,7 @@ def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario1_bud_acctunit():
         idea_cols = [
             "event_int",
             "face_name",
-            "fiscal_title",
+            "fisc_title",
             "road",
             "team_tag",
             "owner_name",
@@ -93,11 +93,11 @@ def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario1_bud_acctunit():
         )
 
         # THEN
-        columns_str = "face_name, event_int, fiscal_title, owner_name, acct_name, credit_belief, debtit_belief"
+        columns_str = "face_name, event_int, fisc_title, owner_name, acct_name, credit_belief, debtit_belief"
         expected_sqlstr = f"""INSERT INTO {budacct_cat}_staging (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_staging
-WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
+WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fisc_title IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -115,7 +115,7 @@ def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario2_bud_acctunit():
         idea_cols = [
             "event_int",
             "face_name",
-            "fiscal_title",
+            "fisc_title",
             "road",
             "team_tag",
             "owner_name",
@@ -143,12 +143,12 @@ def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario2_bud_acctunit():
 
         # THEN
         columns_str = (
-            "face_name, event_int, fiscal_title, owner_name, acct_name, credit_belief"
+            "face_name, event_int, fisc_title, owner_name, acct_name, credit_belief"
         )
         expected_sqlstr = f"""INSERT INTO {budacct_cat}_staging (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_staging
-WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fiscal_title IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
+WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fisc_title IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """

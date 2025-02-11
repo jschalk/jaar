@@ -3,7 +3,7 @@ from src.f00_instrument.file import get_dir_file_strs, create_path
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_gift.atom_config import (
     face_name_str,
-    fiscal_title_str,
+    fisc_title_str,
     owner_name_str,
     acct_name_str,
     group_label_str,
@@ -103,7 +103,7 @@ def test_get_headers_list_ReturnsObj():
     assert format_00021_headers == [
         face_name_str(),
         event_int_str(),
-        fiscal_title_str(),
+        fisc_title_str(),
         owner_name_str(),
         acct_name_str(),
         credit_belief_str(),
@@ -127,12 +127,12 @@ def test_get_sorted_headers_str_ReturnsObj():
     # ESTABLISH / WHEN
     headers = get_sorted_headers_str(idea_format_00021_bud_acctunit_v0_0_0())
     # THEN
-    assert headers == "fiscal_title,owner_name,acct_name,credit_belief,debtit_belief"
+    assert headers == "fisc_title,owner_name,acct_name,credit_belief,debtit_belief"
 
     # ESTABLISH / WHEN
     headers = get_sorted_headers_str(idea_format_00019_itemunit_v0_0_0())
     # THEN
-    item_headers_str = "fiscal_title,owner_name,parent_road,item_title,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
+    item_headers_str = "fisc_title,owner_name,parent_road,item_title,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
     assert headers == item_headers_str
 
 
@@ -214,13 +214,13 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_bud_acctunit_v0_0_0()
         "debtit_belief": {"otx_key": False},
         "event_int": {"otx_key": True},
         "face_name": {"otx_key": True},
-        "fiscal_title": {"otx_key": True},
+        "fisc_title": {"otx_key": True},
         "owner_name": {"otx_key": True},
     }
     headers_list = format_00001_idearef.get_headers_list()
     assert headers_list[0] == face_name_str()
     assert headers_list[1] == event_int_str()
-    assert headers_list[2] == fiscal_title_str()
+    assert headers_list[2] == fisc_title_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
     assert headers_list[5] == credit_belief_str()
@@ -239,7 +239,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_bud_acct_membership_v
     headers_list = format_00021_idearef.get_headers_list()
     assert headers_list[0] == face_name_str()
     assert headers_list[1] == event_int_str()
-    assert headers_list[2] == fiscal_title_str()
+    assert headers_list[2] == fisc_title_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
     assert headers_list[5] == group_label_str()
@@ -259,7 +259,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_itemunit_v0_0_0():
     headers_list = format_00003_idearef.get_headers_list()
     assert headers_list[0] == face_name_str()
     assert headers_list[1] == event_int_str()
-    assert headers_list[2] == fiscal_title_str()
+    assert headers_list[2] == fisc_title_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == parent_road_str()
     assert headers_list[5] == item_title_str()
@@ -279,7 +279,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_itemunit_v0_0_0():
     headers_list = format_00019_idearef.get_headers_list()
     assert headers_list[0] == face_name_str()
     assert headers_list[1] == event_int_str()
-    assert headers_list[2] == fiscal_title_str()
+    assert headers_list[2] == fisc_title_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == parent_road_str()
     assert headers_list[5] == item_title_str()

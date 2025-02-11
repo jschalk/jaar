@@ -6,6 +6,7 @@ from src.f00_instrument.db_toolbox import (
     get_table_columns,
     save_to_split_csvs,
 )
+from src.f00_instrument.dict_toolbox import get_json_from_dict
 from src.f01_road.road import FaceName, EventInt
 from src.f02_bud.bud import (
     budunit_shop,
@@ -16,9 +17,14 @@ from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
 from src.f04_gift.delta import get_minimal_buddelta
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
-from src.f05_listen.hub_paths import create_voice_path, create_fiscal_json_path
-from src.f07_fiscal.fiscal import get_from_json as fiscalunit_get_from_json
-from src.f07_fiscal.fiscal_config import get_fiscal_dimens
+from src.f05_listen.hub_paths import (
+    create_voice_path,
+    create_fisc_json_path,
+    create_fisc_owner_time_csv_path,
+    create_fisc_owner_time_json_path,
+)
+from src.f07_fisc.fisc import get_from_json as fiscunit_get_from_json
+from src.f07_fisc.fisc_config import get_fisc_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
 from src.f09_idea.idea_config import (
@@ -46,23 +52,23 @@ from src.f09_idea.idea_db_tool import (
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
 from src.f10_etl.tran_sqlstrs import (
     get_bud_create_table_sqlstrs,
-    create_fiscal_tables,
+    create_fisc_tables,
     create_bud_tables,
-    get_fiscal_update_inconsist_error_message_sqlstrs,
-    get_fiscal_insert_agg_from_staging_sqlstrs,
+    get_fisc_update_inconsist_error_message_sqlstrs,
+    get_fisc_insert_agg_from_staging_sqlstrs,
     get_bud_put_update_inconsist_error_message_sqlstrs,
     get_bud_insert_put_agg_from_staging_sqlstrs,
     get_bud_insert_del_agg_from_staging_sqlstrs,
     IDEA_STAGEABLE_PUT_DIMENS,
-    CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR,
-    INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR,
-    UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR,
-    CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR,
-    INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR,
+    CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
+    INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
+    UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
+    CREATE_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR,
+    INSERT_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
-from src.f10_etl.fiscal_etl_tool import (
-    create_fiscalunit_jsons_from_prime_files,
+from src.f10_etl.fisc_etl_tool import (
+    create_fiscunit_jsons_from_prime_files,
     collect_events_dir_owner_events_sets,
     get_owners_downhill_event_ints,
 )
@@ -770,12 +776,12 @@ def etl_inz_face_csv_files2idea_staging_tables(
                 insert_idea_csv(csv_path, conn_or_cursor, f"{idea_number}_staging")
 
 
-def etl_idea_staging_to_fiscal_tables(conn_or_cursor):
-    create_fiscal_tables(conn_or_cursor)
-    idea_staging_tables2fiscal_staging_tables(conn_or_cursor)
-    set_fiscal_staging_error_message(conn_or_cursor)
-    fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor)
-    fiscal_agg_tables2fiscal_event_time_agg(conn_or_cursor)
+def etl_idea_staging_to_fisc_tables(conn_or_cursor):
+    create_fisc_tables(conn_or_cursor)
+    idea_staging_tables2fisc_staging_tables(conn_or_cursor)
+    set_fisc_staging_error_message(conn_or_cursor)
+    fisc_staging_tables2fisc_agg_tables(conn_or_cursor)
+    fisc_agg_tables2fisc_event_time_agg(conn_or_cursor)
 
 
 def etl_idea_staging_to_bud_tables(conn_or_cursor):
@@ -785,7 +791,7 @@ def etl_idea_staging_to_bud_tables(conn_or_cursor):
     bud_staging_tables2bud_agg_tables(conn_or_cursor)
 
 
-def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection):
+def idea_staging_tables2fisc_staging_tables(conn_or_cursor: sqlite3_Connection):
     idea_config_dict = get_idea_config_dict()
     for idea_number in get_idea_numbers():
         idea_staging = f"{idea_number}_staging"
@@ -794,14 +800,14 @@ def idea_staging_tables2fiscal_staging_tables(conn_or_cursor: sqlite3_Connection
             stageable_dimens = IDEA_STAGEABLE_PUT_DIMENS.get(idea_number)
             for x_dimen in stageable_dimens:
                 dimen_config = idea_config_dict.get(x_dimen)
-                if dimen_config.get("idea_category") == "fiscal":
+                if dimen_config.get("idea_category") == "fisc":
                     dimen_jkeys = set(dimen_config.get("jkeys").keys())
                     gen_sqlstr = get_idea_into_dimen_staging_query(
                         conn_or_cursor, idea_number, x_dimen, dimen_jkeys
                     )
                     conn_or_cursor.execute(gen_sqlstr)
 
-            # for x_dimen in fiscal_dimens:
+            # for x_dimen in fisc_dimens:
             #     dimen_config = idea_config_dict.get(x_dimen)
             #     dimen_jkeys = set(dimen_config.get("jkeys").keys())
             #     if is_stageable(conn_or_cursor, idea_staging, dimen_jkeys):
@@ -839,10 +845,8 @@ def idea_staging_tables2bud_staging_tables(conn_or_cursor: sqlite3_Connection):
             #         conn_or_cursor.execute(insert_sqlstr)
 
 
-def set_fiscal_staging_error_message(conn_or_cursor: sqlite3_Connection):
-    for (
-        set_error_sqlstr
-    ) in get_fiscal_update_inconsist_error_message_sqlstrs().values():
+def set_fisc_staging_error_message(conn_or_cursor: sqlite3_Connection):
+    for set_error_sqlstr in get_fisc_update_inconsist_error_message_sqlstrs().values():
         conn_or_cursor.execute(set_error_sqlstr)
 
 
@@ -853,28 +857,46 @@ def set_bud_staging_error_message(conn_or_cursor: sqlite3_Connection):
         conn_or_cursor.execute(set_error_sqlstr)
 
 
-def fiscal_agg_tables2fiscal_event_time_agg(conn_or_cursor: sqlite3_Connection):
-    conn_or_cursor.execute(CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR)
-    conn_or_cursor.execute(INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR)
-    conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR)
+def fisc_agg_tables2fisc_event_time_agg(conn_or_cursor: sqlite3_Connection):
+    conn_or_cursor.execute(CREATE_FISC_EVENT_TIME_AGG_SQLSTR)
+    conn_or_cursor.execute(INSERT_FISC_EVENT_TIME_AGG_SQLSTR)
+    conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR)
 
 
-def etl_fiscal_agg_tables2fiscal_owner_time_agg(conn_or_cursor: sqlite3_Connection):
-    conn_or_cursor.execute(CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR)
-    conn_or_cursor.execute(INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR)
+def etl_fisc_agg_tables2fisc_owner_time_agg(conn_or_cursor: sqlite3_Connection):
+    conn_or_cursor.execute(CREATE_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR)
+    conn_or_cursor.execute(INSERT_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR)
 
 
-def etl_fiscal_owner_time_agg_table2fiscal_owner_time_agg_csvs(
-    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
+def etl_fisc_table2fisc_owner_time_agg_csvs(
+    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    save_to_split_csvs(
-        conn_or_cursor, "fiscal_owner_time_agg", ["fiscal_title"], fiscals_dir
-    )
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    save_to_split_csvs(conn_or_cursor, "fisc_owner_time_agg", ["fisc_title"], fiscs_dir)
 
 
-def fiscal_staging_tables2fiscal_agg_tables(conn_or_cursor: sqlite3_Connection):
-    for x_sqlstr in get_fiscal_insert_agg_from_staging_sqlstrs().values():
+def etl_fisc_owner_time_agg_csvs2jsons(fisc_mstr_dir: str):
+    idea_types = get_idea_sqlite_types()
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        csv_path = create_fisc_owner_time_csv_path(fisc_mstr_dir, fisc_title)
+        csv_arrays = open_csv_with_types(csv_path, idea_types)
+        x_dict = {}
+        header_row = csv_arrays.pop(0)
+        for row in csv_arrays:
+            owner_name = row[1]
+            event_int = row[2]
+            time_int = row[3]
+            if x_dict.get(owner_name) is None:
+                x_dict[owner_name] = {}
+            owner_dict = x_dict.get(owner_name)
+            owner_dict[int(event_int)] = time_int
+        json_path = create_fisc_owner_time_json_path(fisc_mstr_dir, fisc_title)
+        save_file(json_path, None, get_json_from_dict(x_dict))
+
+
+def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
+    for x_sqlstr in get_fisc_insert_agg_from_staging_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)
 
 
@@ -886,48 +908,48 @@ def bud_staging_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
 
 
 def etl_bud_tables_to_event_bud_csvs(
-    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
+    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for bud_table in get_bud_create_table_sqlstrs():
         if get_row_count(conn_or_cursor, bud_table) > 0:
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,
                 tablename=bud_table,
-                key_columns=["fiscal_title", "owner_name", "event_int"],
-                output_dir=fiscals_dir,
+                key_columns=["fisc_title", "owner_name", "event_int"],
+                output_dir=fiscs_dir,
                 col1_prefix="events",
             )
 
 
-def etl_fiscal_staging_tables_to_fiscal_csvs(
-    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
+def etl_fisc_staging_tables_to_fisc_csvs(
+    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
-    for ficsal_dimen in get_fiscal_dimens():
-        staging_tablename = f"{ficsal_dimen}_staging"
-        save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, staging_tablename)
+    for fisc_dimen in get_fisc_dimens():
+        staging_tablename = f"{fisc_dimen}_staging"
+        save_table_to_csv(conn_or_cursor, fisc_mstr_dir, staging_tablename)
 
 
-def etl_fiscal_agg_tables_to_fiscal_csvs(
-    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str
+def etl_fisc_agg_tables_to_fisc_csvs(
+    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
-    for ficsal_dimen in get_fiscal_dimens():
-        save_table_to_csv(conn_or_cursor, fiscal_mstr_dir, f"{ficsal_dimen}_agg")
+    for fisc_dimen in get_fisc_dimens():
+        save_table_to_csv(conn_or_cursor, fisc_mstr_dir, f"{fisc_dimen}_agg")
 
 
-def etl_fiscal_csvs_to_fiscal_jsons(fiscal_mstr_dir: str):
-    for ficsal_dimen in get_fiscal_dimens():
-        x_excel_path = create_path(fiscal_mstr_dir, f"{ficsal_dimen}.xlsx")
-        dimen_df = open_csv(fiscal_mstr_dir, f"{ficsal_dimen}_agg.csv")
+def etl_fisc_csvs_to_fisc_jsons(fisc_mstr_dir: str):
+    for fisc_dimen in get_fisc_dimens():
+        x_excel_path = create_path(fisc_mstr_dir, f"{fisc_dimen}.xlsx")
+        dimen_df = open_csv(fisc_mstr_dir, f"{fisc_dimen}_agg.csv")
         upsert_sheet(x_excel_path, "agg", dimen_df)
-    create_fiscalunit_jsons_from_prime_files(fiscal_mstr_dir)
+    create_fiscunit_jsons_from_prime_files(fisc_mstr_dir)
 
 
-def etl_event_bud_csvs_to_gift_json(fiscal_mstr_dir: str):
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    for fiscal_title in get_level1_dirs(fiscals_dir):
-        fiscal_path = create_path(fiscals_dir, fiscal_title)
-        events_path = create_path(fiscal_path, "events")
+def etl_event_bud_csvs_to_gift_json(fisc_mstr_dir: str):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        fisc_path = create_path(fiscs_dir, fisc_title)
+        events_path = create_path(fisc_path, "events")
         for owner_name in get_level1_dirs(events_path):
             owner_path = create_path(events_path, owner_name)
             for event_int in get_level1_dirs(owner_path):
@@ -935,7 +957,7 @@ def etl_event_bud_csvs_to_gift_json(fiscal_mstr_dir: str):
                 event_gift = giftunit_shop(
                     owner_name=owner_name,
                     face_name=None,
-                    fiscal_title=fiscal_title,
+                    fisc_title=fisc_title,
                     event_int=event_int,
                 )
                 add_atomunits_from_csv(event_gift, event_path)
@@ -960,7 +982,7 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
                     if col_name not in {
                         "face_name",
                         "event_int",
-                        "fiscal_title",
+                        "fisc_title",
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
@@ -975,24 +997,24 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
                     if col_name not in {
                         "face_name",
                         "event_int",
-                        "fiscal_title",
+                        "fisc_title",
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
                 owner_gift._buddelta.set_atomunit(x_atom)
 
 
-def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    for fiscal_title in get_level1_dirs(fiscals_dir):
-        fiscal_path = create_path(fiscals_dir, fiscal_title)
-        events_path = create_path(fiscal_path, "events")
+def etl_event_gift_json_to_event_inherited_budunits(fisc_mstr_dir: str):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        fisc_path = create_path(fiscs_dir, fisc_title)
+        events_path = create_path(fisc_path, "events")
         for owner_name in get_level1_dirs(events_path):
             owner_path = create_path(events_path, owner_name)
             prev_event_int = None
             for event_int in get_level1_dirs(owner_path):
                 prev_bud = get_prev_event_int_budunit(
-                    fiscal_title, owner_name, owner_path, prev_event_int
+                    fisc_title, owner_name, owner_path, prev_event_int
                 )
                 event_path = create_path(owner_path, event_int)
                 gift_path = create_path(event_path, "all_gift.json")
@@ -1007,36 +1029,36 @@ def etl_event_gift_json_to_event_inherited_budunits(fiscal_mstr_dir: str):
 
 
 def get_prev_event_int_budunit(
-    fiscal_title, owner_name, owner_path, prev_event_int
+    fisc_title, owner_name, owner_path, prev_event_int
 ) -> BudUnit:
     if prev_event_int is None:
-        return budunit_shop(owner_name, fiscal_title)
+        return budunit_shop(owner_name, fisc_title)
     prev_event_int_path = create_path(owner_path, prev_event_int)
     prev_bud_path = create_path(prev_event_int_path, "bud.json")
     return budunit_get_from_json(open_file(prev_bud_path))
 
 
-def etl_event_inherited_budunits_to_fiscal_voice(fiscal_mstr_dir: str):
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    for fiscal_title in get_level1_dirs(fiscals_dir):
-        fiscal_path = create_path(fiscals_dir, fiscal_title)
-        fiscal_events_dir = create_path(fiscal_path, "events")
-        owner_events = collect_events_dir_owner_events_sets(fiscal_events_dir)
+def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        fisc_path = create_path(fiscs_dir, fisc_title)
+        fisc_events_dir = create_path(fisc_path, "events")
+        owner_events = collect_events_dir_owner_events_sets(fisc_events_dir)
         owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
         for owner_name, max_event_int in owners_max_event_int_dict.items():
-            owner_dir = create_path(fiscal_events_dir, owner_name)
+            owner_dir = create_path(fisc_events_dir, owner_name)
             max_event_int_dir = create_path(owner_dir, max_event_int)
             max_event_bud_path = create_path(max_event_int_dir, "bud.json")
             max_event_bud_json = open_file(max_event_bud_path)
-            voice_path = create_voice_path(fiscals_dir, fiscal_title, owner_name)
+            voice_path = create_voice_path(fisc_mstr_dir, fisc_title, owner_name)
             save_file(voice_path, None, max_event_bud_json)
 
 
-def etl_fiscal_voice_to_fiscal_forecast(fiscal_mstr_dir: str):
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
-    for fiscal_title in get_level1_dirs(fiscals_dir):
-        fiscal_json_path = create_fiscal_json_path(fiscal_mstr_dir, fiscal_title)
-        x_fiscalunit = fiscalunit_get_from_json(open_file(fiscal_json_path))
-        x_fiscalunit.fiscals_dir = fiscals_dir
-        x_fiscalunit._set_fiscal_dirs()
-        x_fiscalunit.generate_all_forecast_buds()
+def etl_fisc_voice_to_fisc_forecast(fisc_mstr_dir: str):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
+        x_fiscunit = fiscunit_get_from_json(open_file(fisc_json_path))
+        x_fiscunit.fisc_mstr_dir = fisc_mstr_dir
+        x_fiscunit._set_fisc_dirs()
+        x_fiscunit.generate_all_forecast_buds()

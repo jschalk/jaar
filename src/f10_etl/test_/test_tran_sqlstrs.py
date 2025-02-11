@@ -10,11 +10,11 @@ from src.f00_instrument.db_toolbox import (
 from src.f02_bud.bud_tool import budunit_str
 from src.f04_gift.atom_config import (
     face_name_str,
-    fiscal_title_str,
+    fisc_title_str,
     get_bud_dimens,
     get_delete_key_name,
 )
-from src.f07_fiscal.fiscal_config import fiscalunit_str, get_fiscal_dimens
+from src.f07_fisc.fisc_config import fiscunit_str, get_fisc_dimens
 from src.f08_pidgin.pidgin_config import event_int_str, pidginunit_str
 from src.f09_idea.idea_config import (
     idea_number_str,
@@ -28,31 +28,31 @@ from src.f09_idea.idea_db_tool import (
     get_custom_sorted_list,
     get_idea_into_dimen_staging_query,
 )
-from src.f10_etl.fiscal_etl_tool import (
-    FiscalPrimeObjsRef,
-    FiscalPrimeColumnsRef,
+from src.f10_etl.fisc_etl_tool import (
+    FiscPrimeObjsRef,
+    FiscPrimeColumnsRef,
 )
 from src.f10_etl.tran_sqlstrs import (
-    get_fiscal_create_table_sqlstrs,
+    get_fisc_create_table_sqlstrs,
     get_bud_create_table_sqlstrs,
-    create_fiscal_tables,
+    create_fisc_tables,
     create_bud_tables,
     create_all_idea_tables,
     get_bud_inconsistency_sqlstrs,
-    get_fiscal_inconsistency_sqlstrs,
+    get_fisc_inconsistency_sqlstrs,
     get_bud_put_update_inconsist_error_message_sqlstrs,
-    get_fiscal_update_inconsist_error_message_sqlstrs,
+    get_fisc_update_inconsist_error_message_sqlstrs,
     get_bud_insert_put_agg_from_staging_sqlstrs,
     get_bud_insert_del_agg_from_staging_sqlstrs,
-    get_fiscal_insert_agg_from_staging_sqlstrs,
-    FISCALUNIT_AGG_INSERT_SQLSTR,
+    get_fisc_insert_agg_from_staging_sqlstrs,
+    FISCUNIT_AGG_INSERT_SQLSTR,
     IDEA_STAGEABLE_PUT_DIMENS,
     IDEA_STAGEABLE_DEL_DIMENS,
-    CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR,
-    INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR,
-    UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR,
-    CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR,
-    INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR,
+    CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
+    INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
+    UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
+    CREATE_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR,
+    INSERT_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -103,17 +103,17 @@ def abbv(tablename: str) -> str:
     return abbrevions.get(tablename)
 
 
-def test_get_fiscal_create_table_sqlstrs_ReturnsObj():
+def test_get_fisc_create_table_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    create_table_sqlstrs = get_fiscal_create_table_sqlstrs()
+    create_table_sqlstrs = get_fisc_create_table_sqlstrs()
 
     # THEN
     idea_config = get_idea_config_dict()
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "fiscal"
+        if dimen_config.get(idea_category_str()) == "fisc"
     }
     sqlite_types = get_idea_sqlite_types()
     for x_dimen in idea_config:
@@ -209,19 +209,17 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj():
         # print(f'"{st_del_table}": CREATE_{abbv(st_del_table)}_SQLSTR,')
 
 
-def test_get_fiscal_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_fisc_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # ESTABLISH / WHEN
-    fiscal_create_table_sqlstrs = get_fiscal_create_table_sqlstrs()
+    fisc_create_table_sqlstrs = get_fisc_create_table_sqlstrs()
 
     # THEN
-    assert fiscal_create_table_sqlstrs
-    fiscal_dimens = get_fiscal_dimens()
-    expected_fiscal_tablenames = {f"{x_dimen}_agg" for x_dimen in fiscal_dimens}
-    expected_fiscal_tablenames.update(
-        {f"{x_dimen}_staging" for x_dimen in fiscal_dimens}
-    )
-    print(f"{expected_fiscal_tablenames=}")
-    assert set(fiscal_create_table_sqlstrs.keys()) == expected_fiscal_tablenames
+    assert fisc_create_table_sqlstrs
+    fisc_dimens = get_fisc_dimens()
+    expected_fisc_tablenames = {f"{x_dimen}_agg" for x_dimen in fisc_dimens}
+    expected_fisc_tablenames.update({f"{x_dimen}_staging" for x_dimen in fisc_dimens})
+    print(f"{expected_fisc_tablenames=}")
+    assert set(fisc_create_table_sqlstrs.keys()) == expected_fisc_tablenames
 
 
 def test_get_bud_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
@@ -239,11 +237,11 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     assert set(bud_create_table_sqlstrs.keys()) == expected_bud_tablenames
 
 
-def test_create_all_idea_tables_CreatesFiscalStagingTables():
+def test_create_all_idea_tables_CreatesFiscStagingTables():
     # ESTABLISH sourcery skip: no-loop-in-tests
     idea_numbers = get_idea_numbers()
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        cursor = fiscal_db_conn.cursor()
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
         for idea_number in idea_numbers:
             assert db_table_exists(cursor, f"{idea_number}_staging") is False
 
@@ -256,10 +254,10 @@ def test_create_all_idea_tables_CreatesFiscalStagingTables():
             assert db_table_exists(cursor, f"{idea_number}_staging")
 
 
-def test_create_bud_tables_CreatesFiscalStagingTables():
+def test_create_bud_tables_CreatesFiscStagingTables():
     # ESTABLISH
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        cursor = fiscal_db_conn.cursor()
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
         assert db_table_exists(cursor, "bud_acct_membership_put_agg") is False
@@ -319,96 +317,108 @@ def test_create_bud_tables_CreatesFiscalStagingTables():
         assert db_table_exists(cursor, "budunit_put_staging")
 
 
-def test_create_fiscal_tables_CreatesFiscalStagingTables():
+def test_create_fisc_tables_CreatesFiscStagingTables():
     # ESTABLISH
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        cursor = fiscal_db_conn.cursor()
-        fis_objs = FiscalPrimeObjsRef()
-        fis_cols = FiscalPrimeColumnsRef()
-        assert db_table_exists(cursor, fis_objs.unit_agg_tablename) is False
-        assert db_table_exists(cursor, fis_objs.deal_agg_tablename) is False
-        assert db_table_exists(cursor, fis_objs.cash_agg_tablename) is False
-        assert db_table_exists(cursor, fis_objs.hour_agg_tablename) is False
-        assert db_table_exists(cursor, fis_objs.mont_agg_tablename) is False
-        assert db_table_exists(cursor, fis_objs.week_agg_tablename) is False
-        assert db_table_exists(cursor, fis_objs.unit_stage_tablename) is False
-        assert db_table_exists(cursor, fis_objs.deal_stage_tablename) is False
-        assert db_table_exists(cursor, fis_objs.cash_stage_tablename) is False
-        assert db_table_exists(cursor, fis_objs.hour_stage_tablename) is False
-        assert db_table_exists(cursor, fis_objs.mont_stage_tablename) is False
-        assert db_table_exists(cursor, fis_objs.week_stage_tablename) is False
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
+        fisc_objs = FiscPrimeObjsRef()
+        fisc_cols = FiscPrimeColumnsRef()
+        assert db_table_exists(cursor, fisc_objs.unit_agg_tablename) is False
+        assert db_table_exists(cursor, fisc_objs.deal_agg_tablename) is False
+        assert db_table_exists(cursor, fisc_objs.cash_agg_tablename) is False
+        assert db_table_exists(cursor, fisc_objs.hour_agg_tablename) is False
+        assert db_table_exists(cursor, fisc_objs.mont_agg_tablename) is False
+        assert db_table_exists(cursor, fisc_objs.week_agg_tablename) is False
+        assert db_table_exists(cursor, fisc_objs.unit_stage_tablename) is False
+        assert db_table_exists(cursor, fisc_objs.deal_stage_tablename) is False
+        assert db_table_exists(cursor, fisc_objs.cash_stage_tablename) is False
+        assert db_table_exists(cursor, fisc_objs.hour_stage_tablename) is False
+        assert db_table_exists(cursor, fisc_objs.mont_stage_tablename) is False
+        assert db_table_exists(cursor, fisc_objs.week_stage_tablename) is False
 
         # WHEN
-        create_fiscal_tables(cursor)
+        create_fisc_tables(cursor)
 
         # THEN
-        assert db_table_exists(cursor, fis_objs.unit_agg_tablename)
-        assert db_table_exists(cursor, fis_objs.deal_agg_tablename)
-        assert db_table_exists(cursor, fis_objs.cash_agg_tablename)
-        assert db_table_exists(cursor, fis_objs.hour_agg_tablename)
-        assert db_table_exists(cursor, fis_objs.mont_agg_tablename)
-        assert db_table_exists(cursor, fis_objs.week_agg_tablename)
+        assert db_table_exists(cursor, fisc_objs.unit_agg_tablename)
+        assert db_table_exists(cursor, fisc_objs.deal_agg_tablename)
+        assert db_table_exists(cursor, fisc_objs.cash_agg_tablename)
+        assert db_table_exists(cursor, fisc_objs.hour_agg_tablename)
+        assert db_table_exists(cursor, fisc_objs.mont_agg_tablename)
+        assert db_table_exists(cursor, fisc_objs.week_agg_tablename)
 
-        assert db_table_exists(cursor, fis_objs.unit_stage_tablename)
-        assert db_table_exists(cursor, fis_objs.deal_stage_tablename)
-        assert db_table_exists(cursor, fis_objs.cash_stage_tablename)
-        assert db_table_exists(cursor, fis_objs.hour_stage_tablename)
-        assert db_table_exists(cursor, fis_objs.mont_stage_tablename)
-        assert db_table_exists(cursor, fis_objs.week_stage_tablename)
+        assert db_table_exists(cursor, fisc_objs.unit_stage_tablename)
+        assert db_table_exists(cursor, fisc_objs.deal_stage_tablename)
+        assert db_table_exists(cursor, fisc_objs.cash_stage_tablename)
+        assert db_table_exists(cursor, fisc_objs.hour_stage_tablename)
+        assert db_table_exists(cursor, fisc_objs.mont_stage_tablename)
+        assert db_table_exists(cursor, fisc_objs.week_stage_tablename)
 
-        fis_unit_agg_pragma = get_pragma_table_fetchall(fis_cols.unit_agg_columns)
-        fis_deal_agg_pragma = get_pragma_table_fetchall(fis_cols.deal_agg_columns)
-        fis_cash_agg_pragma = get_pragma_table_fetchall(fis_cols.cash_agg_columns)
-        fis_hour_agg_pragma = get_pragma_table_fetchall(fis_cols.hour_agg_columns)
-        fis_mont_agg_pragma = get_pragma_table_fetchall(fis_cols.mont_agg_columns)
-        fis_week_agg_pragma = get_pragma_table_fetchall(fis_cols.week_agg_columns)
-        fis_unit_stage_pragma = get_pragma_table_fetchall(fis_cols.unit_staging_columns)
-        fis_deal_stage_pragma = get_pragma_table_fetchall(fis_cols.deal_staging_columns)
-        fis_cash_stage_pragma = get_pragma_table_fetchall(fis_cols.cash_staging_columns)
-        fis_hour_stage_pragma = get_pragma_table_fetchall(fis_cols.hour_staging_columns)
-        fis_mont_stage_pragma = get_pragma_table_fetchall(fis_cols.mont_staging_columns)
-        fis_week_stage_pragma = get_pragma_table_fetchall(fis_cols.week_staging_columns)
-        cursor.execute(f"PRAGMA table_info({fis_objs.unit_agg_tablename})")
-        assert fis_unit_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.deal_agg_tablename})")
-        assert fis_deal_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.cash_agg_tablename})")
-        assert fis_cash_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.hour_agg_tablename})")
-        assert fis_hour_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.mont_agg_tablename})")
-        assert fis_mont_agg_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.week_agg_tablename})")
-        assert fis_week_agg_pragma == cursor.fetchall()
+        fisc_unit_agg_pragma = get_pragma_table_fetchall(fisc_cols.unit_agg_columns)
+        fisc_deal_agg_pragma = get_pragma_table_fetchall(fisc_cols.deal_agg_columns)
+        fisc_cash_agg_pragma = get_pragma_table_fetchall(fisc_cols.cash_agg_columns)
+        fisc_hour_agg_pragma = get_pragma_table_fetchall(fisc_cols.hour_agg_columns)
+        fisc_mont_agg_pragma = get_pragma_table_fetchall(fisc_cols.mont_agg_columns)
+        fisc_week_agg_pragma = get_pragma_table_fetchall(fisc_cols.week_agg_columns)
+        fisc_unit_stage_pragma = get_pragma_table_fetchall(
+            fisc_cols.unit_staging_columns
+        )
+        fisc_deal_stage_pragma = get_pragma_table_fetchall(
+            fisc_cols.deal_staging_columns
+        )
+        fisc_cash_stage_pragma = get_pragma_table_fetchall(
+            fisc_cols.cash_staging_columns
+        )
+        fisc_hour_stage_pragma = get_pragma_table_fetchall(
+            fisc_cols.hour_staging_columns
+        )
+        fisc_mont_stage_pragma = get_pragma_table_fetchall(
+            fisc_cols.mont_staging_columns
+        )
+        fisc_week_stage_pragma = get_pragma_table_fetchall(
+            fisc_cols.week_staging_columns
+        )
+        cursor.execute(f"PRAGMA table_info({fisc_objs.unit_agg_tablename})")
+        assert fisc_unit_agg_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.deal_agg_tablename})")
+        assert fisc_deal_agg_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.cash_agg_tablename})")
+        assert fisc_cash_agg_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.hour_agg_tablename})")
+        assert fisc_hour_agg_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.mont_agg_tablename})")
+        assert fisc_mont_agg_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.week_agg_tablename})")
+        assert fisc_week_agg_pragma == cursor.fetchall()
 
-        cursor.execute(f"PRAGMA table_info({fis_objs.unit_stage_tablename})")
-        assert fis_unit_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.deal_stage_tablename})")
-        assert fis_deal_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.cash_stage_tablename})")
-        assert fis_cash_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.hour_stage_tablename})")
-        assert fis_hour_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.mont_stage_tablename})")
-        assert fis_mont_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fis_objs.week_stage_tablename})")
-        assert fis_week_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.unit_stage_tablename})")
+        assert fisc_unit_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.deal_stage_tablename})")
+        assert fisc_deal_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.cash_stage_tablename})")
+        assert fisc_cash_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.hour_stage_tablename})")
+        assert fisc_hour_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.mont_stage_tablename})")
+        assert fisc_mont_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.week_stage_tablename})")
+        assert fisc_week_stage_pragma == cursor.fetchall()
 
 
-def test_get_fiscal_inconsistency_sqlstrs_ReturnsObj():
+def test_get_fisc_inconsistency_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    fiscal_inconsistency_sqlstrs = get_fiscal_inconsistency_sqlstrs()
+    fisc_inconsistency_sqlstrs = get_fisc_inconsistency_sqlstrs()
 
     # THEN
-    assert fiscal_inconsistency_sqlstrs.keys() == get_fiscal_dimens()
+    assert fisc_inconsistency_sqlstrs.keys() == get_fisc_dimens()
     idea_config = get_idea_config_dict()
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
         # if dimen_config.get(idea_category_str()) != "pidgin"
         # if dimen_config.get(idea_category_str()) == "bud"
-        if dimen_config.get(idea_category_str()) == "fiscal"
+        if dimen_config.get(idea_category_str()) == "fisc"
     }
 
     exclude_cols = {
@@ -419,11 +429,11 @@ def test_get_fiscal_inconsistency_sqlstrs_ReturnsObj():
     }
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fiscal_tables(cursor)
+        create_fisc_tables(cursor)
 
         for x_dimen in sorted(idea_config):
             # print(f"{x_dimen} checking...")
-            x_sqlstr = fiscal_inconsistency_sqlstrs.get(x_dimen)
+            x_sqlstr = fisc_inconsistency_sqlstrs.get(x_dimen)
             x_tablename = f"{x_dimen}_staging"
             dimen_config = idea_config.get(x_dimen)
             dimen_focus_columns = set(dimen_config.get("jkeys").keys())
@@ -469,18 +479,18 @@ def test_get_bud_inconsistency_sqlstrs_ReturnsObj():
             assert x_sqlstr == generated_dimen_sqlstr
 
 
-def test_get_fiscal_update_inconsist_error_message_sqlstrs_ReturnsObj():
+def test_get_fisc_update_inconsist_error_message_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    fiscal_update_error_sqlstrs = get_fiscal_update_inconsist_error_message_sqlstrs()
+    fisc_update_error_sqlstrs = get_fisc_update_inconsist_error_message_sqlstrs()
 
     # THEN
-    assert set(fiscal_update_error_sqlstrs.keys()) == get_fiscal_dimens()
+    assert set(fisc_update_error_sqlstrs.keys()) == get_fisc_dimens()
     idea_config = get_idea_config_dict()
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "fiscal"
+        if dimen_config.get(idea_category_str()) == "fisc"
     }
 
     exclude_cols = {
@@ -491,12 +501,12 @@ def test_get_fiscal_update_inconsist_error_message_sqlstrs_ReturnsObj():
     }
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fiscal_tables(cursor)
+        create_fisc_tables(cursor)
         create_bud_tables(cursor)
 
         for x_dimen in idea_config:
             print(f"{x_dimen} checking...")
-            x_sqlstr = fiscal_update_error_sqlstrs.get(x_dimen)
+            x_sqlstr = fisc_update_error_sqlstrs.get(x_dimen)
             x_tablename = f"{x_dimen}_staging"
             dimen_config = idea_config.get(x_dimen)
             dimen_focus_columns = set(dimen_config.get("jkeys").keys())
@@ -551,13 +561,13 @@ def test_get_bud_put_update_inconsist_error_message_sqlstrs_ReturnsObj():
             assert x_sqlstr == generated_dimen_sqlstr
 
 
-def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
+def test_get_fisc_insert_agg_from_staging_sqlstrs_ReturnsObj():
     # sourcery skip: extract-method, no-loop-in-tests
     # ESTABLISH / WHEN
-    fiscal_insert_agg_sqlstrs = get_fiscal_insert_agg_from_staging_sqlstrs()
+    fisc_insert_agg_sqlstrs = get_fisc_insert_agg_from_staging_sqlstrs()
 
     # THEN
-    assert set(fiscal_insert_agg_sqlstrs.keys()) == get_fiscal_dimens()
+    assert set(fisc_insert_agg_sqlstrs.keys()) == get_fisc_dimens()
     x_exclude_cols = {
         idea_number_str(),
         face_name_str(),
@@ -568,11 +578,11 @@ def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "fiscal"
+        if dimen_config.get(idea_category_str()) == "fisc"
     }
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        cursor = fiscal_db_conn.cursor()
-        create_fiscal_tables(cursor)
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
+        create_fisc_tables(cursor)
 
         for x_dimen in idea_config:
             print(f"{x_dimen} checking...")
@@ -593,33 +603,33 @@ def test_get_fiscal_insert_agg_from_staging_sqlstrs_ReturnsObj():
                     exclude_cols=x_exclude_cols,
                 )
             )
-            x_sqlstr = fiscal_insert_agg_sqlstrs.get(x_dimen)
+            x_sqlstr = fisc_insert_agg_sqlstrs.get(x_dimen)
             # print(f'"{x_dimen}": BUD_AGG_INSERT_SQLSTR,')
             # print(
             #     f'{x_dimen.upper()}_AGG_INSERT_SQLSTR = """{generated_table2table_agg_insert_sqlstr}"""'
             # )
             assert x_sqlstr == generated_table2table_agg_insert_sqlstr
 
-        generated_fiscalunit_sqlstr = create_table2table_agg_insert_query(
+        generated_fiscunit_sqlstr = create_table2table_agg_insert_query(
             cursor,
-            src_table=f"{fiscalunit_str()}_staging",
-            dst_table=f"{fiscalunit_str()}_agg",
-            focus_cols=[fiscal_title_str()],
+            src_table=f"{fiscunit_str()}_staging",
+            dst_table=f"{fiscunit_str()}_agg",
+            focus_cols=[fisc_title_str()],
             exclude_cols=x_exclude_cols,
         )
-        assert FISCALUNIT_AGG_INSERT_SQLSTR == generated_fiscalunit_sqlstr
-        columns_header = """fiscal_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title"""
-        tablename = "fiscalunit"
-        expected_ficsalunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
-SELECT fiscal_title, MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(timeline_title)
+        assert FISCUNIT_AGG_INSERT_SQLSTR == generated_fiscunit_sqlstr
+        columns_header = """fisc_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title"""
+        tablename = "fiscunit"
+        expected_fiscunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
+SELECT fisc_title, MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(timeline_title)
 FROM {tablename}_staging
 WHERE error_message IS NULL
-GROUP BY fiscal_title
+GROUP BY fisc_title
 ;
 """
-        assert FISCALUNIT_AGG_INSERT_SQLSTR == expected_ficsalunit_sqlstr
+        assert FISCUNIT_AGG_INSERT_SQLSTR == expected_fiscunit_sqlstr
 
-    assert len(idea_config) == len(fiscal_insert_agg_sqlstrs)
+    assert len(idea_config) == len(fisc_insert_agg_sqlstrs)
 
 
 def test_get_bud_insert_put_agg_from_staging_sqlstrs_ReturnsObj():
@@ -724,12 +734,12 @@ def test_IDEA_STAGEABLE_PUT_DIMENS_HasAll_idea_numbersForAll_dimens():
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
         if dimen_config.get(idea_category_str()) != "pidgin"
-        # if dimen_config.get(idea_category_str()) == "fiscal"
+        # if dimen_config.get(idea_category_str()) == "fisc"
     }
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        cursor = fiscal_db_conn.cursor()
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
         create_all_idea_tables(cursor)
-        create_fiscal_tables(cursor)
+        create_fisc_tables(cursor)
         create_bud_tables(cursor)
 
         idea_stage2dimen_count = 0
@@ -786,12 +796,12 @@ def test_IDEA_STAGEABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
         if dimen_config.get(idea_category_str()) != "pidgin"
-        # if dimen_config.get(idea_category_str()) == "fiscal"
+        # if dimen_config.get(idea_category_str()) == "fisc"
     }
-    with sqlite3_connect(":memory:") as fiscal_db_conn:
-        cursor = fiscal_db_conn.cursor()
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
         create_all_idea_tables(cursor)
-        create_fiscal_tables(cursor)
+        create_fisc_tables(cursor)
         create_bud_tables(cursor)
 
         idea_stage2dimen_count = 0
@@ -842,11 +852,11 @@ def test_IDEA_STAGEABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     assert IDEA_STAGEABLE_DEL_DIMENS == expected_idea_stagable_dimens
 
 
-def test_CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_CREATE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = """
-CREATE TABLE IF NOT EXISTS fiscal_event_time_agg (
-  fiscal_title TEXT
+CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
+  fisc_title TEXT
 , event_int INTEGER
 , time_int INTEGER
 , error_message TEXT
@@ -854,59 +864,59 @@ CREATE TABLE IF NOT EXISTS fiscal_event_time_agg (
 ;
 """
     # WHEN / THEN
-    assert CREATE_FISCAL_EVENT_TIME_AGG_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_FISC_EVENT_TIME_AGG_SQLSTR == expected_create_table_sqlstr
 
 
-def test_INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_INSERT_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = """
-INSERT INTO fiscal_event_time_agg (fiscal_title, event_int, time_int)
-SELECT fiscal_title, event_int, time_int
+INSERT INTO fisc_event_time_agg (fisc_title, event_int, time_int)
+SELECT fisc_title, event_int, time_int
 FROM (
-    SELECT fiscal_title, event_int, time_int
-    FROM fiscal_cashbook_staging
-    GROUP BY fiscal_title, event_int, time_int
+    SELECT fisc_title, event_int, time_int
+    FROM fisc_cashbook_staging
+    GROUP BY fisc_title, event_int, time_int
     UNION 
-    SELECT fiscal_title, event_int, time_int
-    FROM fiscal_deal_episode_staging
-    GROUP BY fiscal_title, event_int, time_int
+    SELECT fisc_title, event_int, time_int
+    FROM fisc_deal_episode_staging
+    GROUP BY fisc_title, event_int, time_int
 )
-ORDER BY fiscal_title, event_int, time_int
+ORDER BY fisc_title, event_int, time_int
 ;
 """
     # WHEN / THEN
-    assert INSERT_FISCAL_EVENT_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_FISC_EVENT_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
 
 
-def test_UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_UPDATE_sqlstr = """
 WITH EventTimeOrdered AS (
-    SELECT fiscal_title, event_int, time_int,
-           LAG(time_int) OVER (PARTITION BY fiscal_title ORDER BY event_int) AS prev_time_int
-    FROM fiscal_event_time_agg
+    SELECT fisc_title, event_int, time_int,
+           LAG(time_int) OVER (PARTITION BY fisc_title ORDER BY event_int) AS prev_time_int
+    FROM fisc_event_time_agg
 )
-UPDATE fiscal_event_time_agg
+UPDATE fisc_event_time_agg
 SET error_message = CASE 
          WHEN EventTimeOrdered.prev_time_int > EventTimeOrdered.time_int
          THEN 'not sorted'
          ELSE 'sorted'
        END 
 FROM EventTimeOrdered
-WHERE EventTimeOrdered.event_int = fiscal_event_time_agg.event_int
-    AND EventTimeOrdered.fiscal_title = fiscal_event_time_agg.fiscal_title
-    AND EventTimeOrdered.time_int = fiscal_event_time_agg.time_int
+WHERE EventTimeOrdered.event_int = fisc_event_time_agg.event_int
+    AND EventTimeOrdered.fisc_title = fisc_event_time_agg.fisc_title
+    AND EventTimeOrdered.time_int = fisc_event_time_agg.time_int
 ;
 """
     # WHEN / THEN
-    assert UPDATE_ERROR_MESSAGE_FISCAL_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
+    assert UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
 
 
-def test_CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR_Exists():
+def test_CREATE_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = """
-CREATE TABLE IF NOT EXISTS fiscal_owner_time_agg (
-  fiscal_title TEXT
+CREATE TABLE IF NOT EXISTS fisc_owner_time_agg (
+  fisc_title TEXT
 , owner_name TEXT
 , event_int INTEGER
 , time_int INTEGER
@@ -915,21 +925,21 @@ CREATE TABLE IF NOT EXISTS fiscal_owner_time_agg (
 ;
 """
     # WHEN / THEN
-    assert CREATE_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR == expected_create_table_sqlstr
 
 
-def test_INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR_Exists():
+def test_INSERT_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = """
-INSERT INTO fiscal_owner_time_agg (fiscal_title, owner_name, event_int, time_int)
-SELECT fiscal_title, owner_name, event_int, time_int
+INSERT INTO fisc_owner_time_agg (fisc_title, owner_name, event_int, time_int)
+SELECT fisc_title, owner_name, event_int, time_int
 FROM (
-    SELECT fiscal_title, owner_name, event_int, time_int
-    FROM fiscal_deal_episode_staging
-    GROUP BY fiscal_title, owner_name, event_int, time_int
+    SELECT fisc_title, owner_name, event_int, time_int
+    FROM fisc_deal_episode_staging
+    GROUP BY fisc_title, owner_name, event_int, time_int
 )
-ORDER BY fiscal_title, owner_name, event_int, time_int
+ORDER BY fisc_title, owner_name, event_int, time_int
 ;
 """
     # WHEN / THEN
-    assert INSERT_FISCAL_OWNER_DEAL_TIME_AGG1_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR == expected_INSERT_sqlstr
