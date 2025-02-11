@@ -1,4 +1,4 @@
-from src.f00_instrument.file import save_file
+from src.f00_instrument.file import save_file, create_path
 from src.f01_road.road import create_road
 from src.f04_gift.atom_config import acct_name_str, base_str
 from src.f08_pidgin.pidgin import pidginunit_shop
@@ -42,8 +42,8 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     xio_inx = "Xioita"
     sue_pidginunit = pidginunit_shop(sue_otx)
     sue_pidginunit.set_namemap(get_suita_namemap())
-    sue_dir = f"{get_example_face_dir()}/{sue_otx}"
-    pidginunit_file_path = f"{sue_dir}/{pidgin_filename()}"
+    sue_dir = create_path(get_example_face_dir(), sue_otx)
+    pidginunit_file_path = create_path(sue_dir, pidgin_filename())
     print(f"{sue_dir=}")
     save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
     sue_otx_dt = get_suita_acct_name_otx_dt()
@@ -150,7 +150,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     # ESTABLISH
     sue_pidginunit = get_casa_maison_pidginunit_set_by_title()
     sue_pidginunit.set_namemap(get_suita_namemap())
-    sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_name}"
+    sue_dir = create_path(get_example_face_dir(), sue_pidginunit.face_name)
     pidginunit_file_path = f"{sue_dir}/{pidgin_filename()}"
     print(f"{sue_dir=}")
     save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())

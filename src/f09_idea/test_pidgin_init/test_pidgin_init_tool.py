@@ -1,4 +1,4 @@
-from src.f00_instrument.file import get_dir_file_strs
+from src.f00_instrument.file import get_dir_file_strs, create_path
 from src.f04_gift.atom_config import (
     type_AcctName_str,
     type_TitleUnit_str,
@@ -174,10 +174,10 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     label_filename = "label.csv"
     title_filename = "title.csv"
     road_filename = "road.csv"
-    name_csv_path = f"{map_dir}/{name_filename}"
-    group_csv_path = f"{map_dir}/{label_filename}"
-    title_csv_path = f"{map_dir}/{title_filename}"
-    road_csv_path = f"{map_dir}/{road_filename}"
+    name_csv_path = create_path(map_dir, name_filename)
+    group_csv_path = create_path(map_dir, label_filename)
+    title_csv_path = create_path(map_dir, title_filename)
+    road_csv_path = create_path(map_dir, road_filename)
     assert os_path_exists(name_csv_path) is False
     assert os_path_exists(group_csv_path) is False
     assert os_path_exists(title_csv_path) is False
@@ -200,7 +200,7 @@ def test_load_namemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
     name_filename = "name.csv"
-    name_csv_path = f"{map_dir}/{name_filename}"
+    name_csv_path = create_path(map_dir, name_filename)
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(name_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
@@ -222,7 +222,7 @@ def test_load_namemap_from_csv_DoesNotChangeWhenFileDoesNotExist(env_dir_setup_c
     # ESTABLISH
     map_dir = get_example_face_dir()
     name_filename = "name.csv"
-    name_csv_path = f"{map_dir}/{name_filename}"
+    name_csv_path = create_path(map_dir, name_filename)
     assert os_path_exists(name_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
     sue_namemap = empty_pidginunit.get_mapunit(type_AcctName_str())
@@ -242,7 +242,7 @@ def test_load_labelmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
     label_filename = "label.csv"
-    group_csv_path = f"{map_dir}/{label_filename}"
+    group_csv_path = create_path(map_dir, label_filename)
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(group_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
@@ -266,7 +266,7 @@ def test_load_labelmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     # ESTABLISH
     map_dir = get_example_face_dir()
     label_filename = "label.csv"
-    group_csv_path = f"{map_dir}/{label_filename}"
+    group_csv_path = create_path(map_dir, label_filename)
     assert os_path_exists(group_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
     sue_labelmap = empty_pidginunit.get_mapunit(type_LabelUnit_str())
@@ -286,7 +286,7 @@ def test_load_titlemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
     title_filename = "title.csv"
-    title_csv_path = f"{map_dir}/{title_filename}"
+    title_csv_path = create_path(map_dir, title_filename)
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(title_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
@@ -310,7 +310,7 @@ def test_load_titlemap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     # ESTABLISH
     map_dir = get_example_face_dir()
     title_filename = "title.csv"
-    title_csv_path = f"{map_dir}/{title_filename}"
+    title_csv_path = create_path(map_dir, title_filename)
     assert os_path_exists(title_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
     sue_titlemap = empty_pidginunit.get_mapunit(type_TitleUnit_str())
@@ -330,7 +330,7 @@ def test_load_roadmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
     road_filename = "road.csv"
-    road_csv_path = f"{map_dir}/{road_filename}"
+    road_csv_path = create_path(map_dir, road_filename)
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(road_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
@@ -357,7 +357,7 @@ def test_load_roadmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     # ESTABLISH
     map_dir = get_example_face_dir()
     road_filename = "road.csv"
-    road_csv_path = f"{map_dir}/{road_filename}"
+    road_csv_path = create_path(map_dir, road_filename)
     assert os_path_exists(road_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
     sue_roadmap = empty_pidginunit.get_mapunit(type_RoadUnit_str())

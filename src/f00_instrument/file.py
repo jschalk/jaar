@@ -30,9 +30,11 @@ from tempfile import TemporaryFile as tempfile_TemporaryFile
 from copy import deepcopy as copy_deepcopy
 
 
-def create_path(x_dir: str, filename: any) -> str:
+def create_path(x_dir: any, filename: any) -> str:
     if not x_dir:
         return f"{filename}" if filename else ""
+    x_dir = str(x_dir)
+    x_dir.replace("\\", "/")
     return os_path_join(x_dir, str(filename)) if filename else x_dir
 
 

@@ -240,7 +240,6 @@ def test_get_keep_path_ReturnsObj():
     kern_path = get_keep_path(sue_hubunit, kern_road)
 
     # THEN
-    # itemroot_dir = f"{sue_hubunit._keeps_dir}/{get_rootpart_of_keep_dir()}"
     itemroot_dir = create_path(sue_hubunit._keeps_dir, get_rootpart_of_keep_dir())
     print(f"{kern_road=}")
     print(f"{itemroot_dir=}")
