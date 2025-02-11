@@ -99,8 +99,8 @@ def face_name_str() -> str:
     return "face_name"
 
 
-def fiscal_title_str() -> str:
-    return "fiscal_title"
+def fisc_title_str() -> str:
+    return "fisc_title"
 
 
 def owner_name_str() -> str:

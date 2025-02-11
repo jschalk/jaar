@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path, save_file
 from src.f04_gift.atom_config import (
     face_name_str,
-    fiscal_title_str,
+    fisc_title_str,
     acct_name_str,
     owner_name_str,
 )
@@ -25,7 +25,7 @@ from sqlite3 import connect as sqlite3_connect
 #     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
 #     br00011_str = "br00011"
 #     br00011_csv_filename = f"{br00011_str}.csv"
-#     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()}
+#     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()}
 # {sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
 # {sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
 # {sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
@@ -37,20 +37,20 @@ from sqlite3 import connect as sqlite3_connect
 
 #     # WHEN / THEN
 #     br00011_staging_tablename = f"{br00011_str}_staging"
-#     with sqlite3_connect(":memory:") as fiscal_db_conn:
-#         fizz_world.etl_inz_face_csv_files2idea_staging_tables(fiscal_db_conn)
-#         assert fiscal_db_conn != None
-#         cursor = fiscal_db_conn.cursor()
+#     with sqlite3_connect(":memory:") as fisc_db_conn:
+#         fizz_world.etl_inz_face_csv_files2idea_staging_tables(fisc_db_conn)
+#         assert fisc_db_conn != None
+#         cursor = fisc_db_conn.cursor()
 #         cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
 #         br00011_db_columns = cursor.fetchall()
 #         br00011_expected_columns = [
 #             (0, face_name_str(), "TEXT", 0, None, 0),
 #             (1, event_int_str(), "INTEGER", 0, None, 0),
-#             (2, fiscal_title_str(), "TEXT", 0, None, 0),
+#             (2, fisc_title_str(), "TEXT", 0, None, 0),
 #             (3, owner_name_str(), "TEXT", 0, None, 0),
 #             (4, acct_name_str(), "TEXT", 0, None, 0),
 #         ]
-#         print(f"{type(fiscal_db_conn)=}")
+#         print(f"{type(fisc_db_conn)=}")
 #         print(f"      {br00011_db_columns=}")
 #         print(f"{br00011_expected_columns=}")
 #         assert br00011_db_columns == br00011_expected_columns

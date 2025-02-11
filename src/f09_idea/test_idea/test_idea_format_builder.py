@@ -5,7 +5,7 @@ from src.f04_gift.atom_config import (
     parent_road_str,
     item_title_str,
     gogo_want_str,
-    fiscal_title_str,
+    fisc_title_str,
     owner_name_str,
     get_atom_config_args,
 )
@@ -23,7 +23,7 @@ def create_dimens_idea_format_dict() -> dict:
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
         if dimen_dict.get("idea_category") == "bud":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
-            attributes_set = {fiscal_title_str(), owner_name_str()}
+            attributes_set = {fisc_title_str(), owner_name_str()}
             args_dict = get_atom_config_args(idea_dimen)
             attributes_set.update(set(args_dict.keys()))
 
@@ -46,7 +46,7 @@ def test_create_dimens_idea_format_dict_ReturnObj(rebuild_bool):
     assert bud_itemunit_dict.get(dimens_str()) == [bud_itemunit_str()]
     assert bud_itemunit_dict.get(attributes_str())
     bud_itemunit_attributes = bud_itemunit_dict.get(attributes_str())
-    assert fiscal_title_str() in bud_itemunit_attributes
+    assert fisc_title_str() in bud_itemunit_attributes
     assert owner_name_str() in bud_itemunit_attributes
     assert parent_road_str() in bud_itemunit_attributes
     assert item_title_str() in bud_itemunit_attributes

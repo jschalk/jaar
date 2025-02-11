@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path, open_file, save_file
 from src.f02_bud.bud_tool import bud_acctunit_str, budunit_str
 from src.f04_gift.atom_config import (
     face_name_str,
-    fiscal_title_str,
+    fisc_title_str,
     owner_name_str,
     acct_name_str,
     credit_belief_str,
@@ -27,13 +27,13 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles_Scenario0_IgnoresCSV
     a23_str = "accord23"
     put_agg_tablename = f"{budunit_str()}_put_agg"
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
-    fiscal_mstr_dir = get_test_etl_dir()
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    fisc_mstr_dir = get_test_etl_dir()
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
-    a23_bob_e3_dir = create_events_owner_dir_path(fiscals_dir, a23_str, bob_inx, event3)
-    e3_put_csv = f"""{face_name_str()},{event_int_str()},fiscal_title,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit
+    a23_bob_e3_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event3)
+    e3_put_csv = f"""{face_name_str()},{event_int_str()},fisc_title,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit
 {sue_inx},{event3},{a23_str},{bob_inx},,,,,,,,
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
@@ -42,7 +42,7 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles_Scenario0_IgnoresCSV
     assert os_path_exists(e3_gift_path) is False
 
     # WHEN
-    etl_event_bud_csvs_to_gift_json(fiscal_mstr_dir)
+    etl_event_bud_csvs_to_gift_json(fisc_mstr_dir)
 
     # THEN
     assert os_path_exists(e3_gift_path)
@@ -71,17 +71,17 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles_Scenario1(
     a23_str = "accord23"
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
-    fiscal_mstr_dir = get_test_etl_dir()
-    fiscals_dir = create_path(fiscal_mstr_dir, "fiscals")
+    fisc_mstr_dir = get_test_etl_dir()
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
-    a23_bob_e3_dir = create_events_owner_dir_path(fiscals_dir, a23_str, bob_inx, event3)
-    a23_bob_e7_dir = create_events_owner_dir_path(fiscals_dir, a23_str, bob_inx, event7)
-    e3_put_csv = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+    a23_bob_e3_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event3)
+    a23_bob_e7_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event7)
+    e3_put_csv = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {sue_inx},{event3},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 """
-    e7_put_csv = f"""{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+    e7_put_csv = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {sue_inx},{event7},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 {sue_inx},{event7},{a23_str},{bob_inx},{sue_inx},{credit88},{debtit_empty}
 """
@@ -96,15 +96,15 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles_Scenario1(
     assert os_path_exists(e7_gift_path) is False
 
     # WHEN
-    etl_event_bud_csvs_to_gift_json(fiscal_mstr_dir)
+    etl_event_bud_csvs_to_gift_json(fisc_mstr_dir)
 
     # THEN
     assert os_path_exists(e3_gift_path)
     assert os_path_exists(e7_gift_path)
     # print(f"{open_file(e3_gift_path)=}")
     # print(f"{open_file(e7_gift_path)=}")
-    # gifts_dir = create_path(fizz_world._fiscal_mstr_dir, "gifts")
-    # atoms_dir = create_path(fizz_world._fiscal_mstr_dir, "atoms")
+    # gifts_dir = create_path(fizz_world._fisc_mstr_dir, "gifts")
+    # atoms_dir = create_path(fizz_world._fisc_mstr_dir, "atoms")
     # e3_gift = giftunit_shop(bob_inx, sue_inx, a23_str, gifts_dir, atoms_dir, event3)
     # e7_gift = giftunit_shop(bob_inx, sue_inx, a23_str, gifts_dir, atoms_dir, event7)
     expected_e3_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event3)

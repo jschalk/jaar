@@ -2,7 +2,7 @@ from src.f00_instrument.file import open_file, create_path
 from src.f00_instrument.dict_toolbox import get_dict_from_json
 from src.f01_road.jaar_config import get_json_filename
 from src.f02_bud.bud_tool import budunit_str
-from src.f07_fiscal.fiscal_config import fiscalunit_str
+from src.f07_fisc.fisc_config import fiscunit_str
 from src.f08_pidgin.pidgin_config import pidginunit_str
 from src.f09_idea.examples.idea_env import src_idea_dir
 from os import getcwd as os_getcwd
@@ -30,7 +30,7 @@ def idea_category_str() -> str:
 
 
 def get_idea_categorys() -> set[str]:
-    return {"bud", "fiscal", "pidgin"}
+    return {"bud", "fisc", "pidgin"}
 
 
 def allowed_crud_str() -> str:
@@ -101,7 +101,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "idea_number",
         "face_name",
         "event_int",
-        "fiscal_title",
+        "fisc_title",
         "owner_name",
         "owner_name_ERASE",
         "acct_name",
@@ -204,7 +204,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "idea_number": "TEXT",
         "face_name": "TEXT",
         "event_int": "INTEGER",
-        "fiscal_title": "TEXT",
+        "fisc_title": "TEXT",
         "owner_name": "TEXT",
         "owner_name_ERASE": "TEXT",
         "acct_name": "TEXT",
@@ -291,36 +291,36 @@ def get_idea_sqlite_types() -> dict[str, str]:
     }
 
 
-# def idea_format_00000_fiscalunit_v0_0_0()->str: return "idea_format_00000_fiscalunit_v0_0_0"
-# def idea_format_00001_fiscal_deal_episode_v0_0_0()->str: return "idea_format_00001_fiscal_deal_episode_v0_0_0"
-# def idea_format_00002_fiscal_cashbook_v0_0_0()->str: return "idea_format_00002_fiscal_cashbook_v0_0_0"
-# def idea_format_00003_fiscal_timeline_hour_v0_0_0()->str: return "idea_format_00003_fiscal_timeline_hour_v0_0_0"
-# def idea_format_00004_fiscal_timeline_month_v0_0_0()->str: return "idea_format_00004_fiscal_timeline_month_v0_0_0"
-# def idea_format_00005_fiscal_timeline_weekday_v0_0_0()->str: return "idea_format_00005_fiscal_timeline_weekday_v0_0_0"
+# def idea_format_00000_fiscunit_v0_0_0()->str: return "idea_format_00000_fiscunit_v0_0_0"
+# def idea_format_00001_fisc_deal_episode_v0_0_0()->str: return "idea_format_00001_fisc_deal_episode_v0_0_0"
+# def idea_format_00002_fisc_cashbook_v0_0_0()->str: return "idea_format_00002_fisc_cashbook_v0_0_0"
+# def idea_format_00003_fisc_timeline_hour_v0_0_0()->str: return "idea_format_00003_fisc_timeline_hour_v0_0_0"
+# def idea_format_00004_fisc_timeline_month_v0_0_0()->str: return "idea_format_00004_fisc_timeline_month_v0_0_0"
+# def idea_format_00005_fisc_timeline_weekday_v0_0_0()->str: return "idea_format_00005_fisc_timeline_weekday_v0_0_0"
 
 
-def idea_format_00000_fiscalunit_v0_0_0() -> str:
-    return "idea_format_00000_fiscalunit_v0_0_0"
+def idea_format_00000_fiscunit_v0_0_0() -> str:
+    return "idea_format_00000_fiscunit_v0_0_0"
 
 
-def idea_format_00001_fiscal_deal_episode_v0_0_0() -> str:
-    return "idea_format_00001_fiscal_deal_episode_v0_0_0"
+def idea_format_00001_fisc_deal_episode_v0_0_0() -> str:
+    return "idea_format_00001_fisc_deal_episode_v0_0_0"
 
 
-def idea_format_00002_fiscal_cashbook_v0_0_0() -> str:
-    return "idea_format_00002_fiscal_cashbook_v0_0_0"
+def idea_format_00002_fisc_cashbook_v0_0_0() -> str:
+    return "idea_format_00002_fisc_cashbook_v0_0_0"
 
 
-def idea_format_00003_fiscal_timeline_hour_v0_0_0() -> str:
-    return "idea_format_00003_fiscal_timeline_hour_v0_0_0"
+def idea_format_00003_fisc_timeline_hour_v0_0_0() -> str:
+    return "idea_format_00003_fisc_timeline_hour_v0_0_0"
 
 
-def idea_format_00004_fiscal_timeline_month_v0_0_0() -> str:
-    return "idea_format_00004_fiscal_timeline_month_v0_0_0"
+def idea_format_00004_fisc_timeline_month_v0_0_0() -> str:
+    return "idea_format_00004_fisc_timeline_month_v0_0_0"
 
 
-def idea_format_00005_fiscal_timeline_weekday_v0_0_0() -> str:
-    return "idea_format_00005_fiscal_timeline_weekday_v0_0_0"
+def idea_format_00005_fisc_timeline_weekday_v0_0_0() -> str:
+    return "idea_format_00005_fisc_timeline_weekday_v0_0_0"
 
 
 def idea_format_00011_acct_v0_0_0() -> str:
@@ -477,12 +477,12 @@ def idea_format_00117_road_map1_v0_0_0() -> str:
 
 def get_idea_format_filenames() -> set[str]:
     return {
-        idea_format_00000_fiscalunit_v0_0_0(),
-        idea_format_00001_fiscal_deal_episode_v0_0_0(),
-        idea_format_00002_fiscal_cashbook_v0_0_0(),
-        idea_format_00003_fiscal_timeline_hour_v0_0_0(),
-        idea_format_00004_fiscal_timeline_month_v0_0_0(),
-        idea_format_00005_fiscal_timeline_weekday_v0_0_0(),
+        idea_format_00000_fiscunit_v0_0_0(),
+        idea_format_00001_fisc_deal_episode_v0_0_0(),
+        idea_format_00002_fisc_cashbook_v0_0_0(),
+        idea_format_00003_fisc_timeline_hour_v0_0_0(),
+        idea_format_00004_fisc_timeline_month_v0_0_0(),
+        idea_format_00005_fisc_timeline_weekday_v0_0_0(),
         idea_format_00011_acct_v0_0_0(),
         idea_format_00012_membership_v0_0_0(),
         idea_format_00013_itemunit_v0_0_0(),
@@ -572,45 +572,45 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "fiscal_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title": idea_format_00000_fiscalunit_v0_0_0(),
-        "fiscal_title,owner_name,time_int,quota,ledger_depth": idea_format_00001_fiscal_deal_episode_v0_0_0(),
-        "fiscal_title,owner_name,acct_name,time_int,amount": idea_format_00002_fiscal_cashbook_v0_0_0(),
-        "fiscal_title,hour_title,cumlative_minute": idea_format_00003_fiscal_timeline_hour_v0_0_0(),
-        "fiscal_title,month_title,cumlative_day": idea_format_00004_fiscal_timeline_month_v0_0_0(),
-        "fiscal_title,weekday_title,weekday_order": idea_format_00005_fiscal_timeline_weekday_v0_0_0(),
-        "fiscal_title,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
-        "fiscal_title,owner_name,acct_name,group_label": idea_format_00012_membership_v0_0_0(),
-        "fiscal_title,owner_name,parent_road,item_title,mass,pledge": idea_format_00013_itemunit_v0_0_0(),
-        "fiscal_title,owner_name,parent_road,item_title,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_itemunit_v0_0_0(),
-        "fiscal_title,owner_name,acct_name,group_label,credit_vote,debtit_vote": idea_format_00020_bud_acct_membership_v0_0_0(),
-        "fiscal_title,owner_name,acct_name,credit_belief,debtit_belief": idea_format_00021_bud_acctunit_v0_0_0(),
-        "fiscal_title,owner_name,road,awardee_tag,give_force,take_force": idea_format_00022_bud_item_awardlink_v0_0_0(),
-        "fiscal_title,owner_name,road,base,pick,fopen,fnigh": idea_format_00023_bud_item_factunit_v0_0_0(),
-        "fiscal_title,owner_name,road,team_tag": idea_format_00024_bud_item_teamlink_v0_0_0(),
-        "fiscal_title,owner_name,road,healer_name": idea_format_00025_bud_item_healerlink_v0_0_0(),
-        "fiscal_title,owner_name,road,base,need,nigh,open,divisor": idea_format_00026_bud_item_reason_premiseunit_v0_0_0(),
-        "fiscal_title,owner_name,road,base,base_item_active_requisite": idea_format_00027_bud_item_reasonunit_v0_0_0(),
-        "fiscal_title,owner_name,parent_road,item_title,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": idea_format_00028_bud_itemunit_v0_0_0(),
-        "fiscal_title,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit": idea_format_00029_budunit_v0_0_0(),
-        "fiscal_title,owner_name,parent_road,item_title,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
+        "fisc_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title": idea_format_00000_fiscunit_v0_0_0(),
+        "fisc_title,owner_name,time_int,quota,ledger_depth": idea_format_00001_fisc_deal_episode_v0_0_0(),
+        "fisc_title,owner_name,acct_name,time_int,amount": idea_format_00002_fisc_cashbook_v0_0_0(),
+        "fisc_title,hour_title,cumlative_minute": idea_format_00003_fisc_timeline_hour_v0_0_0(),
+        "fisc_title,month_title,cumlative_day": idea_format_00004_fisc_timeline_month_v0_0_0(),
+        "fisc_title,weekday_title,weekday_order": idea_format_00005_fisc_timeline_weekday_v0_0_0(),
+        "fisc_title,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
+        "fisc_title,owner_name,acct_name,group_label": idea_format_00012_membership_v0_0_0(),
+        "fisc_title,owner_name,parent_road,item_title,mass,pledge": idea_format_00013_itemunit_v0_0_0(),
+        "fisc_title,owner_name,parent_road,item_title,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_itemunit_v0_0_0(),
+        "fisc_title,owner_name,acct_name,group_label,credit_vote,debtit_vote": idea_format_00020_bud_acct_membership_v0_0_0(),
+        "fisc_title,owner_name,acct_name,credit_belief,debtit_belief": idea_format_00021_bud_acctunit_v0_0_0(),
+        "fisc_title,owner_name,road,awardee_tag,give_force,take_force": idea_format_00022_bud_item_awardlink_v0_0_0(),
+        "fisc_title,owner_name,road,base,pick,fopen,fnigh": idea_format_00023_bud_item_factunit_v0_0_0(),
+        "fisc_title,owner_name,road,team_tag": idea_format_00024_bud_item_teamlink_v0_0_0(),
+        "fisc_title,owner_name,road,healer_name": idea_format_00025_bud_item_healerlink_v0_0_0(),
+        "fisc_title,owner_name,road,base,need,nigh,open,divisor": idea_format_00026_bud_item_reason_premiseunit_v0_0_0(),
+        "fisc_title,owner_name,road,base,base_item_active_requisite": idea_format_00027_bud_item_reasonunit_v0_0_0(),
+        "fisc_title,owner_name,parent_road,item_title,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": idea_format_00028_bud_itemunit_v0_0_0(),
+        "fisc_title,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit": idea_format_00029_budunit_v0_0_0(),
+        "fisc_title,owner_name,parent_road,item_title,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
         "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word": idea_format_00042_map_label_v0_0_0(),
         "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word": idea_format_00043_map_name_v0_0_0(),
         "otx_title,inx_title,otx_bridge,inx_bridge,unknown_word": idea_format_00044_map_title_v0_0_0(),
         "otx_road,inx_road,otx_bridge,inx_bridge,unknown_word": idea_format_00045_map_road_v0_0_0(),
-        "fiscal_title,owner_name,acct_name,group_label_ERASE": idea_format_00050_delete_bud_acct_membership_v0_0_0(),
-        "fiscal_title,owner_name,acct_name_ERASE": idea_format_00051_delete_bud_acctunit_v0_0_0(),
-        "fiscal_title,owner_name,road,awardee_tag_ERASE": idea_format_00052_delete_bud_item_awardlink_v0_0_0(),
-        "fiscal_title,owner_name,road,base_EXCISE": idea_format_00053_delete_bud_item_factunit_v0_0_0(),
-        "fiscal_title,owner_name,road,team_tag_ERASE": idea_format_00054_delete_bud_item_teamlink_v0_0_0(),
-        "fiscal_title,owner_name,road,healer_name_ERASE": idea_format_00055_delete_bud_item_healerlink_v0_0_0(),
-        "fiscal_title,owner_name,road,base,need_ERASE": idea_format_00056_delete_bud_item_reason_premiseunit_v0_0_0(),
-        "fiscal_title,owner_name,road,base_ERASE": idea_format_00057_delete_bud_item_reasonunit_v0_0_0(),
-        "fiscal_title,owner_name,parent_road,item_title_ERASE": idea_format_00058_delete_bud_itemunit_v0_0_0(),
-        "fiscal_title,owner_name_ERASE": idea_format_00059_delete_budunit_v0_0_0(),
-        "fiscal_title,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
-        "fiscal_title,owner_name,acct_name,otx_label,inx_label": idea_format_00115_group_map1_v0_0_0(),
-        "fiscal_title,owner_name,acct_name,otx_title,inx_title": idea_format_00116_title_map1_v0_0_0(),
-        "fiscal_title,owner_name,acct_name,otx_road,inx_road": idea_format_00117_road_map1_v0_0_0(),
+        "fisc_title,owner_name,acct_name,group_label_ERASE": idea_format_00050_delete_bud_acct_membership_v0_0_0(),
+        "fisc_title,owner_name,acct_name_ERASE": idea_format_00051_delete_bud_acctunit_v0_0_0(),
+        "fisc_title,owner_name,road,awardee_tag_ERASE": idea_format_00052_delete_bud_item_awardlink_v0_0_0(),
+        "fisc_title,owner_name,road,base_EXCISE": idea_format_00053_delete_bud_item_factunit_v0_0_0(),
+        "fisc_title,owner_name,road,team_tag_ERASE": idea_format_00054_delete_bud_item_teamlink_v0_0_0(),
+        "fisc_title,owner_name,road,healer_name_ERASE": idea_format_00055_delete_bud_item_healerlink_v0_0_0(),
+        "fisc_title,owner_name,road,base,need_ERASE": idea_format_00056_delete_bud_item_reason_premiseunit_v0_0_0(),
+        "fisc_title,owner_name,road,base_ERASE": idea_format_00057_delete_bud_item_reasonunit_v0_0_0(),
+        "fisc_title,owner_name,parent_road,item_title_ERASE": idea_format_00058_delete_bud_itemunit_v0_0_0(),
+        "fisc_title,owner_name_ERASE": idea_format_00059_delete_budunit_v0_0_0(),
+        "fisc_title,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
+        "fisc_title,owner_name,acct_name,otx_label,inx_label": idea_format_00115_group_map1_v0_0_0(),
+        "fisc_title,owner_name,acct_name,otx_title,inx_title": idea_format_00116_title_map1_v0_0_0(),
+        "fisc_title,owner_name,acct_name,otx_road,inx_road": idea_format_00117_road_map1_v0_0_0(),
     }
 
 
@@ -631,12 +631,12 @@ def get_quick_ideas_column_ref() -> dict[str, set[str]]:
 
 def get_idea_dimen_ref() -> dict[str, set[str]]:
     # return {
-    #     "fiscalunit": ["br00000"],
-    #     "fiscal_deal_episode": ["br00001"],
-    #     "fiscal_cashbook": ["br00002"],
-    #     "fiscal_timeline_hour": ["br00003"],
-    #     "fiscal_timeline_month": ["br00004"],
-    #     "fiscal_timeline_weekday": ["br00005"],
+    #     "fiscunit": ["br00000"],
+    #     "fisc_deal_episode": ["br00001"],
+    #     "fisc_cashbook": ["br00002"],
+    #     "fisc_timeline_hour": ["br00003"],
+    #     "fisc_timeline_month": ["br00004"],
+    #     "fisc_timeline_weekday": ["br00005"],
     #     "bud_acctunit": [
     #         "br00011",
     #         "br00021",
@@ -660,12 +660,12 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
     #     "map_road": ["br00045", "br00117"],
     # }
     return {
-        "fiscalunit": ["br00000"],
-        "fiscal_deal_episode": ["br00001"],
-        "fiscal_cashbook": ["br00002"],
-        "fiscal_timeline_hour": ["br00003"],
-        "fiscal_timeline_month": ["br00004"],
-        "fiscal_timeline_weekday": ["br00005"],
+        "fiscunit": ["br00000"],
+        "fisc_deal_episode": ["br00001"],
+        "fisc_cashbook": ["br00002"],
+        "fisc_timeline_hour": ["br00003"],
+        "fisc_timeline_month": ["br00004"],
+        "fisc_timeline_weekday": ["br00005"],
         "bud_acctunit": [
             "br00011",
             "br00021",

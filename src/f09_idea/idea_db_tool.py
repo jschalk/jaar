@@ -181,13 +181,13 @@ def _get_pidgen_idea_format_filenames() -> set[str]:
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 
-def _get_fiscal_idea_format_filenames() -> set[str]:
-    idea_numbers = set(get_idea_dimen_ref().get("fiscalunit"))
-    idea_numbers.update(set(get_idea_dimen_ref().get("fiscal_cashbook")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("fiscal_deal_episode")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("fiscal_timeline_hour")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("fiscal_timeline_month")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("fiscal_timeline_weekday")))
+def _get_fisc_idea_format_filenames() -> set[str]:
+    idea_numbers = set(get_idea_dimen_ref().get("fiscunit"))
+    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_cashbook")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_deal_episode")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_timeline_hour")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_timeline_month")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_timeline_weekday")))
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 
@@ -366,15 +366,15 @@ def get_pragma_table_fetchall(table_columns):
 
 
 def save_table_to_csv(
-    conn_or_cursor: sqlite3_Connection, fiscal_mstr_dir: str, tablename
+    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str, tablename
 ):
-    fiscalunit_sqlstr = f"""SELECT * FROM {tablename};"""
-    fiscalunit_rows = conn_or_cursor.execute(fiscalunit_sqlstr).fetchall()
-    fiscalunit_columns = get_table_columns(conn_or_cursor, tablename)
-    # fiscalunit_columns = [desc[0] for desc in cursor.description]
-    fiscalunit_df = DataFrame(fiscalunit_rows, columns=fiscalunit_columns)
-    fiscalunit_filename = f"{tablename}.csv"
-    save_dataframe_to_csv(fiscalunit_df, fiscal_mstr_dir, fiscalunit_filename)
+    fiscunit_sqlstr = f"""SELECT * FROM {tablename};"""
+    fiscunit_rows = conn_or_cursor.execute(fiscunit_sqlstr).fetchall()
+    fiscunit_columns = get_table_columns(conn_or_cursor, tablename)
+    # fiscunit_columns = [desc[0] for desc in cursor.description]
+    fiscunit_df = DataFrame(fiscunit_rows, columns=fiscunit_columns)
+    fiscunit_filename = f"{tablename}.csv"
+    save_dataframe_to_csv(fiscunit_df, fisc_mstr_dir, fiscunit_filename)
 
 
 def create_idea_sorted_table(

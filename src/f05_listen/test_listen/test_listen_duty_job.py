@@ -1,7 +1,7 @@
 from src.f01_road.road import (
     RoadUnit,
     create_road,
-    get_default_fiscal_title,
+    get_default_fisc_title,
     TitleUnit,
 )
 from src.f02_bud.item import itemunit_shop
@@ -56,7 +56,7 @@ def run_str():
 
 
 def casa_road() -> RoadUnit:
-    return create_road(get_default_fiscal_title(), casa_str())
+    return create_road(get_default_fisc_title(), casa_str())
 
 
 def cook_road() -> RoadUnit:
@@ -99,7 +99,7 @@ def get_example_yao_bud() -> BudUnit:
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    yao_speaker = budunit_shop(yao_str, get_default_fiscal_title())
+    yao_speaker = budunit_shop(yao_str, get_default_fisc_title())
     yao_speaker.set_item(itemunit_shop(run_str()), casa_road())
     yao_speaker.add_acctunit(yao_str, debtit_belief=10)
     yao_speaker.add_acctunit(zia_str, debtit_belief=30)
@@ -157,7 +157,7 @@ def get_example_yao_job3_speaker() -> BudUnit:
 
 
 def get_usa_road() -> RoadUnit:
-    return create_road(get_default_fiscal_title(), "USA")
+    return create_road(get_default_fisc_title(), "USA")
 
 
 def get_iowa_str() -> TitleUnit:
@@ -201,11 +201,11 @@ def get_utah_road() -> RoadUnit:
 
 
 def get_swim_road() -> RoadUnit:
-    return create_road(get_default_fiscal_title(), get_swim_str())
+    return create_road(get_default_fisc_title(), get_swim_str())
 
 
 def get_location_road() -> RoadUnit:
-    return create_road(get_default_fiscal_title(), get_location_str())
+    return create_road(get_default_fisc_title(), get_location_str())
 
 
 def get_in_mer_road() -> RoadUnit:
@@ -219,8 +219,8 @@ def get_on_land_road() -> RoadUnit:
 def get_yao_ohio_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        fiscals_dir=env_dir(),
-        fiscal_title=yao_bud.fiscal_title,
+        fiscs_dir=env_dir(),
+        fisc_title=yao_bud.fisc_title,
         owner_name=yao_bud.owner_name,
         keep_road=get_ohio_road(),
         # pipeline_voice_forecast_str(),
@@ -230,8 +230,8 @@ def get_yao_ohio_hubunit() -> HubUnit:
 def get_yao_iowa_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        fiscals_dir=env_dir(),
-        fiscal_title=yao_bud.fiscal_title,
+        fiscs_dir=env_dir(),
+        fisc_title=yao_bud.fisc_title,
         owner_name=yao_bud.owner_name,
         keep_road=get_iowa_road(),
         # pipeline_voice_forecast_str(),
@@ -241,8 +241,8 @@ def get_yao_iowa_hubunit() -> HubUnit:
 def get_zia_utah_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        fiscals_dir=env_dir(),
-        fiscal_title=yao_bud.fiscal_title,
+        fiscs_dir=env_dir(),
+        fisc_title=yao_bud.fisc_title,
         owner_name="Zia",
         keep_road=get_utah_road(),
         # pipeline_voice_forecast_str(),

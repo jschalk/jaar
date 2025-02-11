@@ -4,8 +4,8 @@ from src.f01_road.jaar_config import get_init_gift_id_if_None, get_json_filename
 from src.f01_road.road import (
     FaceName,
     OwnerName,
-    FiscalTitle,
-    get_default_fiscal_title,
+    FiscTitle,
+    get_default_fisc_title,
 )
 from src.f02_bud.bud import BudUnit
 from src.f04_gift.atom import AtomUnit, get_from_json as atomunit_get_from_json
@@ -25,7 +25,7 @@ class gift_bud_conflict_Exception(Exception):
 @dataclass
 class GiftUnit:
     face_name: FaceName = None
-    fiscal_title: FiscalTitle = None
+    fisc_title: FiscTitle = None
     owner_name: OwnerName = None
     _gift_id: int = None
     _buddelta: BudDelta = None
@@ -55,7 +55,7 @@ class GiftUnit:
     def get_step_dict(self) -> dict[str, any]:
         return {
             "face_name": self.face_name,
-            "fiscal_title": self.fiscal_title,
+            "fisc_title": self.fisc_title,
             "owner_name": self.owner_name,
             "event_int": self.event_int,
             "delta": self._buddelta.get_ordered_atomunits(self._delta_start),
@@ -136,11 +136,11 @@ class GiftUnit:
 
     def get_edited_bud(self, before_bud: BudUnit) -> BudUnit:
         if (
-            self.fiscal_title != before_bud.fiscal_title
+            self.fisc_title != before_bud.fisc_title
             or self.owner_name != before_bud.owner_name
         ):
             raise gift_bud_conflict_Exception(
-                f"gift bud conflict {self.fiscal_title} != {before_bud.fiscal_title} or {self.owner_name} != {before_bud.owner_name}"
+                f"gift bud conflict {self.fisc_title} != {before_bud.fisc_title} or {self.owner_name} != {before_bud.owner_name}"
             )
         return self._buddelta.get_edited_bud(before_bud)
 
@@ -151,7 +151,7 @@ class GiftUnit:
 def giftunit_shop(
     owner_name: OwnerName,
     face_name: FaceName = None,
-    fiscal_title: FiscalTitle = None,
+    fisc_title: FiscTitle = None,
     _gift_id: int = None,
     _buddelta: BudDelta = None,
     _delta_start: int = None,
@@ -160,11 +160,11 @@ def giftunit_shop(
     event_int: int = None,
 ) -> GiftUnit:
     _buddelta = buddelta_shop() if _buddelta is None else _buddelta
-    fiscal_title = get_default_fiscal_title() if fiscal_title is None else fiscal_title
+    fisc_title = get_default_fisc_title() if fisc_title is None else fisc_title
     x_giftunit = GiftUnit(
         face_name=face_name,
         owner_name=owner_name,
-        fiscal_title=fiscal_title,
+        fisc_title=fisc_title,
         _gift_id=get_init_gift_id_if_None(_gift_id),
         _buddelta=_buddelta,
         _gifts_dir=_gifts_dir,
@@ -183,13 +183,13 @@ def create_giftunit_from_files(
     gift_filename = get_json_filename(gift_id)
     gift_dict = get_dict_from_json(open_file(gifts_dir, gift_filename))
     x_owner_name = gift_dict.get("owner_name")
-    x_fiscal_title = gift_dict.get("fiscal_title")
+    x_fisc_title = gift_dict.get("fisc_title")
     x_face_name = gift_dict.get("face_name")
     delta_atom_numbers_list = gift_dict.get("delta_atom_numbers")
     x_giftunit = giftunit_shop(
         face_name=x_face_name,
         owner_name=x_owner_name,
-        fiscal_title=x_fiscal_title,
+        fisc_title=x_fisc_title,
         _gift_id=gift_id,
         _atoms_dir=atoms_dir,
     )
@@ -206,7 +206,7 @@ def get_giftunit_from_json(x_json: str) -> GiftUnit:
     x_giftunit = giftunit_shop(
         face_name=gift_dict.get("face_name"),
         owner_name=gift_dict.get("owner_name"),
-        fiscal_title=gift_dict.get("fiscal_title"),
+        fisc_title=gift_dict.get("fisc_title"),
         _gift_id=gift_dict.get("gift_id"),
         _atoms_dir=gift_dict.get("atoms_dir"),
         event_int=x_event_int,

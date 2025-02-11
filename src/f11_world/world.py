@@ -8,12 +8,12 @@ from src.f01_road.deal import TimeLinePoint, TimeConversion
 from src.f01_road.road import (
     FaceName,
     EventInt,
-    FiscalTitle,
+    FiscTitle,
     WorldID,
     TimeLineTitle,
     get_default_world_id,
 )
-from src.f07_fiscal.fiscal import FiscalUnit
+from src.f07_fisc.fisc import FiscUnit
 from src.f10_etl.transformers import (
     etl_mine_to_train_staging,
     etl_train_staging_to_train_agg,
@@ -36,19 +36,19 @@ from src.f10_etl.transformers import (
     etl_otz_inx_event_ideas_to_inz_faces,
     etl_inz_face_ideas_to_csv_files,
     etl_inz_face_csv_files2idea_staging_tables,
-    etl_idea_staging_to_fiscal_tables,
-    etl_fiscal_staging_tables_to_fiscal_csvs,
-    etl_fiscal_agg_tables_to_fiscal_csvs,
-    etl_fiscal_csvs_to_fiscal_jsons,
+    etl_idea_staging_to_fisc_tables,
+    etl_fisc_staging_tables_to_fisc_csvs,
+    etl_fisc_agg_tables_to_fisc_csvs,
+    etl_fisc_csvs_to_fisc_jsons,
     etl_idea_staging_to_bud_tables,
     etl_bud_tables_to_event_bud_csvs,
     etl_event_bud_csvs_to_gift_json,
     etl_event_gift_json_to_event_inherited_budunits,
-    etl_event_inherited_budunits_to_fiscal_voice,
-    etl_fiscal_voice_to_fiscal_forecast,
-    etl_fiscal_agg_tables2fiscal_owner_time_agg,
-    etl_fiscal_table2fiscal_owner_time_agg_csvs,
-    etl_fiscal_owner_time_agg_csvs2jsons,
+    etl_event_inherited_budunits_to_fisc_voice,
+    etl_fisc_voice_to_fisc_forecast,
+    etl_fisc_agg_tables2fisc_owner_time_agg,
+    etl_fisc_table2fisc_owner_time_agg_csvs,
+    etl_fisc_owner_time_agg_csvs2jsons,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -58,7 +58,7 @@ def get_default_worlds_dir() -> str:
     return "src/f11_world/examples/worlds"
 
 
-class _set_fiscal_pidgin_Exception(Exception):
+class _set_fisc_pidgin_Exception(Exception):
     pass
 
 
@@ -74,8 +74,8 @@ class WorldUnit:
     _world_dir: str = None
     _mine_dir: str = None
     _train_dir: str = None
-    _fiscal_mstr_dir: str = None
-    _fiscalunits: set[FiscalTitle] = None
+    _fisc_mstr_dir: str = None
+    _fiscunits: set[FiscTitle] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
     def set_event(self, event_int: EventInt, face_name: FaceName):
@@ -106,12 +106,12 @@ class WorldUnit:
         self._faces_otz_dir = create_path(self._world_dir, "faces_otz")
         self._faces_inz_dir = create_path(self._world_dir, "faces_inz")
         self._train_dir = create_path(self._world_dir, "train")
-        self._fiscal_mstr_dir = create_path(self._world_dir, "fiscal_mstr")
+        self._fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         set_dir(self._world_dir)
         set_dir(self._faces_otz_dir)
         set_dir(self._faces_inz_dir)
         set_dir(self._train_dir)
-        set_dir(self._fiscal_mstr_dir)
+        set_dir(self._fisc_mstr_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineTitle, TimeConversion]:
         return self.timeconversions
@@ -181,54 +181,48 @@ class WorldUnit:
     ):
         etl_inz_face_csv_files2idea_staging_tables(conn_or_cursor, self._faces_inz_dir)
 
-    def idea_staging_to_fiscal_tables(self, conn_or_cursor: sqlite3_Connection):
-        etl_idea_staging_to_fiscal_tables(conn_or_cursor)
+    def idea_staging_to_fisc_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_idea_staging_to_fisc_tables(conn_or_cursor)
 
     def idea_staging_to_bud_tables(self, conn_or_cursor: sqlite3_Connection):
         etl_idea_staging_to_bud_tables(conn_or_cursor)
 
-    def inz_faces_ideas_to_fiscal_mstr_csvs(self, conn_or_cursor: sqlite3_Connection):
-        etl_fiscal_staging_tables_to_fiscal_csvs(conn_or_cursor, self._fiscal_mstr_dir)
-        etl_fiscal_agg_tables_to_fiscal_csvs(conn_or_cursor, self._fiscal_mstr_dir)
+    def inz_faces_ideas_to_fisc_mstr_csvs(self, conn_or_cursor: sqlite3_Connection):
+        etl_fisc_staging_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
+        etl_fisc_agg_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
-    def fiscal_csvs_to_jsons(self):
-        etl_fiscal_csvs_to_fiscal_jsons(self._fiscal_mstr_dir)
+    def fisc_csvs_to_jsons(self):
+        etl_fisc_csvs_to_fisc_jsons(self._fisc_mstr_dir)
 
-    def fiscal_agg_tables2fiscal_owner_time_agg(
-        self, conn_or_cursor: sqlite3_Connection
-    ):
-        etl_fiscal_agg_tables2fiscal_owner_time_agg(conn_or_cursor)
+    def fisc_agg_tables2fisc_owner_time_agg(self, conn_or_cursor: sqlite3_Connection):
+        etl_fisc_agg_tables2fisc_owner_time_agg(conn_or_cursor)
 
-    def fiscal_table2fiscal_owner_time_agg_csvs(
-        self, conn_or_cursor: sqlite3_Connection
-    ):
-        etl_fiscal_table2fiscal_owner_time_agg_csvs(
-            conn_or_cursor, self._fiscal_mstr_dir
-        )
+    def fisc_table2fisc_owner_time_agg_csvs(self, conn_or_cursor: sqlite3_Connection):
+        etl_fisc_table2fisc_owner_time_agg_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
     def bud_tables_to_event_bud_csvs(self, conn_or_cursor: sqlite3_Connection):
-        etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fiscal_mstr_dir)
+        etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
     def event_bud_csvs_to_gift_json(self):
-        etl_event_bud_csvs_to_gift_json(self._fiscal_mstr_dir)
+        etl_event_bud_csvs_to_gift_json(self._fisc_mstr_dir)
 
     def event_gift_json_to_event_inherited_budunits(self):
-        etl_event_gift_json_to_event_inherited_budunits(self._fiscal_mstr_dir)
+        etl_event_gift_json_to_event_inherited_budunits(self._fisc_mstr_dir)
 
-    def event_inherited_budunits_to_fiscal_voice(self):
-        etl_event_inherited_budunits_to_fiscal_voice(self._fiscal_mstr_dir)
+    def event_inherited_budunits_to_fisc_voice(self):
+        etl_event_inherited_budunits_to_fisc_voice(self._fisc_mstr_dir)
 
-    def fiscal_voice_to_fiscal_forecast(self):
-        etl_fiscal_voice_to_fiscal_forecast(self._fiscal_mstr_dir)
+    def fisc_voice_to_fisc_forecast(self):
+        etl_fisc_voice_to_fisc_forecast(self._fisc_mstr_dir)
 
-    def fiscal_owner_time_agg_csvs2jsons(self):
-        etl_fiscal_owner_time_agg_csvs2jsons(self._fiscal_mstr_dir)
+    def fisc_owner_time_agg_csvs2jsons(self):
+        etl_fisc_owner_time_agg_csvs2jsons(self._fisc_mstr_dir)
 
     def mine_to_forecasts(self):  # sourcery skip: extract-method
-        fiscal_mstr_dir = create_path(self._world_dir, "fiscal_mstr")
-        delete_dir(fiscal_mstr_dir)
-        print(f"{fiscal_mstr_dir=}")
-        set_dir(fiscal_mstr_dir)
+        fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
+        delete_dir(fisc_mstr_dir)
+        print(f"{fisc_mstr_dir=}")
+        set_dir(fisc_mstr_dir)
 
         # "mine_to_train_staging step 00"),
         # "train_staging_to_train_agg step 01"),
@@ -275,15 +269,15 @@ class WorldUnit:
                 print(f"{step_msg} {count_dirs_files(self.worlds_dir)}")
             etl_func()
 
-        with sqlite3_connect(":memory:") as fiscal_db_conn:
-            cursor = fiscal_db_conn.cursor()
+        with sqlite3_connect(":memory:") as fisc_db_conn:
+            cursor = fisc_db_conn.cursor()
             self.etl_inz_face_csv_files2idea_staging_tables(cursor)
-            self.idea_staging_to_fiscal_tables(cursor)
+            self.idea_staging_to_fisc_tables(cursor)
             print(f"step 05.1 {count_dirs_files(self.worlds_dir)}")
-            self.idea_staging_to_fiscal_tables(cursor)
-            self.inz_faces_ideas_to_fiscal_mstr_csvs(cursor)
+            self.idea_staging_to_fisc_tables(cursor)
+            self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
             print(f"step 05.2 {count_dirs_files(self.worlds_dir)}")
-            self.fiscal_csvs_to_jsons()
+            self.fisc_csvs_to_jsons()
             print(f"step 06.0 {count_dirs_files(self.worlds_dir)}")
             self.idea_staging_to_bud_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
@@ -291,8 +285,8 @@ class WorldUnit:
         self.event_bud_csvs_to_gift_json()
         self.event_gift_json_to_event_inherited_budunits()
         # print(f"step 07 {count_dirs_files(self.worlds_dir)}")
-        self.event_inherited_budunits_to_fiscal_voice()
-        self.fiscal_voice_to_fiscal_forecast()
+        self.event_inherited_budunits_to_fisc_voice()
+        self.fisc_voice_to_fisc_forecast()
         # print(f"step 08 {count_dirs_files(self.worlds_dir)}")
 
     def get_dict(self) -> dict:
@@ -310,7 +304,7 @@ def worldunit_shop(
     mine_dir: str = None,
     present_time: TimeLinePoint = None,
     timeconversions: dict[TimeLineTitle, TimeConversion] = None,
-    _fiscalunits: set[FiscalTitle] = None,
+    _fiscunits: set[FiscTitle] = None,
 ) -> WorldUnit:
     if world_id is None:
         world_id = get_default_world_id()
@@ -322,7 +316,7 @@ def worldunit_shop(
         present_time=get_0_if_None(present_time),
         timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
-        _fiscalunits=get_empty_set_if_None(_fiscalunits),
+        _fiscunits=get_empty_set_if_None(_fiscunits),
         _mine_dir=mine_dir,
         _pidgin_events={},
     )
@@ -332,5 +326,5 @@ def worldunit_shop(
     return x_worldunit
 
 
-def init_fiscalunits_from_dirs(x_dirs: list[str]) -> list[FiscalUnit]:
+def init_fiscunits_from_dirs(x_dirs: list[str]) -> list[FiscUnit]:
     return []

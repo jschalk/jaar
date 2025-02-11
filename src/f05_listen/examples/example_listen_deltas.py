@@ -1,5 +1,5 @@
-from src.f01_road.jaar_config import get_fiscal_title_if_None
-from src.f01_road.road import FiscalTitle
+from src.f01_road.jaar_config import get_fisc_title_if_None
+from src.f01_road.road import FiscTitle
 from src.f02_bud.bud_tool import bud_acctunit_str, bud_itemunit_str
 from src.f04_gift.atom_config import acct_name_str, parent_road_str, item_title_str
 from src.f04_gift.atom import (
@@ -12,13 +12,13 @@ from src.f04_gift.atom import (
 from src.f04_gift.delta import BudDelta, buddelta_shop
 
 
-def get_atom_example_itemunit_sports(fiscal_title: FiscalTitle = None) -> AtomUnit:
-    fiscal_title = get_fiscal_title_if_None(fiscal_title)
+def get_atom_example_itemunit_sports(fisc_title: FiscTitle = None) -> AtomUnit:
+    fisc_title = get_fisc_title_if_None(fisc_title)
     sports_str = "sports"
     x_dimen = bud_itemunit_str()
     insert_itemunit_atomunit = atomunit_shop(x_dimen, atom_insert())
     insert_itemunit_atomunit.set_jkey(item_title_str(), sports_str)
-    insert_itemunit_atomunit.set_jkey(parent_road_str(), fiscal_title)
+    insert_itemunit_atomunit.set_jkey(parent_road_str(), fisc_title)
     return insert_itemunit_atomunit
 
 

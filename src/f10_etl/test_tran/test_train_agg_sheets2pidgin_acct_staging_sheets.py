@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
     face_name_str,
-    fiscal_title_str,
+    fisc_title_str,
     acct_name_str,
     owner_name_str,
 )
@@ -37,7 +37,7 @@ def test_etl_train_agg_to_pidgin_name_staging_CreatesFile_Scenario0_SingleIdea(
     br00113_columns = [
         face_name_str(),
         event_int_str(),
-        fiscal_title_str(),
+        fisc_title_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),
@@ -95,7 +95,7 @@ def test_etl_train_agg_to_pidgin_name_staging_CreatesFile_Scenario1_MultipleIdea
     br00113_columns = [
         face_name_str(),
         event_int_str(),
-        fiscal_title_str(),
+        fisc_title_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),
@@ -173,7 +173,7 @@ def test_etl_train_agg_to_pidgin_name_staging_CreatesFile_Scenario2_WorldUnit_ev
     br00113_columns = [
         face_name_str(),
         event_int_str(),
-        fiscal_title_str(),
+        fisc_title_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),

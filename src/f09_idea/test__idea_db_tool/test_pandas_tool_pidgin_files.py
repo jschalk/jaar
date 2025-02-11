@@ -23,7 +23,7 @@ from src.f09_idea.idea_db_tool import (
     open_csv,
     move_otx_csvs_to_pidgin_inx,
     _get_pidgen_idea_format_filenames,
-    _get_fiscal_idea_format_filenames,
+    _get_fisc_idea_format_filenames,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame
@@ -211,7 +211,7 @@ def test_get_pidgen_idea_format_filenames_ReturnsObj():
     assert len(x_pidgen_idea_filenames) == 8
 
 
-def test_get_fiscal_idea_format_filenames_ReturnsObj():
+def test_get_fisc_idea_format_filenames_ReturnsObj():
     # ESTABLISH
     br00000_filename = "br00000.xlsx"
     br00001_filename = "br00001.xlsx"
@@ -222,7 +222,7 @@ def test_get_fiscal_idea_format_filenames_ReturnsObj():
     br00042_filename = "br00042.xlsx"
 
     # WHEN
-    x_pidgen_idea_filenames = _get_fiscal_idea_format_filenames()
+    x_pidgen_idea_filenames = _get_fisc_idea_format_filenames()
 
     # THEN
     print(f"{x_pidgen_idea_filenames=}")

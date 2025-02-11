@@ -37,7 +37,7 @@ from src.f01_road.deal import (
 )
 from src.f01_road.road import (
     OwnerName,
-    FiscalTitle,
+    FiscTitle,
     TitleUnit,
     RoadUnit,
     rebuild_road,
@@ -111,8 +111,8 @@ def get_keep_grades_dir(x_keep_dir: str) -> str:
 @dataclass
 class HubUnit:
     owner_name: OwnerName = None
-    fiscals_dir: str = None
-    fiscal_title: str = None
+    fiscs_dir: str = None
+    fisc_title: str = None
     keep_road: RoadUnit = None
     bridge: str = None
     fund_pool: float = None
@@ -120,7 +120,7 @@ class HubUnit:
     respect_bit: float = None
     penny: float = None
     keep_point_magnitude: float = None
-    _fiscal_dir: str = None
+    _fisc_dir: str = None
     _owners_dir: str = None
     _owner_dir: str = None
     _keeps_dir: str = None
@@ -135,8 +135,8 @@ class HubUnit:
     _forecast_path: str = None
 
     def set_dir_attrs(self):
-        self._fiscal_dir = f_path(self.fiscals_dir, self.fiscal_title)
-        self._owners_dir = f_path(self._fiscal_dir, "owners")
+        self._fisc_dir = f_path(self.fiscs_dir, self.fisc_title)
+        self._owners_dir = f_path(self._fisc_dir, "owners")
         self._owner_dir = f_path(self._owners_dir, self.owner_name)
         self._keeps_dir = f_path(self._owner_dir, "keeps")
         self._atoms_dir = f_path(self._owner_dir, "atoms")
@@ -189,7 +189,7 @@ class HubUnit:
     def default_voice_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
             owner_name=self.owner_name,
-            fiscal_title=self.fiscal_title,
+            fisc_title=self.fisc_title,
             bridge=self.bridge,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,
@@ -239,7 +239,7 @@ class HubUnit:
         delete_dir(self.atom_file_path(atom_number))
 
     def _get_bud_from_atom_files(self) -> BudUnit:
-        x_bud = budunit_shop(self.owner_name, self.fiscal_title)
+        x_bud = budunit_shop(self.owner_name, self.fisc_title)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = get_dir_file_strs(self._atoms_dir, delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
@@ -582,8 +582,8 @@ class HubUnit:
 
     def dw_speaker_bud(self, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
-            fiscals_dir=self.fiscals_dir,
-            fiscal_title=self.fiscal_title,
+            fiscs_dir=self.fiscs_dir,
+            fisc_title=self.fisc_title,
             owner_name=speaker_id,
             bridge=self.bridge,
             respect_bit=self.respect_bit,
@@ -602,8 +602,8 @@ class HubUnit:
 
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
-            fiscals_dir=self.fiscals_dir,
-            fiscal_title=self.fiscal_title,
+            fiscs_dir=self.fiscs_dir,
+            fisc_title=self.fisc_title,
             owner_name=healer_name,
             keep_road=self.keep_road,
             bridge=self.bridge,
@@ -664,8 +664,8 @@ class HubUnit:
 
 
 def hubunit_shop(
-    fiscals_dir: str,
-    fiscal_title: FiscalTitle,
+    fiscs_dir: str,
+    fisc_title: FiscTitle,
     owner_name: OwnerName = None,
     keep_road: RoadUnit = None,
     bridge: str = None,
@@ -676,8 +676,8 @@ def hubunit_shop(
     keep_point_magnitude: float = None,
 ) -> HubUnit:
     x_hubunit = HubUnit(
-        fiscals_dir=fiscals_dir,
-        fiscal_title=fiscal_title,
+        fiscs_dir=fiscs_dir,
+        fisc_title=fisc_title,
         owner_name=validate_titleunit(owner_name, bridge),
         keep_road=keep_road,
         bridge=default_bridge_if_None(bridge),
@@ -693,7 +693,7 @@ def hubunit_shop(
 
 def get_keep_path(x_hubunit: HubUnit, x_road: TitleUnit) -> str:
     keep_root = get_rootpart_of_keep_dir()
-    x_road = rebuild_road(x_road, x_hubunit.fiscal_title, keep_root)
+    x_road = rebuild_road(x_road, x_hubunit.fisc_title, keep_root)
     x_list = get_all_road_titles(x_road, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])
     return f_path(x_hubunit._keeps_dir, keep_sub_path)

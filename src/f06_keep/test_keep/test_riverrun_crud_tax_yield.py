@@ -4,15 +4,15 @@ from src.f06_keep.rivercycle import get_debtorledger
 from src.f06_keep.riverrun import riverrun_shop
 from src.f06_keep.examples.example_credorledgers import (
     example_yao_hubunit,
-    temp_fiscals_dir,
+    temp_fiscs_dir,
 )
 
 
 def test_RiverRun_set_acct_tax_yield_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
-    x_fiscals_dir = temp_fiscals_dir()
-    bob_hubunit = hubunit_shop(x_fiscals_dir, None, bob_str)
+    x_fiscs_dir = temp_fiscs_dir()
+    bob_hubunit = hubunit_shop(x_fiscs_dir, None, bob_str)
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
     assert bob_riverrun._tax_yields.get(yao_str) is None

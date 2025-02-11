@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import (
     acct_name_str,
     face_name_str,
-    fiscal_title_str,
+    fisc_title_str,
     owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
@@ -25,7 +25,7 @@ def test_otz_inx_event_ideas_to_inz_faces_Scenario0(env_dir_setup_cleanup):
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        fiscal_title_str(),
+        fisc_title_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -68,7 +68,7 @@ def test_otz_inx_event_ideas_to_inz_faces_Scenario1(env_dir_setup_cleanup):
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        fiscal_title_str(),
+        fisc_title_str(),
         owner_name_str(),
         acct_name_str(),
     ]

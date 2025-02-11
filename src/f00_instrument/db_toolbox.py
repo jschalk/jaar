@@ -380,7 +380,7 @@ def create_update_inconsistency_error_query(
     return f"""WITH inconsistency_rows AS (
 {select_inconsistency_query})
 UPDATE {x_tablename}
-SET error_message = 'Inconsistent fiscal data'
+SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 {where_str}
 ;

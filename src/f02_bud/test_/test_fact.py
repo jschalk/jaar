@@ -5,7 +5,7 @@ from src.f02_bud.reason_item import (
     FactCore,
     factunits_get_from_dict,
 )
-from src.f01_road.road import get_default_fiscal_title as root_title, create_road
+from src.f01_road.road import get_default_fisc_title as root_title, create_road
 
 
 def test_FactUnit_exists():

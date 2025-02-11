@@ -4,7 +4,7 @@ from src.f04_gift.atom_config import (
     face_name_str,
     acct_name_str,
     owner_name_str,
-    fiscal_title_str,
+    fisc_title_str,
     credit_belief_str,
     debtit_belief_str,
     get_delete_key_name,
@@ -39,7 +39,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudPutAggTables(
         create_bud_tables(cursor)
         staging_tablename = f"{bud_acctunit_str()}_put_staging"
         insert_staging_sqlstr = f"""
-INSERT INTO {staging_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()},error_message)
+INSERT INTO {staging_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()},error_message)
 VALUES
   ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL,NULL)
 , ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL,NULL,NULL)
@@ -58,7 +58,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 2
-        select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, {credit_belief_str()} FROM {agg_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {credit_belief_str()} FROM {agg_tablename};"
         cursor.execute(select_sqlstr)
         budunit_agg_rows = cursor.fetchall()
         assert budunit_agg_rows == [
@@ -88,7 +88,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudDelAggTables(
         create_bud_tables(cursor)
         staging_tablename = f"{bud_acctunit_str()}_del_staging"
         insert_staging_sqlstr = f"""
-INSERT INTO {staging_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fiscal_title_str()},{owner_name_str()},{acct_name_delete_str},error_message)
+INSERT INTO {staging_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_delete_str},error_message)
 VALUES
   ('br00051','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
 , ('br00051','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
@@ -107,7 +107,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 2
-        select_sqlstr = f"SELECT {event_int_str()}, {fiscal_title_str()}, {acct_name_delete_str} FROM {agg_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {acct_name_delete_str} FROM {agg_tablename};"
         cursor.execute(select_sqlstr)
         budunit_agg_rows = cursor.fetchall()
         assert budunit_agg_rows == [

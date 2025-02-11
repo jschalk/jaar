@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f09_idea.idea_config import get_idea_sqlite_types
-from src.f09_idea.examples.idea_env import idea_env_setup_cleanup, idea_fiscals_dir
+from src.f09_idea.examples.idea_env import idea_env_setup_cleanup, idea_fiscs_dir
 from src.f09_idea.idea_db_tool import create_idea_table_from_csv, insert_idea_csv
 from pytest import fixture as pytest_fixture
 from os import remove as os_remove
@@ -29,7 +29,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     #     CREATE TABLE {test_table} (
     #         face_name TEXT,
     #         event_int INTEGER,
-    #         fiscal_title TEXT,
+    #         fisc_title TEXT,
     #         owner_name TEXT,
     #         acct_name TEXT,
     #         group_label TEXT,
@@ -42,7 +42,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     # Create a test CSV file
     with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            "face_name,event_int,fiscal_title,owner_name,acct_name,group_label,gogo_want\n"
+            "face_name,event_int,fisc_title,owner_name,acct_name,group_label,gogo_want\n"
         )
         csv_file.write("Sue,3,Accord43,Bob,Bob,;runners,6.5\n")
         csv_file.write("Sue,3,Accord43,Yao,Bob,;runners,7.5\n")
@@ -82,7 +82,7 @@ def test_create_idea_table_from_csv_ChangesDBState(
     expected_columns = [
         (0, "face_name", "TEXT", 0, None, 0),
         (1, "event_int", "INTEGER", 0, None, 0),
-        (2, "fiscal_title", "TEXT", 0, None, 0),
+        (2, "fisc_title", "TEXT", 0, None, 0),
         (3, "owner_name", "TEXT", 0, None, 0),
         (4, "acct_name", "TEXT", 0, None, 0),
         (5, "group_label", "TEXT", 0, None, 0),
@@ -93,7 +93,7 @@ def test_create_idea_table_from_csv_ChangesDBState(
     get_idea_sqlite_types_columns = [
         (0, "face_name", column_types.get("face_name"), 0, None, 0),
         (1, "event_int", column_types.get("event_int"), 0, None, 0),
-        (2, "fiscal_title", column_types.get("fiscal_title"), 0, None, 0),
+        (2, "fisc_title", column_types.get("fisc_title"), 0, None, 0),
         (3, "owner_name", column_types.get("owner_name"), 0, None, 0),
         (4, "acct_name", column_types.get("acct_name"), 0, None, 0),
         (5, "group_label", column_types.get("group_label"), 0, None, 0),
@@ -137,7 +137,7 @@ def test_insert_idea_csv_ChangesDBState_CorrectlyInserts(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            "face_name,event_int,fiscal_title,owner_name,acct_name,group_label,gogo_want\n"
+            "face_name,event_int,fisc_title,owner_name,acct_name,group_label,gogo_want\n"
         )
         csv_file.write("Zia,7,Accord55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("Zia,8,Accord43,Zia,Bob,;runners,11.1\n")
@@ -181,7 +181,7 @@ def test_insert_idea_csv_ChangesDBState_CanCreateTable(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            "face_name,event_int,fiscal_title,owner_name,acct_name,group_label,gogo_want\n"
+            "face_name,event_int,fisc_title,owner_name,acct_name,group_label,gogo_want\n"
         )
         csv_file.write("Zia,7,Accord55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("Zia,8,Accord43,Zia,Bob,;runners,11.1\n")

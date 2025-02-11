@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path, open_file
 from src.f04_gift.atom_config import (
     acct_name_str,
     face_name_str,
-    fiscal_title_str,
+    fisc_title_str,
     owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
@@ -24,7 +24,7 @@ def test_WorldUnit_inz_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        fiscal_title_str(),
+        fisc_title_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -50,7 +50,7 @@ def test_WorldUnit_inz_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
 
     # THEN
     assert os_path_exists(br00011_csv_path)
-    expected_csv = """face_name,event_int,fiscal_title,owner_name,acct_name
+    expected_csv = """face_name,event_int,fisc_title,owner_name,acct_name
 Suzy,3,accord23,Bob,Bob
 Suzy,3,accord23,Yao,Bob
 Suzy,3,accord23,Yao,Yao
