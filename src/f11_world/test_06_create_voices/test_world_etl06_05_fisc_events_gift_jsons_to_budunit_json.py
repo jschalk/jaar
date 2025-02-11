@@ -28,9 +28,13 @@ def test_WorldUnit_event_gift_json_to_event_inherited_budunits_SetsFiles_bud_jso
     credit88 = 88
     a23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
-    fiscs_dir = create_path(fizz_world._fisc_mstr_dir, "fiscs")
-    a23_bob_e3_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event3)
-    a23_bob_e7_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event7)
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
+    a23_bob_e3_dir = create_events_owner_dir_path(
+        fisc_mstr_dir, a23_str, bob_inx, event3
+    )
+    a23_bob_e7_dir = create_events_owner_dir_path(
+        fisc_mstr_dir, a23_str, bob_inx, event7
+    )
     a23_bob_e3_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event3)
     a23_bob_e7_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event7)
     budacct_dimen = bud_acctunit_str()
@@ -95,9 +99,13 @@ def test_WorldUnit_event_gift_json_to_event_inherited_budunits_SetsFiles_express
     credit88 = 88
     a23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
-    fiscs_dir = create_path(fizz_world._fisc_mstr_dir, "fiscs")
-    a23_bob_e3_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event3)
-    a23_bob_e7_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event7)
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
+    a23_bob_e3_dir = create_events_owner_dir_path(
+        fisc_mstr_dir, a23_str, bob_inx, event3
+    )
+    a23_bob_e7_dir = create_events_owner_dir_path(
+        fisc_mstr_dir, a23_str, bob_inx, event7
+    )
     a23_bob_e3_gift = giftunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     a23_bob_e7_gift = giftunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
     budacct_dimen = bud_acctunit_str()

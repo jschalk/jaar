@@ -1050,7 +1050,7 @@ def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
             max_event_int_dir = create_path(owner_dir, max_event_int)
             max_event_bud_path = create_path(max_event_int_dir, "bud.json")
             max_event_bud_json = open_file(max_event_bud_path)
-            voice_path = create_voice_path(fiscs_dir, fisc_title, owner_name)
+            voice_path = create_voice_path(fisc_mstr_dir, fisc_title, owner_name)
             save_file(voice_path, None, max_event_bud_json)
 
 

@@ -1,11 +1,6 @@
 from src.f00_instrument.file import create_path, save_file, open_file
-from src.f01_road.allot import allot_nested_scale, allot_scale
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
-from src.f04_gift.atom_config import face_name_str, fisc_title_str
 from src.f05_listen.hub_paths import create_events_owner_dir_path, create_voice_path
-from src.f07_fisc.fisc_config import cumlative_minute_str, hour_title_str
-from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
@@ -25,9 +20,13 @@ def test_WorldUnit_event_inherited_budunits_to_fisc_voice_SetsFiles_Scenario0(
     credit88 = 88
     a23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
-    fiscs_dir = create_path(fizz_world._fisc_mstr_dir, "fiscs")
-    a23_bob_e3_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event3)
-    a23_bob_e7_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event7)
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
+    a23_bob_e3_dir = create_events_owner_dir_path(
+        fisc_mstr_dir, a23_str, bob_inx, event3
+    )
+    a23_bob_e7_dir = create_events_owner_dir_path(
+        fisc_mstr_dir, a23_str, bob_inx, event7
+    )
     bud_filename = "bud.json"
     e3_bob_bud = budunit_shop(bob_inx, a23_str)
     e7_bob_bud = budunit_shop(bob_inx, a23_str)
@@ -42,7 +41,7 @@ def test_WorldUnit_event_inherited_budunits_to_fisc_voice_SetsFiles_Scenario0(
     e7_bud_path = create_path(a23_bob_e7_dir, bud_filename)
     assert os_path_exists(e3_bud_path)
     assert os_path_exists(e7_bud_path)
-    a23_bob_voice_path = create_voice_path(fiscs_dir, a23_str, bob_inx)
+    a23_bob_voice_path = create_voice_path(fisc_mstr_dir, a23_str, bob_inx)
     assert os_path_exists(a23_bob_voice_path) is False
 
     # WHEN

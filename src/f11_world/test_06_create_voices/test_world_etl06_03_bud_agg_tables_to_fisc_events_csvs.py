@@ -31,12 +31,12 @@ def test_WorldUnit_bud_tables_to_event_bud_csvs_CreatesFiles(
     fizz_world = worldunit_shop("fizz")
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv = f"{put_agg_tablename}.csv"
-    fiscs_dir = create_path(fizz_world._fisc_mstr_dir, "fiscs")
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_bob_e3_dir = create_events_owner_dir_path(
-        fiscs_dir, accord23_str, bob_inx, event3
+        fisc_mstr_dir, accord23_str, bob_inx, event3
     )
     a23_bob_e7_dir = create_events_owner_dir_path(
-        fiscs_dir, accord23_str, bob_inx, event7
+        fisc_mstr_dir, accord23_str, bob_inx, event7
     )
     a23_e3_budacct_put_path = create_path(a23_bob_e3_dir, put_agg_csv)
     a23_e7_budacct_put_path = create_path(a23_bob_e7_dir, put_agg_csv)

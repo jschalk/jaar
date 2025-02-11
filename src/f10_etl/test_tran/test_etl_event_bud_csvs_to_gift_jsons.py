@@ -28,11 +28,12 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles_Scenario0_IgnoresCSV
     put_agg_tablename = f"{budunit_str()}_put_agg"
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     fisc_mstr_dir = get_test_etl_dir()
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
-    a23_bob_e3_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event3)
+    a23_bob_e3_dir = create_events_owner_dir_path(
+        fisc_mstr_dir, a23_str, bob_inx, event3
+    )
     e3_put_csv = f"""{face_name_str()},{event_int_str()},fisc_title,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit
 {sue_inx},{event3},{a23_str},{bob_inx},,,,,,,,
 """
@@ -72,12 +73,15 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles_Scenario1(
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     fisc_mstr_dir = get_test_etl_dir()
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
-    a23_bob_e3_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event3)
-    a23_bob_e7_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event7)
+    a23_bob_e3_dir = create_events_owner_dir_path(
+        fisc_mstr_dir, a23_str, bob_inx, event3
+    )
+    a23_bob_e7_dir = create_events_owner_dir_path(
+        fisc_mstr_dir, a23_str, bob_inx, event7
+    )
     e3_put_csv = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {sue_inx},{event3},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 """

@@ -24,9 +24,12 @@ def test_etl_event_inherited_budunits_to_fisc_voice_SetsFiles_Scenario0(
     credit88 = 88
     a23_str = "accord23"
     fisc_mstr_dir = get_test_etl_dir()
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    a23_bob_e3_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event3)
-    a23_bob_e7_dir = create_events_owner_dir_path(fiscs_dir, a23_str, bob_inx, event7)
+    a23_bob_e3_dir = create_events_owner_dir_path(
+        fisc_mstr_dir, a23_str, bob_inx, event3
+    )
+    a23_bob_e7_dir = create_events_owner_dir_path(
+        fisc_mstr_dir, a23_str, bob_inx, event7
+    )
     bud_filename = "bud.json"
     e3_bob_bud = budunit_shop(bob_inx, a23_str)
     e7_bob_bud = budunit_shop(bob_inx, a23_str)
@@ -43,7 +46,7 @@ def test_etl_event_inherited_budunits_to_fisc_voice_SetsFiles_Scenario0(
     assert os_path_exists(e7_bud_path)
     print(e3_bud_path)
     print(e7_bud_path)
-    a23_bob_voice_path = create_voice_path(fiscs_dir, a23_str, bob_inx)
+    a23_bob_voice_path = create_voice_path(fisc_mstr_dir, a23_str, bob_inx)
     assert os_path_exists(a23_bob_voice_path) is False
 
     # WHEN

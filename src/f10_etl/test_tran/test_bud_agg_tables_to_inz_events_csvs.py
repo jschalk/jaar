@@ -31,12 +31,11 @@ def test_etl_bud_tables_to_event_bud_csvs_PopulatesBudPutAggTables(
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv = f"{put_agg_tablename}.csv"
     x_fisc_mstr_dir = get_test_etl_dir()
-    fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_bob_e3_dir = create_events_owner_dir_path(
-        fiscs_dir, accord23_str, bob_inx, event3
+        x_fisc_mstr_dir, accord23_str, bob_inx, event3
     )
     a23_bob_e7_dir = create_events_owner_dir_path(
-        fiscs_dir, accord23_str, bob_inx, event7
+        x_fisc_mstr_dir, accord23_str, bob_inx, event7
     )
     a23_e3_budacct_put_path = create_path(a23_bob_e3_dir, put_agg_csv)
     a23_e7_budacct_put_path = create_path(a23_bob_e7_dir, put_agg_csv)

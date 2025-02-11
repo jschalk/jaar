@@ -88,13 +88,14 @@ def test_fisc_agenda_list_report_path_ReturnObj() -> str:
 
 def test_create_owners_dir_path_ReturnObj() -> str:
     # ESTABLISH
-    x_fiscs_dir = get_listen_temp_env_dir()
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
 
     # WHEN
-    gen_owners_dir = create_owners_dir_path(x_fiscs_dir, accord23_str)
+    gen_owners_dir = create_owners_dir_path(x_fisc_mstr_dir, accord23_str)
 
     # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, accord23_str)
     expected_owners_dir = create_path(accord23_dir, get_owners_folder())
     assert gen_owners_dir == expected_owners_dir
@@ -102,14 +103,15 @@ def test_create_owners_dir_path_ReturnObj() -> str:
 
 def test_create_episodes_dir_path_ReturnObj() -> str:
     # ESTABLISH
-    x_fiscs_dir = get_listen_temp_env_dir()
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
     sue_str = "Sue"
 
     # WHEN
-    episodes_dir = create_episodes_dir_path(x_fiscs_dir, accord23_str, sue_str)
+    episodes_dir = create_episodes_dir_path(x_fisc_mstr_dir, accord23_str, sue_str)
 
     # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, accord23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
@@ -119,17 +121,18 @@ def test_create_episodes_dir_path_ReturnObj() -> str:
 
 def test_create_timepoint_dir_path_ReturnObj() -> str:
     # ESTABLISH
-    x_fiscs_dir = get_listen_temp_env_dir()
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
     sue_str = "Sue"
     timepoint7 = 7
 
     # WHEN
     generated_timepoint_dir = create_timepoint_dir_path(
-        x_fiscs_dir, accord23_str, sue_str, timepoint7
+        x_fisc_mstr_dir, accord23_str, sue_str, timepoint7
     )
 
     # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, accord23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
@@ -140,15 +143,16 @@ def test_create_timepoint_dir_path_ReturnObj() -> str:
 
 def test_create_deal_path_ReturnObj() -> str:
     # ESTABLISH
-    x_fiscs_dir = get_listen_temp_env_dir()
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
     timepoint7 = 7
 
     # WHEN
-    gen_deal_path = create_deal_path(x_fiscs_dir, a23_str, sue_str, timepoint7)
+    gen_deal_path = create_deal_path(x_fisc_mstr_dir, a23_str, sue_str, timepoint7)
 
     # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, a23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
@@ -160,17 +164,18 @@ def test_create_deal_path_ReturnObj() -> str:
 
 def test_create_budpoint_dir_path_ReturnObj() -> str:
     # ESTABLISH
-    x_fiscs_dir = get_listen_temp_env_dir()
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
     timepoint7 = 7
 
     # WHEN
     gen_budpoint_path = create_budpoint_dir_path(
-        x_fiscs_dir, a23_str, sue_str, timepoint7
+        x_fisc_mstr_dir, a23_str, sue_str, timepoint7
     )
 
     # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, a23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
@@ -182,7 +187,7 @@ def test_create_budpoint_dir_path_ReturnObj() -> str:
 
 def test_create_events_owner_dir_path_ReturnObj() -> str:
     # ESTABLISH
-    x_fiscs_dir = get_listen_temp_env_dir()
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
     bob_str = "Bob"
     event3 = 3
@@ -190,10 +195,11 @@ def test_create_events_owner_dir_path_ReturnObj() -> str:
 
     # WHEN
     gen_a23_e3_bud_path = create_events_owner_dir_path(
-        x_fiscs_dir, accord23_str, bob_str, event3
+        x_fisc_mstr_dir, accord23_str, bob_str, event3
     )
 
     # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_dir = create_path(x_fiscs_dir, accord23_str)
     a23_events_dir = create_path(a23_dir, "events")
     a23_bob_dir = create_path(a23_events_dir, bob_str)
@@ -205,14 +211,15 @@ def test_create_events_owner_dir_path_ReturnObj() -> str:
 
 def test_create_voice_path_ReturnObj() -> str:
     # ESTABLISH
-    x_fiscs_dir = get_listen_temp_env_dir()
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     bob_str = "Bob"
 
     # WHEN
-    gen_a23_e3_bud_path = create_voice_path(x_fiscs_dir, a23_str, bob_str)
+    gen_a23_e3_bud_path = create_voice_path(x_fisc_mstr_dir, a23_str, bob_str)
 
     # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_dir = create_path(x_fiscs_dir, a23_str)
     a23_owners_dir = create_path(a23_dir, "owners")
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
@@ -225,14 +232,15 @@ def test_create_voice_path_ReturnObj() -> str:
 
 def test_create_forecast_path_ReturnObj() -> str:
     # ESTABLISH
-    x_fiscs_dir = get_listen_temp_env_dir()
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     bob_str = "Bob"
 
     # WHEN
-    gen_a23_e3_bud_path = create_forecast_path(x_fiscs_dir, a23_str, bob_str)
+    gen_a23_e3_bud_path = create_forecast_path(x_fisc_mstr_dir, a23_str, bob_str)
 
     # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_dir = create_path(x_fiscs_dir, a23_str)
     a23_owners_dir = create_path(a23_dir, "owners")
     a23_bob_dir = create_path(a23_owners_dir, bob_str)

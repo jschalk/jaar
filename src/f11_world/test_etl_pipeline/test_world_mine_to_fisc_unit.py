@@ -85,10 +85,9 @@ def test_WorldUnit_mine_to_forecasts_CreatesFiles(env_dir_setup_cleanup):
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     wrong_a23_fisc_dir = create_path(fisc_mstr_dir, accord23_str)
     assert os_path_exists(wrong_a23_fisc_dir) is False
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     a23_json_path = create_fisc_json_path(fisc_mstr_dir, accord23_str)
-    a23_sue_voice_path = create_voice_path(fiscs_dir, accord23_str, sue_str)
-    a23_sue_forecast_path = create_forecast_path(fiscs_dir, accord23_str, sue_str)
+    a23_sue_voice_path = create_voice_path(fisc_mstr_dir, accord23_str, sue_str)
+    a23_sue_forecast_path = create_forecast_path(fisc_mstr_dir, accord23_str, sue_str)
     assert os_path_exists(mine_file_path)
     assert os_path_exists(a23_json_path) is False
     assert os_path_exists(a23_sue_voice_path) is False

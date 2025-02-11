@@ -124,7 +124,7 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit._forecast_dir == create_path(x_hubunit._owner_dir, "forecast")
     assert x_hubunit._episodes_dir == create_path(x_hubunit._owner_dir, "episodes")
     func_episodes_dir = create_episodes_dir_path(
-        x_fiscs_dir, x_fisc_title, x_hubunit.owner_name
+        x_fisc_mstr_dir, x_fisc_title, x_hubunit.owner_name
     )
     print(f"{x_hubunit._episodes_dir=}")
     print(f"{func_episodes_dir=}")
@@ -135,7 +135,7 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit._voice_filename == f"{sue_str}.json"
     x_voice_path = create_path(x_hubunit._voice_dir, x_hubunit._voice_filename)
     assert x_hubunit._voice_path == x_voice_path
-    func_voice_path = create_voice_path(x_fiscs_dir, x_hubunit.fisc_title, sue_str)
+    func_voice_path = create_voice_path(x_fisc_mstr_dir, x_hubunit.fisc_title, sue_str)
     assert x_hubunit._voice_path == func_voice_path
     print(f"{x_hubunit._voice_path=}")
 
@@ -144,7 +144,7 @@ def test_hubunit_shop_ReturnsObj():
     x_forecastpath = create_path(x_hubunit._forecast_dir, x_hubunit._forecast_filename)
     assert x_hubunit._forecast_path == x_forecastpath
     func_forecast_path = create_forecast_path(
-        x_fiscs_dir, x_hubunit.fisc_title, sue_str
+        x_fisc_mstr_dir, x_hubunit.fisc_title, sue_str
     )
     assert x_hubunit._forecast_path == func_forecast_path
 

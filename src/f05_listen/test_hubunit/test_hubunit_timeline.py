@@ -61,8 +61,7 @@ def test_HubUnit_deal_file_path_ReturnsObj():
     x_timepoint_dir = yao_hubunit.timepoint_dir(t88_time_int)
     x_file_path = create_path(x_timepoint_dir, yao_hubunit.deal_filename())
     assert t88_deal_file_path == x_file_path
-    fiscs_dir = create_path(fisc_mstr_dir(), "fiscs")
-    f_deal_path = create_deal_path(fiscs_dir, fisc_title(), yao_str, t88_time_int)
+    f_deal_path = create_deal_path(fisc_mstr_dir(), fisc_title(), yao_str, t88_time_int)
     assert t88_deal_file_path == f_deal_path
 
 
@@ -183,9 +182,8 @@ def test_HubUnit_budpoint_file_path_ReturnsObj():
     x_timepoint_dir = yao_hubunit.timepoint_dir(t88_time_int)
     x_file_path = create_path(x_timepoint_dir, yao_hubunit.budpoint_filename())
     assert t88_budpoint_file_path == x_file_path
-    fiscs_dir = create_path(fisc_mstr_dir(), "fiscs")
     f_budpoint_path = create_budpoint_dir_path(
-        fiscs_dir, fisc_title(), yao_str, t88_time_int
+        fisc_mstr_dir(), fisc_title(), yao_str, t88_time_int
     )
     assert t88_budpoint_file_path == f_budpoint_path
 

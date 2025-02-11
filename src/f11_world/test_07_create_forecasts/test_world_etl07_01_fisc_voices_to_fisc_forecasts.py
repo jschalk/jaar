@@ -25,16 +25,15 @@ def test_WorldUnit_fisc_voice_to_fisc_forecast_SetsFiles_Scenario0(
     a23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     bob_voice = budunit_shop(bob_inx, a23_str)
     bob_voice.add_acctunit(bob_inx, credit77)
     bob_voice.add_acctunit(yao_inx, credit44)
     bob_voice.add_acctunit(bob_inx, credit77)
     bob_voice.add_acctunit(sue_inx, credit88)
     bob_voice.add_acctunit(yao_inx, credit44)
-    a23_bob_voice_path = create_voice_path(fiscs_dir, a23_str, bob_inx)
+    a23_bob_voice_path = create_voice_path(fisc_mstr_dir, a23_str, bob_inx)
     save_file(a23_bob_voice_path, None, bob_voice.get_json())
-    a23_bob_forecast_path = create_forecast_path(fiscs_dir, a23_str, bob_inx)
+    a23_bob_forecast_path = create_forecast_path(fisc_mstr_dir, a23_str, bob_inx)
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(fisc_json_path, None, fiscunit_shop(a23_str, fisc_mstr_dir).get_json())
     assert os_path_exists(a23_bob_voice_path)
@@ -68,7 +67,6 @@ def test_WorldUnit_fisc_voice_to_fisc_forecast_SetsFiles_Scenario1(
     a23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     bob_voice = budunit_shop(bob_inx, a23_str)
     bob_voice.add_acctunit(bob_inx)
     bob_voice.add_acctunit(yao_inx)
@@ -88,12 +86,12 @@ def test_WorldUnit_fisc_voice_to_fisc_forecast_SetsFiles_Scenario1(
     assert bob_voice.item_exists(clean_road)
     assert yao_voice.item_exists(clean_road) is False
 
-    a23_bob_voice_path = create_voice_path(fiscs_dir, a23_str, bob_inx)
-    a23_yao_voice_path = create_voice_path(fiscs_dir, a23_str, yao_inx)
+    a23_bob_voice_path = create_voice_path(fisc_mstr_dir, a23_str, bob_inx)
+    a23_yao_voice_path = create_voice_path(fisc_mstr_dir, a23_str, yao_inx)
     save_file(a23_bob_voice_path, None, bob_voice.get_json())
     save_file(a23_yao_voice_path, None, yao_voice.get_json())
-    a23_bob_forecast_path = create_forecast_path(fiscs_dir, a23_str, bob_inx)
-    a23_yao_forecast_path = create_forecast_path(fiscs_dir, a23_str, yao_inx)
+    a23_bob_forecast_path = create_forecast_path(fisc_mstr_dir, a23_str, bob_inx)
+    a23_yao_forecast_path = create_forecast_path(fisc_mstr_dir, a23_str, yao_inx)
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(fisc_json_path, None, fiscunit_shop(a23_str, fisc_mstr_dir).get_json())
     assert os_path_exists(a23_bob_voice_path)
