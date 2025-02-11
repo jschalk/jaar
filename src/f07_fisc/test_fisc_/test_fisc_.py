@@ -17,15 +17,17 @@ from src.f03_chrono.chrono import timelineunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import FiscUnit, fiscunit_shop
 from src.f07_fisc.examples.fisc_env import (
+    get_test_fisc_mstr_dir,
     get_test_fiscs_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists, isdir as os_path_isdir
 
 
-def test_FiscUnit_Exists(env_dir_setup_cleanup):
-    accord45_str = "accord45"
+def test_FiscUnit_Exists():
+    # ESTABLISH / WHEN
     accord_fisc = FiscUnit()
+    # THEN
     assert not accord_fisc.fisc_title
     assert not accord_fisc.timeline
     assert not accord_fisc.present_time
@@ -35,7 +37,7 @@ def test_FiscUnit_Exists(env_dir_setup_cleanup):
     assert not accord_fisc.fund_coin
     assert not accord_fisc.respect_bit
     assert not accord_fisc.penny
-    assert not accord_fisc.fiscs_dir
+    assert not accord_fisc.fisc_mstr_dir
     # Calculated fields
     assert not accord_fisc._owners_dir
     assert not accord_fisc._journal_db
@@ -57,7 +59,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert accord_fisc.fund_coin == default_fund_coin_if_None()
     assert accord_fisc.respect_bit == default_respect_bit_if_None()
     assert accord_fisc.penny == default_penny_if_None()
-    assert accord_fisc.fiscs_dir == get_test_fiscs_dir()
+    assert accord_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
     # Calculated fields
     assert accord_fisc._owners_dir != None
     assert accord_fisc._gifts_dir != None
@@ -69,11 +71,11 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_fiscs_dir(env_dir_setup_cleanup):
     accord45_str = "accord45"
 
     # WHEN
-    accord_fisc = fiscunit_shop(accord45_str, fiscs_dir=get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir())
 
     # THEN
     assert accord_fisc.fisc_title == accord45_str
-    assert accord_fisc.fiscs_dir == get_test_fiscs_dir()
+    assert accord_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
     assert accord_fisc._owners_dir is not None
     assert accord_fisc._gifts_dir is not None
 
@@ -90,7 +92,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     # WHEN
     accord_fisc = fiscunit_shop(
         fisc_title=accord45_str,
-        fiscs_dir=get_test_fiscs_dir(),
+        fisc_mstr_dir=get_test_fisc_mstr_dir(),
         present_time=x_present_time,
         in_memory_journal=True,
         bridge=slash_str,
@@ -110,7 +112,9 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
 def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = FiscUnit(fisc_title=accord45_str, fiscs_dir=get_test_fiscs_dir())
+    accord_fisc = FiscUnit(
+        fisc_title=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
+    )
     x_fisc_dir = create_path(get_test_fiscs_dir(), accord45_str)
     x_owners_dir = create_path(x_fisc_dir, "owners")
     x_gifts_dir = create_path(x_fisc_dir, get_gifts_folder())
@@ -146,7 +150,7 @@ def test_fiscunit_shop_SetsfiscsDirs(env_dir_setup_cleanup):
 
     # WHEN
     accord_fisc = fiscunit_shop(
-        accord45_str, get_test_fiscs_dir(), in_memory_journal=True
+        accord45_str, get_test_fisc_mstr_dir(), in_memory_journal=True
     )
 
     # THEN
@@ -191,11 +195,11 @@ def test_FiscUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanu
 def test_FiscUnit_get_owner_voice_from_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     accord45_str = "accord45"
-    x_fiscs_dir = get_test_fiscs_dir()
-    accord_fisc = fiscunit_shop(accord45_str, x_fiscs_dir, in_memory_journal=True)
+    x_fisc_mstr_dir = get_test_fisc_mstr_dir()
+    accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
     sue_str = "Sue"
     accord_fisc.init_owner_keeps(sue_str)
-    sue_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, sue_str, None)
+    sue_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, sue_str, None)
     bob_str = "Bob"
     sue_voice = sue_hubunit.get_voice_bud()
     sue_voice.add_acctunit(bob_str)
@@ -214,14 +218,14 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
 ):
     # ESTABLISH
     accord45_str = "accord45"
-    x_fiscs_dir = get_test_fiscs_dir()
-    accord_fisc = fiscunit_shop(accord45_str, x_fiscs_dir, in_memory_journal=True)
+    x_fisc_mstr_dir = get_test_fisc_mstr_dir()
+    accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
     sue_str = "Sue"
     yao_str = "Yao"
     accord_fisc.init_owner_keeps(sue_str)
     accord_fisc.init_owner_keeps(yao_str)
-    sue_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, sue_str, None)
-    yao_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, yao_str, None)
+    sue_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, sue_str, None)
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, yao_str, None)
     sue_voice_bud = sue_hubunit.get_voice_bud()
     yao_voice_bud = yao_hubunit.get_voice_bud()
 
@@ -251,8 +255,12 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_hubunit.save_voice_bud(yao_voice_bud)
     sue_filename = get_json_filename(sue_str)
     yao_filename = get_json_filename(yao_str)
-    sue_dallas_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, sue_str, dallas_road)
-    yao_dallas_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, yao_str, dallas_road)
+    sue_dallas_hubunit = hubunit_shop(
+        x_fisc_mstr_dir, accord45_str, sue_str, dallas_road
+    )
+    yao_dallas_hubunit = hubunit_shop(
+        x_fisc_mstr_dir, accord45_str, yao_str, dallas_road
+    )
     sue_dutys_dir = sue_dallas_hubunit.dutys_dir()
     yao_dutys_dir = yao_dallas_hubunit.dutys_dir()
     sue_dallas_sue_duty_file_path = f"{sue_dutys_dir}/{sue_filename}"
@@ -301,7 +309,7 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
 
     # THEN
     sue_hubunit = hubunit_shop(
-        fiscs_dir=accord_fisc.fiscs_dir,
+        fisc_mstr_dir=accord_fisc.fisc_mstr_dir,
         fisc_title=accord_fisc.fisc_title,
         owner_name=sue_str,
         keep_road=None,
@@ -310,7 +318,7 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
         respect_bit=accord_fisc.respect_bit,
     )
     yao_hubunit = hubunit_shop(
-        fiscs_dir=accord_fisc.fiscs_dir,
+        fisc_mstr_dir=accord_fisc.fisc_mstr_dir,
         fisc_title=accord_fisc.fisc_title,
         owner_name=yao_str,
         keep_road=None,

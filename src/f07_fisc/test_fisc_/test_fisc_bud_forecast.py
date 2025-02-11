@@ -5,6 +5,7 @@ from src.f02_bud.bud import budunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import fiscunit_shop
 from src.f07_fisc.examples.fisc_env import (
+    get_test_fisc_mstr_dir,
     get_test_fiscs_dir,
     env_dir_setup_cleanup,
 )
@@ -14,10 +15,10 @@ from os.path import exists as os_path_exists
 def test_FiscUnit_generate_forecast_bud_Sets_forecast_BudFile(env_dir_setup_cleanup):
     # ESTABLISH
     accord45_str = "accord45"
-    x_fiscs_dir = get_test_fiscs_dir()
-    accord_fisc = fiscunit_shop(accord45_str, x_fiscs_dir, True)
+    x_fisc_mstr_dir = get_test_fisc_mstr_dir()
+    accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, True)
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, sue_str, None)
+    sue_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, sue_str, None)
 
     x_sue_owner_dir = create_path(accord_fisc._owners_dir, sue_str)
     x_forecast_dir = create_path(x_sue_owner_dir, "forecast")
@@ -44,7 +45,7 @@ def test_FiscUnit_generate_forecast_bud_ReturnsRegeneratedObj(env_dir_setup_clea
     sue_str = "Sue"
     accord_fisc.init_owner_keeps(sue_str)
     sue_hubunit = hubunit_shop(
-        accord_fisc.fiscs_dir, accord_fisc.fisc_title, sue_str, None
+        accord_fisc.fisc_mstr_dir, accord_fisc.fisc_title, sue_str, None
     )
     before_sue_bud = sue_hubunit.get_forecast_bud()
     bob_str = "Bob"
@@ -67,7 +68,7 @@ def test_FiscUnit_generate_forecast_bud_SetsCorrectFileWithout_healerlink(
     bob_str = "Bob"
     accord_fisc.init_owner_keeps(bob_str)
     bob_hubunit = hubunit_shop(
-        accord_fisc.fiscs_dir, accord_fisc.fisc_title, bob_str, None
+        accord_fisc.fisc_mstr_dir, accord_fisc.fisc_title, bob_str, None
     )
     before_bob_forecast_bud = accord_fisc.generate_forecast_bud(bob_str)
     sue_str = "Sue"
@@ -94,7 +95,7 @@ def test_FiscUnit_generate_forecast_bud_SetsFileWith_healerlink(
     bob_str = "Bob"
     accord_fisc.init_owner_keeps(bob_str)
     bob_hubunit = hubunit_shop(
-        accord_fisc.fiscs_dir, accord_fisc.fisc_title, bob_str, None
+        accord_fisc.fisc_mstr_dir, accord_fisc.fisc_title, bob_str, None
     )
     after_bob_forecast_bud = accord_fisc.generate_forecast_bud(bob_str)
     assert after_bob_forecast_bud.acct_exists(bob_str) is False
@@ -126,10 +127,10 @@ def test_FiscUnit_generate_all_forecast_buds_SetsCorrectFiles(
     bob_str = "Bob"
     sue_str = "Sue"
     accord_fisc.init_owner_keeps(bob_str)
-    fiscs_dir = accord_fisc.fiscs_dir
-    bob_hubunit = hubunit_shop(fiscs_dir, accord_fisc.fisc_title, bob_str, None)
+    fisc_mstr_dir = accord_fisc.fisc_mstr_dir
+    bob_hubunit = hubunit_shop(fisc_mstr_dir, accord_fisc.fisc_title, bob_str, None)
     accord_fisc.init_owner_keeps(sue_str)
-    sue_hubunit = hubunit_shop(fiscs_dir, accord_fisc.fisc_title, sue_str, None)
+    sue_hubunit = hubunit_shop(fisc_mstr_dir, accord_fisc.fisc_title, sue_str, None)
     bob_voice_bud = accord_fisc.generate_forecast_bud(bob_str)
     sue_voice_bud = accord_fisc.generate_forecast_bud(sue_str)
 

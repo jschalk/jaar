@@ -2,16 +2,16 @@ from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import FiscUnit, fiscunit_shop
-from src.f07_fisc.examples.fisc_env import get_test_fiscs_dir
+from src.f07_fisc.examples.fisc_env import get_test_fiscs_dir, get_test_fisc_mstr_dir
 
 
 # def create_example_fisc1(graphics_bool) -> FiscUnit:
 #     # ESTABLISH
 #     accord45_str = "accord45"
-#     accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir(), in_memory_journal=True)
+#     accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir(), in_memory_journal=True)
 #     yao_str = "Yao"
 #     accord_fisc.init_owner_keeps(yao_str)
-#     yao_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, yao_str, None)
+#     yao_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, yao_str, None)
 #     yao_voice_bud = yao_hubunit.get_voice_bud()
 
 #     yao_voice_bud.set_credor_respect(101)
@@ -35,7 +35,7 @@ from src.f07_fisc.examples.fisc_env import get_test_fiscs_dir
 #     yao_voice_bud.set_item(elpaso_item, texas_road)
 #     display_itemtree(yao_voice_bud.settle_bud(), mode="Keep", graphics_bool=graphics_bool)
 #     x_hubunit = hubunit_shop(
-#         fiscs_dir=yao_hubunit.fiscs_dir,
+#         fisc_mstr_dir=yao_hubunit.fisc_mstr_dir,
 #         fisc_title=yao_hubunit.fisc_title,
 #         owner_name=yao_hubunit.owner_name,
 #         keep_road=None,
@@ -55,16 +55,16 @@ def create_example_fisc2() -> FiscUnit:
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(
-        accord45_str, get_test_fiscs_dir(), in_memory_journal=True
+        accord45_str, get_test_fisc_mstr_dir(), in_memory_journal=True
     )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
     accord_fisc.init_owner_keeps(yao_str)
-    x_fiscs_dir = get_test_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, yao_str, None)
-    wei_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, wei_str, None)
-    zia_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, zia_str, None)
+    x_fisc_mstr_dir = get_test_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, yao_str, None)
+    wei_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, wei_str, None)
+    zia_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, zia_str, None)
     accord_fisc.init_owner_keeps(wei_str)
     accord_fisc.init_owner_keeps(zia_str)
     yao_voice_bud = yao_hubunit.get_voice_bud()
@@ -123,7 +123,7 @@ def create_example_fisc3() -> FiscUnit:
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(
-        accord45_str, get_test_fiscs_dir(), in_memory_journal=True
+        accord45_str, get_test_fisc_mstr_dir(), in_memory_journal=True
     )
     yao_str = "Yao"
     wei_str = "Wei"
@@ -131,10 +131,10 @@ def create_example_fisc3() -> FiscUnit:
     accord_fisc.init_owner_keeps(yao_str)
     accord_fisc.init_owner_keeps(wei_str)
     accord_fisc.init_owner_keeps(zia_str)
-    x_fiscs_dir = get_test_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, yao_str, None)
-    wei_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, wei_str, None)
-    zia_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, zia_str, None)
+    x_fisc_mstr_dir = get_test_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, yao_str, None)
+    wei_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, wei_str, None)
+    zia_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, zia_str, None)
     yao_voice_bud = yao_hubunit.get_voice_bud()
     wei_voice_bud = wei_hubunit.get_voice_bud()
     zia_voice_bud = zia_hubunit.get_voice_bud()
@@ -171,7 +171,7 @@ def create_example_fisc4() -> FiscUnit:
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(
-        accord45_str, get_test_fiscs_dir(), in_memory_journal=True
+        accord45_str, get_test_fisc_mstr_dir(), in_memory_journal=True
     )
     yao_str = "Yao"
     wei_str = "Wei"
@@ -179,10 +179,10 @@ def create_example_fisc4() -> FiscUnit:
     accord_fisc.init_owner_keeps(yao_str)
     accord_fisc.init_owner_keeps(wei_str)
     accord_fisc.init_owner_keeps(zia_str)
-    x_fiscs_dir = get_test_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, yao_str, None)
-    wei_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, wei_str, None)
-    zia_hubunit = hubunit_shop(x_fiscs_dir, accord45_str, zia_str, None)
+    x_fisc_mstr_dir = get_test_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, yao_str, None)
+    wei_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, wei_str, None)
+    zia_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, zia_str, None)
     yao_voice_bud = yao_hubunit.get_voice_bud()
     wei_voice_bud = wei_hubunit.get_voice_bud()
     zia_voice_bud = zia_hubunit.get_voice_bud()

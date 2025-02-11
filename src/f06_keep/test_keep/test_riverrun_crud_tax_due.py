@@ -2,10 +2,8 @@ from src.f02_bud.bud import budunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f06_keep.rivercycle import get_credorledger, get_debtorledger
 from src.f06_keep.riverrun import riverrun_shop
-from src.f06_keep.examples.example_credorledgers import (
-    example_yao_hubunit,
-    temp_fiscs_dir,
-)
+from src.f06_keep.examples.keep_env import temp_fisc_mstr_dir
+from src.f06_keep.examples.example_credorledgers import example_yao_hubunit
 
 
 def test_get_credorledger_ReturnsObj():
@@ -103,8 +101,8 @@ def test_get_debtorledger_ReturnsObjWithNoEmpty_debtit_belief():
 def test_RiverRun_set_acct_tax_due_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
-    x_fiscs_dir = temp_fiscs_dir()
-    bob_hubunit = hubunit_shop(x_fiscs_dir, None, bob_str)
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    bob_hubunit = hubunit_shop(x_fisc_mstr_dir, None, bob_str)
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
     assert bob_riverrun.tax_dues.get(yao_str) is None

@@ -1,4 +1,4 @@
-from src.f00_instrument.file import open_file, save_file, delete_dir
+from src.f00_instrument.file import open_file, save_file, delete_dir, create_path
 from src.f01_road.road import get_default_fisc_title as root_title
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.f05_listen.hubunit import hubunit_shop
@@ -120,12 +120,13 @@ def test_HubUnit_initialize_forecast_file_CorrectlyDoesNotOverwrite(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_fisc_dir = f"{env_dir()}/{root_title()}"
+    fisc_mstr_dir = env_dir()
+    sue_fisc_dir = f"{fisc_mstr_dir}/{root_title()}"
     sue_fund_pool = 50000
     sue_fund_coin = 5
     sue_bit = 25
     sue_hubunit = hubunit_shop(
-        env_dir(),
+        fisc_mstr_dir,
         root_title(),
         sue_str,
         None,
@@ -153,7 +154,8 @@ def test_HubUnit_initialize_forecast_file_CorrectlyDoesNotOverwrite(
     # THEN
     assert sue_hubunit.forecast_file_exists()
 
-    sue_fisc_dir = f"{env_dir()}/{root_title()}"
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    sue_fisc_dir = create_path(fiscs_dir, root_title())
     sue_owners_dir = f"{sue_fisc_dir}/owners"
     sue_owner_dir = f"{sue_owners_dir}/{sue_str}"
     sue_forecast_dir = f"{sue_owner_dir}/forecast"

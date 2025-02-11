@@ -111,7 +111,7 @@ def get_keep_grades_dir(x_keep_dir: str) -> str:
 @dataclass
 class HubUnit:
     owner_name: OwnerName = None
-    fiscs_dir: str = None
+    fisc_mstr_dir: str = None
     fisc_title: str = None
     keep_road: RoadUnit = None
     bridge: str = None
@@ -135,7 +135,8 @@ class HubUnit:
     _forecast_path: str = None
 
     def set_dir_attrs(self):
-        self._fisc_dir = f_path(self.fiscs_dir, self.fisc_title)
+        fiscs_dir = f_path(self.fisc_mstr_dir, "fiscs")
+        self._fisc_dir = f_path(fiscs_dir, self.fisc_title)
         self._owners_dir = f_path(self._fisc_dir, "owners")
         self._owner_dir = f_path(self._owners_dir, self.owner_name)
         self._keeps_dir = f_path(self._owner_dir, "keeps")
@@ -582,7 +583,7 @@ class HubUnit:
 
     def dw_speaker_bud(self, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
-            fiscs_dir=self.fiscs_dir,
+            fisc_mstr_dir=self.fisc_mstr_dir,
             fisc_title=self.fisc_title,
             owner_name=speaker_id,
             bridge=self.bridge,
@@ -602,7 +603,7 @@ class HubUnit:
 
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
-            fiscs_dir=self.fiscs_dir,
+            fisc_mstr_dir=self.fisc_mstr_dir,
             fisc_title=self.fisc_title,
             owner_name=healer_name,
             keep_road=self.keep_road,
@@ -664,7 +665,7 @@ class HubUnit:
 
 
 def hubunit_shop(
-    fiscs_dir: str,
+    fisc_mstr_dir: str,
     fisc_title: FiscTitle,
     owner_name: OwnerName = None,
     keep_road: RoadUnit = None,
@@ -676,7 +677,7 @@ def hubunit_shop(
     keep_point_magnitude: float = None,
 ) -> HubUnit:
     x_hubunit = HubUnit(
-        fiscs_dir=fiscs_dir,
+        fisc_mstr_dir=fisc_mstr_dir,
         fisc_title=fisc_title,
         owner_name=validate_titleunit(owner_name, bridge),
         keep_road=keep_road,

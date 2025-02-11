@@ -219,7 +219,7 @@ def get_on_land_road() -> RoadUnit:
 def get_yao_ohio_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        fiscs_dir=env_dir(),
+        fisc_mstr_dir=env_dir(),
         fisc_title=yao_bud.fisc_title,
         owner_name=yao_bud.owner_name,
         keep_road=get_ohio_road(),
@@ -230,7 +230,7 @@ def get_yao_ohio_hubunit() -> HubUnit:
 def get_yao_iowa_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        fiscs_dir=env_dir(),
+        fisc_mstr_dir=env_dir(),
         fisc_title=yao_bud.fisc_title,
         owner_name=yao_bud.owner_name,
         keep_road=get_iowa_road(),
@@ -241,7 +241,7 @@ def get_yao_iowa_hubunit() -> HubUnit:
 def get_zia_utah_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        fiscs_dir=env_dir(),
+        fisc_mstr_dir=env_dir(),
         fisc_title=yao_bud.fisc_title,
         owner_name="Zia",
         keep_road=get_utah_road(),

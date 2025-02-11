@@ -1059,6 +1059,6 @@ def etl_fisc_voice_to_fisc_forecast(fisc_mstr_dir: str):
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
         x_fiscunit = fiscunit_get_from_json(open_file(fisc_json_path))
-        x_fiscunit.fiscs_dir = fiscs_dir
+        x_fiscunit.fisc_mstr_dir = fisc_mstr_dir
         x_fiscunit._set_fisc_dirs()
         x_fiscunit.generate_all_forecast_buds()

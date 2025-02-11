@@ -1,5 +1,5 @@
-from src.f00_instrument.file import create_path
-from src.f09_idea.examples.idea_env import idea_env_setup_cleanup, idea_fiscs_dir
+from src.f00_instrument.file import create_path, set_dir
+from src.f09_idea.examples.idea_env import idea_env_setup_cleanup, idea_fisc_mstr_dir
 from src.f09_idea.idea_db_tool import (
     sheet_exists,
     upsert_sheet,
@@ -18,13 +18,14 @@ from numpy import nan as numpy_nan, float64
 
 def test_append_df_to_excel_CreatesSheet(idea_env_setup_cleanup):
     # ESTABLISH
-    test_file = create_path(idea_fiscs_dir(), "test.xlsx")
+    test_file = create_path(idea_fisc_mstr_dir(), "test.xlsx")
     append_data = {
         "Name": ["Alice", "Bob"],
         "Age": [25, 30],
         "City": ["New York", "Los Angeles"],
     }
     append_df = DataFrame(append_data)
+    set_dir(idea_fisc_mstr_dir())
     assert os_path_exists(test_file) is False
 
     # WHEN
@@ -45,7 +46,8 @@ def test_append_df_to_excel_CreatesSheet(idea_env_setup_cleanup):
 
 def test_append_df_to_excel_AppendsToSheet(idea_env_setup_cleanup):
     # ESTABLISH
-    test_file = create_path(idea_fiscs_dir(), "test.xlsx")
+    set_dir(idea_fisc_mstr_dir())
+    test_file = create_path(idea_fisc_mstr_dir(), "test.xlsx")
     initial_data = {
         "Name": ["John", "Doe"],
         "Age": [40, 50],
@@ -139,7 +141,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(
     idea_env_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = idea_fiscs_dir()
+    env_dir = idea_fisc_mstr_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_filename = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
@@ -164,7 +166,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     idea_env_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = idea_fiscs_dir()
+    env_dir = idea_fisc_mstr_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_filename = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
@@ -191,7 +193,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
 
 def test_sheet_exists_ReturnsObj_Scenario1(idea_env_setup_cleanup):
     # ESTABLISH
-    env_dir = idea_fiscs_dir()
+    env_dir = idea_fisc_mstr_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_filename = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
@@ -358,7 +360,7 @@ def test_if_nan_return_None_ReturnsObj(idea_env_setup_cleanup):
     ex1_df = DataFrame([["yao", None]], columns=["face_name", "example_col"])
     ex1_sheet_name = "ex1"
     ex1_filename = "ex1.xlsx"
-    ex1_path = create_path(idea_fiscs_dir(), ex1_filename)
+    ex1_path = create_path(idea_fisc_mstr_dir(), ex1_filename)
     upsert_sheet(ex1_path, ex1_sheet_name, ex1_df)
     gen_df = pandas_read_excel(ex1_path, sheet_name=ex1_sheet_name)
     nan_example = gen_df["example_col"][0]

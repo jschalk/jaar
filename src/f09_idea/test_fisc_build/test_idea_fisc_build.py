@@ -58,7 +58,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     accord23_fiscunit = fiscunit_shop(
         present_time=5500,
         fisc_title=accord23_str,
-        fiscs_dir=x_fiscs_dir,
+        fisc_mstr_dir=x_fiscs_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
         respect_bit=x_respect_bit,
@@ -82,7 +82,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     assert gen_fiscunit.respect_bit == x_respect_bit
     assert gen_fiscunit.penny == x_penny
     assert gen_fiscunit.fisc_title == accord23_str
-    assert gen_fiscunit.fiscs_dir == x_fiscs_dir
+    assert gen_fiscunit.fisc_mstr_dir == x_fiscs_dir
     assert gen_fiscunit.timeline == accord23_fiscunit.timeline
     assert gen_fiscunit.deallogs == accord23_fiscunit.deallogs
     assert gen_fiscunit.cashbook.tranunits == accord23_fiscunit.cashbook.tranunits
@@ -129,7 +129,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     accord23_fiscunit = fiscunit_shop(
         present_time=5500,
         fisc_title=accord23_str,
-        fiscs_dir=x_fiscs_dir,
+        fisc_mstr_dir=x_fiscs_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
         respect_bit=x_respect_bit,
@@ -140,7 +140,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     jeffy45_fiscunit = fiscunit_shop(
         present_time=444,
         fisc_title="jeffy45",
-        fiscs_dir=x_fiscs_dir,
+        fisc_mstr_dir=x_fiscs_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
         respect_bit=x_respect_bit,
@@ -154,7 +154,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     assert creg_fiscunit.respect_bit == x_respect_bit
     assert creg_fiscunit.penny == x_penny
     assert creg_fiscunit.fisc_title == accord23_str
-    assert creg_fiscunit.fiscs_dir == x_fiscs_dir
+    assert creg_fiscunit.fisc_mstr_dir == x_fiscs_dir
     assert creg_fiscunit.timeline == accord23_fiscunit.timeline
     assert len(creg_fiscunit.deallogs) == 3
     assert len(creg_fiscunit.cashbook.tranunits) == 4
@@ -165,7 +165,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     assert five_fiscunit.respect_bit == x_respect_bit
     assert five_fiscunit.penny == x_penny
     assert five_fiscunit.fisc_title == "jeffy45"
-    assert five_fiscunit.fiscs_dir == x_fiscs_dir
+    assert five_fiscunit.fisc_mstr_dir == x_fiscs_dir
     assert len(five_fiscunit.deallogs) == 2
     assert len(five_fiscunit.cashbook.tranunits) == 1
     jeffy45_timeline = jeffy45_fiscunit.timeline

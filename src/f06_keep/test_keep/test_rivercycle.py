@@ -13,7 +13,7 @@ from src.f06_keep.rivercycle import (
     create_init_rivercycle,
     create_next_rivercycle,
 )
-from src.f06_keep.examples.keep_env import temp_fiscs_dir
+from src.f06_keep.examples.keep_env import temp_fisc_mstr_dir
 
 
 def test_RiverCylce_Exists():
@@ -30,8 +30,8 @@ def test_RiverCylce_Exists():
 def test_rivercycle_shop_ReturnsObj():
     # ESTABLISH
     one_int = 1
-    x_fiscs_dir = temp_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, None, "Yao")
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, "Yao")
 
     # WHEN
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int)
@@ -46,8 +46,8 @@ def test_rivercycle_shop_ReturnsObj():
 def test_RiverCylce_set_complete_riverbook_CorrectlySetsAttr():
     # ESTABLISH
     one_int = 1
-    x_fiscs_dir = temp_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, None, "Yao")
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, "Yao")
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int)
     bob_book_point_amount = 555
     bob_str = "Bob"
@@ -65,8 +65,8 @@ def test_RiverCylce_set_riverbook_CorrectlySetsAttr():
     # ESTABLISH
     one_int = 1
     yao_str = "Yao"
-    x_fiscs_dir = temp_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, None, yao_str)
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, yao_str)
     bob_str = "Bob"
     keep_credorledger = {bob_str: {yao_str: 75, bob_str: 25}}
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int, keep_credorledger)
@@ -87,8 +87,8 @@ def test_RiverCylce_set_riverbook_CorrectlySetsAttr():
 def test_RiverCylce_create_cylceledger_ReturnsObjOneRiverBook():
     # ESTABLISH
     yao_str = "Yao"
-    x_fiscs_dir = temp_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, None, yao_str)
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, yao_str)
     one_int = 1
     yao_credorledger = {yao_str: {yao_str: 334.0}}
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int, yao_credorledger)
@@ -106,8 +106,8 @@ def test_RiverCylce_create_cylceledger_ReturnsObjTwoRiverBooks():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
-    x_fiscs_dir = temp_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, None, yao_str)
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, yao_str)
     one_int = 1
     keep_credorledgers = {
         yao_str: {yao_str: 75, bob_str: 25},
@@ -131,8 +131,8 @@ def test_RiverCylce_create_cylceledger_ReturnsObjTwoRiverBooks():
 def test_create_init_rivercycle_ReturnsObjScenarioOne_acctunit():
     # ESTABLISH
     yao_str = "Yao"
-    x_fiscs_dir = temp_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, None, yao_str)
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, yao_str)
     yao_bud = budunit_shop(yao_str)
     yao_bud.add_acctunit(yao_str)
     yao_credorledger = get_credorledger(yao_bud)
@@ -155,8 +155,8 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_acctunit():
     yao_credit_belief = 7
     bob_credit_belief = 3
     zia_credit_belief = 10
-    x_fiscs_dir = temp_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, None, yao_str)
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, yao_str)
     yao_bud = budunit_shop(yao_str)
     yao_bud.add_acctunit(yao_str, yao_credit_belief)
     yao_bud.add_acctunit(bob_str, bob_credit_belief)
@@ -184,8 +184,8 @@ def test_create_next_rivercycle_ReturnsObjScenarioThree_acctunit():
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    x_fiscs_dir = temp_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, None, yao_str)
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, yao_str)
     yao_credorledger = example_yao_credorledger()
     bob_credorledger = example_bob_credorledger()
     zia_credorledger = example_zia_credorledger()
@@ -232,8 +232,8 @@ def test_create_next_rivercycle_ReturnsObjDoesNotReference_cycleledger_From_prev
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    x_fiscs_dir = temp_fiscs_dir()
-    yao_hubunit = hubunit_shop(x_fiscs_dir, None, yao_str)
+    x_fisc_mstr_dir = temp_fisc_mstr_dir()
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, yao_str)
     yao_credorledger = example_yao_credorledger()
     bob_credorledger = example_bob_credorledger()
     zia_credorledger = example_zia_credorledger()

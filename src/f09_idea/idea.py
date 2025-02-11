@@ -175,11 +175,11 @@ def make_buddelta(x_csv: str) -> BudDelta:
 
 def _load_individual_idea_csv(
     complete_csv: str,
-    fiscs_dir: str,
+    fisc_mstr_dir: str,
     x_fisc_title: FiscTitle,
     x_owner_name: OwnerName,
 ):
-    x_hubunit = hubunit_shop(fiscs_dir, x_fisc_title, x_owner_name)
+    x_hubunit = hubunit_shop(fisc_mstr_dir, x_fisc_title, x_owner_name)
     x_hubunit.initialize_gift_voice_files()
     x_voice = x_hubunit.get_voice_bud()
     x_buddelta = make_buddelta(complete_csv)
@@ -190,7 +190,7 @@ def _load_individual_idea_csv(
     x_hubunit._create_voice_from_gifts()
 
 
-def load_idea_csv(fiscs_dir: str, x_file_dir: str, x_filename: str):
+def load_idea_csv(fisc_mstr_dir: str, x_file_dir: str, x_filename: str):
     x_csv = open_file(x_file_dir, x_filename)
     headers_list, headerless_csv = extract_csv_headers(x_csv)
     nested_csv = fisc_title_owner_name_nested_csv_dict(headerless_csv, delimiter=",")
@@ -198,7 +198,7 @@ def load_idea_csv(fiscs_dir: str, x_file_dir: str, x_filename: str):
         for x_owner_name, owner_csv in fisc_dict.items():
             complete_csv = add_headers_to_csv(headers_list, owner_csv)
             _load_individual_idea_csv(
-                complete_csv, fiscs_dir, x_fisc_title, x_owner_name
+                complete_csv, fisc_mstr_dir, x_fisc_title, x_owner_name
             )
 
 
@@ -245,7 +245,7 @@ def fisc_build_from_df(
         x_timeline = timelineunit_shop(x_timeline_config)
         x_fiscunit = fiscunit_shop(
             fisc_title=x_fisc_title,
-            fiscs_dir=x_fiscs_dir,
+            fisc_mstr_dir=x_fiscs_dir,
             timeline=x_timeline,
             present_time=row["present_time"],
             # in_memory_journal=row["in_memory_journal"],

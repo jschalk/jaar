@@ -252,7 +252,7 @@ def create_fiscunit_jsons_from_prime_files(fisc_mstr_dir: str):
         fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
         fiscunit = fiscunit_shop(
             fisc_title=x_fisc_title,
-            fiscs_dir=fiscs_dir,
+            fisc_mstr_dir=fisc_mstr_dir,
             timeline=fisc_timelineunit,
             present_time=if_nan_return_None(fisc_attrs.get("present_time")),
             bridge=fisc_attrs.get("bridge"),

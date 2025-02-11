@@ -14,6 +14,7 @@ from src.f01_road.finance import (
 from src.f01_road.jaar_config import (
     get_gifts_folder,
     get_test_fiscs_dir,
+    get_test_fisc_mstr_dir,
     get_rootpart_of_keep_dir,
     get_fisc_title_if_None,
 )
@@ -33,52 +34,12 @@ from pytest import raises as pytest_raises
 from os.path import exists as os_path_exists
 
 
-def test_get_keep_path_ReturnsObj():
-    # ESTABLISH
-    sue_str = "Sue"
-    peru_str = "peru"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title=peru_str, owner_name=sue_str)
-    texas_str = "texas"
-    dallas_str = "dallas"
-    elpaso_str = "el paso"
-    kern_str = "kern"
-    itemroot = get_rootpart_of_keep_dir()
-    texas_road = create_road_from_titles([itemroot, texas_str])
-    dallas_road = create_road_from_titles([itemroot, texas_str, dallas_str])
-    elpaso_road = create_road_from_titles([itemroot, texas_str, elpaso_str])
-    kern_road = create_road_from_titles([itemroot, texas_str, elpaso_str, kern_str])
-
-    # WHEN
-    texas_path = get_keep_path(sue_hubunit, texas_road)
-    dallas_path = get_keep_path(sue_hubunit, dallas_road)
-    elpaso_path = get_keep_path(sue_hubunit, elpaso_road)
-    kern_path = get_keep_path(sue_hubunit, kern_road)
-
-    # THEN
-    # itemroot_dir = f"{sue_hubunit._keeps_dir}/{get_rootpart_of_keep_dir()}"
-    itemroot_dir = create_path(sue_hubunit._keeps_dir, get_rootpart_of_keep_dir())
-    print(f"{kern_road=}")
-    print(f"{itemroot_dir=}")
-    assert texas_path == create_path(itemroot_dir, texas_str)
-    assert dallas_path == create_path(texas_path, dallas_str)
-    assert elpaso_path == create_path(texas_path, elpaso_str)
-    assert kern_path == create_path(elpaso_path, kern_str)
-
-    # WHEN / THEN
-    diff_root_texas_road = create_road_from_titles([peru_str, texas_str])
-    diff_root_dallas_road = create_road_from_titles([peru_str, texas_str, dallas_str])
-    diff_root_elpaso_road = create_road_from_titles([peru_str, texas_str, elpaso_str])
-    assert texas_path == get_keep_path(sue_hubunit, diff_root_texas_road)
-    assert dallas_path == get_keep_path(sue_hubunit, diff_root_dallas_road)
-    assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_road)
-
-
 def test_HubUnit_Exists():
     # ESTABLISH / WHEN
     x_hubunit = HubUnit()
 
     # THEN
-    assert not x_hubunit.fiscs_dir
+    assert not x_hubunit.fisc_mstr_dir
     assert not x_hubunit.fisc_title
     assert not x_hubunit.owner_name
     assert not x_hubunit.keep_road
@@ -119,7 +80,7 @@ def test_HubUnit_RaisesError_keep_road_DoesNotExist():
 
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
-    x_fiscs_dir = "src/f07_fisc/examples"
+    x_fisc_mstr_dir = "src/f07_fisc/examples"
     x_fisc_title = "accord45"
     sue_str = "Sue"
     x_bridge = "/"
@@ -131,7 +92,7 @@ def test_hubunit_shop_ReturnsObj():
 
     # WHEN
     x_hubunit = hubunit_shop(
-        fiscs_dir=x_fiscs_dir,
+        fisc_mstr_dir=x_fisc_mstr_dir,
         fisc_title=x_fisc_title,
         owner_name=sue_str,
         keep_road=None,
@@ -144,7 +105,8 @@ def test_hubunit_shop_ReturnsObj():
     )
 
     # THEN
-    assert x_hubunit.fiscs_dir == x_fiscs_dir
+    assert x_hubunit.fisc_mstr_dir == x_fisc_mstr_dir
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     assert x_hubunit.fisc_title == x_fisc_title
     assert x_hubunit.owner_name == sue_str
     assert x_hubunit.bridge == x_bridge
@@ -173,9 +135,7 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit._voice_filename == f"{sue_str}.json"
     x_voice_path = create_path(x_hubunit._voice_dir, x_hubunit._voice_filename)
     assert x_hubunit._voice_path == x_voice_path
-    func_voice_path = create_voice_path(
-        x_hubunit.fiscs_dir, x_hubunit.fisc_title, sue_str
-    )
+    func_voice_path = create_voice_path(x_fiscs_dir, x_hubunit.fisc_title, sue_str)
     assert x_hubunit._voice_path == func_voice_path
     print(f"{x_hubunit._voice_path=}")
 
@@ -184,7 +144,7 @@ def test_hubunit_shop_ReturnsObj():
     x_forecastpath = create_path(x_hubunit._forecast_dir, x_hubunit._forecast_filename)
     assert x_hubunit._forecast_path == x_forecastpath
     func_forecast_path = create_forecast_path(
-        x_hubunit.fiscs_dir, x_hubunit.fisc_title, sue_str
+        x_fiscs_dir, x_hubunit.fisc_title, sue_str
     )
     assert x_hubunit._forecast_path == func_forecast_path
 
@@ -198,20 +158,21 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     usa_road = create_road(nation_road, usa_str)
     texas_str = "Texas"
     texas_road = create_road(usa_road, texas_str)
-    fiscs_dir = get_test_fiscs_dir()
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
     accord23_str = "accord23"
 
     # WHEN
-    sue_hubunit = hubunit_shop(fiscs_dir, accord23_str, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str, texas_road)
 
     # THEN
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     x_fisc_path = create_path(fiscs_dir, accord23_str)
     x_owners_path = create_path(sue_hubunit._fisc_dir, "owners")
     x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
     x_jobs_path = create_path(sue_hubunit.keep_dir(), "jobs")
     x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
 
-    assert sue_hubunit.fiscs_dir == fiscs_dir
+    assert sue_hubunit.fisc_mstr_dir == fisc_mstr_dir
     assert sue_hubunit.fisc_title == accord23_str
     assert sue_hubunit._fisc_dir == x_fisc_path
     assert sue_hubunit.owner_name == sue_str
@@ -221,7 +182,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.respect_bit == default_respect_bit_if_None()
     assert sue_hubunit.penny == default_penny_if_None()
     assert sue_hubunit._owners_dir == x_owners_path
-    x_hubunit = hubunit_shop(fiscs_dir, accord23_str, sue_str)
+    x_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str)
     assert sue_hubunit.keep_road == texas_road
     assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_road)
     bob_str = "Bob"
@@ -255,6 +216,46 @@ def test_hubunit_shop_RaisesErrorIf_owner_name_Contains_bridge():
         str(excinfo.value)
         == f"'{bob_str}' needs to be a TitleUnit. Cannot contain bridge: '{slash_str}'"
     )
+
+
+def test_get_keep_path_ReturnsObj():
+    # ESTABLISH
+    sue_str = "Sue"
+    peru_str = "peru"
+    sue_hubunit = hubunit_shop(env_dir(), fisc_title=peru_str, owner_name=sue_str)
+    texas_str = "texas"
+    dallas_str = "dallas"
+    elpaso_str = "el paso"
+    kern_str = "kern"
+    itemroot = get_rootpart_of_keep_dir()
+    texas_road = create_road_from_titles([itemroot, texas_str])
+    dallas_road = create_road_from_titles([itemroot, texas_str, dallas_str])
+    elpaso_road = create_road_from_titles([itemroot, texas_str, elpaso_str])
+    kern_road = create_road_from_titles([itemroot, texas_str, elpaso_str, kern_str])
+
+    # WHEN
+    texas_path = get_keep_path(sue_hubunit, texas_road)
+    dallas_path = get_keep_path(sue_hubunit, dallas_road)
+    elpaso_path = get_keep_path(sue_hubunit, elpaso_road)
+    kern_path = get_keep_path(sue_hubunit, kern_road)
+
+    # THEN
+    # itemroot_dir = f"{sue_hubunit._keeps_dir}/{get_rootpart_of_keep_dir()}"
+    itemroot_dir = create_path(sue_hubunit._keeps_dir, get_rootpart_of_keep_dir())
+    print(f"{kern_road=}")
+    print(f"{itemroot_dir=}")
+    assert texas_path == create_path(itemroot_dir, texas_str)
+    assert dallas_path == create_path(texas_path, dallas_str)
+    assert elpaso_path == create_path(texas_path, elpaso_str)
+    assert kern_path == create_path(elpaso_path, kern_str)
+
+    # WHEN / THEN
+    diff_root_texas_road = create_road_from_titles([peru_str, texas_str])
+    diff_root_dallas_road = create_road_from_titles([peru_str, texas_str, dallas_str])
+    diff_root_elpaso_road = create_road_from_titles([peru_str, texas_str, elpaso_str])
+    assert texas_path == get_keep_path(sue_hubunit, diff_root_texas_road)
+    assert dallas_path == get_keep_path(sue_hubunit, diff_root_dallas_road)
+    assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_road)
 
 
 def test_HubUnit_save_file_voice_CorrectlySavesFile(env_dir_setup_cleanup):

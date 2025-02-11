@@ -7,7 +7,7 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.jaar_config import (
     get_gifts_folder,
     get_fisc_title_if_None,
-    get_test_fiscs_dir,
+    get_test_fisc_mstr_dir,
 )
 from src.f01_road.finance import (
     default_respect_bit_if_None,
@@ -76,7 +76,7 @@ class FiscUnit:
     """
 
     fisc_title: FiscTitle = None
-    fiscs_dir: str = None
+    fisc_mstr_dir: str = None
     timeline: TimeLineUnit = None
     present_time: int = None
     deallogs: dict[OwnerName, DealLog] = None
@@ -93,7 +93,8 @@ class FiscUnit:
 
     # directory setup
     def _set_fisc_dirs(self, in_memory_journal: bool = None):
-        self._fisc_dir = create_path(self.fiscs_dir, self.fisc_title)
+        fiscs_dir = create_path(self.fisc_mstr_dir, "fiscs")
+        self._fisc_dir = create_path(fiscs_dir, self.fisc_title)
         self._owners_dir = create_path(self._fisc_dir, "owners")
         self._gifts_dir = create_path(self._fisc_dir, get_gifts_folder())
         set_dir(x_path=self._fisc_dir)
@@ -113,7 +114,7 @@ class FiscUnit:
     def get_owner_hubunits(self) -> dict[OwnerName:HubUnit]:
         return {
             x_owner_name: hubunit_shop(
-                fiscs_dir=self.fiscs_dir,
+                fisc_mstr_dir=self.fisc_mstr_dir,
                 fisc_title=self.fisc_title,
                 owner_name=x_owner_name,
                 keep_road=None,
@@ -125,7 +126,8 @@ class FiscUnit:
 
     # database
     def get_journal_db_path(self) -> str:
-        fisc_dir = create_path(self.fiscs_dir, f"{self.fisc_title}")
+        fiscs_dir = create_path(self.fisc_mstr_dir, "fiscs")
+        fisc_dir = create_path(fiscs_dir, self.fisc_title)
         return create_path(fisc_dir, "journal.db")
 
     def _create_journal_db(
@@ -163,7 +165,7 @@ class FiscUnit:
         return hubunit_shop(
             owner_name=owner_name,
             fisc_title=self.fisc_title,
-            fiscs_dir=self.fiscs_dir,
+            fisc_mstr_dir=self.fisc_mstr_dir,
             keep_road=None,
             bridge=self.bridge,
             respect_bit=self.respect_bit,
@@ -182,7 +184,7 @@ class FiscUnit:
         x_voice.settle_bud()
         for healer_name, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
-                self.fiscs_dir,
+                self.fisc_mstr_dir,
                 self.fisc_title,
                 healer_name,
                 keep_road=None,
@@ -211,7 +213,7 @@ class FiscUnit:
         x_forecast = get_default_forecast_bud(x_voice)
         for healer_name, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
-                fiscs_dir=self.fiscs_dir,
+                fisc_mstr_dir=self.fisc_mstr_dir,
                 fisc_title=self.fisc_title,
                 owner_name=healer_name,
                 keep_road=None,
@@ -222,7 +224,7 @@ class FiscUnit:
             healer_hubunit.create_voice_treasury_db_files()
             for keep_road in healer_dict.keys():
                 keep_hubunit = hubunit_shop(
-                    fiscs_dir=self.fiscs_dir,
+                    fisc_mstr_dir=self.fisc_mstr_dir,
                     fisc_title=self.fisc_title,
                     owner_name=healer_name,
                     keep_road=keep_road,
@@ -376,7 +378,7 @@ class FiscUnit:
 
 def fiscunit_shop(
     fisc_title: FiscTitle = None,
-    fiscs_dir: str = None,
+    fisc_mstr_dir: str = None,
     timeline: TimeLineUnit = None,
     present_time: int = None,
     in_memory_journal: bool = None,
@@ -388,11 +390,11 @@ def fiscunit_shop(
     if timeline is None:
         timeline = timelineunit_shop()
     fisc_title = get_fisc_title_if_None(fisc_title)
-    if fiscs_dir is None:
-        fiscs_dir = get_test_fiscs_dir()
+    if fisc_mstr_dir is None:
+        fisc_mstr_dir = get_test_fisc_mstr_dir()
     fisc_x = FiscUnit(
         fisc_title=fisc_title,
-        fiscs_dir=fiscs_dir,
+        fisc_mstr_dir=fisc_mstr_dir,
         timeline=timeline,
         present_time=get_0_if_None(present_time),
         deallogs={},

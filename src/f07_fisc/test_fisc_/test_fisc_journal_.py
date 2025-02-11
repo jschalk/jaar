@@ -10,6 +10,7 @@ from src.f01_road.jaar_config import get_fisc_title_if_None
 from src.f07_fisc.fisc import FiscUnit, fiscunit_shop
 from src.f07_fisc.examples.fisc_env import (
     get_test_fiscs_dir,
+    get_test_fisc_mstr_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -19,7 +20,9 @@ from pytest import raises as pytest_raises
 def test_FiscUnit_get_journal_db_path_ReturnsObj():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = FiscUnit(fisc_title=accord45_str, fiscs_dir=get_test_fiscs_dir())
+    accord_fisc = FiscUnit(
+        fisc_title=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
+    )
 
     # WHEN
     x_journal_db_path = accord_fisc.get_journal_db_path()
@@ -35,7 +38,9 @@ def test_FiscUnit_create_journal_db_CreatesDBIfDoesNotExist(
 ):
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(fisc_title=accord45_str, fiscs_dir=get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(
+        fisc_title=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
+    )
     assert os_path_exists(accord_fisc.get_journal_db_path())
     delete_dir(accord_fisc.get_journal_db_path())
     assert os_path_exists(accord_fisc.get_journal_db_path()) is False
@@ -52,7 +57,9 @@ def test_FiscUnit_create_journal_db_DoesNotOverWriteDBIfExists(
 ):
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(fisc_title=accord45_str, fiscs_dir=get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(
+        fisc_title=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
+    )
     delete_dir(dir=accord_fisc.get_journal_db_path())  # clear out any treasury.db file
     accord_fisc._create_journal_db()
     assert os_path_exists(accord_fisc.get_journal_db_path())
@@ -80,7 +87,7 @@ def test_FiscUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(
         fisc_title=accord45_str,
-        fiscs_dir=get_test_fiscs_dir(),
+        fisc_mstr_dir=get_test_fisc_mstr_dir(),
         in_memory_journal=True,
     )
 

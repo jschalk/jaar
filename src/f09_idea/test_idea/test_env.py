@@ -19,4 +19,5 @@ def test_idea_examples_dir_ReturnsObj():
 
 def test_idea_fiscs_dir_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert idea_fiscs_dir() == create_path(src_idea_examples_dir(), "fiscs")
+    fisc_mstr_dir = create_path(idea_examples_dir(), "fisc_mstr")
+    assert idea_fiscs_dir() == create_path(fisc_mstr_dir, "fiscs")

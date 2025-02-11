@@ -20,11 +20,7 @@ from src.f09_idea.idea_config import (
     idea_format_00013_itemunit_v0_0_0,
 )
 from src.f09_idea.idea_db_tool import open_csv
-from src.f09_idea.examples.idea_env import (
-    idea_examples_dir,
-    idea_fiscs_dir,
-    idea_env_setup_cleanup,
-)
+from src.f09_idea.examples.idea_env import idea_examples_dir, idea_env_setup_cleanup
 
 
 def test_open_csv_ReturnsObjWhenFileExists(idea_env_setup_cleanup):
@@ -110,12 +106,14 @@ def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvToForecast(
     csv_example_path = f_path(idea_examples_dir(), name_filename)
     print(f"{csv_example_path}")
     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
-    sue_hubunit = hubunit_shop(idea_fiscs_dir(), accord_fisc_title, owner_name=sue_str)
+    sue_hubunit = hubunit_shop(
+        idea_examples_dir(), accord_fisc_title, owner_name=sue_str
+    )
     # Open FiscUnit and confirm voice BudUnit does not exist
     assert not sue_hubunit.voice_file_exists()
 
     # WHEN
-    load_idea_csv(sue_hubunit.fiscs_dir, idea_examples_dir(), name_filename)
+    load_idea_csv(sue_hubunit.fisc_mstr_dir, idea_examples_dir(), name_filename)
 
     # THEN
     # assert voice Budunit now exists
@@ -161,12 +159,14 @@ def test_load_idea_csv_csvToForecast(
     csv_example_path = f_path(idea_examples_dir(), name_filename)
     print(f"{csv_example_path}")
     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
-    sue_hubunit = hubunit_shop(idea_fiscs_dir(), accord_fisc_title, owner_name=sue_str)
+    sue_hubunit = hubunit_shop(
+        idea_examples_dir(), accord_fisc_title, owner_name=sue_str
+    )
     # Open FiscUnit and confirm voice BudUnit does not exist
     assert not sue_hubunit.voice_file_exists()
 
     # WHEN
-    load_idea_csv(sue_hubunit.fiscs_dir, idea_examples_dir(), name_filename)
+    load_idea_csv(sue_hubunit.fisc_mstr_dir, idea_examples_dir(), name_filename)
 
     # THEN
     # assert voice Budunit now exists
@@ -204,7 +204,7 @@ def test_load_idea_csv_csvToForecast(
 #     csv_example_path = f_path(idea_examples_dir(), name_filename)
 #     print(f"{csv_example_path}")
 #     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
-#     sue_hubunit = hubunit_shop(idea_fiscs_dir(), accord_fisc_title, owner_name=sue_str)
+#     sue_hubunit = hubunit_shop(idea_examples_dir(), accord_fisc_title, owner_name=sue_str)
 #     sue_hubunit.save_voice_bud(budunit_shop(sue_str, accord_fisc_title))
 #     sue_hubunit._create_initial_gift_files_from_voice()
 #     old_sue_voice = sue_hubunit.get_voice_bud()
@@ -219,7 +219,7 @@ def test_load_idea_csv_csvToForecast(
 #     assert sue_hubunit.get_max_gift_file_number() == 3
 
 #     # WHEN
-#     load_idea_csv(sue_hubunit.fiscs_dir, idea_examples_dir(), name_filename)
+#     load_idea_csv(sue_hubunit.fisc_mstr_dir, idea_examples_dir(), name_filename)
 
 #     # THEN
 #     # assert voice Budunit acctunit now exists

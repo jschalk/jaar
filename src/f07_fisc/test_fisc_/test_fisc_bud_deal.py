@@ -1,13 +1,13 @@
 from src.f01_road.deal import deallog_shop
 from src.f07_fisc.fisc import fiscunit_shop
-from src.f07_fisc.examples.fisc_env import get_test_fiscs_dir
+from src.f07_fisc.examples.fisc_env import get_test_fisc_mstr_dir
 from pytest import raises as pytest_raises
 
 
 def test_FiscUnit_set_deallog_SetsAttr():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     assert accord_fisc.deallogs == {}
 
     # WHEN
@@ -23,7 +23,7 @@ def test_FiscUnit_set_deallog_SetsAttr():
 def test_FiscUnit_deallog_exists_ReturnsObj():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     sue_str = "Sue"
     assert accord_fisc.deallog_exists(sue_str) is False
 
@@ -38,7 +38,7 @@ def test_FiscUnit_deallog_exists_ReturnsObj():
 def test_FiscUnit_get_deallog_ReturnsObj():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     sue_str = "Sue"
     sue_deallog = deallog_shop(sue_str)
     accord_fisc.set_deallog(sue_deallog)
@@ -55,7 +55,7 @@ def test_FiscUnit_get_deallog_ReturnsObj():
 def test_FiscUnit_del_deallog_SetsAttr():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     sue_str = "Sue"
     sue_deallog = deallog_shop(sue_str)
     accord_fisc.set_deallog(sue_deallog)
@@ -71,7 +71,7 @@ def test_FiscUnit_del_deallog_SetsAttr():
 def test_FiscUnit_add_dealepisode_SetsAttr():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     assert accord_fisc.deallogs == {}
 
     # WHEN
@@ -101,7 +101,7 @@ def test_FiscUnit_add_dealepisode_SetsAttr():
 def test_FiscUnit_get_deallogs_time_ints_ReturnsObj():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     bob_str = "Bob"
     bob_x0_time_int = 702
     bob_x0_magnitude = 33
@@ -125,7 +125,7 @@ def test_FiscUnit_get_deallogs_time_ints_ReturnsObj():
 def test_FiscUnit_add_dealepisode_RaisesErrorWhen_time_int_IsLessThan_present_time():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     accord_present_time = 606
     accord_fisc.present_time = accord_present_time
     bob_str = "Bob"
@@ -150,7 +150,7 @@ def test_FiscUnit_add_dealepisode_RaisesErrorWhen_time_int_IsLessThan_present_ti
 def test_FiscUnit_add_dealepisode_DoesNotRaiseError_allow_prev_to_present_time_entry_IsTrue():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     accord_present_time = 606
     accord_fisc.present_time = accord_present_time
     bob_str = "Bob"

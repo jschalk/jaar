@@ -24,7 +24,7 @@ from src.f07_fisc.fisc_config import (
     cashbook_str,
 )
 from src.f07_fisc.examples.fisc_env import (
-    get_test_fiscs_dir,
+    get_test_fisc_mstr_dir,
     env_dir_setup_cleanup,
 )
 
@@ -32,7 +32,7 @@ from src.f07_fisc.examples.fisc_env import (
 def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     accord_present_time_int = 23
     bob_str = "Bob"
     bob_x0_time_int = 702
@@ -86,7 +86,7 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
 def test_FiscUnit_get_dict_ReturnsObjWithOut_cashbook():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
 
     # WHEN
     x_dict = accord_fisc.get_dict(include_cashbook=False)
@@ -108,7 +108,7 @@ def test_FiscUnit_get_dict_ReturnsObjWithOut_cashbook():
 def test_FiscUnit_get_json_ReturnsObj():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fiscs_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     bob_str = "Bob"
     bob_x0_time_int = 702
     bob_x0_magnitude = 33
@@ -180,7 +180,7 @@ def test_get_from_dict_ReturnsFiscUnit():
     assert x_fisc.penny == sue_penny
     assert x_fisc.deallogs == accord_fisc.deallogs
     assert x_fisc.cashbook == accord_fisc.cashbook
-    assert x_fisc.fiscs_dir == accord_fisc.fiscs_dir
+    assert x_fisc.fisc_mstr_dir == accord_fisc.fisc_mstr_dir
     assert x_fisc == accord_fisc
 
 
@@ -225,5 +225,5 @@ def test_get_from_json_ReturnsFiscUnit():
     assert x_fisc.respect_bit == sue_respect_bit
     assert x_fisc.penny == sue_penny
     assert x_fisc.deallogs == accord_fisc.deallogs
-    assert x_fisc.fiscs_dir == accord_fisc.fiscs_dir
+    assert x_fisc.fisc_mstr_dir == accord_fisc.fisc_mstr_dir
     assert x_fisc == accord_fisc

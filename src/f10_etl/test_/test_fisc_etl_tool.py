@@ -389,11 +389,11 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParame
     # THEN
     assert os_path_exists(accord56_json_path)
     accord56_fiscunit = fisc_get_from_json(open_file(accord56_json_path))
-    accord56_fiscunit.fiscs_dir = fisc_mstr_dir
+    accord56_fiscunit.fisc_mstr_dir = fisc_mstr_dir
     accord56_fiscunit._set_fisc_dirs()
     assert accord56_fiscunit
     assert accord56_fiscunit.fisc_title == accord56_str
-    assert accord56_fiscunit.fiscs_dir == fisc_mstr_dir
+    assert accord56_fiscunit.fisc_mstr_dir == fisc_mstr_dir
     expected_fiscunit = fiscunit_shop(accord56_str, fisc_mstr_dir)
     assert accord56_fiscunit.timeline == expected_fiscunit.timeline
     assert accord56_fiscunit == expected_fiscunit

@@ -11,7 +11,7 @@ from src.f10_etl.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
 from os.path import exists as os_path_exists
 
 
-def test_etl_event_inherited_budunits_to_fisc_voice_SetsFiles_Scenario0(
+def test_etl_fisc_voice_to_fisc_forecast_SetsFiles_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -34,7 +34,7 @@ def test_etl_event_inherited_budunits_to_fisc_voice_SetsFiles_Scenario0(
     save_file(a23_bob_voice_path, None, bob_voice.get_json())
     a23_bob_forecast_path = create_forecast_path(fiscs_dir, a23_str, bob_inx)
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
-    save_file(fisc_json_path, None, fiscunit_shop(a23_str, fiscs_dir).get_json())
+    save_file(fisc_json_path, None, fiscunit_shop(a23_str, fisc_mstr_dir).get_json())
     assert os_path_exists(fisc_json_path)
     assert os_path_exists(a23_bob_voice_path)
     print(f"{a23_bob_voice_path=}")

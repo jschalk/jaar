@@ -13,8 +13,12 @@ def temp_fisc_dir():
     return f"{temp_fiscs_dir()}/{temp_fisc_title()}"
 
 
+def temp_fisc_mstr_dir():
+    return "src/f06_keep/examples/fisc_mstr"
+
+
 def temp_fiscs_dir():
-    return "src/f06_keep/examples/fiscs"
+    return "src/f06_keep/examples/fisc_mstr/fiscs"
 
 
 def temp_owner_name():
