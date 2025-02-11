@@ -925,22 +925,22 @@ def etl_bud_tables_to_event_bud_csvs(
 def etl_fisc_staging_tables_to_fisc_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
-    for ficsal_dimen in get_fisc_dimens():
-        staging_tablename = f"{ficsal_dimen}_staging"
+    for fisc_dimen in get_fisc_dimens():
+        staging_tablename = f"{fisc_dimen}_staging"
         save_table_to_csv(conn_or_cursor, fisc_mstr_dir, staging_tablename)
 
 
 def etl_fisc_agg_tables_to_fisc_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
-    for ficsal_dimen in get_fisc_dimens():
-        save_table_to_csv(conn_or_cursor, fisc_mstr_dir, f"{ficsal_dimen}_agg")
+    for fisc_dimen in get_fisc_dimens():
+        save_table_to_csv(conn_or_cursor, fisc_mstr_dir, f"{fisc_dimen}_agg")
 
 
 def etl_fisc_csvs_to_fisc_jsons(fisc_mstr_dir: str):
-    for ficsal_dimen in get_fisc_dimens():
-        x_excel_path = create_path(fisc_mstr_dir, f"{ficsal_dimen}.xlsx")
-        dimen_df = open_csv(fisc_mstr_dir, f"{ficsal_dimen}_agg.csv")
+    for fisc_dimen in get_fisc_dimens():
+        x_excel_path = create_path(fisc_mstr_dir, f"{fisc_dimen}.xlsx")
+        dimen_df = open_csv(fisc_mstr_dir, f"{fisc_dimen}_agg.csv")
         upsert_sheet(x_excel_path, "agg", dimen_df)
     create_fiscunit_jsons_from_prime_files(fisc_mstr_dir)
 

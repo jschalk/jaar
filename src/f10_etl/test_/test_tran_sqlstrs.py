@@ -620,14 +620,14 @@ def test_get_fisc_insert_agg_from_staging_sqlstrs_ReturnsObj():
         assert FISCUNIT_AGG_INSERT_SQLSTR == generated_fiscunit_sqlstr
         columns_header = """fisc_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title"""
         tablename = "fiscunit"
-        expected_ficsalunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
+        expected_fiscunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
 SELECT fisc_title, MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(timeline_title)
 FROM {tablename}_staging
 WHERE error_message IS NULL
 GROUP BY fisc_title
 ;
 """
-        assert FISCUNIT_AGG_INSERT_SQLSTR == expected_ficsalunit_sqlstr
+        assert FISCUNIT_AGG_INSERT_SQLSTR == expected_fiscunit_sqlstr
 
     assert len(idea_config) == len(fisc_insert_agg_sqlstrs)
 
