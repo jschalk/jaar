@@ -229,31 +229,52 @@ class WorldUnit:
         delete_dir(fiscal_mstr_dir)
         print(f"{fiscal_mstr_dir=}")
         set_dir(fiscal_mstr_dir)
-        print(f"      {self.worlds_dir=}")
-        print(f"step 00 {count_dirs_files(self.worlds_dir)}")
-        self.mine_to_train_staging()
-        print(f"step 01 {count_dirs_files(self.worlds_dir)}")
-        self.train_staging_to_train_agg()
-        print(f"step 02 {count_dirs_files(self.worlds_dir)}")
-        self.train_agg_to_train_events()
-        self.train_events_to_events_log()
-        self.train_events_log_to_events_agg()
-        self.set_events_from_events_agg_file()
-        print(f"step 03 {count_dirs_files(self.worlds_dir)}")
-        self.train_agg_to_pidgin_staging()
-        self.train_pidgin_staging_to_agg()
-        self.train_pidgin_agg_to_otz_face_dirs()
-        self.otz_face_pidgins_to_otz_event_pidgins()
-        self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()
-        self.pidgin_jsons_inherit_younger_pidgins()
-        print(f"step 04 {count_dirs_files(self.worlds_dir)}")
-        self.train_agg_to_train_valid()
-        self.train_ideas_to_otz_face_ideas()
-        self.otz_face_ideas_to_otz_event_otx_ideas()
-        self.otz_event_ideas_to_inx_events()
-        self.otz_inx_event_ideas_to_inz_faces()
-        self.inz_face_ideas_to_csv_files()
-        print(f"step 05 {count_dirs_files(self.worlds_dir)}")
+
+        # "mine_to_train_staging step 00"),
+        # "train_staging_to_train_agg step 01"),
+        # "train_agg_to_train_events step 02"),
+        # "train_events_to_events_log step 02.1"),
+        # "train_events_log_to_events_agg step 02.2"),
+        # "set_events_from_events_agg_file step 03"),
+        # "train_agg_to_pidgin_staging step 03.1"),
+        # "train_pidgin_staging_to_agg step 03.2"),
+        # "train_pidgin_agg_to_otz_face_dirs step 03.3"),
+        # "otz_face_pidgins_to_otz_event_pidgins step 03.4"),
+        # "otz_event_pidgins_csvs_to_otz_pidgin_jsons step 03.5"),
+        # "pidgin_jsons_inherit_younger_pidgins step 04"),
+        # "train_agg_to_train_valid step 04.1"),
+        # "train_ideas_to_otz_face_ideas step 04.2"),
+        # "otz_face_ideas_to_otz_event_otx_ideas step 04.3"),
+        # "otz_event_ideas_to_inx_events 04.4"),
+        # "otz_inx_event_ideas_to_inz_faces 04.5"),
+        # "inz_face_ideas_to_csv_files step 05"),
+
+        mine_to_forecasts_steps = [
+            (self.mine_to_train_staging, "step 00.0"),
+            (self.train_staging_to_train_agg, "step 01.0"),
+            (self.train_agg_to_train_events, "step 02.0"),
+            (self.train_events_to_events_log, "step 02.1"),
+            (self.train_events_log_to_events_agg, "step 02.2"),
+            (self.set_events_from_events_agg_file, "step 03.0"),
+            (self.train_agg_to_pidgin_staging, "step 03.1"),
+            (self.train_pidgin_staging_to_agg, "step 03.2"),
+            (self.train_pidgin_agg_to_otz_face_dirs, "step 03.3"),
+            (self.otz_face_pidgins_to_otz_event_pidgins, "step 03.4"),
+            (self.otz_event_pidgins_csvs_to_otz_pidgin_jsons, "step 03.5"),
+            (self.pidgin_jsons_inherit_younger_pidgins, "step 04.0"),
+            (self.train_agg_to_train_valid, "step 04.1"),
+            (self.train_ideas_to_otz_face_ideas, "step 04.2"),
+            (self.otz_face_ideas_to_otz_event_otx_ideas, "step 04.3"),
+            (self.otz_event_ideas_to_inx_events, "step 04.4"),
+            (self.otz_inx_event_ideas_to_inz_faces, "step 04.5"),
+            (self.inz_face_ideas_to_csv_files, "step 05.0"),
+        ]
+
+        for etl_func, step_msg in mine_to_forecasts_steps:
+            if step_msg:
+                print(f"{step_msg} {count_dirs_files(self.worlds_dir)}")
+            etl_func()
+
         with sqlite3_connect(":memory:") as fiscal_db_conn:
             cursor = fiscal_db_conn.cursor()
             self.etl_inz_face_csv_files2idea_staging_tables(cursor)
@@ -263,7 +284,7 @@ class WorldUnit:
             self.inz_faces_ideas_to_fiscal_mstr_csvs(cursor)
             print(f"step 05.2 {count_dirs_files(self.worlds_dir)}")
             self.fiscal_csvs_to_jsons()
-            print(f"step 06 {count_dirs_files(self.worlds_dir)}")
+            print(f"step 06.0 {count_dirs_files(self.worlds_dir)}")
             self.idea_staging_to_bud_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
         print(f"step 06.5 {count_dirs_files(self.worlds_dir)}")

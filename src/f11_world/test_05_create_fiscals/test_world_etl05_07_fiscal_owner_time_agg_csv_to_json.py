@@ -7,11 +7,8 @@ from src.f05_listen.hub_paths import (
     create_fiscal_owner_time_json_path,
 )
 from src.f08_pidgin.pidgin_config import event_int_str
-from src.f09_idea.idea_config import get_idea_sqlite_types
-from src.f10_etl.transformers import create_fiscal_tables
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
-from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
 # open_fiscal_owner_time_agg(path)-> dict[tuple(OwnerName, TimePiont), EventInt]

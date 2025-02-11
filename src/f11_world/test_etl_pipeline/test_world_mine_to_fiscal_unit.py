@@ -107,6 +107,7 @@ def test_WorldUnit_mine_to_forecasts_CreatesFiles(env_dir_setup_cleanup):
     assert os_path_exists(a23_sue_voice_path)
     assert os_path_exists(a23_sue_forecast_path)
     assert count_dirs_files(fizz_world.worlds_dir) == 68
+    assert 1 == 2
 
 
 # def test_WorldUnit_mine_to_forecasts_CreatestrainFiles(env_dir_setup_cleanup):
