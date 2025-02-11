@@ -156,7 +156,7 @@ def test_get_fisc_dimens_ReturnsObj():
     assert fisc_timeline_month_str() in fisc_config_dimens
     assert fisc_timeline_weekday_str() in fisc_config_dimens
     assert len(fisc_config_dimens) == 6
-    return fisc_config_dimens == set(get_fisc_config_dict().keys())
+    assert fisc_config_dimens == set(get_fisc_config_dict().keys())
 
 
 def test_get_fisc_args_dimen_mapping_ReturnsObj():
