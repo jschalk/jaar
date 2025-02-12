@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, save_file, open_file
+from src.f00_instrument.file import create_path, save_file, open_file, set_dir
 from src.f01_road.deal import TimeLinePoint
 from src.f01_road.finance import RespectNum
 from src.f01_road.road import AcctName, OwnerName, TitleUnit
@@ -8,7 +8,12 @@ from src.f05_listen.hub_path import (
     create_budpoint_json_path,
     create_events_owner_json_path,
 )
-from os.path import exists as os_path_exists
+from os import listdir as os_listdir
+from os.path import (
+    exists as os_path_exists,
+    join as os_path_join,
+    isdir as os_path_isdir,
+)
 
 
 def save_bud_file(dest_dir: str, filename: str = None, budunit: BudUnit = None):
@@ -38,3 +43,45 @@ def get_events_owner_credit_ledger(
     )
     budpoint = open_bud_file(timepoint_json_path)
     return get_credit_ledger(budpoint) if budpoint else {}
+
+
+def collect_events_dir_owner_events_sets(fisc_events_dir: str) -> dict[str, set[int]]:
+    directory_structure = {}
+    set_dir(fisc_events_dir)
+    for owner_name in os_listdir(fisc_events_dir):
+        owner_dir = os_path_join(fisc_events_dir, owner_name)
+        if os_path_isdir(owner_dir):
+            owner_events_dirs = {
+                int(event_int_dir)
+                for event_int_dir in os_listdir(owner_dir)
+                if os_path_isdir(os_path_join(owner_dir, event_int_dir))
+            }
+            directory_structure[owner_name] = owner_events_dirs
+    return directory_structure
+
+
+def get_owners_downhill_event_ints(
+    owner_events_sets: dict[str, set[int]],
+    downhill_owners: set[str] = None,
+    ref_event_int: int = None,
+) -> dict[str, int]:
+    x_dict = {}
+    if downhill_owners:
+        for owner_name in downhill_owners:
+            if event_set := owner_events_sets.get(owner_name):
+                _add_downhill_event_int(x_dict, event_set, ref_event_int, owner_name)
+    else:
+        for owner_name, event_set in owner_events_sets.items():
+            _add_downhill_event_int(x_dict, event_set, ref_event_int, owner_name)
+    return x_dict
+
+
+def _add_downhill_event_int(
+    x_dict: dict[str, int], event_set: set[int], ref_event_int: int, downhill_owner: str
+):
+    if event_set:
+        if ref_event_int:
+            if downhill_event_ints := {ei for ei in event_set if ei <= ref_event_int}:
+                x_dict[downhill_owner] = max(downhill_event_ints)
+        else:
+            x_dict[downhill_owner] = max(event_set)
