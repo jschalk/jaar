@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, count_dirs_files, delete_dir, save_file
 from src.f04_gift.atom_config import face_name_str, fisc_title_str
-from src.f05_listen.hub_paths import (
+from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_forecast_path,
     create_voice_path,

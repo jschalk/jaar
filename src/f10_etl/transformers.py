@@ -17,7 +17,7 @@ from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
 from src.f04_gift.delta import get_minimal_buddelta
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
-from src.f05_listen.hub_paths import (
+from src.f05_listen.hub_path import (
     create_voice_path,
     create_fisc_json_path,
     create_fisc_owner_time_csv_path,

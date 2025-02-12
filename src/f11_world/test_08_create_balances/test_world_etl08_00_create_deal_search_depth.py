@@ -3,7 +3,7 @@ from src.f00_instrument.file import open_file, save_file, create_path, count_dir
 from src.f01_road.deal import time_int_str
 from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import fisc_title_str, owner_name_str
-from src.f05_listen.hub_paths import (
+from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_episodes_dir_path,
     create_fisc_owner_time_csv_path,

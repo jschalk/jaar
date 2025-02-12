@@ -10,7 +10,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
 )
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json
-from src.f05_listen.hub_paths import create_events_owner_dir_path
+from src.f05_listen.hub_path import create_events_owner_dir_path
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f10_etl.transformers import etl_event_bud_csvs_to_gift_json
 from src.f10_etl.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir

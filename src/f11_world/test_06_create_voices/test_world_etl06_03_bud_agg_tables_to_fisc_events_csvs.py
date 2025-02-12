@@ -7,7 +7,7 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     credit_belief_str,
 )
-from src.f05_listen.hub_paths import create_events_owner_dir_path
+from src.f05_listen.hub_path import create_events_owner_dir_path
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f10_etl.tran_sqlstrs import create_bud_tables
 from src.f11_world.world import worldunit_shop

@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
-from src.f05_listen.hub_paths import create_events_owner_dir_path, create_voice_path
+from src.f05_listen.hub_path import create_events_owner_dir_path, create_voice_path
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists

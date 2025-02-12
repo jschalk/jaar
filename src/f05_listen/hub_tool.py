@@ -4,7 +4,7 @@ from src.f01_road.finance import RespectNum
 from src.f01_road.road import AcctName, OwnerName, TitleUnit
 from src.f02_bud.bud import BudUnit, get_from_json as budunit_get_from_json
 from src.f02_bud.bud_tool import get_credit_ledger
-from src.f05_listen.hub_paths import (
+from src.f05_listen.hub_path import (
     create_budpoint_json_path,
     create_events_owner_json_path,
 )

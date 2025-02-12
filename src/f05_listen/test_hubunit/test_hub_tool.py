@@ -6,7 +6,7 @@ from src.f01_road.jaar_config import (
     get_owners_folder,
 )
 from src.f02_bud.bud import budunit_shop
-from src.f05_listen.hub_paths import (
+from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_fisc_owner_time_csv_path,
     create_fisc_owner_time_json_path,

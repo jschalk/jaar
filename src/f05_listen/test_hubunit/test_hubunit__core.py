@@ -17,7 +17,7 @@ from src.f01_road.jaar_config import (
     get_rootpart_of_keep_dir,
 )
 from src.f02_bud.bud import budunit_shop
-from src.f05_listen.hub_paths import (
+from src.f05_listen.hub_path import (
     create_episodes_dir_path,
     create_voice_path,
     create_forecast_path,
