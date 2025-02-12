@@ -15,6 +15,7 @@ from src.f05_listen.hub_paths import (
     create_episodes_dir_path,
     create_timepoint_dir_path,
     create_budpoint_json_path,
+    create_events_owner_json_path,
     create_deal_path,
     create_events_owner_dir_path,
     create_voice_path,
@@ -24,6 +25,7 @@ from src.f05_listen.hub_tool import (
     save_bud_file,
     open_bud_file,
     get_timepoint_credit_ledger,
+    get_events_owner_credit_ledger,
 )
 from src.f05_listen.examples.example_listen_buds import get_budunit_3_acct
 from src.f05_listen.examples.listen_env import (
@@ -110,6 +112,46 @@ def test_get_timepoint_credit_ledger_ReturnsObj_Scenario1_FileExists(
 
     # WHEN
     gen_a3_credit_ledger = get_timepoint_credit_ledger(
+        fisc_mstr_dir, a23_str, sue_str, t3
+    )
+
+    # THEN
+    expected_a3_credit_ledger = {sue_str: 5, "Yao": 2, "Zia": 33}
+    assert gen_a3_credit_ledger == expected_a3_credit_ledger
+
+
+def test_get_events_owner_credit_ledger_ReturnsObj_Scenario0_NoFile(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord"
+    sue_str = "Sue"
+    t3 = 3
+
+    # WHEN
+    gen_a3_credit_ledger = get_events_owner_credit_ledger(
+        fisc_mstr_dir, a23_str, sue_str, t3
+    )
+
+    # THEN
+    assert gen_a3_credit_ledger == {}
+
+
+def test_get_events_owner_credit_ledger_ReturnsObj_Scenario1_FileExists(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord"
+    sue_str = "Sue"
+    t3 = 3
+    t3_json_path = create_events_owner_json_path(fisc_mstr_dir, a23_str, sue_str, t3)
+    a3_bud = get_budunit_3_acct()
+    save_bud_file(t3_json_path, None, a3_bud)
+
+    # WHEN
+    gen_a3_credit_ledger = get_events_owner_credit_ledger(
         fisc_mstr_dir, a23_str, sue_str, t3
     )
 
