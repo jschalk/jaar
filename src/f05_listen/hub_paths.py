@@ -58,7 +58,7 @@ def create_deal_path(
     return create_path(timepoint_dir, "deal.json")
 
 
-def create_budpoint_dir_path(
+def create_budpoint_json_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, timepoint_int: int
 ) -> str:
     timepoint_dir = create_timepoint_dir_path(
@@ -75,6 +75,16 @@ def create_events_owner_dir_path(
     fisc_events_dir = create_path(fisc_dir, "events")
     fisc_events_owner_dir = create_path(fisc_events_dir, owner_name)
     return create_path(fisc_events_owner_dir, event_int)
+
+
+def create_events_owner_json_path(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
+):
+    owner_event_dir_path = create_events_owner_dir_path(
+        fisc_mstr_dir, fisc_title, owner_name, event_int
+    )
+    bud_filename = "bud.json"
+    return create_path(owner_event_dir_path, bud_filename)
 
 
 def create_voice_path(fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName):

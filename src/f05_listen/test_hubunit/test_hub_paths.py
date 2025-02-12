@@ -14,15 +14,13 @@ from src.f05_listen.hub_paths import (
     create_episodes_dir_path,
     create_timepoint_dir_path,
     create_deal_path,
-    create_budpoint_dir_path,
+    create_budpoint_json_path,
     create_events_owner_dir_path,
+    create_events_owner_json_path,
     create_voice_path,
     create_forecast_path,
 )
-from src.f05_listen.examples.listen_env import (
-    get_listen_temp_env_dir,
-    env_dir_setup_cleanup,
-)
+from src.f05_listen.examples.listen_env import get_listen_temp_env_dir
 
 
 def test_create_fisc_json_path_ReturnObj() -> str:
@@ -161,7 +159,7 @@ def test_create_deal_path_ReturnObj() -> str:
     assert gen_deal_path == expected_deal_path_dir
 
 
-def test_create_budpoint_dir_path_ReturnObj() -> str:
+def test_create_budpoint_json_path_ReturnObj() -> str:
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -169,7 +167,7 @@ def test_create_budpoint_dir_path_ReturnObj() -> str:
     timepoint7 = 7
 
     # WHEN
-    gen_budpoint_path = create_budpoint_dir_path(
+    gen_budpoint_path = create_budpoint_json_path(
         x_fisc_mstr_dir, a23_str, sue_str, timepoint7
     )
 
@@ -190,7 +188,6 @@ def test_create_events_owner_dir_path_ReturnObj() -> str:
     accord23_str = "accord23"
     bob_str = "Bob"
     event3 = 3
-    event7 = 7
 
     # WHEN
     gen_a23_e3_bud_path = create_events_owner_dir_path(
