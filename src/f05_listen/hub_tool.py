@@ -6,7 +6,7 @@ from src.f02_bud.bud import BudUnit, get_from_json as budunit_get_from_json
 from src.f02_bud.bud_tool import get_credit_ledger
 from src.f05_listen.hub_path import (
     create_budpoint_json_path,
-    create_events_owner_bud_path,
+    create_event_bud_path,
     create_owners_dir_path,
 )
 from os import listdir as os_listdir
@@ -39,7 +39,7 @@ def get_timepoint_credit_ledger(
 def get_events_owner_credit_ledger(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
 ) -> dict[AcctName, RespectNum]:
-    timepoint_json_path = create_events_owner_bud_path(
+    timepoint_json_path = create_event_bud_path(
         fisc_mstr_dir, fisc_title, owner_name, event_int
     )
     budpoint = open_bud_file(timepoint_json_path)

@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
-from src.f05_listen.hub_path import create_events_owner_dir_path, create_voice_path
+from src.f05_listen.hub_path import create_owner_event_dir_path, create_voice_path
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
@@ -21,10 +21,10 @@ def test_WorldUnit_event_inherited_budunits_to_fisc_voice_SetsFiles_Scenario0(
     a23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
-    a23_bob_e3_dir = create_events_owner_dir_path(
+    a23_bob_e3_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event3
     )
-    a23_bob_e7_dir = create_events_owner_dir_path(
+    a23_bob_e7_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event7
     )
     bud_filename = "bud.json"

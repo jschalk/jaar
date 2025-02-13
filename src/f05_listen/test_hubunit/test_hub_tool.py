@@ -15,8 +15,8 @@ from src.f05_listen.hub_path import (
     create_episodes_dir_path,
     create_timepoint_dir_path,
     create_budpoint_json_path,
-    create_events_owner_dir_path,
-    create_events_owner_bud_path,
+    create_owner_event_dir_path,
+    create_event_bud_path,
     create_deal_path,
     create_voice_path,
     create_forecast_path,
@@ -148,7 +148,7 @@ def test_get_events_owner_credit_ledger_ReturnsObj_Scenario1_FileExists(
     a23_str = "accord"
     sue_str = "Sue"
     t3 = 3
-    t3_json_path = create_events_owner_bud_path(fisc_mstr_dir, a23_str, sue_str, t3)
+    t3_json_path = create_event_bud_path(fisc_mstr_dir, a23_str, sue_str, t3)
     a3_bud = get_budunit_3_acct()
     save_bud_file(t3_json_path, None, a3_bud)
 
@@ -183,8 +183,8 @@ def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario1_DirsExist(
     bob_str = "Bob"
     event1 = 1
     event2 = 2
-    bob1_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, bob_str, event1)
-    bob2_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, bob_str, event2)
+    bob1_dir = create_owner_event_dir_path(fisc_mstr_dir, a23_str, bob_str, event1)
+    bob2_dir = create_owner_event_dir_path(fisc_mstr_dir, a23_str, bob_str, event2)
     print(f"  {bob1_dir=}")
     print(f"  {bob2_dir=}")
     set_dir(bob1_dir)
@@ -208,10 +208,10 @@ def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario2_DirsExist(
     event1 = 1
     event2 = 2
     event7 = 7
-    bob1_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, bob_str, event1)
-    bob2_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, bob_str, event2)
-    sue2_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, sue_str, event2)
-    sue7_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, sue_str, event7)
+    bob1_dir = create_owner_event_dir_path(fisc_mstr_dir, a23_str, bob_str, event1)
+    bob2_dir = create_owner_event_dir_path(fisc_mstr_dir, a23_str, bob_str, event2)
+    sue2_dir = create_owner_event_dir_path(fisc_mstr_dir, a23_str, sue_str, event2)
+    sue7_dir = create_owner_event_dir_path(fisc_mstr_dir, a23_str, sue_str, event7)
     set_dir(bob1_dir)
     set_dir(bob2_dir)
     set_dir(sue2_dir)

@@ -9,10 +9,10 @@ from src.f04_gift.atom_config import (
 )
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json
 from src.f05_listen.hub_path import (
-    create_events_owner_dir_path,
-    create_events_owner_bud_path,
-    create_events_owner_all_gift_path,
-    create_events_owner_expressed_gift_path,
+    create_owner_event_dir_path,
+    create_event_bud_path,
+    create_event_all_gift_path,
+    create_event_expressed_gift_path,
 )
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
@@ -34,10 +34,10 @@ def test_WorldUnit_event_gift_json_to_event_inherited_budunits_SetsFiles_bud_jso
     a23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
-    a23_bob_e3_dir = create_events_owner_dir_path(
+    a23_bob_e3_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event3
     )
-    a23_bob_e7_dir = create_events_owner_dir_path(
+    a23_bob_e7_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event7
     )
     a23_bob_e3_gift = giftunit_shop(bob_inx, None, a23_str, event_int=event3)
@@ -54,10 +54,10 @@ def test_WorldUnit_event_gift_json_to_event_inherited_budunits_SetsFiles_bud_jso
     sue_jvalues = {credit_belief_str(): credit88, debtit_belief_str(): None}
     a23_bob_e7_gift.add_atomunit(budacct_dimen, insert_str, bob_jkeys, bob_jvalues)
     a23_bob_e7_gift.add_atomunit(budacct_dimen, insert_str, sue_jkeys, sue_jvalues)
-    e3_all_gift_path = create_events_owner_all_gift_path(
+    e3_all_gift_path = create_event_all_gift_path(
         fisc_mstr_dir, a23_str, bob_inx, event3
     )
-    e7_all_gift_path = create_events_owner_all_gift_path(
+    e7_all_gift_path = create_event_all_gift_path(
         fisc_mstr_dir, a23_str, bob_inx, event7
     )
     save_file(e3_all_gift_path, None, a23_bob_e3_gift.get_json())
@@ -122,18 +122,18 @@ def test_WorldUnit_event_gift_json_to_event_inherited_budunits_SetsFiles_express
     sue_jvalues = {credit_belief_str(): credit88}
     a23_bob_e7_gift.add_atomunit(budacct_dimen, insert_str, bob_jkeys, bob_jvalues)
     a23_bob_e7_gift.add_atomunit(budacct_dimen, insert_str, sue_jkeys, sue_jvalues)
-    a23_bob_e3_all_gift_path = create_events_owner_all_gift_path(
+    a23_bob_e3_all_gift_path = create_event_all_gift_path(
         fisc_mstr_dir, a23_str, bob_inx, event3
     )
-    a23_bob_e7_all_gift_path = create_events_owner_all_gift_path(
+    a23_bob_e7_all_gift_path = create_event_all_gift_path(
         fisc_mstr_dir, a23_str, bob_inx, event7
     )
     save_file(a23_bob_e3_all_gift_path, None, a23_bob_e3_gift.get_json())
     save_file(a23_bob_e7_all_gift_path, None, a23_bob_e7_gift.get_json())
-    e3_expressed_gift_path = create_events_owner_expressed_gift_path(
+    e3_expressed_gift_path = create_event_expressed_gift_path(
         fisc_mstr_dir, a23_str, bob_inx, event3
     )
-    e7_expressed_gift_path = create_events_owner_expressed_gift_path(
+    e7_expressed_gift_path = create_event_expressed_gift_path(
         fisc_mstr_dir, a23_str, bob_inx, event7
     )
     assert os_path_exists(a23_bob_e3_all_gift_path)
