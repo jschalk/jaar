@@ -10,10 +10,6 @@ def get_test_fisc_mstr_dir():
     return "src/f07_fisc/examples/fisc_mstr"
 
 
-def get_test_fiscs_dir():
-    return "src/f07_fisc/examples/fisc_mstr/fiscs"
-
-
 def get_owners_folder() -> str:
     return "owners"
 

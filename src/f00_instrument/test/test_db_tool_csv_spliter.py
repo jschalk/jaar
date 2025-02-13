@@ -159,3 +159,52 @@ VALUES
         assert B3_csv[1] == expected_B3_row
         assert C4_csv[1] == expected_C4_0_row
         assert C4_csv[2] == expected_C4_1_row
+
+
+def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col2_prefix():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_tablename = "test_table56"
+    key_columns = ["user", "hair", "y_int"]
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            f"""CREATE TABLE {x_tablename} (hair INTEGER,user TEXT,y_int INTEGER, "run" TEXT)"""
+        )
+        cursor.execute(
+            f"""INSERT INTO {x_tablename} (hair, user, y_int, run) VALUES (1, "A", 200, "yes") ;"""
+        )
+        x_dir = get_instrument_temp_env_dir()
+        hairs_str = "hairs"
+        y_ints_str = "y_ints"
+        A_dir = create_path(x_dir, "A")
+        A_hairs_dir = create_path(A_dir, hairs_str)
+        A1_dir = create_path(A_hairs_dir, 1)
+        A1y_ints_dir = create_path(A1_dir, y_ints_str)
+        A200_dir = create_path(A1y_ints_dir, 200)
+        A1_path = create_path(A200_dir, f"{x_tablename}.csv")
+        print(f"{A1_path=}")
+        assert os_path_exists(A1_path) is False
+
+        # WHEN
+        save_to_split_csvs(
+            conn_or_cursor=conn,
+            tablename=x_tablename,
+            key_columns=key_columns,
+            output_dir=x_dir,
+            col1_prefix=hairs_str,
+            col2_prefix=y_ints_str,
+        )
+
+        # THEN
+        assert os_path_exists(A1_path)
+        expected_A1_row = (1, "A", 200, "yes")
+        x_column_types = {
+            "hair": "INTEGER",
+            "user": "TEXT",
+            "y_int": "INTEGER",
+            "run": "TEXT",
+        }
+        A1_csv = open_csv_with_types(A1_path, x_column_types)
+        assert A1_csv[0] == ("hair", "user", "y_int", "run")
+        assert A1_csv[1] == expected_A1_row

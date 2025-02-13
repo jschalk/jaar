@@ -19,7 +19,7 @@ from sqlite3 import connect as sqlite3_connect
 
 def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudPutAggTables(
     env_dir_setup_cleanup,
-):  # sourcery skip: extract-method
+):
 
     # ESTABLISH
     sue_inx = "Suzy"
@@ -69,7 +69,7 @@ VALUES
 
 def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudDelAggTables(
     env_dir_setup_cleanup,
-):  # sourcery skip: extract-method
+):
 
     # ESTABLISH
     sue_inx = "Suzy"

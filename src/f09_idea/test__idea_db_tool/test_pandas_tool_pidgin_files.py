@@ -48,12 +48,12 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
     sue_otx_dt = get_suita_acct_name_otx_dt()
     sue_inx_dt = get_suita_acct_name_inx_dt()
-    otz_dir = f"{sue_dir}/otz"
-    inz_dir = f"{sue_dir}/inz"
+    otz_dir = create_path(sue_dir, "otz")
+    inz_dir = create_path(sue_dir, "inz")
 
     example_filename = "acct_name_example.csv"
-    otx_file_path = f"{otz_dir}/{example_filename}"
-    inx_file_path = f"{inz_dir}/{example_filename}"
+    otx_file_path = create_path(otz_dir, example_filename)
+    inx_file_path = create_path(inz_dir, example_filename)
     save_dataframe_to_csv(sue_otx_dt, otz_dir, example_filename)
     assert os_path_exists(pidginunit_file_path)
     assert os_path_exists(otx_file_path)
@@ -106,16 +106,16 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
     sue_pidginunit = get_casa_maison_pidginunit_set_by_title()
-    sue_dir = f"{get_example_face_dir()}/{sue_pidginunit.face_name}"
+    sue_dir = create_path(get_example_face_dir(), sue_pidginunit.face_name)
     save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
     sue_otx_dt = get_casa_maison_road_otx_dt()
     sue_inx_dt = get_casa_maison_road_inx_dt()
-    otz_dir = f"{sue_dir}/otz"
-    inz_dir = f"{sue_dir}/inz"
+    otz_dir = create_path(sue_dir, "otz")
+    inz_dir = create_path(sue_dir, "inz")
 
     example_filename = "road1_example.csv"
-    otx_file_path = f"{otz_dir}/{example_filename}"
-    inx_file_path = f"{inz_dir}/{example_filename}"
+    otx_file_path = create_path(otz_dir, example_filename)
+    inx_file_path = create_path(inz_dir, example_filename)
     save_dataframe_to_csv(sue_otx_dt, otz_dir, example_filename)
     assert os_path_exists(otx_file_path)
     assert os_path_exists(inx_file_path) is False
@@ -151,20 +151,20 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     sue_pidginunit = get_casa_maison_pidginunit_set_by_title()
     sue_pidginunit.set_namemap(get_suita_namemap())
     sue_dir = create_path(get_example_face_dir(), sue_pidginunit.face_name)
-    pidginunit_file_path = f"{sue_dir}/{pidgin_filename()}"
+    pidginunit_file_path = create_path(sue_dir, pidgin_filename())
     print(f"{sue_dir=}")
     save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
     sue_otx_dt = get_suita_acct_name_otx_dt()
-    otz_dir = f"{sue_dir}/otz"
-    inz_dir = f"{sue_dir}/inz"
+    otz_dir = create_path(sue_dir, "otz")
+    inz_dir = create_path(sue_dir, "inz")
 
     acct_name_filename = "acct_name_example.csv"
-    acct_name_otx_file_path = f"{otz_dir}/{acct_name_filename}"
-    acct_name_inx_file_path = f"{inz_dir}/{acct_name_filename}"
+    acct_name_otx_file_path = create_path(otz_dir, acct_name_filename)
+    acct_name_inx_file_path = create_path(inz_dir, acct_name_filename)
     road1_otx_dt = get_casa_maison_road_otx_dt()
     road1_filename = "road1_example.csv"
-    road1_otx_file_path = f"{otz_dir}/{road1_filename}"
-    road1_inx_file_path = f"{inz_dir}/{road1_filename}"
+    road1_otx_file_path = create_path(otz_dir, road1_filename)
+    road1_inx_file_path = create_path(inz_dir, road1_filename)
     save_dataframe_to_csv(road1_otx_dt, otz_dir, road1_filename)
     save_dataframe_to_csv(sue_otx_dt, otz_dir, acct_name_filename)
     assert os_path_exists(road1_otx_file_path)

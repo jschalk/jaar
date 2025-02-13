@@ -1,4 +1,4 @@
-from src.f00_instrument.file import delete_dir, copy_dir
+from src.f00_instrument.file import delete_dir, copy_dir, create_path
 from src.f01_road.road import create_road_from_titles, RoadUnit
 from src.f05_listen.hubunit import hubunit_shop, HubUnit
 from os.path import exists as os_path_exists
@@ -10,7 +10,7 @@ def temp_fisc_title():
 
 
 def temp_fisc_dir():
-    return f"{temp_fiscs_dir()}/{temp_fisc_title()}"
+    return create_path(temp_fiscs_dir(), temp_fisc_title())
 
 
 def temp_fisc_mstr_dir():
@@ -52,12 +52,12 @@ class InvalidkeepCopyException(Exception):
 
 def copy_evaluation_keep(src_fisc_title: str, dest_fisc_title: str):
     base_dir = "src/keep/examples/keeps"
-    new_dir = f"{base_dir}/{dest_fisc_title}"
+    new_dir = create_path(base_dir, dest_fisc_title)
     if os_path_exists(new_dir):
         raise InvalidkeepCopyException(
             f"Cannot copy keep to '{new_dir}' directory because '{new_dir}' exists."
         )
     # base_dir = keep_obj.hubunit.keep_dir()
-    src_dir = f"{base_dir}/{src_fisc_title}"
-    dest_dir = f"{base_dir}/{dest_fisc_title}"
+    src_dir = create_path(base_dir, src_fisc_title)
+    dest_dir = create_path(base_dir, dest_fisc_title)
     copy_dir(src_dir=src_dir, dest_dir=dest_dir)

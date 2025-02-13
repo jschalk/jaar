@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
-from src.f05_listen.hub_paths import (
+from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_voice_path,
     create_forecast_path,

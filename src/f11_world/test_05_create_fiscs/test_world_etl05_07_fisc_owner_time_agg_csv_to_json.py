@@ -2,7 +2,7 @@ from src.f00_instrument.dict_toolbox import get_dict_from_json
 from src.f00_instrument.file import open_file, save_file
 from src.f01_road.deal import time_int_str
 from src.f04_gift.atom_config import fisc_title_str, owner_name_str
-from src.f05_listen.hub_paths import (
+from src.f05_listen.hub_path import (
     create_fisc_owner_time_csv_path,
     create_fisc_owner_time_json_path,
 )
@@ -14,7 +14,7 @@ from os.path import exists as os_path_exists
 # open_fisc_owner_time_agg(path)-> dict[tuple(OwnerName, TimePiont), EventInt]
 
 
-def test_WorldUnit_fisc_table2fisc_owner_time_agg_csvs_Scenaro1_SetsTableAttr(
+def test_WorldUnit_fisc_owner_time_agg_csvs2jsons_CreatesFile_Scenaro0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -58,7 +58,7 @@ def test_WorldUnit_fisc_table2fisc_owner_time_agg_csvs_Scenaro1_SetsTableAttr(
     assert os_path_exists(a45_event_time_json_path)
     a23_event_time_dict = get_dict_from_json(open_file(a23_event_time_json_path))
     a45_event_time_dict = get_dict_from_json(open_file(a45_event_time_json_path))
-    assert a23_event_time_dict == {bob_str: {str(event3): timepoint55}}
+    assert a23_event_time_dict == {bob_str: {str(timepoint55): event3}}
     assert a45_event_time_dict == {
-        sue_str: {str(event3): timepoint55, str(event7): timepoint66}
+        sue_str: {str(timepoint55): event3, str(timepoint66): event7}
     }

@@ -3,6 +3,7 @@ from src.f02_bud.bud_tool import (
     get_bud_acct_agenda_award_array,
     get_bud_acct_agenda_award_csv,
     get_acct_agenda_ledger,
+    get_credit_ledger,
 )
 
 
@@ -191,3 +192,79 @@ def test_get_acct_agenda_ledger_ReturnsObj_settle_bud_True():
     assert sue_bud_settle_net_dict.get(xio_str) != None
     assert sue_bud_settle_net_dict.get(zia_str) is None
     assert sue_bud_settle_net_dict == example_net_deal_dict
+
+
+def test_get_credit_ledger_ReturnsObj_Scenario0_No_acctunits():
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_bud = budunit_shop(sue_str)
+    # WHEN / THEN
+    assert get_credit_ledger(sue_bud) == {}
+
+
+def test_get_credit_ledger_ReturnsObj_Scenario1_acctunits_Exist():
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_bud = budunit_shop(sue_str)
+    yao_str = "Yao"
+    bob_str = "Bob"
+    xio_str = "Xio"
+    zia_str = "Zia"
+    bob_credit_belief = 11
+    yao_credit_belief = 13
+    xio_credit_belief = 17
+    sue_bud.add_acctunit(yao_str, yao_credit_belief)
+    sue_bud.add_acctunit(bob_str, bob_credit_belief)
+    sue_bud.add_acctunit(xio_str, xio_credit_belief)
+
+    # WHEN
+    sue_acct_credit_ledger = get_credit_ledger(sue_bud)
+
+    # THEN
+    print(f"{sue_acct_credit_ledger=}")
+    print("")
+    expected_sue_acct_credit_ledger = {
+        bob_str: bob_credit_belief,
+        yao_str: yao_credit_belief,
+        xio_str: xio_credit_belief,
+    }
+    print(f"{expected_sue_acct_credit_ledger=}")
+    assert sue_acct_credit_ledger.get(yao_str) != None
+    assert sue_acct_credit_ledger.get(bob_str) != None
+    assert sue_acct_credit_ledger.get(xio_str) != None
+    assert sue_acct_credit_ledger.get(zia_str) is None
+    assert sue_acct_credit_ledger == expected_sue_acct_credit_ledger
+
+
+def test_get_credit_ledger_ReturnsObj_Scenario1_acctunits_Exist():
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_bud = budunit_shop(sue_str)
+    yao_str = "Yao"
+    bob_str = "Bob"
+    xio_str = "Xio"
+    zia_str = "Zia"
+    bob_credit_belief = 11
+    yao_credit_belief = 13
+    xio_credit_belief = 17
+    sue_bud.add_acctunit(yao_str, yao_credit_belief)
+    sue_bud.add_acctunit(bob_str, bob_credit_belief)
+    sue_bud.add_acctunit(xio_str, xio_credit_belief)
+
+    # WHEN
+    sue_acct_credit_ledger = get_credit_ledger(sue_bud)
+
+    # THEN
+    print(f"{sue_acct_credit_ledger=}")
+    print("")
+    expected_sue_acct_credit_ledger = {
+        bob_str: bob_credit_belief,
+        yao_str: yao_credit_belief,
+        xio_str: xio_credit_belief,
+    }
+    print(f"{expected_sue_acct_credit_ledger=}")
+    assert sue_acct_credit_ledger.get(yao_str) != None
+    assert sue_acct_credit_ledger.get(bob_str) != None
+    assert sue_acct_credit_ledger.get(xio_str) != None
+    assert sue_acct_credit_ledger.get(zia_str) is None
+    assert sue_acct_credit_ledger == expected_sue_acct_credit_ledger

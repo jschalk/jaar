@@ -17,11 +17,17 @@ from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
 from src.f04_gift.delta import get_minimal_buddelta
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
-from src.f05_listen.hub_paths import (
+from src.f05_listen.hub_path import (
     create_voice_path,
     create_fisc_json_path,
     create_fisc_owner_time_csv_path,
     create_fisc_owner_time_json_path,
+    create_owner_event_dir_path,
+    create_event_bud_path,
+)
+from src.f05_listen.hub_tool import (
+    collect_events_dir_owner_events_sets,
+    get_owners_downhill_event_ints,
 )
 from src.f07_fisc.fisc import get_from_json as fiscunit_get_from_json
 from src.f07_fisc.fisc_config import get_fisc_dimens
@@ -67,11 +73,7 @@ from src.f10_etl.tran_sqlstrs import (
     INSERT_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR,
 )
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
-from src.f10_etl.fisc_etl_tool import (
-    create_fiscunit_jsons_from_prime_files,
-    collect_events_dir_owner_events_sets,
-    get_owners_downhill_event_ints,
-)
+from src.f10_etl.fisc_etl_tool import create_fiscunit_jsons_from_prime_files
 from src.f10_etl.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
@@ -890,9 +892,13 @@ def etl_fisc_owner_time_agg_csvs2jsons(fisc_mstr_dir: str):
             if x_dict.get(owner_name) is None:
                 x_dict[owner_name] = {}
             owner_dict = x_dict.get(owner_name)
-            owner_dict[int(event_int)] = time_int
+            owner_dict[int(time_int)] = event_int
         json_path = create_fisc_owner_time_json_path(fisc_mstr_dir, fisc_title)
         save_file(json_path, None, get_json_from_dict(x_dict))
+
+
+def etl_create_deal_ledger_depth_dir(fisc_mstr_dir: str):
+    pass
 
 
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
@@ -918,7 +924,8 @@ def etl_bud_tables_to_event_bud_csvs(
                 tablename=bud_table,
                 key_columns=["fisc_title", "owner_name", "event_int"],
                 output_dir=fiscs_dir,
-                col1_prefix="events",
+                col1_prefix="owners",
+                col2_prefix="events",
             )
 
 
@@ -949,11 +956,12 @@ def etl_event_bud_csvs_to_gift_json(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_path = create_path(fiscs_dir, fisc_title)
-        events_path = create_path(fisc_path, "events")
-        for owner_name in get_level1_dirs(events_path):
-            owner_path = create_path(events_path, owner_name)
-            for event_int in get_level1_dirs(owner_path):
-                event_path = create_path(owner_path, event_int)
+        owners_path = create_path(fisc_path, "owners")
+        for owner_name in get_level1_dirs(owners_path):
+            owner_path = create_path(owners_path, owner_name)
+            events_path = create_path(owner_path, "events")
+            for event_int in get_level1_dirs(events_path):
+                event_path = create_path(events_path, event_int)
                 event_gift = giftunit_shop(
                     owner_name=owner_name,
                     face_name=None,
@@ -1008,47 +1016,52 @@ def etl_event_gift_json_to_event_inherited_budunits(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_path = create_path(fiscs_dir, fisc_title)
-        events_path = create_path(fisc_path, "events")
-        for owner_name in get_level1_dirs(events_path):
-            owner_path = create_path(events_path, owner_name)
+        owners_dir = create_path(fisc_path, "owners")
+        for owner_name in get_level1_dirs(owners_dir):
+            owner_dir = create_path(owners_dir, owner_name)
+            events_dir = create_path(owner_dir, "events")
             prev_event_int = None
-            for event_int in get_level1_dirs(owner_path):
-                prev_bud = get_prev_event_int_budunit(
-                    fisc_title, owner_name, owner_path, prev_event_int
+            for event_int in get_level1_dirs(events_dir):
+                prev_bud = _get_prev_event_int_budunit(
+                    fisc_mstr_dir, fisc_title, owner_name, prev_event_int
                 )
-                event_path = create_path(owner_path, event_int)
-                gift_path = create_path(event_path, "all_gift.json")
+                event_bud_path = create_event_bud_path(
+                    fisc_mstr_dir, fisc_title, owner_name, event_int
+                )
+                event_dir = create_owner_event_dir_path(
+                    fisc_mstr_dir, fisc_title, owner_name, event_int
+                )
+                gift_path = create_path(event_dir, "all_gift.json")
                 event_gift = get_giftunit_from_json(open_file(gift_path))
                 sift_delta = get_minimal_buddelta(event_gift._buddelta, prev_bud)
                 curr_bud = event_gift.get_edited_bud(prev_bud)
-                save_file(event_path, "bud.json", curr_bud.get_json())
+                save_file(event_bud_path, None, curr_bud.get_json())
                 expressed_gift = copy_deepcopy(event_gift)
                 expressed_gift.set_buddelta(sift_delta)
-                save_file(event_path, "expressed_gift.json", expressed_gift.get_json())
+                save_file(event_dir, "expressed_gift.json", expressed_gift.get_json())
                 prev_event_int = event_int
 
 
-def get_prev_event_int_budunit(
-    fisc_title, owner_name, owner_path, prev_event_int
+def _get_prev_event_int_budunit(
+    fisc_mstr_dir, fisc_title, owner_name, prev_event_int
 ) -> BudUnit:
     if prev_event_int is None:
         return budunit_shop(owner_name, fisc_title)
-    prev_event_int_path = create_path(owner_path, prev_event_int)
-    prev_bud_path = create_path(prev_event_int_path, "bud.json")
-    return budunit_get_from_json(open_file(prev_bud_path))
+    prev_event_bud_path = create_event_bud_path(
+        fisc_mstr_dir, fisc_title, owner_name, prev_event_int
+    )
+    return budunit_get_from_json(open_file(prev_event_bud_path))
 
 
 def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        fisc_path = create_path(fiscs_dir, fisc_title)
-        fisc_events_dir = create_path(fisc_path, "events")
-        owner_events = collect_events_dir_owner_events_sets(fisc_events_dir)
+        owner_events = collect_events_dir_owner_events_sets(fisc_mstr_dir, fisc_title)
         owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
         for owner_name, max_event_int in owners_max_event_int_dict.items():
-            owner_dir = create_path(fisc_events_dir, owner_name)
-            max_event_int_dir = create_path(owner_dir, max_event_int)
-            max_event_bud_path = create_path(max_event_int_dir, "bud.json")
+            max_event_bud_path = create_event_bud_path(
+                fisc_mstr_dir, fisc_title, owner_name, max_event_int
+            )
             max_event_bud_json = open_file(max_event_bud_path)
             voice_path = create_voice_path(fisc_mstr_dir, fisc_title, owner_name)
             save_file(voice_path, None, max_event_bud_json)

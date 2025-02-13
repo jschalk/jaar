@@ -6,7 +6,6 @@ from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import fiscunit_shop
 from src.f07_fisc.examples.fisc_env import (
     get_test_fisc_mstr_dir,
-    get_test_fiscs_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -41,7 +40,7 @@ def test_FiscUnit_generate_forecast_bud_Sets_forecast_BudFile(env_dir_setup_clea
 
 def test_FiscUnit_generate_forecast_bud_ReturnsRegeneratedObj(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_fisc = fiscunit_shop("accord45", get_test_fiscs_dir(), True)
+    accord_fisc = fiscunit_shop("accord45", get_test_fisc_mstr_dir(), True)
     sue_str = "Sue"
     accord_fisc.init_owner_keeps(sue_str)
     sue_hubunit = hubunit_shop(
@@ -64,7 +63,7 @@ def test_FiscUnit_generate_forecast_bud_SetsCorrectFileWithout_healerlink(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    accord_fisc = fiscunit_shop("accord45", get_test_fiscs_dir(), True)
+    accord_fisc = fiscunit_shop("accord45", get_test_fisc_mstr_dir(), True)
     bob_str = "Bob"
     accord_fisc.init_owner_keeps(bob_str)
     bob_hubunit = hubunit_shop(
@@ -90,7 +89,7 @@ def test_FiscUnit_generate_forecast_bud_SetsFileWith_healerlink(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    accord_fisc = fiscunit_shop("accord45", get_test_fiscs_dir(), True)
+    accord_fisc = fiscunit_shop("accord45", get_test_fisc_mstr_dir(), True)
 
     bob_str = "Bob"
     accord_fisc.init_owner_keeps(bob_str)
@@ -122,7 +121,7 @@ def test_FiscUnit_generate_all_forecast_buds_SetsCorrectFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    accord_fisc = fiscunit_shop("accord45", get_test_fiscs_dir(), True)
+    accord_fisc = fiscunit_shop("accord45", get_test_fisc_mstr_dir(), True)
 
     bob_str = "Bob"
     sue_str = "Sue"

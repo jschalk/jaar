@@ -7,7 +7,7 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     credit_belief_str,
 )
-from src.f05_listen.hub_paths import create_events_owner_dir_path
+from src.f05_listen.hub_path import create_owner_event_dir_path
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f10_etl.tran_sqlstrs import create_bud_tables
 from src.f11_world.world import worldunit_shop
@@ -32,10 +32,10 @@ def test_WorldUnit_bud_tables_to_event_bud_csvs_CreatesFiles(
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv = f"{put_agg_tablename}.csv"
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
-    a23_bob_e3_dir = create_events_owner_dir_path(
+    a23_bob_e3_dir = create_owner_event_dir_path(
         fisc_mstr_dir, accord23_str, bob_inx, event3
     )
-    a23_bob_e7_dir = create_events_owner_dir_path(
+    a23_bob_e7_dir = create_owner_event_dir_path(
         fisc_mstr_dir, accord23_str, bob_inx, event7
     )
     a23_e3_budacct_put_path = create_path(a23_bob_e3_dir, put_agg_csv)
@@ -82,7 +82,7 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
 
 # def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudDelAggTables(
 #     env_dir_setup_cleanup,
-# ):  # sourcery skip: extract-method
+# ):
 
 #     # ESTABLISH
 #     sue_inx = "Suzy"

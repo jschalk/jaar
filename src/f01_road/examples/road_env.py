@@ -1,4 +1,4 @@
-from src.f00_instrument.file import delete_dir
+from src.f00_instrument.file import delete_dir, create_path
 from pytest import fixture as pytest_fixture
 
 
@@ -7,7 +7,7 @@ def get_road_examples_dir():
 
 
 def get_road_temp_env_dir():
-    return f"{get_road_examples_dir()}/temp"
+    return create_path(get_road_examples_dir(), "temp")
 
 
 @pytest_fixture()

@@ -262,9 +262,12 @@ def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
     """Test splitting an Excel file by a valid column."""
     # ESTABLISH
     x_filename = "fizz"
-    a_file_path = create_path(output_dir, f"A/{x_filename}.xlsx")
-    b_file_path = create_path(output_dir, f"B/{x_filename}.xlsx")
-    c_file_path = create_path(output_dir, f"C/{x_filename}.xlsx")
+    a_dir = create_path(output_dir, "A")
+    b_dir = create_path(output_dir, "B")
+    c_dir = create_path(output_dir, "C")
+    a_file_path = create_path(a_dir, f"{x_filename}.xlsx")
+    b_file_path = create_path(b_dir, f"{x_filename}.xlsx")
+    c_file_path = create_path(c_dir, f"{x_filename}.xlsx")
     assert os_path_exists(a_file_path) is False
     assert os_path_exists(b_file_path) is False
     assert os_path_exists(c_file_path) is False
@@ -342,8 +345,10 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
     file_path = tmp_path / "special_chars.xlsx"
     df.to_excel(file_path, index=False, sheet_name="sheet5")
     x_filename = "fizz"
-    b_file_path = create_path(output_dir, f"A_B/{x_filename}.xlsx")
-    c_file_path = create_path(output_dir, f"C_D/{x_filename}.xlsx")
+    ab_dir = create_path(output_dir, "A_B")
+    cd_dir = create_path(output_dir, "C_D")
+    b_file_path = create_path(ab_dir, f"{x_filename}.xlsx")
+    c_file_path = create_path(cd_dir, f"{x_filename}.xlsx")
     assert os_path_exists(b_file_path) is False
     assert os_path_exists(c_file_path) is False
 

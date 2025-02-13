@@ -101,8 +101,8 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
 
 def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     # ESTABLISH
-    worlds2_dir = f"{get_test_worlds_dir()}/worlds2"
-    example_mine_dir = f"{get_test_worlds_dir()}/example_mine"
+    worlds2_dir = create_path(get_test_worlds_dir(), "worlds2")
+    example_mine_dir = create_path(get_test_worlds_dir(), "example_mine")
     five_world_id = "five"
     world2_present_time = 55
     accord45_str = "accord45"
@@ -175,9 +175,9 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
 #     sue_str = "Sue"
 #     bob_str = "Bob"
 #     zia_str = "Zia"
-#     save_file(f"{x_world._faces_otz_dir}/{sue_str}", "temp.txt", "")
-#     save_file(f"{x_world._faces_otz_dir}/{bob_str}", "temp.txt", "")
-#     save_file(f"{x_world._faces_otz_dir}/{zia_str}", "temp.txt", "")
+#     save_file(x_world._faces_otz_dir, sue_str, "temp.txt", "")
+#     save_file(x_world._faces_otz_dir, bob_str, "temp.txt", "")
+#     save_file(x_world._faces_otz_dir, zia_str, "temp.txt", "")
 #     assert x_world.pidginunit_exists(sue_str) is False
 #     assert x_world.pidginunit_exists(bob_str) is False
 #     assert x_world.pidginunit_exists(zia_str) is False
@@ -193,7 +193,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
 #     assert x_world.pidgins_empty() is False
 
 #     # WHEN
-#     delete_dir(f"{x_world._faces_otz_dir}/{zia_str}")
+#     delete_dir(x_world._faces_otz_dir, zia_str)
 #     x_world._set_all_pidginunits_from_dirs()
 
 #     # THEN

@@ -3,7 +3,7 @@ from src.f00_instrument.db_toolbox import get_row_count
 from src.f00_instrument.file import open_file
 from src.f01_road.deal import time_int_str
 from src.f04_gift.atom_config import fisc_title_str, owner_name_str
-from src.f05_listen.hub_paths import create_fisc_owner_time_csv_path
+from src.f05_listen.hub_path import create_fisc_owner_time_csv_path
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_config import get_idea_sqlite_types
 from src.f10_etl.transformers import create_fisc_tables

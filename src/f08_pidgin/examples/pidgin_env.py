@@ -1,4 +1,4 @@
-from src.f00_instrument.file import delete_dir
+from src.f00_instrument.file import delete_dir, create_path
 from pytest import fixture as pytest_fixture
 
 
@@ -7,7 +7,8 @@ def get_example_pidgins_dir():
 
 
 def get_example_face_dir():
-    return f"{get_example_pidgins_dir()}/faces/sue"
+    faces_dir = create_path(get_example_pidgins_dir(), "faces")
+    return create_path(faces_dir, "sue")
 
 
 @pytest_fixture()

@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import create_csv
-from src.f01_road.finance import FundNum, get_net
+from src.f01_road.finance import FundNum, get_net, RespectNum
 from src.f01_road.road import AcctName
 from src.f02_bud.acct import AcctUnit
 from src.f02_bud.group import MemberShip, AwardLink
@@ -241,3 +241,8 @@ def get_acct_agenda_ledger(
         if settle_net != 0:
             x_dict[x_acct.acct_name] = settle_net
     return x_dict
+
+
+def get_credit_ledger(x_bud: BudUnit) -> dict[AcctUnit, RespectNum]:
+    credit_ledger, debtit_ledger = x_bud.get_credit_ledger_debtit_ledger()
+    return credit_ledger

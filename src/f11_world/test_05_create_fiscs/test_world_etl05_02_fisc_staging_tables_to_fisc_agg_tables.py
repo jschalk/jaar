@@ -83,7 +83,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
 
 def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesTable_fisc_event_time(
     env_dir_setup_cleanup,
-):  # sourcery skip: extract-method
+):
 
     # ESTABLISH
     sue_inx = "Suzy"

@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.finance import default_fund_pool
-from src.f05_listen.hub_paths import create_deal_path, create_budpoint_dir_path
+from src.f05_listen.hub_path import create_deal_path, create_budpoint_json_path
 from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.example_listen_buds import (
     get_budunit_with_4_levels,
@@ -182,7 +182,7 @@ def test_HubUnit_budpoint_file_path_ReturnsObj():
     x_timepoint_dir = yao_hubunit.timepoint_dir(t88_time_int)
     x_file_path = create_path(x_timepoint_dir, yao_hubunit.budpoint_filename())
     assert t88_budpoint_file_path == x_file_path
-    f_budpoint_path = create_budpoint_dir_path(
+    f_budpoint_path = create_budpoint_json_path(
         fisc_mstr_dir(), fisc_title(), yao_str, t88_time_int
     )
     assert t88_budpoint_file_path == f_budpoint_path

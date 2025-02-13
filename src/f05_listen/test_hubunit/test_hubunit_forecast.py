@@ -121,7 +121,7 @@ def test_HubUnit_initialize_forecast_file_CorrectlyDoesNotOverwrite(
     # ESTABLISH
     sue_str = "Sue"
     fisc_mstr_dir = env_dir()
-    sue_fisc_dir = f"{fisc_mstr_dir}/{root_title()}"
+    sue_fisc_dir = create_path(fisc_mstr_dir, root_title())
     sue_fund_pool = 50000
     sue_fund_coin = 5
     sue_bit = 25
@@ -156,9 +156,9 @@ def test_HubUnit_initialize_forecast_file_CorrectlyDoesNotOverwrite(
 
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     sue_fisc_dir = create_path(fiscs_dir, root_title())
-    sue_owners_dir = f"{sue_fisc_dir}/owners"
-    sue_owner_dir = f"{sue_owners_dir}/{sue_str}"
-    sue_forecast_dir = f"{sue_owner_dir}/forecast"
+    sue_owners_dir = create_path(sue_fisc_dir, "owners")
+    sue_owner_dir = create_path(sue_owners_dir, sue_str)
+    sue_forecast_dir = create_path(sue_owner_dir, "forecast")
     sue_forecast_filename = f"{sue_str}.json"
     forecast_file_str = open_file(
         dest_dir=sue_forecast_dir, filename=sue_forecast_filename

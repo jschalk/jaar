@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path, save_file, set_dir
+from src.f00_instrument.file import create_path, save_file
 from src.f00_instrument.dict_toolbox import (
     get_sorted_list_of_dict_keys as get_sorted_list,
 )
@@ -15,8 +15,6 @@ from src.f09_idea.idea_db_tool import (
     if_nan_return_None,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
-from os import listdir as os_listdir
-from os.path import join as os_path_join, isdir as os_path_isdir
 
 
 def get_fiscunit_sorted_args() -> list[str]:
@@ -268,45 +266,3 @@ def create_fiscunit_jsons_from_prime_files(fisc_mstr_dir: str):
         fisc_filename = "fisc.json"
         fiscunit_dir = create_path(fiscs_dir, fiscunit.fisc_title)
         save_file(fiscunit_dir, fisc_filename, fiscunit.get_json())
-
-
-def collect_events_dir_owner_events_sets(fisc_events_dir: str) -> dict[str, set[int]]:
-    directory_structure = {}
-    set_dir(fisc_events_dir)
-    for owner_name in os_listdir(fisc_events_dir):
-        owner_dir = os_path_join(fisc_events_dir, owner_name)
-        if os_path_isdir(owner_dir):
-            owner_events_dirs = {
-                int(event_int_dir)
-                for event_int_dir in os_listdir(owner_dir)
-                if os_path_isdir(os_path_join(owner_dir, event_int_dir))
-            }
-            directory_structure[owner_name] = owner_events_dirs
-    return directory_structure
-
-
-def get_owners_downhill_event_ints(
-    owner_events_sets: dict[str, set[int]],
-    downhill_owners: set[str] = None,
-    ref_event_int: int = None,
-) -> dict[str, int]:
-    x_dict = {}
-    if downhill_owners:
-        for owner_name in downhill_owners:
-            if event_set := owner_events_sets.get(owner_name):
-                _add_downhill_event_int(x_dict, event_set, ref_event_int, owner_name)
-    else:
-        for owner_name, event_set in owner_events_sets.items():
-            _add_downhill_event_int(x_dict, event_set, ref_event_int, owner_name)
-    return x_dict
-
-
-def _add_downhill_event_int(
-    x_dict: dict[str, int], event_set: set[int], ref_event_int: int, downhill_owner: str
-):
-    if event_set:
-        if ref_event_int:
-            if downhill_event_ints := {ei for ei in event_set if ei <= ref_event_int}:
-                x_dict[downhill_owner] = max(downhill_event_ints)
-        else:
-            x_dict[downhill_owner] = max(event_set)

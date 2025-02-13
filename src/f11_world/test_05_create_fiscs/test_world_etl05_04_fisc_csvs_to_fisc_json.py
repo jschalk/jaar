@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f03_chrono.chrono import timelineunit_shop, timeline_config_shop
-from src.f05_listen.hub_paths import create_fisc_json_path
+from src.f05_listen.hub_path import create_fisc_json_path
 from src.f07_fisc.fisc import (
     fiscunit_shop,
     get_from_json as fiscunit_get_from_json,
