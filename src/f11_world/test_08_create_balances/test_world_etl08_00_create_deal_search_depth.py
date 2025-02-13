@@ -8,8 +8,8 @@ from src.f05_listen.hub_path import (
     create_owners_dir_path,
     create_episodes_dir_path,
     create_timepoint_dir_path,
-    create_fisc_owner_time_csv_path,
-    create_fisc_owner_time_json_path,
+    create_fisc_ote1_csv_path,
+    create_fisc_ote1_json_path,
 )
 from src.f07_fisc.fisc import fiscunit_shop
 from src.f08_pidgin.pidgin_config import event_int_str
@@ -71,13 +71,13 @@ def test_WorldUnit_create_deal_ledger_depth_dir_Scenaro0_DealEmpty(
 #     }
 
 
-#     a23_event_time_json_path = create_fisc_owner_time_json_path(
+#     a23_event_time_json_path = create_fisc_ote1_json_path(
 #         fisc_mstr_dir, accord23_str
 #     )
 #     assert os_path_exists(a23_event_time_json_path) is False
 
 #     # WHEN
-#     fizz_world.fisc_owner_time_agg_csvs2jsons()
+#     fizz_world.fisc_ote1_agg_csvs2jsons()
 
 #     # THEN
 #     assert os_path_exists(a23_event_time_json_path)
@@ -108,8 +108,8 @@ def test_WorldUnit_create_deal_ledger_depth_dir_Scenaro0_DealEmpty(
 # fisc_mstr_dir = fizz_world._fisc_mstr_dir
 
 
-#     a23_event_time_p = create_fisc_owner_time_csv_path(fisc_mstr_dir, accord23_str)
-#     a45_event_time_p = create_fisc_owner_time_csv_path(fisc_mstr_dir, accord45_str)
+#     a23_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord23_str)
+#     a45_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord45_str)
 #     a23_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{time_int_str()},error_message
 # {accord23_str},{bob_str},{event3},{timepoint55},
 # """
@@ -121,17 +121,17 @@ def test_WorldUnit_create_deal_ledger_depth_dir_Scenaro0_DealEmpty(
 #     save_file(a45_event_time_p, None, a45_event_time_csv)
 #     assert os_path_exists(a23_event_time_p)
 #     assert os_path_exists(a45_event_time_p)
-#     a23_event_time_json_path = create_fisc_owner_time_json_path(
+#     a23_event_time_json_path = create_fisc_ote1_json_path(
 #         fisc_mstr_dir, accord23_str
 #     )
-#     a45_event_time_json_path = create_fisc_owner_time_json_path(
+#     a45_event_time_json_path = create_fisc_ote1_json_path(
 #         fisc_mstr_dir, accord45_str
 #     )
 #     assert os_path_exists(a23_event_time_json_path) is False
 #     assert os_path_exists(a45_event_time_json_path) is False
 
 #     # WHEN
-#     fizz_world.fisc_owner_time_agg_csvs2jsons()
+#     fizz_world.fisc_ote1_agg_csvs2jsons()
 
 #     # THEN
 #     assert os_path_exists(a23_event_time_json_path)

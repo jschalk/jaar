@@ -20,8 +20,8 @@ from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
 from src.f05_listen.hub_path import (
     create_voice_path,
     create_fisc_json_path,
-    create_fisc_owner_time_csv_path,
-    create_fisc_owner_time_json_path,
+    create_fisc_ote1_csv_path,
+    create_fisc_ote1_json_path,
     create_owner_event_dir_path,
     create_event_bud_path,
 )
@@ -865,23 +865,23 @@ def fisc_agg_tables2fisc_event_time_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR)
 
 
-def etl_fisc_agg_tables2fisc_owner_time_agg(conn_or_cursor: sqlite3_Connection):
+def etl_fisc_agg_tables2fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(CREATE_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR)
     conn_or_cursor.execute(INSERT_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR)
 
 
-def etl_fisc_table2fisc_owner_time_agg_csvs(
+def etl_fisc_table2fisc_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    save_to_split_csvs(conn_or_cursor, "fisc_owner_time_agg", ["fisc_title"], fiscs_dir)
+    save_to_split_csvs(conn_or_cursor, "fisc_ote1_agg", ["fisc_title"], fiscs_dir)
 
 
-def etl_fisc_owner_time_agg_csvs2jsons(fisc_mstr_dir: str):
+def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
     idea_types = get_idea_sqlite_types()
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        csv_path = create_fisc_owner_time_csv_path(fisc_mstr_dir, fisc_title)
+        csv_path = create_fisc_ote1_csv_path(fisc_mstr_dir, fisc_title)
         csv_arrays = open_csv_with_types(csv_path, idea_types)
         x_dict = {}
         header_row = csv_arrays.pop(0)
@@ -893,7 +893,7 @@ def etl_fisc_owner_time_agg_csvs2jsons(fisc_mstr_dir: str):
                 x_dict[owner_name] = {}
             owner_dict = x_dict.get(owner_name)
             owner_dict[int(time_int)] = event_int
-        json_path = create_fisc_owner_time_json_path(fisc_mstr_dir, fisc_title)
+        json_path = create_fisc_ote1_json_path(fisc_mstr_dir, fisc_title)
         save_file(json_path, None, get_json_from_dict(x_dict))
 
 

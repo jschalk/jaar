@@ -8,8 +8,8 @@ from src.f01_road.jaar_config import (
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
-    create_fisc_owner_time_csv_path,
-    create_fisc_owner_time_json_path,
+    create_fisc_ote1_csv_path,
+    create_fisc_ote1_json_path,
     fisc_agenda_list_report_path,
     create_owners_dir_path,
     create_episodes_dir_path,

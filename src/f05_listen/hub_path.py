@@ -9,18 +9,18 @@ def create_fisc_json_path(fisc_mstr_dir: str, fisc_title: str) -> str:
     return create_path(fisc_path, "fisc.json")
 
 
-def create_fisc_owner_time_csv_path(fisc_mstr_dir: str, fisc_title: str):
-    """Returns path: fisc_mstr\\fiscs\\fisc_title\\fisc_owner_time_agg.csv"""
+def create_fisc_ote1_csv_path(fisc_mstr_dir: str, fisc_title: str):
+    """Returns path: fisc_mstr\\fiscs\\fisc_title\\fisc_ote1_agg.csv"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_path = create_path(fiscs_dir, fisc_title)
-    return create_path(fisc_path, "fisc_owner_time_agg.csv")
+    return create_path(fisc_path, "fisc_ote1_agg.csv")
 
 
-def create_fisc_owner_time_json_path(fisc_mstr_dir: str, fisc_title: str):
-    """Returns path: fisc_mstr\\fiscs\\fisc_title\\fisc_owner_time_agg.json"""
+def create_fisc_ote1_json_path(fisc_mstr_dir: str, fisc_title: str):
+    """Returns path: fisc_mstr\\fiscs\\fisc_title\\fisc_ote1_agg.json"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_path = create_path(fiscs_dir, fisc_title)
-    return create_path(fisc_path, "fisc_owner_time_agg.json")
+    return create_path(fisc_path, "fisc_ote1_agg.json")
 
 
 def fisc_agenda_list_report_path(fisc_mstr_dir: str, fisc_title: str) -> str:

@@ -8,7 +8,7 @@ from src.f11_world.world import worldunit_shop
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_fisc_agg_tables2fisc_owner_time_agg_Scenaro0_SetsTableAttr():
+def test_WorldUnit_fisc_agg_tables2fisc_ote1_agg_Scenaro0_SetsTableAttr():
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     with sqlite3_connect(":memory:") as fisc_db_conn:
@@ -17,18 +17,18 @@ def test_WorldUnit_fisc_agg_tables2fisc_owner_time_agg_Scenaro0_SetsTableAttr():
 
         x_fisc = FiscPrimeObjsRef()
         assert get_row_count(cursor, x_fisc.deal_stage_tablename) == 0
-        fisc_owner_time_agg_str = "fisc_owner_time_agg"
-        assert db_table_exists(cursor, fisc_owner_time_agg_str) is False
+        fisc_ote1_agg_str = "fisc_ote1_agg"
+        assert db_table_exists(cursor, fisc_ote1_agg_str) is False
 
         # WHEN
-        fizz_world.fisc_agg_tables2fisc_owner_time_agg(cursor)
+        fizz_world.fisc_agg_tables2fisc_ote1_agg(cursor)
 
         # THEN
-        assert db_table_exists(cursor, fisc_owner_time_agg_str)
-        assert get_row_count(cursor, fisc_owner_time_agg_str) == 0
+        assert db_table_exists(cursor, fisc_ote1_agg_str)
+        assert get_row_count(cursor, fisc_ote1_agg_str) == 0
 
 
-def test_WorldUnit_fisc_agg_tables2fisc_owner_time_agg_Scenaro1_SetsTableAttr():
+def test_WorldUnit_fisc_agg_tables2fisc_ote1_agg_Scenaro1_SetsTableAttr():
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     bob_str = "Bob"
@@ -57,16 +57,16 @@ VALUES
 """
         cursor.execute(insert_staging_sqlstr)
         assert get_row_count(cursor, x_fisc.deal_stage_tablename) == 4
-        fisc_owner_time_agg_str = "fisc_owner_time_agg"
-        assert db_table_exists(cursor, fisc_owner_time_agg_str) is False
+        fisc_ote1_agg_str = "fisc_ote1_agg"
+        assert db_table_exists(cursor, fisc_ote1_agg_str) is False
 
         # WHEN
-        fizz_world.fisc_agg_tables2fisc_owner_time_agg(cursor)
+        fizz_world.fisc_agg_tables2fisc_ote1_agg(cursor)
 
         # THEN
-        assert db_table_exists(cursor, fisc_owner_time_agg_str)
-        assert get_row_count(cursor, fisc_owner_time_agg_str) == 3
-        cursor.execute(f"SELECT * FROM {fisc_owner_time_agg_str};")
+        assert db_table_exists(cursor, fisc_ote1_agg_str)
+        assert get_row_count(cursor, fisc_ote1_agg_str) == 3
+        cursor.execute(f"SELECT * FROM {fisc_ote1_agg_str};")
         fiscunit_agg_rows = cursor.fetchall()
         ex_row0 = (accord23_str, bob_str, event3, timepoint55, None)
         ex_row1 = (accord45_str, sue_str, event3, timepoint55, None)

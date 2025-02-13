@@ -1,7 +1,7 @@
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
-    create_fisc_owner_time_csv_path,
-    create_fisc_owner_time_json_path,
+    create_fisc_ote1_csv_path,
+    create_fisc_ote1_json_path,
     fisc_agenda_list_report_path,
     create_owners_dir_path,
     create_episodes_dir_path,
@@ -29,20 +29,20 @@ def test_create_fisc_json_path_HasDocString():
     assert LINUX_OS or LINUX_OS or inspect_getdoc(create_fisc_json_path) == doc_str
 
 
-def test_create_fisc_owner_time_csv_path_HasDocString():
+def test_create_fisc_ote1_csv_path_HasDocString():
     # ESTABLISH
-    doc_str = create_fisc_owner_time_csv_path("fisc_mstr", "fisc_title")
+    doc_str = create_fisc_ote1_csv_path("fisc_mstr", "fisc_title")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_fisc_owner_time_csv_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_fisc_ote1_csv_path) == doc_str
 
 
-def test_create_fisc_owner_time_json_path_HasDocString():
+def test_create_fisc_ote1_json_path_HasDocString():
     # ESTABLISH
-    doc_str = create_fisc_owner_time_json_path("fisc_mstr", "fisc_title")
+    doc_str = create_fisc_ote1_json_path("fisc_mstr", "fisc_title")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_fisc_owner_time_json_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_fisc_ote1_json_path) == doc_str
 
 
 def test_fisc_agenda_list_report_path_HasDocString():

@@ -7,8 +7,8 @@ from src.f01_road.jaar_config import (
 )
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
-    create_fisc_owner_time_csv_path,
-    create_fisc_owner_time_json_path,
+    create_fisc_ote1_csv_path,
+    create_fisc_ote1_json_path,
     fisc_agenda_list_report_path,
     create_owners_dir_path,
     create_episodes_dir_path,
@@ -41,33 +41,33 @@ def test_create_fisc_json_path_ReturnObj():
     assert gen_a23_json_path == expected_a23_json_path
 
 
-def test_create_fisc_owner_time_csv_path_ReturnObj():
+def test_create_fisc_ote1_csv_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
 
     # WHEN
-    gen_a23_te_csv_path = create_fisc_owner_time_csv_path(x_fisc_mstr_dir, a23_str)
+    gen_a23_te_csv_path = create_fisc_ote1_csv_path(x_fisc_mstr_dir, a23_str)
 
     # THEN
     fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_path = create_path(fiscs_dir, a23_str)
-    expected_a23_te_path = create_path(a23_path, "fisc_owner_time_agg.csv")
+    expected_a23_te_path = create_path(a23_path, "fisc_ote1_agg.csv")
     assert gen_a23_te_csv_path == expected_a23_te_path
 
 
-def test_create_fisc_owner_time_json_path_ReturnObj():
+def test_create_fisc_ote1_json_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
 
     # WHEN
-    gen_a23_te_csv_path = create_fisc_owner_time_json_path(x_fisc_mstr_dir, a23_str)
+    gen_a23_te_csv_path = create_fisc_ote1_json_path(x_fisc_mstr_dir, a23_str)
 
     # THEN
     fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_path = create_path(fiscs_dir, a23_str)
-    expected_a23_te_path = create_path(a23_path, "fisc_owner_time_agg.json")
+    expected_a23_te_path = create_path(a23_path, "fisc_ote1_agg.json")
     assert gen_a23_te_csv_path == expected_a23_te_path
 
 
