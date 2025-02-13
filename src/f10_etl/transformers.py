@@ -23,7 +23,7 @@ from src.f05_listen.hub_path import (
     create_fisc_owner_time_csv_path,
     create_fisc_owner_time_json_path,
     create_events_owner_dir_path,
-    create_events_owner_json_path,
+    create_events_owner_bud_path,
 )
 from src.f05_listen.hub_tool import (
     collect_events_dir_owner_events_sets,
@@ -1025,7 +1025,7 @@ def etl_event_gift_json_to_event_inherited_budunits(fisc_mstr_dir: str):
                 prev_bud = _get_prev_event_int_budunit(
                     fisc_mstr_dir, fisc_title, owner_name, prev_event_int
                 )
-                event_bud_path = create_events_owner_json_path(
+                event_bud_path = create_events_owner_bud_path(
                     fisc_mstr_dir, fisc_title, owner_name, event_int
                 )
                 event_dir = create_events_owner_dir_path(
@@ -1047,7 +1047,7 @@ def _get_prev_event_int_budunit(
 ) -> BudUnit:
     if prev_event_int is None:
         return budunit_shop(owner_name, fisc_title)
-    prev_event_bud_path = create_events_owner_json_path(
+    prev_event_bud_path = create_events_owner_bud_path(
         fisc_mstr_dir, fisc_title, owner_name, prev_event_int
     )
     return budunit_get_from_json(open_file(prev_event_bud_path))
@@ -1059,7 +1059,7 @@ def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
         owner_events = collect_events_dir_owner_events_sets(fisc_mstr_dir, fisc_title)
         owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
         for owner_name, max_event_int in owners_max_event_int_dict.items():
-            max_event_bud_path = create_events_owner_json_path(
+            max_event_bud_path = create_events_owner_bud_path(
                 fisc_mstr_dir, fisc_title, owner_name, max_event_int
             )
             max_event_bud_json = open_file(max_event_bud_path)

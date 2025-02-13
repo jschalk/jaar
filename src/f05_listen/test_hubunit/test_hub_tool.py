@@ -16,7 +16,7 @@ from src.f05_listen.hub_path import (
     create_timepoint_dir_path,
     create_budpoint_json_path,
     create_events_owner_dir_path,
-    create_events_owner_json_path,
+    create_events_owner_bud_path,
     create_deal_path,
     create_voice_path,
     create_forecast_path,
@@ -148,7 +148,7 @@ def test_get_events_owner_credit_ledger_ReturnsObj_Scenario1_FileExists(
     a23_str = "accord"
     sue_str = "Sue"
     t3 = 3
-    t3_json_path = create_events_owner_json_path(fisc_mstr_dir, a23_str, sue_str, t3)
+    t3_json_path = create_events_owner_bud_path(fisc_mstr_dir, a23_str, sue_str, t3)
     a3_bud = get_budunit_3_acct()
     save_bud_file(t3_json_path, None, a3_bud)
 

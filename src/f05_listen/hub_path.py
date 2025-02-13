@@ -88,7 +88,7 @@ def create_events_owner_dir_path(
     return create_path(fisc_events_dir, event_int)
 
 
-def create_events_owner_json_path(
+def create_events_owner_bud_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
 ):
     """Returns path: fisc_mstr\\fiscs\\fisc_title\\owners\\owner_name\\events\\event_int\\bud.json"""
@@ -97,6 +97,28 @@ def create_events_owner_json_path(
     )
     bud_filename = "bud.json"
     return create_path(owner_event_dir_path, bud_filename)
+
+
+def create_events_owner_all_gift_path(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
+):
+    """Returns path: fisc_mstr\\fiscs\\fisc_title\\owners\\owner_name\\events\\event_int\\all_gift.json"""
+    owner_event_dir_path = create_events_owner_dir_path(
+        fisc_mstr_dir, fisc_title, owner_name, event_int
+    )
+    all_gift_filename = "all_gift.json"
+    return create_path(owner_event_dir_path, all_gift_filename)
+
+
+def create_events_owner_expressed_gift_path(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
+):
+    """Returns path: fisc_mstr\\fiscs\\fisc_title\\owners\\owner_name\\events\\event_int\\expressed_gift.json"""
+    owner_event_dir_path = create_events_owner_dir_path(
+        fisc_mstr_dir, fisc_title, owner_name, event_int
+    )
+    expressed_gift_filename = "expressed_gift.json"
+    return create_path(owner_event_dir_path, expressed_gift_filename)
 
 
 def create_voice_path(fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName):

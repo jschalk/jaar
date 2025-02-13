@@ -9,7 +9,9 @@ from src.f05_listen.hub_path import (
     create_deal_path,
     create_budpoint_json_path,
     create_events_owner_dir_path,
-    create_events_owner_json_path,
+    create_events_owner_bud_path,
+    create_events_owner_all_gift_path,
+    create_events_owner_expressed_gift_path,
     create_voice_path,
     create_forecast_path,
 )
@@ -102,14 +104,34 @@ def test_create_events_owner_dir_path_HasDocString():
     assert inspect_getdoc(create_events_owner_dir_path) == doc_str
 
 
-def test_create_events_owner_json_path_HasDocString():
+def test_create_events_owner_bud_path_HasDocString():
     # ESTABLISH
-    doc_str = create_events_owner_json_path(
+    doc_str = create_events_owner_bud_path(
         "fisc_mstr", "fisc_title", "owner_name", "event_int"
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert inspect_getdoc(create_events_owner_json_path) == doc_str
+    assert inspect_getdoc(create_events_owner_bud_path) == doc_str
+
+
+def test_create_events_owner_all_gift_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_events_owner_all_gift_path(
+        "fisc_mstr", "fisc_title", "owner_name", "event_int"
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert inspect_getdoc(create_events_owner_all_gift_path) == doc_str
+
+
+def test_create_events_owner_expressed_gift_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_events_owner_expressed_gift_path(
+        "fisc_mstr", "fisc_title", "owner_name", "event_int"
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert inspect_getdoc(create_events_owner_expressed_gift_path) == doc_str
 
 
 def test_create_voice_path_HasDocString():

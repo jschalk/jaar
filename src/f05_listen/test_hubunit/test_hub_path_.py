@@ -16,7 +16,9 @@ from src.f05_listen.hub_path import (
     create_deal_path,
     create_budpoint_json_path,
     create_events_owner_dir_path,
-    create_events_owner_json_path,
+    create_events_owner_bud_path,
+    create_events_owner_all_gift_path,
+    create_events_owner_expressed_gift_path,
     create_voice_path,
     create_forecast_path,
 )
@@ -191,7 +193,29 @@ def test_create_events_owner_dir_path_ReturnObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_bud_path = create_events_owner_dir_path(
+    gen_a23_e3_dir_path = create_events_owner_dir_path(
+        x_fisc_mstr_dir, accord23_str, bob_str, event3
+    )
+
+    # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    a23_dir = create_path(x_fiscs_dir, accord23_str)
+    a23_owners_dir = create_path(a23_dir, "owners")
+    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_events_dir = create_path(a23_bob_dir, "events")
+    expected_a23_bob_e3_dir = create_path(a23_events_dir, event3)
+    assert gen_a23_e3_dir_path == expected_a23_bob_e3_dir
+
+
+def test_create_events_owner_bud_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    accord23_str = "accord23"
+    bob_str = "Bob"
+    event3 = 3
+
+    # WHEN
+    gen_a23_e3_bud_path = create_events_owner_bud_path(
         x_fisc_mstr_dir, accord23_str, bob_str, event3
     )
 
@@ -202,9 +226,56 @@ def test_create_events_owner_dir_path_ReturnObj():
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
-    # bud_filename = "bud.json"
-    # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
-    assert gen_a23_e3_bud_path == a23_bob_e3_dir
+    expected_a23_bob_e3_bud_path = create_path(a23_bob_e3_dir, "bud.json")
+    assert gen_a23_e3_bud_path == expected_a23_bob_e3_bud_path
+
+
+def test_create_events_owner_all_gift_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    accord23_str = "accord23"
+    bob_str = "Bob"
+    event3 = 3
+
+    # WHEN
+    gen_a23_e3_bud_path = create_events_owner_all_gift_path(
+        x_fisc_mstr_dir, accord23_str, bob_str, event3
+    )
+
+    # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    a23_dir = create_path(x_fiscs_dir, accord23_str)
+    a23_owners_dir = create_path(a23_dir, "owners")
+    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_events_dir = create_path(a23_bob_dir, "events")
+    a23_bob_e3_dir = create_path(a23_events_dir, event3)
+    expected_a23_bob_e3_all_gift_path = create_path(a23_bob_e3_dir, "all_gift.json")
+    assert gen_a23_e3_bud_path == expected_a23_bob_e3_all_gift_path
+
+
+def test_create_events_owner_expressed_gift_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    accord23_str = "accord23"
+    bob_str = "Bob"
+    event3 = 3
+
+    # WHEN
+    gen_a23_e3_bud_path = create_events_owner_expressed_gift_path(
+        x_fisc_mstr_dir, accord23_str, bob_str, event3
+    )
+
+    # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    a23_dir = create_path(x_fiscs_dir, accord23_str)
+    a23_owners_dir = create_path(a23_dir, "owners")
+    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_events_dir = create_path(a23_bob_dir, "events")
+    a23_bob_e3_dir = create_path(a23_events_dir, event3)
+    expected_a23_bob_e3_all_gift_path = create_path(
+        a23_bob_e3_dir, "expressed_gift.json"
+    )
+    assert gen_a23_e3_bud_path == expected_a23_bob_e3_all_gift_path
 
 
 def test_create_voice_path_ReturnObj():
