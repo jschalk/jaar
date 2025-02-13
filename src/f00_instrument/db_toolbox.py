@@ -432,6 +432,7 @@ def save_to_split_csvs(
     key_columns,
     output_dir,
     col1_prefix=None,
+    col2_prefix=None,
 ):
     """
     Select a single table from a SQLite DB, filter rows into CSVs by key columns, and save them.
@@ -465,11 +466,17 @@ def save_to_split_csvs(
             new_key_values = [key_values[0], col1_prefix]
             new_key_values.extend(key_values[1:])
             key_values = new_key_values
+        if col2_prefix:
+            new_key_values = key_values[:3]
+            new_key_values.append(col2_prefix)
+            new_key_values.extend(key_values[3:])
+            key_values = new_key_values
 
         key_path_part = get_key_part(key_values)
         csv_path = create_path(output_dir, key_path_part)
         set_dir(csv_path)
         output_file = os_path_join(csv_path, f"{tablename}.csv")
+        print(f"{csv_path=}")
         # Write to CSV
         with open(output_file, mode="w", newline="", encoding="utf-8") as csv_file:
             writer = csv_writer(csv_file)

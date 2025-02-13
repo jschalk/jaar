@@ -7,6 +7,7 @@ from src.f02_bud.bud_tool import get_credit_ledger
 from src.f05_listen.hub_path import (
     create_budpoint_json_path,
     create_events_owner_json_path,
+    create_owners_dir_path,
 )
 from os import listdir as os_listdir
 from os.path import (
@@ -45,19 +46,24 @@ def get_events_owner_credit_ledger(
     return get_credit_ledger(budpoint) if budpoint else {}
 
 
-def collect_events_dir_owner_events_sets(fisc_events_dir: str) -> dict[str, set[int]]:
-    directory_structure = {}
-    set_dir(fisc_events_dir)
-    for owner_name in os_listdir(fisc_events_dir):
-        owner_dir = os_path_join(fisc_events_dir, owner_name)
-        if os_path_isdir(owner_dir):
+def collect_events_dir_owner_events_sets(
+    fisc_mstr_dir: str, fisc_title: str
+) -> dict[str, set[int]]:
+    x_dict = {}
+    owners_dir = create_owners_dir_path(fisc_mstr_dir, fisc_title)
+    set_dir(owners_dir)
+    for owner_name in os_listdir(owners_dir):
+        owner_dir = create_path(owners_dir, owner_name)
+        events_dir = create_path(owner_dir, "events")
+        set_dir(events_dir)
+        if os_path_isdir(events_dir):
             owner_events_dirs = {
-                int(event_int_dir)
-                for event_int_dir in os_listdir(owner_dir)
-                if os_path_isdir(os_path_join(owner_dir, event_int_dir))
+                int(event_int_folder)
+                for event_int_folder in os_listdir(events_dir)
+                if os_path_isdir(create_path(events_dir, event_int_folder))
             }
-            directory_structure[owner_name] = owner_events_dirs
-    return directory_structure
+            x_dict[owner_name] = owner_events_dirs
+    return x_dict
 
 
 def get_owners_downhill_event_ints(

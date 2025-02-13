@@ -15,9 +15,9 @@ from src.f05_listen.hub_path import (
     create_episodes_dir_path,
     create_timepoint_dir_path,
     create_budpoint_json_path,
+    create_events_owner_dir_path,
     create_events_owner_json_path,
     create_deal_path,
-    create_events_owner_dir_path,
     create_voice_path,
     create_forecast_path,
 )
@@ -166,9 +166,10 @@ def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario0_none(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_events_dir = get_listen_temp_env_dir()
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
     # WHEN
-    owner_events_sets = collect_events_dir_owner_events_sets(fisc_events_dir)
+    owner_events_sets = collect_events_dir_owner_events_sets(fisc_mstr_dir, a23_str)
     # THEN
     assert owner_events_sets == {}
 
@@ -177,18 +178,20 @@ def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario1_DirsExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_events_dir = get_listen_temp_env_dir()
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
     bob_str = "Bob"
-    bob_dir = create_path(fisc_events_dir, bob_str)
     event1 = 1
     event2 = 2
-    bob_event1_dir = create_path(bob_dir, event1)
-    bob_event2_dir = create_path(bob_dir, event2)
-    set_dir(bob_event1_dir)
-    set_dir(bob_event2_dir)
+    bob1_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, bob_str, event1)
+    bob2_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, bob_str, event2)
+    print(f"  {bob1_dir=}")
+    print(f"  {bob2_dir=}")
+    set_dir(bob1_dir)
+    set_dir(bob2_dir)
 
     # WHEN
-    owner_events_sets = collect_events_dir_owner_events_sets(fisc_events_dir)
+    owner_events_sets = collect_events_dir_owner_events_sets(fisc_mstr_dir, a23_str)
 
     # THEN
     assert owner_events_sets == {bob_str: {event1, event2}}
@@ -198,25 +201,24 @@ def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario2_DirsExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_events_dir = get_listen_temp_env_dir()
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
     bob_str = "Bob"
     sue_str = "Sue"
-    bob_dir = create_path(fisc_events_dir, bob_str)
-    sue_dir = create_path(fisc_events_dir, sue_str)
     event1 = 1
     event2 = 2
     event7 = 7
-    bob_event1_dir = create_path(bob_dir, event1)
-    bob_event2_dir = create_path(bob_dir, event2)
-    sue_event2_dir = create_path(sue_dir, event2)
-    sue_event7_dir = create_path(sue_dir, event7)
-    set_dir(bob_event1_dir)
-    set_dir(bob_event2_dir)
-    set_dir(sue_event2_dir)
-    set_dir(sue_event7_dir)
+    bob1_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, bob_str, event1)
+    bob2_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, bob_str, event2)
+    sue2_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, sue_str, event2)
+    sue7_dir = create_events_owner_dir_path(fisc_mstr_dir, a23_str, sue_str, event7)
+    set_dir(bob1_dir)
+    set_dir(bob2_dir)
+    set_dir(sue2_dir)
+    set_dir(sue7_dir)
 
     # WHEN
-    owner_events_sets = collect_events_dir_owner_events_sets(fisc_events_dir)
+    owner_events_sets = collect_events_dir_owner_events_sets(fisc_mstr_dir, a23_str)
 
     # THEN
     assert owner_events_sets == {bob_str: {event1, event2}, sue_str: {event2, event7}}

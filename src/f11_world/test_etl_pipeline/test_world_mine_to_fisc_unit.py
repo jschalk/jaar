@@ -1,5 +1,10 @@
 from src.f00_instrument.file import create_path, count_dirs_files, delete_dir, save_file
-from src.f04_gift.atom_config import face_name_str, fisc_title_str
+from src.f04_gift.atom_config import (
+    face_name_str,
+    fisc_title_str,
+    owner_name_str,
+    acct_name_str,
+)
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_forecast_path,
@@ -75,9 +80,9 @@ def test_WorldUnit_mine_to_forecasts_CreatesFiles(env_dir_setup_cleanup):
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        "fisc_title",
-        "owner_name",
-        "acct_name",
+        fisc_title_str(),
+        owner_name_str(),
+        acct_name_str(),
     ]
     br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -105,7 +110,7 @@ def test_WorldUnit_mine_to_forecasts_CreatesFiles(env_dir_setup_cleanup):
     assert os_path_exists(a23_json_path)
     assert os_path_exists(a23_sue_voice_path)
     assert os_path_exists(a23_sue_forecast_path)
-    assert count_dirs_files(fizz_world.worlds_dir) == 68
+    assert count_dirs_files(fizz_world.worlds_dir) == 67
 
 
 # def test_WorldUnit_mine_to_forecasts_CreatestrainFiles(env_dir_setup_cleanup):

@@ -198,9 +198,10 @@ def test_create_events_owner_dir_path_ReturnObj():
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_dir = create_path(x_fiscs_dir, accord23_str)
-    a23_events_dir = create_path(a23_dir, "events")
-    a23_bob_dir = create_path(a23_events_dir, bob_str)
-    a23_bob_e3_dir = create_path(a23_bob_dir, event3)
+    a23_owners_dir = create_path(a23_dir, "owners")
+    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_events_dir = create_path(a23_bob_dir, "events")
+    a23_bob_e3_dir = create_path(a23_events_dir, event3)
     # bud_filename = "bud.json"
     # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
     assert gen_a23_e3_bud_path == a23_bob_e3_dir
