@@ -895,6 +895,10 @@ def etl_fisc_owner_time_agg_csvs2jsons(fisc_mstr_dir: str):
         save_file(json_path, None, get_json_from_dict(x_dict))
 
 
+def etl_create_deal_ledger_depth_dir(fisc_mstr_dir: str):
+    pass
+
+
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
     for x_sqlstr in get_fisc_insert_agg_from_staging_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)

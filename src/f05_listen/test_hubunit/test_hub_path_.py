@@ -21,9 +21,10 @@ from src.f05_listen.hub_path import (
     create_forecast_path,
 )
 from src.f05_listen.examples.listen_env import get_listen_temp_env_dir
+from inspect import getdoc as inspect_getdoc
 
 
-def test_create_fisc_json_path_ReturnObj() -> str:
+def test_create_fisc_json_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -38,7 +39,7 @@ def test_create_fisc_json_path_ReturnObj() -> str:
     assert gen_a23_json_path == expected_a23_json_path
 
 
-def test_create_fisc_owner_time_csv_path_ReturnObj() -> str:
+def test_create_fisc_owner_time_csv_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -53,7 +54,7 @@ def test_create_fisc_owner_time_csv_path_ReturnObj() -> str:
     assert gen_a23_te_csv_path == expected_a23_te_path
 
 
-def test_create_fisc_owner_time_json_path_ReturnObj() -> str:
+def test_create_fisc_owner_time_json_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -68,7 +69,7 @@ def test_create_fisc_owner_time_json_path_ReturnObj() -> str:
     assert gen_a23_te_csv_path == expected_a23_te_path
 
 
-def test_fisc_agenda_list_report_path_ReturnObj() -> str:
+def test_fisc_agenda_list_report_path_ReturnObj():
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -83,7 +84,7 @@ def test_fisc_agenda_list_report_path_ReturnObj() -> str:
     assert gen_a23_full_report_path == expected_a23_agenda_full_path
 
 
-def test_create_owners_dir_path_ReturnObj() -> str:
+def test_create_owners_dir_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
@@ -98,7 +99,7 @@ def test_create_owners_dir_path_ReturnObj() -> str:
     assert gen_owners_dir == expected_owners_dir
 
 
-def test_create_episodes_dir_path_ReturnObj() -> str:
+def test_create_episodes_dir_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
@@ -116,7 +117,7 @@ def test_create_episodes_dir_path_ReturnObj() -> str:
     assert episodes_dir == expected_episodes_dir
 
 
-def test_create_timepoint_dir_path_ReturnObj() -> str:
+def test_create_timepoint_dir_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
@@ -138,7 +139,7 @@ def test_create_timepoint_dir_path_ReturnObj() -> str:
     assert generated_timepoint_dir == expected_timepoint_dir
 
 
-def test_create_deal_path_ReturnObj() -> str:
+def test_create_deal_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -159,7 +160,7 @@ def test_create_deal_path_ReturnObj() -> str:
     assert gen_deal_path == expected_deal_path_dir
 
 
-def test_create_budpoint_json_path_ReturnObj() -> str:
+def test_create_budpoint_json_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -182,7 +183,7 @@ def test_create_budpoint_json_path_ReturnObj() -> str:
     assert gen_budpoint_path == expected_budpoint_path_dir
 
 
-def test_create_events_owner_dir_path_ReturnObj() -> str:
+def test_create_events_owner_dir_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
@@ -205,7 +206,7 @@ def test_create_events_owner_dir_path_ReturnObj() -> str:
     assert gen_a23_e3_bud_path == a23_bob_e3_dir
 
 
-def test_create_voice_path_ReturnObj() -> str:
+def test_create_voice_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -226,7 +227,7 @@ def test_create_voice_path_ReturnObj() -> str:
     assert gen_a23_e3_bud_path == expected_a23_bob_voice_json_path
 
 
-def test_create_forecast_path_ReturnObj() -> str:
+def test_create_forecast_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
