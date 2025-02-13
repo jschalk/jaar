@@ -18,7 +18,7 @@ from src.f05_listen.hub_path import (
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 
-LINUX_OS = platform_system == "Linux"
+LINUX_OS = platform_system() == "Linux"
 
 
 def test_create_fisc_json_path_HasDocString():
