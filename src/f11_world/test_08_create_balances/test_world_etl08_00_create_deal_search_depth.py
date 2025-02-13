@@ -45,21 +45,46 @@ def test_WorldUnit_create_deal_ledger_depth_dir_Scenaro0_DealEmpty(
 #     fizz_world = worldunit_shop("fizz")
 #     fisc_mstr_dir = fizz_world._fisc_mstr_dir
 #     a23_str = "accord23"
-#     fiscs_dir = create_path(fisc_mstr_dir, "fiscals")
-#     accord23_fisc = fiscunit_shop(a23_str, fiscs_dir)
+
+#     # Create FiscUnit with bob deal at time 37
+#     accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
 #     bob_str = "Bob"
 #     deal1_time_int = 37
 #     deal1_magnitude = 450
 #     accord23_fisc.add_dealepisode(bob_str, deal1_time_int, deal1_magnitude)
 #     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
 #     save_file(a23_json_path, None, accord23_fisc.get_json())
-#     a23_owners_path = create_owners_dir_path(fisc_mstr_dir, a23_str)
 #     a23_bob_episodes_dir = create_episodes_dir_path(fisc_mstr_dir, a23_str, bob_str)
 #     deal1_timepoint = create_timepoint_dir_path(
 #         fisc_mstr_dir, a23_str, bob_str, deal1_time_int
 #     )
-#     assert count_dirs_files(a23_owners_path) == 0
+#     #
+
+#     # Create event time mapping owner_time_agg for time 37
+#     sue_str = "Sue"
+#     event3 = 3
+#     event7 = 7
+#     timepoint37 = 37
+#     timepoint66 = 66
+#     a23_event_time_dict == {
+#         sue_str: {str(timepoint55): event3, str(timepoint66): event7}
+#     }
+
+
+#     a23_event_time_json_path = create_fisc_owner_time_json_path(
+#         fisc_mstr_dir, accord23_str
+#     )
+#     assert os_path_exists(a23_event_time_json_path) is False
+
+#     # WHEN
+#     fizz_world.fisc_owner_time_agg_csvs2jsons()
+
+#     # THEN
+#     assert os_path_exists(a23_event_time_json_path)
+#     a23_event_time_dict = get_dict_from_json(open_file(a23_event_time_json_path))
+
 #     assert os_path_exists(a23_bob_episodes_dir) is False
+#     assert count_dirs_files(a23_bob_episodes_dir) == 0
 #     assert os_path_exists(deal1_timepoint) is False
 
 #     # WHEN
@@ -67,8 +92,10 @@ def test_WorldUnit_create_deal_ledger_depth_dir_Scenaro0_DealEmpty(
 
 #     # THEN
 #     assert os_path_exists(a23_bob_episodes_dir)
+#     assert count_dirs_files(a23_bob_episodes_dir) == 2
 #     assert os_path_exists(deal1_timepoint)
 #     assert 1 == 2
+
 
 # bob_str = "Bob"
 # sue_str = "Sue"

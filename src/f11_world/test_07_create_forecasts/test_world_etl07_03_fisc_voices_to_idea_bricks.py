@@ -42,7 +42,7 @@ from os.path import exists as os_path_exists
 #     save_file(a23_bob_voice_path, None, bob_voice.get_json())
 #     a23_bob_forecast_path = create_forecast_path(fiscs_dir, a23_str, bob_inx)
 #     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
-#     save_file(fisc_json_path, None, fiscunit_shop(a23_str, fiscs_dir).get_json())
+#     save_file(fisc_json_path, None, fiscunit_shop(a23_str, fisc_mstr_dir).get_json())
 #     assert os_path_exists(a23_bob_voice_path)
 #     assert os_path_exists(a23_bob_forecast_path) is False
 
@@ -101,7 +101,7 @@ from os.path import exists as os_path_exists
 #     a23_bob_forecast_path = create_forecast_path(fiscs_dir, a23_str, bob_inx)
 #     a23_yao_forecast_path = create_forecast_path(fiscs_dir, a23_str, yao_inx)
 #     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
-#     save_file(fisc_json_path, None, fiscunit_shop(a23_str, fiscs_dir).get_json())
+#     save_file(fisc_json_path, None, fiscunit_shop(a23_str, fisc_mstr_dir).get_json())
 #     assert os_path_exists(a23_bob_voice_path)
 #     assert os_path_exists(a23_yao_voice_path)
 #     assert os_path_exists(a23_bob_forecast_path) is False
