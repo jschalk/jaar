@@ -1,7 +1,7 @@
-import pytest
+from pytest import fixture as pytest_fixture
 from pathlib import Path
-import tempfile
-import shutil
+from tempfile import mkdtemp as tempfile_mkdtemp
+from shutil import rmtree as shutil_rmtree
 from src.f00_instrument.file import count_dirs_files, save_file, create_path
 from src.f00_instrument.examples.instrument_env import (
     get_instrument_temp_env_dir,
@@ -10,10 +10,10 @@ from src.f00_instrument.examples.instrument_env import (
 from os.path import exists as os_path_exists
 
 
-@pytest.fixture
+@pytest_fixture
 def test_directory():
     """Fixture to create a temporary directory with files and subdirectories."""
-    test_dir = Path(tempfile.mkdtemp())  # Create a temp directory
+    test_dir = Path(tempfile_mkdtemp())  # Create a temp directory
 
     # Create subdirectories
     (test_dir / "subdir1").mkdir()
@@ -27,7 +27,7 @@ def test_directory():
     yield test_dir  # Provide the test directory to the test function
 
     # Cleanup after the test
-    shutil.rmtree(test_dir)
+    shutil_rmtree(test_dir)
 
 
 def test_count_dirs_files(test_directory):
