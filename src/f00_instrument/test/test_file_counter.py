@@ -3,6 +3,11 @@ from pathlib import Path
 import tempfile
 import shutil
 from src.f00_instrument.file import count_dirs_files, save_file, create_path
+from src.f00_instrument.examples.instrument_env import (
+    get_instrument_temp_env_dir,
+    env_dir_setup_cleanup,
+)
+from os.path import exists as os_path_exists
 
 
 @pytest.fixture
@@ -37,3 +42,17 @@ def test_count_dirs_files(test_directory):
     test2_dir = create_path(test_directory, "testing2")
     save_file(test2_dir, "testing.txt", "")
     assert count_dirs_files(test_directory) == 8
+
+
+def test_count_dirs_files_DoesNotCreateDir(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    sub1_dir = create_path(env_dir, "sub1")
+    assert os_path_exists(sub1_dir) is False
+
+    # WHEN
+    dirs_files_count = count_dirs_files(sub1_dir)
+
+    # THEN
+    assert dirs_files_count == 0
+    assert os_path_exists(sub1_dir) is False
