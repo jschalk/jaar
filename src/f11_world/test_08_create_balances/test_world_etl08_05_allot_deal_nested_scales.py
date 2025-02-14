@@ -41,10 +41,10 @@ from os.path import exists as os_path_exists
 #     save_file(a45_event_time_p, None, a45_event_time_csv)
 #     assert os_path_exists(a23_event_time_p)
 #     assert os_path_exists(a45_event_time_p)
-#     a23_event_time_json_path = create_fisc_ote1_json_path(
+#     a23_ote1_json_path = create_fisc_ote1_json_path(
 #         fisc_mstr_dir, accord23_str
 #     )
-#     a45_event_time_json_path = create_fisc_ote1_json_path(
+#     a45_ote1_json_path = create_fisc_ote1_json_path(
 #         fisc_mstr_dir, accord45_str
 #     )
 #     assert os_path_exists(a23_event_time_json_path) is False

@@ -41,19 +41,19 @@ def test_WorldUnit_fisc_ote1_agg_csvs2jsons_CreatesFile_Scenaro0(
     save_file(a45_event_time_p, None, a45_event_time_csv)
     assert os_path_exists(a23_event_time_p)
     assert os_path_exists(a45_event_time_p)
-    a23_event_time_json_path = create_fisc_ote1_json_path(fisc_mstr_dir, accord23_str)
-    a45_event_time_json_path = create_fisc_ote1_json_path(fisc_mstr_dir, accord45_str)
-    assert os_path_exists(a23_event_time_json_path) is False
-    assert os_path_exists(a45_event_time_json_path) is False
+    a23_ote1_json_path = create_fisc_ote1_json_path(fisc_mstr_dir, accord23_str)
+    a45_ote1_json_path = create_fisc_ote1_json_path(fisc_mstr_dir, accord45_str)
+    assert os_path_exists(a23_ote1_json_path) is False
+    assert os_path_exists(a45_ote1_json_path) is False
 
     # WHEN
     fizz_world.fisc_ote1_agg_csvs2jsons()
 
     # THEN
-    assert os_path_exists(a23_event_time_json_path)
-    assert os_path_exists(a45_event_time_json_path)
-    a23_event_time_dict = get_dict_from_json(open_file(a23_event_time_json_path))
-    a45_event_time_dict = get_dict_from_json(open_file(a45_event_time_json_path))
+    assert os_path_exists(a23_ote1_json_path)
+    assert os_path_exists(a45_ote1_json_path)
+    a23_event_time_dict = get_dict_from_json(open_file(a23_ote1_json_path))
+    a45_event_time_dict = get_dict_from_json(open_file(a45_ote1_json_path))
     assert a23_event_time_dict == {bob_str: {str(timepoint55): event3}}
     assert a45_event_time_dict == {
         sue_str: {str(timepoint55): event3, str(timepoint66): event7}
