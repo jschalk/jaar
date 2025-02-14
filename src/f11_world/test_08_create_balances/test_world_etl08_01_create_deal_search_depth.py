@@ -197,7 +197,7 @@
 #     assert os_path_exists(timepoint37_deal_ledger_state_json_path)
 #     ledger_state_json = open_file(timepoint37_deal_ledger_state_json_path)
 #     ledger_state_dict = get_dict_from_json(ledger_state_json)
-#     assert ledger_state_dict.get("ledger_depth") == 0
+#     assert ledger_state_dict.get(ledger_depth_str()) == 0
 #     assert ledger_state_dict.get("owner_name") == bob_str
 #     assert ledger_state_dict.get("event_int") == event3
 #     assert len(ledger_state_dict) == 3

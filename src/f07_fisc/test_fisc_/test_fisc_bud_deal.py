@@ -184,3 +184,38 @@ def test_FiscUnit_add_dealepisode_DoesNotRaiseError_allow_prev_to_present_time_e
     bob_deallog = deallog_shop(bob_str)
     bob_deallog.add_episode(bob_x0_time_int, bob_x0_magnitude)
     assert accord_fisc.get_deallog(bob_str) == bob_deallog
+
+
+def test_FiscUnit_add_dealepisode_SetsAttr_ledger_depth():
+    # ESTABLISH
+    accord45_str = "accord45"
+    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
+    sue_str = "Sue"
+    sue_x4_time_int = 4
+    sue_x4_magnitude = 55
+    sue_x7_time_int = 7
+    sue_x7_magnitude = 66
+    sue_x7_ledger_depth = 5
+    assert accord_fisc.deallogs == {}
+
+    # WHEN
+    accord_fisc.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
+    accord_fisc.add_dealepisode(
+        sue_str, sue_x7_time_int, sue_x7_magnitude, ledger_depth=sue_x7_ledger_depth
+    )
+
+    # THEN
+    assert accord_fisc.deallogs != {}
+    expected_sue_deallog = deallog_shop(sue_str)
+    expected_sue_deallog.add_episode(sue_x4_time_int, sue_x4_magnitude)
+    expected_sue_deallog.add_episode(
+        sue_x7_time_int, sue_x7_magnitude, ledger_depth=sue_x7_ledger_depth
+    )
+    # print(f"{expected_sue_deallog=}")
+    gen_sue_deallog = accord_fisc.get_deallog(sue_str)
+    gen_sue_x7_episode = gen_sue_deallog.get_episode(sue_x7_time_int)
+    print(f"{gen_sue_deallog=}")
+    assert gen_sue_x7_episode == expected_sue_deallog.get_episode(sue_x7_time_int)
+    assert gen_sue_deallog.episodes == expected_sue_deallog.episodes
+    assert gen_sue_deallog == expected_sue_deallog
+    assert accord_fisc.get_deallog(sue_str) == expected_sue_deallog

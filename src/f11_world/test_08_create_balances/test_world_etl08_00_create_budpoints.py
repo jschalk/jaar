@@ -1,5 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_json_from_dict
 from src.f00_instrument.file import open_file, save_file, create_path, count_dirs_files
+from src.f01_road.deal import ledger_depth_str
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.f04_gift.atom_config import owner_name_str
 from src.f05_listen.hub_path import (
@@ -150,7 +151,10 @@ def test_WorldUnit_create_budpoints_Scenaro3_DealExistsNotPerfectMatch_time_int_
     bob_str = "Bob"
     timepoint37 = 37
     deal1_magnitude = 450
-    accord23_fisc.add_dealepisode(bob_str, timepoint37, deal1_magnitude)
+    deal1_ledger_depth = 3
+    accord23_fisc.add_dealepisode(
+        bob_str, timepoint37, deal1_magnitude, ledger_depth=deal1_ledger_depth
+    )
     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(a23_json_path, None, accord23_fisc.get_json())
     assert os_path_exists(a23_json_path)
@@ -194,7 +198,7 @@ def test_WorldUnit_create_budpoints_Scenaro3_DealExistsNotPerfectMatch_time_int_
     assert os_path_exists(timepoint37_deal_ledger_state_json_path)
     ledger_state_json = open_file(timepoint37_deal_ledger_state_json_path)
     ledger_state_dict = get_dict_from_json(ledger_state_json)
-    assert ledger_state_dict.get("ledger_depth") == 0
+    assert ledger_state_dict.get(ledger_depth_str()) == deal1_ledger_depth
     assert ledger_state_dict.get(owner_name_str()) == bob_str
     assert ledger_state_dict.get(event_int_str()) == event3
     assert len(ledger_state_dict) == 3

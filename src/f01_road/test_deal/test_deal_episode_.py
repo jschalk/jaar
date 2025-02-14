@@ -4,10 +4,13 @@ from src.f01_road.deal import (
     time_int_str,
     bridge_str,
     ledger_depth_str,
+    magnitude_str,
+    episode_net_str,
     DealEpisode,
     dealepisode_shop,
     get_dealepisode_from_dict,
     get_dealepisode_from_json,
+    DEFAULT_DEPTH_LEDGER,
 )
 from pytest import raises as pytest_raises
 
@@ -17,6 +20,13 @@ def test_str_functions_ReturnObj():
     assert ledger_depth_str() == "ledger_depth"
     assert time_int_str() == "time_int"
     assert quota_str() == "quota"
+    assert magnitude_str() == "magnitude"
+    assert episode_net_str() == "episode_net"
+
+
+def test_DEFAULT_DEPTH_LEDGER():
+    # ESTABLISH / WHEN / THEN
+    assert DEFAULT_DEPTH_LEDGER == 2
 
 
 def test_DealEpisode_Exists():
@@ -208,18 +218,21 @@ def test_DealEpisode_get_dict_ReturnsObjWith_episode_net():
     t4_quota = 55
     t4_episode_net = {"Sue": -4}
     t4_magnitude = 67
-    t4_dealepisode = dealepisode_shop(t4_time_int, t4_quota, t4_episode_net)
-    t4_dealepisode._magnitude = 67
+    t4_ledger_depth = 5
+    t4_dealepisode = dealepisode_shop(
+        t4_time_int, t4_quota, t4_episode_net, t4_magnitude, t4_ledger_depth
+    )
 
     # WHEN
     t4_dict = t4_dealepisode.get_dict()
 
     # THEN
     assert t4_dict == {
-        "time_int": t4_time_int,
+        time_int_str(): t4_time_int,
         quota_str(): t4_quota,
-        "magnitude": t4_magnitude,
-        "episode_net": t4_episode_net,
+        magnitude_str(): t4_magnitude,
+        episode_net_str(): t4_episode_net,
+        ledger_depth_str(): t4_ledger_depth,
     }
 
 
@@ -271,9 +284,15 @@ def test_get_dealepisode_from_dict_ReturnsObj_Scenario1():
     t4_time_int = 4
     t4_quota = 55
     t4_magnitude = 65
+    t4_ledger_depth = 33
     t4_episode_net = {"Sue": -77}
-    t4_dealepisode = dealepisode_shop(t4_time_int, t4_quota, t4_episode_net)
-    t4_dealepisode._magnitude = t4_magnitude
+    t4_dealepisode = dealepisode_shop(
+        t4_time_int,
+        t4_quota,
+        t4_episode_net,
+        t4_magnitude,
+        ledger_depth=t4_ledger_depth,
+    )
     t4_dict = t4_dealepisode.get_dict()
 
     # WHEN
@@ -285,6 +304,7 @@ def test_get_dealepisode_from_dict_ReturnsObj_Scenario1():
     assert x_dealepisode.quota == t4_quota
     assert x_dealepisode._magnitude == t4_magnitude
     assert x_dealepisode._episode_net == t4_episode_net
+    assert x_dealepisode.ledger_depth == t4_ledger_depth
     assert x_dealepisode == t4_dealepisode
 
 

@@ -920,7 +920,7 @@ def etl_create_budpoints(fisc_mstr_dir: str):
                         timepoint_int=timepoint_int,
                     )
                     deal_ledger_state = {
-                        "ledger_depth": 0,
+                        "ledger_depth": deal_episode.ledger_depth,
                         "owner_name": owner_name,
                         "event_int": max_past_event_int,
                     }
