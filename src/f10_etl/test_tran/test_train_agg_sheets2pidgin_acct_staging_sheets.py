@@ -1,9 +1,9 @@
 from src.f00_instrument.file import create_path
+from src.f01_road.deal import owner_name_str
 from src.f04_gift.atom_config import (
     face_name_str,
     fisc_title_str,
     acct_name_str,
-    owner_name_str,
 )
 from src.f08_pidgin.pidgin_config import (
     event_int_str,

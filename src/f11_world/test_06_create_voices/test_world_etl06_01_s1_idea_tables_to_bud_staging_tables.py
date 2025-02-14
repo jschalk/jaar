@@ -1,10 +1,10 @@
 from src.f00_instrument.file import create_path, save_file
 from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
+from src.f01_road.deal import owner_name_str
 from src.f02_bud.bud_tool import budunit_str, bud_acctunit_str
 from src.f04_gift.atom_config import (
     face_name_str,
     acct_name_str,
-    owner_name_str,
     get_bud_dimens,
     fisc_title_str,
     credit_belief_str,

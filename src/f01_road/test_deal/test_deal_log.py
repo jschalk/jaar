@@ -6,6 +6,7 @@ from src.f01_road.deal import (
     get_deallog_from_dict,
     time_int_str,
     ledger_depth_str,
+    owner_name_str,
 )
 
 
@@ -198,7 +199,7 @@ def test_DealLog_get_headers_ReturnsObj():
     sue_headers_list = sue_deallog.get_headers()
 
     # THEN
-    assert sue_headers_list == ["owner_name", "time_int", quota_str()]
+    assert sue_headers_list == [owner_name_str(), time_int_str(), quota_str()]
 
 
 def test_DealLog_get_dict_ReturnsObj_Scenario0():
@@ -218,7 +219,7 @@ def test_DealLog_get_dict_ReturnsObj_Scenario0():
 
     # THEN
     assert sue_episodes_dict == {
-        "owner_name": sue_str,
+        owner_name_str(): sue_str,
         "episodes": {
             x4_time_int: {quota_str(): x4_quota, time_int_str(): x4_time_int},
             x7_time_int: {
@@ -235,7 +236,7 @@ def test_get_deallog_from_dict_ReturnsObj_Scenario0():
     sue_str = "Sue"
     sue_deallog = deallog_shop(sue_str)
     sue_episodes_dict = sue_deallog.get_dict()
-    assert sue_episodes_dict == {"owner_name": sue_str, "episodes": {}}
+    assert sue_episodes_dict == {owner_name_str(): sue_str, "episodes": {}}
 
     # WHEN
     x_deallog = get_deallog_from_dict(sue_episodes_dict)
@@ -260,7 +261,7 @@ def test_get_deallog_from_dict_ReturnsObj_Scenario1():
     sue_deallog.add_episode(x7_time_int, x7_quota)
     sue_episodes_dict = sue_deallog.get_dict()
     assert sue_episodes_dict == {
-        "owner_name": sue_str,
+        owner_name_str(): sue_str,
         "episodes": {
             x4_time_int: {"time_int": x4_time_int, quota_str(): x4_quota},
             x7_time_int: {"time_int": x7_time_int, quota_str(): x7_quota},
@@ -296,11 +297,11 @@ def test_get_deallog_from_dict_ReturnsObj_Scenario2():
     sue_deallog.get_episode(x7_time_int).set_net_deal(zia_str, zia_net_deal)
     sue_episodes_dict = sue_deallog.get_dict()
     assert sue_episodes_dict == {
-        "owner_name": sue_str,
+        owner_name_str(): sue_str,
         "episodes": {
-            x4_time_int: {"time_int": x4_time_int, quota_str(): x4_quota},
+            x4_time_int: {time_int_str(): x4_time_int, quota_str(): x4_quota},
             x7_time_int: {
-                "time_int": x7_time_int,
+                time_int_str(): x7_time_int,
                 quota_str(): x7_quota,
                 "episode_net": {sue_str: sue_net_deal, zia_str: zia_net_deal},
             },
@@ -339,7 +340,7 @@ def test_DealLog_get_tranbook_ReturnsObj():
     sue_deallog.get_episode(x7_time_int).set_net_deal(zia_str, zia_net_deal)
     sue_episodes_dict = sue_deallog.get_dict()
     assert sue_episodes_dict == {
-        "owner_name": sue_str,
+        owner_name_str(): sue_str,
         "episodes": {
             x4_time_int: {
                 time_int_str(): x4_time_int,

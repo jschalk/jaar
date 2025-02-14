@@ -9,6 +9,7 @@ from src.f01_road.deal import (
     quota_str,
     time_int_str,
     ledger_depth_str,
+    owner_name_str,
 )
 from src.f03_chrono.chrono import (
     c400_number_str,
@@ -20,7 +21,6 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     face_name_str,
     fisc_title_str,
-    owner_name_str,
     fund_coin_str,
     penny_str,
     respect_bit_str,

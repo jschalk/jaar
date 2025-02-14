@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, save_file, open_file
-from src.f01_road.deal import bridge_str
+from src.f01_road.deal import bridge_str, owner_name_str
 from src.f03_chrono.chrono import (
     c400_number_str,
     yr1_jan1_offset_str,
@@ -12,7 +12,6 @@ from src.f04_gift.atom_config import (
     acct_name_str,
     face_name_str,
     fisc_title_str,
-    owner_name_str,
     fund_coin_str,
     penny_str,
     respect_bit_str,

@@ -1,4 +1,5 @@
 from src.f01_road.jaar_config import default_unknown_word_if_None
+from src.f01_road.deal import owner_name_str
 from src.f01_road.road import default_bridge_if_None
 from src.f03_chrono.chrono import timeline_title_str
 from src.f04_gift.atom_config import (
@@ -18,7 +19,6 @@ from src.f04_gift.atom_config import (
     item_title_str,
     parent_road_str,
     penny_str,
-    owner_name_str,
     respect_bit_str,
     road_str,
     team_tag_str,

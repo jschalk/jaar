@@ -1,10 +1,10 @@
 from src.f00_instrument.dict_toolbox import create_sorted_concatenated_str
 from src.f00_instrument.file import get_dir_file_strs, create_path
+from src.f01_road.deal import owner_name_str
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_gift.atom_config import (
     face_name_str,
     fisc_title_str,
-    owner_name_str,
     acct_name_str,
     group_label_str,
     parent_road_str,

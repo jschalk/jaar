@@ -53,6 +53,10 @@ def episode_net_str() -> str:
     return "episode_net"
 
 
+def owner_name_str() -> str:
+    return "owner_name"
+
+
 DEFAULT_DEPTH_LEDGER = 2
 
 

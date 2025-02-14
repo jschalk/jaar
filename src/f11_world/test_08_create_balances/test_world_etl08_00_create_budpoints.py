@@ -1,8 +1,7 @@
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_json_from_dict
 from src.f00_instrument.file import open_file, save_file, create_path, count_dirs_files
-from src.f01_road.deal import ledger_depth_str
+from src.f01_road.deal import ledger_depth_str, owner_name_str
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
-from src.f04_gift.atom_config import owner_name_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_owners_dir_path,
