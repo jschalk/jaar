@@ -52,9 +52,9 @@ def test_WorldUnit_fisc_ote1_agg_csvs2jsons_CreatesFile_Scenaro0(
     # THEN
     assert os_path_exists(a23_ote1_json_path)
     assert os_path_exists(a45_ote1_json_path)
-    a23_event_time_dict = get_dict_from_json(open_file(a23_ote1_json_path))
-    a45_event_time_dict = get_dict_from_json(open_file(a45_ote1_json_path))
-    assert a23_event_time_dict == {bob_str: {str(timepoint55): event3}}
-    assert a45_event_time_dict == {
+    a23_ote1_dict = get_dict_from_json(open_file(a23_ote1_json_path))
+    a45_ote1_dict = get_dict_from_json(open_file(a45_ote1_json_path))
+    assert a23_ote1_dict == {bob_str: {str(timepoint55): event3}}
+    assert a45_ote1_dict == {
         sue_str: {str(timepoint55): event3, str(timepoint66): event7}
     }
