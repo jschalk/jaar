@@ -150,7 +150,7 @@ def test_DealEpisode_get_dict_ReturnsObj():
     t4_dict = t4_dealepisode.get_dict()
 
     # THEN
-    assert t4_dict == {"time_int": t4_time_int, quota_str(): t4_quota}
+    assert t4_dict == {time_int_str(): t4_time_int, quota_str(): t4_quota}
 
 
 def test_DealEpisode_calc_magnitude_SetsAttr_Scenario0():
@@ -266,7 +266,7 @@ def test_get_dealepisode_from_dict_ReturnsObj_Sccenario0():
     t4_quota = 55
     t4_dealepisode = dealepisode_shop(t4_time_int, t4_quota)
     t4_dict = t4_dealepisode.get_dict()
-    assert t4_dict == {"time_int": t4_time_int, quota_str(): t4_quota}
+    assert t4_dict == {time_int_str(): t4_time_int, quota_str(): t4_quota}
 
     # WHEN
     x_dealepisode = get_dealepisode_from_dict(t4_dict)
