@@ -202,11 +202,11 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
 
 
 def etl_train_staging_to_train_agg(train_dir):
-    transformer = trainStagingTotrainAggTransformer(train_dir)
+    transformer = TrainStagingToTrainAggTransformer(train_dir)
     transformer.transform()
 
 
-class trainStagingTotrainAggTransformer:
+class TrainStagingToTrainAggTransformer:
     def __init__(self, train_dir: str):
         self.train_dir = train_dir
 
@@ -232,11 +232,11 @@ class trainStagingTotrainAggTransformer:
 
 
 def etl_train_agg_to_train_valid(train_dir: str, legitimate_events: set[EventInt]):
-    transformer = trainAggTotrainValidTransformer(train_dir, legitimate_events)
+    transformer = TrainAggToTrainValidTransformer(train_dir, legitimate_events)
     transformer.transform()
 
 
-class trainAggTotrainValidTransformer:
+class TrainAggToTrainValidTransformer:
     def __init__(self, train_dir: str, legitimate_events: set[EventInt]):
         self.train_dir = train_dir
         self.legitimate_events = legitimate_events
@@ -265,11 +265,11 @@ class trainAggTotrainValidTransformer:
 
 
 def etl_train_agg_to_train_events(train_dir):
-    transformer = trainAggTotrainEventsTransformer(train_dir)
+    transformer = TrainAggToTrainEventsTransformer(train_dir)
     transformer.transform()
 
 
-class trainAggTotrainEventsTransformer:
+class TrainAggToTrainEventsTransformer:
     def __init__(self, train_dir: str):
         self.train_dir = train_dir
 
@@ -291,11 +291,11 @@ class trainAggTotrainEventsTransformer:
 
 
 def etl_train_events_to_events_log(train_dir: str):
-    transformer = trainEventsToEventsLogTransformer(train_dir)
+    transformer = TrainEventsToEventsLogTransformer(train_dir)
     transformer.transform()
 
 
-class trainEventsToEventsLogTransformer:
+class TrainEventsToEventsLogTransformer:
     def __init__(self, train_dir: str):
         self.train_dir = train_dir
 
@@ -378,7 +378,7 @@ def train_agg_single_to_pidgin_staging(
     pidgin_dimen: str, legitimate_events: set[EventInt], train_dir: str
 ):
     x_events = legitimate_events
-    transformer = trainAggToStagingTransformer(train_dir, pidgin_dimen, x_events)
+    transformer = TrainAggToStagingTransformer(train_dir, pidgin_dimen, x_events)
     transformer.transform()
 
 
@@ -413,7 +413,7 @@ def etl_train_agg_to_pidgin_staging(legitimate_events: set[EventInt], train_dir:
     etl_train_agg_to_pidgin_road_staging(legitimate_events, train_dir)
 
 
-class trainAggToStagingTransformer:
+class TrainAggToStagingTransformer:
     def __init__(
         self, train_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
     ):
