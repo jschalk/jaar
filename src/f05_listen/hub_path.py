@@ -76,6 +76,15 @@ def create_budpoint_json_path(
     return create_path(timepoint_dir, "budpoint.json")
 
 
+def create_deal_ledger_state_json_path(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, timepoint_int: int
+):
+    timepoint_dir = create_timepoint_dir_path(
+        fisc_mstr_dir, fisc_title, owner_name, timepoint_int
+    )
+    return create_path(timepoint_dir, "deal_ledger_state.json")
+
+
 def create_owner_event_dir_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
 ):

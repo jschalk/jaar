@@ -49,7 +49,7 @@ from src.f10_etl.transformers import (
     etl_fisc_agg_tables2fisc_ote1_agg,
     etl_fisc_table2fisc_ote1_agg_csvs,
     etl_fisc_ote1_agg_csvs2jsons,
-    etl_create_deal_ledger_depth_dir,
+    etl_create_budpoints,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -219,8 +219,8 @@ class WorldUnit:
     def fisc_ote1_agg_csvs2jsons(self):
         etl_fisc_ote1_agg_csvs2jsons(self._fisc_mstr_dir)
 
-    def create_deal_ledger_depth_dir(self):
-        etl_create_deal_ledger_depth_dir(self._fisc_mstr_dir)
+    def create_budpoints(self):
+        etl_create_budpoints(self._fisc_mstr_dir)
 
     def mine_to_forecasts(self):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")

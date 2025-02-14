@@ -15,6 +15,7 @@ from src.f05_listen.hub_path import (
     create_timepoint_dir_path,
     create_deal_path,
     create_budpoint_json_path,
+    create_deal_ledger_state_json_path,
     create_owner_event_dir_path,
     create_event_bud_path,
     create_event_all_gift_path,
@@ -183,6 +184,31 @@ def test_create_budpoint_json_path_ReturnObj():
     timepoint_dir = create_path(episodes_dir, timepoint7)
     expected_budpoint_path_dir = create_path(timepoint_dir, "budpoint.json")
     assert gen_budpoint_path == expected_budpoint_path_dir
+
+
+def test_create_deal_ledger_state_json_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    timepoint7 = 7
+
+    # WHEN
+    gen_deal_ledger_state_path = create_deal_ledger_state_json_path(
+        x_fisc_mstr_dir, a23_str, sue_str, timepoint7
+    )
+
+    # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    accord23_dir = create_path(x_fiscs_dir, a23_str)
+    owners_dir = create_path(accord23_dir, get_owners_folder())
+    sue_dir = create_path(owners_dir, sue_str)
+    episodes_dir = create_path(sue_dir, "episodes")
+    timepoint_dir = create_path(episodes_dir, timepoint7)
+    expected_deal_ledger_state_path_dir = create_path(
+        timepoint_dir, "deal_ledger_state.json"
+    )
+    assert gen_deal_ledger_state_path == expected_deal_ledger_state_path_dir
 
 
 def test_create_owner_event_dir_path_ReturnObj():

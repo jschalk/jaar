@@ -6,13 +6,14 @@ from src.f00_instrument.db_toolbox import (
     get_table_columns,
     save_to_split_csvs,
 )
-from src.f00_instrument.dict_toolbox import get_json_from_dict
+from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
 from src.f01_road.road import FaceName, EventInt
 from src.f02_bud.bud import (
     budunit_shop,
     get_from_json as budunit_get_from_json,
     BudUnit,
 )
+from src.f02_bud.bud_tool import get_credit_ledger
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
 from src.f04_gift.delta import get_minimal_buddelta
@@ -24,6 +25,8 @@ from src.f05_listen.hub_path import (
     create_fisc_ote1_json_path,
     create_owner_event_dir_path,
     create_event_bud_path,
+    create_budpoint_json_path,
+    create_deal_ledger_state_json_path,
 )
 from src.f05_listen.hub_tool import (
     collect_events_dir_owner_events_sets,
@@ -897,8 +900,76 @@ def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
         save_file(json_path, None, get_json_from_dict(x_dict))
 
 
-def etl_create_deal_ledger_depth_dir(fisc_mstr_dir: str):
-    pass
+def etl_create_budpoints(fisc_mstr_dir: str):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        fisc_dir = create_path(fiscs_dir, fisc_title)
+        ote1_json_path = create_path(fisc_dir, "fisc_ote1_agg.json")
+        if os_path_exists(ote1_json_path):
+            ote1_dict = get_dict_from_json(open_file(ote1_json_path))
+            fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
+            x_fiscunit = fiscunit_get_from_json(open_file(fisc_json_path))
+            for owner_name, deal_log in x_fiscunit.deallogs.items():
+                for timepoint_int, deal_episode in deal_log.episodes.items():
+                    ote1_owner_dict = ote1_dict.get(owner_name)
+                    max_past_event_int = save_budpoint_file_from_events(
+                        fisc_mstr_dir=fisc_mstr_dir,
+                        fisc_title=fisc_title,
+                        owner_name=owner_name,
+                        ote1_owner_dict=ote1_owner_dict,
+                        timepoint_int=timepoint_int,
+                    )
+                    deal_ledger_state = {
+                        "ledger_depth": 0,
+                        "owner_name": owner_name,
+                        "event_int": max_past_event_int,
+                    }
+                    deal_ledger_state_json_path = create_deal_ledger_state_json_path(
+                        fisc_mstr_dir=fisc_mstr_dir,
+                        fisc_title=fisc_title,
+                        owner_name=owner_name,
+                        timepoint_int=timepoint_int,
+                    )
+                    deal_ledger_json = get_json_from_dict(deal_ledger_state)
+                    save_file(deal_ledger_state_json_path, None, deal_ledger_json)
+                    # print(
+                    #     f"{owner_name=} {timepoint_int=} {timepoint_event_int=} {deal_episode=}"
+                    # )
+
+    # for every fiscunit
+    # for every deal
+    # find event_int for timepoint
+    # get bud from event
+    # get ledger, save ledger
+    # while depth incomplete
+    #    get currect ledger
+    #    for each acct in ledger
+    #       get most recent event after prev for acct
+    #       get bud from event_int
+    #       add ledger
+    #    add to ledger incomplete list
+
+
+def save_budpoint_file_from_events(
+    fisc_mstr_dir: str,
+    fisc_title: str,
+    owner_name: str,
+    ote1_owner_dict: dict[str, int],
+    timepoint_int: int,
+):
+    event_timepoints = set(ote1_owner_dict.keys())
+    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= timepoint_int}:
+        max_past_timepoint = max(past_timepoints)
+        max_past_event_int = ote1_owner_dict.get(max_past_timepoint)
+        event_bud_path = create_event_bud_path(
+            fisc_mstr_dir, fisc_title, owner_name, max_past_event_int
+        )
+        event_bud_json = open_file(event_bud_path)
+        budpoint_path = create_budpoint_json_path(
+            fisc_mstr_dir, fisc_title, owner_name, timepoint_int
+        )
+        save_file(budpoint_path, None, event_bud_json)
+        return max_past_event_int
 
 
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
