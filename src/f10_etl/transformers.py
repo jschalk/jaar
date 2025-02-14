@@ -923,6 +923,7 @@ def etl_create_budpoints(fisc_mstr_dir: str):
                         "ledger_depth": deal_episode.ledger_depth,
                         "owner_name": owner_name,
                         "event_int": max_past_event_int,
+                        "quota": deal_episode.quota,
                     }
                     deal_ledger_state_json_path = create_deal_ledger_state_json_path(
                         fisc_mstr_dir=fisc_mstr_dir,

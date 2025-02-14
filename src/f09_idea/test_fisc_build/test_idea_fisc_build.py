@@ -69,7 +69,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     accord23_fiscunit.add_dealepisode(
         owner_name="Sue",
         time_int=777,
-        money_magnitude=445,
+        quota=445,
         allow_prev_to_present_time_entry=True,
     )
     accord23_fiscunit.add_cashpurchase(

@@ -36,18 +36,18 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     accord_present_time_int = 23
     bob_str = "Bob"
     bob_x0_time_int = 702
-    bob_x0_magnitude = 33
+    bob_x0_quota = 33
     sue_str = "Sue"
     sue_x4_time_int = 404
-    sue_x4_magnitude = 55
+    sue_x4_quota = 55
     sue_x7_time_int = 505
-    sue_x7_magnitude = 66
+    sue_x7_quota = 66
     cash_time_int = 15
     bob_sue_amount = 30000
     accord_fisc.set_present_time(accord_present_time_int)
-    accord_fisc.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
-    accord_fisc.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
-    accord_fisc.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
+    accord_fisc.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_quota)
+    accord_fisc.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_quota)
+    accord_fisc.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_quota)
     accord_fisc.add_cashpurchase(
         owner_name=bob_str,
         acct_name=sue_str,
@@ -111,15 +111,15 @@ def test_FiscUnit_get_json_ReturnsObj():
     accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     bob_str = "Bob"
     bob_x0_time_int = 702
-    bob_x0_magnitude = 33
+    bob_x0_quota = 33
     sue_str = "Sue"
     sue_x4_time_int = 4
-    sue_x4_magnitude = 55
+    sue_x4_quota = 55
     sue_x7_time_int = 7
-    sue_x7_magnitude = 66
-    accord_fisc.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
-    accord_fisc.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
-    accord_fisc.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
+    sue_x7_quota = 66
+    accord_fisc.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_quota)
+    accord_fisc.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_quota)
+    accord_fisc.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_quota)
 
     # WHEN
     x_json = accord_fisc.get_json()
@@ -143,17 +143,17 @@ def test_get_from_dict_ReturnsFiscUnit():
     sue_penny = 0.8
     bob_str = "Bob"
     bob_x0_time_int = 702
-    bob_x0_magnitude = 33
+    bob_x0_quota = 33
     sue_str = "Sue"
     sue_x4_time_int = 4
-    sue_x4_magnitude = 55
+    sue_x4_quota = 55
     sue_x7_time_int = 7
-    sue_x7_magnitude = 66
+    sue_x7_quota = 66
     cash_time_int = 15
     bob_sue_amount = 30000
-    accord_fisc.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
-    accord_fisc.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
-    accord_fisc.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
+    accord_fisc.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_quota)
+    accord_fisc.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_quota)
+    accord_fisc.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_quota)
     accord_fisc.present_time = sue_present_time
     accord_fisc.bridge = sue_bridge
     accord_fisc.fund_coin = sue_fund_coin
@@ -197,15 +197,15 @@ def test_get_from_json_ReturnsFiscUnit():
     sue_penny = 0.8
     bob_str = "Bob"
     bob_x0_time_int = 702
-    bob_x0_magnitude = 33
+    bob_x0_quota = 33
     sue_str = "Sue"
     sue_x4_time_int = 4
-    sue_x4_magnitude = 55
+    sue_x4_quota = 55
     sue_x7_time_int = 7
-    sue_x7_magnitude = 66
-    accord_fisc.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_magnitude)
-    accord_fisc.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_magnitude)
-    accord_fisc.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_magnitude)
+    sue_x7_quota = 66
+    accord_fisc.add_dealepisode(bob_str, bob_x0_time_int, bob_x0_quota)
+    accord_fisc.add_dealepisode(sue_str, sue_x4_time_int, sue_x4_quota)
+    accord_fisc.add_dealepisode(sue_str, sue_x7_time_int, sue_x7_quota)
     accord_fisc.present_time = sue_present_time
     accord_fisc.bridge = sue_bridge
     accord_fisc.fund_coin = sue_fund_coin

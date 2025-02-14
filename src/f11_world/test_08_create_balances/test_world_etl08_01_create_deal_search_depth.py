@@ -53,8 +53,8 @@
 #     accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
 #     bob_str = "Bob"
 #     timepoint37 = 37
-#     deal1_magnitude = 450
-#     accord23_fisc.add_dealepisode(bob_str, timepoint37, deal1_magnitude)
+#     deal1_quota = 450
+#     accord23_fisc.add_dealepisode(bob_str, timepoint37, deal1_quota)
 #     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
 #     save_file(a23_json_path, None, accord23_fisc.get_json())
 #     assert os_path_exists(a23_json_path)
@@ -103,8 +103,8 @@
 #     accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
 #     bob_str = "Bob"
 #     timepoint37 = 37
-#     deal1_magnitude = 450
-#     accord23_fisc.add_dealepisode(bob_str, timepoint37, deal1_magnitude)
+#     deal1_quota = 450
+#     accord23_fisc.add_dealepisode(bob_str, timepoint37, deal1_quota)
 #     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
 #     save_file(a23_json_path, None, accord23_fisc.get_json())
 #     assert os_path_exists(a23_json_path)
@@ -152,8 +152,8 @@
 #     accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
 #     bob_str = "Bob"
 #     timepoint37 = 37
-#     deal1_magnitude = 450
-#     accord23_fisc.add_dealepisode(bob_str, timepoint37, deal1_magnitude)
+#     deal1_quota = 450
+#     accord23_fisc.add_dealepisode(bob_str, timepoint37, deal1_quota)
 #     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
 #     save_file(a23_json_path, None, accord23_fisc.get_json())
 #     assert os_path_exists(a23_json_path)
