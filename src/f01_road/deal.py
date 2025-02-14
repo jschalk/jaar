@@ -45,6 +45,21 @@ def ledger_depth_str() -> str:
     return "ledger_depth"
 
 
+def magnitude_str() -> str:
+    return "magnitude"
+
+
+def episode_net_str() -> str:
+    return "episode_net"
+
+
+def owner_name_str() -> str:
+    return "owner_name"
+
+
+DEFAULT_DEPTH_LEDGER = 2
+
+
 @dataclass
 class TranUnit:
     src: AcctName = None
@@ -236,6 +251,8 @@ class DealEpisode:
             x_dict["episode_net"] = self._episode_net
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
+        if self.ledger_depth != DEFAULT_DEPTH_LEDGER:
+            x_dict["ledger_depth"] = self.ledger_depth
         return x_dict
 
     def get_json(self) -> dict[str,]:
@@ -252,7 +269,7 @@ def dealepisode_shop(
     if quota is None:
         quota = default_fund_pool()
     if ledger_depth is None:
-        ledger_depth = 2
+        ledger_depth = DEFAULT_DEPTH_LEDGER
 
     return DealEpisode(
         time_int=time_int,
@@ -275,8 +292,13 @@ class DealLog:
     def set_episode(self, x_episode: DealEpisode):
         self.episodes[x_episode.time_int] = x_episode
 
-    def add_episode(self, x_time_int: TimeLinePoint, x_quota: FundNum):
-        self.set_episode(dealepisode_shop(x_time_int, x_quota))
+    def add_episode(
+        self, x_time_int: TimeLinePoint, x_quota: FundNum, ledger_depth: int = None
+    ):
+        dealepisode = dealepisode_shop(
+            time_int=x_time_int, quota=x_quota, ledger_depth=ledger_depth
+        )
+        self.set_episode(dealepisode)
 
     def episode_exists(self, x_time_int: TimeLinePoint) -> bool:
         return self.episodes.get(x_time_int) != None
@@ -330,7 +352,10 @@ def get_dealepisode_from_dict(x_dict: dict) -> DealEpisode:
     x_quota = x_dict.get("quota")
     x_episode_net = x_dict.get("episode_net")
     x_magnitude = x_dict.get("magnitude")
-    return dealepisode_shop(x_time_int, x_quota, x_episode_net, x_magnitude)
+    x_ledger_depth = x_dict.get("ledger_depth")
+    return dealepisode_shop(
+        x_time_int, x_quota, x_episode_net, x_magnitude, ledger_depth=x_ledger_depth
+    )
 
 
 def get_dealepisode_from_json(x_json: str) -> DealEpisode:

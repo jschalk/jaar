@@ -1,16 +1,16 @@
 from src.f00_instrument.db_toolbox import get_row_count, db_table_exists
-from src.f01_road.deal import time_int_str
-from src.f04_gift.atom_config import fisc_title_str, owner_name_str
+from src.f01_road.deal import time_int_str, owner_name_str
+from src.f04_gift.atom_config import fisc_title_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f10_etl.fisc_etl_tool import FiscPrimeObjsRef
 from src.f10_etl.transformers import (
     create_fisc_tables,
-    etl_fisc_agg_tables2fisc_owner_time_agg,
+    etl_fisc_agg_tables2fisc_ote1_agg,
 )
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_fisc_agg_tables2fisc_owner_time_agg_SetsTableAttr():
+def test_etl_fisc_agg_tables2fisc_ote1_agg_SetsTableAttr():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -38,16 +38,16 @@ VALUES
 """
         cursor.execute(insert_staging_sqlstr)
         assert get_row_count(cursor, x_fisc.deal_stage_tablename) == 4
-        fisc_owner_time_agg_str = "fisc_owner_time_agg"
-        assert db_table_exists(cursor, fisc_owner_time_agg_str) is False
+        fisc_ote1_agg_str = "fisc_ote1_agg"
+        assert db_table_exists(cursor, fisc_ote1_agg_str) is False
 
         # WHEN
-        etl_fisc_agg_tables2fisc_owner_time_agg(cursor)
+        etl_fisc_agg_tables2fisc_ote1_agg(cursor)
 
         # THEN
-        assert db_table_exists(cursor, fisc_owner_time_agg_str)
-        assert get_row_count(cursor, fisc_owner_time_agg_str) == 3
-        cursor.execute(f"SELECT * FROM {fisc_owner_time_agg_str};")
+        assert db_table_exists(cursor, fisc_ote1_agg_str)
+        assert get_row_count(cursor, fisc_ote1_agg_str) == 3
+        cursor.execute(f"SELECT * FROM {fisc_ote1_agg_str};")
         fiscunit_agg_rows = cursor.fetchall()
         ex_row0 = (accord23_str, bob_str, event3, timepoint55, None)
         ex_row1 = (accord45_str, sue_str, event3, timepoint55, None)
@@ -58,7 +58,7 @@ VALUES
         assert fiscunit_agg_rows == [ex_row0, ex_row1, ex_row2]
 
 
-# def test_etl_fisc_agg_tables2fisc_owner_time_agg_SetsTableAttr():
+# def test_etl_fisc_agg_tables2fisc_ote1_agg_SetsTableAttr():
 #     # ESTABLISH
 #     event3 = 3
 #     event7 = 7
@@ -83,17 +83,17 @@ VALUES
 # ;
 # """
 #         cursor.execute(insert_staging_sqlstr)
-#         fisc_owner_time_agg_str = "fisc_owner_time_agg"
-#         assert db_table_exists(cursor, fisc_owner_time_agg_str) is False
+#         fisc_ote1_agg_str = "fisc_ote1_agg"
+#         assert db_table_exists(cursor, fisc_ote1_agg_str) is False
 
 #         # WHEN
-#         etl_fisc_agg_tables2fisc_owner_time_agg(cursor)
+#         etl_fisc_agg_tables2fisc_ote1_agg(cursor)
 
 #         # THEN
-#         assert db_table_exists(cursor, fisc_owner_time_agg_str)
-#         assert get_row_count(cursor, fisc_owner_time_agg_str) == 3
+#         assert db_table_exists(cursor, fisc_ote1_agg_str)
+#         assert get_row_count(cursor, fisc_ote1_agg_str) == 3
 #         cursor.execute(
-#             f"SELECT {event_int_str()}, {fisc_title_str()}, {time_int_str()}, error_message FROM {fisc_owner_time_agg_str};"
+#             f"SELECT {event_int_str()}, {fisc_title_str()}, {time_int_str()}, error_message FROM {fisc_ote1_agg_str};"
 #         )
 #         fiscunit_agg_rows = cursor.fetchall()
 #         ex_row0 = (accord23_str, event3, timepoint66, "sorted")

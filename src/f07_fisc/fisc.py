@@ -274,6 +274,7 @@ class FiscUnit:
         time_int: TimeLinePoint,
         money_magnitude: int,
         allow_prev_to_present_time_entry: bool = False,
+        ledger_depth: int = None,
     ):
         if time_int < self.present_time and not allow_prev_to_present_time_entry:
             exception_str = f"Cannot set dealepisode because time_int {time_int} is less than FiscUnit.present_time {self.present_time}."
@@ -281,7 +282,7 @@ class FiscUnit:
         if self.deallog_exists(owner_name) is False:
             self.set_deallog(deallog_shop(owner_name))
         x_deallog = self.get_deallog(owner_name)
-        x_deallog.add_episode(time_int, money_magnitude)
+        x_deallog.add_episode(time_int, money_magnitude, ledger_depth)
 
     def get_dict(self, include_cashbook: bool = True) -> dict:
         x_dict = {

@@ -46,10 +46,10 @@ from src.f10_etl.transformers import (
     etl_event_gift_json_to_event_inherited_budunits,
     etl_event_inherited_budunits_to_fisc_voice,
     etl_fisc_voice_to_fisc_forecast,
-    etl_fisc_agg_tables2fisc_owner_time_agg,
-    etl_fisc_table2fisc_owner_time_agg_csvs,
-    etl_fisc_owner_time_agg_csvs2jsons,
-    etl_create_deal_ledger_depth_dir,
+    etl_fisc_agg_tables2fisc_ote1_agg,
+    etl_fisc_table2fisc_ote1_agg_csvs,
+    etl_fisc_ote1_agg_csvs2jsons,
+    etl_create_budpoints,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -195,11 +195,11 @@ class WorldUnit:
     def fisc_csvs_to_jsons(self):
         etl_fisc_csvs_to_fisc_jsons(self._fisc_mstr_dir)
 
-    def fisc_agg_tables2fisc_owner_time_agg(self, conn_or_cursor: sqlite3_Connection):
-        etl_fisc_agg_tables2fisc_owner_time_agg(conn_or_cursor)
+    def fisc_agg_tables2fisc_ote1_agg(self, conn_or_cursor: sqlite3_Connection):
+        etl_fisc_agg_tables2fisc_ote1_agg(conn_or_cursor)
 
-    def fisc_table2fisc_owner_time_agg_csvs(self, conn_or_cursor: sqlite3_Connection):
-        etl_fisc_table2fisc_owner_time_agg_csvs(conn_or_cursor, self._fisc_mstr_dir)
+    def fisc_table2fisc_ote1_agg_csvs(self, conn_or_cursor: sqlite3_Connection):
+        etl_fisc_table2fisc_ote1_agg_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
     def bud_tables_to_event_bud_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fisc_mstr_dir)
@@ -216,11 +216,11 @@ class WorldUnit:
     def fisc_voice_to_fisc_forecast(self):
         etl_fisc_voice_to_fisc_forecast(self._fisc_mstr_dir)
 
-    def fisc_owner_time_agg_csvs2jsons(self):
-        etl_fisc_owner_time_agg_csvs2jsons(self._fisc_mstr_dir)
+    def fisc_ote1_agg_csvs2jsons(self):
+        etl_fisc_ote1_agg_csvs2jsons(self._fisc_mstr_dir)
 
-    def create_deal_ledger_depth_dir(self):
-        etl_create_deal_ledger_depth_dir(self._fisc_mstr_dir)
+    def create_budpoints(self):
+        etl_create_budpoints(self._fisc_mstr_dir)
 
     def mine_to_forecasts(self):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")

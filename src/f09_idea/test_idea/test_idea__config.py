@@ -5,6 +5,7 @@ from src.f01_road.deal import (
     time_int_str,
     bridge_str,
     ledger_depth_str,
+    owner_name_str,
 )
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
@@ -39,7 +40,6 @@ from src.f04_gift.atom_config import (
     atom_update,
     face_name_str,
     fisc_title_str,
-    owner_name_str,
     acct_name_str,
     group_label_str,
     parent_road_str,

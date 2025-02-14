@@ -1,4 +1,5 @@
 from src.f00_instrument.dict_toolbox import x_is_json
+from src.f01_road.deal import owner_name_str
 from src.f01_road.jaar_config import init_gift_id, get_gifts_folder
 from src.f01_road.road import get_default_fisc_title as root_title
 from src.f02_bud.acct import acctunit_shop
@@ -7,7 +8,6 @@ from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import (
     fisc_title_str,
-    owner_name_str,
     face_name_str,
     credit_belief_str,
     debtit_belief_str,

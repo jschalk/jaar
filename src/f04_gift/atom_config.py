@@ -103,10 +103,6 @@ def fisc_title_str() -> str:
     return "fisc_title"
 
 
-def owner_name_str() -> str:
-    return "owner_name"
-
-
 def credor_respect_str() -> str:
     return "credor_respect"
 

@@ -1,11 +1,7 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
-from src.f04_gift.atom_config import (
-    face_name_str,
-    fisc_title_str,
-    acct_name_str,
-    owner_name_str,
-)
+from src.f01_road.deal import owner_name_str
+from src.f04_gift.atom_config import face_name_str, fisc_title_str, acct_name_str
 from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_db_tool import get_pragma_table_fetchall
 from src.f10_etl.fisc_etl_tool import (

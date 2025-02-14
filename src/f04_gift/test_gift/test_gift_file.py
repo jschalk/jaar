@@ -1,10 +1,11 @@
 from src.f00_instrument.file import open_file, create_path as f_path
 from src.f00_instrument.dict_toolbox import get_dict_from_json
+from src.f01_road.deal import owner_name_str
 from src.f01_road.jaar_config import (
     get_gifts_folder,
     get_test_fisc_title as fisc_title,
 )
-from src.f04_gift.atom_config import owner_name_str, face_name_str
+from src.f04_gift.atom_config import face_name_str
 from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.gift import giftunit_shop, create_giftunit_from_files
 from src.f04_gift.examples.example_atoms import (
