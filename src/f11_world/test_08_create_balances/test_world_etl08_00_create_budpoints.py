@@ -1,16 +1,13 @@
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_json_from_dict
 from src.f00_instrument.file import open_file, save_file, create_path, count_dirs_files
-from src.f01_road.deal import time_int_str
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
-from src.f04_gift.atom_config import fisc_title_str, owner_name_str
+from src.f04_gift.atom_config import owner_name_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_owners_dir_path,
-    create_episodes_dir_path,
     create_event_bud_path,
     create_budpoint_json_path,
     create_deal_ledger_state_json_path,
-    create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
 )
 from src.f07_fisc.fisc import fiscunit_shop
@@ -198,55 +195,6 @@ def test_WorldUnit_create_budpoints_Scenaro3_DealExistsNotPerfectMatch_time_int_
     ledger_state_json = open_file(timepoint37_deal_ledger_state_json_path)
     ledger_state_dict = get_dict_from_json(ledger_state_json)
     assert ledger_state_dict.get("ledger_depth") == 0
-    assert ledger_state_dict.get("owner_name") == bob_str
-    assert ledger_state_dict.get("event_int") == event3
+    assert ledger_state_dict.get(owner_name_str()) == bob_str
+    assert ledger_state_dict.get(event_int_str()) == event3
     assert len(ledger_state_dict) == 3
-
-
-# a23_ote1_dict = get_dict_from_json(open_file(a23_ote1_json_path))
-
-# bob_str = "Bob"
-# sue_str = "Sue"
-# event3 = 3
-# event7 = 7
-# accord23_str = "accord23"
-# accord45_str = "accord45"
-# timepoint55 = 55
-# timepoint66 = 66
-# fisc_mstr_dir = fizz_world._fisc_mstr_dir
-
-
-#     a23_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord23_str)
-#     a45_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord45_str)
-#     a23_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{time_int_str()},error_message
-# {accord23_str},{bob_str},{event3},{timepoint55},
-# """
-#     a45_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{time_int_str()},error_message
-# {accord45_str},{sue_str},{event3},{timepoint55},
-# {accord45_str},{sue_str},{event7},{timepoint66},
-# """
-#     save_file(a23_event_time_p, None, a23_event_time_csv)
-#     save_file(a45_event_time_p, None, a45_event_time_csv)
-#     assert os_path_exists(a23_event_time_p)
-#     assert os_path_exists(a45_event_time_p)
-#     a23_ote1_json_path = create_fisc_ote1_json_path(
-#         fisc_mstr_dir, accord23_str
-#     )
-#     a45_ote1_json_path = create_fisc_ote1_json_path(
-#         fisc_mstr_dir, accord45_str
-#     )
-#     assert os_path_exists(a23_ote1_json_path) is False
-#     assert os_path_exists(a45_event_time_json_path) is False
-
-#     # WHEN
-#     fizz_world.fisc_ote1_agg_csvs2jsons()
-
-#     # THEN
-#     assert os_path_exists(a23_ote1_json_path)
-#     assert os_path_exists(a45_event_time_json_path)
-#     a23_ote1_dict = get_dict_from_json(open_file(a23_ote1_json_path))
-#     a45_ote1_dict = get_dict_from_json(open_file(a45_event_time_json_path))
-#     assert a23_ote1_dict == {bob_str: {str(event3): timepoint55}}
-#     assert a45_ote1_dict == {
-#         sue_str: {str(event3): timepoint55, str(event7): timepoint66}
-#     }
