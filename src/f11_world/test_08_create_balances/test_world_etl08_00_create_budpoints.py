@@ -7,7 +7,7 @@ from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_owners_dir_path,
     create_event_bud_path,
-    create_budpoint_json_path,
+    create_budpoint_path,
     create_deal_ledger_state_json_path,
     create_fisc_ote1_json_path,
 )
@@ -70,7 +70,7 @@ def test_WorldUnit_create_budpoints_Scenaro1_DealExists(env_dir_setup_cleanup):
     assert os_path_exists(e3_budpoint_path)
 
     # destination of event 37 budunit json
-    timepoint37_budpoint_path = create_budpoint_json_path(
+    timepoint37_budpoint_path = create_budpoint_path(
         fisc_mstr_dir, a23_str, bob_str, timepoint37
     )
     print(f"{timepoint37_budpoint_path=}")
@@ -121,7 +121,7 @@ def test_WorldUnit_create_budpoints_Scenaro2_DealExistsButNoBudExistsInEventsPas
     assert os_path_exists(e3_budpoint_path)
 
     # where a timepoint 37 budunit json should be
-    timepoint37_budpoint_path = create_budpoint_json_path(
+    timepoint37_budpoint_path = create_budpoint_path(
         fisc_mstr_dir, a23_str, bob_str, timepoint37
     )
     print(f"{timepoint37_budpoint_path=}")
@@ -173,7 +173,7 @@ def test_WorldUnit_create_budpoints_Scenaro3_DealExistsNotPerfectMatch_time_int_
     assert os_path_exists(e3_budpoint_path)
 
     # destination of event 3 budunit json
-    timepoint37_budpoint_path = create_budpoint_json_path(
+    timepoint37_budpoint_path = create_budpoint_path(
         fisc_mstr_dir, a23_str, bob_str, timepoint37
     )
     print(f"{timepoint37_budpoint_path=}")

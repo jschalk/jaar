@@ -25,7 +25,7 @@ from src.f05_listen.hub_path import (
     create_fisc_ote1_json_path,
     create_owner_event_dir_path,
     create_event_bud_path,
-    create_budpoint_json_path,
+    create_budpoint_path,
     create_deal_ledger_state_json_path,
 )
 from src.f05_listen.hub_tool import (
@@ -970,7 +970,7 @@ def save_budpoint_file_from_events(
             fisc_mstr_dir, fisc_title, owner_name, max_past_event_int
         )
         event_bud_json = open_file(event_bud_path)
-        budpoint_path = create_budpoint_json_path(
+        budpoint_path = create_budpoint_path(
             fisc_mstr_dir, fisc_title, owner_name, time_int
         )
         save_file(budpoint_path, None, event_bud_json)
