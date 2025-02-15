@@ -17,9 +17,7 @@ from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_create_budpoints_Scenaro0_DealEmpty(
-    env_dir_setup_cleanup,
-):
+def test_WorldUnit_create_budpoints_Scenaro0_DealEmpty(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     accord23_str = "accord23"
@@ -38,9 +36,7 @@ def test_WorldUnit_create_budpoints_Scenaro0_DealEmpty(
     assert count_dirs_files(a23_owners_path) == 0
 
 
-def test_WorldUnit_create_budpoints_Scenaro1_DealExists(
-    env_dir_setup_cleanup,
-):
+def test_WorldUnit_create_budpoints_Scenaro1_DealExists(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     fisc_mstr_dir = fizz_world._fisc_mstr_dir

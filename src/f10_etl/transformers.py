@@ -933,9 +933,13 @@ def etl_create_budpoints(fisc_mstr_dir: str):
                     )
                     deal_ledger_json = get_json_from_dict(deal_ledger_state)
                     save_file(deal_ledger_state_json_path, None, deal_ledger_json)
-                    # print(
-                    #     f"{owner_name=} {timepoint_int=} {timepoint_event_int=} {deal_episode=}"
-                    # )
+
+
+def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
+    pass
+    # print(
+    #     f"{owner_name=} {timepoint_int=} {timepoint_event_int=} {deal_episode=}"
+    # )
 
     # for every fiscunit
     # for every deal
