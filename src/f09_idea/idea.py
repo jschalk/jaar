@@ -302,7 +302,7 @@ def _add_dealepisodes_from_df(x_fiscunit: FiscUnit, br00001_df: DataFrame):
         x_fiscunit.add_dealepisode(
             owner_name=row["owner_name"],
             time_int=row["time_int"],
-            money_magnitude=row["quota"],
+            quota=row["quota"],
             allow_prev_to_present_time_entry=True,
         )
 

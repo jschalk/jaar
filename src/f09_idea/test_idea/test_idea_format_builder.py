@@ -1,12 +1,11 @@
 from src.f00_instrument.dict_toolbox import get_json_from_dict
 from src.f00_instrument.file import save_file
-from src.f01_road.deal import owner_name_str
+from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f02_bud.bud_tool import bud_itemunit_str
 from src.f04_gift.atom_config import (
     parent_road_str,
     item_title_str,
     gogo_want_str,
-    fisc_title_str,
     get_atom_config_args,
 )
 from src.f09_idea.idea_config import (

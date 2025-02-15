@@ -1,4 +1,12 @@
 from src.f00_instrument.file import create_path
+from src.f01_road.deal import fisc_title_str, owner_name_str
+from src.f04_gift.atom_config import (
+    face_name_str,
+    event_int_str,
+    acct_name_str,
+    group_label_str,
+    gogo_want_str,
+)
 from src.f09_idea.idea_config import get_idea_sqlite_types
 from src.f09_idea.examples.idea_env import idea_env_setup_cleanup, idea_fiscs_dir
 from src.f09_idea.idea_db_tool import create_idea_table_from_csv, insert_idea_csv
@@ -42,7 +50,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     # Create a test CSV file
     with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            "face_name,event_int,fisc_title,owner_name,acct_name,group_label,gogo_want\n"
+            f"{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
         )
         csv_file.write("Sue,3,Accord43,Bob,Bob,;runners,6.5\n")
         csv_file.write("Sue,3,Accord43,Yao,Bob,;runners,7.5\n")
@@ -80,24 +88,24 @@ def test_create_idea_table_from_csv_ChangesDBState(
 
     # Expected column definitions
     expected_columns = [
-        (0, "face_name", "TEXT", 0, None, 0),
-        (1, "event_int", "INTEGER", 0, None, 0),
-        (2, "fisc_title", "TEXT", 0, None, 0),
-        (3, "owner_name", "TEXT", 0, None, 0),
-        (4, "acct_name", "TEXT", 0, None, 0),
-        (5, "group_label", "TEXT", 0, None, 0),
-        (6, "gogo_want", "REAL", 0, None, 0),
+        (0, face_name_str(), "TEXT", 0, None, 0),
+        (1, event_int_str(), "INTEGER", 0, None, 0),
+        (2, fisc_title_str(), "TEXT", 0, None, 0),
+        (3, owner_name_str(), "TEXT", 0, None, 0),
+        (4, acct_name_str(), "TEXT", 0, None, 0),
+        (5, group_label_str(), "TEXT", 0, None, 0),
+        (6, gogo_want_str(), "REAL", 0, None, 0),
     ]
     assert columns == expected_columns
     column_types = get_idea_sqlite_types()
     get_idea_sqlite_types_columns = [
-        (0, "face_name", column_types.get("face_name"), 0, None, 0),
-        (1, "event_int", column_types.get("event_int"), 0, None, 0),
-        (2, "fisc_title", column_types.get("fisc_title"), 0, None, 0),
-        (3, "owner_name", column_types.get("owner_name"), 0, None, 0),
-        (4, "acct_name", column_types.get("acct_name"), 0, None, 0),
-        (5, "group_label", column_types.get("group_label"), 0, None, 0),
-        (6, "gogo_want", column_types.get("gogo_want"), 0, None, 0),
+        (0, face_name_str(), column_types.get(face_name_str()), 0, None, 0),
+        (1, event_int_str(), column_types.get(event_int_str()), 0, None, 0),
+        (2, fisc_title_str(), column_types.get(fisc_title_str()), 0, None, 0),
+        (3, owner_name_str(), column_types.get(owner_name_str()), 0, None, 0),
+        (4, acct_name_str(), column_types.get(acct_name_str()), 0, None, 0),
+        (5, group_label_str(), column_types.get(group_label_str()), 0, None, 0),
+        (6, gogo_want_str(), column_types.get(gogo_want_str()), 0, None, 0),
     ]
     assert columns == get_idea_sqlite_types_columns
 
@@ -128,7 +136,7 @@ def test_insert_idea_csv_ChangesDBState_add_to_empty_table(
 
 
 def test_insert_idea_csv_ChangesDBState_CorrectlyInserts(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str], idea_env_setup_cleanup
 ):
     """Test the insert_csv function using pytest."""
     # ESTABLISH
@@ -137,7 +145,7 @@ def test_insert_idea_csv_ChangesDBState_CorrectlyInserts(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            "face_name,event_int,fisc_title,owner_name,acct_name,group_label,gogo_want\n"
+            f"{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
         )
         csv_file.write("Zia,7,Accord55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("Zia,8,Accord43,Zia,Bob,;runners,11.1\n")
@@ -181,7 +189,7 @@ def test_insert_idea_csv_ChangesDBState_CanCreateTable(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            "face_name,event_int,fisc_title,owner_name,acct_name,group_label,gogo_want\n"
+            f"{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
         )
         csv_file.write("Zia,7,Accord55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("Zia,8,Accord43,Zia,Bob,;runners,11.1\n")

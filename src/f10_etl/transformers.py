@@ -910,31 +910,36 @@ def etl_create_budpoints(fisc_mstr_dir: str):
             fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
             x_fiscunit = fiscunit_get_from_json(open_file(fisc_json_path))
             for owner_name, deal_log in x_fiscunit.deallogs.items():
-                for timepoint_int, deal_episode in deal_log.episodes.items():
+                for time_int, deal_episode in deal_log.episodes.items():
                     ote1_owner_dict = ote1_dict.get(owner_name)
                     max_past_event_int = save_budpoint_file_from_events(
                         fisc_mstr_dir=fisc_mstr_dir,
                         fisc_title=fisc_title,
                         owner_name=owner_name,
                         ote1_owner_dict=ote1_owner_dict,
-                        timepoint_int=timepoint_int,
+                        time_int=time_int,
                     )
                     deal_ledger_state = {
                         "ledger_depth": deal_episode.ledger_depth,
                         "owner_name": owner_name,
                         "event_int": max_past_event_int,
+                        "quota": deal_episode.quota,
                     }
                     deal_ledger_state_json_path = create_deal_ledger_state_json_path(
                         fisc_mstr_dir=fisc_mstr_dir,
                         fisc_title=fisc_title,
                         owner_name=owner_name,
-                        timepoint_int=timepoint_int,
+                        time_int=time_int,
                     )
                     deal_ledger_json = get_json_from_dict(deal_ledger_state)
                     save_file(deal_ledger_state_json_path, None, deal_ledger_json)
-                    # print(
-                    #     f"{owner_name=} {timepoint_int=} {timepoint_event_int=} {deal_episode=}"
-                    # )
+
+
+def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
+    pass
+    # print(
+    #     f"{owner_name=} {time_int=} {timepoint_event_int=} {deal_episode=}"
+    # )
 
     # for every fiscunit
     # for every deal
@@ -955,10 +960,10 @@ def save_budpoint_file_from_events(
     fisc_title: str,
     owner_name: str,
     ote1_owner_dict: dict[str, int],
-    timepoint_int: int,
+    time_int: int,
 ):
     event_timepoints = set(ote1_owner_dict.keys())
-    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= timepoint_int}:
+    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= time_int}:
         max_past_timepoint = max(past_timepoints)
         max_past_event_int = ote1_owner_dict.get(max_past_timepoint)
         event_bud_path = create_event_bud_path(
@@ -966,7 +971,7 @@ def save_budpoint_file_from_events(
         )
         event_bud_json = open_file(event_bud_path)
         budpoint_path = create_budpoint_json_path(
-            fisc_mstr_dir, fisc_title, owner_name, timepoint_int
+            fisc_mstr_dir, fisc_title, owner_name, time_int
         )
         save_file(budpoint_path, None, event_bud_json)
         return max_past_event_int

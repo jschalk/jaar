@@ -31,10 +31,6 @@ def pidgin_filename() -> str:
     return "pidgin.json"
 
 
-def event_int_str() -> str:
-    return "event_int"
-
-
 def otx_bridge_str() -> str:
     return "otx_bridge"
 

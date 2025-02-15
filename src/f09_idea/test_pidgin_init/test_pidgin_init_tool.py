@@ -6,11 +6,11 @@ from src.f04_gift.atom_config import (
     type_LabelUnit_str,
     road_str,
     face_name_str,
+    event_int_str,
     type_AcctName_str,
     type_LabelUnit_str,
 )
 from src.f08_pidgin.pidgin_config import (
-    event_int_str,
     otx_bridge_str,
     inx_bridge_str,
     unknown_word_str,

@@ -1,5 +1,5 @@
 from src.f01_road.jaar_config import default_unknown_word_if_None
-from src.f01_road.deal import owner_name_str
+from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f01_road.road import default_bridge_if_None
 from src.f03_chrono.chrono import timeline_title_str
 from src.f04_gift.atom_config import (
@@ -12,7 +12,6 @@ from src.f04_gift.atom_config import (
     awardee_tag_str,
     base_str,
     face_name_str,
-    fisc_title_str,
     fund_coin_str,
     healer_name_str,
     group_label_str,

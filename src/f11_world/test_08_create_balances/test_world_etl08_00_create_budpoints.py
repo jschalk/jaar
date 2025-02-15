@@ -1,7 +1,8 @@
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_json_from_dict
 from src.f00_instrument.file import open_file, save_file, create_path, count_dirs_files
-from src.f01_road.deal import ledger_depth_str, owner_name_str
+from src.f01_road.deal import ledger_depth_str, owner_name_str, quota_str
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
+from src.f04_gift.atom_config import event_int_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_owners_dir_path,
@@ -11,20 +12,18 @@ from src.f05_listen.hub_path import (
     create_fisc_ote1_json_path,
 )
 from src.f07_fisc.fisc import fiscunit_shop
-from src.f08_pidgin.pidgin_config import event_int_str
+
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_create_budpoints_Scenaro0_DealEmpty(
-    env_dir_setup_cleanup,
-):
+def test_WorldUnit_create_budpoints_Scenaro0_DealEmpty(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     accord23_str = "accord23"
-    fiscs_dir = create_path(fizz_world._fisc_mstr_dir, "fiscals")
-    accord23_fisc = fiscunit_shop(accord23_str, fiscs_dir)
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
+    accord23_fisc = fiscunit_shop(accord23_str, fisc_mstr_dir)
     a23_json_path = create_fisc_json_path(fizz_world._fisc_mstr_dir, accord23_str)
     save_file(a23_json_path, None, accord23_fisc.get_json())
     print(f"{a23_json_path=}")
@@ -38,9 +37,7 @@ def test_WorldUnit_create_budpoints_Scenaro0_DealEmpty(
     assert count_dirs_files(a23_owners_path) == 0
 
 
-def test_WorldUnit_create_budpoints_Scenaro1_DealExists(
-    env_dir_setup_cleanup,
-):
+def test_WorldUnit_create_budpoints_Scenaro1_DealExists(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
@@ -50,8 +47,8 @@ def test_WorldUnit_create_budpoints_Scenaro1_DealExists(
     accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
     bob_str = "Bob"
     timepoint37 = 37
-    deal1_magnitude = 450
-    accord23_fisc.add_dealepisode(bob_str, timepoint37, deal1_magnitude)
+    deal1_quota = 450
+    accord23_fisc.add_dealepisode(bob_str, timepoint37, deal1_quota)
     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(a23_json_path, None, accord23_fisc.get_json())
     assert os_path_exists(a23_json_path)
@@ -100,8 +97,8 @@ def test_WorldUnit_create_budpoints_Scenaro2_DealExistsButNoBudExistsInEventsPas
     accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
     bob_str = "Bob"
     timepoint37 = 37
-    deal1_magnitude = 450
-    accord23_fisc.add_dealepisode(bob_str, timepoint37, deal1_magnitude)
+    deal1_quota = 450
+    accord23_fisc.add_dealepisode(bob_str, timepoint37, deal1_quota)
     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(a23_json_path, None, accord23_fisc.get_json())
     assert os_path_exists(a23_json_path)
@@ -149,10 +146,10 @@ def test_WorldUnit_create_budpoints_Scenaro3_DealExistsNotPerfectMatch_time_int_
     accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
     bob_str = "Bob"
     timepoint37 = 37
-    deal1_magnitude = 450
+    deal1_quota = 450
     deal1_ledger_depth = 3
     accord23_fisc.add_dealepisode(
-        bob_str, timepoint37, deal1_magnitude, ledger_depth=deal1_ledger_depth
+        bob_str, timepoint37, deal1_quota, ledger_depth=deal1_ledger_depth
     )
     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(a23_json_path, None, accord23_fisc.get_json())
@@ -199,5 +196,6 @@ def test_WorldUnit_create_budpoints_Scenaro3_DealExistsNotPerfectMatch_time_int_
     ledger_state_dict = get_dict_from_json(ledger_state_json)
     assert ledger_state_dict.get(ledger_depth_str()) == deal1_ledger_depth
     assert ledger_state_dict.get(owner_name_str()) == bob_str
+    assert ledger_state_dict.get(quota_str()) == deal1_quota
     assert ledger_state_dict.get(event_int_str()) == event3
-    assert len(ledger_state_dict) == 3
+    assert len(ledger_state_dict) == 4

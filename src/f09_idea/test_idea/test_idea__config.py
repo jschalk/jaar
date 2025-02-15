@@ -6,6 +6,7 @@ from src.f01_road.deal import (
     bridge_str,
     ledger_depth_str,
     owner_name_str,
+    fisc_title_str,
 )
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
@@ -39,7 +40,7 @@ from src.f04_gift.atom_config import (
     atom_insert,
     atom_update,
     face_name_str,
-    fisc_title_str,
+    event_int_str,
     acct_name_str,
     group_label_str,
     parent_road_str,
@@ -95,7 +96,6 @@ from src.f07_fisc.fisc_config import (
     weekday_order_str,
 )
 from src.f08_pidgin.pidgin_config import (
-    event_int_str,
     pidginunit_str,
     otx_bridge_str,
     inx_bridge_str,

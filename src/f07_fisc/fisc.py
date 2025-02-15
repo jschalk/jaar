@@ -272,7 +272,7 @@ class FiscUnit:
         self,
         owner_name: OwnerName,
         time_int: TimeLinePoint,
-        money_magnitude: int,
+        quota: int,
         allow_prev_to_present_time_entry: bool = False,
         ledger_depth: int = None,
     ):
@@ -282,7 +282,7 @@ class FiscUnit:
         if self.deallog_exists(owner_name) is False:
             self.set_deallog(deallog_shop(owner_name))
         x_deallog = self.get_deallog(owner_name)
-        x_deallog.add_episode(time_int, money_magnitude, ledger_depth)
+        x_deallog.add_episode(time_int, quota, ledger_depth)
 
     def get_dict(self, include_cashbook: bool = True) -> dict:
         x_dict = {

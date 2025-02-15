@@ -1,4 +1,15 @@
 # from src.f00_instrument.db_toolbox import create_table_from_columns
+from src.f01_road.deal import fisc_title_str, owner_name_str
+from src.f04_gift.atom_config import (
+    event_int_str,
+    face_name_str,
+    road_str,
+    team_tag_str,
+    acct_name_str,
+    credit_belief_str,
+    debtit_belief_str,
+)
+from src.f07_fisc.fisc_config import amount_str
 from src.f09_idea.idea_config import get_idea_config_dict
 from src.f09_idea.idea_db_tool import (
     create_idea_sorted_table,
@@ -13,14 +24,14 @@ def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario0_bud_item_teamlin
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            "event_int",
-            "face_name",
-            "fisc_title",
-            "road",
-            "team_tag",
-            "owner_name",
-            "acct_name",
-            "amount",
+            event_int_str(),
+            face_name_str(),
+            fisc_title_str(),
+            road_str(),
+            team_tag_str(),
+            owner_name_str(),
+            acct_name_str(),
+            amount_str(),
         ]
         budteam_cat = "bud_item_teamlink"
         src_table = f"{idea_number}_staging"
@@ -63,16 +74,16 @@ def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario1_bud_acctunit():
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            "event_int",
-            "face_name",
-            "fisc_title",
-            "road",
-            "team_tag",
-            "owner_name",
-            "acct_name",
-            "credit_belief",
-            "debtit_belief",
-            "amount",
+            event_int_str(),
+            face_name_str(),
+            fisc_title_str(),
+            road_str(),
+            team_tag_str(),
+            owner_name_str(),
+            acct_name_str(),
+            credit_belief_str(),
+            debtit_belief_str(),
+            amount_str(),
         ]
         budacct_cat = "bud_acctunit"
         src_table = f"{idea_number}_staging"
@@ -113,15 +124,15 @@ def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario2_bud_acctunit():
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            "event_int",
-            "face_name",
-            "fisc_title",
-            "road",
-            "team_tag",
-            "owner_name",
-            "acct_name",
-            "credit_belief",
-            "amount",
+            event_int_str(),
+            face_name_str(),
+            fisc_title_str(),
+            road_str(),
+            team_tag_str(),
+            owner_name_str(),
+            acct_name_str(),
+            credit_belief_str(),
+            amount_str(),
         ]
         budacct_cat = "bud_acctunit"
         src_table = f"{idea_number}_staging"

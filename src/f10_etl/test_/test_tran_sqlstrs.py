@@ -7,15 +7,15 @@ from src.f00_instrument.db_toolbox import (
     get_table_columns,
     is_stageable,
 )
+from src.f01_road.deal import fisc_title_str
 from src.f02_bud.bud_tool import budunit_str
 from src.f04_gift.atom_config import (
+    event_int_str,
     face_name_str,
-    fisc_title_str,
     get_bud_dimens,
     get_delete_key_name,
 )
 from src.f07_fisc.fisc_config import fiscunit_str, get_fisc_dimens
-from src.f08_pidgin.pidgin_config import event_int_str, pidginunit_str
 from src.f09_idea.idea_config import (
     idea_number_str,
     get_idea_sqlite_types,

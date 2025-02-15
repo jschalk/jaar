@@ -1,5 +1,13 @@
 from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.road import default_bridge_if_None
+from src.f01_road.deal import owner_name_str
+from src.f04_gift.atom_config import event_int_str, face_name_str
+from src.f08_pidgin.pidgin_config import (
+    otx_bridge_str,
+    inx_bridge_str,
+    unknown_word_str,
+    otx2inx_str,
+)
 from src.f08_pidgin.map import (
     NameMap,
     namemap_shop,
@@ -310,12 +318,12 @@ def test_NameMap_get_dict_ReturnsObj():
         event_int=event7,
     )
     x1_road_map_dict = {
-        "otx_bridge": x_namemap.otx_bridge,
-        "inx_bridge": x_namemap.inx_bridge,
-        "unknown_word": x_namemap.unknown_word,
-        "otx2inx": {},
-        "face_name": x_namemap.face_name,
-        "event_int": x_namemap.event_int,
+        otx_bridge_str(): x_namemap.otx_bridge,
+        inx_bridge_str(): x_namemap.inx_bridge,
+        unknown_word_str(): x_namemap.unknown_word,
+        otx2inx_str(): {},
+        face_name_str(): x_namemap.face_name,
+        event_int_str(): x_namemap.event_int,
     }
     assert x_namemap.get_dict() == x1_road_map_dict
 
@@ -323,12 +331,12 @@ def test_NameMap_get_dict_ReturnsObj():
     x_namemap.set_otx2inx(clean_otx, clean_inx)
     # THEN
     x2_road_map_dict = {
-        "otx_bridge": x_namemap.otx_bridge,
-        "inx_bridge": x_namemap.inx_bridge,
-        "unknown_word": x_namemap.unknown_word,
-        "otx2inx": {clean_otx: clean_inx},
-        "face_name": sue_str,
-        "event_int": event7,
+        otx_bridge_str(): x_namemap.otx_bridge,
+        inx_bridge_str(): x_namemap.inx_bridge,
+        unknown_word_str(): x_namemap.unknown_word,
+        otx2inx_str(): {clean_otx: clean_inx},
+        face_name_str(): sue_str,
+        event_int_str(): event7,
     }
     assert x_namemap.get_dict() == x2_road_map_dict
 
@@ -344,12 +352,12 @@ def test_NameMap_get_json_ReturnsObj():
     slash_otx_bridge = "/"
     x_namemap = namemap_shop(sue_str, otx_bridge=slash_otx_bridge)
     x1_road_map_json = f"""{{
-  "event_int": 0,
-  "face_name": "{sue_str}",
-  "inx_bridge": "{x_namemap.inx_bridge}",
-  "otx2inx": {{}},
-  "otx_bridge": "{x_namemap.otx_bridge}",
-  "unknown_word": "{x_namemap.unknown_word}"
+  "{event_int_str()}": 0,
+  "{face_name_str()}": "{sue_str}",
+  "{inx_bridge_str()}": "{x_namemap.inx_bridge}",
+  "{otx2inx_str()}": {{}},
+  "{otx_bridge_str()}": "{x_namemap.otx_bridge}",
+  "{unknown_word_str()}": "{x_namemap.unknown_word}"
 }}"""
     print(f"           {x1_road_map_json=}")
     print(f"{x_namemap.get_json()=}")
@@ -360,14 +368,14 @@ def test_NameMap_get_json_ReturnsObj():
     x_namemap.event_int = event7
     # THEN
     x2_road_map_json = f"""{{
-  "event_int": {event7},
-  "face_name": "{sue_str}",
-  "inx_bridge": "{x_namemap.inx_bridge}",
-  "otx2inx": {{
+  "{event_int_str()}": {event7},
+  "{face_name_str()}": "{sue_str}",
+  "{inx_bridge_str()}": "{x_namemap.inx_bridge}",
+  "{otx2inx_str()}": {{
     "{clean_otx}": "{clean_inx}"
   }},
-  "otx_bridge": "{x_namemap.otx_bridge}",
-  "unknown_word": "{x_namemap.unknown_word}"
+  "{otx_bridge_str()}": "{x_namemap.otx_bridge}",
+  "{unknown_word_str()}": "{x_namemap.unknown_word}"
 }}"""
     print(f"           {x2_road_map_json=}")
     print(f"{x_namemap.get_json()=}")

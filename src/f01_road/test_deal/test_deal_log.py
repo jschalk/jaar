@@ -7,6 +7,7 @@ from src.f01_road.deal import (
     time_int_str,
     ledger_depth_str,
     owner_name_str,
+    episode_net_str,
 )
 
 
@@ -263,8 +264,8 @@ def test_get_deallog_from_dict_ReturnsObj_Scenario1():
     assert sue_episodes_dict == {
         owner_name_str(): sue_str,
         "episodes": {
-            x4_time_int: {"time_int": x4_time_int, quota_str(): x4_quota},
-            x7_time_int: {"time_int": x7_time_int, quota_str(): x7_quota},
+            x4_time_int: {time_int_str(): x4_time_int, quota_str(): x4_quota},
+            x7_time_int: {time_int_str(): x7_time_int, quota_str(): x7_quota},
         },
     }
 
@@ -303,7 +304,7 @@ def test_get_deallog_from_dict_ReturnsObj_Scenario2():
             x7_time_int: {
                 time_int_str(): x7_time_int,
                 quota_str(): x7_quota,
-                "episode_net": {sue_str: sue_net_deal, zia_str: zia_net_deal},
+                episode_net_str(): {sue_str: sue_net_deal, zia_str: zia_net_deal},
             },
         },
     }
@@ -345,12 +346,12 @@ def test_DealLog_get_tranbook_ReturnsObj():
             x4_time_int: {
                 time_int_str(): x4_time_int,
                 quota_str(): x4_quota,
-                "episode_net": {bob_str: bob_net_deal},
+                episode_net_str(): {bob_str: bob_net_deal},
             },
             x7_time_int: {
                 time_int_str(): x7_time_int,
                 quota_str(): x7_quota,
-                "episode_net": {zia_str: zia_net_deal},
+                episode_net_str(): {zia_str: zia_net_deal},
             },
         },
     }

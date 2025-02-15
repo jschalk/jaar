@@ -81,8 +81,8 @@ def test_FiscUnit_set_cashpurchase_RaisesErrorWhenDealEpisodeHas_time_int():
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
-    t55_money_magnitude = 100
-    x_fisc.add_dealepisode("yao", t55_t, t55_money_magnitude)
+    t55_quota = 100
+    x_fisc.add_dealepisode("yao", t55_t, t55_quota)
     t55_amount = 37
     t6606_present_time = 6606
     x_fisc.present_time = t6606_present_time
