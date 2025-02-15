@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import x_is_json
-from src.f01_road.deal import owner_name_str
+from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f01_road.jaar_config import init_gift_id, get_gifts_folder
 from src.f01_road.road import get_default_fisc_title as root_title
 from src.f02_bud.acct import acctunit_shop
@@ -7,8 +7,8 @@ from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import (
-    fisc_title_str,
     face_name_str,
+    event_int_str,
     credit_belief_str,
     debtit_belief_str,
     acct_name_str,
@@ -246,8 +246,8 @@ def test_GiftUnit_get_step_dict_ReturnsObj_Simple():
     assert x_dict.get(owner_name_str()) == bob_str
     assert x_dict.get(face_name_str()) is not None
     assert x_dict.get(face_name_str()) == sue_str
-    assert x_dict.get("event_int") is not None
-    assert x_dict.get("event_int") == accord45_e5_int
+    assert x_dict.get(event_int_str()) is not None
+    assert x_dict.get(event_int_str()) == accord45_e5_int
 
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
@@ -323,8 +323,8 @@ def test_GiftUnit_get_serializable_dict_ReturnsObj_Simple():
     assert total_dict.get(owner_name_str()) == bob_str
     assert total_dict.get(face_name_str()) is not None
     assert total_dict.get(face_name_str()) == sue_str
-    assert total_dict.get("event_int") is not None
-    assert total_dict.get("event_int") == accord45_e5_int
+    assert total_dict.get(event_int_str()) is not None
+    assert total_dict.get(event_int_str()) == accord45_e5_int
     delta_str = "delta"
     assert total_dict.get(delta_str) == {}
 
@@ -441,8 +441,8 @@ def test_GiftUnit_get_deltametric_dict_ReturnsObj():
     assert x_dict.get(owner_name_str()) == bob_str
     assert x_dict.get(face_name_str()) is not None
     assert x_dict.get(face_name_str()) == yao_str
-    assert x_dict.get("event_int") is not None
-    assert x_dict.get("event_int") == event5_int
+    assert x_dict.get(event_int_str()) is not None
+    assert x_dict.get(event_int_str()) == event5_int
 
     delta_atom_numbers_str = "delta_atom_numbers"
     assert x_dict.get(delta_atom_numbers_str) is not None

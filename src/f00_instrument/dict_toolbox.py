@@ -200,12 +200,11 @@ def create_l2nested_csv_dict(
         set_in_nested_dict(io_dict, [row[2], row[3]], fisc_owner_io)
 
     x_dict = {}
-    for fisc_title, owner_name_dict in io_dict.items():
-        for owner_name, io_function in owner_name_dict.items():
-            fisc_owner_csv = io_function.getvalue()
-            fisc_owner_csv = fisc_owner_csv.replace("\r", "")
-            set_in_nested_dict(x_dict, [fisc_title, owner_name], fisc_owner_csv)
-
+    for l1_key, l1_dict in io_dict.items():
+        for l2_key, io_function in l1_dict.items():
+            l1_l2_csv = io_function.getvalue()
+            l1_l2_csv = l1_l2_csv.replace("\r", "")
+            set_in_nested_dict(x_dict, [l1_key, l2_key], l1_l2_csv)
     return x_dict
 
 

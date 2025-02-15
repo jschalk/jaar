@@ -7,6 +7,7 @@ from src.f04_gift.atom_config import (
     atom_delete,
     normal_specs_str,
     class_type_str,
+    event_int_str,
 )
 from src.f08_pidgin.pidgin_config import (
     config_file_dir,
@@ -17,7 +18,6 @@ from src.f08_pidgin.pidgin_config import (
     get_quick_pidgens_column_ref,
     pidginunit_str,
     pidgin_filename,
-    event_int_str,
     otx_bridge_str,
     inx_bridge_str,
     inx_label_str,
@@ -59,7 +59,6 @@ def test_str_functions_ReturnsObj():
     assert map_title_str() == "map_title"
     assert map_road_str() == "map_road"
     assert map_otx2inx_str() == "map_otx2inx"
-    assert event_int_str() == "event_int"
 
 
 def test_get_pidgin_config_filename_ReturnsObj():

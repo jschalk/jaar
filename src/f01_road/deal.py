@@ -57,6 +57,10 @@ def owner_name_str() -> str:
     return "owner_name"
 
 
+def fisc_title_str() -> str:
+    return "fisc_title"
+
+
 DEFAULT_DEPTH_LEDGER = 2
 
 

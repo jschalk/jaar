@@ -1,4 +1,5 @@
 from src.f01_road.deal import (
+    fisc_title_str,
     TranUnit,
     tranunit_shop,
     TranBook,
@@ -616,11 +617,10 @@ def test_TranBook_get_dict_ReturnsObj():
     x_dict = x_tranbook.get_dict()
 
     # THEN
-    fisc_title_str = "fisc_title"
     tranunits_str = "tranunits"
     assert x_dict
-    assert fisc_title_str in x_dict.keys()
-    assert x_dict.get(fisc_title_str) == accord23_str
+    assert fisc_title_str() in x_dict.keys()
+    assert x_dict.get(fisc_title_str()) == accord23_str
     assert tranunits_str in x_dict.keys()
     tranunits_dict = x_dict.get(tranunits_str)
     assert tranunits_dict.get(sue_str)

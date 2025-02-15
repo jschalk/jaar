@@ -5,6 +5,7 @@ from src.f01_road.deal import (
     bridge_str,
     ledger_depth_str,
     owner_name_str,
+    fisc_title_str,
 )
 from src.f03_chrono.chrono import (
     c400_number_str,
@@ -14,7 +15,6 @@ from src.f03_chrono.chrono import (
 )
 from src.f04_gift.atom_config import (
     acct_name_str,
-    fisc_title_str,
     penny_str,
     fund_coin_str,
     penny_str,

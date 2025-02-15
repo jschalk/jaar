@@ -1,7 +1,6 @@
 from src.f00_instrument.file import create_path, get_dir_filenames
-from src.f04_gift.atom_config import face_name_str
+from src.f04_gift.atom_config import face_name_str, event_int_str
 from src.f08_pidgin.pidgin_config import (
-    event_int_str,
     inx_bridge_str,
     otx_bridge_str,
     inx_name_str,

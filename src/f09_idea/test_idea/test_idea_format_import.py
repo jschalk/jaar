@@ -1,12 +1,7 @@
 from src.f00_instrument.file import create_path as f_path
-from src.f01_road.deal import owner_name_str
+from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f02_bud.bud import budunit_shop
-from src.f04_gift.atom_config import (
-    fisc_title_str,
-    acct_name_str,
-    debtit_belief_str,
-    credit_belief_str,
-)
+from src.f04_gift.atom_config import acct_name_str, debtit_belief_str, credit_belief_str
 from src.f05_listen.hubunit import hubunit_shop
 from src.f09_idea.idea import (
     create_idea_df,

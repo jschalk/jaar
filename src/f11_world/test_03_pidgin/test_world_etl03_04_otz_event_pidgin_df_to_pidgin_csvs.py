@@ -1,15 +1,8 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str
+from src.f04_gift.atom_config import face_name_str, event_int_str
 from src.f08_pidgin.pidgin_config import (
-    event_int_str,
     inx_bridge_str,
     otx_bridge_str,
-    inx_name_str,
-    otx_name_str,
-    inx_label_str,
-    otx_label_str,
-    inx_title_str,
-    otx_title_str,
     inx_road_str,
     otx_road_str,
     unknown_word_str,
@@ -17,7 +10,7 @@ from src.f08_pidgin.pidgin_config import (
 from src.f09_idea.idea_db_tool import sheet_exists, upsert_sheet, open_csv
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
-from pandas import DataFrame, read_excel as pandas_read_excel
+from pandas import DataFrame
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
 

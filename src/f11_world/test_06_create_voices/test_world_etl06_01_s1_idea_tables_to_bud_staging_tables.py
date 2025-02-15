@@ -1,16 +1,16 @@
 from src.f00_instrument.file import create_path, save_file
 from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
-from src.f01_road.deal import owner_name_str
+from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f02_bud.bud_tool import budunit_str, bud_acctunit_str
 from src.f04_gift.atom_config import (
     face_name_str,
     acct_name_str,
+    event_int_str,
     get_bud_dimens,
-    fisc_title_str,
     credit_belief_str,
     debtit_belief_str,
 )
-from src.f08_pidgin.pidgin_config import event_int_str
+
 from src.f09_idea.idea_config import idea_number_str
 from src.f10_etl.tran_sqlstrs import create_bud_tables
 from src.f11_world.world import worldunit_shop

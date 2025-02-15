@@ -1,6 +1,6 @@
 from src.f00_instrument.file import open_file
 from src.f00_instrument.db_toolbox import get_row_count
-from src.f01_road.deal import bridge_str
+from src.f01_road.deal import bridge_str, fisc_title_str
 from src.f03_chrono.chrono import (
     c400_number_str,
     yr1_jan1_offset_str,
@@ -8,7 +8,6 @@ from src.f03_chrono.chrono import (
     timeline_title_str,
 )
 from src.f04_gift.atom_config import (
-    fisc_title_str,
     fund_coin_str,
     penny_str,
     respect_bit_str,

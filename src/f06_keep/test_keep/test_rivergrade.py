@@ -1,4 +1,4 @@
-from src.f04_gift.atom_config import fisc_title_str
+from src.f01_road.deal import fisc_title_str
 from src.f06_keep.examples.example_credorledgers import example_yao_hubunit
 from src.f06_keep.rivercycle import RiverGrade, rivergrade_shop
 

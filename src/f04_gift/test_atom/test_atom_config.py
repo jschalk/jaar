@@ -45,6 +45,7 @@ from src.f04_gift.atom_config import (
     debtor_respect_str,
     debtit_vote_str,
     denom_str,
+    event_int_str,
     fnigh_str,
     fopen_str,
     fund_coin_str,
@@ -93,6 +94,7 @@ def test_str_functions_ReturnsObj():
     assert debtor_respect_str() == "debtor_respect"
     assert debtit_vote_str() == "debtit_vote"
     assert denom_str() == "denom"
+    assert event_int_str() == "event_int"
     assert fnigh_str() == "fnigh"
     assert fopen_str() == "fopen"
     assert fund_coin_str() == "fund_coin"

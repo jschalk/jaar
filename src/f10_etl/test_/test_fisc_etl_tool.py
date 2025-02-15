@@ -1,9 +1,9 @@
 from src.f00_instrument.file import create_path, open_file, set_dir
-from src.f01_road.deal import owner_name_str
+from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f03_chrono.chrono import timelineunit_shop, timeline_config_shop
 from src.f04_gift.atom_config import (
     face_name_str,
-    fisc_title_str,
+    event_int_str,
     acct_name_str,
     fund_coin_str,
     penny_str,
@@ -20,7 +20,6 @@ from src.f07_fisc.fisc_config import (
     fisc_timeline_weekday_str,
     get_fisc_config_args,
 )
-from src.f08_pidgin.pidgin_config import event_int_str
 from src.f09_idea.idea_db_tool import sheet_exists, upsert_sheet, get_custom_sorted_list
 from src.f10_etl.fisc_etl_tool import (
     FiscPrimeObjsRef,
