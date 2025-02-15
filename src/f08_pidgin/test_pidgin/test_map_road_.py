@@ -1,5 +1,12 @@
 from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.road import default_bridge_if_None, create_road
+from src.f04_gift.atom_config import event_int_str, face_name_str
+from src.f08_pidgin.pidgin_config import (
+    inx_bridge_str,
+    otx2inx_str,
+    otx_bridge_str,
+    unknown_word_str,
+)
 from src.f08_pidgin.map import (
     titlemap_shop,
     RoadMap,
@@ -471,12 +478,12 @@ def test_RoadMap_get_json_ReturnsObj():
     slash_otx_bridge = "/"
     x_roadmap = roadmap_shop(sue_str, otx_bridge=slash_otx_bridge)
     x1_road_map_json = f"""{{
-  "event_int": 0,
-  "face_name": "{sue_str}",
-  "inx_bridge": "{x_roadmap.inx_bridge}",
-  "otx2inx": {{}},
-  "otx_bridge": "{x_roadmap.otx_bridge}",
-  "unknown_word": "{x_roadmap.unknown_word}"
+  "{event_int_str()}": 0,
+  "{face_name_str()}": "{sue_str}",
+  "{inx_bridge_str()}": "{x_roadmap.inx_bridge}",
+  "{otx2inx_str()}": {{}},
+  "{otx_bridge_str()}": "{x_roadmap.otx_bridge}",
+  "{unknown_word_str()}": "{x_roadmap.unknown_word}"
 }}"""
     print(f"           {x1_road_map_json=}")
     print(f"{x_roadmap.get_json()=}")
@@ -488,14 +495,14 @@ def test_RoadMap_get_json_ReturnsObj():
     x_roadmap.event_int = event7
     # THEN
     x2_road_map_json = f"""{{
-  "event_int": {event7},
-  "face_name": "{sue_str}",
-  "inx_bridge": "{x_roadmap.inx_bridge}",
-  "otx2inx": {{
+  "{event_int_str()}": {event7},
+  "{face_name_str()}": "{sue_str}",
+  "{inx_bridge_str()}": "{x_roadmap.inx_bridge}",
+  "{otx2inx_str()}": {{
     "{clean_otx}": "{clean_inx}"
   }},
-  "otx_bridge": "{x_roadmap.otx_bridge}",
-  "unknown_word": "{x_roadmap.unknown_word}"
+  "{otx_bridge_str()}": "{x_roadmap.otx_bridge}",
+  "{unknown_word_str()}": "{x_roadmap.unknown_word}"
 }}"""
     print(f"           {x2_road_map_json=}")
     print(f"{x_roadmap.get_json()=}")
