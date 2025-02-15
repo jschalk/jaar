@@ -28,7 +28,7 @@ def get_existing_bud_x_tables(cursor: sqlite3_Connection, ending: str) -> set:
 
 def test_WorldUnit_idea_staging_to_bud_tables_CreatesBudStagingTables(
     env_dir_setup_cleanup,
-):
+):  # sourcery skip: extract-method
     # ESTABLISH
     staging_str = "_put_staging"
     agg_str = "_put_agg"
